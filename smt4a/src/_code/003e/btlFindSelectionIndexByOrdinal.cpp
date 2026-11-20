@@ -10,9 +10,9 @@ s32 btlFindSelectionIndexByOrdinal(const BtlMainStateA *state, s32 ordinal)
 {
     s32 found = 0;
     for (s32 index = 0; index < 109; ++index) {
-        u64 flags = state->entries[index].flags;
-        if ((flags & g_btlMain.combatantMasks.required) != 0 &&
-            (flags & g_btlMain.selectionMask) != 0) {
+        const BtlCombatantEntryA *entry = &state->entries[index];
+        if ((entry->flags & g_btlMain.combatantMasks.required) != 0 &&
+            (g_btlMain.selectionMask & entry->flags) != 0) {
             ++found;
             if (found == ordinal) {
                 return state->entries[index].selectionIndex;

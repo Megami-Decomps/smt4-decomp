@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail looks the record up once more at the end and reads flag bit 1 ((flags & 2) >> 1) before returning 1 regardless; the original use of that bit is unknown. */
 #include "common.h"
 #include "quest_center/QuestRecordA.h"
 #include "quest_center/QuestUnlock.h"
@@ -7,6 +6,13 @@ extern "C" {
 
 s32 gameFlagIsSet(u32 flag);
 u32 partyEntryFlagsBit3(s32 member);
+
+/* Returns bit 1 of the quest record's flags (same body as smt4 FUN_00298e00). */
+static __inline u32 questRecordHasFlag2(u32 id)
+{
+    QuestRecordA *record = questDataGetRecord(id);
+    return record != NULL ? (record->flags & 2) >> 1 : 0;
+}
 
 /* Return 1 when the record's required game flag and party members are all satisfied. */
 s32 gameUnlockRecordRequirementsMet(u32 id)
@@ -27,6 +33,9 @@ s32 gameUnlockRecordRequirementsMet(u32 id)
     }
     if (record->requiredMembers[2] != 0 && !partyEntryFlagsBit3(record->requiredMembers[2])) {
         return 0;
+    }
+    if (questRecordHasFlag2(id)) {
+        return 1;
     }
     return 1;
 }

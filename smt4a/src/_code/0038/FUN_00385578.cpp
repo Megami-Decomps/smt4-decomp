@@ -15,7 +15,7 @@ typedef char LmapIdleVoiceOffsetsCheck[
 extern "C" {
 extern const LmapIdleVoiceTables DAT_00532018;
 s32 randBetween(s32 minimum, s32 maximum);
-void FUN_002d1f40(s32 duration, s32 first, s32 second);
+void lmapRequestTimedEffect(s32 duration, s32 first, s32 second);
 void soundApplyValueOrStop(u32 voice, s32 mode);
 void lmapClearExtraFlag(void);
 
@@ -43,7 +43,7 @@ void FUN_00385578(void)
             ++scene->idleVoiceFrame >= scene->idleVoiceDuration) {
             s32 duration = durations[randBetween(0, 5)];
             g_lmapScene->idleVoiceDuration = duration;
-            FUN_002d1f40(duration, 40, 10);
+            lmapRequestTimedEffect(duration, 40, 10);
             u32 voice = sysPlayVoice(0x0100009E);
             scene = g_lmapScene;
             scene->idleVoiceFrame = 0;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: allocation debug trace recovered; native work zero/scale initialization grouping differs. */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -7,7 +6,8 @@ struct CrazingBackgroundWork {
     u32 process;
     CommonBgFlags appearance;
     u32 unk08;
-    f32 x, y, scaleX, scaleY;
+    s32 x, y;
+    f32 scaleX, scaleY;
     CommonBgFlags visibility;
 };
 struct CommonBgCreateGlobals { u8 unk00[2]; u8 references; u8 unk03[9]; CrazingBackgroundWork *work; };
@@ -21,7 +21,7 @@ s32 FUN_0039a7ac(u32 process);
 s32 FUN_003bab24(u32 process);
 u32 taskCreateDraw(const char *name, s32 priority, u32 flags, AsdProcFunc start, AsdProcUpdateFunc update, AsdProcFunc end, void *work, u32 parent);
 
-// Acquire the phone background, creating its calculation and draw processes on the first reference.
+/* Acquire the phone background, creating its calculation and draw processes on the first reference. */
 void campCommonBgCreateCrazingSumaho()
 {
     if (g_commonBg.references == 0) {
@@ -31,10 +31,10 @@ void campCommonBgCreateCrazingSumaho()
         }
         CrazingBackgroundWork *work = g_commonBg.work;
         *work = CrazingBackgroundWork();
-        work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_0052c828), 4, 0, NULL, FUN_0039a7ac, NULL, NULL);
+        work->process = asdProcessCreateSimple((const s8 *)DAT_0052c828, 4, 0, NULL, FUN_0039a7ac, NULL, NULL);
         taskCreateDraw(DAT_0052c810, 238, 0, NULL, FUN_003bab24, NULL, NULL, work->process);
-        work->x = 0.0f;
-        work->y = 0.0f;
+        work->x = 0;
+        work->y = 0;
         work->scaleX = 0.8f;
         work->scaleY = 0.8f;
         work->appearance.bytes.first = 0;
@@ -44,4 +44,4 @@ void campCommonBgCreateCrazingSumaho()
     }
     ++g_commonBg.references;
 }
-}
+} /* extern "C" */

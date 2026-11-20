@@ -18,7 +18,7 @@ static inline u32 unitBaseGrowthCost(s32 level)
     return costs[level - 1];
 }
 
-extern "C" u32 FUN_004ccdb8(u32 unit, s32 level, s32 referenceLevel)
+extern "C" u32 unitGetExpRequirement(u32 unit, s32 level, s32 referenceLevel)
 {
     if (gameGetUnlockedCountLimit() <= level) {
         return 0;

@@ -100,6 +100,12 @@ difference a register tie-break.
   (armcc's 64-bit zero store). Where the record puts it at a 4-aligned offset, declare it `__packed u64` in the
   struct, never a cast at the use (`SaveLoadTransitionValues::values`: smt4a `spriteListMenuResetSprites`,
   `saveLoadUiRestartSpritesAndWait`, `saveLoadUiRestartSlotSpritesAndWait`).
+- One zero register stored twice (`mov r2, #0; str r2, [r0, #n]; str r2, [r0, #n+4]`) where the build uses `r1` is
+  the same 64-bit field on an object that can only be 4-aligned: declare it `__packed u64` once the alignment is
+  shown, not assumed (a 0x3c-byte array element, or an element at an address that is 4 mod 8). smt4
+  `frameHeapInitializeRange` and smt4a's twin (0x3c-byte elements) and smt4 `FUN_003494f0` (elements at
+  0x4e25dc); a natural `s64` there compiles to one `stm`. Where the object is 8-aligned the field cannot be packed:
+  look for another cause (smt4 `FUN_00361934`).
 - Keep packing local to genuinely unaligned members, with size and offset assertions: packing a whole
   record downgrades its aligned word accesses.
 - A float-shaped stack argument does not prove a variadic callee: a one-word integer/float payload
@@ -117,6 +123,10 @@ difference a register tie-break.
   and then mixes both pointers compiles to other alias and cross-jump decisions than one that declares
   the parameter as the derived struct (`struct ContentDepartureWork : ContentTransition { ... };`,
   `void f(ContentDepartureWork *work)`): smt4 `contentTransitionProcessDeparture`, smt4a `FUN_004b9410`.
+- A by-value result passed straight into a callee taking `const T &` makes armcc copy the temporary into a second
+  stack slot: retail's larger frame (and a `vldmia`/`vstmia` copy) means the callee takes a reference and the caller
+  writes `f(owner, archive, lookup(&ref))`, not a named local passed by address (`Obj4221fc::vfunc0c`,
+  `Obj422260::vfunc0c`, both games; `classes/WindowStatus.h`).
 - Parameter order is part of the signature even where the registers agree: see
   [Parameter order](#parameter-order).
 
@@ -181,6 +191,8 @@ difference a register tie-break.
   `push {r0-r3, …}`); an `else if` chain folds the zero away (smt4 `FUN_00283f80`).
 - A guarded call through a handle (`if (x->handle) call(x->handle, …)`) as an inline helper taking the
   owning struct gives unconditional argument moves and `blne`; passing the handle predicates the moves.
+- A chain of tests returning constants (`if (a) return 1; … return 4;`) whose return blocks retail lays out in another
+  order can be one result variable assigned in each arm and returned once (smt4 `FUN_00293ac0`).
 - A comparator written with early returns (`if (order != 0) return order;`) can match where the
   nested-if form does not.
 - A search loop that sets `bool found = true; break;` and tests `found` afterwards is jump-threaded
@@ -210,6 +222,9 @@ difference a register tie-break.
   *g_commandBufferCursor++ = 0x8025E;`, with the context's fields read through `g_asdGfxContext.cmdBuffer->` at
   each use: a cached cursor or buffer local merges the two stores into `stm` and moves the registers (wave 52:
   the pad/terminate/submit functions of both games, `asdGxCommandBufferPadAndGetRanges` and siblings).
+- A field set to one of two constants is an if/else of two stores (`if (delta < 0.0f) work->alpha = 0.0f; else
+  work->alpha = 1.0f;`), not a ternary into the field: retail keeps each store in its arm (`eventMessUnderFadeJobStep`,
+  both games; the same form moved about ten near misses).
 - A clamp or two-way choice of a local written as a ternary (`count = count > 300 ? 300 : count;`,
   `checked = ok ? resource : NULL;`) and the same as an `if` assign through different registers; try
   both (about forty near misses moved). Not for globals, and an `else if` chain stays a chain: don't
@@ -275,6 +290,9 @@ asks for.
   contentTransitionStep(state, phase)` in `shard/W6_W6Match6_ContentTransition.h`;
   `BtlUiPanelTimerA panelStartState(state)` with `{frame 0, state}` in `battle/btlUI.h`).
   `step = contentTransitionStep(2, 0);` keeps the `strd`, two field stores do not.
+- nn::math's header inlines are helpers with evidence: `MTX44PerspectivePivotDeg` (`MTX44Perspective` of the angle
+  in radians, then `MTX44PivotC`) written as a `static __inline` at both call sites gave retail's projection code in
+  `stereoCameraSetPerspective` (both games), and `MTX44Transpose` returns its destination.
 - A thread start (`nn::os::Thread::Start`) inlined into its caller is a `static __inline` helper that
   takes the thread's bound argument by value and passes its address (`&argument`) with the argument
   descriptor, then reports a failed result (`uniteStartThread`, `campCecStartThread`,

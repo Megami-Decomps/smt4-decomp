@@ -46,7 +46,7 @@ int libm_sinf(...);
 void FUN_00297f00(int value, int count);
 int mapTrapArm(...);
 int FUN_002c2d44(...);
-int FUN_002d1f40(...);
+int lmapRequestTimedEffect(...);
 int FUN_003024a0(...);
 int mapMainStartEntry(...);
 int mapTrapGetUnk38(...);
@@ -100,7 +100,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: mapTrapGetUnk3C. */
 /* Supplied declaration required: mapTrapArm. */
 /* Supplied declaration required: FUN_002c2d44. */
-/* Supplied declaration required: FUN_002d1f40. */
+/* Supplied declaration required: lmapRequestTimedEffect. */
 /* Supplied declaration required: FUN_002de104. */
 extern int pairedAvailabilityBothReady(void);
 /* Supplied declaration required: FUN_002e364c. */
@@ -200,7 +200,7 @@ void FUN_002d9b50(void)
           sysPlaySe(0xe9);
         }
         *(unsigned char *)(g_lmapScene + 0x291) = 0;
-        FUN_002d1f40(8,0x78,0);
+        lmapRequestTimedEffect(8,0x78,0);
         temp_v11 = sysPlayVoice(0x10000d2);
         *(unsigned int *)(g_lmapScene + 0x264) = temp_v11;
         break;
@@ -290,7 +290,7 @@ void FUN_002d9b50(void)
             }
             if (*(int *)(g_lmapScene + 0x270) == 6) {
               FUN_00297f00(8,10);
-              FUN_002d1f40(8,0x28,0);
+              lmapRequestTimedEffect(8,0x28,0);
               mapSpawnRandomEventKindEffect();
             }
             temp_v6 = *(int *)(g_lmapScene + 0x270);
@@ -319,7 +319,7 @@ void FUN_002d9b50(void)
             if ((*(int *)(g_lmapScene + 0x270) == 6) &&
                (mapSpawnRandomEventKindEffect(), *(int *)(g_lmapScene + 0x270) == 6)) {
               FUN_00297f00(8,10);
-              FUN_002d1f40(8,0x28,0);
+              lmapRequestTimedEffect(8,0x28,0);
             }
             temp_v6 = *(int *)(g_lmapScene + 0x270);
             goto joined_r0x002da288;
@@ -350,7 +350,7 @@ LAB_002da1e4:
             }
             if (*(int *)(g_lmapScene + 0x270) == 4) {
               FUN_00297f00(8,10);
-              FUN_002d1f40(8,0x28,0);
+              lmapRequestTimedEffect(8,0x28,0);
               mapSpawnRandomEventKindEffect();
             }
             temp_v6 = *(int *)(g_lmapScene + 0x270);
@@ -399,13 +399,13 @@ LAB_002da3cc:
           if ((*(int *)(g_lmapScene + 0x270) == 6) &&
              (mapSpawnRandomEventKindEffect(), *(int *)(g_lmapScene + 0x270) == 6)) {
             FUN_00297f00(8,10);
-            FUN_002d1f40(8,0x28,0);
+            lmapRequestTimedEffect(8,0x28,0);
           }
           if (*(int *)(g_lmapScene + 0x270) != 0xe) goto LAB_002da3cc;
           *(int *)(g_lmapScene + 0x26c) = DAT_005f1c94 + *(int *)(g_lmapScene + 0x26c) + 3;
         }
         if (*(int *)(g_lmapScene + 8) >= (int)(unsigned int)*(unsigned short *)(temp_v0 + 2)) {
-          FUN_002d1f40(10,0x78,0);
+          lmapRequestTimedEffect(10,0x78,0);
           if ((int)(unsigned int)*(unsigned short *)(temp_v0 + 4) <= *(int *)(g_lmapScene + 0x26c)) {
             popupStateClose();
             soundApplyValueOrStop(*(unsigned int *)(g_lmapScene + 0x264),0);
@@ -616,7 +616,7 @@ LAB_002dad8c:
           FUN_001628c0("I001023",temp_v1,temp_v11,1);
         }
         if (*(int *)(g_lmapScene + 8) == 7) {
-          FUN_002d1f40(4,0x32,0);
+          lmapRequestTimedEffect(4,0x32,0);
         }
         temp_v6 = linkHolderCallFirst(*(unsigned int *)(g_lmapScene + 0x1a8));
         if ((temp_v6 == 0x23) &&

@@ -1,4 +1,3 @@
-/* NON_MATCHING: rectangle semantics restored; float-register scheduling and color initialization order differ. */
 #include "shard/W6_W6Match3_EffectColor.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxTitle.h"
@@ -21,10 +20,7 @@ void gfxDrawColoredRectangles(const ColoredRectangle *rectangles, u32 count)
 {
     for (u32 i = 0; i < count; ++i) {
         EffectColor color;
-        color.red = 1.0f;
-        color.green = 1.0f;
-        color.blue = 1.0f;
-        color.alpha = 1.0f;
+        effectColorSet(&color, 1.0f, 1.0f, 1.0f, 1.0f);
         u32 packed = rectangles[i].color;
         for (s32 channel = 0; channel < 4; ++channel) {
             f32 value = (f32)(packed & 0xff) * 0.003921569f;
@@ -39,12 +35,12 @@ void gfxDrawColoredRectangles(const ColoredRectangle *rectangles, u32 count)
         renderCtxSelectTexture(g_titleScene, 0);
         f32 x = rectangles[i].left;
         f32 y = rectangles[i].top;
-        f32 width = rectangles[i].right - x;
+        f32 width = rectangles[i].right - rectangles[i].left;
         if (0.0f <= width)
             width += 1.0f;
         else
             width -= 1.0f;
-        f32 height = rectangles[i].bottom - y;
+        f32 height = rectangles[i].bottom - rectangles[i].top;
         if (height >= 0.0f)
             height += 1.0f;
         else

@@ -44,7 +44,7 @@ extern long long __aeabi_uldivmod(int, unsigned int, unsigned int, unsigned int)
 /* Supplied declaration required: slotIsReservePick. */
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: bitsAt60Set. */
-extern unsigned int FUN_004ccdb8(unsigned short, int, int);
+extern unsigned int unitGetExpRequirement(unsigned short, int, int);
 
 
 void FUN_0023c384(int param_1)
@@ -93,7 +93,7 @@ void FUN_0023c384(int param_1)
       if (temp_v11 != 0) {
         temp_v14 = temp_v12 + 0x7800;
         if (*(char *)(temp_v12 + 0x78b6) != '\0') {
-          temp_v7 = FUN_004ccdb8(*(unsigned short *)(temp_v11 + 0x62),
+          temp_v7 = unitGetExpRequirement(*(unsigned short *)(temp_v11 + 0x62),
                                (int)*(short *)(temp_v12 + 0x78b2) + (unsigned int)*(unsigned short *)(temp_v11 + 100),
                                (int)*(short *)(temp_v12 + 0x78b8));
           *(unsigned int *)(temp_v12 + 0x78a8) = temp_v7 << 0xc;
@@ -143,7 +143,7 @@ void FUN_0023c384(int param_1)
               *puVar8 = 1;
             }
             else {
-              temp_v16 = FUN_004ccdb8(*(unsigned short *)(temp_v11 + 0x62),temp_v10,
+              temp_v16 = unitGetExpRequirement(*(unsigned short *)(temp_v11 + 0x62),temp_v10,
                                     (int)*(short *)(temp_v12 + 0x78b8));
               temp_v7 = temp_v16 * 0x1000;
               temp_v15 = temp_v16 >> 0x14;

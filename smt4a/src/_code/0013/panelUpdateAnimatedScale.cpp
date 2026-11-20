@@ -29,13 +29,21 @@ u8 panelUpdateAnimatedScale(u32 job)
                 x -= 0.13f / panel->campSpeed;
                 panel->campWidthScale = x;
             }
-            panel->campWidthScale = scaleBits(x) > kContractedScaleBits ? x : 0.25f;
+            if (scaleBits(x) > kContractedScaleBits) {
+                panel->campWidthScale = x;
+            } else {
+                panel->campWidthScale = 0.25f;
+            }
             f32 y = panel->campHeightScale;
             if (scaleBits(y) > kContractedScaleBits) {
                 y -= 0.110000014f / panel->campSpeed;
                 panel->campHeightScale = y;
             }
-            panel->campHeightScale = scaleBits(y) > kContractedScaleBits ? y : 0.25f;
+            if (scaleBits(y) > kContractedScaleBits) {
+                panel->campHeightScale = y;
+            } else {
+                panel->campHeightScale = 0.25f;
+            }
             for (s32 i = 0; i < 24; ++i)
                 uiSpriteAdvanceAnimation(&panel->campItems[i], 1.0f);
             uiSpriteAdvanceAnimation(&panel->campWidgets[2], 1.0f);
@@ -48,13 +56,21 @@ u8 panelUpdateAnimatedScale(u32 job)
                 x = 0.13f / panel->campSpeed + x;
                 panel->campWidthScale = x;
             }
-            panel->campWidthScale = scaleBits(x) <= kExpandedXBits ? x : 0.38f;
+            if (scaleBits(x) <= kExpandedXBits) {
+                panel->campWidthScale = x;
+            } else {
+                panel->campWidthScale = 0.38f;
+            }
             f32 y = panel->campHeightScale;
             if (scaleBits(y) < kExpandedYBits) {
                 y = 0.110000014f / panel->campSpeed + y;
                 panel->campHeightScale = y;
             }
-            panel->campHeightScale = scaleBits(y) > kExpandedYBits ? 0.36f : y;
+            if (scaleBits(y) > kExpandedYBits) {
+                panel->campHeightScale = 0.36f;
+            } else {
+                panel->campHeightScale = y;
+            }
             FUN_001536e4(panel);
         }
         FUN_0014aa9c(1);

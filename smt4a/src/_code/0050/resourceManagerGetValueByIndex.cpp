@@ -1,52 +1,66 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `resourceManagerGetValueByIndex` (_code @ 0x50d2cc, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
+namespace {
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
+struct TreeNodeLocalView {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ TreeNodeLocalView *parent;
+    /* 0x08 */ TreeNodeLocalView *left;
+    /* 0x0C */ TreeNodeLocalView *right;
+    /* 0x10 */ u8 unk10[0x08];
+    /* 0x18 */ void *value;
+};
 
+struct TreeLocalView {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ TreeNodeLocalView *sentinel;
+};
 
-unsigned int resourceManagerGetValueByIndex(int param_1,int param_2)
+struct ObjectLocalView {
+    /* 0x0000 */ u8 unk00[0x141C];
+    /* 0x141C */ TreeLocalView tree;
+};
 
+/* In-order iterator over the red-black tree's nodes (same view as smt4 FUN_003b214c). */
+struct TreeIterator {
+    TreeNodeLocalView *node;
+
+    TreeIterator(TreeNodeLocalView *start) : node(start) {}
+    bool operator!=(TreeNodeLocalView *other) const { return node != other; }
+    TreeIterator &operator++()
+    {
+        TreeNodeLocalView *next = node->right;
+        if (next != 0) {
+            do {
+                node = next;
+                next = node->left;
+            } while (next != 0);
+        } else {
+            next = node->parent;
+            while (node == next->right) {
+                node = next;
+                next = node->parent;
+            }
+            if (node->right != next) {
+                node = next;
+            }
+        }
+        return *this;
+    }
+};
+
+} /* namespace */
+
+/* Returns the value at in-order position `index` of the resource tree, or NULL if out of range. */
+extern "C" void *resourceManagerGetValueByIndex(ObjectLocalView *object, s32 index)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 0;
-  temp_v0 = *(int *)(*(int *)(param_1 + 0x1430) + 8);
-  if (temp_v0 != *(int *)(param_1 + 0x1430)) {
-    do {
-      if (param_2 == temp_v2) {
-        return *(unsigned int *)(temp_v0 + 0x18);
-      }
-      temp_v1 = *(int *)(temp_v0 + 0xc);
-      if (*(int *)(temp_v0 + 0xc) != 0) {
-        do {
-          temp_v0 = temp_v1;
-          temp_v1 = *(int *)(temp_v0 + 8);
-        } while (*(int *)(temp_v0 + 8) != 0);
-      }
-      else {
-        temp_v1 = *(int *)(temp_v0 + 4);
-        if (temp_v0 == *(int *)(temp_v1 + 0xc)) {
-          do {
-            temp_v0 = temp_v1;
-            temp_v1 = *(int *)(temp_v0 + 4);
-          } while (temp_v0 == *(int *)(temp_v1 + 0xc));
-        }
-        if (*(int *)(temp_v0 + 0xc) != temp_v1) {
-          temp_v0 = temp_v1;
-        }
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v0 != *(int *)(param_1 + 0x1430));
-  }
-  return 0;
-}
+    s32 current = 0;
+    TreeLocalView *tree = &object->tree;
 
-} /* extern "C" */
+    for (TreeIterator it(tree->sentinel->left); it != tree->sentinel; ++it, ++current) {
+        if (index == current) {
+            return it.node->value;
+        }
+    }
+    return NULL;
+}

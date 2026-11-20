@@ -1,4 +1,5 @@
-/* NON_MATCHING: maximum update now uses an atLeast helper (retail order/condition reproduced); remaining: battle address computed after the entry value address, flag read-modify-writes use r1 where retail uses r2, `movs` null test on the found unit, enemy-count loop registers. */
+/* NON_MATCHING: maximum update uses the atLeast helper written with an early return; remaining: the maximum's
+ * registers and condition (retail movle r1, r2 where the build keeps the unit value in r0, movgt), battle address computed after the entry value address, flag read-modify-writes use r1 where retail uses r2, `movs` null test on the found unit, enemy-count loop registers. */
 #include "battle/BtlEntry.h"
 #include "battle/BtlGlobals.h"
 
@@ -34,7 +35,10 @@ void btlEntryValuesCopy(CommandEventContext *, CommandEventChoice *);
 
 static __inline s32 atLeastS32(s32 value, s32 minimum)
 {
-    return value > minimum ? value : minimum;
+    if (value > minimum) {
+        return value;
+    }
+    return minimum;
 }
 
 void btlResolveCommandEvent(CommandEventContext *context, CommandEventChoice *choice)

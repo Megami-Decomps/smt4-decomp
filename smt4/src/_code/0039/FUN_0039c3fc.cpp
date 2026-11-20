@@ -1,4 +1,4 @@
-/* NON_MATCHING: control flow, completion getter and callee order match retail; armcc keeps the sprite pointer/dirty-store addresses and the zero constant in different registers (zero in r0 instead of r2, display pointer re-copied for call arguments). */
+/* NON_MATCHING: sprite pointer setup and the calls that clear or load the map use a different register schedule. */
 #include "ui/UiSpriteApi.h"
 #include "map/NaviDisplayTransition.h"
 
@@ -9,10 +9,10 @@ void FUN_0039f860(u16 *state, s32 option);
 void FUN_002316e8(MapNaviDisplay *display);
 void mapNaviDisplayLoadMap(MapNaviDisplay *display, s32 map);
 
-// Animate the map switch, loading the new map between its outgoing and incoming phases.
+/* Animates the map switch, changing the map between the outgoing and incoming phases. */
 void FUN_0039c3fc(MapNaviDisplay *display)
 {
-    NaviDisplayTransitionView *work = reinterpret_cast<NaviDisplayTransitionView *>(display);
+    NaviDisplayTransitionView *work = (NaviDisplayTransitionView *)display;
     if ((work->flags & 8) != 0) {
         UiSpriteState *indicator = &work->indicator;
         if (work->phase == 0) {
@@ -25,10 +25,10 @@ void FUN_0039c3fc(MapNaviDisplay *display)
                 work->counter = 0;
                 if (map >= 100) {
                     work->mapVisible = 0;
-                    FUN_002316e8(reinterpret_cast<MapNaviDisplay *>(work));
+                    FUN_002316e8(display);
                 } else {
                     work->mapVisible = 1;
-                    mapNaviDisplayLoadMap(reinterpret_cast<MapNaviDisplay *>(work), map);
+                    mapNaviDisplayLoadMap(display, map);
                 }
                 uiSpriteSetImageKeyframe(indicator, 2, 0);
                 work->phase = 1;
@@ -56,4 +56,4 @@ void FUN_0039c3fc(MapNaviDisplay *display)
         }
     }
 }
-}
+} /* extern "C" */

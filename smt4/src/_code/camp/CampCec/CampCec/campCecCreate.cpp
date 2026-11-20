@@ -1,4 +1,5 @@
-/* NON_MATCHING: 85 lines (11 by shape); same frame and registers up to the thread launch, where retail takes -2 in r3 and 17 in ip and stores -2/0 through a pointer to sp+8 (17 in r3, -2 in ip and one store less here: every later row is shifted by one). */
+/* NON_MATCHING: 85 lines (11 by shape); same frame and registers up to the thread launch, where retail takes -2 in r3 and 17 in ip and stores -2/0 through a pointer to sp+8 (17 in r3, -2 in ip and one store less here: every later row is shifted by one).
+ * Tried: with the draw callback's cast written at both taskCreateDraw calls (no `draw` local) the launch matches and the constant 1 and &g_campCec trade r7/r8 instead (20 lines, 20 by shape). The launch's order follows the helper's (priority, processor) order, which uniteCreate proves; the reverse order is IDENTICAL here only together with `runScript` declared mid-way through the handler stores, so neither is written. */
 #include "camp/CecMenu.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -62,7 +63,7 @@ static __inline void campCecStartThread(void *thread, void (*entry)(CampCecMenu 
 }
 
 // Install the camp screen handlers. When StreetPass is available the worker loads its resources.
-void FUN_001ffc5c()
+void campCecCreate()
 {
     if (g_campCec == NULL) {
         asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\camp\\CampCec\\CampCec.cpp", 281);

@@ -69,7 +69,7 @@ f32 mathPositionHeadingDegrees(MapVector from, MapVector to);
 f32 mathGetShortestAngleDelta(f32 first, f32 second);
 f32 mathAbsHeadingErrorToPoint(f32 x, f32 y, f32 z, f32 heading, f32 targetX, f32 targetY, f32 targetZ);
 void FUN_002df824(s32 id, s32 flag);
-void FUN_002879dc(s32 a, s32 b, s32 c);
+void lmapRequestTimedEffect(s32 a, s32 b, s32 c);
 void mapCollisionDisableByTag(s32 id);
 
 /* Advances every active map-range entry: it triggers when the encounter source is close and
@@ -113,7 +113,7 @@ u32 FUN_001a8cf8(void)
         case MAP_RANGE_TRIGGERED:
             entry->timer++;
             if (entry->timer == 2)
-                FUN_002879dc(0xF, 0x1E, 1);
+                lmapRequestTimedEffect(0xF, 0x1E, 1);
             if (entry->timer == 0x28)
                 mapCollisionDisableByTag((s16)entry->soundId);
             if (entry->timer >= 0x3C) {

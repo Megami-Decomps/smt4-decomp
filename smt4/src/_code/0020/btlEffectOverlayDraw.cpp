@@ -1,4 +1,4 @@
-/* NON_MATCHING: render-stack pop uses exchanged state registers; zero setup and early returns differ. */
+/* NON_MATCHING: retail loads the zero it stores into the stack's dirty flag and returns into r7 before the flag test (here after the push call), and keeps the popped top in r0 and the new state in r1 (copied to r0 for the callback); the build swaps them. */
 /* Draws the active battle-effect overlay with a temporary title-scene render state. */
 #include "battle/btlEffect.h"
 #include "camp/RenderCtx.h"
@@ -26,13 +26,17 @@ u32 btlEffectOverlayDraw(u32 process)
     };
     jobGetWork(process);
     EffectOverlayView *effect = (EffectOverlayView *)g_btlEffect.data;
-    if (effect != NULL && (effect->flags & 2) && effect->object != NULL) {
-        renderCtxPushC(g_titleScene, gxPackFadeKindAlphaWord(6, 0.0f));
-        effect->object->methods->draw(effect->object);
-        renderStackPop(&g_titleScene->additional.stackC);
-        renderCtxApplyTransforms(g_titleScene);
-        renderCtxResetColorScale(g_titleScene);
+    if (effect == NULL) {
+        return 0;
     }
+    if (!(effect->flags & 2) || effect->object == NULL) {
+        return 0;
+    }
+    renderCtxPushC(g_titleScene, gxPackFadeKindAlphaWord(6, 0.0f));
+    effect->object->methods->draw(effect->object);
+    renderStackPop(&g_titleScene->additional.stackC);
+    renderCtxApplyTransforms(g_titleScene);
+    renderCtxResetColorScale(g_titleScene);
     return 0;
 }
 }

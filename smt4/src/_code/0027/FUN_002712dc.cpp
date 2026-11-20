@@ -42,7 +42,7 @@ void lmapCameraSetMode(s32 mode);
 void FUN_0027fae4(f32 x, f32 y, f32 z);
 u32 FUN_002804ec(MapVector *position);
 void mapSelectContainingRegions(f32 x, f32 z);
-void FUN_002879dc(s32 identifier, s32 amount, s32 priority);
+void lmapRequestTimedEffect(s32 identifier, s32 amount, s32 priority);
 bool FUN_0027f848(MapVector *out, MapVector position);
 u32 mapProjectPositionToGround(MapVector *position, MapVector *previous);
 void placementUpdateSceneState(void);
@@ -357,7 +357,7 @@ void FUN_002712dc(void)
                              g_lmapScene->pose.targetPosition.z);
             }
             if (g_lmapScene->stateTime == 6) {
-                FUN_002879dc(30, 50, 0);
+                lmapRequestTimedEffect(30, 50, 0);
                 lmapScenePlayWarpInSounds();
             }
             if (g_lmapScene->stateTime > 35) {
@@ -388,7 +388,7 @@ void FUN_002712dc(void)
                              g_lmapScene->pose.targetPosition.z);
             }
             if (g_lmapScene->stateTime == 6) {
-                FUN_002879dc(30, 50, 0);
+                lmapRequestTimedEffect(30, 50, 0);
                 lmapScenePlayWarpInSounds();
             }
             if (g_lmapScene->stateTime > 35) {
@@ -606,7 +606,7 @@ void FUN_002712dc(void)
             g_lmapScene->pose.targetHeading = g_lmapScene->pose.heading;
             g_lmapScene->pose.targetPosition = g_lmapScene->pose.position;
             g_lmapScene->unk06C = 0;
-            FUN_002879dc(10, 20, 0);
+            lmapRequestTimedEffect(10, 20, 0);
             mapDepartSpawnPlayerEffect(0);
             soundActorStartOnFreeChannel(0x1000186, lmapSceneSoundPosition());
             {

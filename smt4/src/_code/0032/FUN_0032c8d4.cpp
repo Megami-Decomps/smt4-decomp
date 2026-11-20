@@ -1660,7 +1660,7 @@ code_r0x0032f574:
         iVar7 = iVar7 + 1;
         if (7 < iVar7) break;
         if ((iVar7 == 7) && (*(char *)((int)puVar2 + 0xd62) != '\0')) {
-          FUN_001ffc5c();
+          campCecCreate();
         }
       }
       uiSpriteAdvanceAnimation(puVar2 + 0x192);

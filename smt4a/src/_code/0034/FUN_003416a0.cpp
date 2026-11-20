@@ -1,102 +1,102 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003416a0` (_code @ 0x3416a0, 0x144 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "nn/Result.h"
 
 extern "C" {
 
-int fileHandleClose(unsigned char **, int);
-int holderReleaseObject(void);
-int taggedObjectRelease(void);
-int taggedOwnerRelease(unsigned char **);
-int taggedOwnerRelease2(void);
+/* The words a freshly built stream is initialized from (vtable pointer, the virtual base's
+ * pointer at 0x20 and a second word at 0x24; same layout as saveMediaReadBuffer). */
+typedef struct StreamTemplate {
+    /* 0x00 */ u32 *vtable;
+    /* 0x04 */ u8 unk04[0x1C];
+    /* 0x20 */ u32 virtualBase;
+    /* 0x24 */ u32 second;
+} StreamTemplate;
 
-/* stack frame of param_2: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
+struct LocalStream;
 
-extern unsigned char DAT_00558024; /* 0x558024 */
+extern StreamTemplate DAT_00557fcc;
 
-/* Supplied declaration required: fileHandleClose. */
-extern int archiveStreamOpenConverted(unsigned char **);
-extern int requestSubmitRecordById(void);
-extern int romFileStreamOpen(unsigned char **, unsigned int, unsigned int);
-/* Supplied declaration required: holderReleaseObject. */
-/* Supplied declaration required: taggedObjectRelease. */
-/* Supplied declaration required: taggedOwnerRelease. */
-extern int romFileOpenForWrite(unsigned char **);
-/* Supplied declaration required: taggedOwnerRelease2. */
-
-
-unsigned int FUN_003416a0(int param_1,unsigned int param_2)
-
-{
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned char *temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  
-  temp_v3 = 0;
-  temp_v4 = 0;
-  temp_v5 = 0;
-  temp_v6 = 0;
-  temp_v7 = 0;
-  temp_v1 = &DAT_00558024;
-  temp_v2 = 0x55809c;
-  temp_v0 = -0x181c0001;
-  if (param_1 != 0) {
-    if (param_1 != 1) {
-      if (param_1 != 2) {
-        if (param_1 == 3) {
-          temp_v0 = requestSubmitRecordById();
-        }
-      }
-      else {
-        temp_v0 = romFileOpenForWrite(&temp_v1);
-      }
-    }
-    else {
-      temp_v0 = archiveStreamOpenConverted(&temp_v1);
-    }
-  }
-  else {
-    temp_v0 = romFileStreamOpen(&temp_v1,param_2,2);
-  }
-  if (temp_v0 < 0) {
-    fileHandleClose(&temp_v1,0);
-    return 0;
-  }
-  if (param_1 != 0) {
-    if (param_1 != 1) {
-      if (param_1 != 2) {
-        if (param_1 == 3) {
-          taggedObjectRelease();
-        }
-      }
-      else {
-        taggedOwnerRelease2();
-      }
-    }
-    else {
-      holderReleaseObject();
-    }
-  }
-  else {
-    taggedOwnerRelease(&temp_v1);
-  }
-  fileHandleClose(&temp_v1,0);
-  return 1;
-}
+nn::Result romFileStreamOpen(LocalStream *stream, u32 name, u32 mode);
+nn::Result archiveStreamOpenConverted(LocalStream *stream, u32 name, u32 mode);
+nn::Result romFileOpenForWrite(LocalStream *stream, u32 name, u32 mode);
+nn::Result requestSubmitRecordById(LocalStream *stream, u32 name, u32 mode);
+u32 taggedOwnerRelease2(LocalStream *stream);
+u32 holderReleaseObject(LocalStream *stream);
+u32 taggedOwnerRelease(LocalStream *stream);
+u32 taggedObjectRelease(LocalStream *stream);
+void fileHandleClose(LocalStream *stream, u32 flags); // declcheck: local (the stream's close passes a second word, 0, that the shared one-argument prototype drops)
 
 } /* extern "C" */
+
+/* A stream object on the stack with RAII close and virtual-base vtable setup. */
+struct LocalStream {
+    /* 0x00 */ u32 words[2];
+    /* 0x08 */ u32 owner[5];
+
+    LocalStream()
+    {
+        owner[0] = 0;
+        owner[1] = 0;
+        owner[2] = 0;
+        owner[3] = 0;
+        owner[4] = 0;
+        words[0] = (u32)DAT_00557fcc.vtable;
+        *(u32 *)((u8 *)this + ((s32 *)words[0])[-12]) = DAT_00557fcc.virtualBase;
+        words[1] = DAT_00557fcc.second;
+    }
+
+    ~LocalStream()
+    {
+        fileHandleClose(this, 0);
+    }
+
+    nn::Result open(s32 kind, u32 name, u32 mode)
+    {
+        nn::Result result;
+        switch (kind) {
+        case 0:
+            result = romFileStreamOpen(this, name, mode);
+            break;
+        case 1:
+            result = archiveStreamOpenConverted(this, name, mode);
+            break;
+        case 2:
+            result = romFileOpenForWrite(this, name, mode);
+            break;
+        case 3:
+            result = requestSubmitRecordById(this, name, mode);
+            break;
+        }
+        return result;
+    }
+
+    void close(s32 kind)
+    {
+        switch (kind) {
+        case 0:
+            taggedOwnerRelease(this);
+            break;
+        case 1:
+            holderReleaseObject(this);
+            break;
+        case 2:
+            taggedOwnerRelease2(this);
+            break;
+        case 3:
+            taggedObjectRelease(this);
+            break;
+        }
+    }
+};
+
+/* Opens and immediately closes a save-media stream of `kind` (0-3) to test whether `name` exists. */
+extern "C" u32 FUN_003416a0(s32 kind, u32 name)
+{
+    LocalStream stream;
+    nn::Result result = stream.open(kind, name, 2);
+    if (!nnResultIsSuccess(result)) {
+        return 0;
+    }
+    stream.close(kind);
+    return 1;
+}

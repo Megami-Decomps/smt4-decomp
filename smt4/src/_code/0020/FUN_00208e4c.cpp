@@ -7,7 +7,7 @@
 
 extern "C" {
 
-int FUN_002879dc(...);
+int lmapRequestTimedEffect(...);
 int FUN_002df948(void);
 int FUN_002dfb48(void);
 
@@ -106,7 +106,7 @@ extern int spriteTemplateGetPreferredDevilId(void);
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: mathRemPio2f. */
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002879dc. */
+/* Supplied declaration required: lmapRequestTimedEffect. */
 /* Supplied declaration required: mathAbsHeadingErrorToPoint. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: mathGetShortestAngleDelta. */
@@ -2529,7 +2529,7 @@ LAB_0020a934:
           FUN_002df948();
         }
         if (*(int *)(temp_v3 + 0xbc) == (int)*(float *)(temp_v3 + 0x158)) {
-          FUN_002879dc(0xf,0x1e,0);
+          lmapRequestTimedEffect(0xf,0x1e,0);
         }
         if (*(int *)(temp_v3 + 0xbc) == 4) {
           FUN_00253860(pcVar17,1);

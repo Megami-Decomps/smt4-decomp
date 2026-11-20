@@ -6064,3 +6064,12 @@
 00248738 gauntletAppMenuSetMode
 00256550 mapEnemyLoadExtraModel
 002c52dc svcCreateSemaphore
+003d0220 btlCameraRunTimedCues
+0023cb70 btlCameraStartFovShift
+002d747c campCecViewCreate
+001c1014 campCecViewUpdate
+001ffc5c campCecCreate
+00296474 resultExpGaugesRefresh
+003540d8 aocServiceRunItemRequest
+00353a74 aocServiceRunItemCodeRequest
+002879dc lmapRequestTimedEffect

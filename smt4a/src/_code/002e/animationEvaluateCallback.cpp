@@ -1,37 +1,21 @@
-/* NON_MATCHING: callback takes (range pair, time, context); retail copies the maximum into s2 before the clamp and stores the changed flag after the previous-value store. */
-#include "common.h"
+/* NON_MATCHING: the dirty-byte store is scheduled before the previous-value store (retail stores previous, then sets dirty). */
+#include "shard/Shard0034.h"
 
-struct FloatPair { f32 first, second; };
-struct AnimationCallback {
-    /* 0x00 */ u8 unk00[0x38];
-    /* 0x38 */ f32 value;
-    /* 0x3C */ f32 previous;
-    /* 0x40 */ u32 unk40;
-    /* 0x44 */ FloatPair range;
-    /* 0x4C */ f32 (*evaluate)(FloatPair range, f32 time, void *context);
-    /* 0x50 */ void *context;
-    /* 0x54 */ u32 unk54;
-    /* 0x58 */ u8 changed;
-};
-struct AnimationCallbackOwner {
-    /* 0x00 */ u8 unk00[0x34];
-    /* 0x34 */ s32 count;
-    /* 0x38 */ u8 unk38[0x14];
-    /* 0x4C */ AnimationCallback *callback;
-};
-
-/* Evaluate a live animation callback, clamping elapsed time to its duration. */
-extern "C" void animationEvaluateCallback(AnimationCallbackOwner *owner, f32 time)
+/* Evaluate the first scalar channel, clamping time at its endpoint. */
+extern "C" void animationEvaluateCallback(ScalarAnimationOwner *owner, f32 time)
 {
-    if (owner->count <= 0)
+    if (owner->count <= 0) {
         return;
-    AnimationCallback *callback = owner->callback;
-    if (callback != NULL) {
-        if (time > callback->range.second)
-            time = callback->range.second;
-        f32 value = callback->evaluate(callback->range, time, callback->context);
-        callback->previous = callback->value;
-        callback->value = value;
-        callback->changed = true;
+    }
+    ScalarAnimationChannel *channel = owner->channel;
+    if (channel != NULL) {
+        f32 end = scalarAnimationEnd(channel);
+        if (time > end) {
+            time = end;
+        }
+        f32 value = channel->interpolate(channel->range, time, channel->work);
+        channel->previous = channel->current;
+        channel->current = value;
+        channel->dirty = 1;
     }
 }

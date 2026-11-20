@@ -52,8 +52,12 @@ typedef struct LmapView {
     /* 0x21C */ u8 tracking;
     /* 0x21D */ u8 unk21D[0x77];
     /* 0x294 */ MapVector targetOffset;
-    /* 0x2A0 */ u32 counters[2];
-    /* 0x2A8 */ u16 range[4];
+    /* 0x2A0 */ u32 requestActive;  /* a request (lmapRequestTimedEffect) is pending */
+    /* 0x2A4 */ s32 priority;       /* the pending request's priority */
+    /* 0x2A8 */ s16 requestId;      /* -1 for none */
+    /* 0x2AA */ s16 unk2AA;         /* four tenths of unk2AC */
+    /* 0x2AC */ s16 unk2AC;         /* the request amount times 10 */
+    /* 0x2AE */ s16 unk2AE;         /* four tenths of unk2AC */
     /* 0x2B0 */ u8 moving;
     /* 0x2B1 */ u8 unk2B1[7];
     /* 0x2B8 */ u8 presetEnabled;

@@ -14,7 +14,7 @@ int FUN_00245f70(int);
 void mapIfClearMatchingRecord(int id);
 int FUN_00274a30(void);
 int FUN_002941c8(...);
-int FUN_002d1f40(int, int, int);
+int lmapRequestTimedEffect(int, int, int);
 int FUN_002d8a48(void);
 int lmapCameraSetMode(...);
 int mapCollisionDisableByTag(int);
@@ -83,7 +83,7 @@ extern int g_lmapScene; /* 0x581288 */
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: FUN_002b63d0. */
-/* Supplied declaration required: FUN_002d1f40. */
+/* Supplied declaration required: lmapRequestTimedEffect. */
 /* Supplied declaration required: FUN_002d8a48. */
 /* Supplied declaration required: lmapCameraSetMode. */
 /* Supplied declaration required: mapSetSceneState. */
@@ -337,7 +337,7 @@ LAB_00233a04:
         temp_v4 = *(int *)(temp_v5 + 100) + 1;
         *(int *)(temp_v5 + 100) = temp_v4;
         if (temp_v4 == 2) {
-          FUN_002d1f40(0xf,0x1e,1);
+          lmapRequestTimedEffect(0xf,0x1e,1);
         }
         if (*(int *)(temp_v5 + 100) == 0xf) {
           mapCollisionDisableByTag((int)(short)*(unsigned int *)(temp_v5 + 0x94));

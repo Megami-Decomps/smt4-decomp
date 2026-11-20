@@ -1,75 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f2cb0` (_code @ 0x3f2cb8, 0xc4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: modeled on proven smt4 FUN_0033b66c; only the prologue differs (retail adds 0x12FC before push and addresses handles/manager3d/base relative to control.status). */
+#include "common.h"
+
+struct SoundSystemManager3dA {
+    /* 0x00 */ const void *vtables[2];
+    /* 0x08 */ u8 unk08[0x34];
+    /* 0x3C */ u8 entries[16][0x88];
+};
+
+struct SoundSystemA {
+    /* 0x0000 */ u8 archive[0x194];
+    /* 0x0194 */ u8 player[0x118];
+    /* 0x02AC */ u8 dataManager[0x278];
+    /* 0x0524 */ u8 objs70[4][0x70];
+    /* 0x06E4 */ u8 detachObjs[2][0x3C];
+    /* 0x075C */ u8 registered[8];
+    /* 0x0764 */ u8 objs3c[4][0x3C];
+    /* 0x0854 */ SoundSystemManager3dA manager3d;
+    /* 0x1110 */ u8 handles[16][4];
+    /* 0x1150 */ u8 rest[0x1AC];
+    /* 0x12FC */ u8 status[0x4C];
+};
+
+typedef void *(*ElementDestructor)(void *element);
 
 extern "C" {
 
-int vcallSlot12IfValid(...);
-int FUN_0019059c(...);
-int FUN_001913e4(...);
-int sysFatalBreak(...);
-int __aeabi_vec_dtor(...);
-int FUN_0018fee4(...);
+extern u8 _ZTV9Obj55bd64[];
+void *__aeabi_vec_dtor(void *array, ElementDestructor destroy, u32 size, u32 count);
+void *_ZN11SoundHandleD1Ev(void *handle);
+void *FUN_0045bc3c(void *entry);
+void *_ZN10SoundObj3cD1Ev(void *object);
+void *soundObjDetachHandles(void *object);
+void *_ZN10SoundObj70D1Ev(void *object);
+u8 *FUN_0045c350(void *member);
+u8 *FUN_0045e8fc(void *member);
+void *FUN_00460f2c(void *base);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern int _ZN10SoundObj70D1Ev(...); /* 0x40167c */
-extern int _ZN10SoundObj3cD1Ev(...); /* 0x413094 */
-extern int _ZN11SoundHandleD1Ev(...); /* 0x45b830 */
-extern int FUN_0045bc3c(...); /* 0x45bc3c */
-extern int soundObjDetachHandles(...); /* 0x467080 */
-extern unsigned char DAT_0055bd6c; /* 0x55bd6c */
-extern unsigned char DAT_0055bda8; /* 0x55bda8 */
-extern unsigned char DAT_0055bdc8; /* 0x55bdc8 */
-extern unsigned char DAT_0055c0fc; /* 0x55c0fc */
-
-/* Supplied declaration required: vcallSlot12IfValid. */
-/* Supplied declaration required: FUN_0019059c. */
-/* Supplied declaration required: FUN_001913e4. */
-/* Supplied declaration required: sysFatalBreak. */
-/* Supplied declaration required: __aeabi_vec_dtor. */
-extern int FUN_0045c350(int);
-extern int FUN_0045e8fc(int);
-/* Supplied declaration required: FUN_0018fee4. */
-
-
-void FUN_003f2cb0(int param_1)
-
+/* Destroys the Apocalypse sound system's members in reverse order, then its base; returns the object. */
+void *FUN_003f2cb0(SoundSystemA *system)
 {
-/* irregular: 11 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  
-  __aeabi_vec_dtor(param_1 - 0x1ec,_ZN11SoundHandleD1Ev,4,0x10);
-  __aeabi_vec_dtor(param_1 - 0xa6c,FUN_0045bc3c,0x88,0x10);
-  *(unsigned char **)(param_1 - 0xaa8) = &DAT_0055bda8;
-  *(unsigned char **)(param_1 - 0xaa4) = &DAT_0055bdc8;
-  __aeabi_vec_dtor(param_1 - 0xb98,_ZN10SoundObj3cD1Ev,0x3c,4);
-  __aeabi_vec_dtor(param_1 - 0xc18,soundObjDetachHandles,0x3c,2);
-  __aeabi_vec_dtor(param_1 - 0xdd8,_ZN10SoundObj70D1Ev,0x70,4);
-  temp_v0 = FUN_0045c350(param_1 - 0x1050);
-  temp_v0 = FUN_0045e8fc(temp_v0 - 0x118);
-  puVar2 = (unsigned int *)(temp_v0 - 0x194);
-  *puVar2 = (unsigned int)&DAT_0055c0fc;
-  if (*(char *)(temp_v0 - 4) != '\0') {
-    FUN_0019059c(temp_v0 - 0x78);
-    FUN_001913e4(temp_v0 - 0x58);
-    *(unsigned char *)(temp_v0 - 4) = 0;
-  }
-  FUN_0018fee4(puVar2);
-  *(unsigned int *)(temp_v0 - 8) = 0xffffffff;
-  if ((*(unsigned int *)(temp_v0 - 0x74) & 0xfffffffe) != 0) {
-    if ((*(unsigned int *)(temp_v0 - 0x74) & 1) != 0) {
-      sysFatalBreak();
-    }
-    vcallSlot12IfValid(*(unsigned int *)(temp_v0 - 0x74) & 0xfffffffe);
-    *(unsigned int *)(temp_v0 - 0x74) = 0;
-  }
-  *puVar2 = (unsigned int)&DAT_0055bd6c;
-  return;
+    SoundSystemManager3dA *manager3d = &system->manager3d;
+
+    __aeabi_vec_dtor(system->handles, _ZN11SoundHandleD1Ev, 4, 16);
+    __aeabi_vec_dtor(manager3d->entries, FUN_0045bc3c, 0x88, 16);
+    manager3d->vtables[0] = _ZTV9Obj55bd64 + 0x44;
+    manager3d->vtables[1] = _ZTV9Obj55bd64 + 0x64;
+    __aeabi_vec_dtor(system->objs3c, _ZN10SoundObj3cD1Ev, 0x3C, 4);
+    __aeabi_vec_dtor(system->detachObjs, soundObjDetachHandles, 0x3C, 2);
+    __aeabi_vec_dtor(system->objs70, _ZN10SoundObj70D1Ev, 0x70, 4);
+    u8 *member = FUN_0045c350(system->dataManager);
+    member = FUN_0045e8fc(member - 0x118);
+    return FUN_00460f2c(member - 0x194);
 }
 
 } /* extern "C" */

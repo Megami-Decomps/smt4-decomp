@@ -1,10 +1,15 @@
-/* NON_MATCHING: paired-lock move/store order and GPU scalar address walking differ. */
+/* NON_MATCHING: CriticalSection init store/move scheduling and NngxCmdState base register choice differ (-O2 candidate). */
 #include "nn/os/CriticalSection.h"
 
 extern const u32 g_nngxDefaultCommandState[2];
 
+struct NngxCmdState {
+    u32 value;
+    NngxCmdState() : value(g_nngxDefaultCommandState[1]) {}
+};
+
 nn::os::CriticalSection g_nngxCriticalSection;
 nn::os::CriticalSection g_nngxInterruptCriticalSection;
-u32 g_nngxCommandState1 = g_nngxDefaultCommandState[1];
-u32 g_nngxGpu = g_nngxDefaultCommandState[1];
-u32 g_nngxCommandState3 = g_nngxDefaultCommandState[1];
+NngxCmdState g_nngxCommandState1;
+NngxCmdState g_nngxGpu;
+NngxCmdState g_nngxCommandState3;

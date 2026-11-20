@@ -1,4 +1,7 @@
-/* NON_MATCHING: addressing now matches retail (s8 `maxed`, entries indexed directly from the 0x7800 base); remaining: retail loads the leader's u64 with `ldrd` (members use two `ldr`), places the `lsr` temp in r2, and schedules the `maxed` byte load after the move of `needed`. */
+/* NON_MATCHING: addressing now matches retail (s8 `maxed`, entries indexed directly from the 0x7800 base); remaining: retail loads the leader's u64 with `ldrd` (members use two `ldr`), places the `lsr` temp in r2, and schedules the `maxed` byte load after the move of `needed`.
+ * The IV twin FUN_00296474 matches with the u64-to-gauge conversion as a plain `static f32 expWholePart(u64)` helper
+ * at each site; here that helper scores 62, and 10 only when marked `__inline` (wave 54): one helper cannot take two
+ * spellings, so the twin's form is not applied yet. */
 #include "common.h"
 #include "sys/RuntimeObjects.h"
 #include "gamedata/GamePlayerData.h"
@@ -43,11 +46,11 @@ PartyMemberRecord *gameGetSlotRecord(s32 slot);
 PartyMemberRecord *partyGetSlotPreferredFirst(u16 index);
 s32 partySlotMatchesSelected(PartyMemberRecord *record);
 u32 levelGetExpRequirement(s32 level);
-u32 FUN_004ccdb8(u16 expCurve, s32 level, s32 expBonus);
+u32 unitGetExpRequirement(u16 expCurve, s32 level, s32 expBonus);
 }
 
 /* Refreshes the gauge widths of the player, the party, the stock and the remaining slots. */
-extern "C" void FUN_00240674(ExpResultWork *work)
+extern "C" void resultExpGaugesRefresh(ExpResultWork *work)
 {
     PartySlotTable *table = gameGetSlotTable();
     TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x1d, 0x14);
@@ -63,7 +66,7 @@ extern "C" void FUN_00240674(ExpResultWork *work)
         if (slot >= 0) {
             PartyMemberRecord *record = gameGetSlotRecord(slot);
             if (record != NULL) {
-                u64 needed = FUN_004ccdb8(record->expCurve, record->level + work->members[slot].levelOffset, work->members[slot].expBonus);
+                u64 needed = unitGetExpRequirement(record->expCurve, record->level + work->members[slot].levelOffset, work->members[slot].expBonus);
                 if (work->members[slot].maxed) {
                     work->members[slot].gauge = icon->placement->width;
                 } else {
@@ -84,7 +87,7 @@ extern "C" void FUN_00240674(ExpResultWork *work)
         if (slot >= 0) {
             PartyMemberRecord *record = gameGetSlotRecord(slot);
             if (record != NULL) {
-                u64 needed = FUN_004ccdb8(record->expCurve, record->level + work->members[slot].levelOffset, work->members[slot].expBonus);
+                u64 needed = unitGetExpRequirement(record->expCurve, record->level + work->members[slot].levelOffset, work->members[slot].expBonus);
                 if (work->members[slot].maxed) {
                     work->members[slot].gauge = icon->placement->width;
                 } else {

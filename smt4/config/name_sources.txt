@@ -5879,3 +5879,12 @@
 00248738 gauntletAppMenuSetMode inferred twin of smt4a FUN_003dc0c0
 00256550 mapEnemyLoadExtraModel inferred twin of smt4a mapEnemyLoadExtraModel (same resource path map/all/sym%03d.bam)
 002c52dc svcCreateSemaphore evidence svc 0x15 (CreateSemaphore), output handle stored through the first argument
+003d0220 btlCameraRunTimedCues inferred runs the camera cues at timeline frames 15, 35 and 41 (alternate: 15, ends after 65); twin of smt4a 0x4e81bc
+0023cb70 btlCameraStartFovShift inferred stores the start/end FOV, frames and mode of the camera's FOV shift and sets its flag bits
+002d747c campCecViewCreate evidence debug trace path camp\CampCec\CampCecView.cpp and the "CampCecView Calc" process; twin of smt4a campCecViewCreate
+001c1014 campCecViewUpdate inferred registered by FUN_002d747c as the "CampCecView Calc" process; twin of smt4a 0x25d6a0
+001ffc5c campCecCreate evidence debug trace path camp\CampCec\CampCec.cpp line 281 and the "CampCec Calc" process; same shape as uniteCreate
+00296474 resultExpGaugesRefresh inferred refreshes the experience gauge widths of the player, the party and the stock
+003540d8 aocServiceRunItemRequest inferred validates and runs one content request for an item on the AOC service, returning the translated result
+00353a74 aocServiceRunItemCodeRequest inferred the variant that also passes the entered content code
+002879dc lmapRequestTimedEffect inferred clears or replaces the map view's pending request (priority, id, scaled timers)

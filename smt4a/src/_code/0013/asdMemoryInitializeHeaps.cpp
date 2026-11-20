@@ -22,7 +22,7 @@ void nn_os_CriticalSection_Initialize(AsdCriticalSectionInit *cs);
 
 extern AsdMemoryApoc g_asdMemory;
 extern AsdMemSystemInit DAT_00640414;       /* the memory system object */
-extern const u8 DAT_00558414;               /* ExpHeapBase vtable */
+extern const u8 _ZTV9Obj55840c[];           /* ExpHeapBase vtable */
 
 /* Sets up the process memory: keeps `reserve` bytes of the application's memory aside, maps the
  * address space, initializes the allocator (if `heapSize` is set) and the AsdMemSystem, and
@@ -59,7 +59,7 @@ void asdMemoryInitializeHeaps(u32 reserve, u32 heapSize, u32 arg2)
     system->mainLock.field04 = 0;
     system->mainLock.owner = -1;
     system->extraHeap.field04 = 0;
-    system->mainHeap.vtbl = &DAT_00558414;
+    system->mainHeap.vtbl = _ZTV9Obj55840c + 8;
     system->extraHeap.field08 = 0;
     system->extraHeap.field0C = 0;
     system->extraHeap.field10 = 0;
@@ -69,7 +69,7 @@ void asdMemoryInitializeHeaps(u32 reserve, u32 heapSize, u32 arg2)
     system->extraLock.field00 = 0;
     system->extraLock.field04 = 0;
     system->extraLock.owner = -1;
-    system->extraHeap.vtbl = &DAT_00558414;
+    system->extraHeap.vtbl = _ZTV9Obj55840c + 8;
     g_asdMemory.system = (AsdMemSystem *)system;
     addressBlockAllocate((AsdMemSystemInit *)g_asdMemory.system, FUN_00146898() - heapSize - arg2);
 

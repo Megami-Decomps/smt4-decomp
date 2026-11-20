@@ -92,7 +92,7 @@ int messageVoiceBankGet(...);
 int sysPlaySe(...);
 int FUN_00233e10(...);
 int mapIfSpawnManholeAction(...);
-int FUN_002d1f40(...);
+int lmapRequestTimedEffect(...);
 int lmapCameraSetMode(...);
 int FUN_003250ac(...);
 int FUN_0033abd4(...);
@@ -341,7 +341,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_002c2d44. */
 /* Supplied declaration required: lmapViewUpdateOrbitSequence. */
 /* Supplied declaration required: FUN_002d1e44. */
-/* Supplied declaration required: FUN_002d1f40. */
+/* Supplied declaration required: lmapRequestTimedEffect. */
 /* Supplied declaration required: mapIfReleasePanel. */
 /* Supplied declaration required: mapIfOverlayRelease. */
 /* Supplied declaration required: mapEaseSceneHeading. */
@@ -1641,7 +1641,7 @@ LAB_00326fcc:
               if ((g_lmapScene[2] == 6) && (mapSpawnRandomEventKindEffect(), g_lmapScene[2] == 6)) {
                 temp_v3 = 0x14;
                 temp_v17 = 6;
-                FUN_002d1f40(temp_v17,temp_v3,0);
+                lmapRequestTimedEffect(temp_v17,temp_v3,0);
               }
             }
             if (g_lmapScene[2] >= 8) {
@@ -1734,7 +1734,7 @@ LAB_003268e4:
         if ((g_lmapScene[2] == 6) && (mapSpawnRandomEventKindEffect(), g_lmapScene[2] == 6)) {
           temp_v3 = 8;
           temp_v17 = 4;
-          FUN_002d1f40(temp_v17,temp_v3,0);
+          lmapRequestTimedEffect(temp_v17,temp_v3,0);
         }
 LAB_00326a10:
         if (g_lmapScene[2] >= 8) {
@@ -3005,7 +3005,7 @@ LAB_00366704:
           temp_v17 = 0xf;
           temp_v3 = 10;
         }
-        FUN_002d1f40(temp_v3,temp_v17,0);
+        lmapRequestTimedEffect(temp_v3,temp_v17,0);
         temp_v32 = g_lmapScene[1];
         piVar18 = g_lmapScene;
         piVar18[1] = temp_v32 + 1;
@@ -4173,7 +4173,7 @@ LAB_0033eae8:
           FUN_0033abd4();
         }
         if (g_lmapScene[2] == 6) {
-          FUN_002d1f40(0x1e,0x32,0);
+          lmapRequestTimedEffect(0x1e,0x32,0);
           switch(DAT_005f162e) {
           case 0:
             temp_v3 = 0x10002c5;
@@ -4247,7 +4247,7 @@ LAB_0033eae8:
           FUN_0033abd4();
         }
         if (g_lmapScene[2] == 6) {
-          FUN_002d1f40(0x1e,0x32,0);
+          lmapRequestTimedEffect(0x1e,0x32,0);
           switch(DAT_005f162e) {
           case 0:
             temp_v3 = 0x10002c5;
@@ -4575,7 +4575,7 @@ joined_r0x00248750:
             sysPlaySe(0xe9);
           }
           *(unsigned char *)((int)g_lmapScene + 0x291) = 0;
-          FUN_002d1f40(8,0x78,0);
+          lmapRequestTimedEffect(8,0x78,0);
           temp_v32 = sysPlayVoice(0x10000d2);
           g_lmapScene[0x99] = temp_v32;
           break;
@@ -4661,7 +4661,7 @@ joined_r0x00248750:
                 }
                 if ((g_lmapScene[0x9c] == 6) && (mapSpawnRandomEventKindEffect(), g_lmapScene[0x9c] == 6)) {
                   FUN_00297f00(8,10);
-                  FUN_002d1f40(8,0x28,0);
+                  lmapRequestTimedEffect(8,0x28,0);
                 }
                 temp_v12 = g_lmapScene[0x9c];
                 goto joined_r0x002da15c;
@@ -4676,7 +4676,7 @@ LAB_002da1e4:
                 }
                 if (g_lmapScene[0x9c] == 4) {
                   FUN_00297f00(8,10);
-                  FUN_002d1f40(8,0x28,0);
+                  lmapRequestTimedEffect(8,0x28,0);
                   mapSpawnRandomEventKindEffect();
                 }
                 temp_v12 = g_lmapScene[0x9c];
@@ -4719,7 +4719,7 @@ LAB_002da2b0:
               }
               if (g_lmapScene[0x9c] == 6) {
                 FUN_00297f00(8,10);
-                FUN_002d1f40(8,0x28,0);
+                lmapRequestTimedEffect(8,0x28,0);
                 mapSpawnRandomEventKindEffect();
               }
               temp_v12 = g_lmapScene[0x9c];
@@ -4767,13 +4767,13 @@ LAB_002da3cc:
             }
             if ((g_lmapScene[0x9c] == 6) && (mapSpawnRandomEventKindEffect(), g_lmapScene[0x9c] == 6)) {
               FUN_00297f00(8,10);
-              FUN_002d1f40(8,0x28,0);
+              lmapRequestTimedEffect(8,0x28,0);
             }
             if (g_lmapScene[0x9c] != 0xe) goto LAB_002da3cc;
             g_lmapScene[0x9b] = DAT_005f1c94 + g_lmapScene[0x9b] + 3;
           }
           if ((int)(unsigned int)*(unsigned short *)(temp_v6 + 2) <= g_lmapScene[2]) {
-            FUN_002d1f40(10,0x78,0);
+            lmapRequestTimedEffect(10,0x78,0);
             if (g_lmapScene[0x9b] >= (int)(unsigned int)*(unsigned short *)(temp_v6 + 4)) {
               popupStateClose();
               soundApplyValueOrStop(g_lmapScene[0x99],0);
@@ -4992,7 +4992,7 @@ LAB_002dad8c:
             FUN_001628c0(&LAB_002dae38,temp_v3,temp_v17,1);
           }
           if (g_lmapScene[2] == 7) {
-            FUN_002d1f40(4,0x32,0);
+            lmapRequestTimedEffect(4,0x32,0);
           }
           temp_v32 = linkHolderCallFirst(g_lmapScene[0x6a]);
           if ((temp_v32 == 0x23) && (temp_v32 = linkHolderCheckFirst(g_lmapScene[0x6a]), temp_v32 != 0)) {
@@ -5196,7 +5196,7 @@ LAB_002dad8c:
       piVar10[0xb] = piVar10[8];
       piVar10[0xc] = piVar10[9];
       *(unsigned char *)(piVar10 + 0x1b) = 0;
-      FUN_002d1f40(10,0x14,0);
+      lmapRequestTimedEffect(10,0x14,0);
       FUN_00324e38(0);
       soundActorStartOnFreeChannel(0x1000224);
       libm_sinf();
@@ -7999,7 +7999,7 @@ joined_r0x00397538:
           sysPlayVoice(0x10000c5);
         }
         if (g_lmapScene[2] == 7) {
-          FUN_002d1f40(4,0x32,0);
+          lmapRequestTimedEffect(4,0x32,0);
         }
         temp_v32 = linkHolderCallFirst(g_lmapScene[0x6a]);
         if ((temp_v32 == 0x23) && (temp_v32 = linkHolderCheckFirst(g_lmapScene[0x6a]), temp_v32 != 0)) {

@@ -125,7 +125,7 @@ int pairSetHalves(...);
 int gameGetSlotRecord(...);
 int gameGetSlotTable(void);
 int resultSetMode(...);
-int FUN_00240674(...);
+int resultExpGaugesRefresh(...);
 int uiQuestClose(void);
 int FUN_00358e94(...);
 int panelSetTarget(unsigned int, int);
@@ -216,7 +216,7 @@ extern int FUN_0022e750(void);
 /* Supplied declaration required: statusPanelClose. */
 /* Supplied declaration required: gameSavedFlagSet. */
 /* Supplied declaration required: FUN_0023c384. */
-/* Supplied declaration required: FUN_00240674. */
+/* Supplied declaration required: resultExpGaugesRefresh. */
 extern int *FUN_0025e684(int);
 extern int dialogIsActive(void);
 extern int messageMainIsIdle(void);
@@ -503,7 +503,7 @@ unsigned int FUN_00204098(void)
       }
       temp_v13 = temp_v13 + 1;
     } while ((int)temp_v13 < 0xc);
-    FUN_00240674(temp_v6);
+    resultExpGaugesRefresh(temp_v6);
     resultSetMode(temp_v6,2);
     messageBannerInitCounter(1,0);
     panelSetTarget(*(unsigned int *)(temp_v6 + 0x4428),1);
@@ -918,7 +918,7 @@ LAB_00204688:
       }
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 0x25);
-    FUN_00240674(temp_v6,temp_v13);
+    resultExpGaugesRefresh(temp_v6,temp_v13);
     temp_v13 = 1;
     temp_v7 = 0x25;
     pcVar26 = temp_v43;
@@ -1196,7 +1196,7 @@ LAB_00205528:
             }
             temp_v13 = temp_v13 + 1;
           } while ((int)temp_v13 < 0xc);
-          FUN_00240674(temp_v6);
+          resultExpGaugesRefresh(temp_v6);
           piVar25 = (int *)(temp_v6 + 0x74bc);
           *piVar25 = 0;
           *(unsigned int *)(temp_v6 + 0x74c0) = 0;

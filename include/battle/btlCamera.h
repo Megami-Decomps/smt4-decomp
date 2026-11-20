@@ -277,13 +277,26 @@ struct BtlCameraA {
             };
             /* 0x5C0 */ f32 distance;
         } basePose;
+        struct {
+            /* 0x06C */ u8 unk06c[0x598];
+            /* 0x604 */ f32 endFov;
+            /* 0x608 */ u8 unk608[0x40];
+            /* 0x648 */ f32 startFov;
+        } lensPose;
     };
     /* 0x64c */ u32 flags;
     /* 0x650 */ u8 unk650[8];
     /* 0x658 */ CameraBackend *backend;
     /* 0x65c */ u8 unk65c[0x2e];
     /* 0x68a */ u8 enabled;
-    /* 0x68b */ u8 unk68b[0x109];
+    /* 0x68b */ u8 unk68b[0x79];
+    /* 0x704 */ f32 eyeDip;
+    /* 0x708 */ u8 unk708[0xC];
+    /* 0x714 */ f32 fovShift;
+    /* 0x718 */ s32 fovShiftDuration;
+    /* 0x71c */ s32 fovShiftFrame;
+    /* 0x720 */ s32 fovShiftMode;
+    /* 0x724 */ u8 unk724[0x70];
     /* 0x794 */ u32 settleState;
     /* 0x798 */ u32 settleMode;
     /* 0x79c */ BtlCameraGraphics graphics;
@@ -305,6 +318,10 @@ typedef char BtlCameraFlagsCheck[offsetof(BtlCameraA, flags) == 0x64C ? 1 : -1];
 typedef char BtlCameraBackendCheck[offsetof(BtlCameraA, backend) == 0x658 ? 1 : -1];
 typedef char BtlCameraEnabledCheck[offsetof(BtlCameraA, enabled) == 0x68A ? 1 : -1];
 typedef char BtlCameraGraphicsCheck[offsetof(BtlCameraA, graphics) == 0x79C ? 1 : -1];
+typedef char BtlCameraALensOffsetsCheck[
+    offsetof(BtlCameraA, lensPose.endFov) == 0x604 && offsetof(BtlCameraA, lensPose.startFov) == 0x648 &&
+    offsetof(BtlCameraA, eyeDip) == 0x704 && offsetof(BtlCameraA, fovShift) == 0x714 &&
+    offsetof(BtlCameraA, fovShiftMode) == 0x720 ? 1 : -1];
 typedef char BtlCameraJobSizeCheck[sizeof(BtlCameraJobA) == 0x6C ? 1 : -1];
 typedef char BtlCameraJobDrawCheck[offsetof(BtlCameraJobA, drawJob) == 0x68 ? 1 : -1];
 typedef char BtlCameraOrientationOffsetCheck[

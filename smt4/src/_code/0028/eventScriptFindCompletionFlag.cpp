@@ -1,4 +1,4 @@
-/* NON_MATCHING: bsearch argument setup folds the table count/entry-base calculation into a post-indexed load instead of retail's separate instructions. */
+/* NON_MATCHING: bsearch argument setup: armcc folds the table count load and the entry-base add into a post-indexed load (ldr r2, [r1], #24) where retail adds the base first, and the compare-pointer load is scheduled earlier. */
 #include "shard/W6_W6Match5_NamedLookup.h"
 
 struct NamedLookupTable {
@@ -20,8 +20,9 @@ u32 eventScriptFindCompletionFlag(u16 id, const NamedRecordName *name)
         key.name.words[word] = name->words[word];
     key.key = id;
     u32 result = 0;
+    NamedLookupTable *table = &DAT_0043e3b0;
     NamedSortRecord *entry = static_cast<NamedSortRecord *>(
-        libc_bsearch(&key, DAT_0043e3b0.entries, DAT_0043e3b0.count,
+        libc_bsearch(&key, table->entries, table->count,
                      sizeof(NamedSortRecord), keyedRecordCompareName));
     if (entry)
         result = entry->index + 0x820;

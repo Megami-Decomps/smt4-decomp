@@ -27,7 +27,7 @@ bool inputTestEnabledRule(u32 index)
         return false;
     }
     InputState *input;
-    if ((g_padInputState.unk08 & 1) != 0) {
+    if ((g_padInputState.flags & 1) != 0) {
         input = &DAT_004e3c48;
     } else {
         input = &DAT_004e3c28;

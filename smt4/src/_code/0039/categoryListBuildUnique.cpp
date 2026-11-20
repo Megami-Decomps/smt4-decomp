@@ -1,4 +1,4 @@
-/* NON_MATCHING: selection-sort loop arithmetic/branch orientation and local register allocation differ; -O2 candidate. */
+/* NON_MATCHING: selection-sort register allocation, the empty-table branch target and the entry-copy registers differ. */
 #include "common.h"
 #include "shard/W6_W6Match3_BattleQueue.h"
 #include "game/GameState.h"
@@ -23,7 +23,7 @@ s32 saveTestFlagRow(u8, u8);
 
 void categoryListBuildUnique(CategoryList *list, s32 kind)
 {
-    u16 categories[32] = {0};
+    s16 categories[32] = {0};
     s32 count = 0;
     CategoryTable table;
     for (s32 i = 0; i < dataTable2bSub1GetCount(&table); ++i) {
@@ -46,12 +46,13 @@ void categoryListBuildUnique(CategoryList *list, s32 kind)
         if (!found)
             categories[count++] = record->category;
     }
+    /* Select the largest category in each remaining suffix. */
     for (s32 i = 0; i < count - 1; ++i) {
-        for (s32 j = i + 1; j < count; ++j) {
-            if (categories[j] > categories[i]) {
+        for (s32 j = 1; j < count - i; ++j) {
+            if (categories[i + j] > categories[i]) {
                 s16 category = categories[i];
-                categories[i] = categories[j];
-                categories[j] = category;
+                categories[i] = categories[i + j];
+                categories[i + j] = category;
             }
         }
     }

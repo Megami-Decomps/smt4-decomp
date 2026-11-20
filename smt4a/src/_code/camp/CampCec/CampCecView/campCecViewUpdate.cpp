@@ -1,4 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025d6a0` (_code @ 0x25d6a0, 0xfd8 bytes) from smt4a.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `campCecViewUpdate` (_code @ 0x25d6a0, 0xfd8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -81,7 +81,7 @@ extern int fourPtrsAllNull(unsigned int);
 
 /* WARNING: Type propagation algorithm not settling */
 
-unsigned int FUN_0025d6a0(void)
+unsigned int campCecViewUpdate(void)
 
 {
 /* irregular: 7 goto(s); irregular input(s): in_fpscr; 30 native warning(s); review required */

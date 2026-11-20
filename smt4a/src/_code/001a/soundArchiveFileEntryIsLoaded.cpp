@@ -1,20 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `soundArchiveFileEntryIsLoaded` (_code @ 0x1a8e14, 0x10 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail has a linker-inlined `nop` (empty callee) between the two loads; the loads and tail call match. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001b3950(unsigned int);
+s32 FUN_001b3950(u32 value);
 
-/* Supplied declaration required: FUN_001b3950. */
+struct SoundArchiveEntry {
+    /* 0x00 */ u8 unk00[0x3C];
+    /* 0x3C */ u32 fileId;
+};
 
+struct SoundArchiveView {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ const SoundArchiveEntry *entry;
+};
 
-void soundArchiveFileEntryIsLoaded(int param_1)
-
+/* Forwards the archive entry's file id to FUN_001b3950 and returns its result. */
+s32 soundArchiveFileEntryIsLoaded(SoundArchiveView *archive)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_001b3950(*(unsigned int *)(*(int *)(param_1 + 4) + 0x3c));
-  return;
+    return FUN_001b3950(archive->entry->fileId);
 }
 
 } /* extern "C" */

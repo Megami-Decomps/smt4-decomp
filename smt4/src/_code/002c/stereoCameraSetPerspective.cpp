@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail copies the perspective as two vstmia pairs and shuffles the call's float args through s4 from s1; ours stores all four at once. */
+/* NON_MATCHING: the projections (nn::math's inlined MTX44PerspectivePivotDeg) match retail; in the prologue armcc moves the aspect into s1 before storing the perspective (vstr s0, vstr s4, then the far/aspect pair) where retail stores both pairs from the incoming registers first, and pivot is copied to r5 later. */
 #include "common.h"
 
 extern "C" {
@@ -29,19 +29,27 @@ typedef struct StereoCameraView {
 
 void mtx44Perspective(f32 (*mtx)[4], f32 fovy, f32 aspect, f32 nearZ, f32 farZ);
 void nn_math_ARMv6_MTX44PivotC_FAST(f32 (*mtx)[4], u32 pivot);
-void nn_math_ARMv6_MTX44TransposeAsm(f32 (*dst)[4], f32 (*src)[4]);
+/* nn::math::MTX44Transpose: returns dst. */
+f32 (*nn_math_ARMv6_MTX44TransposeAsm(f32 (*dst)[4], f32 (*src)[4]))[4];
 void nn_ulcd_CTR_StereoCamera_SetBaseFrustum(void *stereoCamera, f32 (*projection)[4]);
 
+/* nn::math::MTX44PerspectivePivotDeg (an SDK header inline): a perspective projection from a field of view in
+ * degrees, rotated for the screen's pivot. */
+static __inline void mtx44PerspectivePivotDeg(f32 (*mtx)[4], f32 fovy, f32 aspect, f32 nearZ, f32 farZ, u32 pivot)
+{
+    mtx44Perspective(mtx, fovy * DEG_TO_RAD, aspect, nearZ, farZ);
+    nn_math_ARMv6_MTX44PivotC_FAST(mtx, pivot);
+}
+
+/* Stores the camera's perspective and rebuilds its pivoted projection, the transposed copy and the stereo base frustum. */
 void stereoCameraSetPerspective(StereoCameraView *view, u32 pivot, CameraPerspective perspective)
 {
     view->perspective = perspective;
-    mtx44Perspective(view->projection, perspective.fovy * DEG_TO_RAD, perspective.aspect,
-                 perspective.nearZ, perspective.farZ);
-    nn_math_ARMv6_MTX44PivotC_FAST(view->projection, pivot);
+    mtx44PerspectivePivotDeg(view->projection, perspective.fovy, perspective.aspect, perspective.nearZ,
+                             perspective.farZ, pivot);
     nn_math_ARMv6_MTX44TransposeAsm(view->projectionTransposed, view->projection);
-    mtx44Perspective(view->baseProjection, view->perspective.fovy * DEG_TO_RAD, view->perspective.aspect,
-                 view->perspective.nearZ, view->perspective.farZ);
-    nn_math_ARMv6_MTX44PivotC_FAST(view->baseProjection, 0);
+    mtx44PerspectivePivotDeg(view->baseProjection, view->perspective.fovy, view->perspective.aspect,
+                             view->perspective.nearZ, view->perspective.farZ, 0);
     if (view->stereoEnabled) {
         nn_ulcd_CTR_StereoCamera_SetBaseFrustum(view->stereoCamera, view->baseProjection);
     }

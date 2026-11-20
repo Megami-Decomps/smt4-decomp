@@ -48,7 +48,7 @@ void skillHelpUpdateAttributeAndTarget(u32 id);
 void buttonHelpSetText(u32 mode, u32 color);
 u32 padQueryLogicalKey(u32 button, u32 mode);
 void unitRecordBuild(u32 id, UnitRecord *record);
-void FUN_0020b908(u32 channel, u32 mode);
+void uniteMenuChangeState(u32 channel, u32 mode);
 void eventQueueAddUniqueIfValid(u32 event);
 
 u32 FUN_003cca18(UniteWorkA *work, s8 blocked, u32 *selected)
@@ -75,7 +75,7 @@ u32 FUN_003cca18(UniteWorkA *work, s8 blocked, u32 *selected)
             &work->pairList.pairs[*selected]);
         UnitRecord record;
         unitRecordBuild(pair->resultId, &record);
-        FUN_0020b908(0x10, 0);
+        uniteMenuChangeState(0x10, 0);
         eventQueueAddUniqueIfValid(0x100020E);
     } else if (padQueryLogicalKey(1, 1) != 0) {
         eventQueueAddUniqueIfValid(0x100020F);

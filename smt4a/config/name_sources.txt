@@ -8433,3 +8433,17 @@
 00372794 skillMenuCanCurrentUserUseSkill inferred whether the user under the skill menu's cursor can use a skill
 0019a300 svcConnectToPort evidence svc 0x2d (ConnectToPort), output handle stored through the first argument
 0017fd20 svcCreateEvent evidence svc 0x17 (CreateEvent), called by the nn::os::Event::Initialize idiom (0xE0A0183B when already created)
+004e81bc btlCameraRunTimedCues inferred twin of smt4 0x3d0220
+004f3f1c btlCameraStartFovShift inferred twin of smt4 0x23cb70
+00235bfc mapApplySceneFog inferred same fog fields and default values as moriSceneSetFogDefaults
+00272d44 mapTryStartAreaLevelEvent inferred tests the area's level event and starts it
+002ac2b4 fusionSelectionHasAilment inferred tests the fusion selection's units for an ailment
+0025d6a0 campCecViewUpdate inferred registered by campCecViewCreate as the "CampCecView Calc" process
+0020b908 uniteMenuChangeState inferred twin of smt4 uniteMenuChangeState (same states, help presets and request handling)
+00232d58 MapEnemy_Register inferred twin of smt4 MapEnemy_Register (mapEnemy.cpp trace, "MENEMY" draw task)
+00240674 resultExpGaugesRefresh inferred twin of smt4 0x296474
+0020a320 btlCommandMenuApplySelection inferred applies the battle command menu's selection (marker-flag tests, help text)
+004ccdb8 unitGetExpRequirement inferred scales the level table by the unit's base level
+00429178 aocServiceRunItemRequest inferred twin of smt4 0x3540d8
+004289cc aocServiceRunItemCodeRequest inferred twin of smt4 0x353a74
+002d1f40 lmapRequestTimedEffect inferred twin of smt4 0x2879dc

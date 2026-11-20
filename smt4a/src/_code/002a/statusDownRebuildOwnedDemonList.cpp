@@ -1,4 +1,4 @@
-/* NON_MATCHING: quantity/count increment registers, controller address scheduling and final cursor-clamp arithmetic differ from retail. */
+/* NON_MATCHING: the cursor bound test uses the opposite row and column registers, as in the IV twin. */
 #include "status/StatusDownA.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
@@ -21,26 +21,26 @@ void statusDownRebuildOwnedDemonList(const u8 *quantities)
             state->inventory.entries[state->inventory.count][0] = record->id;
             u8 quantity = quantities[record->id];
             state->inventory.entries[state->inventory.count][1] = quantity;
+            s16 count = state->inventory.count;
             if (quantity != 0) {
                 ++state->inventory.ownedCount;
             }
-            ++state->inventory.count;
+            state->inventory.count = count + 1;
         }
     }
-    void *controller = &state->inventory.navigation;
-    gridNavigationConfigure(controller, state->inventory.count, 9, 4, 1, 1);
+    gridNavigationConfigure(&state->inventory.navigation, state->inventory.count, 9, 4, 1, 1);
+    ScrollSelection *controller = (ScrollSelection *)&state->inventory.navigation;
     s32 count = state->inventory.count;
     if (count > 0 && count <= state->inventory.column + state->inventory.row * 4) {
-        u16 row = (count - 1) / 4;
-        state->inventory.row = row;
-        state->inventory.column = count - row * 4 - 1;
-        scrollListSetSelectionTracked(reinterpret_cast<ScrollSelection *>(controller), row);
+        state->inventory.row = (count - 1) / 4;
+        state->inventory.column = state->inventory.count - state->inventory.row * 4 - 1;
+        scrollListSetSelectionTracked(controller, state->inventory.row);
         scrollOwnerSelectIndex(controller, state->inventory.column);
     } else {
-        scrollListSetSelectionTracked(reinterpret_cast<ScrollSelection *>(controller), state->inventory.row);
+        scrollListSetSelectionTracked(controller, state->inventory.row);
         scrollOwnerSelectIndex(controller, state->inventory.column);
     }
     FUN_003d4104();
     state->listActive = 1;
 }
-}
+} /* extern "C" */

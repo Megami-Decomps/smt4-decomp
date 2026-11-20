@@ -1,5 +1,6 @@
-/* NON_MATCHING: instruction scheduling and register choice only (retail routes nnosGetApplicationMemorySize's result through r4 before nnosInitAddressSpaceOnce and
- * schedules the constructor stores differently); the same instructions otherwise. */
+/* NON_MATCHING: instruction scheduling and register choice only (retail routes nnosGetApplicationMemorySize's result through r4 before nnosInitAddressSpaceOnce,
+ * sets the -1 register after the first lock store, and forms the heap locks' addresses in r1 just before their stm); the same instructions otherwise. */
+#include <new>
 #include "protos__code.h"
 #include "nn/os/CriticalSection.h"
 #include "shard/S2AsdMemInit.h"
@@ -7,7 +8,7 @@
 
 extern "C" {
 
-extern u8 DAT_00420f30; /* ExpHeapBase vtable */
+extern const u32 _ZTV9Obj420f28[]; /* ExpHeapBase vtable */
 extern NnCriticalSection DAT_004e40f4;
 extern NnCriticalSection *DAT_00465124;
 extern AsdMemSystemFull DAT_004e3ff0;
@@ -24,13 +25,6 @@ void addressBlockAllocate(void *block, u32 size);
 void rt_memclr(u32 base, u32 size);
 void heapOwnerCreate(void *expHeap, u32 base, u32 size, u32 flags);
 
-static __inline void criticalSectionConstruct(NnCriticalSection *lock)
-{
-    lock->unk00 = 0;
-    lock->unk04 = 0;
-    lock->unk08 = -1;
-}
-
 static __inline void expHeapConstruct(NnExpHeap *heap)
 {
     u32 i;
@@ -39,8 +33,8 @@ static __inline void expHeapConstruct(NnExpHeap *heap)
         heap->base.unk04[i] = 0;
     }
     heap->base.unk54 = 0;
-    criticalSectionConstruct(&heap->lock);
-    heap->base.vtable = &DAT_00420f30;
+    new (&heap->lock) NnCriticalSection;
+    heap->base.vtable = _ZTV9Obj420f28 + 2;
 }
 
 /* Reserves the application memory, brings up the nn allocator and builds the engine's memory
@@ -61,8 +55,7 @@ void asdMemInitializeSystem(u32 reserveSize, u32 allocatorSize, u32 extraReserve
         nn_init_InitializeAllocator(allocatorSize);
     }
 
-    criticalSectionConstruct(&DAT_004e40f4);
-    DAT_00465124 = &DAT_004e40f4;
+    DAT_00465124 = new (&DAT_004e40f4) NnCriticalSection;
     nn_os_CriticalSection_Initialize(&DAT_004e40f4);
 
     system = &DAT_004e3ff0;

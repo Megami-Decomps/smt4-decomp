@@ -16,7 +16,7 @@ void buttonHelpSetPreset(s32 preset);
 void FUN_0026b9bc(void);
 void FUN_0028a924(s32 a, s32 b, s32 c);
 void FUN_0028a368(s32 a);
-void FUN_002d747c(void);
+void campCecViewCreate(void);
 
 /* Closes the camp CEC view screen once it signals completion; returns 2 when the camp state moved to 6. */
 s32 FUN_001dc608(CampState *camp)
@@ -24,7 +24,7 @@ s32 FUN_001dc608(CampState *camp)
     s32 result = 0;
 
     if (campCecViewExists() == 0) {
-        FUN_002d747c();
+        campCecViewCreate();
     } else if (campCecViewIsDone() != 0) {
         campCecViewDestroy();
         buttonHelpSetPreset(3);

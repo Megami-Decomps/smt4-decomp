@@ -3,10 +3,10 @@
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "battle/BtlGlobals.h"
+#include "battle/CameraScalarTransition.h"
 
 extern "C" {
 
-int FUN_0023cb70(int, unsigned int, int, int);
 int transitionConfigureAndReset(int, unsigned int, int);
 int FUN_0023cd08(...);
 int FUN_00256898(int, unsigned int);
@@ -40,7 +40,7 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-/* Supplied declaration required: FUN_0023cb70. */
+/* Supplied declaration required: btlCameraStartFovShift. */
 /* Supplied declaration required: transitionConfigureAndReset. */
 /* Supplied declaration required: FUN_0023cd08. */
 /* Supplied declaration required: FUN_00256898. */
@@ -101,10 +101,11 @@ void FUN_003445f8(unsigned int param_1,int param_2)
       return;
     }
     break;
-  case 10:
-    VectorSignedToFloat((int)*(short *)(param_2 + 0x24),(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_0023cb70(reinterpret_cast<int>(g_btlMain),*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48),0);
+  case 10: {
+    const BtlCameraLensCommand *command = (const BtlCameraLensCommand *)param_2;
+    btlCameraStartFovShift(g_btlMain, (f32)command->fov, command->frames, command->mode, 0);
     return;
+  }
   case 0xb:
     if ((*(int *)(param_2 + 0x14) != 0) &&
        ((*(unsigned int *)(*(int *)(param_2 + 0x14) + 0x50) & 0x10) == 0)) {

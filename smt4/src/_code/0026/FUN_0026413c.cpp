@@ -69,7 +69,11 @@ void FUN_0026413c(void)
             camera->turnStart = camera->heading;
             camera->turnTarget = 180.0f;
             g_mapCamera->elapsed = 0;
-            g_mapCamera->turnDirection = mathGetShortestAngleDelta(camera->heading, 180.0f) < 0.0f ? -1.0f : 1.0f;
+            if (mathGetShortestAngleDelta(camera->heading, 180.0f) < 0.0f) {
+                g_mapCamera->turnDirection = -1.0f;
+            } else {
+                g_mapCamera->turnDirection = 1.0f;
+            }
         }
     }
     if (g_mapCamera->turning == 0) {

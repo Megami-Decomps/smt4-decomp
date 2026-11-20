@@ -93,7 +93,7 @@ int unitNotificationShowNext(...);
 int FUN_002960ec(...);
 int FUN_00296284(int, int);
 int FUN_002963ec(...);
-int FUN_00296474(...);
+int resultExpGaugesRefresh(...);
 int resultSetMenuState(...);
 int uiQuestClose(void);
 int messageBannerSetCountdown(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
@@ -177,7 +177,7 @@ extern int dataTable9EntryOrZero(int);
 /* Supplied declaration required: FUN_002960ec. */
 /* Supplied declaration required: FUN_00296284. */
 /* Supplied declaration required: FUN_002963ec. */
-/* Supplied declaration required: FUN_00296474. */
+/* Supplied declaration required: resultExpGaugesRefresh. */
 /* Supplied declaration required: resultSetMenuState. */
 /* Supplied declaration required: uiQuestClose. */
 extern int modelPairTryBind(int);
@@ -384,7 +384,7 @@ unsigned int FUN_0018c0ec(void)
       }
       temp_v8 = temp_v8 + 1;
     } while (temp_v8 < 0x18);
-    FUN_00296474(temp_v2);
+    resultExpGaugesRefresh(temp_v2);
     resultSetMenuState(temp_v2,2);
     messageBannerInitSelection(1,0);
     messageTargetSetValue(*(unsigned int *)(temp_v2 + 0x3650),1);
@@ -757,7 +757,7 @@ LAB_0018c354:
       }
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 0x18);
-    FUN_00296474(temp_v2);
+    resultExpGaugesRefresh(temp_v2);
     temp_v16 = 1;
     temp_v4 = 0x19;
     pcVar18 = temp_v32;
@@ -925,7 +925,7 @@ LAB_0018d058:
             }
             temp_v4 = temp_v4 + 1;
           } while (temp_v4 < 0x18);
-          FUN_00296474(temp_v2);
+          resultExpGaugesRefresh(temp_v2);
           piVar17 = (int *)(temp_v2 + 0xcf74);
           *piVar17 = 0;
           *(unsigned int *)(temp_v2 + 0xcf78) = 0;

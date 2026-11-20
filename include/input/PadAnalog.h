@@ -9,6 +9,21 @@ struct PadAnalogCalibration {
     /* 0x12 */ s16 maximum[3];
     /* 0x18 */ u8 mode;
 };
+/* Reads the lower and upper calibration limits for the current mode. */
+static __inline void padAnalogGetExtrema(const PadAnalogCalibration *calibration, s16 &minimum, s16 &maximum)
+{
+    if (calibration->mode == 0) {
+        minimum = calibration->minimum[0];
+        maximum = calibration->maximum[0];
+    } else if (calibration->mode == 1) {
+        minimum = calibration->minimum[1];
+        maximum = calibration->maximum[1];
+    } else {
+        minimum = calibration->minimum[2];
+        maximum = calibration->maximum[2];
+    }
+}
+
 struct PadAnalogSample {
     /* 0x00 */ u8 prefix[0xC];
     /* 0x0C */ s16 x;

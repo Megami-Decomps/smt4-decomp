@@ -1,65 +1,70 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f1cb8` (_code @ 0x3f1cc4, 0xe4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: modeled on smt4a FUN_0051159c; middle constructor chain and atexit match, but the initial 64-bit stores use stm instead of strd and the tail section stores offset from listener instead of base+0x11EC. */
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+
+struct SndSystemLayout {
+    /* 0x0000 */ u8 archive[0x184];
+    /* 0x0184 */ u8 player[0xC0];
+    /* 0x0244 */ u8 dataManager[0x278];
+    /* 0x04BC */ AsdSndSlotB slotsB[ASD_SND_SLOT_B_COUNT];
+    /* 0x05FC */ AsdSndAuxSlot auxSlots[2];
+    /* 0x0674 */ AsdSndSlotC slotsC[ASD_SND_SLOT_C_COUNT];
+    /* 0x0694 */ AsdSndSlotA slotsA[ASD_SND_SLOT_A_COUNT];
+    /* 0x0784 */ u8 manager3d[0x3C];
+    /* 0x07C0 */ u8 actors[16][0x84];
+    /* 0x1000 */ u8 handles[16][4];
+    /* 0x1040 */ u8 pad1040[0xC0];
+    /* 0x1100 */ u8 listener[0xD0];
+    /* 0x11D0 */ AsdSndDuck duck;
+    /* 0x11EC */ u32 status0;
+    /* 0x11F0 */ u32 status1;
+    /* 0x11F4 */ AsdSndCriticalSection section;
+};
 
 extern "C" {
 
-int __aeabi_vec_ctor_nocookie_nodtor(...);
+extern s64 DAT_00464ff0;
+extern u64 DAT_00464ff8;
+extern SndSystemLayout g_asdSound;
+extern u8 entry;
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_3_stack;
+typedef void (*ElementCtor)(void *element);
 
-extern int FUN_0034068c(...); /* 0x34068c */
-extern int objectRegisterPart(...); /* 0x3472c8 */
-extern unsigned char frameHeapInitializeRange; /* 0x34883c */
-extern unsigned char FUN_003494f0; /* 0x3494f0 */
-extern unsigned char FUN_00376968; /* 0x376968 */
-extern int FUN_00376d14(...); /* 0x376d14 */
-extern unsigned int DAT_00464ff8; /* 0x464ff8 */
-extern unsigned int DAT_00464ffc; /* 0x464ffc */
-extern unsigned char g_asdSound; /* 0x4e1f68 */
+void *__aeabi_vec_ctor_nocookie_nodtor(void *array, ElementCtor ctor, u32 elementSize, u32 count); // declcheck: local (classes/Obj557b68.h types the constructor as returning its element)
+void __aeabi_atexit(void *object, void (*destructor)(void *), void *moduleHandle);
 
-/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-extern int FUN_00377174(int);
-extern int installVtbl55BDE0(unsigned char *);
-extern int FUN_003773d4(int);
-extern int FUN_00378a54(int);
-extern int nw_snd_Sound3DListener_Sound3DListener_sub_object(int);
+u8 *installVtbl55BDE0(u8 *part);
+u8 *FUN_00378a54(u8 *part);
+u8 *FUN_003773d4(u8 *part);
+u8 *FUN_00377174(u8 *part);
+u8 *nw_snd_Sound3DListener_Sound3DListener_sub_object(u8 *part);
 
+void FUN_0034068c(void *element);
+void objectRegisterPart(void *element);
+void FUN_00376d14(void *element);
+extern u8 frameHeapInitializeRange, FUN_003494f0, FUN_00376968;
+void FUN_0033b66c(void *object);
 
-void FUN_003f1cb8(unsigned int param_1,unsigned int param_2,unsigned int *param_3)
-
+/* Initializes the sound globals and constructs g_asdSound, then registers its destructor. */
+void FUN_003f1cb8(void)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  
-  *param_3 = param_1;
-  param_3[1] = param_2;
-  DAT_00464ff8 = 0;
-  DAT_00464ffc = 0;
-  temp_v0 = installVtbl55BDE0(&g_asdSound);
-  temp_v0 = FUN_00378a54(temp_v0 + 0x184);
-  temp_v0 = FUN_003773d4(temp_v0 + 0xc0);
-  temp_v0 = temp_v0 + 0x278;
-  __aeabi_vec_ctor_nocookie_nodtor(temp_v0,FUN_0034068c,0x50,4);
-  temp_v0 = temp_v0 + 0x140;
-  __aeabi_vec_ctor_nocookie_nodtor(temp_v0,&frameHeapInitializeRange,0x3c,2);
-  temp_v0 = temp_v0 + 0x78;
-  __aeabi_vec_ctor_nocookie_nodtor(temp_v0,&FUN_003494f0,0x10,2);
-  temp_v0 = temp_v0 + 0x20;
-  __aeabi_vec_ctor_nocookie_nodtor(temp_v0,objectRegisterPart,0x3c,4);
-  temp_v0 = FUN_00377174(temp_v0 + 0xf0);
-  temp_v0 = temp_v0 + 0x3c;
-  __aeabi_vec_ctor_nocookie_nodtor(temp_v0,FUN_00376d14,0x84,0x10);
-  temp_v0 = temp_v0 + 0x840;
-  __aeabi_vec_ctor_nocookie_nodtor(temp_v0,&FUN_00376968,4,0x10);
-  temp_v0 = nw_snd_Sound3DListener_Sound3DListener_sub_object(temp_v0 + 0x100);
-  *(unsigned int *)(temp_v0 + 0xf4) = 0;
-  *(unsigned int *)(temp_v0 + 0xf8) = 0;
-  *(unsigned int *)(temp_v0 + 0xfc) = 0xffffffff;
-  return;
+    DAT_00464ff0 = -1;
+    DAT_00464ff8 = 0;
+    u8 *object = installVtbl55BDE0(g_asdSound.archive);
+    object = FUN_00378a54(object + 0x184);
+    object = FUN_003773d4(object + 0xC0);
+    object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x278, FUN_0034068c, 0x50, 4);
+    object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x140, (ElementCtor)&frameHeapInitializeRange, 0x3C, 2);
+    object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x78, (ElementCtor)&FUN_003494f0, 0x10, 2);
+    object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x20, objectRegisterPart, 0x3C, 4);
+    object = FUN_00377174(object + 0xF0);
+    object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x3C, FUN_00376d14, 0x84, 16);
+    object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x840, (ElementCtor)&FUN_00376968, 4, 16);
+    object = nw_snd_Sound3DListener_Sound3DListener_sub_object(object + 0x100);
+    SndSystemLayout *system = (SndSystemLayout *)(object - offsetof(SndSystemLayout, listener));
+    system->section.unk00 = 0;
+    system->section.unk04 = 0;
+    system->section.unk08 = -1;
+    __aeabi_atexit(system, FUN_0033b66c, &entry);
 }
 
 } /* extern "C" */

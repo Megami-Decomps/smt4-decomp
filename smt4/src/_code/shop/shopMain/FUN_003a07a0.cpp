@@ -1,23 +1,16 @@
 #include "shop/shopMain.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include "shop/ShopMenuData.h"
 
-struct ShopDecorationPair { s32 first, second; };
-struct ShopImageGroup { u32 images[8]; };
-struct ShopDecorationImages {
-    u8 prefix[0xa4];
-    ShopImageGroup first;
-    ShopImageGroup second;
-};
 struct AlternateShopDecorations {
-    ShopDecorationPair pages[8];
-    ShopDecorationPair lockedFirst;
-    ShopDecorationPair lockedFourth;
+    ShopIconIndices pages[8];
+    ShopIconIndices lockedFirst;
+    ShopIconIndices lockedFourth;
 };
 
 extern "C" {
-extern const ShopDecorationPair DAT_0044df98[7];
+extern const ShopIconIndices DAT_0044df98[7];
 extern const AlternateShopDecorations DAT_0044dfd0;
-extern const ShopDecorationImages DAT_004074a4;
 void FUN_00231bcc(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color, u32 flags);
 s32 gameFlagIsSet(u32 flag);
 
@@ -70,8 +63,8 @@ void FUN_003a07a0(ShopWork *shop, s32 state)
             firstIndex = DAT_0044df98[work->page].first;
             secondIndex = DAT_0044df98[work->page].second;
         }
-        ShopImageGroup first = DAT_004074a4.first;
-        ShopImageGroup second = DAT_004074a4.second;
+        ShopDecorationImageGroup first = DAT_004074a4.firstDecoration;
+        ShopDecorationImageGroup second = DAT_004074a4.secondDecoration;
         FUN_00231bcc(&work->region, first.images[firstIndex], 0, 0, color, 1);
         FUN_00231bcc(&work->region, second.images[secondIndex], 0, 0, color, 1);
     }

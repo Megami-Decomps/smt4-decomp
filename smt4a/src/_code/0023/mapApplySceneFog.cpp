@@ -1,5 +1,5 @@
-/* NON_MATCHING: retail loads the 1.0f/0.0f constants (s1, s0) before the color packing and stores them with
- * two vstr; this build loads them late and pairs them in one vstmia. */
+/* NON_MATCHING: retail loads the fog offset (0.0f) and scale (1.0f) before packing the colour.
+ * The build has them reversed, loads them later, and pairs their stores. */
 #include "common.h"
 
 /* A color with an extra mode byte in place of alpha. */
@@ -30,7 +30,7 @@ extern "C" {
 extern HandleRegistryView *g_handleRegistry;
 
 /* Sets the scene light's color (components 0..255 as floats), mode (0, 1 or 2) and position. */
-void FUN_00235bfc(s32 mode, ColorRgbm color, f32 red, f32 green, f32 blue, f32 x, f32 y, f32 z)
+void mapApplySceneFog(s32 mode, ColorRgbm color, f32 red, f32 green, f32 blue, f32 x, f32 y, f32 z)
 {
     color.r = (u32)red;
     color.g = (u32)green;

@@ -1,10 +1,11 @@
-/* NON_MATCHING: retail builds the local stream object from the data table's words in a different order and dispatches the four stream kinds through conditional tail branches (bleq to the callee); the open/transfer/close sequence is the same. */
+/* NON_MATCHING: all 143 instructions match retail (LocalStream RAII + open/readAt/close methods); only block placement of the read-failure close cases (C/B/A) vs the success-close dispatch header differs. */
 #include "common.h"
+#include "nn/Result.h"
 #include "shard/W6_W6Match1_PositionedStream.h"
 
 extern "C" {
 
-/* The words a freshly built stream is initialised from (vtable pointer, the virtual base's
+/* The words a freshly built stream is initialized from (vtable pointer, the virtual base's
  * pointer at 0x20 and a second word at 0x24). */
 typedef struct StreamTemplate {
     /* 0x00 */ u32 *vtable;
@@ -13,98 +14,123 @@ typedef struct StreamTemplate {
     /* 0x24 */ u32 second;
 } StreamTemplate;
 
-/* A stream object on the stack: its two vtable words plus the owner state the open call fills. */
-typedef struct LocalStream {
-    u32 words[2];
-    u32 owner[5];
-} LocalStream;
-
-/* nn::Result style: bit 31 flags a failure. */
-static __inline bool resultFailed(u32 result)
-{
-    return (result & 0x80000000) != 0;
-}
-
-enum {
-    STREAM_ERROR = 0xE7E3FFFF   /* result for a kind that has no handler */
-};
+struct LocalStream;
 
 extern StreamTemplate DAT_00420b20;
 
-u32 romFileStreamOpen(LocalStream *stream, u32 name, u32 mode);
-u32 archiveStreamOpenConverted(LocalStream *stream);
-u32 romFileOpenForWrite(LocalStream *stream);
-u32 requestSubmitRecordById(LocalStream *stream);
-u32 FUN_002102ec(LocalStream *stream, u32 offset, u32 buffer, u32 size);
-u32 positionedFileReadAtReport(LocalStream *stream);
-u32 fileOwnerCloseA(LocalStream *stream);
-u32 fileOwnerCloseB(LocalStream *stream);
-u32 fileOwnerCloseC(LocalStream *stream);
-u32 fileOwnerCloseD(LocalStream *stream);
+nn::Result romFileStreamOpen(LocalStream *stream, u32 name, u32 mode);
+nn::Result archiveStreamOpenConverted(LocalStream *stream, u32 name, u32 mode);
+nn::Result romFileOpenForWrite(LocalStream *stream, u32 name, u32 mode);
+nn::Result requestSubmitRecordById(LocalStream *stream, u32 name, u32 mode);
+nn::Result FUN_002102ec(LocalStream *stream, u32 offset, u32 buffer, u32 size);
+nn::Result positionedFileReadAtReport(LocalStream *stream, u32 offset, u32 buffer, u32 size);
+nn::Result fileOwnerCloseA(LocalStream *stream);
+nn::Result fileOwnerCloseB(LocalStream *stream);
+nn::Result fileOwnerCloseC(LocalStream *stream);
+nn::Result fileOwnerCloseD(LocalStream *stream);
 void fileHandleClose(LocalStream *stream, u32 flags);
+
+} /* extern "C" */
+
+/* A stream object on the stack with RAII close and virtual-base vtable setup (shared with FUN_002d5e44). */
+struct LocalStream {
+    /* 0x00 */ u32 words[2];
+    /* 0x08 */ u32 owner[5];
+
+    LocalStream()
+    {
+        owner[0] = 0;
+        owner[1] = 0;
+        owner[2] = 0;
+        owner[3] = 0;
+        owner[4] = 0;
+        words[0] = (u32)DAT_00420b20.vtable;
+        *(u32 *)((u8 *)this + ((s32 *)words[0])[-12]) = DAT_00420b20.virtualBase;
+        words[1] = DAT_00420b20.second;
+    }
+
+    ~LocalStream()
+    {
+        fileHandleClose(this, 0);
+    }
+
+    nn::Result open(s32 kind, u32 name, u32 mode)
+    {
+        nn::Result result;
+        switch (kind) {
+        case 0:
+            result = romFileStreamOpen(this, name, mode);
+            break;
+        case 1:
+            result = archiveStreamOpenConverted(this, name, mode);
+            break;
+        case 2:
+            result = romFileOpenForWrite(this, name, mode);
+            break;
+        case 3:
+            result = requestSubmitRecordById(this, name, mode);
+            break;
+        }
+        return result;
+    }
+
+    nn::Result readAt(s32 kind, u32 offset, u32 buffer, u32 size)
+    {
+        nn::Result result;
+        switch (kind) {
+        case 0:
+            result = FUN_002102ec(this, offset, buffer, size);
+            break;
+        case 1:
+            result = positionedFileReadAtReport(this, offset, buffer, size);
+            break;
+        case 2:
+            break;
+        case 3:
+            result = positionedStreamSeekTransfer((PositionedStream *)this, offset, (void *)buffer, size);
+            break;
+        }
+        return result;
+    }
+
+    nn::Result close(s32 kind)
+    {
+        nn::Result result;
+        switch (kind) {
+        case 0:
+            result = fileOwnerCloseC(this);
+            break;
+        case 1:
+            result = fileOwnerCloseB(this);
+            break;
+        case 2:
+            result = fileOwnerCloseA(this);
+            break;
+        case 3:
+            result = fileOwnerCloseD(this);
+            break;
+        }
+        return result;
+    }
+};
 
 /* Opens a stream of the given kind (0-3), transfers `size` bytes of `buffer` through it and closes
  * it. Returns 1 when every step succeeded. */
-u32 saveMediaReadBuffer(s32 kind, u32 name, u32 buffer, u32 size)
+extern "C" u32 saveMediaReadBuffer(s32 kind, u32 name, u32 buffer, u32 size)
 {
-    LocalStream stream = {{0, 0}, {0, 0, 0, 0, 0}};
-    u32 result;
-
-    stream.words[0] = (u32)DAT_00420b20.vtable;
-    *(u32 *)((u8 *)&stream + (s32)DAT_00420b20.vtable[-12]) = DAT_00420b20.virtualBase;
-    stream.words[1] = DAT_00420b20.second;
-
-    if (kind == 0) {
-        result = romFileStreamOpen(&stream, name, 2);
-    } else if (kind == 1) {
-        result = archiveStreamOpenConverted(&stream);
-    } else if (kind == 2) {
-        result = romFileOpenForWrite(&stream);
-    } else if (!(kind == 3)) {
-        result = STREAM_ERROR;
-    } else {
-        result = requestSubmitRecordById(&stream);
+    LocalStream stream;
+    s32 result = stream.open(kind, name, 2);
+    if ((result & (s32)0x80000000) < 0) {
+        return 0;
     }
-    if (!resultFailed(result)) {
-        if (kind == 0) {
-            result = FUN_002102ec(&stream, 0, buffer, size);
-        } else if (kind == 1) {
-            result = positionedFileReadAtReport(&stream);
-        } else if (!(kind == 3)) {
-            result = STREAM_ERROR;
-        } else {
-            result = positionedStreamSeekTransfer((PositionedStream *)&stream, 0, (void *)buffer, size);
-        }
-        if (resultFailed(result)) {
-            if (kind == 0) {
-                fileOwnerCloseC(&stream);
-            } else if (kind == 1) {
-                fileOwnerCloseB(&stream);
-            } else if (kind == 2) {
-                fileOwnerCloseA(&stream);
-            } else if (kind == 3) {
-                fileOwnerCloseD(&stream);
-            }
-        } else {
-            if (kind == 0) {
-                result = fileOwnerCloseC(&stream);
-            } else if (kind == 1) {
-                result = fileOwnerCloseB(&stream);
-            } else if (kind == 2) {
-                result = fileOwnerCloseA(&stream);
-            } else if (kind == 3) {
-                result = fileOwnerCloseD(&stream);
-            } else {
-                result = STREAM_ERROR;
-            }
-            if (!resultFailed(result)) {
-                fileHandleClose(&stream, 0);
-                return 1;
-            }
-        }
+    result = stream.readAt(kind, 0, buffer, size);
+    if ((result & (s32)0x80000000) < 0) {
+        stream.close(kind);
+        return 0;
     }
-    fileHandleClose(&stream, 0);
-    return 0;
-}
-
+    result = stream.close(kind);
+    if ((result & (s32)0x80000000) < 0) {
+        return 0;
+    }
+    return 1;
 }

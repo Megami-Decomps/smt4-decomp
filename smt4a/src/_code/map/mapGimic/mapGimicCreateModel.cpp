@@ -1,4 +1,3 @@
-/* NON_MATCHING: aggregate table addressing folds its prefix into indexed loads; initial register assignment and active-store order differ. */
 #include "shard/W5_W5Match7_SceneState.h"
 #include "map/MapGimicGlobal.h"
 #include "Model/MoriModelContent.h"
@@ -24,8 +23,9 @@ void mapGimicCreateModel(void)
 {
     const MapGimicSetupGlobalsView *globals = (const MapGimicSetupGlobalsView *)&g_mapGimic;
     MapGimicA *gimmick = globals->gimmick;
+    const MapEntry *entries = globals->entries;
     for (s32 i = 0; i < 19; ++i) {
-        const MapEntry *source = &globals->entries[i];
+        const MapEntry *source = &entries[i];
         if (source->id == gimmick->area && source->kind == gimmick->subArea) {
             MapGimicStageActorA *entry = &gimmick->stageActor;
             entry->index = i;
@@ -36,10 +36,11 @@ void mapGimicCreateModel(void)
             heading.bits = source->unk14;
             entry->heading = heading.value;
             entry->flag = source->status;
-            s32 mode = gameFlagIsSet(entry->flag);
-            if (mode)
-                mode = 2;
-            entry->motion = mode;
+            if (gameFlagIsSet(entry->flag)) {
+                entry->motion = 2;
+            } else {
+                entry->motion = 0;
+            }
             entry->active = 1;
             void *memory = asdMemoryAllocTraced(0x20, DAT_00531a48, 0xa04);
             entry->obj = memory ? modelListInit(memory) : NULL;

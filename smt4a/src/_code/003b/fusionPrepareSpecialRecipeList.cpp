@@ -45,7 +45,7 @@ u32 histogramFindHighestSupportedValue(void *context);
 void statusPanelClose();
 void FUN_002a7b74();
 void uniteStartOrQueueRequest(s32 mode);
-void FUN_0020b908(s32 id, s32 enabled);
+void uniteMenuChangeState(s32 id, s32 enabled);
 LmapScript *lmapSceneGetScript();
 void linkHolderClearFlag(LinkHolder *holder);
 
@@ -85,7 +85,7 @@ void fusionPrepareSpecialRecipeList()
     recipes->progress = 0;
     FUN_002a7b74();
     uniteStartOrQueueRequest(18);
-    FUN_0020b908(0x26, 1);
+    uniteMenuChangeState(0x26, 1);
     LmapScript *script = lmapSceneGetScript();
     if (script != NULL) {
         lmapSceneSetUnk134(1);

@@ -338,7 +338,7 @@ typedef struct LmapViewA {
     /* 0x224 */ VectorPairTransitionA move; /* the camera move (FUN_0033a374 steps it) */
     /* 0x298 */ f32 unk298;
     /* 0x29C */ MapVector targetOffset; /* added to the target (FUN_00324b68) */
-    /* 0x2A8 */ u32 requestActive;  /* a request (FUN_002d1f40) is pending */
+    /* 0x2A8 */ u32 requestActive;  /* a request (lmapRequestTimedEffect) is pending */
     /* 0x2AC */ s32 priority;       /* the pending request's priority */
     /* 0x2B0 */ s16 requestId;
     /* 0x2B2 */ s16 unk2B2;

@@ -1,7 +1,7 @@
-/* NON_MATCHING: native hidden-result return is recovered; retail keeps the table entry below the request copy in the frame (92 vs 84 bytes). */
 #include "addon/aocMain.h"
 #include "classes/Obj4221fc.h"
 #include "gamedata/TableEntryRef.h"
+#include "classes/WindowStatus.h"
 #include "nn/Result.h"
 #include "code/Code0023.h"
 #include "gamedata/GameDataAccess_Shard0050.h"
@@ -9,10 +9,11 @@
 extern "C" {
 void asdGxWaitForPreviousFrame();
 ItemCodeInfo FUN_003df244(ItemPropertyResource **resource);
-WindowStatusResult FUN_003540d8(void *owner, void *request, void *parameters);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
 }
 
+/* Looks up the selected entry's item code and runs its content request on the AOC service: status 0 on success,
+ * 103 for result 0xc9213801, otherwise 100. */
 WindowStatusOperationResult Obj4221fc::vfunc0c(const void *)
 {
     WindowStatusOperationResult output(1);
@@ -20,8 +21,7 @@ WindowStatusOperationResult Obj4221fc::vfunc0c(const void *)
     asdGxWaitForPreviousFrame();
     TableEntryRef ref;
     table30GetEntryB(reinterpret_cast<u8 **>(&ref.entry), reinterpret_cast<Table30 *>(manager->contentRequest), state);
-    ItemCodeInfo request = FUN_003df244(&ref.entry);
-    output.result = FUN_003540d8(manager->service, manager->contentArchive, &request);
+    output.result = aocServiceRunItemRequest(manager->service, manager->contentArchive, FUN_003df244(&ref.entry));
     if (!nnResultIsFailure(legacyResourceIdRemap(&output.result))) {
         output.status = 0;
     } else if (legacyResourceIdRemap(&output.result) == (s32)0xc9213801) {

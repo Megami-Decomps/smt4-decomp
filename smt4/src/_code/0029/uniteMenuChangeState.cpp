@@ -1,7 +1,7 @@
-/* NON_MATCHING: the dense 36-entry table now matches (explicit labels); retail keeps an extra zero in r9 and saves a larger register set. */
 #include "camp/Unite/UniteGlobals.h"
 #include "status/StatusCamera.h"
 #include "code/Code0029_Smt4.h"
+#include "gamedata/UnitStats.h"
 
 extern "C" {
 void buttonHelpSetPreset(u32 preset);
@@ -11,8 +11,8 @@ u32 dataTableGetCount(const void *table);
 void buttonHelpSetText(const char *text, u32 color);
 s32 resourceRunOperationIfUnblocked(const void *cursor);
 s32 listCursorGetRowIfUnblocked(const void *cursor);
-void FUN_0029dc74(u32 id, void *member);
-void unitInitializeFromSavedRecord(u32 id, void *member);
+void FUN_0029dc74(u32 id, StatBlock *member);
+void unitInitializeFromSavedRecord(u32 id, StatBlock *member);
 const void *partyMemberFindById(u32 id);
 void FUN_0029da34(u32 mode, u32 enabled, u32 id, const void *member);
 void buttonHelpShowSkillDetails(u32 id);
@@ -20,11 +20,20 @@ void menuSetModeAndResetTransitions(s32 mode);
 void buttonHelpSetSlot(s32 first, s32 second, s32 third, s32 enabled);
 void uiSpriteSetKeyframe(void *timer, s32 period, s32 value); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
+/* Row `index` of the unite help texts (data table 0x24, section 2: 0x55-byte strings), or NULL past the end. */
+static __inline const char *uniteHelpTextAt(u32 index)
+{
+    const void *table = dataTableGet(0x24, 2);
+    const char *text = (const char *)dataTableGetEntries(table);
+    if (index < dataTableGetCount(table))
+        return text + index * 0x55;
+    return NULL;
+}
+
 /* Enter a unite-menu state, updating its help, selected member, and transition history. */
 void uniteMenuChangeState(u32 state, s32 preservePrevious)
 {
     UniteWork *work = g_unite;
-    u8 member[1552];
     switch (state) {
     case 0x22:
     case 0x23:
@@ -41,34 +50,32 @@ void uniteMenuChangeState(u32 state, s32 preservePrevious)
         break;
     case 0x0B: {
         buttonHelpSetPreset(0x53);
-        const void *table = dataTableGet(0x24, 2);
-        const UniteDescriptionEntry *entry = dataTableGetEntries(table);
-        const char *text = dataTableGetCount(table) > 1 ? entry->text : NULL;
-        buttonHelpSetText(text, 0x323232FF);
+        buttonHelpSetText(uniteHelpTextAt(1), 0x323232FF);
         break;
     }
     case 0x0D: {
         buttonHelpSetPreset(0x54);
-        s32 selected = resourceRunOperationIfUnblocked(work->firstListIV.cursor);
-        selected += listCursorGetRowIfUnblocked(work->firstListIV.cursor);
-        u32 index = work->firstListIV.indices[selected];
+        u32 selected = resourceRunOperationIfUnblocked(work->firstListIV.cursor) +
+                       listCursorGetRowIfUnblocked(work->firstListIV.cursor);
+        u16 index = work->firstListIV.indices[selected];
+        StatBlock member;
         if (work->firstListIV.kind == 0) {
-            FUN_0029dc74(work->pairListIV.pairs[index].resultId, member);
-            FUN_0029da34(0, 1, work->pairListIV.pairs[index].resultId, member);
+            FUN_0029dc74(work->pairListIV.pairs[index].resultId, &member);
+            FUN_0029da34(0, 1, work->pairListIV.pairs[index].resultId, &member);
         }
         if (work->firstListIV.kind == 1) {
             const void *selectedMember = partyMemberFindById(work->pairListIV.pairs[index].firstId);
             if (selectedMember == NULL) {
-                unitInitializeFromSavedRecord(work->pairListIV.pairs[index].firstId, member);
-                selectedMember = member;
+                unitInitializeFromSavedRecord(work->pairListIV.pairs[index].firstId, &member);
+                selectedMember = &member;
             }
             FUN_0029da34(0, 1, work->pairListIV.pairs[index].firstId, selectedMember);
         }
         if (work->firstListIV.kind == 2) {
             const void *selectedMember = partyMemberFindById(work->pairListIV.pairs[index].secondId);
             if (selectedMember == NULL) {
-                unitInitializeFromSavedRecord(work->pairListIV.pairs[index].secondId, member);
-                selectedMember = member;
+                unitInitializeFromSavedRecord(work->pairListIV.pairs[index].secondId, &member);
+                selectedMember = &member;
             }
             FUN_0029da34(0, 1, work->pairListIV.pairs[index].secondId, selectedMember);
         }
@@ -77,8 +84,8 @@ void uniteMenuChangeState(u32 state, s32 preservePrevious)
     case 0x0F:
         if (work->state != 0x10 && work->state != 0x11 && work->state != 0x12) {
             buttonHelpSetPreset(0x55);
-            s32 selected = resourceRunOperationIfUnblocked(work->secondListIV.cursor);
-            selected += listCursorGetRowIfUnblocked(work->secondListIV.cursor);
+            u32 selected = resourceRunOperationIfUnblocked(work->secondListIV.cursor) +
+                           listCursorGetRowIfUnblocked(work->secondListIV.cursor);
             buttonHelpShowSkillDetails(work->secondListIV.indices[selected]);
             menuSetModeAndResetTransitions(0x0E);
         }
@@ -92,10 +99,7 @@ void uniteMenuChangeState(u32 state, s32 preservePrevious)
         break;
     case 0x1A: {
         buttonHelpSetPreset(0x59);
-        const void *table = dataTableGet(0x24, 2);
-        const UniteDescriptionEntry *entry = dataTableGetEntries(table);
-        const char *text = dataTableGetCount(table) > 1 ? entry->text : NULL;
-        buttonHelpSetText(text, 0x323232FF);
+        buttonHelpSetText(uniteHelpTextAt(1), 0x323232FF);
         break;
     }
     case 0x1B:

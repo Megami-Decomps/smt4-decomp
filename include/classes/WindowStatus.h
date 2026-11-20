@@ -18,7 +18,16 @@ typedef char WindowStatusResultLayoutCheck[
     offsetof(WindowStatusResult, code) == 0 && offsetof(WindowStatusResult, description) == 4 &&
     sizeof(WindowStatusResult) == 8 ? 1 : -1];
 
+struct ItemCodeInfo;
+
 extern "C" {
+/* Run one content request for `item` on the service `owner` and return its translated result (smt4 aocServiceRunItemRequest,
+ * smt4a aocServiceRunItemRequest; the variants taking a content code are smt4 aocServiceRunItemCodeRequest, smt4a aocServiceRunItemCodeRequest). The item is
+ * taken by reference: callers pass the item-code lookup's result directly, and armcc copies that temporary. */
+WindowStatusResult aocServiceRunItemRequest(void *owner, void *request, const ItemCodeInfo &item);
+WindowStatusResult aocServiceRunItemRequest(void *owner, void *request, const ItemCodeInfo &item);
+WindowStatusResult aocServiceRunItemCodeRequest(void *owner, void *request, const ItemCodeInfo &item, const char *contentCode);
+WindowStatusResult aocServiceRunItemCodeRequest(void *owner, void *request, const ItemCodeInfo &item, const char *contentCode);
 void recordValidatePair(void *owner, WindowStatusResult result);
 WindowStatusResult nnAsyncMapOperationResult(const void *operation);
 WindowStatusResult FUN_00428060(void *owner, void *output, const void *identifier);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: same logic as the other render-state push/pop users; the inlined renderStackPush/Pop helpers schedule their index arithmetic differently and the effect null checks branch differently */
+/* NON_MATCHING: retail loads the zero it stores into the stack's dirty flag and returns into r7 before the flag test (here after the push call), and keeps the popped top in r0 and the new state in r1 (copied to r0 for the callback); the build swaps them. */
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "shard/JobWork.h"
@@ -36,13 +36,17 @@ s32 btlEffectOverlayDraw(u32 job)
 {
     jobGetWork(job);
     BtlEffectObject *effect = g_btlEffect.object;
-    if (effect != NULL && (effect->flags & 2) != 0 && effect->child != NULL) {
-        renderCtxPushC(g_renderCtx, renderCtxPackPassFlagsWithAlpha(6, 0.0f));
-        effect->child->vtable->draw(effect->child);
-        renderStackPop(&g_renderCtx->additional.stackC);
-        skinObjectUpdateMatrices(g_renderCtx);
-        renderCtxResetColorScale(g_renderCtx);
+    if (effect == NULL) {
+        return 0;
     }
+    if ((effect->flags & 2) == 0 || effect->child == NULL) {
+        return 0;
+    }
+    renderCtxPushC(g_renderCtx, renderCtxPackPassFlagsWithAlpha(6, 0.0f));
+    effect->child->vtable->draw(effect->child);
+    renderStackPop(&g_renderCtx->additional.stackC);
+    skinObjectUpdateMatrices(g_renderCtx);
+    renderCtxResetColorScale(g_renderCtx);
     return 0;
 }
 }

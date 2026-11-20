@@ -1,4 +1,8 @@
-/* NON_MATCHING: task setup and stores now match; only the position-to-previousPosition copy in the entry loop uses r0/r1 the other way round (retail: ldm r1, {r1, r2}; stm r0). */
+/* NON_MATCHING: task setup and stores match; only the position-to-previousPosition copy in the entry loop uses
+ * r0/r1 the other way round (retail: ldm r1, {r1, r2}; stm r0). The entry reset written as an inline function gives
+ * retail's copy here but then keeps the constants 1 and -1 in r8/r9 instead of r9/r8 (13 shape / 35 raw); in the
+ * Apocalypse twin (FUN_00232d58) any inline helper (this one or one for the extra-model loop) only moves registers,
+ * so it was rejected as steering (wave 54) and both loops stay in place. */
 #include "map/MapEnemyGlobal.h"
 #include "sys/Task.h"
 #include "shard/S1Mover.h"

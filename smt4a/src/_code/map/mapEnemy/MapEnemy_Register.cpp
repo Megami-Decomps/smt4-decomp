@@ -1,27 +1,31 @@
-/* NON_MATCHING: the per-slot field stores are written in field order rather than retail's interleaved order; the stores compile with different grouping and register use than retail. */
+/* NON_MATCHING: only the extra-model reset loop differs, by two registers: retail counts in r0 and addresses the
+ * model through r1, the build has them the other way round (18 lines, the same instructions). Declaring `pair` at
+ * function scope ahead of the entry loop compiles to retail's bytes, but nothing supports that scoping, so it is
+ * not used. The spawn-group arrays are cleared element by element because that is the form whose prologue and
+ * entry loop match; inner loops unroll to the same stores with other registers. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "map/MapEnemyGlobal.h"
+#include "util/Random.h"
 
 extern "C" {
 
-void *asdMemoryAllocTracked(u32 size, u32 alignment, u32 a, u32 b, u32 c);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc draw, AsdProcFunc release, u32 work, void *owner);
-s32 randRange(u32 limit);
 s32 mapEnemyCleanupUpdate(u32 job);
 void mapEnemyRelease(u32 job);
 
 /* Creates the map enemy manager: allocates its block, starts the draw task and resets the 40
  * enemy slots, the small and cleared record tables and the reference tables. */
-void FUN_00232d58(u32 parent)
+void MapEnemy_Register(u32 parent)
 {
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapEnemy.cpp", 519);
     g_mapEnemy = (MapEnemyA *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(MapEnemyA), 1);
     MapEnemyA *enemy = g_mapEnemy;
-    enemy->task = taskCreateDraw(reinterpret_cast<const s8 *>("MENEMY"), 4, 0, 0, mapEnemyCleanupUpdate, mapEnemyRelease, 0,
-                                 reinterpret_cast<void *>(parent));
+    enemy->task = taskCreateDraw((const s8 *)"MENEMY", 4, 0, 0, mapEnemyCleanupUpdate, mapEnemyRelease, 0,
+                                 (void *)parent);
     enemy->state = 0;
     enemy->elapsed = 0;
     enemy->requestArgs[0] = 0;
@@ -40,9 +44,7 @@ void FUN_00232d58(u32 parent)
         slot->basePosition.x = 0;
         slot->basePosition.y = 0;
         slot->basePosition.z = 0;
-        slot->previousPosition.x = slot->basePosition.x;
-        slot->previousPosition.y = slot->basePosition.y;
-        slot->previousPosition.z = 0;
+        slot->previousPosition = slot->basePosition;
         slot->position.x = 0;
         slot->position.y = 0;
         slot->position.z = 0;
@@ -50,7 +52,7 @@ void FUN_00232d58(u32 parent)
         slot->behavior = 0;
         slot->targetIndex = -1;
         slot->moveMode = 1;
-        slot->targetDistance = 100000.0f;
+        slot->targetDistance = 99999.0f;
         slot->eventEnabled = 0;
         slot->markerIndex = 0;
         slot->mapId = 0;
@@ -69,26 +71,26 @@ void FUN_00232d58(u32 parent)
         slot->elapsed = 0;
         slot->randomDelay = randRange(200) + 0x3C;
         slot->unk090 = 0;
-        slot->timer138 = 0;
-        slot->timer13A = 0;
+        slot->unk170 = 0;
         slot->flag13C = 0;
         slot->flag13D = 0;
         slot->flag13E = 0;
         slot->flag13F = 0;
         slot->flag140 = 0;
+        slot->timer138 = 0;
+        slot->timer13A = 0;
         slot->tracking = 0;
         slot->blinkTimer = 0;
         slot->onRadar = 0;
         slot->playerDistance = 0;
-        slot->unk170 = 0;
         slot->level = 999;
         slot->unk176 = 0;
-        slot->effectPending = 0;
-        slot->variant = 1;
         slot->kind = 0;
         slot->model = NULL;
         slot->registered = 0;
         slot->owned = 0;
+        slot->effectPending = 0;
+        slot->variant = 1;
     }
     for (s32 index = 0; index < MAP_ENEMY_EXTRA_MODEL_COUNT; index++) {
         MapEnemyExtraModelA *pair = &enemy->extraModels[index];
@@ -180,4 +182,4 @@ void FUN_00232d58(u32 parent)
     enemy->spawnTables[2].count = 0;
 }
 
-}
+} /* extern "C" */

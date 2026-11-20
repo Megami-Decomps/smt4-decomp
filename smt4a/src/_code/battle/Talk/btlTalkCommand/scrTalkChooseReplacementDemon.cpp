@@ -1,4 +1,4 @@
-/* NON_MATCHING: source/definition/ID registers and valid-successor return-block placement differ; -O2 candidate. */
+/* NON_MATCHING: unsigned successorId and branch layout match retail; saved-register rotation (retail successorId/successor/source = r4/r5/r6 vs built r6/r4/r5), same as smt4 twin btlTalkCommand_SelectTalkTarget. */
 #include "AsdSDK/AsdDebug.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "gamedata/NkmEnemyLookup.h"
@@ -17,11 +17,13 @@ void asdMemFree(void *);
 u32 scrTalkChooseReplacementDemon()
 {
     const NkmEnemyRecordA *source = nkmEnemyFindById((u16)scrGetArg(0));
-    s16 successorId = source->successorId;
-    const NkmEnemyRecordA *successor = nkmEnemyFindById((u16)successorId);
+    u16 successorId = source->successorId;
+    const NkmEnemyRecordA *successor = nkmEnemyFindById(successorId);
     nkmBaseGetRecord(successorId);
-    if (!successorId || !successor || !(successor->flags & 0x80) ||
-        gameGetPlayerData()->level < (successor->level & 0x7fffU) || gameStockContainsEntry(successorId)) {
+    if (successorId && successor && (successor->flags & 0x80) &&
+        gameGetPlayerData()->level >= (successor->level & 0x7fffU) && !gameStockContainsEntry(successorId)) {
+        scrSetResult(successorId);
+    } else {
         asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\Talk\\btlTalkCommand.cpp", 1054);
         s16 *candidates = (s16 *)asdMemoryAllocTracked(0x100, 0x100, 0, 1201 * sizeof(s16), 1);
         u16 count = 0;
@@ -53,8 +55,6 @@ u32 scrTalkChooseReplacementDemon()
                 scrSetResult(-1);
         }
         asdMemFree(candidates);
-    } else {
-        scrSetResult(successorId);
     }
     return 1;
 }

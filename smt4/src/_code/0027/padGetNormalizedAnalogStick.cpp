@@ -1,4 +1,4 @@
-/* NON_MATCHING: calibration sign-extension, coordinate VFP scheduling and return-block placement differ. */
+/* NON_MATCHING: only the zero-return block and the branch into it differ. */
 #include "input/PadAnalog.h"
 #include "shard/Sys4650a0.h"
 
@@ -10,44 +10,26 @@ f32 inputApplyDeadZone(f32 *value, f32 threshold);
 // Read normalized analog coordinates and apply the configured dead zone when enabled.
 u32 padGetNormalizedAnalogStick(f32 *outX, f32 *outY, u32 index)
 {
-    // Dead-zone state lies beyond the established shared globals prefix.
-    struct AnalogGlobalsView {
-        PadAnalogCalibration *calibration;
-        u32 count;
-        u32 flags;
-        u32 unk0C;
-        u32 unk10;
-        f32 deadZone;
-    };
-    AnalogGlobalsView *state = reinterpret_cast<AnalogGlobalsView *>(&g_padInputState);
-    PadAnalogCalibration *calibration = state->calibration;
     s16 minimum;
     s16 maximum;
-    if (calibration->mode == 0) {
-        minimum = calibration->minimum[0];
-        maximum = calibration->maximum[0];
-    } else if (calibration->mode == 1) {
-        minimum = calibration->minimum[1];
-        maximum = calibration->maximum[1];
-    } else {
-        minimum = calibration->minimum[2];
-        maximum = calibration->maximum[2];
-    }
+    padAnalogGetExtrema(g_padInputState.calibration, minimum, maximum);
     f32 range = (f32)(maximum - minimum);
     if (index >= 2) {
         return 0;
     }
-    if (index > state->count) {
+    if (index > g_padInputState.count) {
         return 0;
     }
     {
-        PadAnalogSample *sample = (state->flags & 1) != 0 ? &DAT_004e3c48 : &DAT_004e3c28[index];
+        PadAnalogSample *sample = (g_padInputState.flags & 1) != 0 ? &DAT_004e3c48 : &DAT_004e3c28[index];
         if (sample != NULL) {
-            f32 x = (f32)sample->x / range;
-            f32 y = (f32)sample->y / range;
-            if (state->deadZone != 0.0f) {
-                inputApplyDeadZone(&x, state->deadZone);
-                inputApplyDeadZone(&y, state->deadZone);
+            f32 rawX = (f32)sample->x;
+            f32 rawY = (f32)sample->y;
+            f32 x = rawX / range;
+            f32 y = rawY / range;
+            if (g_padInputState.deadZone != 0.0f) {
+                inputApplyDeadZone(&x, g_padInputState.deadZone);
+                inputApplyDeadZone(&y, g_padInputState.deadZone);
                 if (x == 0.0f && y == 0.0f)
                     return 0;
             }

@@ -63,7 +63,10 @@ typedef struct AocMain {
     /* 0x680 */ u8 unk680[8];
     /* 0x688 */ Obj422214Owner *selectedRecord;
     /* 0x68C */ u8 unk68C[8];
-    /* 0x694 */ u32 contentCode[16];       /* the content code the purchase is made with */
+    /* 0x694 */ union {
+        char text[64];                    /* the content code the purchase is made with (UTF-8, from the keyboard) */
+        u32 words[16];                    /* cleared a word at a time */
+    } contentCode;
     /* 0x6D4 */ u8 contentText[0x80];
     /* 0x754 */ u32 flags;
     /* 0x758 */ RequestParameters request; /* the request the AOC process is running */

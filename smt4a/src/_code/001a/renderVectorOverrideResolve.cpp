@@ -1,4 +1,4 @@
-/* NON_MATCHING: the previous/current copy now uses retail's VFP transfer; retail copies the final vector as a three-word block plus a separate w (so the two arms do not merge their stores) and lays the two arms out differently. */
+/* NON_MATCHING: retail loads direction[0] before direction[2] for the yaw call, and reuses the scratch slot's address (r0) for the override copy where the build forms it again in ip. */
 #include "shard/W9_W9Match7_RenderVectorOverride.h"
 #include "gfx/VectorScratch.h"
 
@@ -17,7 +17,9 @@ void gfxQuaternionScratchMultiply(void);
 
 void renderVectorOverrideResolve(RenderVectorOverride *override, u32 source, Vector4 *output)
 {
-    if (override->flags & 0x60) {
+    if ((override->flags & 0x60) == 0) {
+        *output = override->value;
+    } else {
         f32 direction[3];
         FUN_001b4abc(source, direction);
         f32 pitch;
@@ -33,9 +35,7 @@ void renderVectorOverrideResolve(RenderVectorOverride *override, u32 source, Vec
             g_vectorScratch.first.vector = override->value;
             gfxQuaternionScratchMultiply();
         }
-        *output = g_vectorScratch.first.vector;
-    } else {
-        *output = override->value;
+        vector4Copy(&g_vectorScratch.first.vector, output);
     }
 }
 }

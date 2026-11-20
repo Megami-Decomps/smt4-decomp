@@ -41,7 +41,7 @@ typedef struct PartyPanelState {
     /* 0x003C */ s16 requestedUnitId;
     /* 0x003E */ u16 unk003E;
     /* 0x0040 */ u16 unk0040;
-    /* 0x0042 */ u8 alternate;              /* the alternate layout: cursors move on the alternate grids */
+    /* 0x0042 */ s8 alternate;              /* the alternate layout: cursors move on the alternate grids */
     /* 0x0043 */ u8 unk0043;
     /* 0x0044 */ s8 helpMode;
     /* 0x0045 */ u8 unk0045[3];
@@ -78,7 +78,7 @@ typedef struct PartyPanelState {
     /* 0x115C */ void *unite;                         /* the fusion work (a buffer array) */
     /* 0x1160 */ PlayerDataIV previewPlayer;
     /* 0x11EC */ PartyPanelUnitPreview previewUnit;
-    /* 0x17F0 */ u8 disabled;
+    /* 0x17F0 */ s8 disabled;
     /* 0x17F1 */ u8 unk17F1[7];                       /* the panel is allocated and cleared as 0x17F8 bytes */
 } PartyPanelState;
 

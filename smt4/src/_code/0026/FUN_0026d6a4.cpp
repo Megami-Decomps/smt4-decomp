@@ -1,226 +1,116 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026d6a4` (_code @ 0x26d6a4, 0x434 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "ui/UiSpriteApi.h"
+#include "common.h"
+#include "camp/CampMenuEntry.h"
+#include "code/Code002a_VariantA.h"
+#include "shard/W5_W5Match7_FlagBanks.h"
+#include "shard/W6_W6Match3_ScrollSelection.h"
+#include "shard/W6_W6Match4_RelativeDirectory.h"
 #include "status/StatusCamera.h"
+#include "ui/PartyPanelState.h"
 
 extern "C" {
 
-int partyPanelRebuildTouchRegions(void);
-int slotPlacementStartTransition(...);
-int slotPlacementAssignSlotAndPosition(...);
+s32 inputQueryButtonState(s32 key, s32 mode);
+void scrollOwnerSelectIndex(GridNavigation *grid, s32 index);
+void objClearFlagPair(GridNavigation *grid);
+void partyPanelConfigureGridNavigation(void);
+void slotPlacementAssignSlotAndPosition(PartyPanelWidget *widget, u32 slot);
+void slotPlacementStartTransition(PartyPanelWidget *widget, u8 mode);
+void partyPanelRebuildTouchRegions(void);
+s32 FUN_0029e02c(void);
+void sortMenuCreate(u32 owner, u8 option);
+void useCounterStart(void);
+void partyPanelSetState(s32 state, s32 rememberPrevious);
 
-int partyPanelSetState(int, int);
-int objClearFlagPair(...);
-int partyPanelConfigureGridNavigation(void);
-int useCounterStart(void);
-int useCounterAppendValue(int);
-int sortMenuCreate(int);
-int scrollOwnerSelectIndex(...);
-int objectPartRunUnlessLocked(...); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
-int scrollListSetSelectionMarkChanged(...);
-int listCursorGetRowIfUnblocked(...);
-int eventQueueAddUniqueIfValid(int);
-int uiSpriteSetKeyframe(int, int, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
-int inputQueryButtonState(int, int);
-int SBORROW4(...);
-
-extern int g_partyPanel; /* 0x43dcf0 */
-
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: partyPanelSetState. */
-/* Supplied declaration required: partyPanelRebuildTouchRegions. */
-/* Supplied declaration required: slotPlacementStartTransition. */
-/* Supplied declaration required: slotPlacementAssignSlotAndPosition. */
-/* Supplied declaration required: objClearFlagPair. */
-/* Supplied declaration required: partyPanelConfigureGridNavigation. */
-extern int FUN_0029e02c(void);
-/* Supplied declaration required: useCounterStart. */
-/* Supplied declaration required: useCounterAppendValue. */
-/* Supplied declaration required: sortMenuCreate. */
-/* Supplied declaration required: scrollOwnerSelectIndex. */
-/* Supplied declaration required: objectPartRunUnlessLocked. */
-/* Supplied declaration required: scrollListSetSelectionMarkChanged. */
-/* Supplied declaration required: listCursorGetRowIfUnblocked. */
-/* Supplied declaration required: gameGlobalsSetSubScreenActive. */
-/* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: inputQueryButtonState. */
-
-
-unsigned int FUN_0026d6a4(int param_1)
-
+/* The party panel's help-view toggle: flips the alternate layout, reselects the matching list entry in
+ * the list that takes over and restarts the widget placement transitions. Without the toggle key it opens
+ * the sort menu instead. */
+u32 FUN_0026d6a4(s32 enabled)
 {
-/* irregular: 18 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6;
-  unsigned char temp_v7;
-  
-  temp_v5 = g_partyPanel;
-  temp_v1 = 10;
-  inputQueryButtonState(10,1);
-  if (temp_v1 == 0) {
-    if (param_1 == 0) {
-      return 0;
-    }
-    if (*(char *)(temp_v5 + 0x17f0) != '\0') {
-      return 0;
-    }
-    temp_v5 = FUN_0029e02c();
-    if (temp_v5 != 0) {
-      return 0;
-    }
-    temp_v5 = 9;
-    inputQueryButtonState(9,1);
-    if (temp_v5 == 0) {
-      return 0;
-    }
-    sortMenuCreate(0);
-    useCounterAppendValue(2);
-    useCounterAppendValue(1);
-    useCounterAppendValue(4);
-    useCounterAppendValue(5);
-    useCounterAppendValue(0x1f);
-    useCounterAppendValue(3);
-    useCounterStart();
-    partyPanelSetState(0xf,1);
-    gameGlobalsSetSubScreenActive(1);
-    eventQueueAddUniqueIfValid(0x100016d);
-    return 1;
-  }
-  temp_v0 = *(unsigned char *)(temp_v5 + 0x42) ^ 1;
-  *(unsigned char *)(temp_v5 + 0x42) = temp_v0;
-  if (temp_v0 != 0) {
-    uiSpriteSetKeyframe(temp_v5 + 0x4c8,6,0);
-  }
-  else {
-    uiSpriteSetKeyframe(temp_v5 + 0x4c8,4,0);
-  }
-  eventQueueAddUniqueIfValid(0x100016d);
-  if (*(int *)(temp_v5 + 0x1c) != 6) {
-    if (*(int *)(temp_v5 + 0x1c) == 8) {
-      if (*(char *)(temp_v5 + 0x42) != '\0') {
-        temp_v2 = objectPartRunUnlessLocked();
-        temp_v3 = temp_v5 + 0xa6c;
-        scrollOwnerSelectIndex(temp_v3,temp_v2);
-        temp_v1 = listCursorGetRowIfUnblocked(temp_v5 + 0xa08);
-        if (temp_v1 < 1) {
-          scrollListSetSelectionMarkChanged(temp_v3,0);
+    u32 result = 0;
+    PartyPanelState *panel = g_partyPanel;
+    if (inputQueryButtonState(10, 1) != 0) {
+        panel->alternate ^= 1;
+        if (panel->alternate != 0)
+            uiSpriteSetKeyframe(&panel->sprites[PARTY_PANEL_SPRITE_LAYOUT], 6, 0);
+        else
+            uiSpriteSetKeyframe(&panel->sprites[PARTY_PANEL_SPRITE_LAYOUT], 4, 0);
+        eventQueueAddUniqueIfValid(0x100016d);
+        switch (panel->sceneState) {
+        case 6:
+            if (panel->alternate != 0) {
+                scrollOwnerSelectIndex(&panel->stockGridAlternate, objectPartRunUnlessLocked(&panel->stockGrid));
+                scrollListSetSelectionMarkChanged((ScrollSelection *)&panel->stockGridAlternate, panel->page * 3 + listCursorGetRowIfUnblocked(&panel->stockGrid));
+            } else {
+                if (listCursorGetRowIfUnblocked(&panel->stockGridAlternate) >= 3 && panel->pageCount > 1)
+                    panel->page = 1;
+                else
+                    panel->page = 0;
+                partyPanelConfigureGridNavigation();
+                scrollOwnerSelectIndex(&panel->stockGrid, objectPartRunUnlessLocked(&panel->stockGridAlternate));
+                if (listCursorGetRowIfUnblocked(&panel->stockGridAlternate) >= 3) {
+                    if (panel->pageCount > 1)
+                        scrollListSetSelectionMarkChanged((ScrollSelection *)&panel->stockGrid, listCursorGetRowIfUnblocked(&panel->stockGridAlternate) - panel->page * 3);
+                    else
+                        scrollListSetSelectionMarkChanged((ScrollSelection *)&panel->stockGrid, 2);
+                } else {
+                    scrollListSetSelectionMarkChanged((ScrollSelection *)&panel->stockGrid, listCursorGetRowIfUnblocked(&panel->stockGridAlternate));
+                }
+                objClearFlagPair(&panel->stockGrid);
+            }
+            break;
+        case 8:
+            if (panel->alternate != 0) {
+                scrollOwnerSelectIndex(&panel->fullGridAlternate, objectPartRunUnlessLocked(&panel->fullGrid));
+                if (listCursorGetRowIfUnblocked(&panel->fullGrid) < 1)
+                    scrollListSetSelectionMarkChanged((ScrollSelection *)&panel->fullGridAlternate, 0);
+                else
+                    scrollListSetSelectionMarkChanged((ScrollSelection *)&panel->fullGridAlternate, panel->page * 3 + listCursorGetRowIfUnblocked(&panel->fullGrid));
+            } else {
+                if (listCursorGetRowIfUnblocked(&panel->fullGridAlternate) >= 4 && panel->pageCount > 1)
+                    panel->page = 1;
+                else
+                    panel->page = 0;
+                partyPanelConfigureGridNavigation();
+                scrollOwnerSelectIndex(&panel->fullGrid, objectPartRunUnlessLocked(&panel->fullGridAlternate));
+                if (listCursorGetRowIfUnblocked(&panel->fullGridAlternate) >= 4) {
+                    if (panel->pageCount > 1)
+                        scrollListSetSelectionMarkChanged((ScrollSelection *)&panel->fullGrid, listCursorGetRowIfUnblocked(&panel->fullGridAlternate) - panel->page * 3);
+                    else
+                        scrollListSetSelectionMarkChanged((ScrollSelection *)&panel->fullGrid, 3);
+                } else {
+                    scrollListSetSelectionMarkChanged((ScrollSelection *)&panel->fullGrid, listCursorGetRowIfUnblocked(&panel->fullGridAlternate));
+                }
+                objClearFlagPair(&panel->fullGrid);
+            }
+            break;
         }
-        else {
-          temp_v1 = listCursorGetRowIfUnblocked(temp_v5 + 0xa08);
-          temp_v1 = *(int *)(temp_v5 + 0x2c) * 3 + temp_v1;
-          scrollListSetSelectionMarkChanged(temp_v3,temp_v1);
+        for (s32 i = 0; i < 4; i++) {
+            slotPlacementAssignSlotAndPosition(panel->characters[i], panel->page);
+            slotPlacementStartTransition(panel->characters[i], panel->alternate == 1);
         }
-      }
-      else {
-        temp_v3 = temp_v5 + 0xa6c;
-        temp_v4 = listCursorGetRowIfUnblocked();
-        temp_v7 = SBORROW4(temp_v4,4);
-        temp_v1 = temp_v4 - 4;
-        temp_v6 = temp_v4 == 4;
-        if (temp_v4 >= 4) {
-          temp_v4 = *(int *)(temp_v5 + 0x30);
-          temp_v7 = SBORROW4(temp_v4,1);
-          temp_v1 = temp_v4 - 1;
-          temp_v6 = temp_v4 == 1;
+        for (s32 i = 0; i < 0x18; i++) {
+            slotPlacementAssignSlotAndPosition(panel->demons[i], panel->page);
+            slotPlacementStartTransition(panel->demons[i], panel->alternate == 1);
         }
-        if (temp_v6 || temp_v1 < 0 != temp_v7) {
-          *(unsigned int *)(temp_v5 + 0x2c) = 0;
-        }
-        else {
-          *(unsigned int *)(temp_v5 + 0x2c) = 1;
-        }
-        partyPanelConfigureGridNavigation();
-        temp_v2 = objectPartRunUnlessLocked(temp_v3);
-        temp_v1 = temp_v5 + 0xa08;
-        scrollOwnerSelectIndex(temp_v1,temp_v2);
-        temp_v4 = listCursorGetRowIfUnblocked(temp_v3);
-        if (temp_v4 >= 4) {
-          if (*(int *)(temp_v5 + 0x30) >= 2) {
-            temp_v3 = listCursorGetRowIfUnblocked(temp_v3);
-            scrollListSetSelectionMarkChanged(temp_v1,*(int *)(temp_v5 + 0x2c) * -3 + temp_v3);
-          }
-          else {
-            scrollListSetSelectionMarkChanged(temp_v1,3);
-          }
-        }
-        else {
-          temp_v2 = listCursorGetRowIfUnblocked(temp_v3);
-          scrollListSetSelectionMarkChanged(temp_v1,temp_v2);
-        }
-        objClearFlagPair(temp_v1);
-      }
+        if (panel->sceneState != 1)
+            partyPanelRebuildTouchRegions();
+        result = 1;
+    } else if (enabled != 0 && panel->disabled == 0 && FUN_0029e02c() == 0 && inputQueryButtonState(9, 1) != 0) {
+        sortMenuCreate(0, 0);
+        useCounterAppendValue(2);
+        useCounterAppendValue(1);
+        useCounterAppendValue(4);
+        useCounterAppendValue(5);
+        useCounterAppendValue(0x1f);
+        useCounterAppendValue(3);
+        useCounterStart();
+        partyPanelSetState(0xf, 1);
+        gameGlobalsSetSubScreenActive(1);
+        eventQueueAddUniqueIfValid(0x100016d);
+        result = 1;
     }
-  }
-  else if (*(char *)(temp_v5 + 0x42) != '\0') {
-    temp_v2 = objectPartRunUnlessLocked(temp_v5 + 0x940);
-    temp_v3 = temp_v5 + 0x9a4;
-    scrollOwnerSelectIndex(temp_v3,temp_v2);
-    temp_v1 = listCursorGetRowIfUnblocked(temp_v5 + 0x940);
-    temp_v1 = *(int *)(temp_v5 + 0x2c) * 3 + temp_v1;
-    scrollListSetSelectionMarkChanged(temp_v3,temp_v1);
-  }
-  else {
-    temp_v3 = temp_v5 + 0x9a4;
-    temp_v4 = listCursorGetRowIfUnblocked();
-    temp_v7 = SBORROW4(temp_v4,3);
-    temp_v1 = temp_v4 - 3;
-    temp_v6 = temp_v4 == 3;
-    if (temp_v4 >= 3) {
-      temp_v4 = *(int *)(temp_v5 + 0x30);
-      temp_v7 = SBORROW4(temp_v4,1);
-      temp_v1 = temp_v4 - 1;
-      temp_v6 = temp_v4 == 1;
-    }
-    if (temp_v6 || temp_v1 < 0 != temp_v7) {
-      *(unsigned int *)(temp_v5 + 0x2c) = 0;
-    }
-    else {
-      *(unsigned int *)(temp_v5 + 0x2c) = 1;
-    }
-    partyPanelConfigureGridNavigation();
-    temp_v2 = objectPartRunUnlessLocked(temp_v3);
-    scrollOwnerSelectIndex(temp_v5 + 0x940,temp_v2);
-    temp_v1 = listCursorGetRowIfUnblocked(temp_v3);
-    if (temp_v1 >= 3) {
-      if (*(int *)(temp_v5 + 0x30) >= 2) {
-        temp_v1 = listCursorGetRowIfUnblocked(temp_v3);
-        scrollListSetSelectionMarkChanged(temp_v5 + 0x940,*(int *)(temp_v5 + 0x2c) * -3 + temp_v1);
-      }
-      else {
-        scrollListSetSelectionMarkChanged(temp_v5 + 0x940,2);
-      }
-    }
-    else {
-      temp_v2 = listCursorGetRowIfUnblocked(temp_v3);
-      scrollListSetSelectionMarkChanged(temp_v5 + 0x940,temp_v2);
-    }
-    temp_v1 = temp_v5 + 0x940;
-    objClearFlagPair(temp_v1);
-  }
-  temp_v1 = 0;
-  do {
-    temp_v3 = temp_v5 + temp_v1 * 4;
-    slotPlacementAssignSlotAndPosition(*(unsigned int *)(temp_v3 + 0x6c8),*(unsigned int *)(temp_v5 + 0x2c));
-    slotPlacementStartTransition(*(unsigned int *)(temp_v3 + 0x6c8),*(char *)(temp_v5 + 0x42) == '\x01');
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 4);
-  temp_v1 = 0;
-  do {
-    temp_v3 = temp_v5 + temp_v1 * 4;
-    slotPlacementAssignSlotAndPosition(*(unsigned int *)(temp_v3 + 0x6d8),*(unsigned int *)(temp_v5 + 0x2c));
-    slotPlacementStartTransition(*(unsigned int *)(temp_v3 + 0x6d8),*(char *)(temp_v5 + 0x42) == '\x01');
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x18);
-  if (*(int *)(temp_v5 + 0x1c) != 1) {
-    partyPanelRebuildTouchRegions();
-  }
-  return 1;
+    return result;
 }
 
 } /* extern "C" */

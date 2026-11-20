@@ -19,7 +19,7 @@ int soundAllocateSpatialActor(...);
 int mapResolveCollisionSphere(int *, int *, int);
 int FUN_002826dc(int *, int *, int, int);
 int distSpatial(void);
-int FUN_002d1f40(int, int, int);
+int lmapRequestTimedEffect(int, int, int);
 int FUN_003250ac(int *);
 int mathPositionHeadingDegrees(void);
 int soundActorStartOnFreeChannel(...);
@@ -89,7 +89,7 @@ extern signed char DAT_005f1c7e; /* 0x5f1c7e */
 /* Supplied declaration required: FUN_002826dc. */
 /* Supplied declaration required: mapEplSetSlotPosition. */
 /* Supplied declaration required: distSpatial. */
-/* Supplied declaration required: FUN_002d1f40. */
+/* Supplied declaration required: lmapRequestTimedEffect. */
 /* Supplied declaration required: FUN_003250ac. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
@@ -459,7 +459,7 @@ LAB_002db724:
         }
         else {
 LAB_002dba80:
-          FUN_002d1f40(4,8,0);
+          lmapRequestTimedEffect(4,8,0);
           piVar2 = g_lmapScene;
           g_lmapScene[0x74] = 8;
           DAT_005f17ac = 0;
@@ -556,7 +556,7 @@ LAB_002dba80:
       }
       else {
 LAB_002dbd84:
-        FUN_002d1f40(4,8,0);
+        lmapRequestTimedEffect(4,8,0);
         piVar2 = g_lmapScene;
         g_lmapScene[0x74] = 8;
         DAT_005f17ac = 0;

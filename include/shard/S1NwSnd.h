@@ -37,10 +37,12 @@ struct SoundPlayerPairState {
 typedef char SoundPlayerResetStateSizeCheck[sizeof(SoundPlayerResetState) == 0x14 ? 1 : -1];
 typedef char SoundPlayerPairStateSizeCheck[sizeof(SoundPlayerPairState) == 0x0c ? 1 : -1];
 
+/* The 0x3c-byte heap the sound system's initializer constructs two of (smt4 FUN_003f1cb8) after its
+ * Obj421f54 base. Its 64-bit range value is __packed: a 0x3c-byte element can only be 4-aligned,
+ * and retail clears it with two word stores of one zero register. */
 struct FrameHeapStateView {
     /* 0x00 */ u8 base[0x20];
-    /* 0x20 */ u32 first;
-    /* 0x24 */ u32 last;
+    /* 0x20 */ __packed u64 range;
 };
 typedef char FrameHeapStateViewSizeCheck[sizeof(FrameHeapStateView) == 0x28 ? 1 : -1];
 

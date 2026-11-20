@@ -10,7 +10,7 @@ extern "C" {
 int FUN_00272e0c(...);
 int btlViewGetCameraPositionOrDefault(void);
 int gameDataBlocksAddFloat(void);
-int FUN_002d1f40(...);
+int lmapRequestTimedEffect(...);
 int byte76Set(...);
 int FUN_00352ff8(void);
 int FUN_00353200(void);
@@ -130,7 +130,7 @@ extern unsigned int gameDataGetTableValue(void);
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: gameDataBlocksAddFloat. */
-/* Supplied declaration required: FUN_002d1f40. */
+/* Supplied declaration required: lmapRequestTimedEffect. */
 extern int mapEnemyLoadExtraModel(unsigned int);
 /* Supplied declaration required: FUN_00303a5c. */
 /* Supplied declaration required: effectSpawnTypeTen. */
@@ -2879,7 +2879,7 @@ LAB_002d68ec:
           FUN_00352ff8();
         }
         if (*(int *)(temp_v10 + 0xbc) == (int)*(float *)(temp_v10 + 0x158)) {
-          FUN_002d1f40(0xf,0x1e,0);
+          lmapRequestTimedEffect(0xf,0x1e,0);
         }
         if (*(int *)(temp_v10 + 0xbc) == 4) {
           mapPlayActorKindSound(pcVar15,1);

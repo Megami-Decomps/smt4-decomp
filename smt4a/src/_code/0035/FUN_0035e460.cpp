@@ -1,20 +1,34 @@
-/* NON_MATCHING: register allocation and scheduling (retail shares r4 between the flag and the id, stores the search key after the count call and keeps 9 in a register for the loop); logic identical. */
-#include "common.h"
+/* NON_MATCHING: first branch (findExtraRecord, same as dataTableCountRecordStages) matches retail; the 9-slot loop keeps 9 in a register and separates loop index and counter in retail. */
+#include "gamedata/DataTable.h"
 #include "gamedata/SkillDataRecord.h"
+#include "shard/W6_W6Match2_HelpResources.h"
+#include "addon/AocSystemA.h"
+#include "util/BinarySearch.h"
 
 extern "C" {
+
+Table04ExtraRecord *dataTable41FindByIdImpl(AocSystemA *system, u32 id);
+s32 recordSortEntryCompareByKey(const void *left, const void *right);
+
+/* Looks up a table-4 DLC record in the add-on table, falling back to binary search in data table 4 (same as dataTableCountRecordStages). */
+static __inline Table04ExtraRecord *findExtraRecord(u32 id)
+{
+    Table04ExtraRecord *record = dataTable41FindByIdImpl(g_aocSystem, id);
+    if (record == NULL) {
+        void *section = dataTableGet(4, 1);
+        void *entries = dataTableGetEntries(section);
+        u32 count = dataTableGetCount(section);
+        Table04ExtraRecord key;
+        key.id = (u16)id;
+        record = (Table04ExtraRecord *)libc_bsearch(&key, entries, count, sizeof(key), recordSortEntryCompareByKey);
+    }
+    return record;
+}
 
 typedef struct AocItemSlot {
     u8 id;
     u8 unk01;
 } AocItemSlot;
-
-/* A data table 4 entry (0x48 bytes), sorted by `id`. */
-typedef struct AocTableEntry {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ u16 id;
-    /* 0x22 */ u8 unk22[0x26];
-} AocTableEntry;
 
 /* An entry of the data table skillDataFindById searches: `slot` lists its used slots first. */
 typedef struct AocItemEntry {
@@ -25,28 +39,12 @@ typedef struct AocItemEntry {
 
 #define AOC_ID_LIMIT 400  /* ids above it are add-on ids, searched in table 4 */
 
-u32 dataTableGet(u32 table, u32 arg1);
-void *dataTableGetEntries(u32 table);
-u32 dataTableGetCount(u32 table);
-s32 dataTable41FindByIdImpl(void *system, u32 id);
-void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
-
-extern void *g_aocSystem;
-s32 recordSortEntryCompareByKey(const void *left, const void *right);  /* table 4 entry comparison */
-
 /* Number of used slots (up to 9) of data table 4 entry `id`, negated when `positive` is 0.
  * Returns 0 for an unknown id; add-on ids (> 400) are only looked up. */
 s32 FUN_0035e460(u32 id, s32 positive)
 {
     if (id > AOC_ID_LIMIT) {
-        if (dataTable41FindByIdImpl(g_aocSystem, id) == 0) {
-            u32 table = dataTableGet(4, 1);
-            void *entries = dataTableGetEntries(table);
-            AocTableEntry key;
-
-            key.id = id;
-            libc_bsearch(&key, entries, dataTableGetCount(table), sizeof(AocTableEntry), recordSortEntryCompareByKey);
-        }
+        findExtraRecord(id);
     } else {
         AocItemEntry *entry = (AocItemEntry *)skillDataFindById(id);
 

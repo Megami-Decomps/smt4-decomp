@@ -1,14 +1,9 @@
-/* NON_MATCHING: only register allocation/pool order differs (retail loads the icon-table pointer first and uses r1/r2/r3 for the two icon copies; the icon tables are also read from the image's constant data at DAT_004074a4+0xe4 where this build emits its own copy). */
+/* NON_MATCHING: the addresses of the two local tab icon rows are formed and kept in different registers. */
 #include "shop/ShopScreen.h"
-
-/* The two sprite choices each tab makes (indices into the icon table). */
-struct ShopTabIcons {
-    s32 first;
-    s32 second;
-};
+#include "shop/ShopMenuData.h"
 
 extern "C" {
-extern ShopTabIcons DAT_0044e020[];
+extern const ShopIconIndices DAT_0044e020[];
 void uiRectDrawAtBottomRight(void *header, u32 id, s32 dx, s32 dy, u32 flags);
 void FUN_00231bcc(void *header, u32 id, s32 dx, s32 dy, u32 color, u32 flags);
 void shopDrawListRow(ShopScreen *screen, s32 index, s32 flag, ShopSlot *slot);
@@ -51,10 +46,13 @@ void shopScreenRedraw(ShopScreen *screen, u32 sprite)
     FUN_00231bcc(&screen->region, 0x66, 0, 0, color, 1);
     s32 firstIndex = DAT_0044e020[screen->tab].first;
     s32 secondIndex = DAT_0044e020[screen->tab].second;
-    u32 firstIcons[4] = {0x6F, 0x6E, 0x71, 0x70};
-    u32 secondIcons[4] = {0x7A, 0x79, 0x7C, 0x7B};
-    FUN_00231bcc(&screen->region, firstIcons[firstIndex], 0, 0, color, 1);
-    FUN_00231bcc(&screen->region, secondIcons[secondIndex], 0, 0, color, 1);
+    /* unit-local: a copy of the two tab icon groups for these draws */
+    struct TabIconRows {
+        ShopTabImageGroup first;
+        ShopTabImageGroup second;
+    } icons = {DAT_004074a4.firstTab, DAT_004074a4.secondTab};
+    FUN_00231bcc(&screen->region, icons.first.icons[firstIndex], 0, 0, color, 1);
+    FUN_00231bcc(&screen->region, icons.second.icons[secondIndex], 0, 0, color, 1);
 
     s32 mode = screen->phase;
     s32 compact = (mode == 5 || mode == 9) || (mode == 6 || mode == 10) || (mode == 7 || mode == 11) ||

@@ -1,9 +1,8 @@
-/* NON_MATCHING: the light-array base is not cached separately and the final attachment becomes a tail call. */
+/* NON_MATCHING: the light and visitor array bases use different registers, and the final attachment becomes a tail call. */
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "shard/S1GfxModel.h"
 #include "gfx/GfxSettings.h"
 #include "code/Code0017.h"
-#include "gfx/GfxSettings.h"
 
 extern "C" {
 struct Triple;
@@ -22,19 +21,21 @@ void FUN_00141724(void);
 void FUN_00143424(void);
 bool nw_gfx_SceneNode_AttachChild(ModelSlotList* parent, u32 child);
 
-// Initialize the two model-slot light resources and attach their existing scene nodes.
+/* Initializes both model-slot lights and attaches their existing scene nodes. */
 void FUN_001399b0(const u32* settings, u32 options)
 {
     tripleClear(&DAT_00636ebc);
     tripleClear(&g_asdMdlObjectList);
     GfxSettings *state = &g_gfxSettings;
     state->unk1C = 0;
-    state->attachInfo[0] = FUN_0014850c(asdMemoryGetDefaultAllocator(), DAT_00636e30);
-    state->attachInfo[1] = FUN_0014850c(asdMemoryGetDefaultAllocator(), DAT_00636e6c);
+    void **lights = state->attachInfo;
+    lights[0] = FUN_0014850c(asdMemoryGetDefaultAllocator(), DAT_00636e30);
+    lights[1] = FUN_0014850c(asdMemoryGetDefaultAllocator(), DAT_00636e6c);
     FUN_0013d42c(settings, options);
+    void **visitors = state->transformBuilder;
     for (s32 i = 0; i < 2; ++i) {
-        asdScenePassVisit(state->attachInfo[i], state->transformBuilder[i]);
-        FUN_00176538(state->attachInfo[i]);
+        asdScenePassVisit(lights[i], visitors[i]);
+        FUN_00176538(lights[i]);
     }
     FUN_001445d4();
     FUN_00141724();
@@ -51,4 +52,4 @@ void FUN_001399b0(const u32* settings, u32 options)
         nw_gfx_SceneNode_AttachChild(g_asdModelSlotArray0[1], state->node1);
     }
 }
-}
+} /* extern "C" */

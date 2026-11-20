@@ -1,4 +1,4 @@
-/* NON_MATCHING: material/camera selection now matches retail; the float24 depth-bias packing schedules its sign/exponent/fraction extraction after the zero test (retail extracts all three first and shifts the fraction in each arm). */
+/* NON_MATCHING: material/camera selection matches retail; in the float24 depth-bias packing retail shifts the fraction (>> 7) separately in the zero and non-zero arms and masks the exponent unpredicated, where armcc folds the shift into the final orr and predicates the mask. */
 #include "gfx/ModelDepthBias.h"
 
 struct ModelDrawMaterial {

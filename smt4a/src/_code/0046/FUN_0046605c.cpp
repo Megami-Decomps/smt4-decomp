@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0046605c` (_code @ 0x46605c, 0xe4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "classes/RangeOwner.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int nn_os_LightEvent_TryWait(void);
 int FUN_001b6660(unsigned int, int);
 int FUN_001cc644(int);
 int linkListInsertByKind(void);
-int wordsFlag8Reset(unsigned int);
 int wordsFlagReset(unsigned int);
 int nw_ut_internal_LinkListImpl_insert(int, int, int);
 
@@ -19,7 +19,6 @@ int nw_ut_internal_LinkListImpl_insert(int, int, int);
 extern unsigned int FUN_001c35d8(void);
 /* Supplied declaration required: FUN_001cc644. */
 /* Supplied declaration required: linkListInsertByKind. */
-/* Supplied declaration required: wordsFlag8Reset. */
 /* Supplied declaration required: wordsFlagReset. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
 
@@ -43,7 +42,7 @@ void FUN_0046605c(int param_1)
   }
   temp_v2 = 0;
   do {
-    wordsFlag8Reset(param_1 + temp_v2 * 0xc + 0x134);
+    wordsFlag8Reset(&((RangeOwner *)param_1)->flags[temp_v2]);
     wordsFlagReset(param_1 + temp_v2 * 0x10 + 0xf4);
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 4);

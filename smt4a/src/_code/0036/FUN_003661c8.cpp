@@ -12,7 +12,7 @@ int libm_cosf(void); // declcheck: local (romwright prototype; the shared declar
 int libm_sinf(void);
 int FUN_00233e10(...);
 int FUN_00246014(void);
-int FUN_002d1f40(...);
+int lmapRequestTimedEffect(...);
 int padGetNormalizedAnalogStick(...);
 int FUN_00324e38(...);
 int FUN_00352308(void);
@@ -53,7 +53,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_002342b8. */
 /* Supplied declaration required: FUN_00246014. */
 extern int mapIfHasSelection(void);
-/* Supplied declaration required: FUN_002d1f40. */
+/* Supplied declaration required: lmapRequestTimedEffect. */
 /* Supplied declaration required: mapIfOverlayRelease. */
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_002e364c. */
@@ -535,7 +535,7 @@ LAB_00366a74:
         temp_v0 = 0xf;
         temp_v4 = 10;
       }
-      FUN_002d1f40(temp_v4,temp_v0,0);
+      lmapRequestTimedEffect(temp_v4,temp_v0,0);
       temp_v2 = *(int *)(g_lmapScene + 4);
       temp_v1 = g_lmapScene;
       *(int *)(temp_v1 + 4) = temp_v2 + 1;

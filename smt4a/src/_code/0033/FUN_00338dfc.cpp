@@ -41,7 +41,7 @@ extern int gameFlagIsSet(unsigned int);
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
 extern int gameSlotTableFindFree(void);
-extern int FUN_00272d44(void);
+extern int mapTryStartAreaLevelEvent(void);
 /* Supplied declaration required: gameStatePickAvoidingRecent. */
 /* Supplied declaration required: FUN_002c263c. */
 /* Supplied declaration required: gameDataResetFloat. */
@@ -72,7 +72,7 @@ void FUN_00338dfc(void)
   if (temp_v0 == 0) {
     return;
   }
-  temp_v0 = FUN_00272d44();
+  temp_v0 = mapTryStartAreaLevelEvent();
   if (temp_v0 != 0) {
     sprintf((char *)(0x5f0cc1),(const char *)&LAB_0033915c);
   }

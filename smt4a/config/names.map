@@ -7771,3 +7771,17 @@
 00372794 skillMenuCanCurrentUserUseSkill
 0019a300 svcConnectToPort
 0017fd20 svcCreateEvent
+004e81bc btlCameraRunTimedCues
+004f3f1c btlCameraStartFovShift
+00235bfc mapApplySceneFog
+00272d44 mapTryStartAreaLevelEvent
+002ac2b4 fusionSelectionHasAilment
+0025d6a0 campCecViewUpdate
+0020b908 uniteMenuChangeState
+00232d58 MapEnemy_Register
+00240674 resultExpGaugesRefresh
+0020a320 btlCommandMenuApplySelection
+004ccdb8 unitGetExpRequirement
+00429178 aocServiceRunItemRequest
+004289cc aocServiceRunItemCodeRequest
+002d1f40 lmapRequestTimedEffect

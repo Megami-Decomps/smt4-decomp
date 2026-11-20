@@ -10,7 +10,7 @@ int mapIfActivateRecord(...);
 int table23FindRecordByKey(unsigned int, unsigned int, unsigned int);
 int padGetNormalizedAnalogStick(...);
 int mapDepartSpawnPlayerEffect(...);
-int FUN_002879dc(...);
+int lmapRequestTimedEffect(...);
 int buttonHelpSetPreset(int);
 int VectorSignedToFloat(...);
 
@@ -66,7 +66,7 @@ extern int inputConfirmPressed(void);
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: mathRemPio2f. */
-/* Supplied declaration required: FUN_002879dc. */
+/* Supplied declaration required: lmapRequestTimedEffect. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -519,7 +519,7 @@ LAB_002e9794:
         temp_v3 = 0xf;
         temp_v7 = 10;
       }
-      FUN_002879dc(temp_v7,temp_v3,0);
+      lmapRequestTimedEffect(temp_v7,temp_v3,0);
       temp_v1 = *(int *)(g_lmapScene + 4);
       temp_v0 = g_lmapScene;
       *(int *)(temp_v0 + 4) = temp_v1 + 1;

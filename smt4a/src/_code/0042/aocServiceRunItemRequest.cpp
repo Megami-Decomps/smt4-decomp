@@ -4,10 +4,10 @@
 
 extern "C" {
 nn::Result FUN_00427ac4(void *request, u32 count);
-WindowStatusResult FUN_00429580(void *owner, void *request, void *parameters, u32 count, s32 mode);
+WindowStatusResult FUN_00429580(void *owner, void *request, const ItemCodeInfo *items, u32 count, s32 mode);
 
 /* Validates `count` requests and their owner, executes them, and returns the translated result. */
-static __inline WindowStatusResult runRequests(void *owner, void *request, void *parameters, u32 count)
+static __inline WindowStatusResult runRequests(void *owner, void *request, const ItemCodeInfo *items, u32 count)
 {
     nn::Result status = FUN_00427ac4(request, count);
     if (nnResultIsFailure(status)) {
@@ -17,14 +17,14 @@ static __inline WindowStatusResult runRequests(void *owner, void *request, void 
     if (nnResultIsFailure(status)) {
         return WindowStatusResult(status);
     }
-    WindowStatusResult result = FUN_00429580(owner, request, parameters, count, 0);
+    WindowStatusResult result = FUN_00429580(owner, request, items, count, 0);
     recordValidatePair(owner, result);
     return result;
 }
 
-/* Validates one request and its owner, executes it, and returns the translated operation result. */
-WindowStatusResult FUN_00429178(void *owner, void *request, void *parameters)
+/* Validates one request (for one item) and its owner, executes it, and returns the translated operation result. */
+WindowStatusResult aocServiceRunItemRequest(void *owner, void *request, const ItemCodeInfo &item)
 {
-    return runRequests(owner, request, parameters, 1);
+    return runRequests(owner, request, &item, 1);
 }
 }

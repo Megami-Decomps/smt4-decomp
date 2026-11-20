@@ -13,19 +13,19 @@ static u32 gpuEncodeDepthBias(f32 value)
     if (sign != 0) {
         sign = 0x800000;
     }
-    u32 biasedExponent = encoding.ieee.exponent;
+    u32 exponent = encoding.ieee.exponent;
     u32 fraction = encoding.ieee.fraction;
-    s32 exponent = encoding.bits & 0x7fffffff;
-    if (exponent != 0) {
-        exponent = biasedExponent - 64;
-        if (exponent < 0) {
+    if ((encoding.bits & 0x7fffffff) != 0) {
+        s32 unbiased = exponent - 64;
+        if (unbiased < 0) {
             return sign;
         }
-        if (exponent > 127) {
+        if (unbiased > 127) {
             return 0x7f0000;
         }
+        exponent = unbiased & 127;
     }
-    return (fraction >> 7) | sign | ((exponent & 127) << 16);
+    return (fraction >> 7) | sign | (exponent << 16);
 }
 
 #endif

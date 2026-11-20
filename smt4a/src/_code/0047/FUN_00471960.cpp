@@ -1,4 +1,3 @@
-/* NON_MATCHING: slot bytes use computed object bases instead of retail's12/13-plus-index register offsets; slot-array load is predicated. */
 #include "addon/aocMain.h"
 
 extern "C" {
@@ -30,9 +29,10 @@ u32 FUN_00471960(AocSdOwner *owner)
         g_aocMain->flags &= ~0x10000;
     } else if (objGetFlagBit16(g_aocMain) != 0) {
         for (s32 i = 0; i < owner->slotCount; i++) {
-            AocSdSlot *slot = &owner->slots[i];
-            if (slot->present && !slot->opened && slot->handle == 0) {
-                return 0;
+            if (owner->slots[i].present != 0) {
+                if (owner->slots[i].opened == 0 && owner->slots[i].handle == 0) {
+                    return 0;
+                }
             }
         }
     }

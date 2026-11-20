@@ -1,4 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001c1014` (_code @ 0x1c1014, 0xd2c bytes) from smt4_v1.2.0.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `campCecViewUpdate` (_code @ 0x1c1014, 0xd2c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "code/Code0026.h"
@@ -63,7 +63,7 @@ extern int slotIsActive(unsigned int);
 
 /* WARNING: Type propagation algorithm not settling */
 
-unsigned int FUN_001c1014(void)
+unsigned int campCecViewUpdate(void)
 
 {
 /* irregular: 1 goto(s); irregular input(s): in_fpscr; 21 native warning(s); review required */

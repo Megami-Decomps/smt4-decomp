@@ -15,7 +15,7 @@ int FUN_001f3f34(void);
 int mapResolveCollisionSphere(...);
 int FUN_002826dc(...);
 int distSpatial(void);
-int FUN_002d1f40(...);
+int lmapRequestTimedEffect(...);
 int FUN_003250ac(int *);
 int mathPositionHeadingDegrees(void);
 int soundActorStartOnFreeChannel(...);
@@ -68,7 +68,7 @@ extern signed char DAT_005f1c7e; /* 0x5f1c7e */
 /* Supplied declaration required: mapResolveCollisionSphere. */
 /* Supplied declaration required: FUN_002826dc. */
 /* Supplied declaration required: distSpatial. */
-/* Supplied declaration required: FUN_002d1f40. */
+/* Supplied declaration required: lmapRequestTimedEffect. */
 /* Supplied declaration required: FUN_003250ac. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
@@ -341,7 +341,7 @@ void FUN_003541c0(void)
       }
       else {
 LAB_00354acc:
-        FUN_002d1f40(4,8,0);
+        lmapRequestTimedEffect(4,8,0);
         piVar4 = g_lmapScene;
         g_lmapScene[0x74] = 8;
         g_gameState.unk1B0 = 0;
@@ -403,7 +403,7 @@ LAB_00354acc:
       temp_v16 = temp_v16 + 30.0f;
       FUN_002826dc(&temp_v15,&temp_v18,0);
       if ((piVar5 != (int *)0x0) || (mapResolveCollisionSphere(&temp_v15,&temp_v18,0), piVar6 != (int *)0x0)) {
-        FUN_002d1f40(4,8,0);
+        lmapRequestTimedEffect(4,8,0);
         piVar4 = g_lmapScene;
         g_lmapScene[0x74] = 8;
         g_gameState.unk1B0 = 0;

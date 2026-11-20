@@ -140,7 +140,7 @@ int dataTableGetCount(...);
 int dataTableGetEntries(void);
 int ptrListRemoveClearOwner(...);
 int gridNavigationConfigure(...);
-int FUN_0020b908(...);
+int uniteMenuChangeState(...);
 int uniteSortCandidateList(void);
 int FUN_00215bbc(void);
 int FUN_00284ee4(...);
@@ -239,7 +239,7 @@ extern unsigned short recordGetScaledMaximum(int);
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_001ff014. */
 /* Supplied declaration required: gridNavigationConfigure. */
-/* Supplied declaration required: FUN_0020b908. */
+/* Supplied declaration required: uniteMenuChangeState. */
 /* Supplied declaration required: uniteSortCandidateList. */
 /* Supplied declaration required: FUN_00215bbc. */
 /* Supplied declaration required: unitStatusResetSpriteState. */
@@ -283,7 +283,7 @@ extern int FUN_002a7410(void);
 extern int screenIsStateEight(void);
 /* Supplied declaration required: uniteResultInitialize. */
 /* Supplied declaration required: FUN_002a7b74. */
-extern int FUN_002ac2b4(unsigned int, unsigned char);
+extern int fusionSelectionHasAilment(unsigned int, unsigned char);
 /* Supplied declaration required: frameTexSetValue. */
 extern unsigned int computeCountLimit(void);
 extern int widgetSubCallIfVisible(int *);
@@ -607,7 +607,7 @@ s32 FUN_001f5294(u32)
       rebuildFusionCatalogLists();
       FUN_0028a2e8(0);
       FUN_00184b90(piVar3,1);
-      FUN_0020b908(5,1);
+      uniteMenuChangeState(5,1);
       temp_v4 = gameFlagIsSet(0x455);
       if ((temp_v4 != 0) || ((g_unite != (int *)0x0 && (g_unite[0x10d] == 0x16)))) {
         FUN_002a7b74();
@@ -621,7 +621,7 @@ s32 FUN_001f5294(u32)
     }
     if ((char)piVar3[0x108] == '\x01') {
       FUN_00184b90(piVar3,1);
-      FUN_0020b908(0x1e,1);
+      uniteMenuChangeState(0x1e,1);
       partyPanelSetHidden(1);
       temp_v4 = gameFlagIsSet(0x456);
       if ((temp_v4 != 0) || ((g_unite != (int *)0x0 && (g_unite[0x10d] == 0x17)))) {
@@ -674,7 +674,7 @@ s32 FUN_001f5294(u32)
               } while (temp_v5 < (int)(unsigned int)*(unsigned short *)(piVar3 + 0x23de));
             }
             FUN_00184b90(piVar3,1);
-            FUN_0020b908(0x1b,1);
+            uniteMenuChangeState(0x1b,1);
             uniteSortCandidateList();
           }
         }
@@ -699,7 +699,7 @@ s32 FUN_001f5294(u32)
       piVar3[0x2421] = 0;
       piVar3[0x2422] = 0;
       piVar3[0x2423] = 0;
-      FUN_0020b908(2,1);
+      uniteMenuChangeState(2,1);
       piVar3[0x2428] = -1;
       *(unsigned char *)(piVar3 + 0x2424) = 1;
     }
@@ -732,11 +732,11 @@ s32 FUN_001f5294(u32)
       temp_v26 = 1;
       gridNavigationConfigure(piVar3 + 0x2452,temp_v7,10,1);
       FUN_00184b90(piVar3,1);
-      FUN_0020b908(3,1);
+      uniteMenuChangeState(3,1);
       FUN_002a7b74();
     }
     if ((char)piVar3[0x108] == '\x05') {
-      FUN_0020b908(2,1);
+      uniteMenuChangeState(2,1);
       FUN_002a7b74();
     }
   default:
@@ -764,7 +764,7 @@ s32 FUN_001f5294(u32)
       temp_v4 = uiQuestIsCreated();
       if ((temp_v4 != 0) && (temp_v4 = FUN_002c8748(), temp_v4 == 0)) {
         piVar3[0x103] = 4;
-        FUN_0020b908(0x24,1);
+        uniteMenuChangeState(0x24,1);
         temp_v4 = 0;
         do {
           *(unsigned short *)((int)piVar3 + temp_v4 * 2 + 0x438) = 0xffff;
@@ -828,7 +828,7 @@ s32 FUN_001f5294(u32)
             padQueryLogicalKey();
             if (temp_v4 != 0) {
               piVar3[0x103] = 0x28;
-              FUN_0020b908(0x24,1);
+              uniteMenuChangeState(0x24,1);
               temp_v4 = 0;
               do {
                 *(unsigned short *)((int)piVar3 + temp_v4 * 2 + 0x438) = 0xffff;
@@ -976,7 +976,7 @@ s32 FUN_001f5294(u32)
       if ((temp_v10 != 0 && temp_v10 < temp_v7) &&
          ((g_unite == (int *)0x0 || (g_unite[0x10d] != 3)))) {
         piVar3[0x103] = 0xb;
-        FUN_0020b908(0x24,1);
+        uniteMenuChangeState(0x24,1);
         if (*(char *)(temp_v4 + 0x38) == '\0') {
           FUN_00231574();
         }
@@ -1119,7 +1119,7 @@ s32 FUN_001f5294(u32)
                 gridNavigationConfigure(piVar3 + 0x158,(int)piVar19 + 1,8,1);
                 scrollListSetSelectionTracked(piVar3 + 0x158,temp_v28);
                 uiSpriteSetKeyframe(piVar3 + 0x95,5,0);
-                FUN_0020b908(6,1);
+                uniteMenuChangeState(6,1);
                 break;
               case 1:
                 temp_v25 = (int *)0x1;
@@ -1138,7 +1138,7 @@ s32 FUN_001f5294(u32)
                   }
                 }
                 uiSpriteSetKeyframe(piVar3 + 0x95,5,0);
-                FUN_0020b908(6,1);
+                uniteMenuChangeState(6,1);
                 break;
               case 2:
                 temp_v25 = (int *)0x1;
@@ -1148,7 +1148,7 @@ s32 FUN_001f5294(u32)
                   scrollListSetSelectionTracked(piVar3 + 0x158,temp_v10);
                 }
                 uiSpriteSetKeyframe(piVar3 + 0x95,5,0);
-                FUN_0020b908(6,1);
+                uniteMenuChangeState(6,1);
                 break;
               case 3:
                 temp_v25 = (int *)0x1;
@@ -1167,7 +1167,7 @@ s32 FUN_001f5294(u32)
                   }
                 }
                 uiSpriteSetKeyframe(piVar3 + 0x95,5,0);
-                FUN_0020b908(6,1);
+                uniteMenuChangeState(6,1);
                 break;
               case 4:
                 temp_v25 = (int *)0x1;
@@ -1186,7 +1186,7 @@ s32 FUN_001f5294(u32)
                   }
                 }
                 uiSpriteSetKeyframe(piVar3 + 0x95,5,0);
-                FUN_0020b908(6,1);
+                uniteMenuChangeState(6,1);
                 break;
               case 5:
                 temp_v25 = (int *)0x1;
@@ -1202,7 +1202,7 @@ joined_r0x001f6a20:
                   scrollListSetSelectionTracked(piVar3 + 0x158,temp_v10 + 1);
                 }
                 uiSpriteSetKeyframe(piVar3 + 0x95,5,0);
-                FUN_0020b908(6,1);
+                uniteMenuChangeState(6,1);
                 break;
               case 7:
                 temp_v18 = 1;
@@ -1230,29 +1230,29 @@ joined_r0x001f6a20:
                 else {
                   temp_v15 = 10;
                 }
-                FUN_0020b908(temp_v15,1);
+                uniteMenuChangeState(temp_v15,1);
                 break;
               case 0xc:
                 if (*(char *)(temp_v4 + 0x31) != '\0') {
                   temp_v15 = 10;
-                  FUN_0020b908(temp_v15,1);
+                  uniteMenuChangeState(temp_v15,1);
                   break;
                 }
                 *(unsigned char *)(temp_v4 + 0x31) = 1;
                 FUN_0028a2e8(1);
                 temp_v15 = 9;
-                FUN_0020b908(temp_v15,1);
+                uniteMenuChangeState(temp_v15,1);
                 break;
               case 0xd:
                 if (*(char *)(temp_v4 + 0x32) != '\0') {
                   temp_v15 = 10;
-                  FUN_0020b908(temp_v15,1);
+                  uniteMenuChangeState(temp_v15,1);
                   break;
                 }
                 *(unsigned char *)(temp_v4 + 0x32) = 1;
                 FUN_0028a2e8(1);
                 temp_v15 = 9;
-                FUN_0020b908(temp_v15,1);
+                uniteMenuChangeState(temp_v15,1);
                 break;
               case 0xe:
                 temp_v5 = 0;
@@ -1277,7 +1277,7 @@ joined_r0x001f6a20:
                 gridNavigationConfigure(piVar3 + 0x158,(int)piVar19 + 1,8,1);
                 scrollListSetSelectionTracked(piVar3 + 0x158,temp_v28);
                 uiSpriteSetKeyframe(piVar3 + 0x95,5,0);
-                FUN_0020b908(6,1);
+                uniteMenuChangeState(6,1);
                 break;
               case 0xf:
                 temp_v2 = *(unsigned char *)(temp_v4 + 0x36) ^ 2;
@@ -1289,7 +1289,7 @@ joined_r0x001f6a20:
               temp_v5 = 1;
               padQueryLogicalKey();
               if (temp_v5 == 0) goto LAB_001f6b9c;
-              FUN_0020b908(8,1);
+              uniteMenuChangeState(8,1);
               FUN_00184b90(piVar3,3);
               temp_v5 = 0;
               do {
@@ -1650,7 +1650,7 @@ LAB_001f732c:
             }
           }
           uiSpriteSetKeyframe(piVar3 + 0x95,5,0);
-          FUN_0020b908(5,1);
+          uniteMenuChangeState(5,1);
           temp_v4 = 0;
           do {
             if (-1 < *(short *)((int)piVar3 + temp_v4 * 2 + 0x44c)) {
@@ -1667,7 +1667,7 @@ LAB_001f732c:
           padQueryLogicalKey();
           if (temp_v4 != 0) {
             uiSpriteSetKeyframe(piVar3 + 0x95,5,0);
-            FUN_0020b908(5,1);
+            uniteMenuChangeState(5,1);
             temp_v4 = 0;
             do {
               if (-1 < *(short *)((int)piVar3 + temp_v4 * 2 + 0x44c)) {
@@ -1878,7 +1878,7 @@ LAB_001f77ec:
       gridNavigationConfigure(piVar3 + 0x19f3,piVar3[0x1cfb],5,1);
       *(unsigned char *)(piVar3 + 0x1a0c) = 0;
       piVar3[0x103] = 0xd;
-      FUN_0020b908(0x24,1);
+      uniteMenuChangeState(0x24,1);
       FUN_0037e1b0((int)(char)piVar3[0x1a0c],1);
       gameGlobalsSetOverlayActive(1);
       unitStatusResetSpriteState();
@@ -1905,7 +1905,7 @@ LAB_001f77ec:
       padQueryLogicalKey(10,1);
       if (temp_v5 != 0) {
         piVar3[0x103] = 0xb;
-        FUN_0020b908(0x24,1);
+        uniteMenuChangeState(0x24,1);
         temp_v15 = 0x1000210;
         eventQueueAddUniqueIfValid(temp_v15);
       }
@@ -1914,7 +1914,7 @@ LAB_001f77ec:
         padQueryLogicalKey();
         if (temp_v5 != 0) {
           piVar3[0x103] = 5;
-          FUN_0020b908(0x24,1);
+          uniteMenuChangeState(0x24,1);
           FUN_002a7b74();
           uniteStartOrQueueRequest(2);
           temp_v15 = 0x100020f;
@@ -1934,7 +1934,7 @@ LAB_001f77ec:
           useCounterAppendValue(0x31);
           useCounterAppendValue(3);
           useCounterStart();
-          FUN_0020b908(0xc,1);
+          uniteMenuChangeState(0xc,1);
         }
       }
     }
@@ -1969,7 +1969,7 @@ LAB_001f77ec:
       return 0;
     }
     useCounterRelease();
-    FUN_0020b908(piVar3[0x101],1);
+    uniteMenuChangeState(piVar3[0x101],1);
     *(unsigned char *)(piVar3 + 0x125) = 1;
     piVar3[0xff] = piVar3[0xff] + 1;
     return 0;
@@ -2043,7 +2043,7 @@ LAB_001f77ec:
         }
       }
       piVar3[0x102] = 0xd;
-      FUN_0020b908(0x22,0);
+      uniteMenuChangeState(0x22,0);
       temp_v4 = 0;
       do {
         if (-1 < *(short *)((int)piVar3 + temp_v4 * 2 + 0x438)) {
@@ -2369,7 +2369,7 @@ LAB_001f77ec:
                       FUN_003bb710((piVar3[temp_v47[0] * 2 + 0x4ef] & 0x1ffffU) >> 2);
                       uniteListRebuild((piVar3[temp_v47[0] * 2 + 0x4ef] & 0x1ffffU) >> 2);
                       piVar3[0x103] = 0xf;
-                      FUN_0020b908(0x24,1);
+                      uniteMenuChangeState(0x24,1);
                       if ((char)piVar3[0x1a0c] != '\0') {
                         *(unsigned char *)(piVar3 + 0x1a0c) = 0;
                         FUN_0031f718((piVar3[temp_v47[0] * 2 + 0x4ef] & 0x1ffffU) >> 2,0);
@@ -2399,7 +2399,7 @@ LAB_001f77ec:
                 FUN_002a7b74();
                 uniteStartOrQueueRequest(4);
                 piVar3[0x103] = 0xb;
-                FUN_0020b908(0x24,1);
+                uniteMenuChangeState(0x24,1);
                 temp_v15 = 0x100020f;
 LAB_001f8c54:
                 eventQueueAddUniqueIfValid(temp_v15);
@@ -2415,7 +2415,7 @@ LAB_001f8c54:
                 useCounterAppendValue(7);
                 useCounterAppendValue(3);
                 useCounterStart();
-                FUN_0020b908(0xe,1);
+                uniteMenuChangeState(0xe,1);
               }
               temp_v4 = 0;
               do {
@@ -2475,7 +2475,7 @@ LAB_001f8d58:
       if (*(char *)(temp_v4 + 0x33) != '\0') {
         panelSetTarget(-piVar3[0x106],0);
       }
-      FUN_0020b908(piVar3[0x101],1);
+      uniteMenuChangeState(piVar3[0x101],1);
       *(unsigned char *)(piVar3 + 0x125) = 1;
     }
     else {
@@ -2613,7 +2613,7 @@ LAB_001f8d58:
     statusPanelSetOpen(0);
     buttonHelpSetText(0,0xf4f4f4ff);
     piVar3[0x103] = 0x13;
-    FUN_0020b908(0x24,0);
+    uniteMenuChangeState(0x24,0);
     temp_v15 = 0x100020e;
     eventQueueAddUniqueIfValid(temp_v15);
     piVar3[0xff] = piVar3[0xff] + 1;
@@ -2743,30 +2743,30 @@ LAB_001f8d58:
             if (piVar3[0x101] == 2) {
               temp_v47[0] = 0;
             }
-            temp_v4 = FUN_002ac2b4(temp_v47[0],piVar3[0x101] == 0x1c);
+            temp_v4 = fusionSelectionHasAilment(temp_v47[0],piVar3[0x101] == 0x1c);
             if (temp_v4 == 0) {
               panelSetMode3(-piVar3[0x106],0);
               piVar3[0x103] = 0x16;
-              FUN_0020b908(0x24,1);
+              uniteMenuChangeState(0x24,1);
             }
             goto LAB_001f9850;
           }
           temp_v47[0] = 0;
-          temp_v4 = FUN_002ac2b4(0,piVar3[0x101] == 0x1c);
+          temp_v4 = fusionSelectionHasAilment(0,piVar3[0x101] == 0x1c);
           gameGlobalsSetMenuOpenFlag(1);
           FUN_00333dc8(1);
           if (temp_v4 != 0) goto LAB_001f9868;
           piVar3[0x103] = 0x1f;
-          FUN_0020b908(0x24,1);
+          uniteMenuChangeState(0x24,1);
           FUN_002a7b74();
         }
         else {
           temp_v47[0] = 0;
-          temp_v4 = FUN_002ac2b4(0,piVar3[0x101] == 0x1c);
+          temp_v4 = fusionSelectionHasAilment(0,piVar3[0x101] == 0x1c);
           if (temp_v4 == 0) {
             panelSetMode3(-piVar3[0x106],0);
             piVar3[0x103] = 0x1d;
-            FUN_0020b908(0x24,1);
+            uniteMenuChangeState(0x24,1);
           }
 LAB_001f9850:
           gameGlobalsSetMenuOpenFlag(1);
@@ -2829,7 +2829,7 @@ LAB_001f9868:
           statusDisplayBindUnitRecord(piVar3 + 0x19a7,0,0);
           statusPanelSetOpen(0);
           piVar3[0x103] = 0xf;
-          FUN_0020b908(0x24,0);
+          uniteMenuChangeState(0x24,0);
         }
         eventQueueAddUniqueIfValid(0x100020f);
         piVar3[0xff] = piVar3[0xff] + 1;
@@ -2876,17 +2876,17 @@ LAB_001f9868:
         if (piVar3[0x101] != 0x1e) {
           panelSetMode3(-piVar3[0x106],0);
           piVar3[0x103] = 0x16;
-          FUN_0020b908(0x24,1);
+          uniteMenuChangeState(0x24,1);
         }
         else {
           piVar3[0x103] = 0x1f;
-          FUN_0020b908(0x24,1);
+          uniteMenuChangeState(0x24,1);
         }
       }
       else {
         panelSetMode3(-piVar3[0x106],0);
         piVar3[0x103] = 0x1d;
-        FUN_0020b908(0x24,1);
+        uniteMenuChangeState(0x24,1);
       }
       temp_v15 = 6;
       uniteStartOrQueueRequest(temp_v15);
@@ -3191,7 +3191,7 @@ LAB_001f9868:
           piVar19[0x246c] = 0;
           FUN_002a7b74();
           uniteStartOrQueueRequest(0x12);
-          FUN_0020b908(0x27,1);
+          uniteMenuChangeState(0x27,1);
           temp_v4 = lmapSceneGetScript();
           if (temp_v4 != 0) {
             lmapSceneSetUnk134(1);
@@ -3402,7 +3402,7 @@ LAB_001fac50:
           gridNavigationConfigure(piVar3 + 0x19f3,piVar3[0x172],5,1);
           *(unsigned char *)(piVar3 + 0x1a0c) = 0;
           piVar3[0x103] = 0x1c;
-          FUN_0020b908(0x24,1);
+          uniteMenuChangeState(0x24,1);
           FUN_0037e1b0((int)(char)piVar3[0x1a0c],1);
           gameGlobalsSetOverlayActive(1);
           unitStatusResetSpriteState();
@@ -3431,7 +3431,7 @@ LAB_001fac50:
           padQueryLogicalKey(10,1);
           if (temp_v5 != 0) {
             piVar3[0x103] = 0x1b;
-            FUN_0020b908(0x24,1);
+            uniteMenuChangeState(0x24,1);
             temp_v15 = 0x1000210;
             eventQueueAddUniqueIfValid(temp_v15);
           }
@@ -3446,7 +3446,7 @@ LAB_001fac50:
               useCounterAppendValue(0x31);
               useCounterAppendValue(3);
               useCounterStart();
-              FUN_0020b908(0xc,1);
+              uniteMenuChangeState(0xc,1);
             }
             else {
               temp_v5 = 1;
@@ -3455,7 +3455,7 @@ LAB_001fac50:
                 piVar3[0xff] = piVar3[0xff] + 1;
                 return 0;
               }
-              FUN_0020b908(0x28,1);
+              uniteMenuChangeState(0x28,1);
               temp_v15 = 0x100020f;
               piVar3[0x106] = 0;
               eventQueueAddUniqueIfValid(temp_v15);
@@ -3558,7 +3558,7 @@ LAB_001fac1c:
         }
       }
       piVar3[0x102] = 0x1c;
-      FUN_0020b908(0x22,0);
+      uniteMenuChangeState(0x22,0);
       *(unsigned short *)(piVar3 + 0x10e) = 0xffff;
       ifTouchRegionRemove();
       *(unsigned short *)(piVar3 + 0x117) = 0xffff;
@@ -3711,7 +3711,7 @@ LAB_001fac1c:
             padQueryLogicalKey();
             if (temp_v4 != 0) {
               piVar3[0x103] = 0x1b;
-              FUN_0020b908(0x24,1);
+              uniteMenuChangeState(0x24,1);
               FUN_0037e1b0(0xffffffff,1);
               statusPanelClose();
               FUN_002a7b74();
@@ -3850,7 +3850,7 @@ LAB_001fb9c4:
                   FUN_003bb710((short)temp_v46[0xe]);
                   uniteListRebuild((short)temp_v46[0xe]);
                   piVar3[0x103] = 0xf;
-                  FUN_0020b908(0x24,1);
+                  uniteMenuChangeState(0x24,1);
                   *(unsigned short *)(piVar3 + 0x10e) = 0xffff;
                   ifTouchRegionRemove();
                   *(unsigned short *)(piVar3 + 0x117) = 0xffff;
@@ -3964,7 +3964,7 @@ joined_r0x001fbbe8:
           FUN_003bb710((piVar3[0x4ef] & 0x1ffffU) >> 2);
           uniteListRebuild((piVar3[0x4ef] & 0x1ffffU) >> 2);
           piVar3[0x103] = 0xf;
-          FUN_0020b908(0x24,1);
+          uniteMenuChangeState(0x24,1);
         }
       }
     }
@@ -4166,7 +4166,7 @@ LAB_001fc128:
       piVar3[0x239f] = 0;
     }
     FUN_00184b90(piVar3,1);
-    FUN_0020b908(piVar3[0x103],0);
+    uniteMenuChangeState(piVar3[0x103],0);
     temp_v4 = piVar3[0x103];
     if ((temp_v4 != 0x16 && temp_v4 != 0x1f) && (temp_v4 != 0x1d)) {
       gameGlobalsSetMenuOpenFlag(0);
@@ -4188,7 +4188,7 @@ LAB_001fc128:
     }
     else {
       statusPanelClose();
-      FUN_0020b908(5,1);
+      uniteMenuChangeState(5,1);
       FUN_002a7b74();
       temp_v15 = 3;
       uniteStartOrQueueRequest(temp_v15);
@@ -4226,7 +4226,7 @@ LAB_001fc128:
     temp_v15 = 1;
     temp_v4 = 0x1e;
   }
-  FUN_0020b908(temp_v4,temp_v15);
+  uniteMenuChangeState(temp_v4,temp_v15);
   piVar3[0xff] = piVar3[0xff] + 1;
   return 0;
 }

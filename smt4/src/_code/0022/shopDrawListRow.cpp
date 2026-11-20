@@ -1,7 +1,13 @@
-/* NON_MATCHING: the touch selection's `selected` flag is read through its linker-inlined getter
- * (touchSelectionGetSelected); retail keeps `selected` in r6 and the row origin in r7/r8 (here r8, r6/r7), gives
- * the item id, font, name and name sprite their own stack slots around the text buffer, loads the entry id into r2
- * before moving the price for btlRollClamped, and materialises `row != 0` as mov #1; moveq #0. */
+/* NON_MATCHING: 120 lines (58 by shape); same calls, branches, registers and 84-byte frame as retail. What differs:
+ * - where the spilled locals live: retail keeps the font at sp+36, the text at sp+40 and the name and its sprite at
+ *   sp+72/76, the scroll highlight's layout entry, sprite and x in sp+0/4/12 and the helper's id copy and the price
+ *   in sp+8; the build puts the text at sp+48, the name at sp+40 and the others in the outgoing-argument slots
+ *   (font sp+0, name sprite sp+12, layout entry/sprite/x sp+4/0/8, id copy sp+4, price sp+0). shopDrawAppraisalRow
+ *   differs the same way;
+ * - `row != 0` is `mov #1; moveq #0` in retail (`movne #1; moveq #0` here);
+ * - retail loads the entry id into r2 before it moves the price for btlRollClamped, as its four other callers do
+ *   (a plain `static` helper around the call gives that, but moves the id's slot to sp+28);
+ * - the name draw loads the 0.0 spacing after the colour move (before it here). */
 #include <stdio.h>
 #include "shard/S2Scene3a.h"
 #include "shard/S1ListPanel.h"

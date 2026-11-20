@@ -11,7 +11,7 @@ extern "C" {
 int mapSelectContainingRegions(void);
 int FUN_002804ec(...);
 int mapEaseSceneHeading(void);
-int FUN_002879dc(...);
+int lmapRequestTimedEffect(...);
 int mathDistanceBetweenPoints(void);
 
 int FUN_002562e4(int, int);
@@ -68,7 +68,7 @@ extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: mathRemPio2f. */
-/* Supplied declaration required: FUN_002879dc. */
+/* Supplied declaration required: lmapRequestTimedEffect. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int randBetween(unsigned int, unsigned int);
@@ -388,7 +388,7 @@ joined_r0x002c99a8:
                  (FUN_0025bc80(), *(int *)(g_lmapScene + 8) == 6)) {
                 temp_v5 = 0x14;
                 temp_v3 = 6;
-                FUN_002879dc(temp_v3,temp_v5,0);
+                lmapRequestTimedEffect(temp_v3,temp_v5,0);
               }
             }
           }
@@ -465,7 +465,7 @@ joined_r0x002c99a8:
         {
           temp_v5 = 8;
           temp_v3 = 4;
-          FUN_002879dc(temp_v3,temp_v5,0);
+          lmapRequestTimedEffect(temp_v3,temp_v5,0);
         }
       }
       temp_v2 = g_lmapScene;

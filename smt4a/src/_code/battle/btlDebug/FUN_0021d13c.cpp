@@ -57,7 +57,7 @@ int bitsAt60Test(...);
 int padQueryLogicalKey(...);
 int eventQueueAddUniqueIfValid(...);
 int skillDataFindById(void);
-int FUN_0020a320(...);
+int btlCommandMenuApplySelection(...);
 int btlCommandMenuEnterMode(...);
 int useCounterStart(void);
 int touchMenuClose(void);
@@ -162,7 +162,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: gameGetSlotTable. */
 /* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: gridNavigationConfigure. */
-/* Supplied declaration required: FUN_0020a320. */
+/* Supplied declaration required: btlCommandMenuApplySelection. */
 /* Supplied declaration required: FUN_0020acd8. */
 /* Supplied declaration required: btlCommandMenuEnterMode. */
 /* Supplied declaration required: FUN_0020d3d4. */
@@ -671,7 +671,7 @@ joined_r0x0021db60:
       eventQueueAddUniqueIfValid(temp_v8);
       break;
     }
-    temp_v4 = FUN_0020a320(param_1);
+    temp_v4 = btlCommandMenuApplySelection(param_1);
     if (temp_v4 != 0) {
       temp_v8 = 0x100020e;
       eventQueueAddUniqueIfValid(temp_v8);
@@ -1072,7 +1072,7 @@ LAB_0021e950:
                   screenSetContextHint(param_1,temp_v8,*piVar16);
                   temp_v4 = FUN_002cc9e0(param_1,1);
                   if ((temp_v4 == 1 || temp_v4 == 2) || ((temp_v4 == 7 || temp_v4 == 3) || temp_v4 == 0xc)) {
-                    FUN_0020a320(param_1);
+                    btlCommandMenuApplySelection(param_1);
                   }
                   break;
                 }
@@ -1355,7 +1355,7 @@ LAB_0021f098:
       screenSetContextHint(param_1,temp_v8,*piVar16);
       temp_v4 = FUN_002cc9e0(param_1,1);
       if ((temp_v4 != 1 && temp_v4 != 2) && ((temp_v4 != 7 && temp_v4 != 3) && temp_v4 != 0xc)) break;
-      FUN_0020a320(param_1);
+      btlCommandMenuApplySelection(param_1);
       break;
     }
     *puVar20 = 1;
@@ -1440,7 +1440,7 @@ LAB_0021f338:
         screenSetContextHint(param_1,temp_v8,*piVar16);
         temp_v4 = FUN_002cc9e0(param_1,1);
         if ((temp_v4 != 1 && temp_v4 != 2) && ((temp_v4 != 7 && temp_v4 != 3) && temp_v4 != 0xc)) break;
-        FUN_0020a320(param_1);
+        btlCommandMenuApplySelection(param_1);
         break;
       }
       *puVar20 = 9;

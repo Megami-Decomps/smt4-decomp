@@ -36,7 +36,10 @@ s32 streamWriterSetLengthIfFits(RecordWriteStream *stream, u32 position);
 
 static inline const u8 &supportedRecordVersion(const u8 &requested, const u8 &supported)
 {
-    return supported < requested ? supported : requested;
+    if (supported < requested) {
+        return supported;
+    }
+    return requested;
 }
 
 /* Serialize the handle record, backpatching its payload size when headers are enabled. */

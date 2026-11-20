@@ -14,7 +14,7 @@ int FUN_0037e1b0(...);
 int padQueryLogicalKey(...);
 int eventQueueAddUniqueIfValid(...);
 int buttonHelpSetText(...);
-int FUN_0020b908(...);
+int uniteMenuChangeState(...);
 int gridNavigationHandleConfirm(int, int);
 int uniteStartOrQueueRequest(int);
 int resourceRunOperationIfUnblocked(...);
@@ -47,7 +47,7 @@ typedef struct {
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: buttonHelpSetText. */
-/* Supplied declaration required: FUN_0020b908. */
+/* Supplied declaration required: uniteMenuChangeState. */
 /* Supplied declaration required: gridNavigationHandleConfirm. */
 /* Supplied declaration required: FUN_0023b45c. */
 /* Supplied declaration required: uniteStartOrQueueRequest. */
@@ -230,7 +230,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
     temp_v5 = temp_v16;
     arrayContainsU16(temp_v16,8,*(unsigned short *)(param_1 + temp_v4 * 2 + 0x8b70));
     if (temp_v5 != 0) {
-      FUN_0020b908(0x11,0);
+      uniteMenuChangeState(0x11,0);
       eventQueueAddUniqueIfValid(0x100020f);
       return temp_v15;
     }
@@ -329,7 +329,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
       else {
         *(int *)(param_1 + 0x40c) = temp_v4;
       }
-      FUN_0020b908(0x24,1);
+      uniteMenuChangeState(0x24,1);
       temp_v4 = 0;
       do {
         temp_v5 = param_1 + temp_v4 * 2;
@@ -369,7 +369,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
       }
     }
     else {
-      FUN_0020b908(0x12,0);
+      uniteMenuChangeState(0x12,0);
     }
   }
   eventQueueAddUniqueIfValid(0x100020f);

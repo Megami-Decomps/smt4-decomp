@@ -4,6 +4,7 @@
 #include "romwright_types.h"
 #include "code/Code0015.h"
 #include "battle/BtlGlobals.h"
+#include "battle/CameraScalarTransition.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ int FUN_004f1b2c(...);
 int FUN_004f22a4(...);
 int FUN_004f2938(...);
 int cameraBeginScalarTransition(int, unsigned int, int);
-int FUN_004f3f1c(int, unsigned int, int, int);
 void FUN_004f4348(int camera, float x, float y, float z, unsigned int duration, unsigned int mode);
 int btlQueueDuplicateSuppressedAction(int, unsigned int);
 int FUN_004feecc(int, unsigned int);
@@ -48,7 +48,7 @@ static float romwright_fabs_4(float value)
 extern int FUN_004f2708(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004f2938. */
 /* Supplied declaration required: cameraBeginScalarTransition. */
-/* Supplied declaration required: FUN_004f3f1c. */
+/* Supplied declaration required: btlCameraStartFovShift. */
 /* Supplied declaration required: FUN_004f4348. */
 /* Supplied declaration required: btlQueueDuplicateSuppressedAction. */
 /* Supplied declaration required: FUN_004feecc. */
@@ -101,10 +101,11 @@ void FUN_0040d274(unsigned int param_1,int param_2)
       return;
     }
     break;
-  case 10:
-    VectorSignedToFloat((int)*(short *)(param_2 + 0x24),(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_004f3f1c(reinterpret_cast<int>(g_btlCamera),*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48),0);
+  case 10: {
+    const BtlCameraLensCommand *command = (const BtlCameraLensCommand *)param_2;
+    btlCameraStartFovShift(g_btlCamera, (f32)command->fov, command->frames, command->mode, 0);
     return;
+  }
   case 0xb:
     if ((*(int *)(param_2 + 0x14) != 0) &&
        ((*(unsigned int *)(*(int *)(param_2 + 0x14) + 0x50) & 0x10) == 0)) {

@@ -1,47 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `recordQueryAndValidatePairWithKey` (_code @ 0x3539e8, 0x8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: IDENTICAL with unit cflags `--fpu=softvfp` (matching smt4a's project.json entry; default flags spill the 5th argument to s16). */
+#include "classes/WindowStatus.h"
+#include "nn/Result.h"
 
 extern "C" {
 
-int FUN_00239fc4(int, int);
-int recordValidatePair(unsigned int, int, unsigned int);
-int _ZN18WindowStatusResultC1Ej(unsigned int *, int);
-int FUN_00354168(int *, unsigned int, int, unsigned int, unsigned int);
+nn::Result FUN_00239fc4(void *archive, u32 mode);
+WindowStatusResult FUN_00354168(void *file, void *archive, const u16 *path, u32 flags);
 
-/* stack frame of param_5: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_5_stack;
-
-/* Supplied declaration required: FUN_00239fc4. */
-/* Supplied declaration required: recordValidatePair. */
-extern int queryFailureResultOrZero(unsigned int); // declcheck: local (romwright prototype; the shared declaration in classes/WindowStatus.h does not compile here: more than one instance of overloaded function "recordValidatePair" has "C" linkage)
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-/* Supplied declaration required: FUN_00354168. */
-
-
-void recordQueryAndValidatePairWithKey(unsigned int *param_1,unsigned int param_2,int param_3,unsigned int param_4,
-                 unsigned int param_5)
-
+/* Opens the archive, verifies no pending failure on `file`, queries and validates the pair. */
+WindowStatusResult recordQueryAndValidatePairWithKey(void *file, void *archive, const u16 *path, u32 flags)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int uStack_1c;
-  
-  temp_v0 = param_3;
-  FUN_00239fc4(param_3,1);
-  if ((-1 < temp_v0) && (temp_v0 = queryFailureResultOrZero(param_2), -1 < temp_v0)) {
-    FUN_00354168(&temp_v1,param_2,param_3,param_4,param_5);
-    recordValidatePair(param_2,temp_v1,uStack_1c);
-    *param_1 = temp_v1;
-    param_1[1] = uStack_1c;
-    return;
-  }
-  _ZN18WindowStatusResultC1Ej(param_1,temp_v0);
-  return;
+    nn::Result status = FUN_00239fc4(archive, 1);
+    if (nnResultIsFailure(status)) {
+        return WindowStatusResult(status);
+    }
+    status = queryFailureResultOrZero(file);
+    if (nnResultIsFailure(status)) {
+        return WindowStatusResult(status);
+    }
+    WindowStatusResult result = FUN_00354168(file, archive, path, flags);
+    recordValidatePair(file, result);
+    return result;
 }
 
 } /* extern "C" */

@@ -23095,12 +23095,12 @@
     {
       "address": "0x1c1014",
       "file": "camp/CampCec/CampCecView",
-      "function": "FUN_001c1014",
+      "function": "campCecViewUpdate",
       "module": "_code",
-      "object": "build/obj/_code/camp/CampCec/CampCecView/FUN_001c1014.o",
+      "object": "build/obj/_code/camp/CampCec/CampCecView/campCecViewUpdate.o",
       "size": 3372,
-      "source": "src/_code/camp/CampCec/CampCecView/FUN_001c1014.cpp",
-      "target": "orig/target/_code/camp/CampCec/CampCecView/FUN_001c1014.o",
+      "source": "src/_code/camp/CampCec/CampCecView/campCecViewUpdate.cpp",
+      "target": "orig/target/_code/camp/CampCec/CampCecView/campCecViewUpdate.o",
       "thumb": false
     },
     {
@@ -27671,12 +27671,12 @@
     {
       "address": "0x1ffc5c",
       "file": "camp/CampCec/CampCec",
-      "function": "FUN_001ffc5c",
+      "function": "campCecCreate",
       "module": "_code",
-      "object": "build/obj/_code/camp/CampCec/CampCec/FUN_001ffc5c.o",
+      "object": "build/obj/_code/camp/CampCec/CampCec/campCecCreate.o",
       "size": 816,
-      "source": "src/_code/camp/CampCec/CampCec/FUN_001ffc5c.cpp",
-      "target": "orig/target/_code/camp/CampCec/CampCec/FUN_001ffc5c.o",
+      "source": "src/_code/camp/CampCec/CampCec/campCecCreate.cpp",
+      "target": "orig/target/_code/camp/CampCec/CampCec/campCecCreate.o",
       "thumb": false
     },
     {
@@ -37243,12 +37243,12 @@
     },
     {
       "address": "0x23cb70",
-      "function": "FUN_0023cb70",
+      "function": "btlCameraStartFovShift",
       "module": "_code",
-      "object": "build/obj/_code/0023/FUN_0023cb70.o",
+      "object": "build/obj/_code/0023/btlCameraStartFovShift.o",
       "size": 80,
-      "source": "src/_code/0023/FUN_0023cb70.cpp",
-      "target": "orig/target/_code/0023/FUN_0023cb70.o",
+      "source": "src/_code/0023/btlCameraStartFovShift.cpp",
+      "target": "orig/target/_code/0023/btlCameraStartFovShift.o",
       "thumb": false
     },
     {
@@ -47565,12 +47565,12 @@
     },
     {
       "address": "0x2879dc",
-      "function": "FUN_002879dc",
+      "function": "lmapRequestTimedEffect",
       "module": "_code",
-      "object": "build/obj/_code/0028/FUN_002879dc.o",
+      "object": "build/obj/_code/0028/lmapRequestTimedEffect.o",
       "size": 144,
-      "source": "src/_code/0028/FUN_002879dc.cpp",
-      "target": "orig/target/_code/0028/FUN_002879dc.o",
+      "source": "src/_code/0028/lmapRequestTimedEffect.cpp",
+      "target": "orig/target/_code/0028/lmapRequestTimedEffect.o",
       "thumb": false
     },
     {
@@ -50323,12 +50323,12 @@
     },
     {
       "address": "0x296474",
-      "function": "FUN_00296474",
+      "function": "resultExpGaugesRefresh",
       "module": "_code",
-      "object": "build/obj/_code/0029/FUN_00296474.o",
+      "object": "build/obj/_code/0029/resultExpGaugesRefresh.o",
       "size": 752,
-      "source": "src/_code/0029/FUN_00296474.cpp",
-      "target": "orig/target/_code/0029/FUN_00296474.o",
+      "source": "src/_code/0029/resultExpGaugesRefresh.cpp",
+      "target": "orig/target/_code/0029/resultExpGaugesRefresh.o",
       "thumb": false
     },
     {
@@ -64134,12 +64134,12 @@
     {
       "address": "0x2d747c",
       "file": "camp/CampCec/CampCecView",
-      "function": "FUN_002d747c",
+      "function": "campCecViewCreate",
       "module": "_code",
-      "object": "build/obj/_code/camp/CampCec/CampCecView/FUN_002d747c.o",
+      "object": "build/obj/_code/camp/CampCec/CampCecView/campCecViewCreate.o",
       "size": 752,
-      "source": "src/_code/camp/CampCec/CampCecView/FUN_002d747c.cpp",
-      "target": "orig/target/_code/camp/CampCec/CampCecView/FUN_002d747c.o",
+      "source": "src/_code/camp/CampCec/CampCecView/campCecViewCreate.cpp",
+      "target": "orig/target/_code/camp/CampCec/CampCecView/campCecViewCreate.o",
       "thumb": false
     },
     {
@@ -84432,12 +84432,12 @@
     },
     {
       "address": "0x353a74",
-      "function": "FUN_00353a74",
+      "function": "aocServiceRunItemCodeRequest",
       "module": "_code",
-      "object": "build/obj/_code/0035/FUN_00353a74.o",
+      "object": "build/obj/_code/0035/aocServiceRunItemCodeRequest.o",
       "size": 140,
-      "source": "src/_code/0035/FUN_00353a74.cpp",
-      "target": "orig/target/_code/0035/FUN_00353a74.o",
+      "source": "src/_code/0035/aocServiceRunItemCodeRequest.cpp",
+      "target": "orig/target/_code/0035/aocServiceRunItemCodeRequest.o",
       "thumb": false
     },
     {
@@ -84462,12 +84462,12 @@
     },
     {
       "address": "0x3540d8",
-      "function": "FUN_003540d8",
+      "function": "aocServiceRunItemRequest",
       "module": "_code",
-      "object": "build/obj/_code/0035/FUN_003540d8.o",
+      "object": "build/obj/_code/0035/aocServiceRunItemRequest.o",
       "size": 144,
-      "source": "src/_code/0035/FUN_003540d8.cpp",
-      "target": "orig/target/_code/0035/FUN_003540d8.o",
+      "source": "src/_code/0035/aocServiceRunItemRequest.cpp",
+      "target": "orig/target/_code/0035/aocServiceRunItemRequest.o",
       "thumb": false
     },
     {
@@ -104051,12 +104051,12 @@
     },
     {
       "address": "0x3d0220",
-      "function": "FUN_003d0220",
+      "function": "btlCameraRunTimedCues",
       "module": "_code",
-      "object": "build/obj/_code/003d/FUN_003d0220.o",
+      "object": "build/obj/_code/003d/btlCameraRunTimedCues.o",
       "size": 304,
-      "source": "src/_code/003d/FUN_003d0220.cpp",
-      "target": "orig/target/_code/003d/FUN_003d0220.o",
+      "source": "src/_code/003d/btlCameraRunTimedCues.cpp",
+      "target": "orig/target/_code/003d/btlCameraRunTimedCues.o",
       "thumb": false
     },
     {

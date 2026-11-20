@@ -4,14 +4,21 @@
 #define SHARD_GLOBALBLOCKS_H
 
 #include "common.h"
+#include <stddef.h>
 
-/* Global at 0x5B4000. */
+struct PadAnalogCalibration;
+
+/* Analog input state at 0x5B4000. */
 typedef struct Block5b4000 {
-    /* 0x00 */ u8 unk00[0x8];
-    /* 0x08 */ u32 unk08;
+    /* 0x00 */ PadAnalogCalibration *calibration;
+    /* 0x04 */ u32 count;
+    /* 0x08 */ u32 flags;
     /* 0x0C */ u32 unk0C;
     /* 0x10 */ u32 unk10;
+    /* 0x14 */ f32 deadZone;
 } Block5b4000;
+typedef char Block5b4000PadOffsets[offsetof(Block5b4000, flags) == 0x8 &&
+    offsetof(Block5b4000, deadZone) == 0x14 ? 1 : -1];
 extern Block5b4000 g_padInputState;
 
 /* Global at 0x5B40B4. */

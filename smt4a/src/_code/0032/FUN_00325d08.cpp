@@ -20,7 +20,7 @@ int libm_cosf(void); // declcheck: local (romwright prototype; the shared declar
 int FUN_002469d0(void);
 int mapResolveCollisionSphere(...);
 int distSpatial(void);
-int FUN_002d1f40(...);
+int lmapRequestTimedEffect(...);
 int FUN_002e364c(...);
 int sysPlayVoice(...);
 int moriModelUnitStartMaterialAnimation(...);
@@ -92,7 +92,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: mapResolveCollisionSphere. */
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: mathAngleDeltaDegrees. */
-/* Supplied declaration required: FUN_002d1f40. */
+/* Supplied declaration required: lmapRequestTimedEffect. */
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_002e364c. */
 extern int saveSlotSelectedIsId175(void);
@@ -523,7 +523,7 @@ LAB_00326fcc:
                (mapSpawnRandomEventKindEffect(), *(int *)(g_lmapScene + 8) == 6)) {
               temp_v6 = 0x14;
               temp_v4 = 6;
-              FUN_002d1f40(temp_v4,temp_v6,0);
+              lmapRequestTimedEffect(temp_v4,temp_v6,0);
             }
           }
           if (*(int *)(g_lmapScene + 8) >= 8) {
@@ -616,7 +616,7 @@ LAB_003268e4:
       if ((*(int *)(g_lmapScene + 8) == 6) && (mapSpawnRandomEventKindEffect(), *(int *)(g_lmapScene + 8) == 6)) {
         temp_v6 = 8;
         temp_v4 = 4;
-        FUN_002d1f40(temp_v4,temp_v6,0);
+        lmapRequestTimedEffect(temp_v4,temp_v6,0);
       }
 LAB_00326a10:
       if (*(int *)(g_lmapScene + 8) >= 8) {

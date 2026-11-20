@@ -140,7 +140,7 @@ extern "C" s32 uniteDrawPanel(u32)
         s32 opened = 0;
         if (work->state == 0x1B && uiSpriteGetCompletionState(&work->sprites.open))
             opened = 1;
-        if (g_unite && (g_unite->request == 0x18 || g_unite->scriptA.pendingRequest == 0x18))
+        if (uniteRequest18Active(g_unite))
             opened = 0;
         s32 x = vec2GetXInt(&work->sprites.open);
         s32 y = vec2GetYInt(&work->sprites.open);

@@ -1,4 +1,5 @@
-/* NON_MATCHING: same loops and calls; retail hoists the zero constant into r9 at entry and caches begin/end with ldrd; registers and schedule differ */
+/* NON_MATCHING: only one scratch register differs on the list-index multiply (retail `add r1, r7, r7, lsl #1; add r0, r8, r1, lsl #2` vs built `r0`/`r0`). */
+#include <vector>
 #include "common.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -7,11 +8,7 @@ struct Owned406a1c {
     virtual ~Owned406a1c();
 };
 
-struct PointerVector406a1c {
-    void **begin;
-    void **end;
-    void **capacityEnd;
-};
+struct Item406a1c {};
 
 struct Obj406a1c {
     u8 unk00[4];
@@ -21,7 +18,7 @@ struct Obj406a1c {
     u8 unk10[0xec];
     u8 *array;
     u8 unk100[0x14];
-    PointerVector406a1c lists[8];
+    std::vector<Item406a1c *> lists[8];
 };
 
 extern "C" {
@@ -31,18 +28,14 @@ void asdOperatorDeleteB(void *block);
 void FUN_00406a1c(Obj406a1c *obj)
 {
     for (s32 i = 0; i < 8; i++) {
-        PointerVector406a1c *list = &obj->lists[i];
-        void **last = list->end;
-        for (void **entry = list->begin; entry != last; entry++) {
-            if (*entry != NULL) {
-                asdOperatorDelete(*entry);
+        std::vector<Item406a1c *> &list = obj->lists[i];
+        std::vector<Item406a1c *>::iterator end = list.end();
+        for (std::vector<Item406a1c *>::iterator it = list.begin(); it != end; ++it) {
+            if (*it != NULL) {
+                asdOperatorDelete(*it);
             }
         }
-        void **first = list->begin;
-        void **end = list->end;
-        if (end != first) {
-            list->end = end - (end - first);
-        }
+        list.clear();
     }
     if (obj->array != NULL) {
         asdOperatorDeleteB(obj->array - 8);
@@ -56,4 +49,4 @@ void FUN_00406a1c(Obj406a1c *obj)
         obj->buffer = NULL;
     }
 }
-}
+} /* extern "C" */

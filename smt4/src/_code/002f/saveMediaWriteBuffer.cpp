@@ -1,149 +1,193 @@
-/* NON_MATCHING: readable rebuild of the file open/read/close helper; the on-stack file object is initialised by retail with address constants (0x420B78, 0x420BF0) written as separate stores, and the media dispatch is a chain of compares that armcc here compiles from the switches. */
-#include "nn/Result.h"
+/* NON_MATCHING: LocalStream RAII + open/create/writeAt/close and nnResultModule/nnResultDescriptionBits match 195 of 196 instructions; only one prologue `mov r2, sp; mov r3, r2` differs (shifting branch targets by 4 bytes). */
 #include "common.h"
-
-/* A file object living on the caller's stack: a vtable pair and open state. */
-struct FileObject {
-    const void *vtable;
-    const void *vtableSecond;
-    u32 state[5];
-};
-
-typedef s32 FileResult;
+#include "nn/Result.h"
 
 extern "C" {
-extern u8 DAT_00420b20;
+
+/* The words a freshly built stream is initialized from (vtable pointer, the virtual base's
+ * pointer at 0x20 and a second word at 0x24; shared with FUN_002d5e44 and saveMediaReadBuffer). */
+typedef struct StreamTemplate {
+    /* 0x00 */ u32 *vtable;
+    /* 0x04 */ u8 unk04[0x1C];
+    /* 0x20 */ u32 virtualBase;
+    /* 0x24 */ u32 second;
+} StreamTemplate;
+
+struct LocalStream;
+
+extern StreamTemplate DAT_00420b20;
 extern u8 g_processResultState;
 
-FileResult romFileStreamOpen(FileObject *file, s32 path, u32 mode);
-FileResult archiveStreamOpenConverted(FileObject *file);
-FileResult romFileOpenForWrite(FileObject *file);
-FileResult requestSubmitRecordById(void);
-FileResult romFileCreateSized(FileObject *file, s32 path, u32 size);
-FileResult FUN_00220330(FileObject *file);
-FileResult FUN_002e1380(void);
-void fileSendPathRequestRoot0(void);
-void archivePathRequestRoot1(void);
-void archivePathRequestRoot2(void);
-FileResult fileObjSeekRead(FileObject *file, s32 position, u32 buffer, u32 size);
-void FUN_002104c8(void);
-void FUN_002d5f90(void);
-FileResult fileOwnerCloseA(FileObject *file);
-FileResult fileOwnerCloseB(FileObject *file);
-FileResult fileOwnerCloseC(FileObject *file);
-FileResult fileOwnerCloseD(void);
-void fileHandleClose(FileObject *file, s32 arg);
-
-#define FILE_INVALID_MEDIA ((FileResult)0xE7E3FFFF)
-
-/* Whether a failed open is the retryable "file not yet available" error (module 0x11, range 100..179). */
-static bool isRetryable(FileResult result)
-{
-    return (result & 0x3FC00) == 0x4400 && (result & 0x3FF) >= 100 && (result & 0x3FF) < 0xB4;
-}
-
-/* Opens a file on one of the four media (`media`: 0 archive, 1 save, 2 extra, 3 raw), reads from it
- * into `buffer` and closes it again; returns 1 on success and 0 on any error. */
-u32 saveMediaWriteBuffer(s32 media, s32 path, u32 buffer, u32 size)
-{
-    FileObject file;
-    file.vtable = &DAT_00420b20 + 0x58;
-    file.vtableSecond = (const void *)0x420BF0;
-    for (s32 i = 0; i < 5; i++)
-        file.state[i] = 0;
-
-    FileResult result = FILE_INVALID_MEDIA;
-    switch (media) {
-    case 0:
-        result = romFileStreamOpen(&file, path, 1);
-        break;
-    case 1:
-        result = archiveStreamOpenConverted(&file);
-        break;
-    case 2:
-        result = romFileOpenForWrite(&file);
-        break;
-    case 3:
-        result = requestSubmitRecordById();
-        break;
-    }
-    if (isRetryable(result) || nnResultIsFailure(result)) {
-        switch (media) {
-        case 0:
-            result = romFileCreateSized(&file, path, size);
-            break;
-        case 1:
-            result = FUN_00220330(&file);
-            break;
-        case 2:
-            result = FUN_002e1380();
-            break;
-        default:
-            result = FILE_INVALID_MEDIA;
-            break;
-        }
-        if (nnResultIsFailure(result)) {
-            if (path != 0) {
-                if (media == 0)
-                    fileSendPathRequestRoot0();
-                else if (media == 1)
-                    archivePathRequestRoot1();
-                else if (media == 2)
-                    archivePathRequestRoot2();
-            } else {
-                *(u32 *)(&g_processResultState + 0x10) = 0xC8804464;
-            }
-            switch (media) {
-            case 0:
-                result = romFileCreateSized(&file, path, size);
-                break;
-            case 1:
-                result = FUN_00220330(&file);
-                break;
-            case 2:
-                result = FUN_002e1380();
-                break;
-            default:
-                result = FILE_INVALID_MEDIA;
-                break;
-            }
-        }
-    }
-    if (nnResultIsSuccess(result)) {
-        FileResult readResult = FILE_INVALID_MEDIA;
-        if (media == 0) {
-            readResult = fileObjSeekRead(&file, 0, buffer, size);
-        } else if (media == 1) {
-            FUN_002104c8();
-            readResult = 0;
-        } else if (media == 2) {
-            FUN_002d5f90();
-            readResult = 0;
-        }
-        if (readResult >= 0) {
-            FileResult closeResult = FILE_INVALID_MEDIA;
-            switch (media) {
-            case 0:
-                closeResult = fileOwnerCloseC(&file);
-                break;
-            case 1:
-                closeResult = fileOwnerCloseB(&file);
-                break;
-            case 2:
-                closeResult = fileOwnerCloseA(&file);
-                break;
-            case 3:
-                closeResult = fileOwnerCloseD();
-                break;
-            }
-            if (closeResult >= 0) {
-                fileHandleClose(&file, 0);
-                return 1;
-            }
-        }
-    }
-    fileHandleClose(&file, 0);
-    return 0;
-}
+nn::Result romFileStreamOpen(LocalStream *stream, u32 path, u32 mode);
+nn::Result archiveStreamOpenConverted(LocalStream *stream, u32 path, u32 mode);
+nn::Result romFileOpenForWrite(LocalStream *stream, u32 path, u32 mode);
+nn::Result requestSubmitRecordById(LocalStream *stream, u32 path, u32 mode);
+nn::Result romFileCreateSized(LocalStream *stream, u32 path, u32 size);
+nn::Result FUN_00220330(LocalStream *stream, u32 path, u32 size);
+nn::Result FUN_002e1380(LocalStream *stream, u32 path, u32 size);
+void fileSendPathRequestRoot0(u32 path);
+void archivePathRequestRoot1(u32 path);
+void archivePathRequestRoot2(u32 path);
+nn::Result fileObjSeekRead(LocalStream *stream, u32 offset, u32 buffer, u32 size);
+nn::Result FUN_002104c8(LocalStream *stream, u32 offset, u32 buffer, u32 size);
+nn::Result FUN_002d5f90(LocalStream *stream, u32 offset, u32 buffer, u32 size);
+nn::Result fileOwnerCloseA(LocalStream *stream);
+nn::Result fileOwnerCloseB(LocalStream *stream);
+nn::Result fileOwnerCloseC(LocalStream *stream);
+nn::Result fileOwnerCloseD(LocalStream *stream);
+void fileHandleClose(LocalStream *stream, u32 flags); // declcheck: local (the stream's close passes a second word, 0, that the shared one-argument prototype drops)
 
 } /* extern "C" */
+
+/* A stream object on the stack with RAII close and virtual-base vtable setup. */
+struct LocalStream {
+    /* 0x00 */ u32 words[2];
+    /* 0x08 */ u32 owner[5];
+
+    LocalStream()
+    {
+        owner[0] = 0;
+        owner[1] = 0;
+        owner[2] = 0;
+        owner[3] = 0;
+        owner[4] = 0;
+        words[0] = (u32)DAT_00420b20.vtable;
+        *(u32 *)((u8 *)this + ((s32 *)words[0])[-12]) = DAT_00420b20.virtualBase;
+        words[1] = DAT_00420b20.second;
+    }
+
+    ~LocalStream()
+    {
+        fileHandleClose(this, 0);
+    }
+
+    nn::Result open(s32 kind, u32 name, u32 mode)
+    {
+        nn::Result result;
+        switch (kind) {
+        case 0:
+            result = romFileStreamOpen(this, name, mode);
+            break;
+        case 1:
+            result = archiveStreamOpenConverted(this, name, mode);
+            break;
+        case 2:
+            result = romFileOpenForWrite(this, name, mode);
+            break;
+        case 3:
+            result = requestSubmitRecordById(this, name, mode);
+            break;
+        }
+        return result;
+    }
+
+    nn::Result create(s32 kind, u32 name, u32 size)
+    {
+        nn::Result result;
+        switch (kind) {
+        case 0:
+            result = romFileCreateSized(this, name, size);
+            break;
+        case 1:
+            result = FUN_00220330(this, name, size);
+            break;
+        case 2:
+            result = FUN_002e1380(this, name, size);
+            break;
+        }
+        return result;
+    }
+
+    nn::Result writeAt(s32 kind, u32 offset, u32 buffer, u32 size)
+    {
+        nn::Result result;
+        switch (kind) {
+        case 0:
+            result = fileObjSeekRead(this, offset, buffer, size);
+            break;
+        case 1:
+            result = FUN_002104c8(this, offset, buffer, size);
+            break;
+        case 2:
+            result = FUN_002d5f90(this, offset, buffer, size);
+            break;
+        }
+        return result;
+    }
+
+    nn::Result close(s32 kind)
+    {
+        nn::Result result;
+        switch (kind) {
+        case 0:
+            result = fileOwnerCloseC(this);
+            break;
+        case 1:
+            result = fileOwnerCloseB(this);
+            break;
+        case 2:
+            result = fileOwnerCloseA(this);
+            break;
+        case 3:
+            result = fileOwnerCloseD(this);
+            break;
+        }
+        return result;
+    }
+};
+
+/* Whether a failed open is the retryable "file not found / unavailable" error (module 17, desc 100..179). */
+static __inline bool isNotFoundResult(u32 result)
+{
+    return nnResultModule(result) == 17 &&
+           nnResultDescriptionBits(result) >= 100 &&
+           nnResultDescriptionBits(result) <= 179;
+}
+
+/* Removes an existing file on `media` before recreating it (shared with smt4a saveMediaWriteBuffer). */
+static __inline void deletePath(s32 media, u32 path)
+{
+    if (path == 0) {
+        *(u32 *)(&g_processResultState + 0x10) = 0xC8804464;
+        return;
+    }
+    switch (media) {
+    case 0:
+        fileSendPathRequestRoot0(path);
+        break;
+    case 1:
+        archivePathRequestRoot1(path);
+        break;
+    case 2:
+        archivePathRequestRoot2(path);
+        break;
+    }
+}
+
+/* Opens a file on one of the four media (`media`: 0 archive, 1 save, 2 extra, 3 raw), creates or
+ * recreates it if needed, writes `buffer` and closes it; returns 1 on success and 0 on any error. */
+extern "C" u32 saveMediaWriteBuffer(s32 media, u32 path, u32 buffer, u32 size)
+{
+    LocalStream stream;
+    s32 result = stream.open(media, path, 1);
+    if (isNotFoundResult(result) || nnResultIsFailure(result)) {
+        s32 createResult = stream.create(media, path, size);
+        if ((createResult & (s32)0x80000000) < 0) {
+            deletePath(media, path);
+            createResult = stream.create(media, path, size);
+        }
+        result = createResult;
+    }
+    if ((result & (s32)0x80000000) < 0) {
+        return 0;
+    }
+    result = stream.writeAt(media, 0, buffer, size);
+    if ((result & (s32)0x80000000) < 0) {
+        return 0;
+    }
+    result = stream.close(media);
+    if ((result & (s32)0x80000000) < 0) {
+        return 0;
+    }
+    return 1;
+}

@@ -161,7 +161,7 @@ struct UniteWork {
             /* 0x0438 */ u8 unk0438[0x6840];
             /* 0x6C78 */ s32 unk6C78;
             /* 0x6C7C */ u8 cursor[0x64];
-            /* 0x6CE0 */ u8 kind;
+            /* 0x6CE0 */ s8 kind;              /* which demon of the pair the list shows, as UniteWorkA's pairKind */
             /* 0x6CE1 */ u8 unk6ce1;
             /* 0x6CE2 */ u16 indices[1];
         } firstListIV;
@@ -259,6 +259,12 @@ struct UniteWork {
     /* 0x95F5 */ u8 unk95F5[3];
 };
 
+/* A chain-fusion group; its first twelve halfwords hold the component IDs. */
+struct UniteChainGroupA {
+    u16 ids[12];
+    u8 unk18[0x10];
+};
+
 /* The fusion screen's work (Apocalypse layout, 0x92C0 bytes, kept by g_unite). The first 0x438 bytes
  * are laid out as in Shin Megami Tensei IV. */
 struct UniteWorkA {
@@ -347,7 +353,8 @@ struct UniteWorkA {
         struct {
             /* 0x0438 */ u8 unk0438[0x54];
             /* 0x048C */ u32 soundChannel;
-            /* 0x0490 */ u8 unk0490[0x8BE1];
+            /* 0x0490 */ u8 unk0490[0x8BE0];
+            /* 0x9070 */ u8 helpShown;         /* set when state 0x1C clears the help text */
             /* 0x9071 */ s8 helpAvailable;
             /* 0x9072 */ u8 unk9072[0x1E];
             /* 0x9090 */ u8 busy;
@@ -366,6 +373,10 @@ struct UniteWorkA {
             /* 0x0438 */ u8 unk0438[0xf80];
             UnitePairEntry pairs[1]; /* 0x13b8 */
         } pairList;
+        struct {
+            /* 0x0438 */ u8 unk0438[0x4E02];
+            /* 0x523A */ UniteChainGroupA groups[1];
+        } chains;
         struct {
             /* 0x0438 */ u8 unk0438[0x5e68];
             union {
@@ -418,6 +429,8 @@ struct UniteWorkA {
         struct {
             u8 prefix438[0x8738];
             /* 0x8B70 */ u16 skills[24];
+            /* 0x8BA0 */ u8 unk8BA0[0x274];
+            /* 0x8E14 */ ScrollSelection skillList; /* the cursor over `skills` */
         } inheritanceA;
         struct {
             /* 0x438 */ s16 rowRegions[29];     /* touch regions of the visible list rows, as in IV */
@@ -443,6 +456,9 @@ struct UniteWorkA {
         } catalogThreadA;
     };
 };
+typedef char UniteWorkAChainOffsets[offsetof(UniteWorkA, chains.groups) == 0x523A &&
+    sizeof(UniteChainGroupA) == 0x28 ? 1 : -1];
+
 typedef char UniteWorkACreateOffsets[
     offsetof(UniteWorkA, touchA.scrollUpRegion) == 0x472 && offsetof(UniteWorkA, sprites.resources) == 0x4 && offsetof(UniteWorkA, sprites.process) == 0x3F8 &&
     offsetof(UniteWorkA, menu.openedSeconds) == 0x41C && offsetof(UniteWorkA, menu.messageFile) == 0x424 &&
@@ -544,6 +560,15 @@ typedef char UniteWorkResultBuildAOffsets[
     offsetof(UniteWorkA, resultPairsA.pairs) == 0x9078 &&
     offsetof(UniteWorkA, inheritanceA.skills) == 0x8B70 &&
     sizeof(UniteWork) == 0x95F8 ? 1 : -1];
+
+typedef char UniteWorkAHelpOffsetCheck[offsetof(UniteWorkA, inheritanceA.skillList) == 0x8E14 &&
+    offsetof(UniteWorkA, returnState.helpShown) == 0x9070 && offsetof(UniteWorkA, returnState.helpAvailable) == 0x9071 ? 1 : -1];
+
+/* Whether the screen's request 0x18 is running or queued (unite may be NULL: the screen is closed). */
+static __inline bool uniteRequest18Active(const UniteWorkA *unite)
+{
+    return unite != NULL && (unite->request == 0x18 || unite->scriptA.pendingRequest == 0x18);
+}
 
 typedef char UniteWorkASizeCheck[sizeof(UniteWorkA) == 0x92C0 && offsetof(UniteWorkA, pairSort.pairList) == 0x67CC && offsetof(UniteWorkA, selectionCountA.selectedCount) == 0x8F7A && offsetof(UniteWorkA, registered.handle) == 0x920C ? 1 : -1];
 

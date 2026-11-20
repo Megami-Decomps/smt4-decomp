@@ -5,11 +5,12 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 /* nn::os::CriticalSection as its constructor leaves it (before Initialize). */
-typedef struct NnCriticalSection {
+struct NnCriticalSection {
+    NnCriticalSection() : unk00(0), unk04(0), unk08(-1) {}
     /* 0x00 */ u32 unk00;
     /* 0x04 */ u32 unk04;
     /* 0x08 */ s32 unk08;
-} NnCriticalSection;
+};
 
 /* nn::fnd::ExpHeapBase: vtable, then fields its constructor clears. */
 typedef struct NnExpHeapBase {

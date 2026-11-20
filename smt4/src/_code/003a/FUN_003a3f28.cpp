@@ -33,7 +33,11 @@ void FUN_003a3f28(ShopScreen *screen)
         buttonHelpSelectMenuPreset(screen);
         if (screen->help.variant == 1) {
             screen->substep = 0;
-            screen->phase = screen->slot != 8 ? 15 : 16;
+            if (screen->slot != 8) {
+                screen->phase = 15;
+            } else {
+                screen->phase = 16;
+            }
             return;
         }
         if (screen->slot == 7) {
@@ -41,7 +45,11 @@ void FUN_003a3f28(ShopScreen *screen)
             screen->substep = 0;
             return;
         }
-        screen->phase = screen->slot == 8 ? 7 : 5;
+        if (screen->slot == 8) {
+            screen->phase = 7;
+        } else {
+            screen->phase = 5;
+        }
         screen->substep = 0;
         return;
     }

@@ -21,7 +21,7 @@ void soundChannelRequestIfEnabled(u32 channel, s32 arg, s32 fade);
 u32 histogramFindHighestSupportedValue(void *context);
 void FUN_002a7b74(void);
 void uniteStartOrQueueRequest(s32 request);
-void FUN_0020b908(s32 id, s32 arg);
+void uniteMenuChangeState(s32 id, s32 arg);
 void *lmapSceneGetScript(void);
 void linkHolderClearFlag(void *holder);
 
@@ -50,7 +50,7 @@ void FUN_0039c744(void)
     unite->returnState.unk91B0 = 0;
     FUN_002a7b74();
     uniteStartOrQueueRequest(0x12);
-    FUN_0020b908(0x25, 1);
+    uniteMenuChangeState(0x25, 1);
     void *script = lmapSceneGetScript();
     if (script != NULL) {
         lmapSceneSetUnk134(1);

@@ -1,11 +1,11 @@
 /* NON_MATCHING: vptr global is restored; embedded member setup, byte test and pool layout differ. */
 #include "romwright_types.h"
+#include "classes/WordsFlag8.h"
 
 extern "C" {
 
 int linkListEraseObject(unsigned int, int *);
 int FUN_002c4038(int *);
-int wordsFlag8Reset(int *);
 int wordsFlagReset(int *);
 int nw_snd_internal_driver_SequenceSoundPlayer_FinishPlayer(int *);
 
@@ -14,7 +14,6 @@ extern unsigned char DAT_00421ddc; /* 0x421ddc */
 /* Supplied declaration required: linkListEraseObject. */
 extern unsigned int FUN_002a2174(void);
 /* Supplied declaration required: FUN_002c4038. */
-/* Supplied declaration required: wordsFlag8Reset. */
 /* Supplied declaration required: wordsFlagReset. */
 /* Supplied declaration required: nw_snd_internal_driver_SequenceSoundPlayer_FinishPlayer. */
 
@@ -40,7 +39,7 @@ int * FUN_0037f9a8(int *param_1)
   }
   temp_v1 = 0;
   do {
-    wordsFlag8Reset(param_1 + temp_v1 * 3 + 0x4c);
+    wordsFlag8Reset((WordsFlag8 *)(param_1 + 0x4c) + temp_v1);
     wordsFlagReset(param_1 + temp_v1 * 4 + 0x3c);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 4);

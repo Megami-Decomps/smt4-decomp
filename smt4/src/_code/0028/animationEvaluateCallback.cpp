@@ -1,4 +1,4 @@
-/* NON_MATCHING: scalar callback arguments use an extra VFP temporary, and the dirty-byte store is scheduled before the previous-value store. */
+/* NON_MATCHING: the dirty-byte store is scheduled before the previous-value store (retail stores previous, then sets dirty). */
 #include "shard/Shard0034.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMotionControlApi.h"
 
@@ -10,8 +10,9 @@ extern "C" void animationEvaluateCallback(ScalarAnimationOwner *owner, f32 time)
     }
     ScalarAnimationChannel *channel = owner->channel;
     if (channel != NULL) {
-        if (time > channel->range.end) {
-            time = channel->range.end;
+        f32 end = scalarAnimationEnd(channel);
+        if (time > end) {
+            time = end;
         }
         f32 value = channel->interpolate(channel->range, time, channel->work);
         channel->previous = channel->current;

@@ -1,19 +1,14 @@
-#include "common.h"
+#include "classes/WordsFlag8.h"
 
 extern "C" {
 
-typedef struct Obj {
-    /* 0x0 */ u32 unk0;
-    /* 0x4 */ u32 unk4;
-    /* 0x8 */ u8 valid;
-} Obj;
-
-void wordsFlag8Reset(Obj *obj)
+/* Clears and invalidates an active record. */
+void wordsFlag8Reset(WordsFlag8 *flags)
 {
-    if (obj->valid != 0) {
-        obj->unk0 = 0;
-        obj->unk4 = 0;
-        obj->valid = 0;
+    if (flags->valid != 0) {
+        flags->id = 0;
+        flags->unk04 = 0;
+        flags->valid = 0;
     }
 }
 

@@ -141,7 +141,7 @@ void AocMenu::runLicenseFlow()
             }
             AocMain *main = g_aocMain;
             for (s32 index = 0; index < 16; ++index) {
-                main->contentCode[index] = 0;
+                main->contentCode.words[index] = 0;
             }
             sysMemClear(main->contentText, 0x80);
             return;
