@@ -1,13 +1,12 @@
-/* NON_MATCHING: VFP argument preservation uses three scalar moves rather than retail's paired move (d8 = d0) and scalar move; a by-value float-pair parameter did not reproduce it. */
 #include "common.h"
 #include <stdio.h>
 #include "code/Code0014.h"
 
 extern "C" {
-u32 FUN_001628c0(const char *text, u32 alpha, u32 flags, u32 options, f32 x, f32 y);
+u32 FUN_001628c0(const char *name, u32 volume, u32 category, u32 options, f32 leftVolume, f32 rightVolume);
 
-// Draw the icon encoded by a packed resource id, including its optional variant suffix.
-u32 btlPlayIndexedVoice(u32 resourceId, f32 opacity, f32 x, f32 y)
+/* Play the indexed voice clip encoded by a packed resource id, including its optional variant suffix. */
+u32 btlPlayIndexedVoice(u32 resourceId, f32 volumeScale, f32 leftVolume, f32 rightVolume)
 {
     char name[16];
     u32 group = (resourceId & 0xfffff) >> 8;
@@ -17,9 +16,8 @@ u32 btlPlayIndexedVoice(u32 resourceId, f32 opacity, f32 x, f32 y)
         sprintf(name, "I%03u%03u", index, group);
         if (variant)
             sprintf(name, "%s%s", name, variant == 1 ? "a" : "b");
-        u32 alpha = (u32)((f32)messageVoiceBankGet() * opacity);
-        return FUN_001628c0(name, alpha & 0xff, 0, 0, x, y);
+        return FUN_001628c0(name, (u8)((f32)messageVoiceBankGet() * volumeScale), 0, 0, leftVolume, rightVolume);
     }
     return 0;
 }
-}
+} /* extern "C" */

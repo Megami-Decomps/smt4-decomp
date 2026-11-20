@@ -1,4 +1,3 @@
-/* NON_MATCHING: registers and logic match, but armcc places the playerHasFlagBit and btlMainGetUnk14 calls inline; retail moves both to out-of-line blocks after the return. */
 #include "common.h"
 #include "mapnavi/naviMain.h"
 #include "gamedata/SkillDataRecord.h"
@@ -25,28 +24,31 @@ s32 bitsAt60Test(SkillUser *user, u32 bit);
 s32 FUN_004bd098(SkillUser *user, s32 id);
 
 /* Returns whether the user under the menu cursor (flag bit 4 set) can use skill `id`; with no `user` only the player is accepted. */
-u32 FUN_00372794(SkillMenuWork *work, s32 id, SkillUser *user)
+u32 skillMenuCanCurrentUserUseSkill(SkillMenuWork *work, s32 id, SkillUser *user)
 {
     s16 slot = work->userSlots[work->cursor];
-    s32 enabled;
+    u32 usable;
 
-    if (slot == -1) {
-        enabled = playerHasFlagBit(4);
-    } else if (user != NULL) {
-        if (slot == -2) {
-            user = btlMainGetUnk14();
-        } else {
-            user = gameGetSlotRecord(slot);
-        }
-        enabled = bitsAt60Test(user, 4);
+    if (slot != -1 && user == NULL) {
+        usable = 0;
     } else {
-        enabled = 0;
-    }
-    u32 usable = 0;
-    if (enabled) {
-        SkillTableEntry *entry = (SkillTableEntry *)skillDataFindById(id);
-        if (entry != NULL && entry->unk86 != 0 && (user == NULL || FUN_004bd098(user, id) >= 0)) {
-            usable = 1;
+        s32 enabled;
+        if (slot == -1) {
+            enabled = playerHasFlagBit(4);
+        } else {
+            if (slot == -2) {
+                user = btlMainGetUnk14();
+            } else {
+                user = gameGetSlotRecord(slot);
+            }
+            enabled = bitsAt60Test(user, 4);
+        }
+        usable = 0;
+        if (enabled) {
+            SkillTableEntry *entry = (SkillTableEntry *)skillDataFindById(id);
+            if (entry != NULL && entry->unk86 != 0 && (user == NULL || FUN_004bd098(user, id) >= 0)) {
+                usable = 1;
+            }
         }
     }
     return usable;

@@ -29,7 +29,7 @@ int scrollOwnerSelectIndex(...);
 int scrollListSetSelectionMarkChanged(...);
 int gridNavigationConfigure(...);
 int gameGetSlotTable(...);
-int timerStart(...);
+int uiSpriteSetKeyframe(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int uiSpriteStateInitFromSource(...);
 int spriteStartAnimationByIndex(...);
 int __aeabi_memset4(...);
@@ -90,7 +90,7 @@ extern unsigned int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: gridNavigationConfigure. */
 /* Supplied declaration required: gameGlobalsSetSubScreenActive. */
 /* Supplied declaration required: gameGetSlotTable. */
-/* Supplied declaration required: timerStart. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteStateInitFromSource. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: paramsInit. */
@@ -150,19 +150,19 @@ void FUN_0028a420(void)
   drawParameterBlockClear();
   paramsInit(reinterpret_cast<UiResourceParameters *>(puVar3),&DAT_00402648,0x6c,&DAT_004026b4,0x30,0,0,0,0,&DAT_004026e4,0x150);
   uiSpriteStateInitFromSource(puVar1 + 0x192,0x1d,0,puVar3,0xc9);
-  timerStart(puVar1 + 0x192,1,0);
+  uiSpriteSetKeyframe(puVar1 + 0x192,1,0);
   uiSpriteStateInitFromSource(puVar1 + 0x1b5,0x1d,0,puVar3,0xc9);
-  timerStart(puVar1 + 0x1b5,1,0);
+  uiSpriteSetKeyframe(puVar1 + 0x1b5,1,0);
   uiSpriteStateInitFromSource(puVar1 + 0x1d8,0x1d,0,puVar3,0xc9);
-  timerStart(puVar1 + 0x1d8,8,0);
+  uiSpriteSetKeyframe(puVar1 + 0x1d8,8,0);
   uiSpriteStateInitFromSource(puVar1 + 0x1fb,0x1d,0,puVar3,0xc9);
   spriteStartAnimationByIndex(puVar1 + 0x1fb,2);
   uiSpriteStateInitFromSource(puVar1 + 0x21e,0x1d,0,puVar3,0xc9);
-  timerStart(puVar1 + 0x21e,1,0);
+  uiSpriteSetKeyframe(puVar1 + 0x21e,1,0);
   temp_v6 = 0;
   do {
     uiSpriteStateInitFromSource(puVar1 + temp_v6 * 0x23 + 0x241,0x1d,0x22,puVar3,0xc9);
-    timerStart(puVar1 + temp_v6 * 0x23 + 0x241,1,0);
+    uiSpriteSetKeyframe(puVar1 + temp_v6 * 0x23 + 0x241,1,0);
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 8);
   uiSpriteStateInitFromSource(puVar1 + 0x359,0x1d,0,puVar3,0xc9);
@@ -380,7 +380,7 @@ LAB_0028b668:
                 }
                 else {
                   *(unsigned int *)(g_partyPanel + 0x2c) = *(unsigned int *)(g_partyPanel + 0x2c) ^ 1;
-                  timerStart(temp_v0 + 0x180,5,0);
+                  uiSpriteSetKeyframe(temp_v0 + 0x180,5,0);
                   temp_v8 = 0;
                   do {
                     slotPlacementAssignSlotAndPosition(*(unsigned int *)(temp_v0 + temp_v8 * 4 + 0x6c8),
@@ -403,7 +403,7 @@ LAB_0028b668:
               }
               else {
                 *(unsigned int *)(g_partyPanel + 0x2c) = *(unsigned int *)(g_partyPanel + 0x2c) ^ 1;
-                timerStart(temp_v0 + 0x180,4,0);
+                uiSpriteSetKeyframe(temp_v0 + 0x180,4,0);
                 temp_v8 = 0;
                 do {
                   slotPlacementAssignSlotAndPosition(*(unsigned int *)(temp_v0 + temp_v8 * 4 + 0x6c8),

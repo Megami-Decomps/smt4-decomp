@@ -1,48 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `fsFormatSaveData` (_code @ 0x354c60, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: 11-arg IPC call and LowPath layout recovered; remaining: r6/r8 swap (fixed under --fpu=softvfp, score 10) and retail stores LowPath with str+stm instead of strd. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00361234(void);
-int nn_fs_ipc_FileSystem_FormatSaveData(unsigned int [2], int, int, unsigned int **, int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int);
+/* nn::fs::LowPath: empty path descriptor (type = 1, ptr, size = 1). */
+struct LowPath {
+    u32 type;
+    const void *ptr;
+    u32 size;
+};
 
-/* stack frame of param_3: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_3_stack;
+struct FileSystemRoot {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 archiveId;
+};
 
-extern unsigned char g_titleContentFileSystem; /* 0x44e650 */
+extern FileSystemRoot g_titleContentFileSystem;
+u32 FUN_00361234(u32 value);
+s32 nn_fs_ipc_FileSystem_FormatSaveData(u32 *session, u32 archiveId, u32 pathType, const void *pathPtr,
+                                        u32 pathSize, u32 blocks, u32 directories, u32 files,
+                                        u32 directoryBuckets, u32 fileBuckets, u32 duplicateData);
 
-/* Supplied declaration required: FUN_00361234. */
-/* Supplied declaration required: nn_fs_ipc_FileSystem_FormatSaveData. */
-
-
-void fsFormatSaveData(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Formats the save data archive with the given block, file and directory counts (twin in smt4a fsFormatSaveData). */
+static void formatArchive(u32 blocks, u32 files, u32 directories, u32 duplicateData)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int **temp_v2;
-  unsigned int uStack_24;
-  unsigned int temp_v3 [2];
-  
-  temp_v0 = param_2;
-  FUN_00361234();
-  temp_v1 = param_1;
-  FUN_00361234();
-  temp_v2 = (unsigned int **)&temp_v2;
-  uStack_24 = 1;
-  temp_v3[0] = (*(unsigned int *)((unsigned char *)&g_titleContentFileSystem + 0x10));
-  nn_fs_ipc_FileSystem_FormatSaveData
-            (temp_v3,4,1,temp_v2,1,0x200,param_2,param_1,temp_v0,temp_v1,param_3,1);
-  return;
+    u32 dirBuckets = FUN_00361234(directories);
+    u32 fileBuckets = FUN_00361234(files);
+    LowPath path;
+    path.type = 1;
+    path.ptr = &path.ptr;
+    path.size = 1;
+    u32 session = g_titleContentFileSystem.archiveId;
+    nn_fs_ipc_FileSystem_FormatSaveData(&session, 4, path.type, path.ptr, path.size, blocks,
+                                        directories, files, dirBuckets, fileBuckets, duplicateData);
+}
+
+/* Formats the save data archive with the given file and directory limits. */
+void fsFormatSaveData(u32 files, u32 directories, u32 duplicateData)
+{
+    formatArchive(0x200, files, directories, duplicateData);
 }
 
 } /* extern "C" */

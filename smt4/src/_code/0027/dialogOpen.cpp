@@ -13,7 +13,7 @@ void dialogOpen(u8 mode, s32 flag)
     InfoWindow *countdown = g_infoWin;
 
     countdown->state = 1;
-    timerStart(&countdown->background, 0, 0);
+    uiSpriteSetKeyframe(&countdown->background, 0, 0);
     countdown->style = mode;
     countdown->shown = 1;
     countdown->timer = 30;

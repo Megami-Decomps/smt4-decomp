@@ -16,7 +16,7 @@ void uiSpriteInitializeState(UiSpriteState *sprite, u32 textureTable, s32 image,
 void uiSpriteStateInitFromSource(UiSpriteState *sprite, u32 textureTable, s32 image,
                                  UiResourceParameters *resources, s16 id, f32 alpha);
 /* Starts opacity key `key` (from its last value to its first when `reverse`). */
-void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 reverse);
+void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s16 key, s32 reverse);
 /* The finished flag: every track is done. */
 s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 /* The position in whole pixels. */
@@ -34,7 +34,7 @@ void spriteSetLayer(UiSpriteState *sprite, u16 layer);
 s8 frameAnimationGetBusy(const UiSpriteState *sprite);     /* the updated flag */
 
 /* Starts position key `key` and moves the sprite to its first point (its last one when `reverse`). */
-void timerStart(UiSpriteState *sprite, s32 key, s32 reverse);
+void uiSpriteSetKeyframe(UiSpriteState *sprite, s16 key, s32 reverse);
 /* Starts every track a command names; spriteStartAnimationByIndex starts the first command of group `index`. */
 void spriteStartAnimation(UiSpriteState *sprite, const SpriteAnimationCommand *command);
 void spriteStartAnimationByIndex(UiSpriteState *sprite, s32 index);

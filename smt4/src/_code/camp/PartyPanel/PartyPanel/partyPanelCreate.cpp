@@ -147,18 +147,18 @@ void partyPanelCreate(s32 showIcons)
     uiSpriteStateInitFromSource(&panel->sprites[1], 25, 37, &panel->parameters, 106, 1.0f);
     spriteStartAnimationByIndex(&panel->sprites[1], 1);
     uiSpriteStateInitFromSource(&panel->sprites[PARTY_PANEL_SPRITE_PAGE], 25, 0, &panel->parameters, 106, 1.0f);
-    timerStart(&panel->sprites[PARTY_PANEL_SPRITE_PAGE], 4, 0);
+    uiSpriteSetKeyframe(&panel->sprites[PARTY_PANEL_SPRITE_PAGE], 4, 0);
     uiSpriteStateInitFromSource(&panel->sprites[PARTY_PANEL_SPRITE_HIGHLIGHT], 25, 0, &panel->parameters, 106, 1.0f);
     spriteStartAnimationByIndex(&panel->sprites[PARTY_PANEL_SPRITE_HIGHLIGHT], 2);
     for (i = 0; i < 4; i++) {
         uiSpriteStateInitFromSource(&panel->sprites[PARTY_PANEL_SPRITE_MEMBERS + i], 25, 0, &panel->parameters, 106, 1.0f);
-        timerStart(&panel->sprites[PARTY_PANEL_SPRITE_MEMBERS + i], 4, 0);
+        uiSpriteSetKeyframe(&panel->sprites[PARTY_PANEL_SPRITE_MEMBERS + i], 4, 0);
     }
     uiSpriteStateInitFromSource(&panel->sprites[PARTY_PANEL_SPRITE_LAYOUT], 25, 0, &panel->parameters, 106, 1.0f);
     if (panel->alternate) {
-        timerStart(&panel->sprites[PARTY_PANEL_SPRITE_LAYOUT], 6, 0);
+        uiSpriteSetKeyframe(&panel->sprites[PARTY_PANEL_SPRITE_LAYOUT], 6, 0);
     } else {
-        timerStart(&panel->sprites[PARTY_PANEL_SPRITE_LAYOUT], 4, 0);
+        uiSpriteSetKeyframe(&panel->sprites[PARTY_PANEL_SPRITE_LAYOUT], 4, 0);
     }
     uiSpriteStateInitFromSource(&panel->sprites[9], 25, 1000, &panel->parameters, 201, 1.0f);
     spriteStartAnimationByIndex(&panel->sprites[9], 3);

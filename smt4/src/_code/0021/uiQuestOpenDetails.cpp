@@ -5,7 +5,7 @@
 extern "C" {
 void uiQuestLoadResources(void);
 void FUN_0028fe0c(u32 questId, s32 enabled);
-void timerStart(void *sprite, s32 animation, s32 frame);
+void uiSpriteSetKeyframe(void *sprite, s32 animation, s32 frame); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Opens quest details and selects the detail layout indicated by the quest flags. */
 void uiQuestOpenDetails(u32 questId)
@@ -16,7 +16,7 @@ void uiQuestOpenDetails(u32 questId)
     work->questId = questId;
     uiQuestLoadResources();
     FUN_0028fe0c(questId, 1);
-    timerStart(work->mainSprite, 0, 0);
+    uiSpriteSetKeyframe(work->mainSprite, 0, 0);
     uiQuestEnterState(g_uiQuest, 1);
     work->nextState = 0x1D;
     QuestRecord *record = questDataGetRecord(questId);

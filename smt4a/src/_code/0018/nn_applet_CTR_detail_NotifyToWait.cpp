@@ -7,7 +7,7 @@ extern "C" {
 int errThrowFatal(...);
 int FUN_0018b70c(...);
 int nn_applet_CTR_detail_OpenSession(...);
-int FUN_0019a300(...);
+int svcConnectToPort(...);
 int nn_os_LightEvent_Initialize(...);
 int resultPostErrorReport(...);
 int FUN_001ab838(...);
@@ -40,7 +40,7 @@ extern unsigned char bRam1ff80014; /* 0x1ff80014 */
 /* Supplied declaration required: FUN_0018b70c. */
 /* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
 extern int FUN_0018bab4(void);
-/* Supplied declaration required: FUN_0019a300. */
+/* Supplied declaration required: svcConnectToPort. */
 /* Supplied declaration required: nn_os_LightEvent_Initialize. */
 /* Supplied declaration required: resultPostErrorReport. */
 /* Supplied declaration required: FUN_001ab838. */
@@ -111,7 +111,7 @@ void nn_applet_CTR_detail_NotifyToWait(void)
     nn_os_CriticalSection_Enter((unsigned int)&g_moduleStateCriticalSection);
     if (g_moduleInitialState == 0) {
       puVar2 = (unsigned int *)&g_moduleInitialState;
-      FUN_0019a300(&g_moduleInitialState,"err:f");
+      svcConnectToPort(&g_moduleInitialState,"err:f");
       if (-1 < (int)puVar2) {
         puVar2 = (unsigned int *)0x0;
       }

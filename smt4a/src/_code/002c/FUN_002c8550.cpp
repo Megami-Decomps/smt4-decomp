@@ -1,34 +1,26 @@
-/* NON_MATCHING: compiler preserves data+0x2000 and uses a literal 0x1374 offset; retail preserves the raw data base, computes data+0x1000 early, and shares a differently placed return tail. */
-#include "shard/Shard0033.h"
+/* NON_MATCHING: the branches and shared reset sequence match; the build keeps the
+ * adjusted field-state base across the call, while retail keeps the session base. */
 #include "game/GameGlobalsRef.h"
-
-struct ModeResetView {
-    u8 unk0000[0x1374]; // 0x0000
-    u32 step;            // 0x1374
-    u8 unk1378[0xc9c]; // 0x1378
-    u8 pending;          // 0x2014
-    u8 unk2015[2];      // 0x2015
-    u8 mode;             // 0x2017
-};
 
 extern "C" {
 void gameTransitionStartStep(void);
 
-// Resets mode-specific state when leaving mode eight or nine.
-void FUN_002c8550(s32 mode)
+/* Resets the transition when leaving field state eight or nine. */
+void FUN_002c8550(s32 state)
 {
-    ModeResetView* data = reinterpret_cast<ModeResetView*>(g_gameGlobals.instance);
-    u8 previous = data->mode;
-    data->mode = static_cast<u8>(mode);
-    if (previous != 9) {
-        if (previous != 8 || mode == 8) {
-            return;
+    ObjB *game = g_gameGlobals.instance;
+    u8 previous = game->unk2017;
+    game->unk2017 = (u8)state;
+    if (previous == 9) {
+        if (state != 9) {
+            g_gameGlobals.instance->unk1374 = 0;
+            gameTransitionStartStep();
+            game->mode = 0;
         }
-    } else if (mode == 9) {
-        return;
+    } else if (previous == 8 && state != 8) {
+        g_gameGlobals.instance->unk1374 = 0;
+        gameTransitionStartStep();
+        game->mode = 0;
     }
-    data->step = 0;
-    gameTransitionStartStep();
-    data->pending = 0;
 }
-}
+} /* extern "C" */

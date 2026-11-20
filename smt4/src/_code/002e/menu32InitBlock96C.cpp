@@ -7,7 +7,7 @@ int playSceneSetState(PlayScene *scene, int a, int b);
 
 void menu32InitBlock96C(PlayScene *scene)
 {
-    timerStart(&scene->timerC, 0xd, 0);
+    uiSpriteSetKeyframe(&scene->timerC, 0xd, 0);
     playSceneSetState(scene, 0xe, 1);
 }
 

@@ -21,3 +21,8 @@ thumb 0x100348 0x10037a armlib vsnprintf wrapper: add r3, pc callback, format en
 # NintendoWare sound: nw::snd::Sound3DManager::Initialize, right before Sound3DManager::GetRequiredMemSize (0x15e278),
 # whose body it inlines; smt4's twin nw_snd_Sound3DManager_Initialize_120F48 (0x120f48) is already third-party.
 arm 0x15e1ec 0x15e278 NintendoWare-snd Sound3DManager Initialize; placed before and inlines nw_snd Sound3DManager GetRequiredMemSize
+# The CTR-SDK's hand-written svc wrappers returning an output handle, svcReleaseSemaphore (svc 0x16, smt4's 0x2c5254) and
+# svcCreateEvent (svc 0x17): `push {r0}; svc N; ldr r2, [sp]; str r1, [r2]; add sp, sp, #4; bx lr`, the shape of the
+# third-party 0x19a300 (svc 0x2d); armcc never pushes an argument register alone around an svc.
+arm 0x19a364 0x19a37c CTR-SDK svcReleaseSemaphore: push {r0}; svc 0x16; ldr r2, [sp]; str r1, [r2]; add sp, sp, #4
+arm 0x17fd20 0x17fd38 CTR-SDK svcCreateEvent: push {r0}; svc 0x17; ldr r2, [sp]; str r1, [r2]; add sp, sp, #4 (nn::os::Event::Initialize's call)

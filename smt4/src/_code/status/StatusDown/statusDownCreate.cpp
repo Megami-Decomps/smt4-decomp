@@ -72,17 +72,17 @@ void statusDownCreate(void)
     paramsInit(&status->packet, sKeysFirst, sizeof(sKeysFirst), sKeysSecond, sizeof(sKeysSecond),
                sKeysThird, sizeof(sKeysThird), NULL, 0, sKeysFifth, sizeof(sKeysFifth));
     uiSpriteStateInitFromSource(&status->sprites[0], 0x1a, 1000, &status->packet, 1, 1.0f);
-    timerStart(&status->sprites[0], 0, 0);
+    uiSpriteSetKeyframe(&status->sprites[0], 0, 0);
     uiSpriteStateInitFromSource(&status->sprites[1], 0x1a, 1000, &status->packet, 1, 1.0f);
     spriteStartAnimationByIndex(&status->sprites[1], 0);
     uiSpriteStateInitFromSource(&status->sprites[2], 0x1a, 1000, &status->packet, 1, 1.0f);
     spriteStartAnimationByIndex(&status->sprites[2], 1);
     uiSpriteStateInitFromSource(&status->sprites[3], 0x1a, 1000, &status->packet, 1, 1.0f);
-    timerStart(&status->sprites[3], 4, 0);
+    uiSpriteSetKeyframe(&status->sprites[3], 4, 0);
     uiSpriteStateInitFromSource(&status->sprites[4], 0x1a, 1000, &status->packet, 1, 1.0f);
-    timerStart(&status->sprites[4], 5, 0);
+    uiSpriteSetKeyframe(&status->sprites[4], 5, 0);
     uiSpriteStateInitFromSource(&status->sprites[5], 0x1a, 1000, &status->packet, 1, 1.0f);
-    timerStart(&status->sprites[5], 0, 0);
+    uiSpriteSetKeyframe(&status->sprites[5], 0, 0);
     uiSpriteInitializeState(&status->sprites[6], 0x1a, -1, 0x1c, &status->packet, 0xc9, 1.0f);
     spriteStartAnimationByIndex(&status->sprites[6], 2);
     spriteSetLayer(&status->sprites[6], 2);

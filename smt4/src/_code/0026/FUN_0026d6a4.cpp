@@ -20,7 +20,7 @@ int objectPartRunUnlessLocked(...); // declcheck: local (romwright prototype; it
 int scrollListSetSelectionMarkChanged(...);
 int listCursorGetRowIfUnblocked(...);
 int eventQueueAddUniqueIfValid(int);
-int timerStart(int, int, int);
+int uiSpriteSetKeyframe(int, int, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int inputQueryButtonState(int, int);
 int SBORROW4(...);
 
@@ -43,7 +43,7 @@ extern int FUN_0029e02c(void);
 /* Supplied declaration required: listCursorGetRowIfUnblocked. */
 /* Supplied declaration required: gameGlobalsSetSubScreenActive. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: timerStart. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: inputQueryButtonState. */
 
 
@@ -95,10 +95,10 @@ unsigned int FUN_0026d6a4(int param_1)
   temp_v0 = *(unsigned char *)(temp_v5 + 0x42) ^ 1;
   *(unsigned char *)(temp_v5 + 0x42) = temp_v0;
   if (temp_v0 != 0) {
-    timerStart(temp_v5 + 0x4c8,6,0);
+    uiSpriteSetKeyframe(temp_v5 + 0x4c8,6,0);
   }
   else {
-    timerStart(temp_v5 + 0x4c8,4,0);
+    uiSpriteSetKeyframe(temp_v5 + 0x4c8,4,0);
   }
   eventQueueAddUniqueIfValid(0x100016d);
   if (*(int *)(temp_v5 + 0x1c) != 6) {

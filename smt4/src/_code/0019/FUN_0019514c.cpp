@@ -23,7 +23,7 @@ u32 saveBlockGetPlaySeconds(void);
 s32 uiScrollHandleActionsOrTouch(void* list, const TextureTableEntryIV *touchArea, s32 b, s32 c, s32 d, s32 e, u8* flags, s32 f, s32 g);
 s32 eventQueueAddUniqueIfValid(u32 event);
 s32 inputQueryButtonState(s32 a, s32 b);
-void timerStart(void* widget, s32 a, s32 b);
+void uiSpriteSetKeyframe(void* widget, s32 a, s32 b); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void uiSpriteAdvanceAnimation(void* widget);
 
 // Per-frame update of the animated scroll list: row fade-in, list input handling with
@@ -75,7 +75,7 @@ void FUN_0019514c(u8** screenRef)
             } else {
                 if (inputQueryButtonState(1, 1) != 0) {
                     eventQueueAddUniqueIfValid(0x0100016e);
-                    for (s32 i = 0; i < 5; i++) timerStart(&rows[i], 1, 0);
+                    for (s32 i = 0; i < 5; i++) uiSpriteSetKeyframe(&rows[i], 1, 0);
                     SCREEN_STATE(screen) = 2;
                 }
                 break;

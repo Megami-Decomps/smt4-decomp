@@ -23,7 +23,7 @@ void infoWinSetMessage(const void *message, u32 arg)
             win->wideText = 1;
             win->textWidth = (s32)width;
         }
-        timerStart(&win->content, 2, 0);
+        uiSpriteSetKeyframe(&win->content, 2, 0);
         win->labelX = vec2GetXInt(&win->content);
         win->textRight = win->labelX + win->textWidth + 42;
         if (win->state == 3) {

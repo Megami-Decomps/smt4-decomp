@@ -100,7 +100,7 @@ void FUN_003eb068(void *state);
 void drawParameterBlockClear(UiResourceParameters *packet);
 
 void uiSpriteStateInitFromSource(NaviSprite *sprite, u32 group, u32 image, UiResourceParameters *owner, u16 id, f32 scale);
-void timerStart(NaviSprite *sprite, s32 id, s32 arg);
+void uiSpriteSetKeyframe(NaviSprite *sprite, s32 id, s32 arg); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void uiInitializeEightTimerSet(void *timers);
 void memFill8(void *data, s32 value);
 void uiSpriteInitializeState(NaviSprite *sprite, u32 group, s32 image, s32 kind,
@@ -129,7 +129,7 @@ void NaviMain_InitInstance(NaviMainWork *work)
                NULL, 0, NULL, 0, sKeysFifth, sizeof(sKeysFifth));
     for (s32 i = 0; i < 5; i++) {
         uiSpriteStateInitFromSource(&work->sprites[i], 0x1c, 0xfa1, &work->packet, 0x15, 1.0f);
-        timerStart(&work->sprites[i], 4, 0);
+        uiSpriteSetKeyframe(&work->sprites[i], 4, 0);
     }
     uiInitializeEightTimerSet(work->timers);
     work->unkB84 = 0x78;
@@ -166,12 +166,12 @@ void NaviMain_InitInstance(NaviMainWork *work)
     work->unk9ec[2] = 0;
     work->unk9f0 = 0;
     uiSpriteInitializeState(&work->spriteA, 0x1c, 0x1121, 0x1d, &work->packet, 0x15, 1.0f);
-    timerStart(&work->spriteA, 0, 0);
+    uiSpriteSetKeyframe(&work->spriteA, 0, 0);
     work->unkA84[0] = 0;
     work->unkA84[1] = 0;
     work->unkA84[2] = 0;
     uiSpriteInitializeState(&work->spriteB, 0x1c, 0x111a, 0x1c, &work->packet, 0x15, 1.0f);
-    timerStart(&work->spriteB, 5, 0);
+    uiSpriteSetKeyframe(&work->spriteB, 5, 0);
 }
 
 } /* extern "C" */

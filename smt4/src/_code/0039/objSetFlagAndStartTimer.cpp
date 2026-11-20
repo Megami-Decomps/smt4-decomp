@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int timerStart(void *timer, int a, int b);
+int uiSpriteSetKeyframe(void *timer, int a, int b); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 typedef struct Obj {
     /* 0x000 */ u8 unk000[0x9ED];
@@ -14,7 +14,7 @@ typedef struct Obj {
 void objSetFlagAndStartTimer(Obj *obj)
 {
     obj->unk9ED = 1;
-    timerStart(obj->timer, 6, 0);
+    uiSpriteSetKeyframe(obj->timer, 6, 0);
 }
 
 } /* extern "C" */

@@ -1,6 +1,9 @@
-/* NON_MATCHING: 24 rows, in the coordinate arguments of a few calls (the attack value call, 0x527, among them): retail
- * loads and sums the row and part coordinates in another order and through other scratch registers. Every site is written
- * `row + part + x` (no per-site order picked by score). Everything else agrees. */
+/* NON_MATCHING: 16 rows, one call: the attack value of a weapon (layout part 0x527). Retail sums its coordinates as at
+ * the gun's attack value (0x542: row y in r0, part y in r2, the y sum built in r2 before the x sum); this build loads
+ * and sums them as at the hit range (0x546: the sums in r1 and r0, moved to r2 and r1 by the final adds). The same
+ * statement gives retail's code at 0x542, 0x55E and 0x563; removing the element icon (0x529) from the same case gives
+ * it here too. Every layout part has its own variable (one reused `part` cost 8 more rows at 0x528) and every site is
+ * written `row + part + x`. */
 #include <stdio.h>
 #include "camp/CampEquipment.h"
 #include "camp/CampState.h"
@@ -50,25 +53,25 @@ extern "C" void campDrawSelectedEquipmentDetails(s32 category, s32 row, u32 item
     // The first two layout rows are the header; touch regions start at the first item.
     FUN_0028f694(rowEntry->x + x, rowEntry->y + y, camp->touch.rowRegions[row - 2]);
 
-    const TextureTableEntryIV *part = asdTMTexTableEntryAt(texture, 0x523);
+    const TextureTableEntryIV *nameEntry = asdTMTexTableEntryAt(texture, 0x523);
     const char *name = reinterpret_cast<const char *>(dataFindKindRecordWithAocOverrides(itemId, 0));
     if (name != NULL) {
         u32 color = 0xFFFFFFFF;
         if (!recordAcceptsStickDirection(itemId))
             color = 0x5A5A5AFF;
-        textDrawString(rowEntry->x + part->x + x, rowEntry->y + part->y + y, 0.5f, 3, 0.0f,
+        textDrawString(rowEntry->x + nameEntry->x + x, rowEntry->y + nameEntry->y + y, 0.5f, 3, 0.0f,
                        color, 1.0f, name);
     }
-    part = asdTMTexTableEntryAt(texture, 0x52F);
+    const TextureTableEntryIV *countEntry = asdTMTexTableEntryAt(texture, 0x52F);
     sprintf(text, "%d", flagValueRead(itemId));
     drawSetColorFromRGBA8(0xFFFFFFFF);
-    FUN_002bdf94(0, rowEntry->x + part->x + x, rowEntry->y + part->y + y, 1, 2, layer, text);
+    FUN_002bdf94(0, rowEntry->x + countEntry->x + x, rowEntry->y + countEntry->y + y, 1, 2, layer, text);
     gxResetColorQuadToWhite();
     texDrawTableEntryAtStoredOrigin(2, texture, 0x521, rowEntry->x + x, rowEntry->y + y, layer);
-    part = asdTMTexTableEntryAt(texture, 0x522);
+    const TextureTableEntryIV *badgeEntry = asdTMTexTableEntryAt(texture, 0x522);
     BadgeWord equippedFlag;
     equippedFlag.i = 1;
-    itemDrawCategoryBadge((s16)itemId, rowEntry->x + part->x + x, rowEntry->y + part->y + y, 0x88, equippedFlag);
+    itemDrawCategoryBadge((s16)itemId, rowEntry->x + badgeEntry->x + x, rowEntry->y + badgeEntry->y + y, 0x88, equippedFlag);
 
     switch (category) {
     case 0x11:
@@ -77,16 +80,12 @@ extern "C" void campDrawSelectedEquipmentDetails(s32 category, s32 row, u32 item
             equippedId = player->equipped.weapon;
         if (category == 0x13)
             equippedId = player->equipped.bullets;
-        s32 equippedAttack;
-        if (equippedId == 0)
-            equippedAttack = 0;
-        else
-            equippedAttack = itemTableGetEquipmentRecord(equippedId)->traitBits.group;
+        s32 equippedAttack = equippedId == 0 ? 0 : itemTableGetEquipmentRecord(equippedId)->traitBits.group;
         drawSetColorFromRGBA8(0xFFFFFFFF);
         setStatComparisonColor(item->traitBits.group, equippedAttack);
-        part = asdTMTexTableEntryAt(texture, 0x527);
+        const TextureTableEntryIV *attackEntry = asdTMTexTableEntryAt(texture, 0x527);
         sprintf(text, "%d", item->traitBits.group);
-        FUN_002bdf94(0, rowEntry->x + part->x + x, rowEntry->y + part->y + y, 1, 4, layer, text);
+        FUN_002bdf94(0, rowEntry->x + attackEntry->x + x, rowEntry->y + attackEntry->y + y, 1, 4, layer, text);
         gxResetColorQuadToWhite();
 
         // These Shift-JIS strings are the weapon's attack attributes.
@@ -108,23 +107,22 @@ extern "C" void campDrawSelectedEquipmentDetails(s32 category, s32 row, u32 item
             sprintf(text, "\x82\x63\x82\x81\x82\x92\x82\x8B"); // Dark
         if (item->traitBits.attribute == 0x11)
             sprintf(text, "\x82`\x82\x8C\x82\x8D\x82\x89\x82\x87\x82\x88\x82\x94\x82\x99"); // Almighty
-        part = asdTMTexTableEntryAt(texture, 0x528);
-        textDrawString(rowEntry->x + part->x + x, rowEntry->y + part->y + y, 0.5f, 3, 0.0f, 0xFFFFFFFF, 1.0f, text);
+        const TextureTableEntryIV *attributeEntry = asdTMTexTableEntryAt(texture, 0x528);
+        textDrawString(rowEntry->x + attributeEntry->x + x, rowEntry->y + attributeEntry->y + y, 0.5f, 3, 0.0f, 0xFFFFFFFF, 1.0f, text);
         if (item->element != 0) {
-            part = asdTMTexTableEntryAt(texture, 0x529);
-            messageKindForward(item->element, rowEntry->x + part->x + (x + 24), rowEntry->y + part->y + y, layer);
+            const TextureTableEntryIV *elementEntry = asdTMTexTableEntryAt(texture, 0x529);
+            messageKindForward(item->element, rowEntry->x + elementEntry->x + (x + 24), rowEntry->y + elementEntry->y + y, layer);
         }
         break;
     }
     case 0x12: {
         equippedId = player->equipped.gun;
-        s32 equippedAttack;
-        equippedAttack = equippedId == 0 ? 0 : itemTableGetEquipmentRecord(equippedId)->traitBits.group;
+        s32 equippedAttack = equippedId == 0 ? 0 : itemTableGetEquipmentRecord(equippedId)->traitBits.group;
         drawSetColorFromRGBA8(0xFFFFFFFF);
         setStatComparisonColor(item->traitBits.group, equippedAttack);
-        part = asdTMTexTableEntryAt(texture, 0x542);
+        const TextureTableEntryIV *gunAttackEntry = asdTMTexTableEntryAt(texture, 0x542);
         sprintf(text, "%d", item->traitBits.group);
-        FUN_002bdf94(0, rowEntry->x + part->x + x, rowEntry->y + part->y + y, 1, 4, layer, text);
+        FUN_002bdf94(0, rowEntry->x + gunAttackEntry->x + x, rowEntry->y + gunAttackEntry->y + y, 1, 4, layer, text);
         gxResetColorQuadToWhite();
 
         if (item->target == 0)
@@ -133,16 +131,16 @@ extern "C" void campDrawSelectedEquipmentDetails(s32 category, s32 row, u32 item
             sprintf(text, "\x82`\x82\x8C\x82\x8C"); // All
         if (item->target == 6)
             sprintf(text, "\x82l\x82\x95\x82\x8C\x82\x94\x82\x89"); // Multi
-        part = asdTMTexTableEntryAt(texture, 0x543);
-        textDrawString(rowEntry->x + part->x + x, rowEntry->y + part->y + y, 0.5f, 3, 0.0f, 0xFFFFFFFF, 1.0f, text);
+        const TextureTableEntryIV *targetEntry = asdTMTexTableEntryAt(texture, 0x543);
+        textDrawString(rowEntry->x + targetEntry->x + x, rowEntry->y + targetEntry->y + y, 0.5f, 3, 0.0f, 0xFFFFFFFF, 1.0f, text);
         u8 hitRange = item->hitRange;
         if ((hitRange & 15) == (hitRange >> 4))
             sprintf(text, "%d", hitRange & 15);
         else
             sprintf(text, "%d-%d", hitRange & 15, hitRange >> 4);
         drawSetColorFromRGBA8(0xFFFFFFFF);
-        part = asdTMTexTableEntryAt(texture, 0x546);
-        FUN_002bdf94(0, rowEntry->x + part->x + x, rowEntry->y + part->y + y, 1, 3, layer, text);
+        const TextureTableEntryIV *rangeEntry = asdTMTexTableEntryAt(texture, 0x546);
+        FUN_002bdf94(0, rowEntry->x + rangeEntry->x + x, rowEntry->y + rangeEntry->y + y, 1, 3, layer, text);
         gxResetColorQuadToWhite();
         break;
     }
@@ -169,15 +167,15 @@ extern "C" void campDrawSelectedEquipmentDetails(s32 category, s32 row, u32 item
         }
         drawSetColorFromRGBA8(0xFFFFFFFF);
         setStatComparisonColor(item->hpBonus, equippedHp);
-        part = asdTMTexTableEntryAt(texture, 0x55E);
+        const TextureTableEntryIV *hpEntry = asdTMTexTableEntryAt(texture, 0x55E);
         sprintf(text, "%d", item->hpBonus);
-        FUN_002bdf94(0, rowEntry->x + part->x + x, rowEntry->y + part->y + y, 1, 5, layer, text);
+        FUN_002bdf94(0, rowEntry->x + hpEntry->x + x, rowEntry->y + hpEntry->y + y, 1, 5, layer, text);
         gxResetColorQuadToWhite();
         drawSetColorFromRGBA8(0xFFFFFFFF);
         setStatComparisonColor(item->mpBonus, equippedMp);
-        part = asdTMTexTableEntryAt(texture, 0x563);
+        const TextureTableEntryIV *mpEntry = asdTMTexTableEntryAt(texture, 0x563);
         sprintf(text, "%d", item->mpBonus);
-        FUN_002bdf94(0, rowEntry->x + part->x + x, rowEntry->y + part->y + y, 1, 5, layer, text);
+        FUN_002bdf94(0, rowEntry->x + mpEntry->x + x, rowEntry->y + mpEntry->y + y, 1, 5, layer, text);
         gxResetColorQuadToWhite();
         break;
     }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: initial global-base loading and flag-test/prologue scheduling differ. */
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 #include "map/mapMain.h"

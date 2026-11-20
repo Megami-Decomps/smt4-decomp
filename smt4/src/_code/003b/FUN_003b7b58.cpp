@@ -14,7 +14,7 @@ int statusBustUpPortraitAcquire(...);
 int asdLoadFileAsyncSimple(...);
 int gameGlobalsSetSelected(...);
 int asdTMTexTableLoadEntryAsync(int, int);
-int timerStart(...);
+int uiSpriteSetKeyframe(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int uiSpriteStateInitFromSource(...);
 int spriteStartAnimationByIndex(...);
 
@@ -45,7 +45,7 @@ extern unsigned char DAT_00405a4c; /* 0x405a4c */
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 extern int gameGetUnitRecord(void);
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: timerStart. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteStateInitFromSource. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: paramsInit. */
@@ -122,22 +122,22 @@ void FUN_003b7b58(int param_1)
   paramsInit(reinterpret_cast<UiResourceParameters *>(param_1), &DAT_004058d4,0x48,&DAT_0040591c,0xa8,&DAT_004059c4,0x6c,&DAT_00405a30,0x1c,
                &DAT_00405a4c,0x32c);
   uiSpriteStateInitFromSource(param_1 + 0x20,0x28,0,param_1,1);
-  timerStart(param_1 + 0x20,0);
+  uiSpriteSetKeyframe(param_1 + 0x20,0);
   temp_v1 = 0;
   do {
     temp_v2 = param_1 + temp_v1 * 0x8c;
     uiSpriteStateInitFromSource(temp_v2 + 0xac,0x28,0,param_1,1);
-    timerStart(temp_v2 + 0xac,4,0);
+    uiSpriteSetKeyframe(temp_v2 + 0xac,4,0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 6);
   uiSpriteStateInitFromSource(param_1 + 0x3f4,0x28,0,param_1,1);
   spriteStartAnimationByIndex(param_1 + 0x3f4,4);
   uiSpriteStateInitFromSource(param_1 + 0x480,0x28,0,param_1,1);
-  timerStart(param_1 + 0x480,2,0);
+  uiSpriteSetKeyframe(param_1 + 0x480,2,0);
   uiSpriteStateInitFromSource(param_1 + 0x50c,0x28,0,param_1,1);
-  timerStart(param_1 + 0x50c,0);
+  uiSpriteSetKeyframe(param_1 + 0x50c,0);
   uiSpriteStateInitFromSource(param_1 + 0x598,0x28,0,param_1,1);
-  timerStart(param_1 + 0x598,0);
+  uiSpriteSetKeyframe(param_1 + 0x598,0);
   uiSpriteStateInitFromSource(param_1 + 0x624,0x28,1000,param_1,0x65);
   FUN_002eb76c(param_1 + 0x624,0);
   uiSpriteStateInitFromSource(param_1 + 0x6b0,0x28,1000,param_1,0x65);

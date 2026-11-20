@@ -1,4 +1,6 @@
-/* NON_MATCHING: loop body matches; retail folds the loop-entry test into the clamp (`movgt r3, #8; cmple r3, #0`) where armcc tests the limit separately. */
+/* NON_MATCHING: loop body matches; retail folds the loop-entry test into the clamp (`movgt r3, #8; cmple r3, #0`) where
+ * armcc tests the limit separately. A ternary clamp with `total` declared before `limit` is IDENTICAL, but that
+ * declaration order was only found by scoring, so it is not used. */
 #include "gamedata/SkillDataLookup.h"
 
 extern "C" {

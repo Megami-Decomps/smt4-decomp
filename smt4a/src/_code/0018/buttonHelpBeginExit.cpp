@@ -3,7 +3,7 @@
 
 extern "C" {
 void ifTouchDecrementTimer();
-void rangeSelectionSelectEndpoint(UiSpriteState *sprite, s32 enabled, s32 initial);
+void uiSpriteSetScaleKeyframe(UiSpriteState *sprite, s32 enabled, s32 initial);
 
 // Release help touch registrations and start the four panel exit animations.
 void buttonHelpBeginExit(s32 clearKinds)
@@ -28,9 +28,9 @@ void buttonHelpBeginExit(s32 clearKinds)
             uiSpriteSetKeyframe(&work->panelSprites[index], 3, 0);
         } else if (work->mode == 2) {
             uiSpriteSetImageKeyframe(&work->panelSprites[index], 1, 0);
-            rangeSelectionSelectEndpoint(&work->panelSprites[index], 1, 0);
+            uiSpriteSetScaleKeyframe(&work->panelSprites[index], 1, 0);
         } else {
-            rangeSelectionSelectEndpoint(&work->panelSprites[index], 0, 1);
+            uiSpriteSetScaleKeyframe(&work->panelSprites[index], 0, 1);
         }
     }
     work = g_buttonHelp.work;

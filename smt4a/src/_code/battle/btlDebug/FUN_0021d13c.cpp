@@ -75,7 +75,7 @@ int uiSpriteAdvanceAnimation(...);
 int gameGetPlayerData(void);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetImageKeyframe(...);
-int rangeSelectionSelectEndpoint(int, int, int);
+int uiSpriteSetScaleKeyframe(int, int, int);
 int gameGetSlotTable(void);
 int gridNavigationConfigure(...);
 int gridNavigationHandleConfirm(...);
@@ -157,7 +157,7 @@ extern short vec2GetYInt(int *);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: itemTableGetItemRecord. */
 /* Supplied declaration required: buttonHelpSetText. */
-/* Supplied declaration required: rangeSelectionSelectEndpoint. */
+/* Supplied declaration required: uiSpriteSetScaleKeyframe. */
 /* Supplied declaration required: gameGetSlotRecord. */
 /* Supplied declaration required: gameGetSlotTable. */
 /* Supplied declaration required: skillDataFindById. */
@@ -482,7 +482,7 @@ LAB_0021d628:
             uiSpriteSelectAnim(param_1 + 0x1c04,0x17);
             uiSpriteSelectAnim(param_1 + 0x1c90,0x15);
             uiSpriteSelectAnim(param_1 + 0x1d1c,0x16);
-            rangeSelectionSelectEndpoint(param_1 + 0x1d1c,0xe,0);
+            uiSpriteSetScaleKeyframe(param_1 + 0x1d1c,0xe,0);
             *pcVar17 = '\x02';
             *(unsigned short *)(param_1 + 0x4b9c) = temp_v1;
             temp_v25 = (short **)0x0;

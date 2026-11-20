@@ -23,7 +23,7 @@ extern Record DAT_005e1560;
 
 void qsort(void *elements, u32 count, u32 elementSize, s32 (*compare)(const u16 *, const u16 *));
 s32 dataTableCompareIdsByOrder(const u16 *a, const u16 *b);
-void rangeSelectionSelectEndpoint(UiSpriteState *sprite, s32 index, s32 reverse);
+void uiSpriteSetScaleKeyframe(UiSpriteState *sprite, s32 index, s32 reverse);
 void gridNavigationConfigure(GridNavigation *work, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys);
 void FUN_0020d3d4(ActorCardAnimationsA *card);
 void partyStatusRefreshSlot(ActorCardAnimationsA *card, s32 slot, s32 reset);
@@ -338,7 +338,7 @@ void btlUiPartyDisplayInit(ActorCardAnimationsA *card, u32 unit)
     uiStoreTextureEntryCenter(&card->unk1C04, 0xd, 0xfc1);
     uiSpriteStateInitFromSource(&card->unk1D1C, 0xd, 0xfbf, &card->resources, 0x42, 1.0f);
     uiSpriteSelectAnim(&card->unk1D1C, 0x16);
-    rangeSelectionSelectEndpoint(&card->unk1D1C, 14, 0);
+    uiSpriteSetScaleKeyframe(&card->unk1D1C, 14, 0);
     uiStoreTextureEntryCenter(&card->unk1C04, 0xd, 0xfc2);
     for (i = 0; i < 8; i++) {
         uiSpriteStateInitFromSource(&card->unk1DA8[i], 0xd, 0xfbf, &card->resources, 0x42, 1.0f);

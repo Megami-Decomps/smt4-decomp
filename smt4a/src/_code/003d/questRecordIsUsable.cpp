@@ -1,4 +1,3 @@
-/* NON_MATCHING: the quest ID and record occupy swapped saved registers, and late-record lookup sets up its argument after the range branch. */
 #include "quest_center/QuestRecordA.h"
 #include "quest_center/QuestUnlock.h"
 #include "game/GameStateA.h"
@@ -14,22 +13,36 @@ extern "C" {
 #define GAME_FLAG_ITEMS_LOCKED 0x560
 
 
+/* Body of recordCategoryNineIsActiveInMode24 (proven in smt4, inlined in smt4 questIsOfferable). */
+static __inline s32 questIsModeNineRecord(u32 recordId)
+{
+    if (recordId < ITEM_FIRST_LATE_ID) {
+        return 0;
+    }
+    const QuestRecordA *record = questDataGetRecord(recordId);
+    if (record == NULL) {
+        return 0;
+    }
+    if (record->kind == ITEM_GROUP_KEY && g_gameState.mapId == GAME_MODE_KEY_ITEMS_LOCKED) {
+        return 1;
+    }
+    return 0;
+}
+
 /* Returns whether item `id` is currently usable. */
 u32 questRecordIsUsable(u32 id)
 {
-    QuestRecordA *record;
-    QuestRecordA *late;
-
     if (!gameUnlockRecordRequirementsMet(id)) {
         return 0;
     }
-    record = questDataGetRecord(id);
+    const QuestRecordA *record = questDataGetRecord(id);
     if (gameFlagEntryGetBit(id, 3) && record->kind != ITEM_GROUP_KEY) {
         return 0;
     }
-    if (id >= ITEM_FIRST_LATE_ID && (late = questDataGetRecord(id)) != NULL
-        && late->kind == ITEM_GROUP_KEY && g_gameState.mapId == GAME_MODE_KEY_ITEMS_LOCKED) {
-        return 0;
+    if (id >= ITEM_FIRST_LATE_ID) {
+        if (questIsModeNineRecord(id)) {
+            return 0;
+        }
     }
     if (record->lockFlag != 0 && gameFlagIsSet(record->lockFlag)
         && (record->unlockFlag == 0 || !gameFlagIsSet(record->unlockFlag))) {

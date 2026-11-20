@@ -7,7 +7,7 @@ void uiQuestLoadResources(void);
 void FUN_0028fe0c(u16 id, s32 mode);
 void buttonHelpWorkSetPreset(s32 sound);
 s32 resourceRunOperationIfUnblocked(void *cursor);
-void timerStart(void *timer, s32 a, s32 b);
+void uiSpriteSetKeyframe(void *timer, s32 a, s32 b); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Leave the quest detail view: open the selected quest, or go back from state 13 with a cancel sound. */
 void FUN_00223cf0(void)
@@ -18,11 +18,11 @@ void FUN_00223cf0(void)
     if (quest->state != 13) {
         uiQuestLoadResources();
         FUN_0028fe0c(quest->list[resourceRunOperationIfUnblocked(quest->cursor.data) + listCursorGetRowIfUnblocked(quest->cursor.data)], 1);
-        timerStart(quest->mainSprite, 0, 0);
+        uiSpriteSetKeyframe(quest->mainSprite, 0, 0);
         uiQuestEnterState(g_uiQuest, 1);
         return;
     }
-    timerStart(quest->mainSprite, 2, 0);
+    uiSpriteSetKeyframe(quest->mainSprite, 2, 0);
     uiQuestEnterState(g_uiQuest, 3);
     buttonHelpWorkSetPreset(0xa0);
 }

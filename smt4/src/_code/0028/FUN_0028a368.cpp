@@ -17,13 +17,13 @@ void FUN_0028a368(int reset)
         if (reset != 0) {
             i = 0;
             do {
-                timerStart(&scene->sprites[PARTY_PANEL_SPRITE_MEMBERS + i], 4, 0);
+                uiSpriteSetKeyframe(&scene->sprites[PARTY_PANEL_SPRITE_MEMBERS + i], 4, 0);
                 i++;
             } while (i < 4);
             if (scene->alternate != 0) {
-                timerStart(&scene->sprites[PARTY_PANEL_SPRITE_LAYOUT], 6, 0);
+                uiSpriteSetKeyframe(&scene->sprites[PARTY_PANEL_SPRITE_LAYOUT], 6, 0);
             } else {
-                timerStart(&scene->sprites[PARTY_PANEL_SPRITE_LAYOUT], 4, 0);
+                uiSpriteSetKeyframe(&scene->sprites[PARTY_PANEL_SPRITE_LAYOUT], 4, 0);
             }
         }
         if (scene->panelState != 0 && scene->panelState != 1) {

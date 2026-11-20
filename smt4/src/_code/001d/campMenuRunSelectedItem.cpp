@@ -90,7 +90,7 @@ void campMenuRunSelectedItem(void)
         return;
     case 9:
         campTimersStart();
-        timerStart(&camp->sprites[1], 1, 0);
+        uiSpriteSetKeyframe(&camp->sprites[1], 1, 0);
         FUN_0026d5a4();
         campUpdateCategoryHighlightColors();
         guestWinRequestClose();
@@ -106,7 +106,7 @@ void campMenuRunSelectedItem(void)
     case 10:
         if ((s32)gridNavigationGetItemCount(&camp->grids[4]) > 0) {
             campTimersStart();
-            timerStart(&camp->sprites[1], 1, 0);
+            uiSpriteSetKeyframe(&camp->sprites[1], 1, 0);
             FUN_0026d5a4();
             spriteTable22Acquire();
             FUN_003ad0e0();
@@ -130,7 +130,7 @@ void campMenuRunSelectedItem(void)
         }
         if ((s32)gridNavigationGetItemCount(grid) > 0) {
             campTimersStart();
-            timerStart(&camp->sprites[1], 1, 0);
+            uiSpriteSetKeyframe(&camp->sprites[1], 1, 0);
             FUN_0026d5a4();
             if (item == 0xb) {
                 camp->returnState = 10;
@@ -183,7 +183,7 @@ void campMenuRunSelectedItem(void)
         }
         if ((s32)gridNavigationGetItemCount(grid) > 0) {
             campTimersStart();
-            timerStart(&camp->sprites[1], 1, 0);
+            uiSpriteSetKeyframe(&camp->sprites[1], 1, 0);
             FUN_0026d5a4();
             guestWinRequestClose();
             messageDismissNumericBanner(1);
@@ -272,7 +272,7 @@ void campMenuRunSelectedItem(void)
     case 0x27:
         configOpen();
         campTimersStart();
-        timerStart(&camp->sprites[1], 1, 0);
+        uiSpriteSetKeyframe(&camp->sprites[1], 1, 0);
         FUN_0026d5a4();
         guestWinRequestClose();
         messageDismissNumericBanner(1);
@@ -282,7 +282,7 @@ void campMenuRunSelectedItem(void)
     case 0x29:
         FUN_00194ec8();
         campTimersStart();
-        timerStart(&camp->sprites[1], 0, 0);
+        uiSpriteSetKeyframe(&camp->sprites[1], 0, 0);
         FUN_0026d5a4();
         camp->returnState = 0x2c;
         campChangeState(4);

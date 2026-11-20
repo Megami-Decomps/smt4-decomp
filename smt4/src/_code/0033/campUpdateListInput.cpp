@@ -80,7 +80,7 @@ void campUpdateListInput(s32 kind)
         u32 id = camp->gridIds0[index];
         if (FUN_0028fc60(id) != 0) {
             camp->selectedId = camp->gridIds0[index];
-            timerStart(&camp->sprites[1], 3, 0);
+            uiSpriteSetKeyframe(&camp->sprites[1], 3, 0);
             camp->returnState = 11;
             campChangeState(5);
             campReleaseScreenTouchRegions(list, 1);
@@ -94,7 +94,7 @@ void campUpdateListInput(s32 kind)
 
     if (inputQueryButtonState(1, 1) != 0) {
         campListShowSelectedHelp(0);
-        timerStart(&camp->sprites[1], 3, 0);
+        uiSpriteSetKeyframe(&camp->sprites[1], 3, 0);
         camp->returnState = 6;
         campChangeState(5);
         campReleaseScreenTouchRegions(list, 1);

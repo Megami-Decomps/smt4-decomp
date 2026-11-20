@@ -1,4 +1,3 @@
-/* NON_MATCHING: everything but the steady-state blink (state 3) matches; retail reads the frame before storing the opacity and predicates both flag stores, the build cross-jumps its set into the shared tail. */
 #include "event/2dEvent/SnowNoise.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -6,10 +5,11 @@ extern "C" {
 extern EventEffectGlobalsA g_eventEffect;
 extern EventFilterTexture DAT_0057f430;
 
+/* Advances the snow-noise animation and updates its visibility. */
 u32 eventSnowNoiseUpdate()
 {
     EventEffectGlobalsA *effect = &g_eventEffect;
-    EventSnowNoiseWork *work = static_cast<EventSnowNoiseWork *>(effect->unk08);
+    EventSnowNoiseWork *work = (EventSnowNoiseWork *)effect->unk08;
     switch (work->state) {
     case 0:
         if (asdTMTexTableNodeIsLoaded(DAT_0057f430.table, DAT_0057f430.node)) {
@@ -53,11 +53,13 @@ u32 eventSnowNoiseUpdate()
         }
         break;
     case 3:
-        work->opacity = 0.5f;
-        if (work->frame % 4 < 2)
+        if (work->frame % 4 < 2) {
+            work->opacity = 0.5f;
             work->complete = 1;
-        else
+        } else {
+            work->opacity = 0.5f;
             work->complete = 0;
+        }
         break;
     case 4:
         if (work->frame < 4) {
@@ -76,4 +78,4 @@ u32 eventSnowNoiseUpdate()
     ++work->frame;
     return 0;
 }
-}
+} /* extern "C" */

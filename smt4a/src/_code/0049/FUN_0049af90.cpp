@@ -22,7 +22,7 @@ extern u32 g_handleRegistry;
 
 void ptrListRemoveClearOwner(u32 list, u32 id);
 void statusPanelClose(void);
-void FUN_00345718(s32 arg);
+void messageWindowStartTimer(s32 arg);
 
 void FUN_0049af90(HandleOwner *owner)
 {
@@ -32,7 +32,7 @@ void FUN_0049af90(HandleOwner *owner)
         } else {
             statusPanelClose();
             owner->state = 3;
-            FUN_00345718(0);
+            messageWindowStartTimer(0);
             if (owner->handle != NULL) {
                 ptrListRemoveClearOwner(g_handleRegistry, owner->handle->id);
                 if (owner->handle != NULL) {

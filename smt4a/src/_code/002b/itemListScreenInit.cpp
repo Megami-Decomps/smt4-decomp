@@ -129,7 +129,7 @@ static const u8 listScreenResource4[0x40c] = {
 void paramsClearPacket(void* screen);
 
 void uiStoreTextureEntryCenter(void* sprite, s32 a, s32 index);
-void rangeSelectionSelectEndpoint(void* sprite, s32 a, s32 b);
+void uiSpriteSetScaleKeyframe(void* sprite, s32 a, s32 b);
 
 // Initialises the list screen: clears its row state and creates its sprite banks.
 void itemListScreenInit(ListScreen* screen)
@@ -153,7 +153,7 @@ void itemListScreenInit(ListScreen* screen)
     for (s32 i = 0; i <= 9; i++) {
         uiSpriteStateInitFromSource(&screen->sprites[i], 0xc, 0, (UiResourceParameters *)(screen), 2, 1.0f);
         uiStoreTextureEntryCenter(&screen->sprites[i], 0xc, i + 0xb);
-        rangeSelectionSelectEndpoint(&screen->sprites[i], 5, 0);
+        uiSpriteSetScaleKeyframe(&screen->sprites[i], 5, 0);
     }
     for (s32 i = 10; i <= 19; i++) {
         uiSpriteStateInitFromSource(&screen->sprites[i], 0xc, 4, (UiResourceParameters *)(screen), 2, 1.0f);

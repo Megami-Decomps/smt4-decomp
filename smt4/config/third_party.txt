@@ -1715,6 +1715,8 @@
 0x002c4040 nn_os_LightEvent_Signal name
 0x002c424c __aeabi_memset4 name
 0x002c5220 nn_os_LightEvent_Initialize name
+0x002c5254 svcReleaseSemaphore name
+0x002c52dc FUN_002c52dc library
 0x002c5454 nn_applet_CTR_detail_CloseApplication name
 0x002c55b4 FUN_002c55b4 between
 0x002c55c4 appletIsExitRequested between

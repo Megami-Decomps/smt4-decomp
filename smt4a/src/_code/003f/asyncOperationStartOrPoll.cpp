@@ -8,7 +8,7 @@ extern "C" {
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
 s32 svcCloseHandle(u32 handle);
 s32 FUN_00426204(void);
-s32 FUN_0017fd20(u32 *handle, s32 flags);
+s32 svcCreateEvent(u32 *handle, s32 flags);
 s32 FUN_0042632c(void *buffer);
 s32 resetFlag5891A4And6530(void);
 void FUN_004262e4(u32 *detail);
@@ -43,7 +43,7 @@ u32 asyncOperationStartOrPoll(ThreadHandleState *operation, s32 *result, u32 *de
         if (operation->handle != 0) {
             createResult = static_cast<s32>(0xe0a0183b);
         } else {
-            createResult = FUN_0017fd20(&handle, 0);
+            createResult = svcCreateEvent(&handle, 0);
             if (!nnResultIsFailure(createResult)) {
                 operation->handle = handle;
                 createResult = 0;

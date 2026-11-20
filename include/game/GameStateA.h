@@ -194,7 +194,7 @@ struct GameStateA {
     /* 0x2C2 */ s8 enemyModelCapacity;
     /* 0x2C3 */ s8 enemyApproachLevel;  /* row of the enemy approach-mode table (set to 0, 3 or a map record's byte 0x13) */
     /* 0x2C4 */ u32 unk2C4;
-    /* 0x2C8 */ u8 skipTransitionSnapshot;
+    /* 0x2C8 */ s8 skipTransitionSnapshot;
     /* 0x2C9 */ u8 unk2C9;
     /* 0x2CA */ u8 unk2CA[0x1E];
     /* 0x2E8 */ s32 unk2E8;

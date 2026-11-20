@@ -7,7 +7,7 @@ extern "C" {
 int aocThreadAllocateStorage(...);
 int asdOperatorNew(...);
 int resultHandleFailure(...);
-int FUN_002c52dc(...);
+int svcCreateSemaphore(...);
 int asdProcessCreateSimple(...);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 
@@ -26,7 +26,7 @@ extern int g_aocDisplay; /* 0x433130 */
 extern int FUN_00121fa0(int);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: resultHandleFailure. */
-/* Supplied declaration required: FUN_002c52dc. */
+/* Supplied declaration required: svcCreateSemaphore. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
@@ -66,7 +66,7 @@ void FUN_001070ac(void)
       asdProcessCreateSimple("Aoc fileload Calc",2,0);
       *(char **)(temp_v1 + 0x14) = pcVar3;
       temp_v2 = (romwright_code *)0x0;
-      FUN_002c52dc(&temp_v2,1,1);
+      svcCreateSemaphore(&temp_v2,1,1);
       if (-1 < (int)ppcVar4) {
         ppcVar4 = (romwright_code **)0x0;
         *(romwright_code **)(temp_v1 + 0x10) = temp_v2;

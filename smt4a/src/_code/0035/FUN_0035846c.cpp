@@ -1,5 +1,3 @@
-/* NON_MATCHING: only the first block differs: retail loads g_gameState's address twice (once for the
- * skip-flag test, once for the clear and the body), armcc loads it once. */
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 #include "map/mapMain.h"

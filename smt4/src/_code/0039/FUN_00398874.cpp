@@ -46,7 +46,7 @@ void FUN_00398874(CursorMenu *menu)
             buttonHelpSetPreset(151);
         }
         messageOwnerSetState(menu, 11);
-        timerStart(&menu->timer, 0, 0);
+        uiSpriteSetKeyframe(&menu->timer, 0, 0);
     }
     menu->timerValue = vec2GetXInt(&menu->timer);
 }

@@ -17,7 +17,7 @@ static __inline void statusDownEnter(StatusDownState *work, u32 next)
 void FUN_001ddbbc(void)
 {
     StatusDownState *work = g_statusDown;
-    timerStart(work->sprites, 1, 0);
+    uiSpriteSetKeyframe(work->sprites, 1, 0);
     statusDownEnter(g_statusDown, 1);
     work->nextState = 3;
 }

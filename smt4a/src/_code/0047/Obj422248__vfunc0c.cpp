@@ -1,6 +1,3 @@
-/* NON_MATCHING: the thread start (uniteStartThread's shape: argument by value, stack by reference) matches up to the
- * stack arguments: retail stores the 0 flags word on its own and the stack top, 17 and -2 with one stm; the build pairs
- * them differently. */
 #include "classes/Obj422248.h"
 #include "addon/aocMain.h"
 #include "nn/Result.h"
@@ -36,16 +33,21 @@ static __inline void aocStartWorkerThread(AocWorkerThread *thread, void (*entry)
     }
 }
 
+/* Starts the AOC worker thread on the first call; once it has finished, reports its result (0 or 100 with the
+ * failure) and moves to the done state. Otherwise the result is 1 (busy). */
 WindowStatusOperationResult Obj422248::vfunc0c(const void *)
 {
     WindowStatusOperationResult output(1);
     AocMain *manager = g_aocMain;
-    if (reserved == 0) {
+    switch (reserved) {
+    case 0: {
         reserved = 1;
         AocWorkerThread *thread = &manager->thread;
         aocStartWorkerThread(thread, FUN_00475700, this, *thread->stack, 0x11, -2);
-    } else {
-        if (reserved == 1 && threadTryJoinAndClose(&manager->thread) != 0) {
+        break;
+    }
+    case 1:
+        if (threadTryJoinAndClose(&manager->thread) != 0) {
             bool succeeded = !nnResultIsFailureBool(legacyResourceIdRemap(&result));
             if (succeeded) {
                 output.status = 0;
@@ -55,6 +57,7 @@ WindowStatusOperationResult Obj422248::vfunc0c(const void *)
             }
             reserved = 2;
         }
+        break;
     }
     return output;
 }

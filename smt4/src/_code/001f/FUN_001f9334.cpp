@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_00256550(unsigned int);
+int mapEnemyLoadExtraModel(unsigned int);
 int contentEntryGetE(void);
 int FUN_00267144(void);
 int clearFlags310To31F(void);
@@ -35,7 +35,7 @@ extern int g_lmapScene; /* 0x447e88 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_00256550. */
+/* Supplied declaration required: mapEnemyLoadExtraModel. */
 /* Supplied declaration required: contentEntryGetE. */
 /* Supplied declaration required: FUN_00267144. */
 extern int dataTableGetRecordFifty(void);
@@ -216,7 +216,7 @@ LAB_001f9924:
                       *(unsigned int *)(temp_v7 + 0x1a4) = 999;
                       *(int *)(temp_v7 + 0x1a8) = (int)pcVar9[0xe];
                       *(unsigned short *)(temp_v7 + 0x16e) = temp_v1;
-                      FUN_00256550(*(unsigned int *)(temp_v7 + 0x1a8));
+                      mapEnemyLoadExtraModel(*(unsigned int *)(temp_v7 + 0x1a8));
                       temp_v12 = 0;
                       *(int *)(temp_v7 + 0xac) = (int)pcVar9[0xb];
                       temp_v6 = *(int *)(g_lmapScene + 0x1c);
@@ -392,7 +392,7 @@ LAB_001f9924:
                 *(unsigned int *)(temp_v7 + 0x1a4) = 999;
                 *(int *)(temp_v7 + 0x1a8) = (int)pcVar9[0xe];
                 *(unsigned short *)(temp_v7 + 0x16e) = temp_v1;
-                FUN_00256550(*(unsigned int *)(temp_v7 + 0x1a8));
+                mapEnemyLoadExtraModel(*(unsigned int *)(temp_v7 + 0x1a8));
                 temp_v6 = *(int *)(g_lmapScene + 0x1c);
                 mathDistanceBetweenPoints();
                 *(int *)(temp_v7 + 0xac) = (int)pcVar9[0xb];

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0017fd20(...);
+int svcCreateEvent(...);
 int nn_os_LightEvent_Initialize(...);
 int resultHandleFailure(...);
 int FUN_002fb0d4(...);
@@ -33,7 +33,7 @@ extern unsigned int *DAT_006416ac; /* 0x6416ac */
 extern unsigned int *DAT_006416b0; /* 0x6416b0 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_0017fd20. */
+/* Supplied declaration required: svcCreateEvent. */
 /* Supplied declaration required: nn_os_LightEvent_Initialize. */
 /* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: FUN_002fb0d4. */
@@ -66,7 +66,7 @@ void FUN_0015a79c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   puVar5 = (unsigned char *)0xe0a0183b;
   puVar3 = puVar5;
   if ((DAT_006416ac == (unsigned int *)0x0) &&
-     (FUN_0017fd20(), puVar3 = (unsigned char *)ppuVar1, -1 < (int)ppuVar1)) {
+     (svcCreateEvent(), puVar3 = (unsigned char *)ppuVar1, -1 < (int)ppuVar1)) {
     DAT_006416ac = temp_v0;
     puVar3 = (unsigned char *)0x0;
   }
@@ -80,7 +80,7 @@ void FUN_0015a79c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   puVar3 = puVar5;
   DAT_006416ac = (unsigned int *)param_2;
   if ((DAT_006416a8 == (unsigned int *)0x0) &&
-     (FUN_0017fd20(&temp_v0,0), puVar3 = (unsigned char *)ppuVar2, -1 < (int)ppuVar2)) {
+     (svcCreateEvent(&temp_v0,0), puVar3 = (unsigned char *)ppuVar2, -1 < (int)ppuVar2)) {
     DAT_006416a8 = temp_v0;
     puVar3 = (unsigned char *)0x0;
   }
@@ -93,7 +93,7 @@ void FUN_0015a79c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v0 = (unsigned int *)0x0;
   DAT_006416a8 = (unsigned int *)param_3;
   if ((DAT_006416b0 == (unsigned int *)0x0) &&
-     (FUN_0017fd20(&temp_v0,0), puVar5 = (unsigned char *)ppuVar4, -1 < (int)ppuVar4)) {
+     (svcCreateEvent(&temp_v0,0), puVar5 = (unsigned char *)ppuVar4, -1 < (int)ppuVar4)) {
     puVar5 = (unsigned char *)0x0;
     DAT_006416b0 = temp_v0;
   }

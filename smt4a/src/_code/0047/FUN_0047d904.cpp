@@ -3,7 +3,7 @@
 
 extern "C" {
 
-int FUN_0017fd20(unsigned int *, int);
+int svcCreateEvent(unsigned int *, int);
 int resultHandleFailure(void);
 int FUN_00426204(void);
 int resetFlag5891A4And6530(void);
@@ -16,7 +16,7 @@ typedef struct {
 } param_3_stack;
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_0017fd20. */
+/* Supplied declaration required: svcCreateEvent. */
 /* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: FUN_00426204. */
 extern int FUN_00426264(unsigned char *, unsigned int *);
@@ -68,7 +68,7 @@ unsigned int FUN_0047d904(unsigned int *param_1,int *param_2,unsigned int *param
     }
     else {
       puVar3 = temp_v3;
-      FUN_0017fd20(puVar3,0);
+      svcCreateEvent(puVar3,0);
       if (-1 < (int)puVar3) {
         puVar3 = (unsigned int *)0x0;
         *param_1 = temp_v3[0];

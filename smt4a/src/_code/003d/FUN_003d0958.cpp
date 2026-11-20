@@ -10,7 +10,7 @@ s32 textureIdIsLoaded(s16 id);
 s32 padQueryLogicalKey(s32 first, s32 second);
 s32 uiSpriteAdvanceAnimation(ByteStateWork *sprite, f32 speed);
 void uiSpriteSetImageKeyframe(ByteStateWork *sprite, s32 keyframe, s32 frame);
-void rangeSelectionSelectEndpoint(ByteStateWork *sprite, s32 keyframe, s32 frame);
+void uiSpriteSetScaleKeyframe(ByteStateWork *sprite, s32 keyframe, s32 frame);
 void workSetStateByte(ByteStateWork *work, u8 state);
 void asdTMTexTableReleaseNode(s32 table, s32 index);
 /* Releases the downloadable texture resource mapped to a window texture id, if it has one. */
@@ -39,7 +39,7 @@ s32 FUN_003d0958(void)
                     workSetStateByte(&window->sprite, 1);
                 } else {
                     uiSpriteSetImageKeyframe(&window->sprite, 0, 0);
-                    rangeSelectionSelectEndpoint(&window->sprite, 0, 0);
+                    uiSpriteSetScaleKeyframe(&window->sprite, 0, 0);
                 }
                 window->phase = 1;
             }

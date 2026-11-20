@@ -1,5 +1,3 @@
-/* NON_MATCHING: retail returns 0 from the variant-1 guard through a branch to the shared `mov r0, #0; pop`;
- * the build pops directly with r0 already 0 (2 lines). Written as its proven sibling FUN_002b25a4. */
 #include "battle/BtlGlobals.h"
 #include "gamedata/GameDataAccess_Smt4a.h"
 #include "gamedata/GameDataAccess_VariantG.h"
@@ -22,17 +20,15 @@ s32 btlListIsKind9Available(void)
 
     switch (flagSelectVariant()) {
     case 1:
-        if (!FUN_002e2b38()) {
-            return false;
-        }
-        break;
-    case 2:
-        if (gameFlagIsSet(KIND9_VARIANT2_ALLOW_FLAG)) {
-            return true;
-        }
-        break;
+        if (FUN_002e2b38())
+            break;
+        /* fall through: the scenario guard rejected the entry */
     default:
         return false;
+    case 2:
+        if (gameFlagIsSet(KIND9_VARIANT2_ALLOW_FLAG))
+            return true;
+        break;
     }
 
     BtlMainStateA *battle = g_btlMain.state;

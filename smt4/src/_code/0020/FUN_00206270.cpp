@@ -13,7 +13,7 @@ void FUN_00206270(PlayScene *scene)
 {
     u32 value;
 
-    timerStart(&scene->timer, 0, 0);
+    uiSpriteSetKeyframe(&scene->timer, 0, 0);
     beginStatusPanelClose();
     scene->unk5918 = 4;
     gameGlobalsSetSubScreenActive(0);

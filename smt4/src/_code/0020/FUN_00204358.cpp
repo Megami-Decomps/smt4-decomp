@@ -25,7 +25,7 @@ int gameGetPlayerData(void);
 int buttonHelpSetPreset(...);
 int uiSlidingSpriteAdvance(int, int);
 int eventQueueAddUniqueIfValid(...);
-int timerStart(...);
+int uiSpriteSetKeyframe(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int uiSpriteAdvanceAnimation(...);
 int inputQueryButtonState(...);
 
@@ -69,7 +69,7 @@ extern unsigned short ifTouchRegionAddRequested(unsigned int, int);
 extern int buttonHelpGetStatus(void);
 /* Supplied declaration required: uiSlidingSpriteAdvance. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: timerStart. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern unsigned int dataTableGetCount(unsigned int);
@@ -117,7 +117,7 @@ void FUN_00204358(int param_1)
     temp_v10 = gameGetPlayerData();
     FUN_0029ede8(0x18,(unsigned int)*(unsigned char *)(temp_v10 + 0x76) -
                       (unsigned int)*(unsigned char *)(param_1 + *piVar15 * 0x620 + 0x36ce),0xffffffff,0);
-    timerStart(temp_v12,0);
+    uiSpriteSetKeyframe(temp_v12,0);
     temp_v10 = 0;
     do {
       temp_v1 = ifTouchRegionAddRequested(0x28,temp_v10 + 0xba);
@@ -468,7 +468,7 @@ LAB_002049f0:
     FUN_0029c424(0);
     temp_v5 = messageMainGetChoiceResult();
     if (temp_v5 == 0) {
-      timerStart(temp_v12,1,0);
+      uiSpriteSetKeyframe(temp_v12,1,0);
       *piVar16 = *piVar16 + 1;
       break;
     }

@@ -15,7 +15,7 @@ typedef struct {
     u8 widget[1];       /* 0x9f8 */
 } Screen;
 
-int timerStart(u8 *widget, int a, int b);
+int uiSpriteSetKeyframe(u8 *widget, int a, int b); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int uiSpriteInitializeState(u8 *widget, int a, int b, int c, u8 *source, int d, f32 scale);
 
 /* Resets the screen's state block and (re)creates its widget. */
@@ -27,7 +27,7 @@ void naviMainResetBlock(Screen *screen)
     screen->unk9ed = 0;
     screen->unk9ee = 0;
     uiSpriteInitializeState(screen->widget, 0x1c, 0x1121, 0x1d, screen->source, 0x15, 1.0f);
-    timerStart(screen->widget, 5, 0);
+    uiSpriteSetKeyframe(screen->widget, 5, 0);
 }
 
 } /* extern "C" */

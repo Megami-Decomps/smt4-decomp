@@ -179,7 +179,7 @@ void btlUiPartyDisplayInit(ActorCardAnimations *card, u32 unit)
     }
     uiSpriteStateInitFromSource(&card->guestFrame, 0x15, 0x5e, &card->resources, 6, 1.0f);
     if (btlActorIsDown(card->unit) && FUN_002b6ad0())
-        timerStart(&card->guestFrame, 13, 0);
+        uiSpriteSetKeyframe(&card->guestFrame, 13, 0);
     uiSpriteStateInitFromSource(&card->backdrop, 0x15, 0xdb, &card->resources, 6, 1.0f);
     spriteStartAnimationByIndex(&card->backdrop, 0);
     for (i = 0; i < 8; i++) {
@@ -193,7 +193,7 @@ void btlUiPartyDisplayInit(ActorCardAnimations *card, u32 unit)
     uiSpriteStateInitFromSource(&card->unk0624, 0x15, 0x96, &card->resources, 6, 1.0f);
     spriteStartAnimationByIndex(&card->unk0624, 3);
     uiSpriteStateInitFromSource(&card->unk06B0, 0x15, 0x9c, &card->resources, 6, 1.0f);
-    timerStart(&card->unk06B0, 6, 0);
+    uiSpriteSetKeyframe(&card->unk06B0, 6, 0);
     for (i = 0; i < 6; i++)
         uiSpriteStateInitFromSource(&card->unk0E58[i], 0x15, 0x72, &card->resources, 6, 1.0f);
     for (i = 0; i < 25; i++) {

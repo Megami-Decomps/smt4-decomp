@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail 56 vs built 56 rows; snapshot pointer registers and relocated global-base literals differ. */
 #include "map/mapMain.h"
 #include "game/GameStateA.h"
 #include "gamedata/MapSaveBlockA.h"

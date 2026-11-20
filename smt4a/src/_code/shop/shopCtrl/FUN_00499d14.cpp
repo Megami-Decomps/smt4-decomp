@@ -20,7 +20,7 @@ u32 gameGetPlayerData(void);
 s32 FUN_0033449c(s32 arg);
 s32 gameGlobalsQueueValues(u32 data, s32 arg);
 s32 FUN_00372100(u32 data, s32 arg);
-s32 FUN_00345718(void);
+s32 messageWindowStartTimer(void);
 s32 placeWinSetValue(s32 arg);
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 
@@ -44,7 +44,7 @@ void FUN_00499d14(Scene *scene)
     gameGlobalsQueueValues(player, 0);
     FUN_00372100(player, 0);
     scene->active = 1;
-    FUN_00345718();
+    messageWindowStartTimer();
     placeWinSetValue(0);
     if (scene->secondList == NULL) {
         list = static_cast<MoriModelContent *>(asdMemoryAllocTraced(0x20, "c:\\SMT4F\\SMT4F\\sdds4\\program\\shop\\shopCtrl.cpp", 1997));

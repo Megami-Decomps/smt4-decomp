@@ -1,20 +1,23 @@
-/* NON_MATCHING: the compiler places the shared successful return after the model query instead of before it and schedules the model-query arguments differently. */
+/* NON_MATCHING: retail computes the model index (`add r2, r4, #1`) after the owner and kind moves for the package lookup; the build computes it first. */
 #include "gamedata/DevilModel.h"
 #include "addon/aocMain.h"
+#include "addon/AocSystem.h"
 #include "shard/W6_W6Match3_NameFormState.h"
-
-struct AocModelStatus {
-    /* 0x00 */ u8 unk00[0x0D];
-    /* 0x0D */ u8 ready;
-};
 
 extern "C" {
 s32 btlTalkBustUpGetValue(void);
 s32 objGetFlagBit16(AocMain *main);
-AocModelStatus *packageFindFileRefByName(void *owner, s32 category, s32 model);
 
-// Report whether the portrait mode or requested add-on model is ready.
-u32 portraitModelIsReady(void *owner, u32 id)
+/* Returns the load completion of the kind-22 package file `index`, or 0 when it is missing (the same
+   lookup as aocResourceStateValueKind12/16, inlined here). */
+static __inline s32 aocResourceStateValueKind22(AocSystem *system, u32 index)
+{
+    AocPackageFile *file = packageFindFileRefByName(system, 22, index);
+    return file ? file->completion : 0;
+}
+
+/* Reports whether the portrait mode or requested add-on model is ready. */
+u32 portraitModelIsReady(AocSystem *system, u32 id)
 {
     s16 model = nkmEnemyFindById((u16)id)->portraitId;
     if (btlTalkBustUpGetValue()) {
@@ -23,8 +26,7 @@ u32 portraitModelIsReady(void *owner, u32 id)
     } else {
         if (aocJobIsValid())
             return 1;
-        AocModelStatus *status = packageFindFileRefByName(owner, 22, model + 1);
-        if (status != NULL && status->ready != 0)
+        if (aocResourceStateValueKind22(system, model + 1))
             return 1;
     }
     return 0;

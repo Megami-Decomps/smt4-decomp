@@ -35,9 +35,9 @@ void infoWindowCreate()
     drawParameterBlockClear(&work->parameters);
     paramsInit(&work->parameters, g_infoWindowDefaultParams, 0x24, 0, 0, 0, 0, 0, 0, 0, 0);
     uiSpriteStateInitFromSource(&work->background, 0xE, 0x87, &work->parameters, 1, 1.0f);
-    timerStart(&work->background, 0, 0);
+    uiSpriteSetKeyframe(&work->background, 0, 0);
     uiSpriteStateInitFromSource(&work->content, 0xE, 0x87, &work->parameters, 1, 1.0f);
-    timerStart(&work->content, 2, 0);
+    uiSpriteSetKeyframe(&work->content, 2, 0);
     void *text = asdTextCreate(0);
     work->text = text;
     asdTextSetBaseColor(text, 0xFFFFFFFF);

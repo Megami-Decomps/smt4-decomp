@@ -14,7 +14,7 @@ extern "C" void spriteStartAnimation(UiSpriteState *sprite, const SpriteAnimatio
     sprite->frameStep = 0;
     sprite->commandsRunning = 1;
     if (command->positionKey > -1)
-        timerStart(sprite, (s16)command->positionKey, command->positionReverse);
+        uiSpriteSetKeyframe(sprite, (s16)command->positionKey, command->positionReverse);
     if (sprite->commands->alphaKey > -1) {
         s16 key = sprite->commands->alphaKey;
         s8 reverse = sprite->commands->alphaReverse;

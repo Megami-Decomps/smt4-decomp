@@ -17,7 +17,7 @@ static void partyPanelCollapse(void)
     s32 i;
 
     panel->page ^= 1;
-    timerStart(&panel->sprites[PARTY_PANEL_SPRITE_PAGE], 5, 0);
+    uiSpriteSetKeyframe(&panel->sprites[PARTY_PANEL_SPRITE_PAGE], 5, 0);
     for (i = 0; i < 4; i++) {
         slotPlacementAssignSlotAndPosition(panel->characters[i], panel->page);
     }
@@ -34,7 +34,7 @@ static void partyPanelExpand(void)
     s32 i;
 
     panel->page ^= 1;
-    timerStart(&panel->sprites[PARTY_PANEL_SPRITE_PAGE], 4, 0);
+    uiSpriteSetKeyframe(&panel->sprites[PARTY_PANEL_SPRITE_PAGE], 4, 0);
     for (i = 0; i < 4; i++) {
         slotPlacementAssignSlotAndPosition(panel->characters[i], panel->page);
     }

@@ -197,7 +197,7 @@ u32 titleConfigUpdate(void)
             work->state = 2;
         } else if (inputQueryButtonState(1, 1)) {
             eventQueueAddUniqueIfValid(0x100016E);
-            timerStart(&work->window, 1, 0);
+            uiSpriteSetKeyframe(&work->window, 1, 0);
             g_titleConfigValues = work->saved;
             titleConfigApplyVolumes();
             work->state = 3;
@@ -210,7 +210,7 @@ u32 titleConfigUpdate(void)
         }
         switch (messageMainGetChoiceResult()) {
         case 0:
-            timerStart(&work->window, 1, 0);
+            uiSpriteSetKeyframe(&work->window, 1, 0);
             g_titleConfigValues.changed = 1;
             work->state = 3;
             break;

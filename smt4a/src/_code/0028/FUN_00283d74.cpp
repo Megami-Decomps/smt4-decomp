@@ -42,7 +42,7 @@ void gameFlagUnlockEntryById(s32 arg);
 void rosterAddUnit(s32 arg);
 void saveNameBlockReset(void);
 
-void FUN_003e45bc(s32 a, s32 b, s32 c);
+void appTryPurchase(s32 a, s32 b, s32 c);
 void popupMarkNewlySeenEntries(s32 arg);
 
 /* Sets up a new game when `loaded` is zero: the starting demon stock, the player record and name,
@@ -108,9 +108,9 @@ void FUN_00283d74(s32 loaded)
     gameFlagSetValue(0x40F, 0, 1);
     gameFlagSetValue(0x408, 0, 1);
     gameFlagSetValue(0x464, 0, 1);
-    FUN_003e45bc(0x18, 1, 0);
-    FUN_003e45bc(0x2E, 1, 0);
-    FUN_003e45bc(0x76, 1, 0);
+    appTryPurchase(0x18, 1, 0);
+    appTryPurchase(0x2E, 1, 0);
+    appTryPurchase(0x76, 1, 0);
     popupMarkNewlySeenEntries(1);
 }
 

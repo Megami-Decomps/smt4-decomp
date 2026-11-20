@@ -5,7 +5,7 @@
 extern "C" {
 
 int nn_os_CriticalSection_Initialize(...);
-int FUN_0019a300(...);
+int svcConnectToPort(...);
 int svcSleepThread(...);
 
 extern signed char DAT_005c0b10; /* 0x5c0b10 */
@@ -56,7 +56,7 @@ extern union romwright_storage_DAT_00646094_1_1 DAT_00646094; /* 0x646094 */
 
 extern unsigned int *FUN_00147268(void);
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
-/* Supplied declaration required: FUN_0019a300. */
+/* Supplied declaration required: svcConnectToPort. */
 /* Supplied declaration required: svcSleepThread. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -91,7 +91,7 @@ unsigned int * srvInitialize(void)
   }
   while( 1 ) {
     puVar1 = &DAT_005c0b18;
-    FUN_0019a300(&DAT_005c0b18,"srv:");
+    svcConnectToPort(&DAT_005c0b18,"srv:");
     temp_v0 = (unsigned int)puVar1 >> 0x1b;
     if (((unsigned int)puVar1 & 0x80000000) != 0) {
       temp_v0 = temp_v0 - 0x20;

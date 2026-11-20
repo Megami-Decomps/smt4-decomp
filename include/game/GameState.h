@@ -125,7 +125,7 @@ struct GameStateMapBlock {
     /* 0x7C */ s16 entryMinimum;
     /* 0x7E */ s16 enemyModelCapacity;
     /* 0x80 */ u32 departureMode;
-    /* 0x84 */ u8 unk84;
+    /* 0x84 */ s8 skipReturnSnapshot; /* set to skip the next return snapshot, which clears it */
     /* 0x85 */ u8 unk85[3];
     /* 0x88 */ void *scriptFile;
     /* 0x8C */ void *messageFile;

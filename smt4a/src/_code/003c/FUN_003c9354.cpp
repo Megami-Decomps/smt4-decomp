@@ -27,7 +27,7 @@ int unitRecordBuild(...);
 int uiScrollHandleActionsOrTouch(int, unsigned int, int, int);
 int skillHelpUpdateAttributeAndTarget(...);
 int screenStartOrClear(unsigned int, int);
-int FUN_003b0558(void);
+int partyPanelRemoveLastFusionParent(void);
 
 /* stack frame of param_3: 10 slot(s), 35 byte(s) */
 typedef struct {
@@ -68,7 +68,7 @@ extern int uiSearchPrimary(int);
 /* Supplied declaration required: skillHelpUpdateAttributeAndTarget. */
 /* Supplied declaration required: screenStartOrClear. */
 /* Supplied declaration required: FUN_0037e1b0. */
-/* Supplied declaration required: FUN_003b0558. */
+/* Supplied declaration required: partyPanelRemoveLastFusionParent. */
 extern int getUnlockedSlotCount(unsigned int *);
 
 
@@ -314,7 +314,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
           }
           else {
             *(unsigned int *)(param_1 + 0x40c) = 0x1e;
-            FUN_003b0558();
+            partyPanelRemoveLastFusionParent();
             FUN_0023b45c(0);
             FUN_00284ee4(1);
             temp_v2 = 1;

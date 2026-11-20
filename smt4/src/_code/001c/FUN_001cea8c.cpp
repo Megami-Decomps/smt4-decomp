@@ -106,7 +106,7 @@ extern unsigned short ifTouchRegionAddRequested(unsigned int, int);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int buttonHelpGetStatus(void);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: timerStart. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern int gameFlagIsSet(unsigned int);
@@ -381,7 +381,7 @@ void FUN_001cea8c(int param_1)
         }
         else {
           buttonHelpSetText(0,0x323232ff);
-          timerStart((UiSpriteState *)(param_1 + 0xac),1,0);
+          uiSpriteSetKeyframe((UiSpriteState *)(param_1 + 0xac),1,0);
           *piVar9 = *piVar9 + 1;
           if (*piVar25 == 3) {
             *(unsigned short *)(param_1 + *(int *)(param_1 + 0xd2c4) * 2 + 0xd134) = 0;
@@ -414,7 +414,7 @@ void FUN_001cea8c(int param_1)
   switch(temp_v15) {
   case 0:
     *(unsigned char *)(temp_v5 + 0x4b) = 1;
-    timerStart((UiSpriteState *)(param_1 + 0xac),4,0);
+    uiSpriteSetKeyframe((UiSpriteState *)(param_1 + 0xac),4,0);
     temp_v11 = *(unsigned int *)(temp_v6 + 0x34);
     temp_v17 = *(unsigned int *)(temp_v6 + 0x38);
     temp_v19 = *(unsigned int *)(temp_v6 + 0x3c);

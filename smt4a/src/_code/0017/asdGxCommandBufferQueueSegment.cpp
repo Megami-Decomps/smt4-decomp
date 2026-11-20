@@ -1,5 +1,7 @@
 /* NON_MATCHING: only the record address differs: retail folds it into a pre-indexed `strb r6, [r0, r1, lsl #2]!`
- * (the build adds first), which shifts the pool by one word. */
+ * (the build adds first), which shifts the pool by one word. Initialising the cursor in two steps
+ * (`entry = buffer->entries; entry += buffer->listCount;`) gives retail's code but is only a split of this
+ * statement (asdCmdBufferAppendCopyTransfer indexes the same way), so it is not written. */
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 struct CommandSegmentLink {
@@ -14,7 +16,7 @@ void globalCriticalSectionLeaveForward(void);
 void FUN_001963e0(void);
 
 /* Terminates the current GPU command segment, queues its descriptor and wakes the submitter when needed. */
-void FUN_0017d43c(void)
+void asdGxCommandBufferQueueSegment(void)
 {
     AsdCmdBuffer *buffer = g_asdGfxContext.cmdBuffer;
     u32 bytes = (u8 *)g_commandBufferCursor - buffer->start;
@@ -68,4 +70,4 @@ void FUN_0017d43c(void)
     }
     globalCriticalSectionLeaveForward();
 }
-}
+} /* extern "C" */

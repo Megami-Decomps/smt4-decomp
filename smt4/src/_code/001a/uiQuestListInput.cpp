@@ -109,7 +109,7 @@ void uiQuestListInput(void)
     if (static_cast<s32>(gridNavigationGetItemCount(cursor)) <= 0) {
         /* An empty list can only be left. */
         if (inputQueryButtonState(1, 1)) {
-            timerStart(&quest->sprites[0], 2, 0);
+            uiSpriteSetKeyframe(&quest->sprites[0], 2, 0);
             uiQuestEnterState(g_uiQuest, 3);
             eventQueueAddUniqueIfValid(QUEST_SE_CANCEL);
         }
@@ -131,7 +131,7 @@ void uiQuestListInput(void)
             if (quest->panelView.panel.nextSelection < 0)
                 quest->panelView.panel.nextSelection = quest->panelView.panel.page - 1;
             if (quest->panelView.panel.nextSelection != quest->panelView.panel.selection) {
-                timerStart(&quest->sprites[3], 3, 0);
+                uiSpriteSetKeyframe(&quest->sprites[3], 3, 0);
                 uiQuestEnterState(g_uiQuest, 5);
                 eventQueueAddUniqueIfValid(QUEST_SE_PAGE);
             }
@@ -142,7 +142,7 @@ void uiQuestListInput(void)
             if (quest->panelView.panel.nextSelection >= quest->panelView.panel.page)
                 quest->panelView.panel.nextSelection = 0;
             if (quest->panelView.panel.nextSelection != quest->panelView.panel.selection) {
-                timerStart(&quest->sprites[3], 2, 0);
+                uiSpriteSetKeyframe(&quest->sprites[3], 2, 0);
                 uiQuestEnterState(g_uiQuest, 5);
                 eventQueueAddUniqueIfValid(QUEST_SE_PAGE);
             }
@@ -228,7 +228,7 @@ void uiQuestListInput(void)
             eventQueueAddUniqueIfValid(QUEST_SE_DECIDE);
         } else if (!gameFlagIsSet(0x216) && inputQueryButtonState(1, 1)) {
             /* Leave the list. */
-            timerStart(&quest->sprites[0], 2, 0);
+            uiSpriteSetKeyframe(&quest->sprites[0], 2, 0);
             uiQuestEnterState(g_uiQuest, 3);
             if (quest->selectedId != 0) {
                 questClearOwnerModeBitsIfEligible(quest);

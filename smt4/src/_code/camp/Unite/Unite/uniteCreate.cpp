@@ -187,13 +187,13 @@ void uniteCreate(void)
     uiSpriteStateInitFromSource(&work->sprites.fade, 0x24, 0, &work->sprites.resources, 1, 1.0f);
     spriteStartAnimationByIndex(&work->sprites.fade, 0);
     uiSpriteStateInitFromSource(&work->sprites.slide, 0x24, 0, &work->sprites.resources, 1, 1.0f);
-    timerStart(&work->sprites.slide, 0, 0);
+    uiSpriteSetKeyframe(&work->sprites.slide, 0, 0);
     uiSpriteStateInitFromSource(&work->sprites.pulse, 0x24, 0, &work->sprites.resources, 1, 1.0f);
     spriteStartAnimationByIndex(&work->sprites.pulse, 1);
     uiSpriteStateInitFromSource(&work->sprites.open, 0x24, 0, &work->sprites.resources, 1, 1.0f);
-    timerStart(&work->sprites.open, 1, 0);
+    uiSpriteSetKeyframe(&work->sprites.open, 1, 0);
     uiSpriteStateInitFromSource(&work->sprites.listOffset, 0x24, 0, &work->sprites.resources, 1, 1.0f);
-    timerStart(&work->sprites.listOffset, 5, 0);
+    uiSpriteSetKeyframe(&work->sprites.listOffset, 5, 0);
     uiSpriteStateInitFromSource(&work->sprites.unk02E0, 0x24, 0, &work->sprites.resources, 1, 1.0f);
     spriteStartAnimationByIndex(&work->sprites.unk02E0, 2);
     uiSpriteStateInitFromSource(&work->sprites.unk036C, 0x24, 0, &work->sprites.resources, 1, 1.0f);

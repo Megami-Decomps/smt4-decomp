@@ -10,13 +10,13 @@ void campTimersStart(void)
     CampState *scene = g_camp;
     int i;
 
-    timerStart(&g_camp->sprites[0], 3, 0);
+    uiSpriteSetKeyframe(&g_camp->sprites[0], 3, 0);
     i = 0;
     do {
-        timerStart(&scene->sprites[5 + i], 3, 0);
+        uiSpriteSetKeyframe(&scene->sprites[5 + i], 3, 0);
         i++;
     } while (i < 8);
-    timerStart(&scene->sprites[4], 3, 0);
+    uiSpriteSetKeyframe(&scene->sprites[4], 3, 0);
 }
 
 } /* extern "C" */

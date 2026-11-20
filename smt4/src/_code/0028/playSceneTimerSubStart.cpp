@@ -6,7 +6,7 @@ extern "C" {
 
 void playSceneTimerSubStart(PlayScene *scene)
 {
-    timerStart(&scene->timerSub, 3, 0);
+    uiSpriteSetKeyframe(&scene->timerSub, 3, 0);
 }
 
 } /* extern "C" */

@@ -70,5 +70,5 @@ extern "C" void uiInitializeFourTimerSet(UiFourTimerSet *set)
     spriteSetVisible(&set->timers[1], 1);
     spriteStartAnimationByIndex(&set->timers[1], 1);
     uiSpriteStateInitFromSource(&set->timers[3], 0x14, 9, &set->resources, 0xb, 1.0f);
-    timerStart(&set->timers[3], 2, 0);
+    uiSpriteSetKeyframe(&set->timers[3], 2, 0);
 }

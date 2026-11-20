@@ -1,4 +1,5 @@
-/* NON_MATCHING: only the copy of the current stats into the initial ones differs: retail reloads the last stat halfword, armcc reuses the stored value. */
+/* NON_MATCHING: only the unit header stores differ: retail loads the saved id into r0 and the -1 selections into r1,
+ * the build the other way round. */
 #include "battle/UnitInitialization.h"
 #include "battle/btlUnit.h"
 #include "gamedata/PlayerInitialization.h"
@@ -40,14 +41,15 @@ void btlInitializeActivePartyUnits(BtlPartyInitializationStateIV *world)
             unit->selection[0] = -1;
             unit->selection[1] = -1;
             unit->statMode = 0;
-            unit->current.hp = saved->hp;
-            unit->current.maximumHp = saved->maximumHp;
-            unit->current.mp = saved->mp;
-            unit->current.maximumMp = saved->maximumMp;
+            BtlInitialStatSetIV *current = &unit->current;
+            current->hp = saved->hp;
+            current->maximumHp = saved->maximumHp;
+            current->mp = saved->mp;
+            current->maximumMp = saved->maximumMp;
             for (s32 index = 0; index < 5; ++index) {
-                unit->current.stats[index] = saved->stats[index];
+                current->stats[index] = saved->stats[index];
             }
-            unit->initial = unit->current;
+            unit->initial = *current;
             unit->points = saved->points;
             unit->pending[0] = 0;
             unit->pending[1] = 0;

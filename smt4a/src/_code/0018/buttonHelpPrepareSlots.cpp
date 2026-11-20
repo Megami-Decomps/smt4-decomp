@@ -6,7 +6,7 @@
 extern "C" {
 
 u16 FUN_0019d890(s32 table, s32 id);
-void rangeSelectionSelectEndpoint(UiSpriteState *unit, s32 arg, s32 flag);
+void uiSpriteSetScaleKeyframe(UiSpriteState *unit, s32 arg, s32 flag);
 void FUN_001a90e0(void *state);
 }
 
@@ -61,7 +61,7 @@ extern "C" void buttonHelpPrepareSlots(void)
     for (s32 i = 0; i < 4; i++) {
         if (work->mode != 1) {
             uiSpriteSetImageKeyframe(&work->panelSprites[i], 0, 0);
-            rangeSelectionSelectEndpoint(&work->panelSprites[i], 0, 0);
+            uiSpriteSetScaleKeyframe(&work->panelSprites[i], 0, 0);
         } else {
             uiSpriteSetImageKeyframe(&work->panelSprites[i], 0, 0);
             uiSpriteSetKeyframe(&work->panelSprites[i], 2, 0);

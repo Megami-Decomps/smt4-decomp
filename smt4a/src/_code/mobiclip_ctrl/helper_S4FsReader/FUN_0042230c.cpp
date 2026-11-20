@@ -34,7 +34,7 @@ extern S4ThreadStackBlock DAT_005880f8;
 
 void resultReportIfFailed(S4ThreadStack *stack, void *memory, u32 size);
 void nn_os_CriticalSection_Initialize(void *lock);
-s32 FUN_0017fd20(u32 *handle, u32 resetType); /* creates an event */
+s32 svcCreateEvent(u32 *handle, u32 resetType); /* creates an event */
 s32 FUN_002fb0d4(u32 *thread, const S4ThreadHooks *hooks, void (*entry)(void *), void *argument, u32 stackTop, u32 alignment, s32 priority, s32 affinity);
 void FUN_00422534(void *reader);
 void FUN_00514a74(void);
@@ -46,7 +46,7 @@ static void createEventOnce(u32 *slot)
     s32 result = (s32)0xE0A0183B; /* already created */
     u32 handle = 0;
     if (*slot == 0) {
-        result = FUN_0017fd20(&handle, 0);
+        result = svcCreateEvent(&handle, 0);
         if (nnResultIsSuccess(result)) {
             *slot = handle;
             result = 0;

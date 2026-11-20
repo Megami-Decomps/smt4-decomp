@@ -1,6 +1,6 @@
-/* NON_MATCHING: 28 lines, all scratch registers. Retail adds the three scroll-bar regions to the count as
- * `add r0, r1, #3` (the build: `add r1, r1, #3`) and, at each of the three places an app is appended to the list,
- * loads the count into r1 for the store and increments it from r0 into r1 (the build uses r0 throughout).
+/* NON_MATCHING: 4 lines, one register: retail adds the three scroll-bar regions to the count as `add r0, r1, #3`,
+ * the build as `add r1, r1, #3`. Three `touchRegionCount++` after the three registrations give retail's code but
+ * are only a split of this `+= 3` (one `++` after each registration is far off), so they are not written.
  * Apocalypse's twin is FUN_003ce598. */
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
 #include "ui/UiSpriteApi.h"
@@ -32,7 +32,7 @@ extern "C" {
 
 extern GauntletAppMenuWork *g_gauntletAppMenu;
 
-u32 FUN_00248738(GauntletAppMenuWork *menu, u32 mode);
+u32 gauntletAppMenuSetMode(GauntletAppMenuWork *menu, u32 mode);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 s32 ifTouchRegionAddRequested(u32 file, s32 index);
 u32 padIsButtonPressed(u32 button);
@@ -79,18 +79,56 @@ static __inline bool gauntletMenuIsForced(GauntletAppMenuWork *menu)
     return true;
 }
 
+/* Lists the apps the player can still buy: the forced one, or every app. */
+static __inline void gauntletBuildBuyableEntries(GauntletAppMenuWork *menu)
+{
+    menu->list.count = 0;
+    if (menu->list.forceFirst) {
+        u32 id = 0x2E;
+        if (!flagBitIsSet(id) && !appCheckPurchaseRequirements(id)) {
+            menu->list.entries[menu->list.count] = id;
+            menu->list.count++;
+        }
+    } else if (menu->list.forceSecond) {
+        u32 id = 0x18;
+        if (!flagBitIsSet(id) && !appCheckPurchaseRequirements(id)) {
+            menu->list.entries[menu->list.count] = id;
+            menu->list.count++;
+        }
+    } else {
+        for (u32 id = 1; id < 0x8D; id++) {
+            if (!flagBitIsSet(id) && !appCheckPurchaseRequirements(id)) {
+                menu->list.entries[menu->list.count] = id;
+                menu->list.count++;
+            }
+        }
+    }
+    gridNavigationConfigure(menu->list.controller, menu->list.count, 10, 1, 1, 1);
+}
+
+/* Appends every app the menu can show (on sale, and owned or not yet ruled out) to the list. */
+static __inline void gauntletAddAvailableEntries(GauntletAppMenuWork *menu)
+{
+    for (u32 id = 1; id < 0x8D; id++) {
+        if (appCostRecordFindById(id) != NULL && (flagBitIsSet(id) || appCheckPurchaseRequirements(id) != 2)) {
+            menu->list.entries[menu->list.count] = id;
+            menu->list.count++;
+        }
+    }
+}
+
 /* The top screen: buy or browse; -1 when the menu is left. */
 static s32 gauntletUpdateTop(GauntletAppMenuWork *menu)
 {
     if (padIsButtonPressed(0)) {
         switch (menu->list.selection) {
         case 0:
-            if (FUN_00248738(menu, 2)) {
+            if (gauntletAppMenuSetMode(menu, 2)) {
                 eventQueueAddUniqueIfValid(GAUNTLET_SE_DECIDE);
             }
             break;
         case 1:
-            if (FUN_00248738(menu, 3)) {
+            if (gauntletAppMenuSetMode(menu, 3)) {
                 eventQueueAddUniqueIfValid(GAUNTLET_SE_DECIDE);
             }
             break;
@@ -134,34 +172,13 @@ static s32 gauntletUpdateCategory(GauntletAppMenuWork *menu)
     } else if (padIsButtonPressed(0)) {
         if (appTryPurchase(gauntletCursorEntry(menu), 0, 0)) {
             eventQueueAddUniqueIfValid(GAUNTLET_SE_DECIDE);
-            menu->list.count = 0;
-            if (menu->list.forceFirst) {
-                u32 id = 0x2E;
-                if (!flagBitIsSet(id) && !appCheckPurchaseRequirements(id)) {
-                    menu->list.entries[menu->list.count] = id;
-                    menu->list.count++;
-                }
-            } else if (menu->list.forceSecond) {
-                u32 id = 0x18;
-                if (!flagBitIsSet(id) && !appCheckPurchaseRequirements(id)) {
-                    menu->list.entries[menu->list.count] = id;
-                    menu->list.count++;
-                }
-            } else {
-                for (u32 id = 1; id < 0x8D; id++) {
-                    if (!flagBitIsSet(id) && !appCheckPurchaseRequirements(id)) {
-                        menu->list.entries[menu->list.count] = id;
-                        menu->list.count++;
-                    }
-                }
-            }
-            gridNavigationConfigure(menu->list.controller, menu->list.count, 10, 1, 1, 1);
+            gauntletBuildBuyableEntries(menu);
             if (menu->list.count == 0) {
-                FUN_00248738(menu, 1);
+                gauntletAppMenuSetMode(menu, 1);
             }
         }
     } else if (padIsButtonPressed(1)) {
-        if (FUN_00248738(menu, 1)) {
+        if (gauntletAppMenuSetMode(menu, 1)) {
             eventQueueAddUniqueIfValid(GAUNTLET_SE_CANCEL);
         }
     }
@@ -183,14 +200,14 @@ static s32 gauntletUpdateList(GauntletAppMenuWork *menu)
             textEncodeFontSlot(0, reinterpret_cast<const u8 *>(dataTable0BFindById(id)));
             FUN_0029ede8(24, dataTable0BGetValueById(id), 0xFFFFFFFF, 0);
             scrScriptProcessStartEntry(menu->handle, 0);
-            FUN_00248738(menu, 4);
+            gauntletAppMenuSetMode(menu, 4);
             eventQueueAddUniqueIfValid(GAUNTLET_SE_DECIDE);
         } else {
             eventQueueAddUnique(GAUNTLET_SE_CANCEL);
         }
     } else if (inputQueryButtonState(1, 1)) {
         if (!gauntletMenuIsForced(menu)) {
-            FUN_00248738(menu, 7);
+            gauntletAppMenuSetMode(menu, 7);
             eventQueueAddUniqueIfValid(GAUNTLET_SE_CANCEL);
         }
     } else if (inputQueryButtonState(9, 1)) {
@@ -201,7 +218,7 @@ static s32 gauntletUpdateList(GauntletAppMenuWork *menu)
         useCounterAppendValue(0x16);
         useCounterAppendValue(3);
         useCounterStart();
-        FUN_00248738(menu, 6);
+        gauntletAppMenuSetMode(menu, 6);
     }
     return 0;
 }
@@ -219,7 +236,7 @@ s32 gauntletAppMenuUpdate(void)
         if (uiSlidingSpriteAdvance(reinterpret_cast<UiSpriteState *>(&menu->list.sprites[0]), 0)) {
             buttonHelpSetPreset(25);
             FUN_00242000(reinterpret_cast<MenuScreen *>(menu));
-            FUN_00248738(menu, 3);
+            gauntletAppMenuSetMode(menu, 3);
             for (s32 i = 0; i < 10; i++) {
                 if (i >= static_cast<s32>(gridNavigationGetItemCount(menu->list.controller))) {
                     break;
@@ -245,9 +262,9 @@ s32 gauntletAppMenuUpdate(void)
             if (messageMainGetChoiceResult() == 0) {
                 appTryPurchase(gauntletCursorEntry(menu), 0, 0);
                 eventQueueAddUnique(0x100025C);
-                FUN_00248738(menu, 5);
+                gauntletAppMenuSetMode(menu, 5);
             } else {
-                FUN_00248738(menu, 3);
+                gauntletAppMenuSetMode(menu, 3);
             }
             buttonHelpSetPreset(25);
         }
@@ -256,7 +273,7 @@ s32 gauntletAppMenuUpdate(void)
         /* The purchase animation; a forced choice closes the menu afterwards. */
         if (uiSpriteAdvanceAnimation(gauntletSprite(menu, 3))) {
             if (gauntletMenuIsForced(menu)) {
-                FUN_00248738(menu, 7);
+                gauntletAppMenuSetMode(menu, 7);
                 eventQueueAddUniqueIfValid(GAUNTLET_SE_CANCEL);
             } else {
                 s32 top = resourceRunOperationIfUnblocked(menu->list.controller);
@@ -272,19 +289,14 @@ s32 gauntletAppMenuUpdate(void)
                     menu->list.entries[0] = 0x76;
                     menu->list.count = 1;
                 } else {
-                    for (u32 id = 1; id < 0x8D; ++id) {
-                        if (appCostRecordFindById(id) != NULL && (flagBitIsSet(id) || appCheckPurchaseRequirements(id) != 2)) {
-                            menu->list.entries[menu->list.count] = id;
-                            ++menu->list.count;
-                        }
-                    }
+                    gauntletAddAvailableEntries(menu);
                 }
                 gridNavigationConfigure(menu->list.controller, menu->list.count, 10, 1, 1, 1);
                 gauntletAppSortMenuEntries();
                 scrollOwnerSetValue(menu->list.controller, top);
                 flaggedEntrySetValueA(reinterpret_cast<FlaggedEntry *>(menu->list.controller), row);
                 FUN_00242000(reinterpret_cast<MenuScreen *>(menu));
-                FUN_00248738(menu, 3);
+                gauntletAppMenuSetMode(menu, 3);
             }
         }
         break;
@@ -294,7 +306,7 @@ s32 gauntletAppMenuUpdate(void)
             useCounterRelease();
             buttonHelpSetPreset(25);
             FUN_00242000(reinterpret_cast<MenuScreen *>(menu));
-            FUN_00248738(menu, 3);
+            gauntletAppMenuSetMode(menu, 3);
         } else {
             gauntletAppSortMenuEntries();
         }

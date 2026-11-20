@@ -6666,7 +6666,7 @@
 0019e52c dataTable10FindValue
 004f59b0 btlGetMaxSlotMetric
 00230b9c statusDownSetSpriteMode
-0019e330 rangeSelectionSelectEndpoint
+0019e330 uiSpriteSetScaleKeyframe
 004834b0 enemySpawnChooseCandidates
 003b61ec commonBgStopChildAndBeginTransition
 00261440 saveGetIndexedFlagBytes
@@ -7758,3 +7758,16 @@
 003aef48 campCecEditChoiceListState
 0023d230 campSkillListDraw
 003692c0 bustupViewerDraw
+0026f3a0 partyPanelResetWidgets
+002ade88 partyPanelRefreshFusionAvailability
+004da344 fusionCheckPairAvailability
+003b0558 partyPanelRemoveLastFusionParent
+0028c2ec partyPanelRefreshSkillPreview
+003dc0c0 gauntletAppMenuSetMode
+003e45bc appTryPurchase
+00345718 messageWindowStartTimer
+0021b968 resultMarkUnitSlot
+0017d43c asdGxCommandBufferQueueSegment
+00372794 skillMenuCanCurrentUserUseSkill
+0019a300 svcConnectToPort
+0017fd20 svcCreateEvent

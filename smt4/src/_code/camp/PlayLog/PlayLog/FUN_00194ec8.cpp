@@ -33,7 +33,7 @@ extern void asdTMTexTableLoadEntryAsync(s32 table, s32 index);
 extern void fileSlotLoad(s32 id);
 extern void drawParameterBlockClear(void *params);
 extern void uiSpriteStateInitFromSource(PlayLogSprite *sprite, s32 group, s32 id, void *owner, s32 flags, f32 scale);
-extern void timerStart(PlayLogSprite *sprite, s32 animation, s32 flags);
+extern void uiSpriteSetKeyframe(PlayLogSprite *sprite, s32 animation, s32 flags); // declcheck: local (the shared declaration does not compile here or changes this unit)
 extern s32 gameCountersGetWord(u32 counter);
 extern void gridNavigationConfigure(u8 *list, s32 count, s32 columns, s32 a, s32 b, s32 c);
 
@@ -60,7 +60,7 @@ void FUN_00194ec8(void)
     paramsInit(&log->parameters, DAT_00402d04, 0x18, 0, 0, 0, 0, 0, 0, 0, 0);
     for (i = 0; i < 5; i++) {
         uiSpriteStateInitFromSource(&log->sprites[i], 0x30, 0, log, 1, 1.0f);
-        timerStart(&log->sprites[i], 0, 0);
+        uiSpriteSetKeyframe(&log->sprites[i], 0, 0);
     }
     shown = 0;
     for (i = 0; (u32)i < playLogRecords(&records); i++) {

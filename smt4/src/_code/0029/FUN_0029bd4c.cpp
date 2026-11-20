@@ -17,7 +17,7 @@ void FUN_0029bd4c(void)
     if (screen->track.state == 0) {
         return;
     }
-    timerStart(screen->sprites, 2, 0);
+    uiSpriteSetKeyframe(screen->sprites, 2, 0);
     status = g_statusDown;
     status->stateTimer = 0;
     previous = status->track.state;

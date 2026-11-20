@@ -1,6 +1,9 @@
 /* NON_MATCHING: 6 rows: the pool holds g_aocMain before g_aocJob where retail has them the other way round
- * (the two entry loads and their registers agree; the IV twin FUN_0019f3dc has the same difference). Retail's
- * `mov r0, #0` at 0x22600c is the inlined eventScriptFindCompletionFlag stub (config/inlined.txt). */
+ * (the two entry loads and their registers agree; IV's twin has the same difference). armcc numbers pool words in
+ * the order it generates the loads, before it moves one up to separate a load from its use: retail generated
+ * g_aocJob's first. Testing the busy bits in an inlined `static __inline bool aocMainIsBusy(const AocMain *main)`
+ * gives that order, but then the request and g_aocSystem swap r6 and r7 in state 0 (16 rows), so it is not used.
+ * Retail's `mov r0, #0` at 0x22600c is the inlined eventScriptFindCompletionFlag stub (config/inlined.txt). */
 #include <stdio.h>
 #include "event/EventScriptJob.h"
 #include "addon/aocMain.h"

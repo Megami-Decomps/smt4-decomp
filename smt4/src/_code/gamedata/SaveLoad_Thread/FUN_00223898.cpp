@@ -27,7 +27,7 @@ struct SaveLoadThreadWork {
     u32 semaphore;         // 0x4c
 };
 
-s32 FUN_002c52dc(u32 *out, u32 initialCount, u32 maxCount);
+s32 svcCreateSemaphore(u32 *out, u32 initialCount, u32 maxCount);
 s32 svcReleaseSemaphore(u32 *out, u32 semaphore, u32 releaseCount);
 s32 FUN_002cbe5c(s32 result);
 void *memAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, u32 alignment, u32 category);
@@ -44,7 +44,7 @@ void FUN_002d8f3c(void *);
 static __inline s32 createSemaphore(u32 *out, u32 initialCount, u32 maxCount)
 {
     u32 handle = 0;
-    s32 result = FUN_002c52dc(&handle, initialCount, maxCount);
+    s32 result = svcCreateSemaphore(&handle, initialCount, maxCount);
     if (!nnResultIsFailure(result)) {
         *out = handle;
         result = 0;

@@ -6,7 +6,7 @@
 
 extern "C" {
 u16 FUN_002aa024(s32 resource, s32 glyph);
-void rangeSelectionSelectEndpoint(UiSpriteState *unit, s32 state, s32 mode);
+void uiSpriteSetScaleKeyframe(UiSpriteState *unit, s32 state, s32 mode);
 void FUN_002ae028(void *animation);
 
 /* Rebuilds the button-help touch regions for the six slots, restarts the panel sprites and clears the touch flags. */
@@ -53,9 +53,9 @@ void buttonHelpRebuildTouchRegions(void)
     }
     for (s32 index = 0; index < 2; ++index) {
         if (work->mode == 1) {
-            timerStart(&work->panelSprites[index], 2, 0);
+            uiSpriteSetKeyframe(&work->panelSprites[index], 2, 0);
         } else {
-            rangeSelectionSelectEndpoint(&work->panelSprites[index], 0, 0);
+            uiSpriteSetScaleKeyframe(&work->panelSprites[index], 0, 0);
         }
     }
     memset(work->touchPressed, 0, sizeof(work->touchPressed));

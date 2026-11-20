@@ -9,16 +9,16 @@ int partyPanelHasSlotValue(...);
 int slotPlacementAssignSlotAndPosition(...);
 int scrollOwnerSelectIndex(...);
 int scrollListSetSelectionMarkChanged(...);
-int timerStart(...);
+int uiSpriteSetKeyframe(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
-int FUN_001d13b0(void);
+int partyPanelResetWidgets(void);
 int partyPanelRefreshItemPreview(void);
 int saveResolvePartySlot(...);
 int FUN_0026b7c0(void);
 int FUN_0026c654(...);
 int FUN_0026c710(...);
 int FUN_0026c868(void);
-int FUN_0026c9c0(void);
+int partyPanelRefreshFusionParents(void);
 int FUN_0026d144(...);
 int FUN_0026d3e0(...);
 int pair40Set(unsigned int, int);
@@ -29,7 +29,7 @@ int skillDataFindById(void);
 int itemTableGetItemRecord(void);
 int buttonHelpSetPreset(...);
 int __aeabi_memset4(int, int, int);
-int FUN_002e36f8(void);
+int partyPanelRefreshFilterMarks(void);
 int partyPanelFocusSelectedPartyMember(int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -40,14 +40,14 @@ typedef struct {
 extern int g_partyPanel; /* 0x43dcf0 */
 
 /* Supplied declaration required: partyPanelHasSlotValue. */
-/* Supplied declaration required: FUN_001d13b0. */
+/* Supplied declaration required: partyPanelResetWidgets. */
 /* Supplied declaration required: partyPanelRefreshItemPreview. */
 /* Supplied declaration required: saveResolvePartySlot. */
 /* Supplied declaration required: FUN_0026b7c0. */
 /* Supplied declaration required: FUN_0026c654. */
 /* Supplied declaration required: FUN_0026c710. */
 /* Supplied declaration required: FUN_0026c868. */
-/* Supplied declaration required: FUN_0026c9c0. */
+/* Supplied declaration required: partyPanelRefreshFusionParents. */
 /* Supplied declaration required: FUN_0026d144. */
 /* Supplied declaration required: FUN_0026d3e0. */
 /* Supplied declaration required: pair40Set. */
@@ -63,9 +63,9 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: itemTableGetItemRecord. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: timerStart. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: FUN_002e36f8. */
+/* Supplied declaration required: partyPanelRefreshFilterMarks. */
 /* Supplied declaration required: partyPanelFocusSelectedPartyMember. */
 
 
@@ -200,7 +200,7 @@ void FUN_0028a924(int param_1,unsigned int param_2,unsigned short param_3)
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 3);
     partyPanelFocusSelectedPartyMember(1);
-    FUN_001d13b0();
+    partyPanelResetWidgets();
     *(unsigned int *)(temp_v0 + 0x20) = 6;
     FUN_0026c868();
     if (*(int *)(temp_v0 + 0x1c) != 0x17) {
@@ -460,13 +460,13 @@ LAB_0028ad80:
     *(unsigned char *)(temp_v0 + 0xb40) = 0xff;
     *(unsigned char *)(temp_v0 + 0xb41) = 0xff;
     *(unsigned int *)(temp_v0 + 0xb3c) = 0;
-    FUN_0026c9c0();
+    partyPanelRefreshFusionParents();
     *(unsigned int *)(temp_v0 + 0x20) = 8;
     goto LAB_0028b264;
   case 0xb:
     *(short *)(temp_v0 + 0x36) = (short)param_2;
     *(unsigned short *)(temp_v0 + 0x38) = 0xffff;
-    FUN_002e36f8();
+    partyPanelRefreshFilterMarks();
     *(unsigned int *)(temp_v0 + 0x20) = 8;
     if (*(char *)(temp_v0 + 0x42) == '\0') {
       temp_v7 = 0xc4;
@@ -636,7 +636,7 @@ LAB_0028b668:
                 }
                 else {
                   *(unsigned int *)(g_partyPanel + 0x2c) = *(unsigned int *)(g_partyPanel + 0x2c) ^ 1;
-                  timerStart(temp_v2 + 0x180,5,0);
+                  uiSpriteSetKeyframe(temp_v2 + 0x180,5,0);
                   temp_v4 = 0;
                   do {
                     slotPlacementAssignSlotAndPosition(*(unsigned int *)(temp_v2 + temp_v4 * 4 + 0x6c8),
@@ -659,7 +659,7 @@ LAB_0028b668:
               }
               else {
                 *(unsigned int *)(g_partyPanel + 0x2c) = *(unsigned int *)(g_partyPanel + 0x2c) ^ 1;
-                timerStart(temp_v2 + 0x180,4,0);
+                uiSpriteSetKeyframe(temp_v2 + 0x180,4,0);
                 temp_v4 = 0;
                 do {
                   slotPlacementAssignSlotAndPosition(*(unsigned int *)(temp_v2 + temp_v4 * 4 + 0x6c8),

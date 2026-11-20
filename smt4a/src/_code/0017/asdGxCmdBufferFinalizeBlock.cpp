@@ -1,5 +1,3 @@
-/* NON_MATCHING: only r2 and r3 are swapped in the head (retail keeps the written byte count in r2 and the committed
- * offset in r3, then g_commandBufferEnd in r3); the rest matches. */
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 extern "C" {
 extern u32 *g_commandBufferCursor;
@@ -9,6 +7,7 @@ void globalCriticalSectionLeaveForward(void);
 void heapCloseOpenBlock(AsdCmdBuffer *buffer, AsdCmdRecord *record);
 void FUN_001963e0(void);
 
+/* Closes the current GPU command block and queues it for submission. */
 void asdGxCmdBufferFinalizeBlock(void)
 {
     AsdCmdBuffer *buffer = g_asdGfxContext.cmdBuffer;
@@ -16,10 +15,10 @@ void asdGxCmdBufferFinalizeBlock(void)
     buffer->writeOffset = bytes;
     if (buffer->committedOffset == bytes)
         return;
-    if (bytes & 8) {
-        buffer->writeOffset = bytes + 24;
+    if ((bytes & 8) != 0) {
+        buffer->writeOffset += 24;
     } else {
-        buffer->writeOffset = bytes + 32;
+        buffer->writeOffset += 32;
         if (g_commandBufferCursor < g_commandBufferEnd) {
             *g_commandBufferCursor++ = 0;
             *g_commandBufferCursor++ = 0x8025E;

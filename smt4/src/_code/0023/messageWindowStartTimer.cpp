@@ -12,11 +12,11 @@ u32 messageWindowStartTimer(int open)
     if (open != 0) {
         window->transition = 1;
         uiSpriteStateInitFromSource(&window->sprites[13], 0xE, 0, &window->parameters, 0xB, 1.0f);
-        timerStart(&window->sprites[13], 8, 0);
+        uiSpriteSetKeyframe(&window->sprites[13], 8, 0);
     } else {
         window->transition = 2;
         uiSpriteStateInitFromSource(&window->sprites[13], 0xE, 0, &window->parameters, 0xB, 1.0f);
-        timerStart(&window->sprites[13], 9, 0);
+        uiSpriteSetKeyframe(&window->sprites[13], 9, 0);
     }
     return 1;
 }

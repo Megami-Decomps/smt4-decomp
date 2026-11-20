@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0017fd20(void);
+int svcCreateEvent(void);
 int resultHandleFailure(void);
 int onlineHandleClose(int *);
 
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_0017fd20. */
+/* Supplied declaration required: svcCreateEvent. */
 extern int svcClearEvent(int);
 /* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: onlineHandleClose. */
@@ -39,7 +39,7 @@ void FUN_002ea458(int param_1,unsigned int param_2,unsigned int param_3,int para
     piVar1 = (int *)0xe0a0183b;
   }
   else {
-    FUN_0017fd20();
+    svcCreateEvent();
     if (-1 < (int)piVar1) {
       piVar1 = (int *)0x0;
       *piVar3 = temp_v1;

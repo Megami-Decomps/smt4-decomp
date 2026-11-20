@@ -1,0 +1,70 @@
+/* NON_MATCHING: 6 lines, one register choice. The widget flags are set through the one-instruction setters armlink
+ * inlined (partyWidgetSetTransitionPending, partyWidgetSetTransitionKind: inlined.txt rows). In the stock loop's
+ * id compare retail loads the stock demon's id into r1 and the excluded unit's into r0 (`cmp r1, r0`); the same
+ * trade as in Apocalypse's FUN_002ade88. */
+#include "ui/PartyPanelState.h"
+#include "gamedata/UnitStats.h"
+
+#include "gamedata/SaveSlotTableIV.h"
+#include "gamedata/UnitRecordAccess.h"
+
+extern "C" {
+const StatBlock *partyMemberFindById(u32 id); // declcheck: local (the shared declaration does not compile here or changes this unit)
+void __aeabi_memset4(void *destination, u32 size, s32 value);
+void partyWidgetSetTransitionPending(PartyPanelWidget *widget, u8 value);
+void partyWidgetSetTransitionKind(PartyPanelWidget *widget, u8 value);
+
+/* Resets which party rows and stock cells can be picked as a fusion parent: empty rows, demons with ailment
+ * bits 2 or 10 and the parents already picked are disabled. */
+void partyPanelRefreshFusionParents()
+{
+    PartyPanelState *work = g_partyPanel;
+    const SaveSlotTableIV *slots = gameGetSlotTable();
+    __aeabi_memset4(work->activeSlots, sizeof(work->activeSlots), 1);
+    for (s32 index = 0; index < 3; ++index) {
+        partyWidgetSetTransitionPending(work->characters[index + 1], 0);
+    }
+    for (s32 index = 0; index < 24; ++index) {
+        work->entries[index].available = 1;
+        partyWidgetSetTransitionPending(work->demons[index], 0);
+    }
+    work->activeSlots[0] = 0;
+    for (s32 index = 0; index < 3; ++index) {
+        if (slots->active[index] < 0) {
+            work->activeSlots[index + 1] = 0;
+        }
+    }
+    for (s32 index = 0; index < 24; ++index) {
+        s32 unit = work->entries[index].packedIndex;
+        if (unit < 0 || (((const StatBlock *)gameGetUnitRecord(unit))->ailments & 0x404) != 0) {
+            work->entries[index].available = 0;
+        }
+    }
+    for (s32 exclusion = 0; exclusion < work->fusionParentCount; ++exclusion) {
+        s32 id = work->fusionParentIds[exclusion];
+        if (id < 0) {
+            continue;
+        }
+        const StatBlock *excluded = partyMemberFindById((u16)id);
+        if (excluded == NULL) {
+            continue;
+        }
+        for (s32 index = 0; index < 3; ++index) {
+            s32 unit = slots->active[index];
+            if (unit >= 0 && gameGetUnitRecord(unit)->id == excluded->id) {
+                work->activeSlots[index + 1] = 0;
+                partyWidgetSetTransitionKind(work->characters[index + 1], 0);
+                partyWidgetSetTransitionPending(work->characters[index + 1], 1);
+            }
+        }
+        for (s32 index = 0; index < 24; ++index) {
+            s32 unit = work->entries[index].packedIndex;
+            if (unit >= 0 && gameGetUnitRecord(unit)->id == excluded->id) {
+                work->entries[index].available = 0;
+                partyWidgetSetTransitionKind(work->demons[index], 0);
+                partyWidgetSetTransitionPending(work->demons[index], 1);
+            }
+        }
+    }
+}
+}

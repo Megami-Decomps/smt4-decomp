@@ -71,7 +71,7 @@ typedef struct ResultWorkA {
     /* 0x7538 */ u32 unk7538;
     /* 0x753C */ u8 reserveMarkers[3];
     /* 0x753F */ u8 partyMarkers[24];
-    /* 0x7557 */ u8 markersPending;
+    /* 0x7557 */ s8 markersPending;
     /* 0x7558 */ s32 statPointTotal;            /* the points this level-up gives */
     /* 0x755C */ u8 unk755C[4];
     /* 0x7560 */ GridNavigation statList;       /* the stat rows' cursor */

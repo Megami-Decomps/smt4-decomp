@@ -128,7 +128,7 @@ void statusAcquireSharedResources(void)
     drawParameterBlockClear(reinterpret_cast<UiResourceParameters *>(workWords + 9));
     paramsInit(reinterpret_cast<UiResourceParameters *>(workWords + 9), sPositionKeys,sizeof(sPositionKeys),sAlphaKeys,sizeof(sAlphaKeys),0,0,0,0,sCommands,sizeof(sCommands));
     uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(workWords + 0xe3),0x17,0,reinterpret_cast<UiResourceParameters *>(workWords + 9),1,1.0f);
-    timerStart(reinterpret_cast<UiSpriteState *>(workWords + 0xe3),1,0);
+    uiSpriteSetKeyframe(reinterpret_cast<UiSpriteState *>(workWords + 0xe3),1,0);
     uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(workWords + 0x106),0x1a,1,reinterpret_cast<UiResourceParameters *>(workWords + 9),1,1.0f);
     spriteStartAnimationByIndex(reinterpret_cast<UiSpriteState *>(workWords + 0x106),0);
     uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(workWords + 0x129),0x1a,2,reinterpret_cast<UiResourceParameters *>(workWords + 9),1,1.0f);
@@ -136,17 +136,17 @@ void statusAcquireSharedResources(void)
     uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(workWords + 0x14c),0x1a,0,reinterpret_cast<UiResourceParameters *>(workWords + 9),1,1.0f);
     spriteStartAnimationByIndex(reinterpret_cast<UiSpriteState *>(workWords + 0x14c),2);
     uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(workWords + 0x16f),0x1a,0,reinterpret_cast<UiResourceParameters *>(workWords + 9),1,1.0f);
-    timerStart(reinterpret_cast<UiSpriteState *>(workWords + 0x16f),7,0);
+    uiSpriteSetKeyframe(reinterpret_cast<UiSpriteState *>(workWords + 0x16f),7,0);
     index = 0;
     do {
       uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(workWords + index * 0x23 + 0x1fb),0x1a,0,reinterpret_cast<UiResourceParameters *>(workWords + 9),1,1.0f);
-      timerStart(reinterpret_cast<UiSpriteState *>(workWords + index * 0x23 + 0x1fb),4,0);
+      uiSpriteSetKeyframe(reinterpret_cast<UiSpriteState *>(workWords + index * 0x23 + 0x1fb),4,0);
       uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(workWords + index * 0x23 + 0x359),0x1a,0,reinterpret_cast<UiResourceParameters *>(workWords + 9),1,1.0f);
-      timerStart(reinterpret_cast<UiSpriteState *>(workWords + index * 0x23 + 0x359),1,0);
+      uiSpriteSetKeyframe(reinterpret_cast<UiSpriteState *>(workWords + index * 0x23 + 0x359),1,0);
       index = index + 1;
     } while (index < 10);
     uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(workWords + 0x11),0x1a,0,reinterpret_cast<UiResourceParameters *>(workWords + 9),1,1.0f);
-    timerStart(reinterpret_cast<UiSpriteState *>(workWords + 0x11),6,0);
+    uiSpriteSetKeyframe(reinterpret_cast<UiSpriteState *>(workWords + 0x11),6,0);
     uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(workWords + 0x57),0x1a,0,reinterpret_cast<UiResourceParameters *>(workWords + 9),1,1.0f);
     uiSpriteSetImageKeyframe(reinterpret_cast<UiSpriteState *>(workWords + 0x57),4,0);
     uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(workWords + 0x7a),0x1a,0,reinterpret_cast<UiResourceParameters *>(workWords + 9),1,1.0f);
@@ -158,9 +158,9 @@ void statusAcquireSharedResources(void)
     uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(workWords + 0x34),0x1a,0,reinterpret_cast<UiResourceParameters *>(workWords + 9),1,1.0f);
     spriteStartAnimationByIndex(reinterpret_cast<UiSpriteState *>(workWords + 0x34),4);
     uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(workWords + 0x192),0x1a,0,reinterpret_cast<UiResourceParameters *>(workWords + 9),1,1.0f);
-    timerStart(reinterpret_cast<UiSpriteState *>(workWords + 0x192),8,0);
+    uiSpriteSetKeyframe(reinterpret_cast<UiSpriteState *>(workWords + 0x192),8,0);
     uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(workWords + 0x1b5),0x1a,0,reinterpret_cast<UiResourceParameters *>(workWords + 9),1,1.0f);
-    timerStart(reinterpret_cast<UiSpriteState *>(workWords + 0x1b5),9,0);
+    uiSpriteSetKeyframe(reinterpret_cast<UiSpriteState *>(workWords + 0x1b5),9,0);
     uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(workWords + 0x1d8),0x1a,0,reinterpret_cast<UiResourceParameters *>(workWords + 9),1,1.0f);
     spriteStartAnimationByIndex(reinterpret_cast<UiSpriteState *>(workWords + 0x1d8),5);
   }

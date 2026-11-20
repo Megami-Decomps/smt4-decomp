@@ -48,17 +48,17 @@ void *script = lmapSceneGetScript();
             statusCameraDestroy();
     }
     UiSpriteState *sprites = (UiSpriteState *)(state->unk0301 + 0x8b); // 0x38c
-    timerStart(&sprites[0], 5, 0);
+    uiSpriteSetKeyframe(&sprites[0], 5, 0);
     spriteStartAnimationByIndex(&sprites[1], 3);
     spriteStartAnimationByIndex(&sprites[2], 3);
     spriteStartAnimationByIndex(&sprites[3], 3);
-    timerStart(&sprites[4], 5, 0);
-    timerStart(&sprites[5], 5, 0);
-    timerStart(&sprites[6], 5, 0);
+    uiSpriteSetKeyframe(&sprites[4], 5, 0);
+    uiSpriteSetKeyframe(&sprites[5], 5, 0);
+    uiSpriteSetKeyframe(&sprites[6], 5, 0);
     spriteStartAnimationByIndex(&sprites[7], 3);
     for (s32 i = 0; i < 10; ++i) {
-        timerStart(&sprites[8 + i], 5, 0);
-        timerStart(&sprites[18 + i], 5, 0);
+        uiSpriteSetKeyframe(&sprites[8 + i], 5, 0);
+        uiSpriteSetKeyframe(&sprites[18 + i], 5, 0);
     }
     gameSetState(2);
 }

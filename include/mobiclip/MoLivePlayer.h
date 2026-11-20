@@ -65,9 +65,10 @@ struct PlayerArray {
     /* 0x0C */ u32 *capacity;
 };
 
-/* Four words, cleared on construction. */
+/* Four words (leading 64-bit value plus two words), cleared on construction. */
 struct PlayerQuad {
-    u32 a, b, c, d;
+    u64 first;
+    u32 c, d;
 };
 
 struct MessageHandler;

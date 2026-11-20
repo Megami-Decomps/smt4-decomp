@@ -55,7 +55,7 @@ u32 asdVramBGetFreeBytes(void);
 void uniteResultLoadTexture(UniteRenderTarget *target, u32 extent, u32 options, u32 width, u32 height);
 void statusBustUpPortraitAcquire(s32 id, u32 kind);
 
-void rangeSelectionSelectEndpoint(UiSpriteState *sprite, s32 a, s32 b);
+void uiSpriteSetScaleKeyframe(UiSpriteState *sprite, s32 a, s32 b);
 void spriteSetVisible(UiSpriteState *sprite, u8 visible);
 
 /* Starts the fusion-result screen: loads the result devils' textures, the stage model and camera
@@ -114,14 +114,14 @@ void uniteResultInitialize(void)
     paramsInit(&work->resources, sKeysFirst, 0x24, sKeysSecond, 0x30, sKeysThird, 0xc, NULL, 0, sUniteResultSpriteKeys, 0xe0);
     for (s32 i = 0; i <= 5; i++) {
         uiSpriteStateInitFromSource(&work->sprites[i], 0x24, 0, &work->resources, 1, 1.0f);
-        timerStart(&work->sprites[i], 0, 0);
+        uiSpriteSetKeyframe(&work->sprites[i], 0, 0);
     }
     for (s32 i = 6; i <= 9; i++) {
         uiSpriteStateInitFromSource(&work->sprites[i], 0x24, 0, &work->resources, 1, 1.0f);
         spriteStartAnimationByIndex(&work->sprites[i], 0);
     }
     uiSpriteInitializeState(&work->panel, 0x24, -1, 0x18, &work->resources, 0x65, 1.0f);
-    rangeSelectionSelectEndpoint(&work->panel, 0, 0);
+    uiSpriteSetScaleKeyframe(&work->panel, 0, 0);
     spriteSetLayer(&work->panel, 2);
     uiStoreTextureEntryCenter(reinterpret_cast<PointDeltaWork *>(&work->panel), 0x24, 0x21c);
     spriteSetVisible(&work->panel, 1);

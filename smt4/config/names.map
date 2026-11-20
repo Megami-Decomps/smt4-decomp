@@ -1482,7 +1482,7 @@
 002c1870 rt_memcmp
 002bfe28 mtx44Copy
 002be61c libc_sprintf
-002bd8e8 timerStart
+002bd8e8 uiSpriteSetKeyframe
 002b3abc nngxCheckVramBank
 00292f28 flagBitIsSet
 002c9e40 scrDestroyActive
@@ -5460,7 +5460,7 @@
 00298f88 dataTable1bOr1cRecordHasFlag1
 0029aafc countUnlockedSlots
 0029c1c8 dispatchIfFound
-002a9fdc rangeSelectionSelectEndpoint
+002a9fdc uiSpriteSetScaleKeyframe
 002aa624 heapCloseOpenBlock
 002ae8e4 aocLoadTextureNode
 002b2b64 ownerGetFloatValue
@@ -6058,3 +6058,9 @@
 003172e0 campCecEditChoiceListState
 003a21b8 shopDrawAppraisalRow
 0022f1b8 aocEntryIsKindTen
+001d13b0 partyPanelResetWidgets
+002e36f8 partyPanelRefreshFilterMarks
+0026c9c0 partyPanelRefreshFusionParents
+00248738 gauntletAppMenuSetMode
+00256550 mapEnemyLoadExtraModel
+002c52dc svcCreateSemaphore

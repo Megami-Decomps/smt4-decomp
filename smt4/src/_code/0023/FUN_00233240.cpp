@@ -12,7 +12,7 @@ typedef struct SpriteSetOwner {
 
 static __inline void spriteSetStart(UiSpriteState *sprite, s32 key)
 {
-    timerStart(sprite, key, 0);
+    uiSpriteSetKeyframe(sprite, key, 0);
 }
 
 /* Starts the animation of sprite `index`; sprite 2 starts through its own sequence. */

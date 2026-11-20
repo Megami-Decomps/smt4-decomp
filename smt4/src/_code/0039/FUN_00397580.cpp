@@ -15,7 +15,7 @@ int flaggedEntrySetValueB(int, int);
 int flaggedEntryGetValueA(int);
 int gridNavigationHandleConfirm(int, int);
 int eventQueueAddUniqueIfValid(int);
-int timerStart(int, int, int);
+int uiSpriteSetKeyframe(int, int, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int uiSpriteAdvanceAnimation(int);
 int FUN_003983dc(...);
 int FUN_00398fa8(void);
@@ -39,7 +39,7 @@ extern int inputConfirmPressed(void);
 /* Supplied declaration required: flaggedEntryGetValueA. */
 /* Supplied declaration required: gridNavigationHandleConfirm. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: timerStart. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: FUN_003983dc. */
 /* Supplied declaration required: FUN_00398fa8. */
@@ -115,7 +115,7 @@ void FUN_00397580(int param_1)
       if (*(char *)(param_1 + 0x29) != '\0') {
         *(unsigned char *)(param_1 + 0x21) = 2;
         messageOwnerSetState(param_1,10);
-        timerStart(param_1 + 0x708,1,0);
+        uiSpriteSetKeyframe(param_1 + 0x708,1,0);
         return;
       }
       temp_v7 = 0;

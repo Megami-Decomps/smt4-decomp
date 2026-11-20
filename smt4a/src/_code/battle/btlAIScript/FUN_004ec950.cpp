@@ -1,10 +1,18 @@
-/* NON_MATCHING: 10 diff lines left: the final command store materialises the constant 4 after the slot multiply where retail sets it before (register allocation; every other store/test shape tried disturbs the 64-bit mask tests) */
+/* NON_MATCHING: 10 lines, one schedule: the final command store loads the constant 4 after the slot multiply
+ * (retail before it, in r1, with the battle in r0). A `static __inline void set(BtlMainStateA *battle, s32 command)`
+ * that reaches the slot through a reference (`BtlActionSlotA &slot = g_btlAction.slots[battle->...currentSlot];
+ * slot.unit.command = command;`, the operation FUN_004eb838 and FUN_004eb740 repeat) compiles that store exactly
+ * as retail, but the menu-mask and target-mask tests then load their halves through other registers (14 lines at
+ * best over both operand orders of the four tests), so the closer form is kept.
+ * `cmd` is the unit (BtlUnitA: entry 0x20, data 0x28, targets 0x38) and `record` its data block; with
+ * BtlUnitDataA's signed actionKind/actionArg the function is 82 lines off, so the unsigned view stays here. */
 #include "battle/BattleUnitRecordState.h"
 #include "gamedata/GameFlags.h"
 #include "battle/BtlUiGlobal.h"
 #include "battle/BtlGlobals.h"
 
-/* What btlEntryBuildSummary reports about the unit's pending command. */
+/* unit-local: what btlEntryBuildSummary reports about the unit's pending command; Apocalypse's summary has
+ * no shared layout yet (IV's is battle/BattleEntrySummary.h: element 0x02, scope 0x1C). */
 struct BtlAiCommandInfo {
     /* 0x00 */ u8 unk00[2];
     /* 0x02 */ u16 kind;
@@ -13,14 +21,15 @@ struct BtlAiCommandInfo {
     /* 0x1d */ u8 unk1d[0x13];
 };
 
-/* The AI's per-unit scratch record (cmd->record). */
+/* unit-local: the unit's data block (BtlUnitDataA) as this function reads and writes it, the action kind and
+ * argument as unsigned halfwords (see the note above). */
 struct BtlAiRecord {
     /* 0x000 */ u8 unk000[0x1be];
     /* 0x1be */ u16 state;
     /* 0x1c0 */ u16 param;
 };
 
-/* The AI command being executed for a unit. */
+/* unit-local: the unit (BtlUnitA) with that view of its data block. */
 struct BtlAiCommand {
     /* 0x00 */ u8 unk00[0x20];
     /* 0x20 */ u32 commandId;

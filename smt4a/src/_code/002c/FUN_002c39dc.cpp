@@ -21,10 +21,10 @@ int __aeabi_memset4(int, int, int);
 int partyPanelChangeState(...);
 int FUN_0020d934(void);
 int gameGetSaveSlotData(...);
-int FUN_0026f3a0(void);
+int partyPanelResetWidgets(void);
 void partyPanelRefreshSelectedItemValues(void*, int);
-int FUN_0028c2ec(...);
-int FUN_002ade88(void);
+int partyPanelRefreshSkillPreview(...);
+int partyPanelRefreshFusionAvailability(void);
 int gameGlobalsSetOverlayActive(int);
 int partyPanelRefreshItemPreview(void);
 int FUN_002f8288(void);
@@ -55,14 +55,14 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: gameGetSaveSlotData. */
 /* Supplied declaration required: partyPanelHasSlotValue. */
 extern int FUN_0025e684(void);
-/* Supplied declaration required: FUN_0026f3a0. */
+/* Supplied declaration required: partyPanelResetWidgets. */
 /* Supplied declaration required: partyPanelRefreshSelectedItemValues. */
-/* Supplied declaration required: FUN_0028c2ec. */
+/* Supplied declaration required: partyPanelRefreshSkillPreview. */
 /* Supplied declaration required: listCursorGetRowOfChildIfUnblocked. */
 extern unsigned int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: scrollListSetSelectionTracked. */
-/* Supplied declaration required: FUN_002ade88. */
+/* Supplied declaration required: partyPanelRefreshFusionAvailability. */
 /* Supplied declaration required: gameGlobalsSetOverlayActive. */
 /* Supplied declaration required: FUN_002cb84c. */
 /* Supplied declaration required: partyPanelRefreshItemPreview. */
@@ -214,7 +214,7 @@ void FUN_002c39dc(int param_1,unsigned int param_2,unsigned short param_3)
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 3);
     FUN_00372570(1);
-    FUN_0026f3a0();
+    partyPanelResetWidgets();
     *(unsigned int *)(temp_v0 + 0x20) = 6;
     FUN_0020d934();
     if (*(int *)(temp_v0 + 0x1c) != 0x1b) {
@@ -493,7 +493,7 @@ LAB_002c4018:
         else {
           temp_v2 = temp_v0 + 0xd50;
         }
-        FUN_0028c2ec(temp_v2,0);
+        partyPanelRefreshSkillPreview(temp_v2,0);
       }
     }
     break;
@@ -505,7 +505,7 @@ LAB_002c4018:
     *(unsigned char *)(temp_v0 + 0xe88) = 0xff;
     *(unsigned char *)(temp_v0 + 0xe89) = 0xff;
     *(unsigned int *)(temp_v0 + 0xe84) = 0;
-    FUN_002ade88();
+    partyPanelRefreshFusionAvailability();
     *(unsigned int *)(temp_v0 + 0x20) = 8;
     goto LAB_002c45c0;
   case 0xb:

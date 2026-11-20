@@ -81,8 +81,8 @@ typedef struct BtlUnitA {
     /* 0x028 */ BtlUnitDataA *data;  /* the entry's data block (btlFindEntryBlockByMemberId) */
     /* 0x02C */ u16 id;
     /* 0x02E */ u8 unk02E[0xA];
-    /* 0x038 */ s8 targets[0x6D]; /* indexed by battle entry: 1 = selected as a target */
-    /* 0x0A5 */ u8 unk0A5[0x4EF];
+    /* 0x038 */ s8 targets[0x85]; /* indexed by battle entry: 1 = selected as a target */
+    /* 0x0BD */ u8 unk0BD[0x4D7];
     /* 0x594 */ u32 cameraMode;     /* the action's camera mode (FUN_004e69e8) */
     /* 0x598 */ u8 unk598[5];
     /* 0x59D */ s8 uiMode;          /* the command menu variant (dispatchBattleCommandUiVariant) */

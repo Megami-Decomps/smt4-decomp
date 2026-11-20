@@ -1,6 +1,11 @@
 /* NON_MATCHING: 20 lines. Retail pools 1.0f ahead of g_gauntletAppMenu (the build: after it), adds the three
  * scroll-bar regions to the count as `add r0, r1, #3` (the build: `add r1, r1, #3`) and loads the list count into r1
- * for both entry stores of the category screen (the build: r0), as FUN_003dc0c0's copy of that code also does. */
+ * for both entry stores of the category screen (the build: r0). Three stacked `touchRegionCount++` (a split of the
+ * `+= 3`, not written: steering) give the add in IV's twin; the category's list built by the static
+ * gauntletBuildBuyableEntries that gauntletAppMenuSetMode also inlines (IDENTICAL with it) gives retail's code at the second forced app and in
+ * the loop but leave the first forced app's store in r0, which stops the two forced stores from sharing a tail
+ * (124 lines), so they are not applied. A named `f32 step = 1.0f` gives retail's pool order but moves the app
+ * list's scroll call. */
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
 #include "ui/UiSpriteApi.h"
 #include "gamedata/GameFlags.h"
@@ -35,7 +40,7 @@ extern "C" {
 extern GauntletAppMenuWorkA *g_gauntletAppMenu;
 
 void sysPlaySe(u32 id);
-u32 FUN_003dc0c0(GauntletAppMenuWork *menu, u32 mode);
+u32 gauntletAppMenuSetMode(GauntletAppMenuWork *menu, u32 mode);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void campHideNumericBanner(void);
 void campResetScreen(void);
@@ -43,7 +48,7 @@ s32 ifTouchRegionAddRequested(u32 file, s32 index);
 u32 padButtonIsPressed(u32 button);
 s32 padQueryLogicalKey(s32 key, s32 mode);
 u8 gridNavigationHandleConfirm(void *list, s32 notify);
-u32 FUN_003e45bc(u32 id, s32 ignoreRequirements, s32 preview);
+u32 appTryPurchase(u32 id, s32 ignoreRequirements, s32 preview);
 u8 shopGetEntryAvailability(u32 id);
 void gridNavigationConfigure(void *list, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys);
 u32 uiScrollHandleActionsOrTouch(void *list, const TextureTableEntryIV *sprite, const s16 *rows, s32 thumb,
@@ -107,7 +112,7 @@ static s32 gauntletUpdateCategory(GauntletAppMenuWork *menu)
     if (gridNavigationHandleConfirm(menu->list.controller, 1)) {
         FUN_0021b1a8(reinterpret_cast<HelpMenu *>(menu));
     } else if (padButtonIsPressed(0)) {
-        if (FUN_003e45bc(gauntletCursorEntry(menu), 0, 0)) {
+        if (appTryPurchase(gauntletCursorEntry(menu), 0, 0)) {
             eventQueueAddUniqueIfValid(GAUNTLET_SE_DECIDE);
             menu->list.count = 0;
             if (menu->list.forceFirst) {
@@ -121,11 +126,11 @@ static s32 gauntletUpdateCategory(GauntletAppMenuWork *menu)
             }
             gridNavigationConfigure(menu->list.controller, menu->list.count, 10, 1, 1, 1);
             if (menu->list.count == 0) {
-                FUN_003dc0c0(menu, 1);
+                gauntletAppMenuSetMode(menu, 1);
             }
         }
     } else if (padButtonIsPressed(1)) {
-        if (FUN_003dc0c0(menu, 1)) {
+        if (gauntletAppMenuSetMode(menu, 1)) {
             eventQueueAddUniqueIfValid(GAUNTLET_SE_CANCEL);
         }
     }
@@ -153,11 +158,11 @@ static s32 gauntletUpdateList(GauntletAppMenuWorkA *menu)
         }
         menu->idleFrames = 0;
     } else if (padQueryLogicalKey(0, 1) || decide) {
-        if (FUN_003e45bc(id, 0, 1)) {
+        if (appTryPurchase(id, 0, 1)) {
             scrSetStringSlot(0, FUN_00186f54(id));
             entryTableResetAndInit(24, dataRecordGetValue(id), 0xFFFFFFFF, 0);
             scrScriptProcessStartEntry(menu->handle, 0);
-            FUN_003dc0c0(menu, 4);
+            gauntletAppMenuSetMode(menu, 4);
             eventQueueAddUniqueIfValid(GAUNTLET_SE_DECIDE);
             if (gameDataAreaBitTest(id)) {
                 gameDataArea28350SetBit(id, 0);
@@ -167,7 +172,7 @@ static s32 gauntletUpdateList(GauntletAppMenuWorkA *menu)
         }
     } else if (padQueryLogicalKey(1, 1)) {
         if (!gauntletMenuIsForced(menu)) {
-            FUN_003dc0c0(menu, 7);
+            gauntletAppMenuSetMode(menu, 7);
             eventQueueAddUniqueIfValid(GAUNTLET_SE_CANCEL);
         }
     } else if (padQueryLogicalKey(9, 1)) {
@@ -178,7 +183,7 @@ static s32 gauntletUpdateList(GauntletAppMenuWorkA *menu)
         useCounterAppendValue(0x16);
         useCounterAppendValue(3);
         useCounterStart();
-        FUN_003dc0c0(menu, 6);
+        gauntletAppMenuSetMode(menu, 6);
     } else if (padQueryLogicalKey(10, 1)) {
         if (areaConsumeOneShotFlags(id)) {
             eventQueueAddUniqueIfValid(GAUNTLET_SE_CANCEL);
@@ -194,12 +199,12 @@ static s32 gauntletUpdateTop(GauntletAppMenuWork *menu)
     if (padButtonIsPressed(0)) {
         switch (menu->list.selection) {
         case 0:
-            if (FUN_003dc0c0(menu, 2)) {
+            if (gauntletAppMenuSetMode(menu, 2)) {
                 eventQueueAddUniqueIfValid(GAUNTLET_SE_DECIDE);
             }
             break;
         case 1:
-            if (FUN_003dc0c0(menu, 3)) {
+            if (gauntletAppMenuSetMode(menu, 3)) {
                 eventQueueAddUniqueIfValid(GAUNTLET_SE_DECIDE);
             }
             break;
@@ -250,10 +255,10 @@ s32 gauntletAppMenuUpdate(void)
             FUN_0021b1a8(reinterpret_cast<HelpMenu *>(menu));
             if (gameFlagIsSet(GAUNTLET_FLAG_INTRODUCED) == 0) {
                 scrScriptProcessStartEntry(menu->handle, 1);
-                FUN_003dc0c0(menu, 8);
+                gauntletAppMenuSetMode(menu, 8);
                 campHideNumericBanner();
             } else {
-                FUN_003dc0c0(menu, 3);
+                gauntletAppMenuSetMode(menu, 3);
             }
             for (s32 i = 0; i < 10; i++) {
                 if (i >= gridNavigationGetItemCount(gauntletList(menu))) {
@@ -278,11 +283,11 @@ s32 gauntletAppMenuUpdate(void)
         /* The purchase question. */
         if (scrRunOpcodesStub(menu->handle) == 2) {
             if (messageGetChoiceResult() == 0) {
-                FUN_003e45bc(gauntletCursorEntry(menu), 0, 0);
+                appTryPurchase(gauntletCursorEntry(menu), 0, 0);
                 eventQueueAddUnique(0x1000308);
-                FUN_003dc0c0(menu, 5);
+                gauntletAppMenuSetMode(menu, 5);
             } else {
-                FUN_003dc0c0(menu, 3);
+                gauntletAppMenuSetMode(menu, 3);
             }
             msgWindowReset();
             messageBannerRestartOrClear();
@@ -293,7 +298,7 @@ s32 gauntletAppMenuUpdate(void)
         /* The purchase animation; a forced choice closes the menu afterwards. */
         if (uiSpriteAdvanceAnimation(gauntletSprite(menu, 3), 1.0f)) {
             if (gauntletMenuIsForced(menu)) {
-                FUN_003dc0c0(menu, 7);
+                gauntletAppMenuSetMode(menu, 7);
                 eventQueueAddUniqueIfValid(GAUNTLET_SE_CANCEL);
             } else {
                 s32 top = resourceRunOperationIfUnblocked(gauntletList(menu));
@@ -302,7 +307,7 @@ s32 gauntletAppMenuUpdate(void)
                 scrollOwnerSetValue(menu->list.controller, top);
                 flaggedEntrySetValueA(reinterpret_cast<FlaggedEntry *>(menu->list.controller), row);
                 FUN_0021b1a8(reinterpret_cast<HelpMenu *>(menu));
-                FUN_003dc0c0(menu, 3);
+                gauntletAppMenuSetMode(menu, 3);
             }
         }
         break;
@@ -312,7 +317,7 @@ s32 gauntletAppMenuUpdate(void)
             useCounterRelease();
             sysPlaySe(25);
             FUN_0021b1a8(reinterpret_cast<HelpMenu *>(menu));
-            FUN_003dc0c0(menu, 3);
+            gauntletAppMenuSetMode(menu, 3);
         } else {
             gauntletAppSortMenuEntries();
         }
@@ -330,7 +335,7 @@ s32 gauntletAppMenuUpdate(void)
             gameFlagSetValue(GAUNTLET_FLAG_INTRODUCED, 1, 1);
             campResetScreen();
             FUN_0021b1a8(reinterpret_cast<HelpMenu *>(menu));
-            FUN_003dc0c0(menu, 3);
+            gauntletAppMenuSetMode(menu, 3);
         }
         break;
     }

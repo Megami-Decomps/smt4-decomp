@@ -1,4 +1,5 @@
-/* NON_MATCHING: filename buffers start eight bytes later (retail keeps 8 spare bytes after them); flag-clear temp register and the id-store order differ. */
+/* NON_MATCHING: the flag clear's base registers and the request-id store are scheduled differently, and retail keeps
+ * the path base in its own register across the string lookup and the asynchronous load. */
 #include "runtime/Stdio.h"
 #include "gfx/VersionedTextureRequest.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
@@ -8,13 +9,21 @@ char *libc_strcpy(char *, const char *);
 void asdMemFree(const void *);
 void memClear(void *, u32);
 s32 keyedRecordFindByName(const char *);
-char *libc_strrchr(char *, s32);
+const u8 *libc_strrchr(const u8 *, u32);
 extern const char DAT_004008c4[];
 
-// Replace the pending effect request, reusing a cached effect when its filename is known.
+/* Twin of fileNameFromPath in smt4 FUN_003dbb40 and smt4a effectRequestByName. */
+static __inline const char *fileNameFromPath(const char *path)
+{
+    const u8 *separator = libc_strrchr((const u8 *)path, '/');
+    return (const char *)(separator + 1);
+}
+
+/* Replace the pending effect request, reusing a cached effect when its filename is known. */
 u32 effectRequestByName(VersionedTextureOwner *owner, const char *effect)
 {
-    owner->flags &= ~0x30000;
+    owner->flags &= ~0x10000;
+    owner->flags &= ~0x20000;
     VersionedTextureRequest *request = &owner->request;
     request->id = 0xff;
     memClear(owner->request.name, sizeof(request->name));
@@ -28,9 +37,9 @@ u32 effectRequestByName(VersionedTextureOwner *owner, const char *effect)
     memClear(formatted, 0x80);
     __2sprintf(formatted, DAT_004008c4, effect);
     libc_strcpy(path, formatted);
-    libc_strcpy(request->name, libc_strrchr(path, '/') + 1);
+    libc_strcpy(request->name, fileNameFromPath(path));
     if (keyedRecordFindByName(request->name) == 0xff) {
-        asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&request->format), 0);
+        asdLoadFileAsyncSimple(path, (u32 *)&request->format, 0);
         request->flags |= 1;
     }
     return 1;

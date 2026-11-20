@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0017fd20(...);
+int svcCreateEvent(...);
 int nn_os_CriticalSection_Initialize(...);
 int nn_os_LightEvent_Initialize(...);
 int FUN_001a2420(...);
@@ -31,7 +31,7 @@ extern unsigned char LAB_00100ded; /* 0x100ded */
 extern unsigned char LAB_00100df3; /* 0x100df3 */
 extern int FUN_001a26e4(...); /* 0x1a26e4 */
 
-/* Supplied declaration required: FUN_0017fd20. */
+/* Supplied declaration required: svcCreateEvent. */
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 extern int nngxCheckVramBank(void);
 /* Supplied declaration required: nn_os_LightEvent_Initialize. */
@@ -78,7 +78,7 @@ void FUN_0018b28c(int param_1)
     puVar1 = (unsigned char *)0xe0a0183b;
   }
   else {
-    FUN_0017fd20(&temp_v2,0);
+    svcCreateEvent(&temp_v2,0);
     if (-1 < (int)puVar1) {
       puVar1 = (unsigned char *)0x0;
       *(unsigned int *)(param_1 + 0x2c) = temp_v2;

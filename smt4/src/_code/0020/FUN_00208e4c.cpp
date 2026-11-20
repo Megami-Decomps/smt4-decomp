@@ -97,7 +97,7 @@ static float romwright_fabs_4(float value)
 extern int FUN_00253968(char *);
 extern int mapEnemyIsClosestMarkedByAdjustedDistance(char *);
 /* Supplied declaration required: FUN_00253c70. */
-extern int FUN_00256550(unsigned int);
+extern int mapEnemyLoadExtraModel(unsigned int);
 /* Supplied declaration required: mapCollisionRaySegmentTest. */
 /* Supplied declaration required: vec4Forward. */
 extern int spriteTemplateGetPreferredDevilId(void);
@@ -1481,7 +1481,7 @@ joined_r0x0020ae6c:
                 temp_v4 = 1;
                 *(unsigned int *)(temp_v3 + 0x1a8) = 1;
               }
-              temp_v8 = FUN_00256550(temp_v4);
+              temp_v8 = mapEnemyLoadExtraModel(temp_v4);
             } while (temp_v8 == 0);
             *(unsigned int *)(temp_v3 + 0x3c) = *(unsigned int *)(temp_v3 + 0x48);
             *(unsigned int *)(temp_v3 + 0x40) = *(unsigned int *)(temp_v3 + 0x4c);

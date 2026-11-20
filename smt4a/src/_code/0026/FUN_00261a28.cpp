@@ -23,7 +23,7 @@ int gameDataBlocksSetFlagBits(...);
 int FUN_00363c58(int);
 int FUN_003df7c4(...);
 int playerSyncPair2AOnce(void);
-int FUN_003e45bc(...);
+int appTryPurchase(...);
 void partySlotClearInactiveFlag(unsigned int);
 int FUN_003fd5bc(...);
 
@@ -97,7 +97,7 @@ extern int gameDataBlocksValueGet(void);
 /* Supplied declaration required: FUN_00363c58. */
 /* Supplied declaration required: FUN_003df7c4. */
 /* Supplied declaration required: playerSyncPair2AOnce. */
-/* Supplied declaration required: FUN_003e45bc. */
+/* Supplied declaration required: appTryPurchase. */
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: partySlotClearInactiveFlag. */
 extern int partyGetSlot(unsigned int);
@@ -351,7 +351,7 @@ void FUN_00261a28(const u8 *options)
   *(unsigned int *)(temp_v0 + 0x21e44) = *(unsigned int *)(temp_v1 + 0x21e44);
   do {
     if (temp_v18[temp_v5] != '\0') {
-      FUN_003e45bc(temp_v5 + 0x77,1,0);
+      appTryPurchase(temp_v5 + 0x77,1,0);
     }
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 8);

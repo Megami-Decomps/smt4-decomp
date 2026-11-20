@@ -37,7 +37,7 @@ void FUN_001e1104(Panel *panel, s32 style, u8 flagB, u8 flagA)
     pairSetSecondResetFirst(&panel->animB, 0);
     spriteStartAnimationByIndex(&panel->animB, 1);
     pairSetFirstResetSecond(&panel->timer, 9);
-    timerStart(&panel->timer, 2, 0);
+    uiSpriteSetKeyframe(&panel->timer, 2, 0);
     } else if (style == 1) {
     pairSetFirstResetSecond(&panel->animA, 42);
     spriteStartAnimationByIndex(&panel->animA, 0);
@@ -46,7 +46,7 @@ void FUN_001e1104(Panel *panel, s32 style, u8 flagB, u8 flagA)
     pairSetSecondResetFirst(&panel->animB, 1);
     spriteStartAnimationByIndex(&panel->animB, 1);
     pairSetFirstResetSecond(&panel->timer, 10);
-    timerStart(&panel->timer, 2, 0);
+    uiSpriteSetKeyframe(&panel->timer, 2, 0);
     }
     panel->phase = 0;
     panel->step = 2;

@@ -53,7 +53,7 @@ int communicationBeginTransition(...);
 int communicationSetResultPointer(void);
 int btlUiPanelFadeInWhenReady(...);
 int FUN_0026c868(void);
-int FUN_0026c9c0(void);
+int partyPanelRefreshFusionParents(void);
 int obj48Arm(...); // declcheck: local (romwright prototype; the shared declaration in code/Code0029_Smt4.h does not compile here: more than one instance of overloaded function "FUN_0029c4e4" has "C" linkage)
 int scrScriptProcessStartEntry(...);
 int FUN_00298d28(...);
@@ -136,7 +136,7 @@ extern int gameGetNavigationState(void);
 /* Supplied declaration required: communicationSetResultPointer. */
 /* Supplied declaration required: btlUiPanelFadeInWhenReady. */
 /* Supplied declaration required: FUN_0026c868. */
-/* Supplied declaration required: FUN_0026c9c0. */
+/* Supplied declaration required: partyPanelRefreshFusionParents. */
 /* Supplied declaration required: FUN_0026cba4. */
 /* Supplied declaration required: partyPanelHandleCursorEdgeInput. */
 /* Supplied declaration required: FUN_0026cf4c. */
@@ -230,7 +230,7 @@ extern int ifTouchGetSelectionMode(void);
 /* Supplied declaration required: uiSlidingSpriteAdvance. */
 /* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: timerStart. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: inputQueryButtonState. */
@@ -318,20 +318,20 @@ unsigned int FUN_001c3fd4(void)
     if (temp_v6 < 0) {
       temp_v6 = 0;
       do {
-        timerStart((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),8,0);
+        uiSpriteSetKeyframe((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),8,0);
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < 4);
-      timerStart((UiSpriteState *)temp_v5,8,0);
+      uiSpriteSetKeyframe((UiSpriteState *)temp_v5,8,0);
     }
     else {
       temp_v6 = gameGetFlagByte12e8();
       if (0 < temp_v6) {
         temp_v6 = 0;
         do {
-          timerStart((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),7,0);
+          uiSpriteSetKeyframe((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),7,0);
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < 4);
-        timerStart((UiSpriteState *)temp_v5,7,0);
+        uiSpriteSetKeyframe((UiSpriteState *)temp_v5,7,0);
       }
     }
     if (*(char *)(temp_v1 + 0x66c) == '\v') {
@@ -409,13 +409,13 @@ joined_r0x001c43a0:
       temp_v6 = FUN_002015a4();
       if (temp_v6 < 0) {
         *(unsigned int *)(temp_v1 + 0x2c) = *(unsigned int *)(temp_v1 + 0x2c) ^ 1;
-        timerStart((UiSpriteState *)(temp_v1 + 0x180),4,0);
+        uiSpriteSetKeyframe((UiSpriteState *)(temp_v1 + 0x180),4,0);
       }
       else {
         temp_v6 = FUN_002015a4();
         if (0 < temp_v6) {
           *(unsigned int *)(temp_v1 + 0x2c) = *(unsigned int *)(temp_v1 + 0x2c) ^ 1;
-          timerStart((UiSpriteState *)(temp_v1 + 0x180),5,0);
+          uiSpriteSetKeyframe((UiSpriteState *)(temp_v1 + 0x180),5,0);
         }
       }
       temp_v14 = 0;
@@ -1385,7 +1385,7 @@ LAB_001c6598:
                       temp_v6 = gameGetUnitRecord((int)*(char *)(temp_v4 + temp_v6 + 0x9107));
                       *(unsigned int *)(temp_v1 + *piVar17 * 4 + 0xb34) = (unsigned int)*(unsigned short *)(temp_v6 + 0x46);
                       *piVar17 = *piVar17 + 1;
-                      FUN_0026c9c0();
+                      partyPanelRefreshFusionParents();
                       FUN_0026c868();
                       temp_v6 = *piVar17;
                       if (temp_v6 >= 2) {
@@ -1403,7 +1403,7 @@ LAB_001c6598:
                           __aeabi_memset4(temp_v4 + 0x67c,0x3c,0xffffffff);
                           temp_v6 = 0;
                           do {
-                            timerStart((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),7,0);
+                            uiSpriteSetKeyframe((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),7,0);
                             temp_v6 = temp_v6 + 1;
                           } while (temp_v6 < 4);
                           goto LAB_001c5c34;
@@ -1558,7 +1558,7 @@ LAB_001c653c:
                       temp_v6 = gameGetUnitRecord(*(unsigned int *)(temp_v6 + 0x738));
                       *(unsigned int *)(temp_v1 + *piVar17 * 4 + 0xb34) = (unsigned int)*(unsigned short *)(temp_v6 + 0x46);
                       *piVar17 = *piVar17 + 1;
-                      FUN_0026c9c0();
+                      partyPanelRefreshFusionParents();
                       FUN_0026c868();
                       temp_v6 = *piVar17;
                       if (temp_v6 >= 2) {
@@ -1576,11 +1576,11 @@ LAB_001c653c:
                           __aeabi_memset4(temp_v4 + 0x67c,0x3c,0xffffffff);
                           temp_v6 = 0;
                           do {
-                            timerStart((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),7,0);
+                            uiSpriteSetKeyframe((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),7,0);
                             temp_v6 = temp_v6 + 1;
                           } while (temp_v6 < 4);
 LAB_001c5c34:
-                          timerStart((UiSpriteState *)temp_v5,7,0);
+                          uiSpriteSetKeyframe((UiSpriteState *)temp_v5,7,0);
                           buttonHelpSetPreset(0x5d);
                           *(unsigned char *)(temp_v1 + 0xb42) = 2;
                           *(unsigned int *)(temp_v1 + 0x20) = 0xb;
@@ -1651,11 +1651,11 @@ LAB_001c6680:
                 __aeabi_memset4(temp_v6 + 0x67c,0x3c,0xffffffff);
                 temp_v6 = 0;
                 do {
-                  timerStart((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),7,0);
+                  uiSpriteSetKeyframe((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),7,0);
                   temp_v6 = temp_v6 + 1;
                 } while (temp_v6 < 4);
-                timerStart((UiSpriteState *)temp_v5,7,0);
-                FUN_0026c9c0();
+                uiSpriteSetKeyframe((UiSpriteState *)temp_v5,7,0);
+                partyPanelRefreshFusionParents();
                 buttonHelpSetPreset(0x5d);
                 messageMainFinishWindow();
                 FUN_0029dfc0(0);
@@ -1670,7 +1670,7 @@ LAB_001c6680:
               *(unsigned char *)(*(int *)(temp_v1 + 0xb3c) + temp_v1 + 0xb40) = 0xff;
               *(unsigned int *)(temp_v1 + *(int *)(temp_v1 + 0xb3c) * 4 + 0xb34) = 0xffffffff;
               *(int *)(temp_v1 + 0xb3c) = *(int *)(temp_v1 + 0xb3c) - 1;
-              FUN_0026c9c0();
+              partyPanelRefreshFusionParents();
               temp_v6 = 0;
               if (*(char *)(*(int *)(temp_v1 + 0xb3c) + temp_v1 + 0xb40) == '\0') {
                 do {
@@ -1752,7 +1752,7 @@ LAB_001c6680:
       if (!(temp_v0 == '\t' || temp_v0 == '\b')) {
         if ((!(temp_v0 == '\x06' || temp_v0 == '\x05')) && (!(temp_v0 == '\a' || temp_v0 == '\x02'))) {
           if (temp_v0 == '\n') {
-            FUN_0026c9c0();
+            partyPanelRefreshFusionParents();
           }
         }
         else {
@@ -2005,14 +2005,14 @@ LAB_001c6d98:
             FUN_0026d670();
             temp_v6 = 0;
             do {
-              timerStart((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),4,0);
+              uiSpriteSetKeyframe((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),4,0);
               temp_v6 = temp_v6 + 1;
             } while (temp_v6 < 4);
             if (*(char *)(temp_v1 + 0x42) != '\0') {
-              timerStart((UiSpriteState *)temp_v5,6,0);
+              uiSpriteSetKeyframe((UiSpriteState *)temp_v5,6,0);
             }
             else {
-              timerStart((UiSpriteState *)temp_v5,4,0);
+              uiSpriteSetKeyframe((UiSpriteState *)temp_v5,4,0);
             }
             buttonHelpSetText(0,0x323232ff);
             FUN_0026c214();
@@ -2066,7 +2066,7 @@ joined_r0x001c7220:
                   temp_v24 = temp_v24 + 1;
                 } while (temp_v24 < 0x18);
               }
-              FUN_0026c9c0();
+              partyPanelRefreshFusionParents();
               FUN_0029e890(2,0);
               FUN_0029dfc0(0);
               FUN_0029bd4c();
@@ -2074,14 +2074,14 @@ joined_r0x001c7220:
               FUN_0029c4ac(0);
               temp_v6 = 0;
               do {
-                timerStart((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),4,0);
+                uiSpriteSetKeyframe((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),4,0);
                 temp_v6 = temp_v6 + 1;
               } while (temp_v6 < 4);
               if (*(char *)(temp_v1 + 0x42) != '\0') {
-                timerStart((UiSpriteState *)temp_v5,6,0);
+                uiSpriteSetKeyframe((UiSpriteState *)temp_v5,6,0);
               }
               else {
-                timerStart((UiSpriteState *)temp_v5,4,0);
+                uiSpriteSetKeyframe((UiSpriteState *)temp_v5,4,0);
               }
               *(unsigned char *)(temp_v1 + 0x66c) = 10;
               *(unsigned int *)(temp_v1 + 0x20) = 8;
@@ -2104,7 +2104,7 @@ joined_r0x001c7220:
         *(int *)(temp_v1 + 0xb3c) = temp_v6;
         *(unsigned char *)(temp_v6 + temp_v1 + 0xb40) = 0xff;
         *(unsigned int *)(temp_v1 + *(int *)(temp_v1 + 0xb3c) * 4 + 0xb34) = 0xffffffff;
-        FUN_0026c9c0();
+        partyPanelRefreshFusionParents();
         temp_v6 = 0;
         if (*(char *)(*(int *)(temp_v1 + 0xb3c) + temp_v1 + 0xb40) == '\0') {
           do {
@@ -2796,14 +2796,14 @@ LAB_001c8644:
   if (temp_v6 < 0) {
     temp_v6 = 0;
     do {
-      timerStart((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),5,0);
+      uiSpriteSetKeyframe((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),5,0);
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 4);
     if (*(char *)(temp_v1 + 0x42) == '\0') {
-      timerStart((UiSpriteState *)temp_v5,5,0);
+      uiSpriteSetKeyframe((UiSpriteState *)temp_v5,5,0);
     }
     else {
-      timerStart((UiSpriteState *)temp_v5,6,0);
+      uiSpriteSetKeyframe((UiSpriteState *)temp_v5,6,0);
     }
   }
   else {
@@ -2811,14 +2811,14 @@ LAB_001c8644:
     if (0 < temp_v6) {
       temp_v6 = 0;
       do {
-        timerStart((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),4,0);
+        uiSpriteSetKeyframe((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),4,0);
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < 4);
       if (*(char *)(temp_v1 + 0x42) != '\0') {
-        timerStart((UiSpriteState *)temp_v5,6,0);
+        uiSpriteSetKeyframe((UiSpriteState *)temp_v5,6,0);
       }
       else {
-        timerStart((UiSpriteState *)temp_v5,4,0);
+        uiSpriteSetKeyframe((UiSpriteState *)temp_v5,4,0);
       }
     }
   }

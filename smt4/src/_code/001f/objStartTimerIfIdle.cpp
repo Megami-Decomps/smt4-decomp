@@ -13,7 +13,7 @@ typedef struct Obj {
 void objStartTimerIfIdle(Obj *obj)
 {
     if (obj->timerRunning == 0) {
-        timerStart((UiSpriteState *)obj->timer, 2, 1);
+        uiSpriteSetKeyframe((UiSpriteState *)obj->timer, 2, 1);
     }
 }
 

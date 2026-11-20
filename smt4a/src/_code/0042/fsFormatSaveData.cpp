@@ -1,12 +1,13 @@
-/* NON_MATCHING: frame size and the hoisted 512 (r7) now match retail (directory/file counts are helper parameters); remaining: retail merges the 12th argument and request.self into one strd and loads the archive id earlier. */
+/* NON_MATCHING: 11-arg IPC call, LowPath layout and strd match retail (30 vs 30 rows); remaining: r6/r8 swap (fixed under --fpu=softvfp, score 10, like neighbor handleRequestSubmit) and session load scheduling. */
 #include "common.h"
 
 extern "C" {
 
-/* The save-data format request: a pointer back to itself and a flag. */
-struct FormatRequest {
-    FormatRequest *self;
-    u32 flag;
+/* nn::fs::LowPath: empty path descriptor (type = 1, ptr, size = 1). */
+struct LowPath {
+    u32 type;
+    const void *ptr;
+    u32 size;
 };
 
 struct FileSystemRoot {
@@ -16,29 +17,28 @@ struct FileSystemRoot {
 
 extern FileSystemRoot DAT_00589398;
 u32 FUN_0043c32c(u32 value);
-s32 nn_fs_ipc_FileSystem_FormatSaveData(u32 *archive, u32 archiveSize, u32 mediaType, FormatRequest *request,
-                                        u32 directories, u32 files, u32 blocksA, u32 blocksB, u32 maxDirectories,
-                                        u32 maxFiles, u32 duplicateData, u32 flag);
+s32 nn_fs_ipc_FileSystem_FormatSaveData(u32 *session, u32 archiveId, u32 pathType, const void *pathPtr,
+                                        u32 pathSize, u32 blocks, u32 directories, u32 files,
+                                        u32 directoryBuckets, u32 fileBuckets, u32 duplicateData);
 
-/* Formats the save data archive with the given directory/file counts and block counts. */
-static void formatArchive(u32 directories, u32 files, u32 blocksA, u32 blocksB, u32 duplicateData)
+/* Formats the save data archive with the given block, file and directory counts (twin in smt4 fsFormatSaveData). */
+static void formatArchive(u32 blocks, u32 files, u32 directories, u32 duplicateData)
 {
-    FormatRequest request;
-    u32 archive[2];
-    u32 maxDirectories = FUN_0043c32c(blocksB);
-    u32 maxFiles = FUN_0043c32c(blocksA);
-
-    request.self = &request;
-    request.flag = 1;
-    archive[0] = DAT_00589398.archiveId;
-    nn_fs_ipc_FileSystem_FormatSaveData(archive, 4, 1, &request, directories, files, blocksB, blocksA, maxDirectories,
-                                        maxFiles, duplicateData, 1);
+    u32 dirBuckets = FUN_0043c32c(directories);
+    u32 fileBuckets = FUN_0043c32c(files);
+    LowPath path;
+    path.type = 1;
+    path.ptr = &path.ptr;
+    path.size = 1;
+    u32 session = DAT_00589398.archiveId;
+    nn_fs_ipc_FileSystem_FormatSaveData(&session, 4, path.type, path.ptr, path.size, blocks,
+                                        directories, files, dirBuckets, fileBuckets, duplicateData);
 }
 
-/* Formats the save data archive with the given block counts. */
-void fsFormatSaveData(u32 blocksA, u32 blocksB, u32 duplicateData)
+/* Formats the save data archive with the given file and directory limits. */
+void fsFormatSaveData(u32 files, u32 directories, u32 duplicateData)
 {
-    formatArchive(1, 0x200, blocksA, blocksB, duplicateData);
+    formatArchive(0x200, files, directories, duplicateData);
 }
 
 } /* extern "C" */

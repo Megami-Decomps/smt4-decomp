@@ -23,9 +23,9 @@ void statusDownSwitchTab(u32 tab)
     status->previousTab = status->tab;
     status->tab = tab;
     if (gameGetFlagByte12e8() < 0) {
-        timerStart(status->sprites, 3, 0);
+        uiSpriteSetKeyframe(status->sprites, 3, 0);
     } else if (gameGetFlagByte12e8() > 0) {
-        timerStart(status->sprites, 2, 0);
+        uiSpriteSetKeyframe(status->sprites, 2, 0);
     }
     current = g_statusDown;
     for (i = 0; i < current->touchRegionCount; i++) {

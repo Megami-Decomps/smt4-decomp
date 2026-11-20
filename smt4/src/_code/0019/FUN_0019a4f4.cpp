@@ -34,7 +34,7 @@ int buttonHelpSetText(...);
 int uiSpriteSetImageKeyframe(...);
 int itemTableGetItemRecord(...);
 int uiSlidingSpriteAdvance(...);
-int timerStart(...);
+int uiSpriteSetKeyframe(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 struct BtlMainState;
 void FUN_00338c38(BtlMainState *script);
 
@@ -168,7 +168,7 @@ extern int ifTouchGetSelectionMode(void);
 extern int ifTouchGetSelectedRegion(void);
 /* Supplied declaration required: uiSlidingSpriteAdvance. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: timerStart. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 extern short vec2GetYInt(int);
 extern short vec2GetXInt(int);
 /* Supplied declaration required: spriteStartAnimationByIndex. */
@@ -1619,7 +1619,7 @@ LAB_0019c9b8:
     temp_v5 = FUN_00295618();
     if (temp_v5 != 0) {
       gameReleaseDataReference();
-      timerStart(param_1 + 0x12b8,0);
+      uiSpriteSetKeyframe(param_1 + 0x12b8,0);
       playSceneSetState(param_1,1);
     }
     break;

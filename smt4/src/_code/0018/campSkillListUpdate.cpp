@@ -147,7 +147,7 @@ void campSkillListUpdate(void)
             beginStatusPanelClose();
             FUN_00298d0c(0);
             campListShowSelectedHelp(0);
-            timerStart(&camp->sprites[1], 3, 0);
+            uiSpriteSetKeyframe(&camp->sprites[1], 3, 0);
             camp->returnState = 6;
             campChangeState(5);
             campRestoreMenuGroup(camp);
@@ -186,9 +186,9 @@ void campSkillListUpdate(void)
                 camp->touch.rowRegions[i] = -1;
             }
             if (gameGetFlagByte12e8() < 0) {
-                timerStart(&camp->sprites[1], 4, 0);
+                uiSpriteSetKeyframe(&camp->sprites[1], 4, 0);
             } else if (gameGetFlagByte12e8() > 0) {
-                timerStart(&camp->sprites[1], 3, 0);
+                uiSpriteSetKeyframe(&camp->sprites[1], 3, 0);
             }
             camp->returnState = 0x15;
             campChangeState(5);
@@ -235,7 +235,7 @@ void campSkillListUpdate(void)
                 }
                 /* Pick the skill's target on the party panel. */
                 campReleaseScreenTouchRegions(&camp->grids[3], 1);
-                timerStart(&camp->sprites[1], 3, 0);
+                uiSpriteSetKeyframe(&camp->sprites[1], 3, 0);
                 FUN_0029dfc0(0);
                 FUN_00298d0c(0);
                 camp->returnState = 0xF;
@@ -254,7 +254,7 @@ void campSkillListUpdate(void)
             beginStatusPanelClose();
             FUN_00298d0c(0);
             campListShowSelectedHelp(0);
-            timerStart(&camp->sprites[1], 3, 0);
+            uiSpriteSetKeyframe(&camp->sprites[1], 3, 0);
             camp->returnState = 6;
             campChangeState(5);
             guestWinRequestOpen();

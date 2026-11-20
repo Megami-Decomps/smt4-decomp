@@ -46,7 +46,7 @@ int uiScrollHandleActionsOrTouch(...);
 int gridNavigationConfigure(...);
 int buttonHelpSetPreset(...);
 int eventQueueAddUniqueIfValid(...);
-int timerStart(...);
+int uiSpriteSetKeyframe(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int spriteStartAnimationByIndex(...);
 int uiSpriteAdvanceAnimation(...);
 int inputQueryButtonState(...);
@@ -120,7 +120,7 @@ extern int uiSlidingSpriteAdvance(int, unsigned int);
 extern int querySlotHasHandle(void);
 extern unsigned int demonGetRaceLabel(unsigned int, unsigned int);
 extern unsigned int FUN_002bd068(unsigned int);
-/* Supplied declaration required: timerStart. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 extern unsigned int soundPlaySeUnpanned(unsigned int);
@@ -214,10 +214,10 @@ unsigned int FUN_001ca748(void)
     if (*(char *)(temp_v2 + 0xb2) != '\0') {
       if (*(int *)(temp_v2 + 0x408) != 0) {
         if (*(short *)(temp_v2 + 0x78) != 3) {
-          timerStart(temp_v2 + 0x28,1,0);
+          uiSpriteSetKeyframe(temp_v2 + 0x28,1,0);
         }
         else {
-          timerStart(temp_v2 + 0x28,0,0);
+          uiSpriteSetKeyframe(temp_v2 + 0x28,0,0);
         }
         temp_v6 = g_statusDown;
         *(unsigned int *)(g_statusDown + 0x40c) = 0;
@@ -394,7 +394,7 @@ LAB_001cabe4:
         gridNavigationConfigure(temp_v2 + 0x4d4,temp_v15 + 1,8,1,0,1);
         flaggedEntrySetValueA(temp_v2 + 0x4d4,temp_v15);
         *(unsigned char *)(temp_v2 + 0x410) = 1;
-        timerStart(temp_v2 + 0x2e4,0);
+        uiSpriteSetKeyframe(temp_v2 + 0x2e4,0);
         spriteStartAnimationByIndex(temp_v2 + 0x370,2);
         uiStoreTextureEntryCenter(temp_v2 + 0x370,0x1a,temp_v15 + 0x414);
         *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
@@ -552,7 +552,7 @@ LAB_001cb104:
           flaggedEntrySetValueA(temp_v6);
         }
         *(unsigned char *)(temp_v2 + 0x410) = 1;
-        timerStart(temp_v2 + 0x2e4,0);
+        uiSpriteSetKeyframe(temp_v2 + 0x2e4,0);
         spriteStartAnimationByIndex(temp_v2 + 0x370,2);
         uiStoreTextureEntryCenter(temp_v2 + 0x370,0x1a,*(int *)(temp_v2 + 0x53c) + 0x414);
         *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
@@ -615,7 +615,7 @@ LAB_001cb104:
                (short)*(unsigned int *)(temp_v2 + 0x540);
           temp_v6 = gridNavigationGetItemCount();
           gridNavigationConfigure(temp_v2 + 0x4d4,temp_v6 - 1,8,1,0,1);
-          timerStart(temp_v2 + 0x2e4,0);
+          uiSpriteSetKeyframe(temp_v2 + 0x2e4,0);
           spriteStartAnimationByIndex(temp_v2 + 0x370,2);
           uiStoreTextureEntryCenter(temp_v2 + 0x370,0x1a,*(int *)(temp_v2 + 0x544) + 0x414);
           *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
@@ -1063,7 +1063,7 @@ LAB_001cbbac:
         } while (temp_v15 < 8);
         flaggedEntrySetValueA(temp_v2 + 0x230c,temp_v15);
         *(unsigned char *)(temp_v2 + 0x410) = 1;
-        timerStart(temp_v2 + 0x2e4,0);
+        uiSpriteSetKeyframe(temp_v2 + 0x2e4,0);
         spriteStartAnimationByIndex(temp_v2 + 0x370,2);
         uiStoreTextureEntryCenter(temp_v2 + 0x370,0x1a,temp_v15 + 0x414);
         *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
@@ -1163,7 +1163,7 @@ LAB_001cbbac:
           gridNavigationConfigure(temp_v6,temp_v8 - 1,8,1,1,1);
           flaggedEntrySetValueA(temp_v6,temp_v15);
           *(unsigned char *)(temp_v2 + 0x410) = 1;
-          timerStart(temp_v2 + 0x2e4,0);
+          uiSpriteSetKeyframe(temp_v2 + 0x2e4,0);
           spriteStartAnimationByIndex(temp_v2 + 0x370,2);
           uiStoreTextureEntryCenter(temp_v2 + 0x370,0x1a,temp_v15 + 0x414);
           *(unsigned short *)(temp_v2 + 0x388) = 0xa0;

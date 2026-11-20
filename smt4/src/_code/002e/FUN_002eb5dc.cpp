@@ -1,4 +1,3 @@
-/* NON_MATCHING: the body matches; retail reloads the game-state base in the prologue and loads the map pointer before comparing the skip flag. */
 #include "map/mapDepart.h"
 #include "map/mapMain.h"
 #include "game/GameState.h"
@@ -13,8 +12,8 @@ void FUN_002eb5dc(void)
 {
     const GameState &current = g_gameState;
     const MapMain *map = g_mapMain;
-    if (current.map.unk84) {
-        g_gameState.map.unk84 = 0;
+    if (current.map.skipReturnSnapshot) {
+        g_gameState.map.skipReturnSnapshot = 0;
     } else {
         mapAdjustPositionToGround(&g_gameState.position);
         g_gameState.map.savedLocationSet = 1;

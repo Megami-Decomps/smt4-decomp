@@ -30,7 +30,7 @@ void dialogSetText(const char *text)
                 dialog->wideText = 1;
                 dialog->textWidth = (length / 2) * 14;
             }
-            timerStart(&dialog->content, 2, 0);
+            uiSpriteSetKeyframe(&dialog->content, 2, 0);
             dialog->labelX = vec2GetXInt(&dialog->content);
             dialog->textRight = dialog->labelX + dialog->textWidth + 42;
             if (dialog->state == 3) {

@@ -18,7 +18,7 @@ typedef struct Screen0039bc28 {
 
 void FUN_00233240(u8 *panel, s32 value);
 void uiSpriteSetImageKeyframe(u8 *sprite, s32 keyframe, s32 flag);
-void timerStart(u8 *timer, s32 a, s32 b);
+void uiSpriteSetKeyframe(u8 *timer, s32 a, s32 b); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void FUN_0039c3fc(Screen0039bc28 *screen);
 
 /* Screen step: step 0 sets up its panel, sprite and timer and moves to step 1; step 1 updates until flag 8 is set, then moves to step 2. */
@@ -32,7 +32,7 @@ void screenStep(Screen0039bc28 *screen)
         FUN_00233240(screen->panel, 0);
         FUN_00233240(screen->panel, 1);
         uiSpriteSetImageKeyframe(screen->sprite, 1, 0);
-        timerStart(screen->timer, 1, 0);
+        uiSpriteSetKeyframe(screen->timer, 1, 0);
         next = 1;
     } else {
         if (screen->step != 1) {

@@ -1,19 +1,19 @@
-/* NON_MATCHING: reserve scan now matches; retail reads the pending marker through a pool-loaded offset (ldrb [r0, r4]) and recomputes its address for the store, the build shares one address; unit/slot registers swap. */
 #include "shard/X14_EngineUnits.h"
 #include "shard/Shard0031.h"
 #include "gamedata/SaveSlotTable.h"
 
 extern "C" void FUN_0015f490(u32 handle, s32 kind, f32 scale, s32 enabled, s32 flags);
 
-extern "C" void FUN_0021b968(ResultWorkA *units, s32 slot, u32 handle, s32 animate)
+/* Marks the party or reserve slot and queues the marker animation once. */
+extern "C" void resultMarkUnitSlot(ResultWorkA *units, s32 slot, u32 handle, s32 animate)
 {
     SaveSlotTableA *table = gameGetSlotTable();
     s32 reserve;
     for (reserve = 0; reserve < 3; ++reserve) {
-        s32 member = table->reserve[reserve];
-        if (member >= 0 && member == table->party[slot]) {
+        if (table->reserve[reserve] < 0)
+            continue;
+        if (table->reserve[reserve] == table->party[slot])
             break;
-        }
     }
     if (reserve < 3) {
         units->reserveMarkers[reserve] = 1;

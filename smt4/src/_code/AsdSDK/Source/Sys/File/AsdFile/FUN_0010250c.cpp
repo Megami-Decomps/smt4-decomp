@@ -15,7 +15,7 @@ void fsMountRomFs(u32 first, u32 second, void *buffer, u32 size, u32 mode);
 u32 requestForwardKindFive(u32 first, u32 second, u32 mode);
 u32 FUN_0010f698(const char *device, u32 first, u32 second, void *buffer, u32 size, u32 mode);
 void asdFatalError(void);
-u32 FUN_002c52dc(u32 *handle, u32 initial, u32 maximum);
+u32 svcCreateSemaphore(u32 *handle, u32 initial, u32 maximum);
 u32 svcReleaseSemaphore(u32 *handle, u32 object, u32 mode);
 void nn_os_LightEvent_Initialize(void *event, u32 mode);
 void FUN_0010d0f8(void);
@@ -39,7 +39,7 @@ void FUN_0010250c(void)
     if (nnResultIsFailure(result)) {
         asdFatalError();
     }
-    result = FUN_002c52dc(&handle, 0, 2);
+    result = svcCreateSemaphore(&handle, 0, 2);
     if (nnResultIsSuccess(result)) {
         g_asdFileMutex = handle;
         result = 0;

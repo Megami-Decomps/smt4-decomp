@@ -1,7 +1,10 @@
-/* NON_MATCHING: 14 lines. Retail leaves the `if (!listed)` test in place for the switch arms that keep `listed` true
- * (this build jumps past it: four branch targets), and forms the report list's address in r0 before copying it to r6
- * (this build forms it in r6). `listed` is declared at the top (C89 style); declared in the loop the
- * function is 304 lines off, so the remaining difference may be the original's declaration placement. */
+/* NON_MATCHING: 6 lines (raw and shape), one register choice: retail forms the report list's address in r0 for the
+ * first gridNavigationConfigure and copies it to r6 after the other argument moves; this build forms it in r6 and
+ * copies it to r0. Without the `reportList` local (the field expression at every use, as for the open list) armcc
+ * shares the address the way retail does and the code is retail's, but the frame grows from 20 to 52 bytes (32 unused
+ * bytes around `progress`, which only appear while both saved-scroll blocks are present), 14 lines.
+ * `listed` is cleared, not skipped, by an open objective: that keeps retail's `if (!listed)` test on the switch arms
+ * that leave it true. It is declared at the top (C89 style); declared in the loop the function is 304 lines off. */
 #include "code/Code001b.h"
 #include "shard/W4_W4Match2_UiQuest.h"
 #include "quest_center/QuestRecord.h"
@@ -85,8 +88,8 @@ void uiQuestRebuildLists(void)
             if (record == NULL || record->kind != 0)
                 continue;
             if (questHasOpenObjective(id))
-                continue;
-            if (idIsAtLeast350(id) == 0) {
+                listed = false;
+            if (listed && idIsAtLeast350(id) == 0) {
                 if (record->area == 0)
                     continue;
                 switch (quest->panelView.panel.choice) {

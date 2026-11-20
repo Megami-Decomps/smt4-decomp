@@ -4,7 +4,7 @@
 #include "font/ComWin/ComWin.h"
 
 extern "C" {
-void rangeSelectionSelectEndpoint(UiSpriteState *sprite, s32 key, s32 mode);
+void uiSpriteSetScaleKeyframe(UiSpriteState *sprite, s32 key, s32 mode);
 void uiStoreTextureEntryCenter(UiSpriteState *sprite, s32 group, s32 image);
 void soundPlaySeUnpanned(u32 sound);
 
@@ -42,7 +42,7 @@ void frameTexCampSetMode(s32 mode)
                             0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0};
         for (s32 index = 0; index < 24; ++index) {
             uiSpriteStateInitFromSource((&work->campItems[index]), 0x1D, tileKinds[index] + 0x7D1, &work->campResources, 0xB, 1.0f);
-            rangeSelectionSelectEndpoint((&work->campItems[index]), 0, 0);
+            uiSpriteSetScaleKeyframe((&work->campItems[index]), 0, 0);
             uiStoreTextureEntryCenter((&work->campItems[index]), 0x1D, index + 0x7D5);
         }
         break;

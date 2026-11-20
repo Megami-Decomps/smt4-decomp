@@ -72,7 +72,7 @@ static float romwright_fabs_4(float value)
 extern int dataTableGetRecordFortyOne(void);
 /* Supplied declaration required: dataTable29Sub0GetEntryWithAoc. */
 /* Supplied declaration required: FUN_002533f4. */
-extern int FUN_00256550(unsigned int);
+extern int mapEnemyLoadExtraModel(unsigned int);
 extern int spriteTemplateGetPreferredDevilId(void);
 extern int *dataTable2fSub0GetRecord(int);
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
@@ -264,7 +264,7 @@ LAB_0021c1e4:
             *(unsigned int *)(temp_v2 + 0x1a8) = 1;
           }
           *(unsigned short *)(temp_v2 + 0x16e) = 0xffff;
-          temp_v1 = FUN_00256550(*(unsigned int *)(temp_v2 + 0x1a8));
+          temp_v1 = mapEnemyLoadExtraModel(*(unsigned int *)(temp_v2 + 0x1a8));
           temp_v13 = (float)((unsigned long long)temp_v12 >> 0x20);
         } while (temp_v1 == 0);
         *(unsigned int *)(temp_v2 + 0xb8) = 2;

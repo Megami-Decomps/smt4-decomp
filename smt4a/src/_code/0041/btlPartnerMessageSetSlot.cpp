@@ -29,7 +29,7 @@ typedef char PartnerMessageViewOffsets[offsetof(PartnerMessageOwnerView, source)
 
 extern "C" {
 void asdMemFreeSlot(void **object);
-void rangeSelectionSelectEndpoint(UiSpriteState *sprite, s32 mode, s32 state);
+void uiSpriteSetScaleKeyframe(UiSpriteState *sprite, s32 mode, s32 state);
 void cameraProjectToScreen(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
 PartnerMessageOffset FUN_00416388(PartnerMessageOwnerView *owner, s32 index, UiSpriteState *sprite);
 void pairSetHalves(UiSpriteState *sprite, s32 x, s32 y);
@@ -62,7 +62,7 @@ void btlPartnerMessageSetSlot(PartnerMessageOwnerView *owner, s32 index, u32 mes
     uiSpriteStateInitFromSource(&slot->sprite, 8, ~0u, &owner->source, 11, 1.0f);
     pairSetFirstResetSecond(&slot->sprite, 139);
     uiSpriteSetImageKeyframe(&slot->sprite, 4, 0);
-    rangeSelectionSelectEndpoint(&slot->sprite, 6, 0);
+    uiSpriteSetScaleKeyframe(&slot->sprite, 6, 0);
     cameraProjectToScreen(&slot->position.x, 0, reinterpret_cast<const ProjectionMatrices *>(asdCameraGetSavedRenderPairs()), &world.x);
     PartnerMessageOffset offset = FUN_00416388(owner, index, &slot->sprite);
     slot->position.x += offset.x;

@@ -98,7 +98,9 @@ struct BtlCombatantEntryA {
     /* 0x070 */ u8 unk070[4];
     /* 0x074 */ s32 properties[50]; /* per-property counters, indexed by a script's property id */
     /* 0x13C */ s16 modifiers[9];
-    /* 0x14E */ u8 unk14E[0x16];
+    /* 0x14E */ u8 unk14E[0xA];
+    /* 0x158 */ s32 targetDelay;    /* positive: not selectable yet */
+    /* 0x15C */ u8 unk15C[8];
     /* 0x164 */ BtlUnitDataA data;
 }; /* 0x408 bytes */
 
@@ -115,6 +117,7 @@ typedef char BtlUnitDataALayoutCheck[
 typedef char BtlCombatantEntryALayoutCheck[
     offsetof(BtlCombatantEntryA, ids) == 8 && offsetof(BtlCombatantEntryA, selectionIndex) == 0x6E &&
     offsetof(BtlCombatantEntryA, properties) == 0x74 && offsetof(BtlCombatantEntryA, modifiers) == 0x13C &&
+    offsetof(BtlCombatantEntryA, targetDelay) == 0x158 &&
     offsetof(BtlCombatantEntryA, data) == 0x164 && offsetof(BtlCombatantEntryA, data.hp) == 0x258 &&
     offsetof(BtlCombatantEntryA, data.record) == 0x3F8 && sizeof(BtlCombatantEntryA) == 0x408 ? 1 : -1];
 typedef char BtlCombatantRecordLayoutCheck[

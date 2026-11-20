@@ -94,7 +94,7 @@ void FUN_003d2a00(const char *name);
 void FUN_001fc348(UniteRenderTarget *target);
 void statusBustUpPortraitAcquire(s32 id, u32 kind);
 
-void rangeSelectionSelectEndpoint(UniteSprite *sprite, s32 a, s32 b);
+void uiSpriteSetScaleKeyframe(UniteSprite *sprite, s32 a, s32 b);
 void spriteSetVisible(UniteSprite *sprite, u8 visible);
 void uiStoreTextureEntryCenter(UniteSprite *sprite, s32 kind, s32 count);
 void sysPlaySe(s32 preset);
@@ -193,7 +193,7 @@ void uniteResultInitialize(void)
         uiSpriteSelectAnim(reinterpret_cast<UiSpriteState *>(&work->sprites[i]), 0);
     }
     uiSpriteInitializeState(reinterpret_cast<UiSpriteState *>(&work->panel), 0x1a, -1, 0x18, &work->resources, 0x65, 1.0f);
-    rangeSelectionSelectEndpoint(&work->panel, 0, 0);
+    uiSpriteSetScaleKeyframe(&work->panel, 0, 0);
     spriteSetLayer(reinterpret_cast<UiSpriteState *>(&work->panel), 2);
     uiStoreTextureEntryCenter(&work->panel, 0x1a, 0x21c);
     spriteSetVisible(&work->panel, 1);

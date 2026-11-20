@@ -14,7 +14,7 @@ int asdLoadFileAsyncSimple(...);
 int asdTMTexTableLoadEntryAsync(...);
 int __ARM_common_memcpy4_8(...);
 int buttonHelpSetPreset(...);
-int timerStart(...);
+int uiSpriteSetKeyframe(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int uiSpriteStateInitFromSource(...);
 int uiSpriteInitializeState(...);
 int gameDataBlocksGetSaveData(void);
@@ -63,7 +63,7 @@ extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int)
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 /* Supplied declaration required: __ARM_common_memcpy4_8. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: timerStart. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteStateInitFromSource. */
 /* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: gameDataBlocksGetSaveData. */
@@ -162,9 +162,9 @@ void FUN_00202ab4(void)
   uiSpriteStateInitFromSource(puVar1 + 0x27,0x36,1,puVar1 + 0x1f,0xc9);
   uiSpriteInitializeState(puVar1 + 0x4a,0x36,0x51,2,puVar1 + 0x1f,2);
   uiSpriteInitializeState(puVar1 + 0x6d,0x36,0x52,2,puVar1 + 0x1f,2);
-  timerStart(puVar1 + 0x27,1,0);
-  timerStart(puVar1 + 0x4a,3,0);
-  timerStart(puVar1 + 0x6d,4,0);
+  uiSpriteSetKeyframe(puVar1 + 0x27,1,0);
+  uiSpriteSetKeyframe(puVar1 + 0x4a,3,0);
+  uiSpriteSetKeyframe(puVar1 + 0x6d,4,0);
   buttonHelpSetPreset(0xa8);
   reinterpret_cast<int>(memClear(reinterpret_cast<void*>(puVar1 + 0x93), 0x80));
   reinterpret_cast<int>(memClear(reinterpret_cast<void*>(puVar1 + 0xb3), 0x80));

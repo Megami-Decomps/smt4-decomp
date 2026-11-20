@@ -1,8 +1,3 @@
-/* NON_MATCHING: ported from IV's uniteCreate; 6 raw / 8 shape rows differ (from 567), all one frame slot. The camera
- * file's size word is at sp+8, inside the outgoing-argument area, where retail gives it its own word at sp+56
- * above the thread descriptor: the frame is 56 bytes for retail's 64 (`sub sp`, `add r1, sp, #N` before
- * asdLoadFileWithSize, `add sp`). Declared at function scope the word moves the descriptor and the thread
- * argument instead. The pool word for the command table is the unit's own .constdata (relink places it). */
 #include "camp/Unite/UniteGlobals.h"
 #include "camp/Unite/UniteDraw.h"
 #include "camp/Unite/UnitePreferences.h"
@@ -105,11 +100,6 @@ u32 fusionListAvailableSpecialRecipes(void *context, u16 *recipes);
 void FUN_00184b90(u8 *owner, s32 direction); // declcheck: local (its header, shard/W5_W5Match5_GameSaveViews.h, declares asdMemoryAllocTraced with other types)
 void *__aeabi_memset4(void *dest, s32 size, s32 value);
 
-}
-
-inline void *operator new(u32 size, const char *file, u32 line) throw()
-{
-    return asdMemoryAllocTraced(size, file, line);
 }
 
 /* nn::os::Thread::Start: runs `entry(argument)` on a new thread whose stack is `stack`; a failure is fatal. */
@@ -272,12 +262,11 @@ void uniteCreate(void)
     }
 
     /* The cathedral's camera clip and its two model sets. */
-    {
-        u32 cameraSize;
-        const AsdAnimCameraResource *cameraResource =
-            static_cast<const AsdAnimCameraResource *>(asdLoadFileWithSize("camp/jakyou_all.bch", &cameraSize, 1));
-        work->previewA.camera = new (UNITE_SOURCE_FILE, 7443) Obj557af8(cameraResource);
-    }
+    u32 cameraSize;
+    const AsdAnimCameraResource *cameraResource =
+        (const AsdAnimCameraResource *)asdLoadFileWithSize("camp/jakyou_all.bch", &cameraSize, 1);
+    void *cameraStorage = asdMemoryAllocTraced(sizeof(Obj557af8), UNITE_SOURCE_FILE, 7443);
+    work->previewA.camera = cameraStorage ? new (cameraStorage) Obj557af8(cameraResource) : NULL;
     MoriModelContent *models = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent), UNITE_SOURCE_FILE, 7445));
     if (models != NULL) {
         models = modelListInit(models);

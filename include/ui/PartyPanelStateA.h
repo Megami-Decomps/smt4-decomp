@@ -13,6 +13,18 @@
 
 struct UniteWorkA;
 
+/* Bits of PartyPanelStateA::fusionFlags: why a slot cannot be the second fusion parent, or what picking it gives
+ * (partyPanelRefreshFusionAvailability sets them; the selected slot's are kept in selectedFusionFlags). */
+enum PartyPanelFusionFlag {
+    PARTY_PANEL_FUSION_OVER_LEVEL = 0x02,    /* the result is above the level the player can fuse */
+    PARTY_PANEL_FUSION_OWNED = 0x04,         /* the result is already in the stock */
+    PARTY_PANEL_FUSION_NO_RESULT = 0x08,     /* the pair makes nothing */
+    PARTY_PANEL_FUSION_AILMENT_BIT2 = 0x10,  /* the unit has ailment bit 2 */
+    PARTY_PANEL_FUSION_AILMENT_BIT10 = 0x20, /* the stock demon has ailment bit 10 and cannot be picked */
+    PARTY_PANEL_FUSION_SAME_AS_FIRST = 0x40, /* the same demon as the first parent */
+    PARTY_PANEL_FUSION_NEW_RESULT = 0x80     /* the result is not registered in the compendium yet */
+};
+
 typedef struct PartyPanelStateA {
     /* 0x0000 */ u32 job;
     /* 0x0004 */ u8 unk0004[4];

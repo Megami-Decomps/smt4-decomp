@@ -19,7 +19,7 @@ typedef struct StatusDownState {
     /* 0x0000 */ u32 job;
     /* 0x0004 */ u32 drawTask;
     /* 0x0008 */ UiResourceParameters packet;
-    /* 0x0028 */ UiSpriteState sprites[7];  /* [0] slides the panels in and out (timerStart) */
+    /* 0x0028 */ UiSpriteState sprites[7];  /* [0] slides the panels in and out (uiSpriteSetKeyframe) */
     /* 0x03FC */ u8 tab;                    /* current tab */
     /* 0x03FD */ u8 previousTab;
     /* 0x03FE */ u8 unk3FE[2];

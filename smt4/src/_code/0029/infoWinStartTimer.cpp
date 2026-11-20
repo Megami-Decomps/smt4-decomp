@@ -13,7 +13,7 @@ void infoWinStartTimer(void)
 
     g_infoWin->state = 5;
     obj->timer = 0x1e;
-    timerStart(&obj->background, 1, 0);
+    uiSpriteSetKeyframe(&obj->background, 1, 0);
 }
 
 } /* extern "C" */

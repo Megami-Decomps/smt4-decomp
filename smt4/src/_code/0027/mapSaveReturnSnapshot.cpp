@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation: retail loads g_mapMain before testing unk284 into r2 and uses ip for the second vector copy. */
 #include "map/mapDepart.h"
 #include "map/LmapGlobals.h"
 #include "game/GameState.h"
@@ -13,8 +12,8 @@ void mapSaveReturnSnapshot(void)
 {
     MapMain *map = g_mapMain;
 
-    if (g_gameState.map.unk84) {
-        g_gameState.map.unk84 = 0;
+    if (g_gameState.map.skipReturnSnapshot) {
+        g_gameState.map.skipReturnSnapshot = 0;
     } else {
         g_gameState.map.savedLocationSet = 1;
         g_gameState.savedMapId = map->mapId;

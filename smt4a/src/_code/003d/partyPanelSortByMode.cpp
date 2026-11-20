@@ -4,7 +4,7 @@
 extern "C" {
 
 int qsort(...);
-int FUN_0026f3a0(void);
+int partyPanelResetWidgets(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -26,7 +26,7 @@ extern int FUN_002fddd8(...); /* 0x2fddd8 */
 extern int g_partyPanel; /* 0x57f268 */
 
 /* Supplied declaration required: qsort. */
-/* Supplied declaration required: FUN_0026f3a0. */
+/* Supplied declaration required: partyPanelResetWidgets. */
 
 
 void partyPanelSortByMode(void)
@@ -88,7 +88,7 @@ void partyPanelSortByMode(void)
       qsort(temp_v0 + 0xa80,0x18,8,&LAB_002ce670);
     }
   }
-  FUN_0026f3a0();
+  partyPanelResetWidgets();
   return;
 }
 

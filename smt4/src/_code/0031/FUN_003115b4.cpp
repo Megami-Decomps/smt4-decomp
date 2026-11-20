@@ -8,7 +8,7 @@ extern "C" {
 void uiQuestLoadResources();
 void FUN_0028fe0c(u32 questId, s32 mode);
 void buttonHelpSetPreset(s32 preset);
-void timerStart(void *timer, s32 animation, s32 initial);
+void uiSpriteSetKeyframe(void *timer, s32 animation, s32 initial); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void soundPlaySeUnpanned(u32 message);
 
 // Focus the quest in the appropriate list, then open its detail panel.
@@ -36,8 +36,8 @@ void FUN_003115b4(u32 questId)
     }
     uiQuestLoadResources();
     FUN_0028fe0c(questId, 0);
-    timerStart(quest->mainSprite, 0, 0);
-    timerStart(quest->detailAnimation.timer, 2, 0);
+    uiSpriteSetKeyframe(quest->mainSprite, 0, 0);
+    uiSpriteSetKeyframe(quest->detailAnimation.timer, 2, 0);
     uiQuestEnterState(g_uiQuest, 0x17);
     buttonHelpSetPreset(0x1A);
     soundPlaySeUnpanned(0x100025C);

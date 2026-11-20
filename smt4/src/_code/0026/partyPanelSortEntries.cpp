@@ -3,7 +3,7 @@
 
 extern "C" {
 
-int FUN_001d13b0(void);
+int partyPanelResetWidgets(void);
 void qsort(void *entries, u32 count, u32 stride, s32 (*compare)(const void *, const void *));
 
 extern s32 FUN_0019215c(const void *left, const void *right); /* 0x19215c */
@@ -78,7 +78,7 @@ void partyPanelSortEntries(void)
       qsort(panel->entries,0x18,8,&entryCompare);
     }
   }
-  FUN_001d13b0();
+  partyPanelResetWidgets();
   return;
 }
 

@@ -11,7 +11,7 @@ void FUN_002932d8(void)
     int i;
 
     g_partyPanel->page = g_partyPanel->page ^ 1;
-    timerStart(&scene->sprites[PARTY_PANEL_SPRITE_PAGE], 5, 0);
+    uiSpriteSetKeyframe(&scene->sprites[PARTY_PANEL_SPRITE_PAGE], 5, 0);
     i = 0;
     do {
         slotPlacementAssignSlotAndPosition(scene->characters[i], scene->page);

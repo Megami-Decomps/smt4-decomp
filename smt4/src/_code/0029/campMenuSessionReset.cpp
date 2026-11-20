@@ -51,8 +51,8 @@ void campMenuSessionReset()
     spriteStartAnimationByIndex(&session->headers[1], 1);
     spriteStartAnimationByIndex(&session->headers[2], 2);
     for (s32 index = 0; index < 10; ++index) {
-        timerStart(&session->primary[index], 4, 0);
-        timerStart(&session->secondary[index], 1, 0);
+        uiSpriteSetKeyframe(&session->primary[index], 4, 0);
+        uiSpriteSetKeyframe(&session->secondary[index], 1, 0);
     }
     MenuSessionResetViewIV *current = (MenuSessionResetViewIV *)g_gameGlobals.data;
     current->flag1e60 = 0;

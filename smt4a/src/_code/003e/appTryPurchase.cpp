@@ -12,7 +12,7 @@ AppUnlockState *gameDataBlockGetArea2D68();
 s32 shopGetEntryAvailability(u32 id);
 
 // Unlock or preview an app purchase, charging points and updating category counts and unlock flags.
-u32 FUN_003e45bc(u32 id, s32 ignoreRequirements, s32 preview)
+u32 appTryPurchase(u32 id, s32 ignoreRequirements, s32 preview)
 {
     AppUnlockState *state = gameDataBlockGetArea2D68();
     const AppUnlockState *current = gameDataBlockGetArea2D68();

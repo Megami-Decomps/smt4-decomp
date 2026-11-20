@@ -122,11 +122,11 @@ extern "C" void uiQuestCreate(void)
                sizeof(sQuestScaleKeys), NULL, 0, sQuestCommands, sizeof(sQuestCommands));
 
     uiSpriteStateInitFromSource(&quest->sprites[0], 41, 0, &quest->resources, 201, 1.0f);
-    timerStart(&quest->sprites[0], 0, 0);
+    uiSpriteSetKeyframe(&quest->sprites[0], 0, 0);
     uiSpriteStateInitFromSource(&quest->sprites[1], 41, 0, &quest->resources, 201, 1.0f);
     spriteStartAnimationByIndex(&quest->sprites[1], 0);
     uiSpriteStateInitFromSource(&quest->sprites[2], 41, 0, &quest->resources, 201, 1.0f);
-    timerStart(&quest->sprites[2], 4, 0);
+    uiSpriteSetKeyframe(&quest->sprites[2], 4, 0);
     uiSpriteStateInitFromSource(&quest->sprites[3], 41, 0, &quest->resources, 201, 1.0f);
     uiSpriteStateInitFromSource(&quest->sprites[4], 41, 97, &quest->resources, 104, 1.0f);
     spriteStartAnimationByIndex(&quest->sprites[4], 2);
@@ -139,10 +139,10 @@ extern "C" void uiQuestCreate(void)
     spriteSetLayer(&quest->sprites[6], 2);
     pairSetHalves(reinterpret_cast<Obj *>(&quest->sprites[6]), 0, 120);
     uiSpriteStateInitFromSource(&quest->sprites[7], 41, 92, &quest->resources, 161, 1.0f);
-    timerStart(&quest->sprites[7], 0, 0);
+    uiSpriteSetKeyframe(&quest->sprites[7], 0, 0);
     uiGetLayoutPointDifference(reinterpret_cast<PointDeltaWork *>(&quest->sprites[7]), 41, 90, 92);
     uiSpriteStateInitFromSource(&quest->sprites[8], 41, 0, &quest->resources, 201, 1.0f);
-    timerStart(&quest->sprites[8], 2, 0);
+    uiSpriteSetKeyframe(&quest->sprites[8], 2, 0);
     uiSpriteStateInitFromSource(&quest->sprites[9], 41, 0, &quest->resources, 201, 1.0f);
     spriteStartAnimationByIndex(&quest->sprites[9], 5);
     uiQuestEnterState(g_uiQuest, 0);

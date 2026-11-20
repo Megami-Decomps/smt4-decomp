@@ -1,4 +1,3 @@
-/* NON_MATCHING: forced-choice branch sharing matches; menu/id saved registers, zero/one materialization and list-count scratch registers differ. */
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
 
 extern "C" {
@@ -15,8 +14,46 @@ void gauntletAppBuildAvailableEntries(GauntletAppMenuWork *menu);
 s32 shopGetEntryAvailability(u32 id);
 s32 gameDataFlagTestBit(u32 id);
 
+/* Lists the apps the player can still buy: the forced one, or every app. */
+static __inline void gauntletBuildBuyableEntries(GauntletAppMenuWork *menu)
+{
+    menu->list.count = 0;
+    if (menu->list.forceFirst) {
+        u32 id = 0x2E;
+        if (!gameDataFlagTestBit(id) && !shopGetEntryAvailability(id)) {
+            menu->list.entries[menu->list.count] = id;
+            menu->list.count++;
+        }
+    } else if (menu->list.forceSecond) {
+        u32 id = 0x18;
+        if (!gameDataFlagTestBit(id) && !shopGetEntryAvailability(id)) {
+            menu->list.entries[menu->list.count] = id;
+            menu->list.count++;
+        }
+    } else {
+        for (u32 id = 1; id < 0x8D; id++) {
+            if (!gameDataFlagTestBit(id) && !shopGetEntryAvailability(id)) {
+                menu->list.entries[menu->list.count] = id;
+                menu->list.count++;
+            }
+        }
+    }
+    gridNavigationConfigure(menu->list.controller, menu->list.count, 10, 1, 1, 1);
+}
+
+/* Appends every app the player owns to the list. */
+static __inline void gauntletAddOwnedEntries(GauntletAppMenuWork *menu)
+{
+    for (u32 id = 1; id < 0x8D; id++) {
+        if (gameDataFlagTestBit(id)) {
+            menu->list.entries[menu->list.count] = id;
+            menu->list.count++;
+        }
+    }
+}
+
 /* Switches the Gauntlet app menu to `mode` and sets up what that mode shows; returns 0 when the mode was skipped. */
-u32 FUN_003dc0c0(GauntletAppMenuWork *menu, u32 mode)
+u32 gauntletAppMenuSetMode(GauntletAppMenuWork *menu, u32 mode)
 {
     switch (mode) {
     case 0:
@@ -27,39 +64,13 @@ u32 FUN_003dc0c0(GauntletAppMenuWork *menu, u32 mode)
         break;
     case 1:
         menu->list.count = 0;
-        for (u32 id = 1; id < 0x8D; id++) {
-            if (gameDataFlagTestBit(id) != 0) {
-                menu->list.entries[menu->list.count] = id;
-                menu->list.count++;
-            }
-        }
+        gauntletAddOwnedEntries(menu);
         gridNavigationConfigure(menu->list.controller, menu->list.count, 10, 1, 1, 1);
         break;
     case 2:
-        menu->list.count = 0;
-        if (menu->list.forceFirst != 0) {
-            u32 id = 0x2E;
-            if (gameDataFlagTestBit(id) == 0 && shopGetEntryAvailability(id) == 0) {
-                menu->list.entries[menu->list.count] = id;
-                menu->list.count++;
-            }
-        } else if (menu->list.forceSecond != 0) {
-            u32 id = 0x18;
-            if (gameDataFlagTestBit(id) == 0 && shopGetEntryAvailability(id) == 0) {
-                menu->list.entries[menu->list.count] = id;
-                menu->list.count++;
-            }
-        } else {
-            for (u32 id = 1; id < 0x8D; id++) {
-                if (gameDataFlagTestBit(id) == 0 && shopGetEntryAvailability(id) == 0) {
-                    menu->list.entries[menu->list.count] = id;
-                    menu->list.count++;
-                }
-            }
-        }
-        gridNavigationConfigure(menu->list.controller, menu->list.count, 10, 1, 1, 1);
+        gauntletBuildBuyableEntries(menu);
         if (menu->list.count == 0) {
-            FUN_003dc0c0(menu, menu->list.mode);
+            gauntletAppMenuSetMode(menu, menu->list.mode);
             return 0;
         }
         break;

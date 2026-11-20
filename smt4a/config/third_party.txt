@@ -2702,6 +2702,7 @@
 0x0017cdb4 nngxGetError name
 0x0017cff0 nngxBindCmdlist name
 0x0017fcb0 nn_math_ARMv6_MTX44TransposeAsm name
+0x0017fd20 FUN_0017fd20 library
 0x0017fd5c FUN_0017fd5c library
 0x001884c8 FUN_001884c8 callers
 0x00188558 nn_fs_ipc_FileSystem_OpenArchive name
@@ -3019,6 +3020,7 @@
 0x0019a300 FUN_0019a300 between
 0x0019a318 FUN_0019a318 between
 0x0019a35c FUN_0019a35c between
+0x0019a364 svcReleaseSemaphore name
 0x0019a37c libc_strncmp name
 0x0019fc50 nn_fs_GetPriority name
 0x0019fc70 FUN_0019fc70 between

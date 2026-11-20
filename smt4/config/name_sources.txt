@@ -5870,3 +5870,12 @@
 003172e0 campCecEditChoiceListState inferred twin of smt4a FUN_003aef48
 003a21b8 shopDrawAppraisalRow inferred appraisal list row draw
 0022f1b8 aocEntryIsKindTen inferred u8 (u32 id): the entry's kind is 10
+004640e8 g_effectTexturesLoaded inferred effectTexturesLoadOnce's once-flag (set after the 22 textures are loaded)
+002a9fdc uiSpriteSetScaleKeyframe inferred starts UiSpriteState's scale key (scaleKeys/scaleKey/scaleReverse), sibling of uiSpriteSetImageKeyframe
+002bd8e8 uiSpriteSetKeyframe inferred starts UiSpriteState's position key: same code as smt4a uiSpriteSetKeyframe
+001d13b0 partyPanelResetWidgets inferred resets the party panel's slot widgets and fills them from the slot table; twin of smt4a FUN_0026f3a0
+002e36f8 partyPanelRefreshFilterMarks inferred same code as smt4a partyPanelRefreshFilterMarks
+0026c9c0 partyPanelRefreshFusionParents inferred marks the party rows and stock cells usable as the second fusion parent; twin of smt4a FUN_002ade88
+00248738 gauntletAppMenuSetMode inferred twin of smt4a FUN_003dc0c0
+00256550 mapEnemyLoadExtraModel inferred twin of smt4a mapEnemyLoadExtraModel (same resource path map/all/sym%03d.bam)
+002c52dc svcCreateSemaphore evidence svc 0x15 (CreateSemaphore), output handle stored through the first argument

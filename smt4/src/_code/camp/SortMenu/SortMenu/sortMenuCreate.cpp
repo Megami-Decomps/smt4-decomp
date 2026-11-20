@@ -58,7 +58,7 @@ void sortMenuCreate(u32 owner, u8 option)
         uiSpriteStateInitFromSource(&current->sprites[10], 30, 0, &current->parameters, 1, 1.0f);
         spriteStartAnimationByIndex(&current->sprites[10], 0);
         uiSpriteStateInitFromSource(&current->sprites[11], 30, 0, &current->parameters, 1, 1.0f);
-        timerStart(&current->sprites[11], 0, 0);
+        uiSpriteSetKeyframe(&current->sprites[11], 0, 0);
         uiSpriteStateInitFromSource(&current->sprites[12], 30, 0, &current->parameters, 1, 1.0f);
         spriteStartAnimationByIndex(&current->sprites[12], 1);
         __aeabi_memset4(current->ids, sizeof(current->ids), -1);

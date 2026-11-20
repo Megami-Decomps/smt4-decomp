@@ -60,7 +60,7 @@ void btlUiTargetListStep(ActorCardAnimations *card)
         break;
     case 1:
         FUN_001990d4(card);
-        timerStart(&card->slide, 0, 0);
+        uiSpriteSetKeyframe(&card->slide, 0, 0);
         if (uiSlidingSpriteAdvance(&card->unk11A0, 0)) {
             card->targetState = 2;
             card->targetTimer = 0;
@@ -92,7 +92,7 @@ void btlUiTargetListStep(ActorCardAnimations *card)
             if (!uiSlidingSpriteAdvance(&card->slide, 0))
                 break;
         }
-        timerStart(&card->slide, 0, 0);
+        uiSpriteSetKeyframe(&card->slide, 0, 0);
         if (FUN_0029e0f8()) {
             u16 *shown = FUN_0029acb0();
 
@@ -132,9 +132,9 @@ void btlUiTargetListStep(ActorCardAnimations *card)
                 card->targetState = 3;
                 card->unk5924 = 0;
                 if (gameGetFlagByte12e8() < 0) {
-                    timerStart(&card->slide, 10, 0);
+                    uiSpriteSetKeyframe(&card->slide, 10, 0);
                 } else if (gameGetFlagByte12e8() > 0) {
-                    timerStart(&card->slide, 9, 0);
+                    uiSpriteSetKeyframe(&card->slide, 9, 0);
                 }
             } else if (!card->unk307C) {
                 bool touched = false;
@@ -182,9 +182,9 @@ void btlUiTargetListStep(ActorCardAnimations *card)
             FUN_002efed8(0);
             card->targetState = 2;
             if (gameGetFlagByte12e8() < 0) {
-                timerStart(&card->slide, 11, 0);
+                uiSpriteSetKeyframe(&card->slide, 11, 0);
             } else if (gameGetFlagByte12e8() > 0) {
-                timerStart(&card->slide, 12, 0);
+                uiSpriteSetKeyframe(&card->slide, 12, 0);
             }
             buttonHelpSetPreset(0x33);
             u16 *shown = FUN_0029acb0();

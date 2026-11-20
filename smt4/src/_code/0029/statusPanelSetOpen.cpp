@@ -4,7 +4,7 @@ extern "C" {
 
 void statusPanelRefreshSelection(s32 value);
 void statusDownRestoreTabForMode(void);
-void timerStart(void *timer, s32 frames, s32 arg);
+void uiSpriteSetKeyframe(void *timer, s32 frames, s32 arg); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Opens (open != 0) or closes the status display unless state 2/3 is active, then reapplies its tab. */
 void statusPanelSetOpen(s32 open)
@@ -25,7 +25,7 @@ void statusPanelSetOpen(s32 open)
             data->activeState = 4;
             data->unk12E0 = 8;
         }
-        timerStart(data->statusTimer, 4, 0);
+        uiSpriteSetKeyframe(data->statusTimer, 4, 0);
     } else {
         u8 tab = data->unk1E66;
 

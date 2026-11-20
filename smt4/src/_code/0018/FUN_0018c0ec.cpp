@@ -75,7 +75,7 @@ int slotUnitIsInActiveParty(...);
 int uiStoreTextureEntryCenter(...); // declcheck: local (romwright prototype; its types do not fit ui/UiTexturePlacement.h: including it fails to compile)
 int qsort(...);
 int eventQueueAddUnique(...);
-int timerStart(...);
+int uiSpriteSetKeyframe(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int spriteStartAnimationByIndex(...);
 int soundPlaySeUnpanned(...);
 int inputQueryButtonState(...);
@@ -230,7 +230,7 @@ extern int sys43e188GetState(void);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: dataTable01FindByIdWithAoc. */
-/* Supplied declaration required: timerStart. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: libc_strcpy. */
@@ -977,10 +977,10 @@ LAB_0018d058:
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 6);
       resultSetMenuState(temp_v2,7);
-      timerStart(temp_v2 + 0x20,1,0);
+      uiSpriteSetKeyframe(temp_v2 + 0x20,1,0);
       temp_v4 = 0;
       do {
-        timerStart(temp_v2 + temp_v4 * 0x8c + 0xac,1,0);
+        uiSpriteSetKeyframe(temp_v2 + temp_v4 * 0x8c + 0xac,1,0);
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 6);
       messageDismissNumericBanner(1);
@@ -1857,7 +1857,7 @@ joined_r0x0018edf0:
       FUN_0029ede8(0x18,((unsigned int)*(unsigned char *)(temp_v4 + 0x76) -
                         (unsigned int)*(unsigned char *)(temp_v2 + *(int *)(temp_v2 + 0xcf78) * 0x620 + 0x36ce)) * 10,
                    0xffffffff,0);
-      timerStart(temp_v2 + 0x598,0);
+      uiSpriteSetKeyframe(temp_v2 + 0x598,0);
       *piVar17 = *piVar17 + 1;
     case 1:
       uiSlidingSpriteAdvance(temp_v2 + 0x598,0);
@@ -1894,7 +1894,7 @@ joined_r0x0018edf0:
         }
         temp_v4 = gameSaveGetPoints();
         *puVar13 = temp_v4 << 0xc;
-        timerStart(temp_v2 + 0x598,1,0);
+        uiSpriteSetKeyframe(temp_v2 + 0x598,1,0);
         temp_v4 = *(int *)(temp_v2 + 0x3534) + 1;
         *(int *)(temp_v2 + 0x3534) = temp_v4;
       }

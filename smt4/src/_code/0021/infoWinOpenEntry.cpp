@@ -26,7 +26,7 @@ static __inline void setMessage(const void *message, u32 arg)
             win->wideText = 1;
             win->textWidth = (s32)width;
         }
-        timerStart(&win->content, 2, 0);
+        uiSpriteSetKeyframe(&win->content, 2, 0);
         win->labelX = vec2GetXInt(&win->content);
         win->textRight = win->labelX + win->textWidth + 42;
         if (win->state == 3) {
@@ -46,7 +46,7 @@ extern "C" void infoWinOpenEntry(u32 message)
     setMessage(directory, message);
     InfoWindow *window = g_infoWin;
     window->state = 1;
-    timerStart(&window->background, 0, 0);
+    uiSpriteSetKeyframe(&window->background, 0, 0);
     window->style = 1;
     window->shown = 1;
     window->timer = 30;

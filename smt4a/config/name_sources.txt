@@ -8418,3 +8418,18 @@
 00588ff4 g_bustupViewerPositions3d inferred size:0x68 26 position ids of the 3D mode (bust-up viewer)
 0058905c g_bustupViewerPositions3d2 inferred size:0x78 30 position ids of the 3D_2 mode (bust-up viewer)
 005890d4 g_bustupViewerPositionNames inferred position name pointers (bust-up viewer)
+005b3270 g_effectTexturesLoaded inferred effectTexturesLoadOnce's once-flag (twin of smt4 0x4640e8)
+0019e330 uiSpriteSetScaleKeyframe inferred twin of smt4
+0026f3a0 partyPanelResetWidgets inferred resets the party panel's slot widgets and fills them from the slot table
+002ade88 partyPanelRefreshFusionAvailability inferred sets each slot's PartyPanelFusionFlag bits from FUN_004da344's answer
+004da344 fusionCheckPairAvailability inferred resolves the result of fusing two demons into a FusionAvailability
+003b0558 partyPanelRemoveLastFusionParent inferred takes the last fusion parent off the panel's list and clears its widget's pending transition
+0028c2ec partyPanelRefreshSkillPreview inferred sets each widget's cost and value for the selected skill
+003dc0c0 gauntletAppMenuSetMode inferred switches the Gauntlet app menu to a mode and builds that mode's list
+003e45bc appTryPurchase inferred smt4's name for the same call (gauntletAppMenuUpdate's purchase)
+00345718 messageWindowStartTimer inferred same shape as smt4 messageWindowStartTimer (open/close indicator animation)
+0021b968 resultMarkUnitSlot inferred marks the party or reserve slot of a result unit and queues the marker animation once
+0017d43c asdGxCommandBufferQueueSegment inferred terminates the current GPU command segment and queues its descriptor
+00372794 skillMenuCanCurrentUserUseSkill inferred whether the user under the skill menu's cursor can use a skill
+0019a300 svcConnectToPort evidence svc 0x2d (ConnectToPort), output handle stored through the first argument
+0017fd20 svcCreateEvent evidence svc 0x17 (CreateEvent), called by the nn::os::Event::Initialize idiom (0xE0A0183B when already created)

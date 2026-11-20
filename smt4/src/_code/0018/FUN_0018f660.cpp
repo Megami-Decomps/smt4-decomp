@@ -118,7 +118,7 @@ extern int lmapMainIsRunning(void);
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: uiSlidingSpriteAdvance. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: timerStart. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern int padIsButtonPressed(unsigned int);
@@ -448,7 +448,7 @@ LAB_0018fbe4:
         objSetAnglesDegrees(*(unsigned int *)pcVar13,pcVar4 + 0x1e90);
 LAB_0018fd84:
         if ((pcVar4[0x12f2] != '\0') || ((*pcVar5 != '\x03' && (*pcVar5 != '\t')))) {
-          timerStart((UiSpriteState *)(pcVar4 + 0x38c),1,0);
+          uiSpriteSetKeyframe((UiSpriteState *)(pcVar4 + 0x38c),1,0);
           pcVar4[0x12f2] = '\0';
         }
         if (*(int *)(pcVar4 + 0x12e0) != 0) {
@@ -468,8 +468,8 @@ LAB_0018fd84:
               pcVar4[0x6cd] = '\0';
               pcVar4[0x759] = '\0';
               pcVar4[0x7e5] = '\0';
-              timerStart((UiSpriteState *)(pcVar4 + 0x648),8,0);
-              timerStart((UiSpriteState *)(pcVar4 + 0x6d4),9,0);
+              uiSpriteSetKeyframe((UiSpriteState *)(pcVar4 + 0x648),8,0);
+              uiSpriteSetKeyframe((UiSpriteState *)(pcVar4 + 0x6d4),9,0);
               spriteStartAnimationByIndex((UiSpriteState *)(pcVar4 + 0x760),5);
               pcVar5 = DAT_0044e144;
               pcVar5[0x10] = '\0';
@@ -755,7 +755,7 @@ LAB_00190190:
               inputQueryButtonState(10,1);
               if (temp_v7 != 0) {
                 pcVar4[0x12f0] = pcVar4[0x12f0] != '\x01';
-                timerStart((UiSpriteState *)(pcVar4 + 0x5bc),7,0);
+                uiSpriteSetKeyframe((UiSpriteState *)(pcVar4 + 0x5bc),7,0);
                 temp_v6 = 0x100016d;
                 eventQueueAddUniqueIfValid(temp_v6);
               }

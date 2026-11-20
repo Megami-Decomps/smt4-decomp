@@ -20,3 +20,8 @@ arm 0x1383c8 0x1383f0 armlib __aeabi_lasr: subs r3, r2, #32; bpl; lsr/orr/asr pa
 # armlib's hardfp ceilf (fdlibm s_ceilf.c): the same code as the third-party __hardfp_floorf at 0x2a30dc
 # with the rounding reversed, early `bxge/bxeq lr` returns that b1454 does not emit; smt4a's twin 0x50db54 is third-party.
 arm 0x3eb078 0x3eb0fc armlib ceilf: exponent test against 23, 1.0e30f + x > 0 inexact raise, fraction mask 0x7fffff >> e
+# The CTR-SDK's hand-written svc wrappers returning an output handle: `push {r0}; svc N; ldr r2, [sp]; str r1, [r2];
+# add sp, sp, #4; bx lr` (armcc never pushes an argument register alone around an svc). svc 0x16 is ReleaseSemaphore,
+# 0x15 CreateSemaphore; smt4a's twins are 0x19a364 and the third-party 0x19a300 (svc 0x2d).
+arm 0x2c5254 0x2c526c CTR-SDK svcReleaseSemaphore: push {r0}; svc 0x16; ldr r2, [sp]; str r1, [r2]; add sp, sp, #4
+arm 0x2c52dc 0x2c52f4 CTR-SDK svcCreateSemaphore: push {r0}; svc 0x15; ldr r2, [sp]; str r1, [r2]; add sp, sp, #4

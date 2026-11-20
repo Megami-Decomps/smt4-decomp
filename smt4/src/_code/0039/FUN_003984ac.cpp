@@ -83,7 +83,7 @@ void gridNavigationConfigure(void* grid, s32 a, s32 b, s32 c, s32 d, s32 e);
 void drawParameterBlockClear(void);
 void uiSpriteStateInitFromSource(void* sprite, s32 sheet, s32 index, void* params, f32 scale, s32 flag);
 void spriteStartAnimationByIndex(void* sprite, s32 index);
-void timerStart(void* sprite, s32 a, s32 b);
+void uiSpriteSetKeyframe(void* sprite, s32 a, s32 b); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void uiSpriteSetImageKeyframe(void* sprite, s32 a, s32 b);
 void buttonHelpCreate(void);
 
@@ -128,7 +128,7 @@ void FUN_003984ac(NameForm* form, u8 mode)
     uiSpriteStateInitFromSource(form->cursorSprite, 0x2e, 0, form->params, 1.0f, 1);
     spriteStartAnimationByIndex(form->cursorSprite, 0);
     uiSpriteStateInitFromSource(form->blinkSprite, 0x2e, 0, form->params, 1.0f, 1);
-    timerStart(form->blinkSprite, 0, 0);
+    uiSpriteSetKeyframe(form->blinkSprite, 0, 0);
     uiSpriteStateInitFromSource(form->frameSprite, 0x2e, 0, form->params, 1.0f, 1);
     uiSpriteSetImageKeyframe(form->frameSprite, 0, 0);
     buttonHelpCreate();

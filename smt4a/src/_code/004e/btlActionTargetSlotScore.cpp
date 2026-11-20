@@ -1,54 +1,37 @@
-/* NON_MATCHING: the entry flags now load as ldrd like retail; remaining differences are the targetable mask pair (retail: two ldr with hi/lo in r4/r5, build ldrd) and the index copy scheduled before the r1 argument move. */
 #include "battle/btlAction.h"
 #include "battle/BtlGlobals.h"
 
-/* The 0x408-byte combatant entry as the action target check sees it. */
-struct ActionTargetEntry {
-    /* 0x000 */ u64 flags;
-    /* 0x008 */ u8 unk008[0x66];
-    /* 0x06E */ s16 selectionIndex;
-    /* 0x070 */ u8 unk070[0xe8];
-    /* 0x158 */ s32 unk158; /* positive: not selectable yet */
-    /* 0x15C */ u8 unk15c[0x2ac];
-};
-
-typedef char ActionTargetEntrySizeCheck[sizeof(ActionTargetEntry) == 0x408 ? 1 : -1];
-
-struct ActionTargetBattle {
-    /* 0x0000 */ u8 unk0000[0x1ffc];
-    /* 0x1FFC */ ActionTargetEntry *entries;
-};
-
-struct ActionTargetOwner {
-    /* 0x00 */ ActionTargetBattle *battle;
-};
-
+/* unit-local: the target-selection table's per-slot entry and view used by btlActionTargetSlotScore. */
 struct ActionTargetSlot {
     /* 0x00 */ s32 taken;
     /* 0x04 */ u8 unk04[0xc];
 };
 
+/* unit-local: target-slot table view for btlActionTargetSlotScore. */
 struct ActionTargetSlots {
     /* 0x000 */ u8 unk000[0x9e4];
     /* 0x9E4 */ ActionTargetSlot slots[1];
 };
 
+/* unit-local: owner wrapper holding the battle state pointer. */
+struct ActionTargetOwner {
+    /* 0x00 */ BtlMainStateA *battle;
+};
+
 extern "C" {
 
-
-
-/* Whether the combatant at index (or the one it redirects to) is free and targetable. */
-u32 btlActionTargetSlotScore(ActionTargetOwner *owner, ActionTargetSlots *table, s32 index)
+/* Whether the combatant at listedId (or the one it redirects to) is free and targetable. */
+u32 btlActionTargetSlotScore(ActionTargetOwner *owner, ActionTargetSlots *table, s32 listedId)
 {
-    ActionTargetEntry *target = reinterpret_cast<ActionTargetEntry *>(
-        btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(owner->battle), index));
+    s32 index = listedId;
+    BtlCombatantEntryA *target = btlMainFindEntryByListedId(owner->battle, listedId);
     if (target != NULL) {
         index = target->selectionIndex;
     }
     if (table->slots[index].taken == 0) {
         if ((owner->battle->entries[index].flags & g_btlAction.targetableMask) != 0 &&
             (owner->battle->entries[index].flags & g_btlAction.untargetableMask) == 0 &&
-            *reinterpret_cast<s32 *>(reinterpret_cast<u8 *>(owner->battle->entries) + (0x158 + index * 0x408)) <= 0) {
+            owner->battle->entries[index].targetDelay <= 0) {
             return 1;
         }
     }

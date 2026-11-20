@@ -38,9 +38,9 @@ s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite)
                         sprite->positionDone = 1;
                     } else if (step->positionKey == -2) {
                         sprite->positionStep = 0;
-                        timerStart(sprite, (s16)sprite->commands[0].positionKey, sprite->commands[0].positionReverse);
+                        uiSpriteSetKeyframe(sprite, (s16)sprite->commands[0].positionKey, sprite->commands[0].positionReverse);
                     } else {
-                        timerStart(sprite, (s16)step->positionKey, step->positionReverse);
+                        uiSpriteSetKeyframe(sprite, (s16)step->positionKey, step->positionReverse);
                     }
                 } else {
                     sprite->positionDone = 1;

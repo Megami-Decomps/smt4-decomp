@@ -1,4 +1,3 @@
-/* NON_MATCHING: global-address loads are hoisted differently and snapshot copies use different base registers. */
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 #include "map/mapMain.h"

@@ -37,7 +37,7 @@ int asdMemFreeSlot(unsigned int);
 int ifTouchRegionAddRequested(int, int);
 int buttonHelpSetPreset(...);
 int uiSlidingSpriteAdvance(...);
-int timerStart(...);
+int uiSpriteSetKeyframe(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int uiSpriteAdvanceAnimation(...);
 int asdMemFree(...);
 
@@ -79,7 +79,7 @@ extern int gridNavigationGetItemCount(int);
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: uiSlidingSpriteAdvance. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: timerStart. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: soundPlaySeUnpanned. */
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
@@ -303,10 +303,10 @@ s32 uiQuestCalc(u32 job)
       return 0;
     }
     if (*(short *)(temp_v1 + 0x228) != 2) {
-      timerStart(temp_v1 + 0x1d8,1,0);
+      uiSpriteSetKeyframe(temp_v1 + 0x1d8,1,0);
     }
     else {
-      timerStart(temp_v1 + 0x1d8,0,0);
+      uiSpriteSetKeyframe(temp_v1 + 0x1d8,0,0);
     }
     *(unsigned int *)(temp_v1 + 0x5c8) = *(unsigned int *)(temp_v1 + 0x5cc);
     temp_v11 = g_uiQuest;
@@ -594,7 +594,7 @@ s32 uiQuestCalc(u32 job)
         *(unsigned char *)(temp_v1 + 0x5c6) = 1;
         gameStateResetRecord(g_aocMain + 0xa8);
       }
-      timerStart(temp_v1 + 0x34,2,0);
+      uiSpriteSetKeyframe(temp_v1 + 0x34,2,0);
       temp_v7 = 3;
       break;
     }
@@ -629,7 +629,7 @@ joined_r0x0019627c:
         break;
       }
     }
-    timerStart(temp_v1 + 0x34,2,0);
+    uiSpriteSetKeyframe(temp_v1 + 0x34,2,0);
     temp_v7 = 3;
     break;
   case 0xf:
@@ -650,7 +650,7 @@ joined_r0x0019627c:
       temp_v0 = *(char *)(temp_v1 + 0x5f5);
       goto joined_r0x0019627c;
     }
-    timerStart(temp_v1 + 0x34,2,0);
+    uiSpriteSetKeyframe(temp_v1 + 0x34,2,0);
     temp_v7 = 3;
     break;
   case 0x10:
@@ -750,7 +750,7 @@ joined_r0x0019627c:
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    timerStart(temp_v1 + 0x34,2,0);
+    uiSpriteSetKeyframe(temp_v1 + 0x34,2,0);
     spriteStartAnimationByIndex(temp_v1 + 0x2f0,4);
     temp_v7 = 0x13;
     break;
@@ -833,9 +833,9 @@ joined_r0x0019627c:
       return 0;
     }
     if (*(char *)(temp_v1 + 0x5f0) != '\0') {
-      timerStart(temp_v1 + 0x34,2,0);
+      uiSpriteSetKeyframe(temp_v1 + 0x34,2,0);
     }
-    timerStart(temp_v1 + 0x408,2,0);
+    uiSpriteSetKeyframe(temp_v1 + 0x408,2,0);
     uiFadeRequestHalf();
     temp_v7 = 0x16;
     break;
@@ -897,7 +897,7 @@ joined_r0x0019627c:
         temp_v0 = *(char *)(temp_v1 + 0x5f5);
       }
       if (temp_v12 || temp_v0 != '\0') {
-        timerStart(temp_v1 + 0x34,2,0);
+        uiSpriteSetKeyframe(temp_v1 + 0x34,2,0);
         temp_v7 = 3;
         break;
       }
@@ -931,7 +931,7 @@ joined_r0x0019627c:
       *(unsigned int *)(temp_v1 + 0x5e0) = 0;
     }
     FUN_0028fe0c(*(unsigned short *)(temp_v1 + 0x97e),1);
-    timerStart(temp_v1 + 0x494,0);
+    uiSpriteSetKeyframe(temp_v1 + 0x494,0);
     spriteStartAnimationByIndex(temp_v1 + 0x520,5);
     temp_v7 = 0x18;
     break;
@@ -957,7 +957,7 @@ joined_r0x0019627c:
         *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
         return 0;
       }
-      timerStart(temp_v1 + 0x1d8,3,0);
+      uiSpriteSetKeyframe(temp_v1 + 0x1d8,3,0);
       temp_v7 = 5;
     }
     else {
@@ -977,7 +977,7 @@ joined_r0x0019627c:
           *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
           return 0;
         }
-        timerStart(temp_v1 + 0x1d8,2,0);
+        uiSpriteSetKeyframe(temp_v1 + 0x1d8,2,0);
         temp_v7 = 5;
       }
       else {
@@ -991,7 +991,7 @@ joined_r0x0019627c:
             return 0;
           }
         }
-        timerStart(temp_v1 + 0x34,2,0);
+        uiSpriteSetKeyframe(temp_v1 + 0x34,2,0);
         temp_v7 = 0x19;
       }
     }
@@ -1021,7 +1021,7 @@ joined_r0x0019627c:
       return 0;
     }
     *(unsigned char *)(temp_v1 + 0x5c7) = 1;
-    timerStart(temp_v1 + 0x34,2,0);
+    uiSpriteSetKeyframe(temp_v1 + 0x34,2,0);
     temp_v7 = 3;
     break;
   case 0x1c:
@@ -1042,7 +1042,7 @@ joined_r0x0019627c:
         *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
         return 0;
       }
-      timerStart(temp_v1 + 0x1d8,3,0);
+      uiSpriteSetKeyframe(temp_v1 + 0x1d8,3,0);
       temp_v11 = g_uiQuest;
       *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
       *(unsigned int *)(temp_v11 + 4) = 5;
@@ -1066,7 +1066,7 @@ joined_r0x0019627c:
           *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
           return 0;
         }
-        timerStart(temp_v1 + 0x1d8,2,0);
+        uiSpriteSetKeyframe(temp_v1 + 0x1d8,2,0);
         temp_v11 = g_uiQuest;
         *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
         *(unsigned int *)(temp_v11 + 4) = 5;
@@ -1084,7 +1084,7 @@ joined_r0x0019627c:
             return 0;
           }
         }
-        timerStart(temp_v1 + 0x34,2,0);
+        uiSpriteSetKeyframe(temp_v1 + 0x34,2,0);
         temp_v11 = g_uiQuest;
         *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
         *(unsigned int *)(temp_v11 + 4) = 3;

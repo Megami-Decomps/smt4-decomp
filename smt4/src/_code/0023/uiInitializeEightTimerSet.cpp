@@ -1,5 +1,5 @@
 #include "ui/UiSpriteApi.h"
-/* NON_MATCHING: the packets and the hoisted per-case timer addresses now match; retail keeps `set` in r4 and the index in r5 (swapped here) and lays out the timerStart tail merges differently (own call for case 0, shared call in case 1). */
+/* NON_MATCHING: the packets and the hoisted per-case timer addresses now match; retail keeps `set` in r4 and the index in r5 (swapped here) and lays out the uiSpriteSetKeyframe tail merges differently (own call for case 0, shared call in case 1). */
 #include "ui/UiSpriteState.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 
@@ -37,28 +37,28 @@ void uiInitializeEightTimerSet(UiEightTimerSet *set)
         uiSpriteStateInitFromSource(&set->timers[index], 0x1c, 1, &set->resources, 0x15, 1.0f);
         switch (index) {
         case 0:
-            timerStart(&set->timers[index], 0, 0);
+            uiSpriteSetKeyframe(&set->timers[index], 0, 0);
             break;
         case 1:
-            timerStart(&set->timers[index], 1, 0);
+            uiSpriteSetKeyframe(&set->timers[index], 1, 0);
             break;
         case 2:
             spriteStartAnimationByIndex(&set->timers[index], 0);
             break;
         case 3:
-            timerStart(&set->timers[index], 2, 0);
+            uiSpriteSetKeyframe(&set->timers[index], 2, 0);
             break;
         case 4:
-            timerStart(&set->timers[index], 3, 0);
+            uiSpriteSetKeyframe(&set->timers[index], 3, 0);
             break;
         case 5:
-            timerStart(&set->timers[index], 4, 0);
+            uiSpriteSetKeyframe(&set->timers[index], 4, 0);
             break;
         case 6:
-            timerStart(&set->timers[index], 5, 0);
+            uiSpriteSetKeyframe(&set->timers[index], 5, 0);
             break;
         case 7:
-            timerStart(&set->timers[index], 6, 0);
+            uiSpriteSetKeyframe(&set->timers[index], 6, 0);
             break;
         }
     }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: default optimization combines repeated slot/source loads and omits retail inline-getter hints (95/81 rows, six versus eight saved GPRs); O2 candidate. */
 #include "ui/PartyPanelState.h"
 #include "battle/BtlEntry.h"
 #include "gamedata/UnitRecordAccess.h"
@@ -7,39 +6,36 @@ extern "C" {
 void FUN_0033c468(PartyPanelWidget* widget);
 u16* FUN_0029acb0();
 s32 FUN_0028dbe0(PartyPanelWidget* widget);
+s32 partyWidgetGetUnitId(PartyPanelWidget *widget);
 }
 
-namespace {
-inline s32 widgetSource(PartyPanelWidget* widget)
-{
-    return widget->slot;
-}
-
-// Keep the slot by reference: callbacks may replace its widget.
-inline void pollStatusColor(PartyPanelWidget* const& widget, u32& color)
-{
-    FUN_0033c468(widget);
-    const s16* selectedId = reinterpret_cast<const s16*>(FUN_0029acb0());
-    if (widgetSource(widget) < 0) {
-        if (*selectedId < 0 && FUN_0028dbe0(widget) != -1) {
-            color = FUN_0028dbe0(widget);
-        }
-    } else if (gameGetUnitRecord(widgetSource(widget))->id == *selectedId
-               && FUN_0028dbe0(widget) != -1) {
-        color = FUN_0028dbe0(widget);
-    }
-}
-}
-
+/* Polls every party row and stock cell and returns the status colour of the last one that shows the selected
+ * unit (-1 when none has one). */
 extern "C" u32 partyPanelPollSelectedStatusColor()
 {
     PartyPanelState* panel = g_partyPanel;
     u32 color = ~0u;
     for (s32 i = 0; i < 4; ++i) {
-        pollStatusColor(panel->characters[i], color);
+        FUN_0033c468(panel->characters[i]);
+        const s16 *selectedId = (const s16 *)FUN_0029acb0();
+        if (partyWidgetGetUnitId(panel->characters[i]) < 0) {
+            if (*selectedId < 0 && FUN_0028dbe0(panel->characters[i]) != -1) {
+                color = FUN_0028dbe0(panel->characters[i]);
+            }
+        } else if (gameGetUnitRecord(partyWidgetGetUnitId(panel->characters[i]))->id == *selectedId && FUN_0028dbe0(panel->characters[i]) != -1) {
+            color = FUN_0028dbe0(panel->characters[i]);
+        }
     }
     for (s32 i = 0; i < 24; ++i) {
-        pollStatusColor(panel->demons[i], color);
+        FUN_0033c468(panel->demons[i]);
+        const s16 *selectedId = (const s16 *)FUN_0029acb0();
+        if (partyWidgetGetUnitId(panel->demons[i]) < 0) {
+            if (*selectedId < 0 && FUN_0028dbe0(panel->demons[i]) != -1) {
+                color = FUN_0028dbe0(panel->demons[i]);
+            }
+        } else if (gameGetUnitRecord(partyWidgetGetUnitId(panel->demons[i]))->id == *selectedId && FUN_0028dbe0(panel->demons[i]) != -1) {
+            color = FUN_0028dbe0(panel->demons[i]);
+        }
     }
     return color;
 }

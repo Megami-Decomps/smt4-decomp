@@ -71041,13 +71041,13 @@
       "target_path": "orig/target/_code/0017/asdGxCmdBufferFinalizeBlock.o"
     },
     {
-      "base_path": "build/obj/_code/0017/FUN_0017d43c.o",
+      "base_path": "build/obj/_code/0017/asdGxCommandBufferQueueSegment.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0017d43c",
+            "name": "asdGxCommandBufferQueueSegment",
             "size": 412,
             "vram": "0x17d43c"
           }
@@ -71055,10 +71055,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0017/FUN_0017d43c.cpp"
+        "source_path": "src/_code/0017/asdGxCommandBufferQueueSegment.cpp"
       },
-      "name": "_code/0017/FUN_0017d43c",
-      "target_path": "orig/target/_code/0017/FUN_0017d43c.o"
+      "name": "_code/0017/asdGxCommandBufferQueueSegment",
+      "target_path": "orig/target/_code/0017/asdGxCommandBufferQueueSegment.o"
     },
     {
       "base_path": "build/obj/_code/0017/FUN_0017d5f8.o",
@@ -71761,13 +71761,13 @@
       "target_path": "orig/target/_code/0017/FUN_0017fcf8.o"
     },
     {
-      "base_path": "build/obj/_code/0017/FUN_0017fd20.o",
+      "base_path": "build/obj/_code/0017/svcCreateEvent.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0017fd20",
+            "name": "svcCreateEvent",
             "size": 24,
             "vram": "0x17fd20"
           }
@@ -71775,10 +71775,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0017/FUN_0017fd20.cpp"
+        "source_path": "src/_code/0017/svcCreateEvent.cpp"
       },
-      "name": "_code/0017/FUN_0017fd20",
-      "target_path": "orig/target/_code/0017/FUN_0017fd20.o"
+      "name": "_code/0017/svcCreateEvent",
+      "target_path": "orig/target/_code/0017/svcCreateEvent.o"
     },
     {
       "base_path": "build/obj/_code/0017/svcWaitSynchronizationN.o",
@@ -81894,13 +81894,13 @@
       "target_path": "orig/target/_code/0019/svcBreakTrap.o"
     },
     {
-      "base_path": "build/obj/_code/0019/FUN_0019a300.o",
+      "base_path": "build/obj/_code/0019/svcConnectToPort.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0019a300",
+            "name": "svcConnectToPort",
             "size": 24,
             "vram": "0x19a300"
           }
@@ -81908,10 +81908,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0019/FUN_0019a300.cpp"
+        "source_path": "src/_code/0019/svcConnectToPort.cpp"
       },
-      "name": "_code/0019/FUN_0019a300",
-      "target_path": "orig/target/_code/0019/FUN_0019a300.o"
+      "name": "_code/0019/svcConnectToPort",
+      "target_path": "orig/target/_code/0019/svcConnectToPort.o"
     },
     {
       "base_path": "build/obj/_code/0019/FUN_0019a318.o",
@@ -83284,13 +83284,13 @@
       "target_path": "orig/target/_code/0019/FUN_0019e31c.o"
     },
     {
-      "base_path": "build/obj/_code/0019/rangeSelectionSelectEndpoint.o",
+      "base_path": "build/obj/_code/0019/uiSpriteSetScaleKeyframe.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "rangeSelectionSelectEndpoint",
+            "name": "uiSpriteSetScaleKeyframe",
             "size": 72,
             "vram": "0x19e330"
           }
@@ -83298,10 +83298,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0019/rangeSelectionSelectEndpoint.cpp"
+        "source_path": "src/_code/0019/uiSpriteSetScaleKeyframe.cpp"
       },
-      "name": "_code/0019/rangeSelectionSelectEndpoint",
-      "target_path": "orig/target/_code/0019/rangeSelectionSelectEndpoint.o"
+      "name": "_code/0019/uiSpriteSetScaleKeyframe",
+      "target_path": "orig/target/_code/0019/uiSpriteSetScaleKeyframe.o"
     },
     {
       "base_path": "build/obj/_code/0019/dataTable19FindAddonWord.o",
@@ -111090,13 +111090,13 @@
       "target_path": "orig/target/_code/0021/FUN_0021b6ec.o"
     },
     {
-      "base_path": "build/obj/_code/0021/FUN_0021b968.o",
+      "base_path": "build/obj/_code/0021/resultMarkUnitSlot.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0021b968",
+            "name": "resultMarkUnitSlot",
             "size": 236,
             "vram": "0x21b968"
           }
@@ -111104,10 +111104,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0021/FUN_0021b968.cpp"
+        "source_path": "src/_code/0021/resultMarkUnitSlot.cpp"
       },
-      "name": "_code/0021/FUN_0021b968",
-      "target_path": "orig/target/_code/0021/FUN_0021b968.o"
+      "name": "_code/0021/resultMarkUnitSlot",
+      "target_path": "orig/target/_code/0021/resultMarkUnitSlot.o"
     },
     {
       "base_path": "build/obj/_code/0021/uiSpriteScreenSetupForMode.o",
@@ -120815,13 +120815,13 @@
       "target_path": "orig/target/_code/0026/campSelectorRebuildList.o"
     },
     {
-      "base_path": "build/obj/_code/0026/FUN_0026f3a0.o",
+      "base_path": "build/obj/_code/0026/partyPanelResetWidgets.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0026f3a0",
+            "name": "partyPanelResetWidgets",
             "size": 612,
             "vram": "0x26f3a0"
           }
@@ -120829,10 +120829,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0026/FUN_0026f3a0.cpp"
+        "source_path": "src/_code/0026/partyPanelResetWidgets.cpp"
       },
-      "name": "_code/0026/FUN_0026f3a0",
-      "target_path": "orig/target/_code/0026/FUN_0026f3a0.o"
+      "name": "_code/0026/partyPanelResetWidgets",
+      "target_path": "orig/target/_code/0026/partyPanelResetWidgets.o"
     },
     {
       "base_path": "build/obj/_code/0026/rebuildFusionCatalogLists.o",
@@ -125676,13 +125676,13 @@
       "target_path": "orig/target/_code/test/BustupViewer/FUN_0028c258.o"
     },
     {
-      "base_path": "build/obj/_code/0028/FUN_0028c2ec.o",
+      "base_path": "build/obj/_code/0028/partyPanelRefreshSkillPreview.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0028c2ec",
+            "name": "partyPanelRefreshSkillPreview",
             "size": 808,
             "vram": "0x28c2ec"
           }
@@ -125690,10 +125690,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0028/FUN_0028c2ec.cpp"
+        "source_path": "src/_code/0028/partyPanelRefreshSkillPreview.cpp"
       },
-      "name": "_code/0028/FUN_0028c2ec",
-      "target_path": "orig/target/_code/0028/FUN_0028c2ec.o"
+      "name": "_code/0028/partyPanelRefreshSkillPreview",
+      "target_path": "orig/target/_code/0028/partyPanelRefreshSkillPreview.o"
     },
     {
       "base_path": "build/obj/_code/0028/btlCommandResolveSelectedTarget.o",
@@ -131275,13 +131275,13 @@
       "target_path": "orig/target/_code/002a/campFusionResultCommand.o"
     },
     {
-      "base_path": "build/obj/_code/002a/FUN_002ade88.o",
+      "base_path": "build/obj/_code/002a/partyPanelRefreshFusionAvailability.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002ade88",
+            "name": "partyPanelRefreshFusionAvailability",
             "size": 1168,
             "vram": "0x2ade88"
           }
@@ -131289,10 +131289,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002a/FUN_002ade88.cpp"
+        "source_path": "src/_code/002a/partyPanelRefreshFusionAvailability.cpp"
       },
-      "name": "_code/002a/FUN_002ade88",
-      "target_path": "orig/target/_code/002a/FUN_002ade88.o"
+      "name": "_code/002a/partyPanelRefreshFusionAvailability",
+      "target_path": "orig/target/_code/002a/partyPanelRefreshFusionAvailability.o"
     },
     {
       "base_path": "build/obj/_code/002a/questMarkSelectedSpecialDetail.o",
@@ -199873,13 +199873,13 @@
       "target_path": "orig/target/_code/0034/scrCommMessageShowWithKind.o"
     },
     {
-      "base_path": "build/obj/_code/0034/FUN_00345718.o",
+      "base_path": "build/obj/_code/0034/messageWindowStartTimer.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00345718",
+            "name": "messageWindowStartTimer",
             "size": 152,
             "vram": "0x345718"
           }
@@ -199887,10 +199887,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0034/FUN_00345718.cpp"
+        "source_path": "src/_code/0034/messageWindowStartTimer.cpp"
       },
-      "name": "_code/0034/FUN_00345718",
-      "target_path": "orig/target/_code/0034/FUN_00345718.o"
+      "name": "_code/0034/messageWindowStartTimer",
+      "target_path": "orig/target/_code/0034/messageWindowStartTimer.o"
     },
     {
       "base_path": "build/obj/_code/camp/CommonBg/CommonBg/campCreateCommonBackground.o",
@@ -213905,13 +213905,13 @@
       "target_path": "orig/target/_code/0037/FUN_00372570.o"
     },
     {
-      "base_path": "build/obj/_code/0037/FUN_00372794.o",
+      "base_path": "build/obj/_code/0037/skillMenuCanCurrentUserUseSkill.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00372794",
+            "name": "skillMenuCanCurrentUserUseSkill",
             "size": 196,
             "vram": "0x372794"
           }
@@ -213919,10 +213919,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0037/FUN_00372794.cpp"
+        "source_path": "src/_code/0037/skillMenuCanCurrentUserUseSkill.cpp"
       },
-      "name": "_code/0037/FUN_00372794",
-      "target_path": "orig/target/_code/0037/FUN_00372794.o"
+      "name": "_code/0037/skillMenuCanCurrentUserUseSkill",
+      "target_path": "orig/target/_code/0037/skillMenuCanCurrentUserUseSkill.o"
     },
     {
       "base_path": "build/obj/_code/0037/FUN_0037285c.o",
@@ -236323,13 +236323,13 @@
       "target_path": "orig/target/_code/003b/FUN_003b0544.o"
     },
     {
-      "base_path": "build/obj/_code/003b/FUN_003b0558.o",
+      "base_path": "build/obj/_code/003b/partyPanelRemoveLastFusionParent.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_003b0558",
+            "name": "partyPanelRemoveLastFusionParent",
             "size": 296,
             "vram": "0x3b0558"
           }
@@ -236337,10 +236337,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003b/FUN_003b0558.cpp"
+        "source_path": "src/_code/003b/partyPanelRemoveLastFusionParent.cpp"
       },
-      "name": "_code/003b/FUN_003b0558",
-      "target_path": "orig/target/_code/003b/FUN_003b0558.o"
+      "name": "_code/003b/partyPanelRemoveLastFusionParent",
+      "target_path": "orig/target/_code/003b/partyPanelRemoveLastFusionParent.o"
     },
     {
       "base_path": "build/obj/_code/003b/FUN_003b0684.o",
@@ -249429,13 +249429,13 @@
       "target_path": "orig/target/_code/003d/gauntletAppMenuDrawScreen.o"
     },
     {
-      "base_path": "build/obj/_code/003d/FUN_003dc0c0.o",
+      "base_path": "build/obj/_code/003d/gauntletAppMenuSetMode.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_003dc0c0",
+            "name": "gauntletAppMenuSetMode",
             "size": 712,
             "vram": "0x3dc0c0"
           }
@@ -249443,10 +249443,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003d/FUN_003dc0c0.cpp"
+        "source_path": "src/_code/003d/gauntletAppMenuSetMode.cpp"
       },
-      "name": "_code/003d/FUN_003dc0c0",
-      "target_path": "orig/target/_code/003d/FUN_003dc0c0.o"
+      "name": "_code/003d/gauntletAppMenuSetMode",
+      "target_path": "orig/target/_code/003d/gauntletAppMenuSetMode.o"
     },
     {
       "base_path": "build/obj/_code/003d/uiQuestRefreshDetailPages.o",
@@ -251734,13 +251734,13 @@
       "target_path": "orig/target/_code/003e/dataRecordGetValue.o"
     },
     {
-      "base_path": "build/obj/_code/003e/FUN_003e45bc.o",
+      "base_path": "build/obj/_code/003e/appTryPurchase.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_003e45bc",
+            "name": "appTryPurchase",
             "size": 308,
             "vram": "0x3e45bc"
           }
@@ -251748,10 +251748,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003e/FUN_003e45bc.cpp"
+        "source_path": "src/_code/003e/appTryPurchase.cpp"
       },
-      "name": "_code/003e/FUN_003e45bc",
-      "target_path": "orig/target/_code/003e/FUN_003e45bc.o"
+      "name": "_code/003e/appTryPurchase",
+      "target_path": "orig/target/_code/003e/appTryPurchase.o"
     },
     {
       "base_path": "build/obj/_code/003e/gameDataFlagTestBit.o",
@@ -327708,13 +327708,13 @@
       "target_path": "orig/target/_code/004d/optionsClearFlag1.o"
     },
     {
-      "base_path": "build/obj/_code/004d/FUN_004da344.o",
+      "base_path": "build/obj/_code/004d/fusionCheckPairAvailability.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004da344",
+            "name": "fusionCheckPairAvailability",
             "size": 476,
             "vram": "0x4da344"
           }
@@ -327722,10 +327722,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004d/FUN_004da344.cpp"
+        "source_path": "src/_code/004d/fusionCheckPairAvailability.cpp"
       },
-      "name": "_code/004d/FUN_004da344",
-      "target_path": "orig/target/_code/004d/FUN_004da344.o"
+      "name": "_code/004d/fusionCheckPairAvailability",
+      "target_path": "orig/target/_code/004d/fusionCheckPairAvailability.o"
     },
     {
       "base_path": "build/obj/_code/004d/FUN_004da520.o",

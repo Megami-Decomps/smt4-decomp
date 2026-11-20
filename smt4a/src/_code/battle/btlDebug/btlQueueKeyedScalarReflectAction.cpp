@@ -1,4 +1,4 @@
-/* NON_MATCHING: native event-mask global and four-word argument ABI are recovered; OR/AND load grouping and the allocated action's constant-value lifetime still differ. */
+/* NON_MATCHING: action queue matches retail; the combined primary|secondary mask OR and required-mask load grouping differ (a single-use mask local drops to 4 lines but is steering, so not written). */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
@@ -9,8 +9,16 @@
 extern "C" {
 void *FUN_003f0254(BtlMainStateA *, BtlActionRecord *);
 void *FUN_003f06b4(BtlMainStateA *, BtlActionRecord *);
-
 s32 FUN_004d7a60(void *, BtlActionRecord *, u32);
+
+/* Queues a reflection action of kind 0x2E on the entry (twin of smt4 btlQueueReflectEntryAction, sibling FUN_004fcde0). */
+static __inline void queueEntryAction(s32 actorId, u32 parameter, BtlCombatantEntryA *entry, s32 value)
+{
+    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actorId, 0, parameter);
+    action->kind = 0x2E;
+    action->wordValues.unk18 = (u32)entry;
+    action->value = value;
+}
 
 u32 btlQueueKeyedScalarReflectAction(s32 actorId, u32 parameter, BtlActionRecord *command, s32)
 {
@@ -26,14 +34,11 @@ u32 btlQueueKeyedScalarReflectAction(s32 actorId, u32 parameter, BtlActionRecord
     if ((command->status & 1) && (command->status & 0x80)) {
         BtlMainStateA *state = btlGetMainState();
         BtlCombatantEntryA *entry = btlMainFindEntryByListedId(state, command->apocalypse.memberId);
-        entry->flags |= DAT_00573c08.secondary | DAT_00573c08.primary;
+        entry->flags |= (DAT_00573c08.secondary | DAT_00573c08.primary);
         if (FUN_004d7a60(g_btlEvent.owner, command, 1) == 0 ||
             (FUN_003f06b4(state, command) != NULL && FUN_003f0254(state, command) == NULL) ||
             (DAT_00573c08.required & entry->flags) == 0) {
-            ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, static_cast<s16>(actorId), 0, parameter);
-            action->kind = 0x2E;
-            action->wordValues.unk18 = reinterpret_cast<u32>(entry);
-            action->value = 1;
+            queueEntryAction(actorId, parameter, entry, 1);
         }
     }
     return 1;

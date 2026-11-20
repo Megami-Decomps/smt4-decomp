@@ -61,7 +61,7 @@ extern "C" void titleConfigCreate(void)
     drawParameterBlockClear(&work->resources);
     paramsInit(&work->resources, g_titleConfigDefaultParams, 0x18, NULL, 0, NULL, 0, NULL, 0, NULL, 0);
     uiSpriteStateInitFromSource(&work->sprite, 0x2f, 0, &work->resources, 0xc9, 1.0f);
-    timerStart(&work->sprite, 0, 0);
+    uiSpriteSetKeyframe(&work->sprite, 0, 0);
     gridNavigationConfigure(work->selector, 3, 3, 1, 0, 1);
     work->state = 0;
     work->countA = 0;

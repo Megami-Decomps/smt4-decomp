@@ -18,7 +18,7 @@ void FUN_0029da34(u32 mode, u32 enabled, u32 id, const void *member);
 void buttonHelpShowSkillDetails(u32 id);
 void menuSetModeAndResetTransitions(s32 mode);
 void buttonHelpSetSlot(s32 first, s32 second, s32 third, s32 enabled);
-void timerStart(void *timer, s32 period, s32 value);
+void uiSpriteSetKeyframe(void *timer, s32 period, s32 value); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Enter a unite-menu state, updating its help, selected member, and transition history. */
 void uniteMenuChangeState(u32 state, s32 preservePrevious)
@@ -105,7 +105,7 @@ void uniteMenuChangeState(u32 state, s32 preservePrevious)
         break;
     case 0x21:
         work->history.saved = work->state;
-        timerStart(work->event.timer, 3, 0);
+        uiSpriteSetKeyframe(work->event.timer, 3, 0);
         gameGlobalsSetSubScreenActive(1);
         break;
     case 0:

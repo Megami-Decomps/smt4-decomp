@@ -23,7 +23,7 @@ void sysMemClear(void *buffer, u32 bytes);
 u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, GauntletTaskFunc draw, GauntletTaskFunc destroy,
                    void *work, u32 parent);
 s32 gameFlagIsSet(u32 flag);
-void FUN_003dc0c0(GauntletAppMenuWork *menu, s32 mode);
+void gauntletAppMenuSetMode(GauntletAppMenuWork *menu, s32 mode);
 u32 dataTableGetCount(void *section);
 void paramsClearPacket(void *params);
 
@@ -90,7 +90,7 @@ u32 gauntletAppMenuCreate(void)
     if (gameFlagIsSet(0x527)) {
         menu->list.forceThird = 1;
     }
-    FUN_003dc0c0(menu, 0);
+    gauntletAppMenuSetMode(menu, 0);
     loadSlotEnsureLoaded(0xd);
     {
         void *section = dataTableGet(0xd, 0);

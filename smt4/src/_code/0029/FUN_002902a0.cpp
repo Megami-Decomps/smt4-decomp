@@ -8,7 +8,7 @@ extern "C" {
 void uiFadeRequestClear(void);
 void scrollListSetSelectionMarkChanged(void *cursor, s32 index);
 void buttonHelpSetPreset(s32 preset);
-void timerStart(void *timer, s32 start, s32 mode);
+void uiSpriteSetKeyframe(void *timer, s32 start, s32 mode); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void soundPlaySeUnpanned(u32 event);
 
 /* Opens a quest detail panel, optionally restoring its selected list entry. */
@@ -28,7 +28,7 @@ void FUN_002902a0(u32 questId, s32 restoreSelection)
     quest->questId = (s16)questId;
     quest->panelView.panel.detailMode = dataTable1bOr1cRecordHasFlag1(questId);
     detail->speed = 0.2088f;
-    timerStart(detail->timer, 0, 0);
+    uiSpriteSetKeyframe(detail->timer, 0, 0);
     if (restoreSelection == 0) {
         detail->restoreSelection = 0;
     } else {
@@ -48,7 +48,7 @@ void FUN_002902a0(u32 questId, s32 restoreSelection)
                 break;
             }
         }
-        timerStart(quest->mainSprite, 0, 0);
+        uiSpriteSetKeyframe(quest->mainSprite, 0, 0);
     }
     uiFadeRequestClear();
     uiQuestEnterState(g_uiQuest, 20);

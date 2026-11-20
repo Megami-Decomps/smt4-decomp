@@ -3,10 +3,10 @@
 
 extern "C" {
 
-/* Connects to the named port through svc 0x2d and stores the session handle in *out. */
-s32 FUN_0019a300(u32 *out, const char *name)
+/* Creates a semaphore through svc 0x15 and stores its handle in *out (the arguments pass through). */
+s32 svcCreateSemaphore(u32 *out, u32 initialCount, u32 maxCount)
 {
-    nn::svc::ResultAndValue r = nn::svc::ConnectToPortRaw((u32)out, name);
+    nn::svc::ResultAndValue r = nn::svc::CreateSemaphoreRaw((u32)out, initialCount, maxCount);
     *out = r.value;
     return r.result;
 }

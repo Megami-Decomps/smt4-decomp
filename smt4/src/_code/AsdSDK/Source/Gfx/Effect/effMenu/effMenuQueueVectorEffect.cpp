@@ -1,5 +1,4 @@
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers_effMenu.h"
-/* NON_MATCHING: the payload copy destination uses r5 where retail uses lr. */
 #include "AsdSDK/Source/Gfx/Effect/effMenu.h"
 #include "AsdSDK/Source/Gfx/Effect/effMenuMatrix.h"
 #include "AsdSDK/AsdDebug.h"

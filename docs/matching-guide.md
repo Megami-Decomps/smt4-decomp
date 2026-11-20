@@ -71,6 +71,14 @@ difference a register tie-break.
   `AsdSndSlotC` made retail's split base (`add r0, r1, #1536` then `[r0, #130]`/`[r0, #146]`, smt4
   `FUN_0010d3f8`), where a `u8` addresses each slot from the sound base.
 - A flag read with `ldrb` through a split large-offset base and tested against 0 is `s8`.
+- A one-shot skip flag in a global that retail tests and clears through two loads of the global's address (`ldr r0, =g;
+  ldrb r0, [r0, #N]; ldr r5, =g` before the `push` returns, where the build loads the address once or copies it with
+  `add r5, r0, #0`) is `s8` too: `GameStateMapBlock::skipReturnSnapshot` (smt4) and `GameStateA::skipTransitionSnapshot`
+  (smt4a) made the eight return-snapshot functions IDENTICAL with the global written directly (wave 53).
+- A starter that stores its index into an `s16` field and then indexes a table takes the index as `s16` and indexes
+  by the field it just stored (`sprite->scaleKey = key; … value = &sprite->scaleKeys[sprite->scaleKey];`): retail
+  multiplies in place and does not save `r4` (the UiSpriteState key starters `uiSpriteSetKeyframe`,
+  `uiSpriteSetImageKeyframe` and the scale-key starter in both games, `ui/UiSpriteApi.h`).
 - A byte flag whose `== 0` test retail keeps as its own `ldrb; cmp; bne` block, where the build predicates
   it (`ldrbeq; cmpeq`), is `s8`, at a direct offset too (`boardState.fullNoticePlayed`, qcBoardStep); `u8`,
   `bool` and wider types all predicate.
@@ -338,6 +346,14 @@ More on classes, constructors and destructors is in [C++](style-and-naming.md#c)
 - A lone `mov r0, #const` where a call would be, followed by a reload of a value the call would have
   clobbered, is a linker-inlined constant getter: write the call and add an `inlined.txt` row
   (`titleConfigUpdate`'s default volumes).
+- Record setters and getters are linker-inlined too: a widget reloaded into `r0` and the value rematerialised before
+  each `strb r1, [r0, #N]` (or a lone `ldr r0, [r0, #N]` followed by the call's `nop` padding) is a call to a
+  one-instruction accessor. Write the calls and add the rows after checking each call site's word in the image
+  (`partyWidgetSet*`/`partyWidgetGetUnitId` in both games: smt4a `FUN_0026f3a0` and `partyPanelRefreshFilterMarks`,
+  smt4 `FUN_001d13b0` and `partyPanelPollSelectedStatusColor`, wave 53).
+- A NULL test retail repeats right before a few stores through a pointer the function has already dereferenced is a
+  small real function with its own NULL check, inlined there: write that function's body as a `static __inline`
+  copy (smt4 `partyRestoreGroup`, with `FUN_002954bc`'s `if (unit != NULL) { hp = maxHp; mp = maxMp; }`).
 - A `rev16` on a constant between argument moves (`mov r0, rN; rev16 r0, r0; mov rM, r0`) is a
   one-instruction function armlink inlined, not the compiler's byte-swap idiom: write the call and add
   an `inlined.txt` row (`textCodeSwapBytes`).

@@ -100,7 +100,7 @@ extern short *gameGetPlayerData(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern unsigned char buttonHelpGetStatus(void);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: timerStart. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: soundPlaySeUnpanned. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: inputQueryButtonState. */
@@ -711,7 +711,7 @@ joined_r0x00188f3c:
       beginStatusPanelClose();
       gameGlobalsSetSelected(0);
       campListShowSelectedHelp(0);
-      timerStart((UiSpriteState *)(temp_v5 + 0x6d4),3,0);
+      uiSpriteSetKeyframe((UiSpriteState *)(temp_v5 + 0x6d4),3,0);
       *(unsigned int *)(temp_v5 + 0x20) = 6;
       temp_v9 = g_camp;
       puVar11 = (unsigned int *)(g_camp + 0x18);

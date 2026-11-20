@@ -1,23 +1,29 @@
-/* NON_MATCHING: retail references shared save-format strings and computes the prefixed format relative to its directory string; this standalone compilation places literals inline and uses ADR. */
 #include "common.h"
-#include <stdio.h>
+#include "runtime/Stdio.h"
 
 extern "C" {
 extern char DAT_005e2114[0x80];
-void rt_aeabi_memclr(void* buffer, u32 size);
+void rt_aeabi_memclr(void *buffer, u32 size);
 
-// Formats the slot's save filename, optionally with the sdds4/ directory prefix.
-char* saveFormatSlotFilename(u32 slot, s32 directoryMode)
+/* Save filename format strings stored contiguously in .rodata (0x530fe4..0x531010). */
+static const struct {
+    char prefixed[0x14];
+    char directory[0x08];
+} s_prefixedSaveFormat = {
+    "%ssdds4game%d.sav",
+    "sdds4/"
+};
+static const char s_plainSaveFormat[] = "sdds4game%d.sav";
+
+/* Format the slot's save filename, optionally with the sdds4/ directory prefix. */
+char *saveFormatSlotFilename(u32 slot, s32 directoryMode)
 {
     rt_aeabi_memclr(DAT_005e2114, sizeof(DAT_005e2114));
-    switch (directoryMode) {
-    case 1:
-        sprintf(DAT_005e2114, "%ssdds4game%d.sav", "sdds4/", slot);
-        break;
-    default:
-        sprintf(DAT_005e2114, "sdds4game%d.sav", slot);
-        break;
+    if (directoryMode == 1) {
+        __2sprintf(DAT_005e2114, s_prefixedSaveFormat.prefixed, s_prefixedSaveFormat.directory, slot);
+    } else {
+        __2sprintf(DAT_005e2114, s_plainSaveFormat, slot);
     }
     return DAT_005e2114;
 }
-}
+} /* extern "C" */

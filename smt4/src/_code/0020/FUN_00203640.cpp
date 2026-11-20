@@ -32,7 +32,7 @@ void FUN_00203640(u16 page)
 
     quest->page = page;
     quest->unk5e8 = 0;
-    timerStart((UiSpriteState *)quest->timer, 1, 0);
+    uiSpriteSetKeyframe((UiSpriteState *)quest->timer, 1, 0);
     spriteStartAnimationByIndex((UiSpriteState *)quest->anim0, 2);
     spriteStartAnimationByIndex((UiSpriteState *)quest->anim1, 3);
     quest = g_uiQuest;

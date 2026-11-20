@@ -42,7 +42,7 @@ void statusOpenSkillSelection(u16 selectedId, u8 mode)
     }
     uniteRequestScriptEntry(14);
     buttonHelpSetPreset(5);
-    timerStart(screen->sprites, 1, 0);
+    uiSpriteSetKeyframe(screen->sprites, 1, 0);
     if (count >= statusGetAvailableChoiceCount()) {
         gridNavigationConfigure(screen->selector, statusGetAvailableChoiceCount() + 1, 9, 1, 1, 1);
         screen->nextState = 25;

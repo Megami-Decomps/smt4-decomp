@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a300(...);
+int svcConnectToPort(...);
 int nn_os_LightEvent_Initialize(...);
 int FUN_001ab838(...);
 int nn_os_LightEvent_Wait(...);
@@ -25,7 +25,7 @@ extern unsigned int g_moduleStateCriticalSection; /* 0x62d280 */
 extern unsigned char bRam1ff80014; /* 0x1ff80014 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_0019a300. */
+/* Supplied declaration required: svcConnectToPort. */
 /* Supplied declaration required: nn_os_LightEvent_Initialize. */
 /* Supplied declaration required: FUN_001ab838. */
 /* Supplied declaration required: nn_os_LightEvent_Wait. */
@@ -86,7 +86,7 @@ unsigned char * FUN_00514428(unsigned int *param_1,int param_2)
     nn_os_CriticalSection_Enter((unsigned int)&g_moduleStateCriticalSection);
     if (g_moduleInitialState == 0) {
       puVar2 = (unsigned int *)&g_moduleInitialState;
-      FUN_0019a300(&g_moduleInitialState,"err:f");
+      svcConnectToPort(&g_moduleInitialState,"err:f");
       if (-1 < (int)puVar2) {
         puVar2 = (unsigned int *)0x0;
       }

@@ -78,7 +78,7 @@ extern int listCursorGetRowIfUnblocked(unsigned int);
 extern int FUN_002cc9e0(int, unsigned int);
 extern unsigned int dataTable16Sub2GetRecordS64(unsigned int);
 extern int FUN_002fa75c(void);
-extern int FUN_00372794(int, int, unsigned char *);
+extern int skillMenuCanCurrentUserUseSkill(int, int, unsigned char *);
 /* Supplied declaration required: statDrawClampedDelta. */
 /* Supplied declaration required: dataRecordGetKindValue. */
 /* Supplied declaration required: playerSecondaryGetKindValue. */
@@ -585,7 +585,7 @@ void btlUiPartyDisplayDrawEntry(int param_1)
     VectorSignedToFloat(*(short *)(temp_v6 + 10) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v6 + 8) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(3,0x57d8ffff,temp_v19);
-    temp_v6 = FUN_00372794(param_1,temp_v8,temp_v17);
+    temp_v6 = skillMenuCanCurrentUserUseSkill(param_1,temp_v8,temp_v17);
     temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x12f));
     if (temp_v14) {
       if ((temp_v6 != 0) && (*(int *)(param_1 + 0x4ba4) >= 0x15)) {

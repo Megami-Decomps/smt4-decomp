@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads the flag address (ldr r7) before `sub sp, #260`; built emits it after the sub */
 #include "common.h"
 #include <stdio.h>
 #include "AsdSDK/AsdLoadFileSyncDefault.h"
@@ -8,8 +7,8 @@ extern "C" {
 
 void asdMemFree(void *block);
 
-extern u8 g_effectTexturesLoaded; /* 0x5b3270 */
-extern void *g_effectTextures[22]; /* 0x635770 */
+extern u8 g_effectTexturesLoaded; /* set once the effect textures are loaded */
+extern void *g_sysWordTable[22]; /* the effect textures (read back through sysGetTableWord) */
 
 /* Loads the 22 numbered effect textures once. */
 void effectTexturesLoadOnce(void)
@@ -22,7 +21,7 @@ void effectTexturesLoadOnce(void)
         do {
             sprintf(path, "effect/tex/be_%04d.stex", i + 1);
             void *file = asdLoadFileSyncNoContext(path, NULL, 1, 0x80);
-            g_effectTextures[i] = asdEffectTextureCreate(file);
+            g_sysWordTable[i] = asdEffectTextureCreate(file);
             asdMemFree(file);
             i++;
         } while (i < 22);

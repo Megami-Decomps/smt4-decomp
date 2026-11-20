@@ -13,7 +13,7 @@ extern "C" s32 infoWindowUpdate(u32 job)
                 window->state = 4;
             } else {
                 window->state = 2;
-                timerStart(&window->content, 2, 0);
+                uiSpriteSetKeyframe(&window->content, 2, 0);
             }
             window->frame = 0;
         }
@@ -43,7 +43,7 @@ extern "C" s32 infoWindowUpdate(u32 job)
             /* Begin closing, written as infoWinStartTimer does it. */
             g_infoWin->state = 5;
             window->timer = 30;
-            timerStart(&window->background, 1, 0);
+            uiSpriteSetKeyframe(&window->background, 1, 0);
         }
         break;
     case 5:

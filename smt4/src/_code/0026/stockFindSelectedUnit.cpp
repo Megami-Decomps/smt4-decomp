@@ -1,19 +1,18 @@
-/* NON_MATCHING: Retail ldr r1, [pc, #132] differs from recovered ldr r0, [pc, #132]. */
+/* NON_MATCHING: allocation: retail keeps the slot table in r4 and the record offset in r5 (saving r4-r5),
+ * this build uses r2/r4 and saves only r4; the load order of the save block and selected id differs too. */
 #include "gamedata/GameSaveBlocks.h"
 
-// Find the first stock unit whose devil is the selected unit.
+/* Finds the first stock unit whose devil is the selected unit. */
 extern "C" StatBlock *stockFindSelectedUnit(void)
 {
-    StatBlock *result = 0;
-    GameSaveData *save = g_gameDataBlocks.saveBlock;
-    SaveSlotTableIV *slots = &save->body.slots;
-    s32 selectedId = save->body.config.selection.selectedUnitId;
+    StatBlock *result = NULL;
+    SaveSlotTableIV *slots = &g_gameDataBlocks.saveBlock->body.slots;
 
-    if (selectedId != 0) {
+    if (g_gameDataBlocks.saveBlock->body.config.selection.selectedUnitId != 0) {
         for (s32 slotIndex = 0; slotIndex < 24; ++slotIndex) {
             s32 recordIndex = slots->stock[slotIndex];
             if (recordIndex >= 0 &&
-                slots->units[recordIndex].id == selectedId) {
+                slots->units[recordIndex].id == g_gameDataBlocks.saveBlock->body.config.selection.selectedUnitId) {
                 result = &slots->units[slots->stock[slotIndex]];
                 break;
             }

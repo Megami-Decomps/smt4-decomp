@@ -1,37 +1,32 @@
-/* NON_MATCHING: with the inlined.txt row for partyWidgetSetTransitionKind (strb r1, [r0, #40]) one diff is left: the reserve-row "same as the first pick" compare loads entryId into r0 and ids[0] into r1 (retail r1/r0). */
+/* NON_MATCHING: 6 lines, one register choice. With the inlined.txt row for partyWidgetSetTransitionKind
+ * (strb r1, [r0, #40]) only the reserve rows' "same as the first parent" compare differs: retail loads the
+ * member's id into r1 and fusionParentIds[0] into r0 (`cmp r1, r0`), this build the id into r0 and the parent
+ * into r1. The operand order, a local for either side, the first call's id local and an early-out layout of the
+ * availability test all compile to the same code or move other rows. */
 #include "ui/PartyPanelStateA.h"
 #include "camp/Unite/UniteWork.h"
+#include "camp/Unite/FusionAvailability.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "gamedata/SaveSlotTable.h"
 #include "gamedata/SaveSlotRecord.h"
 
-struct PartyPanelFusionResult {
-    u8 available;  // 0x00
-    u8 unk01[3];
-    u32 reason;    // 0x04
-    u16 resultId;  // 0x08
-};
-
 extern "C" {
 
-u8 FUN_004da344(UniteWorkA *work, u32 first, u32 second, s32 special, PartyPanelFusionResult *output);
 u32 compendiumEntryIsRegistered(u32 index);
 void partyWidgetSetTransitionPending(PartyPanelWidget *widget, u8 value);
 void partyWidgetSetTransitionKind(PartyPanelWidget *widget, u8 value);
 void __aeabi_memset4(void *destination, u32 size, s32 value);
 
 /* Refreshes the fusion availability flags and icons of the panel's reserve rows and slot cells. */
-void FUN_002ade88(void)
+void partyPanelRefreshFusionAvailability(void)
 {
     PartyPanelStateA *panel = g_partyPanel;
     SaveSlotTableA *slots = gameGetSlotTable();
-    __aeabi_memset4(&panel->activeSlots[0], 4, 1);
-    s32 i = 0;
-    while (i < 3) {
+    __aeabi_memset4(panel->activeSlots, sizeof(panel->activeSlots), 1);
+    for (s32 i = 0; i < 3; ++i) {
         panel->fusionFlags[i] = 0;
         panel->fusionResultIds[i] = 0;
         partyWidgetSetTransitionPending(panel->characters[1 + i], 0);
-        i++;
     }
     for (s32 i = 0; i < 24; ++i) {
         panel->fusionFlags[3 + i] = 0;
@@ -46,70 +41,70 @@ void FUN_002ade88(void)
         special = 0;
     }
     panel->activeSlots[0] = 0;
-    PartyPanelFusionResult out;
+    FusionAvailability out;
     for (s32 i = 0; i < 3; ++i) {
         if (slots->reserve[i] < 0) {
             panel->activeSlots[i + 1] = 0;
         } else if (panel->fusionParentCount >= 1 && panel->activeSlots[i + 1] != 0) {
             u16 entryId = gameGetSlotRecord(slots->reserve[i])->id;
-            if (FUN_004da344(panel->unite, (u16)panel->fusionParentIds[0], entryId, special, &out) == 0) {
+            if (fusionCheckPairAvailability(panel->unite, (u16)panel->fusionParentIds[0], entryId, special, &out) == 0) {
                 panel->activeSlots[i + 1] = 0;
                 switch (out.reason) {
-                case 1:
-                    panel->fusionFlags[i] |= 8;
+                case FUSION_REFUSAL_NO_RESULT:
+                    panel->fusionFlags[i] |= PARTY_PANEL_FUSION_NO_RESULT;
                     break;
-                case 2:
-                    panel->fusionFlags[i] |= 2;
+                case FUSION_REFUSAL_LEVEL:
+                    panel->fusionFlags[i] |= PARTY_PANEL_FUSION_OVER_LEVEL;
                     break;
-                case 3:
-                    panel->fusionFlags[i] |= 4;
+                case FUSION_REFUSAL_OWNED:
+                    panel->fusionFlags[i] |= PARTY_PANEL_FUSION_OWNED;
                     break;
                 }
                 if (gameGetSlotRecord(slots->reserve[i])->id == panel->fusionParentIds[0]) {
-                    panel->fusionFlags[i] |= 0x40;
+                    panel->fusionFlags[i] |= PARTY_PANEL_FUSION_SAME_AS_FIRST;
                 }
             } else if (compendiumEntryIsRegistered(out.resultId) == 0) {
-                panel->fusionFlags[i] |= 0x80;
+                panel->fusionFlags[i] |= PARTY_PANEL_FUSION_NEW_RESULT;
             }
             panel->fusionResultIds[i] = out.resultId;
         }
     }
     for (s32 i = 0; i < 3; ++i) {
         if (slots->reserve[i] >= 0 && (gameGetSlotRecord(slots->reserve[i])->ailments & 4) != 0) {
-            panel->fusionFlags[i] |= 0x10;
+            panel->fusionFlags[i] |= PARTY_PANEL_FUSION_AILMENT_BIT2;
         }
     }
     for (s32 i = 0; i < 24; ++i) {
-        if (static_cast<s32>(panel->entries[i].packedIndex) < 0) {
+        if ((s32)panel->entries[i].packedIndex < 0) {
             panel->entries[i].available = 0;
         } else {
-            SlotRecordA *record = gameGetSlotRecord(static_cast<s32>(panel->entries[i].packedIndex));
+            SlotRecordA *record = gameGetSlotRecord((s32)panel->entries[i].packedIndex);
             if ((record->ailments & 0x400) != 0) {
                 panel->entries[i].available = 0;
-                panel->fusionFlags[3 + i] |= 0x20;
+                panel->fusionFlags[3 + i] |= PARTY_PANEL_FUSION_AILMENT_BIT10;
             } else {
                 if ((record->ailments & 4) != 0) {
-                    panel->fusionFlags[3 + i] |= 0x10;
+                    panel->fusionFlags[3 + i] |= PARTY_PANEL_FUSION_AILMENT_BIT2;
                 }
                 if (panel->fusionParentCount >= 1 && panel->entries[i].available != 0) {
-                    if (FUN_004da344(panel->unite, (u16)panel->fusionParentIds[0], record->id, special, &out) == 0) {
+                    if (fusionCheckPairAvailability(panel->unite, (u16)panel->fusionParentIds[0], record->id, special, &out) == 0) {
                         panel->entries[i].available = 0;
                         switch (out.reason) {
-                        case 1:
-                            panel->fusionFlags[3 + i] |= 8;
+                        case FUSION_REFUSAL_NO_RESULT:
+                            panel->fusionFlags[3 + i] |= PARTY_PANEL_FUSION_NO_RESULT;
                             break;
-                        case 2:
-                            panel->fusionFlags[3 + i] |= 2;
+                        case FUSION_REFUSAL_LEVEL:
+                            panel->fusionFlags[3 + i] |= PARTY_PANEL_FUSION_OVER_LEVEL;
                             break;
-                        case 3:
-                            panel->fusionFlags[3 + i] |= 4;
+                        case FUSION_REFUSAL_OWNED:
+                            panel->fusionFlags[3 + i] |= PARTY_PANEL_FUSION_OWNED;
                             break;
                         }
                         if (panel->fusionParentIds[0] == record->id) {
-                            panel->fusionFlags[3 + i] |= 0x40;
+                            panel->fusionFlags[3 + i] |= PARTY_PANEL_FUSION_SAME_AS_FIRST;
                         }
                     } else if (compendiumEntryIsRegistered(out.resultId) == 0) {
-                        panel->fusionFlags[3 + i] |= 0x80;
+                        panel->fusionFlags[3 + i] |= PARTY_PANEL_FUSION_NEW_RESULT;
                     }
                     panel->fusionResultIds[3 + i] = out.resultId;
                 }
@@ -131,10 +126,10 @@ void FUN_002ade88(void)
                     }
                 }
                 for (s32 i = 0; i < 24; ++i) {
-                    if (static_cast<s32>(panel->entries[i].packedIndex) < 0) {
+                    if ((s32)panel->entries[i].packedIndex < 0) {
                         continue;
                     }
-                    SlotRecordA *record = gameGetSlotRecord(static_cast<s32>(panel->entries[i].packedIndex));
+                    SlotRecordA *record = gameGetSlotRecord((s32)panel->entries[i].packedIndex);
                     if (record->id == found->id) {
                         panel->entries[i].available = 0;
                         partyWidgetSetTransitionKind(panel->demons[i], 0);

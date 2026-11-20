@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0017fd20(int [2], int);
+int svcCreateEvent(int [2], int);
 int nn_os_CriticalSection_Initialize(int *);
 int FUN_00189804(int);
 int FUN_00189de4(unsigned char *);
@@ -26,7 +26,7 @@ extern unsigned char g_nnSndVoiceManager; /* 0x6449d0 */
 extern unsigned char g_nnSndMasterManagerImpl; /* 0x647708 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_0017fd20. */
+/* Supplied declaration required: svcCreateEvent. */
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: FUN_00189804. */
 extern int FUN_00189830(int *);
@@ -61,7 +61,7 @@ int FUN_0016f574(int *param_1,int param_2)
       piVar2 = (int *)0xe0a0183b;
     }
     else {
-      FUN_0017fd20(temp_v1,1);
+      svcCreateEvent(temp_v1,1);
       if (-1 < (int)piVar2) {
         piVar2 = (int *)0x0;
         *param_1 = temp_v1[0];
