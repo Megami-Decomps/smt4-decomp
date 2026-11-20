@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029212c` (_code @ 0x29212c, 0x6d0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "code/Code002e.h"
 #include <stdio.h>
 #include "romwright_types.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -37,7 +38,6 @@ extern int DAT_0043da2c; /* 0x43da2c */
 /* Supplied declaration required: btlFormatCategoryLabel. */
 /* Supplied declaration required: textFormatFullWidthNumber. */
 /* Supplied declaration required: textEncodeFontSlot. */
-extern int FUN_00295cec(void);
 /* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: skillDataFindById. */
@@ -105,7 +105,7 @@ void FUN_0029212c(int param_1)
     temp_v8 = temp_v5;
     itemTableGetItemRecord();
     if (*(short *)(temp_v8 + 0x76) != 0) {
-      temp_v5 = FUN_00295cec();
+      temp_v5 = gameSaveGetPoints();
       FUN_0029ede8(0x24,temp_v5,0xffffffff,0);
       temp_v5 = (unsigned int)*(unsigned short *)(temp_v8 + 0x76) + temp_v5;
       if (temp_v5 >= 10000) {

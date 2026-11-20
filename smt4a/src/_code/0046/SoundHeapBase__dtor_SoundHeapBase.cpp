@@ -1,11 +1,11 @@
-/* NON_MATCHING: register allocation and block order: retail passes the object through a copy (r6) to the inlined clear and places the no-heap path after the return; build keeps r4 and falls through. */
+/* NON_MATCHING: the scoped lock, the early return and the out-of-line no-heap exit match; retail still passes the object
+ * through a copy (r6) to the inlined clear, and names the vtable by its class symbol. */
 #include "common.h"
 #include "shard/S3SoundHeapObj.h"
+#include "shard/W6_W6Match1_CriticalSection.h"
 
 extern "C" {
 
-void nn_os_CriticalSection_Enter(void *cs);
-void nn_os_CriticalSection_Leave(void *cs);
 void nw_snd_internal_FrameHeap_Clear(u32 *heap);
 void nw_snd_internal_FrameHeap_Destroy(u32 *heap);
 u32 *nw_snd_internal_FrameHeap_FrameHeap_sub_object_3802B0(u32 *heap);
@@ -18,28 +18,21 @@ extern const u8 DAT_0055c3f4;  /* vtable */
 /* Clears the frame heap under the lock. */
 static __inline void soundHeapObjClear(SoundHeapObj *self)
 {
-    void *lock = self->lock;
-
-    nn_os_CriticalSection_Enter(lock);
+    ScopedCriticalLock lock(self->lock);
     nw_snd_internal_FrameHeap_Clear(&self->heap);
-    nn_os_CriticalSection_Leave(lock);
 }
 
 /* Releases the frame heap under the lock. */
 static __inline void soundHeapObjDestroyHeap(SoundHeapObj *self)
 {
-    void *lock = self->lock;
-
-    nn_os_CriticalSection_Enter(lock);
-    if (self->heap != 0) {
-        soundHeapObjClear(self);
-        u32 heapOwner = objectCommandQueueGet();
-        soundRequestQueueDequeueUntilToken(heapOwner, soundRequestQueueFlush(heapOwner, 1));
-        nw_snd_internal_FrameHeap_Destroy(&self->heap);
-        nn_os_CriticalSection_Leave(lock);
-    } else {
-        nn_os_CriticalSection_Leave(lock);
+    ScopedCriticalLock lock(self->lock);
+    if (self->heap == 0) {
+        return;
     }
+    soundHeapObjClear(self);
+    u32 heapOwner = objectCommandQueueGet();
+    soundRequestQueueDequeueUntilToken(heapOwner, soundRequestQueueFlush(heapOwner, 1));
+    nw_snd_internal_FrameHeap_Destroy(&self->heap);
 }
 
 /* Destroys the object: the frame heap, then its base (the frame heap base sits at +0x10);

@@ -1,5 +1,5 @@
 #include "battle/BtlResidentLoader.h"
-/* NON_MATCHING: 37 lines (21 by shape). The wait and the thread launch match; retail materialises the not-timeout test as 0/1 (movne/moveq, teq #1) before branching, and keeps the thread's address in r5 and the wait's result in r7 (swapped here). */
+/* NON_MATCHING: 16 lines. The wait, the 0/1 running test (as in fileWorkerQueueRestartIfIdle) and the thread launch match; retail keeps the thread's address in r5 and the wait's result in r7 (swapped here). */
 #include "battle/btlMain.h"
 #include "nn/os/ThreadLaunch.h"
 #include "nn/Result.h"
@@ -71,7 +71,12 @@ void FUN_0033a414(BtlMainState *state)
         resultReportIfFailed(stack, worker->memory, 0x1000);
     }
     /* A worker that is still running keeps going. */
-    if (worker->thread && !nnResultIsNotTimeout(handleWait(worker->thread, 0)))
+    bool running = false;
+    if (worker->thread != 0) {
+        s32 result = handleWait(worker->thread, 0);
+        running = nnResultIsNotTimeout(result) != 1;
+    }
+    if (running)
         return;
     btlStartWorkerThread(&worker->thread, btlAdvanceResidentResourceLoad, worker, *worker->stack, 17, 0);
 }

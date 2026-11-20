@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0014ff04(unsigned int, int, int, char [12], char [4], int);
 int threadSleepDuration(int, int);
-int FUN_002c130c(int);
-int nn_applet_CTR_detail_ReplySleepQueryToManager(int);
+int appletSetSleepQueryState(int); // declcheck: local (romwright prototype; the shared declaration in nn/applet/SleepQuery.h does not compile here)
+int nn_applet_CTR_detail_ReplySleepQueryToManager(int); // declcheck: local (romwright prototype; the shared declaration in nn/applet/SleepQuery.h does not compile here)
 
 /* stack frame of param_1: 5 slot(s), 14 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ extern signed char g_appletSleepModuleState; /* 0x44e3b0 */
 
 /* Supplied declaration required: FUN_0014ff04. */
 /* Supplied declaration required: threadSleepDuration. */
-/* Supplied declaration required: FUN_002c130c. */
+/* Supplied declaration required: appletSetSleepQueryState. */
 /* Supplied declaration required: nn_applet_CTR_detail_ReplySleepQueryToManager. */
 extern void nn_applet_CTR_detail_SleepIfShellClosed(void);
 
@@ -39,7 +39,7 @@ void FUN_002a7d9c(unsigned int param_1)
   temp_v0 = g_appletSleepModuleState;
   if (g_appletSleepModuleState != '\0') {
     g_appletSleepModuleState = '\0';
-    FUN_002c130c(3);
+    appletSetSleepQueryState(3);
     nn_applet_CTR_detail_ReplySleepQueryToManager(0);
   }
   while (temp_v1 = param_1, FUN_0014ff04(param_1,0,0,temp_v3,temp_v2,0),

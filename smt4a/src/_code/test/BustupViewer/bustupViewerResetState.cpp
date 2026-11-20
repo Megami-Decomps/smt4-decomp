@@ -7,24 +7,24 @@ extern BustupViewerState *g_bustupViewer;
 void bustupViewerResetState(void)
 {
     BustupViewerState *viewer = g_bustupViewer;
-    viewer->unk14 = 0;
-    viewer->unk18 = 0;
-    viewer->unk1C = 1;
-    viewer->unk20 = 0;
-    viewer->unk24 = 0;
-    viewer->unk28 = 0;
-    viewer->unk2C = 0;
-    viewer->unk30 = 1;
-    viewer->unk34 = 0;
-    viewer->unk38 = 0;
-    viewer->unk3C = 0;
+    viewer->backgroundId = 0;
+    viewer->characterId = 0;
+    viewer->characterVariant = 1;
+    viewer->subWindowId = 0;
+    viewer->characterParamA = 0;
+    viewer->characterParamB = 0;
+    viewer->partnerId = 0;
+    viewer->partnerVariant = 1;
+    viewer->partnerParamA = 0;
+    viewer->partnerParamB = 0;
+    viewer->positionIndex = 0;
     viewer->selection = 0;
     for (s32 i = 0; i < 4; ++i) {
         viewer->portraitIds[i] = 0;
-        viewer->unk64[i] = 1;
-        viewer->unk68[i] = 0;
-        viewer->unk78[i] = 0;
-        viewer->unk88[i] = 1.0f;
+        viewer->isNpc[i] = 1;
+        viewer->paramA[i] = 0;
+        viewer->paramB[i] = 0;
+        viewer->scale[i] = 1.0f;
     }
 }
 }

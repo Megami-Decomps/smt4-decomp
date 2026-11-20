@@ -1,12 +1,7 @@
-#include "ui/UiSpriteApi.h"
-#include "ui/MessageMainA.h"
-#include "gamedata/SaveSlotTable.h"
+#include "ui/MessageBannerSelection.h"
 
-extern "C" {
-u32 gameDataBlocks2GetWord4(void);
-}
-
-// Initialize the message state from the selected data source and prepare its sprite.
+// Initialize the message state from the selected data source and prepare its sprite (the banner script
+// commands inline the same body, messageBannerInitCounterInline).
 extern "C" u32 messageBannerInitCounter(u8 messageId, s32 useDataBlock)
 {
     MessageWindowA *banner = g_messageMain.banner;
@@ -23,10 +18,10 @@ extern "C" u32 messageBannerInitCounter(u8 messageId, s32 useDataBlock)
         banner->counterBase = value;
     }
 
+    banner->alternateAnimation = messageId;
     banner->unk0092 = 0;
     banner->popupShown = 0;
     banner->unk016D = 0;
-    banner->alternateAnimation = messageId;
     uiSpriteStateInitFromSource(&banner->sprites[17], 8, 0xFFFFFFFFu, &banner->parameters, 11, 1.0f);
     pairSetFirstResetSecond(&banner->sprites[17], 0);
     uiSpriteSelectAnim(&banner->sprites[17], 6);

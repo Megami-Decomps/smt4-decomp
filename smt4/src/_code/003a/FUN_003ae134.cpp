@@ -3,7 +3,7 @@
 
 extern "C" {
 void FUN_001e1104(BtlUiObjB *, s32 mode, s32 options, s32 firstStrike);
-void FUN_00206368(BtlUiObjA *, s32 mode, s32 first, s32 second);
+void spriteRowListOpen(BtlUiObjA *, s32 mode, s32 first, s32 second);
 u16 slotFindNonnegativeRank(void *owner, u32 slot);
 void communicationBeginTransition(s32 mode);
 void communicationSetResultPointer(void);
@@ -43,7 +43,7 @@ void FUN_003ae134(void *, s32 mode, u8 first, u8 second, s32 firstStrike, s32 op
     ui->opening.first = first;
     ui->opening.second = second;
     FUN_001e1104(&ui->base.objB, mode, options, mode == 0 ? 0 : firstStrike);
-    FUN_00206368(&ui->base.objA, ui->opening.mode, ui->opening.first, ui->opening.second);
+    spriteRowListOpen(&ui->base.objA, ui->opening.mode, ui->opening.first, ui->opening.second);
     if (mode == 1 && firstStrike) {
         ui->notice.active = 1;
         ui->notice.duration = 40;

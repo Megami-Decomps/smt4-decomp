@@ -12,7 +12,7 @@ void FUN_003611d4(void)
   cVar1 = g_appletSleepModuleState;
   if (g_appletSleepModuleState != '\0') {
     g_appletSleepModuleState = '\0';
-    FUN_002c130c(3);
+    appletSetSleepQueryState(3);
     FUN_002c12e0(0);
   }
   while (uVar2 = 0x407, FUN_0014ff04(0x407,0,0,acStack_24,acStack_28,0),

@@ -172,8 +172,9 @@ typedef struct GameSaveBodyA {
     /* 0x00004 */ SaveSlotTableA slots;
     /* 0x02C54 */ u8 unk02C54[0x8C];
     /* 0x02CE0 */ u8 area2CE0[4];
-    /* 0x02CE4 */ u8 unk02CE4[0x4C];
-    /* 0x02D30 */ u32 unk02D30;
+    /* 0x02CE4 */ u8 unk02CE4[0x48];
+    /* 0x02D2C */ s32 pointsTotal;   /* every point gained */
+    /* 0x02D30 */ u32 points;        /* spendable, capped at 9999 */
     /* 0x02D34 */ u8 flagValues[0x10B8];   /* the banked flag values (flagValueGetStorage) */
     /* 0x03DEC */ MapSaveBlockA mapBlock;
     /* 0x054D0 */ u8 flagBlock[0x9B4];    /* gameFlagBlockGet */
@@ -249,7 +250,7 @@ typedef char GameSavedItemAOffsetCheck[sizeof(GameSavedItemA) == 0x50 && offseto
     offsetof(GameSavedItemA, bits) == 0x36 && offsetof(GameSavedItemA, counter) == 0x4E ? 1 : -1];
 typedef char GameSaveBodyAOffsetCheck[offsetof(GameSaveBodyA, slots) == 0x4 && offsetof(GameSaveBodyA, area2CE0) == 0x2CE0 &&
     offsetof(GameSaveBodyA, record.tail.unk04) == 0x27E04 && offsetof(GameSaveBodyA, halves.halves) == 0x2803C &&
-    offsetof(GameSaveBodyA, area.area282C8) == 0x282C8 && offsetof(GameSaveBodyA, unk02D30) == 0x2D30 && offsetof(GameSaveBodyA, mapBlock) == 0x3DEC && offsetof(GameSaveBodyA, flagBlock) == 0x54D0 &&
+    offsetof(GameSaveBodyA, area.area282C8) == 0x282C8 && offsetof(GameSaveBodyA, pointsTotal) == 0x2D2C && offsetof(GameSaveBodyA, points) == 0x2D30 && offsetof(GameSaveBodyA, mapBlock) == 0x3DEC && offsetof(GameSaveBodyA, flagBlock) == 0x54D0 &&
     offsetof(GameSaveBodyA, items) == 0x5E84 && offsetof(GameSaveBodyA, flagRows) == 0x1EED4 && offsetof(GameSaveBodyA, questCenter) == 0x21254 && offsetof(GameSaveBodyA, runtime.playerName) == 0x22198 && offsetof(GameSaveBodyA, tableFlag) == 0x27E3C && offsetof(GameSaveBodyA, status.flags) == 0x27FB8 &&
     offsetof(GameSaveBodyA, block214C8) == 0x214C8 && offsetof(GameSaveBodyA, runtime.unk21D8C) == 0x21D8C &&
     offsetof(GameSaveBodyA, pairs.entries) == 0x270C4 && offsetof(GameSaveBodyA, record.tail.value) == 0x27E0C &&

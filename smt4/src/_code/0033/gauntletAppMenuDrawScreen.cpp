@@ -42,7 +42,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: appCheckPurchaseRequirements. */
 /* Supplied declaration required: uiDrawListScrollBar. */
 extern int flagBitIsSet(unsigned int);
-extern unsigned int FUN_00295cec(void);
+extern unsigned int gameSaveGetPoints(void);
 /* Supplied declaration required: gxSetMirroredClippedScissor. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
 extern int uiListGetVisibleCount(int);
@@ -93,7 +93,7 @@ void gauntletAppMenuDrawScreen(int param_1)
   texDrawTableEntryAtStoredOrigin(2,0x1d,0x57e,temp_v0,temp_v1,0x6a);
   texDrawTableEntryAtStoredOrigin(2,0x1d,0x57f,temp_v0,temp_v1,0x6a);
   temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x583));
-  temp_v3 = FUN_00295cec();
+  temp_v3 = gameSaveGetPoints();
   sprintf((char *)temp_v13,"%u",temp_v3);
   FUN_002bdf94(0,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,1,4,0x6a,temp_v13);
   temp_v9 = 0;

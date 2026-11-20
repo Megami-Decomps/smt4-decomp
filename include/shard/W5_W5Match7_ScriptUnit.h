@@ -43,7 +43,7 @@ void scrSetResult(s32 result);
 extern "C" {
 #endif
 
-u32 FUN_00295cec(void);
+u32 gameSaveGetPoints(void);
 
 #ifdef __cplusplus
 }

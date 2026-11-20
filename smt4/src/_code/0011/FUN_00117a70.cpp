@@ -55,7 +55,7 @@ void FUN_00117a70(s32 wide)
 
     RenderCtx *context = g_titleScene;
     s32 state = renderCtxPackPassFlags(1, 0);
-    renderStackPush(&context->stackA, state);
+    renderStackPushCounted(&context->stackA, state);
     context = g_titleScene;
     switch (tex->hdr.blendMode) {
     case 0:

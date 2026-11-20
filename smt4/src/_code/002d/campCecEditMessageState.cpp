@@ -30,8 +30,8 @@ void devilCreateRaceEffect(u32 devilId, s32 group);
  * 4 and 200 without one). */
 static __inline void campCecEditSetView(CampCecEdit *edit, s32 first, s32 second)
 {
-    edit->unk148 = second;
-    edit->unk138 = first;
+    edit->messageBase = second;
+    edit->listCount = first;
 }
 
 /* State 2 of the StreetPass card editor: the conversation. Starts the queued message when none is
@@ -202,11 +202,11 @@ s32 campCecEditMessageState(CampCecEdit *edit)
         }
         switch (messageMainGetChoiceResult()) {
         case 0:
-            edit->unk141 = 0;
+            edit->listActive = 0;
             edit->followingState = 8;
             edit->nextState = 7;
-            edit->unk98 = 0;
-            edit->unk9C = 0;
+            edit->listWindowFrame = 0;
+            edit->listWindowDone = 0;
             buttonHelpSetPreset(0xbd);
             buttonHelpSetTextVisible(0);
             result = 2;

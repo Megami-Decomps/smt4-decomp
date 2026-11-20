@@ -1,42 +1,28 @@
-/* NON_MATCHING: Retail ldr r1, [pc, #108] differs from recovered ldr r1, [pc, #104]. */
-#include "common.h"
-#include <math.h>
-
-// Private view of the four-float interpolation table.
-struct InterpolationEntryView {
-    f32 unk00; // 0x00
-    f32 unk04; // 0x04
-    f32 unk08; // 0x08
-    f32 unk0C; // 0x0C
-};
+/* NON_MATCHING: retail schedules the sign test and interpolation table loads earlier. */
+#include "shard/W6_W6Match6_PhaseTrig.h"
 
 extern "C" {
-extern const InterpolationEntryView g_sinCosTable[];
 f32 FUN_001b4030(f32 value, f32 divisor);
-}
+extern const PhaseTrigEntry g_sinCosTable[256];
 
-// Interpolate two table outputs from the reduced magnitude, restoring the first output's sign.
-extern "C" void mathSinCos(f32 *firstOutput, f32 *secondOutput, f32 value)
+/* Interpolates sine and cosine from a phase measured in 256 steps per revolution. */
+void mathSinCos(f32 *sine, f32 *cosine, f32 phase)
 {
-    union MagnitudeView {
-        f32 value;
-        s32 bits;
-    } magnitude;
-
-    magnitude.value = fabsf(value);
+    union { f32 value; s32 bits; } magnitude;
+    magnitude.value = fabsf(phase);
     if (magnitude.bits >= 0x47800000) {
         magnitude.value = FUN_001b4030(magnitude.value, 65536.0f);
     }
-
-    u16 integerPart = (u16)(u32)magnitude.value;
-    f32 fraction = magnitude.value - (f32)integerPart;
-    const InterpolationEntryView &entry = g_sinCosTable[(u8)integerPart];
-    f32 first = entry.unk00 + fraction * entry.unk08;
-    f32 second = entry.unk04 + fraction * entry.unk0C;
-
-    if (value < 0.0f) {
-        first = -first;
-    }
-    *firstOutput = first;
-    *secondOutput = second;
+    u16 whole = (u32)magnitude.value;
+    f32 fraction = magnitude.value - (f32)whole;
+    const PhaseTrigEntry &entry = g_sinCosTable[(u8)whole];
+    f32 interpolatedSine = entry.sine + fraction * entry.sineDelta;
+    f32 interpolatedCosine = entry.cosine + fraction * entry.cosineDelta;
+    if (phase < 0.0f)
+        *sine = -interpolatedSine;
+    else
+        *sine = interpolatedSine;
+    *cosine = interpolatedCosine;
 }
+
+} /* extern "C" */

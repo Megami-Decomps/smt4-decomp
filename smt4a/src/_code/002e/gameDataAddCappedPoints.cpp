@@ -1,21 +1,12 @@
-/* NON_MATCHING: typed counter view keeps the save-block pointer live; retail reloads g_gameDataBlocks before the final capped store and allocates different registers. */
+/* NON_MATCHING: retail reloads g_gameDataBlocks.saveBlock for the final store and keeps the cap in r3 (`movls r3, r1`);
+ * the build reuses the points address and value. The rest matches. */
 #include "shard/W4_W4Match6b_GameDataBlock.h"
 
-struct GamePointCounters {
-    u8 unk0000[0x2db4];
-    s32 total; // 0x2db4
-    u32 current; // 0x2db8
-};
-
-extern "C" {
-// Accumulate the lifetime count and cap the available count at 9999.
-void gameDataAddCappedPoints(s32 amount)
+/* Adds `amount` to the lifetime total and to the spendable points, capping them at 9999. */
+extern "C" void gameDataAddCappedPoints(s32 amount)
 {
-    GamePointCounters *counters = (GamePointCounters *)g_gameDataBlocks.saveBlock;
-    counters->total += amount;
-    counters->current += amount;
-    u32 current = counters->current;
-    ((GamePointCounters *)g_gameDataBlocks.saveBlock)->current =
-        current <= 9999 ? current : 9999;
-}
+    g_gameDataBlocks.saveBlock->body.pointsTotal += amount;
+    g_gameDataBlocks.saveBlock->body.points += amount;
+    g_gameDataBlocks.saveBlock->body.points =
+        g_gameDataBlocks.saveBlock->body.points > 9999 ? 9999 : g_gameDataBlocks.saveBlock->body.points;
 }

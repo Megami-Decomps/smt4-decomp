@@ -19,7 +19,7 @@ extern "C" {
 extern PromptHandles g_engineResourceHandles; /* 0x57f254 */
 
 void dialogEnterState(PromptDialog *dialog, s32 state, s32 arg);
-void FUN_0039c0e4(void);
+void newHighwayInfoDestroy(void);
 
 /* Opens the prompt dialog on the first call; returns 1 (and closes it) once the dialog has finished. */
 u8 FUN_003bfaac(void)
@@ -36,7 +36,7 @@ u8 FUN_003bfaac(void)
     }
     if (g_engineResourceHandles.dialog->open == 0) {
         g_engineResourceHandles.opened = 0;
-        FUN_0039c0e4();
+        newHighwayInfoDestroy();
         return 1;
     }
     return 0;

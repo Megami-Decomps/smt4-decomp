@@ -2437,6 +2437,7 @@
 0x0015dbe0 nw_gfx_res_ResModel_Setup name
 0x0015ddf0 FUN_0015ddf0 callers
 0x0015ddf8 nw_snd_SoundHandle_DetachSound name
+0x0015e1ec FUN_0015e1ec library
 0x0015e278 nw_snd_Sound3DManager_GetRequiredMemSize name
 0x0015e2bc FUN_0015e2bc between
 0x0015e2fc FUN_0015e2fc between

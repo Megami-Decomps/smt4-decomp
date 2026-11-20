@@ -33,7 +33,7 @@ extern "C" {
 s32 getUnlockedSlotCount(u32 argument);
 void FUN_003b6354(SlotScreen *screen, s32 slot, s32 mode, u32 argument, f32 scale, s32 iconX, s32 iconY,
                   s32 *x, s32 *y, u8 *extra);
-void FUN_003c33e8(SlotScreen *screen, s32 slot, u32 argument, u32 flags, f32 scale, s32 x, s32 y);
+void skillScreenDrawSlotRow(SlotScreen *screen, s32 slot, u32 argument, u32 flags, f32 scale, s32 x, s32 y);
 void FUN_003cce74(SlotScreen *screen, u32 argument, s32 x, s32 y, f32 scale);
 s32 resourceRunOperationIfUnblocked(u32 *cursor);
 void efctSetSpeed(f32 speed);
@@ -60,7 +60,7 @@ void FUN_0037c988(SlotScreen *screen, u32 argument, s32 drawExtra, s32 mode, u32
             texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x170, icon->x + position.x, icon->y + position.y, 0x65);
             texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x26f, icon->x + position.x, icon->y + position.y, 0x65);
             texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x270, icon->x + position.x, icon->y + position.y, 0x65);
-            FUN_003c33e8(screen, slot, argument, flags, scale, icon->x + position.x, icon->y + position.y);
+            skillScreenDrawSlotRow(screen, slot, argument, flags, scale, icon->x + position.x, icon->y + position.y);
             if (mode == 1 && screen->phase >= 5) {
                 s32 base = resourceRunOperationIfUnblocked(&screen->cursor);
                 if (screen->currentIds[slot] == screen->targetIds[base + listCursorGetRowIfUnblocked(&screen->cursor)]) {

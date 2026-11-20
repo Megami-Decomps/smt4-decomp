@@ -1,4 +1,4 @@
-/* NON_MATCHING: free-record signed load, null-check placement and cold initialization layout differ. */
+/* NON_MATCHING: only the free-record test differs: retail loads unitId with ldrsh, the build with ldrh. */
 #include "shard/W4_Match6_BtlScript.h"
 #include "battle/btlMain.h"
 #include "battle/BtlEntry.h"
@@ -25,25 +25,25 @@ extern "C" void FUN_00337900(BtlMainState *script, const BtlEntry *unit, s32 sta
             BtlScriptStatusRecord *candidate = &script->unitStatus.records[i];
             if (candidate->unitId == 0 && candidate->flags == 0) {
                 record = candidate;
+                if (flags & 2) {
+                    record->unitId = -1;
+                    record->flags = 2;
+                } else {
+                    record->unitId = unit->data.id;
+                    flags = unit->flags;
+                    if (flags & 8)
+                        record->flags = 8;
+                    else if (flags & 0x10)
+                        record->flags = 0x10;
+                    else if (flags & 0x20)
+                        record->flags = 0x20;
+                }
                 break;
             }
         }
-        if (record == NULL)
-            return;
-        if (flags & 2) {
-            record->unitId = -1;
-            record->flags = 2;
-        } else {
-            record->unitId = unit->data.id;
-            flags = unit->flags;
-            if (flags & 8)
-                record->flags = 8;
-            else if (flags & 0x10)
-                record->flags = 0x10;
-            else if (flags & 0x20)
-                record->flags = 0x20;
-        }
     }
+    if (record == NULL)
+        return;
     if (status == 1)
         record->statusA = 1;
     else if (status == 2)

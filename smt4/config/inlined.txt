@@ -61,3 +61,4 @@ titleConfigDefaultVoice = 0xe3a00050; // 0x1eac28 (titleConfigUpdate+0x210, rese
 renderCtxGetStereoMode = 0xe5900528; // 0x10783c 0x107858 (FUN_00107784) 0x2e21a0 0x2e21bc (uiFadeQuadDrawJob) 0x3845b4 0x3845d0 (FUN_003844a0), after ldr r0, [rN]: the title scene (twin of the smt4a row)
 textCodeSwapBytes = 0xe6bf0fb0; // 0x10ca44 0x10cad0 (FUN_0010c83c, after mov r0, r8: twin of smt4a's FUN_00141f8c rows)
 touchSelectionGetSelected = 0xe1d001d1; // 0x22f2dc (FUN_0022f1d0: add r0, r4, #2048; add r0, r0, #40 passes &scene->touchSelection; a direct field read would fold into ldrsb [r4, #2105]; same class as uiSubStateGetReady)
+uiSpriteGetScaleDone = 0xe1d008d8; // 0x1f59e4 0x1f5a84 (FUN_001f53d0, after sub r0, r0, #108 forms &sprites[n - 1]): a lone ldrsb r0, [r0, #136], which a direct field read would fold into the address arithmetic; smt4a has the same row

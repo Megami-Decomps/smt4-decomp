@@ -1,6 +1,15 @@
-/* NON_MATCHING: control flow and the command pair writes match retail; retail forms the render-state address as (ctx + 0xA0) + 0x11F8 (count) + 4096 + 512 (entry) through a pooled 0x11F8 offset, which the typed stackG path does not reproduce. */
-#include "camp/RenderCtx.h"
+/* NON_MATCHING: the stack addressing (stacks[5] from ctx + 0xA0 and the pooled 0x11F8) and the command pairs match; retail
+ * computes this & ~0xF00 into r3 and loads the 0xf0107 id into ip, the build swaps the two. */
+#include "classes/Obj464cb0.h"
+
 #include "camp/RenderCtxA.h"
+
+/* unit-local: the draw context seen as its array of render-state stacks (from 0x11F8: D, E, F, A, C, G, B;
+ * RenderCtxA names them one by one). */
+struct RenderCtxStacksA {
+    /* 0x0000 */ u8 unk0000[0x11F8];
+    /* 0x11F8 */ RenderStateStack stacks[7];
+};
 
 extern "C" {
 void cursorResetFromParam(void);
@@ -10,21 +19,27 @@ extern u32 *g_modelCommandBuffer; /* model command buffer */
 extern s32 g_modelCommandWordCount;  /* words used in the buffer */
 }
 
-static __inline void commandQueuePushPair(u32 first, u32 second)
+static void commandQueuePushPair(u32 first, u32 second)
 {
     g_modelCommandBuffer[g_modelCommandWordCount] = first;
     g_modelCommandBuffer[g_modelCommandWordCount + 1] = second;
     g_modelCommandWordCount += 2;
 }
 
-/* Posts the word's flags merged with the current render state (id 0xf0107), then its 3-bit mode
+/* The current (top) state of render-state stack `index`. */
+static __inline u32 renderStackTop(RenderCtxA *context, s32 index)
+{
+    RenderCtxStacksA *stacks = (RenderCtxStacksA *)context;
+    return stacks->stacks[index].entries[stacks->stacks[index].count];
+}
+
+/* Posts this object's flags merged with the current state of render stack G (id 0xf0107), then its 3-bit mode
  * field (0, 1, 2 for modes 6/7, else 3) shifted into the top byte (id 0x80126). */
-extern "C" void _ZN9Obj464cb016postSelectedWordEv(u32 word)
+void Obj464cb0::postSelectedWord()
 {
     cursorResetFromParam();
-    RenderStateStack *stack = &g_renderCtx->additional.stackG;
-    commandQueuePushPair(stack->entries[stack->count] | (word & 0xfffff0ff), 0xf0107);
-    u32 mode = (word & 0x70) >> 4;
+    commandQueuePushPair(renderStackTop(g_renderCtx, 5) | ((u32)this & 0xfffff0ff), 0xf0107);
+    u32 mode = ((u32)this & 0x70) >> 4;
     if (mode != 0 && mode != 1) {
         if (mode == 6 || mode == 7) {
             mode = 2;

@@ -2,31 +2,14 @@
 #define CLASSES_OBJ557B58_H
 
 #include "common.h"
+#include <vector>
 
 extern "C" void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
-extern "C" void _ZN4__rw15__rw_deallocateEPvji(void *block, s32 count, s32 flags);
 
 /* An object the owner deletes through its virtual destructor. */
 class Obj557b58Item {
 public:
     virtual ~Obj557b58Item();
-};
-
-/* A growable array of item pointers: the first and one-past-last used pointer and the end of the
- * allocation. Destroying it empties it and releases the block. */
-struct Obj557b58Vec {
-    /* 0x00 */ Obj557b58Item **begin;
-    /* 0x04 */ Obj557b58Item **end;
-    /* 0x08 */ Obj557b58Item **capacity;
-
-    ~Obj557b58Vec()
-    {
-        Obj557b58Item **first = begin;
-        if (first != end) {
-            end = end - (end - first);
-        }
-        _ZN4__rw15__rw_deallocateEPvji(first, capacity - first, 0);
-    }
 };
 
 /* The object whose vtable is at 0x557b58 (named after it until its real name is known): it owns an
@@ -41,8 +24,10 @@ public:
 
 protected:
     /* 0x00: vtable pointer */
-    /* 0x04 */ Obj557b58Vec items;
-    /* 0x10 */ u8 unk10[0x0C];
+    /* 0x04 */ std::vector<Obj557b58Item *> items;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ u32 unk18;
 };
 
 #endif

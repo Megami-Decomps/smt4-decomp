@@ -1,12 +1,6 @@
-/* NON_MATCHING: the register records match smt4 FUN_0034dc10's (post-increment stores); remaining: retail stores the four header words through a written-back pointer ([1], [0], then [2] and [3] with writeback) and keeps the zero for the combiner bytes in r5 after the 2 and 14 stores. */
+/* NON_MATCHING: header command stores, sysMemClear and attribute loop match; remaining: mov r5, #0 is hoisted before the combiner stage stores (retail places it between them) and mov r0, ip precedes mov r1, #0 / mov r2, #12 before the loop. */
 #include "shard/W6_W6Match7_CombinerState.h"
 
-struct DrawAttributeCommand { u32 index, header, values[4]; };
-struct DrawCommandReset {
-    u32 firstValue, firstHeader, secondValue, secondHeader;
-    u32 reset[38];
-    DrawAttributeCommand attributes[12];
-};
 extern "C" {
 extern u8 DAT_005cc554[];
 u32 FUN_0042c5d0();
@@ -15,34 +9,35 @@ void FUN_00158b88(CombinerState *state);
 u32 *FUN_0015fcec(const CombinerState *state, u32 *commands);
 void sysMemClear(void *memory, u32 size);
 
-// Emit the selected combiner state followed by cleared draw and vertex-attribute commands.
+/* Emit the selected combiner state followed by cleared draw and vertex-attribute commands. */
 u32 *FUN_00422048()
 {
     u32 *commands = FUN_00177e6c(DAT_005cc554, FUN_0042c5d0());
     CombinerState combiner;
     gfxCombinerStateInitialize(&combiner);
     FUN_00158b88(&combiner);
-    combiner.stages[1].color.sources[1] = 14;
     combiner.stages[1].color.function = 2;
+    combiner.stages[1].color.sources[1] = 14;
     combiner.stages[1].constantColor.r = 0;
     combiner.stages[1].constantColor.g = 0;
     combiner.stages[1].constantColor.b = 0;
-    DrawCommandReset *reset = (DrawCommandReset *)FUN_0015fcec(&combiner, commands);
-    reset->firstHeader = 0xf0201;
-    reset->firstValue = 0;
-    reset->secondValue = 0;
-    reset->secondHeader = 0xf0202;
-    sysMemClear(reset->reset, sizeof(reset->reset));
-    reset->reset[1] = 0x823f0203;
-    u32 *record = (u32 *)reset->attributes;
+    u32 *cmd = FUN_0015fcec(&combiner, commands);
+    cmd[0] = 0;
+    cmd[1] = 0xf0201;
+    cmd += 2;
+    *cmd++ = 0;
+    *cmd++ = 0xf0202;
+    sysMemClear(cmd, 0x98);
+    cmd[1] = 0x823f0203;
+    cmd += 0x26;
     for (u32 index = 0; index < 12; ++index) {
-        *record++ = index;
-        *record++ = 0x803f0232;
-        *record++ = 0;
-        *record++ = 0;
-        *record++ = 0;
-        *record++ = 0;
+        *cmd++ = index;
+        *cmd++ = 0x803f0232;
+        *cmd++ = 0;
+        *cmd++ = 0;
+        *cmd++ = 0;
+        *cmd++ = 0;
     }
-    return record;
+    return cmd;
 }
 }

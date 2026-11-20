@@ -1,10 +1,11 @@
 /* NON_MATCHING: draws the camp skill list: the eleven visible rows (name, cost, icon, owner), the cursor row and the
- * "no skills" notice. Same calls, branches and instruction count as retail; what differs is allocation: retail's
- * frame is 184 bytes (here 176) with the list pointer, name, owner flag and colour spilled to [sp,#156..176] and the
- * text buffer at sp+16, it keeps the row's skill id in fp and the part entries in sl (here swapped), loads g_camp
- * before the first call's constants, and adds some of the x/y sums with their operands in the other order. */
+ * "no skills" notice. Same calls, branches and 184-byte frame as retail. What differs: the spilled list pointer,
+ * name and owner flag sit four bytes lower (152, 164, 168 for retail's 156, 168, 172), the cursor row keeps its
+ * name part in sl and the colour in r9 (retail the other way round), a few x/y sums load or add their operands
+ * in the other order, and the "no skills" notice converts y before x, with one more row than retail. */
 #include <stdio.h>
 #include "camp/CampState.h"
+#include "camp/CampSkillList.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match2_FormattedTextSource.h"
 #include "code/Code0028.h"
@@ -37,50 +38,31 @@ void campSkillListDraw(s32 x, s32 y, s32 drawCursor)
     char text[128];
     CampState *camp = g_camp;
     GridNavigation *grid = &camp->grids[3];
-    s32 i;
-    u32 skill;
-    s32 unit;
-    s32 player;
-    TextureTableEntryIV *row;
-    TextureTableEntryIV *part;
     const char *name;
-    u32 color;
-    s32 owner;
-    StatBlock *record;
+    s32 player;
 
     texDrawCompositeSprite(2, 0x1d, 0, x, y, 0x65);
     texDrawTableEntryAtStoredOrigin(2, 0x1d, 0x439, x, y, 0x6a);
-    for (i = 0; i < 11; i++) {
+    for (s32 i = 0; i < 11; i++) {
         if ((s32)(resourceRunOperationIfUnblocked(grid) + i) >= (s32)gridNavigationGetItemCount(grid)) {
             break;
         }
-        skill = camp->skills[resourceRunOperationIfUnblocked(grid) + i].skill;
-        unit = camp->skills[resourceRunOperationIfUnblocked(grid) + i].unit;
+        u32 skill = camp->skills[resourceRunOperationIfUnblocked(grid) + i].skill;
+        s32 unit = camp->skills[resourceRunOperationIfUnblocked(grid) + i].unit;
         player = unit < 0;
-        row = asdTMTexTableEntryAt(0x1d, i + 0x40d);
+        TextureTableEntryIV *row = asdTMTexTableEntryAt(0x1d, i + 0x40d);
 
         texDrawTableEntryAtStoredOrigin(2, 0x1d, 0x43a, row->x + x, row->y + y, 0x6a);
         texDrawTableEntryAtStoredOrigin(2, 0x1d, 0x43b, row->x + x, row->y + y, 0x6a);
         texDrawTableEntryAtStoredOrigin(2, 0x1d, 0x43c, row->x + x, row->y + y, 0x6a);
         texDrawTableEntryAtStoredOrigin(2, 0x1d, 0x43d, row->x + x, row->y + y, 0x6f);
 
-        part = asdTMTexTableEntryAt(0x1d, 0x440);
+        TextureTableEntryIV *part = asdTMTexTableEntryAt(0x1d, 0x440);
         name = (const char *)aocIndexValueOrDefault(skill);
         if (name != NULL) {
-            color = 0xff;
-            if (FUN_00298848(skill, (s16)camp->skills[resourceRunOperationIfUnblocked(grid) + i].unit) && FUN_002987d8(unit, skill)) {
-                owner = camp->skills[resourceRunOperationIfUnblocked(grid) + i].unit;
-                if (owner < 0) {
-                    if (gameGetPlayerData()->ailments & 2) {
-                        color = 0x5a5a5aff;
-                    }
-                } else {
-                    record = gameGetUnitRecord(owner);
-                    if (record == NULL || (record->ailments & 2) || (record->ailments & 0x400) || (record->ailments & 4)) {
-                        color = 0x5a5a5aff;
-                    }
-                }
-            } else {
+            u32 color = 0xff;
+            if (!(FUN_00298848(skill, (s16)camp->skills[resourceRunOperationIfUnblocked(grid) + i].unit) && FUN_002987d8(unit, skill) &&
+                  campSkillUserCanAct(&camp->skills[resourceRunOperationIfUnblocked(grid) + i]))) {
                 color = 0x5a5a5aff;
             }
             textDrawString(row->x + part->x + x, row->y + part->y + y, 0.55f, 2, 0.0f, color, 1.0f, name);
@@ -102,10 +84,10 @@ void campSkillListDraw(s32 x, s32 y, s32 drawCursor)
             drawSetColorFromRGBA8(camp->categoryColors[unit + 1]);
             uiDrawDemonIcon(-1, row->x + part->x + x, row->y + part->y + y, 0x6f, 0);
         } else {
-            record = gameGetUnitRecord(unit);
+            StatBlock *record = gameGetUnitRecord(unit);
             if (record != NULL) {
                 drawSetColorFromRGBA8(camp->categoryColors[unit + 1]);
-                uiDrawDemonIcon((s16)record->id, row->x + part->x + x, part->y + row->y + y, 0x6f, 0);
+                uiDrawDemonIcon((s16)record->id, row->x + part->x + x, row->y + part->y + y, 0x6f, 0);
             }
         }
         gxResetColorQuadToWhite();
@@ -113,31 +95,20 @@ void campSkillListDraw(s32 x, s32 y, s32 drawCursor)
     FUN_0028f870((u32)grid, x, y, 1);
 
     if (drawCursor && (s32)gridNavigationGetItemCount(&camp->grids[3]) > 0) {
-        skill = camp->skills[resourceRunOperationIfUnblocked(grid) + listCursorGetRowIfUnblocked(grid)].skill;
-        unit = camp->skills[resourceRunOperationIfUnblocked(grid) + listCursorGetRowIfUnblocked(grid)].unit;
+        u32 skill = camp->skills[resourceRunOperationIfUnblocked(grid) + listCursorGetRowIfUnblocked(grid)].skill;
+        s32 unit = camp->skills[resourceRunOperationIfUnblocked(grid) + listCursorGetRowIfUnblocked(grid)].unit;
         player = unit < 0;
-        row = asdTMTexTableEntryAt(0x1d, listCursorGetRowIfUnblocked(grid) + 0x42e);
+        TextureTableEntryIV *row = asdTMTexTableEntryAt(0x1d, listCursorGetRowIfUnblocked(grid) + 0x42e);
 
         FUN_0028f694(row->x + x, row->y + y, camp->touch.rowRegions[listCursorGetRowIfUnblocked(grid)]);
 
-        part = asdTMTexTableEntryAt(0x1d, 0x449);
+        TextureTableEntryIV *part = asdTMTexTableEntryAt(0x1d, 0x449);
         name = (const char *)aocIndexValueOrDefault(skill);
         if (name != NULL) {
-            color = 0xffffffff;
-            if (FUN_00298848(skill, (s16)camp->skills[resourceRunOperationIfUnblocked(grid) + listCursorGetRowIfUnblocked(grid)].unit) &&
-                FUN_002987d8(unit, skill)) {
-                owner = camp->skills[resourceRunOperationIfUnblocked(grid) + listCursorGetRowIfUnblocked(grid)].unit;
-                if (owner < 0) {
-                    if (gameGetPlayerData()->ailments & 2) {
-                        color = 0x5a5a5aff;
-                    }
-                } else {
-                    record = gameGetUnitRecord(owner);
-                    if (record == NULL || (record->ailments & 2) || (record->ailments & 0x400) || (record->ailments & 4)) {
-                        color = 0x5a5a5aff;
-                    }
-                }
-            } else {
+            u32 color = 0xffffffff;
+            if (!(FUN_00298848(skill, (s16)camp->skills[resourceRunOperationIfUnblocked(grid) + listCursorGetRowIfUnblocked(grid)].unit) &&
+                FUN_002987d8(unit, skill) &&
+                  campSkillUserCanAct(&camp->skills[resourceRunOperationIfUnblocked(grid) + listCursorGetRowIfUnblocked(grid)]))) {
                 color = 0x5a5a5aff;
             }
             textDrawString(row->x + part->x + x, row->y + part->y + y, 0.5f, 3, 0.0f, color, 1.0f, name);
@@ -159,12 +130,12 @@ void campSkillListDraw(s32 x, s32 y, s32 drawCursor)
         part = asdTMTexTableEntryAt(0x1d, 0x447);
         if (unit < 0) {
             drawSetColorFromRGBA8(camp->categoryColors[unit + 1]);
-            uiDrawDemonIcon(-1, row->x + part->x + x, part->y + row->y + y, 0x88, 0);
+            uiDrawDemonIcon(-1, part->x + row->x + x, row->y + part->y + y, 0x88, 0);
         } else {
-            record = gameGetUnitRecord(unit);
+            StatBlock *record = gameGetUnitRecord(unit);
             if (record != NULL) {
                 drawSetColorFromRGBA8(camp->categoryColors[unit + 1]);
-                uiDrawDemonIcon((s16)record->id, row->x + part->x + x, part->y + row->y + y, 0x88, 0);
+                uiDrawDemonIcon((s16)record->id, row->x + part->x + x, row->y + part->y + y, 0x88, 0);
             }
         }
         gxResetColorQuadToWhite();
@@ -174,7 +145,7 @@ void campSkillListDraw(s32 x, s32 y, s32 drawCursor)
         texDrawCompositeSprite(2, 0x1a, 0x1b, x, y, 0xdd);
         TextureTableEntryIV *box = asdTMTexTableEntryAt(0x1a, 0x544);
         /* "No skills are available." in full-width characters */
-        sprintf(text, "\x82\x6d\x82\x8f\x81\x40\x82\x93\x82\x8b\x82\x89\x82\x8c\x82\x8c\x81\x40\x82\x93\x82\x81\x82\x92\x82\x85"
+        sprintf(text, "\x82\x6d\x82\x8f\x81\x40\x82\x93\x82\x8b\x82\x89\x82\x8c\x82\x8c\x82\x93\x81\x40\x82\x81\x82\x92\x82\x85"
                                "\x81\x40\x82\x81\x82\x96\x82\x81\x82\x89\x82\x8c\x82\x81\x82\x82\x82\x8c\x82\x85\x81\x44");
         s32 width = fontMeasureLineAdvance(text, 2);
         textDrawString(x + (box->x + (box->placement->width - width) / 2), box->y + y, 0.12890625f, 2, 0.0f, 0xffffffff, 1.0f, text);

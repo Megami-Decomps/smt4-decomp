@@ -41,7 +41,7 @@ void aocMenuDrawScreen(AocMenu* screen)
     }
     renderStackPop(&g_titleScene->stackB);
     renderStackPop(&g_titleScene->stackB);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPopChecked(&g_titleScene->stackA);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     renderCtxApplyTransforms(g_titleScene);

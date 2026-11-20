@@ -1,4 +1,5 @@
-/* NON_MATCHING: the command words are now stored as literals like retail (no constant table); retail merges each word pair into one stm with the zero/one constants hoisted into ip/r6 and pushes r7/r8, where this build emits separate stores. */
+/* NON_MATCHING: only the record address differs: retail folds it into a pre-indexed `strb r6, [r0, r1, lsl #2]!`
+ * (the build adds first), which shifts the pool by one word. */
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 struct CommandSegmentLink {
@@ -7,7 +8,7 @@ struct CommandSegmentLink {
 };
 extern "C" {
 extern u32 *g_commandBufferCursor;
-extern u32 g_commandBufferEnd;
+extern u32 *g_commandBufferEnd;
 void globalCriticalSectionEnterForward(void);
 void globalCriticalSectionLeaveForward(void);
 void FUN_001963e0(void);
@@ -16,36 +17,30 @@ void FUN_001963e0(void);
 void FUN_0017d43c(void)
 {
     AsdCmdBuffer *buffer = g_asdGfxContext.cmdBuffer;
-    u32 *cursor = g_commandBufferCursor;
-    u32 used = (u32)cursor - (u32)buffer->start;
-    buffer->writeOffset = used;
-    if (buffer->committedOffset == used) {
+    u32 bytes = (u8 *)g_commandBufferCursor - buffer->start;
+    buffer->writeOffset = bytes;
+    if (buffer->committedOffset == bytes)
         return;
-    }
-    if ((used & 8) != 0) {
-        buffer->writeOffset = used + 24;
+    if (bytes & 8) {
+        buffer->writeOffset = bytes + 24;
     } else {
-        buffer->writeOffset = used + 32;
-        if ((u32)cursor < g_commandBufferEnd) {
-            cursor[0] = 0;
-            cursor[1] = 0x8025E;
-            g_commandBufferCursor = cursor + 2;
+        buffer->writeOffset = bytes + 32;
+        if (g_commandBufferCursor < g_commandBufferEnd) {
+            *g_commandBufferCursor++ = 0;
+            *g_commandBufferCursor++ = 0x8025E;
         }
     }
-    if ((u32)g_commandBufferCursor < g_commandBufferEnd) {
-        g_commandBufferCursor[0] = 1;
-        g_commandBufferCursor[1] = 0xF0111;
-        g_commandBufferCursor += 2;
+    if (g_commandBufferCursor < g_commandBufferEnd) {
+        *g_commandBufferCursor++ = 1;
+        *g_commandBufferCursor++ = 0xF0111;
     }
-    if ((u32)g_commandBufferCursor < g_commandBufferEnd) {
-        g_commandBufferCursor[0] = 1;
-        g_commandBufferCursor[1] = 0xF0110;
-        g_commandBufferCursor += 2;
+    if (g_commandBufferCursor < g_commandBufferEnd) {
+        *g_commandBufferCursor++ = 1;
+        *g_commandBufferCursor++ = 0xF0110;
     }
-    if ((u32)g_commandBufferCursor < g_commandBufferEnd) {
-        g_commandBufferCursor[0] = 0x12345678;
-        g_commandBufferCursor[1] = 0xF0010;
-        g_commandBufferCursor += 2;
+    if (g_commandBufferCursor < g_commandBufferEnd) {
+        *g_commandBufferCursor++ = 0x12345678;
+        *g_commandBufferCursor++ = 0xF0010;
     }
     AsdCmdRecord *entry = &buffer->entries[buffer->listCount];
     entry->kind = 1;

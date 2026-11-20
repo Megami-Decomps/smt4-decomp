@@ -1,4 +1,6 @@
-/* NON_MATCHING: two spots differ: the stack context is loaded into another register for the first push and first pop (retail builds the stack address in place in r4), and the third push (the stack's own top state as its argument) addresses its count through a literal offset where retail adds 0x10C0 and uses an immediate; layout, calls and offsets agree */
+/* NON_MATCHING: 17 lines. Pushes, pops (stack D through renderStackPopChecked) and the third push's top read (stack 6
+ * of the 0x11EC bank) match; the third push still reads the count through a pooled 0x11EC where retail adds
+ * 0x10C0 + 0x1EC from the scene, and the pool shifts with it. */
 #include "ui/UiSpriteApi.h"
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
@@ -15,12 +17,25 @@ u32 asdCameraGetSavedRenderPairs(void);
 s32 renderCtxPackPassFlags(u32 first, u32 second);
 void effectRestoreSavedRenderPairs(RenderCtx *context, u32 value);
 
+/* unit-local: the title scene's draw context seen as its array of render-state stacks (from 0x11EC: D, E, F,
+ * A, C, G, B; RenderCtx names them one by one). */
+struct TitleSceneStacks {
+    /* 0x0000 */ u8 unk0000[0x11EC];
+    /* 0x11EC */ RenderStateStack stacks[7];
+};
+
+/* The current (top) state of render-state stack `index`. */
+static __inline u32 renderStackTop(RenderCtx *context, s32 index)
+{
+    return ((TitleSceneStacks *)context)->stacks[index].entries[((TitleSceneStacks *)context)->stacks[index].count];
+}
+
 /* Draws the effect editor's menu with its own render states pushed, then pops them again. */
 void titleSceneDrawEffectEditorMenu(void)
 {
     renderCtxPushD(g_titleScene, 0);
     renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
-    renderCtxPushB(g_titleScene, g_titleScene->stackB.entries[g_titleScene->stackB.count]);
+    renderStackPushCounted(&g_titleScene->stackB, renderStackTop(g_titleScene, 6));
     if (g_effectEditor.toggle == 0) {
         effectRestoreSavedRenderPairs(g_titleScene, asdCameraGetSavedRenderPairs());
     } else {
@@ -38,7 +53,7 @@ void titleSceneDrawEffectEditorMenu(void)
     }
     renderCtxResetColorScale(g_titleScene);
     renderCtxApplyTransforms(g_titleScene);
-    renderStackPop(&g_titleScene->depthStacks.stackD);
+    renderStackPopChecked(&g_titleScene->depthStacks.stackD);
     renderStackPop(&g_titleScene->stackA);
     renderStackPop(&g_titleScene->stackB);
 }

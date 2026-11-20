@@ -4,7 +4,7 @@
 
 extern "C" {
 
-void FUN_0048c09c(u32 *request, u32 value);
+void naviApplyCategorySelection(u32 *request, u32 value);
 
 void naviMainSetRequestTriple(u32 first, u32 second, u32 third)
 {
@@ -12,7 +12,7 @@ void naviMainSetRequestTriple(u32 first, u32 second, u32 third)
     navi->posX = first;
     navi->posY = second;
     navi->thirdValue = third;
-    FUN_0048c09c(navi->request, third);
+    naviApplyCategorySelection(navi->request, third);
 }
 
 } /* extern "C" */

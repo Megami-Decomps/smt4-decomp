@@ -6046,3 +6046,15 @@
 003dfea0 nn_gr_CTR_Texture_detail_MakeCommand
 003f6b28 mobiclipCtrlReleaseResource
 003f718c variantCopyWithToken
+00295cec gameSaveGetPoints
+002c130c appletSetSleepQueryState
+00316f70 gfxCreateResGraphicsFileObject
+001f3958 campAppListDraw
+001f53d0 spriteRowListUpdate
+00206368 spriteRowListOpen
+00218be0 spriteRowListClose
+001e0de0 spriteRowListChange
+00215d68 uniteDrawSpecialFusionPanel
+003172e0 campCecEditChoiceListState
+003a21b8 shopDrawAppraisalRow
+0022f1b8 aocEntryIsKindTen

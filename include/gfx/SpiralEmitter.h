@@ -74,9 +74,61 @@ typedef char SpiralEmitterOffsets[sizeof(SpiralParticle) == 0x28 && sizeof(Spira
     offsetof(SpiralEmitterDefinition, phaseStep) == 0xE8 && offsetof(SpiralEmitterDefinition, curveA) == 0xF8 &&
     offsetof(SpiralEmitterDefinition, curveB) == 0x124 ? 1 : -1];
 
+/* The motion of one particle of the bouncing emitter (0x40 bytes): SpiralMotion with the factor its speed
+ * is multiplied by each time it hits the floor. */
+struct BounceMotion {
+    /* 0x00 */ f32 direction[3];
+    /* 0x0C */ f32 axis[3];
+    /* 0x18 */ f32 phase;           /* radians */
+    /* 0x1C */ f32 wave;            /* the wave value at the previous step */
+    /* 0x20 */ f32 radius;
+    /* 0x24 */ f32 radiusStep;
+    /* 0x28 */ f32 phaseStep;
+    /* 0x2C */ f32 speed;           /* along `direction`; gravity is taken off it every frame */
+    /* 0x30 */ f32 bounce;          /* negative: the speed changes sign at the floor */
+    /* 0x34 */ f32 scale;
+    /* 0x38 */ f32 angleOffset;
+    /* 0x3C */ f32 angleScale;
+};
+
+/* The bouncing emitter's definition (effBounceEmitterUpdate): the swing emitter's, then the floor its particles
+ * bounce off. */
+struct BounceEmitterDefinition {
+    /* 0x00 */ Vector4 origin;
+    /* 0x10 */ RotationQuaternion rotation;
+    /* 0x20 */ s32 duration;        /* 0: the emitter loops */
+    /* 0x24 */ u8 unk24[0x48];
+    /* 0x6C */ f32 scaleVariance;
+    /* 0x70 */ u8 unk70[0x28];
+    /* 0x98 */ f32 angleVariance;
+    /* 0x9C */ u8 angleMode;        /* 1: random angle and spin direction, 2: no rotation */
+    /* 0x9D */ u8 unk9D[0x1B];
+    /* 0xB8 */ s32 lifetime;        /* frames a particle lives */
+    /* 0xBC */ u8 unkBC[0xC];
+    /* 0xC8 */ f32 spread;
+    /* 0xCC */ f32 speed;
+    /* 0xD0 */ f32 speedVariance;
+    /* 0xD4 */ f32 gravity;
+    /* 0xD8 */ f32 radius;
+    /* 0xDC */ f32 radiusVariance;
+    /* 0xE0 */ f32 endRadius;
+    /* 0xE4 */ f32 endRadiusVariance;
+    /* 0xE8 */ f32 phaseStep;
+    /* 0xEC */ f32 phaseStepVariance;
+    /* 0xF0 */ f32 floorY;          /* the height particles bounce at */
+    /* 0xF4 */ f32 bounce;          /* the share of its speed a particle keeps */
+    /* 0xF8 */ f32 bounceVariance;
+    /* 0xFC */ f32 bounceDecay;     /* multiplies a particle's bounce factor at each bounce */
+};
+typedef char BounceEmitterOffsets[sizeof(BounceMotion) == 0x40 &&
+    offsetof(BounceEmitterDefinition, scaleVariance) == 0x6C && offsetof(BounceEmitterDefinition, angleMode) == 0x9C &&
+    offsetof(BounceEmitterDefinition, lifetime) == 0xB8 && offsetof(BounceEmitterDefinition, spread) == 0xC8 &&
+    offsetof(BounceEmitterDefinition, floorY) == 0xF0 && offsetof(BounceEmitterDefinition, bounceDecay) == 0xFC ? 1 : -1];
+
 extern "C" {
 extern const Vector4 DAT_005c1ea0;      /* the spiral emitter's local "up" axis */
 extern const Vector4 DAT_005c1e80;      /* the swing emitter's (effSwingEmitterUpdate) */
+extern const Vector4 DAT_005c1e90;      /* the bouncing emitter's (effBounceEmitterUpdate) */
 
 }
 

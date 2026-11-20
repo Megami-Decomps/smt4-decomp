@@ -1,4 +1,6 @@
-/* NON_MATCHING: two spots differ: the stack context is loaded into another register for the first push and first pop (retail builds the stack address in place in r4), and the third push (the stack's own top state as its argument) addresses its count through a literal offset where retail adds 0x10C0 and uses an immediate; layout, calls and offsets agree */
+/* NON_MATCHING: 17 lines. Pushes, pops (stack D through renderStackPopChecked) and the third push's top read (stack 6
+ * of the 0x11F8 bank) match; the third push still reads the count through a pooled 0x11F8 where retail builds it from
+ * immediates, and the pool shifts with it. */
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "code/Code0014.h"
@@ -14,12 +16,25 @@ void renderCtxResetColorScale(RenderCtxA *context);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 s32 renderCtxPackPassFlags(u32 first, u32 second);
 
+/* unit-local: the draw context seen as its array of render-state stacks (from 0x11F8: D, E, F, A, C, G, B;
+ * RenderCtxA names them one by one). */
+struct RenderCtxStacksA {
+    /* 0x0000 */ u8 unk0000[0x11F8];
+    /* 0x11F8 */ RenderStateStack stacks[7];
+};
+
+/* The current (top) state of render-state stack `index`. */
+static __inline u32 renderStackTop(RenderCtxA *context, s32 index)
+{
+    return ((RenderCtxStacksA *)context)->stacks[index].entries[((RenderCtxStacksA *)context)->stacks[index].count];
+}
+
 /* Draws the effect editor's menu under its own render states, then pops them again. */
 void effectEditorDrawMenu(void)
 {
     renderCtxPushD(g_renderCtx, 0);
     renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
-    renderCtxPushB(g_renderCtx, g_renderCtx->stackB.entries[g_renderCtx->stackB.count]);
+    renderStackPushCounted(&g_renderCtx->stackB, renderStackTop(g_renderCtx, 6));
     if (g_effectEditor.toggle == 0) {
         effectRestoreSavedRenderPairs(g_renderCtx, reinterpret_cast<void *>(asdCameraGetSavedRenderPairs()));
     } else {
@@ -37,7 +52,7 @@ void effectEditorDrawMenu(void)
     }
     renderCtxResetColorScale(g_renderCtx);
     skinObjectUpdateMatrices(g_renderCtx);
-    renderStackPop(&g_renderCtx->depthStacks.stackD);
+    renderStackPopChecked(&g_renderCtx->depthStacks.stackD);
     renderStackPop(&g_renderCtx->stackA);
     renderStackPop(&g_renderCtx->stackB);
 }

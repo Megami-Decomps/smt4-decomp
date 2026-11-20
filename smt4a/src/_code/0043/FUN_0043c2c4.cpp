@@ -12,7 +12,7 @@ void FUN_0043c2c4(void)
   cVar1 = DAT_005891f4;
   if (DAT_005891f4 != '\0') {
     DAT_005891f4 = '\0';
-    FUN_00170484(3);
+    appletSetSleepQueryState(3);
     FUN_001713f8(0);
   }
   while (uVar2 = 0x407, FUN_001b03dc(0x407,0,0,acStack_24,acStack_28,0),

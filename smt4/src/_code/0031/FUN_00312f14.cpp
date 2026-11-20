@@ -1,4 +1,4 @@
-/* NON_MATCHING: zero is not kept in a saved register, changing row/weight registers and stack-frame allocation. */
+/* NON_MATCHING: retail keeps the zero in r8 (shared by the cleared weights and the zero percentages); the build rematerialises #0 and addresses the candidate row from r1. */
 #include "battle/BattleChoiceWeights.h"
 #include "gamedata/DataTable.h"
 #include "battle/BtlMainAccess.h"
@@ -7,7 +7,6 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-void __ARM_common_memcpy4_8(BattleChoiceRow* destination, const BattleChoiceRow* source);
 
 s32 FUN_00312f14(void)
 {
@@ -18,28 +17,14 @@ s32 FUN_00312f14(void)
     dataTableGetCount(table);
     table = btlMainGetDataTable(btlGetMainState(), 7);
     BattleChoiceRow* weightRows = static_cast<BattleChoiceRow*>(dataTableGetEntries(table));
-    BattleChoiceRow weights;
-    __ARM_common_memcpy4_8(&weights, &weightRows[row]);
+    BattleChoiceRow weights = weightRows[row];
     s32 total = 0;
-    if (!candidates[row].values[0]) {
-        weights.values[0] = 0;
-    } else {
-        total = weights.values[0];
-    }
-    if (!candidates[row].values[1]) {
-        weights.values[1] = 0;
-    } else {
-        total += weights.values[1];
-    }
-    if (!candidates[row].values[2]) {
-        weights.values[2] = 0;
-    } else {
-        total += weights.values[2];
-    }
-    if (!candidates[row].values[3]) {
-        weights.values[3] = 0;
-    } else {
-        total += weights.values[3];
+    for (s32 i = 0; i < 4; i++) {
+        if (!candidates[row].values[i]) {
+            weights.values[i] = 0;
+        } else {
+            total += weights.values[i];
+        }
     }
     s32 first = weights.values[0] ? weights.values[0] * 100 / total : 0;
     s32 second = weights.values[1] ? weights.values[1] * 100 / total : 0;

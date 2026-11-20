@@ -5,12 +5,6 @@ extern "C" {
 
 /* The unite work area: only the selected-entry count is named. */
 
-/* A list of entries with ids (u16 at +2) and kinds (u8 at +0x1A). */
-struct UniteEntryList {
-    /* 0x00 */ u8 unk00[2];
-    /* 0x02 */ u16 ids[12];
-    /* 0x1A */ u8 kinds[12];
-};
 s32 FUN_0029ce60(u32 id, s32 a, s32 b, s32 c, s32 d);
 
 /* Sums the results of requesting every entry of kind 3 from the unite list. */

@@ -117,7 +117,7 @@ u32 uiQuestDrawUpper(void)
         break;
     }
     }
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPopChecked(&g_renderCtx->stackA);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);

@@ -3,7 +3,17 @@
 
 #include "common.h"
 
+/* The sound archive's player info (nw::snd::SoundArchive::SoundArchivePlayerInfo): IV's NintendoWare has seven words
+ * (Sound3DManager::Initialize's 0x1C-byte local), Apocalypse's eight. */
 struct ArchivePoolCounts {
+    /* 0x00 */ u32 firstCount;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 secondCount;
+    /* 0x0C */ u8 unk0C[8];
+    /* 0x14 */ u32 thirdCount;
+    /* 0x18 */ u8 unk18[4];
+};
+struct ArchivePoolCountsA {
     /* 0x00 */ u32 firstCount;
     /* 0x04 */ u32 unk04;
     /* 0x08 */ u32 secondCount;
@@ -11,6 +21,7 @@ struct ArchivePoolCounts {
     /* 0x14 */ u32 thirdCount;
     /* 0x18 */ u8 unk18[8];
 };
+typedef char ArchivePoolCountsSizeCheck[sizeof(ArchivePoolCounts) == 0x1c && sizeof(ArchivePoolCountsA) == 0x20 ? 1 : -1];
 struct SoundArchivePool {
     /* 0x00 */ u8 unk00[8];
     /* 0x08 */ u8 pool[0x24];

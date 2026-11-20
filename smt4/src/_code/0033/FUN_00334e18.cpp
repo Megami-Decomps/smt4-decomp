@@ -7,7 +7,7 @@ s32 gameFlagIsSet(u32 flag);
 s32 unsignedKeyRecordCompare(const void *left, const void *right);
 void *libc_bsearch(const void *key, const void *entries, u32 count, u32 size,
     s32 (*compare)(const void *, const void *));
-void FUN_00295cec(const GauntletAppRecord *record);
+void gameSaveGetPoints(const GauntletAppRecord *record); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 static inline const GauntletAppRecord *questFindUnlockDefinition(u16 id, GauntletAppRecord &key)
 {
@@ -44,7 +44,7 @@ void FUN_00334e18(void)
     for (u32 id = 1; id < 141; ++id) {
         const GauntletAppRecord *record = questFindUnlockDefinition((u16)id, key);
         if (record && record->cost == 0 && questMeetsUnlockRequirements((u16)id, key)) {
-            FUN_00295cec(questFindUnlockDefinition((u16)id, key));
+            gameSaveGetPoints(questFindUnlockDefinition((u16)id, key));
             s32 index = (s32)id;
             u8 *byte = flags + index / 8;
             u8 mask = (u8)(1 << (index % 8));

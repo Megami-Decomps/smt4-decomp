@@ -51,7 +51,7 @@ u32 cecUpdateEditMode(void)
         }
     }
     const CecEditInput *input = reinterpret_cast<const CecEditInput *>(edit->unk08);
-    gfxAdvanceTextureRequestQueue(reinterpret_cast<u32>(edit->unk0C), input->selection);
+    gfxAdvanceTextureRequestQueue(reinterpret_cast<u32>(edit->infoPanel), input->selection);
     if (edit->unk04) {
         f32 value = uiGetFloatValue(edit->unk04);
         CecEditLinkHolder *holder = reinterpret_cast<CecEditLinkHolder *>(edit->unk04);

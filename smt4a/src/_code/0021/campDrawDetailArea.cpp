@@ -28,7 +28,7 @@ void FUN_002027fc(void);
 void FUN_00214dc4(void);
 /* The other pages of the camp's detail area. */
 void FUN_0023c8c0(s32 item, s32 x, s32 y, s32 selected, f32 alpha);
-void FUN_0023d230(s32 x, s32 y, s32 selected, f32 alpha);
+void campSkillListDraw(s32 x, s32 y, s32 selected, f32 alpha);
 /* The list's scroll bar. */
 void FUN_0023d150(GridNavigation *grid, s32 x, s32 y, s32 mode);
 /* Whether the consumable `id` can be used now. */
@@ -144,7 +144,7 @@ void campDrawDetailArea(s32 item, s32 selected)
     switch (item) {
     case 1:
     case 9:
-        FUN_0023d230(x, y, selected, alpha);
+        campSkillListDraw(x, y, selected, alpha);
         break;
     case 10:
         break;

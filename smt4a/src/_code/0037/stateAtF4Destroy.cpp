@@ -19,10 +19,10 @@ void stateAtF4Destroy(void)
     __aeabi_memcpy4(gameGetPlayerData(), state->unk16C, 0xE);
     asdMemFree(state->buf50);
     asdMemFree(state->buf54);
-    asdMemFree(state->unk58);
+    asdMemFree(state->messages);
     asdMemFreeSlot(state->unk5C);
     scrScriptProcessDestroy(state->scriptProcess);
-    resSetFree(state->unk0C);
+    resSetFree(state->infoPanel);
     jobStop(state->job, 0);
     asdMemFree(state);
     g_campCecEdit = NULL;

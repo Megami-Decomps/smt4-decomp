@@ -1,15 +1,12 @@
+/* NON_MATCHING: retail reloads g_gameDataBlocks.saveBlock for the final store and keeps the cap in r3 (`movls r3, r1`);
+ * the build reuses the points address and value. The rest matches. */
 #include "gamedata/GameSaveBlocks.h"
-/* NON_MATCHING: typed save stores let the compiler retain the block pointer; retail reloads the global block pointer before its final clamp store, with different register allocation. */
 
-// Accumulates the total and caps the spendable counter at 9999.
+/* Adds `amount` to the lifetime total and to the spendable points, capping them at 9999. */
 extern "C" void gameSaveAddPointsClamped(s32 amount)
 {
-    GameSaveData *save = g_gameDataBlocks.saveBlock;
-    save->body.pointsTotal += amount;
-    u32 value = save->body.points + amount;
-    save->body.points = value;
-    if (value > 9999) {
-        value = 9999;
-    }
-    g_gameDataBlocks.saveBlock->body.points = value;
+    g_gameDataBlocks.saveBlock->body.pointsTotal += amount;
+    g_gameDataBlocks.saveBlock->body.points += amount;
+    g_gameDataBlocks.saveBlock->body.points =
+        g_gameDataBlocks.saveBlock->body.points > 9999 ? 9999 : g_gameDataBlocks.saveBlock->body.points;
 }

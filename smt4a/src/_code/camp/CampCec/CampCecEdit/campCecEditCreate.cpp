@@ -44,7 +44,7 @@ s32 FUN_00387d38(StateAtF4 *edit);
 s32 FUN_00387bb8(StateAtF4 *edit);
 s32 FUN_0036ce70(StateAtF4 *edit);
 s32 FUN_00318e7c(StateAtF4 *edit);
-s32 FUN_003aef48(StateAtF4 *edit);
+s32 campCecEditChoiceListState(StateAtF4 *edit);
 s32 stepObjStart(StateAtF4 *edit);
 s32 stepObjBStart(StateAtF4 *edit);
 
@@ -81,23 +81,23 @@ void campCecEditCreate(u8 openMode)
     edit->phase = -1;
     edit->table.previousMode = -1;
     edit->mode = 0;
-    edit->unk0FC = -1;
+    edit->followingPhase = -1;
     edit->table.state = -1;
     edit->table.nextState = 0;
     edit->unk112 = 1;
-    edit->unk100 = 0;
+    edit->touchFrames = 0;
     edit->openMode = openMode;
-    edit->unk114 = 0;
-    edit->unk118 = 0;
-    edit->unk120 = 0;
-    edit->unk124 = 0x20;
-    edit->unk128 = 0;
-    edit->unk12D = 0;
-    edit->unk130 = -56;
-    edit->unk134 = 0;
-    edit->unk13C = 0;
-    edit->unk140 = 0;
-    edit->unk144 = 0;
+    edit->listCancelled = 0;
+    edit->listIndex = 0;
+    edit->listTop = 0;
+    edit->listCount = 0x20;
+    edit->listRow = 0;
+    edit->listActive = 0;
+    edit->tickerX = -56;
+    edit->messageBase = 0;
+    edit->arrowHoldFrames = 0;
+    edit->touchX = 0;
+    edit->touchY = 0;
     edit->unk148 = -1;
     edit->frameCounter = 0;
     edit->unk154 = 1;
@@ -116,7 +116,7 @@ void campCecEditCreate(u8 openMode)
     edit->table.handlers[4] = FUN_00387bb8;
     edit->table.handlers[5] = FUN_0036ce70;
     edit->table.handlers[9] = FUN_00318e7c;
-    edit->table.handlers[6] = FUN_003aef48;
+    edit->table.handlers[6] = campCecEditChoiceListState;
     edit->table.handlers[7] = stepObjStart;
     edit->table.handlers[8] = stepObjBStart;
 
@@ -152,15 +152,15 @@ void campCecEditCreate(u8 openMode)
     __aeabi_memcpy4(gameGetPlayerData(), edit->unk08, 0xe);
     edit->profile = *(const CecProfile *)edit->unk08;
     campCecDispatchMode((u32)edit->unk08);
-    edit->unk0C = (u32 *)campCecDrawPageCreate();
-    characterInfoPanelPopulate(edit->unk0C, edit->unk08, edit->unk58);
+    edit->infoPanel = (u32 *)campCecDrawPageCreate();
+    characterInfoPanelPopulate(edit->infoPanel, edit->unk08, edit->messages);
     asdLoadFileAsyncSimple("camp/CecEdit_scr.bf", (u32 *)&edit->buf50, 0);
     asdLoadFileAsyncSimple("camp/CecEdit_msg.mbm", (u32 *)&edit->buf54, 0);
-    asdLoadFileAsyncSimple("camp/CecEdit_one_msg.mbm", (u32 *)&edit->unk58, 0);
+    asdLoadFileAsyncSimple("camp/CecEdit_one_msg.mbm", (u32 *)&edit->messages, 0);
 
     u8 portrait = ((u8 *)edit->unk08)[0x22];
     if (FUN_00182054(portrait) == 0) {
-        textureRequestCacheGet(edit->unk0C, portrait);
+        textureRequestCacheGet(edit->infoPanel, portrait);
     }
 
     edit->unk5C = (u32)spriteHandleCreate(0);

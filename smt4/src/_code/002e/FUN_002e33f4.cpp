@@ -1,4 +1,5 @@
 /* NON_MATCHING: the player/unit duplicated accessors are expanded in another order than retail and the status-bit scan branches differ; the item effect logic is the same. */
+#include "code/Code002e.h"
 #include "common.h"
 #include "shard/PassiveSkill.h"
 #include "gamedata/UnitRecordAccess.h"
@@ -37,7 +38,6 @@ void playerPadSetBit(u32 bit);
 void objectFlagSetBit(EffectUnit *unit, u32 bit);
 u32 dataTable9EntryOrZero(u32 tier);
 u32 devilCalcLevelScaledCost(u32 id, u32 level);
-s32 FUN_00295cec(void);
 void gameSaveAddPointsClamped(void);
 
 /* Applies (or, with `dryRun`, only tests) the effect record `effect` on the unit `index` (a
@@ -116,7 +116,7 @@ u32 FUN_002e33f4(s32 index, EffectRecord *effect, s32 previewOnly, s32 dryRun)
         }
         result = 0;
     }
-    if (effect->unk76 != 0 && player != NULL && FUN_00295cec() != 9999) {
+    if (effect->unk76 != 0 && player != NULL && gameSaveGetPoints() != 9999) {
         if (dryRun == 0) {
             gameSaveAddPointsClamped();
         }

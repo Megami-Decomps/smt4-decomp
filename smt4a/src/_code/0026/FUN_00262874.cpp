@@ -39,7 +39,7 @@ int slotRecordFindById(...);
 int menuStateStartConfirm(void);
 int scrRunOpcodesStub(...);
 int FUN_0023fc38(void);
-int FUN_002a690c(...);
+int skillApplyToParty(...);
 int FUN_002a6a24(...);
 int statusDownRestartTransition(void);
 int FUN_002c39dc(...);
@@ -61,7 +61,7 @@ int scrScriptProcessStartEntry(...);
 int menuStateReset(void);
 int FUN_002ade88(void);
 int FUN_002f707c(...);
-int FUN_00333694(...);
+int skillApplyToMemberAndCharge(...);
 int objBInitBlock19D0(...);
 int statusPreviewMpChange(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int FUN_00372100(...);
@@ -200,7 +200,7 @@ extern int compendiumEntryIsRegistered(unsigned short);
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002a5cf4. */
 /* Supplied declaration required: FUN_002a5e7c. */
-/* Supplied declaration required: FUN_002a690c. */
+/* Supplied declaration required: skillApplyToParty. */
 /* Supplied declaration required: FUN_002a6a24. */
 /* Supplied declaration required: statusDownRestartTransition. */
 /* Supplied declaration required: statusPanelSetOpen. */
@@ -237,7 +237,7 @@ extern int holderKindIsActive(void);
 /* Supplied declaration required: FUN_0031f688. */
 /* Supplied declaration required: FUN_0031f718. */
 extern int FUN_0032fb18(void);
-/* Supplied declaration required: FUN_00333694. */
+/* Supplied declaration required: skillApplyToMemberAndCharge. */
 /* Supplied declaration required: statusDownGetActive. */
 extern int gameGlobalsGetState(void);
 /* Supplied declaration required: mapBlockSetRequest. */
@@ -1474,17 +1474,17 @@ LAB_00264c78:
                       if (temp_v14 != 0) {
                         temp_v4 = temp_v4 + temp_v14;
                         temp_v14 = (int)*(short *)(temp_v1 + 0x38);
-                        FUN_00333694(temp_v14,(int)*(char *)(temp_v4 + 0x1c9f),
+                        skillApplyToMemberAndCharge(temp_v14,(int)*(char *)(temp_v4 + 0x1c9f),
                                      *(unsigned short *)(temp_v1 + 0x36),1);
                         if (temp_v14 == 0) {
-                          FUN_00333694((int)*(short *)(temp_v1 + 0x38),(int)*(char *)(temp_v4 + 0x1c9f),
+                          skillApplyToMemberAndCharge((int)*(short *)(temp_v1 + 0x38),(int)*(char *)(temp_v4 + 0x1c9f),
                                        *(unsigned short *)(temp_v1 + 0x36),0);
                           temp_v10 = gameGetSlotRecord((int)*(char *)(temp_v4 + 0x1c9f));
                           statusDisplayBindUnitRecord(temp_v10,0,0);
                           FUN_0021c1e0();
                           mapBlockSetRequest();
                           temp_v14 = (int)*(short *)(temp_v1 + 0x38);
-                          FUN_00333694(temp_v14,(int)*(char *)(temp_v4 + 0x1c9f),
+                          skillApplyToMemberAndCharge(temp_v14,(int)*(char *)(temp_v4 + 0x1c9f),
                                        *(unsigned short *)(temp_v1 + 0x36),1);
                           if (temp_v14 == 1) {
                             *(unsigned char *)(temp_v15 + 0x9c0) = 0;
@@ -1494,15 +1494,15 @@ LAB_00264c78:
                       }
                       else {
                         temp_v4 = (int)*(short *)(temp_v1 + 0x38);
-                        FUN_00333694(temp_v4,0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
+                        skillApplyToMemberAndCharge(temp_v4,0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
                         if (temp_v4 == 0) {
-                          FUN_00333694((int)*(short *)(temp_v1 + 0x38),0xffffffff,
+                          skillApplyToMemberAndCharge((int)*(short *)(temp_v1 + 0x38),0xffffffff,
                                        *(unsigned short *)(temp_v1 + 0x36),0);
                           FUN_0031f718(0xffffffff,0);
                           FUN_0021c1e0();
                           mapBlockSetRequest();
                           temp_v4 = (int)*(short *)(temp_v1 + 0x38);
-                          FUN_00333694(temp_v4,0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
+                          skillApplyToMemberAndCharge(temp_v4,0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
                           if (temp_v4 == 1) {
                             *(unsigned char *)(temp_v1 + 0x9c0) = 0;
                           }
@@ -1670,10 +1670,10 @@ LAB_002654c8:
                         else {
                           gameGlobalsSetMenuOpenFlag(1);
                           temp_v14 = (int)*(short *)(temp_v1 + 0x38);
-                          FUN_00333694(temp_v14,*(unsigned int *)(temp_v4 + 0xa80),
+                          skillApplyToMemberAndCharge(temp_v14,*(unsigned int *)(temp_v4 + 0xa80),
                                        *(unsigned short *)(temp_v1 + 0x36),1);
                           if (temp_v14 == 0) {
-                            FUN_00333694((int)*(short *)(temp_v1 + 0x38),
+                            skillApplyToMemberAndCharge((int)*(short *)(temp_v1 + 0x38),
                                          *(unsigned int *)(temp_v4 + 0xa80),
                                          *(unsigned short *)(temp_v1 + 0x36),0);
                             temp_v10 = gameGetSlotRecord(*(unsigned int *)(temp_v4 + 0xa80));
@@ -1682,7 +1682,7 @@ LAB_002654c8:
                             FUN_0021c1e0();
                             mapBlockSetRequest();
                             temp_v14 = (int)*(short *)(temp_v1 + 0x38);
-                            FUN_00333694(temp_v14,*(unsigned int *)(temp_v4 + 0xa80),
+                            skillApplyToMemberAndCharge(temp_v14,*(unsigned int *)(temp_v4 + 0xa80),
                                          *(unsigned short *)(temp_v1 + 0x36),1);
                             if (temp_v14 == 1) {
                               *(unsigned short *)(temp_v4 + 0xa84) = 0;
@@ -2083,7 +2083,7 @@ LAB_00265d24:
               FUN_002a5cf4();
             }
             else {
-              FUN_002a690c((int)*(short *)(temp_v1 + 0x38),*(unsigned short *)(temp_v1 + 0x36),0);
+              skillApplyToParty((int)*(short *)(temp_v1 + 0x38),*(unsigned short *)(temp_v1 + 0x36),0);
               temp_v4 = FUN_002a6a24(*(unsigned short *)(temp_v1 + 0x36));
               panelSetMode3(-temp_v4,0);
               partyPanelChangeState(0x11,1);
@@ -2093,9 +2093,9 @@ LAB_00265d24:
           else {
             gameGlobalsSetMenuOpenFlag(1);
             temp_v4 = (int)*(short *)(temp_v1 + 0x38);
-            FUN_002a690c(temp_v4,*(unsigned short *)(temp_v1 + 0x36),1);
+            skillApplyToParty(temp_v4,*(unsigned short *)(temp_v1 + 0x36),1);
             if (temp_v4 == 0) {
-              FUN_002a690c((int)*(short *)(temp_v1 + 0x38),*(unsigned short *)(temp_v1 + 0x36),0);
+              skillApplyToParty((int)*(short *)(temp_v1 + 0x38),*(unsigned short *)(temp_v1 + 0x36),0);
               if (-1 < *(short *)(temp_v1 + 0x38)) goto LAB_00265c00;
 LAB_00265bc8:
               FUN_0031f718(0xffffffff,0);
@@ -2741,12 +2741,12 @@ LAB_0026700c:
             temp_v22 = listCursorGetRowOfChildIfUnblocked(temp_v14);
             if (temp_v22 != 0) {
               temp_v6 = (int)*(short *)(temp_v1 + 0x38);
-              FUN_00333694(temp_v6,(int)*(char *)(temp_v22 + temp_v4 + 0x1c9f),
+              skillApplyToMemberAndCharge(temp_v6,(int)*(char *)(temp_v22 + temp_v4 + 0x1c9f),
                            *(unsigned short *)(temp_v1 + 0x36),1);
             }
             else {
               temp_v6 = (int)*(short *)(temp_v1 + 0x38);
-              FUN_00333694(temp_v6,0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
+              skillApplyToMemberAndCharge(temp_v6,0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
             }
           }
           else {
@@ -2762,7 +2762,7 @@ LAB_0026700c:
               temp_v22 = temp_v22 + temp_v4 * 4 + temp_v6 * 0xc;
             }
             temp_v6 = (int)*(short *)(temp_v1 + 0x38);
-            FUN_00333694(temp_v6,*(unsigned int *)(temp_v1 + (temp_v22 - 4) * 8 + 0xa80),
+            skillApplyToMemberAndCharge(temp_v6,*(unsigned int *)(temp_v1 + (temp_v22 - 4) * 8 + 0xa80),
                          *(unsigned short *)(temp_v1 + 0x36),1);
           }
           if ((temp_v6 != 0) &&
@@ -2848,7 +2848,7 @@ LAB_0026700c:
           break;
         }
         temp_v14 = (int)*(short *)(temp_v1 + 0x38);
-        FUN_00333694(temp_v14,0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
+        skillApplyToMemberAndCharge(temp_v14,0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
         if (temp_v14 == 1) {
           *(unsigned char *)(temp_v1 + 0x9c0) = 0;
           temp_v14 = reinterpret_cast<int>(btlGetMainState());
@@ -2862,7 +2862,7 @@ LAB_0026700c:
         temp_v14 = 0;
         do {
           temp_v22 = (int)*(short *)(temp_v1 + 0x38);
-          FUN_00333694(temp_v22,(int)*(char *)(temp_v4 + temp_v14 + 0x1ca0),*(unsigned short *)(temp_v1 + 0x36),
+          skillApplyToMemberAndCharge(temp_v22,(int)*(char *)(temp_v4 + temp_v14 + 0x1ca0),*(unsigned short *)(temp_v1 + 0x36),
                        1);
           if (temp_v22 == 1) {
             *(unsigned char *)(temp_v1 + temp_v14 + 0x9c1) = 0;
@@ -2873,7 +2873,7 @@ LAB_0026700c:
         do {
           temp_v22 = temp_v1 + temp_v4 * 8;
           temp_v14 = (int)*(short *)(temp_v1 + 0x38);
-          FUN_00333694(temp_v14,*(unsigned int *)(temp_v22 + 0xa80),*(unsigned short *)(temp_v1 + 0x36),1);
+          skillApplyToMemberAndCharge(temp_v14,*(unsigned int *)(temp_v22 + 0xa80),*(unsigned short *)(temp_v1 + 0x36),1);
           if (temp_v14 == 1) {
             *(unsigned short *)(temp_v22 + 0xa84) = 0;
           }

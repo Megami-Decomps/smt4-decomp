@@ -102,7 +102,7 @@ int gameGetUnlockedCountLimit(void);
 int uiUpdateChainedSpriteRows(...);
 int FUN_0023c384(...);
 int mapDepartAdvanceState(void);
-int FUN_002e5c2c(...);
+int gameSaveGetPoints(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int sysMemClear(...);
 int panelSetMode3(...);
 int FUN_00340a94(...);
@@ -237,7 +237,7 @@ extern int FUN_002c8748(void);
 /* Supplied declaration required: FUN_002c9a8c. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002e5c2c. */
+/* Supplied declaration required: gameSaveGetPoints. */
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_002effbc(void);
 /* Supplied declaration required: statusReplaceSkills. */
@@ -968,7 +968,7 @@ LAB_0020524c:
           *(unsigned int *)(temp_v6 + 0x4574) = 0;
           *(unsigned char *)(temp_v6 + 0x442c) = 0x7f;
           __aeabi_memcpy4(temp_v6 + 0x4430,temp_v7,100);
-          temp_v16 = FUN_002e5c2c();
+          temp_v16 = gameSaveGetPoints();
           *(int *)(temp_v6 + 0x7e38) = temp_v16;
           *(int *)(temp_v6 + 0x7e3c) = temp_v16 << 0xc;
           if (temp_v13 != 0) {
@@ -2221,7 +2221,7 @@ joined_r0x002073c8:
       }
       break;
     case 2:
-      temp_v7 = FUN_002e5c2c();
+      temp_v7 = gameSaveGetPoints();
       temp_v13 = temp_v7 - *(int *)(temp_v6 + 0x7e38);
       temp_v12 = (float)__aeabi_ul2f(temp_v13 * 0x1000,temp_v13 >> 0x14);
       if (*(char *)(temp_v6 + 0x7f50) == '\0') {
@@ -2234,11 +2234,11 @@ joined_r0x002073c8:
       temp_v33 = (float)VectorUnsignedToFloat(*puVar29,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v13 = VectorFloatToUnsigned(temp_v12 / (20.0f / temp_v34) + temp_v33,3);
       *puVar29 = temp_v13;
-      temp_v13 = FUN_002e5c2c();
+      temp_v13 = gameSaveGetPoints();
       temp_v26 = *puVar29;
       temp_v32 = temp_v13 * 0x1000 <= temp_v26;
       if (-(temp_v13 >> 0x14) < (unsigned int)temp_v32) {
-        temp_v7 = FUN_002e5c2c(-((temp_v13 >> 0x14) + (unsigned int)!temp_v32),temp_v26 + temp_v13 * -0x1000);
+        temp_v7 = gameSaveGetPoints(-((temp_v13 >> 0x14) + (unsigned int)!temp_v32),temp_v26 + temp_v13 * -0x1000);
         *puVar29 = temp_v7 << 0xc;
         if (*(char *)(temp_v6 + 0x7e49) != '\0') {
           soundApplyValueOrStop(*(unsigned int *)(temp_v6 + 0x7e44),0);
@@ -2248,7 +2248,7 @@ joined_r0x002073c8:
       if (*(char *)(temp_v6 + 0x7f50) != '\0') {
         *(unsigned int *)(temp_v6 + 0x436c) = 5;
         soundApplyValueOrStop(*(unsigned int *)(temp_v6 + 0x7e44),0);
-        temp_v7 = FUN_002e5c2c();
+        temp_v7 = gameSaveGetPoints();
         *puVar29 = temp_v7 << 0xc;
       }
       else {
@@ -2259,7 +2259,7 @@ joined_r0x002073c8:
             soundApplyValueOrStop(*(unsigned int *)(temp_v6 + 0x7e44),0);
             *(unsigned char *)(temp_v6 + 0x7e49) = 0;
           }
-          temp_v7 = FUN_002e5c2c();
+          temp_v7 = gameSaveGetPoints();
           *puVar29 = temp_v7 << 0xc;
           uiSpriteSetKeyframe(temp_v6 + 0x6b0,1,0);
           temp_v7 = *(int *)(temp_v6 + 0x436c) + 1;

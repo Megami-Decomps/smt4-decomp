@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail passes the object through a copy (r6) to the inlined clear, keeps the section in r5 with one shared Leave and places the no-heap exit out of line; build keeps r4 and leaves per arm. */
+/* NON_MATCHING: the scoped lock, the early return and the out-of-line no-heap exit match; retail still passes the object
+ * through a copy (movne r6, r4; add r7, r6, #4) to the inlined clear, and names the vtable _ZTV9Obj421f54+8. */
 #include "common.h"
 #include "shard/S3SoundHeapObj.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
@@ -24,18 +25,14 @@ static __inline void soundHeapObjClear(SoundHeapObj *self)
 /* Releases the frame heap under the lock. */
 static __inline void soundHeapObjDestroyHeap(SoundHeapObj *self)
 {
-    CriticalSection *lock = reinterpret_cast<CriticalSection *>(self->lock);
-
-    nn_os_CriticalSection_Enter(lock);
-    if (self->heap != 0) {
-        soundHeapObjClear(self);
-        u32 heapOwner = soundRequestQueueGetInstance();
-        soundRequestQueueDequeueUntilToken(heapOwner, soundRequestQueueFlush(heapOwner, 1));
-        nw_snd_internal_FrameHeap_Destroy(&self->heap);
-        nn_os_CriticalSection_Leave(lock);
-    } else {
-        nn_os_CriticalSection_Leave(lock);
+    ScopedCriticalLock lock(self->lock);
+    if (self->heap == 0) {
+        return;
     }
+    soundHeapObjClear(self);
+    u32 heapOwner = soundRequestQueueGetInstance();
+    soundRequestQueueDequeueUntilToken(heapOwner, soundRequestQueueFlush(heapOwner, 1));
+    nw_snd_internal_FrameHeap_Destroy(&self->heap);
 }
 
 /* Destroys the object: the frame heap, then its base (the frame heap base sits at +0x10);

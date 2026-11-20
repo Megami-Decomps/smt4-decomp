@@ -3,9 +3,9 @@
 
 #include "common.h"
 #include <stddef.h>
+#include <vector>
 
 extern "C" {
-void _ZN4__rw15__rw_deallocateEPvji(void *allocation, s32 count, s32 allocator);
 void resourceListDestroy(void *resources);
 void asdOperatorDelete(void *allocation);
 }
@@ -24,28 +24,6 @@ struct ResourceListOwnerEntry {
     static void operator delete(void *allocation) { asdOperatorDelete(allocation); }
 };
 
-struct ResourceListOwnerVector {
-    /* 0x00 */ ResourceListOwnerEntry **begin;
-    /* 0x04 */ ResourceListOwnerEntry **end;
-    /* 0x08 */ ResourceListOwnerEntry **capacityEnd;
-
-    ResourceListOwnerVector() : begin(NULL), end(NULL), capacityEnd(NULL) {}
-
-    void clear()
-    {
-        ResourceListOwnerEntry **first = begin;
-        if (first != end) {
-            end = end - (end - first);
-        }
-    }
-
-    ~ResourceListOwnerVector()
-    {
-        clear();
-        _ZN4__rw15__rw_deallocateEPvji(begin, capacityEnd - begin, 0);
-    }
-};
-
 class Obj557dcc {
 public:
     Obj557dcc(u32 value);
@@ -54,11 +32,10 @@ public:
     /* 0x00: vtable pointer */
     /* 0x04 */ u32 value;
     /* 0x08 */ u32 unk08;
-    /* 0x0C */ ResourceListOwnerVector entries;
+    /* 0x0C */ std::vector<ResourceListOwnerEntry *> entries;
 };
 
 typedef char ResourceListOwnerEntrySizeCheck[sizeof(ResourceListOwnerEntry) == 0x10 ? 1 : -1];
-typedef char ResourceListOwnerVectorSizeCheck[sizeof(ResourceListOwnerVector) == 0x0C ? 1 : -1];
 typedef char ResourceListOwnerSizeCheck[sizeof(Obj557dcc) == 0x18 ? 1 : -1];
 
 #endif

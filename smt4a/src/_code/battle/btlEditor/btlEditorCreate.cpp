@@ -14,7 +14,7 @@ u32 taskCreateDraw(const char* name, u32 priority, u32 size, u32 flags,
                    TaskFunc callback, TaskFunc destroy, void* data, u32 parent);
 void* asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
 void FUN_002984d4(void* work);
-void FUN_003285dc(void* work);
+void btlEditorDestroy(void* work);
 void btlEditorUpdate(void* work);
 s32 FUN_004f2708(BtlCameraA* camera, BtlMainStateA* battle, u32 option);
 void FUN_004aa780(void* work, u32 enabled);
@@ -23,7 +23,7 @@ extern BattleEditorGlobalsA g_btlEditor;
 void btlEditorCreate(BtlMainStateA* battle)
 {
     u32 job = taskCreateDraw("btlEditor Calc", 4, 0, 0, FUN_002984d4,
-        FUN_003285dc, battle, battle->job);
+        btlEditorDestroy, battle, battle->job);
     battle->uiJobs.editorJob = job;
     taskCreateDraw("btlEditor DrawUp", 0x75, 0, 0, btlEditorUpdate, 0, battle, job);
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlEditor.cpp", 976);

@@ -1,27 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scriptParseIntArgumentPreservingErrno` (_code @ 0x100bd4, 0x1a bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* ARM runtime code (armlib's atoll): built --cpu=5TE like its neighbours libc_toupper and digitValueInBase. */
+#include "common.h"
+#include <errno.h>
 
 extern "C" {
 
-int FUN_002c5e80(unsigned int, int, int);
+s64 FUN_002c5e80(const char *text, char **end, s32 base);
 
-/* Supplied declaration required: FUN_002c5e80. */
-extern unsigned int *__aeabi_errno_addr(void);
-
-
-void scriptParseIntArgumentPreservingErrno(unsigned int param_1)
-
+/* Parses a decimal integer without disturbing errno (armlib's atoll shape). */
+s64 scriptParseIntArgumentPreservingErrno(const char *text)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  puVar1 = (unsigned int *)__aeabi_errno_addr();
-  temp_v0 = *puVar1;
-  FUN_002c5e80(param_1,0,10);
-  *puVar1 = temp_v0;
-  return;
+    s32 saved = errno;
+    s64 value = FUN_002c5e80(text, NULL, 10);
+    errno = saved;
+    return value;
 }
 
 } /* extern "C" */

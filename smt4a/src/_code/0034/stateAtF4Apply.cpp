@@ -8,7 +8,7 @@ extern void characterInfoPanelPopulate(u32 *a, u16 *b, void *c);
 void stateAtF4Apply(void)
 {
     if (g_campCecEdit != NULL) {
-        characterInfoPanelPopulate(g_campCecEdit->unk0C, g_campCecEdit->unk08, g_campCecEdit->unk58);
+        characterInfoPanelPopulate(g_campCecEdit->infoPanel, g_campCecEdit->unk08, g_campCecEdit->messages);
     }
 }
 

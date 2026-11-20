@@ -7,7 +7,7 @@ s32 FUN_0029e924(MenuList *list);
 s32 rangeLimitMin(MenuList *list);
 s32 flaggedEntryGetValueByState(MenuList *list);
 u32 flaggedValueHolderGetTotal(MenuList *list);
-void FUN_003a21b8(SelectMenu *menu, s32 index, s32 marked, s32 value);
+void shopDrawAppraisalRow(SelectMenu *menu, s32 index, s32 marked, s32 value);
 void shopDrawEquippedItemPage(SelectMenu *menu);
 void FUN_003a1d04(SelectMenu *menu);
 void shopScreenRedraw(SelectMenu *menu);
@@ -32,13 +32,13 @@ void selectMenuHandlePendingRequest(SelectMenu *menu)
 
         for (s32 i = 0; i < count; i++) {
             if (!pickMode || flaggedEntryGetValueByState(list) != i) {
-                FUN_003a21b8(menu, i + 1, 0, first + i);
+                shopDrawAppraisalRow(menu, i + 1, 0, first + i);
             }
         }
         if (pickMode && list->range.count > 0) {
             u32 marked = flaggedValueHolderGetTotal(list);
 
-            FUN_003a21b8(menu, flaggedEntryGetValueByState(list) + 1, 1, marked);
+            shopDrawAppraisalRow(menu, flaggedEntryGetValueByState(list) + 1, 1, marked);
         }
         s32 selected = flaggedEntryGetValueByState(list);
 

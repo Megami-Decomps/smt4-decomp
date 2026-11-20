@@ -1,4 +1,4 @@
-/* NON_MATCHING: the placeholder cell is derived from its icon id like the record cells (retail's four separate mov/str now match); only register assignment differs (x in r9 vs sl, placeholder id loaded predicated after the flag test in retail). */
+/* NON_MATCHING: retail holds x and the constant fallback icon in different saved registers. */
 #include "common.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
@@ -28,20 +28,23 @@ u32 markerKindGetColor(s32 kind);
 void drawSetColorFromRGBA8(u32 color);
 void gxResetColorQuadToWhite(void);
 
-// Draw an item or status icon (id < 0: the placeholder), optionally tinted when the unit's slot is marked.
+enum { PLACEHOLDER_ICON_ID = 0x25D };
+
+/* Draws an item or status icon (negative id: placeholder), optionally tinting marked units. */
 void uiDrawItemOrStatusIcon(s32 id, s32 x, s32 y, s32 z, s32 tint)
 {
     if (id < 0) {
-        if (gameFlagIsSet(17) != 0) {
+        if (gameFlagIsSet(17) == 0) {
+            id = PLACEHOLDER_ICON_ID;
+        } else {
             texDrawTableEntryAtStoredOrigin(2, 27, 1000, x, y, z);
             return;
         }
-        s32 placeholder = 0x25D;
-        if (FUN_00191f18(g_aocSystem, placeholder) != 0) {
-            FUN_00191ea8(g_aocSystem, placeholder, x, y, z);
+        if (FUN_00191f18(g_aocSystem, id) != 0) {
+            FUN_00191ea8(g_aocSystem, id, x, y, z);
             return;
         }
-        s32 icon = placeholder - 0x200;
+        s32 icon = id - 0x200;
         IconRect rect;
         rect.left = icon / 16 * 16;
         rect.right = rect.left + 16;

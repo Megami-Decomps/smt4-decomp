@@ -1,4 +1,5 @@
-/* NON_MATCHING: command writer uses different scratch registers and paired stores in its termination commands. */
+/* NON_MATCHING: only r2 and r3 are swapped in the head (retail keeps the written byte count in r2 and the committed
+ * offset in r3, then g_commandBufferEnd in r3); the rest matches. */
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 extern "C" {
 extern u32 *g_commandBufferCursor;
@@ -20,26 +21,21 @@ void asdGxCmdBufferFinalizeBlock(void)
     } else {
         buffer->writeOffset = bytes + 32;
         if (g_commandBufferCursor < g_commandBufferEnd) {
-            u32 *cursor = g_commandBufferCursor;
-            g_commandBufferCursor += 2;
-            cursor[1] = 0x8025E;
-            cursor[0] = 0;
+            *g_commandBufferCursor++ = 0;
+            *g_commandBufferCursor++ = 0x8025E;
         }
     }
     if (g_commandBufferCursor < g_commandBufferEnd) {
-        g_commandBufferCursor[0] = 1;
-        g_commandBufferCursor[1] = 0xF0111;
-        g_commandBufferCursor += 2;
+        *g_commandBufferCursor++ = 1;
+        *g_commandBufferCursor++ = 0xF0111;
     }
     if (g_commandBufferCursor < g_commandBufferEnd) {
-        g_commandBufferCursor[0] = 1;
-        g_commandBufferCursor[1] = 0xF0110;
-        g_commandBufferCursor += 2;
+        *g_commandBufferCursor++ = 1;
+        *g_commandBufferCursor++ = 0xF0110;
     }
     if (g_commandBufferCursor < g_commandBufferEnd) {
-        g_commandBufferCursor[0] = 0x12345678;
-        g_commandBufferCursor[1] = 0xF0010;
-        g_commandBufferCursor += 2;
+        *g_commandBufferCursor++ = 0x12345678;
+        *g_commandBufferCursor++ = 0xF0010;
     }
     AsdCmdRecord *record = &buffer->entries[buffer->listCount];
     record->kind = 1;

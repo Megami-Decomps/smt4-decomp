@@ -19,7 +19,9 @@ enum { SCENE3A_SLOTS = 9 };
 typedef EquipmentMenuCursor Scene3aSlotInfo;
 typedef EquipmentMenuItem Scene3aEntry;
 typedef EquipmentMenuPage Scene3aList;
-struct Scene3aTransactionRecord { u16 unk00, id, quantity; };
+/* A row of the appraisal list: two item ids and a count. The row shows `id` with its price when that is a
+ * kind-10 item, otherwise `item` and under it `id`. */
+struct Scene3aTransactionRecord { u16 item, id, quantity; };
 enum {
     SCENE3A_STATE_IDLE, SCENE3A_STATE_START, SCENE3A_STATE_RUNNING,
     SCENE3A_STATE_STOP, SCENE3A_STATE_FINISH
@@ -45,6 +47,10 @@ struct Scene3a {
             u8 unk08BeforeFrames[4];
             /* 0x0000C */ s32 frames;       /* frames spent in the current substep */
         } wait;
+        struct {
+            u8 unk08BeforeFrame[0x14];
+            /* 0x0001C */ u8 kindTenFrame;  /* the appraisal list's rows of kind-10 items take their own frame */
+        } appraisal;
         struct {
             u8 unk08BeforePreview[0x16];
             /* 0x0001E */ u8 requested;
@@ -104,6 +110,7 @@ typedef char Scene3aTransactionLayoutCheck[sizeof(Scene3aEntry) == 4 &&
     offsetof(Scene3a, transaction.totalAmount) == 0x15D20 && offsetof(Scene3a, selectedItem) == 0x15D54 &&
     offsetof(Scene3a, quantityIndex) == 0x15D68 ? 1 : -1];
 typedef char Scene3aQuantityLayoutCheck[offsetof(Scene3a, wait.frames) == 0xC &&
+    offsetof(Scene3a, appraisal.kindTenFrame) == 0x1C &&
     offsetof(Scene3a, scriptTable) == 0x160 && offsetof(Scene3a, process) == 0x168 &&
     offsetof(Scene3a, panel.rect) == 0x394 && offsetof(Scene3a, animation) == 0x3A8 &&
     offsetof(Scene3a, touchSelection) == 0x828 && offsetof(Scene3a, quantity) == 0x868 &&

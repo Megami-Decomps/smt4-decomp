@@ -8393,3 +8393,28 @@
 0014166c asdProcessRunAuxiliaryPass inferred Runs each running process auxiliary callback, or replays its command list copy, in stereoscopic 3D.
 0014685c fsMountRomFs inferred Mounts the ROM file system as "rom:" with file/directory limits and a work buffer (nn::fs::MountRom).
 0038af04 scrCommSetAmbientSoundsStopped inferred script command that stops the map ambient sound actors (argument nonzero) or restarts or spawns them (0)
+0055b4e4 _ZTV9Obj55b4e4 evidence size:0x3c vtable: two zero words and 13 slots, ending where the next class's vtable starts (0x55b520)
+0055b520 _ZTV9Obj55b520 evidence size:0xc vtable: two zero words, then FUN_00444370 (address point 0x55b528, the pool word of resourceCreateOwnedObject); twin of smt4 _ZTV9Obj4210d0
+0015e1ec nw_snd_Sound3DManager_Initialize inferred NintendoWare-snd: twin of smt4 nw_snd_Sound3DManager_Initialize_120F48, placed before and inlining Sound3DManager::GetRequiredMemSize
+002e5c2c gameSaveGetPoints inferred twin of smt4 FUN_00295cec
+00170484 appletSetSleepQueryState inferred twin of smt4 FUN_002c130c
+002a690c skillApplyToParty inferred applies a skill to the player and every occupied demon slot, charging MP once
+00333694 skillApplyToMemberAndCharge inferred applies a skill to one target and charges MP outside preview
+002b24fc btlListIsKind9Available inferred kind-9 list entry gate (scenario flags 0x4F8/0x4DB/0x1FD, battle override)
+0031d088 howToControllerDestroy inferred table-0x33 and work cleanup shared with scrCommShowHowTo
+003285dc btlEditorDestroy inferred registered as the end callback in btlEditorCreate
+0023466c partnerPopupStartScripted inferred kind-7 partner trigger with id/argument gates
+0048c09c naviApplyCategorySelection inferred twin of smt4 naviApplyCategorySelection (same findNaviCategory body)
+003c33e8 skillScreenDrawSlotRow inferred draws one skill row (name, icon, delta, adjusted cost) of SkillSlotScreen
+004cb8a0 btlRosterMotionRestart inferred puts a BattleRosterMotionA back into state 2 with the configured initial amount and speed
+0039c0e4 newHighwayInfoDestroy inferred frees what newHighwayInfoCreate allocated (texture bank 0x31 slots, sprite)
+004a6b18 numberPanelDrawCornerWindow inferred NumberPanelWork: corner texture 0x5D5 and the scroll-bar window at its position; sibling of smt4 numberPanelLayoutWindow
+0047f5b8 partyPickRandomMappedValue inferred picks a random qualifying party slot id and maps it through the 11-entry id/value table
+0038e7bc effBounceEmitterUpdate inferred sibling of effSwingEmitterUpdate (BounceMotion)
+003fdd1c moriModelUnitAttachPart inferred the unit's trace string names Model\MoriModelUnit.cpp
+003aef48 campCecEditChoiceListState inferred StreetPass edit choice list state
+0023d230 campSkillListDraw inferred twin of smt4 campSkillListDraw
+003692c0 bustupViewerDraw inferred bust-up viewer menu draw
+00588ff4 g_bustupViewerPositions3d inferred size:0x68 26 position ids of the 3D mode (bust-up viewer)
+0058905c g_bustupViewerPositions3d2 inferred size:0x78 30 position ids of the 3D_2 mode (bust-up viewer)
+005890d4 g_bustupViewerPositionNames inferred position name pointers (bust-up viewer)

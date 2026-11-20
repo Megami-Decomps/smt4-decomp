@@ -45,6 +45,15 @@ struct UnitePairEntryIV {
 };
 typedef char UnitePairEntryIVSizeCheck[sizeof(UnitePairEntryIV) == 8 ? 1 : -1];
 
+/* A special fusion's recipe as the screen keeps it (both games): the result, its ingredients and where
+ * each ingredient would come from. */
+struct UniteEntryList {
+    /* 0x00 */ u16 resultId;
+    /* 0x02 */ u16 ids[12];
+    /* 0x1A */ u8 kinds[12];        /* 0: not owned, 3: registered in the compendium, else: in the party */
+};
+typedef char UniteEntryListLayoutCheck[offsetof(UniteEntryList, kinds) == 0x1A && sizeof(UniteEntryList) == 0x26 ? 1 : -1];
+
 /* The fusion screen's work (Shin Megami Tensei IV layout, 0x95F8 bytes, allocated by the Unite
  * task and kept by g_unite). The block past 0x438 is described by the views the readable code uses. */
 /* A block of the IV work that retail addresses as an object of its own (base 0x9500). */
@@ -201,6 +210,21 @@ struct UniteWork {
             u8 prefix438[0x9000];
             UnitePairEntryIV pairs[1];
         } resultPairsIV;
+        /* the special fusion list and the recipe of the row its cursor is on (uniteDrawSpecialFusionPanel draws it) */
+        struct {
+            /* 0x0438 */ u8 unk0438[0x4DD8];
+            /* 0x5210 */ UniteEntryList recipe;
+            /* 0x5236 */ u8 unk5236[0x1042];
+            /* 0x6278 */ u16 listValues[500];   /* the list rows' data table 54 values */
+            /* 0x6660 */ u8 unk6660[0x680];
+            /* 0x6CE0 */ s8 recipeCursor;        /* 0: on the result, n: on ingredient n - 1 */
+            /* 0x6CE1 */ u8 unk6CE1[0x258F];
+            /* 0x9270 */ GridNavigation list;
+            /* 0x92D4 */ u8 unk92D4[0x64];
+            /* 0x9338 */ u16 recordCount;
+            /* 0x933A */ u16 ingredientCount;
+            /* 0x933C */ u16 recordIds[1];       /* data table 54 records */
+        } specialFusionIV;
     };
     /* 0x9450 */ s8 blocked;
     /* 0x9451 */ u8 unk9451[3];
@@ -434,6 +458,10 @@ typedef char UniteWorkADrawOffsets[
     offsetof(UniteWorkA, returnState.helpAvailable) == 0x9071 && offsetof(UniteWorkA, returnState.busy) == 0x9090 &&
     offsetof(UniteWorkA, optionNamesA.highlightFrame) == 0x9278 && sizeof(UniteWorkA) == 0x92C0 ? 1 : -1];
 
+typedef char UniteWorkSpecialFusionIVOffsets[
+    offsetof(UniteWork, specialFusionIV.recipe) == 0x5210 && offsetof(UniteWork, specialFusionIV.listValues) == 0x6278 &&
+    offsetof(UniteWork, specialFusionIV.recipeCursor) == 0x6CE0 && offsetof(UniteWork, specialFusionIV.list) == 0x9270 &&
+    offsetof(UniteWork, specialFusionIV.recordCount) == 0x9338 && offsetof(UniteWork, specialFusionIV.recordIds) == 0x933C ? 1 : -1];
 typedef char UniteWorkBlockedOffsetCheck[
     offsetof(UniteWork, blocked) == 0x9450 && sizeof(UniteWork) == 0x95F8 ? 1 : -1];
 typedef char UniteWorkDrawOffsets[

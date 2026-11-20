@@ -424,6 +424,7 @@ typedef struct BtlMainStateA {
         struct {
             /* 0x008C */ u8 unk008C[0x1C];
             /* 0x00A8 */ u32 mode;
+            /* 0x00AC */ s32 availabilityOverride; /* 1 permits the kind-9 list entry */
         } commandFilter;
         struct {
             /* 0x008C */ u8 unk008C[0x18];
@@ -688,6 +689,7 @@ typedef char BtlMainStateACompletionOffsetCheck[
     offsetof(BtlMainStateA, completion.pending) == 0x4C74 ? 1 : -1];
 typedef char BtlMainStateAPendingCommandOffsetsCheck[
     offsetof(BtlMainStateA, commandFilter.mode) == 0xA8 &&
+    offsetof(BtlMainStateA, commandFilter.availabilityOverride) == 0xAC &&
     offsetof(BtlMainStateA, pendingCommands.commands) == 0x2410 &&
     offsetof(BtlMainStateA, pendingCommands.count) == 0x2414 &&
     offsetof(BtlMainStateA, markerMasks.bits) == 0x45A8 ? 1 : -1];

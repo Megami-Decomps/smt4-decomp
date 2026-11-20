@@ -1,4 +1,3 @@
-/* NON_MATCHING: literal pool order (retail: global address before 0.0f) and add r3 vs r2 for &axis.y. */
 #include "map/LmapViewGlobals.h"
 
 extern "C" {
@@ -9,7 +8,8 @@ void FUN_00395904(void);
 /* Sets the camera block's mode and resets its transition state. */
 void lmapCameraSetMode(s32 mode)
 {
-    LmapViewA *camera = g_lmapViewHolder.view;
+    LmapViewHolderA *holder = &g_lmapViewHolder;
+    LmapViewA *camera = holder->view;
 
     camera->moving = 0;
     camera->mode = mode;

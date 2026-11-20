@@ -74,7 +74,7 @@ void FUN_003a0f88(ChoicePanel *panel)
     if (panel->showSecondMark != 0) {
         FUN_00231bcc(panel->sprites, 0xc5, x, y, depth + 1, 1);
     }
-    renderStackPop(&g_titleScene->stackB);
+    renderStackPopChecked(&g_titleScene->stackB);
     s32 value = panel->value;
     const SpritePosition *numberPos = layoutFindTableEntry(panel->sprites, 199);
     u32 color = 0xffffffff;

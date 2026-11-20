@@ -39,7 +39,7 @@ extern int gameFlagIsSet(void);
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
 extern int btlIsDefeatSuppressed(void);
-extern int FUN_002b24fc(void);
+extern int btlListIsKind9Available(void);
 extern unsigned int widgetSubCallIfVisible(int);
 /* Supplied declaration required: FUN_002cc228. */
 /* Supplied declaration required: FUN_002fa1b0. */
@@ -151,7 +151,7 @@ LAB_0028fb40:
             else if ((*(short *)(param_1 + *piVar16 * 2 + 0x4210) == -1) ||
                     (*(char *)(param_1 + 0x41ed) == '\0')) {
 LAB_0028fb14:
-              if ((*pcVar12 != '\t') || (temp_v11 = FUN_002b24fc(), temp_v11 != 0)) goto LAB_0028fb40;
+              if ((*pcVar12 != '\t') || (temp_v11 = btlListIsKind9Available(), temp_v11 != 0)) goto LAB_0028fb40;
             }
           }
 LAB_0028fb5c:

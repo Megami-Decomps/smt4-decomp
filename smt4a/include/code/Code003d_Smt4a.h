@@ -6,4 +6,6 @@ extern "C" {
 
 u32 itemDataGetValue(u32 id);
 
+s32 skillGetCostWithRankReduction(u32 id, s32 useSkillRank);
+
 } /* extern "C" */

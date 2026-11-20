@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `screenBuildItemDescriptionMessage` (_code @ 0x28a888, 0x7a0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "code/Code002e.h"
 #include <stdio.h>
 #include "romwright_types.h"
 #include "code/Code0035.h"
@@ -48,7 +49,6 @@ extern unsigned int aocEntryGetKind(int);
 /* Supplied declaration required: battleAttributeFormatName. */
 /* Supplied declaration required: skillFormatTargetLabel. */
 /* Supplied declaration required: textFormatFullWidthNumber. */
-extern int FUN_002e5c2c(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: scrSetStringSlot. */
 /* Supplied declaration required: entryTableResetAndInit. */
@@ -98,7 +98,7 @@ void screenBuildItemDescriptionMessage(int param_1)
     temp_v6 = param_1;
     itemTableGetItemRecord();
     if (*(short *)(temp_v6 + 0x4a) != 0) {
-      temp_v4 = FUN_002e5c2c();
+      temp_v4 = gameSaveGetPoints();
       entryTableResetAndInit(0x24,temp_v4,0xffffffff,0);
       temp_v4 = (unsigned int)*(unsigned short *)(temp_v6 + 0x4a) + temp_v4;
       if (temp_v4 >= 10000) {

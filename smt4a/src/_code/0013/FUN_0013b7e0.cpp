@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_00147384(int, int, unsigned int);
 int FUN_0015a440(int);
-int FUN_00170484(int);
+int appletSetSleepQueryState(int); // declcheck: local (romwright prototype; the shared declaration in nn/applet/SleepQuery.h does not compile here)
 int FUN_00170f68(int, int, int, int, int);
 int FUN_0017145c(int);
-int nn_applet_CTR_detail_ReplySleepQueryToManager(int);
+int nn_applet_CTR_detail_ReplySleepQueryToManager(int); // declcheck: local (romwright prototype; the shared declaration in nn/applet/SleepQuery.h does not compile here)
 
 typedef int romwright_code(...);
 /* stack frame of void: 3 slot(s), 12 byte(s) */
@@ -28,7 +28,7 @@ extern int FUN_0015a318(void);
 extern int FUN_0015a3c0(void);
 extern int FUN_0015a430(void);
 /* Supplied declaration required: FUN_0015a440. */
-/* Supplied declaration required: FUN_00170484. */
+/* Supplied declaration required: appletSetSleepQueryState. */
 /* Supplied declaration required: FUN_00170f68. */
 /* Supplied declaration required: FUN_0017145c. */
 extern unsigned int nn_applet_CTR_detail_PrepareToJumpToHomeMenu(void);
@@ -46,7 +46,7 @@ void FUN_0013b7e0(void)
   temp_v0 = DAT_005891f4;
   if (DAT_005891f4 != '\0') {
     DAT_005891f4 = '\0';
-    FUN_00170484(3);
+    appletSetSleepQueryState(3);
     nn_applet_CTR_detail_ReplySleepQueryToManager(0);
   }
   temp_v1 = FUN_0015a430();

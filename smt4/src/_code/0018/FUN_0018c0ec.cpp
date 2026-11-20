@@ -69,7 +69,7 @@ int libc_strcpy(...);
 int saveFlagSetOrAddCounter(...);
 int infoWinStartTimer(...);
 int gameMoneyAdd(...);
-int FUN_00295cec(...);
+int gameSaveGetPoints(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int soundSlotStopById(...);
 int slotUnitIsInActiveParty(...);
 int uiStoreTextureEntryCenter(...); // declcheck: local (romwright prototype; its types do not fit ui/UiTexturePlacement.h: including it fails to compile)
@@ -166,7 +166,7 @@ extern int FUN_0029563c(void);
 extern int dialogIsActive(void);
 /* Supplied declaration required: gameMoneyAdd. */
 extern int devilCalcLevelScaledCost(unsigned short, unsigned char);
-/* Supplied declaration required: FUN_00295cec. */
+/* Supplied declaration required: gameSaveGetPoints. */
 extern int playerPadTestBit(unsigned int);
 /* Supplied declaration required: soundSlotStopById. */
 /* Supplied declaration required: slotUnitIsInActiveParty. */
@@ -807,7 +807,7 @@ LAB_0018d058:
           *(unsigned int *)(temp_v2 + 0x3c6c) = 0;
           *(unsigned char *)(temp_v2 + 0x3654) = 0x7f;
           __aeabi_memcpy4(temp_v2 + 0x3658,temp_v4,0x8c);
-          temp_v18 = FUN_00295cec();
+          temp_v18 = gameSaveGetPoints();
           *(int *)(temp_v2 + 0xd54c) = temp_v18;
           *(int *)(temp_v2 + 0xd550) = temp_v18 << 0xc;
           if (temp_v8 != 0) {
@@ -1871,15 +1871,15 @@ joined_r0x0018edf0:
       break;
     case 2:
       scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x3568));
-      temp_v4 = FUN_00295cec();
+      temp_v4 = gameSaveGetPoints();
       temp_v16 = temp_v4 - *(int *)(temp_v2 + 0xd54c);
       temp_v4 = __aeabi_uldivmod(temp_v16 * 0x1000,temp_v16 >> 0x14,0x14,0);
       puVar13 = (unsigned int *)(temp_v2 + 0xd550);
       *puVar13 = *puVar13 + temp_v4;
-      temp_v16 = FUN_00295cec();
+      temp_v16 = gameSaveGetPoints();
       temp_v22 = temp_v16 << 0xc <= *puVar13;
       if (-(temp_v16 >> 0x14) < (unsigned int)temp_v22) {
-        temp_v4 = FUN_00295cec(-((temp_v16 >> 0x14) + (unsigned int)!temp_v22));
+        temp_v4 = gameSaveGetPoints(-((temp_v16 >> 0x14) + (unsigned int)!temp_v22));
         *puVar13 = temp_v4 << 0xc;
         if (*(char *)(temp_v2 + 0xd55d) != '\0') {
           soundSlotStopById(*(unsigned int *)(temp_v2 + 0xd558));
@@ -1892,7 +1892,7 @@ joined_r0x0018edf0:
           soundSlotStopById(*(unsigned int *)(temp_v2 + 0xd558));
           *(unsigned char *)(temp_v2 + 0xd55d) = 0;
         }
-        temp_v4 = FUN_00295cec();
+        temp_v4 = gameSaveGetPoints();
         *puVar13 = temp_v4 << 0xc;
         timerStart(temp_v2 + 0x598,1,0);
         temp_v4 = *(int *)(temp_v2 + 0x3534) + 1;

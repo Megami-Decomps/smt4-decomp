@@ -1,6 +1,11 @@
-/* NON_MATCHING: compiler omits the retail saved-register frame for the message-target stores. */
-#include "ui/MessageMain.h"
+#include "ui/MessageBannerSelection.h"
+
 extern "C" {
-/* Begin a message target operation with both stored values synchronized. */
-s32 messageSetTargetState(u32 value) { MessageWindow *target=g_messageMain.banner; target->counterState=3; target->counterDelta=value; target->counterElapsed=value; target->unk081=0; target->counterDuration=0; return 1; }
+
+/* Starts the banner's countdown at `value` (messageBannerSetCountdown with flag 0, inlined). */
+s32 messageSetTargetState(u32 value)
+{
+    return messageBannerSetCountdownInline(value, 0);
 }
+
+} /* extern "C" */

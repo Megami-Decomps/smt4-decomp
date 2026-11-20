@@ -14,10 +14,10 @@ int FUN_002b563c(int, int, int, int, int);
 int FUN_002b5904(int);
 int appletSetUnlockFlag(unsigned int);
 int FUN_002c12d0(void);
-int FUN_002c130c(...);
+int appletSetSleepQueryState(...); // declcheck: local (romwright prototype; the shared declaration in nn/applet/SleepQuery.h does not compile here)
 int errThrowFatal(unsigned int, int);
 int nn_applet_CTR_detail_CancelParameter(int, int, int);
-int nn_applet_CTR_detail_ReplySleepQueryToManager(int);
+int nn_applet_CTR_detail_ReplySleepQueryToManager(int); // declcheck: local (romwright prototype; the shared declaration in nn/applet/SleepQuery.h does not compile here)
 int software_interrupt(int);
 
 typedef int romwright_code(...);
@@ -76,7 +76,7 @@ extern int FUN_0013b82c(void);
 /* Supplied declaration required: appletSetUnlockFlag. */
 extern int FUN_002bc7e4(void);
 /* Supplied declaration required: FUN_002c12d0. */
-/* Supplied declaration required: FUN_002c130c. */
+/* Supplied declaration required: appletSetSleepQueryState. */
 /* Supplied declaration required: errThrowFatal. */
 extern int FUN_002c55b4(void);
 extern int appletIsExitRequested(void);
@@ -214,11 +214,11 @@ unsigned int FUN_00129de4(void)
           (*DAT_0044e3dc)(DAT_0044e41c);
         }
         temp_v2 = 5;
-        FUN_002c130c(temp_v2);
+        appletSetSleepQueryState(temp_v2);
       }
     }
     else {
-      FUN_002c130c(4);
+      appletSetSleepQueryState(4);
       if (((DAT_0044e3d8 != (romwright_code *)0x0) && (temp_v0 = appletIsExitRequested(), temp_v0 == 0)) &&
          (temp_v0 = FUN_002c55b4(), temp_v0 == 0)) {
         (*DAT_0044e3d8)(DAT_0044e418);
@@ -251,7 +251,7 @@ unsigned int FUN_00129de4(void)
 LAB_00129f70:
       if (temp_v0 == 0) {
         temp_v2 = 3;
-        FUN_002c130c(temp_v2);
+        appletSetSleepQueryState(temp_v2);
         nn_applet_CTR_detail_ReplySleepQueryToManager(temp_v0);
         FUN_0013b85c();
         return 0;
@@ -262,13 +262,13 @@ LAB_00129f70:
           return 0;
         }
         temp_v2 = 1;
-        FUN_002c130c(temp_v2);
+        appletSetSleepQueryState(temp_v2);
         FUN_0013b85c();
         return 0;
       }
       temp_v2 = 2;
     }
-    FUN_002c130c(temp_v2);
+    appletSetSleepQueryState(temp_v2);
     nn_applet_CTR_detail_ReplySleepQueryToManager(temp_v0);
   }
   FUN_0013b85c();

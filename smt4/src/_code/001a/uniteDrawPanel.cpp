@@ -138,7 +138,7 @@ extern "C" s32 uniteDrawPanel(u32)
     case 0x1B: {
         s32 x = vec2GetXInt(&work->sprites.open);
         s32 y = vec2GetYInt(&work->sprites.open);
-        FUN_00215d68(x, y);
+        uniteDrawSpecialFusionPanel(x, y);
         break;
     }
     case 3:

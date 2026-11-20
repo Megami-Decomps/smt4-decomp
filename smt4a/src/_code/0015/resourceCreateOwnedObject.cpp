@@ -1,25 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `resourceCreateOwnedObject` (_code @ 0x15aeb0, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+class Obj55b520;
+
+class ResourceAllocator {
+public:
+    virtual void release() = 0;
+    virtual void reset() = 0;
+    virtual void *allocate(u32 size, u32 alignment) = 0;
+};
+
+class Obj55b520 {
+public:
+    Obj55b520(ResourceAllocator *allocator) : owner(allocator), state(0) {}
+    virtual void reset();
+    /* 0x04 */ ResourceAllocator *owner;
+    /* 0x08 */ u32 state;
+};
+
+inline void *operator new(u32, void *storage)
+{
+    return storage;
+}
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern unsigned char DAT_0055b528; /* 0x55b528 */
-
-
-void resourceCreateOwnedObject(int *param_1)
-
+/* Allocates and constructs a small resource object using its owner's allocator. */
+Obj55b520 *resourceCreateOwnedObject(ResourceAllocator *allocator)
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)(**(romwright_code **)(*param_1 + 8))(param_1,0xc,4);
-  if (puVar1 != (unsigned int *)0x0) {
-    puVar1[2] = 0;
-    *puVar1 = (unsigned int)&DAT_0055b528;
-    puVar1[1] = (unsigned int)param_1;
-  }
-  return;
+    void *storage = allocator->allocate(sizeof(Obj55b520), 4);
+    return storage != NULL ? new (storage) Obj55b520(allocator) : NULL;
 }
 
 } /* extern "C" */

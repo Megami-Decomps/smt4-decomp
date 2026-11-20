@@ -39,12 +39,12 @@ void FUN_00343364(RenderCtx *context, u32 color, u32 alpha, u32 flags, f32 scale
     renderCtxPushE(context, FUN_00310578(1, alpha, 0xff));
     renderCtxPushF(context, packThreeNibbles(nibble, nibble, nibble));
     FUN_002b7638(0.0f, 0.0f, width, height, color, color, color, color, scale);
-    renderStackPop(&context->depthStacks.stackF);
-    renderStackPop(&context->depthStacks.stackE);
-    renderStackPop(&context->stackB);
-    renderStackPop(&context->additional.stackG);
-    renderStackPop(&context->additional.stackC);
-    renderStackPop(&context->stackA);
+    renderStackPopChecked(&context->depthStacks.stackF);
+    renderStackPopChecked(&context->depthStacks.stackE);
+    renderStackPopChecked(&context->stackB);
+    renderStackPopChecked(&context->additional.stackG);
+    renderStackPopChecked(&context->additional.stackC);
+    renderStackPopChecked(&context->stackA);
     renderCtxSelectTexture(context, savedTexture);
 }
 

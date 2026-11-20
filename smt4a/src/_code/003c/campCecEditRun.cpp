@@ -8,7 +8,7 @@ extern void resSetAllReady(void);
 
 void campCecEditRun(void)
 {
-    if (g_campCecEdit == NULL || g_campCecEdit->unk0C == NULL) {
+    if (g_campCecEdit == NULL || g_campCecEdit->infoPanel == NULL) {
         return;
     }
     resSetAllReady();

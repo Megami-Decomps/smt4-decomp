@@ -3,9 +3,22 @@
 #include "common.h"
 #include <stddef.h>
 
-struct VertexAttributeDescription {
-    /* 0x00 */ u8 unk00[2];
-    /* 0x02 */ u8 index;
+/* nn::gr::CTR::BindSymbol: a shader symbol binding (shader and symbol type, register range, name). */
+struct BindSymbol {
+    BindSymbol(u8 shaderType, u8 symbolType)
+        : shaderType(shaderType), symbolType(symbolType), index(0xFF), end(0xFF), name(NULL) {}
+    /* 0x00 */ u8 shaderType;
+    /* 0x01 */ u8 symbolType;
+    /* 0x02 */ u8 index;     /* first register, 0xFF while unbound */
+    /* 0x03 */ u8 end;       /* last register */
+    /* 0x04 */ const char *name;
+};
+typedef char BindSymbolLayoutCheck[sizeof(BindSymbol) == 8 && offsetof(BindSymbol, index) == 2 &&
+    offsetof(BindSymbol, name) == 4 ? 1 : -1];
+
+/* nn::gr::CTR::BindSymbolVSInput: a vertex shader input (shader type 0, symbol type 1); `index` is its input register. */
+struct VertexAttributeDescription : BindSymbol {
+    VertexAttributeDescription() : BindSymbol(0, 1) {}
 };
 struct VertexAttributeSlot {
     /* 0x00 */ u32 address;

@@ -71,7 +71,7 @@ int FUN_004c9474(...);
 int FUN_004c9538(...);
 int FUN_004cab9c(...);
 int FUN_004cad84(void);
-void FUN_004cb8a0(TransitionView *state);
+void btlRosterMotionRestart(TransitionView *state);
 int driftObjectStart(...);
 int uiStartRangeAnimationFromTable(...);
 void btlCameraSetFormationSlot(BattleActionCamera *, BtlMainStateA *, int);
@@ -221,7 +221,7 @@ extern unsigned int FUN_0047ecc8(void);
 /* Supplied declaration required: FUN_0047effc. */
 /* Supplied declaration required: btlPlayEntrySound. */
 /* Supplied declaration required: resourcePairApply. */
-extern int FUN_0047f5b8(void);
+extern int partyPickRandomMappedValue(void);
 extern unsigned int FUN_0047fa50(unsigned int);
 /* Supplied declaration required: partyAddMoneyClamped. */
 /* Supplied declaration required: FUN_004a96fc. */
@@ -247,7 +247,7 @@ extern unsigned int FUN_0047fa50(unsigned int);
 /* Supplied declaration required: FUN_004cad84. */
 /* Supplied declaration required: FUN_004cae0c. */
 /* Supplied declaration required: colorFadeStartRgb. */
-/* Supplied declaration required: FUN_004cb8a0. */
+/* Supplied declaration required: btlRosterMotionRestart. */
 /* Supplied declaration required: driftObjectStart. */
 extern int holderObjectCall(unsigned int);
 /* Supplied declaration required: asdModelStartReferencedAnimation. */
@@ -897,7 +897,7 @@ joined_r0x0040ec14:
     temp_v3 = reinterpret_cast<int>(btlGetMainState());
     temp_v3 = btlMainFindEntryByListedId(temp_v3,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
     if (temp_v3 != 0) {
-      FUN_004cb8a0(reinterpret_cast<TransitionView *>(*(int *)(psVar2 + 10)));
+      btlRosterMotionRestart(reinterpret_cast<TransitionView *>(*(int *)(psVar2 + 10)));
     }
     break;
   case '\x1e':
@@ -1364,7 +1364,7 @@ LAB_0040fb78:
   case '=':
     temp_v3 = reinterpret_cast<int>(btlGetMainState());
     temp_v3 = *(int *)(temp_v3 + 0x4cf0);
-    if ((0 < temp_v3) || ((temp_v3 == -1 && (temp_v3 = FUN_0047f5b8(), 0 < temp_v3)))) {
+    if ((0 < temp_v3) || ((temp_v3 == -1 && (temp_v3 = partyPickRandomMappedValue(), 0 < temp_v3)))) {
       btlQueueActionMessage(0,*(unsigned int *)(psVar2 + 4),temp_v3,0,0,0,0);
     }
     break;

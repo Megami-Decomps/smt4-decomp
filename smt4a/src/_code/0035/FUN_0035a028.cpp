@@ -7,7 +7,7 @@ extern StateAtF4 *g_campCecEdit;
 s32 FUN_0035a028(void)
 {
     if (g_campCecEdit != NULL) {
-        return g_campCecEdit->unk14C;
+        return g_campCecEdit->editItem;
     }
     return -1;
 }

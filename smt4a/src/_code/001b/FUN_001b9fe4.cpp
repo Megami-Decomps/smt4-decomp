@@ -1,4 +1,4 @@
-/* NON_MATCHING: structure matches (smt4 FileQueue worker restart); retail keeps a zero in r7 from the top (pushes five registers, 36-byte frame, predicated wait arguments) and orders the literal pool with FUN_001c3864 first, so the entry address was materialised before the descriptor stores. */
+/* NON_MATCHING: structure and the 0/1 running test match (smt4 fileWorkerQueueRestartIfIdle); retail keeps a zero in r7 from the top (pushes five registers, 36-byte frame, predicated wait arguments) and orders the literal pool with FUN_001c3864 first, so the entry address was materialised before the descriptor stores. */
 #include "sys/FileWorkerQueue.h"
 #include "nn/Result.h"
 #include "sys/ResultReport.h"
@@ -17,15 +17,17 @@ void FUN_001c45fc(ThreadEntryPoint entry, void *argument);
 void FUN_001b9fe4(FileQueue *queue)
 {
     FileQueueWorker *thread = &queue->thread;
+    bool running = false;
     if (thread->handle != 0) {
         s32 result = svcWaitSynchronization1(thread->handle, 0);
         bool failed = nnResultIsFailure(result);
         if (failed) {
             resultHandleFailure(result, failed);
         }
-        if (!nnResultIsNotTimeout(result))
-            return;
+        running = nnResultIsNotTimeout(result) != 1;
     }
+    if (running)
+        return;
     nnOsThreadImplDestroy(thread);
     FileQueue *argument = queue;
     ThreadArgumentDescriptor descriptor;

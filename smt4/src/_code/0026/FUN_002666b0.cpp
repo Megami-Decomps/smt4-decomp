@@ -32,7 +32,7 @@ extern "C" {
 extern s32 DAT_0049f920;
 extern char DAT_00447088[];       /* resource paths, 0x50 bytes apart */
 
-void *FUN_00316f70(u32 source, s32 kind);
+void *gfxCreateResGraphicsFileObject(u32 source, s32 kind);
 void sceneAttachLightChild(LmapNodeList *list, s32 index);
 void lmapSlotSetVisible(s32 index, s32 flag);
 void lmapApplyLightVisibilityGrid(const char *path);
@@ -57,7 +57,7 @@ void FUN_002666b0(void)
     LmapMainState *state = g_lmapMainState;
     if (state == NULL)
         return;
-    state->markerModels = FUN_00316f70(state->markerSource, 0x2A);
+    state->markerModels = gfxCreateResGraphicsFileObject(state->markerSource, 0x2A);
     state->unkA94 = 0;
     state->markerSource = 0;
     LmapMainState *current = g_lmapMainState;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail keeps the constant 6 (messageWindowShowOrPoll's fourth argument) in r5 across the earlier calls (mov r5, #6 first), which shifts the other saved registers; built passes it with mov r3, #6 */
 #include "ui/MessageMainA.h"
 
 extern "C" {
@@ -11,12 +10,18 @@ extern void bustupCutAnimRequestStopSlots(void);
 extern void eventTexRequestStopAll(void);
 extern void msgBoxFlagsSetBit7(u32 message);
 
+static u32 showMessage(s32 mode, s32 wait)
+{
+    u32 context = scrGetCommandOwner();
+    u32 message = scrGetArg(0);
+    u32 frame = scrGetCommandFrame();
+    return messageWindowShowOrPoll(context, message, frame, mode, wait, 0);
+}
+
+/* Stops bust-up and event textures, shows the mode-6 message and hides the window on frame 0. */
 u32 FUN_003baa68(void)
 {
     MessageWindowA *window = g_messageMain.window;
-    u32 first;
-    u32 second;
-    u32 third;
     u32 result;
 
     bustupCutAnimRequestStopSlots();
@@ -24,10 +29,7 @@ u32 FUN_003baa68(void)
     if (g_messageMain.window != NULL) {
         g_messageMain.window->displayMode = 0x15;
     }
-    first = scrGetCommandOwner();
-    second = scrGetArg(0);
-    third = scrGetCommandFrame();
-    result = messageWindowShowOrPoll(first, second, third, 6, 0, 0);
+    result = showMessage(6, 0);
     if (scrGetCommandFrame() == 0) {
         msgBoxFlagsSetBit7(window->box);
         window->displayEnabled = 0;

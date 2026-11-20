@@ -6,7 +6,7 @@ extern "C" {
 
 u32 pairedAvailabilityBothReady(void);
 
-u32 FUN_002e5c2c(void);
+u32 gameSaveGetPoints(void);
 
 u8 FUN_002effbc(void);
 

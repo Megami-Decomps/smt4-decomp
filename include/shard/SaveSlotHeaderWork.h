@@ -5,6 +5,7 @@
 #include "shard/W4_Match1b_RegisteredHandle.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "ui/UiSpriteApi.h"
 
 struct ScriptProcess;
 
@@ -129,6 +130,22 @@ static __inline void saveLoadUiWaitSprites(SaveSlotHeaderWork *ui)
     if (uiSpriteGetCompletionState(&ui->slotSprites[ui->spriteCount - 1]) != 0) {
         saveLoadUiChangeMode(ui, ui->phase, 0);
     }
+}
+
+/* Resets every slot sprite back to keyframe 5, image 0. */
+static __inline void saveLoadUiRestartSlotSprites(SaveSlotHeaderWork *ui)
+{
+    for (s32 index = 0; index < ui->spriteCount; ++index) {
+        uiSpriteSetKeyframe(&ui->slotSprites[index], 5, 0);
+        uiSpriteSetImageKeyframe(&ui->slotSprites[index], 0, 0);
+    }
+}
+
+/* Sets a save/load transition's values and progress. */
+static void saveLoadUiSetTransitionValues(SaveLoadTransitionValues *transition, u64 values, f32 progress)
+{
+    transition->values = values;
+    transition->progress = progress;
 }
 
 #endif

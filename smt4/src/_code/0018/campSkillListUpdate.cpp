@@ -8,6 +8,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "camp/CampState.h"
+#include "camp/CampSkillList.h"
 #include "status/StatusCamera.h"
 #include "gamedata/UnitRecordAccess.h"
 #include "gamedata/GamePlayerData.h"
@@ -101,23 +102,6 @@ static __inline void campRestoreMenuGroup(CampState *camp)
 static __inline void campRefreshEntryHelp(CampState *camp)
 {
     campListShowSelectedHelp(dataTable15GetUnlockedEntryId(camp->menuGroup, objectPartRunUnlessLocked(&camp->menuGrid)));
-}
-
-/* Whether the skill's user can act: the player must not be down; a demon must exist and have none of
- * the ailment bits 1 (down), 2 and 10. */
-static __inline bool campSkillUserCanAct(const CampSkillEntry *entry)
-{
-    if (entry->unit < 0) {
-        if (gameGetPlayerData()->ailments & 2) {
-            return false;
-        }
-    } else {
-        StatBlock *record = gameGetUnitRecord(entry->unit);
-        if (record == NULL || (record->ailments & 2) || (record->ailments & 0x400) || (record->ailments & 4)) {
-            return false;
-        }
-    }
-    return true;
 }
 
 /* Takes the row's skill cost from its unit's MP. */

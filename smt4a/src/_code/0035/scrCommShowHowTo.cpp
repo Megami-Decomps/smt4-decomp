@@ -1,41 +1,22 @@
-/* NON_MATCHING: command-frame local recovers controller load timing; cleanup and job work pointers still coalesce. */
-#include "shard/W5_W5Match6_CallbackController.h"
+/* NON_MATCHING: cleanup and job pointers are copied in the opposite direction, and the command frame block allocates registers differently. */
+#include "ui/HowToController.h"
+#include "sys/RuntimeObjects.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/DataTableSections.h"
 #include "battle/btlDebug.h"
 
-struct HowToWork {
-    u32 job;
-    u8 state;
-    u8 unk05[3];
-    void *bufferA;
-    void *bufferB;
-    u8 unk10[0x78];
-    void **slots[3];
-    u8 unk94[0x184];
-    u16 touchCount;
-};
-struct HowToControllerView {
-    u8 ownsTable;
-    u8 unk01[3];
-    HowToWork *work;
-};
 extern "C" {
 u32 scrGetCommandFrame();
 u32 scrGetArg(u32 index);
 void loadSlotRequestAsync(u32 slot, s32 flags);
 void FUN_00348d7c(s32 id);
-void ifTouchRegionRemove();
-void asdMemFreeSlot(void **slot);
-void asdMemFree(void *buffer);
 void asdTMTexTableReleaseNode(s32 table, s32 index);
-u32 jobStop(u32 job, u16 mode);
-void asdOperatorDelete(void *object);
 
+/* Opens the how-to screen on the first command frame, and releases it once closed. */
 u32 scrCommShowHowTo()
 {
     u32 frame = scrGetCommandFrame();
-    HowToControllerView *controller = (HowToControllerView *)&g_callbackController;
+    CallbackControllerGlobal *controller = &g_callbackController;
     if (frame == 0) {
         s32 id = (s32)scrGetArg(0);
         if (!loadSlotIsLoaded(0x46)) {
@@ -44,7 +25,7 @@ u32 scrCommShowHowTo()
         }
         FUN_00348d7c(id);
     }
-    u8 state = controller->work->state;
+    u8 state = ((CallbackControllerWork *)controller->work)->state;
     if (state != 0 && state != 10) {
         return 0;
     }
@@ -52,22 +33,8 @@ u32 scrCommShowHowTo()
         dataTableFree(0x46);
         controller->ownsTable = 0;
     }
-    HowToWork *work = controller->work;
-    for (s32 index = 0; index < work->touchCount; ++index) {
-        ifTouchRegionRemove();
-    }
-    for (s32 index = 0; index < 3; ++index) {
-        asdMemFreeSlot(work->slots[index]);
-        work->slots[index] = NULL;
-    }
-    if (work->bufferA != NULL) {
-        asdMemFree(work->bufferA);
-        work->bufferA = NULL;
-    }
-    if (work->bufferB != NULL) {
-        asdMemFree(work->bufferB);
-        work->bufferB = NULL;
-    }
+    CallbackControllerWork *work = (CallbackControllerWork *)controller->work;
+    work->releaseInputAndBuffers();
     for (s32 index = 0; index < 19; ++index) {
         if (asdTMTexTableNodeIsLoaded(0x33, index)) {
             asdTMTexTableReleaseNode(0x33, index);

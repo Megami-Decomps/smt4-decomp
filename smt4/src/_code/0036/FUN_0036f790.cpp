@@ -1,4 +1,6 @@
-/* NON_MATCHING: the cast (member hasFlags -> bics + conditional move) and the stream getter (addne/moveq) have retail's shape; retail still computes the field address as `0x38 + index * 4` from a hoisted constant 56 (and 257 as 56 + 201) and loads the flag word after the mask constant, built folds +0x38 into a writeback load */
+/* NON_MATCHING: the stream loop now has retail's shape (56 and 257 hoisted, the slot address 56 + index * 4 + resource);
+ * the cast's flag test is laid out differently (retail: bics then moveq r6, r0) and get() adds this + offset where
+ * retail adds offset + this. */
 #include "shard/S1NwGfx.h"
 
 extern "C" void (*g_gfxReleaseCallback)(void *allocation, u32 kind, u32 count, u32 handle);

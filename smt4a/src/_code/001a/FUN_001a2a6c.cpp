@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00170484(int);
+int appletSetSleepQueryState(int); // declcheck: local (romwright prototype; the shared declaration in nn/applet/SleepQuery.h does not compile here)
 int FUN_001b03dc(unsigned int, int, int, char [12], char [4], int);
 int svcSleepThread(int, int);
-int nn_applet_CTR_detail_ReplySleepQueryToManager(int);
+int nn_applet_CTR_detail_ReplySleepQueryToManager(int); // declcheck: local (romwright prototype; the shared declaration in nn/applet/SleepQuery.h does not compile here)
 
 /* stack frame of param_1: 5 slot(s), 14 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ typedef struct {
 
 extern signed char DAT_005891f4; /* 0x5891f4 */
 
-/* Supplied declaration required: FUN_00170484. */
+/* Supplied declaration required: appletSetSleepQueryState. */
 /* Supplied declaration required: FUN_001b03dc. */
 /* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: nn_applet_CTR_detail_ReplySleepQueryToManager. */
@@ -39,7 +39,7 @@ void FUN_001a2a6c(unsigned int param_1)
   temp_v0 = DAT_005891f4;
   if (DAT_005891f4 != '\0') {
     DAT_005891f4 = '\0';
-    FUN_00170484(3);
+    appletSetSleepQueryState(3);
     nn_applet_CTR_detail_ReplySleepQueryToManager(0);
   }
   while (temp_v1 = param_1, FUN_001b03dc(param_1,0,0,temp_v3,temp_v2,0),

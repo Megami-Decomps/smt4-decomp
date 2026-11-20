@@ -73,9 +73,11 @@ struct VertexBufferResource {
         return resource != NULL && resource->hasFlags(0x20000009) ? resource : NULL;
     }
 
+    /* Stream `index`: its relative pointer is found by byte offset from the resource (nw::ut::AddOffsetToPtr). */
     VertexBufferStorage *stream(u8 index)
     {
-        return (VertexBufferStorage *)streams[index].get();
+        u32 offset = offsetof(VertexBufferResource, streams) + index * sizeof(RelativePointer);
+        return (VertexBufferStorage *)((RelativePointer *)((u8 *)this + offset))->get();
     }
 };
 typedef char VertexBufferResourceLayoutCheck[sizeof(VertexBufferResource) == 0x50 &&

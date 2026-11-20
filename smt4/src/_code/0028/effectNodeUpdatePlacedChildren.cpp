@@ -68,7 +68,7 @@ void effectNodeUpdatePlacedChildren(EffectNode *node)
     lastFrame = node->frame - 1;
     scale = node->scale * node->childScale;
     child = node->firstChild;
-    renderStackPush(&g_titleScene->stackB, g_titleScene->stackB.entries[g_titleScene->stackB.count]);
+    renderStackPushCounted(&g_titleScene->stackB, g_titleScene->stackB.entries[g_titleScene->stackB.count]);
     for (; child != NULL; child = child->next) {
         if (child->startFrame > lastFrame || (child->frame & 2) != 0) {
             continue;

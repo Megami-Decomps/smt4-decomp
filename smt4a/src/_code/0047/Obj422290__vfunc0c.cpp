@@ -1,23 +1,36 @@
-/* NON_MATCHING: layout, failure test and tail now match; only the request descriptor construction and the r6/r7 constant registers differ (see Obj4221bc). */
+/* NON_MATCHING: the thread start (uniteStartThread's shape: argument by value, stack by reference) matches up to the
+ * stack arguments: retail stores the 0 flags word on its own and the stack top, 17 and -2 with one stm; the build pairs
+ * them differently. */
 #include "classes/Obj422290.h"
 #include "addon/aocMain.h"
 #include "nn/Result.h"
 #include "sys/ResultReport.h"
+#include "nn/os/ThreadLaunch.h"
 
-struct Obj422290Request {
-    u32 address, type, flags, reserved, size;
-    const void *first;
-    const void *second;
-    const void *third;
-};
 extern "C" {
-void FUN_00514ad4();
-void FUN_00514ba0();
-void FUN_00514b68();
+void FUN_00514ad4(void);
+void FUN_00514ba0(void);
+void FUN_00514b68(void);
 s32 threadTryJoinAndClose(AocWorkerThread *thread);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
-u32 FUN_002fb0d4(AocWorkerThread *thread, const u32 *descriptor, void (*callback)(), Obj422290 **owner);
-void FUN_004767a8();
+s32 FUN_002fb0d4(AocWorkerThread *thread, const ThreadArgumentDescriptor *descriptor, void (*entry)(Obj422290 *),
+                 Obj422290 **argument, u32 stackTop, s32 priority, s32 processor, u32 flags);
+void FUN_004767a8(Obj422290 *operation);
+}
+
+/* nn::os::Thread::Start: runs `entry(argument)` on the AOC worker thread's stack; a failure is reported. */
+static __inline void aocStartWorkerThread(AocWorkerThread *thread, void (*entry)(Obj422290 *), Obj422290 *argument,
+                                          AocThreadStack &stack, s32 priority, s32 processor)
+{
+    ThreadArgumentDescriptor descriptor;
+    descriptor.argumentSize = sizeof(argument);
+    descriptor.callbacks[0] = FUN_00514ad4;
+    descriptor.callbacks[1] = FUN_00514ba0;
+    descriptor.callbacks[2] = FUN_00514b68;
+    s32 status = FUN_002fb0d4(thread, &descriptor, entry, &argument, stack.base + stack.size, priority, processor, 0);
+    if ((status & 0x7e00000) != 0x600000 && nnResultIsFailure(status)) {
+        resultHandleFailure(status);
+    }
 }
 
 WindowStatusOperationResult Obj422290::vfunc0c(const void *)
@@ -26,20 +39,8 @@ WindowStatusOperationResult Obj422290::vfunc0c(const void *)
     AocMain *manager = g_aocMain;
     if (reserved == 0) {
         reserved = 1;
-        Obj422290Request request;
-        request.size = 4;
-        request.first = reinterpret_cast<const void *>(FUN_00514ad4);
-        request.second = reinterpret_cast<const void *>(FUN_00514ba0);
-        request.third = reinterpret_cast<const void *>(FUN_00514b68);
-        request.reserved = 0;
-        request.address = manager->thread.stack->size + manager->thread.stack->base;
-        request.type = 0x11;
-        request.flags = -2;
-        Obj422290 *owner = this;
-        s32 status = FUN_002fb0d4(&manager->thread, &request.size, FUN_004767a8, &owner);
-        if (nnResultIsFailureExceptSummary(status, 3)) {
-            resultHandleFailure(status);
-        }
+        AocWorkerThread *thread = &manager->thread;
+        aocStartWorkerThread(thread, FUN_004767a8, this, *thread->stack, 0x11, -2);
     } else {
         if (reserved == 1 && threadTryJoinAndClose(&manager->thread) != 0) {
             bool succeeded = !nnResultIsFailureBool(legacyResourceIdRemap(&result));

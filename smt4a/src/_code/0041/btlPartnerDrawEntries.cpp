@@ -62,7 +62,7 @@ void btlPartnerDrawEntries(DrawGroup *group, DrawEntrySource *source)
     }
     renderCtxPushA(context, renderCtxPackPassFlags(5, 1));
     context = g_renderCtx;
-    renderStackPush(&context->additional.stackC, renderCtxPackPassFlagsWithAlpha(6));
+    renderStackPushCounted(&context->additional.stackC, renderCtxPackPassFlagsWithAlpha(6));
 
     s32 drawn = 0;
     for (s32 i = 0; i < 12; i++) {

@@ -59,6 +59,6 @@ void tiledMeshDraw(TiledMeshDrawWork *work, u32 mode)
     }
     renderCtxResetColorScale(g_titleScene);
     renderCtxApplyTransforms(g_titleScene);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPopChecked(&g_titleScene->stackA);
 }
 }

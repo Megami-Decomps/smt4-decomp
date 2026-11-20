@@ -1,6 +1,7 @@
 #include "gfx/StereoParallax.h"
 #include "camp/RenderCtxA.h"
-/* NON_MATCHING: same instruction mix and registers; only the scheduling of the cached draw-state push/pop address arithmetic differs (retail computes values[index + 1] after the previous-value load). */
+/* NON_MATCHING: 12 lines. The pops now go through renderStackPopChecked as in retail; what remains: retail converts the
+ * stereo parallax through s1 (the build reuses s0), and loads g_renderCtx into r0 before building the stack address in r4. */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -32,7 +33,7 @@ u32 btlGameOverDrawOverlay(OverlayTask *task)
         asdTMTexTableEntryAt(0x22, 3000);
         f32 shift = (f32)(s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.35f);
         texDrawTableEntryAtStoredOrigin(2, 0x22, 3000, (s32)shift, 0, 2);
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPopChecked(&g_renderCtx->stackA);
         efctSetSpeed(1.0f);
         context = g_renderCtx;
         mode = renderCtxPackPassFlags(1, 0);

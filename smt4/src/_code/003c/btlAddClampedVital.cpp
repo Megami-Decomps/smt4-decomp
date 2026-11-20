@@ -1,4 +1,4 @@
-/* NON_MATCHING: id/kind registers are reversed and the compiler places the shared clamping and persistent-copy tails differently from retail. */
+/* NON_MATCHING: the id/kind registers are reversed, and the out-of-battle HP/MP clamps use different scratch registers. */
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
@@ -16,7 +16,12 @@ static __inline void addClampedVital(s16 *value, s16 maximum, s32 amount)
     *value = result;
 }
 
-// Add a clamped HP/MP amount and copy live battle values back to the persistent unit.
+enum {
+    VITAL_HP = 0,
+    VITAL_MP = 1
+};
+
+/* Adds a clamped HP/MP amount and copies live battle values back to the persistent unit. */
 void btlAddClampedVital(s32 id, s32 kind, s32 amount)
 {
     BtlMainState *state = btlGetMainState();
@@ -24,28 +29,32 @@ void btlAddClampedVital(s32 id, s32 kind, s32 amount)
         BtlUnitData *live = btlFindEntryBlockByMemberId(state, id);
         if (live == NULL)
             return;
-        if (kind == 0)
+        if (kind == VITAL_HP)
             addClampedVital(&live->hp, live->maxHp, amount);
-        else if (kind == 1)
+        if (kind == VITAL_MP)
             addClampedVital(&live->mp, live->maxMp, amount);
         BtlEntry *entry = btlMainFindEntryByListedId(state, id);
         if (entry->data.equipA) {
             entry->data.equipA->hp = live->hp;
             entry->data.equipA->mp = live->mp;
-        } else if (entry->data.equipB) {
+            return;
+        }
+        if (entry->data.equipB) {
             entry->data.equipB->hp = live->hp;
             entry->data.equipB->mp = live->mp;
-        } else if (entry->data.reserve) {
+            return;
+        }
+        if (entry->data.reserve) {
             entry->data.reserve->hp = live->hp;
             entry->data.reserve->mp = live->mp;
         }
         return;
     }
-    /* battle entries view the unit record through BtlEquip (battle/BtlEntry.h) */
-    BtlEquip *unit = reinterpret_cast<BtlEquip *>(gameGetUnitRecord(id - BTL_ENTRY_COUNT));
-    if (kind == 0)
+    StatBlock *unit = gameGetUnitRecord(id - BTL_ENTRY_COUNT);
+    if (kind == VITAL_HP)
         addClampedVital(&unit->hp, unit->maxHp, amount);
-    else if (kind == 1)
+    else if (kind == VITAL_MP)
         addClampedVital(&unit->mp, unit->maxMp, amount);
 }
-}
+
+} /* extern "C" */

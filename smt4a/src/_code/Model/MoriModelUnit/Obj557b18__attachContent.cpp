@@ -4,7 +4,7 @@
 
 extern "C" {
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
-void FUN_003fdd1c(ModelUnitBuffers *unit, void *part);
+void moriModelUnitAttachPart(ModelUnitBuffers *unit, void *part);
 void moriModelUnitAllocateChannels(ModelUnitBuffers *unit);
 void moriModelChannelInitialize(UnitChannel *channel, s32 count);
 void nn_math_ARMv6_MTX34CopyAsm(nw::math::MTX34 *dest, const nw::math::MTX34 *source);
@@ -28,7 +28,7 @@ void Obj557b18::attachContent(UnitModelContent *content, u32 partIndex)
     /* The unit's channels and content pointer, as ModelUnitBuffers names them. */
     ModelUnitBuffers *unit = reinterpret_cast<ModelUnitBuffers *>(this);
     if (partIndex < content->view.table->partCount) {
-        FUN_003fdd1c(unit, content->view.table->parts[partIndex]);
+        moriModelUnitAttachPart(unit, content->view.table->parts[partIndex]);
     }
     unit->content = content;
     moriModelUnitAllocateChannels(unit);

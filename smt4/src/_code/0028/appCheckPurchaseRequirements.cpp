@@ -1,4 +1,5 @@
-/* NON_MATCHING: register allocation only: retail keeps `need` in r8 and the narrowed id in r7 (here swapped), and the entry in r5 / flag in r6 (here swapped); the final need > FUN_00295cec() comparison now matches. Declaration order does not affect it. */
+/* NON_MATCHING: register allocation only: retail keeps `need` in r8 and the narrowed id in r7 (here swapped), and the entry in r5 / flag in r6 (here swapped); the final need > gameSaveGetPoints() comparison now matches. Declaration order does not affect it. */
+#include "code/Code002e.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "gamedata/GauntletAppTable.h"
 #include "gamedata/GamePlayerData.h"
@@ -10,11 +11,10 @@ typedef s32 AppKeyCompare(const UnsignedRecordKey32 *a, const UnsignedRecordKey3
 GauntletAppRecord *libc_bsearch(const GauntletAppRecord *key, const GauntletAppRecord *base, u32 count, u32 size, AppKeyCompare *compare);
 s32 gameFlagIsSet(u32 flag);
 u8 *gameDataGetFlagBits(void);
-u32 FUN_00295cec(void);
 
 s32 unsignedKeyRecordCompare(const UnsignedRecordKey32 *left, const UnsignedRecordKey32 *right);
 
-/* Entry check for `id`: 2 when it is missing, the player is below its level or a required flag is unset; otherwise whether its cost exceeds FUN_00295cec. */
+/* Entry check for `id`: 2 when it is missing, the player is below its level or a required flag is unset; otherwise whether its cost exceeds gameSaveGetPoints. */
 u8 appCheckPurchaseRequirements(u32 id)
 {
     void *table = dataTableGet(11, 0);
@@ -60,7 +60,7 @@ u8 appCheckPurchaseRequirements(u32 id)
             need = entry->cost;
         }
     }
-    return need > FUN_00295cec();
+    return need > gameSaveGetPoints();
 }
 
 } /* extern "C" */

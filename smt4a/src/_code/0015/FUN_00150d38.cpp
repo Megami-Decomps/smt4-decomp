@@ -61,7 +61,7 @@ void FUN_00150d38(s32 usePrimary)
 
     RenderCtxA *context = g_renderCtx;
     s32 state = renderCtxPackPassFlags(1, 0);
-    renderStackPush(&context->stackA, state);
+    renderStackPushCounted(&context->stackA, state);
     context = g_renderCtx;
     switch (tex->zan.blendMode) {
     case 0:

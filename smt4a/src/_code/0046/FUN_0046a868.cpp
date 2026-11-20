@@ -1,21 +1,19 @@
-/* NON_MATCHING: 21 lines from two differences: retail reads the fade at 0x200 through a split base (add r0, r5, #480;
- * vldr s0, [r0, #32]) where this build addresses it directly, and the literal pool's order differs (the rest is
- * the shifted branch and pool offsets). */
 #include "common.h"
 #include "gfx/ColoredQuad.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "Model/MoriModelShadowMap.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
 /* A title-scene overlay object: flags at 0 (0x80: fade overlay, 0x200: extra pass), a state at 4
- * (drawn from 3 on) and its fade amount at 0x200. */
+ * (drawn from 3 on) and its fade sprite state at 0x1E0. */
 typedef struct TitleOverlayA {
     /* 0x000 */ u32 flags;
     /* 0x004 */ s32 state;
-    /* 0x008 */ u8 unk008[0x1F8];
-    /* 0x200 */ f32 fade;
+    /* 0x008 */ u8 unk008[0x1D8];
+    /* 0x1E0 */ UiSpriteState fadeAnimation;
 } TitleOverlayA;
 
 
@@ -43,7 +41,7 @@ void FUN_0046a868(TitleOverlayA *overlay)
         FUN_0046868c(overlay);
     }
     if ((overlay->flags & 0x80) != 0) {
-        u8 alpha = (u8)(u32)(overlay->fade * 192.0f);
+        u8 alpha = (u8)(u32)(vec2GetSpeed(&overlay->fadeAnimation) * 192.0f);
 
         renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
         renderCtxSelectTexture(g_renderCtx, 0);

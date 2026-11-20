@@ -16,13 +16,13 @@ int asdMemFree(...);
 int dataTableFree(...);
 int buttonHelpSetPanelState(...);
 int FUN_002e26a4(void);
-int FUN_0031d088(void);
+int howToControllerDestroy(void);
 int FUN_00330b74(void);
 int campCommonBgRelease(void);
 int FUN_0037a2e4(void);
 int campButtonHelpRelease(void);
 int partyPanelDestroy(void);
-int FUN_0039c0e4(void);
+int newHighwayInfoDestroy(void);
 int freeTexTable24(void);
 int FUN_003a76b8(void);
 int FUN_003b01e8(void);
@@ -273,7 +273,7 @@ extern int uniteIsReady(void);
 /* Supplied declaration required: menuItemPlaySe. */
 /* Supplied declaration required: mapSelectRoomMusicIfActive. */
 /* Supplied declaration required: FUN_00319aec. */
-/* Supplied declaration required: FUN_0031d088. */
+/* Supplied declaration required: howToControllerDestroy. */
 extern int objIsNotInState0xF(void);
 /* Supplied declaration required: partyPanelRefreshFromSlotTable. */
 /* Supplied declaration required: FUN_0031db84. */
@@ -337,7 +337,7 @@ extern int campCecGet(void);
 extern int saveLoadUIHasResult(void);
 extern int aocDataBlockHasEntries(void);
 extern int flagAt4IsClear(void);
-/* Supplied declaration required: FUN_0039c0e4. */
+/* Supplied declaration required: newHighwayInfoDestroy. */
 /* Supplied declaration required: saveLoadStartDefaultWindow. */
 /* Supplied declaration required: saveLoadStartWindowWithArgument. */
 extern int FUN_0039c608(void);
@@ -2121,7 +2121,7 @@ LAB_003d801c:
   case 0x51:
     temp_v4 = obj14IsZero();
     if (temp_v4 != 0) {
-      FUN_0039c0e4();
+      newHighwayInfoDestroy();
       puVar12 = g_camp;
       temp_v2 = FUN_003c0dcc();
       *(unsigned char *)((int)puVar12 + 0x32b2) = temp_v2;
@@ -2138,7 +2138,7 @@ LAB_003d801c:
   case 0x52:
     temp_v4 = FUN_002c2bd0();
     if (temp_v4 != 0) {
-      FUN_0031d088();
+      howToControllerDestroy();
       campResetScreen();
       uiSpriteSetKeyframe(puVar2 + 0x1b9,3,0);
       campShowSelectedEntryHelp(0);

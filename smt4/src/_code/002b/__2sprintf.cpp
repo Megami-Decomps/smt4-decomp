@@ -1,19 +1,29 @@
-/* NON_MATCHING: varargs stack layout, Thumb mov encoding, and callback-address materialization differ. */
+/* NON_MATCHING: the C library is position independent: needs --cpu=5TE --apcs=/interwork/ropi -Ospace (as libc_vsprintf). */
+/* sprintf: formats into `buffer` through the byte-append callback and NUL-terminates; returns the length. */
 #include "common.h"
 #include <stdarg.h>
 
 extern "C" {
-typedef void (*ByteWriter)(u8 value, u8 **cursor);
-s32 FUN_002c683e(const char *format, u8 **cursor, va_list arguments, ByteWriter writer);
-void libcFormatAppendByte(u8 value, u8 **cursor);
+/* Output state the format engine passes to its byte callback. */
+struct FormatOutput {
+    u8 *cursor;
+    u32 unk04;
+};
 
-/* Formats a string and appends its terminating zero byte. */
+typedef void (*ByteWriter)(u8 value, FormatOutput *output);
+s32 FUN_002c683e(const char *format, FormatOutput *output, va_list arguments, ByteWriter writer);
+void libcFormatAppendByte(u8 value, FormatOutput *output);
+
 s32 __2sprintf(u8 *buffer, const char *format, ...)
 {
+    FormatOutput output;
     va_list arguments;
+    s32 length;
+
     va_start(arguments, format);
-    s32 length = FUN_002c683e(format, &buffer, arguments, libcFormatAppendByte);
-    libcFormatAppendByte(0, &buffer);
+    output.cursor = buffer;
+    length = FUN_002c683e(format, &output, arguments, libcFormatAppendByte);
+    libcFormatAppendByte(0, &output);
     va_end(arguments);
     return length;
 }

@@ -1,22 +1,10 @@
-/* NON_MATCHING: default stream-binding initialization scheduling and shared-one constant lifetime add a saved register. */
+/* NON_MATCHING: registers and stores now match up to the frame: retail places the three bindings at sp+0 (color), +8
+ * (position), +16 (texcoord) in a 28-byte frame; the build puts position at sp+32 in a 44-byte frame. */
 #include "gfx/VertexAttributeState.h"
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "gfx/RenderTargetState.h"
 #include "AsdSDK/AsdMemUtil.h"
 
-struct VertexStreamBinding {
-    VertexAttributeDescription attribute;
-    u8 scalarFormat;
-    u32 step;
-    VertexStreamBinding()
-    {
-        attribute.unk00[0] = 0;
-        attribute.unk00[1] = 1;
-        attribute.index = 0xFF;
-        scalarFormat = 0xFF;
-        step = 0;
-    }
-};
 extern "C" {
 void* asdPrimAlloc(u32 size);
 void* rt_memcpy(void* destination, const void* source, u32 size);
@@ -51,32 +39,32 @@ void vertexAttributeUploadStreams(PolyGeomBuf* geometry)
     UploadView* upload = reinterpret_cast<UploadView*>(geometry);
     VertexAttributeState* attributes = &upload->attributes;
     memClear(attributes, 0x790);
-    VertexStreamBinding position;
-    VertexStreamBinding color;
-    VertexStreamBinding texcoord;
+    VertexAttributeDescription position;
+    VertexAttributeDescription color;
+    VertexAttributeDescription texcoord;
     if (upload->streams.flags & 1) {
         void* data = asdPrimAlloc(upload->streamBytes(1, 12));
         rt_memcpy(data, upload->streams.positions, upload->streamBytes(1, 12));
-        position.attribute.index = 0;
-        FUN_0023b9d0(attributes, &position.attribute, osVirtToPhysAddress(reinterpret_cast<u32>(data)), 11);
+        position.index = 0;
+        FUN_0023b9d0(attributes, &position, osVirtToPhysAddress(reinterpret_cast<u32>(data)), 11);
     }
     if (upload->streams.flags & 2) {
         void* data = asdPrimAlloc(upload->streamBytes(2, 16));
         rt_memcpy(data, upload->streams.floatColors, upload->streamBytes(2, 16));
-        color.attribute.index = 1;
-        FUN_0023b9d0(attributes, &color.attribute, osVirtToPhysAddress(reinterpret_cast<u32>(data)), 15);
+        color.index = 1;
+        FUN_0023b9d0(attributes, &color, osVirtToPhysAddress(reinterpret_cast<u32>(data)), 15);
     }
     if (upload->streams.flags & 0x20) {
         void* data = asdPrimAlloc(upload->streamBytes(0x20, 4));
         rt_memcpy(data, upload->streams.packedColors, upload->streamBytes(0x20, 4));
-        color.attribute.index = 1;
-        FUN_0023b9d0(attributes, &color.attribute, osVirtToPhysAddress(reinterpret_cast<u32>(data)), 13);
+        color.index = 1;
+        FUN_0023b9d0(attributes, &color, osVirtToPhysAddress(reinterpret_cast<u32>(data)), 13);
     }
     if (upload->streams.flags & 4) {
         void* data = asdPrimAlloc(upload->streamBytes(4, 8));
         rt_memcpy(data, upload->streams.texcoords, upload->streamBytes(4, 8));
-        texcoord.attribute.index = 2;
-        FUN_0023b9d0(attributes, &texcoord.attribute, osVirtToPhysAddress(reinterpret_cast<u32>(data)), 7);
+        texcoord.index = 2;
+        FUN_0023b9d0(attributes, &texcoord, osVirtToPhysAddress(reinterpret_cast<u32>(data)), 7);
     }
 }
 }

@@ -29,7 +29,7 @@ u8 gameDataFlagTestBit(u32 bit);
 s32 idListHasFlaggedRecord(u32 record);
 s32 btlIsDefeatSuppressed(void);
 s32 btlObjectHasEntryFlag(u32 record);
-s32 FUN_002b24fc(void);
+s32 btlListIsKind9Available(void);
 
 /* Returns the kind of the `which`-th visible entry of the debug menu, or 0 when there are fewer. */
 u8 FUN_003da6ac(BtlDebugMenu *menu, s32 which)
@@ -76,7 +76,7 @@ u8 FUN_003da6ac(BtlDebugMenu *menu, s32 which)
             }
         }
         if (entry->kind != 6 && entry->kind != 8) {
-            if (entry->kind == 9 && FUN_002b24fc() == 0) {
+            if (entry->kind == 9 && btlListIsKind9Available() == 0) {
                 continue;
             }
         }

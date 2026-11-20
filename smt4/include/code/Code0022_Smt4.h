@@ -12,7 +12,7 @@ struct GaugeOwner0022e0b0;
 struct ResetCounterOwner;
 extern "C" {
 
-u8 FUN_0022f1b8(void);
+u8 aocEntryIsKindTen(u32 id);
 
 u32 FUN_0022b8c0(Obj *obj);
 

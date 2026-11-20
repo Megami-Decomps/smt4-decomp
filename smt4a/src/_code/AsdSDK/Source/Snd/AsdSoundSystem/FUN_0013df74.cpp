@@ -8,7 +8,7 @@ int FUN_00150784(void);
 int FUN_00154710(...);
 int holderStartOnce(...);
 int trackerMoveTo(...);
-int FUN_0015e1ec(...);
+int nw_snd_Sound3DManager_Initialize(...);
 int FUN_0015e314(unsigned char *, unsigned char *, unsigned int, unsigned int);
 int nw_snd_SoundArchivePlayer_Initialize(...);
 int soundArchiveLoadInfoBlock(unsigned char *, unsigned int, unsigned int);
@@ -70,7 +70,7 @@ extern unsigned int DAT_0064c01c; /* 0x64c01c */
 /* Supplied declaration required: FUN_00154710. */
 /* Supplied declaration required: holderStartOnce. */
 /* Supplied declaration required: trackerMoveTo. */
-/* Supplied declaration required: FUN_0015e1ec. */
+/* Supplied declaration required: nw_snd_Sound3DManager_Initialize. */
 /* Supplied declaration required: FUN_0015e314. */
 /* Supplied declaration required: nw_snd_SoundArchivePlayer_Initialize. */
 /* Supplied declaration required: soundArchiveLoadInfoBlock. */
@@ -155,7 +155,7 @@ unsigned int FUN_0013df74(unsigned int param_1,int param_2,unsigned char *param_
     temp_v5 = (unsigned char *)0x1;
     asdMemoryAlloc(0x10000,0x100,0,puVar4);
     DAT_0063f4c0 = temp_v1;
-    FUN_0015e1ec(&g_nwSound3DManager,&g_asdSoundSystem,temp_v1,puVar4);
+    nw_snd_Sound3DManager_Initialize(&g_nwSound3DManager,&g_asdSoundSystem,temp_v1,puVar4);
     temp_v1 = 0;
     DAT_0063ea58 = 0x20;
     DAT_0063ea60 = 0x40b55555;

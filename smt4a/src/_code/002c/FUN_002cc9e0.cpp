@@ -52,7 +52,7 @@ s32 gameFlagIsSet(u32 flag);
 s32 gameDataFlagTestBit(u32 flag);
 s32 idListHasFlaggedRecord(SlotRecordA *member);
 s32 btlIsDefeatSuppressed(void);
-s32 FUN_002b24fc(void);
+s32 btlListIsKind9Available(void);
 
 /* Whether a target command is usable by the member: allowed by the member's equipment when no
  * flagged record applies. */
@@ -96,7 +96,7 @@ u32 FUN_002cc9e0(CommandWork *work, s32 inBattle)
         if (entry->kind == 3 && work->targets[work->selected] != -1 && member != NULL &&
             idListHasFlaggedRecord(member) == 0 && !targetCommandAllowed(entry, member))
             continue;
-        if (entry->kind == 9 && FUN_002b24fc() == 0)
+        if (entry->kind == 9 && btlListIsKind9Available() == 0)
             continue;
         if ((entry->attributes & 1) && btlIsDefeatSuppressed() != 0)
             continue;

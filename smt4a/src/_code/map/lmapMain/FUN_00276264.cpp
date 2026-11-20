@@ -490,7 +490,7 @@ extern int pairedAvailabilityBothReady(void);
 extern int buttonHelpIsActionActive(unsigned int);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: frameTexRequestFade. */
-extern unsigned int FUN_002e5c2c(void);
+extern unsigned int gameSaveGetPoints(void);
 /* Supplied declaration required: FUN_00311b74. */
 /* Supplied declaration required: popupStart. */
 /* Supplied declaration required: mapSetSceneState. */
@@ -1368,7 +1368,7 @@ LAB_00276f5c:
           if (temp_v23 && temp_v1 == '\0') {
             temp_v8 = gameFlagIsSet(0x61);
             if (((temp_v8 == 0) && (temp_v8 = gameFlagIsSet(0x48c), temp_v8 == 0)) &&
-               ((temp_v8 = popupGetStateValue(), temp_v8 != 0 && (temp_v10 = FUN_002e5c2c(), temp_v10 >= 100)))
+               ((temp_v8 = popupGetStateValue(), temp_v8 != 0 && (temp_v10 = gameSaveGetPoints(), temp_v10 >= 100)))
                ) {
               *(unsigned char *)(puVar2 + 0x24d8) = 1;
             }

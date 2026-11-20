@@ -88,6 +88,10 @@ difference a register tie-break.
   first), the callee probably takes the vector by value: declare it so in the shared header
   (`distSpatial(MapVector, MapVector)`; three by-value floats and six separate floats use the same
   registers, so the definition alone cannot tell).
+- Two words cleared by one `stm` of two zero registers (`mov r2, r1; stm r0, {r1, r2}`) are one 64-bit field
+  (armcc's 64-bit zero store). Where the record puts it at a 4-aligned offset, declare it `__packed u64` in the
+  struct, never a cast at the use (`SaveLoadTransitionValues::values`: smt4a `spriteListMenuResetSprites`,
+  `saveLoadUiRestartSpritesAndWait`, `saveLoadUiRestartSlotSpritesAndWait`).
 - Keep packing local to genuinely unaligned members, with size and offset assertions: packing a whole
   record downgrades its aligned word accesses.
 - A float-shaped stack argument does not prove a variadic callee: a one-word integer/float payload
@@ -98,6 +102,9 @@ difference a register tie-break.
   returns `nn::Result`, not `s32`: with `s32` armcc gives the result and the reference-count pointer
   other registers (smt4 `FUN_0011c834`, smt4a `FUN_0015997c`, smt4 `FUN_00146704`). Only where every
   caller treats the value as a result (sign test, forwarding); keep `s32`/`bool` for 0/1 answers.
+- Test a returned `nn::Result` from a local: `nn::Result result = f(&out); if (nnResultIsSuccess(result))`
+  gives retail's `and #0x80000000; cmp; bge`, passing the call straight in gives `asr; adds` (wave 52:
+  `runtimeInitializeSharedHandle`, both games).
 - A registered callback that casts its base parameter to a derived view (`Work *work = (Work *)base;`)
   and then mixes both pointers compiles to other alias and cross-jump decisions than one that declares
   the parameter as the derived struct (`struct ContentDepartureWork : ContentTransition { ... };`,
@@ -191,6 +198,10 @@ difference a register tie-break.
   named locals declared in retail's pool order fix the order of constants.
 - Chained assignment (`current[i] = maximum[i] = value;`) stores one value through both pointers the
   way retail does; separate statements reload or reorder it.
+- GPU command words are appended through the global cursor itself, `*g_commandBufferCursor++ = 0;
+  *g_commandBufferCursor++ = 0x8025E;`, with the context's fields read through `g_asdGfxContext.cmdBuffer->` at
+  each use: a cached cursor or buffer local merges the two stores into `stm` and moves the registers (wave 52:
+  the pad/terminate/submit functions of both games, `asdGxCommandBufferPadAndGetRanges` and siblings).
 - A clamp or two-way choice of a local written as a ternary (`count = count > 300 ? 300 : count;`,
   `checked = ok ? resource : NULL;`) and the same as an `if` assign through different registers; try
   both (about forty near misses moved). Not for globals, and an `else if` chain stays a chain: don't
@@ -295,6 +306,10 @@ asks for.
   members whose own constructors zero them (`ModelEffectList() : count(0), items(NULL) {}`) pairs the
   stores into retail's `strd`; the same stores written in the body do not (smt4a
   `ModelUnitExtra::ModelUnitExtra`).
+- A hand-rolled `begin`/`end`/`capacity` pointer triple released through `__rw::__rw_deallocate` is the
+  library's `std::vector<T *>` (`<vector>`): declare the member as one and write the owner's destructor with
+  iterators and an explicit `clear()` (smt4a `Obj557dcc::~Obj557dcc`, `Obj557b58::~Obj557b58`; their
+  constructors and other users stay IDENTICAL).
 
 More on classes, constructors and destructors is in [C++](style-and-naming.md#c).
 

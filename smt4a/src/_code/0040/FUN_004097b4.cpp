@@ -40,12 +40,12 @@ void FUN_004097b4(RenderCtxA *context, u32 color, u32 fade, u32 flags, f32 alpha
     renderStackPush(&context->depthStacks.stackE, FUN_003a48dc(1, fade, 255, 255));
     renderStackPush(&context->depthStacks.stackF, packThreeFields(mode, mode, mode));
     FUN_00164034(0.0f, 0.0f, height, width, color, color, color, color, alpha);
-    renderStackPop(&context->depthStacks.stackF);
-    renderStackPop(&context->depthStacks.stackE);
-    renderStackPop(&context->stackB);
-    renderStackPop(&context->additional.stackG);
-    renderStackPop(&context->additional.stackC);
-    renderStackPop(&context->stackA);
+    renderStackPopChecked(&context->depthStacks.stackF);
+    renderStackPopChecked(&context->depthStacks.stackE);
+    renderStackPopChecked(&context->stackB);
+    renderStackPopChecked(&context->additional.stackG);
+    renderStackPopChecked(&context->additional.stackC);
+    renderStackPopChecked(&context->stackA);
     renderCtxSelectTexture(context, savedTexture);
 }
 

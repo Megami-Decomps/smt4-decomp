@@ -20,7 +20,7 @@ int uiSpriteSetKeyframe(...);
 int popupTryStartActionLabelPrompt(...);
 int popupStateClose(void);
 int gameDataAddCappedPoints(...);
-int FUN_002e5c2c(...);
+int gameSaveGetPoints(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int entryTableSetHalfwordsById(...);
 int mapJobIsDone(void);
 int mapMainStartEntry(...);
@@ -143,7 +143,7 @@ extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002b5e08. */
 extern int popupIsActive(void);
 /* Supplied declaration required: gameDataAddCappedPoints. */
-/* Supplied declaration required: FUN_002e5c2c. */
+/* Supplied declaration required: gameSaveGetPoints. */
 extern int saveSlotSelectedIsId175(void);
 extern int __aeabi_uldivmod(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: blockResetAxis. */
@@ -844,7 +844,7 @@ LAB_0029a094:
         entryTableResetAndInit(0x18,(int)*(char *)(temp_v11 + 7),0xffffffff,0);
         uiSpriteSetKeyframe(temp_v4 + 0x148,0);
         *(unsigned int *)(temp_v4 + 0x490) = 1;
-        temp_v12 = FUN_002e5c2c();
+        temp_v12 = gameSaveGetPoints();
         *(unsigned int *)(temp_v4 + 0x498) = temp_v12;
         gameDataAddCappedPoints((int)*(char *)(temp_v11 + 7));
         *(int *)(temp_v4 + 0x494) = *(int *)(temp_v4 + 0x498) << 0xc;
@@ -859,26 +859,26 @@ LAB_0029a094:
         }
         break;
       case 2:
-        temp_v6 = FUN_002e5c2c();
+        temp_v6 = gameSaveGetPoints();
         temp_v7 = *(unsigned int *)(temp_v4 + 0x498);
         temp_v11 = __aeabi_uldivmod((temp_v6 - temp_v7) * 0x1000,
                               ((temp_v6 - temp_v7) >> 0x14) |
                               ((((int)temp_v7 >> 0x1f) + (unsigned int)(temp_v6 < temp_v7)) * -0x1000),0x14,0);
         *(int *)(temp_v4 + 0x494) = temp_v11 + *(int *)(temp_v4 + 0x494);
-        temp_v5 = FUN_002e5c2c();
+        temp_v5 = gameSaveGetPoints();
         temp_v7 = *(unsigned int *)(temp_v4 + 0x494);
         temp_v6 = temp_v5 >> 0x14;
         temp_v16 = temp_v5 << 0xc <= temp_v7;
         temp_v7 = (int)temp_v7 >> 0x1f;
         if (temp_v6 < temp_v7 || temp_v7 - temp_v6 < (unsigned int)temp_v16) {
-          temp_v11 = FUN_002e5c2c(temp_v7 - (temp_v6 + !temp_v16));
+          temp_v11 = gameSaveGetPoints(temp_v7 - (temp_v6 + !temp_v16));
           *(int *)(temp_v4 + 0x494) = temp_v11 << 0xc;
           soundApplyValueOrStop(*(unsigned int *)(temp_v4 + 0x49c),0);
         }
         temp_v11 = messageMainIsIdle();
         if (temp_v11 != 0) {
           soundApplyValueOrStop(*(unsigned int *)(temp_v4 + 0x49c),0);
-          temp_v11 = FUN_002e5c2c();
+          temp_v11 = gameSaveGetPoints();
           *(int *)(temp_v4 + 0x494) = temp_v11 << 0xc;
           soundApplyValueOrStop(*(unsigned int *)(temp_v4 + 0x49c),0);
           uiSpriteSetKeyframe(temp_v4 + 0x148,1,0);

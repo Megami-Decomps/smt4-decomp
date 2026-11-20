@@ -1,45 +1,41 @@
-/* NON_MATCHING: command-pair STM versus STRD selection, cursor lifetime and record-index scratch registers differ. */
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 extern u32 *g_commandBufferCursor;
-extern u32 g_commandBufferEnd;
+extern u32 *g_commandBufferEnd;
 void globalCriticalSectionEnterForward();
 void globalCriticalSectionLeaveForward();
 void FUN_001963e0();
 
+/* Terminates the buffered GPU commands and enqueues them as a submission record of `parameter` bytes, then
+ * requests submission. */
 void FUN_0017d5f8(u32 parameter)
 {
     AsdCmdBuffer *buffer = g_asdGfxContext.cmdBuffer;
-    u32 *cursor = g_commandBufferCursor;
-    u32 offset = reinterpret_cast<u32>(cursor) - reinterpret_cast<u32>(buffer->start);
-    buffer->writeOffset = offset;
-    if (buffer->committedOffset == offset)
+    u32 bytes = (u8 *)g_commandBufferCursor - buffer->start;
+    buffer->writeOffset = bytes;
+    if (buffer->committedOffset == bytes)
         return;
-    if (offset & 8) {
-        buffer->writeOffset = offset + 0x18;
+    if (bytes & 8) {
+        buffer->writeOffset = bytes + 24;
     } else {
-        buffer->writeOffset = offset + 0x20;
-        if (reinterpret_cast<u32>(cursor) < g_commandBufferEnd) {
-            g_commandBufferCursor = cursor + 2;
-            cursor[1] = 0x8025E;
-            cursor[0] = 0;
+        buffer->writeOffset = bytes + 32;
+        if (g_commandBufferCursor < g_commandBufferEnd) {
+            *g_commandBufferCursor++ = 0;
+            *g_commandBufferCursor++ = 0x8025E;
         }
     }
-    if (reinterpret_cast<u32>(g_commandBufferCursor) < g_commandBufferEnd) {
-        g_commandBufferCursor[0] = 1;
-        g_commandBufferCursor[1] = 0xF0111;
-        g_commandBufferCursor += 2;
+    if (g_commandBufferCursor < g_commandBufferEnd) {
+        *g_commandBufferCursor++ = 1;
+        *g_commandBufferCursor++ = 0xF0111;
     }
-    if (reinterpret_cast<u32>(g_commandBufferCursor) < g_commandBufferEnd) {
-        g_commandBufferCursor[0] = 1;
-        g_commandBufferCursor[1] = 0xF0110;
-        g_commandBufferCursor += 2;
+    if (g_commandBufferCursor < g_commandBufferEnd) {
+        *g_commandBufferCursor++ = 1;
+        *g_commandBufferCursor++ = 0xF0110;
     }
-    if (reinterpret_cast<u32>(g_commandBufferCursor) < g_commandBufferEnd) {
-        g_commandBufferCursor[1] = 0xF0010;
-        g_commandBufferCursor[0] = 0x12345678;
-        g_commandBufferCursor += 2;
+    if (g_commandBufferCursor < g_commandBufferEnd) {
+        *g_commandBufferCursor++ = 0x12345678;
+        *g_commandBufferCursor++ = 0xF0010;
     }
     AsdCmdRecord *record = &buffer->entries[buffer->listCount];
     record->kind = 1;

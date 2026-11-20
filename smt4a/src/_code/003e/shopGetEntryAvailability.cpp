@@ -1,4 +1,5 @@
 /* NON_MATCHING: record and requiredBits trade r5/r6 (register allocation only). */
+#include "code/Code002e.h"
 #include "common.h"
 #include "gamedata/DataTableAccess.h"
 #include "gamedata/GamePlayerData.h"
@@ -16,7 +17,6 @@ typedef struct ShopRecord {
 
 s32 gameFlagIsSet(u16 flag);
 u8 *gameDataBlockGetArea2D68(void);
-u32 FUN_002e5c2c(void);
 
 static __inline u32 shopRecordGetPrice(u32 id)
 {
@@ -52,7 +52,7 @@ u8 shopGetEntryAvailability(u32 id)
         }
     }
     price = shopRecordGetPrice(id);
-    money = FUN_002e5c2c();
+    money = gameSaveGetPoints();
     return price > money;
 }
 

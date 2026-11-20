@@ -28,7 +28,7 @@ int FUN_002ade88(void);
 int gameGlobalsSetOverlayActive(int);
 int partyPanelRefreshItemPreview(void);
 int FUN_002f8288(void);
-int FUN_00333694(...);
+int skillApplyToMemberAndCharge(...);
 int partyPanelRefreshFilterMarks(void);
 int FUN_00372570(int);
 int pair40Set(unsigned int, int);
@@ -67,7 +67,7 @@ extern unsigned int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: FUN_002cb84c. */
 /* Supplied declaration required: partyPanelRefreshItemPreview. */
 /* Supplied declaration required: FUN_002f8288. */
-/* Supplied declaration required: FUN_00333694. */
+/* Supplied declaration required: skillApplyToMemberAndCharge. */
 /* Supplied declaration required: partyPanelRefreshFilterMarks. */
 /* Supplied declaration required: FUN_00372570. */
 /* Supplied declaration required: slotPlacementAssignSlotPosition. */
@@ -411,7 +411,7 @@ LAB_002c4018:
           *(unsigned char *)(temp_v0 + 0x9c3) = 0;
         }
         temp_v3 = (int)*(short *)(temp_v0 + 0x38);
-        FUN_00333694(temp_v3,0xffffffff,temp_v5,1);
+        skillApplyToMemberAndCharge(temp_v3,0xffffffff,temp_v5,1);
         if (temp_v3 == 1) {
           *(unsigned char *)(temp_v0 + 0x9c0) = 0;
           temp_v3 = reinterpret_cast<int>(btlGetMainState());
@@ -425,7 +425,7 @@ LAB_002c4018:
         temp_v3 = 0;
         do {
           temp_v9 = (int)*(short *)(temp_v0 + 0x38);
-          FUN_00333694(temp_v9,(int)*(char *)(temp_v2 + temp_v3 + 0x1ca0),temp_v5,1);
+          skillApplyToMemberAndCharge(temp_v9,(int)*(char *)(temp_v2 + temp_v3 + 0x1ca0),temp_v5,1);
           if (temp_v9 == 1) {
             *(unsigned char *)(temp_v0 + temp_v3 + 0x9c1) = 0;
           }
@@ -435,7 +435,7 @@ LAB_002c4018:
         do {
           temp_v3 = (int)*(short *)(temp_v0 + 0x38);
           temp_v9 = temp_v0 + temp_v2 * 8;
-          FUN_00333694(temp_v3,*(unsigned int *)(temp_v9 + 0xa80),temp_v5,1);
+          skillApplyToMemberAndCharge(temp_v3,*(unsigned int *)(temp_v9 + 0xa80),temp_v5,1);
           if (temp_v3 == 1) {
             *(unsigned short *)(temp_v9 + 0xa84) = 0;
           }

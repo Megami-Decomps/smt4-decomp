@@ -126,7 +126,7 @@ u32 FUN_0035e03c(s32 target, ItemEffect *effect, s32 check, s32 preview)
         }
         result = 0;
     }
-    if (effect->points != 0 && player != NULL && FUN_002e5c2c() != 9999) {
+    if (effect->points != 0 && player != NULL && gameSaveGetPoints() != 9999) {
         if (preview == 0) {
             gameDataAddCappedPoints(effect->points);
         }

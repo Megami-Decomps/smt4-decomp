@@ -1,4 +1,6 @@
-/* NON_MATCHING: text-pointer load precedes slot resets, and projected-coordinate updates reuse the X sum instead of retail's store/reload sequence; message-debug hooks are restored. */
+/* NON_MATCHING: text-pointer load precedes slot resets, and projected-coordinate updates reuse the X sum instead of
+ * retail's store/reload sequence (27 lines). It matches only with single-use zero() and x/y-only operator+= members
+ * on the position type (wave 52), which have no evidence; message-debug hooks are restored. */
 #include "ui/UiSpriteApi.h"
 #include "battle/BtlMainAccess.h"
 #include "ui/AnimatedMessageSlots.h"
@@ -12,8 +14,9 @@ struct PartnerMessageOwnerView {
     AnimatedMessageSlot slots[12];
     UiResourceParameters source;
 };
+/* FUN_00416388's result: a 3-float offset (its definition returns LabelVec3). */
 struct PartnerMessageOffset {
-    f32 x, y;
+    f32 x, y, z;
 };
 // The message directory is beyond the shared battle-state prefix.
 struct PartnerMessageBattleView {

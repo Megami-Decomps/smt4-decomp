@@ -43,7 +43,7 @@ u32 FUN_00229324(void)
             efctSetSpeed(1.0f);
         }
     }
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPopChecked(&g_renderCtx->stackA);
     ctx = g_renderCtx;
     if (scene->state < 10) {
         if (scene->state != 0) {

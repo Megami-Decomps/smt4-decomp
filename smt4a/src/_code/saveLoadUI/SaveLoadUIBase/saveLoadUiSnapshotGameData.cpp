@@ -1,47 +1,37 @@
-/* NON_MATCHING: each copy's destination is staged through r3/r2 instead of loaded straight into r0 after the source call */
+/* NON_MATCHING: the aligned table and save-data copies load the destination through r3 instead of directly into r0. */
 #include "AsdSDK/AsdDebug.h"
 #include "mobiclip_ctrl/MobiclipCtrl.h"
 #include "Model/MoriModelManager.h"
+#include "shard/SaveSlotHeaderWork.h"
+#include "shard/W5_W5Match7_FlagBanks.h"
+#include <string.h>
 
 extern "C" {
-
-typedef struct {
-    u8 unk0[8];
-    void *gameDataBackup;   /* 0x08: 0x80 bytes */
-    void *configBackup;     /* 0x0c: 8 bytes */
-    void *saveDataBackup;   /* 0x10: 0x2a71c bytes */
-} SaveLoadUIBase;
-
-extern SaveLoadUIBase g_saveLoadUIBase;
 extern const char DAT_00533ec0[];
 
-void *asdMemoryAlloc(u32 heap, u32 align, s32 flags, u32 size, s32 fromTop);
 void *gameDataBlocksGetTable(void);
-void __aeabi_memcpy4(void *dst, const void *src, u32 size);
-void __ARM_common_memcpy4_8(void *dst, const void *src);
 
-/* Snapshots the game data table, the config settings and the save data before the save/load UI edits them. */
+enum {
+    SAVE_TABLE_SIZE = 0x80,
+    CONFIG_BACKUP_SIZE = 8,
+    SAVE_BACKUP_SIZE = 0x2a71c
+};
+
+/* Snapshots the game data table, config settings and save data before the save/load UI edits them. */
 void saveLoadUiSnapshotGameData(void)
 {
-    void *gameData;
-    void *config;
-    void *saveData;
-
     if (g_saveLoadUIBase.gameDataBackup != NULL) {
         return;
     }
     asdDebugTrace(DAT_00533ec0, 172);
-    g_saveLoadUIBase.gameDataBackup = asdMemoryAlloc(0x100, 0x100, 0, 0x80, 1);
+    g_saveLoadUIBase.gameDataBackup = asdMemoryAlloc(0x100, 0x100, 0, SAVE_TABLE_SIZE, 1);
     asdDebugTrace(DAT_00533ec0, 173);
-    g_saveLoadUIBase.configBackup = asdMemoryAlloc(0x100, 0x100, 0, 8, 1);
+    g_saveLoadUIBase.configBackup = asdMemoryAlloc(0x100, 0x100, 0, CONFIG_BACKUP_SIZE, 1);
     asdDebugTrace(DAT_00533ec0, 174);
-    g_saveLoadUIBase.saveDataBackup = asdMemoryAlloc(0x100, 0x100, 0, 0x2a71c, 1);
-    gameData = gameDataBlocksGetTable();
-    __aeabi_memcpy4(g_saveLoadUIBase.gameDataBackup, gameData, 0x80);
-    config = reinterpret_cast<void *>(configGetSettings());
-    __ARM_common_memcpy4_8(g_saveLoadUIBase.configBackup, config);
-    saveData = reinterpret_cast<void *>(gameDataBlocksGetSaveData());
-    __aeabi_memcpy4(g_saveLoadUIBase.saveDataBackup, saveData, 0x2a71c);
+    g_saveLoadUIBase.saveDataBackup = asdMemoryAlloc(0x100, 0x100, 0, SAVE_BACKUP_SIZE, 1);
+    memcpy((u32 *)g_saveLoadUIBase.gameDataBackup, (const u32 *)gameDataBlocksGetTable(), SAVE_TABLE_SIZE);
+    memcpy(g_saveLoadUIBase.configBackup, configGetSettings(), CONFIG_BACKUP_SIZE);
+    memcpy((u32 *)g_saveLoadUIBase.saveDataBackup, (const u32 *)gameDataBlocksGetSaveData(), SAVE_BACKUP_SIZE);
 }
 
 } /* extern "C" */

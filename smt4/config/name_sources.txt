@@ -5858,3 +5858,15 @@
 0010baf8 asdProcessRunAuxiliaryPass inferred Runs each running process auxiliary callback, or replays its command list copy, in stereoscopic 3D.
 0010f7e4 fsMountRomFs inferred Mounts the ROM file system as "rom:" with file/directory limits and a work buffer (nn::fs::MountRom).
 002fe9e4 scrCommSetAmbientSoundsStopped inferred script command that stops the map ambient sound actors (argument nonzero) or restarts or spawns them (0)
+00295cec gameSaveGetPoints inferred returns the save block's points (GameSaveDataA::points twin field)
+002c130c appletSetSleepQueryState inferred stores the sleep-query reply state that ReplySleepQuery writes into g_nnAppletState+0xB
+00316f70 gfxCreateResGraphicsFileObject inferred wraps graphics resource data in a ResGraphicsFile handle, applies fix-ups, sets it up and creates its owner
+001f3958 campAppListDraw inferred sibling of campSkillListDraw
+001f53d0 spriteRowListUpdate inferred SpriteRowList state machine
+00206368 spriteRowListOpen inferred SpriteRowList open (state 2)
+00218be0 spriteRowListClose inferred SpriteRowList close
+001e0de0 spriteRowListChange inferred SpriteRowList row/mark change (state 3)
+00215d68 uniteDrawSpecialFusionPanel inferred special fusion panel draw
+003172e0 campCecEditChoiceListState inferred twin of smt4a FUN_003aef48
+003a21b8 shopDrawAppraisalRow inferred appraisal list row draw
+0022f1b8 aocEntryIsKindTen inferred u8 (u32 id): the entry's kind is 10

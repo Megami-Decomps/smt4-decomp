@@ -1,34 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `handleCloseAndReset` (_code @ 0x1a0d70, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "nn/svc.h"
+#include "nn/Result.h"
+#include "sys/ProgramId.h"
 
 extern "C" {
+extern u32 DAT_0053f344;
 
-int sysFatalBreak(void);
-int software_interrupt(int);
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: sysFatalBreak. */
-
-
-int handleCloseAndReset(int *param_1)
-
+/* Closes the handle and replaces it with the default handle value; an unset handle (0) is left as
+ * it is and reports an error. A failed close is fatal. */
+nn::Result handleCloseAndReset(u32 *handle)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *param_1;
-  if (temp_v0 == 0) {
-    temp_v0 = -0x275efc09;
-  }
-  else {
-    software_interrupt(0x23);
-    if (temp_v0 < 0) {
-      sysFatalBreak();
+    s32 result;
+    if (*handle == 0) {
+        result = 0xD8A103F7;
+    } else {
+        result = nn::svc::CloseHandle(*handle);
+        if (nnResultIsFailure(result)) {
+            sysFatalBreak();
+        }
+        *handle = DAT_0053f344;
     }
-    *param_1 = 0;
-  }
-  return temp_v0;
+    return result;
 }
-
-} /* extern "C" */
+}

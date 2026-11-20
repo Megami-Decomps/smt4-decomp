@@ -10,7 +10,8 @@ struct HowToRecord;
 /* The work area g_callbackController.work points at. */
 typedef struct CallbackControllerWork {
     /* 0x000 */ u32 job;
-    /* 0x004 */ u8 unk004[4];
+    /* 0x004 */ u8 state;
+    /* 0x005 */ u8 unk005[3];
     /* 0x008 */ void *bufferA;
     /* 0x00C */ void *bufferB;
     union {
@@ -37,9 +38,13 @@ typedef struct CallbackControllerWork {
         } list;
     };
     /* 0x218 */ u16 touchRegionCount;
+
+    void releaseBuffers();
+    void releaseInputAndBuffers();
 } CallbackControllerWork;
 
-typedef char CallbackControllerWorkOffsets[offsetof(CallbackControllerWork, slots) == 0x88 &&
+typedef char CallbackControllerWorkOffsets[offsetof(CallbackControllerWork, state) == 4 &&
+    offsetof(CallbackControllerWork, slots) == 0x88 &&
     offsetof(CallbackControllerWork, touchRegionCount) == 0x218 ? 1 : -1];
 typedef char CallbackControllerCatalogOffsetsCheck[
     offsetof(CallbackControllerWork, catalog.entries) == 0x10 &&
@@ -53,7 +58,8 @@ typedef char CallbackControllerCatalogOffsetsCheck[
     sizeof(CallbackControllerWork) == 0x21C ? 1 : -1];
 
 struct CallbackControllerGlobal {
-    /* 0x00 */ u32 unk00;
+    /* 0x00 */ u8 ownsTable;
+    /* 0x01 */ u8 unk01[3];
     /* 0x04 */ void *work;
 };
 extern "C" CallbackControllerGlobal g_callbackController;

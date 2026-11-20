@@ -28,7 +28,8 @@ struct BattleEffectSetup {
 
 struct BattleEffectGlobals {
     /* 0x00 */ u8 red, green, blue, alpha;
-    /* 0x04 */ u8 unk04[4];
+    /* 0x04 */ u8 resetMotion;
+    /* 0x05 */ u8 unk05[3];
     /* 0x08 */ class Obj4209d8 *queryObject;   /* the model/grid query interface */
     /* 0x0c */ s32 variant;
     /* 0x10 */ u8 unk10[4];
@@ -38,7 +39,8 @@ struct BattleEffectGlobals {
     union {
         /* 0x20 */ u8 unk20[0x60];
         struct {
-            /* 0x20 */ u8 unk20[8];
+            /* 0x20 */ f32 initialAmount;
+            /* 0x24 */ f32 initialSpeed;
             /* 0x28 */ f32 growingAcceleration;
             /* 0x2C */ f32 shrinkingAcceleration;
         } motion;

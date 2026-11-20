@@ -51,7 +51,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int recordGetModeForId(int);
 extern int resourceRunOperationIfUnblocked(int);
 extern int listCursorGetRowIfUnblocked(int);
-extern unsigned int FUN_002e5c2c(void);
+extern unsigned int gameSaveGetPoints(void);
 /* Supplied declaration required: uiDrawListScrollBar. */
 extern int uiSearchPrimary(int);
 extern int shopGetEntryAvailability(unsigned int);
@@ -91,7 +91,7 @@ void gauntletAppMenuDrawScreen(int param_1)
   texDrawTableEntryAtStoredOrigin(2,0x14,0x57e,temp_v0,temp_v1,0x6a);
   texDrawTableEntryAtStoredOrigin(2,0x14,0x57f,temp_v0,temp_v1,0x6a);
   temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x583));
-  temp_v3 = FUN_002e5c2c();
+  temp_v3 = gameSaveGetPoints();
   sprintf((char *)temp_v12,"%u",temp_v3);
   statRowDrawValueImpl(0,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,1,4,0x6a,temp_v12);
   temp_v5 = 0;

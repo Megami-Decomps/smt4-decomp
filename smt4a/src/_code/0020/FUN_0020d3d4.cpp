@@ -33,7 +33,7 @@ extern BtlDebugBlockMask DAT_00573b88;
 BtlDebugEntry *FUN_002cc228(u8 index, s32 empty);
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataFlagTestBit(u32 flag);
-s32 FUN_002b24fc(void);
+s32 btlListIsKind9Available(void);
 s32 btlIsDefeatSuppressed(void);
 s8 *gameGetSlotTable(void);
 BtlDebugUnitRecord *gameGetSlotRecord(s32 slot);
@@ -67,7 +67,7 @@ void FUN_0020d3d4(BtlDebugMenuLists *menu)
         if (entry->kind == 2) {
             continue;
         }
-        if (entry->kind != 6 && entry->kind != 8 && entry->kind == 9 && FUN_002b24fc() == 0) {
+        if (entry->kind != 6 && entry->kind != 8 && entry->kind == 9 && btlListIsKind9Available() == 0) {
             continue;
         }
         if ((entry->flags & 1) != 0 && btlIsDefeatSuppressed() != 0) {

@@ -8,6 +8,7 @@
 struct ScriptProcess;
 #include "gamedata/GameSaveDataA.h"
 #include "camp/CampCec/CecProfile.h"
+#include "camp/CampCec/CampCecEditList.h"
 #include <stddef.h>
 
 /* A menu object; only the fields the helpers touch are named. */
@@ -119,7 +120,10 @@ typedef struct PlayerSummary {
     /* 0x00 */ u16 stats[7];
     /* 0x0E */ u16 name[9];
     /* 0x20 */ u8 unk20;
-    /* 0x21 */ u8 unk21[0x7];
+    /* 0x21 */ u8 unk21;
+    /* 0x22 */ u8 portrait;              /* portrait image index */
+    /* 0x23 */ u8 title;                 /* index of the earned title shown on the card */
+    /* 0x24 */ u32 message;              /* id of the greeting message */
     /* 0x28 */ u32 unk28;
     /* 0x2C */ u8 unk2C[0x4];
     /* 0x30 */ u32 unk30;
@@ -128,15 +132,31 @@ typedef struct PlayerSummary {
     /* 0x38 */ s16 unk38;
     /* 0x3A */ s16 unk3A;
     /* 0x3C */ s16 unk3C[3];
-    /* 0x42 */ u8 unk42[0x2];
+    /* 0x42 */ u8 pose;                  /* the status scene's controller preset */
+    /* 0x43 */ u8 unk43;
     /* 0x44 */ s16 unk44;
 } PlayerSummary;
+typedef char PlayerSummaryCardOffsets[
+    offsetof(PlayerSummary, portrait) == 0x22 && offsetof(PlayerSummary, title) == 0x23 &&
+    offsetof(PlayerSummary, message) == 0x24 && offsetof(PlayerSummary, unk28) == 0x28 &&
+    offsetof(PlayerSummary, pose) == 0x42 && offsetof(PlayerSummary, unk44) == 0x44 ? 1 : -1];
+
+/* What the edit screen's choice list is changing (StateAtF4::editItem). */
+enum {
+    CEC_EDIT_ITEM_PORTRAIT = 1,
+    CEC_EDIT_ITEM_TITLE = 2,
+    CEC_EDIT_ITEM_POSE = 5,
+    CEC_EDIT_ITEM_MESSAGE = 7
+};
 
 typedef struct StateAtF4 {
     /* 0x00 */ u32 job;
     /* 0x04 */ u32 unk04;
-    /* 0x08 */ u16 *unk08;
-    /* 0x0C */ u32 *unk0C;
+    union {
+        /* 0x08 */ u16 *unk08;
+        /* 0x08 */ PlayerSummary *record; /* the StreetPass card being edited */
+    };
+    /* 0x0C */ u32 *infoPanel;           /* the character info panel (characterInfoPanelPopulate) */
     union {
         /* 0x10 */ u8 unk10[0x14];
         /* 0x10 */ u8 panels[2][0x14];   /* two 0x14-byte records, cleared on creation; [1] starts with `image` */
@@ -151,12 +171,14 @@ typedef struct StateAtF4 {
             /* 0x38 */ f32 alpha;
             /* 0x3C */ s32 x;            /* 30 on creation */
             /* 0x40 */ s32 y;
+            /* 0x44 */ s32 frame;        /* frames into the slide and fade */
+            /* 0x48 */ s8 done;          /* the slide and fade finished */
         } cursor;                        /* the third 0x14-byte record (FUN_002e1d1c draws it) */
     };
     /* 0x4C */ ScriptProcess *scriptProcess;
     /* 0x50 */ void *buf50;
     /* 0x54 */ void *buf54;
-    /* 0x58 */ void *unk58;
+    /* 0x58 */ void *messages;           /* camp/CecEdit_one_msg.mbm */
     /* 0x5C */ u32 unk5C;
     union {
         /* 0x60 */ u8 unk60[0x94];
@@ -174,8 +196,8 @@ typedef struct StateAtF4 {
     };
     /* 0xF4 */ s32 mode;
     /* 0xF8 */ s32 phase;
-    /* 0x0FC */ s32 unk0FC;              /* -1 on creation */
-    /* 0x100 */ s32 unk100;
+    /* 0x0FC */ s32 followingPhase;      /* the phase after `phase`; -1 on creation */
+    /* 0x100 */ s32 touchFrames;         /* frames the stylus has stayed on a list row */
     /* 0x104 */ s32 activeMemberCount;   /* party members with neither ailment bit 10 nor bit 1 */
     /* 0x108 */ s16 unk108;              /* the saved record's value (save body + 0x27E0C), twice */
     /* 0x10A */ s16 unk10A;
@@ -186,34 +208,40 @@ typedef struct StateAtF4 {
     /* 0x110 */ u8 unk110[2];
     /* 0x112 */ u8 unk112;               /* 1 on creation */
     /* 0x113 */ u8 openMode;             /* the argument the screen was created with */
-    /* 0x114 */ u8 unk114;
+    /* 0x114 */ u8 listCancelled;        /* the choice list was left without choosing */
     /* 0x115 */ u8 unk115[3];
-    /* 0x118 */ s32 unk118;
-    /* 0x11C */ u8 unk11C[4];
-    /* 0x120 */ s32 unk120;
-    /* 0x124 */ s32 unk124;              /* 32 on creation */
-    /* 0x128 */ s32 unk128;
+    /* 0x118 */ s32 listIndex;           /* the choice list's position among all its items */
+    /* 0x11C */ u32 touchFlags;          /* CEC_EDIT_TOUCH_* */
+    /* 0x120 */ s32 listTop;             /* the first item shown */
+    /* 0x124 */ s32 listCount;           /* 32 on creation */
+    /* 0x128 */ s32 listRow;             /* the selected row, counted from listTop */
     /* 0x12C */ u8 unk12C;
-    /* 0x12D */ u8 unk12D;
+    /* 0x12D */ u8 listActive;           /* the choice list is taking input */
     /* 0x12E */ u8 unk12E[2];
-    /* 0x130 */ s32 unk130;              /* -56 on creation */
-    /* 0x134 */ s32 unk134;
-    /* 0x138 */ u8 unk138[4];
-    /* 0x13C */ s32 unk13C;
-    /* 0x140 */ s32 unk140;
-    /* 0x144 */ s32 unk144;
+    /* 0x130 */ s32 tickerX;             /* moves 8 a frame from -56 to 280 and wraps; -56 on creation */
+    /* 0x134 */ s32 messageBase;         /* id of the first greeting message in the list */
+    /* 0x138 */ u8 rowTouched;           /* the stylus is on a list row this frame */
+    /* 0x139 */ u8 unk139[3];
+    /* 0x13C */ s32 arrowHoldFrames;     /* frames the stylus has stayed on an arrow or the scroll bar */
+    /* 0x140 */ s32 touchX;              /* where the stylus went down */
+    /* 0x144 */ s32 touchY;
     /* 0x148 */ s32 unk148;              /* -1 on creation */
-    /* 0x14C */ u32 unk14C;
+    /* 0x14C */ u32 editItem;            /* CEC_EDIT_ITEM_* */
     /* 0x150 */ s32 frameCounter;
     /* 0x154 */ u8 unk154;               /* 1 on creation */
-    /* 0x155 */ u8 unk155[0x17];
+    /* 0x155 */ u8 unk155[3];
+    /* 0x158 */ s32 savedTitle;          /* the card's values when the list opened, restored on cancel */
+    /* 0x15C */ s32 savedMessage;
+    /* 0x160 */ s32 savedPose;
+    /* 0x164 */ u8 unk164[4];
+    /* 0x168 */ s32 savedPortrait;
     /* 0x16C */ u8 unk16C[0xE];          /* the player's equipment when the screen opened */
     /* 0x17A */ CecProfile profile;      /* the edited record's profile (its first 14 bytes) while the screen is open */
     /* 0x188 */ u8 outfitSelectionActive;
     /* 0x189 */ u8 unk189;
     /* 0x18A */ u8 unk18A[2];
     /* 0x18C */ u32 unk18C;
-    /* 0x190 */ u8 unk190[4];
+    /* 0x190 */ s32 stillFrames;         /* frames since the list position last changed */
     /* 0x194 */ u8 unk194;
     /* 0x195 */ u8 unk195[3];
 } StateAtF4;   /* 0x198 bytes, as campCecEditCreate allocates it */
@@ -236,6 +264,11 @@ typedef struct FlagAt4 {
 
 typedef char CampCecEditALayoutCheck[sizeof(StateAtF4) == 0x198 ? 1 : -1];
 
-typedef char CampCecEditAOffsets[offsetof(StateAtF4, second.image) == 0x24 && offsetof(StateAtF4, imageActive) == 0x10E && offsetof(StateAtF4, unk10F) == 0x10F && offsetof(StateAtF4, unk14C) == 0x14C ? 1 : -1];
+typedef char CampCecEditAOffsets[offsetof(StateAtF4, second.image) == 0x24 && offsetof(StateAtF4, imageActive) == 0x10E && offsetof(StateAtF4, unk10F) == 0x10F && offsetof(StateAtF4, editItem) == 0x14C ? 1 : -1];
+typedef char CampCecEditAListOffsets[offsetof(StateAtF4, record) == 8 && offsetof(StateAtF4, cursor.done) == 0x48 &&
+    offsetof(StateAtF4, touchFlags) == 0x11C && offsetof(StateAtF4, listRow) == 0x128 &&
+    offsetof(StateAtF4, rowTouched) == 0x138 && offsetof(StateAtF4, touchY) == 0x144 &&
+    offsetof(StateAtF4, savedTitle) == 0x158 && offsetof(StateAtF4, savedPortrait) == 0x168 &&
+    offsetof(StateAtF4, unk16C) == 0x16C && offsetof(StateAtF4, stillFrames) == 0x190 ? 1 : -1];
 
 #endif

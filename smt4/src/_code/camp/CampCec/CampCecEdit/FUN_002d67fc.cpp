@@ -39,7 +39,7 @@ extern int campCecEditMessageState(...); /* 0x2d6d44 */
 extern int FUN_002e1744(...); /* 0x2e1744 */
 extern int FUN_002ec514(...); /* 0x2ec514 */
 extern int FUN_002fc7a0(...); /* 0x2fc7a0 */
-extern int FUN_003172e0(...); /* 0x3172e0 */
+extern int campCecEditChoiceListState(...); /* 0x3172e0 */
 extern int FUN_00321af0(...); /* 0x321af0 */
 extern unsigned int *g_campCecEdit; /* 0x43dad0 */
 
@@ -120,7 +120,7 @@ void FUN_002d67fc(unsigned char param_1)
   puVar1[0x31] = (unsigned int)FUN_002fc7a0;
   puVar1[0x32] = (unsigned int)FUN_002ec514;
   puVar1[0x35] = (unsigned int)&recordQueryModeZero;
-  puVar1[0x33] = (unsigned int)FUN_003172e0;
+  puVar1[0x33] = (unsigned int)campCecEditChoiceListState;
   puVar1[0x34] = (unsigned int)FUN_00321af0;
   puVar1[0x56] = 0;
   puVar1[0x37] = 1;

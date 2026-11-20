@@ -1,4 +1,5 @@
-/* NON_MATCHING: real fade-animation speed getter recovered; effect/draw VFP argument placement and render-state pop bookkeeping differ. */
+/* NON_MATCHING: only the two pops' base differs: retail loads g_titleScene into r0 and builds the stack address in r4
+ * (add r4, r0, #4096), the build loads it into r4 directly. */
 #include "common.h"
 #include "gfx/ColoredQuad.h"
 #include "camp/RenderCtx.h"
@@ -44,10 +45,10 @@ void FUN_003844a0(TitleOverlay *overlay)
         f32 preset = (f32)asdGxPresetsGetByKind(renderCtxGetStereoMode(g_titleScene));
         f32 factor = (f32)asdGxPresetsGetHeightByKind(renderCtxGetStereoMode(g_titleScene));
         gxSubmitDrawZeroExtraParams(0.0f, 0.0f, factor, preset, alpha, alpha, alpha, 0.0f, alpha);
-        renderStackPop(&g_titleScene->stackA);
+        renderStackPopChecked(&g_titleScene->stackA);
     }
     FUN_0038368c(overlay);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPopChecked(&g_titleScene->stackA);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     renderCtxApplyTransforms(g_titleScene);

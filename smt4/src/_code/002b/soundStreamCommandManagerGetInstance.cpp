@@ -1,28 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `soundStreamCommandManagerGetInstance` (_code @ 0x2bae7c, 0x48 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only names differ. The code is identical, but the constructor and destructor are still named
+ * FUN_00140ee4 and FUN_0014dc7c (the C1/D1 of nw::snd::internal::DriverCommandManager, see
+ * soundRequestQueueGetInstance), and the guard (0x472344, inside _ZTV9Obj472300's 0x60 bytes) and the instance
+ * (DAT_004e9fd8) are not named after the static. */
+/* The two driver command queue singletons were defined in one file: this function reaches its guard as the
+ * second word of the file's data, after soundRequestQueueGetInstance's guard (0x472340), so the file's first
+ * function is compiled here too (the build keeps only this unit's function). */
+#include "common.h"
 
-extern "C" {
+namespace nw {
+namespace snd {
+namespace internal {
 
-int FUN_00140ee4(unsigned char *);
+/* The sound driver's command queue (0x190 bytes as FUN_00140ee4 constructs it). */
+class DriverCommandManager {
+public:
+    DriverCommandManager();
+    ~DriverCommandManager();
 
-extern unsigned int DAT_00472344; /* 0x472344 */
-extern unsigned char DAT_004e9fd8; /* 0x4e9fd8 */
+private:
+    u8 unk00[0x190];
+};
 
-/* Supplied declaration required: FUN_00140ee4. */
-extern int __cxa_guard_acquire(unsigned int *);
+} // namespace internal
+} // namespace snd
+} // namespace nw
 
-
-unsigned char * soundStreamCommandManagerGetInstance(void)
-
+/* Returns the driver command queue singleton, constructing it on first use. */
+extern "C" nw::snd::internal::DriverCommandManager *soundRequestQueueGetInstance(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  if (((DAT_00472344 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00472344), temp_v0 != 0)) {
-    FUN_00140ee4(&DAT_004e9fd8);
-  }
-  return &DAT_004e9fd8;
+    static nw::snd::internal::DriverCommandManager instance;
+
+    return &instance;
 }
 
-} /* extern "C" */
+/* Returns the stream command queue singleton, a second DriverCommandManager, constructing it on first use. */
+extern "C" nw::snd::internal::DriverCommandManager *soundStreamCommandManagerGetInstance(void)
+{
+    static nw::snd::internal::DriverCommandManager instance;
+
+    return &instance;
+}

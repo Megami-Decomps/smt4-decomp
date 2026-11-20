@@ -1,4 +1,6 @@
-/* NON_MATCHING: marker-ring draw split from FUN_0041c108 (+0xcc); identical code except the VFP register allocation of the slot position conversion (retail converts x with s0, the build with s1 and reloads). */
+/* NON_MATCHING: marker-ring draw split from FUN_0041c108 (+0xcc); with the pop through renderStackPopChecked the only
+ * difference left is the pop's base: retail loads g_renderCtx into r0 and builds the stack address in r4 (add r4, r0, ...),
+ * the build loads it into r4 directly. */
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
@@ -47,7 +49,7 @@ void FUN_0041c1d4(MarkerRing *ring)
     texDrawTableEntryAtStoredOrigin(2, 43, 96, (s32)positions[second][0], (s32)positions[second][1], 211);
     texDrawTableEntryAtStoredOrigin(2, 43, 97, (s32)positions[third][0], (s32)positions[third][1], 211);
     texDrawTableEntryAtStoredOrigin(2, 43, 96, (s32)positions[fourth][0], (s32)positions[fourth][1], 211);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPopChecked(&g_renderCtx->stackA);
     efctSetSpeed(1.0f);
 }
 }

@@ -864,8 +864,8 @@ typedef char TextureDrawRequestPrefixIVLayoutCheck[
 
 /* The reset-able values of a save/load screen transition. */
 struct SaveLoadTransitionValues {
-    /* 0x0 */ u32 value0;
-    /* 0x4 */ u32 value1;
+    /* 0x0 */ __packed u64 values; /* one 64-bit value: every reset clears it with one 64-bit store (stm of two zero
+                                    * registers); packed because the record puts it at 0x6ec, only 4-aligned */
     /* 0x8 */ f32 progress;
 };
 
@@ -893,7 +893,10 @@ struct SaveLoadUiSharedPrefixA {
     /* 0x00 */ u8 unk00[2];
     /* 0x02 */ u8 setFlag470;      /* a finished save sets game flag 0x470 */
     /* 0x03 */ u8 setFlag471;      /* a finished save sets game flag 0x471 */
-    /* 0x04 */ u8 unk04[0x10];
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ void *gameDataBackup;
+    /* 0x0C */ void *configBackup;
+    /* 0x10 */ void *saveDataBackup;
     /* 0x14 */ u32 selectedValue;  /* the slot the screen ended on */
 };
 
@@ -908,11 +911,13 @@ typedef char SaveLoadTransitionPrefixATailCheck[
     offsetof(SaveLoadTransitionPrefixA, selectedValue) == 0x2F8 &&
     offsetof(SaveLoadTransitionPrefixA, transitionCounter) == 0x620 &&
     offsetof(SaveLoadTransitionPrefixA, transition) == 0x6EC &&
-    offsetof(SaveLoadTransitionPrefixA, transition.value1) == 0x6F0 &&
-    offsetof(SaveLoadTransitionPrefixA, transition.progress) == 0x6F4 &&
+        offsetof(SaveLoadTransitionPrefixA, transition.progress) == 0x6F4 &&
     sizeof(SaveLoadTransitionPrefixA) == 0x6F8 ? 1 : -1];
 typedef char SaveLoadUiSharedPrefixACheck[
     offsetof(SaveLoadUiSharedPrefixA, setFlag470) == 2 &&
+    offsetof(SaveLoadUiSharedPrefixA, gameDataBackup) == 0x08 &&
+    offsetof(SaveLoadUiSharedPrefixA, configBackup) == 0x0C &&
+    offsetof(SaveLoadUiSharedPrefixA, saveDataBackup) == 0x10 &&
     offsetof(SaveLoadUiSharedPrefixA, selectedValue) == 0x14 &&
     sizeof(SaveLoadUiSharedPrefixA) == 0x18 ? 1 : -1];
 

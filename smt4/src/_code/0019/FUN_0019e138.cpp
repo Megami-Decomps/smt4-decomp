@@ -54,7 +54,7 @@ int FUN_0033c6f8(...);
 
 int FUN_0017fbc4(void);
 int FUN_0019a4f4(unsigned int);
-int FUN_001f53d0(unsigned int);
+int spriteRowListUpdate(unsigned int);
 int objStartTimerIfIdle(unsigned int);
 int FUN_00205cc8(unsigned int);
 int FUN_00206b80(unsigned int);
@@ -97,7 +97,7 @@ extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: FUN_0019a4f4. */
 /* Supplied declaration required: FUN_001ed64c. */
 /* Supplied declaration required: FUN_001f4f14. */
-/* Supplied declaration required: FUN_001f53d0. */
+/* Supplied declaration required: spriteRowListUpdate. */
 /* Supplied declaration required: objStartTimerIfIdle. */
 /* Supplied declaration required: messageMainApplyClose. */
 /* Supplied declaration required: FUN_00205cc8. */
@@ -234,7 +234,7 @@ int FUN_0019e138(unsigned int job)
     return 0;
   }
   FUN_00206b80(temp_v0 + 0x2200);
-  FUN_001f53d0(temp_v0 + 8);
+  spriteRowListUpdate(temp_v0 + 8);
   FUN_0019a4f4(temp_v0 + 0x2460);
   FUN_00205cc8(temp_v0);
   if ((*(char *)(temp_v0 + 0xc9d8) != '\0') &&

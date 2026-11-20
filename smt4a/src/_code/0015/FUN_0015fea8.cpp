@@ -16,7 +16,7 @@ static __inline u32 alignSoundPoolBytes(u32 size)
 extern "C" {
 u32 FUN_00194fd8(SoundArchiveWrapper *archive);
 s32 FUN_00178458(SoundArchiveWrapper *archive, u32 playerId, ArchivePlayerInfo *info);
-s32 nw_snd_SoundArchive_ReadSoundArchivePlayerInfo(SoundArchiveWrapper *archive, ArchivePoolCounts *counts);
+s32 nw_snd_SoundArchive_ReadSoundArchivePlayerInfo(SoundArchiveWrapper *archive, ArchivePoolCountsA *counts);
 
 // Include player heaps, the per-sound pools and optional caller data in the required buffer size.
 u32 FUN_0015fea8(void *, SoundArchiveWrapper *archive, u32 userDataSize)
@@ -30,7 +30,7 @@ u32 FUN_0015fea8(void *, SoundArchiveWrapper *archive, u32 userDataSize)
             size += player.playableSoundMax * (alignSoundPoolBytes(player.playerHeapSize) + 0x40);
         ++index;
     }
-    ArchivePoolCounts counts;
+    ArchivePoolCountsA counts;
     if (nw_snd_SoundArchive_ReadSoundArchivePlayerInfo(archive, &counts) != 0) {
         size += alignSoundPoolBytes(counts.firstCount * 0x2D8);
         size += alignSoundPoolBytes(counts.firstCount * 0x88);

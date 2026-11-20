@@ -1,7 +1,11 @@
-/* NON_MATCHING: default-result construction retains a zero register instead of recovering the owner from its member constructor. */
+/* NON_MATCHING: retail inlines the body of WindowOperationResult(u8) (status, the default WindowStatusResult, zeroed
+ * words, then result = WindowStatusResult(0)), which the build only sees out of line; with that body visible inline
+ * the diff falls from 35 to 12 lines (the zero and the member pointer swap r0/r1). */
 #include "classes/WindowOperation.h"
 
 extern "C" {
+/* One-instruction getter (armlink inlines it): the request's content index. */
+u16 contentIndexGetValue(const u16 *index);
 s32 objGetFlagBit0(const WindowOperationRequest *request);
 WindowOperationResult aocFileContentPrepareMountBuffer(WindowOperationState *state, u32 id);
 
@@ -14,6 +18,6 @@ WindowOperationResult FUN_0047402c(WindowOperationState *state,
     state->request = *request;
     if (!objGetFlagBit0(&state->request))
         return result;
-    return aocFileContentPrepareMountBuffer(state, request->id);
+    return aocFileContentPrepareMountBuffer(state, contentIndexGetValue(&request->id));
 }
 }
