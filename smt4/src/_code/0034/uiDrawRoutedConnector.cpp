@@ -5,7 +5,7 @@
 #include "camp/RenderCtxTitle.h"
 
 extern "C" {
-void FUN_002d5900(u32 firstColor, u32 secondColor, f32 startX, f32 startY,
+void uiDrawSegmentStrip(u32 firstColor, u32 secondColor, f32 startX, f32 startY,
                   f32 endX, f32 endY, f32 opacity, f32 width);
 
 // Draw a two-segment connector with a clamped diagonal and a horizontal end segment.
@@ -38,9 +38,9 @@ void uiDrawRoutedConnector(const RoutedConnectorState* state, const f32* start, 
     }
     f32 joinX = pixelOffset + bendX;
     f32 joinY = pixelOffsetY + bendY;
-    FUN_002d5900(color, color, start[0], start[1], bendX, bendY,
+    uiDrawSegmentStrip(color, color, start[0], start[1], bendX, bendY,
                   (256 - fade) * (1.0f / 256.0f), 1.0f);
-    FUN_002d5900(color, color, joinX, joinY, end[0], end[1],
+    uiDrawSegmentStrip(color, color, joinX, joinY, end[0], end[1],
                   (256 - fade) * (1.0f / 256.0f), 1.0f);
 }
 }

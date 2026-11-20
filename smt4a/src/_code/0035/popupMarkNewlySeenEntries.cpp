@@ -1,4 +1,5 @@
-/* NON_MATCHING: both the byte index and bit mask now use retail's saved registers, but retail folds the byte-index shift into the address and uses post-increment popup stores. */
+/* NON_MATCHING: the bit test now matches (index and mask written at each use, as smt4 FUN_002dfefc); retail picks r2 for the
+ * remainder and fills the popup with post-increment stores. */
 #include "runtime/Stdio.h"
 #include "gamedata/MapSaveBlockA.h"
 #include "game/GameStateA.h"
@@ -24,14 +25,11 @@ void popupMarkNewlySeenEntries(int popupOpen)
     marked = 0;
     for (id = 1; id < 0x8D; id++) {
         MapSaveBlockA *block = gameFlagsGetBlock();
-        s32 byte = (s32)id / 8;
-        int mask = 1 << ((int)id % 8);
-
-        if ((block->discoveredApps[byte] & mask) == 0) {
+        if ((block->discoveredApps[(s32)id / 8] & (1 << ((s32)id % 8))) == 0) {
             if ((int)gameDataFlagTestBit(id) != 0) {
-                gameFlagsGetBlock()->discoveredApps[byte] |= mask;
+                gameFlagsGetBlock()->discoveredApps[(s32)id / 8] |= 1 << ((s32)id % 8);
             } else if (shopGetEntryAvailability(id) != 2) {
-                gameFlagsGetBlock()->discoveredApps[byte] |= mask;
+                gameFlagsGetBlock()->discoveredApps[(s32)id / 8] |= 1 << ((s32)id % 8);
                 marked = 1;
             }
         }

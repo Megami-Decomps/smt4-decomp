@@ -8,7 +8,7 @@ extern "C" {
 
 
 void messageVoiceFlagsGet(void);
-void FUN_002dfefc(s32 arg);
+void popupMarkNewlySeenEntries(s32 arg);
 s32 gameFlagIsSet(u32 id);
 
 
@@ -21,7 +21,7 @@ void FUN_001d34a8(s32 a, s32 b)
     g_mapIfTimer->unk08 = a;
     extra->unk0C = b;
     if (g_gameState.inputBlocked == 0 && gameFlagIsSet(0x16) != 0 && g_mapIfTimer->state == 0) {
-        FUN_002dfefc(0);
+        popupMarkNewlySeenEntries(0);
     }
 }
 

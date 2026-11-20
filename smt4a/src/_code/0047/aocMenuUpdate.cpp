@@ -1,5 +1,4 @@
 #include "ui/UiControl.h"
-/* NON_MATCHING: register allocation of the fast-tick modulo only (retail keeps tick+1 in r2 and the smlal high word in r1; here they swap); a `s32 tick = fastTick + 1;` temporary reproduces it but is steering. */
 #include "addon/aocMain.h"
 #include "classes/AocMenu.h"
 #include "addon/AocSystemSmt4a.h"
@@ -55,20 +54,14 @@ void aocMenuUpdate(AocMenu *scene)
             aocClearDisplayFlag(g_aocSystem);
             aocReleasePackageOwner(g_aocSystem);
         }
-        scene->step = 17;
-        scene->substep = 0;
-        if (scene->window != NULL) {
-            delete scene->window;
-            scene->window = NULL;
-        }
+        aocMenuChangeStep(scene, 17);
         return;
     }
     for (s32 index = 0; index < 25; index++) {
         uiSpriteAdvanceAnimation(reinterpret_cast<UiSpriteState *>(scene->animated.effects[index]), 1.0f);
     }
-    ++scene->animated.slowTick;
-    scene->animated.slowTick = static_cast<s32>(scene->animated.slowTick) % 20;
-    scene->animated.fastTick = (static_cast<s32>(scene->animated.fastTick) + 1) % 30;
+    scene->animated.slowTick = (scene->animated.slowTick + 1) % 20;
+    scene->animated.fastTick = (scene->animated.fastTick + 1) % 30;
     if (scene->stepDispatch.flat[scene->step] != NULL) {
         (scene->*scene->stepDispatch.flat[scene->step])();
     }

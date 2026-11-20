@@ -4,6 +4,7 @@
 #define S2_MOVIE_SYNC_H
 
 #include "common.h"
+#include <stddef.h>
 
 #define MOVIE_SYNC_STREAMS 2
 #define MOVIE_SYNC_RING_SIZE 16
@@ -16,6 +17,22 @@ typedef struct MovieSyncEntry {
 } MovieSyncEntry;
 
 class MovieSyncSource;
+
+class MovieOutputBuffers {
+public:
+    virtual void unk00() = 0;
+    virtual void unk04() = 0;
+    virtual void *getBuffer(s32 index) = 0;
+    virtual u32 getBufferSize(s32 index) = 0;
+};
+
+/* The output queue's stream format and buffer provider. */
+struct MovieOutputQueue {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 format;
+    /* 0x05 */ u8 unk05[0x5f];
+    /* 0x64 */ MovieOutputBuffers *buffers;
+};
 
 typedef struct MovieSync {
     /* 0x000 */ u8 unk000[0xc];
@@ -32,6 +49,7 @@ typedef struct MovieSync {
     /* 0x150 */ u8 unk150[8];
     union {
         /* 0x158 */ u8 queue[0x1b4];       /* pending-message queue */
+        /* 0x158 */ MovieOutputQueue output;
         struct {
             union {
                 u8 unk158[0x194];
@@ -52,6 +70,9 @@ typedef struct MovieSync {
     /* 0x474 */ s32 limit[MOVIE_SYNC_STREAMS];      /* ring slots written so far */
     /* 0x47c */ s32 readPos[MOVIE_SYNC_STREAMS];    /* ring slots consumed so far */
 } MovieSync;
+
+typedef char MovieOutputQueueOffsets[offsetof(MovieSync, output.format) == 0x15c &&
+    offsetof(MovieSync, output.buffers) == 0x1bc ? 1 : -1];
 
 /* Ring slots the current entry of `index` consumes (0 when there is none to look at). */
 static __inline s32 movieSyncEntrySlots(MovieSync *sync, s32 entryIndex)

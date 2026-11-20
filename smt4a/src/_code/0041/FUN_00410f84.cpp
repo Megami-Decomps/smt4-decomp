@@ -73,7 +73,7 @@ BattleUnitBlock *btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
 u32 partyFindActiveRecordById(u32 id);
 u32 saveSlotFindSelected(void);
 s32 btlUnitStateInitFromRecord(BtlMainView *mainState, void *unit, u32 record, s32 flag);
-s32 FUN_004fe7e4(s32 a, s32 b, s32 c);
+s32 btlReflectQueuePendingRosterFade(s32 a, s32 b, s32 c);
 s32 FUN_003f14a0(BtlMainView *mainState);
 u32 partyGetSlotPreferredFirst(u32 index);
 s32 FUN_004fef44(s32 a, s32 b, s32 c);
@@ -137,7 +137,7 @@ void FUN_00410f84(StageState *state)
         block->activeRecord = record;
         mainState->activeRecord = record;
         FUN_004fea10(0, 0, 1);
-        FUN_004fe7e4(0, 0, 1);
+        btlReflectQueuePendingRosterFade(0, 0, 1);
         FUN_003f14a0(mainState);
         return;
     }
@@ -167,7 +167,7 @@ void FUN_00410f84(StageState *state)
             block->totalB = 999;
         }
         FUN_004fea10(0, 0, 1);
-        FUN_004fe7e4(0, 0, 1);
+        btlReflectQueuePendingRosterFade(0, 0, 1);
         FUN_003f14a0(mainState);
         FUN_004fef44(0, 0, 0);
         return;

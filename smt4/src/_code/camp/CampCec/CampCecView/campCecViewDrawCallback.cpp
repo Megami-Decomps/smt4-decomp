@@ -1,4 +1,5 @@
-/* NON_MATCHING: canonical renderCtxPushA wrapper is used; cached-stack push registers, paired selection/footer loads, and saved boolean registers still differ. */
+/* NON_MATCHING: 40 lines: the two row flags swap r8/r9, the footer call loads selected/first with ldm (retail: three
+ * ldr and an stm of the last two), and retail pools g_titleScene before g_campCecView. */
 #include "camp/CampCec/CampCecView.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxTitle.h"
@@ -45,8 +46,7 @@ u32 campCecViewDrawCallback()
     CampCecView *view = g_campCecView;
     CecViewDrawFields *fields = reinterpret_cast<CecViewDrawFields *>(view);
     renderCtxSelectStereoLayout(g_titleScene);
-    RenderCtx *context = g_titleScene;
-    renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
+    renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
     u32 headerValue = FUN_0025981c();
     uiDrawPanelWithValue(&fields->widgets[0], 0, 0, headerValue, 0);
     for (s32 row = 0; row < 3; ++row) {

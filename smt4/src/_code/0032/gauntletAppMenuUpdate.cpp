@@ -53,7 +53,7 @@ u8 sys43e188GetState(void);
 u32 messageMainGetChoiceResult(void);
 void gauntletAppSortMenuEntries(void);
 void scrollOwnerSetValue(void *list, s32 value);
-void FUN_002dfefc(s32 suppressNotification);
+void popupMarkNewlySeenEntries(s32 suppressNotification);
 void FUN_0029ede8(s32 index, u32 first, u32 second, u32 third); // declcheck: local (bible/bibleDevil.h redeclares asdMemoryAlloc against AsdSoundSystem.h)
 
 /* One of the menu's sprites (0: the frame, 3: the purchase mark). */
@@ -314,7 +314,7 @@ s32 gauntletAppMenuUpdate(void)
     case 7:
         /* Sliding out. */
         if (uiSpriteAdvanceAnimation(gauntletSprite(menu, 0))) {
-            FUN_002dfefc(1);
+            popupMarkNewlySeenEntries(1);
             return -1;
         }
         break;

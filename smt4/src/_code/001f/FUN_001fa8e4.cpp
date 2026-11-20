@@ -14,7 +14,7 @@ int mapEnemyAdvancePursuit(void);
 int CONCAT44(...);
 float mathSnapHeading16(float angle);
 float calcHeadingRoundedTo32Directions(float angle);
-int FUN_001e2be4(void);
+int mapIdleHintStep(void);
 int FUN_002562e4(int, int);
 int partyApplyNonlethalAilmentDamage(int, int);
 int mapProjectPositionToGround(int, int);
@@ -56,7 +56,7 @@ extern int DAT_0049fd04; /* 0x49fd04 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Supplied declaration required: FUN_001e2be4. */
+/* Supplied declaration required: mapIdleHintStep. */
 /* Supplied declaration required: FUN_001f9188. */
 /* Supplied declaration required: FUN_002562e4. */
 /* Supplied declaration required: partyApplyNonlethalAilmentDamage. */
@@ -229,7 +229,7 @@ void FUN_001fa8e4(void)
       *(unsigned char *)(temp_v8 + 0x10) = 0;
       if ((*(int *)(temp_v2 + 0xd98) == 0) &&
          (temp_v8 = *(int *)(temp_v2 + 0xd94) + 1, *(int *)(temp_v2 + 0xd94) = temp_v8, temp_v8 >= 901)) {
-        FUN_001e2be4();
+        mapIdleHintStep();
         *(unsigned int *)(temp_v2 + 0xd98) = 0xe10;
         *(unsigned int *)(temp_v2 + 0xd94) = 0;
       }

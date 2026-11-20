@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
+#include "gamedata/GameSaveBlocks.h"
 
 extern "C" {
 
@@ -42,7 +43,6 @@ extern int partyFindSlotById(unsigned int);
 extern unsigned int configGetSettings(void);
 extern int lazyScriptTaskStep(void);
 extern unsigned int *gameDataGetExtraBlock(void);
-extern unsigned int gameDataBlocksGetTable(void);
 /* Supplied declaration required: FUN_00268250. */
 /* Supplied declaration required: clockRecordStartSeconds. */
 /* Supplied declaration required: gameApplyFlagTriggers. */

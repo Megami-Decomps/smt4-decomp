@@ -1,4 +1,4 @@
-/* NON_MATCHING: BLOCKED: factory for the 0x14D0-byte MoLive movie object: needs the allocator-interface class at DAT_00557da8 and the full movie class (MoLivePlayer plus its secondary vtable at _ZTV9Obj557b68 + 0x18); _ZN12MoLivePlayerC1EPN6MoLive9AllocatorEj (its constructor) and FUN_004af258 are not yet C++ members. */
+/* NON_MATCHING: BLOCKED: factory for the 0x14D0-byte MoLive movie object: needs the allocator-interface class at DAT_00557da8 and the full movie class (MoLivePlayer plus its secondary vtable at _ZTV9Obj557b68 + 0x18); _ZN12MoLivePlayerC1EPN6MoLive9AllocatorEj (its constructor) and moLivePlayerSetWorker are not yet C++ members. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -10,7 +10,7 @@ extern unsigned char DAT_00557b80; /* 0x557b80 */
 extern romwright_code *DAT_00589530; /* 0x589530 */
 extern romwright_code *DAT_00589534; /* 0x589534 */
 
-extern int FUN_004af258(int, int);
+extern int moLivePlayerSetWorker(int, int);
 extern int _ZN12MoLivePlayerC1EPN6MoLive9AllocatorEj(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004afd38. */
 
@@ -52,7 +52,7 @@ unsigned int FUN_00513d64(romwright_code *param_1,unsigned int param_2,unsigned 
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0x14c8) = param_2;
       *(unsigned int *)(puVar2[1] + 0x14c4) = param_3;
-      temp_v1 = FUN_004af258(puVar2[1],puVar2[1] + 0x14c0);
+      temp_v1 = moLivePlayerSetWorker(puVar2[1],puVar2[1] + 0x14c0);
       if (temp_v1 == 0) {
         *(unsigned int **)param_1 = puVar2;
         return 0;

@@ -21,7 +21,7 @@ extern SessionHooks DAT_0044e990;
 extern const u8 DAT_00420740[];       /* vtable of the session object (_ZTV9Obj420738 + 8) */
 extern const u8 DAT_0042091c[];       /* vtable of the owner object (_ZTV9Obj42091c) */
 u8 *FUN_003b3030(void *storage, void *owner, u32 unk);
-s32 FUN_003b21e4(u8 *session, u8 *callbackTable);
+s32 moLivePlayerSetWorker(u8 *session, u8 *callbackTable);
 void FUN_003b3160(u8 *session);
 
 /* Maps the session setup's error code to the public result code. */
@@ -71,7 +71,7 @@ u32 FUN_003f66f0(SessionHandle **handle, u32 callback, u32 userData)
         if (session != NULL) {
             *(u32 *)(session + 0x1494) = callback;
             *(u32 *)(created->session + 0x1490) = userData;
-            s32 error = FUN_003b21e4(created->session, created->session + 0x148c);
+            s32 error = moLivePlayerSetWorker(created->session, created->session + 0x148c);
             if (error == 0) {
                 *handle = created;
                 return 0;

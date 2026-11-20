@@ -8471,3 +8471,24 @@
 002ba870 btlDebugDrawUpper evidence registrar label "btlDebug DrawUp"
 00420b70 saveLoadUiReleaseResources inferred releases the save/load UI's buffers, scripts, textures, touch regions and global state
 0041de6c saveLoadUiConfirmSave inferred runs the save confirmation: writes the menu's working copies back, starts the save, then shows the saved slot's header
+0020d934 partyPanelShowButtonHelp inferred Apocalypse's party panel button help: the same switch as smt4 FUN_0026c868 plus the selected fusion's flag lines
+004743e4 aocPackageAllRequestedFilesReady inferred exact twin of smt4 0x38ba40
+0036be10 spatialSoundActorStop inferred twin of smt4 0x2ebdd8
+0036b004 mapSnapshotCurrentAndTarget inferred saves the current map, area, object and position as the return point and sets the target to the current map
+00371f3c mapFindEligibleGroupIndex inferred first map-group record whose required/blocked flags and progress bounds hold, or -1
+002f72dc mapGetSelectedGroupName inferred cached or first eligible map-group record's name, or "NoGroup"
+003b5064 mapRestoreSavedSelection inferred restores g_mapSelection from the map save block by its resume mode (0-3)
+003bcb64 scrChooseRecruitmentCandidate inferred script result: a random eligible recruitment target (masks, stock and compendium gates, second pass at 10%), or -1
+0023fc38 partyPanelPlayInputCue inferred plays the party panel's confirm/cancel cue for its page and layout, then updates the button help
+00381758 modelSetTransformFromParts inferred exact twin of smt4 0x2f81d4
+0034111c uiDrawSegmentStrip inferred exact twin of smt4 0x2d5900
+00422184 asdTextureTileCreate inferred exact twin of smt4 0x23a62c
+004af258 moLivePlayerSetWorker inferred attaches a ready worker to the MoLivePlayer (reset, store, isReady, kind) and resets its stream state; twin of smt4 0x3b21e4
+003f1138 btlMainFindFreeCombatantEntry inferred first combatant entry from slot 4 to 53 whose flags share no bit with the battle globals' required mask, or NULL
+00416d30 resultInputLoadScripts inferred loads the result scripts and, for the selected demon, the level-up script and its talk-tone message archive ("%s" of table 0x25)
+003ca3d0 scrCmdSaintGermainShopRun inferred script command: creates the Saint Germain shop work and job on frame 0, waits for state 0 or 8, then tears it down (sibling of scrCmdTransitionFinish)
+0047f7c0 btlPlayPackedVoiceSlot inferred plays the packed voice queued in slot 0 or 1 (btlPlayIndexedVoice's body with category 2) and clears the slot
+00422654 mobiclipS4FsReaderDestroy inferred the S4 file-system reader's teardown (stop event, thread join and close, buffer delete); counterpart of smt4 mobiclipS4FsReaderDestroy in the same helper_S4FsReader file
+0045af14 floatArrayConstruct inferred binds and zero-constructs an { f32 *values; u32 count; } array; neighbour of idArrayConstruct
+004cd340 unitApplyWeightedStatPoint inferred zeroes the weights of stats at 999, rolls randRange over the remaining total and adds one point to the stat drawn
+004fe7e4 btlReflectQueuePendingRosterFade inferred queues kind 0x2B/0x2C reflect actions for roster records flagged 0x10000 and clears the flag

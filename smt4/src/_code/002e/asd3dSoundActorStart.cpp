@@ -1,5 +1,5 @@
 /* NON_MATCHING: global sound-system addresses reload instead of staying saved; actor base and early-return register allocation differ. */
-#include "sound/SpatialSoundPlayback.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "code/Code002b.h"
 
 extern "C" {
@@ -11,7 +11,7 @@ u32 nw_snd_SoundStartable_StartSound(SpatialSoundActor *, u32 *, u32, u32);
 
 u8 asd3dSoundActorStart(u32 soundId, u32 actorIndex)
 {
-    SpatialSoundPlayback *playback = reinterpret_cast<SpatialSoundPlayback *>(g_asdSound.unk784);
+    SpatialSoundPlayback *playback = &g_asdSound.sound3d;
     AsdSndSlotA *slot = g_asdSound.currentSlotA;
     u8 started = 0;
     if (playback->enabled && actorIndex < 16 && nw_snd_SoundArchive_IsAvailable(&g_asdSound) &&

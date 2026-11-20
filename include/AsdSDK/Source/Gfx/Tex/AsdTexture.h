@@ -82,6 +82,23 @@ typedef char AsdTextureRegionLayoutCheck[sizeof(AsdTextureRegion) == 0x20 &&
     offsetof(AsdTextureRegion, scale) == 0x18 && offsetof(AsdTextureRegion, flags) == 0x1C ? 1 : -1];
 
 
+/* A texture tile built over caller-owned pixels (asdTextureTileCreate, smt4a asdTextureTileCreate): its size in
+ * floats and the GL format/type pair it was created with. */
+struct AsdTextureTile {
+    /* 0x00 */ f32 width;
+    /* 0x04 */ f32 height;
+    /* 0x08 */ u32 format;   /* GL format, e.g. 0x6754 (GL_RGB_NATIVE_DMP) */
+    /* 0x0C */ u32 type;     /* GL type, e.g. 0x1401 (GL_UNSIGNED_BYTE) */
+    /* 0x10 */ AsdTexture *texture;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ f32 scale;
+    /* 0x1C */ u8 flags[2];
+    /* 0x1E */ u8 unk1E[2];
+};
+typedef char AsdTextureTileLayoutCheck[sizeof(AsdTextureTile) == 0x20 &&
+    offsetof(AsdTextureTile, format) == 8 && offsetof(AsdTextureTile, texture) == 0x10 &&
+    offsetof(AsdTextureTile, scale) == 0x18 && offsetof(AsdTextureTile, flags) == 0x1C ? 1 : -1];
+
 /* Buffer-handle entry: texture and backing allocation are independently owned. */
 typedef struct AsdBufferHandle {
     /* 0x00 */ u8 unk00[8];

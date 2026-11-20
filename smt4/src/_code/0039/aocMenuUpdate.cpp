@@ -58,9 +58,8 @@ extern "C" void aocMenuUpdate(AocMenu *menu)
     }
     for (s32 i = 0; i < 25; i++)
         uiSpriteAdvanceAnimation(reinterpret_cast<UiSpriteState *>(menu->animated.effects[i]));
-    ++menu->animated.slowTick;
-    menu->animated.slowTick = static_cast<s32>(menu->animated.slowTick) % 20;
-    menu->animated.fastTick = (static_cast<s32>(menu->animated.fastTick) + 1) % 30;
+    menu->animated.slowTick = (menu->animated.slowTick + 1) % 20;
+    menu->animated.fastTick = (menu->animated.fastTick + 1) % 30;
     if (menu->stepDispatch.flat[menu->step] != NULL)
         (menu->*menu->stepDispatch.flat[menu->step])();
 }

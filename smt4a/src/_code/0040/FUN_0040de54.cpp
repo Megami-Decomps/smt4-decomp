@@ -53,7 +53,7 @@ int keyedValueFindPair(...);
 int btlQueueActionMessage(...);
 int btlRecoverHpMpByPercent(...);
 int FUN_004fd508(...);
-int FUN_004fe7e4(...);
+int btlReflectQueuePendingRosterFade(...);
 int FUN_004fe900(...);
 
 int btlScriptUnitHasFlags(...);
@@ -287,7 +287,7 @@ extern int FUN_004fa7bc(int);
 /* Supplied declaration required: btlRecoverHpMpByPercent. */
 /* Supplied declaration required: btlReflectCreateKind19. */
 /* Supplied declaration required: FUN_004fd508. */
-/* Supplied declaration required: FUN_004fe7e4. */
+/* Supplied declaration required: btlReflectQueuePendingRosterFade. */
 /* Supplied declaration required: FUN_004fe900. */
 /* Supplied declaration required: btlReflectSetValuePair. */
 /* Supplied declaration required: btlReflectRequestPairScalar. */
@@ -1064,7 +1064,7 @@ LAB_0040f258:
     FUN_004fd508(0,*(unsigned int *)(psVar2 + 4),*(unsigned int *)(psVar2 + 0x14),0,1);
     break;
   case '*':
-    FUN_004fe7e4(0,*(unsigned int *)(psVar2 + 4));
+    btlReflectQueuePendingRosterFade(0,*(unsigned int *)(psVar2 + 4));
     break;
   case '+':
   case ',':

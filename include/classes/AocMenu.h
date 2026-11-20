@@ -120,8 +120,8 @@ public:
         struct {
             /* 0x035C */ u8 unk035C[0x20];
             /* 0x037C */ u8 effects[25][0x8C];
-            /* 0x1128 */ u32 slowTick;
-            /* 0x112C */ u32 fastTick;
+            /* 0x1128 */ s32 slowTick;
+            /* 0x112C */ s32 fastTick;
         } animated;
     };
     /* 0x1130 */ char prompt[0x80];
@@ -150,6 +150,17 @@ public:
     };
     /* 0x1EF0 */ u8 unk1EF0[0x800];
 };
+
+/* Moves the menu to another step and drops the window of the one it leaves. */
+static __inline void aocMenuChangeStep(AocMenu *menu, u32 step)
+{
+    menu->step = step;
+    menu->substep = 0;
+    if (menu->window != NULL) {
+        delete menu->window;
+        menu->window = NULL;
+    }
+}
 
 typedef char AocMenuSizeCheck[sizeof(AocMenu) == 0x26F0 ? 1 : -1];
 typedef char AocMenuMemberOffsetsCheck[

@@ -28,7 +28,7 @@ extern "C" {
 /* Looks up animation `index` of the set at `time` (interpolating between the two surrounding keys)
  * and plays the resulting key, applying interpolated placement when options.positioned is set. */
 void spriteAnimationPlayAtTime(SpriteDrawOwner *owner, s32 index, const SpriteDrawVector3 *placement,
-                  u32 flags, SpriteDrawOptions options, f32 time, f32 globalScale)
+                  u32 flags, s32 filter, s32 positioned, s32 flipY, f32 time, f32 globalScale)
 {
     AnimSet *set = static_cast<AnimSet *>(owner);
     if (index >= set->origin->animationCount)
@@ -71,11 +71,11 @@ void spriteAnimationPlayAtTime(SpriteDrawOwner *owner, s32 index, const SpriteDr
     }
     keyScale.x *= 0.01f;
     keyScale.y *= 0.01f;
-    if (options.positioned == 0)
-        FUN_004ff058(set, key, placement, flags, options.filter, globalScale);
+    if (positioned == 0)
+        FUN_004ff058(set, key, placement, flags, filter, globalScale);
     else
-        FUN_003fad14(set, key, placement, flags, options.filter, &position, &keyScale,
-                     options.flipY, globalScale);
+        FUN_003fad14(set, key, placement, flags, filter, &position, &keyScale,
+                     flipY, globalScale);
 }
 
 } /* extern "C" */

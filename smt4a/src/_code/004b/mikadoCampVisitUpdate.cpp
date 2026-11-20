@@ -50,7 +50,7 @@ void frameTexRequestFade(s32 request);
 void commonBgStopChildAndReset(void);
 void FUN_002c3398(s32 a, s32 b);
 void FUN_00363c58(s32 mode);
-void FUN_003b5064(void);
+void mapRestoreSavedSelection(void);
 u32 campIsState51(void);
 u32 screenFadeIsBusy(void);
 void clearFlags310To31F(void);
@@ -160,7 +160,7 @@ void mikadoCampVisitUpdate(CampScriptPanelResources *work)
             switch (gameDataBlocksGetSaveData()[2]) {
             case 0:
             case 1:
-                FUN_003b5064();
+                mapRestoreSavedSelection();
                 asdDebugHookVoid();
                 if (g_mapSelection.id >= 200) {
                     work->mikado.exitRequest[2] = 1;

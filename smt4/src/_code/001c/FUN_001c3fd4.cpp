@@ -54,7 +54,7 @@ int FUN_0026c710(...);
 int communicationBeginTransition(...);
 int communicationSetResultPointer(void);
 int btlUiPanelFadeInWhenReady(...);
-int FUN_0026c868(void);
+int partyPanelShowButtonHelp(void);
 int partyPanelRefreshFusionParents(void);
 int obj48Arm(...); // declcheck: local (romwright prototype; the shared declaration in code/Code0029_Smt4.h does not compile here: more than one instance of overloaded function "FUN_0029c4e4" has "C" linkage)
 int scrScriptProcessStartEntry(...);
@@ -137,7 +137,7 @@ extern int gameGetNavigationState(void);
 /* Supplied declaration required: communicationBeginTransition. */
 /* Supplied declaration required: communicationSetResultPointer. */
 /* Supplied declaration required: btlUiPanelFadeInWhenReady. */
-/* Supplied declaration required: FUN_0026c868. */
+/* Supplied declaration required: partyPanelShowButtonHelp. */
 /* Supplied declaration required: partyPanelRefreshFusionParents. */
 /* Supplied declaration required: FUN_0026cba4. */
 /* Supplied declaration required: partyPanelHandleCursorEdgeInput. */
@@ -1388,7 +1388,7 @@ LAB_001c6598:
                       *(unsigned int *)(temp_v1 + *piVar17 * 4 + 0xb34) = (unsigned int)*(unsigned short *)(temp_v6 + 0x46);
                       *piVar17 = *piVar17 + 1;
                       partyPanelRefreshFusionParents();
-                      FUN_0026c868();
+                      partyPanelShowButtonHelp();
                       temp_v6 = *piVar17;
                       if (temp_v6 >= 2) {
                         FUN_001d1828();
@@ -1561,7 +1561,7 @@ LAB_001c653c:
                       *(unsigned int *)(temp_v1 + *piVar17 * 4 + 0xb34) = (unsigned int)*(unsigned short *)(temp_v6 + 0x46);
                       *piVar17 = *piVar17 + 1;
                       partyPanelRefreshFusionParents();
-                      FUN_0026c868();
+                      partyPanelShowButtonHelp();
                       temp_v6 = *piVar17;
                       if (temp_v6 >= 2) {
                         FUN_001d1828();
@@ -1705,7 +1705,7 @@ LAB_001c6680:
               }
               else {
                 FUN_0029e890((int)(char)((char)*(int *)(temp_v1 + 0xb3c) + '\x01'),0);
-                FUN_0026c868();
+                partyPanelShowButtonHelp();
               }
             }
             eventQueueAddUniqueIfValid(0x100016e);
@@ -2088,7 +2088,7 @@ joined_r0x001c7220:
               *(unsigned char *)(temp_v1 + 0x66c) = 10;
               *(unsigned int *)(temp_v1 + 0x20) = 8;
               partyPanelSetState(0,1);
-              FUN_0026c868();
+              partyPanelShowButtonHelp();
               FUN_0026c214();
               temp_v7 = 0x100016e;
               eventQueueAddUniqueIfValid(temp_v7);
@@ -2519,7 +2519,7 @@ LAB_001c7c50:
             partyPanelResetCursor();
             FUN_0026d3e0(temp_v6,0);
           }
-          FUN_0026c868();
+          partyPanelShowButtonHelp();
           temp_v14 = 1;
           temp_v7 = 8;
           partyPanelSetState(temp_v7,temp_v14);
@@ -2824,7 +2824,7 @@ LAB_001c8644:
       }
     }
   }
-  FUN_0026c868();
+  partyPanelShowButtonHelp();
   FUN_0026c214();
   partyPanelSetState(0,1);
   if (*(char *)(temp_v1 + 0x66c) == '\v') {

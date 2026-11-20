@@ -8,7 +8,7 @@ extern "C" {
 u16 ifTouchGetButtonHelpValue(void);
 s32 FUN_002cad18(void);
 s32 partyPanelGetSelectedDemonId(void);
-void FUN_0023fc38(void);
+void partyPanelPlayInputCue(void);
 void FUN_0023f900(void);
 
 /* Refreshes the party panel's help text and selection when the button help value or selection changed. */
@@ -40,7 +40,7 @@ void FUN_0034cda0(void)
         if ((((help == 0x25 || help == 3) || ((help == 0xBC || help == 0xC4) || help == 0xE5)) &&
              (slot != 0 || demon >= 0 || panel->alternate != 0)) ||
             refresh)
-            FUN_0023fc38();
+            partyPanelPlayInputCue();
         if (!(panel->previousSelection == demon && panel->helpMode == slot) &&
             (((panel->panelState == 3 || panel->panelState == 2 || (panel->panelState == 4 || panel->panelState == 15)) || (panel->panelState == 17 || panel->panelState == 12)) ||
              ((panel->panelState == 13 || panel->panelState == 14 || (panel->panelState == 16 || panel->panelState == 19)))))

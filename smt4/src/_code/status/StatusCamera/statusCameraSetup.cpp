@@ -1,4 +1,4 @@
-/* NON_MATCHING: look-at arithmetic is fused; input VFP packing, saved eye pointer and up-vector construction differ. */
+/* NON_MATCHING: look-at arithmetic is fused; input VFP packing and the saved eye pointer differ. */
 #include "status/StatusCamera.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -31,7 +31,9 @@ void statusCameraSetup(const Vec3 *eye, const Vec3 *direction, const Vec3 *refer
     work->eye = *eye;
     work->unk520 = *reference;
     work->dist = distance;
-    Vec3 up = {0.0f, 1.0f, 0.0f};
+    Vec3 up;
+    up.z = up.x = 0.0f;
+    up.y = 1.0f;
     Vec3 target = work->eye;
     target.x += work->dir.x * work->dist;
     target.y += work->dir.y * work->dist;

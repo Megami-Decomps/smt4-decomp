@@ -5,9 +5,9 @@ extern "C" {
 
 void partyPanelChangeState(s32 a, s32 b);
 void FUN_00230ac0(s32 mode, s16 imageFrame, u32 flags, s32 resetAuxiliary);
-void FUN_0023fc38(void);
+void partyPanelPlayInputCue(void);
 
-/* Clears the party panel's two flags, optionally starts FUN_00230ac0, and runs FUN_0023fc38 unless the panel is in state 0 or 1. */
+/* Clears the party panel's two flags, optionally starts FUN_00230ac0, and runs partyPanelPlayInputCue unless the panel is in state 0 or 1. */
 void FUN_00284ee4(s32 start)
 {
     PartyPanelStateA *panel = g_partyPanel;
@@ -19,7 +19,7 @@ void FUN_00284ee4(s32 start)
             FUN_00230ac0(4, -1, 0, panel->alternate ? 1 : panel->alternate);
         }
         if (panel->panelState != 0 && panel->panelState != 1) {
-            FUN_0023fc38();
+            partyPanelPlayInputCue();
         }
         partyPanelChangeState(0, 1);
     }

@@ -1,6 +1,6 @@
-/* NON_MATCHING: branch layout (first-entry arm out of line) and the length sign test now match retail; retail loads the Vec3 operands with vldm triples where this build loads individual components. */
+/* NON_MATCHING: 33 lines: retail loads the point's kind separately in each arm where armcc hoists one load above
+ * the index test, which also swaps the queue and previous-point registers (r6/r7). */
 #include "shard/W6_W6Match2_VectorQueue.h"
-#include "shard/S1Mover.h"
 
 extern "C" {
 extern VectorQueueWork *g_vectorQueueWork;
@@ -20,13 +20,13 @@ void FUN_00295d40(void)
         } else {
             QueuedVector *previous = entry - 1;
             entry->kind |= 1;
-            f32 length = distSpatial(entry->x, entry->y, entry->z,
-                                     previous->x, previous->y, previous->z);
+            f32 length = distSpatial(entry->position.x, entry->position.y, entry->position.z,
+                                     previous->position.x, previous->position.y, previous->position.z);
             if (length < 0.0f)
                 length = -length;
-            Vec3f previousPosition = *(const Vec3f *)&previous->x;
-            Vec3f position = *(const Vec3f *)&entry->x;
-            Vec3f direction;
+            MapVector previousPosition = previous->position;
+            MapVector position = entry->position;
+            MapVector direction;
             direction.x = previousPosition.x - position.x;
             direction.y = previousPosition.y - position.y;
             direction.z = previousPosition.z - position.z;
@@ -36,7 +36,7 @@ void FUN_00295d40(void)
                 direction.y *= reciprocal;
                 direction.z *= reciprocal;
             }
-            *(Vec3f *)&entry->direction = direction;
+            entry->direction = direction;
         }
     }
     ++g_vectorQueueWork->activeQueue;

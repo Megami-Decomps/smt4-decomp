@@ -15,7 +15,7 @@ struct SegmentStyle {
 };
 
 extern "C" {
-void FUN_0034111c(u32 colorA, u32 colorB, f32 x0, f32 y0, f32 x1, f32 y1, f32 alpha, f32 scale);
+void uiDrawSegmentStrip(u32 colorA, u32 colorB, f32 x0, f32 y0, f32 x1, f32 y1, f32 alpha, f32 scale);
 
 // Draw two joined segments with the elbow offset toward the facing side.
 void drawFacingElbowSegments(const SegmentStyle *style, const SegmentPoint *start,
@@ -46,9 +46,9 @@ void drawFacingElbowSegments(const SegmentStyle *style, const SegmentPoint *star
         }
     }
     SegmentPoint adjustedElbow = {offsetX + x, offsetY + y};
-    FUN_0034111c(color, color, start->x, start->y, x, y,
+    uiDrawSegmentStrip(color, color, start->x, start->y, x, y,
                  (256 - transparency) * (1.0f / 256.0f), 1.0f);
-    FUN_0034111c(color, color, adjustedElbow.x, adjustedElbow.y, end->x, end->y,
+    uiDrawSegmentStrip(color, color, adjustedElbow.x, adjustedElbow.y, end->x, end->y,
                  (256 - transparency) * (1.0f / 256.0f), 1.0f);
 }
 }

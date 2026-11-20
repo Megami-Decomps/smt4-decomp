@@ -126,7 +126,7 @@ void FUN_004cd4b8(int param_1,int param_2)
             if (uVar14 != 0) {
               do {
                 iVar10 = param_1;
-                FUN_004cd340(param_1,&uStack_70,1);
+                unitApplyWeightedStatPoint(param_1,&uStack_70,1);
                 switch(iVar10) {
                 case 0:
                   *(short *)(param_1 + 0x20) = *(short *)(param_1 + 0x20) + 1;

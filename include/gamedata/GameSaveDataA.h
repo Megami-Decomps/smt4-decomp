@@ -242,7 +242,13 @@ typedef struct GameSaveBodyA {
 
 /* Apocalypse: the save block (allocation 0x2A7A4 bytes). */
 typedef struct GameSaveDataA {
-    /* 0x00000 */ u8 header[0x80];
+    union {
+        /* 0x00000 */ u8 header[0x80];
+        struct {
+            u8 unk00[0x66];
+            /* 0x66 */ u16 progress; /* compared against the map-group record's progress bounds */
+        } mapGroup;
+    };
     /* 0x00080 */ u8 settings[8];         /* configGetSettings: five setting bytes */
     /* 0x00088 */ GameSaveBodyA body;
 } GameSaveDataA;
@@ -257,6 +263,7 @@ typedef char GameSaveBodyAOffsetCheck[offsetof(GameSaveBodyA, slots) == 0x4 && o
     offsetof(GameSaveBodyA, pairs.entries) == 0x270C4 && offsetof(GameSaveBodyA, record.tail.value) == 0x27E0C &&
     offsetof(GameSaveBodyA, saveState) == 0x27E1E && offsetof(GameSaveBodyA, entryFlags) == 0x27E50 &&
     offsetof(GameSaveBodyA, work.savedFlags) == 0x27EB8 && offsetof(GameSaveBodyA, tail.block28390) == 0x28390 &&
-    sizeof(GameSaveBodyA) == 0x2A71C && sizeof(GameSaveDataA) == 0x2A7A4 ? 1 : -1];
+    sizeof(GameSaveBodyA) == 0x2A71C && sizeof(GameSaveDataA) == 0x2A7A4 &&
+    offsetof(GameSaveDataA, mapGroup.progress) == 0x66 ? 1 : -1];
 
 #endif

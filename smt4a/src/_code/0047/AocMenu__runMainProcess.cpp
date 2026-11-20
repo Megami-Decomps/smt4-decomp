@@ -139,17 +139,6 @@ static __inline void touchRowsUpdate(AocTouchRows *rows, FlaggedValueHolder *hol
     }
 }
 
-/* Moves the menu to another step and drops the window of the one it leaves. */
-static __inline void changeStep(AocMenu *menu, u32 step)
-{
-    menu->step = step;
-    menu->substep = 0;
-    if (menu->window != NULL) {
-        delete menu->window;
-        menu->window = NULL;
-    }
-}
-
 /* Starts the script that asks the player to confirm an action on the content. */
 static __inline void startQuestion(AocMenu *menu, u32 substep, const char *entry)
 {
@@ -235,7 +224,7 @@ void AocMenu::runMainProcess()
             return;
         }
         if (buttonHelpIsActionActive(10)) {
-            changeStep(this, 12);
+            aocMenuChangeStep(this, 12);
             buttonHelpSetEnabled(1);
             eventQueueAddUniqueIfValid(AOC_MENU_DECIDE_SOUND);
             panel.ready = 0;
@@ -265,23 +254,23 @@ void AocMenu::runMainProcess()
         s32 choice = messageGetChoiceResult();
         if (choice == 0) {
             if (substep == 2) {
-                changeStep(this, 7);
+                aocMenuChangeStep(this, 7);
                 return;
             }
             if (substep == 3) {
-                changeStep(this, 8);
+                aocMenuChangeStep(this, 8);
                 return;
             }
             if (substep == 4) {
-                changeStep(this, 9);
+                aocMenuChangeStep(this, 9);
                 return;
             }
             if (substep == 5) {
-                changeStep(this, 15);
+                aocMenuChangeStep(this, 15);
                 return;
             }
             if (substep == 6) {
-                changeStep(this, 13);
+                aocMenuChangeStep(this, 13);
                 return;
             }
         } else if (choice == 1) {

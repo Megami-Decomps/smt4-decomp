@@ -36,7 +36,9 @@ void statusCameraSetup(const Vec3 *eye, const Vec3 *direction, const Vec3 *auxil
     camera->eye = *eye;
     camera->unk524 = *auxiliary;
     camera->dist = distance;
-    Vec3 up = {0.0f, 1.0f, 0.0f};
+    Vec3 up;
+    up.z = up.x = 0.0f;
+    up.y = 1.0f;
     Vec3 target = camera->eye;
     target.x += camera->dir.x * camera->dist;
     target.y += camera->dir.y * camera->dist;

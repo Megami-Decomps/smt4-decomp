@@ -34,7 +34,7 @@ extern u8 DAT_005c1132;
 extern u8 DAT_005c1133;
 /* The curve sampler: (curve, envelope, frame, duration); the emitter's own color is sampled with only its first two arguments. */
 u32 FUN_0038136c(const void *curve, const void *envelope, ...);
-void FUN_00381758(PolygonTrackPrimitive *primitive, const f32 *rotation, const f32 *scale);
+void modelSetTransformFromParts(PolygonTrackPrimitive *primitive, const f32 *rotation, const f32 *scale);
 void FUN_003380a0(PolygonTrackPrimitive *primitive, u32 drawMode);
 
 /* Fills a polygon track's per-vertex colors for the current frame: each vertex that is still inside
@@ -78,7 +78,7 @@ void FUN_003952f0(RenderSubmission *submission)
         }
         entries += 12;
     }
-    FUN_00381758(primitive, submission->rotation, submission->scale);
+    modelSetTransformFromParts(primitive, submission->rotation, submission->scale);
     if (emitter->depthEnabled != 0) {
         primitive->flags |= 0x100;
     } else {

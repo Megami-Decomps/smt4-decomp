@@ -5,7 +5,7 @@
 
 extern "C" {
 s32 loadSlotIsLoaded(u32 slot);
-void FUN_00416d30(ResultInputWork *work);
+void resultInputLoadScripts(ResultInputWork *work);
 u32 scrScriptProcessCreate(const void *script, const void *messages);
 u32 FUN_003df4a4(u32 skill);
 s32 playerStockHasFreeSlot(void);
@@ -35,7 +35,7 @@ extern "C" u32 FUN_00416e60(ResultInputWork *work)
         if (loadSlotIsLoaded(0x25) == 0) {
             return 0;
         }
-        FUN_00416d30(work);
+        resultInputLoadScripts(work);
         ++work->preparation.phase;
         // Fall through once the load request has been submitted.
     case 1:

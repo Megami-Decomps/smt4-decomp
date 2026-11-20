@@ -1,29 +1,46 @@
-/* NON_MATCHING: frame (0x180), the s16-s18 argument loads and both paths' instruction order match retail; retail puts the one-path record at sp+0 and the two-path record at sp+0xb8 (here the reverse), keeps `orr #2; orr #1` as two steps, and has linker NOPs between the length call and the constructor. */
+/* NON_MATCHING: 13 lines: retail keeps the two-path `flags |= 2; flags |= 1` as two orr (armcc folds them into
+ * orr #3) and builds the mode/bytes address in r2 where this build uses r0. */
 #include "shard/FileQueueRequest.h"
 
 struct AocDisplay;
 
-/* The one-path record: the same layout, 0x10 bytes longer. */
-struct FileQueueSingleRequest : FileQueueRequest {
-    u32 unkB8[4];
-};
-
 extern "C" {
 void FUN_001b9fe4(AocDisplay *display);
 void FUN_001ba0c8(AocDisplay *display, const FileQueueRequest *request);
-void FUN_001a6c40(FileQueueRequest *request);
+void _ZN9Obj422224C1Ev(FileQueueRequest *request);
 void stringCopyTruncated(u8 *destination, const char *path, u32 capacity);
 u32 libc_strlen(const char *path);
+
+/* aocQueueFileLoad's body, inlined here (retail copies the path argument again for it): queues a load
+ * of one path. */
+static __inline void queueFileLoad(AocDisplay *display, const char *path, u32 *completion,
+                                   u32 mode, u32 bytes, void *context)
+{
+    FileQueueRequest request;
+    libc_strlen(path);
+    _ZN9Obj422224C1Ev(&request);
+    stringCopyTruncated(request.path, path, 0x40);
+    request.mode = mode;
+    request.bytes = bytes;
+    request.completion = completion;
+    request.context = context;
+    request.flags |= 1;
+    if (completion != 0) {
+        *completion = 0;
+    }
+    FUN_001ba0c8(display, &request);
+    FUN_001b9fe4(display);
+}
 
 /* Queues a file load for the display: one path, or two (the second is stored after the first). */
 void aocDisplayQueueRecord(AocDisplay *display, const char *path, const char *secondPath, u32 *completion,
                            u32 mode, u32 bytes, void *context)
 {
+    FileQueueRequest request;
     if (secondPath != NULL) {
-        FileQueueRequest request;
         libc_strlen(path);
         libc_strlen(secondPath);
-        FUN_001a6c40(&request);
+        _ZN9Obj422224C1Ev(&request);
         stringCopyTruncated(request.path, path, 0x40);
         stringCopyTruncated(request.path + 0x40, secondPath, 0x40);
         request.mode = mode;
@@ -39,19 +56,6 @@ void aocDisplayQueueRecord(AocDisplay *display, const char *path, const char *se
         FUN_001b9fe4(display);
         return;
     }
-    FileQueueSingleRequest request;
-    libc_strlen(path);
-    FUN_001a6c40(&request);
-    stringCopyTruncated(request.path, path, 0x40);
-    request.mode = mode;
-    request.bytes = bytes;
-    request.completion = completion;
-    request.context = NULL;
-    request.flags |= 1;
-    if (completion != 0) {
-        *completion = 0;
-    }
-    FUN_001ba0c8(display, &request);
-    FUN_001b9fe4(display);
+    queueFileLoad(display, path, completion, mode, bytes, NULL);
 }
 }

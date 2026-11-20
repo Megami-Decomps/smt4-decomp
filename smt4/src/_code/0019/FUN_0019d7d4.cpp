@@ -11,7 +11,7 @@ s32 FUN_0019d7d4(const DistanceSortRecord *const *left, const DistanceSortRecord
     const DistanceSortRecord *a = *left;
     const DistanceSortRecord *b = *right;
     f32 az = a->z + a->height * 10.0f;
-    f32 bz = b->height + b->z * 10.0f;
+    f32 bz = b->z + b->height * 10.0f;
     f32 ax = 0.0f - a->x;
     f32 ay = 0.0f - a->y;
     f32 bx = 0.0f - b->x;

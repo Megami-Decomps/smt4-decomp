@@ -36,6 +36,23 @@ typedef struct StatusCameraWorkA {
     /* 0x534 */ CameraLens lens;
 } StatusCameraWorkA;
 
+/* nn::math's VEC3Scale and VEC3Add header inlines: the cameras aim at eye + dir * dist through them. */
+static __inline Vec3 *vec3Scale(Vec3 *out, const Vec3 *v, f32 scale)
+{
+    out->x = v->x * scale;
+    out->y = v->y * scale;
+    out->z = v->z * scale;
+    return out;
+}
+
+static __inline Vec3 *vec3Add(Vec3 *out, const Vec3 *a, const Vec3 *b)
+{
+    out->x = a->x + b->x;
+    out->y = a->y + b->y;
+    out->z = a->z + b->z;
+    return out;
+}
+
 extern "C" {
 u8 *gameDataGetSortPreferences(void);
 }

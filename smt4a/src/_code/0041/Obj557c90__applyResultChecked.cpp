@@ -1,4 +1,5 @@
-/* NON_MATCHING: needs the renames in rename_S2.tsv (Obj55aff4 char* constructor, OnlineResultRecord members, __rw_throw, Obj557c90 members) to link; with them only register assignment differs (retail keeps `this` in r5 and walks the vectors through their addresses in r4/r6). */
+/* NON_MATCHING: register assignment only: retail keeps `this` in r5 and walks the entry vector and each entry's text
+ * vector through their addresses in r4/r6. `const` reference aliases to both vectors reproduce it but only steer registers. */
 #include "classes/Obj557c90.h"
 
 extern "C" s32 gameFlagIsSet(u32 flag);

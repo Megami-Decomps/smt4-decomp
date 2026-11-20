@@ -1,4 +1,5 @@
-/* NON_MATCHING: spatial/status base-address formation and tail scheduling differ (117/118 normalized rows); -O2 may change the address CSE. */
+/* NON_MATCHING: 29 lines: retail reaches the status block through its own base (duck + 0x1c, then offsets 0x15,
+ * 0x17, 0, 4) where armcc folds it into the duck base. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdDebug.h"
@@ -20,13 +21,6 @@ struct SoundAuxiliarySlotView {
     u8 unk3a[2];
 };
 
-struct SoundSpatialTailView {
-    u8 unk000[0xa48];
-    u8 flag;
-    u8 volume;
-    u8 unka4a[2];
-};
-
 // The initializer accesses the duck state and the immediately following status
 // as one contiguous control block; the canonical component layouts are reused.
 struct SoundControlView {
@@ -46,6 +40,40 @@ u32 FUN_0012a740(u32 value);
 void sndMasterManagerApply(u32 mode);
 void asdFatalError();
 void* asdMemoryAlloc(s32 heap, s32 alignment, s32 option, u32 size, s32 fromFront);
+
+/* asdSoundDuckSetup's body: AsdSoundSystem.cpp's own callers inline it (startup clears the duck with enable 0). */
+static __inline void duckSetup(f32 level, s32 enable, u32 holdFrames, u32 unk08, u32 fadeInFrames, u32 fadeOutFrames)
+{
+    if (enable != 0) {
+        AsdSndDuck *duck = &g_asdSoundDuck.duck;
+        duck->flags |= 1;
+        duck->level = level;
+        if (duck->level <= 0.0f) {
+            duck->level = 0.0f;
+        }
+        if (duck->level > 1.0f) {
+            duck->level = 1.0f;
+        }
+        duck->holdFrames = holdFrames;
+        duck->fadeInFrames = fadeInFrames;
+        duck->fadeOutFrames = fadeOutFrames;
+        duck->unk08 = unk08;
+        if (g_asdSoundDuck.status.hasStream == 0) {
+            return;
+        }
+        duck->active = 1;
+    } else {
+        g_asdSoundDuck.duck.holdFrames = 0;
+        g_asdSoundDuck.duck.level = 0.0f;
+        g_asdSoundDuck.duck.fadeInFrames = 0;
+        g_asdSoundDuck.duck.fadeOutFrames = 0;
+        g_asdSoundDuck.duck.unk08 = 0;
+        g_asdSoundDuck.duck.timer = 0;
+        g_asdSoundDuck.duck.fading = 0;
+        g_asdSoundDuck.duck.flags = 0;
+        g_asdSoundDuck.duck.active = 0;
+    }
+}
 
 // Start the sound services, provision their work area and reset slot/control state.
 void asdSoundInitialize(s32 auxiliaryMode)
@@ -110,24 +138,13 @@ void asdSoundInitialize(s32 auxiliaryMode)
         sound->slotsA[slot].active = 0;
         sound->slotsA[slot].hasHeap = 0;
     }
-    SoundSpatialTailView* spatial =
-        reinterpret_cast<SoundSpatialTailView*>(sound->unk784);
-    spatial->flag = 0;
-    spatial->volume = ASD_SND_VOLUME_DEFAULT;
-    g_asdSoundDuck.duck.holdFrames = 0;
-    g_asdSoundDuck.duck.level = 0.0f;
-    g_asdSoundDuck.duck.fadeInFrames = 0;
-    g_asdSoundDuck.duck.fadeOutFrames = 0;
-    g_asdSoundDuck.duck.unk08 = 0;
-    g_asdSoundDuck.duck.timer = 0;
-    g_asdSoundDuck.duck.fading = 0;
-    g_asdSoundDuck.duck.flags = 0;
-    g_asdSoundDuck.duck.active = 0;
-    AsdSndStatus* status = &g_asdSoundDuck.status;
-    status->unk15 = 0;
-    status->hasStream = 0;
-    status->objects = NULL;
-    status->objectCount = 0;
+    sound->sound3d.enabled = 0;
+    sound->sound3d.volume = ASD_SND_VOLUME_DEFAULT;
+    duckSetup(0.0f, 0, 0, 0, 0, 0);
+    g_asdSoundDuck.status.unk15 = 0;
+    g_asdSoundDuck.status.hasStream = 0;
+    g_asdSoundDuck.status.objects = NULL;
+    g_asdSoundDuck.status.objectCount = 0;
     sound->archiveLoaded = 0;
 }
 }

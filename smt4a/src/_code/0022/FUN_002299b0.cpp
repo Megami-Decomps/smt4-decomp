@@ -48,7 +48,7 @@ extern GameDataBlocksA g_gameDataBlocks;
 
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 bool gameFlagIsSet(u32 index);
-s32 FUN_00371f3c(void);
+s32 mapFindEligibleGroupIndex(void);
 u32 gameFlagsClassify(s32 id);
 
 /* Build the save-slot summary record from a save image and store it in the game data block (IV: saveBuildSlotSummary). */
@@ -129,7 +129,7 @@ void FUN_002299b0(u16 *save)
             summary->partyIds[2] = save[third * 0x96 + 0x67];
     }
     summary->unk68 = save[0x1628];
-    summary->unk6A = FUN_00371f3c();
+    summary->unk6A = mapFindEligibleGroupIndex();
     if (gameFlagIsSet(0x11))
         summary->unk6B = 1;
     else

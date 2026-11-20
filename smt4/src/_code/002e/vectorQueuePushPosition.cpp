@@ -7,9 +7,9 @@ static __inline void vectorQueuePush(VectorQueue* queue, u32 kind, f32 x, f32 y,
 {
     QueuedVector* entry = &queue->entries[queue->count];
     entry->kind = kind;
-    entry->x = x;
-    entry->y = y;
-    entry->z = z;
+    entry->position.x = x;
+    entry->position.y = y;
+    entry->position.z = z;
     ++queue->count;
 }
 

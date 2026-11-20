@@ -125,13 +125,15 @@ typedef struct ObjB {
     /* 0x2060 */ u32 unk2060;
     /* 0x2064 */ u32 unk2064;
     /* 0x2068 */ u8 unk2068[0x40];
-    /* 0x20A8 */ u32 unk20A8;
+    /* 0x20A8 */ s32 mapGroupIndex;    /* cached map-group record index; -1 means unresolved */
     /* 0x20AC */ u8 unk20AC;
     /* 0x20AD */ u8 unk20AD;
     /* 0x20AE */ u8 unk20AE[0x2];
     /* 0x20B0 */ u8 unk20B0;
     /* 0x20B1 */ u8 unk20B1;
-    /* 0x20B2 */ u8 unk20B2[0x1F];
+    /* 0x20B2 */ u8 unk20B2[0x1A];
+    /* 0x20CC */ u32 mapGroupsFile;    /* table file address */
+    /* 0x20D0 */ u8 unk20D0;
     /* 0x20D1 */ u8 unk20D1;
     /* 0x20D2 */ u8 unk20D2[0x2];
     /* 0x20D4 */ u8 block20D4[4];
@@ -147,6 +149,7 @@ typedef char ObjBSessionOffsetsCheck[sizeof(ObjB) == 0x20F4 &&
     offsetof(ObjB, sessionSelection.pending) == 0x137D &&
     offsetof(ObjB, sessionDisplay.active) == 0x2010 &&
     offsetof(ObjB, sessionEligibility.allowed) == 0x2032 &&
+    offsetof(ObjB, mapGroupIndex) == 0x20A8 && offsetof(ObjB, mapGroupsFile) == 0x20CC &&
     offsetof(ObjB, scaledMaxHp) == 0x20E8 && offsetof(ObjB, scaledMaxMp) == 0x20EC ? 1 : -1];
 typedef char ObjBMenuSpriteOffsetsCheck[
     offsetof(ObjB, statusSprites.status) == 0x418 && offsetof(ObjB, statusModelPosition) == 0x2038 &&

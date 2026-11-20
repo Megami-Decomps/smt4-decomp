@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023a62c(...);
+int asdTextureTileCreate(...);
 int rt_memclr(int, int);
 
 typedef struct fn_0034f0fc_arg1 fn_0034f0fc_arg1;
@@ -34,7 +34,7 @@ typedef struct {
     unsigned int sp70; /* 0x70: local_70 */
 } param_5_stack;
 
-/* Supplied declaration required: FUN_0023a62c. */
+/* Supplied declaration required: asdTextureTileCreate. */
 /* Supplied declaration required: rt_memclr. */
 
 
@@ -101,16 +101,16 @@ LAB_0034f1b8:
         temp_v2 = param_2->field_0x8;
         if (!(temp_v2 == 4 || temp_v2 == 5)) {
           if (!(temp_v2 == 2 || temp_v2 == 3)) {
-            FUN_0023a62c(param_4 + temp_v1 * 0x20,*param_5,temp_v8,0,0,temp_v0,temp_v5,0x6754,0x1401,
+            asdTextureTileCreate(param_4 + temp_v1 * 0x20,*param_5,temp_v8,0,0,temp_v0,temp_v5,0x6754,0x1401,
                          param_3[temp_v1],0);
           }
           else {
-            FUN_0023a62c(param_4 + temp_v1 * 0x20,*param_5,temp_v8,0,(temp_v5 >> 1) * temp_v1,temp_v0,
+            asdTextureTileCreate(param_4 + temp_v1 * 0x20,*param_5,temp_v8,0,(temp_v5 >> 1) * temp_v1,temp_v0,
                          temp_v5 >> 1,0x6754,0x1401,param_3[temp_v1],0);
           }
         }
         else {
-          FUN_0023a62c(param_4 + temp_v1 * 0x20,*param_5,temp_v8,(temp_v0 >> 1) * temp_v1,0,temp_v0 >> 1,
+          asdTextureTileCreate(param_4 + temp_v1 * 0x20,*param_5,temp_v8,(temp_v0 >> 1) * temp_v1,0,temp_v0 >> 1,
                        temp_v5,0x6754,0x1401,param_3[temp_v1],0);
         }
         temp_v2 = param_2->field_0x24;

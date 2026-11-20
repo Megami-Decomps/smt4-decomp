@@ -1,5 +1,5 @@
 /* Built with --cpu=5TE (see flags_W4Match4b.txt). */
-#include "common.h"
+#include "gamedata/CatalogProgress.h"
 
 extern "C" {
 

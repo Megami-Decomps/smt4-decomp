@@ -324,6 +324,15 @@ asks for.
   `stageStartThread`, `btlStartWorkerThread`; SaveLoad's `startWorkerThread`).
 - A comparator over a lookup sets its `{id, 0}` keys with separate stores and calls the lookup's body
   as a `static __inline` taking the keys by reference.
+- A sound stop guarded by its handle (`if (u32 handle = playback.handles[i]) stop(handle, frames);`) is
+  nw::snd's `SoundHandle::Stop` header inline: as a `static __inline` it gave the spatial actor stops of both games
+  (smt4 `FUN_002ebdd8`, smt4a `FUN_0036be10`, wave 57); the same test written in place differs by two lines.
+- AocMenu's step change (store the step, clear the substep, delete the window) is `aocMenuChangeStep` in
+  `classes/AocMenu.h`, the helper `AocMenu::runMainProcess` uses at six sites in each game; called in place of the
+  open-coded statements it made smt4a `aocMenuUpdate` IDENTICAL (wave 57).
+- A switch case that sets several globals and then looks a value up can be another function of the file
+  inlined with constant arguments: smt4a `FUN_003b5064`'s resume mode 0 is `mapPlaceSet(1, 2, 0)`'s body
+  (`mapPlaceSelect` in `smt4a/include/map/MapPlaceLookup.h`), where open-coded literals miss by 27 lines.
 
 ### Loops and data
 
@@ -390,6 +399,10 @@ More on classes, constructors and destructors is in [C++](style-and-naming.md#c)
   (an `extern const char DAT_x[]`) becomes `__c89sprintf`, which retail never calls: define the format
   in the unit with the bytes at that address (`static const char s_romPathFormat[] = "rom:/%s";`,
   smt4a `asdLoadFileAsyncByPath`); relink places it there.
+- Two format strings a unit owns at adjacent addresses with word padding between them (smt4
+  `asdLoadFileAsync`'s `"patch:/%s"` at 0x409800 and `"rom:/%s"` at 0x40980c) are one `static const` struct of two
+  `char` arrays sized to the padding: armcc emits separate `static const char[]` objects unpadded and in reverse
+  declaration order, so relink cannot place them (`fdiff` is IDENTICAL either way).
 - armcc's hex escapes are greedy: `"\x82e"` is the single escape `\x82e` (one byte), not 0x82 then
   `e`. Write `"\x82\x65"` or split the literal (`"\x82" "e"`); check Shift-JIS strings against the image.
 - A lone `mov r0, #const` where a call would be, followed by a reload of a value the call would have

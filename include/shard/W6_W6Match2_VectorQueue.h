@@ -3,20 +3,14 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "map/MapVector.h"
 
 struct QueuedVector {
-    u32 kind;          // 0x00
-    f32 x;             // 0x04
-    f32 y;             // 0x08
-    f32 z;             // 0x0c
+    /* 0x00 */ u32 kind;
+    /* 0x04 */ MapVector position;
     union {
-        u8 unk10[0x18];    // 0x10
-        struct {
-            f32 x;        // 0x10
-            f32 y;        // 0x14
-            f32 z;        // 0x18
-            u8 unk1C[0xC];
-        } direction;
+        /* 0x10 */ u8 unk10[0x18];
+        /* 0x10 */ MapVector direction;    /* unit vector toward the previous point (zero for the first) */
     };
 };
 

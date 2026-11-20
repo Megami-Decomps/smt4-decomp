@@ -67,7 +67,7 @@ extern int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 /* Supplied declaration required: FUN_004740b4. */
 extern int recordIsEnabledAndPresent(int);
 /* Supplied declaration required: aocEntryBeginBaseLoad. */
-extern int FUN_004743e4(int);
+extern int aocPackageAllRequestedFilesReady(int);
 extern int threadTryJoinAndClose(int);
 
 
@@ -262,7 +262,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
       if (*(int *)(param_2 + 0x310) != 0) {
         if (*(int *)(param_2 + 0x358) != 0) {
           if ((*(int *)(param_2 + 0x358) == 1) &&
-             (temp_v3 = FUN_004743e4(*(int *)(param_2 + 0x318) + *(int *)(param_2 + 0x354) * 0x50),
+             (temp_v3 = aocPackageAllRequestedFilesReady(*(int *)(param_2 + 0x318) + *(int *)(param_2 + 0x354) * 0x50),
              temp_v3 != 0)) {
             *(int *)(param_2 + 0x354) = *(int *)(param_2 + 0x354) + 1;
             *(unsigned int *)(param_2 + 0x358) = 0;

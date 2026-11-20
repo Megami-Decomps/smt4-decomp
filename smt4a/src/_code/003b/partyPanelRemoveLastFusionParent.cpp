@@ -10,8 +10,8 @@
 extern "C" {
 void partyPanelRefreshFusionAvailability(void);
 void partyPanelChangeState(s32 mode, s32 enabled);
-void FUN_0020d934(void);
-void FUN_0023fc38(void);
+void partyPanelShowButtonHelp(void);
+void partyPanelPlayInputCue(void);
 
 /* Takes the last fusion parent off the panel's list, clears the pending transition of its widget (a party row
  * or a stock cell) and refreshes the panel's fusion marks. */
@@ -42,7 +42,7 @@ void partyPanelRemoveLastFusionParent(void)
     partyPanelRefreshFusionAvailability();
     panel->pendingState = 8;
     partyPanelChangeState(0, 1);
-    FUN_0020d934();
-    FUN_0023fc38();
+    partyPanelShowButtonHelp();
+    partyPanelPlayInputCue();
 }
 }

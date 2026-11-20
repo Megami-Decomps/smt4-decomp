@@ -1,14 +1,11 @@
-#include "runtime/Stdio.h"
+/* NON_MATCHING: request search uses another scratch register; the saved group and flags registers and request-field store scheduling differ. */
+#include <stdio.h>
 #include "code/Code0016.h"
-/* NON_MATCHING: retail reloads the g_soundObjectTable base (r1) after asdSoundGetObjectCount instead of keeping it in r4, and assigns group/flags to sl/r9 the other way round. */
 #include "sound/VoiceLoadQueue.h"
 #include "kernel/jyoucyuGetTableEntry.h"
 
 extern "C" {
 extern VoiceLoadQueue g_soundObjectTable;
-extern const char DAT_0053629c[];
-extern const char DAT_00536294[];
-extern const char DAT_00536288[];
 void rt_aeabi_memclr(void *memory, u32 size);
 s32 eventIsSkipping(void);
 char *libc_strcat(char *destination, const char *source);
@@ -16,22 +13,26 @@ char *libc_strcpy(char *destination, const char *source);
 u32 asdSoundGetObjectCount(void);
 u32 asdLoadFileExists(const char *path);
 void workCommandArm(void *file, VoiceLoadRequest *request);
-}
+} /* extern "C" */
 
-static inline VoiceLoadRequest *voiceLoadRequestAt(u32 index)
+static const char s_voiceDirectory[] = "snd/voice/";
+static const char s_voiceIdFormat[] = "%06d";
+static const char s_voiceFileFormat[] = "%s.bcwav";
+
+static __inline VoiceLoadRequest *voiceLoadRequestAt(VoiceLoadQueue *queue, u32 index)
 {
-    return index < 4 ? &g_soundObjectTable.entries[index] : NULL;
+    return index < 4 ? &queue->entries[index] : NULL;
 }
-static inline s32 findFreeVoiceLoadRequest()
+static __inline s32 findFreeVoiceLoadRequest(VoiceLoadQueue *queue)
 {
     for (s32 index = 0; index < 4; ++index) {
-        if (voiceLoadRequestAt(index)->active == 0)
+        if (voiceLoadRequestAt(queue, index)->active == 0)
             return index;
     }
     return -1;
 }
 
-// Reserve a voice-load slot and schedule a wave file with per-channel stereo gains.
+/* Reserve a voice-load slot and schedule a wave file with per-channel stereo gains. */
 extern "C" u32 FUN_001566a8(u32 group, u32 id, s32 kind, u8 flags, u8 priority,
                              f32 leftGain, f32 rightGain)
 {
@@ -46,15 +47,16 @@ extern "C" u32 FUN_001566a8(u32 group, u32 id, s32 kind, u8 flags, u8 priority,
         return failure;
     if (g_soundObjectTable.disabled != 0 || kind == 0)
         return failure;
-    __2sprintf(directory, DAT_0053629c);
-    __2sprintf(number, DAT_00536294, id);
+    sprintf(directory, s_voiceDirectory);
+    sprintf(number, s_voiceIdFormat, (s32)id);
     libc_strcat(directory, number);
-    __2sprintf(path, DAT_00536288, directory);
+    sprintf(path, s_voiceFileFormat, directory);
     asdSoundGetObjectCount();
-    s32 index = findFreeVoiceLoadRequest();
+    VoiceLoadQueue *queue = &g_soundObjectTable;
+    s32 index = findFreeVoiceLoadRequest(queue);
     if (index == -1)
         return failure;
-    VoiceLoadRequest *request = voiceLoadRequestAt(index);
+    VoiceLoadRequest *request = voiceLoadRequestAt(queue, index);
     if (request == NULL || !asdLoadFileExists(path))
         return failure;
     request->counter = 0;
@@ -67,6 +69,6 @@ extern "C" u32 FUN_001566a8(u32 group, u32 id, s32 kind, u8 flags, u8 priority,
     request->kind = kind;
     request->priority = priority;
     libc_strcpy(request->path, path);
-    asdLoadFileAsyncDefault(reinterpret_cast<u32>(path), 0, 3, reinterpret_cast<u32>(workCommandArm), reinterpret_cast<u32>(request));
+    asdLoadFileAsyncDefault((u32)path, 0, 3, (u32)workCommandArm, (u32)request);
     return index;
 }

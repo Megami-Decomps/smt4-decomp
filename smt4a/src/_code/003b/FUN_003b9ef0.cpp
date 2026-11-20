@@ -20,7 +20,7 @@ int mapPlaceSet(...);
 int naviMainApplyRequestValue(...);
 int FUN_0035846c(void);
 int naviMainSetRequestValue(...);
-int FUN_0036b004(void);
+int mapSnapshotCurrentAndTarget(void);
 int FUN_003a2278(...);
 int naviMainSetRequestTriple(...);
 int table23FindRecordByKey(...);
@@ -90,7 +90,7 @@ extern int messageGetChoiceResult(void);
 /* Supplied declaration required: naviMainApplyRequestValue. */
 /* Supplied declaration required: FUN_0035846c. */
 /* Supplied declaration required: naviMainSetRequestValue. */
-/* Supplied declaration required: FUN_0036b004. */
+/* Supplied declaration required: mapSnapshotCurrentAndTarget. */
 extern int FUN_00376f84(void);
 extern int lmapGetSpawnIndex(void);
 extern int dataTableGetRecord23(void);
@@ -187,7 +187,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
     if (DAT_005f1654 != 0) {
       DAT_005f1654 = 0;
       naviMainSetFlagsAndActivate(DAT_005f1725,DAT_005f1726,DAT_005f1727,DAT_005f1728,DAT_005f1729,DAT_005f172a);
-      FUN_0036b004();
+      mapSnapshotCurrentAndTarget();
       *(unsigned int *)(temp_v2 + 0x3c) = DAT_005f16a0;
       *(unsigned char *)(temp_v2 + 0xf) = 1;
       *(unsigned int *)(temp_v2 + 0x28) = 0xb2;
@@ -335,7 +335,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
     DAT_005f1a50 = DAT_005f16e0;
   }
 LAB_003ba158:
-  FUN_0036b004();
+  mapSnapshotCurrentAndTarget();
   *(unsigned int *)(temp_v2 + 0x3c) = DAT_005f16a0;
   *(unsigned char *)(temp_v2 + 0xe) = 1;
   *(unsigned int *)(temp_v2 + 0x28) = 0xb2;

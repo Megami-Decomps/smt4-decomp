@@ -18,7 +18,7 @@ int saveResolvePartySlot(...);
 int FUN_0026b7c0(void);
 int FUN_0026c654(...);
 int FUN_0026c710(...);
-int FUN_0026c868(void);
+int partyPanelShowButtonHelp(void);
 int partyPanelRefreshFusionParents(void);
 int FUN_0026d144(...);
 int FUN_0026d3e0(...);
@@ -47,7 +47,7 @@ extern int g_partyPanel; /* 0x43dcf0 */
 /* Supplied declaration required: FUN_0026b7c0. */
 /* Supplied declaration required: FUN_0026c654. */
 /* Supplied declaration required: FUN_0026c710. */
-/* Supplied declaration required: FUN_0026c868. */
+/* Supplied declaration required: partyPanelShowButtonHelp. */
 /* Supplied declaration required: partyPanelRefreshFusionParents. */
 /* Supplied declaration required: FUN_0026d144. */
 /* Supplied declaration required: FUN_0026d3e0. */
@@ -203,7 +203,7 @@ void FUN_0028a924(int param_1,unsigned int param_2,unsigned short param_3)
     partyPanelFocusSelectedPartyMember(1);
     partyPanelResetWidgets();
     *(unsigned int *)(temp_v0 + 0x20) = 6;
-    FUN_0026c868();
+    partyPanelShowButtonHelp();
     if (*(int *)(temp_v0 + 0x1c) != 0x17) {
       return;
     }
@@ -689,7 +689,7 @@ LAB_0028b6c0:
     }
   }
 LAB_0028b6d0:
-  FUN_0026c868();
+  partyPanelShowButtonHelp();
   if (*(int *)(temp_v0 + 0x1c) != 0x17) {
     return;
   }

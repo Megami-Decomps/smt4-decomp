@@ -36,10 +36,10 @@ public:
 
     u32 &slot(u32 index) { return slots[index]; }
 
-    void appendRange(WordRange range, Appender appender)
+    void appendRange(u32 *first, u32 *last, Appender appender)
     {
-        for (u32 *entry = range.begin; entry != range.end; ++entry)
-            (this->*appender)(*entry);
+        for (; first != last; ++first)
+            (this->*appender)(*first);
     }
 };
 struct InheritedValueDestination {

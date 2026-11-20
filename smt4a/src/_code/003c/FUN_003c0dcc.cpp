@@ -1,37 +1,33 @@
-/* NON_MATCHING: saved record/count registers and progress-counter return scheduling differ; retail and built both have 124 rows. */
-#include "addon/PackageSelection.h"
+/* NON_MATCHING: the zero used to initialize scan counters has a different home register; the progress update shares the other exits' success assignment. */
+#include "gamedata/CatalogProgress.h"
 #include "addon/aocMain.h"
 #include "addon/AocSystemA.h"
 
 extern "C" {
 void *dataTableGet(s32 table, s32 section);
-s32 gameFlagIsSet(u32 flag);
 s32 aocCountTableRecords(AocSystemA *system);
 s32 tableFlagBit0(s32 index);
 s32 tableFlagBit1(s32 index);
 s32 tableFlagBit2(s32 index);
-u8 tableByteGet1(s32 index);
 void FUN_0040a790(s32 index);
 void FUN_0040a7b4(s32 index);
 void FUN_0040a844(s32 index, s32 enabled);
 void gameDataSetEnabledBit(s32 index, s32 enabled);
-void gameDataSetModeAndFlag(s32 index, u32 count);
 
-// Refresh available quest records, stopping when a newly relevant entry needs attention.
+/* Refresh available quest records, stopping when a newly relevant entry needs attention. */
 u32 FUN_003c0dcc()
 {
     if (!gameFlagIsSet(0x40E))
         return 0;
     void *table = dataTableGet(0x45, 0);
     dataTableGetEntries(table);
-    s32 count = dataTableGetCount(table);
-    count += aocCountTableRecords(g_aocSystem);
+    s32 count = dataTableGetCount(table) + aocCountTableRecords(g_aocSystem);
     s32 visited = 0;
     u32 needsAttention = 0;
     for (s32 index = 0; index < 300; ++index) {
         if (visited >= count)
             break;
-        PackageSelectableRecord *record = contentFindRecordById(static_cast<u16>(index));
+        PackageSelectableRecord *record = contentFindRecordById((u16)index);
         if (record == NULL)
             continue;
         ++visited;
@@ -47,16 +43,8 @@ u32 FUN_003c0dcc()
                 needsAttention = 1;
                 break;
             }
-            u32 previous = tableByteGet1(index);
-            u32 progress = previous;
-            if (previous < 5) {
-                u8 satisfied = 0;
-                for (u8 i = 0; i < 5; ++i) {
-                    if (gameFlagIsSet(record->options[i]))
-                        ++satisfied;
-                }
-                progress = satisfied;
-            }
+            u8 previous = tableByteGet1(index);
+            u8 progress = countCompletedOptions(record, previous);
             if (previous < progress) {
                 gameDataSetModeAndFlag(index, progress);
                 needsAttention = 1;
@@ -87,4 +75,4 @@ u32 FUN_003c0dcc()
     }
     return needsAttention;
 }
-}
+} /* extern "C" */

@@ -52,6 +52,12 @@ All of these units are third-party (listed in `config/third_party.txt`) and stil
 so a failure here changes no proven function and no progress number: relink keeps their retail
 bytes. CI's Windows build compiles every unit and is the complete gate.
 
+The relink itself can also fail on the host: the bundled 32-bit GNU `ld` (`<game>/build/tools/binutils-arm-none-eabi/`)
+has crashed with an access violation (exit code 3221225477, `0xC0000005`) linking Apocalypse's larger
+`.code`. That is the linker, not the sources: rerun with a 64-bit build of the same binutils,
+`python -B ../tools/relink.py --matched --ld C:/msys64/mingw64/bin/arm-none-eabi-ld.exe` (an MSYS2
+mingw64 arm-none-eabi binutils); it gives the same `MATCH` (wave 57).
+
 ## objdiff, fdiff and relink disagree
 
 objdiff ignores some operand differences, so its 100% is not proof. `tools/fdiff.py` compares

@@ -7,7 +7,7 @@ extern "C" {
 extern const char g_moriModelUnitSourceFileName[];
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void idArrayConstruct(void *array, u16 *data, s32 count);
-void FUN_0045af14(void *array, f32 *data, s32 count);
+void floatArrayConstruct(void *array, f32 *data, s32 count);
 
 /* The largest element count among a table's meshes. */
 static __inline s32 maxElementCount(UnitMeshTable *table)
@@ -58,7 +58,7 @@ void moriModelUnitAllocateChannels(ModelUnitBuffers *unit)
         } else {
             asdDebugTrace(g_moriModelUnitSourceFileName, 0x250);
             positions->data = static_cast<f32 *>(asdMemoryAlloc(0x10000, 0x100, 0, bytes, 1));
-            FUN_0045af14(positions, positions->data, floatCount);
+            floatArrayConstruct(positions, positions->data, floatCount);
         }
         positions->enabled = 0;
         positions->unk0c = 0.0f;

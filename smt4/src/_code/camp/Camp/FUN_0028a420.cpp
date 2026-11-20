@@ -7,7 +7,7 @@
 
 extern "C" {
 
-int FUN_0026c868(void);
+int partyPanelShowButtonHelp(void);
 int obj48Arm(...); // declcheck: local (romwright prototype; the shared declaration in code/Code0029_Smt4.h does not compile here: more than one instance of overloaded function "pair40Set" has "C" linkage)
 int slotPlacementAssignSlotAndPosition(...);
 int FUN_00298d28(...);
@@ -69,7 +69,7 @@ extern int FUN_00262cb0(unsigned int);
 /* Supplied declaration required: FUN_00262d40. */
 /* Supplied declaration required: campRebuildOwnedInventoryCategory. */
 extern unsigned int statusGetAvailableChoiceCount(void);
-/* Supplied declaration required: FUN_0026c868. */
+/* Supplied declaration required: partyPanelShowButtonHelp. */
 /* Supplied declaration required: campRebuildCategoryList. */
 /* Supplied declaration required: table8Type5GetValue. */
 /* Supplied declaration required: commonBgAcquire. */
@@ -433,7 +433,7 @@ LAB_0028b6c0:
     }
   }
 LAB_0028b6d0:
-  FUN_0026c868();
+  partyPanelShowButtonHelp();
   temp_v0 = g_partyPanel;
   if (*(int *)(temp_v6 + 0x1c) == 0x17) {
     temp_v6 = *(int *)(temp_v6 + 0x20);

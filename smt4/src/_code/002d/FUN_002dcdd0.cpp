@@ -1,4 +1,5 @@
-/* NON_MATCHING: affinity-selection loop has different register allocation and loop comparison encoding. */
+/* NON_MATCHING: the loop bound now compares with 7 as retail; the affinity-selection loop's registers differ (retail keeps the
+ * records in r8/r9 and sets the first comparator argument before loading the affinity). */
 #include "common.h"
 #include "gamedata/EquipmentRecord.h"
 
@@ -18,7 +19,7 @@ s32 FUN_002dcdd0(const u16 *left, const u16 *right)
     s32 rightAffinity = 0;
     s32 leftIndex = DAT_00402638[0];
     s32 rightIndex = DAT_00402638[1];
-    for (s32 index = 0; index < 8; index++) {
+    for (s32 index = 0; index <= 7; index++) {
         if (FUN_0028886c(leftAffinity, leftRecord->affinities[index] >> 10) > 0) {
             leftIndex = index;
             leftAffinity = leftRecord->affinities[index] >> 10;

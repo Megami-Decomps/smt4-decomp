@@ -5,7 +5,7 @@
 #include "nn/os/Thread.h"
 #include <stddef.h>
 
-extern "C" void FUN_00422654(void *reader);
+extern "C" void mobiclipS4FsReaderDestroy(void *reader);
 
 /* The base that owns the reader thread; its implicit destructor runs after the owner's handles close. */
 struct MobiclipStreamThreadOwner {
@@ -28,5 +28,5 @@ typedef char MobiclipStreamOwnerLayoutCheck[
 
 MobiclipStreamOwner::~MobiclipStreamOwner()
 {
-    FUN_00422654(this);
+    mobiclipS4FsReaderDestroy(this);
 }

@@ -65,10 +65,10 @@ struct PlayerArray {
     /* 0x0C */ u32 *capacity;
 };
 
-/* Four words (leading 64-bit value plus two words), cleared on construction. */
+/* Four words (two 64-bit values), cleared on construction and stream start. */
 struct PlayerQuad {
     u64 first;
-    u32 c, d;
+    u64 second;
 };
 
 struct MessageHandler;
@@ -87,13 +87,13 @@ struct MessageHandlerTable {
     /* 0x04 */ MoLive::Tree<PlayerUnknownValue> handlers;
 };
 
-/* The worker the player runs; slot 4 destroys it. */
+/* The worker/source the player runs; slot 1 gets kind, slot 3 checks readiness, slot 4 destroys it. */
 class PlayerWorker {
 public:
     virtual void slot0();
-    virtual void slot1();
+    virtual u8 getKind();
     virtual void slot2();
-    virtual void slot3();
+    virtual s32 isReady();
     virtual void destroy();
 };
 
@@ -103,6 +103,17 @@ struct MoLivePlayer {
     bool flushPending();
     void releaseIdleStreams();
     void reset();
+
+    /* Resets stream playback counters and buffer defaults (also inlined in smt4 moLivePlayerSetWorker and FUN_003b2318). */
+    void resetStreamState()
+    {
+        unk0000.first = 0;
+        unk0000.second = 0;
+        unk1480 = 64;
+        unk1484 = 0x10000;
+        unk148F = 0;
+        unk1491 = 0;
+    }
 
     /* 0x0000 */ PlayerQuad unk0000;
     /* 0x0010 */ u8 unk0010[8];

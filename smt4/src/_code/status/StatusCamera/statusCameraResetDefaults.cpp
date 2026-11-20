@@ -34,13 +34,9 @@ void statusCameraResetDefaults(void)
         up.y = 1.0f;
         up.z = 0.0f;
         Vec3 target = camera->eye;
-        Vec3 offset = camera->dir;
-        offset.x *= camera->dist;
-        offset.y *= camera->dist;
-        offset.z *= camera->dist;
-        target.x += offset.x;
-        target.y += offset.y;
-        target.z += offset.z;
+        Vec3 offset;
+        vec3Scale(&offset, &camera->dir, camera->dist);
+        vec3Add(&target, &target, &offset);
         FUN_002bc644(200, 0, 200, 240);
         cameraMatrixCacheReset(camera, 1);
         cameraMatrixCacheSetLookAt(camera, &camera->eye, &target, &up);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: the zero register is hoisted above the phase dispatch and the voice-stop block is duplicated per path where retail shares one copy (the other path jumps back into it). */
+/* NON_MATCHING: the delay-table copy uses core registers rather than VFP, and the wait phase exchanges two scratch registers. */
 #include "map/LmapGlobals.h"
 #include <string.h>
 
@@ -19,7 +19,14 @@ void lmapRequestTimedEffect(s32 duration, s32 first, s32 second);
 void soundApplyValueOrStop(u32 voice, s32 mode);
 void lmapClearExtraFlag(void);
 
-// Wait a randomized idle interval, play a timed voice, and cancel it when the scene stops idling.
+enum {
+    IDLE_VOICE_OFF,
+    IDLE_VOICE_PICK_DELAY,
+    IDLE_VOICE_WAITING,
+    IDLE_VOICE_PLAYING,
+};
+
+/* Wait a randomized idle interval, play a timed voice, and cancel it when the scene stops idling. */
 void FUN_00385578(void)
 {
     s32 delays[6];
@@ -28,17 +35,17 @@ void FUN_00385578(void)
     memcpy(durations, DAT_00532018.durations, sizeof(durations));
     LmapSceneA *scene = g_lmapScene;
     switch (scene->idleVoicePhase) {
-    case 0:
+    case IDLE_VOICE_OFF:
         break;
-    case 1: {
+    case IDLE_VOICE_PICK_DELAY: {
         s32 delay = delays[randBetween(0, 5)];
         scene = g_lmapScene;
-        scene->idleVoicePhase = 2;
+        scene->idleVoicePhase = IDLE_VOICE_WAITING;
         scene->idleVoiceDuration = delay;
         scene->idleVoiceFrame = 0;
         break;
     }
-    case 2:
+    case IDLE_VOICE_WAITING:
         if ((scene->mode == 1 || scene->mode == 3) &&
             ++scene->idleVoiceFrame >= scene->idleVoiceDuration) {
             s32 duration = durations[randBetween(0, 5)];
@@ -47,23 +54,26 @@ void FUN_00385578(void)
             u32 voice = sysPlayVoice(0x0100009E);
             scene = g_lmapScene;
             scene->idleVoiceFrame = 0;
-            scene->idleVoicePhase = 3;
+            scene->idleVoicePhase = IDLE_VOICE_PLAYING;
             scene->idleVoice = voice;
         }
         break;
-    case 3:
-        if (scene->mode != 1 && scene->mode != 3) {
+    case IDLE_VOICE_PLAYING:
+        if (scene->mode == 1 || scene->mode == 3) {
+            if (++g_lmapScene->idleVoiceFrame >= g_lmapScene->idleVoiceDuration) {
+                if (g_lmapScene->idleVoice != 0)
+                    soundApplyValueOrStop(g_lmapScene->idleVoice, 0);
+                g_lmapScene->idleVoiceFrame = 0;
+                g_lmapScene->idleVoicePhase = IDLE_VOICE_OFF;
+            }
+        } else {
             lmapClearExtraFlag();
-            scene = g_lmapScene;
-        } else if (++scene->idleVoiceFrame < scene->idleVoiceDuration) {
-            return;
+            if (g_lmapScene->idleVoice != 0)
+                soundApplyValueOrStop(g_lmapScene->idleVoice, 0);
+            g_lmapScene->idleVoiceFrame = 0;
+            g_lmapScene->idleVoicePhase = IDLE_VOICE_OFF;
         }
-        if (scene->idleVoice != 0)
-            soundApplyValueOrStop(scene->idleVoice, 0);
-        scene = g_lmapScene;
-        scene->idleVoiceFrame = 0;
-        scene->idleVoicePhase = 0;
         break;
     }
 }
-}
+} /* extern "C" */

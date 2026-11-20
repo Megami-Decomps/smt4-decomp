@@ -96,7 +96,7 @@ extern int statusDownGetFlag(void);
 extern int FUN_002c7cb4(void);
 /* Supplied declaration required: statusCameraApply. */
 extern int FUN_002effbc(void);
-extern unsigned int FUN_002f72dc(int);
+extern unsigned int mapGetSelectedGroupName(int);
 /* Supplied declaration required: FUN_0031416c. */
 /* Supplied declaration required: FUN_00316580. */
 extern int objStateNotEnding(void);
@@ -171,7 +171,7 @@ unsigned int FUN_00208c08(void)
     }
   }
   if ((*(char *)(temp_v2 + 0x20ac) == '\0') && (*(int *)(temp_v2 + 0x20cc) != 0)) {
-    temp_v4 = FUN_002f72dc(temp_v2);
+    temp_v4 = mapGetSelectedGroupName(temp_v2);
     sprintf((char *)(temp_v2 + 0x2068),(const char *)temp_v4);
     *(unsigned char *)(temp_v2 + 0x20ac) = 1;
   }

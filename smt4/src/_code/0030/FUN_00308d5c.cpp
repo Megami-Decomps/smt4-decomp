@@ -7,7 +7,7 @@
 extern "C" {
 
 int btlSupportVoiceChoose(...);
-int FUN_00245d0c(int, int);
+int btlRollAilmentChance(int, int);
 int FUN_00246d38(int, int, int, unsigned int);
 int btlUiRefreshSlotRanks(...);
 int pickerAdvance(...);
@@ -34,7 +34,7 @@ extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: btlSupportVoiceChoose. */
 extern unsigned int mapCategoryToDestinationGroup(unsigned int);
-/* Supplied declaration required: FUN_00245d0c. */
+/* Supplied declaration required: btlRollAilmentChance. */
 /* Supplied declaration required: FUN_00246d38. */
 /* Supplied declaration required: btlUiRefreshSlotRanks. */
 /* Supplied declaration required: pickerAdvance. */
@@ -99,28 +99,28 @@ LAB_00308ea4:
               temp_v2 = 0;
               if ((*(unsigned short *)((int)puVar9 + 0x1c6) & 0x80) != 0) {
                 temp_v5 = temp_v4;
-                FUN_00245d0c(temp_v4,7);
+                btlRollAilmentChance(temp_v4,7);
                 if (temp_v5 != 0) {
                   temp_v2 = 0x80;
                 }
               }
               if ((*(unsigned short *)((int)puVar9 + 0x1c6) & 0x40) != 0) {
                 temp_v5 = temp_v4;
-                FUN_00245d0c(temp_v4,6);
+                btlRollAilmentChance(temp_v4,6);
                 if (temp_v5 != 0) {
                   temp_v2 = temp_v2 | 0x40;
                 }
               }
               if ((*(unsigned short *)((int)puVar9 + 0x1c6) & 0x100) != 0) {
                 temp_v5 = temp_v4;
-                FUN_00245d0c(temp_v4,8);
+                btlRollAilmentChance(temp_v4,8);
                 if (temp_v5 != 0) {
                   temp_v2 = temp_v2 | 0x100;
                 }
               }
               if ((*(unsigned short *)((int)puVar9 + 0x1c6) & 8) != 0) {
                 temp_v5 = temp_v4;
-                FUN_00245d0c(temp_v4,3);
+                btlRollAilmentChance(temp_v4,3);
                 if (temp_v5 != 0) {
                   temp_v2 = temp_v2 | 8;
                 }

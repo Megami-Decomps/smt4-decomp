@@ -11,6 +11,7 @@
 #include "AsdSDK/Source/Snd/AsdSnd3dPosition.h"
 #include <stddef.h>
 #include "shard/S3SoundArchiveLoader.h"
+#include "sound/SpatialSoundPlayback.h"
 
 #define ASD_SND_SLOT_A_COUNT 4
 #define ASD_SND_SLOT_B_COUNT 4
@@ -163,7 +164,10 @@ typedef struct AsdSoundSystem {
     };
     /* 0x674 */ AsdSndSlotC slotsC[ASD_SND_SLOT_C_COUNT];
     /* 0x694 */ AsdSndSlotA slotsA[ASD_SND_SLOT_A_COUNT];
-    /* 0x784 */ u8 unk784[0xa4c];           /* the 3D sound manager, its actors and the listener state */
+    union {
+        /* 0x784 */ u8 unk784[0xa4c];
+        /* 0x784 */ SpatialSoundPlayback sound3d;
+    };
     /* 0x11d0 */ AsdSndDuck duck;
     /* 0x11ec */ u32 unk11ec;
     /* 0x11f0 */ u32 unk11f0;

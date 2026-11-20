@@ -1,5 +1,6 @@
 /* NON_MATCHING: Page parameter spills, saved-register assignment and the fallback null-check join differ. */
 #include "ui/HunterDatabaseWork.h"
+#include "gamedata/CatalogProgress.h"
 #include "addon/AocSystemA.h"
 
 struct AocSystemA;
@@ -15,7 +16,6 @@ struct HunterDatabasePageTextView {
 };
 extern "C" {
 extern const char DAT_0052d13c[];
-s32 tableByteGet1(s32 page);
 void asdTextFormatStream(u32 sprite, s32 font, u32 color, s32 flags, s32 style, const char *format, ...);
 void *FUN_00471678(AocSystemA *system, s32 page, s32 entry);
 const char *fileSectionGetData(u32 file, s32 entry, s32 *length);

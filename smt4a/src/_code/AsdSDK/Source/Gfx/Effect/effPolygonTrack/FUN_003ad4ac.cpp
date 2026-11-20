@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_003380a0(...);
 int FUN_0038136c(...);
-int FUN_00381758(...);
+int modelSetTransformFromParts(...);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(...);
 
@@ -36,7 +36,7 @@ extern float DAT_006472f8; /* 0x6472f8 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_003380a0. */
 /* Supplied declaration required: FUN_0038136c. */
-/* Supplied declaration required: FUN_00381758. */
+/* Supplied declaration required: modelSetTransformFromParts. */
 
 
 void FUN_003ad4ac(int param_1)
@@ -154,7 +154,7 @@ void FUN_003ad4ac(int param_1)
       puVar6 = puVar6 + 0xc;
     } while (temp_v3 < temp_v1);
   }
-  FUN_00381758(temp_v5,param_1,param_1 + 0x10,param_1 + 0x20);
+  modelSetTransformFromParts(temp_v5,param_1,param_1 + 0x10,param_1 + 0x20);
   if (*(char *)(temp_v4 + 0xb9) != '\0') {
     temp_v0 = *(unsigned short *)(temp_v5 + 0x12) | 0x100;
   }

@@ -58,7 +58,7 @@ s32 FUN_00256940(void *main, BtlMainState *state, u32 flag);
 void btlReflectQueueKind34(s32 a, CommandState *work);
 void btlReflectCreateKind18(s32 a, CommandState *work, s32 kind, s32 b, s32 c);
 s32 FUN_00245c78(void);
-s32 FUN_00245d0c(s32 unit, s32 kind);
+s32 btlRollAilmentChance(s32 unit, s32 kind);
 void FUN_00246d38(s32 a, s32 b, BtlActionRecord *record, u32 mask);
 void FUN_00255180(s32 unit, s32 kind, s32 value);
 void FUN_003c0484(BtlEntry *entry, u32 mask, s32 context);
@@ -192,13 +192,13 @@ u32 FUN_003d317c(BtlMainState **block, CommandState *work)
     if ((work->entry->flags & 0x20) == 0 || FUN_00245c78() != 0) {
         u32 responses = 0;
         s32 unitId = work->record->memberId;
-        if ((work->selection->responseFlags & 0x80) != 0 && FUN_00245d0c(unitId, 7) != 0)
+        if ((work->selection->responseFlags & 0x80) != 0 && btlRollAilmentChance(unitId, 7) != 0)
             responses = 0x80;
-        if ((work->selection->responseFlags & 0x40) != 0 && FUN_00245d0c(unitId, 6) != 0)
+        if ((work->selection->responseFlags & 0x40) != 0 && btlRollAilmentChance(unitId, 6) != 0)
             responses |= 0x40;
-        if ((work->selection->responseFlags & 0x100) != 0 && FUN_00245d0c(unitId, 8) != 0)
+        if ((work->selection->responseFlags & 0x100) != 0 && btlRollAilmentChance(unitId, 8) != 0)
             responses |= 0x100;
-        if ((work->selection->responseFlags & 8) != 0 && FUN_00245d0c(unitId, 3) != 0)
+        if ((work->selection->responseFlags & 8) != 0 && btlRollAilmentChance(unitId, 3) != 0)
             responses |= 8;
         if (responses != 0)
             FUN_00246d38(0, 0, work->record, responses);

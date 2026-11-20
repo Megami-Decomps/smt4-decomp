@@ -26,7 +26,7 @@ int FUN_004e5830(int *, unsigned int *, unsigned int);
 int btlActionTargetSlotScore(...);
 int FUN_004fcffc(...);
 int FUN_004fdb18(...);
-int FUN_004fe7e4(int, unsigned int *, int);
+int btlReflectQueuePendingRosterFade(int, unsigned int *, int);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -89,7 +89,7 @@ extern int FUN_004c8a9c(void);
 /* Supplied declaration required: FUN_004fcde0. */
 /* Supplied declaration required: FUN_004fcffc. */
 /* Supplied declaration required: FUN_004fdb18. */
-/* Supplied declaration required: FUN_004fe7e4. */
+/* Supplied declaration required: btlReflectQueuePendingRosterFade. */
 
 
 unsigned int FUN_004e05d4(int *param_1,unsigned int *param_2)
@@ -206,7 +206,7 @@ unsigned int FUN_004e05d4(int *param_1,unsigned int *param_2)
   *(unsigned int *)(temp_v2 + 0x45a4) = temp_v7 & ~DAT_005712b4;
   *(unsigned int *)(temp_v2 + 0x45a0) = temp_v9 & temp_v4;
   stateFinishIfPresent(*param_1);
-  FUN_004fe7e4(0,param_2,5);
+  btlReflectQueuePendingRosterFade(0,param_2,5);
   temp_v2 = 0;
   do {
     temp_v3 = *(int *)(*param_1 + 0x1ed4) + temp_v2 * 0x1d0;

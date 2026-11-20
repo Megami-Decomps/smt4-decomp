@@ -19,7 +19,7 @@ int cameraRegistryRemove(...);
 int FUN_00363c58(...);
 int FUN_00376f84(void);
 int FUN_003847d4(...);
-int FUN_003b5064(void);
+int mapRestoreSavedSelection(void);
 int FUN_003c91e8(void);
 int soundChannelStopAll(...);
 int objectVectorClear(...);
@@ -554,7 +554,7 @@ extern int dataTable2FType0GetEntry(int);
 extern int FUN_003ae4d0(unsigned int);
 /* Supplied declaration required: naviMainFinishRequest. */
 /* Supplied declaration required: sysClearCachedFlag. */
-/* Supplied declaration required: FUN_003b5064. */
+/* Supplied declaration required: mapRestoreSavedSelection. */
 /* Supplied declaration required: table23FindRecordByKey. */
 /* Supplied declaration required: FUN_003b5c54. */
 /* Supplied declaration required: FUN_003c91e8. */
@@ -4546,7 +4546,7 @@ joined_r0x0027ce58:
     if (DAT_005f1634 != '\0') {
       FUN_003c91e8();
       FUN_00363c58(1);
-      FUN_003b5064();
+      mapRestoreSavedSelection();
       if ((DAT_005f1634 != '\0') && (temp_v8 = gameDataBlocksGetSaveData(), *(char *)(temp_v8 + 2) == '\x02')) {
         bgmReleaseStopped();
         soundChannelStopAll(0xf);

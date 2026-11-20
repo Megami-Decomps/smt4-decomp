@@ -5913,3 +5913,14 @@
 00383f70 debugItemListDraw inferred draws the debug item list's visible names and cursor, or the empty-list message
 003f41ec mobiclipAudioDeviceInitializeStatics inferred initializes the S4AudioDevice helper's global objects and registers their destructors
 003c219c unitRollGrowthStat inferred rolls the weighted stat increment for its two growth callers
+0026c868 partyPanelShowButtonHelp inferred shows the party panel's button help per panel state: skill/item details, the fusion help lines of table 0x39, or the general help (FUN_001b0558)
+002f7e10 btlScriptSetTargetStatus inferred script command: sets or clears status bit arg1 on battle target or stored unit arg0 (arg2), queueing the status effect when set
+0038ba40 aocPackageAllRequestedFilesReady inferred 1 unless a requested (available) file of the package's directory table has no data yet; exact twin of smt4a 0x4743e4
+002ebdd8 spatialSoundActorStop inferred stops spatial actor N (when playing) through its handle and clears its active-mask bit; twin of smt4a 0x36be10
+002dfefc popupMarkNewlySeenEntries inferred twin of smt4a popupMarkNewlySeenEntries (same source shape)
+002f81d4 modelSetTransformFromParts inferred composes scale, rotation and translation into the model's transform; exact twin of smt4a 0x381758
+002d5900 uiDrawSegmentStrip inferred sorts a segment's endpoints and emits a strip offset along its normal; exact twin of smt4a 0x34111c
+0023a62c asdTextureTileCreate inferred fills an AsdTextureTile (format/type stack arguments, physical address); exact twin of smt4a 0x422184
+00245d0c btlRollAilmentChance inferred an ailment's luck-adjusted base chance plus the combatant's modifier for that ailment
+001e2be4 mapIdleHintStep inferred selects the next idle hint of the map save block's hint progress (skipping time- and party-inapplicable hints) and queues its voice message
+003b21e4 moLivePlayerSetWorker inferred twin of smt4a 0x4af258 (same worker attach and stream-state reset)

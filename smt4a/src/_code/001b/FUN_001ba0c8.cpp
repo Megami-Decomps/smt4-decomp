@@ -1,4 +1,4 @@
-/* NON_MATCHING: semaphore wait/release helpers (as in the smt4 twin fileQueuePush) give retail's registers; only the zero for the ring-index wrap (r9) is set after the semaphore wait here, retail sets it before the svc (FUN_0036d41c, FUN_00159e68, FUN_0015f0f4 and FUN_00422654 show the same zero-before-svc 0x24 placement; multifile with the callees does not reproduce it). */
+/* NON_MATCHING: semaphore wait/release helpers (as in the smt4 twin fileQueuePush) give retail's registers; only the zero for the ring-index wrap (r9) is set after the semaphore wait here, retail sets it before the svc (FUN_0036d41c, FUN_00159e68, FUN_0015f0f4 and mobiclipS4FsReaderDestroy show the same zero-before-svc 0x24 placement; multifile with the callees does not reproduce it). */
 #include "sys/FileWorkerQueue.h"
 #include "nn/Result.h"
 #include "sys/ResultReport.h"

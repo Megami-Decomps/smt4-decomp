@@ -1,6 +1,7 @@
 #ifndef SOUND_SPATIAL_SOUND_PLAYBACK_H
 #define SOUND_SPATIAL_SOUND_PLAYBACK_H
-#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "common.h"
+#include <stddef.h>
 
 struct SpatialSoundActor {
     u8 prefix[0x48];
@@ -14,7 +15,7 @@ struct SpatialSoundPlayback {
     u8 unk8BC[0x184];
     u32 activeMask;
     u8 unkA44[4];
-    u8 enabled;
+    s8 enabled;
     u8 volume;
     u8 unkA4A[2];
 };

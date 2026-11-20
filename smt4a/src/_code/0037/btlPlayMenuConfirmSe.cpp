@@ -1,4 +1,3 @@
-/* NON_MATCHING: all sound-selection branches agree; initial battle flags/masks load ordering and flag-id register differ. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_StatGrowth.h"
 #include "battle/BtlGlobals.h"
@@ -7,13 +6,12 @@ extern "C" {
 void sysPlaySe(u32 id);
 s32 gameFlagIsSet(u32 id);
 
+/* Play the menu confirmation cue for the current battle state. */
 void btlPlayMenuConfirmSe(s32 alternate)
 {
-    struct CueMaskView { u8 prefix[0xd0]; u64 mask; };
-    typedef char CueMaskOffset[offsetof(CueMaskView, mask) == 0xd0 ? 1 : -1];
-    const CueMaskView *cues = reinterpret_cast<const CueMaskView *>(&g_btlMain);
-    u64 flags = g_btlMain.state->stateFlags64.bits;
-    if ((flags & cues->mask) || (flags & g_btlMain.transition.mask)) {
+    const BtlMainStateA *battle = g_btlMain.state;
+    if ((battle->stateFlags64.bits & g_btlMain.partyTarget.mask) ||
+        (battle->stateFlags64.bits & g_btlMain.transition.mask)) {
         if (gameFlagIsSet(0x525)) {
             sysPlaySe(0xe6);
             return;
@@ -59,4 +57,4 @@ void btlPlayMenuConfirmSe(s32 alternate)
     }
     sysPlaySe(0xaf);
 }
-}
+} /* extern "C" */

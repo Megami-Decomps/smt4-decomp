@@ -16,7 +16,7 @@ extern u32 DAT_00573cd8[];
 
 struct Slot *saveSlotFindById(u32 id);
 u32 partySlotIsOccupied(const struct Slot *slot);
-void FUN_0047f7c0(s32 index);
+void btlPlayPackedVoiceSlot(s32 index);
 
 /* Triggers the two hooks for the slot with this id: hook 0 when its table 10 links point at target. */
 void FUN_0047f8ac(u32 id, void *target)
@@ -32,14 +32,14 @@ void FUN_0047f8ac(u32 id, void *target)
 
             for (i = 0; i < count; i++) {
                 if (entries[i].type == 11 && entries[i].target == target) {
-                    FUN_0047f7c0(0);
+                    btlPlayPackedVoiceSlot(0);
                     break;
                 }
             }
         }
     }
     if (partySlotIsOccupied(saveSlotFindById((u16)id)) && DAT_00573cd8[1] != 0) {
-        FUN_0047f7c0(1);
+        btlPlayPackedVoiceSlot(1);
     }
 }
 

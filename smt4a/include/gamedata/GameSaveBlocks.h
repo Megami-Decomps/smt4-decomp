@@ -8,6 +8,7 @@
 extern "C" {
 
 extern GameDataBlocksA g_gameDataBlocks;
+u32 gameDataBlocksGetTable(void);
 
 } /* extern "C" */
 

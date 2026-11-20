@@ -39,7 +39,7 @@ int buttonHelpSetText(...);
 int slotRecordFindById(...);
 int menuStateStartConfirm(void);
 int scrRunOpcodesStub(...);
-int FUN_0023fc38(void);
+int partyPanelPlayInputCue(void);
 int skillApplyToParty(...);
 int FUN_002a6a24(...);
 int statusDownRestartTransition(void);
@@ -54,7 +54,7 @@ int itemApplyToParty(...);
 int FUN_004fd508(...);
 
 int sysPlaySe(...);
-int FUN_0020d934(void);
+int partyPanelShowButtonHelp(void);
 int btlMenuSetMessageText(...);
 int statusPanelClose(void);
 int FUN_00270498(void);
@@ -162,7 +162,7 @@ extern int flagValueRead(unsigned short);
 /* Supplied declaration required: partyPanelHandleLayoutToggle. */
 /* Supplied declaration required: partyPanelHandleCursorEdgeInput. */
 /* Supplied declaration required: partyPanelChangeState. */
-/* Supplied declaration required: FUN_0020d934. */
+/* Supplied declaration required: partyPanelShowButtonHelp. */
 /* Supplied declaration required: FUN_0021c1e0. */
 /* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: btlMenuSetMessageText. */
@@ -178,7 +178,7 @@ extern int FUN_0023b3b8(void);
 /* Supplied declaration required: FUN_0023b45c. */
 /* Supplied declaration required: FUN_0023e908. */
 /* Supplied declaration required: FUN_0023f900. */
-/* Supplied declaration required: FUN_0023fc38. */
+/* Supplied declaration required: partyPanelPlayInputCue. */
 extern int messageMainIsIdle(void);
 /* Supplied declaration required: FUN_0026e848. */
 /* Supplied declaration required: partyPanelReconfigureStockGrids. */
@@ -1321,7 +1321,7 @@ LAB_00264384:
                     if (*(char *)(temp_v1 + 0x9b4) == '\x12') {
                       FUN_0037e1b0((int)(char)((char)*(unsigned int *)(temp_v1 + 0xe84) + '\x01'),0);
                     }
-                    FUN_0020d934();
+                    partyPanelShowButtonHelp();
                     temp_v4 = *(int *)(temp_v1 + 0xe84);
                     if (temp_v4 >= 2) {
                       FUN_00270498();
@@ -1364,7 +1364,7 @@ LAB_00264384:
                       *(unsigned int *)(temp_v1 + 0x1074) = temp_v5 | 0x40;
                       *(unsigned int *)(temp_v1 + 0x1078) = temp_v5;
                       if (temp_v5 != (temp_v5 | 0x40)) {
-                        FUN_0020d934();
+                        partyPanelShowButtonHelp();
                       }
                     }
                     goto LAB_00264d34;
@@ -1740,7 +1740,7 @@ LAB_002654c8:
                     if (*(char *)(temp_v1 + 0x9b4) == '\x12') {
                       FUN_0037e1b0((int)(char)((char)*(unsigned int *)(temp_v1 + 0xe84) + '\x01'),0);
                     }
-                    FUN_0020d934();
+                    partyPanelShowButtonHelp();
                     temp_v4 = *(int *)(temp_v1 + 0xe84);
                     if (temp_v4 >= 2) {
                       FUN_00270498();
@@ -1782,7 +1782,7 @@ LAB_002654c8:
                       temp_v5 = *(unsigned int *)(temp_v1 + 0x1074);
                       *(unsigned int *)(temp_v1 + 0x1074) = temp_v5 | 0x40;
                       *(unsigned int *)(temp_v1 + 0x1078) = temp_v5;
-                      FUN_0020d934();
+                      partyPanelShowButtonHelp();
                     }
                   }
                   if (temp_v22 != 0) {
@@ -1899,7 +1899,7 @@ LAB_002654dc:
             }
             else {
               FUN_0037e1b0((int)(char)((char)*(int *)(temp_v1 + 0xe84) + '\x01'),0);
-              FUN_0020d934();
+              partyPanelShowButtonHelp();
             }
           }
           eventQueueAddUniqueIfValid(0x100020f);
@@ -1960,7 +1960,7 @@ LAB_002657e4:
             }
             *(unsigned int *)(temp_v1 + 0x1074) = temp_v10;
             if (*(int *)(temp_v1 + 0x1078) != *(int *)(temp_v1 + 0x1074)) {
-              FUN_0020d934();
+              partyPanelShowButtonHelp();
             }
           }
         }
@@ -2229,7 +2229,7 @@ LAB_002661cc:
                     FUN_00285800();
                     FUN_00230ac0(4,0xffffffff,0);
                     buttonHelpSetText(0,0xf4f4f4ff);
-                    FUN_0023fc38();
+                    partyPanelPlayInputCue();
                     temp_v4 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x14),1);
                     if (temp_v4 != 0) {
                       scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x14));
@@ -2307,8 +2307,8 @@ LAB_002662a0:
               *(unsigned char *)(temp_v1 + 0x9b4) = 10;
               *(unsigned int *)(temp_v1 + 0x20) = 8;
               partyPanelChangeState(0,1);
-              FUN_0020d934();
-              FUN_0023fc38();
+              partyPanelShowButtonHelp();
+              partyPanelPlayInputCue();
               temp_v10 = 0x100020f;
               eventQueueAddUniqueIfValid(temp_v10);
             }
@@ -2445,7 +2445,7 @@ LAB_00266850:
       useCounterRelease();
       gameGlobalsSetMenuOpenFlag(0);
       if (*(char *)(temp_v1 + 0x9b4) != '\x01') {
-        FUN_0023fc38();
+        partyPanelPlayInputCue();
       }
       FUN_0023b45c(0);
       temp_v14 = *(int *)(temp_v1 + 0x24);
@@ -2613,7 +2613,7 @@ LAB_00266ac4:
         else {
           if ((*(int *)(temp_v1 + 0x9bc) < 0) ||
              (*(int *)(temp_v1 + *(int *)(temp_v1 + 0x9bc) * 8 + 0xa80) < 0)) {
-            FUN_0023fc38();
+            partyPanelPlayInputCue();
             temp_v10 = 1;
             temp_v14 = 8;
             partyPanelChangeState(temp_v14,temp_v10);
@@ -2640,7 +2640,7 @@ LAB_00266ac4:
           eventQueueAddUniqueIfValid(0x100021f);
         }
       }
-      FUN_0023fc38();
+      partyPanelPlayInputCue();
       temp_v10 = 1;
       temp_v14 = 8;
       partyPanelChangeState(temp_v14,temp_v10);
@@ -2706,7 +2706,7 @@ LAB_0026700c:
         *(unsigned char *)(temp_v4 + 0x35) = 0;
         FUN_00230ac0(4,0xffffffff,0,*(char *)(temp_v4 + 0x42) != '\0');
         if (*(unsigned char *)(temp_v4 + 0x9b4) >= 2) {
-          FUN_0023fc38();
+          partyPanelPlayInputCue();
         }
         partyPanelChangeState(0,1);
       }
@@ -2824,7 +2824,7 @@ LAB_0026700c:
             FUN_002cb84c();
             partyPanelRefreshSelectedItemValues(reinterpret_cast<void*>(temp_v14),0);
           }
-          FUN_0020d934();
+          partyPanelShowButtonHelp();
           temp_v10 = 1;
           temp_v14 = 8;
           partyPanelChangeState(temp_v14,temp_v10);
@@ -3124,7 +3124,7 @@ LAB_0026700c:
         FUN_00285800();
         FUN_00230ac0(4,0xffffffff,0);
         buttonHelpSetText(0,0xf4f4f4ff);
-        FUN_0023fc38();
+        partyPanelPlayInputCue();
         temp_v4 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x14),1);
         if (temp_v4 != 0) {
           scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x14));
@@ -3166,8 +3166,8 @@ LAB_0026795c:
       FUN_00230ac0(temp_v10,0xffffffff,0);
     }
   }
-  FUN_0020d934();
-  FUN_0023fc38();
+  partyPanelShowButtonHelp();
+  partyPanelPlayInputCue();
   partyPanelChangeState(0,1);
   if (*(char *)(temp_v1 + 0x9b4) == '\v') {
     scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x14),1);

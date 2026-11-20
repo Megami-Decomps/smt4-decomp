@@ -22,7 +22,7 @@ int s4LoadCreate(void);
 int gameApplyFlagTriggers(void);
 int FUN_00324c94(...);
 int FUN_00363c58(...);
-int FUN_003b5064(void);
+int mapRestoreSavedSelection(void);
 int commonBgStopChildAndBeginTransition(void);
 int FUN_003c91e8(void);
 int gameFlagsSetFlagsFromTaggedGroupEntries(...);
@@ -134,7 +134,7 @@ extern int FUN_0035e6d4(unsigned int *);
 extern int titleConfigIsClosed(void);
 extern int saveLoadUIHasResult(void);
 /* Supplied declaration required: saveLoadStartDefaultWindow. */
-/* Supplied declaration required: FUN_003b5064. */
+/* Supplied declaration required: mapRestoreSavedSelection. */
 /* Supplied declaration required: commonBgStopChildAndBeginTransition. */
 /* Supplied declaration required: mobiclipProcessSetFlag78. */
 /* Supplied declaration required: mobiclipProcessSetFlag77. */
@@ -912,7 +912,7 @@ LAB_0029fb00:
           piVar10 = &temp_v13;
         }
         else {
-          FUN_003b5064();
+          mapRestoreSavedSelection();
           DAT_005f1bd4 = 0;
           DAT_005f1be8 = 1;
           if (g_mapSelection >= 200) {

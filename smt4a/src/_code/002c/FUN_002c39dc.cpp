@@ -20,7 +20,7 @@ int gameGetSlotRecord(...);
 int skillDataFindById(void);
 int __aeabi_memset4(int, int, int);
 int partyPanelChangeState(...);
-int FUN_0020d934(void);
+int partyPanelShowButtonHelp(void);
 int gameGetSaveSlotData(...);
 int partyPanelResetWidgets(void);
 void partyPanelRefreshSelectedItemValues(void*, int);
@@ -52,7 +52,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: partyPanelChangeState. */
-/* Supplied declaration required: FUN_0020d934. */
+/* Supplied declaration required: partyPanelShowButtonHelp. */
 /* Supplied declaration required: gameGetSaveSlotData. */
 /* Supplied declaration required: partyPanelHasSlotValue. */
 extern int FUN_0025e684(void);
@@ -217,7 +217,7 @@ void FUN_002c39dc(int param_1,unsigned int param_2,unsigned short param_3)
     FUN_00372570(1);
     partyPanelResetWidgets();
     *(unsigned int *)(temp_v0 + 0x20) = 6;
-    FUN_0020d934();
+    partyPanelShowButtonHelp();
     if (*(int *)(temp_v0 + 0x1c) != 0x1b) {
       return;
     }
@@ -826,7 +826,7 @@ LAB_002c4a1c:
     }
   }
 LAB_002c4a2c:
-  FUN_0020d934();
+  partyPanelShowButtonHelp();
   if (*(int *)(temp_v0 + 0x1c) != 0x1b) {
     return;
   }

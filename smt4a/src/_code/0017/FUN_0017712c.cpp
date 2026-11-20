@@ -1,4 +1,5 @@
-/* NON_MATCHING: indexed slot update and cached member-pointer dispatch scheduling differ. */
+/* NON_MATCHING: 28 lines: retail predicates the member-pointer dispatch in each append loop (ldrne/moveq,
+ * the argument loaded between them) where armcc branches around the virtual lookup. */
 #include "gfx/InheritedValues.h"
 
 extern "C" InheritedValueCollection::Appender DAT_00544d14[2];
@@ -18,8 +19,8 @@ extern "C" void FUN_0017712c(InheritedValueDestinationOwner *destination,
         values->firstValue = *inherited->firstValue.begin;
     if (inherited->secondValue.begin != inherited->secondValue.end)
         values->secondValue = *inherited->secondValue.begin;
-    values->appendRange(inherited->firstList, DAT_00544d14[0]);
-    values->appendRange(inherited->secondList, DAT_00544d14[1]);
+    values->appendRange(inherited->firstList.begin, inherited->firstList.end, DAT_00544d14[0]);
+    values->appendRange(inherited->secondList.begin, inherited->secondList.end, DAT_00544d14[1]);
     if (inherited->defaults.begin != inherited->defaults.end)
         *values->defaultValue = *inherited->defaults.begin;
 }

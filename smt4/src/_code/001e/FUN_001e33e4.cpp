@@ -1,4 +1,5 @@
-/* NON_MATCHING (b1454): arm layout and the absolute-value compare match; retail loads previous/point as vldmia triples (vldm, vstmia {s1-s3}) and keeps the point kind load per arm. */
+/* NON_MATCHING: 44 lines: retail loads the point's kind separately in each arm where armcc hoists one load above
+ * the index test, which also swaps the queue and previous-point registers (r6/r7). */
 #include "shard/W6_W6Match2_VectorQueue.h"
 #include "util/MathFunctions.h"
 
@@ -17,24 +18,25 @@ void FUN_001e33e4(void)
             point->direction.y = 0.0f;
             point->direction.z = 0.0f;
         } else {
-            point->kind |= 1;
             QueuedVector *previous = point - 1;
-            f32 distance = mathDistanceBetweenPoints(point->x, point->y, point->z,
-                                                      previous->x, previous->y, previous->z);
+            point->kind |= 1;
+            f32 distance = mathDistanceBetweenPoints(point->position.x, point->position.y, point->position.z,
+                                     previous->position.x, previous->position.y, previous->position.z);
             if (distance < 0.0f)
                 distance = -distance;
-            f32 x = previous->x - point->x;
-            f32 y = previous->y - point->y;
-            f32 z = previous->z - point->z;
+            MapVector previousPosition = previous->position;
+            MapVector position = point->position;
+            MapVector direction;
+            direction.x = previousPosition.x - position.x;
+            direction.y = previousPosition.y - position.y;
+            direction.z = previousPosition.z - position.z;
             if (distance != 0.0f) {
                 f32 inverseDistance = 1.0f / distance;
-                x *= inverseDistance;
-                y *= inverseDistance;
-                z *= inverseDistance;
+                direction.x *= inverseDistance;
+                direction.y *= inverseDistance;
+                direction.z *= inverseDistance;
             }
-            point->direction.x = x;
-            point->direction.y = y;
-            point->direction.z = z;
+            point->direction = direction;
         }
     }
     ++g_vectorQueueWork->activeQueue;

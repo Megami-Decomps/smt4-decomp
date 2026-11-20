@@ -10,7 +10,7 @@ extern "C" {
 int statusPreviewMpChange(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int obj48Arm(...);
 
-int FUN_0020d934(...);
+int partyPanelShowButtonHelp(...);
 int partyPanelHasSlotValue(...);
 int scrollOwnerSelectIndex(...);
 int scrollListSetSelectionTracked(...);
@@ -78,7 +78,7 @@ extern unsigned char DAT_005e1eba; /* 0x5e1eba */
 /* Supplied declaration required: gameGetSlotTable. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_0020d700. */
-/* Supplied declaration required: FUN_0020d934. */
+/* Supplied declaration required: partyPanelShowButtonHelp. */
 /* Supplied declaration required: partyPanelHasSlotValue. */
 /* Supplied declaration required: campRebuildEnabledFlagList. */
 /* Supplied declaration required: campSelectorRebuildList. */
@@ -474,7 +474,7 @@ LAB_002c4a1c:
     }
   }
 LAB_002c4a2c:
-  FUN_0020d934();
+  partyPanelShowButtonHelp();
   temp_v1 = g_partyPanel;
   if (*(int *)(temp_v6 + 0x1c) != 0x1b) {
     return;

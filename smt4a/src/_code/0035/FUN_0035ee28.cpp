@@ -1,4 +1,4 @@
-/* NON_MATCHING: first group-output stack slot and excluded-mask load pairing differ. */
+/* NON_MATCHING: the required and excluded masks use different load pairing and scratch registers. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"

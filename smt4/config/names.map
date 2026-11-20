@@ -6096,3 +6096,14 @@
 00383f70 debugItemListDraw
 003f41ec mobiclipAudioDeviceInitializeStatics
 003c219c unitRollGrowthStat
+0026c868 partyPanelShowButtonHelp
+002f7e10 btlScriptSetTargetStatus
+0038ba40 aocPackageAllRequestedFilesReady
+002ebdd8 spatialSoundActorStop
+002dfefc popupMarkNewlySeenEntries
+002f81d4 modelSetTransformFromParts
+002d5900 uiDrawSegmentStrip
+0023a62c asdTextureTileCreate
+00245d0c btlRollAilmentChance
+001e2be4 mapIdleHintStep
+003b21e4 moLivePlayerSetWorker

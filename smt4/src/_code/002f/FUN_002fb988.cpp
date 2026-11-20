@@ -8,7 +8,7 @@
 extern "C" {
 
 
-int FUN_001e2be4(void);
+int mapIdleHintStep(void);
 int FUN_002562e4(int, int);
 int partyApplyNonlethalAilmentDamage(int, int);
 int FUN_0026413c(void);
@@ -47,7 +47,7 @@ extern int g_lmapScene; /* 0x447e88 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_001e2be4. */
+/* Supplied declaration required: mapIdleHintStep. */
 /* Supplied declaration required: FUN_002562e4. */
 /* Supplied declaration required: partyApplyNonlethalAilmentDamage. */
 extern unsigned int FUN_00256540(void);
@@ -192,7 +192,7 @@ void FUN_002fb988(int param_1)
     else {
       if ((*(int *)(temp_v0 + 0xd98) == 0) &&
          (temp_v2 = *(int *)(temp_v0 + 0xd94) + 1, *(int *)(temp_v0 + 0xd94) = temp_v2, temp_v2 >= 901)) {
-        FUN_001e2be4();
+        mapIdleHintStep();
         *(unsigned int *)(temp_v0 + 0xd98) = 0xe10;
         *(unsigned int *)(temp_v0 + 0xd94) = 0;
       }

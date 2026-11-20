@@ -8,7 +8,7 @@ int nkmEnemyFindById(void);
 int sysMemClear(unsigned int *, int);
 int rt_memclr(int, int);
 int FUN_003edaf0(unsigned int *, int);
-int FUN_003f1138(void);
+int btlMainFindFreeCombatantEntry(void);
 int FUN_0041a7dc(int);
 int FUN_004c3d00(unsigned int *);
 int btlAdjustPropertyClamped(int, int, unsigned int *, int);
@@ -46,7 +46,7 @@ extern unsigned int btlMainGetUnk14(void);
 /* Supplied declaration required: rt_memclr. */
 extern unsigned int *FUN_003e83b4(unsigned int *, int, unsigned int);
 /* Supplied declaration required: FUN_003edaf0. */
-/* Supplied declaration required: FUN_003f1138. */
+/* Supplied declaration required: btlMainFindFreeCombatantEntry. */
 /* Supplied declaration required: FUN_0041a7dc. */
 /* Supplied declaration required: FUN_004c3d00. */
 /* Supplied declaration required: btlAdjustPropertyClamped. */
@@ -95,7 +95,7 @@ void FUN_004ca63c(unsigned int *param_1,int param_2,int param_3,int param_4,int 
     }
     else {
       puVar3 = param_1;
-      FUN_003f1138();
+      btlMainFindFreeCombatantEntry();
       __aeabi_memcpy4(puVar3 + 0x59,param_2,0x230);
       temp_v1 = DAT_0057aa4c | DAT_0057aa34;
       *puVar3 = DAT_0057aa48 | DAT_0057aa30;

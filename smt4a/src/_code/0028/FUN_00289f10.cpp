@@ -65,9 +65,8 @@ u32 FUN_00289f10(u32 job)
             FUN_003fba4c(work->sprite, 0, (s32)(f32)work->frame, (s32 *)&work->origin,
                          spriteColorPack(work->level, work->alpha), 0);
         } else {
-            SpriteDrawPlacementOptions options = {1, 0};
             spriteDrawWithOrigin((SpriteDrawOwner *)work->sprite, 0, &work->origin,
-                                 spriteColorPack(work->level, work->alpha), options,
+                                 spriteColorPack(work->level, work->alpha), 1, 0,
                                  (f32)work->frame, 1.0f);
             FUN_003fba4c(work->sprite, 0, (s32)(f32)work->frame, (s32 *)&work->origin,
                          spriteColorPack(work->level, work->alpha), 2);

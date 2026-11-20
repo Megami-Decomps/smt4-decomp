@@ -1,4 +1,6 @@
-/* NON_MATCHING: retail includes an unreferenced pool word 0x004efb30 at +0x44 and a removed destructor-registration call at +0x28; the draft incorrectly merges the CRC-table tail callee. */
+/* NON_MATCHING: retail statically initializes the transfer-memory owner at 0x004EFB30,
+ * registers its destructor (FUN_003575a0, linker NOP at +0x30), and tail-calls the separate
+ * CRC-table initializer FUN_003611e4. The draft still takes parameters and inlines the CRC loop. */
 #include "romwright_types.h"
 
 extern "C" {

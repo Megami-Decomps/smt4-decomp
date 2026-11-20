@@ -1,5 +1,6 @@
-/* NON_MATCHING: the up vector is now a CameraPosition built in VFP registers as retail; remaining: retail loads the 0.0 constant first and stores x then y/z (ours x/y then z), loads the view direction with one vldmia, and swaps the camera/base registers (r4/r5). */
-/* Points the status camera at its target (eye + dir * dist) with +Y up, if the camera exists. */
+/* NON_MATCHING: the target is eye + dir * dist through nn::math's VEC3Scale/VEC3Add inlines and the up vector is stored as
+ * retail (x alone, y/z as a pair); remaining: retail loads the up vector's 0.0 into s1 before the arithmetic, so the
+ * direction lands in s2-s4 (ours s1-s3). */
 #include "common.h"
 #include "status/StatusCamera.h"
 #include "gfx/CameraVector3.h"
@@ -11,6 +12,7 @@ int cameraMatrixCacheSetLookAt(StatusCameraWork *camera, Vec3 *eye, Vec3 *target
 
 extern StatusCameraWork *g_statusCamera;
 
+/* Points the status camera at its target (eye + dir * dist) with +Y up, if the camera exists. */
 void statusCameraApply(void)
 {
     StatusCameraWork *camera = g_statusCamera;
@@ -18,17 +20,12 @@ void statusCameraApply(void)
     Vec3 offset;
 
     if (camera != NULL) {
-        f32 dist = camera->dist;
-
         target = camera->eye;
-        offset = camera->dir;
-        offset.x *= dist;
-        offset.y *= dist;
-        offset.z *= dist;
-        target.x += offset.x;
-        target.y += offset.y;
-        target.z += offset.z;
-        CameraPosition up(0.0f, 1.0f, 0.0f);
+        vec3Scale(&offset, &camera->dir, camera->dist);
+        vec3Add(&target, &target, &offset);
+        AsdCameraVec3 up;
+        up.z = up.x = 0.0f;
+        up.y = 1.0f;
         cameraMatrixCacheSetLookAt(camera, &camera->eye, &target, &up);
         FUN_001db388(camera, 0, camera->lens.fov, camera->lens.nearClip, camera->lens.farClip);
     }

@@ -1,6 +1,7 @@
 /* NON_MATCHING: step function of the save-write process (stage 0: snapshot the extra block and write it to slot file 0x62; stage 2: build the full save image of 0x2a7a4 bytes and write it; stages 1 and 3 wait for the write and either advance, fail to stage 5 or animate the wait counter; stages 4/5 end with a result); written from the decompilation, the goto into the stage-3 wait is rebuilt as a shared helper and the allocation arguments follow gameDataAllocBlocks */
 #include "common.h"
 #include "gamedata/SaveLoadProcess.h"
+#include "gamedata/GameSaveBlocks.h"
 #include "AsdSDK/AsdDebug.h"
 
 #define SAVE_STAGE_WRITE_EXTRA 0
@@ -56,7 +57,6 @@ void FUN_00268250(u8 mode, u32 arg0, u32 arg1, void *buffer, u32 size);
 void clockRecordStartSeconds(void);
 void gameDataBlocksSetIndexedValue(s32 index, u32 value);
 u8 *gameDataBlocksGetSaveData(void);
-u32 gameDataBlocksGetTable(void);
 u32 gameDataBlocksGetSelectedValue(void);
 u32 configGetSettings(void);
 void titleConfigWriteToSave(void);

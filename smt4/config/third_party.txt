@@ -897,6 +897,7 @@
 0x00152604 FUN_00152604 between
 0x00152608 nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryEnqueue name
 0x00152688 frem callers
+0x001527b4 ll_udiv10 library
 0x0015284c FUN_0015284c library
 0x0015335c nn_snd_CTR_MasterManager_GetAuxCallback name
 0x00153374 FUN_00153374 between
@@ -1738,6 +1739,7 @@
 0x002c5e80 FUN_002c5e80 between
 0x002c5ef0 FUN_002c5ef0 between
 0x002c5f60 __aeabi_idivmod name
+0x002c618c FUN_002c618c library
 0x002c6202 FUN_002c6202 between
 0x002c639c FUN_002c639c between
 0x002c6614 FUN_002c6614 between
@@ -2352,6 +2354,7 @@
 0x0036865c FUN_0036865c callers
 0x00368a28 FUN_00368a28 between
 0x00368ab0 FUN_00368ab0 callers
+0x0036a474 FUN_0036a474 library
 0x0036a5a8 nw_gfx_CalculatedTransform_ConvertQuaternionToMatrix name
 0x0036a6fc nw_gfx_CalculatedTransform_UpdateRotateFlagsStrictly name
 0x0036a798 FUN_0036a798 between
@@ -2377,11 +2380,13 @@
 0x0036e434 nw_gfx_Fog_Accept name
 0x0036e488 FUN_0036e488 between
 0x0036e7c8 FUN_0036e7c8 callers
+0x0036ef0c FUN_0036ef0c library
 0x0036f0c8 FUN_0036f0c8 callers
 0x0036f128 FUN_0036f128 callers
 0x0036f168 _ZN9Obj4734b87vfunc00Ev between
 0x0036f170 nw_gfx_res_ResVertexAttribute_Setup name
 0x0036fb88 nw_gfx_res_ResTextureCoordinatorData_ResTextureCoordinatorData name
+0x0036fc08 FUN_0036fc08 library
 0x00370234 FUN_00370234 callers
 0x00370244 FUN_00370244 between
 0x003702e0 FUN_003702e0 between

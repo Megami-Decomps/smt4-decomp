@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail keeps both `table + index * 0x5c` (r6) and the slot address (r4 = r6 + 0x1c) live and addresses some fields from each; branch layout differs accordingly. */
 #include "common.h"
 #include "code/Code001c.h"
 #include <string.h>
@@ -36,6 +35,19 @@ extern "C" {
 s32 moriModelContentIsLoaded(NamedResourceHandle *handle);
 char *strncpy(char *destination, const char *source, u32 count);
 
+/* resourceEntryMarkReleased's body (smt4a 0x3e5810, same file), inlined: releases slot `index`'s object (state 2). */
+static __inline void releaseSlotObject(NamedResourceTable *table, s32 index)
+{
+    NamedResourceSlot *slot = &table->slots[index];
+    NamedResourceObject *object = slot->handle->object;
+
+    if (object != NULL) {
+        slot->state = 2;
+        object->flags |= 3;
+        ptrListRemoveClearOwner(g_handleRegistry, object);
+    }
+}
+
 /* Points slot `index` at the resource `name` of kind `kind`: an open slot showing another name
  * releases its object, an idle table opens it directly (state 4), otherwise it is queued (state 5). */
 void namedResourceSlotAssign(NamedResourceTable *table, s32 index, const char *name, u16 kind)
@@ -44,25 +56,17 @@ void namedResourceSlotAssign(NamedResourceTable *table, s32 index, const char *n
 
     slot->kind = kind;
     if (moriModelContentIsLoaded(slot->handle) != 0) {
-        NamedResourceObject *object;
-
-        if (strcmp(slot->name, name) == 0) {
-            return;
-        }
-        object = slot->handle->object;
-        if (object != NULL) {
-            slot->state = 2;
-            object->flags |= 3;
-            ptrListRemoveClearOwner(g_handleRegistry, object);
+        if (strcmp(slot->name, name) != 0) {
+            releaseSlotObject(table, index);
+            strncpy(slot->name, name, sizeof(slot->name));
         }
     } else if (table->busy == 0 && moriModelContentIsLoaded(table->handle) != 0) {
         modelLoadFileAsyncByName(slot->handle, name);
         slot->state = 4;
-        return;
     } else {
         slot->state = 5;
+        strncpy(slot->name, name, sizeof(slot->name));
     }
-    strncpy(slot->name, name, sizeof(slot->name));
 }
 
 } /* extern "C" */

@@ -1,4 +1,3 @@
-/* NON_MATCHING: ARMCC keeps the positive-color cases inline instead of retail's out-of-line tails, changing branch hints and pool layout. */
 #include <stdio.h>
 #include "font/SearchWin/RunWin.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -10,6 +9,13 @@ s32 partyRecordClampEquippedRankDown(u32 stat);
 void drawSetColorFromRGBA8(u32 color);
 void statRowDrawValueImpl(s32 layer, s32 x, s32 y, s32 z, s32 mode, s32 depth, const char *format, ...);
 void gxResetColorQuadToWhite(void);
+
+enum {
+    STAT_DELTA_LOWER_LIMIT_COLOR = 0xFF00FFFF,
+    STAT_DELTA_LOSS_COLOR = 0xDC0F14FF,
+    STAT_DELTA_UPPER_LIMIT_COLOR = 0xFBEB39FF,
+    STAT_DELTA_GAIN_COLOR = 0x72E027FF,
+};
 
 /* Show the clamped stat delta, coloring values at the bounds separately. */
 void statDrawClampedDelta(void *owner, u32 stat, s32 x, s32 y, s32 depth, s32 delta)
@@ -28,21 +34,19 @@ void statDrawClampedDelta(void *owner, u32 stat, s32 x, s32 y, s32 depth, s32 de
     }
     if (value != 0) {
         char text[64];
-        u32 color;
         if (minimum >= value) {
             sprintf(text, "-");
-            color = 0xFF00FFFF;
+            drawSetColorFromRGBA8(STAT_DELTA_LOWER_LIMIT_COLOR);
         } else if (value < 0) {
             sprintf(text, "-");
-            color = 0xDC0F14FF;
+            drawSetColorFromRGBA8(STAT_DELTA_LOSS_COLOR);
         } else if (value >= maximum) {
             sprintf(text, "+");
-            color = 0xFBEB39FF;
+            drawSetColorFromRGBA8(STAT_DELTA_UPPER_LIMIT_COLOR);
         } else {
             sprintf(text, "+");
-            color = 0x72E027FF;
+            drawSetColorFromRGBA8(STAT_DELTA_GAIN_COLOR);
         }
-        drawSetColorFromRGBA8(color);
         const TextureTableEntryIV *position = asdTMTexTableEntryAt(11, 0x402);
         statRowDrawValueImpl(2, position->x + x, position->y + y, 0, 1, depth + 1, text);
         position = asdTMTexTableEntryAt(11, 0x401);
@@ -53,4 +57,4 @@ void statDrawClampedDelta(void *owner, u32 stat, s32 x, s32 y, s32 depth, s32 de
         gxResetColorQuadToWhite();
     }
 }
-}
+} /* extern "C" */

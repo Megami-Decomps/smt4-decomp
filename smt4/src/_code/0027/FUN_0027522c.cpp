@@ -1,4 +1,5 @@
-/* NON_MATCHING: visibility flag registers and zero/one VFP registers differ; motion resource comparison retains its pointer. */
+/* NON_MATCHING: the motion test now calls modelGetCurrentMotion (linker-inlined) as retail; the 0.0/1.0 constants swap s16/s17 and
+ * the loop base and node-flag temporaries swap r0/r1. */
 #include "map/MapObjects.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
@@ -9,6 +10,7 @@ extern MapObjectWork *g_mapObj;
 void modelPartSetRotationDegrees(AsdMdlNode *, s32, f32, f32, f32);
 void modelSelectPrimaryMotion(AsdMdlNode *, u32, f32);
 void modelSetScale(AsdMdlNode *, f32);
+u32 modelGetCurrentMotion(AsdMdlNode *model);
 
 // Synchronize visible map-object models with their pending position and motion changes.
 void FUN_0027522c(void)
@@ -28,7 +30,6 @@ void FUN_0027522c(void)
         u8 unk2C[8];
     };
     struct ObjectView { u8 prefix[0x14]; ObjectStateView state; };
-    struct MotionView { u8 prefix[0x38]; u32 motion; };
     for (s32 i = 0; i < 24; ++i) {
         ObjectStateView *object = &reinterpret_cast<ObjectView *>(g_mapObj)[i].state;
         if (object->active) {
@@ -48,7 +49,7 @@ void FUN_0027522c(void)
                         nodeSetTranslation(object->node->node, 0, &object->position.x);
                         modelPartSetRotationDegrees(object->node->node, 0, 0.0f, object->heading, 0.0f);
                     }
-                    if (reinterpret_cast<MotionView *>(object->node->node)->motion != object->motion) {
+                    if (modelGetCurrentMotion(object->node->node) != object->motion) {
                         modelSelectPrimaryMotion(object->node->node, object->motion, 0.0f);
                         modelSetScale(object->node->node, 1.0f);
                     }

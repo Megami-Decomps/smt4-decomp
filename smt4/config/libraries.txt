@@ -42,3 +42,15 @@ arm 0x120000 0x1200d4 NintendoWare-gfx Obj4212e8::create: nw::gfx DynamicBuilder
 arm 0x1204b8 0x12057c NintendoWare-gfx Obj421774 (fog)::create: nw::gfx DynamicBuilder::Create, MovePtr resource handle, inside the nw_gfx block
 arm 0x12abd0 0x12acbc NintendoWare-gfx Obj421058::create: nw::gfx DynamicBuilder::Create, MovePtr resource handle, inside the nw_gfx block
 arm 0x12b48c 0x12b550 NintendoWare-gfx Obj421158::create: nw::gfx DynamicBuilder::Create, MovePtr resource handle, inside the nw_gfx block
+# armlib's mbrtowc (Thumb, `movs` register moves, calls __aeabi_errno_addr), linked between the third-party
+# __aeabi_idivmod at 0x2c5f60 and the library functions from 0x2c6202; smt4a's exact twin FUN_002e3c44 is third-party (library).
+thumb 0x2c618c 0x2c61fc armlib mbrtowc: Thumb, calls __aeabi_errno_addr; exact twin of smt4a's library FUN_002e3c44
+# NintendoWare gfx: three functions inside the nw::gfx block whose exact smt4a twins are third-party (between).
+# 0x36a474 sits right before nw_gfx_CalculatedTransform_ConvertQuaternionToMatrix (twin FUN_0044bd1c),
+# 0x36ef0c between nw_gfx_Fog_Accept and the nw::gfx res functions (twin FUN_004511d8),
+# 0x36fc08 right after nw_gfx_res_ResTextureCoordinatorData_ResTextureCoordinatorData (twin FUN_00452380).
+arm 0x36a474 0x36a59c NintendoWare-gfx before CalculatedTransform_ConvertQuaternionToMatrix; exact twin of smt4a's third-party FUN_0044bd1c
+arm 0x36ef0c 0x36efa8 NintendoWare-gfx between nw_gfx_Fog_Accept and nw::gfx res code; exact twin of smt4a's third-party FUN_004511d8
+arm 0x36fc08 0x36fcf8 NintendoWare-gfx after ResTextureCoordinatorData constructor; exact twin of smt4a's third-party FUN_00452380
+# armlib's ll_udiv10 (unsigned 64-bit divide by ten, named from the ARM runtime); smt4a's exact twin 0x2e3fcc is third-party.
+arm 0x1527b4 0x15284c armlib ll_udiv10: 64-bit reciprocal divide by ten; smt4a twin ll_udiv10 is third-party

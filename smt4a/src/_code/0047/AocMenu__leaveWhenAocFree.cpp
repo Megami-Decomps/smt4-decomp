@@ -21,11 +21,6 @@ void AocMenu::leaveWhenAocFree()
     u32 flags = g_aocMain->flags;
 
     if (!aocOperationBusy(flags) && !aocOperationPending(flags)) {
-        step = 3;
-        substep = 0;
-        if (window != NULL) {
-            delete window;
-            window = NULL;
-        }
+        aocMenuChangeStep(this, 3);
     }
 }

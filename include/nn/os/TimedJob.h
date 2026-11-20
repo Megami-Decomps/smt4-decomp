@@ -7,7 +7,7 @@
 /* SDK timed work item, including its accumulated and current-run timestamps. */
 struct TimedJob {
     /* 0x000 */ u8 lock[0xc];
-    /* 0x00c */ s32 state; // 1 stopped, 3 running, 5 stop requested, 6 stopping, 7 finished
+    /* 0x00c */ volatile s32 state; // 1 stopped, 3 running, 5 stop requested, 6 stopping, 7 finished; polled across threads
     /* 0x010 */ u8 unk10[0x10];
     /* 0x020 */ u8 event[0x118];
     /* 0x138 */ s64 elapsed;
