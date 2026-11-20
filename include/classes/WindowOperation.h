@@ -6,6 +6,9 @@
 struct WindowOperationResult {
     WindowOperationResult() : status(0), first(0), second(0) {}
     explicit WindowOperationResult(u8 status);
+    /* Empty, but it makes the class non-trivial: armcc then constructs a named result directly in the call's
+       hidden result storage and tests it there (FUN_0038a048, smt4a FUN_00471adc), as WindowStatusOperationResult. */
+    ~WindowOperationResult() {}
     /* 0x00 */ u8 status;
     /* 0x04 */ WindowStatusResult result;
     /* 0x0c */ u32 first;

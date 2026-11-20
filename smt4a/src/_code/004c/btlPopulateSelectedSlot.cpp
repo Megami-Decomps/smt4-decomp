@@ -1,8 +1,9 @@
-/* NON_MATCHING: retail pads the register push with ip (frame 1056) where the build extends the frame by 4, and loads the final transition flags after the state store (built hoists it above the compare); all other instructions agree. */
+/* NON_MATCHING: real BtlCombatantEntryA scratch restores the 1056-byte frame and ip push; only the final transitionFlags load is still hoisted above the alternate compare (8 diff lines). */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "gamedata/NkmEnemyLookup.h"
 #include "battle/BtlUiGlobal.h"
+#include "battle/BtlEntryA.h"
 
 struct BattleSlotCore { u8 data[0x2ac]; };
 struct BattleSlotScratch {
@@ -55,7 +56,7 @@ void FUN_004ca63c(BattleSlotState *, BattleSlotCore *, s32, s32, s32);
 void btlPopulateSelectedSlot(s32 kind, s32 slot, s32 destination, s32 animate)
 {
     BattleSlotState *battle = reinterpret_cast<BattleSlotState *>(btlGetMainState());
-    BattleSlotScratch scratch;
+    BtlCombatantEntryA scratch;
     if (kind == 0) {
         PartySlotMap *party = gameGetSlotTable();
         RecoverableSlot *record = gameGetSlotRecord(party->selected[slot]);
@@ -63,7 +64,7 @@ void btlPopulateSelectedSlot(s32 kind, s32 slot, s32 destination, s32 animate)
             record->hp = recordGetScaledMaximum(record);
             bitsAt60Clear(record, 2);
         }
-        btlInitializeDemonUnitState(battle, &scratch.core, record, 0);
+        btlInitializeDemonUnitState(battle, (BattleSlotCore *)&scratch.data, record, 0);
         if (party->selected[slot] >= 0) {
             BattleSlotVisual *unit = FUN_003e83b4(battle, destination, 0);
             s32 assignedIndex = unit->unitIndex - 1;
@@ -79,9 +80,9 @@ void btlPopulateSelectedSlot(s32 kind, s32 slot, s32 destination, s32 animate)
         void *definition = nkmEnemyFindById((u16)battle->slots[slot].id);
         if (definition == NULL)
             return;
-        FUN_003eb314(battle, &scratch.core, definition);
+        FUN_003eb314(battle, (BattleSlotCore *)&scratch.data, definition);
     }
-    FUN_004ca63c(battle, &scratch.core, kind, destination, 1);
+    FUN_004ca63c(battle, (BattleSlotCore *)&scratch.data, kind, destination, 1);
     if (kind == 1) {
         BattleSlotVisual *unit = &battle->units[destination];
         u32 flags = unit->flags;

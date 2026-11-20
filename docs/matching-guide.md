@@ -124,6 +124,11 @@ difference a register tie-break.
 - Test a returned `nn::Result` from a local: `nn::Result result = f(&out); if (nnResultIsSuccess(result))`
   gives retail's `and #0x80000000; cmp; bge`, passing the call straight in gives `asr; adds` (wave 52:
   `runtimeInitializeSharedHandle`, both games).
+- A wrapper that returns the SDK call's result unchanged after testing it keeps the result in `r0` and tests the
+  error bit in a scratch register (`and r1, r0, #0x80000000; cmp r1, #0; movge …; strbge …`): write the result into
+  a local, test it and return the local, `s32 result = dspComponentLoad(…); if (nnResultIsSuccess(result))
+  state.started = 1; return result;` (wave 56: smt4a `FUN_00159030`, whose inlined loader is IV's
+  `dspComponentLoadEmbedded`).
 - A registered callback that casts its base parameter to a derived view (`Work *work = (Work *)base;`)
   and then mixes both pointers compiles to other alias and cross-jump decisions than one that declares
   the parameter as the derived struct (`struct ContentDepartureWork : ContentTransition { ... };`,
@@ -166,6 +171,12 @@ difference a register tie-break.
 - A switch case whose jump-table entry points into another case's tail is a fall-through
   (`case A: …; /* fall through */ case B:`).
 - Two identical branches that retail cross-jumps come from one inline helper called in both.
+- A load whose value retail never uses (`ldrb r0, [r1, #43]` between the stores, nothing reads `r0`) can be the
+  condition of an `if`/`else` whose two arms do the same stores: armcc merges the arms and drops the compare but
+  keeps the load (`if (definition->flags != 0) { x = 25.0f; y = 25.0f; } else { x = 25.0f; y = 25.0f; }`, smt4
+  `bustupTextureStart`, wave 56; the same dead read is in the Apocalypse twin). The rule: both arms hold the statements
+  retail performs and the tested value is a load retail keeps; an empty arm, or a test added only to move a branch
+  or a register, is steering (wave 55 rejected one).
 - `if (a == b) { X } else { Y }` moves `X` out of line after the next unconditional branch; the `!=`
   spelling does not. `cmp; beq; cmp; beq; b` is an if/else-if chain, `cmp; beq; cmp; bne; b` a
   `switch`. Which copy of identical tail blocks survives follows `return` against `break`, and
@@ -278,6 +289,11 @@ asks for.
   tail call or predication: move the lookup into a `static __inline` helper so its scope ends there.
 - A body retail repeats in its callers (an allocator such as `effBlockCreate`, a sibling function from
   the same file) is a `static __inline` copy of that body.
+- A `__FILE__` trace naming `./effMisc.h` at line 450 (`asdDebugTrace(DAT_004102f4, 450)`: each unit has its own
+  copy of the header's `__FILE__` string) followed by `memAlloc` and `rt_memclr` of the same size, with the size kept
+  in a saved register (`mov sl, #168`), is effMisc.h's cleared-allocation inline: write it as a
+  `static __inline void *effAllocCleared(u32 size)` (smt4 `FUN_003138a4` and smt4a `FUN_003aa6c0`, wave 56;
+  `effEmitterCreateSmall` has the same body).
 - Some retail shapes need small non-inline `static` functions instead: list cursors
   (`getTop`/`getPosition`/`set`), message commands (`showMessage(mode, wait)`), table walks
   (`tableEntry(section, index)`), comparator tie-breaks (`s32 x = F(a); s32 y = F(b); return x - y;`)
@@ -345,6 +361,12 @@ asks for.
   library's `std::vector<T *>` (`<vector>`): declare the member as one and write the owner's destructor with
   iterators and an explicit `clear()` (smt4a `Obj557dcc::~Obj557dcc`, `Obj557b58::~Obj557b58`; their
   constructors and other users stay IDENTICAL).
+- NintendoWare gfx's `DynamicBuilder::Create` functions keep their default resource in NW's move-only pointer
+  (`ut::MovePtr` with a deleter): `{Res *res; Deleter deleter;}` whose copy constructor takes the pointer and empties
+  the source and whose destructor destroys a resource still held. With it the creator is
+  `Handle res(create(allocator), allocator); T *p = new (memory) T(allocator, res, owner); p->initialize(allocator);`
+  with no explicit release and no NULL ternary around the placement `new` (`Obj421230ResHandle`/`Obj55b680ResHandle`,
+  `include/classes/Obj421230.h`; the light and fog creators of both games, wave 56; third-party code).
 
 More on classes, constructors and destructors is in [C++](style-and-naming.md#c).
 

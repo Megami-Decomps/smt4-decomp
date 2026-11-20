@@ -15,17 +15,17 @@ struct SaveSlotHeaderWork {
     u8 unk00[4];
     u8 finished;                /* 0x04: set on reaching mode 22, the end of the flow */
     s8 recordIndex;             /* 0x05: row of saveLoadUIRecords() whose help text the menu shows */
-    u8 unk06;
+    u8 saveKind;                /* 0x06: stored in the save data and passed to saveLoadStartSave */
     u8 mode;                    /* 0x07 */
     s32 step;                   /* 0x08 */
     u8 phase;                   /* 0x0c: the mode to enter once the current one is done (0: none) */
     u8 previousMode;            /* 0x0d */
-    u8 flag0e;                  /* 0x0e */
-    u8 flag0f;                  /* 0x0f */
+    u8 flag0e;                  /* 0x0e: saveLoadUiConfirmSave: the save was confirmed and its request started */
+    u8 flag0f;                  /* 0x0f: saveLoadUiConfirmSave: the finished save was announced */
     u8 flag10;                  /* 0x10 */
     u8 flag11;                  /* 0x11 */
     u8 busy;                    /* 0x12: suppresses the return to idle */
-    u8 unk13;
+    u8 waitScript;              /* 0x13: with a slot past the first, wait for the script as well */
     u8 isLoad;                  /* 0x14: picks the slot list FUN_0041dbdc rebuilds */
     u8 ready;                   /* 0x15 */
     u8 unk16[2];
@@ -36,7 +36,8 @@ struct SaveSlotHeaderWork {
     u8 unk28[0x18];
     ScriptProcess *script;        /* 0x40 */
     u8 scriptPending;           /* 0x44 */
-    u8 unk45[0x13];
+    u8 unk45[0x0f];
+    struct PlayerDataA *player; /* 0x54: the player record the slot preview shows */
     RegisteredHandle *popup;    /* 0x58: registered object shown over the menu; released when it is dismissed */
     u8 popupActive;             /* 0x5c */
     u8 unk5d[0x0b];

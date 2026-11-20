@@ -23,7 +23,7 @@ StatusRefreshMemberView *partyMemberFindById(u32 id);
 s32 statusCollectUnlearnedSkillsAboveLevel(u16 memberId, u32 level, const u16 *skills, u32 *result, s32 skip);
 void statusDownRestoreTabForMode();
 void FUN_00215a8c(const void *entry);
-void statusDownSetSelectedEntryDescription(s32 id);
+void statusDownSetSelectedEntryDescription(s16 id);
 void statusBuildFlaggedDemonList(const u8 *flags);
 void FUN_001ee8b4(const u8 *inventory);
 void FUN_0026ae64();

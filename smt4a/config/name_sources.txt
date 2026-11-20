@@ -8459,3 +8459,15 @@
 0014a948 svcGetResourceLimit evidence svc 0x38 (GetResourceLimit), output handle stored through the first argument
 0047e150 itemEventStartupUpdate inferred the ItemEventStartup state machine's update (loads event/e%03d's .bf/.mbm, runs and ends the event); twin of smt4 0x27398c
 00497a6c shopScreenRedrawHeaderAndSlots inferred redraws the shop screen's header icons and the visible slots of the current category
+0014a878 asdGfxWaitVblank inferred twin of smt4 0x113244
+002853ec effScalarKeyLegacyAdvance inferred twin of smt4 0x1dda40
+002a65fc effScalarTrackAdvance inferred twin of smt4 0x1ee200
+002a67d8 effScalarStateAdvance inferred twin of smt4 0x1ee3dc
+00451550 modelFileRelease inferred twin of smt4 0x1108e4
+003aa6c0 effObjectParticleCreate inferred twin of smt4 0x3138a4
+003384c0 effObjectParticleClone inferred twin of smt4 0x2d15fc
+00544ac4 g_effObjectParticleEffMiscHeaderFileName evidence __FILE__ string "c:\SMT4F\SMT4F\AsdSDK\Source\Gfx\Effect\./effMisc.h" passed to asdDebugTrace by the effMisc.h allocator inline (line 450) in effObjectParticle.cpp; each unit has its own copy of the string
+00159030 dspComponentLoadEmbeddedAndStart inferred loads the embedded DSP component (dspComponentLoadEmbedded's body) and marks the callback state started on success
+002ba870 btlDebugDrawUpper evidence registrar label "btlDebug DrawUp"
+00420b70 saveLoadUiReleaseResources inferred releases the save/load UI's buffers, scripts, textures, touch regions and global state
+0041de6c saveLoadUiConfirmSave inferred runs the save confirmation: writes the menu's working copies back, starts the save, then shows the saved slot's header

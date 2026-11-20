@@ -1,4 +1,4 @@
-/* NON_MATCHING: target-kind compare now matches retail (bitfield); retail shares one `requiresTargetSelection = 1` store between all arms and reads the flag back through a pool-constant offset, ours duplicates the store and reuses the flag pointer. */
+/* NON_MATCHING: control flow and the signed flag addressing match; the global base and constant 1 occupy the opposite callee-saved registers. */
 #include "battle/BtlUiGlobal.h"
 #include "gamedata/SkillDataLookup.h"
 #include "gamedata/ConsumableRecord.h"
@@ -18,23 +18,22 @@ s32 playSceneIsFadeInDone(BtlUiObjA *);
 void playSceneFadeOutStart(BtlUiObjA *);
 void playSceneTimerSubStartReverse(BtlUiObjB *);
 
-// Route a selected action to target selection or directly to the next UI transition.
+/* Routes a selected action to target selection or directly to the next UI transition. */
 void btlUiRouteSelectedAction(void)
 {
     BtlUi *ui = g_btlUi.ui;
     ui->panelState.requiresTargetSelection = 0;
     s16 kind = 0;
     s16 id = 0;
-    BtlUiObjC *selection = &ui->objC;
-    btlCommandMenuResolveLayout(selection, &kind, &id);
+    btlCommandMenuResolveLayout(&ui->objC, &kind, &id);
     if (kind == 2 || kind == 3) {
-        BattleActionDetails *details = reinterpret_cast<BattleActionDetails *>(skillDataFindById(id));
+        const BattleActionDetails *details = (const BattleActionDetails *)skillDataFindById(id);
         if (details->targetKind == 2 || details->targetKind == 3 || details->targetKind == 4)
             ui->panelState.requiresTargetSelection = 1;
     } else if (kind == 8) {
         u16 action = itemTableGetItemRecord(id)->skillId;
         if (action) {
-            BattleActionDetails *details = reinterpret_cast<BattleActionDetails *>(skillDataFindById(action));
+            const BattleActionDetails *details = (const BattleActionDetails *)skillDataFindById(action);
             if (details->targetKind == 2 || details->targetKind == 3 || details->targetKind == 4)
                 ui->panelState.requiresTargetSelection = 1;
         } else if ((itemTableGetItemRecord(id)->target & 0x7f) != 1) {
@@ -43,14 +42,14 @@ void btlUiRouteSelectedAction(void)
     }
     if (ui->panelState.requiresTargetSelection) {
         ui->panelState.state = 12;
-        btlCommandBeginTargetSelection(selection);
+        btlCommandBeginTargetSelection(&ui->objC);
     } else {
         ui->panelState.state = 8;
-        btlUiObjCResetToState27(selection);
-        ui = g_btlUi.ui;
-        if (playSceneIsFadeInDone(&ui->objA) && recordQueryStateThree(&ui->objB)) {
-            playSceneFadeOutStart(&ui->objA);
-            playSceneTimerSubStartReverse(&ui->objB);
+        btlUiObjCResetToState27(&ui->objC);
+        BtlUi *current = g_btlUi.ui;
+        if (playSceneIsFadeInDone(&current->objA) && recordQueryStateThree(&current->objB)) {
+            playSceneFadeOutStart(&current->objA);
+            playSceneTimerSubStartReverse(&current->objB);
         }
     }
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: terminator constant synthesis and command-store register allocation differ from retail. */
+/* NON_MATCHING: the command cursor uses a different register; retail forms two complete final command-pair stores, where the build interleaves the words. */
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 
@@ -16,9 +16,9 @@ void gfxCommandBufferSubmit(AsdCmdBuffer *buffer, u32 size)
     }
     u32 *commands = reinterpret_cast<u32 *>(buffer->start + cursor);
     if ((cursor & 8) != 0) {
-        buffer->writeOffset = cursor + 0x18;
+        buffer->writeOffset += 0x18;
     } else {
-        buffer->writeOffset = cursor + 0x20;
+        buffer->writeOffset += 0x20;
         *commands++ = 0;
         *commands++ = 0x8025e;
     }

@@ -1,10 +1,19 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
-/* NON_MATCHING: the placement and show/hide tail match; in the camera-distance test retail reloads `flags` after the square root (the build keeps it in r1) and allocates the deltas to s1/s2/s0, and the rise step's float registers differ. */
+/* NON_MATCHING: the placement and show/hide tail match; the distance deltas and the rise step still use different VFP registers, and retail reloads flags after the distance test. */
 #include "classes/Obj42233c.h"
 #include "map/LmapGlobals.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "game/GameState.h"
+
+/* Computes the distance between two points, as in distSpatial. */
+static __inline f32 mapMotionDistance(MapVector from, NodeVec3 to)
+{
+    f32 dx = to.x - from.x;
+    f32 dy = to.y - from.y;
+    f32 dz = to.z - from.z;
+    return __sqrtf(dx * dx + dy * dy + dz * dz);
+}
 
 extern "C" {
 f32 sqrtf(f32 value);
@@ -17,16 +26,14 @@ void nodeSetScale(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
 void Obj42233c::stop()
 {
     if ((flags & 4) != 0) {
-        f32 dx = basePosition.x - g_lmapScene->pose.position.x;
-        f32 dy = basePosition.y - g_lmapScene->pose.position.y;
-        f32 dz = basePosition.z - g_lmapScene->pose.position.z;
-        if (sqrtf(dx * dx + dy * dy + dz * dz) > 300.0f) {
+        if (mapMotionDistance(g_lmapScene->pose.position, basePosition) > 300.0f) {
             flags = (flags & ~4) | 1;
         }
     }
     if ((flags & 1) != 0) {
-        offset[1] += 50.0f;
-        if (offset[1] > 0) {
+        f32 nextHeight = offset[1] + 50.0f;
+        offset[1] = nextHeight;
+        if (nextHeight > 0.0f) {
             offset[1] = 0;
             flags &= ~1;
             timerFlags &= ~4;

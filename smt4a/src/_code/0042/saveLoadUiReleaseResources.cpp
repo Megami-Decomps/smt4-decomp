@@ -1,26 +1,21 @@
-/* NON_MATCHING: controller stays in r5 rather than moving r4 to r5 at the touch-region loop, removing one MOV. */
 #include "saveLoadUI/SaveLoadControllerA.h"
 #include "script/scrScriptProcess.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/DataTableSections.h"
+#include "shard/Shard0050.h"
 
 /* The shared controller's padding starts at 0x13; pointer members there would change its alignment. */
 struct SaveLoadCleanupBuffersView {
-    u8 unk00[0x1c];
-    void *first;
-    void *second;
-    void *third;
-    u8 unk28[0x10];
-    void *text;
-    void *auxiliary;
-    ScriptProcess *script;
-    u8 unk44[0x10];
-    void *display;
-};
-struct SaveLoadTouchRegionsView {
-    u8 unk000[0x43c];
-    s32 ids[3];
-    s32 count;
+    /* 0x00 */ u8 unk00[0x1c];
+    /* 0x1C */ void *first;
+    /* 0x20 */ void *second;
+    /* 0x24 */ void *third;
+    /* 0x28 */ u8 unk28[0x10];
+    /* 0x38 */ void *text;
+    /* 0x3C */ void *auxiliary;
+    /* 0x40 */ ScriptProcess *script;
+    /* 0x44 */ u8 unk44[0x10];
+    /* 0x54 */ void *display;
 };
 struct HandleRegistry;
 
@@ -32,14 +27,26 @@ void FUN_002c1648(void);
 void msgWindowReset(void);
 void ptrListRemoveClearOwner(HandleRegistry *registry, u32 handle);
 void ifTouchRegionRemove(void);
-void fillThreeWordsWithByte(void *words, u32 value);
 void gameGlobalsSetSceneState(s32 mode);
 void FUN_0033440c(u32 value);
 void gameGlobalsReleaseReference(void);
 void buttonHelpSetText(s32 layer, u32 color);
 void messageMainSetFlag(s32 enabled);
 
-void FUN_00420b70(SaveLoadControllerA *work)
+/* Releases the active touch regions and resets the touch handles (same sequence as FUN_0041e9d4). */
+static __inline void saveLoadClearTouchRegions(SaveLoadControllerA *work)
+{
+    for (s32 i = 0; i < work->touch.count; ++i)
+        ifTouchRegionRemove();
+    work->touch.count = 0;
+    fillThreeWordsWithByte(work->touch.handles, -1);
+    work->pending = 0;
+    work->confirmed = 0;
+    work->canceled = 0;
+}
+
+/* Releases all buffers, scripts, textures, touch regions and global state held by the save/load UI. */
+void saveLoadUiReleaseResources(SaveLoadControllerA *work)
 {
     SaveLoadCleanupBuffersView *buffers = (SaveLoadCleanupBuffersView *)work;
     if (buffers->first) {
@@ -82,18 +89,11 @@ void FUN_00420b70(SaveLoadControllerA *work)
             work->resource = 0;
         }
     }
-    SaveLoadTouchRegionsView *regions = (SaveLoadTouchRegionsView *)work;
-    for (s32 i = 0; i < regions->count; ++i)
-        ifTouchRegionRemove();
-    regions->count = 0;
-    fillThreeWordsWithByte(regions->ids, -1);
-    work->pending = 0;
-    work->confirmed = 0;
-    work->canceled = 0;
+    saveLoadClearTouchRegions(work);
     gameGlobalsSetSceneState(0);
     FUN_0033440c(-1);
     gameGlobalsReleaseReference();
     buttonHelpSetText(0, 0xf4f4f4ff);
     messageMainSetFlag(1);
 }
-}
+} /* extern "C" */

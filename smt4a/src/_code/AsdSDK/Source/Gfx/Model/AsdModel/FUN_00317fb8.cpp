@@ -5,7 +5,7 @@
 extern "C" {
 extern ModelResourceList DAT_00636ee0;
 extern void* DAT_005b3c74;
-void FUN_00451550(void**);
+void modelFileRelease(void**);
 
 void FUN_00317fb8(void)
 {
@@ -17,7 +17,7 @@ void FUN_00317fb8(void)
             --DAT_00636ee0.end;
         }
         runtimeDispatchObjectRelease(reinterpret_cast<u32 **>(&DAT_005b3c74));
-        FUN_00451550(&DAT_005b3c74);
+        modelFileRelease(&DAT_005b3c74);
         g_gfxSettings.ready = 0;
     }
 }

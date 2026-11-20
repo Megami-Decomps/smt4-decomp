@@ -1,14 +1,13 @@
-/* NON_MATCHING: writeback addressing of the self-relative accessor now matches (RelativePointer::get() called directly on the field); retail does not share the two loads of the allocation and keeps zero in r7, the build merges them. */
+/* NON_MATCHING: the data release now matches (the accessor read again for the call); retail reloads *storage and recomputes the allocation for its second read (the build reuses the first, so the owner and allocator take other registers). */
 #include "Model/ModelResource.h"
 
-extern "C" void FUN_001108e4(void** storage)
+extern "C" void modelFileRelease(void** storage)
 {
     AsdAllocatorObject* allocator = ((ModelFileAllocation*)((ModelFileHeader*)*storage)->allocation.get())->allocator;
     ModelFileAllocation* allocation = (ModelFileAllocation*)((ModelFileHeader*)*storage)->allocation.get();
     if (allocation != NULL) {
-        void* data = allocation->data.get();
-        if (data != NULL) {
-            allocator->release(data);
+        if (allocation->data.get() != NULL) {
+            allocator->release(allocation->data.get());
         }
         allocator->release(allocation);
     }

@@ -7796,3 +7796,14 @@
 0014a948 svcGetResourceLimit
 0047e150 itemEventStartupUpdate
 00497a6c shopScreenRedrawHeaderAndSlots
+0014a878 asdGfxWaitVblank
+002853ec effScalarKeyLegacyAdvance
+002a65fc effScalarTrackAdvance
+002a67d8 effScalarStateAdvance
+00451550 modelFileRelease
+003aa6c0 effObjectParticleCreate
+003384c0 effObjectParticleClone
+00159030 dspComponentLoadEmbeddedAndStart
+002ba870 btlDebugDrawUpper
+00420b70 saveLoadUiReleaseResources
+0041de6c saveLoadUiConfirmSave

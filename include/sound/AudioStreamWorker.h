@@ -24,6 +24,7 @@ struct AudioStreamSlot {
     u8 unk68[8];
 };
 struct AudioStreamWorker {
+    explicit AudioStreamWorker(s64 initialValue) : initialTimestamp(initialValue) {}
     volatile u8 running; // 0x00
     u8 unk01[7];
     AudioStreamSlot *streams; // 0x08
@@ -31,6 +32,7 @@ struct AudioStreamWorker {
     u32 streamCount; // 0x14
     volatile u32 written; // 0x18
     volatile u32 read; // 0x1c
+    /* 0x20 */ s64 initialTimestamp; /* initialized to -1 by the S4 audio device startup */
 };
 struct AudioStreamRequest {
     AudioStreamSlot *stream;
@@ -44,6 +46,7 @@ typedef char CheckWaveBufferStatus[offsetof(WaveBuffer, playback.status) == 0x11
 typedef char AudioStreamWorkerLayoutCheck[
     offsetof(AudioStreamWorker, streams) == 8 && offsetof(AudioStreamWorker, streamCount) == 0x14 &&
     offsetof(AudioStreamWorker, written) == 0x18 && offsetof(AudioStreamWorker, read) == 0x1C &&
+    offsetof(AudioStreamWorker, initialTimestamp) == 0x20 && sizeof(AudioStreamWorker) == 0x28 &&
     offsetof(AudioStreamSlot, writeIndex) == 0x44 && offsetof(AudioStreamSlot, submittedSamples) == 0x58 ? 1 : -1];
 
 #endif

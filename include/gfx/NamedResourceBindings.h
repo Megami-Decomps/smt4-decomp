@@ -7,9 +7,17 @@ struct NamedResourceDirectoryData {
     /* 0x00 */ void** resources;
     /* 0x04 */ u8 nameIndex[4]; // Embedded lookup structure; remaining extent is unknown.
 };
+struct NamedSubresourceGroup;
+struct NamedSubresourceDirectoryData {
+    /* 0x00 */ NamedSubresourceGroup **groups;
+    /* 0x04 */ u8 nameIndex[4]; /* Group-name lookup structure; remaining extent is unknown. */
+};
+
 struct NamedResourceDirectory {
     /* 0x00 */ u8 unk00[0x24];
     /* 0x24 */ NamedResourceDirectoryData data;
+    /* 0x2C */ u8 unk2C[4];
+    /* 0x30 */ NamedSubresourceDirectoryData subresources;
 };
 struct NamedResourceBindingArray {
     /* 0x00 */ void** resources;
@@ -27,6 +35,8 @@ struct NamedResourceBindingOwner {
 typedef char NamedResourceBindingOffsetsCheck[
     offsetof(NamedResourceDirectory, data.resources) == 0x24 &&
     offsetof(NamedResourceDirectory, data.nameIndex) == 0x28 &&
+    offsetof(NamedResourceDirectory, subresources.groups) == 0x30 &&
+    offsetof(NamedResourceDirectory, subresources.nameIndex) == 0x34 &&
     offsetof(NamedResourceBindingRequest, names) == 0x18 &&
     sizeof(NamedResourceBindingRequest) == 0x20 &&
     offsetof(NamedResourceBindingRequest, count) == 0x1C &&

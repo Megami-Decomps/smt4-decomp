@@ -5898,3 +5898,18 @@
 003c33c8 btlDebugStatusFlagEditorApply inferred twin of smt4a btlDebugStatusFlagEditorApply (0x4d1470): the same item switch, filters and member loops
 00343324 renderCtxSetMatrices inferred composes the RenderTransformState's matrices from the projection, view and transform, uploads the combined one and clears the camera type
 0027398c itemEventStartupUpdate inferred twin of smt4a 0x47e150
+0023f500 battleEncounterStepSetup inferred step 10 of the encounter setup: loads the arrangement once its path is accepted (entering steps 11/12), else runs the fade-in scan and enters step 14
+003349c0 battleEncounterTaskUpdate inferred twin of smt4a battleEncounterTaskUpdate (0x3e2bd8): the encounter setup's step dispatcher, the same inlined step helpers
+00214950 fsResultClassifyRestriction inferred classifies an fs result through the nn/FsResult.h range tests
+00113244 asdGfxWaitVblank inferred pumps graphics work until the vblank counters the wait mode names have advanced; twin of smt4a 0x14a878
+0010b91c asdWaveVoiceFadeOut inferred fades out the live wave voices (asdWaveVoiceIsLive walk, as FUN_0010bf78's)
+001dda40 effScalarKeyLegacyAdvance inferred advances a legacy scalar key track by the frame step; twin of smt4a 0x2853ec
+001ee200 effScalarTrackAdvance inferred advances an EffectScalarTrackKey track; twin of smt4a 0x2a65fc
+001ee3dc effScalarStateAdvance inferred advances the state scalar keys (keys at +4); twin of smt4a 0x2a67d8
+001108e4 modelFileRelease inferred releases a model file's storage; twin of smt4a 0x451550
+003138a4 effObjectParticleCreate inferred creates an object particle from its resource (emitter parameters, CGFX model); in effObjectParticle.cpp's block; twin of smt4a 0x3aa6c0
+002d15fc effObjectParticleClone inferred clones an object particle (same effMisc.h allocator and model copy); twin of smt4a 0x3384c0
+004102f4 g_effObjectParticleEffMiscHeaderFileName evidence __FILE__ string "c:\SMT4\XRD686\sdds4\Patch\AsdSDK\Source\Gfx\Effect\./effMisc.h" passed to asdDebugTrace by the effMisc.h allocator inline (line 450) in effObjectParticle.cpp; each unit has its own copy of the string
+00383f70 debugItemListDraw inferred draws the debug item list's visible names and cursor, or the empty-list message
+003f41ec mobiclipAudioDeviceInitializeStatics inferred initializes the S4AudioDevice helper's global objects and registers their destructors
+003c219c unitRollGrowthStat inferred rolls the weighted stat increment for its two growth callers

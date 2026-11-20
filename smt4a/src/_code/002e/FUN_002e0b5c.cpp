@@ -1,23 +1,5 @@
 #include "sys/ProcessResult.h"
-#include "nn/Result.h"
-
-/* Filesystem (module 17) result descriptions 340-359. */
-static __inline bool fsResultInRange340(nn::Result result)
-{
-    return nnResultModule(result) == 17 && nnResultDescriptionBits(result) >= 340 && nnResultDescriptionBits(result) < 360;
-}
-
-/* Filesystem (module 17) result descriptions 360-389. */
-static __inline bool fsResultInRange360(nn::Result result)
-{
-    return nnResultModule(result) == 17 && nnResultDescriptionBits(result) >= 360 && nnResultDescriptionBits(result) <= 389;
-}
-
-/* Filesystem (module 17) result descriptions 390-399. */
-static __inline bool fsResultInRange390(nn::Result result)
-{
-    return nnResultModule(result) == 17 && nnResultDescriptionBits(result) >= 390 && nnResultDescriptionBits(result) < 400;
-}
+#include "nn/FsResult.h"
 
 extern "C" {
 extern u8 g_contentMounted;

@@ -24,17 +24,21 @@ struct MapActorMotion {
     MapVector offset;
 };
 
+/* Computes the distance between two points, as in distSpatial. */
+static __inline f32 mapMotionDistance(MapVector from, MapVector to)
+{
+    f32 dx = to.x - from.x;
+    f32 dy = to.y - from.y;
+    f32 dz = to.z - from.z;
+    return __sqrtf(dx * dx + dy * dy + dz * dz);
+}
+
 extern "C" {
 
 void mapActorUpdateDistanceMotionAndController(MapActorMotion *actor)
 {
-    if (actor->motionFlags & 4) {
-        MapVector delta = {
-            actor->position.x - g_lmapScene->pose.position.x,
-            actor->position.y - g_lmapScene->pose.position.y,
-            actor->position.z - g_lmapScene->pose.position.z
-        };
-        if (sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z) > 300.0f) {
+    if ((actor->motionFlags & 4) != 0) {
+        if (mapMotionDistance(g_lmapScene->pose.position, actor->position) > 300.0f) {
             actor->motionFlags = (actor->motionFlags & ~4) | 1;
         }
     }

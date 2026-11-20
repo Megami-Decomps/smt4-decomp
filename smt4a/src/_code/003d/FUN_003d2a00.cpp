@@ -1,4 +1,4 @@
-/* NON_MATCHING: the per-slot resource switch now matches retail; remaining: register assignment of the binding index (retail r8, build r7) and the duplicate-search loop (retail compares signed, `gt`, without peeling; the build compares unsigned, `hi`). */
+/* NON_MATCHING: signed duplicate-search loop now matches; remaining: scratch register assignment (r0-r3) when loading metadata->bindings and metadata->materials (18 diff lines). */
 #include "gfx/MaterialNameSelection.h"
 
 /* The named resource of slot `slot` (0..2) of a material, or NULL for any other slot. */
@@ -33,12 +33,14 @@ void FUN_003d2a00(const char *pattern)
         for (s32 resourceIndex = 0; resourceIndex < 3; ++resourceIndex) {
             MaterialNamedResource *resource = materialGetResource(material, resourceIndex);
             if (resource != NULL && FUN_00102c30(resource->name, pattern) != NULL) {
-                u32 match;
-                for (match = 0; match < selection->count; ++match) {
-                    if (selection->matches[match].materialIndex == binding->materialIndex)
+                bool found = false;
+                for (s32 match = 0; match < selection->count; ++match) {
+                    if (selection->matches[match].materialIndex == binding->materialIndex) {
+                        found = true;
                         break;
+                    }
                 }
-                if (match == selection->count) {
+                if (!found) {
                     selection->matches[selection->count].materialIndex = binding->materialIndex;
                     selection->matches[selection->count].resourceIndex = resourceIndex;
                     ++selection->count;

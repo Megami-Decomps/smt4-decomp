@@ -55,20 +55,17 @@ void FUN_0048d418(SelectableList *list, s32 kind)
                 (record->first == 0x79 || record->first == 0x7A || record->first == 0x7D || record->first == 0x7E))
                 continue;
         }
-        if (g_gameState.showAllEntries == 0) {
-            if (record->requiredFlag != 0 && !gameFlagIsSet(record->requiredFlag))
-                continue;
-            if (record->excludedFlag != 0 && gameFlagIsSet(record->excludedFlag))
-                continue;
-            if (!interactionVariantIsEnabled(record->first, record->second))
-                continue;
-        }
-        for (j = 0; j < count; j++) {
-            if (ids[j] == record->id)
-                found = 1;
-        }
-        if (!found) {
-            ids[count++] = (record->id);
+        if (g_gameState.showAllEntries != 0 ||
+            ((record->requiredFlag == 0 || gameFlagIsSet(record->requiredFlag)) &&
+             (record->excludedFlag == 0 || !gameFlagIsSet(record->excludedFlag)) &&
+             interactionVariantIsEnabled(record->first, record->second))) {
+            for (j = 0; j < count; j++) {
+                if (ids[j] == record->id)
+                    found = 1;
+            }
+            if (!found) {
+                ids[count++] = record->id;
+            }
         }
     }
     for (i = 0; i < count - 1; i++) {

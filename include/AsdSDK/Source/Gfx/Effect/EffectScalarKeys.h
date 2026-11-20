@@ -3,37 +3,17 @@
 #include "common.h"
 #include <stddef.h>
 
-struct EffectScalarKey {
-    /* 0x00 */ s32 frame;
-    /* 0x04 */ u8 unk04[0x1C];
-    /* 0x20 */ f32 value;
-    /* 0x24 */ u8 unk24[0x20];
+/* A key as the key tracks lay their four keys out from the track's start (0x44 bytes): their
+ * interpolators address key i at track + i * 0x44, its frame 0x20 into the record. */
+struct EffectScalarTrackKey {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ s32 frame;
+    /* 0x24 */ u8 unk24[0x1C];
+    /* 0x40 */ f32 value;
 };
-struct EffectScalarKeySource {
-    /* 0x000 */ u8 unk000[0x24];
-    /* 0x024 */ EffectScalarKey keys[4];
-};
-struct EffectScalarKeyState {
-    /* 0x000 */ u8 unk000[0x24];
-    /* 0x024 */ EffectScalarKey keys[4];
-    /* 0x134 */ u8 unk134[0xF4];
-    /* 0x228 */ f32 step;
-    /* 0x22C */ u8 unk22C[0x28];
-    /* 0x254 */ f32 target;
-    /* 0x258 */ u8 unk258[0x8D];
-    /* 0x2E5 */ s8 index;
-    /* 0x2E6 */ u8 unk2E6[0x3E];
-    /* 0x324 */ s32 duration;
-};
-typedef char EffectScalarKeySizeCheck[sizeof(EffectScalarKey) == 0x44 ? 1 : -1];
-typedef char EffectScalarKeyStateOffsetCheck[offsetof(EffectScalarKeyState, step) == 0x228 &&
-    offsetof(EffectScalarKeyState, target) == 0x254 && offsetof(EffectScalarKeyState, index) == 0x2E5 &&
-    offsetof(EffectScalarKeyState, duration) == 0x324 ? 1 : -1];
-
 struct EffectScalarKeyTrack {
-    /* 0x000 */ u8 unk000[0x20];
-    /* 0x020 */ EffectScalarKey keys[4];
-    /* 0x130 */ u8 unk130[0xF4];
+    /* 0x000 */ EffectScalarTrackKey keys[4];
+    /* 0x110 */ u8 unk110[0x114];
     /* 0x224 */ f32 step;
     /* 0x228 */ u8 unk228[0x28];
     /* 0x250 */ f32 target;
@@ -43,11 +23,33 @@ struct EffectScalarKeyTrack {
     /* 0x320 */ s32 duration;
 };
 typedef char EffectScalarKeyTrackOffsetCheck[
+    sizeof(EffectScalarTrackKey) == 0x44 &&
     offsetof(EffectScalarKeyTrack, step) == 0x224 &&
     offsetof(EffectScalarKeyTrack, target) == 0x250 &&
     offsetof(EffectScalarKeyTrack, index) == 0x2E4 &&
     offsetof(EffectScalarKeyTrack, duration) == 0x320 &&
     sizeof(EffectScalarKeyTrack) == 0x324 ? 1 : -1];
+
+/* The state and source tracks hold the same four keys one word in. */
+struct EffectScalarKeySource {
+    /* 0x000 */ u8 unk000[0x4];
+    /* 0x004 */ EffectScalarTrackKey keys[4];
+};
+struct EffectScalarKeyState {
+    /* 0x000 */ u8 unk000[0x4];
+    /* 0x004 */ EffectScalarTrackKey keys[4];
+    /* 0x114 */ u8 unk114[0x114];
+    /* 0x228 */ f32 step;
+    /* 0x22C */ u8 unk22C[0x28];
+    /* 0x254 */ f32 target;
+    /* 0x258 */ u8 unk258[0x8D];
+    /* 0x2E5 */ s8 index;
+    /* 0x2E6 */ u8 unk2E6[0x3E];
+    /* 0x324 */ s32 duration;
+};
+typedef char EffectScalarKeyStateOffsetCheck[offsetof(EffectScalarKeyState, step) == 0x228 &&
+    offsetof(EffectScalarKeyState, target) == 0x254 && offsetof(EffectScalarKeyState, index) == 0x2E5 &&
+    offsetof(EffectScalarKeyState, duration) == 0x324 ? 1 : -1];
 struct EffectIntegerKey {
     /* 0x00 */ s32 value;
     /* 0x04 */ s32 frame;

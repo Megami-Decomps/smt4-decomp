@@ -1,47 +1,13 @@
-/* NON_MATCHING: script-load transition registers and shared continuation/cold-block layout differ from retail. */
-#include "common.h"
-#include "runtime/Stdio.h"
-#include "AsdSDK/AsdMemUtil.h"
+#include "battle/BattleEventStates.h"
+#include "battle/btlMain.h"
 #include "gamedata/DataTable.h"
 
-struct BattleEventWork {
-    /* 0x00 */ u32 state;
-    /* 0x04 */ u32 flags;
-    /* 0x08 */ void *tableData;
-    /* 0x0C */ void *modelData;
-    /* 0x10 */ void *scriptData;
-    /* 0x14 */ void *script;
-    /* 0x18 */ void *entries;
-    /* 0x1C */ u32 entryCount;
-    /* 0x20 */ s32 entry;
-    /* 0x24 */ u32 unk24;
-    /* 0x28 */ s32 frames;
-    /* 0x2C */ u8 stage;
-};
-struct BattleEventContext {
-    /* 0x0000 */ u8 unk0000[0xc4];
-    /* 0x00C4 */ u32 aocId;
-    /* 0x00C8 */ u8 unk00c8[0x38];
-    /* 0x0100 */ char eventName[0x40];
-    /* 0x0140 */ u8 unk0140[0x4360];
-    /* 0x44A0 */ u32 flags;
-};
-
 extern "C" {
-extern void *g_aocSystem;
 extern void *g_btlAux;
-extern const char DAT_00400968[];
-extern const char DAT_00400938[];
-s32 FUN_0022a2c4(void *system, u32 id);
-void aocQueueType1e(void *system, u32 id, void **output, const char *name);
-void aocQueueType1f(void *system, u32 id, void **output, const char *name);
-void asdLoadFileAsyncSimple(const char *name, void **output, u32 flags);
+extern const char DAT_00400968[]; /* battle/event/%s/%s.tbb */
 void *dataTableFileGetTable(void *file, u32 index);
-u32 dataTableGetCount(void *table);
-u32 FUN_0022a190(BattleEventWork *work, BattleEventContext *context);
-u32 FUN_0022a07c(BattleEventWork *work, BattleEventContext *context);
-u32 FUN_003c7760(BattleEventWork *work, BattleEventContext *context);
-void scrScriptProcessStartEntry(void *script, s32 entry);
+s32 FUN_003c7760(BtlEvent *event, BtlMainState *state);
+void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void buttonHelpSetPreset(s32 preset);
 void FUN_003dadd8(void *state);
 s32 btlEventAreResourcesReady(void *state);
@@ -49,99 +15,85 @@ void FUN_003dbe68(void *state);
 s32 FUN_003dcc34(void *state);
 }
 
-static inline u32 finishBattleEventTable(BattleEventWork *work, BattleEventContext *context)
+/* BTL_EVENT_WAIT_TABLE: waits for the event table, then reads its records. */
+static __inline u32 btlEventWaitTable(BtlEvent *event, BattleEventAssetSource *source)
 {
-    if (work->tableData == NULL)
+    if (event->dataA == NULL)
         return 0;
-    void *table = dataTableFileGetTable(work->tableData, 0);
-    work->entries = dataTableGetEntries(table);
-    work->entryCount = dataTableGetCount(table);
-    work->state = 3;
-    return FUN_0022a190(work, context);
+    void *table = dataTableFileGetTable(event->dataA, 0);
+    event->entries = dataTableGetEntries(table);
+    event->entryCount = dataTableGetCount(table);
+    event->state = BTL_EVENT_LOAD_MESSAGES;
+    return FUN_0022a190(event, source);
 }
 
-static inline u32 loadBattleEventScript(BattleEventWork *work, BattleEventContext *context)
+/* BTL_EVENT_START_SCRIPT: starts the chosen script entry once there is one. */
+static __inline u32 btlEventStartScript(BtlEvent *event, BtlMainState *state)
 {
-    char name[128];
-    memClear(name, sizeof(name));
-    __2sprintf(name, DAT_00400938, context->eventName, context->eventName);
-    if (FUN_0022a2c4(g_aocSystem, context->aocId))
-        aocQueueType1f(g_aocSystem, context->aocId, &work->scriptData, name);
-    else
-        asdLoadFileAsyncSimple(name, &work->scriptData, 0);
-    work->state = 6;
-    if (work->scriptData == NULL)
+    if (event->entry < 0)
         return 0;
-    work->state = 7;
-    return FUN_0022a07c(work, context);
-}
-
-static inline u32 startBattleEventScript(BattleEventWork *work, BattleEventContext *context)
-{
-    if (work->entry < 0)
-        return 0;
-    scrScriptProcessStartEntry(work->script, work->entry);
-    work->state = 10;
-    work->frames = 0;
-    if (context->flags & 0x100000)
+    scrScriptProcessStartEntry(event->process, event->entry);
+    event->frames = 0;
+    event->state = BTL_EVENT_RUN_SCRIPT;
+    if (state->battleFlags & 0x100000)
         buttonHelpSetPreset(0xdd);
-    return FUN_003c7760(work, context);
+    return FUN_003c7760(event, state);
 }
 
-/* Load and run a battle event, including asynchronous resource and transition waits. */
-extern "C" u32 battleEventProcessUpdate(BattleEventWork *work, BattleEventContext *context)
+/* Loads and runs a battle event: one call steps the event through every state whose wait is over. */
+extern "C" u32 battleEventProcessUpdate(BtlEvent *event, BtlMainState *state)
 {
-    switch (work->state) {
-    case 1: {
-        char name[128];
-        memClear(name, sizeof(name));
-        __2sprintf(name, DAT_00400968, context->eventName, context->eventName);
-        if (FUN_0022a2c4(g_aocSystem, context->aocId))
-            aocQueueType1e(g_aocSystem, context->aocId, &work->tableData, name);
+    /* The state block starts with the event's archive and name. */
+    BattleEventAssetSource *source = (BattleEventAssetSource *)state;
+
+    switch (event->state) {
+    case BTL_EVENT_LOAD_TABLE: {
+        char path[128];
+        memClear(path, sizeof(path));
+        __2sprintf(path, DAT_00400968, source->name, source->name);
+        if (FUN_0022a2c4((u32)g_aocSystem, source->archiveId))
+            aocQueueType1e(g_aocSystem, source->archiveId, &event->dataA, path);
         else
-            asdLoadFileAsyncSimple(name, &work->tableData, 0);
-        work->state = 2;
-        return finishBattleEventTable(work, context);
+            asdLoadFileAsyncSimple(path, (u32 *)&event->dataA, 0);
+        event->state = BTL_EVENT_WAIT_TABLE;
+        return btlEventWaitTable(event, source);
     }
-    case 2:
-        return finishBattleEventTable(work, context);
-    case 3:
-        return FUN_0022a190(work, context);
-    case 4:
-        if (work->modelData == NULL)
-            return 0;
-        work->state = 5;
-        return loadBattleEventScript(work, context);
-    case 5:
-        return loadBattleEventScript(work, context);
-    case 6:
-        if (work->scriptData == NULL)
-            return 0;
-        work->state = 7;
-        return FUN_0022a07c(work, context);
-    case 7:
-        return FUN_0022a07c(work, context);
-    case 8:
-        switch (work->stage) {
+    case BTL_EVENT_WAIT_TABLE:
+        return btlEventWaitTable(event, source);
+    case BTL_EVENT_LOAD_MESSAGES:
+        return FUN_0022a190(event, source);
+    case BTL_EVENT_WAIT_MESSAGES:
+        return btlEventWaitMessages(event, source);
+    case BTL_EVENT_LOAD_SCRIPT:
+        return btlEventLoadScript(event, source);
+    case BTL_EVENT_WAIT_SCRIPT:
+        return btlEventWaitScript(event, source);
+    case BTL_EVENT_CREATE_SCRIPT:
+        return FUN_0022a07c(event, source);
+    case BTL_EVENT_START_SCRIPT:
+        return btlEventStartScript(event, state);
+    case BTL_EVENT_RUN_SCRIPT:
+        return FUN_003c7760(event, state);
+    case BTL_EVENT_PREPARE:
+        /* Bring the battle's auxiliary resources up in three stages. */
+        switch (event->stage) {
         case 0:
             FUN_003dadd8(g_btlAux);
-            work->stage = 1;
+            event->stage = 1;
+            /* fall through */
         case 1:
             if (!btlEventAreResourcesReady(g_btlAux))
                 return 0;
             FUN_003dbe68(g_btlAux);
-            work->stage = 2;
+            event->stage = 2;
+            /* fall through */
         case 2:
             if (!FUN_003dcc34(g_btlAux))
                 return 0;
-            work->stage = 3;
+            event->stage = 3;
         }
-        work->state = 9;
-        return startBattleEventScript(work, context);
-    case 9:
-        return startBattleEventScript(work, context);
-    case 10:
-        return FUN_003c7760(work, context);
+        event->state = BTL_EVENT_START_SCRIPT;
+        return btlEventStartScript(event, state);
     default:
         return 0;
     }

@@ -15,8 +15,8 @@ void saveLoadUiSuspendOrRestart(SaveSlotHeaderWork *ui)
         statusCameraRestore(1);
         ui->suspended = 1;
     }
-    FUN_0041de6c(ui);
-    if (g_saveLoadUIBase.unk00[1]) {
+    saveLoadUiConfirmSave(ui);
+    if (g_saveLoadUIBase.saveAnnounced) {
         if (ui->popup != NULL) {
             ptrListRemoveClearOwner(g_handleRegistry, reinterpret_cast<void *>(ui->popup->id));
             if (ui->popup != NULL) {

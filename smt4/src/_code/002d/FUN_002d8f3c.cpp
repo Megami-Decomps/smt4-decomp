@@ -15,7 +15,7 @@ extern "C" {
 extern SaveWriteWorker g_saveLoadThread;
 void asdSaveHeaderInit(AsdSaveHeader *, u32, u32, u32, u32, u32, u32);
 s32 asdSaveWriteBlock(u32, const char *, const AsdSaveHeader *, const void *, u32);
-s32 FUN_00214950(u32, const char *);
+s32 fsResultClassifyRestriction(u32, const char *);
 u32 colorForMode(s32 mode);
 }
 
@@ -32,7 +32,7 @@ extern "C" void FUN_002d8f3c(u32 context)
     if (asdSaveWriteBlock(file, filename, &header, g_saveLoadThread.request->payload,
                           g_saveLoadThread.request->payloadSize) == 0) {
         if (file == 0) {
-            g_saveLoadThread.result = FUN_00214950(context, filename) == 1 ? 6 : -1;
+            g_saveLoadThread.result = fsResultClassifyRestriction(context, filename) == 1 ? 6 : -1;
         }
         g_saveLoadThread.busy = 0;
     }

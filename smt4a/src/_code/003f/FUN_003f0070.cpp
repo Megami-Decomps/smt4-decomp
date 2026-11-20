@@ -1,5 +1,5 @@
-/* NON_MATCHING: null fallback returns directly instead of retaining a zero selected ID; output stack slots and saved registers differ. */
 #include "gamedata/GameSaveDataA.h"
+#include "gamedata/PartyPick.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
 #include "battle/btlDebug.h"
 #include "code/Code0018.h"
@@ -7,43 +7,24 @@
 
 extern "C" {
 s32 FUN_003e4978(void);
-s32 lcgRandomRange(u16 maximum);
-void FUN_003f1b3c(u32 request, void *record, s32 kind, s32 *value, u32 result[3]);
+void FUN_003f1b3c(u32 request, void *record, s32 kind, s32 *value, u32 *result);
 void FUN_0047f7ac(s32 enabled, u32 result);
 void btlReflectCreateKind44(s32 first, s32 second, s32 id, s32 value);
 
-// Choose an eligible nonselected party member, falling back to the selected member.
+/* Chooses an eligible non-selected party member, falling back to the selected member. */
 void FUN_003f0070(u32 request)
 {
     if (FUN_003e48bc() == 0 || FUN_003e4978() == 0) {
         return;
     }
-    u16 candidates[12] = {0};
-    s32 count = 0;
-    for (s32 index = 0; index < 12; ++index) {
-        PartySlotA *slot = partyGetSlot((u16)index);
-        if (partySlotIsOccupied(slot) != 0 && partySlotMatchesSelected(slot) == 0) {
-            candidates[count++] = slot->id;
-        }
-    }
-    u16 selectedId = 0;
-    if (count == 0) {
-        PartySlotA *slot = saveSlotFindSelected();
-        if (slot != NULL) {
-            candidates[0] = slot->id;
-            count = 1;
-        }
-    }
-    if (count != 0) {
-        selectedId = candidates[lcgRandomRange((u16)(count - 1))];
-    }
+    s32 value;
+    u32 result;
+    u16 selectedId = partyPickRandomNonSelectedId();
     if (selectedId != 0) {
-        s32 value;
-        u32 result[3];
-        void *record = reinterpret_cast<void *>(unitMapIdToCategory(selectedId, 1));
-        FUN_003f1b3c(request, record, 6, &value, result);
-        FUN_0047f7ac(1, result[0]);
+        void *record = (void *)unitMapIdToCategory(selectedId, 1);
+        FUN_003f1b3c(request, record, 6, &value, &result);
+        FUN_0047f7ac(1, result);
         btlReflectCreateKind44(0, 0, selectedId, value);
     }
 }
-}
+} /* extern "C" */

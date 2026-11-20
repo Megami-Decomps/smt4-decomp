@@ -1,44 +1,20 @@
-/* NON_MATCHING: loader/source saved registers are swapped (retail loader r5, source r4), the state store is followed by the images/font reload in retail (ours hoists the load) and the final call is if-converted. */
-#include "runtime/Stdio.h"
-#include "battle/BattleEventAssets.h"
+#include "battle/BattleEventStatesA.h"
 
 extern "C" {
-extern void *g_aocSystem;
 extern const char DAT_005285a0[];
-extern const char DAT_00528588[];
-void sysMemClear(void *buffer, u32 size);
-u32 FUN_0046c4b4(void *system, u32 archiveId);
-void aocQueueType20(void *system, u32 archiveId, void **output, const char *path);
-void aocQueueType1f(void *system, u32 archiveId, void **output, const char *path);
-void asdLoadFileAsyncSimple(const char *path, void **output, u32 flags);
-u32 FUN_004d7e20(BattleEventAssetLoadState *, const BattleEventAssetSourceA *);
 
-// Load event images and font from add-on storage when available, then initialize the event.
-u32 FUN_004d83b4(BattleEventAssetLoadState *loader, const BattleEventAssetSourceA *source)
+/* BTL_EVENT_A_LOAD_MESSAGES: requests the battle event's message bank (battle/event/%s/%s.mbm), from an add-on archive when one holds it. */
+u32 FUN_004d83b4(BattleEventAssetLoadState *event, const BattleEventAssetSourceA *source)
 {
-    char imagePath[128];
-    char fontPath[128];
-    sysMemClear(imagePath, sizeof(imagePath));
-    __2sprintf(imagePath, DAT_005285a0, source->name, source->name);
-    if (FUN_0046c4b4(g_aocSystem, source->archiveId))
-        aocQueueType20(g_aocSystem, source->archiveId, &loader->images, imagePath);
+    char path[128];
+    sysMemClear(path, sizeof(path));
+    __2sprintf(path, DAT_005285a0, source->name, source->name);
+    if (FUN_0046c4b4((u32)g_aocSystem, source->archiveId))
+        aocQueueType20(g_aocSystem, source->archiveId, &event->messages, path);
     else
-        asdLoadFileAsyncSimple(imagePath, &loader->images, 0);
-    loader->state = 4;
-    if (loader->images) {
-        loader->state = 5;
-        sysMemClear(fontPath, sizeof(fontPath));
-        __2sprintf(fontPath, DAT_00528588, source->name, source->name);
-        if (FUN_0046c4b4(g_aocSystem, source->archiveId))
-            aocQueueType1f(g_aocSystem, source->archiveId, &loader->font, fontPath);
-        else
-            asdLoadFileAsyncSimple(fontPath, &loader->font, 0);
-        loader->state = 6;
-        if (loader->font) {
-            loader->state = 7;
-            return FUN_004d7e20(loader, source);
-        }
-    }
-    return 0;
+        asdLoadFileAsyncSimple(path, (u32 *)&event->messages, 0);
+    event->state = BTL_EVENT_A_WAIT_MESSAGES;
+    return btlEventWaitMessagesA(event, source);
 }
-}
+
+} /* extern "C" */

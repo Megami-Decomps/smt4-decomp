@@ -40,7 +40,7 @@ s32 inputQueryButtonState(s32 a, s32 b);
 u32 asdSoundWaveVoiceCreate(void *data, u32 sourceId, s32 flag);
 void voiceSetMixParam(f32 a, f32 b);
 void FUN_0010b864(u32 handle, s32 volume, s32 flag);
-void FUN_0010b91c(u32 handle);
+void asdWaveVoiceFadeOut(u32 handle);
 void FUN_0010c270(u32 handle);
 void asdMemFree(void *block);
 void rt_aeabi_memclr(void *block, s32 size);
@@ -129,7 +129,7 @@ void FUN_00106708(void)
             }
             if (voice->flags & VOICE_STOP_REQUESTED) {
                 voice->fade = 3;
-                FUN_0010b91c(voice->handle);
+                asdWaveVoiceFadeOut(voice->handle);
                 voice->flags = (voice->flags & ~(VOICE_PLAYING | VOICE_STOP_REQUESTED)) | VOICE_STOPPING;
             } else if (objectGetFlagBit1(voice->handle) == 0 && voice->waitFrames > 0) {
                 voice->repeat = 1;

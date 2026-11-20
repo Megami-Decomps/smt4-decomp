@@ -1,4 +1,4 @@
-/* NON_MATCHING: the switch, results (u32: early 0 and the tail call's value) now match; retail loads selectedIndex after the state store, keeps the 64-bit pending-bit test in ldrd, and orders the two final stores differently. */
+/* NON_MATCHING: stateFlags64 OR-store now emits strd (39 diff lines); remaining: retail loads selectedIndex after state=9, keeps the 64-bit pending-bit test in ldrd, and stores state=10 before pendingChanges=0. */
 #include "battle/btlMain.h"
 
 namespace {
@@ -48,7 +48,7 @@ u32 FUN_004d7ec0(BtlStep *step, BtlMainStateA *battle)
     if ((battle->stateFlags64.bits & g_btlEvent.pendingMask) != 0)
         sysPlaySe(223);
     if (step->completion.kind == 5) {
-        battle->stateFlags64.bits |= g_btlEvent.pendingMask;
+        battle->stateFlags64.bits = g_btlEvent.pendingMask | battle->stateFlags64.bits;
         sysPlaySe(223);
     }
     return btlActionStepFinishPendingChanges(step, battle);

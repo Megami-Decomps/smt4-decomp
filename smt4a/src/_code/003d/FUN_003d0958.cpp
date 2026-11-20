@@ -1,4 +1,3 @@
-/* NON_MATCHING: case 1's closing stores are tail-merged with case 3's (strne/strne then b), retail keeps all three stores in place */
 #include "gamedata/TextureIdTable.h"
 #include "ui/SpriteWindow.h"
 #include "StaffRoll/StaffRollMain.h"
@@ -28,7 +27,7 @@ s32 FUN_003d0958(void)
 {
     SpriteWindow *window = g_sWin;
 
-    switch (window->state) {
+    switch (g_sWin->state) {
     case 0:
     case 2:
         break;
@@ -44,8 +43,8 @@ s32 FUN_003d0958(void)
                 window->phase = 1;
             }
             if (uiSpriteAdvanceAnimation(&window->sprite, 1.0f)) {
-                window->phase = 0;
                 window->state = 2;
+                window->phase = 0;
                 window->frames = 0;
             }
         }

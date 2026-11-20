@@ -15,14 +15,14 @@ u32 FUN_0035ee28(void)
 {
     s32 limit = scrGetArg(0);
     s32 group = btlResolveEntryChoice(scrGetArg(1));
-    u32 first, count;
+    s32 first, count;
     s32 eligible = 0;
-    btlGetEntryChoiceRange(group, reinterpret_cast<s32 *>(&first), reinterpret_cast<s32 *>(&count));
-    for (s32 index = first; index < (s32)(first + count); ++index) {
-        u64 mask = btlGetMainState()->entries[index].flags;
-        if (!(mask & g_btlCandidateMasks.unavailable) &&
-            (mask & g_btlCandidateMasks.required) &&
-            !(mask & g_btlCandidateMasks.excluded))
+    btlGetEntryChoiceRange(group, &first, &count);
+    for (s32 index = first; index < first + count; ++index) {
+        const BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
+        if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
+            (g_btlCandidateMasks.required & entry->flags) &&
+            !(g_btlCandidateMasks.excluded & entry->flags))
             ++eligible;
     }
     if (btlGetMainState()->unk4cd1) {

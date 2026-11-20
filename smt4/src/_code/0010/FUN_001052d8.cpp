@@ -5,7 +5,7 @@ extern "C" {
 void asdFileWakeWorker(void);
 void asdGxSetTopScreenMode(u32 mode);
 void gxLcdClearForceBlack(void);
-void FUN_00113244(u32 command);
+void asdGfxWaitVblank(u32 command);
 u8 asdGxGetBlackForced(const AsdGxPresets *presets);
 
 /* Flush the queued GX commands, wake the file worker, then apply a pending top-screen preset. */
@@ -15,10 +15,10 @@ void FUN_001052d8(void)
     s32 i;
 
     for (i = 0; i < count - 1; i++) {
-        FUN_00113244(0x402);
+        asdGfxWaitVblank(0x402);
     }
     asdFileWakeWorker();
-    FUN_00113244(0x402);
+    asdGfxWaitVblank(0x402);
     g_asdGxPresets.elapsedFrames = 0;
     if (g_asdGxPresets.pendingStereoMode >= 0) {
         g_asdGxPresets.stereoMode = g_asdGxPresets.pendingStereoMode;

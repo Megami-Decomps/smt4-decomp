@@ -1,4 +1,4 @@
-/* NON_MATCHING: the transition clear is now fully unrolled like retail; the default-definition branch is out of line in retail and reads (and discards) definition->flags at +0x27. */
+/* NON_MATCHING: only the saved registers of the constants 1 and -1 swap (retail r7 = 1, r8 = -1); IV's twin matches. */
 #include "event/bustupEvent/BustupTextureWork.h"
 #include "addon/aocMain.h"
 #include "AsdSDK/AsdDebug.h"
@@ -31,23 +31,29 @@ void asdMTeXReleaseJobContext(void *work);
 void bustupTextureStart(u32 id, s32 useDefinition)
 {
     // Transition values extend beyond the shared 0x90-byte work prefix.
-    struct ExtendedTextureWork { BustupTextureWork work; f32 transition[6]; };
-    typedef char ExtendedTextureWorkLayout[offsetof(ExtendedTextureWork, transition) == 0x90 && sizeof(ExtendedTextureWork) == 0xa8 ? 1 : -1];
+    struct ExtendedTextureWork : BustupTextureWork { f32 transition[6]; };
+    typedef char ExtendedTextureWorkLayout[sizeof(BustupTextureWork) == 0x90 && sizeof(ExtendedTextureWork) == 0xa8 ? 1 : -1];
     if (gameFlagIsSet(0x522) && !dataTable19FindAddonWord(FUN_00283498(id), 1))
         return;
     asdDebugTrace(DAT_0052f77c, 0x4c0);
-    ExtendedTextureWork *allocation = static_cast<ExtendedTextureWork *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(ExtendedTextureWork), 1));
-    sysMemClear(allocation, sizeof(ExtendedTextureWork));
-    BustupTextureWork *work = &allocation->work;
+    ExtendedTextureWork *work = static_cast<ExtendedTextureWork *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(ExtendedTextureWork), 1));
+    sysMemClear(work, sizeof(ExtendedTextureWork));
     work->id = id;
     work->previousId = -1;
     work->previousNode = -1;
-    work->definition = FUN_00283498(id);
+    BustupTextureDefinition *definition = FUN_00283498(id);
+    work->definition = definition;
     if (!useDefinition) {
         work->table = 0x17;
         work->node = -1;
-        work->x = 25.0f;
-        work->y = 25.0f;
+        /* both placements are (25, 25), but retail still reads the flag */
+        if (definition->flags != 0) {
+            work->x = 25.0f;
+            work->y = 25.0f;
+        } else {
+            work->x = 25.0f;
+            work->y = 25.0f;
+        }
     }
     if (eventIsSkipping()) {
         work->deferred = 1;
@@ -64,12 +70,12 @@ void bustupTextureStart(u32 id, s32 useDefinition)
     work->active = 0;
     work->visible = 1;
     work->frame = 0.0f;
-    allocation->transition[0] = 0.0f;
-    allocation->transition[1] = 0.0f;
-    allocation->transition[2] = 0.0f;
-    allocation->transition[3] = 0.0f;
-    allocation->transition[4] = 0.0f;
-    allocation->transition[5] = 0.0f;
-    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_0052f76c), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0026c568), reinterpret_cast<AsdProcFunc>(asdMTeXReleaseJobContext), reinterpret_cast<u32>(allocation));
+    work->transition[0] = 0.0f;
+    work->transition[1] = 0.0f;
+    work->transition[2] = 0.0f;
+    work->transition[3] = 0.0f;
+    work->transition[4] = 0.0f;
+    work->transition[5] = 0.0f;
+    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_0052f76c), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0026c568), reinterpret_cast<AsdProcFunc>(asdMTeXReleaseJobContext), reinterpret_cast<u32>(work));
 }
 }

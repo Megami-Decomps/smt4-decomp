@@ -1,4 +1,5 @@
-/* NON_MATCHING: VFP constant register allocation differs (retail reuses s16 for the degrees-to-radians factor in state 0 after hoisting 5.0f, this build allocates s18) */
+/* NON_MATCHING: VFP register allocation in state 0 only (20 lines): retail keeps the degrees-to-radians factor in s16
+   (shared with the hoisted 5.0f), 40.0f in s17 and z in s18; this build gives them s18, s16 and s16. */
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 #include "map/LmapViewGlobals.h"
@@ -52,10 +53,12 @@ void FUN_00365dcc(void)
         g_lmapView->contextMode = -2;
         sysPlaySe(0xdd);
         FUN_00233e10(1, g_gameState.overviewRecord);
-        MapVector viewPosition = g_gameState.overviewPosition;
-        viewPosition.x = viewPosition.x + libm_sinf(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
-        viewPosition.z = viewPosition.z + libm_cosf(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
-        mapIfSpawnCaveAction(viewPosition.x, viewPosition.y, viewPosition.z, g_gameState.pointHeading);
+        f32 x = g_gameState.overviewPosition.x;
+        f32 y = g_gameState.overviewPosition.y;
+        f32 z = g_gameState.overviewPosition.z;
+        x = x + libm_sinf(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
+        z = z + libm_cosf(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
+        mapIfSpawnCaveAction(x, y, z, g_gameState.pointHeading);
         g_lmapScene->state = g_lmapScene->state + 1;
         g_lmapScene->stateTime = 0;
         break;

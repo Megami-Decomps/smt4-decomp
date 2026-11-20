@@ -1,132 +1,84 @@
-/* NON_MATCHING: Battle-event resource loading and pending-mask stages are complete; the prologue, inline bytecode-load cases, and branch joins differ. */
-#include "runtime/Stdio.h"
+/* NON_MATCHING: 18 lines. Retail reads the state before `sub sp` in the prologue (this build after), and in
+   BTL_EVENT_A_START_SCRIPT's two 64-bit mask operations it holds the mask's low word in r2 and r3 where this
+   build uses r3 and r2. */
+#include "battle/BattleEventStatesA.h"
 #include "gamedata/DataTable.h"
 #include "battle/BtlMainAccess.h"
 
-struct BattleEventLoadStep {
-    /* 0x00 */ s32 state;
-    /* 0x04 */ u32 flags;
-    /* 0x08 */ void *tableFile;
-    /* 0x0C */ void *messageFile;
-    /* 0x10 */ void *scriptFile;
-    /* 0x14 */ void *scriptProcess;
-    /* 0x18 */ void *entries;
-    /* 0x1C */ u32 count;
-    /* 0x20 */ s32 entry;
-    /* 0x24 */ s32 type;
-    /* 0x28 */ u32 ticks;
-};
-struct BattleEventLoadIdentity {
-    /* 0x000 */ u8 unk000[0xf0];
-    /* 0x0F0 */ u32 aocId;
-    /* 0x0F4 */ u8 unk0f4[0x3c];
-    /* 0x130 */ char name[1];
-};
+/* unit-local: the event module's global, of which this function reads only the pending mask */
 struct BattleEventPendingMask {
     /* 0x00 */ u8 unk00[0x20];
     /* 0x20 */ u64 mask;
 };
+
 extern "C" {
-extern void *g_aocSystem;
 extern BattleEventPendingMask g_btlEvent;
 extern const char DAT_005285b8[];
-extern const char DAT_00528588[];
-void sysMemClear(void *data, u32 size);
-u32 FUN_0046c4b4(void *system, u32 aocId);
-void aocQueueType1e(void *system, u32 aocId, void **file, const char *path);
-void aocQueueType1f(void *system, u32 aocId, void **file, const char *path);
-void asdLoadFileAsyncSimple(const char *path, void **file, u32 flags);
 void *dataTableFileGetTable(void *file, s32 index);
-u32 FUN_004d83b4(BattleEventLoadStep *step, BtlMainStateA *battle);
-u32 FUN_004d7e20(BattleEventLoadStep *step, BtlMainStateA *battle);
-u32 FUN_004d7ec0(BattleEventLoadStep *step, BtlMainStateA *battle);
-u32 btlActionStepFinishPendingChanges(BattleEventLoadStep *step, BtlMainStateA *battle);
+u32 FUN_004d7ec0(BattleEventAssetLoadState *event, BtlMainStateA *battle);
+u32 btlActionStepFinishPendingChanges(BattleEventAssetLoadState *event, BtlMainStateA *battle);
 void scrScriptProcessStartEntry(void *process, s32 entry);
 void sysPlaySe(u32 sound);
 }
 
-static inline void battleEventReadProTable(BattleEventLoadStep *step)
+/* BTL_EVENT_A_WAIT_TABLE: waits for the event table, then reads its records. */
+static __inline u32 btlEventWaitTableA(BattleEventAssetLoadState *event, const BattleEventAssetSourceA *source)
 {
-    void *table = dataTableFileGetTable(step->tableFile, 0);
-    step->entries = dataTableGetEntries(table);
-    step->count = dataTableGetCount(table);
-    step->state = 3;
+    if (event->table == NULL)
+        return 0;
+    void *table = dataTableFileGetTable(event->table, 0);
+    event->entries = dataTableGetEntries(table);
+    event->entryCount = dataTableGetCount(table);
+    event->state = BTL_EVENT_A_LOAD_MESSAGES;
+    return FUN_004d83b4(event, source);
 }
 
-static inline u32 battleEventLoadBytecode(BattleEventLoadStep *step, BtlMainStateA *battle)
+/* Loads and runs a battle event: one call steps the event through every state whose wait is over. */
+extern "C" u32 FUN_004d800c(BattleEventAssetLoadState *event, const BattleEventAssetSourceA *source)
 {
-    const BattleEventLoadIdentity *identity = reinterpret_cast<const BattleEventLoadIdentity *>(battle);
-    char path[128];
-    sysMemClear(path, sizeof(path));
-    __2sprintf(path, DAT_00528588, identity->name, identity->name);
-    if (FUN_0046c4b4(g_aocSystem, identity->aocId)) {
-        aocQueueType1f(g_aocSystem, identity->aocId, &step->scriptFile, path);
-    } else {
-        asdLoadFileAsyncSimple(path, &step->scriptFile, 0);
-    }
-    step->state = 6;
-    if (step->scriptFile != NULL) {
-        step->state = 7;
-        return FUN_004d7e20(step, battle);
-    }
-    return 0;
-}
-
-/* Load the event's table and bytecode, then advance its script and pending-change stages. */
-extern "C" u32 FUN_004d800c(BattleEventLoadStep *step, BtlMainStateA *battle)
-{
-    switch (step->state) {
-    case 1: {
-        const BattleEventLoadIdentity *identity = reinterpret_cast<const BattleEventLoadIdentity *>(battle);
+    switch (event->state) {
+    case BTL_EVENT_A_LOAD_TABLE: {
         char path[128];
         sysMemClear(path, sizeof(path));
-        __2sprintf(path, DAT_005285b8, identity->name, identity->name);
-        if (FUN_0046c4b4(g_aocSystem, identity->aocId)) {
-            aocQueueType1e(g_aocSystem, identity->aocId, &step->tableFile, path);
-        } else {
-            asdLoadFileAsyncSimple(path, &step->tableFile, 0);
-        }
-        step->state = 2;
-        u32 result = 0;
-        if (step->tableFile != NULL) {
-            battleEventReadProTable(step);
-            result = FUN_004d83b4(step, battle);
-        }
-        return result;
+        __2sprintf(path, DAT_005285b8, source->name, source->name);
+        if (FUN_0046c4b4((u32)g_aocSystem, source->archiveId))
+            aocQueueType1e(g_aocSystem, source->archiveId, &event->table, path);
+        else
+            asdLoadFileAsyncSimple(path, (u32 *)&event->table, 0);
+        event->state = BTL_EVENT_A_WAIT_TABLE;
+        return btlEventWaitTableA(event, source);
     }
-    case 2:
-        if (step->tableFile == NULL) return 0;
-        battleEventReadProTable(step);
-        return FUN_004d83b4(step, battle);
-    case 3:
-        return FUN_004d83b4(step, battle);
-    case 4:
-        if (step->messageFile == NULL) return 0;
-        step->state = 5;
-        return battleEventLoadBytecode(step, battle);
-    case 5:
-        return battleEventLoadBytecode(step, battle);
-    case 6:
-        if (step->scriptFile == NULL) return 0;
-        step->state = 7;
-        return FUN_004d7e20(step, battle);
-    case 7:
-        return FUN_004d7e20(step, battle);
-    case 8:
-        return FUN_004d7ec0(step, battle);
-    case 9:
-        if (step->entry < 0) return 0;
-        scrScriptProcessStartEntry(step->scriptProcess, step->entry);
-        step->state = 10;
-        step->ticks = 0;
-        if (g_btlEvent.mask & battle->stateFlags64.bits) sysPlaySe(223);
-        if (step->type == 5) {
-            battle->stateFlags64.bits |= g_btlEvent.mask;
+    case BTL_EVENT_A_WAIT_TABLE:
+        return btlEventWaitTableA(event, source);
+    case BTL_EVENT_A_LOAD_MESSAGES:
+        return FUN_004d83b4(event, source);
+    case BTL_EVENT_A_WAIT_MESSAGES:
+        return btlEventWaitMessagesA(event, source);
+    case BTL_EVENT_A_LOAD_SCRIPT:
+        return btlEventLoadScriptA(event, source);
+    case BTL_EVENT_A_WAIT_SCRIPT:
+        return btlEventWaitScriptA(event, source);
+    case BTL_EVENT_A_CREATE_SCRIPT:
+        return FUN_004d7e20(event, source);
+    case BTL_EVENT_A_START_SCRIPT: {
+        BtlMainStateA *battle = (BtlMainStateA *)source;
+        if (event->entry < 0)
+            return 0;
+        scrScriptProcessStartEntry(event->scriptProcess, event->entry);
+        event->frames = 0;
+        event->state = BTL_EVENT_A_RUN_SCRIPT;
+        if (battle->stateFlags64.bits & g_btlEvent.mask)
+            sysPlaySe(223);
+        if (event->type == 5) {
+            battle->stateFlags64.bits = g_btlEvent.mask | battle->stateFlags64.bits;
             sysPlaySe(223);
         }
-        return btlActionStepFinishPendingChanges(step, battle);
-    case 10:
-        return btlActionStepFinishPendingChanges(step, battle);
+        return btlActionStepFinishPendingChanges(event, battle);
+    }
+    case BTL_EVENT_A_RUN_SCRIPT:
+        return btlActionStepFinishPendingChanges(event, (BtlMainStateA *)source);
+    case BTL_EVENT_A_PREPARE:
+        return FUN_004d7ec0(event, (BtlMainStateA *)source);
     default:
         return 0;
     }

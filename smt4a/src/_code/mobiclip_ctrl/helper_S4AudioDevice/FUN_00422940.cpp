@@ -49,7 +49,7 @@ extern u8 g_soundVoiceCriticalSection[];
 extern const char DAT_00532a54[];
 
 void FUN_00158f64();
-void FUN_00159030();
+void dspComponentLoadEmbeddedAndStart();
 void dspsndInitializeManagers();
 void sndMasterManagerSetVolume(f32 value);
 void *sysMemClear(void *destination, u32 size);
@@ -67,7 +67,7 @@ void FUN_00100326();
 u32 FUN_00422940(AudioAllocator *allocator, s32 ringCount, u8 loop)
 {
     FUN_00158f64();
-    FUN_00159030();
+    dspComponentLoadEmbeddedAndStart();
     dspsndInitializeManagers();
     sndMasterManagerSetVolume(1.0f);
     g_soundVoicePool.loop = loop;

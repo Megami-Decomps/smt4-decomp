@@ -1,4 +1,4 @@
-/* NON_MATCHING: register assignment (object/slot index) and the owned==NULL store is predicated instead of sharing retail's single `unk04 = 0` store */
+/* NON_MATCHING: switch(object->unk04) matches the shared unk04=0 store; only the final `ldreq r0, [r5, #28]` vs tail-call to FUN_00340f80 remains (16 diff lines). */
 #include "classes/Obj557ae8.h"
 #include "Model/MoriModelManager.h"
 #include "gfx/ControllerModel.h"
@@ -13,21 +13,24 @@ void namedResourceSlotAssign(Obj557ae8 *object, s32 index, const char *name, u16
  * through its states (1 loading, 2 releasing, 3 released, 4 retry, 5 queued). */
 void FUN_003e5858(Obj557ae8 *object)
 {
-    if (object->unk04 != 0 && object->unk04 == 1) {
+    switch (object->unk04) {
+    case 0:
+        break;
+    case 1:
         if (object->owned != NULL) {
-            if (moriModelContentIsLoaded(object->owned) != 0) {
-                FUN_0040ab7c(object->owned, 2);
-                moriModelContentLoadBody(object->owned, NULL);
-                Obj557b18 *model = object->owned->body;
-                controllerSetPositionXyz(model, 0.0f, 0.0f, 0.0f);
-                modelPlayClip(model, 0, 2, 0.0f, 0.0f);
-                handleRegistryRegisterObject(g_handleRegistry, model);
-                object->owned->body->flags |= 1;
-                object->unk04 = 0;
+            if (moriModelContentIsLoaded(object->owned) == 0) {
+                break;
             }
-        } else {
-            object->unk04 = 0;
+            FUN_0040ab7c(object->owned, 2);
+            moriModelContentLoadBody(object->owned, NULL);
+            Obj557b18 *model = object->owned->body;
+            controllerSetPositionXyz(model, 0.0f, 0.0f, 0.0f);
+            modelPlayClip(model, 0, 2, 0.0f, 0.0f);
+            handleRegistryRegisterObject(g_handleRegistry, model);
+            object->owned->body->flags |= 1;
         }
+        object->unk04 = 0;
+        break;
     }
     bool finished = false;
     for (s32 i = 0; i < 3; i++) {

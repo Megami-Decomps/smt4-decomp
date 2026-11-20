@@ -29,9 +29,9 @@ void effCopyTransformColorKeys(EffectKeyTrack *destination, const EffectTransfor
 f32 effRandomSignedValue(s32 mode, s32 range, s32 positive);
 void colorKeyTrackAdvanceRgb(EffectKeyTrack *effect, const EffectTransformCopyState *source);
 void FUN_001dd974(EffectKeyTrack *effect, const EffectTransformCopyState *source);
-void FUN_001dda40(EffectKeyTrack *effect, const EffectTransformCopyState *source);
-void FUN_001ee200(EffectKeyTrack *effect, const EffectTransformCopyState *source);
-void FUN_001ee3dc(EffectKeyTrack *effect, const EffectTransformCopyState *source);
+void effScalarKeyLegacyAdvance(EffectKeyTrack *effect, const EffectTransformCopyState *source);
+void effScalarTrackAdvance(EffectKeyTrack *effect, const EffectTransformCopyState *source);
+void effScalarStateAdvance(EffectKeyTrack *effect, const EffectTransformCopyState *source);
 void FUN_001ee2bc(EffectKeyTrack *effect, const EffectTransformCopyState *source);
 void FUN_002030bc(EffectKeyTrack *effect, const EffectTransformCopyState *source);
 void FUN_002031dc(EffectKeyTrack *effect, const EffectTransformCopyState *source);
@@ -111,9 +111,9 @@ void FUN_00193c70(EffectKeyTrack *effect, const EffectTransformCopyState *source
     }
     colorKeyTrackAdvanceRgb(effect, source);
     FUN_001dd974(effect, source);
-    FUN_001dda40(effect, source);
-    FUN_001ee200(effect, source);
-    FUN_001ee3dc(effect, source);
+    effScalarKeyLegacyAdvance(effect, source);
+    effScalarTrackAdvance(effect, source);
+    effScalarStateAdvance(effect, source);
     FUN_001ee2bc(effect, source);
     FUN_002030bc(effect, source);
     FUN_002031dc(effect, source);

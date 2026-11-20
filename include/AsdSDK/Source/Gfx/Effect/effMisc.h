@@ -95,6 +95,23 @@ typedef struct EffEmitterDesc {
     /* 0xB8 */ s32 countDefault;
 } EffEmitterDesc;
 
+/* The descriptor's particle capacity: its count (the override, or the default when that is 0) times the multiplier,
+ * at most 100 (effEmitterCreateSmall and the object-particle creators). */
+static __inline u32 effEmitterGetCapacity(const EffEmitterDesc *desc)
+{
+    u32 maxCount;
+
+    if (desc->countOverride == 0) {
+        maxCount = desc->countDefault * desc->multiplier;
+    } else {
+        maxCount = desc->countOverride * desc->multiplier;
+    }
+    if (maxCount > 100) {
+        maxCount = 100;
+    }
+    return maxCount;
+}
+
 /* Description of an effect to spawn (from effect data). */
 typedef struct EffMiscDesc {
     /* 0x00 */ u8 unk00[0xC];

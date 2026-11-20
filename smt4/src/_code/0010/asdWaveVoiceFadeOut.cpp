@@ -1,13 +1,25 @@
-/* NON_MATCHING: list/critical-section register allocation, fade flag materialization, and VFP minimum registers differ. */
+/* NON_MATCHING: only retail's hoisted `mov r7, #256` (the 0x100 fade flag kept in r7, so r7/r8 are saved) differs; every other row matches. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "shard/W6_W6Match1_CriticalSection.h"
 
 extern "C" {
 extern AsdSndStatus g_asdSoundStatus;
-void nn_os_CriticalSection_Enter(void *section);
-void nn_os_CriticalSection_Leave(void *section);
 void nn_snd_CTR_Voice_SetState(u32 voice, s32 state);
 
-void FUN_0010b91c(AsdSndWaveVoice *voice, s32 frames)
+/* Whether the voice is in the status's object list (FUN_0010bf78's soundObjectIsLive walks it the same way). */
+static bool asdWaveVoiceIsLive(AsdSndWaveVoice *voice)
+{
+    for (AsdSndWaveVoice *item = (AsdSndWaveVoice *)g_asdSoundStatus.objects; item != NULL; item = item->link.next) {
+        if (item == voice) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/* Starts fading a live, playing voice out over `frames` frames (never above its current volume), or stops it
+ * at once when `frames` is not positive. */
+void asdWaveVoiceFadeOut(AsdSndWaveVoice *voice, s32 frames)
 {
     struct VoiceVolumeView {
         u8 unk00[0x64];
@@ -16,11 +28,8 @@ void FUN_0010b91c(AsdSndWaveVoice *voice, s32 frames)
     if (voice == NULL) {
         return;
     }
-    for (AsdSndWaveVoice *current = (AsdSndWaveVoice *)g_asdSoundStatus.objects; current != NULL; current = current->link.next) {
-        if (current != voice) {
-            continue;
-        }
-        nn_os_CriticalSection_Enter(g_asdSoundStatus.unk08);
+    if (asdWaveVoiceIsLive(voice)) {
+        ScopedCriticalLock lock(g_asdSoundStatus.unk08);
         u32 flags = voice->unk90;
         if ((flags & 2) != 0) {
             if (frames > 0) {
@@ -34,13 +43,12 @@ void FUN_0010b91c(AsdSndWaveVoice *voice, s32 frames)
                 voice->fadeFrames = frames;
                 f32 volume = ((VoiceVolumeView *)voice->voice)->volume;
                 voice->targetVolume = volume < voice->targetVolume ? volume : voice->targetVolume;
-                voice->unk90 = flags | 0x100;
+                flags |= 0x100;
+                voice->unk90 = flags;
             } else {
                 nn_snd_CTR_Voice_SetState(voice->voice, 1);
             }
         }
-        nn_os_CriticalSection_Leave(g_asdSoundStatus.unk08);
-        return;
     }
 }
 }

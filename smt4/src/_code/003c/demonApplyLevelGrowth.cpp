@@ -26,7 +26,7 @@ typedef char LevelGrowthParametersSizeCheck[sizeof(LevelGrowthParameters) == 0x1
 typedef char DemonLevelWorkSizeCheck[sizeof(DemonLevelWork) == 0x4a ? 1 : -1];
 
 extern "C" {
-u32 FUN_003c219c(DemonLevelWork *work, LevelGrowthParameters *parameters, u32 flags);
+u32 unitRollGrowthStat(DemonLevelWork *work, LevelGrowthParameters *parameters, u32 flags);
 s32 FUN_00245768(u32 id);
 void FUN_0024571c(u32 id, s32 value);
 void unitRecalculateEffectiveStats(DemonLevelWork *work);
@@ -62,7 +62,7 @@ extern "C" void demonApplyLevelGrowth(DemonLevelWork *work, s32 levels)
         if (work->level == 99)
             break;
         for (s32 point = 0; point < 5; ++point) {
-            switch (FUN_003c219c(work, &parameters, 1)) {
+            switch (unitRollGrowthStat(work, &parameters, 1)) {
             case 0: ++work->gains[0]; break;
             case 1: ++work->gains[1]; break;
             case 2: ++work->gains[2]; break;

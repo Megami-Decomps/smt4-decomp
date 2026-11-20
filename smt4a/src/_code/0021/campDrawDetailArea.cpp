@@ -1,10 +1,8 @@
-/* NON_MATCHING: control flow, calls and constants follow retail. Retail copies the sprite
- * pointer into two registers (r9 and r5; the build keeps one), and its frame is 16 bytes smaller: the row's name is
- * spilled to the outgoing-argument slot sp+4 next to the colour (`ldm sp, {r1, r2}` before textDrawString: needs the
- * textDrawString reorder) and the list's item/selected copies sit in adjacent slots (sp+84/88). A few x/y operand
- * loads are ordered differently. Retail also loads 1.0f into s19 before the distance test (the build loads it only
- * for the final call), which moves the literal pool split. */
-#include "runtime/Stdio.h"
+/* NON_MATCHING: control flow, calls, constants, pools and the frame size follow retail (115 raw / 51 shape). What
+ * differs: three spill slots (retail: pressed sp+76, item/selected sp+84/88; here sp+28 and sp+88/92), the load order
+ * of the x/y operands at five of the row draws (count, "*" and icon positions), and the literal-pool skip after the
+ * loop's count draw, where retail pads with two nops and loads the next id after the pool. */
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 #include "camp/CampStateA.h"
 #include "shard/TextureDrawCall.h"
@@ -42,7 +40,9 @@ static void campDrawItemList(s32 item, s32 x, s32 y, s32 selected, f32 alpha)
     CampStateA *camp = g_camp;
     GridNavigation *grid;
     u16 *ids;
-    char count[44];
+    char count[32];
+    const char *name;
+    u32 color;
 
     switch (item) {
     case 11:
@@ -67,38 +67,36 @@ static void campDrawItemList(s32 item, s32 x, s32 y, s32 selected, f32 alpha)
         return;
     }
     for (s32 row = 0; row < 11; row++) {
-        if (resourceRunOperationIfUnblocked(reinterpret_cast<Object *>(grid)) + row >=
-            gridNavigationGetItemCount(reinterpret_cast<Object *>(grid))) {
+        if (resourceRunOperationIfUnblocked((Object *)grid) + row >= gridNavigationGetItemCount((Object *)grid)) {
             break;
         }
-        u16 id = ids[resourceRunOperationIfUnblocked(reinterpret_cast<Object *>(grid)) + row];
+        u16 id = ids[resourceRunOperationIfUnblocked((Object *)grid) + row];
         TextureTableEntryIV *line = asdTMTexTableEntryAt(20, row + 0x40D);
         texDrawTableEntryAtStoredOrigin(2, 20, 0x46C, line->x + x, line->y + y, 0x6A);
         texDrawTableEntryAtStoredOrigin(2, 20, 0x46D, line->x + x, line->y + y, 0x6A);
         texDrawTableEntryAtStoredOrigin(2, 20, 0x46E, line->x + x, line->y + y, 0x6A);
         TextureTableEntryIV *nameAt = asdTMTexTableEntryAt(20, 0x470);
-        const char *name = dataFindKindRecordWithAocOverrides(id, 0);
+        name = dataFindKindRecordWithAocOverrides(id, 0);
         if (name) {
-            u32 color = 0xFFFFFFFF;
+            color = 0xFFFFFFFF;
             if (item == 11 && FUN_0048144c(id) == 0) {
                 color = 0x9B9B9BFF;
             }
             textDrawString(line->x + nameAt->x + x, line->y + nameAt->y + y, 0.55f, 2, 0.0f, color, alpha, name);
         }
         TextureTableEntryIV *countAt = asdTMTexTableEntryAt(20, 0x473);
-        __2sprintf(count, "%d", flagValueRead(id));
+        sprintf(count, "%d", flagValueRead(id));
         statRowDrawValueImpl(0, line->x + countAt->x + x, line->y + countAt->y + y, 1, 3, 0x6F, count);
         TextureTableEntryIV *markAt = asdTMTexTableEntryAt(20, 0x474);
         statRowDrawValueImpl(0, markAt->x + line->x + x, line->y + markAt->y + y, 1, 1, 0x6F, "*");
         TextureTableEntryIV *iconAt = asdTMTexTableEntryAt(20, 0x46F);
-        uiDrawItemCategoryIcon(static_cast<s16>(id), iconAt->x + line->x + x, line->y + iconAt->y + y, 0x6F, 0);
+        uiDrawItemCategoryIcon((s16)id, iconAt->x + line->x + x, line->y + iconAt->y + y, 0x6F, 0);
     }
     FUN_0023d150(grid, x, y, 1);
     if (selected) {
-        u16 id = ids[resourceRunOperationIfUnblocked(reinterpret_cast<Object *>(grid)) +
-                     listCursorGetRowIfUnblocked(grid)];
+        u16 id = ids[resourceRunOperationIfUnblocked((Object *)grid) + listCursorGetRowIfUnblocked(grid)];
         s32 mode = recordGetModeForId(camp->touch.rowRegions[listCursorGetRowIfUnblocked(grid)]);
-        u32 color = 0x9FE7FFFF;
+        color = 0x9FE7FFFF;
         if (mode == 1 || mode == 2 || mode == 6) {
             color = 0xF5FF9FFF;
             pressed = 1;
@@ -106,7 +104,7 @@ static void campDrawItemList(s32 item, s32 x, s32 y, s32 selected, f32 alpha)
         TextureTableEntryIV *line = asdTMTexTableEntryAt(20, listCursorGetRowIfUnblocked(grid) + 0x42E);
         FUN_0026ec00(line->x + x, line->y + y, pressed);
         TextureTableEntryIV *nameAt = asdTMTexTableEntryAt(20, 0x477);
-        const char *name = dataFindKindRecordWithAocOverrides(id, 0);
+        name = dataFindKindRecordWithAocOverrides(id, 0);
         if (name) {
             if (item == 11 && FUN_0048144c(id) == 0) {
                 color = 0x9B9B9BFF;
@@ -114,13 +112,13 @@ static void campDrawItemList(s32 item, s32 x, s32 y, s32 selected, f32 alpha)
             textDrawString(line->x + nameAt->x + x, line->y + nameAt->y + y, 0.5f, 3, 0.0f, color, alpha, name);
         }
         TextureTableEntryIV *countAt = asdTMTexTableEntryAt(20, 0x47A);
-        __2sprintf(count, "%d", flagValueRead(id));
-        statRowDrawValueImpl(0, line->x + countAt->x + x, line->y + countAt->y + y, 1, 3, 0x83, count);
+        sprintf(count, "%d", flagValueRead(id));
+        statRowDrawValueImpl(0, countAt->x + line->x + x, line->y + countAt->y + y, 1, 3, 0x83, count);
         TextureTableEntryIV *markAt = asdTMTexTableEntryAt(20, 0x47B);
         statRowDrawValueImpl(0, markAt->x + line->x + x, line->y + markAt->y + y, 1, 1, 0x83, "*");
         texDrawTableEntryAtStoredOrigin(2, 20, 0x475, line->x + x, line->y + y, 0x83);
         TextureTableEntryIV *iconAt = asdTMTexTableEntryAt(20, 0x476);
-        uiDrawItemCategoryIcon(static_cast<s16>(id), iconAt->x + line->x + x, line->y + iconAt->y + y, 0x88, 0);
+        uiDrawItemCategoryIcon((s16)id, iconAt->x + line->x + x, line->y + iconAt->y + y, 0x88, 0);
     }
 }
 
@@ -128,10 +126,11 @@ static void campDrawItemList(s32 item, s32 x, s32 y, s32 selected, f32 alpha)
    cursor row to a list page. */
 void campDrawDetailArea(s32 item, s32 selected)
 {
-    UiSpriteState *sprite = &g_camp->sprites[1];
-    s32 x = vec2GetXInt(sprite);
-    s32 y = vec2GetYInt(sprite);
+    CampStateA *camp = g_camp;
+    s32 x = vec2GetXInt(&camp->sprites[1]);
+    s32 y = vec2GetYInt(&camp->sprites[1]);
     s32 distance = x;
+    f32 alpha = 1.0f; /* full opacity: restored after the page is drawn */
 
     if (distance < 0) {
         distance = -x;
@@ -139,7 +138,7 @@ void campDrawDetailArea(s32 item, s32 selected)
     if (distance >= 320) {
         return;
     }
-    f32 alpha = vec2GetSpeed(sprite);
+    alpha = vec2GetSpeed(&camp->sprites[1]);
     efctSetSpeed(alpha);
     switch (item) {
     case 1:

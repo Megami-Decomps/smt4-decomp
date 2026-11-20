@@ -7,7 +7,7 @@
 extern "C" {
 extern AsdSndControlA g_asdSoundDuck;
 s32 FUN_00158f64(void);
-s32 FUN_00159030(void);
+s32 dspComponentLoadEmbeddedAndStart(void);
 s32 dspsndInitializeManagers(void);
 void sysFatalBreak(void);
 void sndMasterManagerSetVolume(f32 volume);
@@ -19,7 +19,7 @@ void FUN_00142b84(s32 auxiliaryMode)
 {
     if (nnResultIsFailure(FUN_00158f64()))
         sysFatalBreak();
-    if (nnResultIsFailure(FUN_00159030()))
+    if (nnResultIsFailure(dspComponentLoadEmbeddedAndStart()))
         sysFatalBreak();
     if (nnResultIsFailure(dspsndInitializeManagers()))
         sysFatalBreak();

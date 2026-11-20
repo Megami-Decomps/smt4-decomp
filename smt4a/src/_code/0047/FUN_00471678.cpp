@@ -1,4 +1,3 @@
-/* NON_MATCHING: option-index range calculation is hoisted out of the package loops. */
 /* Finds the loaded package containing a selected record and optional populated option. */
 #include "addon/aocMain.h"
 #include "addon/PackageSelection.h"
@@ -16,9 +15,12 @@ extern "C" u32 FUN_00471678(AocSystemA *system, u32 id, s32 option)
             s32 count = dataTableGetCount(table);
             for (s32 j = 0; j < count; ++j) {
                 PackageSelectableRecord *entry = &entries[j];
-                if (entry->id == id &&
-                    (option == 0 || ((u32)(option - 1) < 5 && entry->options[option - 1] != 0))) {
-                    return handle;
+                if (entry->id == id) {
+                    if (option == 0)
+                        return handle;
+                    u32 idx = (u32)(option - 1);
+                    if (idx < 5 && entry->options[idx] != 0)
+                        return handle;
                 }
             }
         }

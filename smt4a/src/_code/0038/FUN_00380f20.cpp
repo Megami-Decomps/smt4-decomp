@@ -1,4 +1,4 @@
-/* NON_MATCHING: the third mask test and the marked-entry test are predicated here; retail branches (same as FUN_00380e34). */
+/* NON_MATCHING: hpPercent helper matches the ldm hp/maxHp load (37 diff lines); remaining: third mask test and marked-entry test are predicated (changing BtlEntryA::marked to s8 drops this to 2 diff lines but regresses 5 other units in usercheck). */
 #include "battle/BtlMainAccess.h"
 #include "battle/BtlEntryLookup.h"
 #include "battle/btlMain.h"
@@ -19,6 +19,12 @@ struct EntryRef {
     /* 0x00 */ u8 unk00[2];
     /* 0x02 */ s8 slot;
 };
+
+/* Current HP as a percentage of the maximum (same helper as FUN_00372b80). */
+static __inline s32 hpPercent(s32 hp, s32 maxHp)
+{
+    return hp * 100 / maxHp;
+}
 
 extern "C" {
 
@@ -53,7 +59,7 @@ u32 FUN_00380f20(void)
     if (ref != NULL) {
         s32 passes = FUN_003ec668(battle, ref->slot, 2);
 
-        if (skill->data.hp * 100 / skill->data.maxHp < 20 && passes != 0) {
+        if (hpPercent(skill->data.hp, skill->data.maxHp) < 20 && passes != 0) {
             FUN_003f2638(battle, 2, record, 0);
         } else {
             FUN_003f2638(battle, 1, record, 0);

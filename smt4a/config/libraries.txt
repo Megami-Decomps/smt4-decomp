@@ -32,3 +32,12 @@ arm 0x1623dc 0x16242c armlib ll_sdiv: asrs/eor sign packing and rsbs/rsc negatio
 # Two more of the CTR-SDK's hand-written svc wrappers returning an output handle (`push {r0}; svc N; ldr r2, [sp];
 # str r1, [r2]; add sp, sp, #4; bx lr`): svc 0x15 CreateSemaphore (smt4's 0x2c52dc) and svc 0x38 GetResourceLimit.
 arm 0x14a930 0x14a960 CTR-SDK svcCreateSemaphore (svc 0x15) and svcGetResourceLimit (svc 0x38): push {r0}; svc N; ldr r2, [sp]; str r1, [r2]
+# NintendoWare gfx: the light and fog DynamicBuilder::Create functions (nw::gfx). Each keeps its default resource in
+# NW's move-only resource pointer (ut::MovePtr with a ResDeleter: the copy moves the pointer, the destructor destroys
+# what is left), placement-news the object and initializes it; they sit between nw_gfx functions (Fog_DestroyResFog,
+# res_ResFog_Setup, *Light_GetMemorySizeInternal, TransformNode_DynamicBuilder_Create); smt4's twins 0x11d9c4/0x120000/0x1204b8/0x12abd0/0x12b48c.
+arm 0x15add8 0x15aeac NintendoWare-gfx Obj55b4e4::create: nw::gfx DynamicBuilder::Create, MovePtr resource handle, inside the nw_gfx block
+arm 0x15d35c 0x15d430 NintendoWare-gfx Obj55b704::create: nw::gfx DynamicBuilder::Create, MovePtr resource handle, inside the nw_gfx block
+arm 0x15d814 0x15d8d8 NintendoWare-gfx Obj55bb90 (fog)::create: nw::gfx DynamicBuilder::Create, MovePtr resource handle, inside the nw_gfx block
+arm 0x171acc 0x171bb8 NintendoWare-gfx Obj55b4a8::create: nw::gfx DynamicBuilder::Create, MovePtr resource handle, inside the nw_gfx block
+arm 0x171d7c 0x171e40 NintendoWare-gfx Obj55b5a8::create: nw::gfx DynamicBuilder::Create, MovePtr resource handle, inside the nw_gfx block

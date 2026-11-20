@@ -1,4 +1,7 @@
-/* NON_MATCHING: code, registers and branch layout match retail; only the stack frame differs (retail keeps the two table-handle temporaries at sp+4 and sp+88 and its tab-pointer spill slots in a different order, frame 92 vs 108 bytes). */
+/* NON_MATCHING: 15 lines. (1) Retail passes the record search's three accessor calls a scratch object at sp+4 (the slot
+   it later reuses for listScrollerInitialize's sixth argument) and the two child calls one at sp+88; this build passes
+   sp+88 to all five. (2) In the last loop retail sets rows to 9 before the loop and again next to its `moveq r1, #10`
+   at the bottom; this build sets it once at the loop top. */
 #include "common.h"
 #include "shop/CellList.h"
 #include "quest_center/QuestUnlockConditions.h"
@@ -34,17 +37,16 @@ struct PlaceListScene {
 
 /* The scratch object the data table 0x17/1 accessors take (and ignore) as their first argument. */
 struct Table17Handle {
-    u32 words[2];
-    Table17Handle() {}
+    u32 unused;
 };
 
 extern "C" {
 
 u16 *statisticsGetCounter(u8 bank, u32 row, u32 column);
-PlaceListRecord *dataTable17Sub1GetRecord(const Table17Handle &ignored, s32 index);
-s32 dataTable17Sub1GetCount(const Table17Handle &ignored);
-const QuestUnlockConditions *dataTable17Sub1ChildGetEntries(const Table17Handle &ignored, s32 index);
-s32 dataTable17Sub1ChildGetCount(const Table17Handle &ignored, s32 index);
+PlaceListRecord *dataTable17Sub1GetRecord(Table17Handle *ignored, s32 index);
+s32 dataTable17Sub1GetCount(Table17Handle *ignored);
+const QuestUnlockConditions *dataTable17Sub1ChildGetEntries(Table17Handle *ignored, s32 index);
+s32 dataTable17Sub1ChildGetCount(Table17Handle *ignored, s32 index);
 u32 questEvaluateUnlockConditions(const QuestUnlockConditions *conditions);
 s32 gameTestIndexedAuxiliaryFlag(s32 index);
 u32 contentGetEntryKind(u32 id);
@@ -55,10 +57,10 @@ void listCursorSetPage(PlaceListCursor *cursor, s32 page);
  * that are locked or unseen, and opens their list windows. Returns whether any entry is active. */
 u32 FUN_003a45fc(PlaceListScene *scene)
 {
+    Table17Handle table;
     u32 anyActive = 0;
-    s32 i;
 
-    for (i = 0; i < PLACE_TAB_COUNT; i++) {
+    for (s32 i = 0; i < PLACE_TAB_COUNT; i++) {
         CellList *tab = &scene->tabs[i];
         tab->count = 0;
     }
@@ -66,17 +68,17 @@ u32 FUN_003a45fc(PlaceListScene *scene)
     u32 kind = scene->placeKind;
     s32 key = scene->placeKey;
     s32 found = -1;
-    PlaceListRecord *records = dataTable17Sub1GetRecord(Table17Handle(), 0);
-    for (i = 0; i < dataTable17Sub1GetCount(Table17Handle()); i++) {
+    PlaceListRecord *records = dataTable17Sub1GetRecord(&table, 0);
+    for (s32 i = 0; i < dataTable17Sub1GetCount(&table); i++) {
         if (records[i].kind == kind && records[i].key == key) {
             found = i;
             break;
         }
     }
 
-    const QuestUnlockConditions *entries = dataTable17Sub1ChildGetEntries(Table17Handle(), found);
-    s32 count = dataTable17Sub1ChildGetCount(Table17Handle(), found);
-    for (i = 0; i < count; i++) {
+    const QuestUnlockConditions *entries = dataTable17Sub1ChildGetEntries(&table, found);
+    s32 count = dataTable17Sub1ChildGetCount(&table, found);
+    for (s32 i = 0; i < count; i++) {
         const QuestUnlockConditions *entry = &entries[i];
         u32 id = entry->unk00;
         if (id == 0) {
@@ -156,7 +158,7 @@ u32 FUN_003a45fc(PlaceListScene *scene)
         }
     }
 
-    for (i = 0; i < PLACE_TAB_COUNT; i++) {
+    for (s32 i = 0; i < PLACE_TAB_COUNT; i++) {
         s32 rows = (i == 7 || i == 8) ? 10 : 9;
         s32 special = i == 7 || i == 8;
         listScrollerInitialize(&scene->cursors[i], rows, scene->tabs[i].count, 0, 1, special);

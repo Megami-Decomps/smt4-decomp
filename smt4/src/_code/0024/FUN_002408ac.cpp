@@ -6,14 +6,14 @@
 
 extern "C" {
 void FUN_0023f410(BtlMainState *state, s32 group, s32 keepFlag, s32 keepFlag58);
-u32 FUN_0023f500(BattleEncounterQuery *query, BtlMainState *state);
+u32 battleEncounterStepSetup(BattleEncounterQuery *query, BtlMainState *state);
 void FUN_0023f79c(BtlMainState *state, u32 flags);
 
 /* Moves the encounter setup to step 10 and runs it (loads the arrangement). */
 static __inline u32 encounterStartArrangement(BattleEncounterQuery *query, BtlMainState *state)
 {
     query->step = 10;
-    return FUN_0023f500(query, state);
+    return battleEncounterStepSetup(query, state);
 }
 
 /* Encounter setup step: counts the finished actions, then advances to step 10 once the battle is ready. */

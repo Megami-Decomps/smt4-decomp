@@ -7,7 +7,7 @@
 extern "C" {
 s32 FUN_002d5e44(u32 mode, const char *name);
 s32 asdSaveReadBlock(u32 file, const char *name, AsdSaveHeader *header, void *payload, u32 size);
-s32 FUN_00214950(u32 context, const char *name);
+s32 fsResultClassifyRestriction(u32 context, const char *name);
 
 // Read the selected game save and advance the thread after validation succeeds.
 void FUN_002d8e74(u32 context)
@@ -33,7 +33,7 @@ void FUN_002d8e74(u32 context)
         if (asdSaveReadBlock(file, filename, &header, payload, size) != 0) {
             return;
         }
-        thread->result = (FUN_00214950(context, filename) == 1) ? 6 : -1;
+        thread->result = (fsResultClassifyRestriction(context, filename) == 1) ? 6 : -1;
     } else {
         thread->result = -1;
     }

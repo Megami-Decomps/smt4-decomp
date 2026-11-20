@@ -19,22 +19,6 @@ static __inline void *effAllocCleared(s32 size)
     return block;
 }
 
-/* Resolve and clamp the descriptor's particle capacity. */
-static __inline u32 effEmitterGetCapacity(const EffEmitterDesc *desc)
-{
-    u32 maxCount;
-
-    if (desc->countOverride == 0) {
-        maxCount = desc->countDefault * desc->multiplier;
-    } else {
-        maxCount = desc->countOverride * desc->multiplier;
-    }
-    if (maxCount > 100) {
-        maxCount = 100;
-    }
-    return maxCount;
-}
-
 /* Creates the smaller emitter object for `desc`. */
 EffEmitter *effEmitterCreateSmall(EffEmitterDesc *desc)
 {

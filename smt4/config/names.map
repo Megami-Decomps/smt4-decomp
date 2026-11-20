@@ -6082,3 +6082,17 @@
 003c33c8 btlDebugStatusFlagEditorApply
 00343324 renderCtxSetMatrices
 0027398c itemEventStartupUpdate
+0023f500 battleEncounterStepSetup
+003349c0 battleEncounterTaskUpdate
+00214950 fsResultClassifyRestriction
+00113244 asdGfxWaitVblank
+0010b91c asdWaveVoiceFadeOut
+001dda40 effScalarKeyLegacyAdvance
+001ee200 effScalarTrackAdvance
+001ee3dc effScalarStateAdvance
+001108e4 modelFileRelease
+003138a4 effObjectParticleCreate
+002d15fc effObjectParticleClone
+00383f70 debugItemListDraw
+003f41ec mobiclipAudioDeviceInitializeStatics
+003c219c unitRollGrowthStat

@@ -1,4 +1,4 @@
-/* NON_MATCHING: stat loads (all signed), cap checks interleaved with the weight sum and the result narrowing match retail; only the callee-saved register numbering of the five cached stats is rotated (retail: strength in fp, then r7-r9, sl). */
+/* NON_MATCHING: the signed stat loads, cap checks and byte-sized result match; the cached stats are assigned different registers. */
 #include "gamedata/UnitStats.h"
 #include "util/Random.h"
 
@@ -6,9 +6,9 @@ extern "C" {
 void FUN_003eb068(void *);
 
 /* Increment one weighted base stat; capped stats are removed from the distribution. */
-u32 FUN_003c219c(StatBlock *unit, u8 *weights)
+u32 unitRollGrowthStat(StatBlock *unit, u8 *weights)
 {
-    u8 selected = 0;
+    s32 selected = 0;
     s16 updated[5];
     FUN_003eb068(updated);
     s16 strength = unit->summary.stats[0];
@@ -32,7 +32,7 @@ u32 FUN_003c219c(StatBlock *unit, u8 *weights)
     if (luck >= 999) weights[4] = 0;
     total += weights[4];
 
-    u32 roll = randNextInRange(static_cast<u16>(total - 1));
+    u32 roll = randNextInRange((u16)(total - 1));
     u32 cumulative = weights[0];
     if (weights[0] && cumulative > roll) {
         updated[0] = strength + 1;
@@ -67,6 +67,6 @@ u32 FUN_003c219c(StatBlock *unit, u8 *weights)
     unit->summary.stats[2] = updated[2];
     unit->summary.stats[3] = updated[3];
     unit->summary.stats[4] = updated[4];
-    return selected;
+    return (u8)selected;
 }
 }

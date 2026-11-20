@@ -1,4 +1,4 @@
-/* NON_MATCHING: the selection store is scheduled earlier, enabling saved-register reuse and a 12-byte instead of 16-byte frame; candidate -O2. */
+/* NON_MATCHING: only the registers of the constants 3 and 0 kept across the draws swap (r7/r8). */
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
@@ -17,22 +17,23 @@ void gridNavigationConfigure(GridNavigation *grid, s32 count, s32 rows, s32 colu
                   s32 wrap, s32 updateColor);
 void flagsSetOrClearBit(u32 *flags, s32 set);
 
-void statusDownSetSelectedEntryDescription(s32 entry)
+/* Shows the description of the selected entry (none when negative) and refreshes the button help. */
+void statusDownSetSelectedEntryDescription(s16 entry)
 {
     StatusDownState *screen = g_statusDown;
     if (screen->selectedEntry < 0 && entry >= 0 && screen->tab == 1) {
         s32 mode = FUN_0029ac94();
-        u32 preset;
         if (mode == 13 || mode == 6) {
-            preset = 0x31;
+            buttonHelpSetPreset(0x31);
         } else if (mode == 8 || mode == 9 || mode == 11 || mode == 7) {
-            preset = 0x60;
+            buttonHelpSetPreset(0x60);
+        } else if (mode == 2) {
+            buttonHelpSetPreset(0x27);
         } else {
-            preset = mode == 2 ? 0x27 : 0x2b;
+            buttonHelpSetPreset(0x2b);
         }
-        buttonHelpSetPreset(preset);
     }
-    screen->selectedEntry = (s16)entry;
+    screen->selectedEntry = entry;
     if (entry < 0) {
         RelativeDirectory *directory = (RelativeDirectory *)fileSlotGetBuffer(0x40);
         asdTextDrawDirectoryEntry(screen->text, 3, -1, 0, 3, directory, 0);

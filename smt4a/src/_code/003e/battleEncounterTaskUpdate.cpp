@@ -1,8 +1,10 @@
-/* NON_MATCHING: 174 lines. Case order, callees and each transition's store order follow retail. Still
- * different: retail gives several states their own copies of the arguments, as inlined per-state functions
- * would (state 0 keeps the main state in r6 and its flag word's address in r5; states 9 and 19 store through
- * r0 with the main state still in r1, so no reload before the tail call); state 26's first test has its own
- * `mov r0, #0; pop`; state 14 stores the state before the zero and state 16 after the argument moves. */
+/* NON_MATCHING: 58 lines (raw and shape). Same instructions and layout as retail; what differs is the order of
+ * the three transition stores (counters 0x10 and 0xC, state) at states 2, 4/5, 7, 14, 16 and 18, where retail uses
+ * three different orders and one source form gives armcc's other choice, and the registers of the 64-bit mask OR
+ * in state 0. The states that retail shows as inlined step functions are written as such, as in IV's
+ * FUN_003349c0: state 0 (copies the battle state to r6), 5 (inlined twice), 9 and 19 (keep the arguments in
+ * r0/r1 for the tail call) and 26 (its own `return 0` epilogue). encounterRunKind (state 24) has no such
+ * evidence of its own; in place the unrelated transition stores get other orders (163 raw / 115 shape). */
 #include "battle/btlMain.h"
 #include "battle/btlEncount.h"
 #include "code/Code0040_Smt4a.h"
@@ -58,15 +60,81 @@ void stateFinishIfPresent(BtlMainStateA *state);
 void eventCommandClearPending(BtlCameraA *camera);
 }
 
+/* State 0: starts the encounter's event trigger (with the screen fade the first time), then enters state 1. */
+static __inline s32 encounterStartEvent(BtlStep *step, BtlMainStateA *state)
+{
+    if (isEntryUsable(g_btlEvent))
+        return 0;
+    if (FUN_004d7a70(g_btlEvent, 9, -1u, 0)) {
+        if (!(g_btlEncount.initializedMask & state->stateFlags64.bits)) {
+            frameTexRequestFade(2);
+            state->stateFlags64.bits = g_btlEncount.initializedMask | state->stateFlags64.bits;
+            if (pairedAvailabilityGetState(1) == 3)
+                screenFadeStartIn(1, 10, 0xff);
+        }
+        FUN_004d7fe4(g_btlEvent);
+    }
+    step->counters.unk0C = step->counters.unk10 = 0;
+    step->state = 1;
+    return FUN_003e11ac(step, state);
+}
+
 /* State 5: waits for the main slot, then starts the enemy model step. */
 static __inline s32 encounterWaitMainSlot(BtlStep *step, BtlMainStateA *state)
 {
     if (!loadSlotMainIsLoaded(state))
         return 0;
-    step->counters.unk10 = 0;
+    step->counters.unk0C = step->counters.unk10 = 0;
     step->state = 6;
-    step->counters.unk0C = 0;
     return FUN_003e1114(step, state);
+}
+
+/* State 9: waits for the arrangement file, then collects its entries. */
+static __inline s32 encounterWaitArrangementFile(BtlStep *step, BtlMainStateA *state)
+{
+    if (state->arrangementFile == NULL)
+        return 0;
+    step->counters.unk0C = step->counters.unk10 = 0;
+    step->state = 10;
+    return FUN_003e12a8(step, state);
+}
+
+/* State 19: enters state 20 and runs it. */
+static __inline s32 encounterStartState20(BtlStep *step, BtlMainStateA *state)
+{
+    step->counters.unk0C = step->counters.unk10 = 0;
+    step->state = 20;
+    return FUN_003e1454(step, state);
+}
+
+/* State 24: runs the handler of the encounter's kind. */
+static __inline s32 encounterRunKind(BtlStep *step, BtlMainStateA *state)
+{
+    switch (FUN_003e0f94(step)) {
+    case 2: return FUN_003e1b80(step, state);
+    case 1: return btlStepInitEncounterFlags(step, state);
+    case 3: return FUN_003e1a30(step, state);
+    case 4: return FUN_003e2a88(step, state);
+    case 5: return FUN_003e2504(step, state);
+    default: return FUN_003e16cc(step, state);
+    }
+}
+
+/* State 26: finishes once the reflect actions, the aux records and the camera's commands have drained. */
+static __inline s32 encounterWaitDrain(BtlStep *step, BtlMainStateA *state)
+{
+    if (chainCountIdUnflagged((ChainOwner *)g_btlActionReflect, (s32)step) > 0)
+        return 0;
+    if (!recordAreAllCountsNonpositive(g_btlAux))
+        return 0;
+    if (!eventCommandRangeCheck(g_btlCamera))
+        return 0;
+    if (g_btlCamera->flags & 0x80000)
+        return 0;
+    stateFinishIfPresent(state);
+    g_btlCamera->flags &= ~0x4000u;
+    eventCommandClearPending(g_btlCamera);
+    return -1;
 }
 
 /* Dispatch encounter phases and finish only after all action and command work drains. */
@@ -74,32 +142,21 @@ extern "C" s32 battleEncounterTaskUpdate(BtlStep *step, BtlMainStateA *state)
 {
     switch (step->state) {
     case 0:
-        if (isEntryUsable(g_btlEvent))
-            return 0;
-        if (FUN_004d7a70(g_btlEvent, 9, -1u, 0)) {
-            if (!(g_btlEncount.initializedMask & state->stateFlags64.bits)) {
-                frameTexRequestFade(2);
-                state->stateFlags64.bits = g_btlEncount.initializedMask | state->stateFlags64.bits;
-                if (pairedAvailabilityGetState(1) == 3)
-                    screenFadeStartIn(1, 10, 0xff);
-            }
-            FUN_004d7fe4(g_btlEvent);
-        }
-        btlStepEnter(step, 1);
-        return FUN_003e11ac(step, state);
+        return encounterStartEvent(step, state);
     case 1:
         return FUN_003e11ac(step, state);
     case 2:
         if (!loadSlotIsLoaded(0x4e))
             loadSlotRequestAsync(0x4e, 0);
-        btlStepEnter(step, 3);
+        step->counters.unk0C = step->counters.unk10 = 0;
+        step->state = 3;
         return FUN_003e2470(step, state);
     case 3:
         return FUN_003e2470(step, state);
     case 4:
         FUN_003f1334(state);
-        step->state = 5;
         step->counters.unk0C = step->counters.unk10 = 0;
+        step->state = 5;
         return encounterWaitMainSlot(step, state);
     case 5:
         return encounterWaitMainSlot(step, state);
@@ -108,17 +165,13 @@ extern "C" s32 battleEncounterTaskUpdate(BtlStep *step, BtlMainStateA *state)
     case 7:
         if (!FUN_003f0f2c(state))
             return 0;
-        btlStepEnter(step, 8);
+        step->counters.unk0C = step->counters.unk10 = 0;
+        step->state = 8;
         return FUN_003e03b0(step, state);
     case 8:
         return FUN_003e03b0(step, state);
     case 9:
-        if (state->arrangementFile == NULL)
-            return 0;
-        step->counters.unk10 = 0;
-        step->state = 10;
-        step->counters.unk0C = 0;
-        return FUN_003e12a8(step, state);
+        return encounterWaitArrangementFile(step, state);
     case 10:
         return FUN_003e12a8(step, state);
     case 11:
@@ -138,9 +191,8 @@ extern "C" s32 battleEncounterTaskUpdate(BtlStep *step, BtlMainStateA *state)
             if ((flags & 1) && (flags & 0x80) && (flags & 0x400))
                 ++state->flaggedRoster.count;
         }
-        step->counters.unk10 = 0;
+        step->counters.unk0C = step->counters.unk10 = 0;
         step->state = 13;
-        step->counters.unk0C = 0;
         return FUN_003e025c(step, state);
     case 13:
         return FUN_003e025c(step, state);
@@ -148,8 +200,8 @@ extern "C" s32 battleEncounterTaskUpdate(BtlStep *step, BtlMainStateA *state)
         if (!FUN_004f2294(g_btlCamera))
             return 0;
         btlCameraObjectCreate(g_btlCamera);
-        step->state = 15;
         step->counters.unk0C = step->counters.unk10 = 0;
+        step->state = 15;
         return FUN_003e1068(step, state);
     case 15:
         return FUN_003e1068(step, state);
@@ -157,13 +209,11 @@ extern "C" s32 battleEncounterTaskUpdate(BtlStep *step, BtlMainStateA *state)
         if (!FUN_003ece50(state))
             return 0;
         FUN_003eaa9c(state);
-        btlStepEnter(step, 20);
+        step->counters.unk0C = step->counters.unk10 = 0;
+        step->state = 20;
         return FUN_003e1454(step, state);
     case 19:
-        step->counters.unk10 = 0;
-        step->state = 20;
-        step->counters.unk0C = 0;
-        return FUN_003e1454(step, state);
+        return encounterStartState20(step, state);
     case 20:
         return FUN_003e1454(step, state);
     case 21:
@@ -173,26 +223,11 @@ extern "C" s32 battleEncounterTaskUpdate(BtlStep *step, BtlMainStateA *state)
     case 23:
         return FUN_003e0bb8(step, state);
     case 24:
-        switch (FUN_003e0f94(step)) {
-        case 2: return FUN_003e1b80(step, state);
-        case 1: return btlStepInitEncounterFlags(step, state);
-        case 3: return FUN_003e1a30(step, state);
-        case 4: return FUN_003e2a88(step, state);
-        case 5: return FUN_003e2504(step, state);
-        default: return FUN_003e16cc(step, state);
-        }
+        return encounterRunKind(step, state);
     case 25:
         return FUN_003e0cd4(step, state);
     case 26:
-        if (chainCountIdUnflagged((ChainOwner *)g_btlActionReflect, (s32)step) > 0 ||
-            !recordAreAllCountsNonpositive(g_btlAux) || !eventCommandRangeCheck(g_btlCamera))
-            return 0;
-        if (g_btlCamera->flags & 0x80000)
-            return 0;
-        stateFinishIfPresent(state);
-        g_btlCamera->flags &= ~0x4000u;
-        eventCommandClearPending(g_btlCamera);
-        return -1;
+        return encounterWaitDrain(step, state);
     default:
         return 0;
     }

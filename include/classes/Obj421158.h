@@ -14,23 +14,27 @@ struct Obj421158Words {
     u32 tail;
 };
 
+extern "C" void nw_gfx_FragmentLight_DestroyResFragmentLight(AsdAllocatorObject *allocator, struct Obj421158Res *res);
+
 /* A fragment light's resource: three words at 0x10c are copied into the light. */
 struct Obj421158Res : public Obj421230Res {
     /* 0x10 */ u8 unk10[0xfc];
     /* 0x10C */ Obj421158Words unk10c;
+
+    /* Destroyed through the fragment-light library. */
+    static void destroy(AsdAllocatorObject *allocator, Obj421158Res *res)
+    {
+        nw_gfx_FragmentLight_DestroyResFragmentLight(allocator, res);
+    }
 };
 
 /* A fragment light (vtable at 0x421158; named after it until its real name is known), built from a
  * default resource that it owns once constructed. */
-class Obj421158 : public Obj421230 {
+class Obj421158 : public Obj421230Light {
 public:
-    Obj421158(void *owner, Obj421230ResHandle<Obj421158Res> handle);
+    Obj421158(AsdAllocatorObject *allocator, Obj421230ResHandle<Obj421158Res> handle, void *owner);
     static Obj421158 *create(void *owner, AsdAllocatorObject *allocator);
 
-    /* 0x148 */ u32 unk148;
-    /* 0x14C */ u8 unk14c[0x20];
-    /* 0x16C */ u8 unk16c[4];
-    /* 0x170 */ u32 unk170;
     /* 0x174 */ Obj421230ResHandle<Obj421158Res> handle;   /* res at 0x174, its allocator at 0x178 */
     /* 0x17C */ Obj421158Words unk17c;
 };

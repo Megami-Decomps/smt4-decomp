@@ -33,29 +33,28 @@ u32 partySlotLevelUpTo(u32 id, s32 targetLevel, s32 maximumIncrease)
     if (maximumIncrease < increase)
         increase = maximumIncrease;
     u16 learned[8] = {};
-    FUN_004cd0c8(slot, static_cast<s16>(increase), learned);
-    SlotRecordA *ranks = &slot->record;
+    FUN_004cd0c8(slot, (s16)increase, learned);
     s32 nextSlot = 0;
-    for (s32 count = 0; count < 8 && ranks->skills[count]; ++count)
+    for (s32 count = 0; count < 8 && slot->record.skills[count]; ++count)
         ++nextSlot;
     for (s32 index = 0; index < 8 && learned[index]; ++index, ++nextSlot) {
         u32 skill = learned[index];
         if (slot && nextSlot < 8) {
-            ranks->skills[nextSlot] = skill;
+            slot->record.skills[nextSlot] = skill;
             const ItemRankDefinition *definition = (const ItemRankDefinition *)skillDataFindById(skill);
             s32 rank = 0;
             if (definition && definition->category < 18)
-                rank = ranks->categoryRanks[definition->category];
+                rank = slot->record.categoryRanks[definition->category];
             s32 maximum = partyRecordClampEquippedRankUp(skill);
             s32 minimum = partyRecordClampEquippedRankDown(skill);
             if (rank > maximum)
-                rank = static_cast<s8>(maximum);
-            else if (minimum > rank)
-                rank = static_cast<s8>(minimum);
-            ranks->skillRanks[nextSlot] = rank;
+                rank = maximum;
+            else if (rank < minimum)
+                rank = minimum;
+            slot->record.skillRanks[nextSlot] = rank;
         }
     }
-    FUN_004cd4b8(slot, static_cast<s16>(increase));
+    FUN_004cd4b8(slot, (s16)increase);
     return 1;
 }
 }

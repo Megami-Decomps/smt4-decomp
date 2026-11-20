@@ -4,10 +4,6 @@
 #include "gamedata/ConsumableRecordA.h"
 
 struct Menu32;
-struct BattleTargetFlagView {
-    u8 unk00[0x74b0];
-    s8 requiresTargetSelection;
-};
 struct CommandSkillRecord {
     u8 unk00[0x28];
     u32 : 5;
@@ -33,8 +29,7 @@ void owner2DCInitSub(BtlUiObjBA *owner);
 void btlUiSelectCommandTargetState()
 {
     BtlUiA *ui = g_btlUi.ui;
-    BattleTargetFlagView *target = (BattleTargetFlagView *)ui;
-    target->requiresTargetSelection = 0;
+    ui->requiresTargetSelection = 0;
     s16 kind = 0;
     s16 id = 0;
     btlMenuResolveHighlightedCommand((Menu32 *)&ui->objC, &kind, &id);
@@ -43,7 +38,7 @@ void btlUiSelectCommandTargetState()
     case 3: {
         const CommandSkillRecord *skill = (const CommandSkillRecord *)skillDataFindById(id);
         if (commandRequiresTargetSelection(skill)) {
-            target->requiresTargetSelection = 1;
+            ui->requiresTargetSelection = 1;
         }
         break;
     }
@@ -52,18 +47,18 @@ void btlUiSelectCommandTargetState()
         if (item->skillId != 0) {
             const CommandSkillRecord *skill = (const CommandSkillRecord *)skillDataFindById(item->skillId);
             if (commandRequiresTargetSelection(skill)) {
-                target->requiresTargetSelection = 1;
+                ui->requiresTargetSelection = 1;
             }
         } else if (!(item->flags & 4)) {
             item = itemTableGetItemRecord(id);
             if ((item->groupFlags & 0x7f) != 1) {
-                target->requiresTargetSelection = 1;
+                ui->requiresTargetSelection = 1;
             }
         }
         break;
     }
     }
-    if (target->requiresTargetSelection != 0) {
+    if (ui->requiresTargetSelection != 0) {
         ui->state = 16;
         FUN_002fa7a8((Menu32 *)&ui->objC);
     } else {

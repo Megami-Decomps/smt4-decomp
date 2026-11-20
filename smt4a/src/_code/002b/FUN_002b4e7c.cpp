@@ -1,21 +1,17 @@
-/* NON_MATCHING: armcc hoists the exclusion and category masks out of the loop (extra saved registers); retail hoists only the required mask and reloads the others each pass. */
+/* NON_MATCHING: retail uses even register pairs and LDRD for the exclusion and actor masks; the build uses LDM and assigns the HP fallback and entry base differently. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "battle/BtlGlobals.h"
-
-struct BtlUnitRecordA {
-    /* 0x00 */ u8 unk00[0x1C];
-    /* 0x1C */ s16 maxHp;
-};
+#include "gamedata/BattleUnitSkills.h"
 
 extern "C" {
 
-/* The unit's maximum HP: its battle combatant's while a battle (not in phase 29) holds it, else the record's own. */
+/* Returns the unit's in-battle maximum HP when available, or the value in its record. */
 s32 FUN_002b4e7c(BtlUnitRecordA *record)
 {
     BtlMainGlobalsA *btlMainPtr = &g_btlMain;
     BtlMainStateA *state = btlMainPtr->state;
-    s32 maxHp = record->maxHp;
+    s32 maxHp = record->maximum.maxHp;
 
     if (state != NULL && state->unk0088 != 29) {
         for (s32 i = 0; i < 109; i++) {

@@ -29,7 +29,7 @@ struct LevelGrowthUnit {
     /* 0x76 */ u8 level;
 };
 
-extern "C" u32 FUN_003c219c(LevelGrowthStats *stats, LevelGrowthParameters *parameters, u32 flags);
+extern "C" u32 unitRollGrowthStat(LevelGrowthStats *stats, LevelGrowthParameters *parameters, u32 flags);
 extern "C" void gameSaveAddPointsClamped(u32 value);
 extern "C" void playerRecalcStatsFromEquipment(u32 value);
 
@@ -48,7 +48,7 @@ extern "C" void unitApplyLevelGrowth(LevelGrowthUnit *unit, s32 levels, bool gro
             break;
         if (growStats) {
             for (s32 point = 0; point < 5; ++point)
-                FUN_003c219c(&unit->base, &parameters, 0);
+                unitRollGrowthStat(&unit->base, &parameters, 0);
         }
         ++unit->level;
         gameSaveAddPointsClamped(10);

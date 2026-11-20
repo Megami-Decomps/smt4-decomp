@@ -24,9 +24,9 @@ extern "C" {
 
 void colorKeyTrackAdvanceRgb(ColorKeyTrack *effect, const ColorKey *timing);
 void FUN_00285320(ColorKeyEffect *effect, u32 arg);
-void FUN_002853ec(ColorKeyEffect *effect, u32 arg);
-void FUN_002a65fc(ColorKeyEffect *effect, u32 arg);
-void FUN_002a67d8(ColorKeyEffect *effect, u32 arg);
+void effScalarKeyLegacyAdvance(ColorKeyEffect *effect, u32 arg);
+void effScalarTrackAdvance(ColorKeyEffect *effect, u32 arg);
+void effScalarStateAdvance(ColorKeyEffect *effect, u32 arg);
 void FUN_002a66b8(ColorKeyEffect *effect, u32 arg);
 void FUN_002c76fc(ColorKeyEffect *effect, u32 arg);
 void FUN_002c781c(ColorKeyEffect *effect, u32 arg);
@@ -77,9 +77,9 @@ void FUN_00213fe4(ColorKeyEffect *effect, u32 arg)
 {
     advanceColorKeyRgbChannel(effect, arg);
     advanceColorKeyChannel<1, 3, FUN_00285320>(effect, arg);
-    advanceColorKeyChannel<2, 4, FUN_002853ec>(effect, arg);
-    advanceColorKeyChannel<3, 5, FUN_002a65fc>(effect, arg);
-    advanceColorKeyChannel<4, 6, FUN_002a67d8>(effect, arg);
+    advanceColorKeyChannel<2, 4, effScalarKeyLegacyAdvance>(effect, arg);
+    advanceColorKeyChannel<3, 5, effScalarTrackAdvance>(effect, arg);
+    advanceColorKeyChannel<4, 6, effScalarStateAdvance>(effect, arg);
     advanceColorKeyChannel<5, 7, FUN_002a66b8>(effect, arg);
     advanceColorKeyChannel<6, 8, FUN_002c76fc>(effect, arg);
     advanceColorKeyChannel<7, 9, FUN_002c781c>(effect, arg);

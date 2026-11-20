@@ -1,4 +1,3 @@
-/* NON_MATCHING: allocation-size register reuse, count multiply operands and resolved-data pointer lifetime differ. */
 #include "AsdSDK/Source/Gfx/Effect/effParticle.h"
 #include "gfx/ModelBoneLookup.h"
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
@@ -26,7 +25,7 @@ union ObjectParticleCreationView {
     } creation;
 };
 extern "C" {
-extern const char DAT_00544ac4[], g_effObjectParticleSourceFileName[];
+extern const char g_effObjectParticleEffMiscHeaderFileName[], g_effObjectParticleSourceFileName[];
 ObjectParticleHeaderView *resourceResolveHeaderPointer(ObjectParticleResourceView *);
 const u8 *resourceResolveDataPointer(ObjectParticleResourceView *);
 void *memAlloc(u32, u32, u32, u32, u32, u32);
@@ -36,18 +35,36 @@ void effObjectParticleSetSource(EffObjectParticle *, u16, EffEmitterDesc *);
 void FUN_003b8ecc(EffObjectParticle *);
 AsdMdlObject *asdMdlManagerCreateFromSource(void *, u32, u32);
 
-EffObjectParticle *FUN_003aa6c0(ObjectParticleResourceView *resource)
+/* effMisc.h's inline allocator (retail traces the allocation at ./effMisc.h line 450, as effEmitterCreateSmall's
+ * effAllocCleared does): a cleared block from the effect heap. */
+static __inline void *effAllocCleared(u32 size)
+{
+    asdDebugTrace(g_effObjectParticleEffMiscHeaderFileName, 450);
+    void *block = memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
+    rt_memclr(block, size);
+    return block;
+}
+
+/* Creates the particle's model from CGFX data (a copy the particle owns), then binds the particle to it. */
+static __inline void particleLoadModel(ObjectParticleCreationView *particle, const u8 *data, u32 size)
+{
+    if (data[0] == 'C' && data[1] == 'G' && data[2] == 'F' && data[3] == 'X') {
+        asdDebugTrace(g_effObjectParticleSourceFileName, 0x279);
+        particle->creation.modelData = memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
+        memcpySrcFirst(data, particle->creation.modelData, size);
+        AsdMdlObject *model = asdMdlManagerCreateFromSource(particle->creation.modelData, size, 7);
+        particle->creation.model = model;
+        model->node->sceneNode->skeleton->resource->flags = 1;
+    }
+    FUN_003b8ecc(&particle->object);
+}
+
+/* Creates an object particle from its resource: the emitter parameters and, for a model resource, the CGFX model. */
+EffObjectParticle *effObjectParticleCreate(ObjectParticleResourceView *resource)
 {
     ObjectParticleHeaderView *header = resourceResolveHeaderPointer(resource);
-    s32 count = header->emission.countOverride;
-    if (!count)
-        count = header->emission.countDefault;
-    u32 maximum = count * header->emission.multiplier;
-    if (maximum > 100)
-        maximum = 100;
-    asdDebugTrace(DAT_00544ac4, 0x1C2);
-    ObjectParticleCreationView *particle = static_cast<ObjectParticleCreationView *>(memAlloc(0x10000, 0x100, 0, sizeof(EffObjectParticle), 0x10, 1));
-    rt_memclr(particle, sizeof(EffObjectParticle));
+    u32 maximum = effEmitterGetCapacity(&header->emission);
+    ObjectParticleCreationView *particle = static_cast<ObjectParticleCreationView *>(effAllocCleared(sizeof(EffObjectParticle)));
     particle->creation.previous = -1;
     particle->creation.maxCount = maximum;
     particle->creation.scale = 1.0f;
@@ -57,16 +74,7 @@ EffObjectParticle *FUN_003aa6c0(ObjectParticleResourceView *resource)
         const u8 *data = resourceResolveDataPointer(resource);
         if (data) {
             if (resource->description.resourceType == 3 && resource) {
-                u32 size = resource->dataSize;
-                if (data[0] == 'C' && data[1] == 'G' && data[2] == 'F' && data[3] == 'X') {
-                    asdDebugTrace(g_effObjectParticleSourceFileName, 0x279);
-                    particle->creation.modelData = memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
-                    memcpySrcFirst(data, particle->creation.modelData, size);
-                    AsdMdlObject *model = asdMdlManagerCreateFromSource(particle->creation.modelData, size, 7);
-                    particle->creation.model = model;
-                    model->node->sceneNode->skeleton->resource->flags = 1;
-                }
-                FUN_003b8ecc(&particle->object);
+                particleLoadModel(particle, data, resource->dataSize);
             }
             particle->creation.type = resource->description.resourceType;
         }

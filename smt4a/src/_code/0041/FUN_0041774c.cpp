@@ -1,4 +1,4 @@
-/* NON_MATCHING: state machine matches except armcc cross-jumps the shared "close prompt" tail differently (retail: case 4 branches back into case 3 tail; one row more) and orders the hoisted constants r0/r6 differently. */
+/* NON_MATCHING: case 3/4 cross-jumping now matches; only case 5 differs (retail uses strd r0, [r4, #12] with hoisted 0 in r0). */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "addon/LookupRecord.h"
@@ -101,10 +101,11 @@ u32 FUN_0041774c(SkillLearnTask *task)
         }
         break;
     case 4:
-        if (scrRunOpcodesStub(task->script) == 2) {
-            FUN_00333dc8(0);
-            task->step = 5;
+        if (scrRunOpcodesStub(task->script) != 2) {
+            break;
         }
+        FUN_00333dc8(0);
+        task->step = 5;
         break;
     case 5:
         task->phase = 6;

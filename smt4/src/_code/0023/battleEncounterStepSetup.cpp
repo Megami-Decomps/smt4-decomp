@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail copies query into r4 (mov r4, r9) around the arrangement load and uses r1 for the flags |= update; otherwise identical */
 #include "code/Code002c.h"
 #include "battle/BattleEncounter.h"
 #include "battle/btlMain.h"
@@ -15,8 +14,8 @@ char *libc_strcpy(char *output, const char *input);
 void asdMemFree(void *allocation);
 void asdLoadFileAsyncSimple(const char *path, void **output, u32 flags);
 s32 FUN_002402c4(BtlMainState *context, const char *path);
-void FUN_0023fffc(BattleEncounterQuery *query, BtlMainState *context);
-void FUN_0023fbdc(BattleEncounterQuery *query, BtlMainState *context);
+u32 FUN_0023fffc(BattleEncounterQuery *query, BtlMainState *context);
+u32 FUN_0023fbdc(BattleEncounterQuery *query, BtlMainState *context);
 void frameTexApplyMode(s32 mode);
 void FUN_00338458(BtlMainState *context);
 void FUN_0033a144(BtlMainState *context);
@@ -29,11 +28,13 @@ void battleInitializeTurnOrder(BtlMainState *context);
 void btlSetSelectedListedValue(s32 value);
 void screenFadeStartIn(u32 channel, u32 frames, u32 volume);
 
-/* Starts loading the arrangement file for the encounter. */
-static __inline void battleEncounterLoadArrangement(BattleEncounterQuery *query, BtlMainState *context)
+/* Enters step 11: starts loading the arrangement file for the encounter, then runs step 12
+ * (battleEncounterTaskUpdate's case 11 does the same load). */
+static __inline u32 battleEncounterLoadArrangement(BattleEncounterQuery *query, BtlMainState *context)
 {
     char path[128];
 
+    query->step = 0xb;
     memClear(path, sizeof(path));
     libc_strcpy(path, btlPosArrangeGetFilePath(context));
     if (query->arrangement != NULL) {
@@ -42,24 +43,23 @@ static __inline void battleEncounterLoadArrangement(BattleEncounterQuery *query,
     }
     asdLoadFileAsyncSimple(path, &query->arrangement, 0);
     query->step = 0xc;
-    FUN_0023fffc(query, context);
+    return FUN_0023fffc(query, context);
 }
 
 /* Encounter setup state: starts the arrangement load once the path is accepted, else runs the per-frame scan. */
-void FUN_0023f500(BattleEncounterQuery *query, BtlMainState *context)
+u32 battleEncounterStepSetup(BattleEncounterQuery *query, BtlMainState *context)
 {
     char path[128];
 
     memClear(path, sizeof(path));
     libc_strcpy(path, btlPosArrangeGetFilePath(context));
     if (FUN_002402c4(context, path) != 0) {
-        query->step = 0xb;
-        battleEncounterLoadArrangement(query, context);
+        return battleEncounterLoadArrangement(query, context);
     } else {
         query->step = 0xd;
-        if (!(context->battleFlags & 0x40000000)) {
+        if (!(context->battleMask & 0x40000000)) {
             frameTexApplyMode(2);
-            context->battleFlags |= 0x40000000;
+            context->battleMask |= 0x40000000;
         }
         FUN_00338458(context);
         FUN_0033a144(context);
@@ -96,11 +96,12 @@ void FUN_0023f500(BattleEncounterQuery *query, BtlMainState *context)
         if (pairedAvailabilityGetState(1) == 3) {
             screenFadeStartIn(1, 10, 0xff);
         }
-        if (screenFadesAllReady() != 0) {
-            query->step = 0xe;
-            query->pending = 0;
-            FUN_0023fbdc(query, context);
+        if (screenFadesAllReady() == 0) {
+            return 0;
         }
+        query->step = 0xe;
+        query->pending = 0;
+        return FUN_0023fbdc(query, context);
     }
 }
 

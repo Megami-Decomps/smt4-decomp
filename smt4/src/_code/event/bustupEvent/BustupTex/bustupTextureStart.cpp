@@ -1,5 +1,5 @@
-/* NON_MATCHING: retail retains an unused definition-byte read; startup stores and callback argument scheduling differ. */
 #include "event/bustupEvent/BustupTextureWork.h"
+#include "gamedata/DataTable25.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "addon/aocMain.h"
@@ -12,7 +12,6 @@ extern "C" {
 extern const char DAT_004037b0[];
 extern const char DAT_004037a0[];
 s32 gameFlagIsSet(u32 flag);
-void *dataTable25FindById(u32 id);
 s32 aocContentGetIndexedRecord(void *definition, s32 enabled);
 s32 eventIsSkipping(void);
 s32 aocRunByName(AocSystem *system, s32 table, s32 node, s32 enabled);
@@ -20,7 +19,7 @@ u32 asdTMTexTablePrepareNodeImage(s32 table, s32 node);
 s32 FUN_001ce4a4(u32 handle);
 void asdMTeXReleaseJobContext(u32 handle);
 
-/* Start a bustup texture process, subject to its game-flag visibility rule. */
+/* Starts a bustup texture process, subject to its game-flag visibility rule. */
 void bustupTextureStart(u32 id, s32 keepPlacement)
 {
     if (gameFlagIsSet(0x522) && !aocContentGetIndexedRecord(dataTable25FindById(id), 1))
@@ -31,12 +30,19 @@ void bustupTextureStart(u32 id, s32 keepPlacement)
     work->id = id;
     work->previousId = -1;
     work->previousNode = -1;
-    work->definition = dataTable25FindById(id);
+    DataTable25Record *definition = dataTable25FindById(id);
+    work->definition = definition;
     if (!keepPlacement) {
         work->table = 32;
         work->node = -1;
-        work->x = 25.0f;
-        work->y = 25.0f;
+        /* both placements are (25, 25), but retail still reads the flag */
+        if (definition->flags != 0) {
+            work->x = 25.0f;
+            work->y = 25.0f;
+        } else {
+            work->x = 25.0f;
+            work->y = 25.0f;
+        }
     }
     if (eventIsSkipping()) {
         work->deferred = 1;

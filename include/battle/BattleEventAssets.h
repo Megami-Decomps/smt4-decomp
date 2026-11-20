@@ -21,16 +21,41 @@ struct BattleEventAssetSourceA {
     u8 unk0f4[0x3c];
     char name[1]; // 0x130
 };
+/* The Apocalypse battle event block (BtlEvent in battle/btlEvent.h is Shin Megami Tensei IV's). */
 struct BattleEventAssetLoadState {
-    u32 state;
-    u8 unk04[8];
-    void *images; // 0x0c
-    void *font; // 0x10
+    /* 0x00 */ u32 state;           /* BtlEventStateA */
+    /* 0x04 */ u32 flags;
+    /* 0x08 */ void *table;         /* the event table file */
+    /* 0x0C */ void *messages;      /* the message bank file (.mbm) */
+    /* 0x10 */ void *script;        /* the script file (.bf) */
+    /* 0x14 */ void *scriptProcess;
+    /* 0x18 */ void *entries;       /* the event table's records */
+    /* 0x1C */ u32 entryCount;
+    /* 0x20 */ s32 entry;           /* script entry to start, negative while none is chosen */
+    /* 0x24 */ s32 type;
+    /* 0x28 */ u32 frames;          /* frames the script has run */
+};
+
+/* BattleEventAssetLoadState::state. Each state hands over to the next in the same frame when its wait is over. */
+enum BtlEventStateA {
+    BTL_EVENT_A_IDLE = 0,
+    BTL_EVENT_A_LOAD_TABLE = 1,
+    BTL_EVENT_A_WAIT_TABLE = 2,
+    BTL_EVENT_A_LOAD_MESSAGES = 3,
+    BTL_EVENT_A_WAIT_MESSAGES = 4,
+    BTL_EVENT_A_LOAD_SCRIPT = 5,
+    BTL_EVENT_A_WAIT_SCRIPT = 6,
+    BTL_EVENT_A_CREATE_SCRIPT = 7,
+    BTL_EVENT_A_PREPARE = 8,
+    BTL_EVENT_A_START_SCRIPT = 9,
+    BTL_EVENT_A_RUN_SCRIPT = 10
 };
 typedef char BattleEventAssetSourceAOffsetsCheck[
     offsetof(BattleEventAssetSourceA, archiveId) == 0xf0 &&
     offsetof(BattleEventAssetSourceA, name) == 0x130 &&
-    offsetof(BattleEventAssetLoadState, images) == 0xc &&
-    offsetof(BattleEventAssetLoadState, font) == 0x10 ? 1 : -1];
+    offsetof(BattleEventAssetLoadState, messages) == 0xc &&
+    offsetof(BattleEventAssetLoadState, script) == 0x10 &&
+    offsetof(BattleEventAssetLoadState, entry) == 0x20 &&
+    offsetof(BattleEventAssetLoadState, frames) == 0x28 ? 1 : -1];
 
 #endif

@@ -1,9 +1,9 @@
-/* NON_MATCHING (b1454): only register allocation differs (retail keeps &source->keys[current] in r4 and the span in ip; built swaps them). */
+/* NON_MATCHING (b1454): the step division's registers differ (retail subtracts into s2, converts the frame count into s1 and divides into s0; the build converts in place) and the second key's frame loads into r4 before the first key's value. */
 #include "AsdSDK/Source/Gfx/Effect/EffectScalarKeys.h"
 
 extern "C" {
-// Skip zero-length segments and prepare the next scalar interpolation step.
-void FUN_002853ec(EffectScalarKeyLegacyTrack *track, const EffectScalarKeyLegacySource *source)
+/* Skips zero-length segments and prepares the next scalar interpolation step. */
+void effScalarKeyLegacyAdvance(EffectScalarKeyLegacyTrack *track, const EffectScalarKeyLegacySource *source)
 {
     s32 step = 1;
     if (track->index >= 3)
@@ -16,7 +16,8 @@ void FUN_002853ec(EffectScalarKeyLegacyTrack *track, const EffectScalarKeyLegacy
             const EffectScalarKeyLegacy *from = &track->keys[current];
             s32 next = current + step;
             const EffectScalarKeyLegacy *to = &track->keys[next];
-            track->step = (to->value - from->value) / static_cast<f32>(to->frame - from->frame);
+            s32 frames = to->frame - from->frame;
+            track->step = (to->value - from->value) / frames;
             track->target = to->value;
             track->index = static_cast<s8>(current + step);
             break;

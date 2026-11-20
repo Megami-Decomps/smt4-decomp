@@ -167,7 +167,8 @@ typedef struct GameSavedPairA {
 /* Apocalypse: the save body (0x2A71C bytes), copied to and from the work block; it follows the save block's
  * 0x88-byte header. Offsets are from the body; add 0x88 for the save block offset. */
 typedef struct GameSaveBodyA {
-    /* 0x00000 */ u8 unk00000[0x3];
+    /* 0x00000 */ u16 summaryId;    /* 4 once the save menu writes the body; FUN_002299b0 copies it into the slot summary */
+    /* 0x00002 */ u8 saveKind;      /* SaveSlotHeaderWork::saveKind of the menu that wrote it */
     /* 0x00003 */ u8 option;        /* the save option; FUN_00138aa4 runs down GameDataBlocksA.countdowns[option] */
     /* 0x00004 */ SaveSlotTableA slots;
     /* 0x02C54 */ u8 unk02C54[0x8C];

@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail retains an unused pure getter call; FSM and flag-register scheduling also differ. */
+/* NON_MATCHING: one branch target: when the actor is negative after clearing its flag, retail branches back to the
+ * final block's actor test where this build jumps straight to the return. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlUnit.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
@@ -20,7 +21,7 @@ typedef char BattleUnitStateWorkOffsets[offsetof(BattleUnitStateWork, state) == 
 
 extern "C" {
 
-// Refresh the unit state machine and mirror its status mask onto the actor entry.
+/* Refreshes the unit state machine and mirrors its status mask onto the actor entry. */
 void FUN_0027e5e4(BattleUnitStateWork* work)
 {
     BtlUnitData* data = btlFindEntryBlockByMemberId(btlGetMainState(), work->target);
@@ -28,6 +29,7 @@ void FUN_0027e5e4(BattleUnitStateWork* work)
         return;
     }
     if (data->statusFlags & 0x180) {
+        btlGetMainState(); /* retail calls it here and ignores the result */
         work->state = 3;
         work->timer = 0;
         work->step = 0;
@@ -36,7 +38,7 @@ void FUN_0027e5e4(BattleUnitStateWork* work)
         work->timer = 0;
         work->step = 0;
         if (work->actor >= 0) {
-            btlGetMainState()->entries[work->actor].flags &= ~0x80000;
+            btlGetMainState()->entries[work->actor].flagMask &= ~0x80000ULL;
         }
     }
     if (work->actor >= 0) {

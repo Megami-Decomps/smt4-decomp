@@ -72,6 +72,9 @@ typedef struct BtlUiAvailabilityCell {
 typedef struct BtlUiAvailabilityCellRow {
     BtlUiAvailabilityCell cells[8];
 } BtlUiAvailabilityCellRow;
+typedef struct BtlUiAvailabilityCellRowA {
+    BtlUiAvailabilityCell cells[32];
+} BtlUiAvailabilityCellRowA;
 struct BtlUiPositionRequest {
     f32 x, y, z;
     u8 active; /* 0x0c */
@@ -191,7 +194,7 @@ typedef struct BtlUiPanelState {
     /* 0x30 */ BtlUiValuePair secondPair;
     /* 0x38 */ s32 state;
     /* 0x3C */ u8 unk3C[0x0C];
-    /* 0x48 */ u8 requiresTargetSelection;
+    /* 0x48 */ s8 requiresTargetSelection;
     /* 0x49 */ u8 pairFlag;              /* reported with the two pairs */
     /* 0x4A */ u8 unk4A;
     /* 0x4B */ u8 spriteActive;
@@ -314,7 +317,8 @@ typedef struct BtlUiA {
     /* 0x7490 */ BtlUiValuePair firstPair;
     /* 0x7498 */ BtlUiValuePair secondPair;
     /* 0x74A0 */ s32 state;
-    /* 0x74A4 */ u8 unk74A4[0x0D];
+    /* 0x74A4 */ u8 unk74A4[0x0C];
+    /* 0x74B0 */ s8 requiresTargetSelection;
     /* 0x74B1 */ u8 pairFlag;              /* reported with the two pairs */
     /* 0x74B2 */ u8 unk74B2;
     /* 0x74B3 */ s8 spriteActive;
@@ -336,7 +340,10 @@ typedef struct BtlUiA {
         /* Strided byte view; slots start 32 cell strides apart. */
         struct {
             u8 prefix[0x20B4];
-            /* 0xF080 */ BtlUiAvailabilityCell cells[1];
+            /* 0xF080 */ union {
+                BtlUiAvailabilityCell cells[1];
+                BtlUiAvailabilityCellRowA rows[1];
+            };
         } availabilityCells;
         struct {
             u8 prefix[0x48B8];
@@ -363,7 +370,8 @@ typedef struct BtlUiGlobalsA {
 typedef char BtlUiUnitRecordLayoutCheck[sizeof(BtlUiUnitRecord) == 0x604 &&
     offsetof(BtlUiObjC, unitRecords.records) == 0x3900 ? 1 : -1];
 typedef char BtlUiUnitRecordALayoutCheck[sizeof(BtlUiUnitRecordA) == 0x12C &&
-    offsetof(BtlUiA, unitRecords.records) == 0x6AF4 && sizeof(BtlUiA) == 0x12FD0 ? 1 : -1];
+    offsetof(BtlUiA, unitRecords.records) == 0x6AF4 &&
+    offsetof(BtlUiA, requiresTargetSelection) == 0x74B0 && sizeof(BtlUiA) == 0x12FD0 ? 1 : -1];
 typedef char BtlUiColumnLayoutCheck[sizeof(BtlUiColumnRecord) == 0x2c &&
     sizeof(BtlUiObjC) == 0x59a0 &&
     offsetof(BtlUiObjC, unk307C) == 0x307c &&

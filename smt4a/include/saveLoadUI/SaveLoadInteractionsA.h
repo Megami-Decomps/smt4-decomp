@@ -7,7 +7,7 @@ struct SaveSlotHeaderWork;
 
 extern "C" {
 void saveLoadUiRebuildTouchRegions(SaveSlotHeaderWork *ui, s32 enabled);
-void FUN_0041de6c(SaveSlotHeaderWork *ui);
+void saveLoadUiConfirmSave(SaveSlotHeaderWork *ui);
 }
 
 #endif

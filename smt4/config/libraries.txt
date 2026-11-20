@@ -33,3 +33,12 @@ arm 0x2b5960 0x2b59b0 armlib ll_sdiv: asrs/eor sign packing and rsbs/rsc negatio
 # 0x000f0101, ...); its twin, smt4a's 0x42c3c4, is third-party (between nn_fs_ipc_Directory_Close and
 # nn_gr_CTR_Vertex_DisableAttr with nothing first-party between).
 arm 0x356d98 0x356e1c nn::gr CTR command builder: PICA register command words only; smt4a's twin 0x42c3c4 is third-party
+# NintendoWare gfx: the light and fog DynamicBuilder::Create functions (nw::gfx). Each keeps its default resource in
+# NW's move-only resource pointer (ut::MovePtr with a ResDeleter: the copy moves the pointer, the destructor destroys
+# what is left), placement-news the object and initializes it; they sit between nw_gfx functions (Fog_DestroyResFog,
+# res_ResFog_Setup, *Light_GetMemorySizeInternal, TransformNode_DynamicBuilder_Create); smt4a's twins 0x15add8/0x15d35c/0x15d814/0x171acc/0x171d7c.
+arm 0x11d9c4 0x11da98 NintendoWare-gfx Obj421094::create: nw::gfx DynamicBuilder::Create, MovePtr resource handle, inside the nw_gfx block
+arm 0x120000 0x1200d4 NintendoWare-gfx Obj4212e8::create: nw::gfx DynamicBuilder::Create, MovePtr resource handle, inside the nw_gfx block
+arm 0x1204b8 0x12057c NintendoWare-gfx Obj421774 (fog)::create: nw::gfx DynamicBuilder::Create, MovePtr resource handle, inside the nw_gfx block
+arm 0x12abd0 0x12acbc NintendoWare-gfx Obj421058::create: nw::gfx DynamicBuilder::Create, MovePtr resource handle, inside the nw_gfx block
+arm 0x12b48c 0x12b550 NintendoWare-gfx Obj421158::create: nw::gfx DynamicBuilder::Create, MovePtr resource handle, inside the nw_gfx block

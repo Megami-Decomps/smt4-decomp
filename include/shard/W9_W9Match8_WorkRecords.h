@@ -890,7 +890,8 @@ struct SaveLoadTransitionPrefixA {
 };
 
 struct SaveLoadUiSharedPrefixA {
-    /* 0x00 */ u8 unk00[2];
+    /* 0x00 */ u8 unk00;
+    /* 0x01 */ u8 saveAnnounced;   /* saveLoadUiConfirmSave: a save was written and its announcement dismissed */
     /* 0x02 */ u8 setFlag470;      /* a finished save sets game flag 0x470 */
     /* 0x03 */ u8 setFlag471;      /* a finished save sets game flag 0x471 */
     /* 0x04 */ u8 unk04[4];

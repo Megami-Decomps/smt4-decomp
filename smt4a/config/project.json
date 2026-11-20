@@ -27295,12 +27295,12 @@
     },
     {
       "address": "0x14a878",
-      "function": "FUN_0014a878",
+      "function": "asdGfxWaitVblank",
       "module": "_code",
-      "object": "build/obj/_code/0014/FUN_0014a878.o",
+      "object": "build/obj/_code/0014/asdGfxWaitVblank.o",
       "size": 132,
-      "source": "src/_code/0014/FUN_0014a878.cpp",
-      "target": "orig/target/_code/0014/FUN_0014a878.o",
+      "source": "src/_code/0014/asdGfxWaitVblank.cpp",
+      "target": "orig/target/_code/0014/asdGfxWaitVblank.o",
       "thumb": false
     },
     {
@@ -29128,12 +29128,12 @@
     },
     {
       "address": "0x159030",
-      "function": "FUN_00159030",
+      "function": "dspComponentLoadEmbeddedAndStart",
       "module": "_code",
-      "object": "build/obj/_code/0015/FUN_00159030.o",
+      "object": "build/obj/_code/0015/dspComponentLoadEmbeddedAndStart.o",
       "size": 124,
-      "source": "src/_code/0015/FUN_00159030.cpp",
-      "target": "orig/target/_code/0015/FUN_00159030.o",
+      "source": "src/_code/0015/dspComponentLoadEmbeddedAndStart.cpp",
+      "target": "orig/target/_code/0015/dspComponentLoadEmbeddedAndStart.o",
       "thumb": false
     },
     {
@@ -63061,12 +63061,12 @@
     },
     {
       "address": "0x2853ec",
-      "function": "FUN_002853ec",
+      "function": "effScalarKeyLegacyAdvance",
       "module": "_code",
-      "object": "build/obj/_code/0028/FUN_002853ec.o",
+      "object": "build/obj/_code/0028/effScalarKeyLegacyAdvance.o",
       "size": 188,
-      "source": "src/_code/0028/FUN_002853ec.cpp",
-      "target": "orig/target/_code/0028/FUN_002853ec.o",
+      "source": "src/_code/0028/effScalarKeyLegacyAdvance.cpp",
+      "target": "orig/target/_code/0028/effScalarKeyLegacyAdvance.o",
       "thumb": false
     },
     {
@@ -65867,12 +65867,12 @@
     },
     {
       "address": "0x2a65fc",
-      "function": "FUN_002a65fc",
+      "function": "effScalarTrackAdvance",
       "module": "_code",
-      "object": "build/obj/_code/002a/FUN_002a65fc.o",
+      "object": "build/obj/_code/002a/effScalarTrackAdvance.o",
       "size": 188,
-      "source": "src/_code/002a/FUN_002a65fc.cpp",
-      "target": "orig/target/_code/002a/FUN_002a65fc.o",
+      "source": "src/_code/002a/effScalarTrackAdvance.cpp",
+      "target": "orig/target/_code/002a/effScalarTrackAdvance.o",
       "thumb": false
     },
     {
@@ -65887,12 +65887,12 @@
     },
     {
       "address": "0x2a67d8",
-      "function": "FUN_002a67d8",
+      "function": "effScalarStateAdvance",
       "module": "_code",
-      "object": "build/obj/_code/002a/FUN_002a67d8.o",
+      "object": "build/obj/_code/002a/effScalarStateAdvance.o",
       "size": 188,
-      "source": "src/_code/002a/FUN_002a67d8.cpp",
-      "target": "orig/target/_code/002a/FUN_002a67d8.o",
+      "source": "src/_code/002a/effScalarStateAdvance.cpp",
+      "target": "orig/target/_code/002a/effScalarStateAdvance.o",
       "thumb": false
     },
     {
@@ -67620,12 +67620,12 @@
     },
     {
       "address": "0x2ba870",
-      "function": "FUN_002ba870",
+      "function": "btlDebugDrawUpper",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002ba870.o",
+      "object": "build/obj/_code/002b/btlDebugDrawUpper.o",
       "size": 232,
-      "source": "src/_code/002b/FUN_002ba870.cpp",
-      "target": "orig/target/_code/002b/FUN_002ba870.o",
+      "source": "src/_code/002b/btlDebugDrawUpper.cpp",
+      "target": "orig/target/_code/002b/btlDebugDrawUpper.o",
       "thumb": false
     },
     {
@@ -100728,12 +100728,12 @@
     },
     {
       "address": "0x3384c0",
-      "function": "FUN_003384c0",
+      "function": "effObjectParticleClone",
       "module": "_code",
-      "object": "build/obj/_code/0033/FUN_003384c0.o",
+      "object": "build/obj/_code/0033/effObjectParticleClone.o",
       "size": 280,
-      "source": "src/_code/0033/FUN_003384c0.cpp",
-      "target": "orig/target/_code/0033/FUN_003384c0.o",
+      "source": "src/_code/0033/effObjectParticleClone.cpp",
+      "target": "orig/target/_code/0033/effObjectParticleClone.o",
       "thumb": false
     },
     {
@@ -119833,12 +119833,12 @@
     {
       "address": "0x3aa6c0",
       "file": "AsdSDK/Source/Gfx/Effect/effObjectParticle",
-      "function": "FUN_003aa6c0",
+      "function": "effObjectParticleCreate",
       "module": "_code",
-      "object": "build/obj/_code/AsdSDK/Source/Gfx/Effect/effObjectParticle/FUN_003aa6c0.o",
+      "object": "build/obj/_code/AsdSDK/Source/Gfx/Effect/effObjectParticle/effObjectParticleCreate.o",
       "size": 392,
-      "source": "src/_code/AsdSDK/Source/Gfx/Effect/effObjectParticle/FUN_003aa6c0.cpp",
-      "target": "orig/target/_code/AsdSDK/Source/Gfx/Effect/effObjectParticle/FUN_003aa6c0.o",
+      "source": "src/_code/AsdSDK/Source/Gfx/Effect/effObjectParticle/effObjectParticleCreate.cpp",
+      "target": "orig/target/_code/AsdSDK/Source/Gfx/Effect/effObjectParticle/effObjectParticleCreate.o",
       "thumb": false
     },
     {
@@ -136809,12 +136809,12 @@
     },
     {
       "address": "0x41de6c",
-      "function": "FUN_0041de6c",
+      "function": "saveLoadUiConfirmSave",
       "module": "_code",
-      "object": "build/obj/_code/0041/FUN_0041de6c.o",
+      "object": "build/obj/_code/0041/saveLoadUiConfirmSave.o",
       "size": 1120,
-      "source": "src/_code/0041/FUN_0041de6c.cpp",
-      "target": "orig/target/_code/0041/FUN_0041de6c.o",
+      "source": "src/_code/0041/saveLoadUiConfirmSave.cpp",
+      "target": "orig/target/_code/0041/saveLoadUiConfirmSave.o",
       "thumb": false
     },
     {
@@ -137051,12 +137051,12 @@
     },
     {
       "address": "0x420b70",
-      "function": "FUN_00420b70",
+      "function": "saveLoadUiReleaseResources",
       "module": "_code",
-      "object": "build/obj/_code/0042/FUN_00420b70.o",
+      "object": "build/obj/_code/0042/saveLoadUiReleaseResources.o",
       "size": 400,
-      "source": "src/_code/0042/FUN_00420b70.cpp",
-      "target": "orig/target/_code/0042/FUN_00420b70.o",
+      "source": "src/_code/0042/saveLoadUiReleaseResources.cpp",
+      "target": "orig/target/_code/0042/saveLoadUiReleaseResources.o",
       "thumb": false
     },
     {
@@ -148003,12 +148003,12 @@
     },
     {
       "address": "0x451550",
-      "function": "FUN_00451550",
+      "function": "modelFileRelease",
       "module": "_code",
-      "object": "build/obj/_code/0045/FUN_00451550.o",
+      "object": "build/obj/_code/0045/modelFileRelease.o",
       "size": 148,
-      "source": "src/_code/0045/FUN_00451550.cpp",
-      "target": "orig/target/_code/0045/FUN_00451550.o",
+      "source": "src/_code/0045/modelFileRelease.cpp",
+      "target": "orig/target/_code/0045/modelFileRelease.o",
       "thumb": false
     },
     {

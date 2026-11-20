@@ -1,4 +1,4 @@
-/* NON_MATCHING: description pointer reloads fold and allocation-size lifetime changes saved registers. */
+/* NON_MATCHING: description reloads fold; allocation-size constant lifetime and result registers differ. */
 #include "AsdSDK/Source/Gfx/Effect/EmitterCloneResource.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -7,13 +7,13 @@ void *memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 blockAlignment,
 void rt_memclr(void *memory, u32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void effObjectParticleSetSource(EffEmitter *emitter, u16 kind, EffEmitterDesc *description);
-void FUN_003b8ecc(EffEmitter *emitter);
+void FUN_0031ce4c(EffEmitter *emitter);
 void asdMdlManagerDestroy(EmitterCloneModel *model);
 EmitterCloneModel *asdMdlManagerClone(EmitterCloneModel *model, u32 flags);
-extern const char DAT_00544ac4[];
+extern const char g_effObjectParticleEffMiscHeaderFileName[];
 
 /* Duplicate emitter parameters and clone the model-backed emitter's rendering object. */
-EffEmitter *FUN_003384c0(EffEmitter *source)
+EffEmitter *effObjectParticleClone(EffEmitter *source)
 {
     // The source and destination allocation extend beyond the shared emitter prefix.
     struct EmitterView {
@@ -37,8 +37,10 @@ EffEmitter *FUN_003384c0(EffEmitter *source)
         count = description->countDefault;
     }
     u32 maxCount = count * original->resource->description->multiplier;
-    maxCount = maxCount > 100 ? 100 : maxCount;
-    asdDebugTrace(DAT_00544ac4, 450);
+    if (maxCount > 100) {
+        maxCount = 100;
+    }
+    asdDebugTrace(g_effObjectParticleEffMiscHeaderFileName, 450);
     EmitterView *clone = static_cast<EmitterView *>(memAlloc(0x10000, 0x100, 0, 0xa8, 0x10, 1));
     rt_memclr(clone, 0xa8);
     clone->handle = -1;
@@ -46,7 +48,7 @@ EffEmitter *FUN_003384c0(EffEmitter *source)
     clone->scale = 1.0f;
     __aeabi_memcpy4(clone->parameters, original->parameters, sizeof(clone->parameters));
     EffEmitter *emitter = reinterpret_cast<EffEmitter *>(clone);
-    effObjectParticleSetSource(emitter, original->resource->kind, description);
+    effObjectParticleSetSource(emitter, original->resource->kind, original->resource->description);
     if (clone->resource->data != NULL) {
         if (original->kind == 3) {
             if (clone->model != NULL) {
@@ -56,7 +58,7 @@ EffEmitter *FUN_003384c0(EffEmitter *source)
             clone->model->object->body->renderState->state->enabled = 1;
         }
         clone->kind = original->kind;
-        FUN_003b8ecc(emitter);
+        FUN_0031ce4c(emitter);
     }
     return emitter;
 }

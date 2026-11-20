@@ -1,4 +1,4 @@
-/* NON_MATCHING: float stereo-offset round trips recovered; VFP destinations and first render-stack pop allocation still differ. */
+/* NON_MATCHING: first renderStackPopChecked now matches; remaining: stereo parallax vcvt uses s1 in retail (built reuses s0) and first pop loads g_renderCtx into r0 instead of r4 (12 diff lines). */
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -30,7 +30,7 @@ void FUN_004cf58c(StereoSpriteEffect *effect)
     asdTMTexTableEntryAt(0x22, 3000);
     f32 wideOffset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.35f);
     texDrawTableEntryAtStoredOrigin(2, 0x22, 3000, wideOffset, 0, 2);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPopChecked(&g_renderCtx->stackA);
     efctSetSpeed(1.0f);
     renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
     efctSetSpeed(effect->speed);
