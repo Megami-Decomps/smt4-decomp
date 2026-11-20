@@ -36,10 +36,11 @@ REGISTER = re.compile(r"\b(?:r1[0-5]|r[0-9]|sl|fp|ip|sp|lr|pc|[sd][0-9]{1,2})\b"
 def unproven(game, min_score):
     proof = json.loads((ROOT / game / "build" / "relink" / "proof.json").read_text())
     proven = set(proof["proven"])
+    # By address: the names in third_party.txt go stale when functions are renamed.
     third = set()
     for line in (ROOT / game / "config" / "third_party.txt").read_text(encoding="utf-8").splitlines():
         if line.strip() and not line.startswith("#"):
-            third.add(line.split()[1])
+            third.add(int(line.split()[0], 16))
     report = json.loads((ROOT / game / "build" / "report.json").read_text())
     scores = {f["name"]: (f.get("fuzzy_match_percent") or 0.0, int(f.get("size", 0)))
               for u in report["units"] for f in u.get("functions", [])}
@@ -47,7 +48,7 @@ def unproven(game, min_score):
     rows = []
     for unit in units:
         name = unit["function"]
-        if name in proven or name in third:
+        if name in proven or int(unit["address"], 16) in third:
             continue
         score, size = scores.get(name, (0.0, unit["size"]))
         if score >= min_score:
