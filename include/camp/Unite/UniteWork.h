@@ -10,6 +10,8 @@
 #include "gamedata/UnitStats.h"
 
 class RegisteredHandle;
+struct ThreadStackStorage;
+struct FusionRaceSelection;
 
 /* A demon model shown in the fusion preview. */
 struct UnitePreviewModel {
@@ -225,10 +227,18 @@ struct UniteWorkA {
     union {
         /* 0x0000 */ u8 unk0000[0x400];
         /* 0x0000 */ void *context;
+        /* the screen's animated sprites, as in IV */
         struct {
-            /* 0x0000 */ u8 unk0000[0x1C8];
+            /* 0x0000 */ FusionRaceSelection *ctrl; /* the fusion rules (gamedata/unite/UniteCtrl.cpp) */
+            /* 0x0004 */ UiResourceParameters resources; /* the animation tables every sprite below plays */
+            /* 0x0024 */ UiSpriteState fade;
+            /* 0x00B0 */ UiSpriteState slide;
+            /* 0x013C */ UiSpriteState pulse;
             /* 0x01C8 */ UiSpriteState open;
             /* 0x0254 */ UiSpriteState listOffset;
+            /* 0x02E0 */ UiSpriteState unk02E0;
+            /* 0x036C */ UiSpriteState unk036C;
+            /* 0x03F8 */ u32 process;          /* the "Unite Calc" process; the draw task is its child */
         } sprites;
         struct {
             /* 0x0000 */ u8 unk0000[0x1C8];
@@ -248,9 +258,12 @@ struct UniteWorkA {
     /* 0x0404 */ union {
         /* 0x0404 */ u8 unk0404[0x30];
         struct {
-            /* 0x0404 */ u8 unk0404[0x1c];
+            /* 0x0404 */ u8 unk0404[0x18];
+            /* 0x41C */ u32 openedSeconds;     /* the play time when the screen opened */
             s8 mode; /* 0x420 */
-            /* 0x421 */ u8 unk0421[0xB];
+            /* 0x421 */ u8 unk0421[3];
+            /* 0x424 */ void *messageFile;     /* unite/unite.mbm */
+            /* 0x428 */ void *scriptFile;      /* unite/unite.bf */
             /* 0x42C */ u32 scriptProcess;
             /* 0x430 */ u8 active;
             /* 0x431 */ u8 unk0431[3];
@@ -368,8 +381,37 @@ struct UniteWorkA {
             u8 prefix438[0x8738];
             /* 0x8B70 */ u16 skills[24];
         } inheritanceA;
+        struct {
+            /* 0x438 */ s16 rowRegions[29];     /* touch regions of the visible list rows, as in IV */
+            /* 0x472 */ s16 scrollUpRegion;
+            /* 0x474 */ s16 scrollDownRegion;
+            /* 0x476 */ s16 scrollThumbRegion;
+        } touchA;
+        /* what uniteCreate sets up past the lists: the special recipes and the catalog thread */
+        struct {
+            /* 0x0438 */ u8 unk0438[0x8B44];
+            /* 0x8F7C */ u16 specialRecipes[146]; /* filled by fusionListAvailableSpecialRecipes (extent not known) */
+            /* 0x90A0 */ s32 unk90A0;
+            /* 0x90A4 */ s32 unk90A4;          /* histogramFindHighestSupportedValue() when the screen opens */
+            /* 0x90A8 */ u8 unk90A8[0x1BC];
+            /* 0x9264 */ u8 stopRequested;     /* ends the catalog thread */
+            /* 0x9265 */ u8 unk9265[3];
+            /* 0x9268 */ ThreadStackStorage *stack; /* the catalog thread's stack mapping */
+            /* 0x926C */ u8 thread[8];         /* the catalog thread (FUN_0028625c) */
+            /* 0x9274 */ void *stackMemory;    /* the 0x1000 bytes the stack maps */
+            /* 0x9278 */ u8 unk9278[0x44];
+            /* 0x92BC */ u16 unlockOption;     /* flag id of SearchTable's kind-15 row, 0 = none */
+            /* 0x92BE */ u16 unk92BE;
+        } catalogThreadA;
     };
 };
+typedef char UniteWorkACreateOffsets[
+    offsetof(UniteWorkA, touchA.scrollUpRegion) == 0x472 && offsetof(UniteWorkA, sprites.resources) == 0x4 && offsetof(UniteWorkA, sprites.process) == 0x3F8 &&
+    offsetof(UniteWorkA, menu.openedSeconds) == 0x41C && offsetof(UniteWorkA, menu.messageFile) == 0x424 &&
+    offsetof(UniteWorkA, menu.scriptProcess) == 0x42C && offsetof(UniteWorkA, catalogThreadA.specialRecipes) == 0x8F7C &&
+    offsetof(UniteWorkA, catalogThreadA.unk90A0) == 0x90A0 && offsetof(UniteWorkA, catalogThreadA.stopRequested) == 0x9264 &&
+    offsetof(UniteWorkA, catalogThreadA.stack) == 0x9268 && offsetof(UniteWorkA, catalogThreadA.stackMemory) == 0x9274 &&
+    offsetof(UniteWorkA, catalogThreadA.unlockOption) == 0x92BC && sizeof(UniteWorkA) == 0x92C0 ? 1 : -1];
 
 typedef char UniteWorkADrawOffsets[
     offsetof(UniteWorkA, sprites.open) == 0x1C8 && offsetof(UniteWorkA, sprites.listOffset) == 0x254 &&

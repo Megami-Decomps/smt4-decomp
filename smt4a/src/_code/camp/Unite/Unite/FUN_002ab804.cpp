@@ -1,330 +1,315 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ab804` (_code @ 0x2ab804, 0x760 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "ui/UiSpriteApi.h"
-#include "shard/W6_W6Match8_UiResourceParameters.h"
-#include "gamedata/GameFlags.h"
-#include "romwright_types.h"
+#include "camp/Unite/UniteGlobals.h"
 #include "camp/Unite/UniteDraw.h"
+#include "camp/Unite/UnitePreferences.h"
+#include "classes/Obj557af8.h"
+#include "classes/Obj557c48.h"
+#include "Model/MoriModelContent.h"
+#include "Model/MoriModelManager.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "shard/W6_W6Match8_FusionSelection.h"
+#include "shard/GameGlobals.h"
+#include "shard/S1ModelEffect.h"
+#include "ui/UiSpriteApi.h"
+#include "ui/ParamsClearPacket.h"
+#include "nn/os/ThreadLaunch.h"
+#include "nn/Result.h"
+#include "sys/ResultReport.h"
+#include "camp/Config/Config.h"
 #include "code/Code0015_Smt4a.h"
+#include "code/Code001c.h"
+#include "gamedata/GameFlags.h"
+#include "gamedata/GameDataAccess_VariantG.h"
+#include "gamedata/SaveSlotRecord.h"
+#include "gamedata/SearchTable.h"
+#include "script/scrScriptProcess.h"
+#include "util/BitsAndBytes_VariantF_Shard004B.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/AsdLoadFileSyncDefault.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers_Smt4a.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
+
+/* The original source file, as the debug hooks and the traced allocations name it. */
+#define UNITE_SOURCE_FILE "c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\Unite.cpp"
+
+/* The screen's sprite animation tables. */
+static const UiSpritePositionKey sUnitePositionKeys[] = {
+    {320, 0, -50, 0, 40, 1, 0},
+    {320, 0, 0, 0, 8, 0, 0},
+    {-320, 0, 0, 0, 8, 0, 0},
+    {0, 0, -320, 0, 4, 0, 0},
+    {0, 0, 320, 0, 4, 0, 0},
+    {40, 0, 0, 0, 8, 0, 0},
+    {200, 0, 0, 0, 8, 0, 0},
+    {30, 0, 0, 0, 5, 0, 0},
+    {-30, 0, 0, 0, 5, 0, 0},
+    {0, 0, -30, 0, 3, 0, 0},
+    {0, 0, 30, 0, 3, 0, 0},
+};
+static const UiSpriteScalarKey sUniteAlphaKeys[] = {
+    {1.0f, 0.5f, 20, 0, 0},
+    {0.5f, 1.0f, 40, 0, 0},
+    {1.0f, 0.0f, 20, 0, 0},
+    {0.0f, 1.0f, 8, 0, 0},
+    {1.0f, 0.0f, 4, 0, 0},
+    {0.0f, 1.0f, 5, 0, 0},
+    {1.0f, 0.0f, 3, 0, 0},
+    {1.0f, 0.0f, 20, 0, 0},
+};
+static const SpriteAnimationCommand sUniteCommands[] = {
+    {-3, 0, {0, 0, 0}, -3, 0, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-3, 0, {0, 0, 0}, -3, 1, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-3, 0, {0, 0, 0}, -3, -2, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-1, 0, {0, 0, 0}, -1, -1, 0, {0, 0, 0}, -1, 0, {0, 0, 0}},
+    {-3, 0, {0, 0, 0}, -3, 2, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-3, 0, {0, 0, 0}, -3, 2, 1, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-3, 0, {0, 0, 0}, -3, -2, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-1, 0, {0, 0, 0}, -1, -1, 0, {0, 0, 0}, -1, 0, {0, 0, 0}},
+    {6, 0, {0, 0, 0}, -3, 3, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-1, 0, {0, 0, 0}, -1, -1, 0, {0, 0, 0}, -1, 0, {0, 0, 0}},
+    {-3, 0, {0, 0, 0}, -3, 3, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-3, 0, {0, 0, 0}, -3, 4, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-1, 0, {0, 0, 0}, -1, -1, 0, {0, 0, 0}, -1, 0, {0, 0, 0}},
+    {-3, 0, {0, 0, 0}, -3, 7, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-3, 0, {0, 0, 0}, -3, 7, 1, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-3, 0, {0, 0, 0}, -3, -2, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-1, 0, {0, 0, 0}, -1, -1, 0, {0, 0, 0}, -1, 0, {0, 0, 0}},
+};
 
 extern "C" {
 
-int dataTableGetCount(...);
-int dataTableGetEntries(...);
+void FUN_0028625c(UniteWorkA *work);
+void FUN_00514a54(const u32 *source, u32 *destination);
+void FUN_00514b80(void);
+u32 FUN_00514b08(u32 (*callback)(u32), const u32 *value);
+s32 FUN_002fb0d4(void *thread, const ThreadArgumentDescriptor *descriptor, void (*entry)(UniteWorkA *),
+                 UniteWorkA **argument, u32 stackTop, s32 priority, s32 processor, u32 flags);
+FusionRaceSelection *fusionRaceSelectionInitialize(FusionRaceSelection *selection);
+s32 histogramFindHighestSupportedValue(void);
+void rebuildFusionCatalogLists(void);
+void mapSettings5BSetValueIfActive(s32 flag);
+s32 lmapMainIsRunning(void);
+void FUN_0031416c(s32 r0, s32 g0, s32 b0, s32 r1, s32 g1, s32 b1, s32 r2, s32 g2, s32 b2, s32 r3, s32 g3, s32 b3,
+                  f32 f0, f32 f1, f32 f2, f32 f3, f32 f4, f32 f5, f32 f6, f32 f7, f32 f8);
+void resultReportIfFailed(ThreadStackStorage *stack, void *buffer, u32 size);
+/* Lists the special fusions whose materials are available; returns their count. */
+u32 fusionListAvailableSpecialRecipes(void *context, u16 *recipes);
+void FUN_00184b90(u8 *owner, s32 direction); // declcheck: local (its header, shard/W5_W5Match5_GameSaveViews.h, declares asdMemoryAllocTraced with other types)
+void *__aeabi_memset4(void *dest, s32 size, s32 value);
 
-int asdLoadFileWithSize(...);
+}
 
-int asdOperatorNew(...);
-int asdMemoryAllocTracked(...);
-int memAlloc(...);
-int resultReportIfFailed(...);
-int asdMemoryAllocTraced(...);
-int FUN_00184b90(...);
-int __aeabi_memset4(...);
-int modelLoadFileAsyncByName(...);
-int asdLoadFileSyncDefault(...);
-int rebuildFusionCatalogLists(...);
-int scrScriptProcessCreate(...);
-int resultHandleFailure(...);
-int sysMemClear(...);
-int FUN_002fb0d4(...);
-int FUN_0031416c(...);
-int mapSettings5BSetValueIfActive(...);
-int loadSlotEnsureLoaded(...);
-int _ZN9Obj557af8C1EPK21AsdAnimCameraResource(...);
-int fusionListAvailableSpecialRecipes(...);
-int fusionRaceSelectionInitialize(...);
-int paramsClearPacket(...);
-
-/* stack frame of void: 12 slot(s), 48 byte(s) */
-typedef struct {
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-} void_stack;
-
-
-
-extern int FUN_0028625c(...); /* 0x28625c */
-extern unsigned char LAB_002abbd8; /* 0x2abbd8 */
-extern unsigned char LAB_002abc10; /* 0x2abc10 */
-extern unsigned char LAB_002abc20; /* 0x2abc20 */
-extern unsigned char LAB_002abf64; /* 0x2abf64 */
-extern unsigned char LAB_002abf74; /* 0x2abf74 */
-extern unsigned char LAB_002abfa0; /* 0x2abfa0 */
-extern unsigned char LAB_00514a54; /* 0x514a54 */
-extern unsigned char LAB_00514b08; /* 0x514b08 */
-extern unsigned char LAB_00514b80; /* 0x514b80 */
-extern unsigned char DAT_0052ef50; /* 0x52ef50 */
-extern unsigned char DAT_0052efd4; /* 0x52efd4 */
-extern unsigned char DAT_0052f034; /* 0x52f034 */
-extern int g_handleRegistry; /* 0x56fcc0 */
-extern int *g_unite; /* 0x57f290 */
-
-/* Supplied declaration required: asdLoadFileWithSize. */
-/* Supplied declaration required: uiSpriteStateInitFromSource. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-extern int lmapMainIsRunning(void);
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: resultReportIfFailed. */
-/* Supplied declaration required: asdMemoryAllocTraced. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: FUN_00184b90. */
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: dataTableGetCount. */
-/* Supplied declaration required: dataTableGetEntries. */
-extern int gameGetSlotRecord(void);
-/* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: modelLoadFileAsyncByName. */
-/* Supplied declaration required: asdLoadFileSyncDefault. */
-extern int saveGetUserSettingsBlock(void);
-/* Supplied declaration required: rebuildFusionCatalogLists. */
-/* Supplied declaration required: scrScriptProcessCreate. */
-/* Supplied declaration required: resultHandleFailure. */
-extern int FUN_002e50d4(void);
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002fb0d4. */
-/* Supplied declaration required: FUN_0031416c. */
-extern int lmapSceneGetScript(void);
-/* Supplied declaration required: mapSettings5BSetValueIfActive. */
-/* Supplied declaration required: loadSlotEnsureLoaded. */
-/* Supplied declaration required: _ZN9Obj557af8C1EPK21AsdAnimCameraResource. */
-extern int modelListInit(void);
-extern int bitsAt60Test(int, unsigned int);
-extern int histogramFindHighestSupportedValue(void);
-/* Supplied declaration required: fusionListAvailableSpecialRecipes. */
-/* Supplied declaration required: fusionRaceSelectionInitialize. */
-/* Supplied declaration required: paramsClearPacket. */
-
-
-void FUN_002ab804(void)
-
+inline void *operator new(u32 size, const char *file, u32 line) throw()
 {
-/* irregular: 34 native warning(s); review required */
-  unsigned short temp_v0;
-  int *piVar2;
-  unsigned char *puVar3;
-  int temp_v1;
-  unsigned int *puVar5;
-  int *piVar6;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int *temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  unsigned char *temp_v9;
-  unsigned char *temp_v10;
-  unsigned char *temp_v11;
-  unsigned char temp_v12 [16];
-  
-  if (g_unite == (int *)0x0) {
-    piVar2 = (int *)0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0x92c0,1);
-    g_unite = piVar2;
-  }
-  piVar2 = g_unite;
-  sysMemClear();
-  piVar2[0x2428] = -1;
-  mapSettings5BSetValueIfActive(0);
-  puVar3 = &LAB_002abc10;
-  asdProcessCreateSimple(reinterpret_cast<const s8 *>(&LAB_002abc10), 4, 0, 0, FUN_001f5294, NULL, 0);
-  piVar2[0xfe] = (int)puVar3;
-  taskCreateDraw(reinterpret_cast<const s8 *>(&LAB_002abc20), 0xEA, 0, 0, uniteDrawPanel, NULL, 0, puVar3);
-  temp_v1 = 0x1b8;
-  asdOperatorNew();
-  if (temp_v1 != 0) {
-    fusionRaceSelectionInitialize();
-  }
-  *piVar2 = temp_v1;
-  temp_v1 = histogramFindHighestSupportedValue();
-  piVar2[0x2429] = temp_v1;
-  *(unsigned char *)(piVar2 + 0x2499) = 0;
-  temp_v1 = 0x100;
-  memAlloc(0x100,0x100,0,0x1000,0x1000,1);
-  piVar2[0x249d] = temp_v1;
-  puVar5 = (unsigned int *)0x18;
-  asdOperatorNew();
-  if (puVar5 != (unsigned int *)0x0) {
-    *puVar5 = 0;
-    puVar5[1] = 0;
-    puVar5[2] = 0;
-    puVar5[3] = 0;
-    *(unsigned char *)(puVar5 + 4) = 0;
-  }
-  piVar2[0x249a] = (int)puVar5;
-  resultReportIfFailed();
-  temp_v8 = 4;
-  temp_v9 = &LAB_00514a54;
-  piVar6 = piVar2 + 0x249b;
-  temp_v10 = &LAB_00514b80;
-  temp_v11 = &LAB_00514b08;
-  temp_v6 = piVar2;
-  FUN_002fb0d4(piVar6,&temp_v8,FUN_0028625c,&temp_v6,
-               *(int *)(piVar2[0x249a] + 0xc) + *(int *)(piVar2[0x249a] + 8),0x11,0xfffffffe,0);
-  if (((unsigned int)piVar6 & 0x7e00000) != 0x600000 && (int)piVar6 < 0) {
-    resultHandleFailure();
-  }
-  temp_v1 = gameFlagIsSet(0x418);
-  if (temp_v1 == 0) {
-    temp_v1 = saveGetUserSettingsBlock();
-    *(unsigned short *)(temp_v1 + 0x20) = 0xffff;
-    *(unsigned short *)(temp_v1 + 0x22) = 0xffff;
-    *(unsigned short *)(temp_v1 + 0x24) = 0;
-    *(unsigned short *)(temp_v1 + 0x26) = 0;
-    *(unsigned short *)(temp_v1 + 0x28) = 0;
-    *(unsigned char *)(temp_v1 + 0x43) = 0;
-    *(unsigned short *)(temp_v1 + 0x2a) = 0;
-    *(unsigned short *)(temp_v1 + 0x2c) = 0;
-    *(unsigned short *)(temp_v1 + 0x2e) = 0xffff;
-    *(unsigned char *)(temp_v1 + 0x33) = 0;
-    *(unsigned char *)(temp_v1 + 0x34) = 0;
-    *(unsigned char *)(temp_v1 + 0x35) = 0xff;
-    *(unsigned char *)(temp_v1 + 0x37) = 0;
-    *(unsigned char *)(temp_v1 + 0x36) = *(unsigned char *)(temp_v1 + 0x36) & 0xfc;
-    rebuildFusionCatalogLists();
-  }
-  temp_v1 = saveGetUserSettingsBlock();
-  if (-1 < *(short *)(temp_v1 + 0x20)) {
-    if (*(short *)(temp_v1 + 0x24) == 0) {
-      *(unsigned short *)(temp_v1 + 0x20) = 0xffff;
+    return asdMemoryAllocTraced(size, file, line);
+}
+
+/* nn::os::Thread::Start: runs `entry(argument)` on a new thread whose stack is `stack`; a failure is fatal. */
+static __inline void uniteStartThread(void *thread, void (*entry)(UniteWorkA *), UniteWorkA *argument,
+                                      ThreadStackStorage &stack, s32 priority, s32 processor)
+{
+    ThreadArgumentDescriptor descriptor;
+    descriptor.argumentSize = sizeof(argument);
+    descriptor.callbacks[0] = reinterpret_cast<void (*)(void)>(FUN_00514a54);
+    descriptor.callbacks[1] = FUN_00514b80;
+    descriptor.callbacks[2] = reinterpret_cast<void (*)(void)>(FUN_00514b08);
+    s32 result = FUN_002fb0d4(thread, &descriptor, entry, &argument, stack.info.address + stack.info.size, priority,
+                              processor, 0);
+    if (nnResultIsFailureExceptSummary(result, 3)) {
+        resultHandleFailure(result);
     }
-    else {
-      temp_v2 = gameGetSlotRecord();
-      if ((*(short *)(temp_v2 + 0x62) != *(short *)(temp_v1 + 0x24)) ||
-         (temp_v2 = bitsAt60Test(temp_v2,10), temp_v2 != 0)) {
-        *(unsigned short *)(temp_v1 + 0x20) = 0xffff;
-        *(unsigned short *)(temp_v1 + 0x24) = 0;
-      }
+}
+
+/* dataTableGetEntry24Byte0's body: entry `index`'s option, -1 past the end. */
+static u32 searchTableOption(u32 index)
+{
+    void *table = dataTableGet(0x24, 0);
+    SearchTableRecordA *entries = searchTableRecordsA(table);
+    u32 count = dataTableGetCount(table);
+    if (index >= count) {
+        return 0xFFFFFFFF;
     }
-  }
-  if (-1 < *(short *)(temp_v1 + 0x22)) {
-    if (*(short *)(temp_v1 + 0x26) == 0) {
-      *(unsigned short *)(temp_v1 + 0x22) = 0xffff;
+    return entries[index].option;
+}
+
+/* Entry `index`'s unlock flag, 0 past the end. */
+static u16 searchTableFlagId(u32 index)
+{
+    void *table = dataTableGet(0x24, 0);
+    SearchTableRecordA *entries = searchTableRecordsA(table);
+    u32 count = dataTableGetCount(table);
+    if (index >= count) {
+        return 0;
     }
-    else {
-      temp_v2 = gameGetSlotRecord();
-      if (*(short *)(temp_v2 + 0x62) != *(short *)(temp_v1 + 0x26)) {
-        *(unsigned short *)(temp_v1 + 0x22) = 0xffff;
-        *(unsigned short *)(temp_v1 + 0x26) = 0;
-      }
+    return entries[index].flagId;
+}
+
+extern "C" {
+
+/* Opens the fusion screen: allocates its work, starts its process, draw task and catalog thread, drops saved
+   materials that are gone, builds the sprites and loads the script, the camera and the cathedral models. */
+void FUN_002ab804(void)
+{
+    void *owner; /* the original passes this to operator new uninitialised */
+
+    if (g_unite == NULL) {
+        asdDebugTrace(UNITE_SOURCE_FILE, 7257);
+        g_unite = (UniteWorkA *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(UniteWorkA), 1);
     }
-  }
-  __aeabi_memset4(piVar2 + 0x10e,0xa0,0xffffffff);
-  rebuildFusionCatalogLists();
-  paramsClearPacket(piVar2 + 1);
-  paramsInit(reinterpret_cast<UiResourceParameters *>(piVar2 + 1),&DAT_0052ef50,0x84,&DAT_0052efd4,0x60,0,0,0,0,&DAT_0052f034,0x1dc);
-  uiSpriteStateInitFromSource((UiSpriteState *)(piVar2 + 9),0x1a,0, (UiResourceParameters *)(piVar2 + 1),1, 1.0f);
-  uiSpriteSelectAnim((UiSpriteState *)(piVar2 + 9),0);
-  uiSpriteStateInitFromSource((UiSpriteState *)(piVar2 + 0x2c),0x1a,0, (UiResourceParameters *)(piVar2 + 1),1, 1.0f);
-  uiSpriteSelectAnim((UiSpriteState *)(piVar2 + 0x2c),4);
-  uiSpriteStateInitFromSource((UiSpriteState *)(piVar2 + 0x4f),0x1a,0, (UiResourceParameters *)(piVar2 + 1),1, 1.0f);
-  uiSpriteSelectAnim((UiSpriteState *)(piVar2 + 0x4f),1);
-  uiSpriteStateInitFromSource((UiSpriteState *)(piVar2 + 0x72),0x1a,0, (UiResourceParameters *)(piVar2 + 1),1, 1.0f);
-  FUN_00184b90(piVar2,1);
-  uiSpriteStateInitFromSource((UiSpriteState *)(piVar2 + 0x95),0x1a,0, (UiResourceParameters *)(piVar2 + 1),1, 1.0f);
-  uiSpriteSetKeyframe((UiSpriteState *)(piVar2 + 0x95),5,0);
-  uiSpriteStateInitFromSource((UiSpriteState *)(piVar2 + 0xb8),0x1a,0, (UiResourceParameters *)(piVar2 + 1),1, 1.0f);
-  uiSpriteSelectAnim((UiSpriteState *)(piVar2 + 0xb8),2);
-  uiSpriteStateInitFromSource((UiSpriteState *)(piVar2 + 0xdb),0x1a,0, (UiResourceParameters *)(piVar2 + 1),1, 1.0f);
-  uiSpriteSelectAnim((UiSpriteState *)(piVar2 + 0xdb),3);
-  loadSlotEnsureLoaded(0x24);
-  loadSlotEnsureLoaded(0x22);
-  piVar2[0x10d] = -1;
-  puVar3 = &LAB_002abf64;
-  piVar2[0x122] = -1;
-  asdLoadFileSyncDefault();
-  piVar2[0x109] = (int)puVar3;
-  puVar3 = &LAB_002abf74;
-  asdLoadFileSyncDefault();
-  piVar2[0x10a] = (int)puVar3;
-  scrScriptProcessCreate();
-  piVar2[0x10b] = (int)puVar3;
-  temp_v1 = lmapSceneGetScript();
-  if ((temp_v1 != 0) || (temp_v1 = lmapMainIsRunning(), temp_v1 != 0)) {
-    temp_v6 = (int *)0x0;
-    temp_v7 = 0;
-    FUN_0031416c(0,0,0,0,0,0,0xff,0,0,0xff);
-  }
-  asdLoadFileWithSize(&LAB_002abfa0,temp_v12,1);
-  temp_v1 = 0x48;
-  asdMemoryAllocTraced(0x48,&LAB_002abbd8,0x1d13);
-  if (temp_v1 != 0) {
-    _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
-  }
-  piVar2[0x2484] = temp_v1;
-  temp_v2 = 0x20;
-  asdMemoryAllocTraced(0x20,&LAB_002abbd8,0x1d15);
-  temp_v1 = 0;
-  if (temp_v2 != 0) {
-    temp_v1 = modelListInit();
-  }
-  piVar2[0x2482] = temp_v1;
-  modelLoadFileAsyncByName();
-  temp_v2 = 0x20;
-  asdMemoryAllocTraced(0x20,&LAB_002abbd8,0x1d18);
-  temp_v1 = 0;
-  if (temp_v2 != 0) {
-    temp_v1 = modelListInit();
-  }
-  piVar2[0x2483] = temp_v1;
-  modelLoadFileAsyncByName();
-  *(unsigned int *)(g_handleRegistry + 0x34) = *(unsigned int *)(g_handleRegistry + 0x34) | 1;
-  piVar2[0x2497] = 0;
-  piVar2[0x2498] = 0;
-  temp_v1 = FUN_002e50d4();
-  piVar2[0x107] = temp_v1;
-  temp_v1 = *piVar2;
-  fusionListAvailableSpecialRecipes(temp_v1,piVar2 + 0x23df);
-  gameFlagSetValue(0x52c,temp_v1 != 0,1);
-  piVar2 = g_unite;
-  *(unsigned short *)(g_unite + 0x24af) = 0;
-  *(unsigned short *)((int)piVar2 + 0x92be) = 0;
-  temp_v3 = dataTableGet(0x24,0);
-  dataTableGetEntries();
-  temp_v1 = dataTableGetCount(temp_v3);
-  temp_v5 = 0;
-  if ((int)temp_v5 < temp_v1) {
-    do {
-      temp_v3 = dataTableGet(0x24,0);
-      temp_v2 = dataTableGetEntries();
-      temp_v4 = dataTableGetCount(temp_v3);
-      if ((temp_v5 < temp_v4) && (*(char *)(temp_v2 + temp_v5 * 0x94) == '\x0f')) {
-        temp_v3 = dataTableGet(0x24,0);
-        temp_v2 = dataTableGetEntries();
-        temp_v4 = dataTableGetCount(temp_v3);
-        if ((temp_v5 < temp_v4) && (*(short *)(temp_v2 + temp_v5 * 0x94 + 4) != 0)) {
-          temp_v3 = dataTableGet(0x24,0);
-          temp_v2 = dataTableGetEntries();
-          temp_v4 = dataTableGetCount(temp_v3);
-          if (temp_v5 < temp_v4) {
-            temp_v0 = *(unsigned short *)(temp_v2 + temp_v5 * 0x94 + 4);
-          }
-          else {
-            temp_v0 = 0;
-          }
-          *(unsigned short *)(piVar2 + 0x24af) = temp_v0;
+    UniteWorkA *work = g_unite;
+    sysMemClear(work, sizeof(UniteWorkA));
+    work->catalogThreadA.unk90A0 = -1;
+    mapSettings5BSetValueIfActive(0);
+    work->sprites.process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("Unite Calc"), 4, 0, 0, FUN_001f5294, NULL, 0);
+    taskCreateDraw(reinterpret_cast<const s8 *>("Unite DDraw"), 234, 0, 0, uniteDrawPanel, NULL, 0,
+                   reinterpret_cast<void *>(work->sprites.process));
+
+    FusionRaceSelection *ctrl = static_cast<FusionRaceSelection *>(asdOperatorNew(0x1B8, owner));
+    if (ctrl != NULL) {
+        ctrl = fusionRaceSelectionInitialize(ctrl);
+    }
+    work->sprites.ctrl = ctrl;
+    work->catalogThreadA.unk90A4 = histogramFindHighestSupportedValue();
+
+    /* The thread that builds the fusion catalog. */
+    work->catalogThreadA.stopRequested = 0;
+    asdDebugTrace(UNITE_SOURCE_FILE, 7292);
+    work->catalogThreadA.stackMemory = memAlloc(0x100, 0x100, 0, 0x1000, 0x1000, 1);
+    ThreadStackStorage *stack = static_cast<ThreadStackStorage *>(asdOperatorNew(sizeof(ThreadStackStorage), owner));
+    if (stack != NULL) {
+        stack->info.unk00 = 0;
+        stack->info.unk04 = 0;
+        stack->info.address = 0;
+        stack->info.size = 0;
+        stack->owned = 0;
+    }
+    work->catalogThreadA.stack = stack;
+    resultReportIfFailed(work->catalogThreadA.stack, work->catalogThreadA.stackMemory, 0x1000);
+    uniteStartThread(work->catalogThreadA.thread, FUN_0028625c, work, *work->catalogThreadA.stack, 17, -2);
+
+    /* A fresh search until the screen has been used once. */
+    if (!gameFlagIsSet(0x418)) {
+        UniteSavedPreferencesA *preferences = reinterpret_cast<UniteSavedPreferencesA *>(saveGetUserSettingsBlock());
+        preferences->catalog.firstSlot = -1;
+        preferences->catalog.secondSlot = -1;
+        preferences->catalog.firstId = 0;
+        preferences->catalog.secondId = 0;
+        preferences->catalog.race = 0;
+        preferences->catalog.levelBand = 0;
+        preferences->catalog.unk0A = 0;
+        preferences->catalog.unk0C = 0;
+        preferences->catalog.unk0E = -1;
+        preferences->catalog.searchEnabled = 0;
+        preferences->catalog.unk14 = 0;
+        preferences->catalog.unk16Bit0 = 0;
+        preferences->catalog.skillCategory = -1;
+        preferences->catalog.unk16Bit1 = 0;
+        preferences->catalog.unk17 = 0;
+        rebuildFusionCatalogLists();
+    }
+
+    /* Forget a saved material whose slot now holds another demon, or one that can no longer be fused. */
+    FusionCatalogCriteria *criteria = &reinterpret_cast<UniteSavedPreferencesA *>(saveGetUserSettingsBlock())->catalog;
+    if (criteria->firstSlot >= 0) {
+        if (criteria->firstId == 0) {
+            criteria->firstSlot = -1;
+        } else {
+            SlotRecordA *unit = gameGetSlotRecord(criteria->firstSlot);
+            if (unit->id != criteria->firstId || bitsAt60Test(unit, 10)) {
+                criteria->firstSlot = -1;
+                criteria->firstId = 0;
+            }
         }
-      }
-      temp_v5 = temp_v5 + 1;
-    } while ((int)temp_v5 < temp_v1);
-  }
-  return;
+    }
+    if (criteria->secondSlot >= 0) {
+        if (criteria->secondId == 0) {
+            criteria->secondSlot = -1;
+        } else if (gameGetSlotRecord(criteria->secondSlot)->id != criteria->secondId) {
+            criteria->secondSlot = -1;
+            criteria->secondId = 0;
+        }
+    }
+    __aeabi_memset4(work->touchA.rowRegions, 0xA0, -1);
+    rebuildFusionCatalogLists();
+
+    paramsClearPacket(&work->sprites.resources);
+    paramsInit(&work->sprites.resources, sUnitePositionKeys, sizeof(sUnitePositionKeys), sUniteAlphaKeys,
+               sizeof(sUniteAlphaKeys), NULL, 0, NULL, 0, sUniteCommands, sizeof(sUniteCommands));
+    uiSpriteStateInitFromSource(&work->sprites.fade, 0x1A, 0, &work->sprites.resources, 1, 1.0f);
+    uiSpriteSelectAnim(&work->sprites.fade, 0);
+    uiSpriteStateInitFromSource(&work->sprites.slide, 0x1A, 0, &work->sprites.resources, 1, 1.0f);
+    uiSpriteSelectAnim(&work->sprites.slide, 4);
+    uiSpriteStateInitFromSource(&work->sprites.pulse, 0x1A, 0, &work->sprites.resources, 1, 1.0f);
+    uiSpriteSelectAnim(&work->sprites.pulse, 1);
+    uiSpriteStateInitFromSource(&work->sprites.open, 0x1A, 0, &work->sprites.resources, 1, 1.0f);
+    FUN_00184b90(reinterpret_cast<u8 *>(work), 1);
+    uiSpriteStateInitFromSource(&work->sprites.listOffset, 0x1A, 0, &work->sprites.resources, 1, 1.0f);
+    uiSpriteSetKeyframe(&work->sprites.listOffset, 5, 0);
+    uiSpriteStateInitFromSource(&work->sprites.unk02E0, 0x1A, 0, &work->sprites.resources, 1, 1.0f);
+    uiSpriteSelectAnim(&work->sprites.unk02E0, 2);
+    uiSpriteStateInitFromSource(&work->sprites.unk036C, 0x1A, 0, &work->sprites.resources, 1, 1.0f);
+    uiSpriteSelectAnim(&work->sprites.unk036C, 3);
+
+    loadSlotEnsureLoaded(0x24);
+    loadSlotEnsureLoaded(0x22);
+    work->request = -1;
+    work->scriptA.pendingRequest = -1;
+    work->menu.messageFile = asdLoadFileSyncDefault("unite/unite.mbm");
+    work->menu.scriptFile = asdLoadFileSyncDefault("unite/unite.bf");
+    work->menu.scriptProcess = reinterpret_cast<u32>(scrScriptProcessCreate(work->menu.scriptFile, work->menu.messageFile));
+
+    if (lmapSceneGetScript() != NULL || lmapMainIsRunning() != 0) {
+        FUN_0031416c(0, 0, 0, 0, 0, 0, 255, 0, 0, 255, 0, 0, 0.0f, -1.0f, -565.0f, 1335.0f, 0.0f, -100.0f, 1500.0f, 1500.0f,
+                     100.0f);
+    }
+
+    /* The cathedral's camera clip and its two model sets. */
+    u32 cameraSize;
+    const AsdAnimCameraResource *cameraResource =
+        (const AsdAnimCameraResource *)asdLoadFileWithSize("camp/jakyou_all.bch", &cameraSize, 1);
+    void *cameraStorage = asdMemoryAllocTraced(sizeof(Obj557af8), UNITE_SOURCE_FILE, 7443);
+    work->previewA.camera = cameraStorage ? new (cameraStorage) Obj557af8(cameraResource) : NULL;
+    MoriModelContent *models = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent), UNITE_SOURCE_FILE, 7445));
+    if (models != NULL) {
+        models = modelListInit(models);
+    }
+    work->previewA.firstModel = reinterpret_cast<UnitePreviewModel *>(models);
+    modelLoadFileAsyncByName(models, "camp/jakyou_all.bam");
+    models = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent), UNITE_SOURCE_FILE, 7448));
+    if (models != NULL) {
+        models = modelListInit(models);
+    }
+    work->previewA.secondModel = reinterpret_cast<UnitePreviewModel *>(models);
+    modelLoadFileAsyncByName(models, "camp/jakyou_all_mido.bam");
+    g_handleRegistry->flags |= 1;
+    work->previewA.resetCount = 0;
+    work->previewA.frames = 0;
+    work->menu.openedSeconds = FUN_002e50d4();
+    if (fusionListAvailableSpecialRecipes(work->sprites.ctrl, work->catalogThreadA.specialRecipes) != 0) {
+        gameFlagSetValue(0x52C, 1, 1);
+    } else {
+        gameFlagSetValue(0x52C, 0, 1);
+    }
+
+    /* The flag of the search option that has to be unlocked (the table's option-15 row). */
+    UniteWorkA *unite = g_unite;
+    unite->catalogThreadA.unlockOption = 0;
+    unite->catalogThreadA.unk92BE = 0;
+    void *table = dataTableGet(0x24, 0);
+    searchTableRecordsA(table);
+    s32 count = dataTableGetCount(table);
+    for (s32 i = 0; i < count; i++) {
+        if (searchTableOption(i) != 15) {
+            continue;
+        }
+        if (searchTableFlagId(i) == 0) {
+            continue;
+        }
+        unite->catalogThreadA.unlockOption = searchTableFlagId(i);
+    }
 }
 
 } /* extern "C" */
