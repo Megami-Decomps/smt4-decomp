@@ -16,10 +16,10 @@ u32 cecMessageBoxFindByKey(AsdCecMessageBox *box, s32 kind, const CecMessageKey 
     for (u32 index = 0; index < count; ++index) {
         CecMessageKey candidate;
         CecMessageKeyHeader *header = nn_cec_CTR_MessageBox_GetMessHeader(box, kind, index);
-        if (header != NULL && (u32)header != 0xffffffe0) {
-            releaseOrCopyHandle(&candidate, &header->key);
-        } else {
+        if (header == NULL || header == (CecMessageKeyHeader *)-0x20) {
             releaseOrCopyHandle2(&candidate, DAT_005b4499);
+        } else {
+            releaseOrCopyHandle(&candidate, &header->key);
         }
         CecMessageKey copy = candidate;
         if (FUN_00501f78(key, &copy) != 0) {

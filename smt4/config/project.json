@@ -3147,12 +3147,12 @@
     {
       "address": "0x10d0f8",
       "file": "AsdSDK/Source/Sys/File/AsdFile",
-      "function": "FUN_0010d0f8",
+      "function": "asdFileStartWorkerThread",
       "module": "_code",
-      "object": "build/obj/_code/AsdSDK/Source/Sys/File/AsdFile/FUN_0010d0f8.o",
+      "object": "build/obj/_code/AsdSDK/Source/Sys/File/AsdFile/asdFileStartWorkerThread.o",
       "size": 240,
-      "source": "src/_code/AsdSDK/Source/Sys/File/AsdFile/FUN_0010d0f8.cpp",
-      "target": "orig/target/_code/AsdSDK/Source/Sys/File/AsdFile/FUN_0010d0f8.o",
+      "source": "src/_code/AsdSDK/Source/Sys/File/AsdFile/asdFileStartWorkerThread.cpp",
+      "target": "orig/target/_code/AsdSDK/Source/Sys/File/AsdFile/asdFileStartWorkerThread.o",
       "thumb": false
     },
     {
@@ -40098,12 +40098,12 @@
     },
     {
       "address": "0x24d434",
-      "function": "FUN_0024d434",
+      "function": "btlActionEffectAnchor",
       "module": "_code",
-      "object": "build/obj/_code/0024/FUN_0024d434.o",
+      "object": "build/obj/_code/0024/btlActionEffectAnchor.o",
       "size": 372,
-      "source": "src/_code/0024/FUN_0024d434.cpp",
-      "target": "orig/target/_code/0024/FUN_0024d434.o",
+      "source": "src/_code/0024/btlActionEffectAnchor.cpp",
+      "target": "orig/target/_code/0024/btlActionEffectAnchor.o",
       "thumb": false
     },
     {
@@ -44466,12 +44466,12 @@
     },
     {
       "address": "0x26d3e0",
-      "function": "FUN_0026d3e0",
+      "function": "partyPanelRefreshSelectedItemValues",
       "module": "_code",
-      "object": "build/obj/_code/0026/FUN_0026d3e0.o",
+      "object": "build/obj/_code/0026/partyPanelRefreshSelectedItemValues.o",
       "size": 448,
-      "source": "src/_code/0026/FUN_0026d3e0.cpp",
-      "target": "orig/target/_code/0026/FUN_0026d3e0.o",
+      "source": "src/_code/0026/partyPanelRefreshSelectedItemValues.cpp",
+      "target": "orig/target/_code/0026/partyPanelRefreshSelectedItemValues.o",
       "thumb": false
     },
     {
@@ -58168,12 +58168,12 @@
     },
     {
       "address": "0x2bbf8c",
-      "function": "FUN_002bbf8c",
+      "function": "mtx44OrthoC",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002bbf8c.o",
+      "object": "build/obj/_code/002b/mtx44OrthoC.o",
       "size": 132,
-      "source": "src/_code/002b/FUN_002bbf8c.cpp",
-      "target": "orig/target/_code/002b/FUN_002bbf8c.o",
+      "source": "src/_code/002b/mtx44OrthoC.cpp",
+      "target": "orig/target/_code/002b/mtx44OrthoC.o",
       "thumb": false
     },
     {
@@ -69569,12 +69569,12 @@
     },
     {
       "address": "0x2f51bc",
-      "function": "FUN_002f51bc",
+      "function": "renderFillScreenColor",
       "module": "_code",
-      "object": "build/obj/_code/002f/FUN_002f51bc.o",
+      "object": "build/obj/_code/002f/renderFillScreenColor.o",
       "size": 188,
-      "source": "src/_code/002f/FUN_002f51bc.cpp",
-      "target": "orig/target/_code/002f/FUN_002f51bc.o",
+      "source": "src/_code/002f/renderFillScreenColor.cpp",
+      "target": "orig/target/_code/002f/renderFillScreenColor.o",
       "thumb": false
     },
     {
@@ -82003,12 +82003,12 @@
     {
       "address": "0x34914c",
       "file": "AsdSDK/Source/Gfx/Model/AsdModel",
-      "function": "FUN_0034914c",
+      "function": "modelSelectMaterialAndRecord",
       "module": "_code",
-      "object": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_0034914c.o",
+      "object": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/modelSelectMaterialAndRecord.o",
       "size": 184,
-      "source": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_0034914c.cpp",
-      "target": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_0034914c.o",
+      "source": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/modelSelectMaterialAndRecord.cpp",
+      "target": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/modelSelectMaterialAndRecord.o",
       "thumb": false
     },
     {
@@ -97874,12 +97874,12 @@
     },
     {
       "address": "0x39c728",
-      "function": "FUN_0039c728",
+      "function": "mapNaviDisplayUpdateDragScroll",
       "module": "_code",
-      "object": "build/obj/_code/0039/FUN_0039c728.o",
+      "object": "build/obj/_code/0039/mapNaviDisplayUpdateDragScroll.o",
       "size": 544,
-      "source": "src/_code/0039/FUN_0039c728.cpp",
-      "target": "orig/target/_code/0039/FUN_0039c728.o",
+      "source": "src/_code/0039/mapNaviDisplayUpdateDragScroll.cpp",
+      "target": "orig/target/_code/0039/mapNaviDisplayUpdateDragScroll.o",
       "thumb": false
     },
     {
@@ -102874,12 +102874,12 @@
     },
     {
       "address": "0x3c25f0",
-      "function": "FUN_003c25f0",
+      "function": "statisticsRollAll",
       "module": "_code",
-      "object": "build/obj/_code/003c/FUN_003c25f0.o",
+      "object": "build/obj/_code/003c/statisticsRollAll.o",
       "size": 684,
-      "source": "src/_code/003c/FUN_003c25f0.cpp",
-      "target": "orig/target/_code/003c/FUN_003c25f0.o",
+      "source": "src/_code/003c/statisticsRollAll.cpp",
+      "target": "orig/target/_code/003c/statisticsRollAll.o",
       "thumb": false
     },
     {
@@ -105208,12 +105208,12 @@
     },
     {
       "address": "0x3dc19c",
-      "function": "FUN_003dc19c",
+      "function": "btlLoadSequenceEffects",
       "module": "_code",
-      "object": "build/obj/_code/003d/FUN_003dc19c.o",
+      "object": "build/obj/_code/003d/btlLoadSequenceEffects.o",
       "size": 312,
-      "source": "src/_code/003d/FUN_003dc19c.cpp",
-      "target": "orig/target/_code/003d/FUN_003dc19c.o",
+      "source": "src/_code/003d/btlLoadSequenceEffects.cpp",
+      "target": "orig/target/_code/003d/btlLoadSequenceEffects.o",
       "thumb": false
     },
     {
@@ -105579,12 +105579,12 @@
     },
     {
       "address": "0x3de758",
-      "function": "FUN_003de758",
+      "function": "btlReflectQueuePendingRosterFade",
       "module": "_code",
-      "object": "build/obj/_code/003d/FUN_003de758.o",
+      "object": "build/obj/_code/003d/btlReflectQueuePendingRosterFade.o",
       "size": 276,
-      "source": "src/_code/003d/FUN_003de758.cpp",
-      "target": "orig/target/_code/003d/FUN_003de758.o",
+      "source": "src/_code/003d/btlReflectQueuePendingRosterFade.cpp",
+      "target": "orig/target/_code/003d/btlReflectQueuePendingRosterFade.o",
       "thumb": false
     },
     {

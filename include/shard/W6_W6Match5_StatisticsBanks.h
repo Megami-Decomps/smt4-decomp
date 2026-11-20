@@ -4,13 +4,17 @@
 #include "gamedata/GameDataAccess.h"
 #include <stddef.h>
 
+/* A statistics counter; the rolled statistics (data table 0x24, statisticsRollAll / smt4a statisticsRollAll) keep
+ * their roll state in it, laid out as the encounter roll state (gamedata/ItemFlagState.h). */
 union StatisticsCounter {
     u32 word;
     struct {
-        /* 0x00 */ u16 count;
-        /* 0x02 */ u8 rolledMask;
-        /* 0x03 */ u8 countdown : 5;
-        u8 flags : 3;
+        /* 0x00 */ u16 count;             /* the rolled result */
+        /* 0x02 */ u8 rolledMask;         /* weight groups already used this phase */
+        /* 0x03 */ u8 countdown : 5;      /* rolls left before the result is rolled again */
+        u8 changed : 1;
+        u8 notify : 1;
+        u8 enabled : 1;
     } fields;
 };
 

@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: retail keeps the shared zero in sl and the call results in r9, and schedules the state byte pointer after the FUN_004a34a0 call. */
+/* NON_MATCHING: retail keeps the shared zero in sl and the price/menu results in r9; the build swaps those registers. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
@@ -82,13 +82,14 @@ static s16 currentId(StatusScreen* screen)
 
 // Per-frame handler of the quest/status list: shows the highlighted entry and reacts to
 // confirm, menu and cancel.
-void FUN_004a41d8(StatusScreen* screen)
+void compendiumUpdateSelectedEntry(StatusScreen* screen)
 {
     s32 select = 0;
     s32 cancel = 0;
     s16 id = currentId(screen);
+    s32 price = FUN_004a8750((u16)id, screen->page, 0, (s8)SCREEN_BYTE(screen, 0x94) >= 100, 0);
     if (compendiumEntryIsRegistered((u16)id) != 0) {
-        panelSetTarget(-FUN_004a8750((u16)id, screen->page, 0, (s8)SCREEN_BYTE(screen, 0x94) >= 100, 0), 0);
+        panelSetTarget(-price, 0);
     } else {
         messageSetActiveMode(1);
     }
@@ -106,24 +107,23 @@ void FUN_004a41d8(StatusScreen* screen)
     if (select != 0) {
         id = currentId(screen);
         entryTableResetAndInit(0x18, FUN_004a8750((u16)id, screen->page, 0, (s8)SCREEN_BYTE(screen, 0x94) >= 100, 0), -1, 0);
-        u8* mode = &SCREEN_BYTE(screen, 0xa870);
         if (FUN_004a34a0(screen, (u16)id) != 0) {
             char text[128];
             libc_strcpy(text, dataTable01GetRecordWithAocOverride((u16)id));
             scrSetStringSlot(8, text);
             libc_strcpy(text, demonGetRaceLabel((u16)id, 0));
             scrSetStringSlot(0x10, text);
-            scrScriptProcessStartEntry(screen->process, *mode == 7);
+            scrScriptProcessStartEntry(screen->process, SCREEN_BYTE(screen, 0xa870) == 7);
             screen->state = 3;
             screen->stateArg = 0;
         } else {
-            if (*mode == 6) {
-                *mode = 0;
+            if (SCREEN_BYTE(screen, 0xa870) == 6) {
+                SCREEN_BYTE(screen, 0xa870) = 0;
                 sendEvent100020F();
                 return;
             }
             s32 entry = 0;
-            switch (*mode) {
+            switch (SCREEN_BYTE(screen, 0xa870)) {
             case 1: entry = 3; break;
             case 2: entry = 2; break;
             case 3: entry = 4; break;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: relative-pointer null handling and matrix/bounds evaluation order differ; retail keeps a shared zero register and a call/return rather than this tail call. */
+/* NON_MATCHING: 56 lines: retail reads the mesh index before the resource and walks the mesh table with a pre-indexed load, computes the bounds before the world matrix in the multi-bone arm, and shares that arm's `bl; pop` with the bone arm (the build tail-calls); relative-pointer adds take the other operand order at several sites. */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "gfx/ModelBoneLookup.h"
 
@@ -33,7 +33,7 @@ typedef char ModelDepthLayoutCheck[offsetof(ModelDepthMesh, bounds) == 0x1c &&
 extern "C" f32 nw_gfx_SceneHelper_CalculateDepth(const SkeletonVector3 *center,
     const SkeletonMatrix34 *matrix, const void *camera);
 
-// Use a singly-bound mesh's bone matrix; other meshes use the model transform.
+/* Computes a mesh's depth from its bounds' centre: a singly-bound mesh uses its bone matrix, other meshes the model transform. */
 extern "C" f32 FUN_002255c0(ModelDepthInstance *instance,
     ModelDepthMeshInstance *meshInstance, const void *camera)
 {
@@ -42,8 +42,6 @@ extern "C" f32 FUN_002255c0(ModelDepthInstance *instance,
     const SkeletonMatrix34 *matrix;
     if (mesh->boneCount != 1) {
         matrix = &instance->sceneNode->worldMatrix;
-        ModelDepthBounds *bounds = (ModelDepthBounds *)mesh->bounds.get();
-        return nw_gfx_SceneHelper_CalculateDepth(&bounds->center, matrix, camera);
     } else {
         RelativePointer *bones = (RelativePointer *)mesh->bones.get();
         ModelDepthBoneBinding *binding = (ModelDepthBoneBinding *)bones->get();

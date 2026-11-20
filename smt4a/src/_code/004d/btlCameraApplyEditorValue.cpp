@@ -1,4 +1,4 @@
-/* NON_MATCHING: base-position copy registers differ; fast floating-point mode folds the two degree-conversion multiplies into vnmls, unlike retail. */
+/* NON_MATCHING: base-position copy and angle/distance update use different registers and scheduling. */
 #include "battle/btlCamera.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "battle/BtlGlobals.h"
@@ -14,7 +14,7 @@ s32 listBoxItemHasOwner(AsdListBox *list);
 f32 *asdListBoxGetFloatValuePtr(AsdListBox *list, u32 index);
 
 // Convert absolute editor values into offsets from the current base camera pose.
-void FUN_004d542c(CameraDebugMenu *menu, u32 unused, u32 index)
+void btlCameraApplyEditorValue(CameraDebugMenu *menu, u32 unused, u32 index)
 {
     BtlCameraVector3 position = g_btlCamera->basePose.position;
     switch (index) {
@@ -33,9 +33,12 @@ void FUN_004d542c(CameraDebugMenu *menu, u32 unused, u32 index)
     case 3:
         g_btlCamera->vector[2] = *asdListBoxGetFloatValuePtr(menu->list, index) - position.z;
         return;
-    case 4:
-        g_btlCamera->unk10 = *asdListBoxGetFloatValuePtr(menu->list, index) * 256.0f * 0.0027777778f - g_btlCamera->basePose.angle;
+    case 4: {
+        f32 degrees = *asdListBoxGetFloatValuePtr(menu->list, index) * 256.0f;
+        f32 turns = degrees / 360.0f;
+        g_btlCamera->unk10 = turns - g_btlCamera->basePose.angle;
         return;
+    }
     case 5:
         g_btlCamera->unk0C = *asdListBoxGetFloatValuePtr(menu->list, index) - g_btlCamera->basePose.distance;
         return;

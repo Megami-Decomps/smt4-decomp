@@ -1,4 +1,4 @@
-/* NON_MATCHING: binding loads and float conversion/max scheduling allocate two extra saved registers. */
+/* NON_MATCHING: retail loads the image and custom-size bindings with one ldm and keeps everything in caller-saved registers; armcc loads them separately and saves r4/r5 for the custom size and the image height. */
 #include "AsdSDK/Source/Gfx/Effect/EffectBounds.h"
 #include <math.h>
 #include <stddef.h>
@@ -31,7 +31,11 @@ extern "C" void FUN_00401a74(EffectBoundsSource *bounds, f32 *scale, f32 *offset
     f32 height = (f32)custom->height;
     f32 extentX = (f32)(u32)image->width + fabsf(source->marginX) * 2.0f;
     f32 extentY = (f32)(u32)image->height + fabsf(source->marginY) * 2.0f;
-    f32 extent = extentX > extentY ? extentX : extentY;
+    f32 extent;
+    if (extentX > extentY)
+        extent = extentX;
+    else
+        extent = extentY;
     scale[0] = extent / width;
     scale[1] = extent / height;
     offset[0] = 0.0f;

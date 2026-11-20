@@ -1,4 +1,4 @@
-/* NON_MATCHING: the unused event/e%03d/e%03d.bf/.mbm path buffers are restored; only the state-4 store sharing, saved-register numbering (r5/r6) and frame setup order differ. */
+/* NON_MATCHING: the unused event/e%03d/e%03d.bf/.mbm path buffers are restored and the script mode goes through the linker-inlined scriptProcessSetMode; the package value and the record's event base trade r5/r6, the state-4 store shares the state-1 store (retail: the state-2 one), and the second sprintf loads the entry before the package. */
 #include <stdio.h>
 #include "addon/AocMain.h"
 #include "quest_center/QuestRecord.h"
@@ -26,6 +26,7 @@ void aocQueueType08(AocSystem *system, u32 id, void **output, u32 flags);
 void buttonHelpSetPreset(u32 preset);
 u32 tableGroupFindEntryIndex(void *commands, const char *entry);
 void scrScriptProcessStartEntry(ScriptProcess *script, u32 entry);
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 
 u32 itemEventStartupUpdate(QuestAddonScriptWork *work)
 {
@@ -61,7 +62,7 @@ u32 itemEventStartupUpdate(QuestAddonScriptWork *work)
         }
         buttonHelpSetPreset(0x90);
         work->script = scrScriptProcessCreate(work->commands, work->messages);
-        work->script->mode = 2;
+        scriptProcessSetMode(work->script, 2);
         sprintf(commandPath, "e%03d_%02d", definition->event.package, definition->event.entry);
         u32 entry = tableGroupFindEntryIndex(work->commands, commandPath);
         scrScriptProcessStartEntry(work->script, entry);

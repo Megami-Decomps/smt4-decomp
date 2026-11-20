@@ -21,7 +21,7 @@ int FUN_0026c710(...);
 int partyPanelShowButtonHelp(void);
 int partyPanelRefreshFusionParents(void);
 int FUN_0026d144(...);
-int FUN_0026d3e0(...);
+int partyPanelRefreshSelectedItemValues(...);
 int pair40Set(unsigned int, int);
 int partyPanelSetState(...);
 int gameSetIconDisplayEnabled(int);
@@ -50,7 +50,7 @@ extern int g_partyPanel; /* 0x43dcf0 */
 /* Supplied declaration required: partyPanelShowButtonHelp. */
 /* Supplied declaration required: partyPanelRefreshFusionParents. */
 /* Supplied declaration required: FUN_0026d144. */
-/* Supplied declaration required: FUN_0026d3e0. */
+/* Supplied declaration required: partyPanelRefreshSelectedItemValues. */
 /* Supplied declaration required: pair40Set. */
 /* Supplied declaration required: partyPanelSetState. */
 /* Supplied declaration required: slotPlacementAssignSlotAndPosition. */
@@ -338,7 +338,7 @@ LAB_0028ad80:
             else {
               temp_v2 = temp_v0 + 0xa08;
             }
-            FUN_0026d3e0(temp_v2,0);
+            partyPanelRefreshSelectedItemValues(temp_v2,0);
           }
         }
         break;

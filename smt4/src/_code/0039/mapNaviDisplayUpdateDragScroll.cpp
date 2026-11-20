@@ -1,4 +1,4 @@
-/* NON_MATCHING: same control flow and stack layout as retail; the build schedules the f32 expression temporaries (s0-s3) and the early address setup of r5/r6 differently. */
+/* NON_MATCHING: retail uses two predicated velocity stores on drag release and schedules the address setup and float operations differently. */
 #include <math.h>
 #include "map/NaviDisplayTransition.h"
 #include "map/mapDepart.h"
@@ -17,12 +17,18 @@ f32 naviMainGetParameter(u16 *state);
 CursorPosition *NaviMain_GetCursorPos(u16 *state);
 void NaviMain_SetCursorPos(u16 *state, CursorPosition *position);
 
-// Scrolls the navigation map: follows a touch drag while one is active, then lets the leftover speed coast.
-void FUN_0039c728(MapNaviDisplay *display)
+/* Halts inertial scrolling by clearing both velocity components. */
+static __inline void naviStopScroll(NaviDisplayTransitionView *work)
 {
-    NaviDisplayTransitionView *work = reinterpret_cast<NaviDisplayTransitionView *>(display);
+    work->velocityX = 0.0f;
+    work->velocityY = 0.0f;
+}
+
+// Scrolls the navigation map: follows a touch drag while one is active, then lets the leftover speed coast.
+void mapNaviDisplayUpdateDragScroll(MapNaviDisplay *display)
+{
+    NaviDisplayTransitionView *work = (NaviDisplayTransitionView *)display;
     u16 *mapState = &work->mapState;
-    f32 zero = 0.0f;
     if (work->flags & 0x20000) {
         s32 touchY;
         s32 touchX;
@@ -47,8 +53,7 @@ void FUN_0039c728(MapNaviDisplay *display)
         } else {
             work->flags &= ~0x30000u;
             if (work->touchAge > 2) {
-                work->velocityX = zero;
-                work->velocityY = zero;
+                naviStopScroll(work);
             } else {
                 work->velocityX = work->touchX - work->lastTouchX;
                 work->velocityY = work->touchY - work->lastTouchY;
@@ -59,15 +64,14 @@ void FUN_0039c728(MapNaviDisplay *display)
         }
     }
     if (fabsf(work->velocityX) <= 0.5f && fabsf(work->velocityY) <= 0.5f) {
-        work->velocityX = zero;
-        work->velocityY = zero;
+        naviStopScroll(work);
     } else {
         work->velocityX = work->velocityX * DAT_0044cdc8;
         work->velocityY = work->velocityY * DAT_0044cdc8;
         f32 scale = naviMainGetParameter(mapState);
         CursorPosition position = *NaviMain_GetCursorPos(mapState);
         position.x = work->velocityX / scale + position.x;
-        position.y = work->velocityY / position.y + scale;
+        position.y = work->velocityY / scale + position.y;
         NaviMain_SetCursorPos(mapState, &position);
         work->overlayDirty = 1;
     }

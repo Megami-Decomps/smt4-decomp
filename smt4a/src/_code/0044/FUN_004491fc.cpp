@@ -1,4 +1,3 @@
-/* NON_MATCHING: material dirty flags, ordered value commits and tail callee are recovered; armcc interleaves VFP loads with scalar copies unlike retail. */
 #include "shard/Shard0044.h"
 
 struct MaterialCommitData {
@@ -11,22 +10,21 @@ struct MaterialCommitOwner {
     /* 0x04 */ MaterialCommitData *data;
 };
 
-struct MaterialTrack {
-    /* 0x00 */ u32 current;
-    /* 0x04 */ u32 previous;
-    /* 0x08 */ u8 unk08[8];
-
-    void commit() { previous = current; }
+struct ResetCursor {
+    /* 0x00 */ void *begin;
+    /* 0x04 */ void *current;
+    /* 0x08 */ void *end;
+    /* 0x0C */ u32 unk0c;
 };
 
-struct MaterialTracks {
+struct CursorResetState {
     /* 0x00 */ u8 unk00[0xc];
-    /* 0x0C */ MaterialTrack entries[15];
+    /* 0x0C */ ResetCursor cursors[15];
 };
 
-struct MaterialTracksOwner {
+struct CursorResetView {
     /* 0x00 */ u32 unk00;
-    /* 0x04 */ MaterialTracks *tracks;
+    /* 0x04 */ CursorResetState *data;
 };
 
 struct MaterialUpdateList {
@@ -40,29 +38,35 @@ void FUN_0044d750(void *piece);
 void FUN_004492b4(MaterialFlagArrays *arrays);
 }
 
-// Update the material pieces, commit the track values, and clear their dirty flag arrays.
-extern "C" void FUN_004491fc(MaterialCommitOwner *owner, MaterialTracksOwner *trackOwner,
+/* Moves a cursor back to its first element. */
+static void resetCursorRewind(ResetCursor *cursor)
+{
+    cursor->current = cursor->begin;
+}
+
+/* Updates the material pieces, rewinds all cursor positions and clears the dirty flag arrays. */
+extern "C" void FUN_004491fc(MaterialCommitOwner *owner, CursorResetView *view,
                             MaterialUpdateList *updates)
 {
     void **end = updates->end;
-    MaterialCommitData *data = owner->data;
-    MaterialTracks *tracks = trackOwner->tracks;
+    MaterialFlagArrays *flags = &owner->data->flags;
+    CursorResetState *cursors = view->data;
     for (void **piece = updates->begin; piece != end; ++piece)
         FUN_0044d750(*piece);
-    tracks->entries[0].commit();
-    tracks->entries[1].commit();
-    tracks->entries[2].commit();
-    tracks->entries[3].commit();
-    tracks->entries[6].commit();
-    tracks->entries[7].commit();
-    tracks->entries[8].commit();
-    tracks->entries[9].commit();
-    tracks->entries[10].commit();
-    tracks->entries[4].commit();
-    tracks->entries[5].commit();
-    tracks->entries[11].commit();
-    tracks->entries[12].commit();
-    tracks->entries[13].commit();
-    tracks->entries[14].commit();
-    FUN_004492b4(&data->flags);
+    resetCursorRewind(&cursors->cursors[0]);
+    resetCursorRewind(&cursors->cursors[1]);
+    resetCursorRewind(&cursors->cursors[2]);
+    resetCursorRewind(&cursors->cursors[3]);
+    resetCursorRewind(&cursors->cursors[6]);
+    resetCursorRewind(&cursors->cursors[7]);
+    resetCursorRewind(&cursors->cursors[8]);
+    resetCursorRewind(&cursors->cursors[9]);
+    resetCursorRewind(&cursors->cursors[10]);
+    resetCursorRewind(&cursors->cursors[4]);
+    resetCursorRewind(&cursors->cursors[5]);
+    resetCursorRewind(&cursors->cursors[11]);
+    resetCursorRewind(&cursors->cursors[12]);
+    resetCursorRewind(&cursors->cursors[13]);
+    resetCursorRewind(&cursors->cursors[14]);
+    FUN_004492b4(flags);
 }

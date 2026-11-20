@@ -12,6 +12,9 @@
 
 struct ScriptProcess;
 struct MoriModelContent;
+class Obj536044;
+
+extern "C" void shopEnterQuantitySelection(Obj536044 *shop, s32 nextState);
 
 /* A scene whose step functions are listed in the table at 0x536044 (named after it until its real
  * name is known): the table holds member-function pointers, not a vtable. */
@@ -108,6 +111,7 @@ protected:
     /* 0x16046 */ u8 unk16046[2];
     /* 0x16048 */ s32 quantityIndex;        /* the list index the quantity panel was set up for, -1: none */
 
+    friend void shopEnterQuantitySelection(Obj536044 *shop, s32 nextState);
     friend struct Obj536044LayoutCheck;
 };
 

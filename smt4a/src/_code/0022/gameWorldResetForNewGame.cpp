@@ -17,7 +17,7 @@ int gameFlagsClearEntryLowBits(void);
 int slotFlagsClearState(void);
 int tableClearFlags300(void);
 int FUN_004bb880(void);
-int FUN_004cd960(void);
+int statisticsRollAll(void);
 int __aeabi_memcpy4(unsigned short *, unsigned short *, int);
 
 extern int DAT_0057f69c; /* 0x57f69c */
@@ -36,7 +36,7 @@ extern unsigned int *DAT_0057f6a4; /* 0x57f6a4 */
 /* Supplied declaration required: slotFlagsClearState. */
 /* Supplied declaration required: tableClearFlags300. */
 /* Supplied declaration required: FUN_004bb880. */
-/* Supplied declaration required: FUN_004cd960. */
+/* Supplied declaration required: statisticsRollAll. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -328,7 +328,7 @@ void gameWorldResetForNewGame(void)
   partyFlagRange();
   FUN_002e6340();
   FUN_004bb880();
-  FUN_004cd960();
+  statisticsRollAll();
   rt_memclr(DAT_0057f69c + 0x21550,0x80);
   FUN_003339ec();
   FUN_0034c8e8();

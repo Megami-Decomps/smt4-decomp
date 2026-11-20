@@ -9,7 +9,7 @@ int cameraMatrixCacheSetLookAt(...);
 int stereoCameraSetPerspective(...);
 int FUN_00156fd8(...);
 int FUN_001579dc(...);
-int FUN_0015a050(...);
+int mtx44OrthoC(...);
 int asdLoadFileSyncNoContext(...);
 int asdMemoryAllocTraced(...);
 int mathCopyIdentityMatrix(...);
@@ -36,7 +36,7 @@ extern unsigned int FUN_00154c94(unsigned int);
 /* Supplied declaration required: FUN_00156fd8. */
 /* Supplied declaration required: FUN_001579dc. */
 extern unsigned int FUN_00157acc(void);
-/* Supplied declaration required: FUN_0015a050. */
+/* Supplied declaration required: mtx44OrthoC. */
 /* Supplied declaration required: asdLoadFileSyncNoContext. */
 extern unsigned int asdGxPresetsGetByKind(unsigned int);
 /* Supplied declaration required: asdMemoryAllocTraced. */
@@ -97,17 +97,17 @@ void asdRenderContextInitialize(int param_1)
   temp_v0 = asdGxPresetsGetByKind(0);
   temp_v5 = 0;
   VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_0015a050();
+  mtx44OrthoC();
   nn_math_ARMv6_MTX44PivotC_FAST(param_1 + 0x5fc,1);
   temp_v0 = asdGxPresetsGetHeightByKind(2);
   VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v0 = asdGxPresetsGetByKind(2);
   VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_0015a050();
+  mtx44OrthoC();
   nn_math_ARMv6_MTX44PivotC_FAST(param_1 + 0x63c,1);
-  FUN_0015a050();
+  mtx44OrthoC();
   nn_math_ARMv6_MTX44PivotC_FAST(param_1 + 0x67c,1);
-  FUN_0015a050();
+  mtx44OrthoC();
   nn_math_ARMv6_MTX44PivotC_FAST(param_1 + 0x6bc,1);
   temp_v1 = param_1 + 0x700;
   temp_v7 = 0x42c80000;

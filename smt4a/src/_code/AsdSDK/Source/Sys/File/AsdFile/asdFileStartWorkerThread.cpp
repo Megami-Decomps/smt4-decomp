@@ -1,4 +1,5 @@
-/* NON_MATCHING: only the thread-start stack-argument setup differs (retail stores the uninitialised argument slot first and orders the descriptor/argument stores and literal pool differently) */
+/* NON_MATCHING: retail stores an uninitialised VFP register (s16) as the thread argument (the original passed an unset
+ * local, undefined behaviour this source does not reproduce); the worker ignores its argument and gets 0.0f here. */
 #include "AsdSDK/AsdDebug.h"
 #include "nn/os/ThreadLaunch.h"
 #include "nn/Result.h"
@@ -27,10 +28,25 @@ void copyValueIfDestination(void);
 void FUN_00100326(void);
 void emptyStub_0010032c(void);
 
-/* Starts the file worker thread on a 4 KB stack. */
-void FUN_0014287c(void)
+/* nn::os::Thread::Start: runs `entry(argument)` on a new thread whose stack is `stack`; a failure is reported. */
+static __inline void asdFileStartThread(void *thread, void (*entry)(void *), f32 argument, ThreadStackStorage &stack,
+                                       s32 priority, s32 processor)
 {
-    f32 unset;
+    ThreadArgumentDescriptor descriptor;
+    descriptor.argumentSize = sizeof(argument);
+    descriptor.callbacks[0] = copyValueIfDestination;
+    descriptor.callbacks[1] = emptyStub_0010032c;
+    descriptor.callbacks[2] = FUN_00100326;
+    s32 result = FUN_002fb0d4(thread, &descriptor, entry, &argument, stack.info.address + stack.info.size, priority,
+                              processor, 0);
+    if (nnResultIsFailureExceptSummary(result, 3)) {
+        resultHandleFailure(result);
+    }
+}
+
+/* Starts the file worker thread on a 4 KB stack. */
+void asdFileStartWorkerThread(void)
+{
     g_asdFile.stopRequested = 0;
     asdDebugTrace(DAT_0053d448, 956);
     g_asdFile.stackMemory = memAlloc(0x100, 0x100, 0, 0x1000, 0x1000, 1);
@@ -44,16 +60,6 @@ void FUN_0014287c(void)
     }
     g_asdFile.threadStack = stack;
     resultReportIfFailed(stack, g_asdFile.stackMemory, 0x1000);
-    f32 argument = unset;
-    ThreadArgumentDescriptor descriptor;
-    descriptor.argumentSize = 4;
-    descriptor.callbacks[0] = copyValueIfDestination;
-    descriptor.callbacks[1] = emptyStub_0010032c;
-    descriptor.callbacks[2] = FUN_00100326;
-    ThreadStackInfo *info = &g_asdFile.threadStack->info;
-    s32 result = FUN_002fb0d4(g_asdFileWorkerThread, &descriptor, FUN_0014b66c, &argument, info->size + info->address, 18, -2, 0);
-    if (nnResultIsFailureExceptSummary(result, 3)) {
-        resultHandleFailure(result);
-    }
+    asdFileStartThread(g_asdFileWorkerThread, FUN_0014b66c, 0.0f, *g_asdFile.threadStack, 18, -2);
 }
 }

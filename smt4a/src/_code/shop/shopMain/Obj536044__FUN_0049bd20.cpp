@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049bd20` (_code @ 0x49bd20, 0x694 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "classes/Obj536044.h"
 #include "network/DataStore/DataStoreMain.h"
 
 extern "C" {
@@ -23,7 +24,6 @@ int moriModelContentLoadBody(int, int);
 int handleRegistryRegisterObject(unsigned int, unsigned int);
 int FUN_004954e8(int);
 int menuOpenCommandList(...);
-int FUN_00498494(int, int);
 int messageChoiceShowCurrent(int);
 int shopStartSelectionScript(...);
 int FUN_00498de0(...);
@@ -61,7 +61,6 @@ extern int moriModelContentIsLoaded(void);
 /* Supplied declaration required: FUN_004954e8. */
 /* Supplied declaration required: FUN_004964e0. */
 /* Supplied declaration required: menuOpenCommandList. */
-/* Supplied declaration required: FUN_00498494. */
 /* Supplied declaration required: messageChoiceShowCurrent. */
 /* Supplied declaration required: shopStartSelectionScript. */
 /* Supplied declaration required: FUN_00498de0. */
@@ -142,7 +141,7 @@ void _ZN9Obj53604412FUN_0049bd20Ev(int param_1)
 LAB_0049be70:
     if (temp_v1 != 0) {
       sendEvent100020E();
-      FUN_00498494(param_1,0xb);
+      shopEnterQuantitySelection((Obj536044 *)param_1, 0xb);
       FUN_00498de0(param_1);
       return;
     }

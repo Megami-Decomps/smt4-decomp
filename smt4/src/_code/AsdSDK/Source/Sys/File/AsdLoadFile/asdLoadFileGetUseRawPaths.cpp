@@ -1,7 +1,7 @@
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadPath.h"
 
 extern "C" {
-extern s8 g_asdLoadFileUseRawPaths; /* 1: use paths exactly as given */
 
 s32 asdLoadFileGetUseRawPaths(void)
 {

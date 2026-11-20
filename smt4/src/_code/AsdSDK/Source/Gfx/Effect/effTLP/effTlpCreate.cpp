@@ -1,13 +1,12 @@
-/* NON_MATCHING: allocation size, trace order and entries/objects stores match; retail groups refCount/unk20/self into one stm with the zero in r0 (built keeps the zero in ip), shifting the loop registers. */
+/* NON_MATCHING: allocation size, trace, entries/objects and the loops match (the default texture takes the block); retail stores refCount/unk20/self with one stm before the entries/objects pair (zero in r0, shared with the loop index), the build splits the triple around that pair. */
 #include "AsdSDK/Source/Gfx/Effect/effTLP.h"
 #include "AsdSDK/AsdDebug.h"
+#include "shard/W6_W6Match2_TextureHolder.h"
 
 extern "C" {
 
 void *memAlloc(int, int, int, u32 size, int align, int);
 s32 stexHeaderIsValid(void *data);
-void *asdEffectTextureCreate(void *data);
-void *textureCreateFromImage(void);
 
 /* Builds a TLP object from file data: copies the header and entries and creates an effect object
  * for each entry's data block (or a default one when the block is not valid). */
@@ -42,7 +41,7 @@ TlpObject *effTlpCreate(TlpFile *file)
         if (stexHeaderIsValid(block) != 0) {
             tlp->objects[i] = asdEffectTextureCreate(block);
         } else {
-            tlp->objects[i] = textureCreateFromImage();
+            tlp->objects[i] = textureCreateFromImage(block);
         }
         block += src->size;
         src++;

@@ -15,7 +15,7 @@ typedef struct StepObject {
 void FUN_00220984(void);
 s32 FUN_0039ad14(StepObject *object);
 s32 FUN_0039b370(StepObject *object);
-void FUN_0039c728(StepObject *object);
+void mapNaviDisplayUpdateDragScroll(StepObject *object);
 s32 flagBitIsSet(u32 bit);
 s32 gameFlagIsSet(u32 flag);
 
@@ -28,7 +28,7 @@ void FUN_00399b44(StepObject *object)
     }
     u32 locked = (object->flags & STEP_LOCKED) >> 12;
     if (gameFlagIsSet(0x400) && flagBitIsSet(118) && object->state != 0) {
-        FUN_0039c728(object);
+        mapNaviDisplayUpdateDragScroll(object);
     }
     if (locked) {
         return;

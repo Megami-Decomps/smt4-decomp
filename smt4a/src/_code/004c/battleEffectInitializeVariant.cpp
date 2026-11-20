@@ -14,7 +14,7 @@ struct BattleEffectMainHeader {
 extern "C" {
 extern BattleEffectGlobals g_battleEffectSettings;
 s32 btlFindSelectionIndexByOrdinal(BtlMainStateA *, s32 side);
-void FUN_004cb9d0(BattleEffectSetup *);
+void battleEffectUpdateProjectionScale(BattleEffectSetup *);
 s32 idSetFindSubjectIndex(BtlMainStateA *, BattleEffectSetup *);
 u32 stateEntryFindById(BtlMainStateA *, u32 handle);
 f32 asdAnimGetTrackLastFrame(u32 handle, s32 index);
@@ -59,7 +59,7 @@ void battleEffectInitializeVariant(BtlMainStateA *battle, BattleEffectSetup *eff
             effect->position[0] = 0.0f;
             effect->position[1] = 0.0f;
             effect->position[2] = 0.0f;
-            FUN_004cb9d0(effect);
+            battleEffectUpdateProjectionScale(effect);
         }
         u32 initialValue = g_battleEffectSettings.defaultValue;
         effect->value6c = initialValue;

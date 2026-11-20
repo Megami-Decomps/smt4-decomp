@@ -1,4 +1,4 @@
-/* NON_MATCHING: instructions and schedule match retail; only the saved-register numbering differs (flag r5/value r7/entries r6 in retail). */
+/* NON_MATCHING: record addressing and saved-register allocation differ. */
 #include "gamedata/ItemFlagState.h"
 #include "gamedata/GameFlags.h"
 #include "gamedata/EncountData.h"
@@ -10,7 +10,7 @@ s32 gameFlagIsSet(u32);
 void weightedTableRollNextValue(u8, u8, s32);
 
 /* Reset the encounter roll states whose applying record would change with this flag. */
-void FUN_004bb6d8(u32 flag, u32 value)
+void encounterRefreshOnFlagChange(u32 flag, u32 value)
 {
     if (value != 0) {
         if (gameFlagIsSet(flag)) {
@@ -22,12 +22,13 @@ void FUN_004bb6d8(u32 flag, u32 value)
         }
     }
     void *table = dataTableGet(2, 0);
-    EncountRecordA *entries = encountRecordsA(table);
+    const EncountRecordA *entries = encountRecordsA(table);
     s32 count = dataTableGetCount(table);
     for (s32 i = 0; i < count; ++i) {
-        if (entries[i].requiredFlag == flag || entries[i].excludedFlag == flag) {
-            u8 groupId = entries[i].map;
-            u8 itemId = entries[i].area;
+        const EncountRecordA *record = &entries[i];
+        if (record->requiredFlag == flag || record->excludedFlag == flag) {
+            u8 groupId = record->map;
+            u8 itemId = record->area;
             ItemFlagCacheState *state = gameDataGetTableEntry(groupId, itemId);
             const EncountRecordA *previous = dataTable02FindConditionalMapRecord(groupId, itemId);
             gameFlagSetValue(flag, value, 0);

@@ -6,7 +6,7 @@
  *   code; a temporary with one use, so it is not written.)
  * - the selected item's id before screenShowMessage (substep 2) and in substep 10: retail loads the
  *   category into r1 and builds the two table addresses in r1-r3; this build uses r0-r2. */
-#include "classes/Obj536044.h"
+#include "shop/ShopSelectedItem.h"
 #include "sys/FlagWord.h"
 #include "ui/UiSpriteApi.h"
 #include "ui/UiControl.h"
@@ -66,14 +66,6 @@ u32 sysPlayVoice(u32 id); // declcheck: local (declared in the large map's heade
 void statusCameraRestore(s32 usePreset);
 
 } /* extern "C" */
-
-inline EquipmentMenuItem *Obj536044::selectedItem()
-{
-    EquipmentMenuCursor *list = &slotInfo[slot];
-    EquipmentMenuItem *items = lists[slot].items;
-
-    return &items[flaggedValueHolderGetTotal(&list->holder)];
-}
 
 inline s32 Obj536044::quantityPrice()
 {

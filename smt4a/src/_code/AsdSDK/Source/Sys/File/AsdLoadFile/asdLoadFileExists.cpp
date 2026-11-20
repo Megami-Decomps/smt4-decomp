@@ -1,5 +1,5 @@
 /* NON_MATCHING: native constructs a polymorphic stream through a VTT; its virtual-base hierarchy is not recovered by this scoped handle model. */
-#include <stdio.h>
+#include "AsdSDK/Source/Sys/File/AsdLoadPath.h"
 #include "nn/fs/ArchivePath.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/asdFileHashPackIsOpen.h"
@@ -9,7 +9,6 @@ struct FileProbeConversionState { u32 words[2]; };
 struct FileProbeHandle;
 
 extern "C" {
-extern u8 g_asdLoadFileUseRawPaths;
 void rt_aeabi_memclr(void *, u32);
 u32 FUN_001860e4(const char *);
 s32 refIsNullOrZero(FileProbeConversionState *);

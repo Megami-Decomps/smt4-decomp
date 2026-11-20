@@ -1,64 +1,61 @@
-/* NON_MATCHING: weight-branch layout, grouped weight arithmetic and flag masking/register allocation differ. */
 #include "common.h"
+#include "gamedata/EncountData.h"
+#include "gamedata/ItemFlagState.h"
+#include "shard/W4_W4Match5_DataTable.h"
+#include "util/Random.h"
 
-struct WeightedTableState { u16 value; u8 usedGroups, flags; };
-struct WeightedTableChoice { u16 value, weight, duration; };
-struct WeightedTableRecord {
-    u8 prefix[0xE];
-    u16 defaultValue;
-    WeightedTableChoice choices[24];
-};
 extern "C" {
-u8 FUN_002c0a84();
-WeightedTableState *gameDataGetTableEntry(u32 type, u32 id);
-const WeightedTableRecord *aocEntryFind(u32 type, u32 id);
-u32 randNextInRange(u32 maximum);
+ItemFlagCacheState *gameDataGetTableEntry(u32 map, u32 area);
 
-u32 weightedTableRollNextValue(u32 type, u32 id, s32 suppressNotification)
+/* Rolls the encounter table of (map, area) for the current phase: a held table counts its rolls down
+ * first, then the phase's slot applies by weight (below 1000 a percentage, above it a group of weights
+ * shared across phases, each group used once). Returns 1 when the table changed. */
+u32 weightedTableRollNextValue(u32 map, u32 area, s32 suppressNotification)
 {
     s32 phase = FUN_002c0a84();
-    WeightedTableState *state = gameDataGetTableEntry(type, id);
+    ItemFlagCacheState *state = gameDataGetTableEntry(map, area);
     if (phase == 0)
-        state->usedGroups = 0;
-    u8 flags = state->flags;
-    if ((flags & 0x1F) >= 2) {
-        state->flags = (flags & 0xE0) | ((flags - 1) & 0x1F);
+        state->count = 0;
+    if (state->bits.holdFrames > 1) {
+        state->bits.holdFrames--;
         return 0;
     }
-    state->flags = flags & 0xE0;
-    const WeightedTableRecord *record = aocEntryFind(type, id);
-    u16 nextValue = record->defaultValue;
-    const WeightedTableChoice *choice = &record->choices[phase];
-    if (choice->weight != 0) {
-        if (choice->weight < 1000) {
-            if (choice->weight > randNextInRange(99) && choice->value != 0)
-                nextValue = choice->value;
+    state->bits.holdFrames = 0;
+    const EncountRecord *record = aocEntryFind(map, area);
+    u16 tableId = record->initialTableId;
+    const EncountSlot *slot = &record->slots[phase];
+    if (slot->weight == 0) {
+        if (slot->tableId != 0)
+            tableId = slot->tableId;
+    } else {
+        if (slot->weight < 1000) {
+            u32 roll = randNextInRange(99);
+            if (roll < slot->weight && slot->tableId != 0)
+                tableId = slot->tableId;
         } else {
-            s32 group = choice->weight / 1000u;
+            s32 group = (u8)(slot->weight / 1000); /* the group's bit lives in the u8 mask */
             u32 groupBit = 1u << (group - 1);
-            if ((state->usedGroups & groupBit) == 0) {
+            if ((state->count & groupBit) == 0) {
                 u32 total = 0;
                 for (s32 index = 0; index < phase + 1; ++index) {
-                    s32 weight = record->choices[index].weight;
+                    s32 weight = record->slots[index].weight;
                     if (group * 1000 < weight && weight < (group + 1) * 1000)
                         total += weight - group * 1000;
                 }
-                if (randNextInRange(99) < total) {
-                    nextValue = choice->value;
-                    state->usedGroups |= groupBit;
+                u32 roll = randNextInRange(99);
+                if (roll < total) {
+                    tableId = slot->tableId;
+                    state->count |= groupBit;
                 }
             }
         }
-    } else if (choice->value != 0) {
-        nextValue = choice->value;
     }
-    if (state->value == nextValue)
+    if (state->value == tableId)
         return 0;
-    state->value = nextValue;
-    flags = state->flags;
-    state->flags = (flags & 0xE0) | (choice->duration & 0x1F);
-    if (suppressNotification == 0 && (flags & 0x40) != 0)
-        state->flags |= 0x20;
+    state->value = tableId;
+    state->bits.holdFrames = slot->holdFrames;
+    if (suppressNotification == 0 && state->bits.notify)
+        state->bits.changed = 1;
     return 1;
 }
 }

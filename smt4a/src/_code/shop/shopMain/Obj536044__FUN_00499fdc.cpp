@@ -1,5 +1,5 @@
 /* NON_MATCHING: the item-page address is scheduled after the cursor query, and the tab and item use different saved registers. */
-#include "common.h"
+#include "classes/Obj536044.h"
 #include "shard/Shard004A.h"
 #include "shop/EquipmentMenuPage.h"
 #include <stddef.h>
@@ -66,7 +66,6 @@ s32 FUN_0047fe44(u16 item);
 void sendEvent100020E(void);
 void sendEvent100020F(void);
 void sendEvent1000210(void);
-void FUN_00498494(ShopMainWork *work, s32 mode);
 s32 inputIsQuestRepeatRight(void);
 s32 FUN_004d0494(void);
 s32 recordGetModeForId(s32 id);
@@ -110,7 +109,7 @@ void _ZN9Obj53604412FUN_00499fdcEv(ShopMainWork *work)
     if ((work->tab != 8 || ((FUN_00498408(work, item) == 0 || FUN_001ba3d0(item) > 1) && FUN_0047fe44(item) == 0))
         && blocked != 0) {
         sendEvent100020E();
-        FUN_00498494(work, 13);
+        shopEnterQuantitySelection((Obj536044 *)work, 13);
         return;
     }
     if (inputIsQuestRepeatRight() != 0 || recordGetModeForId(work->leftRecord) == 6) {

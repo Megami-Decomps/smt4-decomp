@@ -7,7 +7,7 @@
 extern "C" {
 
 s32 goalConditionsSatisfied(u32 id);
-void FUN_004bb6d8(u32 flag, s32 value);
+void encounterRefreshOnFlagChange(u32 flag, s32 value);
 void clearTwoWords(void *words);
 void clearThreeWords(void *words);
 
@@ -73,7 +73,7 @@ u32 rosterAddUnit(u16 id)
         for (u32 flag = 0x500; flag < 0x520; flag++) {
             u8 *bits = (u8 *)reinterpret_cast<RosterView *>(gameFlagBlockGet());
 
-            FUN_004bb6d8(flag, 0);
+            encounterRefreshOnFlagChange(flag, 0);
             bits[flag >> 3] &= ~(1u << (flag & 7));
         }
     }

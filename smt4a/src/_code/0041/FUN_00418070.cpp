@@ -16,12 +16,12 @@ typedef struct GameFlagBlock418070 {
     /* 0x8E0 */ u16 activeEntry;
 } GameFlagBlock418070;
 
-void FUN_004bb6d8(u32 id, s32 value);
+void encounterRefreshOnFlagChange(u32 id, s32 value);
 
 static inline void gameFlagWrite(u32 id, u32 value)
 {
     u8 *bits = reinterpret_cast<GameFlagBlock418070 *>(gameFlagBlockGet())->bits;
-    FUN_004bb6d8(id, value);
+    encounterRefreshOnFlagChange(id, value);
     u32 index = id >> 3;
     if (value) {
         bits[index] |= 1 << (id & 7);

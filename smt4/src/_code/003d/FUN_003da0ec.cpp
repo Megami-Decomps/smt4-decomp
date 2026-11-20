@@ -23,7 +23,7 @@ int FUN_0034c7a8(unsigned int, float *);
 int animationSelectSecondPart(...);
 int animationSelectFirstPart(unsigned int);
 int deadEffectStartLoad(void);
-int FUN_003dc19c(int);
+int btlLoadSequenceEffects(int);
 void battleActionFinishPlacement(ActionController*);
 int nn_math_ARMv6_MTX34CopyAsm(...);
 int nw_ut_ResDicPatricia_Get(...);
@@ -93,7 +93,7 @@ extern int asdMdlManagerCreateFromSourceB(int, unsigned int, unsigned short);
 /* Supplied declaration required: animationSelectFirstPart. */
 /* Supplied declaration required: deadEffectStartLoad. */
 extern unsigned int _ZN9Obj4209ccC1Ev(void);
-/* Supplied declaration required: FUN_003dc19c. */
+/* Supplied declaration required: btlLoadSequenceEffects. */
 /* Supplied declaration required: battleActionFinishPlacement. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nw_ut_ResDicPatricia_Get. */
@@ -194,7 +194,7 @@ void FUN_003da0ec(int param_1)
   }
   switch(*(unsigned char *)(param_1 + 0x3040)) {
   case 1:
-    FUN_003dc19c(param_1);
+    btlLoadSequenceEffects(param_1);
     *(unsigned char *)(param_1 + 0x3040) = 2;
     break;
   case 2:

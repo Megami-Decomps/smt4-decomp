@@ -1,31 +1,16 @@
-#include <stdio.h>
+#include "AsdSDK/Source/Sys/File/AsdLoadPath.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
-extern u8 g_asdLoadFileUseRawPaths;
 void sysMemClear(void *buffer, u32 size);
-s32 asdLoadFileHasDevice(const char *path);
 void *asdMemoryAllocTracked(s32 heap, s32 alignment, s32 flags, u32 size, s32 fromFront);
 u32 asdFileEnqueueRead(const char *path, u8 flags, void (*callback)(void *), void *argument);
 void asdFileFinalizeCompletion(void *job);
 void asdFileRequestSetHeapKind(u32 handle, u8 flags);
 void optionalParameterTrySet(u32 handle, u32 priority);
 
-/* The format of a path without a device: under the ROM device (0x53D4C0). */
-static const char s_romPathFormat[] = "rom:/%s";
-
-// Start an asynchronous load and clear its optional completion result.
-/* Writes the full path of `path` into `destination`: as given when raw paths are on or it names a device, else under the default device. */
-static __inline void asdLoadFileBuildPath(char *destination, const char *path)
-{
-    if (g_asdLoadFileUseRawPaths != 0 || asdLoadFileHasDevice(path) != 0) {
-        sprintf(destination, path);
-    } else {
-        sprintf(destination, s_romPathFormat, path);
-    }
-}
-
+/* Starts an asynchronous load and clears its optional completion result. */
 void asdLoadFileAsyncByPath(const char *path, u32 *result, u32 flags, u32 arg, u32 arg2, u32 priority)
 {
     char fullPath[ASD_FILE_PATH_LEN];

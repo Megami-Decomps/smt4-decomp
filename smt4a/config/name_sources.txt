@@ -8492,3 +8492,17 @@
 0045af14 floatArrayConstruct inferred binds and zero-constructs an { f32 *values; u32 count; } array; neighbour of idArrayConstruct
 004cd340 unitApplyWeightedStatPoint inferred zeroes the weights of stats at 999, rolls randRange over the remaining total and adds one point to the stat drawn
 004fe7e4 btlReflectQueuePendingRosterFade inferred queues kind 0x2B/0x2C reflect actions for roster records flagged 0x10000 and clears the flag
+0045991c _ZN9Obj55bcccD1Ev evidence vtable store _ZTV9Obj55bccc+8; its constructor _ZN9Obj55bcccC1Ejjj sits just before; source is the native destructor (classes/Obj55bccc.h)
+002ef7f0 fsResultClassifyRestriction inferred same body as the smt4 function of that name
+0014287c asdFileStartWorkerThread inferred twin of smt4 FUN_0010d0f8
+0015a050 mtx44OrthoC inferred twin of smt4 FUN_002bbf8c
+0037a99c renderFillScreenColor inferred twin of smt4 FUN_002f51bc
+004cd960 statisticsRollAll inferred twin of smt4 FUN_003c25f0
+0053d4c0 g_asdRomPathFormat inferred size:0x8 the "rom:/%s" format the file loaders put unqualified paths under
+0051218c socketInitializeAllocatorStatics inferred creates the socket work-buffer heap and allocator used by socketInitializeWithWorkBuffer
+00498494 shopEnterQuantitySelection inferred changes the shop state and sets up the quantity stepper
+004ced50 partyNeedsRecovery inferred player, party and support-roster recovery checks
+004bb6d8 encounterRefreshOnFlagChange inferred conditionally invalidates the encounter roll state
+004cb9d0 battleEffectUpdateProjectionScale inferred writes the battle effect's camera projection scale
+004a41d8 compendiumUpdateSelectedEntry inferred updates the selected compendium entry's price, registration and details
+004d542c btlCameraApplyEditorValue inferred applies an edited camera position, angle, distance and flags

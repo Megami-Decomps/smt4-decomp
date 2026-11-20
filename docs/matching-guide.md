@@ -171,6 +171,11 @@ difference a register tie-break.
 - A switch case whose jump-table entry points into another case's tail is a fall-through
   (`case A: …; /* fall through */ case B:`).
 - Two identical branches that retail cross-jumps come from one inline helper called in both.
+- An early-return arm whose final call retail cross-jumps into the other path's call to the same
+  function (a `b` into the other arm's `bl`) is an if/else with the call in both arms, the early
+  condition joined into the test: `if (stockOnly == 0 && row < 1) { …; f(unit, index, 0); } else { …;
+  f(entry, index, 1); }` made smt4 `FUN_0026d3e0` and smt4a `partyPanelRefreshSelectedItemValues`
+  IDENTICAL (wave 58), where `if (…) { …; f(…); return; }` followed by the tail did not.
 - A load whose value retail never uses (`ldrb r0, [r1, #43]` between the stores, nothing reads `r0`) can be the
   condition of an `if`/`else` whose two arms do the same stores: armcc merges the arms and drops the compare but
   keeps the load (`if (definition->flags != 0) { x = 25.0f; y = 25.0f; } else { x = 25.0f; y = 25.0f; }`, smt4
@@ -302,6 +307,11 @@ asks for.
   do not always schedule alike: once a helper has evidence, try both (the basename helper of
   `FUN_003dbb40`, the same expression as in `FUN_003dadd8` and `FUN_003dba3c`; the map-camera accessor
   of smt4a `FUN_002442ac`, read twice around a call).
+- Retail copying fields one `ldr`/`str` pair at a time where the build batches the same copies through VFP
+  registers (`vldr`/`vstr` runs) is a plain `static` helper armcc inlined late, called once per copy: smt4
+  `FUN_001569d8` and its smt4a twin `FUN_004491fc` (15 calls of `resetCursorRewind`, `current = begin`) are
+  IDENTICAL with it and 60 lines off with the same body as `static __inline` (wave 58). A plain `static`
+  search helper also gave retail's pair-unrolled loop in smt4 `FUN_0024d434`/`FUN_0023cd08`.
 - A bounds-checked row getter (`if (i >= count) return NULL; return base + i * size;`) as a
   `static __inline` gives retail's `movcs r0, rN; bcs`.
 - A state machine's `stepEnter(step, state)` helper that clears the counters and then stores the
@@ -316,8 +326,16 @@ asks for.
   `stereoCameraSetPerspective` (both games), and `MTX44Transpose` returns its destination.
 - An inlined orthographic projection (zero stores early, then elements 0/3/5/7/10/11, pooled as 0.0, far, 1.0, 2.0)
   is `MTX44Ortho` in the SDK's fast C form: the three reciprocals and the six computed elements into locals first,
-  then the ten constant stores, then the six computed ones. smt4a keeps an out-of-line copy, `FUN_0015a050`
-  (32 → 20 with that body); smt4 `titleLogoDraw` inlines it (93 → 44). Neither matches yet.
+  then the ten constant stores, then the six computed ones, all through the SDK's two-dimensional view
+  `f32 (*const m)[4] = pOut->m;` (`m[0][1] = 0.0f; …`): with flat `m[k]` stores the out-of-line copies (smt4
+  `FUN_002bbf8c`, smt4a `FUN_0015a050`) stay 32/20 lines off, with the 2-D stores both are IDENTICAL (wave 58).
+  smt4 `titleLogoDraw` inlines it and stays 44 lines off either way (its frame layout).
+- A depth bias packed to the GPU's float24 (fraction `>> 7` in both arms, `orr` of the sign, an unpredicated
+  exponent mask) is NintendoWare's float-to-24-bit conversion written as the library has it: sign, exponent and
+  fraction split first, `bits24 |= sign ? 0x800000 : 0;`, the exponent rebiased (`- 127 + 63`, 0 for ±0), then
+  `if (exponent < 0) { } else if (exponent > 0x7f) bits24 = 0x7f << 16; else { fraction, exponent }`. The empty
+  underflow arm is the library's and changes the code (21 lines without it). `gpuEncodeDepthBias`
+  (`gfx/ModelDepthBias.h`, `static __inline`) made smt4 `FUN_0034914c` IDENTICAL (wave 58).
 - A thread start (`nn::os::Thread::Start`) inlined into its caller is a `static __inline` helper that
   takes the thread's bound argument by value and passes its address (`&argument`) with the argument
   descriptor, then reports a failed result (`uniteStartThread`, `campCecStartThread`,
@@ -397,8 +415,12 @@ More on classes, constructors and destructors is in [C++](style-and-naming.md#c)
   (`push; ldr; vpush; sub sp`, titleConfigDraw) is a plain variadic call: call `__2sprintf` through
   `runtime/Stdio.h` there. A `sprintf` whose format armcc cannot read
   (an `extern const char DAT_x[]`) becomes `__c89sprintf`, which retail never calls: define the format
-  in the unit with the bytes at that address (`static const char s_romPathFormat[] = "rom:/%s";`,
-  smt4a `asdLoadFileAsyncByPath`); relink places it there.
+  in the unit with the bytes at that address (`static const char s_romPathFormat[] = "rom:/%s";`);
+  relink places it there. When two units use the same literal (the original's one file pooled it once:
+  smt4a `asdLoadFileAsyncByPath` and `asdLoadFileSync`), neither can own it, because relink places one
+  object at an address: both name the image's global (`g_asdRomPathFormat`) and pass it to `__2sprintf`
+  from `runtime/Stdio.h` (`AsdSDK/Source/Sys/File/AsdLoadPath.h`), keeping `<stdio.h>` `sprintf` for the
+  arm whose format is a plain pointer.
 - Two format strings a unit owns at adjacent addresses with word padding between them (smt4
   `asdLoadFileAsync`'s `"patch:/%s"` at 0x409800 and `"rom:/%s"` at 0x40980c) are one `static const` struct of two
   `char` arrays sized to the padding: armcc emits separate `static const char[]` objects unpadded and in reverse

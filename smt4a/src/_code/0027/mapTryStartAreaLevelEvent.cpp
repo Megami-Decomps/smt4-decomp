@@ -1,4 +1,3 @@
-/* NON_MATCHING: the area read may be an inlined getter; the flag narrowing and zero-return blocks also differ. */
 #include "util/Random.h"
 #include "map/mapDepart.h"
 #include "gamedata/EncountData.h"
@@ -14,30 +13,32 @@ void gameFlagsWriteBit(s32 flag, s32 value);
 /* Fires the current area's one-time event when the party's level is below its threshold. */
 s32 mapTryStartAreaLevelEvent(void)
 {
-    s32 id = g_gameState.areaId;
+    enum { AREAS_PER_EVENT_GROUP = 20 };
+    s32 id;
     switch (g_gameState.mapId) {
     case 28:
+        id = g_gameState.areaId;
         break;
     case 29:
-        id += 20;
+        id = g_gameState.areaId + AREAS_PER_EVENT_GROUP;
         break;
     case 30:
-        id += 40;
+        id = g_gameState.areaId + 2 * AREAS_PER_EVENT_GROUP;
         break;
     case 31:
-        id += 60;
+        id = g_gameState.areaId + 3 * AREAS_PER_EVENT_GROUP;
         break;
     default:
         return 0;
     }
-    if (id != 0) {
-        s16 flag = (s16)id;
-        if (gameFlagsTestThirdBank(flag) == 0 && flagsBit7Get(g_gameState.mapId, g_gameState.areaId) != 0) {
-            EncountRecordA *record = dataTable02FindConditionalMapRecord(g_gameState.mapId, g_gameState.areaId);
-            if ((s32)partyGetAverageLevel(2) < record->levelThreshold) {
-                gameFlagsWriteBit(flag, 1);
-                return randRange(1) + 1;
-            }
+    if (id != 0 && gameFlagsTestThirdBank((s16)id) == 0) {
+        if (flagsBit7Get(g_gameState.mapId, g_gameState.areaId) == 0) {
+            return 0;
+        }
+        const EncountRecordA *record = dataTable02FindConditionalMapRecord(g_gameState.mapId, g_gameState.areaId);
+        if ((s32)partyGetAverageLevel(2) < record->levelThreshold) {
+            gameFlagsWriteBit((s16)id, 1);
+            return randRange(1) + 1;
         }
     }
     return 0;

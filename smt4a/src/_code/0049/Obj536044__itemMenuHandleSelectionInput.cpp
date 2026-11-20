@@ -1,4 +1,5 @@
 /* NON_MATCHING: category/choice address preparation and state/constant register allocation differ; -O2 candidate. */
+#include "classes/Obj536044.h"
 #include "shard/W6_W6Match6_SpritePresetBank.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 
@@ -40,7 +41,6 @@ u32 shopGetEntryPrice(const EquipmentChoice *);
 u32 btlRollClamped(u16, u32);
 void sendEvent100020E();
 void sendEvent100020F();
-void FUN_00498494(EquipmentMenu *, s32);
 u32 inputIsQuestMenuPressed();
 u32 inputIsQuestCancelPressed();
 void FUN_0038b010(u8 value);
@@ -82,7 +82,7 @@ void _ZN9Obj53604428itemMenuHandleSelectionInputEv(EquipmentMenu *menu)
     }
     if (eligible && confirmed) {
         sendEvent100020E();
-        FUN_00498494(menu, 12);
+        shopEnterQuantitySelection((Obj536044 *)menu, 12);
         return;
     }
     if (inputIsQuestMenuPressed()) {

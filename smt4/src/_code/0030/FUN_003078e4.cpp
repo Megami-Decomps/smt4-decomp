@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail exits with bxls before pushing registers (shrink-wrapped empty-count guard) and uses r0/r1 differently; armcc here pushes first. The owner's group/params pair is now a sub-block so the writeback load matches. */
+/* NON_MATCHING: the empty-count exit before the push (bxls) and the per-iteration colour address now match retail; retail sets the index register before loading the count (the build: after, from a moved load order) and allocates -1, the halfword index and the colour byte to r6/r5/r7 where armcc uses r5/r7/r4. */
 #include "common.h"
 #include "gfx/Vec4.h"
 
@@ -45,10 +45,11 @@ void FUN_003078e4(GroupOwner *owner)
     ColoredIndexedVertex *vertex = group->vertices;
     for (u32 i = 0; i < count; i++) {
         Vec4 *color = &group->table->colors[(u16)i];
-        color->x = DAT_00472560[0] * (1.0f / 255.0f) * (1.0f / 255.0f);
-        color->y = DAT_00472560[1] * (1.0f / 255.0f) * (1.0f / 255.0f);
-        color->z = DAT_00472560[2] * (1.0f / 255.0f) * (1.0f / 255.0f);
-        color->w = DAT_00472560[3] * (1.0f / 255.0f) * (1.0f / 255.0f);
+        const u8 *rgba = DAT_00472560;
+        color->x = rgba[0] * (1.0f / 255.0f) * (1.0f / 255.0f);
+        color->y = rgba[1] * (1.0f / 255.0f) * (1.0f / 255.0f);
+        color->z = rgba[2] * (1.0f / 255.0f) * (1.0f / 255.0f);
+        color->w = rgba[3] * (1.0f / 255.0f) * (1.0f / 255.0f);
         vertex->index = -1;
         vertex++;
     }

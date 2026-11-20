@@ -4,7 +4,7 @@
 
 extern "C" {
 u8 *gameFlagBlockGet(void);
-void FUN_004bb6d8(u32, s32);
+void encounterRefreshOnFlagChange(u32, s32);
 
 /* Sets or clears the flag bit `id` in the flag block. */
 static __inline void flagBitWrite(u8 *flags, u32 id, s32 value)
@@ -20,7 +20,7 @@ void gameFlagSetValue(u32 id, s32 value, s32 notify)
 {
     u8 *flags = gameFlagBlockGet();
     if (notify != 0)
-        FUN_004bb6d8(id, value);
+        encounterRefreshOnFlagChange(id, value);
     flagBitWrite(flags, id, value);
 }
 }

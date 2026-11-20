@@ -1,101 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `weightedTableRollNextValue` (_code @ 0x148d68, 0x1bc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "gamedata/EncountData.h"
 #include "gamedata/GameDataEntries.h"
+#include "code/Code0015.h"
+#include "util/Random.h"
 
 extern "C" {
-
-extern unsigned int randRange(unsigned int);
-extern int dataTable02FindConditionalMapRecord(unsigned int, unsigned int);
-extern int FUN_0015fb68(void);
-
-
-unsigned int weightedTableRollNextValue(unsigned int param_1,unsigned int param_2,int param_3)
-
+/* Rolls the encounter table of (map, area) for the current phase: a held table counts its rolls down
+ * first, then the phase's slot applies by weight (below 1000 a percentage, above it a group of weights
+ * shared across phases, each group used once). Returns 1 when the table changed. */
+u32 weightedTableRollNextValue(u32 map, u32 area, s32 suppressNotification)
 {
-  unsigned int temp_v0;
-  unsigned char temp_v1;
-  short temp_v2;
-  unsigned char temp_v3;
-  int temp_v4;
-  short *psVar6;
-  int temp_v5;
-  unsigned short *puVar8;
-  int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  short *psVar12;
-  short temp_v9;
-  unsigned int temp_v10;
-  
-  temp_v4 = FUN_0015fb68();
-  psVar6 = (short *)reinterpret_cast<short *>(gameDataGetTableEntry(param_1, param_2));
-  if (temp_v4 == 0) {
-    *(unsigned char *)(psVar6 + 1) = 0;
-  }
-  temp_v1 = *(unsigned char *)((int)psVar6 + 3);
-  if ((temp_v1 & 0x1f) >= 2) {
-    *(unsigned char *)((int)psVar6 + 3) = (temp_v1 & 0xe0) | ((temp_v1 - 1) & 0x1f);
-    return 0;
-  }
-  *(unsigned char *)((int)psVar6 + 3) = temp_v1 & 0xe0;
-  temp_v5 = dataTable02FindConditionalMapRecord(param_1,param_2);
-  temp_v9 = *(short *)(temp_v5 + 0x12);
-  temp_v6 = temp_v5 + temp_v4 * 6;
-  psVar12 = (short *)(temp_v6 + 0x14);
-  temp_v7 = (unsigned int)*(unsigned short *)(temp_v6 + 0x16);
-  if (temp_v7 != 0) {
-    if (999 >= temp_v7) {
-      temp_v7 = randRange(99);
-      if (*(unsigned short *)(temp_v6 + 0x16) > temp_v7) {
-        temp_v2 = *psVar12;
-        if (temp_v2 != 0) {
-          temp_v9 = temp_v2;
-        }
-      }
+    s32 phase = FUN_0015fb68();
+    ItemFlagCacheState *state = gameDataGetTableEntry(map, area);
+    if (phase == 0)
+        state->count = 0;
+    if (state->bits.holdFrames > 1) {
+        state->bits.holdFrames--;
+        return 0;
     }
-    else {
-      temp_v7 = (temp_v7 * 0x4189 + 0x4189) >> 0x18;
-      temp_v0 = 1 << ((temp_v7 - 1) & 0xff);
-      if ((*(unsigned char *)(psVar6 + 1) & temp_v0) == 0) {
-        temp_v4 = temp_v4 + 1;
-        temp_v10 = 0;
-        if (0 < temp_v4) {
-          puVar8 = (unsigned short *)(temp_v5 + 0x16);
-          do {
-            temp_v8 = (unsigned int)*puVar8;
-            if ((temp_v7 * 1000 < temp_v8) && (temp_v8 < (temp_v7 + 1) * 1000)) {
-              temp_v10 = temp_v10 + temp_v7 * -1000 + temp_v8;
+    state->bits.holdFrames = 0;
+    const EncountRecordA *record = dataTable02FindConditionalMapRecord(map, area);
+    u16 tableId = record->initialTableId;
+    const EncountSlot *slot = &record->slots[phase];
+    if (slot->weight == 0) {
+        if (slot->tableId != 0)
+            tableId = slot->tableId;
+    } else {
+        if (slot->weight < 1000) {
+            u32 roll = randRange(99);
+            if (roll < slot->weight && slot->tableId != 0)
+                tableId = slot->tableId;
+        } else {
+            s32 group = (u8)(slot->weight / 1000); /* the group's bit lives in the u8 mask */
+            u32 groupBit = 1u << (group - 1);
+            if ((state->count & groupBit) == 0) {
+                u32 total = 0;
+                for (s32 index = 0; index < phase + 1; ++index) {
+                    s32 weight = record->slots[index].weight;
+                    if (group * 1000 < weight && weight < (group + 1) * 1000)
+                        total += weight - group * 1000;
+                }
+                u32 roll = randRange(99);
+                if (roll < total) {
+                    tableId = slot->tableId;
+                    state->count |= groupBit;
+                }
             }
-            temp_v4 = temp_v4 - 1;
-            puVar8 = puVar8 + 3;
-          } while (temp_v4 != 0);
         }
-        temp_v7 = randRange(99);
-        if (temp_v7 < temp_v10) {
-          temp_v9 = *psVar12;
-          *(unsigned char *)(psVar6 + 1) = *(unsigned char *)(psVar6 + 1) | (unsigned char)temp_v0;
-        }
-      }
     }
-  }
-  else {
-    temp_v2 = *psVar12;
-    if (temp_v2 != 0) {
-      temp_v9 = temp_v2;
-    }
-  }
-  if (*psVar6 == temp_v9) {
-    return 0;
-  }
-  *psVar6 = temp_v9;
-  temp_v1 = *(unsigned char *)((int)psVar6 + 3);
-  temp_v3 = (temp_v1 & 0xe0) | ((unsigned char)*(unsigned short *)(temp_v6 + 0x18) & 0x1f);
-  *(unsigned char *)((int)psVar6 + 3) = temp_v3;
-  if ((param_3 == 0) && ((temp_v1 & 0x40) != 0)) {
-    *(unsigned char *)((int)psVar6 + 3) = temp_v3 | 0x20;
-  }
-  return 1;
+    if (state->value == tableId)
+        return 0;
+    state->value = tableId;
+    state->bits.holdFrames = slot->holdFrames;
+    if (suppressNotification == 0 && state->bits.notify)
+        state->bits.changed = 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

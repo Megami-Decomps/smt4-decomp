@@ -7828,3 +7828,16 @@
 0045af14 floatArrayConstruct
 004cd340 unitApplyWeightedStatPoint
 004fe7e4 btlReflectQueuePendingRosterFade
+0045991c _ZN9Obj55bcccD1Ev
+002ef7f0 fsResultClassifyRestriction
+0014287c asdFileStartWorkerThread
+0015a050 mtx44OrthoC
+0037a99c renderFillScreenColor
+004cd960 statisticsRollAll
+0051218c socketInitializeAllocatorStatics
+00498494 shopEnterQuantitySelection
+004ced50 partyNeedsRecovery
+004bb6d8 encounterRefreshOnFlagChange
+004cb9d0 battleEffectUpdateProjectionScale
+004a41d8 compendiumUpdateSelectedEntry
+004d542c btlCameraApplyEditorValue

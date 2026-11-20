@@ -13,6 +13,16 @@
 #include "gamedata/DataTable.h"
 #include <stddef.h>
 
+/* One encounter table an encounter record can roll in a phase (weightedTableRollNextValue), both
+ * games. */
+struct EncountSlot {
+    /* 0x00 */ u16 tableId;               /* row of section 1; 0 = keep the current one */
+    /* 0x02 */ u16 weight;                /* below 1000 a percentage chance; from 1000 on, group
+                                           * (weight / 1000) shares the remainders; 0: see the roller */
+    /* 0x04 */ u16 holdFrames;            /* rolls the chosen table is kept for */
+};
+typedef EncountSlot EncountSlotA;
+
 /* IV: one 0xA0-byte row of EncountData.tbb table 0 (data table 2, section 0). */
 struct EncountRecord {
     /* 0x00 */ u8 map;
@@ -20,13 +30,8 @@ struct EncountRecord {
     /* 0x02 */ u8 unk02[8];
     /* 0x0A */ u16 requiredFlag;          /* 0 = none; else a game flag that must be set */
     /* 0x0C */ u16 excludedFlag;          /* 0 = none; else a game flag that must be clear */
-    /* 0x0E */ u8 unk0E[0x92];
-};
-
-/* Apocalypse: one encounter table an encounter record can roll. */
-struct EncountSlotA {
-    /* 0x00 */ u16 tableId;               /* row of section 1 */
-    /* 0x02 */ u16 unk02[2];
+    /* 0x0E */ u16 initialTableId;        /* the roll state's initial encounter table */
+    /* 0x10 */ EncountSlot slots[24];
 };
 
 /* Apocalypse: one 0xA4-byte row of EncountData.tbb table 0 (data table 2, section 0). */
@@ -47,7 +52,9 @@ struct EncountRecordA {
 typedef char EncountRecordLayoutCheck[
     sizeof(EncountRecord) == 0xA0 &&
     offsetof(EncountRecord, requiredFlag) == 0x0A &&
-    sizeof(EncountSlotA) == 6 &&
+    offsetof(EncountRecord, initialTableId) == 0x0E &&
+    offsetof(EncountRecord, slots) == 0x10 &&
+    sizeof(EncountSlot) == 6 &&
     sizeof(EncountRecordA) == 0xA4 &&
     offsetof(EncountRecordA, levelThreshold) == 0x08 &&
     offsetof(EncountRecordA, requiredFlag) == 0x0E &&

@@ -1,4 +1,4 @@
-/* NON_MATCHING: special-mode block placement and copy/zero register scheduling differ. */
+/* NON_MATCHING: name-copy register and special-mode zero scheduling differ; the retail tail call is linker-NOPed. */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include <stddef.h>
 #include "code/Code002b_Smt4a.h"
@@ -42,27 +42,29 @@ void FUN_00485308(StateSetterSpriteWork* work)
         offsetof(ConfirmationView, scriptStarted) == 0x270 &&
         offsetof(ConfirmationView, sprite) == 0x3AC ? 1 : -1];
     ConfirmationView* confirmation = reinterpret_cast<ConfirmationView*>(work);
-    if (confirmation->scriptStarted != 0) {
-        if (FUN_00318dc4() != 0) {
-            buttonHelpSetPanelState(0);
+    if (confirmation->scriptStarted == 0) {
+        if (messageMainIsIdle() != 0) {
+            scrScriptProcessStartEntry(confirmation->script, confirmation->mode == 4 ? 2 : 3);
+            confirmation->scriptStarted = 1;
         }
-        if (scrRunOpcodesStub(confirmation->script) == 2) {
-            if (messageGetChoiceResult() != 0) {
-                if (confirmation->mode != 4) {
-                    confirmation->name = confirmation->savedName;
-                } else {
-                    confirmation->editing = 0;
-                    uiSpriteSetImageKeyframe(&confirmation->sprite, 0, 1);
-                    buttonHelpTeardownSlots();
-                    stateSetterEnterState(work, 8);
-                    return;
-                }
+        return;
+    }
+    if (FUN_00318dc4() != 0) {
+        buttonHelpSetPanelState(0);
+    }
+    if (scrRunOpcodesStub(confirmation->script) == 2) {
+        if (messageGetChoiceResult() != 0) {
+            if (confirmation->mode != 4) {
+                confirmation->name = confirmation->savedName;
+            } else {
+                confirmation->editing = 0;
+                uiSpriteSetImageKeyframe(&confirmation->sprite, 0, 1);
+                buttonHelpTeardownSlots();
+                stateSetterEnterState(work, 8);
+                return;
             }
-            stateSetterEnterState(work, 2);
         }
-    } else if (messageMainIsIdle() != 0) {
-        scrScriptProcessStartEntry(confirmation->script, confirmation->mode == 4 ? 2 : 3);
-        confirmation->scriptStarted = 1;
+        stateSetterEnterState(work, 2);
     }
 }
 }

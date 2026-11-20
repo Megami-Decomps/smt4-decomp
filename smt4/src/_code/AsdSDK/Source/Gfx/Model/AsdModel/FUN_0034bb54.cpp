@@ -1,4 +1,4 @@
-/* NON_MATCHING: camera selection now matches retail; the float24 depth-bias packing schedules its sign/exponent/fraction extraction after the zero test (retail extracts all three first and shifts the fraction in each arm), and the render flags are loaded into r1 where retail uses r0. */
+/* NON_MATCHING: camera selection and the float24 depth-bias packing match retail; the global's address and the fraction trade r3/r2, and the render flags are loaded into r1 (with the context move hoisted above the store) where retail uses r0. */
 #include "AsdSDK/Source/Gfx/Model/AsdModelRender.h"
 #include "shard/S1ListPanel.h"
 #include "gfx/ModelDepthBias.h"

@@ -146,7 +146,7 @@ void rt_memclr(void *data, u32 size);
 void FUN_0033f81c(void);
 void FUN_002c4924(void);
 void inventoryResetSavedTableEntries(void);
-void FUN_003c25f0(void);
+void statisticsRollAll(void);
 void FUN_002cf3b4(void);
 
 /* Resets the whole game world for a new game: clears the main blocks, restores the party slot defaults, rebuilds
@@ -297,7 +297,7 @@ void gameWorldResetForNewGame(void)
     FUN_0033f81c();
     FUN_002c4924();
     inventoryResetSavedTableEntries();
-    FUN_003c25f0();
+    statisticsRollAll();
     rt_memclr(reinterpret_cast<u8 *>(world) + 0x1ec18, 0x80);
     FUN_002cf3b4();
 }

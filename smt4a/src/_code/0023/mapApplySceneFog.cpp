@@ -1,8 +1,9 @@
-/* NON_MATCHING: retail loads the fog offset (0.0f) and scale (1.0f) before packing the colour.
- * The build has them reversed, loads them later, and pairs their stores. */
-#include "common.h"
+/* NON_MATCHING: retail loads the two fog defaults before the color packing, which also uses different registers. */
+#include "Model/MoriModelManager.h"
+#include "classes/Obj557b68.h"
+#include <string.h>
 
-/* A color with an extra mode byte in place of alpha. */
+/* The high byte carries the fog mode rather than opacity. */
 struct ColorRgbm {
     u8 r;
     u8 g;
@@ -10,27 +11,19 @@ struct ColorRgbm {
     u8 mode;
 };
 
-/* The light the registry's scene object holds. */
-struct RegistryScene {
-    /* 0x000 */ u8 unk000[0x17c];
-    /* 0x17c */ f32 x;
-    /* 0x180 */ f32 y;
-    /* 0x184 */ f32 unk184;
-    /* 0x188 */ f32 unk188;
-    /* 0x18c */ f32 z;
-    /* 0x190 */ ColorRgbm color;
-};
+/* Sets the same five range and falloff fields initialized by moriSceneSetFogDefaults. */
+static __inline void moriSceneSetFogRange(Obj557b68 *scene, f32 start, f32 end, f32 offset, f32 scale, f32 power)
+{
+    scene->fogOffset = offset;
+    scene->fogScale = scale;
+    scene->fogPower = power;
+    scene->fogStart = start;
+    scene->fogEnd = end;
+}
 
-struct HandleRegistryView {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ RegistryScene *scene;
-};
-
-extern "C" {
-extern HandleRegistryView *g_handleRegistry;
-
-/* Sets the scene light's color (components 0..255 as floats), mode (0, 1 or 2) and position. */
-void mapApplySceneFog(s32 mode, ColorRgbm color, f32 red, f32 green, f32 blue, f32 x, f32 y, f32 z)
+/* Applies distance fog to the render scene using float RGB components in the range 0..255. */
+extern "C" void mapApplySceneFog(s32 mode, ColorRgbm color, f32 red, f32 green, f32 blue,
+                                 f32 start, f32 end, f32 power)
 {
     color.r = (u32)red;
     color.g = (u32)green;
@@ -46,12 +39,7 @@ void mapApplySceneFog(s32 mode, ColorRgbm color, f32 red, f32 green, f32 blue, f
         color.mode = 2;
         break;
     }
-    RegistryScene *scene = g_handleRegistry->scene;
-    scene->x = x;
-    scene->y = y;
-    scene->unk184 = 1.0f;
-    scene->unk188 = 0.0f;
-    scene->z = z;
-    scene->color = color;
-}
+    Obj557b68 *scene = g_handleRegistry->scene();
+    moriSceneSetFogRange(scene, start, end, 0.0f, 1.0f, power);
+    memcpy(scene->fogColor, &color, sizeof(color));
 }

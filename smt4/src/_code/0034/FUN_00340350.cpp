@@ -1,4 +1,4 @@
-/* NON_MATCHING: fog color conversion order, VFP save grouping and depth-range arithmetic scheduling differ. */
+/* NON_MATCHING: the near distance is shared by both range ends as in retail; the colour/range values take other VFP registers (retail: red, green in s16-s17, the range in s18-s19, so both pairs are stored with vstmia), retail addresses the range through a written-back pointer to its offset field, and the mode stores are shared differently. */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 struct ModelFogSettings {
@@ -26,8 +26,10 @@ u32 asdModelIdListGet(s32 index, s32 list);
 // Apply normalized fog color and mapped depth range to the primary model.
 void FUN_00340350(const ModelFogSettings *settings)
 {
-    f32 start = (f32)settings->start * 0.001f + 25570.0f;
-    f32 end = (f32)settings->start * 0.001f + (f32)settings->distance * 0.001f + 25570.0f;
+    f32 nearDistance = (f32)settings->start * 0.001f;
+    f32 farDistance = nearDistance + (f32)settings->distance * 0.001f;
+    f32 start = nearDistance + 25570.0f;
+    f32 end = farDistance + 25570.0f;
     f32 red = (f32)settings->red * 0.003921569f;
     f32 green = (f32)settings->green * 0.003921569f;
     f32 blue = (f32)settings->blue * 0.003921569f;

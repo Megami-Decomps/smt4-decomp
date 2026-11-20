@@ -8,7 +8,9 @@ struct BattleEffectSetup {
     /* 0x00c */ f32 position[3];
     /* 0x018 */ u8 unk18[0x24];
     /* 0x03c */ u8 variant;
-    /* 0x03d */ u8 unk3d[0x13];
+    /* 0x03d */ u8 unk3d[3];
+    /* 0x040 */ f32 scale;
+    /* 0x044 */ u8 unk44[0xC];
     /* 0x050 */ u32 flags;
     /* 0x054 */ u8 unk54[4];
     /* 0x058 */ u32 renderFlags;

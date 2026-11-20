@@ -62,7 +62,7 @@ int FUN_003d6644(...);
 int FUN_003d6df0(...);
 int transitionClearAxisVectors(...);
 int FUN_003d86a0(...);
-int FUN_003de758(...);
+int btlReflectQueuePendingRosterFade(...);
 
 int FUN_0023c638(...);
 int asdModelClearSlotColors(...);
@@ -193,7 +193,7 @@ extern int handlePoolRequestIsDone(int, int);
 /* Supplied declaration required: btlEffectDisableModels. */
 /* Supplied declaration required: FUN_003d9f74. */
 /* Supplied declaration required: keyedValueFindPair. */
-/* Supplied declaration required: FUN_003de758. */
+/* Supplied declaration required: btlReflectQueuePendingRosterFade. */
 
 
 unsigned int FUN_00344f5c(int *param_1)
@@ -807,7 +807,7 @@ LAB_00345938:
     }
     break;
   case ' ':
-    FUN_003de758(0,*(unsigned int *)(psVar2 + 4));
+    btlReflectQueuePendingRosterFade(0,*(unsigned int *)(psVar2 + 4));
     break;
   case '!':
   case '\"':

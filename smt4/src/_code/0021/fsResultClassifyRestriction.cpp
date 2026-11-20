@@ -4,7 +4,7 @@
 #include "shard/W6_W6Match3_EmitterRecord.h"
 
 extern "C" {
-nn::Result FUN_001db8fc(void);
+u32 FUN_001db8fc(void);
 
 /* Classifies the current filesystem result and optionally displays its restriction message. */
 u32 fsResultClassifyRestriction(u32 context, s32 message)

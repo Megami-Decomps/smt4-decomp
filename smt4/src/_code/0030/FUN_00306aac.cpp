@@ -1,4 +1,4 @@
-/* NON_MATCHING: same loop; retail tests the count with an unsigned `bxls lr` guard before the push and keeps the index in r1 from the start, this build emits `bxeq lr` and a different register assignment. */
+/* NON_MATCHING: written as its siblings FUN_00316a20/FUN_003078e4: the empty-count exit before the push (bxls), the written-back links pointer and the per-iteration colour address match retail; -1, the halfword index and the colour byte take other registers. */
 #include "common.h"
 #include "gfx/VertexColor.h"
 
@@ -22,10 +22,14 @@ struct Info {
     /* 0x38 */ u32 count;
 };
 
+struct MeshLinks {
+    /* 0x00 */ Mesh *mesh;
+    /* 0x04 */ Info *info;
+};
+
 struct Object {
     /* 0x00 */ u8 unk00[0x3C];
-    /* 0x3C */ Mesh *mesh;
-    /* 0x40 */ Info *info;
+    /* 0x3C */ MeshLinks links;
 };
 
 extern "C" u8 DAT_00472560[4];
@@ -33,23 +37,19 @@ extern "C" u8 DAT_00472560[4];
 /* Gives every vertex the colour (scaled from bytes) and marks every record unused. */
 extern "C" void FUN_00306aac(Object *object)
 {
-    Mesh *mesh = object->mesh;
-    Info *info = object->info;
-    u32 count = info->count;
+    MeshLinks *links = &object->links;
+    Mesh *mesh = links->mesh;
+    u32 count = links->info->count;
     Record *record = mesh->records;
-    u32 i;
 
-    if (count == 0) {
-        return;
-    }
-    for (i = 0; i < count; i++) {
+    for (u32 i = 0; i < count; i++) {
         VertexColor *vertex = &mesh->geometry->vertices[(u16)i];
-        const f32 scale = 1.0f / 255.0f;
 
-        vertex->r = DAT_00472560[0] * scale * scale;
-        vertex->g = DAT_00472560[1] * scale * scale;
-        vertex->b = DAT_00472560[2] * scale * scale;
-        vertex->a = DAT_00472560[3] * scale * scale;
+        const u8 *rgba = DAT_00472560;
+        vertex->r = rgba[0] * (1.0f / 255.0f) * (1.0f / 255.0f);
+        vertex->g = rgba[1] * (1.0f / 255.0f) * (1.0f / 255.0f);
+        vertex->b = rgba[2] * (1.0f / 255.0f) * (1.0f / 255.0f);
+        vertex->a = rgba[3] * (1.0f / 255.0f) * (1.0f / 255.0f);
         record->id = -1;
         record++;
     }

@@ -1,7 +1,6 @@
-/* NON_MATCHING: 29 lines (9 by shape). The widgets' unit id, cost and value go through one-instruction accessors
- * armlink inlined (partyWidgetGetUnitId, partyWidgetGetCost, partyWidgetSetCost, partyWidgetSetValue: inlined.txt
- * rows). Retail places the paged-layout block of a direct refresh before the paged block of the list case (here
- * after it, so the shared `- 4` moves with it), and the party rows' selection compare is `cmp slot, selection`. */
+/* NON_MATCHING: 10 lines. The widgets' unit id, cost and value go through one-instruction accessors armlink
+ * inlined (partyWidgetGetUnitId, partyWidgetGetCost, partyWidgetSetCost, partyWidgetSetValue: inlined.txt rows).
+ * Only the reserve-row comparison differs: retail gives the slot and the selected index the other registers. */
 #include "battle/BtlMainAccess.h"
 #include "network/DataStore/DataStoreMain.h"
 #include "code/Code002a.h"
@@ -52,7 +51,7 @@ void partyPanelRefreshSkillPreview(u32 id, s32 direct)
             }
         } else {
             for (s32 i = 0; i < 3; i++) {
-                if (panel->selection == slots->reserve[i]) {
+                if (slots->reserve[i] == panel->selection) {
                     SlotRecordA *record = gameGetSlotRecord(partyWidgetGetUnitId(panel->characters[i + 1]));
                     partyWidgetSetCost(panel->characters[i + 1], -skillGetAdjustedCost(record, panel->previewItem));
                 }
@@ -66,28 +65,29 @@ void partyPanelRefreshSkillPreview(u32 id, s32 direct)
         }
     }
 
-    if (direct == 0) {
-        if (listCursorGetRowIfUnblocked(id) < 1) {
-            s32 position = listCursorGetRowOfChildIfUnblocked((void *)(id));
-            if (position == 0) {
-                skillApplyToTarget(panel->selection, -1, panel->previewItem, &out);
-            } else {
-                skillApplyToTarget(panel->selection, slots->reserve[position - 1], panel->previewItem, &out);
-            }
-            partyWidgetSetValue(panel->characters[position], out);
-            statusPreviewMpChange(out, partyWidgetGetCost(panel->characters[position]));
-            return;
-        }
-        if (panel->alternate != 0) {
-            index = listCursorGetRowOfChildIfUnblocked((void *)(id)) + listCursorGetRowIfUnblocked(id) * 4 - 4;
+    /* In the list layout, the first row contains the player and reserve characters. */
+    if (!direct && listCursorGetRowIfUnblocked(id) < 1) {
+        s32 position = listCursorGetRowOfChildIfUnblocked((void *)id);
+        if (position == 0) {
+            skillApplyToTarget(panel->selection, -1, panel->previewItem, &out);
         } else {
-            index = listCursorGetRowIfUnblocked(id) * 4 + panel->page * 12 + listCursorGetRowOfChildIfUnblocked((void *)(id)) - 4;
+            skillApplyToTarget(panel->selection, slots->reserve[position - 1], panel->previewItem, &out);
+        }
+        partyWidgetSetValue(panel->characters[position], out);
+        statusPreviewMpChange(out, partyWidgetGetCost(panel->characters[position]));
+        return;
+    }
+    if (direct != 0) {
+        if (panel->alternate != 0) {
+            index = listCursorGetRowOfChildIfUnblocked((void *)id) + listCursorGetRowIfUnblocked(id) * 4;
+        } else {
+            index = listCursorGetRowIfUnblocked(id) * 4 + panel->page * 12 + listCursorGetRowOfChildIfUnblocked((void *)id);
         }
     } else {
         if (panel->alternate != 0) {
-            index = listCursorGetRowOfChildIfUnblocked((void *)(id)) + listCursorGetRowIfUnblocked(id) * 4;
+            index = listCursorGetRowOfChildIfUnblocked((void *)id) + listCursorGetRowIfUnblocked(id) * 4 - 4;
         } else {
-            index = listCursorGetRowIfUnblocked(id) * 4 + panel->page * 12 + listCursorGetRowOfChildIfUnblocked((void *)(id));
+            index = listCursorGetRowIfUnblocked(id) * 4 + panel->page * 12 + listCursorGetRowOfChildIfUnblocked((void *)id) - 4;
         }
     }
     skillApplyToTarget(panel->selection, panel->entries[index].packedIndex, panel->previewItem, &out);

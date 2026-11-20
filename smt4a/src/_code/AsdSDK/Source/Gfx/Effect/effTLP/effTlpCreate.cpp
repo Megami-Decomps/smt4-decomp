@@ -1,13 +1,12 @@
-/* NON_MATCHING: debug trace (effTLP.cpp line 54) and the allocation-size prologue now match retail; the header/entry field stores after the allocation are grouped and ordered differently (retail 105 vs built 107 rows). */
+/* NON_MATCHING: allocation size, trace, entries/objects and the loops match; retail stores refCount/unk20/self with one stm before the entries/objects pair (zero in r0, shared with the loop index), the build splits the triple around that pair. */
 #include "AsdSDK/Source/Gfx/Effect/effTLP.h"
 #include "AsdSDK/AsdDebug.h"
+#include "shard/W6_W6Match2_TextureHolder.h"
 
 extern "C" {
 
 void *memAlloc(int, int, int, u32 size, int align, int);
 s32 texIsStexFile(void *data);
-void *asdEffectTextureCreate(void *data);
-void *textureCreateFromImage(void);
 
 /* Builds a TLP object from file data: copies the header and entries and creates an effect object
  * for each entry's data block (or a default one when the block is not valid). */
@@ -27,7 +26,7 @@ TlpObject *effTlpCreate(TlpFile *file)
     tlp->unk20 = -1;
     tlp->self = tlp;
     tlp->entries = (TlpEntry *)tlp->payload;
-    tlp->objects = (void **)(tlp->payload + count * 0x10);
+    tlp->objects = (void **)(tlp->entries + count);
     src = file->entry;
     block = (u8 *)(src + count);
     tlp->unk00 = file->unk00;
@@ -41,7 +40,7 @@ TlpObject *effTlpCreate(TlpFile *file)
         if (texIsStexFile(block) != 0) {
             tlp->objects[i] = asdEffectTextureCreate(block);
         } else {
-            tlp->objects[i] = textureCreateFromImage();
+            tlp->objects[i] = textureCreateFromImage(block);
         }
         block += src->size;
         src++;

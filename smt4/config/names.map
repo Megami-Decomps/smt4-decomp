@@ -6107,3 +6107,13 @@
 00245d0c btlRollAilmentChance
 001e2be4 mapIdleHintStep
 003b21e4 moLivePlayerSetWorker
+0026d3e0 partyPanelRefreshSelectedItemValues
+0010d0f8 asdFileStartWorkerThread
+0024d434 btlActionEffectAnchor
+002bbf8c mtx44OrthoC
+002f51bc renderFillScreenColor
+003c25f0 statisticsRollAll
+0034914c modelSelectMaterialAndRecord
+003de758 btlReflectQueuePendingRosterFade
+0039c728 mapNaviDisplayUpdateDragScroll
+003dc19c btlLoadSequenceEffects

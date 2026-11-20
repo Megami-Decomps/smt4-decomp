@@ -30,7 +30,7 @@ extern "C" {
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 u32 *battleModelOwnerInitialize(u32 *word);
 void btlUiAddRequest(BtlUiA *ui, u16 id);
-void FUN_004cb9d0(BattleEffectSetup *render);
+void battleEffectUpdateProjectionScale(BattleEffectSetup *render);
 void FUN_004d854c(s32 *owner);
 bool FUN_004d87e4(void **holder);
 void modelOwnerLoadNamed(ModelOwner *owner, const char *name);
@@ -72,7 +72,7 @@ void battleUnitUpdateModelLoad(BtlMainStateA *state, BattleModelRecord *record)
             render.position[0] = 0.0f;
             render.position[1] = 0.0f;
             render.position[2] = 0.0f;
-            FUN_004cb9d0(&render);
+            battleEffectUpdateProjectionScale(&render);
             u32 value = g_battleEffectSettings.defaultValue;
             render.value6c = value;
             render.value70 = value;

@@ -1,102 +1,46 @@
-/* NON_MATCHING: canonical SDK result construction matches; full-path pointer reuse, saved registers and stack allocation differ. */
-#include "runtime/Stdio.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
-#include "nn/Result.h"
-#include <stddef.h>
-#include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
-
-namespace {
-// Apocalypse stores a context/result pair where the shared IV request prefix has list links,
-// and its copied record extends through 0x148. Keep the complete variant local.
-struct AsdSyncFileRecordA {
-    s32 state;
-    s32 lifetime;
-    s32 lifetimeStep;
-    void *buffer;
-    s32 userBuffer;
-    u32 unk14;
-    u32 size;
-    u32 unk1C;
-    u8 flag;
-    u8 unk21[3];
-    s32 heapKind;
-    u32 alignment;
-    char path[ASD_FILE_PATH_LEN];
-    void *stream;
-    void (*onDone)(AsdSyncFileRecordA *);
-    AsdSyncFileRecordA *onDoneArg;
-    void (*onOpen)(void *);
-    void *context;
-    nn::Result result;
-    u32 unk144;
-    u32 unk148;
-};
-typedef char AsdSyncFileRecordALayoutCheck[sizeof(AsdSyncFileRecordA) == 0x14C &&
-    offsetof(AsdSyncFileRecordA, context) == 0x13C &&
-    offsetof(AsdSyncFileRecordA, result) == 0x140 ? 1 : -1];
-}
+#include "AsdSDK/Source/Sys/File/AsdFileReadRequest.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadPath.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 
 extern "C" {
-extern s8 g_asdLoadFileUseRawPaths;
-extern const char DAT_0053d4c0[];
 void rt_aeabi_memclr(void *data, u32 size);
-void sysMemClear(void *data, u32 size);
-s32 asdLoadFileHasDevice(const char *path);
-void pathSetWithRomPrefix(AsdSyncFileRecordA *record, const char *path);
-void asdLoadConfigureModeFlags(AsdSyncFileRecordA *record, u32 flags);
+void pathSetWithRomPrefix(AsdFileReadRequestA *record, const char *path);
+void asdLoadConfigureModeFlags(AsdFileReadRequestA *record, u32 flags);
 AsdFileEntry *asdFileAddEntry(const void *record);
-void asdFileWait(AsdSyncFileRecordA *request);
-void asdFileRequestRelease(AsdSyncFileRecordA *request);
+void asdFileWait(AsdFileReadRequestA *request);
 
-// Queue a copied request, wait for completion, and transfer successful buffer ownership to the caller.
+/* Queues a request, waits for completion and returns the caller-owned buffer on success. */
 void *asdLoadFileSync(s32 *result, void *context, const char *path, u32 *size, u32 flags, u32 alignment)
 {
     char fullPath[ASD_FILE_PATH_LEN];
     rt_aeabi_memclr(fullPath, sizeof(fullPath));
-    if (g_asdLoadFileUseRawPaths != 0 || asdLoadFileHasDevice(path) != 0)
-        __2sprintf(fullPath, path);
-    else
-        __2sprintf(fullPath, DAT_0053d4c0, path);
-    AsdSyncFileRecordA record;
-    record.state = 0;
-    record.lifetime = 1;
-    record.lifetimeStep = 0;
-    record.unk14 = 0;
-    record.buffer = NULL;
-    record.userBuffer = 0;
-    record.alignment = 0x80;
-    record.size = 0;
-    record.unk1C = 0;
-    record.flag = 0;
-    record.heapKind = 0;
-    sysMemClear(record.path, sizeof(record.path));
-    record.stream = NULL;
-    record.onDone = NULL;
-    record.onDoneArg = NULL;
-    record.onOpen = NULL;
-    record.context = NULL;
-    record.result = 0;
-    record.unk144 = 0;
-    record.unk148 = 0;
+    asdLoadFileBuildPath(fullPath, path);
+
+    AsdFileReadRequestA record;
+    asdFileResetReadRequest(&record);
     pathSetWithRomPrefix(&record, fullPath);
     asdLoadConfigureModeFlags(&record, flags);
     record.alignment = alignment;
     record.context = context;
-    AsdSyncFileRecordA *request = reinterpret_cast<AsdSyncFileRecordA *>(asdFileAddEntry(&record));
+    AsdFileReadRequestA *request = (AsdFileReadRequestA *)asdFileAddEntry(&record);
     asdFileWait(request);
-    if (result != NULL)
+    if (result != NULL) {
         *result = request->result;
-    if (asdFileRequestHasFailed(reinterpret_cast<s32 *>(request)) != 0) {
-        if (size != NULL)
+    }
+    if (asdFileRequestHasFailed((s32 *)request) != 0) {
+        if (size != NULL) {
             *size = 0;
+        }
         asdFileRequestRelease(request);
         return NULL;
     }
-    if (size != NULL)
-        *size = request->size;
     void *buffer = request->buffer;
+    if (size != NULL) {
+        *size = request->size;
+    }
     request->buffer = NULL;
     asdFileRequestRelease(request);
     return buffer;
 }
-}
+} /* extern "C" */

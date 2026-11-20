@@ -28,7 +28,7 @@ char *libc_strcpy(char *destination, const char *source);
 u32 FUN_003416a0(s32 archive, u32 path);
 u32 asdSaveReadBlock(u32 archive, u32 path, void *header, void *payload, u32 payloadSize);
 u32 FUN_002c7388(u32 context, s32 path, s32 operation, s32 slot);
-s32 FUN_002ef7f0(u32 context, const char *path);
+s32 fsResultClassifyRestriction(u32 context, const char *path);
 
 void saveLoadReadThreadWorker(u32 context)
 {
@@ -54,7 +54,7 @@ void saveLoadReadThreadWorker(u32 context)
             return;
         }
         if (archive == 0) {
-            if (FUN_002ef7f0(context, filename) == 1) {
+            if (fsResultClassifyRestriction(context, filename) == 1) {
                 thread->state = 6;
             } else {
                 thread->state = -1;

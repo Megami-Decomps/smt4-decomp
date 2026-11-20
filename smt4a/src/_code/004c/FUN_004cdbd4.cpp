@@ -20,11 +20,11 @@ void messageBannerRestartOrClear(void);
 s32 messageMainGetValue(void);
 s32 tableGroupFindEntryIndex(u32 group, const char *name);
 void scrScriptProcessStartEntry(u32 script, s32 index);
-s32 FUN_004ced50(FountainMenu *menu);
+s32 partyNeedsRecovery(FountainMenu *menu);
 void FUN_004ce300(FountainMenu *menu);
 
 /* Fountain menu step: once the script yields, either returns to the top entry (state 5) or, when healing
- * is not possible, runs the "no healing" entry (state 10); state 8 when FUN_004ced50 takes over. */
+ * is not possible, runs the "no healing" entry (state 10); state 8 when partyNeedsRecovery takes over. */
 void FUN_004cdbd4(FountainMenu *menu)
 {
     s32 index;
@@ -34,7 +34,7 @@ void FUN_004cdbd4(FountainMenu *menu)
     messageBannerRestartOrClear();
     if (messageMainGetValue() == 0) {
         menu->state = 7;
-        if (FUN_004ced50(menu) != 0) {
+        if (partyNeedsRecovery(menu) != 0) {
             menu->state = 8;
             FUN_004ce300(menu);
             return;

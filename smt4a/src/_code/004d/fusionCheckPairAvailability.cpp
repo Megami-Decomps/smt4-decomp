@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the load form of the packed 64-bit result differs: retail reads it with ldm in the owned-demon compare and ldr/ldr elsewhere, the build uses ldr/ldr and ldrd; prologue, callee contracts, the 24-slot search loop and the 64-bit compare match. */
+/* NON_MATCHING: the owned-demon comparison uses different registers and ordering for the packed 64-bit result. */
 #include "camp/Unite/UniteWork.h"
 #include "camp/Unite/FusionAvailability.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
@@ -61,8 +61,11 @@ u8 fusionCheckPairAvailability(UniteWorkA *work, u32 first, u32 second, s32 spec
             output->reason = FUSION_REFUSAL_OWNED;
     }
     if (output != NULL) {
-        if (fusionClassifyPair(work, first, second) == 5 || !entryDefIsAvailable(work, result.resultIdentifier))
+        if (fusionClassifyPair(work, first, second) == 5) {
             output->reason = FUSION_REFUSAL_NO_RESULT;
+        } else if (!entryDefIsAvailable(work, result.resultIdentifier)) {
+            output->reason = FUSION_REFUSAL_NO_RESULT;
+        }
         output->available = available;
     }
     return available;

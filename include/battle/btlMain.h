@@ -173,6 +173,14 @@ typedef struct BtlMainState {
             /* 0x225A */ s16 checkId;           /* listed id of the player's unit */
         } playerCheck;
         struct {
+            u8 unk1FD8[0x284];
+            /* 0x225C */ s32 mode;
+            /* 0x2260 */ u32 event;
+            /* 0x2264 */ s32 targetMode;
+            /* 0x2268 */ u32 unk2268;
+            /* 0x226C */ s32 maximumTargetLevel;
+        } commandEvent;
+        struct {
             u8 unk1FD8[0x290];
             /* 0x2268 */ u32 command;           /* the battle debug menu's command value */
         } debugMenu;
@@ -290,6 +298,8 @@ typedef char BtlMainStateBodyOffsetCheck[
     offsetof(BtlMainState, secondaryPendingAction) == 0x1FD8 && offsetof(BtlMainState, actionCleanup.resources) == 0x2134 &&
     offsetof(BtlMainState, actionCleanup.retainedIds) == 0x21DC && offsetof(BtlMainState, dialog.messageHandle) == 0x2230 &&
     offsetof(BtlMainState, playerCheck.checkId) == 0x225A && offsetof(BtlMainState, actionCleanup.selectedAction) == 0x4454 &&
+    offsetof(BtlMainState, commandEvent.mode) == 0x225C && offsetof(BtlMainState, commandEvent.event) == 0x2260 &&
+    offsetof(BtlMainState, commandEvent.maximumTargetLevel) == 0x226C &&
     offsetof(BtlMainState, actionCleanup.selectedResource) == 0x4458 ? 1 : -1];
 typedef char BtlMainStateTailOffsetCheck[
     offsetof(BtlMainState, battleFlags) == 0x44A0 && offsetof(BtlMainState, battleMask) == 0x44A0 && offsetof(BtlMainState, sprite.flags) == 0x44A4 &&

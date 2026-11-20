@@ -5924,3 +5924,13 @@
 00245d0c btlRollAilmentChance inferred an ailment's luck-adjusted base chance plus the combatant's modifier for that ailment
 001e2be4 mapIdleHintStep inferred selects the next idle hint of the map save block's hint progress (skipping time- and party-inapplicable hints) and queues its voice message
 003b21e4 moLivePlayerSetWorker inferred twin of smt4a 0x4af258 (same worker attach and stream-state reset)
+0026d3e0 partyPanelRefreshSelectedItemValues inferred its smt4a twin's name
+0010d0f8 asdFileStartWorkerThread inferred allocates the AsdFile worker's 4 KB stack and starts its thread (AsdFile.cpp trace)
+0024d434 btlActionEffectAnchor inferred an action's effect anchor: arrangement anchor plus height, or the acting part's position plus its draw offset
+002bbf8c mtx44OrthoC inferred body is nn::math's MTX44OrthoC fast-C form
+002f51bc renderFillScreenColor inferred fills the screen with an RGBA colour under the title scene's stereo mode
+003c25f0 statisticsRollAll inferred clears and rolls every statistic of data table 0x24 for the current phase
+0034914c modelSelectMaterialAndRecord inferred selects a model material and records its float24 depth bias
+003de758 btlReflectQueuePendingRosterFade inferred its smt4a twin's name (same reflect actions, kinds 0x21/0x22)
+0039c728 mapNaviDisplayUpdateDragScroll inferred follows a touch drag on the navigation map, then lets the speed coast
+003dc19c btlLoadSequenceEffects inferred looks up indexed effect descriptors and requests their files

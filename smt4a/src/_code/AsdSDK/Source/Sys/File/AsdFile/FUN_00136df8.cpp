@@ -17,7 +17,7 @@ void *asdMemoryAlloc(u32 heap, u32 alignment, u32 pool, u32 size, u32 flags);
 u32 svcCreateSemaphore(u32 *handle, u32 initial, u32 maximum);
 u32 svcReleaseSemaphore(u32 *handle, u32 mutex, u32 mode);
 void nn_os_LightEvent_Initialize(void *event, u32 mode);
-void FUN_0014287c();
+void asdFileStartWorkerThread();
 void FUN_00146808();
 
 /* Allocates file-service workspace and initializes the semaphore, mutex binding and event. */
@@ -50,7 +50,7 @@ void FUN_00136df8()
             resultHandleFailure(result);
     }
     nn_os_LightEvent_Initialize(g_asdFileEvent, 0);
-    FUN_0014287c();
+    asdFileStartWorkerThread();
     FUN_00146808();
 }
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: same block-ordering difference as FUN_0026d3e0: retail lays out the stock and active-party `unk42 == 0` arms after the non-stock path; armcc here keeps each pair adjacent. */
+/* NON_MATCHING: 10 lines: only the active-party loop's compare differs (retail loads the slot into r1 and the selection into r0; armcc swaps them). */
 #include "battle/BtlMainAccess.h"
 #include "ui/PartyPanelState.h"
 
@@ -26,8 +26,8 @@ s32 skillGetDiscountedCost(u16 item, u32 flag);
 s32 listCursorGetRowIfUnblocked(void *selection);
 s32 objectPartRunUnlessLocked(void *selection);
 
-// Set the price shown beside every preview widget affected by the selected item, then compute the
-// value for the selected active-party or stock unit and publish it on that unit's widget.
+/* Sets the price shown beside every preview widget affected by the selected item, then computes the
+ * value for the selected active-party or stock unit and publishes it on that unit's widget. */
 void FUN_0026d144(void *selection, s32 stockOnly)
 {
     PartyPanelState *panel = g_partyPanel;
@@ -57,40 +57,38 @@ void FUN_0026d144(void *selection, s32 stockOnly)
         }
     }
 
-    if (stockOnly) {
-        if (panel->alternate) {
-            index = objectPartRunUnlessLocked(selection);
-            index += listCursorGetRowIfUnblocked(selection) * 4;
+    if (stockOnly == 0 && listCursorGetRowIfUnblocked(selection) < 1) {
+        index = objectPartRunUnlessLocked(selection);
+        if (index == 0) {
+            skillApplyToTarget(panel->selection, -1, panel->previewItem, &value);
         } else {
-            index = listCursorGetRowIfUnblocked(selection) * 4 + panel->page * 12;
-            index += objectPartRunUnlessLocked(selection);
+            skillApplyToTarget(panel->selection, slots->active[index - 1], panel->previewItem, &value);
         }
+        partyWidgetSetValue(panel->characters[index], value);
+        FUN_00298d28(value, partyWidgetGetCost(panel->characters[index]));
     } else {
-        if (listCursorGetRowIfUnblocked(selection) < 1) {
-            index = objectPartRunUnlessLocked(selection);
-            s32 unit;
-            if (index != 0) {
-                unit = slots->active[index - 1];
+        if (stockOnly) {
+            if (panel->alternate) {
+                index = objectPartRunUnlessLocked(selection);
+                index += listCursorGetRowIfUnblocked(selection) * 4;
             } else {
-                unit = -1;
+                index = listCursorGetRowIfUnblocked(selection) * 4 + panel->page * 12;
+                index += objectPartRunUnlessLocked(selection);
             }
-            skillApplyToTarget(panel->selection, unit, panel->previewItem, &value);
-            partyWidgetSetValue(panel->characters[index], value);
-            FUN_00298d28(value, partyWidgetGetCost(panel->characters[index]));
-            return;
-        }
-        if (panel->alternate) {
-            index = objectPartRunUnlessLocked(selection);
-            index += listCursorGetRowIfUnblocked(selection) * 4;
         } else {
-            index = listCursorGetRowIfUnblocked(selection) * 4 + panel->page * 12;
-            index += objectPartRunUnlessLocked(selection);
+            if (panel->alternate) {
+                index = objectPartRunUnlessLocked(selection);
+                index += listCursorGetRowIfUnblocked(selection) * 4;
+            } else {
+                index = listCursorGetRowIfUnblocked(selection) * 4 + panel->page * 12;
+                index += objectPartRunUnlessLocked(selection);
+            }
+            index -= 4;
         }
-        index -= 4;
+        skillApplyToTarget(panel->selection, panel->entries[index].packedIndex,
+                     panel->previewItem, &value);
+        partyWidgetSetValue(panel->demons[index], value);
+        FUN_00298d28(value, partyWidgetGetCost(panel->demons[index]));
     }
-    skillApplyToTarget(panel->selection, panel->entries[index].packedIndex,
-                 panel->previewItem, &value);
-    partyWidgetSetValue(panel->demons[index], value);
-    FUN_00298d28(value, partyWidgetGetCost(panel->demons[index]));
 }
 }

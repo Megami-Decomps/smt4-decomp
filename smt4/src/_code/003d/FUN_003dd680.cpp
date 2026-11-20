@@ -23,7 +23,7 @@ extern "C" {
 extern BattleMain* g_btlMain;
 
 Vec3 FUN_0023cd08(void* battle, u32 id, s32 mode);
-Vec3 FUN_0024d434(void* battle, u32 id, s32 mode);
+Vec3 btlActionEffectAnchor(void* battle, u32 id, s32 mode);
 
 // Position `distance` units along the camera direction from the main object's anchor.
 static Vec3 cameraRelativePoint()
@@ -73,7 +73,7 @@ Vec3 FUN_003dd680(u32 unused, u32 kind, u32 first, u32 second)
         result = FUN_0023cd08(static_cast<void *>(btlGetMainState()), first, 0);
         break;
     case 1:
-        result = FUN_0024d434(static_cast<void *>(btlGetMainState()), first, 0);
+        result = btlActionEffectAnchor(static_cast<void *>(btlGetMainState()), first, 0);
         break;
     case 2:
         result = entrySlotPoint(first);
@@ -82,7 +82,7 @@ Vec3 FUN_003dd680(u32 unused, u32 kind, u32 first, u32 second)
         result = FUN_0023cd08(static_cast<void *>(btlGetMainState()), second, 0);
         break;
     case 4:
-        result = FUN_0024d434(static_cast<void *>(btlGetMainState()), second, 0);
+        result = btlActionEffectAnchor(static_cast<void *>(btlGetMainState()), second, 0);
         break;
     case 5:
         result = entrySlotPoint(second);

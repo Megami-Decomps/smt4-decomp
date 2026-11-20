@@ -123,7 +123,7 @@ void btlReserveEditorApplySelection(DebugMenu *menu, DebugBattle *battle);
 void FUN_004d3df0(DebugMenu *menu, DebugBattle *battle);
 void FUN_004d463c(DebugMenu *menu);
 void FUN_004d5290(DebugMenu *menu, DebugBattle *battle);
-void FUN_004d542c(DebugMenu *menu, DebugBattle *battle, u32 item);
+void btlCameraApplyEditorValue(DebugMenu *menu, DebugBattle *battle, u32 item);
 void FUN_004d5578(DebugMenu *menu, DebugBattle *battle);
 void FUN_004d5be4(DebugMenu *menu, DebugBattle *battle, u32 item);
 void btlCameraDebugApplyMenuItem(DebugMenu *menu, DebugBattle *battle, u32 item);
@@ -406,7 +406,7 @@ u32 FUN_004d6104(DebugMenu *menu, DebugBattle *battle)
                 FUN_004d5be4(menu, battle, item);
             }
         } else {
-            FUN_004d542c(menu, battle, item);
+            btlCameraApplyEditorValue(menu, battle, item);
         }
         if (padButtonIsPressed(0) == 0) {
             if (padButtonIsPressed(1) == 0)

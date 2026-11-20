@@ -15,7 +15,7 @@ void asdLoadFileAsyncSimple(const char *path, void **destination, s32 flags);
 extern const char DAT_004008c4[];
 
 /* Resolve each sequence effect's file name and request uncached files asynchronously. */
-u32 FUN_003dc19c(ActionController *controller)
+u32 btlLoadSequenceEffects(ActionController *controller)
 {
     struct EffectDescriptor { u32 id, unk04; };
     struct SequenceEffectView {

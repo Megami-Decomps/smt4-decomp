@@ -17,7 +17,7 @@ s32 compendiumEntryIsRegistered(u32);
 void FUN_0032d0c8(s32, s32, u32, const UnitRecord *);
 void FUN_004a16bc(void *);
 void FUN_004a1db4(void *);
-void FUN_004a41d8(void *);
+void compendiumUpdateSelectedEntry(void *);
 void FUN_004a3b48(void *);
 void words4At20Clear(PartySlots *);
 void partyIdsActivateEntry(PartySlots *, u32);
@@ -87,7 +87,7 @@ void Obj55c89c::FUN_004a2064()
             }
         }
         if (tail->savedList == 0)
-            FUN_004a41d8(menu);
+            compendiumUpdateSelectedEntry(menu);
         else
             FUN_004a16bc(menu);
     }

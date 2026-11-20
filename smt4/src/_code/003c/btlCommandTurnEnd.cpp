@@ -17,7 +17,7 @@ s32 nodeListCountActiveById(u32 id);
 s32 btlUnitIsDeadAndUncopied(BtlMainState **block, CommandState *work, s32 index);
 s32 btlNodeListAnyReady(void);
 void FUN_0023f4e4(BtlMainState *state);
-void FUN_003de758(s32 a, CommandState *work, s32 b);
+void btlReflectQueuePendingRosterFade(s32 a, CommandState *work, s32 b);
 void FUN_0027e5e4(BtlActionRecord *action);
 void btlSlotManagerResetAll(BtlMainState *state);
 void FUN_003cefe0(BtlMainState **block, CommandState *work, u32 command);
@@ -92,7 +92,7 @@ u32 btlCommandTurnEnd(BtlMainState **block, CommandState *work)
     bool handled = false;
     u32 command = 0;
     FUN_0023f4e4(*block);
-    FUN_003de758(0, work, 5);
+    btlReflectQueuePendingRosterFade(0, work, 5);
     for (s32 index = 0; index < 109; ++index) {
         BtlActionRecord *action = &(*block)->actions[index];
         if (action != NULL && (action->status & 1) != 0 && (action->status & 2) != 0)

@@ -269,7 +269,8 @@ struct BtlCameraA {
         struct {
             /* 0x06C */ u8 unk06C[0x514];
             /* 0x580 */ BtlCameraVector3 position;
-            /* 0x58C */ u8 unk58C[0x28];
+            /* 0x58C */ u8 unk58C[0x24];
+            /* 0x5B0 */ f32 projectionDepth; /* used to place effects on offset camera planes */
             /* 0x5B4 */ f32 angle;
             union {
                 /* 0x5B8 */ u8 unk5B8[8];
@@ -335,6 +336,7 @@ typedef char BtlCameraEditorSelectionOffsetCheck[
     sizeof(BtlCameraA) == 0x8B4 ? 1 : -1];
 typedef char BtlCameraBasePoseOffsetCheck[
     offsetof(BtlCameraA, basePose.position) == 0x580 &&
+    offsetof(BtlCameraA, basePose.projectionDepth) == 0x5B0 &&
     offsetof(BtlCameraA, basePose.angle) == 0x5B4 &&
     offsetof(BtlCameraA, basePose.distance) == 0x5C0 &&
     sizeof(BtlCameraA) == 0x8B4 ? 1 : -1];

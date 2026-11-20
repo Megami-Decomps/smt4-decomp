@@ -1,25 +1,9 @@
-/* NON_MATCHING: maximum update uses the atLeast helper written with an early return; remaining: the maximum's
- * registers and condition (retail movle r1, r2 where the build keeps the unit value in r0, movgt), battle address computed after the entry value address, flag read-modify-writes use r1 where retail uses r2, `movs` null test on the found unit, enemy-count loop registers. */
+/* NON_MATCHING: the maximum's operand and address setup differs, and the two battle-flag updates use other registers. */
 #include "battle/BtlEntry.h"
 #include "battle/BtlGlobals.h"
+#include "battle/btlMain.h"
 
-struct CommandEventBattle {
-    u8 unk0000[0x84];
-    u32 actor, phase;
-    u8 unk008c[0x1f34];
-    BtlEntry *entries;
-    u8 unk1fc4[0x296];
-    s16 target;
-    s32 mode;
-    u32 event;
-    s32 targetMode;
-    u32 unk2268;
-    s32 maximum;
-    u8 unk2270[0x2230];
-    u32 flags;
-};
-struct CommandEventContext { CommandEventBattle *battle; };
-struct CommandEventUnit { u8 unk000[0x1cc]; u16 value; };
+struct CommandEventContext { BtlMainState *battle; };
 struct CommandEventData { u8 unk000[0x14c]; u16 type; };
 struct CommandEventChoice {
     u32 flags;
@@ -33,26 +17,23 @@ void btlMenuCursorStepReflectAction(u32, CommandEventChoice *, u32, u32, u32);
 void FUN_002569ac(CommandEventContext *, u32);
 void btlEntryValuesCopy(CommandEventContext *, CommandEventChoice *);
 
-static __inline s32 atLeastS32(s32 value, s32 minimum)
-{
-    if (value > minimum) {
-        return value;
-    }
-    return minimum;
-}
-
 void btlResolveCommandEvent(CommandEventContext *context, CommandEventChoice *choice)
 {
-    BtlEntry *target = btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(context->battle), context->battle->target);
-    if (target && !(context->battle->flags & 0x200)) {
-        CommandEventBattle *battle = context->battle;
-        battle->maximum = atLeastS32(battle->maximum, ((CommandEventUnit *)target)->value);
+    BtlEntry *target = btlMainFindEntryByListedId(context->battle, context->battle->playerCheck.checkId);
+    if (target && !(context->battle->battleMask & 0x200)) {
+        BtlMainState *battle = context->battle;
+        s32 level = battle->commandEvent.maximumTargetLevel;
+        s32 targetLevel = target->data.level;
+        if (level <= targetLevel) {
+            level = targetLevel;
+        }
+        battle->commandEvent.maximumTargetLevel = level;
     }
-    switch (context->battle->mode) {
+    switch (context->battle->commandEvent.mode) {
     case 1:
         break;
     case 2:
-        context->battle->flags |= 0x400000;
+        context->battle->battleMask |= 0x400000;
         break;
     case 3:
         choice->command->type = 4;
@@ -60,36 +41,38 @@ void btlResolveCommandEvent(CommandEventContext *context, CommandEventChoice *ch
     }
     bool queueEffect = false;
     u32 effect = 0;
-    if (context->battle->mode == 1) {
-        switch (context->battle->event) {
+    if (context->battle->commandEvent.mode == 1) {
+        switch (context->battle->commandEvent.event) {
         case 1: queueEffect = true; effect = 12; break;
         case 2: queueEffect = true; effect = 5; break;
         case 3: queueEffect = true; effect = 3; break;
         case 4: queueEffect = true; effect = 14; break;
         case 7:
-            context->battle->flags |= 0x80;
+            context->battle->battleMask |= 0x80;
             choice->flags |= 4;
             break;
         }
-        CommandEventBattle *battle = context->battle;
-        if (battle->targetMode == 2) {
-            BtlEntry *unit = btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(battle), battle->target);
+        BtlMainState *battle = context->battle;
+        if (battle->commandEvent.targetMode == 2) {
+            BtlEntry *unit = btlMainFindEntryByListedId(battle, battle->playerCheck.checkId);
             if (unit)
                 FUN_00246454(0, choice, unit);
         }
         if (queueEffect)
             btlMenuCursorStepReflectAction(0, choice, effect, choice->effectHandle, 1);
     }
-    CommandEventBattle *battle = context->battle;
-    BtlEntry *enemy = &battle->entries[4];
+    BtlMainState *battle = context->battle;
+    enum { FIRST_ENEMY_SLOT = 4, END_ENEMY_SLOT = 54 };
     s32 active = 0;
-    for (s32 remaining = 50; remaining > 0; --remaining, ++enemy) {
-        if ((enemy->flags & BTL_ENTRY_FLAG_ACTIVE) && !(enemy->flags & BTL_ENTRY_FLAG_BLOCKED))
+    for (s32 slot = FIRST_ENEMY_SLOT; slot < END_ENEMY_SLOT; ++slot) {
+        if ((battle->entries[slot].flags & BTL_ENTRY_FLAG_ACTIVE) &&
+            !(battle->entries[slot].flags & BTL_ENTRY_FLAG_BLOCKED)) {
             ++active;
+        }
     }
-    if (!active)
-        battle->phase = 10;
-    FUN_002569ac(context, context->battle->actor);
+    if (active == 0)
+        battle->actionState.mode = 10;
+    FUN_002569ac(context, context->battle->actionState.index);
     btlEntryValuesCopy(context, choice);
 }
 }

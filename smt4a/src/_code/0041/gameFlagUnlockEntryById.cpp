@@ -26,14 +26,14 @@ typedef struct FlagBlock {
 
 s32 itemDataIsFlagClear(s32 id);
 s32 rosterAddUnit(s32 id);
-s32 FUN_004bb6d8(u32 id, s32 arg);
+s32 encounterRefreshOnFlagChange(u32 id, s32 arg);
 
 /* Marks the linked id as set: tells the flag system and sets its bit in the bitmap. */
 static __inline void setBitmapFlag(u32 linked, s32 value)
 {
     FlagBlock *block = reinterpret_cast<FlagBlock *>(gameFlagBlockGet());
 
-    FUN_004bb6d8(linked, value);
+    encounterRefreshOnFlagChange(linked, value);
     u32 byteIndex = linked >> 3;
     u32 bit = linked & 7;
     u8 bits = block->bitmap[byteIndex];

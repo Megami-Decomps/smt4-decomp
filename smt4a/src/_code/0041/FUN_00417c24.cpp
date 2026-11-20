@@ -3,14 +3,14 @@
 
 extern "C" {
 
-void FUN_004bb6d8(u32 flag, s32 value);
+void encounterRefreshOnFlagChange(u32 flag, s32 value);
 
-/* Reports a game flag change to FUN_004bb6d8, then sets or clears the flag's bit. */
+/* Reports a game flag change to encounterRefreshOnFlagChange, then sets or clears the flag's bit. */
 static __inline void gameFlagWrite(u32 flag, s32 value)
 {
     PartyBlockB *block = reinterpret_cast<PartyBlockB *>(gameFlagBlockGet());
 
-    FUN_004bb6d8(flag, value);
+    encounterRefreshOnFlagChange(flag, value);
     u32 index = flag >> 3;
     if (value) {
         block->unk00[index] |= 1 << (flag & 7);

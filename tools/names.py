@@ -27,7 +27,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(os.path.abspath(__file__)).parent))
-from cxxnames import file_stem  # noqa: E402
+from cxxnames import demangle, file_stem  # noqa: E402
 
 ROOT = Path(os.path.abspath(__file__)).parent.parent
 IDENT = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
@@ -183,6 +183,23 @@ class Game:
         return True
 
 
+def defines_member(state, old, new):
+    """Whether a plain-to-mangled rename is ready: no source or header names `old` any more, and the
+    unit's source defines the member `new` demangles to (`Obj55bccc::~Obj55bccc()` for
+    `_ZN9Obj55bcccD1Ev`), the definition the person renaming wrote by hand."""
+    unit = state.units.get(old)
+    member = demangle(new)
+    if unit is None or not member or "::" not in member:
+        return False
+    qualified = member.split("(")[0]
+    text = (state.dir / unit["source"]).read_text(encoding="utf-8")
+    if not re.search(re.escape(qualified) + r"\s*\(", text):
+        return False
+    plain = re.compile(r"(?<![A-Za-z0-9_])" + re.escape(old) + r"(?![A-Za-z0-9_])")
+    paths = list((state.dir / "src").rglob("*.cpp")) + list((state.dir / "include").rglob("*.h")) + list((ROOT / "include").rglob("*.h"))
+    return not any(plain.search(path.read_text(encoding="utf-8")) for path in paths)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     parser.add_argument("command", choices=["apply", "check"])
@@ -232,7 +249,7 @@ def main():
             # leave the class's member (and so the compiled symbol) behind.
             errors.append(f"{where}: {what} is the member function {old}; give the mangled name of the renamed member")
             continue
-        if old is not None and not old.startswith("_Z") and new.startswith("_Z"):
+        if old is not None and not old.startswith("_Z") and new.startswith("_Z") and not defines_member(state, old, new):
             # apply leaves sources alone for a mangled name (source cannot spell one; see apply), so the
             # unit would keep defining the old plain name and lose its match. Make it a member first.
             errors.append(f"{where}: {what} becomes the mangled {new}: make it that member in source by hand "

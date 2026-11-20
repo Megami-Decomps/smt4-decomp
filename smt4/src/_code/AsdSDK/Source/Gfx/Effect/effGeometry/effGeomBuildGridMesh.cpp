@@ -1,4 +1,4 @@
-/* NON_MATCHING: same calls, allocations and loops; armcc keeps rows*triangles*3 and triangles*3 in different registers (retail spills triangles*3 and recomputes rows*triangles*3 at the call), computes columns*2-2 as mvn+add rather than lsl+sub, and hoists the (x+2)/3 division above the rows guard. */
+/* NON_MATCHING: same calls, allocations and loops; armcc keeps triangles in a register and spills rows*triangles*3 (retail keeps rows*triangles, spills triangles*3 and multiplies by 3 at the call), and computes the band's (triangles*3+2)/3 before the rows guard (retail after it). */
 #include "classes/EffGeomRecord.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -11,9 +11,8 @@ void recordPrepareActive(EffGeomRecord *record, u32 buffer, s32 indexCount, s32 
 // for every band, each time offset by that band's first vertex.
 EffGeomHandle *effGeomBuildGridMesh(s32 rows, const u16 *indices, s32 columns, u16 tag)
 {
-    s32 triangles = columns * 2 - 2;
+    s32 triangles = (columns - 1) * 2;
     s32 vertexCount = (rows + 1) * columns;
-    s32 rowIndices = triangles * 3;
     s32 indexCount = rows * triangles * 3;
 
     asdDebugTrace(g_effGeometrySourceFileName, 112);
@@ -27,7 +26,7 @@ EffGeomHandle *effGeomBuildGridMesh(s32 rows, const u16 *indices, s32 columns, u
 
     u16 *vertices = (u16 *)record->vertices;
     for (s32 row = 0; row < rows; row++) {
-        s32 bandTriangles = (rowIndices + 2) / 3;
+        s32 bandTriangles = (triangles * 3 + 2) / 3;
         for (s32 i = 0; i < bandTriangles * 3; i++) {
             vertices[bandTriangles * row * 3 + i] = (u16)(indices[i] + (u16)columns * (u16)row);
         }

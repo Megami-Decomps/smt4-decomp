@@ -14,7 +14,7 @@ struct BattleDistanceReference {
 }
 extern "C" {
 void idSetFindSubjectIndex(BtlMainState *, BtlActionRecord *);
-BattleVector3 FUN_0024d434(BtlMainState *, s32 index, s32 mode);
+BattleVector3 btlActionEffectAnchor(BtlMainState *, s32 index, s32 mode);
 
 static __inline f32 vectorLength(f32 x, f32 y, f32 z)
 {
@@ -38,7 +38,7 @@ bool FUN_00224ab0(f32 *scale, s32 index, s32 mode)
         enabled = true;
     if ((!(action->status & 0x10) && action->animation.kind == 1) || enabled) {
         BattleVector3 reference = reinterpret_cast<BattleDistanceReference *>(asdCameraGetSavedRenderPairs())->position;
-        BattleVector3 position = FUN_0024d434(btlGetMainState(), index, 0);
+        BattleVector3 position = btlActionEffectAnchor(btlGetMainState(), index, 0);
         f32 referenceLength = vectorLength(reference.x, reference.y, reference.z);
         f32 distance = vectorLength(reference.x - position.x, reference.y - position.y, reference.z - position.z);
         *scale = distance / referenceLength * 5.6f;

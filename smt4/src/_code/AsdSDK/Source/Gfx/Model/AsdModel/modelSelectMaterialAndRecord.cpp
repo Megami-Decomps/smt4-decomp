@@ -1,4 +1,3 @@
-/* NON_MATCHING: material/camera selection matches retail; in the float24 depth-bias packing retail shifts the fraction (>> 7) separately in the zero and non-zero arms and masks the exponent unpredicated, where armcc folds the shift into the final orr and predicates the mask. */
 #include "gfx/ModelDepthBias.h"
 
 struct ModelDrawMaterial {
@@ -46,7 +45,7 @@ static __inline void modelSelectMaterial(ModelMaterialContext *context, s32 inde
 }
 
 // Bind the selected material, then restart recording on the first pass's command list.
-void FUN_0034914c(const ModelDrawSelection *selection, ModelMaterialContext *context)
+void modelSelectMaterialAndRecord(const ModelDrawSelection *selection, ModelMaterialContext *context)
 {
     renderCtxResetFrameState(0);
     modelSelectMaterial(context, selection->materialIndex);

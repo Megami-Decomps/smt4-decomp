@@ -13,7 +13,7 @@ s32 FUN_0032c8c8(void);
 void FUN_002c7388(u32, const char *, u32, u32);
 void asdSaveHeaderInit(AsdSaveHeader *, u32, u32, u32, u32, u32, u32);
 s32 asdSaveWriteBlock(u32, const char *, const AsdSaveHeader *, const void *, u32);
-s32 FUN_002ef7f0(u32, const char *);
+s32 fsResultClassifyRestriction(u32, const char *);
 void colorForMode(u32);
 extern char DAT_005e2114[128];
 
@@ -53,7 +53,7 @@ void FUN_00349ca4(u32 job)
     asdSaveHeaderInit(&header, 0x34534444, 0x454d4147, 0, state->request->payloadSize, 0, 0);
     if (!asdSaveWriteBlock(backend, filename, &header, state->request->payload, state->request->payloadSize)) {
         if (backend == 0) {
-            state->result = FUN_002ef7f0(job, filename) == 1 ? 6 : -1;
+            state->result = fsResultClassifyRestriction(job, filename) == 1 ? 6 : -1;
         } else if (backend == 1) {
             FUN_002c7388(job, filename, 1, 0);
             state->busy = 0;

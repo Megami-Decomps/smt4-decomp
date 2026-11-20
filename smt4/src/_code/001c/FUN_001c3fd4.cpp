@@ -68,7 +68,7 @@ int __aeabi_memcpy4(...);
 int FUN_0026cba4(...);
 int partyPanelHandleCursorEdgeInput(...);
 int FUN_0026d144(...);
-int FUN_0026d3e0(...);
+int partyPanelRefreshSelectedItemValues(...);
 int pair40Set(...);
 int slotPlacementAssignSlotAndPosition(...);
 int menuSetModeAndResetTransitions(...);
@@ -143,7 +143,7 @@ extern int gameGetNavigationState(void);
 /* Supplied declaration required: partyPanelHandleCursorEdgeInput. */
 /* Supplied declaration required: FUN_0026cf4c. */
 /* Supplied declaration required: FUN_0026d144. */
-/* Supplied declaration required: FUN_0026d3e0. */
+/* Supplied declaration required: partyPanelRefreshSelectedItemValues. */
 /* Supplied declaration required: FUN_0026d5a4. */
 /* Supplied declaration required: FUN_0026d654. */
 /* Supplied declaration required: FUN_0026d670. */
@@ -595,7 +595,7 @@ LAB_001c4748:
       }
     }
     else {
-      FUN_0026d3e0(temp_v4,0);
+      partyPanelRefreshSelectedItemValues(temp_v4,0);
     }
     temp_v6 = 0;
     do {
@@ -880,7 +880,7 @@ LAB_001c5040:
       }
     }
     else if (temp_v8 == 0) {
-      FUN_0026d3e0(temp_v24,1);
+      partyPanelRefreshSelectedItemValues(temp_v24,1);
     }
     temp_v6 = 0;
     do {
@@ -1762,7 +1762,7 @@ LAB_001c6680:
         }
       }
       else {
-        FUN_0026d3e0(temp_v8,0);
+        partyPanelRefreshSelectedItemValues(temp_v8,0);
       }
     }
     if (*(char *)(temp_v1 + 0x66c) != '\v') {
@@ -2482,7 +2482,7 @@ LAB_001c7c50:
           else {
             temp_v6 = temp_v1 + 0xa08;
           }
-          FUN_0026d3e0(temp_v6,0);
+          partyPanelRefreshSelectedItemValues(temp_v6,0);
           temp_v6 = temp_v1 + 0xa08;
           if (*(char *)(temp_v1 + 0x42) != '\0') {
             temp_v6 = temp_v1 + 0xa6c;
@@ -2517,7 +2517,7 @@ LAB_001c7c50:
           if ((temp_v4 != 0) && (temp_v4 = btlItemUselessOnGroupMember(0,*(unsigned short *)(temp_v1 + 0x36)), temp_v4 != 0)) {
             FUN_0029dfc0(0);
             partyPanelResetCursor();
-            FUN_0026d3e0(temp_v6,0);
+            partyPanelRefreshSelectedItemValues(temp_v6,0);
           }
           partyPanelShowButtonHelp();
           temp_v14 = 1;

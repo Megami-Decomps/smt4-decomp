@@ -1,4 +1,4 @@
-/* NON_MATCHING: the links sub-block pointer (ldr r3,[r0,#60]!) now matches retail; retail also hoists `mov r1,#0` and returns with bxls before the push, the build emits bxeq and a second loop-entry test. */
+/* NON_MATCHING: the empty-count exit before the push (bxls) and the per-iteration colour address now match retail; retail sets the index register before loading the count (the build: after, from a moved load order) and allocates -1, the halfword index and the colour byte to r6/r5/r7 where armcc uses r5/r7/r4. */
 #include "common.h"
 #include "gfx/VertexColor.h"
 
@@ -46,16 +46,14 @@ void FUN_00316a20(SlotOwner *self)
     u32 count = links->setup->count;
     SlotEntry *entry = list->entries;
 
-    if (count == 0) {
-        return;
-    }
     for (u32 index = 0; index < count; index++) {
         VertexColor *vertex = &list->buffer->vertices[(u16)index];
 
-        vertex->r = DAT_00472560[0] * (1.0f / 255.0f) * (1.0f / 255.0f);
-        vertex->g = DAT_00472560[1] * (1.0f / 255.0f) * (1.0f / 255.0f);
-        vertex->b = DAT_00472560[2] * (1.0f / 255.0f) * (1.0f / 255.0f);
-        vertex->a = DAT_00472560[3] * (1.0f / 255.0f) * (1.0f / 255.0f);
+        const u8 *rgba = DAT_00472560;
+        vertex->r = rgba[0] * (1.0f / 255.0f) * (1.0f / 255.0f);
+        vertex->g = rgba[1] * (1.0f / 255.0f) * (1.0f / 255.0f);
+        vertex->b = rgba[2] * (1.0f / 255.0f) * (1.0f / 255.0f);
+        vertex->a = rgba[3] * (1.0f / 255.0f) * (1.0f / 255.0f);
         entry->id = -1;
         entry++;
     }
