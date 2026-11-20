@@ -1,8 +1,3 @@
-/* NON_MATCHING: 34 lines; same instructions and frame (116 bytes, with the retail slots). Two differences: the entry
- * block is scheduled differently (this build zeroes fp and r9 before the vpush; retail after loading the panel's
- * origin, with the vpush right behind the push), and the hidden large panel's empty-frame draw shares its call with
- * the large layout's last overlay where retail shares the small layout's (so the two `nop`s after that call sit in
- * the other layout and the branches between them move by 8 bytes). */
 #include "common.h"
 #include <stdio.h>
 #include "status/StatusStrip.h"
@@ -125,12 +120,16 @@ void statusStripDraw(StatusStrip *panel, s32 x, s32 y, f32 opacity)
             texDrawTableEntryAtStoredOrigin(2, 0x19, 0x40, x, y, 0x6f);
             if (panel->unk28) {
                 texDrawTableEntryAtStoredOrigin(2, 0x19, 0x95, x, y, 0x79);
+                goto restoreOpacity;
             } else if (panel->dimmed) {
                 texDrawTableEntryAtStoredOrigin(2, 0x19, 0x4b, x, y, 0x79);
+                goto restoreOpacity;
             } else if (panel->unk24) {
                 texDrawTableEntryAtStoredOrigin(2, 0x19, 0x4c, x, y, 0x79);
+                goto restoreOpacity;
             } else if (panel->unk29) {
                 texDrawTableEntryAtStoredOrigin(2, 0x19, 0x97, x, y, 0x79);
+                goto restoreOpacity;
             } else {
                 texDrawTableEntryAtStoredOrigin(2, 0x19, 0x3f, x, y, 0x6f);
                 drawSetColorFromRGBA8(0x292929ff);
@@ -186,6 +185,7 @@ void statusStripDraw(StatusStrip *panel, s32 x, s32 y, f32 opacity)
             }
         }
     }
+restoreOpacity:
     efctSetSpeed(1.0f);
 }
 
