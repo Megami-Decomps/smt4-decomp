@@ -5,7 +5,7 @@ extern "C" {
 
 
 extern void FUN_00144ab4(s32 target);
-extern void FUN_0017dd80(void);
+extern void asdGxFlushCommandBuffer(void);
 extern void renderTargetClear(s32 a, s32 b);
 extern void renderCtxResetFrameState(RenderCtxA *ctx);
 extern void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *ctx);
@@ -15,7 +15,7 @@ s32 renderBeginPrimaryScreen(void)
 {
     FUN_00144ab4(0);
     renderCtxSetStereoMode(g_renderCtx, 0);
-    FUN_0017dd80();
+    asdGxFlushCommandBuffer();
     renderTargetClear(0, 0);
     renderCtxResetFrameState(g_renderCtx);
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);

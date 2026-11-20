@@ -16,7 +16,7 @@ typedef struct Entity003ab7c8 {
 
 void pointConvertToFloat(u8 *target, u32 x, u32 y);
 s32 buttonHelpStateIsNot3(void);
-s32 FUN_00241a44(void);
+s32 countdownIsNotFinished(void);
 s32 FUN_00295618(void);
 
 /* Syncs the entity's target to its placement and, when the placement is active and all three gates hold, switches to state 11. */
@@ -33,7 +33,7 @@ void Obj422448::FUN_003ab7c8()
     y = vec2GetYInt(placement);
     x = vec2GetXInt(placement);
     pointConvertToFloat(entity->target, x, y);
-    if (uiSpriteGetCompletionState(placement) != 0 && buttonHelpStateIsNot3() != 0 && FUN_00241a44() != 0 && FUN_00295618() != 0) {
+    if (uiSpriteGetCompletionState(placement) != 0 && buttonHelpStateIsNot3() != 0 && countdownIsNotFinished() != 0 && FUN_00295618() != 0) {
         entity->state = 11;
         entity->stateArg = 0;
     }

@@ -18,31 +18,31 @@ u32 FUN_003bf5a8(s32 index)
                         if (!gameFlagIsSet(entry->status))
                             return 0;
                     } else {
-                        if (FUN_004083a8(237, 4))
+                        if (interactionVariantIsEnabled(237, 4))
                             return 0;
                         if (!gameFlagIsSet(entry->status))
                             return 0;
                     }
                 } else {
-                    if (FUN_004083a8(218, 5))
+                    if (interactionVariantIsEnabled(218, 5))
                         return 0;
                     if (!gameFlagIsSet(entry->status))
                         return 0;
                 }
             } else {
-                if (FUN_004083a8(205, 3))
+                if (interactionVariantIsEnabled(205, 3))
                     return 0;
                 if (!gameFlagIsSet(entry->status))
                     return 0;
             }
         } else {
-            if (FUN_004083a8(191, 7))
+            if (interactionVariantIsEnabled(191, 7))
                 return 0;
             if (!gameFlagIsSet(entry->status))
                 return 0;
         }
     } else {
-        if (FUN_004083a8(78, 8))
+        if (interactionVariantIsEnabled(78, 8))
             return 0;
         if (!gameFlagIsSet(entry->status))
             return 0;

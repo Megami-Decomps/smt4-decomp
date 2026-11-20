@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern int FUN_00145ec8(void);
+extern int questCenterTestFlag(void);
 extern unsigned short *statisticsGetCounter(char, unsigned int, short);
 extern int gameTestFlagBit32(unsigned int);
 /* Supplied declaration required: FUN_00148bb8. */
@@ -130,7 +130,7 @@ LAB_0013bd60:
             *(unsigned char *)((int)puVar6 + 3) =
                  ((unsigned char)puVar7[temp_v6 * 3 + 4] & 0x1f) | (*(unsigned char *)((int)puVar6 + 3) & 0xe0);
             if (temp_v0 != '\0') {
-              temp_v6 = FUN_00145ec8();
+              temp_v6 = questCenterTestFlag();
             }
             else {
               temp_v6 = gameTestFlagBit32(temp_v4);

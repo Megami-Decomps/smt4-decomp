@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00139750(int);
-int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
+int svcWaitSynchronizationN(unsigned char *, int *, int, int, unsigned int, unsigned int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int resultHandleFailure(void);
 int software_interrupt(int);
 
@@ -17,7 +17,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_00139750. */
 extern unsigned int nn_gxlow_CTR_GetGpu(void);
-/* Supplied declaration required: FUN_002c40f8. */
+/* Supplied declaration required: svcWaitSynchronizationN. */
 /* Supplied declaration required: resultHandleFailure. */
 extern void nn_gxlow_CTR_CmdReqQueueTx_Finalize(unsigned int);
 extern unsigned int nn_gxlow_CTR_Gpu_UnregisterInterruptRelayQueue(unsigned int);
@@ -42,7 +42,7 @@ void nn_gxlow_CTR_InterruptReceiver_Finalize(int param_1)
   }
   uStack_18 = *(unsigned int *)(param_1 + 0x6c);
   puVar1 = temp_v1;
-  FUN_002c40f8(puVar1,&uStack_18,1,0,0xffffffff,0xffffffff);
+  svcWaitSynchronizationN(puVar1,&uStack_18,1,0,0xffffffff,0xffffffff);
   if ((int)puVar1 < 0) {
     resultHandleFailure();
   }

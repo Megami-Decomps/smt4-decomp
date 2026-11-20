@@ -5,7 +5,7 @@
 extern "C" {
 void cursorResetFromParam(void);
 void asdModelCommandBlockRelease(void);
-void FUN_003c8538(s32 arg);
+void renderStatesSubmitCached(s32 arg);
 extern u32 *g_modelCommandBuffer; /* model command buffer */
 extern s32 g_modelCommandWordCount;  /* words used in the buffer */
 }
@@ -34,5 +34,5 @@ extern "C" void _ZN9Obj464cb016postSelectedWordEv(u32 word)
     }
     commandQueuePushPair(mode << 24, 0x80126);
     asdModelCommandBlockRelease();
-    FUN_003c8538(1);
+    renderStatesSubmitCached(1);
 }

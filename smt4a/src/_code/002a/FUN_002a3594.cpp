@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_00183e58(void);
+void buttonHelpTeardownSlots(void);
 void messageSlotSet(s32 value);
 void scrCommMessageSetMode(...);
 void messageStateEndMode2(void);
@@ -27,7 +27,7 @@ u32 FUN_002a3594(void)
             return 1;
         }
     } else {
-        FUN_00183e58();
+        buttonHelpTeardownSlots();
         commonBgReset();
         campCreateCommonBackground();
     }

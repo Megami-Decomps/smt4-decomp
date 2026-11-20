@@ -22,7 +22,7 @@ struct BattleDebugMasks {
 }
 
 extern "C" {
-extern BattleDebugMasks DAT_005715f8;
+extern BattleDebugMasks g_btlDebugGlobals;
 extern u64 DAT_00571678;
 extern u64 DAT_00571720;
 
@@ -31,21 +31,21 @@ void btlDebugNormalizeMarkerFlags(void*, BtlMainStateA* state)
 {
     u64 flags;
     memcpy(&flags, state->markerMasks.words, sizeof(flags));
-    if (flags & DAT_005715f8.primaryTrigger) {
-        flags = (flags | DAT_005715f8.enabled0 | DAT_005715f8.enabled1 |
-                 DAT_005715f8.enabled3 | DAT_005715f8.enabled4 |
-                 DAT_005715f8.enabled2) & ~DAT_005715f8.secondaryMode;
+    if (flags & g_btlDebugGlobals.primaryTrigger) {
+        flags = (flags | g_btlDebugGlobals.enabled0 | g_btlDebugGlobals.enabled1 |
+                 g_btlDebugGlobals.enabled3 | g_btlDebugGlobals.enabled4 |
+                 g_btlDebugGlobals.enabled2) & ~g_btlDebugGlobals.secondaryMode;
     } else if (flags & DAT_00571720) {
-        flags = flags | DAT_005715f8.enabled0 | DAT_005715f8.enabled1 |
-                 DAT_005715f8.enabled3 | DAT_005715f8.enabled4 |
-                 DAT_005715f8.enabled2 | DAT_005715f8.secondaryMode;
+        flags = flags | g_btlDebugGlobals.enabled0 | g_btlDebugGlobals.enabled1 |
+                 g_btlDebugGlobals.enabled3 | g_btlDebugGlobals.enabled4 |
+                 g_btlDebugGlobals.enabled2 | g_btlDebugGlobals.secondaryMode;
         memcpy(state->markerMasks.words, &flags, sizeof(flags));
         return;
     } else {
         // The default path deliberately omits enabled2 from the clear mask.
-        flags = ((flags & ~DAT_005715f8.enabled0) | DAT_00571678) &
-                ~DAT_005715f8.enabled1 & ~DAT_005715f8.enabled3 &
-                ~DAT_005715f8.enabled4 & ~DAT_005715f8.secondaryMode;
+        flags = ((flags & ~g_btlDebugGlobals.enabled0) | DAT_00571678) &
+                ~g_btlDebugGlobals.enabled1 & ~g_btlDebugGlobals.enabled3 &
+                ~g_btlDebugGlobals.enabled4 & ~g_btlDebugGlobals.secondaryMode;
     }
     memcpy(state->markerMasks.words, &flags, sizeof(flags));
 }

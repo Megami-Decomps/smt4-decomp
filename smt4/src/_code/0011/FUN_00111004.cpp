@@ -10,7 +10,7 @@ extern "C" {
 s32 FUN_00121e50(AocSystem *system);
 void aocReleasePackageOwner(AocSystem *system);
 void kernelThreadJoinAndClose(u32 *waitHandle);
-s32 FUN_002c40f8(s32 *signalled, const u32 *handles, s32 count, s32 waitAll, u32 timeoutLow, u32 timeoutHigh);
+s32 svcWaitSynchronizationN(s32 *signalled, const u32 *handles, s32 count, s32 waitAll, u32 timeoutLow, u32 timeoutHigh); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* The AOC job step: once the operation it started is acknowledged and its event is signalled,
  * queues the follow-up request; then, if the wait on its handle times out, releases the handle. */
@@ -32,7 +32,7 @@ u32 FUN_00111004(u32 handle)
     u32 waitHandle = work->waitHandle;
     if (waitHandle != 0) {
         s32 signalled = 0;
-        s32 result = FUN_002c40f8(&signalled, &waitHandle, 1, 0, 0, 0);
+        s32 result = svcWaitSynchronizationN(&signalled, &waitHandle, 1, 0, 0, 0);
         bool failed = nnResultIsFailure(result);
         if (failed) {
             resultHandleFailure(result, failed);

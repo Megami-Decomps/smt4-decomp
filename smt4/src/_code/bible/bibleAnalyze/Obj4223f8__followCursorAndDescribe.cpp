@@ -44,7 +44,7 @@ const char *dataLookupDisplayName(u8 *, u32);
 void buttonHelpSetText(const char *, u32);
 extern const char DAT_0040226c[];
 extern const char DAT_00402274[];
-extern BibleAnalyzeTextView DAT_0043d990;
+extern BibleAnalyzeTextView g_btlDevilListCallbackContext;
 
 }
 
@@ -60,7 +60,7 @@ void Obj4223f8::followCursorAndDescribe()
     s32 x = vec2GetXInt(cursor);
     pointConvertToFloat(work->position, x, y);
     if (uiSpriteGetCompletionState(cursor) && buttonHelpIsNotActive()) {
-        FUN_002a0cc8(0);
+        gameGlobalsSetSubScreenActive(0);
         work->state = 2;
         work->stateArg = 0;
         pointConvertToFloat(work->position, 0, 0);
@@ -72,7 +72,7 @@ void Obj4223f8::followCursorAndDescribe()
         }
         const char *displayName = dataLookupDisplayName(nameBuffer, work->nameId);
         const char *fallback = DAT_0040226c;
-        __2sprintf(text, DAT_00402274, displayName == NULL ? fallback : displayName, DAT_0043d990.suffix);
+        __2sprintf(text, DAT_00402274, displayName == NULL ? fallback : displayName, g_btlDevilListCallbackContext.suffix);
         buttonHelpSetText(text, 0x323232ff);
     }
 }

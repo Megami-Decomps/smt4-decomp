@@ -12,7 +12,7 @@ typedef struct HeapRegion {
 
 HeapRegion *nn_fnd_detail_GetNextListObject(void *head, HeapRegion *previous);
 HeapRegion *nnFndFindNestedRange(void *list, void *address);
-void FUN_00431e1c(void *list, void *node);
+void nnFndExpHeapUnlinkFreeBlock(void *list, void *node);
 
 extern u8 DAT_00647604;  /* list of top level heap regions */
 
@@ -44,7 +44,7 @@ void nnFndDetailRemoveBlockFromRegion(void *node)
     if (region != NULL) {
         list = region->list;
     }
-    FUN_00431e1c(list, node);
+    nnFndExpHeapUnlinkFreeBlock(list, node);
 }
 
 } /* extern "C" */

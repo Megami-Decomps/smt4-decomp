@@ -5,7 +5,7 @@
 extern "C" {
 
 int aocRecordLookup83(void);
-int FUN_00295a18(...);
+int saveFlagSetOrAddCounter(...);
 int jyoucyuGetTableEntry(int);
 int aocFindPackageTable22Record(int, unsigned int);
 
@@ -25,7 +25,7 @@ extern int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: aocRecordLookup83. */
 extern int unlockFlagTest(int);
-/* Supplied declaration required: FUN_00295a18. */
+/* Supplied declaration required: saveFlagSetOrAddCounter. */
 extern int randNextInRange(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
@@ -121,7 +121,7 @@ unsigned int FUN_001f8da8(unsigned int param_1,int param_2,int param_3,unsigned 
           temp_v7 = randNextInRange(99);
           temp_v3 = (temp_v7 + 1U) & 0xffff;
           if (temp_v3 <= *(unsigned char *)(temp_v10 + 0xb)) {
-            temp_v3 = FUN_00295a18(temp_v6,1);
+            temp_v3 = saveFlagSetOrAddCounter(temp_v6,1);
             if (param_2 != 0) {
               *(unsigned int *)(param_2 + temp_v5 * 4) = temp_v6;
             }
@@ -198,7 +198,7 @@ unsigned int FUN_001f8da8(unsigned int param_1,int param_2,int param_3,unsigned 
             else {
               *(unsigned char *)(param_3 + temp_v5) = 0;
             }
-            FUN_00295a18(temp_v7,1);
+            saveFlagSetOrAddCounter(temp_v7,1);
             if (param_2 != 0) {
               *(int *)(param_2 + temp_v5 * 4) = temp_v7;
             }

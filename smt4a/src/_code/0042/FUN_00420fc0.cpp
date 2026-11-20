@@ -11,7 +11,7 @@ void FUN_00420fc0(ModelStatePlayer *player)
         u32 name = FUN_003fdadc();
         u32 motion = ownerSlotSetText(model, name);
         if (motion != MODEL_MOTION_NONE) {
-            FUN_003fd924(model, motion, 2, 0.0f, 0.0f);
+            motionPlayerStartBlended(model, motion, 2, 0.0f, 0.0f);
         }
         motion = FUN_001a79e8(model, name);
         if (motion != MODEL_MOTION_NONE) {

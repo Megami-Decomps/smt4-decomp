@@ -8,9 +8,9 @@
 extern "C" {
 extern StatusCameraWork *g_statusCamera;
 void FUN_002bc644(s32, s32, s32, s32);
-void FUN_002c2044(StatusCameraWork *, u32);
-void FUN_002c1edc(StatusCameraWork *, const Vec3 *, const Vec3 *, const Vec3 *);
-void FUN_002c1e30(StatusCameraWork *, u32, f32, f32, f32, f32);
+void cameraMatrixCacheReset(StatusCameraWork *, u32);
+void cameraMatrixCacheSetLookAt(StatusCameraWork *, const Vec3 *, const Vec3 *, const Vec3 *);
+void stereoCameraSetPerspective(StatusCameraWork *, u32, f32, f32, f32, f32);
 void asdCameraRegister(StatusCameraWork *);
 void FUN_002c159c(StatusCameraWork *, f32, f32);
 
@@ -37,9 +37,9 @@ void statusCameraSetup(const Vec3 *eye, const Vec3 *direction, const Vec3 *refer
     target.y += work->dir.y * work->dist;
     target.z += work->dir.z * work->dist;
     FUN_002bc644(200, 0, 200, 240);
-    FUN_002c2044(work, 1);
-    FUN_002c1edc(work, &work->eye, &target, &up);
-    FUN_002c1e30(work, 1, work->lens.fov, work->lens.nearClip, work->lens.farClip, 1.6666666f);
+    cameraMatrixCacheReset(work, 1);
+    cameraMatrixCacheSetLookAt(work, &work->eye, &target, &up);
+    stereoCameraSetPerspective(work, 1, work->lens.fov, work->lens.nearClip, work->lens.farClip, 1.6666666f);
     FUN_00298d50(reinterpret_cast<u32>(work));
     asdCameraRegister(work);
     FUN_002c159c(work, scale, 1.0f);

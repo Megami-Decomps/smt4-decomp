@@ -7,8 +7,8 @@
  * stamped, filled in and appended to its pending list. */
 extern "C" {
 Obj421aa4Manager *soundRequestQueueGetInstance(void);
-Obj421aa4Manager *FUN_002bae7c(void);
-/* Flushes the manager's pending requests; returns a token FUN_002b4b94 waits on. */
+Obj421aa4Manager *soundStreamCommandManagerGetInstance(void);
+/* Flushes the manager's pending requests; returns a token soundRequestQueueDequeueUntilToken waits on. */
 s32 soundRequestQueueFlush(Obj421aa4Manager *manager, s32 value);
 Obj421aa4Node *FUN_002b4f64(Obj421aa4Manager *manager, int words);
 void listAppendNode(Obj421aa4Manager *manager, Obj421aa4Node *node);

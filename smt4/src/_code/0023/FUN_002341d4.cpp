@@ -7,7 +7,7 @@ extern "C" {
 WindowStatusResult FUN_00353154(void *provider, void *identifier);
 WindowStatusResult FUN_002345a4(void *provider, void *record, const void *identifier);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
-u32 FUN_002ba81c(char *destination, const char *source, u32 capacity);
+u32 stringCopyTruncated(char *destination, const char *source, u32 capacity);
 u32 textConvertToBoundedWide(void *owner, u16 *buffer, u32 length, const void *identifier);
 
 // Populate the product name and localized title/description, preserving the first provider failure.
@@ -23,7 +23,7 @@ WindowStatusResult FUN_002341d4(ResourceDisplayMetadata *metadata)
     result = FUN_002345a4(metadata->provider, &product, identifier);
     if (nnResultIsFailure(legacyResourceIdRemap(&result)))
         return result;
-    FUN_002ba81c(metadata->productName, product.name, 0x40);
+    stringCopyTruncated(metadata->productName, product.name, 0x40);
     result = FUN_002345a4(metadata->provider, &text, identifier);
     if (nnResultIsFailure(legacyResourceIdRemap(&result)))
         return result;

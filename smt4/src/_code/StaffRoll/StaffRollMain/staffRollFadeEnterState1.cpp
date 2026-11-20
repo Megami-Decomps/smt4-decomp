@@ -1,10 +1,8 @@
-/* Staff roll: fades the screen layers out and moves to state 1. */
 #include "common.h"
 #include "StaffRoll/StaffRollMain.h"
+#include "code/Code002c_Smt4.h"
 
 extern "C" {
-
-int FUN_002c29d8(int layer, int frames, int alpha);
 
 extern StaffRollWork *g_staffRoll;
 
@@ -13,11 +11,12 @@ static __inline void staffRollSetState(StaffRollWork *work, s32 state)
     work->state = state;
 }
 
+/* Starts fading both screens in over 60 frames and waits for the fades. */
 void staffRollFadeEnterState1(void)
 {
-    FUN_002c29d8(0, 0x3c, 0xff);
-    FUN_002c29d8(1, 0x3c, 0xff);
-    staffRollSetState(g_staffRoll, 1);
+    screenFadeStartIn(0, 60, 0xff);
+    screenFadeStartIn(1, 60, 0xff);
+    staffRollSetState(g_staffRoll, STAFF_ROLL_STATE_WAIT_FADE_IN);
 }
 
 } /* extern "C" */

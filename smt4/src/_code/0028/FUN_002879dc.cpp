@@ -17,12 +17,12 @@ struct GlobalView {
 };
 
 extern "C" {
-extern GlobalView DAT_004474f0;
+extern GlobalView g_lmapViewHolder;
 
 // Clear the active request or replace it when the new priority is not lower.
 void FUN_002879dc(s32 identifier, s32 amount, s32 priority)
 {
-    StateView* state = DAT_004474f0.unk04;
+    StateView* state = g_lmapViewHolder.unk04;
     if (amount == 0) {
         state->unk2A0 = 0;
         state->unk2A4 = 0;
@@ -34,7 +34,7 @@ void FUN_002879dc(s32 identifier, s32 amount, s32 priority)
     }
 
     state->unk2A0 = 1;
-    StateView* output = DAT_004474f0.unk04;
+    StateView* output = g_lmapViewHolder.unk04;
     if (identifier == 0) {
         identifier = -1;
     }

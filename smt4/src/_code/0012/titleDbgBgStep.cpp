@@ -1,0 +1,37 @@
+#include "event/bustupEvent/BustupTex.h"
+#include "sys/RuntimeObjects.h"
+#include "common.h"
+
+struct TitleTask {
+    u32 job;     // 0x00
+    u8 unk04[4];
+    s32 step;    // 0x08
+};
+
+extern "C" {
+
+extern TitleTask *g_titleDbgBg; /* 0x44e2e8 */
+void asdTMTexTableLoadTmx(s32 a, s32 b);
+void gxResetUniformQuadColorsAndScale(void);
+
+// Step function of the loading task: step 0 loads the texture table once, step 99 stops the job.
+u32 titleDbgBgStep(void)
+{
+    TitleTask *task = g_titleDbgBg;
+    switch (task->step) {
+    case 0:
+        asdTMTexTableLoadTmx(0, 0);
+        asdTMTexTablePrepareNodeImage(0, 0);
+        gxResetUniformQuadColorsAndScale();
+        task->step++;
+        break;
+    case 1:
+        break;
+    case 99:
+        jobStop(task->job, 0);
+        break;
+    }
+    return 0;
+}
+
+} /* extern "C" */

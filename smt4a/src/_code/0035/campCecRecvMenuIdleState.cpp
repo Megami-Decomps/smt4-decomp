@@ -27,7 +27,7 @@ struct CampCecFlagGlobals {
 extern "C" {
 MarkPresenceRecord *gameDataGetMarkEntry(s32 index);
 void sysPlaySe(u32 sound);
-void FUN_0037c8e4(s32 enabled, s32 mode);
+void messageBannerInitCounter(s32 enabled, s32 mode);
 void messageRestoreBanner();
 u32 FUN_003ba65c(void *controls);
 extern CampCecFlagGlobals g_campCec;
@@ -70,7 +70,7 @@ extern "C" s32 campCecRecvMenuIdleState(CampCecMenuState *work)
     }
     if (work->refreshRequested != 0) {
         work->refreshRequested = 0;
-        FUN_0037c8e4(1, 0);
+        messageBannerInitCounter(1, 0);
         messageRestoreBanner();
     }
     if (FUN_003ba65c(work->controls) & 2) {

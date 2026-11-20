@@ -1,0 +1,30 @@
+#include "mobiclip_ctrl/MobiclipCtrl.h"
+
+extern "C" {
+extern S4Player g_mobiclipPlayer;
+void registerBlockRequestGroups(u32 mask);
+void gfxRestoreTextureBindingState(u32 mask, s32 enabled);
+u32 nngxGetError(void);
+void gxLcdClearForceBlack(void);
+void FUN_0015842c(S4Player *player);
+void asdSndApplyPendingVoiceState(void);
+
+// Restore display request groups and normal shared-frame processing.
+void mobiclipRestoreDisplayState(s32 mode)
+{
+    S4Player *player = &g_mobiclipPlayer;
+    switch (mode) {
+    case 2:
+        gxLcdClearForceBlack();
+        break;
+    default:
+        registerBlockRequestGroups(0x3fff);
+        gfxRestoreTextureBindingState(0x3fff, 1);
+        nngxGetError();
+        break;
+    }
+    FUN_0015842c(player);
+    if (player->handle)
+        asdSndApplyPendingVoiceState();
+}
+}

@@ -10,9 +10,9 @@ int archivePathDeviceOpen(...);
 int asdMemoryAllocAligned(...);
 int asdOperatorNew(...);
 int nn_os_LightEvent_Wait(...);
-int FUN_002c40f8(...);
+int svcWaitSynchronizationN(...);
 int asdMemFree(...);
-int FUN_002c5254(...);
+int svcReleaseSemaphore(...);
 int resultHandleFailure(...);
 int asdFatalError(...);
 int FUN_002c618c(...);
@@ -43,9 +43,9 @@ extern int FUN_002b90c8(int *, unsigned int, unsigned int *);
 /* Supplied declaration required: asdMemoryAllocAligned. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: nn_os_LightEvent_Wait. */
-/* Supplied declaration required: FUN_002c40f8. */
+/* Supplied declaration required: svcWaitSynchronizationN. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002c5254. */
+/* Supplied declaration required: svcReleaseSemaphore. */
 /* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: FUN_002c618c. */
@@ -86,13 +86,13 @@ void asdFileThreadMain(void)
     temp_v2 = -1;
     uStack_244 = 0xffffffff;
     puVar1 = temp_v3;
-    FUN_002c40f8(puVar1,&uStack_240,1,0);
+    svcWaitSynchronizationN(puVar1,&uStack_240,1,0);
     if ((int)puVar1 < 0) {
       resultHandleFailure();
     }
     piVar8 = DAT_00465010;
     piVar2 = &temp_v2;
-    FUN_002c5254(&temp_v2,g_asdFileMutex,1);
+    svcReleaseSemaphore(&temp_v2,g_asdFileMutex,1);
     while( 1 ) {
       if ((int)piVar2 < 0) {
         resultHandleFailure();
@@ -107,14 +107,14 @@ void asdFileThreadMain(void)
           temp_v2 = -1;
           uStack_244 = 0xffffffff;
           puVar1 = temp_v3;
-          FUN_002c40f8(puVar1,&uStack_240,1,0);
+          svcWaitSynchronizationN(puVar1,&uStack_240,1,0);
           if ((int)puVar1 < 0) {
             resultHandleFailure();
           }
           (*(romwright_code *)piVar8[0x4e])(piVar8 + 0xb);
           piVar8[0x4e] = 0;
           piVar2 = &temp_v2;
-          FUN_002c5254(&temp_v2,g_asdFileMutex,1);
+          svcReleaseSemaphore(&temp_v2,g_asdFileMutex,1);
           if ((int)piVar2 < 0) {
             resultHandleFailure();
           }
@@ -251,7 +251,7 @@ void asdFileThreadMain(void)
           temp_v2 = -1;
           uStack_244 = 0xffffffff;
           puVar1 = temp_v3;
-          FUN_002c40f8(puVar1,&uStack_240,1,0);
+          svcWaitSynchronizationN(puVar1,&uStack_240,1,0);
           if ((int)puVar1 < 0) {
             resultHandleFailure();
           }
@@ -261,7 +261,7 @@ void asdFileThreadMain(void)
           }
           (*(romwright_code *)piVar8[0x4c])(piVar2);
           piVar2 = &temp_v2;
-          FUN_002c5254(&temp_v2,g_asdFileMutex,1);
+          svcReleaseSemaphore(&temp_v2,g_asdFileMutex,1);
 joined_r0x0011436c:
           if ((int)piVar2 < 0) {
             resultHandleFailure();
@@ -271,20 +271,20 @@ joined_r0x0011436c:
         temp_v2 = -1;
         uStack_244 = 0xffffffff;
         puVar1 = temp_v3;
-        FUN_002c40f8(puVar1,&uStack_240,1,0);
+        svcWaitSynchronizationN(puVar1,&uStack_240,1,0);
         if ((int)puVar1 < 0) {
           resultHandleFailure();
         }
         piVar8 = (int *)piVar8[0x4f];
         piVar2 = &temp_v2;
-        FUN_002c5254(&temp_v2,g_asdFileMutex,1);
+        svcReleaseSemaphore(&temp_v2,g_asdFileMutex,1);
       }
       else {
         uStack_240 = g_asdFileMutex;
         temp_v2 = -1;
         uStack_244 = 0xffffffff;
         puVar1 = temp_v3;
-        FUN_002c40f8(puVar1,&uStack_240,1,0);
+        svcWaitSynchronizationN(puVar1,&uStack_240,1,0);
         if ((int)puVar1 < 0) {
           resultHandleFailure();
         }
@@ -292,7 +292,7 @@ joined_r0x0011436c:
         piVar8[1] = temp_v1 - piVar8[2];
         if (0 < temp_v1 - piVar8[2]) {
           piVar2 = &temp_v2;
-          FUN_002c5254(&temp_v2,g_asdFileMutex,1);
+          svcReleaseSemaphore(&temp_v2,g_asdFileMutex,1);
           goto joined_r0x0011436c;
         }
         temp_v1 = piVar8[0x50];
@@ -315,7 +315,7 @@ joined_r0x0011436c:
         piVar8[3] = 0;
         asdMemFree(piVar8);
         piVar2 = &temp_v2;
-        FUN_002c5254(&temp_v2,g_asdFileMutex,1);
+        svcReleaseSemaphore(&temp_v2,g_asdFileMutex,1);
         piVar8 = piVar7;
       }
     }

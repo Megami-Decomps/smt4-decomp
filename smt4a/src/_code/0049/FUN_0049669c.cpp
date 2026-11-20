@@ -40,7 +40,7 @@ u32 npcCreateTextureEffectJob(u32 id, s32 x, s32 y);
 void npc2dCreatePortraitJob(u32 id, s32 x, s32 y);
 void FUN_0031bca4(void);
 void resourceReleaseReference(void);
-u32 FUN_00409fe8(s32 id, s32 flag);
+u32 resourceCacheGetOrLoadModel(s32 id, s32 flag);
 
 /* Loads the shop scene: the shared layout, then the stock file and backdrop of the shop for its district
  * (weapons or items); starts the backdrop job and, for a shop with an NPC, creates its model. */
@@ -124,7 +124,7 @@ void FUN_0049669c(ShopScene *shop)
             shop->npcModel = 0;
         }
         {
-            u32 model = FUN_00409fe8(nkmEnemyFindById((u16)npcId)->battleTextureId, 1);
+            u32 model = resourceCacheGetOrLoadModel(nkmEnemyFindById((u16)npcId)->battleTextureId, 1);
 
             shop->npcState = 0;
             shop->npcModel = model;

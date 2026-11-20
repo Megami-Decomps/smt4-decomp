@@ -14,8 +14,8 @@ int FUN_003563fc(void);
 int moriModelUnitStartMaterialAnimation(...);
 int animationSelectClip(unsigned int, int, int);
 int modelPlayClip(unsigned int, int, int);
-int FUN_0040a908(...);
-int FUN_0040a918(...);
+int moriModelContentSetRequestFirst(...);
+int moriModelContentSetRequestSecond(...);
 int moriModelContentCopyBody(...);
 int moriModelContentLoadBody(int, int);
 int handleRegistryRegisterObject(unsigned int, unsigned int);
@@ -32,11 +32,11 @@ extern int FUN_003a3238(void);
 /* Supplied declaration required: moriModelUnitStartMaterialAnimation. */
 /* Supplied declaration required: animationSelectClip. */
 /* Supplied declaration required: modelPlayClip. */
-/* Supplied declaration required: FUN_0040a908. */
-/* Supplied declaration required: FUN_0040a918. */
+/* Supplied declaration required: moriModelContentSetRequestFirst. */
+/* Supplied declaration required: moriModelContentSetRequestSecond. */
 /* Supplied declaration required: moriModelContentCopyBody. */
 /* Supplied declaration required: moriModelContentLoadBody. */
-extern int FUN_0040ab8c(unsigned int);
+extern int moriModelContentIsLoaded(unsigned int);
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
 
@@ -104,7 +104,7 @@ unsigned int FUN_0033bfac(void)
     FUN_003563fc();
     temp_v3 = ((unsigned int)g_mapGimic) + *(short *)(((unsigned int)g_mapGimic) + 0xe) * 0x3c;
     if ((*(char *)(temp_v3 + 0xb4) == '\0') &&
-       (temp_v4 = FUN_0040ab8c(*(unsigned int *)(temp_v3 + 0xa8)), temp_v4 == 0)) {
+       (temp_v4 = moriModelContentIsLoaded(*(unsigned int *)(temp_v3 + 0xa8)), temp_v4 == 0)) {
       return 0;
     }
     temp_v5 = ((unsigned int)g_mapGimic);
@@ -301,8 +301,8 @@ unsigned int FUN_0033bfac(void)
           }
           *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
           modelLoadFileAsyncByName();
-          FUN_0040a908(*(unsigned int *)(temp_v2 + 0xa8),0x10000);
-          FUN_0040a918(*(unsigned int *)(temp_v2 + 0xa8),0x20000);
+          moriModelContentSetRequestFirst(*(unsigned int *)(temp_v2 + 0xa8),0x10000);
+          moriModelContentSetRequestSecond(*(unsigned int *)(temp_v2 + 0xa8),0x20000);
         }
       }
       else {
@@ -314,8 +314,8 @@ unsigned int FUN_0033bfac(void)
             temp_v6 = modelListInit();
           }
           *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
-          FUN_0040a908();
-          FUN_0040a918(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
+          moriModelContentSetRequestFirst();
+          moriModelContentSetRequestSecond(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
           moriModelContentCopyBody(*(unsigned int *)(temp_v2 + 0xa8),
                        *(unsigned int *)(((unsigned int)g_mapGimic) + *(int *)(((unsigned int)g_mapGimic) + 0x30) * 0x3c + 0xa8),0
                       );
@@ -331,8 +331,8 @@ unsigned int FUN_0033bfac(void)
           temp_v6 = modelListInit();
         }
         *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
-        FUN_0040a908();
-        FUN_0040a918(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
+        moriModelContentSetRequestFirst();
+        moriModelContentSetRequestSecond(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
         modelLoadFileAsyncByName(*(unsigned int *)(temp_v2 + 0xa8),temp_v9);
         temp_v5 = ((unsigned int)g_mapGimic);
         *(int *)(((unsigned int)g_mapGimic) + 0x30) = (int)*(short *)(((unsigned int)g_mapGimic) + 0xe);
@@ -348,8 +348,8 @@ unsigned int FUN_0033bfac(void)
           temp_v6 = modelListInit();
         }
         *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
-        FUN_0040a908();
-        FUN_0040a918(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
+        moriModelContentSetRequestFirst();
+        moriModelContentSetRequestSecond(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
         moriModelContentCopyBody(*(unsigned int *)(temp_v2 + 0xa8),
                      *(unsigned int *)(((unsigned int)g_mapGimic) + *(int *)(((unsigned int)g_mapGimic) + 0x28) * 0x3c + 0xa8),0);
         *(unsigned char *)(temp_v2 + 0xb4) = 1;
@@ -364,8 +364,8 @@ unsigned int FUN_0033bfac(void)
         temp_v6 = modelListInit();
       }
       *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
-      FUN_0040a908();
-      FUN_0040a918(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
+      moriModelContentSetRequestFirst();
+      moriModelContentSetRequestSecond(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
       modelLoadFileAsyncByName(*(unsigned int *)(temp_v2 + 0xa8),temp_v9);
       temp_v5 = ((unsigned int)g_mapGimic);
       *(int *)(((unsigned int)g_mapGimic) + 0x28) = (int)*(short *)(((unsigned int)g_mapGimic) + 0xe);
@@ -381,8 +381,8 @@ unsigned int FUN_0033bfac(void)
         temp_v6 = modelListInit();
       }
       *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
-      FUN_0040a908();
-      FUN_0040a918(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
+      moriModelContentSetRequestFirst();
+      moriModelContentSetRequestSecond(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
       moriModelContentCopyBody(*(unsigned int *)(temp_v2 + 0xa8),
                    *(unsigned int *)(((unsigned int)g_mapGimic) + *(int *)(((unsigned int)g_mapGimic) + 0x20) * 0x3c + 0xa8),0);
       *(unsigned char *)(temp_v2 + 0xb4) = 1;
@@ -397,8 +397,8 @@ unsigned int FUN_0033bfac(void)
       temp_v6 = modelListInit();
     }
     *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
-    FUN_0040a908();
-    FUN_0040a918(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
+    moriModelContentSetRequestFirst();
+    moriModelContentSetRequestSecond(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
     modelLoadFileAsyncByName(*(unsigned int *)(temp_v2 + 0xa8),temp_v9);
     temp_v5 = ((unsigned int)g_mapGimic);
     *(int *)(((unsigned int)g_mapGimic) + 0x20) = (int)*(short *)(((unsigned int)g_mapGimic) + 0xe);

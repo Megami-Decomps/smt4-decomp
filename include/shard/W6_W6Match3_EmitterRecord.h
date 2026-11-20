@@ -19,7 +19,7 @@ ResourceEmitter *effPolygonTrackCreateFromResource(const EmitterResourceRecord *
 extern "C" {
 #endif
 
-u8 FUN_002f530c(s32 kind, s32 arg);
+u8 archivePathRequestSucceeded(s32 kind, s32 arg);
 
 #ifdef __cplusplus
 }

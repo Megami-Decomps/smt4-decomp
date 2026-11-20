@@ -4,7 +4,7 @@
 extern "C" {
 
 void sysPlaySe(s32 soundId);
-s32 FUN_00162ea4(void);
+s32 eventIsSkipping(void);
 u32 scrGetArg(s32 index);
 s32 scrGetCommandFrame(void);
 void uiQuestCreate(s32 value);
@@ -21,7 +21,7 @@ u8 FUN_003b7044(void)
 
     if (scrGetCommandFrame() == 0) {
         flagEntrySetValue(first, second);
-        result = FUN_00162ea4();
+        result = eventIsSkipping();
         if (result != 0) {
             return 1;
         }

@@ -23,9 +23,9 @@ typedef struct CameraMoveRequest {
 } CameraMoveRequest;
 
 
-s32 FUN_003033d4(void);
+s32 lmapResolveContextValue(void);
 s32 FUN_0033a374(LmapViewA *view);
-void FUN_00303460(s32 arg);
+void lmapCameraSetMode(s32 arg);
 f32 libm_sinf(f32 radians);
 s32 FUN_00330108(MapVec3 *from, MapVec3 *to, MapVec3 *out);
 void FUN_002d1e44(CameraMoveRequest *request);
@@ -35,7 +35,7 @@ void FUN_002d1e44(CameraMoveRequest *request);
  * move is done. */
 void FUN_00376c64(void)
 {
-    s32 index = FUN_003033d4();
+    s32 index = lmapResolveContextValue();
     LmapViewA *view = g_lmapViewHolder.view;
 
     if (view->phase != 0) {
@@ -50,7 +50,7 @@ void FUN_00376c64(void)
             view->savedTarget.x = view->move.value.target.first.x;
             view->savedTarget.y = view->move.value.target.first.y;
             view->savedTarget.z = view->move.value.target.first.z;
-            FUN_00303460(0);
+            lmapCameraSetMode(0);
             view = g_lmapViewHolder.view;
             view->phase++;
             view->unk008 = 0;
@@ -62,7 +62,7 @@ void FUN_00376c64(void)
     f32 dz = view->savedTarget.z - view->savedEye.z;
 
     if (sqrtf(dx * dx + dy * dy + dz * dz) < 200.0f) {
-        FUN_00303460(0);
+        lmapCameraSetMode(0);
         return;
     }
     CameraMoveRequest request;

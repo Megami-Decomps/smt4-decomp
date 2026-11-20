@@ -2,7 +2,7 @@
 #include "sound/SoundParameterCommand.h"
 
 extern "C" {
-f32 FUN_0017fc38(const SoundFadeState *fade);
+f32 interpolationStateEvaluate(const SoundFadeState *fade);
 SoundParameterQueue *objectCommandQueueGet(void);
 SoundParameterCommand *objectCommandReserveWords(SoundParameterQueue *queue, u32 words);
 void listAppendNode(SoundParameterQueue *queue, SoundParameterCommand *command);
@@ -15,10 +15,10 @@ void FUN_0045f478(SoundParameterVoice *voice)
         volume = 0.0f;
     } else {
         volume = voice->owner->volume * voice->volumeMultiplier;
-        volume = FUN_0017fc38(&voice->fade) * volume;
-        volume = FUN_0017fc38(&voice->fades[0]) * volume;
-        volume = FUN_0017fc38(&voice->fades[1]) * volume;
-        volume = FUN_0017fc38(&voice->fades[2]) * volume;
+        volume = interpolationStateEvaluate(&voice->fade) * volume;
+        volume = interpolationStateEvaluate(&voice->fades[0]) * volume;
+        volume = interpolationStateEvaluate(&voice->fades[1]) * volume;
+        volume = interpolationStateEvaluate(&voice->fades[2]) * volume;
         volume = voice->volume * volume;
         volume = voice->volumeScale * volume;
     }

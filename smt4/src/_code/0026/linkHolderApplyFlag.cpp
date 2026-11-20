@@ -2,8 +2,8 @@
 
 extern "C" {
 
-int FUN_0029ae60(void);
-int FUN_0029b8ec(void);
+int linkHolderClearFlagGroup(void);
+int linkHolderSetFlagGroup(void);
 
 typedef struct Obj {
     /* 0x00 */ u8 unk00[0x1C];
@@ -16,10 +16,10 @@ void linkHolderApplyFlag(Obj *obj, int flag)
         return;
     }
     if (flag != 0) {
-        FUN_0029ae60();
+        linkHolderClearFlagGroup();
         return;
     }
-    FUN_0029b8ec();
+    linkHolderSetFlagGroup();
 }
 
 } /* extern "C" */

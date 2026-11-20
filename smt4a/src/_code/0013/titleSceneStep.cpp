@@ -1,31 +1,24 @@
 #include "common.h"
-#include "code/Code0015.h"
+#include "shard/W6_W6Match2_TitleCommand.h"
 #include "camp/RenderCtxA.h"
+#include "code/Code0015.h"
+#include "code/Code0014.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
 
-typedef struct TitleState0013705c {
-    /* 0x00 */ s8 skipped;
-    /* 0x01 */ s8 ready;
-    /* 0x02 */ u8 unk02[6];
-    /* 0x08 */ u32 sceneArg;
-} TitleState0013705c;
+void asdGxCommandListReplayCopy(u32 commandList); // declcheck: local (the title keeps the AsdGxCommandList as a u32 handle)
 
-s32 gxIsStereoscopic3dEnabled(void);
-void effectRestoreSavedRenderPairs(RenderCtxA *scene, s32 arg);
-void FUN_00167eb0(u32 arg);
-
-extern TitleState0013705c g_titleFlags; /* 0x57ffd0 */
-
-/* Title scene step: when gxIsStereoscopic3dEnabled reports 1 and the title is ready, forwards the pending value and starts the scene unless skipped. */
+/* Steps the title scene in stereoscopic 3D while the command list is active: restores the saved
+ * render pairs and, unless the command list is disabled, replays the scene list's saved copy. */
 u32 titleSceneStep(void)
 {
-    if (gxIsStereoscopic3dEnabled() == 1 && g_titleFlags.ready != 0) {
+    if (gxIsStereoscopic3dEnabled() == 1 && g_titleFlags.commandActive != 0) {
         if (asdCameraGetSavedRenderPairs() != 0) {
-            effectRestoreSavedRenderPairs(g_renderCtx, asdCameraGetSavedRenderPairs());
+            effectRestoreSavedRenderPairs(g_renderCtx, (void *)asdCameraGetSavedRenderPairs());
         }
-        if (g_titleFlags.skipped == 0) {
-            FUN_00167eb0(g_titleFlags.sceneArg);
+        if (g_titleFlags.disabled == 0) {
+            asdGxCommandListReplayCopy(g_titleFlags.sceneList);
         }
     }
     return 0;

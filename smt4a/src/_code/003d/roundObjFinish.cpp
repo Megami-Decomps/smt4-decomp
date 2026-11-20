@@ -16,9 +16,9 @@ typedef struct RoundObj {
 
 extern void asdMemFree(void *ptr);
 extern void btlTalkBustUpDestroy(void);
-extern void FUN_0020b490(RoundObj *obj, u32 state);
-extern void FUN_002c8538(u8 value);
-extern void FUN_00215bd0(void);
+extern void resultSetMode(RoundObj *obj, u32 state);
+extern void gameGlobalsSetOverlayActive(u8 value);
+extern void unitStatusResetSpriteState(void);
 
 /* Finishes a round: releases the script process and buffer, advances the round counter, and picks the next state. */
 u32 roundObjFinish(RoundObj *obj)
@@ -32,12 +32,12 @@ u32 roundObjFinish(RoundObj *obj)
     round = obj->round + 1;
     obj->round = round;
     if (obj->roundCount == round) {
-        FUN_0020b490(obj, 0x17);
+        resultSetMode(obj, 0x17);
         return 0;
     }
-    FUN_002c8538(1);
-    FUN_00215bd0();
-    FUN_0020b490(obj, 10);
+    gameGlobalsSetOverlayActive(1);
+    unitStatusResetSpriteState();
+    resultSetMode(obj, 10);
     return 1;
 }
 

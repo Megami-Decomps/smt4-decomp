@@ -6,8 +6,8 @@ struct FlaggedEntry;
 
 extern "C" {
 u8 ifTouchGetSelectionModeForRegion(s32);
-u32 FUN_0029d644(const FlaggedEntry *);
-s32 FUN_0028cfbc(FlaggedEntry *);
+u32 uiListGetVisibleCount(const FlaggedEntry *);
+s32 widgetGetVisibleLength(FlaggedEntry *);
 s32 resourceRunEmbeddedOperationIfUnblocked(FlaggedEntry *);
 s32 objectPartRunUnlessLocked(FlaggedEntry *);
 s32 resourceRunOperationIfUnblocked(FlaggedEntry *);
@@ -26,10 +26,10 @@ u32 uiScrollHandleActionsOrTouch(FlaggedEntry *owner, const TextureTableEntryIV 
     ifTouchGetSelectionModeForRegion((s16)firstAction);
     s32 special = 0;
     s32 selected = -1;
-    s32 count = FUN_0029d644(owner);
+    s32 count = uiListGetVisibleCount(owner);
     if (actions != NULL) {
         if (alternateAxis)
-            count = FUN_0028cfbc(owner);
+            count = widgetGetVisibleLength(owner);
         for (s32 index = 0; index < count; ++index) {
             u8 state = ifTouchGetSelectionModeForRegion(actions[index]);
             if (state == 6) {

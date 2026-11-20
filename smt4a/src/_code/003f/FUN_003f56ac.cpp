@@ -29,7 +29,7 @@ void uiSpriteSetKeyframe(void *sprite, s16 key, s32 mode);
 void uiSpriteSetImageKeyframe(void *sprite, s32 key, s32 mode);
 s32 resourceRunOperationIfUnblocked(void *cursor);
 s32 scrollOwnerSetValue(void *cursor, s32 value);
-s32 objectApplyIfUnblocked(void *cursor);
+s32 gridNavigationGetItemCount(void *cursor);
 s32 flaggedEntryGetValueA(void *cursor);
 void dialogEnterState(UnlockLogMenu *menu, u32 state, u32 arg);
 void FUN_003f6f68(UnlockLogMenu *menu, u32 state);
@@ -47,9 +47,9 @@ void FUN_003f56ac(UnlockLogMenu *menu)
             menu->selected--;
             scrollOwnerSetValue(menu->cursor, menu->selected);
         }
-        if (padQueryLogicalKey(10, 0) != 0 && objectApplyIfUnblocked(menu->cursor) >= 7) {
-            if (resourceRunOperationIfUnblocked(menu->cursor) != objectApplyIfUnblocked(menu->cursor) - 7 &&
-                (flaggedEntryGetValueA(menu->cursor) != 0 || objectApplyIfUnblocked(menu->cursor) >= 7)) {
+        if (padQueryLogicalKey(10, 0) != 0 && gridNavigationGetItemCount(menu->cursor) >= 7) {
+            if (resourceRunOperationIfUnblocked(menu->cursor) != gridNavigationGetItemCount(menu->cursor) - 7 &&
+                (flaggedEntryGetValueA(menu->cursor) != 0 || gridNavigationGetItemCount(menu->cursor) >= 7)) {
                 eventQueueAddUniqueIfValid(0x100020d);
                 menu->selected++;
                 scrollOwnerSetValue(menu->cursor, menu->selected);

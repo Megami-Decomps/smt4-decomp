@@ -3,7 +3,7 @@
 extern "C" {
 u32 scrGetArg(u32);
 s32 scrGetCommandFrame(void);
-void FUN_0028eeb8(u32);
+void gameFlagEntryActivate(u32);
 void scrWorkSetValue(s32, s32);
 s32 scrWorkGetValue(s32);
 const void *fileSlotGetBuffer(u32);
@@ -19,7 +19,7 @@ u32 scrComm_Party_ConfirmSwap(void)
 {
     u16 id = scrGetArg(0);
     if (scrGetCommandFrame() == 0) {
-        FUN_0028eeb8(id);
+        gameFlagEntryActivate(id);
         scrWorkSetValue(0, 0);
         scrWorkSetValue(1, 0);
     }

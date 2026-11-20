@@ -15,7 +15,7 @@ s32 FUN_0023959c(AsdCecMessageBox* box, CecMessageIndexHeader* header,
                   AsdCecMessageIndexEntry* ids, u32 capacity, s32 kind);
 u32 nn_cec_CTR_MessageBox_ReadOutBoxIndex(AsdCecMessageBox* box);
 void clockGetTicksAsMicroseconds(u64* clock);
-void FUN_002ad66c(CecCalendarDate* date, const u64* clock);
+void asdSaveHeaderBuildCalendarTime(CecCalendarDate* date, const u64* clock);
 
 s32 asdCecMessageBoxOpen(AsdCecMessageBox* box, u32 id, u32 expectedTag)
 {
@@ -75,7 +75,7 @@ s32 asdCecMessageBoxOpen(AsdCecMessageBox* box, u32 id, u32 expectedTag)
     clockGetTicksAsMicroseconds(&clock);
     u64 now = clock;
     CecCalendarDate date;
-    FUN_002ad66c(&date, &now);
+    asdSaveHeaderBuildCalendarTime(&date, &now);
     state->info.openedAt = date;
     g_asdCecModuleFlags.open = 1;
     return 0;

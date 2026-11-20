@@ -13,7 +13,7 @@ int FUN_002bb2c8(...);
 int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
 int sysReportCheckFailure(int, int);
-int FUN_002c5434(int);
+int sleepAllow(int);
 int sleepQueryAnswer(int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -35,7 +35,7 @@ extern int FUN_002bb0e0(void);
 /* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
 /* Supplied declaration required: sysReportCheckFailure. */
-/* Supplied declaration required: FUN_002c5434. */
+/* Supplied declaration required: sleepAllow. */
 /* Supplied declaration required: sleepQueryAnswer. */
 
 
@@ -72,7 +72,7 @@ int FUN_002a7f28(unsigned int param_1,unsigned int param_2,unsigned int param_3,
     if (temp_v0 != 0) {
       temp_v0 = FUN_002bb0d0();
       if (temp_v0 == 0) {
-        FUN_002c5434(1);
+        sleepAllow(1);
       }
     }
     else {

@@ -44,7 +44,7 @@ typedef char ScriptLoadStateOffsets[offsetof(ScriptLoadState, loadState) == 0x7f
 extern "C" {
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
 void nn_os_Thread_FinalizeImpl(u32 *thread);
-void FUN_001469a8(AddressSpaceRegion *region);
+void addressSpaceRegionFree(AddressSpaceRegion *region);
 void asdOperatorDelete(void *block);
 void asdMemFree(void *block);
 void gameDataBlocksReleaseHold(u32 mask);
@@ -57,7 +57,7 @@ void gameDataBlocksAddFlags(u32 mask);
 
 inline StackRegion::~StackRegion()
 {
-    FUN_001469a8(this);
+    addressSpaceRegionFree(this);
 }
 
 inline void StackRegion::operator delete(void *block)
@@ -80,7 +80,7 @@ extern "C" u32 FUN_0035a840(ScriptLoadState *state)
         }
         state->thread.joined = 1;
         state->thread.~NnOsThread();
-        FUN_001469a8(state->stackRegion);
+        addressSpaceRegionFree(state->stackRegion);
         delete state->stackRegion;
         state->stackRegion = NULL;
         asdMemFree(state->threadStack);

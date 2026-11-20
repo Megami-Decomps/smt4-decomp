@@ -28,7 +28,7 @@ typedef char NaviAvailabilityLayoutCheck[
     offsetof(NaviAvailabilityView, mode) == 0x204FC ? 1 : -1];
 
 extern "C" {
-s32 FUN_00408240(u32 flag);
+s32 saveFlagTest(u32 flag);
 
 // Re-evaluate entries in the current category and derive the selected kind's special display mode.
 void FUN_004915f0(NaviCategorySelectionWork *work)
@@ -41,18 +41,18 @@ void FUN_004915f0(NaviCategorySelectionWork *work)
         if (entry->category != work->selection) {
             entry->active = 0;
         } else if (entry->completionFlag != -1) {
-            if (FUN_004083a8(entry->kind, entry->condition)) {
+            if (interactionVariantIsEnabled(entry->kind, entry->condition)) {
                 selectedKind = entry->kind;
                 entry->active = 1;
-                if (entry->pending && FUN_00408240(entry->completionFlag))
+                if (entry->pending && saveFlagTest(entry->completionFlag))
                     entry->pending = 0;
             } else {
                 entry->active = 0;
             }
         } else {
-            if (!(FUN_004083a8(entry->kind, entry->condition) ||
-                  (entry->alternateFirst && FUN_004083a8(entry->kind, entry->alternateFirst)) ||
-                  (entry->alternateSecond && FUN_004083a8(entry->kind, entry->alternateSecond)))) {
+            if (!(interactionVariantIsEnabled(entry->kind, entry->condition) ||
+                  (entry->alternateFirst && interactionVariantIsEnabled(entry->kind, entry->alternateFirst)) ||
+                  (entry->alternateSecond && interactionVariantIsEnabled(entry->kind, entry->alternateSecond)))) {
                 entry->active = 1;
             } else {
                 entry->active = 0;

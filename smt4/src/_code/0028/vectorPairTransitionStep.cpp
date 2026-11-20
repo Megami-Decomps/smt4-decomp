@@ -26,11 +26,11 @@ inline void approachVector(BattleVector3& current, const BattleVector3& target, 
 }
 
 extern "C" {
-extern VectorTransitionGlobals DAT_004474f0;
+extern VectorTransitionGlobals g_lmapViewHolder;
 
 s32 vectorPairTransitionStep()
 {
-    VectorPairTransition* transition = &DAT_004474f0.work->transition;
+    VectorPairTransition* transition = &g_lmapViewHolder.work->transition;
     if (transition->frame >= transition->duration) {
         transition->current = transition->target;
         return 1;

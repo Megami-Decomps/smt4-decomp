@@ -16,12 +16,12 @@ int FUN_00281b94(int);
 int FUN_00294854(void);
 int distSpatial(void);
 int mapTableValueSet(...);
-int FUN_00319f64(int);
+int mapCollisionDisableByTag(int);
 int gameFlagsWriteBankBit(int, int);
-int FUN_003b51a4(void);
+int mapGimicCreateModel(void);
 int sysPlayVoice(void);
 int moriModelUnitStartMaterialAnimation(...);
-int FUN_003fd924(...);
+int motionPlayerStartBlended(...);
 int modelPlayClip(...);
 int candidateGetPreferredValue(int);
 int itemListGetCurrentIdOrInvalid(...);
@@ -48,18 +48,18 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: distSpatial. */
 extern int FUN_002ddd7c(void);
 /* Supplied declaration required: mapTableValueSet. */
-/* Supplied declaration required: FUN_00319f64. */
+/* Supplied declaration required: mapCollisionDisableByTag. */
 extern int FUN_0033bfac(void);
 extern int gameTestFlagBlockBit(int);
 /* Supplied declaration required: gameFlagsWriteBankBit. */
-/* Supplied declaration required: FUN_003b51a4. */
+/* Supplied declaration required: mapGimicCreateModel. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: moriModelUnitStartMaterialAnimation. */
-/* Supplied declaration required: FUN_003fd924. */
+/* Supplied declaration required: motionPlayerStartBlended. */
 /* Supplied declaration required: controllerSetRotationEulerDegrees. */
 /* Supplied declaration required: modelPlayClip. */
-extern int FUN_0040ab8c(int);
+extern int moriModelContentIsLoaded(int);
 /* Supplied declaration required: candidateGetPreferredValue. */
 extern int FUN_004ff970(unsigned int);
 /* Supplied declaration required: itemListGetCurrentIdOrInvalid. */
@@ -129,7 +129,7 @@ void FUN_002737a8(void)
         }
         return;
       }
-      FUN_003b51a4();
+      mapGimicCreateModel();
     }
     else {
       FUN_00294854();
@@ -231,7 +231,7 @@ void FUN_002737a8(void)
               break;
             case 3:
               *(unsigned char *)(temp_v0 + 0x1525) = 1;
-              FUN_00319f64((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
+              mapCollisionDisableByTag((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
               temp_v2 = 4;
               ((int *)g_mapGimic)[0x1d] = temp_v2;
             }
@@ -256,7 +256,7 @@ void FUN_002737a8(void)
               break;
             case 3:
               *(unsigned char *)(temp_v0 + 0x1524) = 1;
-              FUN_00319f64((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
+              mapCollisionDisableByTag((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
               ((int *)g_mapGimic)[0x1e] = 4;
               break;
             }
@@ -281,7 +281,7 @@ void FUN_002737a8(void)
               break;
             case 3:
               *(unsigned char *)(temp_v0 + 0x1526) = 1;
-              FUN_00319f64((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
+              mapCollisionDisableByTag((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
               ((int *)g_mapGimic)[0x1f] = 4;
               break;
             }
@@ -361,7 +361,7 @@ joined_r0x00273f44:
                 if (((short)piVar1[temp_v4 * 0xf + 0x29] != 2) &&
                    (temp_v2 = slots4FGetActiveValue(temp_v1), temp_v2 != 2)) {
                   *(unsigned short *)(piVar1 + temp_v4 * 0xf + 0x29) = 2;
-                  FUN_003fd924(temp_v1,2,2);
+                  motionPlayerStartBlended(temp_v1,2,2);
                   in_s0 = (int)temp_v9;
                   moriModelUnitStartMaterialAnimation(temp_v1,2);
                 }
@@ -373,7 +373,7 @@ joined_r0x00273f44:
                 if (((short)piVar1[temp_v4 * 0xf + 0x29] != 2) &&
                    (temp_v2 = slots4FGetActiveValue(temp_v1), temp_v2 != 2)) {
                   *(unsigned short *)(piVar1 + temp_v4 * 0xf + 0x29) = 2;
-                  FUN_003fd924(temp_v1,2,2);
+                  motionPlayerStartBlended(temp_v1,2,2);
                   in_s0 = (int)temp_v9;
                   moriModelUnitStartMaterialAnimation(temp_v1,2);
                 }
@@ -415,7 +415,7 @@ joined_r0x00273f44:
             if (((short)piVar1[temp_v4 * 0xf + 0x29] != 2) &&
                (temp_v2 = slots4FGetActiveValue(temp_v1), temp_v2 != 2)) {
               *(unsigned short *)(piVar1 + temp_v4 * 0xf + 0x29) = 2;
-              FUN_003fd924(temp_v1,2,2);
+              motionPlayerStartBlended(temp_v1,2,2);
               in_s0 = (int)temp_v9;
               moriModelUnitStartMaterialAnimation(temp_v1,2);
             }
@@ -440,7 +440,7 @@ LAB_0027412c:
                 break;
               case 3:
                 modelPlayClip(temp_v1,2);
-                FUN_00319f64((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
+                mapCollisionDisableByTag((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
                 temp_v3 = 4;
                 in_s0 = temp_v2;
                 ((int *)g_mapGimic)[0x21] = temp_v3;
@@ -466,7 +466,7 @@ LAB_0027412c:
                 break;
               case 3:
                 modelPlayClip(temp_v1,2);
-                FUN_00319f64((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
+                mapCollisionDisableByTag((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
                 temp_v3 = 4;
                 in_s0 = temp_v2;
                 ((int *)g_mapGimic)[0x22] = temp_v3;
@@ -492,7 +492,7 @@ LAB_0027412c:
                 break;
               case 3:
                 modelPlayClip(temp_v1,2);
-                FUN_00319f64((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
+                mapCollisionDisableByTag((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
                 temp_v3 = 4;
                 in_s0 = temp_v2;
                 ((int *)g_mapGimic)[0x23] = temp_v3;
@@ -507,7 +507,7 @@ LAB_00274348:
             temp_v2 = slots4FGetActiveValue(temp_v1);
             if (temp_v2 != (short)piVar1[temp_v4 * 0xf + 0x29]) {
               in_s0 = (int)temp_v9;
-              FUN_003fd924(temp_v1,(int)(short)piVar1[temp_v4 * 0xf + 0x29],2);
+              motionPlayerStartBlended(temp_v1,(int)(short)piVar1[temp_v4 * 0xf + 0x29],2);
             }
             *(unsigned char *)((int)piVar1 + temp_v4 * 0x3c + 0x91) = 0;
           }
@@ -545,33 +545,33 @@ LAB_00274348:
           temp_v4 = gameFlagIsSet(0x592);
           if (temp_v4 != 0) {
             if ((((short)piVar1[temp_v0 * 6 + 0x232] == 0xd2) &&
-                (temp_v4 = FUN_0040ab8c(piVar1[temp_v0 * 6 + 0x233]), temp_v4 != 0)) &&
+                (temp_v4 = moriModelContentIsLoaded(piVar1[temp_v0 * 6 + 0x233]), temp_v4 != 0)) &&
                (temp_v4 = *(int *)(piVar1[temp_v0 * 6 + 0x233] + 4), temp_v4 != 0)) {
               *(unsigned char *)(piVar1 + temp_v0 * 6 + 0x236) = 1;
               temp_v1 = querySlotHasHandle();
               if (temp_v1 != 0) {
                 temp_v1 = itemListGetCurrentIdOrInvalid(temp_v4);
                 if (temp_v1 != 2) {
-                  FUN_003fd924(temp_v4,2);
+                  motionPlayerStartBlended(temp_v4,2);
                   moriModelUnitStartMaterialAnimation(temp_v4,0,2);
                 }
               }
               else {
                 temp_v1 = itemListGetCurrentIdOrInvalid(temp_v4);
                 if (temp_v1 == 2) {
-                  FUN_003fd924(temp_v4,0,2);
+                  motionPlayerStartBlended(temp_v4,0,2);
                   moriModelUnitStartMaterialAnimation(temp_v4,0,2);
                 }
               }
             }
           }
           else if ((((short)piVar1[temp_v0 * 6 + 0x232] == 0xd2) &&
-                   (temp_v4 = FUN_0040ab8c(piVar1[temp_v0 * 6 + 0x233]), temp_v4 != 0)) &&
+                   (temp_v4 = moriModelContentIsLoaded(piVar1[temp_v0 * 6 + 0x233]), temp_v4 != 0)) &&
                   (temp_v7 = *(unsigned int *)(piVar1[temp_v0 * 6 + 0x233] + 4),
                   (char)piVar1[temp_v0 * 6 + 0x236] != '\0')) {
             temp_v4 = itemListGetCurrentIdOrInvalid(temp_v7);
             if (temp_v4 == 2) {
-              FUN_003fd924(temp_v7,0,2);
+              motionPlayerStartBlended(temp_v7,0,2);
               moriModelUnitStartMaterialAnimation(temp_v7,0,2);
             }
             *(unsigned char *)(piVar1 + temp_v0 * 6 + 0x236) = 0;

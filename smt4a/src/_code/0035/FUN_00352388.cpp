@@ -4,7 +4,7 @@
 
 extern "C" {
 
-void FUN_00292b84(void);
+void lmapCameraUpdate(void);
 s32 mapStateGet(void);
 void settings5BSetValue(s32 value);
 
@@ -24,7 +24,7 @@ void FUN_00352388(void)
     view->savedEye = view->homeEye;
     view->unk2B8 = 0;
     view->unk304 = 0;
-    FUN_00292b84();
+    lmapCameraUpdate();
     if (mapStateGet()) {
         settings5BSetValue(1);
     }

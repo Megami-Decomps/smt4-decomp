@@ -2,13 +2,13 @@
 
 extern "C" {
 
-extern void *DAT_0057f678;
+extern void *g_gameOverJobRecord;
 void FUN_004cf58c(void *owner);
 
 s32 FUN_00330a60(u32 job)
 {
-    if (DAT_0057f678 != NULL) {
-        FUN_004cf58c(DAT_0057f678);
+    if (g_gameOverJobRecord != NULL) {
+        FUN_004cf58c(g_gameOverJobRecord);
     }
     return 0;
 }

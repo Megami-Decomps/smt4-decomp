@@ -6,7 +6,7 @@ extern "C" {
 extern const char DAT_0052a9a8[]; /* "I009017" */
 extern const char DAT_0052a9b0[]; /* "I009018" */
 
-u32 FUN_0014af98(void);
+u32 messageVoiceBankGet(void);
 void FUN_001628c0(const char *name, u32 handle, s32 a, s32 b, f32 x, f32 y);
 
 static void itemEffectFormatName(char *name, s32 item)
@@ -27,7 +27,7 @@ void itemEffectPlay(s32 item)
     char name[64] = {0};
 
     itemEffectFormatName(name, item);
-    FUN_001628c0(name, FUN_0014af98(), 2, 0, 0.707f, 0.707f);
+    FUN_001628c0(name, messageVoiceBankGet(), 2, 0, 0.707f, 0.707f);
 }
 
 } /* extern "C" */

@@ -20,7 +20,7 @@ extern u8 DAT_0044fd18[];
 void FUN_00324944(ParameterOwner *owner)
 {
     ParameterData *data = owner->parameters;
-    FUN_0024330c(reinterpret_cast<u32 *>(data->data + 96), data->value, reinterpret_cast<EffectEditorOptions *>(DAT_0044fd18 + 112), reinterpret_cast<EffectEditorOptions *>(DAT_0044fd18));
+    effectEditorApplyOwnerOptionsPair(reinterpret_cast<u32 *>(data->data + 96), data->value, reinterpret_cast<EffectEditorOptions *>(DAT_0044fd18 + 112), reinterpret_cast<EffectEditorOptions *>(DAT_0044fd18));
 }
 
 } /* extern "C" */

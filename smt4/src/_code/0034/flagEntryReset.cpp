@@ -20,7 +20,7 @@ typedef struct FlagBlock {
 
 extern FlagBlock *gameGetFlagBlock(void);
 extern int table1bOr1cGetRecordValue(int index);
-extern int FUN_0028eeb8(int index);
+extern int gameFlagEntryActivate(int index);
 
 /* Resets flag entry `index` to its initial state (shown, on, no count, not pending) and refreshes it if needed. */
 void flagEntryReset(int index)
@@ -33,7 +33,7 @@ void flagEntryReset(int index)
     entry->shown = 1;
     entry->mode = 0;
     if (table1bOr1cGetRecordValue(index) == 0) {
-        FUN_0028eeb8(index);
+        gameFlagEntryActivate(index);
     }
 }
 

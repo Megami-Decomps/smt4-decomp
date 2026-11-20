@@ -21,7 +21,7 @@ s32 messageGetChoiceResult();
 u32 flaggedValueHolderGetTotal(const PreviewMenuWindow *window);
 void demonRefreshSavedSnapshot(PreviewMenuWork *work, u16 option);
 s32 FUN_0031d174(PreviewMenuWindow *window);
-void FUN_004a1958(PreviewMenuWork *work);
+void demonScreenRebuildEntryList(PreviewMenuWork *work);
 void setListWindow(PreviewMenuWindow *window, s32 first, s32 second);
 u32 buttonHelpGetValue();
 void sysPlaySe(u32 id);
@@ -43,8 +43,8 @@ void Obj55c89c::FUN_004a38bc()
         demonRefreshSavedSnapshot(work, entries[index].option);
         g_animatedPageSelection.selected = 0xffffffff;
         s32 count = FUN_0031d174(&work->window);
-        s32 first = FUN_002a482c(&work->window);
-        FUN_004a1958(work);
+        s32 first = resourceDispatchTaggedOperation(&work->window);
+        demonScreenRebuildEntryList(work);
         if (first > 0)
             --first;
         else if (count != 0 && work->window.maximum <= count + first)

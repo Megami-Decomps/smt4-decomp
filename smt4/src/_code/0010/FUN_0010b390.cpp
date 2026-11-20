@@ -2,16 +2,16 @@
 
 extern "C" {
 
-extern WorkRange DAT_00464a70;
+extern WorkRange g_asdFontGlyphSets;
 
 /* Updates the bound when it lies within the configured range. */
 bool FUN_0010b390(u32 value)
 {
-    u32 limit = DAT_00464a70.limit;
+    u32 limit = g_asdFontGlyphSets.limit;
     if (value >= limit) {
         return false;
     }
-    DAT_00464a70.upper = value;
+    g_asdFontGlyphSets.upper = value;
     return true;
 }
 

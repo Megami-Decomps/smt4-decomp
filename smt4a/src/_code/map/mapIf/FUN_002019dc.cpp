@@ -16,7 +16,7 @@ struct MapIfQuad {
 extern "C" {
 u32 taskCreateDraw(const char *name, s32 priority, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, u32 parent);
-void FUN_002747dc(void);
+void mapIfResetRecords(void);
 s32 FUN_00226538(u32 handle);
 void mapIfFree(u32 handle);
 s32 FUN_0029d760(u32 handle);
@@ -102,7 +102,7 @@ void FUN_002019dc(u32 parent, u8 mode)
     quads[66].corner[3].y = 0.0f;
     quads[66].corner[3].z = 16.0f;
     mapIf->mode = mode;
-    FUN_002747dc();
+    mapIfResetRecords();
 }
 
 }

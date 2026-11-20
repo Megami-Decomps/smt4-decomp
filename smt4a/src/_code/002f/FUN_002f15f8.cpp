@@ -19,7 +19,7 @@ extern "C" {
 u8 dataTable1bOr1cRecordHasFlag1(u32 questId);
 void uiSpriteSetKeyframe(void *sprite, s32 frame, s32 flags);
 void uiSpriteSetImageKeyframe(void *sprite, s32 image, s32 flags);
-s32 objectApplyIfUnblocked(void *cursor);
+s32 gridNavigationGetItemCount(void *cursor);
 void scrollListSetSelectionTracked(void *cursor, s32 index);
 void uiFadeRequestClear(void);
 void sysPlaySe(u32 sound);
@@ -48,7 +48,7 @@ void FUN_002f15f8(u32 questId, s32 reposition)
             cursor = quest->cursor;
             list = quest->list;
         }
-        for (s32 index = 0; index < objectApplyIfUnblocked(cursor); ++index) {
+        for (s32 index = 0; index < gridNavigationGetItemCount(cursor); ++index) {
             if (list[index] == questId) {
                 scrollListSetSelectionTracked(cursor, index);
                 break;

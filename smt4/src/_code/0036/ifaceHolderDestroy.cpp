@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern u8 DAT_004211d0;
+extern u8 g_ifaceHolderVtable;
 
 struct Owner;
 typedef struct OwnerVtbl {
@@ -32,7 +32,7 @@ typedef struct Obj {
 
 Obj *ifaceHolderDestroy(Obj *obj)
 {
-    obj->vtbl = &DAT_004211d0;
+    obj->vtbl = &g_ifaceHolderVtable;
     obj->owner->vtbl->release(obj->owner, obj->handle);
     if (obj->slot0 != 0) {
         obj->slot0 = 0;

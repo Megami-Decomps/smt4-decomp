@@ -55,7 +55,7 @@ void FUN_004a5d5c(ItemListSelectionOwner *owner)
     u32 id = entries[flaggedValueHolderGetTotal(work->cursor)].id;
     if (entries[flaggedValueHolderGetTotal(work->cursor)].enabled == 0)
         id = 0;
-    if (FUN_0023b3d0() == 0 || cache->id == id)
+    if (gameStateIsNotTransitioning() == 0 || cache->id == id)
         return;
     cache->id = id;
     if (id == 0) {

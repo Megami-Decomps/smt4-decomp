@@ -17,7 +17,7 @@ struct EnemyApproachKind {
 extern "C" {
 extern EnemyApproachMode DAT_00580b94[];
 extern EnemyApproachKind DAT_00582204[];
-s32 FUN_0036d984(const MapVector *position, const MapVector *other, u32 flags);
+s32 mapCollisionRaySegmentTest(const MapVector *position, const MapVector *other, u32 flags);
 
 /* Non-negative IEEE-754 values keep their numeric order when compared as signed words. */
 static __inline s32 floatBits(f32 value)
@@ -38,7 +38,7 @@ u32 mapEnemyTryStartApproach(void)
             if (floatBits(distance) <= 0x447a0000) {
                 f32 angle = mathAbsHeadingErrorToPoint(g_lmapScene->pose.position, g_lmapScene->pose.heading, enemy->position);
                 if ((floatBits(distance) >= 0x43960000 || floatBits(angle) >= 0x42f00000) &&
-                    FUN_0036d984(&g_lmapScene->pose.position, &enemy->position, 0) == -1) {
+                    mapCollisionRaySegmentTest(&g_lmapScene->pose.position, &enemy->position, 0) == -1) {
                     enemy->state = 30;
                     enemy->approachMode = DAT_00580b94[g_gameState.enemyApproachLevel].mode;
                     enemy->approachHeight = (f32)DAT_00582204[enemy->kind].height;

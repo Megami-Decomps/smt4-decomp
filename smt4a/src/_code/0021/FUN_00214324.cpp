@@ -61,7 +61,7 @@ extern unsigned int DAT_005f1b78; /* 0x5f1b78 */
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: jobSetIntensity. */
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00168980. */
+/* Supplied declaration required: buttonHelpTransitionPresetFlags. */
 extern int gameSaveTestFlag(unsigned short, unsigned char);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: gameFlagIsSet. */
@@ -327,7 +327,7 @@ LAB_002146c0:
     puVar4 = g_npcRoom;
     g_npcRoom[0x3b] = 0;
     puVar4[0x3c] = 4;
-    FUN_00168980(0xa4);
+    buttonHelpTransitionPresetFlags(0xa4);
     sysPlaySe(0xa4);
     break;
   case 4:
@@ -399,7 +399,7 @@ joined_r0x00214af8:
     }
     g_npcRoom[0x3b] = 0;
     puVar4[0x3c] = 1;
-    FUN_00168980(0xa2);
+    buttonHelpTransitionPresetFlags(0xa2);
     buttonHelpSetSelectedId(0xa2);
     break;
   case 5:

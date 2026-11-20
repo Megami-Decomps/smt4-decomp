@@ -81,7 +81,7 @@ extern int FUN_002eb530(int);
 /* Supplied declaration required: onlineTimeGetNow. */
 /* Supplied declaration required: FUN_002eb5c0. */
 extern int constructObj00559344(unsigned char *, unsigned int);
-extern int FUN_002eb5f4(void);
+extern int watcherGetActiveContext(void);
 extern int *arrayElementAddress_002eee88(int, unsigned int);
 extern int FUN_002ef01c(unsigned int);
 extern unsigned int *arrayElementAddress_002efa50(int, unsigned int);
@@ -314,7 +314,7 @@ int FUN_00109240(fn_00109240_arg0 *param_1,unsigned int param_2,unsigned int par
   *(unsigned int *)(temp_v4 - 0x28c) = *(unsigned int *)(temp_v3 + 0x74);
   temp_v3 = FUN_002ef01c(*(unsigned int *)(temp_v4 - 0x33c));
   *(unsigned int *)(temp_v4 - 0x288) = *(unsigned int *)(temp_v3 + 0x6c);
-  temp_v3 = FUN_002eb5f4();
+  temp_v3 = watcherGetActiveContext();
   *(int *)(temp_v4 - 0x144) = temp_v3 + 0xd4;
   FUN_001077d6(temp_v8);
   return temp_v8;

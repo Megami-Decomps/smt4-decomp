@@ -36,8 +36,8 @@ extern "C" {
 
 void uiSpriteBankApplyPreset(void *bank, s32 preset);
 void FUN_002d22c0(s32 value);
-void FUN_0048821c(NaviMenu *menu, u32 map);
-void FUN_0048a378(NaviMenu *menu);
+void naviSwitchTextureSetForMap(NaviMenu *menu, u32 map);
+void naviRefreshBackgroundAndFeedback(NaviMenu *menu);
 void FUN_0048d248(NaviMenu *menu, u32 value);
 void naviMainSetCurrentMap(void *state, u32 map);
 u32 naviMainGetRequestedMap(void *state);
@@ -51,7 +51,7 @@ void _ZN9Obj53230012FUN_0048bad0Ev(NaviMenu *menu)
 
     if (menu->step == 0) {
         pointConvertToFloat(menu->cursorPoint, -320, 0);
-        FUN_0048a378(menu);
+        naviRefreshBackgroundAndFeedback(menu);
         uiSpriteBankApplyPreset(menu->titleBank, 0);
         menu->step = 1;
         menu->flags = (menu->flags & ~NAVI_FLAG_ENTERING) | NAVI_FLAG_CLOSING;
@@ -62,12 +62,12 @@ void _ZN9Obj53230012FUN_0048bad0Ev(NaviMenu *menu)
 
             naviMainSetCurrentMap(menu->mapState, map);
             FUN_00492ac8(reinterpret_cast<u32>(menu->mapState), 0);
-            FUN_0048821c(menu, map);
+            naviSwitchTextureSetForMap(menu, map);
         }
         FUN_0048d248(menu, FUN_00492c84(menu->mapState));
         uiSpriteSetImageKeyframe(&menu->imageSpriteA, 3, 0);
         uiSpriteSetImageKeyframe((UiSpriteState *)menu->imageSpriteB, 5, 0);
-        FUN_0048a378(menu);
+        naviRefreshBackgroundAndFeedback(menu);
         for (i = 0; i < NAVI_SLOT_COUNT; i++) {
             uiSpriteSetKeyframe((UiSpriteState *)menu->slotSprites[i], 4, 0);
         }

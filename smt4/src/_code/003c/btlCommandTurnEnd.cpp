@@ -14,16 +14,16 @@ extern "C" {
 extern u32 g_btlActionReflect;
 
 s32 nodeListCountActiveById(u32 id);
-s32 FUN_00229914(BtlMainState **block, CommandState *work, s32 index);
+s32 btlUnitIsDeadAndUncopied(BtlMainState **block, CommandState *work, s32 index);
 s32 btlNodeListAnyReady(void);
 void FUN_0023f4e4(BtlMainState *state);
 void FUN_003de758(s32 a, CommandState *work, s32 b);
 void FUN_0027e5e4(BtlActionRecord *action);
-void FUN_00250720(BtlMainState *state);
+void btlSlotManagerResetAll(BtlMainState *state);
 void FUN_003cefe0(BtlMainState **block, CommandState *work, u32 command);
 void FUN_00246d38(s32 a, CommandState *work, BtlActionRecord *record, u32 mask);
 void FUN_00246e24(s32 a, CommandState *work, BtlActionRecord *record, u32 mask, s32 b);
-void FUN_0022a5d8(s32 effect, BtlEntry *entry, s32 mode);
+void btlSubmitAction(s32 effect, BtlEntry *entry, s32 mode);
 void FUN_003c05e8(s32 value);
 void FUN_00229a3c(s32 a, CommandState *work, s32 b, s32 c, s32 d);
 s32 randRange(s32 range);
@@ -35,7 +35,7 @@ s32 questGetCurrentRecordValue6(void);
 u16 questGetCurrentRecordValue8(void);
 u16 questCurrentGetValue(void);
 u16 questRecordValueIfState2(void);
-s32 FUN_00245cc0(u32 kind);
+s32 mapCategoryToDestinationGroup(u32 kind);
 void FUN_00255180(u32 unit, s32 kind, s32 value);
 void FUN_003d03f8(BtlMainState **block, CommandState *work, s32 value, s32 kind, BtlActionRecord *record, BtlEntry *entry);
 u16 FUN_003c8880(void);
@@ -62,7 +62,7 @@ static __inline bool opposingSideStands(BtlMainState **block, CommandState *work
         count = 4;
     }
     for (s32 index = first; index < first + count; ++index) {
-        if (((*block)->actions[index].status & 1) != 0 && FUN_00229914(block, work, index) == 0)
+        if (((*block)->actions[index].status & 1) != 0 && btlUnitIsDeadAndUncopied(block, work, index) == 0)
             return true;
     }
     return false;
@@ -77,7 +77,7 @@ u32 btlCommandTurnEnd(BtlMainState **block, CommandState *work)
     bool marked = false;
     if ((work->flags & 0x1080) == 0) {
         for (s32 index = 0; index < 109; ++index) {
-            if (((*block)->actions[index].status & 1) != 0 && FUN_00229914(block, work, index) == 0) {
+            if (((*block)->actions[index].status & 1) != 0 && btlUnitIsDeadAndUncopied(block, work, index) == 0) {
                 BtlUnitData *data = &btlMainFindEntryByListedId(*block, index)->data;
                 if (data->primaryFlags != 0 && data->statusFlags == 0) {
                     marked = true;
@@ -99,7 +99,7 @@ u32 btlCommandTurnEnd(BtlMainState **block, CommandState *work)
             FUN_0027e5e4(action);
     }
     (*block)->effectValue = 0;
-    FUN_00250720(*block);
+    btlSlotManagerResetAll(*block);
     if ((work->flags & 0x2000) != 0) {
         work->flags &= ~0x2000u;
         setNextCommand(block, 20);
@@ -118,7 +118,7 @@ u32 btlCommandTurnEnd(BtlMainState **block, CommandState *work)
         bool anyUp = false;
         u8 slotFlags[4] = {0, 0, 0, 0};
         for (s32 i = 0; i < 109; ++i) {
-            if (((*block)->actions[i].status & 1) == 0 || FUN_00229914(block, work, i) != 0)
+            if (((*block)->actions[i].status & 1) == 0 || btlUnitIsDeadAndUncopied(block, work, i) != 0)
                 continue;
             BtlEntry *entry = btlMainFindEntryByListedId(*block, i);
             BtlUnitData *data = &entry->data;
@@ -134,7 +134,7 @@ u32 btlCommandTurnEnd(BtlMainState **block, CommandState *work)
                 }
             } else if (canRetry) {
                 FUN_00246e24(0, work, &(*block)->actions[i], 0x10, 0);
-                FUN_0022a5d8(25, entry, 1);
+                btlSubmitAction(25, entry, 1);
                 data->primaryFlags = 0;
                 handled = true;
                 if ((entry->flags & 10) == 0)
@@ -161,7 +161,7 @@ u32 btlCommandTurnEnd(BtlMainState **block, CommandState *work)
         }
     }
 
-    if (FUN_00229914(block, work, work->record->memberId) == 0 && (work->selection->responseFlags & 0x20) != 0 &&
+    if (btlUnitIsDeadAndUncopied(block, work, work->record->memberId) == 0 && (work->selection->responseFlags & 0x20) != 0 &&
         opposingSideStands(block, work) && (*block)->actionState.mode == 0 && (work->entry->flags & 0x40) == 0 &&
         (work->entry->flags & 0x20000000) == 0 && (work->flags & 4) == 0) {
         s32 value = work->selection->power / 8;
@@ -175,7 +175,7 @@ u32 btlCommandTurnEnd(BtlMainState **block, CommandState *work)
     for (s32 i = 0; i < 109; ++i) {
         BtlEntry *entry = &(*block)->entries[i];
         if ((entry->flags & 1) != 0 && (entry->flags & 0x40) == 0 && (entry->data.statusFlags & 0x400) != 0) {
-            FUN_0022a5d8(22, entry, 1);
+            btlSubmitAction(22, entry, 1);
             FUN_00246454(0, work, entry);
             handled = true;
         }
@@ -195,7 +195,7 @@ u32 btlCommandTurnEnd(BtlMainState **block, CommandState *work)
             u32 required = questRecordValueIfState2();
             u32 have = battleGetEntryHalfword(work->record->memberId, 29);
             if (current != 0 && required <= have) {
-                FUN_00255180(work->record->memberId, 29, FUN_00245cc0(29));
+                FUN_00255180(work->record->memberId, 29, mapCategoryToDestinationGroup(29));
                 FUN_003d03f8(block, work, current, 25, activeAction, active);
                 s32 result = FUN_003c8880();
                 if (result != 0)

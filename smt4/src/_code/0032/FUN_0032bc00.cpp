@@ -42,8 +42,8 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0029ab54. */
 extern int FUN_0029ac94(void);
 extern unsigned short *FUN_0029acb0(void);
-extern int FUN_0029e9cc(unsigned short);
-extern int FUN_0029ee54(int);
+extern int itemIsCollectedWithRelated(unsigned short);
+extern int gridNavigationGetItemCount(int);
 extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(void);
 /* Supplied declaration required: textDrawString. */
@@ -89,7 +89,7 @@ void FUN_0032bc00(int param_1,int param_2)
   if (temp_v5 != 0xd) {
     if (temp_v5 == 6) {
       puVar7 = (unsigned short *)FUN_0029acb0();
-      temp_v5 = FUN_0029e9cc(*puVar7);
+      temp_v5 = itemIsCollectedWithRelated(*puVar7);
       if (temp_v5 == 0) {
         temp_v1 = 1;
       }
@@ -220,7 +220,7 @@ void FUN_0032bc00(int param_1,int param_2)
                  (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + param_1,
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,0xc9);
   }
-  temp_v3 = FUN_0029ee54(temp_v15);
+  temp_v3 = gridNavigationGetItemCount(temp_v15);
   if (temp_v3 < 1) {
     texDrawCompositeSprite(2,0x1a,0x1b,param_1,param_2,0xdd);
   }

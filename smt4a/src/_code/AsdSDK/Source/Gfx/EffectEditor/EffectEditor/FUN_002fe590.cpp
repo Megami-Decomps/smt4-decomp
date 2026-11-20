@@ -8,7 +8,7 @@ extern const PhaseTrigEntry g_sinCosTable[];
 s32 padButtonIsPressed(u32 button);
 s32 slotIsActive(u32 button);
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(PhaseVector *destination, const f32 *matrix);
-void FUN_0014f0dc(void *camera, const PhaseVector *eye, const PhaseVector *center, const PhaseVector *up);
+void cameraMatrixCacheSetLookAt(void *camera, const PhaseVector *eye, const PhaseVector *center, const PhaseVector *up);
 
 /* Updates the editor's free camera from the pads: both sticks turn and move it (button 27
  * resets it, 28 swaps the move axes, 23/18 raise and lower it), then rebuilds the orbit offset
@@ -67,7 +67,7 @@ void FUN_002fe590(void)
     eye.x = center.x + offset.x;
     eye.y = center.y + offset.y;
     eye.z = center.z + offset.z;
-    FUN_0014f0dc(&g_effectEditorCamera, &eye, &center, &g_effectEditorCameraDefaults.up);
+    cameraMatrixCacheSetLookAt(&g_effectEditorCamera, &eye, &center, &g_effectEditorCameraDefaults.up);
 }
 
 }

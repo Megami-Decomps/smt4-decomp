@@ -41,7 +41,7 @@ extern "C" {
 void FUN_0018fe70(u32 command, s32 arg);
 u32 objectCommandQueueGet(void);
 u32 soundRequestQueueFlush(u32 queue, u32 arg); // declcheck: local (the shared declaration does not compile here or changes this unit)
-void FUN_001912cc(u32 queue, u32 value);
+void soundRequestQueueDequeueUntilToken(u32 queue, u32 value);
 void constructObj0055c19c(s32 object, u32 arg);
 void nw_ut_internal_LinkListImpl_erase_2AC900(void* list, u32 head, void* headPtr);
 u32 _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
@@ -73,7 +73,7 @@ void FUN_00173c7c(SoundPlayerPools* player)
         FUN_0018fe70(player->commandBuffer + i * 0x5c, 0);
     }
     u32 queue = objectCommandQueueGet();
-    FUN_001912cc(queue, soundRequestQueueFlush(queue, 1));
+    soundRequestQueueDequeueUntilToken(queue, soundRequestQueueFlush(queue, 1));
     player->commandCount = 0;
     player->commandBuffer = 0;
 

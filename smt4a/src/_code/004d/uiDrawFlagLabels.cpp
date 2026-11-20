@@ -7,7 +7,7 @@ struct FlagLabelRecord {
     u16 message; // 0x166
 };
 extern "C" {
-extern const u64 DAT_005715f8[];
+extern const u64 g_btlDebugGlobals[];
 extern const char DAT_00528128[];
 extern const char DAT_00528130[];
 extern const char DAT_00528138[];
@@ -25,16 +25,16 @@ extern "C" void uiDrawFlagLabels(void *, const FlagLabelRecord *record)
     u32 lineHeight = entryTableCallSlot3(3);
     char label[12] = {};
     const char *description = NULL;
-    if (DAT_005715f8[2] & record->flags) {
+    if (g_btlDebugGlobals[2] & record->flags) {
         __2sprintf(label, DAT_00528128);
         description = gameGetPlayerName();
-    } else if (record->flags & DAT_005715f8[3]) {
+    } else if (record->flags & g_btlDebugGlobals[3]) {
         __2sprintf(label, DAT_00528130);
         description = dataTable01GetRecordWithAocOverride(record->message);
-    } else if (record->flags & DAT_005715f8[5]) {
+    } else if (record->flags & g_btlDebugGlobals[5]) {
         __2sprintf(label, DAT_00528138);
         description = dataTable01GetRecordWithAocOverride(record->message);
-    } else if (DAT_005715f8[4] & record->flags) {
+    } else if (g_btlDebugGlobals[4] & record->flags) {
         __2sprintf(label, DAT_00528140);
         description = dataTable01GetRecordWithAocOverride(record->message);
     }

@@ -49,13 +49,13 @@ s32 padQueryLogicalKey(s32 key, s32 mode);
 s32 ifTouchRegionAddRequested(u32 file, u32 index);
 void eventQueueAddUniqueIfValid(s32 event);
 void FUN_002007f4(void *work);
-u8 FUN_00228b04(ScrollSelection *list, s32 mode);
+u8 gridNavigationHandleConfirm(ScrollSelection *list, s32 mode);
 u32 FUN_002e50d4(void);
 u32 uiScrollHandleActionsOrTouch(ScrollSelection *list, const TextureTableEntryIV *rectangle, const s16 *ids, u32 firstKey,
                  u32 secondKey, u32 thirdKey, bool *blocked, s32 secondary, s32 notify);
 s32 resourceRunOperationIfUnblocked(ScrollSelection *list);
 s32 listCursorGetRowIfUnblocked(const void *object);
-s32 objectApplyIfUnblocked(ScrollSelection *list);
+s32 gridNavigationGetItemCount(ScrollSelection *list);
 
 /* One frame of the play log screen: animates the sprites, scrolls the list and moves between states. */
 void FUN_0021545c(void)
@@ -77,7 +77,7 @@ void FUN_0021545c(void)
         }
         break;
     case 1: {
-        for (s32 i = 0; i < objectApplyIfUnblocked(&work->list); i++) {
+        for (s32 i = 0; i < gridNavigationGetItemCount(&work->list); i++) {
             u32 index = work->ids[i];
             DataTableView<PlayLogRecord> rows(0x37, 0);
             PlayLogRecord *row = rows.at(index);
@@ -96,7 +96,7 @@ void FUN_0021545c(void)
             if (resourceRunOperationIfUnblocked(&work->list) != before)
                 eventQueueAddUniqueIfValid(0x100020D);
         } else {
-            if (FUN_00228b04(&work->list, 0) == 0) {
+            if (gridNavigationHandleConfirm(&work->list, 0) == 0) {
                 if (padQueryLogicalKey(1, 1) != 0) {
                     eventQueueAddUniqueIfValid(0x100020F);
                     s32 animation = 1;
@@ -125,15 +125,15 @@ void FUN_0021545c(void)
                 }
                 break;
             }
-            if (objectApplyIfUnblocked(&work->list) > 5) {
+            if (gridNavigationGetItemCount(&work->list) > 5) {
                 if (resourceRunOperationIfUnblocked(&work->list) == before) {
                     for (;;) {
                         if (resourceRunOperationIfUnblocked(&work->list) == 0 && listCursorGetRowIfUnblocked(&work->list) == 0)
                             break;
-                        if (resourceRunOperationIfUnblocked(&work->list) == objectApplyIfUnblocked(&work->list) - 5 &&
+                        if (resourceRunOperationIfUnblocked(&work->list) == gridNavigationGetItemCount(&work->list) - 5 &&
                             listCursorGetRowIfUnblocked(&work->list) == 4)
                             break;
-                        FUN_00228b04(&work->list, 0);
+                        gridNavigationHandleConfirm(&work->list, 0);
                         if (resourceRunOperationIfUnblocked(&work->list) != before)
                             break;
                     }

@@ -16,6 +16,14 @@
 #define EFF_GEOM_ATTR_20 0x20   /* 4 */
 #define EFF_GEOM_ATTR_80 0x80   /* 0x10 */
 
+/* A buffer flag: the buffer starts with the default tint. */
+enum { EFF_GEOM_DEFAULT_TINT = 0x80000 };
+
+/* A four-component tint, copied as a whole. */
+typedef struct EffGeomColor {
+    /* 0x00 */ f32 r, g, b, a;
+} EffGeomColor;
+
 /* The header (0xB8 bytes) in front of the vertex data. */
 struct EffGeomBuffer {
     /* 0x00 */ u8 *data;            /* the vertex data, which follows this header */
@@ -33,7 +41,10 @@ struct EffGeomBuffer {
     /* 0x30 */ u8 unk30[4];
     /* 0x34 */ u8 *attr20;
     /* 0x38 */ u8 *attr80;
-    /* 0x3C */ u8 unk3c[0x28];
+    /* 0x3C */ u8 unk3c[4];
+    /* 0x40 */ EffGeomColor tint;   /* g_effGeomDefaultTint when created with EFF_GEOM_DEFAULT_TINT */
+    /* 0x50 */ u8 unk50[0x10];
+    /* 0x60 */ u32 unk60;
     /* 0x64 */ u8 color[4];
     /* 0x68 */ nw::math::MTX44 transform;
     /* 0xA8 */ u32 owner;
@@ -41,6 +52,7 @@ struct EffGeomBuffer {
 };
 
 typedef char EffGeomBufferLayoutCheck[offsetof(EffGeomBuffer, attr80) == 0x38 &&
+    offsetof(EffGeomBuffer, tint) == 0x40 && offsetof(EffGeomBuffer, unk60) == 0x60 &&
     offsetof(EffGeomBuffer, color) == 0x64 && offsetof(EffGeomBuffer, transform) == 0x68 &&
     offsetof(EffGeomBuffer, owner) == 0xA8 && sizeof(EffGeomBuffer) == 0xB8 ? 1 : -1];
 

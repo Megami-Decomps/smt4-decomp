@@ -35,7 +35,7 @@ typedef char VariantChildrenLayoutCheck[sizeof(Variant) == 0x14 &&
     offsetof(Variant, children) == 8 && offsetof(Variant, allocator) == 0x10 ? 1 : -1];
 
 extern "C" {
-u32 FUN_005153f0(Variant *destination, const Variant *source, const u32 *token, void *allocator);
+u32 variantCopyWithToken(Variant *destination, const Variant *source, const u32 *token, void *allocator);
 u32 variantCopy(Variant *destination, const Variant *source, void *allocator);
 }
 #endif

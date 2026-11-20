@@ -3,8 +3,8 @@
 #include "gamedata/GameSaveDataA.h"
 
 extern "C" {
-s32 FUN_0035e458(u32 item);
-s32 FUN_0035d89c(u32 item);
+s32 partyRecordClampEquippedRankUp(u32 item);
+s32 partyRecordClampEquippedRankDown(u32 item);
 }
 
 /* Set one equipped item and clamp its inherited category rank to the item limits. */
@@ -20,8 +20,8 @@ extern "C" void partyRecordSetEquippedItemClampRank(SlotRecordA *record, u32 ite
         u32 category = definition->category;
         rank = record->categoryRanks[category];
     }
-    s32 maximum = FUN_0035e458(item);
-    s32 minimum = FUN_0035d89c(item);
+    s32 maximum = partyRecordClampEquippedRankUp(item);
+    s32 minimum = partyRecordClampEquippedRankDown(item);
     if (rank > maximum) {
         rank = (s8)maximum;
     } else if (minimum > rank) {

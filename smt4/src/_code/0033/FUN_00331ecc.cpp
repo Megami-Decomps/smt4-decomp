@@ -78,7 +78,7 @@ void FUN_00331ecc(void)
           if (!bVar19) {
             uVar18 = 0x12;
           }
-          FUN_002b8454(uVar17 & 0xff,uVar18);
+          buttonHelpSetSlot(uVar17 & 0xff,uVar18);
           uVar17 = uVar17 + 1;
           uVar18 = extraout_r1;
         } while ((int)uVar17 < 6);
@@ -89,7 +89,7 @@ void FUN_00331ecc(void)
             return;
           }
           *(unsigned char *)(DAT_0043da2c + 0x4c5) = 1;
-          FUN_002ae5e0();
+          buttonHelpRebuildTouchRegions();
           return;
         }
         *(unsigned char *)(DAT_0043da2c + 0x4c5) = 1;
@@ -148,7 +148,7 @@ void FUN_00331ecc(void)
     if (iVar7 == 1 || iVar7 == 2) {
       iVar7 = FUN_0029e908(iVar12 + 0x34);
       iVar15 = 0;
-      iVar10 = FUN_0029e958(iVar12 + 0x34);
+      iVar10 = uiGridNavigationEntryCount(iVar12 + 0x34);
       if (0 < iVar10) {
         do {
           iVar10 = FUN_002c09d0(0x520);
@@ -180,14 +180,14 @@ void FUN_00331ecc(void)
             break;
           }
           iVar15 = iVar15 + 1;
-          iVar10 = FUN_0029e958(iVar12 + 0x34);
+          iVar10 = uiGridNavigationEntryCount(iVar12 + 0x34);
         } while (iVar15 < iVar10);
       }
     }
   }
   else {
     iVar10 = 0;
-    iVar7 = FUN_0029e958(iVar12 + 0x34);
+    iVar7 = uiGridNavigationEntryCount(iVar12 + 0x34);
     if (0 < iVar7) {
       do {
         if (*(short *)(iVar12 + iVar10 * 2 + 0xdf0) == iVar8) {
@@ -199,7 +199,7 @@ void FUN_00331ecc(void)
               ((iVar7 = FUN_002c09d0(0x527), iVar7 != 0 || (iVar7 = FUN_002c09d0(0x215), iVar7 != 0)
                ))))) {
             iVar10 = 0;
-            iVar7 = FUN_0029e958(iVar12 + 0x34);
+            iVar7 = uiGridNavigationEntryCount(iVar12 + 0x34);
             if (0 < iVar7) {
               do {
                 if (*(short *)(iVar12 + iVar10 * 2 + 0xdf0) == iVar8) {
@@ -213,14 +213,14 @@ void FUN_00331ecc(void)
                   }
                 }
                 iVar10 = iVar10 + 1;
-                iVar7 = FUN_0029e958(iVar12 + 0x34);
+                iVar7 = uiGridNavigationEntryCount(iVar12 + 0x34);
               } while (iVar10 < iVar7);
             }
           }
           break;
         }
         iVar10 = iVar10 + 1;
-        iVar7 = FUN_0029e958(iVar12 + 0x34);
+        iVar7 = uiGridNavigationEntryCount(iVar12 + 0x34);
       } while (iVar10 < iVar7);
     }
     if (((((*psStack_630 == iVar8) && (iVar7 = FUN_002c09d0(0x520), iVar7 == 0)) &&
@@ -395,7 +395,7 @@ LAB_003323f0:
       } while (iVar7 < 3);
     }
     iVar7 = 0;
-    FUN_002c1658(0,1);
+    inputQueryButtonState(0,1);
     if (!(iVar7 == 0 && !bVar19)) {
       uVar9 = FUN_0029e908(iVar12 + 0x34);
       iStack_634 = dataTable15GetUnlockedEntryId((int)*(char *)(iVar12 + 0x98),uVar9);
@@ -450,7 +450,7 @@ LAB_003323f0:
           func_0x001d0750();
           if ((*(char *)(iVar7 + 2) == '\0') || (*(char *)(iVar12 + 0x25bc) != '\0')) {
             if (*(int *)(iVar12 + 0x18) != 6) {
-              FUN_00299900(0);
+              campListShowSelectedHelp(0);
               if ((*(unsigned char *)(iVar7 + 3) & 0xf0) != 0) {
                 if (iStack_634 != 10) {
                   messageDismissNumericBanner(1);
@@ -506,7 +506,7 @@ LAB_003323f0:
           ((iVar7 = FUN_002c09d0(0x527), iVar7 == 0 && (iVar7 = FUN_002c09d0(0x215), iVar7 == 0)))))
          ) {
         iVar7 = 1;
-        FUN_002c1658();
+        inputQueryButtonState();
         if (iVar7 != 0) {
           bVar2 = 1;
           uVar18 = 0;
@@ -623,7 +623,7 @@ LAB_003323f0:
         else if ((*(char *)(iVar12 + 0xab) != '\0') &&
                 ((cVar5 = *(char *)(iVar12 + 0xad), cVar5 < '\x03' || (bVar2)))) {
           iVar7 = 5;
-          FUN_002c1658(5,1);
+          inputQueryButtonState(5,1);
           if (iVar7 != 0) {
             cVar4 = *(char *)(iVar12 + 0xad) - '\x01';
             *(char *)(iVar12 + 0xad) = cVar4;
@@ -652,7 +652,7 @@ joined_r0x00333130:
           }
           else {
             iVar7 = 6;
-            FUN_002c1658(6,1);
+            inputQueryButtonState(6,1);
             if (iVar7 != 0) {
               cVar4 = *(char *)(iVar12 + 0xad) + '\x01';
               *(char *)(iVar12 + 0xad) = cVar4;
@@ -676,7 +676,7 @@ joined_r0x00333130:
               goto joined_r0x00333130;
             }
             iVar7 = 4;
-            FUN_002c1658(4,1);
+            inputQueryButtonState(4,1);
             if (iVar7 != 0) {
               cVar5 = *(char *)(iVar12 + 0xac) - '\x01';
               *(char *)(iVar12 + 0xac) = cVar5;
@@ -687,7 +687,7 @@ joined_r0x00333130:
             }
             else {
               iVar7 = 3;
-              FUN_002c1658(3,1);
+              inputQueryButtonState(3,1);
               if (iVar7 == 0) goto LAB_003333b4;
               cVar5 = *(char *)(iVar12 + 0xac) + '\x01';
               *(char *)(iVar12 + 0xac) = cVar5;
@@ -704,7 +704,7 @@ joined_r0x00333130:
         else if (*(char *)(iVar12 + 0xad) == '\x03') {
           if (*(char *)(iVar12 + 0xab) != '\0') {
             iVar7 = 5;
-            FUN_002c1658(5,1);
+            inputQueryButtonState(5,1);
             if (((iVar7 != 0) && (!bVar20)) && (!bVar19)) {
               cVar4 = *(char *)(iVar12 + 0xad);
               cVar5 = cVar4 - '\x01';
@@ -736,7 +736,7 @@ joined_r0x00333130:
             }
             if (*(char *)(iVar12 + 0xab) != '\0') {
               iVar7 = 6;
-              FUN_002c1658(6,1);
+              inputQueryButtonState(6,1);
               if (((iVar7 != 0) && (!bVar20)) && (!bVar19)) {
                 cVar4 = *(char *)(iVar12 + 0xad);
                 cVar5 = cVar4 + '\x01';
@@ -766,7 +766,7 @@ joined_r0x00333130:
             }
           }
           iVar7 = iVar12 + 0x34;
-          FUN_0029efd8(iVar7,1);
+          gridNavigationHandleConfirm(iVar7,1);
           if (iVar7 != 0 || bVar20) {
             uVar3 = FUN_0029e908(iVar12 + 0x34);
             *(unsigned char *)((int)*(char *)(iVar12 + 0x98) + iVar12 + 0x9b) = uVar3;
@@ -794,7 +794,7 @@ LAB_003333b4:
           FUN_002b8838(0x50);
           FUN_0029e890((int)*(char *)(iVar12 + 0xac),1);
           gameSetIconDisplayEnabled(1);
-          FUN_0029e788();
+          campMenuSessionReset();
         }
         iVar7 = FUN_0029e0f8();
         if ((((iVar7 != 0) && (*(int *)(iVar12 + 0x18) == 6)) &&

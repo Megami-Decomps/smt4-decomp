@@ -21,11 +21,11 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
-StatBlock *FUN_00262f94(void);
+StatBlock *stockFindSelectedUnit(void);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void unitRecalculateEffectiveStats(StatBlock *unit);
 void FUN_0029d8f4(StatBlock *unit, s32 demonSide, u8 flag);
-void FUN_0029e788(void);
+void campMenuSessionReset(void);
 s32 FUN_001ddc00(void);
 s32 FUN_00223c78(void);
 void statusBustUpPortraitAcquire(s32 id, s32 byDevilId);
@@ -49,7 +49,7 @@ u32 padIsButtonPressed(u32 button);
 extern "C" s32 campCecStatGainState(CampCecMenu *menu)
 {
     s32 result = 0;
-    StatBlock *unit = FUN_00262f94();
+    StatBlock *unit = stockFindSelectedUnit();
     u8 name[32];
     switch (menu->scriptFlow.phase) {
     case 0:
@@ -165,7 +165,7 @@ extern "C" s32 campCecStatGainState(CampCecMenu *menu)
             btlTalkBustUpSetDemonTexture(unit->id, 1);
             menu->rewardPortraitPending = 0;
             gameSetIconDisplayEnabled(1);
-            FUN_0029e788();
+            campMenuSessionReset();
             if (partyPanelIsActive())
                 buttonHelpSetPreset(0xcc);
             else
@@ -178,7 +178,7 @@ extern "C" s32 campCecStatGainState(CampCecMenu *menu)
             gameGlobalsSetSelected(0);
             FUN_0029c4c8(1);
             FUN_0029d8f4(&menu->rewardUnit.beforeStatGains, 0, 0);
-            FUN_0029c4e4((u32)FUN_00262f94(), 0);
+            FUN_0029c4e4((u32)stockFindSelectedUnit(), 0);
             FUN_0029c4ac(0);
             statusPanelSetOpen(1);
             FUN_0026d654(0);
@@ -188,7 +188,7 @@ extern "C" s32 campCecStatGainState(CampCecMenu *menu)
     case 8:
         if (FUN_0029563c() && !FUN_00223c78() && !FUN_001ddc00() && !FUN_00293aac() &&
             (padIsButtonPressed(0) || buttonHelpHasEnabledEntryForId(1))) {
-            FUN_002a0cc8(1);
+            gameGlobalsSetSubScreenActive(1);
             soundPlaySeUnpanned(0x100016d);
             ++menu->scriptFlow.phase;
             beginStatusPanelClose();

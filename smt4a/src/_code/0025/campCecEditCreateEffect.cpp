@@ -17,13 +17,13 @@ struct CampCecEdit {
     /* 0x100 */ CampCecEditOptions options;
 };
 extern CampCecEdit *g_campCecEdit;
-void *FUN_0032d61c(u32 effectId, void *resource, void *parameters, u32 mode, u32 flags, s32 selection);
+void *campCecCreateEffectDraw(u32 effectId, void *resource, void *parameters, u32 mode, u32 flags, s32 selection);
 s32 campCecEditCreateEffect(void)
 {
     CampCecEdit *edit = g_campCecEdit;
     CampCecEditOptions *options = &edit->options;
     if (options->enabled != 0) {
-        FUN_0032d61c(edit->effectId, edit->resource, edit->parameters, 0, 0, options->selection);
+        campCecCreateEffectDraw(edit->effectId, edit->resource, edit->parameters, 0, 0, options->selection);
     }
     return 0;
 }

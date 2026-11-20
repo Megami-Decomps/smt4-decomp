@@ -38,7 +38,7 @@ extern int onlineInstanceTableGetCurrent(void);
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: onlineJobSetStateDone. */
-extern int FUN_002ea704(void);
+extern int watcherGetEnabledFlag(void);
 extern unsigned int onlineUrlGetAddress(void);
 /* Supplied declaration required: onlineUrlDestroy. */
 /* Supplied declaration required: onlineSockAddrConstruct2. */
@@ -82,12 +82,12 @@ void FUN_001123a0(int param_1)
   onlineInstanceTableFind(temp_v1,*(unsigned int *)(param_1 + 0x1f0));
   temp_v13 = temp_v1;
   if (temp_v1 != 0) {
-    temp_v1 = FUN_002ea704();
-    if ((((temp_v1 != 0) && (temp_v1 = FUN_002ea704(), *(char *)(temp_v1 + 0x10c) != '\0')) &&
+    temp_v1 = watcherGetEnabledFlag();
+    if ((((temp_v1 != 0) && (temp_v1 = watcherGetEnabledFlag(), *(char *)(temp_v1 + 0x10c) != '\0')) &&
         (FUN_0043d588(&temp_v9,temp_v17),
         (temp_v9 != '\0' || temp_v10 != '\0') || (temp_v11 != '\0' || temp_v12 != '\0'))) &&
        (temp_v15 = param_1 + 0x180, *(char *)(param_1 + 0x198) != '\0')) {
-      temp_v1 = FUN_002ea704();
+      temp_v1 = watcherGetEnabledFlag();
       temp_v8 = param_1 + 0x120;
       for (piVar7 = *(int **)(temp_v1 + 0x114); piVar7 < *(int **)(temp_v1 + 0x118); piVar7 = piVar7 + 1
           ) {

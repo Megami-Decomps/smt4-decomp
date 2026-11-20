@@ -22,17 +22,17 @@ typedef struct GlobalTask {
     /* 0x05 */ u8 unk05[3];
     /* 0x08 */ Object *object;
 } GlobalTask;
-extern GlobalTask *DAT_00588e2c;
+extern GlobalTask *g_saveLoadRunner;
 
 /* Shuts down the global task: stops and destroys its object, stops its job and frees the task. */
 void taskShutdownGlobal(void)
 {
     GlobalTask *task;
 
-    task = DAT_00588e2c;
-    if (DAT_00588e2c != NULL) {
-        if (DAT_00588e2c->object != NULL) {
-            DAT_00588e2c->object->vtbl->stop(DAT_00588e2c->object);
+    task = g_saveLoadRunner;
+    if (g_saveLoadRunner != NULL) {
+        if (g_saveLoadRunner->object != NULL) {
+            g_saveLoadRunner->object->vtbl->stop(g_saveLoadRunner->object);
             if (task->object != NULL) {
                 task->object->vtbl->destroy(task->object);
             }
@@ -40,9 +40,9 @@ void taskShutdownGlobal(void)
         }
         task->stopped = 1;
         jobStop(task->job, 0);
-        if (DAT_00588e2c != NULL) {
-            asdOperatorDelete(DAT_00588e2c);
-            DAT_00588e2c = NULL;
+        if (g_saveLoadRunner != NULL) {
+            asdOperatorDelete(g_saveLoadRunner);
+            g_saveLoadRunner = NULL;
         }
     }
 }

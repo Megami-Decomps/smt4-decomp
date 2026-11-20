@@ -158,7 +158,7 @@ void FUN_001ae538(int param_1,unsigned int param_2,unsigned int param_3,int para
     }
     if (((temp_v7[temp_v1] != 0x12 && temp_v7[temp_v1] != 0x13) ||
         (temp_v2 = gameFlagIsSet(0x410), temp_v2 != 0)) &&
-       (temp_v2 = FUN_0029ee54((const void *)(temp_v3 + temp_v1 * 100 + 0x2a4)), 0 < temp_v2)) {
+       (temp_v2 = gridNavigationGetItemCount((const void *)(temp_v3 + temp_v1 * 100 + 0x2a4)), 0 < temp_v2)) {
       texDrawTableEntryAtStoredOrigin(2,0x1d,0x4f8,temp_v8,param_3,0x6a);
       texDrawTableEntryAtStoredOrigin(2,0x1d,temp_v1 + 0x4fa,temp_v8,param_3,0x6a);
       break;
@@ -173,7 +173,7 @@ void FUN_001ae538(int param_1,unsigned int param_2,unsigned int param_3,int para
     }
     if (((temp_v7[temp_v4] != 0x12 && temp_v7[temp_v4] != 0x13) ||
         (temp_v5 = gameFlagIsSet(0x410), temp_v5 != 0)) &&
-       (temp_v5 = FUN_0029ee54((const void *)(temp_v3 + temp_v4 * 100 + 0x2a4)), 0 < temp_v5)) {
+       (temp_v5 = gridNavigationGetItemCount((const void *)(temp_v3 + temp_v4 * 100 + 0x2a4)), 0 < temp_v5)) {
       texDrawTableEntryAtStoredOrigin(2,0x1d,0x4f9,temp_v8,param_3,0x6a);
       texDrawTableEntryAtStoredOrigin(2,0x1d,temp_v4 + 0x501,temp_v8,param_3,0x6a);
       break;
@@ -185,7 +185,7 @@ void FUN_001ae538(int param_1,unsigned int param_2,unsigned int param_3,int para
   temp_v3 = 0;
   do {
     temp_v1 = resourceRunOperationIfUnblocked(temp_v9);
-    temp_v4 = FUN_0029ee54((const void *)(temp_v9));
+    temp_v4 = gridNavigationGetItemCount((const void *)(temp_v9));
     if (temp_v4 <= temp_v1 + temp_v3) break;
     temp_v1 = resourceRunOperationIfUnblocked(temp_v9);
     equipListDrawRowDetails(temp_v10,temp_v3 + 2,*(unsigned short *)(temp_v6 + (temp_v1 + temp_v3) * 2),temp_v11,param_3);

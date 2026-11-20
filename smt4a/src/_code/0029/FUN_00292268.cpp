@@ -7,12 +7,12 @@ extern "C" {
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void);
 int FUN_002227e8(void);
-int FUN_0025ef68(float *, float *, int);
+int mapResolveCollisionSphere(float *, float *, int);
 int FUN_002826dc(float *, float *, int, int);
 int distSpatial(void);
 int mathAngleDeltaDegrees(void);
 int mathPositionHeadingDegrees(void);
-int FUN_0036d984(...);
+int mapCollisionRaySegmentTest(...);
 int controllerSetDestination(...);
 int controllerSetRotationEulerDegrees(...);
 int modelPlayClip(...);
@@ -71,13 +71,13 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_002227e8. */
-/* Supplied declaration required: FUN_0025ef68. */
+/* Supplied declaration required: mapResolveCollisionSphere. */
 /* Supplied declaration required: FUN_002826dc. */
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: mathAngleDeltaDegrees. */
 extern int mapCollisionExists(void);
 /* Supplied declaration required: mathPositionHeadingDegrees. */
-/* Supplied declaration required: FUN_0036d984. */
+/* Supplied declaration required: mapCollisionRaySegmentTest. */
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: controllerSetRotationEulerDegrees. */
 /* Supplied declaration required: modelPlayClip. */
@@ -226,7 +226,7 @@ void FUN_00292268(void)
   temp_v24 = DAT_005f0c98;
   temp_v25 = DAT_005f0c9c;
   pfVar3 = &temp_v23;
-  FUN_0025ef68(pfVar3,&temp_v21,0);
+  mapResolveCollisionSphere(pfVar3,&temp_v21,0);
   temp_v17 = 0.0f;
   temp_v14 = 10.0f;
   temp_v15 = 2.0f;
@@ -266,7 +266,7 @@ void FUN_00292268(void)
   temp_v15 = 1.0f;
   if (DAT_005f0cf9 == '\0') {
     if (DAT_005f0ca8 != 0xc) {
-      temp_v1 = FUN_0036d984(&DAT_005f0c94,g_lmapScene + 7,0);
+      temp_v1 = mapCollisionRaySegmentTest(&DAT_005f0c94,g_lmapScene + 7,0);
       if (temp_v1 == -1) {
         DAT_005f0cb4 = 0;
         goto LAB_002928a4;
@@ -317,7 +317,7 @@ void FUN_00292268(void)
         temp_v19 = temp_v19 + temp_v11 * 400.0f;
         libm_cosf();
         temp_v20 = temp_v20 + temp_v6 * temp_v7;
-        temp_v1 = FUN_0036d984(g_lmapScene + 7,&temp_v19,0);
+        temp_v1 = mapCollisionRaySegmentTest(g_lmapScene + 7,&temp_v19,0);
         if (temp_v1 == -1) {
           temp_v21 = temp_v19;
           fStack_54 = temp_v20;

@@ -20,10 +20,10 @@ f32 renderCtxCalculateStereoParallax(RenderCtxA *ctx, f32 depth);
 f32 jobGetScalarValue(void);
 void efctSetSpeed(f32 speed);
 s16 dataTable10FindValue(u16 id);
-u32 FUN_00180114(void);
+u32 table01RecordLookupForContent(void);
 void uiDrawItemOrStatusIcon(s32 icon, s32 x, s32 y, s32 index, s32 flags);
 void drawSetColorFromRGBA8(u32 rgba);
-void FUN_00180310(s32 mode, s32 x, s32 y, s32 align, s32 digits, s32 index, const char *text);
+void statRowDrawValueImpl(s32 mode, s32 x, s32 y, s32 align, s32 digits, s32 index, const char *text);
 void gxResetColorQuadToWhite(void);
 s32 fontMeasureLineAdvance(const char *text, s32 mode);
 
@@ -49,7 +49,7 @@ void FUN_003721b0(u32 unused, f32 speed, StatusRecord *record, s32 slot, s32 x, 
     efctSetSpeed(speed);
     icon = dataTable10FindValue(record->iconId);
     count = record->count;
-    sprintf(name, "%s", FUN_00180114());
+    sprintf(name, "%s", table01RecordLookupForContent());
     parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, depth);
     frameId = 0xbba;
     if (slot == 0) {
@@ -77,7 +77,7 @@ void FUN_003721b0(u32 unused, f32 speed, StatusRecord *record, s32 slot, s32 x, 
     frameX += placement->x;
     frameY = placement->y + y;
     drawSetColorFromRGBA8(0xffffffff);
-    FUN_00180310(0, frameX, frameY, 1, digits, 0xce, countText);
+    statRowDrawValueImpl(0, frameX, frameY, 1, digits, 0xce, countText);
     gxResetColorQuadToWhite();
     placement = asdTMTexTableEntryAt(20, slot + 0xbe5);
     frameX = placement->x + (placement->placement->width - fontMeasureLineAdvance(name, 2)) / 2 + x + parallax;

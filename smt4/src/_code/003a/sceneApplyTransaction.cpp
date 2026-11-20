@@ -3,8 +3,8 @@
 #include "gamedata/EquipmentSortPower.h"
 
 extern "C" {
-void FUN_002306f8(const Scene3aEntry* item, s32 quantity, u32 flags);
-void FUN_0026e630(u32 amount);
+void inventoryApplyTransaction(const Scene3aEntry* item, s32 quantity, u32 flags);
+void gameSaveAddPointsClamped(u32 amount);
 void gameCounterAddSaturating(s32 index, u32 amount);
 
 // Apply the scene's total and item deltas, converting downloadable entries separately.
@@ -20,15 +20,15 @@ void sceneApplyTransaction(Scene3a* scene)
             break;
         }
         if (contentGetEntryKind(id) == 10) {
-            FUN_0026e630(aocGetContentFlags(id) * quantity);
+            gameSaveAddPointsClamped(aocGetContentFlags(id) * quantity);
             item.clearOptions();
             item.id = id;
-            FUN_002306f8(&item, -(s32)quantity, 0);
+            inventoryApplyTransaction(&item, -(s32)quantity, 0);
             continue;
         }
         item.clearOptions();
         item.id = id;
-        FUN_002306f8(&item, quantity, 0);
+        inventoryApplyTransaction(&item, quantity, 0);
     }
 }
 }

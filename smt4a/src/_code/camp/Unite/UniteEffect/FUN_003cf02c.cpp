@@ -31,7 +31,7 @@ int titleRestartSlotState3(...);
 int scrScriptProcessStartEntry(...);
 int libc_strcpy(...);
 int uniteCameraDestroy(void);
-int FUN_003d2158(...);
+int soundApplyValueOrStop(...);
 int FUN_003d2a00(...);
 int FUN_0040c190(...);
 int candidateGetPreferredValue(...);
@@ -71,7 +71,7 @@ extern unsigned char LAB_003d009c; /* 0x3d009c */
 extern unsigned char LAB_003d00a8; /* 0x3d00a8 */
 extern unsigned char LAB_003d00b4; /* 0x3d00b4 */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern int DAT_0057f2c4; /* 0x57f2c4 */
+extern int g_uniteEffectWork; /* 0x57f2c4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
@@ -80,10 +80,10 @@ extern int DAT_0057f2c4; /* 0x57f2c4 */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Supplied declaration required: asdLoadFileWithSize. */
-extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
+extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: padQueryLogicalKey. */
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
-/* Supplied declaration required: FUN_00167458. */
+/* Supplied declaration required: uiSpriteSlideFromSide. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: asdMemoryAllocTraced. */
 /* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
@@ -106,7 +106,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: statusBustUpPortraitRelease. */
 /* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: FUN_003d2158. */
+/* Supplied declaration required: soundApplyValueOrStop. */
 /* Supplied declaration required: FUN_003d2a00. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
@@ -156,10 +156,10 @@ unsigned int FUN_003cf02c(void)
   int temp_v17 [37];
   unsigned long long temp_v18;
   
-  temp_v2 = DAT_0057f2c4;
+  temp_v2 = g_uniteEffectWork;
   temp_v16 = 1.0f;
   temp_v18 = 0x3f800000;
-  uiSpriteAdvanceAnimation((UiSpriteState *)(DAT_0057f2c4 + 0x964), 1.0f);
+  uiSpriteAdvanceAnimation((UiSpriteState *)(g_uniteEffectWork + 0x964), 1.0f);
   *(int *)(temp_v2 + 0x88) = *(int *)(temp_v2 + 0x88) + 2;
   asdAnimGetTrackLastFrame(*(unsigned int *)(temp_v2 + 0x8c),0);
   temp_v16 = (float)(int)temp_v16;
@@ -168,7 +168,7 @@ unsigned int FUN_003cf02c(void)
   temp_v15 = 0x42652ee000000000;
   switch(*(unsigned int *)(temp_v2 + 4)) {
   case 1:
-    temp_v6 = FUN_0026c3a0();
+    temp_v6 = gameGlobalsIsActiveStateFour();
     if (temp_v6 == 0) break;
     titleSetSlotValueState2(0,10);
     titleSetSlotValueState2(1,10);
@@ -181,8 +181,8 @@ unsigned int FUN_003cf02c(void)
       }
       else {
         if (temp_v0 != 4) {
-          temp_v6 = DAT_0057f2c4;
-          *(unsigned int *)(DAT_0057f2c4 + 4) = 2;
+          temp_v6 = g_uniteEffectWork;
+          *(unsigned int *)(g_uniteEffectWork + 4) = 2;
           *(unsigned int *)(temp_v6 + 8) = 0;
           break;
         }
@@ -193,22 +193,22 @@ unsigned int FUN_003cf02c(void)
     else {
       sysPlayVoice(0x10000b4);
     }
-    temp_v6 = DAT_0057f2c4;
-    *(unsigned int *)(DAT_0057f2c4 + 4) = 2;
+    temp_v6 = g_uniteEffectWork;
+    *(unsigned int *)(g_uniteEffectWork + 4) = 2;
     *(unsigned int *)(temp_v6 + 8) = 0;
     break;
   case 2:
     temp_v6 = 0;
     do {
       if (temp_v6 <= *(int *)(temp_v2 + 8) - 1) {
-        FUN_00167458((UiSpriteState *)(temp_v2 + temp_v6 * 0x8c + 0x360),0);
+        uiSpriteSlideFromSide((UiSpriteState *)(temp_v2 + temp_v6 * 0x8c + 0x360),0);
       }
       temp_v16 = (float)((unsigned long long)temp_v15 >> 0x20);
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 5);
     uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v2 + 0x8d8), 1.0f);
-    temp_v6 = FUN_00163e84(0);
-    if (((temp_v6 != 0) && (temp_v6 = FUN_00163e84(1), temp_v6 != 0)) &&
+    temp_v6 = screenFaderIsSettled(0);
+    if (((temp_v6 != 0) && (temp_v6 = screenFaderIsSettled(1), temp_v6 != 0)) &&
        (*(char *)(temp_v2 + 0x61a) != '\0')) {
       temp_v6 = *(int *)(*(int *)(temp_v2 + 0x90) + 4);
       handleRegistryRegisterObject(g_handleRegistry,temp_v6);
@@ -241,14 +241,14 @@ unsigned int FUN_003cf02c(void)
         FUN_0019eb14();
       }
       uniteCameraInitialize(temp_v2 + 0xa0);
-      temp_v6 = DAT_0057f2c4;
-      *(unsigned int *)(DAT_0057f2c4 + 4) = 3;
+      temp_v6 = g_uniteEffectWork;
+      *(unsigned int *)(g_uniteEffectWork + 4) = 3;
       *(unsigned int *)(temp_v6 + 8) = 0;
     }
     break;
   case 3:
     *(int *)(temp_v2 + 0x84) = *(int *)(temp_v2 + 0x84) + 1;
-    temp_v6 = DAT_0057f2c4;
+    temp_v6 = g_uniteEffectWork;
     temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x20b));
     temp_v17[0] = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x20e));
     temp_v14 = (float)((unsigned long long)temp_v15 >> 0x20);
@@ -309,7 +309,7 @@ unsigned int FUN_003cf02c(void)
     }
     if (*(int *)(temp_v2 + 0x98) != 0) {
       if (*(char *)(temp_v2 + 0x128) != '\0') {
-        FUN_003f9ac4(reinterpret_cast<AnimatedObject *>(*(int *)(temp_v2 + 0x98)), reinterpret_cast<CameraMotionOutput *>(temp_v2 + 0xa0), 0, 1.0f);
+        cameraMotionSampleAtFrame(reinterpret_cast<AnimatedObject *>(*(int *)(temp_v2 + 0x98)), reinterpret_cast<CameraMotionOutput *>(temp_v2 + 0xa0), 0, 1.0f);
         temp_v16 = temp_v13;
       }
       FUN_002c8894();
@@ -412,16 +412,16 @@ unsigned int FUN_003cf02c(void)
         (**(romwright_code **)(**(int **)(temp_v2 + 0x90) + 4))();
         *(unsigned int *)(temp_v2 + 0x90) = 0;
       }
-      temp_v6 = DAT_0057f2c4;
+      temp_v6 = g_uniteEffectWork;
       if (*(char *)(temp_v2 + 0x20) != '\0') {
         scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x338),0x11);
         sysPlaySe(0x5a);
-        temp_v6 = DAT_0057f2c4;
-        *(unsigned int *)(DAT_0057f2c4 + 4) = 4;
+        temp_v6 = g_uniteEffectWork;
+        *(unsigned int *)(g_uniteEffectWork + 4) = 4;
         *(unsigned int *)(temp_v6 + 8) = 0;
       }
       else {
-        *(unsigned int *)(DAT_0057f2c4 + 4) = 5;
+        *(unsigned int *)(g_uniteEffectWork + 4) = 5;
         *(unsigned int *)(temp_v6 + 8) = 0;
       }
       break;
@@ -458,7 +458,7 @@ LAB_003cf9bc:
             temp_v10 = 0x375;
           }
           if (*(int *)(temp_v2 + 0x24) != -1) {
-            FUN_003d2158(*(int *)(temp_v2 + 0x24),0);
+            soundApplyValueOrStop(*(int *)(temp_v2 + 0x24),0);
             *(unsigned int *)(temp_v2 + 0x24) = 0xffffffff;
             sysPlayVoice(0x10000b7);
           }
@@ -477,7 +477,7 @@ LAB_003cf9bc:
         *(unsigned char *)(temp_v2 + 0x128) = temp_v12;
         if (temp_v12) {
           controllerRefreshAtUnitScale(reinterpret_cast<AnimatedObject *>(temp_v3), reinterpret_cast<CameraMotionOutput *>(temp_v2 + 0xa0), 0);
-          FUN_003f9ac4(reinterpret_cast<AnimatedObject *>(*(unsigned int *)(temp_v2 + 0x98)), reinterpret_cast<CameraMotionOutput *>(temp_v2 + 0xa0), 0, static_cast<f32>(temp_v10));
+          cameraMotionSampleAtFrame(reinterpret_cast<AnimatedObject *>(*(unsigned int *)(temp_v2 + 0x98)), reinterpret_cast<CameraMotionOutput *>(temp_v2 + 0xa0), 0, static_cast<f32>(temp_v10));
         }
         else {
           temp_v3 = **(int **)(*(int *)(temp_v3 + 0x34) + 0x48);
@@ -546,7 +546,7 @@ LAB_003cf9bc:
       titleSetSlotValueState2(0,0x1e);
     }
     if (*(char *)(temp_v2 + 0x20) != '\0') {
-      temp_v0 = *(short *)(DAT_0057f2c4 + 0x1e);
+      temp_v0 = *(short *)(g_uniteEffectWork + 0x1e);
       if (temp_v0 == 2) {
         temp_v6 = 0x28f;
       }
@@ -621,15 +621,15 @@ LAB_003cf9bc:
     dataTable01GetRecordWithAocOverride(temp_v4);
     libc_strcpy(temp_v17,temp_v4);
     scrSetStringSlot(8,temp_v17);
-    temp_v5 = FUN_0014bf3c(*(unsigned short *)(temp_v2 + 0xc),0);
+    temp_v5 = demonGetRaceLabel(*(unsigned short *)(temp_v2 + 0xc),0);
     libc_strcpy(temp_v17,temp_v5);
     scrSetStringSlot(0x10,temp_v17);
     scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x338),0x10);
     sysPlaySe(0x5a);
     btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v2 + 0xc),1);
     btlTalkBustUpSetUnk2F4(1);
-    temp_v6 = DAT_0057f2c4;
-    *(unsigned int *)(DAT_0057f2c4 + 4) = 6;
+    temp_v6 = g_uniteEffectWork;
+    *(unsigned int *)(g_uniteEffectWork + 4) = 6;
     *(unsigned int *)(temp_v6 + 8) = 0;
     break;
   case 6:
@@ -639,14 +639,14 @@ LAB_003cf9bc:
       slotSetRequest(0,10,0xff);
       slotSetRequest(1,10,0xff);
       soundChannelStopAll(10);
-      temp_v6 = DAT_0057f2c4;
-      *(unsigned int *)(DAT_0057f2c4 + 4) = 7;
+      temp_v6 = g_uniteEffectWork;
+      *(unsigned int *)(g_uniteEffectWork + 4) = 7;
       *(unsigned int *)(temp_v6 + 8) = 0;
     }
     break;
   case 7:
-    temp_v6 = FUN_00163e84(0);
-    if ((temp_v6 != 0) && (temp_v6 = FUN_00163e84(1), temp_v6 != 0)) {
+    temp_v6 = screenFaderIsSettled(0);
+    if ((temp_v6 != 0) && (temp_v6 = screenFaderIsSettled(1), temp_v6 != 0)) {
       scrScriptProcessDestroy(*(unsigned int *)(temp_v2 + 0x338));
       asdMemFree(*(unsigned int *)(temp_v2 + 0x33c));
       asdMemFree(*(unsigned int *)(temp_v2 + 0x334));
@@ -674,8 +674,8 @@ LAB_003cf9bc:
         *(unsigned int *)(temp_v2 + 0x9c) = 0;
       }
       uniteCameraDestroy();
-      temp_v6 = DAT_0057f2c4;
-      *(unsigned int *)(DAT_0057f2c4 + 4) = 8;
+      temp_v6 = g_uniteEffectWork;
+      *(unsigned int *)(g_uniteEffectWork + 4) = 8;
       *(unsigned int *)(temp_v6 + 8) = 0;
     }
   }

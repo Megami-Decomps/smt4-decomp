@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001907a4(unsigned char [16], int);
 int FUN_001a5c44(int *, unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_001a8e14(...);
+int soundArchiveFileEntryIsLoaded(...);
 int nw_snd_internal_SoundArchiveLoader_LoadImpl(int *, unsigned int, unsigned int, unsigned int, int);
 
 typedef int romwright_code(...);
@@ -22,7 +22,7 @@ typedef struct {
 extern unsigned int *FUN_00194834(unsigned char *);
 /* Supplied declaration required: FUN_001a5c44. */
 extern int FUN_001a8930(int, unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_001a8e14. */
+/* Supplied declaration required: soundArchiveFileEntryIsLoaded. */
 extern unsigned int *FUN_001b3da8(int, unsigned int);
 /* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_LoadImpl. */
 
@@ -43,7 +43,7 @@ FUN_00190c24(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int
   char temp_v6;
   unsigned char temp_v7 [16];
   
-  temp_v0 = FUN_001a8e14(param_1[1]);
+  temp_v0 = soundArchiveFileEntryIsLoaded(param_1[1]);
   if (((param_4 & 4) != 0) &&
      (piVar2 = param_1, nw_snd_internal_SoundArchiveLoader_LoadImpl(param_1,temp_v0,param_3,param_5,0)
      , piVar2 == (int *)0x0)) {
@@ -82,7 +82,7 @@ FUN_00190c24(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int
             }
           }
           else if ((param_4 & 8) != 0) {
-            temp_v0 = FUN_001a8e14(param_1[1],temp_v3);
+            temp_v0 = soundArchiveFileEntryIsLoaded(param_1[1],temp_v3);
             nw_snd_internal_SoundArchiveLoader_LoadImpl(param_1,temp_v0,param_3,param_5,1);
             if (piVar2 == (int *)0x0) {
               return 0;
@@ -98,7 +98,7 @@ FUN_00190c24(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int
       if (temp_v2 < *puVar4) {
         do {
           if ((param_4 & 8) != 0) {
-            temp_v0 = FUN_001a8e14(param_1[1],puVar4[temp_v2 + 1]);
+            temp_v0 = soundArchiveFileEntryIsLoaded(param_1[1],puVar4[temp_v2 + 1]);
             piVar2 = param_1;
             nw_snd_internal_SoundArchiveLoader_LoadImpl(param_1,temp_v0,param_3,param_5,1);
             if (piVar2 == (int *)0x0) {

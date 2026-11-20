@@ -9,7 +9,7 @@ int FUN_002e9acc(int *, int);
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(...);
 int onlineJobSetStateDone(int);
-int FUN_002ea704(void);
+int watcherGetEnabledFlag(void);
 int FUN_002eb858(unsigned char [32], unsigned int, int);
 int onlineSockAddrConstruct2(...);
 int FUN_002f2e3c(int, int, int, int, unsigned int);
@@ -43,7 +43,7 @@ extern int onlineInstanceTableGetCurrent(void);
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: onlineJobSetStateDone. */
-/* Supplied declaration required: FUN_002ea704. */
+/* Supplied declaration required: watcherGetEnabledFlag. */
 /* Supplied declaration required: FUN_002eb858. */
 /* Supplied declaration required: onlineSockAddrConstruct2. */
 /* Supplied declaration required: FUN_002f2e3c. */
@@ -84,7 +84,7 @@ void FUN_00112e7c(int param_1)
   unsigned char temp_v19 [32];
   unsigned char temp_v20 [16];
   
-  temp_v2 = FUN_002ea704();
+  temp_v2 = watcherGetEnabledFlag();
   if (temp_v2 == 0) {
     temp_v2 = onlineInstanceTableGetCurrent();
     onlineInstanceTableFind(temp_v2,*(unsigned int *)(param_1 + 0x1f0));
@@ -131,7 +131,7 @@ void FUN_00112e7c(int param_1)
     temp_v3 = iteratorAdvance(temp_v11);
     temp_v4 = wordRefsDiffer_002fd750(temp_v3,&temp_v14);
     if ((temp_v4 != 0) && (*(char *)(temp_v8 + 6) == '\x03')) {
-      temp_v3 = FUN_002ea704();
+      temp_v3 = watcherGetEnabledFlag();
       FUN_002fa434(temp_v15,temp_v3);
       temp_v1 = 1;
       temp_v4 = FUN_002fdb0c(temp_v15);

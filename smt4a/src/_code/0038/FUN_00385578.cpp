@@ -16,7 +16,7 @@ extern "C" {
 extern const LmapIdleVoiceTables DAT_00532018;
 s32 randBetween(s32 minimum, s32 maximum);
 void FUN_002d1f40(s32 duration, s32 first, s32 second);
-void FUN_003d2158(u32 voice, s32 mode);
+void soundApplyValueOrStop(u32 voice, s32 mode);
 void lmapClearExtraFlag(void);
 
 // Wait a randomized idle interval, play a timed voice, and cancel it when the scene stops idling.
@@ -59,7 +59,7 @@ void FUN_00385578(void)
             return;
         }
         if (scene->idleVoice != 0)
-            FUN_003d2158(scene->idleVoice, 0);
+            soundApplyValueOrStop(scene->idleVoice, 0);
         scene = g_lmapScene;
         scene->idleVoiceFrame = 0;
         scene->idleVoicePhase = 0;

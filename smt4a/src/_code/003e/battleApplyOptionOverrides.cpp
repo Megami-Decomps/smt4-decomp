@@ -5,7 +5,7 @@
 
 extern "C" {
 s32 gameOptionsClassifyMode(void);
-void FUN_003eb760(BtlMainStateA *battle, void *parameters, const PartySlotA *source);
+void btlEntryApplyOptionOverrides(BtlMainStateA *battle, void *parameters, const PartySlotA *source);
 void FUN_004ca63c(BtlMainStateA *battle, void *parameters, s32 kind, s32 index, s32 mode);
 void optionsApplyOverride(s32 value);
 void FUN_004d9ebc(s32 mode);
@@ -69,7 +69,7 @@ void battleApplyOptionOverrides(BtlMainStateA *battle)
     }
     PartySlotA *player = &gameGetSlotTable()->player;
     if (player->record.id != 0) {
-        FUN_003eb760(battle, &temporary.data, player);
+        btlEntryApplyOptionOverrides(battle, &temporary.data, player);
         FUN_004ca63c(battle, &temporary.data, 2, 54, 0);
     }
 }

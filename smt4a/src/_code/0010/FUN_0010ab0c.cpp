@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002f3b58(unsigned int, unsigned int, unsigned int);
 
 typedef int romwright_code(...);
-extern int FUN_002ecf28(void);
+extern int objectRegistryGetOwnerForCurrent(void);
 /* Supplied declaration required: FUN_002f3b58. */
 
 
@@ -21,7 +21,7 @@ void FUN_0010ab0c(int param_1,int *param_2,unsigned int param_3)
   (**(romwright_code **)(*param_2 + 0x58))(param_2,*(unsigned int *)(param_1 + 8));
   *(short *)(param_2 + 8) = (short)param_3;
   temp_v0 = (**(romwright_code **)(*param_2 + 0x54))(param_2);
-  temp_v1 = FUN_002ecf28();
+  temp_v1 = objectRegistryGetOwnerForCurrent();
   FUN_002f3b58(*(unsigned int *)(temp_v1 + 0xc),param_3,temp_v0);
   return;
 }

@@ -32,7 +32,7 @@ void FUN_002bdf94(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 depth, cons
 void drawSetColorFromRGBA8(u32 packed);
 void gxSetMirroredClippedScissor(s32 x, s32 y, u32 width, s32 height, s32 useNarrowScreen);
 u8 ifTouchGetSelectionModeForRegion(int id);
-u32 FUN_0029dde0(void);
+u32 fusionPlayerLevelCapGet(void);
 
 #define UNITE_TEXTURES 0x24   /* the fusion screen's texture table */
 #define TEXT_WHITE 0xFFFFFFFF
@@ -70,7 +70,7 @@ void uniteDrawResultPanel(s32 x, s32 y, u32 selected, s32 cursorSlot, s32 region
     sprintf(text, "\202\145\202\225\202\223\202\211\202\217\202\216\201\100\202\157\202\217\202\223\202\223\202\211\202\202\202\214\202\205\201\106");
     textDrawString(part->x + x, part->y + y, 0.0f, 2, 0.0f, TEXT_WHITE, 1.0f, text);
     part = asdTMTexTableEntryAt(UNITE_TEXTURES, 76);
-    FUN_002bdf94(0, part->x + x, part->y + y, 1, 2, 201, "%d", FUN_0029dde0());
+    FUN_002bdf94(0, part->x + x, part->y + y, 1, 2, 201, "%d", fusionPlayerLevelCapGet());
     if (work->blocked) {
         return;
     }

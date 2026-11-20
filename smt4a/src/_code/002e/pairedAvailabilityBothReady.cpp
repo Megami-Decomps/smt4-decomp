@@ -2,12 +2,12 @@
 #include "code/Code002e.h"
 
 extern "C" {
-extern AvailabilityState DAT_006357d8;
+extern AvailabilityState g_screenFadeSlots;
 extern AvailabilityState g_screenFadeAvailability;
 
 u32 pairedAvailabilityBothReady(void)
 {
-    if (availabilityStateReady(&DAT_006357d8)) {
+    if (availabilityStateReady(&g_screenFadeSlots)) {
         if (availabilityStateReady(&g_screenFadeAvailability))
             return 1;
     }

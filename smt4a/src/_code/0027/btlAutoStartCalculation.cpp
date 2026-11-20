@@ -9,13 +9,13 @@ struct BattleAutoWork {
 extern "C" {
 u32 taskCreateDraw(const s8* name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void* owner);
-s32 FUN_0024b718(u32 handle);
-void FUN_002dec74(u32 handle);
+s32 btlAutoStartCalculationJobUpdate(u32 handle);
+void dialogTaskStopInfoWin(u32 handle);
 
 // Start the battle auto-calculation worker owned by this work block.
 void btlAutoStartCalculation(BattleAutoWork* work)
 {
     work->process = taskCreateDraw((const s8*)"btlAuto Calc", 4, 0, 0,
-                                   FUN_0024b718, FUN_002dec74, (u32)work, work->owner);
+                                   btlAutoStartCalculationJobUpdate, dialogTaskStopInfoWin, (u32)work, work->owner);
 }
 }

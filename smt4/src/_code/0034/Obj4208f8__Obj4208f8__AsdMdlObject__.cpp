@@ -2,7 +2,7 @@
 
 extern "C" {
 void resourceGetPosition(AsdMdlNode *node, u32 unused, Obj4208f8Vec3 *position);
-void FUN_002b2ae8(AsdMdlNode *node, u32 unused, Obj4208f8Vec3 *vector);
+void asdMdlNodeGetWorldPosition(AsdMdlNode *node, u32 unused, Obj4208f8Vec3 *vector);
 }
 
 /* Clears the effect state, reads the model's vector and position, and takes over the position. */
@@ -15,7 +15,7 @@ Obj4208f8::Obj4208f8(AsdMdlObject *m)
         i++;
     }
     resourceGetPosition(model->node, 0, &unk30);
-    FUN_002b2ae8(model->node, 0, &unk18);
+    asdMdlNodeGetWorldPosition(model->node, 0, &unk18);
     unk24.set(0.0f, 0.0f, 0.0f);
     unk0C.set(0.0f, unk30.y * 0.5f, 0.0f);
     unk90 = unk18;

@@ -17,7 +17,7 @@ typedef struct ResourceKeyTable {
     /* 0x8 */ u32 count;
 } ResourceKeyTable;
 
-u32 FUN_002b5c44(void);
+u32 tokenTableGet(void);
 s32 tokenResolveAddress(u32 context, ResourceKeyTable **table, u32 token);
 
 /* Look up each of `count` keys in the token's table and copy the matching entries to `out`;
@@ -25,7 +25,7 @@ s32 tokenResolveAddress(u32 context, ResourceKeyTable **table, u32 token);
 s32 FUN_003df3b4(u32 *token, ResourceKey *out, const ResourceKey *keys, u32 count)
 {
     ResourceKeyTable *table;
-    s32 result = tokenResolveAddress(FUN_002b5c44(), &table, *token);
+    s32 result = tokenResolveAddress(tokenTableGet(), &table, *token);
     u32 i;
     u32 j;
 

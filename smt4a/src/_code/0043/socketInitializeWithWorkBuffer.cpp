@@ -4,7 +4,7 @@
 extern "C" {
 
 int heapOwnerCreate(unsigned char *, int, int, int);
-int FUN_0016f864(int);
+int srvInitialize(int);
 int FUN_001a1244(unsigned char *, unsigned int *);
 int FUN_0043f384(void);
 int FUN_0043f440(unsigned int *, unsigned int);
@@ -24,7 +24,7 @@ extern unsigned char DAT_0062d6b5; /* 0x62d6b5 */
 extern unsigned char DAT_0062d6b6; /* 0x62d6b6 */
 
 /* Supplied declaration required: heapOwnerCreate. */
-/* Supplied declaration required: FUN_0016f864. */
+/* Supplied declaration required: srvInitialize. */
 extern unsigned int *nn_os_CriticalSection_Initialize(unsigned char *);
 /* Supplied declaration required: FUN_001a1244. */
 /* Supplied declaration required: FUN_0043f384. */
@@ -52,7 +52,7 @@ unsigned int * socketInitializeWithWorkBuffer(unsigned int *param_1,int param_2,
     puVar2 = (unsigned int *)0xc8a073f9;
   }
   else {
-    FUN_0016f864(0);
+    srvInitialize(0);
     heapOwnerCreate(&DAT_0062d648,(int)param_1 + param_3,param_2 - param_3,0);
     puVar2 = (unsigned int *)nn_os_CriticalSection_Initialize(&DAT_0062d6a0);
     DAT_0062d6b0 = &DAT_0062d648;

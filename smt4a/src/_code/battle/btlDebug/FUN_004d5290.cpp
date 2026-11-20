@@ -9,7 +9,7 @@ extern "C" {
 extern const AsdListBoxEntry DAT_00573220[];
 extern const char DAT_0052809c[];
 s32 jobIsValid(u32 job);
-void FUN_003592dc(u32 list);
+void asdListBoxJobReset(u32 list);
 void jobStop(u32 job, s32 delay);
 void asdListBoxAddItems(u32 list, const AsdListBoxEntry *items, s32 count);
 void asdListBoxSetByteValue(u32 list, u8 value);
@@ -20,7 +20,7 @@ void asdListBoxSetFloatItem(u32 list, u32 index, f32 value, s32 minimum, s32 max
 void FUN_004d5290(BattleDebugPanelWork *work, const BattleDebugPanelParent *parent)
 {
     if (jobIsValid(work->panelJob)) {
-        FUN_003592dc(work->panelJob);
+        asdListBoxJobReset(work->panelJob);
         jobStop(work->panelJob, 0);
     }
     work->panelJob = asdListBoxCreateDefaultFlags(parent->job, 0x75, 0, 0);

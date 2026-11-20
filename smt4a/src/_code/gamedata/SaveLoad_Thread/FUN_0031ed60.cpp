@@ -6,7 +6,7 @@
 
 extern "C" {
 s32 FUN_0014a930(u32 *handle, u32 initialCount, u32 maxCount);
-s32 FUN_0019a364(u32 *previousCount, u32 semaphore, u32 releaseCount);
+s32 svcReleaseSemaphore(u32 *previousCount, u32 semaphore, u32 releaseCount);
 void *memAlloc(u32 heap, u32 alignmentClass, u32 option, u32 size, u32 alignment, u32 fromFront);
 void resultReportIfFailed(ThreadStackStorage *stack, void *buffer, u32 size);
 s32 FUN_002fb0d4(ThreadHandleState *thread, const ThreadArgumentDescriptor *descriptor,
@@ -37,7 +37,7 @@ static inline s32 initializeSaveSemaphore(u32 *semaphore)
 static inline s32 releaseSaveSemaphore(u32 semaphore)
 {
     u32 previousCount;
-    return FUN_0019a364(&previousCount, semaphore, 1);
+    return svcReleaseSemaphore(&previousCount, semaphore, 1);
 }
 
 static inline s32 startSaveLoadWorker(SaveLoadThreadRequest *request, ThreadEntryPoint worker)

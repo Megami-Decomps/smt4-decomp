@@ -22,9 +22,9 @@ extern "C" {
 OnlineInstanceTable* onlineInstanceTableGetCurrent();
 OnlineInstance* onlineInstanceTableFind(OnlineInstanceTable*, u32);
 s32 _ZNK18OnlineResultRecord7isValidEv(s32*);
-void FUN_002f3dc4(OnlineInstance*, const OnlineCallbackResult*);
-void FUN_002f3dde(OnlineInstance*, const OnlineCallbackResult*);
-u32 FUN_002e9f00(OnlineCallbackRequest*, u32);
+void onlineInstanceCompleteMode2(OnlineInstance*, const OnlineCallbackResult*);
+void onlineInstanceCompleteMode3(OnlineInstance*, const OnlineCallbackResult*);
+u32 onlineInstanceCompleteWithChildren(OnlineCallbackRequest*, u32);
 void onlineJobSetStateDone(OnlineCallbackJob*);
 
 // Forward the completion result to its instance, then finish the originating job.
@@ -38,13 +38,13 @@ void onlineJobCompleteWithResult(OnlineCallbackJob* job, OnlineCallbackResult* r
                 *job->output = job->value;
             }
             OnlineCallbackResult copy = *result;
-            FUN_002f3dc4(instance, &copy);
+            onlineInstanceCompleteMode2(instance, &copy);
         } else {
             OnlineCallbackResult copy = *result;
-            FUN_002f3dde(instance, &copy);
+            onlineInstanceCompleteMode3(instance, &copy);
         }
     } else {
-        FUN_002e9f00(&job->request, 4);
+        onlineInstanceCompleteWithChildren(&job->request, 4);
     }
     onlineJobSetStateDone(job);
 }

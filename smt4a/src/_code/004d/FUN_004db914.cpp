@@ -71,14 +71,14 @@ u32 FUN_004db914(UniteContext* ctx, u16* first, u16* second, FusionResult* resul
     {
         u32 base = 25;
         for (u32 id = 0; id <= 1200; id++) {
-            if (nkmBaseGetRecord(id & 0xffff)->race == 0x33 && FUN_002a4b28(id & 0xffff) != 0) {
+            if (nkmBaseGetRecord(id & 0xffff)->race == 0x33 && compendiumEntryIsRegistered(id & 0xffff) != 0) {
                 base = 10;
                 break;
             }
         }
         u8 limit = base + 25;
         for (u32 id = 0; id <= 1200; id++) {
-            if (nkmBaseGetRecord(id & 0xffff)->race == 0x2a && FUN_002a4b28(id & 0xffff) != 0) {
+            if (nkmBaseGetRecord(id & 0xffff)->race == 0x2a && compendiumEntryIsRegistered(id & 0xffff) != 0) {
                 limit = base + 10;
                 break;
             }

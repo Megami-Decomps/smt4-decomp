@@ -37,7 +37,7 @@ extern SoundSystem g_asdSoundSystem;
 
 s32 FUN_00178144(u32* voice);
 void FUN_00152bf8(SoundGroup* group);
-void FUN_001b6390(u32* voice, f32 volume);
+void soundVoiceSetVolume(u32* voice, f32 volume);
 void nn_os_CriticalSection_Enter(void* section);
 void nn_os_CriticalSection_Leave(void* section);
 void nn_snd_CTR_Voice_SetState(u32* voice, s32 state);
@@ -58,7 +58,7 @@ static inline SoundGroup* groupAt(SoundGroupList* list, s32 index)
 
 static inline void setVolume(SoundGroup* group, f32 volume)
 {
-    for (s32 v = 0; v < group->voiceCount; v++) FUN_001b6390(group->voices[v], volume);
+    for (s32 v = 0; v < group->voiceCount; v++) soundVoiceSetVolume(group->voices[v], volume);
 }
 
 static inline void setState(SoundGroup* group, s32 state)

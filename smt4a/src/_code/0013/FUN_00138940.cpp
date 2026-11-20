@@ -9,7 +9,7 @@ extern u32 g_nnAppletCriticalSection[2];
 void nn_os_LightEvent_Initialize(u32 *event, u8 resetType);
 void nn_os_LightEvent_Signal(u32 *event);
 void nn_os_CriticalSection_Initialize(u32 *section);
-void FUN_00170390(void);
+void sleepAllow(void);
 void FUN_00147328(void (*callback)(void), u32 userData);
 void FUN_00147314(void (*callback)(void), u32 userData);
 void FUN_00144a90(void);
@@ -25,7 +25,7 @@ u32 FUN_00138940(void)
     nn_os_LightEvent_Initialize(g_appletHomeButtonEvent, 0);
     nn_os_CriticalSection_Initialize(g_nnAppletCriticalSection);
     g_appletEventState.initialized = 1;
-    FUN_00170390();
+    sleepAllow();
     g_appletEventState.enabled = 1;
     nn_os_LightEvent_Signal(g_appletEventState.sleepQueryEvent);
     nn_os_LightEvent_Signal(g_appletEventState.homeButtonEvent);

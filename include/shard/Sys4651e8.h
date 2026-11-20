@@ -9,9 +9,9 @@ typedef struct Sys4651e8 {
     /* 0x04 */ u32 unk04;
     /* 0x08 */ u32 unk08;
     /* 0x0C */ u8 unk0C[0x4];
-    /* 0x10 */ u32 unk10;
+    /* 0x10 */ u32 lastResult; /* nn::Result of the last process or file operation */
 } Sys4651e8;
 
-extern Sys4651e8 DAT_004651e8;
+extern Sys4651e8 g_processResultState;
 
 #endif

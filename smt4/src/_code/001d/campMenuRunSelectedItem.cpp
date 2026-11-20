@@ -25,7 +25,7 @@ void bgmRestart(u32 value);
 void campTimersStart(void);
 void campUpdateCategoryHighlightColors(void);
 void guestWinRequestClose(void);
-void FUN_0029e788(void);
+void campMenuSessionReset(void);
 void FUN_00298d0c(u32 value);
 void spriteTable22Acquire(void);
 void FUN_003ad0e0(void);
@@ -95,16 +95,16 @@ void campMenuRunSelectedItem(void)
         campUpdateCategoryHighlightColors();
         guestWinRequestClose();
         messageDismissNumericBanner(1);
-        if ((s32)FUN_0029ee54(&camp->grids[3]) > 0) {
+        if ((s32)gridNavigationGetItemCount(&camp->grids[3]) > 0) {
             gameSetIconDisplayEnabled(1);
-            FUN_0029e788();
+            campMenuSessionReset();
             FUN_00298d0c(1);
         }
         camp->returnState = 0xe;
         campChangeState(4);
         return;
     case 10:
-        if ((s32)FUN_0029ee54(&camp->grids[4]) > 0) {
+        if ((s32)gridNavigationGetItemCount(&camp->grids[4]) > 0) {
             campTimersStart();
             timerStart(&camp->sprites[1], 1, 0);
             FUN_0026d5a4();
@@ -128,7 +128,7 @@ void campMenuRunSelectedItem(void)
         } else if (item == 0xd) {
             grid = &camp->grids[2];
         }
-        if ((s32)FUN_0029ee54(grid) > 0) {
+        if ((s32)gridNavigationGetItemCount(grid) > 0) {
             campTimersStart();
             timerStart(&camp->sprites[1], 1, 0);
             FUN_0026d5a4();
@@ -181,14 +181,14 @@ void campMenuRunSelectedItem(void)
         } else if (item == 0x17) {
             grid = &camp->grids[11];
         }
-        if ((s32)FUN_0029ee54(grid) > 0) {
+        if ((s32)gridNavigationGetItemCount(grid) > 0) {
             campTimersStart();
             timerStart(&camp->sprites[1], 1, 0);
             FUN_0026d5a4();
             guestWinRequestClose();
             messageDismissNumericBanner(1);
             gameSetIconDisplayEnabled(1);
-            FUN_0029e788();
+            campMenuSessionReset();
             camp->returnState = 0x1a;
             campRefreshEquipmentCategory(0x11);
             campRefreshEquipmentCategory(0x12);

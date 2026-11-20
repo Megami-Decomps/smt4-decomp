@@ -23,7 +23,7 @@ static __inline void vectorAdd(W5Match8Vec3 *result, const W5Match8Vec3 *left, c
 }
 
 extern "C" {
-f32 FUN_003d4dd4(u32 mode, u32 duration, u32 frame);
+f32 easeEvaluate(u32 mode, u32 duration, u32 frame);
 extern W5Match8Vec3 g_cameraAlternateProgressStart;
 
 void FUN_004f1708(void *camera)
@@ -41,7 +41,7 @@ void FUN_004f1708(void *camera)
         u32 mode;
     };
     SecondaryPositionView *state = static_cast<SecondaryPositionView *>(camera);
-    f32 progress = FUN_003d4dd4(state->mode, state->duration, state->frame);
+    f32 progress = easeEvaluate(state->mode, state->duration, state->frame);
     W5Match8Vec3 first;
     vectorSubtract(&first, &state->target, &g_cameraAlternateProgressStart);
     W5Match8Vec3 second;

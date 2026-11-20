@@ -31,7 +31,7 @@ extern unsigned char LAB_001174b4; /* 0x1174b4 */
 extern int FUN_00123a3a(unsigned int);
 /* Supplied declaration required: FUN_00124300. */
 /* Supplied declaration required: FUN_002eb2ec. */
-extern unsigned int FUN_002eb5f4(void);
+extern unsigned int watcherGetActiveContext(void);
 extern int wordRefsDiffer_002ee774(unsigned int **, unsigned int *);
 /* Supplied declaration required: FUN_003031f4. */
 
@@ -49,7 +49,7 @@ void FUN_0011742c(unsigned int param_1,int param_2,unsigned int *param_3,unsigne
   
   temp_v3 = param_3;
   temp_v4 = param_4;
-  temp_v0 = FUN_002eb5f4();
+  temp_v0 = watcherGetActiveContext();
   FUN_00124300(temp_v0,param_2);
   temp_v1 = FUN_00123a3a(param_1);
   temp_v1 = *(int *)(temp_v1 + 0x18) + 0x58;
@@ -67,7 +67,7 @@ void FUN_0011742c(unsigned int param_1,int param_2,unsigned int *param_3,unsigne
     FUN_00103a24(temp_v3 + 2,0);
     FUN_003031f4(temp_v3 + 2);
     puVar4 = temp_v3 + 2;
-    temp_v0 = FUN_002eb5f4();
+    temp_v0 = watcherGetActiveContext();
     FUN_00121ad0(temp_v0,puVar4);
   }
   return;

@@ -30,7 +30,7 @@ struct ObjectStreamOwner {
 };
 
 extern "C" {
-ObjectCommandQueue *FUN_00191330(void);
+ObjectCommandQueue *soundStreamCommandManagerGetInstance(void);
 s32 soundRequestQueueFlush(ObjectCommandQueue *queue, s32 value); // declcheck: local (the shared declaration does not compile here or changes this unit)
 u8 FUN_00463e10(ObjectStreamTarget *target, ObjectCommand *command, u8 *request, u32 start, ObjectLevelPair level);
 u8 FUN_004645ec(ObjectStreamTarget *target, ObjectCommand *command, u8 *request, u32 start, ObjectLevelPair level);
@@ -48,7 +48,7 @@ extern "C" void FUN_00463a9c(ObjectStreamOwner *owner)
     if (target->suppressed != 0) {
         return;
     }
-    ObjectCommandQueue *queue = FUN_00191330();
+    ObjectCommandQueue *queue = soundStreamCommandManagerGetInstance();
     ObjectCommand *command = objectCommandBegin(queue, 25);
     command->kind = 43;
     u8 value = target->kind;

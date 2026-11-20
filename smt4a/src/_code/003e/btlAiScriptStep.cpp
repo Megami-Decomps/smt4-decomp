@@ -1,0 +1,59 @@
+#include "battle/BtlMainAccess.h"
+#include "battle/btlAIScript.h"
+#include "addon/AocSystemA.h"
+#include "script/scrScriptProcess.h"
+#include "quest_center/qcCtrl.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+
+struct BtlMainStateA;
+extern "C" {
+void asdMemFree(void *data);
+void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
+s32 FUN_003efb18(BtlMainStateA *battle);
+
+/* Loads and executes a battle AI script, then releases both its process and file data. */
+s32 btlAiScriptStep(BtlAiScript *runner)
+{
+    switch (runner->unk0C) {
+    case 0: // Idle until a script is requested.
+        return 0;
+    case 1:
+        if (g_aocSystem->aiDemonId != -1) {
+            aocQueueType1d(reinterpret_cast<u32>(g_aocSystem), g_aocSystem->aiDemonId, reinterpret_cast<u32>(&runner->data), reinterpret_cast<u32>(runner->path));
+            g_aocSystem->aiDemonId = -1;
+        } else {
+            asdLoadFileAsyncSimple(runner->path, reinterpret_cast<u32 *>(&runner->data), 0);
+        }
+        if (FUN_003efb18(btlGetMainState()) == 0) {
+            runner->unk0C = 2;
+        } else {
+            runner->unk0C = 4;
+        }
+        break;
+    case 2:
+        if (runner->data != NULL) {
+            runner->process = scrScriptProcessCreate(runner->data, 0);
+            runner->process->mode = 1;
+            scrScriptProcessStartEntry(runner->process, 0);
+            runner->unk0C = 3;
+        }
+        break;
+    case 3:
+        if (scrRunOpcodesStub(runner->process) == 2) {
+            runner->unk0C = 4;
+        }
+        break;
+    case 4:
+        if (runner->process != NULL) {
+            scrScriptProcessDestroy(runner->process);
+            runner->process = NULL;
+        }
+        if (runner->data != NULL) {
+            asdMemFree(runner->data);
+            runner->data = NULL;
+        }
+        break;
+    }
+    return 0;
+}
+}

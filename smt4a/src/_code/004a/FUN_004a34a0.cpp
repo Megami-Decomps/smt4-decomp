@@ -34,7 +34,7 @@ u32 FUN_004a34a0(Screen4A *screen, u32 id)
         nkmBaseGetRecord(selected->id);
     }
     u8 reason;
-    if (!FUN_002a4b28(id)) {
+    if (!compendiumEntryIsRegistered(id)) {
         reason = 6;
     } else if (FUN_004d05b4() < cost && flagValueRead(0x7c3) <= 0) {
         reason = 1;

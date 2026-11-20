@@ -9,14 +9,14 @@ extern "C" {
 u32 FUN_00401440(ModelActivationGroup *group)
 {
     for (s32 index = 0; index < 3; ++index) {
-        if (group->models[index] != NULL && !FUN_0040ab8c(group->models[index])) {
+        if (group->models[index] != NULL && !moriModelContentIsLoaded(group->models[index])) {
             return 0;
         }
     }
     for (s32 index = 0; index < 3; ++index) {
         if (group->models[index] != NULL) {
-            FUN_0040a908(group->models[index], 0x10000);
-            FUN_0040a918(group->models[index], 0x30000);
+            moriModelContentSetRequestFirst(group->models[index], 0x10000);
+            moriModelContentSetRequestSecond(group->models[index], 0x30000);
             moriModelContentLoadBody(group->models[index], 0);
             Obj557b18 *model = group->models[index]->body;
             modelPlayClip(model, 0, 2, 0.0f, 0.0f);

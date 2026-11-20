@@ -11,7 +11,7 @@ static __inline void copyVector(AsdCameraVec3 *destination, const AsdCameraVec3 
 }
 
 extern "C" {
-void FUN_0014f0dc(void *owner);
+void cameraMatrixCacheSetLookAt(void *owner);
 void FUN_001aff14(MTX34 *matrix, s32 mode, f32 x, f32 y, f32 z);
 void mathSinCos(f32 *first, f32 *second, f32 angle);
 void FUN_00162330(void *destination, const MTX34 *source);
@@ -27,7 +27,7 @@ void FUN_004f112c(void *owner, AsdCamera *camera, const AsdCameraVec3 *eye, cons
                   const AsdCameraVec3 *up, const AsdCameraVec3 *rotation)
 {
     if (rotation->z == 0.0f) {
-        FUN_0014f0dc(static_cast<u8 *>(owner) + 0x6c);
+        cameraMatrixCacheSetLookAt(static_cast<u8 *>(owner) + 0x6c);
         return;
     }
     copyVector(&camera->eye, eye);

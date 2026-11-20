@@ -30,7 +30,7 @@ typedef struct {
 
 extern unsigned char LAB_003da674; /* 0x3da674 */
 extern unsigned char LAB_003da698; /* 0x3da698 */
-extern int DAT_0057f2c4; /* 0x57f2c4 */
+extern int g_uniteEffectWork; /* 0x57f2c4 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
@@ -65,8 +65,8 @@ unsigned int FUN_003da030(void)
   unsigned char temp_v6;
   unsigned int in_fpscr;
   
-  temp_v3 = DAT_0057f2c4;
-  if (*(int *)(DAT_0057f2c4 + 4) != 0) {
+  temp_v3 = g_uniteEffectWork;
+  if (*(int *)(g_uniteEffectWork + 4) != 0) {
     renderCtxSelectDisplayAreaForStereoMode(reinterpret_cast<RenderCtxA *>(g_renderCtx));
     temp_v2 = g_renderCtx;
     temp_v1 = renderCtxPackPassFlags(1,0);
@@ -80,7 +80,7 @@ unsigned int FUN_003da030(void)
       *(unsigned char *)(temp_v2 + 0x1270) = 0;
     }
     temp_v2 = g_renderCtx;
-    temp_v0 = *(short *)(DAT_0057f2c4 + 0x1e);
+    temp_v0 = *(short *)(g_uniteEffectWork + 0x1e);
     if (temp_v0 == 2) {
       temp_v1 = 0x28f;
     }

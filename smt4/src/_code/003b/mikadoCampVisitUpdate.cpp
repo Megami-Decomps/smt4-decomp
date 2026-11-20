@@ -28,9 +28,9 @@ inline void MikadoTalkWork::operator delete(void *block)
 }
 
 extern "C" {
-void FUN_0022b778(MikadoCamera *camera);
+void transformInterpolationStep(MikadoCamera *camera);
 void buttonHelpSelectByProgress(MikadoCamera *camera); // declcheck: local (ui/UiControl_Smt4.h types the argument as a HelpOwner view)
-void FUN_0022b29c(MikadoCamera *camera, s32 type, s32 group);
+void contentMenuRebuildGroup(MikadoCamera *camera, s32 type, s32 group);
 s32 listUpdateRevealTransition(SelectionFlags *menu);
 void FUN_00233808(SelectionFlags *menu);
 ListEntry20 *FUN_0022b8c0(SelectionFlags *menu); // declcheck: local (code/Code0022_Smt4.h returns the entry as a u32)
@@ -46,9 +46,9 @@ void frameTexCampSetMode(s32 mode);
 void FUN_00275dec(void);
 void frameTexApplyMode(s32 mode);
 void commonBgStopChildAndReset(void);
-void FUN_002636b0(void);
+void placeWindowStartClose(void);
 void FUN_0028a420(s32 a, s32 b);
-void FUN_00287c34(s32 mode);
+void mapSceneResetState(s32 mode);
 void FUN_0026ff54(void);
 void FUN_0026fe0c(void);
 void FUN_0026faa4(void);
@@ -57,14 +57,14 @@ u32 screenFadeIsBusy(void);
 void clearFlags310To31F(void);
 void naviClearObjectBlock(void);
 void mapClearPendingEntries(void);
-void FUN_00273d34(void);
-void FUN_00273c54(void);
+void mapUpdateLocationAvailability(void);
+void mapUpdatePendingAvailabilityFlags(void);
 void titleSetSlotValueState2(u32 index, u32 value);
 void FUN_002a4bac(MikadoTalkWork *talk);
 void FUN_00235250(MikadoTalkWork *talk);
 void FUN_00234f5c(MikadoTalkWork *talk, const char *name, const char *altName);
 void FUN_0022afc4(MikadoTalkWork *talk, s32 index, s32 mode); // declcheck: local (code/Code0022_Smt4.h types the argument as a ModelController view)
-void FUN_00234cd8(MikadoTalkWork *talk, s32 view, s32 immediate);
+void moverRetargetToSlot(MikadoTalkWork *talk, s32 view, s32 immediate);
 void objModelCreateFromSource(MikadoTalkWork *talk, void *file, u32 size);
 void modelSetVisible(MikadoTalkWork *talk, s32 visible);
 void nodeOwnerSetEnabled(MikadoTalkWork *talk, s32 enabled);
@@ -74,11 +74,11 @@ void nodeOwnerSetEnabled(MikadoTalkWork *talk, s32 enabled);
  * new quest selection), then either leaves the scene or rebuilds its menu, model and windows. */
 void mikadoCampVisitUpdate(MikadoCamera *camera)
 {
-    FUN_0022b778(camera);
+    transformInterpolationStep(camera);
     switch (camera->step) {
     case 0:
         placeWinSetValue(0);
-        FUN_0022af9c(0);
+        infoWinSetShown(0);
         FUN_00275dc4();
         frameTexCampSetMode(1);
         if (camera->flags & 0x40) {
@@ -105,7 +105,7 @@ void mikadoCampVisitUpdate(MikadoCamera *camera)
                 }
             }
         }
-        FUN_002636b0();
+        placeWindowStartClose();
         break;
     case 2:
         if (++camera->frame < 10) {
@@ -152,14 +152,14 @@ void mikadoCampVisitUpdate(MikadoCamera *camera)
                 camera->keepUi = 1;
             } else {
                 gameGetMapBlock()->quest = result->mapValue;
-                FUN_00273d34();
-                FUN_00273c54();
+                mapUpdateLocationAvailability();
+                mapUpdatePendingAvailabilityFlags();
             }
         }
         if (g_gameState.retainCampResources) {
             /* The camp stays loaded: leave the scene for wherever the pending jump points. */
             FUN_0026ff54();
-            FUN_00287c34(1);
+            mapSceneResetState(1);
             frameTexCampSetMode(0);
             switch (gameDataBlocksGetSaveData()[2]) {
             case 0:
@@ -187,7 +187,7 @@ void mikadoCampVisitUpdate(MikadoCamera *camera)
     case 5: {
         if (campGetState()->changed) {
             u8 kind = FUN_0022b8c0(&camera->selectionFlags)->kind;
-            FUN_0022b29c(camera, static_cast<s16>(camera->positionA.a), camera->group);
+            contentMenuRebuildGroup(camera, static_cast<s16>(camera->positionA.a), camera->group);
             listScrollToId(&camera->selectionFlags, kind);
             camera->menuTotal = flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(&camera->selectionFlags));
         }
@@ -219,7 +219,7 @@ void mikadoCampVisitUpdate(MikadoCamera *camera)
             }
             current = FUN_0022b8c0(&camera->selectionFlags);
             FUN_0022afc4(camera->talkWork, 0, -1);
-            FUN_00234cd8(camera->talkWork, current->cameraView, 1);
+            moverRetargetToSlot(camera->talkWork, current->cameraView, 1);
             if (camera->record->modelSet >= 0) {
                 const char *names = static_cast<const char *>(dataTable33GetEntries(table33, camera->record->modelSet));
 
@@ -247,7 +247,7 @@ void mikadoCampVisitUpdate(MikadoCamera *camera)
             infoWinSetMessage(reinterpret_cast<const void *>(camera->talkMbm), camera->record->messageId);
             placeWinStartText(camera->record->name);
             placeWinSetValue(1);
-            FUN_0022af9c(1);
+            infoWinSetShown(1);
         }
         break;
     }

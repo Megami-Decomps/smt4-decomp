@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern void FUN_003daaf8(void);
+extern void statGrowthAccumulate(void);
 
 /* Forwards to the function that follows it in the binary. */
 void FUN_003daaf4(void)
 {
-    FUN_003daaf8();
+    statGrowthAccumulate();
 }
 
 } /* extern "C" */

@@ -16,7 +16,7 @@ struct EquipmentListIndicator {
 };
 }
 extern "C" {
-void FUN_0049339c(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color);
+void uiDrawCompositeSpriteAtRectCorner(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color);
 void FUN_0049368c(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color, u32 flags);
 void FUN_00494574(EquipmentMenuState *work, s32 page);
 s32 rangeGetMinimumLimit(EquipmentMenuCursor *cursor);
@@ -36,7 +36,7 @@ void shopDrawEquipmentList(EquipmentMenuState *work, u32 background)
     case 7: background = 3; break;
     case 8: background = 4; break;
     }
-    FUN_0049339c(&work->detail.region, background, 0, 0, color);
+    uiDrawCompositeSpriteAtRectCorner(&work->detail.region, background, 0, 0, color);
     FUN_0049368c(&work->detail.region, 100, 0, 0, color, 1);
     FUN_00494574(work, work->page);
     u32 state = work->transition.state;
@@ -48,7 +48,7 @@ void shopDrawEquipmentList(EquipmentMenuState *work, u32 background)
         highlight = false;
     EquipmentMenuCursor *cursor = &work->cursors[work->page];
     EquipmentMenuItem *items = work->pages[work->page].items;
-    s32 top = FUN_002a482c(cursor);
+    s32 top = resourceDispatchTaggedOperation(cursor);
     s32 visible = rangeGetMinimumLimit(cursor);
     for (s32 row = 0; row < visible; ++row) {
         if (!highlight || FUN_0031d174(cursor) != row)
@@ -61,7 +61,7 @@ void shopDrawEquipmentList(EquipmentMenuState *work, u32 background)
         FUN_00494d68(work, row + 1, 1, item);
     }
     u32 selected = FUN_0031d174(cursor);
-    u32 offset = FUN_002a482c(cursor);
+    u32 offset = resourceDispatchTaggedOperation(cursor);
     size40Set(work->scroll.indicator, offset, selected);
     EquipmentListIndicator *indicator = static_cast<EquipmentListIndicator *>(work->scroll.indicator);
     indicator->vtable->draw(indicator, color);

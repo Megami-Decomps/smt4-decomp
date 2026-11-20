@@ -12,7 +12,7 @@ void btlHelpFreeEntries();
 s32 dialogIsActive();
 void dialogClose(s32 immediate);
 const char* scrGetArgString(u32 index);
-void FUN_004c8894(const char* text, s32 mode);
+void btlHelpAppendMessage(const char* text, s32 mode);
 
 // Set the dialog flags, replace any active dialog, and display the script string.
 u32 scrCommReplaceBattleDialog()
@@ -23,7 +23,7 @@ u32 scrCommReplaceBattleDialog()
     if (dialogIsActive()) {
         dialogClose(1);
     }
-    FUN_004c8894(scrGetArgString(0), 1);
+    btlHelpAppendMessage(scrGetArgString(0), 1);
     return 1;
 }
 }

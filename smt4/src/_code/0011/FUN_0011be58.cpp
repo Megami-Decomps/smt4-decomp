@@ -7,9 +7,9 @@ extern SoundCallbackState g_callbackState;
 extern SoundCallbackBanks DAT_004c6464;
 extern const char DAT_00407e40[];
 extern u8 DAT_004c64c4[];
-s32 FUN_002c1398(u32 mode);
+s32 srvInitialize(u32 mode); // declcheck: local (the shared declaration does not compile here or changes this unit)
 u32 libc_strlen(const char *text);
-s32 asdModelForwardChecked(u32 *resource, const char *name, u32 length, u32 flags);
+s32 srvGetServiceHandle(u32 *resource, const char *name, u32 length, u32 flags); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void FUN_0012a294(void *queue);
 
 /* Clears one entry of each callback bank. */
@@ -26,11 +26,11 @@ nn::Result FUN_0011be58(void)
     if (g_callbackState.resource) {
         return 0;
     }
-    s32 result = FUN_002c1398(0);
+    s32 result = srvInitialize(0);
     if (nnResultIsFailure(result)) {
         return result;
     }
-    result = asdModelForwardChecked(&g_callbackState.openedResource, DAT_00407e40,
+    result = srvGetServiceHandle(&g_callbackState.openedResource, DAT_00407e40,
                                    libc_strlen(DAT_00407e40), 0);
     if (nnResultIsFailure(result)) {
         return result;

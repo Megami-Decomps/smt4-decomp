@@ -2,7 +2,7 @@
 #include "nn/svc.h"
 #include "nn/os/IpcCommandBuffer.h"
 
-extern "C" s32 DAT_005c1fc8;
+extern "C" s32 g_cecdUseLocalBackend;
 
 /* Sends one word to the service (request 0x0c). */
 extern "C" s32 FUN_0043069c(u32 value)
@@ -10,7 +10,7 @@ extern "C" s32 FUN_0043069c(u32 value)
     nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
     nn::os::SetIpcWord(command, 0, 0xc0040);
     nn::os::SetIpcWord(command, 1, value);
-    s32 result = nn::svc::SendSyncRequest(DAT_005c1fc8);
+    s32 result = nn::svc::SendSyncRequest(g_cecdUseLocalBackend);
     if (nnResultIsSuccess(result)) {
         result = command->words[0];
     }

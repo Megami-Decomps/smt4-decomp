@@ -3,14 +3,14 @@
 
 extern "C" {
 extern void *g_aocSystem;
-EncountRecordA *FUN_00176124(void *, u32, u32);
+EncountRecordA *aocPackageFindConditionalMapRecord(void *, u32, u32);
 s32 gameFlagIsSet(u32);
 
 /* Finds the record for (map, area): the add-on system's own, else the first table record whose flag
  * and level conditions hold; the table's first record if none does. */
 EncountRecordA *dataTable02FindConditionalMapRecord(u32 map, u32 area)
 {
-    EncountRecordA *found = FUN_00176124(g_aocSystem, map, area);
+    EncountRecordA *found = aocPackageFindConditionalMapRecord(g_aocSystem, map, area);
     void *section;
     EncountRecordA *records;
     s32 count;

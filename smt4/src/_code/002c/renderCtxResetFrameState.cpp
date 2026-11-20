@@ -3,13 +3,13 @@
 #include "AsdSDK/Source/Gfx/AsdGfxHelpersSmt4.h"
 
 extern "C" {
-extern AsdGxDisplayBuffers DAT_004e3a0c;
+extern AsdGxDisplayBuffers g_asdGxPresetsDisplay1;
 extern AsdGxDisplayBuffers DAT_004e3a38;
 extern AsdGxFramebuffer DAT_004e3aa4;
 extern AsdGxFramebuffer DAT_004e3ae0;
 void FUN_0011a258(const void *color, const void *depth, s32 width, s32 height);
 void FUN_002bc644(s32 x, s32 y, s32 width, s32 height);
-void FUN_002c2620(u32 buffer);
+void asdGfxBindTarget(u32 buffer);
 
 /* Select the screen's framebuffer and apply its scaled viewport and buffer binding. */
 void renderCtxResetFrameState(s32 target)
@@ -28,7 +28,7 @@ void renderCtxResetFrameState(s32 target)
             g_asdGxPresets.selectedDisplay = &DAT_004e3a38;
         }
     } else {
-        g_asdGxPresets.selectedDisplay = &DAT_004e3a0c;
+        g_asdGxPresets.selectedDisplay = &g_asdGxPresetsDisplay1;
         g_asdGxPresets.selectedFramebuffer = &DAT_004e3aa4;
     }
     AsdGxFramebuffer *framebuffer = g_asdGxPresets.selectedFramebuffer;
@@ -55,7 +55,7 @@ void renderCtxResetFrameState(s32 target)
     if (g_asdGxPresets.displayMode == 1) {
         s32 index = binding->index;
         asdGfxSetMode(binding->mode);
-        FUN_002c2620(binding->buffers[index]);
+        asdGfxBindTarget(binding->buffers[index]);
     }
 }
 }

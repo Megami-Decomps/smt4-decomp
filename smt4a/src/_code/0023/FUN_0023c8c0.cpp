@@ -32,7 +32,7 @@ extern int gameFlagIsSet(unsigned int);
 extern int resourceRunOperationIfUnblocked(int);
 extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: FUN_002ac470. */
-extern int objectApplyIfUnblocked(int);
+extern int gridNavigationGetItemCount(int);
 /* Supplied declaration required: FUN_0034cfc0. */
 
 
@@ -196,7 +196,7 @@ LAB_0023ce68:
     }
     if (((temp_v7[temp_v1] != 0x14 && temp_v7[temp_v1] != 0x15) ||
         (temp_v2 = gameFlagIsSet(0x410), temp_v2 != 0)) &&
-       (temp_v2 = objectApplyIfUnblocked(temp_v3 + temp_v1 * 100 + 0x2b4), 0 < temp_v2)) {
+       (temp_v2 = gridNavigationGetItemCount(temp_v3 + temp_v1 * 100 + 0x2b4), 0 < temp_v2)) {
       texDrawTableEntryAtStoredOrigin(2,0x14,0x4f8,temp_v8,param_3,0x6a);
       texDrawTableEntryAtStoredOrigin(2,0x14,temp_v1 + 0x4fa,temp_v8,param_3,0x6a);
       break;
@@ -211,7 +211,7 @@ LAB_0023ce68:
     }
     if (((temp_v7[temp_v4] != 0x14 && temp_v7[temp_v4] != 0x15) ||
         (temp_v5 = gameFlagIsSet(0x410), temp_v5 != 0)) &&
-       (temp_v5 = objectApplyIfUnblocked(temp_v3 + temp_v4 * 100 + 0x2b4), 0 < temp_v5)) {
+       (temp_v5 = gridNavigationGetItemCount(temp_v3 + temp_v4 * 100 + 0x2b4), 0 < temp_v5)) {
       texDrawTableEntryAtStoredOrigin(2,0x14,0x4f9,temp_v8,param_3,0x6a);
       texDrawTableEntryAtStoredOrigin(2,0x14,temp_v4 + 0x501,temp_v8,param_3,0x6a);
       break;
@@ -223,7 +223,7 @@ LAB_0023ce68:
   temp_v3 = 0;
   do {
     temp_v1 = resourceRunOperationIfUnblocked(temp_v9);
-    temp_v4 = objectApplyIfUnblocked(temp_v9);
+    temp_v4 = gridNavigationGetItemCount(temp_v9);
     if (temp_v4 <= temp_v1 + temp_v3) break;
     temp_v1 = resourceRunOperationIfUnblocked(temp_v9);
     FUN_002ac470(temp_v10,temp_v3 + 2,*(unsigned short *)(temp_v6 + (temp_v1 + temp_v3) * 2),temp_v11,param_3,

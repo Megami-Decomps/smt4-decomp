@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern void FUN_0045b96c(u32 value);
+extern void linkListInsertByKind(u32 value);
 
 void callerARelease3C(CallerA *obj)
 {
     if (obj->unk3C != 0) {
-        FUN_0045b96c(obj->unk24);
+        linkListInsertByKind(obj->unk24);
     }
 }
 

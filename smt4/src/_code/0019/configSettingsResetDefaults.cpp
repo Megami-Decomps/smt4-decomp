@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a1110(void);
+int gameWorldResetForNewGame(void);
 int cecMessageIdClear(u8 *settings);
 
 void configSettingsResetDefaults(void)
@@ -17,7 +17,7 @@ void configSettingsResetDefaults(void)
     settings[2] = 2;
     settings[3] = 1;
     settings[4] = 1;
-    FUN_001a1110();
+    gameWorldResetForNewGame();
     reinterpret_cast<int>(memClear(g_gameDataBlocks.saveBlock, 0x80));
 }
 

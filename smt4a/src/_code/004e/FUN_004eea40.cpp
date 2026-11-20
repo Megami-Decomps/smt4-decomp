@@ -374,7 +374,7 @@ void FUN_004eea40(int *param_1,unsigned int *param_2)
                    ((*puVar18 & DAT_00571150) == 0 && (puVar18[1] & DAT_00571154) == 0)) break;
               }
               iVar13 = iVar22 + iVar9 * 0x16;
-              FUN_004fdcd8((int)*(short *)(iVar13 + 0x68) + iVar4 + iVar12 * iVar23,puVar25,
+              btlQueueMessageTableReflectAction((int)*(short *)(iVar13 + 0x68) + iVar4 + iVar12 * iVar23,puVar25,
                            (int)*(short *)(param_2[9] + 0x6a),(int)*psVar15,1,iVar9,
                            *(unsigned short *)(iVar13 + 0x6a),iVar13 + 0x58);
             }
@@ -404,7 +404,7 @@ LAB_004ef594:
         if ((*(char *)((int)param_2 + iVar12 + 0x38) != '\0') &&
            ((puVar18 = (unsigned int *)(*(int *)(*piVar14 + 0x1ffc) + iVar12 * 0x408),
             (puVar18[1] & DAT_0057117c) != 0 || (DAT_00571178 & *puVar18) != 0 ||
-            (iVar13 = FUN_004e83ac(piVar14,param_2,iVar12), iVar13 != 0)))) {
+            (iVar13 = btlActionTargetSlotScore(piVar14,param_2,iVar12), iVar13 != 0)))) {
           *(unsigned char *)((int)param_2 + iVar12 + 0x38) = 0;
         }
         iVar12 = iVar12 + 1;
@@ -508,7 +508,7 @@ LAB_004ef7f0:
       if (-1 < iVar9) {
         iVar9 = iVar22 + iVar6 * 0x16;
         if (*(unsigned short *)(iVar9 + 0x6a) - 6 < 6) {
-          FUN_004fdcd8(*(short *)(iVar9 + 0x68) + iVar4,puVar25,(int)*(short *)(param_2[9] + 0x6a),
+          btlQueueMessageTableReflectAction(*(short *)(iVar9 + 0x68) + iVar4,puVar25,(int)*(short *)(param_2[9] + 0x6a),
                        0xffffffff,1,iVar6,(unsigned int)*(unsigned short *)(iVar9 + 0x6a),iVar9 + 0x58);
         }
       }
@@ -633,7 +633,7 @@ LAB_004ef7f0:
       iVar23 = FUN_004f80e4(DAT_00573808);
       if (-1 < iVar23) {
         iVar23 = iVar5 + iVar29 * 0x16;
-        FUN_004fdcd8(*(short *)(iVar23 + 0x10) + iVar4,puVar25,(int)*(short *)(param_2[9] + 0x6a),0,
+        btlQueueMessageTableReflectAction(*(short *)(iVar23 + 0x10) + iVar4,puVar25,(int)*(short *)(param_2[9] + 0x6a),0,
                      0,iVar29,*(unsigned short *)(iVar23 + 0x12),iVar23);
       }
       iVar29 = iVar29 + 1;
@@ -651,7 +651,7 @@ LAB_004ef7f0:
           func_0x004fbd30(iVar23 + iVar4,puVar25);
         }
         else if (param_2[0x165] != 0) {
-          FUN_004fdcd8(*(short *)(iVar6 + 0x118) + iVar4,puVar25,(int)*(short *)(param_2[9] + 0x6a),
+          btlQueueMessageTableReflectAction(*(short *)(iVar6 + 0x118) + iVar4,puVar25,(int)*(short *)(param_2[9] + 0x6a),
                        0,3,iVar29,*(unsigned short *)(iVar6 + 0x11a),iVar6 + 0x108);
         }
       }
@@ -822,7 +822,7 @@ LAB_004f054c:
       if ((*(unsigned int *)(uVar17 + 0x3c) & 0x400) != 0) {
         iVar29 = *(int *)(uVar20 + 0xf4) - 1;
         btlSlotManagerResetStates(iVar23);
-        FUN_004fc094(uStack_288,param_2,0,param_2[9],0,iVar29,0xffffffff,0xffffffff,
+        btlAdjustPropertyAndQueueAction(uStack_288,param_2,0,param_2[9],0,iVar29,0xffffffff,0xffffffff,
                      *(unsigned int *)(param_2[10] + 0xf4),*(unsigned int *)(param_2[10] + 0xf8),0,0,0,0
                      ,0,0,0,0,0,0xffffffff,1,0,1,0,0,1);
         iVar4 = FUN_0018719c(0x591);
@@ -834,7 +834,7 @@ LAB_004f054c:
       if ((*(unsigned int *)(uVar17 + 0x3c) & 0x200) != 0) {
         iVar29 = *(int *)(param_2[10] + 0xf8);
         btlSlotManagerResetStates(*piStack_30);
-        FUN_004fc094(uStack_288,param_2,0,param_2[9],0,iVar29,0xffffffff,0xffffffff,
+        btlAdjustPropertyAndQueueAction(uStack_288,param_2,0,param_2[9],0,iVar29,0xffffffff,0xffffffff,
                      *(unsigned int *)(param_2[10] + 0xf4),*(unsigned int *)(param_2[10] + 0xf8),0,0,0,0
                      ,0,0,0,0,0,0xffffffff,1,0,1,0,0,1);
         btlQueueKeyedScalarReflectAction(uStack_288 + 0x19,param_2,param_2[9],0);
@@ -845,7 +845,7 @@ LAB_004f054c:
         puVar25 = (unsigned int *)param_2[8];
         if ((DAT_00571168 & *puVar25) == 0 && (DAT_0057116c & puVar25[1]) == 0) {
           if (!((puVar25[1] & DAT_00571154) == 0 && (*puVar25 & DAT_00571150) == 0)) {
-            uVar17 = FUN_003df57c(uStack_74,1);
+            uVar17 = skillGetCostWithRankReduction(uStack_74,1);
             iVar29 = FUN_004c3a98((int)*(short *)(param_2[9] + 0x6a),0x24);
           }
           else {

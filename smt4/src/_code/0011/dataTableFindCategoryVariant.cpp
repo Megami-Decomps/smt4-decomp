@@ -3,7 +3,7 @@
 
 extern "C" {
 extern const u8 g_fileSlot17Ref[8];
-extern const u8 DAT_0044e070[8];
+extern const u8 g_dataTableCategoryVariants[8];
 
 // Find a category/kind record with the variant selected by the corresponding lookup bank.
 CategoryVariantRecord *dataTableFindCategoryVariant(u32 kind, u32 category, s32 variantIndex)
@@ -13,7 +13,7 @@ CategoryVariantRecord *dataTableFindCategoryVariant(u32 kind, u32 category, s32 
     s32 count = dataTableGetCount(table);
     const u8 *variants;
     if (kind == 0)
-        variants = DAT_0044e070;
+        variants = g_dataTableCategoryVariants;
     else
         variants = g_fileSlot17Ref;
     u32 variant = variants[variantIndex];

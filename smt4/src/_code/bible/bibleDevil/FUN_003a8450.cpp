@@ -38,14 +38,14 @@ struct DevilView {
 };
 
 extern "C" {
-extern u8 DAT_0043d9c8[];
+extern u8 g_bibleDevilCallbackContext[];
 
 s32 flaggedValueHolderGetTotal(void *cursor);
 void FUN_0029ce60(u32 devil, s32 kind, s32 flag);
 void messageTargetSetValue(u32 value, s32 flag);
 s32 inputIsQuestMenuPressed(void);
 s32 inputIsQuestCancelPressed(void);
-s32 FUN_0027ee9c(void);
+s32 inputConfirmPressed(void);
 s32 gameGetNavigationState(void);
 s32 gameGetFlagByte12e8(void);
 void FUN_00233240(void *status, s32 mode);
@@ -60,7 +60,7 @@ void buttonHelpSetPreset(s32 preset);
 void messageMainSetTargetFlags(s32 flags);
 void FUN_002328b4(void);
 void sortMenuCreate(s32 a, s32 b);
-void FUN_0029e328(u8 value);
+void useCounterAppendValue(u8 value);
 void useCounterStart(void);
 void buttonHelpSetText(s32 a, u32 color);
 void beginStatusPanelClose(void);
@@ -79,7 +79,7 @@ void FUN_003a8450(DevilView *view)
     s32 menuPressed = inputIsQuestMenuPressed();
     SelectedRow *row = &view->row;
     if (*(s16 *)((u8 *)view + 0x5A8) > 0) {
-        confirm = FUN_0027ee9c();
+        confirm = inputConfirmPressed();
         cancel = inputIsQuestCancelPressed();
         if (confirm == 0)
             confirm = row->confirm;
@@ -134,21 +134,21 @@ void FUN_003a8450(DevilView *view)
             buttonHelpSetPreset(0x9E);
         }
         messageMainSetTargetFlags(1);
-        FUN_002a0cc8(1);
+        gameGlobalsSetSubScreenActive(1);
         FUN_002328b4();
         return;
     }
     if (menuPressed == 0) {
         if (cancel == 0)
             return;
-        *(s32 *)(DAT_0043d9c8 + 4) = -1;
+        *(s32 *)(g_bibleDevilCallbackContext + 4) = -1;
         sortMenuCreate(0xF, 0);
-        FUN_0029e328(1);
-        FUN_0029e328(2);
-        FUN_0029e328(7);
-        FUN_0029e328(3);
+        useCounterAppendValue(1);
+        useCounterAppendValue(2);
+        useCounterAppendValue(7);
+        useCounterAppendValue(3);
         useCounterStart();
-        FUN_002a0cc8(1);
+        gameGlobalsSetSubScreenActive(1);
         view->state = 6;
         view->subState = 0;
         buttonHelpSetText(0, 0x323232FF);
@@ -160,7 +160,7 @@ void FUN_003a8450(DevilView *view)
     buttonHelpSetText(0, 0x323232FF);
     beginStatusPanelClose();
     FUN_00233240(view->status, 1);
-    FUN_002a0cc8(1);
+    gameGlobalsSetSubScreenActive(1);
     view->state = 11;
     view->subState = 0;
     FUN_00232848();

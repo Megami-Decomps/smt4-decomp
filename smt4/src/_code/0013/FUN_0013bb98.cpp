@@ -30,7 +30,7 @@ typedef struct {
     unsigned int sp78; /* 0x78: local_78 */
 } param_8_stack;
 
-extern int DAT_0044e368; /* 0x44e368 */
+extern int g_appletCloseReason; /* 0x44e368 */
 extern unsigned int DAT_0044e370; /* 0x44e370 */
 extern unsigned int DAT_0044e374; /* 0x44e374 */
 extern unsigned int DAT_0044e378; /* 0x44e378 */
@@ -128,7 +128,7 @@ FUN_0013bb98(unsigned int *param_1,unsigned int *param_2,unsigned char *param_3,
         }
         puVar9 = (unsigned int *)0x0;
         if (param_6 != (int *)0x0) {
-          *param_6 = DAT_0044e368;
+          *param_6 = g_appletCloseReason;
         }
       }
       else {

@@ -31,7 +31,7 @@ typedef struct {
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned int FUN_0014bf3c(unsigned int, unsigned int);
+extern unsigned int demonGetRaceLabel(unsigned int, unsigned int);
 /* Supplied declaration required: drawTextAtSnappedRectangle. */
 extern int vec2GetXInt(void);
 extern int vec2GetYInt(int);
@@ -125,7 +125,7 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
     else {
       temp_v13 = 3;
     }
-    temp_v6 = FUN_0014bf3c(param_4 & 0xffff,0);
+    temp_v6 = demonGetRaceLabel(param_4 & 0xffff,0);
     temp_v3 = textMeasureOnLayer(temp_v6,2);
     if (param_3 == 0) {
       temp_v8 = 0x105b;

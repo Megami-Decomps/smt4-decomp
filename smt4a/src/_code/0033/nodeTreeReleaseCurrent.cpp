@@ -2,13 +2,13 @@
 
 extern "C" {
 
-extern u32 DAT_00570ab4;
+extern u32 g_effectColorOverride;
 extern void nodeTreeReleaseItem(u32 handle);
 
 void nodeTreeReleaseCurrent(void)
 {
-    nodeTreeReleaseItem(DAT_00570ab4);
-    DAT_00570ab4 = 0;
+    nodeTreeReleaseItem(g_effectColorOverride);
+    g_effectColorOverride = 0;
 }
 
 } /* extern "C" */

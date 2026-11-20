@@ -36,10 +36,10 @@ void FUN_003d3a4c(s32 x, s32 y, f32 alpha)
     bool hidden = false;
     char text[64];
 
-    u32 kind = FUN_002c7e3c();
+    u32 kind = gameGlobalsGetFieldState();
     if (kind == 14) {
         hidden = true;
-    } else if (kind == 7 && !itemIsCollectedWithRelated(*reinterpret_cast<u16 *>(FUN_002c7e24()))) {
+    } else if (kind == 7 && !itemIsCollectedWithRelated(*reinterpret_cast<u16 *>(gameGlobalsGetBlock1390()))) {
         hidden = true;
     }
 
@@ -107,7 +107,7 @@ void FUN_003d3a4c(s32 x, s32 y, f32 alpha)
         }
     }
 
-    if (objectApplyIfUnblocked(reinterpret_cast<Object *>(&screen->flagged.navigation)) <= 0) {
+    if (gridNavigationGetItemCount(reinterpret_cast<Object *>(&screen->flagged.navigation)) <= 0) {
         texDrawCompositeSprite(2, 0x12, 0x1b, x, y, 0xdd);
     }
     texDrawTableEntryAtStoredOrigin(2, 0x12, 0x5a1, x, y, 0xbf);

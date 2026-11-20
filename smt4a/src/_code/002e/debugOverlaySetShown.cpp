@@ -9,20 +9,20 @@ typedef struct DebugFlags {
     /* 0x04 */ u32 value;
 } DebugFlags;
 
-extern DebugFlags DAT_0057f560; /* 0x57f560 */
+extern DebugFlags g_messageFlags; /* 0x57f560 */
 
 /* Enables (nonzero `enable`: shown) or clears the debug overlay flags. */
 void debugOverlaySetShown(int enable)
 {
     if (enable != 0) {
-        DAT_0057f560.active = 0;
-        DAT_0057f560.value = 0;
-        DAT_0057f560.shown = 1;
+        g_messageFlags.active = 0;
+        g_messageFlags.value = 0;
+        g_messageFlags.shown = 1;
         return;
     }
-    DAT_0057f560.active = 0;
-    DAT_0057f560.value = 0;
-    DAT_0057f560.shown = 0;
+    g_messageFlags.active = 0;
+    g_messageFlags.value = 0;
+    g_messageFlags.shown = 0;
 }
 
 } /* extern "C" */

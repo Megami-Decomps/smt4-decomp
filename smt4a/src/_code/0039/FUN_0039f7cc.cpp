@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(...);
 int FUN_001a1ee0(void);
 int effGetFrameStep(void);
-int FUN_001b63b0(void);
+int phaseCosine(void);
 int gfxQuaternionWorkspaceBuildMatrix(void);
 int FUN_0027134c(int, float *);
 int FUN_002fe2e8(int, float *);
@@ -60,7 +60,7 @@ extern float DAT_00647348; /* 0x647348 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: effGetFrameStep. */
-/* Supplied declaration required: FUN_001b63b0. */
+/* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: FUN_0027134c. */
 /* Supplied declaration required: FUN_002fe2e8. */
@@ -186,7 +186,7 @@ void FUN_0039f7cc(int param_1)
             *pfVar7 = temp_v10;
             temp_v20 = (pfVar7[3] + temp_v8) * temp_v21;
             temp_v10 = temp_v20;
-            FUN_001b63b0();
+            phaseCosine();
             temp_v20 = temp_v20 * (float)temp_v13;
             temp_v8 = pfVar7[4];
             FUN_001a1ee0();
@@ -256,7 +256,7 @@ void FUN_0039f7cc(int param_1)
             temp_v21 = (float)temp_v12;
             pfVar7[3] = temp_v10 * (float)((unsigned long long)temp_v22 >> 0x20);
             temp_v10 = (float)temp_v15;
-            FUN_001b63b0();
+            phaseCosine();
             temp_v14 = (float)((unsigned long long)temp_v15 >> 0x20);
             temp_v2 = (float)puVar8[0x32];
             temp_v9 = (float)puVar8[0x33];
@@ -265,7 +265,7 @@ void FUN_0039f7cc(int param_1)
             pfVar7[5] = (temp_v9 * temp_v10 - temp_v2 * temp_v10) / temp_v20;
             temp_v13 = romwright_piece_4_4((int)((unsigned long long)temp_v12 >> 0x20),*pfVar7);
             temp_v10 = pfVar7[3] * temp_v21;
-            FUN_001b63b0();
+            phaseCosine();
             temp_v10 = temp_v10 * (float)temp_v13;
             temp_v20 = pfVar7[4];
             temp_v2 = pfVar7[3] * temp_v21;
@@ -335,7 +335,7 @@ void FUN_0039f7cc(int param_1)
               temp_v20 = *pfVar7 + pfVar7[1] * temp_v10;
               *pfVar7 = temp_v20;
               temp_v10 = pfVar7[3] * temp_v21;
-              FUN_001b63b0();
+              phaseCosine();
               temp_v10 = temp_v10 * temp_v20;
               temp_v8 = pfVar7[4];
               temp_v2 = pfVar7[3] * temp_v21;

@@ -6,7 +6,7 @@
 #include "text/TextDraw.h"
 #include "addon/AocSystemA.h"
 extern "C" {
-void FUN_003dea6c(u32 id, s32 enabled, s32 flags);
+void scrMessageSetSpeakerTitle(u32 id, s32 enabled, s32 flags);
 void *dataSetFindRequestedFileByKey(AocSystemA *system, u32 id);
 void *asdLoadFileSyncDefault(const char *path);
 void asdTextDrawDirectoryEntry(u32 window, s32 mode, u32 color, u32 flags, s32 type, const void *data, s32 entry);
@@ -23,7 +23,7 @@ void FUN_003d498c(u32 id, u32 mode)
     UiQuestApoc *work = g_uiQuest;
     if (!id)
         return;
-    FUN_003dea6c(id, 1, 1);
+    scrMessageSetSpeakerTitle(id, 1, 1);
     void *messages = dataSetFindRequestedFileByKey(g_aocSystem, id);
     if (messages) {
         work->detailMessages = messages;
@@ -39,7 +39,7 @@ void FUN_003d498c(u32 id, u32 mode)
     s32 extraPage = partyEntryGetByte1(id);
     if (extraPage > 0)
         asdTextDrawDirectoryEntry(work->sprites[2], 3, 0xFFFFFFFF, 0, 3, work->detailMessages, extraPage);
-    FUN_003dea6c(id, 1, 0);
+    scrMessageSetSpeakerTitle(id, 1, 0);
     s32 detail = FUN_003de464(id, mode);
     if (detail < 0) {
         const char *name = textExpandGlyphsToBuffer(questDataGetRecord(id)->description, NULL, 0);

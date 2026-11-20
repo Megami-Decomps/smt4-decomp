@@ -6,7 +6,7 @@
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
 void lmapClearExtraFlag();
-void FUN_003d2158(u32 handle, s32 enabled);
+void soundApplyValueOrStop(u32 handle, s32 enabled);
 
 // Enable the extra map transition during selected story intervals; otherwise clear it.
 void FUN_00354098()
@@ -44,7 +44,7 @@ void FUN_00354098()
         lmapClearExtraFlag();
         extra = reinterpret_cast<ExtraTransitionView *>(g_lmapScene);
         if (extra->handle != 0)
-            FUN_003d2158(extra->handle, 0);
+            soundApplyValueOrStop(extra->handle, 0);
         break;
     }
     extra = reinterpret_cast<ExtraTransitionView *>(g_lmapScene);

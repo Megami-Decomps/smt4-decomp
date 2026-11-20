@@ -80,7 +80,7 @@ inline void applyTextureSampler(GrTextureUnit *unit, const NamedModelTexture *bo
 
 extern "C" {
 u32 libc_strlen(const u16 *text);
-s32 FUN_001a7a20(void *names, const void *name, u32 length);
+s32 nameTableLookupEntry(void *names, const void *name, u32 length);
 void gfxModelRebuildTextureCommands(ModelTextureBindings *model, MaterialTextureCommands *commands,
                                     MaterialTextureState *state, const MaterialTextureSampler *first,
                                     const MaterialTextureSampler *second, const MaterialTextureSampler *third,
@@ -97,7 +97,7 @@ u32 FUN_0018f69c(ModelTextureBindings *model, ModelBindOwner *owner, u8 *replace
         MaterialDefinition *material = static_cast<MaterialDefinition *>(binding->material);
         if (material != NULL) {
             if (material->resource == NULL) {
-                s32 index = FUN_001a7a20(owner->set->materialNames, material->name, libc_strlen(material->name));
+                s32 index = nameTableLookupEntry(owner->set->materialNames, material->name, libc_strlen(material->name));
                 if (index == NAME_NOT_FOUND)
                     result |= RESULT_MISSING_MATERIAL;
                 else
@@ -106,7 +106,7 @@ u32 FUN_0018f69c(ModelTextureBindings *model, ModelBindOwner *owner, u8 *replace
             for (s32 slot = 0; slot < MATERIAL_ENTRY_COUNT; ++slot) {
                 if (material->entries[slot] == NULL && material->tableNames[slot] != NULL
                     && material->entryNames[slot] != NULL) {
-                    s32 tableIndex = FUN_001a7a20(owner->set->entryNames, material->tableNames[slot],
+                    s32 tableIndex = nameTableLookupEntry(owner->set->entryNames, material->tableNames[slot],
                                                   libc_strlen(material->tableNames[slot]));
                     if (tableIndex == NAME_NOT_FOUND) {
                         result |= RESULT_MISSING_ENTRY_TABLE;
@@ -138,7 +138,7 @@ u32 FUN_0018f69c(ModelTextureBindings *model, ModelBindOwner *owner, u8 *replace
         for (s32 slot = 0; slot < 3; ++slot) {
             NamedModelTexture *&bound = *references[slot];
             if (bound == NULL && binding->textureNames[slot] != NULL) {
-                s32 index = FUN_001a7a20(owner->set->textureNames, binding->textureNames[slot],
+                s32 index = nameTableLookupEntry(owner->set->textureNames, binding->textureNames[slot],
                                          libc_strlen(reinterpret_cast<const u16 *>(binding->textureNames[slot])));
                 if (index == NAME_NOT_FOUND) {
                     result |= RESULT_MISSING_TEXTURE;

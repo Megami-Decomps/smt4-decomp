@@ -9,10 +9,10 @@ typedef struct Scene {
     /* 0x3040 */ u8 unk3040;
 } Scene;
 
-extern Scene *DAT_00435d18;
+extern Scene *g_btlAux;
 u32 FUN_002f11ac(void)
 {
-    if ((DAT_00435d18)->unk3040 != '\r') {
+    if ((g_btlAux)->unk3040 != '\r') {
         scrSetResult(0);
         return 0;
     }

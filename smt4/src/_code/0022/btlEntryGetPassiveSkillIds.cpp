@@ -4,8 +4,8 @@
 extern "C" {
 
 int halves34Copy(void *a, void *b); // declcheck: local (the shared declaration in code/Code0024_Smt4.h does not compile here: argument of type "void *" is incompatible with parameter of type "Source *")
-int FUN_00283f30(void *a, int b);
-int FUN_002e1f1c(u32 a, void *b, int c);
+int playerCollectPassiveSkillBits(void *a, int b);
+int nkmEnemyRecordCopySkillIds(u32 a, void *b, int c);
 
 typedef struct Target {
     /* 0x00 */ u16 unk00[8];
@@ -30,7 +30,7 @@ void btlEntryGetPassiveSkillIds(Obj *obj, Target *target)
     u8 noFirst;
 
     if (obj->unk278 != 0) {
-        FUN_00283f30(target, 1);
+        playerCollectPassiveSkillBits(target, 1);
         return;
     }
     source = obj->unk27C;
@@ -42,7 +42,7 @@ void btlEntryGetPassiveSkillIds(Obj *obj, Target *target)
         if (obj->unk284 == 0) {
             return;
         }
-        FUN_002e1f1c(obj->unk0CE, target, 8);
+        nkmEnemyRecordCopySkillIds(obj->unk0CE, target, 8);
         return;
     }
     halves34Copy(source, target);

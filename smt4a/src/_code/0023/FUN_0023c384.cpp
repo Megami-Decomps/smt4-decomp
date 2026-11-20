@@ -12,7 +12,7 @@ int pairSetFirstResetSecond(int, int);
 int gameGetSlotRecord(int);
 int FUN_00358e94(int, int, int);
 int uiStoreTextureEntryCenter(int, int, int);
-int FUN_004bd0d8(...);
+int slotIsReservePick(...);
 int bitsAt60Set(int, int);
 
 /* stack frame of param_1: 8 slot(s), 32 byte(s) */
@@ -41,7 +41,7 @@ extern int gameGetUnlockedCountLimit(void);
 extern long long __aeabi_uldivmod(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00358e94. */
 /* Supplied declaration required: uiStoreTextureEntryCenter. */
-/* Supplied declaration required: FUN_004bd0d8. */
+/* Supplied declaration required: slotIsReservePick. */
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: bitsAt60Set. */
 extern unsigned int FUN_004ccdb8(unsigned short, int, int);
@@ -176,7 +176,7 @@ void FUN_0023c384(int param_1)
                   *(unsigned char *)(param_1 + 0x7e48) = 1;
                 }
                 *(unsigned char *)(param_1 + 0x7e40) = 1;
-                temp_v11 = FUN_004bd0d8(temp_v11);
+                temp_v11 = slotIsReservePick(temp_v11);
                 if (temp_v11 == 0) {
                   temp_v14 = 0;
                 }
@@ -201,7 +201,7 @@ void FUN_0023c384(int param_1)
                     if (-1 < *(char *)(temp_v11 + temp_v12 + 0x1c88)) {
                       temp_v11 = gameGetSlotTable();
                       gameGetSlotRecord((int)*(char *)(temp_v11 + temp_v12 + 0x1c88));
-                      temp_v11 = FUN_004bd0d8();
+                      temp_v11 = slotIsReservePick();
                       if (temp_v11 == 0) {
                         temp_v11 = gameGetSlotTable();
                         if (*(char *)(temp_v11 + temp_v12 + 0x1c88) == temp_v6) break;

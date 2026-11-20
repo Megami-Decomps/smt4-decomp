@@ -5,7 +5,7 @@
 
 extern "C" {
 u32 libc_strlen(const char *);
-u32 FUN_001a7a20(const void *, const char *, u32);
+u32 nameTableLookupEntry(const void *, const char *, u32);
 }
 
 static __inline NamedSubresourceEntry *findSubresource(NamedSubresourceGroup *group, const char *name)
@@ -36,7 +36,7 @@ extern "C" u32 FUN_0018f9c0(NamedSubresourceSelection *selection, NamedResourceB
     if (!selection->primary && selection->primaryGroup && selection->primaryName) {
         DirectoryGroupData *directory = &reinterpret_cast<DirectoryView *>(owner->directory)->data;
         const char *name = selection->primaryGroup;
-        u32 index = FUN_001a7a20(directory->nameIndex, name, libc_strlen(name));
+        u32 index = nameTableLookupEntry(directory->nameIndex, name, libc_strlen(name));
         if (index == 0xFFFF)
             status |= 0x80000020;
         else
@@ -45,7 +45,7 @@ extern "C" u32 FUN_0018f9c0(NamedSubresourceSelection *selection, NamedResourceB
     if (!selection->secondary && selection->secondaryGroup && selection->secondaryName) {
         DirectoryGroupData *directory = &reinterpret_cast<DirectoryView *>(owner->directory)->data;
         const char *name = selection->secondaryGroup;
-        u32 index = FUN_001a7a20(directory->nameIndex, name, libc_strlen(name));
+        u32 index = nameTableLookupEntry(directory->nameIndex, name, libc_strlen(name));
         if (index == 0xFFFF)
             status |= 0x80000020;
         else

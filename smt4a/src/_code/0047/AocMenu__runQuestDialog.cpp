@@ -6,7 +6,7 @@ extern "C" {
 void aocEntryPanelCreateText(u32 *dialog, s32 value, s32 mode, s32 flags);
 void aocMenuSetButtonHelp(SceneWindowWork *window, s32 value, s32 mode);
 void jobOwnerFreeSlotAndStop(u32 *dialog);
-s32 FUN_004d0584(void);
+s32 inputConfirmPressed(void);
 s32 inputIsQuestMenuPressed(void);
 void eventQueueAddUniqueIfValid(u32 event);
 s8 uiSpriteGetCompletionState(const void *record);
@@ -24,7 +24,7 @@ void AocMenu::runQuestDialog()
         break;
     case 1:
         if (uiSpriteGetCompletionState(&window->dialog.cursor) != 0) {
-            if (FUN_004d0584() != 0) {
+            if (inputConfirmPressed() != 0) {
                 eventQueueAddUniqueIfValid(0x0100020E);
                 aocMenuSetButtonHelp(window, -1, 0);
                 flagObjAdvance(dialog);

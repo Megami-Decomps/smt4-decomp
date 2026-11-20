@@ -9,7 +9,7 @@ extern "C" {
 extern const PhaseTrigEntry g_sinCosTable[256];
 
 s32 scrGetArg(u32 index);
-void FUN_00303460(s32 mode);
+void lmapCameraSetMode(s32 mode);
 void mapSetSceneState(s32 state);
 void FUN_003a2278(s32 flag);
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(f32 *out, const f32 *matrix, const f32 *in);
@@ -52,7 +52,7 @@ u32 FUN_003702b4(void)
     g_gameState.scriptCameraFov = 40.0f;
     if (g_lmapView->mode != 3) {
         g_lmapView->enabled = 1;
-        FUN_00303460(3);
+        lmapCameraSetMode(3);
         mapSetSceneState(0x1d);
     }
     FUN_003a2278(1);

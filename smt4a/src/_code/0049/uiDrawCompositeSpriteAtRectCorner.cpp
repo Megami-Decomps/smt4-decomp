@@ -1,0 +1,23 @@
+#include "common.h"
+
+struct ScreenRect {
+    f32 x;      // 0x00
+    f32 y;      // 0x04
+    f32 width;  // 0x08
+    f32 height; // 0x0c
+    u32 value;  // 0x10
+};
+
+extern "C" {
+
+void texDrawCompositeSprite(s32 kind, u32 value, u32 id, s32 x, s32 y, u32 extra);
+
+// Submit the rectangle's bottom-right corner, shifted by (dx, dy), together with its value.
+void uiDrawCompositeSpriteAtRectCorner(ScreenRect *rect, u32 id, s32 dx, s32 dy, u32 extra)
+{
+    s32 x = (s32)(rect->x + rect->width + dx);
+    s32 y = (s32)(rect->y + rect->height + dy);
+    texDrawCompositeSprite(2, rect->value, id, x, y, extra);
+}
+
+} /* extern "C" */

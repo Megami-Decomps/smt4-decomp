@@ -81,7 +81,7 @@ void modelSetVisible(NodeEnableOwner *model, s32 visible);
 void FUN_0022b6c4(void *block);
 void nodeOwnerSetEnabled(NodeEnableOwner *owner, int enabled);
 void FUN_0023d344(NodeEnableOwner *model);
-void FUN_002636d0(s32 flag);
+void buttonHelpSetPanelState(s32 flag);
 void infoWinSetMessage(u32 infoWin, u8 message);
 s32 rosterGetLeaderId(void);
 u32 tableGroupFindEntryIndex(u32 group, u8 *name);
@@ -210,7 +210,7 @@ void FUN_003b8e58(GateScene *scene)
         FUN_0022b6c4(scene->objBlock);
         scene->marked = 0;
         DAT_0044cfb8 = 0;
-        FUN_002636d0(1);
+        buttonHelpSetPanelState(1);
         dialogOpen(0, 0);
         infoWinSetMessage(scene->infoWin, scene->info->message);
         return;

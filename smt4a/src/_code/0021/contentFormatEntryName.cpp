@@ -5,7 +5,7 @@
 extern "C" {
 s32 libc_sprintf(char *destination, const char *format, ...);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-const char *FUN_00180114(u32 id);
+const char *table01RecordLookupForContent(u32 id);
 const char *contentEntryDataGet(u32 id, u32 kind);
 extern const char *DAT_0057f298[];
 extern const char *DAT_0052f2b4[21];
@@ -20,7 +20,7 @@ void contentFormatEntryName(u32 context, s32 category, s32 id, char *destination
         return;
     }
     if (category == 0 || category == 14 || category == 1) {
-        libc_sprintf(destination, "%s", FUN_00180114((u16)id));
+        libc_sprintf(destination, "%s", table01RecordLookupForContent((u16)id));
     } else if (category == 2) {
         libc_sprintf(destination, "%s", DAT_0057f298[id]);
     } else if (category == 3) {

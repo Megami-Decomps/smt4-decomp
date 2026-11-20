@@ -8,10 +8,10 @@ int bgmStop(unsigned int, int, int);
 
 extern int DAT_0044e09c; /* 0x44e09c */
 extern unsigned int g_bgmRequestChannels; /* 0x4c53c4 */
-extern unsigned int DAT_004c53e4; /* 0x4c53e4 */
+extern unsigned int g_bgmRequestChannel1; /* 0x4c53e4 */
 
 /* Supplied declaration required: bgmStop. */
-extern int FUN_002c1d5c(void);
+extern int eventIsSkipping(void);
 extern int jyoucyuGetTableEntry(unsigned int);
 
 
@@ -38,16 +38,16 @@ unsigned int soundChannelRequest(int param_1,int param_2)
   if (param_1 == 0) {
     return 0;
   }
-  temp_v1 = FUN_002c1d5c();
+  temp_v1 = eventIsSkipping();
   if (temp_v1 != 0) {
     bgmStop(0xffffffff,0,1);
   }
   piVar6 = (int *)&g_bgmRequestChannels;
   if ((DAT_0044e09c != 0) && (piVar3 = (int *)&g_bgmRequestChannels, piVar6 = (int *)0x0, DAT_0044e09c == 1)) {
-    piVar6 = (int *)&DAT_004c53e4;
+    piVar6 = (int *)&g_bgmRequestChannel1;
   }
   else {
-    piVar3 = (int *)&DAT_004c53e4;
+    piVar3 = (int *)&g_bgmRequestChannel1;
   }
   temp_v2 = piVar6[7];
   if ((((temp_v2 & 2) != 0) && ((temp_v2 & 0x3c) == 0)) && (temp_v5 = piVar6[3] == param_1, !temp_v5)) {

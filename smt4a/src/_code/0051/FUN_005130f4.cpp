@@ -22,21 +22,21 @@ typedef char AudioDecoderSetupLayout[sizeof(AudioDecoderChannelSetupView) == 0x1
     sizeof(AudioDecoderSetupView) == 0x18 ? 1 : -1];
 
 extern "C" {
-extern AudioDecoderAllocationHooks DAT_00589510;
+extern AudioDecoderAllocationHooks g_moAllocationHooks;
 void sysMemClear(void *, u32);
 
 /* Allocate one cleared decoder state per channel and set the interleaved sample stride. */
 u32 FUN_005130f4(AudioDecoderSetupView **output, u32 format, s32 channelCount)
 {
-    if (DAT_00589510.allocate == NULL || DAT_00589510.release == NULL)
+    if (g_moAllocationHooks.allocate == NULL || g_moAllocationHooks.release == NULL)
         return 0;
-    AudioDecoderSetupView *decoder = static_cast<AudioDecoderSetupView *>(DAT_00589510.allocate(sizeof(AudioDecoderSetupView)));
+    AudioDecoderSetupView *decoder = static_cast<AudioDecoderSetupView *>(g_moAllocationHooks.allocate(sizeof(AudioDecoderSetupView)));
     if (decoder == NULL)
         return 0;
     u32 stateSize = channelCount * sizeof(AudioDecoderChannelSetupView);
-    decoder->channels = static_cast<AudioDecoderChannelSetupView *>(DAT_00589510.allocate(stateSize));
+    decoder->channels = static_cast<AudioDecoderChannelSetupView *>(g_moAllocationHooks.allocate(stateSize));
     if (decoder->channels == NULL) {
-        DAT_00589510.release(decoder);
+        g_moAllocationHooks.release(decoder);
         return 0;
     }
     sysMemClear(decoder->channels, stateSize);

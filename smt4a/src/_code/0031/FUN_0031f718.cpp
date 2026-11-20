@@ -10,7 +10,7 @@
 #include "game/GameGlobalsRef.h"
 
 extern "C" {
-void FUN_002cb55c(UnitPresentationInfo *, void *, u32);
+void playerDataBuildPresentationRecord(UnitPresentationInfo *, void *, u32);
 void unitInitializeFromTemplate(u32, UnitRecord *);
 void unitRecordBuild(s32, UnitRecord *);
 void FUN_0026fd50(UnitPresentationInfo *, UnitRecord *, s32, u32);
@@ -33,7 +33,7 @@ void FUN_0031f718(s32 id, s32 useBaseStats, u32 flags)
     bool allowed = true;
     session->sessionDisplay.active = 1;
     if (id < 0) {
-        FUN_002cb55c(info, gameGetPlayerData(), flags);
+        playerDataBuildPresentationRecord(info, gameGetPlayerData(), flags);
         session->unk2017 = 0;
     } else if (useBaseStats) {
         unitInitializeFromTemplate((u16)id, &unit);

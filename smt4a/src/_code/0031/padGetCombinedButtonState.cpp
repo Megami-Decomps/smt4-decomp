@@ -31,7 +31,7 @@ struct StickDirectionTable {
     s8 enabled;           /* 0x10 */
 };
 
-extern StickDirectionTable DAT_005b40cc;   /* 0x5b40cc */
+extern StickDirectionTable g_stickDirectionTable;   /* 0x5b40cc */
 
 s32 padButtonIsPressed(s32 button);
 s32 padButtonRepeat(s32 button);
@@ -90,7 +90,7 @@ u32 padGetCombinedButtonState(s32 buttonA, s32 buttonB, s32 mode)
         return result;
     }
 
-    if (DAT_005b40cc.enabled != 0 &&
+    if (g_stickDirectionTable.enabled != 0 &&
         (slotIsActive(BUTTON_STICK_UP) != 0 || slotIsActive(BUTTON_STICK_LEFT) != 0 ||
          slotIsActive(BUTTON_STICK_DOWN) != 0 || slotIsActive(BUTTON_STICK_RIGHT) != 0)) {
         f32 x;
@@ -105,22 +105,22 @@ u32 padGetCombinedButtonState(s32 buttonA, s32 buttonB, s32 mode)
         }
         /* The up sector wraps through 0: [center - halfWidth + 360, 360) and [center, center + halfWidth). */
         if (slotIsActive(BUTTON_STICK_UP) != 0) {
-            if ((f32)(DAT_005b40cc.up.center - DAT_005b40cc.up.halfWidth) + 360.0f <= angle && angle < 360.0f) {
+            if ((f32)(g_stickDirectionTable.up.center - g_stickDirectionTable.up.halfWidth) + 360.0f <= angle && angle < 360.0f) {
                 return result;
             }
-            if ((f32)DAT_005b40cc.up.center <= angle && angle < (f32)(DAT_005b40cc.up.center + DAT_005b40cc.up.halfWidth)) {
+            if ((f32)g_stickDirectionTable.up.center <= angle && angle < (f32)(g_stickDirectionTable.up.center + g_stickDirectionTable.up.halfWidth)) {
                 return result;
             }
         } else if (slotIsActive(BUTTON_STICK_LEFT) != 0) {
-            if (angleInSector(angle, &DAT_005b40cc.left)) {
+            if (angleInSector(angle, &g_stickDirectionTable.left)) {
                 return result;
             }
         } else if (slotIsActive(BUTTON_STICK_DOWN) != 0) {
-            if (angleInSector(angle, &DAT_005b40cc.down)) {
+            if (angleInSector(angle, &g_stickDirectionTable.down)) {
                 return result;
             }
         } else if (slotIsActive(BUTTON_STICK_RIGHT) != 0) {
-            if (angleInSector(angle, &DAT_005b40cc.right)) {
+            if (angleInSector(angle, &g_stickDirectionTable.right)) {
                 return result;
             }
         }

@@ -4,7 +4,7 @@
 
 extern "C" {
 FusionRaceRule *dataTable5Sub3Lookup(u32 race, u32 id);
-u16 FUN_004dc154(FusionCandidateTables *tables, u32 race, u32 level);
+u16 fusionFindClosestLevelEntry(FusionCandidateTables *tables, u32 race, u32 level);
 u16 uniteFindClosestEligibleCandidate(FusionCandidateTables *tables, u32 race, u32 level, u32 flags);
 
 // Apply a directional race rule to two demons and encode their resulting fusion pair.
@@ -27,7 +27,7 @@ u32 fusionResolveRaceRulePair(FusionCandidateTables *tables, u16 firstId, u16 se
         u32 race = first->id == rule->devilId ? second->race : first->race;
         if (tables->races[race][0].level < level)
             level = tables->races[race][tables->counts[race] - 1].level;
-        result = FUN_004dc154(tables, race, level);
+        result = fusionFindClosestLevelEntry(tables, race, level);
         if (first->id == result || second->id == result || result == 0)
             return 0;
     }

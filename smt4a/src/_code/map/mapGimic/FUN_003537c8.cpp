@@ -29,8 +29,8 @@ void FUN_003537c8(s32 unitId)
     slot->obj = storage != NULL ? modelListInit(storage) : NULL;
     modelLoadFileAsyncByName(slot->obj, path);
     if (unitId == 0x6A || unitId == 0xD2 || unitId == 0xD3 || unitId == 0xD4) {
-        FUN_0040a908(slot->obj, 0x10000);
-        FUN_0040a918(slot->obj, 0x20000);
+        moriModelContentSetRequestFirst(slot->obj, 0x10000);
+        moriModelContentSetRequestSecond(slot->obj, 0x20000);
     }
 }
 }

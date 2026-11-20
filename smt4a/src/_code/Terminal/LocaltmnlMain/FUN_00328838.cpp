@@ -22,7 +22,7 @@ int asdCameraInitAreas(void);
 int ptrListRemoveClearOwner(...);
 int resourceOwnerReleaseAndReset(...);
 int floatInterpolateOverDuration(...);
-int FUN_00214da4(void);
+int placeWindowStartClose(void);
 int titleRestartSlotState3(...);
 int gameStateClearFlag(void);
 int naviMainSetFlagsAndActivate(...);
@@ -32,7 +32,7 @@ int campCommonBgRelease(void);
 int campButtonHelpRelease(void);
 int buttonHelpSetMode(...);
 int sysPlayVoice(...);
-int FUN_003d2158(...);
+int soundApplyValueOrStop(...);
 int soundChannelStopAll(...);
 int FUN_003e5858(void);
 int linkHolderClearFlag(...);
@@ -43,8 +43,8 @@ int padQueryLogicalKey(...);
 int asdLoadFileSyncNoContext(...);
 int sysPlaySe(...);
 int resOwnerRunNodeHandlers(...);
-int FUN_001abbc4(void);
-int FUN_001b4eb8(void);
+int effPartCreateFromSource(void);
+int skelNodePoseChain(void);
 int slotSetRequest(...);
 int asdLoadFileSyncDefault(void);
 int placeWinStartText(...);
@@ -65,8 +65,8 @@ int linkHolderSetFlag(...);
 int asdLoadFileWithSize(...);
 int asdCameraInitializeDefaults(...);
 int uiSetFloatPair(...);
-int FUN_0014f0dc(...);
-int FUN_001523b8(...);
+int cameraMatrixCacheSetLookAt(...);
+int stereoCameraSetPerspective(...);
 int asdOperatorNew(void);
 int asdMemoryAllocTraced(...);
 int effectNodeUpdateTransform(unsigned int);
@@ -125,12 +125,12 @@ extern unsigned int DAT_005f1b7c; /* 0x5f1b7c */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: asdLoadFileWithSize. */
 /* Supplied declaration required: asdCameraInitializeDefaults. */
-/* Supplied declaration required: FUN_0013cab8. */
+/* Supplied declaration required: screenFadeStartIn. */
 extern int pairedAvailabilityGetState(unsigned int);
 /* Supplied declaration required: uiSetFloatPair. */
-/* Supplied declaration required: FUN_0014f0dc. */
+/* Supplied declaration required: cameraMatrixCacheSetLookAt. */
 /* Supplied declaration required: padQueryLogicalKey. */
-/* Supplied declaration required: FUN_001523b8. */
+/* Supplied declaration required: stereoCameraSetPerspective. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: asdLoadFileSyncNoContext. */
 /* Supplied declaration required: sysPlaySe. */
@@ -143,17 +143,17 @@ extern int pairedAvailabilityGetState(unsigned int);
 /* Supplied declaration required: resOwnerRunNodeHandlers. */
 /* Supplied declaration required: placeWinRelease. */
 /* Supplied declaration required: messageSetMode. */
-/* Supplied declaration required: FUN_001abbc4. */
+/* Supplied declaration required: effPartCreateFromSource. */
 /* Supplied declaration required: asdCameraInitAreas. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: resourceOwnerReleaseAndReset. */
-/* Supplied declaration required: FUN_001b4eb8. */
+/* Supplied declaration required: skelNodePoseChain. */
 /* Supplied declaration required: floatInterpolateOverDuration. */
 /* Supplied declaration required: slotSetRequest. */
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: placeWinStartText. */
-/* Supplied declaration required: FUN_00214da4. */
+/* Supplied declaration required: placeWindowStartClose. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: titleRestartSlotState3. */
 /* Supplied declaration required: scrScriptProcessCreate. */
@@ -164,7 +164,7 @@ extern int messageGetChoiceResult(void);
 /* Supplied declaration required: naviMainSetFlagsAndActivate. */
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: placeWinCreate. */
-extern int FUN_00323bc4(unsigned int);
+extern int effectTimelineChildrenFit(unsigned int);
 /* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: gameStateSetJumpRequest. */
 /* Supplied declaration required: campButtonHelpAcquire. */
@@ -173,7 +173,7 @@ extern int FUN_00323bc4(unsigned int);
 /* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: buttonHelpSetMode. */
 /* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: FUN_003d2158. */
+/* Supplied declaration required: soundApplyValueOrStop. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: titleSetSlotValueState2. */
@@ -273,15 +273,15 @@ unsigned int FUN_00328838(void)
     }
     *(int *)(temp_v0 + 0x3c) = *(int *)(temp_v0 + 0x3c) + 1;
     uiSetFloatPair(temp_v0 + 0x40);
-    FUN_0014f0dc(temp_v0 + 0x40,&temp_v9,temp_v10,temp_v11);
-    FUN_001523b8(temp_v0 + 0x40,1);
+    cameraMatrixCacheSetLookAt(temp_v0 + 0x40,&temp_v9,temp_v10,temp_v11);
+    stereoCameraSetPerspective(temp_v0 + 0x40,1);
     temp_v4 = 0;
     in_s0 = temp_v12;
     do {
       temp_v6 = temp_v0 + temp_v4 * 0xc;
       if (*(char *)(temp_v6 + 0x56c) != '\0') {
         effectNodeUpdateTransform(*(unsigned int *)(temp_v6 + 0x568));
-        temp_v2 = FUN_00323bc4(*(unsigned int *)(temp_v6 + 0x568));
+        temp_v2 = effectTimelineChildrenFit(*(unsigned int *)(temp_v6 + 0x568));
         if (temp_v2 != 0) {
           *(unsigned char *)(temp_v6 + 0x56c) = 0;
         }
@@ -370,8 +370,8 @@ unsigned int FUN_00328838(void)
     }
     *(int *)(temp_v4 + 0x3c) = *(int *)(temp_v4 + 0x3c) + 1;
     uiSetFloatPair(temp_v4 + 0x40);
-    FUN_0014f0dc(temp_v4 + 0x40,&temp_v9,temp_v10,temp_v11);
-    FUN_001523b8(temp_v4 + 0x40,1);
+    cameraMatrixCacheSetLookAt(temp_v4 + 0x40,&temp_v9,temp_v10,temp_v11);
+    stereoCameraSetPerspective(temp_v4 + 0x40,1);
     FUN_0036b824(temp_v4 + 0x40);
     *(int *)(g_handleRegistry + 0xc) = temp_v4 + 0x40;
     placeWinCreate();
@@ -409,9 +409,9 @@ unsigned int FUN_00328838(void)
     do {
       temp_v2 = temp_v4 + temp_v6 * 0xc;
       temp_v3 = *(unsigned int *)(temp_v2 + 0x564);
-      FUN_001abbc4();
+      effPartCreateFromSource();
       *(unsigned int *)(temp_v2 + 0x568) = temp_v3;
-      FUN_001b4eb8();
+      skelNodePoseChain();
       temp_v6 = temp_v6 + 1;
       *(unsigned char *)(temp_v2 + 0x56c) = 0;
     } while (temp_v6 < 4);
@@ -440,11 +440,11 @@ unsigned int FUN_00328838(void)
     *(unsigned int *)(temp_v4 + 0x108) = 2;
     temp_v4 = pairedAvailabilityGetState(0);
     if (temp_v4 == 3) {
-      FUN_0013cab8(0,10,0xff);
+      screenFadeStartIn(0,10,0xff);
     }
     temp_v4 = pairedAvailabilityGetState(1);
     if (temp_v4 == 3) {
-      FUN_0013cab8(1,10,0xff);
+      screenFadeStartIn(1,10,0xff);
     }
     temp_v4 = g_localTmnl;
     if (*(int *)(*(int *)(g_localTmnl + 0x560) * 0x10 + 0x56fcd8) == 0) {
@@ -573,7 +573,7 @@ unsigned int FUN_00328838(void)
     *(unsigned int *)(temp_v0 + 0x560) = *(unsigned int *)(*(int *)(temp_v0 + 0x560) * 0x10 + 0x56fcd4);
     if (*(char *)(temp_v0 + 0x558) == '\0') break;
     soundChannelStopAll(0xf);
-    FUN_003d2158(0x10000b2,0);
+    soundApplyValueOrStop(0x10000b2,0);
     sysPlayVoice(0x10000b3);
     temp_v3 = 0xf;
     *(unsigned int *)(temp_v0 + 8) = temp_v3;
@@ -644,7 +644,7 @@ unsigned int FUN_00328838(void)
     buttonHelpSetMode(0);
     *(unsigned int *)(temp_v0 + 8) = 5;
     *(unsigned int *)(temp_v0 + 0xc) = 0;
-    FUN_00214da4();
+    placeWindowStartClose();
     if (*(char *)(temp_v0 + 0x550) != '\0') {
       linkHolderClearFlag(*(unsigned int *)(temp_v0 + 0x28));
       linkHolderApplyFirst(*(unsigned int *)(temp_v0 + 0x28),0x13);

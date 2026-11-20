@@ -10,7 +10,7 @@ extern "C" {
 extern s32 jobIsValid(u32 job);
 extern void jobStop(u32 job, s32 arg);
 extern void asdMemFree(void *block);
-extern void FUN_0024ef90(u32 job);
+extern void asdListBoxJobReset(u32 job);
 
 /* Shuts down the battle UI block and the popup job, then clears the debug-menu bit of the editor mask. */
 void btlDebugClose(u32 handle)
@@ -25,7 +25,7 @@ void btlDebugClose(u32 handle)
 
         g_btlDebugState.selection = 0;
         if (jobIsValid(popup->listBox) != 0) {
-            FUN_0024ef90(popup->listBox);
+            asdListBoxJobReset(popup->listBox);
             jobStop(popup->listBox, 0);
         }
         asdMemFree(g_btlDebugState.work);

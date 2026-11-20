@@ -21,7 +21,7 @@ u32 wstrBufferPutChar(u16 *buffer, s32 *cursor, u16 value, s32 countOnly);
 s32 FUN_0014f2a8(u16 *buffer, s32 *position, const u16 *text, s32 measureOnly);
 const char *uiGetTableEntry(u32 index);
 const char *dataFindKindRecordWithAocOverrides(u32 id, s32 alternate);
-const char *FUN_0014bf3c(u16 id, s32 alternate);
+const char *demonGetRaceLabel(u16 id, s32 alternate);
 const char *FUN_00156850(u32 questId, u32 key);
 u8 *dataTableGetNamePayload(u32 questId);
 s32 bustupCutAnimSelectSlotsByWorkId(s32 workId);
@@ -107,7 +107,7 @@ u32 messageExpandControlCode(s32 code, const u16 *text, u16 *out, s32 *index, s3
         ++*index;
         break;
     case 0xF874:
-        libc_strcpy(name, FUN_0014bf3c(text[*index + 1], 0));
+        libc_strcpy(name, demonGetRaceLabel(text[*index + 1], 0));
         FUN_001654f0(name, wide);
         FUN_0014f2a8(out, position, wide, measureOnly);
         ++*index;

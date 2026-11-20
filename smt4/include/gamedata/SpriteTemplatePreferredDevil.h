@@ -9,7 +9,7 @@ extern "C" {
 /* The id of the demon that data table 0 picks for `index`. */
 u32 spriteTemplateGetPreferredDevilId(s32 index);
 
-/* The byte of DAT_00447620 for the demon picked for `kind`. */
+/* The byte of g_devilSpriteTemplateTable for the demon picked for `kind`. */
 u8 spriteTemplateGetDevilTableByte(s32 kind);
 
 } /* extern "C" */

@@ -38,7 +38,7 @@ u8 gameItemSetFlag(u32 id, s16 value);
 void FUN_0031f190(u32 id, s32 arg);
 void unitRecomputeDerivedStats(SlotRecordA *record);
 s32 unitHasRankingBonus(u16 id);
-void FUN_002a6894(SlotRecordA *record);
+void saveMarkIdListSeen(SlotRecordA *record);
 
 /* Adds each skill's affinity growth to its affinity bonus, clamped to [-9, 9]. */
 static __inline void demonApplySkillAffinities(SlotRecordA *record)
@@ -142,7 +142,7 @@ void demonRecordInitialize(SlotRecordA *record, u32 slot, u32 id, s32 kind)
     unitRecomputeDerivedStats(record);
     record->hp = scaledHpForRecord(record);
     record->mp = record->maxMp;
-    FUN_002a6894(record);
+    saveMarkIdListSeen(record);
 }
 
 } /* extern "C" */

@@ -30,7 +30,7 @@ u32 FUN_00145534(u32 messageId)
         u8 queueSound = 1;
         if (padQueryLogicalKey(9, 2) != 0 || slotIsActive(6) != 0)
             FUN_0015059c(1);
-        if (querySlotHasHandle() != 0 && (FUN_00152f44() & 1) != 0) {
+        if (querySlotHasHandle() != 0 && (messageVoiceFlagsGet() & 1) != 0) {
             workCommandRefreshActiveSlots();
             queueSound = 0;
         }

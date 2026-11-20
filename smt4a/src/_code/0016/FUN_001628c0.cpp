@@ -31,14 +31,14 @@ typedef char VoiceFileSlotOffsetsCheck[sizeof(VoiceFileSlot) == 0x78 &&
 }
 
 extern "C" {
-extern VoiceFileRequests DAT_0061978c;
+extern VoiceFileRequests g_soundObjectTable;
 extern const char DAT_0053629c[]; // "snd/voice/"
 extern const char DAT_00536288[]; // "%s.bcwav"
 void rt_aeabi_memclr(void *data, u32 size);
 char *libc_strcat(char *output, const char *input);
 char *libc_strcpy(char *output, const char *input);
 void *jyoucyuGetTableEntry(u32 id);
-s32 FUN_00162ea4(void);
+s32 eventIsSkipping(void);
 void asdSoundGetObjectCount(void);
 u32 asdLoadFileExists(const char *path);
 void workCommandArm(void *file, VoiceFileSlot *slot);
@@ -50,7 +50,7 @@ static __inline VoiceFileSlot *voiceFileSlotAt(u32 index)
 {
     if (index >= 4)
         return NULL;
-    return &DAT_0061978c.slots[index];
+    return &g_soundObjectTable.slots[index];
 }
 
 static __inline s32 findFreeVoiceFileSlot(void)
@@ -70,8 +70,8 @@ extern "C" u32 FUN_001628c0(const char *name, u32 volume, u8 category, u8 option
     char basename[64];
     rt_aeabi_memclr(path, sizeof(path));
     rt_aeabi_memclr(basename, sizeof(basename));
-    if (jyoucyuGetTableEntry(1) != NULL || FUN_00162ea4() != 0 ||
-        DAT_0061978c.disabled != 0 || volume == 0)
+    if (jyoucyuGetTableEntry(1) != NULL || eventIsSkipping() != 0 ||
+        g_soundObjectTable.disabled != 0 || volume == 0)
         return ~0u;
     __2sprintf(basename, DAT_0053629c);
     libc_strcat(basename, name);

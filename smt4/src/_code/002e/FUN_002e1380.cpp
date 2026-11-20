@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail materialises FUN_002ad80c's zero high size word in r5 before FUN_002ad888 (one more saved register, a 496-byte frame) and later clears the stream with a fresh zero in r0, passing the stream address through r3; the build uses `mov r3, #0` at the call and pads the frame to 500. Same in Apocalypse's FUN_00359608. */
+/* NON_MATCHING: retail materialises FUN_002ad80c's zero high size word in r5 before fileSystemRequireReady (one more saved register, a 496-byte frame) and later clears the stream with a fresh zero in r0, passing the stream address through r3; the build uses `mov r3, #0` at the call and pads the frame to 500. Same in Apocalypse's FUN_00359608. */
 #include "sys/ProcessResult.h"
 #include "common.h"
 #include "nn/Result.h"
@@ -20,7 +20,7 @@ typedef struct SaveStreamOwner {
 } SaveStreamOwner;
 
 void *pathBuildWide(u32 id, u8 *buffer, s32 flags);
-u32 FUN_002ad888(void);
+u32 fileSystemRequireReady(void);
 
 static s32 saveStreamOpen(SaveStream *stream, u8 *buffer, s32 mode)
 {
@@ -48,7 +48,7 @@ nn::Result FUN_002e1380(SaveStreamOwner *owner, u32 id, u32 size)
         processResultSetValue(result);
         return result;
     }
-    FUN_002ad888();
+    fileSystemRequireReady();
     result = FUN_002ad80c(reinterpret_cast<const u16 *>(buffer), size);
     if ((s32)(result & 0x80000000) < 0) {
         processResultSetValue(result);

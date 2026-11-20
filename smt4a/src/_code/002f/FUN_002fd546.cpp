@@ -12,7 +12,7 @@ int FUN_002fd624(...);
 /* Supplied declaration required: FUN_002e93c2. */
 /* Supplied declaration required: FUN_002ea974. */
 /* Supplied declaration required: onlineUrlDestroy. */
-extern int FUN_002eb5f4(void);
+extern int watcherGetActiveContext(void);
 extern int FUN_002ee5fe(unsigned int, int, unsigned char *);
 /* Supplied declaration required: FUN_002fd624. */
 
@@ -28,12 +28,12 @@ unsigned int FUN_002fd546(int param_1)
   int temp_v3;
   unsigned char temp_v4 [104];
   
-  temp_v1 = FUN_002eb5f4();
+  temp_v1 = watcherGetActiveContext();
   if (*(int *)(temp_v1 + 0xd0) != 0) {
     FUN_002ea974(temp_v4);
     piVar4 = (int *)(param_1 + 0x1ac);
     temp_v3 = *piVar4;
-    temp_v1 = FUN_002eb5f4();
+    temp_v1 = watcherGetActiveContext();
     temp_v1 = FUN_002ee5fe(*(unsigned int *)(temp_v1 + 0xd0),temp_v3 + 8,temp_v4);
     if (temp_v1 != 0) {
       temp_v1 = FUN_002fd624(*piVar4 + 8);

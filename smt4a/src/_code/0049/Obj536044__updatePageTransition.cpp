@@ -28,7 +28,7 @@ inline void ShopMenuView::finishPageTransition()
 {
     switch (slot) {
     case 0: case 1: case 2: case 3: case 4: case 5: case 6:
-        if (FUN_0023b3d0())
+        if (gameStateIsNotTransitioning())
             changeState(7);
         return;
     case 7:
@@ -56,7 +56,7 @@ void Obj536044::updatePageTransition()
         break;
     case 1: {
         UiSpriteState *sprite = reinterpret_cast<UiSpriteState *>(&scene->animation.sprites[0]);
-        FUN_00167458(sprite, 0);
+        uiSpriteSlideFromSide(sprite, 0);
         s32 y = vec2GetYInt(sprite);
         s32 x = vec2GetXInt(sprite);
         pointConvertToFloat(scene->cursorPosition, x, y);
@@ -66,7 +66,7 @@ void Obj536044::updatePageTransition()
         break;
     }
     }
-    if (scene->resource && FUN_0040ab8c(scene->resource) && scene->resource->body == NULL) {
+    if (scene->resource && moriModelContentIsLoaded(scene->resource) && scene->resource->body == NULL) {
         moriModelContentLoadBody(scene->resource, 0);
         Obj557b18 *handle = scene->resource->body;
         handleRegistryRegisterObject(g_handleRegistry, handle);

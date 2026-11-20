@@ -43,14 +43,14 @@ extern "C" {
 void btlShowListedActionMessage(s32* battle, ActionContext* ctx, s32 id, s32 value, s32 arg);
 u32 FUN_00227fac(u32 listedId);
 void frameRangeExtend(s32* battle, ActionContext* ctx, s32 id, s32 a, s32 b, s32 c);
-s32 FUN_00229914(s32* battle, ActionContext* ctx, s32 id);
+s32 btlUnitIsDeadAndUncopied(s32* battle, ActionContext* ctx, s32 id);
 void FUN_0023c0d0(s32* battle, ActionContext* ctx, s32 id, s32 amount);
 void actionCreateKindSeventeen(s32 kind, ActionContext* ctx, s32 arg);
 void btlQueueKeyedScalarReflectAction(s32 a, ActionContext* ctx, s32 b, s32 c, s32 d, s32 e, s32 f);
 void FUN_002551ac(s32 kind, ActionContext* ctx, ActionTarget* target, s32 a, s32 amount, s32 b, s32 c, s32 d, s32 e,
                   s32 f, s32 g, u8 h, s32 i, s32 j, s32 k, s32 l, s32 m, s32 n, s32 o, s32 p, s32 q, s32 r, s32 s, s32 t, s32 u);
-void FUN_0027df30(s32 kind, ActionContext* ctx, ActionTarget* target, s32 a, u32 value, s32 b, s32 c, s32 d, u32 e, u32 f, u32 g, s32 h, s32 i);
-s32 FUN_00293230(s32 battle);
+void btlQueueSkillReflectActions(s32 kind, ActionContext* ctx, ActionTarget* target, s32 a, u32 value, s32 b, s32 c, s32 d, u32 e, u32 f, u32 g, s32 h, s32 i);
+s32 btlScriptUnitIsIncapacitated(s32 battle);
 
 // Applies a heal/damage change of `amount` to the target and queues its effects; returns
 // whether the target was left needing a follow-up message.
@@ -72,7 +72,7 @@ u8 FUN_003cfe14(s32* battle, ActionContext* ctx, s32 amount)
         FUN_00227d18(ctx->target->listedId);
     }
     FUN_0023c0d0(battle, ctx, ctx->target->listedId, -amount);
-    s32 followUp = FUN_00229914(battle, ctx, ctx->target->listedId);
+    s32 followUp = btlUnitIsDeadAndUncopied(battle, ctx, ctx->target->listedId);
     if (followUp != 0)
         result = 1;
     if ((s32)value > 0) {
@@ -85,13 +85,13 @@ u8 FUN_003cfe14(s32* battle, ActionContext* ctx, s32 amount)
         a = 0;
         b = 0xb;
     }
-    if (FUN_00293230(*battle) == 0) c = 0;
+    if (btlScriptUnitIsIncapacitated(*battle) == 0) c = 0;
     FUN_002551ac(10, ctx, ctx->target, 0, amount, -1, -1,
                  reinterpret_cast<ActionSlotRow*>(reinterpret_cast<u8*>(ctx) + ctx->target->listedId * 10 + 0x9d4)->minPower,
                  *reinterpret_cast<s16*>(ctx->source + 0xea), 0, 0, result, 0, 1, 0, 0x1e, 0, a, c, b, -1, 1, 0, 1, 1);
     btlQueueKeyedScalarReflectAction(10, ctx, 0x1000185, 0, 0, 0, 0);
     if ((s32)value >= 0) {
-        FUN_0027df30(0x1e, ctx, ctx->target, 0, value, -1, -1, 0, a, c, b, 0, 1);
+        btlQueueSkillReflectActions(0x1e, ctx, ctx->target, 0, value, -1, -1, 0, a, c, b, 0, 1);
         btlQueueKeyedScalarReflectAction(0x1e, ctx, 0x10001c5, 0, 1, 0, 0);
     }
     if (result != 0) {

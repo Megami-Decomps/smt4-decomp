@@ -47,7 +47,7 @@ void FUN_00149ae0(const void *a, const void *b);
 void gxCmdListSetCreate(void *list, u32 count, ...);
 void asdGfxSetMode(u32 mode);
 void FUN_00149950(u32 count, u32 *handles);
-void FUN_00161074(u32 handle);
+void asdGfxBindTarget(u32 handle);
 void FUN_00149864(u32 format, u32 width, u32 height, u32 flags);
 void FUN_00149a88(u32 query, u32 *result);
 void FUN_00144c9c(u32 a, u32 b, u32 c);
@@ -66,7 +66,7 @@ static __inline void gxTargetBlockInit(AsdGxDisplayBuffers *block, u32 mode, u32
     asdGfxSetMode(mode);
     FUN_00149950(block->count, block->buffers);
     for (u32 i = 0; i < block->count; i++) {
-        FUN_00161074(block->buffers[i]);
+        asdGfxBindTarget(block->buffers[i]);
         FUN_00149864(format, GX_SCREEN_WIDTH, height, GX_TARGET_FORMAT);
         u32 result = 0;
         FUN_00149a88(GX_RESULT_QUERY, &result);

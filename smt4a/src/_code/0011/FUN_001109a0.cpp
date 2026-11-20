@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e789a(unsigned int);
-int FUN_002f3dc4(unsigned int, unsigned int);
+int onlineInstanceCompleteMode2(unsigned int, unsigned int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ typedef struct {
 #endif
 /* Supplied declaration required: FUN_002e789a. */
 extern unsigned int _ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
-/* Supplied declaration required: FUN_002f3dc4. */
+/* Supplied declaration required: onlineInstanceCompleteMode2. */
 
 
 unsigned long long FUN_001109a0(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -38,7 +38,7 @@ unsigned long long FUN_001109a0(unsigned int param_1,unsigned int param_2,unsign
   FUN_002e789a(param_2);
   temp_v1 = 0x10001;
   temp_v0 = _ZN12OnlineResultC1ERKj((unsigned int *)&uStack_18,(unsigned int *)&temp_v1);
-  FUN_002f3dc4(param_2,temp_v0);
+  onlineInstanceCompleteMode2(param_2,temp_v0);
   return romwright_piece_4_4(uStack_14,uStack_18);
 }
 

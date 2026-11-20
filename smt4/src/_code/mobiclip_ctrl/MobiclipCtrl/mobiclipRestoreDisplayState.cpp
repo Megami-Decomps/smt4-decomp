@@ -3,7 +3,7 @@
 extern "C" {
 extern S4Player g_mobiclipPlayer;
 void registerBlockRequestGroups(u32 mask);
-void FUN_00123750(u32 mask, s32 enabled);
+void gfxRestoreTextureBindingState(u32 mask, s32 enabled);
 u32 nngxGetError(void);
 void gxLcdClearForceBlack(void);
 void FUN_0011b788(S4Player* player);
@@ -19,7 +19,7 @@ void mobiclipRestoreDisplayState(s32 mode)
         break;
     default:
         registerBlockRequestGroups(0x3fff);
-        FUN_00123750(0x3fff, 1);
+        gfxRestoreTextureBindingState(0x3fff, 1);
         nngxGetError();
         break;
     }

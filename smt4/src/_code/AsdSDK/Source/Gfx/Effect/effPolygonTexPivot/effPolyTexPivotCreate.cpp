@@ -24,7 +24,7 @@ void refCountIncrement(u32 texture);
 void *effTlpCreate(u32 *resource);
 
 extern u8 g_effQuadIndexList;
-extern const char DAT_004104e0[]; /* effPolygonTexPivot.cpp: __FILE__ */
+extern const char g_effPolygonTexPivotSourceFileName[]; /* effPolygonTexPivot.cpp: __FILE__ */
 
 /* Creates a textured polygon object from an effect description: zeroed object, one-segment
  * geometry, the effect's parameters copied in, and the description's resource attached
@@ -34,7 +34,7 @@ PolyTexPivotObject *effPolyTexPivotCreate(PolyTexDesc *desc)
     PolyTexPivotObject *obj;
     u32 *resource;
 
-    asdDebugTrace(DAT_004104e0, 35);
+    asdDebugTrace(g_effPolygonTexPivotSourceFileName, 35);
     obj = (PolyTexPivotObject *)memAlloc(0x10000, 0x100, 0, 328, 0x10, 1);
 
     memClear(obj, 328);

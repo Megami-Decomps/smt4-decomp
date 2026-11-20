@@ -22,7 +22,7 @@ typedef struct ListMenuWork {
     /* 0x8E88 */ s32 rowIds[1];
 } ListMenuWork;
 
-s32 objectApplyIfUnblocked(void *list);
+s32 gridNavigationGetItemCount(void *list);
 s32 resourceRunOperationIfUnblocked(void *list);
 s32 listCursorGetRowIfUnblocked(void *list);
 void efctSetSpeed(f32 speed);
@@ -37,7 +37,7 @@ void FUN_003b6354(f32 scale, ListMenuWork *work, s32 row, s32 mode, s32 selected
         texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x172, *x + offsetX, *y + offsetY, 0x65);
         return;
     }
-    if (work->selected < objectApplyIfUnblocked(work->list) && row == selectedRow) {
+    if (work->selected < gridNavigationGetItemCount(work->list) && row == selectedRow) {
         if (mode != 1) {
             if ((mode == 2 || mode == 3) && *shifted != 0) {
                 *y = work->scroll * -3 + *y;

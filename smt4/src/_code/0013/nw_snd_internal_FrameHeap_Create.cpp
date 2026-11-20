@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_0013c6ec(unsigned int, unsigned int, int);
-int FUN_0013c780(unsigned int);
+int nw_snd_internal_FrameHeap_DestroyImpl(unsigned int);
 int nw_snd_internal_FrameHeap_ClearSection(unsigned int *);
 int nw_snd_internal_FrameHeap_NewSection(unsigned int *);
 int nw_ut_FrameHeap_Free(unsigned int, int);
 
 /* Supplied declaration required: FUN_0013c6ec. */
-/* Supplied declaration required: FUN_0013c780. */
+/* Supplied declaration required: nw_snd_internal_FrameHeap_DestroyImpl. */
 /* Supplied declaration required: nw_snd_internal_FrameHeap_ClearSection. */
 /* Supplied declaration required: nw_snd_internal_FrameHeap_NewSection. */
 /* Supplied declaration required: nw_ut_FrameHeap_Free. */
@@ -26,7 +26,7 @@ void nw_snd_internal_FrameHeap_Create(unsigned int *param_1,int param_2,int para
   if (*param_1 != 0) {
     nw_snd_internal_FrameHeap_ClearSection(param_1);
     nw_ut_FrameHeap_Free(*param_1,3);
-    FUN_0013c780(*param_1);
+    nw_snd_internal_FrameHeap_DestroyImpl(*param_1);
     *param_1 = 0;
   }
   temp_v0 = (param_2 + 3U) & 0xfffffffc;

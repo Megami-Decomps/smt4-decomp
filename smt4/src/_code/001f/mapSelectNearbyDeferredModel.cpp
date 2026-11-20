@@ -32,7 +32,7 @@ extern "C" {
 extern DeferredModels1fa800 *g_deferredMapModels;
 f32 mathDistanceBetweenPoints(MapVector a, MapVector b);
 ModelInfo1fa800 *dataTable2AGetEntryWithAoc(s32 modelId);
-void FUN_00266fac(s32 found, s32 index);
+void mapHudStartSelectionAnimation(s32 found, s32 index);
 char *libc_strcpy(char *dest, const char *src);
 
 // Remember the first active deferred model within 200 units of `point`, or clear the selection.
@@ -46,11 +46,11 @@ void mapSelectNearbyDeferredModel(MapVector point)
             g_deferredMapModels->nearIndex = i;
             g_deferredMapModels->nearKind = g_deferredMapModels->models[i].kind;
             libc_strcpy(g_deferredMapModels->nearName, info->name);
-            FUN_00266fac(1, i);
+            mapHudStartSelectionAnimation(1, i);
             return;
         }
     }
-    FUN_00266fac(0, 0);
+    mapHudStartSelectionAnimation(0, 0);
     g_deferredMapModels->nearActive = 0;
 }
 

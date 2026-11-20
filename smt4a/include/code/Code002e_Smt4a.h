@@ -5,13 +5,13 @@
 struct LinkedTarget;
 extern "C" {
 
-u8 FUN_002e2014(void);
+u8 campCecEditHasConfirmFlag(void);
 
 void FUN_002e1208(u32 unused, s32 id, u32 *outA, u32 *outB);
 
 unsigned int * rt_memclr(unsigned int *param_1,unsigned int param_2);
 
-u32 FUN_002e2114(LinkedTarget *target);
+u32 linkedTargetRunHolderLinks(LinkedTarget *target);
 
 void asdOperatorDeleteC(void *memory);
 

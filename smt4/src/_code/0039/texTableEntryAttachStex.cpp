@@ -30,7 +30,7 @@ void texTableEntryAttachStex(TextureHeapEntry ***reference, const StexLoadPacket
         entry->texture->dimensions.height = header->height;
         entry->texture->image.format = header->format;
         entry->texture->image.type = header->type;
-        entry->texture->storage.unk28 = bytes - header->dataOffset;
+        entry->texture->storage.bytes = bytes - header->dataOffset;
         entry->texture->storage.flags |= 0x10;
         if (header->version == 1) {
             entry->texture->unk3c = 1;

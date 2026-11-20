@@ -54,7 +54,7 @@ s32 gameFlagIsSet(u32 flag);
 void FUN_00234f5c(NodeEnableOwner *owner, const char *first, const char *second);
 PanelSelection *FUN_0022b8c0(void *selection);
 void FUN_0022afc4(NodeEnableOwner *owner, s32 a, s32 b);
-void FUN_00234cd8(NodeEnableOwner *owner, s32 kind, s32 flag);
+void moverRetargetToSlot(NodeEnableOwner *owner, s32 kind, s32 flag);
 u32 fileLoadSync(const char *path, u32 *size, u32 flags);
 void objModelCreateFromSource(NodeEnableOwner *owner, u32 file, u32 size);
 void modelSetVisible(NodeEnableOwner *owner, s32 visible);
@@ -86,7 +86,7 @@ void FUN_003b95a4(PanelWork *work)
         }
         selection = FUN_0022b8c0(work->selection);
         FUN_0022afc4(work->modelOwner, 0, -1);
-        FUN_00234cd8(work->modelOwner, selection->kind, 1);
+        moverRetargetToSlot(work->modelOwner, selection->kind, 1);
         if (work->record->modelSet >= 0) {
             s32 count;
             const char *entries = static_cast<const char *>(dataTable33GetEntries(&count, work->record->modelSet));

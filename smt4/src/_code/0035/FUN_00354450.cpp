@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00239e14(int, int);
 int FUN_00239ed0(unsigned int, unsigned char *);
-int FUN_002ba81c(unsigned int, unsigned int, int);
+int stringCopyTruncated(unsigned int, unsigned int, int);
 int _ZN18WindowStatusResultC1Ej(...);
 int __aeabi_memcpy4(unsigned char *, int, int);
 
@@ -27,8 +27,8 @@ extern signed char DAT_004c72f8; /* 0x4c72f8 */
 /* Supplied declaration required: FUN_00239ed0. */
 extern int FUN_00239f84(unsigned char *, unsigned char *, unsigned int);
 extern int tokenResolveAddress(unsigned int, int *, int);
-extern unsigned int FUN_002b5c44(void);
-/* Supplied declaration required: FUN_002ba81c. */
+extern unsigned int tokenTableGet(void);
+/* Supplied declaration required: stringCopyTruncated. */
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern int FUN_002c55b4(void);
 extern int appletIsExitRequested(void);
@@ -75,12 +75,12 @@ void FUN_00354450(unsigned int param_1,int *param_2,unsigned int *param_3,int pa
              (unsigned int)*(unsigned char *)((int)param_3 + 5) | ((*param_3 & 0xff0fffff) << 8);
         (&DAT_004c707c)[temp_v4 * 8] = temp_v2 | 0x40000;
         *(unsigned int *)(&DAT_004c7080 + temp_v4 * 0x20) = *(unsigned int *)(param_4 + temp_v4 * 0x24);
-        FUN_002ba81c(temp_v4 * 0x20 + 0x4c7084,param_4 + temp_v4 * 0x24 + 4,0x14);
+        stringCopyTruncated(temp_v4 * 0x20 + 0x4c7084,param_4 + temp_v4 * 0x24 + 4,0x14);
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < param_5);
     }
     DAT_004c7074 = param_5;
-    temp_v3 = FUN_002b5c44();
+    temp_v3 = tokenTableGet();
     temp_v1 = tokenResolveAddress(temp_v3,&temp_v5,*param_2);
     if (-1 < temp_v1) {
       __aeabi_memcpy4(&DAT_004c7030,temp_v5 + 0x54,0x44);

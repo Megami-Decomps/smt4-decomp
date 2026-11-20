@@ -4,7 +4,7 @@
 #include "common.h"
 
 extern "C" {
-void FUN_00215bd0(void);
+void unitStatusResetSpriteState(void);
 }
 
 #ifdef __cplusplus

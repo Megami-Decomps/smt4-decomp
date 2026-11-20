@@ -59,7 +59,7 @@ typedef struct {
 /* Supplied declaration required: selectionCopySupportedValue. */
 /* Supplied declaration required: btlEntryGetPassiveSkillIds. */
 extern int randRange(unsigned int);
-extern unsigned short FUN_00245cc0(unsigned int);
+extern unsigned short mapCategoryToDestinationGroup(unsigned int);
 /* Supplied declaration required: FUN_00246134. */
 /* Supplied declaration required: FUN_002463e8. */
 /* Supplied declaration required: btlEntryBuildSummary. */
@@ -406,7 +406,7 @@ LAB_00228de4:
           temp_v5 = 1;
           return temp_v5;
         }
-        temp_v3 = FUN_00245cc0(0x1a);
+        temp_v3 = mapCategoryToDestinationGroup(0x1a);
         temp_v10 = reinterpret_cast<int>(btlGetMainState());
         btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v10), temp_v5);
         if (temp_v10 != 0) {

@@ -10,7 +10,7 @@ int onlineInstanceTableGetCurrent(void);
 int vectorInitEmpty(unsigned int **);
 int FUN_002e9e8a(unsigned int, unsigned int, unsigned int **);
 int onlineInstanceTableFind(int, unsigned int);
-int FUN_002e9f00(void);
+int onlineInstanceCompleteWithChildren(void);
 int vectorDestroyWords(unsigned int **);
 
 extern unsigned int FUN_00103e8e(int, unsigned int);
@@ -21,7 +21,7 @@ extern int onlineContextGetInstance(void);
 /* Supplied declaration required: vectorInitEmpty. */
 /* Supplied declaration required: FUN_002e9e8a. */
 /* Supplied declaration required: onlineInstanceTableFind. */
-/* Supplied declaration required: FUN_002e9f00. */
+/* Supplied declaration required: onlineInstanceCompleteWithChildren. */
 /* Supplied declaration required: vectorDestroyWords. */
 
 
@@ -46,7 +46,7 @@ unsigned int FUN_002e9ef8(int param_1,unsigned int param_2)
     temp_v0 = onlineInstanceTableGetCurrent();
     onlineInstanceTableFind(temp_v0,*puVar3);
     if (temp_v0 != 0) {
-      FUN_002e9f00();
+      onlineInstanceCompleteWithChildren();
     }
   }
   vectorDestroyWords(&puStack_28);

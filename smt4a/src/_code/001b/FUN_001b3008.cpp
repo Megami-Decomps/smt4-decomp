@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a46c(...);
+int stringCopyTruncated(...);
 int FUN_001a6c40(unsigned char [4]);
 int FUN_001b9fe4(unsigned int);
 int FUN_001ba0c8(unsigned int, unsigned char [4]);
@@ -28,7 +28,7 @@ typedef struct {
     unsigned int sp1AC; /* 0x1ac: local_1ac */
 } param_8_stack;
 
-/* Supplied declaration required: FUN_0019a46c. */
+/* Supplied declaration required: stringCopyTruncated. */
 /* Supplied declaration required: FUN_001a6c40. */
 /* Supplied declaration required: FUN_001b9fe4. */
 /* Supplied declaration required: FUN_001ba0c8. */
@@ -64,8 +64,8 @@ void FUN_001b3008(unsigned int param_1,unsigned int param_2,int param_3,unsigned
     libc_strlen(param_2);
     libc_strlen(param_3);
     FUN_001a6c40(temp_v9);
-    FUN_0019a46c(temp_v16,param_2,0x40);
-    FUN_0019a46c(temp_v17,param_3,0x40);
+    stringCopyTruncated(temp_v16,param_2,0x40);
+    stringCopyTruncated(temp_v17,param_3,0x40);
     temp_v14 = (unsigned int)param_5;
     temp_v12 = (unsigned int)((unsigned long long)param_5 >> 0x20);
     temp_v10 = temp_v10 | 3;
@@ -82,7 +82,7 @@ void FUN_001b3008(unsigned int param_1,unsigned int param_2,int param_3,unsigned
   }
   libc_strlen(param_2);
   FUN_001a6c40(temp_v0);
-  FUN_0019a46c(temp_v7,param_2,0x40);
+  stringCopyTruncated(temp_v7,param_2,0x40);
   temp_v5 = (unsigned int)param_5;
   temp_v3 = (unsigned int)((unsigned long long)param_5 >> 0x20);
   temp_v8 = 0;

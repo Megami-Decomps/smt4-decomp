@@ -13,7 +13,7 @@ struct ResourcePairEntry {
 };
 
 extern "C" {
-extern ResourcePairEntry DAT_00573ce0[14];
+extern ResourcePairEntry g_btlActionResourceTable[14];
 s32 jyoucyuGetTableEntry(u32 index);
 void btlQueueActionMessage(u32 param, u32 target, void *resource, s32 slot, s32 arg4, s32 arg5, s32 arg6);
 
@@ -22,7 +22,7 @@ static __inline ResourcePairEntry *findResourcePair(u32 id)
     s32 i;
 
     for (i = 0; i < 14; i++) {
-        ResourcePairEntry *entry = &DAT_00573ce0[i];
+        ResourcePairEntry *entry = &g_btlActionResourceTable[i];
         if (entry->id == id) {
             return entry;
         }

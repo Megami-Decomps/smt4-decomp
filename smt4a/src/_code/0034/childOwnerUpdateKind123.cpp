@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern void FUN_004b9588(void *data);
+extern void mikadoCameraDrawView(void *data);
 
 extern ChildOwner4 g_mikado;
 
@@ -18,7 +18,7 @@ u32 childOwnerUpdateKind123(void)
             data = child->data;
         }
         if (child != NULL && data != NULL) {
-            FUN_004b9588(data);
+            mikadoCameraDrawView(data);
         }
     }
     return 0;

@@ -6,7 +6,7 @@ struct AddressToken {
 struct TokenTable;
 
 extern "C" {
-TokenTable* FUN_0016ccfc(void);
+TokenTable* tokenTableGet(void);
 u32 tokenResolveAddress(TokenTable* table, u32* address, u32 token);
 u32 FUN_00428220(u32 address);
 u32 windowGetOperationFailure(u32 address);
@@ -15,7 +15,7 @@ u32 windowGetOperationFailure(u32 address);
 u32 FUN_00428878(const AddressToken* token)
 {
     u32 address;
-    u32 result = tokenResolveAddress(FUN_0016ccfc(), &address, token->value);
+    u32 result = tokenResolveAddress(tokenTableGet(), &address, token->value);
     if (!nnResultIsFailure(result)) {
         result = FUN_00428220(address);
         if (!nnResultIsFailure(result)) {

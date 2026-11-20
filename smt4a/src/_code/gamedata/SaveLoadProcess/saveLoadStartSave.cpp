@@ -37,7 +37,7 @@ void gameDataBlocksAddFlags(u32 bits);
 void gameDataBlocksOrFlagsClearUnk02(u32 bits);
 u32 taskCreateDraw(const s8* name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void* owner);
-s32 FUN_00371750(u32 process);
+s32 saveLoadProcessWriteStep(u32 process);
 void work8BufDestroy(u32 process);
 s32 saveLoadDrawActivityIcon(u32 process);
 void asdProcessClearSelectedFlags(u32 process, u32 mask, u32 mode);
@@ -73,7 +73,7 @@ extern "C" u32 saveLoadStartSave(s32 slot, u8 option)
         work->directSlot = 1;
     }
     work->started = 0;
-    work->process = asdProcessCreateSimple(reinterpret_cast<const s8*>("Save"), 4, 0, 0, FUN_00371750, work8BufDestroy, reinterpret_cast<u32>(work));
+    work->process = asdProcessCreateSimple(reinterpret_cast<const s8*>("Save"), 4, 0, 0, saveLoadProcessWriteStep, work8BufDestroy, reinterpret_cast<u32>(work));
     asdProcessClearSelectedFlags(work->process, 0x80000, 0);
     work->phase = 0;
     work->option = option;

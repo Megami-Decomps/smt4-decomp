@@ -62,7 +62,7 @@ void shopDrawEquippedItemPage(Scene3a *scene)
         FUN_0022ea70(scene, flaggedEntryGetValueByState(&page->holder) + 2, 1, held);
     }
     s32 selected = flaggedEntryGetValueByState(&page->holder);
-    FUN_002332e8(scene->view, FUN_0029e924(&page->holder), selected);
+    shopPanelSetScrollPosition(scene->view, FUN_0029e924(&page->holder), selected);
     scene->view->refresh(color);
 }
 }

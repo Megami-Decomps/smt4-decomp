@@ -65,7 +65,7 @@ u32 fusionListAvailableSpecialRecipes(void *context, u16 *recipes)
                     break;
                 }
             }
-            if (present[ingredient] == 0 && FUN_002a4b28(recipe->ingredients[ingredient]))
+            if (present[ingredient] == 0 && compendiumEntryIsRegistered(recipe->ingredients[ingredient]))
                 present[ingredient] = 1;
             ++ingredientCount;
         }

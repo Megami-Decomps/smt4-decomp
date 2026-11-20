@@ -20,7 +20,7 @@ typedef struct {
 
 extern ScreenState *g_btlMain;
 
-void FUN_0019faa0(s32 a, s32 b, f32 value);
+void asdCameraInitializeStereoChannels(s32 a, s32 b, f32 value);
 void eventCommandSetPendingCleanup(s32 value);
 void asdMemoryFreeLockedAlt(u32 resource);
 void gfxObjectDestroy(u32 effect);
@@ -45,7 +45,7 @@ void scrDestroyActive(u32 job)
             screen->effectParam = 0;
         }
         cameraRegistryRemove(screen->subObject);
-        FUN_0019faa0(0, 1, 10.0f);
+        asdCameraInitializeStereoChannels(0, 1, 10.0f);
         asdMemFree(g_btlMain);
         g_btlMain = NULL;
     }

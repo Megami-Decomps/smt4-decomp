@@ -12,7 +12,7 @@ void sub68OwnerCall3(void);
 void naviMainEnterState4IfActive(void);
 void commonBgStopChildAndBeginTransition(void);
 void commonBgReset(void);
-s32 FUN_004a0404(void);
+s32 playerCanAffordRecoverySkill(void);
 
 /* Opens (nonzero) or updates/closes (zero) the map pause menu: plays the matching sound, resets the
  * background and restores the field when the menu closes. */
@@ -45,7 +45,7 @@ void FUN_003a2278(s32 open)
             sysPlaySe(0xD3);
         } else if (gameFlagIsSet(12) && !gameFlagIsSet(16)) {
             sysPlaySe(0xD3);
-        } else if (FUN_004a0404()) {
+        } else if (playerCanAffordRecoverySkill()) {
             if (g_gameState.mapId != 0x65) {
                 sysPlaySe(0x104);
                 buttonHelpSelectSlot(0, 0x13, 0x59, 1);

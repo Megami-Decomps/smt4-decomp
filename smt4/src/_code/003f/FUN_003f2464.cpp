@@ -5,7 +5,7 @@
 extern "C" {
 extern u8 DAT_00420a14;
 extern ShaderModuleCounters DAT_00433dd0;
-extern ShaderModule DAT_0047e54c;
+extern ShaderModule g_materialShader;
 extern u8 entry;
 ShaderModuleStorage *nn_gr_CTR_Shader_Shader_sub_object(ShaderModuleStorage *storage);
 void FUN_0034dd48(void *module);
@@ -18,9 +18,9 @@ s32 FUN_003f2464(u32 first, u32 second, ShaderModuleContext *context)
     context->second = second;
     DAT_00433dd0.first = 0;
     DAT_00433dd0.second = 0;
-    DAT_0047e54c.vtable = &DAT_00420a14;
-    DAT_0047e54c.unk04 = 0;
-    ShaderModuleStorage *storage = nn_gr_CTR_Shader_Shader_sub_object(&DAT_0047e54c.shader);
+    g_materialShader.vtable = &DAT_00420a14;
+    g_materialShader.unk04 = 0;
+    ShaderModuleStorage *storage = nn_gr_CTR_Shader_Shader_sub_object(&g_materialShader.shader);
     storage->channels[0].unk00 = 0;
     storage->channels[0].unk01 = 2;
     storage->channels[0].unk02 = 0xff;

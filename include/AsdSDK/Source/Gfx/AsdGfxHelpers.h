@@ -6,7 +6,7 @@ struct TextureNode;
 struct TexNode;
 extern "C" {
 
-s32 asdModelForwardChecked(u32 handle, u32 arg, s32 level, u32 extra);
+s32 srvGetServiceHandle(u32 handle, u32 arg, s32 level, u32 extra);
 
 /* Loads the texture of node `index` of texture table `table` into the main heap. */
 struct TextureNode *asdTMTexLoadMainHeap(u32 table, u32 index);

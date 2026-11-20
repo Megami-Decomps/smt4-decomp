@@ -6,11 +6,11 @@ extern "C" {
 
 int _ZN9Obj55aff4aSERKS_(...);
 int onlineInstanceTableFind(...);
-int FUN_002e9f00(...);
+int onlineInstanceCompleteWithChildren(...);
 int onlineJobSetStateDone(...);
-int FUN_002f3dc4(...);
-int FUN_002f3dde(...);
-int FUN_002f76ca(...);
+int onlineInstanceCompleteMode2(...);
+int onlineInstanceCompleteMode3(...);
+int stringSlotAssign(...);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -20,12 +20,12 @@ typedef struct {
 /* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
-/* Supplied declaration required: FUN_002e9f00. */
+/* Supplied declaration required: onlineInstanceCompleteWithChildren. */
 /* Supplied declaration required: onlineJobSetStateDone. */
-/* Supplied declaration required: FUN_002f3dc4. */
-/* Supplied declaration required: FUN_002f3dde. */
+/* Supplied declaration required: onlineInstanceCompleteMode2. */
+/* Supplied declaration required: onlineInstanceCompleteMode3. */
 extern int _ZNK18OnlineResultRecord7isValidEv(unsigned int *);
-/* Supplied declaration required: FUN_002f76ca. */
+/* Supplied declaration required: stringSlotAssign. */
 
 
 void FUN_00310ec8(int param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
@@ -50,7 +50,7 @@ void FUN_00310ec8(int param_1,unsigned int *param_2,unsigned int param_3,unsigne
     temp_v1 = _ZNK18OnlineResultRecord7isValidEv(param_2);
     if (temp_v1 != 0) {
       if (*(char *)(param_1 + 0x168) != '\0') {
-        FUN_002f76ca(*(unsigned int *)(param_1 + 0x78),"invalidurl");
+        stringSlotAssign(*(unsigned int *)(param_1 + 0x78),"invalidurl");
         puVar4 = *(unsigned int **)(param_1 + 0x108);
         *puVar4 = 0;
         puVar4[1] = 0;
@@ -67,17 +67,17 @@ void FUN_00310ec8(int param_1,unsigned int *param_2,unsigned int param_3,unsigne
       temp_v3 = (unsigned int *)*param_2;
       uStack_1c = param_2[1];
       uStack_18 = param_2[2];
-      FUN_002f3dc4(temp_v0,&temp_v3,uStack_18,&uStack_14);
+      onlineInstanceCompleteMode2(temp_v0,&temp_v3,uStack_18,&uStack_14);
     }
     else {
       temp_v3 = (unsigned int *)*param_2;
       uStack_1c = param_2[1];
       uStack_18 = param_2[2];
-      FUN_002f3dde(temp_v0,&temp_v3,uStack_18,&uStack_14);
+      onlineInstanceCompleteMode3(temp_v0,&temp_v3,uStack_18,&uStack_14);
     }
   }
   else {
-    FUN_002e9f00(param_1 + 0x90,4);
+    onlineInstanceCompleteWithChildren(param_1 + 0x90,4);
   }
   onlineJobSetStateDone(param_1);
   return;

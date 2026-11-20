@@ -29,9 +29,9 @@ void FUN_00211d00(void);
 void statusBustUpAcquire(void);
 void playerInitNewGame(s32 value);
 void buttonHelpAcquireResources(void);
-void FUN_002c5620(void);
+void gameDataSmallBlockFinalize(void);
 void asdTMTexTableLoadTmx(s32 table, s32 flags);
-void FUN_002fc1a8(void);
+void effectTexturesLoadOnce(void);
 void dataTableSortLookupSections(void);
 void FUN_00324a20(void);
 void fileSlotsPreloadShuffled(void);
@@ -50,7 +50,7 @@ s32 jyoucyuLoadStep(u32 handle)
         work->state = 2;
         break;
     case 2:
-        FUN_002fc1a8();
+        effectTexturesLoadOnce();
         work->state++;
         break;
     case 3:
@@ -110,7 +110,7 @@ s32 jyoucyuLoadStep(u32 handle)
     case 11:
         configSettingsResetDefaults();
         playerInitNewGame(0);
-        FUN_002c5620();
+        gameDataSmallBlockFinalize();
         mapSystemLoadSharedFiles();
         work->state++;
         break;

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern ByteTableA DAT_0057f560;
+extern ByteTableA g_messageFlags;
 
 s32 getByteTableAValue(void)
 {
-    return DAT_0057f560.value;
+    return g_messageFlags.value;
 }
 
 } /* extern "C" */

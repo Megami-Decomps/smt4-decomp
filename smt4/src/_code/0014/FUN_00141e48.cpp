@@ -24,7 +24,7 @@ extern int FUN_0014d530(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002aa984. */
 extern unsigned int *FUN_002ac5d8(unsigned char *);
 /* Supplied declaration required: _ZN2nw3snd8internal14BankFileReaderC1EPKv. */
-extern unsigned int FUN_002ac780(int);
+extern unsigned int soundArchiveFileEntryIsLoaded(int);
 
 
 unsigned int FUN_00141e48(int *param_1,unsigned int param_2,unsigned int param_3)
@@ -44,7 +44,7 @@ unsigned int FUN_00141e48(int *param_1,unsigned int param_2,unsigned int param_3
   unsigned char temp_v8 [16];
   
   if ((param_3 & 1) != 0) {
-    temp_v0 = FUN_002ac780(param_1[1]);
+    temp_v0 = soundArchiveFileEntryIsLoaded(param_1[1]);
     temp_v1 = (**(romwright_code **)(*param_1 + 0x10))(param_1,temp_v0);
     if (temp_v1 == 0) {
       return 0;
@@ -66,7 +66,7 @@ unsigned int FUN_00141e48(int *param_1,unsigned int param_2,unsigned int param_3
     temp_v3 = 0;
     do {
       if (temp_v5[temp_v3] != -1) {
-        temp_v0 = FUN_002ac780(param_1[1]);
+        temp_v0 = soundArchiveFileEntryIsLoaded(param_1[1]);
         temp_v1 = (**(romwright_code **)(*param_1 + 0x10))(param_1,temp_v0);
         if (((param_3 & 0xc) != 0) && (temp_v1 == 0)) {
           return 0;

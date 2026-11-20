@@ -16,16 +16,16 @@ struct JobStepWork {
 
 s32 scrGetArg(u32 index);
 
-// Division counts are limited to 4 while FUN_00203d74 reports true.
+// Division counts are limited to 4 while inputFastForwardActive reports true.
 static __inline s32 limitDivisions(s32 divisions)
 {
-    if (FUN_00203d74() != 0 && divisions > 4) {
+    if (inputFastForwardActive() != 0 && divisions > 4) {
         divisions = 4;
     }
     return divisions;
 }
 
-/* Script command: sets the job's start/step pair from a division count (capped at 4 when FUN_00203d74 is set). */
+/* Script command: sets the job's start/step pair from a division count (capped at 4 when inputFastForwardActive is set). */
 u32 FUN_002e52f8(void)
 {
     u32 job = scrGetArg(0);

@@ -277,7 +277,7 @@ u8 FUN_00295618(void);
 }
 
 extern "C" {
-u32 FUN_0023e330(u32 slot, u32 arg, s32 checkContext);
+u32 aocPackageHasVoiceContent(u32 slot, u32 arg, s32 checkContext);
 }
 
 extern "C" {

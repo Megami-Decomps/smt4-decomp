@@ -14,7 +14,7 @@ typedef struct Scene {
 } Scene;
 
 s32 statusAcquireSharedResources(void);
-s32 FUN_002c85b0(u32 arg);
+s32 gameGlobalsSetSceneState(u32 arg);
 s32 statusDownSwitchTab(s32 arg);
 u32 gameGetPlayerData(void);
 s32 FUN_0033449c(s32 arg);
@@ -37,7 +37,7 @@ void FUN_00499d14(Scene *scene)
     } else {
         value = 8;
     }
-    FUN_002c85b0(value);
+    gameGlobalsSetSceneState(value);
     statusDownSwitchTab(0);
     player = gameGetPlayerData();
     FUN_0033449c(1);

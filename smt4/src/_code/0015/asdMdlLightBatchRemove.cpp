@@ -35,7 +35,7 @@ extern "C" {
 extern LightRegistry *sceneGroup1Root[2];
 extern LightRegistry *sceneGroup2Root[2];
 extern void *g_asdModelTransformBuilder[2];
-extern void *DAT_00464b7c[2];
+extern void *g_asdModelSceneRoots[2];
 extern LightCount g_asdLightCount[2];
 void asdLightActivate(s32 index);
 void nw_gfx_SceneNode_AttachChild(void *parent, LightRegistry *child);
@@ -74,21 +74,21 @@ void asdMdlLightBatchRemove(LightBatch *batch)
         g_asdLightCount[index].render.active = 0;
         g_asdLightCount[index].render.dirty = 0;
         nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder[index], sceneGroup2Root[index]);
-        sceneTraverserVisit(DAT_00464b7c[index], g_asdModelTransformBuilder[index]);
+        sceneTraverserVisit(g_asdModelSceneRoots[index], g_asdModelTransformBuilder[index]);
     }
     if (batch->owner != NULL) {
         if (batch->owner->secondary == 0) {
-            sceneTraverserVisit(DAT_00464b7c[0], g_asdModelTransformBuilder[0]);
+            sceneTraverserVisit(g_asdModelSceneRoots[0], g_asdModelTransformBuilder[0]);
             --g_asdLightCount[0].count;
         } else {
-            sceneTraverserVisit(DAT_00464b7c[1], g_asdModelTransformBuilder[1]);
+            sceneTraverserVisit(g_asdModelSceneRoots[1], g_asdModelTransformBuilder[1]);
             --g_asdLightCount[1].count;
         }
     } else if (batch->group < 3) {
-        sceneTraverserVisit(DAT_00464b7c[0], g_asdModelTransformBuilder[0]);
+        sceneTraverserVisit(g_asdModelSceneRoots[0], g_asdModelTransformBuilder[0]);
         --g_asdLightCount[0].count;
     } else {
-        sceneTraverserVisit(DAT_00464b7c[1], g_asdModelTransformBuilder[1]);
+        sceneTraverserVisit(g_asdModelSceneRoots[1], g_asdModelTransformBuilder[1]);
         --g_asdLightCount[1].count;
     }
     if (batch->owner != NULL) {

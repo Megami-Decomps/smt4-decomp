@@ -13,7 +13,7 @@
 #include "gamedata/EquipmentSortPower.h"
 
 extern "C" {
-void FUN_00230d84(const AsdTextureRegion *region, u32 id, s32 x, s32 y, u32 depth);
+void uiDrawBottomRightOffset(const AsdTextureRegion *region, u32 id, s32 x, s32 y, u32 depth);
 void FUN_00231bcc(const AsdTextureRegion *region, u32 id, s32 x, s32 y, u32 depth, u32 mode);
 void FUN_00230d2c(const AsdTextureRegion *region, u32 id, s32 x, s32 y, s32 depth, s32 showEquipped);
 void uiRectDrawAtBottomRight(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 depth);
@@ -58,9 +58,9 @@ void shopDrawListRow(Scene3a *scene, s32 row, s32 selected, const Scene3aEntry *
 
     if (selected) {
         efctSetSpeed(vec2GetSpeed(&scene->animation.sprites[2]));
-        FUN_00230d84(&scene->region, 0x47, x, y, depth);
-        FUN_00230d84(&scene->region, 0x48, x, y, depth);
-        FUN_00230d84(&scene->region, 0x49, x, y, depth);
+        uiDrawBottomRightOffset(&scene->region, 0x47, x, y, depth);
+        uiDrawBottomRightOffset(&scene->region, 0x48, x, y, depth);
+        uiDrawBottomRightOffset(&scene->region, 0x49, x, y, depth);
         efctSetSpeed(1.0f);
         FUN_00231bcc(&scene->region, 0x4A, x, y, depth, 1);
         if (touchSelectionGetSelected((Obj55ca08 *)scene->touchSelection) != 0) {

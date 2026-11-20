@@ -53,7 +53,7 @@ extern int *FUN_0011595c(int, int);
 extern int _Znwj(unsigned int);
 /* Supplied declaration required: sharedRefHolderDestroy. */
 /* Supplied declaration required: FUN_002eb17c. */
-extern int FUN_002eb5f4(void);
+extern int watcherGetActiveContext(void);
 extern int FUN_002eb7d0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ed258. */
 /* Supplied declaration required: ringSetLimit. */
@@ -105,7 +105,7 @@ LAB_00109882:
     FUN_002ed258(temp_v4,param_4);
     if (s______00594975.whole[0] != '\0') {
       temp_v1 = 0;
-      temp_v0 = FUN_002eb5f4();
+      temp_v0 = watcherGetActiveContext();
       temp_v3 = (int *)(temp_v0 + 0xd4);
       while ((temp_v0 = (**(romwright_code **)(*temp_v3 + 0x1c))(temp_v3,temp_v4,piVar2,&temp_v2),
              temp_v0 != 0 && (temp_v0 = FUN_002f2a70(piVar2), temp_v0 != 0))) {

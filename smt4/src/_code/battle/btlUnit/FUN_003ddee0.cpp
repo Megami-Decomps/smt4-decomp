@@ -37,7 +37,7 @@ typedef struct {
     unsigned int sp54; /* 0x54: local_54 */
     unsigned int sp58; /* 0x58: local_58 */
 } param_6_stack;
-extern int DAT_00435d18; /* 0x435d18 */
+extern int g_btlAux; /* 0x435d18 */
 extern unsigned int g_btlEvent; /* 0x435d48 */
 
 /* Supplied declaration required: btlReflectQueueMemberAction. */
@@ -86,7 +86,7 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
       temp_v3 = param_4 * 0xc;
       puVar5 = puVar2;
       btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar2), (int)param_3->field_0x62);
-      temp_v9 = DAT_00435d18;
+      temp_v9 = g_btlAux;
       if (temp_v1 != 0 && puVar5 != (unsigned int *)0x0) {
         temp_v11 = (*puVar5 & 0x10) != 0;
         temp_v2 = *puVar5;
@@ -95,7 +95,7 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
         }
         if (temp_v11 && temp_v2 != 0) {
           param_4 = 0xf;
-          *(fn_003ddee0_arg2 **)(DAT_00435d18 + 0x3048) = param_3;
+          *(fn_003ddee0_arg2 **)(g_btlAux + 0x3048) = param_3;
           *(unsigned int *)(temp_v9 + 0x3028) = *(unsigned int *)(temp_v9 + 0x3028) | 0x8000;
           for (temp_v9 = (int)g_btlActionReflect->head; temp_v9 != 0; temp_v9 = *(int *)(temp_v9 + 0xc)) {
           }
@@ -109,7 +109,7 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
         }
       }
       if (param_4 == 0) {
-        *(unsigned int *)(DAT_00435d18 + 0x3028) = *(unsigned int *)(DAT_00435d18 + 0x3028) | 0x8000;
+        *(unsigned int *)(g_btlAux + 0x3028) = *(unsigned int *)(g_btlAux + 0x3028) | 0x8000;
       }
       switch(param_4) {
       case 0:

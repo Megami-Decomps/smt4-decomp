@@ -7,7 +7,7 @@ extern "C" {
 
 
 typedef int romwright_code(...);
-extern romwright_code *DAT_0044e930; /* 0x44e930 */
+extern romwright_code *g_moAllocationHooks; /* 0x44e930 */
 extern romwright_code *DAT_0044e934; /* 0x44e934 */
 
 /* Supplied declaration required: memClear. */
@@ -25,12 +25,12 @@ unsigned int FUN_003f5a80(romwright_code *param_1,int param_2,unsigned int param
   unsigned int temp_v3;
   
   pcVar1 = param_1;
-  if (DAT_0044e930 != (romwright_code *)0x0) {
+  if (g_moAllocationHooks != (romwright_code *)0x0) {
     pcVar1 = DAT_0044e934;
   }
-  if ((DAT_0044e930 != (romwright_code *)0x0 && pcVar1 != (romwright_code *)0x0) &&
-     (piVar2 = (int *)(*DAT_0044e930)(0x18), piVar2 != (int *)0x0)) {
-    temp_v0 = (*DAT_0044e930)(param_3 * 0x1d0);
+  if ((g_moAllocationHooks != (romwright_code *)0x0 && pcVar1 != (romwright_code *)0x0) &&
+     (piVar2 = (int *)(*g_moAllocationHooks)(0x18), piVar2 != (int *)0x0)) {
+    temp_v0 = (*g_moAllocationHooks)(param_3 * 0x1d0);
     *piVar2 = temp_v0;
     if (temp_v0 != 0) {
       reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v0), param_3 * 0x1d0));

@@ -53,7 +53,7 @@ void Obj55c8d0::FUN_004a677c()
     for (s32 i = 0; i < count; i++) {
         DevilListItem *items = menu->items;
 
-        u16 id = shopListItemGetId(&items[FUN_002a482c(menu->range) + i]);
+        u16 id = shopListItemGetId(&items[resourceDispatchTaggedOperation(menu->range) + i]);
         partyIdsActivateEntry(&menu->party, id);
     }
     FUN_004a6cfc(&menu->party);

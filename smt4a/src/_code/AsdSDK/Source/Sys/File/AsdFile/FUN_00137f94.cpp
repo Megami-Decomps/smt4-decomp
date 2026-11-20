@@ -23,7 +23,7 @@ s32 svcWaitSynchronization1(u32 handle, s64 timeout);
 s32 nn_os_detail_ConvertLibraryToSvcPriority(s32 priority);
 void nn_os_LightEvent_Signal(void *event);
 void syncWaitHandleForever(u32 *handle);
-void FUN_001469a8(AddressSpaceRegion *region);
+void addressSpaceRegionFree(AddressSpaceRegion *region);
 void asdFileHashPackClose(void);
 void fsUnmountByName(const char *mount);
 
@@ -52,7 +52,7 @@ void FUN_00137f94(void)
             syncWaitHandleForever(&g_asdFile.thread.handle);
             g_asdFileWorkerThread.joined = 1;
             g_asdFile.thread.~NnOsThread();
-            FUN_001469a8(g_asdFile.stack);
+            addressSpaceRegionFree(g_asdFile.stack);
         }
     }
     asdFileHashPackClose();

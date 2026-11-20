@@ -17,13 +17,13 @@ int VectorSignedToFloat(...);
 int uiPointerHitsRect(...);
 int FUN_00182054(void);
 int linkHolderApplyFlag(...);
-int FUN_002e1c94(...);
-int FUN_002e207c(...);
-int FUN_002e2114(void);
+int timedValueInterpolateStep(...);
+int linkControllerResetScaleAndCancel(...);
+int linkedTargetRunHolderLinks(void);
 void outfitPreviewConfigureEquipment(struct OutfitPreview *preview, const struct OutfitPreviewEquipment *equipment);
 int campCecSetObjectValue(int);
 int gameDataGetMarkEntry(...);
-int FUN_00359974(int, unsigned int);
+int entryTableResetAndInit(int, unsigned int);
 int controllerApplyPreset(...);
 int screenStartOrClear(...);
 int uiDrawExtendedRecordLabel(...);
@@ -51,15 +51,15 @@ extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: FUN_00182054. */
 /* Supplied declaration required: linkHolderApplyFlag. */
 extern int buttonHelpIsActionActive(unsigned int);
-/* Supplied declaration required: FUN_002e1c94. */
-/* Supplied declaration required: FUN_002e207c. */
-/* Supplied declaration required: FUN_002e2114. */
+/* Supplied declaration required: timedValueInterpolateStep. */
+/* Supplied declaration required: linkControllerResetScaleAndCancel. */
+/* Supplied declaration required: linkedTargetRunHolderLinks. */
 /* Supplied declaration required: campCecSetObjectValue. */
 extern int overlayGetStatusScene(void);
 extern int buttonHelpGetPanelMode(void);
 extern unsigned int overlayGetBuffer1(void);
 /* Supplied declaration required: gameDataGetMarkEntry. */
-/* Supplied declaration required: FUN_00359974. */
+/* Supplied declaration required: entryTableResetAndInit. */
 /* Supplied declaration required: controllerApplyPreset. */
 /* Supplied declaration required: FUN_0036c7a8. */
 /* Supplied declaration required: screenStartOrClear. */
@@ -128,13 +128,13 @@ unsigned int FUN_0025d6a0(void)
         temp_v1 = 0;
         do {
           temp_v5 = temp_v0 + temp_v1 * 0x14;
-          FUN_002e1c94(temp_v5 + 0x78,4);
+          timedValueInterpolateStep(temp_v5 + 0x78,4);
           temp_v1 = temp_v1 + 1;
           *(int *)(temp_v5 + 0x84) = *(int *)(temp_v5 + 0x84) + 1;
         } while (temp_v1 < 2);
         if (*(char *)(temp_v0 + 0xd8) == '\x01') {
           temp_v1 = *(int *)(temp_v0 + 8);
-          FUN_002e2114();
+          linkedTargetRunHolderLinks();
           if (temp_v1 != 0) {
             temp_v1 = (int)*(short *)(*(int *)(temp_v0 + 0x110) + 0x90);
             devilIsTextureLoaded(temp_v1,1);
@@ -157,7 +157,7 @@ unsigned int FUN_0025d6a0(void)
       if (*(int *)(temp_v0 + 0x144) == 1) {
         FUN_0039bb48(*(unsigned int *)(g_campCecView + 0xc),temp_v17);
         temp_v5 = *(int *)(temp_v1 + 8);
-        FUN_002e2114();
+        linkedTargetRunHolderLinks();
         if (temp_v5 != 0) {
           temp_v5 = overlayGetStatusScene();
           resourceEntryMarkReleased(*(unsigned int *)(temp_v5 + 0x1c),0);
@@ -167,14 +167,14 @@ unsigned int FUN_0025d6a0(void)
           resourceEntryMarkReleased(*(unsigned int *)(temp_v5 + 0x1c),2);
           outfitPreviewConfigureEquipment(reinterpret_cast<OutfitPreview *>(*(unsigned int *)(temp_v1 + 8)),
                        reinterpret_cast<const OutfitPreviewEquipment *>(temp_v17));
-          FUN_002e207c(*(unsigned int *)(temp_v1 + 8));
+          linkControllerResetScaleAndCancel(*(unsigned int *)(temp_v1 + 8));
           linkHolderApplyFlag(*(unsigned int *)(temp_v1 + 8),0);
           *(unsigned int *)(temp_v1 + 0x124) = *(unsigned int *)(temp_v1 + 0x114);
         }
         *(unsigned int *)(temp_v0 + 0x144) = 2;
       }
       temp_v5 = *(int *)(temp_v0 + 8);
-      FUN_002e2114();
+      linkedTargetRunHolderLinks();
       temp_v1 = 0;
       if (temp_v5 != 0) {
         temp_v1 = *(int *)(temp_v0 + 0x138);
@@ -198,7 +198,7 @@ unsigned int FUN_0025d6a0(void)
           }
           temp_v1 = buttonHelpGetPanelMode();
           if (temp_v1 == 0) {
-            FUN_00359974(0,*(unsigned int *)(temp_v0 + 0x120));
+            entryTableResetAndInit(0,*(unsigned int *)(temp_v0 + 0x120));
             temp_v2 = overlayGetBuffer1();
             screenStartOrClear(temp_v2,0xe);
           }
@@ -212,7 +212,7 @@ unsigned int FUN_0025d6a0(void)
           if (*(char *)(temp_v0 + 0xec) == '\0') {
             linkHolderApplyFlag(*(unsigned int *)(temp_v0 + 8),0);
             *(unsigned char *)(temp_v0 + 0x13d) = 0;
-            FUN_002e1c94(temp_v0 + 0x8c,4,*(unsigned int *)(temp_v0 + 0x98));
+            timedValueInterpolateStep(temp_v0 + 0x8c,4,*(unsigned int *)(temp_v0 + 0x98));
             temp_v1 = 0;
             *(int *)(temp_v0 + 0x98) = *(int *)(temp_v0 + 0x98) + 1;
             do {
@@ -674,7 +674,7 @@ LAB_0025e324:
         if ((temp_v5 != 0) && (*(int *)(temp_v0 + 0x144) == 1)) {
           FUN_0039bb48(*(unsigned int *)(g_campCecView + 0xc),temp_v17);
           temp_v5 = *(int *)(temp_v1 + 8);
-          FUN_002e2114();
+          linkedTargetRunHolderLinks();
           if (temp_v5 != 0) {
             temp_v5 = overlayGetStatusScene();
             resourceEntryMarkReleased(*(unsigned int *)(temp_v5 + 0x1c),0);
@@ -684,7 +684,7 @@ LAB_0025e324:
             resourceEntryMarkReleased(*(unsigned int *)(temp_v5 + 0x1c),2);
             outfitPreviewConfigureEquipment(reinterpret_cast<OutfitPreview *>(*(unsigned int *)(temp_v1 + 8)),
                          reinterpret_cast<const OutfitPreviewEquipment *>(temp_v17));
-            FUN_002e207c(*(unsigned int *)(temp_v1 + 8));
+            linkControllerResetScaleAndCancel(*(unsigned int *)(temp_v1 + 8));
             linkHolderApplyFlag(*(unsigned int *)(temp_v1 + 8),0);
             *(unsigned int *)(temp_v1 + 0x124) = *(unsigned int *)(temp_v1 + 0x114);
           }

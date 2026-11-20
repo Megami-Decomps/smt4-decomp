@@ -12,7 +12,7 @@ struct SceneLightCounter {
 extern "C" {
 extern SceneNode *sceneGroup1Root[2];
 extern SceneNode *sceneGroup2Root[2];
-extern SceneTraverser *DAT_00464b7c[2];
+extern SceneTraverser *g_asdModelSceneRoots[2];
 extern ModelTransformBuilder *g_asdModelTransformBuilder[2];
 extern SceneLightCounter g_asdLightCount[2];
 void nw_gfx_SceneNode_AttachChild(SceneNode *parent, SceneNode *child);
@@ -47,7 +47,7 @@ void FUN_001c0998(SceneNode *node, s32 group)
             bank = 0;
         else
             bank = 1;
-        sceneTraverserVisit(DAT_00464b7c[bank], g_asdModelTransformBuilder[bank]);
+        sceneTraverserVisit(g_asdModelSceneRoots[bank], g_asdModelTransformBuilder[bank]);
         ++g_asdLightCount[bank].count;
     }
 }

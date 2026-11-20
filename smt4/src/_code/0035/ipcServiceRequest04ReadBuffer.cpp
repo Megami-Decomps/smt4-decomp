@@ -7,7 +7,7 @@
 
 extern "C" {
 
-extern u32 DAT_004719e8; /* service session handle */
+extern u32 g_nimAocSession; /* service session handle */
 
 /* IPC request 0x0004 with one parameter (length) and one read-only buffer (length bytes at buffer);
  * returns the transport result, or the service's result word when the transport succeeded. */
@@ -18,7 +18,7 @@ s32 ipcServiceRequest04ReadBuffer(const void *buffer, u32 length)
     cmd->words[0] = length;
     cmd->words[1] = ipcStaticBufferDescriptor(length, 0);
     cmd->words[2] = (u32)buffer;
-    s32 result = nn::svc::SendSyncRequest(DAT_004719e8);
+    s32 result = nn::svc::SendSyncRequest(g_nimAocSession);
     if (nnResultIsSuccess(result)) {
         result = cmd->words[0];
     }

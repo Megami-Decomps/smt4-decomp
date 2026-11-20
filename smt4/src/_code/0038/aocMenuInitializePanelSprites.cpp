@@ -26,7 +26,7 @@ struct AocMenuSprites {
 };
 
 extern "C" {
-extern const char DAT_003ff12c[];
+extern const char g_aocMenuPanelParams[];
 void drawParameterBlockClear(UiResourceParameters *parameters);
 
 void uiSpriteStateInitFromSource(AocUiSprite *sprite, s32 group, s32 image, UiResourceParameters *parameters, s32 flags, f32 scale);
@@ -41,7 +41,7 @@ void uiInitializeEightTimerSet(void *control);
 void aocMenuInitializePanelSprites(AocMenuSprites *menu)
 {
     drawParameterBlockClear(&menu->parameters);
-    paramsInit(&menu->parameters, 0, 0, DAT_003ff12c, 0xc, 0, 0, 0, 0, 0, 0);
+    paramsInit(&menu->parameters, 0, 0, g_aocMenuPanelParams, 0xc, 0, 0, 0, 0, 0, 0);
     uiSpriteStateInitFromSource(&menu->header, 0x1d, 2000, &menu->parameters, 0xb, 1.0f);
     uiSpriteSetImageKeyframe(&menu->header, 0, 0);
     AocSpriteLayout layout = {{

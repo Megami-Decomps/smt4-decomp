@@ -14,19 +14,19 @@ typedef struct Object003f5c14 {
     /* 0x04 */ void *extra;
 } Object003f5c14;
 
-extern Hooks003f5c14 DAT_0044e930;
+extern Hooks003f5c14 g_moAllocationHooks;
 
 /* Releases the object's extra and main resources through the hook, then the object itself. */
 void handleObjectRelease(Object003f5c14 *object)
 {
-    if (DAT_0044e930.release != NULL && object != NULL) {
+    if (g_moAllocationHooks.release != NULL && object != NULL) {
         Object003f5c14 *self = object;
 
         if (self->extra != NULL) {
-            DAT_0044e930.release(self->extra);
+            g_moAllocationHooks.release(self->extra);
         }
-        DAT_0044e930.release(self->resource);
-        DAT_0044e930.release(self);
+        g_moAllocationHooks.release(self->resource);
+        g_moAllocationHooks.release(self);
     }
 }
 

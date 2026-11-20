@@ -7,12 +7,12 @@ typedef struct Entry {
     /* 0x0C */ u32 value;
 } Entry;
 
-Entry *FUN_002ecf28(void);
+Entry *objectRegistryGetOwnerForCurrent(void);
 
-/* Returns the field at 0x0C of the entry FUN_002ecf28 returns. */
+/* Returns the field at 0x0C of the entry objectRegistryGetOwnerForCurrent returns. */
 u32 FUN_00123a44(void)
 {
-    Entry *entry = FUN_002ecf28();
+    Entry *entry = objectRegistryGetOwnerForCurrent();
     return entry->value;
 }
 

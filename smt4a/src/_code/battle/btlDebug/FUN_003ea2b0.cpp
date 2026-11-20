@@ -102,9 +102,9 @@ void nkmEnemyFindById(u32 id);
 u32 stateEntryFindById(BtlSummonState *state, s32 id);
 s32 nkdwLoaderParse(u32 resource);
 void aocHandleButtons(u32 resource, s32 mode);
-s32 FUN_003fce08(u32 resource, s32 flag);
+s32 aocResourceStartOnce(u32 resource, s32 flag);
 void btlEnsureEnemyDrawResources(u32 resource, s32 flag);
-SummonResource *FUN_00409fe8(s32 id, s32 flag);
+SummonResource *resourceCacheGetOrLoadModel(s32 id, s32 flag);
 void FUN_004cae0c(void *context, void *state, s32 pending, u32 target);
 void btlReflectQueueKind44(s32 a, u32 unit, SummonEffect *effect, s32 b, s32 c, s32 d);
 u32 btlUnitGet(u32 unit);
@@ -141,7 +141,7 @@ u32 FUN_003ea2b0(BtlSummonState *state, u32 request)
             state->slots[0].flags |= SUMMON_RESOURCE_PARSED | SUMMON_RESOURCE_READY;
             state->slots[0].id = id;
         } else {
-            SummonResource *loaded = FUN_00409fe8(id, 1);
+            SummonResource *loaded = resourceCacheGetOrLoadModel(id, 1);
             for (s32 i = 0; i < SUMMON_CACHE_SLOTS; i++) {
                 if (state->cache[i] == NULL) {
                     state->cache[i] = loaded;
@@ -167,7 +167,7 @@ u32 FUN_003ea2b0(BtlSummonState *state, u32 request)
         aocHandleButtons(resource, 7);
     }
     if ((state->slots[0].flags & SUMMON_RESOURCE_READY) == 0) {
-        if (FUN_003fce08(resource, 1) == 0)
+        if (aocResourceStartOnce(resource, 1) == 0)
             return 0;
         btlEnsureEnemyDrawResources(resource, 1);
         state->slots[0].flags |= SUMMON_RESOURCE_READY;

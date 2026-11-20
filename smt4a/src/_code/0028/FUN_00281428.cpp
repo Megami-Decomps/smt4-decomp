@@ -47,7 +47,7 @@ struct QuadWork {
 
 extern "C" {
 QuadWork *jobGetWork(void);
-s32 FUN_00162ea4(void);
+s32 eventIsSkipping(void);
 void FUN_0019e3d0(u32 color0, u32 color1, u32 color2, u32 color3,
     f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
     f32 x2, f32 y2, f32 z2, f32 x3, f32 y3, f32 z3,
@@ -64,7 +64,7 @@ void FUN_00281428(f32 offsetX, f32 offsetY)
     if (work->fade == 0.0f && work->overlaySlot == NULL) {
         return;
     }
-    if (FUN_00162ea4() != 0 && engineCleanupIsDone() != 0) {
+    if (eventIsSkipping() != 0 && engineCleanupIsDone() != 0) {
         return;
     }
     f32 centerX = (work->x + work->offsetX) + (work->shiftX + offsetX);

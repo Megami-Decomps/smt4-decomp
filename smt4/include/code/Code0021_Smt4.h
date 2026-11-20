@@ -9,6 +9,6 @@ extern "C" {
 
 void matrixInitializeWithScaleAndOffset(Matrix44View* matrix, const Vector3View* offset, const Matrix44View* source, f32 scale);
 
-void FUN_00210194(ModelOwner *owner, f32 time);
+void modelOwnerApplyAnimationTime(ModelOwner *owner, f32 time);
 
 } /* extern "C" */

@@ -153,7 +153,7 @@ void FUN_0015f490(u32 id, s32 kind, f32 scale, u32 argument, u32 variant)
         }
     }
 
-    FUN_001628c0(name, (u32)((f32)FUN_0014af98() * scale) & 0xFF, LINE_START_ARG, argument);
+    FUN_001628c0(name, (u32)((f32)messageVoiceBankGet() * scale) & 0xFF, LINE_START_ARG, argument);
 }
 
 } /* extern "C" */

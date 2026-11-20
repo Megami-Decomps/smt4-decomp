@@ -16,7 +16,7 @@ extern "C" {
 
 void drawSetColorFromRGBA8(u32 color);
 void uiDrawItemOrStatusIcon(s32 id, s32 x, s32 y, s32 z, s32 tint);
-void FUN_00180310(u32 screen, s32 x, s32 y, s32 mode, s32 font, s32 layer, const char *format, ...);
+void statRowDrawValueImpl(u32 screen, s32 x, s32 y, s32 mode, s32 font, s32 layer, const char *format, ...);
 u32 texDrawTableEntrySized(u32 id, u32 table, s32 texture, s32 x, s32 y, s32 width, s32 height, u32 tag);
 
 /* The ailment bits of slot `slot`, the player's for a negative slot. */
@@ -112,7 +112,7 @@ void partyPanelDrawSlotPart(CyclingPanel *panel, s32 part, s32 slot, s32 row, s3
             DAT_00588c4c.color = color;
         }
         TextureTableEntryIV *levelEntry = DAT_00588c4c.levelEntry;
-        FUN_00180310(0, levelEntry->x + entry->x + x, entry->y + levelEntry->y + y, 1, font, 0x7e, "%d",
+        statRowDrawValueImpl(0, levelEntry->x + entry->x + x, entry->y + levelEntry->y + y, 1, font, 0x7e, "%d",
                      record->level + levelGain);
         break;
     }

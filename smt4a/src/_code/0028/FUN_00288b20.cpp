@@ -11,7 +11,7 @@ extern "C" {
 int textDrawString(...);
 int texDrawCompositeSprite(int, int, int, int, int, int);
 int efctSetSpeed(void);
-int FUN_00180310(...);
+int statRowDrawValueImpl(...);
 int FUN_00185e84(...);
 int skillDataFindById(void);
 int unitRecordBuild(...);
@@ -39,19 +39,19 @@ extern int g_statusDown; /* 0x588fe8 */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00180310. */
+/* Supplied declaration required: statRowDrawValueImpl. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00185e84. */
 extern int slotRecordFindById(void);
 /* Supplied declaration required: skillDataFindById. */
 extern int listCursorGetRowIfUnblocked(void);
 extern unsigned int FUN_002a6a24(int);
-extern int objectApplyIfUnblocked(int);
-extern int FUN_002c7e3c(void);
+extern int gridNavigationGetItemCount(int);
+extern int gameGlobalsGetFieldState(void);
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: unitRecordBuildFromSave. */
 /* Supplied declaration required: statDrawClampedDelta. */
-extern unsigned int FUN_003df57c(int, unsigned int);
+extern unsigned int skillGetCostWithRankReduction(int, unsigned int);
 extern int recordContainsPairedId(unsigned char *, int);
 extern unsigned int skillGetAdjustedCost(unsigned char *, int);
 /* Supplied declaration required: partyRecordSetEquippedItemClampRank. */
@@ -149,7 +149,7 @@ LAB_00288c34:
       }
     }
     else if ((*(int *)(temp_v0 + 0x65c) == temp_v2) ||
-            (temp_v3 = objectApplyIfUnblocked(temp_v12), temp_v3 - 1 == temp_v2)) {
+            (temp_v3 = gridNavigationGetItemCount(temp_v12), temp_v3 - 1 == temp_v2)) {
       temp_v5 = 0x57d8ffff;
     }
     else {
@@ -177,8 +177,8 @@ LAB_00288c34:
   VectorSignedToFloat((int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_1,
                       (unsigned char)(in_fpscr >> 0x16) & 3);
   textDrawString(3,temp_v5,temp_v13,(int)*(short *)(temp_v3 + 8));
-  if ((-1 < *(short *)(temp_v0 + 0x598)) && (temp_v3 = FUN_002c7e3c(), temp_v3 != 4)) {
-    temp_v3 = FUN_002c7e3c();
+  if ((-1 < *(short *)(temp_v0 + 0x598)) && (temp_v3 = gameGlobalsGetFieldState(), temp_v3 != 4)) {
+    temp_v3 = gameGlobalsGetFieldState();
     if (temp_v3 != 5) {
       temp_v3 = slotRecordFindById();
       if (temp_v3 != 0) {
@@ -204,7 +204,7 @@ LAB_00288c34:
                  (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v3 + 10) + param_2,0xc9,param_5,0)
     ;
     temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x42a));
-    if ((-1 < *(short *)(temp_v0 + 0x598)) && (temp_v4 = FUN_002c7e3c(), temp_v4 != 4)) {
+    if ((-1 < *(short *)(temp_v0 + 0x598)) && (temp_v4 = gameGlobalsGetFieldState(), temp_v4 != 4)) {
       if ((*(int *)(temp_v0 + 0x518) == 0xe) &&
          (temp_v4 = recordContainsPairedId(temp_v11,param_3), temp_v4 == 0)) {
         partyRecordSetEquippedItemClampRank(temp_v11,param_3,0);
@@ -220,13 +220,13 @@ LAB_00288c34:
                    0xc4);
       if (param_3 != 0) {
         temp_v5 = FUN_002a6a24(param_3);
-        FUN_00180310(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_1,
+        statRowDrawValueImpl(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_1,
                      (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,1,8,0xc9,
                      "%d",temp_v5);
       }
       else {
         sprintf((char *)temp_v13,"---");
-        FUN_00180310(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_1,
+        statRowDrawValueImpl(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_1,
                      (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,1,8,0xc9,
                      temp_v13);
       }
@@ -236,10 +236,10 @@ LAB_00288c34:
                    0xc4);
       temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x52a));
       if (*(short *)(temp_v0 + 0x598) < 0) {
-        temp_v10 = FUN_003df57c(param_3,1);
+        temp_v10 = skillGetCostWithRankReduction(param_3,1);
       }
       else {
-        temp_v3 = FUN_002c7e3c();
+        temp_v3 = gameGlobalsGetFieldState();
         if (temp_v3 != 7) {
           temp_v10 = skillGetAdjustedCost(temp_v11,param_3);
         }
@@ -251,7 +251,7 @@ LAB_00288c34:
         }
       }
       temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x429));
-      FUN_00180310(0,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
+      statRowDrawValueImpl(0,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
                    (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v3 + 10) + param_2,1,4,0xc9,
                    "%d",temp_v10);
     }

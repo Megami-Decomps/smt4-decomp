@@ -7,7 +7,7 @@ struct CommandTemplate {
 
 extern "C" {
 
-extern CommandTemplate DAT_005c0cc0;
+extern CommandTemplate g_gfxCommandTemplate;
 extern u8 *g_commandBufferCursor;
 extern u8 *nw_gfx_internal_FastWordCopyAsm_78(u8 *output, const void *commands);
 
@@ -15,11 +15,11 @@ extern u8 *nw_gfx_internal_FastWordCopyAsm_78(u8 *output, const void *commands);
 u32 gfxCommandTemplateAppend(u32 enabled)
 {
     if (enabled != 0) {
-        DAT_005c0cc0.mode = 2;
+        g_gfxCommandTemplate.mode = 2;
     } else {
-        DAT_005c0cc0.mode = 0;
+        g_gfxCommandTemplate.mode = 0;
     }
-    g_commandBufferCursor = nw_gfx_internal_FastWordCopyAsm_78(g_commandBufferCursor, &DAT_005c0cc0);
+    g_commandBufferCursor = nw_gfx_internal_FastWordCopyAsm_78(g_commandBufferCursor, &g_gfxCommandTemplate);
     return 0x138;
 }
 

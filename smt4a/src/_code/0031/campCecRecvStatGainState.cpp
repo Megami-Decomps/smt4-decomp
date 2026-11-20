@@ -20,7 +20,7 @@
 
 extern "C" {
 
-SlotRecordA *FUN_0031cf00(void);
+SlotRecordA *stockFindSelectedUnit(void);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 s32 btlTalkBustUpGetValue(void);
 void btlTalkBustUpSetDemonTexture(u32 demonId, s32 deferred);
@@ -29,7 +29,7 @@ void btlTalkBustUpReleaseAllSlots(void);
 void btlTalkBustUpReleaseTexture(void);
 s32 battleTalkIsBustReady(void);
 void unitRecomputeDerivedStats(SlotRecordA *record);
-void FUN_002c85b0(u32 value);
+void gameGlobalsSetSceneState(u32 value);
 s32 gameDataGetRecordValue(void);
 void statusBustUpPortraitAcquire(s32 id, s32 byDevilId);
 void statusBustUpPortraitRelease(s32 id, s32 resolveRecord);
@@ -47,7 +47,7 @@ u32 FUN_0031f63c(void);
 u8 statusDownGetFlag(void);
 u32 padButtonIsPressed(u32 button);
 u32 buttonHelpIsActionActive(u32 action);
-void FUN_0022e774(void);
+void statusPanelClose(void);
 u32 maskToCode(u32 mask);
 void FUN_00285800(void);
 
@@ -57,7 +57,7 @@ void FUN_00285800(void);
 s32 campCecRecvStatGainState(CampCecRecv *recv)
 {
     s32 result = 0;
-    SlotRecordA *unit = FUN_0031cf00();
+    SlotRecordA *unit = stockFindSelectedUnit();
     char name[36];
 
     switch (recv->gains.step) {
@@ -158,13 +158,13 @@ s32 campCecRecvStatGainState(CampCecRecv *recv)
             }
         }
         if (message != 0) {
-            FUN_00359974(1, gain, 0xffffffff, 0);
+            entryTableResetAndInit(1, gain, 0xffffffff, 0);
             scrScriptProcessStartEntry(recv->resources.scripts[0], message);
             recv->gains.step++;
         } else {
-            FUN_002c85b0(0);
+            gameGlobalsSetSceneState(0);
             statusDownSwitchTab(0);
-            FUN_002c8538(0);
+            gameGlobalsSetOverlayActive(0);
             statusBustUpPortraitAcquire(gameDataGetRecordValue(), 1);
             unitRecomputeDerivedStats(unit);
             recv->gains.step = 6;
@@ -186,8 +186,8 @@ s32 campCecRecvStatGainState(CampCecRecv *recv)
             btlTalkBustUpReleaseTexture();
             btlTalkBustUpSetDemonTexture(unit->id, 1);
             recv->gains.unk3E6 = 0;
-            FUN_002c8538(1);
-            FUN_00215bd0();
+            gameGlobalsSetOverlayActive(1);
+            unitStatusResetSpriteState();
             if (partyPanelIsActive()) {
                 sysPlaySe(0xce);
             } else {
@@ -197,11 +197,11 @@ s32 campCecRecvStatGainState(CampCecRecv *recv)
         }
         break;
     case 7:
-        if (FUN_0023b3d0()) {
-            FUN_002c85b0(0);
+        if (gameStateIsNotTransitioning()) {
+            gameGlobalsSetSceneState(0);
             FUN_0033449c(1);
             statusDisplayBindUnitRecord(&recv->gains.unitBefore, 0, 0, NULL);
-            objBInitBlock19D0(FUN_0031cf00(), 0, 0);
+            objBInitBlock19D0(stockFindSelectedUnit(), 0, 0);
             FUN_003343c0(0);
             statusPanelSetOpen(1);
             FUN_0038b548(0);
@@ -235,12 +235,12 @@ s32 campCecRecvStatGainState(CampCecRecv *recv)
                 gameGlobalsSetMenuOpenFlag(1);
                 sysPlayVoice(0x100020e);
                 recv->gains.step++;
-                FUN_0022e774();
+                statusPanelClose();
             }
         }
         break;
     case 9:
-        if (FUN_0026c3a0()) {
+        if (gameGlobalsIsActiveStateFour()) {
             recv->gains.pending &= ~4;
             s32 next = maskToCode(recv->gains.pending);
             if (next == 9) {
@@ -255,11 +255,11 @@ s32 campCecRecvStatGainState(CampCecRecv *recv)
                 result = 3;
             }
             statusBustUpPortraitRelease(gameDataGetRecordValue(), 1);
-            FUN_002c85b0(0);
+            gameGlobalsSetSceneState(0);
             statusDownSwitchTab(0);
             FUN_0038b548(1);
             FUN_0023b45c(0);
-            FUN_002c8538(0);
+            gameGlobalsSetOverlayActive(0);
             FUN_0033449c(0);
             FUN_00285800();
             recv->unitFlag.unk7D4 = 0;

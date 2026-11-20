@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern UiCallbackContext *DAT_0043d990;
+extern UiCallbackContext *g_btlDevilListCallbackContext;
 
 /* Runs the UI object's finishDraw callback. */
 s32 FUN_003acdec()
 {
-    DAT_0043d990->object->finishDraw();
+    g_btlDevilListCallbackContext->object->finishDraw();
     return 0;
 }
 

@@ -9,7 +9,7 @@ int hasExclusiveAccess(unsigned int *);
 
 /* Unsupported intrinsic, declaration required: coproc_moveto_Data_Synchronization (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
-extern int FUN_001a2a4c(void);
+extern int nn_gxlow_CTR_GetCmdManager(void);
 
 
 void FUN_0018b108(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -23,7 +23,7 @@ void FUN_0018b108(unsigned int param_1,unsigned int param_2,unsigned int param_3
   unsigned char *pbVar4;
   unsigned int *puVar5;
   
-  temp_v1 = FUN_001a2a4c();
+  temp_v1 = nn_gxlow_CTR_GetCmdManager();
   if (param_1 < 2) {
     pbVar4 = *(unsigned char **)(temp_v1 + 0x5c + param_1 * 4);
     temp_v2 = 1 - *pbVar4;

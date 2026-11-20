@@ -6,7 +6,7 @@
 
 /* The "EventMessUnderFade" job's work (eventSetUnderMessageFade): a full-screen quad drawn under the
  * message window whose alpha ramps by `delta` per frame for `duration` frames. The process
- * (FUN_002e2250, Apocalypse FUN_0035c0c8) steps the ramp, the two draw tasks (uiFadeQuadDrawJob)
+ * (eventMessUnderFadeJobStep, Apocalypse eventMessUnderFadeJobStep) steps the ramp, the two draw tasks (uiFadeQuadDrawJob)
  * draw it, and the destroy callback (eventCommandFreeWorkCallback / eventCommandFreeWork) frees it.
  * Every callback receives it from jobGetWork(). */
 typedef struct EventCommand {

@@ -3,7 +3,7 @@
 
 extern "C" {
 
-s32 FUN_0029a9d4(u16 id, u32 flag);
+s32 skillGetDiscountedCost(u16 id, u32 flag);
 
 /* Compares two entries by their looked-up values; empty or unknown ids compare equal. */
 s32 FUN_002197a0(const u16 *idA, const u16 *idB)
@@ -22,8 +22,8 @@ s32 FUN_002197a0(const u16 *idA, const u16 *idB)
     if (entryB == 0) {
         return 0;
     }
-    s16 rankA = FUN_0029a9d4(*idA, 1);
-    s16 rankB = FUN_0029a9d4(*idB, 1);
+    s16 rankA = skillGetDiscountedCost(*idA, 1);
+    s16 rankB = skillGetDiscountedCost(*idB, 1);
     return rankA - rankB;
 }
 

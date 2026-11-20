@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00189a38(int, int);
+int errThrowFatal(int, int);
 int FUN_0018b70c(void);
 int nn_applet_CTR_detail_OpenSession(void);
 int nn_applet_CTR_detail_CloseSession(void);
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-/* Supplied declaration required: FUN_00189a38. */
+/* Supplied declaration required: errThrowFatal. */
 /* Supplied declaration required: FUN_0018b70c. */
 /* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
 /* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
@@ -31,7 +31,7 @@ void nn_applet_CTR_detail_ReplySleepNotificationCompleteToManager(void)
   FUN_0018b70c();
   temp_v0 = FUN_001a366c();
   if (temp_v0 < 0) {
-    FUN_00189a38(temp_v0,0x18ba2c);
+    errThrowFatal(temp_v0,0x18ba2c);
   }
   nn_applet_CTR_detail_CloseSession();
   return;

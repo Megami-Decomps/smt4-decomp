@@ -10,7 +10,7 @@ int phaseCosInterpolate(void);
 int mathSinFixedAngle(void);
 int cameraSetViewMatrix(...);
 int renderCtxCalculateStereoParallax(...);
-int FUN_002c1ac8(...);
+int gxSubmitFloatColoredQuad(...);
 int renderCtxSelectTexture(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -21,7 +21,7 @@ typedef struct {
 } param_3_stack;
 
 extern int g_titleScene; /* 0x44ea00 */
-extern unsigned int DAT_00476628; /* 0x476628 */
+extern unsigned int g_asdSoundListenerGuard; /* 0x476628 */
 extern unsigned int DAT_004d46ac; /* 0x4d46ac */
 extern unsigned int DAT_004d46bc; /* 0x4d46bc */
 extern unsigned int DAT_004d46cc; /* 0x4d46cc */
@@ -53,7 +53,7 @@ extern float DAT_004efd34; /* 0x4efd34 */
 extern int __cxa_guard_acquire(unsigned int *);
 extern unsigned int asdGxPresetsGetHeightByKind(unsigned int);
 extern unsigned int asdGxPresetsGetByKind(unsigned int);
-/* Supplied declaration required: FUN_002c1ac8. */
+/* Supplied declaration required: gxSubmitFloatColoredQuad. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 
 
@@ -91,7 +91,7 @@ unsigned int FUN_002a8ac4(unsigned short *param_1,unsigned int *param_2,int para
   unsigned char temp_v22 [148];
   
   temp_v19 = 0.0f;
-  if (((DAT_00476628 & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&DAT_00476628), temp_v3 != 0)) {
+  if (((g_asdSoundListenerGuard & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&g_asdSoundListenerGuard), temp_v3 != 0)) {
     g_asdSoundListener = temp_v19;
     DAT_004efd30 = temp_v19;
     DAT_004efd34 = temp_v19;
@@ -338,7 +338,7 @@ unsigned int FUN_002a8ac4(unsigned short *param_1,unsigned int *param_2,int para
       phaseCosInterpolate();
     }
   }
-  FUN_002c1ac8(puVar13,puVar14,puVar11,puVar12);
+  gxSubmitFloatColoredQuad(puVar13,puVar14,puVar11,puVar12);
   if (temp_v2) {
     cameraSetViewMatrix(g_titleScene,temp_v22);
   }

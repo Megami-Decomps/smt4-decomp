@@ -25,7 +25,7 @@ extern unsigned int pendingValueTake(void);
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-extern int FUN_002eb5f4(void);
+extern int watcherGetActiveContext(void);
 extern int wordRefsDiffer_002ee774(unsigned int **, unsigned int *);
 extern int FUN_002ee978(unsigned int *);
 extern int FUN_002fd454(unsigned int *);
@@ -49,8 +49,8 @@ void FUN_0011a01c(int param_1)
   unsigned int *temp_v9 [2];
   
   temp_v3 = *(int *)(*(int *)(param_1 + 0x70) + 0x10);
-  if ((temp_v3 != 0) && (temp_v0 = FUN_002eb5f4(), temp_v0 != 0)) {
-    temp_v0 = FUN_002eb5f4();
+  if ((temp_v3 != 0) && (temp_v0 = watcherGetActiveContext(), temp_v0 != 0)) {
+    temp_v0 = watcherGetActiveContext();
     _ZN9Obj55b28cC1EPv(temp_v7,temp_v0 + 0x58);
     temp_v5 = *(unsigned int **)(temp_v0 + 0x98);
     do {

@@ -29,7 +29,7 @@ extern unsigned int FUN_002ea268(void);
 /* Supplied declaration required: FUN_002ea2a8. */
 /* Supplied declaration required: FUN_002ea2b4. */
 /* Supplied declaration required: ptrHolderDestroy. */
-extern unsigned int FUN_002ea704(void);
+extern unsigned int watcherGetEnabledFlag(void);
 
 
 int FUN_00122a68(void)
@@ -60,7 +60,7 @@ int FUN_00122a68(void)
   *(unsigned char *)(temp_v0 + 0x12) = 0;
   temp_v0 = FUN_002ea2a8(temp_v0 + 0x14,0);
   temp_v3 = temp_v0 - 0x144;
-  temp_v1 = FUN_002ea704();
+  temp_v1 = watcherGetEnabledFlag();
   FUN_0010a0c4(temp_v1,0);
   temp_v4[0] = temp_v3;
   FUN_0010d128(temp_v3,&LAB_00122799,temp_v4);

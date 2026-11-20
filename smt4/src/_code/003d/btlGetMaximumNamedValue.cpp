@@ -15,13 +15,13 @@ struct NamedBattleValues {
 };
 
 extern "C" {
-s32 FUN_00293230(void *state);
+s32 btlScriptUnitIsIncapacitated(void *state);
 u32 libc_strlen(const char *);
 
 // Return the largest valid value among the four named entries, or -1 when unavailable.
 s32 btlGetMaximumNamedValue(NamedBattleValues *values)
 {
-    if (values->entries == NULL || FUN_00293230(static_cast<void *>(btlGetMainState())))
+    if (values->entries == NULL || btlScriptUnitIsIncapacitated(static_cast<void *>(btlGetMainState())))
         return -1;
     s32 maximum = 0;
     if (libc_strlen(values->entries[0].name) &&

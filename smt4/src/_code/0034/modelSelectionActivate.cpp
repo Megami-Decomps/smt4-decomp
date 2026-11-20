@@ -88,15 +88,15 @@ struct ModelParameters {
     float value34;                                      // 0x34
 };
 
-extern WordVector3* FUN_002a86a4(SceneNode*);
-extern void FUN_002cbaf8(SceneNode*, int);
+extern WordVector3* cameraGetProviderEntryPayload(SceneNode*);
+extern void gfxModelSlotSetActive(SceneNode*, int);
 extern void sysFlagsSetBits(u32);
 extern float mathClampFloat(void*, float, float, float);
 extern int FUN_0024530c(SceneNode*, Animation*);
 extern SceneNode* asdModelGetSlotArray0(int);
 extern int nw_gfx_SceneNode_IsCircularReference(SceneNode*, SceneNode*);
 extern ModelParameters* asdCameraGetSavedRenderPairs(void*);
-extern void FUN_002a8638(SceneNode*, float*, float*, float*, float*);
+extern void cameraExportProviderEntryWords(SceneNode*, float*, float*, float*, float*);
 extern void FUN_00341bec(ModelSelection*);
 
 void modelSelectionActivate(ModelSelection* selection, int modelIndex, int animationIndex)
@@ -113,12 +113,12 @@ void modelSelectionActivate(ModelSelection* selection, int modelIndex, int anima
     selection->savedTranslation.y = model->translationY;
     selection->savedTranslation.z = model->translationZ;
 
-    WordVector3* auxiliary = FUN_002a86a4(model);
+    WordVector3* auxiliary = cameraGetProviderEntryPayload(model);
     selection->savedAuxiliary.x = auxiliary->x;
     selection->savedAuxiliary.y = auxiliary->y;
     selection->savedAuxiliary.z = auxiliary->z;
 
-    FUN_002cbaf8(model, 0);
+    gfxModelSlotSetActive(model, 0);
     sysFlagsSetBits(1);
 
     if (animationIndex >= 0) {
@@ -239,7 +239,7 @@ void modelSelectionActivate(ModelSelection* selection, int modelIndex, int anima
 
     void* parameterOwner = effApplyModelLight(0);
     ModelParameters* parameters = asdCameraGetSavedRenderPairs(parameterOwner);
-    FUN_002a8638(model,
+    cameraExportProviderEntryWords(model,
                  &parameters->value28,
                  &parameters->value34,
                  &parameters->value2c,

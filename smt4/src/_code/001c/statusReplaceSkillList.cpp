@@ -9,10 +9,10 @@ struct StatusSkillMemberView {
 
 extern "C" {
 void statusReplaceSkills(u16 *skills, u8 count);
-void FUN_0026a978(const u32 *result, s32 selection);
+void statusDownSetSelectedIds(const u32 *result, s32 selection);
 StatusSkillMemberView *partyMemberFindById(u32 id);
 void rt_memcpy(void *destination, const void *source, u32 size);
-s32 FUN_0026a9cc(u16 memberId, u32 level, const u16 *skills, u32 *result, s32 skip);
+s32 statusCollectUnlearnedSkillsAboveLevel(u16 memberId, u32 level, const u16 *skills, u32 *result, s32 skip);
 u32 countUnlockedSlots();
 u32 flagCountUnlockedSlots();
 
@@ -42,11 +42,11 @@ void statusReplaceSkillList(const u16 *skills)
         StatusSkillMemberView *member = partyMemberFindById((u16)selection->memberId);
         if (data->unk1E66 == 2 || data->unk1E66 == 3)
             member = partyMemberFindById((u16)selection->memberId);
-        s8 selected = (s8)FUN_0026a9cc(selection->memberId, selection->secondaryId,
+        s8 selected = (s8)statusCollectUnlearnedSkillsAboveLevel(selection->memberId, selection->secondaryId,
                                   selection->skills, result, member != NULL && member->available != 0);
-        FUN_0026a978(result, selected);
+        statusDownSetSelectedIds(result, selected);
     } else {
-        FUN_0026a978(NULL, -1);
+        statusDownSetSelectedIds(NULL, -1);
     }
 }
 }

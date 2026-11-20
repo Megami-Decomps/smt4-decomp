@@ -21,7 +21,7 @@ extern u32 dataTableFree(u32 id);
 extern void btlTalkBustUpDestroy(void);
 extern void asdTMTexTableReleaseNode(s32 a, s32 b);
 extern void statusSceneDestroy(StatusScene *scene);
-extern u8 *handles5Free(u32 handle);
+extern u8 *handleObjectFree(u32 handle);
 extern void soundChannelStopAll(s32 value);
 extern void bgmFadeOut(u32 value);
 
@@ -79,7 +79,7 @@ void campCecDestroyOverlay(s32 leaving)
         asdTMTexTableReleaseNode(0x2E, 0);
         asdTMTexTableFreeEntry(0x2E);
         statusSceneDestroy(&g_campCec.instance->scene);
-        handles5Free(overlay->unk174);
+        handleObjectFree(overlay->unk174);
         jobStop(overlay->job, 0);
         asdMemFree(overlay);
         g_campCec.instance = NULL;

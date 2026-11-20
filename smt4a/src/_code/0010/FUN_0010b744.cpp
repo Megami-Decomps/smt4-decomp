@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002f3dde(...);
+int onlineInstanceCompleteMode3(...);
 int FUN_002f4e90(unsigned char [64], unsigned int);
 int FUN_002f4ecc(unsigned char [64], unsigned char [4], unsigned char [4]);
 int FUN_002f4f00(unsigned char [64]);
@@ -20,7 +20,7 @@ typedef struct {
 
 extern unsigned int _ZN12OnlineResultC1ERKj(unsigned int *, int *);
 extern unsigned int streamWriterFinish(unsigned int);
-/* Supplied declaration required: FUN_002f3dde. */
+/* Supplied declaration required: onlineInstanceCompleteMode3. */
 extern int _ZNK18OnlineResultRecord7isValidEv(unsigned int *);
 /* Supplied declaration required: FUN_002f4e90. */
 /* Supplied declaration required: FUN_002f4ecc. */
@@ -64,14 +64,14 @@ unsigned int FUN_0010b744(int param_1,int param_2,unsigned int param_3)
       temp_v7 = temp_v4;
       uStack_20 = uStack_34;
       uStack_1c = uStack_30;
-      FUN_002f3dde(param_2,&temp_v7,uStack_30,temp_v8);
+      onlineInstanceCompleteMode3(param_2,&temp_v7,uStack_30,temp_v8);
     }
     FUN_002f4f00(temp_v3);
   }
   else {
     temp_v2[0] = -0x7ffefffe;
     temp_v1 = _ZN12OnlineResultC1ERKj((unsigned int *)&temp_v7,temp_v2);
-    FUN_002f3dde(param_2,temp_v1);
+    onlineInstanceCompleteMode3(param_2,temp_v1);
   }
   return 0;
 }

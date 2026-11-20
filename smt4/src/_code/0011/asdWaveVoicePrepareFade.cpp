@@ -10,7 +10,7 @@ void nn_snd_CTR_Voice_SetPitch(u32 voice, f32 pitch);
 void nn_snd_CTR_Voice_SetState(u32 voice, s32 state);
 void nn_snd_CTR_InitializeWaveBuffer(void *);
 u32 soundQueueArchiveWaveBuffers(u32 player, void *archive, void *initial, void *loop, s32 index);
-void FUN_00147370(u32 voice, f32 volume);
+void soundVoiceSetVolume(u32 voice, f32 volume);
 
 // Reset a stopped voice when necessary, then prepare its target volume and fade.
 void asdWaveVoicePrepareFade(AsdSndWaveVoice *sound, s32 frames, f32 volume, f32 secondaryVolume)
@@ -27,7 +27,7 @@ void asdWaveVoicePrepareFade(AsdSndWaveVoice *sound, s32 frames, f32 volume, f32
         f32 startVolume = volume;
         if (sound->fadeFrames > 0)
             startVolume = 0.0f;
-        FUN_00147370(sound->voice, startVolume);
+        soundVoiceSetVolume(sound->voice, startVolume);
         nn_snd_CTR_Voice_SetState(sound->voice, 0);
         sound->unk90 |= 0x40;
         if (sound->fadeFrames > 0)
@@ -39,7 +39,7 @@ void asdWaveVoicePrepareFade(AsdSndWaveVoice *sound, s32 frames, f32 volume, f32
         return;
     ScopedCriticalLock lock(status->unk08);
     sndVoiceFree(sound->voice);
-    sound->voice = FUN_002bd29c(0x7fff, 0, 0);
+    sound->voice = nwSoundVoiceAllocate(0x7fff, 0, 0);
     nn_snd_CTR_Voice_SetMixParam(sound->voice, sound->mix);
     nn_snd_CTR_Voice_SetPitch(sound->voice, 1.0f);
     sound->unk90 = 0;

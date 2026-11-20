@@ -1,4 +1,4 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_002ab8c4; not written yet. */
+/* NON_MATCHING: found outside every function: branched to by gfxDispatchBufferIfNonEmpty; not written yet. */
 /* romwright 0.5.0 decompilation of FUN_0014d7cc for reference (not compiled; its own view of the boundaries):
 
 void FUN_0014d7cc(unsigned int param_1,int param_2)

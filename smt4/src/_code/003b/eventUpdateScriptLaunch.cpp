@@ -8,7 +8,7 @@
 #include "game/GameState.h"
 
 extern "C" {
-void FUN_0022b778(EventScriptScene *scene);
+void transformInterpolationStep(EventScriptScene *scene);
 void messageSetConfirmDisplayMode();
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 u32 tableGroupFindEntryIndex(void *script, const char *name);
@@ -18,7 +18,7 @@ void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 void eventUpdateScriptLaunch(EventScriptScene *scene)
 {
     char path[128];
-    FUN_0022b778(scene);
+    transformInterpolationStep(scene);
     if (scene->substate == 0) {
         g_gameState.event.eventState = 0;
         messageSetConfirmDisplayMode();

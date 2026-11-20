@@ -1,8 +1,7 @@
 #include "npc_room/NpcRoomDebug.h"
-#include <stddef.h>
 
 extern "C" {
-void FUN_0026dcd4(u32 roomId);
+void npcRoomCreate(u32 roomId);
 void titleSetSlotValueState2(s32 screen, s32 enabled);
 void asdMemFree(void *);
 void jobStop(u32 job, s32 result);
@@ -10,40 +9,34 @@ s32 npcRoomIsDone(void);
 s32 padIsButtonRepeat(u32 button);
 s32 padIsButtonPressed(u32 button);
 
-// Select a room to preview, then restore both screens when the room exits.
-u32 npcRoomDebugSelectRoomUpdate(void)
+/* Lets the pad pick a room id and opens that room, then restores both screens when the room is
+ * done and closes the menu. */
+s32 npcRoomDebugSelectRoomUpdate(u32 process)
 {
-    // The selection fields lie beyond the shared debug job's currently known extent.
-    struct DebugMenuView {
-        NpcRoomDebug base;
-        s32 state; // 0x04
-        u16 roomId; // 0x08
-    };
-    typedef char LayoutCheck[offsetof(DebugMenuView, state) == 4 &&
-        offsetof(DebugMenuView, roomId) == 8 ? 1 : -1];
-    extern DebugMenuView *g_npcRoomDebug;
-    DebugMenuView *menu = g_npcRoomDebug;
+    NpcRoomDebug *menu = g_npcRoomDebug;
+
     switch (menu->state) {
-    case 0:
-        if (padIsButtonRepeat(3) && menu->roomId < 999)
+    case NPC_ROOM_DEBUG_SELECT:
+        /* buttons 3 and 4 step the id up and down, button 0 opens the room */
+        if (padIsButtonRepeat(3) && menu->roomId < NPC_ROOM_DEBUG_LAST_ROOM)
             ++menu->roomId;
         if (padIsButtonRepeat(4) && menu->roomId != 0)
             --menu->roomId;
         if (padIsButtonPressed(0)) {
-            FUN_0026dcd4(menu->roomId);
+            npcRoomCreate(menu->roomId);
             ++menu->state;
         }
         break;
-    case 1:
+    case NPC_ROOM_DEBUG_IN_ROOM:
         if (npcRoomIsDone()) {
             titleSetSlotValueState2(0, 1);
             titleSetSlotValueState2(1, 1);
             ++menu->state;
         }
         break;
-    case 2:
+    case NPC_ROOM_DEBUG_CLOSE:
         if (menu != NULL) {
-            jobStop(menu->base.job, 0);
+            jobStop(menu->job, 0);
             asdMemFree(menu);
             g_npcRoomDebug = NULL;
         }
@@ -51,4 +44,5 @@ u32 npcRoomDebugSelectRoomUpdate(void)
     }
     return 0;
 }
-}
+
+} /* extern "C" */

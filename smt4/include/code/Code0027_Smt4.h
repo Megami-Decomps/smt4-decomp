@@ -12,7 +12,7 @@ void FUN_0027e3e8(void *obj, EntryFUN_0027e3e8 *entry, int arg);
 
 Entry * FUN_0027ee24(u32 index);
 
-int FUN_0027e974(Obj *obj);
+int _ZN7AocMenuD1Ev(Obj *obj);
 
 int nodeListCountActiveById(List *list, int id);
 

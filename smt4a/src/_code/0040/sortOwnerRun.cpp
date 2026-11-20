@@ -15,7 +15,7 @@ extern int entryRefCompareByOrderDefault(...); /* 0x40456c */
 extern int FUN_00404d50(...); /* 0x404d50 */
 extern int FUN_00404f00(...); /* 0x404f00 */
 
-extern unsigned int objectApplyIfUnblocked(int);
+extern unsigned int gridNavigationGetItemCount(int);
 /* Supplied declaration required: arraySortQsort. */
 
 
@@ -33,21 +33,21 @@ void sortOwnerRun(int param_1)
   param_1 = param_1 + 0x408;
   if ((temp_v0 & 0x7f) == 0x34) {
     if ((temp_v0 & 0x80) != 0) {
-      temp_v2 = objectApplyIfUnblocked(temp_v1);
+      temp_v2 = gridNavigationGetItemCount(temp_v1);
       arraySortQsort(param_1,temp_v2,2,FUN_00404f00);
       return;
     }
-    temp_v2 = objectApplyIfUnblocked(temp_v1);
+    temp_v2 = gridNavigationGetItemCount(temp_v1);
     arraySortQsort(param_1,temp_v2,2,entryRefCompareByOrderDefault);
     return;
   }
   if ((temp_v0 & 0x7f) == 0x1b) {
     if ((temp_v0 & 0x80) != 0) {
-      temp_v2 = objectApplyIfUnblocked(temp_v1);
+      temp_v2 = gridNavigationGetItemCount(temp_v1);
       arraySortQsort(param_1,temp_v2,2,FUN_00404d50);
       return;
     }
-    temp_v2 = objectApplyIfUnblocked(temp_v1);
+    temp_v2 = gridNavigationGetItemCount(temp_v1);
     arraySortQsort(param_1,temp_v2,2,FUN_004039b4);
     return;
   }

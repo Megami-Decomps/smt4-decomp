@@ -16,7 +16,7 @@ typedef struct MapGlobals002df598 {
 
 
 
-extern MapGlobals002df598 DAT_004474f0; /* 0x4474f0 */
+extern MapGlobals002df598 g_lmapViewHolder; /* 0x4474f0 */
 
 /* Loads the camera file of map `map`, variant `index`, into the map state. */
 void mapCameraLoad(u32 map, u32 index)
@@ -24,7 +24,7 @@ void mapCameraLoad(u32 map, u32 index)
     u8 path[64];
 
     sprintf((char *)path, "map/m%03d/cam%03d_%02d.bccam", map, map, index);
-    DAT_004474f0.state->camera = reinterpret_cast<u32>(asdCameraLoadFromFile(reinterpret_cast<const char *>(path)));
+    g_lmapViewHolder.state->camera = reinterpret_cast<u32>(asdCameraLoadFromFile(reinterpret_cast<const char *>(path)));
 }
 
 } /* extern "C" */

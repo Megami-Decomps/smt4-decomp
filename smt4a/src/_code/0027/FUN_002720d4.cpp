@@ -4,7 +4,7 @@
 #include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
-extern const char DAT_00544b38[];
+extern const char g_effMiscHeaderNestedSourceFileName[];
 void *memAlloc(u32 pool, u32 category, u32 options, u32 size,
                u32 alignment, u32 count);
 void rt_memclr(void *destination, u32 size);
@@ -24,7 +24,7 @@ ParticleInstanceA *FUN_002720d4(ParticleSourcePrefixA *source)
     count *= source->resource->capacity->countMultiplier;
     count = count > 300 ? 300 : count;
 
-    asdDebugTrace(DAT_00544b38, 450);
+    asdDebugTrace(g_effMiscHeaderNestedSourceFileName, 450);
     ParticleInstanceA *instance = static_cast<ParticleInstanceA *>(
         memAlloc(0x10000, 0x100, 0, sizeof(ParticleInstanceA), 0x10, 1));
     rt_memclr(instance, sizeof(ParticleInstanceA));

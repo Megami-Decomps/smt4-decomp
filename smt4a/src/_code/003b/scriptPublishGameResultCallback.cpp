@@ -2,12 +2,12 @@
 #include "game/GameStateA.h"
 
 extern "C" void scrSetResult(s32 result);
-extern "C" void FUN_003130cc(void);
+extern "C" void popupSelectGameResultEntries(void);
 
 /* Publish the game state's result and complete this operation. */
 extern "C" s32 scriptPublishGameResultCallback(void)
 {
     scrSetResult(g_gameState.unk0A4);
-    FUN_003130cc();
+    popupSelectGameResultEntries();
     return 1;
 }

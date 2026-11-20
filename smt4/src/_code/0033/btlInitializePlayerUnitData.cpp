@@ -4,7 +4,7 @@
 
 extern "C" {
 u16 playerDataValueAt(u32 index);
-s16 FUN_00257e40(u32 index);
+s16 playerGetAffinitySlotState(u32 index);
 s32 padGetStickHorizontalDirection();
 
 void btlInitializePlayerUnitData(u32, BtlUnitData *data, const PlayerDataIV *player)
@@ -32,9 +32,9 @@ void btlInitializePlayerUnitData(u32, BtlUnitData *data, const PlayerDataIV *pla
         unit->effects[index] = 0;
     for (s32 index = 0; index < 18; ++index) {
         unit->encoded[index].value = playerDataValueAt((u8)index);
-        unit->encoded[index].kind = FUN_00257e40((u8)index);
+        unit->encoded[index].kind = playerGetAffinitySlotState((u8)index);
         unit->initialEncoded[index].value = playerDataValueAt((u8)index);
-        unit->initialEncoded[index].kind = FUN_00257e40((u8)index);
+        unit->initialEncoded[index].kind = playerGetAffinitySlotState((u8)index);
     }
     unit->percentage = 100;
     s32 direction = padGetStickHorizontalDirection();

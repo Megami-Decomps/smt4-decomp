@@ -1,34 +1,36 @@
 #include "shard/W5_W5Match1_RecordKeys.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
-void FUN_00144564(f32 duration);
-void asdSnd3dSetOutputVolume(f32 duration);
-void FUN_00145048(f32 duration);
+void asdSnd3dSetManagerScalarA34(f32 value);
+void asdSnd3dSetOutputVolume(f32 value);
+void asdSnd3dSetManagerScalarA3C(f32 value);
 void soundApplyVolumeToSlots(u32 volume);
-void FUN_00151340(u32 resource);
+void asdSndEnsureCurrentSlotData(u32 soundId);
 void asdSoundSelectCurrentSlot(u32 slot);
-void sysMemClear(void *buffer, u32 size);
 void *jyoucyuGetTableEntry(u32 index);
 
 extern SoundVolumeState g_soundVolumeSetting;
 extern u32 g_eventQueueEntries[32];
 
-/* Initializes the persistent sound slots and clears queued sound events. */
+/* Unless the resident table's sound entry is set already, loads the resident sound data into sound slots
+ * 0, 1 and 3, sets the 3D sound scalars, applies the volume setting and clears the sound event queue. */
 void soundInitializePersistentSlots(void)
 {
     if (jyoucyuGetTableEntry(1) == NULL) {
         asdSoundSelectCurrentSlot(0);
-        FUN_00151340(0x6000000);
+        asdSndEnsureCurrentSlotData(0x6000000);
         asdSoundSelectCurrentSlot(1);
-        FUN_00151340(0x6000002);
+        asdSndEnsureCurrentSlotData(0x6000002);
         asdSoundSelectCurrentSlot(3);
-        FUN_00151340(0x6000001);
-        FUN_00144564(200.0f);
+        asdSndEnsureCurrentSlotData(0x6000001);
+        asdSnd3dSetManagerScalarA34(200.0f);
         asdSnd3dSetOutputVolume(800.0f);
-        FUN_00145048(250.0f);
+        asdSnd3dSetManagerScalarA3C(250.0f);
         soundApplyVolumeToSlots(g_soundVolumeSetting.volume);
         sysMemClear(g_eventQueueEntries, sizeof(g_eventQueueEntries));
         jyoucyuGetTableEntry(1);
     }
 }
-}
+
+} /* extern "C" */

@@ -12,14 +12,14 @@ extern TitleConfigValues g_titleConfigValues;
 
 void FUN_0013c874(u32 value);
 void soundVolumeSettingSet(u32 value);
-void FUN_0013dee0(u32 value);
+void titleConfigSetAudioFlag(u32 value);
 void soundSetVolumeSetting(u32 value);
 
 void titleConfigApply()
 {
     FUN_0013c874(g_titleConfigValues.first);
     soundVolumeSettingSet(g_titleConfigValues.second);
-    FUN_0013dee0(g_titleConfigValues.third);
+    titleConfigSetAudioFlag(g_titleConfigValues.third);
     soundSetVolumeSetting(g_titleConfigValues.fourth);
 }
 }

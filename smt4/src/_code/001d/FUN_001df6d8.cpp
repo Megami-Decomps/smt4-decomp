@@ -17,7 +17,7 @@ struct UniteAnimationView {
 };
 
 extern "C" {
-void FUN_00210194(void *object, f32 value);
+void modelOwnerApplyAnimationTime(void *object, f32 value);
 
 void FUN_001df6d8()
 {
@@ -26,8 +26,8 @@ void FUN_001df6d8()
         return;
     }
     UniteAnimationView *view = (UniteAnimationView *)work;
-    FUN_00210194(view->objectA, 480.0f);
-    FUN_00210194(view->objectB, 480.0f);
+    modelOwnerApplyAnimationTime(view->objectA, 480.0f);
+    modelOwnerApplyAnimationTime(view->objectB, 480.0f);
     ScalarAnimationChannel *channel = view->animation->channel;
     f32 value = channel->interpolate(channel->range, 480.0f, channel->work);
     channel->previous = channel->current;

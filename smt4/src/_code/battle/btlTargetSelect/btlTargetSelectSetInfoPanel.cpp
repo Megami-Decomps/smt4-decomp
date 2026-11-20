@@ -36,8 +36,8 @@ static __inline TargetInfoPanel *targetInfoPanel(BtlTargetSelect *selection)
 extern "C" {
 extern BtlTargetSelect *g_btlTargetSelect;
 const char *demonGetRaceLabel(u32, u32);
-u8 FUN_0029e9cc(u32);
-void FUN_002630e0(TargetInfoProjection *, u32, u32, const TargetInfoPosition *);
+u8 itemIsCollectedWithRelated(u32);
+void cameraProjectToScreen(TargetInfoProjection *, u32, u32, const TargetInfoPosition *);
 
 void btlTargetSelectSetInfoPanel(const TargetInfoPosition *position, u32 id, u32 option0, u32 option1,
                  u8 option2, u8 option3, u8 option4, u8 option5)
@@ -48,7 +48,7 @@ void btlTargetSelectSetInfoPanel(const TargetInfoPosition *position, u32 id, u32
     sprintf(targetInfoPanel(selection)->name, "%s", name);
     const char *category = demonGetRaceLabel(id, 0);
     sprintf(targetInfoPanel(selection)->categoryName, "%s", category);
-    targetInfoPanel(selection)->level = FUN_0029e9cc(id);
+    targetInfoPanel(selection)->level = itemIsCollectedWithRelated(id);
     targetInfoPanel(selection)->category = definition->level;
     for (u32 i = 0; i < 8; ++i)
         targetInfoPanel(selection)->resistances[i] = definition->resistances[i] >> 10;
@@ -63,7 +63,7 @@ void btlTargetSelectSetInfoPanel(const TargetInfoPosition *position, u32 id, u32
     panel->position.y = position->y;
     panel->position.z = position->z;
     TargetInfoProjection projected;
-    FUN_002630e0(&projected, 0, obj80Select(0), &panel->position);
+    cameraProjectToScreen(&projected, 0, obj80Select(0), &panel->position);
     panel->projected = projected;
     if (projected.x > 210.0f) {
         panel->side = 0;

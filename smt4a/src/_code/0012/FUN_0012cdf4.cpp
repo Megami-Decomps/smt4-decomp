@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e9f00(void *, int);
+int onlineInstanceCompleteWithChildren(void *, int);
 
 typedef struct fn_0012cdf4_arg0 fn_0012cdf4_arg0;
 struct fn_0012cdf4_arg0 {
@@ -27,7 +27,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002e9f00. */
+/* Supplied declaration required: onlineInstanceCompleteWithChildren. */
 
 
 void FUN_0012cdf4(fn_0012cdf4_arg0 *param_1)
@@ -40,7 +40,7 @@ void FUN_0012cdf4(fn_0012cdf4_arg0 *param_1)
   
   if (((param_1->field_0x24 != in_stack_00000000) || (param_1->field_0x28 != in_stack_00000008)) ||
      (param_1->field_0x2c != in_stack_0000000c)) {
-    FUN_002e9f00(param_1->field_0x8,4);
+    onlineInstanceCompleteWithChildren(param_1->field_0x8,4);
   }
   else {
     (**(romwright_code **)(**(int **)&param_1->field_0x4 + 8))();

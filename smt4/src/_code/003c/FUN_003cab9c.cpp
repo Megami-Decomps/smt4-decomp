@@ -1,4 +1,4 @@
-/* NON_MATCHING: contract fixes applied (owner->state passed to the slot helpers, FUN_003dc504(DAT_00435d18) result tested, shared result exit, action-data slot setter, case order); retail merges the command store of four case groups into one tail and loads the slot stride from the pool each time. */
+/* NON_MATCHING: contract fixes applied (owner->state passed to the slot helpers, FUN_003dc504(g_btlAux) result tested, shared result exit, action-data slot setter, case order); retail merges the command store of four case groups into one tail and loads the slot stride from the pool each time. */
 #include "common.h"
 #include "battle/btlUnit.h"
 #include "gamedata/SkillDataLookup.h"
@@ -59,7 +59,7 @@ struct DataTable40Record {
 };
 
 extern "C" {
-extern void *DAT_00435d18;
+extern void *g_btlAux;
 
 s32 objSlotStateIsActiveRange(TurnState *state, s32 slot);
 void slotResetIdle(TurnState *state, s32 slot, u32 value);
@@ -86,19 +86,19 @@ u32 FUN_003cab9c(TurnOwner *owner, TurnWork *work)
         work->phase = 1;
         /* fall through */
     case 1:
-        if (FUN_003dc504(DAT_00435d18) == 0) {
+        if (FUN_003dc504(g_btlAux) == 0) {
             return result;
         }
-        FUN_003da010(DAT_00435d18);
+        FUN_003da010(g_btlAux);
         work->phase = 2;
         return result;
     case 2:
-        if (FUN_003db7b4(DAT_00435d18) == 0) {
+        if (FUN_003db7b4(g_btlAux) == 0) {
             return result;
         }
         work->phase = 5;
         if ((owner->state->stateFlags & 4) == 0) {
-            FUN_003dcaac(DAT_00435d18, work->argument);
+            FUN_003dcaac(g_btlAux, work->argument);
         }
         break;
     case 5:

@@ -12,7 +12,7 @@ f32 FUN_001e27f8(const f32 *, const f32 *, const f32 *, f32, f32);
 
 void FUN_0021b0f0(void)
 {
-    DAT_004474f0.view->values[2] = 0.0f;
+    g_lmapViewHolder.view->values[2] = 0.0f;
     if (g_gameState.mapId == 25) {
         if (g_gameState.areaId == 3)
             return;
@@ -26,7 +26,7 @@ void FUN_0021b0f0(void)
         f32 vertexY[3] = { first.y, second.y, third.y };
         f32 vertexZ[3] = { first.z, second.z, third.z };
         MapSaveBlock *saved = gameGetMapBlock();
-        LmapView *work = DAT_004474f0.view;
+        LmapView *work = g_lmapViewHolder.view;
         s32 preset = work->preset;
         if (work->contextOverride != -1) {
             preset = work->contextOverride;
@@ -41,12 +41,12 @@ void FUN_0021b0f0(void)
             }
         }
         const f32 degreesToRadians = 0.017453292f;
-        f32 x = g_lmapScene->pose.position.x - mathRemPio2f(DAT_004474f0.view->heading * degreesToRadians) *
-                DAT_004474f0.view->rearDistance[preset];
-        f32 z = g_lmapScene->pose.position.z - libm_cosf(DAT_004474f0.view->heading * degreesToRadians) *
-                DAT_004474f0.view->rearDistance[preset];
+        f32 x = g_lmapScene->pose.position.x - mathRemPio2f(g_lmapViewHolder.view->heading * degreesToRadians) *
+                g_lmapViewHolder.view->rearDistance[preset];
+        f32 z = g_lmapScene->pose.position.z - libm_cosf(g_lmapViewHolder.view->heading * degreesToRadians) *
+                g_lmapViewHolder.view->rearDistance[preset];
         f32 height = FUN_001e27f8(vertexX, vertexY, vertexZ, x, z);
-        DAT_004474f0.view->values[2] = height - g_lmapScene->pose.position.y;
+        g_lmapViewHolder.view->values[2] = height - g_lmapScene->pose.position.y;
     }
 }
 }

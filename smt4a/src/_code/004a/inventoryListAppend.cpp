@@ -15,14 +15,14 @@ struct InventoryList {
 };
 
 extern "C" {
-s32 FUN_002a4b28(u16 id);
+s32 compendiumEntryIsRegistered(u16 id);
 
 // Append an inventory record and update the special-entry count.
 void inventoryListAppend(InventoryList *list, const InventoryEntry *entry)
 {
     list->entries[list->count] = *entry;
     ++list->count;
-    if (FUN_002a4b28(entry->id) != 0) {
+    if (compendiumEntryIsRegistered(entry->id) != 0) {
         ++list->specialCount;
     }
 }

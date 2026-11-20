@@ -17,7 +17,7 @@ extern "C" {
 extern BtlStage* g_btlStage;
 void nn_os_CriticalSection_Enter(CriticalSection* section);
 void nn_os_CriticalSection_Leave(CriticalSection* section);
-void FUN_003400f0(StageRequest* request, s32 width, s32 height, u32 flags);
+void btlStageModelLoad(StageRequest* request, s32 width, s32 height, u32 flags);
 
 static __inline void stageRequestSubmit(StageRequest* request)
 {
@@ -30,7 +30,7 @@ static __inline void stageRequestSubmit(StageRequest* request)
         height = 1;
     }
     request->stage = g_btlStage;
-    FUN_003400f0(request, width, height, 0x1c0);
+    btlStageModelLoad(request, width, height, 0x1c0);
 }
 
 // Queues stage work under the embedded lock, using a 1x1 extent for negative dimensions.

@@ -7,7 +7,7 @@ u32 getByteTableAValue(void);
 void byteTableASetValue(u32 value);
 u32 byteTableAGetValue3(void);
 void byteTableASetValue3(u32 value);
-s32 FUN_00162ea4(void);
+s32 eventIsSkipping(void);
 void titleSetSlotValueState2(s32 display, s32 mode);
 
 void messageSlotSet(s32 slot);
@@ -25,7 +25,7 @@ u32 FUN_002dfa18(void)
             byteTableASetValue3(0);
             byteTableASetValue(0);
         }
-        if (getByteTableAValue() && !FUN_00162ea4()) {
+        if (getByteTableAValue() && !eventIsSkipping()) {
             titleSetSlotValueState2(0, 5);
             titleSetSlotValueState2(1, 5);
             byteTableASetValue(0);

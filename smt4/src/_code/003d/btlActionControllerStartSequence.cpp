@@ -20,8 +20,8 @@ struct ActionControllerEffects {
 
 extern "C" {
 void screenFadeResetAndRelease(ScreenOwner *owner);
-ActionSequence *FUN_00337ba0(BtlMainState *battle, u32 firstId, u32 secondId);
-ActionTrack *FUN_003383a4(BtlMainState *battle, s16 kind);
+ActionSequence *tableFileFindByKeyPair(BtlMainState *battle, u32 firstId, u32 secondId);
+ActionTrack *tableFileGetSlotEntry(BtlMainState *battle, s16 kind);
 u32 shakeEffectAlloc();
 
 void btlActionControllerStartSequence(ActionControllerEffects *work, u32 firstId, u32 secondId)
@@ -31,7 +31,7 @@ void btlActionControllerStartSequence(ActionControllerEffects *work, u32 firstId
     work->ids.secondId = secondId;
     work->controller.flags |= 0x4000;
     BtlMainState *battle = btlGetMainState();
-    ActionSequence *sequence = FUN_00337ba0(battle, firstId, secondId);
+    ActionSequence *sequence = tableFileFindByKeyPair(battle, firstId, secondId);
     if (!sequence) {
         work->controller.state = 13;
         return;
@@ -39,7 +39,7 @@ void btlActionControllerStartSequence(ActionControllerEffects *work, u32 firstId
     work->controller.state = 1;
     s16 kind = sequence->kind;
     work->ids.kind = kind;
-    work->controller.tracks = FUN_003383a4(battle, kind);
+    work->controller.tracks = tableFileGetSlotEntry(battle, kind);
     work->controller.sequence = sequence;
     if (sequence->flags & 2) {
         work->firstShake = shakeEffectAlloc();

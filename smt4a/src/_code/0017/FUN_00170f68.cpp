@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0015a318(...);
-int FUN_0015a400(int);
+int appletSetUnlockFlag(int);
 int FUN_0015a440(int);
 int FUN_0015adc4(void);
 int FUN_0016e6b8(void);
@@ -15,7 +15,7 @@ int FUN_00170e58(void);
 int FUN_00170e6c(int);
 int FUN_00170ebc(...);
 int FUN_001716ac(int);
-int FUN_00189a38(int, int);
+int errThrowFatal(int, int);
 int FUN_0018bd50(unsigned int *, int [5], unsigned int, unsigned int, int *, int *, unsigned int, unsigned int);
 
 typedef int romwright_code(...);
@@ -40,7 +40,7 @@ extern romwright_code *DAT_0058923c; /* 0x58923c */
 extern unsigned int DAT_0058927c; /* 0x58927c */
 
 /* Supplied declaration required: FUN_0015a318. */
-/* Supplied declaration required: FUN_0015a400. */
+/* Supplied declaration required: appletSetUnlockFlag. */
 /* Supplied declaration required: FUN_0015a440. */
 /* Supplied declaration required: FUN_0015adc4. */
 /* Supplied declaration required: FUN_0016e6b8. */
@@ -52,7 +52,7 @@ extern int FUN_00170464(void);
 /* Supplied declaration required: FUN_00170ebc. */
 extern int FUN_001713a0(void);
 /* Supplied declaration required: FUN_001716ac. */
-/* Supplied declaration required: FUN_00189a38. */
+/* Supplied declaration required: errThrowFatal. */
 /* Supplied declaration required: FUN_0018bd50. */
 extern void nn_applet_CTR_detail_LockTransition(unsigned int, unsigned char);
 extern void nn_applet_CTR_detail_NotifyToWait(void);
@@ -159,7 +159,7 @@ LAB_001710dc:
     FUN_00170ebc(1);
     temp_v2 = FUN_001713a0();
     if (temp_v2 < 0) {
-      FUN_00189a38(temp_v2,0x171174);
+      errThrowFatal(temp_v2,0x171174);
     }
   }
   if (temp_v5 == 0xe) {
@@ -189,7 +189,7 @@ LAB_001711e8:
         }
         else {
           temp_v5 = 7;
-          FUN_0015a400(1);
+          appletSetUnlockFlag(1);
           FUN_0015a440(1);
         }
       }
@@ -251,7 +251,7 @@ LAB_001712c4:
     }
     temp_v1 = FUN_0015a318();
     if ((temp_v1 == 0) && (temp_v5 != 7)) {
-      FUN_0015a400(0);
+      appletSetUnlockFlag(0);
       nn_applet_CTR_detail_UnlockTransition(1);
       nn_applet_CTR_detail_SleepIfShellClosed();
     }

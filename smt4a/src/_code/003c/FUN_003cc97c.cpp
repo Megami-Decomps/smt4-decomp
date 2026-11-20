@@ -15,7 +15,7 @@ struct WaitObject {
 
 extern "C" {
 
-s32 FUN_0019a364(u32 *out, u32 handle, s32 value);
+s32 svcReleaseSemaphore(u32 *out, u32 handle, s32 value);
 void svcSleepThread(nn::fnd::TimeSpan span);
 
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
@@ -31,7 +31,7 @@ void FUN_003cc97c(WaitObject *object, u32 state)
     }
     object->signal = -1;
     object->state = state;
-    s32 started = FUN_0019a364(&reply, object->handle, 1);
+    s32 started = svcReleaseSemaphore(&reply, object->handle, 1);
     failed = nnResultIsFailure(started);
     if (failed) {
         resultHandleFailure(started, failed);

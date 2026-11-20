@@ -4,7 +4,7 @@
 using nw::math::MTX44;
 
 extern "C" {
-extern const char DAT_0041490c[];
+extern const char g_effGeomEngineSourceFileName[];
 void *memAlloc(u32 size, u32 alignment, u32 region, u32 heap, u32 pageSize, u32 flags);
 void mtx44Copy(MTX44 *dest, const MTX44 *source);
 void *poolCreate(u32 count, u32 type);
@@ -21,7 +21,7 @@ EffGeomBuffer *effGeomBufferCreate(u32 count, u32 flags, u32 owner)
     if (flags & EFF_GEOM_ATTR_80) stride += 0x10;
     u32 dataBytes = stride * count + 16;
 
-    asdDebugTrace(DAT_0041490c, 99);
+    asdDebugTrace(g_effGeomEngineSourceFileName, 99);
     EffGeomBuffer *buffer = (EffGeomBuffer *)memAlloc(0x10000, 0x100, 0, dataBytes + sizeof(EffGeomBuffer), 16, 1);
     MTX44 *transform = &buffer->transform;
     mtx44Copy(transform, &MTX44::Identity());

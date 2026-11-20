@@ -10,7 +10,7 @@ extern "C" {
 s32 FUN_00176474(AocSystemA *system);
 s32 sysLightEventTryWait(LightEvent *event);
 void aocReleasePackageOwner(AocSystemA *system);
-void FUN_001b3428(u32 *waitHandle);
+void nnOsThreadImplDestroy(u32 *waitHandle);
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
 
 /* The AOC job step: once the operation it started is acknowledged and its event is signalled,
@@ -39,7 +39,7 @@ u32 FUN_0015f0f4(u32 job)
         nnResultFields code;
         code.value = result;
         if (code.fields.description != 0x3fe && work->requestId == work->completedId) {
-            FUN_001b3428(&work->waitHandle);
+            nnOsThreadImplDestroy(&work->waitHandle);
         }
     }
     return 0;

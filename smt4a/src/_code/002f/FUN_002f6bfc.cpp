@@ -4,8 +4,8 @@ extern "C" {
 
 void strAssign(u32 dest, u8 *source, s32 length, u32 flags);
 void FUN_002ea668(u8 *object);
-void FUN_002ea6bc(u8 *object, s32 data, u32 size);
-void FUN_002ea6cc(u8 *object);
+void lazyStaticInitOnce(u8 *object, s32 data, u32 size);
+void lazyMemberInitOnce(u8 *object);
 
 typedef struct DataRange {
     /* 0x00 */ u8 unk00[0x0C];
@@ -22,8 +22,8 @@ u32 FUN_002f6bfc(u32 unused, DataRange *range, u32 dest)
     u8 text[20];
 
     FUN_002ea668(object);
-    FUN_002ea6bc(object, range->base + range->offset, range->size);
-    FUN_002ea6cc(object);
+    lazyStaticInitOnce(object, range->base + range->offset, range->size);
+    lazyMemberInitOnce(object);
     strAssign(dest, text, 0x10, 0xFFFFFFFF);
     return 1;
 }

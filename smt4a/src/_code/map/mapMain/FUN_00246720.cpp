@@ -70,12 +70,12 @@ extern "C" {
 extern MapMainBlockA *g_mapMain;
 extern u32 g_handleRegistry;
 
-void FUN_002c23cc(s32 mode);
+void frameTexConfigureCaptureTextures(s32 mode);
 void mapEplAlloc(void);
 void mapEplSlotsInit(void);
 void FUN_002496b8(void);
 void FUN_002442ac(void);
-void FUN_0020ef94(void);
+void mapControllerWorkReset(void);
 void mapDepartResetWork(void);
 void mapObjectResetSlots(void);
 void mapGimmickResetControllers(void);
@@ -97,7 +97,7 @@ void FUN_00246720(void)
     g_mapMain = (MapMainBlockA *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(MapMainBlockA), 1);
     MapMainBlockA *map = g_mapMain;
     MapSaveBlockA *flagsBlock = gameFlagsGetBlock();
-    FUN_002c23cc(1);
+    frameTexConfigureCaptureTextures(1);
     map->flag0D = 0;
     map->flag0E = 0;
     map->flag0F = 0;
@@ -137,7 +137,7 @@ void FUN_00246720(void)
     mapEplSlotsInit();
     FUN_002496b8();
     FUN_002442ac();
-    FUN_0020ef94();
+    mapControllerWorkReset();
     mapDepartResetWork();
     mapObjectResetSlots();
     mapGimmickResetControllers();

@@ -1,6 +1,6 @@
 #include "gfx/VectorScratch.h"
 extern "C" {
-f32 FUN_001b63b0(f32);
+f32 phaseCosine(f32);
 f32 FUN_001a1ee0(f32);
 void matrix44SetIdentity(Matrix44*);
 
@@ -8,7 +8,7 @@ void matrix44SetIdentity(Matrix44*);
 void FUN_00514878(f32 angle)
 {
     f32 phase = angle * 40.743664f;
-    f32 cosine = FUN_001b63b0(phase);
+    f32 cosine = phaseCosine(phase);
     f32 sine = FUN_001a1ee0(phase);
     Matrix44 matrix;
     matrix44SetIdentity(&matrix);

@@ -9,12 +9,12 @@ typedef struct Sub10Owner {
     /* 0x10 */ u8 block10[4];
 } Sub10Owner;
 
-extern u8 FUN_00228b04(u8 *block, s32 a);
+extern u8 gridNavigationHandleConfirm(u8 *block, s32 a);
 
 void sub10OwnerStart(Sub10Owner *obj)
 {
     if (obj->unk08 != 0) {
-        FUN_00228b04(obj->block10, 1);
+        gridNavigationHandleConfirm(obj->block10, 1);
     }
 }
 

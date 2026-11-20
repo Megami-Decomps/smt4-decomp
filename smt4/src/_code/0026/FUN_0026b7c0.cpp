@@ -5,8 +5,8 @@
 extern "C" {
 void FUN_00298d28(u32 a, u32 b);
 s32 appGetRemainingCapacity(u16 action);
-s32 FUN_0029a9d4(u16 action, u32 mode);
-s32 FUN_002621b4(u32 user, s32 target, u32 action, s32 *result);
+s32 skillGetDiscountedCost(u16 action, u32 mode);
+s32 skillApplyToTarget(u32 user, s32 target, u32 action, s32 *result);
 s32 partyWidgetGetX(void *widget);
 s32 partyWidgetGetCost(void *widget);
 void partyWidgetSetValue(void *widget, s32 value);
@@ -18,7 +18,7 @@ void FUN_0026b7c0(void)
     const SaveSlotTableIV *slots = gameGetSlotTable();
     s32 result = 0;
     if (panel->selection < 0) {
-        partyWidgetSetCost(panel->characters[0], -FUN_0029a9d4(panel->previewItem, 1));
+        partyWidgetSetCost(panel->characters[0], -skillGetDiscountedCost(panel->previewItem, 1));
     } else {
         for (s32 index = 0; index < 3; ++index) {
             if (slots->active[index] == panel->selection)
@@ -30,18 +30,18 @@ void FUN_0026b7c0(void)
         }
     }
     if (panel->activeSlots[0]) {
-        FUN_002621b4(panel->selection, -1, panel->previewItem, &result);
+        skillApplyToTarget(panel->selection, -1, panel->previewItem, &result);
         partyWidgetSetValue(panel->characters[0], result);
     }
     for (s32 index = 0; index < 3; ++index) {
         if (slots->active[index] >= 0) {
-            FUN_002621b4(panel->selection, slots->active[index], panel->previewItem, &result);
+            skillApplyToTarget(panel->selection, slots->active[index], panel->previewItem, &result);
             partyWidgetSetValue(panel->characters[index + 1], result);
         }
     }
     for (s32 index = 0; index < 24; ++index) {
         if (static_cast<s32>(panel->entries[index].packedIndex) >= 0) {
-            FUN_002621b4(panel->selection, static_cast<s32>(panel->entries[index].packedIndex), panel->previewItem, &result);
+            skillApplyToTarget(panel->selection, static_cast<s32>(panel->entries[index].packedIndex), panel->previewItem, &result);
             partyWidgetSetValue(panel->demons[index], result);
         }
     }

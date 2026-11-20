@@ -18,7 +18,7 @@ void pair40Set(Obj *obj, u32 a, u32 b);
 
 u32 FUN_00297ca4(BattleCommandMenu *menu, s32 confirm);
 
-void FUN_00295214(u8 value);
+void buttonHelpSetTextVisible(u8 value);
 
 void FUN_0029c4e4(u32 value, int copy);
 
@@ -46,7 +46,7 @@ void debugDrawText(u32 color, f32 x, f32 y, f32 alpha, const char* text);
 
 u32 FUN_00299fc0(void);
 
-u32 FUN_00294fe0(Obj *obj);
+u32 aocTextureEntryLoadOnce(Obj *obj);
 
 u8 useCounterIsFinished(void);
 

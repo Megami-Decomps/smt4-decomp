@@ -32,7 +32,7 @@ typedef char SpriteDrawParametersSizeCheck[sizeof(SpriteDrawParameters) == 0x3C 
 
 extern "C" {
 TexNode *asdTMTexTableGetNode(u32, u32);
-void FUN_001ab8e0(SpriteDrawParameters *, u32, u32, u32, u32);
+void requestParamsInitialize(SpriteDrawParameters *, u32, u32, u32, u32);
 void FUN_0047ce24(SpriteBank *, SpriteFrame *, SpriteDrawParameters *);
 
 void spriteDrawFromTextureTable(SpriteBank **banks, u32 flags, u32 table, u32 node,
@@ -44,7 +44,7 @@ void spriteDrawFromTextureTable(SpriteBank **banks, u32 flags, u32 table, u32 no
     SpriteFrame *frame = &bank->list->frames[spriteId % 1000];
     SpriteSizeOverride *size = frame->size;
     SpriteDrawParameters parameters;
-    FUN_001ab8e0(&parameters, flags, color, xBits, yBits);
+    requestParamsInitialize(&parameters, flags, color, xBits, yBits);
     if (size != NULL) {
         if (size->mode == 0 && (size->flags & 1)) {
             parameters.flags |= 0x8000;

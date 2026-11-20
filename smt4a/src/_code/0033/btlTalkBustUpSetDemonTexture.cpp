@@ -8,7 +8,7 @@ extern "C" {
 s32 texTableRequestNamedTextureLoad(u32 system, s32 group, u32 node, s32 flags);
 s32 asdTMTexLoadMainHeap(s32 group, u32 node);
 void uiSpriteScreenSetupForMode(BtlTalkBustUp *portrait);
-void FUN_003d44ac(BtlTalkBustUp *portrait);
+void btlTalkBustUpApplyTexturePlacement(BtlTalkBustUp *portrait);
 s32 aocRunByName(u32 system, u32 group, u32 node, u32 mode);
 extern u32 g_aocSystem;
 
@@ -35,7 +35,7 @@ void btlTalkBustUpSetDemonTexture(u32 demonId, s32 deferred)
             } else {
                 asdTMTexTablePrepareNodeImage(0x10, portrait->textureNode);
             }
-            FUN_003d44ac(portrait);
+            btlTalkBustUpApplyTexturePlacement(portrait);
             uiSpriteScreenSetupForMode(portrait);
             portrait->state = 2;
             portrait->stateCounter = 0;

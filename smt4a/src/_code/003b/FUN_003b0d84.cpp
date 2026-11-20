@@ -5,9 +5,9 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-s32 FUN_003020fc(BtlCombatantEntryA *entry, u32 value);
+s32 btlCombatantMatchesCategory(BtlCombatantEntryA *entry, u32 value);
 
-/* Script check: report whether a candidate battle entry with demon id argument 0 passes FUN_003020fc with argument 1. */
+/* Script check: report whether a candidate battle entry with demon id argument 0 passes btlCombatantMatchesCategory with argument 1. */
 u32 FUN_003b0d84(void)
 {
     u32 id = scrGetArg(0);
@@ -18,7 +18,7 @@ u32 FUN_003b0d84(void)
         if (g_btlCandidateMasks.unavailable & (entry->flags) &&
             (g_btlCandidateMasks.required & entry->flags) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
-            entry->data.id == id && FUN_003020fc(entry, value)) {
+            entry->data.id == id && btlCombatantMatchesCategory(entry, value)) {
             scrSetResult(1);
             return 1;
         }

@@ -8,7 +8,7 @@ int padQueryLogicalKey(...);
 int eventQueueAddUniqueIfValid(int);
 int uiSpriteSetKeyframe(int, int, int);
 int uiSpriteSetImageKeyframe(int, int, int);
-int FUN_00228b04(int, int);
+int gridNavigationHandleConfirm(int, int);
 int scrScriptProcessStartEntry(...);
 int flaggedEntrySetValueA(...);
 int uiScrollHandleActionsOrTouch(int, int, int, unsigned int, unsigned int, unsigned int, char [4], int, int);
@@ -25,7 +25,7 @@ typedef struct {
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_00228b04. */
+/* Supplied declaration required: gridNavigationHandleConfirm. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: flaggedEntrySetValueA. */
@@ -43,7 +43,7 @@ void FUN_002f7f6c(int param_1)
   temp_v2[0] = '\0';
   temp_v0 = listCursorGetRowIfUnblocked(param_1 + 0x2500);
   temp_v1 = param_1 + 0x2500;
-  FUN_00228b04(temp_v1,1);
+  gridNavigationHandleConfirm(temp_v1,1);
   if (temp_v1 == 0) {
     temp_v1 = param_1 + 0x2500;
     uiScrollHandleActionsOrTouch(temp_v1,0,param_1 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2,0,1);

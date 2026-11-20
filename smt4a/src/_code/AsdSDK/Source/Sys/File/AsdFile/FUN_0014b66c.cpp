@@ -11,12 +11,12 @@ int svcSleepThread(...);
 int syncWaitHandleForever(int *);
 int refIsNullOrZero(int *);
 int asdMemoryAllocTraced(int, unsigned char *, int);
-int FUN_001858ec(...);
+int asdFileAllocZeroedBuffer(...);
 int asdFileHashPackReadRequest(int, int *);
 int archivePathDeviceOpen(char *, int *, unsigned int);
 int vcallSlot12IfValid(...);
 int sysFatalBreak(void);
-int FUN_0019a364(...);
+int svcReleaseSemaphore(...);
 int nn_os_LightEvent_Wait(unsigned int *);
 int resultHandleFailure(void);
 int FUN_002e3c44(int *, int *, int, int *);
@@ -45,13 +45,13 @@ extern unsigned int g_asdFileEvent; /* 0x5b3fd4 */
 extern int FUN_00100836(int *, unsigned int, unsigned int *);
 extern int asdFileHashPackTryReadRequest(int *);
 /* Supplied declaration required: asdMemoryAllocTraced. */
-/* Supplied declaration required: FUN_001858ec. */
+/* Supplied declaration required: asdFileAllocZeroedBuffer. */
 extern int asdFileHashPackIsOpen(void);
 /* Supplied declaration required: asdFileHashPackReadRequest. */
 /* Supplied declaration required: archivePathDeviceOpen. */
 /* Supplied declaration required: vcallSlot12IfValid. */
 /* Supplied declaration required: sysFatalBreak. */
-/* Supplied declaration required: FUN_0019a364. */
+/* Supplied declaration required: svcReleaseSemaphore. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: nn_os_LightEvent_ClearSignal. */
 /* Supplied declaration required: nn_os_LightEvent_Wait. */
@@ -89,7 +89,7 @@ void FUN_0014b66c(void)
     syncWaitHandleForever(&g_asdFileMutex);
     piVar8 = DAT_005b3fbc;
     piVar4 = &temp_v3;
-    FUN_0019a364(&temp_v3,g_asdFileMutex,1);
+    svcReleaseSemaphore(&temp_v3,g_asdFileMutex,1);
     while( 1 ) {
       if ((int)piVar4 < 0) {
         resultHandleFailure();
@@ -107,7 +107,7 @@ void FUN_0014b66c(void)
           (*(romwright_code *)piVar8[0x4e])(piVar8 + 0xb);
           piVar8[0x4e] = 0;
           piVar4 = &temp_v3;
-          FUN_0019a364(&temp_v3,g_asdFileMutex,1);
+          svcReleaseSemaphore(&temp_v3,g_asdFileMutex,1);
           if ((int)piVar4 < 0) {
             resultHandleFailure();
           }
@@ -198,7 +198,7 @@ void FUN_0014b66c(void)
                       temp_v4 = piVar8 + 0xb;
                       uStack_244 = 1;
                       temp_v1 = 0x100;
-                      FUN_001858ec(0x100,0x100,0,piVar8[6]);
+                      asdFileAllocZeroedBuffer(0x100,0x100,0,piVar8[6]);
                       piVar8[3] = temp_v1;
                     }
                     else {
@@ -206,7 +206,7 @@ void FUN_0014b66c(void)
                       temp_v4 = piVar8 + 0xb;
                       uStack_244 = 0;
                       temp_v1 = 0x10000;
-                      FUN_001858ec(0x10000,0x100,0,piVar8[6]);
+                      asdFileAllocZeroedBuffer(0x10000,0x100,0,piVar8[6]);
                       piVar8[3] = temp_v1;
                     }
                   }
@@ -215,7 +215,7 @@ void FUN_0014b66c(void)
                     temp_v4 = piVar8 + 0xb;
                     uStack_244 = 1;
                     temp_v1 = 0x10000;
-                    FUN_001858ec(0x10000,0x100,0,piVar8[6]);
+                    asdFileAllocZeroedBuffer(0x10000,0x100,0,piVar8[6]);
                     piVar8[3] = temp_v1;
                   }
                 }
@@ -224,7 +224,7 @@ void FUN_0014b66c(void)
                   temp_v4 = piVar8 + 0xb;
                   uStack_244 = 0;
                   temp_v1 = 0x100;
-                  FUN_001858ec(0x100,0x100,0,piVar8[6]);
+                  asdFileAllocZeroedBuffer(0x100,0x100,0,piVar8[6]);
                   piVar8[3] = temp_v1;
                 }
               }
@@ -267,7 +267,7 @@ void FUN_0014b66c(void)
           }
           (*(romwright_code *)piVar8[0x51])(piVar8[0x52],piVar8);
           piVar4 = &temp_v3;
-          FUN_0019a364(&temp_v3,g_asdFileMutex,1);
+          svcReleaseSemaphore(&temp_v3,g_asdFileMutex,1);
           if ((int)piVar4 < 0) {
             resultHandleFailure();
           }
@@ -283,7 +283,7 @@ void FUN_0014b66c(void)
           }
           (*(romwright_code *)piVar8[0x4c])(piVar4);
           piVar4 = &temp_v3;
-          FUN_0019a364(&temp_v3,g_asdFileMutex,1);
+          svcReleaseSemaphore(&temp_v3,g_asdFileMutex,1);
           if ((int)piVar4 < 0) {
             resultHandleFailure();
           }
@@ -294,7 +294,7 @@ void FUN_0014b66c(void)
         }
         piVar8 = (int *)piVar8[0x53];
         piVar4 = &temp_v3;
-        FUN_0019a364(&temp_v3,g_asdFileMutex,1);
+        svcReleaseSemaphore(&temp_v3,g_asdFileMutex,1);
       }
       else {
         software_interrupt(0x24);
@@ -305,7 +305,7 @@ void FUN_0014b66c(void)
         piVar8[1] = temp_v0 - piVar8[2];
         if (0 < temp_v0 - piVar8[2]) {
           piVar4 = &temp_v3;
-          FUN_0019a364(&temp_v3,g_asdFileMutex,1);
+          svcReleaseSemaphore(&temp_v3,g_asdFileMutex,1);
           if ((int)piVar4 < 0) {
             resultHandleFailure();
           }
@@ -315,7 +315,7 @@ void FUN_0014b66c(void)
           }
           piVar8 = (int *)piVar8[0x53];
           piVar4 = &temp_v3;
-          FUN_0019a364(&temp_v3,g_asdFileMutex,1);
+          svcReleaseSemaphore(&temp_v3,g_asdFileMutex,1);
           continue;
         }
         temp_v0 = piVar8[0x54];
@@ -338,7 +338,7 @@ void FUN_0014b66c(void)
         piVar8[3] = 0;
         asdMemFree(piVar8);
         piVar4 = &temp_v3;
-        FUN_0019a364(&temp_v3,g_asdFileMutex,1);
+        svcReleaseSemaphore(&temp_v3,g_asdFileMutex,1);
         piVar8 = piVar7;
       }
     }

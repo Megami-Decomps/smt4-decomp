@@ -75,7 +75,7 @@ u32 asdListBoxCreate(u32 parent, s32 group, s32 x, s32 y, s32 flags);
 void FUN_00192a9c(const Point2 *position, const u32 *handle, u32 value);
 u32 textMeasureFixedWidth(const char *text);
 void jobSetWork7C(u32 list, void (*draw)(const Point2 *, const u32 *, u32), u32 (*measure)(const char *));
-void FUN_002271e8(u32 list, s32 width, s32 height);
+void debugEditorListSetCellSize(u32 list, s32 width, s32 height);
 void asdListBoxAddItem(u32 list, const char *text);
 u32 asdListBoxGetSelectedItemId(u32 list);
 const char *btlPosArrangeGetFilePath(BtlMainState *state);
@@ -83,7 +83,7 @@ char *libc_strcpy(char *destination, const char *source);
 s32 asdLoadFileGetUseRawPaths(void);
 void asdLoadFileSetUseRawPaths(s32 enabled);
 EditorUnitPosition *FUN_0033a5ec(BtlMainState *state, s32 unit);
-void FUN_003d8a18(BattleDebugEditorJob *job, BtlMainState *state);
+void btlDebugEditorRestoreSelection(BattleDebugEditorJob *job, BtlMainState *state);
 void FUN_003d8b34(BattleDebugEditorJob *job, BtlMainState *state, u32 parent);
 void FUN_003d9628(BattleDebugEditorJob *job, BtlMainState *state, const PosArrangeFile *file);
 void btlDebugNavigateActionEditor(BattleDebugEditorJob *job, BtlMainState *state);
@@ -94,7 +94,7 @@ static __inline void debugListCreate(BattleDebugEditorJob *job, BtlMainState *st
 {
     job->list = asdListBoxCreate(state->editor.job, 0xEB, 16, 32, 4);
     jobSetWork7C(job->list, FUN_00192a9c, textMeasureFixedWidth);
-    FUN_002271e8(job->list, 12, 16);
+    debugEditorListSetCellSize(job->list, 12, 16);
 }
 
 /* The first menu: three entries. */
@@ -215,7 +215,7 @@ u32 btlDebugEditorStep(BattleDebugEditorJob *job, BtlMainState *state)
             u32 selected = asdListBoxGetSelectedItemId(job->list);
             debugListClose(job);
             if (selected == 0) {
-                FUN_003d8a18(job, state);
+                btlDebugEditorRestoreSelection(job, state);
                 job->state = 3;
                 break;
             } else if (selected == 1) {

@@ -36,7 +36,7 @@ enum {
 
 void campReleaseScreenTouchRegions(GridNavigation *list, s32 flag);
 void campUpdateCategoryHighlightColors(void);
-void FUN_00299900(s32 arg);
+void campListShowSelectedHelp(s32 arg);
 void FUN_00298ad8(void);
 void FUN_00298d0c(u32 value);
 void beginStatusPanelClose(void);
@@ -49,9 +49,9 @@ void sortMenuCreate(s32 id, s32 arg);
 void buttonHelpSetText(s32 a, u32 color);
 u8 buttonHelpStartScript(u32 value);
 s32 resourceRunOperationIfUnblocked(GridNavigation *list);
-s32 FUN_0029efd8(GridNavigation *list, s32 flag);
+s32 gridNavigationHandleConfirm(GridNavigation *list, s32 flag);
 s32 uiScrollHandleActionsOrTouch(GridNavigation *list, const TextureTableEntryIV *touchArea, s16 *rowRegions, s32 thumbRegion, s32 previousRegion, s32 nextRegion, s8 *touched, s32 a, s32 b);
-s32 FUN_002c1658(s32 button, s32 mode);
+s32 inputQueryButtonState(s32 button, s32 mode);
 u8 buttonHelpGetStatus(void);
 s32 FUN_002987d8(s32 unit, s32 skill);
 s32 FUN_00298848(u32 skill, s32 unit);
@@ -80,7 +80,7 @@ static void showSelectedSkillCost(void)
     s32 cost;
 
     if (camp->skills[index].unit < 0) {
-        cost = FUN_0029a9d4(camp->skills[index].skill, 1);
+        cost = skillGetDiscountedCost(camp->skills[index].skill, 1);
     } else {
         cost = appGetRemainingCapacity(camp->skills[index].skill);
     }
@@ -100,7 +100,7 @@ static __inline void campRestoreMenuGroup(CampState *camp)
 /* Shows the help of the menu entry the cursor is on. */
 static __inline void campRefreshEntryHelp(CampState *camp)
 {
-    FUN_00299900(dataTable15GetUnlockedEntryId(camp->menuGroup, objectPartRunUnlessLocked(&camp->menuGrid)));
+    campListShowSelectedHelp(dataTable15GetUnlockedEntryId(camp->menuGroup, objectPartRunUnlessLocked(&camp->menuGrid)));
 }
 
 /* Whether the skill's user can act: the player must not be down; a demon must exist and have none of
@@ -125,7 +125,7 @@ static __inline void campPaySkillCost(CampState *camp, s32 row)
 {
     if (camp->skills[row].unit < 0) {
         PlayerDataIV *player = gameGetPlayerData();
-        player->mp -= FUN_0029a9d4(camp->skills[row].skill, 1);
+        player->mp -= skillGetDiscountedCost(camp->skills[row].skill, 1);
         if (player->mp < 0) {
             player->mp = 0;
         }
@@ -147,7 +147,7 @@ void campSkillListUpdate(void)
     switch (camp->phase) {
     case 0:
         showSelectedSkillCost();
-        FUN_00299bc4(&camp->grids[3], 1);
+        campListRegisterTouchRegions(&camp->grids[3], 1);
         camp->phase++;
         /* fall through */
     case 1:
@@ -156,13 +156,13 @@ void campSkillListUpdate(void)
         return;
     }
 
-    if ((s32)FUN_0029ee54(&camp->grids[3]) <= 0) {
+    if ((s32)gridNavigationGetItemCount(&camp->grids[3]) <= 0) {
         /* The list is empty: only cancel works. */
-        if (FUN_002c1658(1, 1)) {
+        if (inputQueryButtonState(1, 1)) {
             campReleaseScreenTouchRegions(&camp->grids[3], 1);
             beginStatusPanelClose();
             FUN_00298d0c(0);
-            FUN_00299900(0);
+            campListShowSelectedHelp(0);
             timerStart(&camp->sprites[1], 3, 0);
             camp->returnState = 6;
             campChangeState(5);
@@ -197,7 +197,7 @@ void campSkillListUpdate(void)
             /* The party panel took the input: hand the screen over to it. */
             FUN_0029acb0();
             campReleaseScreenTouchRegions(&camp->grids[3], 1);
-            for (s32 i = 0; i < (s32)FUN_0029d644(&camp->grids[3]); i++) {
+            for (s32 i = 0; i < (s32)uiListGetVisibleCount(&camp->grids[3]); i++) {
                 ifTouchRegionRemove();
                 camp->touch.rowRegions[i] = -1;
             }
@@ -223,12 +223,12 @@ void campSkillListUpdate(void)
             showSelectedSkillCost();
             return;
         }
-        if (FUN_0029efd8(&camp->grids[3], 1)) {
+        if (gridNavigationHandleConfirm(&camp->grids[3], 1)) {
             campRefreshEntryHelp(camp);
             showSelectedSkillCost();
             return;
         }
-        if ((FUN_002c1658(0, 1) | touched) && FUN_0029dfa8()) {
+        if ((inputQueryButtonState(0, 1) | touched) && FUN_0029dfa8()) {
             if (FUN_00298848(camp->skills[row].skill, static_cast<s16>(camp->skills[row].unit)) &&
                 FUN_002987d8(camp->skills[row].unit, camp->skills[row].skill) &&
                 campSkillUserCanAct(&camp->skills[row])) {
@@ -246,7 +246,7 @@ void campSkillListUpdate(void)
                     buttonHelpStartScript(0);
                     campChangeState(0x35);
                     buttonHelpSetPreset(0x9E);
-                    FUN_002a0cc8(1);
+                    gameGlobalsSetSubScreenActive(1);
                     return;
                 }
                 /* Pick the skill's target on the party panel. */
@@ -262,14 +262,14 @@ void campSkillListUpdate(void)
             eventQueueAddUniqueIfValid(CAMP_EVENT_CANCEL);
             return;
         }
-        if (FUN_002c1658(1, 1) && !FUN_0029e02c()) {
+        if (inputQueryButtonState(1, 1) && !FUN_0029e02c()) {
             /* Cancel: back to the menu. */
             campReleaseScreenTouchRegions(&camp->grids[3], 1);
             campRestoreMenuGroup(camp);
             FUN_00298d28(0, 0);
             beginStatusPanelClose();
             FUN_00298d0c(0);
-            FUN_00299900(0);
+            campListShowSelectedHelp(0);
             timerStart(&camp->sprites[1], 3, 0);
             camp->returnState = 6;
             campChangeState(5);
@@ -279,14 +279,14 @@ void campSkillListUpdate(void)
             eventQueueAddUniqueIfValid(CAMP_EVENT_CANCEL);
             return;
         }
-        if (!scrolling && FUN_002c1658(9, 1)) {
+        if (!scrolling && inputQueryButtonState(9, 1)) {
             sortMenuCreate(1, 0);
-            FUN_0029e328(11);
-            FUN_0029e328(32);
-            FUN_0029e328(13);
-            FUN_0029e328(15);
-            FUN_0029e328(17);
-            FUN_0029e328(3);
+            useCounterAppendValue(11);
+            useCounterAppendValue(32);
+            useCounterAppendValue(13);
+            useCounterAppendValue(15);
+            useCounterAppendValue(17);
+            useCounterAppendValue(3);
             buttonHelpSetText(0, 0x323232FF);
             camp->helpStatus = buttonHelpGetStatus();
             campChangeState(40);

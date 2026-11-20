@@ -24,8 +24,8 @@ void sysMemClear(void *, u32);
 void FUN_00154180(s32, s32, s32, s32);
 f32 libm_sinf(f32);
 void asdCameraInitializeDefaults(ManagedCamera *, s32);
-void FUN_0014f0dc(ManagedCamera *, const Vec3f *, const Vec3f *, const Vec3f *);
-void FUN_001523b8(ManagedCamera *, s32, f32, f32, f32, f32);
+void cameraMatrixCacheSetLookAt(ManagedCamera *, const Vec3f *, const Vec3f *, const Vec3f *);
+void stereoCameraSetPerspective(ManagedCamera *, s32, f32, f32, f32, f32);
 void asdCameraRegister(ManagedCamera *);
 void uiSetFloatPair(ManagedCamera *, f32, f32);
 
@@ -45,8 +45,8 @@ void uniteCameraInitialize(const CameraParameters *parameters)
     target.y = libm_sinf(work->parameters->rotation.x) + target.y;
     target.z -= libm_cosf(work->parameters->rotation.y);
     asdCameraInitializeDefaults(&work->camera, 1);
-    FUN_0014f0dc(&work->camera, &work->parameters->eye, &target, &work->parameters->up);
-    FUN_001523b8(&work->camera, 1, work->parameters->fieldOfView, work->parameters->nearClip,
+    cameraMatrixCacheSetLookAt(&work->camera, &work->parameters->eye, &target, &work->parameters->up);
+    stereoCameraSetPerspective(&work->camera, 1, work->parameters->fieldOfView, work->parameters->nearClip,
                  work->parameters->farClip, work->parameters->aspect);
     FUN_0036b824(reinterpret_cast<u32>(&work->camera));
     asdCameraRegister(&work->camera);

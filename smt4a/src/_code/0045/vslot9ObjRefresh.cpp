@@ -17,14 +17,14 @@ struct VSlot9Obj {
     /* 0x9D */ u8 unk9D;
 };
 
-extern void FUN_001a586c(s32 value, VSlot9Obj *obj);
+extern void soundObjectUnlinkFromOwner(s32 value, VSlot9Obj *obj);
 
 /* Stores the flag at +0x9D, re-registers the object, then calls its virtual slot 9 (tail call). */
 void vslot9ObjRefresh(VSlot9Obj *obj, u8 flag)
 {
     obj->unk9D = flag;
     if (obj->unk10 != 0) {
-        FUN_001a586c(obj->unk10, obj);
+        soundObjectUnlinkFromOwner(obj->unk10, obj);
     }
     obj->vtbl->slot9(obj);
 }

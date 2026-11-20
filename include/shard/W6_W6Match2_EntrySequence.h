@@ -67,7 +67,7 @@ s32 FUN_001386b4(void);
 extern "C" {
 #endif
 
-bool FUN_001387c0(void);
+bool contentUnmount(void);
 
 #ifdef __cplusplus
 }

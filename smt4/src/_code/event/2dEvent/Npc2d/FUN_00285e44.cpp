@@ -13,7 +13,7 @@ extern "C" {
 extern const char DAT_0040357c[];
 extern const char DAT_00403570[];
 NpcPortraitSourceView *dataTable25FindById(s32);
-s32 FUN_002c1d5c();
+s32 eventIsSkipping();
 u32 eventResourceCacheAcquire(s32 portraitId, u32 enabled);
 s32 FUN_001dfc64(u32);
 void FUN_002db92c(u32);
@@ -32,7 +32,7 @@ void FUN_00285e44(s32 npcId, u32 style, s32 x)
     work->unk08 = style;
     work->display.stopWhenHidden = 0;
     work->portrait.portraitId = -static_cast<s32>(dataTable25FindById(npcId)->portraitId);
-    if (FUN_002c1d5c()) {
+    if (eventIsSkipping()) {
         work->deferred = 1;
     } else {
         work->portrait.portraitHandle = eventResourceCacheAcquire(work->portrait.portraitId, 1);

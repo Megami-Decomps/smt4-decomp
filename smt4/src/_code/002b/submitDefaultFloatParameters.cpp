@@ -5,13 +5,13 @@ struct SixFloatParameters {
     f32 values[6];
 };
 extern "C" {
-extern const SixFloatParameters DAT_00409970;
+extern const SixFloatParameters g_defaultFloatParameters;
 void gpuSubmitCommandBlock(const SixFloatParameters *parameters, u32 size, s32 enabled);
 }
 
 /* Submit a writable copy of the six default floating-point parameters. */
 extern "C" void submitDefaultFloatParameters()
 {
-    SixFloatParameters parameters = DAT_00409970;
+    SixFloatParameters parameters = g_defaultFloatParameters;
     gpuSubmitCommandBlock(&parameters, sizeof(parameters), 1);
 }

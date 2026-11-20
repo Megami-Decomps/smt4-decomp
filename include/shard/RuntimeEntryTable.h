@@ -24,7 +24,7 @@ struct RuntimeEntry {
 
 extern "C" {
 extern RuntimeEntryTable DAT_00580c90;
-extern RuntimeEntry DAT_005f32a0[];
+extern RuntimeEntry g_recordTable[];
 }
 
 #endif

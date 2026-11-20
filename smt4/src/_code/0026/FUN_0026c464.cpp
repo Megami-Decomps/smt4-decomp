@@ -10,7 +10,7 @@
 extern "C" {
 s32 FUN_00258de0(s32 user, s32 target, SkillDataRecord *skill, s32 preview, s32 mode);
 s32 appGetRemainingCapacity(u32 skill);
-s32 FUN_0029a9d4(u32 skill, s32 mode);
+s32 skillGetDiscountedCost(u32 skill, s32 mode);
 
 /* Applies a field skill to the player and stock, charging MP only when a target accepts it. */
 s32 FUN_0026c464(s32 user, u32 skillId, s32 preview)
@@ -32,7 +32,7 @@ s32 FUN_0026c464(s32 user, u32 skillId, s32 preview)
             if (preview == 0) {
                 if (user < 0) {
                     PlayerDataIV *unit = gameGetPlayerData();
-                    unit->mp -= FUN_0029a9d4(skill->identity.id, 1);
+                    unit->mp -= skillGetDiscountedCost(skill->identity.id, 1);
                     if (unit->mp < 0)
                         unit->mp = 0;
                 } else {

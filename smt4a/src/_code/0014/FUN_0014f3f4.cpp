@@ -70,7 +70,7 @@ extern int ifTouchIsActive(void);
 /* Supplied declaration required: messageWindowDrawSprites. */
 /* Supplied declaration required: fontMeasureTextWidth. */
 extern int entryListCurrentIsUsable(unsigned int);
-extern int FUN_001688c4(unsigned int);
+extern int statusDownScanSelectedEntryIndex(unsigned int);
 extern int gameGetIndexedSlotMember(unsigned int);
 extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
@@ -543,7 +543,7 @@ LAB_0014fe60:
     renderStackPushIndexed(g_renderCtx,3,temp_v7);
     temp_v18 = 0.27f;
     renderCtxCalculateStereoParallax(g_renderCtx);
-    temp_v22 = FUN_001688c4(*(unsigned int *)(temp_v5 + 4));
+    temp_v22 = statusDownScanSelectedEntryIndex(*(unsigned int *)(temp_v5 + 4));
     temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0x8e));
     temp_v2 = *(short *)(temp_v6 + 8);
     temp_v3 = *(short *)(temp_v6 + 10);

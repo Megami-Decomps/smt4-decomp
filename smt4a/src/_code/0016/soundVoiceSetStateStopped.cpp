@@ -16,7 +16,7 @@ struct VoiceTable {
     /* 0x14 */ u32 count;
 };
 
-extern VoiceTable DAT_005880d0;
+extern VoiceTable g_soundVoicePool;
 extern u8 g_soundVoiceCriticalSection;
 void nn_os_CriticalSection_Enter(void *section);
 void nn_os_CriticalSection_Leave(void *section);
@@ -27,12 +27,12 @@ void soundVoiceSetStateStopped(u32 index)
     if ((s32)index < 0) {
         return;
     }
-    u32 count = DAT_005880d0.count;
+    u32 count = g_soundVoicePool.count;
     if (index >= count) {
         return;
     }
     nn_os_CriticalSection_Enter(&g_soundVoiceCriticalSection);
-    Voice *voice = &DAT_005880d0.voices[index];
+    Voice *voice = &g_soundVoicePool.voices[index];
     nn_snd_CTR_Voice_SetState(voice->handle, 2);
     nn_os_CriticalSection_Leave(&g_soundVoiceCriticalSection);
 }

@@ -3,7 +3,7 @@
 
 extern "C" {
 
-u32 FUN_0028c600(BtlUiObjC *state);
+u32 btlUiObjCStateIsNotFourteen(BtlUiObjC *state);
 
 u32 stateBlockCall(void)
 {
@@ -12,7 +12,7 @@ u32 stateBlockCall(void)
     if (ui == NULL) {
         return 1;
     }
-    return FUN_0028c600(&ui->objC);
+    return btlUiObjCStateIsNotFourteen(&ui->objC);
 }
 
 }

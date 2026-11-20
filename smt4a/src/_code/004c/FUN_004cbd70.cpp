@@ -44,7 +44,7 @@ extern int gameGetSlotRecord(unsigned int);
 /* Supplied declaration required: gameSavedFlagSet. */
 extern int saveGetSelectedRecordSlot(unsigned int);
 extern int messageMainIsIdle(void);
-extern int FUN_0026c3a0(void);
+extern int gameGlobalsIsActiveStateFour(void);
 /* Supplied declaration required: statusCommitSelectedSkills. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageGetChoiceResult(void);
@@ -189,7 +189,7 @@ LAB_004cbdc8:
       countersAddSaturating(6,1);
       break;
     case 1:
-      temp_v3 = FUN_0026c3a0();
+      temp_v3 = gameGlobalsIsActiveStateFour();
       if (temp_v3 == 0) {
         return;
       }

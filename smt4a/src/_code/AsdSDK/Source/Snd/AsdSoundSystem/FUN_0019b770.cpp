@@ -5,14 +5,14 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_001640cc(...);
+int gxSubmitFloatColoredQuad(...);
 int renderCtxSelectTexture(...);
 int renderCtxCalculateStereoParallax(...);
 int camSetMatrixA(...);
 int FUN_0019ac70(...);
 int FUN_0019f678(...);
 int FUN_001a1ee0(void);
-int FUN_001b63b0(void);
+int phaseCosine(void);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -25,7 +25,7 @@ typedef struct {
 } param_4_stack;
 
 extern int g_renderCtx; /* 0x59dbb4 */
-extern unsigned int DAT_005c4c20; /* 0x5c4c20 */
+extern unsigned int g_asdSoundListenerGuard; /* 0x5c4c20 */
 extern unsigned int DAT_00630724; /* 0x630724 */
 extern unsigned int DAT_00630734; /* 0x630734 */
 extern unsigned int DAT_00630744; /* 0x630744 */
@@ -49,7 +49,7 @@ extern float DAT_0064c01c; /* 0x64c01c */
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_001640cc. */
+/* Supplied declaration required: gxSubmitFloatColoredQuad. */
 extern unsigned int asdGxPresetsGetByKind(unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 extern unsigned int asdGxPresetsGetHeightByKind(unsigned int);
@@ -58,7 +58,7 @@ extern unsigned int asdGxPresetsGetHeightByKind(unsigned int);
 /* Supplied declaration required: FUN_0019ac70. */
 /* Supplied declaration required: FUN_0019f678. */
 /* Supplied declaration required: FUN_001a1ee0. */
-/* Supplied declaration required: FUN_001b63b0. */
+/* Supplied declaration required: phaseCosine. */
 extern int __cxa_guard_acquire(unsigned int *);
 
 
@@ -97,7 +97,7 @@ unsigned int FUN_0019b770(unsigned short *param_1,unsigned int *param_2,int para
   unsigned char *temp_v24;
   
   temp_v18 = 0.0f;
-  if (((DAT_005c4c20 & 1) == 0) && (temp_v2 = __cxa_guard_acquire(&DAT_005c4c20), temp_v2 != 0)) {
+  if (((g_asdSoundListenerGuard & 1) == 0) && (temp_v2 = __cxa_guard_acquire(&g_asdSoundListenerGuard), temp_v2 != 0)) {
     g_asdSoundListener = temp_v18;
     DAT_0064c018 = temp_v18;
     DAT_0064c01c = temp_v18;
@@ -352,7 +352,7 @@ unsigned int FUN_0019b770(unsigned short *param_1,unsigned int *param_2,int para
     }
     if (!romwright_subpiece_4_1_0(temp_v6 >> 0x1e,0)) {
       FUN_001a1ee0();
-      FUN_001b63b0();
+      phaseCosine();
     }
   }
   else if (param_4 != 0) {
@@ -362,7 +362,7 @@ unsigned int FUN_0019b770(unsigned short *param_1,unsigned int *param_2,int para
     }
     return 1;
   }
-  FUN_001640cc(temp_v21,puVar12,puVar10,puVar11);
+  gxSubmitFloatColoredQuad(temp_v21,puVar12,puVar10,puVar11);
   if (temp_v23 != 0) {
     camSetMatrixA(g_renderCtx,temp_v22);
   }

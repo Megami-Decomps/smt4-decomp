@@ -16,7 +16,7 @@ int renderCtxPopState(...);
 int textDrawString(...);
 int efctSetSpeed(void);
 int renderStackPushIndexed(RenderCtxA *, int, unsigned int);
-int FUN_00180310(...);
+int statRowDrawValueImpl(...);
 int uiDrawItemOrStatusIcon(...);
 int gxResetColorQuadToWhite(void);
 int fontMeasureLineAdvance(...);
@@ -44,7 +44,7 @@ extern unsigned char DAT_00530b58; /* 0x530b58 */
 extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
-/* Supplied declaration required: FUN_00180310. */
+/* Supplied declaration required: statRowDrawValueImpl. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
@@ -152,10 +152,10 @@ void FUN_00165b08(void)
       temp_v0 = *(short *)(temp_v8 + 8);
       temp_v1 = *(short *)(temp_v8 + 10);
       drawSetColorFromRGBA8(0xffffffff);
-      FUN_00180310(0,temp_v0 + temp_v4,temp_v1 + temp_v5,1,3,0xce,temp_v18);
+      statRowDrawValueImpl(0,temp_v0 + temp_v4,temp_v1 + temp_v5,1,3,0xce,temp_v18);
       gxResetColorQuadToWhite();
       rt_aeabi_memclr(temp_v17,0x40);
-      temp_v2 = (unsigned int)FUN_00180114(*(unsigned short *)(temp_v3 + 0x62));
+      temp_v2 = (unsigned int)table01RecordLookupForContent(*(unsigned short *)(temp_v3 + 0x62));
       sprintf((char *)temp_v17,(const char *)&DAT_00530b54,temp_v2);
       temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v10 + 0xc49));
       puVar8 = temp_v17;
@@ -214,10 +214,10 @@ LAB_00165eec:
       temp_v0 = *(short *)(temp_v8 + 8);
       temp_v1 = *(short *)(temp_v8 + 10);
       drawSetColorFromRGBA8(0xffffffff);
-      FUN_00180310(0,temp_v0 + temp_v4,temp_v1 + temp_v5,1,3,0xce,temp_v18);
+      statRowDrawValueImpl(0,temp_v0 + temp_v4,temp_v1 + temp_v5,1,3,0xce,temp_v18);
       gxResetColorQuadToWhite();
       rt_aeabi_memclr(temp_v17,0x40);
-      temp_v2 = (unsigned int)FUN_00180114(*(unsigned short *)(temp_v3 + 0x62));
+      temp_v2 = (unsigned int)table01RecordLookupForContent(*(unsigned short *)(temp_v3 + 0x62));
       sprintf((char *)temp_v17,(const char *)&DAT_00530b54,temp_v2);
       temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v10 + 0xc49));
       puVar8 = temp_v17;

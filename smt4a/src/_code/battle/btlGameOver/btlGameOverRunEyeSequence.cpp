@@ -20,9 +20,9 @@ extern "C" {
 extern BtlAuxA *g_btlAux;
 extern GameOverEyeTimeline g_btlGameOverEyeTimeline;
 extern const char DAT_00530eb0[]; // "Dead_eyes"
-void FUN_004f7b84(BtlAuxA *, const char *);
+void effectRequestByName(BtlAuxA *, const char *);
 u32 btlPollVersionedEffectTexture(BtlAuxA *);
-void FUN_004fdcd8(u32, u32, u32, u32, u32, u32, u32, u32);
+void btlQueueMessageTableReflectAction(u32, u32, u32, u32, u32, u32, u32, u32);
 void btlUiPanelStart(BtlUiA *);
 u32 btlReflectQueuePairedParameters(s32 actor, u32 flags, u32 value, u32 parameter,
                  u32 target, u32 first, u32 second, u32 third, u32 fourth);
@@ -31,14 +31,14 @@ void FUN_003f14a0(BtlMainStateA *);
 void btlTalkBustUpDestroy();
 void holderStopJob2(BtlMainStateA *);
 void objectJobStop(BtlMainStateA *);
-void FUN_00290ba4(BtlMainStateA *);
+void btlUiSessionDestroy(BtlMainStateA *);
 void eventCommandClearPending(void *);
 
 u32 btlGameOverRunEyeSequence(BtlGameOverSequence *sequence)
 {
     switch (sequence->phase) {
     case 0:
-        FUN_004f7b84(g_btlAux, DAT_00530eb0);
+        effectRequestByName(g_btlAux, DAT_00530eb0);
         sequence->phase = 1;
         sequence->frame = 0;
         // Fall through while the animation is becoming available.
@@ -53,7 +53,7 @@ u32 btlGameOverRunEyeSequence(BtlGameOverSequence *sequence)
         return 0;
     }
     if (sequence->frame == g_btlGameOverEyeTimeline.panelFrame) {
-        FUN_004fdcd8(0, 0, 0, 0, 7, 0, 11, 0);
+        btlQueueMessageTableReflectAction(0, 0, 0, 0, 7, 0, 11, 0);
         btlUiPanelStart(g_btlUiBlock);
     }
     if (sequence->frame == g_btlGameOverEyeTimeline.effectFrame)
@@ -68,7 +68,7 @@ u32 btlGameOverRunEyeSequence(BtlGameOverSequence *sequence)
         btlTalkBustUpDestroy();
         holderStopJob2(battle);
         objectJobStop(battle);
-        FUN_00290ba4(battle);
+        btlUiSessionDestroy(battle);
         if (reinterpret_cast<void *>(g_btlCamera))
             eventCommandClearPending(reinterpret_cast<void *>(g_btlCamera));
         sequence->state = sequence->mode == 2 ? 1 : 3;

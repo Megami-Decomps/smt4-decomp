@@ -11,7 +11,7 @@ int FUN_00189de4(unsigned char *);
 int FUN_00189fe0(void);
 int FUN_0018a28c(unsigned char *);
 int FUN_0018a520(int *, int);
-int FUN_001afd94(void);
+int dspFxStateGet(void);
 int FUN_001bd5f8(void);
 int resultHandleFailure(void);
 int software_interrupt(int);
@@ -35,7 +35,7 @@ extern int FUN_0018985c(int, unsigned int);
 /* Supplied declaration required: FUN_00189fe0. */
 /* Supplied declaration required: FUN_0018a28c. */
 /* Supplied declaration required: FUN_0018a520. */
-/* Supplied declaration required: FUN_001afd94. */
+/* Supplied declaration required: dspFxStateGet. */
 /* Supplied declaration required: FUN_001bd5f8. */
 extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 /* Supplied declaration required: resultHandleFailure. */
@@ -92,7 +92,7 @@ int FUN_0016f574(int *param_1,int param_2)
       FUN_00189de4(&g_nnSndVoiceManager);
       FUN_0018a28c(&g_nnSndMasterManagerImpl);
       FUN_001bd5f8();
-      FUN_001afd94();
+      dspFxStateGet();
       FUN_00189fe0();
     }
     else {

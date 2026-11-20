@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern signed char DAT_005c1484; /* 0x5c1484 */
+extern signed char g_handlerRefForward; /* 0x5c1484 */
 extern unsigned int DAT_005c1488; /* 0x5c1488 */
 extern unsigned char DAT_0064751c; /* 0x64751c */
 extern unsigned int DAT_0064757c; /* 0x64757c */
@@ -19,7 +19,7 @@ extern void nn_fnd_ExpHeapBase_Finalize(unsigned int);
 void FUN_0042fbe4(unsigned int param_1,unsigned int param_2)
 
 {
-  if (DAT_005c1484 != '\0') {
+  if (g_handlerRefForward != '\0') {
     DAT_00647584 = 0;
     DAT_00647588 = (unsigned char)param_2;
     DAT_00647589 = (unsigned char)((unsigned int)param_2 >> 8);
@@ -27,7 +27,7 @@ void FUN_0042fbe4(unsigned int param_1,unsigned int param_2)
     DAT_0064757c = 0xffffffff;
     nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_0064751c);
     DAT_005c1488 = 0;
-    DAT_005c1484 = '\0';
+    g_handlerRefForward = '\0';
   }
   return;
 }

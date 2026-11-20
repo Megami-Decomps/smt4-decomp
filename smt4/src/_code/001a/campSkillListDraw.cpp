@@ -51,7 +51,7 @@ void campSkillListDraw(s32 x, s32 y, s32 drawCursor)
     texDrawCompositeSprite(2, 0x1d, 0, x, y, 0x65);
     texDrawTableEntryAtStoredOrigin(2, 0x1d, 0x439, x, y, 0x6a);
     for (i = 0; i < 11; i++) {
-        if ((s32)(resourceRunOperationIfUnblocked(grid) + i) >= (s32)FUN_0029ee54(grid)) {
+        if ((s32)(resourceRunOperationIfUnblocked(grid) + i) >= (s32)gridNavigationGetItemCount(grid)) {
             break;
         }
         skill = camp->skills[resourceRunOperationIfUnblocked(grid) + i].skill;
@@ -88,7 +88,7 @@ void campSkillListDraw(s32 x, s32 y, s32 drawCursor)
 
         part = asdTMTexTableEntryAt(0x1d, 0x444);
         if (unit < 0) {
-            sprintf(text, "%d", FUN_0029a9d4(skill, 1));
+            sprintf(text, "%d", skillGetDiscountedCost(skill, 1));
         } else {
             sprintf(text, "%d", appGetRemainingCapacity(skill));
         }
@@ -112,7 +112,7 @@ void campSkillListDraw(s32 x, s32 y, s32 drawCursor)
     }
     FUN_0028f870((u32)grid, x, y, 1);
 
-    if (drawCursor && (s32)FUN_0029ee54(&camp->grids[3]) > 0) {
+    if (drawCursor && (s32)gridNavigationGetItemCount(&camp->grids[3]) > 0) {
         skill = camp->skills[resourceRunOperationIfUnblocked(grid) + listCursorGetRowIfUnblocked(grid)].skill;
         unit = camp->skills[resourceRunOperationIfUnblocked(grid) + listCursorGetRowIfUnblocked(grid)].unit;
         player = unit < 0;
@@ -146,7 +146,7 @@ void campSkillListDraw(s32 x, s32 y, s32 drawCursor)
 
         part = asdTMTexTableEntryAt(0x1d, 0x44d);
         if (unit < 0) {
-            sprintf(text, "%d", FUN_0029a9d4(skill, 1));
+            sprintf(text, "%d", skillGetDiscountedCost(skill, 1));
         } else {
             sprintf(text, "%d", appGetRemainingCapacity(skill));
         }
@@ -170,7 +170,7 @@ void campSkillListDraw(s32 x, s32 y, s32 drawCursor)
         gxResetColorQuadToWhite();
     }
 
-    if ((s32)FUN_0029ee54(&camp->grids[3]) <= 0) {
+    if ((s32)gridNavigationGetItemCount(&camp->grids[3]) <= 0) {
         texDrawCompositeSprite(2, 0x1a, 0x1b, x, y, 0xdd);
         TextureTableEntryIV *box = asdTMTexTableEntryAt(0x1a, 0x544);
         /* "No skills are available." in full-width characters */

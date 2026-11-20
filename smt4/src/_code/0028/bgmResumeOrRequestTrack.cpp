@@ -14,7 +14,7 @@ static __inline void bgmResumeChannel(BgmRequestChannel *channel)
         if (channel->flags & 0x20) {
             channel->flags = (channel->flags & ~0x20) | 0x40;
             channel->play.param = 60;
-            g_titleConfigModeFlag.selected = channel->play.unk00;
+            g_titleConfigModeFlag.selected = channel->play.index;
         } else if (!(channel->flags & 0x400)) {
             channel->fadeFrames = 30;
             channel->flags |= 8;

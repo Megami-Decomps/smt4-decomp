@@ -21,7 +21,7 @@ s32 gameStateIsFlagSetAndLarge();
 s32 lmapMainGetUnk74();
 void titleSetSlotValueState2(s32, s32);
 void mapPlaceSet(u32, u32, u32);
-void FUN_004731d8();
+void gameSaveBlockRebuild27E98();
 void sysClearCachedFlag();
 
 /* Restore the saved map destination, choose its sequence and finish the departure. */
@@ -76,7 +76,7 @@ void FUN_0047dd4c(void *work)
     titleSetSlotValueState2(0, 10);
     titleSetSlotValueState2(1, 10);
     mapPlaceSet(-1, -1, -1);
-    FUN_004731d8();
+    gameSaveBlockRebuild27E98();
     ((DepartureCompletionView *)work)->complete = true;
     sysClearCachedFlag();
 }

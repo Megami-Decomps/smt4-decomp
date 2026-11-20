@@ -2,7 +2,7 @@
 
 extern "C" {
 
-s32 FUN_00308576(void *list);
+s32 listAllocateNode(void *list);
 
 typedef struct Node {
     /* 0x00 */ u8 unk00[4];
@@ -35,7 +35,7 @@ List *onlineListInitialize(List *list, u8 *flagB, u8 flagA)
     list->unk0C = 0;
     list->unk08 = 0;
     list->unk04 = 0;
-    node = (Node *)FUN_00308576(list);
+    node = (Node *)listAllocateNode(list);
     list->head = node;
     node->unk04 = 0;
     list->head->prev = list->head;

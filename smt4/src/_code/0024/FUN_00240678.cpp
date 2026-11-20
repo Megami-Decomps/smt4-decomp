@@ -18,7 +18,7 @@ struct CompletionState {
 }
 extern "C" {
 extern ReflectContext *g_btlActionReflect;
-extern CountPairTable *DAT_00435d18;
+extern CountPairTable *g_btlAux;
 s32 nodeListCountActiveById(ReflectContext *queue, const CompletionState *id);
 s32 recordAreAllCountsNonpositive(const CountPairTable *counts);
 u32 stateBlockCall(BtlUi *ui);
@@ -29,7 +29,7 @@ u32 FUN_00240678(CompletionState *completion, BtlMainState *battle)
 {
     if (battle->encounterControl.blocked && nodeListCountActiveById(g_btlActionReflect, completion) > 0)
         return 0;
-    if (!recordAreAllCountsNonpositive(DAT_00435d18))
+    if (!recordAreAllCountsNonpositive(g_btlAux))
         return 0;
     if ((battle->battleFlags & 8) && !stateBlockCall(g_btlUiBlock))
         return 0;

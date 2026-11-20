@@ -55,7 +55,7 @@ s32 FUN_004d0494(void);
 s32 inputIsQuestCancelPressed(void);
 s32 inputIsQuestMenuPressed(void);
 void FUN_0038b57c(s32 index);
-void FUN_002f0384(s32 a);
+void statusCameraRestore(s32 a);
 void sendEvent1000210(void);
 void sendEvent100020F(void);
 void sendEvent100020E(void);
@@ -91,7 +91,7 @@ void _ZN9Obj53604412FUN_00497290Ev(ShopScreen *shop)
             return;
         }
         if (shop->cursor != NULL) {
-            if (FUN_0040ab8c(shop->cursor) == 0) {
+            if (moriModelContentIsLoaded(shop->cursor) == 0) {
                 return;
             }
             if (shop->cursor->body == NULL) {
@@ -114,7 +114,7 @@ void _ZN9Obj53604412FUN_00497290Ev(ShopScreen *shop)
     if (inputIsQuestRepeatRight() != 0 || recordGetModeForId(shop->prevRecord) == 6) {
         if (shop->tab != SHOP_TAB_NONE) {
             shopClearTabMarker(shop);
-            FUN_002f0384(0);
+            statusCameraRestore(0);
             shop->unk22 = 0;
             if (shop->tab == 0 && (shop->locked != 0 || gameFlagIsSet(0x410) == 0)) {
                 shop->tab = g_shopTabNeighbors.tab0Left;
@@ -136,7 +136,7 @@ void _ZN9Obj53604412FUN_00497290Ev(ShopScreen *shop)
     } else if (FUN_004d0494() != 0 || recordGetModeForId(shop->nextRecord) == 6) {
         if (shop->tab != SHOP_TAB_NONE) {
             shopClearTabMarker(shop);
-            FUN_002f0384(0);
+            statusCameraRestore(0);
             shop->unk22 = 0;
             if (shop->tab == 0 && (shop->locked != 0 || gameFlagIsSet(0x410) == 0)) {
                 shop->tab = g_shopTabNeighbors.tab0Right;

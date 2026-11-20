@@ -14,7 +14,7 @@ int table30GetEntryB(unsigned char [48], unsigned int, unsigned int); // declche
 int FUN_0026281c(...);
 int FUN_002b4b80(int, int);
 int wstrlenU16(...);
-int FUN_002ba81c(...);
+int stringCopyTruncated(...);
 int memClear(...);
 int jyoucyuGetTableEntry(...);
 int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
@@ -80,7 +80,7 @@ extern unsigned char objGetFlagBit0(int);
 extern unsigned char objGetFlagBit1(int);
 /* Supplied declaration required: FUN_002b4b80. */
 /* Supplied declaration required: wstrlenU16. */
-/* Supplied declaration required: FUN_002ba81c. */
+/* Supplied declaration required: stringCopyTruncated. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
@@ -500,7 +500,7 @@ int FUN_0038c224(int param_1)
           if (temp_v9 < 0) {
             return temp_v9;
           }
-          FUN_002ba81c(temp_v16 + 0x980,&temp_v21,0x20);
+          stringCopyTruncated(temp_v16 + 0x980,&temp_v21,0x20);
         }
         else {
           *(unsigned char *)(temp_v16 + 0x9b0) = 0;

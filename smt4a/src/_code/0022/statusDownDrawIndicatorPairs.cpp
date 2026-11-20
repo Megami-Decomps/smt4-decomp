@@ -2,13 +2,13 @@
 #include "shard/TextureDrawCall.h"
 
 extern "C" {
-s32 FUN_00230544();
+s32 statusDownPanelIsOpenAndIdle();
 
 // Draw both status indicators using the active or inactive image pair.
 void statusDownDrawIndicatorPairs(s32 x, s32 y)
 {
     StatusDownStateA *screen = g_statusDown;
-    if (FUN_00230544()) {
+    if (statusDownPanelIsOpenAndIdle()) {
         s32 first = screen->indicatorFirst;
         if (first == 1 || first == 2) {
             texDrawTableEntryAtStoredOrigin(2, 0x12, 0x4d5, x, y, 0xba);

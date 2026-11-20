@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00297684(u32 value);
+int lmapPlayerModelDestroy(u32 value); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int statusCameraApply(void);
 
 struct StatusContext;
@@ -42,7 +42,7 @@ u32 campCecUpdateState(void)
     camera = &context->camera;
     if (context->state > 0 && (context->state != 0xd && context->state != 0xf)) {
         statusCameraApply();
-        FUN_00297684(camera->unk1C);
+        lmapPlayerModelDestroy(camera->unk1C);
     }
     return 0;
 }

@@ -4,15 +4,15 @@
 #include "Model/MoriModelManager.h"
 
 extern "C" {
-void FUN_002f0384(s32 enabled);
-void FUN_0022e774(void);
+void statusCameraRestore(s32 enabled);
+void statusPanelClose(void);
 void buttonHelpSetText(void *text, u32 rgba);
 
 /* Leave for the suspended screen or restart the idle screen for another selection. */
 void saveLoadUiSuspendOrRestart(SaveSlotHeaderWork *ui)
 {
     if (objBStateAllowsAction() && ui->present[ui->selected]) {
-        FUN_002f0384(1);
+        statusCameraRestore(1);
         ui->suspended = 1;
     }
     FUN_0041de6c(ui);
@@ -24,7 +24,7 @@ void saveLoadUiSuspendOrRestart(SaveSlotHeaderWork *ui)
                 ui->popup = NULL;
             }
         }
-        FUN_0022e774();
+        statusPanelClose();
         saveLoadUiSetMode(ui, 16, 12);
     } else if (!ui->busy) {
         s32 index = ui->recordIndex;

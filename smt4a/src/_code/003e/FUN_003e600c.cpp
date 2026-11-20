@@ -64,9 +64,9 @@ void FUN_003e600c(ItemExchangeWork *work)
         u32 first = flagValueRead(0x7C4);
         u32 second = flagValueRead(0x7C5);
         u32 third = flagValueRead(0x7C6);
-        FUN_00359974(0x18, first, 0xFFFFFFFF, 0);
-        FUN_00359974(0x19, second, 0xFFFFFFFF, 0);
-        FUN_00359974(0x1A, third, 0xFFFFFFFF, 0);
+        entryTableResetAndInit(0x18, first, 0xFFFFFFFF, 0);
+        entryTableResetAndInit(0x19, second, 0xFFFFFFFF, 0);
+        entryTableResetAndInit(0x1A, third, 0xFFFFFFFF, 0);
         screenStartOrClear(reinterpret_cast<s32>(work->screen), 0x15);
         itemExchangeEnterState(work, 3);
     }

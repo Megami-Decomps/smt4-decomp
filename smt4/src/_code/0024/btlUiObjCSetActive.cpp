@@ -3,12 +3,12 @@
 
 extern "C" {
 
-void FUN_00225214(BtlUiObjC *obj, u8 value);
+void playSceneSetUiActive(BtlUiObjC *obj, u8 value);
 
 
 void btlUiObjCSetActive(void *block, u8 value)
 {
-    FUN_00225214(&g_btlUi.ui->objC, value);
+    playSceneSetUiActive(&g_btlUi.ui->objC, value);
 }
 
 } /* extern "C" */

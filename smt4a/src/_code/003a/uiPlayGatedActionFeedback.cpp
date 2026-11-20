@@ -3,7 +3,7 @@
 
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
-s32 FUN_004a0404();
+s32 playerCanAffordRecoverySkill();
 void sysPlaySe(u32 id);
 void buttonHelpSelectSlot(u32 mode, u32 first, u32 second, u32 enabled);
 
@@ -15,7 +15,7 @@ void uiPlayGatedActionFeedback()
         sysPlaySe(0xd3);
         return;
     }
-    if (FUN_004a0404()) {
+    if (playerCanAffordRecoverySkill()) {
         if (g_gameState.mapId == 101) {
             sysPlaySe(0x105);
             buttonHelpSelectSlot(0, 19, 89, 1);

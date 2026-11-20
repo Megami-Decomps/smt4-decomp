@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_0040afcc(u32 owner);
+void btlEffectSettingsClearIfSet(u32 owner);
 s32 jobStop(u32 job, s32 flag);
 s32 jobIsValid(u32 job);
 extern u32 g_handleRegistry;
@@ -28,7 +28,7 @@ typedef struct Global57aa00 {
 } Global57aa00;
 extern Global57aa00 g_battleEffectSettings;
 
-/* Stops the task's job if it is valid, runs FUN_0040afcc and destroys the global object at 0x57AA08. */
+/* Stops the task's job if it is valid, runs btlEffectSettingsClearIfSet and destroys the global object at 0x57AA08. */
 void btlEffectSettingsReleaseTask(void)
 {
     BtlEffectSettingsTask *task;
@@ -39,7 +39,7 @@ void btlEffectSettingsReleaseTask(void)
     if (valid != 0) {
         jobStop(task->job, 0);
     }
-    FUN_0040afcc(g_handleRegistry);
+    btlEffectSettingsClearIfSet(g_handleRegistry);
     if (g_battleEffectSettings.object != NULL) {
         g_battleEffectSettings.object->vtbl->destroy(g_battleEffectSettings.object);
         g_battleEffectSettings.object = NULL;

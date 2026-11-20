@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern ByteTableA DAT_0057f560;
+extern ByteTableA g_messageFlags;
 
 void byteTableASetValue3(s8 value)
 {
-    DAT_0057f560.value3 = value;
+    g_messageFlags.value3 = value;
 }
 
 } /* extern "C" */

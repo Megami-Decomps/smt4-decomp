@@ -19,7 +19,7 @@ struct ScriptMenuTask {
 extern "C" {
 
 s32 buttonHelpGetState(void);
-void FUN_002636d0(s32);
+void buttonHelpSetPanelState(s32);
 s32 scrRunOpcodesStub(u32 entry);
 s32 messageMainGetChoiceResult(void);
 void messageOwnerSetState(ScriptMenuTask *task, s32 state);
@@ -31,7 +31,7 @@ void scriptMenuTaskRunScript(ScriptMenuTask *task)
 {
     if (task->started) {
         if (buttonHelpGetState() != 0) {
-            FUN_002636d0(0);
+            buttonHelpSetPanelState(0);
         }
         if (scrRunOpcodesStub(task->scriptEntry) == 2) {
             if (messageMainGetChoiceResult() != 0) {

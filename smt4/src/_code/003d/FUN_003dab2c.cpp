@@ -34,7 +34,7 @@ char *libc_strcpy(char *destination, const char *source);
 void memClear(void *block, s32 size);
 s32 keyedRecordFindByName(const char *name);
 void FUN_002276f8(EffectWork *work);
-u32 FUN_00246644(u32 index, u32 kind, u32 flag);
+u32 filterCreateByKind(u32 index, u32 kind, u32 flag);
 char *libc_strrchr(const char *text, s32 character);
 void asdLoadFileAsyncSimple(const char *path, u32 *file, s32 flag);
 
@@ -70,7 +70,7 @@ u32 FUN_003dab2c(EffectWork *work)
                 __2sprintf(text, DAT_00400904, g_btlEffect[0], j);
                 if (strcmp(text, name) == 0) {
                     FUN_002276f8(work);
-                    *reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(work) + 0x3034) = FUN_00246644(j & 0xff, 7, 0);
+                    *reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(work) + 0x3034) = filterCreateByKind(j & 0xff, 7, 0);
                     *(reinterpret_cast<u8 *>(work) + 0x3038) = j;
                     selected = true;
                     break;

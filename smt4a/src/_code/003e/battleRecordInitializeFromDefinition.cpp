@@ -23,7 +23,7 @@ void sysMemClear(void *buffer, u32 size);
 u16 dataTable10FindValue(u16 id);
 void unitRecomputeDerivedStats(BattleStatRecord *record);
 s32 unitHasRankingBonus(u16 id);
-void FUN_002a6894(BattleStatRecord *record);
+void saveMarkIdListSeen(BattleStatRecord *record);
 }
 
 // Initialize a battle record from its override or saved fallback definition.
@@ -68,5 +68,5 @@ extern "C" void battleRecordInitializeFromDefinition(BattleStatRecord *record, u
         maximum = (s16)(s32)(maximum * 1.25f);
     record->current = maximum;
     record->secondaryCurrent = record->secondaryMaximum;
-    FUN_002a6894(record);
+    saveMarkIdListSeen(record);
 }

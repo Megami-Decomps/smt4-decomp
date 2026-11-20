@@ -8,14 +8,14 @@ typedef struct Entry {
 } Entry;
 
 extern s32 jobFind(u32 id);
-extern Entry *DAT_00588e2c;
+extern Entry *g_saveLoadRunner;
 
 u32 FUN_0021c424(void)
 {
     u32 result = 0;
 
-    if (DAT_00588e2c != NULL) {
-        if (jobFind(DAT_00588e2c->id) != 0) {
+    if (g_saveLoadRunner != NULL) {
+        if (jobFind(g_saveLoadRunner->id) != 0) {
             return 1;
         }
     }

@@ -18,12 +18,12 @@ typedef struct IfaceHolder {
     /* 0x20C */ u32 arg;
 } IfaceHolder;
 
-extern u8 DAT_0055b620;
+extern u8 g_ifaceHolderVtable;
 
 /* Destroy hook: restores the vtable, releases through the interface and clears the four handle pairs. */
 IfaceHolder *ifaceHolderDestroy(IfaceHolder *obj)
 {
-    obj->vtbl = &DAT_0055b620;
+    obj->vtbl = &g_ifaceHolderVtable;
     obj->iface->vtbl->slot3(obj->iface, obj->arg);
     if (obj->first0 != 0) {
         obj->first0 = 0;

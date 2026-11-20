@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match8_DateTimeValue.h"
 
 extern "C" {
-SaveCalendarTime FUN_002ad66c(const DateTimeValue *value);
+SaveCalendarTime asdSaveHeaderBuildCalendarTime(const DateTimeValue *value);
 void rt_aeabi_memclr(void *destination, u32 bytes);
 DateTimeValue clockGetTicksAsMicroseconds(void);
 
@@ -16,7 +16,7 @@ void asdSaveHeaderInit(AsdSaveHeader *header, u32 gameMagic, u32 blockMagic, u32
     header->version = version;
     header->dataSize = dataSize;
     DateTimeValue now = clockGetTicksAsMicroseconds();
-    header->timestamp = FUN_002ad66c(&now);
+    header->timestamp = asdSaveHeaderBuildCalendarTime(&now);
     header->flags = flags;
     if (metadata != NULL)
         memCopy(metadata, header->metadata, sizeof(header->metadata));

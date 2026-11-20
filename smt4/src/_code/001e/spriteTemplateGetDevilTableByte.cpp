@@ -2,13 +2,13 @@
 
 extern "C" {
 
-extern u8 DAT_00447620[];
+extern u8 g_devilSpriteTemplateTable[];
 
 u8 spriteTemplateGetDevilTableByte(s32 kind)
 {
     u32 index = spriteTemplateGetPreferredDevilId(kind);
 
-    return DAT_00447620[index];
+    return g_devilSpriteTemplateTable[index];
 }
 
 } /* extern "C" */

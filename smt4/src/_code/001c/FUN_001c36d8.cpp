@@ -10,10 +10,10 @@ int aocActivateFileGroupFlags(...);
 unsigned int appTryPurchase(unsigned int, int, int);
 int saveGetMapFlag(...);
 int objectFlagSetBit(...);
-int FUN_0026e630(...);
+int gameSaveAddPointsClamped(...);
 int playerInitNewGame(int);
 int gameCopyPersistentSave(void);
-int FUN_00287c34(int);
+int mapSceneResetState(int);
 
 int playerRecalcStatsFromEquipment(...);
 int dispatchIfFound(...); // declcheck: local (romwright prototype; the shared declaration in code/Code0029.h does not compile here: too few arguments in function call)
@@ -67,10 +67,10 @@ extern int gameDataGetWorkBlock(void);
 /* Supplied declaration required: appTryPurchase. */
 /* Supplied declaration required: saveGetMapFlag. */
 /* Supplied declaration required: objectFlagSetBit. */
-/* Supplied declaration required: FUN_0026e630. */
+/* Supplied declaration required: gameSaveAddPointsClamped. */
 /* Supplied declaration required: playerInitNewGame. */
 /* Supplied declaration required: gameCopyPersistentSave. */
-/* Supplied declaration required: FUN_00287c34. */
+/* Supplied declaration required: mapSceneResetState. */
 extern int flagBitIsSet(unsigned int);
 /* Supplied declaration required: playerRecalcStatsFromEquipment. */
 /* Supplied declaration required: dispatchIfFound. */
@@ -248,7 +248,7 @@ void FUN_001c36d8(int param_1)
               temp_v1 = gameFlagIsSet(0x551);
               gameCopyPersistentSave();
               playerInitNewGame(0);
-              FUN_00287c34(0);
+              mapSceneResetState(0);
               temp_v2 = gameDataBlocksGetSaveData();
               temp_v3 = gameDataGetWorkBlock();
               *(unsigned int *)(temp_v2 + 0x1f458) = *(unsigned int *)(temp_v3 + 0x1f458);
@@ -386,7 +386,7 @@ void FUN_001c36d8(int param_1)
                     *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v3 + 4);
                     break;
                   case 5:
-                    FUN_0026e630(*temp_v24);
+                    gameSaveAddPointsClamped(*temp_v24);
                     break;
                   case 6:
                     temp_v0 = 0;

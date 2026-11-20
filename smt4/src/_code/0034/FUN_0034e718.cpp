@@ -3,7 +3,7 @@
 #include <stddef.h>
 
 extern "C" {
-extern AudioStreamWorker DAT_0044d0f8;
+extern AudioStreamWorker g_soundVoicePool;
 extern AudioStreamRequest DAT_004c4104[64];
 extern u8 DAT_004c40f8[];
 void nn_os_CriticalSection_Enter(void *lock);
@@ -19,12 +19,12 @@ void threadSleepDuration(s64 duration);
 // Reclaim finished wave buffers and submit queued PCM data under the stream lock.
 extern "C" void FUN_0034e718()
 {
-    DAT_0044d0f8.running = 1;
-    while (DAT_0044d0f8.running) {
+    g_soundVoicePool.running = 1;
+    while (g_soundVoicePool.running) {
         nn_os_CriticalSection_Enter(DAT_004c40f8);
         FUN_002a208c();
-        u32 count = DAT_0044d0f8.streamCount;
-        AudioStreamSlot *streams = DAT_0044d0f8.streams;
+        u32 count = g_soundVoicePool.streamCount;
+        AudioStreamSlot *streams = g_soundVoicePool.streams;
         for (u32 i = 0; i < count; ++i) {
             AudioStreamSlot *stream = &streams[i];
             if (stream->voice && stream->queued && stream->buffers[stream->readIndex].playback.status == 3) {
@@ -35,13 +35,13 @@ extern "C" void FUN_0034e718()
                     stream->readIndex = 0;
             }
         }
-        while (DAT_0044d0f8.written > DAT_0044d0f8.read) {
-            AudioStreamSlot *stream = DAT_004c4104[DAT_0044d0f8.read & 63].stream;
+        while (g_soundVoicePool.written > g_soundVoicePool.read) {
+            AudioStreamSlot *stream = DAT_004c4104[g_soundVoicePool.read & 63].stream;
             if (stream) {
                 if (stream->queued >= stream->capacity)
                     break;
-                u8 *data = DAT_004c4104[DAT_0044d0f8.read & 63].data;
-                u32 bytes = DAT_004c4104[DAT_0044d0f8.read & 63].bytes;
+                u8 *data = DAT_004c4104[g_soundVoicePool.read & 63].data;
+                u32 bytes = DAT_004c4104[g_soundVoicePool.read & 63].bytes;
                 nn_snd_CTR_InitializeWaveBuffer(&stream->buffers[stream->writeIndex]);
                 stream->buffers[stream->writeIndex].data = data;
                 u32 samples = FUN_00360060(bytes, 1, stream->channels);
@@ -55,7 +55,7 @@ extern "C" void FUN_0034e718()
                     stream->writeIndex = 0;
                 --stream->pending;
             }
-            ++DAT_0044d0f8.read;
+            ++g_soundVoicePool.read;
         }
         FUN_00159fd8();
         nn_os_CriticalSection_Leave(DAT_004c40f8);

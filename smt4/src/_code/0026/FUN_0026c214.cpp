@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00282ccc(void);
 int FUN_00282e70(void);
 int FUN_0029dfa8(void);
-int FUN_002b8454(s32, s32, s32, s32);
+int buttonHelpSetSlot(s32, s32, s32, s32);
 int buttonHelpSetPreset(u32 preset);
 int campCecIsActive(void);
 int gameFlagIsSet(u32 flag);
@@ -79,9 +79,9 @@ void FUN_0026c214(void)
         buttonHelpSetPreset(preset);
     }
     if (panel->disabled != 0) {
-        FUN_002b8454(3, 0x12, 0, 1);
+        buttonHelpSetSlot(3, 0x12, 0, 1);
     } else if (buttonHelpGetEntryValue(3) == 0) {
-        FUN_002b8454(3, 3, 0xB, 1);
+        buttonHelpSetSlot(3, 3, 0xB, 1);
     }
 }
 

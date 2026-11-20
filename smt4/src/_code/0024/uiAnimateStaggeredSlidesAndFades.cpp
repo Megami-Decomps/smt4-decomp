@@ -20,7 +20,7 @@ struct UiSlideState {
 };
 extern "C" {
 s32 FUN_0026f024(UiTweenMotion *, s32, s32, s32, s32, s32);
-void FUN_0026f100(UiTween *, s32, s32, f32, f32);
+void timedValueInterpolateStep(UiTween *, s32, s32, f32, f32);
 
 u32 uiAnimateStaggeredSlidesAndFades(UiSlideState *work, s32 entering)
 {
@@ -36,7 +36,7 @@ u32 uiAnimateStaggeredSlidesAndFades(UiSlideState *work, s32 entering)
         if (work->phase != 2) {
             for (s32 i = 0; i < 2; ++i) {
                 UiTween *fade = &work->fades[i];
-                FUN_0026f100(fade, 4, fade->frame, 1.0f, 0.0f);
+                timedValueInterpolateStep(fade, 4, fade->frame, 1.0f, 0.0f);
                 ++fade->frame;
             }
         }
@@ -44,7 +44,7 @@ u32 uiAnimateStaggeredSlidesAndFades(UiSlideState *work, s32 entering)
         if (work->state != 4) {
             for (s32 i = 0; i < 2; ++i) {
                 UiTween *fade = &work->fades[i];
-                FUN_0026f100(fade, 12, fade->frame, 0.0f, 1.0f);
+                timedValueInterpolateStep(fade, 12, fade->frame, 0.0f, 1.0f);
                 ++fade->frame;
             }
         }

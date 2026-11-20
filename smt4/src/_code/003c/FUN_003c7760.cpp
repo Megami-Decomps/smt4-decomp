@@ -18,7 +18,7 @@ typedef struct BtlTask {
 #define BTL_FLAG_ACTIVE 0x100000
 #define BTL_FLAG_UI     0x20000000
 
-extern u32 DAT_00435d18;
+extern u32 g_btlAux;
 
 extern s32 scrRunOpcodesStub(u32 job);
 extern s32 FUN_00256940(BtlCamera *main, BtlMainState *state, s32 arg);
@@ -48,7 +48,7 @@ s32 FUN_003c7760(BtlTask *task, BtlMainState *state)
         }
         task->state = 0;
         state->battleMask &= ~BTL_FLAG_ACTIVE;
-        battleResetCounterAndFlag(DAT_00435d18);
+        battleResetCounterAndFlag(g_btlAux);
     }
     if (task->frames < 0xFFFF) {
         task->frames++;

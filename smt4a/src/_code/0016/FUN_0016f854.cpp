@@ -3,11 +3,11 @@
 extern "C" {
 
 extern void FUN_00146c34(void);
-extern void FUN_0016f864(void);
+extern void srvInitialize(void);
 void FUN_0016f854(void)
 {
     FUN_00146c34();
-    FUN_0016f864();
+    srvInitialize();
 }
 
 } /* extern "C" */

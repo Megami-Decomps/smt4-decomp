@@ -15,9 +15,9 @@ int FUN_002bb130(int);
 int threadSleepDuration(int, int);
 int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
-int FUN_002c131c(...);
+int errThrowFatal(...);
 int nn_os_LightEvent_Signal(unsigned int *);
-int FUN_002c40f8(unsigned int *, int *, int, int);
+int svcWaitSynchronizationN(unsigned int *, int *, int, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int resultHandleFailure(void);
 int asdFatalError(void);
 int __aeabi_vec_ctor_nocookie_nodtor(int *, unsigned char *, int, int);
@@ -58,9 +58,9 @@ extern unsigned int FUN_002bb100(void);
 /* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
-/* Supplied declaration required: FUN_002c131c. */
+/* Supplied declaration required: errThrowFatal. */
 /* Supplied declaration required: nn_os_LightEvent_Signal. */
-/* Supplied declaration required: FUN_002c40f8. */
+/* Supplied declaration required: svcWaitSynchronizationN. */
 /* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
@@ -96,9 +96,9 @@ void FUN_0012a37c(void)
     temp_v4 = 0xffffffff;
     uStack_24 = 0xffffffff;
     puVar2 = &temp_v5;
-    FUN_002c40f8(puVar2,&temp_v6,3,0);
+    svcWaitSynchronizationN(puVar2,&temp_v6,3,0);
     if ((int)puVar2 < 0) {
-      FUN_002c131c();
+      errThrowFatal();
     }
     if (DAT_00465630 != '\0') {
       return;
@@ -188,7 +188,7 @@ joined_r0x0012a634:
           FUN_002bb378();
           temp_v2 = FUN_0013b8c4(0,0x40);
           if (temp_v2 < 0) {
-            FUN_002c131c(temp_v2,0x12a674);
+            errThrowFatal(temp_v2,0x12a674);
           }
           nn_applet_CTR_detail_CloseSession();
           continue;

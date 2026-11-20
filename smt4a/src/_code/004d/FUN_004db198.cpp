@@ -5,7 +5,7 @@
 
 extern "C" {
 const u8 *dataTable5GetEntries(void);
-u16 FUN_004dc154(void *, u8, u16);
+u16 fusionFindClosestLevelEntry(void *, u8, u16);
 
 u32 FUN_004db198(void *context, u16 firstId, u16 secondId, PackedIdentifiers *output)
 {
@@ -17,7 +17,7 @@ u32 FUN_004db198(void *context, u16 firstId, u16 secondId, PackedIdentifiers *ou
         u32 level = first->level + second->level;
         if ((first->level + second->level) % 2 == 1)
             ++level;
-        u16 result = FUN_004dc154(context, recipe->result, *levelBias + level / 2);
+        u16 result = fusionFindClosestLevelEntry(context, recipe->result, *levelBias + level / 2);
         if (result != first->id && result != second->id && result != 0) {
             // Both games use the same two packed operand ids and result id.
             output->firstIdentifier = firstId;

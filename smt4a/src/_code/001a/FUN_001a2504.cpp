@@ -12,7 +12,7 @@ struct NetState {
 
 extern NetState DAT_005c14a8;
 
-void *FUN_001a2a4c(void);
+void *nn_gxlow_CTR_GetCmdManager(void);
 s32 FUN_001b013c(void *session, const NetMessage *message);
 
 /* Send a type-5 message with the session payload (when requested), then, if that succeeded, a type-1
@@ -35,7 +35,7 @@ void FUN_001a2504(u32 param1, u32 param2, s32 withHeader, u32 param3)
         message.payload[1] = session->payload[1];
         message.payload[2] = session->payload[2];
         message.payload[3] = session->payload[3];
-        result = FUN_001b013c((u8 *)FUN_001a2a4c() + 0x58, &message);
+        result = FUN_001b013c((u8 *)nn_gxlow_CTR_GetCmdManager() + 0x58, &message);
     }
     if ((s32)(result & 0x80000000) >= 0) {
         NetSessionHeader *session = DAT_005c14a8.header;
@@ -50,7 +50,7 @@ void FUN_001a2504(u32 param1, u32 param2, s32 withHeader, u32 param3)
         message.payload[1] = session->payload[1];
         message.payload[2] = session->payload[2];
         message.payload[3] = 0;
-        FUN_001b013c((u8 *)FUN_001a2a4c() + 0x58, &message);
+        FUN_001b013c((u8 *)nn_gxlow_CTR_GetCmdManager() + 0x58, &message);
     }
 }
 

@@ -47,7 +47,7 @@ s32 flaggedValueHolderGetTotal(ShopHolder *holder);
 s32 messageTargetSetValue(u32 value, s32 arg);
 s32 inputIsQuestMenuPressed(void);
 s32 inputIsQuestCancelPressed(void);
-s32 FUN_0027ee9c(void);
+s32 inputConfirmPressed(void);
 s8 uiStateGetFirstFlag(const void *state);
 s8 uiSubStateGetReady(const StateWindow *window);
 u32 selectOwnerGetSelected(StateWindow *window); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: argument of type "StateWindow *" is incompatible with parameter of type "Obj *")
@@ -65,7 +65,7 @@ int countdownSetModeFive(void);
 int beginStatusPanelClose(void);
 int buttonHelpSetText(...);
 int sortMenuCreate(...);
-int FUN_0029e328(...);
+int useCounterAppendValue(...);
 int useCounterStart(void);
 int FUN_0029dfc0(...);
 int FUN_0029e0f8(void);
@@ -90,7 +90,7 @@ void Obj422448::FUN_003abed8()
     s32 menuPressed = inputIsQuestMenuPressed();
     if (screen->rowCount > 0) {
         cancel = inputIsQuestCancelPressed();
-        confirm = FUN_0027ee9c();
+        confirm = inputConfirmPressed();
     }
     StateWindow *window = &screen->window;
     if (uiSubStateGetReady(window) != 0) {
@@ -126,11 +126,11 @@ void Obj422448::FUN_003abed8()
         FUN_00232848();
     } else if (cancel != 0) {
         sortMenuCreate(16, 0);
-        FUN_0029e328(11);
-        FUN_0029e328(7);
-        FUN_0029e328(15);
-        FUN_0029e328(17);
-        FUN_0029e328(3);
+        useCounterAppendValue(11);
+        useCounterAppendValue(7);
+        useCounterAppendValue(15);
+        useCounterAppendValue(17);
+        useCounterAppendValue(3);
         useCounterStart();
         screen->state = 4;
         screen->substate = 0;

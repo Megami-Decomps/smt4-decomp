@@ -5,7 +5,7 @@
 
 extern "C" {
 void sysPlaySe(s32 sound);
-u32 FUN_002f3bc4(SlotRecordA *record, s32 index, s32 source);
+u32 uniteBuildResultUnitRecord(SlotRecordA *record, s32 index, s32 source);
 void FUN_0032d0c8(s32 first, s32 second, u16 id, const SlotRecordA *record);
 void FUN_00331380(s32 panel);
 bool partyPanelIsActive(void);
@@ -17,7 +17,7 @@ void campFusionResultCommand(void)
         if ((u8)camp->unitSelectIndex != 3) {
             sysPlaySe(82);
             SlotRecordA record;
-            if (FUN_002f3bc4(&record, camp->unitSelectIndex, camp->unitSelectSource)) {
+            if (uniteBuildResultUnitRecord(&record, camp->unitSelectIndex, camp->unitSelectSource)) {
                 FUN_0032d0c8(0, 1, record.id, &record);
             }
             return;

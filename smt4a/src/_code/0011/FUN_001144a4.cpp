@@ -10,7 +10,7 @@ extern unsigned char DAT_00559684; /* 0x559684 */
 
 extern unsigned int FUN_0011c5d8(void);
 extern int _Znwj(unsigned int);
-extern unsigned int FUN_002ea704(void);
+extern unsigned int watcherGetEnabledFlag(void);
 /* Supplied declaration required: _ZN9Obj558cbcC1EhP17Obj558cbcListener. */
 
 
@@ -21,7 +21,7 @@ unsigned int * FUN_001144a4(unsigned int *param_1,unsigned int param_2)
   unsigned int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_002ea704();
+  temp_v0 = watcherGetEnabledFlag();
   _ZN9Obj558cbcC1EhP17Obj558cbcListener(param_1,param_2,temp_v0);
   param_1[10] = 0;
   *param_1 = (unsigned int)&DAT_00559684;

@@ -12,9 +12,9 @@ extern u8 g_nngxGpu;
 
 extern void nn_os_CriticalSection_Enter(void *lock);
 extern void nn_os_CriticalSection_Leave(void *lock);
-extern void FUN_0016f864(void);
+extern void srvInitialize(void);
 extern u32 libc_strlen(const u16 *s);
-extern void asdModelForwardChecked(void *buffer, const u16 *name, u32 length, s32 flag);
+extern void srvGetServiceHandle(void *buffer, const u16 *name, u32 length, s32 flag);
 extern void nn_gxlow_CTR_Gpu_AcquireRight(void *gpu, u32 a, s32 b);
 extern void FUN_0018b28c(void);
 
@@ -29,13 +29,13 @@ void FUN_00170054(void)
     }
     g_nngxState.initialized = 1;
     if (g_nngxState.nameReady == 0) {
-        FUN_0016f864();
+        srvInitialize();
         g_nngxState.nameReady = 1;
     }
     {
         const u16 *name = g_nngxState.name;
 
-        asdModelForwardChecked(&g_nngxDefaultCommandState, name, libc_strlen(name), 0);
+        srvGetServiceHandle(&g_nngxDefaultCommandState, name, libc_strlen(name), 0);
     }
     g_nngxState.unk14 = g_nngxState.unk10;
     nn_gxlow_CTR_Gpu_AcquireRight(&g_nngxGpu, g_nngxCommandState1, g_nngxState.gpuRightFlag);

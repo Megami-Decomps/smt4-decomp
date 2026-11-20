@@ -25,13 +25,13 @@
 
 extern "C" {
 
-s32 objectApplyIfUnblocked(GridNavigation *object); // declcheck: local (the shared prototype takes the opaque Object; the list is a GridNavigation)
+s32 gridNavigationGetItemCount(GridNavigation *object); // declcheck: local (the shared prototype takes the opaque Object; the list is a GridNavigation)
 s32 padQueryLogicalKey(s32 key, s32 mode);
 s32 resourceRunOperationIfUnblocked(GridNavigation *object); // declcheck: local (as above)
 u32 uiScrollHandleActionsOrTouch(GridNavigation *list, const TextureTableEntryIV *touchArea, const s16 *rowRegions,
                                  s32 thumbRegion, s32 previousRegion, s32 nextRegion, s8 *touched, s32 secondary,
                                  s32 notify);
-u8 FUN_00228b04(GridNavigation *list, s32 mode);
+u8 gridNavigationHandleConfirm(GridNavigation *list, s32 mode);
 void FUN_003d498c(u32 id, u32 mode);
 void FUN_003d474c(void);
 void FUN_0023ff10(void);
@@ -42,7 +42,7 @@ void FUN_00417d08(UiQuestApoc *quest);
 void buttonHelpSetText(const s8 *text, u32 color);
 void sortMenuAcquire(u32 owner, u8 option);
 void useCounterStart(void);
-void FUN_003dea6c(u16 definitionId, s32 includeArguments, s32 convertTitle);
+void scrMessageSetSpeakerTitle(u16 definitionId, s32 includeArguments, s32 convertTitle);
 u32 questRecordIsUsable(u32 id);
 s32 questQueryFalse(void);
 u32 partyEntryFlagsBit3(s32 index);
@@ -79,7 +79,7 @@ static __inline void uiQuestSelectSpecialDetailPage(u16 id)
     if (!partyEntryBitsBit4(id) && questHasSpecialDetailPage(id)) {
         s32 index;
         for (index = 0; index < quest->listState.count; ++index) {
-            if (FUN_002f7730(index, id) == 3)
+            if (questGetDisplayState(index, id) == 3)
                 break;
         }
         if (index >= quest->listState.count)
@@ -124,7 +124,7 @@ void uiQuestListInput(void)
         ids = quest->list;
     }
 
-    if (objectApplyIfUnblocked(cursor) <= 0) {
+    if (gridNavigationGetItemCount(cursor) <= 0) {
         /* An empty list can only be left. */
         if (padQueryLogicalKey(1, 1)) {
             uiSpriteSetKeyframe(quest->sprite(0), 2, 0);
@@ -141,7 +141,7 @@ void uiQuestListInput(void)
                                          quest->touch.scrollDownRegion, &touched, 0, 1)) {
             if (questListCurrentId(cursor, ids) != before)
                 questListSelect(quest, questListCurrentId(cursor, ids));
-        } else if (FUN_00228b04(cursor, 1)) {
+        } else if (gridNavigationHandleConfirm(cursor, 1)) {
             questListSelect(quest, questListCurrentId(cursor, ids));
         } else if (padQueryLogicalKey(8, 0)) {
             /* Previous category. */
@@ -172,10 +172,10 @@ void uiQuestListInput(void)
             eventQueueAddUniqueIfValid(QUEST_SE_DECIDE);
             buttonHelpSetText(NULL, 0xF4F4F4FF);
             sortMenuAcquire(14, 0);
-            FUN_0031f208(0x22);
-            FUN_0031f208(0x21);
-            FUN_0031f208(0x18);
-            FUN_0031f208(0x19);
+            useCounterAppendValue(0x22);
+            useCounterAppendValue(0x21);
+            useCounterAppendValue(0x18);
+            useCounterAppendValue(0x19);
             useCounterStart();
             uiQuestEnterMenuState(g_uiQuest, 30);
         } else if (quest->unk90c == 0 && !quest->unk93D && padQueryLogicalKey(10, 1)) {
@@ -190,7 +190,7 @@ void uiQuestListInput(void)
                 QuestRecordA *record = questDataGetRecord(id);
                 bool accepted = false;
 
-                FUN_003dea6c(id, 0, 1);
+                scrMessageSetSpeakerTitle(id, 0, 1);
                 if (record->kind == 6 || record->kind == 9 || record->kind == 11) {
                     if (questRecordIsUsable(id) || questQueryFalse()) {
                         if (!partyEntryFlagsBit3(id) || record->kind == 9) {

@@ -10,7 +10,7 @@ extern "C" {
 
 int statusReplaceSkillList(...);
 int FUN_001cea8c(...);
-int FUN_00295214(...);
+int buttonHelpSetTextVisible(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int devilCreateRaceEffect(...);
 int gameSavedFlagSet(...);
 int messageMainFinishWindow(void);
@@ -30,7 +30,7 @@ int FUN_002954bc(...);
 int btlTalkBustUpSetUnk2F4(...);
 int btlTalkBustUpSetDemonTexture(...);
 int FUN_0029bd4c(void);
-int FUN_0029bde4(...);
+int saveMarkIdListSeen(...);
 int unitRecalculateEffectiveStats(...);
 int flagCountUnlockedSlots(...);
 int beginStatusPanelClose(void);
@@ -48,7 +48,7 @@ int btlTalkBustUpCreate(void);
 int statusBustUpPortraitRelease(...);
 int scrScriptProcessStartEntry(...);
 int scrScriptProcessCreate(...);
-int FUN_0029a0cc(void);
+int btlBuildDemonSnapshotFromSaveRecord(void);
 int FUN_0029a0e8(...);
 int gameGlobalsSetSelected(...);
 int FUN_0029c424(...);
@@ -57,7 +57,7 @@ int FUN_0029c4e4(...);
 int messageDismissNumericBanner(...);
 int statusPanelSetOpen(...);
 int FUN_0029d8f4(...);
-int FUN_0029e788(void);
+int campMenuSessionReset(void);
 int gameSetIconDisplayEnabled(...);
 int FUN_0029ede8(...);
 int gridNavigationConfigure(...);
@@ -66,7 +66,7 @@ int eventQueueAddUniqueIfValid(...);
 int dataTable01FindByIdWithAoc(...);
 int libc_strcpy(...);
 
-int FUN_00295a18(...);
+int saveFlagSetOrAddCounter(...);
 int infoWinStartTimer(...);
 int gameMoneyAdd(...);
 int FUN_00295cec(...);
@@ -78,7 +78,7 @@ int eventQueueAddUnique(...);
 int timerStart(...);
 int spriteStartAnimationByIndex(...);
 int soundPlaySeUnpanned(...);
-int FUN_002c1658(...);
+int inputQueryButtonState(...);
 int rt_memclr(...);
 int memClear(...);
 int FUN_0033b7a0(...);
@@ -96,7 +96,7 @@ int FUN_002963ec(...);
 int FUN_00296474(...);
 int resultSetMenuState(...);
 int uiQuestClose(void);
-int FUN_0029c43c(...);
+int messageBannerSetCountdown(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int messageTargetSetValue(unsigned int, int);
 int messageBannerInitSelection(int, int);
 int soundChannelRequestIfEnabled(int, int);
@@ -146,7 +146,7 @@ extern int g_result; /* 0x44dc20 */
 /* Supplied declaration required: mapDepartAdvanceState. */
 /* Supplied declaration required: FUN_00204358. */
 /* Supplied declaration required: FUN_00216e64. */
-/* Supplied declaration required: FUN_00295214. */
+/* Supplied declaration required: buttonHelpSetTextVisible. */
 /* Supplied declaration required: devilCreateRaceEffect. */
 extern int asdSoundSlotBIsPlaying(unsigned int);
 /* Supplied declaration required: gameSavedFlagSet. */
@@ -161,7 +161,7 @@ extern int FUN_0029563c(void);
 /* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
 /* Supplied declaration required: statusBustUpPortraitRelease. */
-/* Supplied declaration required: FUN_00295a18. */
+/* Supplied declaration required: saveFlagSetOrAddCounter. */
 /* Supplied declaration required: infoWinStartTimer. */
 extern int dialogIsActive(void);
 /* Supplied declaration required: gameMoneyAdd. */
@@ -185,14 +185,14 @@ extern int modelPairTryBind(int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: scrScriptProcessCreate. */
 extern int messageMainGetChoiceResult(void);
-/* Supplied declaration required: FUN_0029a0cc. */
+/* Supplied declaration required: btlBuildDemonSnapshotFromSaveRecord. */
 /* Supplied declaration required: FUN_0029a0e8. */
 /* Supplied declaration required: gameGlobalsSetSelected. */
 /* Supplied declaration required: FUN_0029bd4c. */
-/* Supplied declaration required: FUN_0029bde4. */
+/* Supplied declaration required: saveMarkIdListSeen. */
 /* Supplied declaration required: FUN_0029bed8. */
 /* Supplied declaration required: FUN_0029c424. */
-/* Supplied declaration required: FUN_0029c43c. */
+/* Supplied declaration required: messageBannerSetCountdown. */
 extern int FUN_0029c48c(void);
 /* Supplied declaration required: FUN_0029c4c8. */
 /* Supplied declaration required: FUN_0029c4e4. */
@@ -205,14 +205,14 @@ extern int FUN_0029c48c(void);
 extern int FUN_0029e0f8(void);
 /* Supplied declaration required: messageTargetSetValue. */
 /* Supplied declaration required: messageBannerInitSelection. */
-/* Supplied declaration required: FUN_0029e788. */
+/* Supplied declaration required: campMenuSessionReset. */
 /* Supplied declaration required: gameSetIconDisplayEnabled. */
 extern int flagWordTestBit(int, unsigned int);
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: gridNavigationConfigure. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
-/* Supplied declaration required: FUN_002a0cc8. */
+/* Supplied declaration required: gameGlobalsSetSubScreenActive. */
 extern int sys43e188GetState(void);
 /* Supplied declaration required: gameGetUnitRecord. */
 /* Supplied declaration required: gameGetSlotTable. */
@@ -239,7 +239,7 @@ extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern char *dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c1658. */
+/* Supplied declaration required: inputQueryButtonState. */
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: memClear. */
 extern unsigned int asdLoadFileSyncDefault(int *);
@@ -479,7 +479,7 @@ LAB_0018c354:
         } while (temp_v8 < 7);
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 4);
-      FUN_0029c43c(*(unsigned int *)(temp_v2 + 0x3650),1);
+      messageBannerSetCountdown(*(unsigned int *)(temp_v2 + 0x3650),1);
       resultSetMenuState(temp_v2,4);
     }
     break;
@@ -775,10 +775,10 @@ LAB_0018c354:
       *(unsigned char *)(temp_v2 + 0xd55d) = 1;
     }
     temp_v4 = 0;
-    FUN_002c1658(0,1);
+    inputQueryButtonState(0,1);
     if (temp_v4 == 0) {
       temp_v4 = 1;
-      FUN_002c1658();
+      inputQueryButtonState();
       if (temp_v4 == 0) {
         if (temp_v16 != 0) {
 LAB_0018d058:
@@ -961,7 +961,7 @@ LAB_0018d058:
     FUN_002960ec(temp_v2);
     unitNotificationShowNext(temp_v2);
     temp_v4 = 0;
-    FUN_002c1658(0,1);
+    inputQueryButtonState(0,1);
     if (temp_v4 != 0) {
       temp_v4 = dialogIsActive();
       if (temp_v4 != 0) {
@@ -972,7 +972,7 @@ LAB_0018d058:
         temp_v8 = temp_v2 + temp_v4 * 4;
         temp_v18 = *(int *)(temp_v8 + 0x3618);
         if (temp_v18 != 0) {
-          FUN_00295a18(temp_v18,*(unsigned int *)(temp_v8 + 0x3630));
+          saveFlagSetOrAddCounter(temp_v18,*(unsigned int *)(temp_v8 + 0x3630));
         }
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 6);
@@ -1007,7 +1007,7 @@ LAB_0018d058:
       } while (temp_v8 < 3);
       if (*(int *)(temp_v2 + 0xcf74) != *(int *)(temp_v2 + 0xcf78)) {
         gameSetIconDisplayEnabled(1);
-        FUN_0029e788();
+        campMenuSessionReset();
         resultSetMenuState(temp_v2,9);
       }
       else {
@@ -1033,7 +1033,7 @@ LAB_0018d058:
         FUN_0029c4c8(1);
         FUN_0029a0e8(temp_v2 + *piVar17 * 0x620 + 0x3658);
         gameGetPlayerData();
-        FUN_0029a0cc();
+        btlBuildDemonSnapshotFromSaveRecord();
         statusPanelSetOpen(1);
         resultSetMenuState(temp_v2,10);
         gridNavigationConfigure(temp_v2 + 0xcfd4,5,5,1,0,1);
@@ -1050,7 +1050,7 @@ LAB_0018d058:
     case 0:
       btlTalkBustUpCreate();
       FUN_0029c424(1);
-      FUN_002a0cc8(1);
+      gameGlobalsSetSubScreenActive(1);
       temp_v16 = (unsigned int)*(unsigned short *)(temp_v4 + 0x46);
       dataTable01FindByIdWithAoc(temp_v16);
       libc_strcpy(temp_v26,temp_v16);
@@ -1095,7 +1095,7 @@ LAB_0018da7c:
     case 2:
       temp_v4 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x3568));
       if (temp_v4 == 2) {
-        FUN_002a0cc8(0);
+        gameGlobalsSetSubScreenActive(0);
         temp_v4 = 0;
         temp_v18 = 3;
         *(int *)(temp_v2 + 0x3534) = *(int *)(temp_v2 + 0x3534) + 1;
@@ -1377,12 +1377,12 @@ joined_r0x0018edf0:
           *piVar20 = *piVar20 + 1;
           FUN_0029c424(0);
         }
-        FUN_0029bde4(temp_v4);
+        saveMarkIdListSeen(temp_v4);
       }
       break;
     case 4:
       temp_v4 = 0;
-      FUN_002c1658(0,1);
+      inputQueryButtonState(0,1);
       if (temp_v4 != 0) {
         buttonHelpSetText(0,0x323232ff);
         if (*(char *)(temp_v8 + 0x3c71) != '\0') {
@@ -1516,7 +1516,7 @@ joined_r0x0018edf0:
         FUN_0029c424(0);
         unitRecalculateEffectiveStats(temp_v4);
         FUN_002954bc(temp_v4);
-        FUN_0029bde4(temp_v4);
+        saveMarkIdListSeen(temp_v4);
       }
       break;
     case 4:
@@ -1666,7 +1666,7 @@ joined_r0x0018edf0:
         scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x3574));
         if (*(int *)(temp_v2 + 0x3544) >= 0x21) {
           temp_v4 = 0;
-          FUN_002c1658(0,1);
+          inputQueryButtonState(0,1);
           if ((temp_v4 != 0) || (temp_v4 = statusDownValueGet(), temp_v4 != 0)) {
             temp_v4 = statusDownGetCursorIndex();
             if ((temp_v4 != *(int *)(temp_v2 + 0xd038)) && (temp_v4 = statusCursorIsAtLast(), temp_v4 == 0)) {
@@ -1684,7 +1684,7 @@ joined_r0x0018edf0:
           }
           else {
             temp_v4 = 10;
-            FUN_002c1658(10,1);
+            inputQueryButtonState(10,1);
             if (temp_v4 != 0) {
               FUN_0029c424(1);
               messageMainFinishWindow();
@@ -1791,7 +1791,7 @@ joined_r0x0018edf0:
             temp_v0 = *(char *)(temp_v18 + 0x3c72);
             goto joined_r0x0018edf0;
           }
-          FUN_00295214(0);
+          buttonHelpSetTextVisible(0);
           resultSetMenuState(temp_v2,0xc);
         }
       }
@@ -1928,7 +1928,7 @@ joined_r0x0018edf0:
   case 0x13:
     temp_v4 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x3568));
     if (temp_v4 == 2) {
-      FUN_00295214(0);
+      buttonHelpSetTextVisible(0);
       buttonHelpSetContext(3);
       *(unsigned int *)(temp_v2 + 0x352c) = 0x14;
     }

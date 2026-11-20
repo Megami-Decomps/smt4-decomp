@@ -14,7 +14,7 @@ int FUN_0027eee0(void);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
 int mathRemPio2f(void);
 int mathAbsHeadingErrorToPoint(void);
-int FUN_00295a18(int, int);
+int saveFlagSetOrAddCounter(int, int);
 int gameCounterAddSaturating(int, int);
 int asdMdlManagerDestroy(void);
 int eventQueueAddUnique(int);
@@ -61,14 +61,14 @@ extern int DAT_0049fc84; /* 0x49fc84 */
 extern int FUN_0021e7f4(int, unsigned int);
 extern int mapDepartIsRunning(void);
 /* Supplied declaration required: FUN_0027ee24. */
-extern int FUN_0027ee9c(void);
+extern int inputConfirmPressed(void);
 extern unsigned int lmapSceneGetUnk0(void);
 /* Supplied declaration required: FUN_0027eee0. */
 extern int mathCirclesOverlap(void);
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: mathAbsHeadingErrorToPoint. */
-/* Supplied declaration required: FUN_00295a18. */
+/* Supplied declaration required: saveFlagSetOrAddCounter. */
 /* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: eventQueueAddUnique. */
@@ -162,7 +162,7 @@ joined_r0x002706c8:
           }
           if ((*(char *)(temp_v23 + 0x12) == '\0') && (DAT_0049f934 == '\0')) {
             if ((DAT_0049fc84 == 0) || (DAT_0049fc84 == 4)) {
-              temp_v3 = FUN_0027ee9c();
+              temp_v3 = inputConfirmPressed();
               if (((temp_v3 != 0) && (*(char *)(g_mapCamera + 0xb0) == '\0')) && (temp_v17[0] != 0))
               {
                 DAT_0049fa58 = 0;
@@ -184,7 +184,7 @@ joined_r0x002706c8:
                   }
                   temp_v16 = (int)*(short *)(temp_v3 + 0x12);
                   if (temp_v16 != 0) {
-                    FUN_00295a18(temp_v16,1);
+                    saveFlagSetOrAddCounter(temp_v16,1);
                   }
                   else {
                     temp_v16 = FUN_0021e7f4((int)*(short *)(temp_v3 + 0x14),1);

@@ -2,12 +2,12 @@
 #include "shard/W6_W6Match2_ScrollList.h"
 
 extern "C" {
-extern AvailabilityState DAT_004d9758;
+extern AvailabilityState g_screenFadeSlots;
 extern AvailabilityState g_screenFadeAvailability;
 
 u32 screenFadesAllReady(void)
 {
-    if (availabilityStateReady(&DAT_004d9758)) {
+    if (availabilityStateReady(&g_screenFadeSlots)) {
         if (availabilityStateReady(&g_screenFadeAvailability))
             return 1;
     }

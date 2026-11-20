@@ -29,7 +29,7 @@ typedef struct PartnerCardScreen {
 
 s32 FUN_002b4dcc(PartnerCardUnit *unit);
 void efctSetSpeed(f32 speed);
-void FUN_00180310(u32 a, s32 x, s32 y, u32 b, u32 c, u32 tag, const char *format, s32 value);
+void statRowDrawValueImpl(u32 a, s32 x, s32 y, u32 b, u32 c, u32 tag, const char *format, s32 value);
 void FUN_00183788(s32 hp, s32 maxHp, u32 a, u32 b, u32 group, u32 id0, u32 id1, u32 id2, u32 id3, s32 x, s32 y, u32 tag,
                   u32 c);
 s32 valueAtMostFifthOfTotal(s32 value, s32 total);
@@ -63,7 +63,7 @@ void FUN_004bde34(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s3
     texDrawTableEntryAtStoredOrigin(2, 0x11, 0x98, x, y, 0x6F);
     TextureTableEntryIV *levelBox = asdTMTexTableEntryAt(0x11, 0x9D);
 
-    FUN_00180310(0, levelBox->x + x, levelBox->y + y, 1, 3, 0x79, "%d", level);
+    statRowDrawValueImpl(0, levelBox->x + x, levelBox->y + y, 1, 3, 0x79, "%d", level);
     efctSetSpeed(scale);
     texDrawTableEntryAtStoredOrigin(2, 0x11, 0x9E, x, y, 0x6F);
     texDrawTableEntryAtStoredOrigin(2, 0x11, 0x77, x, y, 0x79);
@@ -76,7 +76,7 @@ void FUN_004bde34(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s3
         drawSetColorFromRGBA8(0xDC0F14FF);
     }
     efctSetSpeed(scale);
-    FUN_00180310(10, hpX, hpY, 1, 4, 0x79, "%d", hp);
+    statRowDrawValueImpl(10, hpX, hpY, 1, 4, 0x79, "%d", hp);
     gxResetColorQuadToWhite();
     TextureTableEntryIV *markerBox = asdTMTexTableEntryAt(0x11, 0xAC);
     s32 markerX = markerBox->x + x;

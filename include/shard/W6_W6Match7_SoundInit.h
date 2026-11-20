@@ -68,7 +68,7 @@ void asdSoundSetVolumeIfEnabled(u8 volume);
 extern "C" {
 #endif
 
-void romPathForward(u32 a, u32 b, u32 c, u32 d, u32 e);
+void fsMountRomFs(u32 maxFiles, u32 maxDirectories, void *buffer, u32 bufferSize, u32 useCache);
 
 #ifdef __cplusplus
 }

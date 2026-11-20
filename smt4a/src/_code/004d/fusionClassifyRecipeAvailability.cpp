@@ -7,7 +7,7 @@ extern "C" {
 const FusionRecipe *contentEntryFindById(u32);
 s32 gameSlotTableFindFree(void);
 s32 bitsAt60Test(const SlotRecordA *, u32);
-s32 FUN_002a4b28(u16);
+s32 compendiumEntryIsRegistered(u16);
 s32 arrayContainsU16(const u16 *, s32, u32);
 
 // Classify recipe ingredients as held or summonable, then test the collected availability list.
@@ -33,7 +33,7 @@ u32 fusionClassifyRecipeAvailability(u32 unused, u32 recipeId, u16 *statuses)
                     }
                 }
             }
-            if (statuses[i] == 0 && FUN_002a4b28(recipe->ingredients[i]))
+            if (statuses[i] == 0 && compendiumEntryIsRegistered(recipe->ingredients[i]))
                 statuses[i] = 2;
             ++count;
         }

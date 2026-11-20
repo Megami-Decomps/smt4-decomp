@@ -4,9 +4,9 @@
 
 extern "C" {
 
-u8 FUN_00270bfc(void *holder);
+u8 btlUiObjCStateIsNotFourteen(void *holder);
 
-/* Returns 1 when there is no battle UI, otherwise FUN_00270bfc's result for its objC. */
+/* Returns 1 when there is no battle UI, otherwise btlUiObjCStateIsNotFourteen's result for its objC. */
 u8 btlUiIsPanelHolderReady(BtlUiA *arg0)
 {
     BtlUiA *ui = g_btlUi.ui;
@@ -14,7 +14,7 @@ u8 btlUiIsPanelHolderReady(BtlUiA *arg0)
     if (ui == NULL) {
         return 1;
     }
-    return FUN_00270bfc(&ui->objC);
+    return btlUiObjCStateIsNotFourteen(&ui->objC);
 }
 
 } /* extern "C" */

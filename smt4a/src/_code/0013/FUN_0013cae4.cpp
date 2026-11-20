@@ -13,11 +13,11 @@ void FUN_0015f490(u32 id, s32 sound, f32 volume, u32 enabled, u32 flags);
 u32 FUN_0013cae4(s32 category, u32 sound)
 {
     if (category != 10) {
-        u32 flags = FUN_00152f44();
+        u32 flags = messageVoiceFlagsGet();
         if (category == 1 || category == 3) {
             flags |= 4;
         }
-        u32 volume = FUN_0014af98();
+        u32 volume = messageVoiceBankGet();
         FUN_001566a8(category, sound, volume, flags, 1, 0.707f, 0.707f);
     } else {
         BtlMainStateA* battle = btlGetMainState();

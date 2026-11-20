@@ -10,22 +10,22 @@ struct ModelBankSet {
     /* 0x284 */ ModelManager *models[6][64];
 };
 
-extern ModelBankSet DAT_004bce8c;
+extern ModelBankSet g_asdMdlBankSet;
 void asdMdlManagerDestroy(ModelManager *manager);
 
 void asdMdlBanksDestroyAll(void)
 {
     for (s32 bank = 0; bank < 6; bank++) {
         for (s32 i = 1; i < 64; i++) {
-            if (DAT_004bce8c.models[bank][i] != NULL) {
-                asdMdlManagerDestroy(DAT_004bce8c.models[bank][i]);
-                DAT_004bce8c.models[bank][i] = NULL;
+            if (g_asdMdlBankSet.models[bank][i] != NULL) {
+                asdMdlManagerDestroy(g_asdMdlBankSet.models[bank][i]);
+                g_asdMdlBankSet.models[bank][i] = NULL;
             }
         }
-        if (DAT_004bce8c.bankManagers[bank] != NULL) {
-            asdMdlManagerDestroy(DAT_004bce8c.bankManagers[bank]);
-            DAT_004bce8c.bankManagers[bank] = NULL;
-            DAT_004bce8c.models[bank][0] = NULL;
+        if (g_asdMdlBankSet.bankManagers[bank] != NULL) {
+            asdMdlManagerDestroy(g_asdMdlBankSet.bankManagers[bank]);
+            g_asdMdlBankSet.bankManagers[bank] = NULL;
+            g_asdMdlBankSet.models[bank][0] = NULL;
         }
     }
 }

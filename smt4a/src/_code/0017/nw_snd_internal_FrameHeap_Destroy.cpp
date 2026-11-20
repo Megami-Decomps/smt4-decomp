@@ -2,7 +2,7 @@
 
 extern "C" {
 
-s32 FUN_0018c988(s32 heap);
+s32 nw_snd_internal_FrameHeap_DestroyImpl(s32 heap);
 s32 nw_snd_internal_FrameHeap_ClearSection(s32 *frameHeap);
 s32 nw_ut_FrameHeap_Free(s32 heap, s32 mode);
 
@@ -12,7 +12,7 @@ void nw_snd_internal_FrameHeap_Destroy(s32 *frameHeap)
     if (*frameHeap != 0) {
         nw_snd_internal_FrameHeap_ClearSection(frameHeap);
         nw_ut_FrameHeap_Free(*frameHeap, 3);
-        FUN_0018c988(*frameHeap);
+        nw_snd_internal_FrameHeap_DestroyImpl(*frameHeap);
         *frameHeap = 0;
     }
 }

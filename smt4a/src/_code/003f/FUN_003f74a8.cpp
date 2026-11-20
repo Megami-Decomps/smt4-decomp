@@ -12,7 +12,7 @@ extern "C" {
 
 extern const char DAT_0052d3e8[];
 u16 dataTable10FindValue(u16 id);
-const char *FUN_00180114(u16 messageId);
+const char *table01RecordLookupForContent(u16 messageId);
 
 // Message group id for an element kind, -1 when it has none.
 static inline s32 elementMessageGroup(u32 kind)
@@ -77,7 +77,7 @@ const char *FUN_003f74a8(void *owner, const ElementInfo *info)
             message = dataTable10FindValue(id);
         }
     }
-    return FUN_00180114(message);
+    return table01RecordLookupForContent(message);
 }
 
 } /* extern "C" */

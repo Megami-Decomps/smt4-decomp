@@ -28,7 +28,7 @@ typedef struct Owner {
     /* 0x210 */ NameTable *names;
 } Owner;
 
-s32 FUN_001a7a20(u8 *table, u32 name, u32 length);
+s32 nameTableLookupEntry(u8 *table, u32 name, u32 length);
 u32 libc_strlen(u32 name);
 
 /* Looks `name` up in the owner's name table and, if found, copies the three words at 0xC, 0x1C and 0x2C of its entry into `out`. Returns whether it was found. */
@@ -40,7 +40,7 @@ u8 lookupNameEntry(Owner *owner, u32 name, u32 *out)
     u8 *base = owner->names->member70;
 
     length = libc_strlen(name);
-    index = FUN_001a7a20(base + 4, name, length);
+    index = nameTableLookupEntry(base + 4, name, length);
     if (index != 0xFFFF) {
         entry = &owner->list->entries[index];
         out[0] = entry->first;

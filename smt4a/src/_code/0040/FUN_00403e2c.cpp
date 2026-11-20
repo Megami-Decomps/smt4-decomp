@@ -37,9 +37,9 @@ void uiSpriteSetKeyframe(void *sprite, s32 key, s32 arg);
 void uiSpriteSetImageKeyframe(void *sprite, s32 key, s32 arg);
 void buttonHelpSetText(s32 a, u32 color);
 void FUN_00212724(void);
-void FUN_00228b04(void *list, s32 arg);
+void gridNavigationHandleConfirm(void *list, s32 arg);
 void useCounterStart(void);
-void FUN_0031f208(s32 id);
+void useCounterAppendValue(s32 id);
 void sortMenuAcquire(s32 id, s32 arg);
 s32 uiScrollHandleActionsOrTouch(void *list, const TextureTableEntryIV *touchArea, void *area, s32 x, s32 y, s32 w, u8 *flag, s32 a, s32 b);
 u32 contentFindRecordById(void);
@@ -55,7 +55,7 @@ void FUN_00403e2c(ListMenu *menu)
 {
     uiSpriteAdvanceAnimation(menu->scrollA, 1.0f);
     uiSpriteAdvanceAnimation(menu->scrollB, 1.0f);
-    FUN_00228b04(menu->list, 1);
+    gridNavigationHandleConfirm(menu->list, 1);
     menu->cursor = resourceRunOperationIfUnblocked(menu->list);
     menu->pageCount = listCursorGetRowIfUnblocked(menu->list);
     menu->selectedId = menu->ids[menu->pageCount + menu->cursor];
@@ -81,8 +81,8 @@ void FUN_00403e2c(ListMenu *menu)
         FUN_004029f4(menu, 2, 0);
     } else if (padQueryLogicalKey(9, 1)) {
         sortMenuAcquire(30, 0);
-        FUN_0031f208(52);
-        FUN_0031f208(27);
+        useCounterAppendValue(52);
+        useCounterAppendValue(27);
         useCounterStart();
         buttonHelpSetText(0, 0xF4F4F4FF);
         eventQueueAddUniqueIfValid(0x0100020E);

@@ -7,15 +7,15 @@
 extern "C" {
 
 int effectNodeUpdateTransform(...);
-int FUN_001abbc4(void);
-int FUN_001ac8ec(...);
-int FUN_001acb48(void);
+int effPartCreateFromSource(void);
+int effectParticleEmitterSetAdvance(...);
+int effectTimelinePartApplyRotation(void);
 int FUN_001b4c1c(...);
-int FUN_001b4eb8(...);
+int skelNodePoseChain(...);
 int eventDispatch(...);
 int effBlockCreateFromBlock(void);
 int FUN_002b30e4(void);
-int FUN_00323bc4(...);
+int effectTimelineChildrenFit(...);
 int swapSlotExchange(...);
 int effectEditorApplyHandlerState(void);
 int FUN_003874ec(...);
@@ -85,7 +85,7 @@ extern unsigned char DAT_0059e658; /* 0x59e658 */
 extern unsigned char DAT_0059e700; /* 0x59e700 */
 extern unsigned char DAT_0059e8c8; /* 0x59e8c8 */
 extern unsigned char DAT_0059e938; /* 0x59e938 */
-extern unsigned char DAT_0059e9a8; /* 0x59e9a8 */
+extern unsigned char g_effectEditorState; /* 0x59e9a8 */
 extern unsigned int DAT_0059e9b4; /* 0x59e9b4 */
 extern unsigned int DAT_0059e9b8; /* 0x59e9b8 */
 extern int DAT_0059e9bc; /* 0x59e9bc */
@@ -103,11 +103,11 @@ extern int slotIsActive(unsigned int);
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: effectNodeUpdateTransform. */
-/* Supplied declaration required: FUN_001abbc4. */
-/* Supplied declaration required: FUN_001ac8ec. */
-/* Supplied declaration required: FUN_001acb48. */
+/* Supplied declaration required: effPartCreateFromSource. */
+/* Supplied declaration required: effectParticleEmitterSetAdvance. */
+/* Supplied declaration required: effectTimelinePartApplyRotation. */
 /* Supplied declaration required: FUN_001b4c1c. */
-/* Supplied declaration required: FUN_001b4eb8. */
+/* Supplied declaration required: skelNodePoseChain. */
 extern unsigned char *FUN_00200bcc(unsigned char *);
 /* Supplied declaration required: FUN_00202178. */
 /* Supplied declaration required: effEditorNodeChainApply. */
@@ -117,9 +117,9 @@ extern unsigned char *FUN_00200bcc(unsigned char *);
 /* Supplied declaration required: effPartCreate. */
 /* Supplied declaration required: FUN_002b30e4. */
 /* Supplied declaration required: rt_memclr. */
-extern unsigned int FUN_0030061c(int);
+extern unsigned int effectTimelineComputeDuration(int);
 /* Supplied declaration required: linkedFindItemByIndex. */
-/* Supplied declaration required: FUN_00323bc4. */
+/* Supplied declaration required: effectTimelineChildrenFit. */
 /* Supplied declaration required: nodeChainCount. */
 /* Supplied declaration required: swapSlotExchange. */
 /* Supplied declaration required: effectEditorApplyHandlerState. */
@@ -160,7 +160,7 @@ unsigned int FUN_00388aac(void)
   
   temp_v14 = 0;
   temp_v17 = 0;
-  if (DAT_0059dc14 == &DAT_0059e9a8) {
+  if (DAT_0059dc14 == &g_effectEditorState) {
     DAT_0059e9b8 = DAT_0059e9b8 & 0xfffffffe;
   }
   if (DAT_0059dbf4 == 0) {
@@ -168,7 +168,7 @@ unsigned int FUN_00388aac(void)
   }
   temp_v2 = nodeChainCount();
   temp_v1 = 0;
-  if (DAT_0059dc14 == &DAT_0059e9a8) {
+  if (DAT_0059dc14 == &g_effectEditorState) {
     if (DAT_0059e9b4 != 0) {
       if (DAT_0059e9b4 == 0x14) {
         temp_v3 = padButtonRepeat(6);
@@ -512,7 +512,7 @@ LAB_00388edc:
   else {
     asdDebugLog(0x1c4,0x17,5,&LAB_00389778);
   }
-  if (DAT_0059dc14 != &DAT_0059e9a8) {
+  if (DAT_0059dc14 != &g_effectEditorState) {
     temp_v3 = padButtonIsPressed(10);
     if (temp_v3 == 0) {
       FUN_00202178(10);
@@ -526,7 +526,7 @@ LAB_00388edc:
     }
   }
   if (DAT_0059dbe6 == '\0') {
-    if (DAT_0059dc14 == &DAT_0059e9a8) {
+    if (DAT_0059dc14 == &g_effectEditorState) {
       temp_v2 = DAT_0059e9b4;
       if (DAT_0059e9b4 == temp_v10) {
         temp_v2 = temp_v17;
@@ -554,11 +554,11 @@ LAB_00388edc:
         if (!temp_v14) goto LAB_00389604;
       }
       temp_v3 = DAT_0059dbf4;
-      FUN_001abbc4();
+      effPartCreateFromSource();
       DAT_0059dbf0 = temp_v3;
-      FUN_001acb48();
-      FUN_001b4eb8(DAT_0059dbf0,&g_effectEditorInitialVector);
-      FUN_001ac8ec(DAT_0059dbf0);
+      effectTimelinePartApplyRotation();
+      skelNodePoseChain(DAT_0059dbf0,&g_effectEditorInitialVector);
+      effectParticleEmitterSetAdvance(DAT_0059dbf0);
       FUN_001b4c1c(DAT_0059dbf0,g_effectEditorWorkingSnapshot.parameters.value);
     }
   }
@@ -604,7 +604,7 @@ LAB_00389604:
   }
   if (DAT_0059dbf0 != 0) {
     temp_v11 = *(unsigned int *)(DAT_0059dbf0 + 0x84);
-    temp_v5 = FUN_0030061c(DAT_0059dbf0);
+    temp_v5 = effectTimelineComputeDuration(DAT_0059dbf0);
     asdDebugLog(0xaa,0xc,6,&LAB_00389794,temp_v5,temp_v11);
     if (DAT_0059dbe9 != 0) {
       if (DAT_0059dbe9 != 1) {
@@ -633,7 +633,7 @@ LAB_00389604:
     else {
       effectNodeUpdateTransform(DAT_0059dbf0);
     }
-    FUN_00323bc4(DAT_0059dbf0);
+    effectTimelineChildrenFit(DAT_0059dbf0);
     temp_v3 = effResourceListHasActiveData(reinterpret_cast<LinkedItems*>(DAT_0059dbf0));
     if (temp_v3 != 0) {
       iRam0059dc60 = iRam0059dc60 + 1;

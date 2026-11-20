@@ -156,7 +156,7 @@ struct AocJobStateA {
 typedef char AocMusicJobOffsets[offsetof(AocMusicJob, current) == 0x3C ? 1 : -1];
 
 extern "C" {
-u32 FUN_00270a70(void);
+u32 aocMainPollShutdown(void);
 }
 
 #ifdef __cplusplus

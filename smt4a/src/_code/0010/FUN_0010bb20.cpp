@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ecac4(int);
+int deletingDtor_002ecac4(int);
 int FUN_002f4364(void);
 int FUN_002f4ab0(unsigned int, unsigned int);
 int FUN_002f5908(unsigned char *);
@@ -18,7 +18,7 @@ typedef struct {
 extern unsigned char DAT_00558e44; /* 0x558e44 */
 extern unsigned char DAT_00630314; /* 0x630314 */
 
-/* Supplied declaration required: FUN_002ecac4. */
+/* Supplied declaration required: deletingDtor_002ecac4. */
 /* Supplied declaration required: FUN_002f4364. */
 /* Supplied declaration required: FUN_002f4ab0. */
 /* Supplied declaration required: FUN_002f5908. */
@@ -41,7 +41,7 @@ void FUN_0010bb20(unsigned int *param_1)
   }
   FUN_002f4364();
   temp_v0 = FUN_002f5966(param_1 + 0x1f);
-  FUN_002ecac4(temp_v0 - 0x7c);
+  deletingDtor_002ecac4(temp_v0 - 0x7c);
   return;
 }
 

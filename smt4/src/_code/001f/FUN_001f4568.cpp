@@ -33,7 +33,7 @@ extern unsigned char LAB_001f49b0; /* 0x1f49b0 */
 
 /* Supplied declaration required: randomGetLowerTenBits. */
 extern int playerDataValueAt(void);
-extern int FUN_00257e40(unsigned char);
+extern int playerGetAffinitySlotState(unsigned char);
 /* Supplied declaration required: randomGetUpperSixBits. */
 /* Supplied declaration required: nkmEnemyFindById. */
 /* Supplied declaration required: libc_strcat. */
@@ -86,7 +86,7 @@ void FUN_001f4568(int param_1,int param_2,unsigned int param_3,fn_001f4568_arg3 
   temp_v8[7] = 0;
   if (param_1 != 0) {
     do {
-      temp_v3 = FUN_00257e40(pbVar10[(int)unaff_r4]);
+      temp_v3 = playerGetAffinitySlotState(pbVar10[(int)unaff_r4]);
       if (temp_v3 != 1) {
         if (temp_v3 == 2) {
           temp_v11[temp_v6] = pbVar10[(int)unaff_r4];

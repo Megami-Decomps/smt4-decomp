@@ -6,7 +6,7 @@ extern "C" {
 
 typedef int romwright_code(...);
 extern romwright_code *g_mwmofilterDeblocker; /* 0x44e948 */
-extern unsigned int *DAT_0044e94c; /* 0x44e94c */
+extern unsigned int *g_mwmofilterDeblockerState; /* 0x44e94c */
 
 
 unsigned int mwmofilterDeblockerCreate(unsigned int *param_1)
@@ -17,7 +17,7 @@ unsigned int mwmofilterDeblockerCreate(unsigned int *param_1)
   
   puVar2 = (unsigned int *)&g_mwmofilterDeblocker;
   if (g_mwmofilterDeblocker != (romwright_code *)0x0) {
-    puVar2 = DAT_0044e94c;
+    puVar2 = g_mwmofilterDeblockerState;
   }
   if (!(g_mwmofilterDeblocker != (romwright_code *)0x0 && puVar2 != (unsigned int *)0x0)) {
     temp_v0 = 0;

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u32 DAT_00464b7c[];
+extern u32 g_asdModelSceneRoots[];
 
 u32 asdModelGetSlotRecord(int index)
 {
-    return DAT_00464b7c[index];
+    return g_asdModelSceneRoots[index];
 }
 
 } /* extern "C" */

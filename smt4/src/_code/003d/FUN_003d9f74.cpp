@@ -26,7 +26,7 @@ typedef char InstanceCacheSecondaryCheck[offsetof(InstanceCache, secondary) == 0
 typedef char InstanceCacheParametersCheck[offsetof(InstanceCache, parameters) == 0x1CF8 ? 1 : -1];
 
 extern "C" {
-void *FUN_00349fc0(void *parameters, u32 data);
+void *particleEmitterSpawnOne(void *parameters, u32 data);
 
 /* Creates a missing cached instance for the first matching id in either bank. */
 void FUN_003d9f74(InstanceCache *cache, s32 id)
@@ -35,7 +35,7 @@ void FUN_003d9f74(InstanceCache *cache, s32 id)
         PrimaryInstanceEntry *entry = &cache->primary[i];
         if (entry->id == id) {
             if (entry->instance == NULL) {
-                entry->instance = FUN_00349fc0(cache->parameters, entry->data);
+                entry->instance = particleEmitterSpawnOne(cache->parameters, entry->data);
             }
             return;
         }
@@ -44,7 +44,7 @@ void FUN_003d9f74(InstanceCache *cache, s32 id)
         SecondaryInstanceEntry *entry = &cache->secondary[i];
         if (entry->id == id) {
             if (entry->instance == NULL) {
-                entry->instance = FUN_00349fc0(cache->parameters, entry->data);
+                entry->instance = particleEmitterSpawnOne(cache->parameters, entry->data);
             }
             return;
         }

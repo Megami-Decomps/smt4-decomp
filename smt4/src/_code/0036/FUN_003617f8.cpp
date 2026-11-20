@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_4_stack;
 
-extern unsigned int DAT_0044e368; /* 0x44e368 */
+extern unsigned int g_appletCloseReason; /* 0x44e368 */
 extern romwright_code *DAT_0044e7d0; /* 0x44e7d0 */
 extern int DAT_0044e7d8; /* 0x44e7d8 */
 extern unsigned int DAT_0044e7dc; /* 0x44e7dc */
@@ -57,7 +57,7 @@ void FUN_003617f8(unsigned int param_1,unsigned int param_2,int param_3,unsigned
   *(int *)(param_3 + 0x14c) = temp_v1;
   temp_v3 = DAT_0044e7d8;
   uStack_24 = DAT_0044e7dc;
-  nn_applet_CTR_detail_SendMessage(param_2,param_3,param_4,DAT_0044e368);
+  nn_applet_CTR_detail_SendMessage(param_2,param_3,param_4,g_appletCloseReason);
   return;
 }
 

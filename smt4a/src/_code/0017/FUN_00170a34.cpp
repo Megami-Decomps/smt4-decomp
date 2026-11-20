@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_001713d8(int);
 int FUN_001713e8(int);
-int FUN_0017fd38(unsigned int *, int *, int, int);
-int FUN_00189a38(...);
+int svcWaitSynchronizationN(unsigned int *, int *, int, int);
+int errThrowFatal(...);
 int FUN_0018b68c(unsigned int);
 int FUN_0018b69c(void);
 int FUN_0018b6d4(void);
@@ -46,8 +46,8 @@ extern unsigned int DAT_006416b0; /* 0x6416b0 */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_001713d8. */
 /* Supplied declaration required: FUN_001713e8. */
-/* Supplied declaration required: FUN_0017fd38. */
-/* Supplied declaration required: FUN_00189a38. */
+/* Supplied declaration required: svcWaitSynchronizationN. */
+/* Supplied declaration required: errThrowFatal. */
 /* Supplied declaration required: FUN_0018b68c. */
 /* Supplied declaration required: FUN_0018b69c. */
 /* Supplied declaration required: FUN_0018b6d4. */
@@ -98,9 +98,9 @@ void FUN_00170a34(void)
     puVar1 = &temp_v5;
     temp_v4 = 0xffffffff;
     uStack_24 = 0xffffffff;
-    FUN_0017fd38(puVar1,&temp_v6,3,0);
+    svcWaitSynchronizationN(puVar1,&temp_v6,3,0);
     if ((int)puVar1 < 0) {
-      FUN_00189a38();
+      errThrowFatal();
     }
     if (DAT_005b4448 != '\0') {
       return;
@@ -191,7 +191,7 @@ joined_r0x00170cec:
           nn_applet_CTR_detail_OpenSession();
           temp_v1 = FUN_0018ba38(0,0x40);
           if (temp_v1 < 0) {
-            FUN_00189a38(temp_v1,0x170d2c);
+            errThrowFatal(temp_v1,0x170d2c);
           }
           nn_applet_CTR_detail_CloseSession();
           continue;

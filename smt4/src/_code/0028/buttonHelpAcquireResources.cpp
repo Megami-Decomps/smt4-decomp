@@ -5,7 +5,7 @@ extern "C" {
 
 s32 asdTMTexTableLoadSprites(s32 id);
 s32 asdTMTexTablePrepareNodeImage(s32 id, s32 arg);
-s32 FUN_0022097c(void);
+s32 buttonHelpLoadResourceFile(void);
 
 /* Loads the camp button-help resources on the first load (counted by loadCount). */
 void buttonHelpAcquireResources(void)
@@ -13,7 +13,7 @@ void buttonHelpAcquireResources(void)
     if (g_buttonHelp.loadCount <= 0) {
         asdTMTexTableLoadSprites(0x12);
         asdTMTexTablePrepareNodeImage(0x12, 0);
-        FUN_0022097c();
+        buttonHelpLoadResourceFile();
         if (g_buttonHelp.mbm == NULL) {
             g_buttonHelp.mbm = asdLoadFileSyncDefault("camp/camp.mbm");
         }

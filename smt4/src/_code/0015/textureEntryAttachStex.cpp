@@ -12,7 +12,7 @@ AsdTexture *asdTextureCreate(s32 retry);
 static __inline void assignVramBank(TextureHeapEntry *entry, u32 heap, u32 mode)
 {
     if (entry != NULL && entry->texture != NULL) {
-        entry->texture->unk08 = heap;
+        entry->texture->heap = heap;
         entry->flags |= mode;
     }
 }
@@ -42,7 +42,7 @@ static __inline void textureEntryAttachStex(StexHeader *data, u32 size, TextureH
         entry->texture->dimensions.height = data->height;
         entry->texture->image.format = data->format;
         entry->texture->image.type = data->type;
-        entry->texture->storage.unk28 = size - data->dataOffset;
+        entry->texture->storage.bytes = size - data->dataOffset;
         entry->texture->storage.flags |= 0x10;
         if (data->version == 1) {
             entry->texture->unk3c = 1;

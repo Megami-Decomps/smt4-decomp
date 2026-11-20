@@ -28,7 +28,7 @@ extern "C" {
 extern MapStateSlots *g_mapStateSlots;
 MapRewardSet *aocFindDisplayNameOverrideText(AocSystem *system, u32 id);
 s32 flagValueRead(u16 id);
-void FUN_00295a18(u16 id, s32 amount);
+void saveFlagSetOrAddCounter(u16 id, s32 amount);
 
 u16 FUN_0021e7f4(u32 group, s32 award)
 {
@@ -75,7 +75,7 @@ u16 FUN_0021e7f4(u32 group, s32 award)
         if (flagValueRead(selected) >= capacity) {
             g_mapStateSlots->reward.atCapacity = 1;
         } else {
-            FUN_00295a18(selected, 1);
+            saveFlagSetOrAddCounter(selected, 1);
         }
     }
     return selected;

@@ -8,7 +8,7 @@ int FUN_0013231c(int, unsigned int, int, int);
 int FUN_001325c4(int, unsigned int, unsigned int, int);
 int sceneTraverserVisit(unsigned int, int);
 int _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_(int *, int *, int *, int *);
-int FUN_002c3a14(unsigned int);
+int renderCtxResetFrameStacks(unsigned int);
 int nw_gfx_RenderContext_ResetState_2B7478(unsigned int);
 int nw_gfx_SceneNode_AttachChild(int, int);
 
@@ -37,7 +37,7 @@ extern signed char DAT_004dadac; /* 0x4dadac */
 /* Supplied declaration required: FUN_001325c4. */
 /* Supplied declaration required: sceneTraverserVisit. */
 /* Supplied declaration required: _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_. */
-/* Supplied declaration required: FUN_002c3a14. */
+/* Supplied declaration required: renderCtxResetFrameStacks. */
 /* Supplied declaration required: nw_gfx_RenderContext_ResetState_2B7478. */
 /* Supplied declaration required: nw_gfx_SceneNode_AttachChild. */
 
@@ -87,7 +87,7 @@ void FUN_001183d8(void)
     }
     FUN_0013231c(DAT_00464bb8,DAT_00464b1c,2,0);
     nw_gfx_RenderContext_ResetState_2B7478(temp_v2);
-    FUN_002c3a14(g_titleScene);
+    renderCtxResetFrameStacks(g_titleScene);
     DAT_00464b08 = 0;
   }
   return;

@@ -23,7 +23,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: btlActionAllocData. */
-/* Supplied declaration required: FUN_0027db24. */
+/* Supplied declaration required: gameSaveSetBattleResultCode. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: wordTripleClear. */
 /* Supplied declaration required: skillDataFindById. */
@@ -53,7 +53,7 @@ void FUN_001b6b98(unsigned int *param_1)
   
   btlActionAllocData();
   jobIsValid(*param_1);
-  FUN_0027db24(0);
+  gameSaveSetBattleResultCode(0);
   *param_1 = 0;
   param_1[1] = 0;
   param_1[2] = 0;

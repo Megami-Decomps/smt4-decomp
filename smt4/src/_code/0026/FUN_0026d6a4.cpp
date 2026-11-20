@@ -11,9 +11,9 @@ int slotPlacementAssignSlotAndPosition(...);
 
 int partyPanelSetState(int, int);
 int objClearFlagPair(...);
-int FUN_002937e0(void);
+int partyPanelConfigureGridNavigation(void);
 int useCounterStart(void);
-int FUN_0029e328(int);
+int useCounterAppendValue(int);
 int sortMenuCreate(int);
 int scrollOwnerSelectIndex(...);
 int objectPartRunUnlessLocked(...); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
@@ -21,7 +21,7 @@ int scrollListSetSelectionMarkChanged(...);
 int listCursorGetRowIfUnblocked(...);
 int eventQueueAddUniqueIfValid(int);
 int timerStart(int, int, int);
-int FUN_002c1658(int, int);
+int inputQueryButtonState(int, int);
 int SBORROW4(...);
 
 extern int g_partyPanel; /* 0x43dcf0 */
@@ -32,19 +32,19 @@ extern int g_partyPanel; /* 0x43dcf0 */
 /* Supplied declaration required: slotPlacementStartTransition. */
 /* Supplied declaration required: slotPlacementAssignSlotAndPosition. */
 /* Supplied declaration required: objClearFlagPair. */
-/* Supplied declaration required: FUN_002937e0. */
+/* Supplied declaration required: partyPanelConfigureGridNavigation. */
 extern int FUN_0029e02c(void);
 /* Supplied declaration required: useCounterStart. */
-/* Supplied declaration required: FUN_0029e328. */
+/* Supplied declaration required: useCounterAppendValue. */
 /* Supplied declaration required: sortMenuCreate. */
 /* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: objectPartRunUnlessLocked. */
 /* Supplied declaration required: scrollListSetSelectionMarkChanged. */
 /* Supplied declaration required: listCursorGetRowIfUnblocked. */
-/* Supplied declaration required: FUN_002a0cc8. */
+/* Supplied declaration required: gameGlobalsSetSubScreenActive. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002c1658. */
+/* Supplied declaration required: inputQueryButtonState. */
 
 
 unsigned int FUN_0026d6a4(int param_1)
@@ -62,7 +62,7 @@ unsigned int FUN_0026d6a4(int param_1)
   
   temp_v5 = g_partyPanel;
   temp_v1 = 10;
-  FUN_002c1658(10,1);
+  inputQueryButtonState(10,1);
   if (temp_v1 == 0) {
     if (param_1 == 0) {
       return 0;
@@ -75,20 +75,20 @@ unsigned int FUN_0026d6a4(int param_1)
       return 0;
     }
     temp_v5 = 9;
-    FUN_002c1658(9,1);
+    inputQueryButtonState(9,1);
     if (temp_v5 == 0) {
       return 0;
     }
     sortMenuCreate(0);
-    FUN_0029e328(2);
-    FUN_0029e328(1);
-    FUN_0029e328(4);
-    FUN_0029e328(5);
-    FUN_0029e328(0x1f);
-    FUN_0029e328(3);
+    useCounterAppendValue(2);
+    useCounterAppendValue(1);
+    useCounterAppendValue(4);
+    useCounterAppendValue(5);
+    useCounterAppendValue(0x1f);
+    useCounterAppendValue(3);
     useCounterStart();
     partyPanelSetState(0xf,1);
-    FUN_002a0cc8(1);
+    gameGlobalsSetSubScreenActive(1);
     eventQueueAddUniqueIfValid(0x100016d);
     return 1;
   }
@@ -135,7 +135,7 @@ unsigned int FUN_0026d6a4(int param_1)
         else {
           *(unsigned int *)(temp_v5 + 0x2c) = 1;
         }
-        FUN_002937e0();
+        partyPanelConfigureGridNavigation();
         temp_v2 = objectPartRunUnlessLocked(temp_v3);
         temp_v1 = temp_v5 + 0xa08;
         scrollOwnerSelectIndex(temp_v1,temp_v2);
@@ -183,7 +183,7 @@ unsigned int FUN_0026d6a4(int param_1)
     else {
       *(unsigned int *)(temp_v5 + 0x2c) = 1;
     }
-    FUN_002937e0();
+    partyPanelConfigureGridNavigation();
     temp_v2 = objectPartRunUnlessLocked(temp_v3);
     scrollOwnerSelectIndex(temp_v5 + 0x940,temp_v2);
     temp_v1 = listCursorGetRowIfUnblocked(temp_v3);

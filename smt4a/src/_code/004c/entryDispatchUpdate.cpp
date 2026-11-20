@@ -2,7 +2,7 @@
 #include "sys/RuntimeObjects_EntryDispatch.h"
 extern "C" {
 u32 uiSpriteAdvanceAnimation(DispatchEntry*, f32);
-u32 FUN_00167458(DispatchEntry*, u32);
+u32 uiSpriteSlideFromSide(DispatchEntry*, u32);
 
 // Uses the entry kind's appropriate update routine and default factor.
 u32 entryDispatchUpdate(DispatchEntrySet* entries, s32 kind)
@@ -11,10 +11,10 @@ u32 entryDispatchUpdate(DispatchEntrySet* entries, s32 kind)
     switch (kind) {
     case 0:
     case 6:
-        result = FUN_00167458(&entries->entries[kind], 0);
+        result = uiSpriteSlideFromSide(&entries->entries[kind], 0);
         break;
     case 4:
-        result = FUN_00167458(&entries->entries[kind], 1);
+        result = uiSpriteSlideFromSide(&entries->entries[kind], 1);
         break;
     case 1:
     case 2:

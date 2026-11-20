@@ -15,22 +15,22 @@ typedef struct Picker {
     /* 0x2f1e */ s16 index;        /* current position in `list`, negative = none */
 } Picker;
 
-void FUN_00254f58(Picker *picker);
+void battleInitializeTurnOrder(Picker *picker);
 
-/* Advances the picker to the next used entry of its list (FUN_00254f58 when it runs out) and publishes its value. */
+/* Advances the picker to the next used entry of its list (battleInitializeTurnOrder when it runs out) and publishes its value. */
 void pickerAdvance(Picker *picker)
 {
     PickerHud *hud;
     s32 value;
 
     if (picker->index < 0) {
-        FUN_00254f58(picker);
+        battleInitializeTurnOrder(picker);
         return;
     }
     do {
         picker->index++;
         if (picker->index >= 12) {
-            FUN_00254f58(picker);
+            battleInitializeTurnOrder(picker);
             break;
         }
     } while (picker->list[picker->index] < 0);

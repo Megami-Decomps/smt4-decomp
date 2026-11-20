@@ -9,7 +9,7 @@ extern "C" {
 
 u32 FUN_00426264(void *output, const void *input);
 
-u32 FUN_00429d58(Object00429d58 *object);
+u32 vtableRunIfPresent(Object00429d58 *object);
 
 u8 counterPairReset(CounterPair *obj);
 

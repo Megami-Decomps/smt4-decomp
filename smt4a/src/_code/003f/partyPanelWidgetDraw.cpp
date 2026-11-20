@@ -26,7 +26,7 @@ u32 heldAmountLessThan(s32 amount, u32 id);
 u8 valueAtMostFifthOfTotal(s32 value, s32 total);
 void drawSetColorFromRGBA8(u32 packed);
 void uiDrawItemOrStatusIcon(s32 id, s32 x, s32 y, s32 z, s32 tint);
-void FUN_00180310(s32 font, s32 x, s32 y, s32 align, s32 digits, s32 z, const char *text);
+void statRowDrawValueImpl(s32 font, s32 x, s32 y, s32 align, s32 digits, s32 z, const char *text);
 void FUN_00183788(s32 value, s32 maximum, s32 shown, s32 mode, u32 table, u32 frame, u32 fill, u32 low, u32 change,
                   s32 x, s32 y, s32 z, s32 flags);
 void FUN_0025e704(s32 value, s32 maximum, s32 shown, s32 mode, u32 table, u32 frame, u32 fill, u32 change, s32 x,
@@ -94,7 +94,7 @@ void partyPanelWidgetDraw(PartyPanelWidget *widget, s32 x, s32 y, f32 alpha)
             unit = gameGetSlotRecord(widget->slot);
         }
         if (unit != NULL) {
-            __2sprintf(name, "%s", FUN_00180114(unit->id));
+            __2sprintf(name, "%s", table01RecordLookupForContent(unit->id));
             id = (s16)unit->id;
             level = unit->level;
             hp = unit->hp;
@@ -178,10 +178,10 @@ void partyPanelWidgetDraw(PartyPanelWidget *widget, s32 x, s32 y, f32 alpha)
                 __2sprintf(number, "%d", level);
                 if (level > 99) {
                     TextureTableEntryIV *slot = asdTMTexTableEntryAt(PANEL_SPRITES, 0x80);
-                    FUN_00180310(1, slot->x + x, slot->y + y, 1, 3, PANEL_TOP_LAYER, number);
+                    statRowDrawValueImpl(1, slot->x + x, slot->y + y, 1, 3, PANEL_TOP_LAYER, number);
                 } else {
                     TextureTableEntryIV *slot = asdTMTexTableEntryAt(PANEL_SPRITES, 0x53);
-                    FUN_00180310(1, slot->x + x, slot->y + y, 1, 2, PANEL_TOP_LAYER, number);
+                    statRowDrawValueImpl(1, slot->x + x, slot->y + y, 1, 2, PANEL_TOP_LAYER, number);
                 }
                 gxResetColorQuadToWhite();
                 efctSetSpeed(alpha);
@@ -236,7 +236,7 @@ void partyPanelWidgetDraw(PartyPanelWidget *widget, s32 x, s32 y, f32 alpha)
                 __2sprintf(number, "%d", hp);
             }
             TextureTableEntryIV *hpSlot = asdTMTexTableEntryAt(PANEL_SPRITES, 0x19);
-            FUN_00180310(10, hpSlot->x + x, hpSlot->y + y, 1, 4, PANEL_TOP_LAYER, number);
+            statRowDrawValueImpl(10, hpSlot->x + x, hpSlot->y + y, 1, 4, PANEL_TOP_LAYER, number);
             gxResetColorQuadToWhite();
             s32 shownMp = 9999;
             if (mp <= 9999) {
@@ -244,7 +244,7 @@ void partyPanelWidgetDraw(PartyPanelWidget *widget, s32 x, s32 y, f32 alpha)
             }
             __2sprintf(number, "%d", shownMp);
             TextureTableEntryIV *mpSlot = asdTMTexTableEntryAt(PANEL_SPRITES, 0x1d);
-            FUN_00180310(10, mpSlot->x + x, mpSlot->y + y, 1, 4, PANEL_TOP_LAYER, number);
+            statRowDrawValueImpl(10, mpSlot->x + x, mpSlot->y + y, 1, 4, PANEL_TOP_LAYER, number);
             partyPanelWidgetDrawAilments(widget, x, y);
             if (widget->flagB != 0) {
                 TextureTableEntryIV *mark = asdTMTexTableEntryAt(PANEL_SPRITES, 0xbc);

@@ -5,7 +5,7 @@ extern "C" {
 int screenFadeSlotReset(int index);
 int scrGetArg(...);
 int titleSetSlotValueState2(int index, u32 value);
-extern int FUN_002c1d5c(void);
+extern int eventIsSkipping(void);
 
 u32 FUN_002f4a10(void)
 {
@@ -13,7 +13,7 @@ u32 FUN_002f4a10(void)
     u32 which = scrGetArg(0);
 
     if (which == 0 || which == 1) {
-        if (FUN_002c1d5c() != 0) {
+        if (eventIsSkipping() != 0) {
             screenFadeSlotReset(0);
             screenFadeSlotReset(1);
         } else {

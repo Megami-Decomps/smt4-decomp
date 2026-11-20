@@ -13,7 +13,7 @@ int FUN_002371b0(void);
 int effectSubmitDefaultVectors(void);
 int FUN_00290c28(...);
 int entryListSetPhase(...);
-int FUN_002a1850(...);
+int cameraProjectToScreen(...);
 int effectSpawnPositionDefault(...);
 void gfxDrawOffsetTwoColorRect(int, int, int, int, unsigned int, unsigned int);
 int effectDrawProjectedCircleFan(...);
@@ -59,7 +59,7 @@ extern unsigned int asdCameraValueGet(unsigned int);
 /* Supplied declaration required: effectSubmitDefaultVectors. */
 /* Supplied declaration required: FUN_00290c28. */
 /* Supplied declaration required: entryListSetPhase. */
-/* Supplied declaration required: FUN_002a1850. */
+/* Supplied declaration required: cameraProjectToScreen. */
 /* Supplied declaration required: effectSpawnPositionDefault. */
 /* Supplied declaration required: gfxDrawOffsetTwoColorRect. */
 /* Supplied declaration required: effectDrawProjectedCircleFan. */
@@ -241,8 +241,8 @@ joined_r0x003a122c:
       temp_v20 = param_2[8];
       temp_v7 = *(unsigned int *)(g_renderCtx + 0x52c);
       temp_v4 = asdCameraValueGet(temp_v7);
-      FUN_002a1850(&temp_v15,0,temp_v4);
-      FUN_002a1850(&temp_v18,0,temp_v4,&temp_v18);
+      cameraProjectToScreen(&temp_v15,0,temp_v4);
+      cameraProjectToScreen(&temp_v18,0,temp_v4,&temp_v18);
       renderCtxSelectTexture(g_renderCtx,0);
       renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
       FUN_0032c810((temp_v3 << 0x18) | (((temp_v3 & 0xffff) >> 8) << 0x10) |
@@ -255,7 +255,7 @@ joined_r0x003a122c:
       temp_v16 = param_2[3];
       temp_v17 = param_2[4];
       temp_v7 = asdCameraGetSavedRenderPairs();
-      FUN_002a1850(&temp_v15,0,temp_v7,param_2 + 2);
+      cameraProjectToScreen(&temp_v15,0,temp_v7,param_2 + 2);
       temp_v17 = 0;
       renderCtxSelectTexture(g_renderCtx,0);
       FUN_0032c808();

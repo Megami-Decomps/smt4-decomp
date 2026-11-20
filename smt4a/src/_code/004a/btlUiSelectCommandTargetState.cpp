@@ -21,11 +21,11 @@ static inline bool commandRequiresTargetSelection(const CommandSkillRecord *skil
 }
 
 extern "C" {
-void FUN_002ccde8(Menu32 *menu, s16 *kind, s16 *id);
+void btlMenuResolveHighlightedCommand(Menu32 *menu, s16 *kind, s16 *id);
 void FUN_002fa7a8(Menu32 *menu);
 void menu32EnterState27(Menu32 *menu);
 s32 menu32ModeIsNot5(BtlUiObjAA *menu);
-s32 FUN_00280030(BtlUiObjBA *owner);
+s32 btlUiPanelOperationIsAllowed(BtlUiObjBA *owner);
 BtlUiObjBA *FUN_00502754(u8 *subobject); /* returns the subobject's sprite (+0xBC) */
 void uiWorkEndState1(BtlUiObjAA *menu);
 void owner2DCInitSub(BtlUiObjBA *owner);
@@ -37,7 +37,7 @@ void btlUiSelectCommandTargetState()
     target->requiresTargetSelection = 0;
     s16 kind = 0;
     s16 id = 0;
-    FUN_002ccde8((Menu32 *)&ui->objC, &kind, &id);
+    btlMenuResolveHighlightedCommand((Menu32 *)&ui->objC, &kind, &id);
     switch (kind) {
     case 2:
     case 3: {
@@ -71,7 +71,7 @@ void btlUiSelectCommandTargetState()
         menu32EnterState27((Menu32 *)&ui->objC);
         BtlUiA *current = g_btlUi.ui;
         if (menu32ModeIsNot5(&current->objA) != 0 &&
-            FUN_00280030(FUN_00502754(reinterpret_cast<u8 *>(&current->objA) + 0x23F8)) != 0) {
+            btlUiPanelOperationIsAllowed(FUN_00502754(reinterpret_cast<u8 *>(&current->objA) + 0x23F8)) != 0) {
             uiWorkEndState1(&current->objA);
             owner2DCInitSub(&current->objB);
         }

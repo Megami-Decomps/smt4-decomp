@@ -7,7 +7,7 @@ extern "C" {
 
 int CONCAT44(...);
 int FUN_0014ce2c(float *);
-int FUN_00265b78(int, int);
+int lmapSlotSetVisible(int, int);
 int nn_math_ARMv6_MTX33CopyAsm(float *, float *);
 int nn_math_ARMv6_MTX44MultAsm(float *, int, int);
 
@@ -104,7 +104,7 @@ static float romwright_sqrt_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_0014ce2c. */
-/* Supplied declaration required: FUN_00265b78. */
+/* Supplied declaration required: lmapSlotSetVisible. */
 extern int __cxa_guard_acquire(unsigned int *);
 extern int asdCameraGetSavedRenderPairs(void);
 /* Supplied declaration required: nn_math_ARMv6_MTX33CopyAsm. */
@@ -436,10 +436,10 @@ void FUN_00265180(void)
                          ) - temp_v78)) &&
              (temp_v16 >= (temp_v75 * temp_v61[0xc] + temp_v8 * temp_v13 * temp_v62 +
                         temp_v76 * temp_v63) - temp_v79)) {
-            FUN_00265b78(temp_v5,1);
+            lmapSlotSetVisible(temp_v5,1);
           }
           else {
-            FUN_00265b78(temp_v5,0);
+            lmapSlotSetVisible(temp_v5,0);
           }
           temp_v5 = temp_v5 + 1;
         } while (temp_v5 < *(int *)(*(int *)(temp_v77 + 0xa9c) + 4));

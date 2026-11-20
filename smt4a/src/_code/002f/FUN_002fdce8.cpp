@@ -18,9 +18,9 @@ struct OnlineInstanceTable;
 extern "C" {
 OnlineInstanceTable* onlineInstanceTableGetCurrent(void);
 OnlineInstance* onlineInstanceTableFind(OnlineInstanceTable* table, u32 id);
-void FUN_002f3dc4(OnlineInstance* instance, OnlineResult* result);
-void FUN_002f3dde(OnlineInstance* instance, OnlineResult* result);
-void FUN_002e9f00(void* error, s32 code);
+void onlineInstanceCompleteMode2(OnlineInstance* instance, OnlineResult* result);
+void onlineInstanceCompleteMode3(OnlineInstance* instance, OnlineResult* result);
+void onlineInstanceCompleteWithChildren(void* error, s32 code);
 void onlineJobSetStateDone(OnlineJobError* job);
 
 // Delivers a completion result to the instance and finishes the job.
@@ -31,12 +31,12 @@ void FUN_002fdce8(OnlineJobError* job, const OnlineResult* status)
     if (instance != NULL) {
         OnlineResult result = *status;
         if (result.status >= 0) {
-            FUN_002f3dc4(instance, &result);
+            onlineInstanceCompleteMode2(instance, &result);
         } else {
-            FUN_002f3dde(instance, &result);
+            onlineInstanceCompleteMode3(instance, &result);
         }
     } else {
-        FUN_002e9f00(job->error, 4);
+        onlineInstanceCompleteWithChildren(job->error, 4);
     }
     onlineJobSetStateDone(job);
 }

@@ -7,7 +7,7 @@
 
 extern "C" {
 s32 idSetFindSubjectIndex(BtlMainState *state, BtlActionRecord *action);
-u32 FUN_00337ba0(BtlMainState *state, s16 selection, u16 kind);
+u32 tableFileFindByKeyPair(BtlMainState *state, s16 selection, u16 kind);
 void FUN_00340ad4(BattleSpritePlacement *placement, u32 mask, u32 flags, u32 variant);
 void FUN_00340c90(BattleSpritePlacement *placement);
 
@@ -40,7 +40,7 @@ u32 FUN_003db0c0(MaterialMergeOwner *owner, BtlActionRecord *action)
                 u32 selection = reinterpret_cast<SelectionView *>(state)->index;
                 u32 variant = 0;
                 if (selection >= 0) {
-                    variant = FUN_00337ba0(state, (s16)selection, kind);
+                    variant = tableFileFindByKeyPair(state, (s16)selection, kind);
                 }
                 FUN_00340ad4(&slot.placement, 0x20000, 0x20000, variant);
                 FUN_00340c90(&slot.placement);

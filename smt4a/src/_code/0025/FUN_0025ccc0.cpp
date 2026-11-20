@@ -25,7 +25,7 @@ u32 FUN_0025ccc0(void)
                 if (work->mode != 1) {
                     uiSpriteAdvanceAnimation(unit, 1.0f);
                 } else if (work->panelSliding != 0) {
-                    FUN_00167458(unit, 0);
+                    uiSpriteSlideFromSide(unit, 0);
                 }
             }
             for (s32 i = 0; i < 6; i++) {

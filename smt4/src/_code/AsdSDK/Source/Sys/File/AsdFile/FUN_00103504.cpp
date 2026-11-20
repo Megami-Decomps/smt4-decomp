@@ -12,7 +12,7 @@ extern NnOsThread g_asdFileThread;
 
 s32 nn_os_detail_ConvertLibraryToSvcPriority(s32 priority);
 void nn_os_LightEvent_Signal(void *event);
-void FUN_002c3f5c(AddressSpaceRegion *region);
+void addressSpaceRegionFree(AddressSpaceRegion *region);
 s32 fsUnmountByName(const char *device);
 void asdFatalError(void);
 
@@ -35,7 +35,7 @@ void FUN_00103504(void)
             g_asdFileThread.joined = 1;
             g_asdFileThread.finalize();
             g_asdFileThread.NnOsHandle::~NnOsHandle();
-            FUN_002c3f5c(g_asdFile.threadStack);
+            addressSpaceRegionFree(g_asdFile.threadStack);
         }
     }
     fsUnmountByName("rom:");

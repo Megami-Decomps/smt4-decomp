@@ -9,7 +9,7 @@ extern "C" {
 extern void *g_handleRegistry;
 void FUN_003e55f4(LmapScript *script);
 void lmapClearExtraFlag(void);
-void FUN_003d2158(u32 controller, s32 mode);
+void soundApplyValueOrStop(u32 controller, s32 mode);
 }
 
 static __inline void releaseSceneController(LmapActorA *actor)
@@ -25,7 +25,7 @@ extern "C" void FUN_002daf38(void)
     if (g_lmapScene->idleVoicePhase == 3) {
         lmapClearExtraFlag();
         if (g_lmapScene->idleVoice != 0)
-            FUN_003d2158(g_lmapScene->idleVoice, 0);
+            soundApplyValueOrStop(g_lmapScene->idleVoice, 0);
     }
     releaseSceneController(g_lmapScene->models[1]);
     releaseSceneController(g_lmapScene->models[2]);

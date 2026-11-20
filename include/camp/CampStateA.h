@@ -17,7 +17,7 @@ struct CampListEntryA {
 typedef struct CampStateA {
     /* 0x0000 */ u32 job;
     /* 0x0004 */ u8 unk0004[8];
-    /* 0x000C */ u32 unk000C;               /* FUN_0035c810()'s result when menu item 0x1C opens */
+    /* 0x000C */ u32 unk000C;               /* gauntletAppMenuCreate()'s result when menu item 0x1C opens */
     /* 0x0010 */ u8 unk0010[4];
     /* 0x0014 */ u32 substep;
     /* 0x0018 */ u32 unk0018;

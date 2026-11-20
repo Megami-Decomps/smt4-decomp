@@ -12,7 +12,7 @@ int FUN_004ffaf0(...);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void);
 int FUN_001f3f34(void);
-int FUN_0025ef68(...);
+int mapResolveCollisionSphere(...);
 int FUN_002826dc(...);
 int distSpatial(void);
 int FUN_002d1f40(...);
@@ -21,7 +21,7 @@ int mathPositionHeadingDegrees(void);
 int soundActorStartOnFreeChannel(...);
 int controllerSetDestination(...);
 int moriModelUnitStartMaterialAnimation(...);
-int FUN_003fd924(...);
+int motionPlayerStartBlended(...);
 int controllerSetRotationEulerDegrees(...);
 int VectorSignedToFloat(...);
 
@@ -65,7 +65,7 @@ extern signed char DAT_005f1c7e; /* 0x5f1c7e */
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_001f3f34. */
-/* Supplied declaration required: FUN_0025ef68. */
+/* Supplied declaration required: mapResolveCollisionSphere. */
 /* Supplied declaration required: FUN_002826dc. */
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002d1f40. */
@@ -74,7 +74,7 @@ extern signed char DAT_005f1c7e; /* 0x5f1c7e */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: moriModelUnitStartMaterialAnimation. */
-/* Supplied declaration required: FUN_003fd924. */
+/* Supplied declaration required: motionPlayerStartBlended. */
 /* Supplied declaration required: controllerSetRotationEulerDegrees. */
 extern int FUN_004ff970(unsigned int);
 extern int itemListGetCurrentIdOrInvalid(unsigned int);
@@ -336,7 +336,7 @@ void FUN_003541c0(void)
       FUN_002826dc(piVar4,&temp_v16,0);
       if (piVar4 == (int *)0x0) {
         piVar4 = &temp_v18;
-        FUN_0025ef68(piVar4,&temp_v16,0);
+        mapResolveCollisionSphere(piVar4,&temp_v16,0);
         if (piVar4 != (int *)0x0) goto LAB_00354acc;
       }
       else {
@@ -402,7 +402,7 @@ LAB_00354acc:
       temp_v17 = piVar4[0x7e];
       temp_v16 = temp_v16 + 30.0f;
       FUN_002826dc(&temp_v15,&temp_v18,0);
-      if ((piVar5 != (int *)0x0) || (FUN_0025ef68(&temp_v15,&temp_v18,0), piVar6 != (int *)0x0)) {
+      if ((piVar5 != (int *)0x0) || (mapResolveCollisionSphere(&temp_v15,&temp_v18,0), piVar6 != (int *)0x0)) {
         FUN_002d1f40(4,8,0);
         piVar4 = g_lmapScene;
         g_lmapScene[0x74] = 8;
@@ -470,7 +470,7 @@ LAB_00354dac:
           temp_v2 = *(unsigned int *)(piVar4[99] + 4);
           moriModelUnitStartMaterialAnimation(temp_v2,3,2);
           g_lmapScene[0x8e] = 0xc;
-          FUN_003fd924(temp_v2,0xc,2);
+          motionPlayerStartBlended(temp_v2,0xc,2);
         }
         goto joined_r0x00354f08;
       }
@@ -502,7 +502,7 @@ LAB_00354dac:
           piVar4[0x92] = 0;
           temp_v2 = *(unsigned int *)(piVar4[99] + 4);
           moriModelUnitStartMaterialAnimation(temp_v2,5,2);
-          FUN_003fd924(temp_v2,3,2);
+          motionPlayerStartBlended(temp_v2,3,2);
           *(unsigned char *)(g_lmapScene + 0x8f) = 1;
         }
       }
@@ -524,7 +524,7 @@ LAB_00354dac:
           piVar4[0x92] = 0;
           temp_v2 = *(unsigned int *)(piVar4[99] + 4);
           moriModelUnitStartMaterialAnimation(temp_v2,5,2);
-          FUN_003fd924(temp_v2,3,2);
+          motionPlayerStartBlended(temp_v2,3,2);
           piVar4 = g_lmapScene;
           *(unsigned char *)(g_lmapScene + 0x8f) = 1;
           piVar4[0x8e] = 0;
@@ -664,7 +664,7 @@ LAB_0035521c:
       piVar4[0x92] = 0;
       temp_v2 = *(unsigned int *)(piVar4[99] + 4);
       moriModelUnitStartMaterialAnimation(temp_v2,5,2);
-      FUN_003fd924(temp_v2,3,2);
+      motionPlayerStartBlended(temp_v2,3,2);
       *(unsigned char *)(g_lmapScene + 0x8f) = 1;
     }
   }

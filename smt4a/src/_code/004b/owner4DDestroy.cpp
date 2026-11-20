@@ -24,7 +24,7 @@ extern void dataTable33Unload(u8 *block);
 extern void texSetRelease(void);
 extern u32 dialogIsActive(void);
 extern void dialogClose(s32 a);
-extern void FUN_00168980(u32 id);
+extern void buttonHelpTransitionPresetFlags(u32 id);
 extern void campButtonHelpRelease(void);
 extern void helpTexturesRelease(void);
 extern void campCommonBgRelease(void);
@@ -62,7 +62,7 @@ void owner4DDestroy(Owner4D *obj)
     if (dialogIsActive() != 0) {
         dialogClose(0);
     }
-    FUN_00168980(3);
+    buttonHelpTransitionPresetFlags(3);
     campButtonHelpRelease();
     helpTexturesRelease();
     campCommonBgRelease();

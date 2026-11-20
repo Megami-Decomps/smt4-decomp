@@ -24,6 +24,29 @@ typedef struct MapDepart {
     /* 0x08 */ u8 freeOnEnd;     /* 0 = keep the block after the job ends */
 } MapDepart;
 
+/* The departure sequence's module state (0xC bytes): the loading phase's flags and frame count and
+ * the teardown's step. */
+typedef struct MapDepartSequence {
+    /* 0x00 */ s8 started;
+    /* 0x01 */ s8 finished;       /* the sequence has finished loading */
+    /* 0x02 */ s8 overlayShown;   /* the debug overlay was shown by the sequence */
+    /* 0x03 */ s8 unk03;
+    /* 0x04 */ s32 frame;         /* frames since the sequence started */
+    /* 0x08 */ s32 teardownStep;  /* MapDepartTeardownStep */
+} MapDepartSequence;
+
+typedef char MapDepartSequenceLayoutCheck[
+    offsetof(MapDepartSequence, frame) == 4 && offsetof(MapDepartSequence, teardownStep) == 8 &&
+    sizeof(MapDepartSequence) == 0xC ? 1 : -1];
+
+/* MapDepartSequence.teardownStep */
+enum MapDepartTeardownStep {
+    MAP_DEPART_TEARDOWN_START,        /* finish the navigation request and reset the gimmicks */
+    MAP_DEPART_TEARDOWN_WAIT_GIMMICKS, /* until the gimmicks are idle */
+    MAP_DEPART_TEARDOWN_CLEAR,        /* clear the departure extras */
+    MAP_DEPART_TEARDOWN_WAIT_MODELS   /* until deferred model destruction has finished */
+};
+
 struct AsdTexture;
 struct ScriptProcess;
 

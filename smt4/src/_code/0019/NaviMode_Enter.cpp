@@ -5,7 +5,7 @@ extern "C" {
 
 int NaviMain_EnterState1(u32 *block);
 int backgroundConsumeReset(u32 *block);
-int FUN_003c28a8(u8 *block, int value);
+int naviSlotStart(u8 *block, int value);
 void NaviMain_Start(s32 unused, s32 requestId);
 
 void NaviMode_Enter(void)
@@ -15,7 +15,7 @@ void NaviMode_Enter(void)
     NaviMain_Start(1, 0);
     navi = g_naviMain;
     if (g_naviMain != NULL) {
-        FUN_003c28a8(navi->settings, 8);
+        naviSlotStart(navi->settings, 8);
         NaviMain_EnterState1(navi->state);
         backgroundConsumeReset(navi->state);
     }

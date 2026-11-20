@@ -71,7 +71,7 @@ void Obj422448::FUN_003ab9a4()
         work->timer = 0;
         break;
     case 0:
-        FUN_0029c43c(-static_cast<s32>(work->entries[flaggedValueHolderGetTotal(work->cursor)].cost), 0);
+        messageBannerSetCountdown(-static_cast<s32>(work->entries[flaggedValueHolderGetTotal(work->cursor)].cost), 0);
         work->state = 6;
         work->timer = 0;
         break;

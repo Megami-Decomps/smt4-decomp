@@ -6,7 +6,7 @@ struct ResourceDataBuffer { u32 unk00[8]; };
 extern "C" {
 void FUN_002f7a28(ResourceReadWork*);
 s32 FUN_002f7ac4(ResourceReadWork*, const void*);
-void FUN_002ec70c(ResourceReadWork*);
+void deletingDtor_002ec70c(ResourceReadWork*);
 void FUN_002ece14(ResourceDataBuffer*, const ResourceDataBuffer*);
 s32 FUN_002fdef8(ResourceReadWork*, ResourceDataBuffer*);
 void strDestroy(ResourceDataBuffer*);
@@ -20,14 +20,14 @@ u32 FUN_00303158(void* unused, const ResourceDataBuffer* input,
     ResourceReadWork reader;
     FUN_002f7a28(&reader);
     if (FUN_002f7ac4(&reader, configuration) == 0) {
-        FUN_002ec70c(&reader);
+        deletingDtor_002ec70c(&reader);
         return 0;
     }
     ResourceDataBuffer buffer;
     FUN_002ece14(&buffer, input);
     if (FUN_002fdef8(&reader, &buffer) == 0) {
         strDestroy(&buffer);
-        FUN_002ec70c(&reader);
+        deletingDtor_002ec70c(&reader);
         return 0;
     }
     // The still-unnamed native initializer starts the parser's lifetime in this storage.
@@ -37,13 +37,13 @@ u32 FUN_00303158(void* unused, const ResourceDataBuffer* input,
     if (FUN_002ecb04(parser, configuration) == 0) {
         parser->Obj558c00::~Obj558c00();
         strDestroy(&buffer);
-        FUN_002ec70c(&reader);
+        deletingDtor_002ec70c(&reader);
         return 0;
     }
     u32 result = parser->Obj558c00::vfunc10((s32)&buffer, range) == 0;
     parser->Obj558c00::~Obj558c00();
     strDestroy(&buffer);
-    FUN_002ec70c(&reader);
+    deletingDtor_002ec70c(&reader);
     return result;
 }
 }

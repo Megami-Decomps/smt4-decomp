@@ -8,7 +8,7 @@ int nw_ut_internal_LinkListImpl_erase_2BAE30(int);
 int nn_os_LightEvent_ClearSignal(int);
 int FUN_001b4a58(unsigned int, int *, int, int, int, int, unsigned int, unsigned int);
 int FUN_001cc6c0(unsigned int, int);
-int FUN_001d0b28(unsigned int, int);
+int linkListEraseMember(unsigned int, int);
 int word8HolderCopy0CTo14(void);
 int FUN_00462a18(void);
 int FUN_00462b74(int);
@@ -31,7 +31,7 @@ extern unsigned int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void)
 /* Supplied declaration required: FUN_001b4a58. */
 extern unsigned int FUN_001c35d8(void);
 /* Supplied declaration required: FUN_001cc6c0. */
-/* Supplied declaration required: FUN_001d0b28. */
+/* Supplied declaration required: linkListEraseMember. */
 extern int FUN_0045b9a0(unsigned int);
 /* Supplied declaration required: word8HolderCopy0CTo14. */
 /* Supplied declaration required: FUN_00462a18. */
@@ -86,7 +86,7 @@ LAB_00462fb0:
         return;
       }
       temp_v2 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
-      FUN_001d0b28(temp_v2,param_1 + 0x50);
+      linkListEraseMember(temp_v2,param_1 + 0x50);
       *(unsigned char *)(param_1 + 0xa2) = 0;
       temp_v0 = *(char *)(param_1 + 0xd);
     }
@@ -100,7 +100,7 @@ LAB_00462fb0:
       *(unsigned char *)(param_1 + 0xf) = 1;
       if (*(char *)(param_1 + 0xa2) != '\0') {
         temp_v2 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
-        FUN_001d0b28(temp_v2,param_1 + 0x50);
+        linkListEraseMember(temp_v2,param_1 + 0x50);
         *(unsigned char *)(param_1 + 0xa2) = 0;
       }
       temp_v0 = *(char *)(param_1 + 0xd);
@@ -183,7 +183,7 @@ LAB_00462ee4:
         *(unsigned char *)(param_1 + 0xf) = 1;
         if (*(char *)(param_1 + 0xa2) != '\0') {
           temp_v2 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
-          FUN_001d0b28(temp_v2,param_1 + 0x50);
+          linkListEraseMember(temp_v2,param_1 + 0x50);
           *(unsigned char *)(param_1 + 0xa2) = 0;
         }
         if (*(char *)(param_1 + 0xd) != '\0') {
@@ -202,7 +202,7 @@ LAB_00462ee4:
     *(unsigned char *)(param_1 + 0xf) = 1;
     if (*(char *)(param_1 + 0xa2) != '\0') {
       temp_v2 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
-      FUN_001d0b28(temp_v2,param_1 + 0x50);
+      linkListEraseMember(temp_v2,param_1 + 0x50);
       *(unsigned char *)(param_1 + 0xa2) = 0;
     }
     temp_v0 = *(char *)(param_1 + 0xd);

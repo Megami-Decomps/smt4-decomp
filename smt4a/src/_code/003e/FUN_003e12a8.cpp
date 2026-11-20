@@ -19,9 +19,9 @@ typedef struct AocUiList {
 
 void __aeabi_memset4(void *destination, s32 size, s32 value);
 void uiEntriesReset(AocUiList *list);
-s32 FUN_0039ba24(u32 *ids, s32 capacity, u32 source);
+s32 versionedResourceCollectIds(u32 *ids, s32 capacity, u32 source);
 s32 uiHasEntryId(AocUiList *list, u32 id);
-u32 FUN_00409fe8(u32 id, s32 a, s32 b);
+u32 resourceCacheGetOrLoadModel(u32 id, s32 a, s32 b);
 void valueSlotsInsert(AocUiList *list, u32 value);
 void uiInsertIdInFirstFreeSlot(AocUiList *list, s16 id);
 void aocLoaderUpdateRecords(BattleArrangementLoadState *request, AocUiList *list);
@@ -39,13 +39,13 @@ void FUN_003e12a8(BattleArrangementLoadState *request, AocUiList *list)
     uiEntriesReset(list);
     source = list->source;
     __aeabi_memset4(ids, sizeof(ids), -1);
-    count = FUN_0039ba24(ids, 42, source);
+    count = versionedResourceCollectIds(ids, 42, source);
     added = 0;
     i = 0;
     if (i < count) {
         do {
             if (uiHasEntryId(list, ids[i]) == 0) {
-                value = FUN_00409fe8(ids[i], 1, 1);
+                value = resourceCacheGetOrLoadModel(ids[i], 1, 1);
                 valueSlotsInsert(list, value);
                 list->added[added].id = ids[i];
                 uiInsertIdInFirstFreeSlot(list, (s16)ids[i]);

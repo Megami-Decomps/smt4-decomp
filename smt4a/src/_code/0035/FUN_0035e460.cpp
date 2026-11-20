@@ -28,7 +28,7 @@ typedef struct AocItemEntry {
 u32 dataTableGet(u32 table, u32 arg1);
 void *dataTableGetEntries(u32 table);
 u32 dataTableGetCount(u32 table);
-s32 FUN_001b2e78(void *system, u32 id);
+s32 dataTable41FindByIdImpl(void *system, u32 id);
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 
 extern void *g_aocSystem;
@@ -39,7 +39,7 @@ s32 recordSortEntryCompareByKey(const void *left, const void *right);  /* table 
 s32 FUN_0035e460(u32 id, s32 positive)
 {
     if (id > AOC_ID_LIMIT) {
-        if (FUN_001b2e78(g_aocSystem, id) == 0) {
+        if (dataTable41FindByIdImpl(g_aocSystem, id) == 0) {
             u32 table = dataTableGet(4, 1);
             void *entries = dataTableGetEntries(table);
             AocTableEntry key;

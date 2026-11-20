@@ -9,7 +9,7 @@ int sharedRefRelease(...);
 int listIteratorNext(int [2]);
 int listIteratorNext2(int [2]);
 int FUN_002f9cc8(void);
-int FUN_002f9d6a(int *, int, int *);
+int sharedRefAcquireFromOwner(int *, int, int *);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 5 slot(s), 20 byte(s) */
@@ -27,7 +27,7 @@ extern int wordRefsDiffer_002eb690(int *, int *);
 /* Supplied declaration required: listIteratorNext2. */
 extern int wordRefsDiffer_002f2dec(int *, int);
 /* Supplied declaration required: FUN_002f9cc8. */
-/* Supplied declaration required: FUN_002f9d6a. */
+/* Supplied declaration required: sharedRefAcquireFromOwner. */
 
 
 void FUN_0010e8c4(int param_1)
@@ -62,7 +62,7 @@ void FUN_0010e8c4(int param_1)
        (-1 >= (int)((unsigned int)*(unsigned char *)(*(int *)(temp_v2[0] + 0xd8) + 0x1c) << 0x1d))) {
       sharedRefRelease(temp_v2[0]);
       temp_v1 = temp_v2[0];
-      FUN_002f9d6a(&temp_v3,param_1 + 0x1f8,&temp_v1);
+      sharedRefAcquireFromOwner(&temp_v3,param_1 + 0x1f8,&temp_v1);
       temp_v2[0] = temp_v3;
     }
     else {

@@ -7,7 +7,7 @@ void FUN_00282820(s32 position, u32 first, u32 second, s32 listedId, s32 layer, 
 s32 FUN_0028299c(u32 context);
 u32 libc_strlen(const char *text);
 extern const char DAT_00400440[];
-extern u32 DAT_00435d18;
+extern u32 g_btlAux;
 
 // Spawn configured battle text effects, suppressing conditional labels for inactive entries.
 void FUN_001b1a48(s32 side, u32 first, const void *configuration, s32 spacing, u32 second, s32 listedId)
@@ -25,7 +25,7 @@ void FUN_001b1a48(s32 side, u32 first, const void *configuration, s32 spacing, u
         const char *text = config->entries[index].text;
         if (libc_strlen(text) && strcmp(text, DAT_00400440)) {
             u32 kind = config->entries[index].kind;
-            s32 offset = FUN_0028299c(DAT_00435d18) * spacing;
+            s32 offset = FUN_0028299c(g_btlAux) * spacing;
             u32 mode = 2;
             if (side < 0)
                 mode = 3;

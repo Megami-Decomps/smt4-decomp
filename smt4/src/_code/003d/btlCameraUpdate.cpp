@@ -21,7 +21,7 @@ extern "C" {
 extern BtlCameraStatics g_btlMain; // declcheck: local (the statics view of battle/btlCamera.h, as its users declare it)
 extern BtlCameraVector3 DAT_00493530; /* the look shift's base while flag 0x8000 runs */
 
-f32 FUN_00227280(s32 mode, s32 duration, s32 frame);
+f32 easeEvaluate(s32 mode, s32 duration, s32 frame);
 s32 randBetween(s32 minimum, s32 maximum);
 f32 mathSinFixedAngle(f32 angle);
 void mathSinCos(f32 *sine, f32 *cosine, f32 angle);
@@ -41,7 +41,7 @@ void effectSetSecondaryPosition(const BtlCameraVector3 *position);
 void effectSetProcessScalar(f32 value);
 u32 eventCommandGetPendingCleanup(void);
 u8 *FUN_0018f654(u8 *object);
-void FUN_00257e74(BtlCameraShake *shake);
+void effShakeParticleAdvance(BtlCameraShake *shake);
 void pairSourceGet(BtlCameraShake *shake, f32 *x, f32 *y);
 u32 rangeIsValid(BtlCameraShake *shake);
 
@@ -119,14 +119,14 @@ s32 btlCameraUpdate(BtlCamera *camera)
         if (camera->flags & 4) {
             BtlCameraVector3 span;
             vecSubtract(&span, &camera->endPose.position, &camera->offset);
-            camera->eyeSlide.x = FUN_00227280(camera->eyeSlideMode, camera->eyeSlideDuration, camera->eyeSlideFrame) * span.x;
+            camera->eyeSlide.x = easeEvaluate(camera->eyeSlideMode, camera->eyeSlideDuration, camera->eyeSlideFrame) * span.x;
             if (++camera->eyeSlideFrame > camera->eyeSlideDuration) {
                 camera->flags &= ~4;
             }
         }
         if (camera->flags & 8) {
             f32 span = camera->endPose.distance - camera->distance;
-            camera->eyeRise = FUN_00227280(camera->eyeRiseMode, camera->eyeRiseDuration, camera->eyeRiseFrame) * span;
+            camera->eyeRise = easeEvaluate(camera->eyeRiseMode, camera->eyeRiseDuration, camera->eyeRiseFrame) * span;
             if (++camera->eyeRiseFrame > camera->eyeRiseDuration) {
                 camera->flags &= ~8;
             }
@@ -146,7 +146,7 @@ s32 btlCameraUpdate(BtlCamera *camera)
             /* Move the whole camera from the first editor pose to the second. */
             BtlCameraVector3 span;
             vecSubtract(&span, &camera->movePoints[1], &camera->movePoints[0]);
-            f32 factor = FUN_00227280(0, camera->moveDuration, camera->moveFrame);
+            f32 factor = easeEvaluate(0, camera->moveDuration, camera->moveFrame);
             camera->position.z = camera->movePoints[0].z + span.z * factor;
             camera->position.x = camera->movePoints[0].x + span.x * factor;
             camera->position.y = camera->movePoints[0].y + span.y * factor;
@@ -161,7 +161,7 @@ s32 btlCameraUpdate(BtlCamera *camera)
 
         if (!(camera->flags & 0x100)) {
             if (camera->flags & 0x200) {
-                camera->eyeDip = FUN_00227280(camera->eyeDipMode, camera->eyeDipDuration, camera->eyeDipFrame) *
+                camera->eyeDip = easeEvaluate(camera->eyeDipMode, camera->eyeDipDuration, camera->eyeDipFrame) *
                                  camera->endPose.distance;
                 if (++camera->eyeDipFrame > camera->eyeDipDuration) {
                     camera->flags &= ~0x200;
@@ -169,12 +169,12 @@ s32 btlCameraUpdate(BtlCamera *camera)
             }
             if (camera->flags & 0x400) {
                 if ((camera->flags & 0x200000) == 0) {
-                    camera->fovShift = FUN_00227280(camera->fovShiftMode, camera->fovShiftDuration, camera->fovShiftFrame) *
+                    camera->fovShift = easeEvaluate(camera->fovShiftMode, camera->fovShiftDuration, camera->fovShiftFrame) *
                                        camera->endPose.fov;
                 } else {
                     f32 span = camera->endPose.fov - camera->startPose.fov;
                     camera->fovShift = camera->startPose.fov +
-                                       span * FUN_00227280(camera->fovShiftMode, camera->fovShiftDuration, camera->fovShiftFrame);
+                                       span * easeEvaluate(camera->fovShiftMode, camera->fovShiftDuration, camera->fovShiftFrame);
                 }
                 if (++camera->fovShiftFrame > camera->fovShiftDuration) {
                     camera->flags &= ~0x200000;
@@ -183,7 +183,7 @@ s32 btlCameraUpdate(BtlCamera *camera)
             }
             if (camera->flags & 0x800) {
                 f32 span = camera->endPose.roll - camera->startPose.roll;
-                camera->roll = FUN_00227280(camera->rollMode, camera->rollDuration, camera->rollFrame) * span;
+                camera->roll = easeEvaluate(camera->rollMode, camera->rollDuration, camera->rollFrame) * span;
                 if (++camera->rollFrame > camera->rollDuration) {
                     camera->flags &= ~0x800;
                 }
@@ -191,7 +191,7 @@ s32 btlCameraUpdate(BtlCamera *camera)
             if (camera->flags & 0x1000) {
                 BtlCameraVector3 span;
                 vecSubtract(&span, &camera->endPose.position, &camera->offset);
-                camera->eyeShift.x = span.x * FUN_00227280(camera->eyeShiftMode, camera->eyeShiftDuration, camera->eyeShiftFrame);
+                camera->eyeShift.x = span.x * easeEvaluate(camera->eyeShiftMode, camera->eyeShiftDuration, camera->eyeShiftFrame);
                 if (++camera->eyeShiftFrame > camera->eyeShiftDuration) {
                     camera->flags &= ~0x1000;
                 }
@@ -203,7 +203,7 @@ s32 btlCameraUpdate(BtlCamera *camera)
                 vecSubtract(&base, &camera->lookAt, &camera->lookShift);
                 vecSubtract(&span, &camera->endPose.direction, &base);
                 vecScale(&camera->lookShift, &span,
-                         FUN_00227280(camera->lookShiftMode, camera->lookShiftDuration, camera->lookShiftFrame));
+                         easeEvaluate(camera->lookShiftMode, camera->lookShiftDuration, camera->lookShiftFrame));
                 if (++camera->lookShiftFrame > camera->lookShiftDuration) {
                     camera->flags &= ~0x2000;
                 }
@@ -212,7 +212,7 @@ s32 btlCameraUpdate(BtlCamera *camera)
                 BtlCameraVector3 span;
                 vecSubtract(&span, &camera->endPose.direction, &DAT_00493530);
                 vecScale(&span, &span,
-                         FUN_00227280(camera->lookShiftMode, camera->lookShiftDuration, camera->lookShiftFrame));
+                         easeEvaluate(camera->lookShiftMode, camera->lookShiftDuration, camera->lookShiftFrame));
                 vecSum(&camera->lookShift, &DAT_00493530, &span);
                 if (++camera->lookShiftFrame > camera->lookShiftDuration) {
                     camera->flags &= ~0x8000;
@@ -235,7 +235,7 @@ s32 btlCameraUpdate(BtlCamera *camera)
             /* The alternate mode's own channels; the module's statics hold their durations. */
             if (camera->flags & 0x200) {
                 f32 target = g_btlMain.transitionTarget;
-                camera->altEyeRise = FUN_00227280(g_btlMain.alt.mode, g_btlMain.alt.duration, camera->altEyeRiseFrame) * target;
+                camera->altEyeRise = easeEvaluate(g_btlMain.alt.mode, g_btlMain.alt.duration, camera->altEyeRiseFrame) * target;
                 if (++camera->altEyeRiseFrame > g_btlMain.alt.duration) {
                     camera->flags &= ~0x200;
                 }
@@ -243,14 +243,14 @@ s32 btlCameraUpdate(BtlCamera *camera)
             if (camera->flags & 0x400) {
                 f32 target = camera->endPose.fov;
                 camera->altFovShift =
-                    FUN_00227280(camera->altFovShiftMode, camera->altFovShiftDuration, camera->altFovShiftFrame) * target;
+                    easeEvaluate(camera->altFovShiftMode, camera->altFovShiftDuration, camera->altFovShiftFrame) * target;
                 if (++camera->altFovShiftFrame > g_btlMain.altDurations[0]) {
                     camera->flags &= ~0x400;
                 }
             }
             if (camera->flags & 0x800) {
                 f32 span = camera->endPose.roll - camera->startPose.roll;
-                camera->altRoll = FUN_00227280(camera->altRollMode, camera->altRollDuration, camera->altRollFrame) * span;
+                camera->altRoll = easeEvaluate(camera->altRollMode, camera->altRollDuration, camera->altRollFrame) * span;
                 if (++camera->altRollFrame > g_btlMain.altDurations[1]) {
                     camera->flags &= ~0x800;
                 }
@@ -259,7 +259,7 @@ s32 btlCameraUpdate(BtlCamera *camera)
                 BtlCameraVector3 span;
                 vecSubtract(&span, &camera->endPose.position, &camera->offset);
                 camera->altEyeShift.x =
-                    FUN_00227280(camera->altEyeShiftMode, camera->altEyeShiftDuration, camera->altEyeShiftFrame) * span.x;
+                    easeEvaluate(camera->altEyeShiftMode, camera->altEyeShiftDuration, camera->altEyeShiftFrame) * span.x;
                 if (++camera->altEyeShiftFrame > g_btlMain.altDurations[2]) {
                     camera->flags &= ~0x1000;
                 }
@@ -289,11 +289,11 @@ s32 btlCameraUpdate(BtlCamera *camera)
         pan.y = 0.0f;
         pan.x = 0.0f;
         if (camera->flags & 0x4000) {
-            FUN_00257e74((BtlCameraShake *)eventCommandGetPendingCleanup());
+            effShakeParticleAdvance((BtlCameraShake *)eventCommandGetPendingCleanup());
             pan = *(BtlCameraPan *)FUN_0018f654((u8 *)eventCommandGetPendingCleanup());
         }
         if (camera->flags & 0x40000) {
-            FUN_00257e74(&camera->shake);
+            effShakeParticleAdvance(&camera->shake);
             pairSourceGet(&camera->shake, &pan.x, &pan.y);
             if (rangeIsValid(&camera->shake)) {
                 camera->shake = BtlCameraShake();
@@ -304,7 +304,7 @@ s32 btlCameraUpdate(BtlCamera *camera)
         panExtra.y = 0.0f;
         panExtra.x = 0.0f;
         if (camera->flags & 0x400000) {
-            FUN_00257e74(&camera->shakeExtra);
+            effShakeParticleAdvance(&camera->shakeExtra);
             pairSourceGet(&camera->shakeExtra, &panExtra.x, &panExtra.y);
             if (rangeIsValid(&camera->shakeExtra)) {
                 camera->shakeExtra = BtlCameraShake();

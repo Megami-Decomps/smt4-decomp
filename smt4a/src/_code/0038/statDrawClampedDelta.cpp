@@ -5,10 +5,10 @@
 
 extern "C" {
 s32 FUN_004bd098(void *owner, u32 stat);
-s32 FUN_0035e458(u32 stat);
-s32 FUN_0035d89c(u32 stat);
+s32 partyRecordClampEquippedRankUp(u32 stat);
+s32 partyRecordClampEquippedRankDown(u32 stat);
 void drawSetColorFromRGBA8(u32 color);
-void FUN_00180310(s32 layer, s32 x, s32 y, s32 z, s32 mode, s32 depth, const char *format, ...);
+void statRowDrawValueImpl(s32 layer, s32 x, s32 y, s32 z, s32 mode, s32 depth, const char *format, ...);
 void gxResetColorQuadToWhite(void);
 
 /* Show the clamped stat delta, coloring values at the bounds separately. */
@@ -18,8 +18,8 @@ void statDrawClampedDelta(void *owner, u32 stat, s32 x, s32 y, s32 depth, s32 de
         return;
     }
     s32 value = delta + FUN_004bd098(owner, stat);
-    s32 maximum = FUN_0035e458(stat);
-    s32 minimum = FUN_0035d89c(stat);
+    s32 maximum = partyRecordClampEquippedRankUp(stat);
+    s32 minimum = partyRecordClampEquippedRankDown(stat);
     if (value > maximum) {
         value = maximum;
     }
@@ -44,12 +44,12 @@ void statDrawClampedDelta(void *owner, u32 stat, s32 x, s32 y, s32 depth, s32 de
         }
         drawSetColorFromRGBA8(color);
         const TextureTableEntryIV *position = asdTMTexTableEntryAt(11, 0x402);
-        FUN_00180310(2, position->x + x, position->y + y, 0, 1, depth + 1, text);
+        statRowDrawValueImpl(2, position->x + x, position->y + y, 0, 1, depth + 1, text);
         position = asdTMTexTableEntryAt(11, 0x401);
         if (value < 0) {
             value = -value;
         }
-        FUN_00180310(2, position->x + x, position->y + y, 0, 1, depth + 1, "%d", value);
+        statRowDrawValueImpl(2, position->x + x, position->y + y, 0, 1, depth + 1, "%d", value);
         gxResetColorQuadToWhite();
     }
 }

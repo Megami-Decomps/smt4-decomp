@@ -31,7 +31,7 @@ extern unsigned int onlineSockAddrConstruct(unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002eb338. */
 /* Supplied declaration required: onlineTimeGetNow. */
-extern int FUN_002eb5f4(void);
+extern int watcherGetActiveContext(void);
 /* Supplied declaration required: FUN_002f7c94. */
 
 
@@ -50,12 +50,12 @@ void FUN_0010f37c(int param_1)
   unsigned char temp_v7 [16];
   int temp_v8 [5];
   
-  temp_v0 = FUN_002eb5f4();
+  temp_v0 = watcherGetActiveContext();
   if (temp_v0 != 0) {
     temp_v0 = onlineInstanceTableGetCurrent();
     onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
     if (temp_v0 != 0) {
-      temp_v0 = FUN_002eb5f4();
+      temp_v0 = watcherGetActiveContext();
       piVar3 = *(int **)(*(int *)(temp_v0 + 0xd0) + 8);
       if (piVar3 != (int *)0x0) {
         temp_v1 = onlineSockAddrConstruct(temp_v5);

@@ -5,7 +5,7 @@
 #include "AsdSDK/Source/Util/AsdListHelpers_LinkedItems.h"
 
 extern "C" {
-extern EffectSelectionContext DAT_0044f858;
+extern EffectSelectionContext g_effectEditorState;
 
 extern EffectEditorOptions DAT_0044f708;
 extern const u8 DAT_0044f5e8[];
@@ -14,7 +14,7 @@ void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 u32 FUN_003285b8(u32 result)
 {
-    s32 position = DAT_0044f858.index + g_effectEditor.index;
+    s32 position = g_effectEditorState.index + g_effectEditor.index;
     void *item = linkedFindItemByIndex(static_cast<LinkedItems *>(g_effectEditor.list), position);
     __aeabi_memcpy4(item, &g_effectEditorSettings, sizeof(g_effectEditorSettings));
     __aeabi_memcpy4(g_effectEditorSavedSnapshot.data, &g_effectEditorSettings, sizeof(g_effectEditorSavedSnapshot.data));

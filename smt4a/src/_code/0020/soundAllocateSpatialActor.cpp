@@ -1,12 +1,12 @@
 #include "AsdSDK/Source/Snd/AsdSnd3dPosition.h"
 
 extern "C" {
-void FUN_00359768(u32, s32, u32);
+void soundActorStartIdle(u32, s32, u32);
 void asd3dSoundActorStart(u32, s32);
 s32 asd3dSoundActorIsPlaying(s32);
 s32 asdSoundGetPlayerPriority(void *);
-u32 FUN_0014af98(void);
-s32 FUN_00162ea4(void);
+u32 messageVoiceBankGet(void);
+s32 eventIsSkipping(void);
 void *jyoucyuGetTableEntry(u32);
 void *asd3dSoundActorGetSlotValue(s32);
 
@@ -17,8 +17,8 @@ s32 soundAllocateSpatialActor(u32 sound, AsdSnd3dPosition position)
     bool allocated = false;
     s32 highestPriority = -1;
     s32 replacement = -1;
-    u32 context = FUN_0014af98();
-    if (!jyoucyuGetTableEntry(1) && !FUN_00162ea4()) {
+    u32 context = messageVoiceBankGet();
+    if (!jyoucyuGetTableEntry(1) && !eventIsSkipping()) {
         for (s32 actor = 0; actor < 16; ++actor) {
             if (!asd3dSoundActorIsPlaying(actor)) {
                 selected = actor;
@@ -27,7 +27,7 @@ s32 soundAllocateSpatialActor(u32 sound, AsdSnd3dPosition position)
                     asd3dSoundActorStart(sound, selected);
                     selected += 100000;
                 } else if (sound - 0x100020du <= 261) {
-                    FUN_00359768(sound, selected, context);
+                    soundActorStartIdle(sound, selected, context);
                     break;
                 }
                 allocated = true;
@@ -42,7 +42,7 @@ s32 soundAllocateSpatialActor(u32 sound, AsdSnd3dPosition position)
                 }
             }
             if (replacement != -1)
-                FUN_00359768(sound, replacement, context);
+                soundActorStartIdle(sound, replacement, context);
         }
     }
     return selected;

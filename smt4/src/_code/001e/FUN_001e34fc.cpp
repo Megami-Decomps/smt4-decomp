@@ -13,8 +13,8 @@ int groupedFileTablesCountRecordsOfKind(...);
 int dataTable2AGetEntryWithAoc(void);
 int lightOwnerRegister(int, int);
 int vectorQueuePushPosition(void);
-int FUN_002f479c(void);
-int FUN_002fb4a4(void);
+int dataTable42GetCombinedRecord(void);
+int dataTable42GetSection0Count(void);
 int SBORROW4(int, int);
 int VectorSignedToFloat(int, int);
 
@@ -34,8 +34,8 @@ extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: lightOwnerRegister. */
 extern int modelHasLoadedAttachment(int);
 /* Supplied declaration required: vectorQueuePushPosition. */
-/* Supplied declaration required: FUN_002f479c. */
-/* Supplied declaration required: FUN_002fb4a4. */
+/* Supplied declaration required: dataTable42GetCombinedRecord. */
+/* Supplied declaration required: dataTable42GetSection0Count. */
 extern int FUN_0031b7dc(void);
 
 
@@ -76,7 +76,7 @@ unsigned int FUN_001e34fc(int param_1,unsigned int param_2,int param_3)
           lightOwnerRegister(piVar9[temp_v4 * 0xe + 0xf],1);
           temp_v3 = g_deferredMapModels[1];
           dataTable2AGetEntryWithAoc();
-          FUN_002fb4a4();
+          dataTable42GetSection0Count();
           if (*(char *)(temp_v3 + 0x33) == '\x13') {
             nodeSetScale(*(unsigned int *)(piVar9[temp_v4 * 0xe + 0xf] + 8),0);
           }
@@ -109,7 +109,7 @@ unsigned int FUN_001e34fc(int param_1,unsigned int param_2,int param_3)
       }
     }
     else {
-      temp_v3 = FUN_002fb4a4();
+      temp_v3 = dataTable42GetSection0Count();
       for (psVar8 = (short *)g_deferredMapModels[1]; (int)psVar8 < temp_v3;
           psVar8 = (short *)((int)psVar8 + 1)) {
         psVar3 = psVar8;
@@ -191,13 +191,13 @@ LAB_001e3758:
     if (0 < temp_v3) {
       do {
         piVar10 = piVar9;
-        FUN_002f479c();
+        dataTable42GetCombinedRecord();
         if (((*piVar10 != 999999) && (*piVar10 == param_1)) && (piVar10[1] == param_2)) {
           piVar10 = (int *)((int)piVar9 + 1);
           piVar9 = piVar10;
           for (; (int)piVar10 < 9999; piVar10 = (int *)((int)piVar10 + 1)) {
             piVar2 = piVar9;
-            FUN_002f479c();
+            dataTable42GetCombinedRecord();
             if (*piVar2 == 0xf423e) break;
             VectorSignedToFloat(piVar2[1],(unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat(*piVar2,(unsigned char)(in_fpscr >> 0x16) & 3);

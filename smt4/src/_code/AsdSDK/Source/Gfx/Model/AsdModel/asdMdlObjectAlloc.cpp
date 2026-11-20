@@ -24,7 +24,7 @@ typedef struct AsdModel {
     /* 0x91 */ u8 unk91[0x17];
 } AsdModel;
 
-extern u8 DAT_004dae48[]; /* model list */
+extern u8 g_asdMdlObjectList[]; /* model list */
 
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void asdListAdd(void *list, void *item, s32 flags);
@@ -65,7 +65,7 @@ AsdModel *asdMdlObjectAlloc(void)
     model->color[3] = 1.0f;
     model->unk90 = 0;
     vec3Set(model->offset, 0.0f, 0.0f, 0.0f);
-    asdListAdd(DAT_004dae48, model, 0);
+    asdListAdd(g_asdMdlObjectList, model, 0);
     g_gfxSettings.modelCount++;
     return model;
 }

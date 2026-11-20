@@ -8,8 +8,8 @@ struct NineRowListInput {
 };
 extern "C" {
 s32 resourceRunOperationIfUnblocked(FlaggedEntry *);
-s32 objectApplyIfUnblocked(FlaggedEntry *);
-u32 FUN_00228b04(FlaggedEntry *, u32);
+s32 gridNavigationGetItemCount(FlaggedEntry *);
+u32 gridNavigationHandleConfirm(FlaggedEntry *, u32);
 u32 padQueryLogicalKey(u32, u32);
 u32 flaggedEntryGetValueA(FlaggedEntry *);
 void scrollOwnerSetValue(FlaggedEntry *, s32);
@@ -19,17 +19,17 @@ void eventQueueAddUniqueIfValid(u32);
 void updateNineRowListInput(NineRowListInput *list)
 {
     s32 previousTop = resourceRunOperationIfUnblocked(&list->grid);
-    if (FUN_00228b04(&list->grid, 0)) {
-        if (objectApplyIfUnblocked(&list->grid) > 9) {
+    if (gridNavigationHandleConfirm(&list->grid, 0)) {
+        if (gridNavigationGetItemCount(&list->grid) > 9) {
             resourceRunOperationIfUnblocked(&list->grid);
             while (resourceRunOperationIfUnblocked(&list->grid) == previousTop) {
                 if (resourceRunOperationIfUnblocked(&list->grid) == 0 &&
                     listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&list->grid)) == 0)
                     break;
-                if (resourceRunOperationIfUnblocked(&list->grid) == objectApplyIfUnblocked(&list->grid) - 9 &&
+                if (resourceRunOperationIfUnblocked(&list->grid) == gridNavigationGetItemCount(&list->grid) - 9 &&
                     listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&list->grid)) == 8)
                     break;
-                FUN_00228b04(&list->grid, 0);
+                gridNavigationHandleConfirm(&list->grid, 0);
             }
         }
         list->top = resourceRunOperationIfUnblocked(&list->grid);
@@ -42,11 +42,11 @@ void updateNineRowListInput(NineRowListInput *list)
         eventQueueAddUniqueIfValid(0x100020d);
         scrollOwnerSetValue(&list->grid, --list->top);
     }
-    if (padQueryLogicalKey(10, 0) && objectApplyIfUnblocked(&list->grid) >= 9) {
+    if (padQueryLogicalKey(10, 0) && gridNavigationGetItemCount(&list->grid) >= 9) {
         s32 top = resourceRunOperationIfUnblocked(&list->grid);
-        s32 count = objectApplyIfUnblocked(&list->grid);
+        s32 count = gridNavigationGetItemCount(&list->grid);
         if (top != count - 9 &&
-            (flaggedEntryGetValueA(&list->grid) != 0 || objectApplyIfUnblocked(&list->grid) >= 9)) {
+            (flaggedEntryGetValueA(&list->grid) != 0 || gridNavigationGetItemCount(&list->grid) >= 9)) {
             eventQueueAddUniqueIfValid(0x100020d);
             scrollOwnerSetValue(&list->grid, ++list->top);
         }

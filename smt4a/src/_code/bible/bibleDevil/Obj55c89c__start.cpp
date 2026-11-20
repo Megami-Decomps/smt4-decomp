@@ -12,7 +12,7 @@ int FUN_002c8550(...);
 int FUN_0034a9c4(...);
 int fusionReleaseRegisteredHandle(void);
 int rectangleInitializeSelection(...);
-int FUN_004a1958(...);
+int demonScreenRebuildEntryList(...);
 int FUN_004a3e04(...);
 int partyIdsReset(...);
 int partyIdsActivateEntry(...);
@@ -47,7 +47,7 @@ extern unsigned int DAT_0057f0b8; /* 0x57f0b8 */
 /* Supplied declaration required: FUN_0034a9c4. */
 /* Supplied declaration required: fusionReleaseRegisteredHandle. */
 /* Supplied declaration required: rectangleInitializeSelection. */
-/* Supplied declaration required: FUN_004a1958. */
+/* Supplied declaration required: demonScreenRebuildEntryList. */
 /* Supplied declaration required: FUN_004a3e04. */
 /* Supplied declaration required: partyIdsReset. */
 /* Supplied declaration required: partyIdsActivateEntry. */
@@ -102,7 +102,7 @@ void Obj55c89c::start()
   }
   param_1[0x213] = (int)puVar5;
   puVar5[0x19] = (unsigned int)(param_1 + 0x32);
-  FUN_004a1958(param_1);
+  demonScreenRebuildEntryList(param_1);
   partyIdsReset((int)param_1 + 0x96);
   partyIdsActivateEntry((int)param_1 + 0x96,0);
   temp_v0 = rangeGetMinimumLimit(param_1 + 8);

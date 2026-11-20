@@ -65,7 +65,7 @@ extern unsigned char DAT_00580c99; /* 0x580c99 */
 extern unsigned char DAT_00580c9a; /* 0x580c9a */
 extern unsigned char DAT_00580c9b; /* 0x580c9b */
 extern unsigned char DAT_00580c9c; /* 0x580c9c */
-extern unsigned char DAT_005f32a0; /* 0x5f32a0 */
+extern unsigned char g_recordTable; /* 0x5f32a0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: gameFlagIsSet. */
@@ -582,7 +582,7 @@ LAB_003652e4:
                         piVar6 = (int *)contentEntryGet();
                         temp_v3 = 0;
                         if (0 < (int)DAT_00580c94) {
-                          in_r12 = &DAT_005f32a0;
+                          in_r12 = &g_recordTable;
                           do {
                             if (*(int *)(temp_v3 * 0x17c + 0x5f33cc) == *piVar6) {
                               *(int *)(temp_v3 * 0x17c + 0x5f33d4) = (int)*(short *)((int)piVar6 + 10)
@@ -595,7 +595,7 @@ LAB_003652e4:
                         }
                         temp_v3 = piVar6[2];
                         if (0 < (int)DAT_00580c94) {
-                          in_r12 = &DAT_005f32a0;
+                          in_r12 = &g_recordTable;
                         }
                         temp_v16 = 0;
                         param_3 = DAT_00580c94;
@@ -618,7 +618,7 @@ LAB_003652e4:
                         if ((short)piVar6[2] != 0) {
                           temp_v3 = 0;
                           if (0 < (int)DAT_00580c94) {
-                            in_r12 = &DAT_005f32a0;
+                            in_r12 = &g_recordTable;
                             do {
                               if (*(int *)(temp_v3 * 0x17c + 0x5f33cc) == *piVar6) {
                                 *(short *)(temp_v3 * 0x17c + 0x5f33fc) = (short)piVar6[2];
@@ -631,7 +631,7 @@ LAB_003652e4:
                         else {
                           temp_v3 = 0;
                           if (0 < (int)DAT_00580c94) {
-                            in_r12 = &DAT_005f32a0;
+                            in_r12 = &g_recordTable;
                             do {
                               if (*(int *)(temp_v3 * 0x17c + 0x5f33cc) == *piVar6) {
                                 *(int *)(temp_v3 * 0x17c + 0x5f33d4) =
@@ -683,7 +683,7 @@ LAB_003652e4:
                         param_3 = (unsigned int *)&DAT_00580c98;
                         temp_v3 = 0;
                         if (0 < (int)DAT_00580c94) {
-                          in_r12 = &DAT_005f32a0;
+                          in_r12 = &g_recordTable;
                           do {
                             if (*(unsigned int **)(temp_v3 * 0x17c + 0x5f33cc) == temp_v24) {
                               FUN_001a90f0(temp_v3 * 0x17c + 0x5f340e,&DAT_00580c98);

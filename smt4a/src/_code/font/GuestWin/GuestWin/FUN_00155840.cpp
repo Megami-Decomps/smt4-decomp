@@ -46,7 +46,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00169a1c. */
 extern unsigned int recordGetScaledMaximum(int);
-extern unsigned int FUN_00180114(unsigned short);
+extern unsigned int table01RecordLookupForContent(unsigned short);
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: FUN_00183788. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
@@ -143,7 +143,7 @@ unsigned int FUN_00155840(void)
     else {
       uiDrawItemOrStatusIcon((int)*(short *)(temp_v1 + 0x62),*(short *)(temp_v3 + 8) + temp_v8,
                    *(short *)(temp_v3 + 10) + temp_v4,0x24,0);
-      temp_v5 = FUN_00180114(*(unsigned short *)(temp_v1 + 0x62));
+      temp_v5 = table01RecordLookupForContent(*(unsigned short *)(temp_v1 + 0x62));
       sprintf((char *)temp_v10,(const char *)temp_v5);
     }
     temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0xd8));

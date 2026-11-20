@@ -7,7 +7,7 @@ extern "C" {
 extern const AsdTypeInfo DAT_005c0f3c;
 
 void asdMemFree(void *block);
-void FUN_001ad2a4(AsdMdlNode *model, u8 *data, s32 key);
+void asdModelRebuildAttributeRecordsForKey(AsdMdlNode *model, u8 *data, s32 key);
 
 /* Switches the model to motion `motionIndex`: a pending motion takes over the playing track node's slot,
  * the playing motion is set and its blend clamped to the limit, then the attribute records are rebuilt
@@ -79,7 +79,7 @@ void modelSelectPrimaryMotion(AsdMdlNode *model, s32 motionIndex, f32 blend)
         model->records.items = NULL;
     }
     model->records.count = 0;
-    FUN_001ad2a4(model, model->file->data, motionIndex);
+    asdModelRebuildAttributeRecordsForKey(model, model->file->data, motionIndex);
 }
 
 } /* extern "C" */

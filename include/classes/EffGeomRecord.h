@@ -143,14 +143,22 @@ typedef char EffGeomRecordRendererLayoutCheck[
     sizeof(Obj42072cTail) == 0xC ? 1 : -1];
 
 /* The 0x58-byte handle a geometry builder returns. */
+struct EffGeomBuffer;
+
 struct EffGeomHandle {
-    /* 0x00 */ u16 tag;
+    /* 0x00 */ u16 tag;             /* EFF_GEOM_HANDLE_BUFFER: the geometry is `buffer`, else `record` */
     /* 0x02 */ u16 vertexCount;
     /* 0x04 */ u8 unk04[4];
     /* 0x08 */ EffGeomRecord *record;
-    /* 0x0C */ u8 unk0C[0x48];
+    /* 0x0C */ struct EffGeomBuffer *buffer;
+    /* 0x10 */ u8 unk10[0x44];
     /* 0x54 */ u32 unk54;
 };
+typedef char EffGeomHandleLayoutCheck[offsetof(EffGeomHandle, buffer) == 0xC &&
+    offsetof(EffGeomHandle, unk54) == 0x54 && sizeof(EffGeomHandle) == 0x58 ? 1 : -1];
+
+/* EffGeomHandle.tag of a handle around a vertex buffer (bit 0x200 marks the buffer style). */
+enum { EFF_GEOM_HANDLE_BUFFER = 0x300 };
 
 /* The 0x5C-byte handle of a point-style geometry builder: the record, one four-float vertex per
  * point, the element counts and an identity transform. */

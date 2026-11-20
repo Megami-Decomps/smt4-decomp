@@ -27,7 +27,7 @@ static EffectEditorCameraDefaults g_effectEditorCameraDefaults;
 /* Retail leaves 0xc bytes here in IV and 8 in Apocalypse: the vector is 16-byte aligned. */
 __align(16) static EffectEditorVector g_effectEditorVector;
 static EffectEditorVector g_effectEditorRotation;
-extern EffectEditorDefaultSlot DAT_0044f858;
+extern EffectEditorDefaultSlot g_effectEditorState;
 extern EffectSelectionCatalogEntry *DAT_0044f4d4[13];
 void __aeabi_memcpy4(void *, const void *, u32);
 void randomStateSeed(u32, u32);
@@ -41,22 +41,22 @@ u32 effectEditorEditPositionVector(EffectEditorSnapshot *, s32);
 void FUN_002496cc(const EffectPositionControl *);
 void requestHandlerDispatch(EffectHandlerRequest *, const EffMenuPosition *);
 void FUN_00249678();
-void FUN_0025c8f0(EffectEditorSnapshot *, const EffMenuPosition *, EffectEditorWords *);
-void FUN_002a2c00();
+void renderVectorOverrideResolve(EffectEditorSnapshot *, const EffMenuPosition *, EffectEditorWords *);
+void gfxQuaternionScratchMultiply();
 void handlerTableCallWithValueB(EffectHandlerRequest *, const EffMenuPosition *);
 void handlerTableCall(EffectHandlerRequest *, f32);
-void FUN_0021a4dc(EffectHandlerRequest *, const EffMenuPosition *);
+void effectResourceSetColor(EffectHandlerRequest *, const EffMenuPosition *);
 void handlerTableCallWithValue(EffectHandlerRequest *, u32);
 void effectEditorApplyHandlerState(EffectHandlerRequest *);
 extern const u8 DAT_00400001;
 extern const u8 DAT_00400002;
-void FUN_002430c8(const char *, u32, FileDialogResult *);
+void effectEditorPollTextRequest(const char *, u32, FileDialogResult *);
 void *FUN_001e1a70(const char *);
 void registrationEntryInsert(u32, s32);
-void FUN_002fc1a8();
-void FUN_002c2044(void *, s32);
-void FUN_002c1edc(void *, const PhaseVector *, const PhaseVector *, const PhaseVector *);
-void FUN_002c1e30(void *, u32, f32, f32, f32, f32);
+void effectTexturesLoadOnce();
+void cameraMatrixCacheReset(void *, s32);
+void cameraMatrixCacheSetLookAt(void *, const PhaseVector *, const PhaseVector *, const PhaseVector *);
+void stereoCameraSetPerspective(void *, u32, f32, f32, f32, f32);
 void FUN_00298d50(void *);
 void floatPairStore(f32, f32);
 }
@@ -101,7 +101,7 @@ extern "C" u32 effectPollResourceFileDialog(void)
 {
     u32 state = (u32)&DAT_00400001;
     FileDialogResult dialog;
-    FUN_002430c8("effect_editor/", 0x10, &dialog);
+    effectEditorPollTextRequest("effect_editor/", 0x10, &dialog);
     if (dialog.status == 2) {
         state = 0x400000;
     } else if (dialog.status == 1) {
@@ -114,16 +114,16 @@ extern "C" u32 effectPollResourceFileDialog(void)
         __aeabi_memcpy4(&g_effectEditorWorkingSnapshot, data, 0x80);
         state = (u32)&DAT_00400002;
         g_effectEditor.index = 0;
-        DAT_0044f858.object.indices.extraOffset = 0;
+        g_effectEditorState.object.indices.extraOffset = 0;
     }
     return state;
 }
 
 /* NON_MATCHING: vector initialization grouping and camera argument-base recovery differ. */
-extern "C" void FUN_001dce30()
+extern "C" void effectEditorInitialize()
 {
     randomStateSeed(0, 0x12345678);
-    FUN_002fc1a8();
+    effectTexturesLoadOnce();
     g_effectEditorCameraDefaults.eye.x = 0.0f;
     g_effectEditorCameraDefaults.eye.y = 100.0f;
     g_effectEditorCameraDefaults.eye.z = 600.0f;
@@ -139,9 +139,9 @@ extern "C" void FUN_001dce30()
     g_effectEditorCameraDefaults.rotation.x = 0.0f;
     g_effectEditorCameraDefaults.rotation.y = 0.0f;
     g_effectEditorCameraDefaults.rotation.z = 0.0f;
-    FUN_002c2044(&g_effectEditorCamera, 1);
-    FUN_002c1edc(&g_effectEditorCamera, &g_effectEditorCameraDefaults.eye, &g_effectEditorCameraDefaults.target, &g_effectEditorCameraDefaults.up);
-    FUN_002c1e30(&g_effectEditorCamera, 1, 30.0f, 20.0f, 25600.0f, 5.0f / 3.0f);
+    cameraMatrixCacheReset(&g_effectEditorCamera, 1);
+    cameraMatrixCacheSetLookAt(&g_effectEditorCamera, &g_effectEditorCameraDefaults.eye, &g_effectEditorCameraDefaults.target, &g_effectEditorCameraDefaults.up);
+    stereoCameraSetPerspective(&g_effectEditorCamera, 1, 30.0f, 20.0f, 25600.0f, 5.0f / 3.0f);
     FUN_00298d50(&g_effectEditorCamera);
     struct StartupView {
         u8 unk00[7];
@@ -181,14 +181,14 @@ extern "C" void effectEditorApplyHandlerState(EffectHandlerRequest *request)
         FUN_00249678();
         EffMenuPosition transformed = globals->first.position;
         EffectEditorWords words;
-        FUN_0025c8f0(controls, &transformed, &words);
+        renderVectorOverrideResolve(controls, &transformed, &words);
         globals->first.position = effectRenderSource()->position;
         globals->second.words = words;
-        FUN_002a2c00();
+        gfxQuaternionScratchMultiply();
     } else {
         globals->first.position = effectRenderSource()->position;
         globals->second.words = controls->parameters.fallback;
-        FUN_002a2c00();
+        gfxQuaternionScratchMultiply();
     }
     EffMenuPosition position = globals->first.position;
     handlerTableCallWithValueB(request, &position);
@@ -201,7 +201,7 @@ extern "C" void effectEditorApplyHandlerState(EffectHandlerRequest *request)
         globals->first.position.z *= scale;
         globals->first.position.w *= scale;
         EffMenuPosition tint = globals->first.position;
-        FUN_0021a4dc(request, &tint);
+        effectResourceSetColor(request, &tint);
     }
     handlerTableCallWithValue(request, controls->parameters.value);
 }
@@ -209,7 +209,7 @@ extern "C" void effectEditorApplyHandlerState(EffectHandlerRequest *request)
 /* NON_MATCHING: catalog search register allocation and final reset-store grouping differ. */
 extern "C" u32 effectEditorActivateSelection()
 {
-    s32 index = g_effectEditor.index + DAT_0044f858.object.indices.extraOffset;
+    s32 index = g_effectEditor.index + g_effectEditorState.object.indices.extraOffset;
     EffectSelectionItem *item = linkedFindItemByIndex(g_effectEditor.list, index);
     g_effectEditor.item = item;
     __aeabi_memcpy4(&g_effectEditorSettings, item, 0x90);
@@ -227,7 +227,7 @@ extern "C" u32 effectEditorActivateSelection()
     effectEditorApplyHandlerState(static_cast<EffectHandlerRequest *>(instance));
     g_effectEditor.instance = instance;
     g_effectEditor.object = findEditorTemplate(DAT_0044f4d4, item->block->type, item->block->id, 13);
-    g_effectEditor.object->context = reinterpret_cast<EffectSelectionContext *>(&DAT_0044f858.object);
+    g_effectEditor.object->context = reinterpret_cast<EffectSelectionContext *>(&g_effectEditorState.object);
     g_effectEditor.unk4c = 0;
     g_effectEditor.unk50 = 0;
     g_effectEditor.active = 1;
@@ -252,7 +252,7 @@ __weak void effectEditorTransformPosition(const EffectPositionControl *control,
     const EffMenuPosition *position, EffMenuPosition *result);
 void FUN_0021a250(const EffMenuPosition *position, u32 color,
     const EffMenuMatrix *matrix, u32 resource, f32 scale);
-void FUN_00243224(const EffMenuPosition *first, const EffMenuPosition *second,
+void effMenuQueueVectorEffect(const EffMenuPosition *first, const EffMenuPosition *second,
     u32 color, u32 resource);
 
 /* NON_MATCHING: aggregate copy shapes and vector temporary allocation differ. */
@@ -322,15 +322,15 @@ u32 effectEditorEditPositionVector(EffectEditorSnapshot *record, s32 relative)
     ground.y = origin.y - 2.0f;
     if (offset.y != origin.y) {
         FUN_0021a250(&ground, 0xff808080, NULL, 0, radius);
-        FUN_00243224(&ground, &elevated, 0xff00c0c0, 0);
+        effMenuQueueVectorEffect(&ground, &elevated, 0xff00c0c0, 0);
     }
 
     globals->first.position = offset;
     globals->second.position = origin;
     FUN_00249678();
     EffMenuPosition endpoint = globals->first.position;
-    FUN_00243224(&elevated, &endpoint, 0xff00c0c0, 0);
-    FUN_00243224(&ground, &endpoint, 0xff00c0c0, 0);
+    effMenuQueueVectorEffect(&elevated, &endpoint, 0xff00c0c0, 0);
+    effMenuQueueVectorEffect(&ground, &endpoint, 0xff00c0c0, 0);
 
     asdDebugTrace(DAT_0040930c, 729);
     EffMenuPointNode *point = static_cast<EffMenuPointNode *>(

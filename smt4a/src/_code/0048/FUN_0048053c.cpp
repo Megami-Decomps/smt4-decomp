@@ -16,13 +16,13 @@ struct UpgradeLimits {
 
 
 extern "C" {
-s32 FUN_0047fc38(void);
+s32 equipmentIsFullyUpgraded(void);
 void FUN_001a90f0(EquipmentUpgradeModifiers* extras, const EquipmentUpgradeModifiers* source);
 
 // Fills `limits` with how much more an upgrade of equipment `item` may add to its capped values.
 void FUN_0048053c(s32 item, UpgradeLimits* limits)
 {
-    if (FUN_0047fc38() != 0) {
+    if (equipmentIsFullyUpgraded() != 0) {
         return;
     }
     EquipmentUpgradeRecord* record = reinterpret_cast<EquipmentUpgradeRecord*>(itemCategoryFindByItemId(item));

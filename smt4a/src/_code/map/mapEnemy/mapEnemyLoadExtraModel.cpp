@@ -44,8 +44,8 @@ extern "C" u32 mapEnemyLoadExtraModel(s32 index)
         model = modelListInit(model);
     slot->model = model;
     resourceOwnerLoadFileSync(slot->model, resourceName);
-    FUN_0040a908(slot->model, 0x10000);
-    FUN_0040a918(slot->model, 0x20000);
+    moriModelContentSetRequestFirst(slot->model, 0x10000);
+    moriModelContentSetRequestSecond(slot->model, 0x20000);
     moriModelContentLoadBody(slot->model, 0);
     Obj557b18 *body = slot->model->body;
     modelPlayClip(body, 0, 2, 0.0f, 0.0f);

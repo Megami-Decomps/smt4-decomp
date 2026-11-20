@@ -26,7 +26,7 @@ typedef struct BtlEffect {
 
 extern BtlEffect g_btlEffect;
 
-extern s32 FUN_00293230(BtlMainState *state);
+extern s32 btlScriptUnitIsIncapacitated(BtlMainState *state);
 extern s32 libc_strncmp(const char *a, const char *b, u32 count);
 extern u32 libc_strlen(const char *text);
 
@@ -36,7 +36,7 @@ s32 btlFindEffectValueByNamePrefix(Owner *owner)
     s32 i;
 
     if (owner->table != NULL) {
-        if (FUN_00293230(btlGetMainState()) == 0) {
+        if (btlScriptUnitIsIncapacitated(btlGetMainState()) == 0) {
             for (i = 0; i < 4; i++) {
                 NameEntry *entry = &owner->table->entries[i];
 

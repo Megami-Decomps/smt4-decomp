@@ -25,7 +25,7 @@ struct EventVisibilityState {
 
 extern "C" {
 s32 saveTestFlagRow(u32 row, u32 column);
-s32 FUN_00342044(u32 id);
+s32 saveFlagTest(u32 id);
 
 // Refresh event visibility from category/flag conditions and select the row's menu mode.
 void eventRefreshVisibility(EventVisibilityState *state)
@@ -40,7 +40,7 @@ void eventRefreshVisibility(EventVisibilityState *state)
             if (saveTestFlagRow(entry->row, entry->column)) {
                 lastRow = entry->row;
                 entry->visible = 1;
-                if (entry->pending && FUN_00342044(entry->id)) {
+                if (entry->pending && saveFlagTest(entry->id)) {
                     entry->pending = 0;
                 }
             } else {

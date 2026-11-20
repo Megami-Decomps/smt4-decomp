@@ -40,7 +40,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001572b8. */
 /* Supplied declaration required: FUN_001573e4. */
 /* Supplied declaration required: FUN_00158f90. */
-extern unsigned int FUN_002bafb0(void);
+extern unsigned int nw_snd_internal_driver_ChannelManager_GetInstance(void);
 extern int __aeabi_idivmod(unsigned int);
 /* Supplied declaration required: nw_snd_internal_CurveAdshr_GetValue. */
 /* Supplied declaration required: nw_snd_internal_CurveLfo_Update. */
@@ -102,7 +102,7 @@ void FUN_001552fc(int param_1,int param_2)
         }
         if (*(char *)(param_1 + 199) != '\0') {
           *(unsigned char *)(param_1 + 199) = 0;
-          temp_v3 = FUN_002bafb0();
+          temp_v3 = nw_snd_internal_driver_ChannelManager_GetInstance();
           nw_snd_internal_driver_ChannelManager_Free(temp_v3,param_1);
           return;
         }

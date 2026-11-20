@@ -15,7 +15,7 @@ void handleRegistryRegisterObject(void *registry, u32 controller);
 s32 idSetFindSubjectIndex(BtlMainStateA *battle, BattleRosterRecordA *record);
 void FUN_004019c0(void *transform, Vec3 *value, f32 scale);
 void tripleOwnerSetValue(u32 controller, const Vec3 *value);
-void FUN_00401b50(void *transform, Vec3 *position, f32 scale);
+void enemySpriteDeriveOrigin(void *transform, Vec3 *position, f32 scale);
 void controllerSetDestination(u32 controller, const Vec3 *position);
 
 // Attach a roster controller to its owning model's scaled transform and world position.
@@ -59,7 +59,7 @@ void FUN_004f5fb8(HandlePools *work, s32 index)
         FUN_004019c0(attachment->transform, &value, record->motion.scale);
         tripleOwnerSetValue(slot->controller->handle, &value);
         Vec3 position;
-        FUN_00401b50(attachment->transform, &position, record->motion.scale);
+        enemySpriteDeriveOrigin(attachment->transform, &position, record->motion.scale);
         position.x += record->motion.position[0];
         position.y += record->motion.position[1];
         position.z += record->motion.position[2];

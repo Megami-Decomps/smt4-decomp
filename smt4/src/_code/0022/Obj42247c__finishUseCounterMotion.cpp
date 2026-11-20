@@ -27,7 +27,7 @@ void Obj42247c::finishUseCounterMotion()
     if (useCounterIsFinished()) {
         useCounterRelease();
         buttonHelpSetPreset(owner->alternate == 1 ? 0x46 : 0x2e);
-        FUN_002a0cc8(0);
+        gameGlobalsSetSubScreenActive(0);
         owner->state = 2;
         owner->stateArg = 0;
     } else if (useCounterGetCurrentValue() != 75) {

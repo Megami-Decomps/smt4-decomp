@@ -79,7 +79,7 @@ extern unsigned int g_btlStageModel; /* 0x57a4f8 */
 #endif
 /* Supplied declaration required: asdLoadFileWithSize. */
 extern int lcgRandomRange(unsigned int);
-extern int FUN_00163e84(unsigned int);
+extern int screenFaderIsSettled(unsigned int);
 extern int padButtonIsPressed(unsigned int);
 extern int partySlotIsOccupied(void);
 extern unsigned int dataTableGetEntries(void);
@@ -150,7 +150,7 @@ void FUN_00410628(int param_1)
   temp_v16 = reinterpret_cast<int>(btlGetMainState());
   switch(*(unsigned int *)(param_1 + 0x10)) {
   case 0:
-    temp_v3 = FUN_00163e84(0);
+    temp_v3 = screenFaderIsSettled(0);
     if (temp_v3 == 0) {
       return;
     }
@@ -160,7 +160,7 @@ void FUN_00410628(int param_1)
     }
     break;
   case 1:
-    temp_v3 = FUN_00163e84(0);
+    temp_v3 = screenFaderIsSettled(0);
     if (temp_v3 == 0) {
       return;
     }
@@ -184,7 +184,7 @@ void FUN_00410628(int param_1)
       partyGetSlotPreferredFirst();
       temp_v3 = partySlotIsOccupied();
       if (temp_v3 != 0) {
-        temp_v2 = FUN_0019acdc(*(unsigned short *)(temp_v0 + 300), 1);
+        temp_v2 = unitMapIdToCategory(*(unsigned short *)(temp_v0 + 300), 1);
         temp_v12 = (unsigned int ***)&temp_v14;
         FUN_003f1b3c(temp_v16,temp_v2,5,&temp_v13);
         btlReflectCreateKind42(temp_v6 * 5,0,temp_v6,temp_v13);

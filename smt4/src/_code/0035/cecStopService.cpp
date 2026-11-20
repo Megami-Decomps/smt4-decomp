@@ -12,7 +12,7 @@ struct CecState {
 
 extern CecState DAT_004656ca;
 s32 ipcServiceSessionRelease(void);
-s32 FUN_00358f74(void);
+s32 cecdServiceCloseHandle(void);
 void FUN_00358d34(void);
 
 s32 cecStopService(void)
@@ -29,7 +29,7 @@ s32 cecStopService(void)
             DAT_004656ca.unk02 = 0;
             DAT_004656ca.flushPending = 0;
         }
-        s32 stopResult = FUN_00358f74();
+        s32 stopResult = cecdServiceCloseHandle();
         result = stopResult;
         if (nnResultIsFailure(stopResult)) {
             return stopResult;

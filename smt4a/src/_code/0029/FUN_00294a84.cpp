@@ -18,7 +18,7 @@ const char *popupSelectWeightedMessage(s32 type);
 /* Queue a selected-slot popup, subject to its flags and probability table. */
 extern "C" void FUN_00294a84(s32 immediate)
 {
-    FUN_00152f44();
+    messageVoiceFlagsGet();
     if (g_popupState->state == 3)
         return;
     if (g_popupState->state != 0)

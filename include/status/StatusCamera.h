@@ -41,14 +41,14 @@ u8 *gameDataGetSortPreferences(void);
 }
 
 extern "C" {
-void FUN_002a0cc8(u8 value);
+void gameGlobalsSetSubScreenActive(u8 value);
 }
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void FUN_00220d24(u8 value);
+void buttonHelpSetUseDirectoryText(u8 value);
 
 #ifdef __cplusplus
 }
@@ -68,7 +68,7 @@ s32 appGetRemainingCapacity(u32 id);
 extern "C" {
 #endif
 
-s32 FUN_0029a9d4(u32 skillId, s32 useLearnedRank);
+s32 skillGetDiscountedCost(u32 skillId, s32 useLearnedRank);
 
 #ifdef __cplusplus
 }

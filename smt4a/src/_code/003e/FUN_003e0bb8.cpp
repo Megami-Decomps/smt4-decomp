@@ -3,7 +3,7 @@
 
 extern "C" {
 u32 FUN_003e0f94(BtlStep *step, const BtlMainStateA *state);
-void FUN_0013cab8(u32 channel, u32 state, u32 value);
+void screenFadeStartIn(u32 channel, u32 state, u32 value);
 s32 pairedAvailabilityBothReady(void);
 void FUN_003e16cc(BtlStep *, BtlMainStateA *);
 void FUN_003e1a30(BtlStep *, BtlMainStateA *);
@@ -18,10 +18,10 @@ void FUN_003e0bb8(BtlStep *step, BtlMainStateA *state)
     u32 mode = FUN_003e0f94(step, state);
     if (mode != 2 && mode != 5) {
         if (pairedAvailabilityGetState(0) == 3) {
-            FUN_0013cab8(0, 10, 255);
+            screenFadeStartIn(0, 10, 255);
         }
         if (pairedAvailabilityGetState(1) == 3) {
-            FUN_0013cab8(1, 10, 255);
+            screenFadeStartIn(1, 10, 255);
         }
         if (pairedAvailabilityBothReady() == 0) {
             return;

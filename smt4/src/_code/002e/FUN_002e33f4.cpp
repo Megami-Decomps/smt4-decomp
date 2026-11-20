@@ -29,7 +29,7 @@ typedef struct EffectUnit {
 
 s32 randNextInRange(u32 limit);
 EffectUnit *gameGetPlayerData(void);
-void FUN_00283f30(u16 skills[8], s32 arg);
+void playerCollectPassiveSkillBits(u16 skills[8], s32 arg);
 void halves34Copy(EffectUnit *unit, u16 skills[8]); // declcheck: local (the shared declaration in code/Code0024_Smt4.h does not compile here: argument of type "EffectUnit *" is incompatible with parameter of type "Source *")
 s32 playerPadTestBit(u32 bit);
 s32 flagWordTestBit(EffectUnit *unit, u32 bit);
@@ -38,7 +38,7 @@ void objectFlagSetBit(EffectUnit *unit, u32 bit);
 u32 dataTable9EntryOrZero(u32 tier);
 u32 devilCalcLevelScaledCost(u32 id, u32 level);
 s32 FUN_00295cec(void);
-void FUN_0026e630(void);
+void gameSaveAddPointsClamped(void);
 
 /* Applies (or, with `dryRun`, only tests) the effect record `effect` on the unit `index` (a
  * negative index is the player): halving the value, guarding with a status bit, growing the gauge
@@ -64,7 +64,7 @@ u32 FUN_002e33f4(s32 index, EffectRecord *effect, s32 previewOnly, s32 dryRun)
                 s32 guarded;
 
                 if (player != NULL) {
-                    FUN_00283f30(skills, 0);
+                    playerCollectPassiveSkillBits(skills, 0);
                     guarded = playerPadTestBit(5);
                 } else {
                     halves34Copy(unit, skills);
@@ -118,7 +118,7 @@ u32 FUN_002e33f4(s32 index, EffectRecord *effect, s32 previewOnly, s32 dryRun)
     }
     if (effect->unk76 != 0 && player != NULL && FUN_00295cec() != 9999) {
         if (dryRun == 0) {
-            FUN_0026e630();
+            gameSaveAddPointsClamped();
         }
         result = 0;
     }

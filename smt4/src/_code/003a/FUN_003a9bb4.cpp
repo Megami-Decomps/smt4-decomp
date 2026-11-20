@@ -52,7 +52,7 @@ typedef struct EntryListWork {
 OccurrenceEntry *FUN_003bc0ac(u32 table, s32 first, s32 second);
 Table02Slot *dataTableGetRecord02(u16 key);
 ItemRecord *dataTable02GetEntryByIndex(u32 id);
-s32 FUN_0029e9cc(u32 id);
+s32 itemIsCollectedWithRelated(u32 id);
 void FUN_0022e17c(ListEntry *out, u32 id, s32 arg);
 void recordListAppendUniqueKey(void *list, ListEntry *entry);
 void motionPlayForMode(EntryListWork *work, s32 arg);
@@ -101,7 +101,7 @@ void FUN_003a9bb4(EntryListWork *work)
                         NkmEnemyRecord *record = nkmEnemyFindById(id);
 
                         if (devil != NULL && record != NULL
-                            && (g_gameState.showAllEntries != 0 || ((record->flags & 1) != 0 && FUN_0029e9cc(devil->id) != 0))) {
+                            && (g_gameState.showAllEntries != 0 || ((record->flags & 1) != 0 && itemIsCollectedWithRelated(devil->id) != 0))) {
                             ListEntry listEntry;
                             u32 value = 0;
 

@@ -4,7 +4,7 @@
 #include "shard/W6_W6Match3_SlotState.h"
 
 extern "C" {
-extern W6Match3SlotState DAT_006357d8[2];
+extern W6Match3SlotState g_screenFadeSlots[2];
 u32 renderCtxPackPassFlags(u32 kind, bool enabled);
 u32 asdGxPresetsGetByKind(u32 kind);
 u32 asdGxPresetsGetHeightByKind(u32 kind);
@@ -12,7 +12,7 @@ u32 asdGxPresetsGetHeightByKind(u32 kind);
 // Draw the requested fade slot's color over the full selected render target.
 void screenFadeSlotDraw(s32 index)
 {
-    W6Match3SlotState *fade = &DAT_006357d8[index];
+    W6Match3SlotState *fade = &g_screenFadeSlots[index];
     u32 color = fade->index;
     u32 alpha = static_cast<u32>(fade->value * static_cast<f32>(color & 0xFF));
     if (alpha != 0) {

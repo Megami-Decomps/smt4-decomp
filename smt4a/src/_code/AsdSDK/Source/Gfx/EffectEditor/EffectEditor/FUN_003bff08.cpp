@@ -8,11 +8,11 @@ int padButtonRepeat(...);
 int padButtonIsPressed(...);
 int memAlloc(int, int, int, int, int, int);
 int FUN_001a1ee0(void);
-int FUN_001b63b0(void);
+int phaseCosine(void);
 int FUN_001b640c(void);
 int mathRemPio2f(void);
 int FUN_001bc2f0(...);
-int FUN_001bc3e4(void);
+int gfxQuaternionScratchMultiply(void);
 int FUN_00202178(...);
 int asdDebugLog(...);
 int FUN_002b3ed8(...);
@@ -98,11 +98,11 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: padButtonIsPressed. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_001a1ee0. */
-/* Supplied declaration required: FUN_001b63b0. */
+/* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: FUN_001b640c. */
 /* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: FUN_001bc2f0. */
-/* Supplied declaration required: FUN_001bc3e4. */
+/* Supplied declaration required: gfxQuaternionScratchMultiply. */
 /* Supplied declaration required: FUN_00202178. */
 /* Supplied declaration required: asdDebugLog. */
 /* Supplied declaration required: FUN_002b3ed8. */
@@ -309,7 +309,7 @@ LAB_003c01a8:
     temp_v14 = temp_v17;
     FUN_001a1ee0();
     temp_v29 = temp_v15 + temp_v17 * temp_v20;
-    FUN_001b63b0();
+    phaseCosine();
     if (DAT_0059dbe2 == temp_v9) {
       in_d10 = CONCAT44(temp_v29,temp_v30);
       temp_v23 = temp_v14 * temp_v21;
@@ -419,7 +419,7 @@ LAB_003c01a8:
   temp_v19 = (float)VectorSignedToFloat((int)DAT_0059dbe3,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v18 = temp_v19 * 0.3926991f * temp_v18;
   temp_v19 = temp_v18;
-  FUN_001b63b0();
+  phaseCosine();
   temp_v28 = temp_v25 - temp_v18 * temp_v23;
   temp_v29 = temp_v26;
   temp_v18 = temp_v19;
@@ -427,7 +427,7 @@ LAB_003c01a8:
   temp_v30 = temp_v27 - temp_v19 * temp_v23;
   FUN_002b3ed8(&temp_v28,&temp_v25,0xff00c0c0,0);
   temp_v19 = temp_v18;
-  FUN_001b63b0();
+  phaseCosine();
   temp_v28 = temp_v20 + temp_v18 * temp_v23;
   temp_v29 = (float)((unsigned long long)in_d10 >> 0x20);
   FUN_001a1ee0();
@@ -466,7 +466,7 @@ LAB_003c01a8:
     DAT_006472f4 = temp_v23;
     DAT_006472f0 = temp_v19;
     DAT_006472ec = temp_v18;
-    FUN_001bc3e4();
+    gfxQuaternionScratchMultiply();
     g_effectEditorRotation.value.w = DAT_006472e8;
     g_effectEditorRotation.value.x = DAT_006472dc;
     g_effectEditorRotation.value.y = DAT_006472e0;

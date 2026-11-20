@@ -4,7 +4,7 @@
 extern "C" {
 u32 scrRunOpcodesStub(ScriptProcess *script);
 void saveLoadProcessCreate(s32 slot, s32 mode);
-void FUN_0041e3a0(SaveSlotHeaderWork *work, s32 resetHeader);
+void spriteListMenuResetSprites(SaveSlotHeaderWork *work, s32 resetHeader);
 s32 byteTripleGetV0();
 s32 byteArr5Get3();
 const void *gameDataBlocksGetTable();
@@ -23,7 +23,7 @@ void saveMenuCacheSlotHeadersStep(SaveSlotHeaderWork *work)
     switch (work->step) {
     case 0:
         startSaveLoad(work->slotIndex + 1, 1);
-        FUN_0041e3a0(work, 0);
+        spriteListMenuResetSprites(work, 0);
         ++work->step;
         // Fall through to the first slot's completion poll.
     case 1: {

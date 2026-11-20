@@ -9,12 +9,12 @@ typedef struct Wrapper0014204c {
     /* 0x04 */ Inner0014204c *inner;
 } Wrapper0014204c;
 
-u8 FUN_00142054(Inner0014204c *inner, u32 *out);
+u8 nw_snd_SoundArchive_detail_ReadSoundArchivePlayerInfo(Inner0014204c *inner, u32 *out);
 
-/* Passes the wrapper's inner on to FUN_00142054, the function that follows it. */
+/* Passes the wrapper's inner on to nw_snd_SoundArchive_detail_ReadSoundArchivePlayerInfo, the function that follows it. */
 u8 nw_snd_SoundArchive_ReadSoundArchivePlayerInfo(Wrapper0014204c *wrapper, u32 *out)
 {
-    return FUN_00142054(wrapper->inner, out);
+    return nw_snd_SoundArchive_detail_ReadSoundArchivePlayerInfo(wrapper->inner, out);
 }
 
 } /* extern "C" */

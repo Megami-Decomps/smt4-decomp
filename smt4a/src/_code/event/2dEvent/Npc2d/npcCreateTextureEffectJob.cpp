@@ -11,7 +11,7 @@
 struct TexNode;
 extern "C" {
 void *asdMemoryAllocTracked(u32 heap, u32 alignmentClass, u32 flags, u32 size, s32 kind);
-s32 FUN_00162ea4();
+s32 eventIsSkipping();
 bool aocRunByName(u32 system, u32 table, u32 node, s32 checked);
 s32 FUN_002897cc(u32 handle);
 void FUN_0034da3c(u32 handle);
@@ -40,7 +40,7 @@ u32 npcCreateTextureEffectJob(u32 id, s32 x, s32 y)
     work->node = nodes[id - 1];
     work->x = x - 56;
     work->y = y - 8;
-    if (FUN_00162ea4()) {
+    if (eventIsSkipping()) {
         work->resourceState = 1;
     } else {
         work->resourceState = 0;

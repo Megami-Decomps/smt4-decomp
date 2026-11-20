@@ -13,7 +13,7 @@ int sysMemClear(void);
 int modelPlayClip(...);
 int linkSlotSetFlag1C(...);
 int soundResetSpatialState(void);
-int FUN_00407ab0(...);
+int moveCameraCtrlSetup(...);
 int gameCounterAddSaturating(...);
 int resourceOwnerLoadFileSync(void);
 int moriModelContentLoadBody(int, int);
@@ -49,7 +49,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: modelPlayClip. */
 /* Supplied declaration required: linkSlotSetFlag1C. */
 /* Supplied declaration required: soundResetSpatialState. */
-/* Supplied declaration required: FUN_00407ab0. */
+/* Supplied declaration required: moveCameraCtrlSetup. */
 /* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: resourceOwnerLoadFileSync. */
 /* Supplied declaration required: moriModelContentLoadBody. */
@@ -198,7 +198,7 @@ LAB_0046a3b0:
   }
   *(int *)(param_1 + 0xcdc) = temp_v4;
   soundResetSpatialState();
-  FUN_00407ab0(*(unsigned int *)(param_1 + 0xcdc),
+  moveCameraCtrlSetup(*(unsigned int *)(param_1 + 0xcdc),
                *(unsigned int *)(temp_v7 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4),0);
   linkSlotSetFlag1C(*(unsigned int *)(param_1 + 0xcdc),0);
   if (*(char *)(param_1 + 0x10) != '\x0e') {

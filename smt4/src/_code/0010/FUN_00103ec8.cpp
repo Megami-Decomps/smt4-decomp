@@ -9,7 +9,7 @@ extern u32 g_nnAppletCriticalSection[2];
 void nn_os_LightEvent_Initialize(u32 *event, u8 resetType);
 void nn_os_LightEvent_Signal(u32 *event);
 void nn_os_CriticalSection_Initialize(u32 *section);
-void FUN_002c5434(void);
+void sleepAllow(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void FUN_00110124(void (*callback)(void), u32 userData);
 void FUN_00110110(void (*callback)(void), u32 userData);
 void FUN_0010e924(void);
@@ -25,7 +25,7 @@ u32 FUN_00103ec8(void)
     nn_os_LightEvent_Initialize(g_appletHomeButtonEvent, 0);
     nn_os_CriticalSection_Initialize(g_nnAppletCriticalSection);
     g_appletEventState.initialized = 1;
-    FUN_002c5434();
+    sleepAllow();
     g_appletEventState.enabled = 1;
     nn_os_LightEvent_Signal(g_appletEventState.sleepQueryEvent);
     nn_os_LightEvent_Signal(g_appletEventState.homeButtonEvent);

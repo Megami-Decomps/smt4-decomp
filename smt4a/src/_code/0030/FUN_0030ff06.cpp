@@ -6,8 +6,8 @@ extern "C" {
 
 int onlineInstanceTableFind(int, unsigned int);
 int onlineJobSetStateDone(int);
-int FUN_002f3dc4(void);
-int FUN_002f3dde(void);
+int onlineInstanceCompleteMode2(void);
+int onlineInstanceCompleteMode3(void);
 int FUN_0030ff4c(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -18,8 +18,8 @@ typedef struct {
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: onlineJobSetStateDone. */
-/* Supplied declaration required: FUN_002f3dc4. */
-/* Supplied declaration required: FUN_002f3dde. */
+/* Supplied declaration required: onlineInstanceCompleteMode2. */
+/* Supplied declaration required: onlineInstanceCompleteMode3. */
 /* Supplied declaration required: FUN_0030ff4c. */
 
 
@@ -33,10 +33,10 @@ void FUN_0030ff06(int param_1,int *param_2)
   onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
   if (temp_v0 != 0) {
     if (*param_2 >= 0) {
-      FUN_002f3dc4();
+      onlineInstanceCompleteMode2();
     }
     else {
-      FUN_002f3dde();
+      onlineInstanceCompleteMode3();
     }
   }
   if (*(int *)(param_1 + 0x6c) != 0) {

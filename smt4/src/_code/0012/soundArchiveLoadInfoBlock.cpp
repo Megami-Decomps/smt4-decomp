@@ -21,7 +21,7 @@ u32 nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockOffset(void *reader)
 u32 nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockSize(void *reader);
 s32 fileHandleSeek(void *stream, u32 offset, s32 origin);
 s32 fileHandleRead(void *stream, void *buffer, u32 size, u32 *readSize);
-void FUN_00130ea8(void *reader, void *infoBlock);
+void soundArchiveInfoBlockSetOffset(void *reader, void *infoBlock);
 
 /* Read the archive's info block into buffer and hand it to the reader. */
 s32 soundArchiveLoadInfoBlock(FsSoundArchiveLoader *loader, void *buffer, u32 bufferSize)
@@ -47,7 +47,7 @@ s32 soundArchiveLoadInfoBlock(FsSoundArchiveLoader *loader, void *buffer, u32 bu
     if (readSize != size) {
         return 0;
     }
-    FUN_00130ea8(loader->reader, buffer);
+    soundArchiveInfoBlockSetOffset(loader->reader, buffer);
     return 1;
 }
 

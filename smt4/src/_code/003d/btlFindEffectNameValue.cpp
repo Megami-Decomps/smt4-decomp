@@ -26,14 +26,14 @@ static __inline EffectNameEntryView *effectNameTableGetEntry(EffectNameTableView
     return &table->entries[index];
 }
 extern "C" {
-s32 FUN_00293230(BtlMainState *mainState);
+s32 btlScriptUnitIsIncapacitated(BtlMainState *mainState);
 extern BattleEffectView g_btlEffect;
 }
 
 // Find the current battle effect's name among four entries and return its signed value.
 extern "C" s32 btlFindEffectNameValue(EffectNameTableView* table)
 {
-    if (FUN_00293230(btlGetMainState()) != 0) {
+    if (btlScriptUnitIsIncapacitated(btlGetMainState()) != 0) {
         return -1;
     }
 

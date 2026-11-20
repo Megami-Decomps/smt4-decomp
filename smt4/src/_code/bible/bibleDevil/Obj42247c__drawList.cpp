@@ -6,7 +6,7 @@
 extern "C" {
 
 int digitsDrawAtAreaCorner(...);
-int FUN_0022d7b0(...);
+int scrollMenuDrawLayer(...);
 int uiDrawScrollingSelectionEntry(...);
 int FUN_0022d9c8(...);
 int FUN_0022daac(...);
@@ -31,7 +31,7 @@ typedef struct {
 extern unsigned int DAT_0049375c; /* 0x49375c */
 
 /* Supplied declaration required: digitsDrawAtAreaCorner. */
-/* Supplied declaration required: FUN_0022d7b0. */
+/* Supplied declaration required: scrollMenuDrawLayer. */
 /* Supplied declaration required: uiDrawScrollingSelectionEntry. */
 /* Supplied declaration required: FUN_0022d9c8. */
 /* Supplied declaration required: FUN_0022daac. */
@@ -228,7 +228,7 @@ LAB_0022cd30:
                          *(unsigned int *)(temp_v2 * 4 + 0x4935f4),temp_v12);
             gxResetColorQuadToWhite();
           }
-          FUN_0022d7b0(param_1,temp_v18[0]);
+          scrollMenuDrawLayer(param_1,temp_v18[0]);
           return;
         }
       } while( 1 );

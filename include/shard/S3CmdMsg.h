@@ -1,4 +1,4 @@
-/* A 32-byte command message queued on the manager returned by FUN_002ad244. DAT_00472a8c points
+/* A 32-byte command message queued on the manager returned by nn_gxlow_CTR_GetCmdManager. DAT_00472a8c points
  * at a template message every sender starts from. */
 #ifndef SHARD_S3CMDMSG_H
 #define SHARD_S3CMDMSG_H

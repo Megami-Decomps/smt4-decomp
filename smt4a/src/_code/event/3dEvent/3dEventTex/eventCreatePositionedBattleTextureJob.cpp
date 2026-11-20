@@ -9,8 +9,8 @@ extern "C" {
 extern const s8 DAT_0052f6a8[];
 extern const s8 DAT_0052f698[];
 void sysMemClear(void *memory, u32 size);
-s32 FUN_00162ea4();
-u32 FUN_00409fe8(s32 id, u32 first, u32 second);
+s32 eventIsSkipping();
+u32 resourceCacheGetOrLoadModel(s32 id, u32 first, u32 second);
 u32 eventUpdateTextureFadeJob(u32 job);
 s32 FUN_00289f10(u32 job);
 void jobWorkDestroy34(u32 job);
@@ -31,10 +31,10 @@ u32 eventCreatePositionedBattleTextureJob(u32 id, EventTexturePosition position)
     work->unk17 = 0;
     work->resourceId = nkmEnemyFindById((u16)id)->battleTextureId;
     work->animate = 1;
-    if (FUN_00162ea4()) {
+    if (eventIsSkipping()) {
         work->state = 1;
     } else {
-        work->resource = FUN_00409fe8(work->resourceId, 1, 1);
+        work->resource = resourceCacheGetOrLoadModel(work->resourceId, 1, 1);
         work->state = 2;
     }
     work->texture = (u16)-id;

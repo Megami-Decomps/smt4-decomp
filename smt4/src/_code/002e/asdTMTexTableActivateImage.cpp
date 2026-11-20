@@ -14,7 +14,7 @@ static inline bool prepareTextureNode(TexNode* node, u32 imageMode, u32 stateFla
     if (node->loaded.texture == NULL) {
         return false;
     }
-    node->loaded.texture->unk08 = imageMode;
+    node->loaded.texture->heap = imageMode;
     node->loaded.state |= stateFlag;
     return true;
 }

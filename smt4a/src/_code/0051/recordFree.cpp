@@ -14,21 +14,21 @@ typedef struct Allocator {
     /* 0x04 */ void (*free)(void *ptr);
 } Allocator;
 
-extern Allocator DAT_00589508;
+extern Allocator g_moAllocator;
 
 /* Frees the two buffers of the record and the record itself through the allocator's free callback. */
 void recordFree(Words4Rec *record)
 {
-    if (DAT_00589508.free == NULL || record == NULL) {
+    if (g_moAllocator.free == NULL || record == NULL) {
         return;
     }
     if (record->buf3 != NULL) {
-        DAT_00589508.free(record->buf3);
+        g_moAllocator.free(record->buf3);
     }
     if (record->buf0 != NULL) {
-        DAT_00589508.free(record->buf0);
+        g_moAllocator.free(record->buf0);
     }
-    DAT_00589508.free(record);
+    g_moAllocator.free(record);
 }
 
 } /* extern "C" */

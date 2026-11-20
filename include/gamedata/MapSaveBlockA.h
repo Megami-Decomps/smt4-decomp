@@ -18,7 +18,7 @@ typedef union MapNaviSlotA {
     /* 0x00 */ u8 id;
 } MapNaviSlotA;
 
-/* A navigation request deferred until the navigation screen can take it (FUN_003de188). */
+/* A navigation request deferred until the navigation screen can take it (naviMainCreate). */
 typedef struct MapNaviRequestA {
     /* 0x00 */ s32 pending;
     /* 0x04 */ u32 first;

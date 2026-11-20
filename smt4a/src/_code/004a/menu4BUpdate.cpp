@@ -52,7 +52,7 @@ void menu4BUpdate(Menu4B *obj)
         return;
     }
     if (gameGetMode() == 0 && 0 < obj->count) {
-        x = FUN_002a482c(obj->block20);
+        x = resourceDispatchTaggedOperation(obj->block20);
         y = FUN_0031d174(obj->block20);
         if (statusDownGetMode() != 1) {
             if (statusDownGetMode() == -1) {
@@ -61,7 +61,7 @@ void menu4BUpdate(Menu4B *obj)
         } else {
             listCursorStepForward(obj->block20);
         }
-        if (FUN_002a482c(obj->block20) != x || FUN_0031d174(obj->block20) != y) {
+        if (resourceDispatchTaggedOperation(obj->block20) != x || FUN_0031d174(obj->block20) != y) {
             sendEvent100020D();
             return;
         }

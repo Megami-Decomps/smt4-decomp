@@ -13,7 +13,7 @@ struct Fader {
 
 extern "C" {
 
-extern Fader DAT_006357d8[2];
+extern Fader g_screenFadeSlots[2];
 
 f32 mathInterpolateTimed(s32 duration, s32 frame, f32 from, f32 to);
 
@@ -25,7 +25,7 @@ void faderStepAll(void)
     f32 from;
     f32 to;
     for (u8 i = 0; i < 2; ++i) {
-        Fader *fader = &DAT_006357d8[i];
+        Fader *fader = &g_screenFadeSlots[i];
         u8 state = fader->state;
         fader->frame++;
         s32 frame = fader->frame;

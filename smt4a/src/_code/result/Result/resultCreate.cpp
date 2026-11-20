@@ -17,7 +17,7 @@ s32 FUN_00267c70(u32 task);
 u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32, void *);
 void FUN_004b6390(ResultWorkA *result);
 u16 ifTouchGetButtonHelpValue();
-void FUN_0020b490(ResultWorkA *result, s32 state);
+void resultSetMode(ResultWorkA *result, s32 state);
 
 /* Create the result-screen calculation and draw tasks once. */
 void resultCreate(s32 mode)
@@ -39,7 +39,7 @@ void resultCreate(s32 mode)
         if (mode == 3) {
             result->exitSe = ifTouchGetButtonHelpValue();
         }
-        FUN_0020b490(result, 1);
+        resultSetMode(result, 1);
     }
 }
 }

@@ -17,7 +17,7 @@ const void *partyMemberFindById(u32 id);
 void FUN_0029da34(u32 mode, u32 enabled, u32 id, const void *member);
 void buttonHelpShowSkillDetails(u32 id);
 void menuSetModeAndResetTransitions(s32 mode);
-void FUN_002b8454(s32 first, s32 second, s32 third, s32 enabled);
+void buttonHelpSetSlot(s32 first, s32 second, s32 third, s32 enabled);
 void timerStart(void *timer, s32 period, s32 value);
 
 /* Enter a unite-menu state, updating its help, selected member, and transition history. */
@@ -33,7 +33,7 @@ void uniteMenuChangeState(u32 state, s32 preservePrevious)
     case 0x15:
     case 0x1C:
         buttonHelpSetPreset(0x9E);
-        FUN_002a0cc8(1);
+        gameGlobalsSetSubScreenActive(1);
         FUN_0029c424(1);
         break;
     case 3:
@@ -86,8 +86,8 @@ void uniteMenuChangeState(u32 state, s32 preservePrevious)
     case 0x13:
         buttonHelpSetPreset(0x5D);
         if (work->eventFlagsIV.ready != 0) {
-            FUN_002b8454(2, 9, 0x44, 1);
-            FUN_002b8454(3, 0, 0, 1);
+            buttonHelpSetSlot(2, 9, 0x44, 1);
+            buttonHelpSetSlot(3, 0, 0, 1);
         }
         break;
     case 0x1A: {
@@ -106,7 +106,7 @@ void uniteMenuChangeState(u32 state, s32 preservePrevious)
     case 0x21:
         work->history.saved = work->state;
         timerStart(work->event.timer, 3, 0);
-        FUN_002a0cc8(1);
+        gameGlobalsSetSubScreenActive(1);
         break;
     case 0:
     case 1:

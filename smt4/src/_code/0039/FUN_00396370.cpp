@@ -49,7 +49,7 @@ static __inline f32 mapVectorDistance(const MapVector &a, const MapVector &b)
 }
 
 extern "C" {
-void FUN_0027d8b4(u16 value);
+void mapSetActiveEntryId(u16 value);
 void sequenceRequestDefer(s32 id, s32 argument);
 
 /* Picks the nearest interactable within 150 units of the camera, runs its talk or event action and
@@ -101,7 +101,7 @@ s32 FUN_00396370(TalkTargetList *list)
                                                  target->sequenceArgument);
                             }
                         }
-                        FUN_0027d8b4(target->id);
+                        mapSetActiveEntryId(target->id);
                         result = target->id;
                         if (target->eventValue > 0) {
                             g_gameState.event.encounterCount = target->eventValue;

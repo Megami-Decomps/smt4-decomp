@@ -12,10 +12,10 @@ struct LoadedFile {
 
 extern "C" {
 void mapDepartClearData(void);
-void FUN_00287c34(s32 value);
+void mapSceneResetState(s32 value);
 void mapFilterLoad(void);
 void mapIfLoadWidgets(void);
-void FUN_002f58e0(void);
+void mapNaviCategoryGridBuild(void);
 void asdTMTexTablePrepareNodeImage(s32 a, s32 b);
 void *asdLoadFileSyncDefault(const char *path);
 void *asdLoadFileSync(const char *path, u32 *buffer, s32 a, s32 size);
@@ -23,10 +23,10 @@ void *asdLoadFileSync(const char *path, u32 *buffer, s32 a, s32 size);
 /* Load the field map system's shared files and clear the departure data. */
 void mapSystemLoadSharedFiles(void)
 {
-    FUN_00287c34(0);
+    mapSceneResetState(0);
     mapFilterLoad();
     mapIfLoadWidgets();
-    FUN_002f58e0();
+    mapNaviCategoryGridBuild();
     asdTMTexTableLoadSprites(0x1C);
     asdTMTexTablePrepareNodeImage(0x1C, 3);
     asdTMTexTablePrepareNodeImage(0x1C, 4);

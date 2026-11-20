@@ -15,12 +15,12 @@ typedef struct List {
     /* 0x14 */ s32 size;
 } List;
 
-extern Node *FUN_00307dfe(List *list, u32 arg);
+extern Node *listAllocateSentinelNode2(List *list, u32 arg);
 extern void FUN_002fd5d4(void *dest, u32 value);
 
 void FUN_00307dc2(Node **result, List *list, Node **position, u32 value)
 {
-    Node *node = FUN_00307dfe(list, 0);
+    Node *node = listAllocateSentinelNode2(list, 0);
 
     FUN_002fd5d4(node->value, value);
     node->next = *position;

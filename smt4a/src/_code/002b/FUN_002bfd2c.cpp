@@ -6,14 +6,14 @@ u32 campCecRecvIsDone(void);
 void campCecRecvDestroy(void);
 void sysPlaySe(u32 id);
 void partyPanelRefreshFromSlotTable(void);
-void FUN_00344348(s32 mode);
+void campCecRecvCreate(s32 mode);
 
 u32 FUN_002bfd2c(CampCecResumeState* work)
 {
     u32 result = 0;
     switch (campCecRecvExists()) {
     case 0:
-        FUN_00344348(1);
+        campCecRecvCreate(1);
         break;
     default:
         if (campCecRecvIsDone() != 0) {

@@ -63,7 +63,7 @@ DrawDispatchArgs _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_
                                                                                     DrawDispatchArgs functor);
 void FUN_00197eb0(void *builder, u32 root);
 void nw_gfx_SceneTraverser_Begin(u32 node, u32 other);
-void FUN_0018d01c(u32 node);
+void nw_gfx_SceneTraverser_End(u32 node);
 void asdGxCommandListBegin(u32 list);
 void asdGxCommandListEnd(u32 list, s32 arg);
 void nw_gfx_SceneNode_AttachChild(TransformBuilder *builder, u32 root);
@@ -71,9 +71,9 @@ s32 asdGxIsReady(void);
 void asdGxCommandListStartRecord(u32 *recorder);
 s32 FUN_0018c8c8(char *buffer, s32 size, s32 limit, const char *format, u32 value);
 void FUN_00186a64(u32 *recorder);
-void FUN_0018cf00(u32 renderer, u32 state, s32 arg);
+void gfxUploadShaderMatricesIfChanged(u32 renderer, u32 state, s32 arg);
 void nw_gfx_RenderContext_ResetState_2B7478(u32 renderer);
-void FUN_0018622c(u32 *recorder);
+void gfxDispatchBufferIfNonEmpty(u32 *recorder);
 
 /* Builds the scene graph passes on first use, then draws the job's callback records into the
  * command buffer (optionally dumping the recorded words as hex), and flushes the recorder. */
@@ -88,7 +88,7 @@ void FUN_0017721c(SceneDrawJob *job, u32 stateA, u32 stateB, s32 dumpCommands)
         SceneRootPair *roots = g_effAsdLightHandle;
         nw_gfx_SceneTraverser_Begin(roots->second, roots->first);
         builder->visit(roots->second);
-        FUN_0018d01c(roots->second);
+        nw_gfx_SceneTraverser_End(roots->second);
         asdGxCommandListBegin(pass->commandList);
         DrawDispatchArgs first = {renderer, job->state};
         _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_(job->records->begin, job->records->end, first);
@@ -99,7 +99,7 @@ void FUN_0017721c(SceneDrawJob *job, u32 stateA, u32 stateB, s32 dumpCommands)
         roots = g_effAsdLightHandle;
         nw_gfx_SceneTraverser_Begin(roots->second, roots->first);
         builder->visit(roots->second);
-        FUN_0018d01c(roots->second);
+        nw_gfx_SceneTraverser_End(roots->second);
         pass->sceneBuilt = 1;
     }
     if (asdGxIsReady() == 0) {
@@ -130,12 +130,12 @@ void FUN_0017721c(SceneDrawJob *job, u32 stateA, u32 stateB, s32 dumpCommands)
     }
     FUN_00186a64(pass->recorder);
     if (pass->enabled != 0 && pass->sceneBuilt != 0) {
-        FUN_0018cf00(renderer, stateA, 1);
-        FUN_00167eb0(reinterpret_cast<void *>(pass->commandList));
+        gfxUploadShaderMatricesIfChanged(renderer, stateA, 1);
+        asdGxCommandListReplayCopy(reinterpret_cast<void *>(pass->commandList));
         nw_gfx_RenderContext_ResetState_2B7478(renderer);
     }
-    FUN_0018cf00(renderer, stateA, 1);
-    FUN_0018622c(pass->recorder);
+    gfxUploadShaderMatricesIfChanged(renderer, stateA, 1);
+    gfxDispatchBufferIfNonEmpty(pass->recorder);
 }
 
 }

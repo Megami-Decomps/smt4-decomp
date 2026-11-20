@@ -13,7 +13,7 @@ void processResultSetValue(u32 value);
 extern "C" {
 #endif
 
-bool FUN_00103d48(void);
+bool contentUnmount(void);
 
 #ifdef __cplusplus
 }

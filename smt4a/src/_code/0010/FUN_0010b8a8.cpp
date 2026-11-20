@@ -18,7 +18,7 @@ typedef struct {
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 /* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
-extern int FUN_002ea704(void);
+extern int watcherGetEnabledFlag(void);
 
 
 void FUN_0010b8a8(int param_1)
@@ -33,7 +33,7 @@ void FUN_0010b8a8(int param_1)
   unsigned char temp_v3 [12];
   int temp_v4;
   
-  temp_v0 = FUN_002ea704();
+  temp_v0 = watcherGetEnabledFlag();
   piVar4 = (int *)(temp_v0 + ((int)*(unsigned int *)(param_1 + 0xb8) >> 1));
   if ((*(unsigned int *)(param_1 + 0xb8) & 1) != 0) {
     pcVar3 = *(romwright_code **)(*piVar4 + *(int *)(param_1 + 0xb4));

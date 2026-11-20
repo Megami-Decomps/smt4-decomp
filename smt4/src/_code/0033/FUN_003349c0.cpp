@@ -28,11 +28,11 @@ struct BattleEncounterContext {
 extern "C" {
 extern void *g_btlEvent;
 extern void *g_btlActionReflect;
-extern void *DAT_00435d18;
+extern void *g_btlAux;
 s32 isEntryUsable(void *event); // declcheck: local (the shared declaration in code/Code0027.h does not compile here: argument of type "void *" is incompatible with parameter of type "int *")
 s32 btlEventSelectTrigger(void *event, u32 kind, s32 index, u32 flags);
 void frameTexApplyMode(u32 mode);
-void FUN_002c29d8(u32 channel, u32 frames, u32 volume);
+void screenFadeStartIn(u32 channel, u32 frames, u32 volume);
 void FUN_0027e38c(void *event);
 u32 FUN_00334140(BattleEncounterQuery *query, BattleEncounterContext *context);
 u32 entryCollectNewIdentifiers(BattleEncounterQuery *query, BattleEncounterContext *context);
@@ -70,7 +70,7 @@ extern "C" u32 FUN_003349c0(BattleEncounterQuery *query, BattleEncounterContext 
                 frameTexApplyMode(2);
                 context->flags |= 0x40000000;
                 if (pairedAvailabilityGetState(1) == 3)
-                    FUN_002c29d8(1, 10, 255);
+                    screenFadeStartIn(1, 10, 255);
             }
             FUN_0027e38c(g_btlEvent);
         }
@@ -128,9 +128,9 @@ extern "C" u32 FUN_003349c0(BattleEncounterQuery *query, BattleEncounterContext 
         return FUN_0023fffc(query, context);
     case 13:
         if (pairedAvailabilityGetState(0) == 3)
-            FUN_002c29d8(0, 10, 255);
+            screenFadeStartIn(0, 10, 255);
         if (pairedAvailabilityGetState(1) == 3)
-            FUN_002c29d8(1, 10, 255);
+            screenFadeStartIn(1, 10, 255);
         if (!screenFadesAllReady())
             return 0;
         query->pending = 0;
@@ -143,7 +143,7 @@ extern "C" u32 FUN_003349c0(BattleEncounterQuery *query, BattleEncounterContext 
     case 16:
         ++query->elapsed;
         if (query->elapsed > 30 && nodeListCountActiveById(g_btlActionReflect, reinterpret_cast<u32>(query)) <= 0 &&
-            recordAreAllCountsNonpositive(DAT_00435d18) && FUN_0022724c(g_btlMain) && !(g_btlMain->flags & 0x80000)) {
+            recordAreAllCountsNonpositive(g_btlAux) && FUN_0022724c(g_btlMain) && !(g_btlMain->flags & 0x80000)) {
             FUN_0023f4e4(context);
             g_btlMain->flags &= ~0x4000u;
             eventCommandDispatchPendingCleanup(g_btlMain);

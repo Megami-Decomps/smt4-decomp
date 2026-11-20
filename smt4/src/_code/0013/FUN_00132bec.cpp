@@ -11,7 +11,7 @@ typedef int romwright_code(...);
 /* Supplied declaration required: FUN_002aa984. */
 extern unsigned int *FUN_002ac5d8(unsigned char *);
 /* Supplied declaration required: _ZN2nw3snd8internal14BankFileReaderC1EPKv. */
-extern unsigned int FUN_002ac780(int);
+extern unsigned int soundArchiveFileEntryIsLoaded(int);
 
 
 unsigned int FUN_00132bec(int *param_1,unsigned int param_2,unsigned int param_3)
@@ -25,7 +25,7 @@ unsigned int FUN_00132bec(int *param_1,unsigned int param_2,unsigned int param_3
   unsigned int temp_v2;
   unsigned char temp_v3 [16];
   
-  temp_v0 = FUN_002ac780(param_1[1]);
+  temp_v0 = soundArchiveFileEntryIsLoaded(param_1[1]);
   temp_v1 = (**(romwright_code **)(*param_1 + 0x10))(param_1,temp_v0);
   if (((param_3 & 0xc) != 0) && (temp_v1 == 0)) {
     return 0;

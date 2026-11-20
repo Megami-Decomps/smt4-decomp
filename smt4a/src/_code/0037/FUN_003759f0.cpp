@@ -3,7 +3,7 @@
 
 extern "C" {
 
-s32 FUN_002f744c(u8 group);
+s32 itemKindToSortGroup(u8 group);
 
 /* Sort comparator over item ids: higher rank first, then higher group order, then higher sort key
  * (0 when either id has no record). */
@@ -28,7 +28,7 @@ s32 FUN_003759f0(const u16 *left, const u16 *right)
     if (leftRecord == NULL || rightRecord == NULL) {
         return 0;
     }
-    diff = FUN_002f744c(rightRecord->kind) - FUN_002f744c(leftRecord->kind);
+    diff = itemKindToSortGroup(rightRecord->kind) - itemKindToSortGroup(leftRecord->kind);
     if (diff != 0) {
         return diff;
     }

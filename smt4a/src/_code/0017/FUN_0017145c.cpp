@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00170474(int);
 int FUN_00170f68(int, int, int);
 int FUN_00171624(void);
-int FUN_00189a38(int, int);
+int errThrowFatal(int, int);
 int nn_applet_CTR_detail_OpenSession(void);
 int nn_applet_CTR_detail_CloseSession(void);
 int svcSleepThread(int, int);
@@ -25,7 +25,7 @@ extern int FUN_001703e8(void);
 /* Supplied declaration required: FUN_00170474. */
 /* Supplied declaration required: FUN_00170f68. */
 /* Supplied declaration required: FUN_00171624. */
-/* Supplied declaration required: FUN_00189a38. */
+/* Supplied declaration required: errThrowFatal. */
 extern int FUN_0018b65c(void);
 /* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
 /* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
@@ -51,7 +51,7 @@ int FUN_0017145c(int param_1,unsigned char *param_2)
     nn_applet_CTR_detail_OpenSession();
     temp_v1 = FUN_0018ba70(0x400,temp_v2);
     if (temp_v1 < 0) {
-      FUN_00189a38(temp_v1,0x1714a0);
+      errThrowFatal(temp_v1,0x1714a0);
     }
     nn_applet_CTR_detail_CloseSession();
     if ((temp_v2[0] & 0xff) == 0) {
@@ -63,7 +63,7 @@ int FUN_0017145c(int param_1,unsigned char *param_2)
     nn_applet_CTR_detail_OpenSession();
     temp_v1 = FUN_0018ba70(0x200,temp_v2);
     if (temp_v1 < 0) {
-      FUN_00189a38(temp_v1,0x1714e4);
+      errThrowFatal(temp_v1,0x1714e4);
     }
     nn_applet_CTR_detail_CloseSession();
     if ((char)temp_v2[0] == '\0') {

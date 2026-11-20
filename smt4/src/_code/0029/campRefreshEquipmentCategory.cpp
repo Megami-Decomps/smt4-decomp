@@ -5,7 +5,7 @@
 extern "C" {
 s32 flagValueIsPositive(u32);
 void gridNavigationConfigure(GridNavigation *, s32, s32, s32, s32, s32);
-void FUN_00282f80(u32);
+void campRebuildCategoryList(u32);
 void scrollListSetSelectionMarkChanged(GridNavigation *, s32);
 void objClearFlagPair(GridNavigation *);
 
@@ -65,7 +65,7 @@ void campRefreshEquipmentCategory(u32 category)
             items[count++] = id;
     }
     gridNavigationConfigure(grid, count, 9, 1, 1, 0);
-    FUN_00282f80(category);
+    campRebuildCategoryList(category);
     s32 selected = 0;
     for (s32 i = 0; i < count + 1; ++i) {
         if (items[i] == equipped)

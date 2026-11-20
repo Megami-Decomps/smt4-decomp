@@ -23,11 +23,11 @@ static __inline void vectorAdd(BattleVector3 *result, const BattleVector3 *left,
 
 extern "C" {
 extern BattleVector3 DAT_00493530;
-f32 FUN_00227280(u32 mode, u32 duration, u32 frame);
+f32 easeEvaluate(u32 mode, u32 duration, u32 frame);
 
 void battleVectorTransitionUpdatePath(BattleVectorTransition *work)
 {
-    f32 factor = FUN_00227280(work->path.mode, work->path.duration, work->path.frame);
+    f32 factor = easeEvaluate(work->path.mode, work->path.duration, work->path.frame);
     BattleVector3 first;
     vectorSubtract(&first, &work->path.end, &DAT_00493530);
     BattleVector3 second;

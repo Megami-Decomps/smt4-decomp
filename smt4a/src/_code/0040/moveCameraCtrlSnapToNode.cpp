@@ -5,7 +5,7 @@
 #include "gfx/ControllerModel.h"
 
 extern "C" {
-void FUN_00407598(MikadoTalkWorkA *camera);
+void spatialCameraUpdateLookAt(MikadoTalkWorkA *camera);
 
 /* Snap to a route node. The movement update uses the same position/angle pair. */
 static __inline void routeSelectNode(MikadoTalkWorkA *camera, s32 index, s32 mode)
@@ -16,7 +16,7 @@ static __inline void routeSelectNode(MikadoTalkWorkA *camera, s32 index, s32 mod
         const MikadoRouteNodeA *node = camera->route->table->nodes[index];
         camera->position = node->position;
         camera->angles = *node->angles;
-        FUN_00407598(camera);
+        spatialCameraUpdateLookAt(camera);
     }
 }
 

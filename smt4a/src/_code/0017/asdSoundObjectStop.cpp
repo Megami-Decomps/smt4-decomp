@@ -31,12 +31,12 @@ struct SoundObject {
 
 extern "C" {
 
-f32 FUN_0017fc38(const SoundFadeState *state);
-void FUN_001a586c(void *group, SoundObject *object);
+f32 interpolationStateEvaluate(const SoundFadeState *state);
+void soundObjectUnlinkFromOwner(void *group, SoundObject *object);
 
 static __inline void soundFadeRestart(SoundFadeState *fade, f32 target, s32 duration)
 {
-    fade->start = FUN_0017fc38(fade);
+    fade->start = interpolationStateEvaluate(fade);
     fade->end = target;
     fade->duration = duration;
     fade->elapsed = 0;
@@ -47,11 +47,11 @@ static __inline void soundFadeRestart(SoundFadeState *fade, f32 target, s32 dura
 void asdSoundObjectStop(SoundObject *object, s32 frames)
 {
     if (frames > 0 && object->state != 2 && (object->playing != 0 || object->pending != 0)) {
-        s32 duration = (s32)(FUN_0017fc38(&object->fade) * (f32)frames);
+        s32 duration = (s32)(interpolationStateEvaluate(&object->fade) * (f32)frames);
         soundFadeRestart(&object->fade, 0.0f, duration);
         object->unk9D = 0;
         if (object->group != NULL) {
-            FUN_001a586c(object->group, object);
+            soundObjectUnlinkFromOwner(object->group, object);
         }
         object->vtbl->onFadeStart(object);
         object->unk9A = 0;

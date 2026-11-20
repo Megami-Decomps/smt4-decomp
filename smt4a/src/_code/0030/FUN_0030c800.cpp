@@ -19,9 +19,9 @@ extern "C" {
 OnlineInstanceTable* onlineInstanceTableGetCurrent(void);
 OnlineInstance* onlineInstanceTableFind(OnlineInstanceTable* table, u32 id);
 s32 _ZNK18OnlineResultRecord7isValidEv(const OnlineResult* result);
-void FUN_002f3dc4(OnlineInstance* instance, OnlineResult* result);
-void FUN_002f3dde(OnlineInstance* instance, OnlineResult* result);
-void FUN_002e9f00(void* error, s32 code);
+void onlineInstanceCompleteMode2(OnlineInstance* instance, OnlineResult* result);
+void onlineInstanceCompleteMode3(OnlineInstance* instance, OnlineResult* result);
+void onlineInstanceCompleteWithChildren(void* error, s32 code);
 void onlineJobSetStateDone(OnlineJobErrorByte* job);
 
 // Delivers a completion result to its instance and finishes the job.
@@ -33,12 +33,12 @@ void FUN_0030c800(OnlineJobErrorByte* job, const OnlineResult* status)
         s32 succeeded = _ZNK18OnlineResultRecord7isValidEv(status);
         OnlineResult result = *status;
         if (succeeded) {
-            FUN_002f3dc4(instance, &result);
+            onlineInstanceCompleteMode2(instance, &result);
         } else {
-            FUN_002f3dde(instance, &result);
+            onlineInstanceCompleteMode3(instance, &result);
         }
     } else {
-        FUN_002e9f00(job->error, 4);
+        onlineInstanceCompleteWithChildren(job->error, 4);
     }
     onlineJobSetStateDone(job);
 }

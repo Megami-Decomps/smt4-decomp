@@ -45,7 +45,7 @@ extern unsigned short DAT_00594988; /* 0x594988 */
 /* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: sharedRefAddRef. */
 extern int _Znwj(unsigned int);
-extern int FUN_002eb5f4(void);
+extern int watcherGetActiveContext(void);
 /* Supplied declaration required: streamReset. */
 extern int FUN_002efd4a(unsigned int *, unsigned int);
 extern int *FUN_002f2afc(void);
@@ -159,7 +159,7 @@ LAB_00120aa8:
       else {
         piVar5 = (int *)0x0;
       }
-      temp_v3 = FUN_002eb5f4();
+      temp_v3 = watcherGetActiveContext();
       temp_v16 = temp_v6;
       while (temp_v2 = iterNotEqual(&temp_v16,temp_v14), temp_v4 = temp_v16, temp_v2 != 0) {
         streamReset(piVar5);

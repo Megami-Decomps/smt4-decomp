@@ -5,7 +5,7 @@ extern "C" {
 
 void *jobGetWork(void *job);
 extern BtlPartnerAttackA *g_btlPartnerAttack;
-void FUN_00411458(void *attack, void *state);
+void btlPartnerDrawEntries(void *attack, void *state);
 
 s32 btlPartnerAttackApplyState(void *job)
 {
@@ -19,7 +19,7 @@ s32 btlPartnerAttackApplyState(void *job)
     if (state == NULL) {
         return result;
     }
-    FUN_00411458(attack, state);
+    btlPartnerDrawEntries(attack, state);
     return result;
 }
 

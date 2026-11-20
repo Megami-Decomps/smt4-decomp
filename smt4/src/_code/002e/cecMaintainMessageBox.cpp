@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern void FUN_002e0dfc(void);
+extern void asdCecMaintainMessageBoxOnce(void);
 
-/* Runs the CEC message box maintenance step (FUN_002e0dfc). */
+/* Runs the CEC message box maintenance step (asdCecMaintainMessageBoxOnce). */
 void cecMaintainMessageBox(void)
 {
-    FUN_002e0dfc();
+    asdCecMaintainMessageBoxOnce();
 }
 
 } /* extern "C" */

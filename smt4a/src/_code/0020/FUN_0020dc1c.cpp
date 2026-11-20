@@ -17,8 +17,8 @@ int ifTouchRegionRemove(void);
 int campChangeState(...);
 int FUN_0021b274(...);
 int campResetScreen(void);
-int FUN_00228b04(...);
-int FUN_0022e774(void);
+int gridNavigationHandleConfirm(...);
+int statusPanelClose(void);
 int campRebuildEnabledFlagList(...);
 int gameGlobalsQueueValues(...);
 int sysPlayVoice(...);
@@ -32,7 +32,7 @@ void campSetSpriteAnimationPreset(int, int, int, unsigned int);
 int ifTouchRegionAdd(int, int, int, int);
 int resourceRunOperationIfUnblocked(...);
 int statusPanelSetOpen(...);
-int FUN_002c85b0(int);
+int gameGlobalsSetSceneState(int);
 int sysMemClear(int, int);
 int flaggedEntrySetValueA(int, unsigned int);
 int FUN_0031f718(...);
@@ -79,20 +79,20 @@ extern int ifTouchGetSelectionMode(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: gridNavigationConfigure. */
 /* Supplied declaration required: campChangeState. */
-/* Supplied declaration required: FUN_00215bd0. */
+/* Supplied declaration required: unitStatusResetSpriteState. */
 /* Supplied declaration required: FUN_0021b274. */
 /* Supplied declaration required: campResetScreen. */
-/* Supplied declaration required: FUN_00228b04. */
-/* Supplied declaration required: FUN_0022e774. */
+/* Supplied declaration required: gridNavigationHandleConfirm. */
+/* Supplied declaration required: statusPanelClose. */
 /* Supplied declaration required: campRebuildEnabledFlagList. */
 /* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: statusPanelSetOpen. */
 extern int widgetSubCallIfVisible(int);
-extern int objectApplyIfUnblocked(int);
-/* Supplied declaration required: FUN_002c8538. */
-/* Supplied declaration required: FUN_002c85b0. */
+extern int gridNavigationGetItemCount(int);
+/* Supplied declaration required: gameGlobalsSetOverlayActive. */
+/* Supplied declaration required: gameGlobalsSetSceneState. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
 /* Supplied declaration required: FUN_0031f718. */
@@ -190,9 +190,9 @@ void FUN_0020dc1c(void)
                   temp_v2 = 0x117;
                 }
                 sysPlaySe(temp_v2);
-                FUN_002c85b0(0);
-                FUN_002c8538(1);
-                FUN_00215bd0();
+                gameGlobalsSetSceneState(0);
+                gameGlobalsSetOverlayActive(1);
+                unitStatusResetSpriteState();
                 gameGlobalsSetMenuOpenFlag(1);
                 *(unsigned int *)(temp_v4 + 0x20) = 1;
                 goto LAB_0020de28;
@@ -229,8 +229,8 @@ LAB_0020de28:
         temp_v3 = temp_v3 + 1;
       }
     }
-    if ((*(char *)(temp_v4 + 0x99e) != '\0') && (temp_v6 = FUN_0023b3d0(), temp_v6 != 0)) {
-      FUN_002c85b0(0);
+    if ((*(char *)(temp_v4 + 0x99e) != '\0') && (temp_v6 = gameStateIsNotTransitioning(), temp_v6 != 0)) {
+      gameGlobalsSetSceneState(0);
       FUN_0031f718(0xffffffff,0);
       temp_v6 = resourceRunOperationIfUnblocked();
       temp_v5 = listCursorGetRowIfUnblocked(temp_v4 + 0x32b8);
@@ -286,7 +286,7 @@ LAB_0020de28:
     }
     else {
       temp_v6 = temp_v3;
-      FUN_00228b04(temp_v3,1);
+      gridNavigationHandleConfirm(temp_v3,1);
       if (temp_v6 == 0) {
         temp_v6 = 0;
         padQueryLogicalKey(0,1);
@@ -296,7 +296,7 @@ LAB_0020de28:
           if (temp_v6 != 0) {
             eventQueueAddUniqueIfValid(0x100020f);
             campSetSpriteAnimationPreset(2,3,0xffffffff,0);
-            FUN_0022e774();
+            statusPanelClose();
             *(unsigned int *)(temp_v4 + 0x20) = 3;
             return;
           }
@@ -338,7 +338,7 @@ LAB_0020de28:
         if (temp_v6 == 0) {
           campRebuildEnabledFlagList(0xb);
           campSetSpriteAnimationPreset(2,3,0xffffffff,0);
-          FUN_0022e774();
+          statusPanelClose();
           *(unsigned int *)(temp_v4 + 0x20) = 3;
           return;
         }
@@ -395,7 +395,7 @@ LAB_0020de28:
       }
     }
     if (*(char *)(temp_v4 + 0x99e) != '\0') {
-      temp_v6 = FUN_0026c3a0();
+      temp_v6 = gameGlobalsIsActiveStateFour();
       if (temp_v6 != 0) {
         *(unsigned int *)(temp_v4 + 0x20) = 4;
       }
@@ -421,7 +421,7 @@ LAB_0020de28:
       campRebuildEnabledFlagList(0xb);
     }
     campResetScreen();
-    temp_v6 = objectApplyIfUnblocked(temp_v4 + 0xc0);
+    temp_v6 = gridNavigationGetItemCount(temp_v4 + 0xc0);
     if (temp_v6 >= 1) {
       FUN_0021b274(1,0xffffffff,0);
       *(unsigned int *)(temp_v4 + 0x24) = 10;

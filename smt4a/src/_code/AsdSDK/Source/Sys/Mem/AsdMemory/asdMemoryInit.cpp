@@ -14,8 +14,8 @@ void nn_os_CriticalSection_Enter(void *lock);
 void nn_os_CriticalSection_Leave(void *lock);
 u32 nn_fnd_ExpHeapBase_Allocate(void *heap, u32 size, int alignment, u8 mode, int unk, u8 unk2);
 int nngxGetVramEndAddr(u32 heapId);
-u32 FUN_00188ca4(void);
-u32 FUN_00188c94(void);
+u32 nnosGetHeapBase(void);
+u32 nnosGetHeapSize(void);
 u32 vramAreaGetBaseAddress(u32 heapId);
 void rt_memclr(u32 base, u32 size);
 void heapOwnerCreate(void *expHeap, u32 base, u32 size, u32 flags);
@@ -34,8 +34,8 @@ void asdMemoryInit(void)
     AsdAllocator *allocator;
     u32 extraBlock;
 
-    sys->extra.base = FUN_00188ca4();
-    sys->extra.size = FUN_00188c94();
+    sys->extra.base = nnosGetHeapBase();
+    sys->extra.size = nnosGetHeapSize();
     rt_memclr(sys->extra.base, sys->extra.size);
     heapOwnerCreate(sys->extraHeap, sys->extra.base, sys->extra.size, 0x100);
     nn_os_CriticalSection_Initialize(sys->extraLock);

@@ -32,7 +32,7 @@ typedef struct MessageWindow {
 void *dataTableFileGetTable(void *file, s32 section);
 void fileSectionGetData(void *file, u32 index, s32 arg);
 void asdTextDrawDirectoryEntry(void *text, s32 a1, s32 color, s32 a3, s32 a4, void *file, u32 index);
-s32 FUN_001688c4(void *text);
+s32 statusDownScanSelectedEntryIndex(void *text);
 void gridNavigationConfigure(void *cursor, s32 x, s32 a2, s32 a3, s32 a4, s32 a5);
 void flagsSetOrClearBit(void *flags, s32 set);
 
@@ -63,8 +63,8 @@ void FUN_003f6bc0(MessageWindow *window)
     message = window->message;
     fileSectionGetData(window->messageFile, message, 0);
     asdTextDrawDirectoryEntry(window->text, 3, -1, 0, 3, window->messageFile, message);
-    window->textWidth = FUN_001688c4(window->text);
-    gridNavigationConfigure(window->cursor, window->offsetX + FUN_001688c4(window->text), 8, 1, 0, 1);
+    window->textWidth = statusDownScanSelectedEntryIndex(window->text);
+    gridNavigationConfigure(window->cursor, window->offsetX + statusDownScanSelectedEntryIndex(window->text), 8, 1, 0, 1);
     flagsSetOrClearBit(window->cursor, 0);
     window->unk050 = 0;
 }

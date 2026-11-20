@@ -50,7 +50,7 @@ void FUN_004a2a30(EntryWindow *panel, s32 entry, s32 alternate, u32 textId, f32 
     if (alternate != 0)
         fade++;
     f32 multiplier = 1.0f;
-    if (FUN_002a4b28(static_cast<u16>(textId)) == 0)
+    if (compendiumEntryIsRegistered(static_cast<u16>(textId)) == 0)
         multiplier = 0.5f;
     if (alternate != 0)
         FUN_004a80d8(panel, entry, fade, touchSelectionGetSelected(&panel->style), scale);
@@ -65,7 +65,7 @@ void FUN_004a2a30(EntryWindow *panel, s32 entry, s32 alternate, u32 textId, f32 
     efctSetSpeed(entryScale);
     FUN_004a7814(panel, g_entryWindowNumberFirst[entry], entry, alternate, fade, g_entryWindowNumberSecond[entry]);
     drawSetColorFromRGBA8(g_entryWindowColors[entry]);
-    if (FUN_002a4b28(static_cast<u16>(textId)) != 0)
+    if (compendiumEntryIsRegistered(static_cast<u16>(textId)) != 0)
         digitsDrawAtAreaCorner(reinterpret_cast<TextLayoutContextA *>(panel->textArea), g_entryWindowCaptionX[entry], g_entryWindowCaptionY[entry], fade, g_entryWindowCaptionLabels[entry]);
     else
         drawTextAtRelativePosition(reinterpret_cast<TextLayoutContextA *>(panel->textArea), 0, g_entryWindowCaptionX[entry], g_entryWindowCaptionY[entry],
@@ -81,7 +81,7 @@ void FUN_004a3238(EntryWindow *window, s32 index, u32 mode, s32 enabled, u32 tex
     u32 color = window->fade;
     f32 textScale = 1.0f;
 
-    if (FUN_002a4b28(text & 0xFFFF) == 0) {
+    if (compendiumEntryIsRegistered(text & 0xFFFF) == 0) {
         textScale = 0.5f;
     }
 
@@ -120,7 +120,7 @@ void FUN_004a3238(EntryWindow *window, s32 index, u32 mode, s32 enabled, u32 tex
             drawSetColorFromRGBA8(g_entryWindowColors[index]);
         }
         efctSetSpeed(scale * textScale);
-        if (FUN_002a4b28(text & 0xFFFF) != 0) {
+        if (compendiumEntryIsRegistered(text & 0xFFFF) != 0) {
             digitsDrawAtAreaCorner(reinterpret_cast<TextLayoutContextA *>(window->textArea), g_entryWindowCaptionX[index], g_entryWindowCaptionY[index], color, g_entryWindowCaptionLabels[index]);
         } else {
             drawTextAtRelativePosition(reinterpret_cast<TextLayoutContextA *>(window->textArea), 0, g_entryWindowCaptionX[index], g_entryWindowCaptionY[index], 0, 0, 0xFFFFFFFF, color, "     ???");

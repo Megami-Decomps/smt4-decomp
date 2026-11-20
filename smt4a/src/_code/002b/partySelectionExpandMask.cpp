@@ -16,7 +16,7 @@ static __inline u64 partySelectionBit(u8 slot)
 }
 
 extern "C" {
-void FUN_002ccde8(PartyMaskSelection *, u16 *value, s16 *count);
+void btlMenuResolveHighlightedCommand(PartyMaskSelection *, u16 *value, s16 *count);
 
 // Expand the chosen party entry (or checked entries) to a mask and signed count.
 u32 partySelectionExpandMask(PartyMaskSelection *selection, u64 *mask, s64 *count)
@@ -45,7 +45,7 @@ u32 partySelectionExpandMask(PartyMaskSelection *selection, u64 *mask, s64 *coun
     }
     u16 value = 0;
     s16 selectedCount = 0;
-    FUN_002ccde8(selection, &value, &selectedCount);
+    btlMenuResolveHighlightedCommand(selection, &value, &selectedCount);
     *count = selectedCount;
     return 1;
 }

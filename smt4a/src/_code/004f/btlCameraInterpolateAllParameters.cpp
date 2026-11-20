@@ -22,12 +22,12 @@ struct CameraBlendState {
 };
 }
 
-extern "C" f32 FUN_003d4dd4(s32 mode, s32 duration, s32 frame);
+extern "C" f32 easeEvaluate(s32 mode, s32 duration, s32 frame);
 
 extern "C" void btlCameraInterpolateAllParameters(W5Match8CameraTransition* object, s32 frame)
 {
     CameraBlendState* camera = reinterpret_cast<CameraBlendState*>(object);
-    const f32 progress = FUN_003d4dd4(0, camera->duration, frame);
+    const f32 progress = easeEvaluate(0, camera->duration, frame);
     camera->current.angle =
         (camera->destination.angle - camera->source.angle) * progress + camera->source.angle;
     camera->current.target.x =

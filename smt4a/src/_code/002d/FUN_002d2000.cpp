@@ -31,7 +31,7 @@ void sectionValueSetClamped(s32 value);
 void gameValueBlockSet(s32 index, s32 value);
 void FUN_002c7ad8(void);
 
-s32 FUN_001ba570(void);
+s32 optionsGoalConditionCheck(void);
 s32 gameDataGetTableValue(void);
 s32 sequenceRequestIsPending(void);
 MapSceneRecord *dataTableGetRecord23(s32 index);
@@ -51,7 +51,7 @@ void FUN_002d2000(void)
             case 1:
             case 3:
             case 5:
-                if (FUN_001ba570() == 0) {
+                if (optionsGoalConditionCheck() == 0) {
                     gameFlagsGetBlock()->departureIndex = 0;
                     gameFlagsGetBlock()->unk001C = 0;
                 }

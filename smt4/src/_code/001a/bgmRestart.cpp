@@ -21,7 +21,7 @@ extern struct {
     s32 which;
 } g_titleConfigModeFlag;
 extern Slot g_bgmRequestChannels;
-extern Slot DAT_004c53e4;
+extern Slot g_bgmRequestChannel1;
 
 void bgmRestart(u32 value)
 {
@@ -32,7 +32,7 @@ void bgmRestart(u32 value)
         if (g_titleConfigModeFlag.which == 0) {
             slot = &g_bgmRequestChannels;
         } else if (g_titleConfigModeFlag.which == 1) {
-            slot = &DAT_004c53e4;
+            slot = &g_bgmRequestChannel1;
         }
         if ((slot->flags & 2) != 0) {
             slot->unk04 = 0;

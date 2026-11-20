@@ -10,7 +10,7 @@ int threadSleepDuration(int, int);
 int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
 int FUN_002c0d50(int, int, int);
-int FUN_002c131c(int, int);
+int errThrowFatal(int, int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -30,7 +30,7 @@ extern int FUN_002bb2c8(void);
 /* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
 /* Supplied declaration required: FUN_002c0d50. */
-/* Supplied declaration required: FUN_002c131c. */
+/* Supplied declaration required: errThrowFatal. */
 
 
 int FUN_002c1148(int param_1,unsigned char *param_2)
@@ -51,7 +51,7 @@ int FUN_002c1148(int param_1,unsigned char *param_2)
     FUN_002bb378();
     temp_v1 = FUN_002bb284(0x400,temp_v2);
     if (temp_v1 < 0) {
-      FUN_002c131c(temp_v1,0x2c118c);
+      errThrowFatal(temp_v1,0x2c118c);
     }
     nn_applet_CTR_detail_CloseSession();
     if ((temp_v2[0] & 0xff) == 0) {
@@ -63,7 +63,7 @@ int FUN_002c1148(int param_1,unsigned char *param_2)
     FUN_002bb378();
     temp_v1 = FUN_002bb284(0x200,temp_v2);
     if (temp_v1 < 0) {
-      FUN_002c131c(temp_v1,0x2c11d0);
+      errThrowFatal(temp_v1,0x2c11d0);
     }
     nn_applet_CTR_detail_CloseSession();
     if ((char)temp_v2[0] == '\0') {

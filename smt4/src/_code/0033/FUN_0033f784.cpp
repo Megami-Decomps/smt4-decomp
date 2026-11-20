@@ -9,7 +9,7 @@ struct NamedRecordCatalog {
 extern "C" {
 extern NamedRecordCatalog DAT_0043e3b0;
 extern NamedSortRecord DAT_0043e3c8[];
-void FUN_0027f3dc(void* records, u32 count, u32 stride,
+void arraySortQsort(void* records, u32 count, u32 stride,
                   s32 (*compare)(const NamedSortRecord*, const NamedSortRecord*));
 
 /* Numbers the named records up to the first free key and sorts them by name; does nothing once counted. */
@@ -25,7 +25,7 @@ void FUN_0033f784(void)
             records[count].index = static_cast<u16>(count);
         }
         DAT_0043e3b0.count = count;
-        FUN_0027f3dc(DAT_0043e3c8, count, sizeof(NamedSortRecord), keyedRecordCompareName);
+        arraySortQsort(DAT_0043e3c8, count, sizeof(NamedSortRecord), keyedRecordCompareName);
     }
 }
 }

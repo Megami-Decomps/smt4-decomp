@@ -62,7 +62,7 @@ typedef struct {
 extern int FUN_00270d74(...); /* 0x270d74 */
 extern int FUN_002b2ca8(...); /* 0x2b2ca8 */
 extern int devilCompareByRankGradeAscending(...); /* 0x2ce824 */
-extern int FUN_002fe074(...); /* 0x2fe074 */
+extern int uniteCandidateCompare(...); /* 0x2fe074 */
 extern int FUN_00321cc0(...); /* 0x321cc0 */
 extern int FUN_00337110(...); /* 0x337110 */
 extern int btlDevilCompareValueKindAndOrder(...); /* 0x34f6fc */
@@ -89,7 +89,7 @@ extern int gameSlotTableFindFree(void);
 /* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: gridNavigationConfigure. */
 /* Supplied declaration required: gameDataCopySaveEntry. */
-extern int FUN_002a4b28(unsigned short);
+extern int compendiumEntryIsRegistered(unsigned short);
 /* Supplied declaration required: statusPanelSetOpen. */
 extern int computeCountLimit(void);
 /* Supplied declaration required: sysMemClear. */
@@ -275,7 +275,7 @@ void FUN_0028625c(int *param_1)
           if (temp_v5 == 0) {
             do {
               if ((unsigned int)param_1[0x171] <= (unsigned int)param_1[0x172]) break;
-              temp_v5 = FUN_002a4b28(temp_v1);
+              temp_v5 = compendiumEntryIsRegistered(temp_v1);
               if (temp_v5 != 0) {
                 wordAt1B0Clear(*param_1);
                 idListAppendEightNonzero(*param_1,0,temp_v4 + 0x34);
@@ -718,7 +718,7 @@ LAB_0028727c:
           }
           if ((*pbVar19 & 0x7f) == 0x31) {
             if (temp_v14 != 0) {
-              qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_002fe074);
+              qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,uniteCandidateCompare);
             }
             else {
               qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,devilCompareBySetRaceLevel);

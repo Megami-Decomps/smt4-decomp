@@ -8,7 +8,7 @@ int FUN_0014db9c(...);
 int FUN_002bb020(...);
 int FUN_002bcc60(...);
 int nn_os_CriticalSection_Initialize(...);
-int FUN_002c40f8(...);
+int svcWaitSynchronizationN(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int resultHandleFailure(...);
 int software_interrupt(...);
 
@@ -33,7 +33,7 @@ extern unsigned char LAB_00152604; /* 0x152604 */
 /* Supplied declaration required: FUN_002bb020. */
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
-/* Supplied declaration required: FUN_002c40f8. */
+/* Supplied declaration required: svcWaitSynchronizationN. */
 /* Supplied declaration required: resultHandleFailure. */
 extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
@@ -58,7 +58,7 @@ unsigned char FUN_00130514(int *param_1,unsigned int param_2,int *param_3)
     FUN_0014db9c();
     temp_v0 = *param_1;
     puVar1 = temp_v1;
-    FUN_002c40f8(puVar1,&temp_v0,1,0,0xffffffff,0xffffffff);
+    svcWaitSynchronizationN(puVar1,&temp_v0,1,0,0xffffffff,0xffffffff);
     if ((int)puVar1 < 0) {
       resultHandleFailure();
     }

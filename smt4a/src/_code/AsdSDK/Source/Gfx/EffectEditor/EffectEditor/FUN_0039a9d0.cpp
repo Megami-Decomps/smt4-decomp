@@ -52,7 +52,7 @@ extern unsigned int DAT_0059dc38; /* 0x59dc38 */
 extern unsigned int DAT_0059dc40; /* 0x59dc40 */
 extern unsigned int DAT_0059dc44; /* 0x59dc44 */
 extern unsigned int DAT_0059dc48; /* 0x59dc48 */
-extern unsigned char DAT_0059e9a8; /* 0x59e9a8 */
+extern unsigned char g_effectEditorState; /* 0x59e9a8 */
 extern int DAT_0059e9b4; /* 0x59e9b4 */
 extern unsigned int DAT_0059ea18; /* 0x59ea18 */
 extern unsigned int DAT_0059ea1c; /* 0x59ea1c */
@@ -235,7 +235,7 @@ LAB_0039ab4c:
       DAT_0059dbec = 0;
     }
     temp_v1 = 0x800000;
-    *(unsigned char **)(piVar3[1] + 0x34) = &DAT_0059e9a8;
+    *(unsigned char **)(piVar3[1] + 0x34) = &g_effectEditorState;
     DAT_0059dc2c = 0;
     DAT_0059dc30 = 0;
     DAT_0059dc34 = 1;

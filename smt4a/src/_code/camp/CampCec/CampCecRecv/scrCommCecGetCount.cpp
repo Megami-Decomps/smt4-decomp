@@ -8,7 +8,7 @@ struct CampCecRecord {
 
 extern "C" {
 extern CampCecRecv* g_campCecRecv;
-CampCecRecord* FUN_0031cf00(void);
+CampCecRecord* stockFindSelectedUnit(void);
 
 // Returns to the script the receive screen's value when the argument asks for it, else the current received
 // record's value (0 when there is no receive screen).
@@ -20,7 +20,7 @@ u32 scrCommCecGetCount(void)
     } else if (g_campCecRecv == NULL) {
         scrSetResult(0);
     } else {
-        scrSetResult(FUN_0031cf00()->value);
+        scrSetResult(stockFindSelectedUnit()->value);
     }
     return 1;
 }

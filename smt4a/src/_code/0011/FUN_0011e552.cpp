@@ -5,7 +5,7 @@
 extern "C" {
 
 int onlineInstanceTableFind(int, unsigned int);
-int FUN_002e9f00(int, int);
+int onlineInstanceCompleteWithChildren(int, int);
 int rangeIsEmpty(...);
 int byteVectorErase(int *, int, int);
 int FUN_00310d38(int, int, unsigned int);
@@ -40,7 +40,7 @@ typedef struct {
 
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
-/* Supplied declaration required: FUN_002e9f00. */
+/* Supplied declaration required: onlineInstanceCompleteWithChildren. */
 extern int *wordRefMin(unsigned int *, unsigned int *);
 /* Supplied declaration required: rangeIsEmpty. */
 /* Supplied declaration required: byteVectorErase. */
@@ -120,7 +120,7 @@ void FUN_0011e552(fn_0011e552_arg0 *param_1,unsigned int param_2,unsigned int pa
       return;
     }
   }
-  FUN_002e9f00(temp_v0,4);
+  onlineInstanceCompleteWithChildren(temp_v0,4);
   return;
 }
 

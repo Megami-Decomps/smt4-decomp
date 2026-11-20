@@ -10,7 +10,7 @@ void FUN_003f26d4(BtlMainStateA *battle);
 void FUN_004aa2e0(BtlUiA *ui, s32 mode);
 void FUN_004f1c5c(void *camera, s32 duration);
 s32 btlPollVersionedEffectTexture(BtlAuxA *effects);
-u32 FUN_004f7b84(void *effects, const char *name);
+u32 effectRequestByName(void *effects, const char *name);
 extern BtlAuxA *g_btlAux;
 extern const char DAT_00528548[];
 
@@ -35,7 +35,7 @@ void FUN_003e2a88(BtlStep *step, BtlMainStateA *battle)
     extern EncounterEffectMasksView g_btlEncount;
     extern EffectCameraView *g_btlCamera;
     if (step->counters.unk0C == 0) {
-        FUN_004f7b84(g_btlAux, DAT_00528548);
+        effectRequestByName(g_btlAux, DAT_00528548);
         g_btlCamera->flags |= 0x4000;
         step->counters.unk0C |= 2;
     }

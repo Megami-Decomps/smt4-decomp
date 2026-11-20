@@ -24,7 +24,7 @@ void refCountIncrement(u32 texture);
 void *effTlpCreate(u32 *resource);
 
 extern u8 g_effQuadIndexList;
-extern const char DAT_00410498[]; /* effPolygonTex.cpp: __FILE__ */
+extern const char g_effPolygonTexSourceFileName[]; /* effPolygonTex.cpp: __FILE__ */
 
 /* Creates a textured polygon object from an effect description: zeroed object, one-segment
  * geometry, the effect's parameters copied in, and the description's resource attached
@@ -34,7 +34,7 @@ PolyTexObject *effPolyTexCreate(PolyTexDesc *desc)
     PolyTexObject *obj;
     u32 *resource;
 
-    asdDebugTrace(DAT_00410498, 36);
+    asdDebugTrace(g_effPolygonTexSourceFileName, 36);
     obj = (PolyTexObject *)memAlloc(0x10000, 0x100, 0, 212, 0x10, 1);
 
     memClear(obj, 212);

@@ -1,4 +1,4 @@
-/* Fills the 3-word result for slot `index` of the table: copies the slot's pair and appends the FUN_001d13dc value; returns 1. */
+/* Fills the 3-word result for slot `index` of the table: copies the slot's pair and appends the holderGetOffsetPointer value; returns 1. */
 #include "common.h"
 
 extern "C" {
@@ -20,7 +20,7 @@ typedef struct SlotResult {
     /* 0x08 */ u32 value;
 } SlotResult;
 
-extern u32 FUN_001d13dc(u32 *pair);
+extern u32 holderGetOffsetPointer(u32 *pair);
 
 /* A pass-through hook the release build removed (armlink turned the call into a nop). */
 __weak u32 FUN_001cd210_hook(u32 value);
@@ -31,7 +31,7 @@ u32 slotTableFillResult(SlotTable *table, SlotResult *result, s32 index)
 
     result->first = pair[0];
     result->second = pair[1];
-    result->value = FUN_001cd210_hook(FUN_001d13dc(pair));
+    result->value = FUN_001cd210_hook(holderGetOffsetPointer(pair));
     return 1;
 }
 

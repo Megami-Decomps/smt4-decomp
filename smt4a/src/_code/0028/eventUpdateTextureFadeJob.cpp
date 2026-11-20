@@ -3,11 +3,11 @@
 extern "C" {
 EventTextureJobWork *jobGetWork(void);
 void jobStop(u32 job, s32 mode);
-s32 FUN_00162ea4(void);
-u32 FUN_00409fe8(s32 resource, u32 first, u32 second);
+s32 eventIsSkipping(void);
+u32 resourceCacheGetOrLoadModel(s32 resource, u32 first, u32 second);
 s32 nkdwLoaderParse(u32 resource);
 void aocHandleButtons(u32 resource, s32 mode);
-s32 FUN_003fce08(u32 resource, u32 argument);
+s32 aocResourceStartOnce(u32 resource, u32 argument);
 f32 asdAnimGetTrackLastFrame(u32 resource, u32 track);
 
 // Drive resource loading, looping animation and a clamped texture-opacity fade.
@@ -38,8 +38,8 @@ u32 eventUpdateTextureFadeJob(u32 job)
         }
         break;
     case 1:
-        if (FUN_00162ea4() == 0 && work->resourceId != 0) {
-            u32 resource = FUN_00409fe8(work->resourceId, 1, 1);
+        if (eventIsSkipping() == 0 && work->resourceId != 0) {
+            u32 resource = resourceCacheGetOrLoadModel(work->resourceId, 1, 1);
             work->state = 2;
             work->resource = resource;
         }
@@ -51,7 +51,7 @@ u32 eventUpdateTextureFadeJob(u32 job)
         }
         break;
     case 3:
-        if (FUN_003fce08(work->resource, 1)) {
+        if (aocResourceStartOnce(work->resource, 1)) {
             work->state = 0;
         }
         break;

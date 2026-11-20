@@ -44,7 +44,7 @@ extern "C" void FUN_00381e04(HealingScene199 *scene)
                     buttonHelpSetPreset(0xa3);
                     scene->substate = 5;
                 } else {
-                    FUN_0029c43c(-questCenterGetHealingFee(), 0);
+                    messageBannerSetCountdown(-questCenterGetHealingFee(), 0);
                     scene->substate++;
                 }
             } else if (choice == 1) {

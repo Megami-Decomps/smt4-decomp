@@ -46,8 +46,8 @@ void mapEnvironmentApplyPreset(s32 preset, s32 mode);
 void asdCameraInitializeDefaults(CameraMatrixCache *camera, u32 mode);
 void cameraExportParameters(CameraParameters *output, const CameraParameterOwner *owner);
 void uiSetFloatPair(CameraMatrixCache *camera, f32 first, f32 second);
-void FUN_0014f0dc(CameraMatrixCache *camera, const Vec3 *eye, const Vec3 *target, const Vec3 *up);
-void FUN_001523b8(CameraMatrixCache *camera, u32 pivot, f32 first, f32 second, f32 third, f32 fourth);
+void cameraMatrixCacheSetLookAt(CameraMatrixCache *camera, const Vec3 *eye, const Vec3 *target, const Vec3 *up);
+void stereoCameraSetPerspective(CameraMatrixCache *camera, u32 pivot, f32 first, f32 second, f32 third, f32 fourth);
 void campCommonBgAcquire();
 void campButtonHelpAcquire();
 void asdLoadFileAsyncSimple(const char *name, void **output, u32 mode);
@@ -89,9 +89,9 @@ void FUN_004cdddc(FountainInitializationView *work)
     CameraParameters pose;
     cameraExportParameters(&pose, work->cameraParameters);
     uiSetFloatPair(&work->camera, 5.0f, 1.0f);
-    FUN_0014f0dc(&work->camera, reinterpret_cast<const Vec3 *>(&pose.eye),
+    cameraMatrixCacheSetLookAt(&work->camera, reinterpret_cast<const Vec3 *>(&pose.eye),
                 reinterpret_cast<const Vec3 *>(&pose.target), reinterpret_cast<const Vec3 *>(&pose.up));
-    FUN_001523b8(&work->camera, 1, pose.fieldOfView, pose.nearClip, pose.farClip, pose.aspect);
+    stereoCameraSetPerspective(&work->camera, 1, pose.fieldOfView, pose.nearClip, pose.farClip, pose.aspect);
     FUN_0036b824(reinterpret_cast<u32>(&work->camera));
     g_handleRegistry->fountain.camera = &work->camera;
     campCommonBgAcquire();

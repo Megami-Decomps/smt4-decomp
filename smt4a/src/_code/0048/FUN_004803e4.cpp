@@ -3,12 +3,12 @@
 #include "shard/ItemStackLimit.h"
 
 extern "C" {
-u32 FUN_0047fc38(u32);
+u32 equipmentIsFullyUpgraded(u32);
 EquipmentUpgradeState *FUN_00239200();
 
 void FUN_004803e4(u32 itemId)
 {
-    if (FUN_0047fc38(itemId))
+    if (equipmentIsFullyUpgraded(itemId))
         return;
     const ItemCategoryEntry *category = itemCategoryFindByItemId(itemId);
     if (!category) {

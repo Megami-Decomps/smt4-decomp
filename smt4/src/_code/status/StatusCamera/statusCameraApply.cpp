@@ -7,7 +7,7 @@
 extern "C" {
 
 void FUN_001db388(StatusCameraWork *camera, s32 lowerScreen, f32 fieldOfView, f32 nearClip, f32 farClip);
-int FUN_002c1edc(StatusCameraWork *camera, Vec3 *eye, Vec3 *target, AsdCameraVec3 *up);
+int cameraMatrixCacheSetLookAt(StatusCameraWork *camera, Vec3 *eye, Vec3 *target, AsdCameraVec3 *up);
 
 extern StatusCameraWork *g_statusCamera;
 
@@ -29,7 +29,7 @@ void statusCameraApply(void)
         target.y += offset.y;
         target.z += offset.z;
         CameraPosition up(0.0f, 1.0f, 0.0f);
-        FUN_002c1edc(camera, &camera->eye, &target, &up);
+        cameraMatrixCacheSetLookAt(camera, &camera->eye, &target, &up);
         FUN_001db388(camera, 0, camera->lens.fov, camera->lens.nearClip, camera->lens.farClip);
     }
 }

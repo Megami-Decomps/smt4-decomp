@@ -2,7 +2,7 @@
 #include "map/EnemySpawnState.h"
 
 extern "C" {
-const EnemySpawnRecord *FUN_00356308(u32 index);
+const EnemySpawnRecord *fieldFindAreaPlacementRecord(u32 index);
 s32 gameFlagIsSet(u32 flag);
 u32 FUN_004bc420(u32 id, u32 variant, s32 mode);
 EnemySpawnObject *FUN_00482b08(EnemySpawnOwner *owner, s32 kind, s32 mode);
@@ -16,7 +16,7 @@ s32 table29ApplyEntry(EnemySpawnObject *object, u32 id);
 
 void FUN_00483304(EnemySpawnOwner *owner, u32 sourceIndex)
 {
-    const EnemySpawnRecord *record = FUN_00356308(sourceIndex);
+    const EnemySpawnRecord *record = fieldFindAreaPlacementRecord(sourceIndex);
     if (record->kind != 1 || (gameFlagIsSet(0x137) != 0 && gameFlagIsSet(0x147) == 0)) {
         struct Transform { MapVector position, rotation, scale; } transform;
         transform.position.x = static_cast<f32>(record->x);

@@ -72,7 +72,7 @@ s32 controllerGroupSetPosition(u32 model, f32 x, f32 y, f32 z);
 BattleUnitBlock *btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
 u32 partyFindActiveRecordById(u32 id);
 u32 saveSlotFindSelected(void);
-s32 FUN_003ecfb4(BtlMainView *mainState, void *unit, u32 record, s32 flag);
+s32 btlUnitStateInitFromRecord(BtlMainView *mainState, void *unit, u32 record, s32 flag);
 s32 FUN_004fe7e4(s32 a, s32 b, s32 c);
 s32 FUN_003f14a0(BtlMainView *mainState);
 u32 partyGetSlotPreferredFirst(u32 index);
@@ -133,7 +133,7 @@ void FUN_00410f84(StageState *state)
         BtlMainView *mainState = reinterpret_cast<BtlMainView *>(btlGetMainState());
         BattleUnitBlock *block = btlFindFirstEntryMatchingCategoryAndRequiredMask();
         u32 record = partyFindActiveRecordById((u16)state->value);
-        FUN_003ecfb4(mainState, (u8 *)block + 0x164, record, 1);
+        btlUnitStateInitFromRecord(mainState, (u8 *)block + 0x164, record, 1);
         block->activeRecord = record;
         mainState->activeRecord = record;
         FUN_004fea10(0, 0, 1);
@@ -145,7 +145,7 @@ void FUN_00410f84(StageState *state)
         BtlMainView *mainState = reinterpret_cast<BtlMainView *>(btlGetMainState());
         BattleUnitBlock *block = btlFindFirstEntryMatchingCategoryAndRequiredMask();
         u32 record = saveSlotFindSelected();
-        FUN_003ecfb4(mainState, (u8 *)block + 0x164, record, 0);
+        btlUnitStateInitFromRecord(mainState, (u8 *)block + 0x164, record, 0);
         block->activeRecord = record;
         s16 sumA = 0;
         s16 sumB = 0;

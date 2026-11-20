@@ -26,6 +26,7 @@
 #define ASD_PROC_FLAG_SKIP 0x10       /* the update pass leaves it alone */
 #define ASD_PROC_FLAG_LOCKED 0x40     /* onUpdate runs inside the locked section (FUN_002c41d0) */
 #define ASD_PROC_FLAG_TERMINATE 0x20000 /* ended the next time the process list runs */
+#define ASD_PROC_FLAG_PAUSABLE 0x80000  /* paused with the others when the game pauses every process */
 #define ASD_PROC_FLAG_PAUSED 0x200000 /* neither started nor updated */
 #define ASD_PROC_FLAG_DEFAULT 0x190000
 

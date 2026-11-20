@@ -10,9 +10,9 @@ int entryListSetPhase(...);
 int effectSpawnPositionDefault(...);
 int forwardRecoveredCallback(void);
 int FUN_00263028(...);
-int FUN_002630e0(...);
+int cameraProjectToScreen(...);
 int FUN_002b011c(void);
-int FUN_002b7d30(void);
+int asdGxBlitScaledQuad(void);
 int renderCtxSelectTexture(...);
 int memAlloc(int, int, int, int);
 int renderCtxSelectStereoLayout(int);
@@ -37,7 +37,7 @@ typedef struct {
 } param_3_stack;
 
 extern int g_titleScene; /* 0x44ea00 */
-extern float DAT_004724cc; /* 0x4724cc */
+extern float g_effMenuDrawOffset; /* 0x4724cc */
 extern float DAT_004724d0; /* 0x4724d0 */
 extern unsigned int *DAT_004ea7e0; /* 0x4ea7e0 */
 extern unsigned int *DAT_004ea7f4; /* 0x4ea7f4 */
@@ -53,9 +53,9 @@ extern unsigned int asdCameraValueGet(unsigned int);
 /* Supplied declaration required: effectSpawnPositionDefault. */
 /* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: FUN_00263028. */
-/* Supplied declaration required: FUN_002630e0. */
+/* Supplied declaration required: cameraProjectToScreen. */
 /* Supplied declaration required: FUN_002b011c. */
-/* Supplied declaration required: FUN_002b7d30. */
+/* Supplied declaration required: asdGxBlitScaledQuad. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
@@ -201,8 +201,8 @@ joined_r0x0030e620:
       temp_v9 = (float)VectorSignedToFloat(param_2[4],(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v8 = (float)VectorSignedToFloat(param_2[5],(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v3 = param_2[6];
-      temp_v12 = romwright_piece_4_4((int)(temp_v11 + DAT_004724d0),(int)(temp_v10 + DAT_004724cc));
-      temp_v13 = romwright_piece_4_4((int)(temp_v8 + DAT_004724d0),(int)(temp_v9 + DAT_004724cc));
+      temp_v12 = romwright_piece_4_4((int)(temp_v11 + DAT_004724d0),(int)(temp_v10 + g_effMenuDrawOffset));
+      temp_v13 = romwright_piece_4_4((int)(temp_v8 + DAT_004724d0),(int)(temp_v9 + g_effMenuDrawOffset));
       temp_v1 = renderCtxPackPassFlags(1);
       piVar10 = (int *)(temp_v2 + 0x124c);
       temp_v6 = *piVar10;
@@ -240,8 +240,8 @@ joined_r0x0030e620:
       temp_v20 = param_2[8];
       temp_v7 = *(unsigned int *)(g_titleScene + 0x528);
       temp_v4 = asdCameraValueGet(temp_v7);
-      FUN_002630e0(&temp_v15,0,temp_v4);
-      FUN_002630e0(&temp_v18,0,temp_v4,&temp_v18);
+      cameraProjectToScreen(&temp_v15,0,temp_v4);
+      cameraProjectToScreen(&temp_v18,0,temp_v4,&temp_v18);
       renderCtxSelectTexture(g_titleScene,0);
       renderCtxSelectStereoLayout(g_titleScene);
       FUN_00263028((temp_v3 << 0x18) | (((temp_v3 & 0xffff) >> 8) << 0x10) |
@@ -254,7 +254,7 @@ joined_r0x0030e620:
       temp_v16 = param_2[3];
       temp_v17 = param_2[4];
       temp_v7 = asdCameraGetSavedRenderPairs();
-      FUN_002630e0(&temp_v15,0,temp_v7,param_2 + 2);
+      cameraProjectToScreen(&temp_v15,0,temp_v7,param_2 + 2);
       temp_v17 = 0;
       renderCtxSelectTexture(g_titleScene,0);
       FUN_002b011c();
@@ -294,15 +294,15 @@ joined_r0x0030e620:
       if (temp_v0 != 1) {
         if (temp_v0 != 2) {
           if (temp_v0 == 8) {
-            FUN_002b7d30();
+            asdGxBlitScaledQuad();
           }
         }
         else {
-          FUN_002b7d30();
+          asdGxBlitScaledQuad();
         }
       }
       else {
-        FUN_002b7d30();
+        asdGxBlitScaledQuad();
       }
       break;
     case 0xc: {
@@ -317,7 +317,7 @@ joined_r0x0030e620:
       menuDrawRectangle(static_cast<s32>(point.x + 48.0f),static_cast<s32>(point.y + 48.0f),
                   0x20,0x20,temp_v15,temp_v16);
       renderCtxSelectTexture(g_titleScene,temp_v7);
-      FUN_002b7d30();
+      asdGxBlitScaledQuad();
       renderCtxSelectTexture(g_titleScene,0);
       FUN_00263028(0xffffffff);
       FUN_00263028(0xffffffff);

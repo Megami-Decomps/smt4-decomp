@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_00168980(u32 id);
+void buttonHelpTransitionPresetFlags(u32 id);
 void campCommonBgRelease(void);
 void campButtonHelpRelease(void);
 void texOwner1480Free(u32 *member);
@@ -14,7 +14,7 @@ s32 jobStop(u32 job, s32 flag);
 /* Shuts the scene down: runs the four clean-up calls, then stops its job, destroys its member and frees it. */
 void naviMainShutdown(void)
 {
-    FUN_00168980(3);
+    buttonHelpTransitionPresetFlags(3);
     texSetRelease();
     campCommonBgRelease();
     campButtonHelpRelease();

@@ -22,7 +22,7 @@ struct EffectFileRef {
 };
 
 EffectFileRef *packageFindFileRefByName(u32 package, u32 type, u32 name);
-void FUN_002a6d1c(EffectRequest *request, s32 mode, u32 first, u32 second, u32 param);
+void requestParamsInitialize(EffectRequest *request, s32 mode, u32 first, u32 second, u32 param); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void FUN_002a8ac4(u32 channel, EffectRequest *request, EffectTarget *target);
 
 /* Builds an effect request for the named package entry and submits it to the entry's channel. */
@@ -33,7 +33,7 @@ void effectSubmitPackageRequest(u32 package, u32 name, u32 first, u32 second, u3
     EffectTarget *target = (*entries)->target;
     EffectRequest request;
 
-    FUN_002a6d1c(&request, 2, first, second, param);
+    requestParamsInitialize(&request, 2, first, second, param);
     FUN_002a8ac4(*target->channel, &request, target);
 }
 

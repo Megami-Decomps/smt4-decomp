@@ -93,7 +93,7 @@ void FUN_004ecee8(BtlActorRef *ref, BtlCommand *command)
             FUN_004c9160(0x2D, command->unit, 0, 1);
             owner = btlFindFirstEntryMatchingCategoryAndRequiredMask(ref->unit);
             if (owner != NULL) {
-                u32 id = FUN_0019acdc(*(u16 *)(owner->model + 0x12C), 1);
+                u32 id = unitMapIdToCategory(*(u16 *)(owner->model + 0x12C), 1);
                 u32 outA;
                 u32 outB;
 

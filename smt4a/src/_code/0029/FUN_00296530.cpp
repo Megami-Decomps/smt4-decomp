@@ -25,7 +25,7 @@ int FUN_003e566c(int);
 int FUN_003e5858(int);
 int controllerSetDestination(...);
 int moriModelUnitStartMaterialAnimation(unsigned int, int, int);
-int FUN_003fd924(...);
+int motionPlayerStartBlended(...);
 int animationSelectClip(...);
 int controllerSetRotationEulerDegrees(...);
 int modelPlayClip(...);
@@ -93,7 +93,7 @@ extern int saveSlotSelectedIsId175(void);
 /* Supplied declaration required: FUN_003e5858. */
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: moriModelUnitStartMaterialAnimation. */
-/* Supplied declaration required: FUN_003fd924. */
+/* Supplied declaration required: motionPlayerStartBlended. */
 /* Supplied declaration required: animationSelectClip. */
 /* Supplied declaration required: FUN_003fda64. */
 /* Supplied declaration required: controllerSetRotationEulerDegrees. */
@@ -225,7 +225,7 @@ void FUN_00296530(void)
           moriModelUnitStartMaterialAnimation(temp_v5,0,2);
           animationSelectClip(temp_v5,1,2);
           piVar13 = piVar12;
-          FUN_003fd924(temp_v5,3,2);
+          motionPlayerStartBlended(temp_v5,3,2);
         }
         *(unsigned char *)(g_lmapScene + 0x8f) = 1;
       }

@@ -3,7 +3,7 @@
 extern "C" {
 
 void FUN_00106144(u32 a, u32 b);
-u32 FUN_002ecf28(void);
+u32 objectRegistryGetOwnerForCurrent(void);
 
 typedef struct Widget Widget;
 typedef struct WidgetVtbl {
@@ -31,13 +31,13 @@ typedef struct Screen {
     /* 0x84 */ u32 arg;
 } Screen;
 
-/* Calls FUN_00106144 with FUN_002ecf28's result and the screen's argument, then sets the panel's widget to 100. */
+/* Calls FUN_00106144 with objectRegistryGetOwnerForCurrent's result and the screen's argument, then sets the panel's widget to 100. */
 void FUN_0010d108(Screen *screen)
 {
     u32 value;
     Widget *widget;
 
-    value = FUN_002ecf28();
+    value = objectRegistryGetOwnerForCurrent();
     FUN_00106144(value, screen->arg);
     widget = screen->panel->holder->widget;
     widget->vtbl->setValue(widget, 100);

@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_0022e774(void);
+void statusPanelClose(void);
 void FUN_00270104(void *object);
 void screenSetContextHint(void *object, u32 a, u32 b);
 void gameGlobalsSetMenuOpenFlag(s32 value);
@@ -25,7 +25,7 @@ void FUN_002cc96c(Object *object)
     u32 value;
 
     statusIconSetKind(object, 0);
-    FUN_0022e774();
+    statusPanelClose();
     object->unk4AD8 = 4;
     gameGlobalsSetMenuOpenFlag(0);
     if (object->state - 8U <= 5U) {

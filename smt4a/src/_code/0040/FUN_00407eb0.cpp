@@ -56,7 +56,7 @@ typedef struct CameraController {
     /* 0x620 */ Vec3 secondTable[1];
 } CameraController;
 
-void FUN_00407598(CameraController *controller);
+void spatialCameraUpdateLookAt(CameraController *controller);
 void controllerSetDestination(u32 handle, Vec3 *destination);
 
 /* Moves the camera toward the node's point: at once when `immediate`, otherwise in ten steps; the optional second point follows. */
@@ -67,7 +67,7 @@ void FUN_00407eb0(CameraController *ctrl, s32 index, s32 immediate)
         ctrl->destination.position = node->position;
         ctrl->destination.look = *node->look;
         ctrl->current = ctrl->destination;
-        FUN_00407598(ctrl);
+        spatialCameraUpdateLookAt(ctrl);
         if (ctrl->hasSecond != 0) {
             ctrl->secondDestination = ctrl->secondTable[index];
             ctrl->secondCurrent = ctrl->secondDestination;

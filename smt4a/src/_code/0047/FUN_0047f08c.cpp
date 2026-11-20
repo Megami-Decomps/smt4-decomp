@@ -10,9 +10,9 @@ void FUN_0047e690(s32 slot, s32 id, u32 context, f32 scale);
 void FUN_0047f08c(s32 id, u32 context)
 {
     if (id == 0x16c) {
-        FUN_001628c0("I001029", FUN_0014af98(), 2, 0, 0.707f, 0.707f);
+        FUN_001628c0("I001029", messageVoiceBankGet(), 2, 0, 0.707f, 0.707f);
     } else if (id == 0x16d) {
-        FUN_001628c0("I001030b", FUN_0014af98(), 2, 0, 0.707f, 0.707f);
+        FUN_001628c0("I001030b", messageVoiceBankGet(), 2, 0, 0.707f, 0.707f);
     } else {
         FUN_0047e690(-1, id, context, 1.0f);
     }

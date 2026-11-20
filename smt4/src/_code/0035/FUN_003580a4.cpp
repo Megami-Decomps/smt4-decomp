@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_00238f4c(int *, int);
 int FUN_0024ee68(int);
-int FUN_002ad66c(unsigned char **, int *);
+int asdSaveHeaderBuildCalendarTime(unsigned char **, int *);
 int clockGetTicksAsMicroseconds(int *);
 int nn_cec_CTR_MessageBox_GetMessageBoxNum(int *, int);
 int rt_memcpy(int *, int, int);
@@ -28,7 +28,7 @@ extern signed char DAT_004656d1; /* 0x4656d1 */
 
 /* Supplied declaration required: FUN_00238f4c. */
 /* Supplied declaration required: FUN_0024ee68. */
-/* Supplied declaration required: FUN_002ad66c. */
+/* Supplied declaration required: asdSaveHeaderBuildCalendarTime. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: clockGetTicksAsMicroseconds. */
 extern unsigned int moduleStartOnce(void);
@@ -149,7 +149,7 @@ unsigned int FUN_003580a4(int *param_1,unsigned int param_2,int param_3,int para
             clockGetTicksAsMicroseconds(&temp_v8);
             temp_v5 = temp_v8;
             uStack_4c = uStack_3c;
-            FUN_002ad66c(&temp_v3,&temp_v5);
+            asdSaveHeaderBuildCalendarTime(&temp_v3,&temp_v5);
             param_1[0x74] = (int)temp_v3;
             param_1[0x75] = temp_v4;
             param_1[0x76] = iStack_58;

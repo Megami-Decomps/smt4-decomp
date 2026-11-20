@@ -2,14 +2,14 @@
 
 extern "C" {
 
-extern void *FUN_001a2480(void);
+extern void *nn_gxlow_CTR_IsGpuServiceAvailable(void);
 extern u32 nn_gxlow_CTR_GetGpu(void *context);
 extern u32 nn_gxlow_CTR_Gpu_SaveVramSysArea(u32 area);
 
 /* Saves the VRAM system area of the current GPU context; without one it fails with this result code. */
 u32 nn_gxlow_CTR_SaveVramSysArea(void)
 {
-    void *context = FUN_001a2480();
+    void *context = nn_gxlow_CTR_IsGpuServiceAvailable();
 
     if (context == NULL) {
         return 0x00202bf8;

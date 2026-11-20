@@ -12,7 +12,7 @@ extern unsigned char DAT_00558be8; /* 0x558be8 */
 
 /* Supplied declaration required: FUN_001213c0. */
 extern int onlineSockAddrConstruct(unsigned int *);
-extern int FUN_002eb5f4(void);
+extern int watcherGetActiveContext(void);
 /* Supplied declaration required: FUN_002f2fe8. */
 extern int _ZN9Obj5586e0C1Ev(int, unsigned char *);
 extern unsigned int FUN_002f3044(unsigned int);
@@ -46,7 +46,7 @@ int FUN_002f8574(unsigned int *param_1,unsigned int param_2,unsigned int param_3
   *(unsigned int *)(temp_v0 - 0xd8) = temp_v1;
   temp_v1 = FUN_002f3044(*(unsigned int *)(temp_v0 - 0xd4));
   *(unsigned int *)(temp_v0 - 0xdc) = temp_v1;
-  temp_v2 = FUN_002eb5f4();
+  temp_v2 = watcherGetActiveContext();
   *(int *)(temp_v0 - 4) = temp_v2 + 0xd4;
   return temp_v0 - 0x120;
 }

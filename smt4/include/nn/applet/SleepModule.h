@@ -7,7 +7,7 @@
 extern "C" {
 
 /* Marks the sleep module active; when `sleep` is nonzero, sleeps until the shell is open again. */
-void FUN_002c5434(int sleep);
+void sleepAllow(int sleep);
 
 } /* extern "C" */
 

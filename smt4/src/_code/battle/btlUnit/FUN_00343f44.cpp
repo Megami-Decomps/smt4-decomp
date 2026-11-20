@@ -48,7 +48,7 @@ typedef char BattleQueuedActionStepLayoutCheck[offsetof(BattleQueuedActionStep, 
 
 struct BtlUi;
 extern "C" {
-extern BattleVersionResources *DAT_00435d18;
+extern BattleVersionResources *g_btlAux;
 extern const BattleQueuedActionDrawDefaults DAT_00439a20;
 void FUN_003c1248(s32 mode, s32 queue, s32 actor, s32 target);
 void FUN_0023f79c(BtlMainState *state, u32 flags);
@@ -68,8 +68,8 @@ void FUN_00343f44(u32, BattleQueuedActionStep *work)
         if (work->mode != 0) {
             if (work->mode == 1) {
                 if ((state->battleFlags & 4) != 0) {
-                    if ((reinterpret_cast<BattleVersionReadinessView *>(DAT_00435d18)->flags & 0x400) != 0) {
-                        FUN_00240614(DAT_00435d18);
+                    if ((reinterpret_cast<BattleVersionReadinessView *>(g_btlAux)->flags & 0x400) != 0) {
+                        FUN_00240614(g_btlAux);
                     }
                     work->phase = 1;
                 } else {

@@ -35,7 +35,7 @@ extern unsigned int DAT_00571194; /* 0x571194 */
 /* Supplied declaration required: skillDataFindById. */
 extern int itemIsCollectedWithRelated(unsigned short);
 extern int gameProgressIsAdvanced(void);
-extern int FUN_003df57c(unsigned short, unsigned int);
+extern int skillGetCostWithRankReduction(unsigned short, unsigned int);
 extern int valueAtF0IsReady(int);
 extern int skillGetAdjustedCost(unsigned int, unsigned short);
 /* Supplied declaration required: source4CCopyHalves. */
@@ -101,7 +101,7 @@ void FUN_004e8668(int *param_1,int param_2)
       if ((temp_v1 != 0) && (skillDataFindById(), temp_v1 != 0)) {
         puVar2 = *(unsigned int **)(param_2 + 0x20);
         if (!((puVar2[1] & DAT_00571154) == 0 && (*puVar2 & DAT_00571150) == 0)) {
-          temp_v4 = FUN_003df57c(*puVar7,1);
+          temp_v4 = skillGetCostWithRankReduction(*puVar7,1);
           if (temp_v4 <= *(int *)(*(int *)(param_2 + 0x28) + 0xfc)) {
 LAB_004e8820:
             piVar3 = param_1;
@@ -128,7 +128,7 @@ LAB_004e8820:
         if ((temp_v1 != 0) && (skillDataFindById(), temp_v1 != 0)) {
           puVar2 = *(unsigned int **)(param_2 + 0x20);
           if (!((*puVar2 & DAT_00571150) == 0 && (puVar2[1] & DAT_00571154) == 0)) {
-            temp_v4 = FUN_003df57c(*puVar7,1);
+            temp_v4 = skillGetCostWithRankReduction(*puVar7,1);
             if (temp_v4 <= *(int *)(*(int *)(param_2 + 0x28) + 0xfc)) {
 LAB_004e8904:
               piVar3 = param_1;
@@ -152,7 +152,7 @@ LAB_004e8904:
         if ((temp_v1 != 0) && (skillDataFindById(), temp_v1 != 0)) {
           puVar2 = *(unsigned int **)(param_2 + 0x20);
           if (!((*puVar2 & DAT_00571150) == 0 && (DAT_00571154 & puVar2[1]) == 0)) {
-            temp_v4 = FUN_003df57c(*puVar7,1);
+            temp_v4 = skillGetCostWithRankReduction(*puVar7,1);
             if (temp_v4 <= *(int *)(*(int *)(param_2 + 0x28) + 0xfc)) {
 LAB_004e89c4:
               piVar3 = param_1;

@@ -22,7 +22,7 @@ void FUN_0047f7c0(s32 index);
 void FUN_0047f8ac(u32 id, void *target)
 {
     if (partySlotIsOccupied(saveSlotFindById((u16)id))) {
-        s32 section = FUN_0019acdc(id, 1);
+        s32 section = unitMapIdToCategory(id, 1);
 
         if (section == 4 && DAT_00573cd8[0] != 0) {
             void *resource = dataTableGet(10, section);

@@ -24,7 +24,7 @@ typedef struct DebugItemEntry {
 extern DebugItemEntry DAT_00572b20[];
 
 s32 jobIsValid(u32 job);
-void FUN_003592dc(u32 job);
+void asdListBoxJobReset(u32 job);
 void jobStop(u32 job, s32 arg);
 u32 asdListBoxCreateDefaultFlags(u32 owner, u32 kind, u32 flags, u32 extra);
 void asdListBoxAddItems(u32 list, const DebugItemEntry *items, u32 count);
@@ -38,7 +38,7 @@ void asdListBoxSetIntItem(u32 list, u32 item, s32 value, s32 minimum, s32 maximu
 void talkCtrlDebugMenuBuild(DebugMenuJob *menu, DebugSettings *settings)
 {
     if (jobIsValid(menu->list) != 0) {
-        FUN_003592dc(menu->list);
+        asdListBoxJobReset(menu->list);
         jobStop(menu->list, 0);
     }
     menu->list = asdListBoxCreateDefaultFlags(settings->listBoxHandle, 0x75, 0, 0);

@@ -4,14 +4,14 @@
 extern "C" {
 
 extern s32 g_nnCecdHandle;
-extern s32 DAT_005c1fc8;
+extern s32 g_cecdUseLocalBackend;
 
 extern u32 FUN_004302b4(u32 a, u32 b, u32 c, u32 *d);
 extern u32 FUN_00430768(u32 a, u32 b, u32 c, u32 *d);
 
 u32 FUN_00430858(u32 a, u32 b, u32 c, u32 *d)
 {
-    if (DAT_005c1fc8 != 0) {
+    if (g_cecdUseLocalBackend != 0) {
         return FUN_00430768(a, b, c, d);
     }
     if (g_nnCecdHandle != 0) {

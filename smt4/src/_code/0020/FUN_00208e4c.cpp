@@ -30,7 +30,7 @@ int FUN_002535ec(void);
 int FUN_0025363c(...);
 int FUN_00253860(...);
 int FUN_00253c70(...);
-int FUN_0025b4b0(...);
+int mapCollisionRaySegmentTest(...);
 int __hardfp_atan2f(void);
 int mathDistanceBetweenPoints(void);
 int lightOwnerRegister(...);
@@ -98,7 +98,7 @@ extern int FUN_00253968(char *);
 extern int mapEnemyIsClosestMarkedByAdjustedDistance(char *);
 /* Supplied declaration required: FUN_00253c70. */
 extern int FUN_00256550(unsigned int);
-/* Supplied declaration required: FUN_0025b4b0. */
+/* Supplied declaration required: mapCollisionRaySegmentTest. */
 /* Supplied declaration required: vec4Forward. */
 extern int spriteTemplateGetPreferredDevilId(void);
 /* Supplied declaration required: FUN_0027eee0. */
@@ -325,7 +325,7 @@ LAB_002091f4:
             mathDistanceBetweenPoints();
             in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v22 <= temp_v18) << 0x1d);
             if ((!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) &&
-               (temp_v6 = FUN_0025b4b0(&temp_v33,&temp_v39,0), temp_v6 == -1)) {
+               (temp_v6 = mapCollisionRaySegmentTest(&temp_v33,&temp_v39,0), temp_v6 == -1)) {
               if (temp_v17) {
                 temp_v6 = 0;
                 do {
@@ -409,7 +409,7 @@ LAB_002093d8:
           mathDistanceBetweenPoints();
           in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v18 <= temp_v22) << 0x1d);
           if ((!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) &&
-             (temp_v6 = FUN_0025b4b0(&temp_v33,&temp_v39,0), temp_v6 == -1)) {
+             (temp_v6 = mapCollisionRaySegmentTest(&temp_v33,&temp_v39,0), temp_v6 == -1)) {
 LAB_0020c7d0:
             *(int *)(temp_v5 + 0x303c) = *(int *)(temp_v5 + 0x303c) + 1;
             *(unsigned int *)(temp_v3 + 0xd4) = 0;
@@ -624,7 +624,7 @@ LAB_00209658:
             temp_v35 = *(float *)(temp_v3 + 0xd0);
             temp_v40 = temp_v31 + (float)temp_v23;
             temp_v34 = *(float *)(temp_v3 + 0xcc) + (float)temp_v23;
-            temp_v8 = FUN_0025b4b0(&temp_v33,&temp_v39,0);
+            temp_v8 = mapCollisionRaySegmentTest(&temp_v33,&temp_v39,0);
             if (temp_v8 == -1) {
               if (temp_v6 < 3) {
                 temp_v33 = *(float *)(temp_v3 + 200);
@@ -969,7 +969,7 @@ LAB_00209c48:
           temp_v35 = *(float *)(g_lmapScene + 0x24);
           temp_v40 = temp_v31 + 25.0f;
           temp_v34 = *(float *)(g_lmapScene + 0x20) + 25.0f;
-          temp_v6 = FUN_0025b4b0(&temp_v33,&temp_v39,0);
+          temp_v6 = mapCollisionRaySegmentTest(&temp_v33,&temp_v39,0);
           temp_v18 = (float)((unsigned long long)temp_v28 >> 0x20);
           if (temp_v6 != -1) {
             if (((*(char *)(temp_v44 + 0x3d) == '\0') && ((unsigned int)(temp_v40 - temp_v34) < 0xc1200000))
@@ -981,14 +981,14 @@ LAB_00209c48:
               temp_v37 = temp_v20 + temp_v22;
               temp_v38 = temp_v32;
               temp_v36 = temp_v19;
-              temp_v6 = FUN_0025b4b0(&temp_v36,&temp_v39,0);
-              if ((temp_v6 != -1) || (temp_v6 = FUN_0025b4b0(&temp_v36,&temp_v33,0), temp_v6 != -1)) {
+              temp_v6 = mapCollisionRaySegmentTest(&temp_v36,&temp_v39,0);
+              if ((temp_v6 != -1) || (temp_v6 = mapCollisionRaySegmentTest(&temp_v36,&temp_v33,0), temp_v6 != -1)) {
                 temp_v37 = temp_v20 + temp_v22;
                 temp_v36 = (unsigned int)((unsigned long long)temp_v24 >> 0x20);
                 temp_v38 = (float)temp_v28;
                 temp_v19 = temp_v36;
-                temp_v6 = FUN_0025b4b0(&temp_v36,&temp_v39,0);
-                if ((temp_v6 != -1) || (temp_v6 = FUN_0025b4b0(&temp_v36,&temp_v33,0), temp_v6 != -1))
+                temp_v6 = mapCollisionRaySegmentTest(&temp_v36,&temp_v39,0);
+                if ((temp_v6 != -1) || (temp_v6 = mapCollisionRaySegmentTest(&temp_v36,&temp_v33,0), temp_v6 != -1))
                 goto LAB_0020a4b4;
                 *(unsigned int *)(temp_v3 + 0xb8) = 8;
                 *(unsigned int *)(temp_v3 + 0xdc) = temp_v19;
@@ -1156,7 +1156,7 @@ LAB_0020a6f0:
               temp_v35 = *(float *)(g_lmapScene + 0x24);
               temp_v40 = temp_v31 + 25.0f;
               temp_v34 = *(float *)(g_lmapScene + 0x20) + 25.0f;
-              temp_v6 = FUN_0025b4b0(&temp_v33,&temp_v39,0);
+              temp_v6 = mapCollisionRaySegmentTest(&temp_v33,&temp_v39,0);
               if (temp_v6 != -1) {
                 *(unsigned int *)(temp_v3 + 0xd4) = 0;
                 temp_v6 = randNextInRange(2);
@@ -1621,7 +1621,7 @@ joined_r0x0020ae6c:
           temp_v35 = *(float *)(temp_v3 + 0x124);
           temp_v40 = *(float *)(temp_v5 + 0x18) + 25.0f;
           temp_v34 = *(float *)(temp_v3 + 0x120) + 25.0f;
-          temp_v6 = FUN_0025b4b0(&temp_v33,&temp_v39,&temp_v43);
+          temp_v6 = mapCollisionRaySegmentTest(&temp_v33,&temp_v39,&temp_v43);
           if (temp_v6 != -1) {
             *(unsigned int *)(temp_v3 + 0x11c) = temp_v43;
             *(unsigned int *)(temp_v3 + 0x120) = uStack_70;
@@ -1664,7 +1664,7 @@ LAB_0020b4ec:
           temp_v35 = *(float *)(temp_v3 + 0x124);
           temp_v40 = temp_v31 + temp_v20;
           temp_v34 = *(float *)(temp_v3 + 0x120) + temp_v20;
-          temp_v6 = FUN_0025b4b0(&temp_v33,&temp_v39,0);
+          temp_v6 = mapCollisionRaySegmentTest(&temp_v33,&temp_v39,0);
           if (temp_v6 != -1) {
             *(int *)(temp_v3 + 0xd4) = *(int *)(temp_v3 + 0xd4) + 1;
             *(unsigned int *)(temp_v3 + 0x130) = 0;
@@ -1685,7 +1685,7 @@ LAB_0020b4ec:
             temp_v35 = temp_v35 + temp_v11 * temp_v27;
             temp_v40 = temp_v40 + temp_v20;
             temp_v34 = temp_v34 + temp_v20;
-            temp_v6 = FUN_0025b4b0(&temp_v33,&temp_v39,0);
+            temp_v6 = mapCollisionRaySegmentTest(&temp_v33,&temp_v39,0);
             if (temp_v6 != -1) {
               if (*(char *)(temp_v44 + 0x3d) == '\0') {
                 temp_v39 = temp_v30;
@@ -1703,15 +1703,15 @@ LAB_0020b4ec:
                   temp_v37 = temp_v18 + temp_v20;
                   temp_v38 = temp_v32;
                   temp_v36 = temp_v19;
-                  temp_v6 = FUN_0025b4b0(&temp_v36,&temp_v39,0);
-                  if ((temp_v6 != -1) || (temp_v6 = FUN_0025b4b0(&temp_v36,&temp_v33,0), temp_v6 != -1)) {
+                  temp_v6 = mapCollisionRaySegmentTest(&temp_v36,&temp_v39,0);
+                  if ((temp_v6 != -1) || (temp_v6 = mapCollisionRaySegmentTest(&temp_v36,&temp_v33,0), temp_v6 != -1)) {
                     temp_v37 = temp_v18 + (float)((unsigned long long)temp_v24 >> 0x20);
                     temp_v36 = (unsigned int)((unsigned long long)temp_v23 >> 0x20);
                     temp_v38 = (float)temp_v24;
                     temp_v19 = temp_v36;
-                    temp_v6 = FUN_0025b4b0(&temp_v36,&temp_v39,0);
+                    temp_v6 = mapCollisionRaySegmentTest(&temp_v36,&temp_v39,0);
                     temp_v9 = (unsigned int)temp_v24;
-                    if ((temp_v6 != -1) || (temp_v6 = FUN_0025b4b0(&temp_v36,&temp_v33,0), temp_v6 != -1))
+                    if ((temp_v6 != -1) || (temp_v6 = mapCollisionRaySegmentTest(&temp_v36,&temp_v33,0), temp_v6 != -1))
                     {
                       *(unsigned int *)(temp_v3 + 100) = 1;
                       *(unsigned int *)(temp_v3 + 0x6c) = 1;
@@ -1930,7 +1930,7 @@ LAB_0020ba2c:
             temp_v35 = *(float *)(temp_v5 + 0x1c);
             temp_v40 = temp_v31 + 25.0f;
             temp_v34 = *(float *)(temp_v5 + 0x18) + 25.0f;
-            temp_v6 = FUN_0025b4b0(&temp_v33,&temp_v39,0);
+            temp_v6 = mapCollisionRaySegmentTest(&temp_v33,&temp_v39,0);
             if (temp_v6 != -1) {
               *(unsigned int *)(temp_v3 + 0xd4) = 0;
               temp_v6 = randNextInRange(2);
@@ -2102,7 +2102,7 @@ LAB_0020c014:
             temp_v40 = temp_v40 + 25.0f;
             temp_v34 = temp_v20 + 25.0f;
             temp_v33 = temp_v18;
-            temp_v6 = FUN_0025b4b0(&temp_v33,&temp_v39,0);
+            temp_v6 = mapCollisionRaySegmentTest(&temp_v33,&temp_v39,0);
             if (temp_v6 == -1) {
               temp_v18 = *(float *)(temp_v3 + 0x60) * temp_v27;
               mathRemPio2f();
@@ -2303,7 +2303,7 @@ LAB_0020a934:
         if ((int)romwright_fabs_4(*(float *)(g_lmapScene + 0x20) - temp_v31) < 0x42f00000) {
           temp_v6 = *(int *)(g_lmapScene + 0x1c);
           mathDistanceBetweenPoints();
-          if ((temp_v6 < 0x44bb8000) && (temp_v6 = FUN_0025b4b0(&temp_v33,&temp_v39,0), temp_v6 == -1))
+          if ((temp_v6 < 0x44bb8000) && (temp_v6 = mapCollisionRaySegmentTest(&temp_v33,&temp_v39,0), temp_v6 == -1))
           goto LAB_0020c7d0;
         }
         temp_v19 = 0x15;
@@ -2346,7 +2346,7 @@ LAB_0020a934:
           temp_v35 = *(float *)(g_lmapScene + 0x24);
           temp_v40 = *(float *)(temp_v3 + 0x58) + 35.0f;
           temp_v34 = *(float *)(g_lmapScene + 0x20) + 35.0f;
-          temp_v6 = FUN_0025b4b0(&temp_v33,&temp_v39,0);
+          temp_v6 = mapCollisionRaySegmentTest(&temp_v33,&temp_v39,0);
           if (temp_v6 != -1) {
             *(unsigned int *)(temp_v3 + 0xb8) = 0;
             *(unsigned int *)(temp_v3 + 0xbc) = 0;
@@ -2541,7 +2541,7 @@ LAB_0020a934:
           temp_v35 = *(float *)(g_lmapScene + 0x24);
           temp_v40 = *(float *)(temp_v3 + 0x58) + 35.0f;
           temp_v34 = *(float *)(g_lmapScene + 0x20) + 35.0f;
-          temp_v6 = FUN_0025b4b0(&temp_v33,&temp_v39,0);
+          temp_v6 = mapCollisionRaySegmentTest(&temp_v33,&temp_v39,0);
           if (temp_v6 != -1) {
             *(unsigned int *)(temp_v3 + 0xb8) = 0;
             *(unsigned int *)(temp_v3 + 0xbc) = 0;

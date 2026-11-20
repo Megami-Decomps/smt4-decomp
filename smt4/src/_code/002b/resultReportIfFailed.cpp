@@ -3,13 +3,13 @@
 
 extern "C" {
 
-extern s32 FUN_00127fac(void *stack, void *memory, u32 size);
+extern s32 addressSpaceMapApplicationMemoryBlock(void *stack, void *memory, u32 size);
 
-/* Reports the error code of FUN_00127fac (the address-space mapping of a thread's stack memory) to
+/* Reports the error code of addressSpaceMapApplicationMemoryBlock (the address-space mapping of a thread's stack memory) to
  * resultHandleFailure when it is negative. */
 void resultReportIfFailed(void *stack, void *memory, u32 size)
 {
-    s32 result = FUN_00127fac(stack, memory, size);
+    s32 result = addressSpaceMapApplicationMemoryBlock(stack, memory, size);
     bool failed = result < 0;
 
     if (failed) {

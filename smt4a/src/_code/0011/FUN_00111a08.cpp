@@ -18,7 +18,7 @@ extern signed char DAT_0059497b; /* 0x59497b */
 extern int FUN_00111910(int, int);
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-extern int FUN_002eb5f4(void);
+extern int watcherGetActiveContext(void);
 extern int FUN_002ee978(int);
 extern int wordRefsEqual_002fd432(int *, unsigned int *);
 extern int textHolderSetDefault(int);
@@ -40,7 +40,7 @@ void FUN_00111a08(int param_1)
   unsigned char *puVar5;
   
   puVar5 = temp_v3;
-  temp_v0 = FUN_002eb5f4();
+  temp_v0 = watcherGetActiveContext();
   if (temp_v0 != 0) {
     temp_v4 = *(unsigned int *)(param_1 + 0x1a0);
     piVar2 = (int *)(param_1 + 0x1ac);
@@ -49,7 +49,7 @@ void FUN_00111a08(int param_1)
       puVar6 = (unsigned char *)0x112049;
     }
     else {
-      temp_v0 = FUN_002eb5f4();
+      temp_v0 = watcherGetActiveContext();
       if (((*(int *)(temp_v0 + 0xd0) != 0) && (temp_v0 = FUN_00111910(param_1,*piVar2 + 8), temp_v0 == 0))
          && ((*(char *)(param_1 + 0x1a8) == '\0' ||
              (temp_v1 = *(unsigned int *)(*(int *)(param_1 + 0x88) + 0x30),

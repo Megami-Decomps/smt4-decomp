@@ -10,8 +10,8 @@ int onlineStringSetFromRaw(...);
 int FUN_002ea2e8(unsigned char [4]);
 int FUN_002ea3a8(unsigned char [4]);
 int FUN_002ee818(unsigned char [4], unsigned int);
-int FUN_002f76ca(...);
-int FUN_0030edec(int *, int, int);
+int stringSlotAssign(...);
+int vectorDestroyRange(int *, int, int);
 int _ZNKSt6vectorI9Obj55aff412AsdAllocatorIS0_EE4sizeEv(int *);
 int FUN_00430f5c(void);
 
@@ -33,8 +33,8 @@ extern unsigned int _ZN9Obj55aff4C1EPKt(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002ea3a8. */
 /* Supplied declaration required: FUN_002ee818. */
 extern unsigned int inlineBufferReset(unsigned char *);
-/* Supplied declaration required: FUN_002f76ca. */
-/* Supplied declaration required: FUN_0030edec. */
+/* Supplied declaration required: stringSlotAssign. */
+/* Supplied declaration required: vectorDestroyRange. */
 /* Supplied declaration required: _ZNKSt6vectorI9Obj55aff412AsdAllocatorIS0_EE4sizeEv. */
 extern int FUN_00426684(unsigned char *);
 /* Supplied declaration required: FUN_00430f5c. */
@@ -68,15 +68,15 @@ void FUN_0030745c(unsigned int param_1,int *param_2)
   else {
     temp_v0 = _ZNKSt6vectorI9Obj55aff412AsdAllocatorIS0_EE4sizeEv(param_2);
     if (temp_v0 >= 7) {
-      FUN_0030edec(param_2,*param_2 + 0x30,param_2[1]);
+      vectorDestroyRange(param_2,*param_2 + 0x30,param_2[1]);
     }
   }
   _ZN9Obj55aff4D1Ev(temp_v9);
-  FUN_002f76ca(*param_2,&LAB_00307544);
+  stringSlotAssign(*param_2,&LAB_00307544);
   FUN_002ea2e8(temp_v7);
   temp_v2 = FUN_0043126c();
   FUN_002ee818(temp_v7,temp_v2);
-  FUN_002f76ca(*param_2 + 8,temp_v8);
+  stringSlotAssign(*param_2 + 8,temp_v8);
   temp_v1 = lookupTable5B47D0(temp_v2);
   if (temp_v1 != 0) {
     onlineStringSetFromRaw(*param_2 + 0x10);
@@ -84,7 +84,7 @@ void FUN_0030745c(unsigned int param_1,int *param_2)
   temp_v2 = inlineBufferReset(temp_v7);
   FUN_00430f5c();
   FUN_002ee818(temp_v7,temp_v2);
-  FUN_002f76ca(*param_2 + 0x18,temp_v8);
+  stringSlotAssign(*param_2 + 0x18,temp_v8);
   temp_v1 = lookupTable5B44A4(temp_v2);
   if (temp_v1 != 0) {
     onlineStringSetFromRaw(*param_2 + 0x20);

@@ -32,13 +32,13 @@ static __inline void gameCountersAddPoints(u8 kind, u32 amount)
     gameCounterAdd(&gameGetCounters()->total[kind], amount);
     switch (kind) {
     case 2:
-        FUN_0040a3c8(amount);
+        questCenterCounterAddSaturating14(amount);
         break;
     case 9:
         questCenterAddPoints(amount);
         break;
     case 19:
-        FUN_0040a378(amount);
+        questCenterCounterAddSaturating1A(amount);
         break;
     case 38:
         gameAddPointsClamped(amount);

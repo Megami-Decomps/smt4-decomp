@@ -19,11 +19,11 @@ extern "C" {
 extern BtlAuxA *g_btlAux;
 extern StageHeightRecord DAT_00529780[];
 s32 pairedAvailabilityGetState(u32 slot);
-s32 FUN_00163e84(u32 slot);
+s32 screenFaderIsSettled(u32 slot);
 s32 btlStageGetModeIndex(u32 context);
 void FUN_004f5238(BtlAuxA *context, u32 first, u32 second, u32 kind,
                   u32 enabled, u32 mode, u32 flags, u32 active, u32 extra, f32 x, f32 y);
-void FUN_004a9d1c(BtlUiA *ui);
+void btlUiEnterStateEntryStartup(BtlUiA *ui);
 s32 dialogIsActive(void);
 void dialogClose(s32 mode);
 s32 btlUiIsIdleB(BtlUiA *ui);
@@ -42,7 +42,7 @@ void battleAdvanceEntryStartup(EntryStartupStep *step)
             if (index >= 0)
                 height = DAT_00529780[index].height;
             FUN_004f5238(g_btlAux, 0, 0, 9, 0, 6, 0, 1, 0, 0.0f, height);
-            FUN_004a9d1c(g_btlUiBlock);
+            btlUiEnterStateEntryStartup(g_btlUiBlock);
             if (dialogIsActive())
                 dialogClose(1);
             ++step->phase;
@@ -53,7 +53,7 @@ void battleAdvanceEntryStartup(EntryStartupStep *step)
             ++step->phase;
         }
     } else if (step->phase == 2) {
-        if (FUN_00163e84(0)) {
+        if (screenFaderIsSettled(0)) {
             btlStageResetAndClearCameraFlag(g_btlAux);
             partyModelSlotsLoad(btlGetMainState());
             ++step->phase;

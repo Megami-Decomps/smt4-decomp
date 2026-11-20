@@ -5,13 +5,13 @@ extern "C" {
 
 void battleSelectButtonHelpPreset(int);
 int playSceneSetState(...);
-extern int FUN_001eb82c(void);
+extern int buttonHelpIsStateActive(void);
 
 void FUN_002dc464(PlayScene *scene)
 {
     scene->unk307F = 0;
     if (scene->state == 0) {
-        if (FUN_001eb82c() == 0) {
+        if (buttonHelpIsStateActive() == 0) {
             battleSelectButtonHelpPreset(0);
         }
         playSceneSetState(scene, 0xe, 1);

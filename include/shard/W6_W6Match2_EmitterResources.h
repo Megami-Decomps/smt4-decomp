@@ -30,10 +30,21 @@ struct EmitterArguments {
     u8 data[0x24]; // 0x00
 };
 
+struct EffParticleParam;
+
 struct EmitterResourceRequest {
     u8 unk00[0x0c];            // 0x00
-    EmitterArguments arguments; // 0x0c
+    union {
+        EmitterArguments arguments; // 0x0c
+        struct {
+            u8 unk0c[0x20];
+            /* 0x2C */ EffParticleParam *parameter; /* the particle parameters to copy */
+        } particle;
+    };
     EmitterSource* source;      // 0x30
 };
+typedef char EmitterResourceRequestLayoutCheck[offsetof(EmitterResourceRequest, arguments) == 0x0C &&
+    offsetof(EmitterResourceRequest, particle.parameter) == 0x2C &&
+    offsetof(EmitterResourceRequest, source) == 0x30 ? 1 : -1];
 
 #endif

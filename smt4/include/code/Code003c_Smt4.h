@@ -12,6 +12,6 @@ void FUN_003c2e0c(u32 a, u32 b);
 
 void NaviMain_ResetFlags(Flags *flags, u8 value);
 
-u16 FUN_003c9948(LeveledLists *owner, s32 list, u8 level);
+u16 fusionFindClosestLevelEntry(LeveledLists *owner, s32 list, u8 level);
 
 } /* extern "C" */

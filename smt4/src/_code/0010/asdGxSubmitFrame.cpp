@@ -3,38 +3,39 @@
 extern "C" {
 void asdGxCommandListFlip(void);
 void asdGxCommandListBindBack(void);
-void FUN_0010ec90(s32, u32);
-void FUN_00123934(void);
-void FUN_002bdb44(void);
-void asdGxBindCmdlistAt(void *, s32);
-void FUN_002bf0d8(void);
+void asdGxSwapDisplayBuffers(s32 refresh, u32 stereo);
+void asdGxWaitForPreviousFrame(void);
+void asdGxFlushCommandBuffer(void);
+void asdGxBindCmdlistAt(void *lists, s32 index);
+void asdGxCheckError(void);
 void nn_gxlow_CTR_FlushDataCacheForward(u32, u32);
 void asdModelResetCommandBuffer(void);
 void nngxRunCmdlist(void);
-u32 FUN_002c3984(void);
+u32 nnosGetHeapSize(void);
 u32 nnosGetHeapBase(void);
 }
 
-/* Flush recorded GPU data, submit this frame, and flip the command-list buffers. */
-extern "C" void asdGxSubmitFrame(u32 frame)
+/* Submits the frame: flushes the heap from the data cache, runs the frame's command list, flips the
+ * command lists and swaps the display buffers (the right eye's own buffer when `stereo`). */
+extern "C" void asdGxSubmitFrame(u32 stereo)
 {
-    FUN_002bdb44();
+    asdGxFlushCommandBuffer();
     asdGxBindCmdlistAt(g_asdGxPresets.commandLists, g_asdGxPresets.currentList == 0);
-    FUN_00123934();
+    asdGxWaitForPreviousFrame();
     asdModelResetCommandBuffer();
     asdGxCommandListBindBack();
-    u32 bytes = FUN_002c3984();
-    u32 heap = nnosGetHeapBase();
-    nn_gxlow_CTR_FlushDataCacheForward(heap, bytes);
+    u32 heapSize = nnosGetHeapSize();
+    u32 heapBase = nnosGetHeapBase();
+    nn_gxlow_CTR_FlushDataCacheForward(heapBase, heapSize);
     asdGxBindCmdlistAt(g_asdGxPresets.commandLists, g_asdGxPresets.currentList);
-    FUN_002bf0d8();
+    asdGxCheckError();
     nngxRunCmdlist();
     g_asdGxPresets.currentList = 1 - g_asdGxPresets.currentList;
     asdGxCommandListFlip();
     asdGxBindCmdlistAt(g_asdGxPresets.commandLists, g_asdGxPresets.currentList);
     if (g_asdGxPresets.displayMode == 0) {
-        FUN_0010ec90(0, frame);
+        asdGxSwapDisplayBuffers(0, stereo);
     } else {
-        FUN_0010ec90(1, frame);
+        asdGxSwapDisplayBuffers(1, stereo);
     }
 }

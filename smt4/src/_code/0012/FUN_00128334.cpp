@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00128334` (_code @ 0x128334, 0x9c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "code/Code002c_Result.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -9,8 +10,7 @@ int asdFatalError(void);
 extern unsigned char DAT_00465710; /* 0x465710 */
 extern int DAT_00472a50; /* 0x472a50 */
 
-extern unsigned int asdModelForwardChecked(unsigned int *, char *, unsigned int, unsigned int);
-extern int FUN_002c1398(void);
+extern unsigned int srvGetServiceHandle(unsigned int *, char *, unsigned int, unsigned int);
 extern unsigned int libc_strlen(char *);
 /* Supplied declaration required: asdFatalError. */
 
@@ -24,7 +24,7 @@ unsigned int FUN_00128334(void)
   unsigned int temp_v2;
   
   if ((*(int *)((unsigned char *)&DAT_00465710 + 0x4)) == 0) {
-    temp_v0 = FUN_002c1398();
+    temp_v0 = srvInitialize();
     if (temp_v0 < 0) {
       asdFatalError();
     }
@@ -33,7 +33,7 @@ unsigned int FUN_00128334(void)
     }
     else {
       temp_v1 = libc_strlen("cfg:u");
-      temp_v2 = asdModelForwardChecked((unsigned int *)&DAT_00472a50,"cfg:u",temp_v1,0);
+      temp_v2 = srvGetServiceHandle((unsigned int *)&DAT_00472a50,"cfg:u",temp_v1,0);
       if ((temp_v2 & 0x80000000) != 0) {
         temp_v2 = 0xd92103fb;
       }

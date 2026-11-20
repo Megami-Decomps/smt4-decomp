@@ -2,15 +2,15 @@
 #include "shard/W6_W6Match4_RegisterCommands.h"
 
 extern "C" {
-extern const RegisterCommandData DAT_0053d500;
+extern const RegisterCommandData g_gpuCommandTemplates;
 void gpuSubmitCommandBlock(const void *commands, u32 byteCount);
 
 // Submit the preset register sequence with its first value selected by the caller.
 void FUN_00186948(u32 value)
 {
     RegisterCommandPacket packet;
-    packet.head = DAT_0053d500.head;
-    packet.tail = DAT_0053d500.tail;
+    packet.head = g_gpuCommandTemplates.head;
+    packet.tail = g_gpuCommandTemplates.tail;
     packet.value = value << 8;
     gpuSubmitCommandBlock(&packet, sizeof(packet));
 }

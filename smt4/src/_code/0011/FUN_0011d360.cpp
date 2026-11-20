@@ -4,14 +4,14 @@
 extern "C" {
 extern u32 DAT_004656b0;
 extern u32 DAT_0040b730;
-void FUN_002c131c(s32 result, u32 location, u32 failed);
+void errThrowFatal(s32 result, u32 location, u32 failed);
 }
 
 static __inline void checkResult(s32 result, u32 location)
 {
     u32 failed = static_cast<u32>(result) >> 31;
     if (failed)
-        FUN_002c131c(result, location, failed);
+        errThrowFatal(result, location, failed);
 }
 
 extern "C" {

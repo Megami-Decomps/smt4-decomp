@@ -15,12 +15,12 @@ typedef struct Scene003849d0 {
 } Scene003849d0;
 
 s32 scrScriptProcessStartMappedEntry(Scene003849d0 *scene, const char *name);
-void FUN_002636d0(s32 value);
+void buttonHelpSetPanelState(s32 value);
 s32 buttonHelpResetSlots(void);
 s32 msgWindowReset(void);
 void slotSetRequest(s32 a, s32 b, s32 c);
 void buttonHelpSetPreset(s32 preset);
-s32 FUN_002c1658(s32 value, s32 mode);
+s32 inputQueryButtonState(s32 value, s32 mode);
 s32 scrRunOpcodesStub(u32 handle);
 s32 buttonHelpStateIsNot3(void);
 s32 screenFadeIsBusy(void);
@@ -43,7 +43,7 @@ void qcEndSceneStep(Scene003849d0 *scene)
             scene->step = 0;
         }
     } else {
-        FUN_002636d0(0);
+        buttonHelpSetPanelState(0);
         if (scrRunOpcodesStub(scene->handle->id) == 2) {
             slotSetRequest(0, 10, 0xff);
             slotSetRequest(1, 10, 0xff);
@@ -51,7 +51,7 @@ void qcEndSceneStep(Scene003849d0 *scene)
             scene->step = scene->step + 1;
             return;
         }
-        if (FUN_002c1658(1, 1) != 0 && messageMainIsWindowActive() != 0) {
+        if (inputQueryButtonState(1, 1) != 0 && messageMainIsWindowActive() != 0) {
             msgWindowReset();
         }
     }

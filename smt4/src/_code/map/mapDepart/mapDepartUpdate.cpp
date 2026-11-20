@@ -40,7 +40,7 @@ u32 unlockFlagTest(u32 id);
 /* Lists the relics found under a search record's mark bit. */
 u32 FUN_001f8da8(s32 markBit, u32 *ids, u8 *isNew, s32 *count);
 void FUN_00273358(u32 handle);
-s32 FUN_0027ee9c(void);
+s32 inputConfirmPressed(void);
 s32 inputIsQuestMenuPressed(void);
 void mapIfRequestRecordById(s32 id);
 void entrySetParams(s32 id, u16 first, u16 second);
@@ -230,7 +230,7 @@ s32 mapDepartUpdate(u32 job)
             }
         }
         if (work->listDone) {
-            if (FUN_0027ee9c() || inputIsQuestMenuPressed()) {
+            if (inputConfirmPressed() || inputIsQuestMenuPressed()) {
                 FUN_00273358(0xFFFFFFFF);
                 work->listActive = 0;
                 work->promptActive = 0;

@@ -8,7 +8,7 @@ extern NnSndInitialization g_sndSystemState;
 extern NnSndMasterManager g_nnSndMasterManager;
 extern NnSndVoiceManager g_nnSndVoiceManager;
 extern DspsndState g_dspsndState;
-s32 FUN_00129214(DspsndState *state, u32 mode);
+s32 nn_snd_CTR_Dspsnd_Initialize(DspsndState *state, u32 mode);
 void nnSndMasterManagerSetMode(NnSndMasterManager *manager, s8 value);
 void FUN_00128e20(NnSndMasterManager *manager);
 void nn_snd_CTR_VoiceManager_Initialize(NnSndVoiceManager *manager);
@@ -25,11 +25,11 @@ s32 dspsndInitializeManagers(void)
     if (g_sndSystemState.initialized != 0) {
         return 0x0820ABF9;
     }
-    s32 result = (s32)FUN_002c1398();
+    s32 result = (s32)srvInitialize();
     if (nnResultIsFailure(result)) {
         return result;
     }
-    result = FUN_00129214(&g_dspsndState, 0);
+    result = nn_snd_CTR_Dspsnd_Initialize(&g_dspsndState, 0);
     if (nnResultIsFailure(result)) {
         return result;
     }

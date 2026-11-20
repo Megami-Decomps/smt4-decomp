@@ -71,7 +71,7 @@ extern int DAT_00580c90; /* 0x580c90 */
 
 
 
-extern unsigned char DAT_005f32a0; /* 0x5f32a0 */
+extern unsigned char g_recordTable; /* 0x5f32a0 */
 
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
@@ -161,10 +161,10 @@ void FUN_00311b74(void)
               temp_v7 = 0;
               do {
                 temp_v4 = temp_v7 * 0xc + temp_v6 * 0x17c;
-                if ((temp_v15 * *(float *)(&DAT_005f32a0 + temp_v4 + 0x7c) +
-                     (temp_v10 + temp_v22) * *(float *)(&DAT_005f32a0 + temp_v4 + 0x80) +
-                    in_s2 * *(float *)(&DAT_005f32a0 + temp_v4 + 0x84)) -
-                    *(float *)(&DAT_005f32a0 + temp_v7 * 4 + temp_v6 * 0x17c + 0xc4) < temp_v19)
+                if ((temp_v15 * *(float *)(&g_recordTable + temp_v4 + 0x7c) +
+                     (temp_v10 + temp_v22) * *(float *)(&g_recordTable + temp_v4 + 0x80) +
+                    in_s2 * *(float *)(&g_recordTable + temp_v4 + 0x84)) -
+                    *(float *)(&g_recordTable + temp_v7 * 4 + temp_v6 * 0x17c + 0xc4) < temp_v19)
                 goto LAB_00312644;
                 temp_v7 = temp_v7 + 1;
               } while (temp_v7 < 6);
@@ -365,10 +365,10 @@ void FUN_00311b74(void)
             temp_v4 = 0;
             do {
               temp_v2 = temp_v4 * 0xc + temp_v3;
-              if ((temp_v8 * *(float *)(&DAT_005f32a0 + temp_v2 + 0x88) +
-                   (temp_v10 + temp_v20) * *(float *)(&DAT_005f32a0 + temp_v2 + 0x8c) +
-                  temp_v9 * *(float *)(&DAT_005f32a0 + temp_v2 + 0x90)) -
-                  *(float *)(&DAT_005f32a0 + temp_v4 * 4 + temp_v3 + 200) < temp_v19) {
+              if ((temp_v8 * *(float *)(&g_recordTable + temp_v2 + 0x88) +
+                   (temp_v10 + temp_v20) * *(float *)(&g_recordTable + temp_v2 + 0x8c) +
+                  temp_v9 * *(float *)(&g_recordTable + temp_v2 + 0x90)) -
+                  *(float *)(&g_recordTable + temp_v4 * 4 + temp_v3 + 200) < temp_v19) {
                 *(unsigned short *)(temp_v3 + 0x5f341a) = 0;
                 goto LAB_00312644;
               }

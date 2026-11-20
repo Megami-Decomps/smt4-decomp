@@ -1,0 +1,87 @@
+/* NON_MATCHING: inlined price-return paths use fewer saved registers and reload constants on demand; common money-settlement block placement differs. */
+#include "gamedata/PartyMoney.h"
+#include "camp/Config/Config.h"
+#include "gamedata/EquipmentRecord.h"
+#include "gamedata/ConsumableRecord.h"
+
+struct InventoryTransactionItem {
+    u16 id;
+    union {
+        u16 priceFlags;
+        struct {
+            u16 flags : 2;
+            u16 percent : 8;
+            u16 remaining : 6;
+        } pricing;
+    };
+};
+typedef char InventoryTransactionItemSizeCheck[sizeof(InventoryTransactionItem) == 4 ? 1 : -1];
+// The add-on record's sale price.
+struct ContentTransactionPrice {
+    u8 prefix[0x2C];
+    s32 sale;
+};
+
+extern "C" {
+u32 aocEntryGetKind(u32 id);
+ContentTransactionPrice *aocRecordLookup84(u32 id);
+void saveFlagClearOrSubtractCounter(u32 id, s32 quantity);
+void saveFlagSetOrAddCounter(u32 id, u32 quantity);
+void gameCounterAddSaturating(s32 counter, s32 amount);
+}
+
+static __inline s32 inventoryGetTransactionPrice(u16 id, bool selling)
+{
+    switch (aocEntryGetKind(id)) {
+    case 1: {
+        const ConsumableRecord *record = itemTableGetItemRecord(id);
+        return record != NULL ? (selling ? record->sellPrice : record->buyPrice) : 99999999;
+    }
+    case 2: case 3: case 4: case 5: case 6: case 7: case 8: {
+        const EquipmentRecord *record = itemTableGetEquipmentRecord(id);
+        return record != NULL ? (selling ? record->sellPrice : record->buyPrice) : 99999999;
+    }
+    case 10:
+        if (selling) {
+            const ContentTransactionPrice *record = aocRecordLookup84(id);
+            return record != NULL ? record->sale : 99999999;
+        }
+        break;
+    }
+    return 0;
+}
+
+extern "C" void inventoryApplyTransaction(const InventoryTransactionItem *item, s32 quantity, s32 settleMoney)
+{
+    if (item->id == 0)
+        return;
+    if (quantity < 0) {
+        saveFlagClearOrSubtractCounter(item->id, -quantity);
+        if (!settleMoney)
+            return;
+        s32 price = inventoryGetTransactionPrice(item->id, true);
+        if (item->priceFlags & 2)
+            price = (s32)((u32)item->pricing.percent * price) / 100;
+        s32 amount = (s32)((u32)price * -quantity);
+        partyMoneyAddForward(amount);
+        if (amount >= 0)
+            gameCounterAddSaturating(31, amount);
+        else
+            gameCounterAddSaturating(30, -amount);
+    } else {
+        saveFlagSetOrAddCounter(item->id, quantity);
+        if (!settleMoney)
+            return;
+        s32 price = inventoryGetTransactionPrice(item->id, false);
+        if (item->priceFlags & 2)
+            price = (s32)((u32)item->pricing.percent * price) / 100;
+        if (FUN_002973ec() == 2)
+            price = (s32)((u32)price * 3);
+        s32 amount = (s32)((0u - (u32)price) * quantity);
+        partyMoneyAddForward(amount);
+        if (amount >= 0)
+            gameCounterAddSaturating(31, amount);
+        else
+            gameCounterAddSaturating(30, -amount);
+    }
+}

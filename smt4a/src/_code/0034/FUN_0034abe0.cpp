@@ -15,18 +15,18 @@ extern "C" {
 int uiDrawItemOrStatusIcon(...);
 int FUN_0020caec(...);
 
-int FUN_0014bf3c(...);
+int demonGetRaceLabel(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
-int FUN_00180310(...);
+int statRowDrawValueImpl(...);
 int texDrawTableEntryAtStoredOrigin(...);
 int gxResetColorQuadToWhite(void);
 int fontMeasureLineAdvance(...);
 int nkmBaseGetRecord(void);
 int drawSetColorFromRGBA8(...);
 int slotRecordFindById(...);
-int FUN_002a4b28(...);
+int compendiumEntryIsRegistered(...);
 int uiDrawListScrollBar(...);
 int gxSetMirroredClippedScissor(...);
 int contentEntryFindById(void);
@@ -78,11 +78,11 @@ extern unsigned char LAB_0034c1dc; /* 0x34c1dc */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0014bf3c. */
+/* Supplied declaration required: demonGetRaceLabel. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00180310. */
+/* Supplied declaration required: statRowDrawValueImpl. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
@@ -97,7 +97,7 @@ extern int resourceRunEmbeddedOperationIfUnblocked(unsigned int *);
 extern int resourceRunOperationIfUnblocked(unsigned int *);
 extern int listCursorGetRowOfChildIfUnblocked(unsigned int *);
 extern int listCursorGetRowIfUnblocked(unsigned int *);
-/* Supplied declaration required: FUN_002a4b28. */
+/* Supplied declaration required: compendiumEntryIsRegistered. */
 /* Supplied declaration required: uiDrawListScrollBar. */
 extern int uiSearchSecondary(unsigned int *);
 extern int uiSearchPrimary(unsigned int *);
@@ -189,14 +189,14 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
       texDrawTableEntryAtStoredOrigin(2,0x1a,0x4a,param_1,param_2,0x65);
       temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x253));
       temp_v10 = computeCountLimit();
-      FUN_00180310(0,(int)&param_1->field_0x0 + (int)*(short *)(temp_v2 + 8),
+      statRowDrawValueImpl(0,(int)&param_1->field_0x0 + (int)*(short *)(temp_v2 + 8),
                    *(short *)(temp_v2 + 10) + param_2,1,3,0x65,&LAB_0034b064,temp_v10);
     }
     else {
       texDrawTableEntryAtStoredOrigin(2,0x1a,0x4a,param_1,param_2,0x65);
       temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x4c));
       temp_v10 = computeCountLimit();
-      FUN_00180310(0,(int)&param_1->field_0x0 + (int)*(short *)(temp_v2 + 8),
+      statRowDrawValueImpl(0,(int)&param_1->field_0x0 + (int)*(short *)(temp_v2 + 8),
                    *(short *)(temp_v2 + 10) + param_2,1,2,0x65,&LAB_0034b064,temp_v10);
     }
   }
@@ -282,7 +282,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
         }
         else {
           temp_v11 = 0xffffffff;
-          temp_v10 = (int)FUN_00180114(*puVar7);
+          temp_v10 = (int)table01RecordLookupForContent(*puVar7);
           sprintf((char *)temp_v13,(const char *)&LAB_0034b684,temp_v10);
         }
         temp_v10 = 0xffffffff;
@@ -308,7 +308,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         textDrawString(1,temp_v10,temp_v13,(int)*(short *)(temp_v8 + 8));
         temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xdd));
-        temp_v10 = FUN_0014bf3c(*puVar7,0);
+        temp_v10 = demonGetRaceLabel(*puVar7,0);
         sprintf((char *)temp_v13,(const char *)&LAB_0034b684,temp_v10);
         puVar9 = temp_v13;
         fontMeasureLineAdvance(puVar9,2);
@@ -325,7 +325,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
         if ((unsigned short)puVar7[3] >= 100) {
           texDrawTableEntryAtStoredOrigin(2,0x1a,0x26e,temp_v6,temp_v2,0x6a);
           temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x25c));
-          FUN_00180310(0,(int)&param_1->field_0x0 +
+          statRowDrawValueImpl(0,(int)&param_1->field_0x0 +
                          (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v8 + 8),
                        (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,1,3,0x6f
                        ,&LAB_0034b68c,puVar7[3]);
@@ -333,7 +333,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
         else {
           texDrawTableEntryAtStoredOrigin(2,0x1a,0xd8,temp_v6,temp_v2,0x6a);
           temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xdf));
-          FUN_00180310(0,(int)&param_1->field_0x0 +
+          statRowDrawValueImpl(0,(int)&param_1->field_0x0 +
                          (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v8 + 8),
                        (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,1,2,0x6f
                        ,&LAB_0034b68c,puVar7[3]);
@@ -375,7 +375,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
         nkmBaseGetRecord();
         temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,temp_v9 + 0xe3));
         temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xdb));
-        temp_v6 = FUN_002a4b28(*puVar7);
+        temp_v6 = compendiumEntryIsRegistered(*puVar7);
         if (temp_v6 == 0) {
           texDrawCompositeSprite(2,0x1a,8,(int)&param_1->field_0x0 +
                                 (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v8 + 8),
@@ -436,7 +436,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
           }
         }
         temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xf9));
-        temp_v5 = FUN_0014bf3c(*psVar6,0);
+        temp_v5 = demonGetRaceLabel(*psVar6,0);
         sprintf((char *)temp_v13,(const char *)&LAB_0034b684,temp_v5);
         puVar9 = temp_v13;
         fontMeasureLineAdvance(puVar9,2);
@@ -452,7 +452,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
           sprintf((char *)temp_v13,(const char *)&LAB_0034b680);
         }
         else {
-          temp_v5 = (int)FUN_00180114(*psVar6);
+          temp_v5 = (int)table01RecordLookupForContent(*psVar6);
           sprintf((char *)temp_v13,(const char *)&LAB_0034b684,temp_v5);
         }
         VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,
@@ -464,14 +464,14 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
         drawSetColorFromRGBA8(temp_v11);
         if ((unsigned short)psVar6[3] >= 100) {
           temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x25f));
-          FUN_00180310(0,(int)&param_1->field_0x0 +
+          statRowDrawValueImpl(0,(int)&param_1->field_0x0 +
                          (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v8 + 8),
                        (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,1,3,0x6f
                        ,&LAB_0034b68c,psVar6[3]);
         }
         else {
           temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xf7));
-          FUN_00180310(0,(int)&param_1->field_0x0 +
+          statRowDrawValueImpl(0,(int)&param_1->field_0x0 +
                          (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v8 + 8),
                        (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,1,2,0x6f
                        ,&LAB_0034b68c,psVar6[3]);
@@ -493,7 +493,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
                        (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,0x74);
         }
         temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xfa));
-        temp_v6 = FUN_002a4b28(*psVar6);
+        temp_v6 = compendiumEntryIsRegistered(*psVar6);
         if (temp_v6 == 0) {
           texDrawCompositeSprite(2,0x1a,8,(int)&param_1->field_0x0 +
                                 (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v8 + 8),
@@ -608,7 +608,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
     }
   }
   temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xff));
-  temp_v5 = FUN_0014bf3c(*psVar6,0);
+  temp_v5 = demonGetRaceLabel(*psVar6,0);
   sprintf((char *)temp_v13,(const char *)&LAB_0034c1c0,temp_v5);
   puVar9 = temp_v13;
   fontMeasureLineAdvance(puVar9,3);
@@ -624,7 +624,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
     sprintf((char *)temp_v13,(const char *)&LAB_0034c1c4);
   }
   else {
-    temp_v5 = (int)FUN_00180114(*psVar6);
+    temp_v5 = (int)table01RecordLookupForContent(*psVar6);
     sprintf((char *)temp_v13,(const char *)&LAB_0034c1c0,temp_v5);
   }
   VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,
@@ -636,14 +636,14 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
   drawSetColorFromRGBA8(temp_v11);
   if ((unsigned short)psVar6[3] >= 100) {
     temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x262));
-    FUN_00180310(0,(int)&param_1->field_0x0 +
+    statRowDrawValueImpl(0,(int)&param_1->field_0x0 +
                    (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v1 + 8),
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,1,3,0x83,
                  &LAB_0034c1dc,psVar6[3]);
   }
   else {
     temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xfd));
-    FUN_00180310(0,(int)&param_1->field_0x0 +
+    statRowDrawValueImpl(0,(int)&param_1->field_0x0 +
                    (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v1 + 8),
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,1,2,0x83,
                  &LAB_0034c1dc,psVar6[3]);
@@ -664,7 +664,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,0x88);
   }
   temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x100));
-  temp_v9 = FUN_002a4b28(*psVar6);
+  temp_v9 = compendiumEntryIsRegistered(*psVar6);
   if (temp_v9 == 0) {
     texDrawCompositeSprite(2,0x1a,8,(int)&param_1->field_0x0 +
                           (int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8),

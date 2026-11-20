@@ -8,7 +8,7 @@ s32 aocRunByName(u32 system, s32 category, s32 id, s32 mode);
 void texDrawCompositeSprite(s32 channel, s32 category, s32 variant, u32 first, u32 second, u32 third);
 void texTableRecordCallWithParams(s32 channel, s32 category, s32 resource, u32 first, u32 second, u32 third);
 void texBindBindTableNode(u32 system, s32 id, s32 channel, s32 category, s32 resource, u32 first, u32 second, u32 third);
-void FUN_00471244(u32 system, s32 id, s32 channel, s32 resource, s32 mode, u32 first, u32 second, u32 third);
+void fieldPlacementGroupSpawn(u32 system, s32 id, s32 channel, s32 resource, s32 mode, u32 first, u32 second, u32 third);
 
 void devilDrawResolvedTexture(s32 id, u32 first, u32 second, u32 third, s32 resolve)
 {
@@ -41,7 +41,7 @@ void devilDrawResolvedTexture(s32 id, u32 first, u32 second, u32 third, s32 reso
             if (category == 25)
                 texBindBindTableNode(g_aocSystem, id, 2, category, resource, first, second, third);
             else
-                FUN_00471244(g_aocSystem, id, 2, resource, 0, first, second, third);
+                fieldPlacementGroupSpawn(g_aocSystem, id, 2, resource, 0, first, second, third);
         } else {
             if (variant > 0)
                 texDrawCompositeSprite(2, category, variant, first, second, third);

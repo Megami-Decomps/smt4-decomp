@@ -7,7 +7,7 @@ void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void efctSetSpeed(f32 speed);
 u32 renderCtxPackPassFlags(u32 mode, u32 option);
 void renderCtxResetColorScale(RenderCtxA *context);
-void FUN_0040307c(void *work);
+void contentListDrawRows(void *work);
 
 // Draw the content list after initialization, restoring speed, blend and color state.
 u32 contentListDraw(void *work)
@@ -22,7 +22,7 @@ u32 contentListDraw(void *work)
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
     renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
-    FUN_0040307c(work);
+    contentListDrawRows(work);
     efctSetSpeed(1.0f);
     renderStackPop(&g_renderCtx->stackA);
     context = g_renderCtx;

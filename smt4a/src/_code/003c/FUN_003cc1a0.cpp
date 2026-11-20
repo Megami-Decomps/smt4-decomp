@@ -21,7 +21,7 @@ extern u8 DAT_0059ef80[];
 void FUN_003cc1a0(Object003cc1a0 *object)
 {
     Effect003cc1a0 *effect = object->effect;
-    FUN_0031ab38(reinterpret_cast<u32 *>(effect->body), effect->value, reinterpret_cast<EffectEditorOptions *>(DAT_0059ef80 - 0xa8), reinterpret_cast<EffectEditorOptions *>(DAT_0059ef80));
+    effectEditorApplyOwnerOptionsPair(reinterpret_cast<u32 *>(effect->body), effect->value, reinterpret_cast<EffectEditorOptions *>(DAT_0059ef80 - 0xa8), reinterpret_cast<EffectEditorOptions *>(DAT_0059ef80));
 }
 
 } /* extern "C" */

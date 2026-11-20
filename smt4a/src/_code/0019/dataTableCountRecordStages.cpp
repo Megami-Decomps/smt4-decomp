@@ -5,14 +5,14 @@
 
 struct AocSystemA;
 extern "C" {
-Table04ExtraRecord *FUN_001b2e78(AocSystemA *system, u32 id);
+Table04ExtraRecord *dataTable41FindByIdImpl(AocSystemA *system, u32 id);
 s32 recordSortEntryCompareByKey(const void *left, const void *right);
 void *libc_bsearch(const void *key, const void *entries, u32 count, u32 size,
                    s32 (*compare)(const void *, const void *));
 
 static inline Table04ExtraRecord *findExtraRecord(u32 id)
 {
-    Table04ExtraRecord *record = FUN_001b2e78(g_aocSystem, id);
+    Table04ExtraRecord *record = dataTable41FindByIdImpl(g_aocSystem, id);
     if (record == NULL) {
         void *section = dataTableGet(4, 1);
         void *entries = dataTableGetEntries(section);

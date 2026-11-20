@@ -1,24 +1,27 @@
 #include "nn/Result.h"
 
 extern "C" {
-extern u32 DAT_005c149c;
-extern const char DAT_0053f514[]; // "am:app"
-s32 FUN_0016f864(void);
+extern u32 g_amAppSession;          /* the am:app session handle (0: not connected) */
+extern const char g_amAppServiceName[]; /* "am:app" */
+s32 srvInitialize(void);
 u32 libc_strlen(const char* string);
-s32 asdModelForwardChecked(u32* handle, const char* name, u32 length, u32 flags);
+s32 srvGetServiceHandle(u32* handle, const char* name, u32 length, u32 flags);
 
-// Lazily connect to the application-manager service, preserving failure results.
+/* Connects to the application-manager service "am:app" unless already connected; returns the first failure. */
 s32 nnAmConnectOnce(void)
 {
-    if (DAT_005c149c == 0) {
-        s32 result = FUN_0016f864();
-        if (nnResultIsFailure(result))
+    if (g_amAppSession == 0) {
+        s32 result = srvInitialize();
+        if (nnResultIsFailure(result)) {
             return result;
-        u32 length = libc_strlen(DAT_0053f514);
-        result = asdModelForwardChecked(&DAT_005c149c, DAT_0053f514, length, 0);
-        if (nnResultIsFailure(result))
+        }
+        u32 length = libc_strlen(g_amAppServiceName);
+        result = srvGetServiceHandle(&g_amAppSession, g_amAppServiceName, length, 0);
+        if (nnResultIsFailure(result)) {
             return result;
+        }
     }
     return 0;
 }
-}
+
+} /* extern "C" */

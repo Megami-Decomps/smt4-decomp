@@ -16,7 +16,7 @@ void *asdMemoryAllocTracked(u32 heap, u32 alignmentClass, u32 flags, u32 size, s
 void sysMemClear(void *memory, u32 size);
 NpcTableRecord *FUN_00283498(u32 id);
 
-s32 FUN_00162ea4();
+s32 eventIsSkipping();
 s32 FUN_002897cc(u32 handle);
 void FUN_0034da3c(u32 handle);
 extern const char DAT_0052f4fc[];
@@ -65,7 +65,7 @@ u32 npc2dCreatePortraitCenterJob(u32 id)
     work->fade = 0.0f;
     work->screenRegion = 5;
     work->y = (s32)work->points[1].y;
-    if (!FUN_00162ea4()) {
+    if (!eventIsSkipping()) {
         work->resourceState = 0;
         asdTMTexTablePrepareNodeImage(work->table, work->node);
         asdTMTexTablePrepareNodeImage(0x27, 0);

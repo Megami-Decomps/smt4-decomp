@@ -19,7 +19,7 @@ extern "C" {
 extern void *(*g_gfxAllocateCallback)(u32 memoryArea, u32 usage, TextureResourceHeaderView *owner, u32 size);
 void *nnnstdMemCpy(void *destination, const void *source, u32 size);
 void nn_gxlow_CTR_FlushDataCacheForward(const void *memory, u32 size);
-void FUN_002a666c(const void *source, void *destination, u32 size);
+void asdGxQueueMemoryTransfer(const void *source, void *destination, u32 size);
 
 void FUN_0036f28c(TextureResourceHeaderView *original)
 {
@@ -63,7 +63,7 @@ void FUN_0036f28c(TextureResourceHeaderView *original)
                     void *memory = g_gfxAllocateCallback(memoryArea, 0x101, original, size);
                     const void *source = image->data.get();
                     if (source != NULL) {
-                        FUN_002a666c(source, memory, size);
+                        asdGxQueueMemoryTransfer(source, memory, size);
                     }
                     image->address = memory;
                     image->memoryArea = memoryArea;

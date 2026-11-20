@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00189a38(...);
+int errThrowFatal(...);
 int FUN_0018b70c(...);
 int nn_applet_CTR_detail_OpenSession(...);
 int FUN_0019a300(...);
 int nn_os_LightEvent_Initialize(...);
-int FUN_001a1204(...);
+int resultPostErrorReport(...);
 int FUN_001ab838(...);
 int nn_os_LightEvent_Wait(...);
 int svcSleepThread(...);
@@ -24,7 +24,7 @@ typedef struct {
 extern unsigned char LAB_004c4b40; /* 0x4c4b40 */
 extern romwright_code *DAT_00589280; /* 0x589280 */
 extern int g_moduleInitialState; /* 0x58936c */
-extern signed char DAT_005894cc; /* 0x5894cc */
+extern signed char g_resultDebugMode; /* 0x5894cc */
 extern unsigned int DAT_005b4470; /* 0x5b4470 */
 extern int DAT_005b4480; /* 0x5b4480 */
 extern unsigned char DAT_0062d200; /* 0x62d200 */
@@ -36,13 +36,13 @@ extern unsigned int g_moduleStateCriticalSection; /* 0x62d280 */
 extern unsigned char bRam1ff80014; /* 0x1ff80014 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_00189a38. */
+/* Supplied declaration required: errThrowFatal. */
 /* Supplied declaration required: FUN_0018b70c. */
 /* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
 extern int FUN_0018bab4(void);
 /* Supplied declaration required: FUN_0019a300. */
 /* Supplied declaration required: nn_os_LightEvent_Initialize. */
-/* Supplied declaration required: FUN_001a1204. */
+/* Supplied declaration required: resultPostErrorReport. */
 /* Supplied declaration required: FUN_001ab838. */
 /* Supplied declaration required: nn_os_LightEvent_Wait. */
 /* Supplied declaration required: svcSleepThread. */
@@ -67,7 +67,7 @@ void nn_applet_CTR_detail_NotifyToWait(void)
   FUN_0018b70c();
   temp_v0 = FUN_0018bab4();
   if (temp_v0 < 0) {
-    FUN_00189a38(temp_v0,0x18b958);
+    errThrowFatal(temp_v0,0x18b958);
   }
   temp_v0 = DAT_005b4480;
   if (DAT_005b4480 == 0) {
@@ -78,7 +78,7 @@ void nn_applet_CTR_detail_NotifyToWait(void)
     DAT_005b4480 = 0;
   }
   if (temp_v0 < 0) {
-    FUN_00189a38(temp_v0,0x18b994);
+    errThrowFatal(temp_v0,0x18b994);
   }
   if ((DAT_005b4470 == 0) || (software_interrupt(0x14), -1 < (int)DAT_005b4470)) {
     return;
@@ -87,9 +87,9 @@ void nn_applet_CTR_detail_NotifyToWait(void)
   if ((DAT_005b4470 & 0x80000000) != 0) {
     temp_v1 = temp_v1 - 0x20;
   }
-  if ((bRam1ff80014 & 1) == 0 && DAT_005894cc == '\0') {
+  if ((bRam1ff80014 & 1) == 0 && g_resultDebugMode == '\0') {
     if (temp_v1 == 0xffffffff) {
-      FUN_001a1204(DAT_005b4470,0,in_lr);
+      resultPostErrorReport(DAT_005b4470,0,in_lr);
     }
     pcVar1 = DAT_00589280;
     if (DAT_00589280 != (romwright_code *)0x0) {

@@ -15,7 +15,7 @@ extern TitleDebugBackground *g_titleDbgBg;
 s32 renderCtxPackPassFlags(s32 mode, s32 flags);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
-f32 FUN_00182884(s32 mode, void *display, f32 x, f32 y);
+f32 asdTextDrawDebugSlotString(s32 mode, void *display, f32 x, f32 y);
 
 /* Draws a white debug label on the title background. */
 static __inline void drawDebugLabel(const char *text, f32 x, f32 y)
@@ -42,7 +42,7 @@ u32 titleDbgBgDraw(void)
             drawDebugLabel("\x82\x71\x82\x6e\x82\x6c\x83\x8d\x81\x5b\x83\x68", 296.0f, 194.0f);
         }
         drawDebugLabel("\x90\x5e\x81\x45\x8f\x97\x90\x5f\x93\x5d\x90\xb6\x87\x57\x82\x65", 268.0f, 208.0f);
-        FUN_00182884(1, background->display, 228.0f, 228.0f);
+        asdTextDrawDebugSlotString(1, background->display, 228.0f, 228.0f);
     }
     return 0;
 }

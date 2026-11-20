@@ -52,7 +52,7 @@ typedef struct SkillContext {
     /* 0x38 */ u8 marks[1];
 } SkillContext;
 
-s32 FUN_0029e9cc(u16 recordId);
+s32 itemIsCollectedWithRelated(u16 recordId);
 int categoryMaskFromId(u32 id);
 s32 FUN_00228220(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, s32 c, u32 d, u8 *out);
 s32 FUN_0022899c(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, u32 c);
@@ -105,7 +105,7 @@ u32 FUN_002277d4(u32 unused, SkillContext *context, SkillRecord *skill, SkillTar
     for (i = 0; i < count; i++) {
         s32 blocked = 0;
 
-        if ((targets[i]->flags & 0x400) != 0 && FUN_0029e9cc(targets[i]->recordId) != 0) {
+        if ((targets[i]->flags & 0x400) != 0 && itemIsCollectedWithRelated(targets[i]->recordId) != 0) {
             context->outcome->state = 2;
             context->outcome->skillId = skill->id;
             s32 result = FUN_00228220(skill->id, 0, 2, context->caster->slot, targets[i]->slot, 0, 1, &out);

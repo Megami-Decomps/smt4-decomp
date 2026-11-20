@@ -5,9 +5,9 @@ extern u8 DAT_0057f598;
 extern u8 DAT_0057f5d8;
 
 void fontPoolCreate(s32 count);
-s32 FUN_0014190c(const char *path);
-void FUN_00140e6c(s32 slot, s32 font);
-void FUN_0013f188(s32 slot, f32 offset);
+s32 fontFileLoadSync(const char *path);
+void asdFontLoadSlot(s32 slot, s32 font);
+void fontSetBaselineOffset(s32 slot, f32 offset);
 void workRangeSetLowerBound(s32 value);
 void FUN_00140708(s32 value);
 void FUN_001409d4(u8 *table);
@@ -25,24 +25,24 @@ void asdTextSetDefaultMode(u32 mode);
 void FUN_0013cae4(void);
 void FUN_0013edc8(void);
 void FUN_0013e38c(void);
-void FUN_0013c614(void);
-void FUN_0013dadc(void);
+void messageTextSelectPortrait(void);
+void messageTextSetPortraitFrame(void);
 
 /* Sets up the text system: loads the five UI fonts, their line offsets, the default colour and
  * mode, and registers the two text slots (0xF87A, 0xF87B) with their callbacks. */
 void asdTextSystemInit(void)
 {
     fontPoolCreate(6);
-    FUN_00140e6c(1, FUN_0014190c("font/TsukuMin_9_9.bcfnt"));
-    FUN_00140e6c(2, FUN_0014190c("font/TsukuMin_12_12.bcfnt"));
-    FUN_00140e6c(3, FUN_0014190c("font/TsukuMin_14_14.bcfnt"));
-    FUN_00140e6c(4, FUN_0014190c("font/TsukuMin_16_16.bcfnt"));
-    FUN_00140e6c(5, FUN_0014190c("font/demo_font.bcfnt"));
-    FUN_0013f188(0, -10.0f);
-    FUN_0013f188(1, -2.0f);
-    FUN_0013f188(2, -3.0f);
-    FUN_0013f188(3, -3.0f);
-    FUN_0013f188(4, -3.0f);
+    asdFontLoadSlot(1, fontFileLoadSync("font/TsukuMin_9_9.bcfnt"));
+    asdFontLoadSlot(2, fontFileLoadSync("font/TsukuMin_12_12.bcfnt"));
+    asdFontLoadSlot(3, fontFileLoadSync("font/TsukuMin_14_14.bcfnt"));
+    asdFontLoadSlot(4, fontFileLoadSync("font/TsukuMin_16_16.bcfnt"));
+    asdFontLoadSlot(5, fontFileLoadSync("font/demo_font.bcfnt"));
+    fontSetBaselineOffset(0, -10.0f);
+    fontSetBaselineOffset(1, -2.0f);
+    fontSetBaselineOffset(2, -3.0f);
+    fontSetBaselineOffset(3, -3.0f);
+    fontSetBaselineOffset(4, -3.0f);
     workRangeSetLowerBound(3);
     FUN_00140708(5);
     FUN_001409d4(&DAT_0057f598);
@@ -54,8 +54,8 @@ void asdTextSystemInit(void)
     FUN_00140280(FUN_0013cae4);
     FUN_001418ec(FUN_0013edc8);
     FUN_0013f52c(FUN_0013e38c);
-    asdTextRegisterSlot(0xF87A, 1, FUN_0013c614);
-    asdTextRegisterSlot(0xF87B, 4, FUN_0013dadc);
+    asdTextRegisterSlot(0xF87A, 1, messageTextSelectPortrait);
+    asdTextRegisterSlot(0xF87B, 4, messageTextSetPortraitFrame);
     asdTextSetDefaultMode(0x8190);
 }
 

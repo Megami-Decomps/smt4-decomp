@@ -5,7 +5,7 @@ extern "C" {
 extern s8 DAT_005891a4;
 extern void FUN_00432084(void);
 extern void ipcServiceSessionRelease(void);
-extern void FUN_004265f8(void);
+extern void cecServiceSendRequest7(void);
 
 void resetFlag5891A4And65f8(void)
 {
@@ -14,7 +14,7 @@ void resetFlag5891A4And65f8(void)
         DAT_005891a4 = 0;
         ipcServiceSessionRelease();
     }
-    FUN_004265f8();
+    cecServiceSendRequest7();
 }
 
 } /* extern "C" */

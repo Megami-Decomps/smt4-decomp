@@ -6,8 +6,8 @@ extern "C" {
 
 extern unsigned char DAT_005c1be4; /* 0x5c1be4 */
 
-extern int FUN_00188c94(void);
-extern unsigned int FUN_00188ca4(void);
+extern int nnosGetHeapSize(void);
+extern unsigned int nnosGetHeapBase(void);
 
 
 int FUN_001c6da0(unsigned int param_1,int param_2)
@@ -21,8 +21,8 @@ int FUN_001c6da0(unsigned int param_1,int param_2)
   unsigned char temp_v5;
   
   temp_v3 = param_1 + param_2;
-  temp_v0 = FUN_00188ca4();
-  temp_v1 = FUN_00188c94();
+  temp_v0 = nnosGetHeapBase();
+  temp_v1 = nnosGetHeapSize();
   temp_v5 = param_1 <= temp_v0;
   temp_v4 = temp_v0 == param_1;
   temp_v2 = temp_v1 + temp_v0;

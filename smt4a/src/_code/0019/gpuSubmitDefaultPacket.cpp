@@ -18,15 +18,15 @@ struct CommandPacket {
 };
 
 extern "C" {
-extern CommandDefaults DAT_0053d500;
+extern CommandDefaults g_gpuCommandTemplates;
 void gpuSubmitCommandBlock(const CommandPacket* commands, u32 size);
 
 // Submits the default 48-byte command packet with prefix 0x100.
 void gpuSubmitDefaultPacket(void)
 {
     CommandPacket commands;
-    commands.first = DAT_0053d500.first;
-    commands.second = DAT_0053d500.second;
+    commands.first = g_gpuCommandTemplates.first;
+    commands.second = g_gpuCommandTemplates.second;
     commands.prefix = 0x100;
     gpuSubmitCommandBlock(&commands, sizeof(commands));
 }

@@ -5,7 +5,7 @@ extern "C" {
 
 void processResultSetValue(u32 value)
 {
-    DAT_004651e8.unk10 = value;
+    g_processResultState.lastResult = value;
 }
 
 } /* extern "C" */

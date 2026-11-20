@@ -11,22 +11,22 @@ typedef char NaviCallbackOffsetCheck[offsetof(NaviCallbackStateView, callbacks) 
 }
 
 extern "C" {
-extern const NaviCallbackStateView::Handler DAT_004049cc[11];
+extern const NaviCallbackStateView::Handler g_naviCallbackHandlerTable[11];
 
 // Clear all navigation handlers, then install the supported screen actions.
 void NaviMain_InitCallbacks(NaviCallbackStateView *state)
 {
     for (s32 index = 0; index < 13; ++index)
-        state->callbacks[index] = DAT_004049cc[0];
-    state->callbacks[0] = DAT_004049cc[1];
-    state->callbacks[1] = DAT_004049cc[2];
-    state->callbacks[2] = DAT_004049cc[3];
-    state->callbacks[4] = DAT_004049cc[4];
-    state->callbacks[5] = DAT_004049cc[5];
-    state->callbacks[6] = DAT_004049cc[6];
-    state->callbacks[8] = DAT_004049cc[7];
-    state->callbacks[9] = DAT_004049cc[8];
-    state->callbacks[10] = DAT_004049cc[9];
-    state->callbacks[11] = DAT_004049cc[10];
+        state->callbacks[index] = g_naviCallbackHandlerTable[0];
+    state->callbacks[0] = g_naviCallbackHandlerTable[1];
+    state->callbacks[1] = g_naviCallbackHandlerTable[2];
+    state->callbacks[2] = g_naviCallbackHandlerTable[3];
+    state->callbacks[4] = g_naviCallbackHandlerTable[4];
+    state->callbacks[5] = g_naviCallbackHandlerTable[5];
+    state->callbacks[6] = g_naviCallbackHandlerTable[6];
+    state->callbacks[8] = g_naviCallbackHandlerTable[7];
+    state->callbacks[9] = g_naviCallbackHandlerTable[8];
+    state->callbacks[10] = g_naviCallbackHandlerTable[9];
+    state->callbacks[11] = g_naviCallbackHandlerTable[10];
 }
 }

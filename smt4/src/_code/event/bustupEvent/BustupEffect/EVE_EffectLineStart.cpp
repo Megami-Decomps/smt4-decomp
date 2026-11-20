@@ -9,8 +9,8 @@ extern const char DAT_00403754[];
 extern const char DAT_00403748[];
 extern const char DAT_00403738[];
 s32 scrGetArg(s32 index);
-s32 FUN_002c1d5c(void);
-BustupEffectLineObject *FUN_00246644(u32 effect, u32 layer, u32 mode);
+s32 eventIsSkipping(void);
+BustupEffectLineObject *filterCreateByKind(u32 effect, u32 layer, u32 mode);
 s32 effLineJobUpdate(u32 job);
 void jobWorkFreeWork(u32 job);
 s32 effectLineUpdateCallback(u32 job);
@@ -22,11 +22,11 @@ void bustupCutAnimSetJobParam(u32 job);
 s32 EVE_EffectLineStart(void)
 {
     s32 duration = scrGetArg(0);
-    if (FUN_002c1d5c() == 0) {
+    if (eventIsSkipping() == 0) {
         asdDebugTrace(DAT_00403754, 199);
         EffectLineJobWork *work = (EffectLineJobWork *)asdMemAlloc(0x100, 0x100, 0, sizeof(EffectLineJobWork), 1);
         *work = EffectLineJobWork();
-        work->object = FUN_00246644(10, 7, 0);
+        work->object = filterCreateByKind(10, 7, 0);
         work->elapsed = 0.0f;
         work->duration = duration;
         u32 job = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00403748), 2, 0, 0, effLineJobUpdate, jobWorkFreeWork, reinterpret_cast<u32>(work));

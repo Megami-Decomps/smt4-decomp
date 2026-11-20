@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
+int svcWaitSynchronizationN(unsigned char *, int *, int, int, unsigned int, unsigned int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int resultHandleFailure(void);
 int software_interrupt(int);
 
@@ -15,7 +15,7 @@ typedef struct {
 } param_4_stack;
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_002c40f8. */
+/* Supplied declaration required: svcWaitSynchronizationN. */
 /* Supplied declaration required: resultHandleFailure. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -35,7 +35,7 @@ nn_snd_CTR_Dspsnd_WaitPipe_15D540
   nn_os_CriticalSection_Enter((unsigned int)(param_1 + 2));
   temp_v1 = *param_1;
   puVar1 = temp_v2;
-  FUN_002c40f8(puVar1,&temp_v1,1,0,param_3,param_4);
+  svcWaitSynchronizationN(puVar1,&temp_v1,1,0,param_3,param_4);
   if ((int)puVar1 < 0) {
     resultHandleFailure();
   }

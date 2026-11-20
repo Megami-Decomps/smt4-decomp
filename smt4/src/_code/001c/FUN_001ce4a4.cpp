@@ -25,7 +25,7 @@ extern int g_aocSystem; /* 0x433158 */
 extern int aocRunByName(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteReplaceTextureEntry. */
 extern int jobGetWork(void);
-extern int FUN_002c1d5c(void);
+extern int eventIsSkipping(void);
 
 
 unsigned int FUN_001ce4a4(void)
@@ -44,7 +44,7 @@ unsigned int FUN_001ce4a4(void)
   
   temp_v0 = jobGetWork();
   temp_v1 = 0;
-  if ((*(char *)(temp_v0 + 0x7c) != '\0') && (temp_v1 = FUN_002c1d5c(), temp_v1 == 0)) {
+  if ((*(char *)(temp_v0 + 0x7c) != '\0') && (temp_v1 = eventIsSkipping(), temp_v1 == 0)) {
     temp_v1 = aocRunByName(g_aocSystem,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14),1)
     ;
     if (temp_v1 != 0) {

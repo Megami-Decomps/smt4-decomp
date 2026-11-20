@@ -7730,3 +7730,666 @@
 001d12a0 nw_snd_internal_SequenceSoundFile_FileHeader_GetLabelBlock evidence Exact twin of smt4 nw_snd_internal_SequenceSoundFile_FileHeader_GetLabelBlock (same code in both games, tools/shared.py)
 0050ae88 nw_snd_internal_WaveFile_FileHeader_GetDataBlock evidence Exact twin of smt4 nw_snd_internal_WaveFile_FileHeader_GetDataBlock (same code in both games, tools/shared.py)
 0050f70c sysRegisterCurrentThreadCleanup evidence Exact twin of smt4 sysRegisterCurrentThreadCleanup (same code in both games, tools/shared.py)
+00527248 g_resourceSampleTable inferred Twin of smt4 g_resourceSampleTable; same sample table used by resourceGetSampleFloat.
+0052f760 g_jobRecordTable inferred Twin of smt4 g_jobRecordTable; same byte table used by jobRecordGetTableValue.
+00536228 g_soundEffectSourceFileName evidence Twin of smt4 g_soundEffectSourceFileName; same soundEffect module __FILE__ literal.
+00536cc3 g_nimAocServiceName evidence The string "nim:aoc", the service name passed to its connect call.
+0053cbfc g_fontNextCharacterCallbacks inferred Twin of smt4 g_fontNextCharacterCallbacks; same 3-entry callback table used by callbackBindingInitFromKind.
+0053d500 g_gpuCommandTemplates inferred Const table of prebuilt GPU/texture command blocks (TextureCommandTemplates/GpuCommandTemplates/CommandDefaults) consumed by gxSubmitTextureUnitCommands, gpuSubmitDefaultPacket, gpuSubmitVectorCommand.
+0053d6b0 g_gxHardwareStateLabels evidence Table of 21 strings "tri setup" ... "post dma" naming the GPU hardware-state bits.
+0053d8d8 g_pathFormatString inferred Twin of smt4 g_pathFormatString; same format string used by pathBuildWide.
+0053d994 g_asdListBoxProcessName inferred the "AsdListBox" process name asdListBoxCreate passes to asdProcessCreateSimple
+0053f514 g_amAppServiceName evidence The string "am:app", the service nnAmConnectOnce connects to.
+005449ec g_effMiscHeaderSourceFileName evidence __FILE__ string "...\Effect\./effMisc.h" passed to asdDebugTrace by the header allocator inlined in effMiscCreateFromDesc.
+00544ab8 g_formatStringPrefixedText inferred Twin of smt4 g_formatStringPrefixedText; same two-argument format string used by formattedTextCopyLabel.
+00544ac0 g_formatStringPercentS inferred Twin of smt4 g_formatStringPercentS; same "%s" literal used by formattedTextCopyLabel.
+00544af8 g_effObjectParticleSourceFileName evidence __FILE__ string "c:\SMT4F\...\Effect\effObjectParticle.cpp" passed to asdDebugTrace.
+00544b38 g_effMiscHeaderNestedSourceFileName evidence __FILE__ string "...\Effect\././effMisc.h" passed to asdDebugTrace by the header allocator inlined in effEmitterCreate.
+00544be4 g_effPolygonTexSourceFileName evidence Twin of smt4 g_effPolygonTexSourceFileName; same effPolygonTex __FILE__ literal used by effPolyTexCreate.
+00544c20 g_effPolygonTexPivotSourceFileName evidence Twin of smt4 g_effPolygonTexPivotSourceFileName; same effPolygonTexPivot __FILE__ literal used by effPolyTexPivotCreate.
+00544c60 g_effPolygonThunderSourceFileName evidence Twin of smt4 g_effPolygonThunderSourceFileName; same effPolygonThunder __FILE__ literal used by effPolyThunderCreate.
+0054baf8 g_effGeometrySourceFileName evidence __FILE__ string "c:\SMT4F\...\Effect\effGeometry.cpp" passed to asdDebugTrace by the effGeometry builders.
+0054bcdc g_word8HolderTable inferred Twin of smt4 g_word8HolderTable; same table used by word8HolderSetFromTable.
+0055b620 g_ifaceHolderVtable inferred Twin of smt4 g_ifaceHolderVtable; same vtable assigned in ifaceHolderDestroy.
+0055c7f4 g_callbackOwnerVtable inferred Twin of smt4 g_callbackOwnerVtable; same vtable assigned in callbackOwnerInitialize.
+0056fd34 g_tmnlSelectionParam inferred Twin of smt4 g_tmnlSelectionParam; same u32 passed to asdSequenceRequest(0xd, ...) by tmnlResetSelection in Terminal/tmnlMain.
+00570ab4 g_effectColorOverride inferred Twin of smt4 g_effectColorOverride; same EffectColorOverride pointer used by effectColorInitDefault and effectColorOverrideBeginFadeToGray.
+00570d70 g_materialShaderPath evidence Points at "UserRenderCommandShader.shbin", the shader asdGxLoadMaterialShader loads.
+0057150c g_btlCameraDebugOffset inferred Battle debug camera offset shown as list item 3 (range -10..10) in btlDebugOpenCameraUpDownMenu and written back by btlCameraDebugApplyMenuItem; twin smt4:g_btlCameraDebugOffset.
+00571510 g_btlCameraDebugUpDown inferred Battle debug camera up/down offset shown as list item 4 (range 0..10) in btlDebugOpenCameraUpDownMenu and written back by btlCameraDebugApplyMenuItem; twin smt4:g_btlCameraDebugUpDown.
+005715f8 g_btlDebugGlobals inferred DebugGlobals for the battle debug menu (handler, menu pointer, flag masks, selected id/category) used across battle/btlDebug (FUN_004d6104) and btlDebugDispatchCurrentJob.
+00573ce0 g_btlActionResourceTable inferred Twin of smt4 g_btlActionResourceTable; same 14-entry resource table used by resourcePairApply.
+0057f220 g_campMenuRowOffsets inferred Twin of smt4 g_campMenuRowOffsets; same per-row offset table used by campMenuEntryDraw.
+0057f250 g_texTableRefCount inferred Twin of smt4 g_texTableRefCount; same reference count used by texTableRefAcquire.
+0057f2c4 g_uniteEffectWork inferred Work buffer for the camp "Unite" team-attack cutscene/results screen, allocated in uniteStartEffectProcesses and consumed by uniteResultInitialize (UniteEffectWork/UniteScreenWork); file path camp/Unite/UniteEffect confirms the module.
+0057f560 g_messageFlags inferred Shared message/debug-overlay flag block (locked/value fields) written by messageSlotSet, scrCommMessageSetMode and debugOverlaySetShown; twin smt4:g_messageFlags.
+0057f584 g_searchWin inferred Twin of smt4 g_searchWin; same SearchWin state pointer used by searchWinUpdate/searchWinInitialize/scrComm_SearchWin_Start.
+0057f678 g_gameOverJobRecord inferred Pointer to the allocated GameOverWork job-id record, released once the job completes per the jobRecordWaitRelease.cpp comment ("Returns 0 while the job whose id DAT_0057f678 points at is valid..."); used with btlGameOverPollSequence/jobDestroyGlobal.
+005806b4 g_mapDepartSequence inferred the departure sequence state (loading flags, frame count, teardown step) FUN_0036fe68 and mapDepartStepTeardown step
+005821a0 g_soundActorQueue inferred Twin of smt4 g_soundActorQueue; same SoundActorQueue used by soundActorQueueStartPending, mapAmbientSoundActorsSpawn and resourceTableReleaseHandles.
+005880d0 g_soundVoicePool inferred AudioDevice/voice pool (voices/voiceCount/allocator) for the mobiclip movie audio device and sound voice start/stop; twin smt4:g_soundVoicePool.
+00588e2c g_saveLoadRunner inferred Global SaveLoadRunner instance for the gamedata/SaveLoadProcess module; allocated/deleted in the runner shutdown code and read by saveLoadDrawUpdate/saveLoadStartWindowWithArgument.
+00588eec g_shopSequenceRequest inferred the lazily allocated queued shop request shopRequestSequence and the shop main read and write
+00588fa4 g_dataTableCategoryVariants inferred Twin of smt4 g_dataTableCategoryVariants; same const u8[8] table used by dataTableFindCategoryVariant.
+00589184 g_nngxLastError inferred Twin of smt4 g_nngxLastError; same last-error value read-and-cleared by nngxGetError.
+00589364 g_sysServicesInitialized inferred Set once sysInitializeServices has started the system services.
+005894cc g_resultDebugMode inferred Byte that, like the development-unit bit at 0x1FF80014, makes resultHandleFailure report failures instead of stopping.
+005894d8 g_currentThreadHandleState inferred Twin of smt4 g_currentThreadHandleState; same thread handle state used by sysRegisterCurrentThreadCleanup.
+00589508 g_moAllocator inferred Twin of smt4 g_moAllocator; same allocate/free Allocator used by moCreateValueRecord/recordFree and the movie ADPCM decoder.
+00589510 g_moAllocationHooks inferred Twin of smt4 g_moAllocationHooks; same allocate/release hooks used by handleObjectRelease and the audio decoder setup/teardown.
+0058951c g_mwmofilterDeblockerState inferred Twin of smt4 g_mwmofilterDeblockerState; same deblocker filter state pointer used by mwmofilterDeblockerCreate.
+0059dae4 g_handlerTable2 inferred Twin of smt4 g_handlerTable2; same 2-entry handler function pointer array dispatched by handlerTableDispatch2.
+0059e9a8 g_effectEditorState inferred Twin of smt4 g_effectEditorState; same EffectEditor selection/offset/rotation/vector state used by effectEditorUpdate, effectPollResourceFileDialog, effectEditorResetRotation, effectEditorResetVector.
+0059ee30 g_effectEditorObjectTextureTable inferred Twin of smt4 g_effectEditorObjectTextureTable; same table used by effectEditorBindObjectTexture.
+0059ef10 g_effectEditorOwnerOptions inferred Twin of smt4 g_effectEditorOwnerOptions; same EffectEditorOptions table used by effectEditorApplySecondaryOwnerOptions.
+005b3bc0 g_asdFontGlyphSets inferred Twin of smt4 g_asdFontGlyphSets; AsdFont glyph set table allocated via the same AsdFontAllocateGlyphSets routine.
+005b3c3c g_asdModelManagerStaticBlock inferred Twin of smt4 g_asdModelManagerStaticBlock; same model manager static block returned by asdModelGetStatic38.
+005b3ce8 g_defaultDrawColor inferred Colour pointer draws fall back to when given none (FUN_002c1ac8, gpuSubmitFloatVectorsOrDefault).
+005b4020 g_startMenuPostHook inferred Twin of smt4 g_startMenuPostHook; same optional post-start-menu callback hook.
+005b40b4 g_processResultState inferred the block whose word 0x10 processResultSetValue stores the last operation result in
+005b40c8 g_contentMounted inferred Set when the content archive mounts (FUN_002103dc), cleared by contentUnmount.
+005b40cc g_stickDirectionTable inferred Twin of smt4 g_stickDirectionTable; same StickDirectionTable used by padGetCombinedButtonState (this address is reinterpreted elsewhere as an unrelated Labels struct in labelsReset.cpp).
+005c0a80 g_nimAocSession inferred nim:aoc session handle filled by its connect call and used by its IPC request.
+005c0cc0 g_gfxCommandTemplate inferred Twin of smt4 g_gfxCommandTemplate; same CommandTemplate used by gfxCommandTemplateAppend.
+005c1484 g_handlerRefForward inferred Twin of smt4 g_handlerRefForward; same handler-forwarding holder used by handlerRefForward.
+005c149c g_amAppSession inferred The am:app session handle nnAmConnectOnce fills (0 while not connected).
+005c1d10 g_handlerTable1 inferred Twin of smt4 g_handlerTable1; same 2-entry handler function pointer array dispatched by handlerTableDispatch1.
+005c1ec8 g_effPolyGeomIndexTable inferred Twin of smt4 g_effPolyGeomIndexTable; same shared index table used by effPolyRingGeomCreate0/1 and effPolyWindGeomCreate0/1/2.
+005c1f28 g_effPolyFlashIndexTableS16 inferred Twin of smt4 g_effPolyFlashIndexTableS16; same const s16 index table used by effPolyFlashGeomCreate0/2.
+005c1f3a g_effPolyFlashIndexTableU8 inferred Twin of smt4 g_effPolyFlashIndexTableU8; same const u8 index table used by effPolyFlashGeomCreate1/3.
+005c1fb4 g_effGeomDefaultTint inferred size:0x10 four floats (1, 0, 0, 1) copied into a new geometry buffer's tint when it is created with flag 0x80000.
+005c1fc8 g_cecdUseLocalBackend inferred Twin of smt4 g_cecdUseLocalBackend; same flag gating resourceDispatch/cecdDispatchBackendCall paths.
+005c1fdc g_idList inferred Twin of smt4 g_idList; same IdList table searched by idListFind.
+005c4c20 g_asdSoundListenerGuard inferred Twin of smt4 DAT_00476628: guard of the listener position static.
+005c5000 g_bssStart inferred Twin of smt4 g_bssStart; start of the zero-initialized .bss region, also reused as the software-keyboard scratch buffer by systemKeyboardReadUtf8.
+005cc54c g_materialShader inferred The loaded material shader binary and nn::gr shader object.
+005dee3c g_materialShaderWorld evidence Bind symbol looked up by the name "world" in the material shader.
+005dee44 g_materialShaderColor evidence Bind symbol looked up by the name "uMaterialColor" in the material shader.
+005f32a0 g_recordTable inferred Array of id/name/value Record entries shared by recordSetValueAndName, entryTableSetHalfwordsById, entryTableFlagTargetsOfId203 and reused by saveSlotInfoSet as SaveSlotInfo[] (save slot name/id records).
+0061949c g_itemNameFallbackBuffer inferred Twin of smt4 g_itemNameFallbackBuffer; same fallback-name scratch buffer used by itemGetNameOrFallback.
+0061953c g_bgmRequestChannel1 inferred The second BGM request channel, addressed through its own pool word next to g_bgmRequestChannels (channel 0).
+006195dc g_soundDelayEffect inferred the FxDelay object soundEffectInitializeDelay configures and attaches to auxiliary bus A
+0061963c g_soundDelayParameters inferred the delay parameter block (time, feedback, damping, surround) passed to the delay set-param call
+0061964c g_soundReverbEffect inferred the FxReverb object soundEffectInitializeReverb configures and attaches to auxiliary bus B
+0061975c g_soundReverbParameters inferred the reverb parameter block passed to nw_snd_FxReverb_SetParam
+0061978c g_soundObjectTable inferred SoundObjectTable of positional 3D sound objects/slots (enabled flag, mode, per-object kind) iterated by the panning/culling routine at FUN_0013af10 and queried by workCommandRefreshActiveSlots/querySlotHasHandle.
+006306f8 g_quadColorState inferred Twin of smt4 g_quadColorState; same corners/dirty/default-W/effect speed fields across quadSetOrderedVectors, gxResetColorQuadToWhite, efctSetSpeed.
+00635770 g_sysWordTable inferred Twin of smt4 g_sysWordTable; same word table used by sysGetTableWord.
+006357d8 g_screenFadeSlots inferred Twin of smt4 g_screenFadeSlots; array of 2 fade-slot states used by screenFadeSlotDraw/screenFadeIsBusy/titleRestartSlotState3.
+00636ec8 g_asdMdlObjectList inferred Twin of smt4 g_asdMdlObjectList; same AsdModel object list used by asdMdlObjectAlloc.
+00636f58 g_colorWhite inferred The (1, 1, 1, 1) colour mathInitDefaultUnitVector sets up.
+00636f68 g_textControlCallbacks inferred asdTextRegisterSlot stores each text control code callback here
+0063af98 g_textControlCallbackCodes inferred the control code each registered text callback answers
+0063afa8 g_textControlCallbackArgumentCounts inferred how many arguments the dispatcher passes each registered text callback
+0063e4a0 g_soundArchiveLoader inferred Twin of smt4 g_soundArchiveLoader; same SoundArchiveLoader used by soundArchiveLoadItem.
+0063ea3c g_nwSound3DManager inferred Twin of smt4 g_nwSound3DManager; same nw_snd_Sound3DManager instance used by soundApplyVolumeToSlots and asd3dSoundActorGetSlotValue.
+00640388 g_startMenuProcessGroup inferred Twin of smt4 g_startMenuProcessGroup; same commented usage in startMenuCreateProcess.cpp.
+0064be6c g_rtLocale inferred Twin of smt4 g_rtLocale; same C runtime locale object returned by rt_locale.
+0064bfb8 g_errno inferred The C runtime errno byte returned by __aeabi_errno_addr; matches the already-named smt4 g_errno (same accessor pattern: "extern u8 g_errno; u8 *__aeabi_errno_addr(void) { return &g_errno; }").
+00100348 textFormatProcessRange inferred Builds a Range covering [first, first+count-1] and runs it through FUN_002e31ba with a format callback, then appends a byte when count is non-zero; called from fontMeasureFormattedText and asdTextFormatStream.
+00100df4 libc_vsnprintf inferred Comment confirms: vsnprintf — formats at most size-1 bytes into buffer through the bounded byte-append callback, NUL-terminates, and returns the produced length; called from asdStringFormatGrow.
+001029da scriptParseIntArgumentPreservingErrno inferred exact twin of smt4 FUN_00100bd4 (tools/shared.py): Saves errno, calls a base-10 string-to-integer conversion (FUN_002c5e80) on the argument, then restores errno; called from scriptApplyParsedArgument.
+00103260 filterApplyDefaultHook inferred Twin of smt4 FUN_00101080, supplies the (12, value) argument pair to the optional filter-update callback.
+0010d2a6 onlineScopedLockUnlockMember inferred Calls onlineMutexUnlock on the holder's embedded mutex member; called from onlineScopedLockRelease.
+00123772 onlineUrlLazyInitOnce inferred One-time setup pattern: calls FUN_00103bdc the first time (tracked by a flag byte at offset 0x65); called from onlineUrlGetText.
+00137848 gameDataSmallBlockFinalize inferred exact twin of smt4 FUN_002c5620 (tools/shared.py): Thin forwarder calling FUN_0010fb68(g_gameDataBlocks.smallBlock), which closes a file handle (fileHandleClose) associated with that block; called once from jyoucyuLoadStep when loading finishes.
+00138068 titleStopCommandRecording inferred Stops the title command-list recording (asdProcessSetCommandListRecording(0)), resets the frame state and restores render pairs.
+001387c0 contentUnmount inferred Unmounts the archive FUN_002103dc mounted (fsUnmountByName) and clears its mounted flag.
+00138804 titleStartCommandRecording inferred Starts the title command-list recording (asdProcessSetCommandListRecording(1)) and clears the context counters.
+00138a08 asdProcessPauseAll inferred Sets ASD_PROC_FLAG_PAUSED on every process that carries the pausable flag 0x80000.
+0013a144 resourceRunDeferredDestroys inferred Counts down the deferred-destruction queues each frame and destroys the expired resources.
+0013a630 asdGxSetFrameInterval inferred Stores the frame interval and the frame time it gives at the 59.831 Hz refresh.
+0013c614 messageTextSelectPortrait inferred Text command 0xF87A: selects the bust-up cut or event texture of an id, or resets the window display mode.
+0013cab8 screenFadeStartIn inferred Twin of smt4 FUN_002c29d8: starts a screen fade-in.
+0013dadc messageTextSetPortraitFrame inferred Text command 0xF87B: sets a frame on the bust-up cut or event texture of an id.
+0013dee0 titleConfigSetAudioFlag inferred exact twin of smt4 FUN_00109670 (tools/shared.py): Writes a single byte field (offset 0x1E5) of the title config block; called from titleConfigApplyAudio.
+0013f188 fontSetBaselineOffset inferred exact twin of smt4 FUN_002c44dc (tools/shared.py): Sets the f32 value field of a per-slot record in a small pool (DAT_00464a70); textSystemInitialize calls it once per font slot right after loading each font with distinct offset-like constants (-10.0, -2.0, 0.0, ...).
+0013f4c4 mobiclipRestoreDisplayState inferred Comment: "Restore display request groups and normal shared-frame processing."; used by titleSelectMovieResource.
+0013f53c touchInputReset inferred Clears g_touchInput and sets its key-repeat delays (15, then 4 frames).
+00140e6c asdFontLoadSlot inferred Comment: "Loads font `index` from the file image `data`: frees whatever the slot held, creates its reader, finds the FINF block and creates one texture per sheet in the sheet's pixel format. Returns 0 when `index` is out of range."; used by asdTextSystemInit.
+0014190c fontFileLoadSync inferred exact twin of smt4 FUN_002c4904 (tools/shared.py): Synchronous file load wrapper (asdLoadFileSync with flags 1, mode 0x80) used to load each .bcfnt font file in textSystemInitialize.
+00144564 asdSnd3dSetManagerScalarA34 inferred Sets the 3D sound manager scalar at 0xA34 and forwards it to the manager object.
+00144f1c asdGxSwapDisplayBuffers inferred Shows the previous buffer of the top, right-eye and bottom displays and advances each ring.
+00145048 asdSnd3dSetManagerScalarA3C inferred Sets the 3D sound manager scalar at 0xA3C and forwards it to the manager object.
+00145ec8 questCenterTestFlag inferred Tests flag 0..31 of the second flag set of the quest center block.
+001463b4 modelHandleRegistryInit inferred Initializes the model handle-registry manager object (shader resource setup, named buffers); only caller is handleRegistryCreate, whose name this mirrors.
+00146720 fsInitializeUserMount evidence Opens the "fs:USER" service once and sets its priority.
+001469a8 addressSpaceRegionFree inferred exact twin of smt4 FUN_002c3f5c (tools/shared.py): Own comment: "Removes a mapped region and frees its backing allocation"; unmaps and releases an AddressSpaceRegion via nn::os ControlMemory, used by campCecStopCommThread/uniteScreenDestroy to tear down thread stacks.
+00146f0c asdNgcSetWorkBuffer inferred exact twin of smt4 FUN_0010fd38 (tools/shared.py): Comment confirms: hands the object its working buffer, records the buffer and region offsets, then runs the initializer; called from asdNgcInit.
+00147088 nimAocConnect inferred Gets the nim:aoc service handle once (srv initialise, service handle by name).
+001470f0 nimAocInitialize inferred Sends the parameterless IPC command 0x21 to the nim:aoc session.
+0014733c appletIsSleepQueried inferred True when the applet state reports a pending sleep query; appletProcessSleepQuery answers it.
+00147f08 nw_snd_FxDelay_SetParam inferred called with the delay effect and its parameter block before GetRequiredMemSize, as NW4C FxDelay::SetParam
+0014a960 frameTexDrawXfadeCapture inferred Own comment: "Draw the XFADE capture (the right one when drawing the right screen and it exists) as a screen-sized quad"; called by frameTexDrawWhenReady.
+0014af98 messageVoiceBankGet inferred exact twin of smt4 FUN_002bfdc4 (tools/shared.py): Returns DAT_004c5634.unk1E5, a voice-bank id passed as the third argument into FUN_002bfc24 (voice request) by scrCommQueueRequest, titleConfigUpdate and mapIfShowItemResultMessage.
+0014bf3c demonGetRaceLabel inferred Own comment: "Selects the demon's race label, preferring add-on text over the built-in table"; called by messageExpandControlCode and scrSpawnRandomDemonInLevelRange.
+0014e444 memoryDebugDrawMap inferred Draws the asdMemMap debug display from its two callbacks; called by memoryDebugRefresh.
+0014f0dc cameraMatrixCacheSetLookAt inferred Same callers and look-at-matrix role as smt4:FUN_002c1edc (uniteCameraInitialize and the effect editor reset routines).
+0015110c titleDbgBgCreateDefault inferred exact twin of smt4 FUN_00118170 (tools/shared.py): Comment confirms: runs titleDbgBgCreate(0, 0); called from titleSequenceInit.
+00151340 asdSndEnsureCurrentSlotData inferred Twin of smt4 asdSndEnsureCurrentSlotData (same call site in soundInitializePersistentSlots).
+001522a0 gfxDrawColoredRectangles inferred Draws a list of rectangles with packed RGBA colours; the asdMemMap label callback.
+001523b8 stereoCameraSetPerspective inferred Comment confirms: rebuilds the display and stereo perspective projections after a lens change; called from uniteCameraInitialize, effectPollResourceFileDialog, effectEditorResetRotation and effectEditorResetVector.
+00152f44 messageVoiceFlagsGet inferred exact twin of smt4 FUN_002bfdd4 (tools/shared.py): Returns DAT_004c5634.unk1E4, a base flags value OR'd into the voice/message request flags by scrCommQueueRequest and mapIfShowItemResultMessage.
+00158694 fileSystemOpenFileDirectly inferred Twin of smt4:FUN_0011b9b0, same forwarding callers in smt4a.
+001589a0 fsMountRom inferred Opens the ROM archive and registers it under the given archive name.
+001590c0 sndUnregisterCallback inferred Twin of smt4:FUN_0011bf9c, same caller (sndSystemShutdown).
+00159e18 sndVoiceManagerFinalize inferred Twin of smt4:FUN_0011ccd4, same caller (sndSystemShutdown).
+0015a400 appletSetUnlockFlag inferred Same applet unlock-state field setter as smt4:FUN_002bb460.
+0015d434 asdSceneInitializerFinish inferred twin of smt4 FUN_001200d8 (same 0x10-byte body), called the same way by asdScenePassVisit (FUN_001767a4)
+00160050 bustupTextureBufferGetFreeSpace inferred Comment: "Returns the free space left: capacity minus used, or 0 when used has reached capacity"; used by asdSoundRegisteredSetPause.
+00161074 asdGfxBindTarget inferred Twin of smt4 FUN_002c2620: finds or registers a display target by id and binds it to the active slot.
+0016120c gfxCmdBufferReallocate inferred exact twin of smt4 FUN_0012316c (tools/shared.py): Comment confirms: reallocates the active graphics command buffer and its trailing record list; called from gfxCmdListSetInit.
+00161438 gfxCmdBufferMarkPoolEntryDirty inferred exact twin of smt4 FUN_00123398 (tools/shared.py): Comment confirms: marks a graphics pool entry (or the whole pool via index -1) dirty; called from gfxCmdListSetInit.
+00161474 gfxCmdBufferHandlesAllocate inferred exact twin of smt4 FUN_001233d4 (tools/shared.py): Comment confirms: allocates command-buffer handles and inserts them into the sorted hash registry; called from gfxCmdListSetInit.
+0016182c gfxRestoreTextureBindingState inferred exact twin of smt4 FUN_00123750 (tools/shared.py): Refreshes dirty texture bindings (gfxRefreshDirtyTextureBindings) against g_textureBindingState and checks nngxGetError; called from mobiclipRestoreDisplayState after movie playback to restore GPU texture state.
+00161a10 asdGxWaitForPreviousFrame inferred Forwards to the busy-wait (with timeout callback) that asdGxSubmitFrame runs before reusing the command buffer.
+00162a50 asdMdlManagerUpdate inferred Twin of smt4 FUN_001247f0 (same size class/role); called from modelManagerUpdateCallback, matching the per-frame model manager update.
+00162ea4 eventIsSkipping inferred twin of smt4 FUN_002c1d5c at the same call sites
+00163e84 screenFaderIsSettled inferred twin of smt4 FUN_002b89a4, polled by scrCommScreenFaderOut
+001640cc gxSubmitFloatColoredQuad inferred Twin of smt4 FUN_002c1ac8: draws a per-corner float-coloured textured quad, defaulting missing colours to white.
+00165088 uiPanelCloseStateSection inferred Comment: "Closes the panel parts that belong to the state; when the panel may stay open the sprites are re-keyed instead of hidden"; used by msgWindowReset, messageMainApplyClose, messageBannerRestartOrClear, obj04Finish.
+00167458 uiSpriteSlideFromSide inferred Comment: "Advances the sprite with its position track replaced by a slide from 320 pixels right (left when `reverse`) to 0, decelerating; returns the finished flag."; used by placeWindowUpdateAnimation, panelUpdatePageExitTransition, entryDispatchUpdate.
+0016783c bustupOwnerJobGetFrameByte inferred Comment: "Reads the job work area's signed byte at 0x8c"; used by bustupRequestIdleOwnerTextureFrame.
+0016784c bustupOwnerJobSetFrameByte inferred Comment: "Stores `value` in the byte at 0x8C of the job work area"; used by bustupRequestIdleOwnerTextureFrame.
+00167898 eventTexJobGetHandle inferred Comment: "Returns the first word of the job work area"; used by eventTexSelectJobsById and scrSetEventTextureVisibility.
+00167ce8 eventTexJobGetState inferred Returns the state byte at offset 0xB8 of the job's work area; twin of smt4 FUN_001262fc.
+00167df8 eventTexJobSetState inferred Writes the state byte at offset 0xB8 of the job's work area; twin of smt4 FUN_0012640c.
+00167eb0 asdGxCommandListReplayCopy inferred Appends the saved copy of an AsdGxCommandList (entries[0].copy) to the bound nngx command list.
+001688c4 statusDownScanSelectedEntryIndex inferred Comment: "Scans the line's control codes up to a stop: counts 0xf801 codes, or takes the parameter of the last 0xf81a code"; used by statusDownSetSelectedEntry.
+00168980 buttonHelpTransitionPresetFlags inferred Comment: compares current preset entry flag vs `id`'s entry flag and either begins the help exit or runs FUN_00183e58 (does nothing if either entry is missing); used by naviMainShutdown, sub68OwnerDestroyAll, savedUnitEditorApplyOrClose, saveLoadUIUpdate.
+00168fbc texFormatGetBytesPerPixel inferred Twin of smt4 FUN_002a66e0: maps a GL format/type pair to the hardware format and returns bytes per pixel.
+001692d4 gxResetUniformQuadColorsAndScale inferred Resets the effects quad-color scale to 1.0 and sets the uniform quad color to opaque white via gxSetUniformQuadColors; used by taskRunInitializationState.
+00169580 eventTexJobGetField3C inferred Comment: "Returns the word at 0x3C of the job work area"; used by eventTexSelectJobsById and scrSetEventTextureVisibility.
+00169590 eventTexJobGetField3CAlt inferred Duplicate of eventTexJobGetField3C (same field read at a different address); used by eventTexSelectJobsById and scrSetEventTextureVisibility.
+00169704 bustupCutAnimFinish inferred Comment: "Finishes the cut animation: moves each of its four jobs to its target pose (or releases it when the model is gone). Returns 1 while the animation is still running or has nothing to finish."
+0016ccfc tokenTableGet inferred Same global token table getter as smt4:FUN_002b5c44, used by tokenResolveAddress callers.
+0016dfe0 addressSpaceMapApplicationMemoryBlock inferred exact twin of smt4 FUN_00127fac (tools/shared.py): Validates alignment of the requested virtual address/size, calls asdAddressSpaceAllocate on g_nnosAddressSpaceManagerApplication, then maps/commits the block, returning an nn::Result-style error code on failure; called from resultReportIfFailed.
+0016e2a8 nn_pl_CTR_CreateGameCoinSaveFile inferred Twin of smt4 FUN_00128174, same save-record construction via nn::fs ArchiveCreateFile for the gamecoin save file; called by nn_pl_CTR_InitializeGameCoin.
+0016f35c nn_snd_CTR_MasterManager_Apply inferred exact twin of smt4 FUN_00128f20 (tools/shared.py): Thin wrapper passing g_nnSndMasterManagerImpl to FUN_0013ac30; called from sndMasterManagerApply.
+0016f864 srvInitialize inferred Initialises the service manager before each service handle is requested (am:app, fs:USER, nim:aoc).
+00170390 sleepAllow inferred Twin of smt4 FUN_002c5434: allows sleep and optionally sleeps if the shell is closed.
+001753d4 soundArchiveLoaderLoadItem inferred Comment: "Loads the data the sound archive item needs, dispatching on the item type in the id's top byte. Returns whether the item is loaded."; used by asdSoundEnsureArchiveItemLoaded.
+001757b8 soundArchiveInfoBlockSetOffset inferred Comment: "Stores the address 8 bytes past `base` at 0x3C"; same as smt4:FUN_00130ea8, used by soundArchiveLoadInfoBlock.
+001757c4 soundArchiveStringBlockSetOffset inferred Comment: "Stores the address 8 bytes past `base` at 0x38"; same as smt4:FUN_00130eb4, used by soundArchiveLoadStringBlock.
+00176124 aocPackageFindConditionalMapRecord inferred Scans loaded AOC package directories for a type-0x1b data table entry matching (param_2, param_3), gating on two optional game-flag conditions; implementation behind dataTable02FindConditionalMapRecord.
+0017628c aocIndexedTableFindImpl inferred Binary-searches a 0x20-byte indexed record table (count at +0x42c, entries at +0x430); implementation behind aocIndexValueOrDefault.
+001767a4 asdScenePassVisit inferred Twin of smt4 FUN_002c2968: walks a model scene pass with its visitor through the scene traverser.
+0017909c gxStateValidatorResetDefaults inferred exact twin of smt4 FUN_00133568 (tools/shared.py): Writes the GX command buffer's full set of default register values (blend/stencil/viewport/texture-combiner state etc); implementation behind vldtr_initializeStateValidator.
+0017cdb0 asdGxCheckError inferred Twin of smt4 FUN_002bf0d8: forwards to nngxGetError around texture preparation.
+0017cf74 asdGxQueueMemoryTransfer inferred Twin of smt4 FUN_002a666c: queues a memory transfer on the graphics context's write buffer.
+0017d294 asdGxCmdBufferFinalizeBlock inferred Same GX command-buffer block finalize routine as smt4:FUN_002bc1e4, called by surfaceCopy and gxCopyFramebufferToSurface.
+0017db14 nngxImportCmdlist inferred Twin of smt4 FUN_001373f0: imports exported command data into a command list by id.
+0017dd80 asdGxFlushCommandBuffer inferred twin of smt4 FUN_002bdb44: 4-byte stub that falls through into asdGxCommandBufferTerminateAndSubmit
+0017fc38 interpolationStateEvaluate inferred Comment: "Linear interpolation from start to end; returns end once elapsed reaches duration."; used by asdSoundObjectStop.
+0017fd38 svcWaitSynchronizationN inferred exact twin of smt4 FUN_002c40f8 (tools/shared.py): Raw syscall wrapper (`software_interrupt(0x25)`), svc 0x25 is CTR-OS WaitSynchronizationN; called everywhere as (signalled_index_out, handles, count, waitAll, timeout), matching the real kernel API signature; naming follows the existing svc* family (svcSleepThread, svcCloseHandle, ...).
+0017fe8c asdMemReleaseTrackedAllocation inferred Comment confirms: runs an allocation's release callback, removes it from usage tracking, and returns its backing header; twin of smt4 FUN_001246cc.
+00180114 table01RecordLookupForContent inferred Comment: "Tail call into the function that follows" (dataTable01GetRecordWithAocOverride); used by contentFormatEntryName.
+00180310 statRowDrawValueImpl inferred Formats a stat value and draws it via texDrawTableEntryAtStoredOrigin per the requested display kind; implementation behind statRowDrawValue, drawTextAtRelativePosition, partyPanelDrawPartySlotPart. Twin smt4:FUN_002bdf94.
+00181ae0 textDrawCore inferred Same glyph-rendering core as smt4:FUN_002b2b88, called by textDrawString, textDrawDefaultString and debugDrawText.
+00182084 buttonHelpPrepareSlots inferred Comment: "Prepares every button-help slot: resets its animation, looks up the icon of the kind it shows, then restarts the four selected-slot sprites and the cleared state."; used by aocMenuSetButtonHelp.
+00182884 asdTextDrawDebugSlotString inferred Twin of smt4 FUN_002aed34, identical debug-slot text draw helper.
+00183450 itemRecordCompareByKey inferred Comment: "Compares record keys for sorting"; used by itemTableGetItemRecord.
+00183d90 equipmentRecordCompareByKey inferred Comment: "Compares record keys for sorting"; used by itemTableGetEquipmentRecord.
+00183e58 buttonHelpTeardownSlots inferred Comment: "Tears down the six units: resets each, releases the entries their kinds hold ... then releases the remaining `count` entries and moves the record to state 3."
+001844f8 asdMdlNodeGetWorldPosition inferred exact twin of smt4 FUN_002b2ae8 (tools/shared.py): Reads a model node's world-matrix translation column (block+0x58/0x68/0x78) into a 3-element output vector; used by model bounds rebuilding (FUN_001247f0) and Obj4208f8's AsdMdlObject constructor.
+001858ec asdFileAllocZeroedBuffer inferred Comment: "Allocates `size` zeroed bytes aligned to `alignment` (at least 0x80) under the allocator lock."
+0018622c gfxDispatchBufferIfNonEmpty inferred exact twin of smt4 FUN_002ab8c4 (tools/shared.py): Calls the buffer-processing helper only when the buffer's count is > 0; called from gfxFlushLightRenderCommands.
+00186244 gpuSubmitFloatColoredQuad inferred Twin of smt4 FUN_002b13d8: submits a quad with one float RGBA colour per corner.
+00188444 archiveDeviceSendPathRequest inferred Twin of smt4 FUN_002a84e8: sends a kind-4 path request to the path's archive device.
+001886bc fileSystemRequireReady inferred Twin of smt4 FUN_002ad888: fatal error unless the file system state is set.
+00188c94 nnosGetHeapSize inferred Twin of smt4 FUN_002c3984: returns the heap size word of g_nnosHeapState.
+00188ca4 nnosGetHeapBase inferred Twin of smt4 nnosGetHeapBase: returns the heap base word of g_nnosHeapState.
+00189a38 errThrowFatal inferred Reports a failed result and the address of the check to the fatal error handler.
+0018a3d0 dspsndSetHeadsetConnected inferred Comment: "Tells the DSP sound state whether a headset is connected; returns its result"; same as smt4:FUN_0013ac54.
+0018c988 nw_snd_internal_FrameHeap_DestroyImpl inferred Same forwarding destroy-and-return wrapper as smt4:FUN_0013c780, implementation behind nw_snd_internal_FrameHeap_Destroy.
+0018cf00 gfxUploadShaderMatricesIfChanged inferred exact twin of smt4 FUN_002ab92c (tools/shared.py): Uploads a source's 3x4/4x4 matrices as GPU command-buffer uniform writes to both vertex/geometry shader stages only if the source changed (or forced); called from gfxFlushLightRenderCommands.
+0018d01c nw_gfx_SceneTraverser_End inferred Twin of smt4 FUN_002abb5c: clears the scene pointer nw_gfx_SceneTraverser_Begin set.
+001912cc soundRequestQueueDequeueUntilToken inferred Same dequeue-until-token loop on the sound-request queue as smt4:FUN_002b4b94, used in soundObjectPostStop and SoundHeapBase destructor.
+00191330 soundStreamCommandManagerGetInstance inferred exact twin of smt4 FUN_002bae7c (tools/shared.py): A second nw::snd::internal DriverCommandManager-style singleton accessor (per the comment in soundRequestQueueGetInstance.cpp), used by nwSoundSystemInitializeBuffers, sndSystemFinalize, soundStreamPostTargetLevel/State.
+00193038 asdSaveHeaderBuildCalendarTime inferred Twin of smt4 FUN_002ad66c, identical calendar-time conversion.
+00194934 soundArchiveFindIndexedResource inferred near twin of smt4 FUN_00141bdc (tools/shared.py): Dispatches on the resource handle's type byte (param_2>>24) and queries nw_snd_internal_Util_BitFlag_GetValue to resolve an index; only caller is indexedResourceQuery, which calls it as FUN_00141bdc(owner->handle) and returns the index.
+00195034 nw_snd_SoundArchive_detail_ReadSoundArchivePlayerInfo inferred Twin of smt4:FUN_00142054, the actual player-info reader behind smt4a's own ReadSoundArchivePlayerInfo wrapper.
+0019a2f8 svcBreakTrap inferred A trivial trap that issues software_interrupt(0x3c) (the SVC break call); branched to by sysFatalBreak and sysBreakWithCallback.
+0019a364 svcReleaseSemaphore inferred exact twin of smt4 FUN_002c5254 (tools/shared.py): Own comment: "Releases a semaphore through svc 0x16 and stores the previous count" via nn::svc::ReleaseSemaphoreRaw; matches the real CTR-OS syscall name, follows the svc* naming family.
+0019a46c stringCopyTruncated inferred exact twin of smt4 FUN_002ba81c (tools/shared.py): Comment: "Copy with room for a terminator, returning the full source length even when truncated" — an strlcpy-style bounded copy, used widely (recordTableAppend, aocQueueFileLoad, predicateTableAppendRow, etc).
+0019acdc unitMapIdToCategory inferred Comment confirms: maps an id to its category number (id 0xba picks between two categories by a flag); called from saveSlotBeginTransition and btlScriptGetSelectedSkillDemonId.
+0019e5e0 gpuSubmitColoredTexturedQuad inferred Twin of smt4 FUN_002b7dc4: submits a per-corner coloured, textured quad as float24 GPU vectors.
+001a1204 resultPostErrorReport inferred Twin of smt4 FUN_00128584: posts a failed result with the caller's address to the error report worker.
+001a1f5c appletWaitForSlotReady inferred Same role/callers as smt4:FUN_00147390 (appletShowTextMessage, systemKeyboardReadUtf8).
+001a2480 nn_gxlow_CTR_IsGpuServiceAvailable inferred Twin of smt4 FUN_002ad254, same nn_gxlow state accessor used by the GPU-right acquisition path.
+001a2a4c nn_gxlow_CTR_GetCmdManager inferred Twin of smt4 FUN_002ad244, returns the gxlow state's CmdManager pointer.
+001a586c soundObjectUnlinkFromOwner inferred Comment confirms: erases the source's linked-list node from the owner's list, then runs a follow-up cleanup (FUN_001a5894); called from asdSoundObjectStop and vslot9ObjRefresh.
+001a5fb8 nw_snd_internal_driver_SoundThread_RunFrame inferred Twin of smt4:FUN_0014c544, called from smt4a's SoundThreadFunc.
+001a611c nw_snd_internal_driver_SoundThread_WaitForNextFrame inferred Twin of smt4:FUN_0014c6a8, called from smt4a's SoundThreadFunc.
+001a6d00 aocTextureNodeLoad inferred exact twin of smt4 FUN_0014cbcc (tools/shared.py): Requests the AoC texture file (fileQueueRequestAndWait), expands it if compressed (aocTexExpandCompressedData) and creates the texture (asdTextureCreate); called by aocLoadTextureNode.
+001a777c cameraGetProviderEntryPayload inferred Twin of smt4 FUN_002a86a4, returns the payload pointer (block+8) of the provider's block.
+001a77ac cameraExportProviderEntryWords inferred Twin of smt4 FUN_002a8638, reads four words from the provider's block.
+001a7a20 nameTableLookupEntry inferred Walks a crit-bit/PATRICIA-style trie (bit index and bitmask tests against a byte buffer) to find a matching entry id; called from lookupNameEntry, resourceObjectSetNamedFlag and ownerSlotSetText.
+001a8e14 soundArchiveFileEntryIsLoaded inferred Twin of smt4 FUN_002ac780, forwards the archive's file id to the loaded-check helper.
+001a9104 btlUiCopyIdList inferred Copies the id list into BtlUiObjCA's buffer at offset 0x38a8 via a fixed 8-word memcpy; called from btlUiStartCommandSelection and btlUiIdsRefresh.
+001ab8e0 requestParamsInitialize inferred Comment confirms: initializes the record from four values, clearing three words and setting both halfwords to 1; called from texBindBindTableNode and spriteDrawFromTextureTable. Same shape as smt4 FUN_002a6d1c (not named: twin link unclear).
+001abbc4 effPartCreateFromSource inferred Twin of smt4 FUN_002a4e98: builds the first particle part handle.
+001ac8ec effectParticleEmitterSetAdvance inferred Twin of smt4 FUN_002a36fc, identical particle emitter-set advance logic.
+001acb48 effectTimelinePartApplyRotation inferred Comment confirms: rotates the part's local position and propagates the composed rotation to its children; called from engineApplyGlobalParameters.
+001ad2a4 asdModelRebuildAttributeRecordsForKey inferred Comment: "Rebuilds the model's attribute records for `key`: one record per id of every matching entry of the file's containers." (companion to the neighboring asdModelRebuildAttributeRecords).
+001ad5ec renderVectorOverrideResolve inferred Twin of smt4 FUN_0025c8f0, identical RenderVectorOverride resolution.
+001afc10 nw_snd_internal_driver_SoundThread_GetCurrentTick inferred Twin of smt4:FUN_0014fbc4, called from smt4a's SoundThreadFunc.
+001afd94 dspFxStateGet inferred Same DSP FX global-state getter as smt4:FUN_002b5954, used by nn_snd_CTR_DspFxManager_Initialize.
+001b2e34 skillDataFindByIdImpl inferred Binary-searches the 0x88-byte skill record table (count at +0x434, entries at +0x438); implementation behind skillDataFindById.
+001b2e78 dataTable41FindByIdImpl inferred Binary-searches a 0x48-byte record table (count at +0x43c, entries at +0x440) via libc_bsearch; implementation behind dataTable41FindById.
+001b3428 nnOsThreadImplDestroy inferred Stops and finalizes an nn::os thread-like object: issues svc 0x24 to stop it, marks it finalized, calls nn_os_Thread_FinalizeImpl, then svc 0x23 to close its handle; used by aocClearDisplayFlag and several object destructors.
+001b4eb8 skelNodePoseChain inferred Comment: "Poses the joint chain below `root`: the workspace quaternion is root's rotation plus the given offset, and every child's local vector is rotated by the resulting matrix and accumulated into it before the child's type handler gets the result." Twin smt4:FUN_002a3ab0.
+001b6390 soundVoiceSetVolume inferred exact twin of smt4 FUN_00147370 (tools/shared.py): Own comment: "Changes the nested scalar and marks its work area dirty"; all callers (asdSoundWaveVoiceCreate, asdWaveVoicePrepareFade, sndVoiceStart) pass a voice and a volume/fade value.
+001b63b0 phaseCosine inferred Comment: "The cosine of a phase (65536 per turn), interpolated from the 256-entry sine/cosine table."
+001ba570 optionsGoalConditionCheck inferred Returns a pass/fail result from gameOptionsClassifyMode: mode 2 checks the options' flag bit 2 or that unk2A is zero; used by goalConditionsSatisfied.
+001bc3e4 gfxQuaternionScratchMultiply inferred exact twin of smt4 FUN_002a2c00 (tools/shared.py): Comment confirms: multiplies the scratch quaternion `direction` by the quaternion `origin`, storing the product in `direction` (g_vectorScratch.first); called from effectPollResourceFileDialog and several effect editor reset functions. Twin smt4a has the equivalent inline at the matching spot in FUN_001ad5ec.
+001c5b68 fileReadRequestReset inferred Comment confirms: resets the object's fields (1 at offset 4, 0x80 at offset 0x28) and zeroes the 0x100-byte block at offset 0x2C; called from asdFileEnqueueRead and messageSubmitRequest.
+001d0b28 linkListEraseMember inferred Own comment: "Forwards (this+0x1dc, other+4) to nw_ut_internal_LinkListImpl_erase_2B743C (tail call)"; called by voiceBankStop and posOwnerReach to unlink an entry from its owner's linked list.
+001d13dc holderGetOffsetPointer inferred Own comment: "Returns the address `offset` bytes (the value stored at 0x10) past the object"; called by slotTableFillResult.
+001ff724 uiQuestRebuildLists inferred Own comment: "Rebuilds the quest menu's two lists (available quests and accepted ones) and restores the cursors"; called by uiQuestCreate and stateHolder4Request. Twin smt4:FUN_00189c24 has the equivalent own comment ("Rebuilds the quest menu's two lists...").
+002039d0 effRandomSignedValue inferred Same scaled signed random-value helper as smt4:FUN_00291620, used by particleRingEmitterUpdate.
+00203d74 inputFastForwardActive inferred Returns true when the fast-forward/skip pad input (padQueryLogicalKey(9,2)) or slot flag 6 is active; same condition used by uiPanelCloseStateSection. Used by scrSlotRequestByArg, scrCommCheckCount, bustupSetTransitionScriptCommand, scrBtlStateApplyAmount.
+00208650 runWinDraw inferred Comment: "Draws the run window's title, its loading dots (a 3x3 grid where two dots are lit and their predecessors dimmed, advancing every 5 frames) and the label. Returns 0."; used by runWinOpen.
+00208984 runWinUpdateState inferred Comment: "Advance the escape window's open, wait, and close phases."; used by runWinOpen.
+0020b490 resultSetMode inferred Switches the result screen's mode, resets its frame/progress/touch regions, plays the matching sound, and for mode 23 handles the AOC-required-entries transition; used by resultCreate and roundObjFinish.
+0020ef94 mapControllerWorkReset inferred Comment: "Clears the controller work and its 64 records to their defaults, then finishes the reset."; used by resourceSlotsRelease.
+00214da4 placeWindowStartClose inferred Comment confirms: starts the place window's closing state (state=3) and its close animation; called from campScriptPanelResourcesRelease and mikadoCampVisitUpdate.
+00215254 playLogCreate inferred Comment: "Allocate play-log resources, build its sprites/pages and display the first page."; used by campMenuRunSelectedItem.
+00215bd0 unitStatusResetSpriteState inferred Resets the game session's status sprite animations/keyframes, clears menu-reset tracking, and transitions the game state to 2; called from campMenuRunSelectedItem, campCecRecvStatGainState, partyPanelCreate and roundObjFinish.
+0021af2c gameTransitionStartStep inferred Comment confirms: drives the transition object one step, starting the phases of the requested transition kind (dispatches to statusDownSwitchTab by phase for several kinds); called from statusPanelSetOpen.
+00221a08 appCompareFlagsThenSortKey inferred Twin of smt4 FUN_0019d758: compares app ids by flag bits, then the record sort key ascending.
+002248f8 btlUiDrawJobUpdate inferred Large per-frame update for the battle UI draw job (romwright-decompiled, 0x14e4 bytes); created as the update callback by btlCreateUiDrawJobs's taskCreate call.
+00227a70 mapCollisionRelease inferred Own comment: "Frees the collision buffers and clears the collision state"; frees g_mapCollision's buffers A-D; matches the role of smt4's already-named mapCollisionRelease (different address, not otherwise claimed in smt4a); called by lmapInitializeArea and mapRefreshResourcesForStory.
+00227af0 btlMenuSetMessageText inferred Own comment: "Set the short menu message and refresh its skill-use count for the current unit"; copies `text` into the menu's message field and recomputes the unit's skill-use count; called by btlUiStartCommandSelection.
+002281a0 eventEffectAlertJobUpdate inferred Own comment: "Job callback of the event effect: pulses its level up and down until the stop frame, then fades out and finishes (-1)"; created as the "EvtAlart Calc" process update by eventEffectStartAlert.
+002282c8 filterCreateByKind inferred Own comment: "Initializes the table of the given kind (0-10) and returns it; NULL for an unknown kind"; dispatches to filterCreateQuad/filterCreate4Poly/etc. per kind; bustupEffectStartLine calls it with kind 10 ('line' effect).
+0022838c gameWorldResetForNewGame inferred Twin of smt4 FUN_001a1110; large reset routine touching nkmBaseGetRecord/skillDataFindById records, consistent with resetting new-game world state; called from configSettingsResetDefaults and playerInitNewGame.
+00228b04 gridNavigationHandleConfirm inferred Same role/size as smt4:FUN_0029efd8; contentListUpdateNavigation calls FUN_00228b04(&screen->grid, 0) as the list's confirm/select-input check, same pattern as campUpdateListInput/updateNineRowListInput/sub10OwnerStart.
+00229264 mathStepTowards inferred Twin of smt4 FUN_00291008: steps a float towards a target without passing it.
+00229c9c lazyScriptTaskStep inferred Own comment: "steps the lazily started event script task (start, wait for the script, branch to the next entry, finish)"; drives a LazyScriptTask state machine; addonAdvanceBootTransition uses its result to gate advancing the boot transition.
+0022a0a0 sortMenuCalcUpdate inferred Per-frame update for the sort menu (scroll/touch handling via uiScrollHandleActionsOrTouch, button-help text/mode updates); created as the "SORT CALC" process update by sortMenuAcquire.
+0022b2d4 statusDrawJobUpdate inferred Large per-frame update for a status-screen draw job (romwright-decompiled, 0x3438 bytes); created as the update callback for both the "Status DrawUpLeft" and "Status DrawUpRight" tasks in statusAcquireSharedResources.
+0022e72c gameGlobalsStateIsIdle inferred Own comment: "Returns whether the game state is 0"; checks g_gameGlobals.instance->activeState == 0; used by saveLoadUiWaitPopupDismissed.
+0022e774 statusPanelClose inferred Own comment: "Closes the status panel: hides the status model, restarts the panel's sprite animations and returns to state 3"; called from several status/camp/save-load state machines (campCecRecvStatGainState, scrBattleRunStatusOperation, savedUnitEditorApplyOrClose, saveLoadUiSuspendOrRestart).
+00230544 statusDownPanelIsOpenAndIdle inferred Comment: "Returns 0 when FUN_002c7e54 reports 5, 6, 7, 0xC or 0xB, or FUN_002c7e3c reports 8, 9 or 3; otherwise 1" (gated on g_statusDown->panelEnabled); used by statusDownDrawIndicatorPairs.
+00230d30 statusDownRegisterTouchRegions inferred Clears and re-registers g_statusDown's touch regions per the current list/page kind (switch on unk0x518); used by statusDownOpenList and statusDownEnterStateSeven.
+00237da0 quadEffectCreate inferred Twin of smt4 FUN_00291310: creates a quad effect task without a destroy callback.
+0023a5f8 runWinDrawLoadingDots inferred Twin of smt4 FUN_001acdd8, identical run window draw (title, animated 3x3 loading dots, label); called from searchWinInitialize.
+0023a9a0 runWinUpdateTransition inferred Comment confirms: waits for the window to open, completes its interaction, and closes it (the equivalent transition state machine); called from searchWinInitialize.
+0023b3d0 gameStateIsNotTransitioning inferred Comment: "Returns whether the game state is neither 2 nor 1"; used by campCecRecvStatGainState, saveLoadUiPrepareSelection, panelUpdatePageExitTransition.
+0023f328 partyStatusRefreshSlot inferred Comment: "Refreshes slot `slot` of the screen: clears its stats, then fills them from the player, the battle unit or the stock record the slot points at, marking it unavailable when it cannot be used."
+00245d78 mapIfRestartActiveRecords inferred near twin of smt4 FUN_002646d4 (tools/shared.py): Comment confirms: marks active interface records for restart, runs three map update passes (refreshing the scene camera when asked), then restarts the timers of records still counting; called from mapMainEnterScene.
+00246450 mapIfShowContextPopup inferred Own comment: "Show the context popup for `context`, filling the message's placeholders from `count` and `value`"; called by mapIfDispatchCommand and mapIfStartTransition.
+0024b718 btlAutoStartCalculationJobUpdate inferred Large per-frame job update (romwright-decompiled, 0x578 bytes); created as the process update callback by btlAutoStartCalculation's taskCreate call (FUN_0024b718, FUN_002dec74).
+0025c7e4 jyoucyuAdvancePhase inferred Advances g_jyoucyu's work phase (0->1->2) and triggers FUN_0022258c(0) at phase 2, returning -1 to signal completion; used by jyoucyuInitialize.
+0025ef68 mapResolveCollisionSphere inferred Comment: pushes a sphere out of four lists of collision planes (walls/floors, two passes each with varying radius), records touched planes and the last wall hit, and returns whether motion changed; used by mapProbePositionDownward.
+00261254 eventEffectDrawFullScreenQuad inferred Comment confirms: draws a full-screen quad in the event effect's color while preserving the render-state stack; called from eventEffectStartAlert.
+0026c1a8 unitDrawStatusEffectIcons inferred When the unit's state is in a specific mode (unk2018 == 3 or 10), draws two status icons at stereo screen positions with speed-driven alpha from the unit's sprite headers; called from statusAcquireSharedResources.
+0026c3a0 gameGlobalsIsActiveStateFour inferred Returns whether g_gameGlobals.instance->activeState == 4; included alongside event/2dEvent/SmokeFade.h, used by several state-gated callers such as campCecRecvStatGainState and saveLoadUIUpdate.
+0026fa30 partyPanelReconfigureStockGrids inferred Comment confirms: reconfigures the stock grids for the current stock size and page, keeping each grid's selection; called from partyPanelHandleLayoutToggle and partyPanelHandleCursorEdgeInput.
+00270a70 aocMainPollShutdown inferred returns 1 while the AOC scene job runs, else shuts the AOC system down and frees its scene resource; polled beside shopPollShutdown
+00270bfc btlUiObjCStateIsNotFourteen inferred Own comment: "Returns whether the state is not 0xE"; identical role to smt4:FUN_0028c600 (same struct/logic, named in this batch); called by btlUiIsPanelHolderReady.
+00272f54 mapEnemyResetEncounterState inferred Resets g_mapEnemy->state to 4, clears its elapsed timer and two game-state bytes; called by scrCommRefreshActiveMap.
+002747dc mapIfResetRecords inferred near twin of smt4 FUN_00297a00 (tools/shared.py): Resets all 128 MapIfState story-marker records (state, timers, proximity limits, id) to their defaults; used by mapInitializeStoryMarkerEffects and mapMainEnterScene.
+0027dda4 shopMainUpdatePhase inferred Twin of smt4 FUN_001d9634: same shop-main per-frame phase state machine (open/wait-list/close/exit) with a shop list/request record; called from shopCreateProcessAndDrawTasks.
+00280030 btlUiPanelOperationIsAllowed inferred Own comment: "Use the embedded flag for an enabled mode-three state; otherwise allow the operation"; called by btlUiPanelStart and btlUiSelectCommandTargetState.
+00280840 debugGuideDrawGrid inferred Projects a `count`x`count` grid of lines (spaced by `spacing`, centred at x/y/z) to screen space and draws them as debug guide lines (FUN_0032c810); called by renderEditorSceneDrawOverlay to draw a reference grid.
+00282f00 effectEditorFrameStep inferred Identical body/comment to smt4:FUN_001dcc64 (effect editor per-frame step), distinct from the existing effectEditorUpdate.
+0028324c randomSignedScaledRange inferred Twin of smt4 FUN_00291234: a random value in a range, divided and signed by mode.
+00283328 randomSignedRatio inferred Twin of smt4 FUN_0029118c: a ratio signed positive, negative or at random by mode.
+0028a888 screenBuildItemDescriptionMessage inferred Formats an item/skill/equipment description into message string slots (battleAttributeFormatName, skillFormatTargetLabel, textFormatFullWidthNumber, scrSetStringSlot) from the given id; called by screenShowMessage.
+00290ba4 btlUiSessionDestroy inferred Comment: "Tears down the session: resets its sub-state, releases its handle, frees the session itself and notifies the owner's window"; called by talkEventStartScript.
+00291e50 lmapSceneMoveToWaypoint inferred twin of smt4 FUN_001e2478 called by scrCommLmapMoveToWaypoint
+00292b84 lmapCameraUpdate inferred Large per-frame local-map camera update (romwright-decompiled, 0x1398 bytes): advances camera animation, resolves distance/heading with trig helpers; called by uniteCameraDestroy and statusCameraDestroy to resume the local-map camera.
+00297024 mapEnvironmentSetLight inferred twin of smt4 FUN_001e39ec, takes an environment entry's light fields
+002980e4 btlAuxQueryCommonUpDownPair inferred Comment: "Queries the battle aux object for the common up/down entry matching the sign of `direction`"; used by scrBattleStartChainedEffect and scrCommBattleQueueActorMessage.
+002a1850 cameraProjectToScreen inferred Twin of smt4 FUN_002630e0: projects a world point to screen x/y and view depth for the target markers.
+002a21c8 buttonHelpIsStateActive inferred Comment confirms: returns whether g_buttonHelp.work->state == 2; guards menu32Advance and uiMenuActivateAndCountEntries from running while the button-help overlay is in that state.
+002a2e98 mapCollisionLoad inferred Own comment: "Loads the collision data of map `map`/`area` (and, when `second` is non-zero, a second map/area pair as an overlay): allocates the work buffers and builds both data sets"; called by lmapInitializeArea and mapRefreshResourcesForStory.
+002a3600 commonBgDraw inferred Draws the CommonBg owner's background (as a composite sprite or a full-screen quad depending on mode) using g_commonBg.owner and g_renderCtx; referenced near campCommonBgAcquire.
+002a3f54 eventFilterDrawOverlay inferred Comment: "Draw callback of the full-screen event filter: one overlay image faded by the work's opacity and pulse."; used by eventFilterStart.
+002a482c resourceDispatchTaggedOperation inferred Dispatches a tagged selection payload to resourceRunOperationIfUnblocked or resourceRunEmbeddedOperationIfUnblocked based on a tag byte; used by list/menu row drawing/update callers.
+002a4b28 compendiumEntryIsRegistered inferred Reads bit1 of a save-data entry indexed by demon id in g_gameDataBlocks, used alongside itemIsCollectedWithRelated to decide whether a demon is eligible for fusion catalog listing; twin FUN_00231bcc in smt4 is unrelated code despite the batch's guess.
+002a6894 saveMarkIdListSeen inferred Comment confirms: marks every id (skill/race id, 1-500) in an 8-entry id list as "seen" in the save block's seen-bit set; called by demonRecordInitialize and battleRecordInitializeFromDefinition.
+002a6a38 btlSlotHasReadyKind inferred near twin of smt4 FUN_001ee498 (tools/shared.py): Comment: "Returns 1 for entity kinds 1, 3, 5, 6 and 8, else 0"; used by btlSlotsHaveReadyUnit.
+002ac390 saveLoadUiSnapshotGameData inferred Comment confirms: snapshots the game data table, config settings, and save data before the save/load UI edits them; called from saveLoadUIUpdate.
+002b2c44 appCompareFlagsThenSortKeyDescending inferred Twin of smt4 FUN_001f64c0: the descending flags-then-sort-key comparator.
+002b950c soundActorQueueIsEnabled inferred twin of smt4 FUN_001fb4d8 at the same call site of scrCommSetMapScopedState
+002bda9c asdListBoxUpdate inferred the update callback asdListBoxCreate registers for every list box process, paired with asdListBoxDestroy
+002bf09c soundArchiveLookupItemByLabel inferred Checks the sound archive is available then resolves a sound item id from a name/hash; used by scrCommSoundChannelRequestByName, scrPlayVoiceScaled, scrCommBgmPlay.
+002c23cc frameTexConfigureCaptureTextures inferred Allocates and configures the frame-capture textures (RGB565 format, physical address lookup) via configureFrameCaptureTexture; used by btlStageUpdate.
+002c52d8 debugHookStub inferred Own comment: "A debug hook armlink removed (the jump to it became a nop)"; just calls the removed weak FUN_002c52d8_hook(0), a leftover debug call that is a no-op in retail; called from btlResultTaskStart.
+002c75c0 saveLoadRunnerCreate inferred Own comment: "Creates the save/load runner and its four tasks"; allocates a SaveLoadRunner, creates its process (name "SAVELOAD_UI C") and the three draw tasks parented to it; called by saveLoadStartWindowWithArgument.
+002c7bb0 skillApplyToTarget inferred Own comment: "Resolve table 4's record and apply it to the requested target"; looks up a skill record by id (skillDataFindById) and applies it via FUN_0028809c(user, target, record, apply=1, result); called by btlCommandResolveSelectedTarget.
+002c7e24 gameGlobalsGetBlock1390 inferred Returns g_gameGlobals.instance->block1390, an already-named struct field; simple accessor used by statusDownGetHelpMessage and others.
+002c7e3c gameGlobalsGetFieldState inferred Returns g_gameGlobals.instance->unk2017, an enum-like field state code (0,2,3,4,8,9,10,12 tested by callers); fieldStateAllowsAction's own comment lists it alongside FUN_002c7e54 as one of the "field state checks".
+002c7e54 gameGlobalsGetSceneState inferred Returns g_gameGlobals.instance->unk2018, the same field written by FUN_002c85b0 (named gameGlobalsSetSceneState in this batch); queried by fieldStateAllowsAction/statusDownGetHelpMessage for codes 3,5,6,7,8,9,10,0xB,0xC.
+002c8538 gameGlobalsSetOverlayActive inferred Stores a byte flag (g_gameGlobals.instance->unk2012) read back by FUN_002a73f8; set to 1 when opening camp/UI screens (saveLoadUIStart, partyPanelCreate, campMenuRunSelectedItem) and 0 when closing/destroying them (sceneObjDestroy, campCecRecvStatGainState), consistent with an "a modal UI screen is open" flag.
+002c85b0 gameGlobalsSetSceneState inferred Writes g_gameGlobals.instance->unk2018 (remapping 8 to 3 and recording selectionWasEight), a code later tested elsewhere (FUN_0026c1a8: unk2018 == 3 || unk2018 == 10); called from scene/screen open-close and selection flows across many modules (sceneObjDestroy, campCecRecvStatGainState, saveLoadUIStart) as a scene/step state code setter.
+002c8940 uniteDrawPanelRows inferred Draws the unite candidate list rows (textDrawString, texDrawCompositeSprite, uiDrawListScrollBar) using uniteGetWork/listCursorGetRowIfUnblocked for the current selection; only caller is uniteDrawPanel.
+002cb278 campListRegisterTouchRegions inferred Own comment: "Registers the list screen's touch regions: the scroll bar (when the list overflows), the rows and, in mode 0, the two extra buttons"; called by campUpdateListInput and campSkillListUpdate.
+002cb55c playerDataBuildPresentationRecord inferred Builds a UnitPresentationInfo-style record from the player data (copies name via gameGetPlayerName/libc_strcpy, pulls itemTableGetEquipmentRecord, demonBuildAffinitySlots, countUnlockedSlots, levelGetExpRequirement); called from FUN_0031f718 as FUN_002cb55c(info, gameGetPlayerData(), flags) and from gameGlobalsQueueValues to fill a queued values buffer.
+002cccf8 btlUiWidgetStateIsIdle inferred Own comment: "Returns 1 when the state is one of 0, 6, 0x12..0x17, 0x19..0x1B and 0x28"; tests a BtlUiObjCA-like object's state field against its idle/ready set of codes; called by btlUiPollWidgetResult.
+002ccde8 btlMenuResolveHighlightedCommand inferred Own doc comment: "Maps the highlighted command to (action, argument)"; reads the battle menu cursor/page state and blocked-command bitmask to fill *action/*argument, called by btlCommandResolveSelectedTarget and btlUiPollWidgetResult.
+002cd118 statusPanelResetRows inferred Own comment: "Reset the party panel's rows and set each row's sprites for the current display variant"; writes row count/selection/variant fields and resets each row's sprite widgets; called by btlUiStartCommandSelection.
+002cf09c gfxQuaternionFromMatrix inferred Converts a 3x4 rotation matrix to a quaternion using the trace-based algorithm (matches the classic matrix->quaternion conversion), storing into DAT_006472dc; engineApplyGlobalParameters calls it on a matrix pointer (declared as u32 but used as Mtx34*).
+002ddea0 lmapUpdateEngineRecordNavigation inferred Comment: "Reports each active record's pending talk/navigation event and registers the ones that need a navigation marker."; used by lmapApplyMapAndArea.
+002dec74 dialogTaskStopInfoWin inferred Comment: "Stops the task's job if it is valid, first running dialogClose(1) when dialogIsActive allows it."; used by btlAutoStartCalculation.
+002dece8 btlEffectOverlayDraw inferred Comment: "Draws the battle effect's child object inside its own render state."; used by btlEffectCreateTasks.
+002dedf0 btlGameOverJobStep inferred Comment confirms: advances the saturated game-over timer and dispatches once battle flags permit it; called from btlCreateGameOverJobs.
+002e0898 debugEditorListSetCellSize inferred exact twin of smt4 FUN_002271e8 (tools/shared.py): Stores (a, b) into the current job's work (unk58/unk5C); btlCameraEditorInitializeList and btlDebugEditorStep call it with explicit width/height constants (12, 16) for a debug editor list.
+002e10f0 sequenceSelectorHandleInput inferred Twin of smt4 FUN_0021073c, identical sequence-selector input handling.
+002e1b64 digitsDrawPaddedNumber inferred Comment confirms: draws a seven-column decimal number left-padded with spaces; used by cecCardDrawBackgroundAndLabel and uiDrawNumberFrame.
+002e1c94 timedValueInterpolateStep inferred Comment confirms: interpolates toward target, clamps overshoot, and reports completion; called from slideFadeWindowStep to advance a slide/fade window value.
+002e2014 campCecEditHasConfirmFlag inferred Returns whether g_campCecEdit->unk10F is set; called from campCecEditPollConfirmation to detect a confirm result.
+002e207c linkControllerResetScaleAndCancel inferred Comment confirms: resets the link controller's scale for the holder's kind, cancels a pending link and finishes; called from campCecPreviewEquipmentChoice.
+002e2114 linkedTargetRunHolderLinks inferred Comment confirms: runs every link of the target's holder at the target position and applies its uniform scale, returning whether it ran; called twice from campCecPreviewEquipmentChoice.
+002e2848 scrollListHandleTouch inferred Comment confirms: handles a touch on a scrolling list (prev/next controls step one, a bar touch jumps to position) and returns whether the touch was used; called from uiScrollHandleActionsOrTouch.
+002e486c messageBannerStartCounter inferred Sets g_messageMain.banner's counterState to 3 and initializes counterDelta/counterElapsed/counterDuration from value, starting a banner counter animation; called from scrCommAddOrRemove.
+002e64a0 npcRoomCreate inferred Twin of smt4 FUN_0026dcd4: creates the NpcRoom process and draw tasks for the room id the debug menu passes.
+002e707c lmapDestinationHasAvailableRecord inferred Scans data table 0x35's entries for ones matching the given destination id whose requirement/exclusion flags and save flag all pass, returning whether at least one qualifies; called from lmapRefreshDestinationAvailability.
+002e72c8 digitsDrawString inferred Comment confirms: draws a string of digit glyphs (space = skip) as 7-pixel-wide texture entries starting at (x,y); called from digitsDrawAtAreaCorner.
+002e9f00 onlineInstanceCompleteWithChildren inferred Completes the current online instance (FUN_00103e8e) then recursively completes each of its child instances found via the online instance table; called from onlineCompleteVectorJob, onlineJobFinishValueRequest and onlineJobCompleteWithResult.
+002ea00c destroyObj005585a4 inferred Writes &DAT_005585a4 as the vtable, then tears down an online-context resource, frees associated allocations, and resets fields — the destructor body of the Obj whose vtable is at 0x5585a4, following this codebase's destroyObj<vtableAddr> naming; called by several deletingDtor_* wrappers and destroyObj* siblings.
+002ea6bc lazyStaticInitOnce inferred Same lazy-init shape as FUN_002ea6cc (checks the flag at offset 0x68) but calls the parameterless FUN_0043d144 instead; called from chunkStreamFlush.
+002ea6cc lazyMemberInitOnce inferred Comment confirms: one-time setup that runs FUN_0043d210 on the object's member the first time it is called, tracked by an "initialised" flag at 0x68; called from chunkStreamFlush.
+002ea704 watcherGetEnabledFlag inferred Reads offset 0xa0 of the context returned by watcherGetActiveContext (FUN_002eb5f4), or 0 if none; called from watcherRefreshEnabledState.
+002eb5f4 watcherGetActiveContext inferred Looks up a context via FUN_002eb56c/FUN_002ecedc(1,...) and returns it, or NULL; used by watcherSetEnabled and (indirectly) watcherRefreshEnabledState to find the current watcher context.
+002eb624 deletingDtor_002eb624 inferred Sets the vtable pointer, tail-calls the base destructor FUN_002f59f8, and returns the this-adjusted pointer: the standard deleting-destructor shape; called by deletingDtor_0010d2b0 and destroyObj005598b4.
+002eb7c0 deletingDtor_002eb7c0 inferred Sets the vtable pointer then tail-calls _ZN9Obj5593b8D1Ev, the standard "deleting destructor" shape used throughout this codebase (named deletingDtor_<addr>); called from other deletingDtor/destroyObj wrappers.
+002ebce4 partyPanelIsOutsideDialogState inferred Comment confirms: returns 0 when g_partyPanel->sceneState == 0x17, otherwise 1; called from dialogEnterState to check whether the panel isn't already in that (dialog) state.
+002ec70c deletingDtor_002ec70c inferred Thin forwarder to destroyObj00559e44, the deleting-destructor wrapper shape; called by deletingDtor_00105904.
+002ecac4 deletingDtor_002ecac4 inferred Sets the vtable pointer then tail-calls the destroy body FUN_002eb7c0, the standard deleting-destructor shape (named deletingDtor_<addr> elsewhere in this codebase); called from several destroyObj* wrappers.
+002ecf28 objectRegistryGetOwnerForCurrent inferred Looks up a registry holder via FUN_002ecedc(0xc, FUN_002eb56c()) (classes/ObjectRegistry.h) and returns its owner, or NULL; called from an Obj558c90 destructor during teardown.
+002ef9f0 mapRndMazeTaskIsActive inferred Comment confirms: returns whether the task at DAT_00588e2c exists and its job is still found (i.e. running); declared in map/mapRndMaze.h, called from partyPanelChangeState.
+002f0384 statusCameraRestore inferred Own comment: "Restores the status camera, from the size preset or the default eye, in the two screen modes that show it"; checks g_gameGlobals.instance->unk2018 (the scene-state code), sets the eye from a preset or default constants and applies the status camera. Called by savedUnitEditorApplyOrClose, saveLoadUiSuspendOrRestart, saveLoadUiPrepareSelection, saveLoadUIStart.
+002f0420 statusScreenRefreshForSelection inferred Own comment: "Refreshes the status screen for the selected demon (`second` selects the second entry): the skill lists, the slot counts, the owned demon list, and the help text shown for the demon the entry belongs to"; called by statusPanelSetOpen.
+002f153c uiQuestGetPendingAction inferred Trivial accessor returning g_uiQuest->unk90D; questCenterResolveSelection stores its result in a local named `action`.
+002f197c uniteDrawDetailPanel inferred Draws a unite panel sub-screen (text, item/status icons, texture quads) for state 0x1C in uniteDrawPanel's switch, distinct from FUN_002c8940 (uniteDrawPanelRows, states 3/4).
+002f2a22 ownerRunOperationLocked inferred Own comment: "Executes the operation while holding the object's mutex"; locks the owner object's mutex, runs FUN_002f9fd4 with the argument, then unlocks; resourceRetireAndQueueTarget calls it to hand a retiring target off to its owner instead of destroying it directly.
+002f3bc4 uniteBuildResultUnitRecord inferred Reads g_unite's packed fusion result pairs at `index`, builds the UnitRecord for the fusion result id (unitRecordBuild) or merges the two source units depending on `mode`; called by campFusionResultCommand for the fusion result preview.
+002f3dc4 onlineInstanceCompleteMode2 inferred Own comment: "Forwards a triple using insertion mode two"; forwards to FUN_002e9b30(object, 2, &copy, 1); sibling of FUN_002f3dde (mode 3), called from the same online-job completion sites.
+002f3dde onlineInstanceCompleteMode3 inferred Own comment: "Forwards a triple using insertion mode three"; forwards to FUN_002e9b30(object, 3, &copy, 1); called by onlineCompleteVectorJob, onlineJobFinishValueRequest and onlineJobCompleteWithResult to finish an online instance with a result.
+002f744c itemKindToSortGroup inferred Maps an item kind byte to a sort-group index via a switch table; itemCompareMappedGroupAndKeyDescending and similar comparators call it on both sides' `kind` field to order items by group.
+002f76ca stringSlotAssign inferred Frees the previous heap string at `slot+4` (if any) and duplicates the new C string into it (strDuplicateInto), returning the slot pointer; used throughout as a generic owned-string setter, including by onlineFormatWideString.
+002f7730 questGetDisplayState inferred Looks up a quest record by id (questDataGetRecord), returns -1 when missing, otherwise derives a small status code from party-entry flags; callers across the quest UI (questMarkSelectedSpecialDetail, uiQuestReturnToList, uiQuestListInput, uiQuestRefreshDetailPages) all compare the result against 3 to detect a particular display state.
+002f9d6a sharedRefAcquireFromOwner inferred Called by sharedRefAssignFromOwner right before releasing the previous value and swapping in the new one; takes (temporary-out, owner, source) and is the acquire/retain half of the shared-ref swap (mirrors sharedRefRelease on the other side).
+002fa722 onlineInstanceDispatchResult inferred Thin forwarder to FUN_002e9b30(instance, argument, value, constant) which manipulates an OnlineResultRecord/online call state; called identically from onlineJobApplyStateTriple and onlineJobDispatchInstanceResult as FUN_002fa722(instance, argument, &value).
+002fb208 threadGetCurrentId inferred Calls FUN_002e726c(&id, 0xFFFF8000) which wraps svc 0x37 (CTR-OS GetThreadId) on the current-thread pseudo handle, then reports failure via resultHandleFailure; recursiveLockEnter uses it to record the current thread as the lock owner.
+002fb404 btlUiWidgetEnterStatusMode inferred Own comment: "When the state word is set, runs btlCommandMenuEnterMode(object, 0x27, 1) and statusIconSetKind(object, 9)"; else presumably clears/leaves that mode; called by scrBattleRunStatusOperation.
+002fd93c fusionPairCompare inferred qsort comparator used as the sort function in fusionSortPairs (qsort(..., FUN_002fd93c)); compares two fusion pair entries via a g_unite-indexed record lookup (nkmBaseGetRecord).
+002fdb20 questCompareForDisplayOrder inferred Own comment: "Sort quests by completion status, special category, then descending display order"; used by uiQuestSortListByEntryKind's arraySortQsort pass.
+002fdc2c questCompareByKindGroup inferred Comparator used (with FUN_002fdb20) by uiQuestSortListByEntryKind's qsort pass; looks up each quest record and compares a field at +0xdc, then falls back to FUN_002f744c (itemKindToSortGroup) on byte +6 of the record.
+002fe074 uniteCandidateCompare inferred qsort comparator for uniteSortCandidateList in smt4a, playing the same role as smt4:FUN_002c6e90 (named uniteCandidateCompare in this batch), though the exact tie-break rules differ slightly between games.
+0030061c effectTimelineComputeDuration inferred Twin of smt4 FUN_0021a468, identical timeline duration computation.
+00300908 effectResourceSetColor inferred exact twin of smt4 FUN_0021a4dc (tools/shared.py): Comment confirms: sets the resource's color through its emitter type's setColor handler, if it has one; called from effectPollResourceFileDialog, effectEditorResetRotation and effectEditorResetVector.
+003020fc btlCombatantMatchesCategory inferred Looks up item/equipment/skill records (itemTableGetItemRecord, itemTableGetEquipmentRecord, skillDataFindById) against a combatant entry's data and a category/value argument; used throughout battle-eligibility checks (scrComm_Battle_UnitParamCheckA, scrAnyEligibleUnitIdMatchesCondition) to test whether a candidate entry matches the requested category.
+003026b0 streamReaderAdvanceU32 inferred Own comment: "Runs streamReaderReadU32 and returns `object`"; streamReaderReadWordValue calls it to advance the reader and discard the read word (reading the actual value elsewhere).
+0030337e sortedByteEntriesFind inferred Own comment: "Finds a byte-key entry with lower_bound and returns end when the key is absent"; binary-searches a SortedByteEntries range; listGetFirstValue uses it (with mismatched declared signature) as the underlying lookup.
+003033d4 lmapResolveContextValue inferred Own comment: "Resolves the explicit map-context value or derives it from the current context mode"; reads g_lmapViewHolder.view's contextOverride/contextValue; called by lmapSetFollowCameraTargetPose and lmapSetFollowCameraPose to get a preset.
+00303460 lmapCameraSetMode inferred Own comment: "Sets the camera block's mode and resets its transition state"; writes g_lmapViewHolder.view's mode/phase/timer fields; called from many places including lmapBeginTimedTransition.
+00306d0e onlineHandleWatcherCheck inferred Forwards to FUN_002f3214, which locks the online registry (onlineGetActiveLock) and looks an entry up via the sorted-byte-entries search (FUN_0030337e); handleWatcherPoll XORs its result with 1 to derive watcher->pending.
+00307d00 listAllocateSentinelNode inferred Pops a node from a free-list head or grows the backing storage (same shape as FUN_00308576/listAllocateNode); listInitEmpty calls it to obtain the list's sentinel node.
+00307dfe listAllocateSentinelNode2 inferred Sibling of FUN_00307d00 on a different pool/list type; listInitEmpty2 calls it to obtain its sentinel node.
+00308576 listAllocateNode inferred Pops a node from the list's free-list head, or grows the backing vector (vectorGrowCapacity_0012d304/rt_malloc) and carves a new node when the free-list is empty; onlineListInitialize calls it to obtain a fresh node.
+0030edec vectorDestroyRange inferred Calls the STL _C_destroy helper on an AsdAllocator-based std::vector over the [begin,end) range; clearStringVector calls it with the vector's own begin/end words to clear it.
+0030fb34 streamWriterWriteBits inferred Called by streamWriterWriteArray and other callers with a bit count (count*unitSize*8 / count<<3), performing low-level stream bit-packing (FUN_001224f4/FUN_00122554/FUN_0012259a, strAssign); the underlying bit-write primitive of the stream writer.
+003130cc popupSelectGameResultEntries inferred Comment: "Marks active entries of kind 16 selected (and makes the last one the current selection), the others unselected."; used by scriptPublishGameResultCallback.
+00317e50 archivePathRequestRoot1 inferred twin of smt4 FUN_00220438 (root 1 case of archivePathRequestSucceeded)
+00318794 campButtonHelpLoadSlot inferred Forwards to loadSlotEnsureLoaded(0xE) to ensure the camp button-help resource is loaded.
+00319f64 mapCollisionDisableByTag inferred exact twin of smt4 FUN_002878fc (tools/shared.py): Own comment: "Disable every matching tag in the four dynamic record pools and the static pool"; called by mapGimicReset per gimic id.
+0031ab38 effectEditorApplyOwnerOptionsPair inferred Twin of smt4:FUN_0024330c, called from smt4a's effectEditorApplySecondaryOwnerOptions.
+0031b654 effectProcessCreate inferred Comment plus debug-trace path confirm: creates the battle effect process (work area with its camera, the process job and its draw tasks), returning the process job; called from btlEffectCreateTasks.
+0031ba34 spatialEffectTaskCreate inferred Creates and initializes a SpatialTaskWorkA task: resolves the selector, stores position/scale/mode and clears its slot fields to -1; used by eventCommand_31BEBC and scrCommStartSpatialEventTaskAtXY. Twin smt4:FUN_00244e1c.
+0031bd24 battleStageLoadJobUpdate inferred exact twin of smt4 FUN_00221e1c (tools/shared.py): Own comment: "Load the battle stage environment/model, then register and initialize the ready model"; created as the update callback for the battle-stage load job by event3dEventModelMapCreate.
+0031c55c eventEffectBlinkFadeDraw inferred near twin of smt4 FUN_002222e8 (tools/shared.py): Comment: "Draw callback of the blink fade: one centred image, then the left/right pair offset by the position."
+0031cf00 stockFindSelectedUnit inferred Comment confirms: finds the first party record whose devil matches the saved record's id; twin behavior of smt4 FUN_00262f94 (own save layout).
+0031f208 useCounterAppendValue inferred Comment: "Append a value to the counter's value list (up to 20) and refresh the selection that shows it" (same as smt4:FUN_0029e328); used by partyPanelHandleLayoutToggle, campUpdateListInput, menuOpenCommandList.
+00320c64 aocBootDialogStart inferred Own comment: "Allocate the boot dialog if necessary and start its calculation process"; only caller is addonAdvanceBootTransition.
+0032246c effTreeStepAtScale inferred Same romwright-decompiled body/signature and identical callers (effOwnerRunAtUnitScale, effectBehaviorStep) as smt4:FUN_002c74ac.
+00323bc4 effectTimelineChildrenFit inferred Twin of smt4 FUN_002c79c4: checks the children's durations fit in the timeline part.
+00323e60 effParticleEmitterCreate inferred Twin of smt4 FUN_002c7c28: creates a particle emitter with its buffer and a copied parameter block.
+003248e4 btlCombatantTestApplicableActions inferred Own comment: "Test applicable skill records, using the single action for restricted combatants"; called by scrCommUnitCheck and scrCommBtlHasCandidateWithId.
+00327558 aocDataTable23Section3GetEntry inferred Twin of smt4 FUN_002c9b90: record of data table 0x23 section 3 including the add-on records.
+0032c494 listSourceGetFirst inferred Same offset-0x20 getter pattern as smt4:FUN_002cb8d0 (used by listCursorGetRowIfUnblocked / listCursorGetRowOfChildIfUnblocked); matched to the smt4 twin which is explicitly labelled first in its caller.
+0032c518 gfxModelSlotReplaceTemporary inferred Comment: "Temporarily replaces the selected scene slot, retaining its old node for restoration."; used by modelSlotAttachChild. Related to smt4:FUN_002cbaf8 (gfxModelSlotSetActive) but not an identical twin.
+0032c900 romFileCreateSized inferred Twin of smt4 FUN_002cbe94: creates a file of a given length, closing it on failure.
+0032c9fc fileSendPathRequestRoot0 inferred Twin of smt4 FUN_002cbf90: sends a root-0 path request to its archive device.
+0032cab4 romFileOpenForWrite inferred Twin of smt4 FUN_002cbfe8: opens a root-2 path for writing.
+0032cb58 spatialSoundActorStart inferred Identical body/callers to smt4:FUN_002cc08c (soundActorStartOnFreeChannel).
+0032d61c campCecCreateEffectDraw inferred Large draw routine (romwright-decompiled, 0xbb8 bytes) drawing textured sprite effects with per-frame animation; called by campCecEditCreateEffect and campCecViewCreateEffect.
+003316b4 dataTable25Section0FindById inferred Twin of smt4 FUN_002cdecc: finds a data table 0x25 section 0 record by id.
+00335060 saveListDraw inferred Comment confirms: draws the save list (selected slot first, then the other slots, then optional extra rows and the footer); called from campDrawCurrentSubscreen.
+00335934 scrCommEffectRequestByName inferred Twin of smt4 FUN_002cfd0c: script command requesting an effect by name on g_btlAux.
+00336aec btlUiSlotTrackerEnableSlot inferred Comment confirms: enables tracker slot `index` with the given value and mode, and adds `amount` to the total its mode selects (0 or 1); called from btlUiQueueSlotPositionRequest.
+0033e1d4 mapModelsPollDeferredDestroy inferred twin of smt4 mapModelsPollDeferredDestroy, polled at the same step of mapDepartStepTeardown
+00340c2c cecMessageBoxApplyOperation inferred Comment: "Applies a message-box operation and reports success"; used by cecCardMessageBoxOpenIfAllowed.
+00344348 campCecRecvCreate inferred Comment: "Creates the CEC receive screen: allocates its state, starts the calc/draw tasks, works out whether the feature is available (restriction code in `restriction`) and either loads the script/message files for the error path or opens the receive window."; used by campCecRankingWaitAndResume context in campCecRecvWaitAndResume.
+003447a0 campCecViewCreate inferred Comment plus debug-trace path confirm: creates the CEC view screen's work area, process and draw tasks, then the three row sets and the page for the first entry; called from campCecWaitForView.
+00345ad4 titleSceneDrawEffectMenuHandler3 inferred near twin of smt4 FUN_002d7d84 (tools/shared.py): Comment: "Runs effect-menu handler 3 under render state renderCtxPackPassFlags(1, 1) pushed on the title scene's first stack."; used as titleSceneFinishCallback.
+00345cd4 titleSceneDrawEffectEditorMenu inferred near twin of smt4 FUN_002d7f74 (tools/shared.py): Comment: "Draws the effect editor's menu with its own render states pushed, then pops them again."; used as titleSceneInitializeCallback.
+00347688 quadEffectTaskCreate inferred Twin of smt4 FUN_002d8238: creates a quad effect task and its work block.
+0034a16c effScalarKeyFindNextDistinct inferred Same next-distinct-keyframe finder as smt4:FUN_00291340, used by particleRingEmitterUpdate.
+0034a544 statusDownCreateScreen inferred Sets up the status-down screen (sprite/texture resources via asdMemoryAllocTracked, loads bitmap/font resources); only caller is statusAcquireSharedResources.
+00350cf4 effGeomCreateBufferHandle inferred Twin of smt4 FUN_002de270: creates a buffer-style geometry handle with an optional default tint.
+00350d90 effGeomBuildGridMesh inferred Same grid-mesh builder as smt4:FUN_0024505c (repeats/pattern/verticesPerSection build a band-repeated index/vertex buffer).
+0035105c geometryOwnerSetGeometry inferred Comment: "Replaces the owner's geometry with the one for `id`; the flags depend on the kind"; used by effHolderSetParams.
+003516e4 effJobComputeQuadVertices inferred Computes an effect particle's billboard quad (rotated/scaled corner positions, per-corner color and UVs) for the current frame from the job's state; invoked by effectAdvanceFrame.
+003538d0 mapGimicReset inferred twin of smt4 mapGimicReset, called at the same step of mapDepartStepTeardown
+00353b00 popupMarkNewlySeenEntries inferred Comment: "Marks every id 1-0x8C whose data flag is set (or whose check does not return 2) as seen; when something new was marked outside a popup, opens popup type 0x18"; used by popupStateSetAndShow.
+00353d74 mapObjectSpawnAmbientEffects inferred Comment: "Spawn the ambient effects of every active map object, by kind"; used by mapRefreshResourcesForStory.
+00356308 fieldFindAreaPlacementRecord inferred Comment: "Returns entry `index` of data table 0x29, continuing into the add-on content table past its end (NULL when out of range)"; used by fieldBuildAreaPlacementList.
+00358f70 asdCecResetMessageBoxImpl inferred Comment "Forwards to asdCecResetMessageBox, the function that follows it"; called by cecProcessCall1 on the CEC message box.
+00358fbc cecMessageBoxRequestOpen inferred Comment "Runs the CEC message-box request below"; called by cecProcessCall2 on the CEC message box.
+00358fc0 asdCecMaintainMessageBoxOnce inferred exact twin of smt4 FUN_002e0dfc (tools/shared.py): Comment confirms: opens the CEC message box and, on success, runs maintenance on it before closing it again; called from cecMaintainMessageBox.
+003592dc asdListBoxJobReset inferred Comment: "Releases the job's list and resets its cached source endpoints and count."; used by btlDebugClose, btlDebugFlagMenuCreate, btlDebugCreateUnitMenu, btlReserveEditorOpenList.
+003596e0 archivePathRequestRoot2 inferred twin of smt4 FUN_002e1458 (root 2 case of archivePathRequestSucceeded)
+00359768 soundActorStartIdle inferred Comment: "Start an idle spatial actor and convert the 0..127 volume to its relative gain."
+00359974 entryTableResetAndInit inferred Comment: "Clears entry `index` of the 0x68-byte entry table, then forwards the other arguments for it"; used by s4LoadDrawProfilePanel, campMenuRunSelectedItem, campCecRecvStatGainState.
+0035af44 cecProcessInitializeAndStart inferred Comment: "Initialize inbox accounting, allocate its worker stack, and start the CEC thread."
+0035b76c effectEditorDrawMenu inferred near twin of smt4 FUN_002e1c04 (tools/shared.py): Comment confirms: draws the effect editor's menu with its own render states pushed onto g_titleScene, then restores them; called from titleSceneUpdateCallback.
+0035ba3c effectEditorBindTexture inferred Twin of smt4:FUN_00242f94, called from smt4a's effectEditorBindObjectTexture.
+0035bd94 nkmEnemyRecordCopySkillIds inferred Comment: "Copy up to eight skill IDs, preferring the downloadable table over the base table"; named source4CCopyHalves is a caller reference, this is the enemy record skill-list copier.
+0035c0c8 eventMessUnderFadeJobStep inferred Twin of smt4 FUN_002e2250, identical EventMessUnderFade job step.
+0035c810 gauntletAppMenuCreate inferred Own comment: "Creates the Gauntlet app menu: work area, process and draw task, unlock flags, sprites and script data"; only caller is campMenuRunSelectedItem.
+0035cc80 effScalarChannelAdvance inferred Same scalar-channel keyframe advance as smt4:FUN_00291060, used by particleRingEmitterUpdate.
+0035d89c partyRecordClampEquippedRankDown inferred Forwards to FUN_0035e460(arg, 0) (negative/other direction); used by partyRecordSetEquippedItemClampRank.
+0035da20 statusDownSetSelectedIds inferred Comment: "Replace the eight-entry status filter, or disable it for a negative count"; used by statusCommitSelectedSkills.
+0035e458 partyRecordClampEquippedRankUp inferred Forwards to FUN_0035e460(id, 1) (positive direction); used by partyRecordSetEquippedItemClampRank.
+0035fcbc btlTalkBustUpIsIdle inferred Comment: "True while the battle talk bust-up sprite is idle and in mode 10."; used by scrCommTalkBustUpShow.
+003626bc xformObjectSetTransform inferred Identical to smt4:FUN_0024f7d4 (same matrixInitializeWithScaleAndOffset helper and matrixApplyByMode call).
+0036af24 mapSnapshotTransitionDestination inferred Comment confirms: snapshots the current map position and the requested destination for a transition into g_gameState's saved/target fields; called from scrCommRun3.
+0036bea0 asdTextDrawFormattedCore inferred Twin of smt4 FUN_002869e8, same large record-table-driven formatted text draw routine.
+0036c580 bustupStartUniformShake inferred Comment plus debug-trace path confirm: starts a uniform-amplitude shake job, fading during its final ten frames when timed; called from scrCommStartEventTextureEffect.
+0036d984 mapCollisionRaySegmentTest inferred Tests the segment from start to end against the map's active collision quads, returning the intersection point when it crosses a quad's plane within tolerance; called from mapEnemyTryStartApproach.
+0036dff4 campCommonBgRenderFrame inferred A large (~350 line) per-frame draw routine using texDrawCompositeSprite/texDrawTableEntrySized and render-context color/scale resets; called from campCreateCommonBackground.
+003712a4 saveLoadProcessCreateTask inferred Large (~200 line) routine that allocates a save-data copy, applies game-flag triggers/tagged groups, compacts party slots and tracks timing; called from saveLoadProcessCreate.
+00371750 saveLoadProcessWriteStep inferred Comment confirms: step function of the save-write process (stage 0 snapshots the extra block and writes it, stage 2 builds and writes the full save image, stages 1/3 wait for the write, stages 4/5 end with a result); called from saveLoadStartSave.
+00371b10 saveFormatSlotFilename inferred Comment confirms: formats the slot's save filename ("sdds4game%d.sav"), optionally with the "sdds4/" directory prefix; called from addonAdvanceBootTransition.
+00373dc8 scrCommBtlUiShowPanel inferred script command that shows or hides the battle UI panel by argument 0 and waits for its animation
+003743a4 btlUiPartyDisplayDrawEntry inferred twin of smt4 FUN_002f1558 by call position in btlUiPartyDisplayDraw (called twice, in the same states; FUN_0028f740 is smt4 FUN_0025ee64's twin)
+003756c8 btlPlayMenuConfirmSe inferred Picks and plays one of several sound-effect ids based on the battle state's stat-growth/transition flag masks and game flags (0x525, flag bit 0x10); called from menu32Advance, uiMenuActivateAndCountEntries and btlActionStepFinishPendingChanges.
+00375c30 effBehaviorScaleType7 inferred behavior type 7 scale slot of g_effBehaviorTable: copies the initial parameters to the current ones scaled
+00375da8 effBehaviorScaleType4 inferred behavior type 4 scale slot of g_effBehaviorTable: copies the initial parameters to the current ones scaled
+00375e10 effBehaviorScaleType3 inferred behavior type 3 scale slot of g_effBehaviorTable: copies the initial parameters to the current ones scaled
+00376fa4 mapSetActiveEntryId inferred exact twin of smt4 FUN_0027d8b4 (tools/shared.py): Sets gameGetMapBlock()->unk020 = value; called widely with ids (target->id, enemy->result) from scrCommRun3 and script/encounter code.
+00377acc mapEnemyRebindModel inferred Comment confirms: releases the previous owned or borrowed model, then binds a matching enemy selection record to the slot; called from mapEnemyMoveIdleActorToRecord.
+0037976c dataTable42GetCombinedRecord inferred returns row index of data table 42 section 1, then the add-on packages' '$' rows that follow it
+00379858 dataTable45GetSection4Count inferred returns data table 45 section 4's row count plus the add-on packages' '%' rows
+00379ca0 scrCommScreenFaderOut inferred script command that fades screen fader 0 out (state 2) over argument 0 frames and waits until it settles
+0037aaec archivePathRequestSucceeded inferred runs the path request of archive root 0-2 on its path argument and returns whether the result is a success
+0037b280 bustupCutAnimCreate inferred Allocates and initializes a BustupTextureCreateWorkA (clears it, sets previousId -1) for the given portrait; only caller is scrCommBustupCutAnimStart, whose name this mirrors.
+0037c8e4 messageBannerInitCounter inferred Comment confirms: initializes the message banner's counter state from the selected data source (money or an alt data block) and prepares its sprite; called from campResetScreen, campCecRecvMenuIdleState and questCenterResolveSelection.
+0037cdcc effectEditorPollTextRequest inferred Polls or creates the effect editor's text-entry request node, copying its label/state/linked value into the result and freeing the node once its state reaches 1; called from effectPollResourceFileDialog, effectEditorResetRotation and effectEditorResetVector.
+0038589c dataTable45GetSection3Count inferred returns data table 45 section 3's row count plus the add-on packages' '%' rows
+00385964 dataTable42GetSection0Count inferred returns data table 42 section 0's row count plus the add-on packages' '$' rows
+00385bc8 scrCommScreenFaderIn inferred script command that fades screen fader 0 in (state 1) over argument 0 frames and waits until it settles
+00387454 effectTexturesLoadOnce inferred Comment confirms: loads the 22 numbered "be_%04d.stex" effect textures once, tracked by g_effectTexturesLoaded; called from effectPollResourceFileDialog, effectEditorResetRotation and effectEditorResetVector.
+0038755c rowWidgetSetMode inferred Identical body/callers to smt4:FUN_002fc248 (gridNavigationConfigure).
+0038ada8 scrCommLmapMoveToWaypoint inferred script command passing waypoints (arguments 0-1 and 2-3) to FUN_00291e50, which moves the map scene between them
+0038c380 scrCommBtlTestActiveEntryCount inferred script command that sets the result to whether the battle active entry count (0 or 1) is at most argument 0
+0039a17c handleObjectFree inferred Same caller (campCecViewDestroy, view->handle[i]) as smt4:FUN_00309e94 (named handleObjectFree); its own definition file was not found to confirm the body directly.
+0039a6a4 scrMessageShowLockedForQuestState inferred Identical body/caller to smt4:FUN_0030a02c (scrComm_Message_ShowFromQuestStateWaitLock).
+0039aec8 effEditorResetFrameState inferred Resets the render context's frame state and forwards it to FUN_0035b76c; used by effEditorCreateJobs.
+0039ba24 versionedResourceCollectIds inferred exact twin of smt4 FUN_0030a728 (tools/shared.py): Own comment: "Enumerate distinct identifiers from a versioned resource's single or indexed payload"; handles both format 0 (single id, legacy/modern layout by version) and format 1 (indexed) resources; called by entryCollectNewIdentifiers.
+003a4448 asdCameraCreateFromResource inferred Comment: "Creates the scene objects described by the camera resource `resource`: one scene per entry of its table, and for every camera animation of that scene an animated camera registered with it."; used by asdCameraLoadFromFile.
+003a6efc scrCommBustupStartTransition inferred script command passing job argument 0 work id and frame argument 1 to bustupCutStartSlotTransition
+003a7554 scrCommLmapRestoreSpawnPose inferred script command passing arguments 0-2 (map, waypoint group, point) to lmapRestoreSpawnPose
+003a947c scrCommBtlGetDataValue inferred script command that sets the result to value argument 1 of the battle data row with id argument 0
+003a9a8c scrCommBtlRollWeightedRow inferred script command that rolls 0-99 against a battle weight table (sections 10-12) and returns the one-based row
+003aa57c effObjectParticleSetSource inferred Twin of smt4 FUN_00313760: replaces the particle source and rebuilds the per-entry motion states.
+003b51a4 mapGimicCreateModel inferred Own comment: "Find the map's matching gimmick, create its model and register the controller"; only caller is mapGimicInitializeProcessing.
+003c5d8c textureCacheGetDirection inferred Identical role/callers to smt4:FUN_00246708 (btlPollVersionedEffectTexture).
+003c5fdc engineCleanupOwnerWaitAndDestroy inferred Comment confirms: waits for the owned object's job to stop before destroying and freeing it; called from scrCommStartActionWait.
+003c8538 renderStatesSubmitCached inferred twin of smt4 FUN_00248ae8 at the same call site of Obj464cb0::post0f0103
+003d0bc0 campRebuildListByMode inferred Large rebuild routine (romwright-decompiled, 0xc4c bytes) taking a mode/id; called by campRebuildEnabledFlagList and campSelectorRebuildList with their own mode argument.
+003d2158 soundApplyValueOrStop inferred Own comment: "Apply the value to the selected sound family unless resident table entry one is active"; used all over (scrCommResetPanel and many script commands) to apply a bank value or stop a sound slot.
+003d3738 spriteWindowAdvanceOrCancel inferred Own comment: "Moves an active sprite window to state 3 and restarts its sprite animation (or clears its state byte when a sound or flag blocks it)"; called by scrCommPollWindowAndReleaseTask.
+003d44ac btlTalkBustUpApplyTexturePlacement inferred Twin of smt4:FUN_0032c3fc (same UI sprite texture-placement logic), same caller role for the bust-up demon texture.
+003d4dd4 easeEvaluate inferred exact twin of smt4 FUN_00227280 (tools/shared.py): Own comment: "Evaluate linear or quarter-wave interpolation at an integer frame fraction"; mode 0 is linear, modes 1/2 are sine-based ease curves; used across the battle camera system (btlCameraUpdate, battleVectorTransitionUpdatePath, battleCameraBlendTargetOffset) to blend transitions.
+003d5000 resourceHandleRelease inferred Same caller pattern as smt4:FUN_002877d4 (resourceTableReleaseHandles, releasing slot->handle).
+003d8f24 effShakeParticleAdvance inferred exact twin of smt4 FUN_00257e74 (tools/shared.py): Comment: "Advances the particle one frame: picks a new random velocity (opposing the old direction when it is moving), fades the amplitude out over the last three frames of its life and clears it once the lifetime is over."; used by eventTexUpdateScreenShake.
+003daaf8 statGrowthAccumulate inferred Own comment: "Accumulates mana growth over the applicable level intervals, applying the mana scale and the stat cap"; called by unitBuildStatGrowthPacket and playerResetToStartingStats for HP/MP growth.
+003db56c gauntletAppMenuDrawScreen inferred Twin of smt4 FUN_0033149c: draws the Gauntlet app menu from its draw callback.
+003de188 naviMainCreate inferred Comment: "Creates the navigation screen: allocates its state, starts its update and draw tasks and applies a queued request."; used by naviMainBeginClose.
+003dea6c scrMessageSetSpeakerTitle inferred Looks up a quest/record title by id and writes it into message string slot 40 (scrSetStringSlot), converting/formatting it when requested; called by scrComm_Message_ShowConfirmAndApply, messageScriptAdvanceSpeaker and the quest UI to set the confirm box's speaker/title text.
+003df57c skillGetCostWithRankReduction inferred Own comment: "Calculate a skill's cost after equipped-skill rank or unlocked global cost reductions"; distinct from the already-named skillGetAdjustedCost (used alongside it, see FUN_002b2748's comment); used throughout battle MP-cost checks and sorting (btlSkillCompareBySortKey, kindRefTieBreak, campSkillListUpdate).
+003dfd08 saveDataAdjustCounterB inferred Own comment: "Adds `delta` to the halfword at +0x2830E, clamped to 0..999"; sibling counter to FUN_003dfdf0, called by scrCommDispatchSignedValue for mode != 0.
+003dfdf0 saveDataAdjustCounterA inferred Own comment: "Adds `delta` to the halfword at +0x2830C, clamped to 0..999"; called by scrCommDispatchSignedValue for mode 0.
+003e4140 copyDefaultWordsPair inferred Own comment: "Copies the two default words of table DAT_00536bcc into `dest`"; called by statusAcquireSharedResources, objBMarkAndInit20D4, stateHolderMarkAndInit2588.
+003e41f8 gameDataArea28350SetBit inferred Own comment: "Sets or clears flag bit `id` in the area's bit array" on the same gameDataBlockGetArea28350 bitmap as FUN_003e44ec; called by gauntletAppBuildAvailableEntries.
+003e44ec gameDataArea28350TestBit inferred Own comment: "Tests bit `index` of the flag bitmap returned by gameDataBlockGetArea28350"; called by gauntletAppBuildAvailableEntries.
+003e48dc partySlotClearInactiveFlag inferred Finds the party slot with matching id and clears flag bit 0; called by partyRestoreActiveSlots.
+003e4b2c partySlotLevelUpTo inferred Finds the party slot with matching id and, if below `targetLevel`, raises its level by up to `maximumIncrease`, applying learned skills; called by scrCommForwardTriple.
+003e4e4c saveSlotTableSetPreferredId inferred Sets gameGetSlotTable()->preferredId = value; called by scrCommSelectActivePartySlot and partyRestoreActiveSlots.
+003e573c namedResourceSlotAssign inferred Own comment: "Points slot `index` at the resource `name` of kind `kind`: an open slot showing another name releases its object, an idle table opens it directly (state 4), otherwise it is queued (state 5)"; called by playerLoadOutfitPartModel, playerModelLoadByIndex and playerLoadOutfitModels.
+003e688c btlAiScriptStep inferred Own comment: "Loads and executes a battle AI script, then releases both its process and file data"; only caller is btlAiScriptUpdate.
+003e71a8 touchToContinueSplashStep inferred Own comment: "steps the touch-to-continue splash (loads its textures, pulses the prompt, fades in, waits for a touch or a timeout, then tears down)"; only caller is stepStateBattleStart.
+003eae20 tableFileFindByKeyPair inferred Own comment: "Finds the record of the owner's table file (table 1) whose key pair is (first, second); NULL when absent"; called by btlUnitSlotBind.
+003eb760 btlEntryApplyOptionOverrides inferred Initializes/overrides a BattleEntry's kind/id/category/variant fields from packed ten/six-bit option values; only caller is battleApplyOptionOverrides.
+003ecd24 btlDataFindRecordById inferred searches section 0 of the battle data-table file for the row with the given id
+003ecfb4 btlUnitStateInitFromRecord inferred Own comment: "Initializes a battle unit's state block from a demon record (or the selected save slot's record when `useSaveSlot` is set)"; called by saveSlotApplySelected.
+003eda28 tableFileGetSlotEntry inferred Own comment: "Returns entry (id - 15) of the holder's file table when id is 15-21 and the entry exists; otherwise the first entry (NULL without a file)"; called by btlUnitSlotBind.
+003f3104 characterPickRandomEntryValue inferred Comment confirms: picks a random entry of the demon's character row (the first 12 on a roll, the rest otherwise); called from entrySlotStoreRecordValue.
+003f9ac4 cameraMotionSampleAtFrame inferred Samples a camera motion clip's transform, roll and target curves at a given frame (via per-curve sample helpers and clip transform/roll/target indices), producing a CameraMotionOutput; called from uniteResetPreview and controllerRefreshAtUnitScale.
+003fce08 aocResourceStartOnce inferred Comment confirms: starts the object once, recording the resource's value in its first slot, then running the start callback; called from eventUpdateTextureFadeJob, aocLoaderUpdateRecords and sceneResourcesAreReady.
+003fd140 spriteAnimationPlayAtTime inferred Twin of smt4 FUN_0033f3a0, identical keyframe lookup/interpolation and play.
+003fd924 motionPlayerStartBlended inferred Comment confirms: starts motion `index` in the other slot, blending from the current one over `blend` frames; called from mapGimicPlayEntryAnimation and lmapInitializeActorHandles.
+00400d80 btlStageModelLoad inferred Own comment: "Loads the stage's map and BAM models (falling back to stage 1-1 when a file is missing) and records the BAM positions"; only caller is btlStageUpdate.
+00401198 renderRangeTargetApply inferred Computes the begin/end range (start + 25570 offset, or overrides when the target's high flag bit is set) and packs mode bytes into g_handleRegistry->target; called by drawStoreAndApplyParameters and btlStageUpdate.
+00401b50 enemySpriteDeriveOrigin inferred Comment: "Derive the centered screen-space origin for an enemy frame or its replacement image."; used by attachmentsSetOffset.
+0040307c contentListDrawRows inferred Draws the content list's visible rows (texture sprites, scroll bar via uiDrawListScrollBar); only caller is contentListDraw.
+00405dec moriModelArrayConstruct inferred Allocates array storage and attaches unit model content, animations and material animation handling; called from the Obj557b58(int) constructor in Model/MoriModelArray.
+00407598 spatialCameraUpdateLookAt inferred Advances a LookAtCamera's eye/target/angles each frame (Euler phase rotation, MTX34 identity-based rebuild); only caller is spatialAdvanceTransformTransition.
+00407ab0 moveCameraCtrlSetup inferred Comment confirms: sets up the mikado move-camera controller (camera model, camera data, named points and the two marker models); called from mikadoCampVisitUpdate.
+00408240 saveFlagTest inferred exact twin of smt4 FUN_00342044 (tools/shared.py): Comment: "Tests an indexed packed flag"; used by eventRefreshVisibility.
+00408338 saveSetFlagRow inferred Twin of smt4 FUN_0024c2a8: sets or clears one bit of a group's save flag row.
+004083a8 interactionVariantIsEnabled inferred Own comment: "Whether interaction `id` has variant `variant` enabled: fixed answers for a few ids, the scene state for ids 0x79/0x7A, else the variant's bit in the id's flag row"; called by flagsSetIfUnset3 and lmapRefreshDestinationAvailability.
+004085a8 virtualSlotAlwaysTrue inferred Own comment: "Virtual slot that always answers 1"; called by playerLoadOutfitPartModel and playerLoadOutfitModels as a default/always-ok virtual hook.
+00408c3c btlTargetSelectDrawPanel inferred btlTargetSelectDraw calls it with the information panel (Obj557bd8) in mode 1
+00409fe8 resourceCacheGetOrLoadModel inferred Own comment: "Returns the cached model resource for `id` (negative ids are NPCs), creating and starting its load when it is not cached yet"; called by eventUpdateTextureFadeJob, uniteResultInitialize, eventCreateResourceBattleTexture and eventCreatePositionedBattleTextureJob.
+0040a378 questCenterCounterAddSaturating1A inferred Same saturating +0x1a halfword counter adder as smt4:FUN_00343a04 (comment identical), reached via gameDataBlocksGetStats in smt4a.
+0040a3c8 questCenterCounterAddSaturating14 inferred Same saturating +0x14 halfword counter adder as smt4:FUN_00343a74 (comment identical), reached via gameDataBlocksGetStats in smt4a.
+0040a908 moriModelContentSetRequestFirst inferred Own comment: "Sets the content's request first setting unless the body already exists"; sibling of FUN_0040a918, same callers.
+0040a918 moriModelContentSetRequestSecond inferred Own comment: "Sets the content's request second setting unless the body already exists"; called by uniteCreatePreviewModel, lmapRebuildModelContent, playerModelStartBaseMotion.
+0040ab8c moriModelContentIsLoaded inferred Own comment: "Whether the content's file is loaded"; checks MoriModelContent->file != NULL; called by mapGimicStartById and lmapActorRestoreTransform among many others.
+0040afcc btlEffectSettingsClearIfSet inferred Clears the value at offset 0x3C (valueClear) if it's nonzero; only caller is btlEffectSettingsReleaseTask.
+0040b11c connectionTableFindVariant inferred Looks up a DestinationConnection record matching (group/area, model/point) in one of three connection tables and derives a model/variant id from it combined with the equipped item at `current`; shared by destination-acceptance checks and playerLoadOutfitPartModel/playerLoadOutfitModels's outfit-part model selection.
+0040bd04 uniteEnemyRenderSetup inferred Romwright-decompiled setup routine (0x48c bytes) allocating/configuring render resources (asdMemoryAlloc); file UniteEnemyRender, only caller is uniteResultInitialize.
+00411458 btlPartnerDrawEntries inferred Draws the group's 12 model/variant/motion entries at their placements with a packed draw color, pushing/popping render-context state; called from btlPartnerAttackApplyState.
+0041210c btlPartnerAttackJobStep inferred Comment confirms: applies state transitions, advances looping animation slots and saturates the elapsed-frame count for the battle animation controller; called from btlPartnerAttackJobCallback.
+00416664 btlLabelDrawActiveEntries inferred Draws every active battle label entry's sprite and faded text with stereo parallax offset; called from renderObjAttach.
+00417b70 gameFlagUnlockEntryById inferred Comment confirms: marks entry id as seen and active, runs rosterAddUnit (FUN_00417e08) for ids that qualify, and sets the linked id's bit in the bitmap; called from gameUnlockEntriesByLevel.
+00417e08 rosterAddUnit inferred Comment confirms: adds a unit to the roster, refreshes its state flags, stores it in the active party/leader slot/first free stock slot, clears the related flag range, returning 0 when the id cannot be added; called from messageScriptAdvanceSpeaker and questCenterInitEntry.
+00418960 btlTargetSelectDrawMarkers inferred btlTargetSelectDraw calls it with the marker group (Obj557d48) in mode 2
+00419e38 effectRecordSetsDestroyAll inferred Comment confirms: resets and frees every record of the three parallel effect record lists, then the lists themselves; called from btlEnsureEnemyDrawResources.
+0041aca8 particleEmitterSpawnOne inferred Comment confirms: creates a particle for the model from the emitter spec, a random start offset, a random direction scaled by a random speed, and a randomised target position; called from resourceEnsureCachedObject.
+0041bb2c effDriftEffectAdvance inferred Comment: "One frame of the effect motion; on the last frame it snaps the controller to the final values." Same purpose as smt4:FUN_0034ad94.
+0041e3a0 spriteListMenuResetSprites inferred Comment confirms: resets the cursor (when asked) and every item sprite to keyframe 8 / image 1 and clears the offset; called from saveLoadUiWaitPopupDismissed, saveLoadUIUpdate and saveMenuCacheSlotHeadersStep.
+00422ef8 movieAudioDeviceShutdown inferred Comment: "Shuts the movie audio device down: stops every voice, joins the mixer thread, frees its stack, the voice slots and the DSP component."; used by mobiclipShutdown.
+0042343c block158CountReadyEntries inferred Same ring-buffer ready-entry counter as smt4:FUN_0034ee48, used by block158OwnerReady.
+004265f8 cecServiceSendRequest7 inferred exact twin of smt4 FUN_00351f7c (tools/shared.py): Comment "Sends service command 7" over the CEC service handle DAT_004655f8; used by resetFlag5891A4And65f8.
+00426fe4 aocOpenPackedArchive inferred Comment: "Open a packed archive ID, translating unavailable media errors and cleaning failed handles"; used by AocMenu::runMainProcess.
+004288e0 recordQueryAndValidatePair inferred Same record-pair query/validate pattern as smt4:FUN_0035398c.
+00428940 recordQueryAndValidatePairWithKey inferred Same key-checked record-pair query/validate pattern as smt4:FUN_003539e8.
+00429d58 vtableRunIfPresent inferred Same guarded virtual-call wrapper as smt4:FUN_0023a170 (calls vtbl+0x30, or returns 0xC8804465 for NULL); used by recordClearWideHandle.
+0042d378 cecInitializeOnce inferred exact twin of smt4 FUN_0035778c (tools/shared.py): Comment: "One-time CEC initialization; returns the first failing result, or the service setup's"; used by cecInitializeServices.
+0042fe18 cecdServiceCloseHandle inferred exact twin of smt4 FUN_00358f74 (tools/shared.py): Closes g_nnCecdHandle via svcCloseHandle when open, else returns a not-initialized-style error; used by cecStopService.
+00431594 textConvertBoundedToUtf8Impl inferred Same forwarding helper as smt4:FUN_0035a404, implementation behind systemKeyboardReadUtf8.
+004315a8 textConvertToBoundedWideImpl inferred Same forwarding helper as smt4:FUN_0035a418, implementation behind textConvertToBoundedWide.
+00431e1c nnFndExpHeapUnlinkFreeBlock inferred Unlinks a node from the expanding-heap free-block doubly linked list (prev/next pointer fixups) and decrements its count; branched to by nnFndDetailRemoveBlockFromRegion.
+0043299c ctrNetInitializeSockets inferred Comment plus debug-trace path (CTRNetInit.cpp) confirm: initializes the network module by allocating/registering its work buffer, opening the session and setting it up, returning 1 on success; called from ctrNetInitialize.
+00438944 convertToBufferAndStoreImpl inferred Same thin forwarding wrapper as smt4:FUN_0035eabc, implementation behind convertToBufferAndStore.
+0043aa48 ipcSendParameterlessCommand0x2c0000 inferred Twin of smt4 FUN_003607d0, identical parameterless IPC request (0x2c0000); called from serviceCloseInitializedHandle.
+0043aab4 ipcSendParameterlessCommand0x270000 inferred Comment confirms: sends the parameterless service request (IPC command word 0x270000) and returns its service result; called from nnResultCheckReport0043aab4.
+0043ab50 ipcSendParameterlessCommand0x2b0000 inferred Comment confirms: sends a parameterless request to the service (request 0x2b) and returns its service result; called from modelServiceEnsureOpen. Twin smt4:FUN_003608d8 identical.
+0043ab80 ipcQueryByteCommand inferred Twin of smt4 FUN_00360908, identical IPC byte-query command (0x280000).
+0043ac34 ipcQueryHandleCommand inferred Twin of smt4 FUN_003609bc, identical IPC handle-query command.
+0045092c resourceDispatchResolvePayload inferred Same resource-reference lookup shape (FUN_0018e0cc/FUN_001a90f0) as smt4's documented resourceDispatchResolvePayload (FUN_0036eaf0); romwright view obscures details but the call pattern matches the on-demand payload resolution.
+0045b96c linkListInsertByKind inferred Inserts the object into one of two linked lists (at +0x18/+0x1c or +0x24/+0x28) depending on a byte at +0x18 of the inserted node (nw_ut_internal_LinkListImpl_insert); called by callerARelease3C and callerARelease78.
+004705ec aocPackageHasVoiceContent inferred Same comment and logic as smt4:FUN_0023e330.
+004706e8 aocResourceStateValueKind12 inferred Twin of smt4 FUN_00389700, identical resource-state value lookup (kind 12).
+00470b18 aocPackageHasTextureContent inferred Same comment and logic as smt4:FUN_0023e3a4.
+00470bdc packageSelectableRecordFind inferred Searches a data table's entries (via dataTableGetEntries/dataTableGetCount) for a matching id, returning the PackageSelectableRecord pointer or NULL; wrapped by contentFindRecordById.
+00470e48 aocResourceStateValueKind16 inferred Twin of smt4 FUN_00389dc0, identical resource-state value lookup (kind 16).
+00471244 fieldPlacementGroupSpawn inferred Comment confirms: places every entry of a named placement group, offset by (x,y,z); returns 0 when the record or group is missing. (The batch's "devilDrawResolvedTexture" caller label is misleading; the code is about field placement groups, not texture drawing.)
+00472350 aocMainAdvancePendingRequest inferred Comment confirms: the AOC job step that takes the content system's pending request (or the one it already holds) and queues the follow-up request when the event allows it; called from aocRunType32.
+004731d8 gameSaveBlockRebuild27E98 inferred Rebuilds the save block at offset 0x27e98 (packed byte fields plus five floats) from a local copy; called from mapRestoreSavedDestination, scriptHolderUpdateSimple, aocBootStep and aocBootStepLoadQuestScript.
+00476dfc compareU16KeyAscending inferred Twin of smt4 FUN_0038e29c, identical ascending u16 comparator.
+0047e430 aocBootResetAndReleaseBuffers inferred Own comment: "Resets the object to state 12 with the given flag, frees its three buffers, then enters state 13 and pokes the two device slots that are in mode 3"; this is a different function from smt4:FUN_0022af9c (the guessed twin is wrong - this one is a multi-field object reset, not a simple field setter), named independently from its own evidence.
+0047fc38 equipmentIsFullyUpgraded inferred Comment confirms: true when this equipment item cannot accept any further upgrade bonus (checks power/secondary bonus caps per category); called from itemSelectionCanUse.
+00483acc objectPoolDestroyAll inferred Comment confirms: deletes every object in the pool and updates the live/owned counters; called from lmapMainStateRefreshSetter and lmapInitializeArea.
+0048821c naviSwitchTextureSetForMap inferred Comment confirms: switches the navigation texture set before dispatching the selected map kind, loading special textures once when entering a non-local map; called from naviMainSetSelectionResetProgress and an Obj5323 navi handler.
+004883c8 naviSetSecondaryMarkerSlot inferred Comment confirms: sets a secondary navigation marker slot from its category record, or clears an unused slot; called from naviConfigureEntry and sub68OwnerStart2.
+0048a378 naviRefreshBackgroundAndFeedback inferred Comment confirms: refreshes map background state and chooses navigation feedback after tearing down button help; called from naviMainBeginClose, naviMainUpdateSlider and related Obj5323 navi handlers.
+0049339c uiDrawCompositeSpriteAtRectCorner inferred Comment confirms: submits a composite sprite at the rect's bottom-right corner, shifted by (dx,dy), with its value; called from listRefreshDirtyRows.
+0049ae34 equipmentMenuRunStateHandler inferred Comment confirms: finishes equipment selection or tears down the menu's active child resource, dispatched by menu->state; called from placeWindowRunStateHandler.
+004a0404 playerCanAffordRecoverySkill inferred Comment: "Check whether the player or a usable party demon can afford the recovery skill."; used by uiPlayGatedActionFeedback.
+004a1958 demonScreenRebuildEntryList inferred Comment: "Rebuilds the entry list for the screen: scans every record (or the party for mode 1), appends the listed ones with their display data, then updates the column layout, the completion percentage and the header count."; used by demonScreenConfirmSaveRefresh and FUN_004a38bc.
+004a559c bibleAnalyzeDrawMenu inferred Twin of smt4 FUN_003a9648, same bible/demon-analyze screen draw routine; called from an Obj55c8d0 render vfunc.
+004a998c btlUiPanelShow inferred twin of smt4 FUN_003ae03c at the same call site of scrCommBtlUiShowPanel
+004a9c04 btlUiPanelHide inferred twin of smt4 FUN_003ae2b0 at the same call site of scrCommBtlUiShowPanel
+004a9d1c btlUiEnterStateEntryStartup inferred Sets the battle UI state to 8 and forwards to FUN_002fb4b8 on objA; used by battleAdvanceEntryStartup.
+004a9d40 btlUiPanelIsAnimationDone inferred twin of smt4 FUN_003ae3f0 at the same call site of scrCommBtlUiShowPanel
+004aa2bc btlUiIsSpriteInactive inferred twin of smt4 btlUiIsSpriteInactive at the same call site of scrCommBtlUiShowPanel
+004aa8b0 btlUiObjCApplyVisibility inferred Forwards to FUN_0032134c on the battle UI's objC sub-object; used by scrCommApplyBattleHandleMask and btlActionStepFinishPendingChanges.
+004aaa94 btlUiEnterStateSpawnEffects inferred Sets the battle UI state to 5 and initializes objB block 368; used by btlSpawnStageHeightEffects.
+004ab734 btlUiRefreshMenuPanel inferred Comment: "Refreshes the battle UI menu and panel when the menu is not in mode 6 and spriteOperationGetModeThreeCompletion succeeds."
+004ab7f4 btlUiObjCApplyPreset inferred Forwards to FUN_003756b8 on the battle UI's objC sub-object; implementation behind btlEntryApplyPresetAndEnableUi.
+004aba3c btlUiObjCGetSelectedSkillDemonId inferred Forwards to FUN_003bcf20 on the battle UI's objC sub-object; implementation behind btlScriptGetSelectedSkillDemonId.
+004ac044 btlUiEnterState27 inferred Comment: "Sets the battle menu argument and enters state 27" (sets battle UI state to 20, enters objC state 27); used by btlResultTaskStart.
+004b75d0 transformInterpolationStep inferred exact twin of smt4 FUN_0022b778 (tools/shared.py): Own comment: "Advance the active transform interpolation by one frame"; interpolates valueA/valueB/x/y toward their targets and clears the active flag on completion; called by eventUpdateScriptLaunch, updateContentTransitionDispatch and mikadoCampVisitUpdate.
+004b7d88 soundPlayCueForContextKind inferred Comment confirms: plays the cue of kinds 4/3 specially (SE 0xEA/0xEB), else a default SE 0x43, unless gameFlag 0x40C is set; called from aocBootStep, aocBootStepLoadQuestScript and mikadoCampVisitUpdate.
+004b9588 mikadoCameraDrawView inferred near twin of smt4 FUN_003ba63c (tools/shared.py): Own comment: "Draws the view at 0x9C under render state renderCtxPackPassFlags(1, 0) once the work reaches state 3 (nothing in state 0x11)"; only caller is mikadoDrawCameraCallback.
+004bb2e4 cecCheckResourceCanOpen inferred Own comment: "Dispatches resource 0x19A2 with the active context" via asdCecCanOpenMessageBox; same role as smt4:FUN_003bbc7c.
+004bcaa8 statusCollectUnlearnedSkillsAboveLevel inferred near twin of smt4 FUN_0026a9cc (tools/shared.py): Comment confirms: collects skills of devil id learned above level that aren't already in the known list (8 entries), returning how many were added, or none when skip is set; called from statusReplaceSkillList.
+004bd0d8 slotIsReservePick inferred Comment confirms: returns whether the demon is one of the three reserve picks in the slot table; called from btlTalkChooseRandomPartyTarget.
+004c53fc mapCategoryToDestinationGroup inferred Byte-identical to smt4:FUN_00245cc0 (own comment: "Categories seven through eleven use the special -3 result"); called by btlSlotManagerResetStates and btlAdjustPropertyClamped.
+004c8894 btlHelpAppendMessage inferred Comment confirms: appends a help message unless the battle is in a state that suppresses messages (checked against g_btlHelp's blocked states/transitions); called from scrCommReplaceBattleDialog.
+004c97cc btlTalkWindowStep inferred Own comment: "Per-frame state machine of the battle talk window: loads the tone resources, starts the talk script, applies its result and finally clears the pending mask. Returns -1 when done"; only caller is btlTalkUpdateIfPresent.
+004cf978 naviSlotStart inferred exact twin of smt4 FUN_003c28a8 (tools/shared.py): Comment confirms: starts the slot (state 1) with `value` in both value bytes and resets the counter, unless it is already started; called from NaviMode_Enter and naviMainApplySetting.
+004d0584 inputConfirmPressed inferred Returns true when the confirm button-help entry is active or the confirm pad button is pressed; called by AocMenu::runQuestDialog and Obj53604::FUN_00498ac0. Twin smt4:FUN_0027ee9c is the identical function.
+004dc154 fusionFindClosestLevelEntry inferred Twin of smt4 FUN_003c9948, identical closest-level-entry lookup.
+004e83ac btlActionTargetSlotScore inferred Reads an ActionTargetEntry's flags/selection state from the owner's table at `index` to compute a targetability-related result; only caller is btlAiBestTargetScore, whose name this mirrors.
+004f2c40 btlCameraJobDispatch inferred Large per-frame battle-camera job step (romwright-decompiled, 0x1298 bytes) operating on a CameraBlendFrameView; only caller is btlCameraDispatchCurrentJob.
+004f6254 actionSequenceTriggerRangeAnimation inferred near twin of smt4 FUN_00226a90 (tools/shared.py): Picks the preset range-animation group (1/2/3) for a RangeAnimationOwnerIV and starts the matching first/second range animations whose id and duration match; called by actionSequenceDispatchTriggers, actionSequenceUpdateLoopTransition and FUN_00226fc0.
+004f716c btlEffectResolveRequestedEffects inferred Own comment: "same as the IV twin" (smt4:FUN_003da5e8); identical role/logic in the analogous four-step update.
+004f7b84 effectRequestByName inferred Twin of smt4 FUN_003db258: replaces the pending effect request with the named effect.
+004fa828 btlEffectModelJobDispatch inferred Twin of smt4:FUN_003dd1a4, called from smt4a's btlEffectDispatchCurrentJob.
+004fad68 btlApplyDirectionBucketEffect inferred Computes a unit's attachment position (FUN_003ecab8) and applies a direction-bucket effect; only caller is btlApplyDirectionBucket, whose name this mirrors.
+004fb798 btlRecoverHpMpByPercent inferred Adjusts a unit's HP/MP by a percent-based amount (btlAdjustPropertyClamped) and queues the action message; only caller is btlScriptRecoverHpMpPercent, whose name this mirrors.
+004fc094 btlAdjustPropertyAndQueueAction inferred Large (0xd48 byte) core battle routine combining btlAdjustPropertyClamped, btlCombatantGetSummaryValues and btlQueueActionMessage; called by scrComm_Battle_StartUnitAction, btlScriptDamageFirstCombatantAndQueueAction, scrBattleQueueHpAdjustment and scrBattleDamagePartyNonlethal to apply an HP/MP change and queue its action message.
+004fdcd8 btlQueueMessageTableReflectAction inferred Builds a ReflectAction from the given actor/target/options and effect name (checking btlEffectNameHasPrefix against g_btlAux); only caller is btlEmitMessageTableEntries.
+004ff8dc floatTableResolveValue inferred Own comment: "Resolves the selected value, falling back to slots two and three"; only caller is controllerGetSourceTiming.
+005004a8 aocEnumerateContentWindow inferred Twin of smt4:FUN_003df5d0, called from smt4a's aocEnumerateContentRecords.
+005143ac mobiclipCtrlReleaseResource inferred exact twin of smt4 FUN_003f6b28 (tools/shared.py): Validates the mobiclip control block and its release callback (DAT_0044e990+4), then calls it to release the resource's two tracked handles; called from mobiclipCtrlShutdown and resourceSlotRelease.
+005153f0 variantCopyWithToken inferred Comment confirms: copies a tagged value, including owned child values, using the supplied replacement token; twin of smt4 FUN_003f718c.
+0016f988 srvGetServiceHandle inferred Gets a service session handle by name and length: called with "am:app", "fs:USER" and "nim:aoc".
+002b4078 effEmitterCreate inferred Exact twin of smt4 effEmitterCreate (same code): allocates a zeroed emitter for maxCount particles.
+003d2688 gauntletAppMenuDraw evidence Twin of smt4 gauntletAppMenuExit, the "GauntletApp DDRAW" task callback.
+00138d34 gfxInitDefaultDrawColor inferred Sets up opaque white and makes it the default draw colour (g_defaultDrawColor).
+002c2c68 gridNavigationGetItemCount inferred Twin of smt4 FUN_0029ee54: the GridNavigation entry count (0 while disabled), the count gauntletAppSortMenuEntries sorts.
+00379d18 btlTargetSelectDraw inferred the draw callback FUN_00363990 registers for its "btlTargetSelect DrawUpL"/"DrawUpR" tasks; draws the panel or markers by mode
+0014166c asdProcessRunAuxiliaryPass inferred Runs each running process auxiliary callback, or replays its command list copy, in stereoscopic 3D.
+0014685c fsMountRomFs inferred Mounts the ROM file system as "rom:" with file/directory limits and a work buffer (nn::fs::MountRom).
+0038af04 scrCommSetAmbientSoundsStopped inferred script command that stops the map ambient sound actors (argument nonzero) or restarts or spawns them (0)

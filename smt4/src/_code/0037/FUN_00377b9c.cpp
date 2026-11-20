@@ -52,7 +52,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: UnsignedSaturate (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: UnsignedDoesSaturate (CALLOTHER). */
 /* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
-extern int FUN_0014d3fc(unsigned int, unsigned int, unsigned char *);
+extern int nw_snd_SoundArchive_ReadSoundInfo(unsigned int, unsigned int, unsigned char *);
 extern int FUN_0014d478(unsigned int, unsigned int, unsigned char *);
 extern int FUN_0014d530(unsigned int, unsigned int, unsigned int *);
 /* Supplied declaration required: basicSoundStopOrFadeOut. */
@@ -134,7 +134,7 @@ unsigned int FUN_00377b9c(unsigned int param_1,int *param_2,unsigned int param_3
   if (*temp_v31 != 0) {
     nw_snd_SoundHandle_DetachSound(temp_v31);
   }
-  temp_v1 = FUN_0014d3fc(*(unsigned int *)(param_1 + 4),temp_v32,temp_v13);
+  temp_v1 = nw_snd_SoundArchive_ReadSoundInfo(*(unsigned int *)(param_1 + 4),temp_v32,temp_v13);
   if (temp_v1 == 0) {
     return 3;
   }

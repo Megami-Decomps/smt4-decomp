@@ -15,8 +15,8 @@ void FUN_0025f6b8(PlayScene *scene, s32 expanded, s32 allLit, s32 lift, s32 dimG
 void campDrawPartyComparisonIndicators(PlayScene *scene, s32 forceFull);
 void FUN_0025ee64(PlayScene *scene);
 void FUN_0025d1c4(PlayScene *scene);
-void FUN_002f1558(PlayScene *scene);
-void FUN_002dc120(PlayScene *scene, s32 amount);
+void btlUiPartyDisplayDrawEntry(PlayScene *scene);
+void uiIconScrollerDrawArrow(PlayScene *scene, s32 amount);
 void selectionPanelDrawMarkers(PlayScene *scene, s32 drawAll);
 
 /* Draws the battle UI's party display for the scene's state. */
@@ -89,7 +89,7 @@ void btlUiPartyDisplayDraw(PlayScene *scene)
         FUN_0025f300(scene);
         FUN_0025ee64(scene);
         FUN_0025d1c4(scene);
-        FUN_002f1558(scene);
+        btlUiPartyDisplayDrawEntry(scene);
         break;
     case 22:
         FUN_0025f6b8(scene, 0, 1, 0, 0);
@@ -123,12 +123,12 @@ void btlUiPartyDisplayDraw(PlayScene *scene)
         if (scene->mode == 26 && scene->unk305C != 0) {
             break;
         }
-        FUN_002dc120(scene, 0);
+        uiIconScrollerDrawArrow(scene, 0);
         break;
     case 40:
         FUN_0025f6b8(scene, 1, 0, 0, 0);
         campDrawPartyComparisonIndicators(scene, 0);
-        FUN_002dc120(scene, 0);
+        uiIconScrollerDrawArrow(scene, 0);
         break;
     case 31:
         FUN_0025f6b8(scene, 1, 0, 0, 0);
@@ -190,7 +190,7 @@ void btlUiPartyDisplayDraw(PlayScene *scene)
         break;
     }
     if (scene->state == 6) {
-        FUN_002f1558(scene);
+        btlUiPartyDisplayDrawEntry(scene);
     }
     RenderCtx *context = g_titleScene;
     renderCtxSetB(context, packNibblesAndByte(6, 7, 0));

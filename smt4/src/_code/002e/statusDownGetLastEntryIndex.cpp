@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern int FUN_0029ee54(ScrollSelection *list);
+extern int gridNavigationGetItemCount(ScrollSelection *list);
 
 int statusDownGetLastEntryIndex(void)
 {
@@ -11,7 +11,7 @@ int statusDownGetLastEntryIndex(void)
     if (g_statusDown == NULL) {
         return 0;
     }
-    count = FUN_0029ee54(&g_statusDown->list);
+    count = gridNavigationGetItemCount(&g_statusDown->list);
     return count - 1;
 }
 

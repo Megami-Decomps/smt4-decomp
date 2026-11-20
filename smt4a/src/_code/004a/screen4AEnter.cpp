@@ -4,7 +4,7 @@ extern "C" {
 
 extern void messageDismissNumericBanner(s32 a);
 extern void buttonHelpSetText(s32 a, u32 color);
-extern void FUN_0022e774(void);
+extern void statusPanelClose(void);
 extern void uiSpriteBankApplyPreset(u8 *block);
 extern void sendEvent100020F(void);
 
@@ -15,7 +15,7 @@ void screen4AEnter(Screen4A *obj)
         messageDismissNumericBanner(1);
     }
     buttonHelpSetText(0, 0xF4F4F4FF);
-    FUN_0022e774();
+    statusPanelClose();
     u16 *page = (u16 *)((u8 *)obj + 0xA874);
     *page = 9;
     uiSpriteBankApplyPreset(obj->block0DC);

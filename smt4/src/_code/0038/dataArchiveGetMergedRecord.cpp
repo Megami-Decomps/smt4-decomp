@@ -4,15 +4,10 @@
 
 extern "C" {
 
-/* A 12-byte record of the merged tables. */
-typedef struct DataArchiveRecord {
-    u8 data[0xC];
-} DataArchiveRecord;
-
 void *dataTableFileGetTable(void *handle, u32 section);
 
 /* Returns record `index` of the '$' data tables of every loaded archive taken in order (NULL past the end). */
-DataArchiveRecord *dataArchiveGetMergedRecord(AocSystem *system, s32 index)
+DataTable42Record *dataArchiveGetMergedRecord(AocSystem *system, s32 index)
 {
     s32 base = 0;
     s32 i;
@@ -31,7 +26,7 @@ DataArchiveRecord *dataArchiveGetMergedRecord(AocSystem *system, s32 index)
                     s32 end = dataTableGetCount(table) + base;
 
                     if (end >= index) {
-                        return (DataArchiveRecord *)dataTableGetEntries(table) + (index - base);
+                        return (DataTable42Record *)dataTableGetEntries(table) + (index - base);
                     }
                     base += end;
                 }

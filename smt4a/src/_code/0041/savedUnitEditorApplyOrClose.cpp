@@ -8,7 +8,7 @@
 extern "C" {
 extern void *g_handleRegistry;
 extern s8 g_saveLoadUIBase;
-void FUN_002f0384(s32 enabled);
+void statusCameraRestore(s32 enabled);
 void FUN_0041dcc0(SavedUnitSelection *editor);
 s32 byte1IsZero();
 void FUN_0023b45c(s32 enabled);
@@ -16,7 +16,7 @@ void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_0038b5fc(s32 kind, u16 value);
 void buttonHelpSetText(s32 slot, u32 color);
 void ptrListRemoveClearOwner(void *registry, u32 handle);
-void FUN_0022e774();
+void statusPanelClose();
 
 /* Enters editor state `next`, remembering the state it leaves and restarting its frame count. */
 static __inline void editorEnter(SavedUnitSelection *selection, u8 next)
@@ -33,7 +33,7 @@ void savedUnitEditorApplyOrClose(SavedUnitSelection *editor)
 {
     if (objBStateAllowsAction() && editor->active) {
         editor->active = 0;
-        FUN_002f0384(1);
+        statusCameraRestore(1);
         editor->changed = 1;
     }
     FUN_0041dcc0(editor);
@@ -42,8 +42,8 @@ void savedUnitEditorApplyOrClose(SavedUnitSelection *editor)
             return;
         FUN_0033449c(0);
         FUN_0023b45c(1);
-        FUN_002c8538(1);
-        FUN_002f0384(0);
+        gameGlobalsSetOverlayActive(1);
+        statusCameraRestore(0);
         editor->changed = 0;
         if (!editor->changes[editor->selected])
             FUN_0023b45c(0);
@@ -62,8 +62,8 @@ void savedUnitEditorApplyOrClose(SavedUnitSelection *editor)
                 editor->resource = NULL;
             }
         }
-        FUN_0022e774();
-        FUN_00168980(3);
+        statusPanelClose();
+        buttonHelpTransitionPresetFlags(3);
         editorEnter(editor, 9);
     }
     editor->editor.pending = 0;

@@ -2,8 +2,8 @@
 #include "ui/UiSpriteApi.h"
 
 extern "C" {
-extern SearchWinWork* DAT_0057f584;
-u32 FUN_00162ea4(void);
+extern SearchWinWork* g_searchWin;
+u32 eventIsSkipping(void);
 void jobStop(u32 job, u32 flags);
 void asdMemFree(void* memory);
 void sysPlayVoice(u32 id);
@@ -18,18 +18,18 @@ s32 FUN_002c1550(void)
     };
     typedef char WindowSpriteOffset[offsetof(WindowSpriteView, sprite) == 0x38 ? 1 : -1];
     s32 closed = 0;
-    SearchWinWork* window = DAT_0057f584;
+    SearchWinWork* window = g_searchWin;
     if (window != NULL) {
-        if (FUN_00162ea4() != 0) {
-            SearchWinWork* closing = DAT_0057f584;
+        if (eventIsSkipping() != 0) {
+            SearchWinWork* closing = g_searchWin;
             jobStop(closing->job, 0);
             asdMemFree(closing);
-            DAT_0057f584 = NULL;
+            g_searchWin = NULL;
             return 1;
         }
         if (window->state != 3) {
             if (window->secondaryState != 3 && window->state != 4) {
-                SearchWinWork* current = DAT_0057f584;
+                SearchWinWork* current = g_searchWin;
                 if (current->state == 2) {
                     current->state = 3;
                 } else {
@@ -39,14 +39,14 @@ s32 FUN_002c1550(void)
                 uiSpriteSelectAnim(&view->sprite, 1);
                 sysPlayVoice(0x010000CF);
             } else if (window->state == 4) {
-                SearchWinWork* closing = DAT_0057f584;
+                SearchWinWork* closing = g_searchWin;
                 jobStop(closing->job, 0);
                 asdMemFree(closing);
                 closed = 1;
-                DAT_0057f584 = NULL;
+                g_searchWin = NULL;
             }
         }
-    } else if (FUN_00162ea4() != 0) {
+    } else if (eventIsSkipping() != 0) {
         closed = 1;
     }
     return closed;

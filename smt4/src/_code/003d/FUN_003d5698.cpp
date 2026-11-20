@@ -5,7 +5,7 @@ extern "C" {
 /* The battle camera's vector snapshots (from, to), the origin pair then the current-position pair; they sit
  * together with the module's other globals. */
 BattleVector3 DAT_00493518, DAT_00493524, DAT_00493530, DAT_0049353c;
-f32 FUN_00227280(s32 mode, s32 duration, u32 frame);
+f32 easeEvaluate(s32 mode, s32 duration, u32 frame);
 void FUN_003d7298(BattleVectorTransition *, u32);
 
 /* Evaluate the shared-frame scalar and vector channels, then the extended channels. */
@@ -48,7 +48,7 @@ void FUN_003d5698(BattleVectorTransition *owner, u32 frame)
     BlendView *work = (BlendView *)owner;
     if (work->vectors.flags & 0x100000)
         return;
-    f32 factor = FUN_00227280(0, work->channels.duration, frame);
+    f32 factor = easeEvaluate(0, work->channels.duration, frame);
     work->channels.scale = DAT_00493518.x + (DAT_00493524.x - DAT_00493518.x) * factor;
     const BattleVector3 *destination = &work->vectors.destination;
     const BattleVector3 *origin = &work->channels.origin;
@@ -66,15 +66,15 @@ void FUN_003d5698(BattleVectorTransition *owner, u32 frame)
     work->vectors.current.z = DAT_00493530.z + currentDelta.z * factor;
 
     f32 primaryDelta = work->channels.primaryTarget - work->channels.primaryStart;
-    factor = FUN_00227280(0, work->channels.duration, frame);
+    factor = easeEvaluate(0, work->channels.duration, frame);
     work->channels.primary = work->channels.primaryStart + primaryDelta * factor;
     f32 secondaryDelta = work->channels.secondaryTarget - work->channels.secondaryStart;
-    factor = FUN_00227280(0, work->channels.duration, frame);
+    factor = easeEvaluate(0, work->channels.duration, frame);
     work->channels.secondary = work->channels.secondaryStart + secondaryDelta * factor;
     f32 angleDelta = work->channels.angleTarget - work->channels.angleStart;
-    factor = FUN_00227280(0, work->channels.duration, frame);
+    factor = easeEvaluate(0, work->channels.duration, frame);
     work->channels.angle = work->channels.angleStart + angleDelta * factor;
-    FUN_00227280(0, work->channels.duration, frame);
+    easeEvaluate(0, work->channels.duration, frame);
     FUN_003d7298(owner, frame);
 }
 }

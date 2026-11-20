@@ -9,7 +9,7 @@ extern "C" {
 void scrCommArmPanel3(void);
 void engineResetStateTime(void);
 void mapSetSceneState(s32 state);
-void FUN_00303460(s32 state);
+void lmapCameraSetMode(s32 state);
 }
 
 namespace {
@@ -31,7 +31,7 @@ extern "C" void FUN_002d22c0(u8 panelFlag)
         scrCommArmPanel3();
         engineResetStateTime();
         mapSetSceneState(1);
-        FUN_00303460(0);
+        lmapCameraSetMode(0);
         return;
     }
 
@@ -39,6 +39,6 @@ extern "C" void FUN_002d22c0(u8 panelFlag)
     if (state->mapId >= 100 || lmapSceneGetUnk0() == 1) {
         state->paused = panelFlag;
         mapSetSceneState(0x27);
-        FUN_00303460(0x10);
+        lmapCameraSetMode(0x10);
     }
 }

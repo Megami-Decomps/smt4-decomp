@@ -1,0 +1,17 @@
+#include "common.h"
+#include "code/Code0029_VariantA.h"
+
+namespace { struct Object { u8 padding[0x62]; u8 disabled; }; }
+
+extern "C" {
+/* Reads or updates the current object state. */
+u32 FUN_002d5718(const Object *object);
+u32 gridNavigationGetItemCount(const void *handle)
+{
+    const Object *object = static_cast<const Object *>(handle);
+    if (object->disabled != 0) {
+        return 0;
+    }
+    return FUN_002d5718(object);
+}
+}

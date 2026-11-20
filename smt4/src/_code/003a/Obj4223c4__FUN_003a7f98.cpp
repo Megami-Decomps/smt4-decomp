@@ -26,7 +26,7 @@ void Obj4223c4::FUN_003a7f98()
     Scene * scene = reinterpret_cast<Scene *>(this);
     if (scrRunOpcodesStub(scene->unk5A0) == 2) {
         messageMainSetTargetFlags(0);
-        FUN_002a0cc8(0);
+        gameGlobalsSetSubScreenActive(0);
         scene->unk18 = 0;
         scene->unk14 = 2;
         scene->unkA5B0 = 0;

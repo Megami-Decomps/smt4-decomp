@@ -35,8 +35,8 @@ s32 FUN_001e4d70(void);
 void aocJobEnable(void);
 s32 campQueryFalse(void);
 void noopCallback(void *);
-s32 FUN_002ca07c(void);
-void FUN_002f4b28(void);
+s32 noOpReturnZero(void);
+void aocViewDrawTaskEnd(void);
 
 /* Creates the add-on content job: opens `target` when given, or else loads the default tables and adds the draw tasks. */
 void aocJobCreate(const AocJobTarget *target)
@@ -73,7 +73,7 @@ void aocJobCreate(const AocJobTarget *target)
         }
         job->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVENT VIEW CALC"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001e4d70), reinterpret_cast<AsdProcFunc>(aocJobEnable), 0);
         taskCreateDraw(reinterpret_cast<const s8 *>("EVENT VIEW UDRAW"), 0x73, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(campQueryFalse), reinterpret_cast<AsdProcFunc>(noopCallback), 0, reinterpret_cast<void *>(job->process));
-        taskCreateDraw(reinterpret_cast<const s8 *>("EVENT VIEW DDRAW"), 0xe6, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002ca07c), reinterpret_cast<AsdProcFunc>(FUN_002f4b28), 0, reinterpret_cast<void *>(job->process));
+        taskCreateDraw(reinterpret_cast<const s8 *>("EVENT VIEW DDRAW"), 0xe6, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(noOpReturnZero), reinterpret_cast<AsdProcFunc>(aocViewDrawTaskEnd), 0, reinterpret_cast<void *>(job->process));
     }
 }
 

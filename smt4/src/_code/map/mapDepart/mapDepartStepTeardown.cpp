@@ -1,12 +1,6 @@
-#include "common.h"
+#include "map/mapDepart.h"
 
 extern "C" {
-
-/* Departure progress block (module state at 0x00447518). */
-typedef struct MapDepartProgress {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s32 step;
-} MapDepartProgress;
 
 void navigationFinishReadyField(void);
 void mapGimicReset(void);
@@ -14,29 +8,30 @@ void mapDepartClearExtra(void);
 s32 mapGimicIsIdle(void);
 s32 mapModelsPollDeferredDestroy(void);
 
-extern MapDepartProgress DAT_00447518;
+extern MapDepartSequence g_mapDepartSequence;
 
-/* Steps the map departure teardown; returns 1 once deferred model destruction has finished. */
+/* Runs one step of the map departure teardown; returns 1 once deferred model destruction has
+ * finished (the steps then start over), else 0. */
 s32 mapDepartStepTeardown(void)
 {
-    switch (DAT_00447518.step) {
-    case 0:
+    switch (g_mapDepartSequence.teardownStep) {
+    case MAP_DEPART_TEARDOWN_START:
         navigationFinishReadyField();
         mapGimicReset();
-        DAT_00447518.step = 1;
+        g_mapDepartSequence.teardownStep = MAP_DEPART_TEARDOWN_WAIT_GIMMICKS;
         break;
-    case 1:
+    case MAP_DEPART_TEARDOWN_WAIT_GIMMICKS:
         if (mapGimicIsIdle()) {
-            DAT_00447518.step = 2;
+            g_mapDepartSequence.teardownStep = MAP_DEPART_TEARDOWN_CLEAR;
         }
         break;
-    case 2:
+    case MAP_DEPART_TEARDOWN_CLEAR:
         mapDepartClearExtra();
-        DAT_00447518.step = 3;
+        g_mapDepartSequence.teardownStep = MAP_DEPART_TEARDOWN_WAIT_MODELS;
         break;
-    case 3:
+    case MAP_DEPART_TEARDOWN_WAIT_MODELS:
         if (mapModelsPollDeferredDestroy()) {
-            DAT_00447518.step = 0;
+            g_mapDepartSequence.teardownStep = MAP_DEPART_TEARDOWN_START;
             return 1;
         }
         break;

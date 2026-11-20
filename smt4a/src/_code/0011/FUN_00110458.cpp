@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0011049a(unsigned int);
 int _ZN9Obj55b28cD1Ev(int *);
-int FUN_002fb208(void);
+int threadGetCurrentId(void);
 int FUN_002fb224(unsigned int *, int *);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -23,7 +23,7 @@ extern unsigned char DAT_005949d8; /* 0x5949d8 */
 /* Supplied declaration required: FUN_0011049a. */
 extern unsigned int _ZN9Obj55b28cC1EPv(unsigned int *, int);
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-/* Supplied declaration required: FUN_002fb208. */
+/* Supplied declaration required: threadGetCurrentId. */
 /* Supplied declaration required: FUN_002fb224. */
 
 
@@ -45,7 +45,7 @@ unsigned long long FUN_00110458(unsigned int param_1,unsigned int param_2,unsign
   uStack_18 = param_3;
   temp_v2 = param_4;
   temp_v1 = _ZN9Obj55b28cC1EPv((unsigned int *)&uStack_20,(*(int *)((unsigned char *)&DAT_005949d8 + 0x4)) + 0xdc);
-  FUN_002fb208();
+  threadGetCurrentId();
   puVar3 = (unsigned int *)(temp_v0 + 0x10c);
   temp_v2 = temp_v1;
   FUN_002fb224(puVar3,&temp_v2);

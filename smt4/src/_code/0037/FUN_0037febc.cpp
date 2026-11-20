@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_3_stack;
 
-extern unsigned int FUN_002bafb0(void);
+extern unsigned int nw_snd_internal_driver_ChannelManager_GetInstance(void);
 extern unsigned int FUN_003e71f0(unsigned int);
 extern int nw_snd_internal_Util_GetByteBySample(unsigned int, unsigned int);
 /* Supplied declaration required: nw_snd_internal_driver_ChannelManager_Free. */
@@ -76,7 +76,7 @@ void FUN_0037febc(int param_1,unsigned int param_2,unsigned int param_3)
           }
           if (*(char *)(temp_v1 + 199) != '\0') {
             *(unsigned char *)(temp_v1 + 199) = 0;
-            temp_v2 = FUN_002bafb0();
+            temp_v2 = nw_snd_internal_driver_ChannelManager_GetInstance();
             nw_snd_internal_driver_ChannelManager_Free(temp_v2,temp_v1);
             return;
           }

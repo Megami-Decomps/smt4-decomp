@@ -8,8 +8,8 @@
 extern "C" {
 const Matrix44 *block5B8OwnerGetBlock(RenderCtxA *owner);
 void memCopyWords(const void *source, void *destination, u32 bytes);
-void FUN_002a1850(Vec3f *out, s32 screen, void *projection, const Vec3f *position);
-f32 FUN_001b63b0(f32 phase);
+void cameraProjectToScreen(Vec3f *out, s32 screen, void *projection, const Vec3f *position);
+f32 phaseCosine(f32 phase);
 f32 FUN_001a1ee0(f32 phase);
 void FUN_0032c810(u32 firstColor, u32 secondColor, Point2 first, Point2 second,
                   f32 depth, f32 thickness);
@@ -25,13 +25,13 @@ void effectDrawProjectedCircleFan(const Vec3f *center, u32 color, const Matrix44
     matrix.values[7] = center->y;
     matrix.values[11] = center->z;
     Vec3f projectedCenter;
-    FUN_002a1850(&projectedCenter, 0, projection, center);
+    cameraProjectToScreen(&projectedCenter, 0, projection, center);
     Point2 vertices[11];
     u32 colors[11];
     f32 angle = 0.0f;
     for (u32 index = 0; index < 10; ++index) {
         f32 phase = angle * 40.7436638f;
-        f32 x = FUN_001b63b0(phase) * radius;
+        f32 x = phaseCosine(phase) * radius;
         f32 z = FUN_001a1ee0(phase) * radius;
         f32 reciprocalW = 1.0f / ((matrix.values[13] * height + matrix.values[14] * z) +
                                   (matrix.values[15] + matrix.values[12] * x));
@@ -41,7 +41,7 @@ void effectDrawProjectedCircleFan(const Vec3f *center, u32 color, const Matrix44
             ((matrix.values[9] * height + matrix.values[10] * z) + (matrix.values[11] + matrix.values[8] * x)) * reciprocalW
         };
         Vec3f projected;
-        FUN_002a1850(&projected, 0, projection, &position);
+        cameraProjectToScreen(&projected, 0, projection, &position);
         Point2 point = { projected.x, projected.y };
         Point2 screenCenter = { projectedCenter.x, projectedCenter.y };
         vertices[index] = point;

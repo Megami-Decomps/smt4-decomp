@@ -4,19 +4,19 @@
 #include "code/Code002b_Smt4.h"
 
 extern "C" {
-u32 FUN_002bfdc4();
+u32 messageVoiceBankGet();
 void textFormatFullWidthTwoDigits(s32, char *);
 u32 dataFindKindRecordWithAocOverrides(u32, s32);
 const char *textConvertToGlyphPairs(u32, s32);
 void dialogSetText(const char *);
-void FUN_002bfc24(s32, u32, u32, u32, f32, f32);
+void voiceRequestPlayFile(s32, u32, u32, u32, f32, f32);
 
 // Show the result of obtaining map items and choose the matching spoken message.
 void mapIfShowItemResultMessage(u32 result, u32 item, s32 count)
 {
     MapIfState *state = g_mapIf.state;
     u32 message = 0;
-    u32 flags = FUN_002bfdd4();
+    u32 flags = messageVoiceFlagsGet();
     flags |= 4; /* map messages always add flag 4 (scrCommQueueRequest adds it for kinds 1 and 3) */
     state->unk18 = 1;
     state->unk1C = 0;
@@ -63,6 +63,6 @@ void mapIfShowItemResultMessage(u32 result, u32 item, s32 count)
         else if (count == 20) message = 0x7a900;
         else message = 0x7a901;
     }
-    FUN_002bfc24(1, message, FUN_002bfdc4(), flags, 0.707f, 0.707f);
+    voiceRequestPlayFile(1, message, messageVoiceBankGet(), flags, 0.707f, 0.707f);
 }
 }

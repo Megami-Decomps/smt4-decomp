@@ -13,17 +13,17 @@ struct ModeGlobals {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ ModeWork *work;
 };
-extern ModeGlobals DAT_004474f0;
+extern ModeGlobals g_lmapViewHolder;
 
 /* Select the map mode and reset progress outside mode one. */
 void mapModeInitialize(void)
 {
     if (g_gameState.mapMode == 1) {
-        DAT_004474f0.work->mode = 0;
+        g_lmapViewHolder.work->mode = 0;
     } else {
-        DAT_004474f0.work->state = 0;
-        DAT_004474f0.work->mode = 2;
-        DAT_004474f0.work->counter = 0;
+        g_lmapViewHolder.work->state = 0;
+        g_lmapViewHolder.work->mode = 2;
+        g_lmapViewHolder.work->counter = 0;
     }
 }
 

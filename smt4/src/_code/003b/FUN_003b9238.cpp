@@ -25,7 +25,7 @@ extern "C" {
 
 s32 scrRunOpcodesStub(u32 script);
 void buttonHelpSelectByProgress(TextStep *step);
-void FUN_0027db24(s32 arg);
+void gameSaveSetBattleResultCode(s32 arg);
 void infoWinSetMessage(u32 window, s32 id);
 void placeWinSetValue(s32 value);
 
@@ -34,7 +34,7 @@ void FUN_003b9238(TextStep *step)
 {
     if (scrRunOpcodesStub(step->script) == 2) {
         buttonHelpSelectByProgress(step);
-        FUN_0027db24(0);
+        gameSaveSetBattleResultCode(0);
         dialogOpen(0, 0);
         infoWinSetMessage(step->infoWindow, step->textEntry->infoId);
         step->substate = 0;

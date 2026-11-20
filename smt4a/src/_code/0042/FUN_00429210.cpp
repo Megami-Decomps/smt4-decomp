@@ -33,7 +33,7 @@ extern "C" {
 extern AsyncTransferData DAT_0061b030;
 extern u8 DAT_0061b000[];
 nn::Result FUN_00427e68(u32 token, u32 operation);
-void *FUN_0016ccfc(void);
+void *tokenTableGet(void);
 s32 tokenResolveAddress(void *registry, AsyncTransferContext **context, u32 token);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void rt_memcpy(void *destination, const void *source, u32 size);
@@ -50,7 +50,7 @@ WindowStatusResult FUN_00429210(const u32 *token, const AsyncTransferFormat *for
     nn::Result result = FUN_00427e68(*token, 8);
     if (!nnResultIsFailure(result)) {
         AsyncTransferContext *context;
-        result = tokenResolveAddress(FUN_0016ccfc(), &context, *token);
+        result = tokenResolveAddress(tokenTableGet(), &context, *token);
         if (!nnResultIsFailure(result)) {
             __aeabi_memcpy4(&DAT_0061b030, context->metadata, sizeof(context->metadata));
             u32 encoding;

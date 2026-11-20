@@ -12,7 +12,7 @@ u32 osVirtToPhysAddress(const void *address);
 static __inline void frameTexAllocateImage(AsdTexture *texture, u32 heap, s32 width, s32 height,
     u32 bytes, s32 line)
 {
-    texture->storage.unk28 = bytes;
+    texture->storage.bytes = bytes;
     texture->image.mip.level = 0;
     texture->image.hardwareFormat = 3;
     texture->dimensions.width = width;
@@ -20,7 +20,7 @@ static __inline void frameTexAllocateImage(AsdTexture *texture, u32 heap, s32 wi
     texture->image.format = 0x8D62;
     texture->image.type = 0x1403;
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\frame_tex\\FrameTex.cpp", line);
-    texture->storage.pixels = asdMemoryAlloc(heap, 0x100, 0, texture->storage.unk28, 1);
+    texture->storage.pixels = asdMemoryAlloc(heap, 0x100, 0, texture->storage.bytes, 1);
     texture->image.physicalAddress = osVirtToPhysAddress(texture->storage.pixels);
 }
 

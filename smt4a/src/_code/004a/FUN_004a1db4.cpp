@@ -37,8 +37,8 @@ s32 FUN_0035db94(void);
 void uiSpriteBankApplyPreset(void* sprites, s32 preset);
 s32 flaggedValueHolderGetTotal(void* list);
 void FUN_004a8750(u32 id, s32 page, s32 arg);
-void FUN_0037c8e4(s32 a, s32 b);
-s32 FUN_002a4b28(u16 id);
+void messageBannerInitCounter(s32 a, s32 b);
+s32 compendiumEntryIsRegistered(u16 id);
 void panelSetTarget(s32 target, s32 arg);
 void messageSetActiveMode(s32 mode);
 s32 FUN_0031d174(void* list);
@@ -75,8 +75,8 @@ void FUN_004a1db4(StatusMenu* menu)
         if (MENU_BYTE(menu, 0x860) != 0) return;
         u16 id = *reinterpret_cast<u16*>(reinterpret_cast<u8*>(menu) + flaggedValueHolderGetTotal(menu->list) * 0x20 + 0x868);
         FUN_004a8750(id, MENU_BYTE(menu, 0x861), 0);
-        FUN_0037c8e4(1, 0);
-        if (FUN_002a4b28(id) != 0) {
+        messageBannerInitCounter(1, 0);
+        if (compendiumEntryIsRegistered(id) != 0) {
             panelSetTarget(-(s32)id, 0);
             return;
         }
@@ -86,7 +86,7 @@ void FUN_004a1db4(StatusMenu* menu)
     if (gameGetMode() != 0) return;
     if (menu->itemCount < 1) return;
 
-    s32 cursor = FUN_002a482c(menu->list);
+    s32 cursor = resourceDispatchTaggedOperation(menu->list);
     s32 page = FUN_0031d174(menu->list);
     if (statusDownGetMode() == 1) {
         listCursorStepForward(menu->list);
@@ -95,7 +95,7 @@ void FUN_004a1db4(StatusMenu* menu)
             listCursorStepBack(menu->list);
         } else {
             if (MENU_BYTE(menu, 0x860) != 1) {
-                if (FUN_002a482c(menu->list) == cursor && FUN_0031d174(menu->list) == page) return;
+                if (resourceDispatchTaggedOperation(menu->list) == cursor && FUN_0031d174(menu->list) == page) return;
                 sendEvent100020D();
                 return;
             }
@@ -119,7 +119,7 @@ void FUN_004a1db4(StatusMenu* menu)
             buttonHelpSelectSlot(2, 4, 0x41, 1);
         }
     }
-    if (FUN_002a482c(menu->list) == cursor && FUN_0031d174(menu->list) == page) return;
+    if (resourceDispatchTaggedOperation(menu->list) == cursor && FUN_0031d174(menu->list) == page) return;
     sendEvent100020D();
 }
 

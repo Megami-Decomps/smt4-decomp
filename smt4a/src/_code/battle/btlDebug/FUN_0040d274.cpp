@@ -7,7 +7,7 @@
 
 extern "C" {
 
-int FUN_002a1850(...);
+int cameraProjectToScreen(...);
 int FUN_003e7fa4(...);
 int FUN_004f1b2c(...);
 int FUN_004f22a4(...);
@@ -41,7 +41,7 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-/* Supplied declaration required: FUN_002a1850. */
+/* Supplied declaration required: cameraProjectToScreen. */
 /* Supplied declaration required: FUN_003e7fa4. */
 /* Supplied declaration required: FUN_004f1b2c. */
 /* Supplied declaration required: FUN_004f22a4. */
@@ -182,7 +182,7 @@ LAB_0040d588:
     temp_v11[0] = in_s0;
     temp_v12 = in_s2;
     temp_v4 = asdCameraGetSavedRenderPairs();
-    FUN_002a1850(temp_v11,0,temp_v4);
+    cameraProjectToScreen(temp_v11,0,temp_v4);
     temp_v5 = reinterpret_cast<int>(g_btlCamera);
     temp_v6 = (temp_v11[0] - 200.0f) * 0.006666667f;
     if (temp_v6 < 0.0f) {
@@ -330,7 +330,7 @@ LAB_0040d588:
       temp_v11[0] = in_s0;
       temp_v12 = in_s2;
       temp_v4 = asdCameraGetSavedRenderPairs();
-      FUN_002a1850(temp_v11,0,temp_v4);
+      cameraProjectToScreen(temp_v11,0,temp_v4);
       temp_v6 = (temp_v11[0] - 200.0f) * 0.006666667f;
       if (temp_v6 < 0.0f) {
         temp_v6 = -temp_v6;

@@ -15,7 +15,7 @@ struct ThreadedWorker {
 
 extern "C" {
 
-void FUN_001469a8(u8 *lock);
+void addressSpaceRegionFree(u8 *lock);
 void asdMemFree(void *block);
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
 
@@ -32,7 +32,7 @@ void FUN_0035d7bc(ThreadedWorker *worker)
     /* Joined above: finalize the thread, then close its handle through the handle's destructor. */
     worker->thread.finalize();
     worker->thread.NnOsHandle::~NnOsHandle();
-    FUN_001469a8(worker->lock);
+    addressSpaceRegionFree(worker->lock);
     if (worker->buffer != NULL) {
         asdMemFree(worker->buffer);
         worker->buffer = NULL;

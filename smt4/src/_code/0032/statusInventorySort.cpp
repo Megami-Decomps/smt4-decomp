@@ -12,7 +12,7 @@ struct StatusSortOptions {
 
 extern "C" {
 void qsort(void*, s32, s32, EntryComparator);
-void FUN_0027f3dc(void*, s32, s32, EntryComparator);
+void arraySortQsort(void*, s32, s32, EntryComparator);
 s32 devilSlotCompareRaceDescending(const void*, const void*);
 s32 entryCompareByDataValue(const void*, const void*);
 s32 FUN_00206d9c(const void*, const void*);
@@ -52,9 +52,9 @@ void statusInventorySort(void)
         return;
     }
     if ((*options >> 7) == 0) {
-        FUN_0027f3dc(status->inventory.entries, status->inventory.count, sizeof(status->inventory.entries[0]), entryCompareByDataValue);
+        arraySortQsort(status->inventory.entries, status->inventory.count, sizeof(status->inventory.entries[0]), entryCompareByDataValue);
         return;
     }
-    FUN_0027f3dc(status->inventory.entries, status->inventory.count, sizeof(status->inventory.entries[0]), entryCompareByDataValueB);
+    arraySortQsort(status->inventory.entries, status->inventory.count, sizeof(status->inventory.entries[0]), entryCompareByDataValueB);
 }
 } // extern "C"

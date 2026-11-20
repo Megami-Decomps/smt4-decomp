@@ -18,7 +18,7 @@ extern "C" {
 s32 flaggedValueHolderGetTotal(const FlaggedValueHolder *values);
 void sub10OwnerStart(FlaggedValueHolder *values); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: more than one instance of overloaded function "selectOwnerGetSelected" has "C" linkage)
 s32 selectOwnerGetSelected(Obj55ca08 *selector); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: more than one instance of overloaded function "sub10OwnerStart" has "C" linkage)
-s32 FUN_0027ee9c();
+s32 inputConfirmPressed();
 s8 uiSubStateGetReady(const Obj55ca08 *subState);
 void asdTMTexTableLoadEntryAsync(u32 table, u32 key);
 
@@ -72,7 +72,7 @@ u32 FUN_003bb620(SelectionTextureWork *work)
             stateCounterBelowLimit(values, selectOwnerGetSelected(selector)) != 0) {
             result = 1;
         }
-        if (FUN_0027ee9c() != 0) {
+        if (inputConfirmPressed() != 0) {
             result = 1;
         }
     }

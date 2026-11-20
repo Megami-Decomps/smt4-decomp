@@ -6,7 +6,7 @@ extern "C" {
 extern s32 g_keyedRecordCount;
 extern KeyedRecord g_keyedRecords[];
 extern KeyedVectorPreset g_elementPresetTable[];
-extern KeyedVectorTransition *DAT_00570ab4;
+extern KeyedVectorTransition *g_effectColorOverride;
 KeyedRecord *keyedRecordGet(s32 index);
 const VectorKey *FUN_00239218(u32 index);
 void vectorKeyPrepareNextStep(VectorKey *keys, s32 *index, s32 *duration, KeyVector *step, KeyVector *target);
@@ -14,16 +14,16 @@ void vectorKeyPrepareNextStep(VectorKey *keys, s32 *index, s32 *duration, KeyVec
 // Select a keyed vector sequence, retaining the current vector when interrupting playback.
 void FUN_00260030(s32 index)
 {
-    KeyedVectorTransition *transition = DAT_00570ab4;
+    KeyedVectorTransition *transition = g_effectColorOverride;
     if (g_keyedRecordCount - index - 1 < 0 ||
         reinterpret_cast<const VectorKey *>(keyedRecordGet(index)->payload)[3].frame <= 0 ||
-        DAT_00570ab4 == NULL) {
+        g_effectColorOverride == NULL) {
         return;
     }
     s32 duration = reinterpret_cast<const VectorKey *>(g_keyedRecords[index].payload)[3].frame;
     const VectorKey *keys = FUN_00239218(index);
     memcpy(transition->keys, keys, sizeof(transition->keys));
-    if (DAT_00570ab4 != NULL && DAT_00570ab4->mode != 0) {
+    if (g_effectColorOverride != NULL && g_effectColorOverride->mode != 0) {
         transition->segmentElapsed = 0;
         transition->keyIndex = 0;
         transition->segmentDuration = 0;

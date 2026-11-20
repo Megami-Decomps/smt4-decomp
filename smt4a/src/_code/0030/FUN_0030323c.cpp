@@ -5,7 +5,7 @@
 extern "C" {
 
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
-int FUN_002fb208(void);
+int threadGetCurrentId(void);
 int FUN_0030ceb8(void);
 int FUN_0030cf36(int, int *);
 int FUN_0030cfae(int *, int, int *);
@@ -20,7 +20,7 @@ typedef struct {
 
 extern unsigned int _ZN9Obj55b28cC1EPv(unsigned char *, int);
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-/* Supplied declaration required: FUN_002fb208. */
+/* Supplied declaration required: threadGetCurrentId. */
 /* Supplied declaration required: FUN_0030ceb8. */
 /* Supplied declaration required: FUN_0030cf36. */
 extern int wordRefsEqual_0030cf7c(int *, unsigned int *);
@@ -42,19 +42,19 @@ int FUN_0030323c(int param_1)
   int temp_v8;
   
   temp_v0 = _ZN9Obj55b28cC1EPv(temp_v4,param_1 + 0x24);
-  FUN_002fb208();
+  threadGetCurrentId();
   temp_v3 = param_1 + 0x54;
   temp_v7 = temp_v0;
   FUN_0030cfae(&temp_v6,temp_v3,&temp_v7);
   temp_v8 = *(unsigned int *)(param_1 + 100);
   temp_v1 = wordRefsEqual_0030cf7c(&temp_v6,(unsigned int *)&temp_v8);
   if (temp_v1 != 0) {
-    FUN_002fb208();
+    threadGetCurrentId();
     temp_v2 = temp_v3;
     temp_v5 = temp_v1;
     FUN_0030cf36(temp_v3,&temp_v5);
     FUN_0030ceb8();
-    FUN_002fb208();
+    threadGetCurrentId();
     temp_v5 = temp_v2;
     FUN_0030cf36(temp_v3,&temp_v5);
   }

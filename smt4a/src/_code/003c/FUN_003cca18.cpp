@@ -42,7 +42,7 @@ typedef char FusionInheritanceInputLayoutCheck[
 extern "C" {
 u32 uiScrollHandleActionsOrTouch(FlaggedEntry *entry, const TextureTableEntryIV *rectangle, const s16 *ids,
     u32 firstKey, u32 secondKey, u32 thirdKey, s8 *blockedMode, s32 secondary, s32 notify);
-s32 FUN_00228b04(FlaggedEntry *entry, s32 mode);
+s32 gridNavigationHandleConfirm(FlaggedEntry *entry, s32 mode);
 s32 resourceRunOperationIfUnblocked(const FlaggedEntry *entry);
 void skillHelpUpdateAttributeAndTarget(u32 id);
 void buttonHelpSetText(u32 mode, u32 color);
@@ -55,7 +55,7 @@ u32 FUN_003cca18(UniteWorkA *work, s8 blocked, u32 *selected)
 {
     FusionInheritanceInputView *input = reinterpret_cast<FusionInheritanceInputView *>(work);
     if (uiScrollHandleActionsOrTouch(&input->primary, NULL, input->modeKeys, -1, -1, -1,
-            &blocked, 0, 1) != 0 || FUN_00228b04(&input->primary, 1) != 0) {
+            &blocked, 0, 1) != 0 || gridNavigationHandleConfirm(&input->primary, 1) != 0) {
         const s32 index = resourceRunOperationIfUnblocked(&input->primary) + listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&input->primary));
         const u16 id = input->primaryIds[index];
         if (id != 0) {

@@ -7,7 +7,7 @@
 extern "C" {
 
 /* Forwards its three arguments to the voice manager's request function; returns its result. */
-s32 FUN_002bd29c(u32 first, u32 second, u32 third);
+s32 nwSoundVoiceAllocate(u32 first, u32 second, u32 third);
 
 } /* extern "C" */
 

@@ -15,7 +15,7 @@ extern const char DAT_0040357c[], DAT_00403570[];
 extern const u8 DAT_0040356c[3];
 void memClear(void *, u32);
 NpcTextureSource *dataTable25FindById(s32);
-s32 FUN_002c1d5c();
+s32 eventIsSkipping();
 void asdTMTexTablePrepareNodeImage(s32, s32);
 s32 FUN_001dfc64(u32);
 void FUN_002db92c(u32);
@@ -56,7 +56,7 @@ void npc2dCreatePortraitCenterJob(s32 npcId)
     work->scale.y = 0.0f;
     work->display.screenRegion = 5;
     work->y = (s32)work->npc.sizes[1][1];
-    if (!FUN_002c1d5c()) {
+    if (!eventIsSkipping()) {
         work->deferred = 0;
         asdTMTexTablePrepareNodeImage(work->textureTable, work->textureNode);
         asdTMTexTablePrepareNodeImage(0x32, 0);

@@ -21,7 +21,7 @@ extern "C" {
 s32 tableGroupFindEntryIndex(void *table, const char *name);
 void scrScriptProcessStartEntry(void *process, s32 index);
 void buttonHelpSetPreset(s32 preset);
-s32 FUN_002c1658(s32 first, s32 second);
+s32 inputQueryButtonState(s32 first, s32 second);
 s32 messageMainIsWindowActive(void);
 void msgWindowReset(void);
 u32 FUN_00292bf0(void);
@@ -45,7 +45,7 @@ extern "C" void FUN_003a3130(ShopExit *exit)
             exit->state = (FUN_00292bf0() == 0 || FUN_00292bf0() > gameSlotTableGetHeader()) ? 5 : 2;
             break;
         }
-        if (FUN_002c1658(1, 1) != 0 && messageMainIsWindowActive() != 0) {
+        if (inputQueryButtonState(1, 1) != 0 && messageMainIsWindowActive() != 0) {
             msgWindowReset();
         }
         break;

@@ -29,7 +29,7 @@ void FUN_001dc608();
 void FUN_003105f4();
 void FUN_002ece60();
 void buttonHelpSetPreset(s32 preset);
-void FUN_002579bc(s32 arg);
+void partyPanelSetDisabledMode(s32 arg);
 void campCecModelSceneInit(void *scene);
 void bgmRestart(s32 arg);
 void soundChannelRequestIfEnabled(u32 id, s32 a, s32 frames);
@@ -115,7 +115,7 @@ void FUN_001ffc5c()
         work->rewardPortraitPending = 1;
         work->savedBannerPending = 0;
         buttonHelpSetPreset(0xB9);
-        FUN_002579bc(0);
+        partyPanelSetDisabledMode(0);
         campCecModelSceneInit(g_campCec->block0A0);
         bgmRestart(0);
         soundChannelRequestIfEnabled(0x1000062, 0, 60);

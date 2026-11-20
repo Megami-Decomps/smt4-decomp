@@ -3,7 +3,7 @@
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 extern "C" {
-AllocationHeader *FUN_002b24d8(u32, u32, u32, u32, u32);
+AllocationHeader *asdMemoryAllocFromHeap(u32, u32, u32, u32, u32);
 void asdMemoryTrackAllocation(AllocationHeader *);
 void rt_memclr(void *, u32);
 void nn_os_CriticalSection_Enter(void *);
@@ -34,7 +34,7 @@ void *memAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, u32 alignment,
         alignment = 128;
     u32 mask = -alignment;
     u32 backingSize = (size + alignment + alignment + sizeof(AllocationHeader) - 1) & mask;
-    AllocationHeader *block = FUN_002b24d8(heap, alignmentClass, flags, backingSize, category);
+    AllocationHeader *block = asdMemoryAllocFromHeap(heap, alignmentClass, flags, backingSize, category);
     void *payload = allocationHeaderInit(block, backingSize, alignment, 0);
     rt_memclr(payload, size);
     nn_os_CriticalSection_Leave(g_asdMemState.lock);

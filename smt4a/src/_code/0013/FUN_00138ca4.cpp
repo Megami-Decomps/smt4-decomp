@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern s8 DAT_005b40c8;
+extern s8 g_contentMounted;
 
 /* Returns the signed byte at 0x005b40c8. */
 s32 FUN_00138ca4(void)
 {
-    return DAT_005b40c8;
+    return g_contentMounted;
 }
 
 } /* extern "C" */

@@ -5,7 +5,7 @@
 
 extern "C" {
 
-extern u32 DAT_005c0a80; /* service session handle */
+extern u32 g_nimAocSession; /* service session handle */
 
 /* IPC request 0x12: two sized input buffers (first, second), four word parameters and a third
  * buffer, each buffer passed as a size/pointer translate pair; returns the transport result, or the
@@ -25,7 +25,7 @@ s32 FUN_004397e4(u32 first, u32 firstSize, u32 second, u32 secondSize, u32 *out,
     nn::os::SetIpcWord(cmd, 8, second);
     nn::os::SetIpcWord(cmd, 9, (thirdSize << 4) | 0xC);
     nn::os::SetIpcWord(cmd, 10, third);
-    s32 result = nn::svc::SendSyncRequest(DAT_005c0a80);
+    s32 result = nn::svc::SendSyncRequest(g_nimAocSession);
     if (nnResultIsSuccess(result)) {
         *out = cmd->words[1];
         result = cmd->words[0];

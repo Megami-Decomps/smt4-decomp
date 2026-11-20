@@ -2,7 +2,7 @@
 #include "gamedata/SaveSlotTable.h"
 
 extern "C" {
-u32 FUN_003e4b2c(u32 id, s32 targetLevel, s32 maximumIncrease);
+u32 partySlotLevelUpTo(u32 id, s32 targetLevel, s32 maximumIncrease);
 }
 
 static PartySlotA *getPartySlot(u32 index)
@@ -34,5 +34,5 @@ extern "C" u32 FUN_003e4a54(u32 sourceId, u32 destinationId)
     s32 difference = source->record.level - destination->record.level;
     if (difference < 0)
         return 0;
-    return FUN_003e4b2c(destinationId, source->record.level, difference);
+    return partySlotLevelUpTo(destinationId, source->record.level, difference);
 }

@@ -1,7 +1,7 @@
 /* NON_MATCHING: only the final segment's four key loads differ: retail loads start.frame, start.value, end.frame, end.value and converts the frame count first; the build loads both frames first and converts the value change first. */
 #include "gfx/KeyframeSegment.h"
 extern "C" {
-f32 FUN_002039d0(s32 mode, s32 range, s32 inclusive);
+f32 effRandomSignedValue(s32 mode, s32 range, s32 inclusive);
 
 // Skip duplicate key times and prepare the next linear interpolation segment.
 void FUN_002c76fc(KeyframeSegmentState *state, const KeyframeSegmentState *definition)
@@ -15,7 +15,7 @@ void FUN_002c76fc(KeyframeSegmentState *state, const KeyframeSegmentState *defin
             continue;
         if (state->keys[current + step].value != 0 &&
             state->keys[current + step].randomRange > 0) {
-            f32 variation = FUN_002039d0(2, state->keys[current + step].randomRange, 1);
+            f32 variation = effRandomSignedValue(2, state->keys[current + step].randomRange, 1);
             state->keys[state->keyIndex + step].value -= (s32)variation;
         }
         s32 currentIndex = state->keyIndex;

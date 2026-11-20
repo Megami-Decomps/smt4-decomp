@@ -4,7 +4,7 @@
 
 extern "C" {
 
-s32 FUN_00280030(void *panel);
+s32 btlUiPanelOperationIsAllowed(void *panel);
 void *FUN_00502754(u8 *subobject); /* returns the subobject's panel (+0xBC) */
 void uiWorkEndState1(BtlUiObjAA *menu);
 void owner2DCInitSub(BtlUiObjBA *panel);
@@ -14,7 +14,7 @@ void btlUiPanelStart(void)
 {
     BtlUiA *ui = g_btlUi.ui;
 
-    if (menu32ModeIsNot5(&ui->objA) != 0 && FUN_00280030(FUN_00502754(ui->objA.tail.subobject)) != 0) {
+    if (menu32ModeIsNot5(&ui->objA) != 0 && btlUiPanelOperationIsAllowed(FUN_00502754(ui->objA.tail.subobject)) != 0) {
         uiWorkEndState1(&ui->objA);
         owner2DCInitSub(&ui->objB);
     }

@@ -92,7 +92,7 @@ void FUN_001f1bc4(int param_1,int param_2)
                 (((int)(temp_v5 + ((unsigned int)(temp_v5 >> 0x1f) >> 0x1e)) >> 2) * temp_v8 >> 0xc);
       }
       texDrawTableEntryAtStoredOrigin(2,0x24,0xb1,param_1 + temp_v10,param_2 + temp_v5,0x9c);
-      temp_v8 = FUN_0029ee54((const void *)(temp_v13));
+      temp_v8 = gridNavigationGetItemCount((const void *)(temp_v13));
       temp_v6 = temp_v3 + temp_v11;
       if (temp_v6 < temp_v8) {
         temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0xb2));

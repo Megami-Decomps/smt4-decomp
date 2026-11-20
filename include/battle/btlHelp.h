@@ -90,7 +90,7 @@ typedef char BtlHelpGlobalsAMasksOffsetCheck[
     sizeof(BtlHelpGlobalsA) == 0x30 ? 1 : -1];
 
 extern "C" {
-void FUN_0022af9c(u8 value);
+void infoWinSetShown(u8 value);
 }
 
 extern "C" {

@@ -15,7 +15,7 @@ typedef int romwright_code(...);
 extern unsigned char LAB_004c4b40; /* 0x4c4b40 */
 extern romwright_code *DAT_00589280; /* 0x589280 */
 extern int g_moduleInitialState; /* 0x58936c */
-extern signed char DAT_005894cc; /* 0x5894cc */
+extern signed char g_resultDebugMode; /* 0x5894cc */
 extern unsigned char DAT_0062d200; /* 0x62d200 */
 extern unsigned char DAT_0062d201; /* 0x62d201 */
 extern unsigned short DAT_0062d202; /* 0x62d202 */
@@ -68,7 +68,7 @@ unsigned char * FUN_00514428(unsigned int *param_1,int param_2)
      pcVar1 = DAT_00589280, puVar5 != (unsigned char *)0x0)) {
     return puVar5;
   }
-  if ((bRam1ff80014 & 1) == 0 && DAT_005894cc == '\0') {
+  if ((bRam1ff80014 & 1) == 0 && g_resultDebugMode == '\0') {
     if (DAT_00589280 != (romwright_code *)0x0) {
       DAT_00589280 = (romwright_code *)0x0;
       (*pcVar1)(0,0,0,0);

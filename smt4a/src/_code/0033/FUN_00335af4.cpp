@@ -7,7 +7,7 @@
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
-void FUN_004fc094(s32 channel, ScriptUnit *unit, s32 kind, BattleRosterRecordA *record,
+void btlAdjustPropertyAndQueueAction(s32 channel, ScriptUnit *unit, s32 kind, BattleRosterRecordA *record,
                   s32 a5, s32 maximum, s32 source, s32 target, s32 current,
                   s32 previousMaximum, s32 a11, s32 a12, s32 a13, s32 a14,
                   s32 a15, s32 a16, s32 a17, s32 a18, s32 a19, s32 a20,
@@ -28,7 +28,7 @@ u32 FUN_00335af4(void)
             (entry->flags & g_battleMaskPresets.eligibility.excluded) == 0) {
             s32 channel = sequence * 20;
             BattleRosterRecordA *record = &battle->roster[index];
-            FUN_004fc094(channel, unit, 0, record, 0, entry->data.maxHp, -1, -1,
+            btlAdjustPropertyAndQueueAction(channel, unit, 0, record, 0, entry->data.maxHp, -1, -1,
                          entry->data.hp, entry->data.maxHp, 0, 0, 1, 0, 0, 0, 0, 0,
                          0, 0, 1, 0, 1, 1, 0, 1);
             btlQueueActionMessage(channel, unit, 0x10000CD, 1, 0, 0, 0);

@@ -24,7 +24,7 @@ int placeWinRelease(void);
 int messageSetMode(...);
 int asdCameraInitAreas(void);
 int resourceOwnerReleaseAndReset(...);
-int FUN_00214da4(void);
+int placeWindowStartClose(void);
 int gameStateClearFlag(void);
 int naviMainSetFlagsAndActivate(...);
 int mapPlaceSet(...);
@@ -39,7 +39,7 @@ int resourceOwnerReleaseAll(void);
 int gameCounterAddSaturating(...);
 
 int FUN_001628c0(...);
-int FUN_00168980(...);
+int buttonHelpTransitionPresetFlags(...);
 int resOwnerRunNodeHandlers(...);
 int ptrListRemoveClearOwner(...);
 int slotSetRequest(...);
@@ -53,7 +53,7 @@ int buttonHelpSetPanelState(...);
 int sortMenuAcquire(...);
 int obj7ECSetPair(...);
 int useCounterRelease(void);
-int FUN_003d2158(...);
+int soundApplyValueOrStop(...);
 int soundChannelStopAll(...);
 int titleSetSlotValueState2(...);
 int controllerGetSourceValue(...);
@@ -62,13 +62,13 @@ int slotTargetApplyActiveValue(...);
 int linkHolderSetFlag(...);
 
 int asdCameraInitializeDefaults(...);
-int FUN_0013cab8(...);
+int screenFadeStartIn(...);
 int padQueryLogicalKey(...);
 int asdLoadFileSyncNoContext(...);
 int sysPlaySe(...);
 int gameFlagIsSet(...);
-int FUN_001abbc4(void);
-int FUN_001b4eb8(void);
+int effPartCreateFromSource(void);
+int skelNodePoseChain(void);
 int asdLoadFileSyncDefault(void);
 int placeWinStartText(...);
 int titleRestartSlotState3(...);
@@ -88,8 +88,8 @@ int modelSetDrawMode(...);
 
 int asdLoadFileWithSize(...);
 int uiSetFloatPair(...);
-int FUN_0014f0dc(...);
-int FUN_001523b8(...);
+int cameraMatrixCacheSetLookAt(...);
+int stereoCameraSetPerspective(...);
 int asdOperatorNew(void);
 int asdMemoryAllocTraced(...);
 int effectNodeUpdateTransform(unsigned int);
@@ -161,14 +161,14 @@ extern unsigned int DAT_005f1b7c; /* 0x5f1b7c */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: asdLoadFileWithSize. */
 /* Supplied declaration required: asdCameraInitializeDefaults. */
-/* Supplied declaration required: FUN_0013cab8. */
+/* Supplied declaration required: screenFadeStartIn. */
 extern int pairedAvailabilityGetState(unsigned int);
 /* Supplied declaration required: uiSetFloatPair. */
-extern unsigned int FUN_0014af98(void);
-/* Supplied declaration required: FUN_0014f0dc. */
+extern unsigned int messageVoiceBankGet(void);
+/* Supplied declaration required: cameraMatrixCacheSetLookAt. */
 /* Supplied declaration required: padQueryLogicalKey. */
-/* Supplied declaration required: FUN_001523b8. */
-extern unsigned int FUN_00152f44(void);
+/* Supplied declaration required: stereoCameraSetPerspective. */
+extern unsigned int messageVoiceFlagsGet(void);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_001628c0. */
 /* Supplied declaration required: jobStop. */
@@ -176,7 +176,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: asdLoadFileSyncNoContext. */
 extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00168980. */
+/* Supplied declaration required: buttonHelpTransitionPresetFlags. */
 /* Supplied declaration required: messageSetScriptDisplayMode. */
 /* Supplied declaration required: asdMemoryAllocTraced. */
 /* Supplied declaration required: resourceListDestroy. */
@@ -187,17 +187,17 @@ extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: resOwnerRunNodeHandlers. */
 /* Supplied declaration required: placeWinRelease. */
 /* Supplied declaration required: messageSetMode. */
-/* Supplied declaration required: FUN_001abbc4. */
+/* Supplied declaration required: effPartCreateFromSource. */
 /* Supplied declaration required: asdCameraInitAreas. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: resourceOwnerReleaseAndReset. */
-/* Supplied declaration required: FUN_001b4eb8. */
+/* Supplied declaration required: skelNodePoseChain. */
 /* Supplied declaration required: floatInterpolateOverDuration. */
 /* Supplied declaration required: slotSetRequest. */
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: placeWinStartText. */
-/* Supplied declaration required: FUN_00214da4. */
+/* Supplied declaration required: placeWindowStartClose. */
 /* Supplied declaration required: FUN_0021b6ec. */
 /* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: titleRestartSlotState3. */
@@ -219,7 +219,7 @@ extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: placeWinCreate. */
 /* Supplied declaration required: sortMenuAcquire. */
-extern int FUN_00323bc4(unsigned int);
+extern int effectTimelineChildrenFit(unsigned int);
 /* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: gameStateSetJumpRequest. */
 /* Supplied declaration required: useCounterSelectMode2. */
@@ -232,7 +232,7 @@ extern int FUN_00323bc4(unsigned int);
 /* Supplied declaration required: FUN_003870a8. */
 /* Supplied declaration required: FUN_003a2278. */
 /* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: FUN_003d2158. */
+/* Supplied declaration required: soundApplyValueOrStop. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: titleSetSlotValueState2. */
@@ -259,7 +259,7 @@ extern unsigned int *_ZN9Obj557ae8C1Ev(void);
 /* Supplied declaration required: resourceOwnerLoadFileSync. */
 /* Supplied declaration required: moriModelContentLoadBody. */
 /* Supplied declaration required: FUN_0040ab7c. */
-extern int FUN_0040ab8c(unsigned int);
+extern int moriModelContentIsLoaded(unsigned int);
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_0040ae70. */
@@ -333,14 +333,14 @@ unsigned int FUN_0027e0d8(void)
     }
     puVar3[0x15] = puVar3[0x15] + 1;
     uiSetFloatPair(puVar3 + 0x16);
-    FUN_0014f0dc(puVar3 + 0x16,temp_v11,temp_v13,temp_v14);
-    FUN_001523b8(puVar3 + 0x16,1);
+    cameraMatrixCacheSetLookAt(puVar3 + 0x16,temp_v11,temp_v13,temp_v14);
+    stereoCameraSetPerspective(puVar3 + 0x16,1);
     temp_v7 = 0;
     in_s0 = temp_v15;
     do {
       if (*(char *)(puVar3 + temp_v7 * 3 + 0x160) != '\0') {
         effectNodeUpdateTransform(puVar3[temp_v7 * 3 + 0x15f]);
-        temp_v3 = FUN_00323bc4(puVar3[temp_v7 * 3 + 0x15f]);
+        temp_v3 = effectTimelineChildrenFit(puVar3[temp_v7 * 3 + 0x15f]);
         if (temp_v3 != 0) {
           *(unsigned char *)(puVar3 + temp_v7 * 3 + 0x160) = 0;
         }
@@ -446,8 +446,8 @@ unsigned int FUN_0027e0d8(void)
     }
     puVar8[0x15] = puVar8[0x15] + 1;
     uiSetFloatPair(puVar8 + 0x16);
-    FUN_0014f0dc(puVar8 + 0x16,temp_v11,temp_v13,temp_v14);
-    FUN_001523b8(puVar8 + 0x16,1);
+    cameraMatrixCacheSetLookAt(puVar8 + 0x16,temp_v11,temp_v13,temp_v14);
+    stereoCameraSetPerspective(puVar8 + 0x16,1);
     FUN_0036b824(puVar8 + 0x16);
     *(unsigned int **)(g_handleRegistry + 0xc) = puVar8 + 0x16;
     placeWinCreate();
@@ -484,9 +484,9 @@ unsigned int FUN_0027e0d8(void)
     temp_v7 = 0;
     do {
       temp_v4 = puVar8[temp_v7 * 3 + 0x15e];
-      FUN_001abbc4();
+      effPartCreateFromSource();
       puVar8[temp_v7 * 3 + 0x15f] = temp_v4;
-      FUN_001b4eb8();
+      skelNodePoseChain();
       temp_v3 = temp_v7 + 1;
       *(unsigned char *)(puVar8 + temp_v7 * 3 + 0x160) = 0;
       temp_v7 = temp_v3;
@@ -559,11 +559,11 @@ unsigned int FUN_0027e0d8(void)
     puVar3[0xe] = (unsigned int)puVar9;
     temp_v7 = pairedAvailabilityGetState(0);
     if (temp_v7 == 3) {
-      FUN_0013cab8(0,10,0xff);
+      screenFadeStartIn(0,10,0xff);
     }
     temp_v7 = pairedAvailabilityGetState(1);
     if (temp_v7 == 3) {
-      FUN_0013cab8(1,10,0xff);
+      screenFadeStartIn(1,10,0xff);
     }
     temp_v7 = gameFlagIsSet(0x133);
     if ((temp_v7 != 0) && (temp_v7 = gameFlagIsSet(0x134), temp_v7 == 0)) {
@@ -634,8 +634,8 @@ joined_r0x0027edb8:
             if (temp_v2 != '\0') goto LAB_0027edcc;
           }
           sysPlaySe(0xbf);
-          temp_v4 = FUN_00152f44();
-          temp_v5 = FUN_0014af98();
+          temp_v4 = messageVoiceFlagsGet();
+          temp_v5 = messageVoiceBankGet();
           in_s0 = 0x3f34fdf4;
           FUN_001628c0(&LAB_0027f148,temp_v5,temp_v4,1);
           *(unsigned char *)((int)puVar3 + 0x571) = 1;
@@ -800,10 +800,10 @@ LAB_0027edcc:
     puVar3[0x15d] = (int)s_________0056fd3d[(unsigned int)*(unsigned char *)((int)puVar3 + 9) * 0x3c];
     puVar3[4] = 8;
     puVar3[5] = 0;
-    FUN_00168980(3);
+    buttonHelpTransitionPresetFlags(3);
     if (*(char *)(puVar3 + 0x15c) == '\0') break;
     soundChannelStopAll(0xf);
-    FUN_003d2158(0x10000b2,0);
+    soundApplyValueOrStop(0x10000b2,0);
     sysPlayVoice(0x10000b3);
     temp_v4 = 0x12;
     puVar3[4] = temp_v4;
@@ -835,7 +835,7 @@ LAB_0027edcc:
     }
     puVar3[4] = 9;
   case 9:
-    temp_v7 = FUN_0040ab8c(puVar3[puVar3[0x15d] + 0x10]);
+    temp_v7 = moriModelContentIsLoaded(puVar3[puVar3[0x15d] + 0x10]);
     if (temp_v7 != 0) {
       handleRegistryRegisterObject(g_handleRegistry,*(unsigned int *)(puVar3[puVar3[0x15d] + 0x10] + 4));
       if (*(char *)(puVar3 + 0x15c) != '\0') {
@@ -908,7 +908,7 @@ LAB_0027edcc:
     gameCounterAddSaturating(0x21,1);
     *(unsigned char *)(puVar3 + 0x15c) = 0;
     sysPlayVoice(0x10000b2);
-    FUN_00214da4();
+    placeWindowStartClose();
     sysPlaySe(0x59);
     puVar3[4] = 5;
     puVar3[5] = 0;
@@ -931,7 +931,7 @@ LAB_0027edcc:
     gameCounterAddSaturating(0x21,1);
     *(unsigned char *)(puVar3 + 0x15c) = 0;
     sysPlayVoice(0x10000b2);
-    FUN_00214da4();
+    placeWindowStartClose();
     sysPlaySe(0x59);
     puVar3[4] = 5;
     puVar3[5] = 0;
@@ -1055,8 +1055,8 @@ LAB_0027edcc:
         temp_v7 = temp_v7 + 1;
       } while (temp_v7 < 4);
       if (*(char *)((int)puVar3 + 0x571) != '\0') {
-        temp_v4 = FUN_00152f44();
-        temp_v5 = FUN_0014af98();
+        temp_v4 = messageVoiceFlagsGet();
+        temp_v5 = messageVoiceBankGet();
         FUN_001628c0(&LAB_0027fb98,temp_v5,temp_v4,1);
       }
       messageSetMode(1);

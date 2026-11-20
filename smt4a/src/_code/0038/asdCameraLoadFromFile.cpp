@@ -5,13 +5,13 @@
 
 extern "C" {
 
-extern CameraObject *FUN_003a4448(void *resource);
+extern CameraObject *asdCameraCreateFromResource(void *resource);
 
 /* Loads the camera file `path` and creates the camera for it. */
 void *asdCameraLoadFromFile(const char *path)
 {
     void *resource = asdLoadFileSyncDefault(path);
-    CameraObject *camera = FUN_003a4448(resource);
+    CameraObject *camera = asdCameraCreateFromResource(resource);
 
     camera->resource = resource;
     return camera;

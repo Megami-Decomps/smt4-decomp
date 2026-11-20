@@ -28,7 +28,7 @@ void FUN_00128f60(void)
     uStack_20 = 0x2e;
     if (*(int *)(iVar1 + 0x14) != 0) {
       gxGetCommandListParameter(0x207,&iStack_28);
-      FUN_001373f0(iStack_28,*(unsigned int *)(iVar1 + 0x14),*(unsigned int *)(iVar1 + 0x18));
+      nngxImportCmdlist(iStack_28,*(unsigned int *)(iVar1 + 0x14),*(unsigned int *)(iVar1 + 0x18));
       FUN_002bf0dc();
     }
     return;

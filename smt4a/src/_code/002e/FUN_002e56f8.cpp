@@ -27,7 +27,7 @@ unsigned int FUN_002e56f8(unsigned int param_1)
     }
   }
   else {
-    FUN_004f7b84(DAT_00573808,"Dead_eyes");
+    effectRequestByName(DAT_00573808,"Dead_eyes");
     *(unsigned int *)(unaff_r4 + 0x10) = 1;
     *(unsigned int *)(unaff_r4 + 0x14) = 0;
     iVar1 = DAT_00573808;
@@ -38,7 +38,7 @@ unsigned int FUN_002e56f8(unsigned int param_1)
     *(unsigned int *)(unaff_r4 + 0x10) = 2;
   }
   if (*(int *)(unaff_r4 + 0x14) == DAT_0057a684) {
-    FUN_004fdcd8(0,0,0,0,7,0,0xb,0);
+    btlQueueMessageTableReflectAction(0,0,0,0,7,0,0xb,0);
     FUN_004ab854(DAT_0057a9c8);
   }
   if (*(int *)(unaff_r4 + 0x14) == DAT_0057a698) {
@@ -58,7 +58,7 @@ unsigned int FUN_002e56f8(unsigned int param_1)
     FUN_00321744();
     FUN_002fe2ac(uVar2);
     FUN_002ce874(uVar2);
-    FUN_00290ba4(uVar2);
+    btlUiSessionDestroy(uVar2);
     if (DAT_00571508 != 0) {
       FUN_003d9164();
     }

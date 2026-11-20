@@ -34,7 +34,7 @@ void buttonHelpSetText(u32, u32);
 u32 panelSetTarget(u32, u8);
 u32 FUN_004954e8(EquipmentMenu *);
 void messageChoiceShowCurrent(EquipmentMenu *);
-u32 FUN_004d0584();
+u32 inputConfirmPressed();
 u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *);
 u32 shopGetEntryPrice(const EquipmentChoice *);
 u32 btlRollClamped(u16, u32);
@@ -71,7 +71,7 @@ void _ZN9Obj53604428itemMenuHandleSelectionInputEv(EquipmentMenu *menu)
     panelSetTarget(0, 0);
     u32 confirmed = FUN_004954e8(menu);
     messageChoiceShowCurrent(menu);
-    if (menu->categories[menu->category].items.count > 0 && FUN_004d0584())
+    if (menu->categories[menu->category].items.count > 0 && inputConfirmPressed())
         confirmed = 1;
     u32 index = flaggedValueHolderGetTotal(&menu->categories[menu->category].selection);
     const EquipmentChoice *choice = &menu->choices[menu->category].choices[index];

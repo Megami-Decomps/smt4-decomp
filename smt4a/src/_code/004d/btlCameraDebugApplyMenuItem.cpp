@@ -9,8 +9,8 @@ struct CameraDebugMenu {
 };
 }
 extern "C" {
-extern f32 DAT_0057150c;
-extern f32 DAT_00571510;
+extern f32 g_btlCameraDebugOffset;
+extern f32 g_btlCameraDebugUpDown;
 s32 listBoxItemHasOwner(AsdListBox *list);
 f32 *asdListBoxGetFloatValuePtr(AsdListBox *list, u32 index);
 void transitionResetPosition(BtlCameraA *camera);
@@ -43,10 +43,10 @@ void btlCameraDebugApplyMenuItem(CameraDebugMenu *menu, u32 unused, u32 index)
         }
         return;
     case 3:
-        DAT_0057150c = *asdListBoxGetFloatValuePtr(menu->list, index);
+        g_btlCameraDebugOffset = *asdListBoxGetFloatValuePtr(menu->list, index);
         break;
     case 4:
-        DAT_00571510 = *asdListBoxGetFloatValuePtr(menu->list, index);
+        g_btlCameraDebugUpDown = *asdListBoxGetFloatValuePtr(menu->list, index);
         break;
     case 5:
         g_btlCamera->vector[0] = *asdListBoxGetFloatValuePtr(menu->list, index);

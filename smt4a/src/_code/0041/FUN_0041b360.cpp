@@ -10,7 +10,7 @@ extern "C" {
 int textDrawString(...);
 int texDrawCompositeSprite(int, int, unsigned int, int, int, int);
 int efctSetSpeed(void);
-int FUN_00180310(...);
+int statRowDrawValueImpl(...);
 int uiDrawItemOrStatusIcon(...);
 int gxResetColorQuadToWhite(void);
 int fontMeasureLineAdvance(...);
@@ -40,7 +40,7 @@ extern unsigned char DAT_00533f4c; /* 0x533f4c */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00180310. */
+/* Supplied declaration required: statRowDrawValueImpl. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
@@ -122,7 +122,7 @@ void FUN_0041b360(int *param_1,int param_2,int param_3,unsigned int param_4,int 
     temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2b,0x3a));
     temp_v2 = 2;
   }
-  FUN_00180310(6,temp_v6 + *(short *)(temp_v3 + 8),temp_v7 + *(short *)(temp_v3 + 10),1,temp_v2,2,
+  statRowDrawValueImpl(6,temp_v6 + *(short *)(temp_v3 + 8),temp_v7 + *(short *)(temp_v3 + 10),1,temp_v2,2,
                &DAT_00533f48,*(unsigned short *)(param_2 + 100));
   temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2b,0x2a));
   temp_v1 = (unsigned int)*(unsigned short *)(param_2 + 0x58);
@@ -143,7 +143,7 @@ void FUN_0041b360(int *param_1,int param_2,int param_3,unsigned int param_4,int 
     texDrawTableEntryAtStoredOrigin(2,0x2b,0x6e,temp_v6,temp_v7,2);
     drawSetColorFromRGBA8(0x57d8ffff);
     temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2b,0x72));
-    FUN_00180310(6,temp_v6 + *(short *)(temp_v3 + 8),*(short *)(temp_v3 + 10) + temp_v7,1,4,2,
+    statRowDrawValueImpl(6,temp_v6 + *(short *)(temp_v3 + 8),*(short *)(temp_v3 + 10) + temp_v7,1,4,2,
                  &DAT_00533f48,*(unsigned short *)(param_2 + 0x66) + 1);
     gxResetColorQuadToWhite();
   }

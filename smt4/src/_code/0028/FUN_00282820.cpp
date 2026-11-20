@@ -4,13 +4,13 @@
 #include <string.h>
 
 extern "C" {
-extern void *DAT_00435d18;
+extern void *g_btlAux;
 u32 btlEffectNameHasPrefix(void *table, const char *name);
 
 __softfp ReflectAction *FUN_00282820(s32 actor, u32 options, u16 first, s32 target,
     s16 third, s16 fourth, f32 value, const char *name)
 {
-    if (btlEffectNameHasPrefix(DAT_00435d18, name)) {
+    if (btlEffectNameHasPrefix(g_btlAux, name)) {
         ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
         action->kind = 3;
         return action;

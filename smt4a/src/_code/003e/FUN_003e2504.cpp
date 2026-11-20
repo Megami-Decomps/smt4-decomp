@@ -12,7 +12,7 @@ u32 FUN_004d7a70(BtlEventStateA *event, u32 kind, s32 index, s32 flags);
 void FUN_004d7fe4(BtlEventStateA *event);
 void frameTexRequestFade(s32 kind);
 u32 pairedAvailabilityGetState(u32 display);
-void FUN_0013cab8(u32 display, s32 frames, u32 alpha);
+void screenFadeStartIn(u32 display, s32 frames, u32 alpha);
 void FUN_003ed6e8(BtlMainStateA *state);
 void FUN_003f26d4(BtlMainStateA *state);
 s32 btlFindSelectionIndexByOrdinal(BtlMainStateA *state, s32 flags);
@@ -57,10 +57,10 @@ u32 FUN_003e2504(BtlStep *step, BtlMainStateA *state)
             state->stateFlags64.bits |= masks->fadeStarted;
         }
         if (pairedAvailabilityGetState(0) == 3) {
-            FUN_0013cab8(0, 10, 0xFF);
+            screenFadeStartIn(0, 10, 0xFF);
         }
         if (pairedAvailabilityGetState(1) == 3) {
-            FUN_0013cab8(1, 10, 0xFF);
+            screenFadeStartIn(1, 10, 0xFF);
         }
         FUN_004d7fe4(g_btlEvent);
     }

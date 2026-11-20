@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00147370(void);
+int soundVoiceSetVolume(void);
 int nw_snd_internal_driver_HardwareManager_GetOutputVolume(unsigned char *);
 int nw_snd_internal_driver_Voice_CalcMix(int);
 
 extern unsigned char DAT_004ea168; /* 0x4ea168 */
 
-/* Supplied declaration required: FUN_00147370. */
+/* Supplied declaration required: soundVoiceSetVolume. */
 extern void nn_snd_CTR_Voice_SetPitch(unsigned int, float);
 extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
 /* Supplied declaration required: nw_snd_internal_driver_HardwareManager_GetOutputVolume. */
@@ -57,7 +57,7 @@ void FUN_00155124(int param_1,unsigned int param_2,unsigned int param_3)
       if (temp_v0 < *(int *)(param_1 + 8)) {
         do {
           if (*(int *)(param_1 + temp_v0 * 4) != 0) {
-            FUN_00147370();
+            soundVoiceSetVolume();
           }
           temp_v0 = temp_v0 + 1;
         } while (temp_v0 < *(int *)(param_1 + 8));

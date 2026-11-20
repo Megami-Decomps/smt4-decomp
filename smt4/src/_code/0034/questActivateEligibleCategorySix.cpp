@@ -8,7 +8,7 @@ u32 questReadRuntimeFlag(u32 questId, u32 selector);
 s32 questRequirementsMet(u32 questId);
 QuestRuntimeFlagBlock *gameGetFlagBlock(void);
 s32 table1bOr1cGetRecordValue(u32 questId);
-void FUN_0028eeb8(u32 questId);
+void gameFlagEntryActivate(u32 questId);
 
 /* Activate newly eligible category-six quests and snapshot their progress bookkeeping. */
 u32 questActivateEligibleCategorySix(void)
@@ -28,7 +28,7 @@ u32 questActivateEligibleCategorySix(void)
                 status->flags &= ~0xC0;
                 status->flags |= 0x21;
                 if (!table1bOr1cGetRecordValue(questId)) {
-                    FUN_0028eeb8(questId);
+                    gameFlagEntryActivate(questId);
                 }
                 changed = 1;
             }

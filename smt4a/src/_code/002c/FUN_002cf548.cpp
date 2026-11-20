@@ -8,7 +8,7 @@ extern "C" {
 
 extern Vector4 g_effectRingScratchColor;
 
-void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
+void cameraProjectToScreen(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
 
 /* Saves the camera target, projects it through the current camera and returns the resulting z. */
 f32 FUN_002cf548(void)
@@ -17,7 +17,7 @@ f32 FUN_002cf548(void)
     g_effectRingScratchColor = g_vectorScratch.first.vector;
     f32 world[3] = {g_effectRingScratchColor.x, g_effectRingScratchColor.y, g_effectRingScratchColor.z};
     Vector4 projected;
-    FUN_002a1850(&projected.x, 0, camera, world);
+    cameraProjectToScreen(&projected.x, 0, camera, world);
     projected.w = 0.0f;
     g_vectorScratch.first.vector = projected;
     return projected.z;

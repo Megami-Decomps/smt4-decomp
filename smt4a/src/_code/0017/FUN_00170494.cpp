@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_0015a3c0(void);
-int FUN_0015a400(unsigned int);
+int appletSetUnlockFlag(unsigned int);
 int FUN_00170484(...);
 int FUN_00170e6c(int);
 int FUN_0018991c(void);
-int FUN_00189a38(unsigned int, int);
+int errThrowFatal(unsigned int, int);
 int FUN_0018b6c0(void);
 int FUN_0018b6f8(void);
 int FUN_0018b92c(void);
@@ -63,14 +63,14 @@ extern unsigned int g_appletSleepCallbackCriticalSection; /* 0x61a62c */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0015a3c0. */
-/* Supplied declaration required: FUN_0015a400. */
+/* Supplied declaration required: appletSetUnlockFlag. */
 extern int FUN_0015a410(void);
 extern int appletIsExitRequested(void);
 /* Supplied declaration required: FUN_00170484. */
 /* Supplied declaration required: FUN_00170e6c. */
 extern int FUN_0017169c(void);
 /* Supplied declaration required: FUN_0018991c. */
-/* Supplied declaration required: FUN_00189a38. */
+/* Supplied declaration required: errThrowFatal. */
 extern int FUN_0018b6b0(void);
 /* Supplied declaration required: FUN_0018b6c0. */
 extern int FUN_0018b6e8(void);
@@ -125,7 +125,7 @@ unsigned int FUN_00170494(void)
     if (((DAT_00589200 == (romwright_code *)0x0) ||
         (temp_v1 = (*DAT_00589200)(DAT_00589240,temp_v0,temp_v2), temp_v1 != 0)) &&
        ((temp_v0 != 0 && (temp_v0 = FUN_0015a3c0(), temp_v0 == 0)))) {
-      FUN_0015a400(temp_v2);
+      appletSetUnlockFlag(temp_v2);
       temp_v0 = FUN_0015a3c0();
       if (temp_v0 != 1) {
         FUN_0015a3c0();
@@ -148,7 +148,7 @@ unsigned int FUN_00170494(void)
     temp_v3 = nn_applet_CTR_detail_Glance
                       ((unsigned int)&temp_v6,temp_v8,(unsigned char *)&DAT_00569000,0x1000,(int *)&temp_v7,(unsigned int)&temp_v5);
     if ((int)temp_v3 < 0) {
-      FUN_00189a38(temp_v3,0x1707ec);
+      errThrowFatal(temp_v3,0x1707ec);
     }
     temp_v0 = temp_v5;
     if (temp_v8[0] != 2) {

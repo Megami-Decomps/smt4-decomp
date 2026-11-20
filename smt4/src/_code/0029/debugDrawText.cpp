@@ -2,9 +2,9 @@
 #include "code/Code0029_Smt4.h"
 
 extern "C" {
-extern TextDrawState DAT_00464a70;
+extern TextDrawState g_asdFontGlyphSets;
 u32 libc_strlen(const char*);
-void FUN_002b2b88(u32 color, TextFont*, const char*, u32,
+void textDrawCore(u32 color, TextFont*, const char*, u32,
                   f32, f32, f32, f32, f32, f32, f32, f32);
 
 // Draw with the current font at depth 0 and unit scale; `alpha` is the last argument.
@@ -12,8 +12,8 @@ void debugDrawText(u32 color, f32 x, f32 y, f32 alpha, const char* text)
 {
     f32 zero = 0.0f;
     u32 length = libc_strlen(text);
-    TextDrawState *state = &DAT_00464a70;
-    FUN_002b2b88(color, state->font, text, length,
+    TextDrawState *state = &g_asdFontGlyphSets;
+    textDrawCore(color, state->font, text, length,
                   x, y, zero, 1.0f, zero, zero, zero, alpha);
 }
 }

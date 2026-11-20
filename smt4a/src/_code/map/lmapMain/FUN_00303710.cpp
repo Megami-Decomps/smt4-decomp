@@ -11,9 +11,9 @@ struct LocalCamera;
 extern "C" {
 extern LocalCamera g_localCamera;
 
-void FUN_0014f0dc(LocalCamera *, const MapVector *, const MapVector *,
+void cameraMatrixCacheSetLookAt(LocalCamera *, const MapVector *, const MapVector *,
                   const MapVector *);
-void FUN_001523b8(LocalCamera *, s32, f32, f32, f32, f32);
+void stereoCameraSetPerspective(LocalCamera *, s32, f32, f32, f32, f32);
 
 void FUN_00303710(void)
 {
@@ -39,11 +39,11 @@ void FUN_00303710(void)
     g_lmapViewHolder.view->savedEye = g_lmapViewHolder.view->eye;
 
     asdCameraInitializeDefaults(reinterpret_cast<AsdCamera *>(&g_localCamera), 1);
-    FUN_0014f0dc(&g_localCamera,
+    cameraMatrixCacheSetLookAt(&g_localCamera,
                  &g_lmapViewHolder.view->eye,
                  &g_lmapViewHolder.view->target,
                  &g_lmapViewHolder.view->up);
-    FUN_001523b8(&g_localCamera, 1, 36.0f, 10.0f, 2560000.0f,
+    stereoCameraSetPerspective(&g_localCamera, 1, 36.0f, 10.0f, 2560000.0f,
                  1.66666662693023681640625f);
     FUN_0036b824(reinterpret_cast<u32>(&g_localCamera));
 

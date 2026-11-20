@@ -19,7 +19,7 @@ int FUN_002d0394(void);
 int FUN_002d8614(...);
 int padGetNormalizedAnalogStick(float *, float *, int);
 int mathPositionHeadingDegrees(void);
-int FUN_0036d984(...);
+int mapCollisionRaySegmentTest(...);
 EnemyPosition mapEnemyGetEncounterTargetPosition(void);
 int SBORROW4(int, int);
 int VectorSignedToFloat(unsigned int, int);
@@ -94,7 +94,7 @@ extern int lmapSceneGetUnk0(void);
 /* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 extern int FUN_003646d4(unsigned int);
-/* Supplied declaration required: FUN_0036d984. */
+/* Supplied declaration required: mapCollisionRaySegmentTest. */
 extern int mapEnemyTryStartApproach(void);
 extern int linkHolderCallFirst(unsigned int);
 extern int itemListGetCurrentIdOrInvalid(unsigned int);
@@ -155,7 +155,7 @@ void FUN_002227e8(void)
       temp_v6 = (*(float *)(g_lmapScene + 0x4c) + temp_v17[temp_v1]) * temp_v5;
       libm_cosf();
       temp_v16 = temp_v16 + temp_v6 * temp_v13;
-      temp_v0 = FUN_0036d984(g_lmapScene + 0x1c,&temp_v14,0);
+      temp_v0 = mapCollisionRaySegmentTest(g_lmapScene + 0x1c,&temp_v14,0);
       if (temp_v0 == -1) {
         temp_v18 = temp_v14;
         fStack_34 = temp_v16;
@@ -178,7 +178,7 @@ void FUN_002227e8(void)
       temp_v6 = (*(float *)(g_lmapScene + 0x4c) + temp_v17[temp_v1 + 4]) * temp_v5;
       libm_cosf();
       temp_v16 = temp_v16 + temp_v6 * temp_v13;
-      temp_v0 = FUN_0036d984(g_lmapScene + 0x1c,&temp_v14,0);
+      temp_v0 = mapCollisionRaySegmentTest(g_lmapScene + 0x1c,&temp_v14,0);
       if (temp_v0 == -1) {
         temp_v18 = temp_v14;
         fStack_34 = temp_v16;
@@ -289,7 +289,7 @@ LAB_00222b78:
       temp_v13 = (DAT_005f0ca0 + temp_v7) * temp_v6;
       libm_cosf();
       temp_v19 = temp_v19 + temp_v13 * temp_v8;
-      temp_v1 = FUN_0036d984(&DAT_005f0c94,temp_v17 + 8,0);
+      temp_v1 = mapCollisionRaySegmentTest(&DAT_005f0c94,temp_v17 + 8,0);
       if ((temp_v1 != -1) && (DAT_005f0d14 = DAT_005f0d14 + 2.0f, (int)DAT_005f0d14 >= 0x43340001)) {
         DAT_005f0d14 = 180.0f;
       }
@@ -303,7 +303,7 @@ LAB_00222b78:
       temp_v13 = (DAT_005f0ca0 + temp_v7) * temp_v6;
       libm_cosf();
       temp_v19 = temp_v19 + temp_v13 * temp_v8;
-      temp_v1 = FUN_0036d984(&DAT_005f0c94,temp_v17 + 8,0);
+      temp_v1 = mapCollisionRaySegmentTest(&DAT_005f0c94,temp_v17 + 8,0);
       if ((temp_v1 == -1) && (DAT_005f0d14 = DAT_005f0d14 - 2.0f, (int)DAT_005f0d14 < 0x42f00001)) {
         DAT_005f0d14 = 120.0f;
       }

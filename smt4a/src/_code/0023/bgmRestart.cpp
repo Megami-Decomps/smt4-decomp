@@ -19,7 +19,7 @@ typedef struct Global588fac {
 } Global588fac;
 extern Global588fac g_resourceSharedFlag;
 extern Track g_bgmRequestChannels;
-extern Track DAT_0061953c;
+extern Track g_bgmRequestChannel1;
 
 s32 jyoucyuGetTableEntry(u32 index);
 
@@ -35,7 +35,7 @@ void bgmRestart(u32 value)
         if (g_resourceSharedFlag.mode == 0) {
             track = &g_bgmRequestChannels;
         } else if (g_resourceSharedFlag.mode == 1) {
-            track = &DAT_0061953c;
+            track = &g_bgmRequestChannel1;
         }
         if ((track->flags & 2) != 0) {
             track->unk04 = 0;

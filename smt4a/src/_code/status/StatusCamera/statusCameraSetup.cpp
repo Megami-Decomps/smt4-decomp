@@ -14,8 +14,8 @@ extern StatusCameraRegistryView *g_handleRegistry;
 void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
 void sysMemClear(void *, u32);
 void FUN_00154180(s32, s32, s32, s32);
-void FUN_0014f0dc(StatusCameraWorkA *, const Vec3 *, const Vec3 *, const Vec3 *);
-void FUN_001523b8(StatusCameraWorkA *, s32, f32, f32, f32, f32);
+void cameraMatrixCacheSetLookAt(StatusCameraWorkA *, const Vec3 *, const Vec3 *, const Vec3 *);
+void stereoCameraSetPerspective(StatusCameraWorkA *, s32, f32, f32, f32, f32);
 void asdCameraRegister(StatusCameraWorkA *);
 void uiSetFloatPair(StatusCameraWorkA *, f32, f32);
 
@@ -43,8 +43,8 @@ void statusCameraSetup(const Vec3 *eye, const Vec3 *direction, const Vec3 *auxil
     target.z += camera->dir.z * camera->dist;
     FUN_00154180(200, 0, 200, 240);
     asdCameraInitializeDefaults(reinterpret_cast<AsdCamera *>(camera), 1);
-    FUN_0014f0dc(camera, &camera->eye, &target, &up);
-    FUN_001523b8(camera, 1, camera->lens.fov, camera->lens.nearClip, camera->lens.farClip, 1.6666666f);
+    cameraMatrixCacheSetLookAt(camera, &camera->eye, &target, &up);
+    stereoCameraSetPerspective(camera, 1, camera->lens.fov, camera->lens.nearClip, camera->lens.farClip, 1.6666666f);
     FUN_0036b824(reinterpret_cast<u32>(camera));
     asdCameraRegister(camera);
     uiSetFloatPair(camera, viewportScale, 1.0f);

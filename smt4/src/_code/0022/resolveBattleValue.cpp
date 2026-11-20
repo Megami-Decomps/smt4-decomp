@@ -3,9 +3,9 @@
 
 extern "C" {
 
-extern int FUN_00227668(u32 a);
-extern int FUN_00227ecc(u32 a, u32 b);
-extern int FUN_00293230(void);
+extern int btlEffectOwnerGetBestSlotValue(u32 a);
+extern int btlEffectFindNamedEntry(u32 a, u32 b);
+extern int btlScriptUnitIsIncapacitated(void);
 
 typedef struct Entry {
     /* 0x00 */ u8 unk00[0x10];
@@ -18,16 +18,16 @@ int resolveBattleValue(u32 a, u32 b)
     Entry *entry;
 
     reinterpret_cast<int>(btlGetMainState());
-    if (FUN_00293230() != 0) {
+    if (btlScriptUnitIsIncapacitated() != 0) {
         result = 5;
     } else {
-        entry = (Entry *)FUN_00227ecc(a, b);
+        entry = (Entry *)btlEffectFindNamedEntry(a, b);
         result = 0;
         if (entry != NULL) {
             result = entry->value;
         }
         if (entry == NULL || result == 0) {
-            result = FUN_00227668(a);
+            result = btlEffectOwnerGetBestSlotValue(a);
             return result;
         }
     }

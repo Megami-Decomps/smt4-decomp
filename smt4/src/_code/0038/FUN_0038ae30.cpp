@@ -29,7 +29,7 @@ struct AocListJob {
     /* 0x14 */ u32 entryIndex;
 };
 
-WindowStatusResult FUN_00354608(void *parameters, void *source);
+WindowStatusResult aocOpenPackedArchive(void *parameters, void *source);
 void table30GetEntryB(AocListEntry **entry, void *table, u32 index); // declcheck: local (the shared declaration in gamedata/GameDataAccess_Shard0050.h does not compile here: argument of type "AocListEntry **" is incompatible with parameter of type "u8 **")
 u32 FUN_00234618(AocListEntry **entry);
 WindowStatusResult FUN_003df0c4(AocListEntry **entry, u8 *extra, AocListItem *item, s32 flag, u32 index);
@@ -43,7 +43,7 @@ void asdOperatorDelete(void *ptr);
 void FUN_0038ae30(AocListJob *job)
 {
     AocMain *aoc = g_aocMain;
-    job->result = FUN_00354608((u8 *)aoc + 0x20, (u8 *)aoc + 0x18);
+    job->result = aocOpenPackedArchive((u8 *)aoc + 0x20, (u8 *)aoc + 0x18);
     if (nnResultIsFailure(legacyResourceIdRemap(&job->result))) {
         return;
     }

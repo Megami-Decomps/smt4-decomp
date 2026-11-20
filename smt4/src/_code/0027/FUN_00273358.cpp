@@ -21,12 +21,12 @@ typedef struct EffectHolder {
     /* 0x04 */ EffectState *state;
 } EffectHolder;
 
-extern EffectHolder DAT_004474f0;
+extern EffectHolder g_lmapViewHolder;
 
 /* Resets the effect state: stores the handle and restarts the 10-frame, scale 1 parameters. */
 void FUN_00273358(u32 handle)
 {
-    EffectHolder *holder = &DAT_004474f0;
+    EffectHolder *holder = &g_lmapViewHolder;
     EffectState *state = holder->state;
 
     state->handle = handle;

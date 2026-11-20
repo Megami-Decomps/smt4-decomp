@@ -27,7 +27,7 @@ void FUN_003eed44(BtlMainStateA *battle)
                     battle->specialEffect = 0;
                     if (entry != NULL) {
                         const ScriptEntryInfo *record = reinterpret_cast<const ScriptEntryInfo *>(entry->data.specialRecord);
-                        u32 category = FUN_0019acdc(record->id, 1);
+                        u32 category = unitMapIdToCategory(record->id, 1);
                         u32 selectedEntry;
                         u32 sound;
                         FUN_003f1b3c(battle, category, 1, &selectedEntry, &sound);

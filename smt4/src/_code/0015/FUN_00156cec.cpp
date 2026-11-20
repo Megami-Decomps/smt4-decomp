@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern romwright_code *DAT_004734c8; /* 0x4734c8 */
+extern romwright_code *g_handlerTable1; /* 0x4734c8 */
 extern romwright_code *DAT_004734cc; /* 0x4734cc */
 
 
@@ -39,7 +39,7 @@ void FUN_00156cec(int *param_1)
       piVar1 = (int *)0x0;
     }
     if ((piVar1 != (int *)0x0) &&
-       ((pcVar2 = DAT_004734c8, *piVar1 == -0x80000000 ||
+       ((pcVar2 = g_handlerTable1, *piVar1 == -0x80000000 ||
         (pcVar2 = DAT_004734cc, *piVar1 == 0x40000000)))) {
       (*pcVar2)();
     }

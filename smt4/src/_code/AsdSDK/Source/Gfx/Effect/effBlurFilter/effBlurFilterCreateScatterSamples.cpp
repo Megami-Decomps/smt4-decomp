@@ -42,14 +42,14 @@ struct BlurScatterSample {
     };
 };
 extern "C" {
-extern const char DAT_00410244[];
+extern const char g_effBlurFilterSourceFileName[];
 f32 shiftRandomNextFraction(u32 stream);
 
 BlurSample *effBlurFilterCreateScatterSamples(const BlurScatterParameters *parameters)
 {
     s32 count = parameters->count;
     s32 bytes = count * sizeof(BlurScatterSample);
-    asdDebugTrace(DAT_00410244, 0x3f7);
+    asdDebugTrace(g_effBlurFilterSourceFileName, 0x3f7);
     BlurScatterSample *samples = (BlurScatterSample *)memAlloc(0x10000, 0x100, 0, bytes, 16, 1);
     for (s32 index = 0; index < count; ++index) {
         BlurScatterSample *sample = &samples[index];

@@ -26,7 +26,7 @@ typedef struct Owner {
 } Owner;
 
 u32 _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
-s32 FUN_001d0b28(u32 value, u8 *list);
+s32 linkListEraseMember(u32 value, u8 *list);
 s32 FUN_001d0b34(void);
 
 static void releaseHandle(Owner *owner, s32 index)
@@ -46,7 +46,7 @@ void FUN_001cc644(Owner *owner)
     s32 i;
 
     if (owner->listDirty != 0) {
-        FUN_001d0b28(_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(), owner->list);
+        linkListEraseMember(_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(), owner->list);
         owner->listDirty = 0;
     }
     if (owner->pending != 0) {

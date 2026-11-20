@@ -126,6 +126,9 @@ struct CommandBufferHandleNode {
 typedef char CommandBufferHandleNodeOffsetCheck[
     offsetof(CommandBufferHandleNode, next) == 0x40 && sizeof(CommandBufferHandleNode) == 0x44 ? 1 : -1];
 
+/* Buckets of the display-target registry: a target lives in chain `id % ASD_GFX_TARGET_CHAINS`. */
+enum { ASD_GFX_TARGET_CHAINS = 32 };
+
 /* A display target (colour/depth buffer) registered by id, chained in id order in one of 32 buckets. */
 struct AsdGfxTarget {
     /* 0x00 */ u32 id;
@@ -155,7 +158,7 @@ typedef struct AsdGfxContext {
     /* 0x01C */ CommandBufferHandleNode *buffers[32];   /* command buffers by handle & 31 */
     /* 0x09C */ AsdCmdBuffer *cmdBuffer;      /* buffer being written */
     /* 0x0A0 */ AsdCmdBuffer *activeBuffer;   /* buffer the GPU runs */
-    /* 0x0A4 */ AsdGfxTarget *targetChains[32];   /* targets by id & 31 */
+    /* 0x0A4 */ AsdGfxTarget *targetChains[ASD_GFX_TARGET_CHAINS];   /* targets by id % 32 */
     /* 0x124 */ s32 activeTarget;             /* slot of targets/targetX/targetY */
     /* 0x128 */ AsdGfxTarget *targets[3];     /* top, bottom, top right-eye (stereo) */
     /* 0x134 */ s32 targetX[3];               /* display offset into each target */
@@ -184,9 +187,9 @@ typedef char AsdGfxContextLayoutCheck[
 extern "C" {
 extern AsdGfxContext g_asdGfxContext;
 
-/* Queues a memory transfer on the write buffer (smt4 FUN_002a666c, smt4a FUN_0017cf74). */
-void FUN_002a666c(const void *source, void *destination, u32 bytes);
-void FUN_0017cf74(const void *source, void *destination, u32 bytes);
+/* Queues a memory transfer on the write buffer (smt4 asdGxQueueMemoryTransfer, smt4a asdGxQueueMemoryTransfer). */
+void asdGxQueueMemoryTransfer(const void *source, void *destination, u32 bytes);
+void asdGxQueueMemoryTransfer(const void *source, void *destination, u32 bytes);
 /* Queues a command list of `byteCount` bytes on the write buffer (smt4a; flushes it first when it
  * has unsubmitted commands). */
 void FUN_0017cdcc(const void *commands, u32 byteCount);

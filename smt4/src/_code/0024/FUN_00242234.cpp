@@ -10,7 +10,7 @@ struct EffectEditorLoadRequest {
 };
 extern "C" {
 extern const u8 DAT_00400002;
-void FUN_002430c8(u32 source, u32 index, EffectEditorLoadRequest *request);
+void effectEditorPollTextRequest(u32 source, u32 index, EffectEditorLoadRequest *request);
 void taskRunWithObject(EffectSelectionBlock *block, const void *payload, u32 type);
 void effBlockSetBlobB(EffectSelectionBlock *block, const void *blob, u32 size, u32 mode);
 
@@ -19,7 +19,7 @@ u32 FUN_00242234(u32 source, u32 index)
 {
     EffectEditorLoadRequest request;
     u32 result = 0x600001;
-    FUN_002430c8(source, index, &request);
+    effectEditorPollTextRequest(source, index, &request);
     if (request.state == 2) {
         result = 0x400000;
     } else if (request.state == 1) {

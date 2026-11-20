@@ -12,7 +12,7 @@ extern "C" {
 
 ConsumableRecordA *FUN_0019227c(AocSystemA *system, u32 id);
 Table8Owner *itemCategoryFindByItemId(u32 id);
-s32 FUN_00183450(const void *key, const void *entry);
+s32 itemRecordCompareByKey(const void *key, const void *entry);
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
     s32 (*compare)(const void *, const void *));
 
@@ -46,7 +46,7 @@ ConsumableRecordA *itemTableGetItemRecord(u32 id)
     }
     void *entries = dataTableGetEntries(table);
     u32 count = dataTableGetCount(table);
-    return static_cast<ConsumableRecordA *>(libc_bsearch(&key, entries, count, sizeof(ConsumableRecordA), FUN_00183450));
+    return static_cast<ConsumableRecordA *>(libc_bsearch(&key, entries, count, sizeof(ConsumableRecordA), itemRecordCompareByKey));
 }
 
 } /* extern "C" */

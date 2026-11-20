@@ -14,7 +14,7 @@ extern "C" {
 void __aeabi_memcpy4(void* dst, const void* src, u32 size);
 SlotTable* gameGetSlotTable(void);
 void FUN_0029bbc8(u8 id);
-void FUN_0029bde4(StatBlock* record);
+void saveMarkIdListSeen(StatBlock* record);
 s32 recordContainsPairedId(StatBlock* record, u32 skill);
 void qsort(void* base, s32 count, s32 size, s32 (*compare)(const void*, const void*));
 s32 dataTable06Sub1CompareBySortKeys(const void* a, const void* b);
@@ -45,7 +45,7 @@ u32 FUN_0033bb94(StatBlock* source, u32 arg, u16* outSkills)
         if (sum > 0xff) sum = 0xff;
         record->growth.counters[i] = sum;
     }
-    FUN_0029bde4(record);
+    saveMarkIdListSeen(record);
 
     s32 duplicates = 0;
     s32 added = 0;

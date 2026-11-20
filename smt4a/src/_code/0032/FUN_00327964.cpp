@@ -28,12 +28,12 @@ int libm_sinf(void);
 int mapIfSetMode1(void);
 int FUN_00233e10(int, unsigned int);
 int FUN_002342b8(void);
-int FUN_0025ef68(int, int, int);
+int mapResolveCollisionSphere(int, int, int);
 int distSpatial(void);
 int mapIfSpawnManholeAction(void);
 int mapEaseSceneHeading(void);
 int FUN_002e364c(int);
-int FUN_00303460(int);
+int lmapCameraSetMode(int);
 int mapSetSceneState(unsigned int);
 int FUN_003250ac(...);
 int mapIfReleaseRequestObject(void);
@@ -67,13 +67,13 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: mapIfSetMode1. */
 /* Supplied declaration required: FUN_00233e10. */
 /* Supplied declaration required: FUN_002342b8. */
-/* Supplied declaration required: FUN_0025ef68. */
+/* Supplied declaration required: mapResolveCollisionSphere. */
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: mapIfSpawnManholeAction. */
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_002e364c. */
-/* Supplied declaration required: FUN_00303460. */
+/* Supplied declaration required: lmapCameraSetMode. */
 /* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: mathVec3Dot. */
 /* Supplied declaration required: FUN_003250ac. */
@@ -81,7 +81,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: mapIfReleaseSlot1. */
 extern int inputIsQuestMenuPressed(void);
-extern int FUN_004d0584(void);
+extern int inputConfirmPressed(void);
 
 
 void FUN_00327964(void)
@@ -212,7 +212,7 @@ void FUN_00327964(void)
               mathPositionHeadingDegrees();
               *(unsigned int *)(g_lmapScene + 0x50) = temp_v12;
             }
-            FUN_00303460(10);
+            lmapCameraSetMode(10);
             *(unsigned int *)(g_lmapView + 0xb0) = 0xffffffff;
             sysPlaySe(0xdd);
             FUN_00233e10(1,g_gameState.f005f16ac);
@@ -245,7 +245,7 @@ void FUN_00327964(void)
       else {
         *(int *)(temp_v3 + 8) = *(int *)(temp_v3 + 8) + 1;
         FUN_00233e10(1,g_gameState.f005f16ac);
-        temp_v4 = FUN_004d0584();
+        temp_v4 = inputConfirmPressed();
         temp_v3 = g_lmapScene;
         if (temp_v4 != 0) {
           *(unsigned int *)(g_lmapScene + 4) = 10;
@@ -257,7 +257,7 @@ void FUN_00327964(void)
             temp_v3 = g_lmapView;
             *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
             *(unsigned int *)(temp_v3 + 0xb0) = 0;
-            FUN_00303460(0);
+            lmapCameraSetMode(0);
             temp_v3 = g_lmapScene;
             *(unsigned int *)(g_lmapScene + 0x54) = 0;
             *(unsigned int *)(temp_v3 + 0x58) = temp_v12;
@@ -310,7 +310,7 @@ void FUN_00327964(void)
       temp_v3 = g_lmapView;
       *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
       *(unsigned int *)(temp_v3 + 0xb0) = 0;
-      FUN_00303460(0);
+      lmapCameraSetMode(0);
       temp_v4 = *(int *)(g_lmapScene + 4);
       temp_v3 = g_lmapScene;
       *(int *)(temp_v3 + 4) = temp_v4 + 1;
@@ -345,7 +345,7 @@ LAB_00327dc8:
     *(int *)(temp_v3 + 0x38) = (int)((unsigned long long)temp_v9 >> 0x20);
     *(unsigned int *)(temp_v3 + 0x3c) = temp_v11;
     temp_v3 = temp_v3 + 0x28;
-    FUN_0025ef68(temp_v3,temp_v4,0);
+    mapResolveCollisionSphere(temp_v3,temp_v4,0);
     if (temp_v3 != 0) {
       *(unsigned char *)(g_lmapScene + 0x115) = 0;
     }

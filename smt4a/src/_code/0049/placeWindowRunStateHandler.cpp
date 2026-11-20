@@ -9,12 +9,12 @@ struct PlaceWindowDispatch {
 };
 
 extern "C" {
-void FUN_0049ae34(PlaceWindowDispatch *);
+void equipmentMenuRunStateHandler(PlaceWindowDispatch *);
 
 void placeWindowRunStateHandler(PlaceWindowDispatch *window)
 {
     if (window->handlers[window->state] != NULL)
         (window->*window->handlers[window->state])();
-    FUN_0049ae34(window);
+    equipmentMenuRunStateHandler(window);
 }
 }

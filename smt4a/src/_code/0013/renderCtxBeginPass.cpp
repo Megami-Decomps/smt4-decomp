@@ -5,7 +5,7 @@
 #include "camp/RenderCtx.h"
 
 extern "C" {
-int FUN_0017dd80(void);
+int asdGxFlushCommandBuffer(void);
 int renderTargetClear(int a, int b);
 int FUN_00144ab4(int arg);
 int renderCtxResetFrameState(RenderCtxA *ctx);
@@ -22,7 +22,7 @@ u32 renderCtxBeginPass(void)
         FUN_00144ab4(1);
         ctx = g_renderCtx;
         ctx->unk052C = 1;
-        FUN_0017dd80();
+        asdGxFlushCommandBuffer();
         renderTargetClear(1, 0);
         renderCtxResetFrameState(g_renderCtx);
         renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);

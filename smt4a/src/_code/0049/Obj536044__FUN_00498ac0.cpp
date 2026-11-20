@@ -29,7 +29,7 @@ void FUN_004963f8(AppraisalShop *shop);
 void entryDispatchUpdate(void *sprites, s32 arg);
 void sub10OwnerStart(void *values);
 void sendEvent100020E(void);
-s32 FUN_004d0584(void);
+s32 inputConfirmPressed(void);
 void releaseEntriesA(CountAt30 *menu);
 void releaseEntriesB(CountAt5A *owner);
 void menuSynchronizeFlaggedSelection(MenuSelectionScan *menu, FlaggedMenuList *values);
@@ -62,7 +62,7 @@ void Obj536044::FUN_00498ac0()
     case 1:
         scrRunOpcodesStub(appraisalShop(this)->script());
         appraisalShop(this)->timer++;
-        if (appraisalShop(this)->timer >= 10 && (FUN_004d0584() != 0 || scrRunOpcodesStub(appraisalShop(this)->script()) == 2)) {
+        if (appraisalShop(this)->timer >= 10 && (inputConfirmPressed() != 0 || scrRunOpcodesStub(appraisalShop(this)->script()) == 2)) {
             sendEvent100020E();
             obj04Finish();
             appraisalShop(this)->substate = 2;
@@ -80,7 +80,7 @@ void Obj536044::FUN_00498ac0()
         return;
     case 3: {
         UiSpriteState *cursor = &appraisalShop(this)->animation.sprites[0];
-        FUN_00167458(cursor, 0);
+        uiSpriteSlideFromSide(cursor, 0);
         u32 y = vec2GetYInt(cursor);
         u32 x = vec2GetXInt(cursor);
         pointConvertToFloat(appraisalShop(this)->cursorPosition, x, y);
@@ -100,7 +100,7 @@ void Obj536044::FUN_00498ac0()
         entryDispatchUpdate(&appraisalShop(this)->animation, 0xC);
         s32 total = flaggedValueHolderGetTotal(appraisalShop(this)->flaggedValues);
         screenShowMessage(appraisalShop(this)->messages[total * 3]);
-        if (FUN_004d0584() != 0) {
+        if (inputConfirmPressed() != 0) {
             sendEvent100020E();
             obj04Finish();
             appraisalShop(this)->substate = 5;

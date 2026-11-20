@@ -8,13 +8,13 @@ struct SoundSelection {
 }
 
 extern "C" {
-extern SoundSelection DAT_004e2f68;
+extern SoundSelection g_asdSndSlotSelection;
 
 /* Whether sound `index` of the selected second-kind slot is playing. */
 u32 asdSoundSlotBIsPlaying(u32 index)
 {
     u32 playing = 0;
-    AsdSndSlotB *slot = DAT_004e2f68.currentSlotB;
+    AsdSndSlotB *slot = g_asdSndSlotSelection.currentSlotB;
 
     if (index < 8 && slot != NULL && slot->handles[index] != 0) {
         playing = 1;

@@ -42,7 +42,7 @@ extern unsigned char DAT_0061c000; /* 0x61c000 */
 
 extern int FUN_0015a410(void);
 extern int appletIsExitRequested(void);
-extern unsigned int FUN_0016ccfc(void);
+extern unsigned int tokenTableGet(void);
 /* Supplied declaration required: FUN_0016cd0c. */
 /* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
@@ -231,7 +231,7 @@ void FUN_00428a58(unsigned int *param_1,unsigned int *param_2,unsigned int *para
         temp_v18[1] = (unsigned int)puStack_54;
         return;
       }
-      temp_v13 = FUN_0016ccfc();
+      temp_v13 = tokenTableGet();
       FUN_0016cd0c(&temp_v12);
       temp_v11 = &DAT_0061b43c;
       temp_v10 = param_5;

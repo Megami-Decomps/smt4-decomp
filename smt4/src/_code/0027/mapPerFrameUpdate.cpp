@@ -12,7 +12,7 @@ extern MapMain *g_mapMain;
 
 void mapEplUpdateEntries(void);
 void FUN_002d5374(void);
-void FUN_002f3c28(void);
+void mapNaviUpdateSlots(void);
 void FUN_00208cbc(void);
 void FUN_003079b4(void);
 void FUN_002712dc(void);
@@ -31,7 +31,7 @@ void mapRangeUpdateModelVisibilityAndTransforms(void);
 void FUN_001b4b54(void);
 void mapObjectVisibilityRestore(void);
 void FUN_00273f90(void);
-void FUN_002c8858(void);
+void mapIfRefreshMarkers(void);
 void gameStateSelectKind(void);
 void FUN_001d36cc(void);
 
@@ -42,7 +42,7 @@ void mapPerFrameUpdate(void)
 
     mapEplUpdateEntries();
     FUN_002d5374();
-    FUN_002f3c28();
+    mapNaviUpdateSlots();
     FUN_00208cbc();
     FUN_003079b4();
     FUN_002712dc();
@@ -61,7 +61,7 @@ void mapPerFrameUpdate(void)
     FUN_001b4b54();
     mapObjectVisibilityRestore();
     FUN_00273f90();
-    FUN_002c8858();
+    mapIfRefreshMarkers();
     gameStateSelectKind();
     FUN_001d36cc();
 }

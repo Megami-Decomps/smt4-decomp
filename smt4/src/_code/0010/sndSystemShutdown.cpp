@@ -19,11 +19,11 @@ typedef void (*SoundCallback)(void);
 void FUN_00128f60(void);
 void dspsndHandlePendingRequest(void);
 void FUN_00129084(void);
-void FUN_0011bf9c(SoundCallback first, SoundCallback second, SoundCallback third);
+void sndUnregisterCallback(SoundCallback first, SoundCallback second, SoundCallback third);
 void FUN_002bb470(void);
 void FUN_00128f2c(void);
 void sndMasterFinalize(void *manager);
-void FUN_0011ccd4(void *manager);
+void sndVoiceManagerFinalize(void *manager);
 void nn_snd_CTR_Dspsnd_Finalize(void *state, s32 flag);
 
 s32 sndSystemShutdown(void)
@@ -32,11 +32,11 @@ s32 sndSystemShutdown(void)
         return 0;
     }
     g_sndSystemState.running = 0;
-    FUN_0011bf9c(FUN_00129084, dspsndHandlePendingRequest, FUN_00128f60);
+    sndUnregisterCallback(FUN_00129084, dspsndHandlePendingRequest, FUN_00128f60);
     FUN_002bb470();
     FUN_00128f2c();
     sndMasterFinalize(&g_nnSndMasterManager);
-    FUN_0011ccd4(&g_nnSndVoiceManager);
+    sndVoiceManagerFinalize(&g_nnSndVoiceManager);
     if (g_sndSystemState.dspOwnedElsewhere == 0) {
         nn_snd_CTR_Dspsnd_Finalize(&g_dspsndState, 0);
     }

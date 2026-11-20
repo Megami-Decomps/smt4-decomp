@@ -21,7 +21,7 @@ s32 btlTalkBustUpExists(void);
 u32 btlTalkBustUpGetId(void);
 void btlTalkBustUpSetDemonTexture(u16 id, s32 arg);
 void btlTalkBustUpSetUnk2F4(s32 value);
-s32 FUN_0035fcbc(void);
+s32 btlTalkBustUpIsIdle(void);
 void FUN_003deea4(s32 arg);
 void FUN_00417a60(u32 id);
 s32 rosterHasLeader(void);
@@ -61,7 +61,7 @@ u32 scrCommTalkBustUpShow(void)
         questDataGetRecord(id);
         phase = scrWorkGetValue(0);
         if (phase == 0) {
-            if (FUN_0035fcbc() == 0) {
+            if (btlTalkBustUpIsIdle() == 0) {
                 eventTexSetFlag(0);
                 bustupCutAnimSetFlag(0);
                 if (btlTalkBustUpExists() != 0) {

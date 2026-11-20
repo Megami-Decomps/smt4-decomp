@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00107284(int, unsigned int *);
 int FUN_0010728e(int, unsigned int *);
 int _ZN9Obj55aff4D1Ev(unsigned int *);
-int FUN_002ea704(void);
+int watcherGetEnabledFlag(void);
 int onlineSockAddrToString(...);
 int FUN_002fd784(unsigned int, int);
 
@@ -23,7 +23,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00107284. */
 /* Supplied declaration required: FUN_0010728e. */
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
-/* Supplied declaration required: FUN_002ea704. */
+/* Supplied declaration required: watcherGetEnabledFlag. */
 /* Supplied declaration required: onlineSockAddrToString. */
 /* Supplied declaration required: FUN_002fd784. */
 
@@ -45,7 +45,7 @@ long long FUN_00112910(int param_1,unsigned int param_2,unsigned int param_3,uns
   uStack_20 = param_2;
   uStack_1c = param_3;
   temp_v6 = param_4;
-  temp_v0 = FUN_002ea704();
+  temp_v0 = watcherGetEnabledFlag();
   if (((temp_v0 != 0) && (*(int *)(param_1 + 0x374) != 0)) && (*(int *)(param_1 + 0x39c) != 0)) {
     temp_v6 = param_1 + 0x138;
     onlineSockAddrToString(&uStack_20);
@@ -93,7 +93,7 @@ long long FUN_00112910(int param_1,unsigned int param_2,unsigned int param_3,uns
         *(unsigned int *)(param_1 + 0x368) = 1;
       }
     }
-    temp_v1 = FUN_002ea704();
+    temp_v1 = watcherGetEnabledFlag();
     FUN_002fd784(temp_v1,temp_v0);
     return romwright_piece_4_4(uStack_20,1);
   }

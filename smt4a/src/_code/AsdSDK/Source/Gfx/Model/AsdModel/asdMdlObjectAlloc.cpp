@@ -23,7 +23,7 @@ typedef struct AsdModel {
     /* 0x91 */ u8 unk91[0x17];
 } AsdModel;
 
-extern u8 DAT_00636ec8[]; /* model list */
+extern u8 g_asdMdlObjectList[]; /* model list */
 
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void sysMemClear(void *memory, u32 size);
@@ -58,7 +58,7 @@ AsdModel *asdMdlObjectAlloc(void)
     }
     model->unk90 = 0;
     model->offset[0] = model->offset[1] = model->offset[2] = 0.0f;
-    asdListAdd(DAT_00636ec8, model, 0);
+    asdListAdd(g_asdMdlObjectList, model, 0);
     g_gfxSettings.modelCount++;
     return model;
 }

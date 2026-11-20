@@ -22,8 +22,8 @@ u32 asdVramBGetFreeBytes();
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 RegisteredHandle *modelListInit(RegisteredHandle *list);
 void resourceOwnerLoadFileSync(RegisteredHandle *list, const char *name);
-void FUN_0040a908(RegisteredHandle *list, u32 bytes);
-void FUN_0040a918(RegisteredHandle *list, u32 bytes);
+void moriModelContentSetRequestFirst(RegisteredHandle *list, u32 bytes);
+void moriModelContentSetRequestSecond(RegisteredHandle *list, u32 bytes);
 void moriModelContentLoadBody(RegisteredHandle *list, s32 mode);
 void modelPlayClip(FusionPreviewObject *object, s32 index, s32 mode, f32 first, f32 second);
 }
@@ -49,8 +49,8 @@ extern "C" void uniteCreatePreviewModel()
         }
         work->registered.handle = list;
         resourceOwnerLoadFileSync(list, DAT_0052f298);
-        FUN_0040a908(work->registered.handle, budget);
-        FUN_0040a918(work->registered.handle, budget);
+        moriModelContentSetRequestFirst(work->registered.handle, budget);
+        moriModelContentSetRequestSecond(work->registered.handle, budget);
         moriModelContentLoadBody(work->registered.handle, 0);
         FusionPreviewObject *object = reinterpret_cast<FusionPreviewObject *>(work->registered.handle->id);
         handleRegistryRegisterObject(g_handleRegistry, object);

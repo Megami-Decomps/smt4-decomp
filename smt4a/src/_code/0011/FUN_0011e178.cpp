@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_002ecac4(int);
+int deletingDtor_002ecac4(int);
 int operatorDeleteArray2(void);
 
 extern unsigned char DAT_0055aaa0; /* 0x55aaa0 */
 
-extern int FUN_002ea00c(int);
+extern int destroyObj005585a4(int);
 extern int destroyObj0055ae64(int);
 extern int strDestroy(unsigned int *);
-/* Supplied declaration required: FUN_002ecac4. */
+/* Supplied declaration required: deletingDtor_002ecac4. */
 /* Supplied declaration required: operatorDeleteArray2. */
 extern int FUN_002fb028(int);
 
@@ -30,8 +30,8 @@ void FUN_0011e178(unsigned int *param_1)
   temp_v0 = strDestroy(param_1 + 0x5e);
   temp_v0 = FUN_002fb028(temp_v0 - 0x78);
   temp_v0 = destroyObj0055ae64(temp_v0 - 0x28);
-  temp_v0 = FUN_002ea00c(temp_v0 - 0x60);
-  FUN_002ecac4(temp_v0 - 0x78);
+  temp_v0 = destroyObj005585a4(temp_v0 - 0x60);
+  deletingDtor_002ecac4(temp_v0 - 0x78);
   return;
 }
 

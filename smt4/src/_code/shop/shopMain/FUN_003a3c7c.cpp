@@ -9,8 +9,8 @@ extern "C" {
 void buttonHelpSetText(u32, u32);
 void messageTargetSetValue(u32, u32);
 void messageMainSetEnabled(s32);
-void FUN_0022fb64(SelectMenu *);
-s32 FUN_0027ee9c(void);
+void shopDrawSelectedItem(SelectMenu *);
+s32 inputConfirmPressed(void);
 u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *);
 s32 playerSlotHoldsEntry(SelectMenu *, u16);
 void FUN_002328b4(void);
@@ -18,8 +18,8 @@ void FUN_0022e648(SelectMenu *, s32);
 s32 inputIsQuestRepeatRight(void);
 s32 inputIsQuestRepeatLeft(void);
 s32 ifTouchGetSelectionModeForRegion(s32);
-void FUN_0022fcb8(SelectMenu *, s32);
-void FUN_0022faf8(void);
+void shopScreenRebuildForSelection(SelectMenu *, s32);
+void shopPlaySelectionChangeSound(void);
 s32 inputIsQuestMenuPressed(void);
 void FUN_00230df0(u32);
 void FUN_00232848(void);
@@ -29,7 +29,7 @@ void ifTouchRegionClearAll(MenuView *);
 void releaseEntriesA(Obj55ca08 *); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: more than one instance of overloaded function "playerSlotHoldsEntry" has "C" linkage)
 void ifTouchRegionRemove(void);
 s32 inputIsQuestCancelPressed(void);
-void FUN_0022fa2c(SelectMenu *);
+void shopMenuHandleCancel(SelectMenu *);
 
 /* Pair of neighbouring category ids, indexed by category. */
 struct CategoryLink {
@@ -82,9 +82,9 @@ void FUN_003a3c7c(SelectMenu *menu)
     messageMainSetEnabled(0);
     scrRunOpcodesStub(work->process);
     messageTargetSetValue(0, 0);
-    u32 accepted = FUN_0022fbc0(menu);
-    FUN_0022fb64(menu);
-    if (work->cursors[work->category].range.count > 0 && FUN_0027ee9c())
+    u32 accepted = shopApplyEntryAndCheckReady(menu);
+    shopDrawSelectedItem(menu);
+    if (work->cursors[work->category].range.count > 0 && inputConfirmPressed())
         accepted = 1;
     s32 category = work->category;
     EquipmentMenuItem *items = work->pages[category].items;
@@ -97,14 +97,14 @@ void FUN_003a3c7c(SelectMenu *menu)
     }
     if (inputIsQuestRepeatRight() || ifTouchGetSelectionModeForRegion(work->touchNext) == 6) {
         work->selection = DAT_0044e020[work->selection].next;
-        FUN_0022fcb8(menu, 1);
-        FUN_0022faf8();
+        shopScreenRebuildForSelection(menu, 1);
+        shopPlaySelectionChangeSound();
         return;
     }
     if (inputIsQuestRepeatLeft() || ifTouchGetSelectionModeForRegion(work->touchPrevious) == 6) {
         work->selection = DAT_0044e020[work->selection].previous;
-        FUN_0022fcb8(menu, 1);
-        FUN_0022faf8();
+        shopScreenRebuildForSelection(menu, 1);
+        shopPlaySelectionChangeSound();
         return;
     }
     if (inputIsQuestMenuPressed()) {
@@ -126,7 +126,7 @@ void FUN_003a3c7c(SelectMenu *menu)
     }
     if (inputIsQuestCancelPressed()) {
         FUN_002328b4();
-        FUN_0022fa2c(menu);
+        shopMenuHandleCancel(menu);
     }
 }
 }

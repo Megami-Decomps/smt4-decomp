@@ -1,7 +1,7 @@
 /* NON_MATCHING (b1454): only the key-field load order (retail: start.frame, start.value, end.frame, end.value) and the integer/VFP registers of the final segment differ. */
 #include "AsdSDK/Source/Gfx/Effect/EffectResourceKeys.h"
 
-extern "C" f32 FUN_00291620(s32, s32, s32);
+extern "C" f32 effRandomSignedValue(s32, s32, s32);
 
 // Find the next positive-duration key and interpolate its resource-adjusted value.
 extern "C" void FUN_001ee2bc(EffectResourceKeyTrack *track,
@@ -16,7 +16,7 @@ extern "C" void FUN_001ee2bc(EffectResourceKeyTrack *track,
             continue;
         if (track->keys[current + distance].value != 0 &&
             track->keys[current + distance].resource > 0) {
-            f32 adjustment = FUN_00291620(2, track->keys[current + distance].resource, 1);
+            f32 adjustment = effRandomSignedValue(2, track->keys[current + distance].resource, 1);
             track->keys[track->index + distance].value -= (s32)adjustment;
         }
         s32 nextIndex = track->index + distance;

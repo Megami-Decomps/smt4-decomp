@@ -59,7 +59,7 @@ extern "C" void campDrawCommandMenu(void)
 
     texDrawTableEntryAtStoredOrigin(2, 29, 0, originX, originY, 201);
     texDrawTableEntryAtStoredOrigin(2, 29, 1, originX, originY, 201);
-    const s32 count = FUN_0029e958(&camp->menuGrid);
+    const s32 count = uiGridNavigationEntryCount(&camp->menuGrid);
     for (s32 row = 0; row < count; row++) {
         UiSpriteState *icon = &camp->commands.commandIcons[row];
         s32 x = vec2GetXInt(icon);

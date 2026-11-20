@@ -3,7 +3,7 @@
 extern "C" {
 
 int asdGfxCmdBufferForward5(u32 a, u32 b, u32 c, u32 d, u32 e);
-int FUN_002bc1e4(void);
+int asdGxCmdBufferFinalizeBlock(void);
 
 typedef struct Unit {
     /* 0x00 */ u8 unk00[0x14];
@@ -16,7 +16,7 @@ typedef struct Unit {
 
 void surfaceCopy(Unit *src, Unit *dst)
 {
-    FUN_002bc1e4();
+    asdGxCmdBufferFinalizeBlock();
     asdGfxCmdBufferForward5(src->buffer, dst->buffer, src->unk14, src->unk18, src->unk1C);
 }
 

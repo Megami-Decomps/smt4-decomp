@@ -8,10 +8,10 @@ int onlineInstanceTableGetCurrent(void);
 int vectorInitEmpty(...);
 int FUN_002e9e8a(unsigned int, unsigned int, int *);
 int onlineInstanceTableFind(int, unsigned int);
-int FUN_002e9f00(void);
+int onlineInstanceCompleteWithChildren(void);
 int vectorDestroyWords(...);
 int onlineTimeGetNow(unsigned int *);
-int FUN_002f3dde(unsigned int, unsigned int);
+int onlineInstanceCompleteMode3(unsigned int, unsigned int);
 int FUN_002ff3b0(unsigned int **, unsigned int *, int, unsigned int);
 int wordMoveOut_002ff3b8(int [2], int *, int);
 int mapIteratorNext7(int *, unsigned int);
@@ -35,10 +35,10 @@ extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, int *);
 /* Supplied declaration required: vectorInitEmpty. */
 /* Supplied declaration required: FUN_002e9e8a. */
 /* Supplied declaration required: onlineInstanceTableFind. */
-/* Supplied declaration required: FUN_002e9f00. */
+/* Supplied declaration required: onlineInstanceCompleteWithChildren. */
 /* Supplied declaration required: vectorDestroyWords. */
 /* Supplied declaration required: onlineTimeGetNow. */
-/* Supplied declaration required: FUN_002f3dde. */
+/* Supplied declaration required: onlineInstanceCompleteMode3. */
 /* Supplied declaration required: FUN_002ff3b0. */
 /* Supplied declaration required: wordMoveOut_002ff3b8. */
 /* Supplied declaration required: mapIteratorNext7. */
@@ -88,7 +88,7 @@ void FUN_00114140(int param_1)
           temp_v3 = onlineInstanceTableGetCurrent();
           onlineInstanceTableFind(temp_v3,*puVar7);
           if (temp_v3 != 0) {
-            FUN_002e9f00();
+            onlineInstanceCompleteWithChildren();
           }
         }
         vectorDestroyWords(&temp_v10);
@@ -122,7 +122,7 @@ void FUN_00114140(int param_1)
     temp_v9[1] = 0x8001000b;
     temp_v2 = _ZN12OnlineResultC1ERKj(temp_v18,temp_v9 + 1);
     wordMoveOut_002ff3b8(temp_v9,&temp_v14,0);
-    FUN_002f3dde(*(unsigned int *)(temp_v9[0] + 0x14),temp_v2);
+    onlineInstanceCompleteMode3(*(unsigned int *)(temp_v9[0] + 0x14),temp_v2);
     vectorDestroyWords(&temp_v16);
   } while( 1 );
 }

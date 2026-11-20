@@ -3,11 +3,11 @@
 namespace { struct Slot { f32 scale; u32 active; u32 value; u32 extra; u8 state; u8 tail[3]; }; }
 
 extern "C" {
-extern Slot DAT_004d9758[];
+extern Slot g_screenFadeSlots[];
 /* Restarts slot `index` with `extra`: inactive, state 3, full scale. */
 void titleRestartSlotState3(u32 index, u32 extra)
 {
-    Slot *slot = &DAT_004d9758[index];
+    Slot *slot = &g_screenFadeSlots[index];
     slot->active = 0;
     slot->extra = extra;
     slot->state = 3;

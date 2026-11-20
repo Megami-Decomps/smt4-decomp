@@ -18,11 +18,11 @@ struct AnimatedContentTaskWork {
 };
 extern "C" {
 f32 asdAnimGetTrackLastFrame(NkdwPreviewResource *resource, s32 track);
-s32 FUN_002c1d5c(void);
+s32 eventIsSkipping(void);
 NkdwPreviewResource *eventResourceCacheAcquire(u32 request, u32 mode);
 s32 nkdwHeaderParse(NkdwPreviewResource *resource);
 void aocHandleButtons(NkdwPreviewResource *resource, s32 mode);
-s32 FUN_00294fe0(NkdwPreviewResource *resource);
+s32 aocTextureEntryLoadOnce(NkdwPreviewResource *resource);
 void jobStop(u32 job, s32 mode);
 
 /* Loads the requested content, enables it, then advances its looping animation and opacity fade. */
@@ -53,7 +53,7 @@ u32 uiStepAnimatedContentTask(u32 job)
         }
         break;
     case 1:
-        if (FUN_002c1d5c() == 0 && work->requested != 0) {
+        if (eventIsSkipping() == 0 && work->requested != 0) {
             NkdwPreviewResource *resource = eventResourceCacheAcquire(work->requested, 1);
             work->state = 2;
             work->resource = resource;
@@ -66,7 +66,7 @@ u32 uiStepAnimatedContentTask(u32 job)
         }
         break;
     case 3:
-        if (FUN_00294fe0(work->resource) != 0) {
+        if (aocTextureEntryLoadOnce(work->resource) != 0) {
             work->state = 0;
         }
         break;

@@ -10,7 +10,7 @@ extern "C" {
 int dataTable01GetRecordWithAocOverride(...);
 int fontMeasureLineAdvance(...);
 int nkmEnemyFindById(...);
-int FUN_002a1850(...);
+int cameraProjectToScreen(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -47,15 +47,15 @@ extern int *g_btlTargetSelect; /* 0x57a9a8 */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern unsigned int FUN_0014bf3c(fn_00368e10_arg1 *, unsigned int);
+extern unsigned int demonGetRaceLabel(fn_00368e10_arg1 *, unsigned int);
 /* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: nkmEnemyFindById. */
 extern unsigned int gameDataGetTableValue(void);
 extern unsigned char itemIsCollectedWithRelated(fn_00368e10_arg1 *);
 extern int gameProgressIsAdvanced(void);
-/* Supplied declaration required: FUN_002a1850. */
-extern int FUN_002a4b28(fn_00368e10_arg1 *);
+/* Supplied declaration required: cameraProjectToScreen. */
+extern int compendiumEntryIsRegistered(fn_00368e10_arg1 *);
 extern unsigned int obj80Select(unsigned int);
 
 
@@ -92,7 +92,7 @@ void FUN_00368e10(unsigned int *param_1,fn_00368e10_arg1 *param_2,unsigned int p
   pfVar4 = param_2;
   dataTable01GetRecordWithAocOverride(param_2);
   sprintf((char *)(*piVar1 + 4),(const char *)&LAB_00369218,pfVar4);
-  temp_v1 = FUN_0014bf3c(param_2,0);
+  temp_v1 = demonGetRaceLabel(param_2,0);
   sprintf((char *)(*piVar1 + 0x2c),(const char *)&LAB_00369218,temp_v1);
   temp_v0 = itemIsCollectedWithRelated(param_2);
   *(unsigned char *)(*piVar1 + 0x24) = temp_v0;
@@ -142,7 +142,7 @@ void FUN_00368e10(unsigned int *param_1,fn_00368e10_arg1 *param_2,unsigned int p
     *(unsigned int *)(*piVar1 + 0x84) = temp_v1;
   }
   *(unsigned char *)(*piVar1 + 0xec) = 0;
-  temp_v2 = FUN_002a4b28(param_2);
+  temp_v2 = compendiumEntryIsRegistered(param_2);
   if ((temp_v2 == 0) && ((pfVar3->field_0x16 & 4) != 0)) {
     *(unsigned char *)(*piVar1 + 0xec) = 1;
   }
@@ -177,7 +177,7 @@ void FUN_00368e10(unsigned int *param_1,fn_00368e10_arg1 *param_2,unsigned int p
   *(unsigned int *)(temp_v4 + 0x60) = param_1[1];
   *(unsigned int *)(temp_v4 + 100) = param_1[2];
   temp_v1 = obj80Select(0);
-  FUN_002a1850(&temp_v6,0,temp_v1,temp_v4 + 0x5c);
+  cameraProjectToScreen(&temp_v6,0,temp_v1,temp_v4 + 0x5c);
   temp_v1 = 0xd2;
   *(unsigned int *)(temp_v4 + 0x68) = temp_v6;
   *(unsigned int *)(temp_v4 + 0x6c) = uStack_3c;

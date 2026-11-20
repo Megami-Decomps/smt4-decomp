@@ -10,7 +10,7 @@ extern "C" {
 
 int FUN_002347b8(...);
 int texTableRecordCallWithParams(...);
-int FUN_002b7d30(int, int);
+int asdGxBlitScaledQuad(int, int);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
@@ -44,7 +44,7 @@ extern int aocIsEntryIndexValid(int, int);
 /* Supplied declaration required: FUN_0023478c. */
 /* Supplied declaration required: FUN_002347b8. */
 /* Supplied declaration required: texTableRecordCallWithParams. */
-/* Supplied declaration required: FUN_002b7d30. */
+/* Supplied declaration required: asdGxBlitScaledQuad. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -108,7 +108,7 @@ void FUN_003909d0(int param_1,int param_2,int param_3,int param_4)
       temp_v6 = temp_v10 + temp_v1;
       VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_002b7d30(temp_v4,temp_v6);
+      asdGxBlitScaledQuad(temp_v4,temp_v6);
     }
     if (*(char *)(temp_v3 + 0x9b3) != '\0') {
       temp_v4 = temp_v5;

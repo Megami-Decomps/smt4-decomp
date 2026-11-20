@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00121bf8(void);
 int FUN_002ea3d0(int, unsigned int);
-int FUN_002eb5f4(void);
+int watcherGetActiveContext(void);
 
 extern unsigned char LAB_00111b05; /* 0x111b05 */
 extern unsigned char LAB_00112134; /* 0x112134 */
@@ -15,7 +15,7 @@ extern unsigned char LAB_00112134; /* 0x112134 */
 extern int containerIsEmpty(int);
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-/* Supplied declaration required: FUN_002eb5f4. */
+/* Supplied declaration required: watcherGetActiveContext. */
 extern int mapIsEmpty3(int);
 
 
@@ -31,9 +31,9 @@ void FUN_001120d0(int param_1)
   unsigned char *puVar3;
   
   puVar3 = temp_v2;
-  temp_v0 = FUN_002eb5f4();
+  temp_v0 = watcherGetActiveContext();
   if (temp_v0 != 0) {
-    FUN_002eb5f4();
+    watcherGetActiveContext();
     FUN_00121bf8();
     temp_v0 = containerIsEmpty(param_1 + 400);
     if ((temp_v0 != 0) || (temp_v0 = mapIsEmpty3(param_1 + 0x9c), temp_v0 != 0)) {

@@ -21,13 +21,13 @@ int btlFindEntryBlockByMemberId(...);
 int btlSlotSetStoreValue(...);
 int btlCombatantGetSummaryValues(...);
 int btlDowngradeRandomResistance(void);
-int FUN_004c53fc(...);
+int mapCategoryToDestinationGroup(...);
 int FUN_004c8340(...);
 int halfTable152TopIs2(...);
 int FUN_004e699c(...);
 int FUN_004fb5dc(...);
 int FUN_004fb6f4(...);
-int FUN_004fb798(...);
+int btlRecoverHpMpByPercent(...);
 int btlReflectInitKind23(...);
 void FUN_004fd1b8(int actor, unsigned int flags, unsigned int value,
                   unsigned int parameter, unsigned int auxiliary);
@@ -51,7 +51,7 @@ int resolveBattleValue(...);
 int btlSelectionGetUsableUnit(...);
 int btlQueueActionMessage(...);
 int FUN_004fbeac(...);
-int FUN_004fc094(...);
+int btlAdjustPropertyAndQueueAction(...);
 int FUN_004fda78(...);
 int FUN_004fe764(...);
 int VectorSignedToFloat(...);
@@ -265,7 +265,7 @@ extern int FUN_003eca48(unsigned int, unsigned short);
 /* Supplied declaration required: FUN_004c4604. */
 /* Supplied declaration required: btlDowngradeRandomResistance. */
 extern int btlGetPropertyMaximum(void);
-/* Supplied declaration required: FUN_004c53fc. */
+/* Supplied declaration required: mapCategoryToDestinationGroup. */
 /* Supplied declaration required: btlAdjustPropertyClamped. */
 /* Supplied declaration required: battleRecordUnitMaskHistoryEvents. */
 /* Supplied declaration required: FUN_004c5848. */
@@ -281,7 +281,7 @@ extern int FUN_004c6b8c(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_004e5f2c. */
 /* Supplied declaration required: battleApplyInteractionSelection. */
 /* Supplied declaration required: FUN_004e699c. */
-extern int FUN_004e83ac(unsigned int *, unsigned int *, int);
+extern int btlActionTargetSlotScore(unsigned int *, unsigned int *, int);
 extern int btlUnitGet(unsigned int *);
 extern int btlUnitGetSkillValue(int);
 /* Supplied declaration required: btlEffectFindSlotId. */
@@ -295,10 +295,10 @@ extern int FUN_004f9ae4(int, unsigned int);
 /* Supplied declaration required: btlQueueActionMessage. */
 /* Supplied declaration required: FUN_004fb5dc. */
 /* Supplied declaration required: FUN_004fb6f4. */
-/* Supplied declaration required: FUN_004fb798. */
+/* Supplied declaration required: btlRecoverHpMpByPercent. */
 /* Supplied declaration required: FUN_004fbeac. */
 /* Supplied declaration required: btlReflectInitKind23. */
-/* Supplied declaration required: FUN_004fc094. */
+/* Supplied declaration required: btlAdjustPropertyAndQueueAction. */
 /* Supplied declaration required: FUN_004fda78. */
 /* Supplied declaration required: FUN_004fe764. */
 /* Supplied declaration required: FUN_004fec2c. */
@@ -937,7 +937,7 @@ LAB_004e32dc:
           temp_v55 = (unsigned int *)((int)temp_v16 + (int)temp_v55);
         }
         FUN_004e5f2c(param_1,param_2,param_8,-(int)puVar9);
-        temp_v5 = FUN_004e83ac(param_1,param_2,param_8);
+        temp_v5 = btlActionTargetSlotScore(param_1,param_2,param_8);
         if (temp_v5 != 0) {
           temp_v56 = param_2[0x165];
           temp_v6 = 1;
@@ -1077,7 +1077,7 @@ LAB_004e34b8:
     temp_v23 = (unsigned int *)temp_v99[0x279];
     temp_v27 = temp_v6;
     temp_v33 = temp_v8;
-    FUN_004fc094(0,param_2,temp_v5 + temp_v49 * 0x10,temp_v5 + temp_v80 * 0x10,temp_v47,puVar9);
+    btlAdjustPropertyAndQueueAction(0,param_2,temp_v5 + temp_v49 * 0x10,temp_v5 + temp_v80 * 0x10,temp_v47,puVar9);
     btlAdjustPropertyClamped(param_8,2,puVar9,0);
     if (puVar13 == (unsigned int *)0x0) {
       temp_v23 = (unsigned int *)0x3;
@@ -1107,13 +1107,13 @@ LAB_004e34b8:
       } while (temp_v8 < 0x85);
     }
     if (((unsigned int)temp_v88 & 2) != 0) {
-      temp_v5 = FUN_004e83ac(param_1,param_2,param_8);
+      temp_v5 = btlActionTargetSlotScore(param_1,param_2,param_8);
       if (((temp_v5 == 0) && (temp_v6 != 0)) && (temp_v41 != 6 && temp_v41 != 7)) {
         temp_v5 = g_btlAux;
         resolveBattleValue(g_btlAux,temp_v100);
         FUN_004fbeac(temp_v5 + temp_v106 + temp_v12,param_2,0,0x20,1);
       }
-      temp_v5 = FUN_004e83ac(param_1,param_2,param_8);
+      temp_v5 = btlActionTargetSlotScore(param_1,param_2,param_8);
       if (((temp_v5 == 0 && temp_v6 == 0) && (temp_v62 != 0)) && ((*param_2 & 0x20000) == 0)) {
         temp_v5 = g_btlAux;
         resolveBattleValue(g_btlAux,temp_v100);
@@ -1308,7 +1308,7 @@ LAB_004e34b8:
       temp_v5 = g_btlAux;
       resolveBattleValue(g_btlAux,temp_v100);
       FUN_004fec2c(temp_v5 + temp_v106 + temp_v12,param_2,0x46,temp_v60,&temp_v23,1);
-      temp_v18 = FUN_004c53fc(0x17);
+      temp_v18 = mapCategoryToDestinationGroup(0x17);
       btlSlotSetStoreValue(param_8,0x17,temp_v18);
     }
     temp_v5 = btlSelectionGetUsableUnit(g_btlAux);
@@ -1514,7 +1514,7 @@ LAB_004e45bc:
       temp_v21 = temp_v50;
       temp_v25 = (unsigned int *)(temp_v9 + temp_v5 + temp_v12);
       temp_v26 = temp_v8;
-      FUN_004fb798(0,param_2,*(int *)(*param_1 + 0x1ed4) + temp_v49 * 0x10,
+      btlRecoverHpMpByPercent(0,param_2,*(int *)(*param_1 + 0x1ed4) + temp_v49 * 0x10,
                    *(int *)(*param_1 + 0x1ed4) + param_8 * 0x1d0,0,temp_v78);
       if (0 < (int)temp_v78) {
         FUN_004e5f2c(param_1,param_2,param_8,temp_v78);
@@ -1581,7 +1581,7 @@ LAB_004e49f0:
                   }
                 }
                 else {
-                  temp_v5 = FUN_004c53fc(7);
+                  temp_v5 = mapCategoryToDestinationGroup(7);
                   temp_v8 = btlFindEntryValue(param_8,7);
                   if (temp_v5 == temp_v8) goto LAB_004e49f0;
                 }
@@ -1606,7 +1606,7 @@ LAB_004e4a78:
                     }
                   }
                   else {
-                    temp_v5 = FUN_004c53fc(8);
+                    temp_v5 = mapCategoryToDestinationGroup(8);
                     temp_v8 = btlFindEntryValue(param_8,8);
                     if (temp_v5 == temp_v8) goto LAB_004e4a78;
                   }
@@ -1631,7 +1631,7 @@ LAB_004e4b00:
                       }
                     }
                     else {
-                      temp_v5 = FUN_004c53fc(10);
+                      temp_v5 = mapCategoryToDestinationGroup(10);
                       temp_v8 = btlFindEntryValue(param_8,10);
                       if (temp_v5 == temp_v8) goto LAB_004e4b00;
                     }
@@ -1660,7 +1660,7 @@ LAB_004e4b94:
                         }
                       }
                       else {
-                        temp_v5 = FUN_004c53fc(0xb);
+                        temp_v5 = mapCategoryToDestinationGroup(0xb);
                         temp_v8 = btlFindEntryValue(param_8,0xb);
                         if (temp_v5 == temp_v8) goto LAB_004e4b94;
                       }
@@ -1737,7 +1737,7 @@ LAB_004e4cac:
     temp_v9 = *(int *)(*param_1 + 0x1ed4) + temp_v49 * 0x10;
     temp_v25 = (unsigned int *)(temp_v8 + temp_v5 + temp_v12);
     temp_v26 = temp_v10;
-    FUN_004fb798(temp_v48 + temp_v5 + temp_v12,param_2,temp_v9,temp_v9,2,temp_v55);
+    btlRecoverHpMpByPercent(temp_v48 + temp_v5 + temp_v12,param_2,temp_v9,temp_v9,2,temp_v55);
     if (0 < (int)temp_v55) {
       FUN_004e5f2c(param_1,param_2,param_7,temp_v55);
     }
@@ -1751,7 +1751,7 @@ LAB_004e4cac:
   }
   if (temp_v6 == 0) {
     if ((temp_v92 != 0) && (param_2[0xc] == 0)) {
-      temp_v12 = FUN_004e83ac(param_1,param_2,param_7);
+      temp_v12 = btlActionTargetSlotScore(param_1,param_2,param_7);
       if ((temp_v12 == 0) && (temp_v12 = valueRangeSameSide(param_7,param_8), temp_v12 == 0)) {
         temp_v13 = *param_1;
         btlMainFindEntryByListedId(temp_v13,param_8);
@@ -1762,7 +1762,7 @@ LAB_004e4cac:
                        (int)*(short *)(temp_v5 + temp_v30),temp_v12);
         }
       }
-      temp_v12 = FUN_004e83ac(param_1,param_2,param_7);
+      temp_v12 = btlActionTargetSlotScore(param_1,param_2,param_7);
       if ((temp_v12 == 0) && (temp_v12 = valueRangeSameSide(param_7,param_8), temp_v12 == 0)) {
         temp_v12 = 0;
         do {
@@ -1789,7 +1789,7 @@ LAB_004e4cac:
       }
     }
     if (((temp_v90 != 0) && (param_2[0xc] == 0)) && ((*param_2 & 0x80000) == 0)) {
-      temp_v12 = FUN_004e83ac(param_1,param_2,param_7);
+      temp_v12 = btlActionTargetSlotScore(param_1,param_2,param_7);
       if (temp_v12 == 0) {
         temp_v13 = *param_1;
         btlMainFindEntryByListedId(temp_v13,param_8);
@@ -1811,7 +1811,7 @@ LAB_004e4cac:
                temp_v21,temp_v22,0xffffffff);
   if ((((temp_v6 == 0) && (temp_v59 != 0)) &&
       ((temp_v47 == (unsigned int *)0x2 || ((temp_v13 & 0x800000) != 0)))) &&
-     (temp_v12 = FUN_004e83ac(param_1,param_2,param_7), temp_v12 == 0)) {
+     (temp_v12 = btlActionTargetSlotScore(param_1,param_2,param_7), temp_v12 == 0)) {
     btlMainFindEntryByListedId(*param_1,param_8);
     temp_v12 = param_8;
     FUN_004c5848();

@@ -68,7 +68,7 @@ void asdTMTexTableReleaseNode(u32 table, s32 node);
 
 void gridNavigationConfigure(void *flags, u32 height, s32, s32, s32, s32);
 void FUN_00212724(void);
-void FUN_00228b04(void *listbox, s32 mode);
+void gridNavigationHandleConfirm(void *listbox, s32 mode);
 u32 resourceRunOperationIfUnblocked(void *listbox);
 s32 listCursorGetRowIfUnblocked(void *listbox);
 void flagsSetOrClearBit(void *flags, s32 bit);
@@ -87,7 +87,7 @@ void FUN_0049df84(DirectoryScreenWork *work)
 
     uiSpriteAdvanceAnimation(work->panelA, 1.0f);
     uiSpriteAdvanceAnimation(work->panelB, 1.0f);
-    FUN_00228b04(work->listbox, 1);
+    gridNavigationHandleConfirm(work->listbox, 1);
     work->scroll = resourceRunOperationIfUnblocked(work->listbox);
     work->cursor = listCursorGetRowIfUnblocked(work->listbox);
     work->index = work->order[work->cursor + work->scroll];

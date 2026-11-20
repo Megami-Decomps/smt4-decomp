@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002ea6bc(unsigned int);
-int FUN_002ea6cc(unsigned int);
+int lazyStaticInitOnce(unsigned int);
+int lazyMemberInitOnce(unsigned int);
 
-/* Supplied declaration required: FUN_002ea6bc. */
-/* Supplied declaration required: FUN_002ea6cc. */
+/* Supplied declaration required: lazyStaticInitOnce. */
+/* Supplied declaration required: lazyMemberInitOnce. */
 
 
 void FUN_002ea680(unsigned int param_1,int param_2,int param_3,int param_4,unsigned int param_5)
@@ -19,10 +19,10 @@ void FUN_002ea680(unsigned int param_1,int param_2,int param_3,int param_4,unsig
   
   for (temp_v0 = 0; temp_v0 < param_4; temp_v0 = temp_v0 + 1) {
     if ((*(int *)(param_2 + temp_v0 * 4) != 0) && (*(int *)(param_3 + temp_v0 * 4) != 0)) {
-      FUN_002ea6bc(param_5);
+      lazyStaticInitOnce(param_5);
     }
   }
-  FUN_002ea6cc(param_5);
+  lazyMemberInitOnce(param_5);
   return;
 }
 

@@ -11,14 +11,14 @@ typedef struct Object {
 } Object;
 
 extern void modelLoadFileAsyncByName(u32 handle, const char *path);
-extern void FUN_0040a908(u32 handle, s32 mode);
-extern void FUN_0040a918(u32 handle, s32 mode);
+extern void moriModelContentSetRequestFirst(u32 handle, s32 mode);
+extern void moriModelContentSetRequestSecond(u32 handle, s32 mode);
 
 void playerModelStartBaseMotion(Object *obj)
 {
     modelLoadFileAsyncByName(obj->handle, "player/pl01_00.bam");
-    FUN_0040a908(obj->handle, 0x10000);
-    FUN_0040a918(obj->handle, 0x30000);
+    moriModelContentSetRequestFirst(obj->handle, 0x10000);
+    moriModelContentSetRequestSecond(obj->handle, 0x30000);
     obj->state = 1;
 }
 

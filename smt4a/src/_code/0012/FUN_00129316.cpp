@@ -7,7 +7,7 @@ extern "C" {
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002f1468(unsigned int *, unsigned int **);
 int FUN_002f3e6a(int *, unsigned int *, int *);
-int FUN_002fb208(void);
+int threadGetCurrentId(void);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ extern unsigned int _ZN9Obj55b28cC1EPv(unsigned char *, int);
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002f1468. */
 /* Supplied declaration required: FUN_002f3e6a. */
-/* Supplied declaration required: FUN_002fb208. */
+/* Supplied declaration required: threadGetCurrentId. */
 extern unsigned int *wordRefsEqual_0030cd14(int *, unsigned int *);
 
 
@@ -40,19 +40,19 @@ unsigned int * FUN_00129316(int param_1)
   int temp_v5;
   
   temp_v0 = _ZN9Obj55b28cC1EPv(temp_v1,param_1 + 0x10);
-  FUN_002fb208();
+  threadGetCurrentId();
   puVar4 = (unsigned int *)(param_1 + 0x40);
   temp_v4 = temp_v0;
   FUN_002f3e6a(&temp_v3,puVar4,&temp_v4);
   temp_v5 = *(unsigned int *)(param_1 + 0x50);
   puVar2 = (unsigned int *)wordRefsEqual_0030cd14(&temp_v3,(unsigned int *)&temp_v5);
   if (puVar2 != (unsigned int *)0x0) {
-    FUN_002fb208();
+    threadGetCurrentId();
     puVar3 = puVar4;
     temp_v2 = puVar2;
     FUN_002f1468(puVar4,&temp_v2);
     *puVar3 = *(unsigned int *)(param_1 + 0xc);
-    FUN_002fb208();
+    threadGetCurrentId();
     temp_v2 = puVar3;
     FUN_002f1468(puVar4,&temp_v2);
   }

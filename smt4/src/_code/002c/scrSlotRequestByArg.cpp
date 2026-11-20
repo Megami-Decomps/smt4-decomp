@@ -3,7 +3,7 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-s32 FUN_002c1d5c(void);
+s32 eventIsSkipping(void);
 void titleRestartSlotState3(u32, u32);
 void slotSetRequest(u32, u32, u32);
 
@@ -23,10 +23,10 @@ u32 scrSlotRequestByArg(void)
             return 1;
         }
     } else {
-        if (FUN_002b89a4(0) != 0) {
+        if (screenFaderIsSettled(0) != 0) {
             return 1;
         }
-        if (FUN_002c1d5c() != 0) {
+        if (eventIsSkipping() != 0) {
             switch (scrGetArg(0)) {
             case 0:
                 titleRestartSlotState3(0, 0xff);

@@ -13,7 +13,7 @@ extern "C" {
 extern void *g_aocSystem;
 extern const char DAT_004037b0[];
 extern const char DAT_004037a0[];
-s32 FUN_002c1d5c(void);
+s32 eventIsSkipping(void);
 s32 aocRunByName(void *system, s32 table, s32 node, u32 operation);
 u32 asdTMTexTablePrepareNodeImage(s32 table, s32 node);
 u32 FUN_001ce4a4(u32 process);
@@ -36,7 +36,7 @@ void FUN_002f5a10(s32 bustupId)
     dataTableGetCount(table);
     s32 index = bustupId - 1;
     work->node = entries[index];
-    if (FUN_002c1d5c()) {
+    if (eventIsSkipping()) {
         work->deferred = 1;
     } else {
         if (work->node != -1) {

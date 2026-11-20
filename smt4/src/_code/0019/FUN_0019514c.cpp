@@ -18,11 +18,11 @@ extern "C" {
 void uiSlidingSpriteAdvance(void* widget, s32 arg);
 u16 ifTouchRegionAddRequested(u32 group, u32 index);
 s32 resourceRunOperationIfUnblocked(void* list);
-s32 FUN_0029efd8(void* list, s32 arg);
+s32 gridNavigationHandleConfirm(void* list, s32 arg);
 u32 saveBlockGetPlaySeconds(void);
 s32 uiScrollHandleActionsOrTouch(void* list, const TextureTableEntryIV *touchArea, s32 b, s32 c, s32 d, s32 e, u8* flags, s32 f, s32 g);
 s32 eventQueueAddUniqueIfValid(u32 event);
-s32 FUN_002c1658(s32 a, s32 b);
+s32 inputQueryButtonState(s32 a, s32 b);
 void timerStart(void* widget, s32 a, s32 b);
 void uiSpriteAdvanceAnimation(void* widget);
 
@@ -49,8 +49,8 @@ void FUN_0019514c(u8** screenRef)
         }
         break;
     case 1: {
-        s32 count = (s32)FUN_0029ee54(list);
-        for (s32 i = 0; i < count; i = i + 1, count = (s32)FUN_0029ee54(list)) {
+        s32 count = (s32)gridNavigationGetItemCount(list);
+        for (s32 i = 0; i < count; i = i + 1, count = (s32)gridNavigationGetItemCount(list)) {
             u32 id = reinterpret_cast<s16*>(screen + 0x424)[i];
             void *table = dataTableGet(0x37, 0);
             PlayLogRecord *entries = static_cast<PlayLogRecord *>(dataTableGetEntries(table));
@@ -64,16 +64,16 @@ void FUN_0019514c(u8** screenRef)
             *reinterpret_cast<s16*>(screen + 0x34c), *reinterpret_cast<s16*>(screen + 0x348),
             *reinterpret_cast<s16*>(screen + 0x34a), &flags, 0, 0);
         if (handled == 0) {
-            if (FUN_0029efd8(list, 0) != 0) {
-                if ((s32)FUN_0029ee54(list) > 5) {
+            if (gridNavigationHandleConfirm(list, 0) != 0) {
+                if ((s32)gridNavigationGetItemCount(list) > 5) {
                     while (resourceRunOperationIfUnblocked(list) == previous) {
                         if (resourceRunOperationIfUnblocked(list) != 0 && listCursorGetRowIfUnblocked(list) == 0) break;
-                        if (resourceRunOperationIfUnblocked(list) == (s32)FUN_0029ee54(list) - 5 && listCursorGetRowIfUnblocked(list) == 4) break;
-                        FUN_0029efd8(list, 0);
+                        if (resourceRunOperationIfUnblocked(list) == (s32)gridNavigationGetItemCount(list) - 5 && listCursorGetRowIfUnblocked(list) == 4) break;
+                        gridNavigationHandleConfirm(list, 0);
                     }
                 }
             } else {
-                if (FUN_002c1658(1, 1) != 0) {
+                if (inputQueryButtonState(1, 1) != 0) {
                     eventQueueAddUniqueIfValid(0x0100016e);
                     for (s32 i = 0; i < 5; i++) timerStart(&rows[i], 1, 0);
                     SCREEN_STATE(screen) = 2;

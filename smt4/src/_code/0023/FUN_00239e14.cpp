@@ -22,7 +22,7 @@ extern unsigned char DAT_004c8000; /* 0x4c8000 */
 
 extern unsigned long long libc_strtoul(int, unsigned int, unsigned int);
 extern int tokenResolveAddress(unsigned int, int *, unsigned int);
-extern unsigned int FUN_002b5c44(void);
+extern unsigned int tokenTableGet(void);
 /* Supplied declaration required: FUN_00361140. */
 /* Supplied declaration required: FUN_003611b8. */
 
@@ -40,7 +40,7 @@ int FUN_00239e14(unsigned int param_1,unsigned int param_2,unsigned int param_3,
   int temp_v6;
   
   temp_v6 = param_4;
-  temp_v0 = FUN_002b5c44();
+  temp_v0 = tokenTableGet();
   temp_v1 = tokenResolveAddress(temp_v0,&temp_v6,param_1);
   if (-1 < temp_v1) {
     temp_v1 = temp_v6 + 0x14;

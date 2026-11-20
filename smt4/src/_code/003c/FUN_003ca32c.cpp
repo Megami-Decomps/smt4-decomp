@@ -5,7 +5,7 @@
 #include "battle/btlHelp.h"
 
 extern "C" {
-void FUN_0027df30(s32, u32, BtlActionRecord *, s32, s32, s32, u32, s32, s32, s32, s32, s32, s32);
+void btlQueueSkillReflectActions(s32, u32, BtlActionRecord *, s32, s32, s32, u32, s32, s32, s32, s32, s32, s32);
 void FUN_00282820(s32, u32, s32, s32, s32, s32, s32, s32);
 
 // Queue staggered half-HP/MP recovery actions for the active party.
@@ -31,7 +31,7 @@ void FUN_003ca32c(BtlMainState **main, u32 job)
                 mp = 1;
             s32 delay = queued * 5;
             FUN_00282820(delay, job, entry->ids[0], entry->ids[0], 9, 0, 5, 0);
-            FUN_0027df30(rates.kind, job, &(*main)->actions[entry->ids[0]], 0, hp, mp,
+            btlQueueSkillReflectActions(rates.kind, job, &(*main)->actions[entry->ids[0]], 0, hp, mp,
                          0xFFFFFFFF, 0, delay, delay, 9, 1, 0);
             ++queued;
         }

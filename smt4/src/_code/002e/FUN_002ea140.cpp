@@ -30,7 +30,7 @@ extern "C" {
 
 void mapIfActivateRecord(s32 active, u32 record);
 void lmapSetSceneId(u32 scene);
-void FUN_0027fc14(s32 mode);
+void lmapCameraSetMode(s32 mode);
 void mapSelectContainingRegions(void);
 void FUN_002804ec(f32 *position);
 void mapEaseSceneHeading(void);
@@ -38,7 +38,7 @@ f32 mathDistanceBetweenPoints(void);
 f32 mathPositionHeadingDegrees(void);
 void buttonHelpSetPreset(s32 preset);
 s32 inputIsQuestMenuPressed(void);
-s32 FUN_0027ee9c(void);
+s32 inputConfirmPressed(void);
 s32 padIsButtonPressed(u32 button);
 
 /* Moves the target to the spawn position, pushed out behind `heading`. */
@@ -73,7 +73,7 @@ void FUN_002ea140(void)
             scene->pose.targetHeading = mathPositionHeadingDegrees();
             lmapPlaceBehind(scene, scene->pose.targetHeading);
         }
-        FUN_0027fc14(10);
+        lmapCameraSetMode(10);
         g_mapCamera->contextMode = -1;
         buttonHelpSetPreset(LMAP_BUTTON_HELP_PRESET);
         mapIfActivateRecord(1, g_gameState.overviewRecord);
@@ -97,13 +97,13 @@ void FUN_002ea140(void)
     case LMAP_STATE_WAIT:
         scene->stateTime++;
         mapIfActivateRecord(1, g_gameState.overviewRecord);
-        if (FUN_0027ee9c() != 0) {
+        if (inputConfirmPressed() != 0) {
             g_lmapScene->state = LMAP_STATE_ENTER;
             g_lmapScene->stateTime = 0;
         } else if (padIsButtonPressed(LMAP_BUTTON_ACCEPT) != 0 || inputIsQuestMenuPressed() != 0) {
             g_mapCamera->heading = g_lmapScene->pose.targetHeading;
             g_mapCamera->contextMode = 0;
-            FUN_0027fc14(0);
+            lmapCameraSetMode(0);
             g_lmapScene->moveMode = 0;
             g_lmapScene->moveSpeed = 5.0f;
             mapIfActivateRecord(0, g_gameState.overviewRecord);

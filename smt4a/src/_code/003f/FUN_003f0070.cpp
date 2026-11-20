@@ -40,7 +40,7 @@ void FUN_003f0070(u32 request)
     if (selectedId != 0) {
         s32 value;
         u32 result[3];
-        void *record = reinterpret_cast<void *>(FUN_0019acdc(selectedId, 1));
+        void *record = reinterpret_cast<void *>(unitMapIdToCategory(selectedId, 1));
         FUN_003f1b3c(request, record, 6, &value, result);
         FUN_0047f7ac(1, result[0]);
         btlReflectCreateKind44(0, 0, selectedId, value);

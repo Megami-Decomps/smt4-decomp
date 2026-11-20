@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002c131c(int, int);
-int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
+int errThrowFatal(int, int);
+int svcWaitSynchronizationN(unsigned char *, int *, int, int, unsigned int, unsigned int);
 int resultHandleFailure(void);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -21,10 +21,10 @@ extern int DAT_00465664; /* 0x465664 */
 extern int DAT_00465668; /* 0x465668 */
 extern int DAT_004656b0; /* 0x4656b0 */
 
-/* Supplied declaration required: FUN_002c131c. */
-extern int asdModelForwardChecked(unsigned int *, int, unsigned int, unsigned int);
+/* Supplied declaration required: errThrowFatal. */
+extern int srvGetServiceHandle(unsigned int *, int, unsigned int, unsigned int);
 extern unsigned int libc_strlen(void);
-/* Supplied declaration required: FUN_002c40f8. */
+/* Supplied declaration required: svcWaitSynchronizationN. */
 /* Supplied declaration required: resultHandleFailure. */
 
 
@@ -41,7 +41,7 @@ void FUN_002bb378(void)
   if (DAT_00465668 != 0) {
     puVar1 = temp_v3;
     temp_v2 = DAT_00465668;
-    FUN_002c40f8(puVar1,&temp_v2,1,0,0xffffffff,0xffffffff);
+    svcWaitSynchronizationN(puVar1,&temp_v2,1,0,0xffffffff,0xffffffff);
     if ((int)puVar1 < 0) {
       resultHandleFailure();
     }
@@ -55,12 +55,12 @@ void FUN_002bb378(void)
   }
   else {
     temp_v1 = libc_strlen();
-    temp_v0 = asdModelForwardChecked((unsigned int *)&DAT_004656b0,temp_v0,temp_v1,0);
+    temp_v0 = srvGetServiceHandle((unsigned int *)&DAT_004656b0,temp_v0,temp_v1,0);
   }
   if (-1 < temp_v0) {
     return;
   }
-  FUN_002c131c(temp_v0,0x2bb40c);
+  errThrowFatal(temp_v0,0x2bb40c);
   return;
 }
 

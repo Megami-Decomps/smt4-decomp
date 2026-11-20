@@ -69,7 +69,7 @@ extern unsigned int *uniteGetWork(void);
 /* Supplied declaration required: gxSetMirroredClippedScissor. */
 extern int partyClassifyRequestedSources(unsigned int, unsigned short, unsigned char *);
 extern int ifTouchGetSelectionModeForRegion(int);
-extern unsigned int FUN_0029dde0(void);
+extern unsigned int fusionPlayerLevelCapGet(void);
 extern int listCursorGetRowIfUnblocked(unsigned int *);
 extern int resourceRunOperationIfUnblocked(unsigned int *);
 /* Supplied declaration required: dataTable54FindById. */
@@ -154,7 +154,7 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
     temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x4d));
     temp_v9 = 0xffffffff;
     temp_v11 = 0xffffffff;
-    temp_v1 = FUN_0029dde0();
+    temp_v1 = fusionPlayerLevelCapGet();
     if (temp_v1 < *(unsigned char *)((int)puVar6 + 3)) {
       temp_v9 = 0x5a5a5aff;
       temp_v11 = 0xdc0f14ff;

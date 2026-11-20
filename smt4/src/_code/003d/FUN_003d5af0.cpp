@@ -6,7 +6,7 @@ using nw::math::MTX34;
 using nw::math::MTX44;
 
 extern "C" {
-void FUN_002c1edc(void *owner);
+void cameraMatrixCacheSetLookAt(void *owner);
 void FUN_002929d8(MTX34 *matrix, s32 mode, f32 x, f32 y, f32 z);
 void mathSinCos(f32 *first, f32 *second, f32 angle);
 void FUN_002b77f4(void *destination, const MTX34 *source);
@@ -22,7 +22,7 @@ void FUN_003d5af0(void *owner, AsdCamera *camera, const AsdCameraVec3 *eye, cons
                   const AsdCameraVec3 *up, const AsdCameraVec3 *rotation)
 {
     if (rotation->z == 0.0f) {
-        FUN_002c1edc(static_cast<u8 *>(owner) + 0x58);
+        cameraMatrixCacheSetLookAt(static_cast<u8 *>(owner) + 0x58);
         return;
     }
     camera->eye = *eye;

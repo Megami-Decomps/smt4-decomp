@@ -8,7 +8,7 @@ int FUN_001212c6(unsigned int, unsigned int, int, int);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_001212c6. */
-extern int *FUN_002ea704(void);
+extern int *watcherGetEnabledFlag(void);
 extern unsigned int onlineUrlGetAddress(int *);
 
 
@@ -27,7 +27,7 @@ void FUN_0011164c(int param_1,int *param_2)
     (**(romwright_code **)(*param_2 + 0x40))(param_2,0xffffffff);
     (**(romwright_code **)(*param_2 + 0x38))(param_2);
     temp_v1 = onlineUrlGetAddress(param_2 + 2);
-    piVar3 = (int *)FUN_002ea704();
+    piVar3 = (int *)watcherGetEnabledFlag();
     temp_v2 = (**(romwright_code **)(*piVar3 + 0x28))();
     FUN_001212c6(temp_v2,temp_v1,param_1 + 0x28,1);
   }

@@ -2,15 +2,15 @@
 
 extern "C" {
 
-void FUN_00161474(u32 count, u32 *lists);
+void gfxCmdBufferHandlesAllocate(u32 count, u32 *lists);
 void nngxBindCmdlist(u32 list);
-void FUN_0016120c(u32 bufferSize, u32 requestCount);
+void gfxCmdBufferReallocate(u32 bufferSize, u32 requestCount);
 void asdGfxSetCmdBufferState(u32 a, u32 b);
 void asdModelResetCommandBuffer(void);
 void asdGxMarkSubmissionReady(void);
 void FUN_001536e0(void);
 void asdGfxSetCmdBufferUnk38(void (*callback)(void));
-void FUN_00161438(s32 value);
+void gfxCmdBufferMarkPoolEntryDirty(s32 value);
 
 /* Creates `config.count` command lists, gives each a buffer and a reset state, then binds the first. */
 void gxCmdListSetCreate(GxCmdListSet *set, GxCmdListConfig config)
@@ -22,17 +22,17 @@ void gxCmdListSetCreate(GxCmdListSet *set, GxCmdListConfig config)
     for (i = 0; i < set->config.count; i++) {
         set->lists[i] = 0;
     }
-    FUN_00161474(set->config.count, set->lists);
+    gfxCmdBufferHandlesAllocate(set->config.count, set->lists);
     for (i = 0; i < set->config.count; i++) {
         nngxBindCmdlist(set->lists[i]);
-        FUN_0016120c(set->config.bufferSize, set->config.requestCount);
+        gfxCmdBufferReallocate(set->config.bufferSize, set->config.requestCount);
         asdGfxSetCmdBufferState(0x200, 0x300);
         asdModelResetCommandBuffer();
     }
     nngxBindCmdlist(set->lists[0]);
     asdGxMarkSubmissionReady();
     asdGfxSetCmdBufferUnk38(FUN_001536e0);
-    FUN_00161438(-1);
+    gfxCmdBufferMarkPoolEntryDirty(-1);
 }
 
 } /* extern "C" */

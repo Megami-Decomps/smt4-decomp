@@ -7,6 +7,6 @@ extern "C" {
 
 void FUN_0035d03c(u8 value);
 
-void FUN_0035105c(GeometryOwner *owner, u32 id, u32 kind);
+void geometryOwnerSetGeometry(GeometryOwner *owner, u32 id, u32 kind);
 
 } /* extern "C" */

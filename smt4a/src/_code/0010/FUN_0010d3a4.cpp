@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0012922c(int, unsigned int [2]);
 int FUN_002f74ec(int, int *);
-int FUN_002f76ca(int, unsigned char *);
+int stringSlotAssign(int, unsigned char *);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -29,7 +29,7 @@ extern unsigned int *_ZN9Obj5593b8C1Ev(void);
 extern int _ZN9Obj55aff4C1Ev(unsigned int *);
 /* Supplied declaration required: FUN_002f74ec. */
 extern int FUN_002f7664(void);
-/* Supplied declaration required: FUN_002f76ca. */
+/* Supplied declaration required: stringSlotAssign. */
 
 
 int FUN_0010d3a4(void)
@@ -76,7 +76,7 @@ int FUN_0010d3a4(void)
   *(unsigned char *)(temp_v0 + 0xc) = 1;
   DAT_0059495b = 0;
   DAT_005949a0 = 0xffffffff;
-  FUN_002f76ca(temp_v0 - 0x18c,&LAB_0010d444);
+  stringSlotAssign(temp_v0 - 0x18c,&LAB_0010d444);
   return temp_v0 - 0x198;
 }
 

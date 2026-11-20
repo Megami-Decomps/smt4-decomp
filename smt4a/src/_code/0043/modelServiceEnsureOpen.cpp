@@ -2,11 +2,11 @@
 
 extern "C" {
 extern u8 DAT_005c0b48;
-nn::Result FUN_0016f864();
+nn::Result srvInitialize();
 void sysFatalBreak();
 u32 libc_strlen(const char *text);
-s32 asdModelForwardChecked(u32 *handle, const char *name, u32 length, u32 flags);
-s32 FUN_0043ab50();
+s32 srvGetServiceHandle(u32 *handle, const char *name, u32 length, u32 flags);
+s32 ipcSendParameterlessCommand0x2b0000();
 s32 svcCloseHandle(u32 handle);
 
 bool modelServiceEnsureOpen(u32 *handle, const char *name)
@@ -15,10 +15,10 @@ bool modelServiceEnsureOpen(u32 *handle, const char *name)
     if (*ready) {
         return true;
     }
-    if (nnResultIsFailure((s32)FUN_0016f864())) {
+    if (nnResultIsFailure((s32)srvInitialize())) {
         sysFatalBreak();
     }
-    s32 result = asdModelForwardChecked(handle, name, libc_strlen(name), 1);
+    s32 result = srvGetServiceHandle(handle, name, libc_strlen(name), 1);
     if ((s32)(result & 0x80000000) < 0) {
         if ((u32)result == 0xd0401834) {
             return false;
@@ -27,7 +27,7 @@ bool modelServiceEnsureOpen(u32 *handle, const char *name)
             sysFatalBreak();
         }
     }
-    s32 closeResult = FUN_0043ab50();
+    s32 closeResult = ipcSendParameterlessCommand0x2b0000();
     if ((s32)(closeResult & 0x80000000) < 0) {
         if (nnResultIsFailure(svcCloseHandle(*handle))) {
             sysFatalBreak();

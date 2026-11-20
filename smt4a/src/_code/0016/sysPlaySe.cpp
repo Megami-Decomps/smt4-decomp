@@ -12,10 +12,10 @@ struct SoundSceneEntry {
 extern "C" {
 SoundSceneEntry *dataTableGetEntry0e(u32 id);
 void buttonHelpBeginExit(s32 mode);
-void FUN_00183e58(void);
+void buttonHelpTeardownSlots(void);
 void buttonHelpSelectSlot(u32 channel, u32 kind, u32 value, u32 arg);
 void FUN_00183c0c(void);
-void FUN_00182084(void);
+void buttonHelpPrepareSlots(void);
 
 /* Selects the ButtonHelp entry `id` (a dataTable0e record): pushes its six per-slot values, links paired slots
    and picks how the change is announced. Deferred while a slot is still active. (The sound-flavoured names in
@@ -41,7 +41,7 @@ void sysPlaySe(u32 id)
         if (from->isLayered == 0 && to->isLayered != 0) {
             buttonHelpBeginExit(1);
         } else {
-            FUN_00183e58();
+            buttonHelpTeardownSlots();
         }
     }
     from = dataTableGetEntry0e(work->preset);
@@ -88,7 +88,7 @@ void sysPlaySe(u32 id)
     if (from->isLayered != 0) {
         if (to->isLayered == 0) {
             g_buttonHelp.work->panelState = 1;
-            FUN_00182084();
+            buttonHelpPrepareSlots();
             return;
         }
         g_buttonHelp.work->panelState = 0;

@@ -12,7 +12,7 @@ typedef struct SkillItem {
 } SkillItem;
 
 s32 FUN_00258de0(s32 unit, u32 a, SkillItem *item, s32 noCost, s32 e);
-s32 FUN_0029a9d4(u32 skill, s32 player);
+s32 skillGetDiscountedCost(u32 skill, s32 player);
 s32 appGetRemainingCapacity(u32 skill);
 
 /* Uses a skill item for a unit (negative: the player) and, unless it failed or is free, pays its MP cost. */
@@ -29,7 +29,7 @@ s32 FUN_0026c654(s32 unit, u32 a, u32 id, s32 noCost)
     if (result == 0 && noCost == 0) {
         if (unit < 0) {
             PlayerDataIV *player = gameGetPlayerData();
-            mp = player->mp - FUN_0029a9d4(item->skill, 1);
+            mp = player->mp - skillGetDiscountedCost(item->skill, 1);
             player->mp = mp;
             if (mp < 0) {
                 player->mp = 0;

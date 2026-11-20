@@ -101,7 +101,7 @@ struct BattleModelWork {
 extern "C" {
 void modelAnimationEnsureData(ModelResource *resource);
 void aocHandleButtons(ModelResource *resource, s32 mode);
-s32 FUN_00294fe0(ModelResource *resource);
+s32 aocTextureEntryLoadOnce(ModelResource *resource);
 s32 nkdwHeaderParse(ModelResource *resource);
 }
 
@@ -124,7 +124,7 @@ extern "C" u32 FUN_0033ac58(BattleModelWork *work)
             }
         }
         if ((entry->flags & 2) == 0) {
-            if (FUN_00294fe0(resource) == 0) {
+            if (aocTextureEntryLoadOnce(resource) == 0) {
                 done = 0;
             } else {
                 modelAnimationEnsureData(resource);

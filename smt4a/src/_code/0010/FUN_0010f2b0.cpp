@@ -32,7 +32,7 @@ extern unsigned int FUN_002ea3c0(int *, unsigned char *, unsigned int, unsigned 
 /* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: onlineJobSetStateTimed. */
 /* Supplied declaration required: onlineTimeGetNow. */
-extern int FUN_002eb5f4(void);
+extern int watcherGetActiveContext(void);
 extern int FUN_002eba9c(unsigned char *, int);
 /* Supplied declaration required: FUN_002ec738. */
 /* Supplied declaration required: FUN_002ee64c. */
@@ -54,7 +54,7 @@ void FUN_0010f2b0(int param_1)
   int temp_v7;
   int temp_v8 [5];
   
-  temp_v1 = FUN_002eb5f4();
+  temp_v1 = watcherGetActiveContext();
   if (temp_v1 != 0) {
     temp_v1 = onlineInstanceTableGetCurrent();
     onlineInstanceTableFind(temp_v1,*(unsigned int *)(param_1 + 0x68));
@@ -63,7 +63,7 @@ void FUN_0010f2b0(int param_1)
       onlineTimeGetNow(temp_v5);
       temp_v1 = FUN_002eba9c(temp_v5,param_1 + 0xd0);
       if (temp_v1 == 0) {
-        temp_v1 = FUN_002eb5f4();
+        temp_v1 = watcherGetActiveContext();
         temp_v1 = *(int *)(temp_v1 + 0xd0);
         temp_v0 = 0;
         temp_v8[0] = 1;

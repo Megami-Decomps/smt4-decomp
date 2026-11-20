@@ -11,8 +11,8 @@ extern BlinkFadeWork *g_eventEffect;
 extern BlinkFadeTexture DAT_0043df00[2];
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, u32 parent);
-s32 FUN_00222520(u32 handle);
-s32 FUN_002222e8(u32 handle);
+s32 eventEffectBlinkFadeUpdate(u32 handle);
+s32 eventEffectBlinkFadeDraw(u32 handle);
 void *textureGetIndexedResource(u32 table);
 void asdTMTexTableLoadTmx(u32 table, s32 mode);
 void asdTMTexTableLoadEntryAsync(u32 table, u32 node);
@@ -26,9 +26,9 @@ void eventEffectBlinkFadeInit()
     }
     BlinkFadeWork *work = g_eventEffect;
     memset(work, 0, sizeof(*work));
-    work->job = asdProcessCreateSimple((const s8 *)"BlinkFade Calc", 1, 0, 0, FUN_00222520, NULL, 0);
-    taskCreateDraw((const s8 *)"BlinkFade DrawUpLeft", 0x81, 0, 0, FUN_002222e8, NULL, 0, work->job);
-    taskCreateDraw((const s8 *)"BlinkFade DrawUpRight", 0xdf, 0, 0, FUN_002222e8, NULL, 0, work->job);
+    work->job = asdProcessCreateSimple((const s8 *)"BlinkFade Calc", 1, 0, 0, eventEffectBlinkFadeUpdate, NULL, 0);
+    taskCreateDraw((const s8 *)"BlinkFade DrawUpLeft", 0x81, 0, 0, eventEffectBlinkFadeDraw, NULL, 0, work->job);
+    taskCreateDraw((const s8 *)"BlinkFade DrawUpRight", 0xdf, 0, 0, eventEffectBlinkFadeDraw, NULL, 0, work->job);
     work->frame = 0;
     work->state = 0;
     work->visible = 0;

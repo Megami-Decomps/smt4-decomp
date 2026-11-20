@@ -10,10 +10,10 @@ int btlSelectActionTier(void);
 int FUN_004e5f2c(...);
 int battleApplyInteractionSelection(...);
 int btlQueueActionMessage(...);
-int FUN_004fb798(...);
+int btlRecoverHpMpByPercent(...);
 int btlReflectCreateKind19(...);
 int FUN_004fbeac(...);
-int FUN_004fc094(...);
+int btlAdjustPropertyAndQueueAction(...);
 
 /* stack frame of param_3: 21 slot(s), 84 byte(s) */
 typedef struct {
@@ -49,12 +49,12 @@ extern int btlScriptUnitHasFlags(int);
 /* Supplied declaration required: btlSelectActionTier. */
 /* Supplied declaration required: FUN_004e5f2c. */
 /* Supplied declaration required: battleApplyInteractionSelection. */
-extern int FUN_004e83ac(int *, unsigned int *, int);
+extern int btlActionTargetSlotScore(int *, unsigned int *, int);
 /* Supplied declaration required: btlQueueActionMessage. */
-/* Supplied declaration required: FUN_004fb798. */
+/* Supplied declaration required: btlRecoverHpMpByPercent. */
 /* Supplied declaration required: btlReflectCreateKind19. */
 /* Supplied declaration required: FUN_004fbeac. */
-/* Supplied declaration required: FUN_004fc094. */
+/* Supplied declaration required: btlAdjustPropertyAndQueueAction. */
 
 
 unsigned char FUN_004e76cc(int *param_1,unsigned int *param_2,int param_3)
@@ -85,7 +85,7 @@ unsigned char FUN_004e76cc(int *param_1,unsigned int *param_2,int param_3)
   if (((temp_v0 != 0) &&
       ((*(unsigned int *)param_2[8] & DAT_00571168) == 0 && (((unsigned int *)param_2[8])[1] & DAT_0057116c) == 0))
      && (0 < param_3)) {
-    FUN_004fc094(10,param_2,0,param_2[9],0,param_3,0xffffffff,0xffffffff,
+    btlAdjustPropertyAndQueueAction(10,param_2,0,param_2[9],0,param_3,0xffffffff,0xffffffff,
                  param_2[*(short *)(param_2[9] + 0x6a) * 4 + 0x279],
                  *(unsigned int *)(param_2[10] + 0xf8),0,0,0,0,1,0,0x1e,0,temp_v3,temp_v5,temp_v4,0xffffffff
                  ,1,0,1,1);
@@ -120,7 +120,7 @@ unsigned char FUN_004e76cc(int *param_1,unsigned int *param_2,int param_3)
     battleRecordUnitMaskHistoryEvents((int)*(short *)(param_2[9] + 0x6a));
   }
   FUN_004e5f2c(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),-param_3);
-  temp_v0 = FUN_004e83ac(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a));
+  temp_v0 = btlActionTargetSlotScore(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a));
   temp_v6 = temp_v0 != 0;
   if ((int)temp_v2 >= 1) {
     temp_v6 = 0;
@@ -130,13 +130,13 @@ unsigned char FUN_004e76cc(int *param_1,unsigned int *param_2,int param_3)
             (((unsigned int *)param_2[8])[1] & DAT_0057116c) != 0)) && (*(int *)(*param_1 + 0xe4) == 1)) {
     *(unsigned int *)(*param_1 + 0xa8) = 0xd;
   }
-  FUN_004fc094(10,param_2,0,param_2[9],0,param_3,0xffffffff,0xffffffff,
+  btlAdjustPropertyAndQueueAction(10,param_2,0,param_2[9],0,param_3,0xffffffff,0xffffffff,
                param_2[*(short *)(param_2[9] + 0x6a) * 4 + 0x279],
                *(unsigned int *)(param_2[10] + 0xf8),0,0,temp_v6,0,1,0,0x1e,0,temp_v3,temp_v5,temp_v4,
                0xffffffff,1,0,1,1);
   btlQueueActionMessage(10,param_2,0x1000223,0,0,0,0);
   if (-1 < (int)temp_v2) {
-    FUN_004fb798(0x1e,param_2,0,param_2[9],0,temp_v2,0xffffffff,0xffffffff,0,temp_v3,temp_v5,temp_v4,0,1,1);
+    btlRecoverHpMpByPercent(0x1e,param_2,0,param_2[9],0,temp_v2,0xffffffff,0xffffffff,0,temp_v3,temp_v5,temp_v4,0,1,1);
     btlQueueActionMessage(0x1e,param_2,0x1000267,0,1,0,0);
   }
   if (temp_v6 != 0) {

@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern CallbackBinding DAT_00464d90;
+extern CallbackBinding g_installedCallbackBinding;
 
 /* Installs a callback and its context. */
 void callbackBindingInstall(CallbackBinding binding)
 {
-    DAT_00464d90 = binding;
+    g_installedCallbackBinding = binding;
 }
 
 } /* extern "C" */

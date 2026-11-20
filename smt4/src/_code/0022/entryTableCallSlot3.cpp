@@ -3,12 +3,12 @@
 
 extern "C" {
 
-extern EntryTable DAT_00464a70;
+extern EntryTable g_asdFontGlyphSets;
 
 /* Calls slot 3 of entry `index`'s object; 0 when the table is empty or the index is out of range. */
 u32 entryTableCallSlot3(u32 index)
 {
-    EntryTableEntry *entry = entryTableGet(&DAT_00464a70, index);
+    EntryTableEntry *entry = entryTableGet(&g_asdFontGlyphSets, index);
 
     if (entry != NULL) {
         return entry->object->slot3();

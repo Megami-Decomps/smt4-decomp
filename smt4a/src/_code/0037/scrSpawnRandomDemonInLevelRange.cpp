@@ -31,7 +31,7 @@ void eventInsertSortedTextureJob(u32 job);
 void FUN_0031bca4(u32 job, s32 frame, s32 flag);
 void sysMemClear(void *data, u32 size);
 const char *dataTable01GetRecordWithAocOverride(u32 id);
-const char *FUN_0014bf3c(u32 id, s32 kind);
+const char *demonGetRaceLabel(u32 id, s32 kind);
 char *libc_strcpy(char *destination, const char *source);
 u32 dataTableValueOrZero(u32 slot);
 void messageMainSetMode(s32 arg);
@@ -104,7 +104,7 @@ u32 scrSpawnRandomDemonInLevelRange(void)
         sysMemClear(name, 0x80);
         sysMemClear(race, 0x80);
         libc_strcpy(name, dataTable01GetRecordWithAocOverride((u16)scrWorkGetValue(1)));
-        libc_strcpy(race, FUN_0014bf3c((u16)scrWorkGetValue(1), 0));
+        libc_strcpy(race, demonGetRaceLabel((u16)scrWorkGetValue(1), 0));
         scrSetStringSlot(8, name);
         scrSetStringSlot(9, race);
         u32 buffer = dataTableValueOrZero(30);

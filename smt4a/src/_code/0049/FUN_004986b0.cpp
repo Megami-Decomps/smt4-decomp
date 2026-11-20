@@ -21,7 +21,7 @@ struct ListPanel {
 
 extern "C" {
 s32 FUN_0031d174(void *list);
-void FUN_0049339c(void *rect, u32 style, s32 a, s32 b, u32 context);
+void uiDrawCompositeSpriteAtRectCorner(void *rect, u32 style, s32 a, s32 b, u32 context);
 void FUN_0049368c(void *rect, s32 sprite, s32 a, s32 b, u32 context, s32 c);
 void FUN_00494574(void *panel, u32 tab);
 void FUN_00495b04(void *panel, s32 row, s32 selected, const void *value);
@@ -60,7 +60,7 @@ extern "C" void FUN_004986b0(ListPanel *panel, u32 frameStyle)
     case 8:
         frameStyle = 4;
     }
-    FUN_0049339c(PANEL_AT(panel, 0x3A4), frameStyle, 0, 0, context);
+    uiDrawCompositeSpriteAtRectCorner(PANEL_AT(panel, 0x3A4), frameStyle, 0, 0, context);
     FUN_0049368c(PANEL_AT(panel, 0x3A4), PANEL_WORD(panel, 0xB40) + 0x5A, 0, 0, context, 1);
     FUN_00494574(panel, PANEL_WORD(panel, 0xB40));
     AocItemRef headerValue;
@@ -99,7 +99,7 @@ extern "C" void FUN_004986b0(ListPanel *panel, u32 frameStyle)
     u8 *tabState = PANEL_AT(panel, 0) + PANEL_WORD(panel, 0xB40) * 0x74;
     u8 *list = tabState + 0xB60;
     u8 *values = PANEL_AT(panel, 0) + PANEL_WORD(panel, 0xB40) * 0x1002 + 0xF74;
-    s32 top = FUN_002a482c(list);
+    s32 top = resourceDispatchTaggedOperation(list);
     s32 rows = rangeGetMinimumLimit(list);
     for (s32 row = 0; row < rows; row++) {
         if (!hasSlot || FUN_0031d174(list) != row)
@@ -112,7 +112,7 @@ extern "C" void FUN_004986b0(ListPanel *panel, u32 frameStyle)
         FUN_00495b04(panel, FUN_0031d174(list) + 2, 1, values + flaggedValueHolderGetTotal(list) * 4);
     }
     s32 last = FUN_0031d174(list);
-    s32 first = FUN_002a482c(list);
+    s32 first = resourceDispatchTaggedOperation(list);
     PanelWidget *widget = *reinterpret_cast<PanelWidget **>(PANEL_AT(panel, 0xB3C));
     size40Set(widget, first, last);
     widget->refresh(context);

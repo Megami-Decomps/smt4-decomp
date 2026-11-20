@@ -17,7 +17,7 @@ struct RelativeDirectory {
 };
 
 extern "C" {
-void FUN_0029e328(u8 value);
+void useCounterAppendValue(u8 value);
 }
 
 #ifdef __cplusplus
@@ -34,7 +34,7 @@ u32 flagCountUnlockedSlots(void);
 extern "C" {
 #endif
 
-void FUN_0031f208(u8 value);
+void useCounterAppendValue(u8 value);
 
 #ifdef __cplusplus
 }

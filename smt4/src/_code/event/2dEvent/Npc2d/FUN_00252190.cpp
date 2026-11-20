@@ -10,7 +10,7 @@ extern "C" {
 extern const char DAT_0040357c[];
 extern const char DAT_00403570[];
 u32 eventResourceCacheAcquire(s32 portraitId, u32 mode);
-s32 FUN_002c1d5c();
+s32 eventIsSkipping();
 s32 FUN_001dfc64(u32 handle);
 void FUN_002db92c(u32 handle);
 // Start an NPC portrait animation in the region determined by its horizontal position.
@@ -28,7 +28,7 @@ void FUN_00252190(u32 npcId, u32 mode, s32 x)
     work->display.stopWhenHidden = 0;
     work->portrait.animate = 1;
     work->portrait.portraitId = nkmEnemyFindById(static_cast<u16>(npcId))->portraitId;
-    if (FUN_002c1d5c() != 0) {
+    if (eventIsSkipping() != 0) {
         work->deferred = 1;
     } else {
         work->portrait.portraitHandle = eventResourceCacheAcquire(work->portrait.portraitId, 1);

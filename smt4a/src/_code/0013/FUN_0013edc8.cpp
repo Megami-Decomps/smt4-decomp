@@ -25,7 +25,7 @@ u32 FUN_0013edc8(const char *name)
     EffectNameTable table;
 
     __aeabi_memcpy4(&table, &DAT_00530b5c, sizeof(table));
-    u32 flags = FUN_00152f44();
+    u32 flags = messageVoiceFlagsGet();
     s8 kind = name[0];
 
     if (effectNameHasPrefix(kind)) {
@@ -42,7 +42,7 @@ u32 FUN_0013edc8(const char *name)
             flags |= 4;
         }
     }
-    FUN_001628c0(name, FUN_0014af98(), flags, 1, 0.707f, 0.707f);
+    FUN_001628c0(name, messageVoiceBankGet(), flags, 1, 0.707f, 0.707f);
     return 1;
 }
 

@@ -5,15 +5,17 @@
 extern "C" {
 
 void gpuSubmitDefaultPacket(void);
-void FUN_0019e5e0(u32 a, u32 b, u32 c, u32 d, f32 f0, f32 f1, f32 f2, f32 f3, f32 f4, f32 f5, f32 f6, f32 f7, f32 f8);
+void gpuSubmitColoredTexturedQuad(u32 topLeft, u32 bottomLeft, u32 topRight, u32 bottomRight, f32 x, f32 y, f32 width,
+    f32 height, f32 u, f32 v, f32 uWidth, f32 vHeight, f32 depth);
 void effectSubmitDefaultParameters(void);
 
-/* Draw setup with the extra float parameters zeroed; restores the default float parameters afterwards. */
-void gxSubmitDrawZeroExtraParams(f32 x, f32 y, f32 width, f32 height, u32 color0, u32 color1, u32 color2,
-                                 f32 depth, u32 color3)
+/* Draws a quad with one colour per corner and no texture rectangle, between the default packet
+ * and the default float parameters. */
+void gxSubmitDrawZeroExtraParams(f32 x, f32 y, f32 width, f32 height, u32 topLeft, u32 bottomLeft,
+                                 u32 topRight, f32 depth, u32 bottomRight)
 {
     gpuSubmitDefaultPacket();
-    FUN_0019e5e0(color0, color1, color2, color3, x, y, width, height, 0.0f, 0.0f, 0.0f, 0.0f, depth);
+    gpuSubmitColoredTexturedQuad(topLeft, bottomLeft, topRight, bottomRight, x, y, width, height, 0.0f, 0.0f, 0.0f, 0.0f, depth);
     effectSubmitDefaultParameters();
 }
 

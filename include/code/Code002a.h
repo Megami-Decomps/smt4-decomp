@@ -9,7 +9,7 @@ u8 FUN_002a21e8(void);
 void FUN_002a46d0(void);
 
 /* Runs the operation of a tagged selection object (tag 1: its embedded operation). */
-s32 FUN_002a482c(const void *object);
+s32 resourceDispatchTaggedOperation(const void *object);
 
 s32 listCursorGetRowOfChildIfUnblocked(void *object);
 

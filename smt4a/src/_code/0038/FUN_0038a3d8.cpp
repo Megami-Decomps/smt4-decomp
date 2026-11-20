@@ -1,9 +1,9 @@
-/* Runs the fallback handlers when their checks fail; returns whether FUN_003c5d8c reported success. */
+/* Runs the fallback handlers when their checks fail; returns whether textureCacheGetDirection reported success. */
 #include "common.h"
 
 extern "C" {
 
-extern s32 FUN_003c5d8c(void);
+extern s32 textureCacheGetDirection(void);
 extern s32 scrGetCommandFrame(void);
 extern void textureCachePollReady(void);
 extern void FUN_0036f0a0(s32 arg);
@@ -15,7 +15,7 @@ u8 FUN_0038a3d8(void)
     if (scrGetCommandFrame() == 0) {
         textureCachePollReady();
     }
-    ok = FUN_003c5d8c();
+    ok = textureCacheGetDirection();
     if (ok == 0) {
         FUN_0036f0a0(ok);
     }

@@ -4,7 +4,7 @@
 
 extern "C" {
 u32 scrRunOpcodesStub(u32 process);
-void FUN_0026e630(u32 value);
+void gameSaveAddPointsClamped(u32 value);
 
 
 u32 FUN_002ccb7c(ScriptPhaseWork *work)
@@ -12,7 +12,7 @@ u32 FUN_002ccb7c(ScriptPhaseWork *work)
     u32 result = 0;
     if (scrRunOpcodesStub(work->scriptProcess) == 2) {
         work->scriptState = 0;
-        FUN_0026e630(0x28);
+        gameSaveAddPointsClamped(0x28);
         gameFlagSetValue(0x551, 1, 1);
         work->flags &= ~8u;
         u32 flags = work->flags;

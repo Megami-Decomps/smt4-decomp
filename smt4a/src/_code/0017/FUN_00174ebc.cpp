@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001753d4(int *, unsigned int, unsigned int, unsigned int, unsigned int);
+int soundArchiveLoaderLoadItem(int *, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_001907a4(...);
 int FUN_00190808(unsigned int *[3]);
 int FUN_00190aec(...);
@@ -44,7 +44,7 @@ typedef struct {
     unsigned int spB0; /* 0xb0: local_b0 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_001753d4. */
+/* Supplied declaration required: soundArchiveLoaderLoadItem. */
 extern int soundArchiveReadSoundInfoWithExtension(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_001907a4. */
 /* Supplied declaration required: FUN_00190808. */
@@ -116,7 +116,7 @@ void FUN_00174ebc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
         }
         while ((temp_v0 = nw_snd_internal_GroupFileReader_ReadGroupItemInfoEx
                                   (temp_v19,&temp_v6,temp_v2), temp_v0 == 0 ||
-               (piVar2 = param_1, FUN_001753d4(param_1,temp_v6,param_3,temp_v7,param_4),
+               (piVar2 = param_1, soundArchiveLoaderLoadItem(param_1,temp_v6,param_3,temp_v7,param_4),
                piVar2 != (int *)0x0))) {
           temp_v2 = temp_v2 + 1;
           if (temp_v1 <= temp_v2) {

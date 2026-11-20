@@ -24,8 +24,8 @@ typedef struct JobCameraWork {
 } JobCameraWork;
 
 void effectTextureRequestsPump(void);
-void FUN_002c1edc(JobCameraWork *camera, const MapVector *eye, const MapVector *target, const MapVector *up);
-void FUN_002c1e30(JobCameraWork *camera, u32 pivot, CameraPerspective perspective);
+void cameraMatrixCacheSetLookAt(JobCameraWork *camera, const MapVector *eye, const MapVector *target, const MapVector *up);
+void stereoCameraSetPerspective(JobCameraWork *camera, u32 pivot, CameraPerspective perspective);
 void taskUpdateOrderedPasses(u32 pass);
 
 /* Sets the work area camera to look from its eye at its target with a fixed perspective. */
@@ -38,13 +38,13 @@ s32 FUN_0017fbe4(u32 job)
     up.x = 0.0f;
     up.y = 1.0f;
     up.z = 0.0f;
-    FUN_002c1edc(work, &work->eye, &work->target, &up);
+    cameraMatrixCacheSetLookAt(work, &work->eye, &work->target, &up);
     CameraPerspective perspective;
     perspective.aspect = 5.0f / 3.0f;
     perspective.fovy = work->fovy;
     perspective.farZ = 25600.0f;
     perspective.nearZ = 0.1f;
-    FUN_002c1e30(work, 1, perspective);
+    stereoCameraSetPerspective(work, 1, perspective);
     taskUpdateOrderedPasses(0);
     return 0;
 }

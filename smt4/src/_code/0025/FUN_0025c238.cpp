@@ -13,19 +13,19 @@ struct FixedCameraModelHolder {
 };
 
 extern "C" {
-extern FixedCameraModelHolder DAT_004474f0;
+extern FixedCameraModelHolder g_lmapViewHolder;
 extern FixedCamera g_fixedCamera;
-void FUN_002c1edc(FixedCamera *, const W5Match8Vec3 *, const W5Match8Vec3 *,
+void cameraMatrixCacheSetLookAt(FixedCamera *, const W5Match8Vec3 *, const W5Match8Vec3 *,
                   const W5Match8Vec3 *);
 
 void FUN_0025c238(W5Match8Vec3 eye, W5Match8Vec3 target)
 {
     W5Match8Vec3 destination = target;
     W5Match8Vec3 position = eye;
-    FixedCameraModel *model = DAT_004474f0.model;
+    FixedCameraModel *model = g_lmapViewHolder.model;
     destination.x += model->translation.x;
     destination.y += model->translation.y;
     destination.z += model->translation.z;
-    FUN_002c1edc(&g_fixedCamera, &position, &destination, &model->up);
+    cameraMatrixCacheSetLookAt(&g_fixedCamera, &position, &destination, &model->up);
 }
 }

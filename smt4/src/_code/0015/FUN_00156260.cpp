@@ -13,7 +13,7 @@ typedef struct {
 
 extern unsigned char g_dspsndState; /* 0x4e6f64 */
 
-extern int FUN_002b5954(void);
+extern int dspFxStateGet(void);
 /* Supplied declaration required: nn_snd_CTR_Dspsnd_SetDspDelayEffect. */
 
 
@@ -26,7 +26,7 @@ void FUN_00156260(int param_1,int param_2,unsigned short *param_3)
   unsigned char temp_v2;
   
   *(unsigned char *)(param_1 + param_2 + 4) = param_3[1] != 0;
-  temp_v0 = FUN_002b5954();
+  temp_v0 = dspFxStateGet();
   temp_v1 = *param_3;
   temp_v2 = (temp_v1 & 1) != 0;
   if (temp_v2) {

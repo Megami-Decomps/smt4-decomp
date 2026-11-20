@@ -109,7 +109,7 @@ extern int FUN_004abac8(int);
 extern int btlUiIsMenuSceneActive(int);
 /* Supplied declaration required: FUN_004c1114. */
 /* Supplied declaration required: btlSlotSetStoreValue. */
-extern unsigned int FUN_004c53fc(unsigned int);
+extern unsigned int mapCategoryToDestinationGroup(unsigned int);
 /* Supplied declaration required: btlAdjustPropertyClamped. */
 /* Supplied declaration required: FUN_004c8ee0. */
 /* Supplied declaration required: FUN_004c9160. */
@@ -197,7 +197,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
   do {
     puVar27 = (unsigned int *)(*(int *)(*param_1 + 0x1ffc) + temp_v19 * 0x408);
     if (param_2[0xc] != 5) {
-      temp_v20 = FUN_004c53fc(2);
+      temp_v20 = mapCategoryToDestinationGroup(2);
       puVar27[0x1f] = temp_v20;
     }
     temp_v14 = DAT_0057120c;
@@ -225,15 +225,15 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
                & ~temp_v13;
     puVar27[1] = puVar27[1] & temp_v17 & temp_v18 & temp_v1 & temp_v2 & temp_v3 & temp_v5 & temp_v7 & temp_v10 &
                  temp_v11 & ~temp_v14;
-    temp_v20 = FUN_004c53fc(0x2d);
+    temp_v20 = mapCategoryToDestinationGroup(0x2d);
     puVar27[0x4a] = temp_v20;
-    temp_v20 = FUN_004c53fc(0x2e);
+    temp_v20 = mapCategoryToDestinationGroup(0x2e);
     puVar27[0x4b] = temp_v20;
-    temp_v20 = FUN_004c53fc(0x2f);
+    temp_v20 = mapCategoryToDestinationGroup(0x2f);
     puVar27[0x4c] = temp_v20;
-    temp_v20 = FUN_004c53fc(0x30);
+    temp_v20 = mapCategoryToDestinationGroup(0x30);
     puVar27[0x4d] = temp_v20;
-    temp_v20 = FUN_004c53fc(0x31);
+    temp_v20 = mapCategoryToDestinationGroup(0x31);
     puVar27[0x4e] = temp_v20;
     temp_v25 = temp_v19 + 1;
     temp_v19 = *(int *)(*param_1 + 0x1ed4) + temp_v19 * 0x1d0;
@@ -369,7 +369,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
         }
       }
       else {
-        temp_v15 = FUN_004c53fc(0x1b);
+        temp_v15 = mapCategoryToDestinationGroup(0x1b);
         btlSlotSetStoreValue(temp_v19,0x1b,temp_v15);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x40) != 0) {
@@ -379,7 +379,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
         }
       }
       else {
-        temp_v15 = FUN_004c53fc(0x1c);
+        temp_v15 = mapCategoryToDestinationGroup(0x1c);
         btlSlotSetStoreValue(temp_v19,0x1c,temp_v15);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x100) != 0) {
@@ -389,7 +389,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
         }
       }
       else {
-        temp_v15 = FUN_004c53fc(0x1d);
+        temp_v15 = mapCategoryToDestinationGroup(0x1d);
         btlSlotSetStoreValue(temp_v19,0x1d,temp_v15);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 8) != 0) {
@@ -399,7 +399,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
         }
       }
       else {
-        temp_v15 = FUN_004c53fc(0x1e);
+        temp_v15 = mapCategoryToDestinationGroup(0x1e);
         btlSlotSetStoreValue(temp_v19,0x1e,temp_v15);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x800) != 0) {
@@ -409,11 +409,11 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
         }
       }
       else {
-        temp_v15 = FUN_004c53fc(0x1f);
+        temp_v15 = mapCategoryToDestinationGroup(0x1f);
         btlSlotSetStoreValue(temp_v19,0x1f,temp_v15);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x1000) == 0) {
-        temp_v15 = FUN_004c53fc(0x20);
+        temp_v15 = mapCategoryToDestinationGroup(0x20);
         btlSlotSetStoreValue(temp_v19,0x20,temp_v15);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x2000) != 0) {
@@ -423,7 +423,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
         }
       }
       else {
-        temp_v15 = FUN_004c53fc(0x21);
+        temp_v15 = mapCategoryToDestinationGroup(0x21);
         btlSlotSetStoreValue(temp_v19,0x21,temp_v15);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & ~temp_v24 & 0x19c0) != 0) {

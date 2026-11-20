@@ -40,7 +40,7 @@ typedef char SaveSummaryLayoutCheck[
 extern "C" {
 extern u8 g_gameDataBlocks[];
 void __aeabi_memcpy4(void *dest, const void *src, u32 size);
-s32 FUN_00288f78(u8 value);
+s32 mapClassifyPlaceState(u8 value);
 s32 gameFlagIsSet(u32 flag);
 
 /* Build the save-slot summary record from a save image and store it in the game data block. */
@@ -77,7 +77,7 @@ void saveBuildSlotSummary(u16 *save)
     summary->unk54 = 0;
     summary->unk58 = bytes[0xA839];
     summary->unk5A = *reinterpret_cast<u8 *>(save + 0x541D);
-    if (FUN_00288f78(bytes[0xA839]) == 3)
+    if (mapClassifyPlaceState(bytes[0xA839]) == 3)
         summary->unk58 = 1000;
     if (bytes[0xA83B] == 0) {
         if (summary->unk58 == 0x18) {

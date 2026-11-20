@@ -6,7 +6,7 @@ extern const u8 DAT_005598b4[];  /* vtable */
 extern u8 DAT_00594b24[];
 void onlineObjectListRemove(u8 *table, void *self);
 void FUN_001293b0(void *self);
-u8 *FUN_002eb624(u8 *member);
+u8 *deletingDtor_002eb624(u8 *member);
 
 typedef struct Object5598b4 {
     /* 0x000 */ const void *vtbl;
@@ -22,8 +22,8 @@ u8 *destroyObj005598b4(Object5598b4 *self)
     self->vtbl = DAT_005598b4;
     onlineObjectListRemove(DAT_00594b24, self);
     FUN_001293b0(self);
-    member = FUN_002eb624(self->member13C);
-    member = FUN_002eb624(member - 300);
+    member = deletingDtor_002eb624(self->member13C);
+    member = deletingDtor_002eb624(member - 300);
     return member - 0x10;
 }
 

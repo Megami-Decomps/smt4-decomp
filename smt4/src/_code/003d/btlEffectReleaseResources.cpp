@@ -15,7 +15,7 @@ void FUN_003da890(MaterialMergeOwner *);
 void modelManagerReleaseSlots(MaterialMergeOwner *);
 void keyedRecordsFreeAll(void);
 void textureCacheReleaseAll(void);
-void FUN_00241d58(BattleSpritePlacement *);
+void btlSpritePlacementRelease(BattleSpritePlacement *);
 void asdMdlManagerMarkDestroy(AsdMdlObject *);
 void asdMemFree(void *);
 }
@@ -100,7 +100,7 @@ extern "C" void btlEffectReleaseResources(MaterialMergeOwner *owner)
     for (s32 i = 0; i < 50; ++i) {
         owner->placements.entries[i].resource = NULL;
         owner->placements.entries[i].key = -1;
-        FUN_00241d58(&owner->placements.entries[i].placement);
+        btlSpritePlacementRelease(&owner->placements.entries[i].placement);
         owner->placements.entries[i].activation.flags = 0;
     }
 }

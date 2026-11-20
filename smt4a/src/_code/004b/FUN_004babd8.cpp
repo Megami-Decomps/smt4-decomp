@@ -8,7 +8,7 @@ void menuSynchronizeFlaggedSelection(void *selection, Menu4C *menu);
 void sub10OwnerStart(Menu4C *menu);
 void *asdTMTexLoadMainHeap(u32 table, u32 index);
 u32 selectOwnerGetSelected(void *selection);
-s32 FUN_004d0584();
+s32 inputConfirmPressed();
 
 // Preload the selected entry's image after the selection has remained stable.
 u32 FUN_004babd8(Menu4C *menu)
@@ -53,7 +53,7 @@ u32 FUN_004babd8(Menu4C *menu)
             if (stateCounterBelowLimit(menu, selected))
                 changed = 1;
         }
-        if (FUN_004d0584())
+        if (inputConfirmPressed())
             changed = 1;
     }
     return changed;

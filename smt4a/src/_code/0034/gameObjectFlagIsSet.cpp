@@ -7,12 +7,12 @@ typedef struct Object00347664 {
     /* 0x6c */ u8 flag;
 } Object00347664;
 
-extern Object00347664 *DAT_00570ab4;
+extern Object00347664 *g_effectColorOverride;
 
 /* True when the global object exists and its flag is set. */
 u8 gameObjectFlagIsSet(void)
 {
-    u8 result = DAT_00570ab4 != NULL ? DAT_00570ab4->flag : 0;
+    u8 result = g_effectColorOverride != NULL ? g_effectColorOverride->flag : 0;
 
     if (result != 0) {
         result = 1;

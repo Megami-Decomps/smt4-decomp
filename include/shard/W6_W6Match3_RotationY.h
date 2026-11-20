@@ -22,7 +22,7 @@ void*effApplyModelLight(int index);
 extern "C" {
 #endif
 
-u32 *FUN_00246644(u32 kind, u32 arg1, u32 arg2);
+u32 *filterCreateByKind(u32 kind, u32 arg1, u32 arg2);
 
 #ifdef __cplusplus
 }

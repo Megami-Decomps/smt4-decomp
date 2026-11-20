@@ -4,7 +4,7 @@
 extern "C" {
 
 void asdTMTexTableLoadSprites(s32 table);
-void FUN_00318794(void);
+void campButtonHelpLoadSlot(void);
 void *asdLoadFileSyncDefault(const char *path);
 
 /* First user of the camp button help loads its sprite table and data files; every call counts one user. */
@@ -13,7 +13,7 @@ void campButtonHelpLoad(void)
     if (g_buttonHelp.loadCount <= 0) {
         asdTMTexTableLoadSprites(10);
         asdTMTexTablePrepareNodeImage(10, 0);
-        FUN_00318794();
+        campButtonHelpLoadSlot();
         if (g_buttonHelp.mbm == NULL) {
             g_buttonHelp.mbm = asdLoadFileSyncDefault("camp/camp.mbm");
         }

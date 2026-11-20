@@ -5,7 +5,7 @@ extern "C" {
 extern u8 g_soundVolumeSetting;
 
 s32 jyoucyuGetTableEntry(u32 index);
-s32 FUN_002c1d5c(void);
+s32 eventIsSkipping(void);
 s32 asdSndPlaySlotA(u32 id, u8 volumeSetting, u32 flags);
 s32 asdSndPlaySlotB(u32 id, u8 volumeSetting, u32 flags, f32 volume, f32 pan);
 
@@ -15,7 +15,7 @@ s32 soundPlaySePanned(u32 id, u32 position)
 {
     s32 handle = -1;
 
-    if (jyoucyuGetTableEntry(1) == 0 && FUN_002c1d5c() == 0) {
+    if (jyoucyuGetTableEntry(1) == 0 && eventIsSkipping() == 0) {
         if (id >= 0x100006C && id <= 0x100016B) {
             handle = asdSndPlaySlotA(id, g_soundVolumeSetting, 0) + 100000;
         } else if (id >= 0x100016C && id <= 0x1000267) {

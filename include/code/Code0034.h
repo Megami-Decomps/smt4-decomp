@@ -6,7 +6,7 @@ extern "C" {
 
 void FUN_00341fa4(void *owner, u8 mode);
 
-void FUN_00343a04(s32 amount);
+void questCenterCounterAddSaturating1A(s32 amount);
 
 u8 FUN_0034919c(void);
 

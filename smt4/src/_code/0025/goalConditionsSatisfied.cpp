@@ -20,7 +20,7 @@ SlotTable *gameGetSlotTable(void);
 bool bitsetTestBit(const void *bits, u16 bit);
 u32 bitArrayCountSet1to500(const void *bits);
 s32 partyFindActiveSlotById(u16 id);
-u16 *FUN_00348b7c(u32 id);
+u16 *goalConditionsFindSlot(u32 id);
 s32 aocEntryGetKind(u16 id);
 bool unlockFlagTest(u16 id);
 
@@ -34,12 +34,12 @@ u32 goalConditionsSatisfied(u32 id)
     if (record->kind == 4 || record->kind == 5) {
         if (gameGetOptionProgressStatus() == 0) {
             met = 0;
-        } else if (FUN_00287800() != 0) {
+        } else if (supportUnitProgressIsComplete() != 0) {
             met = 0;
         }
     } else if (record->kind == 6) {
         if (FUN_0027d98c() == 4) met = 0;
-    } else if (gameGetOptionProgressStatus() == 2 && FUN_00287800() != 0) {
+    } else if (gameGetOptionProgressStatus() == 2 && supportUnitProgressIsComplete() != 0) {
         met = 0;
     } else if (record->requirements[0].kind == 5) {
         // Needs one party unit whose record has every listed entry completed.
@@ -77,7 +77,7 @@ u32 goalConditionsSatisfied(u32 id)
             }
             case 2:
                 if (record->kind == 1) {
-                    u16 *counts = FUN_00348b7c(id);
+                    u16 *counts = goalConditionsFindSlot(id);
                     if (record->requirements[i].count > counts[i + 1]) met = 0;
                 } else {
                     if (partyFindActiveSlotById(record->requirements[i].id) < 0) met = 0;

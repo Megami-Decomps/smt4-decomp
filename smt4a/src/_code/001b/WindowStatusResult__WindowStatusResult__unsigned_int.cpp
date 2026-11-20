@@ -3,7 +3,7 @@
 
 extern "C" {
 s32 FUN_001bd5b8(u32 *description);
-void FUN_00189a38(s32 error, u32 returnAddress);
+void errThrowFatal(s32 error, u32 returnAddress);
 }
 
 /* Converts an SDK result into the corresponding game message ID. */
@@ -20,7 +20,7 @@ WindowStatusResult::WindowStatusResult(u32 value) : code(value)
                 u32 serviceDescription;
                 s32 error = FUN_001bd5b8(&serviceDescription);
                 if (error < 0) {
-                    FUN_00189a38(error, 0x1b5848);
+                    errThrowFatal(error, 0x1b5848);
                 }
                 if (serviceDescription != 0xd909) {
                     description = serviceDescription;

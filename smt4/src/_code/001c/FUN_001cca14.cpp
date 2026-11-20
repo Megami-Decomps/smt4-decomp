@@ -73,7 +73,7 @@ extern unsigned long long statusGetAvailableChoiceCount(void);
 /* Supplied declaration required: FUN_0029ab54. */
 extern unsigned short *FUN_0029acb0(void);
 extern int objectPartRunUnlessLocked(int); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
-extern int FUN_0029e9cc(unsigned short);
+extern int itemIsCollectedWithRelated(unsigned short);
 /* Supplied declaration required: listCursorGetRowIfUnblocked. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
@@ -456,7 +456,7 @@ LAB_001ccb9c:
     if (temp_v12 != 0xd) {
       if (temp_v12 == 6) {
         puVar9 = (unsigned short *)FUN_0029acb0();
-        temp_v12 = FUN_0029e9cc(*puVar9);
+        temp_v12 = itemIsCollectedWithRelated(*puVar9);
         if (temp_v12 == 0) {
           temp_v11 = 1;
         }
@@ -559,7 +559,7 @@ LAB_001cdb08:
     if (!(temp_v13 == 0x18 || temp_v13 == 0x1b)) {
       if ((temp_v13 != 0x16 && temp_v13 != 0x17) && temp_v13 != 0x1a) {
         temp_v12 = listCursorGetRowIfUnblocked(temp_v19);
-        temp_v7 = FUN_0029ee54((const void *)(temp_v19));
+        temp_v7 = gridNavigationGetItemCount((const void *)(temp_v19));
         if (temp_v12 == temp_v7 - 1) goto LAB_001cdd1c;
       }
       temp_v8 = (unsigned int)*(unsigned short *)(temp_v10 + 0x2380);
@@ -621,7 +621,7 @@ LAB_001cdd1c:
     }
     else {
       temp_v12 = listCursorGetRowIfUnblocked(temp_v19);
-      temp_v13 = FUN_0029ee54((const void *)(temp_v19));
+      temp_v13 = gridNavigationGetItemCount((const void *)(temp_v19));
       if (temp_v13 - 1 == temp_v12) {
         temp_v8 = (unsigned int)*(unsigned short *)(temp_v10 + 0x2380);
         table8Type5GetValue(temp_v8);

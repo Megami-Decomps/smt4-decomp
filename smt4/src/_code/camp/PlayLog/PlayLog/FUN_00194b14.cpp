@@ -47,11 +47,11 @@ s32 fontMeasureLineAdvance(const char *text, u32 font);
 void FUN_00194b14(void)
 {
     PlayLogView *log = g_playLog;
-    for (s32 row = 0; row < (s32)FUN_0029d644(log->list); row++) {
+    for (s32 row = 0; row < (s32)uiListGetVisibleCount(log->list); row++) {
         s32 x = vec2GetXInt(&log->rows[row]);
         if (row == 0)
             texDrawCompositeSprite(2, PLAYLOG_FONT_TABLE, 0, x, 0, 0xB);
-        if ((s32)FUN_0029d644(log->list) - 1 == row) {
+        if ((s32)uiListGetVisibleCount(log->list) - 1 == row) {
             uiDrawListScrollBar(log->list, x, 0, PLAYLOG_FONT_TABLE, 7, 8, 9, 3, 5, 4, 6, log->barC, log->barA, log->barB, 0xB, 0);
         }
         TextureTableEntryIV *frame = asdTMTexTableEntryAt(PLAYLOG_FONT_TABLE, row + 0x15);

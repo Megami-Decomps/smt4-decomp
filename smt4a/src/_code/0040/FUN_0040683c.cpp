@@ -6,7 +6,7 @@
 extern "C" {
 
 u32 libc_strlen(const u16 *str);
-u32 FUN_001a7a20(void *dictionary, const u16 *str, u32 length);
+u32 nameTableLookupEntry(void *dictionary, const u16 *str, u32 length);
 void FUN_004064a8(UiLookupObj *obj, u32 slot, UiFoundEntry *entry, u32 handle);
 
 /* Byte swap of a big endian value. */
@@ -32,7 +32,7 @@ void FUN_0040683c(UiLookupObj *obj)
             const u16 *name = list->names[i];
             UiContext *context = owner->context;
             UiLookupTable *lookup = &context->lookup;
-            u32 key = FUN_001a7a20(lookup->dictionary, name, libc_strlen(name));
+            u32 key = nameTableLookupEntry(lookup->dictionary, name, libc_strlen(name));
 
             if (key != UILOOKUP_NOT_FOUND) {
                 UiFoundEntry *entry = owner->context->lookup.entries[key];

@@ -4,7 +4,7 @@
 
 extern "C" {
 AocHandleJob *_ZN21WindowOperationResultC1Eh(u32 id, u32 flags);
-WindowStatusResult FUN_00354608(void *parameters, AocHandleSource *source);
+WindowStatusResult aocOpenPackedArchive(void *parameters, AocHandleSource *source);
 WindowStatusResult archiveFileReplaceHandle(void *destination, void *source);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
 void recordClearWideHandle(void *handle);
@@ -14,7 +14,7 @@ int jyoucyuGetTableEntry(s32 index);
 void aocFinishHandleOperation(u32 id, AocHandleSource *source)
 {
     AocHandleJob *job = _ZN21WindowOperationResultC1Eh(id, 0);
-    job->result = FUN_00354608(source->parameters, source);
+    job->result = aocOpenPackedArchive(source->parameters, source);
     if (nnResultIsFailure(legacyResourceIdRemap(&job->result))) {
         job->state = 100;
         if (legacyResourceIdRemap(&job->result) == (s32)0xC8813894 ||

@@ -14,7 +14,7 @@ struct RosterEntry {
 extern "C" {
 
 s32 gameOptionsClassifyMode(void);
-s32 FUN_001ba570(void);
+s32 optionsGoalConditionCheck(void);
 s32 gameDataTableGetFlag(void);
 s32 gameSlotTableFindFree(void);
 u32 gameCountersGetWord(u16 counter);
@@ -32,12 +32,12 @@ s32 goalConditionsSatisfied(s32 id)
     if (goal->kind == 4 || goal->kind == 5) {
         if (gameOptionsClassifyMode() == 0) {
             result = 0;
-        } else if (FUN_001ba570() != 0) {
+        } else if (optionsGoalConditionCheck() != 0) {
             result = 0;
         }
     } else if (goal->kind == 6) {
         if (gameDataTableGetFlag() == 4) result = 0;
-    } else if (gameOptionsClassifyMode() == 2 && FUN_001ba570() != 0) {
+    } else if (gameOptionsClassifyMode() == 2 && optionsGoalConditionCheck() != 0) {
         result = 0;
     } else if (goal->requirements[0].kind == 5) {
         // Needs one filled slot whose record satisfies every listed bit.

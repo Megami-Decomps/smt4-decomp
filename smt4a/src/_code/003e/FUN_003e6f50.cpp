@@ -9,7 +9,7 @@ extern void *g_btlAux;
 extern const char DAT_00528618[]; /* Dead_eyes */
 extern const char DAT_005285fc[]; /* battle/gameover/gameover.bf */
 extern const char DAT_005285dc[]; /* battle/gameover/gameover.mbm */
-void FUN_004f7b84(void *aux, const char *name);
+void effectRequestByName(void *aux, const char *name);
 s32 btlPollVersionedEffectTexture(void *aux);
 void *gameDataBlocksGetSaveData(void);
 void scrScriptProcessStartEntry(void *process, s32 entry);
@@ -17,7 +17,7 @@ void campCommonBgRelease(void);
 void campButtonHelpRelease(void);
 u32 FUN_003e6c14(BtlGameOverA *work);
 s32 talkEventStartScript(BtlGameOverA *work);
-u32 FUN_003e71a8(BtlGameOverA *work);
+u32 touchToContinueSplashStep(BtlGameOverA *work);
 u32 stepStateBattleStart(BtlGameOverA *work);
 void scriptProcessSetMode(void *process, u32 mode);
 }
@@ -49,7 +49,7 @@ s32 FUN_003e6f50(BtlGameOverA *work)
 {
     switch (work->state) {
     case GAMEOVER_STATE_EYES_START:
-        FUN_004f7b84(g_btlAux, DAT_00528618);
+        effectRequestByName(g_btlAux, DAT_00528618);
         work->state = GAMEOVER_STATE_EYES_WAIT;
         if (btlPollVersionedEffectTexture(g_btlAux) != 0) {
             work->state = GAMEOVER_STATE_TIMELINE;
@@ -110,14 +110,14 @@ s32 FUN_003e6f50(BtlGameOverA *work)
             campButtonHelpRelease();
             if (btlGetMainState()->gameOver.kind != 1) {
                 work->state = GAMEOVER_STATE_RESULT;
-                return FUN_003e71a8(work);
+                return touchToContinueSplashStep(work);
             }
             work->state = GAMEOVER_STATE_DONE;
             return -1;
         }
         break;
     case GAMEOVER_STATE_RESULT:
-        return FUN_003e71a8(work);
+        return touchToContinueSplashStep(work);
     case GAMEOVER_STATE_DONE:
         return -1;
     }

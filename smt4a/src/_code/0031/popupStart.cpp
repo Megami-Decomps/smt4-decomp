@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern void FUN_00152f44(void);
+extern void messageVoiceFlagsGet(void);
 extern const char *popupSelectWeightedMessage(s32 kind, s32 arg);
 
 /* Starts popup kind 3 for `speakerId` unless one is already running. */
@@ -11,7 +11,7 @@ void popupStart(s32 speakerId)
 {
     PopupStateA *popup;
 
-    FUN_00152f44();
+    messageVoiceFlagsGet();
     popup = g_popupState;
     if (popup->state == 0) {
         popup->state = 3;

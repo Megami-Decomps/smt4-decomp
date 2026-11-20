@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern void FUN_00152f44(void);
+extern void messageVoiceFlagsGet(void);
 extern const char *popupSelectWeightedMessage(u32 kind);
 
 /* When no popup is active and a save slot is selected, opens popup mode 0x16 for that slot. */
@@ -12,7 +12,7 @@ void FUN_002950a8(void)
 {
     PartySlotA *slot;
 
-    FUN_00152f44();
+    messageVoiceFlagsGet();
     if (g_popupState->state == 0) {
         slot = saveSlotFindSelected();
         if (slot != NULL) {

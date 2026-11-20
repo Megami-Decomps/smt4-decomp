@@ -38,7 +38,7 @@ typedef struct {
 
 extern unsigned char LAB_0019d7bc; /* 0x19d7bc */
 extern unsigned int g_btlScriptUnit; /* 0x43427c */
-extern int DAT_00435d18; /* 0x435d18 */
+extern int g_btlAux; /* 0x435d18 */
 extern unsigned char DAT_00439960; /* 0x439960 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -53,7 +53,7 @@ extern short battleGetEntryHalfword(int, unsigned int);
 /* Supplied declaration required: btlFindEntryBlockByMemberId. */
 extern int idSetFindSubjectIndex(unsigned int, int);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
-extern int FUN_00293230(unsigned int *);
+extern int btlScriptUnitIsIncapacitated(unsigned int *);
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: qsort. */
@@ -184,7 +184,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
           *(unsigned char *)(temp_v4 + 0x59c) = 1;
           temp_v4 = 0;
           if (param_13 == 0) {
-            *(unsigned int *)(DAT_00435d18 + 0x3028) = *(unsigned int *)(DAT_00435d18 + 0x3028) | 0x8000;
+            *(unsigned int *)(g_btlAux + 0x3028) = *(unsigned int *)(g_btlAux + 0x3028) | 0x8000;
           }
           temp_v6 = 4;
           do {
@@ -354,7 +354,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
           temp_v3 = temp_v3 + 1;
         } while (temp_v3 < 0x36);
       }
-      temp_v3 = FUN_00293230(temp_v19);
+      temp_v3 = btlScriptUnitIsIncapacitated(temp_v19);
       if (temp_v3 != 0) {
         temp_v14[0] = 1;
         temp_v14[1] = 0;

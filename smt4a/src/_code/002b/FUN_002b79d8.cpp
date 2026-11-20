@@ -10,14 +10,14 @@ struct FlagGate {
 
 extern "C" {
 extern FlagGatedEntryState DAT_00580c90;
-extern FlagGatedEntry DAT_005f32a0[];
+extern FlagGatedEntry g_recordTable[];
 int gameFlagIsSet(s32 flag);
 
 /* Disable live entries whose required flag is absent or exclusion flag is set. */
 void FUN_002b79d8(void)
 {
     for (s32 index = 0; index < DAT_00580c90.count; ++index) {
-        FlagGatedEntry *entry = &DAT_005f32a0[index];
+        FlagGatedEntry *entry = &g_recordTable[index];
         const FlagGate *gate = reinterpret_cast<const FlagGate *>(reinterpret_cast<u8 *>(entry) + 0x100);
         if (!entry->disabled && entry->object &&
             ((gate->requiredFlag && !gameFlagIsSet(gate->requiredFlag)) ||

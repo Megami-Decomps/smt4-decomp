@@ -11,7 +11,7 @@ typedef struct MapRndMazeA {
 } MapRndMazeA;
 
 extern "C" {
-u8 FUN_002ef9f0(void);
+u8 mapRndMazeTaskIsActive(void);
 }
 
 #endif

@@ -3,12 +3,12 @@
 
 extern "C" {
 
-extern s32 FUN_0016dfe0(ThreadStackStorage *stack, void *buffer, u32 size);
+extern s32 addressSpaceMapApplicationMemoryBlock(ThreadStackStorage *stack, void *buffer, u32 size);
 
 /* Initializes the thread's stack mapping, reporting a failed result. */
 void resultReportIfFailed(ThreadStackStorage *stack, void *buffer, u32 size)
 {
-    s32 result = FUN_0016dfe0(stack, buffer, size);
+    s32 result = addressSpaceMapApplicationMemoryBlock(stack, buffer, size);
     bool failed = result < 0;
 
     if (failed) {

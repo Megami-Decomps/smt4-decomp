@@ -1,7 +1,7 @@
 #include "common.h"
 struct ValuePair { u32 first, second; };
 extern "C" {
-extern ValuePair DAT_00589510;
+extern ValuePair g_moAllocationHooks;
 /* Clears both global state words. */
-void valuePairClear() { DAT_00589510.first=0; DAT_00589510.second=0; }
+void valuePairClear() { g_moAllocationHooks.first=0; g_moAllocationHooks.second=0; }
 }

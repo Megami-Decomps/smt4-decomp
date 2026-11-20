@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern void FUN_0035af44(CecProcessA *process);
+extern void cecProcessInitializeAndStart(CecProcessA *process);
 
 void cecProcessCall3(void)
 {
     if (g_cecProcess != NULL) {
-        FUN_0035af44(g_cecProcess);
+        cecProcessInitializeAndStart(g_cecProcess);
     }
 }
 

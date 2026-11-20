@@ -8,13 +8,13 @@ struct CallbackOwner {
     /* 0x0c */ u32 second;
 };
 extern "C" {
-extern const u8 DAT_004222ec[];
+extern const u8 g_callbackOwnerVtable[];
 /* Clears the callback owner's state and installs its dispatch table. */
 void callbackOwnerInitialize(CallbackOwner *owner)
 {
     owner->active = 0;
     owner->first = 0;
     owner->second = 0;
-    owner->vtable = DAT_004222ec;
+    owner->vtable = g_callbackOwnerVtable;
 }
 }

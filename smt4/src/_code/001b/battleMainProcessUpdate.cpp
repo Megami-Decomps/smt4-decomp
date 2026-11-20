@@ -129,7 +129,7 @@ typedef char BattleTaskContextFlagsOffsetCheck[offsetof(BattleTaskContext, flags
 extern "C" {
 extern BattleTaskGlobals g_btlMainState;
 extern void *g_btlUiBlock, *g_btlActionReflect, *g_btlEvent, *g_btlScriptUnit, *g_btlAiScript;
-extern void *DAT_00435d18, *g_btlMain;
+extern void *g_btlAux, *g_btlMain;
 extern BattleTaskGate *DAT_004398d4;
 s32 jobIsValid(u32 job);
 s32 spriteTablesLoadedEnough(void *ui);
@@ -155,7 +155,7 @@ s32 poolFieldClearIfAccepted(void *ui);
 s32 battleUiIsFadeAndFieldReady(void *ui);
 s32 btlUiIsWidgetOutsideClosingState(void *ui);
 s32 btlUiIsIdle(void *ui);
-void FUN_0027df30(u32 first, u32 second, BattleTaskActor *actor, u32 flags, BattleTaskEffect effect);
+void btlQueueSkillReflectActions(u32 first, u32 second, BattleTaskActor *actor, u32 flags, BattleTaskEffect effect);
 void btlAiScriptIsFinished(void *script);
 s32 FUN_0027de98(BattleTaskContext *work);
 s32 btlUiIsIdleForCommand(void *ui);
@@ -189,14 +189,14 @@ void sequenceRequestClearDeferred();
 void FUN_00208be8();
 s32 sequenceRequestIsDeferred();
 void sequenceRequestFlushDeferred();
-void FUN_0027db24(u32 result);
+void gameSaveSetBattleResultCode(u32 result);
 void FUN_002faf88();
 void asdSequenceRequestInitial();
 s32 FUN_0039440c(AocScriptHolder *controller);
 void FUN_00394508(AocScriptHolder *controller);
 s32 gameStateIsFlagSetAndLarge();
 void asdSequenceRequest(u32 sequence, const void *parameters, u32 size);
-s32 FUN_00287800();
+s32 supportUnitProgressIsComplete();
 s32 FUN_00287304();
 s32 tmnlHasSelection();
 void tmnlResetSelection();
@@ -279,10 +279,10 @@ static inline void resetBattleTaskRound(BattleTaskContext *work)
             work->resources[index] = NULL;
         }
     }
-    listBoxClearSelectionAndReset(DAT_00435d18);
-    modelManagerReleaseSlots(DAT_00435d18);
-    modelSetResetSlots(DAT_00435d18);
-    btlEventResetSlots(DAT_00435d18);
+    listBoxClearSelectionAndReset(g_btlAux);
+    modelManagerReleaseSlots(g_btlAux);
+    modelSetResetSlots(g_btlAux);
+    btlEventResetSlots(g_btlAux);
     mathVectorClear(g_btlMain);
     transformClearVectors(g_btlMain);
     work->flags &= 0xfbffeea7;
@@ -362,11 +362,11 @@ static inline void completeBattleTask(BattleTaskContext *work)
     bool fade = (work->flags3 & 2) != 0;
     if (!fade) {
         switch (work->result) {
-        case 2: FUN_0027db24((work->flags2 & 1) || (work->flags & 0x80000000) ? 5 : 1); break;
-        case 4: FUN_0027db24(2); break;
-        case 5: FUN_0027db24(3); break;
-        case 13: FUN_0027db24(4); break;
-        case 14: FUN_0027db24(6); break;
+        case 2: gameSaveSetBattleResultCode((work->flags2 & 1) || (work->flags & 0x80000000) ? 5 : 1); break;
+        case 4: gameSaveSetBattleResultCode(2); break;
+        case 5: gameSaveSetBattleResultCode(3); break;
+        case 13: gameSaveSetBattleResultCode(4); break;
+        case 14: gameSaveSetBattleResultCode(6); break;
         }
         fade = (work->flags3 & 2) != 0;
     }
@@ -394,12 +394,12 @@ static inline void completeBattleTask(BattleTaskContext *work)
             s32 area = g_gameState.savedMapId - 200;
             asdSequenceRequest(14, &area, sizeof(area));
         } else if (FUN_002080e8()) {
-            if (FUN_00287800())
+            if (supportUnitProgressIsComplete())
                 FUN_002faf88();
             else
                 asdSequenceRequest(8, NULL, 0);
         } else if (FUN_00287304()) {
-            if (FUN_00287800())
+            if (supportUnitProgressIsComplete())
                 FUN_002faf88();
             else
                 asdSequenceRequest(6, NULL, 0);
@@ -526,7 +526,7 @@ extern "C" s32 battleMainProcessUpdate()
                     BattleTaskEffect effect = {
                         reserve->hp ? reserve->hp : -1, -1, -1, 0, index * 5, index * 5, 9, 1, 0
                     };
-                    FUN_0027df30(0, 0, &work->actors[reserve->actor], 0, effect);
+                    btlQueueSkillReflectActions(0, 0, &work->actors[reserve->actor], 0, effect);
                 }
             }
         }

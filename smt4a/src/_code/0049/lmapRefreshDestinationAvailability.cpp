@@ -12,7 +12,7 @@ extern "C" {
 u8 gameOwnedBitTest2(s32 id);
 
 s32 gameFlagsGetWorkState(void);
-s32 FUN_002e707c(u32 key);
+s32 lmapDestinationHasAvailableRecord(u32 key);
 u32 FUN_003bf5a8(s32 id);
 
 /* Refresh the availability of every entry in the current map's destination lists. */
@@ -53,7 +53,7 @@ void lmapRefreshDestinationAvailability(LmapDestinationListsA *list)
                 } else {
                     entry->available = 0;
                 }
-            } else if (FUN_004083a8(entry->id, entry->type) == 0) {
+            } else if (interactionVariantIsEnabled(entry->id, entry->type) == 0) {
                 entry->available = 0;
             } else {
                 s32 blocked = 0;
@@ -62,7 +62,7 @@ void lmapRefreshDestinationAvailability(LmapDestinationListsA *list)
                     (entry->forbiddenFlag != 0 && gameFlagIsSet(entry->forbiddenFlag) != 0)) {
                     blocked = 1;
                 }
-                if ((entry->dataKey == 0 || FUN_002e707c(entry->dataKey) != 0 ||
+                if ((entry->dataKey == 0 || lmapDestinationHasAvailableRecord(entry->dataKey) != 0 ||
                      dataTableHasMatchingEntry35(entry->dataKey) != 0) &&
                     blocked == 0) {
                     entry->available = 1;
@@ -114,7 +114,7 @@ void lmapRefreshDestinationAvailability(LmapDestinationListsA *list)
                 if (entry->requiredSubmode != 0 && entry->requiredSubmode != g_gameState.areaId) {
                     entry->available = 0;
                 }
-            } else if (FUN_004083a8(entry->id, entry->type) == 0) {
+            } else if (interactionVariantIsEnabled(entry->id, entry->type) == 0) {
                 entry->available = 0;
             } else {
                 if ((entry->requiredFlag != 0 && gameFlagIsSet(entry->requiredFlag) == 0) ||

@@ -41,7 +41,7 @@ typedef char NaviCategoryTransitionOffsets[
 
 extern "C" {
 void uiSpriteBankApplyPreset(UiSpriteState *unit, u32 preset);
-void FUN_00168980(u32 sound);
+void buttonHelpTransitionPresetFlags(u32 sound);
 void msgWindowReset(void);
 void sub68OwnerDestroy(void);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
@@ -53,7 +53,7 @@ void _ZN9Obj53230012FUN_0048c1c0Ev(NaviCategorySelectionWork *work)
     case 0:
         uiSpriteBankApplyPreset(&((NaviCategoryTransitionView *)work)->bank, 1);
         if (!g_gameState.menuOpen)
-            FUN_00168980(27);
+            buttonHelpTransitionPresetFlags(27);
         g_gameState.unk463 = 1;
         flagsSetBits(&((NaviCategoryTransitionView *)work)->flags, 0x01000008);
         ((NaviCategoryTransitionView *)work)->state = 1;

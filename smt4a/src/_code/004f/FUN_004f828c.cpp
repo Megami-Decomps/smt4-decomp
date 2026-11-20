@@ -18,7 +18,7 @@ char *libc_strcpy(char *destination, const char *source);
 void sysMemClear(void *buffer, s32 size);
 char *libc_strrchr(char *text, s32 character);
 void btlCameraFinishTransition(BtlEffectWorkA *work);
-u32 FUN_002282c8(u32 first, u32 second, u32 third);
+u32 filterCreateByKind(u32 first, u32 second, u32 third);
 
 /* Resolves the effects a battle unit asks for: names the battle ignores are skipped, numbered ones
  * select the numbered effect, any other name has its effect file loaded into the unit's slot. */
@@ -46,7 +46,7 @@ u32 FUN_004f828c(BtlEffectWorkA *work)
                             __2sprintf(file, DAT_00528534, g_btlEffect.numberedPrefix, n);
                             if (strcmp(file, name) == 0) {
                                 btlCameraFinishTransition(work);
-                                work->numberedEffect = FUN_002282c8(n & 0xff, 7, 0);
+                                work->numberedEffect = filterCreateByKind(n & 0xff, 7, 0);
                                 work->numberedIndex = n;
                                 found = true;
                                 break;

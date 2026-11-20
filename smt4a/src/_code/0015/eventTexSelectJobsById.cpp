@@ -16,10 +16,10 @@ extern s32 jobIsValid(u32 job);
 extern s32 jobGetStatus(u32 job);
 extern s32 eventTexJobGetId(u32 job);
 extern void jobSetIntensity(u32 job, s32 selected);
-extern u32 FUN_00169580(u32 job);
-extern s32 FUN_00167898(u32 job);
+extern u32 eventTexJobGetField3C(u32 job);
+extern s32 eventTexJobGetHandle(u32 job);
 extern void jobBlendSetRate(u32 job, s32 selected);
-extern u32 FUN_00169590(u32 job);
+extern u32 eventTexJobGetField3CAlt(u32 job);
 extern void messageMainSetMode(u32 arg);
 
 /* Selects the event-texture jobs whose id is `id` and deselects the others; 1 if any matched. */
@@ -37,7 +37,7 @@ s32 eventTexSelectJobsById(s32 id)
         if (jobIsValid(eventTex->jobsA[i]) != 0 && jobGetStatus(eventTex->jobsA[i]) != 4) {
             if (eventTexJobGetId(eventTex->jobsA[i]) == id) {
                 jobSetIntensity(eventTex->jobsA[i], 1);
-                messageMainSetMode(FUN_00169580(eventTex->jobsA[i]) & 0xFF);
+                messageMainSetMode(eventTexJobGetField3C(eventTex->jobsA[i]) & 0xFF);
                 found = 1;
             } else {
                 jobSetIntensity(eventTex->jobsA[i], 0);
@@ -46,9 +46,9 @@ s32 eventTexSelectJobsById(s32 id)
     }
     for (i = 0; i < 16; i++) {
         if (jobIsValid(eventTex->jobsB[i]) != 0) {
-            if (FUN_00167898(eventTex->jobsB[i]) == id) {
+            if (eventTexJobGetHandle(eventTex->jobsB[i]) == id) {
                 jobBlendSetRate(eventTex->jobsB[i], 1);
-                messageMainSetMode(FUN_00169590(eventTex->jobsB[i]) & 0xFF);
+                messageMainSetMode(eventTexJobGetField3CAlt(eventTex->jobsB[i]) & 0xFF);
                 found = 1;
             } else {
                 jobBlendSetRate(eventTex->jobsB[i], 0);

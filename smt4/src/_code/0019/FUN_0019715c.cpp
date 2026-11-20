@@ -46,7 +46,7 @@ extern int g_camp; /* 0x43da90 */
 /* Supplied declaration required: FUN_0028f870. */
 extern unsigned int flagValueRead(unsigned int);
 /* Supplied declaration required: FUN_0028fc60. */
-extern int FUN_0029ee54(int);
+extern int gridNavigationGetItemCount(int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_002bdf94. */
@@ -132,7 +132,7 @@ void FUN_0019715c(int param_1,int param_2)
         temp_v9 = 0;
         do {
           temp_v4 = resourceRunOperationIfUnblocked(temp_v12);
-          temp_v5 = FUN_0029ee54(temp_v12);
+          temp_v5 = gridNavigationGetItemCount(temp_v12);
           if (temp_v5 <= temp_v4 + temp_v9) break;
           temp_v4 = resourceRunOperationIfUnblocked(temp_v12);
           temp_v0 = *(unsigned short *)(temp_v1 + (temp_v4 + temp_v9) * 2);

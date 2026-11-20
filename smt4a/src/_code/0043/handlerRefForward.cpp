@@ -17,13 +17,13 @@ typedef struct HandlerRef {
     /* 0x04 */ VHandler *handler;
 } HandlerRef;
 
-extern HandlerRef DAT_005c1484;
+extern HandlerRef g_handlerRefForward;
 
 /* Forwards (a, b) to the global handler object, if one is installed (tail call). */
 void handlerRefForward(u32 a, u32 b)
 {
-    if (DAT_005c1484.handler != NULL) {
-        DAT_005c1484.handler->vtbl->slot0(DAT_005c1484.handler, a, b);
+    if (g_handlerRefForward.handler != NULL) {
+        g_handlerRefForward.handler->vtbl->slot0(g_handlerRefForward.handler, a, b);
     }
 }
 

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern FlagsAt6C DAT_006306f8;
+extern FlagsAt6C g_quadColorState;
 
 u8 flagsAt6CGet(void)
 {
-    return DAT_006306f8.value;
+    return g_quadColorState.value;
 }
 
 } /* extern "C" */

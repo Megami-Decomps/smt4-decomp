@@ -3,10 +3,10 @@
 
 extern "C" {
 
-void FUN_00189c24(void);
+void uiQuestRebuildLists(void);
 void uiQuestLoadResources(void);
 void FUN_0028fe0c(u16 id, s32 mode);
-void FUN_00290d5c(s32 sound);
+void buttonHelpWorkSetPreset(s32 sound);
 s32 resourceRunOperationIfUnblocked(void *cursor);
 void timerStart(void *timer, s32 a, s32 b);
 
@@ -18,7 +18,7 @@ void uiQuestAnswerConfirm(s8 choice)
 
     quest->panelView.panel.confirming = 1;
     quest->panelView.panel.choice = choice;
-    FUN_00189c24();
+    uiQuestRebuildLists();
     quest = g_uiQuest;
     quest->panelView.panel.detailMode = 0;
     if (quest->state != 13) {
@@ -30,7 +30,7 @@ void uiQuestAnswerConfirm(s8 choice)
     }
     timerStart(quest->mainSprite, 2, 0);
     uiQuestEnterState(g_uiQuest, 3);
-    FUN_00290d5c(0xa0);
+    buttonHelpWorkSetPreset(0xa0);
 }
 
 } /* extern "C" */

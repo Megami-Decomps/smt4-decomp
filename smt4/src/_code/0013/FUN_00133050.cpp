@@ -10,7 +10,7 @@ int FUN_00133050(int param_1)
   iVar1 = *(int *)(param_1 + 4);
   if (*(int *)(iVar1 + 0x38) != 0) {
     iVar2 = *(int *)(iVar1 + 0x3c);
-    FUN_00141bdc();
+    soundArchiveFindIndexedResource();
     if (iVar2 != -1) {
       if (iVar2 == -1) {
         iVar1 = 0;

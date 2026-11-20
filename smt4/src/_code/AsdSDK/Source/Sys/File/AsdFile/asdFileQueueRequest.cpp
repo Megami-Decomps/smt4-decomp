@@ -8,8 +8,8 @@ extern "C" {
 extern AsdFileGlobals g_asdFile;
 extern u32 g_asdFileMutex;             /* mutex guarding the list */
 
-s32 FUN_002c40f8(s32 *index, u32 *handles, s32 count, s32 waitAll, s64 timeout);
-s32 FUN_002c5254(s32 *out, u32 handle);
+s32 svcWaitSynchronizationN(s32 *index, u32 *handles, s32 count, s32 waitAll, s64 timeout);
+s32 svcReleaseSemaphore(s32 *out, u32 handle);
 void resultHandleFailure(void);
 void memClear(void *buf, u32 size);
 s32 libc_strlen(const char *s);
@@ -28,7 +28,7 @@ AsdFileRequest *asdFileQueueRequest(const char *path, u8 flag)
     s32 hasDevice;
 
     handle = g_asdFileMutex;
-    if (((u32)FUN_002c40f8(&index, &handle, 1, 0, -1) >> 31) != 0) {
+    if (((u32)svcWaitSynchronizationN(&index, &handle, 1, 0, -1) >> 31) != 0) {
         resultHandleFailure();
     }
 
@@ -76,7 +76,7 @@ AsdFileRequest *asdFileQueueRequest(const char *path, u8 flag)
     request->lifetimeStep = 0;
 
     handle = g_asdFileMutex;
-    if (((u32)FUN_002c5254(&index, handle) >> 31) != 0) {
+    if (((u32)svcReleaseSemaphore(&index, handle) >> 31) != 0) {
         resultHandleFailure();
     }
     return request;

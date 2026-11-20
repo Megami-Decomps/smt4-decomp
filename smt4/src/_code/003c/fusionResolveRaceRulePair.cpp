@@ -44,7 +44,7 @@ u32 fusionResolveRaceRulePair(FusionRaceSelectionIV *selection, u16 firstId, u16
         u32 race = first->id == rule->sourceId ? second->race : first->race;
         if (selection->levels[race][0].level < level)
             level = static_cast<u8>(selection->levels[race][selection->counts[race] - 1].level);
-        result = FUN_003c9948(reinterpret_cast<LeveledLists *>(selection), race, level);
+        result = fusionFindClosestLevelEntry(reinterpret_cast<LeveledLists *>(selection), race, level);
         if (first->id == result || second->id == result || result == 0)
             return 0;
     }

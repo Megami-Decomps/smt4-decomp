@@ -7,7 +7,7 @@ struct Holder;
 struct Owner;
 extern "C" {
 
-void * FUN_001858ec(u32 a, u32 b, u32 c, u32 size, u32 alignment, u32 extra);
+void * asdFileAllocZeroedBuffer(u32 a, u32 b, u32 c, u32 size, u32 alignment, u32 extra);
 
 void FUN_00180000(void);
 
@@ -17,7 +17,7 @@ f32 textLayoutDraw(const void *text, f32 x, f32 y, u32 flags, s32 limit, f32 dep
 
 FileHandle * fileHandleClose(FileHandle *file);
 
-void FUN_001844f8(Holder *object, u32 unused, u32 *out);
+void asdMdlNodeGetWorldPosition(Holder *object, u32 unused, u32 *out);
 
 void FUN_001882fc(Owner *owner);
 

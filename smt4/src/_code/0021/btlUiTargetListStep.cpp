@@ -21,14 +21,14 @@ extern "C" {
 s32 ifTouchGetSelectedRegion(void);
 s32 ifTouchRegionAddRequested(u32 file, s32 index);
 s32 ifTouchGetActiveCounter(void);
-s32 FUN_002c1658(s32 button, s32 mode);
+s32 inputQueryButtonState(s32 button, s32 mode);
 void FUN_001990d4(ActorCardAnimations *card);
 void categoryPreviewCycleTint(ActorCardAnimations *card);
 void FUN_0029d8f4(const StatBlock *unit, s32 demonSide, u8 flag);
 void FUN_0026a958(u8 value);
-void FUN_00258a24(s32 alternate);
+void statusPanelRefreshSelection(s32 alternate);
 void statusPanelSetOpen(s32 open);
-u16 FUN_0029e9cc(u16 id);
+u16 itemIsCollectedWithRelated(u16 id);
 void FUN_0029da34(void *directory, u32 entry, u16 devilId, u32 context);
 s32 FUN_0029e02c(void);
 void FUN_002efed8(u8 value);
@@ -116,7 +116,7 @@ void btlUiTargetListStep(ActorCardAnimations *card)
                         FUN_0026a958(1);
                         statusPanelSetOpen(1);
                         card->categoryIndex = 0;
-                        if (FUN_0029e9cc(card->targets[i].id))
+                        if (itemIsCollectedWithRelated(card->targets[i].id))
                             FUN_0029da34(NULL, 1, card->targets[i].id, 0);
                         else
                             FUN_0029da34(NULL, 2, card->targets[i].id, 0);
@@ -144,7 +144,7 @@ void btlUiTargetListStep(ActorCardAnimations *card)
                         if (region == ACTOR_CARD_TARGET_REGION_BACK) {
                             card->unk3060 = 1;
                             card->targetState = 4;
-                            FUN_002a0cc8(1);
+                            gameGlobalsSetSubScreenActive(1);
                         } else if (!card->targetLocked) {
                             for (s32 i = 0; i < card->targetCount; i++)
                                 card->targets[i].active = 0;
@@ -164,12 +164,12 @@ void btlUiTargetListStep(ActorCardAnimations *card)
                     if (ifTouchGetSelectionMode() == 1 && ifTouchGetActiveCounter() < 1 &&
                         region != ACTOR_CARD_TARGET_REGION_BACK)
                         eventQueueAddUniqueIfValid(0x100016C);
-                } else if (FUN_002c1658(0, 1)) {
+                } else if (inputQueryButtonState(0, 1)) {
                     card->unk3060 = 0;
-                } else if (FUN_002c1658(1, 1)) {
+                } else if (inputQueryButtonState(1, 1)) {
                     card->unk3060 = 1;
                     card->targetState = 4;
-                    FUN_002a0cc8(1);
+                    gameGlobalsSetSubScreenActive(1);
                 }
             }
         }
@@ -188,7 +188,7 @@ void btlUiTargetListStep(ActorCardAnimations *card)
             }
             buttonHelpSetPreset(0x33);
             u16 *shown = FUN_0029acb0();
-            if (FUN_0029e9cc(*shown))
+            if (itemIsCollectedWithRelated(*shown))
                 FUN_0029da34(NULL, 1, *shown, 0);
             else
                 FUN_0029da34(NULL, 2, *shown, 0);
@@ -212,7 +212,7 @@ void btlUiTargetListStep(ActorCardAnimations *card)
                 record.mp = card->targets[selected].mp;
                 record.ailments = card->targets[selected].ailments;
                 FUN_0029d8f4(&record, 1, 0);
-                FUN_00258a24(0);
+                statusPanelRefreshSelection(0);
                 statusPanelSetOpen(1);
                 card->categoryIndex = 0;
                 card->unk5924 = 0;

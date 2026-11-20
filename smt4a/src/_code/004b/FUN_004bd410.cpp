@@ -31,10 +31,10 @@ extern "C" {
 
 PartySlotTable* gameGetSlotTable(void);
 void battleRecordInitializeFromDefinition(PartySlot* slot, s32 mode);
-void FUN_003e4b2c(u32 id);
+void partySlotLevelUpTo(u32 id);
 u32 dataTable0aSub0GetValueById(u32 id);
-s32 FUN_0035e458(u32 skill);
-s32 FUN_0035d89c(u32 skill);
+s32 partyRecordClampEquippedRankUp(u32 skill);
+s32 partyRecordClampEquippedRankDown(u32 skill);
 
 static __inline PartySlot* getSlot(u16 index)
 {
@@ -90,7 +90,7 @@ void FUN_004bd410(u32 id)
     PartySlot* parent = findSlotById(parentId);
     if (parent != NULL) {
         PartySlot* own = findSlotById(id);
-        if (own != NULL && (s32)(parent->level - own->level) > -1) FUN_003e4b2c(id);
+        if (own != NULL && (s32)(parent->level - own->level) > -1) partySlotLevelUpTo(id);
     }
 
     parent = findSlotById(parentId);
@@ -112,8 +112,8 @@ void FUN_004bd410(u32 id)
     if (growth != NULL && growth->skillType < 0x12) {
         rank = (s8)slot->skillRank[8 + growth->skillType];
     }
-    s32 maxRank = FUN_0035e458(skill);
-    s32 minRank = FUN_0035d89c(skill);
+    s32 maxRank = partyRecordClampEquippedRankUp(skill);
+    s32 minRank = partyRecordClampEquippedRankDown(skill);
     if (maxRank < rank) {
         rank = (s8)maxRank;
     } else if (rank < minRank) {

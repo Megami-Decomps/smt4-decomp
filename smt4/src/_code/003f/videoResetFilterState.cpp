@@ -6,11 +6,11 @@ struct ResetState {
 };
 
 extern "C" {
-extern ResetState DAT_0044e918;
+extern ResetState g_moAllocator;
 
 void videoResetFilterState(void)
 {
-    DAT_0044e918.unk00 = 0;
-    DAT_0044e918.unk04 = 0;
+    g_moAllocator.unk00 = 0;
+    g_moAllocator.unk04 = 0;
 }
 }

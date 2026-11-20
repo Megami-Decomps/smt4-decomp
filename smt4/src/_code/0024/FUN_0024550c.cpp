@@ -17,7 +17,7 @@ u32 keyedRecordRegisterName(const char *key);
 u32 FUN_00249e54(u32 handle, const void *file);
 void asdMemFree(void);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
-s32 FUN_00246708(void);
+s32 textureCacheGetDirection(void);
 void textureCachePollReady(void);
 }
 
@@ -47,7 +47,7 @@ u32 FUN_0024550c(MoveOutEffectWork *loader)
         if (loader->state != 1) {
             if (loader->state != 2)
                 return 1;
-            if (FUN_00246708() != 0) {
+            if (textureCacheGetDirection() != 0) {
                 loader->state = 3;
                 return 1;
             }
@@ -94,7 +94,7 @@ u32 FUN_0024550c(MoveOutEffectWork *loader)
     }
     textureCachePollReady();
     loader->state = 2;
-    if (FUN_00246708() != 0) {
+    if (textureCacheGetDirection() != 0) {
         loader->state = 3;
         return 1;
     }

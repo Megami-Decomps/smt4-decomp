@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern PairLog *DAT_0057f2c4;
+extern PairLog *g_uniteEffectWork;
 
 void pairLogSetValue(u16 value)
 {
-    DAT_0057f2c4->unk0C = value;
+    g_uniteEffectWork->unk0C = value;
 }
 
 } /* extern "C" */

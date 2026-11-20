@@ -11,7 +11,7 @@ extern u32 DAT_00573bdc;
 extern f32 DAT_00573be0;
 extern f32 DAT_00573c00;
 s32 jobIsValid(u32 job);
-void FUN_003592dc(u32 job);
+void asdListBoxJobReset(u32 job);
 void jobStop(u32 job, s32 flags);
 u32 asdListBoxCreateDefaultFlags(u32 parent, s32 group, s32 flags, s32 argument);
 void asdListBoxAddItems(u32 box, const AsdListBoxEntry *items, s32 count);
@@ -24,7 +24,7 @@ void asdListBoxSetFloatItem(u32 box, s32 item, f32 value, s32 minimum, s32 maxim
 void btlDebugCreatePanelMenu(BattleDebugPanelWork *work, const BattleDebugPanelParent *parent)
 {
     if (jobIsValid(work->panelJob)) {
-        FUN_003592dc(work->panelJob);
+        asdListBoxJobReset(work->panelJob);
         jobStop(work->panelJob, 0);
     }
     work->panelJob = asdListBoxCreateDefaultFlags(parent->job, 0x75, 0, 0);

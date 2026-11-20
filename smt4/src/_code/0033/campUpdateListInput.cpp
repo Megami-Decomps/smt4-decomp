@@ -18,17 +18,17 @@ extern "C" {
 s32 guestWinRequestClose(void);
 s32 FUN_0028fc60(u32 id);
 void campReleaseScreenTouchRegions(GridNavigation *list, s32 flag);
-void FUN_00299900(s32 arg);
+void campListShowSelectedHelp(s32 arg);
 void messageDismissNumericBanner(s32 arg);
-void FUN_0029e328(s32 id);
+void useCounterAppendValue(s32 id);
 void sortMenuCreate(s32 id, s32 arg);
 void buttonHelpSetText(s32 a, u32 color);
 s32 listCursorGetRowIfUnblocked(GridNavigation *list);
 s32 resourceRunOperationIfUnblocked(GridNavigation *list);
-s32 FUN_0029efd8(GridNavigation *list, s32 flag);
+s32 gridNavigationHandleConfirm(GridNavigation *list, s32 flag);
 s32 uiScrollHandleActionsOrTouch(GridNavigation *list, const TextureTableEntryIV *touchArea, s16 *rowRegions, s32 thumbRegion, s32 previousRegion, s32 nextRegion, s8 *touched, s32 a, s32 b);
 void eventQueueAddUniqueIfValid(u32 event);
-s32 FUN_002c1658(s32 button, s32 mode);
+s32 inputQueryButtonState(s32 button, s32 mode);
 u8 buttonHelpGetStatus(void);
 
 /* Switches the camp to `state`, remembering the previous one. */
@@ -57,7 +57,7 @@ void campUpdateListInput(s32 kind)
     }
 
     if (camp->phase == 0) {
-        FUN_00299bc4(list, 1);
+        campListRegisterTouchRegions(list, 1);
         camp->phase = camp->phase + 1;
         return;
     }
@@ -69,13 +69,13 @@ void campUpdateListInput(s32 kind)
     const TextureTableEntryIV *touchArea = asdTMTexTableEntryAt(0x1D, 0x56D);
     s32 confirmed = uiScrollHandleActionsOrTouch(list, touchArea, camp->touch.rowRegions, camp->touch.scrollRegions[0],
                                                  camp->touch.scrollRegions[1], camp->touch.scrollRegions[2], &touched, 0, 1);
-    if (confirmed != 0 || FUN_0029efd8(list, 1) != 0) {
+    if (confirmed != 0 || gridNavigationHandleConfirm(list, 1) != 0) {
         u32 part = objectPartRunUnlessLocked(&camp->menuGrid);
-        FUN_00299900(dataTable15GetUnlockedEntryId(camp->menuGroup, part));
+        campListShowSelectedHelp(dataTable15GetUnlockedEntryId(camp->menuGroup, part));
         return;
     }
 
-    if ((FUN_002c1658(0, 1) | touched) != 0 && kind == CAMP_LIST_A) {
+    if ((inputQueryButtonState(0, 1) | touched) != 0 && kind == CAMP_LIST_A) {
         s32 index = resourceRunOperationIfUnblocked(list) + listCursorGetRowIfUnblocked(list);
         u32 id = camp->gridIds0[index];
         if (FUN_0028fc60(id) != 0) {
@@ -92,8 +92,8 @@ void campUpdateListInput(s32 kind)
         return eventQueueAddUniqueIfValid(CAMP_EVENT_SELECT);
     }
 
-    if (FUN_002c1658(1, 1) != 0) {
-        FUN_00299900(0);
+    if (inputQueryButtonState(1, 1) != 0) {
+        campListShowSelectedHelp(0);
         timerStart(&camp->sprites[1], 3, 0);
         camp->returnState = 6;
         campChangeState(5);
@@ -101,7 +101,7 @@ void campUpdateListInput(s32 kind)
         return eventQueueAddUniqueIfValid(CAMP_EVENT_CANCEL);
     }
 
-    if (FUN_002c1658(9, 1) == 0) {
+    if (inputQueryButtonState(9, 1) == 0) {
         return;
     }
     if (kind == CAMP_LIST_B) {
@@ -109,14 +109,14 @@ void campUpdateListInput(s32 kind)
     }
     if (kind == CAMP_LIST_A) {
         sortMenuCreate(3, 0);
-        FUN_0029e328(12);
-        FUN_0029e328(16);
-        FUN_0029e328(3);
+        useCounterAppendValue(12);
+        useCounterAppendValue(16);
+        useCounterAppendValue(3);
     } else if (kind == CAMP_LIST_C) {
         sortMenuCreate(4, 0);
-        FUN_0029e328(33);
-        FUN_0029e328(16);
-        FUN_0029e328(3);
+        useCounterAppendValue(33);
+        useCounterAppendValue(16);
+        useCounterAppendValue(3);
     }
     buttonHelpSetText(0, 0x323232FF);
     camp->helpStatus = buttonHelpGetStatus();

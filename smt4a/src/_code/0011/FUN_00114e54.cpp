@@ -33,7 +33,7 @@ extern unsigned int FUN_0010b3de(int, unsigned int *);
 extern unsigned int FUN_0011367e(void);
 extern int _Znwj(unsigned int);
 /* Supplied declaration required: FUN_002e9acc. */
-extern int FUN_002ecf28(void);
+extern int objectRegistryGetOwnerForCurrent(void);
 /* Supplied declaration required: FUN_002f3b58. */
 extern unsigned int *FUN_00300ae8(fn_00114e54_arg0 *, unsigned int);
 /* Supplied declaration required: _ZN9Obj55a94cC1Ej. */
@@ -90,7 +90,7 @@ FUN_00114e54(fn_00114e54_arg0 *param_1,unsigned int param_2,unsigned int param_3
   if (temp_v0 != 0) {
     temp_v1 = _ZN9Obj55a94cC1Ej(temp_v0,0);
   }
-  temp_v0 = FUN_002ecf28();
+  temp_v0 = objectRegistryGetOwnerForCurrent();
   FUN_002f3b58(*(unsigned int *)(temp_v0 + 0xc),10,temp_v1);
   return puVar1;
 }

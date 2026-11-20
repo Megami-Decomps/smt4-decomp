@@ -36,7 +36,7 @@ extern int flagBitIsSet(void);
 extern unsigned int FUN_00293988(void *scene);
 /* Supplied declaration required: btlGetMainState. */
 extern int objectPartRunUnlessLocked(int); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
-extern unsigned int FUN_0029e958(int);
+extern unsigned int uiGridNavigationEntryCount(int);
 extern int gameGetUnitRecord(void);
 extern int gameGetSlotTable(void);
 extern int vec2GetYInt(int);
@@ -80,7 +80,7 @@ void FUN_0025ee64(int param_1)
   texDrawTableEntryAtStoredOrigin(2,0x15,0xdb,temp_v2 + temp_v4,temp_v5 + temp_v6,0x29);
   texDrawTableEntryAtStoredOrigin(2,0x15,0xdc,temp_v2 + temp_v4,temp_v5 + temp_v6,0x29);
   temp_v2 = objectPartRunUnlessLocked(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
-  temp_v7 = FUN_0029e958(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
+  temp_v7 = uiGridNavigationEntryCount(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
   temp_v4 = 0;
   if (temp_v4 < (int)temp_v7) {
     do {

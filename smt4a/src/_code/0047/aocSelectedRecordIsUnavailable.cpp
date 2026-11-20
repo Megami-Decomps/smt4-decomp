@@ -3,7 +3,7 @@
 #include "addon/AocSystemA.h"
 extern "C" {
 void* libc_bsearch(const void*, const void*, u32, u32, s32 (*)(const void*, const void*));
-s32 FUN_00476dfc(const void*, const void*);
+s32 compareU16KeyAscending(const void*, const void*);
 u32 objGetFlagBit16(void*);
 u8 rosterHasLeader(void);
 u16 rosterGetLeaderId(void);
@@ -22,7 +22,7 @@ u32 aocSelectedRecordIsUnavailable(AocSystemA* system)
     key.id = id;
     const void* records = system->table1bRecords;
     u32 count = g_aocSystem->table1bCount;
-    void* record = libc_bsearch(&key, records, count, sizeof(AocTableSearchRecordA), FUN_00476dfc);
+    void* record = libc_bsearch(&key, records, count, sizeof(AocTableSearchRecordA), compareU16KeyAscending);
     if (record == NULL) {
         return 1;
     }

@@ -7,7 +7,7 @@ SavedMapTransition *gameBlockGetArea27E98(void);
 void gameStateSetJumpRequest(s32 map, s32 area, s32 entrance, f32 x, f32 y, f32 z, f32 heading, f32 cameraHeading);
 void asdSequenceRequest(u32 sequence, const void *arguments, u32 size);
 void mapPlaceSet(s32 place, u32 options, u32 argument);
-void FUN_004731d8(void);
+void gameSaveBlockRebuild27E98(void);
 
 // Restore the saved field, dungeon, or world-map destination and optionally change sequence.
 u32 mapRestoreSavedDestination(u32 request, s32 changeSequence)
@@ -45,7 +45,7 @@ u32 mapRestoreSavedDestination(u32 request, s32 changeSequence)
         }
         break;
     }
-    FUN_004731d8();
+    gameSaveBlockRebuild27E98();
     return restored;
 }
 }

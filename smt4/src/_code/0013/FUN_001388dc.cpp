@@ -3,7 +3,7 @@
 extern "C" {
 extern AsdSoundSystem g_asdSound;
 s32 soundArchiveLoaderIsItemLoaded(SoundArchiveLoader *loader, u32 item, u32 flags);
-s32 FUN_002af3b4(SoundArchiveLoader *loader, u32 item, void *heap, u32 flags, u32 mode);
+s32 nw_snd_internal_SoundArchiveLoader_Load(SoundArchiveLoader *loader, u32 item, void *heap, u32 flags, u32 mode);
 
 // Reuse loaded archive data, or load it into the current slot's sound heap.
 s32 FUN_001388dc(u32 item)
@@ -17,7 +17,7 @@ s32 FUN_001388dc(u32 item)
             result = 1;
         }
         else {
-            result = FUN_002af3b4(&sound->loaderState.loader, item, slot->heap, 0xffffffff, 0);
+            result = nw_snd_internal_SoundArchiveLoader_Load(&sound->loaderState.loader, item, slot->heap, 0xffffffff, 0);
         }
     }
     return result;

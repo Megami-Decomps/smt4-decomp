@@ -18,7 +18,7 @@ const TitleConfigHelpEntry *dataTableGetEntries(const void *table);
 void buttonHelpSetText(const char *text, u32 color);
 void FUN_00259e98(void);
 s32 ifTouchGetSelectionModeForRegion(s32 button);
-s32 FUN_002c1658(u32 action, u32 repeat);
+s32 inputQueryButtonState(u32 action, u32 repeat);
 s32 bgmVolumeToStep(u32 value);
 s32 classifyValueByThreshold(u32 value);
 s32 calcByteThresholdRank(u32 value);
@@ -36,9 +36,9 @@ void titleConfigApplyAudio(void);
 u32 titleConfigGetModeFlag(void);
 void audioApplyChannelVolume(u32 slot, u32 value, s32 frames);
 void workCommandRefreshActiveSlots(void);
-u32 FUN_002bfdc4(void);
-void FUN_002bfc24(u32 player, u32 sound, u32 bank, u32 priority, f32 left, f32 right);
-s32 FUN_0029efd8(void *cursor, u32 enabled);
+u32 messageVoiceBankGet(void);
+void voiceRequestPlayFile(u32 player, u32 sound, u32 bank, u32 priority, f32 left, f32 right);
+s32 gridNavigationHandleConfirm(void *cursor, u32 enabled);
 void scrScriptProcessStartEntry(void *process, u32 entry);
 s32 messageMainGetChoiceResult(void);
 
@@ -91,7 +91,7 @@ u32 titleConfigUpdate(void)
 
         /* the reset button restores the selected setting's default */
         if (config->resetButton >= 0 &&
-            (ifTouchGetSelectionModeForRegion(config->resetButton) == 6 || FUN_002c1658(9, 1))) {
+            (ifTouchGetSelectionModeForRegion(config->resetButton) == 6 || inputQueryButtonState(9, 1))) {
             switch (selected) {
             case 0:
                 g_titleConfigValues.music = titleConfigDefaultMusic();
@@ -130,14 +130,14 @@ u32 titleConfigUpdate(void)
             right = true;
         }
 
-        if (left || FUN_002c1658(4, 0)) {
+        if (left || inputQueryButtonState(4, 0)) {
             --config->settings[selected];
             config->settings[selected] = config->settings[selected] > 0 ? config->settings[selected] : 0;
-            FUN_002c1658(4, 0);
-        } else if (right || FUN_002c1658(3, 0)) {
+            inputQueryButtonState(4, 0);
+        } else if (right || inputQueryButtonState(3, 0)) {
             ++config->settings[selected];
             config->settings[selected] = config->settings[selected] > 10 ? 10 : config->settings[selected];
-            FUN_002c1658(3, 0);
+            inputQueryButtonState(3, 0);
         } else {
             mode = ifTouchGetSelectionModeForRegion(config->slider);
             if (mode == 1 || mode == 2) {
@@ -161,13 +161,13 @@ u32 titleConfigUpdate(void)
                 break;
             case 2:
                 workCommandRefreshActiveSlots();
-                FUN_002bfc24(0, 0x2712, FUN_002bfdc4(), 2, 0.707f, 0.707f);
+                voiceRequestPlayFile(0, 0x2712, messageVoiceBankGet(), 2, 0.707f, 0.707f);
                 break;
             }
             break;
         }
 
-        if (FUN_0029efd8(work->cursor, 1)) {
+        if (gridNavigationHandleConfirm(work->cursor, 1)) {
             titleConfigShowHelp();
             break;
         }
@@ -191,11 +191,11 @@ u32 titleConfigUpdate(void)
             }
         }
 
-        if (FUN_002c1658(0, 1)) {
+        if (inputQueryButtonState(0, 1)) {
             eventQueueAddUniqueIfValid(0x100016D);
             scrScriptProcessStartEntry(work->process, 2);
             work->state = 2;
-        } else if (FUN_002c1658(1, 1)) {
+        } else if (inputQueryButtonState(1, 1)) {
             eventQueueAddUniqueIfValid(0x100016E);
             timerStart(&work->window, 1, 0);
             g_titleConfigValues = work->saved;

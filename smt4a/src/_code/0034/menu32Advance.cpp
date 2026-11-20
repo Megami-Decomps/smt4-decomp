@@ -3,15 +3,15 @@
 extern "C" {
 
 extern void btlCommandMenuEnterMode(Menu32 *menu, s32 value, s32 flag);
-extern u8 FUN_002a21c8(void);
-extern void FUN_003756c8(s32 value);
+extern u8 buttonHelpIsStateActive(void);
+extern void btlPlayMenuConfirmSe(s32 value);
 
 void menu32Advance(Menu32 *menu)
 {
     menu->unk38B3 = 0;
     if (menu->unk387C == 0) {
-        if (FUN_002a21c8() == 0) {
-            FUN_003756c8(0);
+        if (buttonHelpIsStateActive() == 0) {
+            btlPlayMenuConfirmSe(0);
         }
         btlCommandMenuEnterMode(menu, 0xE, 1);
     } else if (menu->unk387C == 0x17) {

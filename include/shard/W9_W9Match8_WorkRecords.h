@@ -11,7 +11,7 @@
 
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTableEntry.h"
 
-/* Apocalypse task work allocated by FUN_0031ba34.
+/* Apocalypse task work allocated by spatialEffectTaskCreate.
  * Descriptive field meanings are provisional; the allocation size is explicit. */
 struct SpatialTaskWorkA {
     /* 0x000 */ u32 *activeFlag;
@@ -92,32 +92,45 @@ typedef char ParameterUpdatePrefixIVLayout[
     offsetof(ParameterUpdatePrefixIV, amount) == 0x30 &&
     sizeof(ParameterUpdatePrefixIV) == 0x34 ? 1 : -1];
 
-// The reverb object is used only through the SDK's pointer interface.
-struct SoundReverbEffect;
-
-// The reverb's three filter lengths, a separate object the parameters point at (it follows the
-// parameter block in .bss; retail addresses it as the block's base plus 0x24).
-struct SoundReverbFilterSize {
-    /* 0x0 */ s32 lengths[3];
+/* The SDK's reverb effect object (nw::snd::FxReverb), defined by the game and used through the
+ * SDK's pointer interface. */
+struct SoundReverbEffect {
+    /* 0x000 */ u8 unk000[0x110];
 };
 
-// Reverb parameters (the SDK's FxReverb parameter block).
+/* The reverb's comb and all-pass filter lengths (FxReverb::FilterSize), a separate object the
+ * parameters point at (it follows the parameter block in .bss; retail addresses it as the block's
+ * base plus 0x24). */
+struct SoundReverbFilterSize {
+    /* 0x0 */ u32 comb0;
+    /* 0x4 */ u32 comb1;
+    /* 0x8 */ u32 allPass;
+};
+
+/* Reverb parameters (the SDK's FxReverb::ReverbParam). */
 struct SoundReverbParameters {
-    /* 0x00 */ s32 integerParameters[3];
-    /* 0x0C */ f32 scalarParameters[2];
+    /* 0x00 */ u32 earlyReflectionTime; /* milliseconds */
+    /* 0x04 */ u32 fusedTime;           /* milliseconds */
+    /* 0x08 */ u32 preDelayTime;        /* milliseconds */
+    /* 0x0C */ f32 coloration;
+    /* 0x10 */ f32 damping;
     /* 0x14 */ const SoundReverbFilterSize *filterSize;
-    /* 0x18 */ f32 additionalScalars[2];
-    /* 0x20 */ u8 flags[2];
+    /* 0x18 */ f32 earlyGain;
+    /* 0x1C */ f32 fusedGain;
+    /* 0x20 */ u8 useHighPassDamping;
+    /* 0x21 */ u8 surround;
     /* 0x22 */ u8 unk22[2];
 };
 
 typedef char SoundReverbParametersLayoutCheck[
     sizeof(SoundReverbParameters) == 0x24 && sizeof(SoundReverbFilterSize) == 0xC &&
-    offsetof(SoundReverbParameters, integerParameters) == 0 &&
-    offsetof(SoundReverbParameters, scalarParameters) == 0x0C &&
+    sizeof(SoundReverbEffect) == 0x110 &&
+    offsetof(SoundReverbParameters, earlyReflectionTime) == 0 &&
+    offsetof(SoundReverbParameters, coloration) == 0x0C &&
     offsetof(SoundReverbParameters, filterSize) == 0x14 &&
-    offsetof(SoundReverbParameters, additionalScalars) == 0x18 &&
-    offsetof(SoundReverbParameters, flags) == 0x20 ? 1 : -1];
+    offsetof(SoundReverbParameters, earlyGain) == 0x18 &&
+    offsetof(SoundReverbParameters, useHighPassDamping) == 0x20 &&
+    offsetof(SoundReverbParameters, surround) == 0x21 ? 1 : -1];
 
 struct UiLayoutResourceIV;
 
@@ -1229,7 +1242,7 @@ typedef char PickObjectEndPrefixALayoutCheck[
 extern "C" {
 #endif
 
-void FUN_00299bc4(const void *unit, s32 mode);
+void campListRegisterTouchRegions(const void *unit, s32 mode);
 
 #ifdef __cplusplus
 }

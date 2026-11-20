@@ -8,12 +8,12 @@ struct Fader {
 
 extern "C" {
 
-f32 FUN_0017fc38(const SoundFadeState *state);
+f32 interpolationStateEvaluate(const SoundFadeState *state);
 
 /* Restarts the fade from its current value toward `target` over `duration` frames. */
 static __inline void fadeRestart(SoundFadeState *fade, f32 target, s32 duration)
 {
-    fade->start = FUN_0017fc38(fade);
+    fade->start = interpolationStateEvaluate(fade);
     fade->end = target;
     fade->duration = duration;
     fade->elapsed = 0;

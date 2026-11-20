@@ -19,13 +19,13 @@ struct NamedFlagObject {
 };
 
 extern "C" u32 libc_strlen(const char*);
-extern "C" u32 FUN_001a7a20(ResourceNameDictionary*, const char*, u32);
+extern "C" u32 nameTableLookupEntry(ResourceNameDictionary*, const char*, u32);
 
 // Resolve a named entry and update its bit only when the dictionary contains it.
 extern "C" void resourceObjectSetNamedFlag(NamedFlagObject* object, const char* name, s32 enabled)
 {
     NamedFlagResource* resource = object->resource;
-    u32 index = FUN_001a7a20(&resource->names, name, libc_strlen(name));
+    u32 index = nameTableLookupEntry(&resource->names, name, libc_strlen(name));
     if (index != 0xffff) {
         u8* bits = object->bits;
         if (enabled == 0) {

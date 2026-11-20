@@ -37,17 +37,17 @@ extern "C" {
 extern QuestStateWord DAT_0049fa1c;
 
 s32 FUN_00241990(void);
-u8 FUN_002cf750(void);
+u8 uiQuestGetMapChangedFlag(void);
 u16 uiQuestProcessPendingUpdate(void);
 u16 FUN_002eff34(void);
 s32 questGetPrimaryState(void);
 u8 questGetSecondaryState(void);
-s32 FUN_002cf738(void);
+s32 uiQuestGetPendingChangeFlag(void);
 
 void clearFlags310To31F(void);
 void mapClearPendingEntries(void);
-void FUN_00273d34(void);
-void FUN_00273c54(void);
+void mapUpdateLocationAvailability(void);
+void mapUpdatePendingAvailabilityFlags(void);
 void uiQuestClose(void);
 void messageBannerInitSelection(s32 a, s32 b);
 void messageTargetSetValue(s32 target, s32 value);
@@ -69,14 +69,14 @@ void fieldSceneApplyPendingQuestUpdate(FieldSceneWork *work)
     if (FUN_00241990() == 0) {
         return;
     }
-    work->pending.mapChanged = FUN_002cf750();
+    work->pending.mapChanged = uiQuestGetMapChangedFlag();
     u16 placeId = uiQuestProcessPendingUpdate();
     FieldScenePending *pending = &work->pending;
     pending->placeId = placeId;
     pending->eventId = FUN_002eff34();
     primaryState = questGetPrimaryState();
     work->pending.secondaryState = questGetSecondaryState();
-    if (FUN_002cf738() != 0) {
+    if (uiQuestGetPendingChangeFlag() != 0) {
         if (pending->eventId == EVENT_FIRST_ENDING) {
             gameFlagSetValue(0x246, 0, 1);
             gameFlagSetValue(0x274, 0, 1);
@@ -102,8 +102,8 @@ void fieldSceneApplyPendingQuestUpdate(FieldSceneWork *work)
         mapClearPendingEntries();
         if (primaryState == 0) {
             map->quest = pending->placeId;
-            FUN_00273d34();
-            FUN_00273c54();
+            mapUpdateLocationAvailability();
+            mapUpdatePendingAvailabilityFlags();
         }
     }
     uiQuestClose();

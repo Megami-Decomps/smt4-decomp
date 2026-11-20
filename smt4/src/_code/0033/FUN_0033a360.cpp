@@ -5,7 +5,7 @@
 extern "C" {
 
 extern u32 g_btlScriptUnit;
-extern u32 DAT_00435d18;
+extern u32 g_btlAux;
 
 void btlSelectActorCommandMotion(u32 scriptUnit, BtlUnit *unit, s32 mode);
 void entryTableInvalidate(u32 table);
@@ -26,11 +26,11 @@ void FUN_0033a360(BattleSceneSlots *scene)
         scene->slots[i].secondaryId = -1;
         scene->slots[i].effectId = -1;
     }
-    entryTableInvalidate(DAT_00435d18);
+    entryTableInvalidate(g_btlAux);
     FUN_0023e52c(g_btlScriptUnit, unit, 5, 0, 1);
     FUN_003cc944(g_btlScriptUnit, unit, 1);
-    modelSetResetSlots(DAT_00435d18);
-    battleCreateSecondaryModels(DAT_00435d18, unit->unk594);
+    modelSetResetSlots(g_btlAux);
+    battleCreateSecondaryModels(g_btlAux, unit->unk594);
 }
 
 } /* extern "C" */

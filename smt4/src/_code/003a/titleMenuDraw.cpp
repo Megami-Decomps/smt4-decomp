@@ -18,7 +18,7 @@ struct TitleScene;
 void gxResetColorQuadToWhite(void);
 void renderCtxApplyTransforms(RenderCtx *scene);
 void renderCtxResetColorScale(RenderCtx *scene);
-void FUN_003a9648(TitleMenu *menu);
+void bibleAnalyzeDrawMenu(TitleMenu *menu);
 void scrollMenuDrawVisibleEntries(TitleMenu *menu);
 
 /* Draws the title menu's entries in compact or scrolling form, then refreshes the title scene. */
@@ -33,7 +33,7 @@ void titleMenuDraw(TitleMenu *menu)
             break;
         default:
             menu->drawMode = 0x97;
-            FUN_003a9648(menu);
+            bibleAnalyzeDrawMenu(menu);
             break;
         }
         renderCtxApplyTransforms(g_titleScene);

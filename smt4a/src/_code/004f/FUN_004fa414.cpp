@@ -13,7 +13,7 @@ u32 btlReflectQueuePairedParameters(s32 actor, u32 flags, u32 value, u32 paramet
                                     BattleRosterRecordA *target, u32 first,
                                     u32 second, u32 third, u32 fourth);
 void btlReflectSetValuePair(s32 actor, u32 flags, s32 value, s32 first, s32 second);
-void FUN_004f6254(RangeAnimationOwner *work, s16 frame, s32 mode);
+void actionSequenceTriggerRangeAnimation(RangeAnimationOwner *work, s16 frame, s32 mode);
 
 void FUN_004fa414(RangeAnimationOwner *work)
 {
@@ -70,7 +70,7 @@ void FUN_004fa414(RangeAnimationOwner *work)
                 work->animation.events.roster, frames->second.argument, 0, 0, ~0u);
         if (frames->pairFrame == frame)
             btlReflectSetValuePair(0, 0, frames->pairValue, 0, 0);
-        FUN_004f6254(work, (s16)frame, 3);
+        actionSequenceTriggerRangeAnimation(work, (s16)frame, 3);
     }
     if (animationVisualIsComplete(work->animation.events.visual))
         work->animation.events.state = 13;

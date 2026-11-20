@@ -23,7 +23,7 @@ extern "C" {
 void asdLightActivate(u32 slot);
 extern SceneNode *sceneGroup1Root[2];  /* groups 1 and 4 */
 extern SceneNode *sceneGroup2Root[2];  /* groups 2 and 5 */
-extern SceneTraverser *DAT_00464b7c[2];
+extern SceneTraverser *g_asdModelSceneRoots[2];
 extern ModelTransformBuilder *g_asdModelTransformBuilder[2];
 extern SceneLightCounter g_asdLightCount[2];
 void sceneTraverserVisit(SceneTraverser *traverser, ModelTransformBuilder *builder);
@@ -57,7 +57,7 @@ void sceneNodeCollectionRegisterGroup(SceneGroupSlot *collection, s32 group)
             bank = 0;
         else
             bank = 1;
-        sceneTraverserVisit(DAT_00464b7c[bank], g_asdModelTransformBuilder[bank]);
+        sceneTraverserVisit(g_asdModelSceneRoots[bank], g_asdModelTransformBuilder[bank]);
         ++g_asdLightCount[bank].count;
         collection->lastGroup = collection->group = group;
         collection->unk18 = collection->unk14 = 0;

@@ -37,7 +37,7 @@ struct Filter4PolyView {
 extern "C" {
 s32 randBetween(s32 minimum, s32 maximum);
 u32 randRange(u32 limit);
-f32 FUN_001b63b0(f32 phase);
+f32 phaseCosine(f32 phase);
 f32 FUN_001a1ee0(f32 phase);
 }
 
@@ -61,7 +61,7 @@ extern "C" void _ZN9Obj42094c25refreshTextureCoordinatesEv(Filter4PolyView *self
         speed += self->parameters->minimumSpeed;
         f32 phase = (f32)randRange(65535) * (1.0f / 65536.0f) * 256.0f;
         f32 *velocity = self->particles[index].velocity;
-        f32 x = FUN_001b63b0(phase);
+        f32 x = phaseCosine(phase);
         f32 y = FUN_001a1ee0(phase);
         velocity[0] = x;
         velocity[1] = y;

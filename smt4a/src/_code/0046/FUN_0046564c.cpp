@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001753d4(...);
+int soundArchiveLoaderLoadItem(...);
 int __aeabi_vec_ctor_nocookie_nodtor(unsigned char [4], unsigned char *, int, int);
 int FUN_00461004(unsigned char *, unsigned int, unsigned int);
 int FUN_00461470(unsigned char [12]);
@@ -28,7 +28,7 @@ typedef struct {
 
 extern unsigned char LAB_001b1aa8; /* 0x1b1aa8 */
 
-/* Supplied declaration required: FUN_001753d4. */
+/* Supplied declaration required: soundArchiveLoaderLoadItem. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_00461004. */
 /* Supplied declaration required: FUN_00461470. */
@@ -64,7 +64,7 @@ void FUN_0046564c(int param_1)
   nw_snd_internal_PlayerHeapDataManager_Initialize(temp_v5,*(unsigned int *)(param_1 + 0x1c));
   if ((*(int *)(param_1 + 0x2c) == 0) && (temp_v0 = *(int *)(param_1 + 0x28), temp_v0 != -1)) {
     puVar1 = temp_v6;
-    FUN_001753d4(puVar1,temp_v0,*(unsigned int *)(param_1 + 0x78),1,0);
+    soundArchiveLoaderLoadItem(puVar1,temp_v0,*(unsigned int *)(param_1 + 0x78),1,0);
     if (puVar1 == (unsigned char *)0x0) {
       *(unsigned char *)(*(int *)(param_1 + 0x78) + 0x18) = 2;
       *(unsigned char *)(param_1 + 0x7c) = 0;
@@ -87,7 +87,7 @@ void FUN_0046564c(int param_1)
       if (temp_v3 != -1) {
         temp_v0 = *(int *)(param_1 + 0x78);
         puVar1 = temp_v6;
-        FUN_001753d4(puVar1,temp_v3,temp_v0,4,0);
+        soundArchiveLoaderLoadItem(puVar1,temp_v3,temp_v0,4,0);
         if (puVar1 != (unsigned char *)0x0) {
           puVar1 = temp_v6;
           FUN_00508a6c(puVar1,temp_v3);

@@ -15,7 +15,7 @@ struct PartyPanelFusionResult {
 extern "C" {
 
 u8 FUN_004da344(UniteWorkA *work, u32 first, u32 second, s32 special, PartyPanelFusionResult *output);
-u32 FUN_002a4b28(u32 index);
+u32 compendiumEntryIsRegistered(u32 index);
 void partyWidgetSetTransitionPending(PartyPanelWidget *widget, u8 value);
 void partyWidgetSetTransitionKind(PartyPanelWidget *widget, u8 value);
 void __aeabi_memset4(void *destination, u32 size, s32 value);
@@ -68,7 +68,7 @@ void FUN_002ade88(void)
                 if (gameGetSlotRecord(slots->reserve[i])->id == panel->fusionParentIds[0]) {
                     panel->fusionFlags[i] |= 0x40;
                 }
-            } else if (FUN_002a4b28(out.resultId) == 0) {
+            } else if (compendiumEntryIsRegistered(out.resultId) == 0) {
                 panel->fusionFlags[i] |= 0x80;
             }
             panel->fusionResultIds[i] = out.resultId;
@@ -108,7 +108,7 @@ void FUN_002ade88(void)
                         if (panel->fusionParentIds[0] == record->id) {
                             panel->fusionFlags[3 + i] |= 0x40;
                         }
-                    } else if (FUN_002a4b28(out.resultId) == 0) {
+                    } else if (compendiumEntryIsRegistered(out.resultId) == 0) {
                         panel->fusionFlags[3 + i] |= 0x80;
                     }
                     panel->fusionResultIds[3 + i] = out.resultId;

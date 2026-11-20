@@ -3,8 +3,8 @@
 
 extern "C" {
 
-void FUN_002f0420(s32 value);
-void FUN_0021af2c(void);
+void statusScreenRefreshForSelection(s32 value);
+void gameTransitionStartStep(void);
 
 /* Opens (open != 0) or closes the status display unless state 3/4 is active, then reapplies its tab. */
 void statusPanelSetOpen(s32 open)
@@ -30,13 +30,13 @@ void statusPanelSetOpen(s32 open)
 
         if (tab == 9 || (tab == 10 || tab == 11) || (tab == 12 || tab == 8)) {
             data->unk1378 = 1;
-            FUN_0021af2c();
+            gameTransitionStartStep();
         }
     }
     if (data->unk2018 == 5 || data->unk2018 == 6 || (data->unk2018 == 7 || data->unk2018 == 12)) {
-        FUN_002f0420(0);
+        statusScreenRefreshForSelection(0);
     } else {
-        FUN_002f0420((s8)data->unk2013);
+        statusScreenRefreshForSelection((s8)data->unk2013);
     }
 }
 

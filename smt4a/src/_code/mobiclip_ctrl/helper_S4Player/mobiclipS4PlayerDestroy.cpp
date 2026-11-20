@@ -86,7 +86,7 @@ extern MovieThreadStack DAT_00588100;
 
 void nn_os_LightEvent_Signal(void *event);
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
-void FUN_001469a8(AddressSpaceRegion *region);
+void addressSpaceRegionFree(AddressSpaceRegion *region);
 void asdOperatorDelete(void *block);
 void asdMemFree(void *block);
 void FUN_00424b54(MoviePlayer *player);
@@ -95,7 +95,7 @@ void deblockerHandleRelease(void *deblocker);
 
 inline StackRegion::~StackRegion()
 {
-    FUN_001469a8(this);
+    addressSpaceRegionFree(this);
 }
 
 inline void StackRegion::operator delete(void *block)
@@ -117,7 +117,7 @@ extern "C" void mobiclipS4PlayerDestroy(MoviePlayer *player)
         player->thread.joined = 1;
         player->thread.finalize();
         player->thread.NnOsHandle::~NnOsHandle();
-        FUN_001469a8(DAT_00588100.region);
+        addressSpaceRegionFree(DAT_00588100.region);
         delete DAT_00588100.region;
         DAT_00588100.region = NULL;
         asdMemFree(DAT_00588100.memory);

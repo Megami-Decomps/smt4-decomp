@@ -7,7 +7,7 @@ extern "C" {
 
 int collisionTestProjectedSpherePlanes(...);
 int FUN_00314bbc(void);
-int FUN_00319f64(...);
+int mapCollisionDisableByTag(...);
 int flagRestorationConsumeByKey(int);
 int FUN_00328150(...);
 int gameFlagSetIndexedBit(...);
@@ -68,7 +68,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: collisionTestProjectedSpherePlanes. */
 /* Supplied declaration required: FUN_00314bbc. */
-/* Supplied declaration required: FUN_00319f64. */
+/* Supplied declaration required: mapCollisionDisableByTag. */
 /* Supplied declaration required: flagRestorationConsumeByKey. */
 /* Supplied declaration required: FUN_00328150. */
 /* Supplied declaration required: gameFlagSetIndexedBit. */
@@ -134,7 +134,7 @@ unsigned int FUN_002e364c(float *param_1)
                                                  0x1c);
                               if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                                 flagRestorationConsumeByKey((int)*(short *)(temp_v3 + 6));
-                                FUN_00319f64((int)*(short *)(temp_v3 + 6));
+                                mapCollisionDisableByTag((int)*(short *)(temp_v3 + 6));
                                 DAT_005f1880 = *(unsigned short *)(temp_v3 + 10);
                                 temp_v5 = temp_v5 | 0x2000;
                               }
@@ -152,7 +152,7 @@ unsigned int FUN_002e364c(float *param_1)
                                                0x1c);
                             if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                               flagRestorationConsumeByKey((int)*(short *)(temp_v3 + 6));
-                              FUN_00319f64((int)*(short *)(temp_v3 + 6));
+                              mapCollisionDisableByTag((int)*(short *)(temp_v3 + 6));
                               DAT_005f187e = *(unsigned short *)(temp_v3 + 10);
                               temp_v5 = temp_v5 | 0x800;
                             }
@@ -287,7 +287,7 @@ unsigned int FUN_002e364c(float *param_1)
             in_fpscr = temp_v0 | ((unsigned int)(romwright_isnanf(temp_v11[0]) || romwright_isnanf((float)temp_v10)) << 0x1c);
             if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
               gameFlagSetIndexedBit((int)*(short *)(temp_v3 + 6),1);
-              FUN_00319f64((int)*(short *)(temp_v3 + 6));
+              mapCollisionDisableByTag((int)*(short *)(temp_v3 + 6));
               temp_v5 = temp_v5 | 4;
               FUN_00328150(g_gameState.mapId,(int)*(short *)(temp_v3 + 6));
               FUN_00314bbc();

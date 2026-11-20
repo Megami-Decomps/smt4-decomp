@@ -12,7 +12,7 @@ extern int buttonHelpCreate(void);
 extern int buttonHelpAcquireResources(void);
 extern int asdLoadFileAsyncSimple(const char *path, void **buffer, int flags);
 extern int gameGlobalsSetSelected(int);
-extern int FUN_0029e788(void);
+extern int campMenuSessionReset(void);
 extern int gameSetIconDisplayEnabled(int);
 extern int asdTMTexTablePrepareNodeImage(int, int);
 extern int *asdTMTexTableGetEntry(u32);
@@ -42,8 +42,8 @@ void bibleScreenOpen(BibleScreen *screen)
     statusAcquireSharedResources();
     gameGlobalsSetSelected(2);
     gameSetIconDisplayEnabled(1);
-    FUN_0029e788();
-    FUN_002a0cc8(1);
+    campMenuSessionReset();
+    gameGlobalsSetSubScreenActive(1);
     asdLoadFileAsyncSimple("bible/bible.bf", &screen->files.bibleBf, 0);
     asdLoadFileAsyncSimple("bible/bible.mbm", &screen->files.bibleMbm, 0);
 }

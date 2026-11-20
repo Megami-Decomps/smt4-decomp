@@ -29,7 +29,7 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned char LAB_0013e318; /* 0x13e318 */
-extern unsigned int DAT_005c4c20; /* 0x5c4c20 */
+extern unsigned int g_asdSoundListenerGuard; /* 0x5c4c20 */
 extern unsigned char g_asdSoundSystem; /* 0x63e1e8 */
 extern unsigned char DAT_0063e324; /* 0x63e324 */
 extern unsigned char DAT_0063e37c; /* 0x63e37c */
@@ -39,7 +39,7 @@ extern unsigned int DAT_0063e6bc; /* 0x63e6bc */
 extern unsigned int DAT_0063e6c0; /* 0x63e6c0 */
 extern unsigned int DAT_0063e6c4; /* 0x63e6c4 */
 extern unsigned char DAT_0063e6cc; /* 0x63e6cc */
-extern unsigned char DAT_0063ea3c; /* 0x63ea3c */
+extern unsigned char g_nwSound3DManager; /* 0x63ea3c */
 extern unsigned char DAT_0063ea48; /* 0x63ea48 */
 extern unsigned char DAT_0063ea4c; /* 0x63ea4c */
 extern unsigned int DAT_0063ea58; /* 0x63ea58 */
@@ -148,14 +148,14 @@ unsigned int FUN_0013df74(unsigned int param_1,int param_2,unsigned char *param_
   DAT_0063e6c4 = temp_v1;
   nw_snd_SoundArchivePlayer_Initialize(&DAT_0063e37c,&g_asdSoundSystem,&DAT_0063e494,DAT_0063e6c0);
   if (param_2 != 0) {
-    puVar4 = &DAT_0063ea3c;
+    puVar4 = &g_nwSound3DManager;
     DAT_0063f4c4 = '\x01';
-    nw_snd_Sound3DManager_GetRequiredMemSize(&DAT_0063ea3c,&g_asdSoundSystem);
+    nw_snd_Sound3DManager_GetRequiredMemSize(&g_nwSound3DManager,&g_asdSoundSystem);
     temp_v1 = 0x10000;
     temp_v5 = (unsigned char *)0x1;
     asdMemoryAlloc(0x10000,0x100,0,puVar4);
     DAT_0063f4c0 = temp_v1;
-    FUN_0015e1ec(&DAT_0063ea3c,&g_asdSoundSystem,temp_v1,puVar4);
+    FUN_0015e1ec(&g_nwSound3DManager,&g_asdSoundSystem,temp_v1,puVar4);
     temp_v1 = 0;
     DAT_0063ea58 = 0x20;
     DAT_0063ea60 = 0x40b55555;
@@ -180,9 +180,9 @@ unsigned int FUN_0013df74(unsigned int param_1,int param_2,unsigned char *param_
     temp_v3 = 0;
     DAT_0063f4bc = 0;
     do {
-      holderStartOnce(temp_v3 * 0x88 + 0x63ea78,&DAT_0063e37c,&DAT_0063ea3c);
+      holderStartOnce(temp_v3 * 0x88 + 0x63ea78,&DAT_0063e37c,&g_nwSound3DManager);
       if ((DAT_0063f4c4 != '\0') && (temp_v3 < 0x10)) {
-        if (((DAT_005c4c20 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c4c20), temp_v0 != 0)) {
+        if (((g_asdSoundListenerGuard & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&g_asdSoundListenerGuard), temp_v0 != 0)) {
           g_asdSoundListener = (unsigned int)temp_v4;
           DAT_0064c018 = g_asdSoundListener;
           DAT_0064c01c = g_asdSoundListener;

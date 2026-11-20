@@ -15,6 +15,11 @@ typedef struct GauntletSprite {
     u8 unk3C[0x50];
 } GauntletSprite;
 
+/* The menu's sort preference byte (gameDataGetSortPreferences(), smt4a saveGetUserSettingsBlock()). */
+enum {
+    GAUNTLET_APP_SORT_PREFERENCE = 13
+};
+
 typedef struct GauntletAppMenuWork {
     /* 0x000 */ u32 task;        /* the menu's task handle */
     union {

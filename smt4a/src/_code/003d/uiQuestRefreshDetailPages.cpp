@@ -71,7 +71,7 @@ extern "C" void uiQuestRefreshDetailPages(s32 id)
     }
     if (flags->hasSpecialPage != 0) {
         for (s32 page = 0; page < quest->listState.count; ++page) {
-            if (FUN_002f7730(page, id) == 3) {
+            if (questGetDisplayState(page, id) == 3) {
                 quest->listState.selection = page;
                 break;
             }

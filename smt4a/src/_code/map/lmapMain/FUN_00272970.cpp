@@ -11,7 +11,7 @@ extern "C" {
 extern Obj557c48 *g_handleRegistry;
 
 void *asdMemoryAllocTracked(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
-void FUN_002c23cc(s32 value);
+void frameTexConfigureCaptureTextures(s32 value);
 void controllerPoolReset(void *object);
 void FUN_002442ac(void);
 u32 taskCreateDraw(const char *name, s32 priority, u32 first, u32 second,
@@ -27,7 +27,7 @@ void FUN_00272970(void)
     LmapMainStateA *state = static_cast<LmapMainStateA *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(LmapMainStateA), 1));
     g_lmapMainState = state;
     MapSaveBlockA *gameBlock = gameFlagsGetBlock();
-    FUN_002c23cc(1);
+    frameTexConfigureCaptureTextures(1);
     state->unk009[0] = 0;
     state->unk009[1] = 0;
     state->external = 0;

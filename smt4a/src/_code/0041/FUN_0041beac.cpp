@@ -23,7 +23,7 @@ struct PanelState {
 
 extern "C" {
 
-void FUN_002f0384(u32 value);
+void statusCameraRestore(u32 value);
 void FUN_004087d8(void *block, u32 value);
 void uiDrawScreenDimmer(void *block, u32 value);
 
@@ -32,7 +32,7 @@ static __inline void refreshSelection(PanelState *self)
 {
     if (self->enabled[self->selected] == 0) {
         FUN_0023b45c(0);
-        FUN_002f0384(0);
+        statusCameraRestore(0);
         self->unk68 = 0;
         FUN_004087d8(self->sub624, (self->unk13 != 0 || self->selected < 1) ? 1 : 0);
     }

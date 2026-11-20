@@ -7,7 +7,7 @@
 extern "C" {
 extern u32 g_btlScriptUnit;
 s32 scrGetArg(u32 index);
-void FUN_004fb798(s32, void *, s32, u32, s32, s32, s32, s32, u32, s32, s32, s32, s32, s32, s32);
+void btlRecoverHpMpByPercent(s32, void *, s32, u32, s32, s32, s32, s32, u32, s32, s32, s32, s32, s32, s32);
 void btlQueueActionMessage(s32, void *, u32, s32, s32, s32, s32);
 
 // Queue HP/MP recovery from script percentages, respecting the one-point status limit.
@@ -34,7 +34,7 @@ u32 btlScriptRecoverHpMpPercent()
     } else if (mp == 0) {
         mp = -1;
     }
-    FUN_004fb798(0, unit, 0, btlGetMainState()->unk1ED4, 0, hp, mp, -1,
+    btlRecoverHpMpByPercent(0, unit, 0, btlGetMainState()->unk1ED4, 0, hp, mp, -1,
                  effectFlags, 0, 0, 9, 0, 0, 1);
     btlQueueActionMessage(0, unit, 0x1000263, 0, 0, 0, 0);
     return 1;

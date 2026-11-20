@@ -11,7 +11,7 @@ struct TableEntryView {
 };
 
 extern "C" {
-extern const TableEntryView DAT_0043988c[3];
+extern const TableEntryView g_jyoucyuRowTable[3];
 s32 btlQueueKeyedScalarReflectAction(u32 index, u32 argument, u32 entryValue, u32 flag,
                  u32 unkStack0, u32 unkStack4, u32 unkStack8);
 
@@ -19,7 +19,7 @@ static __inline const TableEntryView* findFallbackEntry(u32 id)
 {
     s32 index = 0;
     while (index < 3) {
-        const TableEntryView* entry = &DAT_0043988c[index];
+        const TableEntryView* entry = &g_jyoucyuRowTable[index];
         if (entry->id == id) {
             return entry;
         }

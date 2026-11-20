@@ -35,7 +35,7 @@ ReflectLookup *btlFindEntryBlockByMemberId(ReflectBattle *battle, s32 id);
 s32 pairedEntryTableContains(ReflectBattle *battle, u16 key);
 void FUN_004cae0c(void *context, void *state, s32 pending, u32 target);
 void btlReflectQueueKind44(s32 position, u32 actor, ReflectEntry *entry, s32 alpha, s32 size, s32 arg);
-void FUN_004fdcd8(s32 position, u32 actor, s32 a, s32 id, s32 b, s32 c, s32 d, s32 e);
+void btlQueueMessageTableReflectAction(s32 position, u32 actor, s32 a, s32 id, s32 b, s32 c, s32 d, s32 e);
 void reflectActionSetScalarPayload(s32 position, u32 actor, u32 kind, s32 id, s32 id2, s32 arg);
 
 /* Places a reflect effect for each eligible combatant waiting for one: collects and sorts the
@@ -89,7 +89,7 @@ void FUN_003e2840(u32 actor, ReflectBattle *battle, s32 mode)
 
         FUN_004cae0c(battle, entry, 0, 0);
         btlReflectQueueKind44(x + yOffset + position, actor, entry, 255, size, 0);
-        FUN_004fdcd8(position, actor, 0, entry->id, 7, 0, 14, 0);
+        btlQueueMessageTableReflectAction(position, actor, 0, entry->id, 7, 0, 14, 0);
         if (mode != 4 || shown < 3) {
             reflectActionSetScalarPayload(position, actor, 0x1000218, entry->id, entry->id, 14);
         }

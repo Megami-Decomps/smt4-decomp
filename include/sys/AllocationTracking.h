@@ -54,6 +54,12 @@ typedef char AllocationUsageCursorOffsetCheck[offsetof(AllocationUsage, cursor) 
     offsetof(AllocationUsage, debugFlags) == 0xc && offsetof(AllocationUsage, limit) == 0x24 &&
     offsetof(AllocationUsage, tag) == 0x38 ? 1 : -1];
 
+/* AllocationUsage.limit: the two memory limits the asdMemMap debug display switches between. */
+enum {
+    ASD_MEM_MAP_LIMIT_DEFAULT = 0x08800000,  /* set when the display starts */
+    ASD_MEM_MAP_LIMIT_EXTENDED = 0x14000000
+};
+
 typedef void (*DebugLabelCallback)(s32 index, u32 value);
 typedef void (*DebugDetailCallback)(s32 first, s32 second, s32 third, s32 fourth, u32 value);
 

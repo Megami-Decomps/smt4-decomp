@@ -5,7 +5,7 @@
 struct HelpMenu;
 extern "C" {
 
-void FUN_00214da4(void);
+void placeWindowStartClose(void);
 
 void FUN_0021b1a8(HelpMenu *menu);
 

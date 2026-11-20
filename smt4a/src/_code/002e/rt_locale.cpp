@@ -3,12 +3,12 @@
 
 extern "C" {
 
-extern u8 DAT_0064be6c[];
+extern u8 g_rtLocale[];
 
 /* Returns the address of the object at 0x64BE6C. */
 u8 *rt_locale(void)
 {
-    return DAT_0064be6c;
+    return g_rtLocale;
 }
 
 } /* extern "C" */

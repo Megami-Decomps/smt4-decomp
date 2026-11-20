@@ -6,10 +6,10 @@ struct Slot10 {
 };
 
 extern "C" {
-extern u32 DAT_00414b54[];
+extern u32 g_word8HolderTable[];
 
 void word8HolderSetFromTable(Slot10 *slot, s32 index)
 {
-    slot->value = DAT_00414b54[index];
+    slot->value = g_word8HolderTable[index];
 }
 }

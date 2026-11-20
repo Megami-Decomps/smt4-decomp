@@ -9,9 +9,9 @@ typedef struct CounterTables {
 } CounterTables;
 
 extern CounterTables *gameGetCounters(void);
-extern void FUN_0040a378(u32 amount);
+extern void questCenterCounterAddSaturating1A(u32 amount);
 extern void gameAddPointsClamped(u32 amount);
-extern void FUN_0040a3c8(u32 amount);
+extern void questCenterCounterAddSaturating14(u32 amount);
 extern void questCenterAddPoints(u32 amount);
 
 static __inline void counterAdd(u32 *counter, u32 amount)
@@ -30,11 +30,11 @@ void gameCounterAddSaturating(s32 index, u32 amount)
     counterAdd(&gameGetCounters()->total[index], amount);
     counterAdd(&gameGetCounters()->session[index], amount);
     if (index == 2) {
-        FUN_0040a3c8(amount);
+        questCenterCounterAddSaturating14(amount);
     } else if (index == 9) {
         questCenterAddPoints(amount);
     } else if (index == 0x13) {
-        FUN_0040a378(amount);
+        questCenterCounterAddSaturating1A(amount);
     } else if (index == 0x26) {
         gameAddPointsClamped(amount);
     }

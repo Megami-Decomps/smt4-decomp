@@ -8,7 +8,7 @@ extern "C" {
 void *asdCameraGetSavedRenderPairs();
 const Matrix44 *FUN_00343318(RenderCtx *owner);
 void memCopyWords(const void *source, void *destination, u32 bytes);
-void FUN_002630e0(Vec3f *out, s32 screen, void *projection, const Vec3f *position);
+void cameraProjectToScreen(Vec3f *out, s32 screen, void *projection, const Vec3f *position);
 f32 phaseCosInterpolate(f32 phase);
 f32 mathSinFixedAngle(f32 phase);
 void FUN_00263028(u32 firstColor, u32 secondColor, Point2 first, Point2 second,
@@ -25,7 +25,7 @@ void effectDrawProjectedCircleFan(const Vec3f *center, u32 color, const Matrix44
     matrix.values[7] = center->y;
     matrix.values[11] = center->z;
     Vec3f projectedCenter;
-    FUN_002630e0(&projectedCenter, 0, projection, center);
+    cameraProjectToScreen(&projectedCenter, 0, projection, center);
     Point2 vertices[11];
     u32 colors[11];
     f32 angle = 0.0f;
@@ -41,7 +41,7 @@ void effectDrawProjectedCircleFan(const Vec3f *center, u32 color, const Matrix44
             ((matrix.values[9] * height + matrix.values[10] * z) + (matrix.values[11] + matrix.values[8] * x)) * reciprocalW
         };
         Vec3f projected;
-        FUN_002630e0(&projected, 0, projection, &position);
+        cameraProjectToScreen(&projected, 0, projection, &position);
         Point2 point = { projected.x, projected.y };
         Point2 screenCenter = { projectedCenter.x, projectedCenter.y };
         vertices[index] = point;

@@ -41,7 +41,7 @@ extern "C" {
 void ifTouchRegionClearAll(void *window);
 void releaseEntriesA(Obj55ca08 *selection); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: argument of type "Obj55ca08 *" is incompatible with parameter of type "Obj *")
 void entryTableClear(void *list);
-s32 FUN_0029e9cc(u16 id);
+s32 itemIsCollectedWithRelated(u16 id);
 void FUN_0022e17c(CompendiumListEntryIV *entry, u16 id, s32 useCurrent);
 void recordAppendFloatEntry(CompendiumEntryListIV *list, const CompendiumListEntryIV *entry);
 void motionPlayForMode(void *screen, s32 mode, s32 flags);
@@ -65,7 +65,7 @@ void FUN_003a8aa0(Obj42247c *screen)
             const NkmEnemyRecord *base = nkmEnemyFindById(static_cast<u16>(id));
             if (devil != NULL && base != NULL && (base->flags & 1)) {
                 ++total;
-                if (FUN_0029e9cc(devil->id)) {
+                if (itemIsCollectedWithRelated(devil->id)) {
                     CompendiumListEntryIV entry;
                     FUN_0022e17c(&entry, devil->id, 0);
                     entry.registered = 1;

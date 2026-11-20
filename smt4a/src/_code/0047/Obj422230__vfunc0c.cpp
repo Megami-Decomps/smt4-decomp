@@ -11,11 +11,11 @@ struct ContentEntryRef {
 };
 
 extern "C" {
-void FUN_00161a10();
+void asdGxWaitForPreviousFrame();
 void table30GetEntryB(HalfwordBufferHandle *out, void *table, u32 index);
 u32 FUN_004ffd4c(HalfwordBufferHandle *handle);
 u32 halfwordBufferCopyRange(HalfwordBufferHandle *handle, u16 *destination, u32 requested, u32 offset);
-WindowStatusResult FUN_00428940(void *file, void *archive, const u16 *path, u32 count);
+WindowStatusResult recordQueryAndValidatePairWithKey(void *file, void *archive, const u16 *path, u32 count);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
 }
 
@@ -44,8 +44,8 @@ WindowStatusOperationResult Obj422230::vfunc0c(const void *)
         u32 count = FUN_004ffd4c(&ref.handle);
         u16 path[64];
         halfwordBufferCopyRange(&ref.handle, path, count, 0);
-        FUN_00161a10();
-        WindowStatusResult opened = FUN_00428940(manager->service, manager->contentArchive, path, count);
+        asdGxWaitForPreviousFrame();
+        WindowStatusResult opened = recordQueryAndValidatePairWithKey(manager->service, manager->contentArchive, path, count);
         reserved = 1;
         result = opened;
     }

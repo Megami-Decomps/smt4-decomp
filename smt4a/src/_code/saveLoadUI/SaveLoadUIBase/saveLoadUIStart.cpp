@@ -32,13 +32,13 @@ extern "C" {
 extern const char DAT_00533ec0[];
 extern const char DAT_00533f34[];
 void statusAcquireSharedResources(void);
-void FUN_002c85b0(s32 value);
+void gameGlobalsSetSceneState(s32 value);
 void gameGlobalsSetMenuOpenFlag(s32 value);
 void FUN_0033449c(s32 value);
 void FUN_0023b45c(s32 value);
-void FUN_002c8538(s32 value);
-void FUN_002f0384(s32 value);
-void FUN_00215bd0(void);
+void gameGlobalsSetOverlayActive(s32 value);
+void statusCameraRestore(s32 value);
+void unitStatusResetSpriteState(void);
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 void FUN_0045b538(void *object);
 void saveLoadProcessCreate(s32 slot, s32 mode);
@@ -47,14 +47,14 @@ void saveLoadProcessCreate(s32 slot, s32 mode);
 void saveLoadUIStart(SaveLoadScreen *screen)
 {
     statusAcquireSharedResources();
-    FUN_002c85b0(10);
+    gameGlobalsSetSceneState(10);
     gameGlobalsSetMenuOpenFlag(1);
     FUN_0033449c(0);
     FUN_0023b45c(1);
-    FUN_002c8538(1);
-    FUN_002f0384(0);
+    gameGlobalsSetOverlayActive(1);
+    statusCameraRestore(0);
     screen->suspended = 0;
-    FUN_00215bd0();
+    unitStatusResetSpriteState();
     if (screen->models == NULL) {
         MoriModelContent *list = static_cast<MoriModelContent *>(asdMemoryAllocTraced(32, DAT_00533ec0, 0x930));
         if (list != NULL) {

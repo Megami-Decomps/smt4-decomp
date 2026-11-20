@@ -17,7 +17,7 @@ extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int,
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: onlineJobSetStateTimed. */
 /* Supplied declaration required: onlineTimeGetNow. */
-extern int FUN_002eb5f4(void);
+extern int watcherGetActiveContext(void);
 extern int FUN_002ee5c4(int, int);
 /* Supplied declaration required: FUN_002ee64c. */
 extern int FUN_002efd4a(int, unsigned char *);
@@ -38,9 +38,9 @@ void FUN_00111df0(int param_1)
   unsigned char *puVar3;
   
   puVar3 = temp_v3;
-  temp_v0 = FUN_002eb5f4();
-  if ((temp_v0 != 0) && (temp_v0 = FUN_002eb5f4(), *(int *)(temp_v0 + 0xd0) != 0)) {
-    temp_v0 = FUN_002eb5f4();
+  temp_v0 = watcherGetActiveContext();
+  if ((temp_v0 != 0) && (temp_v0 = watcherGetActiveContext(), *(int *)(temp_v0 + 0xd0) != 0)) {
+    temp_v0 = watcherGetActiveContext();
     piVar5 = (int *)(param_1 + 0x1ac);
     temp_v2 = *(int *)(temp_v0 + 0xd0);
     temp_v0 = FUN_002ee5c4(temp_v2,*piVar5 + 8);

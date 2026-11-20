@@ -4,16 +4,16 @@
 
 extern "C" {
 extern AsdModelBank g_asdModelBanks[2][4];
-extern AsdModelBank DAT_004d9d88[2][4]; /* the same table from its second pair of banks */
+extern AsdModelBank g_asdModelSlotBanks[2][4]; /* the same table from its second pair of banks */
 
 // Find a model's name in a selected bank; invalid categories return -1, absent names return zero.
 s32 FUN_0025bb34(s32 category, const char *name, s32 bank)
 {
     s32 result = 0;
     AsdModelBank *banks0 = g_asdModelBanks[0];
-    AsdModelBank *banks1 = DAT_004d9d88[0];
+    AsdModelBank *banks1 = g_asdModelSlotBanks[0];
     AsdModelBank *banks2 = g_asdModelBanks[1];
-    AsdModelBank *banks3 = DAT_004d9d88[1];
+    AsdModelBank *banks3 = g_asdModelSlotBanks[1];
     AsdModelNameEntry *entries0 = banks0[bank].names.entries;
     AsdModelNameEntry *entries1 = banks1[bank].names.entries;
     AsdModelNameEntry *entries2 = banks2[bank].names.entries;

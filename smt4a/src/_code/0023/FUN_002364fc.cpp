@@ -79,7 +79,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     uVar5 = 5;
     break;
   case 5:
-    iVar4 = FUN_00229c9c();
+    iVar4 = lazyScriptTaskStep();
     if (iVar4 != 1) {
       return 0;
     }
@@ -187,7 +187,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     uVar5 = 8;
     break;
   case 0xc:
-    iVar4 = FUN_00229c9c();
+    iVar4 = lazyScriptTaskStep();
     if (iVar4 != 1) {
       return 0;
     }
@@ -291,7 +291,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     }
     break;
   case 0x12:
-    iVar4 = FUN_00229c9c();
+    iVar4 = lazyScriptTaskStep();
     if (iVar4 != 1) {
       return 0;
     }
@@ -301,9 +301,9 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
       uVar5 = 0x13;
       break;
     }
-    uVar5 = FUN_00371b10(99,0);
+    uVar5 = saveFormatSlotFilename(99,0);
     FUN_002e342c(auStack_108,uVar5);
-    FUN_0037aaec(0,auStack_108);
+    archivePathRequestSucceeded(0,auStack_108);
     FUN_0043ca60(0);
     *(unsigned int *)(iVar2 + 0xa0) = 0;
     FUN_00275f44(*(unsigned int *)(iVar2 + 0x2b0),0x13);
@@ -344,7 +344,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     }
     *(unsigned int *)(iVar2 + 0xa0) = uVar3;
     if (*(char *)(uVar3 + iVar2 + 0xa4) != '\0') {
-      FUN_00359974(0,uVar3 + 1,0xffffffff);
+      entryTableResetAndInit(0,uVar3 + 1,0xffffffff);
       FUN_00275f44(*(unsigned int *)(iVar2 + 0x2b0),0xc);
       uVar5 = 0x16;
     }
@@ -382,7 +382,7 @@ code_r0x00236f38:
     s4LoadDrawProfilePanel(0);
     return 0;
   case 0x18:
-    iVar4 = FUN_00229c9c();
+    iVar4 = lazyScriptTaskStep();
     if (iVar4 != 1) {
       return 0;
     }

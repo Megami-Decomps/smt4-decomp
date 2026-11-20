@@ -49,7 +49,7 @@ extern "C" {
 
 TextureFileRef *packageFindFileRefByName(void *package, u32 kind, void *name);
 void *asdTMTexTableGetNode(s32 table, void *name);
-void FUN_001ab8e0(SpriteDrawRequest *request, u32 a, s32 b, s32 c, u32 d);
+void requestParamsInitialize(SpriteDrawRequest *request, u32 a, s32 b, s32 c, u32 d);
 void FUN_0019b770(TextureSize *size, SpriteDrawRequest *request, void *node, u32 flags);
 
 void FUN_00471a04(void *package, u32 p2, u32 a, void *name, s32 x0, s32 y0, u32 scale, s32 x1, s32 y1, Extent extent)
@@ -61,7 +61,7 @@ void FUN_00471a04(void *package, u32 p2, u32 a, void *name, s32 x0, s32 y0, u32 
     }
     void *node = asdTMTexTableGetNode(15, name);
     SpriteDrawRequest request;
-    FUN_001ab8e0(&request, a, x1, y1, scale);
+    requestParamsInitialize(&request, a, x1, y1, scale);
     TextureSize *size = &texture->next->next->next->info->size;
     request.flags |= 0x28000;
     request.left = size->width + (x1 - x0);

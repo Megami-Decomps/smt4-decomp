@@ -25,7 +25,7 @@ extern "C" {
 s32 uiQuestCalc(u32 job);
 s32 uiQuestDrawUpper(u32 job);
 s32 uiQuestDrawLower(u32 job);
-void FUN_00189c24(void);
+void uiQuestRebuildLists(void);
 u32 fileSlotLoad(u32 slot);
 u32 questReadRuntimeFlag(u32 questId, u32 selector);
 void gameFlagClearModeBits(s32 id);
@@ -105,7 +105,7 @@ extern "C" void uiQuestCreate(void)
     asdTMTexTableLoadSprites(41);
     asdTMTexTablePrepareNodeImage(41, 0);
     fileSlotLoad(52);
-    FUN_00189c24();
+    uiQuestRebuildLists();
 
     for (u16 id = 0; id < 400; ++id) {
         if (questReadRuntimeFlag(id, 2) && dataTable1bOr1cRecordHasFlag1(id) && (partyEntryGetBit5(id) || partyEntryGetBit6(id)))

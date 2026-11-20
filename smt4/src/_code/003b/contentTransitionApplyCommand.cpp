@@ -8,7 +8,7 @@ struct ContentTransitionCommand {
 };
 
 extern "C" {
-void FUN_0022b29c(ContentTransition *transition, s32 sourceMap, u32 destinationMap);
+void contentMenuRebuildGroup(ContentTransition *transition, s32 sourceMap, u32 destinationMap);
 void gameSynchronizeMapState(ContentTransition *transition);
 void __ARM_common_memcpy4_6(ShortJumpDestination *destination, const ShortJumpDestination *source);
 
@@ -60,7 +60,7 @@ void contentTransitionApplyCommand(ContentTransition *transition, const void *co
         flags = transition->flags | 0x2000000;
         break;
     case 8:
-        FUN_0022b29c(transition, (s16)transition->sourceMap, command->destination.map);
+        contentMenuRebuildGroup(transition, (s16)transition->sourceMap, command->destination.map);
         transition->step = contentTransitionStep(4, 0);
         return;
     case 9:

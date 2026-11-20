@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern u32 DAT_00464b54;
+extern u32 g_asdModelManagerStatic54;
 
-/* Returns the address of the model manager's DAT_00464b54 static. */
+/* Returns the address of the model manager's g_asdModelManagerStatic54 static. */
 u32 *asdModelGetStatic54(void)
 {
-    return &DAT_00464b54;
+    return &g_asdModelManagerStatic54;
 }
 
 } /* extern "C" */

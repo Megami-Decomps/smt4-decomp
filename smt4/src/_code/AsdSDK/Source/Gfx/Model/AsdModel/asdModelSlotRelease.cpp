@@ -18,7 +18,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char g_asdModelBanks; /* 0x4d9880 */
-extern unsigned char DAT_004d9d88; /* 0x4d9d88 */
+extern unsigned char g_asdModelSlotBanks; /* 0x4d9d88 */
 extern unsigned char g_asdModelIdLists; /* 0x4daca0 */
 extern unsigned char DAT_004dace0; /* 0x4dace0 */
 
@@ -124,22 +124,22 @@ void asdModelSlotRelease(int param_1)
       *(unsigned int *)(&g_asdModelBanks + temp_v4 + 0x264) = 0;
     }
     temp_v4 = temp_v1 * 0x4c + temp_v0 * 0x284;
-    puVar9 = *(unsigned int **)(&DAT_004d9d88 + temp_v4 + 0x44);
+    puVar9 = *(unsigned int **)(&g_asdModelSlotBanks + temp_v4 + 0x44);
     if (puVar9 != (unsigned int *)0x0) {
-      temp_v7[0] = (unsigned int *)(&DAT_004d9d88 + temp_v4 + 0x44);
+      temp_v7[0] = (unsigned int *)(&g_asdModelSlotBanks + temp_v4 + 0x44);
       (**(romwright_code **)*puVar9)(puVar9);
       (**(romwright_code **)(*(int *)puVar9[1] + 0xc))((int *)puVar9[1],puVar9);
       *temp_v7[0] = 0;
     }
-    if (*(int *)(&DAT_004d9d88 + temp_v4 + 0x4c) != 0) {
-      asdMemFree((void *)(*(int *)(&DAT_004d9d88 + temp_v4 + 0x4c)));
+    if (*(int *)(&g_asdModelSlotBanks + temp_v4 + 0x4c) != 0) {
+      asdMemFree((void *)(*(int *)(&g_asdModelSlotBanks + temp_v4 + 0x4c)));
     }
     temp_v4 = temp_v1 * 4 + temp_v0 * 0x284;
-    puVar9 = *(unsigned int **)(&DAT_004d9d88 + temp_v4 + 0x264);
+    puVar9 = *(unsigned int **)(&g_asdModelSlotBanks + temp_v4 + 0x264);
     if (puVar9 != (unsigned int *)0x0) {
       (**(romwright_code **)*puVar9)(puVar9);
       (**(romwright_code **)(*(int *)puVar9[1] + 0xc))((int *)puVar9[1],puVar9);
-      *(unsigned int *)(&DAT_004d9d88 + temp_v4 + 0x264) = 0;
+      *(unsigned int *)(&g_asdModelSlotBanks + temp_v4 + 0x264) = 0;
     }
     temp_v4 = temp_v5 + temp_v1 * 0x4c;
     puVar9 = *(unsigned int **)(temp_v4 + 0x44);

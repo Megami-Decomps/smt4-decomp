@@ -37,7 +37,7 @@ typedef char EffectRegistrationCommandLayoutCheck[sizeof(EffectRegistrationComma
 extern "C" {
 extern EntryPoolCountersA DAT_00580c90;
 extern EffectRegistrationCommand DAT_00602020[];
-extern FlagGatedEntry DAT_005f32a0[];
+extern FlagGatedEntry g_recordTable[];
 s32 FUN_00305760(EffectRegistrationAttachment *attachment);
 u32 FUN_00244c70(void *object, u32 first, u32 second, u32 third, f32 x, f32 y, f32 z, f32 rotation);
 
@@ -75,11 +75,11 @@ void FUN_0035363c(void *object, u32 id, u32 reference, u32 styleValue,
     command->attachment.reference = reference;
     s32 index = FUN_00305760(&command->attachment);
     u32 handle = FUN_00244c70(object, first, second, third, x, y, z, rotation);
-    FlagGatedEntry *entry = &DAT_005f32a0[index];
+    FlagGatedEntry *entry = &g_recordTable[index];
     EntryPoolRecordA *record = (EntryPoolRecordA *)entry;
     entry->creation.handle = handle;
     record->value16C = flagA;
-    ((EntryPoolRecordA *)&DAT_005f32a0[current])->value16D = flagB;
+    ((EntryPoolRecordA *)&g_recordTable[current])->value16D = flagB;
     entry->object = object;
     entry->creationState.id = id;
     entry->creationState.state = -1;

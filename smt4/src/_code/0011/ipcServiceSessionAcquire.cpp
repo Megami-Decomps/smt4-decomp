@@ -11,7 +11,7 @@ extern s32 DAT_00471b10;     /* 0x471b10 */
 extern u32 DAT_00472ad8[];    /* 0x472ad8 */
 
 u32 libc_strlen(const char *text);
-s32 asdModelForwardChecked(u32 *session, const char *name, u32 length, u32 flags);
+s32 srvGetServiceHandle(u32 *session, const char *name, u32 length, u32 flags); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Opens the "ndm:u" service session on the first reference; returns the failure result or 0. */
 nn::Result ipcServiceSessionAcquire(void)
@@ -19,8 +19,8 @@ nn::Result ipcServiceSessionAcquire(void)
     ScopedCriticalLock guard(g_moduleCriticalSection3);
 
     if (DAT_00471b10 == 0) {
-        FUN_002c1398();
-        nn::Result result = asdModelForwardChecked(DAT_00472ad8, g_ndmServiceName, libc_strlen(g_ndmServiceName), 0);
+        srvInitialize();
+        nn::Result result = srvGetServiceHandle(DAT_00472ad8, g_ndmServiceName, libc_strlen(g_ndmServiceName), 0);
         if (nnResultIsFailure(result)) {
             return result;
         }

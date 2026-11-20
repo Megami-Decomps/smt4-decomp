@@ -20,7 +20,7 @@ struct UniteCamera {
 extern "C" {
 extern UniteCamera *g_uniteCamera;
 f32 libm_sinf(f32 angle);
-void FUN_0014f0dc(UniteCamera *camera, UniteCameraTarget *target, const Vec3 *eye, const Vec3 *lookAt);
+void cameraMatrixCacheSetLookAt(UniteCamera *camera, UniteCameraTarget *target, const Vec3 *eye, const Vec3 *lookAt);
 void FUN_00280070(UniteCamera *camera, s32 mode, Vec3 up);
 
 /* Places the unite camera one unit from its target along the target's pitch and yaw and looks at
@@ -34,7 +34,7 @@ void FUN_002c8894(void)
         eye.x -= libm_sinf(camera->target->yaw);
         eye.y += libm_sinf(camera->target->pitch);
         eye.z -= libm_cosf(camera->target->yaw);
-        FUN_0014f0dc(camera, camera->target, &eye, &camera->target->lookAt);
+        cameraMatrixCacheSetLookAt(camera, camera->target, &eye, &camera->target->lookAt);
         FUN_00280070(camera, 0, camera->target->up);
     }
 }

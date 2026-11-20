@@ -6,7 +6,7 @@ extern "C" {
 
 int sharedRefRelease(int *);
 int FUN_002e78d0(unsigned int, int *, int);
-int FUN_002f3dde(int, unsigned int);
+int onlineInstanceCompleteMode3(int, unsigned int);
 int _ZNK18OnlineResultRecord7isValidEv(unsigned char [12]);
 
 typedef int romwright_code(...);
@@ -31,7 +31,7 @@ extern int _Znwj(unsigned int);
 extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002e78d0. */
 extern unsigned int _ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
-/* Supplied declaration required: FUN_002f3dde. */
+/* Supplied declaration required: onlineInstanceCompleteMode3. */
 /* Supplied declaration required: _ZNK18OnlineResultRecord7isValidEv. */
 extern int FUN_0030c8d6(int, int);
 
@@ -107,7 +107,7 @@ FUN_0012bb24(int param_1,int param_2,unsigned int param_3,unsigned int param_4,u
     else {
       temp_v5 = 0x80010001;
       temp_v1 = _ZN12OnlineResultC1ERKj((unsigned int *)&temp_v2,(unsigned int *)&temp_v5);
-      FUN_002f3dde(param_2,temp_v1);
+      onlineInstanceCompleteMode3(param_2,temp_v1);
       temp_v1 = 0;
     }
   }

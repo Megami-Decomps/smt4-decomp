@@ -36,10 +36,10 @@ struct AsdModelGroupLink {
 extern "C" {
 
 extern AsdSceneGroup *g_asdModelSlotArray1[];
-extern void *DAT_00464b7c[2];                  /* scene traverser per group */
+extern void *g_asdModelSceneRoots[2];                  /* scene traverser per group */
 extern void *g_asdModelTransformBuilder[2];    /* transform builder per group */
 
-u8 FUN_002abbe8(u8 *children, void *child);
+u8 asdModelSlotVectorRemove(u8 *children, void *child);
 void sceneTraverserVisit(void *traverser, void *builder);
 void asdMemFree(void *memory);
 
@@ -58,13 +58,13 @@ static __inline void asdModelGroupLinkSetGroup(AsdModelGroupLink *link, s32 grou
     if (group == 0 || group == 1) {
         nw_gfx_SceneNode_AttachChild(g_asdModelSlotArray1[group], link->node);
     } else if (group == -1) {
-        FUN_002abbe8(g_asdModelSlotArray1[previous]->children, link->node);
+        asdModelSlotVectorRemove(g_asdModelSlotArray1[previous]->children, link->node);
     }
     if (link->group == 0 || previous == 0) {
-        sceneTraverserVisit(DAT_00464b7c[0], g_asdModelTransformBuilder[0]);
+        sceneTraverserVisit(g_asdModelSceneRoots[0], g_asdModelTransformBuilder[0]);
     }
     if (link->group == 1 || previous == 1) {
-        sceneTraverserVisit(DAT_00464b7c[1], g_asdModelTransformBuilder[1]);
+        sceneTraverserVisit(g_asdModelSceneRoots[1], g_asdModelTransformBuilder[1]);
     }
 }
 

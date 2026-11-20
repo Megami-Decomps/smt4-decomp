@@ -6,7 +6,7 @@ extern "C" {
 
 int sharedRefRelease(...);
 int onlineSockAddrConstruct(unsigned char [4]);
-int FUN_002f2a22(int, int *);
+int ownerRunOperationLocked(int, int *);
 int FUN_002f2ed4(int *, int *[2], unsigned char [4]);
 int FUN_002f2f82(int *, int *);
 int FUN_002f2faa(...);
@@ -36,7 +36,7 @@ extern int _Znwj(unsigned int);
 /* Supplied declaration required: onlineSockAddrConstruct. */
 extern unsigned int onlineInstantiationContextGetCurrent(void);
 extern unsigned int FUN_002ece14(int, int *);
-/* Supplied declaration required: FUN_002f2a22. */
+/* Supplied declaration required: ownerRunOperationLocked. */
 /* Supplied declaration required: FUN_002f2ed4. */
 /* Supplied declaration required: FUN_002f2f82. */
 /* Supplied declaration required: FUN_002f2faa. */
@@ -102,7 +102,7 @@ void FUN_002f91dc(int param_1)
             FUN_002f9394(param_1,piVar4,temp_v3[0],piVar4 + 0x15);
           }
           if (*(int *)(temp_v8 + 0x10) != 0) {
-            FUN_002f2a22(*(int *)(temp_v8 + 0x10),temp_v3[0]);
+            ownerRunOperationLocked(*(int *)(temp_v8 + 0x10),temp_v3[0]);
           }
           else {
             sharedRefRelease(temp_v3[0]);

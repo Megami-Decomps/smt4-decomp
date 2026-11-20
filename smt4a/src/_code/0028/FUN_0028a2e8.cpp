@@ -33,7 +33,7 @@ s32 gamePackedFlagTest(u32 flagId);
 void gridNavigationConfigure(void *list, s32 count, s32 columns, s32 a, s32 b, s32 c);
 void scrollListSetSelectionTracked(void *list, s32 value);
 void ifTouchRegionRemove(void);
-s32 objectApplyIfUnblocked(void *list);
+s32 gridNavigationGetItemCount(void *list);
 s16 ifTouchRegionAddRequested(s32 category, s32 index);
 
 /* Rebuilds the unite menu's entry list from SearchTable.tbb (listing every record up to the first
@@ -82,7 +82,7 @@ void FUN_0028a2e8(s32 resetTouch)
         ifTouchRegionRemove();
         ifTouchRegionRemove();
         ifTouchRegionRemove();
-        for (i = 0; i < objectApplyIfUnblocked(list) && i < 8; i++) {
+        for (i = 0; i < gridNavigationGetItemCount(list) && i < 8; i++) {
             menu->touchIds[i] = ifTouchRegionAddRequested(0x1A, 0xA9 + i);
         }
         menu->prevTouchId = ifTouchRegionAddRequested(0x1A, 0x1F0);

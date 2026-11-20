@@ -1,12 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00101308` (_code @ 0x101308, 0x101c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "sys/ProcessResult.h"
 #include "romwright_types.h"
 
 extern "C" {
 
 int FUN_00103504(...);
 int appletReplySleepQueryAllow(...);
-int FUN_00103f90(...);
+int asdProcessPauseAll(...);
 int appletUnlockAndRestoreDisplay(...);
 int FUN_00106e60(...);
 int FUN_00106f70(...);
@@ -15,12 +16,11 @@ int FUN_002c55b4(...);
 int appletIsExitRequested(...);
 int sleepQueryAnswer(...);
 int FUN_002c560c(...);
-int FUN_002c5620(...);
+int gameDataSmallBlockFinalize(...);
 
 int faderStepAll(...);
 int asdProcessUpdate(...);
 int FUN_00103c9c(...);
-int FUN_00103d48(...);
 int randSetSeed(...);
 int asdPrimSwapBuffers(...);
 int FUN_0010402c(...);
@@ -29,7 +29,7 @@ int asdSoundShutdown(...);
 int FUN_001052d8(...);
 int FUN_00105394(...);
 int asdGxSubmitFrame(...);
-int FUN_00105970(...);
+int resourceRunDeferredDestroys(...);
 int asdGxResumeAndApplyPreset(...);
 int asdGxPresetsGetDepth(...);
 int asdGxSetChannelFlags(...);
@@ -39,7 +39,7 @@ int dataTable02Sub3GetRecord(...);
 int FUN_00107264(...);
 int FUN_00107598(...);
 int FUN_0010b5e8(...);
-int FUN_00123934(...);
+int asdGxWaitForPreviousFrame(...);
 int mobiclipCloseSlot(...);
 int asdProcessSetGroupEnabled(...);
 int clockGetTicksAsMicroseconds(...);
@@ -61,7 +61,7 @@ int titleSequenceInit(...);
 int FUN_00105948(...);
 int titleConfigResetDefaults(...);
 int FUN_00105cac(...);
-int FUN_00105e50(...);
+int asdGxSetFrameInterval(...);
 int soundInitializePersistentSlots(...);
 int soundSetupArchiveAndSlots(...);
 int FUN_00106650(...);
@@ -87,7 +87,7 @@ int appletCloseApplication(...);
 int FUN_00103cec(...);
 int FUN_00103fec(...);
 int FUN_0010421c(...);
-int mathInitDefaultUnitVector(...);
+int gfxInitDefaultDrawColor(...);
 int asdPrimInit(...);
 int FUN_001049ac(...);
 int asdTMTexTableLoadList(...);
@@ -169,12 +169,12 @@ extern int titleSubmitCommandAndUpdateMode(...); /* 0x102834 */
 extern int titleRunActiveCommand(...); /* 0x102884 */
 extern unsigned char LAB_00102d38; /* 0x102d38 */
 extern unsigned char LAB_00102d4c; /* 0x102d4c */
-extern int FUN_00103650(...); /* 0x103650 */
+extern int titleStopCommandRecording(...); /* 0x103650 */
 extern unsigned char LAB_001036c4; /* 0x1036c4 */
 extern unsigned char LAB_001036e0; /* 0x1036e0 */
 extern unsigned char LAB_00103bd4; /* 0x103bd4 */
 extern int renderCtxBeginPass(...); /* 0x103c1c */
-extern int FUN_00103d8c(...); /* 0x103d8c */
+extern int titleStartCommandRecording(...); /* 0x103d8c */
 extern unsigned char LAB_00103dd8; /* 0x103dd8 */
 extern unsigned char LAB_00103e18; /* 0x103e18 */
 extern unsigned char LAB_00103e34; /* 0x103e34 */
@@ -252,7 +252,7 @@ typedef char romwright_storage_uRam00446dd8_8_8_f8_width_check[(sizeof(((union r
 #endif
 extern union romwright_storage_uRam00446dd8_8_8 uRam00446dd8; /* 0x446dd8 */
 extern unsigned char g_mobiclipProcess; /* 0x44d048 */
-extern unsigned int DAT_0044e368; /* 0x44e368 */
+extern unsigned int g_appletCloseReason; /* 0x44e368 */
 extern int g_titleScene; /* 0x44ea00 */
 
 #ifndef ROMWRIGHT_ZEXT_4_8_DEFINED
@@ -292,13 +292,13 @@ extern unsigned int asdModelGetStatic3C(void);
 /* Supplied declaration required: appletReplySleepQueryAllow. */
 /* Supplied declaration required: FUN_00103cec. */
 extern unsigned long long FUN_00103d38(unsigned int);
-/* Supplied declaration required: FUN_00103d48. */
+/* Supplied declaration required: contentUnmount. */
 extern int gameDataHasNoFlags(void);
 /* Supplied declaration required: randSetSeed. */
 extern unsigned long long appletProcessSleepQuery(void);
 extern int FUN_00103ec8(void);
 /* Supplied declaration required: FUN_00103f74. */
-/* Supplied declaration required: FUN_00103f90. */
+/* Supplied declaration required: asdProcessPauseAll. */
 /* Supplied declaration required: FUN_00103fec. */
 /* Supplied declaration required: asdPrimSwapBuffers. */
 /* Supplied declaration required: FUN_0010402c. */
@@ -309,7 +309,7 @@ extern int appletGetBusyFlag(void);
 /* Supplied declaration required: FUN_0010421c. */
 /* Supplied declaration required: appletUnlockAndRestoreDisplay. */
 extern unsigned int asdModelGetStatic50(void);
-/* Supplied declaration required: mathInitDefaultUnitVector. */
+/* Supplied declaration required: gfxInitDefaultDrawColor. */
 /* Supplied declaration required: asdPrimInit. */
 /* Supplied declaration required: FUN_001043c8. */
 /* Supplied declaration required: FUN_001049ac. */
@@ -329,7 +329,7 @@ extern unsigned long long FUN_00105478(void);
 /* Supplied declaration required: FUN_001054bc. */
 /* Supplied declaration required: asdGxSubmitFrame. */
 /* Supplied declaration required: FUN_00105948. */
-/* Supplied declaration required: FUN_00105970. */
+/* Supplied declaration required: resourceRunDeferredDestroys. */
 /* Supplied declaration required: FUN_00105a10. */
 /* Supplied declaration required: FUN_00105b94. */
 /* Supplied declaration required: asdGxResumeAndApplyPreset. */
@@ -340,7 +340,7 @@ extern unsigned int asdModelGetStatic54(void);
 /* Supplied declaration required: asdGxPresetVectorSet. */
 /* Supplied declaration required: FUN_00105e28. */
 /* Supplied declaration required: asdGxPresetRequest. */
-/* Supplied declaration required: FUN_00105e50. */
+/* Supplied declaration required: asdGxSetFrameInterval. */
 /* Supplied declaration required: asdMemorySetUseAllocatorA. */
 /* Supplied declaration required: asdGxSetChannelFlags. */
 /* Supplied declaration required: soundInitializePersistentSlots. */
@@ -366,14 +366,14 @@ extern int FUN_00107538(unsigned int);
 /* Supplied declaration required: randomStateSeed. */
 /* Supplied declaration required: FUN_0010b5e8. */
 /* Supplied declaration required: initializeAndResetSubsystems. */
-/* Supplied declaration required: FUN_00123934. */
+/* Supplied declaration required: asdGxWaitForPreviousFrame. */
 /* Supplied declaration required: appletUnlockAndSleepIfShellClosed. */
-extern unsigned long long FUN_002c5434(unsigned int);
+extern unsigned long long sleepAllow(unsigned int);
 /* Supplied declaration required: FUN_002c55b4. */
 /* Supplied declaration required: appletIsExitRequested. */
 /* Supplied declaration required: sleepQueryAnswer. */
 /* Supplied declaration required: FUN_002c560c. */
-/* Supplied declaration required: FUN_002c5620. */
+/* Supplied declaration required: gameDataSmallBlockFinalize. */
 /* Supplied declaration required: mobiclipCloseSlot. */
 extern unsigned long long jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: asdProcessSetGroupEnabled. */
@@ -500,7 +500,7 @@ void FUN_00101308(void)
   temp_v2 = g_titleScene;
   temp_v3 = renderCtxPackPassFlags(5,1);
   *(unsigned int *)(temp_v2 + 0x1378) = temp_v3;
-  mathInitDefaultUnitVector();
+  gfxInitDefaultDrawColor();
   asdGxPresetVectorSet(0);
   asdGxPresetVectorSet(1);
   __aeabi_vec_ctor_nocookie_nodtor(&temp_v26,&LAB_001071c8,0x3c,2);
@@ -589,7 +589,7 @@ void FUN_00101308(void)
   asdTMTexTablePrepareNodeImage(0x2c,0);
   gameDataAllocBlocks();
   FUN_00104e44(0);
-  FUN_00105e50(1);
+  asdGxSetFrameInterval(1);
   soundSetupArchiveAndSlots();
   soundInitializePersistentSlots();
   FUN_00106650();
@@ -602,11 +602,11 @@ void FUN_00101308(void)
   temp_v27 = 0;
   temp_v28 = 0;
   asdProcessCreateSimple(&LAB_00101804,0x65,0);
-  temp_v26 = FUN_00103d8c;
+  temp_v26 = titleStartCommandRecording;
   temp_v27 = 0;
   temp_v28 = 0;
   asdProcessCreateSimple(&LAB_00101818,0x66,0);
-  temp_v26 = FUN_00103650;
+  temp_v26 = titleStopCommandRecording;
   temp_v27 = 0;
   temp_v28 = 0;
   asdProcessCreateSimple(&LAB_00101830,0x69,0);
@@ -739,7 +739,7 @@ LAB_00101b80:
         iRam00446dcc = temp_v2;
         faderStepAll();
         if (DAT_00446db4 != '\0') {
-          FUN_00105970();
+          resourceRunDeferredDestroys();
           if (DAT_00446db4 != '\0') {
             if (iRam00446dc0 >= 0x1e) {
               iRam00446dc0 = iRam00446dc0 - 0x1e;
@@ -822,14 +822,14 @@ LAB_00101b80:
         if (DAT_00446db3 != 0) {
           temp_v2 = gameDataHasNoFlags();
           if (temp_v2 != 0) {
-            FUN_00123934();
+            asdGxWaitForPreviousFrame();
             if (g_mobiclipProcess != 0) {
               mobiclipCloseSlot(3);
             }
             FUN_00107598();
             temp_v2 = FUN_001041c8();
             if (temp_v2 != 0) {
-              FUN_00103d48();
+              contentUnmount();
             }
             temp_v2 = appletGetBusyFlag();
             if (temp_v2 != 0) {
@@ -851,7 +851,7 @@ LAB_00101b80:
             mobiclipCloseSlot(2);
           }
           appletReplySleepQueryAllow();
-          FUN_002c5620();
+          gameDataSmallBlockFinalize();
           appletUnlockAndRestoreDisplay();
           temp_v3 = temp_v7;
           if (g_mobiclipProcess != 0) {
@@ -874,7 +874,7 @@ LAB_00101b80:
             if (g_mobiclipProcess != 0) {
               mobiclipCloseSlot(0);
             }
-            FUN_00123934();
+            asdGxWaitForPreviousFrame();
             FUN_00106e60();
             temp_v24 = appletIsExitRequested();
             temp_v3 = (unsigned int)((unsigned long long)temp_v24 >> 0x20);
@@ -884,7 +884,7 @@ LAB_00101b80:
               if ((int)temp_v24 != 0) {
                 if (g_mobiclipProcess != 0) {
                   mobiclipCloseSlot(3);
-                  nn_applet_CTR_detail_CloseApplication((unsigned char *)0x0,0,DAT_0044e368);
+                  nn_applet_CTR_detail_CloseApplication((unsigned char *)0x0,0,g_appletCloseReason);
                   temp_v3 = temp_v10;
                 }
                 DAT_00446db3 = 1;
@@ -893,7 +893,7 @@ LAB_00101b80:
             else {
               if (g_mobiclipProcess != 0) {
                 mobiclipCloseSlot(3);
-                nn_applet_CTR_detail_CloseApplication((unsigned char *)0x0,0,DAT_0044e368);
+                nn_applet_CTR_detail_CloseApplication((unsigned char *)0x0,0,g_appletCloseReason);
                 temp_v3 = temp_v10;
               }
               DAT_00446db3 = 1;
@@ -903,7 +903,7 @@ LAB_00101b80:
             if (g_mobiclipProcess != 0) {
               FUN_002c560c(0);
             }
-            FUN_002c5620();
+            gameDataSmallBlockFinalize();
             temp_v3 = temp_v11;
           }
         }
@@ -923,16 +923,16 @@ LAB_00101b80:
   if (g_mobiclipProcess != 0) {
     mobiclipCloseSlot(1);
   }
-  FUN_00123934();
+  asdGxWaitForPreviousFrame();
   FUN_00106f70();
-  FUN_00103f90();
+  asdProcessPauseAll();
   temp_v2 = appletIsExitRequested();
   if (temp_v2 == 0) {
     temp_v2 = FUN_002c55b4();
     if (temp_v2 != 0) {
       if (g_mobiclipProcess != 0) {
         mobiclipCloseSlot(3);
-        nn_applet_CTR_detail_CloseApplication((unsigned char *)0x0,0,DAT_0044e368);
+        nn_applet_CTR_detail_CloseApplication((unsigned char *)0x0,0,g_appletCloseReason);
       }
       DAT_00446db3 = 1;
     }
@@ -940,14 +940,14 @@ LAB_00101b80:
   else {
     if (g_mobiclipProcess != 0) {
       mobiclipCloseSlot(3);
-      nn_applet_CTR_detail_CloseApplication((unsigned char *)0x0,0,DAT_0044e368);
+      nn_applet_CTR_detail_CloseApplication((unsigned char *)0x0,0,g_appletCloseReason);
     }
     DAT_00446db3 = 1;
   }
   if ((DAT_00446db3 == 0) && (g_mobiclipProcess != 0)) {
     FUN_002c560c(1);
   }
-  temp_v23 = FUN_002c5434(1);
+  temp_v23 = sleepAllow(1);
   goto LAB_00101b80;
 }
 

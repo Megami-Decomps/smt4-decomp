@@ -4,22 +4,22 @@
 
 extern "C" {
 
-int FUN_0016e2a8(void);
+int nn_pl_CTR_CreateGameCoinSaveFile(void);
 int FUN_0016e7c0(void);
 int archivePathDeviceOpen(unsigned int, unsigned int, int);
-int FUN_00188444(void);
-int FUN_001886bc(void);
+int archiveDeviceSendPathRequest(void);
+int fileSystemRequireReady(void);
 int svcSleepThread(int, int);
 int SBORROW4(...);
 
 extern unsigned char DAT_005c0adc; /* 0x5c0adc */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_0016e2a8. */
+/* Supplied declaration required: nn_pl_CTR_CreateGameCoinSaveFile. */
 /* Supplied declaration required: FUN_0016e7c0. */
 /* Supplied declaration required: archivePathDeviceOpen. */
-/* Supplied declaration required: FUN_00188444. */
-/* Supplied declaration required: FUN_001886bc. */
+/* Supplied declaration required: archiveDeviceSendPathRequest. */
+/* Supplied declaration required: fileSystemRequireReady. */
 /* Supplied declaration required: svcSleepThread. */
 
 
@@ -54,17 +54,17 @@ unsigned int FUN_00188e44(int param_1)
         svcSleepThread(10000000,0);
       }
       if (((temp_v0 != 0x11) || ((temp_v2 & 0x3ff) < 100)) || ((temp_v2 & 0x3ff) >= 0xb4)) break;
-      FUN_0016e2a8();
+      nn_pl_CTR_CreateGameCoinSaveFile();
       temp_v4 = 1;
     }
     if (((temp_v0 == 0x11) && ((temp_v2 & 0x3ff) >= 0x168)) && ((temp_v2 & 0x3ff) < 0x186)) {
-      FUN_001886bc();
-      FUN_00188444();
+      fileSystemRequireReady();
+      archiveDeviceSendPathRequest();
       if (((((temp_v3 & 0x3fc00) != 0x4400) || ((temp_v3 & 0x3ff) < 100)) || ((temp_v3 & 0x3ff) >= 0xb4))
          && ((int)temp_v3 < 0)) {
         FUN_0016e7c0();
       }
-      FUN_0016e2a8();
+      nn_pl_CTR_CreateGameCoinSaveFile();
       temp_v4 = 1;
       continue;
     }
@@ -77,13 +77,13 @@ unsigned int FUN_00188e44(int param_1)
         temp_v1 = temp_v0 - 400;
       }
       if (temp_v1 < 0 != temp_v5) {
-        FUN_001886bc();
-        FUN_00188444();
+        fileSystemRequireReady();
+        archiveDeviceSendPathRequest();
         if (((((temp_v3 & 0x3fc00) != 0x4400) || ((temp_v3 & 0x3ff) < 100)) || ((temp_v3 & 0x3ff) >= 0xb4))
            && ((int)temp_v3 < 0)) {
           FUN_0016e7c0();
         }
-        FUN_0016e2a8();
+        nn_pl_CTR_CreateGameCoinSaveFile();
         temp_v4 = 1;
         continue;
       }

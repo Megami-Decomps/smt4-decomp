@@ -7,10 +7,10 @@ void FUN_002df5f8(void);
 
 void FUN_002d28a4(s32 map, s32 area)
 {
-    DAT_004474f0.view->presetEnabled = 0;
+    g_lmapViewHolder.view->presetEnabled = 0;
     FUN_002df5f8();
     if (map == 10 && area == 8) {
-        LmapView *work = DAT_004474f0.view;
+        LmapView *work = g_lmapViewHolder.view;
         work->targetHeight[3] = 100.0f;
         work->eyeHeight[3] = 200.0f;
         work->lateralDistance[3] = 0.0f;
@@ -43,7 +43,7 @@ void FUN_002d28a4(s32 map, s32 area)
     default:
         return;
     }
-    LmapView *work = DAT_004474f0.view;
+    LmapView *work = g_lmapViewHolder.view;
     work->presetEnabled = 1;
     for (s32 i = 0; i < 3; ++i) {
         work->targetHeight[i + 2] = height;

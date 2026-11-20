@@ -11,7 +11,7 @@ int gxSubmitDrawZeroExtraParams(...);
 int renderCtxResetColorScale(...);
 int renderCtxSelectTexture(...);
 int skinObjectUpdateMatrices(...);
-int FUN_00180310(...);
+int statRowDrawValueImpl(...);
 int drawSetColorFromRGBA8(...);
 int fadeObjectResetIfActive(...);
 int FUN_002ace4c(...);
@@ -61,7 +61,7 @@ extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
-/* Supplied declaration required: FUN_00180310. */
+/* Supplied declaration required: statRowDrawValueImpl. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 extern int gameGetSlotTable(void);
@@ -597,11 +597,11 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
       temp_v11 = gameGetSlotTable();
       sprintf((char *)temp_v22,(const char *)&LAB_002e87dc,*(unsigned char *)(temp_v11 + 0x1ca3));
       temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x11,0x2a));
-      FUN_00180310(2,*(short *)(temp_v11 + 8) + temp_v7,*(short *)(temp_v11 + 10) + temp_v8,0,2,0x9c,
+      statRowDrawValueImpl(2,*(short *)(temp_v11 + 8) + temp_v7,*(short *)(temp_v11 + 10) + temp_v8,0,2,0x9c,
                    temp_v22);
       sprintf((char *)temp_v22,(const char *)&LAB_002e87dc,*(unsigned int *)(temp_v2 + 0x28));
       temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x11,0x2c));
-      FUN_00180310(2,*(short *)(temp_v11 + 8) + temp_v7,*(short *)(temp_v11 + 10) + temp_v8,1,2,0x9c,
+      statRowDrawValueImpl(2,*(short *)(temp_v11 + 8) + temp_v7,*(short *)(temp_v11 + 10) + temp_v8,1,2,0x9c,
                    temp_v22);
       gxResetColorQuadToWhite();
       if (*(int *)(temp_v2 + 0x30) >= 2) {

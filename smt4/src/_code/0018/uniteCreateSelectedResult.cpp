@@ -35,7 +35,7 @@ void unitRecalculateEffectiveStats(StatBlock* member);
 u32 FUN_0029c0c0(void* context, StatBlock* member);
 void FUN_0029bed8(u32 id);
 void gameCounterAddSaturating(int flag, int value);
-void FUN_0029bde4(StatBlock* member);
+void saveMarkIdListSeen(StatBlock* member);
 
 /* Performs the selected fusion: builds both parents, removes them from the party, creates the result
  * in a free stock slot and gives it the inherited skills (or, when the fusion fails, the unit that
@@ -191,7 +191,7 @@ int uniteCreateSelectedResult(u32 selectionIndex)
     gameCounterAddSaturating(38, 1);
     if (succeeded)
         gameCounterAddSaturating(39, 1);
-    FUN_0029bde4(member);
+    saveMarkIdListSeen(member);
     return succeeded ? 1 : 0;
 }
 }

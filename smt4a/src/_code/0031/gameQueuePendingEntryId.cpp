@@ -3,13 +3,13 @@
 
 extern "C" {
 u32 scrGetArg(u32);
-u32 FUN_002a4b28(u16);
+u32 compendiumEntryIsRegistered(u16);
 
 // Queue an unregistered identifier once, using the first empty pending slot.
 u32 gameQueuePendingEntryId(void)
 {
     u32 id = scrGetArg(0);
-    if (FUN_002a4b28((u16)id) == 0) {
+    if (compendiumEntryIsRegistered((u16)id) == 0) {
         for (s32 index = 0; index < 32; ++index) {
             if (g_gameState.pendingEntryIds[index] == id)
                 return 1;

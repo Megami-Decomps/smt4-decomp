@@ -19,7 +19,7 @@ typedef struct {
 extern unsigned int *FUN_00194834(unsigned char *);
 /* Supplied declaration required: FUN_001a5c44. */
 extern int FUN_001a8930(unsigned int, unsigned int, unsigned int *);
-extern unsigned int FUN_001a8e14(unsigned int, unsigned int);
+extern unsigned int soundArchiveFileEntryIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_LoadImpl. */
 
 
@@ -63,7 +63,7 @@ unsigned int FUN_00461004(int param_1,int param_2,unsigned int param_3)
             FUN_001a5c44(param_1,temp_v3,temp_v4,param_3,0);
           }
           else {
-            temp_v1 = FUN_001a8e14(*(unsigned int *)(param_1 + 4),temp_v3);
+            temp_v1 = soundArchiveFileEntryIsLoaded(*(unsigned int *)(param_1 + 4),temp_v3);
             nw_snd_internal_SoundArchiveLoader_LoadImpl(param_1,temp_v1,param_3,0,1);
           }
           if (temp_v0 == 0) {

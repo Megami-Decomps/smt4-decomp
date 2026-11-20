@@ -4,10 +4,10 @@
 extern "C" {
 void effectNodeUpdateTransform(void *current);
 s32 effectTimelineNodesFitDuration(void *current);
-void *FUN_002a4e98(const void *definition);
-void FUN_002a3ab0(void *current, const f32 *translation);
-void FUN_002a36fc(void *current, f32 value);
-u32 FUN_0021a468(void *current);
+void *effPartCreateFromSource(const void *definition);
+void skelNodePoseChain(void *current, const f32 *translation);
+void effectParticleEmitterSetAdvance(void *current, f32 value);
+u32 effectTimelineComputeDuration(void *current);
 
 /* Process of the EPL event effect job: spawns the effect once its definition has loaded, then runs it
  * until its timeline ends. */
@@ -18,10 +18,10 @@ s32 effectJobUpdateSpawn(u32 job)
     case 0:
         if (work->pending) {
             work->phase = 1;
-            work->current = FUN_002a4e98(work->pending);
-            FUN_002a3ab0(work->current, work->translation);
-            FUN_002a36fc(work->current, 0.5f);
-            work->resource = FUN_0021a468(work->current);
+            work->current = effPartCreateFromSource(work->pending);
+            skelNodePoseChain(work->current, work->translation);
+            effectParticleEmitterSetAdvance(work->current, 0.5f);
+            work->resource = effectTimelineComputeDuration(work->current);
             work->started = 1;
         }
         break;

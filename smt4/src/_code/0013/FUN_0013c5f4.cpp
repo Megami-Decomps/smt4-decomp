@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern unsigned int DAT_0044e368; /* 0x44e368 */
+extern unsigned int g_appletCloseReason; /* 0x44e368 */
 extern unsigned int DAT_0044e620; /* 0x44e620 */
 extern unsigned int DAT_0044e624; /* 0x44e624 */
 
@@ -48,7 +48,7 @@ void FUN_0013c5f4(unsigned char *param_1,unsigned int param_2)
   if (temp_v0 < 0 && temp_v0 != temp_v1) {
     asdFatalError();
   }
-  FUN_002a7f28(0x406,param_2,0xf80,DAT_0044e368);
+  FUN_002a7f28(0x406,param_2,0xf80,g_appletCloseReason);
   temp_v3 = DAT_0044e620;
   uStack_1c = DAT_0044e624;
   puVar2 = (unsigned int *)&temp_v4;

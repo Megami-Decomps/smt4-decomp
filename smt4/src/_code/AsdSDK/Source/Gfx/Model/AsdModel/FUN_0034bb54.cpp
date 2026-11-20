@@ -8,7 +8,7 @@ extern "C" {
 void nw_gfx_RenderContext_ResetState_2B7478(RenderCtx *context);
 void FUN_00364e28(RenderCtx *context, void *target);
 void grRenderTargetClear(RenderCtx *context, u32 mask, const ShaderLightVector4 *color);
-void FUN_002ab92c(RenderCtx *context, void *camera, s32 mode);
+void gfxUploadShaderMatricesIfChanged(RenderCtx *context, void *camera, s32 mode);
 void FUN_002a4908(RenderCtx *context, s32 mode);
 extern u32 DAT_004720f0;
 }
@@ -65,7 +65,7 @@ void FUN_0034bb54(AsdModelRenderPass *pass, RenderCtx *context)
     grRenderTargetClear(context, 0x4000, &clearColor);
     selectCamera(modelPass, pass->cameraIndex);
     modelPass->flags = pass->flags;
-    FUN_002ab92c(context, modelPass->camera, 0);
+    gfxUploadShaderMatricesIfChanged(context, modelPass->camera, 0);
     FUN_002a4908(context, 0);
     modelPass->state = 3;
 }

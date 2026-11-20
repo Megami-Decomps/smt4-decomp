@@ -9,7 +9,7 @@ s32 scrGetArg(s32 index);
 void scrSetResult(s32 value);
 s32 btlResolveEntryChoice(s32 selector);
 BtlCombatantEntryA* btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA*);
-u32 FUN_003020fc(BtlCombatantEntryA* entry, u32 condition);
+u32 btlCombatantMatchesCategory(BtlCombatantEntryA* entry, u32 condition);
 
 u32 scrAnyEligibleUnitIdMatchesCondition()
 {
@@ -22,14 +22,14 @@ u32 scrAnyEligibleUnitIdMatchesCondition()
         BtlCombatantEntryA* entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & g_btlCandidateMasks.unavailable)
             && (entry->flags & g_btlCandidateMasks.required) && !(entry->flags & g_btlCandidateMasks.excluded)
-            && entry->data.id == id && FUN_003020fc(entry, condition)) {
+            && entry->data.id == id && btlCombatantMatchesCategory(entry, condition)) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->unk4cd1) {
         BtlCombatantEntryA* entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
-        if (entry && entry->data.id == id && FUN_003020fc(entry, condition)) {
+        if (entry && entry->data.id == id && btlCombatantMatchesCategory(entry, condition)) {
             scrSetResult(1);
             return 1;
         }

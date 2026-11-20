@@ -89,7 +89,7 @@ int btlInitializeDemonUnitState(int, unsigned char [688], unsigned int, int);
 int btlActionPrepareFromSource(int, int, int);
 int FUN_003ea69c(int, unsigned char [688], unsigned int);
 int btlMainBuffersFree(int, int);
-int FUN_003ecfb4(...);
+int btlUnitStateInitFromRecord(...);
 int FUN_003ef1e4(int, int);
 int FUN_003f1d74(int);
 int countersAddSaturating(...);
@@ -180,7 +180,7 @@ extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: asdMemFree. */
 extern int gameGetOptions(void);
-extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
+extern unsigned int unitMapIdToCategory(unsigned short, unsigned int);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: slotSetRequest. */
@@ -232,7 +232,7 @@ extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: btlFindFirstEntryMatchingCategoryAndRequiredMask. */
 /* Supplied declaration required: btlHasFilteredCommand. */
 /* Supplied declaration required: btlMainBuffersFree. */
-/* Supplied declaration required: FUN_003ecfb4. */
+/* Supplied declaration required: btlUnitStateInitFromRecord. */
 /* Supplied declaration required: FUN_003ee138. */
 /* Supplied declaration required: FUN_003eee9c. */
 /* Supplied declaration required: FUN_003ef1e4. */
@@ -370,12 +370,12 @@ void FUN_002ba998(unsigned int param_1)
     } while (temp_v9 < 3);
     temp_v6 = saveSlotFindSelected();
     if (temp_v6 != 0) {
-      FUN_003ecfb4(temp_v7,temp_v23,temp_v6,0);
+      btlUnitStateInitFromRecord(temp_v7,temp_v23,temp_v6,0);
       FUN_004ca63c(temp_v7,temp_v23,2,0x36,0);
     }
     temp_v6 = saveSlotFindSelected();
     if (temp_v6 != 0) {
-      temp_v11 = FUN_0019acdc(*(unsigned short *)(temp_v6 + 300),0);
+      temp_v11 = unitMapIdToCategory(*(unsigned short *)(temp_v6 + 300),0);
       switch(temp_v11) {
       default:
         break;
@@ -814,7 +814,7 @@ LAB_002bb21c:
     temp_v6 = temp_v7;
     btlFindFirstEntryMatchingCategoryAndRequiredMask();
     temp_v11 = saveSlotFindSelected();
-    FUN_003ecfb4(temp_v7,temp_v6 + 0x164,temp_v11,0);
+    btlUnitStateInitFromRecord(temp_v7,temp_v6 + 0x164,temp_v11,0);
     *(unsigned int *)(temp_v6 + 0x400) = temp_v11;
     break;
   case 0x13:
@@ -872,7 +872,7 @@ LAB_002bb21c:
     unitRecordResetCurrentValues();
     temp_v6 = saveSlotFindSelected();
     if (temp_v6 != 0) {
-      FUN_003ecfb4(temp_v7,temp_v23,temp_v6,0);
+      btlUnitStateInitFromRecord(temp_v7,temp_v23,temp_v6,0);
       FUN_004ca63c(temp_v7,temp_v23,2,0x36,0);
     }
     temp_v9 = DAT_00573af4 | *(unsigned int *)(temp_v7 + 0x45a4);

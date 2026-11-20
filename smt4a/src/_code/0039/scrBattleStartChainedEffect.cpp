@@ -18,7 +18,7 @@ s32 scrGetArg(u32);
 s32 isEntryUsable(void *);
 s32 FUN_004f5a78(ScriptEffectAux *);
 
-void FUN_002980e4(s32, s32);
+void btlAuxQueryCommonUpDownPair(s32, s32);
 void FUN_004fb6f4(s32, s32, BattleRosterRecordA *, u32, s32, s32, s32);
 void btlEmitMessageTableEntries(s32, ScriptEffectUnit *, void *, s32, s32, s32);
 s32 chainCountIdUnflagged(ReflectContext *, u32);
@@ -42,7 +42,7 @@ u8 scrBattleStartChainedEffect()
                 waiting->pending = 0;
             return done;
         }
-        FUN_002980e4(effect, 1);
+        btlAuxQueryCommonUpDownPair(effect, 1);
         ScriptEffectUnit *unit = reinterpret_cast<ScriptEffectUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
         BattleRosterRecordA *visual = btlGetMainState()->roster;
         FUN_004fb6f4(0, 0, visual, action, effect, 0, -1);
@@ -53,7 +53,7 @@ u8 scrBattleStartChainedEffect()
         return 0;
     }
     if (effect != 0) {
-        FUN_002980e4(effect, 1);
+        btlAuxQueryCommonUpDownPair(effect, 1);
         ScriptEffectUnit *unit = reinterpret_cast<ScriptEffectUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
         BattleRosterRecordA *visual = btlGetMainState()->roster;
         FUN_004fb6f4(0, 0, visual, action, effect, 0, -1);

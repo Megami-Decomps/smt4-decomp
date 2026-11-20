@@ -23,7 +23,7 @@ extern HealingFreeCamera *g_freeCamera;
 extern HealingFieldJob *DAT_0057f658;
 extern f32 DAT_005f1b80[5];
 void messageSetMode(u32 mode);
-void FUN_002c23cc(u32 value);
+void frameTexConfigureCaptureTextures(u32 value);
 void FUN_004cdddc(HealingSceneWork *work);
 s32 bgmGetStateById(u32 id);
 void soundChannelRequestIfEnabled(u32 id, u32 channel, u32 duration);
@@ -32,7 +32,7 @@ void *dataTableFileGetTable(void *file, u32 index);
 void *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
 void placeWinStartText(const char *text);
-void FUN_0013cab8(u32 index, u32 duration, u32 value);
+void screenFadeStartIn(u32 index, u32 duration, u32 value);
 void FUN_00348c50(u32 mode);
 void priceMenuUpdateScripts(HealingSceneWork *work);
 void slotSetRequest(u32 index, u32 value, u32 extra);
@@ -63,7 +63,7 @@ extern "C" s32 FUN_004ce3c0(HealingSceneWork *work)
     switch (work->state) {
     case 0:
         messageSetMode(0);
-        FUN_002c23cc(1);
+        frameTexConfigureCaptureTextures(1);
         work->state = 1;
         work->timer = 0;
         break;
@@ -75,11 +75,11 @@ extern "C" s32 FUN_004ce3c0(HealingSceneWork *work)
         work->state = 2;
         break;
     case 2: {
-        s32 firstLoaded = FUN_0040ab8c(work->primary);
-        s32 secondLoaded = FUN_0040ab8c(work->secondary);
+        s32 firstLoaded = moriModelContentIsLoaded(work->primary);
+        s32 secondLoaded = moriModelContentIsLoaded(work->secondary);
         bool ready = firstLoaded != 0 && secondLoaded != 0;
         for (s32 index = 0; index < 3; ++index) {
-            if (!FUN_0040ab8c(work->models[index]))
+            if (!moriModelContentIsLoaded(work->models[index]))
                 ready = false;
         }
         if (work->heapA == NULL)
@@ -101,9 +101,9 @@ extern "C" s32 FUN_004ce3c0(HealingSceneWork *work)
                               "\x82\x8f\x82\x86\x81\x40\x82\x67\x82\x85\x82\x81\x82\x8c"
                               "\x82\x89\x82\x8e\x82\x87");
             if (pairedAvailabilityGetState(0) == 3)
-                FUN_0013cab8(0, 10, 255);
+                screenFadeStartIn(0, 10, 255);
             if (pairedAvailabilityGetState(1) == 3)
-                FUN_0013cab8(1, 10, 255);
+                screenFadeStartIn(1, 10, 255);
             work->state = 3;
             FUN_00348c50(2);
             g_freeCamera->target = work->cameraTarget;

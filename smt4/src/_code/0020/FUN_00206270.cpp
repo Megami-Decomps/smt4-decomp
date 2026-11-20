@@ -16,7 +16,7 @@ void FUN_00206270(PlayScene *scene)
     timerStart(&scene->timer, 0, 0);
     beginStatusPanelClose();
     scene->unk5918 = 4;
-    FUN_002a0cc8(0);
+    gameGlobalsSetSubScreenActive(0);
     if (scene->mode - 8U <= 5) {
         FUN_00292f4c(scene);
         return;

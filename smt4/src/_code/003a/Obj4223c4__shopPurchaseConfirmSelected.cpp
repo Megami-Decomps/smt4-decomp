@@ -63,7 +63,7 @@ void Obj4223c4::shopPurchaseConfirmSelected()
         s32 price = FUN_0029ce60(id, menu->discounted, 0, menu->level >= 100, 0);
         partyMoneyAddForward(-price);
         gameCounterAddSaturating(0x28, price);
-        FUN_002a0cc8(0);
+        gameGlobalsSetSubScreenActive(0);
         menu->state = 2;
         menu->timer = 0;
     }

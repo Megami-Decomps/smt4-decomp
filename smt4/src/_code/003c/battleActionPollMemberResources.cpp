@@ -8,7 +8,7 @@
 #include "battle/BtlUiGlobal.h"
 
 extern "C" {
-extern BattleVersionResources *DAT_00435d18;
+extern BattleVersionResources *g_btlAux;
 s32 idSetFindSubjectIndex(BtlMainState *state, const BtlActionRecord *action);
 s32 entryContainsIdentifier(BtlMainState *state, u32 id);
 u32 eventResourceCacheAcquire(u32 id, s32 mode);
@@ -16,7 +16,7 @@ void resourceSlotsInsert(BtlMainState *state, u32 handle);
 void entryAddUniqueIdentifier(BtlMainState *state, s16 id);
 s32 nkdwHeaderParse(u32 handle);
 void aocHandleButtons(u32 handle, u32 mode);
-s32 FUN_00294fe0(u32 handle);
+s32 aocTextureEntryLoadOnce(u32 handle);
 void modelAnimationEnsureData(u32 handle);
 void btlUiAddListedId(BtlUi *ui, u32 id);
 void effectSlotStart(BattleVersionResources *resources, BtlActionRecord *action, u32 id);
@@ -66,7 +66,7 @@ void battleActionPollMemberResources(BtlMainState *state, BtlActionRecord *actio
             }
         }
         if (ready && !(action->flags & 0x200)) {
-            if (FUN_00294fe0(handle)) {
+            if (aocTextureEntryLoadOnce(handle)) {
                 modelAnimationEnsureData(handle);
                 action->flags |= 0x200;
             } else {
@@ -75,8 +75,8 @@ void battleActionPollMemberResources(BtlMainState *state, BtlActionRecord *actio
         }
         if (ready) {
             btlUiAddListedId(g_btlUiBlock, resources->id);
-            effectSlotStart(DAT_00435d18, action, resources->parts[index]);
-            FUN_003db0c0(DAT_00435d18, action);
+            effectSlotStart(g_btlAux, action, resources->parts[index]);
+            FUN_003db0c0(g_btlAux, action);
             FUN_003c0ae0(state, action);
         }
     }

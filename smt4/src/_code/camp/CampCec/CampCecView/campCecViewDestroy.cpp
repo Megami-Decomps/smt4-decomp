@@ -6,8 +6,8 @@ extern "C" {
 
 int asdMemFree(void *ptr);               /* heap free */
 int jobStop(u32 task, int flags);     /* kill a task */
-int FUN_00309e94(u32 handle);
-int FUN_0031b970(u32 handle);
+int handleObjectFree(u32 handle);
+int campCecEditDestroyResources(u32 handle);
 
 extern CampCecView *g_campCecView;
 
@@ -16,9 +16,9 @@ void campCecViewDestroy(void)
     CampCecView *view = g_campCecView;
     int i;
 
-    FUN_0031b970(view->handleB);
+    campCecEditDestroyResources(view->handleB);
     for (i = 0; i < 3; i++) {
-        FUN_00309e94(view->handle[i]);
+        handleObjectFree(view->handle[i]);
     }
     asdMemFree(view->heap);
     jobStop(view->task, 0);

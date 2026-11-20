@@ -9,7 +9,7 @@ extern "C" {
 int drawTextAtRelativePosition(...);
 int uiRectDrawAtBottomRight(...);
 void FUN_00230d2c(const OffsetPosition2D*, u32, s32, s32, s32, s32);
-int FUN_00230d84(int, int, int, int, int);
+int uiDrawBottomRightOffset(int, int, int, int, int);
 int contentGetKindValue(...);
 void gxSetClippedBottomScreenScissor(int, int, int, int);
 int FUN_00231bcc(...);
@@ -45,7 +45,7 @@ extern int btlRollClamped(unsigned short, unsigned int);
 extern unsigned int itemGetNameOrFallback(unsigned int, unsigned int);
 /* Supplied declaration required: uiRectDrawAtBottomRight. */
 /* Supplied declaration required: FUN_00230d2c. */
-/* Supplied declaration required: FUN_00230d84. */
+/* Supplied declaration required: uiDrawBottomRightOffset. */
 extern unsigned int shopSlotGetPrice(unsigned short *);
 /* Supplied declaration required: contentGetKindValue. */
 /* Supplied declaration required: FUN_00231bcc. */
@@ -108,9 +108,9 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
   temp_v4 = (int)*(short *)(temp_v4 + 10);
   if (param_3 != 0) {
     efctSetSpeed();
-    FUN_00230d84(param_1 + 0x380,0x47,temp_v13,temp_v4,temp_v12);
-    FUN_00230d84(param_1 + 0x380,0x48,temp_v13,temp_v4,temp_v12);
-    FUN_00230d84(param_1 + 0x380,0x49,temp_v13,temp_v4,temp_v12);
+    uiDrawBottomRightOffset(param_1 + 0x380,0x47,temp_v13,temp_v4,temp_v12);
+    uiDrawBottomRightOffset(param_1 + 0x380,0x48,temp_v13,temp_v4,temp_v12);
+    uiDrawBottomRightOffset(param_1 + 0x380,0x49,temp_v13,temp_v4,temp_v12);
     efctSetSpeed();
     FUN_00231bcc(param_1 + 0x380,0x4a,temp_v13,temp_v4,temp_v12,1);
     if (*(char *)(param_1 + 0x839) != '\0') {

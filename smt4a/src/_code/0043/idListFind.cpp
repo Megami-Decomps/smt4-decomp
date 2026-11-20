@@ -1,7 +1,7 @@
 #include "shard/W6_W6Match3_IdList.h"
 
 extern "C" {
-extern IdList DAT_005c1fdc[0x576];
+extern IdList g_idList[0x576];
 
 IdList* idListFind(u32 id)
 {
@@ -10,7 +10,7 @@ IdList* idListFind(u32 id)
     s32 middle;
     for (;;) {
         middle = low + (high - low) / 2;
-        u32 key = DAT_005c1fdc[middle].id;
+        u32 key = g_idList[middle].id;
         if (key > id) {
             high = middle - 1;
         }
@@ -24,7 +24,7 @@ IdList* idListFind(u32 id)
             return NULL;
         }
     }
-    return &DAT_005c1fdc[middle];
+    return &g_idList[middle];
 }
 
 } /* extern "C" */

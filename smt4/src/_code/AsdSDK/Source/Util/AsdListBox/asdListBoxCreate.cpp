@@ -6,16 +6,17 @@
 
 extern "C" {
 extern const char g_asdListBoxSourceFileName[];
-extern const s8 DAT_00409d80[]; /* "AsdListBox" */
-s32 FUN_001fe640(u32 handle);
+extern const s8 g_asdListBoxProcessName[]; /* "AsdListBox" */
+s32 asdListBoxUpdate(u32 handle);
 void asdListBoxDestroy(u32 handle);
 
 s32 jobIsValid(void *parent);
 void jobSetParent(void *parent, u32 handle);
 void rowWidgetInit(void *widget, s32 rows, s32 unk);
 
-/* Creates a list box process at (x, y) in `group` and registers it with `parent`. */
-u32 asdListBoxCreate(void *parent, s32 group, s32 x, s32 y, u8 flag)
+/* Creates a movable 10-row list box process at (x, y) in process group `group`, parented to `parent` when
+ * that is a valid job; returns its handle, or 0 when the box cannot be allocated. */
+u32 asdListBoxCreate(void *parent, s32 group, s32 x, s32 y, u8 colorScheme)
 {
     AsdListBox *box;
     u32 handle;
@@ -26,23 +27,23 @@ u32 asdListBoxCreate(void *parent, s32 group, s32 x, s32 y, u8 flag)
         return 0;
     }
 
-    handle = asdProcessCreateSimple(DAT_00409d80, group, 0, 0, FUN_001fe640, asdListBoxDestroy, reinterpret_cast<u32>(box));
+    handle = asdProcessCreateSimple(g_asdListBoxProcessName, group, 0, 0, asdListBoxUpdate, asdListBoxDestroy, (u32)box);
     if (jobIsValid(parent) != 0) {
         jobSetParent(parent, handle);
     }
 
-    box->unk3c = flag;
+    box->colorScheme = colorScheme;
     box->width = 128.0f;
     box->x = (f32)x;
     box->height = 128.0f;
     box->y = (f32)y;
     box->rowHeight = 13;
     box->rowCount = 10;
-    box->flags |= 4;
-    box->unk68 = box->rowCount;
+    box->flags |= ASD_LISTBOX_FLAG_MOVABLE;
+    box->visibleRows = box->rowCount;
     rowWidgetInit(box->widget, box->rowCount, 0);
     colorSetRgba(box->widget, 6, 5, 32, 32);
-    box->unk34 = 0;
+    box->state = 0;
     return handle;
 }
 

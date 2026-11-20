@@ -10,9 +10,9 @@ extern const char DAT_0053295c[];
 void *asdMemoryAllocTraced(u32 size, const char *source, u32 line);
 MoveCameraResource *_ZN9Obj557af8C1EPK21AsdAnimCameraResource(MoveCameraResource *resource, void *data);
 void uiSetFloatPair(ManagedCamera *camera, f32 distance, f32 scale);
-void FUN_0014f0dc(ManagedCamera *camera, const Vec3f *eye, const Vec3f *target, const Vec3f *up);
-void FUN_001523b8(ManagedCamera *camera, u32 pivot, f32 fieldOfView, f32 nearClip, f32 farClip, f32 aspect);
-void FUN_00407598(MoveCameraCtrlWork *work);
+void cameraMatrixCacheSetLookAt(ManagedCamera *camera, const Vec3f *eye, const Vec3f *target, const Vec3f *up);
+void stereoCameraSetPerspective(ManagedCamera *camera, u32 pivot, f32 fieldOfView, f32 nearClip, f32 farClip, f32 aspect);
+void spatialCameraUpdateLookAt(MoveCameraCtrlWork *work);
 
 // Load a movement-camera track and initialize its native camera, projection and first key.
 void FUN_00407110(MoveCameraCtrlWork *work, const char *name)
@@ -45,8 +45,8 @@ void FUN_00407110(MoveCameraCtrlWork *work, const char *name)
     work->up.z = 0.0f;
     work->distance = 5.0f;
     uiSetFloatPair(&work->camera, 5.0f, 1.0f);
-    FUN_0014f0dc(&work->camera, &work->eye, &work->target, &work->up);
-    FUN_001523b8(&work->camera, 1, work->fieldOfView, work->nearClip, work->farClip, 1.6666666f);
+    cameraMatrixCacheSetLookAt(&work->camera, &work->eye, &work->target, &work->up);
+    stereoCameraSetPerspective(&work->camera, 1, work->fieldOfView, work->nearClip, work->farClip, 1.6666666f);
     FUN_0036b824(reinterpret_cast<u32>(&work->camera));
     static_cast<CurrentCameraView *>(g_handleRegistry)->camera = &work->camera;
     if (work->frameCount > 0) {
@@ -56,7 +56,7 @@ void FUN_00407110(MoveCameraCtrlWork *work, const char *name)
         Vec3f *target = key->target;
         work->initialPosition = key->position;
         work->initialTarget = *target;
-        FUN_00407598(work);
+        spatialCameraUpdateLookAt(work);
     }
 }
 }

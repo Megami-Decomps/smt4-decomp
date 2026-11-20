@@ -2,12 +2,12 @@
 
 extern "C" {
 
-u32 FUN_0043299c(s32 *result);
+u32 ctrNetInitializeSockets(s32 *result);
 
 /* Forwards unchanged to the network init below. */
 u32 ctrNetInitialize(s32 *result)
 {
-    return FUN_0043299c(result);
+    return ctrNetInitializeSockets(result);
 }
 
 } /* extern "C" */

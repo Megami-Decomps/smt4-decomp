@@ -14,6 +14,13 @@
 #define ASD_GL_UNSIGNED_SHORT 0x1403
 #define ASD_GL_UNSIGNED_INT 0x1405
 
+/* The nngx displays (AsdGxDisplayBuffers.mode, renderBindPreset's screen). */
+enum {
+    ASD_GX_DISPLAY_TOP = 0x400,
+    ASD_GX_DISPLAY_BOTTOM = 0x401,
+    ASD_GX_DISPLAY_TOP_RIGHT = 0x410  /* the right eye's image in stereoscopic 3D */
+};
+
 /* A display buffer ring (0x2C bytes): the nngx display buffers one screen cycles through. */
 typedef struct AsdGxDisplayBuffers {
     /* 0x00 */ u32 mode;               /* the nngx display: 0x400 top, 0x410 top right eye, 0x401 bottom */

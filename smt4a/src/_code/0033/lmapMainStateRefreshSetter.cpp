@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_00483acc(LmapObj *setter);
+void objectPoolDestroyAll(LmapObj *setter);
 void stateSetterSetFromBase(LmapObj *setter, s32 base, u32 value);
 void fieldBuildAreaPlacementList(LmapObj *setter);
 
@@ -15,7 +15,7 @@ void lmapMainStateRefreshSetter(void)
     if (state != NULL) {
         asdDebugHookVoid();
         asdDebugHookVoid();
-        FUN_00483acc(&state->obj);
+        objectPoolDestroyAll(&state->obj);
         stateSetterSetFromBase(&state->obj, state->mapId - 100, state->areaId);
         fieldBuildAreaPlacementList(&state->obj);
     }

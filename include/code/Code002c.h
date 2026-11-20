@@ -10,8 +10,8 @@ u8 *saveGetFlagRowTable(void);
 
 u32 asdCameraGetSavedRenderPairs(void);
 
-u8 *FUN_002c7e24(void);
+u8 *gameGlobalsGetBlock1390(void);
 
-void FUN_002c8538(u8 value);
+void gameGlobalsSetOverlayActive(u8 value);
 
 } /* extern "C" */

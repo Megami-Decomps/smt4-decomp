@@ -16,7 +16,7 @@ void stateSetterEnterState(StateSetterSpriteWork* work, s32 state);
 
 void FUN_004852a0(StateSetterSpriteWork* work)
 {
-    FUN_00167458(&work->firstSprite, 0);
+    uiSpriteSlideFromSide(&work->firstSprite, 0);
     uiSpriteAdvanceAnimation(&work->secondSprite, 1.0f);
     work->spriteX = vec2GetXInt(&work->firstSprite);
     work->savedSpriteX = work->spriteX;

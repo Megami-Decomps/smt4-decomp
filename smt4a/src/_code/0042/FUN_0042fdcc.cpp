@@ -13,7 +13,7 @@ typedef struct {
 } param_1_stack;
 
 extern int g_nnCecdHandle; /* 0x5c1fc4 */
-extern int DAT_005c1fc8; /* 0x5c1fc8 */
+extern int g_cecdUseLocalBackend; /* 0x5c1fc8 */
 
 /* Supplied declaration required: FUN_00430084. */
 /* Supplied declaration required: FUN_00430538. */
@@ -23,7 +23,7 @@ void FUN_0042fdcc(unsigned int param_1)
 
 {
 /* irregular: 2 native warning(s); review required */
-  if (DAT_005c1fc8 != 0) {
+  if (g_cecdUseLocalBackend != 0) {
     FUN_00430538();
     return;
   }

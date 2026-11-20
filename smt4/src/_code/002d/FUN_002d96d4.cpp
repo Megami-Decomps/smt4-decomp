@@ -73,13 +73,13 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002580d4. */
 extern unsigned int *uniteGetWork(void);
-extern int FUN_0028cfbc(unsigned int *);
+extern int widgetGetVisibleLength(unsigned int *);
 /* Supplied declaration required: uiDrawListScrollBar. */
 /* Supplied declaration required: gxSetMirroredClippedScissor. */
 extern int partyClassifyRequestedSources(unsigned int, unsigned int, unsigned char *);
-extern int FUN_0029d644(unsigned int *);
+extern int uiListGetVisibleCount(unsigned int *);
 extern int ifTouchGetSelectionModeForRegion(int);
-extern unsigned int FUN_0029dde0(void);
+extern unsigned int fusionPlayerLevelCapGet(void);
 extern int objectPartRunUnlessLocked(unsigned int *); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 extern int resourceRunEmbeddedOperationIfUnblocked(unsigned int *);
 /* Supplied declaration required: itemGetFlagBit1. */
@@ -175,13 +175,13 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0xffffffff,temp_v20);
     temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x4c));
-    temp_v5 = FUN_0029dde0();
+    temp_v5 = fusionPlayerLevelCapGet();
     FUN_002bdf94(0,(int)&param_1->field_0x0 + (int)*(short *)(temp_v4 + 8),
                  *(short *)(temp_v4 + 10) + param_2,1,2,0x65,"%d",temp_v5);
     if (*(char *)(temp_v3 + 0x34) != '\0') {
       temp_v22 = (unsigned int *)resourceRunOperationIfUnblocked(temp_v21);
       temp_v4 = 0;
-      temp_v3 = FUN_0029d644(temp_v21);
+      temp_v3 = uiListGetVisibleCount(temp_v21);
       if (0 < temp_v3) {
         do {
           if ((temp_v27 == 0) || (temp_v3 = listCursorGetRowIfUnblocked(temp_v21), temp_v3 != temp_v4)) {
@@ -210,7 +210,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
             temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,temp_v4 + 0x2e));
             temp_v24 = 0xff;
             temp_v5 = 0xffffffff;
-            temp_v6 = FUN_0029dde0();
+            temp_v6 = fusionPlayerLevelCapGet();
             if (temp_v6 < *(unsigned char *)((int)psVar8 + 3)) {
               temp_v24 = 0x5a5a5aff;
               temp_v5 = 0xdc0f14ff;
@@ -282,7 +282,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
             }
           }
           temp_v4 = temp_v4 + 1;
-          temp_v3 = FUN_0029d644(temp_v21);
+          temp_v3 = uiListGetVisibleCount(temp_v21);
         } while (temp_v4 < temp_v3);
       }
       temp_v3 = listCursorGetRowIfUnblocked(temp_v21);
@@ -360,7 +360,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
         }
         temp_v9 = 0xffffffff;
         temp_v5 = 0xffffffff;
-        temp_v18 = FUN_0029dde0();
+        temp_v18 = fusionPlayerLevelCapGet();
         if (temp_v18 < *(unsigned char *)((int)psVar8 + 3)) {
           temp_v9 = 0x5a5a5aff;
           temp_v5 = 0xdc0f14ff;
@@ -443,7 +443,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
     else {
       temp_v3 = resourceRunEmbeddedOperationIfUnblocked(temp_v22);
       temp_v13 = 0;
-      temp_v4 = FUN_0028cfbc(temp_v22);
+      temp_v4 = widgetGetVisibleLength(temp_v22);
       if (0 < temp_v4) {
         do {
           temp_v4 = temp_v3 + temp_v13;
@@ -495,7 +495,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
             efctSetSpeed();
           }
           else {
-            temp_v6 = FUN_0029dde0();
+            temp_v6 = fusionPlayerLevelCapGet();
             if (temp_v6 < *(unsigned char *)((int)puVar10 + 3)) {
               drawSetColorFromRGBA8(0x5a5a5aff);
               efctSetSpeed();
@@ -547,7 +547,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
             temp_v11 = (int)FUN_002bd068(*puVar10);
             sprintf((char *)temp_v20,"%s",temp_v11);
           }
-          temp_v6 = FUN_0029dde0();
+          temp_v6 = fusionPlayerLevelCapGet();
           if (temp_v6 < *(unsigned char *)((int)puVar10 + 3)) {
             temp_v5 = 0x5a5a5aff;
             temp_v9 = 0xdc0f14ff;
@@ -588,7 +588,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
                        ,"%d",*(unsigned char *)((int)puVar10 + 3));
           gxResetColorQuadToWhite();
           temp_v13 = temp_v13 + 1;
-          temp_v4 = FUN_0028cfbc(temp_v22);
+          temp_v4 = widgetGetVisibleLength(temp_v22);
         } while (temp_v13 < temp_v4);
       }
       if (temp_v27 != 0) {
@@ -616,7 +616,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
         }
       }
       temp_v13 = 0;
-      temp_v4 = FUN_0028cfbc(temp_v22);
+      temp_v4 = widgetGetVisibleLength(temp_v22);
       if (0 < temp_v4) {
         do {
           puVar10 = (unsigned short *)(unsigned int)*(unsigned short *)((int)puVar4 + (temp_v3 + temp_v13) * 2 + 0x6278);
@@ -630,7 +630,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
                          (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v10 + 10) + param_2,0x83);
           }
           temp_v13 = temp_v13 + 1;
-          temp_v4 = FUN_0028cfbc(temp_v22);
+          temp_v4 = widgetGetVisibleLength(temp_v22);
         } while (temp_v13 < temp_v4);
       }
       texDrawTableEntryAtStoredOrigin(2,0x24,0xe7,param_1,param_2,0x8d);

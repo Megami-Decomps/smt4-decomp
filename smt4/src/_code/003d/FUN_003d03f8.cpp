@@ -19,10 +19,10 @@ void btlQueueKeyedScalarReflectAction(s32 slot, BtlUnit *unit, u32 id, s32 a, s3
 void FUN_002551ac(s32 slot, BtlUnit *unit, BtlActionRecord *skill, s32 a, s32 amount, s32 b, s32 c, u32 d, s32 e,
                   s32 f, s32 g, s32 h, s32 i, s32 j, s32 k, s32 l, s32 m, s32 n, s32 o, s32 p, s32 q, s32 r,
                   s32 s, s32 t, s32 u);
-void FUN_0027df30(s32 slot, BtlUnit *unit, BtlActionRecord *skill, s32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g,
+void btlQueueSkillReflectActions(s32 slot, BtlUnit *unit, BtlActionRecord *skill, s32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g,
                   s32 h, s32 i, s32 j);
-s32 FUN_00229914(s32 *state, BtlUnit *unit, s32 kind);
-s32 FUN_00293230(s32 target);
+s32 btlUnitIsDeadAndUncopied(s32 *state, BtlUnit *unit, s32 kind);
+s32 btlScriptUnitIsIncapacitated(s32 target);
 
 /* Resolve the heal/damage action of a skill on a unit and queue its effects and messages. Returns whether it hit. */
 s32 FUN_003d03f8(s32 *state, BtlUnit *unit, s32 amount, s32 slot, BtlActionRecord *skill, u32 *context)
@@ -43,7 +43,7 @@ s32 FUN_003d03f8(s32 *state, BtlUnit *unit, s32 amount, s32 slot, BtlActionRecor
         }
     }
     FUN_0023c0d0(state, unit, skill->memberId, -amount);
-    if (FUN_00229914(state, unit, skill->memberId) != 0) {
+    if (btlUnitIsDeadAndUncopied(state, unit, skill->memberId) != 0) {
         hit = 1;
         if ((*context & 0x10) != 0 && reinterpret_cast<BtlTarget *>(*state)->state == 1)
             *reinterpret_cast<u32 *>(*state + 0x88) = 0xD;
@@ -55,7 +55,7 @@ s32 FUN_003d03f8(s32 *state, BtlUnit *unit, s32 amount, s32 slot, BtlActionRecor
         a = 0;
         c = 0xB;
     }
-    if (FUN_00293230(*state) == 0)
+    if (btlScriptUnitIsIncapacitated(*state) == 0)
         b = 0;
     FUN_002551ac(slot, unit, skill, 0, amount, -1, -1,
                  *reinterpret_cast<u16 *>(reinterpret_cast<u8 *>(unit) + skill->memberId * 10 + 0x9D4),
@@ -63,7 +63,7 @@ s32 FUN_003d03f8(s32 *state, BtlUnit *unit, s32 amount, s32 slot, BtlActionRecor
                  -1, 1, 0, 1, 1);
     btlQueueKeyedScalarReflectAction(slot, unit, 0x1000185, 0, 0, 0, 0);
     if (extraEffect >= 0)
-        FUN_0027df30(slot, unit, skill, 0, extraEffect, -1, -1, 0, a, b, c, 0, 0);
+        btlQueueSkillReflectActions(slot, unit, skill, 0, extraEffect, -1, -1, 0, a, b, c, 0, 0);
     if (hit != 0) {
         if ((unit->record->status & 0x400) != 0) {
             frameRangeExtend(state, unit, unit->record->memberId, slot, 0x3C, 0x3C);

@@ -9,7 +9,7 @@ extern "C" {
 
 int gameGetPlayerData(void);
 int itemTableGetEquipmentRecord(void);
-int FUN_0020b490(int, int);
+int resultSetMode(int, int);
 int resourceTableReleaseHandles(void);
 int bgmReleaseStopped(void);
 int FUN_002c8778(int);
@@ -39,7 +39,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: itemTableGetEquipmentRecord. */
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_0020b490. */
+/* Supplied declaration required: resultSetMode. */
 /* Supplied declaration required: resourceTableReleaseHandles. */
 /* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: FUN_002c8778. */
@@ -93,7 +93,7 @@ void FUN_00331714(const ResultSpoilsA *spoils)
   temp_v3 = DAT_00588c44;
   temp_v4 = gameGetSlotTable();
   gameGetPlayerData();
-  FUN_0020b490(temp_v3,0);
+  resultSetMode(temp_v3,0);
   uiQuestCreate();
   FUN_002c8778(*(unsigned short *)(param_1 + 0x38));
   temp_v5 = mapMainIsBusy();

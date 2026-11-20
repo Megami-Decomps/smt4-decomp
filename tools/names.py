@@ -232,6 +232,12 @@ def main():
             # leave the class's member (and so the compiled symbol) behind.
             errors.append(f"{where}: {what} is the member function {old}; give the mangled name of the renamed member")
             continue
+        if old is not None and not old.startswith("_Z") and new.startswith("_Z"):
+            # apply leaves sources alone for a mangled name (source cannot spell one; see apply), so the
+            # unit would keep defining the old plain name and lose its match. Make it a member first.
+            errors.append(f"{where}: {what} becomes the mangled {new}: make it that member in source by hand "
+                          "(the class declaration, the definition, the callers), then rename")
+            continue
         if old is not None and section and "x" in section[3]:
             state.rename_function(old, new)
         elif old is None:

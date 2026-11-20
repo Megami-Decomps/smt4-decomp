@@ -23,7 +23,7 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } void_stack;
 
-extern signed char DAT_004474f0; /* 0x4474f0 */
+extern signed char g_lmapViewHolder; /* 0x4474f0 */
 extern unsigned int g_mapCamera; /* 0x4474f4 */
 extern float DAT_004474f8; /* 0x4474f8 */
 extern float DAT_004474fc; /* 0x4474fc */
@@ -39,7 +39,7 @@ extern int DAT_0049fc8c; /* 0x49fc8c */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: FUN_0021b0f0. */
 extern unsigned int FUN_00256540(void);
-extern int FUN_0025b4b0(float *, unsigned int *, unsigned int);
+extern int mapCollisionRaySegmentTest(float *, unsigned int *, unsigned int);
 extern int inputIsQuestMenuPressed(void);
 extern int lmapSceneGetUnk0(void);
 /* Supplied declaration required: FUN_0027eee0. */
@@ -362,16 +362,16 @@ LAB_002d21d0:
       temp_v16 = -temp_v16;
     }
     if ((int)temp_v16 >= 0x432a0001) {
-      DAT_004474f0 = '\0';
+      g_lmapViewHolder = '\0';
     }
     else if ((int)temp_v16 >= 0x41a00001) {
-      DAT_004474f0 = '\x01';
+      g_lmapViewHolder = '\x01';
     }
   }
   else {
-    DAT_004474f0 = '\0';
+    g_lmapViewHolder = '\0';
   }
-  if (DAT_004474f0 == '\0') {
+  if (g_lmapViewHolder == '\0') {
     DAT_004474f8 = temp_v20;
     FUN_0021b0f0();
     return;
@@ -399,7 +399,7 @@ LAB_002d21d0:
   temp_v25 = *(unsigned int *)(g_mapCamera + 0x4c);
   temp_v26 = *(float *)(g_mapCamera + 0x50);
   uStack_4c = *(unsigned int *)(g_mapCamera + 0x54);
-  temp_v1 = FUN_0025b4b0(&temp_v22,(unsigned int *)&temp_v25,0);
+  temp_v1 = mapCollisionRaySegmentTest(&temp_v22,(unsigned int *)&temp_v25,0);
   temp_v22 = *(float *)(g_lmapScene + 0x1c);
   temp_v23 = *(float *)(g_lmapScene + 0x20);
   temp_v24 = *(float *)(g_lmapScene + 0x24);
@@ -414,7 +414,7 @@ LAB_002d21d0:
   temp_v25 = *(unsigned int *)(g_lmapScene + 0x1c);
   uStack_4c = *(unsigned int *)(g_lmapScene + 0x24);
   temp_v26 = *(float *)(g_lmapScene + 0x20) + temp_v13;
-  temp_v4 = FUN_0025b4b0(&temp_v22,(unsigned int *)&temp_v25,0);
+  temp_v4 = mapCollisionRaySegmentTest(&temp_v22,(unsigned int *)&temp_v25,0);
   if (temp_v1 != -1) {
     temp_v17 = 6.0f;
     if (temp_v4 != -1) {
@@ -501,7 +501,7 @@ LAB_002d21d0:
     }
   }
   if (DAT_004474f8 > temp_v16) {
-    DAT_004474f0 = '\0';
+    g_lmapViewHolder = '\0';
     DAT_004474f8 = temp_v20;
     *(float *)(g_mapCamera + 0x18) = DAT_004474fc;
     temp_v20 = DAT_004474f8;

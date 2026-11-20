@@ -3,12 +3,12 @@
 
 extern "C" {
 
-extern MapWorkEntries *DAT_00448c20;
+extern MapWorkEntries *g_soundActorQueue;
 
 /* Resets the map work header and its thirty-two entries. */
 void FUN_001a9510(void)
 {
-    MapWorkEntries *work = DAT_00448c20;
+    MapWorkEntries *work = g_soundActorQueue;
     work->state = 0;
     work->count = 0;
     work->active = 0;

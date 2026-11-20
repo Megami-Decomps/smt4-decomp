@@ -13,13 +13,13 @@ struct ActionOwner {
 }
 
 extern "C" {
-extern ActionOwner *DAT_00435d18;
+extern ActionOwner *g_btlAux;
 
 /* Completes the action and clears its owner's active state. */
 void FUN_0027e38c(ActionState *action)
 {
     action->state = 9;
     action->active = 0;
-    DAT_00435d18->active = 0;
+    g_btlAux->active = 0;
 }
 }

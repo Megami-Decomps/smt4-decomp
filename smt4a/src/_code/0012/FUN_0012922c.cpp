@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002fb208(void);
+int threadGetCurrentId(void);
 int FUN_002fb224(unsigned int *, unsigned int **);
 
 typedef struct fn_0012922c_arg0 fn_0012922c_arg0;
@@ -35,7 +35,7 @@ extern unsigned char DAT_00559054; /* 0x559054 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern int FUN_002f5928(unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_002fb208. */
+/* Supplied declaration required: threadGetCurrentId. */
 /* Supplied declaration required: FUN_002fb224. */
 extern int FUN_0030cd36(void);
 extern unsigned int *_ZN9Obj559608C1Ev(fn_0012922c_arg0 *);
@@ -77,7 +77,7 @@ FUN_0012922c(fn_0012922c_arg0 *param_1,unsigned int *param_2,unsigned int param_
   *(int *)(*(int *)(temp_v0 + 0x40) + 8) = *(int *)(temp_v0 + 0x40);
   puVar1 = *(unsigned int **)(temp_v0 + 0x40);
   puVar1[3] = (unsigned int)puVar1;
-  FUN_002fb208();
+  threadGetCurrentId();
   temp_v3 = puVar1;
   FUN_002fb224(puVar3,&temp_v3);
   *puVar3 = *param_2;

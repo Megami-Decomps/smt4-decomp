@@ -26,8 +26,8 @@ void lmapRebuildModelContent(void)
             mem = modelListInit(mem);
         }
         state->model = static_cast<MoriModelContent *>(mem);
-        FUN_0040a908(state->model, 0x10000);
-        FUN_0040a918(state->model, 0x20000);
+        moriModelContentSetRequestFirst(state->model, 0x10000);
+        moriModelContentSetRequestSecond(state->model, 0x20000);
         FUN_0040a9a0(state->model, pending);
         linkModelContent(state->baseModel, state->model);
         FUN_00416168(state->model->resource, state->baseModel->resource);

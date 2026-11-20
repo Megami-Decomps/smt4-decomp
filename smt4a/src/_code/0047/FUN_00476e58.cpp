@@ -24,7 +24,7 @@ static __inline void leaveTransition(SelectionTransition *transition, s32 state)
 }
 
 extern "C" {
-void FUN_001b3428(void *operation);
+void nnOsThreadImplDestroy(void *operation);
 u32 legacyResourceIdRemap(const u32 *result);
 s32 resourceResultMatchesKnownRanges(const u32 *result);
 s32 resourceResultMatchesRemappedCodes(const u32 *result);
@@ -36,7 +36,7 @@ void FUN_0047bc90(SelectionTransition *transition, const RequestParameters *para
 void FUN_00476e58(SelectionTransition *transition, u32 unused, s32 nextState)
 {
     AocMain *main = g_aocMain;
-    FUN_001b3428(&main->thread);
+    nnOsThreadImplDestroy(&main->thread);
     if (legacyResourceIdRemap(&transition->query.result.result.code) == 0xc9413891u)
         return;
     FUN_00473d74(g_aocMain, transition->query.result.result.code, transition->query.result.result.description);

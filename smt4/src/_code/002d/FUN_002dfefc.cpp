@@ -10,15 +10,15 @@
 extern "C" {
 extern char DAT_004b7608[];
 extern const char DAT_00404464[];
-u32 FUN_002bfdd4(void);
+u32 messageVoiceFlagsGet(void);
 s32 appCheckPurchaseRequirements(u32 app);
-u32 FUN_002bfdc4(void);
-void FUN_002bfc24(s32 layer, u32 entry, u32 first, u32 second, f32 scaleX, f32 scaleY);
+u32 messageVoiceBankGet(void);
+void voiceRequestPlayFile(s32 layer, u32 entry, u32 first, u32 second, f32 scaleX, f32 scaleY);
 
 // Remember newly available applications and display the map notification when permitted.
 void FUN_002dfefc(s32 suppressNotification)
 {
-    u32 displayFlags = FUN_002bfdd4() | 4;
+    u32 displayFlags = messageVoiceFlagsGet() | 4;
     bool discovered = false;
     for (u32 app = 1; app < 141; ++app) {
         MapSaveBlock *map = gameGetMapBlock();
@@ -40,7 +40,7 @@ void FUN_002dfefc(s32 suppressNotification)
         timer->unk14 = reinterpret_cast<u32>(DAT_004b7608);
         timer->state = 3;
         timer->frames = 0;
-        FUN_002bfc24(1, 0x61A84, FUN_002bfdc4(), displayFlags, 0.707f, 0.707f);
+        voiceRequestPlayFile(1, 0x61A84, messageVoiceBankGet(), displayFlags, 0.707f, 0.707f);
     }
 }
 }

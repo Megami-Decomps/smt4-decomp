@@ -21,7 +21,7 @@ struct AudioAllocationHooks {
 };
 
 extern "C" {
-extern AudioAllocationHooks DAT_00589510;
+extern AudioAllocationHooks g_moAllocationHooks;
 void FUN_001df7a8(AudioDecoderChannel *channel);
 
 u32 FUN_005132d4(AudioFrameDecoder *decoder, const u8 *input, s32 inputSize)
@@ -31,9 +31,9 @@ u32 FUN_005132d4(AudioFrameDecoder *decoder, const u8 *input, s32 inputSize)
     if (required > decoder->capacity) {
         decoder->capacity = required;
         if (decoder->buffer != NULL) {
-            DAT_00589510.release(decoder->buffer);
+            g_moAllocationHooks.release(decoder->buffer);
         }
-        decoder->buffer = (s16 *)DAT_00589510.allocate(decoder->capacity);
+        decoder->buffer = (s16 *)g_moAllocationHooks.allocate(decoder->capacity);
         if (decoder->buffer == NULL) {
             return 0;
         }

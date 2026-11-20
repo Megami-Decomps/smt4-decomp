@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_00191260(void);
-int FUN_00191330(void);
+int soundStreamCommandManagerGetInstance(void);
 int FUN_001a5ae0(void);
 int FUN_001b1998(void);
 int nw_snd_internal_TaskManager_WaitTask(void);
 
 /* Supplied declaration required: FUN_00191260. */
-/* Supplied declaration required: FUN_00191330. */
+/* Supplied declaration required: soundStreamCommandManagerGetInstance. */
 /* Supplied declaration required: FUN_001a5ae0. */
 /* Supplied declaration required: FUN_001b1998. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -37,7 +37,7 @@ void nw_snd_internal_TaskThread_ThreadFunc(int param_1)
     FUN_001b1998();
     FUN_001a5ae0();
     nn_os_CriticalSection_Leave(param_1 + 8);
-    FUN_00191330();
+    soundStreamCommandManagerGetInstance();
     FUN_00191260();
     temp_v0 = *(char *)(param_1 + 0x14);
   }

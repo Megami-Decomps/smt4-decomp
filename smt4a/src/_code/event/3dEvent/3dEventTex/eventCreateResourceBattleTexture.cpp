@@ -12,8 +12,8 @@ struct BattleTextureResourceRecord {
 }
 extern "C" {
 BattleTextureResourceRecord *FUN_00283498(u32 id);
-s32 FUN_00162ea4();
-u32 FUN_00409fe8(s32 textureId, s32 first, s32 second);
+s32 eventIsSkipping();
+u32 resourceCacheGetOrLoadModel(s32 textureId, s32 first, s32 second);
 u32 eventUpdateTextureFadeJob(void *job);
 u32 FUN_00289f10(void *job);
 void jobWorkDestroy34(void *job);
@@ -34,10 +34,10 @@ void *eventCreateResourceBattleTexture(u32 id, f32 x, f32 y)
     work->stopWhenTransparent = 0;
     work->unk17 = 0;
     work->textureId = -FUN_00283498(id)->textureId;
-    if (FUN_00162ea4()) {
+    if (eventIsSkipping()) {
         work->state = 1;
     } else {
-        work->resource = FUN_00409fe8(work->textureId, 1, 1);
+        work->resource = resourceCacheGetOrLoadModel(work->textureId, 1, 1);
         work->state = 2;
     }
     work->id = id;

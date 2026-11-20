@@ -11,7 +11,7 @@ struct TransitionView;
 extern "C" {
 
 int panelSetMode3(...);
-int FUN_0037c8e4(...);
+int messageBannerInitCounter(...);
 int messageDismissNumericBanner(...);
 int partyAdjustCounterIfEnoughActive(...);
 int FUN_003edfd4(...);
@@ -51,7 +51,7 @@ int resourceEnsureCachedObject(...);
 int btlResetMatchingBoundObjects(...);
 int keyedValueFindPair(...);
 int btlQueueActionMessage(...);
-int FUN_004fb798(...);
+int btlRecoverHpMpByPercent(...);
 int FUN_004fd508(...);
 int FUN_004fe7e4(...);
 int FUN_004fe900(...);
@@ -184,7 +184,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: buttonHelpGetValue. */
 extern int panelIsActiveState2(void);
 extern int panelStateIs0(void);
-/* Supplied declaration required: FUN_0037c8e4. */
+/* Supplied declaration required: messageBannerInitCounter. */
 /* Supplied declaration required: messageDismissNumericBanner. */
 extern unsigned int FUN_003d214c(unsigned int);
 extern int FUN_003e48bc(void);
@@ -284,7 +284,7 @@ extern int FUN_004fa7bc(int);
 /* Supplied declaration required: btlQueueActionMessage. */
 /* Supplied declaration required: FUN_004fb4fc. */
 /* Supplied declaration required: btlQueueDuplicateSuppressedAction. */
-/* Supplied declaration required: FUN_004fb798. */
+/* Supplied declaration required: btlRecoverHpMpByPercent. */
 /* Supplied declaration required: btlReflectCreateKind19. */
 /* Supplied declaration required: FUN_004fd508. */
 /* Supplied declaration required: FUN_004fe7e4. */
@@ -1277,7 +1277,7 @@ LAB_0040f684:
           else {
             temp_v12 = 1;
           }
-          FUN_004fb798(0,*(unsigned int *)(psVar2 + 4),0,
+          btlRecoverHpMpByPercent(0,*(unsigned int *)(psVar2 + 4),0,
                        *(int *)(temp_v3 + 0x1ed4) + (short)puVar6[2] * 0x1d0,0,temp_v12,0xffffffff,
                        0xffffffff,0,0,0,9,0,1,1);
           btlQueueActionMessage(0,*(unsigned int *)(psVar2 + 4),0x1000267,0,1,0,0);
@@ -1325,7 +1325,7 @@ LAB_0040fb78:
     else {
       temp_v3 = FUN_0034919c();
       if (temp_v3 == 0) {
-        FUN_0037c8e4(0);
+        messageBannerInitCounter(0);
       }
     }
     *(int *)(psVar2 + 0x26) = *(int *)(psVar2 + 0x26) + 1;

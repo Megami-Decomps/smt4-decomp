@@ -203,7 +203,7 @@ s32 sortMenuDraw(u32 job)
         renderStackSet(&g_titleScene->scissor, 0);
     }
 
-    if (static_cast<s32>(FUN_0029ee54(&work->list)) > static_cast<s32>(FUN_0029d644(&work->list))) {
+    if (static_cast<s32>(gridNavigationGetItemCount(&work->list)) > static_cast<s32>(uiListGetVisibleCount(&work->list))) {
         UiSpriteState *bar = &work->sprites[12];
         efctSetSpeed(vec2GetSpeed(bar));
         s32 y = vec2GetYInt(bar);

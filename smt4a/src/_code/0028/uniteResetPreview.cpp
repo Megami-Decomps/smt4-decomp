@@ -13,7 +13,7 @@ void uniteResetPreview(void)
         modelPlayClip(unite->previewA.firstModel->object, 0, 2, 480.0f, 0.0f);
         modelPlayClip(unite->previewA.secondModel->object, 0, 2, 480.0f, 0.0f);
         controllerRefreshAtUnitScale(reinterpret_cast<AnimatedObject *>(unite->previewA.camera), reinterpret_cast<CameraMotionOutput *>(unite->previewA.cameraPose), 0);
-        FUN_003f9ac4(reinterpret_cast<AnimatedObject *>(unite->previewA.camera), reinterpret_cast<CameraMotionOutput *>(unite->previewA.cameraPose), 0, 480.0f);
+        cameraMotionSampleAtFrame(reinterpret_cast<AnimatedObject *>(unite->previewA.camera), reinterpret_cast<CameraMotionOutput *>(unite->previewA.cameraPose), 0, 480.0f);
         unite->previewA.frames = 480;
         unite->previewA.resetCount++;
     }

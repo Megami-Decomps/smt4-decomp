@@ -7,14 +7,14 @@ extern "C" void asdTextureSelectHeap(TextureHeapEntry *entry, u32 heap)
     if (entry != NULL && entry->texture != NULL) {
         switch (heap) {
         case ASD_HEAP_EXTRA:
-            entry->texture->unk08 = heap;
+            entry->texture->heap = heap;
             break;
         case ASD_HEAP_VRAM_A:
-            entry->texture->unk08 = heap;
+            entry->texture->heap = heap;
             entry->flags |= 0x20;
             break;
         case ASD_HEAP_VRAM_B:
-            entry->texture->unk08 = heap;
+            entry->texture->heap = heap;
             entry->flags |= 0x40;
             break;
         }

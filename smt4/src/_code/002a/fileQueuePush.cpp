@@ -2,8 +2,8 @@
 #include "nn/Result.h"
 #include "sys/ResultReport.h"
 extern "C" {
-s32 FUN_002c40f8(s32 *index, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
-s32 FUN_002c5254(u32 *previousCount, u32 semaphore, u32 releaseCount);
+s32 svcWaitSynchronizationN(s32 *index, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
+s32 svcReleaseSemaphore(u32 *previousCount, u32 semaphore, u32 releaseCount);
 void *nnnstdMemCpy(void *destination, const void *source, u32 bytes);
 
 // Copy a request into the next ring slot and advance the write index.
@@ -22,7 +22,7 @@ static __inline void semaphoreAcquire(u32 *semaphore)
 {
     u32 handle = *semaphore;
     s32 index;
-    s32 result = FUN_002c40f8(&index, &handle, 1, 0, -1);
+    s32 result = svcWaitSynchronizationN(&index, &handle, 1, 0, -1);
     bool failed = nnResultIsFailure(result);
     if (failed)
         resultHandleFailure(result, failed);
@@ -32,7 +32,7 @@ static __inline void semaphoreAcquire(u32 *semaphore)
 static __inline void semaphoreRelease(u32 *semaphore)
 {
     u32 previousCount;
-    s32 result = FUN_002c5254(&previousCount, *semaphore, 1);
+    s32 result = svcReleaseSemaphore(&previousCount, *semaphore, 1);
     bool failed = nnResultIsFailure(result);
     if (failed)
         resultHandleFailure(result, failed);

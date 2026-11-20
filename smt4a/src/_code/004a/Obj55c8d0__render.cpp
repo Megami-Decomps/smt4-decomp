@@ -18,7 +18,7 @@ struct TitleScene;
 void gxResetColorQuadToWhite(void);
 void skinObjectUpdateMatrices(RenderCtxA *scene);
 void renderCtxResetColorScale(RenderCtxA *scene);
-void FUN_004a559c(TitleMenu *menu);
+void bibleAnalyzeDrawMenu(TitleMenu *menu);
 void FUN_004a5344(TitleMenu *menu);
 
 /* Draws the title menu's entries in compact or scrolling form, then refreshes the title scene. */
@@ -33,7 +33,7 @@ void _ZN9Obj55c8d06renderEv(TitleMenu *menu)
             break;
         default:
             menu->drawMode = 0x97;
-            FUN_004a559c(menu);
+            bibleAnalyzeDrawMenu(menu);
             break;
         }
         skinObjectUpdateMatrices(g_renderCtx);

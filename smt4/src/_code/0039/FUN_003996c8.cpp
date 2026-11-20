@@ -39,7 +39,7 @@ extern unsigned char mathHeadingToDirectionCode(int context, float angle);
 /* Supplied declaration required: titleScissorApplyOrClearRequests. */
 extern float *lmapSceneGetObj(void);
 /* Supplied declaration required: mathDistanceBetweenPoints. */
-extern int FUN_00288f78(unsigned int);
+extern int mapClassifyPlaceState(unsigned int);
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
 extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
@@ -96,7 +96,7 @@ void FUN_003996c8(int param_1)
     return;
   }
   if ((g_gameState.currentObjectId != 0xb6) && (g_gameState.currentObjectId != 0xb7 && g_gameState.currentObjectId != 0xb8)) {
-    temp_v6 = FUN_00288f78(temp_v4);
+    temp_v6 = mapClassifyPlaceState(temp_v4);
     if (temp_v6 == 2 || temp_v6 == 3) {
       (*(int *)((unsigned char *)&DAT_0044cdc8 + 0x10)) = 0xf1;
       FUN_00231dec(param_1);

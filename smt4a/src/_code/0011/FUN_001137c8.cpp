@@ -42,7 +42,7 @@ extern unsigned int DAT_00594a8c; /* 0x594a8c */
 /* Supplied declaration required: FUN_002e93c2. */
 /* Supplied declaration required: onlineSockAddrSetHost. */
 /* Supplied declaration required: onlineSockAddrConstruct. */
-extern int *FUN_002ea704(void);
+extern int *watcherGetEnabledFlag(void);
 /* Supplied declaration required: onlineUrlDestroy. */
 extern int FUN_002f7896(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002fd5d4. */
@@ -86,7 +86,7 @@ void FUN_001137c8(int param_1,unsigned int param_2)
     return;
   }
   FUN_002fd5d4(temp_v11,param_2);
-  piVar3 = (int *)FUN_002ea704();
+  piVar3 = (int *)watcherGetEnabledFlag();
   temp_v1 = (**(romwright_code **)(*piVar3 + 0x2c))();
   temp_v4 = *(char *)(temp_v1 + 8) == '\0';
   do {
@@ -138,7 +138,7 @@ void FUN_001137c8(int param_1,unsigned int param_2)
     _ZN9Obj55aff4D1Ev(temp_v7);
     temp_v3 = FUN_002fe4bc(temp_v11);
     temp_v6 = (unsigned short)((temp_v3 & 0xff) << 8) | ((unsigned short)(temp_v3 >> 8) & 0xff);
-    piVar3 = (int *)FUN_002ea704();
+    piVar3 = (int *)watcherGetEnabledFlag();
     temp_v2 = (**(romwright_code **)(*piVar3 + 0x2c))();
     FUN_00121050(temp_v2,temp_v9,temp_v5,1);
     FUN_0011394c(param_1,temp_v5);

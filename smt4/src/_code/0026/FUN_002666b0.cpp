@@ -34,7 +34,7 @@ extern char DAT_00447088[];       /* resource paths, 0x50 bytes apart */
 
 void *FUN_00316f70(u32 source, s32 kind);
 void sceneAttachLightChild(LmapNodeList *list, s32 index);
-void FUN_00265b78(s32 index, s32 flag);
+void lmapSlotSetVisible(s32 index, s32 flag);
 void lmapApplyLightVisibilityGrid(const char *path);
 void nn_math_ARMv6_MTX33CopyAsm(Mtx33 *destination, const Mtx33 *source);
 
@@ -71,7 +71,7 @@ void FUN_002666b0(void)
                 if (g_lmapMainState->slots[i].registered == 0)
                     g_lmapMainState->slots[i].registered = 1;
             }
-            FUN_00265b78(i, 1);
+            lmapSlotSetVisible(i, 1);
         }
     }
 

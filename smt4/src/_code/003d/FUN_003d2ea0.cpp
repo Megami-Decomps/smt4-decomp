@@ -18,8 +18,8 @@ extern "C" {
 void FUN_002569ac(BtlMainState **turn, s32 bank);
 void btlEntryValuesCopy(BtlMainState **turn, CommandState *work);
 void FUN_00227b14(BtlUi *ui, u16 member, s32 mode);
-void FUN_0022a5d8(s32 effect, BtlEntry *entry, s32 mode);
-void FUN_0026beb4(s32 chance, CommandState *work, s32 a, BtlActionRecord *record, s32 b);
+void btlSubmitAction(s32 effect, BtlEntry *entry, s32 mode);
+void btlMenuCursorStepReflectAction(s32 chance, CommandState *work, s32 a, BtlActionRecord *record, s32 b);
 void frameRangeExtend(BtlMainState **turn, CommandState *work, s32 id, s32 a, s32 b, s32 c);
 void btlAdjustPropertyClamped(s32 id, s32 stat, s32 delta, s32 preview);
 s32 randRange(s32 range);
@@ -58,8 +58,8 @@ u32 FUN_003d2ea0(BtlMainState **turn, CommandState *work)
         }
     }
     if (effect != 0) {
-        FUN_0022a5d8(effect, work->entry, 1);
-        FUN_0026beb4(chance, work, 0, work->record, 1);
+        btlSubmitAction(effect, work->entry, 1);
+        btlMenuCursorStepReflectAction(chance, work, 0, work->record, 1);
         frameRangeExtend(turn, work, work->record->memberId, 0, 0x1e, 0x1e);
         reinterpret_cast<ActionStateChannels *>(g_btlAction.slots)->entries[(*turn)->actionState.index].pending = 0x1b;
     } else {

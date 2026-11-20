@@ -1,0 +1,246 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `sortMenuCalcUpdate` (_code @ 0x22a0a0, 0x530 bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+#include "event/2dEvent/2dEventTex.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+
+extern "C" {
+
+int padQueryLogicalKey(...);
+int uiSpriteAdvanceAnimation(...);
+int eventQueueAddUniqueIfValid(...);
+int ifTouchRegionRemove(void);
+int ifTouchRegionAddRequested(int, int);
+int buttonHelpSetText(...);
+int gridNavigationHandleConfirm(int, int);
+int gridNavigationGetItemCount(...);
+int buttonHelpSetHelpState(int);
+int uiScrollHandleActionsOrTouch(int, unsigned int, int, int, int, int, char [16], int, int);
+int buttonHelpSetMode(...);
+
+/* stack frame of void: 4 slot(s), 13 byte(s) */
+typedef struct {
+    unsigned char sp34; /* 0x34: local_34 */
+    unsigned int sp38; /* 0x38: local_38 */
+    unsigned int sp44; /* 0x44: local_44 */
+    unsigned int sp48; /* 0x48: local_48 */
+} void_stack;
+
+extern int DAT_0057f280; /* 0x57f280 */
+
+/* Supplied declaration required: padQueryLogicalKey. */
+/* Supplied declaration required: uiSpriteAdvanceAnimation. */
+/* Supplied declaration required: eventQueueAddUniqueIfValid. */
+/* Supplied declaration required: ifTouchRegionRemove. */
+/* Supplied declaration required: ifTouchRegionAddRequested. */
+/* Supplied declaration required: buttonHelpSetText. */
+/* Supplied declaration required: gridNavigationHandleConfirm. */
+extern unsigned int mapGetDisplayName(unsigned char);
+extern int resourceRunOperationIfUnblocked(int);
+extern int listCursorGetRowIfUnblocked(int);
+/* Supplied declaration required: gridNavigationGetItemCount. */
+/* Supplied declaration required: buttonHelpSetHelpState. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
+extern int uiSearchPrimary(int);
+/* Supplied declaration required: buttonHelpSetMode. */
+
+
+unsigned int sortMenuCalcUpdate(void)
+
+{
+/* irregular: 11 native warning(s); review required */
+  int temp_v0;
+  unsigned char temp_v1;
+  unsigned char temp_v2;
+  unsigned short temp_v3;
+  int temp_v4;
+  int temp_v5;
+  int temp_v6;
+  unsigned int temp_v7;
+  int temp_v8;
+  int temp_v9;
+  unsigned char *pbVar11;
+  char temp_v10 [16];
+  
+  temp_v0 = DAT_0057f280;
+  temp_v10[0] = '\0';
+  switch(*(unsigned int *)(DAT_0057f280 + 0x744)) {
+  case 1:
+    temp_v8 = *(int *)(DAT_0057f280 + 0x754);
+    if (*(char *)(DAT_0057f280 + 0x74e) == '\x02') {
+      temp_v9 = 10;
+    }
+    else {
+      temp_v9 = 9;
+    }
+    if (temp_v9 < temp_v8) {
+      if (*(char *)(DAT_0057f280 + 0x74e) == '\x02') {
+        temp_v8 = 10;
+      }
+      else {
+        temp_v8 = 9;
+      }
+    }
+    else if (temp_v8 < 1) break;
+    temp_v9 = 0;
+    temp_v5 = DAT_0057f280 + 0x788;
+    do {
+      if (temp_v9 <= *(int *)(temp_v0 + 0x748)) {
+        temp_v6 = temp_v0 + temp_v9 * 0x8c;
+        uiSpriteAdvanceAnimation(temp_v6 + 0x28);
+        if ((temp_v8 - 1 <= temp_v9) && (*(char *)(temp_v6 + 0xb2) != '\0')) {
+          *(unsigned int *)(temp_v0 + 0x744) = 2;
+          if (*(char *)(temp_v0 + 0x74e) != '\x02') {
+            temp_v6 = 0;
+            if (temp_v6 < temp_v8) {
+              do {
+                temp_v3 = ifTouchRegionAddRequested(0x15,temp_v6 + 7);
+                temp_v4 = temp_v6 * 2;
+                temp_v6 = temp_v6 + 1;
+                *(unsigned short *)(temp_v0 + temp_v4 + 0x772) = temp_v3;
+                *(short *)(temp_v0 + 0x786) = *(short *)(temp_v0 + 0x786) + 1;
+              } while (temp_v6 < temp_v8);
+            }
+          }
+          else {
+            temp_v6 = 0;
+            if (temp_v6 < temp_v8) {
+              do {
+                temp_v3 = ifTouchRegionAddRequested(0x15,temp_v6 + 0x2b);
+                temp_v4 = temp_v6 * 2;
+                temp_v6 = temp_v6 + 1;
+                *(unsigned short *)(temp_v0 + temp_v4 + 0x772) = temp_v3;
+                *(short *)(temp_v0 + 0x786) = *(short *)(temp_v0 + 0x786) + 1;
+              } while (temp_v6 < temp_v8);
+            }
+          }
+          temp_v6 = resourceRunOperationIfUnblocked(temp_v5);
+          temp_v4 = listCursorGetRowIfUnblocked(temp_v5);
+          temp_v7 = mapGetDisplayName(*(unsigned char *)(temp_v4 + temp_v6 + temp_v0 + 0x758));
+          buttonHelpSetText(temp_v7,0xf4f4f4ff);
+          temp_v6 = gridNavigationGetItemCount(temp_v5);
+          temp_v4 = uiSearchPrimary(temp_v5);
+          if (temp_v4 < temp_v6) {
+            temp_v3 = ifTouchRegionAddRequested(0x15,0x46);
+            *(unsigned short *)(temp_v0 + 0x76c) = temp_v3;
+            temp_v3 = ifTouchRegionAddRequested(0x15,0x47);
+            *(unsigned short *)(temp_v0 + 0x76e) = temp_v3;
+            temp_v3 = ifTouchRegionAddRequested(0x15,0x48);
+            *(unsigned short *)(temp_v0 + 0x770) = temp_v3;
+            *(short *)(temp_v0 + 0x786) = *(short *)(temp_v0 + 0x786) + 3;
+          }
+        }
+      }
+      temp_v9 = temp_v9 + 1;
+    } while (temp_v9 < temp_v8);
+    break;
+  case 2:
+    uiSpriteAdvanceAnimation(DAT_0057f280 + 0x5a0);
+    uiSpriteAdvanceAnimation(temp_v0 + 0x62c);
+    temp_v8 = temp_v0 + 0x788;
+    temp_v9 = gridNavigationGetItemCount();
+    temp_v5 = uiSearchPrimary(temp_v8);
+    if (temp_v5 < temp_v9) {
+      uiSpriteAdvanceAnimation(temp_v0 + 0x6b8);
+    }
+    temp_v5 = resourceRunOperationIfUnblocked(temp_v8);
+    temp_v6 = listCursorGetRowIfUnblocked(temp_v8);
+    temp_v7 = reinterpret_cast<unsigned int>(asdTMTexTableEntryAt(0x15,0x48));
+    temp_v9 = temp_v8;
+    uiScrollHandleActionsOrTouch(temp_v8,temp_v7,temp_v0 + 0x772,(int)*(short *)(temp_v0 + 0x770),
+                 (int)*(short *)(temp_v0 + 0x76c),(int)*(short *)(temp_v0 + 0x76e),temp_v10,0,1);
+    if (temp_v9 != 0) {
+      temp_v9 = listCursorGetRowIfUnblocked(temp_v8);
+      if (temp_v9 != temp_v5 + temp_v6) {
+        *(unsigned char *)(temp_v0 + 0x74d) = 1;
+      }
+    }
+    else {
+      temp_v9 = temp_v8;
+      gridNavigationHandleConfirm(temp_v8,1);
+      if (temp_v9 == 0) {
+        temp_v9 = 0;
+        padQueryLogicalKey(0,1);
+        if (!(temp_v9 == 0 && temp_v10[0] == '\0')) {
+          *(unsigned char *)(temp_v0 + 0x74c) = 1;
+          *(unsigned int *)(temp_v0 + 0x744) = 3;
+          if (-1 < *(int *)(temp_v0 + 0x750)) {
+            temp_v9 = reinterpret_cast<int>(saveGetUserSettingsBlock());
+            pbVar11 = (unsigned char *)(temp_v9 + *(int *)(temp_v0 + 0x750));
+            temp_v9 = resourceRunOperationIfUnblocked(temp_v8);
+            temp_v8 = listCursorGetRowIfUnblocked(temp_v8);
+            temp_v2 = *(unsigned char *)(temp_v9 + temp_v8 + temp_v0 + 0x758) & 0x7f;
+            temp_v1 = temp_v2 | (*pbVar11 & 0x80);
+            *pbVar11 = temp_v1;
+            if (*(char *)(temp_v0 + 0x74d) == '\0') {
+              temp_v2 = temp_v1 | 0x80;
+            }
+            *pbVar11 = temp_v2;
+          }
+          temp_v7 = 0x100020e;
+        }
+        else {
+          temp_v9 = 1;
+          padQueryLogicalKey();
+          temp_v8 = DAT_0057f280;
+          if (temp_v9 == 0) break;
+          temp_v9 = 0;
+          *(unsigned int *)(DAT_0057f280 + 0x744) = 4;
+          if (0 < *(short *)(temp_v8 + 0x786)) {
+            do {
+              *(unsigned short *)(temp_v8 + temp_v9 * 2 + 0x76c) = 0xffff;
+              ifTouchRegionRemove();
+              temp_v9 = temp_v9 + 1;
+            } while (temp_v9 < *(short *)(temp_v8 + 0x786));
+          }
+          if (*(char *)(temp_v8 + 0x74e) != '\x02' && *(char *)(temp_v8 + 0x74e) != '\x01') {
+            if (*(char *)(temp_v8 + 0x7f4) != '\0') {
+              if (*(char *)(temp_v8 + 0x7f5) != '\0') {
+                buttonHelpSetHelpState(1);
+              }
+              else {
+                buttonHelpSetText(temp_v8 + 0x7f6,0xf4f4f4ff);
+              }
+              *(unsigned char *)(temp_v8 + 0x7f4) = 0;
+            }
+            else {
+              buttonHelpSetMode(0);
+            }
+          }
+          temp_v7 = 0x100020f;
+        }
+        eventQueueAddUniqueIfValid(temp_v7);
+        break;
+      }
+      *(unsigned char *)(temp_v0 + 0x74d) = 1;
+    }
+    temp_v9 = resourceRunOperationIfUnblocked(temp_v8);
+    temp_v8 = listCursorGetRowIfUnblocked(temp_v8);
+    temp_v7 = mapGetDisplayName(*(unsigned char *)(temp_v8 + temp_v9 + temp_v0 + 0x758));
+    buttonHelpSetText(temp_v7,0xf4f4f4ff);
+    break;
+  case 3:
+    uiSpriteAdvanceAnimation(DAT_0057f280 + 0x5a0);
+    uiSpriteAdvanceAnimation(temp_v0 + 0x62c);
+    temp_v8 = gridNavigationGetItemCount();
+    temp_v9 = uiSearchPrimary(temp_v0 + 0x788);
+    if (temp_v9 < temp_v8) {
+      uiSpriteAdvanceAnimation(temp_v0 + 0x6b8);
+    }
+    temp_v8 = DAT_0057f280;
+    if (*(char *)(temp_v0 + 0x74e) != '\x02') {
+      *(unsigned char *)(DAT_0057f280 + 0x74c) = 0;
+      *(unsigned int *)(temp_v8 + 0x744) = 2;
+      if (*(char *)(temp_v8 + 0x74d) != '\0') {
+        *(unsigned char *)(temp_v8 + 0x74d) = 0;
+      }
+      else {
+        *(unsigned char *)(temp_v8 + 0x74d) = 1;
+      }
+    }
+  }
+  *(int *)(temp_v0 + 0x748) = *(int *)(temp_v0 + 0x748) + 1;
+  return 0;
+}
+
+} /* extern "C" */

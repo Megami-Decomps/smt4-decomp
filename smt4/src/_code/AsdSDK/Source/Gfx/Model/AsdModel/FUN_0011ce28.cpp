@@ -4,7 +4,7 @@
 extern "C" {
 
 extern u32 DAT_00471ba4;
-extern u32 DAT_00471b90;
+extern u32 g_srvInitializeCount;
 
 s32 FUN_001383a8(u32* state, u32 request);
 s32 FUN_001295ec(void);
@@ -30,7 +30,7 @@ s32 FUN_0011ce28(u32 request)
         }
         if ((status & 0x80000000u) == 0) {
             result = FUN_001295ec();
-            ++DAT_00471b90;
+            ++g_srvInitializeCount;
         }
         return result;
     }

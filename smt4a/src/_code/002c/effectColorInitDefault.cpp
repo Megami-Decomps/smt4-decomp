@@ -1,6 +1,6 @@
 #include "shard/W6_W6Match3_EffectColor.h"
 
-extern "C" EffectColorOverride* DAT_00570ab4;
+extern "C" EffectColorOverride* g_effectColorOverride;
 
 // Use opaque mid-gray unless the effect's RGB override is enabled.
 static __inline void effectColorSetGray(EffectColor *color, f32 level, f32 alpha)
@@ -14,9 +14,9 @@ static __inline void effectColorSetGray(EffectColor *color, f32 level, f32 alpha
 extern "C" void effectColorInitDefault(EffectColor* color)
 {
     effectColorSetGray(color, 0.5f, 1.0f);
-    if (DAT_00570ab4 != NULL && DAT_00570ab4->enabled != 0) {
-        color->red = DAT_00570ab4->red;
-        color->green = DAT_00570ab4->green;
-        color->blue = DAT_00570ab4->blue;
+    if (g_effectColorOverride != NULL && g_effectColorOverride->enabled != 0) {
+        color->red = g_effectColorOverride->red;
+        color->green = g_effectColorOverride->green;
+        color->blue = g_effectColorOverride->blue;
     }
 }

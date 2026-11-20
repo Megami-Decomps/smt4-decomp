@@ -47,9 +47,9 @@ extern SoundEffectLink g_soundEffectBuffers;
 extern SoundEffectPair DAT_0044e0f0;
 
 extern u8 entry;
-extern Obj421a58 DAT_004c5484;
-extern SoundEffectSmoothing DAT_004c54e4;
-extern SoundEffectReverb DAT_004c5604;
+extern Obj421a58 g_soundDelayEffect;
+extern SoundEffectSmoothing g_soundDelayParameters;
+extern SoundEffectReverb g_soundReverbParameters;
 extern const u32 DAT_004d4668[];
 
 int __aeabi_atexit(void *object, void (*destructor)(void *), void *moduleHandle);
@@ -63,27 +63,27 @@ void FUN_003efc88(void)
     g_soundEffectBuffers.id = -1;
     DAT_0044e0f0.first = 0;
     DAT_0044e0f0.second = 0;
-    Obj421a58 *smoothing = new (&DAT_004c5484) Obj421a58();
+    Obj421a58 *smoothing = new (&g_soundDelayEffect) Obj421a58();
     __aeabi_atexit(smoothing, FUN_00378e28, &entry);
-    DAT_004c54e4.interval = 250;
-    DAT_004c54e4.rise = 0.4f;
-    DAT_004c54e4.fall = 0.5f;
-    DAT_004c54e4.enabled = 0;
-    Obj421a78 *reverb = new (&DAT_004c54e4 + 1) Obj421a78();
+    g_soundDelayParameters.interval = 250;
+    g_soundDelayParameters.rise = 0.4f;
+    g_soundDelayParameters.fall = 0.5f;
+    g_soundDelayParameters.enabled = 0;
+    Obj421a78 *reverb = new (&g_soundDelayParameters + 1) Obj421a78();
     __aeabi_atexit(reverb, FUN_003793d8, &entry);
-    DAT_004c5604.time = 60;
-    DAT_004c5604.delay = 4000;
-    DAT_004c5604.volume = 100;
-    DAT_004c5604.fall = 0.5f;
-    DAT_004c5604.rise = 0.4f;
-    DAT_004c5604.source = DAT_004d4668;
-    DAT_004c5604.ratio = 0.6f;
-    DAT_004c5604.gain = 0.4f;
-    DAT_004c5604.enabled = 0;
-    DAT_004c5604.unk21 = 0;
-    DAT_004c5604.sizeA = 0xbe0;
-    DAT_004c5604.sizeB = 0xe60;
-    DAT_004c5604.sizeC = 0x820;
+    g_soundReverbParameters.time = 60;
+    g_soundReverbParameters.delay = 4000;
+    g_soundReverbParameters.volume = 100;
+    g_soundReverbParameters.fall = 0.5f;
+    g_soundReverbParameters.rise = 0.4f;
+    g_soundReverbParameters.source = DAT_004d4668;
+    g_soundReverbParameters.ratio = 0.6f;
+    g_soundReverbParameters.gain = 0.4f;
+    g_soundReverbParameters.enabled = 0;
+    g_soundReverbParameters.unk21 = 0;
+    g_soundReverbParameters.sizeA = 0xbe0;
+    g_soundReverbParameters.sizeB = 0xe60;
+    g_soundReverbParameters.sizeC = 0x820;
 }
 
 }

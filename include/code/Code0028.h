@@ -11,7 +11,7 @@ u8 FUN_002857dc(void);
 
 u32 gxPackFadeKindAlphaWord(u32 kind, f32 value);
 
-u32 FUN_00287800(void);
+u32 supportUnitProgressIsComplete(void);
 
 int FUN_00288ddc(int limit, u32 id);
 

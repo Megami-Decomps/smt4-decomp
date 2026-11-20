@@ -17,7 +17,7 @@ int mathDistanceBetweenPoints(void);
 int FUN_002562e4(int, int);
 int partyApplyNonlethalAilmentDamage(int, int);
 int FUN_0025bc80(void);
-int FUN_0027f48c(...);
+int mapProjectPositionToGround(...);
 int FUN_0027f848(void);
 int padGetNormalizedAnalogStick(unsigned int *, unsigned int [13], int);
 int lmapSetSceneId(unsigned int);
@@ -58,7 +58,7 @@ extern signed char DAT_0049fce8; /* 0x49fce8 */
 extern int inputIsQuestCancelPressed(void);
 extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0025bc80. */
-/* Supplied declaration required: FUN_0027f48c. */
+/* Supplied declaration required: mapProjectPositionToGround. */
 /* Supplied declaration required: FUN_0027f848. */
 /* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: lmapSetSceneId. */
@@ -298,7 +298,7 @@ joined_r0x002c99a8:
         *(unsigned int *)(temp_v2 + 0x3c) = temp_v7;
         if ((DAT_0049fce8 == '\0') && (DAT_0049f93d != '\0')) {
           temp_v0 = temp_v2 + 0x28;
-          FUN_0027f48c(temp_v0,temp_v2 + 0x34);
+          mapProjectPositionToGround(temp_v0,temp_v2 + 0x34);
           temp_v2 = g_lmapScene;
           temp_v4 = 0;
           if (temp_v0 != 0) {

@@ -4,7 +4,7 @@
 extern "C" {
 void FUN_001a1f7c(s32);
 s32 FUN_001edcf0(void);
-void FUN_00247af8(s32, s32, s32, s32, s32);
+void saveLoadThreadRequestInit(s32, s32, s32, s32, s32);
 void buttonHelpTexturesUnref(void);
 void buttonHelpCreate(void);
 void buttonHelpAcquireResources(void);
@@ -23,7 +23,7 @@ u32 saveLoadProcessBootUpdate(u32 job)
         buttonHelpAcquireResources();
         buttonHelpCreate();
         messageMainSetEnabled(0);
-        FUN_00247af8(0, 0, 0, 0, 0);
+        saveLoadThreadRequestInit(0, 0, 0, 0, 0);
         work->state = 9;
         break;
     case 9:

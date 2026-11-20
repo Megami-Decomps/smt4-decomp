@@ -9,7 +9,7 @@ void objSlotsAllEmpty(Obj4206e8 *holder);
 /* Perform both cleanup stages on the map scene's player-model holder. */
 void lmapSceneCleanupObject(void)
 {
-    FUN_00297684(g_lmapScene->playerModel);
+    lmapPlayerModelDestroy(g_lmapScene->playerModel);
     objSlotsAllEmpty(g_lmapScene->playerModel);
 }
 

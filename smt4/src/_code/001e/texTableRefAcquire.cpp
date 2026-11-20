@@ -5,14 +5,14 @@ extern "C" {
 int asdTMTexTableLoadEntryAsync(int table, int index);
 int asdTMTexTableLoadTmx(int table, int flag);
 
-extern s8 DAT_0043dcc8;
+extern s8 g_texTableRefCount;
 
 /* Loads the table on the first reference. */
 void texTableRefAcquire(void)
 {
     s32 i;
 
-    if (DAT_0043dcc8 <= 0) {
+    if (g_texTableRefCount <= 0) {
         asdTMTexTableLoadTmx(0xd, 0);
         i = 0;
         do {
@@ -20,7 +20,7 @@ void texTableRefAcquire(void)
             i++;
         } while (i < 5);
     }
-    DAT_0043dcc8 = DAT_0043dcc8 + 1;
+    g_texTableRefCount = g_texTableRefCount + 1;
 }
 
 } /* extern "C" */

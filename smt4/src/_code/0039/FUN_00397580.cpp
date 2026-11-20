@@ -13,7 +13,7 @@ int flaggedEntryGetValueB(...);
 int messageOwnerSetState(int, int);
 int flaggedEntrySetValueB(int, int);
 int flaggedEntryGetValueA(int);
-int FUN_0029efd8(int, int);
+int gridNavigationHandleConfirm(int, int);
 int eventQueueAddUniqueIfValid(int);
 int timerStart(int, int, int);
 int uiSpriteAdvanceAnimation(int);
@@ -33,11 +33,11 @@ typedef struct {
 /* Supplied declaration required: flaggedEntryGetValueB. */
 extern int inputIsQuestConfirmPressed(void);
 extern int inputIsQuestMenuPressed(void);
-extern int FUN_0027ee9c(void);
+extern int inputConfirmPressed(void);
 /* Supplied declaration required: messageOwnerSetState. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
 /* Supplied declaration required: flaggedEntryGetValueA. */
-/* Supplied declaration required: FUN_0029efd8. */
+/* Supplied declaration required: gridNavigationHandleConfirm. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
@@ -109,7 +109,7 @@ void FUN_00397580(int param_1)
     return;
   }
   temp_v6 = param_1 + 0x5e4;
-  if ((temp_v7 != 6) && (temp_v8 = FUN_0027ee9c(), temp_v8 == 0)) {
+  if ((temp_v7 != 6) && (temp_v8 = inputConfirmPressed(), temp_v8 == 0)) {
     temp_v7 = inputIsQuestMenuPressed();
     if (temp_v7 != 0) {
       if (*(char *)(param_1 + 0x29) != '\0') {
@@ -160,7 +160,7 @@ void FUN_00397580(int param_1)
       return;
     }
     if (*(char *)(param_1 + 0x648) == '\0') {
-      FUN_0029efd8(param_1 + 0x580,1);
+      gridNavigationHandleConfirm(param_1 + 0x580,1);
       temp_v10 = flaggedEntryGetValueB(param_1 + 0x580);
       *(unsigned int *)(param_1 + 0x10) = temp_v10;
       temp_v7 = flaggedEntryGetValueA(param_1 + 0x580);
@@ -173,8 +173,8 @@ void FUN_00397580(int param_1)
       return;
     }
     temp_v7 = temp_v6;
-    FUN_0029efd8(temp_v6,0);
-    FUN_0029efd8(param_1 + 0x580,0);
+    gridNavigationHandleConfirm(temp_v6,0);
+    gridNavigationHandleConfirm(param_1 + 0x580,0);
     temp_v8 = flaggedEntryGetValueA(param_1 + 0x580);
     if (temp_v8 != 6) {
       *(unsigned char *)(param_1 + 0x648) = 0;

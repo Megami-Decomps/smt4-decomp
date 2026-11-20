@@ -2,8 +2,8 @@
 #include "ui/DummyAttachmentWork.h"
 
 extern "C" {
-void FUN_00234cd8(DummyAttachmentSource *, s32, s32);
-void FUN_00341a3c(DummyAttachmentSource *);
+void moverRetargetToSlot(DummyAttachmentSource *, s32, s32);
+void moverStepOneFrame(DummyAttachmentSource *);
 void modelGetBoneTranslationByName(AsdMdlNode *, const char *, f32 *);
 
 /* Run the active member callback, update source playback and bind both sets of dummy markers. */
@@ -26,9 +26,9 @@ void dummyAttachmentUpdate(DummyAttachmentWork *work)
     if (work->mode == 0) {
         if (work->playback.applied != work->playback.requested) {
             work->playback.applied = work->playback.requested;
-            FUN_00234cd8(work->source, work->playback.requested, 0);
+            moverRetargetToSlot(work->source, work->playback.requested, 0);
         }
-        FUN_00341a3c(work->source);
+        moverStepOneFrame(work->source);
     }
     if (work->initialized == 0 && work->mode == 0) {
         char name[32];

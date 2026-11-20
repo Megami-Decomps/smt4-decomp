@@ -7,13 +7,13 @@ struct MapFollowCameraOutput {
     MapVector target;
 };
 extern "C" {
-s32 FUN_003033d4();
+s32 lmapResolveContextValue();
 f32 libm_sinf(f32 radians);
 extern MapFollowCameraOutput DAT_005f19fc;
 
 void lmapSetFollowCameraPose()
 {
-    s32 preset = FUN_003033d4();
+    s32 preset = lmapResolveContextValue();
     MapVector target;
     target.x = g_lmapScene->pose.position.x;
     target.z = g_lmapScene->pose.position.z;

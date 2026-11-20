@@ -5,7 +5,7 @@
 #include "gamedata/DataTable.h"
 
 extern "C" {
-const EnemySpawnRecord *FUN_00356308(u32 index);
+const EnemySpawnRecord *fieldFindAreaPlacementRecord(u32 index);
 const EnemySpawnCondition *dataTable29GetEntry(u16 id);
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(u32 maximum);
@@ -49,7 +49,7 @@ extern "C" void enemySpawnChooseCandidates(EnemySpawnOwner *owner, s32 mode)
         break;
     case 3: {
         for (s32 index = 0; index < availableCount; ++index) {
-            const EnemySpawnRecord *record = FUN_00356308(available[index]);
+            const EnemySpawnRecord *record = fieldFindAreaPlacementRecord(available[index]);
             if (!enemySpawnStoryAllowed(record))
                 continue;
             const EnemySpawnCondition *condition = dataTable29GetEntry(record->id);
@@ -67,7 +67,7 @@ extern "C" void enemySpawnChooseCandidates(EnemySpawnOwner *owner, s32 mode)
         u16 filtered[512];
         u16 filteredCount = 0;
         for (s32 index = 0; index < availableCount; ++index) {
-            const EnemySpawnRecord *record = FUN_00356308(available[index]);
+            const EnemySpawnRecord *record = fieldFindAreaPlacementRecord(available[index]);
             if (!enemySpawnStoryAllowed(record))
                 continue;
             const EnemySpawnCondition *condition = dataTable29GetEntry(record->id);

@@ -47,11 +47,11 @@ void scrRunOpcodesStub(u32 process);
 s32 largeGridHandleTouchSelection(NameEntryScreen* screen);
 s32 inputIsQuestConfirmPressed(void);
 s32 inputIsQuestMenuPressed(void);
-s32 FUN_004d0584(void);
+s32 inputConfirmPressed(void);
 s32 FUN_0048408c(NameEntryScreen* screen, s32 page, s32 column, s32 row);
 s32 flaggedEntryGetValueB(void* entry);
 void flaggedEntrySetValueB(void* entry, s32 value);
-s32 FUN_00228b04(void* entry, s32 direction);
+s32 gridNavigationHandleConfirm(void* entry, s32 direction);
 void nameFormSetCharacter(NameEntryScreen* screen, s32 position, s32 character);
 void FUN_00484be0(NameEntryScreen* screen);
 void sendEvent100020E(void);
@@ -79,7 +79,7 @@ void FUN_00483d34(NameEntryScreen* screen)
     if (touch == 1 || touch == 2) return;
     if (inputIsQuestConfirmPressed() != 0) return;
 
-    if (touch == 6 || FUN_004d0584() != 0) {
+    if (touch == 6 || inputConfirmPressed() != 0) {
         s32 page = screen->page;
         if (screen->kanaShift != 0) page = (s8)(page + 4);
         s32 character = FUN_0048408c(screen, page, screen->column, screen->row);
@@ -123,8 +123,8 @@ void FUN_00483d34(NameEntryScreen* screen)
     }
 
     if (screen->tabsActive != 0) {
-        s32 tab = FUN_00228b04(screen->pageCursor, 0);
-        FUN_00228b04(screen->gridCursor, 0);
+        s32 tab = gridNavigationHandleConfirm(screen->pageCursor, 0);
+        gridNavigationHandleConfirm(screen->gridCursor, 0);
         if (flaggedEntryGetValueA(reinterpret_cast<FlaggedEntry *>(screen->gridCursor)) != 6) {
             screen->tabsActive = 0;
             s32 value = flaggedEntryGetValueB(screen->pageCursor) * 5;
@@ -138,7 +138,7 @@ void FUN_00483d34(NameEntryScreen* screen)
         screen->row = flaggedEntryGetValueA(reinterpret_cast<FlaggedEntry *>(screen->gridCursor));
         return;
     }
-    FUN_00228b04(screen->gridCursor, 1);
+    gridNavigationHandleConfirm(screen->gridCursor, 1);
     screen->column = flaggedEntryGetValueB(screen->gridCursor);
     screen->row = flaggedEntryGetValueA(reinterpret_cast<FlaggedEntry *>(screen->gridCursor));
     if (screen->row == 6) {

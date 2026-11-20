@@ -8,7 +8,7 @@ extern "C" {
 int textDrawString(...);
 int efctSetSpeed(void);
 int gameGetPlayerData(...);
-int FUN_00180310(int, int, int, int);
+int statRowDrawValueImpl(int, int, int, int);
 int uiDrawItemOrStatusIcon(...);
 int asdTMTexTableEntryAt(...);
 int texDrawTableEntryAtStoredOrigin(...);
@@ -29,9 +29,9 @@ typedef struct {
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
-extern unsigned int FUN_00180114(unsigned short);
+extern unsigned int table01RecordLookupForContent(unsigned short);
 /* Supplied declaration required: gameGetPlayerData. */
-/* Supplied declaration required: FUN_00180310. */
+/* Supplied declaration required: statRowDrawValueImpl. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
@@ -105,7 +105,7 @@ LAB_003f510c:
               temp_v5 = asdTMTexTableEntryAt(0x11,0x7d);
               temp_v10 = 3;
               temp_v11 = 0x79;
-              FUN_00180310(0,*(short *)(temp_v5 + 8) + param_3,*(short *)(temp_v5 + 10) + param_4,1);
+              statRowDrawValueImpl(0,*(short *)(temp_v5 + 8) + param_3,*(short *)(temp_v5 + 10) + param_4,1);
               efctSetSpeed();
               return;
             }
@@ -116,7 +116,7 @@ LAB_003f510c:
           temp_v5 = asdTMTexTableEntryAt(0x11,0x15);
           temp_v10 = 2;
           temp_v11 = 0x79;
-          FUN_00180310(0,*(short *)(temp_v5 + 8) + param_3,*(short *)(temp_v5 + 10) + param_4,1);
+          statRowDrawValueImpl(0,*(short *)(temp_v5 + 8) + param_3,*(short *)(temp_v5 + 10) + param_4,1);
         }
         else if (*(char *)(param_1 + 0x20) == '\0') {
           if (*(int *)(param_1 + 0x34) != -1) {
@@ -127,7 +127,7 @@ LAB_003f510c:
               temp_v5 = btlMainGetUnk14();
             }
             if (temp_v5 != 0) {
-              temp_v3 = FUN_00180114(*(unsigned short *)(temp_v5 + 0x62));
+              temp_v3 = table01RecordLookupForContent(*(unsigned short *)(temp_v5 + 0x62));
               sprintf((char *)&temp_v10,"%s",temp_v3);
             }
           }

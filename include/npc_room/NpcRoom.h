@@ -31,7 +31,8 @@ typedef struct NpcRoom {
     /* 0x60 */ ScriptProcess *eventProcess;
     /* 0x64 */ s16 displayModels[NPC_ROOM_JOBS][NPC_ROOM_JOBS]; /* model index per display row and column, < 0 when empty */
     /* 0xE4 */ s32 displayCount;
-    /* 0xE8 */ u8 unkE8[4];
+    /* 0xE8 */ u8 defaultRoom;              /* 1 when the room was opened without an entry (room 0) */
+    /* 0xE9 */ u8 unkE9[3];
     /* 0xEC */ s32 unkEC;                     /* frames in the current state */
     /* 0xF0 */ s32 state;
     /* 0xF4 */ s32 eventCount;                /* how many of events[] are set */
@@ -79,7 +80,7 @@ typedef char NpcRoomADisplayEntriesOffsetCheck[offsetof(NpcRoomA, displayEntries
 typedef char NpcRoomADisplayCountOffsetCheck[offsetof(NpcRoomA, displayCount) == 0xE4 ? 1 : -1];
 typedef char NpcRoomAMessageParameterOffsetCheck[offsetof(NpcRoomA, messageParameter) == 0x104 ? 1 : -1];
 typedef char NpcRoomDisplayOffsetsCheck[offsetof(NpcRoom, displayModels) == 0x64 && offsetof(NpcRoom, displayCount) == 0xE4 &&
-    offsetof(NpcRoom, unkEC) == 0xEC && offsetof(NpcRoom, state) == 0xF0 && offsetof(NpcRoom, unkFC) == 0xFC &&
+    offsetof(NpcRoom, defaultRoom) == 0xE8 && offsetof(NpcRoom, unkEC) == 0xEC && offsetof(NpcRoom, state) == 0xF0 && offsetof(NpcRoom, unkFC) == 0xFC &&
     offsetof(NpcRoom, unk102) == 0x102 && offsetof(NpcRoom, record) == 0x24 && offsetof(NpcRoom, events) == 0x28 &&
     offsetof(NpcRoom, eventMessages) == 0x58 && offsetof(NpcRoom, eventProcess) == 0x60 &&
     offsetof(NpcRoom, eventCount) == 0xF4 && offsetof(NpcRoom, selectedEvent) == 0xF8 && sizeof(NpcRoom) == 0x108 ? 1 : -1];

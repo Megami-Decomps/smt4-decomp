@@ -6,7 +6,7 @@ extern "C" {
 
 EquipmentRecordA *FUN_00192360(AocSystemA *system, u32 id);
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
-s32 FUN_00183d90(const void *left, const void *right);
+s32 equipmentRecordCompareByKey(const void *left, const void *right);
 u32 dataTableGetCount(void *table);
 void *dataTableGetEntries(void);
 void *dataTableGet(u32 id, u32 type);
@@ -23,7 +23,7 @@ EquipmentRecordA *itemTableGetEquipmentRecord(u32 id)
         if (table != NULL) {
             void *entries = dataTableGetEntries();
             u32 count = dataTableGetCount(table);
-            record = (EquipmentRecordA *)libc_bsearch(&key, entries, count, sizeof(EquipmentRecordA), FUN_00183d90);
+            record = (EquipmentRecordA *)libc_bsearch(&key, entries, count, sizeof(EquipmentRecordA), equipmentRecordCompareByKey);
         }
     }
     return record;

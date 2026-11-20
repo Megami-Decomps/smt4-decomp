@@ -13,7 +13,7 @@ struct CampCecEditController {
 
 extern "C" {
 s32 campCecEditIsOpen();
-s32 FUN_002e2014();
+s32 campCecEditHasConfirmFlag();
 void stateAtF4Destroy();
 void sysPlaySe(u32);
 void partyPanelRefreshFromSlotTable();
@@ -28,7 +28,7 @@ u32 campCecEditPollConfirmation(CampCecEditController* controller)
         campCecEditCreate(0);
         break;
     default:
-        if (FUN_002e2014() != 0) {
+        if (campCecEditHasConfirmFlag() != 0) {
             stateAtF4Destroy();
             sysPlaySe(0x10d);
             controller->completion.active = 1;

@@ -26,10 +26,10 @@ typedef struct Pool {
 
 extern Pool *DAT_00581280;
 
-int FUN_0020ef94(void);
+int mapControllerWorkReset(void);
 int vectorQueueClearActiveSlots(void);
 
-/* Releases the resource of every pool slot (highest first), then runs vectorQueueClearActiveSlots and FUN_0020ef94. */
+/* Releases the resource of every pool slot (highest first), then runs vectorQueueClearActiveSlots and mapControllerWorkReset. */
 void resourceSlotsRelease(void)
 {
     int i;
@@ -43,7 +43,7 @@ void resourceSlotsRelease(void)
         }
     }
     vectorQueueClearActiveSlots();
-    FUN_0020ef94();
+    mapControllerWorkReset();
 }
 
 } /* extern "C" */

@@ -8,11 +8,11 @@ extern "C" {
 
 u8 FUN_002a6464(void);
 
-u32 FUN_002a4b28(u32 index);
+u32 compendiumEntryIsRegistered(u32 index);
 
 s32 resourceRunEmbeddedOperationIfUnblocked(Object *object);
 
-u32 FUN_002a6a38(Packed002a6a38 *object);
+u32 btlSlotHasReadyKind(Packed002a6a38 *object);
 
 s32 resourceRunOperationIfUnblocked(Object *object);
 

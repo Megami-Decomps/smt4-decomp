@@ -9,9 +9,9 @@ union InitialEquipment {
     u32 words[4];
 };
 extern "C" {
-void FUN_001a1110(void);
-void FUN_00295a18(u32 item, u32 count);
-void FUN_003c1ef4(u32 mode);
+void gameWorldResetForNewGame(void);
+void saveFlagSetOrAddCounter(u32 item, u32 count);
+void playerInitializeStats(u32 mode);
 void playerRecalcStatsFromEquipment(u32 slot);
 void FUN_001dd930(void);
 char *gameDataGetPlayerName(void);
@@ -26,7 +26,7 @@ extern const DefaultPlayerTexts DAT_00404360;
 // Initialize a new game's player record, starting equipment, and inventory capacity.
 void playerInitNewGame(s32 mode)
 {
-    FUN_001a1110();
+    gameWorldResetForNewGame();
     SaveSlotTableIV *slots = gameGetSlotTable();
     if (mode == 0) {
         slots->money = 0;
@@ -35,7 +35,7 @@ void playerInitNewGame(s32 mode)
         u32 index = 0;
         while (index < 7) {
             if (equipment.ids[index] != 0)
-                FUN_00295a18(equipment.ids[index], 1);
+                saveFlagSetOrAddCounter(equipment.ids[index], 1);
             ++index;
         }
         const DefaultPlayerTexts *texts = &DAT_00404360;
@@ -45,7 +45,7 @@ void playerInitNewGame(s32 mode)
         player->alignment = 0;
         strncpy(player->name, texts->name, sizeof(player->name));
         player->name[sizeof(player->name) - 1] = 0;
-        FUN_003c1ef4(0);
+        playerInitializeStats(0);
         player->equipment[0] = equipment.ids[0];
         player->equipment[1] = equipment.ids[1];
         player->equipment[2] = equipment.ids[2];
@@ -58,7 +58,7 @@ void playerInitNewGame(s32 mode)
         player->mp = player->maxMp;
         FUN_001dd930();
         sprintf(gameDataGetPlayerName(), texts->nameFormat);
-        FUN_00295a18(0x370, 1);
+        saveFlagSetOrAddCounter(0x370, 1);
     }
 }
 }

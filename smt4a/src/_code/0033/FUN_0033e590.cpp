@@ -12,7 +12,7 @@ int mapIfReleaseResource(void);
 int mapSetSceneState(...);
 
 int soundVolumeSettingSet(...);
-int FUN_0014af98(void);
+int messageVoiceBankGet(void);
 int sysPlaySe(int);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void);
@@ -22,7 +22,7 @@ int FUN_002342b8(void);
 int mapIfReleaseSlot4(void);
 int mapEaseSceneHeading(void);
 int FUN_002e364c(...);
-int FUN_00303460(int);
+int lmapCameraSetMode(int);
 int FUN_00324e38(unsigned int);
 int FUN_00327ee8(void);
 int FUN_0033abd4(void);
@@ -47,7 +47,7 @@ extern int g_lmapScene; /* 0x581288 */
 
 /* Supplied declaration required: soundVolumeSettingSet. */
 extern unsigned int soundVolumeSettingGet(void);
-/* Supplied declaration required: FUN_0014af98. */
+/* Supplied declaration required: messageVoiceBankGet. */
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: libm_cosf. */
@@ -62,7 +62,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapEaseSceneHeading. */
 extern int pairedAvailabilityBothReady(void);
 /* Supplied declaration required: FUN_002e364c. */
-/* Supplied declaration required: FUN_00303460. */
+/* Supplied declaration required: lmapCameraSetMode. */
 /* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_00327ee8. */
@@ -70,7 +70,7 @@ extern int pairedAvailabilityBothReady(void);
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int inputIsQuestMenuPressed(void);
-extern int FUN_004d0584(void);
+extern int inputConfirmPressed(void);
 
 
 void FUN_0033e590(void)
@@ -112,7 +112,7 @@ void FUN_0033e590(void)
               if (temp_v2 == 2) {
                 *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
                 FUN_00233e10(1,g_gameState.overviewRecord);
-                temp_v2 = FUN_004d0584();
+                temp_v2 = inputConfirmPressed();
                 temp_v1 = g_lmapScene;
                 if (temp_v2 != 0) {
                   *(unsigned int *)(g_lmapScene + 4) = 10;
@@ -124,7 +124,7 @@ void FUN_0033e590(void)
                     temp_v1 = g_lmapView;
                     *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
                     *(unsigned int *)(temp_v1 + 0xb0) = 0;
-                    FUN_00303460(0);
+                    lmapCameraSetMode(0);
                     temp_v1 = g_lmapScene;
                     *(unsigned int *)(g_lmapScene + 0x54) = 0;
                     *(unsigned int *)(temp_v1 + 0x58) = temp_v5;
@@ -170,7 +170,7 @@ void FUN_0033e590(void)
           temp_v1 = g_lmapScene;
           *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v4 * temp_v6;
           *(unsigned int *)(temp_v1 + 0x50) = (*(unsigned int *)&g_gameState.overviewHeading);
-          FUN_00303460(0xd);
+          lmapCameraSetMode(0xd);
           *(unsigned int *)(g_lmapView + 0xb0) = 1;
           sysPlaySe(0xdc);
           FUN_00233e10(1,g_gameState.overviewRecord);
@@ -193,7 +193,7 @@ void FUN_0033e590(void)
           temp_v1 = g_lmapView;
           *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
           *(unsigned int *)(temp_v1 + 0xb0) = 0;
-          FUN_00303460(0);
+          lmapCameraSetMode(0);
           temp_v2 = *(int *)(g_lmapScene + 4);
           temp_v1 = g_lmapScene;
         }
@@ -237,7 +237,7 @@ LAB_0033e908:
           FUN_00324e38(0xffffffff);
           libm_sinf();
           libm_cosf();
-          FUN_0014af98();
+          messageVoiceBankGet();
           soundVolumeSettingSet();
           sysPlayVoice(0x10002e5);
           soundVolumeSettingSet(temp_v0);
@@ -293,7 +293,7 @@ LAB_0033e908:
         }
         *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
         *(unsigned int *)(temp_v1 + 0xb0) = 0;
-        FUN_00303460(0);
+        lmapCameraSetMode(0);
         temp_v1 = g_lmapScene;
         *(unsigned int *)(g_lmapScene + 0x54) = 0;
         *(unsigned int *)(temp_v1 + 0x58) = temp_v5;

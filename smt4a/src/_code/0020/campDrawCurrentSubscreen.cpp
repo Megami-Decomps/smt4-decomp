@@ -9,7 +9,7 @@ void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 renderCtxPackPassFlags(u32 kind, bool enabled);
 u32 listCursorGetRowOfChildIfUnblocked(void *list);
 s32 partyCountOccupiedSlots(void);
-void FUN_00335060(CampStateA *camp);
+void saveListDraw(CampStateA *camp);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 
@@ -25,7 +25,7 @@ static __inline void drawPartySubscreen()
 {
     CampStateA *camp = g_camp;
     if (partyCountOccupiedSlots() > 0)
-        FUN_00335060(camp);
+        saveListDraw(camp);
 }
 
 /* Draw the camp's party sub-screen when the current screen has one. */

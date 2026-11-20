@@ -4,7 +4,7 @@
 
 extern "C" {
 
-s32 FUN_00293230(void);
+s32 btlScriptUnitIsIncapacitated(void);
 u8 keyedRecordRegisterName(u8 *work);
 u8 FUN_00249e54(u8 state, u8 *name);
 void FUN_003dbc1c(BattleVersionResources *resources);
@@ -19,7 +19,7 @@ void FUN_003da010(BattleVersionResources *resources)
     s32 i;
 
     btlGetMainState();
-    if (FUN_00293230() != 0) {
+    if (btlScriptUnitIsIncapacitated() != 0) {
         return;
     }
     for (i = 0; i < 11; i++) {

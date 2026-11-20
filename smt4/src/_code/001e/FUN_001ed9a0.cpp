@@ -59,7 +59,7 @@ struct CaptionRecord {
 extern SaveLoadGlobals g_saveLoadUI;   /* 0x44de2c */
 extern TitleScene *g_titleScene;       /* 0x44ea00 */
 
-s32 FUN_002996d8(s32 arg);
+s32 statusCameraRestore(s32 arg);
 void gxResetColorQuadToWhite(void);
 u32 renderCtxPackPassFlags(s32 a, s32 b);
 void efctSetSpeed(f32 speed);
@@ -104,7 +104,7 @@ u8 FUN_001ed9a0(void)
     if (ui->closing == 0 && ui->visible != 0) {
         if (ui->entryLocked[g_saveLoadUI.entryIndex] == 0) {
             FUN_0029dfc0(0);
-            FUN_002996d8(0);
+            statusCameraRestore(0);
             if (ui->titleShown != 0 && ui->titleBusy == 0) {
                 SaveLoadUI *cursorUi = g_saveLoadUI.ui;
                 gxResetColorQuadToWhite();

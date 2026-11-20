@@ -8,7 +8,7 @@
 
 extern "C" {
 s32 idSetFindSubjectIndex(BtlMainStateA *battle, BtlActionRecord *action);
-u32 FUN_003eae20(BtlMainStateA *battle, s32 actor, u16 id);
+u32 tableFileFindByKeyPair(BtlMainStateA *battle, s32 actor, u16 id);
 void FUN_00401d18(BattleSpritePlacement *placement, u32 mask, u32 flags, u32 value);
 void FUN_00402290(BattleSpritePlacement *placement);
 
@@ -58,7 +58,7 @@ s32 FUN_004f7924(void *owner, BtlActionRecord *action)
                 u32 value = 0;
                 s32 actor = ((ActorView *)battle)->actor;
                 if (actor >= 0) {
-                    value = FUN_003eae20(battle, (s16)actor, id);
+                    value = tableFileFindByKeyPair(battle, (s16)actor, id);
                 }
                 FUN_00401d18(&entry->placement, 0x20000, 0x20000, value);
                 FUN_00402290(&entry->placement);

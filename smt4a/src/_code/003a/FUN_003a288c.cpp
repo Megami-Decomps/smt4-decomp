@@ -4,7 +4,7 @@
 
 extern "C" {
 
-/* Calls FUN_003fd924 (mode 2, both float arguments 0) on every active map gimic whose id is `id`. */
+/* Calls motionPlayerStartBlended (mode 2, both float arguments 0) on every active map gimic whose id is `id`. */
 void FUN_003a288c(s32 id, u32 arg)
 {
     s32 i;
@@ -14,7 +14,7 @@ void FUN_003a288c(s32 id, u32 arg)
         MapGimicSlotA *gimic = &map->slots[i];
 
         if (gimic->active != 0 && gimic->id == id) {
-            FUN_003fd924(gimic->obj->body, arg, 2, 0.0f, 0.0f);
+            motionPlayerStartBlended(gimic->obj->body, arg, 2, 0.0f, 0.0f);
         }
     }
 }

@@ -11,12 +11,12 @@ int FUN_00295d40(void);
 int FUN_00312de8(void);
 int dataTable2aGetEntryWithAoc(void);
 int vectorQueuePushPosition(void);
-int FUN_0037976c(void);
-int FUN_00385964(void);
+int dataTable42GetCombinedRecord(void);
+int dataTable42GetSection0Count(void);
 int controllerSetPosition(...);
 int modelPlayClip(unsigned int, int, int);
-int FUN_0040a908(int, int);
-int FUN_0040a918(...);
+int moriModelContentSetRequestFirst(int, int);
+int moriModelContentSetRequestSecond(...);
 int moriModelContentCopyBody(void);
 int moriModelContentLoadBody(int, int);
 int handleRegistryRegisterObject(...);
@@ -37,17 +37,17 @@ extern int *DAT_00581280; /* 0x581280 */
 /* Supplied declaration required: dataTable2aGetEntryWithAoc. */
 extern unsigned int asdVramBGetFreeBytes(void);
 /* Supplied declaration required: vectorQueuePushPosition. */
-/* Supplied declaration required: FUN_0037976c. */
-/* Supplied declaration required: FUN_00385964. */
+/* Supplied declaration required: dataTable42GetCombinedRecord. */
+/* Supplied declaration required: dataTable42GetSection0Count. */
 extern int flagPairCondition(int, int);
 extern int FUN_003b564c(void);
 /* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: modelPlayClip. */
-/* Supplied declaration required: FUN_0040a908. */
-/* Supplied declaration required: FUN_0040a918. */
+/* Supplied declaration required: moriModelContentSetRequestFirst. */
+/* Supplied declaration required: moriModelContentSetRequestSecond. */
 /* Supplied declaration required: moriModelContentCopyBody. */
 /* Supplied declaration required: moriModelContentLoadBody. */
-extern int FUN_0040ab8c(int);
+extern int moriModelContentIsLoaded(int);
 extern int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: groupedFileTablesCountRecordsOfKind. */
@@ -90,13 +90,13 @@ unsigned int FUN_00295e54(int param_1,int param_2,int param_3)
     if (0 < temp_v5) {
       do {
         piVar13 = piVar12;
-        FUN_0037976c();
+        dataTable42GetCombinedRecord();
         if (((*piVar13 != 999999) && (*piVar13 == param_1)) && (piVar13[1] == param_2)) {
           piVar13 = (int *)((int)piVar12 + 1);
           piVar12 = piVar13;
           for (; (int)piVar13 < 9999; piVar13 = (int *)((int)piVar13 + 1)) {
             piVar4 = piVar12;
-            FUN_0037976c();
+            dataTable42GetCombinedRecord();
             if (*piVar4 == 0xf423e) break;
             VectorSignedToFloat(piVar4[1],(unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat(*piVar4,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -116,7 +116,7 @@ unsigned int FUN_00295e54(int param_1,int param_2,int param_3)
     return 0;
   }
   if (temp_v5 == 1) {
-    temp_v5 = FUN_00385964();
+    temp_v5 = dataTable42GetSection0Count();
     for (psVar11 = (short *)DAT_00581280[1]; (int)psVar11 < temp_v5;
         psVar11 = (short *)((int)psVar11 + 1)) {
       psVar5 = psVar11;
@@ -226,8 +226,8 @@ LAB_002961f8:
         }
         piVar12[temp_v3 * 0xf + 0x10] = temp_v5;
         modelLoadFileAsyncByName();
-        FUN_0040a908(piVar12[temp_v3 * 0xf + 0x10],0x10000);
-        FUN_0040a918(piVar12[temp_v3 * 0xf + 0x10],0x30000);
+        moriModelContentSetRequestFirst(piVar12[temp_v3 * 0xf + 0x10],0x10000);
+        moriModelContentSetRequestSecond(piVar12[temp_v3 * 0xf + 0x10],0x30000);
         *(unsigned char *)(piVar12 + temp_v3 * 0xf + 0xe) = 0;
       }
     }
@@ -240,7 +240,7 @@ LAB_002961f8:
       }
       piVar12[temp_v3 * 0xf + 0x10] = temp_v5;
       modelLoadFileAsyncByName();
-      FUN_0040a908(piVar12[temp_v3 * 0xf + 0x10],0x10000);
+      moriModelContentSetRequestFirst(piVar12[temp_v3 * 0xf + 0x10],0x10000);
       if ((!(param_1 == 3 && param_2 == 9)) && (temp_v8 = asdVramBGetFreeBytes(), 0x1f000 >= temp_v8)) {
         temp_v5 = piVar12[temp_v3 * 0xf + 0x10];
         temp_v9 = 0x30000;
@@ -249,7 +249,7 @@ LAB_002961f8:
         temp_v5 = piVar12[temp_v3 * 0xf + 0x10];
         temp_v9 = 0x20000;
       }
-      FUN_0040a918(temp_v5,temp_v9);
+      moriModelContentSetRequestSecond(temp_v5,temp_v9);
     }
     *DAT_00581280 = *DAT_00581280 + 1;
     return 0;
@@ -261,14 +261,14 @@ LAB_002961f8:
   piVar13 = DAT_00581280 + temp_v5 * 0xf + 3;
   if (param_1 >= 0x65) {
     if ((char)DAT_00581280[temp_v5 * 0xf + 0xe] == '\0') {
-      temp_v3 = FUN_0040ab8c(DAT_00581280[temp_v5 * 0xf + 0x10]);
+      temp_v3 = moriModelContentIsLoaded(DAT_00581280[temp_v5 * 0xf + 0x10]);
       if (temp_v3 == 0) {
         return 0;
       }
     }
   }
   else {
-    temp_v3 = FUN_0040ab8c(DAT_00581280[temp_v5 * 0xf + 0x10]);
+    temp_v3 = moriModelContentIsLoaded(DAT_00581280[temp_v5 * 0xf + 0x10]);
     if (temp_v3 == 0) {
       return 0;
     }
@@ -279,7 +279,7 @@ LAB_002961f8:
   handleRegistryRegisterObject(g_handleRegistry,temp_v9);
   temp_v3 = DAT_00581280[1];
   dataTable2aGetEntryWithAoc();
-  FUN_00385964();
+  dataTable42GetSection0Count();
   temp_v0 = *(char *)(temp_v3 + 0x37);
   if ((temp_v0 == '\x13' || temp_v0 == '\x17') || temp_v0 == '\x18') {
     controllerSetPosition(*(unsigned int *)(piVar12[temp_v5 * 0xf + 0x10] + 4));

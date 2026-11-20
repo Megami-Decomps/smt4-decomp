@@ -7,7 +7,7 @@ int aocThreadAllocateStorage(...);
 int FUN_00126fb8(...);
 int FUN_001270f8(...);
 int uiResourceParametersInitDefault(...);
-int FUN_002ba81c(...);
+int stringCopyTruncated(...);
 int _ZN18WindowStatusResultC1Ej(...);
 int memClear(...);
 int asdProcessCreateSimple(...);
@@ -31,7 +31,7 @@ extern int FUN_00121fb4(int);
 /* Supplied declaration required: FUN_00126fb8. */
 /* Supplied declaration required: FUN_001270f8. */
 /* Supplied declaration required: uiResourceParametersInitDefault. */
-/* Supplied declaration required: FUN_002ba81c. */
+/* Supplied declaration required: stringCopyTruncated. */
 extern int FUN_002ba8e4(int);
 extern int clearWord(int);
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
@@ -100,7 +100,7 @@ unsigned int * FUN_00111184(int param_1)
   puVar2[-0x1d0] = (unsigned int)puVar4 & 0xffff0000;
   FUN_00126fb8(puVar2 + -0x1b7);
   memClear(puVar2 + -0x1d6,0xb);
-  FUN_002ba81c(puVar2 + -0x1d6,&LAB_00111388,0xb);
+  stringCopyTruncated(puVar2 + -0x1d6,&LAB_00111388,0xb);
   puVar2[-0x32] = 0;
   puVar2[-0x31] = 0;
   puVar2[-0x30] = 0;

@@ -14,8 +14,8 @@ int asdMemoryAllocTraced(...);
 int FUN_003478dc(unsigned int, char *);
 int textureCachePollReady(void);
 int pairSourceGet(unsigned int, unsigned int *, int);
-int FUN_003d8f24(unsigned int);
-int FUN_003fd924(...);
+int effShakeParticleAdvance(unsigned int);
+int motionPlayerStartBlended(...);
 int ptrVectorAt(...);
 int FUN_0040a884(void);
 int attachmentsSetOffset(unsigned int, float *);
@@ -51,11 +51,11 @@ extern int rangeIsValid(void);
 extern unsigned int keyedRecordRegisterName(int);
 /* Supplied declaration required: FUN_003478dc. */
 /* Supplied declaration required: textureCachePollReady. */
-extern int FUN_003c5d8c(void);
+extern int textureCacheGetDirection(void);
 /* Supplied declaration required: pairSourceGet. */
-/* Supplied declaration required: FUN_003d8f24. */
+/* Supplied declaration required: effShakeParticleAdvance. */
 /* Supplied declaration required: moriModelUnitStartMaterialAnimation. */
-/* Supplied declaration required: FUN_003fd924. */
+/* Supplied declaration required: motionPlayerStartBlended. */
 extern unsigned int FUN_003fdadc(void);
 /* Supplied declaration required: ptrVectorAt. */
 /* Supplied declaration required: FUN_0040a884. */
@@ -107,7 +107,7 @@ void FUN_004f65d4(int param_1)
       *(unsigned int *)(param_1 + 0x33d4) = temp_v9;
     }
     else {
-      FUN_003d8f24(*(unsigned int *)(param_1 + 0x33cc));
+      effShakeParticleAdvance(*(unsigned int *)(param_1 + 0x33cc));
       pairSourceGet(*(unsigned int *)(param_1 + 0x33cc),(unsigned int *)(param_1 + 0x33d4),
                    param_1 + 0x33d8);
     }
@@ -126,7 +126,7 @@ void FUN_004f65d4(int param_1)
       *(unsigned int *)(param_1 + 0x33dc) = temp_v9;
     }
     else {
-      FUN_003d8f24(*(unsigned int *)(param_1 + 0x33d0));
+      effShakeParticleAdvance(*(unsigned int *)(param_1 + 0x33d0));
       pairSourceGet(*(unsigned int *)(param_1 + 0x33d0),(unsigned int *)(param_1 + 0x33dc),
                    param_1 + 0x33e0);
     }
@@ -196,7 +196,7 @@ void FUN_004f65d4(int param_1)
     *(unsigned char *)(param_1 + 0x33b4) = 4;
     break;
   case 4:
-    temp_v4 = FUN_003c5d8c();
+    temp_v4 = textureCacheGetDirection();
     if (temp_v4 != 0) {
       temp_v4 = *(int *)(param_1 + 0x33c0);
       if (temp_v4 != 0) goto code_r0x0042138c;
@@ -302,7 +302,7 @@ code_r0x0042138c:
             temp_v3 = temp_v2;
             ownerSlotSetText(temp_v2,temp_v9);
             if (temp_v3 != 0xffff) {
-              FUN_003fd924(temp_v2,temp_v3,2);
+              motionPlayerStartBlended(temp_v2,temp_v3,2);
             }
             temp_v3 = temp_v2;
             FUN_001a79e8(temp_v2,temp_v9);

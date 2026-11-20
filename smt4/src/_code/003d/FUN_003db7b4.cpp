@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00246708(void);
-int FUN_00293230(void);
+int textureCacheGetDirection(void);
+int btlScriptUnitIsIncapacitated(void);
 
-/* Script command: after btlGetMainState, returns whether FUN_00293230 or FUN_00246708 reports success. */
+/* Script command: after btlGetMainState, returns whether btlScriptUnitIsIncapacitated or textureCacheGetDirection reports success. */
 bool FUN_003db7b4(void *arg0)
 {
     reinterpret_cast<int>(btlGetMainState());
-    return FUN_00293230() != 0 || FUN_00246708() != 0;
+    return btlScriptUnitIsIncapacitated() != 0 || textureCacheGetDirection() != 0;
 }
 
 } /* extern "C" */

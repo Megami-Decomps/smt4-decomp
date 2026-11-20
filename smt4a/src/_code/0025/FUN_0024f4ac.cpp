@@ -138,7 +138,7 @@ LAB_0025c4e0:
         uVar1 = FUN_00376f84();
         _uStack0000000c = CONCAT22(uVar1,uStack0000000c);
         _uStack0000000c = CONCAT31(stack0x0000000d,1);
-        FUN_00376fa4(0);
+        mapSetActiveEntryId(0);
         goto LAB_0025c4e0;
       }
       _uStack0000000c = CONCAT22((short)*(unsigned int *)(unaff_r4 + 0xb4),uStack0000000c);

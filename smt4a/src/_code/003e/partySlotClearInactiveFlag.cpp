@@ -1,0 +1,25 @@
+#include "gamedata/GameSaveDataA.h"
+#include "ui/MessageMainA.h"
+#include "gamedata/SaveSlotTable.h"
+
+extern "C" {
+
+static __inline PartySlotA* getPartySlot(u16 index)
+{
+    if (index >= 12) {
+        return NULL;
+    }
+    return &gameGetSlotTable()->slots[index];
+}
+
+void partySlotClearInactiveFlag(u32 id)
+{
+    for (s32 index = 0; index < 12; ++index) {
+        PartySlotA* slot = getPartySlot((u16)index);
+        if (slot->id == id) {
+            slot->flags &= ~1u;
+            return;
+        }
+    }
+}
+}

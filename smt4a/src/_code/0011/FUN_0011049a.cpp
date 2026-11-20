@@ -7,12 +7,12 @@ extern "C" {
 int FUN_00110494(int);
 int FUN_001104c0(int, int);
 int FUN_001104d4(int);
-int FUN_002fb208(void);
+int threadGetCurrentId(void);
 
 /* Supplied declaration required: FUN_00110494. */
 /* Supplied declaration required: FUN_001104c0. */
 /* Supplied declaration required: FUN_001104d4. */
-/* Supplied declaration required: FUN_002fb208. */
+/* Supplied declaration required: threadGetCurrentId. */
 
 
 void FUN_0011049a(int param_1)
@@ -21,7 +21,7 @@ void FUN_0011049a(int param_1)
 /* irregular: 4 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002fb208();
+  temp_v0 = threadGetCurrentId();
   *(unsigned char *)(param_1 + 0x1e) = 0;
   FUN_001104c0(param_1,temp_v0);
   FUN_00110494(param_1);

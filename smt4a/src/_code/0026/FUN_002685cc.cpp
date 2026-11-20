@@ -3,7 +3,7 @@
 
 extern "C" {
 extern void *g_aocSystem;
-Table04ExtraRecord *FUN_001b2e78(void *system, u32 id);
+Table04ExtraRecord *dataTable41FindByIdImpl(void *system, u32 id);
 void *dataTableGet(u32 type, u32 group);
 u32 dataTableGetCount(void *table);
 const void *dataTableGetEntries(void *table);
@@ -13,7 +13,7 @@ void *libc_bsearch(const void *key, const void *entries, u32 count, u32 stride,
 
 static __inline Table04ExtraRecord *findExtraTable04Record(u32 id)
 {
-    Table04ExtraRecord *record = FUN_001b2e78(g_aocSystem, id);
+    Table04ExtraRecord *record = dataTable41FindByIdImpl(g_aocSystem, id);
     if (record == NULL) {
         void *table = dataTableGet(4, 1);
         const void *entries = dataTableGetEntries(table);

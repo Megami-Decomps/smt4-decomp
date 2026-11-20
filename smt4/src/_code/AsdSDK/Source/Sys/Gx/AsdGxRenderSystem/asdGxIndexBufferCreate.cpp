@@ -4,7 +4,7 @@
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers_Smt4.h"
 
 extern "C" {
-extern const char DAT_00409a68[];
+extern const char g_asdGxRenderSystemSourceFileName[];
 
 AsdGxTexture *asdTextureCreate(s32 unk);
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
@@ -40,7 +40,7 @@ AsdGxTexture *asdGxIndexBufferCreate(u32 kind)
     } else {
         tex->byteSize = tex->byteSize * 2;
     }
-    asdDebugTrace(DAT_00409a68, 2950);
+    asdDebugTrace(g_asdGxRenderSystemSourceFileName, 2950);
     tex->pixels = asdMemoryAlloc(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, tex->byteSize, 1);
     tex->handle = osVirtToPhysAddress();
     return tex;

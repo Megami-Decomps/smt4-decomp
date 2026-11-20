@@ -3,7 +3,7 @@
 
 extern "C" {
 u32 FUN_00280bc0(void);
-void FUN_0037aaec(s32, s32 *);
+void archivePathRequestSucceeded(s32, s32 *);
 
 // Classify the current event, optionally clearing the output for transition events.
 s32 FUN_002ef7f0(u32 unused, s32 *output)
@@ -19,13 +19,13 @@ s32 FUN_002ef7f0(u32 unused, s32 *output)
         // These events retain the default classification.
     } else if (category == 17 && (s32)(event & 0x3ff) >= 390 && (s32)(event & 0x3ff) < 400) {
         if (output != NULL)
-            FUN_0037aaec(0, output);
+            archivePathRequestSucceeded(0, output);
         result = 1;
     } else if (category == 17 && (s32)(event & 0x3ff) >= 230 && (s32)(event & 0x3ff) < 340) {
         // These events retain the default classification.
     } else if (category == 17 && (s32)(event & 0x3ff) >= 200 && (s32)(event & 0x3ff) <= 219) {
         if (output != NULL)
-            FUN_0037aaec(0, output);
+            archivePathRequestSucceeded(0, output);
         result = 1;
     }
     return result;

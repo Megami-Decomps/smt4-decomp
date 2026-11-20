@@ -7,8 +7,8 @@
 extern "C" {
 
 
-s32 FUN_002c40f8(s32 *signaled, u32 *handles, s32 count, s32 waitAll, s64 timeout);
-void FUN_002c3f5c(void *queue);
+s32 svcWaitSynchronizationN(s32 *signaled, u32 *handles, s32 count, s32 waitAll, s64 timeout);
+void addressSpaceRegionFree(void *queue);
 void asdMemFree(void *block);
 
 // Waits for the worker thread to end, then releases the thread, its queue and buffer.
@@ -18,7 +18,7 @@ void FUN_002ecfe4(void)
     if (process != NULL) {
         s32 signaled;
         u32 handles[1] = { process->thread.handle };
-        s32 result = FUN_002c40f8(&signaled, handles, 1, 0, -1);
+        s32 result = svcWaitSynchronizationN(&signaled, handles, 1, 0, -1);
         bool failed = nnResultIsFailure(result);
         if (failed) {
             resultHandleFailure(result, failed);
@@ -27,7 +27,7 @@ void FUN_002ecfe4(void)
         /* Joined above: finalize the thread, then close its handle through the handle's destructor. */
         process->thread.finalize();
         process->thread.NnOsHandle::~NnOsHandle();
-        FUN_002c3f5c(process->queue);
+        addressSpaceRegionFree(process->queue);
         if (process->buffer != NULL) {
             asdMemFree(process->buffer);
             process->buffer = NULL;

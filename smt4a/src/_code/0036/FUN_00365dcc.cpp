@@ -19,9 +19,9 @@ s32 mapIfHasSelection(void);
 void FUN_002342b8(void);
 s32 inputIsQuestMenuPressed(void);
 void mapIfSetMode1(void);
-s32 FUN_004d0584(void);
+s32 inputConfirmPressed(void);
 void mapSetSceneState(u32 id);
-void FUN_00303460(s32 mode);
+void lmapCameraSetMode(s32 mode);
 void FUN_00324e38(s32 mode);
 void FUN_00327ee8(f32 x, f32 z);
 void FUN_002e364c(MapVector *position);
@@ -48,7 +48,7 @@ void FUN_00365dcc(void)
         g_lmapScene->pose.targetPosition.x = g_lmapScene->pose.targetPosition.x + libm_sinf(g_gameState.pointHeading * DEGREES_TO_RADIANS) * 40.0f;
         g_lmapScene->pose.targetPosition.z = g_lmapScene->pose.targetPosition.z + libm_cosf(g_gameState.pointHeading * DEGREES_TO_RADIANS) * 40.0f;
         g_lmapScene->pose.targetHeading = g_gameState.overviewHeading;
-        FUN_00303460(11);
+        lmapCameraSetMode(11);
         g_lmapView->contextMode = -2;
         sysPlaySe(0xdd);
         FUN_00233e10(1, g_gameState.overviewRecord);
@@ -73,13 +73,13 @@ void FUN_00365dcc(void)
     case 2:
         scene->stateTime++;
         FUN_00233e10(1, g_gameState.overviewRecord);
-        if (FUN_004d0584()) {
+        if (inputConfirmPressed()) {
             g_lmapScene->state = 10;
             g_lmapScene->stateTime = 0;
         } else if (padButtonIsPressed(5) || inputIsQuestMenuPressed()) {
             g_lmapView->heading = g_lmapScene->pose.targetHeading;
             g_lmapView->contextMode = 0;
-            FUN_00303460(0);
+            lmapCameraSetMode(0);
             g_lmapScene->moveMode = 0;
             g_lmapScene->moveSpeed = 5.0f;
             FUN_00233e10(0, g_gameState.overviewRecord);
@@ -109,7 +109,7 @@ void FUN_00365dcc(void)
             mapIfReleaseSlot2();
             g_lmapView->heading = g_lmapScene->pose.targetHeading;
             g_lmapView->contextMode = 0;
-            FUN_00303460(0);
+            lmapCameraSetMode(0);
             g_lmapScene->state = g_lmapScene->state + 1;
             g_lmapScene->stateTime = 0;
         }

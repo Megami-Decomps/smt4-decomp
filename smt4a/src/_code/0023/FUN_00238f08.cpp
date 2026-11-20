@@ -32,7 +32,7 @@ void FUN_00213330(void *work);
 LayoutTaskWork *taskCreate(void (*update)(void *), u32 a, u32 b, u32 c, u32 d, u32 size, u32 list, u32 e, u32 f);
 void sysMemClear(void *memory, u32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-void FUN_0034a16c(void *layout, f32 *a, f32 *b, f32 *c, f32 *d);
+void effScalarKeyFindNextDistinct(void *layout, f32 *a, f32 *b, f32 *c, f32 *d);
 
 /* Starts the layout task with copies of its parameter and layout blocks. */
 LayoutTaskWork *FUN_00238f08(u32 owner, const void *params, const void *layout, void *context, u32 *ownerSlot,
@@ -49,7 +49,7 @@ LayoutTaskWork *FUN_00238f08(u32 owner, const void *params, const void *layout, 
         work->kind = kind;
         work->unk234 = -1;
         work->unk230 = -1;
-        FUN_0034a16c(work->layout, work->unk028, work->unk030, work->unk00C, work->unk018);
+        effScalarKeyFindNextDistinct(work->layout, work->unk028, work->unk030, work->unk00C, work->unk018);
         work->ownerSlot = ownerSlot;
         work->startFrame = frame;
         work->frame = frame;

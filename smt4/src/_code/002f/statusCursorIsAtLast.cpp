@@ -14,7 +14,7 @@ u32 statusCursorIsAtLast(void)
     if (holder != NULL) {
         s32 position = listCursorGetRowIfUnblocked(&holder->list);
         ScrollSelection *cursor = &holder->list;
-        s32 count = FUN_0029ee54(cursor);
+        s32 count = gridNavigationGetItemCount(cursor);
 
         if (position == count - 1) {
             return 1;

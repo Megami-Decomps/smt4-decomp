@@ -5,11 +5,11 @@ extern "C" {
 extern struct {
     u8 unk000[0x240];
     u32 unk240;
-} DAT_004bce8c;
+} g_asdMdlBankSet;
 
 u32 FUN_002ef868(void)
 {
-    return DAT_004bce8c.unk240;
+    return g_asdMdlBankSet.unk240;
 }
 
 } /* extern "C" */

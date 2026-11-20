@@ -31,7 +31,7 @@ int slotOwnerDestroyAllSlots(...);
 int ptrListRemoveClearOwner(...);
 int asdEnvResetModelBank(...);
 int dialogClose(...);
-int FUN_00227a70(void);
+int mapCollisionRelease(void);
 int resourceSlotsRelease(void);
 int mapReleaseTableTexture(...);
 int resourceRemoveSlotOwners(void);
@@ -53,7 +53,7 @@ int FUN_002237a0(void);
 int FUN_002342b8(void);
 int FUN_00244ac8(void);
 int scrScriptProcessGetEntry(...);
-int FUN_00291e50(...);
+int lmapSceneMoveToWaypoint(...);
 int FUN_002941c8(...);
 int FUN_002b79d8(void);
 int mapSetSceneState(...);
@@ -66,9 +66,9 @@ int scriptHolderBReset(...);
 int scriptHolderFree2(...);
 int scriptHolderReset(...);
 int scriptHolderFree3(...);
-int FUN_0047e430(...);
-int FUN_00483acc(...);
-int FUN_00245d78(...);
+int aocBootResetAndReleaseBuffers(...);
+int objectPoolDestroyAll(...);
+int mapIfRestartActiveRecords(...);
 int naviMainRequestProcessing(...);
 int recTableFireType3(void);
 
@@ -76,7 +76,7 @@ int questDataGetRecord(void);
 int slotSetRequest(...);
 void frameTransitionSetMode(int);
 int frameTexturesRelease(void);
-int FUN_002c23cc(...);
+int frameTexConfigureCaptureTextures(...);
 int FUN_002c2610(void);
 int FUN_002c3398(...);
 int popupStart(void);
@@ -93,7 +93,7 @@ int lmapApplyMapAndArea(void);
 int uiPlayGatedActionFeedback(void);
 int FUN_003b5c54(...);
 int gameDataSaveSetValues(...);
-int FUN_004731d8(void);
+int gameSaveBlockRebuild27E98(void);
 int mapRestoreSavedDestination(...);
 int FUN_00483294(...);
 int FUN_00294a84(...);
@@ -144,18 +144,18 @@ int aocSelectedRecordIsUnavailable(void);
 int controllerUpdateWithIdleTimer(...);
 int fireEntriesMatchingPair(...);
 
-int FUN_0013cab8(...);
-int FUN_0014f0dc(...);
-int FUN_001523b8(...);
+int screenFadeStartIn(...);
+int cameraMatrixCacheSetLookAt(...);
+int stereoCameraSetPerspective(...);
 int FUN_0020f12c(...);
 int mapIfSetMode1(void);
 int mapLoadSkyTable(...);
 int FUN_00249dec(void);
-int FUN_002747dc(void);
+int mapIfResetRecords(void);
 int naviMainUpdateSlider(...);
 int FUN_00297c3c(void);
-int FUN_002a2e98(...);
-int FUN_002ddea0(void);
+int mapCollisionLoad(...);
+int lmapUpdateEngineRecordNavigation(void);
 int mapPlaceSet(...);
 int FUN_00364740(...);
 int mapIfClose(void);
@@ -190,13 +190,13 @@ int FUN_00356674(void);
 int mapSetDepartureIndex(...); // declcheck: local (romwright prototype; including map/mapDepart.h does not compile here: it redeclares mapProbePositionDownward)
 int FUN_00379d58(void);
 int FUN_00398004(...);
-int FUN_003de188(...);
+int naviMainCreate(...);
 int moriModelUnitStartMaterialAnimation(...);
-int FUN_0040a908(...);
-int FUN_0040a918(...);
+int moriModelContentSetRequestFirst(...);
+int moriModelContentSetRequestSecond(...);
 int resourceOwnerLoadFileSync(void);
 int moriModelContentLoadBody(...);
-int FUN_0040ab8c(...);
+int moriModelContentIsLoaded(...);
 int handleRegistryRegisterObject(...);
 int FUN_0024ad50(void);
 int mapGimicInitializeProcessing(...);
@@ -210,7 +210,7 @@ int FUN_00239b10(int);
 int fieldSceneResetEntryState(void);
 int FUN_002b9324(void);
 int gameFlagBitSetValue(int, int);
-int FUN_00376fa4(...);
+int mapSetActiveEntryId(...);
 int dataTableGetRecord23(void);
 int gameApplyCurrentFlagTableEntry(void);
 int sysClearCachedFlag(void);
@@ -388,12 +388,12 @@ extern unsigned int DAT_005f1cb0; /* 0x5f1cb0 */
 /* Supplied declaration required: __ARM_common_memcpy4_9. */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: asdCameraInitializeDefaults. */
-/* Supplied declaration required: FUN_0013cab8. */
+/* Supplied declaration required: screenFadeStartIn. */
 extern int pairedAvailabilityGetState(unsigned int);
 extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: randRange. */
-/* Supplied declaration required: FUN_0014f0dc. */
-/* Supplied declaration required: FUN_001523b8. */
+/* Supplied declaration required: cameraMatrixCacheSetLookAt. */
+/* Supplied declaration required: stereoCameraSetPerspective. */
 extern int saveSlotFindSelected(void);
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 extern int campIsState85(void);
@@ -416,7 +416,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: resourceOwnerReleaseAndReset. */
 extern int gameSlotTableFindFree(void);
 /* Supplied declaration required: gameDataTableGetFlag. */
-extern int FUN_001ba570(void);
+extern int optionsGoalConditionCheck(void);
 extern int table1bOr1cGetRecordValue(void); // declcheck: local (romwright prototype; the shared declaration in code/Code001b.h does not compile here: too few arguments in function call)
 /* Supplied declaration required: modelLoadFileAsyncByName. */
 /* Supplied declaration required: asdLoadFileAsyncWrap. */
@@ -432,7 +432,7 @@ extern int table1bOr1cGetRecordValue(void); // declcheck: local (romwright proto
 /* Supplied declaration required: mapIfSetMode1. */
 /* Supplied declaration required: FUN_002237a0. */
 extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_00227a70. */
+/* Supplied declaration required: mapCollisionRelease. */
 /* Supplied declaration required: mapGimmickResetControllers. */
 /* Supplied declaration required: FUN_002342b8. */
 /* Supplied declaration required: popupTryStartScrollPrompt. */
@@ -450,7 +450,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: FUN_00270c58. */
 /* Supplied declaration required: FUN_002737a8. */
-/* Supplied declaration required: FUN_002747dc. */
+/* Supplied declaration required: mapIfResetRecords. */
 /* Supplied declaration required: popupStateSetAndShow. */
 /* Supplied declaration required: popupTryStartTimedPrompt. */
 /* Supplied declaration required: resourceRemoveSlotOwners. */
@@ -458,14 +458,14 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern char *campGetState(void);
-/* Supplied declaration required: FUN_00291e50. */
+/* Supplied declaration required: lmapSceneMoveToWaypoint. */
 /* Supplied declaration required: FUN_002941c8. */
 /* Supplied declaration required: FUN_00294854. */
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_00294cfc. */
 /* Supplied declaration required: FUN_00295108. */
 /* Supplied declaration required: FUN_00297c3c. */
-/* Supplied declaration required: FUN_002a2e98. */
+/* Supplied declaration required: mapCollisionLoad. */
 extern int messageGetChoiceResult(void);
 extern int mapDepartIsRunning(void);
 /* Supplied declaration required: FUN_002b79d8. */
@@ -476,14 +476,14 @@ extern int mapDepartIsRunning(void);
 /* Supplied declaration required: FUN_002b9324. */
 /* Supplied declaration required: FUN_002ba30c. */
 /* Supplied declaration required: frameTexturesRelease. */
-/* Supplied declaration required: FUN_002c23cc. */
+/* Supplied declaration required: frameTexConfigureCaptureTextures. */
 /* Supplied declaration required: FUN_002c2610. */
 /* Supplied declaration required: FUN_002c3398. */
 /* Supplied declaration required: FUN_002d22c0. */
 /* Supplied declaration required: mapIfStart. */
 /* Supplied declaration required: mapIfInitializeSceneControllers. */
 /* Supplied declaration required: engineRecordsUnregisterHandles. */
-/* Supplied declaration required: FUN_002ddea0. */
+/* Supplied declaration required: lmapUpdateEngineRecordNavigation. */
 /* Supplied declaration required: navigationSetArguments. */
 /* Supplied declaration required: lmapUpdateMapBgm. */
 extern int pairedAvailabilityBothReady(void);
@@ -530,7 +530,7 @@ extern int FUN_00356380(void);
 /* Supplied declaration required: FUN_0036aa04. */
 /* Supplied declaration required: FUN_0036b824. */
 /* Supplied declaration required: FUN_00376f84. */
-/* Supplied declaration required: FUN_00376fa4. */
+/* Supplied declaration required: mapSetActiveEntryId. */
 /* Supplied declaration required: mapSetDepartureIndex. */
 /* Supplied declaration required: FUN_00378000. */
 /* Supplied declaration required: mapEnvironmentSelectPreset. */
@@ -563,18 +563,18 @@ extern int FUN_003cd4b4(unsigned int);
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d502c. */
-/* Supplied declaration required: FUN_003de188. */
+/* Supplied declaration required: naviMainCreate. */
 /* Supplied declaration required: gameFlagSetEligibleEntryFlagsAtThreshold. */
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: moriModelUnitStartMaterialAnimation. */
 /* Supplied declaration required: ptrVectorAt. */
 /* Supplied declaration required: objectVectorClear. */
 /* Supplied declaration required: countersAddSaturating. */
-/* Supplied declaration required: FUN_0040a908. */
-/* Supplied declaration required: FUN_0040a918. */
+/* Supplied declaration required: moriModelContentSetRequestFirst. */
+/* Supplied declaration required: moriModelContentSetRequestSecond. */
 /* Supplied declaration required: resourceOwnerLoadFileSync. */
 /* Supplied declaration required: moriModelContentLoadBody. */
-/* Supplied declaration required: FUN_0040ab8c. */
+/* Supplied declaration required: moriModelContentIsLoaded. */
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_0040ae70. */
@@ -583,7 +583,7 @@ extern int FUN_0040af60(unsigned int);
 extern int rosterGetLeaderId(void);
 /* Supplied declaration required: aocSelectedRecordIsUnavailable. */
 /* Supplied declaration required: gameDataSaveSetValues. */
-/* Supplied declaration required: FUN_004731d8. */
+/* Supplied declaration required: gameSaveBlockRebuild27E98. */
 extern int gameBlockByte27E98Is1To3(void);
 /* Supplied declaration required: mapRestoreSavedDestination. */
 /* Supplied declaration required: scriptHolderFree1. */
@@ -594,7 +594,7 @@ extern int FUN_0047e150(int);
 /* Supplied declaration required: scriptHolderFree2. */
 /* Supplied declaration required: scriptHolderReset. */
 /* Supplied declaration required: scriptHolderFree3. */
-/* Supplied declaration required: FUN_0047e430. */
+/* Supplied declaration required: aocBootResetAndReleaseBuffers. */
 extern int scriptHolderUpdateSimple(int);
 /* Supplied declaration required: FUN_00482c04. */
 /* Supplied declaration required: FUN_00483294. */
@@ -602,17 +602,17 @@ extern int scriptHolderUpdateSimple(int);
 /* Supplied declaration required: lmapEnemyCtrlLoadModels. */
 /* Supplied declaration required: fieldBuildAreaPlacementList. */
 /* Supplied declaration required: stateSetterSetFromBase. */
-/* Supplied declaration required: FUN_00483acc. */
+/* Supplied declaration required: objectPoolDestroyAll. */
 /* Supplied declaration required: twoObjectsRelease. */
-extern int FUN_004a0404(void);
+extern int playerCanAffordRecoverySkill(void);
 extern int FUN_004a0f5c(void);
 /* Supplied declaration required: itemResetOverLimitStates. */
 extern int flagsBit7Get(int, int);
 /* Supplied declaration required: FUN_004bc95c. */
-extern int FUN_004d0584(void);
+extern int inputConfirmPressed(void);
 extern int battleValuesSet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00244acc. */
-/* Supplied declaration required: FUN_00245d78. */
+/* Supplied declaration required: mapIfRestartActiveRecords. */
 /* Supplied declaration required: mapIfSetOpaqueMode. */
 /* Supplied declaration required: FUN_0024ad50. */
 /* Supplied declaration required: FUN_00294a84. */
@@ -772,20 +772,20 @@ unsigned int FUN_00276264(void)
         FUN_00215978(0);
       }
       *(unsigned short *)(temp_v5 + 0x22) = 0;
-      temp_v8 = FUN_001ba570();
+      temp_v8 = optionsGoalConditionCheck();
       if (temp_v8 != 0) {
         temp_v0 = 1;
         DAT_005f1776 = '\0';
         DAT_005f16d8 = 0;
         sysClearCachedFlag();
-        FUN_00376fa4(0);
+        mapSetActiveEntryId(0);
         DAT_005f172b = '\0';
       }
       else if (!temp_v23) {
         DAT_005f1776 = '\0';
         DAT_005f16d8 = 0;
         sysClearCachedFlag();
-        FUN_00376fa4(0);
+        mapSetActiveEntryId(0);
         DAT_005f172b = '\0';
       }
       g_gameState.mapId = DAT_005f1b74;
@@ -935,7 +935,7 @@ unsigned int FUN_00276264(void)
     FUN_00398004(0);
     DAT_005f1608 = puVar2[0x10];
     DAT_005f160c = puVar2[0x12];
-    FUN_003de188(0);
+    naviMainCreate(0);
     naviMainSetSelectionResetProgress(puVar2[0x10]);
     navigationSetArguments(puVar2[0x10],puVar2[0x12],DAT_005f1604);
     if ((DAT_005f1634 != '\0') || (*(char *)(puVar2 + 0x278) != '\0')) {
@@ -958,8 +958,8 @@ unsigned int FUN_00276264(void)
       temp_v22 = modelListInit();
     }
     puVar2[0x2b8] = temp_v22;
-    FUN_0040a908();
-    FUN_0040a918(puVar2[0x2b8],0x20000);
+    moriModelContentSetRequestFirst();
+    moriModelContentSetRequestSecond(puVar2[0x2b8],0x20000);
     modelLoadFileAsyncByName(puVar2[0x2b8],temp_v27);
     __2sprintf((char *)temp_v27,(const char *)(0x276dc4));
     asdLoadFileAsyncWrap(temp_v27,puVar2 + 0x13bd,1,0x80);
@@ -972,8 +972,8 @@ unsigned int FUN_00276264(void)
     }
     puVar19 = puVar2 + 0x13bf;
     *puVar19 = temp_v22;
-    FUN_0040a908();
-    FUN_0040a918(*puVar19,0x20000);
+    moriModelContentSetRequestFirst();
+    moriModelContentSetRequestSecond(*puVar19,0x20000);
     modelLoadFileAsyncByName(*puVar19,temp_v27);
     temp_v10 = 0;
     if (0 < *(int *)(puVar2[0x10] * 4 + 0x5800ac)) {
@@ -1008,17 +1008,17 @@ unsigned int FUN_00276264(void)
       if (g_lmapMainState != (unsigned int *)0x0) {
         temp_v8 = 0;
         do {
-          if ((puVar19[temp_v8 + 0x295] != 0) && (temp_v6 = FUN_0040ab8c(), temp_v6 == 0)) {
+          if ((puVar19[temp_v8 + 0x295] != 0) && (temp_v6 = moriModelContentIsLoaded(), temp_v6 == 0)) {
             return 0;
           }
           temp_v8 = temp_v8 + 1;
         } while (temp_v8 < 0x20);
       }
-      temp_v8 = FUN_0040ab8c(puVar2[0x2b8]);
+      temp_v8 = moriModelContentIsLoaded(puVar2[0x2b8]);
       if (temp_v8 == 0) {
         return 0;
       }
-      temp_v8 = FUN_0040ab8c(puVar2[0x13bf]);
+      temp_v8 = moriModelContentIsLoaded(puVar2[0x13bf]);
       if (temp_v8 == 0) {
         return 0;
       }
@@ -1080,8 +1080,8 @@ LAB_00276f5c:
           }
           puVar2[0x2f] = temp_v22;
           resourceOwnerLoadFileSync();
-          FUN_0040a908(puVar2[0x2f],0x10000);
-          FUN_0040a918(puVar2[0x2f],0x30000);
+          moriModelContentSetRequestFirst(puVar2[0x2f],0x10000);
+          moriModelContentSetRequestSecond(puVar2[0x2f],0x30000);
           moriModelContentLoadBody(puVar2[0x2f],0);
           temp_v8 = *(int *)(puVar2[0x2f] + 4);
           handleRegistryRegisterObject(g_handleRegistry,temp_v8);
@@ -1094,8 +1094,8 @@ LAB_00276f5c:
           }
           puVar2[0x36] = temp_v22;
           resourceOwnerLoadFileSync();
-          FUN_0040a908(puVar2[0x36],0x10000);
-          FUN_0040a918(puVar2[0x36],0x30000);
+          moriModelContentSetRequestFirst(puVar2[0x36],0x10000);
+          moriModelContentSetRequestSecond(puVar2[0x36],0x30000);
           moriModelContentLoadBody(puVar2[0x36],0);
           temp_v8 = *(int *)(puVar2[0x36] + 4);
           handleRegistryRegisterObject(g_handleRegistry,temp_v8);
@@ -1128,8 +1128,8 @@ LAB_00276f5c:
           puVar2[0x1f] = puVar2[0x19];
           puVar2[0x20] = 0x43960000;
           asdCameraInitializeDefaults(&g_localCamera,1);
-          FUN_0014f0dc(&g_localCamera,puVar2 + 0x18,puVar2 + 0x1b,puVar2 + 0x15);
-          FUN_001523b8(&g_localCamera,1);
+          cameraMatrixCacheSetLookAt(&g_localCamera,puVar2 + 0x18,puVar2 + 0x1b,puVar2 + 0x15);
+          stereoCameraSetPerspective(&g_localCamera,1);
           FUN_0036b824(&g_localCamera);
           *(unsigned char **)(puVar2[0x24db] + 0xc) = &g_localCamera;
           temp_v8 = g_lmapView;
@@ -1181,10 +1181,10 @@ LAB_00276f5c:
           puVar19 = g_lmapMainState;
           DAT_005f18c0 = 0;
           temp_v22 = puVar2[0x10];
-          FUN_002747dc();
+          mapIfResetRecords();
           FUN_00364740(temp_v22,puVar19[0x12]);
-          FUN_002ddea0();
-          FUN_002a2e98(puVar2[0x10],puVar2[0x12]);
+          lmapUpdateEngineRecordNavigation();
+          mapCollisionLoad(puVar2[0x10],puVar2[0x12]);
           FUN_0020f12c(puVar2[0x10],puVar2[0x12]);
           mapLoadSkyTable(puVar2[0x10]);
           mapEnvironmentSelectPreset(1);
@@ -1238,11 +1238,11 @@ LAB_00276f5c:
        (*(char *)((int)puVar2 + 0x9e1) == '\0')) {
       temp_v8 = pairedAvailabilityGetState(0);
       if (temp_v8 == 3) {
-        FUN_0013cab8(0,10,0xff);
+        screenFadeStartIn(0,10,0xff);
       }
       temp_v8 = pairedAvailabilityGetState(1);
       if (temp_v8 == 3) {
-        FUN_0013cab8(1,10,0xff);
+        screenFadeStartIn(1,10,0xff);
       }
     }
     DAT_005f1748 = '\x01';
@@ -1618,13 +1618,13 @@ LAB_00276f5c:
                   puVar2[4] = 0;
                   temp_v8 = pairedAvailabilityGetState(0);
                   if (temp_v8 == 3) {
-                    FUN_0013cab8(0,10,0xff);
+                    screenFadeStartIn(0,10,0xff);
                   }
                   temp_v8 = pairedAvailabilityGetState(1);
                   if (temp_v8 != 3) {
                     return 0;
                   }
-                  FUN_0013cab8(1,10,0xff);
+                  screenFadeStartIn(1,10,0xff);
                   return 0;
                 }
                 if (puVar2[0x277] != 1) {
@@ -1713,7 +1713,7 @@ LAB_00276f5c:
                                   if (DAT_005f1638 != 0x45) {
                                     if (DAT_005f1638 == 0x4b) {
                                       *(unsigned char *)((int)puVar2 + 0xe1) = 1;
-                                      temp_v8 = FUN_004d0584();
+                                      temp_v8 = inputConfirmPressed();
                                       if ((temp_v8 != 0) && (*(char *)(g_lmapView + 0xb4) == '\0'))
                                       {
                                         mapPopupReset();
@@ -1745,7 +1745,7 @@ LAB_00276f5c:
                                     }
                                   }
                                   else {
-                                    temp_v8 = FUN_004d0584();
+                                    temp_v8 = inputConfirmPressed();
                                     if ((temp_v8 != 0) && (*(char *)(g_lmapView + 0xb4) == '\0')) {
                                       DAT_005f1614 = '\x01';
                                       DAT_005f161c = 1;
@@ -1761,7 +1761,7 @@ LAB_00276f5c:
                                   }
                                 }
                                 else {
-                                  temp_v8 = FUN_004d0584();
+                                  temp_v8 = inputConfirmPressed();
                                   if ((temp_v8 != 0) && (*(char *)(g_lmapView + 0xb4) == '\0')) {
                                     DAT_005f1614 = '\x01';
                                     DAT_005f161c = 1;
@@ -1774,7 +1774,7 @@ LAB_00276f5c:
 LAB_00278b38:
                                 FUN_002b80fc(*(float *)(g_lmapScene + 0x28), *(float *)(g_lmapScene + 0x2C), *(float *)(g_lmapScene + 0x30));
                                 if (((*(char *)(DAT_00581280 + 0xf0c) != '\0') &&
-                                    (temp_v8 = FUN_004d0584(), temp_v8 != 0)) &&
+                                    (temp_v8 = inputConfirmPressed(), temp_v8 != 0)) &&
                                    (*(char *)(g_lmapView + 0xb4) == '\0')) {
                                   DAT_005f1614 = '\x01';
                                   DAT_005f165c = -1;
@@ -1789,7 +1789,7 @@ LAB_00278b38:
                                   temp_v10 = (unsigned int)*(unsigned char *)((int)puVar2 + 0xb);
                                 }
                                 if (DAT_005f1be4 == 0 && temp_v10 == 0) {
-                                  temp_v8 = FUN_004a0404();
+                                  temp_v8 = playerCanAffordRecoverySkill();
                                   if (temp_v8 != 0) {
                                     temp_v8 = buttonHelpIsActionActive(0x13);
                                     if ((temp_v8 != 0) && (temp_v8 = FUN_004a0f5c(), temp_v8 != 0)) {
@@ -1917,7 +1917,7 @@ LAB_00278b38:
                                 DAT_005f1a58 = 0;
                                 return 0;
                               }
-                              temp_v8 = FUN_004d0584();
+                              temp_v8 = inputConfirmPressed();
                               if ((temp_v8 == 0) || (*(char *)(g_lmapView + 0xb4) != '\0'))
                               goto LAB_00278b38;
                               DAT_005f1614 = '\x01';
@@ -1950,7 +1950,7 @@ LAB_00278b38:
                               puVar2[4] = 0;
                               break;
                             }
-                            temp_v8 = FUN_004d0584();
+                            temp_v8 = inputConfirmPressed();
                             if ((temp_v8 == 0) || (*(char *)(g_lmapView + 0xb4) != '\0'))
                             goto LAB_00278b38;
                             DAT_005f1614 = '\x01';
@@ -1974,7 +1974,7 @@ LAB_00278b38:
                             temp_v4 = *(short *)(temp_v8 + 0x28);
                           }
                           else {
-                            temp_v8 = FUN_004d0584();
+                            temp_v8 = inputConfirmPressed();
                             if ((temp_v8 == 0) || (*(char *)(g_lmapView + 0xb4) != '\0'))
                             goto LAB_00278b38;
                             DAT_005f1614 = '\x01';
@@ -2002,7 +2002,7 @@ LAB_00278b38:
                           }
                         }
                         else {
-                          temp_v8 = FUN_004d0584();
+                          temp_v8 = inputConfirmPressed();
                           if ((temp_v8 == 0) || (*(char *)(g_lmapView + 0xb4) != '\0'))
                           goto LAB_00278b38;
                           DAT_005f1614 = '\x01';
@@ -2040,7 +2040,7 @@ LAB_00278b38:
                         }
                       }
                       else {
-                        temp_v8 = FUN_004d0584();
+                        temp_v8 = inputConfirmPressed();
                         if ((temp_v8 == 0) || (*(char *)(g_lmapView + 0xb4) != '\0'))
                         goto LAB_00278b38;
                         DAT_005f1614 = '\x01';
@@ -2078,7 +2078,7 @@ LAB_00278b38:
                       }
                     }
                     else {
-                      temp_v8 = FUN_004d0584();
+                      temp_v8 = inputConfirmPressed();
                       if ((temp_v8 == 0) || (*(char *)(g_lmapView + 0xb4) != '\0'))
                       goto LAB_00278b38;
                       DAT_005f1614 = '\x01';
@@ -2127,7 +2127,7 @@ LAB_00278774:
                     }
                   }
                   else {
-                    temp_v8 = FUN_004d0584();
+                    temp_v8 = inputConfirmPressed();
                     if ((temp_v8 == 0) || (*(char *)(g_lmapView + 0xb4) != '\0'))
                     goto LAB_00278b38;
                     DAT_005f1614 = '\x01';
@@ -2266,7 +2266,7 @@ LAB_00278774:
       return 0;
     }
     DAT_005f185c = 0;
-    FUN_002c23cc(1);
+    frameTexConfigureCaptureTextures(1);
     DAT_005f161f = 0;
     FUN_0036a434(puVar2);
     sub68OwnerCall3();
@@ -2468,7 +2468,7 @@ LAB_00279444:
             *(unsigned char *)((int)puVar2 + 10) = 1;
           }
           else {
-            FUN_004731d8();
+            gameSaveBlockRebuild27E98();
             uiPlayGatedActionFeedback();
             DAT_005f1614 = '\0';
             DAT_005f161c = 0;
@@ -2490,7 +2490,7 @@ LAB_00279834:
       DAT_005f1614 = '\x01';
       DAT_005f161c = 1;
       puVar2[3] = 0x17;
-      FUN_004731d8();
+      gameSaveBlockRebuild27E98();
       temp_v5 = 0;
       puVar2[4] = temp_v5;
       break;
@@ -2596,7 +2596,7 @@ LAB_00279834:
       break;
     }
     *(unsigned int *)(g_aocMain + 0x754) = temp_v10 & 0xffffff8f;
-    FUN_0047e430(temp_v8 + 0xa8,1);
+    aocBootResetAndReleaseBuffers(temp_v8 + 0xa8,1);
     temp_v5 = puVar2[4] + 1;
     puVar2[4] = temp_v5;
     break;
@@ -2657,13 +2657,13 @@ LAB_0027a7a8:
       puVar2[4] = 0;
       temp_v8 = pairedAvailabilityGetState(0);
       if (temp_v8 == 3) {
-        FUN_0013cab8(0,10,0xff);
+        screenFadeStartIn(0,10,0xff);
       }
       temp_v8 = pairedAvailabilityGetState(1);
       if (temp_v8 != 3) {
         return 0;
       }
-      FUN_0013cab8(1,10,0xff);
+      screenFadeStartIn(1,10,0xff);
       return 0;
     }
     temp_v8 = 0x70;
@@ -2703,13 +2703,13 @@ LAB_0027a7a8:
       puVar2[4] = 0;
       temp_v8 = pairedAvailabilityGetState(0);
       if (temp_v8 == 3) {
-        FUN_0013cab8(0,10,0xff);
+        screenFadeStartIn(0,10,0xff);
       }
       temp_v8 = pairedAvailabilityGetState(1);
       if (temp_v8 != 3) {
         return 0;
       }
-      FUN_0013cab8(1,10,0xff);
+      screenFadeStartIn(1,10,0xff);
       return 0;
     }
     temp_v8 = 0x70;
@@ -2750,13 +2750,13 @@ LAB_0027a7a8:
         puVar2[4] = 0;
         temp_v8 = pairedAvailabilityGetState(0);
         if (temp_v8 == 3) {
-          FUN_0013cab8(0,10,0xff);
+          screenFadeStartIn(0,10,0xff);
         }
         temp_v8 = pairedAvailabilityGetState(1);
         if (temp_v8 != 3) {
           return 0;
         }
-        FUN_0013cab8(1,10,0xff);
+        screenFadeStartIn(1,10,0xff);
         return 0;
       }
     }
@@ -2827,7 +2827,7 @@ LAB_0027a7a8:
       puVar19[0x34] = 0;
       puVar19[0x35] = 0;
     }
-    FUN_00291e50(0,0,DAT_005f16a4,DAT_005f16a8);
+    lmapSceneMoveToWaypoint(0,0,DAT_005f16a4,DAT_005f16a8);
     puVar2[3] = puVar2[3] + 1;
     puVar2[4] = 0;
     break;
@@ -3093,7 +3093,7 @@ LAB_0027a030:
     sub68OwnerCall4();
     puVar19 = g_lmapMainState;
     if (g_lmapMainState != (unsigned int *)0x0) {
-      FUN_00483acc(g_lmapMainState + 0x3d);
+      objectPoolDestroyAll(g_lmapMainState + 0x3d);
       stateSetterSetFromBase(puVar19 + 0x3d,puVar19[0x10] - 100,puVar19[0x12]);
       fieldBuildAreaPlacementList(puVar19 + 0x3d);
     }
@@ -3184,19 +3184,19 @@ LAB_0027a030:
     if (g_mapSelection == -1) {
       temp_v8 = pairedAvailabilityGetState(0);
       if (temp_v8 == 3) {
-        FUN_0013cab8(0,10,0xff);
+        screenFadeStartIn(0,10,0xff);
       }
       temp_v8 = pairedAvailabilityGetState(1);
       if (temp_v8 == 3) {
-        FUN_0013cab8(1,10,0xff);
+        screenFadeStartIn(1,10,0xff);
       }
       FUN_00244ac8();
       puVar19 = g_lmapMainState;
       temp_v22 = puVar2[0x10];
-      FUN_002747dc();
+      mapIfResetRecords();
       FUN_00364740(temp_v22,puVar19[0x12]);
-      FUN_002ddea0();
-      FUN_00245d78(0);
+      lmapUpdateEngineRecordNavigation();
+      mapIfRestartActiveRecords(0);
       lmapUpdateMapBgm();
       FUN_003a2278(0);
       DAT_005f1614 = '\0';
@@ -3272,7 +3272,7 @@ LAB_0027a030:
     sub68OwnerCall4();
     puVar19 = g_lmapMainState;
     if (g_lmapMainState != (unsigned int *)0x0) {
-      FUN_00483acc(g_lmapMainState + 0x3d);
+      objectPoolDestroyAll(g_lmapMainState + 0x3d);
       stateSetterSetFromBase(puVar19 + 0x3d,puVar19[0x10] - 100,puVar19[0x12]);
       fieldBuildAreaPlacementList(puVar19 + 0x3d);
     }
@@ -3630,7 +3630,7 @@ LAB_0027a030:
   case 0x4d:
     resourceOwnerReleaseAndReset(g_handleRegistry);
     FUN_00244ac8();
-    FUN_00227a70();
+    mapCollisionRelease();
     temp_v5 = 0;
     temp_v8 = temp_v11;
     do {
@@ -3799,7 +3799,7 @@ LAB_0027a030:
     if (g_lmapMainState != (unsigned int *)0x0) {
       temp_v8 = 0;
       do {
-        if ((puVar19[temp_v8 + 0x295] != 0) && (temp_v5 = FUN_0040ab8c(), temp_v5 == 0)) {
+        if ((puVar19[temp_v8 + 0x295] != 0) && (temp_v5 = moriModelContentIsLoaded(), temp_v5 == 0)) {
           return 0;
         }
         temp_v8 = temp_v8 + 1;
@@ -3834,8 +3834,8 @@ LAB_0027a030:
     break;
   case 0x56:
     mapIfInitializeSceneControllers();
-    FUN_002747dc();
-    FUN_002a2e98(puVar2[0x10],puVar2[0x12]);
+    mapIfResetRecords();
+    mapCollisionLoad(puVar2[0x10],puVar2[0x12]);
     FUN_0020f12c(puVar2[0x10],puVar2[0x12]);
     mapLoadSkyTable(puVar2[0x10]);
     mapEnvironmentSelectPreset(1);
@@ -3891,8 +3891,8 @@ LAB_0027a030:
     uRam005f1621 = 0;
     DAT_005f1622 = 0;
     FUN_00387014();
-    FUN_0013cab8(0,0xf,0xffffffff);
-    FUN_0013cab8(1,0xf,0xff);
+    screenFadeStartIn(0,0xf,0xffffffff);
+    screenFadeStartIn(1,0xf,0xff);
     puVar2[4] = 0;
     puVar2[3] = puVar2[3] + 1;
     break;
@@ -3914,8 +3914,8 @@ LAB_0027a030:
       puVar2[0x12] = DAT_005f16a4;
       puVar19 = g_lmapMainState;
       DAT_005f1600 = temp_v8;
-      FUN_00227a70();
-      FUN_002a2e98(puVar19[0x10],puVar19[0x12]);
+      mapCollisionRelease();
+      mapCollisionLoad(puVar19[0x10],puVar19[0x12]);
       temp_v26 = 0x40000000;
       puVar19[0x37] = 0x40000000;
       *(unsigned char *)(puVar19 + 0x38) = 1;
@@ -3974,7 +3974,7 @@ LAB_0027a030:
   case 0x5a:
     resourceOwnerReleaseAndReset(g_handleRegistry);
     FUN_00244ac8();
-    FUN_00227a70();
+    mapCollisionRelease();
     temp_v8 = 0;
     do {
       if (puVar2[temp_v8 + 0x295] != 0) {
@@ -4104,7 +4104,7 @@ LAB_0027a030:
     if (g_lmapMainState != (unsigned int *)0x0) {
       temp_v8 = 0;
       do {
-        if ((puVar19[temp_v8 + 0x295] != 0) && (temp_v5 = FUN_0040ab8c(), temp_v5 == 0)) {
+        if ((puVar19[temp_v8 + 0x295] != 0) && (temp_v5 = moriModelContentIsLoaded(), temp_v5 == 0)) {
           return 0;
         }
         temp_v8 = temp_v8 + 1;
@@ -4144,10 +4144,10 @@ LAB_0027a030:
     lmapUpdateMapBgm();
     puVar19 = g_lmapMainState;
     temp_v22 = puVar2[0x10];
-    FUN_002747dc();
+    mapIfResetRecords();
     FUN_00364740(temp_v22,puVar19[0x12]);
-    FUN_002ddea0();
-    FUN_002a2e98(puVar2[0x10],puVar2[0x12]);
+    lmapUpdateEngineRecordNavigation();
+    mapCollisionLoad(puVar2[0x10],puVar2[0x12]);
     FUN_0020f12c(puVar2[0x10],puVar2[0x12]);
     mapLoadSkyTable(puVar2[0x10]);
     mapEnvironmentSelectPreset(1);
@@ -4200,8 +4200,8 @@ LAB_0027a030:
     puVar2[0x39] = 0x38;
     puVar2[0x3a] = 0x42200000;
     FUN_00387014();
-    FUN_0013cab8(0,0xf,0xff);
-    FUN_0013cab8(1,0xf,0xff);
+    screenFadeStartIn(0,0xf,0xff);
+    screenFadeStartIn(1,0xf,0xff);
     puVar2[4] = 0;
     puVar2[3] = puVar2[3] + 1;
     break;
@@ -4270,7 +4270,7 @@ LAB_0027ca0c:
     engineRecordsUnregisterHandles();
     mapIfUnregisterOwnedResources();
     mapGimicClearEntryChildren();
-    FUN_00227a70();
+    mapCollisionRelease();
     g_gameState.mapId = g_mapSelection;
     puVar2[0x10] = g_mapSelection;
     DAT_005f1600 = DAT_005f1c9c;
@@ -4303,9 +4303,9 @@ LAB_0027ca0c:
     puVar2[3] = puVar2[3] + 1;
     break;
   case 0x69:
-    FUN_002a2e98(puVar2[0x10],puVar2[0x12]);
+    mapCollisionLoad(puVar2[0x10],puVar2[0x12]);
     lmapUpdateMapBgm();
-    FUN_00483acc(puVar2 + 0x3d);
+    objectPoolDestroyAll(puVar2 + 0x3d);
     stateSetterSetFromBase(puVar2 + 0x3d,puVar2[0x10] - 100,puVar2[0x12]);
     fieldBuildAreaPlacementList(puVar2 + 0x3d);
     puVar2[3] = puVar2[3] + 1;
@@ -4320,11 +4320,11 @@ LAB_0027ca0c:
   case 0x6c:
     temp_v8 = pairedAvailabilityGetState(0);
     if (temp_v8 == 3) {
-      FUN_0013cab8(0,10,0xff);
+      screenFadeStartIn(0,10,0xff);
     }
     temp_v8 = pairedAvailabilityGetState(1);
     if (temp_v8 == 3) {
-      FUN_0013cab8(1,10,0xff);
+      screenFadeStartIn(1,10,0xff);
     }
     mapIfSetMode1();
     naviMainUpdateSlider(0,8);
@@ -4394,7 +4394,7 @@ joined_r0x0027ce58:
     dialogClose(1);
     resourceOwnerReleaseAndReset(g_handleRegistry);
     FUN_00244ac8();
-    FUN_00227a70();
+    mapCollisionRelease();
     temp_v8 = 0;
     do {
       if (puVar2[temp_v8 + 0x295] != 0) {
@@ -4424,7 +4424,7 @@ joined_r0x0027ce58:
         }
       }
     }
-    FUN_00483acc(puVar2 + 0x3d);
+    objectPoolDestroyAll(puVar2 + 0x3d);
     twoObjectsRelease(puVar2 + 0x3d);
     temp_v5 = puVar2[0x2f];
     temp_v8 = temp_v19;
@@ -4653,7 +4653,7 @@ joined_r0x0027ce58:
           temp_v3 = FUN_00376f84();
           uStack_b0 = romwright_piece_2_2(temp_v3,(unsigned short)uStack_b0);
           uStack_b0 = romwright_piece_3_1((((unsigned int)(uStack_b0) >> 8) & 0xffffffU),1);
-          FUN_00376fa4(0);
+          mapSetActiveEntryId(0);
         }
         else {
           uStack_b0 = romwright_piece_2_2((short)puVar2[0x11],(unsigned short)uStack_b0);

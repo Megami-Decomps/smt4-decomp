@@ -8,15 +8,15 @@
 
 extern "C" {
 s32 resourceRunOperationIfUnblocked(void *cursor);
-void FUN_00417e08(u32 questId);
+void rosterAddUnit(u32 questId);
 void gameOptionsClassifyMode();
 void optionsSetFlag1();
 void uiQuestRefreshDetailPages(u32 questId);
-void FUN_003dea6c(u32 questId, s32 state, s32 enabled);
+void scrMessageSetSpeakerTitle(u32 questId, s32 state, s32 enabled);
 s32 scrScriptProcessStartEntry(u32 script, u32 entry);
 const char *dataFindKindRecordWithAocOverrides(u32 textId, s32 mode);
 char *libc_strcpy(char *destination, const char *source);
-void FUN_00359974(s32 type, u32 message, s32 argument, s32 flags);
+void entryTableResetAndInit(s32 type, u32 message, s32 argument, s32 flags);
 void sysPlaySe(s32 sound);
 void FUN_003d474c();
 
@@ -33,18 +33,18 @@ void FUN_0021a4b0()
     UiQuestApoc *quest = g_uiQuest;
     quest->state = 1;
     u32 questId = quest->list[resourceRunOperationIfUnblocked(quest->cursor) + listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(quest->cursor))];
-    FUN_00417e08(questId);
+    rosterAddUnit(questId);
     gameOptionsClassifyMode();
     optionsSetFlag1();
     uiQuestRefreshDetailPages(questId);
     uiSpriteSelectAnim((UiSpriteState *)quest->acceptance.sprite, 2);
-    FUN_003dea6c(questId, 0, 1);
+    scrMessageSetSpeakerTitle(questId, 0, 1);
     QuestRecordA *definition = questDataGetRecord(questId);
     if (definition && definition->kind == 11) {
         char text[132];
         libc_strcpy(text, dataFindKindRecordWithAocOverrides(reinterpret_cast<const SpecialQuestMetadata *>(definition)->textId, 0));
         scrSetStringSlot(0, text);
-        FUN_00359974(0x18, reinterpret_cast<const SpecialQuestMetadata *>(definition)->messageId, -1, 0);
+        entryTableResetAndInit(0x18, reinterpret_cast<const SpecialQuestMetadata *>(definition)->messageId, -1, 0);
         if (!scrScriptProcessStartEntry(quest->acceptance.script, 0x13))
             return;
     } else {

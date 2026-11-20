@@ -27,7 +27,7 @@ extern unsigned int *DAT_005c14ac; /* 0x5c14ac */
 #define ROMWRIGHT_PIECE_1_3_DEFINED
 #define romwright_piece_1_3(upper, lower) ((unsigned int)(((unsigned int)(unsigned char)(upper) << 24) | ((unsigned int)(lower) & 0xffffffULL)))
 #endif
-extern int FUN_001a2a4c(void);
+extern int nn_gxlow_CTR_GetCmdManager(void);
 /* Supplied declaration required: FUN_001b013c. */
 
 
@@ -56,7 +56,7 @@ void FUN_001a283c(unsigned int param_1,unsigned int param_2,int param_3,unsigned
   uStack_2c = param_7;
   temp_v3 = param_1;
   uStack_38 = param_4;
-  temp_v0 = FUN_001a2a4c();
+  temp_v0 = nn_gxlow_CTR_GetCmdManager();
   FUN_001b013c(temp_v0 + 0x58,&temp_v1);
   return;
 }

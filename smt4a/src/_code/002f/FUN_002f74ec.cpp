@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002f1468(unsigned int *, unsigned int **);
-int FUN_002fb208(void);
+int threadGetCurrentId(void);
 
 typedef struct fn_002f74ec_arg0 fn_002f74ec_arg0;
 struct fn_002f74ec_arg0 {
@@ -26,7 +26,7 @@ extern unsigned char DAT_00559070; /* 0x559070 */
 /* Supplied declaration required: FUN_002f1468. */
 extern unsigned int *FUN_002f18f8(int);
 extern int FUN_002f5928(unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_002fb208. */
+/* Supplied declaration required: threadGetCurrentId. */
 extern unsigned int *_ZN9Obj559608C1Ev(fn_002f74ec_arg0 *);
 
 
@@ -49,7 +49,7 @@ FUN_002f74ec(fn_002f74ec_arg0 *param_1,unsigned int *param_2,unsigned int param_
   puVar3 = (unsigned int *)FUN_002f18f8(temp_v0 + 0x30);
   puVar4 = puVar3 + -0x10;
   puVar1 = puVar3;
-  FUN_002fb208();
+  threadGetCurrentId();
   temp_v1 = puVar1;
   FUN_002f1468(puVar3,&temp_v1);
   *puVar3 = *param_2;

@@ -6,7 +6,7 @@
 extern "C" {
 
 int soundVolumeSettingSet(...);
-int FUN_0014af98(void);
+int messageVoiceBankGet(void);
 int sysPlaySe(int);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void);
@@ -24,7 +24,7 @@ int FUN_002342b8(void);
 int mapIfOverlayRelease(void);
 int mapEaseSceneHeading(void);
 int FUN_002e364c(...);
-int FUN_00303460(...);
+int lmapCameraSetMode(...);
 int mapIfReleaseSlot3(void);
 int mapSetSceneState(...);
 int FUN_00327ee8(void);
@@ -44,7 +44,7 @@ extern int g_lmapScene; /* 0x581288 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: soundVolumeSettingSet. */
 extern unsigned int soundVolumeSettingGet(void);
-/* Supplied declaration required: FUN_0014af98. */
+/* Supplied declaration required: messageVoiceBankGet. */
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: libm_cosf. */
@@ -57,7 +57,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapIfOverlayRelease. */
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_002e364c. */
-/* Supplied declaration required: FUN_00303460. */
+/* Supplied declaration required: lmapCameraSetMode. */
 /* Supplied declaration required: mapIfReleaseSlot3. */
 /* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: padGetNormalizedAnalogStick. */
@@ -70,7 +70,7 @@ extern int dataTableGetRecord23(void);
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int inputIsQuestMenuPressed(void);
-extern int FUN_004d0584(void);
+extern int inputConfirmPressed(void);
 
 void FUN_003661c8(void)
 
@@ -118,7 +118,7 @@ void FUN_003661c8(void)
         temp_v1 = g_lmapView;
         *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(temp_v2 + 0x50);
         *(unsigned int *)(temp_v1 + 0xb0) = 0;
-        FUN_00303460(0);
+        lmapCameraSetMode(0);
         temp_v1 = g_lmapScene;
         temp_v2 = *(int *)(temp_v1 + 4);
         *(int *)(temp_v1 + 4) = temp_v2 + 1;
@@ -277,7 +277,7 @@ void FUN_003661c8(void)
       *(unsigned int *)(temp_v1 + 0x2c) = temp_v0;
       *(unsigned int *)(temp_v1 + 0x30) = temp_v4;
       *(unsigned int *)(temp_v1 + 0x50) = g_gameState.overviewHeading;
-      FUN_00303460(0xc);
+      lmapCameraSetMode(0xc);
       *(unsigned int *)(g_lmapView + 0xb0) = 0xfffffffd;
       sysPlaySe(0xdd);
       FUN_00233e10(1,g_gameState.overviewRecord);
@@ -304,7 +304,7 @@ void FUN_003661c8(void)
     case 2:
       *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
       FUN_00233e10(1,g_gameState.overviewRecord);
-      temp_v1 = FUN_004d0584();
+      temp_v1 = inputConfirmPressed();
       if (temp_v1 != 0) {
         table23FindRecordByKey(g_gameState.unk0A4,g_gameState.unk0A8,g_gameState.unk0AC);
         temp_v2 = dataTableGetRecord23();
@@ -343,7 +343,7 @@ void FUN_003661c8(void)
           temp_v1 = g_lmapView;
           *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
           *(unsigned int *)(temp_v1 + 0xb0) = 0;
-          FUN_00303460(0);
+          lmapCameraSetMode(0);
           temp_v1 = g_lmapScene;
           *(unsigned int *)(g_lmapScene + 0x54) = 0;
           *(unsigned int *)(temp_v1 + 0x58) = 0x40a00000;
@@ -408,7 +408,7 @@ LAB_00366704:
       FUN_00324e38(0xffffffff);
       libm_sinf();
       libm_cosf();
-      FUN_0014af98();
+      messageVoiceBankGet();
       soundVolumeSettingSet();
       sysPlayVoice(0x10002e5);
       soundVolumeSettingSet(temp_v0);
@@ -485,7 +485,7 @@ LAB_00366704:
         temp_v1 = g_lmapView;
         *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
         *(unsigned int *)(temp_v1 + 0xb0) = 0;
-        FUN_00303460(0);
+        lmapCameraSetMode(0);
         *(unsigned char *)(g_lmapView + 0xa8) = 1;
       }
       if (*(int *)(g_lmapScene + 8) == 3) {
@@ -521,7 +521,7 @@ LAB_00366a74:
         FUN_00324e38(0xffffffff);
         libm_sinf();
         libm_cosf();
-        FUN_0014af98();
+        messageVoiceBankGet();
         soundVolumeSettingSet();
         sysPlayVoice(0x10002e6);
         soundVolumeSettingSet(temp_v0);

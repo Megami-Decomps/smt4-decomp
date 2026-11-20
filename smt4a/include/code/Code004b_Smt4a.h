@@ -16,6 +16,6 @@ u8 isFlag1F0Set(void);
 
 s32 skillGetAdjustedCost(const SlotRecordA *holder, u32 skillId);
 
-void FUN_004b7d88(const SoundCueContext* context);
+void soundPlayCueForContextKind(const SoundCueContext* context);
 
 } /* extern "C" */

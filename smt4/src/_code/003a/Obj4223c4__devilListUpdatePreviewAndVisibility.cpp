@@ -37,7 +37,7 @@ void *partyMemberFindById(u16 id);
 void FUN_003a72a4(DevilListWork *work);
 void FUN_003a6f80(DevilListWork *work);
 void FUN_003a8450(DevilListWork *work);
-void FUN_0022de74(DevilListWork *work);
+void devilListUpdatePreview(DevilListWork *work);
 void objectWordsClear(DevilListVisibility *visibility);
 void devilListMarkOrInsertQualifiedEntry(DevilListVisibility *visibility, u16 id);
 void FUN_003aab90(DevilListVisibility *visibility);
@@ -82,7 +82,7 @@ void Obj4223c4::devilListUpdatePreviewAndVisibility()
             FUN_003a6f80(work);
         }
     }
-    FUN_0022de74(work);
+    devilListUpdatePreview(work);
     objectWordsClear(&work->visibility);
     s32 count = rangeLimitMin(work->cursor);
     for (s32 index = 0; index < count; ++index) {

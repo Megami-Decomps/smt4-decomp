@@ -39,7 +39,7 @@ typedef char MapMenuCompletionOffsets[
     offsetof(MapMenuCompletionWork, choice) == 0x116c ? 1 : -1];
 extern "C" {
 s32 FUN_004ba698(FlaggedValueHolder *);
-void FUN_004b7d88(MapMenuCompletionWork *);
+void soundPlayCueForContextKind(MapMenuCompletionWork *);
 u16 flaggedValueHolderGetTotal(FlaggedValueHolder *);
 void sysPlaySe(u32);
 void *asdLoadFileSyncDefault(const char *);
@@ -52,7 +52,7 @@ void FUN_004b7b74(MapMenuCompletionWork *work)
     s32 state = scrRunOpcodesStub(work->script);
     if (state != 2 || !ready)
         return;
-    FUN_004b7d88(work);
+    soundPlayCueForContextKind(work);
     work->selection = flaggedValueHolderGetTotal(&work->holder);
     AocMain *aoc = g_aocMain;
     if (aoc->skipRestore) {

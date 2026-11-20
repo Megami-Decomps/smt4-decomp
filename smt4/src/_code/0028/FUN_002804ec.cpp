@@ -8,7 +8,7 @@ extern "C" {
 
 int collisionTestProjectedSpherePlanes(...);
 int mapFlagSlotsRetireByKey(int);
-int FUN_002878fc(...);
+int mapCollisionDisableByTag(...);
 int mapBlockBitSet(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -34,7 +34,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Supplied declaration required: collisionTestProjectedSpherePlanes. */
 /* Supplied declaration required: mapFlagSlotsRetireByKey. */
-/* Supplied declaration required: FUN_002878fc. */
+/* Supplied declaration required: mapCollisionDisableByTag. */
 /* Supplied declaration required: mapBlockBitSet. */
 
 
@@ -95,7 +95,7 @@ unsigned int FUN_002804ec(float *param_1)
                                           (int)*(char *)(temp_v4 + 5),temp_v4),
                             (float)in_d10 <= temp_v11[0])))) {
                           mapFlagSlotsRetireByKey((int)*(short *)(temp_v4 + 6));
-                          FUN_002878fc((int)*(short *)(temp_v4 + 6));
+                          mapCollisionDisableByTag((int)*(short *)(temp_v4 + 6));
                           g_gameState.map.unk46 = *(unsigned short *)(temp_v4 + 10);
                           temp_v6 = temp_v6 | 0x2000;
                         }
@@ -105,7 +105,7 @@ unsigned int FUN_002804ec(float *param_1)
                                             (int)*(char *)(temp_v4 + 5),temp_v4),
                               (float)in_d10 <= temp_v11[0])) {
                         mapFlagSlotsRetireByKey((int)*(short *)(temp_v4 + 6));
-                        FUN_002878fc((int)*(short *)(temp_v4 + 6));
+                        mapCollisionDisableByTag((int)*(short *)(temp_v4 + 6));
                         g_gameState.map.unk44 = *(unsigned short *)(temp_v4 + 10);
                         temp_v6 = temp_v6 | 0x800;
                       }
@@ -170,7 +170,7 @@ unsigned int FUN_002804ec(float *param_1)
                   (collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v4 + 4),(int)*(char *)(temp_v4 + 5),temp_v4),
                   (float)in_d10 <= temp_v11[0])) {
             mapBlockBitSet((int)*(short *)(temp_v4 + 6),1);
-            FUN_002878fc((int)*(short *)(temp_v4 + 6));
+            mapCollisionDisableByTag((int)*(short *)(temp_v4 + 6));
             temp_v6 = temp_v6 | 4;
           }
         }

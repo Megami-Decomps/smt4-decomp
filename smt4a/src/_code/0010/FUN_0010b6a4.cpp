@@ -7,7 +7,7 @@ extern "C" {
 int _ZN12OnlineResultC1ERKj(...);
 int FUN_002e9b30(int, int, unsigned int, int);
 int FUN_002e9ff4(int *);
-int FUN_002f3dde(int, unsigned int *);
+int onlineInstanceCompleteMode3(int, unsigned int *);
 int FUN_002f4dc2(int *, unsigned int);
 int FUN_002f4e14(int, int *);
 
@@ -23,7 +23,7 @@ typedef struct {
 /* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
 /* Supplied declaration required: FUN_002e9b30. */
 /* Supplied declaration required: FUN_002e9ff4. */
-/* Supplied declaration required: FUN_002f3dde. */
+/* Supplied declaration required: onlineInstanceCompleteMode3. */
 /* Supplied declaration required: FUN_002f4dc2. */
 extern int FUN_002f4dea(unsigned int);
 /* Supplied declaration required: FUN_002f4e14. */
@@ -66,7 +66,7 @@ void FUN_0010b6a4(int *param_1,int param_2,unsigned int param_3)
       uStack_24 = uStack_30;
       uStack_20 = uStack_2c;
       puVar3 = (unsigned int *)&temp_v5;
-      FUN_002f3dde(temp_v0,puVar3);
+      onlineInstanceCompleteMode3(temp_v0,puVar3);
       return;
     }
     (**(romwright_code **)(*param_1 + 0x50))(param_1,param_2,temp_v0);
@@ -79,7 +79,7 @@ void FUN_0010b6a4(int *param_1,int param_2,unsigned int param_3)
   }
   temp_v6[0] = 0x8001000f;
   puVar3 = (unsigned int *)_ZN12OnlineResultC1ERKj(&temp_v5,temp_v6);
-  FUN_002f3dde(temp_v0,puVar3);
+  onlineInstanceCompleteMode3(temp_v0,puVar3);
   return;
 }
 

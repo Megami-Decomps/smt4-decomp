@@ -59,7 +59,7 @@ extern int uniteGetWork(void);
 /* Supplied declaration required: uiDrawListScrollBar. */
 /* Supplied declaration required: gxSetMirroredClippedScissor. */
 extern int ifTouchGetSelectionModeForRegion(int);
-extern unsigned int FUN_0029dde0(void);
+extern unsigned int fusionPlayerLevelCapGet(void);
 /* Supplied declaration required: FUN_0029e6f0. */
 extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
@@ -130,7 +130,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
     nkmBaseGetRecord();
     temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x4d));
     temp_v15 = 0xffffffff;
-    temp_v5 = FUN_0029dde0();
+    temp_v5 = fusionPlayerLevelCapGet();
     temp_v16 = 0x5a5a5aff;
     if (temp_v5 < *(unsigned char *)((int)puVar5 + 3)) {
       temp_v15 = 0xdc0f14ff;
@@ -187,7 +187,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
     temp_v18 = temp_v2 + 0x6c7c;
     temp_v9 = resourceRunOperationIfUnblocked();
     temp_v4 = 0;
-    temp_v8 = FUN_0029d644((const void *)(temp_v2 + 0x6c7c));
+    temp_v8 = uiListGetVisibleCount((const void *)(temp_v2 + 0x6c7c));
     if (0 < temp_v8) {
       do {
         temp_v6 = temp_v21;
@@ -311,7 +311,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
                      "%d",temp_v13);
         gxResetColorQuadToWhite();
         temp_v4 = temp_v4 + 1;
-        temp_v8 = FUN_0029d644((const void *)(temp_v18));
+        temp_v8 = uiListGetVisibleCount((const void *)(temp_v18));
       } while (temp_v4 < temp_v8);
     }
     temp_v4 = resourceRunOperationIfUnblocked(temp_v18);

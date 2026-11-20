@@ -3,7 +3,7 @@
 
 extern "C" {
 
-int FUN_0029efd8(void *block, int arg);
+int gridNavigationHandleConfirm(void *block, int arg);
 
 typedef struct Obj {
     /* 0x00 */ u8 unk00[8];
@@ -15,7 +15,7 @@ typedef struct Obj {
 void sub10OwnerStart(Obj *obj)
 {
     if (obj->unk08 != 0) {
-        FUN_0029efd8(obj->block, 1);
+        gridNavigationHandleConfirm(obj->block, 1);
     }
 }
 

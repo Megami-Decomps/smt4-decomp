@@ -32,7 +32,7 @@ extern PartyPanelMenu *g_partyPanel;
 s32 padQueryLogicalKey(s32 key, s32 mode);
 void scrollOwnerSelectIndex(ScrollSelection *owner, s32 index);
 void objClearFlagPair(ScrollSelection *object);
-void FUN_0026fa30(void);
+void partyPanelReconfigureStockGrids(void);
 void slotPlacementAssignSlotPosition(void *widget, u32 slot);
 void slotPlacementStartTransition(void *widget, u8 mode);
 void FUN_0023e908(void);
@@ -65,7 +65,7 @@ u32 partyPanelHandleLayoutToggle(s32 enabled)
                     panel->columns = 1;
                 else
                     panel->columns = 0;
-                FUN_0026fa30();
+                partyPanelReconfigureStockGrids();
                 scrollOwnerSelectIndex(&panel->lists[0], listCursorGetRowOfChildIfUnblocked(&panel->lists[1]));
                 if (listCursorGetRowIfUnblocked(&panel->lists[1]) >= 3) {
                     if (panel->pages > 1)
@@ -90,7 +90,7 @@ u32 partyPanelHandleLayoutToggle(s32 enabled)
                     panel->columns = 1;
                 else
                     panel->columns = 0;
-                FUN_0026fa30();
+                partyPanelReconfigureStockGrids();
                 scrollOwnerSelectIndex(&panel->lists[2], listCursorGetRowOfChildIfUnblocked(&panel->lists[3]));
                 if (listCursorGetRowIfUnblocked(&panel->lists[3]) >= 4) {
                     if (panel->pages > 1)
@@ -117,12 +117,12 @@ u32 partyPanelHandleLayoutToggle(s32 enabled)
         result = 1;
     } else if (enabled != 0 && panel->busy == 0 && FUN_002a7410() == 0 && padQueryLogicalKey(9, 1) != 0) {
         sortMenuAcquire(0, 0);
-        FUN_0031f208(2);
-        FUN_0031f208(1);
-        FUN_0031f208(4);
-        FUN_0031f208(5);
-        FUN_0031f208(0x1f);
-        FUN_0031f208(3);
+        useCounterAppendValue(2);
+        useCounterAppendValue(1);
+        useCounterAppendValue(4);
+        useCounterAppendValue(5);
+        useCounterAppendValue(0x1f);
+        useCounterAppendValue(3);
         useCounterStart();
         partyPanelChangeState(0xf, 1);
         gameGlobalsSetMenuOpenFlag(1);

@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern UiCallbackContext *DAT_0043d990;
+extern UiCallbackContext *g_btlDevilListCallbackContext;
 
 /* Runs the UI object's update callback. */
 s32 FUN_003ac6e8()
 {
-    DAT_0043d990->object->update();
+    g_btlDevilListCallbackContext->object->update();
     return 0;
 }
 

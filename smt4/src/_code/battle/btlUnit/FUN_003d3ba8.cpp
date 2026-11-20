@@ -8,7 +8,7 @@ extern "C" {
 int FUN_00227334(...);
 int FUN_0023c0d0(...);
 int FUN_0023c5c0(...);
-int FUN_00250680(...);
+int btlQueueReflectEntryAction(...);
 int FUN_002551ac(...);
 int passiveSkillLookupRecord(void);
 int btlReflectCreateKind1c(...);
@@ -16,9 +16,9 @@ int FUN_003de874(...);
 
 int btlReflectSetValuePair(...);
 unsigned int FUN_0023f27c(int, unsigned int, unsigned int, unsigned int, void *, int, int, int, int);
-int FUN_00250720(...);
-int FUN_00250d84(...);
-int FUN_0026beb4(...);
+int btlSlotManagerResetAll(...);
+int saveFlagClearOrSubtractCounter(...);
+int btlMenuCursorStepReflectAction(...);
 int gameSavedFlagSet(void);
 int itemTableGetItemRecord(void);
 int FUN_0033b33c(...);
@@ -28,7 +28,7 @@ int btlReflectCreateKindf(...);
 int FUN_003de60c(...);
 int FUN_003de978(...);
 
-int FUN_00227668(...);
+int btlEffectOwnerGetBestSlotValue(...);
 int FUN_00228220(unsigned int, int, int, int, int, unsigned int, int, char [16]);
 int FUN_00228930(...);
 int frameRangeExtend(...);
@@ -108,48 +108,48 @@ extern int DAT_00434340; /* 0x434340 */
 extern unsigned int DAT_00434344; /* 0x434344 */
 extern int DAT_00434348; /* 0x434348 */
 extern int DAT_0043434c; /* 0x43434c */
-extern int DAT_00435d18; /* 0x435d18 */
+extern int g_btlAux; /* 0x435d18 */
 extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00227334. */
 extern int FUN_00227630(int);
-/* Supplied declaration required: FUN_00227668. */
+/* Supplied declaration required: btlEffectOwnerGetBestSlotValue. */
 extern int valueRangeSameSide(int, int);
 extern int FUN_0022810c(int, unsigned int);
 extern int FUN_002281a4(int);
 /* Supplied declaration required: FUN_00228220. */
 /* Supplied declaration required: FUN_00228930. */
 /* Supplied declaration required: frameRangeExtend. */
-extern int FUN_00229914(unsigned int *, unsigned int *, int);
+extern int btlUnitIsDeadAndUncopied(unsigned int *, unsigned int *, int);
 /* Supplied declaration required: FUN_00229a3c. */
 /* Supplied declaration required: btlTargetSetFlag10. */
 /* Supplied declaration required: FUN_0023c0d0. */
 /* Supplied declaration required: btlReflectSetValuePair. */
 /* Supplied declaration required: FUN_0023c5c0. */
 extern int FUN_0023c684(unsigned int);
-extern unsigned int FUN_0023dcfc(unsigned int);
+extern unsigned int btlQueueParamLimitForKind(unsigned int);
 extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_0023f27c. */
 /* Supplied declaration required: FUN_00246080. */
 /* Supplied declaration required: FUN_00246454. */
 /* Supplied declaration required: btlEntryBuildSummary. */
 extern int FUN_002485b8(void);
-/* Supplied declaration required: FUN_00250680. */
-/* Supplied declaration required: FUN_00250720. */
-/* Supplied declaration required: FUN_00250d84. */
+/* Supplied declaration required: btlQueueReflectEntryAction. */
+/* Supplied declaration required: btlSlotManagerResetAll. */
+/* Supplied declaration required: saveFlagClearOrSubtractCounter. */
 extern int battleGetEntryHalfword(int, unsigned int);
 /* Supplied declaration required: FUN_00255180. */
 /* Supplied declaration required: FUN_002551ac. */
 /* Supplied declaration required: FUN_00256898. */
 /* Supplied declaration required: btlReflectQueueKind34. */
-/* Supplied declaration required: FUN_0026beb4. */
+/* Supplied declaration required: btlMenuCursorStepReflectAction. */
 /* Supplied declaration required: FUN_00282820. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int FUN_0028299c(int);
 /* Supplied declaration required: passiveSkillLookupRecord. */
 /* Supplied declaration required: gameSavedFlagSet. */
 extern unsigned int appGetRemainingCapacity(unsigned int);
-extern unsigned int FUN_0029a9d4(unsigned int, unsigned int);
+extern unsigned int skillGetDiscountedCost(unsigned int, unsigned int);
 /* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: itemTableGetItemRecord. */
@@ -239,7 +239,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
   temp_v32 = 0;
   temp_v21 = 0;
   temp_v14 = 0;
-  temp_v13 = *(int *)(DAT_00435d18 + 0x1cfc);
+  temp_v13 = *(int *)(g_btlAux + 0x1cfc);
   param_2[4] = 0;
   param_2[6] = 0;
   *(unsigned int *)(*param_1 + 0x48b8) = 0;
@@ -256,7 +256,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
   }
   FUN_003cf4f8(param_1,param_2,asStack_478);
   temp_v20 = 0;
-  temp_v3 = FUN_00227668(DAT_00435d18);
+  temp_v3 = btlEffectOwnerGetBestSlotValue(g_btlAux);
   param_2[7] = temp_v3;
   temp_v18 = 0;
   temp_v33 = 0;
@@ -294,11 +294,11 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
     case 5:
       temp_v4 = (int)*(short *)(param_2[9] + 0x62);
       temp_v7 = (int)*psVar12;
-      temp_v5 = FUN_0022810c(DAT_00435d18,1);
-      temp_v6 = FUN_0028299c(DAT_00435d18);
+      temp_v5 = FUN_0022810c(g_btlAux,1);
+      temp_v6 = FUN_0028299c(g_btlAux);
       temp_v6 = temp_v6 * temp_v14;
       if (param_2[0x166] == 1) {
-        temp_v6 = FUN_0028299c(DAT_00435d18);
+        temp_v6 = FUN_0028299c(g_btlAux);
         temp_v6 = temp_v6 + *(int *)(*(int *)(*param_1 + 0x1e98) + temp_v7 * 0x114 + 0x5c);
       }
       temp_v12 = temp_v3 + temp_v5 + temp_v6;
@@ -336,7 +336,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       temp_v5 = (int)*psVar12;
       puVar7 = (unsigned int *)*param_1;
       btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar7), temp_v5);
-      temp_v4 = FUN_002281a4(DAT_00435d18);
+      temp_v4 = FUN_002281a4(g_btlAux);
       if ((*puVar7 & 8) != 0) {
         if ((*puVar7 & 1) != 0) {
           FUN_00246454(temp_v4 + temp_v21,param_2,puVar7);
@@ -389,7 +389,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       break;
     case 0xd:
       temp_v5 = (int)*psVar12;
-      temp_v3 = FUN_00227668(DAT_00435d18);
+      temp_v3 = btlEffectOwnerGetBestSlotValue(g_btlAux);
       temp_v4 = slotTableValueReducedByRecord(temp_v12);
       FUN_003dda20(temp_v3,param_2,-temp_v4);
       frameRangeExtend(param_1,param_2,temp_v5,temp_v3,10,0x14);
@@ -421,7 +421,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       param_2[7] = temp_v3;
       break;
     case 0xf:
-      temp_v4 = FUN_0022810c(DAT_00435d18,1);
+      temp_v4 = FUN_0022810c(g_btlAux,1);
       temp_v12 = param_2[4];
       temp_v3 = temp_v4 + temp_v3;
       if ((int)temp_v12 < 0) {
@@ -438,7 +438,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       break;
     case 0x10:
       temp_v9 = *(short *)(param_2[9] + 0x62);
-      temp_v4 = FUN_00227630(DAT_00435d18);
+      temp_v4 = FUN_00227630(g_btlAux);
       temp_v12 = temp_v27;
       temp_v15 = *param_1;
       btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v15), (int)temp_v9);
@@ -453,10 +453,10 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       if (temp_v19 != 1 && temp_v19 != 2) {
         temp_v4 = 0;
         do {
-          temp_v5 = FUN_00227668(DAT_00435d18);
+          temp_v5 = btlEffectOwnerGetBestSlotValue(g_btlAux);
           if (-1 < temp_v5) {
             temp_v9 = *(short *)(temp_v13 + temp_v4 * 0x16 + 0x6a);
-            temp_v5 = FUN_0028299c(DAT_00435d18);
+            temp_v5 = FUN_0028299c(g_btlAux);
             switch(temp_v9) {
             case 0:
             case 1:
@@ -499,7 +499,7 @@ LAB_003d444c:
       do {
         if ((*(char *)((int)param_2 + temp_v5 + 0x38) != '\0') &&
            (((*(unsigned int *)(*(int *)(*param_1 + 0x1fc0) + temp_v5 * 0x288) & 0x40) != 0 ||
-            (temp_v6 = FUN_00229914(param_1,param_2,temp_v5), temp_v6 != 0)))) {
+            (temp_v6 = btlUnitIsDeadAndUncopied(param_1,param_2,temp_v5), temp_v6 != 0)))) {
           *(unsigned char *)((int)param_2 + temp_v5 + 0x38) = 0;
         }
         temp_v5 = temp_v5 + 1;
@@ -560,7 +560,7 @@ LAB_003d444c:
   if (temp_v13 != 0) {
     temp_v4 = 0;
     do {
-      temp_v5 = FUN_00227668(DAT_00435d18);
+      temp_v5 = btlEffectOwnerGetBestSlotValue(g_btlAux);
       if (-1 < temp_v5) {
         temp_v5 = temp_v13 + temp_v4 * 0x16;
         if (*(unsigned short *)(temp_v5 + 0x6a) - 6 < 6) {
@@ -588,18 +588,18 @@ LAB_003d444c:
     if (*(short *)(param_2[10] + 0x14c) != 9) {
       if (temp_v14 >= 1) {
         if (param_2[0xc] == 0) {
-          FUN_0026beb4(temp_v20 + temp_v4,param_2,param_2[4],param_2[9],1);
+          btlMenuCursorStepReflectAction(temp_v20 + temp_v4,param_2,param_2[4],param_2[9],1);
         }
       }
       else {
-        FUN_0026beb4(temp_v20 + temp_v4,param_2,0,param_2[9],1);
+        btlMenuCursorStepReflectAction(temp_v20 + temp_v4,param_2,0,param_2[9],1);
       }
       if (0 < (int)param_2[6]) {
-        FUN_0026beb4(temp_v20 + temp_v4 + 0x14,param_2,param_2[6],param_2[9],1);
+        btlMenuCursorStepReflectAction(temp_v20 + temp_v4 + 0x14,param_2,param_2[6],param_2[9],1);
       }
     }
     else {
-      FUN_0026beb4(temp_v20 + temp_v4,param_2,0xb,param_2[9],1);
+      btlMenuCursorStepReflectAction(temp_v20 + temp_v4,param_2,0xb,param_2[9],1);
     }
   }
   if ((*param_2 & 0x1080) == 0) {
@@ -611,7 +611,7 @@ LAB_003d444c:
           temp_v12 = (unsigned int)*(unsigned short *)(temp_v12 + 0x62);
           if (temp_v12 != 0) {
             temp_v4 = FUN_0023c684(temp_v12);
-            temp_v14 = FUN_00227630(DAT_00435d18);
+            temp_v14 = FUN_00227630(g_btlAux);
             if (temp_v14 >= 1) {
               if (temp_v4 != 0) {
                 btlReflectCreateKindf(temp_v14,param_2,temp_v12);
@@ -630,7 +630,7 @@ LAB_003d444c:
         }
       }
       else if (*(int *)(*param_1 + 0x48b8) != 0) {
-        temp_v14 = FUN_002281a4(DAT_00435d18);
+        temp_v14 = FUN_002281a4(g_btlAux);
         temp_v12 = 0;
         temp_v14 = temp_v14 + temp_v30;
         if (temp_v14 < 1) {
@@ -641,7 +641,7 @@ LAB_003d444c:
     }
     else if (!temp_v16) {
       temp_v14 = FUN_0023c684(temp_v27);
-      temp_v4 = FUN_00227630(DAT_00435d18);
+      temp_v4 = FUN_00227630(g_btlAux);
       if (temp_v4 >= 1) {
         if (temp_v14 != 0) {
           if ((*(unsigned int *)(temp_v14 + 8) & 0x10) == 0) {
@@ -661,7 +661,7 @@ LAB_003d444c:
         btlReflectCreateKindf(temp_v4,param_2,temp_v27,temp_v18);
       }
       if (*(int *)(*param_1 + 0x48b8) != 0) {
-        temp_v14 = FUN_002281a4(DAT_00435d18);
+        temp_v14 = FUN_002281a4(g_btlAux);
         temp_v14 = temp_v14 + temp_v30;
         temp_v12 = temp_v27;
         if (temp_v14 < 1) {
@@ -674,7 +674,7 @@ LAB_003d444c:
   if (temp_v13 != 0) {
     temp_v14 = 0;
     do {
-      temp_v4 = btlGetMaximumNamedValue(DAT_00435d18);
+      temp_v4 = btlGetMaximumNamedValue(g_btlAux);
       if (-1 < temp_v4) {
         temp_v4 = temp_v13 + temp_v14 * 0x16;
         FUN_00282820((int)*(short *)(temp_v4 + 0x10),param_2,(int)*(short *)(param_2[9] + 0x62),0,0,
@@ -686,12 +686,12 @@ LAB_003d444c:
   if (((char)param_2[0x167] == '\x01') && (temp_v13 != 0)) {
     temp_v14 = 0;
     do {
-      temp_v4 = btlLookupEffectValue(DAT_00435d18);
+      temp_v4 = btlLookupEffectValue(g_btlAux);
       if (-1 < temp_v4) {
         temp_v5 = temp_v13 + temp_v14 * 0x16;
-        temp_v4 = btlEffectNameHasPrefix(DAT_00435d18,temp_v5 + 0x108);
+        temp_v4 = btlEffectNameHasPrefix(g_btlAux,temp_v5 + 0x108);
         if (temp_v4 != 0) {
-          temp_v8 = btlLookupEffectValue(DAT_00435d18);
+          temp_v8 = btlLookupEffectValue(g_btlAux);
           FUN_003ddae8(temp_v8,param_2);
         }
         else if (param_2[0x165] != 0) {
@@ -719,7 +719,7 @@ LAB_003d444c:
   if ((g_btlMain->flags & 0x100) == 0) {
     temp_v14 = 0;
     do {
-      if (*(int *)(DAT_00435d18 + 0x1cfc) != 0) {
+      if (*(int *)(g_btlAux + 0x1cfc) != 0) {
         temp_v4 = temp_v13 + temp_v14 * 8;
         temp_v10 = *(char *)(temp_v4 + 0x160);
         if (temp_v10 != '\0') {
@@ -817,7 +817,7 @@ LAB_003d444c:
     temp_v12 = 0;
     FUN_003de60c(0,param_2,5);
   }
-  if ((temp_v13 != 0) && (temp_v12 = btlFindEffectNameValue(DAT_00435d18), -1 < (int)temp_v12)) {
+  if ((temp_v13 != 0) && (temp_v12 = btlFindEffectNameValue(g_btlAux), -1 < (int)temp_v12)) {
     temp_v12 = FUN_003de9b0(temp_v12,param_2,5);
   }
   temp_v11 = 0;
@@ -841,7 +841,7 @@ LAB_003d444c:
           temp_v2 = temp_v13;
           itemTableGetItemRecord();
           if ((*(unsigned char *)(temp_v2 + 0x6e) & 1) == 0) {
-            FUN_00250d84(temp_v13,1);
+            saveFlagClearOrSubtractCounter(temp_v13,1);
           }
         }
       }
@@ -851,36 +851,36 @@ LAB_003d444c:
     }
     else if (temp_v3 != 0) {
       if ((*(unsigned int *)(temp_v3 + 0x38) & 0x4000) != 0) {
-        temp_v8 = FUN_0023dcfc(7);
+        temp_v8 = btlQueueParamLimitForKind(7);
         FUN_00255180((int)*(short *)(param_2[9] + 0x62),7,temp_v8);
-        temp_v8 = FUN_0023dcfc(8);
+        temp_v8 = btlQueueParamLimitForKind(8);
         FUN_00255180((int)*(short *)(param_2[9] + 0x62),8,temp_v8);
-        temp_v8 = FUN_0023dcfc(9);
+        temp_v8 = btlQueueParamLimitForKind(9);
         FUN_00255180((int)*(short *)(param_2[9] + 0x62),9,temp_v8);
-        temp_v8 = FUN_0023dcfc(10);
+        temp_v8 = btlQueueParamLimitForKind(10);
         FUN_00255180((int)*(short *)(param_2[9] + 0x62),10,temp_v8);
-        temp_v8 = FUN_0023dcfc(0xb);
+        temp_v8 = btlQueueParamLimitForKind(0xb);
         FUN_00255180((int)*(short *)(param_2[9] + 0x62),0xb,temp_v8);
       }
       if ((*(unsigned int *)(temp_v3 + 0x38) & 0x400) != 0) {
         temp_v2 = *(short *)(param_2[10] + 0xe8) - 1;
-        FUN_00250720(*param_1);
+        btlSlotManagerResetAll(*param_1);
         FUN_002551ac(temp_v15,param_2,param_2[9],0,temp_v2,0xffffffff,0xffffffff,
                      (int)*(short *)(param_2[10] + 0xe8),(int)*(short *)(param_2[10] + 0xea),0,0,0);
       }
       if ((*(unsigned int *)(temp_v3 + 0x38) & 0x200) != 0) {
         temp_v2 = (int)*(short *)(param_2[10] + 0xea);
-        FUN_00250720(*param_1);
+        btlSlotManagerResetAll(*param_1);
         FUN_002551ac(temp_v15,param_2,param_2[9],0,temp_v2,0xffffffff,0xffffffff,
                      (int)*(short *)(param_2[10] + 0xe8),(int)*(short *)(param_2[10] + 0xea),0,0,0);
-        FUN_00250680(temp_v15 + 0x19,param_2,param_2[9],0);
+        btlQueueReflectEntryAction(temp_v15 + 0x19,param_2,param_2[9],0);
       }
       FUN_0023c0d0(param_1,param_2,(int)*(short *)(param_2[9] + 0x62),-temp_v2);
       temp_v3 = (unsigned int)*(unsigned char *)(temp_v3 + 0x22);
       if (temp_v3 != 0) {
         if ((*(unsigned int *)param_2[8] & 0x10) == 0) {
           if ((*(unsigned int *)param_2[8] & 2) != 0) {
-            temp_v3 = FUN_0029a9d4(temp_v27,1);
+            temp_v3 = skillGetDiscountedCost(temp_v27,1);
             temp_v2 = battleGetEntryHalfword((int)*(short *)(param_2[9] + 0x62),0x1b);
           }
           else {

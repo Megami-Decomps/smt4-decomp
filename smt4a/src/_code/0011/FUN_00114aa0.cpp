@@ -24,7 +24,7 @@ extern int FUN_00114a08(void);
 /* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-extern int *FUN_002ea704(void);
+extern int *watcherGetEnabledFlag(void);
 /* Supplied declaration required: FUN_003002c8. */
 
 
@@ -47,7 +47,7 @@ void FUN_00114aa0(unsigned int param_1,unsigned int param_2,unsigned int param_3
     _ZN9Obj55b28cD1Ev(&uStack_20);
     return;
   }
-  piVar2 = (int *)FUN_002ea704();
+  piVar2 = (int *)watcherGetEnabledFlag();
   if (piVar2 != (int *)0x0) {
     (**(romwright_code **)(*piVar2 + 0x3c))();
   }

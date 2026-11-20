@@ -16,7 +16,7 @@ PlayerDataA *slotRecordFindById(u16 id);
 s32 countUnlockedSlots();
 s32 getUnlockedSlotCount();
 void fillTwoWordsWithByte(u32 *destination, u32 value);
-u8 FUN_002c7e3c();
+u8 gameGlobalsGetFieldState();
 void gridNavigationConfigure(GridNavigation *controller, s32 items, s32 visible, s32 columns,
                   s32 option, s32 secondOption);
 s32 FUN_002857b8();
@@ -46,7 +46,7 @@ void statusDownInitializeSkillList()
     fillTwoWordsWithByte((u32 *)screen->menu.selection, ~0u);
     menu->changed = 0;
     menu->source = NULL;
-    FUN_002c7e3c();
+    gameGlobalsGetFieldState();
     if ((s16)screen->selectedEntry <= 0) {
         const PlayerDataA *source = gameGetPlayerData();
         s32 count = countUnlockedSlots();

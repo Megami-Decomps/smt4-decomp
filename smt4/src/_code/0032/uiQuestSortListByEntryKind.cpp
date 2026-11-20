@@ -24,20 +24,20 @@ typedef struct QuestEntry {
 
 extern QuestMenu *g_uiQuest;
 
-extern u32 FUN_0029ee54(QuestCursor *cursor);
+extern u32 gridNavigationGetItemCount(QuestCursor *cursor);
 extern void qsort(void *list, u32 count, u32 size, SortCompare compare);
-extern void FUN_0027f3dc(void *list, u32 count, u32 size, SortCompare compare);
+extern void arraySortQsort(void *list, u32 count, u32 size, SortCompare compare);
 
 extern int entryCompareFlagsCategoryOrder(const void *, const void *);
 extern int dataTable1bOr1cCompareRecordKeys(const void *, const void *);
 extern int devilMaskCompare(const void *, const void *);
 extern int FUN_001f62ec(const void *, const void *);
-extern int FUN_002193bc(const void *, const void *);
-extern int FUN_00219488(const void *, const void *);
+extern int questCompareForDisplayOrder(const void *, const void *);
+extern int questCompareBySortKey(const void *, const void *);
 extern int dataTableCompareRecordValues(const void *, const void *);
 extern int FUN_002d04ac(const void *, const void *);
 extern int recordCompareKindAndOrder(const void *, const void *);
-extern int FUN_002f2798(const void *, const void *);
+extern int questCompareBySortKeyThenId(const void *, const void *);
 
 /* Sorts the menu's list with the comparison of the selected quest entry's kind (the primary or
  * the alternate one). */
@@ -54,37 +54,37 @@ void uiQuestSortListByEntryKind(s32 mode)
 
         if ((*info & 0x7F) == 0x22) {
             if (primary) {
-                qsort(list, FUN_0029ee54(cursor), 2, dataTable1bOr1cCompareRecordKeys);
+                qsort(list, gridNavigationGetItemCount(cursor), 2, dataTable1bOr1cCompareRecordKeys);
             } else {
-                qsort(list, FUN_0029ee54(cursor), 2, dataTableCompareRecordValues);
+                qsort(list, gridNavigationGetItemCount(cursor), 2, dataTableCompareRecordValues);
             }
         }
         if ((*info & 0x7F) == 0x21) {
             if (primary) {
-                qsort(list, FUN_0029ee54(cursor), 2, FUN_001f62ec);
+                qsort(list, gridNavigationGetItemCount(cursor), 2, FUN_001f62ec);
             } else {
-                qsort(list, FUN_0029ee54(cursor), 2, recordCompareKindAndOrder);
+                qsort(list, gridNavigationGetItemCount(cursor), 2, recordCompareKindAndOrder);
             }
         }
         if ((*info & 0x7F) == 0x18) {
             if (primary) {
-                qsort(list, FUN_0029ee54(cursor), 2, FUN_00219488);
+                qsort(list, gridNavigationGetItemCount(cursor), 2, questCompareBySortKey);
             } else {
-                qsort(list, FUN_0029ee54(cursor), 2, FUN_002f2798);
+                qsort(list, gridNavigationGetItemCount(cursor), 2, questCompareBySortKeyThenId);
             }
         }
         if ((*info & 0x7F) == 0x19) {
             if (primary) {
-                qsort(list, FUN_0029ee54(cursor), 2, entryCompareFlagsCategoryOrder);
+                qsort(list, gridNavigationGetItemCount(cursor), 2, entryCompareFlagsCategoryOrder);
             } else {
-                qsort(list, FUN_0029ee54(cursor), 2, FUN_002193bc);
+                qsort(list, gridNavigationGetItemCount(cursor), 2, questCompareForDisplayOrder);
             }
         }
         if ((*info & 0x7F) == 0x1A) {
             if (primary) {
-                FUN_0027f3dc(list, FUN_0029ee54(cursor), 2, devilMaskCompare);
+                arraySortQsort(list, gridNavigationGetItemCount(cursor), 2, devilMaskCompare);
             } else {
-                FUN_0027f3dc(list, FUN_0029ee54(cursor), 2, FUN_002d04ac);
+                arraySortQsort(list, gridNavigationGetItemCount(cursor), 2, FUN_002d04ac);
             }
         }
     }

@@ -2,7 +2,7 @@
 
 
 extern "C" {
-extern CollisionVectorState DAT_0049e85c;
+extern CollisionVectorState g_mapCollisionVectors;
 
 // Copy all four stored collision vectors when the collision state is enabled.
 u8 mapCollisionGetStoredVectors(CollisionVector *first, CollisionVector *second,
@@ -11,10 +11,10 @@ u8 mapCollisionGetStoredVectors(CollisionVector *first, CollisionVector *second,
     if (g_mapCollision.unk00[0] == 0) {
         return 0;
     }
-    *first = DAT_0049e85c.vectors[0];
-    *second = DAT_0049e85c.vectors[1];
-    *third = DAT_0049e85c.vectors[2];
-    *fourth = DAT_0049e85c.vectors[3];
+    *first = g_mapCollisionVectors.vectors[0];
+    *second = g_mapCollisionVectors.vectors[1];
+    *third = g_mapCollisionVectors.vectors[2];
+    *fourth = g_mapCollisionVectors.vectors[3];
     return 1;
 }
 }

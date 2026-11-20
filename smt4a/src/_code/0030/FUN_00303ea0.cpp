@@ -6,19 +6,19 @@
 
 extern "C" {
 extern u32 DAT_005f2c20[256];
-EnemyTableLocation *FUN_00356308(s32 index);
+EnemyTableLocation *fieldFindAreaPlacementRecord(s32 index);
 s32 dataTableGetRecordFortyOne(void);
 void sysMemClear(void *memory, u32 size);
 
 /* Rebuilds the field-enemy entry index for the current map and area. */
 void FUN_00303ea0(void)
 {
-    if (FUN_00356308(0) != NULL) {
+    if (fieldFindAreaPlacementRecord(0) != NULL) {
         sysMemClear(DAT_005f2c20, 0x400);
         s32 total = dataTableGetRecordFortyOne();
         mapEnemyModule().tableEntryCount = 0;
         for (s32 index = 0; index < total; ++index) {
-            EnemyTableLocation *location = FUN_00356308(index);
+            EnemyTableLocation *location = fieldFindAreaPlacementRecord(index);
             if (location->mapId != -1 && location->mapId == g_gameState.mapId &&
                 location->areaId == g_gameState.areaId) {
                 DAT_005f2c20[mapEnemyModule().tableEntryCount++] = index;

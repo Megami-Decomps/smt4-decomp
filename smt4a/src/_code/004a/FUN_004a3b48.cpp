@@ -51,7 +51,7 @@ void objBInitBlock12DC5(void);
 void statusPanelSetOpen(s32 open);
 void FUN_004a3e04(StatusPanel *panel);
 void FUN_0033449c(s32 value);
-void FUN_002f0420(s32 value);
+void statusScreenRefreshForSelection(s32 value);
 StatusSlotTable *gameGetSlotTable(void);
 s32 FUN_00372014(void);
 void __aeabi_memcpy4(void *destination, const void *source, s32 size);
@@ -70,7 +70,7 @@ void FUN_004a3b48(StatusPanel *panel)
     }
     StatusEntry *entries = panel->state.entries;
     u16 id = entries[flaggedValueHolderGetTotal(panel->holder)].id;
-    if (FUN_0023b3d0() == 0) {
+    if (gameStateIsNotTransitioning() == 0) {
         return;
     }
     if (state->mode == 1) {
@@ -78,14 +78,14 @@ void FUN_004a3b48(StatusPanel *panel)
             return;
         }
         if (state->recordPage != 1) {
-            s32 previous = FUN_002c7e3c();
+            s32 previous = gameGlobalsGetFieldState();
             FUN_0034a9c4(id, 0);
             FUN_0033449c(0);
             if (previous != 5) {
                 objBInitBlock12DC();
             }
             if (state->viewing != 0) {
-                FUN_002f0420(0);
+                statusScreenRefreshForSelection(0);
             } else {
                 statusPanelSetOpen(1);
             }
@@ -101,7 +101,7 @@ void FUN_004a3b48(StatusPanel *panel)
                     }
                 }
             }
-            s32 previous = FUN_002c7e3c();
+            s32 previous = gameGlobalsGetFieldState();
             FUN_0034a9c4(id, 0);
             FUN_002c8550(2);
             if (previous == 5 && FUN_00372014() != 0) {
@@ -120,7 +120,7 @@ void FUN_004a3b48(StatusPanel *panel)
             objBInitBlock19D0(&unit, 0);
             FUN_0033449c(1);
             if (state->viewing != 0) {
-                FUN_002f0420(1);
+                statusScreenRefreshForSelection(1);
             } else {
                 statusPanelSetOpen(1);
             }
@@ -131,12 +131,12 @@ void FUN_004a3b48(StatusPanel *panel)
         if (state->shownId == id) {
             return;
         }
-        s32 previous = FUN_002c7e3c();
+        s32 previous = gameGlobalsGetFieldState();
         FUN_0034a9c4(id, 0);
-        if (FUN_002a4b28(id) == 0) {
+        if (compendiumEntryIsRegistered(id) == 0) {
             FUN_002c8550(0xE);
         }
-        s32 current = FUN_002c7e3c();
+        s32 current = gameGlobalsGetFieldState();
         if (current == 5) {
             if (previous == 0xE) {
                 objBInitBlock12DC();

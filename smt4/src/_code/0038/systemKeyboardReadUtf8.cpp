@@ -6,14 +6,14 @@ extern "C" {
 void nn_swkbd_CTR_InitializeConfig(SoftwareKeyboardConfig *);
 u32 nn_swkbd_CTR_GetSharedMemorySize(const SoftwareKeyboardConfig *, u32, u32);
 void libc_wcsncpyShort(u16 *, const u16 *, u32);
-void FUN_00147390(void);
+void appletWaitForSlotReady(void);
 void FUN_003617bc(void);
 void FUN_003617ec(void);
 s32 FUN_00361678(u32 *, SoftwareKeyboardConfig *, void *, u32, u32, u32, u32, u32, u32);
-s32 FUN_0035a404(char *, s32 *, const u16 *, s32 *);
+s32 textConvertBoundedToUtf8Impl(char *, s32 *, const u16 *, s32 *);
 void asdFatalError(void);
 void rt_memclr(void *, u32);
-extern u8 DAT_00477000[4096];
+extern u8 g_bssStart[4096];
 
 u32 systemKeyboardReadUtf8(u32 unused, char *output, const u16 *hint, u32 capacity,
                  s32 password, s32 filter, u32 requestOption)
@@ -32,21 +32,21 @@ u32 systemKeyboardReadUtf8(u32 unused, char *output, const u16 *hint, u32 capaci
         config.filterFlags |= 1;
     libc_wcsncpyShort(config.hintText, hint, 65);
     u32 sharedSize = nn_swkbd_CTR_GetSharedMemorySize(&config, 0, 0);
-    FUN_00147390();
+    appletWaitForSlotReady();
     FUN_003617bc();
     FUN_003617ec();
-    DAT_00477000[4095] = 0;
+    g_bssStart[4095] = 0;
     u32 result;
-    if (FUN_00361678(&result, &config, DAT_00477000, sharedSize, requestOption, 0, 0, 0, 0)
+    if (FUN_00361678(&result, &config, g_bssStart, sharedSize, requestOption, 0, 0, 0, 0)
         && config.response == 2) {
         s32 remaining = -1;
         s32 written; // The count-only query writes the required UTF-8 byte count.
-        if (nnResultIsFailure(FUN_0035a404(NULL, &written,
-                reinterpret_cast<const u16 *>(DAT_00477000) + config.textOffset, &remaining)))
+        if (nnResultIsFailure(textConvertBoundedToUtf8Impl(NULL, &written,
+                reinterpret_cast<const u16 *>(g_bssStart) + config.textOffset, &remaining)))
             asdFatalError();
         rt_memclr(output, capacity);
-        if (nnResultIsFailure(FUN_0035a404(output, &written,
-                reinterpret_cast<const u16 *>(DAT_00477000) + config.textOffset, &remaining)))
+        if (nnResultIsFailure(textConvertBoundedToUtf8Impl(output, &written,
+                reinterpret_cast<const u16 *>(g_bssStart) + config.textOffset, &remaining)))
             asdFatalError();
         return 1;
     }

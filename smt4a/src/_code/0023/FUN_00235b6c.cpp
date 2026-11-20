@@ -22,21 +22,21 @@ typedef struct SlotTable {
     /* 0x0C */ Slot slots[1];
 } SlotTable;
 
-extern SlotTable *DAT_005821a0;
+extern SlotTable *g_soundActorQueue;
 
-extern void FUN_003d5000(u32 handle);
+extern void resourceHandleRelease(u32 handle);
 
 void FUN_00235b6c(void)
 {
     s32 i;
 
-    if (DAT_005821a0->loaded != 0) {
-        for (i = 0; i < DAT_005821a0->count; i++) {
-            Slot *slot = &DAT_005821a0->slots[i];
+    if (g_soundActorQueue->loaded != 0) {
+        for (i = 0; i < g_soundActorQueue->count; i++) {
+            Slot *slot = &g_soundActorQueue->slots[i];
 
             if (slot->used != 0) {
                 if (slot->resource != 0) {
-                    FUN_003d5000(slot->handle);
+                    resourceHandleRelease(slot->handle);
                     slot->resource = 0;
                     slot->unk12 = 0;
                     slot->handle = 0;
@@ -44,9 +44,9 @@ void FUN_00235b6c(void)
                 slot->used = 0;
             }
         }
-        DAT_005821a0->count = 0;
-        DAT_005821a0->active = 0;
-        DAT_005821a0->loaded = 0;
+        g_soundActorQueue->count = 0;
+        g_soundActorQueue->active = 0;
+        g_soundActorQueue->loaded = 0;
     }
 }
 

@@ -5,7 +5,7 @@ static __inline void drawKeyframe(SpriteDrawOwner *owner, s32 index, const Sprit
                                   u32 flags, s32 filter, f32 time, f32 scale)
 {
     SpriteDrawOptions options = {filter, 0, 0};
-    FUN_003fd140(owner, index, position, flags, options, time, scale);
+    spriteAnimationPlayAtTime(owner, index, position, flags, options, time, scale);
 }
 
 /* Draw an animation without applying the keyframe's placement transform. */

@@ -65,7 +65,7 @@ void uiQuestDrawList(void)
         texDrawTableEntryAtStoredOrigin(2, 0x29, 0x83, x, y, 0x6a);
     }
 
-    for (s32 row = 0; row < (s32)FUN_0029d644(cursor); row++) {
+    for (s32 row = 0; row < (s32)uiListGetVisibleCount(cursor); row++) {
         if (quest->state == 2 && listCursorGetRowIfUnblocked(cursor) == row) {
             continue;
         }
@@ -89,7 +89,7 @@ void uiQuestDrawList(void)
         }
     }
 
-    if ((s32)FUN_0029d644(cursor) > 0 &&
+    if ((s32)uiListGetVisibleCount(cursor) > 0 &&
         (quest->state == 2 || quest->state == 6 || quest->state == 7 || quest->state == 8 || quest->state == 9 ||
          quest->state == 10)) {
         s32 row = listCursorGetRowIfUnblocked(cursor);

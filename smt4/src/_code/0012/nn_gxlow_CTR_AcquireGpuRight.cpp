@@ -5,8 +5,8 @@
 
 extern "C" {
 extern u32 DAT_0040b74c;
-s32 FUN_002ad254(void);
-CmdManager *FUN_002ad244(void);
+s32 nn_gxlow_CTR_IsGpuServiceAvailable(void);
+CmdManager *nn_gxlow_CTR_GetCmdManager(void);
 void *nn_gxlow_CTR_GetGpu(void);
 nn::Result nn_gxlow_CTR_Gpu_AcquireRight(void *gpu, u32 process, u32 flags);
 s32 nngxCheckVramBank(void);
@@ -14,7 +14,7 @@ void nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents(InterruptRelayQueueRx 
 
 nn::Result nn_gxlow_CTR_AcquireGpuRight(void)
 {
-    if (FUN_002ad254() == 0) {
+    if (nn_gxlow_CTR_IsGpuServiceAvailable() == 0) {
         return 0x202BF8;
     }
     u32 process = DAT_0040b74c;
@@ -24,7 +24,7 @@ nn::Result nn_gxlow_CTR_AcquireGpuRight(void)
     }
     if (nngxCheckVramBank() != 0) {
         s32 suppress = 0;
-        CmdManager *manager = FUN_002ad244();
+        CmdManager *manager = nn_gxlow_CTR_GetCmdManager();
         nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents(&manager->relayRx, suppress);
     }
     return result;

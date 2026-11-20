@@ -7,6 +7,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "gamedata/DataTable42Record.h"
 #include "addon/AocPackage.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
 
@@ -73,6 +74,7 @@ extern "C" AocSystem *g_aocSystem;
 
 extern "C" {
 u32 groupedFileTablesCountRecordsOfKind(AocSystem *system, s32 kind, u32 tableIndex);
+DataTable42Record *dataArchiveGetMergedRecord(AocSystem *system, s32 index);
 void aocActivateFileGroupFlags(AocSystem *system);
 u8 *aocFindPackageTable22Record(AocSystem *system, s32 id);
 void *aocFindQuestPayloadById(AocSystem *system, s32 id);

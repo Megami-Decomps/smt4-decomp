@@ -10,7 +10,7 @@ extern "C" {
 int gameStatePickAvoidingRecent(void);
 int FUN_002c263c(void);
 int gameDataResetFloat(void);
-int FUN_00359974(int, int, unsigned int, int);
+int entryTableResetAndInit(int, int, unsigned int, int);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -45,7 +45,7 @@ extern int FUN_00272d44(void);
 /* Supplied declaration required: gameStatePickAvoidingRecent. */
 /* Supplied declaration required: FUN_002c263c. */
 /* Supplied declaration required: gameDataResetFloat. */
-/* Supplied declaration required: FUN_00359974. */
+/* Supplied declaration required: entryTableResetAndInit. */
 extern int FUN_003e0024(void);
 extern int FUN_003e0154(void);
 
@@ -168,7 +168,7 @@ LAB_00339020:
         if (temp_v0 >= 1000000000) {
           DAT_005f0cf4 = 999999999;
         }
-        FUN_00359974(0x18,DAT_005f0cf4,0xffffffff,0);
+        entryTableResetAndInit(0x18,DAT_005f0cf4,0xffffffff,0);
         uRam005f0cc1 = 0x665f736d;
         uRam005f0cc5 = 0x6e697275;
         uRam005f0cc9 = 0x6c61745f;

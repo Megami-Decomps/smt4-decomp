@@ -4,7 +4,7 @@
 extern "C" {
 s32 state2CIs4(void *);
 f32 animationGetFurthestFrame(void *);
-void FUN_00226a90(ActionController *, s16, s32);
+void actionSequenceTriggerRangeAnimation(ActionController *, s16, s32);
 void FUN_0023c700(ActionController *, s32, s32, s32, s32, s32, f32, f32);
 void animationSelectThirdPart(void *);
 void actionSequenceDispatchTriggers(ActionController *);
@@ -37,7 +37,7 @@ void actionSequenceUpdateLoopTransition(ActionController *controller)
             FUN_0023c700(controller, controller->actor->id, controller->actor->id, 7, 0, 3,
                          (f32)sequence->startX, (f32)sequence->startY);
         }
-        FUN_00226a90(controller, totalFrame, 2);
+        actionSequenceTriggerRangeAnimation(controller, totalFrame, 2);
         controller->previousFrame = (s32)animationGetFurthestFrame(controller->animation);
     }
     if (!state2CIs4(controller->animation) || (controller->flags & 0x1000)) {

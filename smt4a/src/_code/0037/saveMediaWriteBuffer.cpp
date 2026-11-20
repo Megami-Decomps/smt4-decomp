@@ -13,18 +13,18 @@ typedef s32 FileResult;
 
 extern "C" {
 extern u8 DAT_00557fcc;
-extern u8 DAT_005b40b4;
+extern u8 g_processResultState;
 
 FileResult romFileStreamOpen(FileObject *file, s32 path, u32 mode);
 FileResult archiveStreamOpenConverted(FileObject *file);
-FileResult FUN_0032cab4(FileObject *file);
+FileResult romFileOpenForWrite(FileObject *file);
 FileResult requestSubmitRecordById(void);
-FileResult FUN_0032c900(FileObject *file, s32 path, u32 size);
+FileResult romFileCreateSized(FileObject *file, s32 path, u32 size);
 FileResult FUN_00317d48(FileObject *file);
 FileResult FUN_00359608(void);
-void FUN_0032c9fc(void);
-void FUN_00317e50(void);
-void FUN_003596e0(void);
+void fileSendPathRequestRoot0(void);
+void archivePathRequestRoot1(void);
+void archivePathRequestRoot2(void);
 FileResult fileObjSeekRead(FileObject *file, s32 position, u32 buffer, u32 size);
 void FUN_002e0c80(void);
 void FUN_00341824(void);
@@ -61,7 +61,7 @@ u32 saveMediaWriteBuffer(s32 media, s32 path, u32 buffer, u32 size)
         result = archiveStreamOpenConverted(&file);
         break;
     case 2:
-        result = FUN_0032cab4(&file);
+        result = romFileOpenForWrite(&file);
         break;
     case 3:
         result = requestSubmitRecordById();
@@ -70,7 +70,7 @@ u32 saveMediaWriteBuffer(s32 media, s32 path, u32 buffer, u32 size)
     if (isRetryable(result) || nnResultIsFailure(result)) {
         switch (media) {
         case 0:
-            result = FUN_0032c900(&file, path, size);
+            result = romFileCreateSized(&file, path, size);
             break;
         case 1:
             result = FUN_00317d48(&file);
@@ -85,17 +85,17 @@ u32 saveMediaWriteBuffer(s32 media, s32 path, u32 buffer, u32 size)
         if (nnResultIsFailure(result)) {
             if (path != 0) {
                 if (media == 0)
-                    FUN_0032c9fc();
+                    fileSendPathRequestRoot0();
                 else if (media == 1)
-                    FUN_00317e50();
+                    archivePathRequestRoot1();
                 else if (media == 2)
-                    FUN_003596e0();
+                    archivePathRequestRoot2();
             } else {
-                *(u32 *)(&DAT_005b40b4 + 0x10) = 0xC8804464;
+                *(u32 *)(&g_processResultState + 0x10) = 0xC8804464;
             }
             switch (media) {
             case 0:
-                result = FUN_0032c900(&file, path, size);
+                result = romFileCreateSized(&file, path, size);
                 break;
             case 1:
                 result = FUN_00317d48(&file);

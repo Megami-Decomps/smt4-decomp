@@ -5,7 +5,7 @@ extern "C" {
 
 void searchWinInitialize(void);
 void sysPlayVoice(u32 voiceId);
-s32 FUN_00162ea4(void);
+s32 eventIsSkipping(void);
 s32 scrGetArg(u32 index);
 
 extern const char DAT_0052fde8[];
@@ -21,7 +21,7 @@ typedef struct {
     char message[1];  /* 0xc4 */
 } SearchWin;
 
-extern SearchWin *DAT_0057f584;
+extern SearchWin *g_searchWin;
 
 /* Script command: formats the search window message chosen by argument 0 and opens it. */
 s32 searchWinScriptShowMessage(void)
@@ -29,10 +29,10 @@ s32 searchWinScriptShowMessage(void)
     SearchWin *win;
     s32 kind;
 
-    if (DAT_0057f584 == NULL && FUN_00162ea4() == 0) {
+    if (g_searchWin == NULL && eventIsSkipping() == 0) {
         searchWinInitialize();
         kind = scrGetArg(0);
-        win = DAT_0057f584;
+        win = g_searchWin;
         if (kind == 0) {
             __2sprintf(win->message, DAT_0052fde8);
         } else if (kind == 1) {

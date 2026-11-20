@@ -11,15 +11,15 @@ struct ModelBankSet {
 };
 
 extern "C" {
-extern ModelBankSet DAT_004bce8c;
+extern ModelBankSet g_asdMdlBankSet;
 
 // Clears each bank's manager and its sixty-four model managers.
 void asdMdlBanksReset()
 {
     for (s32 bank = 0; bank < 6; ++bank) {
-        DAT_004bce8c.bankManagers[bank] = NULL;
+        g_asdMdlBankSet.bankManagers[bank] = NULL;
         for (s32 index = 0; index < 64; ++index) {
-            DAT_004bce8c.models[bank][index] = NULL;
+            g_asdMdlBankSet.models[bank][index] = NULL;
         }
     }
 }

@@ -49,7 +49,7 @@ typedef struct LmapMainState {
     /* 0x08 */ u8 freeOnEnd;      /* 0 = keep the block after the job ends */
     /* 0x09 */ u8 unk09;
     /* 0x0A */ u8 unk0A;
-    /* 0x0B */ s8 external;      /* nonzero: FUN_002fb7dc steps the map instead of FUN_0026493c */
+    /* 0x0B */ s8 external;      /* nonzero: lmapRaiseSceneTransition steps the map instead of FUN_0026493c */
     /* 0x0C */ u32 unk0C;
     /* 0x10 */ u32 unk10;
     /* 0x14 */ u8 unk14[0x2C];
@@ -291,7 +291,7 @@ typedef struct LmapMainStateA {
  * camera's heading and per-preset distances, the camera move, a prioritised request and an optional
  * animated camera clip. */
 typedef struct LmapViewA {
-    /* 0x000 */ s32 mode;           /* camera mode (FUN_00303460) */
+    /* 0x000 */ s32 mode;           /* camera mode (lmapCameraSetMode) */
     /* 0x004 */ s32 phase;
     /* 0x008 */ s32 unk008;
     /* 0x00C */ s32 unk00C;
@@ -315,20 +315,20 @@ typedef struct LmapViewA {
     /* 0x0A8 */ u8 enabled;
     /* 0x0A9 */ u8 unk0A9[3];
     /* 0x0AC */ u32 state;
-    /* 0x0B0 */ s32 contextMode;    /* -3..2 (FUN_003033d4); compared with a map-interface record's destination */
+    /* 0x0B0 */ s32 contextMode;    /* -3..2 (lmapResolveContextValue); compared with a map-interface record's destination */
     /* 0x0B4 */ u8 flagB4;
     /* 0x0B5 */ u8 flagB5;
     /* 0x0B6 */ u16 timer;
     /* 0x0B8 */ u16 step;
     /* 0x0BA */ u8 unk0BA[2];
     /* 0x0BC */ MapVector axis;
-    /* 0x0C8 */ s32 contextValue;   /* the context value FUN_003033d4 returns */
+    /* 0x0C8 */ s32 contextValue;   /* the context value lmapResolveContextValue returns */
     /* 0x0CC */ f32 targetHeight[16];    /* follow-camera presets, one column per preset */
     /* 0x10C */ f32 eyeHeight[16];
     /* 0x14C */ f32 lateralDistance[16];
     /* 0x18C */ f32 rearDistance[16];
     /* 0x1CC */ f32 fieldOfView[16];     /* degrees (42, 43) */
-    /* 0x20C */ s32 contextOverride;  /* -1: FUN_003033d4 derives the value from contextMode */
+    /* 0x20C */ s32 contextOverride;  /* -1: lmapResolveContextValue derives the value from contextMode */
     /* 0x210 */ f32 unk210;
     /* 0x214 */ f32 unk214;
     /* 0x218 */ f32 raised;         /* nonzero while the camera is raised */

@@ -7,20 +7,20 @@ typedef struct Allocator {
     /* 0x4 */ void (*free)(void *ptr);
 } Allocator;
 
-extern Allocator DAT_0044e918;
+extern Allocator g_moAllocator;
 
 void allocatorFreeBlock(int *block)
 {
-    if (DAT_0044e918.free == NULL || block == NULL) {
+    if (g_moAllocator.free == NULL || block == NULL) {
         return;
     }
     if (block[3] != 0) {
-        DAT_0044e918.free((void *)block[3]);
+        g_moAllocator.free((void *)block[3]);
     }
     if (*block != 0) {
-        DAT_0044e918.free((void *)*block);
+        g_moAllocator.free((void *)*block);
     }
-    DAT_0044e918.free(block);
+    g_moAllocator.free(block);
 }
 
 } /* extern "C" */

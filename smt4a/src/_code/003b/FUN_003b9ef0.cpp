@@ -9,10 +9,10 @@ extern "C" {
 int FUN_002750d8(...);
 int sysPlayVoice(...);
 
-int FUN_00272f54(void);
+int mapEnemyResetEncounterState(void);
 int mapSelectRoomMusic(void);
 int navigationSetArguments(...);
-int FUN_00303460(...);
+int lmapCameraSetMode(...);
 int blockResetAxis(unsigned int);
 int mapSetSceneState(...);
 int naviMainSetFlagsAndActivate(...);
@@ -75,14 +75,14 @@ extern int DAT_005f1c9c; /* 0x5f1c9c */
 extern unsigned int DAT_005f1ca0; /* 0x5f1ca0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0013cab8. */
+/* Supplied declaration required: screenFadeStartIn. */
 extern int pairedAvailabilityGetState(unsigned int);
-/* Supplied declaration required: FUN_00272f54. */
+/* Supplied declaration required: mapEnemyResetEncounterState. */
 /* Supplied declaration required: FUN_002750d8. */
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: mapSelectRoomMusic. */
 /* Supplied declaration required: navigationSetArguments. */
-/* Supplied declaration required: FUN_00303460. */
+/* Supplied declaration required: lmapCameraSetMode. */
 /* Supplied declaration required: blockResetAxis. */
 /* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: naviMainSetFlagsAndActivate. */
@@ -257,8 +257,8 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
       naviMainApplyRequestValue(DAT_005f1608);
       naviMainSetRequestValue(0);
       mapPlaceSet(0xffffffff,0xffffffff);
-      FUN_00272f54();
-      FUN_00303460(0);
+      mapEnemyResetEncounterState();
+      lmapCameraSetMode(0);
       FUN_003a2278(0);
       mapSetSceneState(1);
       *(unsigned char *)(temp_v2 + 0x4e) = 1;
@@ -273,7 +273,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
       mapSelectRoomMusic();
       temp_v2 = pairedAvailabilityGetState(0);
       if (temp_v2 == 3) {
-        FUN_0013cab8(0,10,0xff);
+        screenFadeStartIn(0,10,0xff);
       }
       temp_v2 = pairedAvailabilityGetState(1);
       if (temp_v2 != 3) {
@@ -287,7 +287,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
         *(unsigned int *)(temp_v2 + 0x2c) = 0;
         return;
       }
-      FUN_00303460(0);
+      lmapCameraSetMode(0);
       FUN_003a2278(0);
       mapSetSceneState(1);
       *(unsigned char *)(temp_v2 + 0x4e) = 1;
@@ -303,14 +303,14 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
       *(unsigned int *)(temp_v2 + 0x2c) = 0;
       temp_v2 = pairedAvailabilityGetState(0);
       if (temp_v2 == 3) {
-        FUN_0013cab8(0,10,0xff);
+        screenFadeStartIn(0,10,0xff);
       }
       temp_v2 = pairedAvailabilityGetState(1);
       if (temp_v2 != 3) {
         return;
       }
     }
-    FUN_0013cab8(1,10,0xff);
+    screenFadeStartIn(1,10,0xff);
     return;
   }
   DAT_005f1650 = 0;

@@ -25,7 +25,7 @@ void btlTalkBustUpReleaseAllSlots(void);
 void btlTalkBustUpReleaseTexture(void);
 s32 btlTalkBustUpGetValue(void);
 void textEncodeFontSlot(s32 slot, u8 *text);
-void FUN_00295a18(u32 item, s32 amount);
+void saveFlagSetOrAddCounter(u32 item, s32 amount);
 void scrScriptProcessStartEntry(u32 script, s32 entry);
 s32 scrRunOpcodesStub(u32 script);
 void messageMainSetEnabled(s32 enabled);
@@ -67,7 +67,7 @@ u32 FUN_002110ac(BattleTalkWork *work)
             printItemName(giftIds[work->giftIndex]);
             scrScriptProcessStartEntry(work->giftScript, 0xF);
             work->state = 3;
-            FUN_00295a18(giftIds[work->giftIndex], amount);
+            saveFlagSetOrAddCounter(giftIds[work->giftIndex], amount);
             messageMainSetEnabled(1);
             return 0;
         }
@@ -89,7 +89,7 @@ u32 FUN_002110ac(BattleTalkWork *work)
         for (s32 i = 0; i < work->leftoverCount; i++) {
             if (work->leftoverIds[i] != 0) {
                 printItemName(work->leftoverIds[i]);
-                FUN_00295a18(work->leftoverIds[i], 1);
+                saveFlagSetOrAddCounter(work->leftoverIds[i], 1);
                 work->leftoverIds[i] = 0;
                 scrScriptProcessStartEntry(work->giftScript, 0xE);
                 work->state = 5;

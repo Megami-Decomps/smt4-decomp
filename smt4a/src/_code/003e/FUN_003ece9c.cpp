@@ -28,7 +28,7 @@ void FUN_003ece9c(BtlMainStateA *state)
         return;
     }
     UnitCategoryState *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(state);
-    s32 category = FUN_0019acdc(entry->record->id, 1);
+    s32 category = unitMapIdToCategory(entry->record->id, 1);
     BtlUnitDataA *data = reinterpret_cast<BtlUnitA *>(reinterpret_cast<ScriptCategoryUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit))))->data;
     switch (data->actionKind) {
     case 1:

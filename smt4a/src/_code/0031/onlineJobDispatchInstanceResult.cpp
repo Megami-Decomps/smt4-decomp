@@ -10,7 +10,7 @@ struct OnlineDispatchJob {
 extern "C" {
 OnlineInstanceTable *onlineInstanceTableGetCurrent();
 OnlineInstance *onlineInstanceTableFind(OnlineInstanceTable *table, u32 id);
-void FUN_002fa722(OnlineInstance *instance, u32 value, const OnlineCallbackResult *result);
+void onlineInstanceDispatchResult(OnlineInstance *instance, u32 value, const OnlineCallbackResult *result);
 void onlineJobSetStateDone(OnlineDispatchJob *job);
 
 // Deliver the result to the owning instance, then finish the job.
@@ -19,7 +19,7 @@ void onlineJobDispatchInstanceResult(OnlineDispatchJob *job, u32 value, const On
     OnlineInstance *instance = onlineInstanceTableFind(onlineInstanceTableGetCurrent(), job->instanceId);
     if (instance != NULL) {
         OnlineCallbackResult copy = *result;
-        FUN_002fa722(instance, value, &copy);
+        onlineInstanceDispatchResult(instance, value, &copy);
     }
     onlineJobSetStateDone(job);
 }

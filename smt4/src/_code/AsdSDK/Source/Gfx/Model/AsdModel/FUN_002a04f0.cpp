@@ -6,7 +6,7 @@ extern "C" {
 
 int asdModelSlotSetActive(...);
 int asdModelGetSlotRecord(...);
-int FUN_002c2968(...);
+int asdScenePassVisit(...);
 int FUN_003946b4(...);
 int nw_gfx_SceneNode_IsCircularReference(...);
 
@@ -43,7 +43,7 @@ extern unsigned int asdModelGetSlotArray3(fn_002a04f0_arg0 *);
 extern int asdModelGetSlotArray2(fn_002a04f0_arg0 *);
 extern int asdModelGetSlotArray1(fn_002a04f0_arg0 *);
 extern int FUN_002af294(int, int);
-/* Supplied declaration required: FUN_002c2968. */
+/* Supplied declaration required: asdScenePassVisit. */
 /* Supplied declaration required: FUN_003946b4. */
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
 
@@ -206,7 +206,7 @@ LAB_002a0868:
 LAB_002a094c:
     temp_v8 = (int)(short)((short)temp_v8 + 1);
     if (temp_v8 >= 4) {
-      FUN_002c2968(temp_v3,(&g_asdModelTransformBuilder)[(int)param_1]);
+      asdScenePassVisit(temp_v3,(&g_asdModelTransformBuilder)[(int)param_1]);
       asdModelSlotSetActive(param_1);
       FUN_003946b4(temp_v0,temp_v1,&DAT_004dace0 + (int)param_1 * 0x40,temp_v2);
       return;

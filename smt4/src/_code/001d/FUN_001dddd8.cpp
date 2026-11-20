@@ -41,8 +41,8 @@ extern unsigned char LAB_001de11c; /* 0x1de11c */
 /* Supplied declaration required: FUN_001af670. */
 /* Supplied declaration required: dataTable24Sub0GetRecord. */
 extern int uniteGetWork(void);
-extern int FUN_0029d644(int);
-extern unsigned int FUN_0029dde0(void);
+extern int uiListGetVisibleCount(int);
+extern unsigned int fusionPlayerLevelCapGet(void);
 extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int gameDataGetSortPreferences(void);
@@ -93,12 +93,12 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
     VectorSignedToFloat(*(short *)(temp_v2 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0xffffffff,temp_v13);
     temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x4c));
-    temp_v3 = FUN_0029dde0();
+    temp_v3 = fusionPlayerLevelCapGet();
     FUN_002bdf94(0,*(short *)(temp_v2 + 8) + param_1,*(short *)(temp_v2 + 10) + param_2,1,2,0x65,
                  &LAB_001de11c,temp_v3);
     temp_v2 = temp_v0 + 0x4e8;
     temp_v4 = resourceRunOperationIfUnblocked();
-    temp_v5 = FUN_0029d644(temp_v2);
+    temp_v5 = uiListGetVisibleCount(temp_v2);
     temp_v10 = 0;
     if (temp_v10 < temp_v5) {
       do {

@@ -38,7 +38,7 @@ void FUN_002b621c()
             entry->heading = entry->startHeading;
             entry->state = 26;
             entry->elapsed = 0;
-            FUN_00377acc(entry, g_gameState.motionId, 3);
+            mapEnemyRebindModel(entry, g_gameState.motionId, 3);
             return;
         }
     }

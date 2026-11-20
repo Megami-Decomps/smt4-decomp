@@ -5,7 +5,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
-extern SearchWinWork *DAT_0057f584;
+extern SearchWinWork *g_searchWin;
 extern const char DAT_0052fd6c[];
 extern const char DAT_0052fdd8[];
 extern const char DAT_0052fdc0[];
@@ -14,8 +14,8 @@ extern const char DAT_0052fda8[];
 const u32 DAT_0052fcb4[9] = {0x00000000, 0x00000000, 0x00000000, 0x0000014A, 0x00000000, 0x00000008, 0x00000000, 0x0000FEB6, 0x00000004};
 const u32 DAT_0052fcd8[9] = {0x3F800000, 0x3F800000, 0x00000000, 0x3F800000, 0x00000000, 0x00000004, 0x00000000, 0x00000000, 0x00000000};
 const u32 DAT_0052fcfc[28] = {0x00000001, 0x00000000, 0xFFFFFFFDu, 0x00000000, 0x00000000, 0xFFFFFFFDu, 0x00000000, 0xFFFFFFFFu, 0x00000000, 0xFFFFFFFFu, 0xFFFFFFFFu, 0x00000000, 0xFFFFFFFFu, 0x00000000, 0x00000002, 0x00000000, 0xFFFFFFFDu, 0x00000001, 0x00000000, 0xFFFFFFFDu, 0x00000000, 0xFFFFFFFFu, 0x00000000, 0xFFFFFFFFu, 0xFFFFFFFFu, 0x00000000, 0xFFFFFFFFu, 0x00000000};
-u32 FUN_0023a9a0(void *work);
-u32 FUN_0023a5f8(void *work);
+u32 runWinUpdateTransition(void *work);
+u32 runWinDrawLoadingDots(void *work);
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 tracked);
 void sysMemClear(void *memory, u32 bytes);
 u32 taskCreateDraw(const char *name, u32 priority, u32 flags, void *work,
@@ -32,15 +32,15 @@ void searchWinInitialize(void)
         u32 packet[8];
         UiSpriteState sprite;
     };
-    if (DAT_0057f584 == NULL) {
+    if (g_searchWin == NULL) {
         asdDebugTrace(DAT_0052fd6c, 135);
-        DAT_0057f584 = static_cast<SearchWinWork *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(SearchWinWork), 1));
+        g_searchWin = static_cast<SearchWinWork *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(SearchWinWork), 1));
     }
-    SearchWinWork *window = DAT_0057f584;
+    SearchWinWork *window = g_searchWin;
     sysMemClear(window, sizeof(*window));
-    window->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_0052fdd8), 3, 0, NULL, reinterpret_cast<AsdProcUpdateFunc>(FUN_0023a9a0), 0, 0);
-    taskCreateDraw(DAT_0052fdc0, 0x86, 0, NULL, FUN_0023a5f8, 0, 0, window->job);
-    taskCreateDraw(DAT_0052fda8, 0xE2, 0, NULL, FUN_0023a5f8, 0, 0, window->job);
+    window->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_0052fdd8), 3, 0, NULL, reinterpret_cast<AsdProcUpdateFunc>(runWinUpdateTransition), 0, 0);
+    taskCreateDraw(DAT_0052fdc0, 0x86, 0, NULL, runWinDrawLoadingDots, 0, 0, window->job);
+    taskCreateDraw(DAT_0052fda8, 0xE2, 0, NULL, runWinDrawLoadingDots, 0, 0, window->job);
     SearchWindowRenderView *render = reinterpret_cast<SearchWindowRenderView *>(window);
     paramsClearPacket(render->packet);
     paramsInit(reinterpret_cast<UiResourceParameters *>(render->packet), DAT_0052fcb4, sizeof(DAT_0052fcb4),

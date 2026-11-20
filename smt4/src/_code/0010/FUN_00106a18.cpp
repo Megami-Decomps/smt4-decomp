@@ -4,7 +4,7 @@
 #include <math.h>
 
 extern "C" {
-void FUN_002c2044(RenderCtx *context, s32 mode);
+void cameraMatrixCacheReset(RenderCtx *context, s32 mode);
 u32 asdGxPresetsGetByKind(u32 kind);
 u32 asdGxPresetsGetHeightByKind(u32 kind);
 void FUN_0011d0dc(RenderCtx *context, f32 left, f32 right, f32 bottom, f32 top, f32 nearClip, f32 farClip);
@@ -15,7 +15,7 @@ void asdCameraRegister(RenderCtx *context);
 // Configure the screen projection and an origin-facing camera at the requested depth.
 void FUN_00106a18(RenderCtx *context, f32 depth, f32 minimum, f32 maximum, f32 parameter)
 {
-    FUN_002c2044(context, 1);
+    cameraMatrixCacheReset(context, 1);
     f32 height = static_cast<f32>(asdGxPresetsGetByKind(0));
     f32 width = static_cast<f32>(asdGxPresetsGetHeightByKind(0));
     FUN_0011d0dc(context, 0.0f, width, height, 0.0f, 1.0f, 1.0f);

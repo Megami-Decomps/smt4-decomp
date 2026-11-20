@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0017fd38(...);
+int svcWaitSynchronizationN(...);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 int nn_os(...);
 int software_interrupt(...);
@@ -21,7 +21,7 @@ extern unsigned char LAB_0018b630; /* 0x18b630 */
 extern int FUN_002e306c(...); /* 0x2e306c */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_0017fd38. */
+/* Supplied declaration required: svcWaitSynchronizationN. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: nn_os. */
 
@@ -65,7 +65,7 @@ FUN_0042cd0c(unsigned int *param_1,unsigned int *param_2,unsigned int *param_3,u
   if (param_3 != (unsigned int *)0x1) {
     temp_v1 = param_5;
     puStack_44 = (unsigned int *)param_6;
-    FUN_0017fd38(param_1,&temp_v2,param_3,param_4);
+    svcWaitSynchronizationN(param_1,&temp_v2,param_3,param_4);
     return param_1;
   }
   *param_1 = 0;

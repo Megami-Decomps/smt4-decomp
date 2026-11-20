@@ -1,0 +1,18 @@
+#include "quest_center/QuestRecord.h"
+
+extern "C" s32 recordCompareKindAndOrder(const u16 *, const u16 *);
+
+// Compare descending secondary-table keys, then use the fallback ID ordering.
+extern "C" s32 questCompareBySortKeyThenId(const u16 *firstId, const u16 *secondId)
+{
+    QuestRecord *first = questDataGetRecord(*firstId);
+    QuestRecord *second = questDataGetRecord(*secondId);
+    if (first == NULL)
+        return 0;
+    if (second == NULL)
+        return 0;
+    s32 order = second->sortKey - first->sortKey;
+    if (order != 0)
+        return order;
+    return recordCompareKindAndOrder(firstId, secondId);
+}

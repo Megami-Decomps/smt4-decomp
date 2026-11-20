@@ -33,13 +33,13 @@ extern const char DAT_004036f8[];
 extern const char DAT_004036e0[];
 extern const char DAT_004036c8[];
 extern char DAT_004036b0[];
-void FUN_002c2044(ManagedCameraIV *camera, s32 enabled);
+void cameraMatrixCacheReset(ManagedCameraIV *camera, s32 enabled);
 void FUN_002c159c(ManagedCameraIV *camera, f32 first, f32 second);
-void FUN_002c1edc(ManagedCameraIV *camera, const Vec3f *eye, const Vec3f *target, const Vec3f *up);
-void FUN_002c1e30(ManagedCameraIV *camera, s32 enabled, f32 fov, f32 nearClip, f32 farClip, f32 aspect);
+void cameraMatrixCacheSetLookAt(ManagedCameraIV *camera, const Vec3f *eye, const Vec3f *target, const Vec3f *up);
+void stereoCameraSetPerspective(ManagedCameraIV *camera, s32 enabled, f32 fov, f32 nearClip, f32 farClip, f32 aspect);
 s32 FUN_00205184(u32 process);
 void event3dOpeningDestroy(u32 process);
-s32 FUN_002c1d5c(void);
+s32 eventIsSkipping(void);
 void FUN_002a09b4(const char *path, s32 flags);
 
 u32 FUN_002f6314(void)
@@ -49,7 +49,7 @@ u32 FUN_002f6314(void)
         Event3dOpeningWork *work = (Event3dOpeningWork *)asdMemAlloc(0x100, 0x100, 0, sizeof(Event3dOpeningWork), 1);
         g_event3dOpening = work;
         memClear(work, sizeof(*work));
-        FUN_002c2044(&work->camera, 1);
+        cameraMatrixCacheReset(&work->camera, 1);
         work->parameters.eye.x = 0.0f;
         work->parameters.eye.y = 0.0f;
         work->parameters.eye.z = 0.0f;
@@ -65,12 +65,12 @@ u32 FUN_002f6314(void)
         work->parameters.aspect = 1.6666666f;
         work->distance = 5.0f;
         FUN_002c159c(&work->camera, 5.0f, 1.0f);
-        FUN_002c1edc(&work->camera, &work->parameters.eye, &work->parameters.target, &work->parameters.up);
-        FUN_002c1e30(&work->camera, 1, work->parameters.fieldOfView, work->parameters.nearClip,
+        cameraMatrixCacheSetLookAt(&work->camera, &work->parameters.eye, &work->parameters.target, &work->parameters.up);
+        stereoCameraSetPerspective(&work->camera, 1, work->parameters.fieldOfView, work->parameters.nearClip,
             work->parameters.farClip, work->parameters.aspect);
         FUN_00298d50(reinterpret_cast<u32>(&work->camera));
         work->process = asdProcessCreateSimple((const s8 *)"3dEventOpening Calc", 2, 0, 0, FUN_00205184, event3dOpeningDestroy, reinterpret_cast<u32>(work));
-        FUN_002c1d5c();
+        eventIsSkipping();
         work->state = 1;
         work->frame = 0;
         FUN_002a09b4(DAT_004036f8, 0);

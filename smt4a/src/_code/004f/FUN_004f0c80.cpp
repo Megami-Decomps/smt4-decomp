@@ -6,7 +6,7 @@ extern f32 DAT_005e1518;
 extern f32 DAT_005e1524;
 extern W5Match8Vec3 g_cameraAlternateProgressStart;
 extern W5Match8Vec3 g_cameraAlternateProgressPrevious;
-f32 FUN_003d4dd4(s32 mode, s32 duration, u32 frame);
+f32 easeEvaluate(s32 mode, s32 duration, u32 frame);
 void FUN_004f2ae4(W5Match8CameraTransition *, u32);
 
 /* Evaluate the common-frame camera channels, then the extended transition channels. */
@@ -49,7 +49,7 @@ void FUN_004f0c80(W5Match8CameraTransition *owner, u32 frame)
     BlendView *work = (BlendView *)owner;
     if (work->camera.flags & 0x100000)
         return;
-    f32 factor = FUN_003d4dd4(0, work->channels.duration, frame);
+    f32 factor = easeEvaluate(0, work->channels.duration, frame);
     work->channels.scale = DAT_005e1518 + (DAT_005e1524 - DAT_005e1518) * factor;
     W5Match8Vec3 delta = {
         work->camera.target.x - work->channels.origin.x,
@@ -69,15 +69,15 @@ void FUN_004f0c80(W5Match8CameraTransition *owner, u32 frame)
     work->camera.alternateProgress.z = g_cameraAlternateProgressStart.z + currentDelta.z * factor;
 
     f32 primaryDelta = work->channels.primaryTarget - work->channels.primaryStart;
-    factor = FUN_003d4dd4(0, work->channels.duration, frame);
+    factor = easeEvaluate(0, work->channels.duration, frame);
     work->channels.primary = work->channels.primaryStart + primaryDelta * factor;
     f32 secondaryDelta = work->channels.secondaryTarget - work->channels.secondaryStart;
-    factor = FUN_003d4dd4(0, work->channels.duration, frame);
+    factor = easeEvaluate(0, work->channels.duration, frame);
     work->channels.secondary = work->channels.secondaryStart + secondaryDelta * factor;
     f32 angleDelta = work->channels.angleTarget - work->channels.angleStart;
-    factor = FUN_003d4dd4(0, work->channels.duration, frame);
+    factor = easeEvaluate(0, work->channels.duration, frame);
     work->channels.angle = work->channels.angleStart + angleDelta * factor;
-    FUN_003d4dd4(0, work->channels.duration, frame);
+    easeEvaluate(0, work->channels.duration, frame);
     FUN_004f2ae4(owner, frame);
 }
 }

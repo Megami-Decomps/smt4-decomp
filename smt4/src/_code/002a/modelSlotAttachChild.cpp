@@ -14,7 +14,7 @@ struct ModelSlotOwner {
 
 extern "C" {
 u32 asdModelGetSlotArray0(s32 index);
-void FUN_002cbaf8(u32 node, s32 index);
+void gfxModelSlotSetActive(u32 node, s32 index);
 void nw_gfx_SceneNode_AttachChild(u32 parent, u32 child);
 extern f32 nw_anim_PlayPolicy_Loop(f32 lower, f32 upper, f32 value);
 }
@@ -40,7 +40,7 @@ extern "C" void modelSlotAttachChild(ModelSlotOwner *owner, s32 index)
 {
     u32 slot = asdModelGetSlotArray0(index);
 
-    FUN_002cbaf8(owner->node, index);
+    gfxModelSlotSetActive(owner->node, index);
     if (index == 0) {
         nw_gfx_SceneNode_AttachChild(slot, owner->child);
         sysFlagsSetBits(1);

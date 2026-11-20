@@ -11,7 +11,7 @@ s32 nw_snd_internal_SoundArchiveLoader_IsWaveSoundDataLoaded(SoundArchiveLoader 
 s32 FUN_00132eb4(SoundArchiveLoader *loader, u32 item, u32 flags);
 s32 FUN_00132bec(SoundArchiveLoader *loader, u32 item, u32 flags);
 s32 FUN_002aa984(SoundArchiveLoader *loader, u32 item, u32 arg2);
-u32 FUN_002ac780(void *archive, u32 item);
+u32 soundArchiveFileEntryIsLoaded(void *archive, u32 item); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Loads the data of one archive item, dispatching on the item type. */
 s32 soundArchiveLoaderIsItemLoaded(SoundArchiveLoader *loader, u32 item, u32 flags)
@@ -34,7 +34,7 @@ s32 soundArchiveLoaderIsItemLoaded(SoundArchiveLoader *loader, u32 item, u32 fla
         case 5:
             return FUN_002aa984(loader, item, 0xFFFFFFFF);
         case 6:
-            return loader->vtbl->loadItem(loader, FUN_002ac780(loader->archive, item)) != 0;
+            return loader->vtbl->loadItem(loader, soundArchiveFileEntryIsLoaded(loader->archive, item)) != 0;
         case 2:
             return FUN_00132eb4(loader, item, flags);
         }

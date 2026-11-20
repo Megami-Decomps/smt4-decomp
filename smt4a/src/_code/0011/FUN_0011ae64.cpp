@@ -10,7 +10,7 @@ int _ZN9Obj55aff4aSERKS_(...);
 int onlineStringSetFromRaw(...);
 int FUN_002ea3d0(...);
 int FUN_002f12d0(...);
-int FUN_002f76ca(...);
+int stringSlotAssign(...);
 
 /* stack frame of param_7: 3 slot(s), 6 byte(s) */
 typedef struct {
@@ -32,7 +32,7 @@ extern int onlineContextGetInstance(void);
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002f12d0. */
-/* Supplied declaration required: FUN_002f76ca. */
+/* Supplied declaration required: stringSlotAssign. */
 
 
 void FUN_0011ae64(unsigned int param_1,int param_2,unsigned int param_3,int param_4,unsigned int param_5,
@@ -64,7 +64,7 @@ void FUN_0011ae64(unsigned int param_1,int param_2,unsigned int param_3,int para
   *(int *)(param_2 + 0x6c) = param_4;
   _ZN9Obj55aff4aSERKS_(param_2 + 0x70,param_5);
   *(unsigned int *)(param_2 + 0x78) = param_7;
-  FUN_002f76ca(param_6,"normaltoken");
+  stringSlotAssign(param_6,"normaltoken");
   if ((DAT_00589558 == param_4) &&
      (temp_v0 = libc_strncmp(&DAT_0062d704,&LAB_0011af0c,0x40), temp_v0 != 0)) {
     onlineStringSetFromRaw(*(unsigned int *)(param_2 + 0x78),&DAT_0062d704);

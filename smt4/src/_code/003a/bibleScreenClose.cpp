@@ -32,7 +32,7 @@ void bibleScreenClose(BibleScreen *screen)
         screen->files.bibleMbm = NULL;
     }
     gameGlobalsSetSelected(0);
-    FUN_002a0cc8(0);
+    gameGlobalsSetSubScreenActive(0);
     gameReleaseDataReference();
     if (screen->sprites1dLoaded != 0) {
         for (i = 0; i < 3; i++) {

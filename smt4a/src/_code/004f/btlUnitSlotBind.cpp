@@ -26,8 +26,8 @@ typedef struct BtlUnitSlot {
 } BtlUnitSlot;
 
 extern void panelReset(BtlUnitSlot *slot);
-extern SlotEntry *FUN_003eae20(void *state, s32 arg0, s32 arg1);
-extern u32 FUN_003eda28(void *state, s32 id);
+extern SlotEntry *tableFileFindByKeyPair(void *state, s32 arg0, s32 arg1);
+extern u32 tableFileGetSlotEntry(void *state, s32 id);
 extern u32 shakeEffectAlloc(void);
 
 /* Binds the slot to the entry for (arg0, arg1) of the battle state, or marks it empty (state 13). */
@@ -41,7 +41,7 @@ void btlUnitSlotBind(BtlUnitSlot *slot, s32 arg0, s32 arg1)
     slot->arg1 = arg1;
     slot->flags |= 0x4000;
     state = static_cast<void *>(btlGetMainState());
-    entry = FUN_003eae20(state, arg0, arg1);
+    entry = tableFileFindByKeyPair(state, arg0, arg1);
     if (entry == NULL) {
         slot->state = 13;
     } else {
@@ -49,7 +49,7 @@ void btlUnitSlotBind(BtlUnitSlot *slot, s32 arg0, s32 arg1)
         s32 id = entry->id;
 
         slot->entryId = id;
-        slot->handle = FUN_003eda28(state, id);
+        slot->handle = tableFileGetSlotEntry(state, id);
         slot->entry = entry;
         if ((entry->flags & 2) != 0) {
             slot->valueA = shakeEffectAlloc();

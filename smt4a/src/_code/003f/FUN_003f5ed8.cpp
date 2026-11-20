@@ -41,7 +41,7 @@ typedef struct DialogWorkView {
     s16 panelA;
 } DialogWorkView;
 
-void FUN_00228b04(void *list, s32 arg);
+void gridNavigationHandleConfirm(void *list, s32 arg);
 s32 resourceRunOperationIfUnblocked(void *list);
 s32 ifTouchGetSelectionMode(void);
 s32 uiScrollHandleActionsOrTouch(void *list, const TextureTableEntryIV *touchArea, void *panel, s32 a, s32 b, s32 c, u8 *flag, s32 d, s32 e);
@@ -68,7 +68,7 @@ void FUN_003f5ed8(DialogWork *work)
     if (work->blinkTimer < 15) {
         work->blink += 0.053333335f;
     }
-    FUN_00228b04(work->list, 1);
+    gridNavigationHandleConfirm(work->list, 1);
     work->offset = resourceRunOperationIfUnblocked(work->list);
     work->first = listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(work->list));
     u32 id = work->ids[work->first + work->offset];

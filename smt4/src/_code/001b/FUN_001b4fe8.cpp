@@ -14,8 +14,8 @@ void FUN_00296fec();
 void aocMenuUpdate(SceneResource *);
 void titleSetSlotValueState2(u32, u32);
 void soundChannelStopAll(u32);
-void FUN_002c5700();
-void *FUN_0027e974(SceneResource *);
+void aocMainShutdown();
+void *_ZN7AocMenuD1Ev(SceneResource *);
 void buttonHelpRelease();
 void buttonHelpTexturesUnref();
 void uiFadeRelease();
@@ -54,9 +54,9 @@ u32 FUN_001b4fe8()
         work->state.pending = 3;
         work->readyToRelease = 1;
         if (SceneResource *resource = work->resource) {
-            FUN_002c5700();
+            aocMainShutdown();
             if (work->resource) {
-                asdMemFreeNonNull(FUN_0027e974(work->resource));
+                asdMemFreeNonNull(_ZN7AocMenuD1Ev(work->resource));
                 work->resource = NULL;
             }
         }

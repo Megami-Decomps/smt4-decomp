@@ -37,7 +37,7 @@ void Obj4223c4::FUN_003a7834()
     height = vec2GetXInt(cursor);
     pointConvertToFloat(menu->layout, height, width);
     if (uiSpriteGetCompletionState(cursor) != 0 && buttonHelpIsNotActive() != 0) {
-        FUN_002a0cc8(0);
+        gameGlobalsSetSubScreenActive(0);
         menu->state.first = 2;
         menu->state.second = 0;
         pointConvertToFloat(menu->layout, 0, 0);

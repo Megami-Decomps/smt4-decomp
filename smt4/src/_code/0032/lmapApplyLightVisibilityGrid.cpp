@@ -3,7 +3,7 @@
 extern "C" {
 extern s8 DAT_0049f08c[80];
 void sceneAttachLightChild(void *, s32);
-void FUN_00265b78(s32, s32);
+void lmapSlotSetVisible(s32, s32);
 
 /* Copies the visible (non-9) cells of the 8x10 grid, column by column, into DAT_0049f08c. */
 static void collectVisible(const s8 *grid)
@@ -37,12 +37,12 @@ void lmapApplyLightVisibilityGrid(const s8 *grid)
             MapLightView *current = reinterpret_cast<MapLightView *>(g_lmapMainState);
             if (current && !current->children[i].enabled)
                 current->children[i].enabled = 1;
-            FUN_00265b78(i, 1);
+            lmapSlotSetVisible(i, 1);
         } else {
             MapLightView *current = reinterpret_cast<MapLightView *>(g_lmapMainState);
             if (current && current->children[i].enabled)
                 current->children[i].enabled = 0;
-            FUN_00265b78(i, 0);
+            lmapSlotSetVisible(i, 0);
         }
     }
 }

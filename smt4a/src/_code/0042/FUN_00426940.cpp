@@ -4,7 +4,7 @@
 #include <string.h>
 
 extern "C" {
-extern u32 DAT_005c149c;
+extern u32 g_amAppSession;
 
 /* Built without VFP (--fpu=softvfp, as the IPC wrappers next to it): the three stack words are copied with
  * core-register ldm/stm. Sends IPC command 0x301 describing `count` elements at `a`/`b`/`c`; stores the reply's second word in *out and returns the reply word or the error. */
@@ -20,7 +20,7 @@ s32 FUN_00426940(u32 *out, u32 handle, s32 count, u8 mode, u32 a, u32 b, u32 c)
     command->words[4] = c;
     command->words[5] = ipcMappedBufferDescriptor(count * 24, 0xc);
     command->words[6] = handle;
-    s32 result = nn::svc::SendSyncRequest(DAT_005c149c);
+    s32 result = nn::svc::SendSyncRequest(g_amAppSession);
     if (nnResultIsSuccess(result)) {
         *out = command->words[1];
         result = command->words[0];

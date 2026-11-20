@@ -21,7 +21,7 @@ struct ThunderBoltBlock {
 extern "C" {
 void *memAlloc(int, int, int, int size, int align, int);
 void rt_memclr(void *block, int size);
-PolyGeom *FUN_00350d90(u32 segments, u8 *table, int w, int tableSize);
+PolyGeom *effGeomBuildGridMesh(u32 segments, u8 *table, int w, int tableSize);
 
 extern u8 DAT_005c1eec;
 
@@ -49,7 +49,7 @@ ThunderBoltBlock *FUN_003ac71c(ThunderBoltParams *params)
     s32 rampOut = (s32)(params->rampOut * span);
     ThunderBolt *bolt = block->bolts;
     for (u32 i = 0; i < count; i++) {
-        PolyGeom *geom = FUN_00350d90((u16)params->level, &DAT_005c1eec, 5, 0x48);
+        PolyGeom *geom = effGeomBuildGridMesh((u16)params->level, &DAT_005c1eec, 5, 0x48);
         bolt->geom = geom;
         thunderBoltFillColors(geom, &colors, rampIn, rampOut);
         bolt->id = -4 * (s32)i - 1;

@@ -29,7 +29,7 @@ struct BattleEventContext {
 
 extern "C" {
 extern void *g_aocSystem;
-extern void *DAT_00435d18;
+extern void *g_btlAux;
 extern const char DAT_00400968[];
 extern const char DAT_00400938[];
 s32 FUN_0022a2c4(void *system, u32 id);
@@ -124,15 +124,15 @@ extern "C" u32 battleEventProcessUpdate(BattleEventWork *work, BattleEventContex
     case 8:
         switch (work->stage) {
         case 0:
-            FUN_003dadd8(DAT_00435d18);
+            FUN_003dadd8(g_btlAux);
             work->stage = 1;
         case 1:
-            if (!btlEventAreResourcesReady(DAT_00435d18))
+            if (!btlEventAreResourcesReady(g_btlAux))
                 return 0;
-            FUN_003dbe68(DAT_00435d18);
+            FUN_003dbe68(g_btlAux);
             work->stage = 2;
         case 2:
-            if (!FUN_003dcc34(DAT_00435d18))
+            if (!FUN_003dcc34(g_btlAux))
                 return 0;
             work->stage = 3;
         }

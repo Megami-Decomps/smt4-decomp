@@ -6,7 +6,7 @@ extern "C" {
 
 int _ZN9Obj55aff4D1Ev(int **);
 int onlineInstanceTableFind(int, unsigned int);
-int FUN_002e9f00(int, int, int);
+int onlineInstanceCompleteWithChildren(int, int, int);
 int _ZN9Obj55aff4C1Ev(int **);
 int FUN_002f6be2(int **, int *);
 int operatorDeleteArrayNullable(int);
@@ -29,7 +29,7 @@ extern unsigned char LAB_0012ad90; /* 0x12ad90 */
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
-/* Supplied declaration required: FUN_002e9f00. */
+/* Supplied declaration required: onlineInstanceCompleteWithChildren. */
 /* Supplied declaration required: _ZN9Obj55aff4C1Ev. */
 /* Supplied declaration required: FUN_002f6be2. */
 /* Supplied declaration required: operatorDeleteArrayNullable. */
@@ -65,7 +65,7 @@ unsigned long long FUN_0012ad10(int param_1,int *param_2,int param_3,unsigned in
       if ((temp_v0 != 0) && (*(int *)(param_1 + 0x16c) != temp_v0)) {
         temp_v1 = temp_v2;
         *(unsigned char *)(param_1 + 0x1cd) = 1;
-        FUN_002e9f00(param_1 + 0x98,4,temp_v0);
+        onlineInstanceCompleteWithChildren(param_1 + 0x98,4,temp_v0);
       }
     }
     _ZN9Obj55aff4D1Ev(&piStack_1c);

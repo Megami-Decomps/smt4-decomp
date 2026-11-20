@@ -13,7 +13,7 @@ struct WaitRequest {
     /* 0x10 */ const s64 *timeout;
 };
 
-s32 FUN_0017fd38(s32 *signaledIndex, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
+s32 svcWaitSynchronizationN(s32 *signaledIndex, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
 
 /* Gathers the object handles into `handles` and waits on them (svc WaitSynchronizationN, or WaitSynchronization1 for a single object). */
@@ -38,7 +38,7 @@ s32 FUN_002e306c(WaitRequest *request, u32 *handles)
     s32 *signaledIndex = request->signaledIndex;
     s32 waitAll = request->waitAll;
     if (count != 1) {
-        return FUN_0017fd38(signaledIndex, handles, count, waitAll, timeout);
+        return svcWaitSynchronizationN(signaledIndex, handles, count, waitAll, timeout);
     }
     *signaledIndex = 0;
     return svcWaitSynchronization1(handles[0], timeout);

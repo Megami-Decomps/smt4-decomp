@@ -9,7 +9,7 @@ u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void *owner);
 s32 commonBackgroundUpdateFade(u32 handle);
 void FUN_002a35fc(u32 handle);
-s32 FUN_002a3600(u32 handle);
+s32 commonBgDraw(u32 handle);
 s32 commonBackgroundDraw(u32 handle);
 void uiFadeOpen();
 void campCommonBgCreateCrazingSumaho();
@@ -27,7 +27,7 @@ extern "C" void campCommonBgAcquire()
         CommonBackgroundState *background = g_commonBg.background;
         memset(background, 0, sizeof(*background));
         background->counters.unk00 = asdProcessCreateSimple((const s8 *)"COMBG CALC", 4, 0, 0, commonBackgroundUpdateFade, FUN_002a35fc, 0);
-        taskCreateDraw((const s8 *)"COMBG DDRAW", 0xe8, 0, 0, FUN_002a3600, NULL, 0,
+        taskCreateDraw((const s8 *)"COMBG DDRAW", 0xe8, 0, 0, commonBgDraw, NULL, 0,
                        (void *)background->counters.unk00);
         taskCreateDraw((const s8 *)"COMBG DDRAW FADE", 0x15f, 0, 0, commonBackgroundDraw, NULL, 0,
                        (void *)background->counters.unk00);

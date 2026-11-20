@@ -4,7 +4,7 @@
 
 extern "C" {
 void modelSetScale(AsdMdlNode *node, f32 frame);
-void FUN_00210194(AsdMdlObject *model, f32 value);
+void modelOwnerApplyAnimationTime(AsdMdlObject *model, f32 value);
 
 // Load the fusion-room model and synchronize it with the preview sound.
 void uniteLoadPreviewRoomModel(void)
@@ -21,7 +21,7 @@ void uniteLoadPreviewRoomModel(void)
             model->node->animationSpeed = 1.0f;
             modelSetScale(model->node, model->node->speed);
         }
-        FUN_00210194(*slot, value);
+        modelOwnerApplyAnimationTime(*slot, value);
     }
 }
 }

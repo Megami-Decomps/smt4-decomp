@@ -3,12 +3,12 @@
 extern "C" {
 
 int nodeTreeReleaseItem(u32 item);
-extern u32 DAT_00433a58;
+extern u32 g_effectColorOverride;
 
 void nodeTreeClearItem(void)
 {
-    nodeTreeReleaseItem(DAT_00433a58);
-    DAT_00433a58 = 0;
+    nodeTreeReleaseItem(g_effectColorOverride);
+    g_effectColorOverride = 0;
 }
 
 } /* extern "C" */

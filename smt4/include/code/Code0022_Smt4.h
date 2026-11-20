@@ -18,7 +18,7 @@ u32 FUN_0022b8c0(Obj *obj);
 
 void objClearFields(Obj *obj);
 
-void FUN_0022fa2c(Scene *scene);
+void shopMenuHandleCancel(Scene *scene);
 
 u32 FUN_0022b238(Obj *obj, s32 index);
 

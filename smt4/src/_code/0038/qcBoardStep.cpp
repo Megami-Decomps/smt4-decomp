@@ -27,7 +27,7 @@ u32 FUN_002950e8(UiSpriteState *sprite, s32 fromBelow);
 s32 FUN_00296284(UiSpriteState *sprite, s32 reverse, s32 vertical);
 u8 *qcGetCenterSlotGroups(s32 index);
 s32 slotGroupFindFree(const SlotGroups *groups, u32 group);
-s32 FUN_0027ee9c(void);
+s32 inputConfirmPressed(void);
 s32 questResetEligibleEntriesMatchingValue(u32 matchingValue);
 
 /* The first free quest slot of this center's rank (-1: none, 0: the rank is closed). */
@@ -137,7 +137,7 @@ void qcBoardStep(DummyAttachmentWork *work)
                 if (work->boardState.inputWait <= 0) {
                     work->boardState.inputWait = 0;
                 }
-                if (FUN_0027ee9c() != 0) {
+                if (inputConfirmPressed() != 0) {
                     buttonHelpSetPreset(0xa3);
                     work->boardState.fullNoticePlayed = 0;
                     if (storyModeCanProceed(work->location) != 0) {

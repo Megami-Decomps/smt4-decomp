@@ -23,7 +23,7 @@ extern unsigned int *_ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 extern int FUN_002ea6fc(int);
-extern unsigned int FUN_002ecf28(void);
+extern unsigned int objectRegistryGetOwnerForCurrent(void);
 /* Supplied declaration required: FUN_003054c0. */
 extern int FUN_003054ce(unsigned int);
 /* Supplied declaration required: FUN_00305658. */
@@ -58,7 +58,7 @@ void FUN_0011f8b4(int param_1)
              *(unsigned int *)(temp_v0 + 0x1c);
         FUN_003054c0(*(int *)(param_1 + 400),*(unsigned int *)(*(int *)(param_1 + 400) + 0x78));
         FUN_00305658();
-        temp_v1 = FUN_002ecf28();
+        temp_v1 = objectRegistryGetOwnerForCurrent();
         FUN_0030566e(temp_v1,param_1 + 0x2f0);
         temp_v1 = FUN_002ea3c0(temp_v5,0x11fb5d,0,&LAB_0011f954);
         FUN_002ea3d0(param_1,temp_v1);

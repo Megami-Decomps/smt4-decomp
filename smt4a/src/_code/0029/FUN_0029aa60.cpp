@@ -77,7 +77,7 @@ extern int FUN_0029d6f0(void);
 /* Supplied declaration required: FUN_00329dd4. */
 /* Supplied declaration required: FUN_0032a904. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
-extern int FUN_0036d984(float *, unsigned int *, unsigned int);
+extern int mapCollisionRaySegmentTest(float *, unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_003a3e60. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern short __aeabi_idivmod(int, int);
@@ -269,7 +269,7 @@ LAB_0029ad50:
               uStack_cc = *(unsigned int *)(temp_v14 + 0x240);
               temp_v27[2] = *(float *)(g_lmapScene + 0x20) + temp_v18;
               temp_v29 = *(float *)(temp_v14 + 0x23c) + temp_v18;
-              temp_v11 = FUN_0036d984(temp_v27 + 1,(unsigned int *)&temp_v28,0);
+              temp_v11 = mapCollisionRaySegmentTest(temp_v27 + 1,(unsigned int *)&temp_v28,0);
               if (temp_v11 != -1) goto LAB_0029ae94;
             }
             if (*(int *)(temp_v14 + 0x1f0) >= 0x2d) {

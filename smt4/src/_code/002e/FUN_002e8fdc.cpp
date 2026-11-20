@@ -19,7 +19,7 @@ int mapIfReleaseSlot2(void);
 int mapInterfaceSetStateTwo(void);
 int lmapSetSceneId(...);
 int FUN_0027fae4(void);
-int FUN_0027fc14(...);
+int lmapCameraSetMode(...);
 int mapSelectContainingRegions(void);
 int FUN_002804ec(...);
 int mapEaseSceneHeading(void);
@@ -55,11 +55,11 @@ extern int mapIfHasSelection(void);
 extern int inputIsQuestMenuPressed(void);
 extern int dataTableGetRecord23(void);
 /* Supplied declaration required: table23FindRecordByKey. */
-extern int FUN_0027ee9c(void);
+extern int inputConfirmPressed(void);
 /* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fae4. */
-/* Supplied declaration required: FUN_0027fc14. */
+/* Supplied declaration required: lmapCameraSetMode. */
 /* Supplied declaration required: mapDepartSpawnPlayerEffect. */
 /* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
@@ -120,7 +120,7 @@ void FUN_002e8fdc(void)
         temp_v0 = g_mapCamera;
         *(unsigned int *)(g_mapCamera + 0x18) = *(unsigned int *)(temp_v1 + 0x50);
         *(unsigned int *)(temp_v0 + 0xac) = 0;
-        FUN_0027fc14(0);
+        lmapCameraSetMode(0);
         temp_v0 = g_lmapScene;
         temp_v1 = *(int *)(temp_v0 + 4);
         *(int *)(temp_v0 + 4) = temp_v1 + 1;
@@ -274,7 +274,7 @@ void FUN_002e8fdc(void)
       *(unsigned int *)(temp_v0 + 0x2c) = temp_v3;
       *(unsigned int *)(temp_v0 + 0x30) = temp_v7;
       *(unsigned int *)(temp_v0 + 0x50) = DAT_0049f9ac;
-      FUN_0027fc14(0xc);
+      lmapCameraSetMode(0xc);
       *(unsigned int *)(g_mapCamera + 0xac) = 0xfffffffd;
       buttonHelpSetPreset(0xdb);
       mapIfActivateRecord(1,DAT_0049f99c);
@@ -306,7 +306,7 @@ void FUN_002e8fdc(void)
     case 2:
       *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
       mapIfActivateRecord(1,DAT_0049f99c);
-      temp_v0 = FUN_0027ee9c();
+      temp_v0 = inputConfirmPressed();
       if (temp_v0 != 0) {
         table23FindRecordByKey(DAT_0049f990,DAT_0049f994,DAT_0049f998);
         temp_v1 = dataTableGetRecord23();
@@ -340,7 +340,7 @@ void FUN_002e8fdc(void)
           temp_v0 = g_mapCamera;
           *(unsigned int *)(g_mapCamera + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
           *(unsigned int *)(temp_v0 + 0xac) = 0;
-          FUN_0027fc14(0);
+          lmapCameraSetMode(0);
           temp_v0 = g_lmapScene;
           *(unsigned int *)(g_lmapScene + 0x54) = 0;
           *(unsigned int *)(temp_v0 + 0x58) = 0x40a00000;
@@ -473,7 +473,7 @@ LAB_002e94f0:
         temp_v0 = g_mapCamera;
         *(unsigned int *)(g_mapCamera + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
         *(unsigned int *)(temp_v0 + 0xac) = 0;
-        FUN_0027fc14(0);
+        lmapCameraSetMode(0);
         *(unsigned char *)(g_mapCamera + 0xa4) = 1;
       }
       if (*(int *)(g_lmapScene + 8) == 3) {

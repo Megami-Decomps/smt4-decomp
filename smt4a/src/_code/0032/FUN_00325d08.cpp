@@ -15,10 +15,10 @@ void lmapSceneStartMovement(unsigned char);
 int __hardfp_atan2f(void);
 
 int soundVolumeSettingSet(...);
-int FUN_0014af98(void);
+int messageVoiceBankGet(void);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int FUN_002469d0(void);
-int FUN_0025ef68(...);
+int mapResolveCollisionSphere(...);
 int distSpatial(void);
 int FUN_002d1f40(...);
 int FUN_002e364c(...);
@@ -83,13 +83,13 @@ extern signed char DAT_005f1c48; /* 0x5f1c48 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: soundVolumeSettingSet. */
 /* Supplied declaration required: soundVolumeSettingGet. */
-/* Supplied declaration required: FUN_0014af98. */
+/* Supplied declaration required: messageVoiceBankGet. */
 extern int randBetween(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_002469d0. */
-/* Supplied declaration required: FUN_0025ef68. */
+/* Supplied declaration required: mapResolveCollisionSphere. */
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: FUN_002d1f40. */
@@ -356,7 +356,7 @@ LAB_00326fcc:
       *(int *)(temp_v3 + 0x3c) = (int)temp_v10;
       if (((DAT_005f1c48 == '\0') && (DAT_005f161e != '\0')) && ((temp_v21 & ~(unsigned int)puVar9) == 0)) {
         temp_v1 = temp_v3 + 0x28;
-        FUN_0025ef68(temp_v1,temp_v3 + 0x34,0);
+        mapResolveCollisionSphere(temp_v1,temp_v3 + 0x34,0);
         temp_v3 = g_lmapScene;
         temp_v5 = 0;
         if (temp_v1 != 0) {
@@ -507,7 +507,7 @@ LAB_00326fcc:
               libm_cosf();
               temp_v3 = randBetween(0,1);
               if (*(int *)(g_lmapScene + 0x1d0) != 10) {
-                FUN_0014af98();
+                messageVoiceBankGet();
                 soundVolumeSettingSet();
                 sysPlayVoice(temp_v3 + 0x10002e2);
                 soundVolumeSettingSet(temp_v4);
@@ -549,7 +549,7 @@ LAB_00326870:
             libm_cosf();
             temp_v3 = randBetween(0,1);
             if (*(int *)(g_lmapScene + 0x1d0) != 10) {
-              FUN_0014af98();
+              messageVoiceBankGet();
               soundVolumeSettingSet();
               sysPlayVoice(temp_v3 + 0x10002e0);
               soundVolumeSettingSet(temp_v4);
@@ -574,7 +574,7 @@ LAB_003267fc:
             libm_cosf();
             temp_v3 = randBetween(0,1);
             if (*(int *)(g_lmapScene + 0x1d0) != 10) {
-              FUN_0014af98();
+              messageVoiceBankGet();
               soundVolumeSettingSet();
               sysPlayVoice(temp_v3 + 0x10002de);
               soundVolumeSettingSet(temp_v4);
@@ -605,7 +605,7 @@ LAB_003268e4:
           libm_cosf();
           temp_v3 = randBetween(0,1);
           if (*(int *)(g_lmapScene + 0x1d0) != 10) {
-            FUN_0014af98();
+            messageVoiceBankGet();
             soundVolumeSettingSet();
             sysPlayVoice(temp_v3 + 0x10002dc);
             soundVolumeSettingSet(temp_v4);

@@ -1,4 +1,4 @@
-/* Returns the signed value at +0x194 of the object's current record, or 0 when there is none or FUN_00293230 reports busy. */
+/* Returns the signed value at +0x194 of the object's current record, or 0 when there is none or btlScriptUnitIsIncapacitated reports busy. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "code/Code0028_Smt4.h"
@@ -15,7 +15,7 @@ typedef struct Owner {
     /* 0x1CFC */ Record *record;
 } Owner;
 
-extern s32 FUN_00293230(void);
+extern s32 btlScriptUnitIsIncapacitated(void);
 
 s32 FUN_0028299c(Owner *owner)
 {
@@ -23,7 +23,7 @@ s32 FUN_0028299c(Owner *owner)
 
     if (result != 0) {
         btlGetMainState();
-        result = FUN_00293230();
+        result = btlScriptUnitIsIncapacitated();
         if (result == 0) {
             result = owner->record->value;
         } else {

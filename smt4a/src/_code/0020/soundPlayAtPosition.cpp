@@ -11,7 +11,7 @@ extern "C" {
 extern u8 g_soundVolumeSetting;
 
 s32 jyoucyuGetTableEntry(u32 index);
-s32 FUN_00162ea4(void);
+s32 eventIsSkipping(void);
 s32 asdSndPlaySlotA(s32 id, u8 volume, s32 arg);
 s32 asdSndPlaySlotB(s32 id, u8 volume, s32 arg, f32 pitch, f32 pan);
 
@@ -21,7 +21,7 @@ s32 soundPlayAtPosition(s32 id, u32 position)
     s32 handle = -1;
     f32 pan;
 
-    if (jyoucyuGetTableEntry(1) != 0 || FUN_00162ea4() != 0) {
+    if (jyoucyuGetTableEntry(1) != 0 || eventIsSkipping() != 0) {
         return handle;
     }
     if ((u32)(id - SOUND_VOICE_FIRST) <= SOUND_VOICE_LAST - SOUND_VOICE_FIRST) {

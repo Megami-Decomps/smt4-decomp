@@ -85,7 +85,7 @@ typedef char BibleAnalyzeScreenLayoutCheck[
 #define BIBLE_LIST_LIMIT 10
 
 extern "C" {
-extern u32 *DAT_0043d990;
+extern u32 *g_btlDevilListCallbackContext;
 
 void entryTableClear(void *table);
 void menuSetModeAndResetTransitions(s32 mode);
@@ -120,11 +120,11 @@ void FUN_003a8fe0(BibleAnalyzeScreen *screen)
 
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\bible\\bibleAnalyze.cpp", 163);
     u32 **work = static_cast<u32 **>(asdMemAlloc(0x100, 0x100, 0, 4, 1));
-    DAT_0043d990 = reinterpret_cast<u32 *>(work);
+    g_btlDevilListCallbackContext = reinterpret_cast<u32 *>(work);
     *work = reinterpret_cast<u32 *>(screen);
     screen->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("BIBLE ANALYZE CALC"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>((void *)FUN_003ac6e8), reinterpret_cast<AsdProcFunc>((void *)FUN_003ac710), reinterpret_cast<u32>(work));
-    screen->drawTask = taskCreateDraw("BIBLE ANALYZE UP", 0x6F, 1, 0, (void *)btlDevilListDrawCallback, NULL, DAT_0043d990, screen->job);
-    screen->fadeTask = taskCreateDraw("BIBLE ANALYZE DOWN", 0xE6, 1, 0, (void *)FUN_003acdec, NULL, DAT_0043d990, screen->job);
+    screen->drawTask = taskCreateDraw("BIBLE ANALYZE UP", 0x6F, 1, 0, (void *)btlDevilListDrawCallback, NULL, g_btlDevilListCallbackContext, screen->job);
+    screen->fadeTask = taskCreateDraw("BIBLE ANALYZE DOWN", 0xE6, 1, 0, (void *)FUN_003acdec, NULL, g_btlDevilListCallbackContext, screen->job);
 
     s32 limit;
     // The allocation owner is not initialized in the retail code.

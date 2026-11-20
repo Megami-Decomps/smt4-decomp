@@ -7,8 +7,8 @@ extern "C" {
 int asdOperatorDeleteArray(void);
 int _ZN9Obj55b28cC1EPv(int *, int);
 int _ZN9Obj55b28cD1Ev(int *);
-int FUN_002e9f00(unsigned int *, int);
-int FUN_002ea00c(unsigned int *);
+int onlineInstanceCompleteWithChildren(unsigned int *, int);
+int destroyObj005585a4(unsigned int *);
 int sharedRefHolderReplace(unsigned int *, int);
 
 extern unsigned char DAT_0055970c; /* 0x55970c */
@@ -17,8 +17,8 @@ extern unsigned char DAT_0055970c; /* 0x55970c */
 extern int onlineContextGetInstance(void);
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-/* Supplied declaration required: FUN_002e9f00. */
-/* Supplied declaration required: FUN_002ea00c. */
+/* Supplied declaration required: onlineInstanceCompleteWithChildren. */
+/* Supplied declaration required: destroyObj005585a4. */
 /* Supplied declaration required: sharedRefHolderReplace. */
 
 
@@ -39,7 +39,7 @@ void FUN_002fb028(unsigned int *param_1,unsigned int param_2,unsigned int param_
     temp_v0 = onlineContextGetInstance();
     _ZN9Obj55b28cC1EPv(&uStack_18,temp_v0 + 0x58);
     if (*(char *)(param_1 + 4) == '\x01') {
-      FUN_002e9f00(param_1,4);
+      onlineInstanceCompleteWithChildren(param_1,4);
     }
     _ZN9Obj55b28cD1Ev(&uStack_18);
   }
@@ -47,7 +47,7 @@ void FUN_002fb028(unsigned int *param_1,unsigned int param_2,unsigned int param_
   for (temp_v0 = param_1[0x18]; temp_v0 != param_1[0x19]; temp_v0 = temp_v0 + 4) {
   }
   asdOperatorDeleteArray();
-  FUN_002ea00c(param_1);
+  destroyObj005585a4(param_1);
   return;
 }
 

@@ -66,7 +66,7 @@ unsigned long long FUN_002def6c(void)
   func_0x00236010();
   FUN_0037e09c(0);
   if (DAT_0057a9c8 != 0) {
-    FUN_00290ba4(puVar1);
+    btlUiSessionDestroy(puVar1);
   }
   uniteReleaseExit();
   FUN_003f19dc(puVar1);

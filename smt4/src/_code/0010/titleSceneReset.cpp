@@ -5,9 +5,9 @@ extern "C" {
 extern TitleScene *g_titleScene;
 
 extern void renderCtxResetFrameState(s32 mode);
-extern void FUN_002bdb44(void);
+extern void asdGxFlushCommandBuffer(void);
 extern void renderTargetClear(s32 a, s32 b);
-extern void FUN_002c3a14(TitleScene *scene);
+extern void renderCtxResetFrameStacks(TitleScene *scene);
 extern void renderCtxSelectStereoLayout(TitleScene *scene);
 
 /* Resets the title scene: clears its state word and restarts the scene's subsystems; returns 0. */
@@ -18,9 +18,9 @@ u32 titleSceneReset(void)
     renderCtxResetFrameState(0);
     scene = g_titleScene;
     scene->stereoMode = 0;
-    FUN_002bdb44();
+    asdGxFlushCommandBuffer();
     renderTargetClear(0, 0);
-    FUN_002c3a14(g_titleScene);
+    renderCtxResetFrameStacks(g_titleScene);
     renderCtxSelectStereoLayout(g_titleScene);
     return 0;
 }

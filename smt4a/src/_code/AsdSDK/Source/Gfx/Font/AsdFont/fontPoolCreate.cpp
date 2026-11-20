@@ -10,7 +10,7 @@ struct FontPool {
 };
 
 extern "C" {
-extern FontPool DAT_005b3bc0;
+extern FontPool g_asdFontGlyphSets;
 void FUN_0030f220(u32 mode, const char* encoding);
 void* asdMemoryAlloc(u32 heap, u32 alignment, u32 parameter, u32 size, bool clear);
 
@@ -25,8 +25,8 @@ static __inline void* allocateTraced(const char* file, s32 line, u32 size)
 void fontPoolCreate(s32 capacity)
 {
     FUN_0030f220(2, "SJIS");
-    DAT_005b3bc0.capacity = capacity;
-    DAT_005b3bc0.entries = static_cast<FontRecord*>(allocateTraced(
+    g_asdFontGlyphSets.capacity = capacity;
+    g_asdFontGlyphSets.entries = static_cast<FontRecord*>(allocateTraced(
         "c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Font\\AsdFont.cpp", 636, capacity * sizeof(FontRecord)));
 }
 }

@@ -36,7 +36,7 @@ extern "C" s32 FUN_0047f7c0(u32 index)
             __2sprintf(text, DAT_0052a980, text,
                               suffix == 1 ? DAT_0052a978 : DAT_0052a97c);
         }
-        u8 opacity = static_cast<u8>(static_cast<u32>(FUN_0014af98() * fade));
+        u8 opacity = static_cast<u8>(static_cast<u32>(messageVoiceBankGet() * fade));
         result = FUN_001628c0(text, opacity, 2, 0, scale, scale);
     }
     DAT_00573cd8[index] = 0;

@@ -33,7 +33,7 @@ typedef struct BibleCursor {
     /* 0x04 */ s32 selection;
 } BibleCursor;
 
-extern BibleCursor DAT_0043d9c8;
+extern BibleCursor g_bibleDevilCallbackContext;
 
 void useCounterRelease(void);
 void buttonHelpSetPreset(s32 preset);
@@ -81,7 +81,7 @@ void Obj4223c4::FUN_003a836c()
     if (useCounterIsFinished()) {
         useCounterRelease();
         buttonHelpSetPreset(45);
-        FUN_002a0cc8(0);
+        gameGlobalsSetSubScreenActive(0);
         screen->state = 2;
         screen->step = 0;
         return;
@@ -89,7 +89,7 @@ void Obj4223c4::FUN_003a836c()
     if (useCounterGetCurrentValue() == 75) {
         return;
     }
-    DAT_0043d9c8.selection = -1;
+    g_bibleDevilCallbackContext.selection = -1;
     iconRefresh(screen);
     FUN_0022d1a8(screen);
 }

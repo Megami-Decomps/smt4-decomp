@@ -31,7 +31,7 @@ typedef char CampStatusCycleOffsets[
     offsetof(CampStatusCyclesView, colors) == 0x3244 ? 1 : -1];
 }
 extern "C" {
-s32 objectApplyIfUnblocked(void *selector);
+s32 gridNavigationGetItemCount(void *selector);
 s32 resourceRunOperationIfUnblocked(void *selector);
 void sysMemClear(void *memory, u32 bytes);
 u32 markerKindGetColor(s16 status);
@@ -42,9 +42,9 @@ void FUN_003d386c(s32 useSelector)
     CampStateA *camp = g_camp;
     CampStatusSelectionView *selection = reinterpret_cast<CampStatusSelectionView *>(camp);
     CampStatusCyclesView *cycles = reinterpret_cast<CampStatusCyclesView *>(camp);
-    s32 count = objectApplyIfUnblocked(selection->selector);
-    if (objectApplyIfUnblocked(selection->selector) < count)
-        count = objectApplyIfUnblocked(selection->selector);
+    s32 count = gridNavigationGetItemCount(selection->selector);
+    if (gridNavigationGetItemCount(selection->selector) < count)
+        count = gridNavigationGetItemCount(selection->selector);
     u32 visited[25];
     sysMemClear(visited, sizeof(visited));
     for (s32 index = 0; index < count; ++index) {

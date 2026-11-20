@@ -25,7 +25,7 @@ typedef char ProjectedNpcMarkerLayoutCheck[sizeof(ProjectedNpcMarker) == 10 &&
 
 struct RenderCtxA;
 extern "C" {
-void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *, const f32 *world);
+void cameraProjectToScreen(f32 *screen, s32 display, const ProjectionMatrices *, const f32 *world);
 f32 messageGetActiveValue(u32 channel);
 void efctSetSpeed(f32 opacity);
 
@@ -52,7 +52,7 @@ void FUN_0046868c(NpcDummyBindings *owner, u32, s32)
                     world.x += (f32)marker.offsetX;
                     world.y += (f32)marker.offsetY;
                     f32 screen[3];
-                    FUN_002a1850(screen, 0, reinterpret_cast<const ProjectionMatrices *>(asdCameraGetSavedRenderPairs()), &world.x);
+                    cameraProjectToScreen(screen, 0, reinterpret_cast<const ProjectionMatrices *>(asdCameraGetSavedRenderPairs()), &world.x);
                     s32 x = (s32)((screen[0] - (f32)width) + (f32)(width / 2) + (f32)parallax);
                     s32 y = (s32)(screen[1] - (f32)height);
                     texDrawTableEntryAtStoredOrigin(2, 8, 0x18D, x, y, 2);

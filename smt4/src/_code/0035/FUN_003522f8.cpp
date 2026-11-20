@@ -4,7 +4,7 @@
 #include <string.h>
 
 extern "C" {
-extern u32 DAT_00472a58;
+extern u32 g_amAppSession;
 
 /* Sends service command 0x7 (header 0x10070102) carrying `count` and three more words and a descriptor sized from `count`; on success stores the first reply word. */
 s32 FUN_003522f8(u32 *reply, u32 descriptorAddress, u32 count, u64 id, u32 flags)
@@ -16,7 +16,7 @@ s32 FUN_003522f8(u32 *reply, u32 descriptorAddress, u32 count, u64 id, u32 flags
     command->words[3] = flags;
     command->words[4] = ipcMappedBufferDescriptor(count * 24, 0xC);
     command->words[5] = descriptorAddress;
-    s32 result = nn::svc::SendSyncRequest(DAT_00472a58);
+    s32 result = nn::svc::SendSyncRequest(g_amAppSession);
     if (nnResultIsSuccess(result)) {
         *reply = command->words[1];
         result = command->words[0];

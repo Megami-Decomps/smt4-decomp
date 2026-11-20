@@ -19,7 +19,7 @@ struct ContentRecordList {
 
 
 extern "C" {
-ContentRecord* FUN_0014caa4(AocSystem* system, const ContentRecordKey* key, u32 index);
+ContentRecord* aocContentFindIndexedRecord(AocSystem* system, const ContentRecordKey* key, u32 index);
 
 // Resolve the content record from add-on data, falling back to the indexed base table.
 ContentRecord* aocContentGetIndexedRecord(const ContentRecordKey* key, u32 index)
@@ -27,7 +27,7 @@ ContentRecord* aocContentGetIndexedRecord(const ContentRecordKey* key, u32 index
     if (key->section == 0) {
         return NULL;
     }
-    ContentRecord* record = FUN_0014caa4(g_aocSystem, key, index);
+    ContentRecord* record = aocContentFindIndexedRecord(g_aocSystem, key, index);
     if (record == NULL) {
         ContentRecordList* list = (ContentRecordList*)dataTableGetEntries(dataTableGet(25, key->section));
         ContentRecord *entries = list->records;

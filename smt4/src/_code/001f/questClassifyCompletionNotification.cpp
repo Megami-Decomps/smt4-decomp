@@ -4,7 +4,7 @@
 #include "game/GameState.h"
 
 extern "C" {
-s32 FUN_00287800();
+s32 supportUnitProgressIsComplete();
 s32 FUN_00287874(u16 quest);
 s32 table1bOr1cGetRecordValue(u16 quest);
 s32 questPassesAvailabilityConditions(u16 quest);
@@ -44,7 +44,7 @@ extern "C" s32 questClassifyCompletionNotification()
             }
         }
     }
-    if (result == 0 && FUN_00287800())
+    if (result == 0 && supportUnitProgressIsComplete())
         result = 3;
     return result;
 }

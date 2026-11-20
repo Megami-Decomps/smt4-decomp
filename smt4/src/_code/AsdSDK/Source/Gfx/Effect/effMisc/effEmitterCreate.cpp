@@ -1,19 +1,21 @@
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
-extern const char DAT_00410380[]; /* ././effMisc.h: __FILE__ */
+extern const char g_effMiscHeaderNestedSourceFileName[]; /* "...\Effect\././effMisc.h": __FILE__ of the header's allocator */
 
-void *memAlloc(int, int, int, int size, int align, int);
 void rt_memclr(void *block, s32 size);
 
-/* Allocates a zeroed effect object of `size` bytes from the main heap, 16-byte aligned. */
+/* Allocates a zeroed effect object of `size` bytes from the extra heap, 16-byte aligned
+ * (effMisc.h line 450: the header's inline allocator). */
 static __inline void *effAllocCleared(s32 size)
 {
     void *block;
 
-    asdDebugTrace(DAT_00410380, 450);
-    block = memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
+    asdDebugTrace(g_effMiscHeaderNestedSourceFileName, 450);
+    block = memAlloc(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, size, 0x10, 1);
     rt_memclr(block, size);
     return block;
 }
@@ -23,7 +25,7 @@ EffEmitter *effEmitterCreate(u32 maxCount)
 {
     EffEmitter *emitter = (EffEmitter *)effAllocCleared(sizeof(EffEmitter));
 
-    emitter->unk04 = -1;
+    emitter->handle = -1;
     emitter->maxCount = maxCount;
     emitter->scale = 1.0f;
     return emitter;

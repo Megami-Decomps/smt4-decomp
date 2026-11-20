@@ -71,9 +71,9 @@ typedef char UniteEffectWorkLayoutCheck[offsetof(UniteEffectWork, renderTarget.m
 extern "C" {
 extern UniteEffectWork *g_screenStateWork;
 s32 uniteEffectUpdate(u32 process);
-void FUN_00258618(UniteRenderTarget *target);
-void FUN_00258408(const char *pattern);
-void FUN_00258170(UniteRenderTarget *target);
+void titleLogoDraw(UniteRenderTarget *target);
+void uniteEffectCollectMaterialPairs(const char *pattern);
+void uniteEffectApplyScrollToModel(UniteRenderTarget *target);
 }
 
 #endif

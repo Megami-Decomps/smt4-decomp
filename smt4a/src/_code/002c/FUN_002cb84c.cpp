@@ -5,7 +5,7 @@
 extern "C" {
 
 int widgetSubCallIfVisible(...);
-int objectApplyIfUnblocked(...);
+int gridNavigationGetItemCount(...);
 int flaggedEntrySetValueB(...);
 int flaggedEntrySetValueA(...);
 
@@ -19,7 +19,7 @@ extern int g_partyPanel; /* 0x57f268 */
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: widgetSubCallIfVisible. */
-/* Supplied declaration required: objectApplyIfUnblocked. */
+/* Supplied declaration required: gridNavigationGetItemCount. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
 
@@ -58,7 +58,7 @@ LAB_002cbb00:
           } while (temp_v3 < temp_v2);
         }
         temp_v3 = 1;
-        temp_v2 = objectApplyIfUnblocked(temp_v1);
+        temp_v2 = gridNavigationGetItemCount(temp_v1);
         if (temp_v2 >= 2) {
           do {
             temp_v4 = 0;
@@ -86,7 +86,7 @@ LAB_002cbb00:
               } while (temp_v4 < temp_v2);
             }
             temp_v3 = temp_v3 + 1;
-            temp_v2 = objectApplyIfUnblocked(temp_v1);
+            temp_v2 = gridNavigationGetItemCount(temp_v1);
           } while (temp_v3 < temp_v2);
         }
       }
@@ -94,7 +94,7 @@ LAB_002cbb00:
     else {
       temp_v1 = g_partyPanel + 0xcec;
       temp_v3 = 0;
-      temp_v2 = objectApplyIfUnblocked();
+      temp_v2 = gridNavigationGetItemCount();
       if (0 < temp_v2) {
         do {
           temp_v4 = 0;
@@ -123,7 +123,7 @@ LAB_002cbb00:
             } while (temp_v4 < temp_v2);
           }
           temp_v3 = temp_v3 + 1;
-          temp_v2 = objectApplyIfUnblocked(temp_v1);
+          temp_v2 = gridNavigationGetItemCount(temp_v1);
         } while (temp_v3 < temp_v2);
       }
     }

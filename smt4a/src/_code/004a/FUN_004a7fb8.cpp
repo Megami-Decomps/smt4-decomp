@@ -10,7 +10,7 @@ struct HighlightedPanelTextView {
 
 extern "C" {
 extern PanelTextDefaultsPrefixA DAT_0057f0ac;
-u32 FUN_002a4b28(u16 textId);
+u32 compendiumEntryIsRegistered(u16 textId);
 u32 dataTable01GetRecordWithAocOverride(u16 textId);
 void drawTextAtSnappedRectangle(TextLayoutContextA *context, f32 x,
                                 f32 y, u32 style,
@@ -42,7 +42,7 @@ void FUN_004a7fb8(HighlightedPanelTextView *panel, u32 textId, s32 entryIndex,
     const s16 baseX = base->x;
     const s16 baseY = base->y;
     u32 textValue;
-    if (FUN_002a4b28(textId) != 0 || panel->owner.allowTextLookup != 0) {
+    if (compendiumEntryIsRegistered(textId) != 0 || panel->owner.allowTextLookup != 0) {
         textValue = dataTable01GetRecordWithAocOverride(textId);
     } else {
         textValue = DAT_0057f0ac.fallbackTextValue;

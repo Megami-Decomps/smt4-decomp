@@ -18,7 +18,7 @@ void scrWorkSetValue(s32 index, u32 value);
 u32 scrWorkGetValue(s32 index);
 void *fileSlotGetBuffer(u32 id);
 u32 goalConditionsSatisfied(u32 id);
-u32 FUN_002e4464(void);
+u32 btlTalkBustUpIsIdle(void);
 void eventTexSetFlag(s32 flag);
 void bustupCutAnimSetFlag(u8 value);
 bool btlTalkBustUpExists(void);
@@ -32,8 +32,8 @@ void scrResultStopJobAndReleaseUi(void);
 u16 rosterGetLeaderId(void); // declcheck: local (its headers belong to the sound and shard units)
 int FUN_00333a38(u32 id, int checkFlag);
 void FUN_00333af8(u32 area, u16 *out, s32 onlyActive);
-u8 FUN_0034888c(u32 id);
-u32 FUN_00348a1c(u32 index);
+u8 questDeactivate(u32 id);
+u32 gameFlagEntryResetIfActive(u32 index);
 GameOptions *gameGetSupportUnitData(void); // declcheck: local (GameDataAccess.h returns it as an int)
 u8 *gameGetPlayerName(void); // declcheck: local (GameDataAccess.h comes with the int gameGetSupportUnitData)
 u8 *dataFindKindRecordWithAocOverrides(u32 id, int payload);
@@ -94,7 +94,7 @@ u32 scrComm_Quest_UpdateObjective(void)
 
     switch (scrWorkGetValue(0)) {
     case 0:
-        if (FUN_002e4464() == 0) {
+        if (btlTalkBustUpIsIdle() == 0) {
             eventTexSetFlag(0);
             bustupCutAnimSetFlag(0);
             if (btlTalkBustUpExists()) {
@@ -116,7 +116,7 @@ u32 scrComm_Quest_UpdateObjective(void)
         finished = 0;
         break;
     case 1: {
-        if (FUN_002b8660() == 0) {
+        if (resultIsIdle() == 0) {
             finished = 0;
             break;
         }
@@ -269,7 +269,7 @@ u32 scrComm_Quest_UpdateObjective(void)
 
         scrWorkSetValue(1, scrWorkGetValue(1) + 1);
         if (done == 1) {
-            FUN_00348a1c(unlocked[index]);
+            gameFlagEntryResetIfActive(unlocked[index]);
             index++;
             if (index < count) {
                 scrWorkSetValue(1, 0);
@@ -288,7 +288,7 @@ u32 scrComm_Quest_UpdateObjective(void)
     }
     }
     if (finished) {
-        FUN_0034888c(questId);
+        questDeactivate(questId);
         scrSetResult(1);
         return 1;
     }

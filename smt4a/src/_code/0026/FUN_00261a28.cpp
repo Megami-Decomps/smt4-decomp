@@ -24,7 +24,7 @@ int FUN_00363c58(int);
 int FUN_003df7c4(...);
 int playerSyncPair2AOnce(void);
 int FUN_003e45bc(...);
-void FUN_003e48dc(unsigned int);
+void partySlotClearInactiveFlag(unsigned int);
 int FUN_003fd5bc(...);
 
 int aocActivateFileGroupFlags(...);
@@ -99,7 +99,7 @@ extern int gameDataBlocksValueGet(void);
 /* Supplied declaration required: playerSyncPair2AOnce. */
 /* Supplied declaration required: FUN_003e45bc. */
 extern int gameDataFlagTestBit(unsigned int);
-/* Supplied declaration required: FUN_003e48dc. */
+/* Supplied declaration required: partySlotClearInactiveFlag. */
 extern int partyGetSlot(unsigned int);
 /* Supplied declaration required: FUN_003fd5bc. */
 /* Supplied declaration required: aocActivateFileGroupFlags. */
@@ -608,7 +608,7 @@ void FUN_00261a28(const u8 *options)
         do {
           temp_v2 = partyGetSlot(temp_v5 & 0xffff);
           __aeabi_memcpy4(temp_v2,temp_v1 + temp_v5 * 0x134 + 0x1de0,0x134);
-          FUN_003e48dc(*(unsigned short *)(temp_v2 + 300));
+          partySlotClearInactiveFlag(*(unsigned short *)(temp_v2 + 300));
           temp_v5 = temp_v5 + 1;
         } while ((int)temp_v5 < 0xc);
       }

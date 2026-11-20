@@ -39,7 +39,7 @@ s32 rangeLimitMin(ComparisonMenuSelection *);
 s32 flaggedValueHolderGetTotal(ComparisonMenuSelection *);
 u32 flaggedEntryGetValueByState(ComparisonMenuSelection *);
 void FUN_003a9df4(ComparisonMenuScene *, s32, u32, s32);
-void FUN_0022d7b0(ComparisonMenuScene *, u32);
+void scrollMenuDrawLayer(ComparisonMenuScene *, u32);
 
 /* Whether the menu's anchor (position plus offset) has an x coordinate on screen, tested on the float's bits. */
 static bool comparisonMenuOnScreen(const ComparisonMenuScene *scene)
@@ -82,6 +82,6 @@ void scrollMenuDrawVisibleEntries(ComparisonMenuScene *scene)
         s32 selectedRow = flaggedEntryGetValueByState(&scene->selection);
         FUN_003a9df4(scene, selectedRow, 1, value);
     }
-    FUN_0022d7b0(scene, layer);
+    scrollMenuDrawLayer(scene, layer);
 }
 }

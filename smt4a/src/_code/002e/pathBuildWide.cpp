@@ -3,8 +3,8 @@
 #include "sys/FilePaths.h"
 
 extern "C" {
-extern const char *DAT_005b40b4[4];
-extern const char DAT_0053d8d8[];
+extern const char *g_processResultState[4];
+extern const char g_pathFormatString[];
 u32 libc_strlen(const char *text);
 void rt_aeabi_memclr(void *memory, u32 size);
 
@@ -27,10 +27,10 @@ u32 pathBuildWide(const char *input, s16 *output, s32 root)
     rt_aeabi_memclr(output, 496);
     rt_aeabi_memclr(path, sizeof(path));
     switch (root) {
-    case 0: __2sprintf(reinterpret_cast<char *>(path), DAT_0053d8d8, DAT_005b40b4[0], input); break;
-    case 1: __2sprintf(reinterpret_cast<char *>(path), DAT_0053d8d8, DAT_005b40b4[1], input); break;
-    case 2: __2sprintf(reinterpret_cast<char *>(path), DAT_0053d8d8, DAT_005b40b4[2], input); break;
-    case 3: __2sprintf(reinterpret_cast<char *>(path), DAT_0053d8d8, DAT_005b40b4[3], input); break;
+    case 0: __2sprintf(reinterpret_cast<char *>(path), g_pathFormatString, g_processResultState[0], input); break;
+    case 1: __2sprintf(reinterpret_cast<char *>(path), g_pathFormatString, g_processResultState[1], input); break;
+    case 2: __2sprintf(reinterpret_cast<char *>(path), g_pathFormatString, g_processResultState[2], input); break;
+    case 3: __2sprintf(reinterpret_cast<char *>(path), g_pathFormatString, g_processResultState[3], input); break;
     }
     u32 length = libc_strlen(reinterpret_cast<const char *>(path));
     if ((s32)length > 248)

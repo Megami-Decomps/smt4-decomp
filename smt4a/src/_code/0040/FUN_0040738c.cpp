@@ -41,7 +41,7 @@ struct AnimatedPoseOwner {
 
 extern "C" {
 void FUN_001986c4(void *track, PoseMatrix *matrix, f32 frame);
-void FUN_00407598(AnimatedPoseOwner *owner);
+void spatialCameraUpdateLookAt(AnimatedPoseOwner *owner);
 
 // Evaluate the selected pose layer and update its translation and reference vector.
 void FUN_0040738c(AnimatedPoseOwner *owner, f32 frame)
@@ -58,6 +58,6 @@ void FUN_0040738c(AnimatedPoseOwner *owner, f32 frame)
     }
     owner->translation = matrix.translation;
     owner->reference = *reference;
-    FUN_00407598(owner);
+    spatialCameraUpdateLookAt(owner);
 }
 }

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_002e9f00(u8 *member, s32 value);
+void onlineInstanceCompleteWithChildren(u8 *member, s32 value);
 
 typedef struct Notifier {
     /* 0x00 */ u8 unk00[0x80];
@@ -14,7 +14,7 @@ typedef struct Notifier {
 u32 FUN_00113baa(Notifier *object)
 {
     if (object->pending == 1) {
-        FUN_002e9f00(object->member80, 4);
+        onlineInstanceCompleteWithChildren(object->member80, 4);
     }
     return 1;
 }

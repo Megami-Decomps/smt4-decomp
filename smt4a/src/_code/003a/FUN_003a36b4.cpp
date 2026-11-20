@@ -16,7 +16,7 @@ int saveSlotFindById(u16 id);
 int partySlotIsOccupied(int value);
 int dataTable10FindValue(u16 id);
 int rt_aeabi_memclr(u16 *slots, int size);
-int FUN_003e4e4c(u16 id);
+int saveSlotTableSetPreferredId(u16 id);
 
 int FUN_004bd410(u16 id);
 
@@ -36,7 +36,7 @@ u32 FUN_003a36b4(void)
 
             if (usable != 0 && (ownerId == 0 || partySlotIsOccupied(ownerId) == 0)) {
                 if (started == 0) {
-                    FUN_003e4e4c(id);
+                    saveSlotTableSetPreferredId(id);
                 }
                 FUN_004bd410(id);
                 started++;

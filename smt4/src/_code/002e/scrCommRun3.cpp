@@ -3,7 +3,7 @@
 extern "C" {
 
 int sequenceRequestDefer(u32 a, u32 b);
-int FUN_0027d8b4(u32 a);
+int mapSetActiveEntryId(u32 a);
 int mapSaveSceneReturnSnapshot(void);
 extern u32 scrGetArg(u32 index);
 
@@ -14,7 +14,7 @@ u32 scrCommRun3(void)
     u32 c = scrGetArg(2);
 
     sequenceRequestDefer(b, c);
-    FUN_0027d8b4(a);
+    mapSetActiveEntryId(a);
     mapSaveSceneReturnSnapshot();
     return 1;
 }

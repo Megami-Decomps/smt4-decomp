@@ -36,7 +36,7 @@ s32 flaggedValueHolderGetTotal(void *cursor);
 void FUN_003abae8(SkillListRenderView *view, s32 row, s32 item, s32 selected, s32 depth);
 void table8Type5GetValue(s32 id);
 void buttonHelpShowSkillDetails(void);
-void FUN_0022d7b0(SkillListRenderView *view, s32 depth);
+void scrollMenuDrawLayer(SkillListRenderView *view, s32 depth);
 
 // Draw visible rows at the requested depth, lifting the selected row by one layer.
 static void drawSkillListContents(SkillListRenderView *view, s32 depth)
@@ -59,7 +59,7 @@ static void drawSkillListContents(SkillListRenderView *view, s32 depth)
         table8Type5GetValue(rows[item].id);
         buttonHelpShowSkillDetails();
     }
-    FUN_0022d7b0(view, depth);
+    scrollMenuDrawLayer(view, depth);
 }
 
 }

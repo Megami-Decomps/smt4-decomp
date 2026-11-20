@@ -16,7 +16,7 @@ int lmapViewUpdateOrbitSequence(void);
 int FUN_002d1e44(float *);
 int FUN_0030250c(void);
 int FUN_003026d8(void);
-int FUN_003033d4(void);
+int lmapResolveContextValue(void);
 int FUN_0033982c(void);
 int FUN_0033a374(void);
 int FUN_00352568(void);
@@ -841,7 +841,7 @@ void FUN_00395904(void)
     }
     break;
   case 0x15:
-    temp_v9 = FUN_003033d4();
+    temp_v9 = lmapResolveContextValue();
     piVar6 = g_lmapView;
     if (g_lmapView[1] != 0) {
       if ((g_lmapView[1] == 1) &&
@@ -978,7 +978,7 @@ void FUN_00395904(void)
     }
     break;
   case 0x17:
-    temp_v9 = FUN_003033d4();
+    temp_v9 = lmapResolveContextValue();
     piVar6 = g_lmapView;
     if (g_lmapView[1] != 0) {
       if (g_lmapView[1] == 1) {
@@ -1060,7 +1060,7 @@ joined_r0x00397538:
     }
     break;
   case 0x18:
-    temp_v9 = FUN_003033d4();
+    temp_v9 = lmapResolveContextValue();
     piVar6 = g_lmapView;
     if (g_lmapView[1] != 0) {
       if (g_lmapView[1] == 1) {
@@ -1128,7 +1128,7 @@ joined_r0x00397538:
     }
     break;
   case 0x19:
-    FUN_003033d4();
+    lmapResolveContextValue();
     temp_v9 = g_lmapView[1];
     if (temp_v9 != 0) {
       if ((temp_v9 == 1) && (FUN_0033a374(), piVar7 = g_lmapView, temp_v9 != 0)) {
@@ -1186,7 +1186,7 @@ joined_r0x00397538:
     }
     break;
   case 0x1a:
-    FUN_003033d4();
+    lmapResolveContextValue();
     piVar6 = g_lmapView;
     if (g_lmapView[1] != 0) {
       if ((g_lmapView[1] == 1) &&

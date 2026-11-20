@@ -15,8 +15,8 @@ struct NamedEntry {
     /* 0x138 */ char name[0x178 - 0x138];
 };
 
-extern NamedEntryTable DAT_00447a28;
-extern NamedEntry DAT_004a1264[];
+extern NamedEntryTable g_entryTableInfo;
+extern NamedEntry g_namedEntryTable[];
 
 char *libc_strcpy(char *dst, const char *src);
 
@@ -25,10 +25,10 @@ void namedEntryTableSetById(s32 id, u32 value, const char *name)
 {
     s32 i;
 
-    for (i = 0; i < DAT_00447a28.count; i++) {
-        if (DAT_004a1264[i].id == id) {
-            DAT_004a1264[i].value = value;
-            libc_strcpy(DAT_004a1264[i].name, name);
+    for (i = 0; i < g_entryTableInfo.count; i++) {
+        if (g_namedEntryTable[i].id == id) {
+            g_namedEntryTable[i].value = value;
+            libc_strcpy(g_namedEntryTable[i].name, name);
             return;
         }
     }

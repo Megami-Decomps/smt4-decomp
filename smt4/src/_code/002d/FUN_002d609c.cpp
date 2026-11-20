@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_3_stack;
 
-extern romwright_code *DAT_00464d90; /* 0x464d90 */
+extern romwright_code *g_installedCallbackBinding; /* 0x464d90 */
 extern romwright_code *DAT_00464d94; /* 0x464d94 */
 
 /* Supplied declaration required: memCopy. */
@@ -62,11 +62,11 @@ void FUN_002d609c(short *param_1,int param_2,int param_3)
       break;
     default:
       pcVar3 = (romwright_code *)(temp_v4 - 0xf804);
-      if (DAT_00464d90 != (romwright_code *)0x0) {
+      if (g_installedCallbackBinding != (romwright_code *)0x0) {
         pcVar3 = DAT_00464d94;
       }
-      if ((DAT_00464d90 == (romwright_code *)0x0 || pcVar3 == (romwright_code *)0x0) ||
-         (temp_v2 = (*DAT_00464d90)(temp_v4), temp_v2 == 0)) goto joined_r0x002d648c;
+      if ((g_installedCallbackBinding == (romwright_code *)0x0 || pcVar3 == (romwright_code *)0x0) ||
+         (temp_v2 = (*g_installedCallbackBinding)(temp_v4), temp_v2 == 0)) goto joined_r0x002d648c;
       (*DAT_00464d94)(temp_v4,param_1,param_2,&temp_v7,&temp_v6,param_3);
       break;
     case (unsigned int)0xc:

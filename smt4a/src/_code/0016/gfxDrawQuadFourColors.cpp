@@ -2,9 +2,9 @@
 #include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
-extern u32 DAT_005b3ce8;
+extern u32 g_defaultDrawColor;
 void gpuSubmitDefaultPacket();
-void FUN_00186244(u32 first, u32 second, u32 third, u32 fourth,
+void gpuSubmitFloatColoredQuad(u32 first, u32 second, u32 third, u32 fourth,
                   f32 value0, f32 value1, f32 value2, f32 value3,
                   f32 value4, f32 value5, f32 value6, f32 value7, f32 value8);
 void effectSubmitDefaultParameters();
@@ -15,19 +15,19 @@ void gfxDrawQuadFourColors(u32 first, u32 second, u32 third,
                   u32 fourth, f32 lastValue)
 {
     if (first == 0) {
-        first = DAT_005b3ce8;
+        first = g_defaultDrawColor;
     }
     if (second == 0) {
-        second = DAT_005b3ce8;
+        second = g_defaultDrawColor;
     }
     if (third == 0) {
-        third = DAT_005b3ce8;
+        third = g_defaultDrawColor;
     }
     if (fourth == 0) {
-        fourth = DAT_005b3ce8;
+        fourth = g_defaultDrawColor;
     }
     gpuSubmitDefaultPacket();
-    FUN_00186244(first, second, third, fourth, firstValue, secondValue,
+    gpuSubmitFloatColoredQuad(first, second, third, fourth, firstValue, secondValue,
                   thirdValue, fourthValue, 0.0f, 0.0f, 0.0f, 0.0f, lastValue);
     effectSubmitDefaultParameters();
 }

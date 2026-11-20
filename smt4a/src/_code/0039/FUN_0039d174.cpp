@@ -6,10 +6,10 @@
 extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-s32 FUN_003020fc(BtlCombatantEntryA *entry, s32 arg);
+s32 btlCombatantMatchesCategory(BtlCombatantEntryA *entry, s32 arg);
 
 /* Script query: reports whether any marked, required, non-excluded battle entry passes
- * FUN_003020fc with argument 0. */
+ * btlCombatantMatchesCategory with argument 0. */
 u32 FUN_0039d174(void)
 {
     s32 arg = scrGetArg(0);
@@ -20,7 +20,7 @@ u32 FUN_0039d174(void)
         if ((entry->flags & g_btlCandidateMasks.unavailable) &&
             (g_btlCandidateMasks.required & entry->flags) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
-            FUN_003020fc(entry, arg)) {
+            btlCombatantMatchesCategory(entry, arg)) {
             scrSetResult(1);
             return 1;
         }

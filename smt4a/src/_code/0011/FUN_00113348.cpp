@@ -11,7 +11,7 @@ int FUN_002e9c0c(void);
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3c0(...);
 int FUN_002ea3d0(int, unsigned int);
-int FUN_002ea704(void);
+int watcherGetEnabledFlag(void);
 int FUN_002f7c94(unsigned int, unsigned int, unsigned int);
 int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(...);
@@ -41,8 +41,8 @@ extern unsigned int _ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002ea3c0. */
 /* Supplied declaration required: FUN_002ea3d0. */
-/* Supplied declaration required: FUN_002ea704. */
-extern int FUN_002eb5f4(void);
+/* Supplied declaration required: watcherGetEnabledFlag. */
+extern int watcherGetActiveContext(void);
 /* Supplied declaration required: FUN_002f7c94. */
 /* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
@@ -63,8 +63,8 @@ void FUN_00113348(int param_1)
   int temp_v5;
   unsigned int temp_v6 [2];
   
-  temp_v0 = FUN_002eb5f4();
-  if ((temp_v0 != 0) && (temp_v0 = FUN_002ea704(), temp_v0 != 0)) {
+  temp_v0 = watcherGetActiveContext();
+  if ((temp_v0 != 0) && (temp_v0 = watcherGetEnabledFlag(), temp_v0 != 0)) {
     if (*(char *)(param_1 + 0xe8) == '\x01') {
       onlineJobSetStateWaiting(param_1);
       temp_v0 = _Znwj(0x10);
@@ -82,13 +82,13 @@ void FUN_00113348(int param_1)
     if (temp_v0 != 0) {
       if (((*(int *)(param_1 + 0x138) == 0) ||
           ((*(unsigned int *)(*(int *)(param_1 + 0x138) + 0x94) & 0xff) != 1)) ||
-         (temp_v0 = FUN_002ea704(), *(char *)(temp_v0 + 0x10d) != '\0')) {
+         (temp_v0 = watcherGetEnabledFlag(), *(char *)(temp_v0 + 0x10d) != '\0')) {
         temp_v1 = FUN_002ea3c0(&temp_v4,0x11330d,0,&LAB_0011348c);
         FUN_002ea3d0(param_1,temp_v1);
         return;
       }
       temp_v0 = *(int *)(param_1 + 0x138);
-      temp_v1 = FUN_002ea704();
+      temp_v1 = watcherGetEnabledFlag();
       FUN_0010a0cc(temp_v1,temp_v0 + 0x88);
       temp_v0 = param_1 + 0x140;
       FUN_002e9c0c();

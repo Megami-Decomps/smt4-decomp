@@ -7,7 +7,7 @@ struct DeblockerState {
 
 extern "C" {
 extern DeblockerState g_mwmofilterDeblocker;
-extern u32 DAT_0044e94c;
+extern u32 g_mwmofilterDeblockerState;
 
 void videoResetDeblockerState(void)
 {

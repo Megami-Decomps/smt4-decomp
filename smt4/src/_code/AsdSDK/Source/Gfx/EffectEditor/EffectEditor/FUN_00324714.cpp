@@ -2,7 +2,7 @@
 #include "ui/UiSpriteApi.h"
 #include "gfx/EffectEditorStorage.h"
 extern "C" {
-extern EffectSelectionContext DAT_0044f858;
+extern EffectSelectionContext g_effectEditorState;
 extern EffectSelectionCatalogEntry *DAT_0044f4d4[13];
 
 EffectSelectionItem *linkedFindItemByIndex(void *owner, s32 index);
@@ -41,7 +41,7 @@ extern "C" u32 FUN_00324714()
 {
     // Related-item metadata and the name tail extend beyond the shared item prefix.
     struct ItemView { EffectSelectionItem item; u32 related; u32 flags; char name[1]; };
-    s32 position = DAT_0044f858.index + g_effectEditor.index;
+    s32 position = g_effectEditorState.index + g_effectEditor.index;
     EffectSelectionItem *source = linkedFindItemByIndex(g_effectEditor.list, position);
     EffectSelectionItem *copy = FUN_002f3208(g_effectEditor.list, source->block);
     g_effectEditor.item = copy;
@@ -64,13 +64,13 @@ extern "C" u32 FUN_00324714()
     effectEditorApplyHandlerState(instance);
     g_effectEditor.instance = instance;
     g_effectEditor.object = findTemplate(copy->block);
-    g_effectEditor.object->context = &DAT_0044f858;
+    g_effectEditor.object->context = &g_effectEditorState;
     u32 count = effEditorNodeListCount(g_effectEditor.list);
     if (count > 21) {
         g_effectEditor.index = count - 21;
-        DAT_0044f858.index = 20;
+        g_effectEditorState.index = 20;
     } else {
-        DAT_0044f858.index = count - 1;
+        g_effectEditorState.index = count - 1;
         g_effectEditor.index = 0;
     }
     g_effectEditor.unk4c = 0;

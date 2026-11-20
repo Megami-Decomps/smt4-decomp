@@ -65,7 +65,7 @@ typedef struct ListPanel {
     /* 0x005 */ u8 unk005[0x83];
     /* 0x088 */ u32 icons[4];
     /* 0x098 */ PanelRow rows[5];
-    /* 0x124 */ u8 scrollBar[0x64]; /* scroll bar state (objectApplyIfUnblocked and friends) */
+    /* 0x124 */ u8 scrollBar[0x64]; /* scroll bar state (gridNavigationGetItemCount and friends) */
     /* 0x188 */ s32 scroll;         /* first visible entry */
     /* 0x18C */ u8 unk18C[0x13C];
     /* 0x2C8 */ u8 position[0x20];  /* a vec2 (x, y) */

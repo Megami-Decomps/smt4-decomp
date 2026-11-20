@@ -9,7 +9,7 @@ struct ObjectStopTarget {
 
 extern "C" {
 s32 soundRequestQueueFlush(ObjectCommandQueue *queue, s32 value); // declcheck: local (the shared declaration does not compile here or changes this unit)
-void FUN_001912cc(ObjectCommandQueue *queue, s32 token);
+void soundRequestQueueDequeueUntilToken(ObjectCommandQueue *queue, s32 token);
 }
 
 // Enqueues a type-0x33 command for the object, flushes the queue and clears the object's queue state.
@@ -20,7 +20,7 @@ extern "C" void soundObjectPostStop(ObjectStopTarget *target)
     command->kind = 0x33;
     command->owner = (u32)target;
     listAppendNode(queue, command);
-    FUN_001912cc(queue, soundRequestQueueFlush(queue, 1));
+    soundRequestQueueDequeueUntilToken(queue, soundRequestQueueFlush(queue, 1));
     target->pending = 0;
     target->queued = 0;
 }

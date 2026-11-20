@@ -35,7 +35,7 @@ typedef char DevilResourceLayoutCheck[sizeof(DevilResourceHeader) == 0x28 &&
 extern "C" {
 extern const char DAT_0052726c[];
 void *asdLoadFileSyncDefault(const char *path);
-bool FUN_00470b18(AocSystemA *system, s32 id, u32 kind);
+bool aocPackageHasTextureContent(AocSystemA *system, s32 id, u32 kind);
 void *aocLoadWorldDataFile(AocSystemA *system, s32 id, const char *path);
 
 void FUN_003fc1b0(DevilResourceWork *work, s32 id)
@@ -45,7 +45,7 @@ void FUN_003fc1b0(DevilResourceWork *work, s32 id)
     work->kind = 6;
     work->index = id - 1;
     DevilResourceHeader *file;
-    if (FUN_00470b18(g_aocSystem, id, 1)) {
+    if (aocPackageHasTextureContent(g_aocSystem, id, 1)) {
         file = (DevilResourceHeader *)aocLoadWorldDataFile(g_aocSystem, id, path);
     } else {
         file = (DevilResourceHeader *)asdLoadFileSyncDefault(path);

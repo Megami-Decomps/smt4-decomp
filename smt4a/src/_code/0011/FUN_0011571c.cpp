@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002eb624(int);
+extern int deletingDtor_002eb624(int);
 
 
 int FUN_0011571c(int param_1)
@@ -12,7 +12,7 @@ int FUN_0011571c(int param_1)
 {
   int temp_v0;
   
-  temp_v0 = FUN_002eb624(param_1 + 4);
+  temp_v0 = deletingDtor_002eb624(param_1 + 4);
   return temp_v0 - 4;
 }
 

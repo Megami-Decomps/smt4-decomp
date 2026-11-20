@@ -14,9 +14,9 @@ int FUN_002b5904(int);
 int FUN_002bb140(int);
 int FUN_002bb180(void);
 int FUN_002bb194(...);
-int FUN_002bb460(int);
+int appletSetUnlockFlag(int);
 int FUN_002c12bc(...);
-int FUN_002c131c(int, int);
+int errThrowFatal(int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_8: 12 slot(s), 48 byte(s) */
@@ -35,7 +35,7 @@ typedef struct {
     unsigned int sp78; /* 0x78: local_78 */
 } param_8_stack;
 
-extern unsigned int DAT_0044e368; /* 0x44e368 */
+extern unsigned int g_appletCloseReason; /* 0x44e368 */
 extern romwright_code *DAT_0044e3f8; /* 0x44e3f8 */
 extern unsigned int DAT_0044e438; /* 0x44e438 */
 
@@ -51,9 +51,9 @@ extern int FUN_0012a708(void);
 /* Supplied declaration required: FUN_002bb140. */
 /* Supplied declaration required: FUN_002bb180. */
 /* Supplied declaration required: FUN_002bb194. */
-/* Supplied declaration required: FUN_002bb460. */
+/* Supplied declaration required: appletSetUnlockFlag. */
 /* Supplied declaration required: FUN_002c12bc. */
-/* Supplied declaration required: FUN_002c131c. */
+/* Supplied declaration required: errThrowFatal. */
 extern void nn_applet_CTR_detail_LockTransition(unsigned int, unsigned char);
 extern void nn_applet_CTR_detail_NotifyToWait(void);
 extern void nn_applet_CTR_detail_SleepIfShellClosed(void);
@@ -101,7 +101,7 @@ int FUN_002c0d50(unsigned int *param_1,unsigned int param_2,unsigned int param_3
       *param_4 = 0;
     }
     if (param_5 != (unsigned int *)0x0) {
-      *param_5 = DAT_0044e368;
+      *param_5 = g_appletCloseReason;
     }
     return 0;
   }
@@ -159,7 +159,7 @@ LAB_002c0ec0:
     FUN_002bb194(1);
     temp_v2 = FUN_0012a708();
     if (temp_v2 < 0) {
-      FUN_002c131c(temp_v2,0x2c0f58);
+      errThrowFatal(temp_v2,0x2c0f58);
     }
   }
   if (temp_v5 == 0xe) {
@@ -185,7 +185,7 @@ LAB_002c0fa8:
       }
       else {
         temp_v5 = 7;
-        FUN_002bb460(1);
+        appletSetUnlockFlag(1);
         FUN_0011d2c0(1);
       }
       goto LAB_002c0fa8;
@@ -246,7 +246,7 @@ LAB_002c108c:
     }
     temp_v1 = FUN_002c12bc();
     if ((temp_v1 == 0) && (temp_v5 != 7)) {
-      FUN_002bb460(0);
+      appletSetUnlockFlag(0);
       nn_applet_CTR_detail_UnlockTransition(1);
       nn_applet_CTR_detail_SleepIfShellClosed();
     }

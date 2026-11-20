@@ -20,7 +20,7 @@ s32 gameFlagIsSet(u32 flag);
 void messageWindowShowOrPoll(u32 a, s32 b, s32 c, s32 d, s32 e, s32 f);
 void msgBoxFlagsSetBit7(u32 handle);
 void sortMenuAcquire(s32 a, s32 b);
-void FUN_0031f208(u8 key);
+void useCounterAppendValue(u8 key);
 void useCounterStart(void);
 u32 useCounterGetCurrentValue(void);
 s32 useCounterIsFinished(void);
@@ -67,7 +67,7 @@ s32 FUN_002841b8(s32 start, s32 index, u32 context)
         sortMenuAcquire(-1, 3);
         for (s32 i = 0; i < 19; i++) {
             if (gameFlagIsSet(unlockFlags[i]) != 0) {
-                FUN_0031f208(keys.v[i]);
+                useCounterAppendValue(keys.v[i]);
             }
         }
         useCounterStart();

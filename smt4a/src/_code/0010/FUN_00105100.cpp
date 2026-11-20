@@ -48,7 +48,7 @@ extern int wordRefsDiffer_002ea764(int *, unsigned int *);
 /* Supplied declaration required: onlineMutexLockIfNeeded. */
 /* Supplied declaration required: onlineMutexUnlockIfNeeded. */
 /* Supplied declaration required: FUN_002eb46c. */
-extern int FUN_002eb624(unsigned int *);
+extern int deletingDtor_002eb624(unsigned int *);
 /* Supplied declaration required: FUN_002eb638. */
 /* Supplied declaration required: constructObj0055a284. */
 
@@ -92,7 +92,7 @@ void FUN_00105100(unsigned int *param_1)
   onlineMutexUnlockIfNeeded(param_1 + 0x3e);
   FUN_002eb46c(param_1,1);
   _ZN9Obj55b28cD1Ev(temp_v4);
-  temp_v1 = FUN_002eb624(param_1 + 0x3e);
+  temp_v1 = deletingDtor_002eb624(param_1 + 0x3e);
   temp_v1 = vectorDestroyWords(temp_v1 - 0x14);
   temp_v1 = temp_v1 - 0x1c;
   FUN_002eb638(temp_v1);

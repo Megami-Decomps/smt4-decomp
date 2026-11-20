@@ -1,10 +1,10 @@
 #include "common.h"
 
 extern "C" {
-extern u32 DAT_00446da0[];
+extern u32 g_jyoucyuEntryTable[];
 
 u32 jyoucyuGetTableEntry(s32 index)
 {
-    return DAT_00446da0[index];
+    return g_jyoucyuEntryTable[index];
 }
 }

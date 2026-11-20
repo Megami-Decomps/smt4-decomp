@@ -1,4 +1,4 @@
-/* NON_MATCHING: FUN_0045092c takes (allocator, data, flags) as its forwarder passes them; remaining: retail builds the data pointer in r1 (offset + base) and copies it to r4, and keeps the unwrapped type pointer in r1 apart from data (the wrapper target lands in the zero register r7); armcc merges target into r4. */
+/* NON_MATCHING: resourceDispatchResolvePayload takes (allocator, data, flags) as its forwarder passes them; remaining: retail builds the data pointer in r1 (offset + base) and copies it to r4, and keeps the unwrapped type pointer in r1 apart from data (the wrapper target lands in the zero register r7); armcc merges target into r4. */
 #include "shard/S1NwGfx.h"
 
 extern "C" {
@@ -16,16 +16,16 @@ typedef struct BinaryResource {
     /* 0x08 */ RelativePointer data;
 } BinaryResource;
 
-u32 FUN_0045092c(u32 allocator, BinaryResourceData *resource, u32 flags);
+u32 resourceDispatchResolvePayload(u32 allocator, BinaryResourceData *resource, u32 flags);
 void FUN_001caea8(BinaryResource *resource);
 void FUN_001cb08c(BinaryResource *resource);
 void FUN_001cb1e8(BinaryResource *resource);
 
-/* Resolves the resource's data with FUN_0045092c and, when that succeeds, finishes setting up the resource by its data type. */
+/* Resolves the resource's data with resourceDispatchResolvePayload and, when that succeeds, finishes setting up the resource by its data type. */
 u32 FUN_004526cc(BinaryResource *resource, u32 allocator, u32 flags)
 {
     BinaryResourceData *data = static_cast<BinaryResourceData *>(resource->data.get());
-    u32 result = FUN_0045092c(allocator, data, flags);
+    u32 result = resourceDispatchResolvePayload(allocator, data, flags);
 
     if ((s32)(result & 0x80000000) < 0) {
         return result;

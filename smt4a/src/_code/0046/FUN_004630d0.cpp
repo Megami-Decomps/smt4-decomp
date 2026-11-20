@@ -7,10 +7,10 @@ extern "C" {
 int FUN_001a08d0(int);
 int nn_os_LightEvent_TryWait(void);
 int FUN_001b6660(unsigned int, int);
-int FUN_001d0b28(unsigned int, int);
+int linkListEraseMember(unsigned int, int);
 int voiceClearCallback(unsigned int);
 int FUN_001d239c(unsigned int);
-int FUN_0045b96c(void);
+int linkListInsertByKind(void);
 int FUN_00462b74(int);
 int nw_ut_internal_LinkListImpl_insert(int, int, int);
 
@@ -19,10 +19,10 @@ int nw_ut_internal_LinkListImpl_insert(int, int, int);
 extern unsigned int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 /* Supplied declaration required: FUN_001b6660. */
 extern unsigned int FUN_001c35d8(void);
-/* Supplied declaration required: FUN_001d0b28. */
+/* Supplied declaration required: linkListEraseMember. */
 /* Supplied declaration required: voiceClearCallback. */
 /* Supplied declaration required: FUN_001d239c. */
-/* Supplied declaration required: FUN_0045b96c. */
+/* Supplied declaration required: linkListInsertByKind. */
 /* Supplied declaration required: FUN_00462b74. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
 
@@ -39,7 +39,7 @@ void FUN_004630d0(int param_1)
   *(unsigned char *)(param_1 + 0xf) = 1;
   if (*(char *)(param_1 + 0xa2) != '\0') {
     temp_v0 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
-    FUN_001d0b28(temp_v0,param_1 + 0x50);
+    linkListEraseMember(temp_v0,param_1 + 0x50);
     *(unsigned char *)(param_1 + 0xa2) = 0;
   }
   if (*(char *)(param_1 + 0xd) != '\0') {
@@ -75,7 +75,7 @@ void FUN_004630d0(int param_1)
     nn_os_LightEvent_TryWait();
     if (temp_v1 != 0) {
       if (*(int *)(temp_v2 + 0x3c) != 0) {
-        FUN_0045b96c();
+        linkListInsertByKind();
       }
       nw_ut_internal_LinkListImpl_insert(temp_v3 + 0x14,temp_v3 + 0x18,temp_v2 + 0x44);
     }

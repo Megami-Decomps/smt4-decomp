@@ -1,4 +1,4 @@
-/* NON_MATCHING: the two editor blocks are defined here (DAT_0044f578, 0x2e0 bytes, then DAT_0044f858) so armcc derives the first from the second like retail (`sub r1, r5, #736`); remaining: retail reloads the list straight into r0 for the second call (ours caches it in r2) and the pool order differs. The retail blocks are initialised .data holding code/string pointers: a shared editor-data source must replace these zero stand-ins. */
+/* NON_MATCHING: the two editor blocks are defined here (DAT_0044f578, 0x2e0 bytes, then g_effectEditorState) so armcc derives the first from the second like retail (`sub r1, r5, #736`); remaining: retail reloads the list straight into r0 for the second call (ours caches it in r2) and the pool order differs. The retail blocks are initialised .data holding code/string pointers: a shared editor-data source must replace these zero stand-ins. */
 #include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
@@ -13,20 +13,20 @@ struct EditorBlock00323960 {
 extern "C" {
 
 u32 DAT_0044f578[0x2e0 / 4];
-EditorBlock00323960 DAT_0044f858;
+EditorBlock00323960 g_effectEditorState;
 
 void linkedItemsRemoveAndRelease(LinkedItems *items, LinkedItem *item);
 
 /* Selects the current editor item and resets the two editing blocks. */
 void FUN_00323960(void)
 {
-    s32 index = DAT_0044f858.index + g_effectEditor.index;
+    s32 index = g_effectEditorState.index + g_effectEditor.index;
     linkedItemsRemoveAndRelease(static_cast<LinkedItems *>(g_effectEditor.list),
                  linkedFindItemByIndex(static_cast<LinkedItems *>(g_effectEditor.list), index));
     DAT_0044f578[3] = 0;
     g_effectEditor.index = 0;
-    DAT_0044f858.index = 0;
-    g_effectEditor.object = (EffectSelectionTemplate *)&DAT_0044f858;
+    g_effectEditorState.index = 0;
+    g_effectEditor.object = (EffectSelectionTemplate *)&g_effectEditorState;
 }
 
 } /* extern "C" */

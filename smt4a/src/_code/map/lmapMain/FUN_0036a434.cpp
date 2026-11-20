@@ -7,8 +7,8 @@
 extern "C" {
 
 int uiSetFloatPair(unsigned char *);
-int FUN_0014f0dc(unsigned char *, int, int, int);
-int FUN_001523b8(unsigned char *, int);
+int cameraMatrixCacheSetLookAt(unsigned char *, int, int, int);
+int stereoCameraSetPerspective(unsigned char *, int);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void);
 int residentApplyFallbackValues(void);
@@ -41,8 +41,8 @@ static float romwright_sqrt_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: uiSetFloatPair. */
-/* Supplied declaration required: FUN_0014f0dc. */
-/* Supplied declaration required: FUN_001523b8. */
+/* Supplied declaration required: cameraMatrixCacheSetLookAt. */
+/* Supplied declaration required: stereoCameraSetPerspective. */
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: residentApplyFallbackValues. */
@@ -238,8 +238,8 @@ void FUN_0036a434(int param_1)
   }
   FUN_0036b824(reinterpret_cast<u32>(&g_localCamera));
   uiSetFloatPair(&g_localCamera);
-  FUN_001523b8(&g_localCamera,1);
-  FUN_0014f0dc(&g_localCamera,param_1 + 0x78,param_1 + 0x84,param_1 + 0x54);
+  stereoCameraSetPerspective(&g_localCamera,1);
+  cameraMatrixCacheSetLookAt(&g_localCamera,param_1 + 0x78,param_1 + 0x84,param_1 + 0x54);
   *(unsigned char **)(*(int *)(param_1 + 0x936c) + 0xc) = &g_localCamera;
   temp_v1 = g_lmapView;
   temp_v3 = *(unsigned int *)(param_1 + 0x88);

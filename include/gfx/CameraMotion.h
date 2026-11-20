@@ -15,7 +15,7 @@ typedef char CameraMotionOutputLayoutCheck[
     sizeof(CameraMotionOutput) == 0x44 ? 1 : -1];
 
 extern "C" {
-bool FUN_003f9ac4(AnimatedObject *object, CameraMotionOutput *output, s32 index, f32 delta);
+bool cameraMotionSampleAtFrame(AnimatedObject *object, CameraMotionOutput *output, s32 index, f32 delta);
 void controllerRefreshAtUnitScale(AnimatedObject *object, CameraMotionOutput *output, s32 index);
 }
 

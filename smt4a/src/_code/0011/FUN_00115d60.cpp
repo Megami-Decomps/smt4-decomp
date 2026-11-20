@@ -30,7 +30,7 @@ extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: _ZN15OnlineTimestampC1Ev. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-extern int FUN_002ea704(void);
+extern int watcherGetEnabledFlag(void);
 /* Supplied declaration required: onlineUrlGetAddress. */
 /* Supplied declaration required: onlineUrlDestroy. */
 /* Supplied declaration required: FUN_002eb858. */
@@ -62,7 +62,7 @@ void FUN_00115d60(int param_1)
   unsigned char temp_v12 [32];
   unsigned char temp_v13 [36];
   
-  temp_v0 = FUN_002ea704();
+  temp_v0 = watcherGetEnabledFlag();
   temp_v5 = temp_v0 == 0;
   do {
     do {
@@ -71,14 +71,14 @@ void FUN_00115d60(int param_1)
         FUN_002ea3d0(param_1,temp_v3);
         return;
       }
-      temp_v0 = FUN_002ea704();
+      temp_v0 = watcherGetEnabledFlag();
       temp_v5 = 1;
     } while (*(char *)(temp_v0 + 0x10c) == '\0');
     temp_v0 = onlineInstanceTableGetCurrent();
     onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x114));
     temp_v5 = 1;
   } while (temp_v0 == 0);
-  temp_v0 = FUN_002ea704();
+  temp_v0 = watcherGetEnabledFlag();
   piVar2 = (int *)(temp_v0 + 0x114);
   temp_v0 = 0;
   temp_v4 = param_1 + 0xcc;

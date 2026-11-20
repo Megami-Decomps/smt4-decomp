@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00120fc0(int);
 
 /* Supplied declaration required: FUN_00120fc0. */
-extern unsigned char FUN_00306d0e(int, unsigned char, unsigned int);
+extern unsigned char onlineHandleWatcherCheck(int, unsigned char, unsigned int);
 
 
 void FUN_00310284(int param_1)
@@ -20,7 +20,7 @@ void FUN_00310284(int param_1)
   if (*(char *)(param_1 + 9) != '\0') {
     temp_v1 = *(int *)(*(int *)(param_1 + 4) + 8);
     if (temp_v1 != 0) {
-      temp_v0 = FUN_00306d0e(temp_v1,*(unsigned char *)(*(int *)(param_1 + 4) + 4),0xf);
+      temp_v0 = onlineHandleWatcherCheck(temp_v1,*(unsigned char *)(*(int *)(param_1 + 4) + 4),0xf);
       *(unsigned char *)(param_1 + 9) = temp_v0 ^ 1;
     }
     FUN_00120fc0(param_1);

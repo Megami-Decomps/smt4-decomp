@@ -10,7 +10,7 @@ int FUN_002e9c0c(void);
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3c0(...);
 int FUN_002ea3d0(...);
-int FUN_002ea704(...);
+int watcherGetEnabledFlag(...);
 int FUN_002f7c94(unsigned int, unsigned int, unsigned int);
 int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(int, int, unsigned int);
@@ -40,8 +40,8 @@ extern int FUN_002e789a(int);
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002ea3c0. */
 /* Supplied declaration required: FUN_002ea3d0. */
-/* Supplied declaration required: FUN_002ea704. */
-extern int FUN_002eb5f4(void);
+/* Supplied declaration required: watcherGetEnabledFlag. */
+extern int watcherGetActiveContext(void);
 /* Supplied declaration required: FUN_002f7c94. */
 /* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
@@ -60,8 +60,8 @@ void FUN_0010dec8(int param_1)
   unsigned int temp_v2;
   unsigned int temp_v3 [5];
   
-  temp_v0 = FUN_002eb5f4();
-  if ((temp_v0 != 0) && (temp_v0 = FUN_002ea704(), temp_v0 != 0)) {
+  temp_v0 = watcherGetActiveContext();
+  if ((temp_v0 != 0) && (temp_v0 = watcherGetEnabledFlag(), temp_v0 != 0)) {
     temp_v0 = onlineInstanceTableGetCurrent();
     onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x114));
     if (temp_v0 != 0) {
@@ -71,8 +71,8 @@ void FUN_0010dec8(int param_1)
         __aeabi_memcpy4(temp_v0 * 0x14 + param_1 + 0x118,temp_v1,0x14);
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < 3);
-      temp_v0 = FUN_002ea704(temp_v3);
-      if ((temp_v0 != 0) && (temp_v0 = FUN_002ea704(), *(char *)(temp_v0 + 0x10c) != '\0')) {
+      temp_v0 = watcherGetEnabledFlag(temp_v3);
+      if ((temp_v0 != 0) && (temp_v0 = watcherGetEnabledFlag(), *(char *)(temp_v0 + 0x10c) != '\0')) {
         temp_v1 = 1;
         puVar3 = (unsigned char *)0x34;
         temp_v1 = FUN_002ea3c0(temp_v3,puVar3,temp_v1,&LAB_0010dfd0);

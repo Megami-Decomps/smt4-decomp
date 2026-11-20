@@ -23,7 +23,7 @@ u32 FUN_0047f4cc(u32 sound, float volume, float gain, float pitch)
             __2sprintf(name, DAT_0052a980, name,
                              variant == 1 ? DAT_0052a978 : DAT_0052a97c);
         }
-        u32 baseVolume = FUN_0014af98();
+        u32 baseVolume = messageVoiceBankGet();
         return FUN_001628c0(name, (u32)(baseVolume * volume) & 0xff, 2, 0, gain, pitch);
     }
     return 0;

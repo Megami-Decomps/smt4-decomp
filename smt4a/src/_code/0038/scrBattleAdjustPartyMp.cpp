@@ -17,7 +17,7 @@ extern ResourceFlagMasks g_btlMessageFlagMasks;
 extern u32 g_btlScriptUnit;
 s32 scrGetArg(u32);
 void btlQueueActionMessage(s32, void *, u32, s32, s32, s32, s32);
-void FUN_004fc094(s32, void *, s32, ResourceUnit *, s32, s32, s32, s32, s32, s32,
+void btlAdjustPropertyAndQueueAction(s32, void *, s32, ResourceUnit *, s32, s32, s32, s32, s32, s32,
                   s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
 
 // Queue an MP adjustment for each eligible party member.
@@ -38,7 +38,7 @@ u32 scrBattleAdjustPartyMp()
             case 2: amountToApply = amount; break;
             }
             btlSlotManagerResetStates(battle);
-            FUN_004fc094(0, source, 0, &((ResourceUnit *)battle->unk1ED4)[target->ids[0]], 0, -1, amountToApply,
+            btlAdjustPropertyAndQueueAction(0, source, 0, &((ResourceUnit *)battle->unk1ED4)[target->ids[0]], 0, -1, amountToApply,
                           -1, target->data.hp, target->data.maxHp, 0, 0, 0, 0, 1, 0,
                           slot << 3, slot << 3, slot << 3, slot << 3, 1, 0, 1, 1, 0, 1);
             btlQueueActionMessage(0, source, 0x1000257, 0, 0, 0, 0);

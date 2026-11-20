@@ -5,7 +5,7 @@
 
 extern "C" {
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
-s32 FUN_0019a364(u32 *previousCount, u32 semaphore, u32 releaseCount);
+s32 svcReleaseSemaphore(u32 *previousCount, u32 semaphore, u32 releaseCount);
 void nnnstdMemCpy(void *destination, const void *source, u32 bytes);
 
 // Copy a request into the next ring slot and advance the write index.
@@ -32,7 +32,7 @@ static __inline void semaphoreAcquire(u32 *semaphore)
 static __inline void semaphoreRelease(u32 *semaphore)
 {
     u32 previousCount;
-    s32 result = FUN_0019a364(&previousCount, *semaphore, 1);
+    s32 result = svcReleaseSemaphore(&previousCount, *semaphore, 1);
     bool failed = nnResultIsFailure(result);
     if (failed)
         resultHandleFailure(result, failed);

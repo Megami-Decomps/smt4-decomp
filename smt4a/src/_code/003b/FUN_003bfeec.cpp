@@ -17,11 +17,11 @@ struct Record {
 };
 
 extern "C" {
-extern Record DAT_0059ef10[];
+extern Record g_effectEditorOwnerOptions[];
 }
 
 extern "C" void FUN_003bfeec(Object *object)
 {
     Inner *inner = object->inner;
-    FUN_0031ab38(reinterpret_cast<u32 *>(inner->member), inner->value, reinterpret_cast<EffectEditorOptions *>(&DAT_0059ef10[1]), reinterpret_cast<EffectEditorOptions *>(DAT_0059ef10));
+    effectEditorApplyOwnerOptionsPair(reinterpret_cast<u32 *>(inner->member), inner->value, reinterpret_cast<EffectEditorOptions *>(&g_effectEditorOwnerOptions[1]), reinterpret_cast<EffectEditorOptions *>(g_effectEditorOwnerOptions));
 }

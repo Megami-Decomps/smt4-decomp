@@ -8,14 +8,14 @@ inline void MikadoTalkWork::operator delete(void *block)
 }
 
 extern "C" {
-void FUN_003b8b0c(MikadoCamera *camera);
+void campScriptCleanupRelease(MikadoCamera *camera);
 void FUN_003b980c(MikadoCamera *camera);
 void placeWinRelease(void);
 
 // Tear down the mikado camera's scene: release its resources, delete the talk window and close the place window.
 void mikadoCameraTeardown(MikadoCamera *camera)
 {
-    FUN_003b8b0c(camera);
+    campScriptCleanupRelease(camera);
     FUN_003b980c(camera);
     asdDebugHookPtr(camera->talkWork);
     delete camera->talkWork;

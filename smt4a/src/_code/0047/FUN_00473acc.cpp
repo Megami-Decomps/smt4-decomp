@@ -4,7 +4,7 @@
 
 extern "C" {
 
-void FUN_00161a10(void);
+void asdGxWaitForPreviousFrame(void);
 WindowStatusResult FUN_00428a58(const u32 *a, const u32 *b, const void *c, const void *d, const void *e, s32 flag);
 WindowStatusResult FUN_001b576c(const void *entries, u32 count);
 s32 legacyResourceIdRemap(WindowStatusResult *id);
@@ -15,7 +15,7 @@ void jyoucyuGetTableEntry(s32 index);
 // partially resolved id is still returned.
 WindowStatusResult FUN_00473acc(ResourceLookup *lookup)
 {
-    FUN_00161a10();
+    asdGxWaitForPreviousFrame();
     WindowStatusResult result;
     result = FUN_00428a58(&lookup->unk7c, &lookup->count, lookup->second, lookup->first, lookup->third, 1);
     if (!nnResultIsFailure(legacyResourceIdRemap(&result))) {

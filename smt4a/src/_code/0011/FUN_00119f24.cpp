@@ -2,7 +2,7 @@
 
 extern "C" {
 
-s32 FUN_00306d0e(u32 handle, u8 kind, u8 flag);
+s32 onlineHandleWatcherCheck(u32 handle, u8 kind, u8 flag);
 
 typedef struct Request {
     /* 0x00 */ u8 unk00[4];
@@ -19,7 +19,7 @@ u8 FUN_00119f24(Request *request)
     u8 kind = request->kind;
     u8 flag = request->flag;
 
-    result = FUN_00306d0e(request->handle, kind, flag);
+    result = onlineHandleWatcherCheck(request->handle, kind, flag);
     if (result != 0) {
         request->flag = 0;
     }

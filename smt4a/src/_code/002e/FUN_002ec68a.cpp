@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002ea668(unsigned char [88]);
-int FUN_002ea6bc(...);
-int FUN_002ea6cc(...);
+int lazyStaticInitOnce(...);
+int lazyMemberInitOnce(...);
 
 /* stack frame of param_5: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,8 +14,8 @@ typedef struct {
 } param_5_stack;
 
 /* Supplied declaration required: FUN_002ea668. */
-/* Supplied declaration required: FUN_002ea6bc. */
-/* Supplied declaration required: FUN_002ea6cc. */
+/* Supplied declaration required: lazyStaticInitOnce. */
+/* Supplied declaration required: lazyMemberInitOnce. */
 
 
 void FUN_002ec68a(int param_1,int param_2,int param_3,int param_4,unsigned int param_5)
@@ -35,16 +35,16 @@ void FUN_002ec68a(int param_1,int param_2,int param_3,int param_4,unsigned int p
   temp_v3 = param_3;
   iStack_18 = param_4;
   FUN_002ea668(temp_v1);
-  FUN_002ea6bc(temp_v1,param_1 + 0x2c,0x40);
+  lazyStaticInitOnce(temp_v1,param_1 + 0x2c,0x40);
   for (temp_v0 = 0; temp_v0 < param_4; temp_v0 = temp_v0 + 1) {
     if ((*(int *)(param_2 + temp_v0 * 4) != 0) && (*(int *)(temp_v3 + temp_v0 * 4) != 0)) {
-      FUN_002ea6bc(temp_v1);
+      lazyStaticInitOnce(temp_v1);
     }
   }
-  FUN_002ea6cc(temp_v1);
-  FUN_002ea6bc(param_5,param_1 + 0x6d,0x40);
-  FUN_002ea6bc(param_5,temp_v2,0x10);
-  FUN_002ea6cc(param_5);
+  lazyMemberInitOnce(temp_v1);
+  lazyStaticInitOnce(param_5,param_1 + 0x6d,0x40);
+  lazyStaticInitOnce(param_5,temp_v2,0x10);
+  lazyMemberInitOnce(param_5);
   return;
 }
 

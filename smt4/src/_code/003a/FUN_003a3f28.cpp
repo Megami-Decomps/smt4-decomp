@@ -8,7 +8,7 @@ void useCounterRelease(void);
 s32 useCounterGetCurrentValue(void);
 s32 useCounterGetValue(void);
 s32 flaggedValueHolderGetTotal(ShopCategoryList *list);
-void FUN_0027f3dc(ShopSlot *slots, u32 count, u32 size, s32 (*compare)(const void *, const void *));
+void arraySortQsort(ShopSlot *slots, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 FUN_0039fcd8(const void *, const void *);
 s32 halfDifference(const void *, const void *);
 s32 equipmentComparePowerThenOrder(const void *, const void *);
@@ -29,7 +29,7 @@ void FUN_003a3f28(ShopScreen *screen)
 {
     if (useCounterIsFinished()) {
         useCounterRelease();
-        FUN_002a0cc8(0);
+        gameGlobalsSetSubScreenActive(0);
         buttonHelpSelectMenuPreset(screen);
         if (screen->help.variant == 1) {
             screen->substep = 0;
@@ -50,45 +50,45 @@ void FUN_003a3f28(ShopScreen *screen)
     switch (useCounterGetCurrentValue()) {
     case 3:
         if (useCounterGetValue() == 0)
-            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_003a0164);
+            arraySortQsort(table->items, table->count, sizeof(ShopSlot), FUN_003a0164);
         else
-            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), equipmentComparePowerThenOrder);
+            arraySortQsort(table->items, table->count, sizeof(ShopSlot), equipmentComparePowerThenOrder);
         break;
     case 7:
         if (screen->slot == 8) {
             if (useCounterGetValue() == 0)
-                FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_003a075c);
+                arraySortQsort(table->items, table->count, sizeof(ShopSlot), FUN_003a075c);
             else
-                FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_003a06b8);
+                arraySortQsort(table->items, table->count, sizeof(ShopSlot), FUN_003a06b8);
         } else if (useCounterGetValue() == 0) {
-            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_003a06fc);
+            arraySortQsort(table->items, table->count, sizeof(ShopSlot), FUN_003a06fc);
         } else {
-            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_003a0674);
+            arraySortQsort(table->items, table->count, sizeof(ShopSlot), FUN_003a0674);
         }
         break;
     case 12:
         if (useCounterGetValue() == 0)
-            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), halfDifference);
+            arraySortQsort(table->items, table->count, sizeof(ShopSlot), halfDifference);
         else
-            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), recordCompareValues);
+            arraySortQsort(table->items, table->count, sizeof(ShopSlot), recordCompareValues);
         break;
     case 15:
         if (useCounterGetValue() == 0)
-            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_003a05e8);
+            arraySortQsort(table->items, table->count, sizeof(ShopSlot), FUN_003a05e8);
         else
-            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_003a0078);
+            arraySortQsort(table->items, table->count, sizeof(ShopSlot), FUN_003a0078);
         break;
     case 16:
         if (useCounterGetValue() == 0)
-            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_003a0118);
+            arraySortQsort(table->items, table->count, sizeof(ShopSlot), FUN_003a0118);
         else
-            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_0039fcd8);
+            arraySortQsort(table->items, table->count, sizeof(ShopSlot), FUN_0039fcd8);
         break;
     case 28:
         if (useCounterGetValue() == 0)
-            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_003a0028);
+            arraySortQsort(table->items, table->count, sizeof(ShopSlot), FUN_003a0028);
         else
-            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), rankedEntryCompare);
+            arraySortQsort(table->items, table->count, sizeof(ShopSlot), rankedEntryCompare);
         break;
     }
 }

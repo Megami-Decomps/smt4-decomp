@@ -5,7 +5,7 @@ extern "C" {
 
 s32 gameJumpRequestIsPending(void);
 void gameJumpRequestClear(void);
-void FUN_0022af9c(s32 enabled);
+void infoWinSetShown(s32 enabled);
 void buttonHelpSelectByProgress(AocStep *step);
 
 /* Boot step: once no AOC operation is busy, start loading the quest script; when it is loaded, go
@@ -20,20 +20,20 @@ void aocBootStepLoadQuestScript(AocStep *step)
         if (g_aocMain->flags & 8) {
             return;
         }
-        FUN_0022af9c(0);
+        infoWinSetShown(0);
         g_aocMain->flags &= ~0x70;
-        FUN_00289608(&g_aocMain->scriptHolder, 1);
+        aocScriptHolderReset(&g_aocMain->scriptHolder, 1);
         step->substate = 1;
         break;
     case 1:
         if (questSysUpdateLoad(&g_aocMain->scriptHolder)) {
-            FUN_002895a8(&g_aocMain->scriptHolder);
+            aocScriptHolderRelease(&g_aocMain->scriptHolder);
             if (gameJumpRequestIsPending()) {
                 step->state = 13;
                 step->substate = 0;
             } else {
                 gameJumpRequestClear();
-                FUN_0022af9c(1);
+                infoWinSetShown(1);
                 buttonHelpSelectByProgress(step);
                 step->state = 5;
                 step->substate = 0;

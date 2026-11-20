@@ -4,9 +4,9 @@
 #include "gamedata/GamePlayerData.h"
 
 extern "C" {
-u32 FUN_0040b11c(void *owner, u32 part, u32 group, u32 model, u32 flags);
-void FUN_003e573c(void *owner, u32 part, const char *path, u32 flags);
-u32 FUN_004085a8(u32 group, u32 model); /* answers 1 */
+u32 connectionTableFindVariant(void *owner, u32 part, u32 group, u32 model, u32 flags);
+void namedResourceSlotAssign(void *owner, u32 part, const char *path, u32 flags);
+u32 virtualSlotAlwaysTrue(u32 group, u32 model); /* answers 1 */
 
 /* Replaces one outfit part (0 head, 1 body, 2 legs) of the model with the equipment's; changing the head
  * also refreshes the body, changing the body the head and legs. A model the check rejects falls back to
@@ -20,11 +20,11 @@ void FUN_0040b27c(void *owner, u32 part, u16 equipment, u32 flags)
         if (record->slot != 4) {
             return;
         }
-        u32 variant = FUN_0040b11c(owner, 0, record->modelGroup, record->model, 0);
-        if (FUN_004085a8(record->modelGroup, record->model)) {
+        u32 variant = connectionTableFindVariant(owner, 0, record->modelGroup, record->model, 0);
+        if (virtualSlotAlwaysTrue(record->modelGroup, record->model)) {
             sprintf(path, "player/pl%02d_%03dhd%d.bam", record->modelGroup, record->model, variant);
         } else {
-            variant = FUN_0040b11c(owner, 0, 8, 0, 0);
+            variant = connectionTableFindVariant(owner, 0, 8, 0, 0);
             sprintf(path, "player/pl%02d_%03dhd%d.bam", 8, 0, variant);
         }
         break;
@@ -33,8 +33,8 @@ void FUN_0040b27c(void *owner, u32 part, u16 equipment, u32 flags)
         if (record->slot != 5) {
             return;
         }
-        u32 variant = FUN_0040b11c(owner, 1, record->modelGroup, record->model, 0);
-        if (FUN_004085a8(record->modelGroup, record->model)) {
+        u32 variant = connectionTableFindVariant(owner, 1, record->modelGroup, record->model, 0);
+        if (virtualSlotAlwaysTrue(record->modelGroup, record->model)) {
             sprintf(path, "player/pl%02d_%03dbd%d.bam", record->modelGroup, record->model, variant);
         } else {
             sprintf(path, "player/pl%02d_%03dbd0.bam", 8, 0);
@@ -45,48 +45,48 @@ void FUN_0040b27c(void *owner, u32 part, u16 equipment, u32 flags)
         if (record->slot != 6) {
             return;
         }
-        u32 variant = FUN_0040b11c(owner, 2, record->modelGroup, record->model, 0);
-        if (FUN_004085a8(record->modelGroup, record->model)) {
+        u32 variant = connectionTableFindVariant(owner, 2, record->modelGroup, record->model, 0);
+        if (virtualSlotAlwaysTrue(record->modelGroup, record->model)) {
             sprintf(path, "player/pl%02d_%03dlg%d.bam", record->modelGroup, record->model, variant);
         } else {
-            variant = FUN_0040b11c(owner, 2, 8, 0, 0);
+            variant = connectionTableFindVariant(owner, 2, 8, 0, 0);
             sprintf(path, "player/pl%02d_%03dlg%d.bam", 8, 0, variant);
         }
         break;
     }
     }
-    FUN_003e573c(owner, part, path, flags);
+    namedResourceSlotAssign(owner, part, path, flags);
     if (part == 0) {
         PlayerDataA *player = gameGetPlayerData();
         record = itemTableGetEquipmentRecord(player->equipped.body);
-        u32 variant = FUN_0040b11c(owner, 1, record->modelGroup, record->model, equipment);
-        if (FUN_004085a8(record->modelGroup, record->model)) {
+        u32 variant = connectionTableFindVariant(owner, 1, record->modelGroup, record->model, equipment);
+        if (virtualSlotAlwaysTrue(record->modelGroup, record->model)) {
             sprintf(path, "player/pl%02d_%03dbd%d.bam", record->modelGroup, record->model, variant);
         } else {
-            variant = FUN_0040b11c(owner, 1, 8, 0, equipment);
+            variant = connectionTableFindVariant(owner, 1, 8, 0, equipment);
             sprintf(path, "player/pl%02d_%03dbd%d.bam", 8, 0, variant);
         }
-        FUN_003e573c(owner, 1, path, flags);
+        namedResourceSlotAssign(owner, 1, path, flags);
     } else if (part == 1) {
         PlayerDataA *player = gameGetPlayerData();
         record = itemTableGetEquipmentRecord(player->equipped.head);
-        u32 variant = FUN_0040b11c(owner, 0, record->modelGroup, record->model, equipment);
-        if (FUN_004085a8(record->modelGroup, record->model)) {
+        u32 variant = connectionTableFindVariant(owner, 0, record->modelGroup, record->model, equipment);
+        if (virtualSlotAlwaysTrue(record->modelGroup, record->model)) {
             sprintf(path, "player/pl%02d_%03dhd%d.bam", record->modelGroup, record->model, variant);
         } else {
-            variant = FUN_0040b11c(owner, 0, 8, 0, equipment);
+            variant = connectionTableFindVariant(owner, 0, 8, 0, equipment);
             sprintf(path, "player/pl%02d_%03dhd%d.bam", 8, 0, variant);
         }
-        FUN_003e573c(owner, 0, path, flags);
+        namedResourceSlotAssign(owner, 0, path, flags);
         record = itemTableGetEquipmentRecord(player->equipped.legs);
-        variant = FUN_0040b11c(owner, 2, record->modelGroup, record->model, equipment);
-        if (FUN_004085a8(record->modelGroup, record->model)) {
+        variant = connectionTableFindVariant(owner, 2, record->modelGroup, record->model, equipment);
+        if (virtualSlotAlwaysTrue(record->modelGroup, record->model)) {
             sprintf(path, "player/pl%02d_%03dlg%d.bam", record->modelGroup, record->model, variant);
         } else {
-            variant = FUN_0040b11c(owner, 2, 8, 0, equipment);
+            variant = connectionTableFindVariant(owner, 2, 8, 0, equipment);
             sprintf(path, "player/pl%02d_%03dlg%d.bam", 8, 0, variant);
         }
-        FUN_003e573c(owner, 2, path, flags);
+        namedResourceSlotAssign(owner, 2, path, flags);
     }
 }
 

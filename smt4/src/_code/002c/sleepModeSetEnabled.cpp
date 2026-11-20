@@ -1,24 +1,25 @@
 #include "common.h"
+#include "nn/applet/SleepModule.h"
 
 extern "C" {
 
-extern int FUN_002c5434(int arg);
-extern int sleepQueryAnswer(int arg);
+void sleepQueryAnswer(s32 reply);
 
-extern s8 g_appletEventState; /* 0x465198 */
+extern s8 g_appletEventState; /* sleep mode enabled */
 
-/* Sets the flag and runs the matching routine (FUN_002c5434 when set, sleepQueryAnswer otherwise); returns the old flag. */
+/* Enables or disables sleep mode and returns the previous setting: enabling allows sleep (and
+ * sleeps at once when the shell is closed), disabling answers the pending sleep query. */
 s32 sleepModeSetEnabled(s32 enable)
 {
     s32 previous = g_appletEventState;
 
     g_appletEventState = enable;
     if (enable != 0) {
-        FUN_002c5434(1);
+        sleepAllow(1);
     } else {
         sleepQueryAnswer(1);
     }
     return previous;
 }
 
-}
+} /* extern "C" */

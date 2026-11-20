@@ -55,7 +55,7 @@ struct fn_003bf5a8_arg1 {
     byte field_0x4f; /* +0x4f */
 };
 
-extern unsigned short FUN_00245cc0(unsigned int);
+extern unsigned short mapCategoryToDestinationGroup(unsigned int);
 /* Supplied declaration required: btlAdjustPropertyClamped. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
@@ -95,13 +95,13 @@ int FUN_003bf5a8(fn_003bf5a8_arg0 *param_1,fn_003bf5a8_arg1 *param_2,unsigned in
             btlAdjustPropertyClamped(param_1,8,(int)param_2->field_0x32,param_3);
           }
           else {
-            temp_v0 = FUN_00245cc0(7);
+            temp_v0 = mapCategoryToDestinationGroup(7);
             temp_v3 = reinterpret_cast<int>(btlGetMainState());
             btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v3), reinterpret_cast<s32>(param_1));
             if (temp_v3 != 0) {
               *(unsigned short *)(temp_v3 + 0x80) = temp_v0;
             }
-            temp_v0 = FUN_00245cc0(8);
+            temp_v0 = mapCategoryToDestinationGroup(8);
             temp_v3 = reinterpret_cast<int>(btlGetMainState());
             btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v3), reinterpret_cast<s32>(param_1));
             if (temp_v3 != 0) {
@@ -209,13 +209,13 @@ int FUN_003bf5a8(fn_003bf5a8_arg0 *param_1,fn_003bf5a8_arg1 *param_2,unsigned in
             btlAdjustPropertyClamped(param_1,9,(int)param_2->field_0x34,param_3);
           }
           else {
-            temp_v0 = FUN_00245cc0(0xb);
+            temp_v0 = mapCategoryToDestinationGroup(0xb);
             temp_v3 = reinterpret_cast<int>(btlGetMainState());
             btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v3), reinterpret_cast<s32>(param_1));
             if (temp_v3 != 0) {
               *(unsigned short *)(temp_v3 + 0x88) = temp_v0;
             }
-            temp_v0 = FUN_00245cc0(9);
+            temp_v0 = mapCategoryToDestinationGroup(9);
             temp_v3 = reinterpret_cast<int>(btlGetMainState());
             btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v3), reinterpret_cast<s32>(param_1));
             if (temp_v3 != 0) {
@@ -322,7 +322,7 @@ int FUN_003bf5a8(fn_003bf5a8_arg0 *param_1,fn_003bf5a8_arg1 *param_2,unsigned in
             temp_v5 = temp_v5 + temp_v3;
           }
           else {
-            temp_v0 = FUN_00245cc0(10);
+            temp_v0 = mapCategoryToDestinationGroup(10);
             temp_v3 = reinterpret_cast<int>(btlGetMainState());
             btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v3), reinterpret_cast<s32>(param_1));
             if (temp_v3 != 0) {

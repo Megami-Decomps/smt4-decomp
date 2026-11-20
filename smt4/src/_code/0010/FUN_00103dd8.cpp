@@ -10,19 +10,19 @@ typedef struct TitleScene {
 
 
 extern int renderCtxResetFrameState(int mode);
-extern void FUN_002bdb44(void);
+extern void asdGxFlushCommandBuffer(void);
 extern int renderTargetClear(int a, int b);
-extern int FUN_002c3a14(RenderCtx *scene);
+extern int renderCtxResetFrameStacks(RenderCtx *scene);
 void renderCtxSetStereoMode(RenderCtx *scene, u32 mode);
 
 /* Switches the title scene to phase 2 and refreshes it. */
 u32 FUN_00103dd8(void)
 {
     renderCtxResetFrameState(2);
-    FUN_002bdb44();
+    asdGxFlushCommandBuffer();
     renderTargetClear(2, 0);
     renderCtxSetStereoMode(g_titleScene, 2);
-    FUN_002c3a14(g_titleScene);
+    renderCtxResetFrameStacks(g_titleScene);
     return 0;
 }
 

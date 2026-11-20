@@ -4,7 +4,7 @@
 
 extern "C" {
 void gridNavigationConfigure(GridNavigation *controller, s32 count, s32 rows, s32 arg3, s32 arg4, s32 arg5);
-void FUN_00282f80(s32 category);
+void campRebuildCategoryList(s32 category);
 
 // Refill one camp inventory category (11-13) with the owned item ids and reset its list navigation.
 void campRebuildOwnedInventoryCategory(s32 category)
@@ -59,6 +59,6 @@ void campRebuildOwnedInventoryCategory(s32 category)
         }
     }
     gridNavigationConfigure(controller, count, 11, 1, 1, 1);
-    FUN_00282f80(category);
+    campRebuildCategoryList(category);
 }
 }

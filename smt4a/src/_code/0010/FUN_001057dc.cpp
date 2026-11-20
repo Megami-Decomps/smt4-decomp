@@ -9,7 +9,7 @@ int asdOperatorDeleteArray(...);
 extern unsigned char DAT_00558788; /* 0x558788 */
 
 /* Supplied declaration required: asdOperatorDeleteArray. */
-extern int FUN_002eb624(unsigned int *);
+extern int deletingDtor_002eb624(unsigned int *);
 
 
 int FUN_001057dc(unsigned int *param_1)
@@ -27,7 +27,7 @@ int FUN_001057dc(unsigned int *param_1)
   }
   asdOperatorDeleteArray();
   asdOperatorDeleteArray(param_1[0xd]);
-  temp_v0 = FUN_002eb624(param_1 + 1);
+  temp_v0 = deletingDtor_002eb624(param_1 + 1);
   return temp_v0 - 4;
 }
 

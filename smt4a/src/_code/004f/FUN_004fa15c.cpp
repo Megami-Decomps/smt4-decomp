@@ -29,7 +29,7 @@ extern "C" {
 bool FUN_004212b8(void *animation);
 f32 animationGetModeChannelValue(void *animation);
 void FUN_004fbdd4(s32 a, s32 b, s32 param, f32 red, f32 green, f32 blue);
-void FUN_004f6254(BtlAttackAnim *anim, s16 frame, s32 mode);
+void actionSequenceTriggerRangeAnimation(BtlAttackAnim *anim, s16 frame, s32 mode);
 void FUN_00420fc0(void *animation);
 void btlUpdateAttackAnimation(BtlAttackAnim *anim);
 
@@ -43,7 +43,7 @@ void FUN_004fa15c(BtlAttackAnim *anim)
             FUN_004fbdd4(0, 0, anim->key->param, anim->color->red * 0.01f,
                          anim->color->green * 0.01f, anim->color->blue * 0.01f);
         }
-        FUN_004f6254(anim, frame, 1);
+        actionSequenceTriggerRangeAnimation(anim, frame, 1);
     }
     if (FUN_004212b8(anim->animation)) {
         FUN_00420fc0(anim->animation);

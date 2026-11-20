@@ -32,7 +32,7 @@ s32 FUN_0029e924(void *holder);
 s32 flaggedEntryGetValueByState(void *holder);
 s32 flaggedValueHolderGetTotal(void *holder);
 void FUN_003909d0(ListMenu *menu, s32 row, s32 value, bool selected);
-void FUN_002332e8(MenuSlider *panel, s32 first, s32 second);
+void shopPanelSetScrollPosition(MenuSlider *panel, s32 first, s32 second);
 void uiDrawListScrollBar(u32 object, u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g, u32 h, u32 i, u32 j,
     s32 x, s32 y, s32 z, u32 priority, u32 last);
 
@@ -76,7 +76,7 @@ extern "C" void aocListMenuDrawRows(ListMenu *menu)
         FUN_003909d0(menu, row, first + row, selected);
     }
     s32 last = flaggedEntryGetValueByState(menu->holder);
-    FUN_002332e8(&menu->slider, FUN_0029e924(menu->holder), last);
+    shopPanelSetScrollPosition(&menu->slider, FUN_0029e924(menu->holder), last);
     numberPanelDraw(&menu->slider, 0x81);
     renderStackPop(&g_titleScene->stackA);
     gxResetColorQuadToWhite();

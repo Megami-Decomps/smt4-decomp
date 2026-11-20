@@ -7,7 +7,7 @@ extern "C" {
 int soundBlockGetPayloadEnd(int);
 int FUN_0018a8a8(int, int);
 int FUN_0018a8c8(int, int);
-int FUN_001b6390(int);
+int soundVoiceSetVolume(int);
 int FUN_001c7bf0(int, int);
 int nn_snd_CTR_Voice_AppendWaveBuffer(int, int *);
 
@@ -29,7 +29,7 @@ extern int FUN_0018a4d0(int, int);
 /* Supplied declaration required: FUN_0018a8a8. */
 /* Supplied declaration required: FUN_0018a8c8. */
 extern int FUN_001af874(unsigned int, unsigned char *, int *);
-/* Supplied declaration required: FUN_001b6390. */
+/* Supplied declaration required: soundVoiceSetVolume. */
 /* Supplied declaration required: FUN_001c7bf0. */
 /* Supplied declaration required: nn_snd_CTR_Voice_AppendWaveBuffer. */
 extern void nn_snd_CTR_InitializeWaveBuffer(unsigned int);
@@ -87,7 +87,7 @@ void FUN_00153cd0(int *param_1,int param_2,unsigned int param_3,int param_4)
           FUN_0018a8a8(param_1[temp_v4 + 0x1a],1);
           FUN_0018a8c8(param_1[temp_v4 + 0x1a],*pcVar2);
           nn_snd_CTR_Voice_SetSampleRate(param_1[temp_v4 + 0x1a],*(int *)(pcVar2 + 4));
-          FUN_001b6390(param_1[temp_v4 + 0x1a]);
+          soundVoiceSetVolume(param_1[temp_v4 + 0x1a]);
           nn_snd_CTR_Voice_SetPitch(param_1[temp_v4 + 0x1a],temp_v2);
           temp_v1 = (int)temp_v5;
           temp_v6 = (int)((unsigned long long)temp_v5 >> 0x20);
@@ -119,7 +119,7 @@ void FUN_00153cd0(int *param_1,int param_2,unsigned int param_3,int param_4)
             param_1[temp_v4 * 0xc + 0x25] = temp_v6;
           }
           nn_snd_CTR_Voice_SetMixParam(param_1[temp_v4 + 0x1a],(unsigned int)(param_1 + temp_v4 * 0xc + 0x1c));
-          FUN_001b6390(param_1[temp_v4 + 0x1a]);
+          soundVoiceSetVolume(param_1[temp_v4 + 0x1a]);
           nn_snd_CTR_Voice_SetPitch(param_1[temp_v4 + 0x1a],temp_v3);
           temp_v1 = 0;
           do {

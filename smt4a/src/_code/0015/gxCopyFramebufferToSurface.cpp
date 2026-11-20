@@ -4,7 +4,7 @@
 
 extern "C" {
 extern s8 DAT_0063ff88[2]; /* Full-resolution enable flags for the two framebuffer classes. */
-void FUN_0017d294(void);
+void asdGxCmdBufferFinalizeBlock(void);
 void FUN_0017ced4(u32 source, u32 sourceStride, u32 sourceGap, u32 destination,
                  u32 destinationStride, s32 destinationGap, u32 bytes);
 
@@ -30,7 +30,7 @@ s32 gxCopyFramebufferToSurface(u32 target, JobSurface *destination)
     if (g_asdGxPresets.colorFormat == 0x8058)
         bytesPerPixel = 4;
     s32 destinationRowBytes = (destination->width / 8) * bytesPerPixel * 64;
-    FUN_0017d294();
+    asdGxCmdBufferFinalizeBlock();
     if (halfWidth) {
         width >>= 1;
         u32 rowBytes = (width >> 3) * bytesPerPixel * 64;

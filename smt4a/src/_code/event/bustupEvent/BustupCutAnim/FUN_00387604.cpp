@@ -68,8 +68,8 @@ void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 cl
 void sysMemClear(void *data, u32 size);
 void asdCameraInitializeDefaults(void *camera, s32 flag);
 void uiSetFloatPair(void *camera);
-void FUN_0014f0dc(void *camera, BustupVec3 *position, BustupVec3 *target, BustupVec3 *up);
-void FUN_001523b8(void *camera, s32 flag, f32 fov, f32 nearPlane, f32 farPlane, f32 aspect);
+void cameraMatrixCacheSetLookAt(void *camera, BustupVec3 *position, BustupVec3 *target, BustupVec3 *up);
+void stereoCameraSetPerspective(void *camera, s32 flag, f32 fov, f32 nearPlane, f32 farPlane, f32 aspect);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, void *work, u32 owner);
 s32 FUN_002f4540(u32 job);
@@ -104,8 +104,8 @@ u32 FUN_00387604(void)
         block->setup.aspect = 5.0f / 3.0f;
         block->setup.roll = 0.0f;
         uiSetFloatPair(block->camera);
-        FUN_0014f0dc(block->camera, &block->setup.position, &block->setup.target, &block->setup.up);
-        FUN_001523b8(block->camera, 1, block->setup.fov, block->setup.nearPlane, block->setup.farPlane, block->setup.aspect);
+        cameraMatrixCacheSetLookAt(block->camera, &block->setup.position, &block->setup.target, &block->setup.up);
+        stereoCameraSetPerspective(block->camera, 1, block->setup.fov, block->setup.nearPlane, block->setup.farPlane, block->setup.aspect);
         FUN_0036b824(reinterpret_cast<u32>(block->camera));
         block->unk5f4 = 0;
         block->unk5f6 = 1;
@@ -130,8 +130,8 @@ u32 FUN_00387604(void)
         }
         cameraExportParameters(&block->setup, block->model);
         uiSetFloatPair(block->camera);
-        FUN_0014f0dc(block->camera, &block->setup.position, &block->setup.target, &block->setup.up);
-        FUN_001523b8(block->camera, 1, block->setup.fov, block->setup.nearPlane, block->setup.farPlane, block->setup.aspect);
+        cameraMatrixCacheSetLookAt(block->camera, &block->setup.position, &block->setup.target, &block->setup.up);
+        stereoCameraSetPerspective(block->camera, 1, block->setup.fov, block->setup.nearPlane, block->setup.farPlane, block->setup.aspect);
         FUN_0036b824(reinterpret_cast<u32>(block->camera));
     }
     return g_bustupCutAnim.block->job;

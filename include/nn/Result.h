@@ -37,6 +37,22 @@ static __inline bool nnResultIsSuccess(s32 result)
     return (s32)(result & 0x80000000) >= 0;
 }
 
+/* Result levels (the signed 5-bit field in bits 27-31). */
+enum {
+    NN_RESULT_LEVEL_INFO = 1,
+    NN_RESULT_LEVEL_FATAL = -1,
+    NN_RESULT_LEVEL_STATUS = -7
+};
+
+/* The result's signed 5-bit level (bits 27-31), sign-extended. */
+static __inline s32 nnResultLevel(u32 result)
+{
+    s32 level = result >> 27;
+    if (result & 0x80000000)
+        level -= 32;
+    return level;
+}
+
 /* Result layout: description in bits 0-9, module in bits 10-17. */
 static __inline u32 nnResultModule(u32 result)
 {

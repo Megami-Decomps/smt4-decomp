@@ -9,8 +9,8 @@ void entryTableFlagTargetsOfId203(s32 target)
     s32 i;
 
     for (i = 0; i < DAT_00580c90.count; i++) {
-        if (!DAT_005f32a0[i].flagged && DAT_005f32a0[i].id == 0x203 && DAT_005f32a0[i].target == target) {
-            DAT_005f32a0[i].flagged = 1;
+        if (!g_recordTable[i].flagged && g_recordTable[i].id == 0x203 && g_recordTable[i].target == target) {
+            g_recordTable[i].flagged = 1;
         }
     }
 }

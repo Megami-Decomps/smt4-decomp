@@ -5,7 +5,7 @@ extern "C" {
 int nodeCollectionReleaseAll(int value);
 int asdMemFree(int *ptr);
 extern int *scrGetArg(u32 index);
-extern int FUN_002c1d5c(void);
+extern int eventIsSkipping(void);
 
 u32 scrCommReleaseJobBlock(void)
 {
@@ -19,7 +19,7 @@ u32 scrCommReleaseJobBlock(void)
             asdMemFree(block);
             return 1;
         }
-        if (FUN_002c1d5c() != 0) {
+        if (eventIsSkipping() != 0) {
             nodeCollectionReleaseAll(block[1]);
         }
         result = 0;

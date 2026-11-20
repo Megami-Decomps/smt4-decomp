@@ -24,18 +24,18 @@ struct SmokeFadeImage {
 typedef char SmokeFadeStateLayoutCheck[sizeof(SmokeFadeState) == 0x28 && offsetof(SmokeFadeState, active) == 0x24 ? 1 : -1];
 typedef char SmokeFadeImageSizeCheck[sizeof(SmokeFadeImage) == 0xC ? 1 : -1];
 extern "C" {
-u8 FUN_0023b3d0(void);
+u8 gameStateIsNotTransitioning(void);
 }
 
 extern "C" {
-u8 FUN_0026c3a0(void);
+u8 gameGlobalsIsActiveStateFour(void);
 }
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-u8 FUN_002c7e3c(void);
+u8 gameGlobalsGetFieldState(void);
 
 #ifdef __cplusplus
 }

@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern u32 DAT_005b40b4;
+extern u32 g_processResultState;
 
 /* Returns the first word of the global block at 0x5B40B4. */
 u32 globalBlockGetFirst(void)
 {
-    return DAT_005b40b4;
+    return g_processResultState;
 }
 
 } /* extern "C" */

@@ -44,15 +44,15 @@ typedef char CommandStartViewOffsets[
     offsetof(CommandStartTalk, unitIndex) == 0x760 ? 1 : -1];
 
 extern "C" {
-extern void *DAT_00435d18;
+extern void *g_btlAux;
 
-void FUN_00250720(BtlMainState *state);
-u16 FUN_00245cc0(s32 kind);
+void btlSlotManagerResetAll(BtlMainState *state);
+u16 mapCategoryToDestinationGroup(s32 kind);
 void memClearTwo200(void *object);
-s32 FUN_00293230(BtlMainState *state);
+s32 btlScriptUnitIsIncapacitated(BtlMainState *state);
 s32 btlUiIsSceneTransitionReady(BtlUi *ui);
 s32 btlSceneIsReady(BtlUi *ui);
-void FUN_0026beb4(s32 chance, CommandState *work, s32 a, BtlActionRecord *record, s32 b);
+void btlMenuCursorStepReflectAction(s32 chance, CommandState *work, s32 a, BtlActionRecord *record, s32 b);
 void FUN_00229a24(void);
 s32 FUN_00256940(void *main, BtlMainState *state, u32 flag);
 void btlReflectQueueKind34(s32 a, CommandState *work);
@@ -90,11 +90,11 @@ u32 FUN_003d317c(BtlMainState **block, CommandState *work)
     (*block)->battleMask &= ~(2ULL << 32);
     (*block)->core.firstBonus = -1;
     (*block)->core.secondBonus = -1;
-    FUN_00250720(*block);
+    btlSlotManagerResetAll(*block);
     for (s32 index = 0; index < 109; ++index) {
         BtlEntry *entry = &(*block)->entries[index];
         CommandEntryView *words = reinterpret_cast<CommandEntryView *>(entry);
-        entry->stat[2] = FUN_00245cc0(2);
+        entry->stat[2] = mapCategoryToDestinationGroup(2);
         u32 flags = words->flags;
         flags &= ~0x60000000u;
         words->flags = flags;
@@ -103,7 +103,7 @@ u32 FUN_003d317c(BtlMainState **block, CommandState *work)
         words->flagsHigh = 0;
         words->unk0c8 = 0;
     }
-    memClearTwo200(DAT_00435d18);
+    memClearTwo200(g_btlAux);
     work->selection->kind = 0;
     work->selection->value = 0;
     reinterpret_cast<CommandEntryView *>(work->entry)->command = 0;
@@ -119,13 +119,13 @@ u32 FUN_003d317c(BtlMainState **block, CommandState *work)
     } else if (((*block)->battleFlags & 0x100) != 0) {
         work->flags |= 0x1000;
     }
-    if (FUN_00293230(*block) != 0 && btlUiIsSceneTransitionReady(g_btlUiBlock) == 0)
+    if (btlScriptUnitIsIncapacitated(*block) != 0 && btlUiIsSceneTransitionReady(g_btlUiBlock) == 0)
         return 0;
 
     if (((*block)->battleFlags & 0x20000) != 0) {
         if (btlSceneIsReady(g_btlUiBlock) == 0)
             return 0;
-        FUN_0026beb4(0, work, 15, work->record, 1);
+        btlMenuCursorStepReflectAction(0, work, 15, work->record, 1);
         reinterpret_cast<CommandStartView *>(*block)->flags64 |= 0x2000;
         reinterpret_cast<CommandStartView *>(*block)->flags64 &= ~0x20000ull;
         reinterpret_cast<CommandStartUi *>(g_btlUiBlock)->sceneState = 0;
@@ -203,13 +203,13 @@ u32 FUN_003d317c(BtlMainState **block, CommandState *work)
         if (responses != 0)
             FUN_00246d38(0, 0, work->record, responses);
         if ((work->selection->responseFlags & 0x80) == 0)
-            FUN_00255180(unitId, 22, FUN_00245cc0(22));
+            FUN_00255180(unitId, 22, mapCategoryToDestinationGroup(22));
         if ((work->selection->responseFlags & 0x40) == 0)
-            FUN_00255180(unitId, 23, FUN_00245cc0(23));
+            FUN_00255180(unitId, 23, mapCategoryToDestinationGroup(23));
         if ((work->selection->responseFlags & 0x100) == 0)
-            FUN_00255180(unitId, 24, FUN_00245cc0(24));
+            FUN_00255180(unitId, 24, mapCategoryToDestinationGroup(24));
         if ((work->selection->responseFlags & 8) == 0)
-            FUN_00255180(unitId, 25, FUN_00245cc0(25));
+            FUN_00255180(unitId, 25, mapCategoryToDestinationGroup(25));
         if ((work->selection->responseFlags & ~responses & 0x1c0) == 0 && (work->entry->flags & 0x60000) == 0) {
             FUN_003c0484(work->entry, responses, 1);
             if ((work->entry->flags & 0x30) != 0)

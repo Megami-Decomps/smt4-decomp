@@ -5,7 +5,7 @@
 extern "C" {
 s32 padQueryLogicalKey(s32, s32);
 s32 sysPlaySe(s32);
-s32 FUN_00183e58(void);
+s32 buttonHelpTeardownSlots(void);
 s32 slotSetRequest(s32, s32, s32);
 s32 msgWindowReset(void);
 s32 buttonHelpSetPanelState(s32);
@@ -29,7 +29,7 @@ extern "C" void eventUpdatePickedObjectEndScript(PickObjectEndPrefixA *object)
         if (scrRunOpcodesStub(*object->script) == 2) {
             slotSetRequest(0, 10, 0xff);
             slotSetRequest(1, 10, 0xff);
-            FUN_00183e58();
+            buttonHelpTeardownSlots();
             ++object->phase;
             return;
         }

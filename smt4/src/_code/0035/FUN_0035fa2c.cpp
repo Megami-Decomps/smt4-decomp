@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_22_stack;
 
-extern int DAT_004719e8; /* 0x4719e8 */
+extern int g_nimAocSession; /* 0x4719e8 */
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
@@ -63,8 +63,8 @@ int FUN_0035fa2c(unsigned int param_1,unsigned int param_2,unsigned int param_3,
   *(unsigned int *)(temp_v1 + 0xf8) = param_21;
   *(unsigned int *)(temp_v1 + 0xf4) = (param_22 << 4) | 0xc;
   software_interrupt(0x32);
-  temp_v0 = DAT_004719e8;
-  if (-1 < DAT_004719e8) {
+  temp_v0 = g_nimAocSession;
+  if (-1 < g_nimAocSession) {
     *param_19 = *(unsigned int *)(temp_v1 + 0x88);
     temp_v0 = *(int *)(temp_v1 + 0x84);
   }

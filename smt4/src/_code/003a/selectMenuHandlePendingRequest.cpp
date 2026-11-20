@@ -10,7 +10,7 @@ u32 flaggedValueHolderGetTotal(MenuList *list);
 void FUN_003a21b8(SelectMenu *menu, s32 index, s32 marked, s32 value);
 void shopDrawEquippedItemPage(SelectMenu *menu);
 void FUN_003a1d04(SelectMenu *menu);
-void FUN_003a1f00(SelectMenu *menu);
+void shopScreenRedraw(SelectMenu *menu);
 void FUN_003a0f88(SelectMenu *menu);
 
 /* Handle the menu's pending request: refresh the list entries, or run the cancel, confirm or scroll
@@ -42,14 +42,14 @@ void selectMenuHandlePendingRequest(SelectMenu *menu)
         }
         s32 selected = flaggedEntryGetValueByState(list);
 
-        FUN_002332e8(menu->view, FUN_0029e924(list), selected);
+        shopPanelSetScrollPosition(menu->view, FUN_0029e924(list), selected);
         menu->view->refresh(listId);
     } else if (menu->flags & MENU_CANCEL) {
         shopDrawEquippedItemPage(menu);
     } else if (menu->flags & MENU_CONFIRM) {
         FUN_003a1d04(menu);
     } else if (menu->flags & MENU_SCROLL) {
-        FUN_003a1f00(menu);
+        shopScreenRedraw(menu);
     }
     if (menu->flags & MENU_CLOSE) {
         FUN_003a0f88(menu);

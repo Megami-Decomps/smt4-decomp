@@ -33,7 +33,7 @@ s32 aocItemGetPrice(const EquipmentMenuItem *item); // declcheck: local (the sce
 void menuSynchronizeFlaggedSelection(void *selection, EquipmentMenuCursor *list);
 void FUN_002c2c80(EquipmentMenuCursor *list);
 void screenShowMessage(s32 id);
-s32 FUN_004d0584(void);
+s32 inputConfirmPressed(void);
 void obj04Finish(void);
 void messageMainSetFlag(u8 value);
 void sendEvent100020E(void);
@@ -63,7 +63,7 @@ void FUN_003df7c4(PlayerDataA *player);
 void gameGlobalsQueueValues(PlayerDataA *player, u32 second);
 void FUN_00372100(PlayerDataA *player, s32 second);
 u32 sysPlayVoice(u32 id); // declcheck: local (declared in the large map's header)
-void FUN_002f0384(s32 usePreset);
+void statusCameraRestore(s32 usePreset);
 
 } /* extern "C" */
 
@@ -153,7 +153,7 @@ void Obj536044::shopQuantityStep()
         }
         screenShowMessage(selectedItem()->id);
         showPriceChange();
-        if (FUN_004d0584() != 0 && quantityIndex == index) {
+        if (inputConfirmPressed() != 0 && quantityIndex == index) {
             if (quantity.value > 0) {
                 if (slot == 7 || slot == 8) {
                     obj04Finish();
@@ -257,8 +257,8 @@ void Obj536044::shopQuantityStep()
         s32 price = quantityPrice();
 
         scrSetStringSlot(0, itemGetNameOrFallback(id, 1));
-        FUN_00359974(0x18, quantity.value, (u32)-1, 0);
-        FUN_00359974(0x19, price, (u32)-1, 0);
+        entryTableResetAndInit(0x18, quantity.value, (u32)-1, 0);
+        entryTableResetAndInit(0x19, price, (u32)-1, 0);
         if (slot == 8) {
             startScript("shop_SellConfirm");
         } else {
@@ -333,7 +333,7 @@ void Obj536044::shopQuantityStep()
             if (slot == 8 && flagValueIsPositiveForward(item->id) == 0) {
                 EquipmentMenuCursor *list = &slotInfo[slot];
                 s32 row = FUN_0031d174(list);
-                s32 first = FUN_002a482c(list);
+                s32 first = resourceDispatchTaggedOperation(list);
 
                 FUN_00496a0c(this, 0);
                 if (first > 0) {
@@ -408,7 +408,7 @@ void Obj536044::shopQuantityStep()
         break;
     }
     if (gameRecordExists() != 0 && objBStateAllowsAction() != 0 && previewReady == 0 && !previewPending) {
-        FUN_002f0384(1);
+        statusCameraRestore(1);
         previewReady = 1;
     }
 }

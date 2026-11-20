@@ -6,14 +6,14 @@ extern "C" {
 
 extern BtlEffectGlobals g_btlEffect;
 
-extern s32 FUN_004fa828(void *target, u32 value);
+extern s32 btlEffectModelJobDispatch(void *target, u32 value);
 
 s32 btlEffectDispatchCurrentJob(u32 job)
 {
     u32 value = reinterpret_cast<u32>(jobGetWork(job));
 
     if (g_btlEffect.data != NULL) {
-        return FUN_004fa828(g_btlEffect.data, value);
+        return btlEffectModelJobDispatch(g_btlEffect.data, value);
     }
     return 0;
 }

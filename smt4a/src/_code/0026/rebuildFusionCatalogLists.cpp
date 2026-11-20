@@ -11,7 +11,7 @@ extern "C" {
 extern const u32 DAT_0052f210[];
 void sysMemClear(void *, u32);
 void rt_memclr(void *, u32);
-u32 FUN_002a4b28(u32);
+u32 compendiumEntryIsRegistered(u32);
 u16 itemIsCollectedWithRelated(u32);
 s32 arrayContainsU16(const u16 *, s32, u32);
 s32 FUN_002b2ca8(const void *, const void *);
@@ -28,7 +28,7 @@ void rebuildFusionCatalogLists()
     for (u16 id = 0; id <= 1200; ++id) {
         if (entryDefIsAvailable(work->context, id)) {
             const NkmBaseRecordA *demon = nkmBaseGetRecord(id);
-            if ((FUN_002a4b28(demon->id) || itemIsCollectedWithRelated(demon->id)) &&
+            if ((compendiumEntryIsRegistered(demon->id) || itemIsCollectedWithRelated(demon->id)) &&
                 (!filter->race || filter->race == demon->race) &&
                 (!filter->levelBand || FUN_004da77c(reinterpret_cast<u32>(work->context), demon->level, filter->levelBand))) {
                 work->catalogA.demons[demonCount++] = demon->id;

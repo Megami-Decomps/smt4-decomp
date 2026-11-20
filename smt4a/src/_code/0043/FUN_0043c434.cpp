@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int asdModelForwardChecked(unsigned int *, unsigned int, unsigned int, int);
+int srvGetServiceHandle(unsigned int *, unsigned int, unsigned int, int);
 int nn_applet_CTR_detail_InquireNotification(unsigned int *, int);
 int software_interrupt(int);
 
@@ -19,7 +19,7 @@ extern unsigned int g_nngxGpu; /* 0x5c0ab4 */
 extern unsigned int g_nngxCriticalSection; /* 0x643080 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: asdModelForwardChecked. */
+/* Supplied declaration required: srvGetServiceHandle. */
 /* Supplied declaration required: nn_applet_CTR_detail_InquireNotification. */
 extern unsigned int libc_strlen(void);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -40,7 +40,7 @@ void FUN_0043c434(void)
   nn_os_CriticalSection_Enter((unsigned int)&g_nngxCriticalSection);
   temp_v0 = (*(unsigned int *)((unsigned char *)&g_nngxGpu - 0x10));
   temp_v1 = libc_strlen();
-  asdModelForwardChecked(&g_nngxCommandState1,temp_v0,temp_v1,0);
+  srvGetServiceHandle(&g_nngxCommandState1,temp_v0,temp_v1,0);
   g_nngxGpu = g_nngxCommandState1;
   nn_applet_CTR_detail_InquireNotification(&g_nngxGpu,1);
   software_interrupt(0x23);

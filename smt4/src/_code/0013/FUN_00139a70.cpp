@@ -7,7 +7,7 @@ extern "C" {
 int nnResultCheckReport00128d98(...);
 int FUN_001398dc(void);
 int FUN_0013a5b0(unsigned int *, unsigned int *);
-int FUN_002ad66c(unsigned int *, int *);
+int asdSaveHeaderBuildCalendarTime(unsigned int *, int *);
 int clockGetTicksAsMicroseconds(int *);
 int SBORROW4(...);
 int nn_fnd_DateTime_FromParameters(unsigned int *, int, int, int);
@@ -54,7 +54,7 @@ typedef struct {
 /* Supplied declaration required: nnResultCheckReport00128d98. */
 /* Supplied declaration required: FUN_001398dc. */
 /* Supplied declaration required: FUN_0013a5b0. */
-/* Supplied declaration required: FUN_002ad66c. */
+/* Supplied declaration required: asdSaveHeaderBuildCalendarTime. */
 /* Supplied declaration required: clockGetTicksAsMicroseconds. */
 /* Supplied declaration required: nn_fnd_DateTime_FromParameters. */
 
@@ -101,7 +101,7 @@ void FUN_00139a70(fn_00139a70_arg0 *param_1)
   clockGetTicksAsMicroseconds(&temp_v14);
   temp_v27 = temp_v14;
   uStack_2c = uStack_8c;
-  FUN_002ad66c(&temp_v10,&temp_v27);
+  asdSaveHeaderBuildCalendarTime(&temp_v10,&temp_v27);
   temp_v20 = temp_v10;
   temp_v21 = temp_v11 & 0xffffff;
   temp_v22 = 0;

@@ -17,7 +17,7 @@ float calcHeadingRoundedTo32Directions(float angle);
 int FUN_001e2be4(void);
 int FUN_002562e4(int, int);
 int partyApplyNonlethalAilmentDamage(int, int);
-int FUN_0027f48c(int, int);
+int mapProjectPositionToGround(int, int);
 int FUN_0027f848(void);
 int padGetNormalizedAnalogStick(float *, unsigned int *, int);
 int lmapSetSceneId(...);
@@ -63,7 +63,7 @@ extern int DAT_0049fd04; /* 0x49fd04 */
 extern int inputIsQuestCancelPressed(void);
 extern unsigned int FUN_00256540(void);
 extern int unitGroupHasFlag(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0027f48c. */
+/* Supplied declaration required: mapProjectPositionToGround. */
 /* Supplied declaration required: FUN_0027f848. */
 /* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: lmapSetSceneId. */
@@ -346,7 +346,7 @@ void FUN_001fa8e4(void)
     *(unsigned int *)(temp_v8 + 0x3c) = temp_v3;
     if (((DAT_0049fce8 == '\0') && (DAT_0049f93d != '\0')) && ((temp_v9 & ~temp_v4) == 0)) {
       temp_v5 = temp_v8 + 0x28;
-      FUN_0027f48c(temp_v5,temp_v8 + 0x34);
+      mapProjectPositionToGround(temp_v5,temp_v8 + 0x34);
       temp_v8 = g_lmapScene;
       temp_v7 = 0;
       if (temp_v5 != 0) {

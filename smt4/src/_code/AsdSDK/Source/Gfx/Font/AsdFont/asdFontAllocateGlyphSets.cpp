@@ -9,7 +9,7 @@ typedef struct AsdFontTable {
     s32 count;   /* 0x04 */
 } AsdFontTable;
 
-extern AsdFontTable DAT_00464a70;
+extern AsdFontTable g_asdFontGlyphSets;
 
 extern void FUN_00100238(int kind, const char *name);
 extern void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
@@ -20,10 +20,10 @@ void asdFontAllocateGlyphSets(s32 count)
     u32 size;
 
     FUN_00100238(2, "SJIS");
-    DAT_00464a70.count = count;
+    g_asdFontGlyphSets.count = count;
     size = count * 0x2c;
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Font\\AsdFont.cpp", 617);
-    DAT_00464a70.items = asdMemoryAlloc(0x100, 0x100, 0, size, 1);
+    g_asdFontGlyphSets.items = asdMemoryAlloc(0x100, 0x100, 0, size, 1);
 }
 
 } /* extern "C" */

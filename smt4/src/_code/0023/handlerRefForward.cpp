@@ -14,12 +14,12 @@ typedef struct Handler {
 extern struct {
     u8 unk0[4];
     Handler *handler;
-} DAT_00472a38;
+} g_handlerRefForward;
 
 void handlerRefForward(u32 a, u32 b)
 {
-    if (DAT_00472a38.handler != NULL) {
-        DAT_00472a38.handler->vtbl->run(DAT_00472a38.handler, a, b);
+    if (g_handlerRefForward.handler != NULL) {
+        g_handlerRefForward.handler->vtbl->run(g_handlerRefForward.handler, a, b);
     }
 }
 

@@ -72,9 +72,9 @@ static inline const NkmBaseRecordA *getDevilRecord(u16 id)
 }
 
 extern "C" {
-extern UniteScreenWork *DAT_0057f2c4;
-u32 FUN_00409fe8(u16, u32, u32);
-Table25Record *FUN_003316b4(s32);
+extern UniteScreenWork *g_uniteEffectWork;
+u32 resourceCacheGetOrLoadModel(u16, u32, u32);
+Table25Record *dataTable25Section0FindById(s32);
 
 
 void uniteRenderTargetSetTexture(UniteRenderTarget *target, u32 texture);
@@ -88,7 +88,7 @@ u8 devilRecordGetTone(const NkmBaseRecordA *record)
 void uniteCameraDestroy(void);
 void FUN_003fb5d4(u32 texture, s32 a, s32 b);
 u32 asdVramBGetFreeBytes(void);
-void FUN_0040bd04(UniteRenderTarget *target, u32 extent, u32 options, u32 width, u32 height);
+void uniteEnemyRenderSetup(UniteRenderTarget *target, u32 extent, u32 options, u32 width, u32 height);
 void FUN_0040c190(UniteRenderTarget *target);
 void FUN_003d2a00(const char *name);
 void FUN_001fc348(UniteRenderTarget *target);
@@ -103,20 +103,20 @@ void sysPlaySe(s32 preset);
    (by how many devils are fused), the message script and builds its sprites. */
 void uniteResultInitialize(void)
 {
-    UniteScreenWork *work = DAT_0057f2c4;
+    UniteScreenWork *work = g_uniteEffectWork;
     uniteCameraDestroy();
     for (s32 i = 0; i < work->materialCount; i++) {
-        work->devilTextures[i] = FUN_00409fe8(getDevilRecord(work->materialDevils[i])->model, 0, 1);
+        work->devilTextures[i] = resourceCacheGetOrLoadModel(getDevilRecord(work->materialDevils[i])->model, 0, 1);
         FUN_003fb5d4(work->devilTextures[i], 7, 1);
     }
     uniteRenderTargetSetTexture(&work->renderTarget, work->devilTextures[0]);
     if (asdVramBGetFreeBytes() < 0x20000) {
-        FUN_0040bd04(&work->renderTarget, 0x20000, 0x20000, 0x100, 0x100);
+        uniteEnemyRenderSetup(&work->renderTarget, 0x20000, 0x20000, 0x100, 0x100);
     } else {
-        FUN_0040bd04(&work->renderTarget, 0x30000, 0x30000, 0x100, 0x100);
+        uniteEnemyRenderSetup(&work->renderTarget, 0x30000, 0x30000, 0x100, 0x100);
     }
     FUN_0040c190(&work->renderTarget);
-    work->resultTexture = FUN_00409fe8(getDevilRecord(work->resultDevil)->model, 0, 1);
+    work->resultTexture = resourceCacheGetOrLoadModel(getDevilRecord(work->resultDevil)->model, 0, 1);
     FUN_003fb5d4(work->resultTexture, 7, 1);
     if (work->materialCount == 2) {
         if (work->sacrifice) {
@@ -179,7 +179,7 @@ void uniteResultInitialize(void)
     work->scriptFile = reinterpret_cast<u32>(asdLoadFileSyncDefault("battle/DevilLvUp.bf"));
     char path[64];
     const NkmBaseRecordA *record = getDevilRecord(work->resultDevil);
-    sprintf(path, "battle/DevilMsg/%s.mbm", reinterpret_cast<const char *>(FUN_003316b4((s8)devilRecordGetTone(record))->unk01));
+    sprintf(path, "battle/DevilMsg/%s.mbm", reinterpret_cast<const char *>(dataTable25Section0FindById((s8)devilRecordGetTone(record))->unk01));
     work->messageFile = reinterpret_cast<u32>(asdLoadFileSyncDefault(path));
     work->script = reinterpret_cast<u32>(scrScriptProcessCreate(reinterpret_cast<void *>(work->scriptFile), reinterpret_cast<void *>(work->messageFile)));
     paramsClearPacket(&work->resources);
@@ -200,8 +200,8 @@ void uniteResultInitialize(void)
     uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(&work->cursor), 0x1a, 0, &work->resources, 1, 1.0f);
     uiSpriteSelectAnim(reinterpret_cast<UiSpriteState *>(&work->cursor), 2);
     sysPlaySe(99);
-    DAT_0057f2c4->state = 1;
-    DAT_0057f2c4->phase = 0;
+    g_uniteEffectWork->state = 1;
+    g_uniteEffectWork->phase = 0;
 }
 
 } /* extern "C" */

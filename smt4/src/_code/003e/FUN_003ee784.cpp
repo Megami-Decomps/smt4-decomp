@@ -22,7 +22,7 @@ extern InitializationArguments DAT_0044e360;
 extern InitializationCounters DAT_0044e378;
 extern InitializedState DAT_004c641c;
 extern const char DAT_00407e34[];
-extern u32 DAT_0044e368;
+extern u32 g_appletCloseReason;
 void FUN_00385b60(void* state);
 void entry(void);
 s32 __aeabi_atexit(void* object, void (*destructor)(void*), void* handle);
@@ -39,6 +39,6 @@ void FUN_003ee784(void)
     DAT_004c641c.third = 0;
     DAT_004c641c.name = DAT_00407e34;
     __aeabi_atexit(&DAT_004c641c, FUN_00385b60, reinterpret_cast<void*>(entry));
-    DAT_0044e368 = 0;
+    g_appletCloseReason = 0;
 }
 }

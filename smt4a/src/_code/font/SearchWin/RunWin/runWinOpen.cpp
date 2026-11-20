@@ -16,8 +16,8 @@ typedef void (*VoidFunc)(void);
 
 int sysMemClear(void *ptr, int size);                  /* zero a block */
 u32 taskCreateDraw(const char *name, int priority, int arg2, int arg3, VoidFunc cb, int arg5, int arg6, u32 parent);
-void FUN_00208650(void);
-void FUN_00208984(void);
+void runWinDraw(void);
+void runWinUpdateState(void);
 
 extern RunWinWork *g_runWin;
 /* Sprite resource packets handed to paramsInit (read-only data defined in this file). */
@@ -53,8 +53,8 @@ void runWinOpen(void)
     }
     run = g_runWin;
     sysMemClear(run, 0xe4);
-    run->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("RunWin Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_00208984), 0, 0);
-    taskCreateDraw("RunWin DrawDown", 0xed, 0, 0, FUN_00208650, 0, 0, run->task);
+    run->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("RunWin Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(runWinUpdateState), 0, 0);
+    taskCreateDraw("RunWin DrawDown", 0xed, 0, 0, runWinDraw, 0, 0, run->task);
     paramsClearPacket(&run->parameters);
     paramsInit(&run->parameters, runWinResource0, 0x24, runWinResource1, 0x24, 0, 0, 0, 0, runWinResource2, 0x70);
     uiSpriteStateInitFromSource(&run->window, 8, 0x87, &run->parameters, 1, 1.0f);

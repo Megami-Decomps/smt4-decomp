@@ -6,7 +6,7 @@ u32 resourceRunOperationIfUnblocked(const void *selector);
 u32 listCursorGetRowIfUnblocked(const void *selector);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void playerRecalcStatsFromEquipment(PlayerDataIV *player);
-void FUN_0029a0cc(PlayerDataIV *player);
+void btlBuildDemonSnapshotFromSaveRecord(PlayerDataIV *player);
 void FUN_0029c4ac(s32 mode);
 
 void campPreviewSelectedEquipment(s32 category)
@@ -34,7 +34,7 @@ void campPreviewSelectedEquipment(s32 category)
     else if (category == 22) preview.equipment[5] = choices[selected];
     else if (category == 23) preview.equipment[6] = choices[selected];
     playerRecalcStatsFromEquipment(&preview);
-    FUN_0029a0cc(&preview);
+    btlBuildDemonSnapshotFromSaveRecord(&preview);
     FUN_0029c4ac(0);
 }
 }

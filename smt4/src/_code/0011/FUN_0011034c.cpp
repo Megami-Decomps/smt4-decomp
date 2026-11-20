@@ -17,7 +17,7 @@ int FUN_002bb120(unsigned int);
 int FUN_002bb130(unsigned int);
 int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
-int FUN_002c131c(int, int);
+int errThrowFatal(int, int);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -46,7 +46,7 @@ extern unsigned int FUN_002bb110(void);
 extern int FUN_002bb2c8(void);
 /* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
-/* Supplied declaration required: FUN_002c131c. */
+/* Supplied declaration required: errThrowFatal. */
 
 
 int FUN_0011034c(unsigned int param_1,unsigned int param_2,unsigned int param_3)
@@ -85,7 +85,7 @@ int FUN_0011034c(unsigned int param_1,unsigned int param_2,unsigned int param_3)
         temp_v2 = FUN_002bb100();
         temp_v0 = FUN_0011d644(temp_v2,temp_v1,&temp_v4,(unsigned int *)&temp_v3);
         if (temp_v0 < 0) {
-          FUN_002c131c(temp_v0,0x11045c);
+          errThrowFatal(temp_v0,0x11045c);
         }
         FUN_0011d20c();
         FUN_0011d3fc(param_3,temp_v3,temp_v4);

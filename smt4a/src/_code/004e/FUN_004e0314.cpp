@@ -108,7 +108,7 @@ u32 FUN_004e0314(BattleMenuOwner *owner, CommandMenu *menu)
         MenuEntryView *view = (MenuEntryView *)current;
         u32 effect;
         u32 sound;
-        s32 unitKind = FUN_0019acdc(view->unit->unitId, 1);
+        s32 unitKind = unitMapIdToCategory(view->unit->unitId, 1);
         FUN_003f1b3c(owner->state, unitKind, 0xb, &effect, &sound);
         FUN_0047f7ac(0, sound);
         btlReflectCreateKind44(row + 15, menu, view->unit->unitId, effect);

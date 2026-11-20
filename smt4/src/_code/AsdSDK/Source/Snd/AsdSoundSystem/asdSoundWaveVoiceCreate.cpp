@@ -13,10 +13,10 @@ u32 soundBlockGetPayloadEnd(const void *data);
 void FUN_00129020(const void *data);
 u8 *FUN_00129034(const void *data, s32 unk);
 void memCopy(const void *src, void *dst, u32 size);
-u32 FUN_002bd29c(u32 priority, u32 callback, u32 userData);
+u32 nwSoundVoiceAllocate(u32 priority, u32 callback, u32 userData);
 void nn_snd_CTR_Voice_SetMixParam(u32 voice, const f32 *mix);
 void nn_snd_CTR_Voice_SetPitch(u32 voice, f32 pitch);
-void FUN_00147370(u32 voice, f32 volume);
+void soundVoiceSetVolume(u32 voice, f32 volume);
 void nn_snd_CTR_InitializeWaveBuffer(void *waveBuffer);
 void soundQueueArchiveWaveBuffers(u32 voice, void *data, void *waveBuffer0, void *waveBuffer1, s32 unk);
 
@@ -42,11 +42,11 @@ AsdSndWaveVoice *asdSoundWaveVoiceCreate(const u8 *data, u32 size, u32 unk8c)
     asdDebugTrace(DAT_00409724, 6441);
     sound->data = asdMemoryAllocAligned(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, size, 0x20, 1);
     memCopy(data, sound->data, size);
-    sound->voice = FUN_002bd29c(0x7fff, 0, 0);
+    sound->voice = nwSoundVoiceAllocate(0x7fff, 0, 0);
     sound->mix[0] = 0.707f;
     sound->mix[1] = 0.707f;
     nn_snd_CTR_Voice_SetMixParam(sound->voice, sound->mix);
-    FUN_00147370(sound->voice, 1.0f);
+    soundVoiceSetVolume(sound->voice, 1.0f);
     nn_snd_CTR_Voice_SetPitch(sound->voice, 1.0f);
     for (i = 0; i < 2; i++) {
         nn_snd_CTR_InitializeWaveBuffer(sound->waveBuffers[i]);

@@ -6,11 +6,11 @@
 extern "C" {
 
 extern s32 uiQuestStateIsIdle(void);
-extern void FUN_00215cd4(u16 questId);
+extern void uiQuestOpenDetails(u16 questId);
 extern void uiQuestCreate(s32 arg);
 extern void uiQuestClose(void);
 extern void buttonHelpSetPreset(s32 id);
-extern s32 FUN_002c1d5c(void);
+extern s32 eventIsSkipping(void);
 extern void flagEntrySetValue(u16 questId, u32 arg);
 
 s32 scrComm_QuestUI_OpenWithArg(void)
@@ -21,12 +21,12 @@ s32 scrComm_QuestUI_OpenWithArg(void)
 
     if (result == 0) {
         flagEntrySetValue(questId, arg);
-        result = FUN_002c1d5c();
+        result = eventIsSkipping();
         if (result != 0) {
             return 1;
         }
         uiQuestCreate(result);
-        FUN_00215cd4(questId);
+        uiQuestOpenDetails(questId);
     }
     result = uiQuestStateIsIdle();
     if (result != 0) {

@@ -28,7 +28,7 @@ int FUN_00122a60(void)
   *(unsigned char *)(iVar2 + 0x12) = 0;
   iVar2 = FUN_002ea2a8(iVar2 + 0x14,0);
   iVar5 = iVar2 - 0x144;
-  uVar3 = FUN_002ea704();
+  uVar3 = watcherGetEnabledFlag();
   FUN_0010a0c4(uVar3,0);
   aiStack_28[0] = iVar5;
   FUN_0010d128(iVar5,&LAB_00122799,aiStack_28);

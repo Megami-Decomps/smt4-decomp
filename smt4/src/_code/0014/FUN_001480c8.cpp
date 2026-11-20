@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
+int svcWaitSynchronizationN(unsigned char *, int *, int, int, unsigned int, unsigned int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int resultHandleFailure(void);
 int software_interrupt(int);
 
@@ -19,7 +19,7 @@ extern unsigned char DAT_00465640; /* 0x465640 */
 extern int DAT_004e5290; /* 0x4e5290 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_002c40f8. */
+/* Supplied declaration required: svcWaitSynchronizationN. */
 /* Supplied declaration required: resultHandleFailure. */
 extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
@@ -40,7 +40,7 @@ void FUN_001480c8(void)
   }
   iStack_20 = DAT_0046563c;
   puVar1 = temp_v1;
-  FUN_002c40f8(puVar1,&iStack_20,1,0,0xffffffff,0xffffffff);
+  svcWaitSynchronizationN(puVar1,&iStack_20,1,0,0xffffffff,0xffffffff);
   if ((int)puVar1 < 0) {
     resultHandleFailure();
   }

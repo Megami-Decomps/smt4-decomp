@@ -50,11 +50,11 @@ void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 cl
 void sysMemClear(void *data, u32 size);
 void asdCameraInitializeDefaults(CameraMatrixCache *camera, s32 mode);
 void uiSetFloatPair(CameraMatrixCache *camera, f32 first, f32 second);
-void FUN_0014f0dc(CameraMatrixCache *camera, const Vec3 *eye, const Vec3 *target, const Vec3 *up);
-void FUN_001523b8(CameraMatrixCache *camera, s32 mode, f32 fieldOfView, f32 nearClip, f32 farClip, f32 aspect);
+void cameraMatrixCacheSetLookAt(CameraMatrixCache *camera, const Vec3 *eye, const Vec3 *target, const Vec3 *up);
+void stereoCameraSetPerspective(CameraMatrixCache *camera, s32 mode, f32 fieldOfView, f32 nearClip, f32 farClip, f32 aspect);
 s32 FUN_002caea0(u32 handle);
 void event3dOpeningDestroy(u32 handle);
-s32 FUN_00162ea4(void);
+s32 eventIsSkipping(void);
 void asdEnvResetModelBank(const char *path, u32 flags);
 
 u32 event3dOpeningCreate(void)
@@ -81,12 +81,12 @@ u32 event3dOpeningCreate(void)
         work->projection.aspect = 5.0f / 3.0f;
         work->distance = 5.0f;
         uiSetFloatPair(&work->camera.cache, 5.0f, 1.0f);
-        FUN_0014f0dc(&work->camera.cache, &work->eye, &work->target, &work->up);
-        FUN_001523b8(&work->camera.cache, 1, work->projection.fieldOfView,
+        cameraMatrixCacheSetLookAt(&work->camera.cache, &work->eye, &work->target, &work->up);
+        stereoCameraSetPerspective(&work->camera.cache, 1, work->projection.fieldOfView,
             work->projection.nearClip, work->projection.farClip, work->projection.aspect);
         FUN_0036b824(reinterpret_cast<u32>(&work->camera.cache));
         work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("3dEventOpening Calc"), 4, 0, 0, FUN_002caea0, event3dOpeningDestroy, reinterpret_cast<u32>(work));
-        FUN_00162ea4();
+        eventIsSkipping();
         work->state = 1;
         work->substate = 0;
         asdEnvResetModelBank(DAT_0052f680, 0);

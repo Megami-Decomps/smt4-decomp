@@ -9,7 +9,7 @@
 
 extern "C" {
 s32 ifTouchGetSelectionModeForRegion(s32 id);
-s32 FUN_0029e958(void *widget);
+s32 uiGridNavigationEntryCount(void *widget);
 s32 resourceRunOperationIfUnblocked(void *widget);
 void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, s32 mode);
 
@@ -39,19 +39,19 @@ void uiDrawListScrollBar(void *widget, s32 x, s32 y, u32 group, u32 frameId, u32
     TextureTableEntryIV *record = asdTMTexTableEntryAt(group, trackId);
 
     if (horizontal != 0) {
-        s32 total = FUN_0029e958(widget);
-        s32 shown = FUN_0028cfbc((Widget *)widget);
+        s32 total = uiGridNavigationEntryCount(widget);
+        s32 shown = widgetGetVisibleLength((Widget *)widget);
         s32 length;
         if (total <= shown) {
             length = record->placement->width;
         } else {
-            f32 ratio = (f32)record->placement->width / (f32)FUN_0029e958(widget);
-            length = (s32)((f32)FUN_0028cfbc((Widget *)widget) * ratio);
+            f32 ratio = (f32)record->placement->width / (f32)uiGridNavigationEntryCount(widget);
+            length = (s32)((f32)widgetGetVisibleLength((Widget *)widget) * ratio);
             if (length < 1) {
                 length = 1;
             }
             offset = (s32)((f32)(s32)resourceRunEmbeddedOperationIfUnblocked(widget) * ratio);
-            if ((s32)resourceRunEmbeddedOperationIfUnblocked(widget) + FUN_0028cfbc((Widget *)widget) == FUN_0029e958(widget) &&
+            if ((s32)resourceRunEmbeddedOperationIfUnblocked(widget) + widgetGetVisibleLength((Widget *)widget) == uiGridNavigationEntryCount(widget) &&
                 offset + length < record->placement->width) {
                 offset = record->placement->width - length;
             }
@@ -59,19 +59,19 @@ void uiDrawListScrollBar(void *widget, s32 x, s32 y, u32 group, u32 frameId, u32
         renderStackSet(&g_titleScene->scissor, 3);
         gxSetMirroredClippedScissor(record->x + x + offset, record->y + y, length, record->placement->height, 1);
     } else {
-        s32 total = (s32)FUN_0029ee54(widget);
-        s32 shown = (s32)FUN_0029d644(widget);
+        s32 total = (s32)gridNavigationGetItemCount(widget);
+        s32 shown = (s32)uiListGetVisibleCount(widget);
         s32 length;
         if (total <= shown) {
             length = record->placement->height;
         } else {
-            f32 ratio = (f32)record->placement->height / (f32)(s32)FUN_0029ee54(widget);
-            length = (s32)((f32)(s32)FUN_0029d644(widget) * ratio);
+            f32 ratio = (f32)record->placement->height / (f32)(s32)gridNavigationGetItemCount(widget);
+            length = (s32)((f32)(s32)uiListGetVisibleCount(widget) * ratio);
             if (length < 1) {
                 length = 1;
             }
             offset = (s32)((f32)resourceRunOperationIfUnblocked(widget) * ratio);
-            if (resourceRunOperationIfUnblocked(widget) + (s32)FUN_0029d644(widget) == (s32)FUN_0029ee54(widget) &&
+            if (resourceRunOperationIfUnblocked(widget) + (s32)uiListGetVisibleCount(widget) == (s32)gridNavigationGetItemCount(widget) &&
                 offset + length < record->placement->height) {
                 offset = record->placement->height - length;
             }

@@ -28,7 +28,7 @@ extern "C" {
 
 Task1ab6f4 *taskCreate(void (*update)(Task1ab6f4 *), u32 a, u32 b, u32 c, u32 d, u32 size, u32 list, u32 e, u32 f);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-void FUN_00291340(void *params, void *a, void *b, void *c, void *d);
+void effScalarKeyFindNextDistinct(void *params, void *a, void *b, void *c, void *d);
 void particleRingEmitterUpdate(Task1ab6f4 *task);
 
 // Create the task that runs particleRingEmitterUpdate with copies of the given data and parameter blocks.
@@ -46,7 +46,7 @@ __softfp Task1ab6f4 *FUN_001ab6f4(u32 arg0, const void *data, const void *params
         task->unk22C = arg5;
         task->unk234 = -1;
         task->unk230 = -1;
-        FUN_00291340(task->params, task->unk028, task->unk030, task->unk00C, task->unk018);
+        effScalarKeyFindNextDistinct(task->params, task->unk028, task->unk030, task->unk00C, task->unk018);
         task->unk228 = arg4;
         task->unk302 = arg6;
         task->unk300 = arg6;

@@ -10,7 +10,7 @@ struct CostSkills { union { UnitSummarySkills main; u16 ids[9]; }; };
 }
 extern "C" {
 extern const f32 DAT_00446d30[];
-void FUN_00283f30(CostSkills *skills, s32 includeSource);
+void playerCollectPassiveSkillBits(CostSkills *skills, s32 includeSource);
 u32 playerGetSkillRank(u16 skill);
 s32 FUN_003bf53c(s32 unitParameter, s32 rankAdjustment, u16 extra, f32 cost, f32 firstScale, f32 secondScale, f32 passiveScale);
 s32 mathApplyReductionMultiplier(s32 value, s32 rankAdjustment, u16 extra, f32 multiplier);
@@ -29,7 +29,7 @@ u32 FUN_00262260(const SkillDataRecord *skill, u32 baseValue, s32 unitIndex)
     s32 unitParameter;
     if (unitIndex < 0) {
         unitParameter = gameGetPlayerData()->stats[2];
-        FUN_00283f30(&skills, 1);
+        playerCollectPassiveSkillBits(&skills, 1);
         rankAdjustment = skillSumRankBonuses(skill, playerGetSkillRank(skill->identity.id), 2);
     } else {
         StatBlock *unit = gameGetUnitRecord(unitIndex);

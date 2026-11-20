@@ -8,9 +8,9 @@ int onlineInstanceTableGetCurrent(void);
 int vectorInitEmpty(...);
 int FUN_002e9e8a(unsigned int, unsigned int, int *);
 int onlineInstanceTableFind(int, unsigned int);
-int FUN_002e9f00(void);
+int onlineInstanceCompleteWithChildren(void);
 int vectorDestroyWords(...);
-int FUN_002f3dde(unsigned int, unsigned int);
+int onlineInstanceCompleteMode3(unsigned int, unsigned int);
 int FUN_002ff3b0(unsigned int **, unsigned int *, int, unsigned int);
 int wordMoveOut_002ff3b8(int *, int *, int);
 int mapIteratorNext7(int *);
@@ -32,9 +32,9 @@ extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 /* Supplied declaration required: vectorInitEmpty. */
 /* Supplied declaration required: FUN_002e9e8a. */
 /* Supplied declaration required: onlineInstanceTableFind. */
-/* Supplied declaration required: FUN_002e9f00. */
+/* Supplied declaration required: onlineInstanceCompleteWithChildren. */
 /* Supplied declaration required: vectorDestroyWords. */
-/* Supplied declaration required: FUN_002f3dde. */
+/* Supplied declaration required: onlineInstanceCompleteMode3. */
 /* Supplied declaration required: FUN_002ff3b0. */
 /* Supplied declaration required: wordMoveOut_002ff3b8. */
 /* Supplied declaration required: mapIteratorNext7. */
@@ -78,7 +78,7 @@ void FUN_00306d9c(int param_1,int param_2,int param_3)
       temp_v10 = 0x80010004;
       temp_v0 = _ZN12OnlineResultC1ERKj(temp_v11,(unsigned int *)&temp_v10);
       wordMoveOut_002ff3b8(&temp_v8,&temp_v7,0);
-      FUN_002f3dde(*(unsigned int *)(temp_v8 + 0x14),temp_v0);
+      onlineInstanceCompleteMode3(*(unsigned int *)(temp_v8 + 0x14),temp_v0);
       vectorDestroyWords(&temp_v5);
     }
     else {
@@ -89,7 +89,7 @@ void FUN_00306d9c(int param_1,int param_2,int param_3)
     temp_v1 = onlineInstanceTableGetCurrent();
     onlineInstanceTableFind(temp_v1,*puVar3);
     if (temp_v1 != 0) {
-      FUN_002e9f00();
+      onlineInstanceCompleteWithChildren();
     }
   }
   vectorDestroyWords(&temp_v3);

@@ -8,8 +8,8 @@
 
 extern "C" {
 void sysMemClear(void *memory, u32 size);
-s32 FUN_00162ea4();
-NpcPortraitResource *FUN_00409fe8(s32 portraitId, s32 mode, s32 enabled);
+s32 eventIsSkipping();
+NpcPortraitResource *resourceCacheGetOrLoadModel(s32 portraitId, s32 mode, s32 enabled);
 s32 FUN_002897cc(u32 handle);
 void FUN_0034da3c(u32 handle);
 extern const s8 DAT_0052f4f0[]; // "EVE_2dTex"
@@ -34,10 +34,10 @@ u32 npc2dCreateDemonPortrait(u32 id, u32 option, s32 x, s32 y, f32 alpha)
         work->unk70[i] = 0;
     }
     work->portraitId = nkmEnemyFindById((u16)id)->battleTextureId;
-    if (FUN_00162ea4()) {
+    if (eventIsSkipping()) {
         work->resourceState = 1;
     } else {
-        work->portrait = FUN_00409fe8(work->portraitId, 1, 1);
+        work->portrait = resourceCacheGetOrLoadModel(work->portraitId, 1, 1);
         work->resourceState = 2;
     }
     work->unk00 = (u16)(-id);

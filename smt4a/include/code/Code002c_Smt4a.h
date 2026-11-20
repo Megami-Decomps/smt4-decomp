@@ -9,7 +9,7 @@ u8 FUN_002c7cb4(void);
 
 s32 gameDataStatusFlagGet(u32 index);
 
-s32 objectApplyIfUnblocked(Object *object);
+s32 gridNavigationGetItemCount(Object *object);
 
 void FUN_002cc96c(Object *object);
 

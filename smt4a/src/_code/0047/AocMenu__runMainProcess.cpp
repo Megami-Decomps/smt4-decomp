@@ -24,7 +24,7 @@ extern "C" {
 nn::Result legacyResourceIdRemap(const WindowStatusResult *result); // declcheck: local (the headers return a plain word, which changes this caller's code)
 void buttonHelpSetEnabled(u32 value);
 u32 buttonHelpIsActionActive(u32 action);
-WindowStatusResult FUN_00426fe4(void *file, const void *archive);
+WindowStatusResult aocOpenPackedArchive(void *file, const void *archive);
 void recordClearWideHandle(void *file);
 s32 FUN_0031d174(FlaggedValueHolder *holder); // declcheck: local (the header's declaration drops the row it returns)
 void listCursorSetPosition(FlaggedValueHolder *holder, s32 position);
@@ -38,7 +38,7 @@ bool _ZN13ObjBase3c2ef07vfunc0cEv(Obj4221a4 *panel, FlaggedValueHolder *holder);
 u8 countOwnerIsValidIndex(const AocMain *main, u32 index);
 u32 statusDecodeActivityState(const StatusBytes *status);
 RelativeDirectory *FUN_00473910(AocMain *main, s32 index); // declcheck: local (the header returns the directory as a plain word)
-void FUN_0036bea0(AsdText *text, u32 font, s32 mode, s32 x, s32 y, const char *message);
+void asdTextDrawFormattedCore(AsdText *text, u32 font, s32 mode, s32 x, s32 y, const char *message);
 void aocMenuSetButtonHelp(AocMenu *menu, u32 selection, s32 mode);
 s32 bgmGetStateById(u32 id);
 void bgmResumeOrRequestTrack(u32 id);
@@ -97,7 +97,7 @@ static __inline void showDescription(AocMenu *menu, AsdText **text)
         if (record->flags[7] != 0) {
             asdTextDrawDirectoryEntry(*text, 3, -1, 0, 3, FUN_00473910(g_aocMain, -1), 12);
         } else {
-            FUN_0036bea0(*text, 3, -1, 0, 3, reinterpret_cast<const char *>(record->contents));
+            asdTextDrawFormattedCore(*text, 3, -1, 0, 3, reinterpret_cast<const char *>(record->contents));
         }
     }
 }
@@ -170,7 +170,7 @@ void AocMenu::runMainProcess()
     case 0: {
         buttonHelpSetEnabled(0);
         flags &= ~AOC_MENU_LOADING;
-        if (failOnArchiveError(this, FUN_00426fe4(main->contentFile, main->contentArchive))) {
+        if (failOnArchiveError(this, aocOpenPackedArchive(main->contentFile, main->contentArchive))) {
             return;
         }
         recordClearWideHandle(main->contentFile);

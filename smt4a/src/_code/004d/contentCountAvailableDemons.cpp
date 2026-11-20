@@ -9,7 +9,7 @@ u32 dataTable5Count(void);
 Entry0035dd74 *contentEntryFindById(u32 id);
 u32 gameFlagIsSet(u32 flag);
 u32 gameDataCopySaveEntry(u32 id, void *output);
-u32 FUN_002a4b28(u16 id);
+u32 compendiumEntryIsRegistered(u16 id);
 
 u16 contentCountAvailableDemons(void)
 {
@@ -40,7 +40,7 @@ u16 contentCountAvailableDemons(void)
                 }
             }
         }
-        if ((demon->flags & 1) && FUN_002a4b28(entry->value)) {
+        if ((demon->flags & 1) && compendiumEntryIsRegistered(entry->value)) {
             ++count;
         }
     }

@@ -8,7 +8,7 @@ extern "C" {
 
 int messageSetMode(...);
 int dialogClose(...);
-int FUN_0020b490(...);
+int resultSetMode(...);
 int FUN_00333dc8(...);
 
 int padQueryLogicalKey(...);
@@ -19,14 +19,14 @@ int gameGetPlayerData(void);
 int uiSpriteSetKeyframe(...);
 int buttonHelpSetText(...);
 int dialogOpen(...);
-int FUN_00228b04(...);
+int gridNavigationHandleConfirm(...);
 int scrScriptProcessStartEntry(...);
 int ifTouchRegionAdd(int, int, int, int);
 int listCursorGetRowIfUnblocked(...);
 int infoWinSetTimer(...);
 int flaggedEntrySetValueA(...);
 int uiScrollHandleActionsOrTouch(...);
-int FUN_00359974(int, int, unsigned int, int);
+int entryTableResetAndInit(int, int, unsigned int, int);
 int FUN_00372100(...);
 int FUN_003df7c4(...);
 int engineGetFloatTableValue(...);
@@ -63,9 +63,9 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: messageSetMode. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: dialogClose. */
-/* Supplied declaration required: FUN_0020b490. */
+/* Supplied declaration required: resultSetMode. */
 extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_00228b04. */
+/* Supplied declaration required: gridNavigationHandleConfirm. */
 extern int FUN_0022e750(void);
 extern int dialogIsActive(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -79,7 +79,7 @@ extern int messageGetChoiceResult(void);
 extern int statsAreAllCapped(int);
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
-/* Supplied declaration required: FUN_00359974. */
+/* Supplied declaration required: entryTableResetAndInit. */
 /* Supplied declaration required: FUN_00372100. */
 /* Supplied declaration required: FUN_003df7c4. */
 /* Supplied declaration required: engineGetFloatTableValue. */
@@ -131,7 +131,7 @@ void FUN_002c9a8c(int param_1)
     temp_v20 = (unsigned int)*(unsigned short *)(temp_v20 + 0x62) -
              (unsigned int)*(unsigned short *)(param_1 + *piVar25 * 0x150 + 0x4492);
     *(int *)(param_1 + 0x7538) = temp_v20;
-    FUN_00359974(0x18,temp_v20,0xffffffff,0);
+    entryTableResetAndInit(0x18,temp_v20,0xffffffff,0);
     uiSpriteSetKeyframe(temp_v19,0);
     temp_v20 = 0;
     do {
@@ -279,7 +279,7 @@ LAB_002ca008:
     }
     temp_v19 = temp_v20;
     uiScrollHandleActionsOrTouch(temp_v20,0,param_1 + 0x43b6,0xffffffff,0xffffffff,0xffffffff,temp_v23,0,1);
-    if ((temp_v19 != 0) || (temp_v19 = temp_v20, FUN_00228b04(temp_v20,0), temp_v19 != 0)) {
+    if ((temp_v19 != 0) || (temp_v19 = temp_v20, gridNavigationHandleConfirm(temp_v20,0), temp_v19 != 0)) {
       temp_v15 = listCursorGetRowIfUnblocked(temp_v20);
       temp_v16 = dataTableGet(0x25,1);
       temp_v19 = dataTableGetEntries();
@@ -480,7 +480,7 @@ LAB_002ca524:
       if (temp_v19 != 0) {
         dialogClose(1);
       }
-      FUN_0020b490(param_1,0x13);
+      resultSetMode(param_1,0x13);
     }
     break;
   case 6:

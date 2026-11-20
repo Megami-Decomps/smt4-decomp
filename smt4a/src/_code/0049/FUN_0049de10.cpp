@@ -47,7 +47,7 @@ extern "C" {
 void FUN_0049dd74(DirectoryLayoutWork *work);
 void asdTextDrawDirectoryEntry(void *text, s32 mode, u32 color, s32 first, s32 alignment,
                                u32 directory, u32 entry);
-s32 FUN_001688c4(void *text);
+s32 statusDownScanSelectedEntryIndex(void *text);
 
 void FUN_0049de10(DirectoryLayoutWork *work)
 {
@@ -84,7 +84,7 @@ void FUN_0049de10(DirectoryLayoutWork *work)
                 work->rows[i].choices[0] = textIndex;
                 asdTextDrawDirectoryEntry(work->texts[textIndex], 3, 0xffffffff, 0, 3,
                                           work->directory, textIndex + (u32)group * 10);
-                height = FUN_001688c4(work->texts[textIndex]);
+                height = statusDownScanSelectedEntryIndex(work->texts[textIndex]);
                 ++textIndex;
             }
             work->rows[i].start = totalHeight;

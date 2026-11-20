@@ -63,7 +63,7 @@ struct DebugGlobals {
 #define DEBUG_STATE_DONE 0x20
 
 extern "C" {
-extern DebugGlobals DAT_005715f8;
+extern DebugGlobals g_btlDebugGlobals;
 extern const AsdListBoxEntry DAT_005731c0[3];
 extern const AsdListBoxEntry DAT_00572340[20];
 extern const AsdListBoxEntry DAT_005725c0[18];
@@ -106,7 +106,7 @@ void asdListBoxSetFloatItem(u32 listBox, u32 id, s32 minimum, s32 maximum, f32 v
 void jobSetText(u32 job, const char *text);
 u32 jobIsValid(u32 handle);
 u32 jobStop(u32 handle, u16 delay);
-void FUN_003592dc(u32 handle);
+void asdListBoxJobReset(u32 handle);
 s32 padButtonIsPressed(s32 button);
 s32 dataTable22GetCount(void);
 s32 dataTable3Type0Count(void);
@@ -139,7 +139,7 @@ void talkCtrlDebugMenuBuild(DebugMenu *menu, DebugBattle *battle);
 static __inline void closeList(DebugMenu *menu)
 {
     if (jobIsValid(menu->listBox) != 0) {
-        FUN_003592dc(menu->listBox);
+        asdListBoxJobReset(menu->listBox);
         jobStop(menu->listBox, 0);
     }
 }
@@ -172,7 +172,7 @@ u32 FUN_004d6104(DebugMenu *menu, DebugBattle *battle)
         switch (item) {
         case 0: {
             u32 value = *asdListBoxGetIntValuePtr(menu->listBox, item);
-            if (DAT_005715f8.prefix.category != 0) {
+            if (g_btlDebugGlobals.prefix.category != 0) {
                 asdListBoxSetIntItem(menu->listBox, 0, value, 0, dataTable3Type0Count() - 1, 0);
                 battle->groupA = -1;
                 battle->groupB = value;
@@ -181,11 +181,11 @@ u32 FUN_004d6104(DebugMenu *menu, DebugBattle *battle)
                 battle->groupB = -1;
                 battle->groupA = value;
             }
-            DAT_005715f8.prefix.selectedId = value;
+            g_btlDebugGlobals.prefix.selectedId = value;
             break;
         }
         case 1:
-            DAT_005715f8.prefix.category = listBoxItemHasOwner(menu->listBox, item);
+            g_btlDebugGlobals.prefix.category = listBoxItemHasOwner(menu->listBox, item);
             break;
         case 2:
             DAT_00573970 = *asdListBoxGetIntValuePtr(menu->listBox, item);
@@ -195,21 +195,21 @@ u32 FUN_004d6104(DebugMenu *menu, DebugBattle *battle)
             break;
         case 4:
             if (listBoxItemHasOwner(menu->listBox, item) != 0)
-                battle->flags |= DAT_005715f8.masks[13];
+                battle->flags |= g_btlDebugGlobals.masks[13];
             else
-                battle->flags &= ~DAT_005715f8.masks[13];
+                battle->flags &= ~g_btlDebugGlobals.masks[13];
             break;
         case 5:
             if (listBoxItemHasOwner(menu->listBox, item) != 0)
-                battle->flags |= DAT_005715f8.masks[14];
+                battle->flags |= g_btlDebugGlobals.masks[14];
             else
-                battle->flags &= ~DAT_005715f8.masks[14];
+                battle->flags &= ~g_btlDebugGlobals.masks[14];
             break;
         case 6:
             if (listBoxItemHasOwner(menu->listBox, item) != 0)
-                battle->flags |= DAT_005715f8.masks[15];
+                battle->flags |= g_btlDebugGlobals.masks[15];
             else
-                battle->flags &= ~DAT_005715f8.masks[15];
+                battle->flags &= ~g_btlDebugGlobals.masks[15];
             break;
         case 7:
             battle->value178 = *asdListBoxGetIntValuePtr(menu->listBox, item);
@@ -225,33 +225,33 @@ u32 FUN_004d6104(DebugMenu *menu, DebugBattle *battle)
             break;
         case 11:
             if (listBoxItemHasOwner(menu->listBox, item) != 0)
-                battle->flags |= DAT_005715f8.masks[27];
+                battle->flags |= g_btlDebugGlobals.masks[27];
             else
-                battle->flags &= ~DAT_005715f8.masks[27];
+                battle->flags &= ~g_btlDebugGlobals.masks[27];
             break;
         case 12:
             if (listBoxItemHasOwner(menu->listBox, item) != 0)
-                battle->flags |= DAT_005715f8.masks[35];
+                battle->flags |= g_btlDebugGlobals.masks[35];
             else
-                battle->flags &= ~DAT_005715f8.masks[35];
+                battle->flags &= ~g_btlDebugGlobals.masks[35];
             break;
         case 13:
             if (listBoxItemHasOwner(menu->listBox, item) != 0)
-                battle->flags |= DAT_005715f8.masks[37];
+                battle->flags |= g_btlDebugGlobals.masks[37];
             else
-                battle->flags &= ~DAT_005715f8.masks[37];
+                battle->flags &= ~g_btlDebugGlobals.masks[37];
             break;
         case 14:
             if (listBoxItemHasOwner(menu->listBox, item) != 0)
-                battle->flags |= DAT_005715f8.masks[18];
+                battle->flags |= g_btlDebugGlobals.masks[18];
             else
-                battle->flags &= ~DAT_005715f8.masks[18];
+                battle->flags &= ~g_btlDebugGlobals.masks[18];
             break;
         case 15:
             if (listBoxItemHasOwner(menu->listBox, item) != 0)
-                battle->flags |= DAT_005715f8.masks[29];
+                battle->flags |= g_btlDebugGlobals.masks[29];
             else
-                battle->flags &= ~DAT_005715f8.masks[29];
+                battle->flags &= ~g_btlDebugGlobals.masks[29];
             break;
         }
         if (padButtonIsPressed(0) != 0) {
@@ -431,9 +431,9 @@ u32 FUN_004d6104(DebugMenu *menu, DebugBattle *battle)
             break;
         case 1:
             if (listBoxItemHasOwner(menu->listBox, item) != 0)
-                battle->flags |= DAT_005715f8.masks[39];
+                battle->flags |= g_btlDebugGlobals.masks[39];
             else
-                battle->flags &= ~DAT_005715f8.masks[39];
+                battle->flags &= ~g_btlDebugGlobals.masks[39];
             break;
         case 2:
             DAT_0057aa0c = *asdListBoxGetIntValuePtr(menu->listBox, 2);
@@ -638,8 +638,8 @@ u32 FUN_004d6104(DebugMenu *menu, DebugBattle *battle)
         break;
     case 0x17:
         openList(menu, battle, DAT_00572e80, 2, "btl Result Menu");
-        asdListBoxSetToggleItem(menu->listBox, 0, (battle->flags & DAT_005715f8.masks[33]) != 0);
-        asdListBoxSetToggleItem(menu->listBox, 1, (battle->flags & DAT_005715f8.masks[34]) != 0);
+        asdListBoxSetToggleItem(menu->listBox, 0, (battle->flags & g_btlDebugGlobals.masks[33]) != 0);
+        asdListBoxSetToggleItem(menu->listBox, 1, (battle->flags & g_btlDebugGlobals.masks[34]) != 0);
         next = 0x18;
         break;
     case 0x18: {
@@ -647,15 +647,15 @@ u32 FUN_004d6104(DebugMenu *menu, DebugBattle *battle)
         if (item != 0) {
             if (item == 1) {
                 if (listBoxItemHasOwner(menu->listBox, item) != 0)
-                    battle->flags |= DAT_005715f8.masks[34];
+                    battle->flags |= g_btlDebugGlobals.masks[34];
                 else
-                    battle->flags &= ~DAT_005715f8.masks[34];
+                    battle->flags &= ~g_btlDebugGlobals.masks[34];
             }
         } else {
             if (listBoxItemHasOwner(menu->listBox, item) != 0)
-                battle->flags |= DAT_005715f8.masks[33];
+                battle->flags |= g_btlDebugGlobals.masks[33];
             else
-                battle->flags &= ~DAT_005715f8.masks[33];
+                battle->flags &= ~g_btlDebugGlobals.masks[33];
         }
         if (padButtonIsPressed(0) == 0)
             return 0;

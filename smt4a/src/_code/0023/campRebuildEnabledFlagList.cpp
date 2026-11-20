@@ -5,7 +5,7 @@
 
 extern "C" {
 void gridNavigationConfigure(GridNavigation *, s32 count, s32 kind, s32 a, s32 b, s32 c);
-void FUN_003d0bc0(s32 mode);
+void campRebuildListByMode(s32 mode);
 
 // Rebuild the requested camp list from the enabled flag ranges.
 void campRebuildEnabledFlagList(s32 mode)
@@ -55,6 +55,6 @@ void campRebuildEnabledFlagList(s32 mode)
         }
     }
     gridNavigationConfigure(menu, count, 11, 1, 1, 1);
-    FUN_003d0bc0(mode);
+    campRebuildListByMode(mode);
 }
 }

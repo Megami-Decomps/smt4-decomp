@@ -25,8 +25,8 @@ extern "C" {
 
 extern const char *g_btlEffect; /* name of the effect being played */
 
-s32 FUN_00293230(void *state);
-s32 FUN_00227668(BtlNamedValueOwner *owner);
+s32 btlScriptUnitIsIncapacitated(void *state);
+s32 btlEffectOwnerGetBestSlotValue(BtlNamedValueOwner *owner);
 u32 libc_strlen(const char *text);
 s32 libc_strncmp(const char *a, const char *b, u32 size);
 
@@ -47,14 +47,14 @@ static BtlNamedValue *btlFindEffectValue(BtlNamedValueOwner *owner)
     return NULL;
 }
 
-/* Returns -1 while FUN_00293230 holds the battle; otherwise the owner's value for the current
- * effect, falling back to FUN_00227668 when it has none. */
+/* Returns -1 while btlScriptUnitIsIncapacitated holds the battle; otherwise the owner's value for the current
+ * effect, falling back to btlEffectOwnerGetBestSlotValue when it has none. */
 s32 btlLookupEffectValue(BtlNamedValueOwner *owner)
 {
     BtlNamedValue *entry;
     s32 value;
 
-    if (FUN_00293230(static_cast<void *>(btlGetMainState())) != 0) {
+    if (btlScriptUnitIsIncapacitated(static_cast<void *>(btlGetMainState())) != 0) {
         return -1;
     }
     value = 0;
@@ -63,7 +63,7 @@ s32 btlLookupEffectValue(BtlNamedValueOwner *owner)
         value = entry->value;
     }
     if (value == 0) {
-        value = FUN_00227668(owner);
+        value = btlEffectOwnerGetBestSlotValue(owner);
     }
     return value;
 }

@@ -19,7 +19,7 @@ int scrScriptProcessStartEntry(unsigned int, int);
 int clockRecordStartSeconds(void);
 int libc_strcpy(...);
 int messageStateEndMode2(void);
-int FUN_002f0384(...);
+int statusCameraRestore(...);
 int FUN_0033440c(...);
 int FUN_0033449c(...);
 int FUN_0034aac8(...);
@@ -52,11 +52,11 @@ extern unsigned int configGetSettings(void);
 extern unsigned int gameDataBlocksGetTable(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageGetChoiceResult(void);
-/* Supplied declaration required: FUN_002c8538. */
+/* Supplied declaration required: gameGlobalsSetOverlayActive. */
 /* Supplied declaration required: clockRecordStartSeconds. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: messageStateEndMode2. */
-/* Supplied declaration required: FUN_002f0384. */
+/* Supplied declaration required: statusCameraRestore. */
 /* Supplied declaration required: FUN_0033440c. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: FUN_0034aac8. */
@@ -161,8 +161,8 @@ void FUN_0041de6c(SaveSlotHeaderWork *ui)
       }
       FUN_0033449c(0);
       FUN_0023b45c(1);
-      FUN_002c8538(1);
-      FUN_002f0384(0);
+      gameGlobalsSetOverlayActive(1);
+      statusCameraRestore(0);
       *(unsigned char *)(param_1 + 0x68) = 0;
       FUN_0038b5fc(1,*(unsigned short *)(*(int *)(param_1 + 0x54) + 8));
       FUN_0038b5fc(2,*(unsigned short *)(*(int *)(param_1 + 0x54) + 10));
@@ -175,7 +175,7 @@ void FUN_0041de6c(SaveSlotHeaderWork *ui)
   }
   if ((*(char *)(param_1 + 0x5c) != '\0') && (temp_v0 = objBStateAllowsAction(), temp_v0 != 0)) {
     *(unsigned char *)(param_1 + 0x5c) = 0;
-    FUN_002f0384(1);
+    statusCameraRestore(1);
     *(unsigned char *)(param_1 + 0x68) = 1;
   }
   temp_v0 = saveLoadThreadHasResult();

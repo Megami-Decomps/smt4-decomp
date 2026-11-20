@@ -14,7 +14,7 @@ void refSlotAssign(PolyGeom *geom, u32 texture);
 u32 sysGetTableWord(int id);
 void FUN_003269d4(PolyWindBlock *block, PolyWindParams *params);
 
-extern u8 DAT_00473708;
+extern u8 g_effPolyGeomIndexTable;
 
 /* Allocates a wind block of `payloadBytes` (header included), recording the allocation site first. */
 static PolyWindBlock *allocWindBlock(u32 payloadBytes)
@@ -35,7 +35,7 @@ PolyWindBlock *effPolyWindGeomCreate0(PolyWindParams *params, void *texture)
 
     sides = atLeastU32(params->sides, 3);
     params->sides = sides;
-    block->geom = FUN_002469ec(params->segments & 0xffff, sides & 0xffff, &DAT_00473708, 4, 0x4c);
+    block->geom = FUN_002469ec(params->segments & 0xffff, sides & 0xffff, &g_effPolyGeomIndexTable, 4, 0x4c);
     if (texture == NULL) {
         refSlotAssign(block->geom, sysGetTableWord(20));
     } else {

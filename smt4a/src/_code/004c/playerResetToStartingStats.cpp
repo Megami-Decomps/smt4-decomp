@@ -3,7 +3,7 @@
 #include "gamedata/GamePlayerData.h"
 
 extern "C" {
-u32 FUN_003daaf8(s32 level, const StatGrowthParameters *parameters);
+u32 statGrowthAccumulate(s32 level, const StatGrowthParameters *parameters);
 void FUN_003df7c4(PlayerDataA *player);
 }
 
@@ -11,7 +11,7 @@ void FUN_003df7c4(PlayerDataA *player);
 static __inline void statMaximumsAtLevel(s32 level, u16 *maximums, const StatGrowthParameters *parameters)
 {
     maximums[0] = unitComputeMaximumHpAtLevel(level, parameters);
-    maximums[1] = FUN_003daaf8(level, parameters);
+    maximums[1] = statGrowthAccumulate(level, parameters);
 }
 
 /* Resets the hero to level 1 with the starting stats of data table 9. */

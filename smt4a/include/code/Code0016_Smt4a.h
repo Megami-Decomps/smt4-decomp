@@ -18,6 +18,6 @@ void vectorClear(Vector *vector);
 
 u8 * fileSectionGetData(FileHeader *file, int index, u32 *size);
 
-s32 FUN_001688c4(TextLine *line);
+s32 statusDownScanSelectedEntryIndex(TextLine *line);
 
 } /* extern "C" */

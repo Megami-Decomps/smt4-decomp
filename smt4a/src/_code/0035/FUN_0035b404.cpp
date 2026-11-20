@@ -17,7 +17,7 @@ s32 loadSlotIsLoaded(u32 slot);
 void loadSlotRequestAsync(u32 slot, u32 flags);
 void campButtonHelpAcquire(void);
 void statusAcquireSharedResources(void);
-void FUN_002c85b0(s32 enabled);
+void gameGlobalsSetSceneState(s32 enabled);
 void FUN_003c607c(u8 value);
 
 /* Moves the market work to `state`, remembering the state it left and restarting its counter. */
@@ -45,8 +45,8 @@ void FUN_0035b404(u32 argument)
     }
     campButtonHelpAcquire();
     statusAcquireSharedResources();
-    FUN_002c85b0(0);
-    FUN_002c8538(0);
+    gameGlobalsSetSceneState(0);
+    gameGlobalsSetOverlayActive(0);
     FUN_003c607c(1);
     devilMarketEnterState(work, 1);
 }

@@ -3,14 +3,14 @@
 
 extern "C" {
 
-void FUN_002cf09c(u32 value);
-void FUN_001acb48(void *object, const EffectEditorWords *parameters);
+void gfxQuaternionFromMatrix(u32 value);
+void effectTimelinePartApplyRotation(void *object, const EffectEditorWords *parameters);
 
 void engineApplyGlobalParameters(void *object, u32 value)
 {
-    FUN_002cf09c(value);
+    gfxQuaternionFromMatrix(value);
     EffectEditorWords parameters = g_vectorScratch.first.words;
-    FUN_001acb48(object, &parameters);
+    effectTimelinePartApplyRotation(object, &parameters);
 }
 
 } /* extern "C" */

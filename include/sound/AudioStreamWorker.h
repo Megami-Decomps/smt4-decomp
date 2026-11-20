@@ -4,7 +4,7 @@
 #include "shard/W6_W6Match7_WaveBuffer.h"
 #include <stddef.h>
 
-/* The audio stream worker thread's state (global DAT_0044d0f8, the same block DeferredTransferState
+/* The audio stream worker thread's state (global g_soundVoicePool, the same block DeferredTransferState
  * and SoundVoicePool view). The worker polls the flag and ring cursors while other threads update them,
  * so those fields are volatile: retail reloads them after its own stores and between tests. */
 struct AudioStreamSlot {

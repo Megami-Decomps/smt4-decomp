@@ -30,7 +30,7 @@ int gameFlagsSetFlagsFromTaggedGroupEntries(...);
 int jobStop(...);
 int ifTouchRegionRemove(void);
 int sysPlaySe(...);
-int FUN_00168980(...);
+int buttonHelpTransitionPresetFlags(...);
 int eventQueueAddUnique(...);
 int dataTableGet(...);
 void frameTransitionSetMode(int);
@@ -88,7 +88,7 @@ extern unsigned short ifTouchRegionAddRequested(unsigned int, unsigned int);
 extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00168980. */
+/* Supplied declaration required: buttonHelpTransitionPresetFlags. */
 /* Supplied declaration required: eventQueueAddUnique. */
 
 /* Supplied declaration required: dataTableGet. */
@@ -834,7 +834,7 @@ LAB_0029fb00:
     }
     break;
   case 0xe:
-    temp_v5 = FUN_002ef9f0();
+    temp_v5 = mapRndMazeTaskIsActive();
     if (temp_v5 != 0) break;
     temp_v5 = saveLoadUIHasResult();
     if (temp_v5 != 0) {
@@ -872,7 +872,7 @@ LAB_0029fb00:
     if (temp_v5 != 0) {
       campCommonBgRelease();
       jobStop(*DAT_00589170,0);
-      FUN_00168980(3);
+      buttonHelpTransitionPresetFlags(3);
       temp_v5 = puVar4[2];
       if (temp_v5 != 1) {
         if (temp_v5 != 0) {

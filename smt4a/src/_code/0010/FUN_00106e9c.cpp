@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-extern int FUN_002eb5f4(void);
+extern int watcherGetActiveContext(void);
 /* Supplied declaration required: FUN_002ee5b8. */
 extern unsigned int FUN_002ee5c4(int, unsigned int *);
 extern int FUN_002ee5fe(int, unsigned int *, int);
@@ -33,7 +33,7 @@ void FUN_00106e9c(int param_1)
   unsigned int *temp_v4 [2];
   unsigned int temp_v5 [3];
   
-  temp_v1 = FUN_002eb5f4();
+  temp_v1 = watcherGetActiveContext();
   temp_v1 = *(int *)(temp_v1 + 0xd0);
   temp_v0 = 1;
   temp_v4[0] = (unsigned int *)**(unsigned int **)(param_1 + 0x1c);

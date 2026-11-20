@@ -6,7 +6,7 @@ void FUN_002df5f8(void);
 /* Resets map camera controls, scalar tracks, and transition defaults. */
 void mapCameraResetControls(void)
 {
-    LmapViewHolder *globals = &DAT_004474f0;
+    LmapViewHolder *globals = &g_lmapViewHolder;
     LmapView *work = globals->view;
     work->mode = 0;
     work->phase = 0;

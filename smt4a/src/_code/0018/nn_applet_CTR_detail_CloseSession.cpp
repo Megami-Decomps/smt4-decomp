@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00189a38(int, int);
+int errThrowFatal(int, int);
 int resultHandleFailure(void);
 int software_interrupt(int);
 
@@ -17,7 +17,7 @@ extern int DAT_005b4470; /* 0x5b4470 */
 extern int DAT_005b4480; /* 0x5b4480 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_00189a38. */
+/* Supplied declaration required: errThrowFatal. */
 /* Supplied declaration required: resultHandleFailure. */
 
 
@@ -36,7 +36,7 @@ void nn_applet_CTR_detail_CloseSession(void)
     DAT_005b4480 = 0;
   }
   if (temp_v0 < 0) {
-    FUN_00189a38(temp_v0,0x18b994);
+    errThrowFatal(temp_v0,0x18b994);
   }
   if ((DAT_005b4470 != 0) && (software_interrupt(0x14), DAT_005b4470 < 0)) {
     resultHandleFailure();

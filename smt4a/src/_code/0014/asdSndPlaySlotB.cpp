@@ -14,7 +14,7 @@ static inline s32 auxiliaryFindFreeSlot16(AsdSndSlotBA *slots)
 extern "C" {
 s32 nw_snd_SoundArchive_IsAvailable(void *archive);
 u32 nw_snd_SoundArchive_GetSoundType(void *archive, u32 id);
-s32 FUN_00151340(u32 id);
+s32 asdSndEnsureCurrentSlotData(u32 id);
 u32 nw_snd_SoundStartable_StartSound(void *player, AuxiliarySoundHandle *handle, u32 id, u32 flags);
 
 // Start a sound in the first free auxiliary slot, reset parameters and apply the requested volume fade/pitch/pan.
@@ -28,7 +28,7 @@ s32 asdSndPlaySlotB(u32 id, u32 level, u32 frames, f32 pitch, f32 pan)
         return -1;
     if (nw_snd_SoundArchive_IsAvailable(&g_asdSoundSystem) &&
         nw_snd_SoundArchive_GetSoundType(&g_asdSoundSystem, id)) {
-        if (!FUN_00151340(id))
+        if (!asdSndEnsureCurrentSlotData(id))
             return -1;
         AuxiliarySoundHandle *handle = (AuxiliarySoundHandle *)&slots->handles[index];
         bool started = (u8)nw_snd_SoundStartable_StartSound(g_asdSoundSystem.player, handle, id, 0) == 0;

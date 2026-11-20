@@ -36,7 +36,7 @@ extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
 extern int DAT_00580c90; /* 0x580c90 */
-extern unsigned char DAT_005f32a0; /* 0x5f32a0 */
+extern unsigned char g_recordTable; /* 0x5f32a0 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -225,7 +225,7 @@ int FUN_00305760(int param_1)
       nn_math_ARMv6_VEC3TransformAsm_2AD44C(temp_v57,&temp_v39,&temp_v32);
       temp_v4 = 0;
       temp_v0 = temp_v0 * 0x17c;
-      pfVar9 = (float *)(&DAT_005f32a0 + temp_v0);
+      pfVar9 = (float *)(&g_recordTable + temp_v0);
       do {
         temp_v2 = temp_v4 * 0xc;
         pfVar3 = pfVar9 + temp_v4 * 3;
@@ -430,7 +430,7 @@ int FUN_00305760(int param_1)
     temp_v34 = temp_v9;
     nn_math_ARMv6_VEC3TransformAsm_2AD44C(temp_v53,&temp_v39,&temp_v32);
     temp_v0 = temp_v0 * 0x17c;
-    pfVar9 = (float *)(&DAT_005f32a0 + temp_v0);
+    pfVar9 = (float *)(&g_recordTable + temp_v0);
     temp_v4 = 0;
     do {
       temp_v2 = temp_v4 + 1;

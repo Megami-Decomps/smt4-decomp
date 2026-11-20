@@ -11,11 +11,11 @@ struct ContentEntryRef {
 };
 
 extern "C" {
-void FUN_00123934();
+void asdGxWaitForPreviousFrame();
 void table30GetEntryB(HalfwordBufferHandle *out, void *table, u32 index); // declcheck: local (the shared declaration in gamedata/GameDataAccess_Shard0050.h does not compile here: argument of type "HalfwordBufferHandle *" is incompatible with parameter of type "u8 **")
 u32 FUN_00234618(HalfwordBufferHandle *handle);
 u32 halfwordBufferCopyRange(HalfwordBufferHandle *handle, u16 *destination, u32 requested, u32 offset);
-WindowStatusResult FUN_003539e8(void *file, void *archive, const u16 *path, u32 count);
+WindowStatusResult recordQueryAndValidatePairWithKey(void *file, void *archive, const u16 *path, u32 count);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
 }
 
@@ -44,8 +44,8 @@ WindowStatusOperationResult Obj422230::vfunc0c(const void *)
         u32 count = FUN_00234618(&ref.handle);
         u16 path[64];
         halfwordBufferCopyRange(&ref.handle, path, count, 0);
-        FUN_00123934();
-        WindowStatusResult opened = FUN_003539e8(manager->service, manager->contentArchive, path, count);
+        asdGxWaitForPreviousFrame();
+        WindowStatusResult opened = recordQueryAndValidatePairWithKey(manager->service, manager->contentArchive, path, count);
         reserved = 1;
         result = opened;
     }

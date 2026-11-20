@@ -12,7 +12,7 @@ typedef struct TaskWork {
 extern void FUN_00200b24(void *work);
 extern TaskWork *taskCreate(void (*update)(void *), u32 a, u32 b, u32 c, u32 d, u32 size, u32 list, u32 e, u32 f);
 
-extern TaskWork *DAT_00433a58; /* 0x433a58 */
+extern TaskWork *g_effectColorOverride; /* 0x433a58 */
 
 /* Creates the task running FUN_00200b24 with a cleared 0x70-byte work area, disabled. */
 void FUN_00221ba8(void)
@@ -21,7 +21,7 @@ void FUN_00221ba8(void)
 
     if (work != NULL) {
         reinterpret_cast<int>(memClear(work, 0x70));
-        DAT_00433a58 = work;
+        g_effectColorOverride = work;
         work->enabled = 0;
     }
 }

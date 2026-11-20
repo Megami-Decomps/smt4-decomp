@@ -9,7 +9,7 @@ int streamExtractU8(...);
 int streamReadWord(int, int *);
 int FUN_0030093c(int, int);
 int FUN_00302698(void);
-int FUN_003026b0(int, unsigned int [2]);
+int streamReaderAdvanceU32(int, unsigned int [2]);
 int FUN_003026bc(int, int);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
@@ -27,7 +27,7 @@ extern int streamSeek(int);
 /* Supplied declaration required: streamReadWord. */
 /* Supplied declaration required: FUN_0030093c. */
 /* Supplied declaration required: FUN_00302698. */
-/* Supplied declaration required: FUN_003026b0. */
+/* Supplied declaration required: streamReaderAdvanceU32. */
 /* Supplied declaration required: FUN_003026bc. */
 
 
@@ -57,7 +57,7 @@ void FUN_00116860(int param_1,int param_2)
     temp_v6 = param_2 + 0x70;
     FUN_00302698();
     temp_v4[0] = 0;
-    FUN_003026b0(param_1,temp_v4);
+    streamReaderAdvanceU32(param_1,temp_v4);
     for (temp_v2 = 0; temp_v2 < temp_v4[0]; temp_v2 = temp_v2 + 1) {
       streamExtractU8(param_1,temp_v7);
       temp_v8 = *(unsigned int *)(temp_v6 + 0x10);

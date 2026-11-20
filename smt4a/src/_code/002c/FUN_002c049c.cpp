@@ -45,7 +45,7 @@ u32 FUN_002c049c(void)
         }
     } else if (setting->done == 0) {
         if (setting->waiting != 0) {
-            if (FUN_002e2014() == 0) {
+            if (campCecEditHasConfirmFlag() == 0) {
                 return 0;
             }
             stateAtF4Destroy();

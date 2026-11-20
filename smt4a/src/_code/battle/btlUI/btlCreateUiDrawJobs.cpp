@@ -9,7 +9,7 @@ void campCommonBgAcquire(void);
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, void *owner);
-s32 FUN_002248f8(u32 handle);
+s32 btlUiDrawJobUpdate(u32 handle);
 void FUN_00298670(u32 handle);
 s32 FUN_0024e31c(u32 handle);
 s32 FUN_00298674(u32 handle);
@@ -27,7 +27,7 @@ void btlCreateUiDrawJobs(BtlMainStateA *battle)
     }
     BtlUiA *ui = g_btlUi.ui;
     battle->uiJobs.drawJob = taskCreateDraw(reinterpret_cast<const s8 *>("btlUI Calc"),
-        4, 0, 0, FUN_002248f8, FUN_00298670, reinterpret_cast<u32>(battle),
+        4, 0, 0, btlUiDrawJobUpdate, FUN_00298670, reinterpret_cast<u32>(battle),
         reinterpret_cast<void *>(battle->job));
     taskCreateDraw(reinterpret_cast<const s8 *>("btlUI DrawUpLeft"), 0x7E, 0, 0,
         FUN_0024e31c, NULL, reinterpret_cast<u32>(battle), reinterpret_cast<void *>(battle->uiJobs.drawJob));

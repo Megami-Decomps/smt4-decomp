@@ -12,9 +12,9 @@ void efctSetSpeed(f32 speed);
 void statusDownCreatePanelEffects(s32 x, s32 y, s32 highlighted);
 void FUN_00185e84(s16 demon, s32 x, s32 y, u32 slot, s32 a, s32 b);
 void statDrawClampedDelta(PlayerDataA *source, s32 other, s32 x, s32 y, u32 slot, s32 a);
-u32 FUN_003df57c(u32 demon, u32 flag);
+u32 skillGetCostWithRankReduction(u32 demon, u32 flag);
 u32 skillGetAdjustedCost(PlayerDataA *source, u32 other);
-void FUN_00180310(u32 a, s32 x, s32 y, u32 b, u32 c, u32 slot, const char *format, u32 value);
+void statRowDrawValueImpl(u32 a, s32 x, s32 y, u32 b, u32 c, u32 slot, const char *format, u32 value);
 
 /* Draws one demon row of the status list at (x, y): its panel, name, power and level readouts. */
 void FUN_0037e5c0(s32 index, s32 x, s32 y, f32 speed)
@@ -50,7 +50,7 @@ void FUN_0037e5c0(s32 index, s32 x, s32 y, f32 speed)
     u32 power;
     if ((s16)status->selectedEntry <= 0) {
         FUN_00185e84(demon, icon->x + x, icon->y + y, 211, 1, 0);
-        power = FUN_003df57c(demon, 1);
+        power = skillGetCostWithRankReduction(demon, 1);
     } else {
         FUN_00185e84(demon, icon->x + x, icon->y + y, 211, 0, 0);
         statDrawClampedDelta(list->source, demon, icon->x + x, icon->y + y, 211, 0);
@@ -60,7 +60,7 @@ void FUN_0037e5c0(s32 index, s32 x, s32 y, f32 speed)
     sprintf(text, "%s", aocIndexValueOrDefault(demon));
     textDrawString(name->x + x, name->y + y, 0.2f, 3, 0.0f, color, speed, text);
     TextureTableEntryIV *level = asdTMTexTableEntryAt(18, 0x57d);
-    FUN_00180310(1, level->x + x, level->y + y, 1, 4, 221, "%d", power);
+    statRowDrawValueImpl(1, level->x + x, level->y + y, 1, 4, 221, "%d", power);
     efctSetSpeed(1.0f);
 }
 

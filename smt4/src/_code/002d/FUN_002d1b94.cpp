@@ -11,7 +11,7 @@ void mapDepartSetTarget(s32 group, s32 map, s32 target);
 void mapCollisionRelease(void);
 void FUN_0027b2b4(s32 map, u32 destination, s32 group, s32 target);
 void lmapUpdateMapBgm(void);
-void FUN_00264444(LmapObj *object);
+void lmapEntryPoolDestroyAll(LmapObj *object);
 void objSetBaseAndValue(LmapObj *object, s32 base, u32 value);
 void entryListCollectMatches(LmapObj *object);
 
@@ -50,7 +50,7 @@ void FUN_002d1b94(u32 destination, u32 flags)
         FUN_0027b2b4(state->mapId, state->areaId, 0, 0);
     }
     lmapUpdateMapBgm();
-    FUN_00264444(&state->obj);
+    lmapEntryPoolDestroyAll(&state->obj);
     objSetBaseAndValue(&state->obj, state->mapId - 100, state->areaId);
     entryListCollectMatches(&state->obj);
     lmapMainEnterTransition(g_lmapMainState, 3);

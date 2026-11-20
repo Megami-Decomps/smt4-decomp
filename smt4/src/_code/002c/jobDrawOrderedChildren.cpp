@@ -15,7 +15,7 @@ extern "C" {
 s32 jobIsValid(u32);
 f32 jobGetScalarFrame(u32);
 s32 gxPackFadeKindAlphaWord(u32, f32);
-void FUN_001dbc5c(u32, f32, f32);
+void titleFadeOverlayDraw(u32, f32, f32);
 void renderCtxResetColorScale(RenderCtx *);
 
 u32 jobDrawOrderedChildren(u32 job)
@@ -55,10 +55,10 @@ u32 jobDrawOrderedChildren(u32 job)
     if (work->drawAll) {
         for (s32 i = 0; i < 10; ++i) {
             if (jobIsValid(work->jobs[i]))
-                FUN_001dbc5c(work->jobs[i], work->x, work->y);
+                titleFadeOverlayDraw(work->jobs[i], work->x, work->y);
         }
     } else if (jobIsValid(work->single)) {
-        FUN_001dbc5c(work->single, work->x, work->y);
+        titleFadeOverlayDraw(work->single, work->x, work->y);
     }
     renderStackPop(&g_titleScene->additional.stackC);
     renderCtxApplyTransforms(g_titleScene);

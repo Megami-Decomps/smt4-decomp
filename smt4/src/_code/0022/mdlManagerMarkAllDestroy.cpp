@@ -14,7 +14,7 @@ typedef struct ModelManager {
     /* 0x284 */ ModelSet sets[6];
 } ModelManager;
 
-extern ModelManager DAT_004bce8c;
+extern ModelManager g_asdMdlBankSet;
 extern void asdMdlManagerMarkDestroy(void *model);
 
 /* Clears the manager's active flag and marks every model (the six primary ones and the 63 of each of the six sets) for destruction. */
@@ -23,15 +23,15 @@ void mdlManagerMarkAllDestroy(void)
     s32 i;
     s32 j;
 
-    DAT_004bce8c.active = 0;
+    g_asdMdlBankSet.active = 0;
     for (i = 0; i < 6; i++) {
         for (j = 1; j < 64; j++) {
-            if (DAT_004bce8c.sets[i].model[j] != NULL) {
-                asdMdlManagerMarkDestroy(DAT_004bce8c.sets[i].model[j]);
+            if (g_asdMdlBankSet.sets[i].model[j] != NULL) {
+                asdMdlManagerMarkDestroy(g_asdMdlBankSet.sets[i].model[j]);
             }
         }
-        if (DAT_004bce8c.primary[i] != NULL) {
-            asdMdlManagerMarkDestroy(DAT_004bce8c.primary[i]);
+        if (g_asdMdlBankSet.primary[i] != NULL) {
+            asdMdlManagerMarkDestroy(g_asdMdlBankSet.primary[i]);
         }
     }
 }

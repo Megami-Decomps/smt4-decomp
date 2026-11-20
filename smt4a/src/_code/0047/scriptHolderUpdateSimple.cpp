@@ -9,7 +9,7 @@ u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void asdLoadFileAsyncSimple(const char *path, void **destination, u32 flags);
 void optionsClearFlag1(void);
 u32 FUN_003a36b4(void);
-void FUN_004731d8(void);
+void gameSaveBlockRebuild27E98(void);
 
 u32 scriptHolderUpdateSimple(ScriptHolder *holder)
 {
@@ -32,7 +32,7 @@ u32 scriptHolderUpdateSimple(ScriptHolder *holder)
             FUN_00418070(rosterGetLeaderId(), 0);
             optionsClearFlag1();
             FUN_003a36b4();
-            FUN_004731d8();
+            gameSaveBlockRebuild27E98();
             holder->phase.state = 4;
         }
         return 0;

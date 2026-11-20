@@ -3,7 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
-extern const char DAT_00414954[]; /* "c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Effect\\effGeometry.cpp": __FILE__ */
+extern const char g_effGeometrySourceFileName[]; /* "c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Effect\\effGeometry.cpp": __FILE__ */
 
 void *memAlloc(int, int, int, s32 size, int align, int);
 void recordPrepareActive(EffGeomRecord *record, u32 first, u32 second, u32 third);
@@ -15,7 +15,7 @@ EffGeomHandle *effGeomCreateRepeatedIndexList(s32 rows, s32 columns, s32 stride,
     s32 cellCount = rows * columns;
     s32 rowIndices = columns * 3;
 
-    asdDebugTrace(DAT_00414954, 112);
+    asdDebugTrace(g_effGeometrySourceFileName, 112);
     EffGeomHandle *handle = (EffGeomHandle *)memAlloc(0x10000, 0x100, 0, 0x58, 0x10, 1);
     EffGeomRecord *record = new (stride) EffGeomRecord;
 

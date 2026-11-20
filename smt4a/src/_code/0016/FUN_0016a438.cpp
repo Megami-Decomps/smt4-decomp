@@ -53,7 +53,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001986c4. */
 /* Supplied declaration required: FUN_00198848. */
 extern unsigned int FUN_001988bc(unsigned int, unsigned char *);
-extern int FUN_001a7a20(int, unsigned int, unsigned int);
+extern int nameTableLookupEntry(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001b4030. */
 extern unsigned int libc_strlen(unsigned int);
 /* Supplied declaration required: strcmp. */
@@ -203,7 +203,7 @@ void FUN_0016a438(int param_1,int param_2)
                 temp_v1 = puVar14[0xc];
                 temp_v8 = *(unsigned int *)(pcVar11 + 8);
                 temp_v4 = libc_strlen(temp_v8);
-                temp_v1 = FUN_001a7a20(temp_v1 + 0x88,temp_v8,temp_v4);
+                temp_v1 = nameTableLookupEntry(temp_v1 + 0x88,temp_v8,temp_v4);
                 if (temp_v1 < (int)temp_v25) {
                   temp_v1 = *(int *)(*(int *)(puVar14[0xc] + 0x84) + temp_v1 * 4);
                   if ((*(unsigned char *)(temp_v1 + 4) & 1) != 0) {
@@ -422,7 +422,7 @@ void FUN_0016a438(int param_1,int param_2)
             temp_v1 = puVar14[0xc];
             temp_v8 = *(unsigned int *)(piVar10[1] + temp_v0 * 4);
             temp_v4 = libc_strlen(temp_v8);
-            temp_v1 = FUN_001a7a20(temp_v1 + 0x40,temp_v8,temp_v4);
+            temp_v1 = nameTableLookupEntry(temp_v1 + 0x40,temp_v8,temp_v4);
             temp_v1 = *(int *)(*(int *)(puVar14[0xc] + 0x3c) + temp_v1 * 4);
             if ((*(unsigned char *)(temp_v1 + 0x28) & 4) != 0) {
               __aeabi_memcpy4(*temp_v30 + *piVar10 * 0x704 + temp_v11 * 0x70,temp_v1,0x70);

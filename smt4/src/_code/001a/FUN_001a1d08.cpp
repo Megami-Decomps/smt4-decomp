@@ -1,4 +1,4 @@
-/* NON_MATCHING: structure and calls match retail; the nn wait-result test (lsl #22 compare vs lsl/lsr/sub), the `mov r3,#0` argument of FUN_00309a60 (armcc reuses r2) and the sp-slot stm grouping of FUN_002c40f8's stack arguments differ. */
+/* NON_MATCHING: structure and calls match retail; the nn wait-result test (lsl #22 compare vs lsl/lsr/sub), the `mov r3,#0` argument of FUN_00309a60 (armcc reuses r2) and the sp-slot stm grouping of svcWaitSynchronizationN's stack arguments differ. */
 #include "nn/Result.h"
 #include "common.h"
 #include "sys/ResultReport.h"
@@ -51,7 +51,7 @@ s32 FUN_00223898(EventRequest *request, s32 kind);
 s32 scrScriptProcessStartEntry(void *process, s32 entry);
 ScriptProcessState *scrScriptProcessCreate(void);
 void scrScriptProcessDestroy(void *process);
-u32 FUN_002c40f8(u32 *signalledCount, s32 *handles, s32 count, s32 waitAll, u32 timeoutLow, u32 timeoutHigh);
+u32 svcWaitSynchronizationN(u32 *signalledCount, s32 *handles, s32 count, s32 waitAll, u32 timeoutLow, u32 timeoutHigh);
 void asdMemFree(void *block);
 void gameDataFlagsClear(s32 flag);
 void gameDataFlagsClearAndRefresh(s32 flag);
@@ -95,7 +95,7 @@ u32 FUN_001a1d08(void)
         if (request->fadeId != 0) {
             u32 signalledCount;
             s32 id = request->fadeId;
-            u32 result = FUN_002c40f8(&signalledCount, &id, 1, 0, 0, 0);
+            u32 result = svcWaitSynchronizationN(&signalledCount, &id, 1, 0, 0, 0);
             bool failed = nnResultIsFailure(result);
             if (failed)
                 resultHandleFailure(result, failed);

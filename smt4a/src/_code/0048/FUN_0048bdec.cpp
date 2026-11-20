@@ -32,8 +32,8 @@ extern "C" {
 
 void dialogClose(s32 arg);
 void FUN_002d22c0(s32 arg);
-void FUN_0048821c(MapScreen* screen, s32 mapIndex);
-void FUN_0048a378(MapScreen* screen);
+void naviSwitchTextureSetForMap(MapScreen* screen, s32 mapIndex);
+void naviRefreshBackgroundAndFeedback(MapScreen* screen);
 void FUN_0048d248(MapScreen* screen, u32 value);
 void naviMainSetCurrentMap(void* cursor, s32 mapIndex);
 void pointConvertToFloat(void* pointer, u32 x, u32 y);
@@ -68,7 +68,7 @@ void FUN_0048bdec(MapScreen* screen)
     } else if (phase == 1) {
         naviMainSetCurrentMap(SCREEN_PTR(screen, 0x4cc), screen->mapIndex);
         FUN_00492ac8(reinterpret_cast<u32>(SCREEN_PTR(screen, 0x4cc)), 0);
-        FUN_0048821c(screen, screen->mapIndex);
+        naviSwitchTextureSetForMap(screen, screen->mapIndex);
         uiSpriteSetImageKeyframe((UiSpriteState *)titleSprite, 2, 0);
         if (g_gameState.naviMapPending != 0) {
             g_gameState.naviMapPending = 0;
@@ -79,7 +79,7 @@ void FUN_0048bdec(MapScreen* screen)
             g_gameState.naviMapPending = 1;
             FUN_0048d248(screen, FUN_00492c84(SCREEN_PTR(screen, 0x4cc)));
         }
-        FUN_0048a378(screen);
+        naviRefreshBackgroundAndFeedback(screen);
         if (list->active != 0) {
             screen->selectedMarker = *reinterpret_cast<u32*>(SCREEN_PTR(screen, 0x20510));
             *dirtyA = 1;
@@ -87,7 +87,7 @@ void FUN_0048bdec(MapScreen* screen)
             FUN_002d22c0(0);
             dialogClose(1);
             list->active = 0;
-            FUN_0048a378(screen);
+            naviRefreshBackgroundAndFeedback(screen);
             g_gameState.alternateNaviMap = 0;
         }
         screen->phase = 2;
@@ -95,7 +95,7 @@ void FUN_0048bdec(MapScreen* screen)
         uiSpriteAdvanceAnimation((UiSpriteState *)titleSprite, 1.0f);
         uiSpriteAdvanceAnimation((UiSpriteState *)(SCREEN_PTR(screen, 0x1014)), 1.0f);
         void* pointerSprite = screen->pointerSprite;
-        FUN_00167458((UiSpriteState *)pointerSprite, 0);
+        uiSpriteSlideFromSide((UiSpriteState *)pointerSprite, 0);
         if (uiSpriteGetCompletionState((const UiSpriteState *)pointerSprite) != 0) {
             if (screen->mapIndex > 100) screen->flags &= 0xfffdffff;
             pointConvertToFloat(SCREEN_PTR(screen, 0x4d0), 0, 0);

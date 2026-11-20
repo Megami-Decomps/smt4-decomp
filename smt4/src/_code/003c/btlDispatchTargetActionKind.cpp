@@ -2,7 +2,7 @@
 #include "shard/W4_Match6_BtlScript.h"
 
 extern "C" {
-u32 FUN_0022a5d8(u32 command, s32 target, u32 argument);
+u32 btlSubmitAction(u32 command, s32 target, u32 argument);
 
 u32 btlDispatchTargetActionKind(s32 target, s32 kind, u32 argument)
 {
@@ -19,6 +19,6 @@ u32 btlDispatchTargetActionKind(s32 target, s32 kind, u32 argument)
     } else if (kind == 2) {
         command = 0x1b;
     }
-    return FUN_0022a5d8(command, target, argument);
+    return btlSubmitAction(command, target, argument);
 }
 }

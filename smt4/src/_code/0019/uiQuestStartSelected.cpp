@@ -34,7 +34,7 @@ static __inline void uiQuestEnterState(StateTrack00199024 *track, u32 next)
 
 s32 uiBindRecordRewardText(u32 id, s32 a, s32 b);
 void gameOptionsEnableAndReset(void);
-void FUN_0028eeb8(u32 id);
+void gameFlagEntryActivate(u32 id);
 void uiQuestCountDetailPages(u32 id);
 void FUN_00290404(void);
 void gameGetOptionProgressStatus(void);
@@ -56,7 +56,7 @@ void uiQuestStartSelected(void)
     base = resourceRunOperationIfUnblocked(quest->list);
     offset = listCursorGetRowIfUnblocked(quest->list);
     id = quest->ids[offset + base];
-    FUN_0028eeb8(id);
+    gameFlagEntryActivate(id);
     gameGetOptionProgressStatus();
     gameOptionsEnableAndReset();
     uiQuestCountDetailPages(id);

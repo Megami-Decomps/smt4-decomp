@@ -47,12 +47,12 @@ u32 FUN_0039a7ac(void)
                 if (engineCleanupIsDone() == 0) {
                     shown = 1;
                 }
-            } else if (FUN_002ef9f0() == 0) {
+            } else if (mapRndMazeTaskIsActive() == 0) {
                 if (campIsState85() != 0) {
                     shown = 1;
                 } else if (((sub68OwnerCall2() == 0 || campIsState85() != 0) || namePollShutdown() != 0) &&
                            titleMainIsRunning() == 0 && npcRoomIsOpen() == 0 && QuestCenterMode_IsBusy() == 0 &&
-                           shopPollShutdown() == 0 && onesRoomIsRunning() == 0 && FUN_00270a70() == 0) {
+                           shopPollShutdown() == 0 && onesRoomIsRunning() == 0 && aocMainPollShutdown() == 0) {
                     shown = 1;
                 }
             }

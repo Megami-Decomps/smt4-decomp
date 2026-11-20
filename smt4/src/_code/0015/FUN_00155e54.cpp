@@ -1,4 +1,4 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_002bd29c; not written yet. */
+/* NON_MATCHING: found outside every function: branched to by nwSoundVoiceAllocate; not written yet. */
 /* romwright 0.5.0 decompilation of FUN_00155e54 for reference (not compiled; its own view of the boundaries):
 
 unsigned int FUN_00155e54(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)

@@ -22,7 +22,7 @@ extern BtlAuxA *g_btlAux;
 extern s32 *g_btlEvent;
 u32 isEntryUsable(s32 *);
 u32 FUN_004f5a78(BtlAuxA *);
-void FUN_002980e4(s32, u32);
+void btlAuxQueryCommonUpDownPair(s32, u32);
 u32 FUN_004fb6f4(s16, u32, BattleRosterRecordA *, u32, u32, s32, s32);
 void btlEmitMessageTableEntries(s32, u32, BattleMessageTable *, s32, u32, s32);
 s32 chainCountIdUnflagged(ChainOwner *, s32);
@@ -48,7 +48,7 @@ u8 scrCommBattleQueueActorMessage()
             }
             return done;
         }
-        FUN_002980e4(actor, 0);
+        btlAuxQueryCommonUpDownPair(actor, 0);
         FUN_004fb6f4(0, 0, &btlGetMainState()->roster[target], value, actor, 0, -1);
         BattleMessageTable *messages = ((BattleMessageSource *)g_btlAux)->messages;
         btlEmitMessageTableEntries(actor, (u32)unit, messages, 0, target, target);
@@ -56,7 +56,7 @@ u8 scrCommBattleQueueActorMessage()
         return 0;
     }
     if (actor != 0) {
-        FUN_002980e4(actor, 0);
+        btlAuxQueryCommonUpDownPair(actor, 0);
         ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
         FUN_004fb6f4(0, 0, &btlGetMainState()->roster[target], value, actor, 0, -1);
         BattleMessageTable *messages = ((BattleMessageSource *)g_btlAux)->messages;

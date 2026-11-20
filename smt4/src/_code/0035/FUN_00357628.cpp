@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002c40f8(unsigned int, unsigned int *, int, int, unsigned int, unsigned int);
+int svcWaitSynchronizationN(unsigned int, unsigned int *, int, int, unsigned int, unsigned int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002c40f8. */
+/* Supplied declaration required: svcWaitSynchronizationN. */
 
 
 void FUN_00357628(unsigned int *param_1,unsigned int *param_2)
@@ -44,7 +44,7 @@ void FUN_00357628(unsigned int *param_1,unsigned int *param_2)
       temp_v2 = param_1[2];
     } while ((int)temp_v1 < temp_v2);
   }
-  FUN_002c40f8(*param_1,param_2,temp_v2,(int)*(char *)(param_1 + 3),*(unsigned int *)param_1[4],
+  svcWaitSynchronizationN(*param_1,param_2,temp_v2,(int)*(char *)(param_1 + 3),*(unsigned int *)param_1[4],
                ((unsigned int *)param_1[4])[1]);
   return;
 }

@@ -43,7 +43,7 @@ void FUN_002cef34(const void *source);
 void FUN_002f5004(u32 amount);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 u8 gameDataBlocksGetFlagByteA(void);
-StatBlock *FUN_00262f94(void);
+StatBlock *stockFindSelectedUnit(void);
 void __aeabi_memset4(void *destination, u32 size, u32 value);
 s32 randBetween(s32 minimum, s32 maximum);
 u32 scrEffectRunIfActive(void);
@@ -169,9 +169,9 @@ s32 campCecInboxState(CampCecMenu *work)
                 }
             }
             if (gameDataBlocksGetFlagByteA() == 1) {
-                memCopy(FUN_00262f94(), &work->rewardUnit.unit, sizeof(StatBlock));
+                memCopy(stockFindSelectedUnit(), &work->rewardUnit.unit, sizeof(StatBlock));
                 SaveSlotTableIV *table = gameGetSlotTable();
-                if (FUN_00262f94() != NULL) {
+                if (stockFindSelectedUnit() != NULL) {
                     u32 candidates[60];
                     s32 count = 0;
                     work->rewardUnit.offeredDemon = NULL;
@@ -238,7 +238,7 @@ s32 campCecInboxState(CampCecMenu *work)
                     }
                     u32 kind = DAT_00402854[slot];
                     if (kind == 8) {
-                        StatBlock *unit = FUN_00262f94();
+                        StatBlock *unit = stockFindSelectedUnit();
                         if (unit != NULL && unit->level > 20) {
                             if (unit->level <= 40) {
                                 kind = 9;
@@ -286,7 +286,7 @@ s32 campCecInboxState(CampCecMenu *work)
                 if ((work->rewards.pending & 1) && work->rewardUnit.offeredDemon != NULL) {
                     id = work->rewardUnit.offeredDemon->id;
                 }
-                sprintf(path, "camp/CecDevilMsg/%s.mbm", FUN_002cdecc((s8)nkmBaseGetRecord(id)->talkTone)->unk01);
+                sprintf(path, "camp/CecDevilMsg/%s.mbm", dataTable25Section0FindById((s8)nkmBaseGetRecord(id)->talkTone)->unk01);
                 asdLoadFileAsyncSimple(path, &work->talk.messages, 0);
                 work->savedBannerPending = 1;
                 messageDismissNumericBanner(1);

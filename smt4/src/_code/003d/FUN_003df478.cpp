@@ -13,7 +13,7 @@ struct TokenEntryBlock {
 };
 
 extern "C" {
-u8 *FUN_002b5c44(void);
+u8 *tokenTableGet(void);
 u32 tokenResolveAddress(const u32 *owner, void **result, u32 token);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 
@@ -22,7 +22,7 @@ s32 FUN_003df478(const u32 *token, u32 *copied, TokenEntry *destination,
                  u32 requested, u32 start)
 {
     void *resolved;
-    const u32 *context = reinterpret_cast<const u32 *>(FUN_002b5c44());
+    const u32 *context = reinterpret_cast<const u32 *>(tokenTableGet());
     s32 status = tokenResolveAddress(context, &resolved, *token);
     if (!nnResultIsFailure(status)) {
         const TokenEntryBlock *block = static_cast<const TokenEntryBlock *>(resolved);

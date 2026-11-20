@@ -14,7 +14,7 @@ typedef struct Source4C {
 } Source4C;
 
 extern void playerGetWords(u16 *out, s32 a);
-extern void FUN_0035bd94(u16 id, u16 *out, u32 count);
+extern void nkmEnemyRecordCopySkillIds(u16 id, u16 *out, u32 count);
 extern void halves34Copy(const SlotRecordA *src, u16 *out);
 
 /* Fills `out` with the halves of the active source: the first non-null entry, else the default record. */
@@ -35,7 +35,7 @@ void source4CCopyHalves(Source4C *obj, u16 *out)
         return;
     }
     if (obj->source404 != NULL) {
-        FUN_0035bd94(obj->unk166, out, 8);
+        nkmEnemyRecordCopySkillIds(obj->unk166, out, 8);
     }
 }
 

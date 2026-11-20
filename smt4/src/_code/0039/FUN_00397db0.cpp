@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_0028cfbc(...);
+int widgetGetVisibleLength(...);
 int textDrawString(int, int, unsigned char [4]);
 int texDrawTableEntryAtStoredOrigin(...);
 int texDrawCompositeSprite(...);
@@ -26,7 +26,7 @@ typedef struct {
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0028cfbc. */
+/* Supplied declaration required: widgetGetVisibleLength. */
 extern int objectPartRunUnlessLocked(int); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 extern int recordTableGet(unsigned int, int);
 /* Supplied declaration required: textDrawString. */
@@ -177,7 +177,7 @@ void FUN_00397db0(int param_1)
         if (*(char *)(param_1 + 0x29) == '\0') {
           temp_v15 = param_1 + 0x5e4;
           temp_v8 = 0;
-          temp_v9 = FUN_0028cfbc();
+          temp_v9 = widgetGetVisibleLength();
           if (0 < temp_v9) {
             do {
               temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,temp_v8 + 0xc6));
@@ -190,7 +190,7 @@ void FUN_00397db0(int param_1)
                            *(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v9 + 8));
               efctSetSpeed();
               temp_v8 = temp_v8 + 1;
-              temp_v9 = FUN_0028cfbc(temp_v15);
+              temp_v9 = widgetGetVisibleLength(temp_v15);
             } while (temp_v8 < temp_v9);
           }
           if (*(char *)(param_1 + 0x648) != '\0') {

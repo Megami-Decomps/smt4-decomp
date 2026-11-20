@@ -146,10 +146,10 @@ LAB_0037c020:;
       temp_v1 = psVar13[1];
       temp_v2 = *psVar13;
       if (temp_v1 != 0 && temp_v2 != 0) {
-        temp_v11 = FUN_0019acdc(temp_v2, 0);
+        temp_v11 = unitMapIdToCategory(temp_v2, 0);
         temp_v4 = FUN_0036fcd0(temp_v11,0);
         if (temp_v4 != temp_v2) {
-          temp_v11 = FUN_0019acdc(temp_v2, 0);
+          temp_v11 = unitMapIdToCategory(temp_v2, 0);
           temp_v5 = FUN_0036fcd0(temp_v11,0);
           temp_v11 = dataTable10FindValue(temp_v5);
           gameDataCopySaveEntry(temp_v1,temp_v20);
@@ -167,10 +167,10 @@ LAB_0037c020:;
       temp_v1 = psVar13[1];
       temp_v2 = *psVar13;
       if (temp_v1 != 0 && temp_v2 != 0) {
-        temp_v11 = FUN_0019acdc(temp_v2, 0);
+        temp_v11 = unitMapIdToCategory(temp_v2, 0);
         temp_v4 = FUN_0036fcd0(temp_v11,0);
         if (temp_v4 == temp_v2) {
-          temp_v17 = FUN_0019acdc(temp_v2, 0);
+          temp_v17 = unitMapIdToCategory(temp_v2, 0);
           temp_v17 = temp_v17 & 0xffff;
           gameDataCopySaveEntry(temp_v1,temp_v20);
           temp_v13 = 0;

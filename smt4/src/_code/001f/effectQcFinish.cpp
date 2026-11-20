@@ -15,7 +15,7 @@ typedef struct EffectOwner {
     Effect *effect; /* 0x04 */
 } EffectOwner;
 
-extern void FUN_002a6fb8(void *handle);
+extern void menuSceneTeardown(void *handle);
 extern void asdMemFreeNonNull(void *handle);
 extern void jyoucyuGetTableEntry(int index);
 
@@ -28,7 +28,7 @@ void effectQcFinish(u32 handle)
 
     effect->finished = 1;
     if (effect->handle != NULL) {
-        FUN_002a6fb8(effect->handle);
+        menuSceneTeardown(effect->handle);
         asdMemFreeNonNull(effect->handle);
         effect->handle = NULL;
     }

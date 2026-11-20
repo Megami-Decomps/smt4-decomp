@@ -4,22 +4,22 @@
 
 extern "C" {
 
-int FUN_0016e2a8(void);
+int nn_pl_CTR_CreateGameCoinSaveFile(void);
 int FUN_0016e7c0(...);
-int FUN_00188444(void);
+int archiveDeviceSendPathRequest(void);
 int vcallSlot12IfValid(unsigned int);
-int FUN_001886bc(void);
+int fileSystemRequireReady(void);
 int FUN_00188e44(...);
 int sysFatalBreak(void);
 
 typedef int romwright_code(...);
 extern unsigned char DAT_005c0adc; /* 0x5c0adc */
 
-/* Supplied declaration required: FUN_0016e2a8. */
+/* Supplied declaration required: nn_pl_CTR_CreateGameCoinSaveFile. */
 /* Supplied declaration required: FUN_0016e7c0. */
-/* Supplied declaration required: FUN_00188444. */
+/* Supplied declaration required: archiveDeviceSendPathRequest. */
 /* Supplied declaration required: vcallSlot12IfValid. */
-/* Supplied declaration required: FUN_001886bc. */
+/* Supplied declaration required: fileSystemRequireReady. */
 /* Supplied declaration required: FUN_00188e44. */
 /* Supplied declaration required: sysFatalBreak. */
 
@@ -57,14 +57,14 @@ unsigned int FUN_00189388(int *param_1,int *param_2,unsigned int param_3,unsigne
       param_1[2] = 0;
     }
     temp_v2 = (*(unsigned int *)((unsigned char *)&DAT_005c0adc + 0x4));
-    FUN_001886bc();
-    FUN_00188444();
+    fileSystemRequireReady();
+    archiveDeviceSendPathRequest();
     if ((((temp_v2 & 0x3fc00) != 0x4400) || ((temp_v2 & 0x3ff) < 100)) || ((temp_v2 & 0x3ff) >= 0xb4)) {
       if ((int)temp_v2 < 0) {
         FUN_0016e7c0();
       }
     }
-    FUN_0016e2a8();
+    nn_pl_CTR_CreateGameCoinSaveFile();
     temp_v0 = 1;
     FUN_00188e44(param_1);
     temp_v1 = (**(romwright_code **)(*param_1 + 0x28))(param_1,&uStack_20,param_2,0x14);

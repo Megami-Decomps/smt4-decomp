@@ -6,9 +6,9 @@ struct ButtonHelpPresetRecord { u16 buttons[6]; u8 shown; };
 extern "C" {
 const ButtonHelpPresetRecord *dataTableGetEntry0e(u32 preset);
 void buttonHelpSetContext(u32 preset);
-void FUN_002b8454(u8 slot, u8 kind, u8 value, s32 sound);
+void buttonHelpSetSlot(u8 slot, u8 kind, u8 value, s32 sound);
 void FUN_001385f8();
-void FUN_002ae5e0();
+void buttonHelpRebuildTouchRegions();
 
 void buttonHelpSetPreset(u32 preset)
 {
@@ -39,7 +39,7 @@ void buttonHelpSetPreset(u32 preset)
         u16 value = next->buttons[index];
         u8 kind = value != 0 ? buttonOrder[index] : 18;
         u8 label = value != 0 ? static_cast<u8>(value) : 81;
-        FUN_002b8454(static_cast<u8>(index), kind, label, 0);
+        buttonHelpSetSlot(static_cast<u8>(index), kind, label, 0);
     }
     if (previous->shown != 0) {
         if (next->shown != 0) {
@@ -47,7 +47,7 @@ void buttonHelpSetPreset(u32 preset)
             FUN_001385f8();
         } else {
             g_buttonHelp.work->panelState = 1;
-            FUN_002ae5e0();
+            buttonHelpRebuildTouchRegions();
         }
     } else {
         g_buttonHelp.work->panelState = 1;

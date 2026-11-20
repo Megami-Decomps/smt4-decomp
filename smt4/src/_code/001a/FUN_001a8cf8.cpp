@@ -70,7 +70,7 @@ f32 mathGetShortestAngleDelta(f32 first, f32 second);
 f32 mathAbsHeadingErrorToPoint(f32 x, f32 y, f32 z, f32 heading, f32 targetX, f32 targetY, f32 targetZ);
 void FUN_002df824(s32 id, s32 flag);
 void FUN_002879dc(s32 a, s32 b, s32 c);
-void FUN_002878fc(s32 id);
+void mapCollisionDisableByTag(s32 id);
 
 /* Advances every active map-range entry: it triggers when the encounter source is close and
  * faces it, plays its sound and effect, then retires its model. */
@@ -115,7 +115,7 @@ u32 FUN_001a8cf8(void)
             if (entry->timer == 2)
                 FUN_002879dc(0xF, 0x1E, 1);
             if (entry->timer == 0x28)
-                FUN_002878fc((s16)entry->soundId);
+                mapCollisionDisableByTag((s16)entry->soundId);
             if (entry->timer >= 0x3C) {
                 u32 next;
                 if (entry->hasModel) {

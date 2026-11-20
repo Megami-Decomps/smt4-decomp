@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_0024317c(void);
-int FUN_00243224(unsigned int *, float *, unsigned int, int);
+int effMenuQueueVectorEffect(unsigned int *, float *, unsigned int, int);
 int FUN_00249678(void);
 void FUN_002496cc(const EffectPositionControl *);
 int effEditorNodeChainApply(unsigned char *);
@@ -78,7 +78,7 @@ extern float DAT_004ea994; /* 0x4ea994 */
 extern float DAT_004ea998; /* 0x4ea998 */
 
 /* Supplied declaration required: FUN_0024317c. */
-/* Supplied declaration required: FUN_00243224. */
+/* Supplied declaration required: effMenuQueueVectorEffect. */
 /* Supplied declaration required: FUN_00249678. */
 /* Supplied declaration required: FUN_002496cc. */
 /* Supplied declaration required: effEditorNodeChainApply. */
@@ -258,7 +258,7 @@ u32 FUN_003224c0(EffectEditorSnapshot *record, s32 param_2)
   *(unsigned int *)(temp_v3 + 0x20) = 0xff00c0c0;
   *(unsigned int *)(temp_v3 + 100) = 0;
   effMenuListAppend();
-  FUN_00243224(&temp_v27,&temp_v25,0xff0000ff,0);
+  effMenuQueueVectorEffect(&temp_v27,&temp_v25,0xff0000ff,0);
   temp_v3 = 0x10000;
   memAlloc(0x10000,0x100,0,0x68,0x10,1);
   *(unsigned int *)(temp_v3 + 0x18) = 0;
@@ -317,7 +317,7 @@ u32 FUN_003224c0(EffectEditorSnapshot *record, s32 param_2)
   fStack_bc = DAT_004ea920;
   fStack_b8 = DAT_004ea924;
   temp_v26 = DAT_004ea928;
-  FUN_00243224(&temp_v27,&temp_v25,0xff00c0c0,0);
+  effMenuQueueVectorEffect(&temp_v27,&temp_v25,0xff00c0c0,0);
   DAT_004ea980 = temp_v11;
   DAT_004ea97c = temp_v9;
   DAT_004ea978 = temp_v7;
@@ -358,7 +358,7 @@ u32 FUN_003224c0(EffectEditorSnapshot *record, s32 param_2)
   fStack_bc = DAT_004ea920;
   fStack_b8 = DAT_004ea924;
   temp_v26 = DAT_004ea928;
-  FUN_00243224(&temp_v27,&temp_v25,0xff00c0c0,0);
+  effMenuQueueVectorEffect(&temp_v27,&temp_v25,0xff00c0c0,0);
   return temp_v4;
 }
 

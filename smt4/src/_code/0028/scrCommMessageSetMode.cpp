@@ -7,7 +7,7 @@ extern "C" {
 void scrCommMessageSetMode(int mode)
 {
     if (mode + 1U < 3) {
-        DAT_0043e0b8.unk04 = mode;
+        g_messageFlags.unk04 = mode;
     }
 }
 

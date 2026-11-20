@@ -4,7 +4,7 @@
 #include "common.h"
 
 /* The object whose vtable is at 0x55859c (named after it until its real name is known); the vtable
- * is stored by FUN_002ea00c (its destructor) and FUN_002eca44. */
+ * is stored by destroyObj005585a4 (its destructor) and FUN_002eca44. */
 class Obj55859c {
 public:
     virtual ~Obj55859c();

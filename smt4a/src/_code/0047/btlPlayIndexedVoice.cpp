@@ -17,7 +17,7 @@ u32 btlPlayIndexedVoice(u32 resourceId, f32 opacity, f32 x, f32 y)
         sprintf(name, "I%03u%03u", index, group);
         if (variant)
             sprintf(name, "%s%s", name, variant == 1 ? "a" : "b");
-        u32 alpha = (u32)((f32)FUN_0014af98() * opacity);
+        u32 alpha = (u32)((f32)messageVoiceBankGet() * opacity);
         return FUN_001628c0(name, alpha & 0xff, 0, 0, x, y);
     }
     return 0;

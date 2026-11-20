@@ -5,8 +5,8 @@
 extern "C" {
 u32 FUN_00280bc0(void);
 void FUN_0032ca54(u32 result);
-void FUN_00359974(s32 index, u32 a, u32 b, u32 c);
-void FUN_0037aaec(s32 kind, s32 value);
+void entryTableResetAndInit(s32 index, u32 a, u32 b, u32 c);
+void archivePathRequestSucceeded(s32 kind, s32 value);
 void FUN_003cc97c(u32 owner, u32 code);
 }
 
@@ -47,20 +47,20 @@ u32 FUN_002c7388(u32 owner, s32 value, s32 mode, s32 extra)
             if (kind == RESULT_KIND_NOTICE && result.bits.id >= 390 && result.bits.id <= 399) {
                 if (mode == 1) {
                     if (value != 0) {
-                        FUN_0037aaec(1, value);
+                        archivePathRequestSucceeded(1, value);
                     }
                     severity = 1;
                     code = 25;
                 } else if (mode == 3) {
                     if (value != 0) {
-                        FUN_0037aaec(1, value);
+                        archivePathRequestSucceeded(1, value);
                     }
                     severity = 1;
-                    FUN_00359974(0, extra + 1, 0xFFFFFFFF, 0);
+                    entryTableResetAndInit(0, extra + 1, 0xFFFFFFFF, 0);
                     code = 34;
                 } else if (mode == 0) {
                     if (value != 0) {
-                        FUN_0037aaec(1, value);
+                        archivePathRequestSucceeded(1, value);
                     }
                     severity = 1;
                     code = 33;
@@ -79,7 +79,7 @@ u32 FUN_002c7388(u32 owner, s32 value, s32 mode, s32 extra)
                 }
             } else if (kind == RESULT_KIND_NOTICE && result.bits.id >= 200 && result.bits.id <= 219 && mode == 1) {
                 if (value != 0) {
-                    FUN_0037aaec(1, value);
+                    archivePathRequestSucceeded(1, value);
                 }
                 code = 29;
             }

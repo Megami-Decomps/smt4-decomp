@@ -3,7 +3,7 @@
 
 extern "C" {
 void btlQueueKeyedScalarReflectAction(s32 index, u32 value, void *resource, u32 mode, u32 unique, u32 options, u32 target);
-extern BtlActionResourceEntry DAT_00435ea0[14];
+extern BtlActionResourceEntry g_btlActionResourceTable[14];
 }
 
 // The resource entry keyed by `id`, or 0 when there is none.
@@ -11,7 +11,7 @@ static __inline BtlActionResourceEntry *findResourceEntry(u32 id)
 {
     s32 index = 0;
     while (index < 14) {
-        BtlActionResourceEntry *entry = &DAT_00435ea0[index];
+        BtlActionResourceEntry *entry = &g_btlActionResourceTable[index];
         if (entry->id == id) {
             return entry;
         }

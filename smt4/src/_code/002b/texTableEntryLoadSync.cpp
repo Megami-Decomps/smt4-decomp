@@ -60,7 +60,7 @@ u32 texTableEntryLoadSync(TexTableNamedEntry *entry)
                     entry->texture->dimensions.height = data->height;
                     entry->texture->image.format = data->format;
                     entry->texture->image.type = data->type;
-                    entry->texture->storage.unk28 = size - data->dataOffset;
+                    entry->texture->storage.bytes = size - data->dataOffset;
                     entry->texture->storage.flags |= 0x10;
                     if (data->version == 1) {
                         entry->texture->unk3c = 1;

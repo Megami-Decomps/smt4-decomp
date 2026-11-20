@@ -42,7 +42,7 @@ struct AudioDeviceState {
 };
 
 extern "C" {
-extern AudioDeviceState DAT_0044d0f8;
+extern AudioDeviceState g_soundVoicePool;
 extern u8 DAT_0044d128[];
 extern u8 DAT_004c40f8[];
 extern const char DAT_00404ee4[];
@@ -72,23 +72,23 @@ u32 FUN_0034e43c(AudioAllocator *allocator, s32 ringCount, const void *first, co
     }
     dspsndInitializeManagers();
     nw_snd_SoundSystem_SetMasterVolume(1.0f);
-    if (DAT_0044d0f8.allocator != NULL) {
+    if (g_soundVoicePool.allocator != NULL) {
         return 0;
     }
-    DAT_0044d0f8.ringCount = ringCount;
-    DAT_0044d0f8.allocator = allocator;
-    DAT_0044d0f8.ring = allocator->allocate(ringCount * 0x70, 4);
-    if (DAT_0044d0f8.ring == NULL) {
-        DAT_0044d0f8.allocator = NULL;
-        DAT_0044d0f8.ringCount = 0;
+    g_soundVoicePool.ringCount = ringCount;
+    g_soundVoicePool.allocator = allocator;
+    g_soundVoicePool.ring = allocator->allocate(ringCount * 0x70, 4);
+    if (g_soundVoicePool.ring == NULL) {
+        g_soundVoicePool.allocator = NULL;
+        g_soundVoicePool.ringCount = 0;
         return 0;
     }
-    memClear(DAT_0044d0f8.ring, DAT_0044d0f8.ringCount * 0x70);
-    DAT_0044d0f8.unk18 = 0;
-    DAT_0044d0f8.unk1C = 0;
+    memClear(g_soundVoicePool.ring, g_soundVoicePool.ringCount * 0x70);
+    g_soundVoicePool.unk18 = 0;
+    g_soundVoicePool.unk1C = 0;
     nn_os_CriticalSection_Initialize(DAT_004c40f8);
     asdDebugTrace(DAT_00404ee4, 271);
-    DAT_0044d0f8.threadStack = memAlloc(0x100, 0x100, 0, 0x1000, 0x1000, 1);
+    g_soundVoicePool.threadStack = memAlloc(0x100, 0x100, 0, 0x1000, 0x1000, 1);
     AudioThreadWork *thread = static_cast<AudioThreadWork *>(asdOperatorNew(sizeof(AudioThreadWork), NULL));
     if (thread != NULL) {
         thread->unk00 = 0;
@@ -97,8 +97,8 @@ u32 FUN_0034e43c(AudioAllocator *allocator, s32 ringCount, const void *first, co
         thread->stackSize = 0;
         thread->unk10 = 0;
     }
-    DAT_0044d0f8.thread = thread;
-    resultReportIfFailed(thread, DAT_0044d0f8.threadStack, 0x1000);
+    g_soundVoicePool.thread = thread;
+    resultReportIfFailed(thread, g_soundVoicePool.threadStack, 0x1000);
     u32 argument = 0;
     ThreadFunctorTable table;
     table.copyArgument = FUN_00123c88;
@@ -106,7 +106,7 @@ u32 FUN_0034e43c(AudioAllocator *allocator, s32 ringCount, const void *first, co
     table.destroyArgument = FUN_00123cb4;
     table.invoke = FUN_00123ca4;
     s32 result = FUN_002bcc60(DAT_0044d128, &table, FUN_0034e718, &argument,
-                              DAT_0044d0f8.thread->stackBase + DAT_0044d0f8.thread->stackSize, 2, -2, 0);
+                              g_soundVoicePool.thread->stackBase + g_soundVoicePool.thread->stackSize, 2, -2, 0);
     bool failed = nnResultIsFailure(result);
     if (failed) {
         resultHandleFailure(result, failed);

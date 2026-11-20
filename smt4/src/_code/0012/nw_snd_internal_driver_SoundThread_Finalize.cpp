@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00146ee0(void);
+int nw_snd_internal_driver_SoundThread_Stop(void);
 
 typedef struct fn_001219bc_arg0 fn_001219bc_arg0;
 struct fn_001219bc_arg0 {
@@ -19,7 +19,7 @@ struct fn_001219bc_arg0 {
 };
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_00146ee0. */
+/* Supplied declaration required: nw_snd_internal_driver_SoundThread_Stop. */
 
 
 void nw_snd_internal_driver_SoundThread_Finalize(fn_001219bc_arg0 *param_1)
@@ -31,7 +31,7 @@ void nw_snd_internal_driver_SoundThread_Finalize(fn_001219bc_arg0 *param_1)
   
   if (param_1->field_0x1f4 != 0) {
     param_1->field_0x1f7 = 1;
-    FUN_00146ee0();
+    nw_snd_internal_driver_SoundThread_Stop();
     param_1->field_0x1f4 = 0;
   }
   puVar1 = (unsigned int *)param_1->field_0x1e0;

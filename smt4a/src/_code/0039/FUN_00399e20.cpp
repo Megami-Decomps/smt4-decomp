@@ -27,7 +27,7 @@ void FUN_00399e20(s32 textId, u32 flags)
     char text[128];
     u32 range = first->hitRange;
     if ((range & 0xF) == range >> 4) {
-        FUN_00359974(0x25, range & 0xF, 0xFFFFFFFF, 0);
+        entryTableResetAndInit(0x25, range & 0xF, 0xFFFFFFFF, 0);
     } else {
         char minimum[8], maximum[8];
         textFormatFullWidthNumber(minimum, range & 0xF);

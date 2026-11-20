@@ -7,9 +7,9 @@ extern SoundCallbackState DAT_00589298;
 extern SoundCallbackBanks DAT_004c6464;
 extern const char DAT_00536c88[];
 extern u8 DAT_0061a6a4[];
-s32 FUN_0016f864(u32 mode);
+s32 srvInitialize(u32 mode);
 u32 libc_strlen(const char *text);
-s32 asdModelForwardChecked(u32 *resource, const char *name, u32 length, u32 flags);
+s32 srvGetServiceHandle(u32 *resource, const char *name, u32 length, u32 flags);
 void FUN_0017094c(void *queue);
 
 /* Clears one entry of each callback bank. */
@@ -26,11 +26,11 @@ nn::Result FUN_00158f64(void)
     if (DAT_00589298.resource) {
         return 0;
     }
-    s32 result = FUN_0016f864(0);
+    s32 result = srvInitialize(0);
     if (nnResultIsFailure(result)) {
         return result;
     }
-    result = asdModelForwardChecked(&DAT_00589298.openedResource, DAT_00536c88,
+    result = srvGetServiceHandle(&DAT_00589298.openedResource, DAT_00536c88,
                                    libc_strlen(DAT_00536c88), 0);
     if (nnResultIsFailure(result)) {
         return result;

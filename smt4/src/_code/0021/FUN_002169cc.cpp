@@ -88,12 +88,12 @@ code_r0x00216c3c:
     case 4:
       iVar5 = iVar2 + 4;
       FUN_002c159c(iVar5);
-      FUN_002c1edc(iVar5,iVar8,iVar2 + 0x518,iVar2 + 0x524);
-      FUN_002c1e30(iVar5,1);
+      cameraMatrixCacheSetLookAt(iVar5,iVar8,iVar2 + 0x518,iVar2 + 0x524);
+      stereoCameraSetPerspective(iVar5,1);
       FUN_00298d50(iVar5);
       goto code_r0x00216b4c;
     case 6:
-      iVar5 = FUN_002c1d5c();
+      iVar5 = eventIsSkipping();
       if (iVar5 != 0) {
         *(unsigned int *)(iVar2 + 0x5dc) = *(unsigned int *)(iVar2 + 0x5d8);
       }
@@ -153,8 +153,8 @@ code_r0x00216b4c:
       if (*(char *)(iVar2 + 0x5f0) != '\0') {
         iVar5 = iVar2 + 4;
         FUN_002c159c(iVar5);
-        FUN_002c1edc(iVar5,iVar8,iVar2 + 0x518,iVar2 + 0x524);
-        FUN_002c1e30(iVar5,1);
+        cameraMatrixCacheSetLookAt(iVar5,iVar8,iVar2 + 0x518,iVar2 + 0x524);
+        stereoCameraSetPerspective(iVar5,1);
         FUN_00298d50(iVar5);
       }
       return 0;

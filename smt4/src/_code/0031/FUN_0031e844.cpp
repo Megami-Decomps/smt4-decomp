@@ -1,4 +1,4 @@
-/* NON_MATCHING: the 144-byte copy now calls rt_memcpy_w144 like retail; retail reaches DAT_0044f864 and DAT_0044f54c from DAT_0044f858's literal (one base register: the editor's default slots are defined in the same source as this code, with their initial menu data), which this unit does not reproduce. */
+/* NON_MATCHING: the 144-byte copy now calls rt_memcpy_w144 like retail; retail reaches DAT_0044f864 and DAT_0044f54c from g_effectEditorState's literal (one base register: the editor's default slots are defined in the same source as this code, with their initial menu data), which this unit does not reproduce. */
 #include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "shard/W5_W5Match2_LinkedItems.h"
@@ -7,7 +7,7 @@
 extern "C" {
 extern s32 DAT_0044f864;
 extern u32 DAT_0044f54c;
-extern EffectSelectionTemplate DAT_0044f858;
+extern EffectSelectionTemplate g_effectEditorState;
 void rt_memcpy_w144(void* destination, const void* source);
 LinkedItem* effPartCloneAfter(LinkedItems* list, LinkedItem* after);
 
@@ -21,7 +21,7 @@ u32 FUN_0031e844(void)
         static_cast<LinkedItems*>(g_effectEditor.list), selected);
     DAT_0044f54c = 0;
     rt_memcpy_w144(&copy->data, &selected->data);
-    g_effectEditor.object = &DAT_0044f858;
+    g_effectEditor.object = &g_effectEditorState;
     return 0;
 }
 }

@@ -3,7 +3,7 @@
 #include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
-u32 FUN_0029dde0();
+u32 fusionPlayerLevelCapGet();
 s32 itemGetFlagBit1(u16);
 s32 partyMemberFindById(u16);
 
@@ -19,7 +19,7 @@ u16 fusionCandidateMatchesParentFilter(const FusionCandidateFilter *filter, u16 
     } else if (filter->matchRace && result->race != filter->race) {
         return 0;
     }
-    if (filter->availableOnly && result->level > FUN_0029dde0())
+    if (filter->availableOnly && result->level > fusionPlayerLevelCapGet())
         return 0;
     if (filter->excludeMarked && itemGetFlagBit1(result->id))
         return 0;

@@ -3,7 +3,7 @@
 #include "battle/btlCamera.h"
 
 extern "C" {
-f32 FUN_003d4dd4(u32, u32, u32);
+f32 easeEvaluate(u32, u32, u32);
 extern BtlCameraStatics g_btlCamera;
 extern W5Match8Vec3 g_cameraAlternateProgressStart;
 extern W5Match8Vec3 g_cameraAlternateProgressPrevious;
@@ -13,7 +13,7 @@ void FUN_004f2548(W5Match8CameraTransition *camera)
 {
     if (g_btlCamera.routingMode == 1) {
         camera->alternateProgress = g_cameraAlternateProgressPrevious;
-        f32 progress = FUN_003d4dd4(camera->targetMode, camera->targetDuration, camera->targetFrame);
+        f32 progress = easeEvaluate(camera->targetMode, camera->targetDuration, camera->targetFrame);
         camera->alternateProgress.z = (camera->alternateTarget.z -
             (camera->reference.position.z - camera->alternateProgress.z)) * progress;
         camera->alternateProgress.x = (camera->alternateTarget.x -
@@ -30,7 +30,7 @@ void FUN_004f2548(W5Match8CameraTransition *camera)
         delta.x = camera->alternateTarget.x - g_cameraUnoffsetStartPosition.x;
         delta.y = camera->alternateTarget.y - g_cameraUnoffsetStartPosition.y;
         delta.z = camera->alternateTarget.z - g_cameraUnoffsetStartPosition.z;
-        f32 progress = FUN_003d4dd4(camera->targetMode, camera->targetDuration, camera->targetFrame);
+        f32 progress = easeEvaluate(camera->targetMode, camera->targetDuration, camera->targetFrame);
         camera->targetProgress.x = camera->targetStart.x + delta.x * progress;
         camera->targetProgress.y = camera->targetStart.y + delta.y * progress;
         camera->targetProgress.z = camera->targetStart.z + delta.z * progress;

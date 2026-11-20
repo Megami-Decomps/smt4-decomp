@@ -11,7 +11,7 @@ int FUN_00296284(...);
 int statusCameraApply(void);
 int eventQueueAddUnique(...);
 int eventQueueAddUniqueIfValid(...);
-int FUN_002c1658(...);
+int inputQueryButtonState(...);
 int __aeabi_uidivmod(...);
 
 int FUN_0020ffe8(...);
@@ -28,11 +28,11 @@ int FUN_00294834(int, int, int, int);
 int FUN_00294d6c(void);
 int statusCameraSelectPreset(int);
 int resourceReleaseReference(void);
-int FUN_00294fe0(...);
+int aocTextureEntryLoadOnce(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int FUN_002950e8(...);
 int statusBustUpPortraitRelease(...);
-int FUN_00297684(...); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
-int FUN_0029ae60(int);
+int lmapPlayerModelDestroy(...); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
+int linkHolderClearFlagGroup(int);
 int lmapSceneSetUnk134(int);
 int FUN_002a09b4(unsigned char *, int);
 int nkmEnemyFindById(void);
@@ -97,18 +97,18 @@ extern unsigned int *_ZN9Obj4206e8C1Ev(void);
 /* Supplied declaration required: FUN_00294d6c. */
 /* Supplied declaration required: statusCameraSelectPreset. */
 /* Supplied declaration required: resourceReleaseReference. */
-/* Supplied declaration required: FUN_00294fe0. */
+/* Supplied declaration required: aocTextureEntryLoadOnce. */
 extern int nkdwHeaderParse(unsigned int);
 /* Supplied declaration required: FUN_002950e8. */
 /* Supplied declaration required: statusBustUpPortraitRelease. */
 /* Supplied declaration required: FUN_00296284. */
-/* Supplied declaration required: FUN_00297684. */
-/* Supplied declaration required: FUN_0029ae60. */
+/* Supplied declaration required: lmapPlayerModelDestroy. */
+/* Supplied declaration required: linkHolderClearFlagGroup. */
 /* Supplied declaration required: lmapSceneSetUnk134. */
 extern int FUN_0029c46c(void);
 extern int FUN_0029c48c(void);
 extern int useCounterIsFinished(void);
-extern int FUN_0029e9cc(unsigned short);
+extern int itemIsCollectedWithRelated(unsigned short);
 /* Supplied declaration required: FUN_002a09b4. */
 extern int lmapSceneGetScript(void);
 /* Supplied declaration required: statusCameraApply. */
@@ -123,7 +123,7 @@ extern int lmapMainIsRunning(void);
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern int padIsButtonPressed(unsigned int);
 extern int slotIsActive(unsigned int);
-/* Supplied declaration required: FUN_002c1658. */
+/* Supplied declaration required: inputQueryButtonState. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -216,7 +216,7 @@ unsigned int FUN_0018f660(void)
         pcVar4[0x1e7c] = '\0';
       }
       if (pcVar4[0x1e7d] != '\0') {
-        temp_v7 = FUN_00294fe0(*(unsigned int *)(pcVar4 + 0x1e74));
+        temp_v7 = aocTextureEntryLoadOnce(*(unsigned int *)(pcVar4 + 0x1e74));
         if (temp_v7 == 0) break;
         pcVar4[0x1e7d] = '\0';
       }
@@ -347,7 +347,7 @@ unsigned int FUN_0018f660(void)
       if (temp_v7 != 0) {
         in_s0 = temp_v10;
         lmapSceneSetUnk134(0);
-        FUN_0029ae60(*piVar14);
+        linkHolderClearFlagGroup(*piVar14);
         DAT_0044e142 = 0;
       }
       else {
@@ -425,7 +425,7 @@ LAB_0018fbe4:
           pcVar4[0x1e7d] = '\0';
           goto LAB_0018fe5c;
         }
-        if ((*(short *)(pcVar4 + 0x12fe) < 1) || (temp_v7 = FUN_00294fe0(), temp_v7 != 0)) {
+        if ((*(short *)(pcVar4 + 0x12fe) < 1) || (temp_v7 = aocTextureEntryLoadOnce(), temp_v7 != 0)) {
           pcVar4[0x1e7c] = '\0';
           pcVar4[0x1e7d] = '\0';
           goto LAB_0018fd84;
@@ -434,7 +434,7 @@ LAB_0018fbe4:
     }
     else {
       pcVar13 = pcVar4 + 0x1e80;
-      FUN_00297684(*(unsigned int *)pcVar13);
+      lmapPlayerModelDestroy(*(unsigned int *)pcVar13);
       temp_v7 = objSlotsAllEmpty(*(unsigned int *)pcVar13);
       if (temp_v7 != 0) {
         temp_v6 = vec2GetXInt((UiSpriteState *)(pcVar4 + 0x38c));
@@ -591,7 +591,7 @@ LAB_0018ffcc:
           pcVar5 = pcVar4 + 0x1e80;
           objSetAnglesDegrees(*(unsigned int *)pcVar5,pcVar4 + 0x1e90);
           statusCameraApply();
-          FUN_00297684(*(unsigned int *)pcVar5);
+          lmapPlayerModelDestroy(*(unsigned int *)pcVar5);
           temp_v6 = vec2GetXInt((UiSpriteState *)(pcVar4 + 0x38c));
           temp_v16 = *(unsigned int *)(pcVar4 + 0x1e88);
           temp_v17 = *(unsigned int *)(pcVar4 + 0x1e8c);
@@ -671,7 +671,7 @@ LAB_00190190:
                (((temp_v7 = FUN_0029c48c(), temp_v7 != 0 && (temp_v7 = FUN_00293a88(), temp_v7 != 0)) &&
                 (temp_v7 = partyPanelIsStateThree(), temp_v7 == 0)))) {
               temp_v7 = 8;
-              FUN_002c1658(8,0);
+              inputQueryButtonState(8,0);
               if (temp_v7 != 0) {
                 temp_v7 = FUN_00293ac0();
                 temp_v4 = *(int *)(pcVar4 + 0x12e4) - 1;
@@ -703,7 +703,7 @@ LAB_00190190:
                   && (temp_v7 = FUN_00293a88(), temp_v7 != 0)) &&
                  (temp_v7 = partyPanelIsStateThree(), temp_v7 == 0)))))) {
               temp_v7 = 7;
-              FUN_002c1658(7,0);
+              inputQueryButtonState(7,0);
               if (temp_v7 != 0) {
                 temp_v7 = FUN_00293ac0();
                 temp_v4 = *(int *)(pcVar4 + 0x12e4);
@@ -735,7 +735,7 @@ LAB_00190190:
                  && (temp_v7 = FUN_00293a88(), temp_v7 != 0)) &&
                 ((temp_v7 = partyPanelIsStateThree(), temp_v7 == 0 && (*(int *)(pcVar4 + 0x12e4) != 0)))))) {
               temp_v7 = 1;
-              FUN_002c1658();
+              inputQueryButtonState();
               if (temp_v7 != 0) {
                 pcVar4[0x12e8] = '\x01';
                 pcVar4[0x12e9] = '\0';
@@ -752,7 +752,7 @@ LAB_00190190:
             }
             if (*temp_v14 == '\x03') {
               temp_v7 = 10;
-              FUN_002c1658(10,1);
+              inputQueryButtonState(10,1);
               if (temp_v7 != 0) {
                 pcVar4[0x12f0] = pcVar4[0x12f0] != '\x01';
                 timerStart((UiSpriteState *)(pcVar4 + 0x5bc),7,0);
@@ -775,7 +775,7 @@ LAB_001903c0:
         pcVar5 = DAT_0044e144;
         if ((DAT_0044e144 != (char *)0x0) && (DAT_0044e144[0x1e66] != '\r')) {
           if (DAT_0044e144[0x1e66] == '\x06') {
-            temp_v7 = FUN_0029e9cc(*(unsigned short *)(DAT_0044e144 + 0x1300));
+            temp_v7 = itemIsCollectedWithRelated(*(unsigned short *)(DAT_0044e144 + 0x1300));
 joined_r0x00190660:
             if (temp_v7 == 0) break;
           }
@@ -786,7 +786,7 @@ joined_r0x00190660:
         temp_v6 = 0xffffffff;
         if ((DAT_0044e144 != (char *)0x0) && (DAT_0044e144[0x1e66] != '\r')) {
           if (DAT_0044e144[0x1e66] == '\x06') {
-            temp_v7 = FUN_0029e9cc(*(unsigned short *)(DAT_0044e144 + 0x1300));
+            temp_v7 = itemIsCollectedWithRelated(*(unsigned short *)(DAT_0044e144 + 0x1300));
             goto joined_r0x00190660;
           }
           *(unsigned int *)(pcVar5 + 0x1898) = temp_v6;

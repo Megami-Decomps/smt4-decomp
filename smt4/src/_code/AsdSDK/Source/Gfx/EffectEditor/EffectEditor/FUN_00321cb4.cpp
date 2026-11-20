@@ -7,13 +7,13 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_00243224(...);
+int effMenuQueueVectorEffect(...);
 int FUN_00249678(void);
 int FUN_0024c418(void);
 int asdDebugLog(...);
 int padAlternateButtonIndex(...);
 int libm_sinf(void);
-int FUN_002a2c00(void);
+int gfxQuaternionScratchMultiply(void);
 int phaseCosInterpolate(void);
 int mathSinFixedAngle(void);
 int padIsButtonRepeat(...);
@@ -96,14 +96,14 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_00243224. */
+/* Supplied declaration required: effMenuQueueVectorEffect. */
 /* Supplied declaration required: FUN_00249678. */
 /* Supplied declaration required: FUN_0024c418. */
 /* Supplied declaration required: asdDebugLog. */
 /* Supplied declaration required: padAlternateButtonIndex. */
 /* Supplied declaration required: effMenuListAppend. */
 /* Supplied declaration required: libm_sinf. */
-/* Supplied declaration required: FUN_002a2c00. */
+/* Supplied declaration required: gfxQuaternionScratchMultiply. */
 /* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: mathSinFixedAngle. */
 /* Supplied declaration required: padIsButtonRepeat. */
@@ -390,7 +390,7 @@ LAB_00321f54:
   temp_v19 = temp_v20;
   mathSinFixedAngle();
   temp_v31 = temp_v28 - temp_v20 * temp_v24;
-  FUN_00243224(&temp_v29,&temp_v26,0xff00c0c0,0);
+  effMenuQueueVectorEffect(&temp_v29,&temp_v26,0xff00c0c0,0);
   temp_v20 = temp_v19;
   phaseCosInterpolate();
   temp_v29 = temp_v21 + temp_v19 * temp_v24;
@@ -431,7 +431,7 @@ LAB_00321f54:
     DAT_004ea934 = temp_v19;
     DAT_004ea930 = temp_v16;
     DAT_004ea92c = temp_v24;
-    FUN_002a2c00();
+    gfxQuaternionScratchMultiply();
     g_effectEditorRotation.value.w = DAT_004ea928;
     g_effectEditorRotation.value.x = DAT_004ea91c;
     g_effectEditorRotation.value.y = DAT_004ea920;

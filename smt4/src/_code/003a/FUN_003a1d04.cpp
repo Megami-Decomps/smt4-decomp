@@ -44,7 +44,7 @@ void FUN_003a1d04(Scene3a *scene)
         shopDrawListRow(scene, flaggedEntryGetValueByState(&page->holder) + 1, 1, held);
     }
     s32 selected = flaggedEntryGetValueByState(&page->holder);
-    FUN_002332e8(scene->view, FUN_0029e924(&page->holder), selected);
+    shopPanelSetScrollPosition(scene->view, FUN_0029e924(&page->holder), selected);
     scene->view->refresh(color);
 }
 }

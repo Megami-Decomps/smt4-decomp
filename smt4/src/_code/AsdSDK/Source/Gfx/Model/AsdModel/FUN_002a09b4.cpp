@@ -16,7 +16,7 @@ static inline void detachModelSlots(ModelSlotList *list)
 
 extern "C" {
 extern AsdModelBank g_asdModelBanks[2];
-extern AsdModelBank DAT_004d9d88[2];
+extern AsdModelBank g_asdModelSlotBanks[2];
 extern AsdModelBank DAT_004da290[2];
 extern AsdModelBank DAT_004da798[2];
 extern AsdModelIdList g_asdModelIdLists[2];
@@ -31,7 +31,7 @@ void FUN_0021f6e4(ModelFileSource *, u32);
 void FUN_002a09b4(const char *path, u32 bank)
 {
     memClear(&g_asdModelBanks[bank], sizeof(AsdModelBank));
-    memClear(&DAT_004d9d88[bank], sizeof(AsdModelBank));
+    memClear(&g_asdModelSlotBanks[bank], sizeof(AsdModelBank));
     memClear(&DAT_004da290[bank], sizeof(AsdModelBank));
     memClear(&DAT_004da798[bank], sizeof(AsdModelBank));
     g_asdModelIdLists[bank] = AsdModelIdList();

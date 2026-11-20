@@ -25,7 +25,7 @@ extern int onlineContextGetInstance(void);
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002e6fb0. */
 /* Supplied declaration required: _ZN9Obj5593b8D1Ev. */
-extern int FUN_002eb624(unsigned int *);
+extern int deletingDtor_002eb624(unsigned int *);
 extern int FUN_002ed250(int);
 /* Supplied declaration required: FUN_002f9f4e. */
 /* Supplied declaration required: FUN_00301792. */
@@ -60,7 +60,7 @@ void FUN_00120e80(unsigned int *param_1)
   (*(int *)((unsigned char *)&DAT_005949d8 + 0x18)) = (*(int *)((unsigned char *)&DAT_005949d8 + 0x18)) - 1;
   _ZN9Obj55b28cD1Ev(temp_v2);
   FUN_0010d2c4();
-  temp_v0 = FUN_002eb624(param_1 + 0x13);
+  temp_v0 = deletingDtor_002eb624(param_1 + 0x13);
   temp_v0 = FUN_002ed250(temp_v0 - 0x30);
   _ZN9Obj5593b8D1Ev(temp_v0 - 0x1c);
   return;

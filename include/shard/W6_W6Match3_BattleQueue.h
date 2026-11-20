@@ -11,7 +11,7 @@ extern "C" void btlPruneInvalidQueuedEntries(BtlMainState* state);
 extern "C" {
 #endif
 
-u32 FUN_0023dcfc(u32 kind);
+u32 btlQueueParamLimitForKind(u32 kind);
 
 #ifdef __cplusplus
 }
@@ -21,7 +21,7 @@ u32 FUN_0023dcfc(u32 kind);
 extern "C" {
 #endif
 
-u32 FUN_0023e3a4(u32 a, u32 b, s32 check);
+u32 aocPackageHasTextureContent(u32 a, u32 b, s32 check);
 
 #ifdef __cplusplus
 }

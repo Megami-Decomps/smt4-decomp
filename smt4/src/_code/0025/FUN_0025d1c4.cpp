@@ -70,10 +70,10 @@ extern int flagBitIsSet(int);
 extern int FUN_00297ca4(int, unsigned int);
 /* Supplied declaration required: gxSetMirroredClippedScissor. */
 extern unsigned int appGetRemainingCapacity(int);
-extern unsigned int FUN_0029a9d4(int, unsigned int);
-extern int FUN_0029d644(unsigned int);
+extern unsigned int skillGetDiscountedCost(int, unsigned int);
+extern int uiListGetVisibleCount(unsigned int);
 extern int ifTouchGetSelectionModeForRegion(int);
-extern int FUN_0029ee54(unsigned int);
+extern int gridNavigationGetItemCount(unsigned int);
 extern int listCursorGetRowIfUnblocked(unsigned int);
 extern int resourceRunOperationIfUnblocked(unsigned int);
 extern int gameGetUnitRecord(int);
@@ -140,15 +140,15 @@ void FUN_0025d1c4(int param_1)
     temp_v3 = 0xb3;
   }
   temp_v20 = (unsigned int *)(param_1 + 0x340c);
-  temp_v4 = FUN_0029d644(*temp_v20);
+  temp_v4 = uiListGetVisibleCount(*temp_v20);
   if (*(int *)(temp_v2 + 0x48) == 0x10 || *(int *)(temp_v2 + 0x48) == 0x29) {
     if (*(char *)(temp_v2 + 0x7e) == '\0') {
       return;
     }
     temp_v4 = *(int *)(temp_v2 + 0x44) + 1;
-    temp_v5 = FUN_0029d644(*temp_v20);
+    temp_v5 = uiListGetVisibleCount(*temp_v20);
     if (temp_v5 < temp_v4) {
-      temp_v4 = FUN_0029d644(*temp_v20);
+      temp_v4 = uiListGetVisibleCount(*temp_v20);
     }
   }
   if (*(char *)(temp_v2 + 0x7e) == '\0') {
@@ -157,7 +157,7 @@ void FUN_0025d1c4(int param_1)
   temp_v5 = *(int *)(temp_v2 + 0x48);
   temp_v24 = 0;
   if ((((temp_v5 == 8 || temp_v5 == 10) || temp_v5 == 0xc) &&
-      (temp_v5 = FUN_0029d644(*temp_v20), temp_v5 <= temp_v4)) &&
+      (temp_v5 = uiListGetVisibleCount(*temp_v20), temp_v5 <= temp_v4)) &&
      (*(int *)(param_1 + temp_v4 * 0x8c + 0xdec) >= 0x3f800000)) {
     temp_v24 = 1;
   }
@@ -387,14 +387,14 @@ void FUN_0025d1c4(int param_1)
                   temp_v5 = (int)(short)((short)(temp_v10 + temp_v5) + 1);
                   temp_v13 = aocIndexValueOrDefault();
                   sprintf((char *)temp_v19,"%s",temp_v13);
-                  temp_v13 = FUN_0029a9d4(temp_v5,1);
+                  temp_v13 = skillGetDiscountedCost(temp_v5,1);
                 }
                 else {
                   temp_v5 = (int)*(short *)(param_1 + *(int *)(temp_v2 + 0x5c) * 0x10 +
                                           (temp_v10 + temp_v5) * 2 + 0x341c);
                   temp_v13 = aocIndexValueOrDefault();
                   sprintf((char *)temp_v19,"%s",temp_v13);
-                  temp_v13 = FUN_0029a9d4(temp_v5,1);
+                  temp_v13 = skillGetDiscountedCost(temp_v5,1);
                 }
                 temp_v21 = FUN_0025cc04(0xffffffff,temp_v5);
               }
@@ -721,14 +721,14 @@ void FUN_0025d1c4(int param_1)
             temp_v5 = (int)(short)((short)(temp_v15 + temp_v4) + 1);
             temp_v12 = aocIndexValueOrDefault();
             sprintf((char *)temp_v19,"%s",temp_v12);
-            temp_v12 = FUN_0029a9d4(temp_v5,1);
+            temp_v12 = skillGetDiscountedCost(temp_v5,1);
           }
           else {
             temp_v5 = (int)*(short *)(param_1 + *(int *)(temp_v2 + 0x5c) * 0x10 + (temp_v15 + temp_v4) * 2 +
                                    0x341c);
             temp_v12 = aocIndexValueOrDefault();
             sprintf((char *)temp_v19,"%s",temp_v12);
-            temp_v12 = FUN_0029a9d4(temp_v5,1);
+            temp_v12 = skillGetDiscountedCost(temp_v5,1);
           }
           temp_v21 = FUN_0025cc04(0xffffffff,temp_v5);
         }
@@ -777,7 +777,7 @@ void FUN_0025d1c4(int param_1)
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v7,1,4,0x74,
                  "%d",temp_v12);
   }
-  temp_v3 = FUN_0029ee54(*temp_v20);
+  temp_v3 = gridNavigationGetItemCount(*temp_v20);
   if (temp_v3 >= 7) {
     if (*(int *)(temp_v2 + 0x5c) == 1) {
       temp_v13 = 200;

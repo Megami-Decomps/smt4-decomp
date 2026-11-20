@@ -35,7 +35,7 @@ static inline void saveSourcePosition(ContentTransition *scene)
 extern "C" void aocTransitionUpdate(ContentTransition *scene)
 {
     if (scene->step.phase == 0) {
-        FUN_0022af9c(0);
+        infoWinSetShown(0);
         FUN_0028d664(&g_aocMain->scriptHolder, 1);
         scene->step.phase = 1;
         return;
@@ -63,7 +63,7 @@ extern "C" void aocTransitionUpdate(ContentTransition *scene)
             scene->step.state = 5;
         } else {
             gameJumpRequestClear();
-            FUN_0022af9c(1);
+            infoWinSetShown(1);
             buttonHelpSelectByProgress(scene);
             scene->step.phase = 0;
             scene->step.state = 5;

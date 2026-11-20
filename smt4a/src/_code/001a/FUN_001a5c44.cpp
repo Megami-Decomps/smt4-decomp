@@ -21,11 +21,11 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_5_stack;
 
-extern int FUN_00188c94(void);
-extern unsigned int FUN_00188ca4(void);
+extern int nnosGetHeapSize(void);
+extern unsigned int nnosGetHeapBase(void);
 /* Supplied declaration required: slotTableReplace. */
 /* Supplied declaration required: FUN_001a5e84. */
-extern unsigned int FUN_001a8e14(int);
+extern unsigned int soundArchiveFileEntryIsLoaded(int);
 /* Supplied declaration required: FUN_001b1ab8. */
 /* Supplied declaration required: FUN_001b1c40. */
 extern int *FUN_001b3c90(unsigned char *, unsigned int);
@@ -51,7 +51,7 @@ FUN_001a5c44(int *param_1,unsigned int param_2,unsigned int param_3,int *param_4
   unsigned int uStack_44;
   unsigned int temp_v8;
   
-  temp_v0 = FUN_001a8e14(param_1[1]);
+  temp_v0 = soundArchiveFileEntryIsLoaded(param_1[1]);
   piVar2 = (int *)(**(romwright_code **)(*param_1 + 0x10))(param_1,temp_v0);
   if ((piVar2 != (int *)0x0) ||
      (piVar2 = param_1, FUN_001b1ab8(param_1,param_2,param_4,param_5), piVar2 != (int *)0x0)) {
@@ -62,8 +62,8 @@ FUN_001a5c44(int *param_1,unsigned int param_2,unsigned int param_3,int *param_4
     piVar2 = (int *)FUN_001b3c90(temp_v5,param_3);
     temp_v2 = (**(romwright_code **)(*param_4 + 8))(param_4,piVar2 + 8);
     if (temp_v2 != 0) {
-      temp_v3 = FUN_00188ca4();
-      temp_v1 = FUN_00188c94();
+      temp_v3 = nnosGetHeapBase();
+      temp_v1 = nnosGetHeapSize();
       if ((temp_v3 <= temp_v2) && (temp_v2 + (int)(piVar2 + 8) <= temp_v1 + temp_v3)) {
         temp_v7 = 0x56574943;
         uStack_44 = temp_v0;

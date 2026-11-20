@@ -59,7 +59,7 @@ s32 commonBackgroundUpdateFade(u32 handle)
         }
         break;
     }
-    if (!FUN_002ef9f0()) {
+    if (!mapRndMazeTaskIsActive()) {
         if (!commonBackgroundChildIsKeptAlive(g_commonBg.owned)) {
             if (gameFlagIsSet(0x11)) {
                 CommonBackgroundChild *owned = g_commonBg.owned;

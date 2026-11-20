@@ -24,14 +24,14 @@ struct Table003ca9bc {
 
 extern "C" {
 
-extern Table003ca9bc DAT_0059ef10;
+extern Table003ca9bc g_effectEditorOwnerOptions;
 
 
-/* Forwards the owner's effect (0x1c): its body (0x8c) and value (0xb8) with the entry at 0x38 of DAT_0059ef10. */
+/* Forwards the owner's effect (0x1c): its body (0x8c) and value (0xb8) with the entry at 0x38 of g_effectEditorOwnerOptions. */
 void effectEditorApplySecondaryOwnerOptions(Object003ca9bc *object)
 {
     Effect003ca9bc *effect = &object->owner->effect;
-    FUN_0031ab38(reinterpret_cast<u32 *>(effect->body), effect->value, reinterpret_cast<EffectEditorOptions *>(DAT_0059ef10.entry), reinterpret_cast<EffectEditorOptions *>(&DAT_0059ef10));
+    effectEditorApplyOwnerOptionsPair(reinterpret_cast<u32 *>(effect->body), effect->value, reinterpret_cast<EffectEditorOptions *>(g_effectEditorOwnerOptions.entry), reinterpret_cast<EffectEditorOptions *>(&g_effectEditorOwnerOptions));
 }
 
 } /* extern "C" */

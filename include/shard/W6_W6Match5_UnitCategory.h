@@ -18,7 +18,7 @@ struct ScriptCategoryUnit {
 
 extern "C" {
 extern u32 g_btlScriptUnit;
-s32 FUN_0019acdc(s32 id, s32 flag);
+s32 unitMapIdToCategory(s32 id, s32 flag);
 }
 
 #ifdef __cplusplus

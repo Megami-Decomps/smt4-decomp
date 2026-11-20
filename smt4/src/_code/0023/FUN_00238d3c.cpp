@@ -5,7 +5,7 @@
 extern "C" {
 
 int threadSleepDuration(int, int);
-int FUN_002c40f8(unsigned char *, int *, int, int);
+int svcWaitSynchronizationN(unsigned char *, int *, int, int);
 int resultHandleFailure(void);
 int FUN_00358e78(int *);
 int software_interrupt(int);
@@ -26,7 +26,7 @@ extern unsigned int g_moduleCriticalSection2; /* 0x4e629c */
 extern int resourceDispatch(unsigned int);
 extern int FUN_00239a54(void);
 /* Supplied declaration required: threadSleepDuration. */
-/* Supplied declaration required: FUN_002c40f8. */
+/* Supplied declaration required: svcWaitSynchronizationN. */
 /* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: FUN_00358e78. */
 extern unsigned int resourceDispatch2(int *);
@@ -93,7 +93,7 @@ int FUN_00238d3c(int param_1,int param_2)
         temp_v6[1] = 0;
         puVar5 = temp_v8;
         temp_v7 = temp_v0;
-        FUN_002c40f8(puVar5,&temp_v7,1,0);
+        svcWaitSynchronizationN(puVar5,&temp_v7,1,0);
         if ((int)puVar5 < 0) {
           resultHandleFailure();
         }

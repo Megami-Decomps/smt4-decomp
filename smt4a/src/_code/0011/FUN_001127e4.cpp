@@ -27,7 +27,7 @@ extern unsigned char LAB_00112a0d; /* 0x112a0d */
 /* Supplied declaration required: FUN_002e93c2. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-extern unsigned int FUN_002ea704(void);
+extern unsigned int watcherGetEnabledFlag(void);
 /* Supplied declaration required: onlineUrlSetAddress. */
 /* Supplied declaration required: FUN_002eb858. */
 /* Supplied declaration required: FUN_002f8728. */
@@ -53,7 +53,7 @@ unsigned char * FUN_001127e4(int param_1)
   FUN_002eb858(temp_v7,*(unsigned int *)(param_1 + 0x378),*(unsigned int *)(param_1 + 0x374) & 0xffff);
   temp_v0 = param_1 + 0x260;
   onlineUrlSetAddress(temp_v0,temp_v7);
-  temp_v1 = FUN_002ea704();
+  temp_v1 = watcherGetEnabledFlag();
   FUN_002fa434(temp_v4,temp_v1);
   (((Obj558b24 *)(temp_v4))->Obj558b24::~Obj558b24(), (int)(temp_v4));
   temp_v2 = FUN_002fd624(temp_v0);

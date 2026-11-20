@@ -15,7 +15,7 @@ struct ScriptWaitSlots {
 }
 extern "C" {
 extern u32 DAT_00588fcc;
-extern ScriptWaitSlots DAT_0061978c;
+extern ScriptWaitSlots g_soundObjectTable;
 u32 scrGetCommandFrame(void);
 u32 FUN_001628c0(u32 slot, u32 mode, u32 flags, s32 enabled, f32 first, f32 second);
 
@@ -24,7 +24,7 @@ static __inline ScriptWaitSlot *waitSlotAt(u32 index)
 {
     ScriptWaitSlot *slot = NULL;
     if (index < 4) {
-        slot = &DAT_0061978c.slots[index];
+        slot = &g_soundObjectTable.slots[index];
     }
     return slot;
 }
@@ -38,13 +38,13 @@ u32 FUN_002a1738(s32 mode, u32 slot)
             return 1;
         }
     } else {
-        u8 flags = DAT_0061978c.flags;
+        u8 flags = g_soundObjectTable.flags;
         if (mode == 1) {
             flags |= 4;
         } else if (mode == 2) {
             flags = 5;
         }
-        u32 index = FUN_001628c0(slot, DAT_0061978c.mode, flags, 1, 0.707f, 0.707f);
+        u32 index = FUN_001628c0(slot, g_soundObjectTable.mode, flags, 1, 0.707f, 0.707f);
         DAT_00588fcc = index;
         if (index == 0xFFFFFFFF) {
             return 1;

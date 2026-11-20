@@ -2,14 +2,14 @@
 
 extern "C" {
 
-void FUN_003d9e88(void);
+void btlEffectBeginEncounterFade(void);
 
-extern void *DAT_00435d18;
+extern void *g_btlAux;
 
 void FUN_0023f4e4(void)
 {
-    if (DAT_00435d18 != NULL) {
-        FUN_003d9e88();
+    if (g_btlAux != NULL) {
+        btlEffectBeginEncounterFade();
     }
 }
 

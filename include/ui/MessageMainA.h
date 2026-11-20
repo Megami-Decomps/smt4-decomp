@@ -151,7 +151,7 @@ extern "C" {
 #endif
 
 /* Canonical declaration (matches the definition). */
-void FUN_003e48dc(u32 id);
+void partySlotClearInactiveFlag(u32 id);
 void FUN_0015059c(u8 value);
 /* Allocates a message window with its text box and jobs. */
 MessageWindowA *FUN_00145280(void);

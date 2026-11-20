@@ -16,7 +16,7 @@ typedef struct {
 extern signed char DAT_00647634; /* 0x647634 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-extern int asdModelForwardChecked(int, char *, unsigned int, unsigned int);
+extern int srvGetServiceHandle(int, char *, unsigned int, unsigned int);
 /* Supplied declaration required: libc_strlen. */
 extern int FUN_0043b1ec(void);
 /* Supplied declaration required: FUN_0043b24c. */
@@ -46,7 +46,7 @@ int FUN_0043ad40(int param_1,int param_2,unsigned int param_3,int param_4)
     FUN_0043b24c(0x64765c,param_2,temp_v1 + 1,param_3,param_1 + 4);
     if (-1 < temp_v0) {
       temp_v2 = libc_strlen("http:C");
-      temp_v0 = asdModelForwardChecked(param_1 + 8,"http:C",temp_v2,0);
+      temp_v0 = srvGetServiceHandle(param_1 + 8,"http:C",temp_v2,0);
       if (-1 < temp_v0) {
         *(unsigned int *)(param_1 + 0xc) = *(unsigned int *)(param_1 + 8);
         temp_v1 = FUN_0043b45c(param_1 + 0xc,*(unsigned int *)(param_1 + 4));

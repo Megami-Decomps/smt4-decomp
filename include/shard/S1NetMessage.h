@@ -1,4 +1,4 @@
-/* A network message sent through the session object returned by FUN_001a2a4c. */
+/* A network message sent through the session object returned by nn_gxlow_CTR_GetCmdManager. */
 #ifndef SHARD_S1NETMESSAGE_H
 #define SHARD_S1NETMESSAGE_H
 

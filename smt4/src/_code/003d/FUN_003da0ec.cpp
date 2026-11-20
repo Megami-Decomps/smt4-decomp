@@ -17,7 +17,7 @@ int animationSelectThirdPart(...);
 int textureCachePollReady(void);
 int FUN_00249e54(unsigned int, char *);
 int btlQueueKeyedScalarReflectAction(...);
-int FUN_00257e74(unsigned int);
+int effShakeParticleAdvance(unsigned int);
 int asdOperatorNew(void);
 int FUN_0034c7a8(unsigned int, float *);
 int animationSelectSecondPart(...);
@@ -74,12 +74,12 @@ extern unsigned int DAT_004efd98; /* 0x4efd98 */
 extern int rangeIsValid(void);
 /* Supplied declaration required: pairSourceGet. */
 /* Supplied declaration required: animationSelectThirdPart. */
-extern int FUN_00246708(void);
+extern int textureCacheGetDirection(void);
 /* Supplied declaration required: textureCachePollReady. */
 /* Supplied declaration required: FUN_00249e54. */
 extern unsigned int keyedRecordRegisterName(int);
 /* Supplied declaration required: btlQueueKeyedScalarReflectAction. */
-/* Supplied declaration required: FUN_00257e74. */
+/* Supplied declaration required: effShakeParticleAdvance. */
 /* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: FUN_002a5960. */
 /* Supplied declaration required: _ZN9Obj42111cC1Ej. */
@@ -165,7 +165,7 @@ void FUN_003da0ec(int param_1)
       *(unsigned int *)(param_1 + 0x3060) = temp_v16;
     }
     else {
-      FUN_00257e74(*(unsigned int *)(param_1 + 0x3058));
+      effShakeParticleAdvance(*(unsigned int *)(param_1 + 0x3058));
       pairSourceGet(*(unsigned int *)(param_1 + 0x3058),(unsigned int *)(param_1 + 0x3060),
                    param_1 + 0x3064);
     }
@@ -184,7 +184,7 @@ void FUN_003da0ec(int param_1)
       *(unsigned int *)(param_1 + 0x3068) = temp_v16;
     }
     else {
-      FUN_00257e74(*(unsigned int *)(param_1 + 0x305c));
+      effShakeParticleAdvance(*(unsigned int *)(param_1 + 0x305c));
       pairSourceGet(*(unsigned int *)(param_1 + 0x305c),(unsigned int *)(param_1 + 0x3068),
                    param_1 + 0x306c);
     }
@@ -254,7 +254,7 @@ void FUN_003da0ec(int param_1)
     *(unsigned char *)(param_1 + 0x3040) = 4;
     break;
   case 4:
-    temp_v6 = FUN_00246708();
+    temp_v6 = textureCacheGetDirection();
     if (temp_v6 != 0) {
       temp_v22 = *(int *)(param_1 + 0x304c);
       if (temp_v22 != 0) goto code_r0x0034ca74;

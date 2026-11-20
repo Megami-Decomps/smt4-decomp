@@ -6,7 +6,7 @@
 
 extern "C" {
 extern DeferredModelWork *g_deferredMapModels;
-void FUN_00266fac(s32 mode, s32 id);
+void mapHudStartSelectionAnimation(s32 mode, s32 id);
 f32 mathAbsHeadingErrorToPoint(f32, f32, f32, f32, f32, f32, f32);
 ModelSelectionLabel *dataTable2AGetEntryWithAoc(u32);
 char *libc_strcpy(char *, const char *);
@@ -18,7 +18,7 @@ void mapSelectNearestInteractiveModel(f32 x, f32 y, f32 z, f32 heading)
     f32 nearest = 0.0f;
     if (g_deferredMapModels->updating)
         return;
-    FUN_00266fac(0, 0);
+    mapHudStartSelectionAnimation(0, 0);
     g_deferredMapModels->pending = 0;
     if (g_gameState.inputBlocked)
         return;

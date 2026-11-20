@@ -64,7 +64,7 @@ extern "C" void FUN_004a3e04(StatMenu *menu)
 {
     if (menu->enabled == 0)
         return;
-    s32 top = FUN_002a482c(menu->list);
+    s32 top = resourceDispatchTaggedOperation(menu->list);
     s32 rows = rangeGetMinimumLimit(menu->list);
     if (top == g_animatedPageSelection[1])
         return;
@@ -73,9 +73,9 @@ extern "C" void FUN_004a3e04(StatMenu *menu)
         s16 id = menu->entries[top + i].id;
         u32 color = 0xFFFFFFFF;
         bool compare = menu->mode != 0;
-        u32 value = statGetValue(&menu->entries[FUN_002a482c(menu->list) + i], compare, menu->kind);
+        u32 value = statGetValue(&menu->entries[resourceDispatchTaggedOperation(menu->list) + i], compare, menu->kind);
         if (menu->mode == 1 && menu->kind == 1) {
-            const StatEntry *entry = &menu->entries[FUN_002a482c(menu->list) + i];
+            const StatEntry *entry = &menu->entries[resourceDispatchTaggedOperation(menu->list) + i];
             u32 base = compare ? entry->current : statGetValue(entry, false, 0);
             if (value > base)
                 color = 0x72E027FF;

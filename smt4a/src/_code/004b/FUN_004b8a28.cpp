@@ -31,7 +31,7 @@ int placeWinSetValue(int arg);
 int scriptHolderReset(void *queue);
 int scriptHolderFree3(void *queue);
 int scriptHolderUpdateSimple(void *queue);
-int FUN_004b7d88(Menu *menu);
+int soundPlayCueForContextKind(Menu *menu);
 
 /* Opens the menu's queue on the first call; once the queue reports ready, closes it and applies the selected entry. */
 void FUN_004b8a28(Menu *menu)
@@ -44,7 +44,7 @@ void FUN_004b8a28(Menu *menu)
     }
     if (menu->phase == 1 && scriptHolderUpdateSimple(&g_aocMain->scriptHolder) != 0) {
         scriptHolderFree3(&g_aocMain->scriptHolder);
-        FUN_004b7d88(menu);
+        soundPlayCueForContextKind(menu);
         FUN_00215978(0);
         dialogOpen(0, 0);
         infoWinSetText(reinterpret_cast<const char *>(menu->owner), menu->entry->kind);

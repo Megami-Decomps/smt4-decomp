@@ -9,7 +9,7 @@
 
 extern "C" {
 extern BtlEvent *g_btlEvent;
-extern BtlEffectOwner *DAT_00435d18;
+extern BtlEffectOwner *g_btlAux;
 extern u32 g_btlScriptUnit;
 extern const char DAT_00400428[];
 extern const char DAT_00400434[];
@@ -26,17 +26,17 @@ u32 scrComm_Battle_PlayCommonEffectExt(void)
     s32 target = scrGetArg(0);
     u32 value = scrGetArg(1);
     s32 amount = scrGetArg(2);
-    if (isEntryUsable(g_btlEvent) != 0 && FUN_0024550c(DAT_00435d18) == 0) {
+    if (isEntryUsable(g_btlEvent) != 0 && FUN_0024550c(g_btlAux) == 0) {
         return 0;
     }
     if (amount != 0) {
         char name[32] = {};
         const char *effectName = amount < 0 ? DAT_00400428 : DAT_00400434;
         memcpy(name, effectName, 9);
-        FUN_002454c4(DAT_00435d18, name, 0, 0);
+        FUN_002454c4(g_btlAux, name, 0, 0);
         u32 unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
         FUN_00245420(0, unit, &btlGetMainState()->actions[target], value, amount, 0, -1);
-        FUN_001b1a48(amount, unit, DAT_00435d18->slots, 0, target, target);
+        FUN_001b1a48(amount, unit, g_btlAux->slots, 0, target, target);
     }
     return 1;
 }

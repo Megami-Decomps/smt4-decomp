@@ -38,7 +38,7 @@ void btlEntryGetPassiveSkillIds(AlternateActionActor *, u16 *);
 void qsort(void *, s32, s32, s32 (*)(const void *, const void *));
 s32 FUN_00333670(const void *, const void *);
 s32 halfwordKeyDescendingCompare(const void *, const void *);
-u32 FUN_0022a5d8(s32, AlternateActionActor *, s32);
+u32 btlSubmitAction(s32, AlternateActionActor *, s32);
 void btlUnitSetParam(AlternateActionContext *, s32, s32);
 void FUN_00229b10(AlternateActionContext *, AlternateActionChoice *);
 void FUN_00227b14(BtlUi *ui, u16, s32, s32);
@@ -66,7 +66,7 @@ u32 btlChooseAlternateSkillOrFallback(AlternateActionContext *context, Alternate
         }
         if (count) {
             qsort(skills, 9, 2, FUN_00333670);
-            FUN_0022a5d8(10, choice->actor, 1);
+            btlSubmitAction(10, choice->actor, 1);
             qsort(skills, count, 2, halfwordKeyDescendingCompare);
             s32 index = randRange((count - 1) & 0xffff);
             choice->command->type = 2;
@@ -81,7 +81,7 @@ u32 btlChooseAlternateSkillOrFallback(AlternateActionContext *context, Alternate
             return 1;
         }
     }
-    FUN_0022a5d8(9, choice->actor, 1);
+    btlSubmitAction(9, choice->actor, 1);
     if (!(choice->actor->flags & 0x30))
         FUN_00227b14(g_btlUiBlock, choice->target, 0, 0);
     choice->command->type = 15;

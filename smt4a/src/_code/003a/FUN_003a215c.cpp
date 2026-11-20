@@ -3,13 +3,13 @@
 #include "gfx/VectorScratch.h"
 
 extern "C" {
-f32 FUN_001b63b0(f32 phase);
+f32 phaseCosine(f32 phase);
 f32 FUN_001a1ee0(f32 phase);
 
 void FUN_003a215c(f32 angle)
 {
     f32 phase = angle * 40.743664f;
-    f32 cosine = FUN_001b63b0(phase);
+    f32 cosine = phaseCosine(phase);
     f32 sine = FUN_001a1ee0(phase);
     f32 complement = 1.0f - cosine;
     f32 x = g_vectorScratch.first.vector.x;

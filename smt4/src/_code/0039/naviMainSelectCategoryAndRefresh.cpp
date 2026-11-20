@@ -13,12 +13,12 @@ typedef char NaviCategorySelectionWorkIVOffsets[
     offsetof(NaviCategorySelectionWorkIV, refresh) == 0x5A8C ? 1 : -1];
 
 extern "C" {
-void FUN_0039c57c(NaviCategorySelectionWorkIV *work, u32 category);
+void naviApplyCategorySelection(NaviCategorySelectionWorkIV *work, u32 category);
 
 /* Selects the category, clears the 0x10 flag and requests a redraw of both screens. */
 void naviMainSelectCategoryAndRefresh(NaviCategorySelectionWorkIV *work, u32 category)
 {
-    FUN_0039c57c(work, category);
+    naviApplyCategorySelection(work, category);
     work->flags &= ~0x10u;
     for (s32 screen = 0; screen < 2; screen++) {
         work->refresh[screen] = 1;

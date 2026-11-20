@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern void FUN_00358fbc(Obj557ec0 *messageBox);
+extern void cecMessageBoxRequestOpen(Obj557ec0 *messageBox);
 
 void cecProcessCall2(void)
 {
     if (g_cecProcess != NULL) {
-        FUN_00358fbc(g_cecProcess->messageBox);
+        cecMessageBoxRequestOpen(g_cecProcess->messageBox);
     }
 }
 

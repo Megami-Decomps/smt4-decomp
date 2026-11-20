@@ -9,7 +9,7 @@ u32 FUN_0026f784(void *link);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 void linkHolderApplyFlag(void *link, u32 flag);
 void characterInfoPanelPopulate(void *panel, u32 selection, const void *record);
-u32 FUN_0028d594(void);
+u32 buttonHelpTextIsVisible(void);
 u32 FUN_0026f1f0(void);
 void buttonHelpSetPreset(u32 preset);
 void uiAnimateStaggeredSlidesAndFades(void *panel, u32 mode);
@@ -56,7 +56,7 @@ u32 FUN_002e1744(void *object)
             work->transition.busy = 1;
             linkHolderApplyFlag(work->link, 1);
             characterInfoPanelPopulate(work->panel, work->selection, work->record);
-            if (!FUN_0028d594()) {
+            if (!buttonHelpTextIsVisible()) {
                 FUN_0026f188(FUN_0026f1f0(), 15);
             }
             if (!transition->needsHelp) {

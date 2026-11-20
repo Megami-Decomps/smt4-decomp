@@ -21,8 +21,8 @@ typedef struct SoundCueModule {
     /* 0x1E4 */ u8 flags;
 } SoundCueModule;
 
-s32 FUN_002bfc24(s32 mode, u32 sound, u8 volume, u8 flags, f32 left, f32 right);
-u32 FUN_00100bd4(SoundCue *cue);
+s32 voiceRequestPlayFile(s32 mode, u32 sound, u8 volume, u8 flags, f32 left, f32 right);
+u32 scriptParseIntArgumentPreservingErrno(SoundCue *cue);
 
 extern SoundCueModule DAT_004c5634;
 extern u32 DAT_0044e128; /* channel of the cue started last */
@@ -41,7 +41,7 @@ s32 FUN_002f4f24(u32 index)
         SoundCue *cue = &DAT_004c5634.cues[index];
         if (cue != NULL) {
             u8 flags = DAT_004c5634.flags | 4;
-            u32 sound = FUN_00100bd4(cue);
+            u32 sound = scriptParseIntArgumentPreservingErrno(cue);
             u8 volume = cue->volume;
             f32 left;
             f32 right;
@@ -55,7 +55,7 @@ s32 FUN_002f4f24(u32 index)
                 left = 0.707f;
                 right = 0.707f;
             }
-            DAT_0044e128 = FUN_002bfc24(1, sound, volume, flags, left, right);
+            DAT_0044e128 = voiceRequestPlayFile(1, sound, volume, flags, left, right);
             if (DAT_0044e128 != (u32)-1) {
                 return 0;
             }

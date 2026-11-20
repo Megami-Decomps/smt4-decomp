@@ -20,7 +20,7 @@ extern const s8 DAT_00403570[];
 s32 gameFlagIsSet(u32 flag);
 NpcTextureSource *dataTable25FindById(u32 npc);
 const NpcPortraitVariantRecord *aocContentGetIndexedRecord(const NpcTextureSource *source, u32 variant);
-s32 FUN_002c1d5c(void);
+s32 eventIsSkipping(void);
 s32 aocRunByName(AocSystem *system, s32 table, s32 node, s32 mode);
 void asdTMTexTablePrepareNodeImage(s32 table, s32 node);
 s32 FUN_001dfc64(u32 process);
@@ -64,7 +64,7 @@ void npc2dCreatePortraitVariantJob(u32 npc, s32 position, u32 variant)
         work->display.screenRegion = 5;
         break;
     }
-    if (FUN_002c1d5c()) {
+    if (eventIsSkipping()) {
         work->deferred = 1;
     } else {
         work->deferred = 0;

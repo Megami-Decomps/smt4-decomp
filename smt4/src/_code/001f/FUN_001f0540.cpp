@@ -9,7 +9,7 @@
 
 extern "C" {
 
-int FUN_0026a9cc(...);
+int statusCollectUnlearnedSkillsAboveLevel(...);
 int uiDrawListScrollBar(...);
 int gxSetMirroredClippedScissor(...);
 int arrayContainsU16(...);
@@ -65,16 +65,16 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002580d4. */
 extern int uniteGetWork(void);
-/* Supplied declaration required: FUN_0026a9cc. */
+/* Supplied declaration required: statusCollectUnlearnedSkillsAboveLevel. */
 /* Supplied declaration required: uiDrawListScrollBar. */
 /* Supplied declaration required: gxSetMirroredClippedScissor. */
 extern unsigned int appGetRemainingCapacity(unsigned short);
 extern int flagCountUnlockedSlots(unsigned char *);
 /* Supplied declaration required: arrayContainsU16. */
-extern int FUN_0029d644(int);
+extern int uiListGetVisibleCount(int);
 extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: FUN_0029dc74. */
-extern int FUN_0029ee54(int);
+extern int gridNavigationGetItemCount(int);
 extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_002b6c34. */
@@ -192,12 +192,12 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
     FUN_002bdf94(0,*(short *)(temp_v2 + 8) + temp_v4,*(short *)(temp_v2 + 10) + temp_v13,1,2,0x8d,
                  &LAB_001f0c5c,*(unsigned char *)((int)psVar4 + 3));
     temp_v15 = 0;
-    temp_v2 = FUN_0029d644(temp_v1 + 0x91a0);
+    temp_v2 = uiListGetVisibleCount(temp_v1 + 0x91a0);
     if (0 < temp_v2) {
       do {
         if (*(short *)(temp_v1 + temp_v15 * 2 + 0x9010) == 0) break;
         temp_v15 = temp_v15 + 1;
-        temp_v2 = FUN_0029d644(temp_v1 + 0x91a0);
+        temp_v2 = uiListGetVisibleCount(temp_v1 + 0x91a0);
       } while ((int)temp_v15 < temp_v2);
     }
     temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x1ed));
@@ -226,7 +226,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
                        0x65);
         }
         else {
-          temp_v14 = FUN_0029ee54(temp_v17);
+          temp_v14 = gridNavigationGetItemCount(temp_v17);
           if ((*(int *)(temp_v21 + 0x26c) < temp_v14) && (temp_v12 == temp_v15)) {
             if (temp_v24 != 1) {
               if ((temp_v24 == 2 || temp_v24 == 3) && (temp_v20 != 0)) {
@@ -381,7 +381,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
     temp_v19[6] = 0;
     temp_v19[7] = 0;
     temp_v4 = temp_v1 + 0x9010;
-    FUN_0026a9cc(*psVar4,*(unsigned char *)((int)psVar4 + 3),temp_v4,temp_v19,0);
+    statusCollectUnlearnedSkillsAboveLevel(*psVar4,*(unsigned char *)((int)psVar4 + 3),temp_v4,temp_v19,0);
     temp_v5 = 0;
     do {
       if (temp_v19[temp_v5] == 0) break;
@@ -435,7 +435,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
                     );
         texDrawTableEntryAtStoredOrigin(2,0x24,0x171,*(short *)(temp_v7 + 8) + temp_v13,*(short *)(temp_v7 + 10) + temp_v2,0x65
                     );
-        temp_v8 = FUN_0029d644(temp_v17);
+        temp_v8 = uiListGetVisibleCount(temp_v17);
         temp_v4 = temp_v10;
         if (temp_v14 < temp_v8) {
           texDrawTableEntryAtStoredOrigin(2,0x24,0x174,*(short *)(temp_v7 + 8) + temp_v13,*(short *)(temp_v7 + 10) + temp_v2,

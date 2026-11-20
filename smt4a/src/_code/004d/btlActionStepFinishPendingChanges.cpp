@@ -27,7 +27,7 @@ extern void *g_btlAux;
 s32 FUN_004f2708(BattleActionCamera *camera, BtlMainStateA *battle, s32 flags);
 void btlQueueDuplicateSuppressedAction(s32, s32, s32);
 s32 scrRunOpcodesStub(u32 process);
-void FUN_003756c8(s32 mode);
+void btlPlayMenuConfirmSe(s32 mode);
 void btlStageResetAndClearCameraFlag(void *context);
 
 // Apply pending action camera/UI changes once, then clear their masks when the process ends.
@@ -42,9 +42,9 @@ u32 btlActionStepFinishPendingChanges(BattleActionStep *step, BtlMainStateA *bat
     }
     if (scrRunOpcodesStub(step->process) == 2) {
         if ((battle->stateFlags64.bits & g_btlEvent.pendingMask) != 0) {
-            FUN_003756c8(0);
+            btlPlayMenuConfirmSe(0);
             if ((battle->stateFlags64.bits & g_btlEvent.uiMask) != 0) {
-                FUN_004aa8b0(g_btlUiBlock, 0);
+                btlUiObjCApplyVisibility(g_btlUiBlock, 0);
                 battle->stateFlags64.bits &= ~g_btlEvent.uiMask;
             }
         }

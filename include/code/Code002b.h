@@ -14,7 +14,7 @@ void gfxDrawQuadFourColors(u32 first, u32 second, u32 third, f32 value0, f32 val
 
 void gameFlagsLoadTable4cEntry(s32 id);
 
-s8 FUN_002b950c(void);
+s8 soundActorQueueIsEnabled(void);
 
 void kernelThreadJoinAndClose(void *thread);
 

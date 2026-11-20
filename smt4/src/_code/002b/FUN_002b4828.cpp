@@ -8,7 +8,7 @@ int FUN_0013c584(unsigned char [4]);
 int FUN_0013c5f4(unsigned char [16], unsigned char [4]);
 int FUN_0013c684(void);
 int FUN_0013c6b4(void);
-int FUN_00147390(void);
+int appletWaitForSlotReady(void);
 
 /* stack frame of param_1: 2 slot(s), 5 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0013c5f4. */
 /* Supplied declaration required: FUN_0013c684. */
 /* Supplied declaration required: FUN_0013c6b4. */
-/* Supplied declaration required: FUN_00147390. */
+/* Supplied declaration required: appletWaitForSlotReady. */
 
 
 void FUN_002b4828(unsigned int param_1)
@@ -35,7 +35,7 @@ void FUN_002b4828(unsigned int param_1)
   FUN_0013c584(temp_v0);
   temp_v2 = 0;
   temp_v1 = param_1;
-  FUN_00147390();
+  appletWaitForSlotReady();
   FUN_0013c684();
   FUN_0013c6b4();
   FUN_0013c5f4(temp_v3,temp_v0);

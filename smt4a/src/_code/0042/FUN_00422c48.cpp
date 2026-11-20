@@ -49,7 +49,7 @@ struct StreamState {
 };
 
 extern "C" {
-extern StreamState DAT_005880d0;
+extern StreamState g_soundVoicePool;
 extern StreamRequest DAT_00618524[0x40];
 extern u8 g_soundVoiceCriticalSection;               // critical section
 
@@ -65,12 +65,12 @@ u32 FUN_00439e0c(u32 samples, u32 flag, u32 chunkFrames);
 void FUN_00422c48(void)
 {
     nn_os_CriticalSection_Enter(&g_soundVoiceCriticalSection);
-    if (DAT_005880d0.active != 0) {
+    if (g_soundVoicePool.active != 0) {
         FUN_001cd5ac();
     }
-    u32 count = DAT_005880d0.voiceCount;
+    u32 count = g_soundVoicePool.voiceCount;
     for (u32 i = 0; i < count; i++) {
-        StreamVoice *voice = &DAT_005880d0.voices[i];
+        StreamVoice *voice = &g_soundVoicePool.voices[i];
         if (voice->voice != 0 && voice->queuedCount != 0 && voice->buffers[voice->readIndex].status == 3) {
             s32 size = (s32)voice->buffers[voice->readIndex].size;
             voice->playedCount += (s64)size;
@@ -81,15 +81,15 @@ void FUN_00422c48(void)
             }
         }
     }
-    while (DAT_005880d0.requestsHandled < DAT_005880d0.requestsQueued) {
-        StreamRequest *request = &DAT_00618524[DAT_005880d0.requestsHandled & 0x3f];
+    while (g_soundVoicePool.requestsHandled < g_soundVoicePool.requestsQueued) {
+        StreamRequest *request = &DAT_00618524[g_soundVoicePool.requestsHandled & 0x3f];
         StreamVoice *voice = request->voice;
         if (voice != NULL) {
             if (voice->bufferCount <= voice->queuedCount) {
                 break;
             }
-            u32 data = DAT_00618524[DAT_005880d0.requestsHandled & 0x3f].data;
-            u32 samples = DAT_00618524[DAT_005880d0.requestsHandled & 0x3f].samples;
+            u32 data = DAT_00618524[g_soundVoicePool.requestsHandled & 0x3f].data;
+            u32 samples = DAT_00618524[g_soundVoicePool.requestsHandled & 0x3f].samples;
             StreamWaveBuffer *buffer = &voice->buffers[voice->writeIndex];
             nn_snd_CTR_InitializeWaveBuffer(buffer);
             buffer->data = data;
@@ -105,9 +105,9 @@ void FUN_00422c48(void)
             }
             voice->freeCount--;
         }
-        DAT_005880d0.requestsHandled++;
+        g_soundVoicePool.requestsHandled++;
     }
-    if (DAT_005880d0.active != 0) {
+    if (g_soundVoicePool.active != 0) {
         FUN_001c76b8();
     }
     nn_os_CriticalSection_Leave(&g_soundVoiceCriticalSection);

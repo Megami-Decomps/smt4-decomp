@@ -5,7 +5,7 @@
 extern "C" {
 
 int rangeInit(...);
-int FUN_00237da0(...);
+int quadEffectCreate(...);
 int FUN_00238e20(unsigned int, unsigned char [288], unsigned char [496], unsigned int *, unsigned int *, int, int, int);
 struct LayoutTaskWork;
 LayoutTaskWork *FUN_00238f08(unsigned int owner, const void *params, const void *layout,
@@ -31,7 +31,7 @@ typedef struct {
 
 /* Supplied declaration required: rangeInit. */
 extern unsigned int eventCommandGetPendingCleanup(void);
-/* Supplied declaration required: FUN_00237da0. */
+/* Supplied declaration required: quadEffectCreate. */
 /* Supplied declaration required: FUN_00238e20. */
 /* Supplied declaration required: FUN_00238f08. */
 extern int keyedRecordCountGet(void);
@@ -143,7 +143,7 @@ void FUN_002c17dc(unsigned int *param_1)
               uStack_230 = temp_v7;
               FUN_0035bc4c(temp_v8);
               temp_v7 = keyedGetEntryValue(*(unsigned char *)(param_1 + 0xc),temp_v2);
-              FUN_00237da0(temp_v7,temp_v9,temp_v11,0,param_1 + 0xd,param_1 + param_1[3] + 0x14
+              quadEffectCreate(temp_v7,temp_v9,temp_v11,0,param_1 + 0xd,param_1 + param_1[3] + 0x14
                            ,param_1[3] & 0xff,*(unsigned char *)(param_1 + 0x54),temp_v1,temp_v3);
               param_1[param_1[3] + 0x14] = temp_v7;
               param_1[3] = param_1[3] + 1;

@@ -20,7 +20,7 @@ struct DspComponentState {
 };
 
 extern DspComponentState g_callbackState;
-extern u8 DAT_004657b8[];
+extern u8 g_dspComponentEmbeddedData[];
 u32 nn_dsp_CTR_DSP_LoadComponent(s32 session, const u8 *image, u32 size, u16 programMask, u16 dataMask, s8 *loaded);
 
 /* Records the DSP component image and loads it once a DSP session exists and nothing is loaded yet. */
@@ -39,6 +39,6 @@ static __inline u32 dspComponentLoad(const u8 *data, u32 size, u16 programMask, 
 
 u32 dspComponentLoadEmbedded(void)
 {
-    return dspComponentLoad(DAT_004657b8, 0xC20A, 0xFF, 0xFF);
+    return dspComponentLoad(g_dspComponentEmbeddedData, 0xC20A, 0xFF, 0xFF);
 }
 }

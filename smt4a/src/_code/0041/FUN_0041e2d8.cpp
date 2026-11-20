@@ -32,7 +32,7 @@ typedef struct SelectMenu {
     /* 0x30C */ u8 locked;
 } SelectMenu;
 
-void FUN_002f0384(s32 arg);
+void statusCameraRestore(s32 arg);
 void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 void FUN_0038b5fc(s32 slot, u16 value);
 void FUN_0023b45c(s32 arg);
@@ -50,7 +50,7 @@ void FUN_0041e2d8(SelectMenu *menu)
     menu->shownIndex = index;
     if (selectable[index]) {
         menu->applied = 1;
-        FUN_002f0384(0);
+        statusCameraRestore(0);
         menu->unk068 = 0;
         __aeabi_memcpy4(reinterpret_cast<void *>(gameGetPlayerData()), menu->record, sizeof(SelectRecord));
         FUN_0038b5fc(1, menu->record->value1);
@@ -59,8 +59,8 @@ void FUN_0041e2d8(SelectMenu *menu)
         return;
     }
     FUN_0023b45c(0);
-    FUN_002c8538(1);
-    FUN_002f0384(0);
+    gameGlobalsSetOverlayActive(1);
+    statusCameraRestore(0);
     menu->unk068 = 0;
 }
 

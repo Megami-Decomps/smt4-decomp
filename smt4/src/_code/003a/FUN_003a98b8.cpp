@@ -138,13 +138,13 @@ void FUN_003a98b8(BibleBrowseView *view)
         if (cancel == 0)
             return;
         sortMenuCreate(0xC, 0);
-        FUN_0029e328(1);
-        FUN_0029e328(2);
-        FUN_0029e328(4);
-        FUN_0029e328(5);
-        FUN_0029e328(3);
+        useCounterAppendValue(1);
+        useCounterAppendValue(2);
+        useCounterAppendValue(4);
+        useCounterAppendValue(5);
+        useCounterAppendValue(3);
         useCounterStart();
-        FUN_002a0cc8(1);
+        gameGlobalsSetSubScreenActive(1);
         view->mode = 3;
         view->modeTimer = 0;
         buttonHelpSetText(0, 0x323232FF);
@@ -154,7 +154,7 @@ void FUN_003a98b8(BibleBrowseView *view)
     beginStatusPanelClose();
     buttonHelpSetText(0, 0x323232FF);
     FUN_00233240(view->animation, 1);
-    FUN_002a0cc8(1);
+    gameGlobalsSetSubScreenActive(1);
     view->mode = 6;
     view->modeTimer = 0;
     FUN_00232848();

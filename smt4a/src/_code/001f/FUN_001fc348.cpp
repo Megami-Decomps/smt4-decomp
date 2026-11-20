@@ -23,12 +23,12 @@ typedef char MaterialTextureRouteOffsets[offsetof(MaterialTextureRouteOwner, rou
     offsetof(MaterialTextureRouteOwner, count) == 0x330 ? 1 : -1];
 }
 extern "C" {
-extern MaterialTextureRouteOwner *DAT_0057f2c4;
+extern MaterialTextureRouteOwner *g_uniteEffectWork;
 void FUN_00401a74(MaterialTextureTransformInput *input, MaterialTextureVector2 *scale, MaterialTextureVector2 *translation);
 
 void FUN_001fc348(MaterialTextureTransformInput *input)
 {
-    MaterialTextureRouteOwner *owner = DAT_0057f2c4;
+    MaterialTextureRouteOwner *owner = g_uniteEffectWork;
     MaterialTextureVector2 scale, translation;
     FUN_00401a74(input, &scale, &translation);
     scale.x = 1.0f;

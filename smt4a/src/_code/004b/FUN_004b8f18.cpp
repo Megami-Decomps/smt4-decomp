@@ -15,8 +15,8 @@ void gameDataCopySaveToWork();
 /* armcc copy helper, called by an opaque name (config alias): the call keeps the dead store retail has */
 void ARM_common_memcpy4_6_call(MapJumpDestination *, const MapJumpDestination *);
 void FUN_004b7a08(MapJumpTransition *work);
-void FUN_004731d8();
-void FUN_004b7d88(MapJumpTransition *work); // declcheck: local (code/Code004b_Smt4a.h types the argument as a SoundCueContext view)
+void gameSaveBlockRebuild27E98();
+void soundPlayCueForContextKind(MapJumpTransition *work); // declcheck: local (code/Code004b_Smt4a.h types the argument as a SoundCueContext view)
 
 /* Moves the transition to `state`, restarting its substate. */
 static __inline void mapJumpEnter(MapJumpTransition *work, u32 state)
@@ -74,9 +74,9 @@ void FUN_004b8f18(MapJumpTransition *work)
                 work->flags |= 0x40100;
                 mapJumpEnter(work, 5);
             } else {
-                FUN_004731d8();
+                gameSaveBlockRebuild27E98();
                 infoWinSetValue(1);
-                FUN_004b7d88(work);
+                soundPlayCueForContextKind(work);
                 mapJumpEnter(work, 5);
             }
         }

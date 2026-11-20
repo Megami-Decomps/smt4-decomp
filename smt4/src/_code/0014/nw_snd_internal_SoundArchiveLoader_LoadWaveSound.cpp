@@ -5,7 +5,7 @@
 extern "C" {
 
 int _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv(unsigned char [12], int);
-int FUN_002ac780(...);
+int soundArchiveFileEntryIsLoaded(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int nw_snd_internal_SoundArchiveLoader_LoadImpl(int *, unsigned int, unsigned int, unsigned int);
 int nw_snd_internal_SoundArchiveLoader_LoadWaveArchiveImpl(int *, unsigned int, unsigned int, unsigned int);
 
@@ -24,7 +24,7 @@ typedef struct {
 extern int FUN_0014d478(int, int, unsigned int *);
 extern unsigned int *FUN_001523d8(int, int);
 /* Supplied declaration required: _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv. */
-/* Supplied declaration required: FUN_002ac780. */
+/* Supplied declaration required: soundArchiveFileEntryIsLoaded. */
 /* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_LoadImpl. */
 /* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_LoadWaveArchiveImpl. */
 extern int nw_snd_internal_WaveSoundFileReader_ReadNoteInfo(unsigned char *, unsigned int *, unsigned int, unsigned int);
@@ -51,7 +51,7 @@ void nw_snd_internal_SoundArchiveLoader_LoadWaveSound
   unsigned char temp_v10;
   unsigned char temp_v11 [12];
   
-  temp_v0 = FUN_002ac780(param_1[1]);
+  temp_v0 = soundArchiveFileEntryIsLoaded(param_1[1]);
   if ((param_4 & 2) != 0) {
     temp_v4 = 0;
     piVar2 = param_1;
@@ -94,7 +94,7 @@ void nw_snd_internal_SoundArchiveLoader_LoadWaveSound
       if (temp_v3 < *puVar5) {
         do {
           if ((param_4 & 8) != 0) {
-            temp_v0 = FUN_002ac780(param_1[1],puVar5[temp_v3 + 1]);
+            temp_v0 = soundArchiveFileEntryIsLoaded(param_1[1],puVar5[temp_v3 + 1]);
             temp_v4 = 1;
             piVar2 = param_1;
             nw_snd_internal_SoundArchiveLoader_LoadImpl(param_1,temp_v0,param_3,param_5);

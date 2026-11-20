@@ -52,7 +52,7 @@ void Obj4223c4::FUN_003a8240()
     }
     if (messageMainGetChoiceResult() != 0) {
         messageMainSetTargetFlags(0);
-        FUN_002a0cc8(0);
+        gameGlobalsSetSubScreenActive(0);
         shop->state = 2;
         shop->step = 0;
         buttonHelpSetPreset(45);
@@ -61,8 +61,8 @@ void Obj4223c4::FUN_003a8240()
     ShopListItem *items = shop->items;
     s16 itemId = shopListItemGetId(&items[flaggedValueHolderGetTotal(shop->cursor)]);
     s32 price = FUN_0029ce60(itemId, shop->quantity, 0, shop->rank >= 100, 0);
-    FUN_0029c43c(-price, 0);
-    FUN_002a0cc8(1);
+    messageBannerSetCountdown(-price, 0);
+    gameGlobalsSetSubScreenActive(1);
     shop->state = 4;
     shop->step = 0;
     FUN_002e3150();

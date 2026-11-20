@@ -140,7 +140,7 @@ void FUN_004aa3d4(u32 unused, s32 kind, s32 value, s32 partyMember, u32 recordId
     default:
         break;
     }
-    FUN_00227af0(text);
+    btlMenuSetMessageText(text);
     menuStateStartSelect(0);
 }
 

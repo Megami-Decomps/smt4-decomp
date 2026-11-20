@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00110838` (_code @ 0x110838, 0xa8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "nn/applet/SleepModule.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -13,8 +14,7 @@ int FUN_002bb140(int);
 int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
 int FUN_002c0d50(unsigned int *, unsigned int, int, unsigned int [2], int);
-int FUN_002c131c(int, int);
-int FUN_002c5434(int);
+int errThrowFatal(int, int);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -39,8 +39,8 @@ extern int FUN_002bb2c8(void);
 /* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
 /* Supplied declaration required: FUN_002c0d50. */
-/* Supplied declaration required: FUN_002c131c. */
-/* Supplied declaration required: FUN_002c5434. */
+/* Supplied declaration required: errThrowFatal. */
+/* Supplied declaration required: sleepAllow. */
 
 
 void FUN_00110838(int param_1)
@@ -57,13 +57,13 @@ void FUN_00110838(int param_1)
   unsigned int temp_v5 [2];
   
   if (param_1 != 0) {
-    FUN_002c5434(0);
+    sleepAllow(0);
   }
   FUN_002bb378();
   FUN_002bb110();
   temp_v0 = FUN_0011d8fc();
   if (temp_v0 < 0) {
-    FUN_002c131c(temp_v0,0x110860);
+    errThrowFatal(temp_v0,0x110860);
   }
   nn_applet_CTR_detail_CloseSession();
   temp_v0 = FUN_002bb2c8();

@@ -165,7 +165,7 @@ s32 clearSaveUpdate(u32 job)
         }
         break;
     case 9:
-        if (FUN_002ef9f0() != 0) {
+        if (mapRndMazeTaskIsActive() != 0) {
             break;
         }
         if (FUN_0037de28() != 0) {

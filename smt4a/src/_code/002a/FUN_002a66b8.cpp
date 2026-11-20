@@ -1,7 +1,7 @@
 /* NON_MATCHING: key search written as a plain for loop (`s32 distance = 1` first); remaining: retail computes the first key pointer in place in r2 and loads the two keys' frame/value pairs interleaved (register assignment of the pointer/temporaries) */
 #include "AsdSDK/Source/Gfx/Effect/EffectResourceKeys.h"
 
-extern "C" f32 FUN_002039d0(s32, s32, s32);
+extern "C" f32 effRandomSignedValue(s32, s32, s32);
 
 // Find the next positive-duration key and interpolate its resource-adjusted value.
 extern "C" void FUN_002a66b8(EffectResourceKeyTrack *track,
@@ -16,7 +16,7 @@ extern "C" void FUN_002a66b8(EffectResourceKeyTrack *track,
         if (track->duration > 0) {
             if (track->keys[current + distance].value != 0 &&
                 track->keys[current + distance].resource > 0) {
-                f32 adjustment = FUN_002039d0(2, track->keys[current + distance].resource, 1);
+                f32 adjustment = effRandomSignedValue(2, track->keys[current + distance].resource, 1);
                 track->keys[track->index + distance].value -= (s32)adjustment;
             }
             s32 nextIndex = track->index + distance;

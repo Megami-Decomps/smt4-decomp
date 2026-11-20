@@ -5,11 +5,11 @@ extern "C" {
 extern s32 scrGetArg(u32 index);
 extern s32 scrGetCommandFrame(void);
 extern s32 uiQuestStateIsIdle(void);
-extern s32 FUN_00215cd4(u32 id);
+extern s32 uiQuestOpenDetails(u32 id);
 extern s32 uiQuestCreate(s32 arg);
 extern s32 uiQuestClose(void);
-extern s32 FUN_002c1d5c(void);
-extern s32 FUN_003490b8(u32 id);
+extern s32 eventIsSkipping(void);
+extern s32 gameFlagEntryToggleValue(u32 id);
 extern s32 buttonHelpSetPreset(s32 preset);
 
 /* Script command: runs the pending step for the id argument, then shows the button help preset 0x90 when the follow-up check holds. */
@@ -19,13 +19,13 @@ u32 scrCommButtonHelpPresetStep(void)
     s32 result;
 
     if (scrGetCommandFrame() == 0) {
-        FUN_003490b8(id);
-        result = FUN_002c1d5c();
+        gameFlagEntryToggleValue(id);
+        result = eventIsSkipping();
         if (result != 0) {
             return 1;
         }
         uiQuestCreate(result);
-        FUN_00215cd4(id);
+        uiQuestOpenDetails(id);
     }
     result = uiQuestStateIsIdle();
     if (result != 0) {

@@ -27,7 +27,7 @@ s32 uiQuestCalc(u32 job);
 s32 uiQuestDrawUpper(u32 job);
 s32 uiQuestDrawLower(u32 job);
 void asdTMTexTableLoadSprites(s32 table);
-void FUN_001ff724(void);
+void uiQuestRebuildLists(void);
 void gameFlagClearModeBits(s32 index);
 void uiGetLayoutPointDifference(UiSpriteState *sprite, u32 table, u32 first, u32 second);
 void uiStoreTextureEntryCenter(UiSpriteState *sprite, u32 table, s32 image);
@@ -167,7 +167,7 @@ void uiQuestCreate(void)
                 flags->known = 0;
         }
     }
-    FUN_001ff724();
+    uiQuestRebuildLists();
     for (u16 id = 0; id < 400; ++id) {
         if (gameFlagEntryGetBit(id, 2) != 0 && dataTable1bOr1cRecordHasFlag1(id) != 0 &&
             (partyEntryGetBit5(id) != 0 || partyEntryGetBit6(id) != 0))

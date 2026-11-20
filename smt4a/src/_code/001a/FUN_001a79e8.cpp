@@ -22,7 +22,7 @@ struct TextOwner {
 };
 extern "C" {
 s32 libc_strlen(const char *text);
-s32 FUN_001a7a20(void *table, const char *text, u32 length);
+s32 nameTableLookupEntry(void *table, const char *text, u32 length);
 s32 FUN_001a79e8(TextOwner *owner, const char *text)
 {
     TextStorageBlock *block = owner->storage;
@@ -31,6 +31,6 @@ s32 FUN_001a79e8(TextOwner *owner, const char *text)
         storage = &block->data;
     }
     TextRecordList *list = &storage->table->list;
-    return FUN_001a7a20(list->records, text, libc_strlen(text));
+    return nameTableLookupEntry(list->records, text, libc_strlen(text));
 }
 }

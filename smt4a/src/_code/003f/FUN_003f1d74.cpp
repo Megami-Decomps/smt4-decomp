@@ -15,7 +15,7 @@ int FUN_003df7c4(int);
 int FUN_003dff6c(int, unsigned char [20], unsigned short *);
 int FUN_003e0174(void);
 int FUN_003e49e8(void);
-int FUN_003e4e4c(void);
+int saveSlotTableSetPreferredId(void);
 int partyRefreshOrInsertSlot(void);
 int partyAdjustCounterIfEnoughActive(int);
 int flagValueAdd(int);
@@ -68,7 +68,7 @@ extern unsigned int flagValueGetStorage(void);
 /* Supplied declaration required: FUN_003dff6c. */
 /* Supplied declaration required: FUN_003e0174. */
 /* Supplied declaration required: FUN_003e49e8. */
-/* Supplied declaration required: FUN_003e4e4c. */
+/* Supplied declaration required: saveSlotTableSetPreferredId. */
 /* Supplied declaration required: partyRefreshOrInsertSlot. */
 /* Supplied declaration required: partyAdjustCounterIfEnoughActive. */
 /* Supplied declaration required: flagValueAdd. */
@@ -219,7 +219,7 @@ void FUN_003f1d74(fn_003f1d74_arg0 *param_1,unsigned int param_2)
           partyRefreshOrInsertSlot();
           temp_v7 = temp_v9;
           if (temp_v3 == 0) {
-            FUN_003e4e4c();
+            saveSlotTableSetPreferredId();
             temp_v7 = temp_v10;
           }
           temp_v4 = temp_v4 + 1;

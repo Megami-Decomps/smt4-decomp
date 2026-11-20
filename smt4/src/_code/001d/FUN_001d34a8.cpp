@@ -7,7 +7,7 @@ extern "C" {
 
 
 
-void FUN_002bfdd4(void);
+void messageVoiceFlagsGet(void);
 void FUN_002dfefc(s32 arg);
 s32 gameFlagIsSet(u32 id);
 
@@ -16,7 +16,7 @@ void FUN_001d34a8(s32 a, s32 b)
 {
     MapIfTimer *extra;
 
-    FUN_002bfdd4();
+    messageVoiceFlagsGet();
     extra = g_mapIfTimer;
     g_mapIfTimer->unk08 = a;
     extra->unk0C = b;

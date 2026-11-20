@@ -1,10 +1,10 @@
 #include "common.h"
 
-extern "C" void FUN_001247f0();
+extern "C" void asdMdlManagerUpdate();
 
 // Run model-manager maintenance and acknowledge the callback.
 extern "C" s32 asdMdlManagerMaintenanceCallback()
 {
-    FUN_001247f0();
+    asdMdlManagerUpdate();
     return 0;
 }

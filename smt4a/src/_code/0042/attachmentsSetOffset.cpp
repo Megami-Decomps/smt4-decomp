@@ -28,7 +28,7 @@ typedef struct AttachOwner {
     /* 0x34 */ AttachVec3 offset;
 } AttachOwner;
 
-void FUN_00401b50(void *model, AttachVec3 *position, f32 arg);
+void enemySpriteDeriveOrigin(void *model, AttachVec3 *position, f32 arg);
 void *ptrVectorAt(AttachGroup *group, s32 index);
 void controllerSetDestination(void *controller, const AttachVec3 *destination);
 
@@ -45,7 +45,7 @@ void attachmentsSetOffset(AttachOwner *owner, const AttachVec3 *offset)
     if (owner->model == NULL) {
         return;
     }
-    FUN_00401b50(owner->model, &position, owner->unk30);
+    enemySpriteDeriveOrigin(owner->model, &position, owner->unk30);
     position.x += owner->offset.x;
     position.y += owner->offset.y;
     position.z += owner->offset.z;

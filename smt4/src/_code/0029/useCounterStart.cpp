@@ -5,10 +5,10 @@
 #include "shard/W6_W6Match3_ScrollSelection.h"
 
 extern "C" {
-s32 FUN_0028d594(void);
+s32 buttonHelpTextIsVisible(void);
 s32 buttonHelpGetSecondaryState(void);
 const char *buttonHelpGetLayoutEntry(u32);
-void FUN_00295214(u8 value);
+void buttonHelpSetTextVisible(u8 value);
 void buttonHelpSetPreset(s32);
 extern Obj7ECRef g_useCounter;
 
@@ -42,7 +42,7 @@ void useCounterStart(void)
     }
     if (work->mode == 2)
         return;
-    s32 mode = FUN_0028d594();
+    s32 mode = buttonHelpTextIsVisible();
     work->savedMode = mode;
     if (mode) {
         s32 state = buttonHelpGetSecondaryState();
@@ -52,7 +52,7 @@ void useCounterStart(void)
             const char *second = buttonHelpGetLayoutEntry(1);
             sprintf(work->savedText, "%s\n%s", first, second);
         }
-        FUN_00295214(0);
+        buttonHelpSetTextVisible(0);
     }
     buttonHelpSetPreset(5);
 }

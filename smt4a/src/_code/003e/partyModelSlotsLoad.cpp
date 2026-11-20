@@ -26,7 +26,7 @@ typedef struct PartyMember {
 
 PartyMember *partyGetSlotPreferredFirst(u16 index);
 s32 partySlotIsOccupied(PartyMember *member);
-u32 FUN_00409fe8(u32 modelId, s32 a, s32 b);
+u32 resourceCacheGetOrLoadModel(u32 modelId, s32 a, s32 b);
 
 /* Clears the model slots, then loads the model of each of the 12 party members present. */
 void partyModelSlotsLoad(PartyModelWork *work)
@@ -51,7 +51,7 @@ void partyModelSlotsLoad(PartyModelWork *work)
         }
         modelId = data->model;
         work->slots[i].modelId = modelId;
-        work->handles[i].handle = FUN_00409fe8(modelId, 1, 0);
+        work->handles[i].handle = resourceCacheGetOrLoadModel(modelId, 1, 0);
     }
 }
 

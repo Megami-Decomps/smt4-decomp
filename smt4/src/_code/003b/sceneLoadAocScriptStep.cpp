@@ -7,8 +7,8 @@ extern "C" {
 
 int buttonHelpSelectByProgress(void *scene);
 int placeWinSetValue(int a);
-u32 FUN_002736e8(AocScriptHolder *loader);
-int FUN_0027db24(int a);
+u32 questScriptRunStep(AocScriptHolder *loader);
+int gameSaveSetBattleResultCode(int a);
 int infoWinSetMessage(u32 a, int b);
 int buttonHelpSetPreset(int preset);
 
@@ -37,10 +37,10 @@ void sceneLoadAocScriptStep(SceneLoad *scene)
         scrLoaderReset(&g_aocMain->scriptHolder);
         buttonHelpSetPreset(0x9e);
         scene->substate = 1;
-    } else if (scene->substate == 1 && FUN_002736e8(&g_aocMain->scriptHolder) != 0) {
+    } else if (scene->substate == 1 && questScriptRunStep(&g_aocMain->scriptHolder) != 0) {
         scrLoaderFreeBuffers(&g_aocMain->scriptHolder);
         buttonHelpSelectByProgress(scene);
-        FUN_0027db24(0);
+        gameSaveSetBattleResultCode(0);
         dialogOpen(0, 0);
         infoWinSetMessage(scene->unkD80, scene->inner->unk3F);
         scene->substate = 0;

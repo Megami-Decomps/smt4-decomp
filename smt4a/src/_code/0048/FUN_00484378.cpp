@@ -50,7 +50,7 @@ extern "C" {
 extern NameConversionTables DAT_00532c10;
 
 void sysPlaySe(s32 id);
-void FUN_00183e58(void);
+void buttonHelpTeardownSlots(void);
 void uiSpriteSetImageKeyframe(u8 *sprite, s32 frame, s32 flag);
 void scrScriptProcessStartEntry(u32 script, s32 entry);
 s32 *logFormatBuffer(NameBuffer *name, s8 *destination, s32 mode);
@@ -87,7 +87,7 @@ void FUN_00484378(NameInputView *menu)
     }
     uiSpriteSetImageKeyframe(menu->sprite, 0, 1);
     if (menu->target != 0 && menu->target != 1 && menu->target != 4) {
-        FUN_00183e58();
+        buttonHelpTeardownSlots();
         stateSetterEnterState(reinterpret_cast<NameEntryMenu *>(menu), 7);
         return;
     }
@@ -120,7 +120,7 @@ void FUN_00484378(NameInputView *menu)
     s32 *status = logFormatBuffer(name, menu->confirmed, 1);
     s32 length = convertToBufferAndStore(reinterpret_cast<const char *>(name), reinterpret_cast<u16 *>(menu->confirmed));
     if (*status == 0 && length < 6) {
-        FUN_00183e58();
+        buttonHelpTeardownSlots();
         stateSetterEnterState(reinterpret_cast<NameEntryMenu *>(menu), 7);
         return;
     }

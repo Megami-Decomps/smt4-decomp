@@ -4,7 +4,7 @@
 #include "code/Code0039_Smt4.h"
 
 extern "C" {
-void FUN_002a6d1c(void *parameters, u32 flags, u32 first, u32 second, u32 third);
+void requestParamsInitialize(void *parameters, u32 flags, u32 first, u32 second, u32 third);
 void FUN_003937e4(void *group, void *entry, const void *parameters);
 
 void FUN_003933d4(void *object, u32 flags, u32 bank, u32 id, s32 index, u32 first, u32 second, u32 third)
@@ -53,7 +53,7 @@ void FUN_003933d4(void *object, u32 flags, u32 bank, u32 id, s32 index, u32 firs
     Entry *entry = &group->entries->begin[index % 1000];
     Dimensions *dimensions = entry->dimensions;
     DrawParameters parameters;
-    FUN_002a6d1c(&parameters, flags, first, second, third);
+    requestParamsInitialize(&parameters, flags, first, second, third);
     if (dimensions != NULL) {
         if (dimensions->kind == 0) {
             if (!(dimensions->flags & 1)) {

@@ -38,7 +38,7 @@ struct SharedFile {
 extern "C" {
 
 extern u8 DAT_00636ebc;
-extern u8 DAT_00636ec8;
+extern u8 g_asdMdlObjectList;
 
 void indexedListErase(u8* list, s32 node);
 void resourceListDestroy(u32 list);
@@ -114,8 +114,8 @@ void asdMdlManagerReleaseResources(u32* model, s32 request, u32 unused, s32 unus
     }
     asdMemFree(model[9]);
     model[9] = 0;
-    s32 node = lookupListFindByKey(&DAT_00636ec8, model);
-    if (node != 0) indexedListErase(&DAT_00636ec8, node);
+    s32 node = lookupListFindByKey(&g_asdMdlObjectList, model);
+    if (node != 0) indexedListErase(&g_asdMdlObjectList, node);
     asdMemFree(reinterpret_cast<u32>(model));
     g_gfxSettings.modelCount--;
 }

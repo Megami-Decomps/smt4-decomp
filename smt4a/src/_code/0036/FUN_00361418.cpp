@@ -8,7 +8,7 @@ extern "C" {
 int CONCAT44(...);
 int FUN_001a1ee0(void);
 int effGetFrameStep(void);
-int FUN_001b63b0(void);
+int phaseCosine(void);
 int FUN_0027134c(int, float *);
 int FUN_002fe2e8(int, float *);
 int FUN_00321d7c(...);
@@ -63,7 +63,7 @@ extern float DAT_00647348; /* 0x647348 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: effGetFrameStep. */
-/* Supplied declaration required: FUN_001b63b0. */
+/* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: FUN_0027134c. */
 /* Supplied declaration required: FUN_002fe2e8. */
 /* Supplied declaration required: FUN_00321d7c. */
@@ -178,7 +178,7 @@ void FUN_00361418(int param_1)
             temp_v15 = temp_v15 * (float)temp_v21;
             temp_v12 = pfVar7[5];
             temp_v11 = temp_v15;
-            FUN_001b63b0();
+            phaseCosine();
             temp_v17 = CONCAT44(temp_v10,temp_v15 * temp_v12);
             temp_v15 = temp_v20;
             FUN_001a1ee0();
@@ -242,7 +242,7 @@ void FUN_00361418(int param_1)
             matrixSetRotationY(pfVar7[4]);
             FUN_005145f4();
             temp_v3 = pfVar7[8] * (float)temp_v21;
-            FUN_001b63b0();
+            phaseCosine();
             temp_v17 = CONCAT44(temp_v10,temp_v3 * temp_v13);
             temp_v3 = pfVar7[8] * (float)temp_v21;
             FUN_001a1ee0();
@@ -318,7 +318,7 @@ void FUN_00361418(int param_1)
               temp_v17 = CONCAT44(temp_v3,temp_v10);
               pfVar7[5] = temp_v10;
               temp_v3 = pfVar7[8] * (float)temp_v21;
-              FUN_001b63b0();
+              phaseCosine();
               temp_v3 = temp_v3 * (float)temp_v17;
               temp_v10 = pfVar7[8] * (float)temp_v21;
               FUN_001a1ee0();

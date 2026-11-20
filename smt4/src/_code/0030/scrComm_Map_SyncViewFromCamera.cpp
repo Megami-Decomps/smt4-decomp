@@ -2,8 +2,8 @@
 
 extern "C" {
 
-int FUN_00273c54(void);
-int FUN_00273d34(void);
+int mapUpdatePendingAvailabilityFlags(void);
+int mapUpdateLocationAvailability(void);
 int clearFlags310To31F(void);
 int battlePrepareEncounter(void);
 int mapClearPendingEntries(void);
@@ -19,8 +19,8 @@ u32 scrComm_Map_SyncViewFromCamera(void)
     if (mapMainIsBusy() != 0) {
         naviClearObjectBlock();
         mapClearPendingEntries();
-        FUN_00273d34();
-        FUN_00273c54();
+        mapUpdateLocationAvailability();
+        mapUpdatePendingAvailabilityFlags();
         battlePrepareEncounter();
     } else {
         if (lmapMainIsRunning() != 0) {

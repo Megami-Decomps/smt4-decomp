@@ -23,7 +23,7 @@ void partyPanelChangeState(s32 state, s32 rememberPrevious)
             panel->sceneState = 0x1C;
             return;
         }
-        s32 ready = FUN_002ef9f0();
+        s32 ready = mapRndMazeTaskIsActive();
         if (ready == 0)
             gameGlobalsSetMenuOpenFlag(ready);
         state = panel->sceneState;

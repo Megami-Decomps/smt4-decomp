@@ -11,7 +11,7 @@ u32 btlEntryApplyPresetAndEnableUi(void)
 {
     BtlCombatantEntryA *entries = btlGetMainState()->entries;
     entries->flags |= g_battleMaskPresets.presets.entryFlags;
-    FUN_004ab7f4(g_btlUiBlock, 1);
+    btlUiObjCApplyPreset(g_btlUiBlock, 1);
     return 1;
 }
 }

@@ -129,7 +129,7 @@ s32 fusionRecordPassesFilter(RecordFilter *filter, u32 memberA, u32 memberB, u32
     if (filter->limitCount && record->level > computeCountLimit()) {
         return 0;
     }
-    if (filter->skipLearned && FUN_002a4b28(record->id) != 0) {
+    if (filter->skipLearned && compendiumEntryIsRegistered(record->id) != 0) {
         return 0;
     }
     if (filter->limitCount && slotRecordFindById(record->id) != 0) {

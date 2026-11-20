@@ -17,17 +17,17 @@ typedef struct MapTable {
 extern MapTable *g_mapTable;
 
 extern s32 gameFlagIsSet(u32 id);
-extern void FUN_001e4284(s32 value, s32 arg);
+extern void mapEnvironmentSwitchPreset(s32 value, s32 arg);
 
 /* Forwards the map entry `index`'s value, or 6 while flag 0xD2 is set without 0xD4 in scene 0x12 modes 4/5. */
 void mapEntryTriggerForScene(s32 index)
 {
     if (g_gameState.mapId == 0x12 && (g_gameState.areaId == 4 || g_gameState.areaId == 5)
         && gameFlagIsSet(0xD2) != 0 && gameFlagIsSet(0xD4) == 0) {
-        FUN_001e4284(6, 0);
+        mapEnvironmentSwitchPreset(6, 0);
         return;
     }
-    FUN_001e4284(g_mapTable->entries[index].value, 0);
+    mapEnvironmentSwitchPreset(g_mapTable->entries[index].value, 0);
 }
 
 } /* extern "C" */

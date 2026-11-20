@@ -7,7 +7,7 @@
 
 extern "C" {
 
-int FUN_002630e0(unsigned int *, int, unsigned int);
+int cameraProjectToScreen(unsigned int *, int, unsigned int);
 int uiStoreTextureEntryCenter(...); // declcheck: local (romwright prototype; its types do not fit ui/UiTexturePlacement.h: including it fails to compile)
 int FUN_002963ec(...);
 int FUN_003adca8(int, int, unsigned int);
@@ -21,8 +21,8 @@ typedef struct {
 
 extern int g_btlUiBlock; /* 0x439ca8 */
 
-/* Supplied declaration required: FUN_002630e0. */
-extern int FUN_00293230(void);
+/* Supplied declaration required: cameraProjectToScreen. */
+extern int btlScriptUnitIsIncapacitated(void);
 /* Supplied declaration required: uiStoreTextureEntryCenter. */
 /* Supplied declaration required: FUN_002963ec. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
@@ -148,7 +148,7 @@ LAB_00205ea4:
       }
       else {
         btlGetMainState();
-        temp_v3 = FUN_00293230();
+        temp_v3 = btlScriptUnitIsIncapacitated();
         if (temp_v3 != 0) {
           if (*(int *)(temp_v7 + 0xbfe8) >= 0xc) {
 LAB_00205fe0:
@@ -193,7 +193,7 @@ LAB_00206088:
         temp_v0 = *(char *)(temp_v7 + 0xd619);
         if (temp_v0 != '\0') {
           temp_v5 = asdCameraGetSavedRenderPairs();
-          FUN_002630e0(&temp_v9,0,temp_v5);
+          cameraProjectToScreen(&temp_v9,0,temp_v5);
         }
         temp_v3 = temp_v3 + temp_v8 * 0xa0;
         *(unsigned char *)(temp_v3 + 0xbfe4) = 1;

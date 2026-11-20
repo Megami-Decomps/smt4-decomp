@@ -7,8 +7,8 @@ extern "C" {
 void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
 void asdMemFree(void *);
 u32 libc_strlen(const char *);
-s32 FUN_00100348(char *, u32, const char *, va_list);
-void FUN_0036bea0(u32, u32, u32, u32, u32, const char *);
+s32 textFormatProcessRange(char *, u32, const char *, va_list);
+void asdTextDrawFormattedCore(u32, u32, u32, u32, u32, const char *);
 
 // Format a bounded string, terminate its text stream, and submit it to the renderer.
 void asdTextFormatStream(u32 first, u32 second, u32 third, u32 fourth, u32 fifth,
@@ -19,7 +19,7 @@ void asdTextFormatStream(u32 first, u32 second, u32 third, u32 fourth, u32 fifth
     va_list arguments;
     libc_strlen(format);
     va_start(arguments, format);
-    FUN_00100348(reinterpret_cast<char *>(buffer), 0x1000, format, arguments);
+    textFormatProcessRange(reinterpret_cast<char *>(buffer), 0x1000, format, arguments);
     va_end(arguments);
     buffer[0xfff] = 0;
     u32 length = libc_strlen(reinterpret_cast<const char *>(buffer));
@@ -34,7 +34,7 @@ void asdTextFormatStream(u32 first, u32 second, u32 third, u32 fourth, u32 fifth
         buffer[length + 2] = -1;
         buffer[length + 3] = 0;
     }
-    FUN_0036bea0(first, second, third, fourth, fifth, reinterpret_cast<const char *>(buffer));
+    asdTextDrawFormattedCore(first, second, third, fourth, fifth, reinterpret_cast<const char *>(buffer));
     asdMemFree(buffer);
 }
 }

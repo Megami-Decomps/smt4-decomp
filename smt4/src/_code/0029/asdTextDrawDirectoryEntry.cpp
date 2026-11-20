@@ -3,7 +3,7 @@
 #include "shard/W5_W5Match7_ScriptUnit.h"
 
 extern "C" {
-void FUN_002869e8(AsdText *text, u32 font, s32 mode, s32 x, s32 y, const char *message);
+void asdTextDrawFormattedCore(AsdText *text, u32 font, s32 mode, s32 x, s32 y, const char *message);
 
 // Set up text from a nonempty entry in a relative-offset message directory.
 void asdTextDrawDirectoryEntry(AsdText *text, u32 font, s32 mode, s32 x, s32 y,
@@ -14,7 +14,7 @@ void asdTextDrawDirectoryEntry(AsdText *text, u32 font, s32 mode, s32 x, s32 y,
         if (record->size != 0) {
             const char *message = (const char *)directory + record->dataOffset;
             if (message != NULL) {
-                FUN_002869e8(text, font, mode, x, y, message);
+                asdTextDrawFormattedCore(text, font, mode, x, y, message);
             }
         }
     }

@@ -73,7 +73,7 @@ extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 /* Supplied declaration required: listCursorGetRowIfUnblocked. */
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: questMarkSelectedSpecialDetail. */
-extern int objectApplyIfUnblocked(int);
+extern int gridNavigationGetItemCount(int);
 extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_002f15f8. */
@@ -138,7 +138,7 @@ unsigned int uiQuestCalc(void)
     if (temp_v6 == 0) {
       temp_v5 = 0;
       do {
-        temp_v6 = objectApplyIfUnblocked(temp_v9);
+        temp_v6 = gridNavigationGetItemCount(temp_v9);
         if (temp_v6 <= temp_v5) break;
         temp_v3 = ifTouchRegionAddRequested(0x1e,temp_v5 + 0x9e);
         temp_v6 = temp_v5 * 2;

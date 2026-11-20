@@ -4,6 +4,13 @@
 
 #include "common.h"
 
+/* How the signed-magnitude helpers (randomSignedRatio, randomSignedScaledRange) sign their result. */
+enum {
+    RANDOM_SIGN_POSITIVE = 0,
+    RANDOM_SIGN_NEGATIVE = 1,
+    RANDOM_SIGN_RANDOM = 2     /* positive or negative with equal chance */
+};
+
 #ifdef __cplusplus
 extern "C" {
 #endif

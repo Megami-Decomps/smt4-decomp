@@ -6,7 +6,7 @@
 
 extern "C" {
 
-void FUN_00152f44(void);
+void messageVoiceFlagsGet(void);
 s32 randRange(u32 id);
 s32 gameFlagIsSet(u32 flag);
 const char *popupSelectWeightedMessage(u32 kind, u16 id);
@@ -21,7 +21,7 @@ void FUN_00294c28(void)
     u16 id;
 
     gameFlagsGetBlock();
-    FUN_00152f44();
+    messageVoiceFlagsGet();
     if (((((g_gameState.inputBlocked == 0) && (g_popupState->state == 0)) && (value = gameFlagIsSet(0x49A), value != 0)) &&
          ((candidate = saveSlotFindSelected(), candidate != NULL) &&
           ((value = gameFlagIsSet(0x1A2), value == 0 || (value = randRange(99), value + 1 > 0x32)))))) {

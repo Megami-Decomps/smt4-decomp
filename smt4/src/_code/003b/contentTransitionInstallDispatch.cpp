@@ -29,7 +29,7 @@ struct ContentDispatchTable {
 };
 
 extern "C" {
-extern const ContentDispatchTable DAT_00404cd0;
+extern const ContentDispatchTable g_contentDispatchTable;
 
 /* Installs the content transition's state dispatch table: every slot gets the idle handler, then each
  * state its own. */
@@ -42,23 +42,23 @@ void contentTransitionInstallDispatch(ContentTransition *transition)
     };
     DispatchView *dispatch = reinterpret_cast<DispatchView *>(transition);
     for (s32 i = 0; i < 19; ++i)
-        dispatch->entries[i] = DAT_00404cd0.state0;
-    dispatch->entries[1] = DAT_00404cd0.state1;
-    dispatch->entries[2] = DAT_00404cd0.state2;
-    dispatch->entries[3] = DAT_00404cd0.state3;
-    dispatch->entries[4] = DAT_00404cd0.state4;
-    dispatch->entries[5] = DAT_00404cd0.state5;
-    dispatch->entries[6] = DAT_00404cd0.state6;
-    dispatch->entries[7] = DAT_00404cd0.state7;
-    dispatch->entries[8] = DAT_00404cd0.state8;
-    dispatch->entries[9] = DAT_00404cd0.state9;
-    dispatch->entries[10] = DAT_00404cd0.state10;
-    dispatch->entries[11] = DAT_00404cd0.state11;
-    dispatch->entries[12] = DAT_00404cd0.state12;
-    dispatch->entries[13] = DAT_00404cd0.state13;
-    dispatch->entries[14] = DAT_00404cd0.state14;
-    dispatch->entries[15] = DAT_00404cd0.state15;
-    dispatch->entries[16] = DAT_00404cd0.state16;
-    dispatch->entries[17] = DAT_00404cd0.state17;
+        dispatch->entries[i] = g_contentDispatchTable.state0;
+    dispatch->entries[1] = g_contentDispatchTable.state1;
+    dispatch->entries[2] = g_contentDispatchTable.state2;
+    dispatch->entries[3] = g_contentDispatchTable.state3;
+    dispatch->entries[4] = g_contentDispatchTable.state4;
+    dispatch->entries[5] = g_contentDispatchTable.state5;
+    dispatch->entries[6] = g_contentDispatchTable.state6;
+    dispatch->entries[7] = g_contentDispatchTable.state7;
+    dispatch->entries[8] = g_contentDispatchTable.state8;
+    dispatch->entries[9] = g_contentDispatchTable.state9;
+    dispatch->entries[10] = g_contentDispatchTable.state10;
+    dispatch->entries[11] = g_contentDispatchTable.state11;
+    dispatch->entries[12] = g_contentDispatchTable.state12;
+    dispatch->entries[13] = g_contentDispatchTable.state13;
+    dispatch->entries[14] = g_contentDispatchTable.state14;
+    dispatch->entries[15] = g_contentDispatchTable.state15;
+    dispatch->entries[16] = g_contentDispatchTable.state16;
+    dispatch->entries[17] = g_contentDispatchTable.state17;
 }
 }

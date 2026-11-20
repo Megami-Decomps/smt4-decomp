@@ -5,9 +5,9 @@
 struct Resource;
 extern "C" {
 
-void FUN_0013cab8(u32 index, u32 value, u32 extra);
+void screenFadeStartIn(u32 index, u32 value, u32 extra);
 
-void FUN_00137848(void);
+void gameDataSmallBlockFinalize(void);
 
 void resourceDestroy(Resource *resource);
 

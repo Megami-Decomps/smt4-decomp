@@ -53,7 +53,7 @@ void FUN_002237a0(void)
   int temp_v2;
   int temp_v3;
   
-  temp_v0 = FUN_00152f44();
+  temp_v0 = messageVoiceFlagsGet();
   popup = g_popupState;
   temp_v0 = temp_v0 | 4;
   temp_v3 = 0;
@@ -75,7 +75,7 @@ void FUN_002237a0(void)
           g_popupState->speakerId = 0xae;
         }
         mapIfStartNavigation(popup->speakerId,*message,1,0,0);
-        temp_v1 = FUN_0014af98();
+        temp_v1 = messageVoiceBankGet();
         FUN_001628c0(g_popupState->messageData,temp_v1,temp_v0,1);
         g_gameState.unk3F2 = 1;
         goto LAB_002238e8;
@@ -105,7 +105,7 @@ LAB_002238e8:
           popup->speakerId = 0xae;
         }
         mapIfStartNavigation(popup->speakerId,popup->message,1,0,0);
-        temp_v1 = FUN_0014af98();
+        temp_v1 = messageVoiceBankGet();
         FUN_001628c0(g_popupState->messageData,temp_v1,temp_v0,1);
         g_gameState.unk3F2 = 1;
         goto LAB_002239b8;
@@ -135,7 +135,7 @@ LAB_002239b8:
           popup->speakerId = 0xae;
         }
         mapIfStartNavigation(popup->speakerId,popup->message,1,0,0);
-        temp_v1 = FUN_0014af98();
+        temp_v1 = messageVoiceBankGet();
         FUN_001628c0(g_popupState->messageData,temp_v1,temp_v0,1);
         g_gameState.unk3F2 = 1;
         goto LAB_00223a7c;
@@ -173,7 +173,7 @@ LAB_00223a7c:
           popup->speakerId = 0xae;
         }
         mapIfStartNavigation(popup->speakerId,popup->message,1,0,0);
-        temp_v1 = FUN_0014af98();
+        temp_v1 = messageVoiceBankGet();
         FUN_001628c0(g_popupState->messageData,temp_v1,temp_v0,1);
         g_gameState.unk3F2 = 1;
         goto LAB_00223b4c;
@@ -203,7 +203,7 @@ LAB_00223b4c:
           popup->speakerId = 0xae;
         }
         mapIfStartNavigation(popup->speakerId,popup->message,0,0,1);
-        temp_v1 = FUN_0014af98();
+        temp_v1 = messageVoiceBankGet();
         FUN_001628c0(g_popupState->messageData,temp_v1,temp_v0,1);
         g_gameState.unk3F2 = 1;
         goto LAB_00223cf4;
@@ -275,7 +275,7 @@ LAB_00223df0:
           popup->speakerId = 0xae;
         }
         mapIfStartNavigation(popup->speakerId,popup->message,1,1,0);
-        temp_v1 = FUN_0014af98();
+        temp_v1 = messageVoiceBankGet();
         FUN_001628c0(g_popupState->messageData,temp_v1,temp_v0,1);
         g_gameState.unk3F2 = 1;
         goto LAB_00223c28;
@@ -306,7 +306,7 @@ LAB_00223c28:
         popup->speakerId = 0xae;
       }
       mapIfStartNavigation(popup->speakerId,popup->message,1,0,0);
-      temp_v1 = FUN_0014af98();
+      temp_v1 = messageVoiceBankGet();
       FUN_001628c0(g_popupState->messageData,temp_v1,temp_v0,1);
     }
     if (g_popupState->timer < 0x5b) break;
@@ -319,7 +319,7 @@ LAB_00223c28:
     g_popupState->timer = temp_v3 + 1;
     if ((temp_v3 + 1 == 2) && (popup->message != 0)) {
       mapIfStartNavigation(popup->speakerId,popup->message,0,0,0);
-      temp_v1 = FUN_0014af98();
+      temp_v1 = messageVoiceBankGet();
       FUN_001628c0(g_popupState->messageData,temp_v1,temp_v0,1);
     }
     break;

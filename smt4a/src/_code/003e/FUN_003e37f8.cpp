@@ -25,15 +25,15 @@ extern const char DAT_00533214[]; /* "npcShop_Few_HaveSkill", shared script-entr
 s32 eventQueueAddUniqueIfValid(u32 event);
 void sysPlaySe(u32 id);
 void buttonHelpSetText(s32 a, u32 color);
-void FUN_00215bd0(void);
-void FUN_0022e774(void);
+void unitStatusResetSpriteState(void);
+void statusPanelClose(void);
 void FUN_0023b45c(s32 arg);
 s32 scrRunOpcodesStub(u32 script);
 void scrScriptProcessStartEntry(u32 script, s32 entry);
 void FUN_00285774(void);
 s32 messageGetChoiceResult(void);
 void statusDownRestartTransition(void);
-void FUN_002c85b0(s32 arg);
+void gameGlobalsSetSceneState(s32 arg);
 void FUN_003e3a20(ShopScene *scene, void *item);
 s32 tableGroupFindEntryIndex(u32 group, const char *name);
 s32 padButtonIsPressed(u32 pad);
@@ -62,14 +62,14 @@ extern "C" void FUN_003e37f8(ShopScene *scene)
     s32 next;
     switch (scene->substep) {
     case 0:
-        FUN_002c85b0(13);
-        FUN_002c8538(1);
-        FUN_00215bd0();
+        gameGlobalsSetSceneState(13);
+        gameGlobalsSetOverlayActive(1);
+        unitStatusResetSpriteState();
         sysPlaySe(0x119);
         next = 1;
         break;
     case 1:
-        if (!FUN_0023b3d0())
+        if (!gameStateIsNotTransitioning())
             return;
         FUN_003e3a20(scene, scene->items[state->selected]);
         FUN_00285774();
@@ -106,17 +106,17 @@ extern "C" void FUN_003e37f8(ShopScene *scene)
         break;
     }
     case 10:
-        FUN_0022e774();
+        statusPanelClose();
         FUN_0023b45c(0);
         statusDownRestartTransition();
         next = 11;
         break;
     case 11:
-        if (!FUN_0026c3a0())
+        if (!gameGlobalsIsActiveStateFour())
             return;
         gameGlobalsSetMenuOpenFlag(0);
         FUN_00333dc8(0);
-        FUN_002c8538(0);
+        gameGlobalsSetOverlayActive(0);
         buttonHelpSetText(0, 0xF4F4F4FF);
         next = 99;
         break;

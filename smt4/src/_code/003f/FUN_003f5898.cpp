@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_3_stack;
 
-extern romwright_code *DAT_0044e918; /* 0x44e918 */
+extern romwright_code *g_moAllocator; /* 0x44e918 */
 extern romwright_code *DAT_0044e91c; /* 0x44e91c */
 
 /* Supplied declaration required: __ARM_common_memcpy4_6. */
@@ -55,7 +55,7 @@ unsigned int FUN_003f5898(int *param_1,int param_2,unsigned int param_3)
         (*DAT_0044e91c)();
       }
       param_1[4] = 0;
-      temp_v2 = (*DAT_0044e918)(temp_v1 << 1);
+      temp_v2 = (*g_moAllocator)(temp_v1 << 1);
       param_1[3] = temp_v2;
       if (temp_v2 == 0) {
         return 0;
@@ -74,7 +74,7 @@ unsigned int FUN_003f5898(int *param_1,int param_2,unsigned int param_3)
         (*DAT_0044e91c)();
       }
       param_1[1] = 0;
-      temp_v2 = (*DAT_0044e918)(unaff_r7);
+      temp_v2 = (*g_moAllocator)(unaff_r7);
       *param_1 = temp_v2;
       if (temp_v2 == 0) {
         return 0;

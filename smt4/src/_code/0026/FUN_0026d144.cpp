@@ -22,7 +22,7 @@ struct BtlUnitExtraView {
 extern "C" {
 extern u32 g_btlScriptUnit;
 s32 appGetRemainingCapacity(u16 item);
-s32 FUN_0029a9d4(u16 item, u32 flag);
+s32 skillGetDiscountedCost(u16 item, u32 flag);
 s32 listCursorGetRowIfUnblocked(void *selection);
 s32 objectPartRunUnlessLocked(void *selection);
 void partyWidgetSetValue(PartyPanelWidget *widget, s32 value);
@@ -45,7 +45,7 @@ void FUN_0026d144(void *selection, s32 stockOnly)
     }
     if (!scripted) {
         if (panel->selection < 0) {
-            partyWidgetSetCost(panel->characters[0], -FUN_0029a9d4(panel->previewItem, 1));
+            partyWidgetSetCost(panel->characters[0], -skillGetDiscountedCost(panel->previewItem, 1));
         } else {
             for (s32 i = 0; i < 3; i++) {
                 if (slots->active[i] == panel->selection) {
@@ -77,7 +77,7 @@ void FUN_0026d144(void *selection, s32 stockOnly)
             } else {
                 unit = -1;
             }
-            FUN_002621b4(panel->selection, unit, panel->previewItem, &value);
+            skillApplyToTarget(panel->selection, unit, panel->previewItem, &value);
             partyWidgetSetValue(panel->characters[index], value);
             FUN_00298d28(value, partyWidgetGetCost(panel->characters[index]));
             return;
@@ -91,7 +91,7 @@ void FUN_0026d144(void *selection, s32 stockOnly)
         }
         index -= 4;
     }
-    FUN_002621b4(panel->selection, panel->entries[index].packedIndex,
+    skillApplyToTarget(panel->selection, panel->entries[index].packedIndex,
                  panel->previewItem, &value);
     partyWidgetSetValue(panel->demons[index], value);
     FUN_00298d28(value, partyWidgetGetCost(panel->demons[index]));

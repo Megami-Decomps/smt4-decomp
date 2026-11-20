@@ -16,7 +16,7 @@ extern s32 FUN_002072f0(const void *left, const void *right); /* 0x2072f0 */
 extern s32 devilCompareUnitsByRaceDescending(const void *left, const void *right); /* 0x219588 */
 extern s32 FUN_0025cac0(const void *left, const void *right); /* 0x25cac0 */
 extern s32 devilSortCompareUnitRankRaceId(const void *left, const void *right); /* 0x25cb2c */
-extern s32 FUN_00291f5c(const void *left, const void *right); /* 0x291f5c */
+extern s32 partyPanelCompareByMaxHp(const void *left, const void *right); /* 0x291f5c */
 extern s32 comparePartyUnitsByRankRaceAndId(const void *left, const void *right); /* 0x291fc8 */
 
 
@@ -48,7 +48,7 @@ void partyPanelSortEntries(void)
   }
   if ((*sortMode & 0x7f) == 4) {
     if (ascending != 0) {
-      qsort(panel->entries,0x18,8,FUN_00291f5c);
+      qsort(panel->entries,0x18,8,partyPanelCompareByMaxHp);
     }
     else {
       qsort(panel->entries,0x18,8,FUN_0025cac0);

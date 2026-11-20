@@ -5,7 +5,7 @@
 
 extern "C" {
 
-CmdManager *FUN_002ad244(void);
+CmdManager *nn_gxlow_CTR_GetCmdManager(void);
 s32 FUN_002a4a10(CmdQueue *queue, CmdMsg *msg);
 
 extern CmdTemplate DAT_00472a88;
@@ -23,7 +23,7 @@ void FUN_0014794c(u32 arg0, u32 arg1, s32 withBegin, u32 arg2)
         msg.flag = 0;
         msg.arg0 = arg0;
         msg.arg1 = arg1;
-        result = FUN_002a4a10(&FUN_002ad244()->queue, &msg);
+        result = FUN_002a4a10(&nn_gxlow_CTR_GetCmdManager()->queue, &msg);
     }
     if (nnResultIsSuccess(result)) {
         CmdMsg msg = *DAT_00472a88.msg;
@@ -34,7 +34,7 @@ void FUN_0014794c(u32 arg0, u32 arg1, s32 withBegin, u32 arg2)
         msg.arg1 = arg1;
         msg.arg2 = arg2;
         msg.unk10[3] = 0;
-        FUN_002a4a10(&FUN_002ad244()->queue, &msg);
+        FUN_002a4a10(&nn_gxlow_CTR_GetCmdManager()->queue, &msg);
     }
 }
 

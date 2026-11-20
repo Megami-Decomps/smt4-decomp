@@ -8,8 +8,8 @@
 extern "C" {
 extern SmokeFadeState *DAT_0043df28;
 extern SmokeFadeImage DAT_0043df40[2];
-s32 FUN_001ad6fc(u32);
-s32 FUN_001ad4f4(u32);
+s32 smokeFadeUpdate(u32);
+s32 smokeFadeDraw(u32);
 u32 taskCreateDraw(const char *, s32, s32, s32, void (*)(u32), void *, void *, u32);
 void *textureGetIndexedResource(u32);
 void asdTMTexTableLoadTmx(u32, s32);
@@ -24,9 +24,9 @@ void smokeFadeInitialize(u32 first, u32 second)
     }
     SmokeFadeState *state = DAT_0043df28;
     memset(state, 0, sizeof(*state));
-    state->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("SmokeFade Calc"), 1, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001ad6fc), NULL, NULL);
-    taskCreateDraw("SmokeFade DrawUpLeft", 0x81, 0, 0, reinterpret_cast<void (*)(u32)>(FUN_001ad4f4), NULL, NULL, state->job);
-    taskCreateDraw("SmokeFade DrawUpRight", 0xdf, 0, 0, reinterpret_cast<void (*)(u32)>(FUN_001ad4f4), NULL, NULL, state->job);
+    state->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("SmokeFade Calc"), 1, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(smokeFadeUpdate), NULL, NULL);
+    taskCreateDraw("SmokeFade DrawUpLeft", 0x81, 0, 0, reinterpret_cast<void (*)(u32)>(smokeFadeDraw), NULL, NULL, state->job);
+    taskCreateDraw("SmokeFade DrawUpRight", 0xdf, 0, 0, reinterpret_cast<void (*)(u32)>(smokeFadeDraw), NULL, NULL, state->job);
     state->frame = 0;
     state->phase = 0;
     state->active = 0;

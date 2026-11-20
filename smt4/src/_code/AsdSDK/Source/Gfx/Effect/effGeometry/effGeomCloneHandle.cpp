@@ -41,7 +41,7 @@ struct EffGeomDefaultTint {
 };
 
 extern "C" {
-extern const char DAT_00414954[]; /* "c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Effect\\effGeometry.cpp": __FILE__ */
+extern const char g_effGeometrySourceFileName[]; /* "c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Effect\\effGeometry.cpp": __FILE__ */
 extern EffGeomDefaultTint DAT_004737f8;
 
 EffGeomBuffer *effGeomBufferCreate(u32 vertexCount, u32 flags, s32 arg);
@@ -57,7 +57,7 @@ EffGeomCloneHandle *effGeomCloneHandle(EffGeomCloneHandle *source)
         EffGeomBuffer *original = source->buffer;
         u16 vertexCount = original->vertexCount;
         u32 flags = original->flags;
-        asdDebugTrace(DAT_00414954, 221);
+        asdDebugTrace(g_effGeometrySourceFileName, 221);
         copy = (EffGeomCloneHandle *)memAlloc(0x10000, 0x100, 0, 0x58, 0x10, 1);
         copy->tag = 0x300;
         copy->vertexCount = 0;
@@ -77,7 +77,7 @@ EffGeomCloneHandle *effGeomCloneHandle(EffGeomCloneHandle *source)
         EffGeomRecord *original = source->record;
         u32 vertexCount = original->state.unk0C;
         u32 triangles = original->state.unk14;
-        asdDebugTrace(DAT_00414954, 112);
+        asdDebugTrace(g_effGeometrySourceFileName, 112);
         copy = (EffGeomCloneHandle *)memAlloc(0x10000, 0x100, 0, 0x58, 0x10, 1);
         EffGeomRecord *record = new ((s32)source) EffGeomRecord;
         recordPrepareActive(record, 0x25, triangles * 3, vertexCount);

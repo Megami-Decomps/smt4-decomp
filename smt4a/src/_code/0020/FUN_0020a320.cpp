@@ -82,7 +82,7 @@ u32 FUN_0020a320(CommandMenuWork *work)
             uiSpriteSetImageKeyframe(&work->sprites[i], 0, 0);
     } else if (FUN_002cc9e0(work, 1) == 7) {
         Object *object;
-        if (objectApplyIfUnblocked(object = &work->lists[6]) <= 0)
+        if (gridNavigationGetItemCount(object = &work->lists[6]) <= 0)
             return 0;
         work->current = object;
         btlCommandMenuEnterMode(work, 11, 1);
@@ -90,7 +90,7 @@ u32 FUN_0020a320(CommandMenuWork *work)
             uiSpriteSetImageKeyframe(&work->sprites[i], 0, 0);
     } else if (FUN_002cc9e0(work, 1) == 3) {
         Object *object;
-        if (objectApplyIfUnblocked(object = &work->lists[7]) <= 0)
+        if (gridNavigationGetItemCount(object = &work->lists[7]) <= 0)
             return 0;
         work->current = object;
         btlCommandMenuEnterMode(work, 13, 1);
@@ -109,7 +109,7 @@ u32 FUN_0020a320(CommandMenuWork *work)
             btlCommandMenuEnterMode(work, 25, 1);
         } else if (FUN_002cc9e0(work, 1) == 12) {
             Object *object;
-            if (objectApplyIfUnblocked(object = &work->extra) <= 0)
+            if (gridNavigationGetItemCount(object = &work->extra) <= 0)
                 return 0;
             work->current = object;
             btlCommandMenuEnterMode(work, 9, 1);

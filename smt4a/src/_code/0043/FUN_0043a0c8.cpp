@@ -14,7 +14,7 @@ extern int DAT_006462b4; /* 0x6462b4 */
 extern int DAT_006462b8; /* 0x6462b8 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-extern int FUN_0016f864(void);
+extern int srvInitialize(void);
 /* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: FUN_0043a040. */
 extern unsigned int *FUN_0043a1d8(unsigned int *);
@@ -36,7 +36,7 @@ unsigned int * FUN_0043a0c8(void)
     nn_os_CriticalSection_Leave((unsigned int)&DAT_006462a4);
     return (unsigned int *)0x0;
   }
-  temp_v0 = FUN_0016f864();
+  temp_v0 = srvInitialize();
   if (temp_v0 < 0) {
     sysFatalBreak();
   }

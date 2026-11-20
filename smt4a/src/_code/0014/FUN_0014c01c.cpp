@@ -10,15 +10,15 @@ int FUN_001624b8(...);
 int mathInterpolateTimed(...);
 int msgBoxFlagsSetBit7(...);
 int FUN_00167400(void);
-int FUN_00168980(...);
+int buttonHelpTransitionPresetFlags(...);
 int buttonHelpSetEnabled(...);
-int FUN_00169704(void);
+int bustupCutAnimFinish(void);
 
 int padQueryLogicalKey(...);
 int uiApplyIndexedPanelSpriteSizes(...);
 int ifTouchRegionRemove(void);
 int workCommandRefreshActiveSlots(void);
-int FUN_00165088(...);
+int uiPanelCloseStateSection(...);
 int msgBoxFlagsClearBit7(...);
 int ifTouchGetButtonHelpValue(void);
 int sysPlaySe(...);
@@ -31,7 +31,7 @@ int gameDataCounterSpend(int);
 int uiSpriteAdvanceAnimation(...);
 int eventQueueAddUniqueIfValid(...);
 int msgBoxFlagsClear(...);
-int FUN_00167458(...);
+int uiSpriteSlideFromSide(...);
 int eventQueueAddUnique(...);
 int itemGetStackLimit(unsigned int);
 int asdTMTexTableReleaseNode(int, int);
@@ -76,7 +76,7 @@ extern int engineCleanupIsDone(void);
 /* Supplied declaration required: uiApplyIndexedPanelSpriteSizes. */
 extern int querySlotHasHandle(void);
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
-extern int FUN_00163e84(unsigned int);
+extern int screenFaderIsSettled(unsigned int);
 extern int slotIsActive(unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
@@ -90,17 +90,17 @@ extern int jobGetWork(void);
 extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: msgBoxFlagsClear. */
 extern int ifTouchGetSelectedRegion(void);
-/* Supplied declaration required: FUN_00165088. */
+/* Supplied declaration required: uiPanelCloseStateSection. */
 /* Supplied declaration required: msgBoxFlagsClearBit7. */
 /* Supplied declaration required: FUN_00167400. */
-/* Supplied declaration required: FUN_00167458. */
+/* Supplied declaration required: uiSpriteSlideFromSide. */
 extern int aocJobIsValid(void);
 /* Supplied declaration required: ifTouchGetButtonHelpValue. */
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00168980. */
+/* Supplied declaration required: buttonHelpTransitionPresetFlags. */
 extern int msgBoxIsState2(unsigned int);
 /* Supplied declaration required: buttonHelpSetEnabled. */
-/* Supplied declaration required: FUN_00169704. */
+/* Supplied declaration required: bustupCutAnimFinish. */
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: itemGetStackLimit. */
 /* Supplied declaration required: buttonHelpSelectSlot. */
@@ -224,7 +224,7 @@ unsigned int FUN_0014c01c(void)
             }
           }
           else {
-            temp_v8 = FUN_00167458(temp_v2 + 0xb00,0);
+            temp_v8 = uiSpriteSlideFromSide(temp_v2 + 0xb00,0);
             if (temp_v8 != 0) {
               *(unsigned char *)(temp_v2 + 0x8d) = 2;
             }
@@ -356,7 +356,7 @@ LAB_0014c48c:
     switch(*(unsigned char *)(DAT_0057f590 + 0x154)) {
     case 1:
       if ((*(char *)(DAT_0057f58c + 0x6d) == '\0') &&
-         (FUN_00167458(DAT_0057f590 + 0xd30,0), *(char *)(DAT_0057f590 + 0xdba) != '\0')) {
+         (uiSpriteSlideFromSide(DAT_0057f590 + 0xd30,0), *(char *)(DAT_0057f590 + 0xdba) != '\0')) {
         *(unsigned char *)(temp_v8 + 0x154) = 2;
       }
       break;
@@ -763,14 +763,14 @@ LAB_0014d1e0:
               temp_v4 = (unsigned int)*(unsigned char *)(temp_v2 + 8);
             }
             if (temp_v2 != 0 && temp_v4 != 0) {
-              FUN_00165088(temp_v2,*(unsigned char *)(temp_v2 + 9));
+              uiPanelCloseStateSection(temp_v2,*(unsigned char *)(temp_v2 + 9));
               *(unsigned char *)(temp_v2 + 8) = 3;
               *(unsigned char *)(temp_v2 + 0x35) = 0;
             }
             temp_v8 = DAT_0057f58c;
             if ((*(char *)(DAT_0057f58c + 8) != '\x01' && DAT_0057f58c != 0) &&
                 *(char *)(DAT_0057f58c + 8) != '\0') {
-              FUN_00165088(DAT_0057f58c,*(unsigned char *)(DAT_0057f58c + 9));
+              uiPanelCloseStateSection(DAT_0057f58c,*(unsigned char *)(DAT_0057f58c + 9));
               *(unsigned char *)(temp_v8 + 8) = 3;
               *(unsigned char *)(temp_v8 + 0x35) = 0;
             }
@@ -874,7 +874,7 @@ LAB_0014cbbc:
         }
         if (temp_v2 != 0) {
           if (*(char *)(temp_v2 + 8) != '\0') {
-            FUN_00165088(temp_v2,*(unsigned char *)(temp_v2 + 9));
+            uiPanelCloseStateSection(temp_v2,*(unsigned char *)(temp_v2 + 9));
             *(unsigned char *)(temp_v2 + 8) = 3;
             goto LAB_0014dd98;
           }
@@ -898,7 +898,7 @@ LAB_0014cbbc:
               if (temp_v8 != 0) goto LAB_0014d428;
             }
             else {
-              FUN_00167458(temp_v2 + 0x1b4,0);
+              uiSpriteSlideFromSide(temp_v2 + 0x1b4,0);
               if (*(char *)(temp_v2 + 0x23e) != '\0') {
                 *(unsigned char *)(temp_v2 + 8) = 1;
                 temp_v1 = ifTouchRegionAddRequested(0x2f,0x98);
@@ -943,8 +943,8 @@ LAB_0014d584:
             goto LAB_0014d5b8;
           }
 LAB_0014d5c4:
-          FUN_00167458(temp_v2 + 0x1b4,0);
-          FUN_00167458(temp_v2 + 0x358,0);
+          uiSpriteSlideFromSide(temp_v2 + 0x1b4,0);
+          uiSpriteSlideFromSide(temp_v2 + 0x358,0);
           if (*(char *)(temp_v2 + 9) == '\v') {
             temp_v0 = *(short *)(temp_v2 + 0x19c6);
             if (temp_v0 != 0xdf) {
@@ -1204,7 +1204,7 @@ LAB_0014d428:
                   } while ((int)temp_v4 < 6);
                 }
                 else {
-                  FUN_00168980(0xa2);
+                  buttonHelpTransitionPresetFlags(0xa2);
                 }
               }
               *(unsigned short *)(temp_v2 + 0x19c6) = 0;
@@ -1297,14 +1297,14 @@ LAB_0014d428:
     if (temp_v2 == 0) break;
     if (*(char *)(temp_v2 + 8) == '\0') goto LAB_0014dfb0;
 LAB_0014dd84:
-    FUN_00165088(temp_v2,*(unsigned char *)(temp_v2 + 9));
+    uiPanelCloseStateSection(temp_v2,*(unsigned char *)(temp_v2 + 9));
     *(unsigned char *)(temp_v2 + 8) = 3;
 LAB_0014dd98:
     *(unsigned char *)(temp_v2 + 0x35) = 0;
     goto LAB_0014dec8;
   case 6:
-    FUN_00169704();
-    if ((temp_v4 != 0) && (temp_v8 = FUN_00163e84(0), temp_v8 != 0)) {
+    bustupCutAnimFinish();
+    if ((temp_v4 != 0) && (temp_v8 = screenFaderIsSettled(0), temp_v8 != 0)) {
 LAB_0014d2c4:
       *(unsigned char *)(temp_v2 + 8) = 2;
       goto LAB_0014dec8;
@@ -1322,10 +1322,10 @@ LAB_0014d2c4:
   case 8:
     if (*(char *)(temp_v2 + 9) != '\v') goto LAB_0014dfb0;
     if (*(char *)(DAT_0057f590 + 0x6d) != '\0') goto LAB_0014d2c4;
-    FUN_00167458(temp_v2 + 0x1b4,0);
-    FUN_00167458(temp_v2 + 0x358,0);
-    FUN_00167458(temp_v2 + 0x470,0);
-    FUN_00167458(temp_v2 + 0x18ac,0);
+    uiSpriteSlideFromSide(temp_v2 + 0x1b4,0);
+    uiSpriteSlideFromSide(temp_v2 + 0x358,0);
+    uiSpriteSlideFromSide(temp_v2 + 0x470,0);
+    uiSpriteSlideFromSide(temp_v2 + 0x18ac,0);
     if (((*(char *)(temp_v2 + 0x23e) != '\0') && (*(char *)(temp_v2 + 0x3e2) != '\0')) &&
        (*(char *)(temp_v2 + 0x1936) != '\0')) {
       temp_v6 = *(char *)(temp_v2 + 0x4fa);

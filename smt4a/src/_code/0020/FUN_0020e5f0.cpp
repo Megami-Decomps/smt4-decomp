@@ -26,7 +26,7 @@ extern "C" {
 void runnerShutdown();
 void FUN_002ef9ec();
 HolderView* vtblHolderInit557bbc(HolderView* self);
-extern BootStateView* DAT_00588e2c;
+extern BootStateView* g_saveLoadRunner;
 
 /* Creates the state's mode holder and sets its initial mode. */
 static __inline void bootStateCreateHolder(BootStateView* state, s32 mode, s32 enabled)
@@ -42,8 +42,8 @@ static __inline void bootStateCreateHolder(BootStateView* state, s32 mode, s32 e
 // Create the boot process and its holder, then initialize the holder's mode.
 void FUN_0020e5f0(void)
 {
-    DAT_00588e2c = new BootStateView;
-    BootStateView* state = DAT_00588e2c;
+    g_saveLoadRunner = new BootStateView;
+    BootStateView* state = g_saveLoadRunner;
     state->process = reinterpret_cast<void*>(asdProcessCreateSimple(reinterpret_cast<const s8 *>("BOOT C"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(runnerShutdown), reinterpret_cast<AsdProcFunc>(FUN_002ef9ec), 0));
 
     bootStateCreateHolder(state, 2, 1);

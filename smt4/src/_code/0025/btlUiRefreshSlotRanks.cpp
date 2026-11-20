@@ -6,7 +6,7 @@ extern "C" {
 
 extern void memFill8(BtlUiSettings *settings, s32 arg);
 extern u16 slotFindNonnegativeRank(u32 owner, s32 index);
-extern void FUN_002ad8a8(void *dest, BtlUiSettings *settings);
+extern void btlUiCopyIdList(void *dest, BtlUiSettings *settings);
 
 void btlUiRefreshSlotRanks(void)
 {
@@ -17,7 +17,7 @@ void btlUiRefreshSlotRanks(void)
     context->settings.slotRanks[1] = slotFindNonnegativeRank(reinterpret_cast<u32>(context->owner), 1);
     context->settings.slotRanks[2] = slotFindNonnegativeRank(reinterpret_cast<u32>(context->owner), 2);
     context->settings.slotRanks[3] = slotFindNonnegativeRank(reinterpret_cast<u32>(context->owner), 3);
-    FUN_002ad8a8(&context->objC, &context->settings);
+    btlUiCopyIdList(&context->objC, &context->settings);
 }
 
 }

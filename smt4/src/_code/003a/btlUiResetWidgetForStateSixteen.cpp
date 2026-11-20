@@ -2,13 +2,13 @@
 
 extern "C" {
 
-void FUN_0028bfe4(BtlUiObjC *widget);
+void btlUiObjCResetToState27(BtlUiObjC *widget);
 
 /* Switches the battle UI state and resets its third widget. */
 void btlUiResetWidgetForStateSixteen()
 {
     g_btlUi.ui->panelState.state = 16;
-    FUN_0028bfe4(&g_btlUi.ui->objC);
+    btlUiObjCResetToState27(&g_btlUi.ui->objC);
 }
 
 }

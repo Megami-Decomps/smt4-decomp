@@ -3,8 +3,8 @@
 
 extern "C" {
 
-s32 FUN_002b89a4(u32 arg);
-s32 FUN_002c1d5c(void);
+s32 screenFaderIsSettled(u32 arg);
+s32 eventIsSkipping(void);
 void screenFadeSlotReset(s32 arg);
 void titleSetSlotValueState2(s32 mode, u32 value);
 
@@ -20,10 +20,10 @@ u32 FUN_0021e9ec(void)
         }
         titleSetSlotValueState2(0, value);
     } else {
-        if (FUN_002b89a4(0) != 0) {
+        if (screenFaderIsSettled(0) != 0) {
             return 1;
         }
-        if (FUN_002c1d5c() != 0) {
+        if (eventIsSkipping() != 0) {
             screenFadeSlotReset(0);
         }
     }

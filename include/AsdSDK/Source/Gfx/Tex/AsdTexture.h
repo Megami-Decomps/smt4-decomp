@@ -7,11 +7,17 @@
 
 #define ASDTEXTURE_TARGET_2D 0xde1  /* GL_TEXTURE_2D */
 
+/* AsdTexture.image.format values (the DMP GL extension's native ETC1 formats). */
+enum {
+    ASDTEXTURE_FORMAT_ETC1 = 0x675a,    /* GL_ETC1_RGB8_NATIVE_DMP */
+    ASDTEXTURE_FORMAT_ETC1_A4 = 0x675b  /* GL_ETC1_ALPHA_RGB8_A4_NATIVE_DMP */
+};
+
 /* A texture object (0x48 bytes). */
 typedef struct AsdTexture {
     /* 0x00 */ s32 refCount;
     /* 0x04 */ u32 target;      /* ASDTEXTURE_TARGET_2D */
-    /* 0x08 */ u32 unk08;       /* 0x10000 when created */
+    /* 0x08 */ u32 heap;        /* heap the image is copied to (ASD_HEAP_*): ASD_HEAP_EXTRA, the default, keeps it in place */
     /* 0x0C */ union {
         u8 unk0c[0x2C];
         struct {
@@ -22,7 +28,7 @@ typedef struct AsdTexture {
         struct {
             u8 unk0c[0x18];
             void *pixels; // 0x24
-            u32 unk28;
+            u32 bytes; // 0x28: size of the pixel data
             u32 flags; // 0x2c
         } storage;
         struct {

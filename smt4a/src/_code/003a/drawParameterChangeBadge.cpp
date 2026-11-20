@@ -7,7 +7,7 @@ extern "C" {
 u32 requestKindToId(u32 kind);
 void texTableRecordCallWithParams(u32 screen, u32 table, s32 index, u32 x, u32 y, u32 layer);
 void drawSetColorFromRGBA8(u32 color);
-void FUN_00180310(u32 screen, s32 x, s32 y, s32 mode, s32 font, s32 layer,
+void statRowDrawValueImpl(u32 screen, s32 x, s32 y, s32 mode, s32 font, s32 layer,
                   const char *format, ...);
 void gxResetColorQuadToWhite();
 
@@ -34,12 +34,12 @@ void drawParameterChangeBadge(u32 kind, s32 amount, s32 x, s32 y, s32 layer)
     texTableRecordCallWithParams(2, 11, icon, x, y, layer);
     drawSetColorFromRGBA8(color);
     const TextureTableEntryIV *info = asdTMTexTableEntryAt(11, 0x402);
-    FUN_00180310(2, info->x + x, info->y + y, 0, 1, layer + 1, sign);
+    statRowDrawValueImpl(2, info->x + x, info->y + y, 0, 1, layer + 1, sign);
     info = asdTMTexTableEntryAt(11, 0x401);
     if (amount < 0) {
         amount = -(u32)amount;
     }
-    FUN_00180310(2, info->x + x, info->y + y, 0, 1, layer + 1, "%d", amount);
+    statRowDrawValueImpl(2, info->x + x, info->y + y, 0, 1, layer + 1, "%d", amount);
     gxResetColorQuadToWhite();
 }
 }

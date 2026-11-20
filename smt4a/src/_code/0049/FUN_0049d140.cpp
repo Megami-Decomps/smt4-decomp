@@ -14,7 +14,7 @@ typedef struct {
 
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: buttonHelpSetText. */
-extern int FUN_002ebce4(void);
+extern int partyPanelIsOutsideDialogState(void);
 /* Supplied declaration required: screenStartOrClear. */
 
 
@@ -60,7 +60,7 @@ void FUN_0049d140(int param_1,unsigned int param_2,unsigned char param_3)
     buttonHelpSetText(0,0xf4f4f4ff);
     return;
   }
-  temp_v1 = FUN_002ebce4();
+  temp_v1 = partyPanelIsOutsideDialogState();
   if (temp_v1 != 0) {
     return;
   }

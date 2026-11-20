@@ -1,0 +1,33 @@
+/* NON_MATCHING: only register numbering of the two live arguments differs (retail: owner in r5, source in r4, source offset added after owner's) */
+/* Runs nw_ut_internal_LinkListImpl_erase_2B743C on the two sub-objects at +0xC / +0x108, then FUN_001a5894 (placed right after, so the last call is a linker NOP). */
+#include "common.h"
+
+struct ListNode {
+    ListNode *next;
+    ListNode *prev;
+};
+
+struct ListState {
+    u32 count;
+};
+
+struct ListOwner {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ ListState list;
+};
+
+struct ListSource {
+    /* 0x000 */ u8 unk000[0x108];
+    /* 0x108 */ ListNode node;
+};
+
+extern "C" {
+ListNode *nw_ut_internal_LinkListImpl_erase_2B743C(ListState *list, ListNode *node);
+void FUN_001a5894(ListOwner *owner, ListSource *source);
+
+void soundObjectUnlinkFromOwner(ListOwner *owner, ListSource *source)
+{
+    nw_ut_internal_LinkListImpl_erase_2B743C(&owner->list, &source->node);
+    FUN_001a5894(owner, source);
+}
+}

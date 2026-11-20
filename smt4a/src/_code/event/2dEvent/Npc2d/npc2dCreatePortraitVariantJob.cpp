@@ -14,7 +14,7 @@ u32 FUN_00283498(u32 id);
 const u16 *dataTable19FindAddonWord(u32 id, u32 variant);
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 tracking);
 void sysMemClear(void *memory, u32 size);
-s32 FUN_00162ea4();
+s32 eventIsSkipping();
 s32 aocRunByName(AocSystemA *system, u32 table, u32 file, s32 mode);
 void FUN_002897cc(JobWork *job);
 void FUN_0034da3c(JobWork *job);
@@ -71,7 +71,7 @@ void npc2dCreatePortraitVariantJob(u32 id, s32 placement, u32 variant)
         work->base.scale.y = 0.0f;
         work->create.mode = 5;
     }
-    if (FUN_00162ea4()) {
+    if (eventIsSkipping()) {
         work->base.deferred = 1;
     } else {
         work->base.deferred = 0;

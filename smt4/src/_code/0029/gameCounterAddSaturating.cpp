@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00343a04(u32 amount);
+int questCenterCounterAddSaturating1A(u32 amount);
 int gameAddPointsClamped(u32 amount);
-int FUN_00343a74(u32 amount);
+int questCenterCounterAddSaturating14(u32 amount);
 int questCenterAddPoints(u32 amount);
 
 /* Adds `amount` to counter `index` (saturating at 0xFFFFFFFF) and notifies the counter's handler. */
@@ -24,13 +24,13 @@ void gameCounterAddSaturating(int index, u32 amount)
     *counter = value;
     switch (index) {
     case 2:
-        FUN_00343a74(amount);
+        questCenterCounterAddSaturating14(amount);
         return;
     case 9:
         questCenterAddPoints(amount);
         return;
     case 0x13:
-        FUN_00343a04(amount);
+        questCenterCounterAddSaturating1A(amount);
         return;
     case 0x26:
         gameAddPointsClamped(amount);

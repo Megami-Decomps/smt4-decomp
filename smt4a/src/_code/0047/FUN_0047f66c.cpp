@@ -2,7 +2,7 @@
 #include "runtime/Stdio.h"
 
 extern "C" {
-u32 FUN_0014af98(void);
+u32 messageVoiceBankGet(void);
 void FUN_001628c0(const char *, u32, u32, u32, f32, f32);
 extern const char DAT_0052a998[]; // \"I009021\"
 extern const char DAT_0052a988[]; // \"I009022\"
@@ -32,5 +32,5 @@ extern "C" void FUN_0047f66c(s32 itemId)
 {
     char imageName[64] = {0};
     itemImageNameFormat(imageName, itemId);
-    FUN_001628c0(imageName, FUN_0014af98(), 2, 0, 0.707f, 0.707f);
+    FUN_001628c0(imageName, messageVoiceBankGet(), 2, 0, 0.707f, 0.707f);
 }

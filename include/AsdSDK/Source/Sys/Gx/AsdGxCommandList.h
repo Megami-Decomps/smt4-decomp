@@ -14,6 +14,11 @@
 #define ASD_GX_CMDLIST_ACTIVE 1
 #define ASD_GX_CMDLIST_SUSPENDED 2
 
+/* gxGetCommandListParameter parameters (nngxGetCmdlistParameteri) whose meaning is known. */
+enum {
+    ASD_GX_CMDLIST_BINDING = 0x207 /* NN_GX_CMDLIST_BINDING: the nngx command list currently bound, 0 for none */
+};
+
 /* Four state words saved when a list is begun (what asdGxCommandBufferPadAndGetRanges reads back) and a heap copy of the
  * state they describe. */
 typedef struct AsdGxStateEntry {

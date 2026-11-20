@@ -5,7 +5,7 @@
 
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
-s32 FUN_004bd0d8(SlotRecordA *record);
+s32 slotIsReservePick(SlotRecordA *record);
 s32 bitsAt60Test(SlotRecordA *record, u32 bit);
 s32 slotTableEntryIsActive(SlotRecordA *record);
 void __aeabi_memset4(void *destination, u32 size, s32 value);
@@ -29,7 +29,7 @@ s32 FUN_003ff888(void)
     for (i = 0; i < occupiedCount; i++) {
         SlotRecordA *record = gameGetSlotRecord(occupiedSlots[i]);
         if (record != NULL && slotTableEntryIsActive(record) != 0 &&
-            FUN_004bd0d8(record) == 0 && bitsAt60Test(record, 1) == 0 &&
+            slotIsReservePick(record) == 0 && bitsAt60Test(record, 1) == 0 &&
             bitsAt60Test(record, 10) == 0) {
             return 1;
         }

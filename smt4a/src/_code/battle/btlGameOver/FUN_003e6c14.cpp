@@ -13,12 +13,12 @@ extern GameOverEyeTimeline g_btlGameOverEyeTimeline;
 extern BtlGameOverGlobalsA g_btlGameOver;
 extern const char DAT_005285fc[]; /* battle/gameover/gameover.bf */
 extern const char DAT_005285dc[]; /* battle/gameover/gameover.mbm */
-void FUN_004fdcd8(u32, u32, u32, u32, u32, u32, u32, u32);
+void btlQueueMessageTableReflectAction(u32, u32, u32, u32, u32, u32, u32, u32);
 void btlUiPanelStart(BtlUiA *);
 u32 btlReflectQueuePairedParameters(s32, u32, u32, u32, u32, u32, u32, u32, u32);
 void slotSetRequest(u32, u32, u32);
 u32 talkEventStartScript(BtlGameOverA *);
-u32 FUN_003e71a8(BtlGameOverA *);
+u32 touchToContinueSplashStep(BtlGameOverA *);
 
 /* Drive eye, effect and fade events, then select the normal or forced game-over path. */
 u32 FUN_003e6c14(BtlGameOverA *work)
@@ -38,7 +38,7 @@ u32 FUN_003e6c14(BtlGameOverA *work)
         offsetof(SaveCounterView, gameOvers) == 0x27E3D ? 1 : -1];
     const TimelineView *timeline = (const TimelineView *)&g_btlGameOverEyeTimeline;
     if (work->timing.frameCounter == timeline->panelFrame) {
-        FUN_004fdcd8(0, 0, 0, 0, 7, 0, 11, 0);
+        btlQueueMessageTableReflectAction(0, 0, 0, 0, 7, 0, 11, 0);
         btlUiPanelStart(g_btlUiBlock);
     }
     if (work->timing.frameCounter == timeline->effectFrame)
@@ -57,7 +57,7 @@ u32 FUN_003e6c14(BtlGameOverA *work)
                      (u64(g_btlGameOver.forcedStates[1]) << 32);
     if ((battle->markerMasks.bits & forcedMask) != 0) {
         work->state = 9;
-        return FUN_003e71a8(work);
+        return touchToContinueSplashStep(work);
     }
     work->state = 3;
     asdLoadFileAsyncSimple(DAT_005285fc, reinterpret_cast<u32 *>(&work->dataA), 0);

@@ -39,7 +39,7 @@ s32 recordContainsPairedId(u32 argument, u16 id);
 void partyRecordSetEquippedItemClampRank(u32 argument, u16 id, s32 value);
 void statDrawClampedDelta(u32 argument, s32 id, s32 x, s32 y, s32 style, s32 mode);
 u32 skillGetAdjustedCost(u32 argument, u16 id);
-void FUN_00180310(s32 a, s32 x, s32 y, s32 b, s32 c, s32 style, const char *format, u32 value);
+void statRowDrawValueImpl(s32 a, s32 x, s32 y, s32 b, s32 c, s32 style, const char *format, u32 value);
 
 /* Draws the highlighted row of the slot list: the button strip and frame, the entry's name in
    the colour its state calls for, and its stat figures. */
@@ -87,7 +87,7 @@ void FUN_003cdeb0(SlotListScreen *screen, u32 argument, s32 x, s32 y, f32 scale)
     statDrawClampedDelta(argument, (s16)screen->entryIds[entry], frame->x + statBox->x + x, frame->y + statBox->y + y, 0x8d, 0);
     if (filled) {
         SlotIconPosition *countBox = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a6));
-        FUN_00180310(1, frame->x + countBox->x + x, frame->y + countBox->y + y, 1, 4, 0x8d, "%d",
+        statRowDrawValueImpl(1, frame->x + countBox->x + x, frame->y + countBox->y + y, 1, 4, 0x8d, "%d",
                      skillGetAdjustedCost(argument, screen->entryIds[entry]));
     } else {
         asdTMTexTableEntryAt(0x1a, 0x19b);

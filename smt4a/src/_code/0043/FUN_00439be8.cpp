@@ -5,7 +5,7 @@
 
 extern "C" {
 
-extern u32 DAT_005c0a80;  /* service session handle */
+extern u32 g_nimAocSession;  /* service session handle */
 
 /* IPC request 0x0024 with a six word parameter block, a size and one buffer (size bytes at
  * buffer); passes the 64-bit response back in *out and returns the transport result, or the
@@ -20,7 +20,7 @@ s32 FUN_00439be8(u64 *out, const IpcParams6 *params, u32 buffer, u32 size)
     cmd->words[9] = size;
     cmd->words[10] = (size << 5) | 10;
     cmd->words[11] = buffer;
-    s32 result = nn::svc::SendSyncRequest(DAT_005c0a80);
+    s32 result = nn::svc::SendSyncRequest(g_nimAocSession);
     if (nnResultIsSuccess(result)) {
         *out = *(u64 *)&cmd->words[1];
         result = cmd->words[0];

@@ -9,7 +9,7 @@ struct BtlUnitA;
 extern "C" {
 extern u32 g_btlScriptUnit;
 s32 scrGetArg(s32 index);
-u32 FUN_004fc094(s32 mode, BtlUnitA *actor, s32 option, BattleRosterRecordA *target,
+u32 btlAdjustPropertyAndQueueAction(s32 mode, BtlUnitA *actor, s32 option, BattleRosterRecordA *target,
                  s32 value5, s32 damage, s32 value7, u32 value8,
                  u32 hp, u32 maxHp, s32 value11, u32 value12,
                  s32 value13, s32 value14, s32 value15, s32 value16,
@@ -39,7 +39,7 @@ u32 FUN_003c23f8(void)
             btlSlotManagerResetStates(btlGetMainState());
             battle = btlGetMainState();
             BattleRosterRecordA *target = &battle->roster[entry->ids[0]];
-            FUN_004fc094(0, actor, 0, target, 0, damage, -1, ~0u,
+            btlAdjustPropertyAndQueueAction(0, actor, 0, target, 0, damage, -1, ~0u,
                          entry->data.hp, entry->data.maxHp, 0, 0, 0, 0, 1, 0,
                          slot << 3, slot << 3, slot << 3, slot << 3,
                          1, 0, 1, 1, 0, 1);

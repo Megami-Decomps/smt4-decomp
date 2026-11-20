@@ -8,7 +8,7 @@ extern "C" {
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int onlineJobSetStateTimed(int, int);
-int FUN_002ea704(void);
+int watcherGetEnabledFlag(void);
 int onlineTimeGetNow(unsigned char [8]);
 int FUN_002fa434(unsigned char [40], unsigned int);
 
@@ -21,7 +21,7 @@ extern int onlineInstanceTableGetCurrent(void);
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: onlineJobSetStateTimed. */
-/* Supplied declaration required: FUN_002ea704. */
+/* Supplied declaration required: watcherGetEnabledFlag. */
 /* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002eba9c(unsigned char *, int);
 /* Supplied declaration required: FUN_002fa434. */
@@ -37,7 +37,7 @@ void FUN_0010f208(int param_1)
   unsigned char temp_v3 [8];
   unsigned char temp_v4 [20];
   
-  temp_v0 = FUN_002ea704();
+  temp_v0 = watcherGetEnabledFlag();
   if (temp_v0 != 0) {
     temp_v0 = onlineInstanceTableGetCurrent();
     onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
@@ -53,7 +53,7 @@ void FUN_0010f208(int param_1)
           onlineJobSetStateTimed(param_1,0x32);
           return;
         }
-        temp_v1 = FUN_002ea704();
+        temp_v1 = watcherGetEnabledFlag();
         FUN_002fa434(temp_v2,temp_v1);
         temp_v1 = FUN_002ea3c0(temp_v4,&LAB_0010f425,0,&LAB_0010f2ac);
         FUN_002ea3d0(param_1,temp_v1);

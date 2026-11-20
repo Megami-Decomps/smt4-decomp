@@ -43,10 +43,10 @@ unsigned int FUN_0032c8d4(void)
     iVar7 = DAT_0043da90[6];
     if (!((iVar7 == 4 || iVar7 == 5) || iVar7 == 0x35)) {
       iVar7 = FUN_0029e1c8();
-      FUN_002a0cc8(iVar7 == 0);
+      gameGlobalsSetSubScreenActive(iVar7 == 0);
     }
     else {
-      FUN_002a0cc8(1);
+      gameGlobalsSetSubScreenActive(1);
     }
   }
   uiSpriteAdvanceAnimation(puVar2 + 0x1d8);
@@ -57,7 +57,7 @@ unsigned int FUN_0032c8d4(void)
   if ((((iVar7 != 7 && iVar7 != 8) && ((iVar7 != 9 && iVar7 != 0x1b) && iVar7 != 0x1c)) &&
       (*(short *)(puVar2 + 0x1a6) != 3)) && (*(short *)(puVar2 + 0x1a6) != 4)) {
     uiSlidingSpriteAdvance(puVar2 + 0x192,0);
-    iVar7 = FUN_0029e958(puVar2 + 0xd);
+    iVar7 = uiGridNavigationEntryCount(puVar2 + 0xd);
     iVar19 = 0;
     if (0 < iVar7) {
       do {
@@ -89,7 +89,7 @@ unsigned int FUN_0032c8d4(void)
     puVar2[6] = 2;
     break;
   case 2:
-    iVar7 = FUN_002b89a4(0);
+    iVar7 = screenFaderIsSettled(0);
     if (iVar7 != 0) {
       puVar2[6] = puVar2[8];
       uVar18 = FUN_0029e908(puVar2 + 0xd);
@@ -147,7 +147,7 @@ unsigned int FUN_0032c8d4(void)
       else {
         FUN_0028a924(1,0,0xffffffff);
       }
-      uVar20 = FUN_0029e958(puVar2 + 0xd);
+      uVar20 = uiGridNavigationEntryCount(puVar2 + 0xd);
       iVar7 = 0;
       if (0 < (int)uVar20) {
         do {
@@ -185,7 +185,7 @@ unsigned int FUN_0032c8d4(void)
             uVar18 = 4;
           }
           FUN_002b8838(uVar18);
-          FUN_002579bc(0);
+          partyPanelSetDisabledMode(0);
         }
         if ((*(char *)(puVar2 + 0x26) == '\x01') && ('\x01' < *(char *)((int)puVar2 + 0x99))) {
           iVar7 = FUN_00262f14();
@@ -196,7 +196,7 @@ unsigned int FUN_0032c8d4(void)
             uVar18 = 2;
           }
           FUN_002b8838(uVar18);
-          FUN_002579bc(1);
+          partyPanelSetDisabledMode(1);
         }
       }
     }
@@ -346,7 +346,7 @@ unsigned int FUN_0032c8d4(void)
       }
     }
     else {
-      iVar19 = FUN_0029ee54(puVar2 + 0x77);
+      iVar19 = gridNavigationGetItemCount(puVar2 + 0x77);
       if (iVar19 < 1) {
         uVar18 = 7;
       }
@@ -356,7 +356,7 @@ unsigned int FUN_0032c8d4(void)
       FUN_002b8838(uVar18);
     }
 code_r0x0032d518:
-    FUN_00299900(iVar7);
+    campListShowSelectedHelp(iVar7);
     puVar17 = DAT_0043da90;
     iVar7 = puVar2[8];
     piVar10 = DAT_0043da90 + 6;
@@ -594,7 +594,7 @@ code_r0x0032d518:
     if (iVar7 == 0) {
       FUN_0026a3c4(0xb);
     }
-    iVar7 = FUN_0029ee54(puVar17 + 0x2c);
+    iVar7 = gridNavigationGetItemCount(puVar17 + 0x2c);
     if (iVar7 < 1) {
       FUN_002bd8e8(puVar17 + 0x1b5,3,0);
       puVar17[8] = 6;
@@ -656,15 +656,15 @@ code_r0x0032d518:
       iVar7 = func_0x003acb08();
       if (iVar7 != 0) {
         puVar17[7] = puVar17[7] + 1;
-        FUN_00299bc4(puVar17 + 0x90,1);
+        campListRegisterTouchRegions(puVar17 + 0x90,1);
       }
       break;
     }
     if (iVar7 != 1) {
-      if ((iVar7 == 2) && (iVar7 = FUN_00241a44(), iVar7 != 0)) {
+      if ((iVar7 == 2) && (iVar7 = countdownIsNotFinished(), iVar7 != 0)) {
         FUN_003aceb4();
         FUN_003ad390();
-        FUN_00299900(0);
+        campListShowSelectedHelp(0);
         FUN_002bd8e8(puVar17 + 0x1b5,3,0);
         puVar17[8] = 6;
         puVar9 = DAT_0043da90;
@@ -689,10 +689,10 @@ code_r0x0032d518:
     FUN_0029f5d8(puVar9,uVar18,puVar17 + 899,(int)*(short *)((int)puVar17 + 0xe02));
     if (puVar9 == (unsigned int *)0x0) {
       puVar9 = puVar17 + 0x90;
-      FUN_0029efd8(puVar9,1);
+      gridNavigationHandleConfirm(puVar9,1);
       if (puVar9 == (unsigned int *)0x0) {
         iVar13 = 0;
-        FUN_002c1658(0,1);
+        inputQueryButtonState(0,1);
         if (!(iVar13 == 0 && acStack_634[0] == '\0')) {
           uVar20 = (unsigned int)*(unsigned short *)((int)puVar17 + (iVar7 + iVar19) * 2 + 0x1db4);
           if (uVar20 == 0) break;
@@ -721,7 +721,7 @@ code_r0x0032d518:
         }
         else {
           iVar7 = 1;
-          FUN_002c1658();
+          inputQueryButtonState();
           if (iVar7 != 0) {
             campReleaseScreenTouchRegions(puVar17 + 0x90);
             countdownSetModeFive();
@@ -730,14 +730,14 @@ code_r0x0032d518:
           }
           else {
             iVar7 = 9;
-            FUN_002c1658(9,1);
+            inputQueryButtonState(9,1);
             if (iVar7 == 0) break;
             FUN_0029e39c(2,0);
-            FUN_0029e328(0xb);
-            FUN_0029e328(0xe);
-            FUN_0029e328(0xf);
-            FUN_0029e328(0x11);
-            FUN_0029e328(3);
+            useCounterAppendValue(0xb);
+            useCounterAppendValue(0xe);
+            useCounterAppendValue(0xf);
+            useCounterAppendValue(0x11);
+            useCounterAppendValue(3);
             buttonHelpSetText(0,0x323232ff);
             uVar4 = FUN_002b898c();
             *(unsigned char *)((int)puVar17 + 0x31) = uVar4;
@@ -758,7 +758,7 @@ code_r0x0032d518:
     FUN_003aca0c();
     uVar18 = FUN_0029e908(puVar17 + 0xd);
     dataTable15GetUnlockedEntryId((int)*(char *)(puVar17 + 0x26),uVar18);
-    FUN_00299900();
+    campListShowSelectedHelp();
     break;
   case 0x11:
     iVar7 = FUN_0028a318();
@@ -788,7 +788,7 @@ code_r0x0032d518:
         uStack_658 = 1;
         uStack_654 = 1;
         gridNavigationConfigure(puVar9 + 0x90,uVar18,0xb,1);
-        FUN_00282f80(10);
+        campRebuildCategoryList(10);
       }
       FUN_0029dfc0(0);
       FUN_002bd8e8(puVar17 + 0x1b5,1,0);
@@ -812,7 +812,7 @@ code_r0x0032d518:
       FUN_0028a924(0xc,0,0xffffffff);
       FUN_0028a368(0);
       FUN_0029e774();
-      FUN_002579bc(1);
+      partyPanelSetDisabledMode(1);
       puVar17 = DAT_0043da90;
       puVar9 = DAT_0043da90 + 6;
       DAT_0043da90[9] = DAT_0043da90[6];
@@ -929,7 +929,7 @@ code_r0x0032d518:
       FUN_0028a924(4,0,0xffffffff);
       FUN_0028a368(0);
       FUN_0029e774();
-      FUN_002579bc(1);
+      partyPanelSetDisabledMode(1);
       puVar9 = DAT_0043da90;
       puVar17 = DAT_0043da90 + 6;
       DAT_0043da90[7] = 0;
@@ -949,7 +949,7 @@ code_r0x0032d518:
       FUN_0028a924(0xf,0,0xffffffff);
       FUN_0028a368(0);
       FUN_0029e774();
-      FUN_002579bc(1);
+      partyPanelSetDisabledMode(1);
       puVar17 = DAT_0043da90;
       DAT_0043da90[9] = DAT_0043da90[6];
       puVar17[7] = 0;
@@ -1055,7 +1055,7 @@ code_r0x0032d518:
     FUN_0018854c();
     break;
   case 0x1b:
-    iVar7 = FUN_002b89a4(0);
+    iVar7 = screenFaderIsSettled(0);
     if (iVar7 != 0) {
       func_0x002c58ac();
       uniteCreate();
@@ -1117,7 +1117,7 @@ code_r0x0032d518:
       uStack_658 = 1;
       uStack_654 = 1;
       gridNavigationConfigure(puVar17 + 0x90,uVar18,0xb,1);
-      FUN_00282f80(10);
+      campRebuildCategoryList(10);
       puVar2[8] = 6;
       puVar17 = DAT_0043da90;
       puVar9 = DAT_0043da90 + 6;
@@ -1144,7 +1144,7 @@ code_r0x0032d518:
     }
     else {
       iVar7 = 1;
-      FUN_002c1658();
+      inputQueryButtonState();
       if ((iVar7 != 0) && (iVar7 = messageMainIsWindowActive(), iVar7 != 0)) {
         FUN_0028971c();
         FUN_002bc01c(0x100016d);
@@ -1156,7 +1156,7 @@ code_r0x0032d518:
     }
     break;
   case 0x1f:
-    iVar7 = FUN_002b89a4(0);
+    iVar7 = screenFaderIsSettled(0);
     if (iVar7 != 0) {
       uniteScreenDestroy();
       func_0x002ae7cc();
@@ -1219,7 +1219,7 @@ code_r0x0032d518:
         else {
           FUN_0029e890((int)*(char *)(puVar2 + 0x2b),1);
           gameSetIconDisplayEnabled(1);
-          FUN_0029e788();
+          campMenuSessionReset();
         }
       }
       else {
@@ -1288,7 +1288,7 @@ code_r0x0032d518:
       uStack_658 = 1;
       uStack_654 = 1;
       gridNavigationConfigure(puVar17 + 0x90,uVar18,0xb,1);
-      FUN_00282f80(10);
+      campRebuildCategoryList(10);
       FUN_0026b9bc();
       iVar7 = dataTable15GetUnlockedEntryId((int)*(char *)(puVar2 + 0x26),
                            (int)*(char *)((int)puVar2 + *(char *)(puVar2 + 0x26) + 0x9b));
@@ -1354,18 +1354,18 @@ code_r0x0032d518:
       FUN_00298ad8();
       *(unsigned char *)(puVar2 + 0x96f) = 0;
     }
-    FUN_00299900(0);
+    campListShowSelectedHelp(0);
     goto code_r0x0032f574;
   case 0x24:
     iVar7 = FUN_00241990();
     if (iVar7 != 0) {
       if (cRam00493788 == '\0') {
-        cRam00493788 = FUN_002cf750();
+        cRam00493788 = uiQuestGetMapChangedFlag();
       }
       uRam0049378a = uiQuestProcessPendingUpdate();
       uRam0049378c = FUN_002eff34();
       iVar7 = FUN_00215cbc();
-      iVar19 = FUN_002cf738();
+      iVar19 = uiQuestGetPendingChangeFlag();
       iVar13 = FUN_00223cd8();
       iVar14 = func_0x002eff4c();
       iVar15 = func_0x002cf768();
@@ -1392,7 +1392,7 @@ code_r0x0032d518:
         frameTexCampSetMode(2);
       }
       else {
-        FUN_00299900(0);
+        campListShowSelectedHelp(0);
         puVar2[8] = 6;
         puVar17 = DAT_0043da90;
         puVar9 = DAT_0043da90 + 6;
@@ -1407,8 +1407,8 @@ code_r0x0032d518:
       if (cRam00493784 == '\0') {
         iVar7 = FUN_002c2950();
         *(unsigned short *)(iVar7 + 0x1e) = uRam0049378a;
-        FUN_00273d34();
-        FUN_00273c54();
+        mapUpdateLocationAvailability();
+        mapUpdatePendingAvailabilityFlags();
       }
     }
     break;
@@ -1425,7 +1425,7 @@ code_r0x0032d518:
       useCounterRelease();
       uVar18 = FUN_0029e908(puVar17 + 0xd);
       dataTable15GetUnlockedEntryId((int)*(char *)(puVar17 + 0x26),uVar18);
-      FUN_00299900();
+      campListShowSelectedHelp();
       FUN_002b8838(*(unsigned char *)((int)puVar17 + 0x31));
       if (puVar17[9] == 0xe) {
         FUN_0029dfc0(0);
@@ -1452,7 +1452,7 @@ code_r0x0032d518:
     else {
       iVar7 = useCounterGetCurrentValue();
       if (iVar7 != 0x4b) {
-        FUN_00282f80(uVar18);
+        campRebuildCategoryList(uVar18);
       }
     }
     break;
@@ -1472,7 +1472,7 @@ code_r0x0032d518:
     configUpdate();
     iVar7 = func_0x00192a78();
     if (iVar7 != 0) {
-      FUN_00299900(0);
+      campListShowSelectedHelp(0);
       FUN_002bd8e8(puVar2 + 0x1b5,3,0);
       puVar2[8] = 6;
       puVar9 = DAT_0043da90;
@@ -1487,7 +1487,7 @@ code_r0x0032d518:
     func_0x0019514c();
     iVar7 = func_0x001a168c();
     if (iVar7 != 0) {
-      FUN_00299900(0);
+      campListShowSelectedHelp(0);
       FUN_002bd8e8(puVar2 + 0x1b5,0);
       puVar2[8] = 6;
       puVar9 = DAT_0043da90;
@@ -1669,7 +1669,7 @@ code_r0x0032f574:
   case 0x35:
     iVar7 = func_0x001eb84c();
     if (iVar7 == 0) break;
-    iVar7 = FUN_0029ee54(puVar2 + 0x77);
+    iVar7 = gridNavigationGetItemCount(puVar2 + 0x77);
     if (iVar7 < 1) {
       uVar18 = 7;
     }

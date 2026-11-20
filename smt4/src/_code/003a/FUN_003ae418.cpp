@@ -15,8 +15,8 @@ static inline u32 findActionSlot(BtlUi *ui)
 }
 
 extern "C" {
-void FUN_002630e0(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
-s32 FUN_00293230(void *owner);
+void cameraProjectToScreen(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
+s32 btlScriptUnitIsIncapacitated(void *owner);
 
 // Reserve a screen-space action slot and mark the owner complete when the UI is already closing.
 u32 FUN_003ae418(u32 request, u32 *ownerFlags, f32 x, f32 y, f32 z)
@@ -31,13 +31,13 @@ u32 FUN_003ae418(u32 request, u32 *ownerFlags, f32 x, f32 y, f32 z)
     slot->progress = 0.0f;
     slot->active = 0;
     BattleUiActionVector position = {x, y, z};
-    FUN_002630e0(&position.x, 0, reinterpret_cast<const ProjectionMatrices *>(asdCameraGetSavedRenderPairs()), &position.x);
+    cameraProjectToScreen(&position.x, 0, reinterpret_cast<const ProjectionMatrices *>(asdCameraGetSavedRenderPairs()), &position.x);
     slot->projected = position;
     slot->velocity[0] = slot->velocity[1] = slot->velocity[2] = 0.0f;
     slot->acceleration[0] = slot->acceleration[1] = slot->acceleration[2] = 0.0f;
     slot->ownerFlags = ownerFlags;
     *ownerFlags &= ~0x2000000;
-    if (FUN_00293230(ui->owner)) {
+    if (btlScriptUnitIsIncapacitated(ui->owner)) {
         slot->active = 0;
         slot->state = 5;
         *slot->ownerFlags |= 0x2000000;

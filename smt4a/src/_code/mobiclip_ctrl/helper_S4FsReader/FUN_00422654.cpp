@@ -15,7 +15,7 @@ extern S4MovieAllocation DAT_005880f8;
 
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
 void nn_os_Thread_FinalizeImpl(u32 *thread);
-void FUN_001469a8(void *object);
+void addressSpaceRegionFree(void *object);
 void asdOperatorDelete(void *object);
 void asdMemFree(void *block);
 
@@ -47,10 +47,10 @@ void FUN_00422654(S4FsReader *reader)
     reader->threadJoined = 1;
     nn_os_Thread_FinalizeImpl(&reader->threadHandle);
     closeHandleAndClear(&reader->threadHandle);
-    FUN_001469a8(DAT_005880f8.object);
+    addressSpaceRegionFree(DAT_005880f8.object);
     void *object = DAT_005880f8.object;
     if (object != NULL) {
-        FUN_001469a8(object);
+        addressSpaceRegionFree(object);
         asdOperatorDelete(object);
     }
     DAT_005880f8.object = NULL;

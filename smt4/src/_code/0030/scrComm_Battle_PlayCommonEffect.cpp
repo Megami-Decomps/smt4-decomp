@@ -8,7 +8,7 @@
 extern "C" {
 extern u32 g_btlScriptUnit;
 extern u32 g_btlEvent;
-extern BtlEffectOwner *DAT_00435d18;
+extern BtlEffectOwner *g_btlAux;
 extern const char DAT_00400428[];
 extern const char DAT_00400434[];
 s32 scrGetArg(s32 index);
@@ -23,19 +23,19 @@ u32 scrComm_Battle_PlayCommonEffect(void)
 {
     u32 value = scrGetArg(0);
     s32 effect = scrGetArg(1);
-    if (isEntryUsable(g_btlEvent) && !FUN_0024550c(DAT_00435d18))
+    if (isEntryUsable(g_btlEvent) && !FUN_0024550c(g_btlAux))
         return 0;
     if (effect != 0) {
         {
             char name[32] = {0};
             __ARM_common_memcpy4_9(name, effect < 0 ? DAT_00400428 : DAT_00400434);
-            FUN_002454c4(DAT_00435d18, reinterpret_cast<u32>(name), 1, 0);
+            FUN_002454c4(g_btlAux, reinterpret_cast<u32>(name), 1, 0);
         }
         u32 unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
         BtlActionRecord *target = btlGetMainState()->actions;
         FUN_00245420(0, unit, target, value, effect, 0, -1);
         s32 member = target->memberId;
-        FUN_001b1a48(effect, unit, DAT_00435d18->slots, 0, member, member);
+        FUN_001b1a48(effect, unit, g_btlAux->slots, 0, member, member);
     }
     return 1;
 }

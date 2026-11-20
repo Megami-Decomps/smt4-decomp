@@ -31,7 +31,7 @@ typedef struct TexBindDesc {
 
 TexBindHandle *packageFindFileRefByName(u32 owner, u32 kind, u32 texture);
 u32 asdTMTexTableGetNode(s32 table, u32 texture);
-__softfp void FUN_001ab8e0(TexBindDesc *desc, u32 source, u32 a, u32 b, f32 scale);
+__softfp void requestParamsInitialize(TexBindDesc *desc, u32 source, u32 a, u32 b, f32 scale);
 void FUN_0019b770(TexBindItem *item, TexBindDesc *desc, u32 node, s32 flags);
 
 /* Returns item `index` of the model's banks (1000 items per bank). */
@@ -53,7 +53,7 @@ __softfp void texBindBindTableNode(u32 owner, u32 unused, u32 source, s32 table,
     u32 node = asdTMTexTableGetNode(table, texture);
     TexBindDesc desc;
 
-    FUN_001ab8e0(&desc, source, a, b, scale);
+    requestParamsInitialize(&desc, source, a, b, scale);
     s32 index = 1;
     if (table == 0x19) {
         index = 0;

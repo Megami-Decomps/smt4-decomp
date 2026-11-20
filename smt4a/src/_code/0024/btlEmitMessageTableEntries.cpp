@@ -23,7 +23,7 @@ extern void *g_btlAux;
 extern BattleMessageMask g_btlMessageFlagMasks;
 s32 libc_strlen(const char *);
 u64 *btlMainFindEntryByListedId(void *battle, s32 target);
-void FUN_004fdcd8(s32 value, s32, u32, s32, s32, u32, u16, const char *);
+void btlQueueMessageTableReflectAction(s32 value, s32, u32, s32, s32, u32, u16, const char *);
 
 // Emit the supported entries, filtering type 12 against the target's battle flags.
 void btlEmitMessageTableEntries(s32 actor, u32 unused, BattleMessageTable *table, s32 multiplier,
@@ -53,7 +53,7 @@ void btlEmitMessageTableEntries(s32 actor, u32 unused, BattleMessageTable *table
                         break;
                     }
                 }
-                FUN_004fdcd8(table->entries[index].value + value, 0, message, target, 5, side,
+                btlQueueMessageTableReflectAction(table->entries[index].value + value, 0, message, target, 5, side,
                              type, table->entries[index].text);
                 break;
             }

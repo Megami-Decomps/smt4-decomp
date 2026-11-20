@@ -23,7 +23,7 @@ void FUN_003edfd4(BtlMainStateA *state)
     if (entry != NULL) {
         u8 info[8];
         s32 effectId;
-        s32 category = FUN_0019acdc(entry->record->id, 1);
+        s32 category = unitMapIdToCategory(entry->record->id, 1);
         FUN_003f1b3c(state, category, 10, info, &effectId);
         state->specialEffect = FUN_0047f4cc(effectId, 1.0f, 0.707f, 0.707f);
     }

@@ -11,5 +11,5 @@ extern "C" s32 FUN_003e84fc(void)
     UnitCategoryRecord *record = unit->state->record;
     if (record == NULL)
         return 0;
-    return FUN_0019acdc(record->id, 0) == 4;
+    return unitMapIdToCategory(record->id, 0) == 4;
 }

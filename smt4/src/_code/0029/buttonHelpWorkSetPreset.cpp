@@ -1,0 +1,13 @@
+#include "ui/ButtonHelpGlobal.h"
+#include "shard/W6_W6Match1_BgmRequestChannel.h"
+
+extern "C" {
+
+void buttonHelpWorkSetPreset(u8 value)
+{
+    if (g_buttonHelp.work != NULL) {
+        g_buttonHelp.work->preset = value;
+    }
+}
+
+} /* extern "C" */

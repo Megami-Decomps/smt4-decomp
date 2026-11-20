@@ -95,7 +95,7 @@ void FUN_00203da4(MessageOpenWork *work, const char *text, u32 arg, s32 kind, u3
         work->state = 2;
     if ((flags & 1) == 0 || previousState == 0 || (previousFlags & 1) == 0 || work->unk14 == 0)
         work->unk14 = 0;
-    if ((bustupCutAnimIsStateFive() != 0 || FUN_00163e84(0) == 0) && work->state == 2)
+    if ((bustupCutAnimIsStateFive() != 0 || screenFaderIsSettled(0) == 0) && work->state == 2)
         work->state = 6;
 }
 }

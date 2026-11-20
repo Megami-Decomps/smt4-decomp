@@ -11,7 +11,7 @@ typedef struct Object {
 extern u8 DAT_0055aa64;
 
 int strDestroy(void *member);
-int FUN_002ecac4(int ptr);
+int deletingDtor_002ecac4(int ptr);
 int FUN_002fb028(int ptr);
 
 /* Destructor body: installs the vtable, then destroys the embedded sub-object and the bases. */
@@ -22,7 +22,7 @@ void FUN_0011de1c(Object *self)
     self->vtbl = &DAT_0055aa64;
     ptr = strDestroy(self->member);
     ptr = FUN_002fb028(ptr - 0x78);
-    FUN_002ecac4(ptr - 0x80);
+    deletingDtor_002ecac4(ptr - 0x80);
 }
 
 } /* extern "C" */

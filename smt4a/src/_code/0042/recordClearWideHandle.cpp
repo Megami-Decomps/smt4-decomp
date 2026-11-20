@@ -10,13 +10,13 @@ union WideHandle {
 };
 
 extern "C" {
-void FUN_00429d58(u64 handle);
+void vtableRunIfPresent(u64 handle);
 
 /* Release a nonzero wide handle and clear its owner. */
 void recordClearWideHandle(WideHandle *handle)
 {
     if (handle->value != 0) {
-        FUN_00429d58(handle->value);
+        vtableRunIfPresent(handle->value);
         handle->words.low = 0;
         handle->words.high = 0;
     }

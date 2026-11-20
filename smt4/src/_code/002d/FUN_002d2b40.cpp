@@ -12,7 +12,7 @@ extern "C" {
 void gameCounterAddSaturating(u32 flag, s32 value);
 void sequenceRequestDefer(s32 message, u32 argument);
 void sequenceRequestClearDeferred();
-void FUN_0027d8b4(u32 result);
+void mapSetActiveEntryId(u32 result);
 f32 mathDistanceBetweenPoints(f32 x1, f32 y1, f32 z1, f32 x2, f32 y2, f32 z2);
 void FUN_00253860(MapEnemyEntry *enemy, s32 state);
 f32 mathPositionHeadingDegrees(f32 x1, f32 y1, f32 z1, f32 x2, f32 y2, f32 z2);
@@ -34,7 +34,7 @@ static __inline void applyEnemyEncounter(MapEnemyEntry *enemy, MapSaveBlock *map
     } else if (forced) {
         sequenceRequestClearDeferred();
     }
-    FUN_0027d8b4(enemy->result);
+    mapSetActiveEntryId(enemy->result);
     if (enemy->count > 0) {
         g_gameState.event.encounterCount = enemy->count;
         g_gameState.event.encounterValue = enemy->value;

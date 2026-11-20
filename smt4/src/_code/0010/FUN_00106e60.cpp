@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } void_stack;
 
-extern unsigned int DAT_0044e368; /* 0x44e368 */
+extern unsigned int g_appletCloseReason; /* 0x44e368 */
 extern signed char g_appletSleepModuleState; /* 0x44e3b0 */
 extern romwright_code *DAT_0044e3e8; /* 0x44e3e8 */
 
@@ -60,7 +60,7 @@ void FUN_00106e60(void)
       }
     }
     nn_applet_CTR_detail_PrepareToJumpToHomeMenu();
-    FUN_00110180(0,0,DAT_0044e368);
+    FUN_00110180(0,0,g_appletCloseReason);
   }
   FUN_002c0d50(0,0,0,0,0);
   if (temp_v0 == '\0') {

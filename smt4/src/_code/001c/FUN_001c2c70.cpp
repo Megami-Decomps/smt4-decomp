@@ -7,13 +7,13 @@ extern "C" {
 int scalarTimelineUpdate(...);
 int FUN_00212224(...);
 int FUN_0026e768(...);
-int FUN_00291060(...);
-int FUN_0029118c(int, double, int);
-f32 FUN_00291234(s32 mode, s32 lower, s32 upper, u32 divisor);
-int FUN_00291310(double, float *, float *, int);
-int FUN_00291340(float *, float *, float *, float *);
+int effScalarChannelAdvance(...);
+int randomSignedRatio(int, double, int);
+f32 randomSignedScaledRange(s32 mode, s32 lower, s32 upper, u32 divisor);
+int quadEffectCreate(double, float *, float *, int);
+int effScalarKeyFindNextDistinct(float *, float *, float *, float *);
 int nodeTreeReleaseItemClearOwner(double);
-int FUN_00291620(...);
+int effRandomSignedValue(...);
 int nodeTreeReleaseItem(...);
 int _ZN2nw4math5MTX448IdentityEv(...);
 int FUN_002b2144(...);
@@ -64,13 +64,13 @@ extern int DAT_00433238; /* 0x433238 */
 /* Supplied declaration required: scalarTimelineUpdate. */
 /* Supplied declaration required: FUN_00212224. */
 /* Supplied declaration required: FUN_0026e768. */
-/* Supplied declaration required: FUN_00291060. */
-/* Supplied declaration required: FUN_0029118c. */
-/* Supplied declaration required: FUN_00291234. */
-/* Supplied declaration required: FUN_00291310. */
-/* Supplied declaration required: FUN_00291340. */
+/* Supplied declaration required: effScalarChannelAdvance. */
+/* Supplied declaration required: randomSignedRatio. */
+/* Supplied declaration required: randomSignedScaledRange. */
+/* Supplied declaration required: quadEffectCreate. */
+/* Supplied declaration required: effScalarKeyFindNextDistinct. */
 /* Supplied declaration required: nodeTreeReleaseItemClearOwner. */
-/* Supplied declaration required: FUN_00291620. */
+/* Supplied declaration required: effRandomSignedValue. */
 /* Supplied declaration required: nodeTreeReleaseItem. */
 extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: _ZN2nw4math5MTX448IdentityEv. */
@@ -157,7 +157,7 @@ void FUN_001c2c70(float *param_1)
       param_1[0x16] = param_1[0x62];
       param_1[0x17] = param_1[99];
       param_1[1] = temp_v14;
-      FUN_00291340(param_1 + 0x66,param_1 + 10,param_1 + 0xc,param_1 + 3);
+      effScalarKeyFindNextDistinct(param_1 + 0x66,param_1 + 10,param_1 + 0xc,param_1 + 3);
     }
     return;
   }
@@ -192,20 +192,20 @@ void FUN_001c2c70(float *param_1)
       temp_v10 = (float)VectorFloatToUnsigned(param_1[0x6a] * temp_v15,3);
       temp_v3 = param_1[0x94];
       temp_v11 = temp_v10;
-      FUN_00291310(temp_v3,param_1 + 0x19,param_1 + 0x66,1);
+      quadEffectCreate(temp_v3,param_1 + 0x19,param_1 + 0x66,1);
       param_1[(int)temp_v8 + 0x99] = temp_v3;
-      temp_v11 = FUN_00291234(0,(s32)(u32)temp_v10,10,10);
+      temp_v11 = randomSignedScaledRange(0,(s32)(u32)temp_v10,10,10);
       *(float *)((int)temp_v3 + 500) = temp_v11 * *(float *)((int)temp_v3 + 500);
       temp_v11 = (float)VectorSignedToFloat(param_1[0x6d],(unsigned char)(in_fpscr >> 0x16) & 3);
       *(float *)((int)temp_v3 + 0x34c) = temp_v11;
-      FUN_00291620(0,param_1[0x67],100);
+      effRandomSignedValue(0,param_1[0x67],100);
       temp_v10 = (float)VectorSignedToFloat(param_1[0x66],(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v11 = temp_v11 + temp_v10 * (float)temp_v13;
       *(float *)((int)temp_v3 + 0x340) = temp_v11;
       *(float *)((int)temp_v3 + 0x33c) = temp_v14;
-      FUN_0029118c(2,param_1[0x68],100);
+      randomSignedRatio(2,param_1[0x68],100);
       *(float *)((int)temp_v3 + 0x344) = temp_v11;
-      FUN_00291620(0,(int)*(short *)((int)temp_v3 + 0x172),100);
+      effRandomSignedValue(0,(int)*(short *)((int)temp_v3 + 0x172),100);
       *(float *)((int)temp_v3 + 0x36c) = temp_v11;
       temp_v0 = *(char *)((int)temp_v3 + 0x174);
       temp_v11 = (float)VectorSignedToFloat(param_1[0x6b],(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -310,7 +310,7 @@ void FUN_001c2c70(float *param_1)
   temp_v18 = param_1 + 6;
   temp_v17 = param_1 + 3;
   temp_v16 = param_1;
-  FUN_00291060(param_1 + 0x66,param_1 + 0xb,param_1 + 10,param_1 + 0xc);
+  effScalarChannelAdvance(param_1 + 0x66,param_1 + 0xb,param_1 + 10,param_1 + 0xc);
   temp_v17 = param_1 + 4;
   temp_v16 = param_1 + 1;
   temp_v18 = param_1 + 7;

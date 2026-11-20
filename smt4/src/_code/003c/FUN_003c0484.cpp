@@ -6,7 +6,7 @@
 #include "code/Code0029_Smt4.h"
 
 extern "C" {
-u32 FUN_0022a5d8(u32 message, BtlEntry *entry, u32 context);
+u32 btlSubmitAction(u32 message, BtlEntry *entry, u32 context);
 
 u32 FUN_003c0484(BtlEntry *entry, u32 ignoredConditions, u8 context)
 {
@@ -19,16 +19,16 @@ u32 FUN_003c0484(BtlEntry *entry, u32 ignoredConditions, u8 context)
         return 0;
     u32 result = 0;
     if ((entry->data.statusFlags & 8) != 0 && (ignoredConditions & 8) == 0) {
-        return FUN_0022a5d8(0x24, entry, context);
+        return btlSubmitAction(0x24, entry, context);
     }
     if ((entry->data.statusFlags & 0x200) != 0) {
-        return FUN_0022a5d8(0x13, entry, context);
+        return btlSubmitAction(0x13, entry, context);
     }
     if ((entry->data.statusFlags & 0x20) != 0) {
-        return FUN_0022a5d8(0x14, entry, context);
+        return btlSubmitAction(0x14, entry, context);
     }
     if (battleGetEntryHalfword(entry->ids[0], 13) > 0) {
-        return FUN_0022a5d8(0x1f, entry, context);
+        return btlSubmitAction(0x1f, entry, context);
     }
     if ((entry->flags & 8) == 0 || playerPadTestBit(1) == 0) {
         return result;

@@ -5,6 +5,6 @@
 extern "C" {
 
 /* Reads or updates the state of an object (0 when its disabled flag at 0x62 is set). */
-u32 FUN_0029ee54(const void *object);
+u32 gridNavigationGetItemCount(const void *object);
 
 } /* extern "C" */

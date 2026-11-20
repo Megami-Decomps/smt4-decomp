@@ -6,12 +6,12 @@ struct ResetState {
 };
 
 extern "C" {
-extern ResetState DAT_0044e930;
+extern ResetState g_moAllocationHooks;
 extern u32 DAT_0044e934;
 
 void videoResetSecondaryFilterState(void)
 {
-    DAT_0044e930.first = 0;
-    DAT_0044e930.second = 0;
+    g_moAllocationHooks.first = 0;
+    g_moAllocationHooks.second = 0;
 }
 }

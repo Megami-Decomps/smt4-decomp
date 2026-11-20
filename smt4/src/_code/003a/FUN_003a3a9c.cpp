@@ -7,8 +7,8 @@
 extern "C" {
 void buttonHelpSetText(u32, u32);
 void messageTargetSetValue(u32, u32);
-void FUN_0022fb64(SelectMenu *);
-s32 FUN_0027ee9c(void);
+void shopDrawSelectedItem(SelectMenu *);
+s32 inputConfirmPressed(void);
 u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *);
 u32 shopSlotGetPrice(const EquipmentMenuItem *);
 s32 btlRollClamped(u16, u32);
@@ -23,7 +23,7 @@ void ifTouchRegionClearAll(MenuView *);
 void releaseEntriesA(Obj55ca08 *); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: argument of type "Obj55ca08 *" is incompatible with parameter of type "Obj *")
 void ifTouchRegionRemove(void);
 s32 inputIsQuestCancelPressed(void);
-void FUN_0022fa2c(SelectMenu *);
+void shopMenuHandleCancel(SelectMenu *);
 
 void FUN_003a3a9c(SelectMenu *menu)
 {
@@ -61,9 +61,9 @@ void FUN_003a3a9c(SelectMenu *menu)
     }
     scrRunOpcodesStub(work->process);
     messageTargetSetValue(0, 0);
-    u32 accepted = FUN_0022fbc0(menu);
-    FUN_0022fb64(menu);
-    if (work->cursors[work->category].range.count > 0 && FUN_0027ee9c())
+    u32 accepted = shopApplyEntryAndCheckReady(menu);
+    shopDrawSelectedItem(menu);
+    if (work->cursors[work->category].range.count > 0 && inputConfirmPressed())
         accepted = 1;
     s32 category = work->category;
     u32 index = flaggedValueHolderGetTotal(&work->cursors[category].holder);
@@ -88,7 +88,7 @@ void FUN_003a3a9c(SelectMenu *menu)
     }
     if (inputIsQuestCancelPressed()) {
         FUN_002328b4();
-        FUN_0022fa2c(menu);
+        shopMenuHandleCancel(menu);
     }
 }
 }

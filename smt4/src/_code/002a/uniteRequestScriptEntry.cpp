@@ -18,10 +18,10 @@ u32 uniteRequestScriptEntry(int value)
                 if (((!(value == 7 || value == 8)) && (!(value == 9 || value == 10))) &&
                     (!(value == 0xb || value == 0xd))) {
                     if (value == 0xc) {
-                        FUN_002a0cc8(1);
+                        gameGlobalsSetSubScreenActive(1);
                     }
                 } else {
-                    FUN_002a0cc8(1);
+                    gameGlobalsSetSubScreenActive(1);
                     buttonHelpSetPreset(0x9e);
                 }
                 obj->scriptIV.pendingRequest = 0xffffffff;

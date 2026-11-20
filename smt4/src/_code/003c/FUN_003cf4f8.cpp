@@ -36,7 +36,7 @@ struct EnemyAiContext {
 
 extern "C" {
 void btlEntryBuildSummary(BattleActionInfo *info, BtlMainState *battle, u32 unit);
-s32 FUN_00229914(EnemyAiContext *context, EnemyTurnWork *work, s32 target);
+s32 btlUnitIsDeadAndUncopied(EnemyAiContext *context, EnemyTurnWork *work, s32 target);
 s32 randRange(u32 limit);
 
 /* Fills `out` (0x85 id/weight pairs, ids -1 when unused) with the targets the enemy may pick this
@@ -81,7 +81,7 @@ void FUN_003cf4f8(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate 
         power = info.powerMin;
     for (s32 target = 0; target < 0x6D; target++) {
         if (work->allowed[target] &&
-            ((context->battle->entries[target].flags & 0x40) || FUN_00229914(context, work, target)))
+            ((context->battle->entries[target].flags & 0x40) || btlUnitIsDeadAndUncopied(context, work, target)))
             work->allowed[target] = 0;
     }
     if (pickOne) {

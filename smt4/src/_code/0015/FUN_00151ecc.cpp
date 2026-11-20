@@ -1,4 +1,4 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_002ac780; not written yet. */
+/* NON_MATCHING: found outside every function: branched to by soundArchiveFileEntryIsLoaded; not written yet. */
 /* romwright 0.5.0 decompilation of FUN_00151ecc for reference (not compiled; its own view of the boundaries):
 
 unsigned int FUN_00151ecc(int param_1,unsigned int param_2)

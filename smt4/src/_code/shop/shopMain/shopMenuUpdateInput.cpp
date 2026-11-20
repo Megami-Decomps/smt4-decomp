@@ -26,11 +26,11 @@ struct ShopScreen {
     /* 0x15D4E */ s16 touchRegionLeft;
 };
 
-void FUN_0022fbc0(ShopScreen *screen);
-void FUN_0022fb64(ShopScreen *screen);
-void FUN_0022fcb8(ShopScreen *screen, s32 flag);
-void FUN_0022faf8(void);
-void FUN_0022fa2c(ShopScreen *screen);
+void shopApplyEntryAndCheckReady(ShopScreen *screen);
+void shopDrawSelectedItem(ShopScreen *screen);
+void shopScreenRebuildForSelection(ShopScreen *screen, s32 flag);
+void shopPlaySelectionChangeSound(void);
+void shopMenuHandleCancel(ShopScreen *screen);
 void FUN_00232848(void);
 void FUN_002328b4(void);
 void FUN_00233240(void *window, s32 flag);
@@ -43,18 +43,18 @@ s32 ifTouchGetSelectionModeForRegion(s32 region);
 // Shop menu input: move the selection left or right, confirm, or cancel.
 void shopMenuUpdateInput(ShopScreen *screen)
 {
-    FUN_0022fbc0(screen);
-    FUN_0022fb64(screen);
+    shopApplyEntryAndCheckReady(screen);
+    shopDrawSelectedItem(screen);
     if (inputIsQuestRepeatRight() || ifTouchGetSelectionModeForRegion(screen->touchRegionRight) == 6) {
         screen->selection = DAT_0044e020[screen->selection].right;
-        FUN_0022fcb8(screen, 1);
-        FUN_0022faf8();
+        shopScreenRebuildForSelection(screen, 1);
+        shopPlaySelectionChangeSound();
         return;
     }
     if (inputIsQuestRepeatLeft() || ifTouchGetSelectionModeForRegion(screen->touchRegionLeft) == 6) {
         screen->selection = DAT_0044e020[screen->selection].left;
-        FUN_0022fcb8(screen, 1);
-        FUN_0022faf8();
+        shopScreenRebuildForSelection(screen, 1);
+        shopPlaySelectionChangeSound();
         return;
     }
     if (inputIsQuestMenuPressed()) {
@@ -64,7 +64,7 @@ void shopMenuUpdateInput(ShopScreen *screen)
         screen->stateTimer = 0;
     } else if (inputIsQuestCancelPressed()) {
         FUN_002328b4();
-        FUN_0022fa2c(screen);
+        shopMenuHandleCancel(screen);
     }
 }
 

@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002b4b94(unsigned int, unsigned int);
+int soundRequestQueueDequeueUntilToken(unsigned int, unsigned int);
 int FUN_002b4dc4(int, unsigned int, unsigned int);
 int nw_snd_SoundPlayer_StopAllSound(unsigned int, int);
 int nw_snd_internal_driver_StreamBufferPool_Finalize(int);
 int nw_ut_internal_LinkListImpl_erase_2AC900(int, unsigned int, int);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002b4b94. */
+/* Supplied declaration required: soundRequestQueueDequeueUntilToken. */
 /* Supplied declaration required: FUN_002b4dc4. */
 extern unsigned int soundRequestQueueFlush(unsigned int, unsigned int);
 extern unsigned int soundRequestQueueGetInstance(void);
@@ -41,7 +41,7 @@ void FUN_0012f844(int param_1)
   }
   temp_v0 = soundRequestQueueGetInstance();
   temp_v1 = soundRequestQueueFlush(temp_v0,1);
-  FUN_002b4b94(temp_v0,temp_v1);
+  soundRequestQueueDequeueUntilToken(temp_v0,temp_v1);
   *(unsigned int *)(param_1 + 0x20) = 0;
   *(unsigned int *)(param_1 + 0x24) = 0;
   nw_snd_internal_driver_StreamBufferPool_Finalize(param_1 + 0x88);

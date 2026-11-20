@@ -76,7 +76,7 @@ struct EffAsdLight {
 #define NW_ARRAY_MODE_ALLOCATOR 0x40000000
 
 extern "C" {
-extern u32 DAT_00464b7c;
+extern u32 g_asdModelSceneRoots;
 extern u32 g_asdModelTransformBuilder;
 extern s32 g_asdLightCount;
 
@@ -152,7 +152,7 @@ void FUN_0031ce4c(EffAsdLight *effect)
         slot += 7;
         g_asdLightCount++;
     }
-    sceneTraverserVisit(DAT_00464b7c, g_asdModelTransformBuilder);
+    sceneTraverserVisit(g_asdModelSceneRoots, g_asdModelTransformBuilder);
 }
 
 } /* extern "C" */

@@ -7,7 +7,7 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
-void FUN_00359974(s32 index, u32 a, u32 b, u32 c);
+void entryTableResetAndInit(s32 index, u32 a, u32 b, u32 c);
 void textFormatFullWidthNumber(char *output, s32 value);
 void battleAttributeFormatName(char *out, s32 kind);
 void skillFormatTargetLabel(char *text, s32 target);
@@ -29,7 +29,7 @@ void FUN_0032d0c8(RelativeDirectory *directory, u32 index, u16 devilId, u32 extr
     work->text.useDirectoryText = 1;
     work->textVisible = 1;
     if (devil->attack.minHits == devil->attack.maxHits) {
-        FUN_00359974(37, devil->attack.minHits, 0xFFFFFFFF, 0);
+        entryTableResetAndInit(37, devil->attack.minHits, 0xFFFFFFFF, 0);
     } else {
         char low[8];
         char high[8];

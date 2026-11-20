@@ -2,11 +2,11 @@
 
 extern "C" {
 
-void FUN_00345cd4(void);
+void titleSceneDrawEffectEditorMenu(void);
 
 s32 FUN_00388a60(void)
 {
-    FUN_00345cd4();
+    titleSceneDrawEffectEditorMenu();
     return 0;
 }
 

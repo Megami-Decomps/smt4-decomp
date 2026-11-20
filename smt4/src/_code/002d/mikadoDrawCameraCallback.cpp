@@ -2,7 +2,7 @@
 
 extern "C" {
 extern MikadoGlobals g_mikado;
-s32 FUN_003ba63c(void);
+s32 mikadoCameraDrawView(void);
 
 // Draw the camera while the mikado controller is running or shutting down.
 s32 mikadoDrawCameraCallback(u32 handle)
@@ -14,7 +14,7 @@ s32 mikadoDrawCameraCallback(u32 handle)
         if (work != NULL)
             camera = work->camera;
         if (work != NULL && camera != NULL)
-            FUN_003ba63c();
+            mikadoCameraDrawView();
     }
     return 0;
 }

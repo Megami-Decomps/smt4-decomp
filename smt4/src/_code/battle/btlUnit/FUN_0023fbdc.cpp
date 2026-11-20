@@ -58,10 +58,10 @@ struct ReflectMainState {
 };
 
 extern "C" {
-extern ReflectMainState *DAT_00435d18;
+extern ReflectMainState *g_btlAux;
 extern ReflectLayouts DAT_00439a20;
 void FUN_0024082c(BtlCamera *btl, s32 frames);
-void FUN_00254f58(ReflectBattle *battle);
+void battleInitializeTurnOrder(ReflectBattle *battle);
 s32 btlFindNthActiveSpecialEntry(ReflectBattle *battle, s32 mode);
 void btlSetSelectedListedValue(s32 value);
 void FUN_003ae720(BtlUi *block, s32 mode);
@@ -85,13 +85,13 @@ void FUN_0023fbdc(ReflectTask *task, ReflectBattle *battle)
             FUN_0024082c(g_btlMain, 120);
         }
         if ((*phase & 2) != 0) {
-            FUN_00254f58(battle);
+            battleInitializeTurnOrder(battle);
             *phase |= 0x200000;
             if (btlFindNthActiveSpecialEntry(battle, 1) < 0 && (battle->flags2 & 0x20) == 0) {
                 btlSetSelectedListedValue(3);
             }
         } else {
-            FUN_00254f58(battle);
+            battleInitializeTurnOrder(battle);
             *phase |= 0x200000;
             FUN_003ae720(g_btlUiBlock, 0);
         }
@@ -100,12 +100,12 @@ void FUN_0023fbdc(ReflectTask *task, ReflectBattle *battle)
         FUN_00240678(task, battle);
         return;
     }
-    if (task->flags == 0 && (DAT_00435d18->flags & 0x400) != 0) {
+    if (task->flags == 0 && (g_btlAux->flags & 0x400) != 0) {
         g_btlMain->flags |= 0x4000;
-        FUN_00240614(reinterpret_cast<BattleVersionResources *>(DAT_00435d18));
+        FUN_00240614(reinterpret_cast<BattleVersionResources *>(g_btlAux));
         task->flags |= 2;
     }
-    if ((task->flags & 2) != 0 && FUN_003db7b4(DAT_00435d18) != 0) {
+    if ((task->flags & 2) != 0 && FUN_003db7b4(g_btlAux) != 0) {
         ReflectUnit *waiting[50];
         s32 waitingCount = 0;
         for (s32 i = 4; i < 54; i++) {
@@ -146,7 +146,7 @@ void FUN_0023fbdc(ReflectTask *task, ReflectBattle *battle)
             FUN_0024082c(g_btlMain, 120);
         }
         if ((*phase & 2) == 0) {
-            FUN_00254f58(battle);
+            battleInitializeTurnOrder(battle);
             *phase |= 0x200000;
             FUN_003ae720(g_btlUiBlock, 0);
         }

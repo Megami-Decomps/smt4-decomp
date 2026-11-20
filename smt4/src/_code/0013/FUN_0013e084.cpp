@@ -8,7 +8,7 @@ int osVirtToPhysAddress(...);
 int vramAreaGetBaseAddress(int);
 
 typedef int romwright_code(...);
-extern unsigned char DAT_004211d0; /* 0x4211d0 */
+extern unsigned char g_ifaceHolderVtable; /* 0x4211d0 */
 
 /* Supplied declaration required: osVirtToPhysAddress. */
 /* Supplied declaration required: vramAreaGetBaseAddress. */
@@ -41,7 +41,7 @@ unsigned int * FUN_0013e084(unsigned int *param_1,int param_2,int *param_3,int *
       return (unsigned int *)0x0;
     }
     puVar2[0xb] = param_2;
-    *puVar2 = (unsigned int)&DAT_004211d0;
+    *puVar2 = (unsigned int)&g_ifaceHolderVtable;
     puVar2[1] = (unsigned int)param_3;
     puVar2[2] = (unsigned int)param_1;
     *(unsigned char *)(puVar2 + 0xc) = 0;

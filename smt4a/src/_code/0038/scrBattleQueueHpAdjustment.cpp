@@ -7,7 +7,7 @@
 extern "C" {
 extern u32 g_btlScriptUnit;
 u32 scrGetArg(u32);
-void FUN_004fc094(s32, u32, s32, BattleRosterRecordA *, s32, s32, s32, s32,
+void btlAdjustPropertyAndQueueAction(s32, u32, s32, BattleRosterRecordA *, s32, s32, s32, s32,
                   s32, s32, s32, s32, s32, s32, s32, s32, s32, s32,
                   s32, s32, s32, s32, s32, s32, s32, s32);
 void btlQueueActionMessage(s32, u32, u32, s32, s32, s32, s32);
@@ -20,7 +20,7 @@ u32 scrBattleQueueHpAdjustment(void)
     btlSlotManagerResetStates(btlGetMainState());
     s32 maxHp = btlGetMainState()->entries->data.maxHp;
     s32 hp = btlGetMainState()->entries->data.hp;
-    FUN_004fc094(0, unit, 0, btlGetMainState()->roster, 0, -1, amount, -1,
+    btlAdjustPropertyAndQueueAction(0, unit, 0, btlGetMainState()->roster, 0, -1, amount, -1,
         hp, maxHp, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1);
     btlQueueActionMessage(0, unit, 0x1000257, 0, 0, 0, 0);
     return 1;

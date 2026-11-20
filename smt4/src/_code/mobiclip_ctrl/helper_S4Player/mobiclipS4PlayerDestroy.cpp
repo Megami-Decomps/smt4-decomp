@@ -5,9 +5,9 @@
 extern "C" {
 
 int asdMemFreeNonNull(int);
-int FUN_002c3f5c(...);
+int addressSpaceRegionFree(...);
 int nn_os_LightEvent_Signal(int);
-int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
+int svcWaitSynchronizationN(unsigned char *, int *, int, int, unsigned int, unsigned int);
 int asdMemFree(unsigned int);
 int resultHandleFailure(void);
 int mobiclipDeblockerRelease(int);
@@ -24,9 +24,9 @@ extern unsigned int DAT_0044d158; /* 0x44d158 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: asdMemFreeNonNull. */
-/* Supplied declaration required: FUN_002c3f5c. */
+/* Supplied declaration required: addressSpaceRegionFree. */
 /* Supplied declaration required: nn_os_LightEvent_Signal. */
-/* Supplied declaration required: FUN_002c40f8. */
+/* Supplied declaration required: svcWaitSynchronizationN. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: mobiclipDeblockerRelease. */
@@ -49,7 +49,7 @@ void mobiclipS4PlayerDestroy(int param_1)
     nn_os_LightEvent_Signal(param_1 + 0x20);
     uStack_20 = *(unsigned int *)(param_1 + 0x28);
     puVar1 = temp_v2;
-    FUN_002c40f8(puVar1,&uStack_20,1,0,0xffffffff,0xffffffff);
+    svcWaitSynchronizationN(puVar1,&uStack_20,1,0,0xffffffff,0xffffffff);
     if ((int)puVar1 < 0) {
       resultHandleFailure();
     }
@@ -59,10 +59,10 @@ void mobiclipS4PlayerDestroy(int param_1)
       software_interrupt(0x23);
       *(unsigned int *)(param_1 + 0x28) = 0;
     }
-    FUN_002c3f5c((*(int *)((unsigned char *)&DAT_0044d158 + 0x4)));
+    addressSpaceRegionFree((*(int *)((unsigned char *)&DAT_0044d158 + 0x4)));
     temp_v0 = (*(int *)((unsigned char *)&DAT_0044d158 + 0x4));
     if ((*(int *)((unsigned char *)&DAT_0044d158 + 0x4)) != 0) {
-      FUN_002c3f5c();
+      addressSpaceRegionFree();
       asdMemFreeNonNull(temp_v0);
     }
     (*(int *)((unsigned char *)&DAT_0044d158 + 0x4)) = 0;

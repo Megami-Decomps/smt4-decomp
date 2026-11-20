@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00114474` (_code @ 0x114474, 0x1800 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "shard/W6_W6Match5_DevilSort.h"
 #include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "ui/MessageMain.h"
@@ -10,10 +11,10 @@ int FUN_00124324(...);
 int FUN_00126058(void);
 int msgBoxFlagsSetBit7(...);
 
-int FUN_001269fc(void);
+int bustupCutAnimFinish(void);
 int buttonHelpSetEnabled(...);
 int buttonHelpSetContext(...);
-int FUN_002b8454(...);
+int buttonHelpSetSlot(...);
 int buttonHelpSetPreset(...);
 int buttonHelpGetStatus(void);
 int titleOverlaySetModeAnimation(...);
@@ -28,7 +29,7 @@ int msgBoxFlagsClear(...);
 int recordPackedValue(unsigned int);
 int eventQueueAddUnique(int);
 int eventQueueAddUniqueIfValid(...);
-int FUN_002c1658(...);
+int inputQueryButtonState(...);
 int objFlagsSetBits(unsigned int, int);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(int, int);
@@ -54,19 +55,17 @@ extern signed char DAT_0049382a; /* 0x49382a */
 /* Supplied declaration required: gameDataCounterSpend. */
 /* Supplied declaration required: FUN_00126058. */
 extern int msgBoxIsState2(unsigned int);
-/* Supplied declaration required: FUN_001269fc. */
+/* Supplied declaration required: bustupCutAnimFinish. */
 /* Supplied declaration required: msgBoxFlagsSetBit7. */
 /* Supplied declaration required: buttonHelpSetEnabled. */
 /* Supplied declaration required: buttonHelpSetContext. */
-/* Supplied declaration required: FUN_002b8454. */
+/* Supplied declaration required: buttonHelpSetSlot. */
 extern unsigned short ifTouchRegionAddRequested(unsigned int, unsigned int);
-extern int FUN_002b8660(void);
 extern int FUN_002b8694(void);
 extern int lmapMainIsRunning(void);
 extern int aocJobIsValid(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: buttonHelpGetStatus. */
-extern int FUN_002b89a4(unsigned int);
 /* Supplied declaration required: titleOverlaySetModeAnimation. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 extern int padIsButtonRepeat(unsigned int);
@@ -85,7 +84,7 @@ extern int querySlotHasHandle(void);
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern int jobGetWork(void);
 extern int slotIsActive(unsigned int);
-/* Supplied declaration required: FUN_002c1658. */
+/* Supplied declaration required: inputQueryButtonState. */
 /* Supplied declaration required: objFlagsSetBits. */
 /* Supplied declaration required: mathInterpolateTimed. */
 extern int mapMainIsBusy(void);
@@ -296,11 +295,11 @@ unsigned int FUN_00114474(void)
       }
       if (*(char *)(temp_v3 + 0x83) == '\0') {
         temp_v6 = 0;
-        FUN_002c1658(0,1);
+        inputQueryButtonState(0,1);
         if (temp_v6 == 0) {
           if (*(char *)(temp_v3 + 0x83) == '\0') {
             temp_v6 = 9;
-            FUN_002c1658(9,2);
+            inputQueryButtonState(9,2);
             if ((temp_v6 != 0) ||
                ((*(char *)(temp_v3 + 0x83) == '\0' && (temp_v6 = slotIsActive(6), temp_v6 != 0))))
             goto LAB_001149c8;
@@ -375,7 +374,7 @@ LAB_001149c8:
                  (temp_v4 = slotIsActive(5), temp_v4 != 0)) {
                 if (*(char *)(temp_v3 + 0x83) == '\0') {
                   temp_v4 = 0;
-                  FUN_002c1658(0,1);
+                  inputQueryButtonState(0,1);
                   if ((temp_v4 == 0 && !temp_v10) || (0 < *(int *)(temp_v3 + 0x60))) goto LAB_00114d48;
                   *(unsigned char *)(temp_v3 + 0x30) = 0;
                   *(unsigned char *)(temp_v3 + 0x31) = 0;
@@ -406,7 +405,7 @@ LAB_001149c8:
 LAB_00114d48:
                   if (*(char *)(temp_v3 + 0x30) != '\0') {
                     temp_v4 = 1;
-                    FUN_002c1658();
+                    inputQueryButtonState();
                     if (temp_v4 != 0) {
                       temp_v12 = *(char *)(temp_v3 + 0x31) == '\0';
                       if (!temp_v12) {
@@ -602,10 +601,10 @@ joined_r0x00114a10:
       }
       uiSpriteAdvanceAnimation((UiSpriteState *)(DAT_0043e18c + 0x2f4));
       temp_v6 = 0;
-      FUN_002c1658(0,1);
+      inputQueryButtonState(0,1);
       if (temp_v6 == 0) {
         temp_v6 = 9;
-        FUN_002c1658(9,2);
+        inputQueryButtonState(9,2);
         if (((temp_v6 != 0) || (temp_v6 = slotIsActive(6), temp_v6 != 0)) || (DAT_00493828 != '\0'))
         goto LAB_001151a8;
 LAB_001151d8:
@@ -657,7 +656,7 @@ LAB_001151e4:
                     if ((((temp_v6 == 0) && (temp_v6 = lmapMainIsRunning(), temp_v6 == 0)) &&
                         ((temp_v6 = mapMainIsBusy(), temp_v6 == 0 &&
                          (temp_v6 = questCenterPollShutdown(), temp_v6 == 0)))) ||
-                       ((temp_v6 = FUN_002b8694(), temp_v6 != 0 || (temp_v6 = FUN_002b8660(), temp_v6 == 0))
+                       ((temp_v6 = FUN_002b8694(), temp_v6 != 0 || (temp_v6 = resultIsIdle(), temp_v6 == 0))
                        )) {
                       temp_v14 = 0x9b;
                     }
@@ -803,7 +802,7 @@ LAB_00115134:
                 buttonHelpSetPreset();
                 temp_v5 = 0;
                 do {
-                  FUN_002b8454(temp_v5 & 0xff,*(unsigned char *)(temp_v3 + temp_v5 + 0xa13),
+                  buttonHelpSetSlot(temp_v5 & 0xff,*(unsigned char *)(temp_v3 + temp_v5 + 0xa13),
                                *(unsigned short *)(temp_v3 + temp_v5 * 2 + 0xa1a),1);
                   temp_v5 = temp_v5 + 1;
                 } while ((int)temp_v5 < 6);
@@ -852,7 +851,7 @@ LAB_00115134:
                 buttonHelpSetPreset();
                 temp_v5 = 0;
                 do {
-                  FUN_002b8454(temp_v5 & 0xff,*(unsigned char *)(temp_v3 + temp_v5 + 0xa13),
+                  buttonHelpSetSlot(temp_v5 & 0xff,*(unsigned char *)(temp_v3 + temp_v5 + 0xa13),
                                *(unsigned short *)(temp_v3 + temp_v5 * 2 + 0xa1a),1);
                   temp_v5 = temp_v5 + 1;
                 } while ((int)temp_v5 < 6);
@@ -939,8 +938,8 @@ LAB_001158ec:
     }
     break;
   case 6:
-    FUN_001269fc();
-    if ((temp_v5 != 0) && (temp_v6 = FUN_002b89a4(0), temp_v6 != 0)) {
+    bustupCutAnimFinish();
+    if ((temp_v5 != 0) && (temp_v6 = screenFaderIsSettled(0), temp_v6 != 0)) {
 LAB_00114fbc:
       temp_v1 = 2;
 LAB_00114fc0:
@@ -972,7 +971,7 @@ joined_r0x001159d0:
 LAB_001159f0:
     if (*(char *)(temp_v3 + 0x83) != '\0') {
       temp_v6 = 7;
-      FUN_002c1658(7,2);
+      inputQueryButtonState(7,2);
       if (temp_v6 == 0) {
         *(unsigned char *)(temp_v3 + 0x83) = 0;
         if ((*(unsigned int *)(temp_v3 + 0xc) & 0x20) != 0) goto LAB_00115ad8;
@@ -983,7 +982,7 @@ LAB_001159f0:
       temp_v6 = buttonHelpGetStatus();
       if ((temp_v6 != 0x51) && (g_messageMain.enabled != 0)) {
         temp_v6 = 7;
-        FUN_002c1658(7,2);
+        inputQueryButtonState(7,2);
         if (temp_v6 != 0) {
           temp_v6 = msgBoxIsState2(*(unsigned int *)(temp_v3 + 4));
           if (temp_v6 != 0) {

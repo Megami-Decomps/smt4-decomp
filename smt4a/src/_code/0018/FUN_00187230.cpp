@@ -31,7 +31,7 @@ struct ShaderLightState {
 
 extern "C" {
 void matrix34RotateVector(f32 *destination, const f32 *matrix, const f32 *source);
-f32 FUN_001b63b0(f32 angle);
+f32 phaseCosine(f32 angle);
 
 /* Rows of a 3x4 matrix applied to a point, and to a direction (no translation). */
 static __inline f32 transformX(const f32 *m, f32 x, f32 y, f32 z)
@@ -124,7 +124,7 @@ void FUN_00187230(u8 *state, const f32 *viewA, const f32 *viewB)
             lights->color[i][3] = (light->flags & 2) != 0 ? 1.0f : 0.0f;
             f32 angle = light->coneAngle;
             if (angle > 0.0f && angle < 3.1415927f) {
-                f32 term = FUN_001b63b0(angle * (256.0f / 6.2831855f));
+                f32 term = phaseCosine(angle * (256.0f / 6.2831855f));
                 lights->cone[i][0] = light->intensity;
                 lights->cone[i][1] = term;
                 lights->cone[i][2] = 0.0f;

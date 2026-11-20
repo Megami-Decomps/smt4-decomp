@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001372c8(unsigned int, int, int, unsigned int, int, int, unsigned int);
-int FUN_002bc1e4(void);
+int asdGxCmdBufferFinalizeBlock(void);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ extern signed char DAT_004e3be0; /* 0x4e3be0 */
 extern signed char DAT_004e3be1; /* 0x4e3be1 */
 
 /* Supplied declaration required: FUN_001372c8. */
-/* Supplied declaration required: FUN_002bc1e4. */
+/* Supplied declaration required: asdGxCmdBufferFinalizeBlock. */
 
 
 int gxCopyFramebufferToSurface(unsigned int param_1,int param_2,unsigned int param_3,int param_4)
@@ -65,7 +65,7 @@ int gxCopyFramebufferToSurface(unsigned int param_1,int param_2,unsigned int par
   if (DAT_004e3bd8 == 0x8058) {
     temp_v7 = 4;
   }
-  FUN_002bc1e4();
+  asdGxCmdBufferFinalizeBlock();
   if (temp_v9 != 0) {
     temp_v2 = (temp_v8 >> 4) * temp_v7;
     temp_v3 = temp_v2 * 0x40;

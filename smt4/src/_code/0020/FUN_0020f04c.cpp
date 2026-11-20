@@ -27,12 +27,12 @@ extern s32 DAT_00435d98;
 
 void btlActionFreeData(void);
 void FUN_0026a958(u8 value);
-void FUN_001e1874(BattleMainState* state);
+void btlUiSessionDestroy(BattleMainState* state);
 void scrResultStopJobAndReleaseUi(void);
-u32 FUN_002c40f8(s32* signalled, s32* handles, s32 count, s32 waitAll, u32 timeoutLow, u32 timeoutHigh);
+u32 svcWaitSynchronizationN(s32* signalled, s32* handles, s32 count, s32 waitAll, u32 timeoutLow, u32 timeoutHigh);
 void resultHandleFailure(void);
 void nn_os_Thread_FinalizeImpl(u32* thread);
-void FUN_002c3f5c(u32 object);
+void addressSpaceRegionFree(u32 object);
 void asdMemFreeNonNull(u32 object);
 void mdlPartsRelease(void *model);
 void FUN_00338fb0(BattleMainState* state);
@@ -66,12 +66,12 @@ void FUN_0020f04c(void)
     *reinterpret_cast<u8*>(&w[BTL_WORD_ACTIVE_FLAG]) = 1;
     btlActionFreeData();
     FUN_0026a958(0);
-    if (g_btlUiBlock != 0) FUN_001e1874(state);
+    if (g_btlUiBlock != 0) btlUiSessionDestroy(state);
     scrResultStopJobAndReleaseUi();
 
     s32 signalled;
     s32 handle = w[BTL_WORD_THREAD];
-    if (FUN_002c40f8(&signalled, &handle, 1, 0, 0xffffffff, 0xffffffff) >> 31) resultHandleFailure();
+    if (svcWaitSynchronizationN(&signalled, &handle, 1, 0, 0xffffffff, 0xffffffff) >> 31) resultHandleFailure();
     *reinterpret_cast<u8*>(&w[BTL_WORD_THREAD_DONE]) = 1;
     nn_os_Thread_FinalizeImpl(&w[BTL_WORD_THREAD]);
     if (w[BTL_WORD_THREAD] != 0) {
@@ -79,10 +79,10 @@ void FUN_0020f04c(void)
         w[BTL_WORD_THREAD] = 0;
     }
     if (w[BTL_WORD_THREAD_STACK] != 0) {
-        FUN_002c3f5c(w[BTL_WORD_THREAD_STACK]);
+        addressSpaceRegionFree(w[BTL_WORD_THREAD_STACK]);
         u32 stack = w[BTL_WORD_THREAD_STACK];
         if (stack != 0) {
-            FUN_002c3f5c(stack);
+            addressSpaceRegionFree(stack);
             asdMemFreeNonNull(stack);
         }
         w[BTL_WORD_THREAD_STACK] = 0;

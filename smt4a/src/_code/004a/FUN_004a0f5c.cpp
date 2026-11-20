@@ -8,7 +8,7 @@ extern "C" {
 
 int dataTable01GetRecordWithAocOverride(unsigned int);
 int gameGetSlotRecord(...);
-int FUN_003df57c(int, int);
+int skillGetCostWithRankReduction(int, int);
 int skillGetAdjustedCost(int, int);
 
 /* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
@@ -17,8 +17,8 @@ extern int gameGetPlayerData(void);
 extern int gameGetSlotTable(void);
 extern int gameSlotTableFindFree(void);
 /* Supplied declaration required: FUN_002b5c88. */
-/* Supplied declaration required: FUN_003df57c. */
-extern int FUN_004a0404(void);
+/* Supplied declaration required: skillGetCostWithRankReduction. */
+extern int playerCanAffordRecoverySkill(void);
 /* Supplied declaration required: skillGetAdjustedCost. */
 
 unsigned int FUN_004a0f5c(void)
@@ -39,7 +39,7 @@ unsigned int FUN_004a0f5c(void)
   unsigned char temp_v10;
   char acStack_a8 [132];
   
-  temp_v1 = FUN_004a0404();
+  temp_v1 = playerCanAffordRecoverySkill();
   if (temp_v1 == 0) {
     return 0;
   }
@@ -199,12 +199,12 @@ LAB_004a11b0:
     }
   }
   temp_v1 = gameGetPlayerData();
-  temp_v2 = FUN_003df57c(0x8c,1);
+  temp_v2 = skillGetCostWithRankReduction(0x8c,1);
   if (*(short *)(temp_v1 + 0x2c) <= temp_v2) {
     return 0;
   }
   FUN_002b5c88();
-  temp_v0 = FUN_003df57c(0x8c,1);
+  temp_v0 = skillGetCostWithRankReduction(0x8c,1);
   temp_v0 = *(short *)(temp_v1 + 0x2c) - temp_v0;
   *(short *)(temp_v1 + 0x2c) = temp_v0;
   if (temp_v0 < 0) {

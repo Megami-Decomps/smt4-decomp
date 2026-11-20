@@ -21,7 +21,7 @@ int messageSlotSet(int);
 int scrCommMessageSetMode(...);
 int libc_strcpy(unsigned int [32], unsigned int);
 int sysMemClear(unsigned int [32], int);
-int FUN_00359974(int, unsigned int, unsigned int, int);
+int entryTableResetAndInit(int, unsigned int, unsigned int, int);
 int messageDismissNumericBannerForced(void);
 int gameFlagSlotSetEnableBit(...);
 int idOwnerGetRecordHalf(void); // declcheck: local (romwright prototype; its types do not fit classes/Obj5333c0.h: including it fails to compile)
@@ -54,7 +54,7 @@ extern int scrGetCommandFrame(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: scrSetStringSlot. */
 extern int panelIsMissingOrFlagClear(void);
-/* Supplied declaration required: FUN_00359974. */
+/* Supplied declaration required: entryTableResetAndInit. */
 /* Supplied declaration required: messageArmMenuAnimation. */
 /* Supplied declaration required: messageDismissNumericBannerForced. */
 extern int obj04StateIs4(void);
@@ -127,7 +127,7 @@ unsigned int FUN_002c4b48(void)
           dataTable01GetRecordWithAocOverride(temp_v5);
           libc_strcpy(temp_v12,temp_v5);
           scrSetStringSlot(8, reinterpret_cast<const char *>(temp_v12));
-          FUN_00359974(0x18,*(unsigned int *)(temp_v9 + 0x104),0xffffffff,0);
+          entryTableResetAndInit(0x18,*(unsigned int *)(temp_v9 + 0x104),0xffffffff,0);
           temp_v6 = gameGetSlotTable();
           temp_v10 = 0;
           do {
@@ -155,7 +155,7 @@ unsigned int FUN_002c4b48(void)
         dataFindKindRecordWithAocOverrides(temp_v14,1);
         libc_strcpy(temp_v12,temp_v5);
         scrSetStringSlot(0, reinterpret_cast<const char *>(temp_v12));
-        FUN_00359974(0x18,temp_v8,0xffffffff,0);
+        entryTableResetAndInit(0x18,temp_v8,0xffffffff,0);
       }
     }
     else {

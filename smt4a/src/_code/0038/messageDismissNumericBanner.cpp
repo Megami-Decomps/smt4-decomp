@@ -3,7 +3,7 @@
 #include "shard/W6_W6Match2_EffectEditor.h"
 
 extern "C" {
-void FUN_00165088(MessageWindowA *window, u32 mode);
+void uiPanelCloseStateSection(MessageWindowA *window, u32 mode);
 }
 
 static __inline void messageNumericReset(MessageWindowA *banner, s32 value)
@@ -17,7 +17,7 @@ static __inline void messageNumericReset(MessageWindowA *banner, s32 value)
 static __inline void messageRequestClose(MessageWindowA *window)
 {
     if (window != NULL && window->state != 0) {
-        FUN_00165088(window, window->mode);
+        uiPanelCloseStateSection(window, window->mode);
         window->state = 3;
         window->closeRequested = 0;
     }

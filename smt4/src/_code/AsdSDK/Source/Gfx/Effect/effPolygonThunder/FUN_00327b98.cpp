@@ -50,15 +50,15 @@ struct ThunderParams {
 
 extern "C" {
 extern u8 DAT_0047372c[];
-extern const char DAT_0041052c[]; /* effect source file name (__FILE__) */
+extern const char g_effPolygonThunderSourceFileName[]; /* effect source file name (__FILE__) */
 
 void *memAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment, u32 zero);
-ThunderStrip *FUN_0024505c(u32 segments, const u8 *signature, u32 valuesPerVertex, u32 vertexSize);
+ThunderStrip *effGeomBuildGridMesh(u32 segments, const u8 *signature, u32 valuesPerVertex, u32 vertexSize);
 
 /* Allocates the strip block of `bytes` bytes, recording the allocation site first. */
 static ThunderBlock *allocStripBlock(u32 bytes)
 {
-    asdDebugTrace(DAT_0041052c, 1181);
+    asdDebugTrace(g_effPolygonThunderSourceFileName, 1181);
     return static_cast<ThunderBlock *>(memAlloc(0x10000, 0x100, 0, bytes, 0x10, 1));
 }
 
@@ -89,7 +89,7 @@ ThunderBlock *FUN_00327b98(ThunderParams *params)
 
     ThunderEntry *entry = block->entries;
     for (u32 strip = 0; strip < stripCount; strip++) {
-        ThunderStrip *bolt = FUN_0024505c((u16)params->segments, DAT_0047372c, 5, 0x48);
+        ThunderStrip *bolt = effGeomBuildGridMesh((u16)params->segments, DAT_0047372c, 5, 0x48);
         entry->strip = bolt;
         u32 vertexCount = bolt->vertexValues / 5;
         ThunderVertex *vertex = bolt->buffer->vertices;

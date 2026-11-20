@@ -10,7 +10,7 @@ void FUN_003d498c(u32 id, s32 enabled);
 void buttonHelpSetSelectedId(s32 sound);
 s32 partyEntryBitsBit4(u32 id);
 u32 questHasSpecialDetailPage(u32 id);
-s32 FUN_002f7730(s32 index, u32 id);
+s32 questGetDisplayState(s32 index, u32 id);
 void questMarkSelectedSpecialDetail(void);
 s32 campIsState85(void);
 void FUN_00202400(void);
@@ -23,7 +23,7 @@ static __inline void uiQuestSelectSpecialDetailPage(u16 id)
     if (!partyEntryBitsBit4(id) && questHasSpecialDetailPage(id)) {
         s32 index;
         for (index = 0; index < quest->listState.count; ++index) {
-            if (FUN_002f7730(index, id) == 3)
+            if (questGetDisplayState(index, id) == 3)
                 break;
         }
         if (index >= quest->listState.count)

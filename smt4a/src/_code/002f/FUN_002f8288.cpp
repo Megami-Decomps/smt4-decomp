@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_002c7bb0(...);
+int skillApplyToTarget(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,9 +16,9 @@ extern int g_partyPanel; /* 0x57f268 */
 
 extern unsigned int gameGetSlotRecord(unsigned int);
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_002c7bb0. */
+/* Supplied declaration required: skillApplyToTarget. */
 /* Supplied declaration required: statusPreviewMpChange. */
-extern int FUN_003df57c(unsigned short, unsigned int);
+extern int skillGetCostWithRankReduction(unsigned short, unsigned int);
 extern int skillGetAdjustedCost(unsigned int, unsigned short);
 
 
@@ -62,18 +62,18 @@ void FUN_002f8288(void)
     } while (temp_v4 < 0x18);
   }
   else {
-    temp_v4 = FUN_003df57c(*(unsigned short *)(temp_v0 + 0x36),1);
+    temp_v4 = skillGetCostWithRankReduction(*(unsigned short *)(temp_v0 + 0x36),1);
     *(int *)(*(int *)(temp_v0 + 0xa10) + 0x44) = -temp_v4;
   }
   if (*(char *)(temp_v0 + 0x9c0) != '\0') {
-    FUN_002c7bb0((int)*(short *)(temp_v0 + 0x38),0xffffffff,*(unsigned short *)(temp_v0 + 0x36),&temp_v6);
+    skillApplyToTarget((int)*(short *)(temp_v0 + 0x38),0xffffffff,*(unsigned short *)(temp_v0 + 0x36),&temp_v6);
     *(unsigned int *)(*(int *)(temp_v0 + 0xa10) + 0x40) = temp_v6;
   }
   temp_v4 = 0;
   do {
     temp_v3 = (int)*(char *)(temp_v1 + temp_v4 + 0x1ca0);
     if (-1 < temp_v3) {
-      FUN_002c7bb0((int)*(short *)(temp_v0 + 0x38),temp_v3,*(unsigned short *)(temp_v0 + 0x36),&temp_v6);
+      skillApplyToTarget((int)*(short *)(temp_v0 + 0x38),temp_v3,*(unsigned short *)(temp_v0 + 0x36),&temp_v6);
       *(unsigned int *)(*(int *)(temp_v0 + temp_v4 * 4 + 0xa14) + 0x40) = temp_v6;
     }
     temp_v4 = temp_v4 + 1;
@@ -82,7 +82,7 @@ void FUN_002f8288(void)
   do {
     temp_v4 = *(int *)(temp_v0 + temp_v1 * 8 + 0xa80);
     if (-1 < temp_v4) {
-      FUN_002c7bb0((int)*(short *)(temp_v0 + 0x38),temp_v4,*(unsigned short *)(temp_v0 + 0x36),&temp_v6);
+      skillApplyToTarget((int)*(short *)(temp_v0 + 0x38),temp_v4,*(unsigned short *)(temp_v0 + 0x36),&temp_v6);
       *(unsigned int *)(*(int *)(temp_v0 + temp_v1 * 4 + 0xa20) + 0x40) = temp_v6;
     }
     temp_v1 = temp_v1 + 1;

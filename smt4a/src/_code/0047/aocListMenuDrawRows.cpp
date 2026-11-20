@@ -68,7 +68,7 @@ extern "C" void aocListMenuDrawRows(ListMenu *menu)
     efctSetSpeed(1.0f);
     renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, false));
     texDrawCompositeSprite(2, 0x2F, 7, 0, 0, 0x81);
-    s32 first = FUN_002a482c(menu->holder);
+    s32 first = resourceDispatchTaggedOperation(menu->holder);
     FUN_0031d174(menu->holder);
     s32 rows = menu->rowCount;
     for (s32 row = 0; row < rows; row++) {
@@ -79,7 +79,7 @@ extern "C" void aocListMenuDrawRows(ListMenu *menu)
     }
     texDrawTableEntryAtStoredOrigin(2, 0x2F, 0x51, 0, 0, 0x81);
     s32 last = FUN_0031d174(menu->holder);
-    size40Set(&menu->slider, FUN_002a482c(menu->holder), last);
+    size40Set(&menu->slider, resourceDispatchTaggedOperation(menu->holder), last);
     numberPanelDraw(&menu->slider, 0x81);
     renderStackPop(&g_renderCtx->stackA);
     gxResetColorQuadToWhite();

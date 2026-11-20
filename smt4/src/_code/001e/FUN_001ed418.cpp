@@ -5,12 +5,12 @@ extern "C" {
 
 s32 eventSetUnderMessageFade(u32 color, s32 first, s32 second, f32 scale);
 s32 scrGetCommandFrame(void);
-s32 FUN_002c1d5c(void);
+s32 eventIsSkipping(void);
 
 /* Script command: starts the under-message fade for command frame 0 (fade in) or 9 (fade out); done at once for frame 0x15 or when a fade is already running. */
 u32 FUN_001ed418(void)
 {
-    if (FUN_002c1d5c() != 0) {
+    if (eventIsSkipping() != 0) {
         return 1;
     }
     if (scrGetCommandFrame() == 0) {

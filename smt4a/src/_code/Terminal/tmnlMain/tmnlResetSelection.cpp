@@ -7,11 +7,11 @@ extern "C" {
 int asdSequenceRequest(int id, u32 *data, int size);
 
 extern TmnlGlobalsA g_tmnl;
-extern u32 DAT_0056fd34;
+extern u32 g_tmnlSelectionParam;
 
 void tmnlResetSelection(void)
 {
-    asdSequenceRequest(0xd, &DAT_0056fd34, 4);
+    asdSequenceRequest(0xd, &g_tmnlSelectionParam, 4);
     g_tmnl.selection = 0xffffffff;
 }
 

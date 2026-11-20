@@ -14,7 +14,7 @@ void FUN_0033440c(u32);
 void gameGlobalsQueueValues(UnitRecord *, s32);
 void FUN_0034aac8(s32);
 void FUN_0023b45c(s32);
-void FUN_002f0384(s32);
+void statusCameraRestore(s32);
 void objBSetWordByIndex(s32, u16);
 
 /* Restore the selected snapshot, its display name and the live session's mode flags. */
@@ -42,14 +42,14 @@ void FUN_0041eb94(SavedUnitSelection *work)
     if (work->changes[work->selected] == 0) {
         FUN_0033449c(0);
         FUN_0023b45c(0);
-        FUN_002c8538(1);
-        FUN_002f0384(0);
+        gameGlobalsSetOverlayActive(1);
+        statusCameraRestore(0);
         work->changed = 0;
     } else {
         FUN_0033449c(0);
         FUN_0023b45c(1);
-        FUN_002c8538(1);
-        FUN_002f0384(1);
+        gameGlobalsSetOverlayActive(1);
+        statusCameraRestore(1);
         work->changed = 1;
     }
     objBSetWordByIndex(1, reinterpret_cast<const PlayerDataA *>(work->unit)->equipment[4]);

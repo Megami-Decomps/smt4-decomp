@@ -1,12 +1,12 @@
 /* NON_MATCHING: compiler fuses lerps into VMLA and schedules scalar loads instead of retail's vector-wide operations. */
 #include "gfx/CameraPoseBlend.h"
 
-extern "C" f32 FUN_00227280(u32, u32, u32);
+extern "C" f32 easeEvaluate(u32, u32, u32);
 
 // Blend the current camera pose from its saved endpoints using the transition curve.
 extern "C" void FUN_003d62a0(CameraPoseBlendView *camera, u32 elapsed)
 {
-    f32 blend = FUN_00227280(0, camera->duration, elapsed);
+    f32 blend = easeEvaluate(0, camera->duration, elapsed);
     camera->current.scalar = (camera->end.scalar - camera->start.scalar) * blend + camera->start.scalar;
     camera->current.target.x = (camera->end.target.x - camera->start.target.x) * blend + camera->start.target.x;
     camera->current.target.y = (camera->end.target.y - camera->start.target.y) * blend + camera->start.target.y;

@@ -12,7 +12,7 @@ int FUN_001e2be4(void);
 int FUN_002562e4(int, int);
 int partyApplyNonlethalAilmentDamage(int, int);
 int FUN_0026413c(void);
-int FUN_0027f48c(int, int);
+int mapProjectPositionToGround(int, int);
 int padGetNormalizedAnalogStick(float *, unsigned int [12], int);
 int __hardfp_atan2f(void);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
@@ -53,7 +53,7 @@ extern int g_lmapScene; /* 0x447e88 */
 extern unsigned int FUN_00256540(void);
 extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0026413c. */
-/* Supplied declaration required: FUN_0027f48c. */
+/* Supplied declaration required: mapProjectPositionToGround. */
 /* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: libm_cosf. */
@@ -177,7 +177,7 @@ void FUN_002fb988(int param_1)
       *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v14 * temp_v8;
       *(unsigned int *)(param_1 + 0xc0) = 1;
       if (g_gameState.unk3CC == '\0') {
-        FUN_0027f48c(temp_v2 + 0x28,temp_v2 + 0x34);
+        mapProjectPositionToGround(temp_v2 + 0x28,temp_v2 + 0x34);
       }
       g_gameState.map.unk54 = g_gameState.map.unk54 + (float)((unsigned long long)temp_v13 >> 0x20);
       if ((int)g_gameState.map.unk54 >= 0x44bb8001) {

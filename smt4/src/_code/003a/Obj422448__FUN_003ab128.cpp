@@ -113,7 +113,7 @@ void Obj422448::FUN_003ab128()
     }
     case 5:
         index = flaggedValueHolderGetTotal(flow->entryHolder);
-        FUN_0029c43c(-flow->entries[index].value, 0);
+        messageBannerSetCountdown(-flow->entries[index].value, 0);
         flow->phase = 7;
         flow->state = 0;
         return;

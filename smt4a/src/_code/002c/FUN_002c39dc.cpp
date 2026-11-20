@@ -25,7 +25,7 @@ int FUN_0026f3a0(void);
 void partyPanelRefreshSelectedItemValues(void*, int);
 int FUN_0028c2ec(...);
 int FUN_002ade88(void);
-int FUN_002c8538(int);
+int gameGlobalsSetOverlayActive(int);
 int partyPanelRefreshItemPreview(void);
 int FUN_002f8288(void);
 int FUN_00333694(...);
@@ -63,7 +63,7 @@ extern unsigned int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: scrollListSetSelectionTracked. */
 /* Supplied declaration required: FUN_002ade88. */
-/* Supplied declaration required: FUN_002c8538. */
+/* Supplied declaration required: gameGlobalsSetOverlayActive. */
 /* Supplied declaration required: FUN_002cb84c. */
 /* Supplied declaration required: partyPanelRefreshItemPreview. */
 /* Supplied declaration required: FUN_002f8288. */
@@ -130,7 +130,7 @@ void FUN_002c39dc(int param_1,unsigned int param_2,unsigned short param_3)
   switch(param_1) {
   case 0:
     *(unsigned int *)(temp_v0 + 0x20) = 1;
-    FUN_002c8538(0);
+    gameGlobalsSetOverlayActive(0);
     break;
   case 1:
     temp_v3 = 0;
@@ -144,7 +144,7 @@ void FUN_002c39dc(int param_1,unsigned int param_2,unsigned short param_3)
       *(unsigned short *)(temp_v0 + temp_v9 * 8 + 0xa84) = 0;
     } while (temp_v2 < 0x18);
     *(unsigned int *)(temp_v0 + 0x20) = 1;
-    FUN_002c8538(0);
+    gameGlobalsSetOverlayActive(0);
     break;
   case 2:
   case 4:

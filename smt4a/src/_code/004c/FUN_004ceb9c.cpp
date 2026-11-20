@@ -29,7 +29,7 @@ void messageBannerRestartOrClear(void);
 s32 tableGroupFindEntryIndex(u32 tableGroup, const char *name);
 void scrScriptProcessStartEntry(u32 script, s32 index);
 s32 messageMainGetValue(void);
-void FUN_0037c8e4(s32 enabled, s32 mode);
+void messageBannerInitCounter(s32 enabled, s32 mode);
 void panelSetTarget(s32 value, s32 mode);
 void FUN_004cdbd4(FountainConfirmationMenuView *menu);
 void messageDismissNumericBanner(s32 mode);
@@ -69,7 +69,7 @@ extern "C" void FUN_004ceb9c(FountainConfirmationMenuView *menu)
         if (messageMainGetValue() == 0) {
             startFountainConfirmationEntry(menu, "fountian_select");
             if (FUN_0034919c() == 0) {
-                FUN_0037c8e4(1, 0);
+                messageBannerInitCounter(1, 0);
                 panelSetTarget(-menu->prices[menu->selection], 0);
             }
             menu->state = 6;

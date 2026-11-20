@@ -15,48 +15,48 @@ void spriteStartAnimationByIndex(u8 *part, s32 value);
 void soundPlaySeUnpanned(u32 message);
 void asdMemFree(SearchWin00200a18 *block);
 void jobStop(u32 job, s32 flags);
-s32 FUN_002c1d5c(void);
+s32 eventIsSkipping(void);
 
-extern SearchWin00200a18 *DAT_0043e170; /* 0x43e170 */
+extern SearchWin00200a18 *g_searchWin; /* 0x43e170 */
 
-/* Search window update. Returns 1 once it has closed (and with no window, when FUN_002c1d5c holds), 0 otherwise. */
+/* Search window update. Returns 1 once it has closed (and with no window, when eventIsSkipping holds), 0 otherwise. */
 u32 searchWinUpdate(void)
 {
-    SearchWin00200a18 *win = DAT_0043e170;
+    SearchWin00200a18 *win = g_searchWin;
     SearchWin00200a18 *current;
     u32 result = 0;
 
     if (win != NULL) {
-        s32 closing = FUN_002c1d5c();
+        s32 closing = eventIsSkipping();
         s32 stateA;
 
         if (closing != 0) {
-            current = DAT_0043e170;
+            current = g_searchWin;
             jobStop(current->job, 0);
             asdMemFree(current);
-            DAT_0043e170 = NULL;
+            g_searchWin = NULL;
             return 1;
         }
         stateA = win->stateA;
         if (stateA != 3) {
             if (win->stateB != 3 && stateA != 4) {
-                if (DAT_0043e170->stateA == 2) {
-                    DAT_0043e170->stateA = 3;
+                if (g_searchWin->stateA == 2) {
+                    g_searchWin->stateA = 3;
                 } else {
-                    DAT_0043e170->stateB = 3;
+                    g_searchWin->stateB = 3;
                 }
-                spriteStartAnimationByIndex(DAT_0043e170->part, 1);
+                spriteStartAnimationByIndex(g_searchWin->part, 1);
                 soundPlaySeUnpanned(0x1000181);
             } else if (stateA == 4) {
-                current = DAT_0043e170;
+                current = g_searchWin;
                 jobStop(current->job, 0);
                 asdMemFree(current);
                 result = 1;
-                DAT_0043e170 = NULL;
+                g_searchWin = NULL;
             }
         }
     } else {
-        if (FUN_002c1d5c() != 0) {
+        if (eventIsSkipping() != 0) {
             result = 1;
         }
     }

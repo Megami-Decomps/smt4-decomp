@@ -3,14 +3,14 @@
 
 extern "C" {
 
-u32 FUN_003bbcf4(Obj420a1c *messageBox);
+u32 cecResolveAvailableBox(Obj420a1c *messageBox);
 
 u32 cecProcessGetObject(void)
 {
     CecProcess *process = g_cecProcess;
     u32 result = 0;
     if (process != NULL) {
-        result = FUN_003bbcf4(process->messageBox);
+        result = cecResolveAvailableBox(process->messageBox);
     }
     return result;
 }

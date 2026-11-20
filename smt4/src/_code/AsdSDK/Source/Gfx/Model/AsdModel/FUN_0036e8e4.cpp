@@ -29,7 +29,7 @@ struct VertexDataList {
 extern "C" {
 extern AsdAllocatorObject *DAT_00471c40;
 extern void *(*g_gfxAllocateCallback)(u32 memoryType, u32 flags, void *tag, u32 size);
-void FUN_002a666c(void *source, void *destination, u32 size);
+void asdGxQueueMemoryTransfer(void *source, void *destination, u32 size);
 void nnnstdMemCpy(void *destination, const void *source, u32 size);
 
 // Gives each vertex data block of the resource a header record and, for the memory types that need
@@ -66,7 +66,7 @@ void FUN_0036e8e4(VertexDataList **resource, AsdAllocatorObject *allocator)
             if (kind == 0x2020000 || kind == 0x2030000) {
                 u32 pool = memoryType & 0x30000;
                 void *memory = g_gfxAllocateCallback(pool, 0x102, tag, size);
-                FUN_002a666c(block->source.get(), memory, size);
+                asdGxQueueMemoryTransfer(block->source.get(), memory, size);
                 block->deviceMemory = memory;
                 block->deviceMemoryType = pool;
             }

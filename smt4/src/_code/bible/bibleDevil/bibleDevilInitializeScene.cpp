@@ -35,7 +35,7 @@ struct BibleInitFields {
 struct BibleDevilTaskWork { BibleScreen *screen; };
 struct BibleDevilTasks { BibleDevilTaskWork *work; s32 selected; };
 extern "C" {
-extern BibleDevilTasks DAT_0043d9c8;
+extern BibleDevilTasks g_bibleDevilCallbackContext;
 void entryTableClear(void *table);
 void menuSetModeAndResetTransitions(s32);
 u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, BibleDevilTaskWork *, u32);
@@ -44,7 +44,7 @@ void uiCallbackFree(u32);
 s32 FUN_003ac738(u32);
 s32 btlDevilListFinishDrawCallback(u32);
 void rectangleInitializeSelection(u32 *, s32, s32, s32);
-void FUN_0022d434(BibleScreen *);
+void bibleDevilListRefresh(BibleScreen *);
 void partyIdsReset(u16 *);
 void devilListMarkOrInsertQualifiedEntry(u16 *, u16);
 s32 rangeLimitMin(FlaggedEntry *);
@@ -66,18 +66,18 @@ void bibleDevilInitializeScene(BibleScreen *screen)
     menuSetModeAndResetTransitions(2);
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\bible\\bibleDevil.cpp", 200);
     BibleDevilTaskWork *work = (BibleDevilTaskWork *)asdMemAlloc(0x100, 0x100, 0, sizeof(BibleDevilTaskWork), 1);
-    DAT_0043d9c8.work = work;
+    g_bibleDevilCallbackContext.work = work;
     work->screen = screen;
     fields->calculate = asdProcessCreateSimple(reinterpret_cast<const s8 *>("BIBLE DEVIL CALC"), 2, 0, 0, uiCallbackUpdate, uiCallbackFree, reinterpret_cast<u32>(work));
-    fields->drawUpper = taskCreateDraw("BIBLE DEVIL UP", 111, 1, 0, FUN_003ac738, NULL, DAT_0043d9c8.work, fields->calculate);
-    fields->drawLower = taskCreateDraw("BIBLE DEVIL DOWN", 230, 1, 0, btlDevilListFinishDrawCallback, NULL, DAT_0043d9c8.work, fields->calculate);
+    fields->drawUpper = taskCreateDraw("BIBLE DEVIL UP", 111, 1, 0, FUN_003ac738, NULL, g_bibleDevilCallbackContext.work, fields->calculate);
+    fields->drawLower = taskCreateDraw("BIBLE DEVIL DOWN", 230, 1, 0, btlDevilListFinishDrawCallback, NULL, g_bibleDevilCallbackContext.work, fields->calculate);
     rectangleInitializeSelection(fields->rectangle, 320, 0, 29);
     // Retail forwards an uninitialized allocation owner in r4.
     void *allocationOwner;
     Obj42242c *controller = new (allocationOwner) Obj42242c;
     controller->rectangle = fields->rectangle;
     fields->controller = controller;
-    FUN_0022d434(screen);
+    bibleDevilListRefresh(screen);
     partyIdsReset(fields->pending);
     devilListMarkOrInsertQualifiedEntry(fields->pending, 0);
     s32 count = rangeLimitMin(&fields->selection.cursor);
@@ -95,7 +95,7 @@ void bibleDevilInitializeScene(BibleScreen *screen)
     screen->state = 0;
     screen->stateArg = 0;
     uniteReleaseModel();
-    DAT_0043d9c8.selected = -1;
+    g_bibleDevilCallbackContext.selected = -1;
     FUN_0022d1a8(screen);
 }
 }

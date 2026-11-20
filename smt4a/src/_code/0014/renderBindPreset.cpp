@@ -2,7 +2,7 @@
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 extern "C" {
-void FUN_0017d294(void);
+void asdGxCmdBufferFinalizeBlock(void);
 void FUN_0017ce88(u32 colorBuffer, s32 width, s32 height, u32 format, u32 displayAddress,
     u32 displayWidth, u32 displayHeight, u32 parameter, u32 mode, u32 zero, u32 alignment);
 
@@ -34,7 +34,7 @@ void renderBindPreset(u32 kind)
         if (!g_asdGxPresets.fullResolution[activeIndex]) {
             mode = 0x500;
         }
-        FUN_0017d294();
+        asdGxCmdBufferFinalizeBlock();
         FUN_0017ce88(framebuffer->color.buffer, framebuffer->width,
             framebuffer->height, framebuffer->color.format, display->addresses[selected],
             display->width, display->height, g_asdGxPresets.parameter, mode, 0, 8);

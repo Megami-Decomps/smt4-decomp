@@ -17,7 +17,7 @@ int _ZN9Obj55aff4C1EPKt(unsigned char [8], int);
 int _ZN9Obj55aff4D1Ev(unsigned char [8]);
 int _ZN18OnlineResultRecordaSERKS_(int, unsigned int);
 int FUN_002ea12c(void);
-int FUN_002ea704(void);
+int watcherGetEnabledFlag(void);
 int FUN_002f3378(unsigned char [36]);
 int FUN_002fd784(unsigned int, unsigned char [36]);
 int FUN_00442100(void);
@@ -47,7 +47,7 @@ extern int FUN_002e789a(int);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 /* Supplied declaration required: FUN_002ea12c. */
-/* Supplied declaration required: FUN_002ea704. */
+/* Supplied declaration required: watcherGetEnabledFlag. */
 /* Supplied declaration required: FUN_002f3378. */
 extern int onlineOwnerHasPendingJob(int);
 extern unsigned int FUN_002f815c(void);
@@ -125,11 +125,11 @@ void FUN_0012284c(unsigned int param_1,int param_2,int param_3,char *param_4,int
                 (temp_v1 = onlineOwnerHasPendingJob2(param_2), temp_v1 == 0)) &&
                (temp_v1 = onlineOwnerHasPendingJob(param_2), temp_v1 == 0)) {
               temp_v0 = FUN_002f815c();
-              FUN_002ea704();
+              watcherGetEnabledFlag();
               FUN_0010a108(temp_v0);
               *(short *)(param_2 + 0x7c) = (short)temp_v0;
               FUN_002f3378(temp_v4);
-              temp_v0 = FUN_002ea704();
+              temp_v0 = watcherGetEnabledFlag();
               FUN_002fd784(temp_v0,temp_v4);
               _ZN9Obj55aff4C1EPKt(temp_v6,param_5);
               FUN_0010d0cc();

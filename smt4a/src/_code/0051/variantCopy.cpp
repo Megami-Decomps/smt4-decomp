@@ -6,6 +6,6 @@ extern "C" {
 u32 variantCopy(Variant *destination, const Variant *source, void *allocator)
 {
     u32 token = source->value;
-    return FUN_005153f0(destination, source, &token, allocator);
+    return variantCopyWithToken(destination, source, &token, allocator);
 }
 }

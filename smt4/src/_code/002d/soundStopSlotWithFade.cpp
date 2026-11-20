@@ -13,13 +13,13 @@ struct SoundSlotOwner {
 }
 
 extern "C" {
-extern SoundSlotOwner DAT_004e2f68;
+extern SoundSlotOwner g_asdSndSlotSelection;
 void basicSoundStopOrFadeOut(SoundHandle *handle, s32 frames);
 
 /* Stops an indexed sound, allowing it to fade over the requested frame count. */
 s32 soundStopSlotWithFade(u32 index, s32 frames)
 {
-    SoundSlots *slots = DAT_004e2f68.slots;
+    SoundSlots *slots = g_asdSndSlotSelection.slots;
     s32 result = 0;
     if (index >= 4 || slots == NULL) {
         return result;

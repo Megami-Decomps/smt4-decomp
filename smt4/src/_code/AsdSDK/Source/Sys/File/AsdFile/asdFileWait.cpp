@@ -1,13 +1,14 @@
 #include "AsdSDK/Source/Sys/File/AsdFile.h"
+#include "nn/fnd/TimeSpan.h"
 
 extern "C" {
 extern u32 g_asdFileEvent; /* nn::os::LightEvent the worker thread sleeps on */
-extern u8 LAB_002dc6c0;
 
 void nn_os_LightEvent_Signal(u32 *event);
-void threadSleepDuration(void *wait, s32 timeout);
+void threadSleepDuration(nn::fnd::TimeSpan delay);
 
-/* Waits until a request has finished (DONE or FAILED), waking the worker thread each round. */
+/* Waits until a request has finished (DONE or FAILED), waking the worker thread and
+ * sleeping 3 ms each round. */
 void asdFileWait(AsdFileRequest *request)
 {
     for (;;) {
@@ -15,7 +16,7 @@ void asdFileWait(AsdFileRequest *request)
             return;
         }
         nn_os_LightEvent_Signal(&g_asdFileEvent);
-        threadSleepDuration(&LAB_002dc6c0, 0);
+        threadSleepDuration(nn::fnd::TimeSpan::FromMilliSeconds(3));
     }
 }
 

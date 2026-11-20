@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a46c(unsigned char *, char *, int);
+int stringCopyTruncated(unsigned char *, char *, int);
 int svcSleepThread(int, int);
 int __aeabi_vec_ctor_nocookie_nodtor(int, unsigned char *, int);
 int FUN_0042cc10(unsigned int *);
@@ -34,7 +34,7 @@ extern int DAT_00646070; /* 0x646070 */
 extern int *DAT_00646074; /* 0x646074 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_0019a46c. */
+/* Supplied declaration required: stringCopyTruncated. */
 /* Supplied declaration required: svcSleepThread. */
 extern unsigned int libc_strlen(char *);
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
@@ -74,7 +74,7 @@ int FUN_0043f440(int *param_1,int param_2,unsigned int param_3,unsigned int para
       nn_os_CriticalSection_Leave((unsigned int)&DAT_0064603c);
     }
     else {
-      FUN_0019a46c(&DAT_00646064,pcVar9,9);
+      stringCopyTruncated(&DAT_00646064,pcVar9,9);
       temp_v2 = 0;
       DAT_00646060 = temp_v0;
       if (0 < param_2) {

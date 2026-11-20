@@ -31,7 +31,7 @@ void FUN_0013ae58(void)
         u8 unk1E7;
         DuckSettings duck;
     };
-    VoiceStateView *state = (VoiceStateView *)&DAT_0061978c;
+    VoiceStateView *state = (VoiceStateView *)&g_soundObjectTable;
     if (jyoucyuGetTableEntry(1) == 0) {
         FUN_00143800();
         state->volume = 0x60;

@@ -72,7 +72,7 @@ s32 gameFlagIsSet(u32 id);
 s32 resultGetListEntryLabel(void *list, ResultListEntry *entry, s32 type);
 s32 packageListCountSectionRecords(void *aocSystem, s32 kind);
 ResultListEntry *contentEntryGetFromFilesByKind(void *aocSystem, s32 kind, s32 index);
-s32 FUN_004b75d0(ResultMenu *menu);
+s32 transformInterpolationStep(ResultMenu *menu);
 void uiClampScrollOffset(ResultMenu *menu, f32 *offset);
 s32 gameStateIsFlagSetAndLarge(void);
 s32 menu4CScrollToKind(void *list, s32 kind);
@@ -193,7 +193,7 @@ void FUN_004b6bc4(ResultMenu *menu, s32 type, s32 group)
     menu->focus[1] = y;
     menu->unk88 = 0;
     menu->unk8c = 1;
-    FUN_004b75d0(menu);
+    transformInterpolationStep(menu);
     menu4CReset(menu->list);
 }
 

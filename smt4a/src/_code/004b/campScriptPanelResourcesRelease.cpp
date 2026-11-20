@@ -8,7 +8,7 @@ extern "C" {
 void asdMemFree(void *memory);
 void asdTMTexTableReleaseNode(s32 table, u32 node);
 void cameraResourcesRelease(u32 handle);
-void FUN_00214da4(void);
+void placeWindowStartClose(void);
 
 /* Release both script panels and, unless retained globally, their cached data. */
 void campScriptPanelResourcesRelease(CampScriptPanelResources *work)
@@ -50,6 +50,6 @@ void campScriptPanelResourcesRelease(CampScriptPanelResources *work)
         }
     }
     if (!work->keepUi)
-        FUN_00214da4();
+        placeWindowStartClose();
 }
 }

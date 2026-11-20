@@ -10,7 +10,7 @@ s32 titleSceneUpdateAndAdvanceTransition(u32 handle);
 s32 titleSceneInitializeCallback(u32 handle);
 s32 titleSceneUpdateCallback(u32 handle);
 s32 titleSceneFinishCallback(u32 handle);
-void FUN_001dce30(void);
+void effectEditorInitialize(void);
 
 /* Creates the effect editor's main process and its four child processes (created in priority order, stored by slot);
  * the shutdown callback starts out empty. */
@@ -21,7 +21,7 @@ u32 effEditorCreateJobs(void)
     g_shutdownJobs.childJobs[2] = asdProcessCreateSimple((const s8 *)"effEditor3DL", 0x75, 0, 0, titleSceneInitializeCallback, NULL, 0);
     g_shutdownJobs.childJobs[3] = asdProcessCreateSimple((const s8 *)"effEditor3DR", 0xd3, 0, 0, titleSceneUpdateCallback, NULL, 0);
     g_shutdownJobs.childJobs[1] = asdProcessCreateSimple((const s8 *)"effEditor2DDLCD", 0xe6, 0, 0, titleSceneFinishCallback, NULL, 0);
-    FUN_001dce30();
+    effectEditorInitialize();
     g_shutdownJobs.finish = NULL;
     return g_shutdownJobs.mainJob;
 }

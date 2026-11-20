@@ -1,7 +1,7 @@
 #include "shard/S1Mover.h"
 #include "map/mapDepart.h"
 
-extern "C" s32 FUN_0025ef68(Vec3f *position, const Vec3f *previous, u32 flags);
+extern "C" s32 mapResolveCollisionSphere(Vec3f *position, const Vec3f *previous, u32 flags);
 
 // Probe slightly above the position, then step downward until a surface is found.
 extern "C" void mapProbePositionDownward(void *positionArg)
@@ -14,7 +14,7 @@ extern "C" void mapProbePositionDownward(void *positionArg)
             candidate.y += 1.0f;
         else
             candidate.y -= 15.0f;
-        if (FUN_0025ef68(&candidate, &previous, 0))
+        if (mapResolveCollisionSphere(&candidate, &previous, 0))
             break;
         previous = candidate;
     }

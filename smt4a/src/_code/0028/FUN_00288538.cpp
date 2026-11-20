@@ -15,7 +15,7 @@ int efctSetSpeed(void);
 int jobGetScalarValue(void);
 int FUN_0037245c(...);
 void uiDrawItemListRow(int x, int y, int message, int category, unsigned int color, unsigned int id, float effect);
-int FUN_0047fc38(void);
+int equipmentIsFullyUpgraded(void);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_1: 8 slot(s), 32 byte(s) */
@@ -45,7 +45,7 @@ extern int resourceRunOperationIfUnblocked(void);
 extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: FUN_0037245c. */
 /* Supplied declaration required: uiDrawItemListRow. */
-/* Supplied declaration required: FUN_0047fc38. */
+/* Supplied declaration required: equipmentIsFullyUpgraded. */
 extern int equipmentHasPositiveUpgrade(int);
 
 
@@ -95,7 +95,7 @@ void FUN_00288538(int param_1)
       }
       if (temp_v8) {
         temp_v4 = temp_v9;
-        FUN_0047fc38();
+        equipmentIsFullyUpgraded();
         if (temp_v4 != 0) {
           temp_v6 = 0xfbeb39ff;
         }
@@ -161,7 +161,7 @@ void FUN_00288538(int param_1)
       if (temp_v8) {
         temp_v6 = 0xffffffff;
         temp_v2 = temp_v9;
-        FUN_0047fc38();
+        equipmentIsFullyUpgraded();
         if (temp_v2 != 0) {
           temp_v6 = 0xfbeb39ff;
         }
@@ -209,7 +209,7 @@ void FUN_00288538(int param_1)
         if (temp_v8) {
           temp_v6 = 0x9fe7ffff;
           temp_v2 = temp_v9;
-          FUN_0047fc38();
+          equipmentIsFullyUpgraded();
           if (temp_v2 != 0) {
             temp_v6 = 0xfbeb39ff;
           }

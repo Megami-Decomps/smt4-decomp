@@ -29,7 +29,7 @@ extern unsigned int g_entryWindowColors; /* 0x5e1e88 */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-extern int FUN_002a482c(int);
+extern int resourceDispatchTaggedOperation(int);
 /* Supplied declaration required: FUN_0031d174. */
 /* Supplied declaration required: FUN_00493518. */
 /* Supplied declaration required: words2Copy. */
@@ -126,7 +126,7 @@ extern "C" void _ZN9Obj55c92012FUN_004a24a8Ev(int param_1)
     FUN_004a7950(param_1,(int)*(char *)(param_1 + 0x94),temp_v8);
     efctSetSpeed();
     if (*(int *)(param_1 + 0x28) != 0) {
-      temp_v1 = FUN_002a482c(param_1 + 0x20);
+      temp_v1 = resourceDispatchTaggedOperation(param_1 + 0x20);
       temp_v2 = rangeGetMinimumLimit(param_1 + 0x20);
       temp_v7 = 1;
       temp_v6 = param_1 + 0x864;

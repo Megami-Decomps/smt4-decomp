@@ -10,7 +10,7 @@ int _ZN18OnlineResultRecordaSERKS_(...);
 int vectorResizeBytes(...);
 int FUN_002f7824(...);
 int FUN_002f8b88(int);
-int FUN_002fb208(void);
+int threadGetCurrentId(void);
 int FUN_002fbe90(...);
 int byteRingWrite(...);
 int FUN_002fc056(unsigned int, int, int);
@@ -42,7 +42,7 @@ extern int wordRefsEqual_002ea4ac(int *, unsigned int *);
 /* Supplied declaration required: vectorResizeBytes. */
 /* Supplied declaration required: FUN_002f7824. */
 /* Supplied declaration required: FUN_002f8b88. */
-/* Supplied declaration required: FUN_002fb208. */
+/* Supplied declaration required: threadGetCurrentId. */
 /* Supplied declaration required: FUN_002fbe90. */
 /* Supplied declaration required: byteRingWrite. */
 extern int rangeIsEmpty(int *);
@@ -81,7 +81,7 @@ void FUN_00110f2c(int param_1)
   
   temp_v9 = 0;
   temp_v0 = 0;
-  FUN_002fb208();
+  threadGetCurrentId();
   temp_v6 = 0;
   *(unsigned int *)(param_1 + 0x10b0) = temp_v0;
   temp_v12 = param_1 + 0x1050;

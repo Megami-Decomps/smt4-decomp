@@ -9,7 +9,7 @@ extern "C" {
 
 
 void asdAllocatorLock(void);
-void *FUN_0017fe8c(void *memory);
+void *asdMemReleaseTrackedAllocation(void *memory);
 void asdMemoryFreeRegion(void *memory);
 
 /* Releases the allocator lock (a kernel mutex), reporting a failed release. */
@@ -35,7 +35,7 @@ void asdMemFree(void *memory)
         asdMemoryFreeRegion(memory);
         allocatorUnlock(g_asdMemState);
     } else {
-        asdMemoryFreeRegion(FUN_0017fe8c(memory));
+        asdMemoryFreeRegion(asdMemReleaseTrackedAllocation(memory));
         allocatorUnlock(g_asdMemState);
     }
 }

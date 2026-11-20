@@ -13,7 +13,7 @@ struct MenuTransitionWork {
 extern "C" {
 void FUN_00230234(MenuTransitionWork* work);
 void FUN_002302d8(MenuTransitionWork* work, s32 immediate);
-void FUN_0022fcb8(MenuTransitionWork* work, s32 immediate);
+void shopScreenRebuildForSelection(MenuTransitionWork* work, s32 immediate);
 
 // Enter menu state fourteen and choose the stage-specific transition path.
 void FUN_0022fc5c(MenuTransitionWork* work)
@@ -28,7 +28,7 @@ void FUN_0022fc5c(MenuTransitionWork* work)
         }
         FUN_002302d8(work, 1);
     } else {
-        FUN_0022fcb8(work, 1);
+        shopScreenRebuildForSelection(work, 1);
     }
 }
 }

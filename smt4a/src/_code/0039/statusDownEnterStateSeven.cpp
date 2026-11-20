@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_00230d30(u32 state, u32 previous, StatusDownTrack *track);
+void statusDownRegisterTouchRegions(u32 state, u32 previous, StatusDownTrack *track);
 
 /* Enters `state`, remembering the previous one and restarting the state timer. */
 static __inline void statusDownEnter(StatusDownStateA *status, u32 state)
@@ -16,7 +16,7 @@ void statusDownEnterStateSeven(void)
 {
     StatusDownStateA *status = g_statusDown;
     statusDownEnter(status, 7);
-    FUN_00230d30(7, status->track.previous, &status->track);
+    statusDownRegisterTouchRegions(7, status->track.previous, &status->track);
     status->unk24A9 = 0;
 }
 

@@ -10,7 +10,7 @@ struct BattleActionEditorSelection {
 extern "C" {
 s32 padIsButtonRepeat(u32 button);
 s32 FUN_00336dec(BtlMainState* battle, s32 group);
-void FUN_003d8a18(BattleActionEditorSelection* selection, BtlMainState* battle);
+void btlDebugEditorRestoreSelection(BattleActionEditorSelection* selection, BtlMainState* battle);
 
 // Navigate action groups/members and restore each action's editable value.
 void btlDebugNavigateActionEditor(BattleActionEditorSelection* selection, BtlMainState* battle)
@@ -37,7 +37,7 @@ void btlDebugNavigateActionEditor(BattleActionEditorSelection* selection, BtlMai
             selection->member = count - 1;
         else if (selection->member >= count)
             selection->member = 0;
-        FUN_003d8a18(selection, battle);
+        btlDebugEditorRestoreSelection(selection, battle);
     }
     for (s32 index = 0; index < 109; ++index) {
         BtlActionRecord* action = &battle->actions[index];

@@ -57,7 +57,7 @@ void aocRecordLookup83(u32 flag);
 u32 resolveWeightedItemChoice(u32 a, u32 b, u32 c, u32 d);
 s32 FUN_0022f1b8(u32 item);
 s32 aocItemGetPrice(PackedItem *item);
-void FUN_002306f8(PackedItem *item, s32 count, s32 charge);
+void inventoryApplyTransaction(PackedItem *item, s32 count, s32 charge);
 void qsort(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 void listScrollerInitialize(void *list, s32 a, u32 b, s32 c);
 void listCursorSetPage(void *list, s32 page);
@@ -109,7 +109,7 @@ void FUN_003a4210(SaleMenu *menu)
         PackedItem removed;
         removed.id = (u16)flag;
         removed.flags = 0;
-        FUN_002306f8(&removed, -owned, 0);
+        inventoryApplyTransaction(&removed, -owned, 0);
     }
     qsort(menu->entries, menu->entryCount, 6, sortCompareKeyPair);
     listScrollerInitialize(menu->list, 10, menu->entryCount, 0);

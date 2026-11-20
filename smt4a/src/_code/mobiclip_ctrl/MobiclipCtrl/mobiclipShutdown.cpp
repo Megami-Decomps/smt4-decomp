@@ -1,7 +1,7 @@
 #include "mobiclip_ctrl/MobiclipHeaps.h"
 
 extern "C" {
-void FUN_00422ef8(void);
+void movieAudioDeviceShutdown(void);
 void FUN_00426140(void);
 void FUN_00513f6c(void);
 void valuePairClear(void);
@@ -20,7 +20,7 @@ extern MobiclipHeap DAT_00617e00;
 /* Shut down movie devices and release all six backing heaps. */
 extern "C" void mobiclipShutdown(void)
 {
-    FUN_00422ef8();
+    movieAudioDeviceShutdown();
     FUN_00426140();
     FUN_00513f6c();
     valuePairClear();

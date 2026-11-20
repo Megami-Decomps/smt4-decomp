@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
+int svcWaitSynchronizationN(unsigned char *, int *, int, int, unsigned int, unsigned int);
 int resultHandleFailure(void);
 int FUN_0034ee98(void);
 
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002c40f8. */
+/* Supplied declaration required: svcWaitSynchronizationN. */
 /* Supplied declaration required: resultHandleFailure. */
 /* Supplied declaration required: FUN_0034ee98. */
 extern unsigned int *FUN_00351b38(void);
@@ -57,7 +57,7 @@ void FUN_0023a4f8(int param_1)
     puVar2 = (unsigned int *)FUN_00351b38();
     uStack_18 = *puVar2;
     puVar3 = temp_v3;
-    FUN_002c40f8(puVar3,&uStack_18,1,0,0xffffffff,0xffffffff);
+    svcWaitSynchronizationN(puVar3,&uStack_18,1,0,0xffffffff,0xffffffff);
     if ((int)puVar3 < 0) {
       resultHandleFailure();
     }

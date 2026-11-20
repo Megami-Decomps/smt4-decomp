@@ -21,10 +21,10 @@ extern "C" {
 extern u8 DAT_0059ee68[];
 
 
-/* Hands the sub-record's block and value, a descriptor entry and its table to FUN_0031ab38. */
+/* Hands the sub-record's block and value, a descriptor entry and its table to effectEditorApplyOwnerOptionsPair. */
 void FUN_003c8b50(Obj326fb8 *obj)
 {
     Obj326fb8Sub *sub = &obj->parent->sub;
-    FUN_0031ab38(reinterpret_cast<u32 *>(sub->block), sub->value, reinterpret_cast<EffectEditorOptions *>(DAT_0059ee68 + 0x70), reinterpret_cast<EffectEditorOptions *>(DAT_0059ee68));
+    effectEditorApplyOwnerOptionsPair(reinterpret_cast<u32 *>(sub->block), sub->value, reinterpret_cast<EffectEditorOptions *>(DAT_0059ee68 + 0x70), reinterpret_cast<EffectEditorOptions *>(DAT_0059ee68));
 }
 }

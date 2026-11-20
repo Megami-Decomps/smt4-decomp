@@ -12,6 +12,6 @@ Obj55abd4::Obj55abd4(u32 newId) : Obj558d20(1)
     if (newId != 0) {
         id = newId;
         Obj55abd4 *object = FUN_0012426e();
-        FUN_002f3b58(FUN_002ecf28()->registry, newId, object);
+        FUN_002f3b58(objectRegistryGetOwnerForCurrent()->registry, newId, object);
     }
 }

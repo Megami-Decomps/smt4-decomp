@@ -38,7 +38,7 @@ int FUN_002826dc(...);
 int distSpatial(void);
 int mathPositionHeadingDegrees(void);
 int FUN_00353c20(...);
-int FUN_0036d984(...);
+int mapCollisionRaySegmentTest(...);
 int moriModelContentCopyBody(void);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -144,7 +144,7 @@ extern int mapEnemyIsNearestLocked(char *);
 /* Supplied declaration required: FUN_00352ff8. */
 /* Supplied declaration required: FUN_00353200. */
 /* Supplied declaration required: FUN_00353c20. */
-/* Supplied declaration required: FUN_0036d984. */
+/* Supplied declaration required: mapCollisionRaySegmentTest. */
 /* Supplied declaration required: mathAbsHeadingErrorToPoint. */
 extern int FUN_003d21dc(void);
 extern int gameDataFlagTestBit(unsigned int);
@@ -355,7 +355,7 @@ LAB_002d2ba8:
             in_fpscr = temp_v2 | ((unsigned int)((temp_v21 != temp_v21) || (temp_v20 != temp_v20)) << 0x1c);
             temp_v14 = (unsigned char)(temp_v2 >> 0x18);
             if (((!(unsigned char)((temp_v14 >> 6) & 1) && temp_v14 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) &&
-                (temp_v3 = FUN_0036d984(&temp_v34,&temp_v42,0), temp_v3 == -1)) &&
+                (temp_v3 = mapCollisionRaySegmentTest(&temp_v34,&temp_v42,0), temp_v3 == -1)) &&
                (*(int *)(temp_v50 + 0xdf4) != 0)) {
               temp_v12 = 0;
               temp_v3 = gameDataFlagTestBit(0x8b);
@@ -396,7 +396,7 @@ LAB_002d2ba8:
               distSpatial();
               in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v17 <= temp_v8) << 0x1d);
               if ((!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) &&
-                 (temp_v3 = FUN_0036d984(&temp_v34,&temp_v42,0), temp_v3 == -1)) {
+                 (temp_v3 = mapCollisionRaySegmentTest(&temp_v34,&temp_v42,0), temp_v3 == -1)) {
                 temp_v3 = gameGetPlayerData();
                 temp_v12 = gameDataFlagTestBit(0x86);
                 if (temp_v12 != 0) {
@@ -517,7 +517,7 @@ LAB_002d3178:
             in_fpscr = (in_fpscr & 0xfffffff) |
                        ((unsigned int)((float)((unsigned long long)temp_v24 >> 0x20) <= temp_v8) << 0x1d);
             if ((!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) &&
-               (temp_v3 = FUN_0036d984(&temp_v34,&temp_v42,0), temp_v3 == -1)) {
+               (temp_v3 = mapCollisionRaySegmentTest(&temp_v34,&temp_v42,0), temp_v3 == -1)) {
               temp_v3 = gameGetPlayerData();
               temp_v12 = gameDataFlagTestBit(0x86);
               if (temp_v12 != 0) {
@@ -632,7 +632,7 @@ LAB_002d3484:
                 temp_v46 = temp_v28 + 35.0f;
                 temp_v48 = *(float *)(g_lmapScene + 0x20) + 35.0f;
                 fStack_84 = temp_v29;
-                temp_v3 = FUN_0036d984(&temp_v47,&temp_v45,0);
+                temp_v3 = mapCollisionRaySegmentTest(&temp_v47,&temp_v45,0);
                 if (temp_v3 == -1) {
                   temp_v8 = temp_v45;
                   mathPositionHeadingDegrees();
@@ -820,7 +820,7 @@ LAB_002d33dc:
             temp_v36 = *(float *)(temp_v10 + 0xd0);
             temp_v43 = temp_v31 + (float)temp_v24;
             temp_v35 = *(float *)(temp_v10 + 0xcc) + (float)temp_v24;
-            temp_v12 = FUN_0036d984(&temp_v34,&temp_v42,0);
+            temp_v12 = mapCollisionRaySegmentTest(&temp_v34,&temp_v42,0);
             if (temp_v12 == -1) {
               if (temp_v3 < 3) {
                 temp_v34 = *(float *)(temp_v10 + 200);
@@ -1218,7 +1218,7 @@ LAB_002d3c7c:
               temp_v36 = *(float *)(g_lmapScene + 0x24);
               temp_v43 = temp_v31 + 25.0f;
               temp_v35 = *(float *)(g_lmapScene + 0x20) + 25.0f;
-              temp_v3 = FUN_0036d984(&temp_v34,&temp_v42,0);
+              temp_v3 = mapCollisionRaySegmentTest(&temp_v34,&temp_v42,0);
               if (temp_v3 != -1) {
                 if (((*(char *)(temp_v10 + 0x171) == '\0') &&
                     ((unsigned int)(temp_v43 - temp_v35) < 0xc1200000)) &&
@@ -1229,8 +1229,8 @@ LAB_002d3c7c:
                   temp_v25 = romwright_piece_4_4(*(unsigned int *)(g_lmapScene + 0x24),temp_v39);
                   temp_v40 = temp_v20 + temp_v17;
                   temp_v41 = temp_v32;
-                  temp_v3 = FUN_0036d984(&temp_v39,&temp_v42,0);
-                  if ((temp_v3 == -1) && (temp_v3 = FUN_0036d984(&temp_v39,&temp_v34,0), temp_v3 == -1)) {
+                  temp_v3 = mapCollisionRaySegmentTest(&temp_v39,&temp_v42,0);
+                  if ((temp_v3 == -1) && (temp_v3 = mapCollisionRaySegmentTest(&temp_v39,&temp_v34,0), temp_v3 == -1)) {
                     *(unsigned int *)(temp_v10 + 0xb8) = 8;
                     *(int *)(temp_v10 + 0xdc) = (int)temp_v25;
                     *(unsigned int *)(temp_v10 + 0xbc) = 0;
@@ -1243,8 +1243,8 @@ LAB_002d3c7c:
                   temp_v17 = (float)((unsigned long long)temp_v25 >> 0x20);
                   temp_v41 = temp_v17;
                   temp_v19 = temp_v39;
-                  temp_v3 = FUN_0036d984(&temp_v39,&temp_v42,0);
-                  if ((temp_v3 == -1) && (temp_v3 = FUN_0036d984(&temp_v39,&temp_v34,0), temp_v3 == -1)) {
+                  temp_v3 = mapCollisionRaySegmentTest(&temp_v39,&temp_v42,0);
+                  if ((temp_v3 == -1) && (temp_v3 = mapCollisionRaySegmentTest(&temp_v39,&temp_v34,0), temp_v3 == -1)) {
                     *(unsigned int *)(temp_v10 + 0xb8) = 8;
                     *(unsigned int *)(temp_v10 + 0xdc) = temp_v19;
                     *(unsigned int *)(temp_v10 + 0xbc) = 0;
@@ -1431,7 +1431,7 @@ LAB_002d4824:
             temp_v36 = *(float *)(g_lmapScene + 0x24);
             temp_v43 = temp_v31 + 25.0f;
             temp_v35 = *(float *)(g_lmapScene + 0x20) + 25.0f;
-            temp_v3 = FUN_0036d984(&temp_v34,&temp_v42,0);
+            temp_v3 = mapCollisionRaySegmentTest(&temp_v34,&temp_v42,0);
             if (temp_v3 != -1) {
               *(unsigned int *)(temp_v10 + 0xd4) = 0;
               temp_v3 = randRange(2);
@@ -1942,7 +1942,7 @@ LAB_002d54c4:
             temp_v36 = *(float *)(temp_v10 + 0x124);
             temp_v43 = *(float *)(temp_v4 + 0x18) + 25.0f;
             temp_v35 = *(float *)(temp_v10 + 0x120) + 25.0f;
-            temp_v3 = FUN_0036d984(&temp_v34,&temp_v42,&temp_v38);
+            temp_v3 = mapCollisionRaySegmentTest(&temp_v34,&temp_v42,&temp_v38);
             if (temp_v3 != -1) {
               *(unsigned int *)(temp_v10 + 0x11c) = temp_v38;
               *(unsigned int *)(temp_v10 + 0x120) = uStack_b0;
@@ -1990,7 +1990,7 @@ LAB_002d5d90:
             temp_v36 = *(float *)(temp_v10 + 0x124);
             temp_v43 = temp_v31 + temp_v20;
             temp_v35 = *(float *)(temp_v10 + 0x120) + temp_v20;
-            temp_v3 = FUN_0036d984(&temp_v34,&temp_v42,0);
+            temp_v3 = mapCollisionRaySegmentTest(&temp_v34,&temp_v42,0);
             if (temp_v3 != -1) {
               *(int *)(temp_v10 + 0xd4) = *(int *)(temp_v10 + 0xd4) + 1;
               *(unsigned int *)(temp_v10 + 0x130) = 0;
@@ -2011,7 +2011,7 @@ LAB_002d5d90:
               temp_v36 = temp_v36 + temp_v21 * temp_v18;
               temp_v43 = temp_v43 + temp_v20;
               temp_v35 = temp_v35 + temp_v20;
-              temp_v3 = FUN_0036d984(&temp_v34,&temp_v42,0);
+              temp_v3 = mapCollisionRaySegmentTest(&temp_v34,&temp_v42,0);
               if (temp_v3 != -1) {
                 if (*(char *)(temp_v10 + 0x171) == '\0') {
                   temp_v42 = temp_v30;
@@ -2029,8 +2029,8 @@ LAB_002d5d90:
                     temp_v40 = temp_v8 + temp_v20;
                     temp_v41 = temp_v32;
                     temp_v39 = temp_v19;
-                    temp_v3 = FUN_0036d984(&temp_v39,&temp_v42,0);
-                    if ((temp_v3 == -1) && (temp_v3 = FUN_0036d984(&temp_v39,&temp_v34,0), temp_v3 == -1))
+                    temp_v3 = mapCollisionRaySegmentTest(&temp_v39,&temp_v42,0);
+                    if ((temp_v3 == -1) && (temp_v3 = mapCollisionRaySegmentTest(&temp_v39,&temp_v34,0), temp_v3 == -1))
                     {
                       *(unsigned int *)(temp_v10 + 0xb8) = 0xe;
                       *(unsigned int *)(temp_v10 + 0xdc) = temp_v19;
@@ -2043,9 +2043,9 @@ LAB_002d5d90:
                     temp_v39 = (unsigned int)((unsigned long long)temp_v24 >> 0x20);
                     temp_v41 = (float)temp_v26;
                     temp_v19 = temp_v39;
-                    temp_v3 = FUN_0036d984(&temp_v39,&temp_v42,0);
+                    temp_v3 = mapCollisionRaySegmentTest(&temp_v39,&temp_v42,0);
                     temp_v9 = (unsigned int)temp_v26;
-                    if ((temp_v3 == -1) && (temp_v3 = FUN_0036d984(&temp_v39,&temp_v34,0), temp_v3 == -1))
+                    if ((temp_v3 == -1) && (temp_v3 = mapCollisionRaySegmentTest(&temp_v39,&temp_v34,0), temp_v3 == -1))
                     {
                       *(unsigned int *)(temp_v10 + 0xb8) = 0xe;
                       *(unsigned int *)(temp_v10 + 0xdc) = temp_v19;
@@ -2262,7 +2262,7 @@ LAB_002d62e4:
             temp_v36 = *(float *)(temp_v4 + 0x1c);
             temp_v43 = temp_v31 + 25.0f;
             temp_v35 = *(float *)(temp_v4 + 0x18) + 25.0f;
-            temp_v3 = FUN_0036d984(&temp_v34,&temp_v42,0);
+            temp_v3 = mapCollisionRaySegmentTest(&temp_v34,&temp_v42,0);
             if (temp_v3 != -1) {
               *(unsigned int *)(temp_v10 + 0xd4) = 0;
               temp_v3 = randRange(2);
@@ -2437,7 +2437,7 @@ LAB_002d68ec:
               temp_v43 = temp_v43 + 25.0f;
               temp_v35 = temp_v20 + 25.0f;
               temp_v34 = temp_v8;
-              temp_v3 = FUN_0036d984(&temp_v34,&temp_v42,0);
+              temp_v3 = mapCollisionRaySegmentTest(&temp_v34,&temp_v42,0);
               if (temp_v3 == -1) {
                 temp_v8 = *(float *)(temp_v10 + 0x60) * temp_v18;
                 libm_sinf();
@@ -2563,7 +2563,7 @@ LAB_002d68ec:
         }
         temp_v3 = *(int *)(g_lmapScene + 0x1c);
         distSpatial();
-        if ((temp_v3 >= 0x44bb8000) || (temp_v3 = FUN_0036d984(&temp_v34,&temp_v42,0), temp_v3 != -1)) {
+        if ((temp_v3 >= 0x44bb8000) || (temp_v3 = mapCollisionRaySegmentTest(&temp_v34,&temp_v42,0), temp_v3 != -1)) {
           temp_v19 = 0x15;
           *(unsigned int *)(temp_v10 + 0xb8) = temp_v19;
           *(unsigned int *)(temp_v10 + 0xbc) = 0;
@@ -2634,7 +2634,7 @@ LAB_002d68ec:
         temp_v36 = *(float *)(g_lmapScene + 0x24);
         temp_v43 = *(float *)(temp_v10 + 0x58) + 35.0f;
         temp_v35 = *(float *)(g_lmapScene + 0x20) + 35.0f;
-        temp_v3 = FUN_0036d984(&temp_v34,&temp_v42,0);
+        temp_v3 = mapCollisionRaySegmentTest(&temp_v34,&temp_v42,0);
         if (temp_v3 == -1) {
           temp_v3 = gameGetPlayerData();
           temp_v12 = gameDataFlagTestBit(0x86);
@@ -2891,7 +2891,7 @@ LAB_002d68ec:
           temp_v36 = *(float *)(g_lmapScene + 0x24);
           temp_v43 = *(float *)(temp_v10 + 0x58) + 35.0f;
           temp_v35 = *(float *)(g_lmapScene + 0x20) + 35.0f;
-          temp_v3 = FUN_0036d984(&temp_v34,&temp_v42,0);
+          temp_v3 = mapCollisionRaySegmentTest(&temp_v34,&temp_v42,0);
           if (temp_v3 == -1) {
             temp_v3 = gameGetPlayerData();
             temp_v12 = gameDataFlagTestBit(0x86);
@@ -3090,7 +3090,7 @@ LAB_002d68ec:
           temp_v35 = temp_v18;
           temp_v36 = temp_v21;
           temp_v43 = temp_v22;
-          temp_v3 = FUN_0036d984(&temp_v34,&temp_v42,0);
+          temp_v3 = mapCollisionRaySegmentTest(&temp_v34,&temp_v42,0);
           if (temp_v3 != -1) {
             *(int *)(temp_v10 + 0xd4) = *(int *)(temp_v10 + 0xd4) + 1;
             *(unsigned int *)(temp_v10 + 0xf0) = 0;

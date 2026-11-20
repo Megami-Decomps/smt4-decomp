@@ -8,7 +8,7 @@ u16 slotFindNonnegativeRank(void *owner, u32 slot);
 void communicationBeginTransition(s32 mode);
 void communicationSetResultPointer(void);
 void memFill8(void *output, u32 value);
-void FUN_002ad8a8(BtlUiObjC *, const BtlUiSettings *settings);
+void btlUiCopyIdList(BtlUiObjC *, const BtlUiSettings *settings);
 void FUN_002dc464(BtlUiObjC *);
 void FUN_002e439c(BtlUiObjC *);
 
@@ -59,7 +59,7 @@ void FUN_003ae134(void *, s32 mode, u8 first, u8 second, s32 firstStrike, s32 op
         current->settings.slotRanks[1] = slotFindNonnegativeRank(current->owner, 1);
         current->settings.slotRanks[2] = slotFindNonnegativeRank(current->owner, 2);
         current->settings.slotRanks[3] = slotFindNonnegativeRank(current->owner, 3);
-        FUN_002ad8a8(&current->objC, &current->settings);
+        btlUiCopyIdList(&current->objC, &current->settings);
         if (mode != 0)
             FUN_002dc464(&ui->base.objC);
         else

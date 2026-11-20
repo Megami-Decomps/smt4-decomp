@@ -53,7 +53,7 @@ void FUN_004cd4b8(int param_1,int param_2)
   FUN_003da99c(uVar6,&uStack_5c);
   uStack_50 = CONCAT22(uStack_50._2_2_,uVar6);
   uVar6 = *(unsigned short *)(uVar14 + 6);
-  FUN_003daaf8(uVar6,&uStack_5c);
+  statGrowthAccumulate(uVar6,&uStack_5c);
   uStack_50 = CONCAT22(uVar6,(unsigned short)uStack_50);
   iVar7 = saveSlotIsActiveWithId((unsigned int)uVar2);
   if (iVar7 == 0) {

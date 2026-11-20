@@ -23,7 +23,7 @@ void mapEnemyMoveIdleActorToRecord(s32 id)
             slot->position = slot->basePosition;
             slot->state = 24;
             slot->elapsed = 0;
-            FUN_00377acc(slot, id, 2);
+            mapEnemyRebindModel(slot, id, 2);
             return;
         }
     }

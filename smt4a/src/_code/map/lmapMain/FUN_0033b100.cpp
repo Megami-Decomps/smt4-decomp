@@ -54,7 +54,7 @@ extern unsigned int gameDataGetTableValue(void);
 extern int FUN_00367f98(void);
 /* Supplied declaration required: FUN_00367fac. */
 /* Supplied declaration required: FUN_00368374. */
-extern int FUN_0036d984(int, unsigned int *, unsigned int);
+extern int mapCollisionRaySegmentTest(int, unsigned int *, unsigned int);
 /* Supplied declaration required: lmapSceneMarkerStart. */
 /* Supplied declaration required: FUN_00379344. */
 /* Supplied declaration required: mathAbsHeadingErrorToPoint. */
@@ -112,7 +112,7 @@ unsigned int FUN_0033b100(int param_1)
     in_fpscr = temp_v0 | ((unsigned int)((temp_v13 != temp_v13) || (temp_v12 != temp_v12)) << 0x1c);
     temp_v2 = (unsigned char)(temp_v0 >> 0x18);
     if (!(unsigned char)((temp_v2 >> 6) & 1) && temp_v2 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
-      temp_v5 = FUN_0036d984(param_1 + 0x20,(unsigned int *)&DAT_005f19d8,0);
+      temp_v5 = mapCollisionRaySegmentTest(param_1 + 0x20,(unsigned int *)&DAT_005f19d8,0);
       if (temp_v5 != -1) {
         return 0;
       }

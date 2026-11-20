@@ -66,7 +66,7 @@ void FUN_0041fc24(void *context)
     work->appliedSlot = selection;
     if (work->slotFlags[selection]) {
         FUN_0023b45c(1);
-        FUN_002c8538(1);
+        gameGlobalsSetOverlayActive(1);
         PlayerView *player = work->player;
         const Profile *profile = &work->profiles[work->appliedSlot];
         player->equipment = profile->equipment;
@@ -86,7 +86,7 @@ void FUN_0041fc24(void *context)
         FUN_0033449c(0);
     } else {
         FUN_0023b45c(0);
-        FUN_002c8538(1);
+        gameGlobalsSetOverlayActive(1);
     }
 }
 }

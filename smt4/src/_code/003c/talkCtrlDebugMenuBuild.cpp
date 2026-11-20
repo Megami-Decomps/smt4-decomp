@@ -19,7 +19,7 @@ struct TalkCtrlMenu {
 
 extern "C" {
 
-extern const char *DAT_00435448[];
+extern const char *g_talkCtrlDebugMenuItems[];
 
 void asdListBoxAddItems(u32 list, const char **names, s32 count);
 void asdListBoxSetByteValue(u32 list, s32 value);
@@ -32,7 +32,7 @@ void asdListBoxSetItemMode3(u32 list, s32 item, u32 value, s32 minimum, s32 maxi
 void talkCtrlDebugMenuBuild(TalkCtrlMenu *menu, TalkCtrlWork *work)
 {
     menu->list = asdListBoxCreateDefault(work->listParent, 0x73, 0, 0);
-    asdListBoxAddItems(menu->list, DAT_00435448, TALK_CTRL_ITEM_COUNT);
+    asdListBoxAddItems(menu->list, g_talkCtrlDebugMenuItems, TALK_CTRL_ITEM_COUNT);
     asdListBoxSetByteValue(menu->list, 1);
     jobSetText(menu->list, "TalkCtrl Menu");
     asdListBoxSetItemMode2(menu->list, 0, work->setting[0] != 0);

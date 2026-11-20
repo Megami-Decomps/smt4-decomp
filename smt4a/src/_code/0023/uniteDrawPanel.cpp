@@ -150,14 +150,14 @@ extern "C" s32 uniteDrawPanel(u32)
     case 0x1C: {
         s32 x = vec2GetXInt(&work->sprites.open);
         s32 y = vec2GetYInt(&work->sprites.open);
-        FUN_002f197c(x, y, vec2GetSpeed(&work->sprites.open));
+        uniteDrawDetailPanel(x, y, vec2GetSpeed(&work->sprites.open));
         break;
     }
     case 3:
     case 4: {
         s32 x = vec2GetXInt(&work->sprites.open);
         s32 y = vec2GetYInt(&work->sprites.open);
-        FUN_002c8940(x, y, vec2GetSpeed(&work->sprites.open));
+        uniteDrawPanelRows(x, y, vec2GetSpeed(&work->sprites.open));
         break;
     }
     case 2:

@@ -121,10 +121,10 @@ void partyPanelCreate(s32 showIcons)
     asdLoadFileAsyncSimple("camp/partypanel.bf", reinterpret_cast<u32 *>(&panel->files[1]), 1);
     statusAcquireSharedResources();
     if (showIcons) {
-        FUN_002c8538(1);
-        FUN_00215bd0();
+        gameGlobalsSetOverlayActive(1);
+        unitStatusResetSpriteState();
     } else {
-        FUN_002c8538(0);
+        gameGlobalsSetOverlayActive(0);
     }
 
     FusionRaceSelection *selection = static_cast<FusionRaceSelection *>(asdOperatorNew(0x1B8, owner));

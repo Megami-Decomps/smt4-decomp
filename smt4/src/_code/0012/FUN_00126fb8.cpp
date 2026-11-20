@@ -14,7 +14,7 @@ typedef struct {
 
 extern unsigned int DAT_004e64c0; /* 0x4e64c0 */
 
-extern int *FUN_002b5c44(void);
+extern int *tokenTableGet(void);
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -25,7 +25,7 @@ void FUN_00126fb8(void)
   int *piVar1;
   unsigned char temp_v0 [152];
   
-  piVar1 = (int *)FUN_002b5c44();
+  piVar1 = (int *)tokenTableGet();
   *piVar1 = *piVar1 + 1;
   __aeabi_memcpy4(&DAT_004e64c0,temp_v0,0x9c);
                     /* WARNING: Treating indirect jump as return */

@@ -23,8 +23,8 @@ extern "C" {
 
 void mathSinCos(f32* sine, f32* cosine);
 void FUN_002c159c(void* camera);
-void FUN_002c1edc(void* camera, Vec3f* position, Vec3f* target, s32* result);
-void FUN_002c1e30(void* camera, s32 flag);
+void cameraMatrixCacheSetLookAt(void* camera, Vec3f* position, Vec3f* target, s32* result);
+void stereoCameraSetPerspective(void* camera, s32 flag);
 
 // Places the screen's camera at its default position and aims it by rotating the
 // default view direction around the screen axis.
@@ -66,8 +66,8 @@ void FUN_0018a104(OrbitScreen* screen)
     target.z = ((xy - sine * axis.z) * screen->direction.x + (yz + sine * axis.x) * screen->direction.y +
                 (cosine + complement * axis.y * axis.y) * screen->direction.z) * screen->distance + screen->position.z;
     FUN_002c159c(screen->camera);
-    FUN_002c1edc(screen->camera, &screen->position, &target, &result);
-    FUN_002c1e30(screen->camera, 1);
+    cameraMatrixCacheSetLookAt(screen->camera, &screen->position, &target, &result);
+    stereoCameraSetPerspective(screen->camera, 1);
     FUN_00298d50(reinterpret_cast<u32>(screen->camera));
 }
 

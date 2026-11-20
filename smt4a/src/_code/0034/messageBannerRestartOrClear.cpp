@@ -13,7 +13,7 @@ struct MessageBannerStateA {
 
 extern "C" {
 void msgBoxFlagsClearBit7(u32 box);
-void FUN_00165088(MessageBannerStateA* banner, u32 mode);
+void uiPanelCloseStateSection(MessageBannerStateA* banner, u32 mode);
 
 // Clear a finished banner, or restart its active message operation.
 void messageBannerRestartOrClear()
@@ -24,7 +24,7 @@ void messageBannerRestartOrClear()
             banner->state = 0;
             msgBoxFlagsClearBit7(banner->box);
         } else if (banner != NULL) {
-            FUN_00165088(banner, banner->mode);
+            uiPanelCloseStateSection(banner, banner->mode);
             banner->state = 3;
             banner->pending = 0;
         }

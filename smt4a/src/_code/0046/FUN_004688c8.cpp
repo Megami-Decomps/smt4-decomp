@@ -28,7 +28,7 @@ u8 FUN_002a746c(void);
 u16 FUN_0031f8cc(void);
 void FUN_003dec50(void);
 u8 FUN_00417a60(u32 id);
-u32 FUN_00417e08(u16 id);
+u32 rosterAddUnit(u16 id);
 void flagValueSub(s32 id, u32 amount);
 u32 FUN_004d0d70(u32 slot);
 u32 screenFadeIsBusy(void);
@@ -166,7 +166,7 @@ extern "C" void FUN_004688c8(Obj5333c0 *scene)
             FUN_003df168(&spoils, scene->deliveryQuestId());
             FUN_00331714(&spoils);
             if (table1bOr1cGetRecordValue(scene->deliveryQuestId()) == 0)
-                FUN_00417e08(scene->deliveryQuestId());
+                rosterAddUnit(scene->deliveryQuestId());
             scene->substate = 7;
         } else {
             scene->substate = 11;

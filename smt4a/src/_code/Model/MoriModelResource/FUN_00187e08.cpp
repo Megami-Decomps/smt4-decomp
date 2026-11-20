@@ -124,13 +124,13 @@ void FUN_00187e08(u8 *state, u8 *resource, s32 kindC, s32 kindA, s32 kindB)
     }
     _ZN18AsdAnimCameraState10InitializeEPK21AsdAnimCameraResourceP18AsdAnimCameraSetup(state + 0xC, resource);
     if (kindA != MEMORY_DEFAULT && *(s32 *)(resource + 0x2C) != 0)
-        FUN_0017cf74(previousA, t->slots[3], *(u32 *)(resource + 0x2C));
+        asdGxQueueMemoryTransfer(previousA, t->slots[3], *(u32 *)(resource + 0x2C));
     if (*(s32 *)(resource + 0x30) != 0 && kindB != MEMORY_DEFAULT)
-        FUN_0017cf74(NULL, t->slots[4], *(u32 *)(resource + 0x30));
+        asdGxQueueMemoryTransfer(NULL, t->slots[4], *(u32 *)(resource + 0x30));
     if (kindC != MEMORY_DEFAULT && *(s32 *)(resource + 0x28) != 0)
-        FUN_0017cf74(t->alignedAMirror, t->slots[2], *(u32 *)(resource + 0x28));
+        asdGxQueueMemoryTransfer(t->alignedAMirror, t->slots[2], *(u32 *)(resource + 0x28));
     if (kindD != MEMORY_DEFAULT && *(s32 *)(resource + 0x3C) != 0)
-        FUN_0017cf74(t->alignedBMirror, t->alignedB, *(u32 *)(resource + 0x3C));
+        asdGxQueueMemoryTransfer(t->alignedBMirror, t->alignedB, *(u32 *)(resource + 0x3C));
 }
 
 } /* extern "C" */

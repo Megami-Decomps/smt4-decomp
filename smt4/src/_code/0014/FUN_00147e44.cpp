@@ -7,7 +7,7 @@ extern "C" {
 int threadSleepDuration(int, int);
 int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
-int FUN_002c131c(int, int);
+int errThrowFatal(int, int);
 int SBORROW4(...);
 int software_interrupt(int);
 
@@ -32,7 +32,7 @@ extern unsigned int DAT_0044e37c; /* 0x44e37c */
 extern int FUN_002bb284(unsigned int, unsigned int *);
 /* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
-/* Supplied declaration required: FUN_002c131c. */
+/* Supplied declaration required: errThrowFatal. */
 
 
 unsigned int FUN_00147e44(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -68,7 +68,7 @@ unsigned int FUN_00147e44(unsigned int param_1,unsigned int param_2,unsigned int
     FUN_002bb378();
     temp_v2 = FUN_002bb284(param_1,(unsigned int *)&temp_v7);
     if (temp_v2 < 0) {
-      FUN_002c131c(temp_v2,0x147ec8);
+      errThrowFatal(temp_v2,0x147ec8);
     }
     nn_applet_CTR_detail_CloseSession();
     if ((char)temp_v7 != '\0') break;

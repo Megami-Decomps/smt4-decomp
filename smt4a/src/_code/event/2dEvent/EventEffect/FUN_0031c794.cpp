@@ -27,7 +27,7 @@ extern "C" {
 extern EventEffect* g_eventEffect;
 extern TexKey DAT_0057f3d0[2];
 
-s32 FUN_00162ea4(void);
+s32 eventIsSkipping(void);
 f32 mathInterpolateTimed(s32 length, f32 from, f32 to, s32 time);
 s32 lerpIntSplitClamped(s32 from, s32 to, s32 length, s32 time);
 
@@ -51,7 +51,7 @@ u32 FUN_0031c794(void)
             screenFadeSlotReset(0);
             effect->state = 1;
             effect->active = 1;
-            if (FUN_00203d74() == 0) {
+            if (inputFastForwardActive() == 0) {
                 effect->slideOnly = 0;
             } else {
                 effect->slideOnly = 1;
@@ -94,7 +94,7 @@ u32 FUN_0031c794(void)
             if ((u32)(effect->frame - 0xf) <= 0xbb) effect->alpha = mathInterpolateTimed(0xca, 1.0f, 0.6f, effect->frame - 0xf);
             if ((u32)(effect->frame - 0xcb) <= 7) effect->alpha = mathInterpolateTimed(8, 0.6f, 0.7f, effect->frame - 0xcb);
             if (effect->frame >= 0xf0) effect->alpha = mathInterpolateTimed(0x3c, 0.7f, 1.0f, effect->frame - 0xf0);
-            if (FUN_00203d74() != 0) {
+            if (inputFastForwardActive() != 0) {
                 effect->slideOnly = 1;
                 effect->frame = lerpIntSplitClamped(0, 10, 0xdc, 0x28 - effect->offset);
             }
@@ -106,7 +106,7 @@ u32 FUN_0031c794(void)
         }
         break;
     }
-    if (FUN_00162ea4() != 0 && loadedTextureCount() == 2) effect->state = 2;
+    if (eventIsSkipping() != 0 && loadedTextureCount() == 2) effect->state = 2;
     return 0;
 }
 

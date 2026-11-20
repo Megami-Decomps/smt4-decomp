@@ -49,9 +49,9 @@ struct AsdSnd3dStateA {
     /* 0xA58 */ AsdSndListener listenerPosition;
     /* 0xA64 */ AsdSndListener listenerUp;
     /* 0xA70 */ f32 listenerHeading;
-    /* 0xA74 */ f32 unkA74;                    /* forwarded to the listener (FUN_00144564) */
+    /* 0xA74 */ f32 unkA74;                    /* forwarded to the listener (asdSnd3dSetManagerScalarA34) */
     /* 0xA78 */ f32 outputVolume;
-    /* 0xA7C */ f32 unkA7C;                    /* forwarded to the listener (FUN_00145048) */
+    /* 0xA7C */ f32 unkA7C;                    /* forwarded to the listener (asdSnd3dSetManagerScalarA3C) */
     /* 0xA80 */ u32 playingMask;              /* bit n: actor n is playing */
     /* 0xA84 */ void *buffer;                 /* the manager's memory */
     /* 0xA88 */ s8 enabled;                   /* the 3D sound state is up */

@@ -7,9 +7,9 @@ extern "C" {
 extern StateAtF4 *g_campCecEdit;
 s32 unitMatchesAlignment(u32 itemId);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-s32 FUN_002e2114(OutfitPreview *preview);
+s32 linkedTargetRunHolderLinks(OutfitPreview *preview);
 void outfitPreviewConfigureEquipment(OutfitPreview *preview, const OutfitPreviewEquipment *equipment);
-void FUN_002e207c(OutfitPreview *preview);
+void linkControllerResetScaleAndCancel(OutfitPreview *preview);
 void modelApplyNonzeroGroupRotation(void *modelGroup, const f32 *rotation);
 void linkHolderApplyFlag(OutfitPreview *preview, u32 enabled);
 
@@ -34,9 +34,9 @@ void campCecPreviewEquipmentChoice(u32 itemId)
         case 8: equipment.slots[2] = static_cast<u16>(itemId); break;
         }
     }
-    if (FUN_002e2114(reinterpret_cast<OutfitPreview *>(edit->unk04))) {
+    if (linkedTargetRunHolderLinks(reinterpret_cast<OutfitPreview *>(edit->unk04))) {
         outfitPreviewConfigureEquipment(reinterpret_cast<OutfitPreview *>(edit->unk04), &equipment);
-        FUN_002e207c(reinterpret_cast<OutfitPreview *>(edit->unk04));
+        linkControllerResetScaleAndCancel(reinterpret_cast<OutfitPreview *>(edit->unk04));
         OutfitPreview *preview = reinterpret_cast<OutfitPreview *>(edit->unk04);
         if (preview != NULL && preview->modelGroup != NULL) {
             modelApplyNonzeroGroupRotation(preview->modelGroup, preview->rotation);

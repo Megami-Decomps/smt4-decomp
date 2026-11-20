@@ -17,7 +17,7 @@ void partyPanelSetState(s32 state, s32 rememberPrevious)
     panel->sceneState = state;
     panel->phase = 0;
     if (state == 23) {
-        FUN_002a0cc8(0);
+        gameGlobalsSetSubScreenActive(0);
         state = panel->sceneState;
     }
     if (state == 19) {

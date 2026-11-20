@@ -22,7 +22,7 @@ BustupTextureDefinition *FUN_00283498(u32 id);
 u32 *dataTable19FindAddonWord(BustupTextureDefinition *definition, u32 index);
 void *asdMemoryAllocTracked(s32 heap, s32 alignment, u32 flags, u32 bytes, s32 fromFront);
 void sysMemClear(void *memory, u32 bytes);
-s32 FUN_00162ea4();
+s32 eventIsSkipping();
 s32 aocRunByName(AocSystemA *system, s32 table, s32 node, u32 mode);
 void FUN_0026c568(void *work);
 void asdMTeXReleaseJobContext(void *work);
@@ -49,7 +49,7 @@ void bustupTextureStart(u32 id, s32 useDefinition)
         work->x = 25.0f;
         work->y = 25.0f;
     }
-    if (FUN_00162ea4()) {
+    if (eventIsSkipping()) {
         work->deferred = 1;
     } else {
         if (work->node != -1) {

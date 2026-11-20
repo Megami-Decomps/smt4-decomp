@@ -3,7 +3,7 @@
 #include "sound/VoiceManagerCalls.h"
 
 extern "C" {
-extern SoundVoicePool DAT_0044d0f8;
+extern SoundVoicePool g_soundVoicePool;
 extern u32 DAT_004c40f8;
 void nn_os_CriticalSection_Enter(void *section);
 void nn_os_CriticalSection_Leave(void *section);
@@ -11,20 +11,20 @@ void nn_os_CriticalSection_Leave(void *section);
 /* Allocate an unused voice slot and its event buffer. */
 u32 FUN_0034e310(s32 first, s32 second, s32 capacity)
 {
-    for (u32 index = 0; index < DAT_0044d0f8.count; ++index) {
-        if (DAT_0044d0f8.entries[index].voice == 0) {
-            DAT_0044d0f8.entries[index].capacity = capacity;
-            DAT_0044d0f8.entries[index].buffer = DAT_0044d0f8.allocator->allocate(capacity * 24, 4);
-            void *buffer = DAT_0044d0f8.entries[index].buffer;
+    for (u32 index = 0; index < g_soundVoicePool.count; ++index) {
+        if (g_soundVoicePool.entries[index].voice == 0) {
+            g_soundVoicePool.entries[index].capacity = capacity;
+            g_soundVoicePool.entries[index].buffer = g_soundVoicePool.allocator->allocate(capacity * 24, 4);
+            void *buffer = g_soundVoicePool.entries[index].buffer;
             if (buffer == NULL) {
                 return 0;
             }
             nn_os_CriticalSection_Enter(&DAT_004c40f8);
-            DAT_0044d0f8.entries[index].voice = FUN_002bd29c(0x80, 0, 0);
+            g_soundVoicePool.entries[index].voice = nwSoundVoiceAllocate(0x80, 0, 0);
             nn_os_CriticalSection_Leave(&DAT_004c40f8);
-            SoundVoicePoolEntry *entry = &DAT_0044d0f8.entries[index];
+            SoundVoicePoolEntry *entry = &g_soundVoicePool.entries[index];
             if (entry->voice == 0) {
-                DAT_0044d0f8.allocator->release(entry->buffer);
+                g_soundVoicePool.allocator->release(entry->buffer);
                 return 0;
             }
             entry->counters[0] = 0;

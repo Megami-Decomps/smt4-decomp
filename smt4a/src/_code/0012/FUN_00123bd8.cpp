@@ -29,7 +29,7 @@ extern int onlineContextGetInstance(void);
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
-extern int FUN_002ea704(void);
+extern int watcherGetEnabledFlag(void);
 extern int *FUN_003055cc(fn_00123bd8_arg1 *);
 
 
@@ -59,7 +59,7 @@ void FUN_00123bd8(unsigned int param_1,fn_00123bd8_arg1 *param_2)
     if (((piVar2 == (int *)0x0) || (temp_v0 = (**(romwright_code **)(*piVar2 + 0x14))(piVar2), temp_v0 == 0)) ||
        ((temp_v0 = (**(romwright_code **)(*piVar2 + 0x18))(piVar2), temp_v0 != 0 ||
         ((*(int *)(piVar2[2] + 0xc) == 0 ||
-         (temp_v0 = FUN_002ea704(), *(char *)(temp_v0 + 0x10e) != '\0')))))) {
+         (temp_v0 = watcherGetEnabledFlag(), *(char *)(temp_v0 + 0x10e) != '\0')))))) {
       temp_v3[0] = 0x800300d2;
       puVar3 = temp_v3;
     }

@@ -2,7 +2,7 @@
 #include "camp/Unite/UniteGlobals.h"
 
 extern "C" {
-void FUN_002f3bc4(void *list, s32 selection, s32 mode);
+void uniteBuildResultUnitRecord(void *list, s32 selection, s32 mode);
 void FUN_0033449c(s32 mode);
 void FUN_0031f718(s32 id, s32 first, s32 second);
 void objBInitBlock19D0(void *list, s32 first, s32 second);
@@ -11,7 +11,7 @@ void FUN_002c8550(s32 state);
 void FUN_0037e1b0(s32 first, s32 second);
 u32 FUN_0034a9ac(void);
 void statusPanelSetOpen(s32 open);
-void FUN_0037c8e4(s32 first, s32 second);
+void messageBannerInitCounter(s32 first, s32 second);
 void panelSetTarget(s32 offset, s32 frame);
 void buttonHelpSetText(s32 first, u32 color);
 void FUN_0020b908(s32 first, s32 second);
@@ -51,7 +51,7 @@ void FUN_0034c940(s32 selection)
     SelectionView *work = reinterpret_cast<SelectionView *>(g_unite);
     void *list = &work->list;
     work->active = 1;
-    FUN_002f3bc4(list, selection, 0);
+    uniteBuildResultUnitRecord(list, selection, 0);
     work->saved[0] = work->list.current[0];
     work->saved[1] = work->list.current[1];
     work->saved[2] = work->list.current[2];
@@ -71,7 +71,7 @@ void FUN_0034c940(s32 selection)
     FUN_0037e1b0(0, 0);
     statusPanelSetOpen(FUN_0034a9ac() != static_cast<u16>(work->list.id));
     if (work->panelOffset > 0) {
-        FUN_0037c8e4(1, 0);
+        messageBannerInitCounter(1, 0);
         panelSetTarget(-work->panelOffset, 0);
     }
     buttonHelpSetText(0, 0xf4f4f4ff);

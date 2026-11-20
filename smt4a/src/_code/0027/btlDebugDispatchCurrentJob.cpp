@@ -8,7 +8,7 @@ typedef struct {
     void *handler;      /* 0x08 */
 } HandlerBlock;
 
-extern HandlerBlock DAT_005715f8;
+extern HandlerBlock g_btlDebugGlobals;
 
 u32 jobGetWork(void);
 int FUN_004d6104(void *handler, u32 context);
@@ -18,10 +18,10 @@ int btlDebugDispatchCurrentJob(void)
 {
     u32 context = jobGetWork();
 
-    if (DAT_005715f8.handler == NULL) {
+    if (g_btlDebugGlobals.handler == NULL) {
         return 0;
     }
-    return FUN_004d6104(DAT_005715f8.handler, context);
+    return FUN_004d6104(g_btlDebugGlobals.handler, context);
 }
 
 } /* extern "C" */

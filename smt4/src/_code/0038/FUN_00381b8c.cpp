@@ -57,7 +57,7 @@ void placeWinCreate(void);
 void messageStatesSetFirst(s32 state);
 void qcMainSetMode(s32 mode);
 s32 questReadRuntimeFlag(u32 id, u32 flag);
-void FUN_0028eeb8(u32 id);
+void gameFlagEntryActivate(u32 id);
 
 // Initialize the quest-center screen resources and enable eligible late quest entries.
 void FUN_00381b8c(QuestCenterScreenStateIV *work)
@@ -103,7 +103,7 @@ void FUN_00381b8c(QuestCenterScreenStateIV *work)
     for (u16 id = 350; id < 400; ++id) {
         const QuestRecord *record = questDataGetRecord(id);
         if (record != NULL && record->kind == 0 && !questReadRuntimeFlag(id, 1))
-            FUN_0028eeb8(id);
+            gameFlagEntryActivate(id);
     }
 }
 }

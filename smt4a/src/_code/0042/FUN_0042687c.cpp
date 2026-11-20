@@ -5,7 +5,7 @@
 #include <string.h>
 
 extern "C" {
-extern u32 DAT_005c149c;
+extern u32 g_amAppSession;
 
 /* Sends IPC command 0x201 with a mode byte, two parameter words, `count` and two mapped buffers (`count` halfwords
  * at `buffer`, `count` 24-byte records at `handle`); returns the reply word or the error. */
@@ -22,7 +22,7 @@ u32 FUN_0042687c(u32 handle, u8 mode, u32 first, u32 second, u32 buffer, s32 cou
     command->words[5] = buffer;
     command->words[6] = ipcMappedBufferDescriptor(count * 24, 0xc);
     command->words[7] = handle;
-    s32 result = nn::svc::SendSyncRequest(DAT_005c149c);
+    s32 result = nn::svc::SendSyncRequest(g_amAppSession);
     return nnResultIsSuccess(result) ? command->words[0] : static_cast<u32>(result);
 }
 }

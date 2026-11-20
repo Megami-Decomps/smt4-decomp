@@ -13,7 +13,7 @@ int fontMeasureLineAdvance(...);
 
 int textDrawString(...);
 int texDrawCompositeSprite(...);
-int FUN_00180310(...);
+int statRowDrawValueImpl(...);
 int uiDrawItemOrStatusIcon(...);
 int gxResetColorQuadToWhite(void);
 int drawSetColorFromRGBA8(...);
@@ -46,7 +46,7 @@ extern int g_camp; /* 0x57f108 */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_00180310. */
+/* Supplied declaration required: statRowDrawValueImpl. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
@@ -61,9 +61,9 @@ extern int FUN_002684d0(unsigned int, int);
 extern int recordGetModeForId(int);
 extern int resourceRunOperationIfUnblocked(int);
 extern int listCursorGetRowIfUnblocked(int);
-extern int objectApplyIfUnblocked(int);
+extern int gridNavigationGetItemCount(int);
 /* Supplied declaration required: statDrawClampedDelta. */
-extern unsigned int FUN_003df57c(unsigned int, unsigned int);
+extern unsigned int skillGetCostWithRankReduction(unsigned int, unsigned int);
 extern unsigned int skillGetAdjustedCost(int, unsigned int);
 
 
@@ -107,7 +107,7 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
   temp_v7 = 0;
   do {
     temp_v1 = resourceRunOperationIfUnblocked(temp_v13);
-    temp_v2 = objectApplyIfUnblocked(temp_v13);
+    temp_v2 = gridNavigationGetItemCount(temp_v13);
     if (temp_v2 <= temp_v1 + temp_v7) break;
     temp_v1 = resourceRunOperationIfUnblocked(temp_v13);
     temp_v9 = *(unsigned int *)(temp_v6 + (temp_v1 + temp_v7) * 8 + 0x1b70);
@@ -167,14 +167,14 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
       textDrawString(2,temp_v15,temp_v17,(int)*(short *)(temp_v2 + 8));
     }
     if ((int)temp_v8 < 0) {
-      temp_v5 = FUN_003df57c(temp_v9,1);
+      temp_v5 = skillGetCostWithRankReduction(temp_v9,1);
       sprintf((char *)temp_v11,"%d",temp_v5);
     }
     else {
       temp_v5 = skillGetAdjustedCost(temp_v12,temp_v9);
       sprintf((char *)temp_v11,"%d",temp_v5);
     }
-    FUN_00180310(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8) + param_1,
+    statRowDrawValueImpl(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8) + param_1,
                  (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,1,4,0x6f,
                  temp_v11);
     FUN_00185e84((int)(short)temp_v9,
@@ -204,7 +204,7 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
     temp_v7 = temp_v7 + 1;
   } while (temp_v7 < 0xb);
   FUN_0023d150(temp_v13,param_1,param_2,1);
-  if ((temp_v18 != 0) && (temp_v7 = objectApplyIfUnblocked(temp_v6 + 0x1ec), temp_v7 >= 1)) {
+  if ((temp_v18 != 0) && (temp_v7 = gridNavigationGetItemCount(temp_v6 + 0x1ec), temp_v7 >= 1)) {
     temp_v7 = resourceRunOperationIfUnblocked(temp_v13);
     temp_v1 = listCursorGetRowIfUnblocked(temp_v13);
     temp_v9 = *(unsigned int *)(temp_v6 + (temp_v1 + temp_v7) * 8 + 0x1b70);
@@ -267,14 +267,14 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
     texDrawTableEntryAtStoredOrigin(2,0x14,0x446,*(short *)(temp_v7 + 8) + param_1,*(short *)(temp_v7 + 10) + param_2,0x83)
     ;
     if ((int)temp_v8 < 0) {
-      temp_v5 = FUN_003df57c(temp_v9,1);
+      temp_v5 = skillGetCostWithRankReduction(temp_v9,1);
       sprintf((char *)temp_v11,"%d",temp_v5);
     }
     else {
       temp_v5 = skillGetAdjustedCost(temp_v12,temp_v9);
       sprintf((char *)temp_v11,"%d",temp_v5);
     }
-    FUN_00180310(0,(int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
+    statRowDrawValueImpl(0,(int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
                  (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,1,4,0x83,
                  temp_v11);
     temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x43f));
@@ -314,7 +314,7 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
     temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x444));
     gxResetColorQuadToWhite();
   }
-  temp_v6 = objectApplyIfUnblocked(temp_v6 + 0x1ec);
+  temp_v6 = gridNavigationGetItemCount(temp_v6 + 0x1ec);
   if (temp_v6 < 1) {
     texDrawCompositeSprite(2,0x12,0x1b,param_1,param_2,0xdd);
     temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x544));

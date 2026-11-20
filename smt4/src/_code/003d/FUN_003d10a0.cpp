@@ -39,7 +39,7 @@ struct BtlMainState;
 
 extern "C" {
 
-s32 FUN_0029e9cc(u16 recordId);
+s32 itemIsCollectedWithRelated(u16 recordId);
 s32 FUN_00228220(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, s32 c, u32 d, u8 *out);
 s32 FUN_0022899c(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, u32 c);
 void btlEntryBuildSummary(u16 *summary, BtlMainState *state, u32 *actor);
@@ -89,7 +89,7 @@ s32 FUN_003d10a0(BtlMainState **state, AiSkillContext *context, AiSkillTarget **
         for (u32 i = 0; i < count; i++) {
             s32 blocked = 0;
 
-            if ((targets[i]->flags & 0x400) != 0 && FUN_0029e9cc(targets[i]->recordId) != 0) {
+            if ((targets[i]->flags & 0x400) != 0 && itemIsCollectedWithRelated(targets[i]->recordId) != 0) {
                 s32 result = FUN_00228220(0, 0, 1, context->caster->slot, targets[i]->slot, 0, 1, &out);
 
                 if (result == 1 || result == 2 || result == 3) {

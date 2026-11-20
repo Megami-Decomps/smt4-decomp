@@ -2,16 +2,16 @@
 extern "C" {
 void saveLoadCreateBootProcess(void);
 s32 byteTripleGetV2(void);
-void FUN_00320c64(void);
+void aocBootDialogStart(void);
 s32 aocBootIsFinished(void);
 void aocBootStop(void);
 void *FUN_00239288(void);
 void rt_aeabi_memclr(void *buffer, u32 size);
-const char *FUN_00371b10(u32 index, u32 flags);
+const char *saveFormatSlotFilename(u32 index, u32 flags);
 char *libc_strcpy(char *destination, const char *source);
 s32 FUN_003416a0(u32 index, const char *path);
 void FUN_00268250(s32 operation, s32 mode, s32 flags, void *buffer, u32 size);
-s32 FUN_00229c9c(void);
+s32 lazyScriptTaskStep(void);
 void byte1IsZero(void);
 void asdSequenceRequest(s32 sequence, s32 argument, s32 flags);
 
@@ -25,7 +25,7 @@ void addonAdvanceBootTransition(BootTransitionWork *work)
     case 1:
         if (!byteTripleGetV2())
             return;
-        FUN_00320c64();
+        aocBootDialogStart();
         ++work->state;
     case 2:
         if (!aocBootIsFinished())
@@ -37,7 +37,7 @@ void addonAdvanceBootTransition(BootTransitionWork *work)
         rt_aeabi_memclr(requestBuffer, 128);
         char path[128];
         rt_aeabi_memclr(path, sizeof(path));
-        libc_strcpy(path, FUN_00371b10(0, 0));
+        libc_strcpy(path, saveFormatSlotFilename(0, 0));
         if (!FUN_003416a0(0, path)) {
             work->state += 2;
             return;
@@ -46,7 +46,7 @@ void addonAdvanceBootTransition(BootTransitionWork *work)
         ++work->state;
     }
     case 4:
-        if (!FUN_00229c9c())
+        if (!lazyScriptTaskStep())
             return;
         byte1IsZero();
         ++work->state;

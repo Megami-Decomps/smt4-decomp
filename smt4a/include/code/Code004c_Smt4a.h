@@ -5,7 +5,7 @@
 struct Flags4C;
 extern "C" {
 
-s32 FUN_004c53fc(u32 category);
+s32 mapCategoryToDestinationGroup(u32 category);
 
 void NaviMain_ResetFlags(Flags4C *obj, u8 mode);
 

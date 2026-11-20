@@ -18,8 +18,8 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_00120faa. */
-extern int *FUN_002ea704(void);
-extern int FUN_002eb5f4(void);
+extern int *watcherGetEnabledFlag(void);
+extern int watcherGetActiveContext(void);
 extern int wordRefsDiffer_002ee774(unsigned int **, unsigned int **);
 extern int FUN_002ee978(unsigned int *);
 /* Supplied declaration required: FUN_002f8728. */
@@ -42,7 +42,7 @@ void FUN_00114504(void)
   unsigned int *temp_v5;
   
   FUN_002f8728(temp_v2);
-  temp_v0 = FUN_002eb5f4();
+  temp_v0 = watcherGetActiveContext();
   FUN_002ff78c(temp_v0 + 0x54,temp_v2);
   temp_v4 = temp_v3;
   while( 1 ) {
@@ -53,7 +53,7 @@ void FUN_00114504(void)
     temp_v0 = FUN_002fd454(temp_v4 + 2);
     if ((temp_v0 != 0) && (temp_v0 = FUN_002ee978(temp_v4 + 2), temp_v0 != 0)) {
       puVar4 = temp_v4 + 2;
-      piVar2 = (int *)FUN_002ea704();
+      piVar2 = (int *)watcherGetEnabledFlag();
       temp_v1 = (**(romwright_code **)(*piVar2 + 0x2c))();
       FUN_00120faa(temp_v1,puVar4);
     }

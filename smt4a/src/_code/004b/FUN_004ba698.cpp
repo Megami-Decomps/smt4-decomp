@@ -23,7 +23,7 @@ s32 FUN_004ba698(SequentialAnimationPrefixA *state)
     }
     ++state->progress;
     UiSpriteState *intro = &state->intro;
-    FUN_00167458(intro, 0);
+    uiSpriteSlideFromSide(intro, 0);
     if (uiSpriteGetCompletionState(intro) && state->progress > count &&
         uiSpriteGetCompletionState(&state->rows[count - 1])) {
         state->completion = 1;

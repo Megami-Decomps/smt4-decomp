@@ -40,25 +40,25 @@ static BattleVector3 operator*(const BattleVector3 &value, f32 factor)
 extern "C" {
 extern BtlCameraStatics g_btlMain;
 extern BattleCameraHistory DAT_00493530;
-f32 FUN_00227280(s32 mode, s32 duration, s32 frame);
+f32 easeEvaluate(s32 mode, s32 duration, s32 frame);
 
 void battleCameraBlendTargetOffset(BattleTargetCamera *camera)
 {
     BattleTargetCameraInputs *input = reinterpret_cast<BattleTargetCameraInputs *>(camera);
     if (g_btlMain.routingMode == 2) {
         BattleVector3 delta = camera->alternateDestination - DAT_00493530.alternate;
-        f32 factor = FUN_00227280(camera->mode, camera->duration, camera->frame);
+        f32 factor = easeEvaluate(camera->mode, camera->duration, camera->frame);
         camera->secondaryElapsed = input->base + delta * factor;
         return;
     }
     if (g_btlMain.routingMode != 1) {
         BattleVector3 delta = camera->alternateDestination - (input->origin - camera->offset);
-        f32 factor = FUN_00227280(camera->mode, camera->duration, camera->frame);
+        f32 factor = easeEvaluate(camera->mode, camera->duration, camera->frame);
         camera->offset = delta * factor;
         return;
     }
     camera->offset = DAT_00493530.current;
-    f32 factor = FUN_00227280(camera->mode, camera->duration, camera->frame);
+    f32 factor = easeEvaluate(camera->mode, camera->duration, camera->frame);
     camera->offset = (camera->alternateDestination - (input->origin - camera->offset)) * factor;
     DAT_00493530.current = camera->offset;
     camera->offset = DAT_00493530.original;

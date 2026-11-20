@@ -65,7 +65,7 @@ struct SceneRecordCounters {
 extern "C" {
 extern SceneRecordCounters DAT_00580c90;
 extern ScenePlacementSlot DAT_00602020[];
-extern SceneRecord DAT_005f32a0[];
+extern SceneRecord g_recordTable[];
 s32 FUN_00305760(SceneRegistration*);
 s32 FUN_00244c70(u32 id, u32 effect, s32 variant, u32 priority,
                  f32 x, f32 y, f32 z, f32 yaw);
@@ -106,10 +106,10 @@ s32 sceneRegisterBoxEffect(u32 id, u32 value, const char* name, u32 resource,
     slot.registration.name = name;
     const s32 recordIndex = FUN_00305760(&slot.registration);
     const s32 handle = FUN_00244c70(id, effect, variant, priority, x, y, z, yaw);
-    SceneRecord& record = DAT_005f32a0[recordIndex];
+    SceneRecord& record = g_recordTable[recordIndex];
     record.handle = handle;
     record.field16c = flag0;
-    DAT_005f32a0[placementIndex].field16d = flag1;
+    g_recordTable[placementIndex].field16d = flag1;
     record.id = id;
     record.value = value;
     record.status = -1;

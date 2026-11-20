@@ -11,7 +11,7 @@ int FUN_0034f5f8(void *obj);
 int FUN_0034f6e8(void *obj);
 int movieSyncDrainSourcePositions(S4Player *player);
 int mobiclipS4PlayerDestroy(S4Player *player);
-int FUN_003f6b28(u32 handle);
+int mobiclipCtrlReleaseResource(u32 handle);
 void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 
 extern u32 DAT_0044d024;
@@ -30,7 +30,7 @@ void mobiclipCtrlShutdown(void)
     mobiclipS4PlayerDestroy(&g_mobiclipPlayer);
     ((Obj420a2c *)DAT_004c3a50)->Obj420a2c::releaseSources();
     FUN_0034f6e8(DAT_004c3af8);
-    FUN_003f6b28(DAT_0044d024);
+    mobiclipCtrlReleaseResource(DAT_0044d024);
     DAT_0044d024 = 0;
     mobiclipS4FsReaderDestroy(&DAT_004c4080);
     handle = &DAT_004c40e0.handle;

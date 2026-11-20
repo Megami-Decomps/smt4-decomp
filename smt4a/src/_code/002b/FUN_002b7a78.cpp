@@ -13,16 +13,16 @@ struct MapEffectInstanceA {
 
 extern "C" {
 extern MapEffectReservationState DAT_00580c90;
-extern MapEffectInstanceA DAT_005f32a0[];
+extern MapEffectInstanceA g_recordTable[];
 
 // Set the frame range of the first live map effect created from the resource and deactivate it.
 void FUN_002b7a78(u32 resource, u16 first, u16 second)
 {
     for (s32 i = 0; i < DAT_00580c90.count; i++) {
-        if (DAT_005f32a0[i].resource == resource) {
-            DAT_005f32a0[i].first = first;
-            DAT_005f32a0[i].second = second;
-            DAT_005f32a0[i].active = 0;
+        if (g_recordTable[i].resource == resource) {
+            g_recordTable[i].first = first;
+            g_recordTable[i].second = second;
+            g_recordTable[i].active = 0;
             return;
         }
     }

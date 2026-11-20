@@ -20,7 +20,7 @@ struct GameUnitSortRecord {
 extern "C" {
 #endif
 
-u32 FUN_002b8660(void);
+u32 resultIsIdle(void);
 
 #ifdef __cplusplus
 }
@@ -30,7 +30,7 @@ u32 FUN_002b8660(void);
 extern "C" {
 #endif
 
-u32 FUN_002b89a4(s32 index);
+u32 screenFaderIsSettled(s32 index);
 
 #ifdef __cplusplus
 }

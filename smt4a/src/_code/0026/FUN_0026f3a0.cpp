@@ -21,7 +21,7 @@ SlotRecord *gameGetSlotRecord(s32 id);
 void slotPlacementAssignSlotPosition(PartyPanelWidget *widget, u32 toggle);
 void slotPlacementStartTransition(PartyPanelWidget *widget, s32 alternate);
 void slotPlacementSetSlot(PartyPanelWidget *widget, s32 slot);
-s32 FUN_004bd0d8(void);
+s32 slotIsReservePick(void);
 void FUN_002ade88(void);
 void partyPanelRefreshFilterMarks(void);
 
@@ -70,7 +70,7 @@ void FUN_0026f3a0(void)
             panel->demons[i]->empty = 0;
             panel->demons[i]->slot = panel->entries[i].packedIndex;
             record = gameGetSlotRecord(panel->entries[i].packedIndex);
-            panel->demons[i]->hasTag = FUN_004bd0d8() != 0;
+            panel->demons[i]->hasTag = slotIsReservePick() != 0;
             panel->demons[i]->flagA = (record->flags & 0x400) != 0;
             panel->demons[i]->flagB = (record->flags & 4) != 0;
         }

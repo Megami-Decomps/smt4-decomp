@@ -6,7 +6,7 @@ extern "C" {
 
 int _ZN9Obj55b28cD1Ev(int *);
 int FUN_002f1468(unsigned int *, int *);
-int FUN_002fb208(void);
+int threadGetCurrentId(void);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ typedef struct {
 extern unsigned int _ZN9Obj55b28cC1EPv(int *, int);
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002f1468. */
-/* Supplied declaration required: FUN_002fb208. */
+/* Supplied declaration required: threadGetCurrentId. */
 
 
 int FUN_002ebc50(int param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
@@ -35,7 +35,7 @@ int FUN_002ebc50(int param_1,unsigned int *param_2,unsigned int param_3,unsigned
   uStack_18 = param_3;
   temp_v1 = param_4;
   temp_v0 = _ZN9Obj55b28cC1EPv(&iStack_20,param_1 + 0x10);
-  FUN_002fb208();
+  threadGetCurrentId();
   puVar2 = (unsigned int *)(param_1 + 0x40);
   temp_v1 = temp_v0;
   FUN_002f1468(puVar2,&temp_v1);

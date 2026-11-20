@@ -41,7 +41,7 @@ void FUN_00291860(ScreenResources *screen)
         screen->blockB = NULL;
     }
     gameGlobalsSetSelected(0);
-    FUN_002a0cc8(0);
+    gameGlobalsSetSubScreenActive(0);
     gameReleaseDataReference();
     if (screen->texturesLoaded != 0) {
         for (s32 node = 0; node < 3; ++node) {

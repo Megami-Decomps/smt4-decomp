@@ -58,7 +58,7 @@ static __inline bool hintInList(const u32 *list, s32 count, u32 id)
 
 void FUN_00294cfc(u32 owner)
 {
-    FUN_00152f44();
+    messageVoiceFlagsGet();
     if (g_popupState->state != 0)
         return;
     SaveSlotView *slot = saveSlotFindSelected();
@@ -75,7 +75,7 @@ void FUN_00294cfc(u32 owner)
     u32 chosen = 0;
     for (s32 i = 0; i < HINT_CANDIDATE_COUNT; i++) {
         u32 id = candidates->ids[i];
-        if (FUN_002a4b28(id) != 0)
+        if (compendiumEntryIsRegistered(id) != 0)
             continue;
         NkmEnemyRecordA *record = nkmEnemyFindById(id);
         if ((nkmBaseGetRecord(id)->flags & 1) != 0 && (nkmEnemyFindById((u16)id)->flags & 4) != 0

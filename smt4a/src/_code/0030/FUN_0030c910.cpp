@@ -23,9 +23,9 @@ extern "C" {
 OnlineInstanceTable *onlineInstanceTableGetCurrent(void);
 OnlineInstance *onlineInstanceTableFind(OnlineInstanceTable *table, u32 key);
 s32 _ZNK18OnlineResultRecord7isValidEv(s32 *index);
-void FUN_002f3dc4(OnlineInstance *instance, const OnlineReference *reference);
-void FUN_002f3dde(OnlineInstance *instance, const OnlineReference *reference);
-void FUN_002e9f00(void *state, s32 value);
+void onlineInstanceCompleteMode2(OnlineInstance *instance, const OnlineReference *reference);
+void onlineInstanceCompleteMode3(OnlineInstance *instance, const OnlineReference *reference);
+void onlineInstanceCompleteWithChildren(void *state, s32 value);
 void onlineJobSetStateDone(OnlineCompletionJob *job);
 
 // Complete an online job by delivering its result/reference to the matching instance.
@@ -36,13 +36,13 @@ void FUN_0030c910(OnlineCompletionJob *job, OnlineReference *reference)
         if (_ZNK18OnlineResultRecord7isValidEv(&reference->index) != 0) {
             *job->output = job->result;
             OnlineReference copied = *reference;
-            FUN_002f3dc4(instance, &copied);
+            onlineInstanceCompleteMode2(instance, &copied);
         } else {
             OnlineReference copied = *reference;
-            FUN_002f3dde(instance, &copied);
+            onlineInstanceCompleteMode3(instance, &copied);
         }
     } else {
-        FUN_002e9f00(job->state, 4);
+        onlineInstanceCompleteWithChildren(job->state, 4);
     }
     onlineJobSetStateDone(job);
 }

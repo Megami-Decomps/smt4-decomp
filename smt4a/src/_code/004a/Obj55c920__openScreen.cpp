@@ -23,9 +23,9 @@ void **asdTMTexTableGetEntry(s32 table);
 void asdTMTexTableLoadSprites(s32 table);
 void asdTMTexTablePrepareNodeImage(s32 table, s32 index);
 void statusAcquireSharedResources(void);
-void FUN_002c85b0(s32 arg);
-void FUN_002c8538(s32 arg);
-void FUN_00215bd0(void);
+void gameGlobalsSetSceneState(s32 arg);
+void gameGlobalsSetOverlayActive(s32 arg);
+void unitStatusResetSpriteState(void);
 void gameGlobalsSetMenuOpenFlag(s32 arg);
 s32 FUN_002e2afc(void);
 void objBInitBlock12DC(void);
@@ -56,9 +56,9 @@ void Obj55c920::openScreen()
         screen->loadedTexture20 = 1;
     }
     statusAcquireSharedResources();
-    FUN_002c85b0(2);
-    FUN_002c8538(1);
-    FUN_00215bd0();
+    gameGlobalsSetSceneState(2);
+    gameGlobalsSetOverlayActive(1);
+    unitStatusResetSpriteState();
     gameGlobalsSetMenuOpenFlag(1);
     if (screen->unk95 == 0 && FUN_002e2afc() != 0x2f) {
         objBInitBlock12DC();

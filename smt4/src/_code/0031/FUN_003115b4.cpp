@@ -2,7 +2,7 @@
 #include "code/Code0029.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
 #include "code/Code001b.h"
-extern "C" s32 FUN_0029ee54(void *cursor);
+extern "C" s32 gridNavigationGetItemCount(void *cursor);
 
 extern "C" {
 void uiQuestLoadResources();
@@ -28,7 +28,7 @@ void FUN_003115b4(u32 questId)
         cursor = &quest->cursor;
         ids = quest->list;
     }
-    for (s32 index = 0; index < FUN_0029ee54(cursor); ++index) {
+    for (s32 index = 0; index < gridNavigationGetItemCount(cursor); ++index) {
         if (ids[index] == questId) {
             scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(cursor), index);
             break;

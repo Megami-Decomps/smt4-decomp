@@ -12,7 +12,7 @@ struct EntrySlot {
 extern "C" {
 
 EntrySlot *saveGetSelectedRecordSlot(s32 index);
-s32 FUN_003f3104(SlotRecordA *record);
+s32 characterPickRandomEntryValue(SlotRecordA *record);
 
 // Index of the slot holding `entryId`, else of a free slot (cleared), else -1.
 static inline s32 entrySlotFind(u16 entryId)
@@ -50,7 +50,7 @@ s32 entrySlotStoreRecordValue(SlotRecordA *record)
     if (index < 0) {
         return 0;
     }
-    value = FUN_003f3104(record);
+    value = characterPickRandomEntryValue(record);
     if (value == 0) {
         return 0;
     }

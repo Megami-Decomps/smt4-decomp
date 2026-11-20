@@ -18,11 +18,11 @@ int FUN_00288b20(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(...);
-int FUN_00180310(...);
+int statRowDrawValueImpl(...);
 int FUN_00185e84(...);
 int skillDataFindById(void);
 int statusDownDrawIndicatorPairs(int, int);
-int FUN_002c7e24(void);
+int gameGlobalsGetBlock1390(void);
 int unitRecordBuild(int, unsigned char [300]);
 int unitRecordBuildFromSave(int, unsigned char [300]);
 int statDrawClampedDelta(...);
@@ -61,7 +61,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00180310. */
+/* Supplied declaration required: statRowDrawValueImpl. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: FUN_00185e84. */
@@ -73,16 +73,16 @@ extern unsigned char *slotRecordFindById(void);
 extern int itemIsCollectedWithRelated(unsigned short);
 /* Supplied declaration required: FUN_00288b20. */
 extern int listCursorGetRowIfUnblocked(void);
-extern int objectApplyIfUnblocked(int);
-/* Supplied declaration required: FUN_002c7e24. */
-extern int FUN_002c7e3c(void);
-extern int FUN_002c7e54(void);
+extern int gridNavigationGetItemCount(int);
+/* Supplied declaration required: gameGlobalsGetBlock1390. */
+extern int gameGlobalsGetFieldState(void);
+extern int gameGlobalsGetSceneState(void);
 /* Supplied declaration required: unitRecordBuild. */
 extern int uiSearchPrimary(int);
 /* Supplied declaration required: unitRecordBuildFromSave. */
 /* Supplied declaration required: statDrawClampedDelta. */
 /* Supplied declaration required: recordFindAcceptedById. */
-extern unsigned int FUN_003df57c(unsigned short, unsigned int);
+extern unsigned int skillGetCostWithRankReduction(unsigned short, unsigned int);
 extern int countUnlockedSlots(void);
 /* Supplied declaration required: recordContainsPairedId. */
 /* Supplied declaration required: skillGetAdjustedCost. */
@@ -137,12 +137,12 @@ void FUN_001fc720(int param_1,int param_2)
   temp_v21 = listCursorGetRowIfUnblocked();
   temp_v27 = 0;
   temp_v24 = 0;
-  psVar4 = (short *)FUN_002c7e24();
+  psVar4 = (short *)gameGlobalsGetBlock1390();
   temp_v12 = 0;
   if (*psVar4 < 0) {
     temp_v24 = 1;
   }
-  temp_v22 = FUN_002c7e3c();
+  temp_v22 = gameGlobalsGetFieldState();
   if (temp_v22 != 0xe) {
     if (temp_v22 != 7) {
       if (temp_v22 == 0x10) {
@@ -150,7 +150,7 @@ void FUN_001fc720(int param_1,int param_2)
       }
     }
     else {
-      puVar5 = (unsigned short *)FUN_002c7e24();
+      puVar5 = (unsigned short *)gameGlobalsGetBlock1390();
       temp_v3 = itemIsCollectedWithRelated(*puVar5);
       if (temp_v3 == 0) {
         temp_v12 = 1;
@@ -168,7 +168,7 @@ void FUN_001fc720(int param_1,int param_2)
   puVar15 = (unsigned char *)0x0;
   if (*(short *)(temp_v2 + 0x598) >= 0) {
     if (temp_v22 != 4) {
-      temp_v3 = FUN_002c7e3c();
+      temp_v3 = gameGlobalsGetFieldState();
       if (temp_v3 != 5) {
         puVar15 = (unsigned char *)slotRecordFindById();
         if (puVar15 != (unsigned char *)0x0) {
@@ -316,7 +316,7 @@ LAB_001fca00:
       }
       if (temp_v12 == 0) {
         if (*(short *)(temp_v25 + 0x98) < 0) {
-          temp_v27 = FUN_003df57c(*(unsigned short *)(temp_v7 + 0x59c),1);
+          temp_v27 = skillGetCostWithRankReduction(*(unsigned short *)(temp_v7 + 0x59c),1);
         }
         else {
           temp_v5 = (unsigned int)*(unsigned short *)(temp_v7 + 0x59c);
@@ -333,7 +333,7 @@ LAB_001fca00:
         texDrawCompositeSprite(2,0x12,7,*(short *)(temp_v8 + 8) + temp_v29,*(short *)(temp_v8 + 10) + param_2,
                      0xb5);
         temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x413));
-        FUN_00180310(0,(int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v29,
+        statRowDrawValueImpl(0,(int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v29,
                      (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v7 + 10) + param_2,1,4,0xba,
                      "%d",temp_v27);
       }
@@ -350,7 +350,7 @@ LAB_001fca00:
   if (temp_v11 != 3) {
     if (temp_v11 == 7) {
       if (*(int *)(temp_v2 + 0x524) >= 9) {
-        temp_v11 = objectApplyIfUnblocked(temp_v23);
+        temp_v11 = gridNavigationGetItemCount(temp_v23);
         if (temp_v11 - 1 == temp_v21) goto LAB_001fcee8;
         if (*(int *)(temp_v2 + 0x518) == 0xe) goto LAB_001fce54;
       }
@@ -358,7 +358,7 @@ LAB_001fca00:
     }
     if (temp_v11 == 0xe) {
 LAB_001fce54:
-      temp_v11 = objectApplyIfUnblocked(temp_v23);
+      temp_v11 = gridNavigationGetItemCount(temp_v23);
       if (temp_v11 - 1 != temp_v21) goto LAB_001fce6c;
       goto LAB_001fcee8;
     }
@@ -366,7 +366,7 @@ LAB_001fce54:
 LAB_001fcef4:
     if (temp_v11 != 0x11) {
       if (*(char *)(temp_v26 + 0x50) != '\0') {
-        if ((!(temp_v11 == 7 || temp_v11 == 8)) && (temp_v12 = FUN_002c7e54(), temp_v12 != 0xc)) {
+        if ((!(temp_v11 == 7 || temp_v11 == 8)) && (temp_v12 = gameGlobalsGetSceneState(), temp_v12 != 0xc)) {
           texDrawCompositeSprite(2,0x12,9,param_1,param_2,0xbf);
         }
         else {
@@ -416,11 +416,11 @@ LAB_001fcef4:
               temp_v12 = 0;
               if (((temp_v7 == 7) || (temp_v7 == 8 || temp_v7 == 9)) || (temp_v7 == 10 || temp_v7 == 0xb)
                  ) {
-                temp_v12 = objectApplyIfUnblocked(temp_v23);
+                temp_v12 = gridNavigationGetItemCount(temp_v23);
                 temp_v12 = temp_v12 - 1;
               }
               if (*(int *)(temp_v2 + 0x518) == 0xc) {
-                temp_v12 = objectApplyIfUnblocked(temp_v23);
+                temp_v12 = gridNavigationGetItemCount(temp_v23);
               }
               if ((*(int *)(temp_v2 + 0x524) >= 9) && (temp_v21 == temp_v12)) {
                 temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x50b));
@@ -499,7 +499,7 @@ LAB_001fd80c:
                 }
                 temp_v14 = skillGetAdjustedCost(temp_v19,*(unsigned short *)(temp_v25 + 0xbc));
                 temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x508));
-                FUN_00180310(0,(int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v7 + 8) + param_1,
+                statRowDrawValueImpl(0,(int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v7 + 8) + param_1,
                              (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v12 + 10) + param_2,1
                              ,4,0xc9,"%d",temp_v14);
               }
@@ -528,7 +528,7 @@ LAB_001fd80c:
                 textDrawString(2,0xffffffff,temp_v20);
                 temp_v14 = skillGetAdjustedCost(temp_v19,*(unsigned short *)(temp_v25 + 0xbc));
                 temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x4fb));
-                FUN_00180310(0,*(short *)(temp_v12 + 8) + temp_v17,*(short *)(temp_v12 + 10) + param_2,1,4
+                statRowDrawValueImpl(0,*(short *)(temp_v12 + 8) + temp_v17,*(short *)(temp_v12 + 10) + param_2,1,4
                              ,0xc9,"%d",temp_v14);
               }
             }
@@ -601,7 +601,7 @@ LAB_001fcee8:
   texDrawTableEntryAtStoredOrigin(2,0x12,0x4e4,temp_v12,param_2,0xb3);
   texDrawTableEntryAtStoredOrigin(2,0x12,0x4e5,temp_v12,param_2,0xb3);
   texDrawCompositeSprite(2,0x12,0x13,param_1,param_2,0xb3);
-  if ((*(int *)(temp_v2 + 0x518) == 0xe) && (temp_v11 = objectApplyIfUnblocked(temp_v23), temp_v11 - 1 == temp_v21))
+  if ((*(int *)(temp_v2 + 0x518) == 0xe) && (temp_v11 = gridNavigationGetItemCount(temp_v23), temp_v11 - 1 == temp_v21))
   {
     FUN_00288b20(temp_v12,param_2,*(unsigned int *)(temp_v2 + 0x658) & 0xffff,0x435,temp_v24,0,0,0,0);
   }
@@ -631,16 +631,16 @@ LAB_001fcee8:
     temp_v14 = skillGetAdjustedCost(temp_v19,*(unsigned int *)(temp_v2 + 0x658));
     texDrawCompositeSprite(2,0x12,7,*(short *)(temp_v3 + 8) + temp_v12,*(short *)(temp_v3 + 10) + param_2,0xb5);
     temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x413));
-    FUN_00180310(0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v12,
+    statRowDrawValueImpl(0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v12,
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v11 + 10) + param_2,1,4,0xba,
                  "%d",temp_v14);
   }
 LAB_001fd57c:
-  temp_v12 = objectApplyIfUnblocked(temp_v23);
+  temp_v12 = gridNavigationGetItemCount(temp_v23);
   if (temp_v12 < 1) {
     texDrawCompositeSprite(2,0x12,0x1b,param_1,param_2,0xdd);
     temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x544));
-    puVar8 = (unsigned short *)FUN_002c7e24();
+    puVar8 = (unsigned short *)gameGlobalsGetBlock1390();
     temp_v5 = (unsigned int)*puVar8;
     nkmEnemyFindById();
     if (((temp_v5 == 0) || ((*(unsigned short *)(temp_v5 + 0x16) & 1) != 0)) && (temp_v22 != 0x10)) {

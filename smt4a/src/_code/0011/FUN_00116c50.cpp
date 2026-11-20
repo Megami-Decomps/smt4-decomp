@@ -5,7 +5,7 @@
 extern "C" {
 
 int onlineInstanceTableFind(int, unsigned int);
-int FUN_002e9f00(int, int);
+int onlineInstanceCompleteWithChildren(int, int);
 int FUN_00302f88(int, unsigned int);
 int FUN_00302fe4(int *, unsigned int, int, int);
 
@@ -18,7 +18,7 @@ typedef struct {
 extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, unsigned int *);
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
-/* Supplied declaration required: FUN_002e9f00. */
+/* Supplied declaration required: onlineInstanceCompleteWithChildren. */
 /* Supplied declaration required: FUN_00302f88. */
 extern int FUN_00302fce(int);
 /* Supplied declaration required: FUN_00302fe4. */
@@ -46,7 +46,7 @@ unsigned int FUN_00116c50(int param_1,int param_2,int param_3)
     }
     else if ((unsigned int)((*(int *)(param_1 + 0xf0) - *(int *)(param_1 + 0xec)) + param_3) >= 0x2801) {
       *(unsigned char *)(param_1 + 0xf8) = 1;
-      FUN_002e9f00(param_1 + 0x80,4);
+      onlineInstanceCompleteWithChildren(param_1 + 0x80,4);
     }
     else {
       FUN_00302fe4((int *)(param_1 + 0xec),*(unsigned int *)(param_1 + 0xf0),param_2,param_2 + param_3

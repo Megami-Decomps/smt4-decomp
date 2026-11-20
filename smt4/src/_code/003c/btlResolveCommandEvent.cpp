@@ -28,7 +28,7 @@ struct CommandEventChoice {
 };
 extern "C" {
 void FUN_00246454(u32, CommandEventChoice *, BtlEntry *);
-void FUN_0026beb4(u32, CommandEventChoice *, u32, u32, u32);
+void btlMenuCursorStepReflectAction(u32, CommandEventChoice *, u32, u32, u32);
 void FUN_002569ac(CommandEventContext *, u32);
 void btlEntryValuesCopy(CommandEventContext *, CommandEventChoice *);
 
@@ -74,7 +74,7 @@ void btlResolveCommandEvent(CommandEventContext *context, CommandEventChoice *ch
                 FUN_00246454(0, choice, unit);
         }
         if (queueEffect)
-            FUN_0026beb4(0, choice, effect, choice->effectHandle, 1);
+            btlMenuCursorStepReflectAction(0, choice, effect, choice->effectHandle, 1);
     }
     CommandEventBattle *battle = context->battle;
     BtlEntry *enemy = &battle->entries[4];

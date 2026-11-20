@@ -2,7 +2,7 @@
 #include "battle/btlCamera.h"
 
 extern "C" {
-f32 FUN_003d4dd4(u32 mode, s32 duration, s32 frame);
+f32 easeEvaluate(u32 mode, s32 duration, s32 frame);
 
 static __inline void copyVector(BtlCameraVector3 *destination, const BtlCameraVector3 *source)
 {
@@ -28,7 +28,7 @@ void FUN_004f1f78(BtlCameraA *camera)
 {
     BtlCameraVector3 delta;
     vectorSubtract(&delta, &camera->orientation.target, &camera->orientation.current);
-    f32 factor = FUN_003d4dd4(camera->orientation.mode, camera->orientation.duration, camera->orientation.frame);
+    f32 factor = easeEvaluate(camera->orientation.mode, camera->orientation.duration, camera->orientation.frame);
     camera->orientation.current.x += delta.x * factor;
     camera->orientation.current.y += delta.y * factor;
     camera->orientation.current.z += delta.z * factor;

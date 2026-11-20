@@ -15,7 +15,7 @@ int buttonHelpSetText(...);
 int scrScriptProcessCreate(void);
 int listCursorGetRowOfChildIfUnblocked(...);
 int statusDownRestartTransition(void);
-int FUN_002e2848(...);
+int scrollListHandleTouch(...);
 int FUN_002f7cd4(...);
 int FUN_002f7f6c(...);
 unsigned short* dataTable0cSub1GetText(unsigned short id);
@@ -34,8 +34,8 @@ int useCounterStart(void);
 int resourceRunOperationIfUnblocked(...);
 int listCursorGetRowIfUnblocked(...);
 int scrollListSetSelectionTracked(...);
-int objectApplyIfUnblocked(...);
-int FUN_0031f208(...);
+int gridNavigationGetItemCount(...);
+int useCounterAppendValue(...);
 int sortMenuAcquire(...);
 int useCounterRelease(void);
 
@@ -47,10 +47,10 @@ int nkmBaseGetRecord(void);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int gridNavigationConfigure(...);
-int FUN_00228b04(...);
+int gridNavigationHandleConfirm(...);
 int FUN_0023092c(void);
 int statusDownSetSpriteMode(unsigned int, unsigned int, int);
-int FUN_00230d30(void);
+int statusDownRegisterTouchRegions(void);
 int recordGetModeForId(...);
 int statusDownSwitchTab(...);
 int flaggedEntryGetValueA(...);
@@ -80,13 +80,13 @@ extern int g_statusDown; /* 0x588fe8 */
 
 /* Supplied declaration required: qsort. */
 extern int randRange(unsigned int);
-extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
+extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: padQueryLogicalKey. */
 /* Supplied declaration required: FUN_0015f490. */
 extern int querySlotHasHandle(void);
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-extern int FUN_00167458(int, unsigned int);
+extern int uiSpriteSlideFromSide(int, unsigned int);
 extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: eventQueueAddUnique. */
@@ -98,11 +98,11 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: gridNavigationConfigure. */
 extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_00228b04. */
-extern int FUN_00230544(void);
+/* Supplied declaration required: gridNavigationHandleConfirm. */
+extern int statusDownPanelIsOpenAndIdle(void);
 /* Supplied declaration required: FUN_0023092c. */
 /* Supplied declaration required: statusDownSetSpriteMode. */
-/* Supplied declaration required: FUN_00230d30. */
+/* Supplied declaration required: statusDownRegisterTouchRegions. */
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 extern int uniteNotBusy(void);
@@ -116,20 +116,20 @@ extern short resourceRunEmbeddedOperationIfUnblocked(int);
 /* Supplied declaration required: scrollListSetSelectionTracked. */
 extern int messageMainGetValue(void);
 /* Supplied declaration required: statusDownRestartTransition. */
-/* Supplied declaration required: objectApplyIfUnblocked. */
+/* Supplied declaration required: gridNavigationGetItemCount. */
 extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: statusDownSwitchTab. */
-extern unsigned short *FUN_002c7e24(void);
-extern int FUN_002c7e3c(void);
-extern int FUN_002c7e54(void);
-/* Supplied declaration required: FUN_002e2848. */
+extern unsigned short *gameGlobalsGetBlock1390(void);
+extern int gameGlobalsGetFieldState(void);
+extern int gameGlobalsGetSceneState(void);
+/* Supplied declaration required: scrollListHandleTouch. */
 /* Supplied declaration required: FUN_002f7cd4. */
 /* Supplied declaration required: FUN_002f7f6c. */
 /* Supplied declaration required: dataTable0cSub1GetText. */
 /* Supplied declaration required: flaggedEntryGetValueA. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
-/* Supplied declaration required: FUN_0031f208. */
+/* Supplied declaration required: useCounterAppendValue. */
 /* Supplied declaration required: sortMenuAcquire. */
 extern int FUN_00334044(void);
 /* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
@@ -203,7 +203,7 @@ unsigned int FUN_00268770(void)
     }
     temp_v14 = temp_v14 + 1;
   } while (temp_v14 < 0x24);
-  temp_v8 = FUN_00230544();
+  temp_v8 = statusDownPanelIsOpenAndIdle();
   if (temp_v8 == 0) {
     *(unsigned int *)(temp_v2 + 0x53c) = 0;
     *(unsigned int *)(temp_v2 + 0x540) = 0;
@@ -222,7 +222,7 @@ unsigned int FUN_00268770(void)
       temp_v12 = *puVar13;
       *puVar13 = temp_v7;
       *(unsigned int *)(temp_v6 + 0x51c) = temp_v12;
-      FUN_00230d30();
+      statusDownRegisterTouchRegions();
       *(unsigned char *)(temp_v2 + 0x528) = 1;
     }
     break;
@@ -246,7 +246,7 @@ unsigned int FUN_00268770(void)
         temp_v7 = *puVar13;
         *puVar13 = 1;
         *(unsigned int *)(temp_v6 + 0x51c) = temp_v7;
-        temp_v6 = FUN_002c7e3c();
+        temp_v6 = gameGlobalsGetFieldState();
         temp_v16 = temp_v6 != 0xe;
         temp_v15 = temp_v6 != 7;
         temp_v7 = 0x29;
@@ -257,7 +257,7 @@ unsigned int FUN_00268770(void)
         }
         if (*(int *)(temp_v2 + 0x520) == 3) {
           if (!(temp_v16 && temp_v15)) {
-            puVar10 = (unsigned short *)FUN_002c7e24();
+            puVar10 = (unsigned short *)gameGlobalsGetBlock1390();
             temp_v11 = (unsigned int)*puVar10;
             nkmBaseGetRecord();
             if ((*(unsigned char *)(temp_v11 + 0xb3) & 2) == 0) {
@@ -268,12 +268,12 @@ unsigned int FUN_00268770(void)
             }
           }
           else {
-            temp_v6 = FUN_002c7e3c();
+            temp_v6 = gameGlobalsGetFieldState();
             if (temp_v6 == 4) {
               temp_v7 = 0xf1;
             }
             else {
-              temp_v6 = FUN_002c7e54();
+              temp_v6 = gameGlobalsGetSceneState();
               if (temp_v6 == 0xd) {
                 temp_v7 = 0x119;
               }
@@ -315,9 +315,9 @@ unsigned int FUN_00268770(void)
               temp_v7 = 0x32;
               goto LAB_00268c6c;
             }
-            temp_v6 = FUN_002c7e3c();
-            if ((((temp_v6 == 9) || (temp_v6 = FUN_002c7e3c(), temp_v6 == 10)) ||
-                (temp_v6 = FUN_002c7e3c(), temp_v6 == 0xc)) || (temp_v6 = FUN_002c7e3c(), temp_v6 == 8)) {
+            temp_v6 = gameGlobalsGetFieldState();
+            if ((((temp_v6 == 9) || (temp_v6 = gameGlobalsGetFieldState(), temp_v6 == 10)) ||
+                (temp_v6 = gameGlobalsGetFieldState(), temp_v6 == 0xc)) || (temp_v6 = gameGlobalsGetFieldState(), temp_v6 == 8)) {
               temp_v7 = 0x60;
             }
             else {
@@ -325,9 +325,9 @@ unsigned int FUN_00268770(void)
             }
           }
           if (*(int *)(temp_v2 + 0x520) == 0x16) {
-            temp_v6 = FUN_002c7e3c();
-            if (((temp_v6 == 9) || (temp_v6 = FUN_002c7e3c(), temp_v6 == 10)) ||
-               ((temp_v6 = FUN_002c7e3c(), temp_v6 == 0xc || (temp_v6 = FUN_002c7e3c(), temp_v6 == 8)))) {
+            temp_v6 = gameGlobalsGetFieldState();
+            if (((temp_v6 == 9) || (temp_v6 = gameGlobalsGetFieldState(), temp_v6 == 10)) ||
+               ((temp_v6 = gameGlobalsGetFieldState(), temp_v6 == 0xc || (temp_v6 = gameGlobalsGetFieldState(), temp_v6 == 8)))) {
               temp_v7 = 0x61;
             }
             else {
@@ -339,10 +339,10 @@ unsigned int FUN_00268770(void)
               temp_v7 = 0x33;
             }
             else {
-              temp_v6 = FUN_002c7e3c();
-              if (((temp_v6 != 9) && (temp_v6 = FUN_002c7e3c(), temp_v6 != 10)) &&
-                 ((temp_v6 = FUN_002c7e3c(), temp_v6 != 0xc && (temp_v6 = FUN_002c7e3c(), temp_v6 != 8)))) {
-                temp_v6 = FUN_002c7e54();
+              temp_v6 = gameGlobalsGetFieldState();
+              if (((temp_v6 != 9) && (temp_v6 = gameGlobalsGetFieldState(), temp_v6 != 10)) &&
+                 ((temp_v6 = gameGlobalsGetFieldState(), temp_v6 != 0xc && (temp_v6 = gameGlobalsGetFieldState(), temp_v6 != 8)))) {
+                temp_v6 = gameGlobalsGetSceneState();
                 if (temp_v6 == 0xd) {
                   temp_v7 = 0x11a;
                 }
@@ -362,31 +362,31 @@ unsigned int FUN_00268770(void)
           else if (*(int *)(temp_v2 + 0x520) == 0x20) break;
         }
 LAB_00268c6c:
-        temp_v6 = FUN_002c7e3c();
+        temp_v6 = gameGlobalsGetFieldState();
         temp_v16 = temp_v6 == 9;
         if (temp_v16) {
           temp_v6 = *(int *)(temp_v2 + 0x520);
         }
         if (!temp_v16 || temp_v6 != 3) {
-          temp_v6 = FUN_002c7e3c();
+          temp_v6 = gameGlobalsGetFieldState();
           temp_v16 = temp_v6 == 10;
           if (temp_v16) {
             temp_v6 = *(int *)(temp_v2 + 0x520);
           }
           if (!temp_v16 || temp_v6 != 3) {
-            temp_v6 = FUN_002c7e3c();
+            temp_v6 = gameGlobalsGetFieldState();
             temp_v16 = temp_v6 == 0xc;
             if (temp_v16) {
               temp_v6 = *(int *)(temp_v2 + 0x520);
             }
             if (!temp_v16 || temp_v6 != 3) {
-              temp_v6 = FUN_002c7e3c();
+              temp_v6 = gameGlobalsGetFieldState();
               temp_v16 = temp_v6 == 8;
               if (temp_v16) {
                 temp_v6 = *(int *)(temp_v2 + 0x520);
               }
-              if ((((!temp_v16 || temp_v6 != 3) && (temp_v6 = FUN_002c7e54(), temp_v6 != 5)) &&
-                  (temp_v6 = FUN_002c7e54(), temp_v6 != 6)) && (temp_v6 = FUN_002c7e54(), temp_v6 != 7)) {
+              if ((((!temp_v16 || temp_v6 != 3) && (temp_v6 = gameGlobalsGetSceneState(), temp_v6 != 5)) &&
+                  (temp_v6 = gameGlobalsGetSceneState(), temp_v6 != 6)) && (temp_v6 = gameGlobalsGetSceneState(), temp_v6 != 7)) {
                 FUN_003423e8(temp_v12);
                 sysPlaySe(temp_v7);
               }
@@ -410,7 +410,7 @@ LAB_00268c6c:
   case 3:
     uiSpriteAdvanceAnimation(temp_v2 + 0xb4);
     uiSpriteAdvanceAnimation(temp_v2 + 0x1cc);
-    if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v14 = FUN_00230544(), temp_v14 != 0)) {
+    if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v14 = statusDownPanelIsOpenAndIdle(), temp_v14 != 0)) {
       temp_v14 = 4;
       padQueryLogicalKey(4,0);
       if (temp_v14 == 0) goto LAB_00268d68;
@@ -418,7 +418,7 @@ LAB_00268c6c:
     else {
 LAB_00268d68:
       if (*(int *)(temp_v2 + 0x540) != 6) {
-        if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v14 = FUN_00230544(), temp_v14 != 0)) {
+        if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v14 = statusDownPanelIsOpenAndIdle(), temp_v14 != 0)) {
           temp_v14 = 3;
           padQueryLogicalKey(3,0);
           if (temp_v14 != 0) {
@@ -444,7 +444,7 @@ LAB_00268d68:
         }
         else if (*(char *)(temp_v2 + 0x52a) == '\0') {
           temp_v14 = temp_v8;
-          FUN_00228b04(temp_v8,0);
+          gridNavigationHandleConfirm(temp_v8,0);
           if (temp_v14 != 0) {
             *(unsigned char *)(temp_v2 + 0x528) = 1;
             temp_v14 = flaggedEntryGetValueA(temp_v8);
@@ -487,7 +487,7 @@ LAB_00268d68:
           }
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < 8);
-        if ((-1 < temp_v14) && (temp_v8 = FUN_002c7e54(), temp_v8 == 0xc)) {
+        if ((-1 < temp_v14) && (temp_v8 = gameGlobalsGetSceneState(), temp_v8 == 0xc)) {
           *(unsigned short *)(temp_v2 + temp_v6 * 2 + 0x59c) = 0;
           *(unsigned short *)(temp_v2 + temp_v14 * 2 + 0x59c) = *(unsigned short *)(temp_v2 + 0x5bc);
           temp_v6 = temp_v14;
@@ -511,7 +511,7 @@ LAB_00268d68:
         temp_v6 = uiSpriteAdvanceAnimation(temp_v2 + 0x370);
         if (temp_v6 != 0) {
           FUN_0023092c();
-          FUN_00230d30();
+          statusDownRegisterTouchRegions();
           temp_v6 = g_statusDown;
           *(unsigned int *)(g_statusDown + 0x524) = 0;
           puVar13 = (unsigned int *)(temp_v6 + 0x518);
@@ -529,7 +529,7 @@ LAB_00268d68:
       if (*(int *)(temp_v2 + 0x524) == 8) {
         temp_v6 = temp_v2 + 0x5ec;
         temp_v7 = listCursorGetRowIfUnblocked();
-        temp_v14 = objectApplyIfUnblocked(temp_v6);
+        temp_v14 = gridNavigationGetItemCount(temp_v6);
         gridNavigationConfigure(temp_v6,temp_v14 + 1,9,1,0,1);
         scrollListSetSelectionTracked(temp_v6,temp_v7);
         *(unsigned char *)(temp_v2 + 0x528) = 1;
@@ -539,13 +539,13 @@ LAB_00268d68:
         temp_v8 = flaggedEntryGetValueA();
         temp_v6 = temp_v14;
         uiScrollHandleActionsOrTouch(temp_v14,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
-        if ((temp_v6 == 0) && (temp_v6 = temp_v14, FUN_00228b04(temp_v14,0), temp_v6 == 0)) {
+        if ((temp_v6 == 0) && (temp_v6 = temp_v14, gridNavigationHandleConfirm(temp_v14,0), temp_v6 == 0)) {
           temp_v6 = 0;
           padQueryLogicalKey(0,1);
           if ((temp_v6 != 0) || (*(char *)(temp_v2 + 0x24a0) != '\0')) {
             temp_v6 = resourceRunOperationIfUnblocked(temp_v14);
             temp_v8 = listCursorGetRowIfUnblocked(temp_v14);
-            temp_v10 = objectApplyIfUnblocked(temp_v14);
+            temp_v10 = gridNavigationGetItemCount(temp_v14);
             if ((temp_v6 + temp_v8) - temp_v10 != -1) {
               resourceRunOperationIfUnblocked();
               listCursorGetRowIfUnblocked(temp_v14);
@@ -555,7 +555,7 @@ LAB_00268d68:
               temp_v7 = sysPlayVoice(0x100020e);
               *(unsigned int *)(temp_v2 + 0x24a4) = temp_v7;
               temp_v7 = *(unsigned int *)(temp_v2 + 0x524);
-              temp_v14 = FUN_002c7e54();
+              temp_v14 = gameGlobalsGetSceneState();
               temp_v6 = g_statusDown;
               if (temp_v14 != 0xc) {
                 *(unsigned int *)(g_statusDown + 0x524) = 0;
@@ -573,7 +573,7 @@ LAB_00268d68:
               *(unsigned int *)(temp_v2 + 0x668) = 0;
               break;
             }
-            temp_v6 = objectApplyIfUnblocked(temp_v14);
+            temp_v6 = gridNavigationGetItemCount(temp_v14);
             *(int *)(temp_v2 + 0x654) = temp_v6 - 1;
             temp_v6 = g_statusDown;
             temp_v12 = *(unsigned int *)(temp_v2 + 0x524);
@@ -593,10 +593,10 @@ LAB_00268d68:
             if (temp_v6 != 0) {
               temp_v7 = sysPlayVoice(0x100020f);
               *(unsigned int *)(temp_v2 + 0x24a4) = temp_v7;
-              temp_v6 = objectApplyIfUnblocked(temp_v14);
+              temp_v6 = gridNavigationGetItemCount(temp_v14);
               *(int *)(temp_v2 + 0x654) = temp_v6 - 1;
               temp_v7 = *(unsigned int *)(temp_v2 + 0x524);
-              temp_v14 = FUN_002c7e54();
+              temp_v14 = gameGlobalsGetSceneState();
               temp_v6 = g_statusDown;
               if (temp_v14 != 0xc) {
                 *(unsigned int *)(g_statusDown + 0x524) = 0;
@@ -628,7 +628,7 @@ LAB_00268d68:
     uiSpriteAdvanceAnimation(temp_v2 + 0x1cc);
     temp_v6 = asdSoundIsBankHandleLoaded(*(unsigned int *)(temp_v2 + 0x24a4));
     if ((temp_v6 == 0) && (*(char *)(temp_v2 + 0x24a9) != '\0')) {
-      temp_v6 = objectApplyIfUnblocked(temp_v2 + 0x5ec);
+      temp_v6 = gridNavigationGetItemCount(temp_v2 + 0x5ec);
       if (temp_v6 - 1 == *(int *)(temp_v2 + 0x654)) {
         temp_v6 = randRange(1);
         FUN_0015f490((int)*(short *)(temp_v2 + 0x598),temp_v6 != 0,1,0);
@@ -674,7 +674,7 @@ joined_r0x002694c0:
       if (*(int *)(temp_v2 + 0x524) == 8) {
         *(unsigned char *)(temp_v2 + 0x24a8) = 0;
         temp_v6 = temp_v2 + 0x5ec;
-        temp_v14 = objectApplyIfUnblocked();
+        temp_v14 = gridNavigationGetItemCount();
         if (temp_v14 - 1 == *(int *)(temp_v2 + 0x654)) {
           FUN_0023092c();
           temp_v14 = g_statusDown;
@@ -689,7 +689,7 @@ joined_r0x002694c0:
                *(unsigned short *)(temp_v2 + 0x5bc);
           eventQueueAddUnique(0x100021a);
         }
-        temp_v14 = objectApplyIfUnblocked(temp_v6);
+        temp_v14 = gridNavigationGetItemCount(temp_v6);
         gridNavigationConfigure(temp_v6,temp_v14 - 1,8,1,0,1);
         if (*(int *)(temp_v2 + 0x654) >= 8) {
           flaggedEntrySetValueA(temp_v6,0);
@@ -703,7 +703,7 @@ joined_r0x002694c0:
         uiStoreTextureEntryCenter(temp_v2 + 0x370,0x12,*(int *)(temp_v2 + 0x654) + 0x414);
         *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
       }
-      temp_v6 = FUN_00167458(temp_v2 + 0x2e4,0);
+      temp_v6 = uiSpriteSlideFromSide(temp_v2 + 0x2e4,0);
       if (temp_v6 != 0) {
         if (*(char *)(temp_v2 + 0x24a8) == '\0') {
           FUN_0015f490((int)*(short *)(temp_v2 + 0x598),0,1);
@@ -712,7 +712,7 @@ joined_r0x002694c0:
         temp_v6 = uiSpriteAdvanceAnimation(temp_v2 + 0x370);
         if (temp_v6 != 0) {
           FUN_0023092c();
-          FUN_00230d30();
+          statusDownRegisterTouchRegions();
           temp_v6 = g_statusDown;
           *(unsigned int *)(g_statusDown + 0x524) = 0;
           puVar13 = (unsigned int *)(temp_v6 + 0x518);
@@ -731,7 +731,7 @@ joined_r0x002694c0:
       temp_v8 = flaggedEntryGetValueA();
       temp_v6 = temp_v14;
       uiScrollHandleActionsOrTouch(temp_v14,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
-      if ((temp_v6 != 0) || (temp_v6 = temp_v14, FUN_00228b04(temp_v14,0), temp_v6 != 0)) {
+      if ((temp_v6 != 0) || (temp_v6 = temp_v14, gridNavigationHandleConfirm(temp_v14,0), temp_v6 != 0)) {
         *(unsigned char *)(temp_v2 + 0x528) = 1;
         temp_v6 = flaggedEntryGetValueA(temp_v14);
         if (temp_v6 != temp_v8) {
@@ -745,7 +745,7 @@ joined_r0x002694c0:
     if (*(int *)(temp_v2 + 0x524) >= 8) {
       if (*(int *)(temp_v2 + 0x524) == 8) {
         if (*(int *)(temp_v2 + 0x65c) < 0) {
-          temp_v6 = objectApplyIfUnblocked();
+          temp_v6 = gridNavigationGetItemCount();
           gridNavigationConfigure(temp_v2 + 0x5ec,temp_v6 - 1,8,1,0,1);
           flaggedEntrySetValueA(temp_v2 + 0x5ec,0);
           temp_v6 = g_statusDown;
@@ -759,7 +759,7 @@ joined_r0x002694c0:
         else {
           *(short *)(temp_v2 + *(int *)(temp_v2 + 0x65c) * 2 + 0x59c) =
                (short)*(unsigned int *)(temp_v2 + 0x658);
-          temp_v6 = objectApplyIfUnblocked();
+          temp_v6 = gridNavigationGetItemCount();
           gridNavigationConfigure(temp_v2 + 0x5ec,temp_v6 - 1,8,1,0,1);
           uiSpriteSetKeyframe(temp_v2 + 0x2e4,1,0);
           uiSpriteSelectAnim(temp_v2 + 0x370,2);
@@ -767,7 +767,7 @@ joined_r0x002694c0:
           *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
         }
       }
-      temp_v6 = FUN_00167458(temp_v2 + 0x2e4,0);
+      temp_v6 = uiSpriteSlideFromSide(temp_v2 + 0x2e4,0);
       if ((temp_v6 != 0) && (temp_v14 = uiSpriteAdvanceAnimation(temp_v2 + 0x370), temp_v6 = g_statusDown, temp_v14 != 0))
       {
         *(unsigned int *)(g_statusDown + 0x524) = 0;
@@ -789,7 +789,7 @@ joined_r0x002694c0:
       *(unsigned char *)(temp_v2 + 0x528) = 1;
     }
     if (*(char *)(temp_v2 + 0x52a) == '\0') {
-      FUN_00228b04(temp_v9,1);
+      gridNavigationHandleConfirm(temp_v9,1);
       if (temp_v9 != 0) {
         *(unsigned char *)(temp_v2 + 0x528) = 1;
       }
@@ -801,7 +801,7 @@ joined_r0x002694c0:
     if (*(char *)(temp_v2 + 0x52a) == '\0') {
       temp_v6 = temp_v2 + 0x67c;
       temp_v14 = listCursorGetRowIfUnblocked();
-      if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v8 = FUN_00230544(), temp_v8 != 0)) {
+      if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v8 = statusDownPanelIsOpenAndIdle(), temp_v8 != 0)) {
         temp_v8 = 4;
         padQueryLogicalKey(4,0);
         if (temp_v8 != 0) {
@@ -815,7 +815,7 @@ joined_r0x002694c0:
         *(unsigned char *)(temp_v2 + 0x59b) = temp_v3;
         break;
       }
-      if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v8 = FUN_00230544(), temp_v8 != 0)) {
+      if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v8 = statusDownPanelIsOpenAndIdle(), temp_v8 != 0)) {
         temp_v8 = 3;
         padQueryLogicalKey(3,0);
         if (temp_v8 != 0) {
@@ -829,7 +829,7 @@ joined_r0x002694c0:
         uiScrollHandleActionsOrTouch(temp_v6,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
         if (temp_v8 == 0) {
           temp_v8 = temp_v6;
-          FUN_00228b04(temp_v6,1);
+          gridNavigationHandleConfirm(temp_v6,1);
           if (temp_v8 == 0) break;
           temp_v8 = gameFlagIsSet(0x410);
           if (temp_v8 == 0) {
@@ -857,7 +857,7 @@ joined_r0x002694c0:
     uiSpriteAdvanceAnimation(temp_v2 + 0xb4);
     uiSpriteAdvanceAnimation(temp_v2 + 0x1cc);
     if (*(char *)(temp_v2 + 0x52a) == '\0') {
-      if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v6 = FUN_00230544(), temp_v6 != 0)) {
+      if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v6 = statusDownPanelIsOpenAndIdle(), temp_v6 != 0)) {
         temp_v6 = 4;
         padQueryLogicalKey(4,0);
         if (temp_v6 != 0) {
@@ -871,7 +871,7 @@ joined_r0x002694c0:
         *(unsigned char *)(temp_v2 + 0x59b) = temp_v3;
         break;
       }
-      if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v6 = FUN_00230544(), temp_v6 != 0)) {
+      if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v6 = statusDownPanelIsOpenAndIdle(), temp_v6 != 0)) {
         temp_v6 = 3;
         padQueryLogicalKey(3,0);
         if (temp_v6 != 0) {
@@ -889,9 +889,9 @@ joined_r0x002694c0:
       padQueryLogicalKey(9,1);
       if (temp_v6 != 0) {
         sortMenuAcquire(0x15,0);
-        FUN_0031f208(1);
-        FUN_0031f208(0x21);
-        FUN_0031f208(3);
+        useCounterAppendValue(1);
+        useCounterAppendValue(0x21);
+        useCounterAppendValue(3);
         useCounterStart();
         temp_v6 = g_statusDown;
         *(unsigned int *)(g_statusDown + 0x524) = 0;
@@ -911,7 +911,7 @@ joined_r0x002694c0:
                    (int)*(short *)(temp_v2 + 0x58e),(int)*(short *)(temp_v2 + 0x590),temp_v2 + 0x24a0,0,1)
       ;
       if (temp_v6 == 0) {
-        FUN_00228b04(temp_v9,1);
+        gridNavigationHandleConfirm(temp_v9,1);
         if (temp_v9 != 0) {
           *(unsigned char *)(temp_v2 + 0x528) = 1;
         }
@@ -925,7 +925,7 @@ joined_r0x002694c0:
     if (temp_v6 != 0) {
       useCounterRelease();
       gameGlobalsSetMenuOpenFlag(0);
-      temp_v6 = FUN_002c7e3c();
+      temp_v6 = gameGlobalsGetFieldState();
       if (temp_v6 == 0xe || temp_v6 == 7) {
         temp_v7 = 0x32;
       }
@@ -986,7 +986,7 @@ joined_r0x002694c0:
       temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x406));
       temp_v7 = *(unsigned int *)(temp_v10 + 8);
       temp_v12 = **(unsigned int **)(temp_v10 + 0xc);
-      if (((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v10 = FUN_00230544(), temp_v10 != 0)) &&
+      if (((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v10 = statusDownPanelIsOpenAndIdle(), temp_v10 != 0)) &&
          ((temp_v10 = listCursorGetRowOfChildIfUnblocked(temp_v9), temp_v10 == 0 || (*(short *)(temp_v2 + 0x234a) == 0)))) {
         temp_v10 = 4;
         padQueryLogicalKey(4,0);
@@ -995,7 +995,7 @@ joined_r0x002694c0:
       else {
 LAB_00269ec4:
         if (*(int *)(temp_v2 + 0x540) != 6) {
-          if (((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v10 = FUN_00230544(), temp_v10 != 0)) &&
+          if (((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v10 = statusDownPanelIsOpenAndIdle(), temp_v10 != 0)) &&
              ((temp_v10 = listCursorGetRowOfChildIfUnblocked(temp_v9), temp_v10 == 3 ||
               ((int)*(short *)(temp_v2 + 0x234a) == temp_v8 + (temp_v6 + temp_v14) * 4 + 1 ||
                *(short *)(temp_v2 + 0x234a) == 0)))) {
@@ -1010,10 +1010,10 @@ LAB_00269f7c:
               padQueryLogicalKey(9,1);
               if (temp_v6 != 0) {
                 sortMenuAcquire(0x16,0);
-                FUN_0031f208(1);
-                FUN_0031f208(8);
-                FUN_0031f208(2);
-                FUN_0031f208(3);
+                useCounterAppendValue(1);
+                useCounterAppendValue(8);
+                useCounterAppendValue(2);
+                useCounterAppendValue(3);
                 useCounterStart();
                 temp_v6 = g_statusDown;
                 *(unsigned int *)(g_statusDown + 0x524) = 0;
@@ -1046,9 +1046,9 @@ LAB_00269f7c:
                 }
               }
               temp_v6 = temp_v9;
-              FUN_00228b04(temp_v9,1);
+              gridNavigationHandleConfirm(temp_v9,1);
               if (temp_v6 == 0) {
-                FUN_002e2848(temp_v9,temp_v7,temp_v12,(int)*(short *)(temp_v2 + 0x58c),
+                scrollListHandleTouch(temp_v9,temp_v7,temp_v12,(int)*(short *)(temp_v2 + 0x58c),
                              (int)*(short *)(temp_v2 + 0x58e),(int)*(short *)(temp_v2 + 0x590),0,1);
                 if (temp_v9 != 0) {
                   *(unsigned char *)(temp_v2 + 0x528) = 1;
@@ -1089,9 +1089,9 @@ LAB_00269f7c:
     if (temp_v6 != 0) {
       useCounterRelease();
       gameGlobalsSetMenuOpenFlag(0);
-      temp_v6 = FUN_002c7e3c();
-      if ((((temp_v6 == 9) || (temp_v6 = FUN_002c7e3c(), temp_v6 == 10)) ||
-          (temp_v6 = FUN_002c7e3c(), temp_v6 == 0xc)) || (temp_v6 = FUN_002c7e3c(), temp_v6 == 8)) {
+      temp_v6 = gameGlobalsGetFieldState();
+      if ((((temp_v6 == 9) || (temp_v6 = gameGlobalsGetFieldState(), temp_v6 == 10)) ||
+          (temp_v6 = gameGlobalsGetFieldState(), temp_v6 == 0xc)) || (temp_v6 = gameGlobalsGetFieldState(), temp_v6 == 8)) {
         temp_v7 = 0x61;
       }
       else {
@@ -1117,7 +1117,7 @@ LAB_00269f7c:
   case 0x18:
     if (*(char *)(temp_v2 + 0x52a) == '\0') {
       temp_v6 = resourceRunOperationIfUnblocked(temp_v2 + 0x23c0);
-      if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v14 = FUN_00230544(), temp_v14 != 0)) {
+      if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v14 = statusDownPanelIsOpenAndIdle(), temp_v14 != 0)) {
         temp_v14 = 4;
         padQueryLogicalKey(4,0);
         if (temp_v14 != 0) {
@@ -1131,7 +1131,7 @@ LAB_00269f7c:
         *(unsigned char *)(temp_v2 + 0x59b) = temp_v3;
         break;
       }
-      if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v14 = FUN_00230544(), temp_v14 != 0)) {
+      if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v14 = statusDownPanelIsOpenAndIdle(), temp_v14 != 0)) {
         temp_v14 = 3;
         padQueryLogicalKey(3,0);
         if (temp_v14 != 0) {
@@ -1158,8 +1158,8 @@ LAB_00269f7c:
       }
       else {
         temp_v14 = temp_v2 + 0x23c0;
-        FUN_00228b04(temp_v14,0);
-        if ((temp_v14 != 0) && (temp_v14 = objectApplyIfUnblocked(temp_v2 + 0x23c0), temp_v14 >= 11)) {
+        gridNavigationHandleConfirm(temp_v14,0);
+        if ((temp_v14 != 0) && (temp_v14 = gridNavigationGetItemCount(temp_v2 + 0x23c0), temp_v14 >= 11)) {
           resourceRunOperationIfUnblocked(temp_v2 + 0x23c0);
           temp_v14 = listCursorGetRowIfUnblocked(temp_v2 + 0x23c0);
           if ((temp_v14 != 9) && (temp_v14 = listCursorGetRowIfUnblocked(temp_v2 + 0x23c0), temp_v14 != 0)) {
@@ -1170,10 +1170,10 @@ LAB_00269f7c:
                  ((temp_v14 = resourceRunOperationIfUnblocked(temp_v2 + 0x23c0), temp_v14 != 0 ||
                   (temp_v14 = listCursorGetRowIfUnblocked(temp_v2 + 0x23c0), temp_v14 != 0))))) {
             temp_v14 = resourceRunOperationIfUnblocked(temp_v2 + 0x23c0);
-            temp_v8 = objectApplyIfUnblocked(temp_v2 + 0x23c0);
+            temp_v8 = gridNavigationGetItemCount(temp_v2 + 0x23c0);
             if ((temp_v14 == temp_v8 - 10) && (temp_v14 = listCursorGetRowIfUnblocked(temp_v2 + 0x23c0), temp_v14 == 9))
             break;
-            FUN_00228b04(temp_v2 + 0x23c0,0);
+            gridNavigationHandleConfirm(temp_v2 + 0x23c0,0);
             temp_v14 = resourceRunOperationIfUnblocked(temp_v2 + 0x23c0);
           }
         }
@@ -1213,7 +1213,7 @@ LAB_00269f7c:
         uiStoreTextureEntryCenter(temp_v2 + 0x370,0x12,temp_v14 + 0x414);
         *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
       }
-      temp_v6 = FUN_00167458(temp_v2 + 0x2e4,0);
+      temp_v6 = uiSpriteSlideFromSide(temp_v2 + 0x2e4,0);
       if ((temp_v6 != 0) && (temp_v14 = uiSpriteAdvanceAnimation(temp_v2 + 0x370), temp_v6 = g_statusDown, temp_v14 != 0))
       {
         *(unsigned int *)(g_statusDown + 0x524) = 0;
@@ -1228,7 +1228,7 @@ LAB_00269f7c:
     temp_v14 = temp_v2 + 0x2424;
     temp_v6 = temp_v14;
     uiScrollHandleActionsOrTouch(temp_v14,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
-    if ((temp_v6 != 0) || (FUN_00228b04(temp_v14,1), temp_v14 != 0)) {
+    if ((temp_v6 != 0) || (gridNavigationHandleConfirm(temp_v14,1), temp_v14 != 0)) {
       *(unsigned char *)(temp_v2 + 0x528) = 1;
       break;
     }
@@ -1251,7 +1251,7 @@ LAB_00269f7c:
     temp_v14 = temp_v2 + 0x2424;
     temp_v6 = temp_v14;
     uiScrollHandleActionsOrTouch(temp_v14,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
-    if ((temp_v6 != 0) || (temp_v6 = temp_v14, FUN_00228b04(temp_v14,1), temp_v6 != 0)) {
+    if ((temp_v6 != 0) || (temp_v6 = temp_v14, gridNavigationHandleConfirm(temp_v14,1), temp_v6 != 0)) {
       *(unsigned char *)(temp_v2 + 0x528) = 1;
       break;
     }
@@ -1259,7 +1259,7 @@ LAB_00269f7c:
     padQueryLogicalKey(0,1);
     if ((temp_v6 != 0) || (*(char *)(temp_v2 + 0x24a0) != '\0')) {
       temp_v6 = listCursorGetRowIfUnblocked(temp_v14);
-      temp_v8 = objectApplyIfUnblocked(temp_v14);
+      temp_v8 = gridNavigationGetItemCount(temp_v14);
       if (temp_v6 == temp_v8 - 1) {
         *(unsigned int *)(temp_v2 + 0x249c) = 0;
         if (*(char *)(temp_v2 + 0x52b) != '\0') {
@@ -1304,7 +1304,7 @@ LAB_00269f7c:
         if (*(int *)(temp_v2 + 0x249c) != 0) {
           temp_v14 = listCursorGetRowIfUnblocked();
           *(unsigned short *)(temp_v2 + temp_v14 * 2 + 0x2488) = *(unsigned short *)(temp_v2 + 0x2498);
-          temp_v8 = objectApplyIfUnblocked(temp_v6);
+          temp_v8 = gridNavigationGetItemCount(temp_v6);
           gridNavigationConfigure(temp_v6,temp_v8 - 1,8,1,1,1);
           flaggedEntrySetValueA(temp_v6,temp_v14);
           *(unsigned char *)(temp_v2 + 0x528) = 1;
@@ -1314,7 +1314,7 @@ LAB_00269f7c:
           *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
         }
         else {
-          temp_v14 = objectApplyIfUnblocked();
+          temp_v14 = gridNavigationGetItemCount();
           gridNavigationConfigure(temp_v6,temp_v14 - 1,8,1,1,1);
           flaggedEntrySetValueA(temp_v6,0);
           temp_v6 = g_statusDown;
@@ -1325,7 +1325,7 @@ LAB_00269f7c:
           *(unsigned int *)(temp_v6 + 0x51c) = temp_v7;
         }
       }
-      temp_v6 = FUN_00167458(temp_v2 + 0x2e4,0);
+      temp_v6 = uiSpriteSlideFromSide(temp_v2 + 0x2e4,0);
       if ((temp_v6 != 0) && (temp_v14 = uiSpriteAdvanceAnimation(temp_v2 + 0x370), temp_v6 = g_statusDown, temp_v14 != 0))
       {
         *(unsigned int *)(g_statusDown + 0x524) = 0;
@@ -1340,7 +1340,7 @@ LAB_00269f7c:
     temp_v14 = temp_v2 + 0x2424;
     temp_v6 = temp_v14;
     uiScrollHandleActionsOrTouch(temp_v14,0,temp_v2 + 0x544,0xffffffff,0xffffffff,0xffffffff,temp_v2 + 0x24a0,0,1);
-    if ((temp_v6 != 0) || (FUN_00228b04(temp_v14,1), temp_v14 != 0)) {
+    if ((temp_v6 != 0) || (gridNavigationHandleConfirm(temp_v14,1), temp_v14 != 0)) {
       *(unsigned char *)(temp_v2 + 0x528) = 1;
       break;
     }
@@ -1476,7 +1476,7 @@ LAB_00269f7c:
   }
   *(unsigned char *)(temp_v2 + 0x528) = 0;
   temp_v16 = 0;
-  temp_v6 = FUN_002c7e3c();
+  temp_v6 = gameGlobalsGetFieldState();
   if (temp_v6 != 0xe) {
     if (temp_v6 != 7) {
       if (temp_v6 == 0x10) {
@@ -1484,7 +1484,7 @@ LAB_00269f7c:
       }
     }
     else {
-      puVar14 = (unsigned short *)FUN_002c7e24();
+      puVar14 = (unsigned short *)gameGlobalsGetBlock1390();
       temp_v6 = itemIsCollectedWithRelated(*puVar14);
       if (temp_v6 == 0) {
         temp_v16 = 1;
@@ -1504,7 +1504,7 @@ LAB_00269f7c:
     temp_v14 = temp_v14 + temp_v8;
     if (*(int *)(temp_v2 + 0x518) == 7) {
       if (*(int *)(temp_v2 + 0x524) >= 8) {
-        temp_v8 = objectApplyIfUnblocked(temp_v6);
+        temp_v8 = gridNavigationGetItemCount(temp_v6);
         if (temp_v8 - 1 != temp_v14) goto LAB_0026adc4;
         temp_v11 = (unsigned int)*(unsigned short *)(temp_v2 + 0x5bc);
       }
@@ -1514,7 +1514,7 @@ LAB_00269f7c:
     }
     else {
 LAB_0026adc4:
-      if ((*(int *)(temp_v2 + 0x518) == 0xe) && (temp_v6 = objectApplyIfUnblocked(temp_v6), temp_v6 - 1 == temp_v14)) {
+      if ((*(int *)(temp_v2 + 0x518) == 0xe) && (temp_v6 = gridNavigationGetItemCount(temp_v6), temp_v6 - 1 == temp_v14)) {
         temp_v11 = *(unsigned int *)(temp_v2 + 0x658);
       }
       else {
@@ -1584,8 +1584,8 @@ LAB_0026adc4:
     }
     else {
       temp_v13 = *(unsigned short *)(temp_v6 + 0xf48);
-      temp_v7 = (unsigned int)FUN_00180114(temp_v13);
-      temp_v12 = FUN_0014bf3c(temp_v13,0);
+      temp_v7 = (unsigned int)table01RecordLookupForContent(temp_v13);
+      temp_v12 = demonGetRaceLabel(temp_v13,0);
       sprintf((char *)temp_v17,"%s  %s",temp_v12,temp_v7);
       puVar16 = temp_v17;
     }
@@ -1599,7 +1599,7 @@ LAB_0026adc4:
   }
   temp_v6 = temp_v2 + 0x2424;
   temp_v14 = listCursorGetRowIfUnblocked();
-  temp_v8 = objectApplyIfUnblocked(temp_v6);
+  temp_v8 = gridNavigationGetItemCount(temp_v6);
   if (temp_v14 == temp_v8 - 1) {
     temp_v1 = *(unsigned short *)(temp_v2 + 0x2498);
     temp_v11 = (unsigned int)temp_v1;

@@ -2,12 +2,12 @@
 #include "shard/W6_W6Match3_SlotState.h"
 
 extern "C" {
-extern W6Match3SlotState DAT_006357d8[2];
+extern W6Match3SlotState g_screenFadeSlots[2];
 
 // Reset both slots to their inactive state.
 void FUN_00138764(void)
 {
-    W6Match3SlotState *slots = DAT_006357d8;
+    W6Match3SlotState *slots = g_screenFadeSlots;
     for (u8 slot = 0; slot < 2; ++slot) {
         slots[slot].value = 0.0f;
         slots[slot].unk04 = 0;

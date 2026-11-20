@@ -42,9 +42,9 @@ static __inline void previewSkillOnParty(PlayScene *scene)
     u16 kind = 0;
     s16 skill = 0;
     btlCommandMenuResolveLayout(scene, &kind, &skill);
-    FUN_002621b4(scene->unk305C - 1, -1, skill, &scene->party.hpDeltas[0]);
+    skillApplyToTarget(scene->unk305C - 1, -1, skill, &scene->party.hpDeltas[0]);
     for (s32 i = 1; i < 4; i++) {
-        FUN_002621b4(scene->unk305C - 1, gameGetSlotTable()->active[i - 1], skill, &scene->party.hpDeltas[i]);
+        skillApplyToTarget(scene->unk305C - 1, gameGetSlotTable()->active[i - 1], skill, &scene->party.hpDeltas[i]);
     }
     const SkillDataRecord *record = skillDataFindById(skill);
     if ((record->rankInfo.rankFlags & 0x600) != 0 && scene->unk305C < 4 && scene->targeting.fallback < 0) {

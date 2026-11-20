@@ -9,10 +9,10 @@ struct GameSlotTable {
 extern "C" {
 s32 itemApplyToMember(s32 slot, ConsumableRecord *record, u32 option, s32 arg3, s32 arg4);
 GameSlotTable *gameGetSlotTable(void);
-void FUN_00250d84(u32 id, s32 mode);
+void saveFlagClearOrSubtractCounter(u32 id, s32 mode);
 
 /* Returns 0 when record `id` applies to the player or any filled slot (and, without `option`,
- * runs FUN_00250d84 on it unless its flag 0 is set); 1 otherwise. */
+ * runs saveFlagClearOrSubtractCounter on it unless its flag 0 is set); 1 otherwise. */
 u32 table08ApplyToParty(u32 id, u32 option)
 {
     bool applied = false;
@@ -33,7 +33,7 @@ u32 table08ApplyToParty(u32 id, u32 option)
         }
         if (applied) {
             if (option == 0 && (record->useFlags & 1) == 0) {
-                FUN_00250d84(id, 1);
+                saveFlagClearOrSubtractCounter(id, 1);
             }
             return 0;
         }

@@ -6,7 +6,7 @@ extern "C" {
 
 char *strncpy(char *destination, const char *source, u32 count);
 void unitApplyLevelGrowth(PlayerDataIV *player, s32 levels, s32 growStats);
-void FUN_003c1ef4(s32 value);
+void playerInitializeStats(s32 value);
 void playerRecalcStatsFromEquipment(s32 value);
 
 // Builds the player's record: level, name and equipment, grown up from level 1.
@@ -18,7 +18,7 @@ void playerUnitRecordInit(s32 level, const char *name, const PlayerEquipment *eq
     player->alignment = 0;
     strncpy(player->name, name, 18);
     player->name[17] = 0;
-    FUN_003c1ef4(0);
+    playerInitializeStats(0);
     if (level > 1) {
         unitApplyLevelGrowth(player, (s8)(level - 1), 1);
     }

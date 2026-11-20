@@ -35,8 +35,8 @@ extern u8 DAT_004c581a;
 
 s32 jyoucyuGetTableEntry(s32 index);
 s32 objectGetFlagBit1(u32 handle);
-s32 FUN_002c1d5c(void);
-s32 FUN_002c1658(s32 a, s32 b);
+s32 eventIsSkipping(void);
+s32 inputQueryButtonState(s32 a, s32 b);
 u32 asdSoundWaveVoiceCreate(void *data, u32 sourceId, s32 flag);
 void voiceSetMixParam(f32 a, f32 b);
 void FUN_0010b864(u32 handle, s32 volume, s32 flag);
@@ -123,7 +123,7 @@ void FUN_00106708(void)
             }
             startVoice(voice);
         } else if (voice->flags & VOICE_PLAYING) {
-            if ((DAT_004c581a != 0 || FUN_002c1d5c() != 0) && voice->mode != 4) {
+            if ((DAT_004c581a != 0 || eventIsSkipping() != 0) && voice->mode != 4) {
                 voice->flags |= VOICE_STOP_REQUESTED;
                 voice->fade = 0;
             }
@@ -150,7 +150,7 @@ void FUN_00106708(void)
             voice->state = 0;
         }
     }
-    if (DAT_004c581a == 1 && FUN_002c1658(9, 2) == 0 && slotIsActive(6) == 0)
+    if (DAT_004c581a == 1 && inputQueryButtonState(9, 2) == 0 && slotIsActive(6) == 0)
         DAT_004c581a = 0;
 }
 

@@ -5,7 +5,7 @@
 extern "C" {
 
 int soundArchiveReadBankInfo(int, unsigned int, int [2]);
-int FUN_0014d3fc(int, unsigned int, int [2]);
+int nw_snd_SoundArchive_ReadSoundInfo(int, unsigned int, int [2]);
 int soundArchiveReadWaveArchiveInfo(int, unsigned int, int [2]);
 int FUN_003e6fe8(int, unsigned int, int [2]);
 
@@ -17,7 +17,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: soundArchiveReadBankInfo. */
-/* Supplied declaration required: FUN_0014d3fc. */
+/* Supplied declaration required: nw_snd_SoundArchive_ReadSoundInfo. */
 /* Supplied declaration required: soundArchiveReadWaveArchiveInfo. */
 /* Supplied declaration required: FUN_003e6fe8. */
 
@@ -60,7 +60,7 @@ unsigned int FUN_00235c70(int *param_1,unsigned int param_2)
     }
   }
   else {
-    FUN_0014d3fc(temp_v1,param_2,temp_v3);
+    nw_snd_SoundArchive_ReadSoundInfo(temp_v1,param_2,temp_v3);
   }
   if (temp_v3[0] != -1) {
     temp_v2 = (**(romwright_code **)(*param_1 + 0x10))(param_1);

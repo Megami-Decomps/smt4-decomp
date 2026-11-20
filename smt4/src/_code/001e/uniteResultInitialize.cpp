@@ -52,7 +52,7 @@ void statusCameraSelectPreset(s32 preset);
 u32 eventResourceCacheAcquire(s32 model, s32 mode);
 void FUN_0033dcec(u32 texture, s32 a, s32 b);
 u32 asdVramBGetFreeBytes(void);
-void FUN_00343e5c(UniteRenderTarget *target, u32 extent, u32 options, u32 width, u32 height);
+void uniteResultLoadTexture(UniteRenderTarget *target, u32 extent, u32 options, u32 width, u32 height);
 void statusBustUpPortraitAcquire(s32 id, u32 kind);
 
 void rangeSelectionSelectEndpoint(UiSpriteState *sprite, s32 a, s32 b);
@@ -71,11 +71,11 @@ void uniteResultInitialize(void)
     }
     FUN_0021a374(&work->renderTarget, reinterpret_cast<u32>(work->devilTextures[0]));
     if (asdVramBGetFreeBytes() < 0x20000) {
-        FUN_00343e5c(&work->renderTarget, 0x20000, 0x20000, 0x100, 0x100);
+        uniteResultLoadTexture(&work->renderTarget, 0x20000, 0x20000, 0x100, 0x100);
     } else {
-        FUN_00343e5c(&work->renderTarget, 0x30000, 0x30000, 0x100, 0x100);
+        uniteResultLoadTexture(&work->renderTarget, 0x30000, 0x30000, 0x100, 0x100);
     }
-    FUN_00258618(&work->renderTarget);
+    titleLogoDraw(&work->renderTarget);
     work->resultTexture = reinterpret_cast<const AnimationTracks *>(eventResourceCacheAcquire(getDevilRecord(work->resultDevil)->model, 0));
     FUN_0033dcec(reinterpret_cast<u32>(work->resultTexture), 7, 1);
     if (work->materialCount == 2) {
@@ -86,20 +86,20 @@ void uniteResultInitialize(void)
             work->model = asdMdlManagerCreateLoaded("camp/jakyou_union2.bam", 7);
             work->camera  = static_cast<CameraObject *>(asdCameraLoadFromFile("camp/jakyou_union2.bccam"));
         }
-        FUN_00258408("tx_devil1");
-        FUN_00258170(&work->renderTarget);
+        uniteEffectCollectMaterialPairs("tx_devil1");
+        uniteEffectApplyScrollToModel(&work->renderTarget);
     }
     if (work->materialCount == 3) {
         work->model = asdMdlManagerCreateLoaded("camp/jakyou_union3.bam", 7);
         work->camera  = static_cast<CameraObject *>(asdCameraLoadFromFile("camp/jakyou_union3.bccam"));
-        FUN_00258408("tx_devil1");
-        FUN_00258170(&work->renderTarget);
+        uniteEffectCollectMaterialPairs("tx_devil1");
+        uniteEffectApplyScrollToModel(&work->renderTarget);
     }
     if (work->materialCount == 4) {
         work->model = asdMdlManagerCreateLoaded("camp/jakyou_union4.bam", 7);
         work->camera  = static_cast<CameraObject *>(asdCameraLoadFromFile("camp/jakyou_union4.bccam"));
-        FUN_00258408("tx_devil1");
-        FUN_00258170(&work->renderTarget);
+        uniteEffectCollectMaterialPairs("tx_devil1");
+        uniteEffectApplyScrollToModel(&work->renderTarget);
     }
     for (s32 i = 0; i < work->materialCount; i++) {
         statusBustUpPortraitAcquire((s16)work->materialDevils[i], 1);
@@ -107,7 +107,7 @@ void uniteResultInitialize(void)
     work->scriptFile = asdLoadFileSyncDefault("battle/DevilLvUp.bf");
     char path[64];
     const NkmBaseRecord *record = getDevilRecord(work->resultDevil);
-    sprintf(path, "battle/DevilMsg/%s.mbm", reinterpret_cast<const char *>(FUN_002cdecc((s8)devilRecordGetTone(record))->unk01));
+    sprintf(path, "battle/DevilMsg/%s.mbm", reinterpret_cast<const char *>(dataTable25Section0FindById((s8)devilRecordGetTone(record))->unk01));
     work->messageFile = asdLoadFileSyncDefault(path);
     work->script = scrScriptProcessCreate(work->scriptFile, work->messageFile);
     drawParameterBlockClear(&work->resources);

@@ -29,7 +29,7 @@ void FUN_00371100(SaveLoadRequest *request)
     thread->busy = 1;
     if (state == 1) {
         if (FUN_00138ca4() != 0) {
-            FUN_001387c0();
+            contentUnmount();
         }
         s32 result = processQueryAndFinish(6, 0, 0);
         /* Whether the follow-up step still runs: the thread stays busy until it finishes. */

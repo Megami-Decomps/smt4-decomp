@@ -17,18 +17,18 @@ extern "C" {
 
 extern TextRowList DAT_005c0a8c;
 extern TextRow DAT_00642b80[];
-void FUN_0019a46c(char *dst, const char *src, u32 size);
+void stringCopyTruncated(char *dst, const char *src, u32 size);
 
 /* Append a row of five strings to the text table. */
 void predicateTableAppendRow(const char *first, const char *second, const char *third, const char *fourth, const char *fifth)
 {
     TextRowList *list = &DAT_005c0a8c;
     TextRow *rows = DAT_00642b80;
-    FUN_0019a46c(rows[list->count].columns[0], first, 0x40);
-    FUN_0019a46c(rows[list->count].columns[1], second, 0x40);
-    FUN_0019a46c(rows[list->count].columns[2], third, 0x40);
-    FUN_0019a46c(rows[list->count].columns[3], fourth, 0x40);
-    FUN_0019a46c(rows[list->count].columns[4], fifth, 0x40);
+    stringCopyTruncated(rows[list->count].columns[0], first, 0x40);
+    stringCopyTruncated(rows[list->count].columns[1], second, 0x40);
+    stringCopyTruncated(rows[list->count].columns[2], third, 0x40);
+    stringCopyTruncated(rows[list->count].columns[3], fourth, 0x40);
+    stringCopyTruncated(rows[list->count].columns[4], fifth, 0x40);
     list->count++;
 }
 

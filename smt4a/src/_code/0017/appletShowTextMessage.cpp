@@ -6,7 +6,7 @@ void FUN_0018c740(AppletMessageConfig* config);
 void FUN_0018c7b0(u8* result, AppletMessageConfig* config);
 void FUN_0018c840(void);
 void FUN_0018c870(void);
-void FUN_001a1f5c(void);
+void appletWaitForSlotReady(void);
 
 void appletShowTextMessage(const u16* text)
 {
@@ -15,7 +15,7 @@ void appletShowTextMessage(const u16* text)
     textNormalizeFullwidthAscii(text, config.message, 0x76c);
     config.unk00 = 1;
     config.enabled = 0;
-    FUN_001a1f5c();
+    appletWaitForSlotReady();
     FUN_0018c840();
     FUN_0018c870();
     u8 result;

@@ -72,7 +72,7 @@ extern "C" void FUN_003e618c(NpcShopExchangeWork *work)
         if (offer->payment != 0) {
             scrSetStringSlot(1, dataFindKindRecordWithAocOverrides(offer->payment, 0));
         }
-        FUN_00359974(24, offer->cost, -1, 0);
+        entryTableResetAndInit(24, offer->cost, -1, 0);
         messageMainRequestBanner();
         npcShopStartEntry(work, "npcShop_ExChange");
         work->step++;
@@ -98,9 +98,9 @@ extern "C" void FUN_003e618c(NpcShopExchangeWork *work)
             work->step = 3;
         } else {
             flagValueSub(offer->payment, offer->cost);
-            FUN_00359974(24, flagValueRead(0x7c4), -1, 0);
-            FUN_00359974(25, flagValueRead(0x7c5), -1, 0);
-            FUN_00359974(26, flagValueRead(0x7c6), -1, 0);
+            entryTableResetAndInit(24, flagValueRead(0x7c4), -1, 0);
+            entryTableResetAndInit(25, flagValueRead(0x7c5), -1, 0);
+            entryTableResetAndInit(26, flagValueRead(0x7c6), -1, 0);
             screenStartOrClear(work->screen, 21);
             flagValueAdd(offer->reward, 1);
             work->step = 99;

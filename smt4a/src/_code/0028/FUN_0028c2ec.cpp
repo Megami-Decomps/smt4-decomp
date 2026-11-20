@@ -28,10 +28,10 @@ s32 gameGetSlotTable(void);
 UnitState *btlUnitGet(u32 unit);
 u32 gameGetSlotRecord(u32 slot);
 s32 skillGetAdjustedCost(u32 record, u32 skillId);
-s32 FUN_003df57c(u32 skillId, s32 flag);
+s32 skillGetCostWithRankReduction(u32 skillId, s32 flag);
 u32 btlMainGetUnk14(void);
 s32 listCursorGetRowIfUnblocked(u32 id);
-s32 FUN_002c7bb0(s32 target, s32 slot, u32 skillId, u32 *out);
+s32 skillApplyToTarget(s32 target, s32 slot, u32 skillId, u32 *out);
 
 /* Refreshes the skill-cost preview of the party panel rows for the current skill/target and the
  * entry of list position `id` (`direct` selects the unpaged layout). */
@@ -51,7 +51,7 @@ void FUN_0028c2ec(u32 id, s32 direct)
     }
     if (!skipPreview) {
         if (panel->selection < 0 && panel->characters[0]->slot == -1) {
-            panel->characters[0]->value = -FUN_003df57c(panel->previewItem, 1);
+            panel->characters[0]->value = -skillGetCostWithRankReduction(panel->previewItem, 1);
         } else if (panel->selection < 0 && panel->characters[0]->slot == -2) {
             u32 unit = btlMainGetUnk14();
             if (unit != 0) {
@@ -89,7 +89,7 @@ void FUN_0028c2ec(u32 id, s32 direct)
             } else {
                 slot = -1;
             }
-            FUN_002c7bb0(panel->selection, slot, panel->previewItem, &out);
+            skillApplyToTarget(panel->selection, slot, panel->previewItem, &out);
             panel->characters[position + 1]->result = out;
             statusPreviewMpChange(out, panel->characters[position + 1]->value);
             return;
@@ -101,7 +101,7 @@ void FUN_0028c2ec(u32 id, s32 direct)
         }
         index = index - 4;
     }
-    FUN_002c7bb0(panel->selection, panel->entries[index].packedIndex, panel->previewItem, &out);
+    skillApplyToTarget(panel->selection, panel->entries[index].packedIndex, panel->previewItem, &out);
     panel->demons[index]->result = out;
     statusPreviewMpChange(out, panel->demons[index]->value);
 }

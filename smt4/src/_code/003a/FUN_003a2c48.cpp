@@ -66,11 +66,11 @@ s32 uiAnimationAdvanceChannel(void *animations, s32 channel);
 void sub10OwnerStart(const u8 *selection); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: more than one instance of overloaded function "releaseEntriesA" has "C" linkage)
 void releaseEntriesA(Obj55ca08 *selection); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: more than one instance of overloaded function "sub10OwnerStart" has "C" linkage)
 void ifTouchRegionClearAll(AppraisePanel *panel);
-s32 FUN_0027ee9c(void);
+s32 inputConfirmPressed(void);
 void FUN_0029212c(u32 id);
 void messageMainFinishWindow(void);
 s32 messageMainTargetIsClear(void);
-u32 FUN_0029c43c(u32 value, u8 flag);
+u32 messageBannerSetCountdown(u32 value, u8 flag);
 void messageTargetSetValue(u32 value, s32 arg);
 s32 sys43e188GetState(void);
 void buttonHelpSetPreset(u32 preset);
@@ -104,7 +104,7 @@ void FUN_003a2c48(AppraiseScene *scene)
     case 1:
         scrRunOpcodesStub(scene->script);
         scene->frames++;
-        if (scene->frames >= 10 && (FUN_0027ee9c() || scrRunOpcodesStub(scene->script) == 2)) {
+        if (scene->frames >= 10 && (inputConfirmPressed() || scrRunOpcodesStub(scene->script) == 2)) {
             FUN_002328b4();
             messageMainFinishWindow();
             scene->state = 2;
@@ -140,12 +140,12 @@ void FUN_003a2c48(AppraiseScene *scene)
         uiAnimationAdvanceChannel(scene->animations, 2);
         uiAnimationAdvanceChannel(scene->animations, 3);
         FUN_0029212c(scene->entries[flaggedValueHolderGetTotal(&scene->holder)].id);
-        if (FUN_0027ee9c()) {
+        if (inputConfirmPressed()) {
             FUN_002328b4();
             messageMainFinishWindow();
             scene->state = 5;
             scene->frames = 0;
-            FUN_0029c43c(scene->total, 0);
+            messageBannerSetCountdown(scene->total, 0);
         }
         break;
     case 5:

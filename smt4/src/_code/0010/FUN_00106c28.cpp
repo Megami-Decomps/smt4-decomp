@@ -11,9 +11,9 @@ extern u8 g_archiveModuleCriticalSection[];
 extern ArchiveReferenceState g_archiveModuleState;
 extern const char DAT_00407e1a[];
 extern u8 DAT_004655f8[];
-u32 FUN_002c1398();
+u32 srvInitialize(); // declcheck: local (the shared declaration does not compile here or changes this unit)
 u32 libc_strlen(const char *text);
-u32 asdModelForwardChecked(void *archive, const char *name, u32 length, u32 flags);
+u32 srvGetServiceHandle(void *archive, const char *name, u32 length, u32 flags); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 // Acquire the shared archive mount, mounting it on the first reference under the module lock.
 u32 FUN_00106c28()
@@ -33,11 +33,11 @@ u32 FUN_00106c28()
         u32 alreadyMounted = 0x00209ff9;
         return alreadyMounted;
     }
-    u32 result = FUN_002c1398();
+    u32 result = srvInitialize();
     if (nnResultIsFailure(result)) {
         return result;
     }
-    result = asdModelForwardChecked(DAT_004655f8, DAT_00407e1a, libc_strlen(DAT_00407e1a), 0);
+    result = srvGetServiceHandle(DAT_004655f8, DAT_00407e1a, libc_strlen(DAT_00407e1a), 0);
     if (nnResultIsFailure(result)) {
         return result;
     }

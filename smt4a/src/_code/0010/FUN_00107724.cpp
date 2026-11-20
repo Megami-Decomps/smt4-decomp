@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ea704(void);
+int watcherGetEnabledFlag(void);
 
 typedef struct fn_00107724_arg0 fn_00107724_arg0;
 struct fn_00107724_arg0 {
@@ -28,7 +28,7 @@ typedef struct {
 extern unsigned char DAT_00538904; /* 0x538904 */
 
 extern int *_ZSt3maxIjERKT_S2_S2_(unsigned int *, unsigned char *);
-/* Supplied declaration required: FUN_002ea704. */
+/* Supplied declaration required: watcherGetEnabledFlag. */
 
 
 int FUN_00107724(fn_00107724_arg0 *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -42,10 +42,10 @@ int FUN_00107724(fn_00107724_arg0 *param_1,unsigned int param_2,unsigned int par
   int temp_v3;
   
   temp_v3 = param_4;
-  temp_v0 = FUN_002ea704();
+  temp_v0 = watcherGetEnabledFlag();
   temp_v1 = *(int *)(temp_v0 + 100);
   temp_v2 = temp_v1 - 0x40;
-  piVar2 = (int *)FUN_002ea704();
+  piVar2 = (int *)watcherGetEnabledFlag();
   temp_v0 = (**(romwright_code **)(*piVar2 + 0x2c))();
   if (*(char *)(temp_v0 + 8) != '\0') {
     temp_v3 = 0x24;
@@ -53,7 +53,7 @@ int FUN_00107724(fn_00107724_arg0 *param_1,unsigned int param_2,unsigned int par
     temp_v2 = temp_v2 - *piVar2;
   }
   else {
-    piVar2 = (int *)FUN_002ea704();
+    piVar2 = (int *)watcherGetEnabledFlag();
     temp_v0 = (**(romwright_code **)(*piVar2 + 0x28))();
     if (((*(char *)(temp_v0 + 4) != '\0') || (param_1->field_0x14c == 0)) ||
        ((param_1->field_0x14c == 1 && ((param_1->field_0x150 & 0xff) == 0)))) {

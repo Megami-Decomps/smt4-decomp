@@ -13,16 +13,16 @@ struct Object {
     /* 0x00 */ const ObjectVtbl *vtbl;
 };
 
-Object *FUN_002ea704(void);
+Object *watcherGetEnabledFlag(void);
 
-/* When FUN_002ea704 yields an object, passes its slot-11 value to watcherSetEnabled(value, 0). */
+/* When watcherGetEnabledFlag yields an object, passes its slot-11 value to watcherSetEnabled(value, 0). */
 void watcherRefreshEnabledState(void)
 {
     Object *object;
     u32 value;
 
-    if (FUN_002ea704() != NULL) {
-        object = FUN_002ea704();
+    if (watcherGetEnabledFlag() != NULL) {
+        object = watcherGetEnabledFlag();
         value = object->vtbl->getValue(object);
         watcherSetEnabled(value, 0);
     }

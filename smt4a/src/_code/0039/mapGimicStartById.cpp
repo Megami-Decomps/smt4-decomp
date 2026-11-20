@@ -18,7 +18,7 @@ u32 mapGimicStartById(s32 id)
         if (slot->active && slot->id == id) {
             Obj557b18 *model;
 
-            if (!FUN_0040ab8c(slot->obj)) {
+            if (!moriModelContentIsLoaded(slot->obj)) {
                 return 0;
             }
             moriModelContentLoadBody(slot->obj, 0);

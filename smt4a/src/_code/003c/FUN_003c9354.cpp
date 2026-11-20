@@ -15,7 +15,7 @@ int padQueryLogicalKey(...);
 int eventQueueAddUniqueIfValid(...);
 int buttonHelpSetText(...);
 int FUN_0020b908(...);
-int FUN_00228b04(int, int);
+int gridNavigationHandleConfirm(int, int);
 int uniteStartOrQueueRequest(int);
 int resourceRunOperationIfUnblocked(...);
 int scrollOwnerSetValue(int, int);
@@ -48,7 +48,7 @@ typedef struct {
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: FUN_0020b908. */
-/* Supplied declaration required: FUN_00228b04. */
+/* Supplied declaration required: gridNavigationHandleConfirm. */
 /* Supplied declaration required: FUN_0023b45c. */
 /* Supplied declaration required: uniteStartOrQueueRequest. */
 extern int recordGetModeForId(int);
@@ -58,7 +58,7 @@ extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: scrollOwnerSetValue. */
 /* Supplied declaration required: scrollListSetSelectionTracked. */
 /* Supplied declaration required: FUN_002a7b74. */
-extern unsigned int *objectApplyIfUnblocked(int);
+extern unsigned int *gridNavigationGetItemCount(int);
 /* Supplied declaration required: FUN_002c8550. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
 /* Supplied declaration required: arrayContainsU16. */
@@ -117,7 +117,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
   uiScrollHandleActionsOrTouch(temp_v4,temp_v3,param_1 + 0x438,(int)*(short *)(param_1 + 0x476));
   piVar11 = (int *)(param_1 + 0x8e84);
   puVar12 = (unsigned char *)(param_1 + 0x8eac);
-  if ((temp_v4 != 0) || (temp_v4 = temp_v14, FUN_00228b04(temp_v14,1), temp_v4 != 0)) {
+  if ((temp_v4 != 0) || (temp_v4 = temp_v14, gridNavigationHandleConfirm(temp_v14,1), temp_v4 != 0)) {
     temp_v10 = listCursorGetRowIfUnblocked(temp_v14);
     temp_v4 = resourceRunOperationIfUnblocked(temp_v14);
     temp_v5 = listCursorGetRowIfUnblocked(temp_v14);
@@ -126,7 +126,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
     if ((*piVar11 >= 9) && ((char)temp_v18 == '\0')) {
       temp_v11 = recordGetModeForId((int)*(short *)(param_1 + *(short *)(param_1 + 0x8e88) * 2 + 0x438));
       temp_v6 = recordGetModeForId((int)*(short *)(param_1 + 0x446));
-      temp_v12 = (unsigned int *)objectApplyIfUnblocked(temp_v14);
+      temp_v12 = (unsigned int *)gridNavigationGetItemCount(temp_v14);
       temp_v1 = *(char *)(param_1 + 0x8eac);
       *puVar12 = 0;
       if (temp_v11 != 0) {

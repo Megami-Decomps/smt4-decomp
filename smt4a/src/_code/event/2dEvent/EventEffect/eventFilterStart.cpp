@@ -9,7 +9,7 @@
 extern "C" {
 extern EventEffectGlobalsA g_eventEffect;
 extern EventFilterTexture DAT_0057f3e8[6];
-u32 FUN_002a3f54(void *job);
+u32 eventFilterDrawOverlay(void *job);
 u32 taskCreateDraw(const char *name, s32 priority, s32 flags, s32 owner,
     u32 (*draw)(void *), void (*destroy)(void *), void *work, u32 process);
 void *textureGetIndexedResource(u32 index);
@@ -27,8 +27,8 @@ void eventFilterStart(u32 kind)
     memset(g_eventEffect.filterState.work, 0, sizeof(EventFilterWork));
     EventFilterWork *work = g_eventEffect.filterState.work;
     work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EvtFilter Calc"), 3, 0, 0, eventFilterUpdate, NULL, NULL);
-    taskCreateDraw("EvtFilter DrawUpLeft", 0x85, 0, 0, FUN_002a3f54, NULL, NULL, work->job);
-    taskCreateDraw("EvtFilter DrawUpRight", 0xe1, 0, 0, FUN_002a3f54, NULL, NULL, work->job);
+    taskCreateDraw("EvtFilter DrawUpLeft", 0x85, 0, 0, eventFilterDrawOverlay, NULL, NULL, work->job);
+    taskCreateDraw("EvtFilter DrawUpRight", 0xe1, 0, 0, eventFilterDrawOverlay, NULL, NULL, work->job);
     work->texture = kind;
     work->frame = 0;
     work->state = 0;

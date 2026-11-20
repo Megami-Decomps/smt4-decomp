@@ -10,7 +10,7 @@ int aocDataTable23GetEntry(...);
 int FUN_0024f24c(...);
 int dataTable2fSub0GetCount(void);
 int FUN_0025b670(void);
-int FUN_00263cb8(...);
+int mapEffectReserveAndSpawn(...);
 int FUN_00298dc8(int);
 int libc_strcpy(...);
 int gameFlagIsSet(void);
@@ -58,7 +58,7 @@ extern unsigned char DAT_00447a31; /* 0x447a31 */
 extern unsigned char DAT_00447a32; /* 0x447a32 */
 extern unsigned char DAT_00447a33; /* 0x447a33 */
 extern unsigned char DAT_00447a34; /* 0x447a34 */
-extern unsigned char DAT_004a1264; /* 0x4a1264 */
+extern unsigned char g_namedEntryTable; /* 0x4a1264 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int dataTableGetRecordFortyEight(void);
@@ -68,7 +68,7 @@ extern int dataTable23Type0CountWithAoc(void);
 /* Supplied declaration required: FUN_0024f24c. */
 /* Supplied declaration required: dataTable2fSub0GetCount. */
 /* Supplied declaration required: FUN_0025b670. */
-/* Supplied declaration required: FUN_00263cb8. */
+/* Supplied declaration required: mapEffectReserveAndSpawn. */
 extern unsigned int FUN_00276060(int);
 extern unsigned int *dataTable2fSub0GetRecord(int);
 extern int FUN_00276264(int);
@@ -460,7 +460,7 @@ LAB_0027bd40:
             temp_v11 = temp_v12;
             temp_v8 = temp_v28;
             temp_v17 = temp_v14;
-            FUN_00263cb8(temp_v11,temp_v8,puVar13,temp_v4,temp_v7,temp_v17,temp_v18,temp_v20,temp_v21,temp_v22,
+            mapEffectReserveAndSpawn(temp_v11,temp_v8,puVar13,temp_v4,temp_v7,temp_v17,temp_v18,temp_v20,temp_v21,temp_v22,
                          temp_v23,temp_v24,temp_v19,temp_v2,temp_v6,temp_v3,temp_v25,temp_v1,temp_v10);
           }
         }
@@ -532,7 +532,7 @@ LAB_0027bef0:
               temp_v4 = 0x39;
               puVar13 = (unsigned char *)0x27c16c;
               temp_v11 = 3;
-              FUN_00263cb8(temp_v11,temp_v8,puVar13,temp_v4,temp_v7,temp_v17,temp_v18,temp_v20,temp_v21,temp_v22,
+              mapEffectReserveAndSpawn(temp_v11,temp_v8,puVar13,temp_v4,temp_v7,temp_v17,temp_v18,temp_v20,temp_v21,temp_v22,
                            temp_v23,temp_v24,temp_v19,temp_v2,temp_v6,temp_v3,temp_v25,temp_v1,temp_v10);
             }
           }
@@ -554,7 +554,7 @@ LAB_0027bef0:
           }
           temp_v1 = piVar11[2];
           if (0 < DAT_00447a2c) {
-            puVar13 = &DAT_004a1264;
+            puVar13 = &g_namedEntryTable;
           }
           temp_v10 = 0;
           if (temp_v10 < DAT_00447a2c) {

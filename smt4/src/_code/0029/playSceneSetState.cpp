@@ -10,7 +10,7 @@ int flagBitIsSet(int);
 int FUN_00292f4c(void);
 int FUN_00297b94(int, unsigned int, unsigned int);
 int objectPartRunUnlessLocked(int); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
-int FUN_0029e958(...); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
+int uiGridNavigationEntryCount(...); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 int gridNavigationConfigure(int, int, int, int, int, int);
 int buttonHelpGetMode(void);
 int nkmEnemyFindById(void);
@@ -27,14 +27,14 @@ typedef struct {
 
 /* Supplied declaration required: flagBitIsSet. */
 /* Supplied declaration required: FUN_00292f4c. */
-extern int FUN_00293230(void);
+extern int btlScriptUnitIsIncapacitated(void);
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_00297b94. */
 extern unsigned int FUN_00297ca4(int, unsigned int);
-extern int FUN_0029d644(unsigned int);
+extern int uiListGetVisibleCount(unsigned int);
 /* Supplied declaration required: objectPartRunUnlessLocked. */
-/* Supplied declaration required: FUN_0029e958. */
-extern int FUN_0029ee54(unsigned int);
+/* Supplied declaration required: uiGridNavigationEntryCount. */
+extern int gridNavigationGetItemCount(unsigned int);
 /* Supplied declaration required: gridNavigationConfigure. */
 /* Supplied declaration required: buttonHelpGetMode. */
 /* Supplied declaration required: nkmEnemyFindById. */
@@ -73,7 +73,7 @@ void playSceneSetState(int param_1,int param_2,int param_3)
   temp_v1 = buttonHelpGetStatus();
   if (temp_v1 == 0x3d) {
     reinterpret_cast<int>(btlGetMainState());
-    temp_v1 = FUN_00293230();
+    temp_v1 = btlScriptUnitIsIncapacitated();
     if (temp_v1 == 0) {
       buttonHelpGetMode();
       buttonHelpSetPreset();
@@ -121,7 +121,7 @@ void playSceneSetState(int param_1,int param_2,int param_3)
   if (param_2 != 1) {
     if (param_2 != 8) goto LAB_00298368;
 LAB_002983fc:
-    temp_v3 = FUN_0029e958(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
+    temp_v3 = uiGridNavigationEntryCount(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
     temp_v1 = 0;
     if (temp_v1 < (int)temp_v3) {
       do {
@@ -140,7 +140,7 @@ LAB_002983fc:
     }
     puVar6 = (unsigned int *)(param_1 + 0x340c);
     temp_v4 = 0;
-    temp_v1 = FUN_0029d644(*puVar6);
+    temp_v1 = uiListGetVisibleCount(*puVar6);
     if (0 < temp_v1) {
       do {
         if (*(int *)(param_1 + 0x305c) == 1) {
@@ -157,11 +157,11 @@ LAB_002983fc:
         temp_v4 = temp_v4 + 1;
         *(unsigned short *)(param_1 + temp_v1 + 0x572c) = temp_v0;
         *(short *)(param_1 + 0x5714) = *(short *)(param_1 + 0x5714) + 1;
-        temp_v1 = FUN_0029d644(*puVar6);
+        temp_v1 = uiListGetVisibleCount(*puVar6);
       } while (temp_v4 < temp_v1);
     }
-    temp_v1 = FUN_0029ee54(*puVar6);
-    temp_v4 = FUN_0029d644(*puVar6);
+    temp_v1 = gridNavigationGetItemCount(*puVar6);
+    temp_v4 = uiListGetVisibleCount(*puVar6);
     if (temp_v4 < temp_v1) {
       if (*(int *)(param_1 + 0x305c) != 1) {
         if (*(int *)(param_1 + 0x305c) != 2) {
@@ -193,7 +193,7 @@ LAB_002983fc:
     }
   }
   else {
-    temp_v3 = FUN_0029e958(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
+    temp_v3 = uiGridNavigationEntryCount(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
     temp_v1 = 0;
     if ((int)temp_v3 < 1) {
       return;
@@ -271,7 +271,7 @@ LAB_00298368:
     }
   }
   temp_v4 = 0;
-  temp_v1 = FUN_0029e958(param_1 + 0x33a8);
+  temp_v1 = uiGridNavigationEntryCount(param_1 + 0x33a8);
   if (0 < temp_v1) {
     do {
       if (*(char *)(param_1 + temp_v4 + 0x38d1) == '\0') {
@@ -280,7 +280,7 @@ LAB_00298368:
         *(short *)(param_1 + 0x5714) = *(short *)(param_1 + 0x5714) + 1;
       }
       temp_v4 = temp_v4 + 1;
-      temp_v1 = FUN_0029e958(param_1 + 0x33a8);
+      temp_v1 = uiGridNavigationEntryCount(param_1 + 0x33a8);
     } while (temp_v4 < temp_v1);
   }
   return;

@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern void FUN_003e4140(u8 *block);
+extern void copyDefaultWordsPair(u8 *block);
 
 void stateHolderMarkAndInit2588(void)
 {
@@ -11,7 +11,7 @@ void stateHolderMarkAndInit2588(void)
 
     if (g_statusDown != NULL) {
         g_statusDown->unk2584 = 1;
-        FUN_003e4140(obj->block2588);
+        copyDefaultWordsPair(obj->block2588);
     }
 }
 

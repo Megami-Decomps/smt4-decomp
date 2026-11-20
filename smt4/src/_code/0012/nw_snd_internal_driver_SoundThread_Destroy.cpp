@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00146ee0(void);
+int nw_snd_internal_driver_SoundThread_Stop(void);
 
 typedef struct SoundThread {
     /* 0x000 */ u8 unk000[500];
@@ -15,7 +15,7 @@ void nw_snd_internal_driver_SoundThread_Destroy(SoundThread *thread)
 {
     if (thread->running != 0) {
         thread->stopRequested = 1;
-        FUN_00146ee0();
+        nw_snd_internal_driver_SoundThread_Stop();
         thread->running = 0;
     }
 }

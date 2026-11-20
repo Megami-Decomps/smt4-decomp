@@ -28,7 +28,7 @@ extern unsigned char DAT_0055b368; /* 0x55b368 */
 /* Supplied declaration required: FUN_0010570e. */
 extern int FUN_001057dc(int);
 /* Supplied declaration required: asdOperatorDeleteArray. */
-extern int FUN_002eb624(int);
+extern int deletingDtor_002eb624(int);
 /* Supplied declaration required: _ZN9Obj558bd0D1Ev. */
 /* Supplied declaration required: FUN_002f4bfc. */
 /* Supplied declaration required: FUN_002f8e58. */
@@ -80,9 +80,9 @@ unsigned long long FUN_0012323c(unsigned int *param_1,unsigned int param_2,int p
   }
   temp_v0 = FUN_0030f34c(temp_v0 - 0x30);
   temp_v0 = FUN_0030f34c(temp_v0 - 0x14);
-  temp_v0 = FUN_002eb624(temp_v0 - 0x30);
-  temp_v0 = FUN_002eb624(temp_v0 - 0x30);
-  temp_v0 = FUN_002eb624(temp_v0 - 0x30);
+  temp_v0 = deletingDtor_002eb624(temp_v0 - 0x30);
+  temp_v0 = deletingDtor_002eb624(temp_v0 - 0x30);
+  temp_v0 = deletingDtor_002eb624(temp_v0 - 0x30);
   temp_v0 = FUN_001057dc(temp_v0 - 0x48);
   return romwright_piece_4_4(temp_v2,temp_v0 - 0x10);
 }

@@ -11,7 +11,7 @@ extern "C" void btlFilterLoadTexture(Filter4Poly* filter, u32 flags, u32 texture
 extern "C" {
 #endif
 
-void FUN_0040a378(s32 amount);
+void questCenterCounterAddSaturating1A(s32 amount);
 
 #ifdef __cplusplus
 }

@@ -66,7 +66,7 @@ void FUN_0028e6d0(MessageWindow *win, const void *message, u32 index, s32 kind, 
     if (!((flags & 1) != 0 && oldState != 0 && (oldFlags & 1) != 0 && win->unk014 != 0)) {
         win->unk014 = 0;
     }
-    if (FUN_00309ba0() != 0 || FUN_002b89a4(0) == 0) {
+    if (FUN_00309ba0() != 0 || screenFaderIsSettled(0) == 0) {
         if (win->state == 2) {
             win->state = 6;
         }

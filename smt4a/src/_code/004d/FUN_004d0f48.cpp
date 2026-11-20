@@ -54,7 +54,7 @@ void FUN_004d0f48(unsigned int param_1,int param_2)
     auStack_110[5] = 0;
     uStack_e0 = 0x3f800000;
     uStack_dc = 0x3f800000;
-    if (DAT_005715f8 != '\0') {
+    if (g_btlDebugGlobals != '\0') {
       aocGetTableRecordOrFallback();
       FUN_004bbc4c(auStack_110,param_2,0);
     }
@@ -74,7 +74,7 @@ void FUN_004d0f48(unsigned int param_1,int param_2)
       }
       uVar3 = (uVar3 + 1) & 0xffff;
     } while (uVar3 < 6);
-    if (DAT_005715f8 == '\0') {
+    if (g_btlDebugGlobals == '\0') {
       acStack_88[0] = -0x74;
       acStack_88[1] = 'R';
       acStack_88[2] = -0x70;

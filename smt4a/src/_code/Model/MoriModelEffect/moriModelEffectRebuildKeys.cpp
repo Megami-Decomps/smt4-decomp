@@ -42,7 +42,7 @@ void* asdMemoryAllocTraced(u32 size, const char* file, u32 line);
 s32 asdAtbcGetEntryCount(AsdAtbcHeader* table);
 void* FUN_001ad70c(const AsdAtbcHeader* table, s32 index);
 u8* FUN_001ad5d8(u8* entry);
-u32* FUN_001abbc4(u32* source);
+u32* effPartCreateFromSource(u32* source);
 
 // Rebuilds the list of effect keys from every entry of the model's ATBC table.
 void moriModelEffectRebuildKeys(MoriModelEffect* effect)
@@ -60,7 +60,7 @@ void moriModelEffectRebuildKeys(MoriModelEffect* effect)
             void *memory = asdMemoryAllocTraced(sizeof(ModelEffectKey),
                 "c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelEffect.cpp", 0x6f);
             ModelEffectKey *k = new (memory) ModelEffectKey();
-            k->data = FUN_001abbc4(reinterpret_cast<u32*>(FUN_001ad5d8(reinterpret_cast<u8*>(cursor))));
+            k->data = effPartCreateFromSource(reinterpret_cast<u32*>(FUN_001ad5d8(reinterpret_cast<u8*>(cursor))));
             k->index = index;
             k->flags = cursor->flags;
             k->key = key;

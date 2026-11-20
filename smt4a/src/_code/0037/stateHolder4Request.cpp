@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern void FUN_001ff724(void);
+extern void uiQuestRebuildLists(void);
 extern void uiQuestReturnToList(void);
 
 void stateHolder4Request(s8 value)
@@ -12,7 +12,7 @@ void stateHolder4Request(s8 value)
 
     obj->unk93D = 1;
     obj->unk945 = value;
-    FUN_001ff724();
+    uiQuestRebuildLists();
     uiQuestReturnToList();
 }
 

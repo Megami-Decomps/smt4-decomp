@@ -41,7 +41,7 @@ void handleBlockRefDrop(void **reference);
 void FUN_002b3fd8(u32 x, u32 y, u32 width, u32 height);
 void effMenuAppendColorRect(u32 x, u32 y, u32 width, u32 height, u32 alpha, u32 flags);
 extern EffMenuLists DAT_006471a0;
-extern const char DAT_00544ac0[]; /* "%s" */
+extern const char g_formatStringPercentS[]; /* "%s" */
 }
 
 static const s32 kWindowRows = 0x11;
@@ -83,7 +83,7 @@ static __inline void browserEntryPath(EffMenuBrowser *menu, EffMenuTextNode *ent
         if (menu->source->unk04 != 0) {
             __2sprintf(path, "%s%s", menu->source->unk04, entry->name);
         } else {
-            __2sprintf(path, DAT_00544ac0, entry->name);
+            __2sprintf(path, g_formatStringPercentS, entry->name);
         }
     }
 }

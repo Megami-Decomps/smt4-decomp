@@ -18,7 +18,7 @@ int CONCAT44(...);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void);
 int FUN_002469d0(void);
-int FUN_0025ef68(int, int, int);
+int mapResolveCollisionSphere(int, int, int);
 float mathSnapHeading16(float angle);
 float calcHeadingRoundedTo32Directions(float angle);
 int FUN_00294c28(void);
@@ -80,7 +80,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_002469d0. */
-/* Supplied declaration required: FUN_0025ef68. */
+/* Supplied declaration required: mapResolveCollisionSphere. */
 extern unsigned int FUN_0029202c(void);
 /* Supplied declaration required: FUN_00294c28. */
 /* Supplied declaration required: FUN_00295108. */
@@ -437,7 +437,7 @@ void FUN_002b81ec(void)
       *(unsigned int *)(temp_v5 + 0x3c) = temp_v16;
       if (((DAT_005f1c48 == '\0') && (DAT_005f161e != '\0')) && ((temp_v9 & ~temp_v4) == 0)) {
         temp_v7 = temp_v5 + 0x28;
-        FUN_0025ef68(temp_v7,temp_v5 + 0x34,0);
+        mapResolveCollisionSphere(temp_v7,temp_v5 + 0x34,0);
         temp_v5 = g_lmapScene;
         temp_v6 = 0;
         if (temp_v7 != 0) {

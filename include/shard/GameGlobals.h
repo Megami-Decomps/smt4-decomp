@@ -93,7 +93,7 @@ typedef char GameDataTimerOffsets[offsetof(GameData, statusTimer) == 0x7EC && of
 extern "C" {
 #endif
 
-void FUN_0026a978(const u32 *ids, s32 count);
+void statusDownSetSelectedIds(const u32 *ids, s32 count);
 
 #ifdef __cplusplus
 }

@@ -7,7 +7,7 @@
 
 extern "C" {
 u32 scrGetArg(u32);
-void FUN_004fc094(s32, u32, s32, BattleRosterRecordA *, s32, u32, s32, s32,
+void btlAdjustPropertyAndQueueAction(s32, u32, s32, BattleRosterRecordA *, s32, u32, s32, s32,
                  s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32,
                  s32, s32, s32, s32, s32, s32);
 extern u32 g_btlScriptUnit;
@@ -21,7 +21,7 @@ extern "C" u32 FUN_003c231c(void)
     BtlCombatantEntryA *target = btlMainFindEntryByListedId(btlGetMainState(), targetId);
     btlSlotManagerResetStates(btlGetMainState());
     BattleRosterRecordA *roster = &btlGetMainState()->roster[target->ids[0]];
-    FUN_004fc094(0, unit, 0, roster, 0, amount, -1, -1, target->data.hp, target->data.maxHp,
+    btlAdjustPropertyAndQueueAction(0, unit, 0, roster, 0, amount, -1, -1, target->data.hp, target->data.maxHp,
                  0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1);
     return 1;
 }

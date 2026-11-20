@@ -5,7 +5,7 @@
 extern "C" {
 
 int nn_os_LightEvent_Signal(int);
-int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
+int svcWaitSynchronizationN(unsigned char *, int *, int, int, unsigned int, unsigned int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int resultHandleFailure(void);
 int coproc_moveto_Data_Synchronization(int);
 int software_interrupt(int);
@@ -20,7 +20,7 @@ extern unsigned char DAT_004e8510; /* 0x4e8510 */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: coproc_moveto_Data_Synchronization (CALLOTHER). */
 /* Supplied declaration required: nn_os_LightEvent_Signal. */
-/* Supplied declaration required: FUN_002c40f8. */
+/* Supplied declaration required: svcWaitSynchronizationN. */
 /* Supplied declaration required: resultHandleFailure. */
 extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
@@ -37,7 +37,7 @@ void FUN_00146ef0(int param_1)
     *(unsigned char *)(param_1 + 0xf) = 0;
     uStack_20 = *(unsigned int *)(param_1 + 0x18);
     puVar1 = temp_v0;
-    FUN_002c40f8(puVar1,&uStack_20,1,0,0xffffffff,0xffffffff);
+    svcWaitSynchronizationN(puVar1,&uStack_20,1,0,0xffffffff,0xffffffff);
     if ((int)puVar1 < 0) {
       resultHandleFailure();
     }
@@ -55,7 +55,7 @@ void FUN_00146ef0(int param_1)
     *(unsigned char *)(param_1 + 0xd) = 0;
     uStack_20 = *(unsigned int *)(param_1 + 0x10);
     puVar1 = temp_v0;
-    FUN_002c40f8(puVar1,&uStack_20,1,0,0xffffffff,0xffffffff);
+    svcWaitSynchronizationN(puVar1,&uStack_20,1,0,0xffffffff,0xffffffff);
     if ((int)puVar1 < 0) {
       resultHandleFailure();
     }

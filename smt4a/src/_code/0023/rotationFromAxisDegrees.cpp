@@ -11,7 +11,7 @@ typedef struct Vec3f {
 
 f32 sqrtf(f32 value);
 f32 FUN_001a1ee0(f32 angle);
-f32 FUN_001b63b0(f32 angle);
+f32 phaseCosine(f32 angle);
 void FUN_003bfb50(void *out, const Vec3f *axis, u32 arg, f32 oneMinusCos, f32 sine);
 
 static __inline void vec3Normalize(Vec3f *out, const Vec3f *v)
@@ -37,7 +37,7 @@ void *rotationFromAxisDegrees(void *out, const Vec3f *axis, u32 arg, f32 degrees
     vec3Normalize(&unit, axis);
     angle = radians * 40.743664f;
     sine = FUN_001a1ee0(angle);
-    FUN_003bfb50(out, &unit, arg, 1.0f - FUN_001b63b0(angle), sine);
+    FUN_003bfb50(out, &unit, arg, 1.0f - phaseCosine(angle), sine);
     return out;
 }
 

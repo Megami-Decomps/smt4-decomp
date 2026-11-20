@@ -28,7 +28,7 @@ s32 sceneTexturesAreLoaded(void);
 s32 isFlag1F0Set(void *flags);
 void __ARM_common_memcpy4_6(void *destination, const void *source);
 void mikadoLoadSceneResources(SceneSetupWork *work);
-void FUN_004b7d88(SceneSetupWork *work);
+void soundPlayCueForContextKind(SceneSetupWork *work);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 
 /* Places the scene, moves setup on to step 2 and clears the pending flag. */
@@ -59,7 +59,7 @@ void FUN_004b91fc(SceneSetupWork *work)
     scriptProcessSetMode(block->scripts[1].process, 2);
     if (work->flags & 0x10) {
         sceneSetupPlace(work);
-        FUN_004b7d88(work);
+        soundPlayCueForContextKind(work);
     }
 }
 

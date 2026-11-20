@@ -28,8 +28,8 @@ struct OnlineStateView {
 };
 
 extern "C" {
-ConnectionManagerView* FUN_002eb5f4(void);
-OnlineStateView* FUN_002ea704(void);
+ConnectionManagerView* watcherGetActiveContext(void);
+OnlineStateView* watcherGetEnabledFlag(void);
 Obj55aff4 onlineSockAddrToString(const void* address);
 void watcherRefreshEnabledState(void);
 extern const u16 DAT_00538900;
@@ -38,16 +38,16 @@ extern const u16 DAT_00538900;
 // Apply the selected address and the explicit or default port to the active connection.
 extern "C" u32 FUN_00300064(const ConnectionOptionsView* options)
 {
-    if (FUN_002eb5f4() == 0 || FUN_002ea704() == 0)
+    if (watcherGetActiveContext() == 0 || watcherGetEnabledFlag() == 0)
         return 0;
 
     switch (static_cast<u8>(options->unk94)) {
     case 0:
-        FUN_002eb5f4()->unkD0->unk110 = options->unk88;
+        watcherGetActiveContext()->unkD0->unk110 = options->unk88;
         break;
     case 1: {
-        ConnectionStateView* connection = FUN_002eb5f4()->unkD0;
-        connection->unk110 = onlineSockAddrToString(FUN_002ea704()->unk120);
+        ConnectionStateView* connection = watcherGetActiveContext()->unkD0;
+        connection->unk110 = onlineSockAddrToString(watcherGetEnabledFlag()->unk120);
         break;
     }
     default:
@@ -56,11 +56,11 @@ extern "C" u32 FUN_00300064(const ConnectionOptionsView* options)
     }
 
     if (options->unk90 != 0) {
-        ConnectionManagerView* manager = FUN_002eb5f4();
+        ConnectionManagerView* manager = watcherGetActiveContext();
         const u16 port = options->unk90;
         manager->unkD0->unk118 = port;
     } else {
-        ConnectionManagerView* manager = FUN_002eb5f4();
+        ConnectionManagerView* manager = watcherGetActiveContext();
         manager->unkD0->unk118 = DAT_00538900;
     }
     return 1;

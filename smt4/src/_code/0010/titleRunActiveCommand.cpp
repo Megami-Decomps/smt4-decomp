@@ -2,14 +2,14 @@
 
 extern "C" {
 
-int processDispatchFinishedNodes(void);
+int asdProcessRunAuxiliaryPass(void);
 int gxIsStereoscopic3dEnabled(void);
 
 s32 titleRunActiveCommand(void)
 {
     if (gxIsStereoscopic3dEnabled() == 1) {
         if (g_titleFlags.commandActive != 0 && g_titleFlags.disabled == 0) {
-            processDispatchFinishedNodes();
+            asdProcessRunAuxiliaryPass();
         }
     }
     return 0;

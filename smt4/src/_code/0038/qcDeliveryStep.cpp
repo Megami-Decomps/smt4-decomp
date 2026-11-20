@@ -41,8 +41,8 @@ void uiQuestClose(void);
 void resultCreate(u8 kind);
 void scrResultStopJobAndReleaseUi(void);
 void messageSetConfirmDisplayMode(void);
-u32 FUN_0028eeb8(u32 id);
-u8 FUN_0034888c(u32 id);
+u32 gameFlagEntryActivate(u32 id);
+u8 questDeactivate(u32 id);
 void FUN_00287528(u32 *reward);
 
 /* The id of the quest chosen for delivery (qcGetDeliveryQuestId's body). */
@@ -184,7 +184,7 @@ void qcDeliveryStep(DummyAttachmentWork *work)
             questBuildRewardSpoils(&spoils, deliveryQuestId(work));
             resultApplySpoils(&spoils);
             if (table1bOr1cGetRecordValue(deliveryQuestId(work)) == 0) {
-                FUN_0028eeb8(deliveryQuestId(work));
+                gameFlagEntryActivate(deliveryQuestId(work));
             }
             work->step = 7;
         } else {
@@ -192,10 +192,10 @@ void qcDeliveryStep(DummyAttachmentWork *work)
         }
         return;
     case 7:
-        if (FUN_002b8660() != 0) {
+        if (resultIsIdle() != 0) {
             scrResultStopJobAndReleaseUi();
             messageSetConfirmDisplayMode();
-            FUN_0034888c(deliveryQuestId(work));
+            questDeactivate(deliveryQuestId(work));
             buttonHelpSetPreset(0xa3);
             scrScriptProcessStartMappedEntry(work, "qc_QuestClear");
             work->step = 8;

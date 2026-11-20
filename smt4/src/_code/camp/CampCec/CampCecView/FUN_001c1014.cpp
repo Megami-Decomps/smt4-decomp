@@ -14,7 +14,7 @@ int SBORROW4(...);
 
 int uiDrawRecordNameLabels(...);
 int saveGetIndexedMapValue(...);
-int FUN_0026f100(int, int, unsigned int);
+int timedValueInterpolateStep(int, int, unsigned int);
 int characterInfoPanelPopulate(...);
 int FUN_0026f784(void);
 int linkHolderApplyFlag(...);
@@ -41,13 +41,13 @@ extern int buttonHelpHasEnabledEntryForId(unsigned int);
 /* Supplied declaration required: uiDrawRecordNameLabels. */
 /* Supplied declaration required: saveGetIndexedMapValue. */
 extern int FUN_0026f024(int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0026f100. */
+/* Supplied declaration required: timedValueInterpolateStep. */
 /* Supplied declaration required: FUN_0026f188. */
 extern unsigned int FUN_0026f1f0(void);
 /* Supplied declaration required: characterInfoPanelPopulate. */
 /* Supplied declaration required: FUN_0026f784. */
 /* Supplied declaration required: linkHolderApplyFlag. */
-extern int FUN_0028d594(void);
+extern int buttonHelpTextIsVisible(void);
 /* Supplied declaration required: FUN_00293f10. */
 /* Supplied declaration required: statusCameraHandleControls. */
 /* Supplied declaration required: FUN_0029ede8. */
@@ -112,7 +112,7 @@ unsigned int FUN_001c1014(void)
       temp_v1 = 0;
       do {
         temp_v7 = temp_v0 + temp_v1 * 0x14;
-        FUN_0026f100(temp_v7 + 0xa0,0xc,*(unsigned int *)(temp_v7 + 0xac));
+        timedValueInterpolateStep(temp_v7 + 0xa0,0xc,*(unsigned int *)(temp_v7 + 0xac));
         temp_v1 = temp_v1 + 1;
         *(int *)(temp_v7 + 0xac) = *(int *)(temp_v7 + 0xac) + 1;
       } while (temp_v1 < 2);
@@ -145,7 +145,7 @@ unsigned int FUN_001c1014(void)
                        *(unsigned int *)(temp_v0 + 0x160));
           *(unsigned char *)(temp_v0 + 0x164) = 1;
         }
-        temp_v1 = FUN_0028d594();
+        temp_v1 = buttonHelpTextIsVisible();
         if (temp_v1 == 0) {
           FUN_0029ede8(0,*(unsigned int *)(temp_v0 + 0x148),0xffffffff);
           temp_v2 = FUN_0026f1f0();
@@ -159,7 +159,7 @@ unsigned int FUN_001c1014(void)
         if (*(char *)(temp_v0 + 0x114) == '\0') {
           linkHolderApplyFlag(*(unsigned int *)(temp_v0 + 8),0);
           *(unsigned char *)(temp_v0 + 0x165) = 0;
-          FUN_0026f100(temp_v0 + 0xb4,0xc,*(unsigned int *)(temp_v0 + 0xc0));
+          timedValueInterpolateStep(temp_v0 + 0xb4,0xc,*(unsigned int *)(temp_v0 + 0xc0));
           temp_v1 = 0;
           *(int *)(temp_v0 + 0xc0) = *(int *)(temp_v0 + 0xc0) + 1;
           do {

@@ -2,14 +2,14 @@
 
 extern "C" {
 
-extern SoundHeapOwner DAT_004e2f68;
+extern SoundHeapOwner g_asdSndSlotSelection;
 void nw_snd_SoundHeap_LoadState(AsdSndSlotB *heap, s32 state);
 
 /* Restore the active heap, clamping the request to its last saved state. */
 s32 soundHeapRestoreClampedState(s32 state)
 {
     s32 result = 0;
-    AsdSndSlotB *slot = DAT_004e2f68.slot;
+    AsdSndSlotB *slot = g_asdSndSlotSelection.slot;
     if (slot != NULL && slot->heapBase != NULL) {
         if ((s32)slot->savedState < state) {
             state = slot->savedState;

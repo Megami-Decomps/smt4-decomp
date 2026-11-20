@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00235c70(int, int);
-int FUN_002af3b4(int, int, unsigned int, int, int);
+int nw_snd_internal_SoundArchiveLoader_Load(int, int, unsigned int, int, int);
 int FUN_0037bf4c(int, unsigned int, unsigned int);
 
 typedef struct fn_00380320_arg0 fn_00380320_arg0;
@@ -32,7 +32,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_00235c70. */
-/* Supplied declaration required: FUN_002af3b4. */
+/* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_Load. */
 /* Supplied declaration required: FUN_0037bf4c. */
 extern int nw_snd_internal_SoundArchiveLoader_detail_LoadWaveArchiveByWaveSoundFile(int, int, unsigned int, unsigned int, unsigned int);
 
@@ -49,7 +49,7 @@ void FUN_00380320(fn_00380320_arg0 *param_1,unsigned int param_2,unsigned int pa
   if ((param_1->field_0x38 == 0) && (temp_v1 = param_1->field_0x34, temp_v1 != -1)) {
     param_4 = 0;
     temp_v0 = param_1->field_0x1c + 0xc;
-    FUN_002af3b4(temp_v0,temp_v1,*(unsigned int *)&param_1->field_0x20,2,0);
+    nw_snd_internal_SoundArchiveLoader_Load(temp_v0,temp_v1,*(unsigned int *)&param_1->field_0x20,2,0);
     if ((temp_v0 == 0) &&
        (UNRECOVERED_JUMPTABLE = (romwright_code *)param_1->field_0x24, UNRECOVERED_JUMPTABLE != (romwright_code *)0x0)) {
                     /* WARNING: Could not recover jumptable at 0x003803f8. Too many branches */

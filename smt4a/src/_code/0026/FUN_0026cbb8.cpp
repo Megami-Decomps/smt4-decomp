@@ -10,8 +10,8 @@ int eventQueueAddUniqueIfValid(...);
 int ifTouchRegionAddRequested(...);
 int dialogOpen(...);
 int gridNavigationConfigure(...);
-int FUN_0020b490(...);
-int FUN_00228b04(...);
+int resultSetMode(...);
+int gridNavigationHandleConfirm(...);
 int FUN_002685cc(void);
 int btlTalkBustUpSetDemonTexture(...);
 int uiScrollHandleActionsOrTouch(...);
@@ -32,13 +32,13 @@ int SBORROW4(...);
 int qsort(...);
 int uiSpriteAdvanceAnimation(...);
 int sysPlaySe(...);
-int FUN_00183e58(void);
+int buttonHelpTeardownSlots(void);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int buttonHelpSetText(int, unsigned int);
 int messageSetMode(int);
 int scrRunOpcodesStub(...);
-int FUN_0022e774(void);
+int statusPanelClose(void);
 int FUN_00267d74(int, int, int, int);
 int scrScriptProcessStartEntry(...);
 int listCursorGetRowIfUnblocked(...);
@@ -86,7 +86,7 @@ extern int infoWinHasValue(void);
 extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_00183e58. */
+/* Supplied declaration required: buttonHelpTeardownSlots. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 extern int gameFlagIsSet(unsigned int);
@@ -95,22 +95,22 @@ extern int gameFlagIsSet(unsigned int);
 extern int gameGetSlotRecord(int);
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: gridNavigationConfigure. */
-/* Supplied declaration required: FUN_0020b490. */
+/* Supplied declaration required: resultSetMode. */
 /* Supplied declaration required: scrRunOpcodesStub. */
-/* Supplied declaration required: FUN_00228b04. */
-/* Supplied declaration required: FUN_0022e774. */
+/* Supplied declaration required: gridNavigationHandleConfirm. */
+/* Supplied declaration required: statusPanelClose. */
 extern int dialogIsActive(void);
 extern int messageMainIsIdle(void);
 /* Supplied declaration required: FUN_00267d74. */
 /* Supplied declaration required: FUN_002685cc. */
-extern int FUN_0026c3a0(void);
+extern int gameGlobalsIsActiveStateFour(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int recordGetModeForId(int);
 /* Supplied declaration required: listCursorGetRowIfUnblocked. */
 /* Supplied declaration required: infoWinSetText. */
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: statusDownRestartTransition. */
-extern int objectApplyIfUnblocked(unsigned int);
+extern int gridNavigationGetItemCount(unsigned int);
 extern int FUN_002effbc(void);
 extern int whisperEffectIsIdle(void);
 extern int flaggedEntryGetValueA(void);
@@ -599,7 +599,7 @@ LAB_0026e1e4:
         }
         qsort(temp_v27,8,2,&LAB_00321c94);
         whisperEffectFinish();
-        FUN_00183e58();
+        buttonHelpTeardownSlots();
       }
       messageSetMode(1);
       return;
@@ -625,9 +625,9 @@ LAB_0026e1e4:
   temp_v30 = param_1 + 0x75dc;
   switch(temp_v9) {
   case 0:
-    temp_v9 = FUN_0026c3a0();
+    temp_v9 = gameGlobalsIsActiveStateFour();
     if (temp_v9 == 0) {
-      FUN_0022e774();
+      statusPanelClose();
     }
     statusDownRestartTransition();
     temp_v9 = gameFlagIsSet(0x406);
@@ -705,7 +705,7 @@ LAB_0026e1e4:
     temp_v9 = listCursorGetRowIfUnblocked(temp_v26);
     skillHelpUpdateAttributeAndTarget(*(unsigned short *)(temp_v5 + temp_v9 * 2 + 0x34));
     temp_v14 = 0;
-    temp_v9 = objectApplyIfUnblocked(temp_v30);
+    temp_v9 = gridNavigationGetItemCount(temp_v30);
     if (0 < temp_v9) {
       do {
         temp_v3 = ifTouchRegionAddRequested(0x1d,temp_v14 + 0xe4);
@@ -713,12 +713,12 @@ LAB_0026e1e4:
         temp_v14 = temp_v14 + 1;
         *(unsigned short *)(param_1 + temp_v9 + 0x43b6) = temp_v3;
         *(short *)(param_1 + 0x43b4) = *(short *)(param_1 + 0x43b4) + 1;
-        temp_v9 = objectApplyIfUnblocked(temp_v30);
+        temp_v9 = gridNavigationGetItemCount(temp_v30);
       } while (temp_v14 < temp_v9);
     }
     temp_v18 = 0;
     temp_v14 = 0;
-    temp_v9 = objectApplyIfUnblocked(temp_v26);
+    temp_v9 = gridNavigationGetItemCount(temp_v26);
     temp_v4 = 0;
     if (0 < temp_v9 - 1) {
       do {
@@ -727,7 +727,7 @@ LAB_0026e1e4:
         *(unsigned short *)(param_1 + temp_v14 * 2 + 0x43c6) = temp_v3;
         temp_v14 = temp_v14 + 1;
         *(short *)(param_1 + 0x43b4) = *(short *)(param_1 + 0x43b4) + 1;
-        temp_v9 = objectApplyIfUnblocked(temp_v26);
+        temp_v9 = gridNavigationGetItemCount(temp_v26);
         temp_v4 = temp_v18;
       } while (temp_v14 < temp_v9 - 1);
     }
@@ -873,10 +873,10 @@ LAB_0026e66c:
         temp_v5 = temp_v5 + 1;
       } while (temp_v5 < 7);
       if (*(int *)(pcVar7 + 0x148) != 1) {
-        FUN_0020b490(param_1,0xd);
+        resultSetMode(param_1,0xd);
       }
       else if (pcVar7[0x14e] != '\0') {
-        FUN_0020b490(param_1,0x11);
+        resultSetMode(param_1,0x11);
       }
       else {
         roundObjFinish(param_1);
@@ -908,7 +908,7 @@ LAB_0026e66c:
     temp_v23 = 1;
     temp_v7 = temp_v26;
     uiScrollHandleActionsOrTouch(temp_v26,0,param_1 + 0x43c6,0xffffffff,0xffffffff,0xffffffff,temp_v31,0);
-    if ((temp_v7 != 0) || (temp_v7 = temp_v26, FUN_00228b04(temp_v26,0), temp_v7 != 0)) {
+    if ((temp_v7 != 0) || (temp_v7 = temp_v26, gridNavigationHandleConfirm(temp_v26,0), temp_v7 != 0)) {
       temp_v6 = listCursorGetRowIfUnblocked(temp_v26);
       if (temp_v6 != temp_v28) {
         eventQueueAddUniqueIfValid(0x100020d);
@@ -919,7 +919,7 @@ LAB_0026e66c:
         flaggedEntrySetValueA(temp_v26,temp_v6 - 1);
       }
       temp_v6 = listCursorGetRowIfUnblocked(temp_v26);
-      temp_v9 = objectApplyIfUnblocked(temp_v26);
+      temp_v9 = gridNavigationGetItemCount(temp_v26);
       if (temp_v9 - 1 <= temp_v6) {
         screenStartOrClear(*(unsigned int *)(param_1 + 0x43a4),700);
         return;
@@ -951,7 +951,7 @@ LAB_0026e66c:
       }
       temp_v9 = temp_v9 + 1;
     } while (temp_v9 < 8);
-    temp_v9 = objectApplyIfUnblocked(temp_v26);
+    temp_v9 = gridNavigationGetItemCount(temp_v26);
     if (temp_v9 - 1 <= temp_v28) {
       eventQueueAddUniqueIfValid(0x100020e);
       obj04Finish();
@@ -1087,7 +1087,7 @@ LAB_0026d4c4:
     temp_v23 = 1;
     temp_v7 = temp_v30;
     uiScrollHandleActionsOrTouch(temp_v30,0,param_1 + 0x43b6,0xffffffff,0xffffffff,0xffffffff,temp_v31,0);
-    if ((temp_v7 != 0) || (temp_v7 = temp_v30, FUN_00228b04(temp_v30,0), temp_v7 != 0)) {
+    if ((temp_v7 != 0) || (temp_v7 = temp_v30, gridNavigationHandleConfirm(temp_v30,0), temp_v7 != 0)) {
       temp_v9 = listCursorGetRowIfUnblocked(temp_v30);
       if (temp_v9 != temp_v6) {
         eventQueueAddUniqueIfValid(0x100020d);
@@ -1107,7 +1107,7 @@ LAB_0026d4c4:
         temp_v29 = param_1;
         temp_v6 = flaggedEntryGetValueA();
         temp_v9 = temp_v6 + 1;
-        temp_v14 = objectApplyIfUnblocked(temp_v7);
+        temp_v14 = gridNavigationGetItemCount(temp_v7);
         if (temp_v14 - 2 <= temp_v6) {
           temp_v9 = 0;
         }

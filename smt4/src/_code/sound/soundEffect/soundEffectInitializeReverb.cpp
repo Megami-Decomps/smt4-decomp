@@ -3,16 +3,12 @@
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
-struct SoundReverbEffect {
-    u8 unk00[0x110];
-};
-
 extern "C" {
-extern const char DAT_004076c8[];
-SoundReverbEffect DAT_004c54f4;
-SoundReverbParameters DAT_004c5604;
+extern const char g_soundEffectSourceFileName[];
+SoundReverbEffect g_soundReverbEffect;
+SoundReverbParameters g_soundReverbParameters;
 SoundReverbFilterSize g_soundReverbFilterSize;
-extern void *g_soundEffectBuffers[2];
+extern void *g_soundEffectBuffers[2]; /* [0] delay, [1] reverb work buffer */
 s32 nw_snd_FxReverb_SetParam(SoundReverbEffect *effect,
                              const SoundReverbParameters *parameters);
 u32 nw_snd_FxReverb_GetRequiredMemSize(SoundReverbEffect *effect);
@@ -21,28 +17,30 @@ s32 nw_snd_FxReverb_AssignWorkBuffer(SoundReverbEffect *effect,
                                     void *buffer, u32 size);
 s32 soundSourceQueueReadyRequest(u32 bus, SoundReverbEffect *effect);
 
+/* Sets up the reverb effect on auxiliary bus 1 (B) unless resident entry 1 is present. */
 void soundEffectInitializeReverb(void)
 {
-    if (jyoucyuGetTableEntry(1) != NULL)
+    if (jyoucyuGetTableEntry(1) != 0)
         return;
-    DAT_004c5604.integerParameters[0] = 90;
-    DAT_004c5604.integerParameters[1] = 1200;
-    DAT_004c5604.integerParameters[2] = 30;
-    DAT_004c5604.scalarParameters[0] = 0.5f;
-    DAT_004c5604.scalarParameters[1] = 0.8f;
-    g_soundReverbFilterSize.lengths[0] = 3040;
-    g_soundReverbFilterSize.lengths[1] = 3680;
-    g_soundReverbFilterSize.lengths[2] = 2080;
-    DAT_004c5604.filterSize = &g_soundReverbFilterSize;
-    DAT_004c5604.additionalScalars[0] = 0.4f;
-    DAT_004c5604.additionalScalars[1] = 0.4f;
-    DAT_004c5604.flags[1] = 1;
-    DAT_004c5604.flags[0] = 0;
-    nw_snd_FxReverb_SetParam(&DAT_004c54f4, &DAT_004c5604);
-    u32 requiredSize = nw_snd_FxReverb_GetRequiredMemSize(&DAT_004c54f4);
-    asdDebugTrace(DAT_004076c8, 108);
-    void *buffer = g_soundEffectBuffers[1] = asdMemoryAlloc(0x10000, 0x100, 0, requiredSize, 1);
-    nw_snd_FxReverb_AssignWorkBuffer(&DAT_004c54f4, buffer, requiredSize);
-    soundSourceQueueReadyRequest(1, &DAT_004c54f4);
+    g_soundReverbParameters.earlyReflectionTime = 90;
+    g_soundReverbParameters.fusedTime = 1200;
+    g_soundReverbParameters.preDelayTime = 30;
+    g_soundReverbParameters.coloration = 0.5f;
+    g_soundReverbParameters.damping = 0.8f;
+    g_soundReverbFilterSize.comb0 = 3040;
+    g_soundReverbFilterSize.comb1 = 3680;
+    g_soundReverbFilterSize.allPass = 2080;
+    g_soundReverbParameters.filterSize = &g_soundReverbFilterSize;
+    g_soundReverbParameters.earlyGain = 0.4f;
+    g_soundReverbParameters.fusedGain = 0.4f;
+    g_soundReverbParameters.surround = 1;
+    g_soundReverbParameters.useHighPassDamping = 0;
+    nw_snd_FxReverb_SetParam(&g_soundReverbEffect, &g_soundReverbParameters);
+    u32 bufferSize = nw_snd_FxReverb_GetRequiredMemSize(&g_soundReverbEffect);
+    asdDebugTrace(g_soundEffectSourceFileName, 108);
+    void *buffer = g_soundEffectBuffers[1] = asdMemoryAlloc(0x10000, 0x100, 0, bufferSize, 1);
+    nw_snd_FxReverb_AssignWorkBuffer(&g_soundReverbEffect, buffer, bufferSize);
+    soundSourceQueueReadyRequest(1, &g_soundReverbEffect);
 }
-}
+
+} /* extern "C" */

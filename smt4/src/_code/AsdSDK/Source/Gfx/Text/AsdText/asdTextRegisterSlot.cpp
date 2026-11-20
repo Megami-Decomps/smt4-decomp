@@ -1,20 +1,22 @@
-#include "common.h"
+#include "script/ScriptCallbackDispatch.h"
 
 extern "C" {
-extern void* DAT_004daee8[8];
-extern u16 DAT_004def18[8];
-extern u32 DAT_004def28[8];
+extern ScriptCallbackFunction g_textControlCallbacks[8]; /* NULL = free slot */
+extern u16 g_textControlCallbackCodes[8];
+extern u32 g_textControlCallbackArgumentCounts[8];
 
-// Register text data in the first unused slot with its ID and attributes.
-void asdTextRegisterSlot(u16 id, u32 attributes, void* text)
+/* Registers the callback for text control code `code`, taking `argumentCount` arguments, in the
+ * first free slot of the eight; does nothing when all are taken. */
+void asdTextRegisterSlot(u16 code, u32 argumentCount, ScriptCallbackFunction callback)
 {
     for (s32 index = 0; index < 8; ++index) {
-        if (DAT_004daee8[index] == NULL) {
-            DAT_004daee8[index] = text;
-            DAT_004def18[index] = id;
-            DAT_004def28[index] = attributes;
+        if (g_textControlCallbacks[index].one == NULL) {
+            g_textControlCallbacks[index] = callback;
+            g_textControlCallbackCodes[index] = code;
+            g_textControlCallbackArgumentCounts[index] = argumentCount;
             return;
         }
     }
 }
-}
+
+} /* extern "C" */

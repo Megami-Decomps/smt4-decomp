@@ -6,7 +6,7 @@ s32 unlockFlagTest(u16 id);
 s32 flagValueRead(u16 id);
 s32 partyFindActiveSlotById(u16 id);
 s32 aocEntryGetKind(u16 id);
-QuestRequirementSavedProgress *FUN_00348b7c(s32 quest);
+QuestRequirementSavedProgress *goalConditionsFindSlot(s32 quest);
 
 // Stores the unmet count, never negative.
 static __inline void setRemaining(QuestRequirementProgress *progress, s32 value)
@@ -45,7 +45,7 @@ u32 FUN_00298e40(s32 quest, s32 index, QuestRequirementProgress *progress)
             }
             return handled;
         }
-        progress->current = FUN_00348b7c(quest)->counts[index];
+        progress->current = goalConditionsFindSlot(quest)->counts[index];
         setRemaining(progress, definition->requirements[index].count - progress->current);
         break;
     case 7:

@@ -22,8 +22,8 @@ int asdMdlManagerDestroy(...);
 int cameraExportParameters(...);
 int ownerGetFloatValue(...); // declcheck: local (romwright prototype; the shared declaration in AsdSDK/Source/Gfx/Model/AsdMotionValueApi.h does not compile here: more than one instance of overloaded function "asdMdlManagerMarkDestroy" has "C" linkage)
 int FUN_002c159c(...);
-int FUN_002c1e30(...);
-int FUN_002c1edc(...);
+int stereoCameraSetPerspective(...);
+int cameraMatrixCacheSetLookAt(...);
 int FUN_002f50b8(...);
 int VectorSignedToFloat(...);
 
@@ -55,9 +55,9 @@ extern int modelHasLoadedAttachment(const ModelBoneAttachmentRoot *object);
 /* Supplied declaration required: ownerGetFloatValue. */
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c159c. */
-extern int FUN_002c1d5c(void);
-/* Supplied declaration required: FUN_002c1e30. */
-/* Supplied declaration required: FUN_002c1edc. */
+extern int eventIsSkipping(void);
+/* Supplied declaration required: stereoCameraSetPerspective. */
+/* Supplied declaration required: cameraMatrixCacheSetLookAt. */
 /* Supplied declaration required: FUN_002f50b8. */
 
 
@@ -76,7 +76,7 @@ unsigned int FUN_00205184(void)
   temp_v0 = jobGetWork();
   switch(*(unsigned int *)(temp_v0 + 0x564)) {
   case 0:
-    temp_v1 = FUN_002c1d5c();
+    temp_v1 = eventIsSkipping();
     if (temp_v1 == 0) {
       FUN_002a09b4("event/oc/oc_loop.bcenv",0);
       *(unsigned int *)(temp_v0 + 0x558) = 0;
@@ -110,8 +110,8 @@ unsigned int FUN_00205184(void)
       *(unsigned char *)(temp_v0 + 0x56c) = 1;
       cameraExportParameters(temp_v0 + 0x50c,*(unsigned int *)(temp_v0 + 0x558));
       FUN_002c159c(temp_v0 + 4);
-      FUN_002c1edc(temp_v0 + 4,temp_v0 + 0x50c,temp_v0 + 0x518,temp_v0 + 0x524);
-      FUN_002c1e30(temp_v0 + 4,1);
+      cameraMatrixCacheSetLookAt(temp_v0 + 4,temp_v0 + 0x50c,temp_v0 + 0x518,temp_v0 + 0x524);
+      stereoCameraSetPerspective(temp_v0 + 4,1);
       screenFadeSlotReset(0);
       titleSetSlotValueState2(1,10);
       *(unsigned int *)(temp_v0 + 0x564) = 2;
@@ -120,7 +120,7 @@ unsigned int FUN_00205184(void)
     break;
   case 2:
     temp_v1 = effTimelineIsDone(*(unsigned int *)(temp_v0 + 0x558));
-    if ((temp_v1 != 0) || (temp_v1 = FUN_002c1d5c(), temp_v1 != 0)) {
+    if ((temp_v1 != 0) || (temp_v1 = eventIsSkipping(), temp_v1 != 0)) {
       piVar5 = (int *)(temp_v0 + 0x554);
       ownerGetFloatValue(*(unsigned int *)(*(int *)(temp_v0 + 0x554) + 8));
       temp_v1 = (int)in_s0;
@@ -146,8 +146,8 @@ unsigned int FUN_00205184(void)
   case 3:
     cameraExportParameters(temp_v0 + 0x50c,*(unsigned int *)(temp_v0 + 0x558));
     FUN_002c159c(temp_v0 + 4);
-    FUN_002c1edc(temp_v0 + 4,temp_v0 + 0x50c,temp_v0 + 0x518,temp_v0 + 0x524);
-    FUN_002c1e30(temp_v0 + 4,1);
+    cameraMatrixCacheSetLookAt(temp_v0 + 4,temp_v0 + 0x50c,temp_v0 + 0x518,temp_v0 + 0x524);
+    stereoCameraSetPerspective(temp_v0 + 4,1);
     break;
   case 4:
     if (*(int *)(temp_v0 + 0x568) != 0) {

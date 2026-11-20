@@ -81,10 +81,10 @@ Allocator* asdMemoryGetAllocatorA(void);
 SceneObject* nw_gfx_SceneBuilder_CreateObject(SceneBuildDesc* desc, Allocator* defaultAllocator, Allocator* allocatorA);
 void* _ZN9Obj42111cC1Ej(void* self, Allocator* allocator);
 void FUN_002a5960(void* self, AnimDesc* desc, f32 startTime, u32 flags, s32 enabled);
-void FUN_002c2044(void* camera, s32 arg);
+void cameraMatrixCacheReset(void* camera, s32 arg);
 void FUN_002c159c(void* camera);
-void FUN_002c1edc(void* camera, f32* position, f32* target, f32* up);
-void FUN_002c1e30(void* camera, s32 arg, f32 a, f32 b, f32 c, f32 d);
+void cameraMatrixCacheSetLookAt(void* camera, f32* position, f32* target, f32* up);
+void stereoCameraSetPerspective(void* camera, s32 arg, f32 a, f32 b, f32 c, f32 d);
 void modelSelectionActivate(ModelSet* set, s32 a, s32 b);
 
 // Resolves a self-relative offset stored at `field` (0 means none).
@@ -167,7 +167,7 @@ void FUN_00341340(ModelSet* set, void* path)
         set->index++;
     }
 
-    FUN_002c2044(set->camera, 1);
+    cameraMatrixCacheReset(set->camera, 1);
     set->position[0] = 0.0f;
     set->position[1] = 0.0f;
     set->position[2] = 0.0f;
@@ -183,8 +183,8 @@ void FUN_00341340(ModelSet* set, void* path)
     set->up[2] = 0.0f;
     set->distance = 5.0f;
     FUN_002c159c(set->camera);
-    FUN_002c1edc(set->camera, set->position, set->target, set->up);
-    FUN_002c1e30(set->camera, 1, set->nearClip, set->aspect, set->farClip, 1.6666666f);
+    cameraMatrixCacheSetLookAt(set->camera, set->position, set->target, set->up);
+    stereoCameraSetPerspective(set->camera, 1, set->nearClip, set->aspect, set->farClip, 1.6666666f);
     FUN_00298d50(reinterpret_cast<u32>(set->camera));
     modelSelectionActivate(set, 0, -1);
 }

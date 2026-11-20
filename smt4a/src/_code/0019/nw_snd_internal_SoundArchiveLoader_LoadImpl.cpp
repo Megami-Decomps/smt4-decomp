@@ -16,8 +16,8 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_5_stack;
 
-extern int FUN_00188c94(void);
-extern unsigned int FUN_00188ca4(void);
+extern int nnosGetHeapSize(void);
+extern unsigned int nnosGetHeapBase(void);
 extern int FUN_001a8988(int, unsigned int, int **);
 /* Supplied declaration required: FUN_001b1c40. */
 /* Supplied declaration required: FUN_001bd53c. */
@@ -56,8 +56,8 @@ unsigned int nw_snd_internal_SoundArchiveLoader_LoadImpl
     return 0;
   }
   if (param_5 != 0) {
-    temp_v2 = FUN_00188ca4();
-    temp_v1 = FUN_00188c94();
+    temp_v2 = nnosGetHeapBase();
+    temp_v1 = nnosGetHeapSize();
     if ((temp_v0 < temp_v2) || (temp_v1 + temp_v2 < temp_v0 + (int)unaff_r4)) {
       temp_v0 = 0;
       if (temp_v0 == 0) {

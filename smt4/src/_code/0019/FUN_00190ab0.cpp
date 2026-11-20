@@ -26,7 +26,7 @@ typedef struct SkillMenuWork {
 
 s32 FUN_00297ca4(SkillMenuWork *work, s32 arg);
 u32 FUN_00293988(void *scene);
-s32 FUN_0029ee54(void);
+s32 gridNavigationGetItemCount(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void playSceneSetState(SkillMenuWork *work, s32 state, s32 flag);
 void buttonHelpSetText(u32 record, u32 color);
 
@@ -73,7 +73,7 @@ u32 FUN_00190ab0(SkillMenuWork *work)
                         playSceneSetState(work, 0x17, 1);
                     }
                 } else {
-                    if (FUN_0029ee54() < 1) {
+                    if (gridNavigationGetItemCount() < 1) {
                         return 0;
                     }
                     work->activeList = work->listTalk;
@@ -81,7 +81,7 @@ u32 FUN_00190ab0(SkillMenuWork *work)
                     resetSprites(work);
                 }
             } else {
-                if (FUN_0029ee54() < 1) {
+                if (gridNavigationGetItemCount() < 1) {
                     return 0;
                 }
                 work->activeList = work->listItem;

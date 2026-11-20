@@ -10,12 +10,12 @@ typedef struct Slot002121c4 {
     /* 0x11 */ u8 unk11[3];
 } Slot002121c4;
 
-extern Slot002121c4 DAT_006357d8[]; /* 0x6357d8 */
+extern Slot002121c4 g_screenFadeSlots[]; /* 0x6357d8 */
 
 /* True when slot `index` is in use and, if waiting (state 3), its timer has run out. */
 u32 slotIsReady(s32 index)
 {
-    Slot002121c4 *slot = &DAT_006357d8[index];
+    Slot002121c4 *slot = &g_screenFadeSlots[index];
 
     if (slot->state == 0) {
         return 0;

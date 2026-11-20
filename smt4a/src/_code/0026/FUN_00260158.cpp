@@ -8,17 +8,17 @@ int _ZN2nw4math5MTX448IdentityEv(...);
 int mtx44Copy(...);
 int nn_math_ARMv6_MTX44MultAsm(...);
 int FUN_001a1c28(...);
-int FUN_002039d0(...);
-int FUN_00237da0(double, float *, float *, int);
+int effRandomSignedValue(...);
+int quadEffectCreate(double, float *, float *, int);
 int nodeTreeReleaseItemClearOwner(double);
-int FUN_0028324c(int, double, int);
-int FUN_00283328(int, double, int);
+int randomSignedScaledRange(int, double, int);
+int randomSignedRatio(int, double, int);
 int nodeTreeReleaseItem(...);
 int scalarTimelineUpdate(...);
 int FUN_002e5de0(...);
 int sysMemClear(float *, int);
-int FUN_0034a16c(float *, float *, float *, float *);
-int FUN_0035cc80(...);
+int effScalarKeyFindNextDistinct(float *, float *, float *, float *);
+int effScalarChannelAdvance(...);
 int FUN_003d2480(...);
 int FUN_0043b5b4(...);
 int VectorFloatToUnsigned(double, int);
@@ -67,17 +67,17 @@ extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 /* Supplied declaration required: FUN_001a1c28. */
-/* Supplied declaration required: FUN_002039d0. */
-/* Supplied declaration required: FUN_00237da0. */
+/* Supplied declaration required: effRandomSignedValue. */
+/* Supplied declaration required: quadEffectCreate. */
 /* Supplied declaration required: nodeTreeReleaseItemClearOwner. */
-/* Supplied declaration required: FUN_0028324c. */
-/* Supplied declaration required: FUN_00283328. */
+/* Supplied declaration required: randomSignedScaledRange. */
+/* Supplied declaration required: randomSignedRatio. */
 /* Supplied declaration required: nodeTreeReleaseItem. */
 /* Supplied declaration required: scalarTimelineUpdate. */
 /* Supplied declaration required: FUN_002e5de0. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0034a16c. */
-/* Supplied declaration required: FUN_0035cc80. */
+/* Supplied declaration required: effScalarKeyFindNextDistinct. */
+/* Supplied declaration required: effScalarChannelAdvance. */
 /* Supplied declaration required: FUN_003d2480. */
 /* Supplied declaration required: FUN_0043b5b4. */
 
@@ -158,7 +158,7 @@ void FUN_00260158(float *param_1)
       param_1[0x16] = param_1[0x62];
       param_1[0x17] = param_1[99];
       param_1[1] = temp_v14;
-      FUN_0034a16c(param_1 + 0x66,param_1 + 10,param_1 + 0xc,param_1 + 3);
+      effScalarKeyFindNextDistinct(param_1 + 0x66,param_1 + 10,param_1 + 0xc,param_1 + 3);
     }
     return;
   }
@@ -193,20 +193,20 @@ void FUN_00260158(float *param_1)
       temp_v10 = (float)VectorFloatToUnsigned(param_1[0x6a] * temp_v15,3);
       temp_v3 = param_1[0x94];
       temp_v11 = temp_v10;
-      FUN_00237da0(temp_v3,param_1 + 0x19,param_1 + 0x66,1);
+      quadEffectCreate(temp_v3,param_1 + 0x19,param_1 + 0x66,1);
       param_1[(int)temp_v8 + 0x99] = temp_v3;
-      FUN_0028324c(0,temp_v10,10);
+      randomSignedScaledRange(0,temp_v10,10);
       *(float *)((int)temp_v3 + 500) = temp_v11 * *(float *)((int)temp_v3 + 500);
       temp_v11 = (float)VectorSignedToFloat(param_1[0x6d],(unsigned char)(in_fpscr >> 0x16) & 3);
       *(float *)((int)temp_v3 + 0x34c) = temp_v11;
-      FUN_002039d0(0,param_1[0x67],100);
+      effRandomSignedValue(0,param_1[0x67],100);
       temp_v10 = (float)VectorSignedToFloat(param_1[0x66],(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v11 = temp_v11 + temp_v10 * (float)temp_v13;
       *(float *)((int)temp_v3 + 0x340) = temp_v11;
       *(float *)((int)temp_v3 + 0x33c) = temp_v14;
-      FUN_00283328(2,param_1[0x68],100);
+      randomSignedRatio(2,param_1[0x68],100);
       *(float *)((int)temp_v3 + 0x344) = temp_v11;
-      FUN_002039d0(0,(int)*(short *)((int)temp_v3 + 0x172),100);
+      effRandomSignedValue(0,(int)*(short *)((int)temp_v3 + 0x172),100);
       *(float *)((int)temp_v3 + 0x36c) = temp_v11;
       temp_v0 = *(char *)((int)temp_v3 + 0x174);
       temp_v11 = (float)VectorSignedToFloat(param_1[0x6b],(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -311,7 +311,7 @@ void FUN_00260158(float *param_1)
   temp_v18 = param_1 + 6;
   temp_v17 = param_1 + 3;
   temp_v16 = param_1;
-  FUN_0035cc80(param_1 + 0x66,param_1 + 0xb,param_1 + 10,param_1 + 0xc);
+  effScalarChannelAdvance(param_1 + 0x66,param_1 + 0xb,param_1 + 10,param_1 + 0xc);
   temp_v17 = param_1 + 4;
   temp_v16 = param_1 + 1;
   temp_v18 = param_1 + 7;

@@ -1,5 +1,5 @@
 #include "quest_center/QuestRecordA.h"
-extern "C" s32 FUN_002f744c(u8);
+extern "C" s32 itemKindToSortGroup(u8);
 
 /* Orders two item records by their sort keys; 0 when either record is missing. */
 static __inline s32 compareSortKeys(const QuestRecordA* left, const QuestRecordA* right)
@@ -19,7 +19,7 @@ extern "C" s32 FUN_002b2b34(const u16* leftId, const u16* rightId)
     if (left == NULL || right == NULL) {
         return 0;
     }
-    s32 result = FUN_002f744c(left->kind) - FUN_002f744c(right->kind);
+    s32 result = itemKindToSortGroup(left->kind) - itemKindToSortGroup(right->kind);
     if (result != 0) {
         return result;
     }

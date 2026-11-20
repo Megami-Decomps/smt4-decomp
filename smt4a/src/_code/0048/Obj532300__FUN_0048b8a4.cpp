@@ -18,8 +18,8 @@ static __inline void flagsClearBits(u32 *flags, u32 bits)
 
 extern "C" {
 void uiSpriteBankApplyPreset(void *, s32);
-void FUN_0048a378(NaviCategorySelectionWork *);
-void FUN_0048821c(NaviCategorySelectionWork *, u32);
+void naviRefreshBackgroundAndFeedback(NaviCategorySelectionWork *);
+void naviSwitchTextureSetForMap(NaviCategorySelectionWork *, u32);
 void pointConvertToFloat(FloatPoint *, s32, s32);
 void naviMainSetCurrentMap(void *, u32);
 
@@ -50,7 +50,7 @@ void _ZN9Obj53230012FUN_0048b8a4Ev(NaviCategorySelectionWork *owner)
     switch (work->phase) {
     case 0: {
         pointConvertToFloat(&work->scene.position, -320, 0);
-        FUN_0048a378(owner);
+        naviRefreshBackgroundAndFeedback(owner);
         uiSpriteBankApplyPreset(work->preset, 0);
         flagsClearBits(&work->flags, 2);
         flagsSetBits(&work->flags, 0x1000000);
@@ -60,7 +60,7 @@ void _ZN9Obj53230012FUN_0048b8a4Ev(NaviCategorySelectionWork *owner)
             u32 map = naviGetActiveStateValue(&work->scene);
             naviMainSetCurrentMap(&work->scene, map);
             FUN_00492ac8(reinterpret_cast<u32>(&work->scene), 0);
-            FUN_0048821c(owner, map);
+            naviSwitchTextureSetForMap(owner, map);
         }
         return;
     }

@@ -7,7 +7,7 @@
 
 extern "C" {
 extern u32 g_btlScriptUnit;
-void FUN_00250720(BtlMainState *);
+void btlSlotManagerResetAll(BtlMainState *);
 u32 FUN_002551ac(s32, u32, BtlActionRecord *, s32, s32, s32, s32, s32, s32,
     s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s16, s32, u32, u32, s32);
 void btlQueueKeyedScalarReflectAction(s32, u32, u32, s32, s32, u32, s32);
@@ -34,7 +34,7 @@ u32 FUN_0030074c()
                 amount = value;
                 break;
             }
-            FUN_00250720(state);
+            btlSlotManagerResetAll(state);
             FUN_002551ac(0, actor, &state->actions[entry->ids[0]], 0,
                 -1, amount, -1, entry->data.hp, entry->data.maxHp, 0, 0, 0, 0,
                 1, 0, i << 3, i << 3, i << 3, i << 3, 1, 0, 1, 1, 0, 1);

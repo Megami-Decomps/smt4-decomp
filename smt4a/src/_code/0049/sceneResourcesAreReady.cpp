@@ -4,7 +4,7 @@ extern "C" {
 u32 jobIsValid(u32 job); // declcheck: local (the shared declaration does not compile here or changes this unit)
 s32 eventTexJobSlotsDone(u32 job);
 void aocHandleButtons(u32 loader, u32 mode); // declcheck: local (the shared declaration does not compile here or changes this unit)
-s32 FUN_003fce08(u32 loader, u32 wait);
+s32 aocResourceStartOnce(u32 loader, u32 wait);
 u32 nkdwLoaderParse(u32 loader);
 
 /* Poll the optional loader through parse, button setup, and readiness. The battle
@@ -19,7 +19,7 @@ static __inline bool advanceResourceLoader(SceneResourceWaitState *state)
         state->loaderState++;
         // The first update can finish both loading phases.
     case 1:
-        if (!FUN_003fce08(state->loader, 1))
+        if (!aocResourceStartOnce(state->loader, 1))
             return false;
         state->loaderState++;
         break;

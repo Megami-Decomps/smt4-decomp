@@ -19,13 +19,13 @@ struct Owner0018cfe4 {
 };
 
 void nw_gfx_SceneTraverser_Begin(void *scene, void *traverser);
-void FUN_0018d01c(void *scene);
+void nw_gfx_SceneTraverser_End(void *scene);
 
 void sceneTraverserVisit(Owner0018cfe4 *owner, Visitor0018cfe4 *visitor)
 {
     nw_gfx_SceneTraverser_Begin(owner->scene, owner->traverser);
     visitor->visit(owner->scene);
-    FUN_0018d01c(owner->scene);
+    nw_gfx_SceneTraverser_End(owner->scene);
 }
 
 }

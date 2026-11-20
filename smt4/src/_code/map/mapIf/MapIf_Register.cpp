@@ -23,7 +23,7 @@ void mapIfFreeWork(void);
 void MAPIF_DrawUp(void);
 void FUN_0021ef10(void);
 void FUN_001e84f0(void);
-void FUN_00297a00(void);
+void mapIfResetRecords(void);
 
 // Registers the map interface: allocates its state, clears it, creates the update, draw-up, fade and mesh tasks and
 // fills the three marker quads (one facing the camera, two lying on the ground plane).
@@ -91,6 +91,6 @@ void MapIf_Register(u32 parent, u8 variant)
     DAT_004b5d30[2].quad.corner[3][1] = 0.0f;
     DAT_004b5d30[2].quad.corner[3][2] = 16.0f;
     state->variant = variant;
-    FUN_00297a00();
+    mapIfResetRecords();
 }
 }

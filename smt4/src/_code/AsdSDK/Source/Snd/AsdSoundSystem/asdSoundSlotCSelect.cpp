@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail derives g_asdSound from DAT_004e2f68 (`sub r1, r5, #4096`) and loads one fewer literal, i.e. g_asdSound (0x1000 bytes) and DAT_004e2f68 were defined in the same file; only the base-register/literal handling differs. */
+/* NON_MATCHING: retail derives g_asdSound from g_asdSndSlotSelection (`sub r1, r5, #4096`) and loads one fewer literal, i.e. g_asdSound (0x1000 bytes) and g_asdSndSlotSelection were defined in the same file; only the base-register/literal handling differs. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
@@ -9,7 +9,7 @@ struct SoundOutputTail {
     AsdSndSlotC *outputC0;
     AsdSndSlotC *outputC1;
 };
-extern SoundOutputTail DAT_004e2f68;
+extern SoundOutputTail g_asdSndSlotSelection;
 
 void basicSoundStopOrFadeOut(s32 handle, s32 unk);
 
@@ -27,9 +27,9 @@ void asdSoundSlotCSelect(u32 first, u32 second)
         slot->unk08 = 0;
         slot->volume = ASD_SND_VOLUME_DEFAULT;
         slot->flag = 0;
-        DAT_004e2f68.outputC0 = slot;
+        g_asdSndSlotSelection.outputC0 = slot;
     } else {
-        DAT_004e2f68.outputC0 = NULL;
+        g_asdSndSlotSelection.outputC0 = NULL;
     }
 
     if (second != 0xffffffff && second < 2) {
@@ -40,10 +40,10 @@ void asdSoundSlotCSelect(u32 first, u32 second)
         slot->unk08 = 0;
         slot->volume = ASD_SND_VOLUME_DEFAULT;
         slot->flag = 0;
-        DAT_004e2f68.outputC1 = slot;
+        g_asdSndSlotSelection.outputC1 = slot;
         return;
     }
-    DAT_004e2f68.outputC1 = NULL;
+    g_asdSndSlotSelection.outputC1 = NULL;
 }
 
 } /* extern "C" */

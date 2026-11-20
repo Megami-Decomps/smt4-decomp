@@ -8,8 +8,8 @@ int _ZN18OnlineResultRecordaSERKS_(...);
 int FUN_002e9c0c(void);
 int onlineInstanceTableFind(int, unsigned int);
 int onlineJobSetStateDone(int);
-int FUN_002f3dc4(int, int *);
-int FUN_002f3dde(int, int *);
+int onlineInstanceCompleteMode2(int, int *);
+int onlineInstanceCompleteMode3(int, int *);
 int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(int, int, unsigned int);
 
@@ -30,8 +30,8 @@ extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(int, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: onlineJobSetStateDone. */
-/* Supplied declaration required: FUN_002f3dc4. */
-/* Supplied declaration required: FUN_002f3dde. */
+/* Supplied declaration required: onlineInstanceCompleteMode2. */
+/* Supplied declaration required: onlineInstanceCompleteMode3. */
 extern int _ZNK18OnlineResultRecord7isValidEv(int);
 extern int FUN_002f71b0(int, int, unsigned int);
 /* Supplied declaration required: onlineJobSetStateWaiting. */
@@ -82,13 +82,13 @@ void FUN_00310784(int param_1,unsigned int param_2,unsigned int param_3,unsigned
       temp_v3 = *(unsigned int *)(param_1 + 0x164);
       temp_v4 = *(unsigned int *)(param_1 + 0x168);
       temp_v5 = *(unsigned int *)(param_1 + 0x16c);
-      FUN_002f3dc4(temp_v1,&temp_v3);
+      onlineInstanceCompleteMode2(temp_v1,&temp_v3);
     }
     else {
       temp_v3 = *(unsigned int *)(param_1 + 0x164);
       temp_v4 = *(unsigned int *)(param_1 + 0x168);
       temp_v5 = *(unsigned int *)(param_1 + 0x16c);
-      FUN_002f3dde(temp_v1,&temp_v3);
+      onlineInstanceCompleteMode3(temp_v1,&temp_v3);
     }
   }
   onlineJobSetStateDone(param_1);

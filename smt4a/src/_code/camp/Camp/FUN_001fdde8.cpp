@@ -12,23 +12,23 @@ int buttonHelpSetText(...);
 int ptrListRemoveClearOwner(...);
 int campChangeState(...);
 int FUN_0021b274(...);
-int FUN_0022e774(void);
+int statusPanelClose(void);
 int campSelectorRebuildList(...);
 int listCursorGetRowOfChildIfUnblocked(...);
 int campTouchRegionsRemoveGroup(...);
-int FUN_002cb278(...);
+int campListRegisterTouchRegions(...);
 int FUN_002f78a0(...);
 int menuItemPlaySe(...);
 int flaggedEntrySetValueB(...);
-int FUN_0037c8e4(...);
+int messageBannerInitCounter(...);
 int gameSetStatusCameraHeightMode(...);
 int messageRestoreBanner(void);
 
 int padQueryLogicalKey(...);
 int eventQueueAddUniqueIfValid(...);
-int FUN_00228b04(...);
+int gridNavigationHandleConfirm(...);
 int campShowSelectedEntryHelp(...);
-int FUN_0031f208(...);
+int useCounterAppendValue(...);
 int sortMenuAcquire(...);
 int stateAtF4Apply(void);
 int uiScrollHandleActionsOrTouch(...);
@@ -43,8 +43,8 @@ int FUN_003df7c4(...);
 int asdMemoryAllocTraced(...);
 int gameGetPlayerData(void);
 int statusPanelSetOpen(int);
-int FUN_002c85b0(...);
-int FUN_002f0384(...);
+int gameGlobalsSetSceneState(...);
+int statusCameraRestore(...);
 int campPreviewSelectedEquipment(...);
 int FUN_003343d8(...);
 int FUN_0033449c(...);
@@ -87,9 +87,9 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: campChangeState. */
 /* Supplied declaration required: FUN_0021b274. */
-/* Supplied declaration required: FUN_00228b04. */
+/* Supplied declaration required: gridNavigationHandleConfirm. */
 extern int FUN_0022e714(void);
-/* Supplied declaration required: FUN_0022e774. */
+/* Supplied declaration required: statusPanelClose. */
 /* Supplied declaration required: campSelectorRebuildList. */
 extern int recordGetModeForId(int);
 /* Supplied declaration required: campShowSelectedEntryHelp. */
@@ -100,13 +100,13 @@ extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: campTouchRegionsRemoveGroup. */
 extern unsigned int FUN_002bf520(void);
 extern int widgetSubCallIfVisible(int);
-/* Supplied declaration required: FUN_002c85b0. */
-/* Supplied declaration required: FUN_002cb278. */
-/* Supplied declaration required: FUN_002f0384. */
+/* Supplied declaration required: gameGlobalsSetSceneState. */
+/* Supplied declaration required: campListRegisterTouchRegions. */
+/* Supplied declaration required: statusCameraRestore. */
 /* Supplied declaration required: FUN_002f78a0. */
 /* Supplied declaration required: menuItemPlaySe. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
-/* Supplied declaration required: FUN_0031f208. */
+/* Supplied declaration required: useCounterAppendValue. */
 /* Supplied declaration required: sortMenuAcquire. */
 /* Supplied declaration required: campPreviewSelectedEquipment. */
 /* Supplied declaration required: objBStateAllowsAction. */
@@ -120,7 +120,7 @@ extern int FUN_0036cf78(void);
 /* Supplied declaration required: FUN_0036cf98. */
 /* Supplied declaration required: gameGlobalsQueueValues. */
 /* Supplied declaration required: FUN_00372100. */
-/* Supplied declaration required: FUN_0037c8e4. */
+/* Supplied declaration required: messageBannerInitCounter. */
 /* Supplied declaration required: gameSetStatusCameraHeightMode. */
 /* Supplied declaration required: messageRestoreBanner. */
 /* Supplied declaration required: FUN_0038b57c. */
@@ -133,7 +133,7 @@ extern int FUN_0036cf78(void);
 /* Supplied declaration required: resourceOwnerLoadFileSync. */
 /* Supplied declaration required: moriModelContentLoadBody. */
 /* Supplied declaration required: FUN_0040ab7c. */
-extern int FUN_0040ab8c(unsigned int);
+extern int moriModelContentIsLoaded(unsigned int);
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_0045b538. */
@@ -220,11 +220,11 @@ void FUN_001fdde8(int param_1)
       if (temp_v4 != 0) {
         return;
       }
-      temp_v4 = FUN_0023b3d0();
+      temp_v4 = gameStateIsNotTransitioning();
       if (temp_v4 == 0) {
         return;
       }
-      FUN_002c85b0(3);
+      gameGlobalsSetSceneState(3);
       FUN_0033449c(1);
       gameGlobalsQueueValues(psVar4,0);
       FUN_00372100(psVar4,0);
@@ -275,7 +275,7 @@ void FUN_001fdde8(int param_1)
     *(int *)(temp_v5 + 0x20) = temp_v9;
     return;
   case 1:
-    temp_v9 = FUN_0040ab8c(*(unsigned int *)(temp_v5 + 0x32ac));
+    temp_v9 = moriModelContentIsLoaded(*(unsigned int *)(temp_v5 + 0x32ac));
     if (temp_v9 != 0) {
       temp_v3 = *(unsigned int *)(*(int *)(temp_v5 + 0x32ac) + 4);
       handleRegistryRegisterObject(g_handleRegistry,temp_v3);
@@ -286,7 +286,7 @@ void FUN_001fdde8(int param_1)
     if (temp_v9 == 0) {
       return;
     }
-    temp_v9 = FUN_0040ab8c(*(unsigned int *)(temp_v5 + 0x32ac));
+    temp_v9 = moriModelContentIsLoaded(*(unsigned int *)(temp_v5 + 0x32ac));
     if (temp_v9 == 0) {
       return;
     }
@@ -302,7 +302,7 @@ void FUN_001fdde8(int param_1)
       *(unsigned int *)(temp_v5 + 0x28) = 0x1d;
       if (temp_v12 != 0) {
         if (temp_v10 == 0) {
-          FUN_002f0384(0);
+          statusCameraRestore(0);
         }
         *(unsigned char *)(temp_v5 + 0x3c) = 1;
       }
@@ -317,7 +317,7 @@ void FUN_001fdde8(int param_1)
           temp_v4 = FUN_0036cf78();
         }
         else {
-          FUN_002f0384(0);
+          statusCameraRestore(0);
           *(unsigned char *)(temp_v5 + 0x3c) = 1;
           temp_v4 = objBStateAllowsAction();
         }
@@ -358,7 +358,7 @@ void FUN_001fdde8(int param_1)
       else {
         temp_v12 = objBStateAllowsAction();
         if ((temp_v12 & ~temp_v10) != 0) {
-          FUN_002f0384(1);
+          statusCameraRestore(1);
         }
       }
       if (temp_v10 != 0) {
@@ -387,7 +387,7 @@ void FUN_001fdde8(int param_1)
       return;
     }
     temp_v4 = temp_v13;
-    FUN_00228b04(temp_v13,1);
+    gridNavigationHandleConfirm(temp_v13,1);
     if (temp_v4 != 0) {
       campShowSelectedEntryHelp(param_1);
       if (temp_v10 != 0) {
@@ -464,7 +464,7 @@ void FUN_001fdde8(int param_1)
         FUN_0036cf98(0);
       }
       else {
-        FUN_002f0384(0);
+        statusCameraRestore(0);
         FUN_0038b57c(0);
         FUN_0038b57c(1);
         FUN_0038b57c(2);
@@ -487,45 +487,45 @@ void FUN_001fdde8(int param_1)
         }
         if (param_1 == 0x13 || param_1 == 0x48) {
           sortMenuAcquire(5,0);
-          FUN_0031f208(6);
-          FUN_0031f208(0x11);
-          FUN_0031f208(0x12);
-          FUN_0031f208(3);
+          useCounterAppendValue(6);
+          useCounterAppendValue(0x11);
+          useCounterAppendValue(0x12);
+          useCounterAppendValue(3);
         }
         if (param_1 == 0x14 || param_1 == 0x49) {
           sortMenuAcquire(6,0);
-          FUN_0031f208(6);
-          FUN_0031f208(0x11);
-          FUN_0031f208(0x12);
-          FUN_0031f208(3);
+          useCounterAppendValue(6);
+          useCounterAppendValue(0x11);
+          useCounterAppendValue(0x12);
+          useCounterAppendValue(3);
         }
         if (param_1 == 0x15 || param_1 == 0x4a) {
           sortMenuAcquire(7,0);
-          FUN_0031f208(6);
-          FUN_0031f208(0x1f);
-          FUN_0031f208(0x13);
-          FUN_0031f208(3);
+          useCounterAppendValue(6);
+          useCounterAppendValue(0x1f);
+          useCounterAppendValue(0x13);
+          useCounterAppendValue(3);
         }
         if ((param_1 == 0x16 || param_1 == 0x4b) || (param_1 == 0x18 || param_1 == 0x4d)) {
           sortMenuAcquire();
-          FUN_0031f208(4);
-          FUN_0031f208(0x24);
-          FUN_0031f208(0x25);
-          FUN_0031f208(0x26);
-          FUN_0031f208(0x27);
-          FUN_0031f208(0x28);
-          FUN_0031f208(3);
+          useCounterAppendValue(4);
+          useCounterAppendValue(0x24);
+          useCounterAppendValue(0x25);
+          useCounterAppendValue(0x26);
+          useCounterAppendValue(0x27);
+          useCounterAppendValue(0x28);
+          useCounterAppendValue(3);
         }
         if (param_1 == 0x17 || param_1 == 0x4c) {
           sortMenuAcquire(9,0);
-          FUN_0031f208(4);
-          FUN_0031f208(0x32);
-          FUN_0031f208(3);
+          useCounterAppendValue(4);
+          useCounterAppendValue(0x32);
+          useCounterAppendValue(3);
         }
         if (param_1 == 0x19 || param_1 == 0x4e) {
           sortMenuAcquire(0xb,0);
-          FUN_0031f208(0x33);
-          FUN_0031f208(3);
+          useCounterAppendValue(0x33);
+          useCounterAppendValue(3);
         }
         *(unsigned char *)(temp_v5 + 0x3d) = 1;
         buttonHelpSetText(0,0xf4f4f4ff);
@@ -544,19 +544,19 @@ void FUN_001fdde8(int param_1)
           if ((param_1 == 0x18) && (psVar4[5] != *(short *)(temp_v9 + temp_v8 * 2))) {
             temp_v3 = 2;
             FUN_0038b57c(temp_v3);
-            FUN_002f0384(0);
+            statusCameraRestore(0);
             *(unsigned char *)(temp_v5 + 0x3c) = 1;
           }
         }
         else if (psVar4[4] != *(short *)(temp_v9 + temp_v8 * 2)) {
           temp_v3 = 1;
           FUN_0038b57c(temp_v3);
-          FUN_002f0384(0);
+          statusCameraRestore(0);
           *(unsigned char *)(temp_v5 + 0x3c) = 1;
         }
       }
       else if (psVar4[3] != *(short *)(temp_v9 + temp_v8 * 2)) {
-        FUN_002f0384(0);
+        statusCameraRestore(0);
         *(unsigned char *)(temp_v5 + 0x3c) = 1;
       }
       temp_v9 = listCursorGetRowOfChildIfUnblocked(temp_v5 + 0x40);
@@ -588,21 +588,21 @@ void FUN_001fdde8(int param_1)
       if (param_1 != 0x16) {
         if (param_1 != 0x17) {
           if ((param_1 == 0x18) && (psVar4[5] != *(short *)(temp_v9 + temp_v8 * 2))) {
-            FUN_002f0384(0);
+            statusCameraRestore(0);
             *(unsigned char *)(temp_v5 + 0x3c) = 1;
           }
         }
         else if (psVar4[4] != *(short *)(temp_v9 + temp_v8 * 2)) {
           temp_v3 = 1;
           FUN_0038b57c(temp_v3);
-          FUN_002f0384(0);
+          statusCameraRestore(0);
           *(unsigned char *)(temp_v5 + 0x3c) = 1;
         }
       }
       else if (psVar4[3] != *(short *)(temp_v9 + temp_v8 * 2)) {
         temp_v3 = 0;
         FUN_0038b57c(temp_v3);
-        FUN_002f0384(0);
+        statusCameraRestore(0);
         *(unsigned char *)(temp_v5 + 0x3c) = 1;
       }
       temp_v9 = listCursorGetRowOfChildIfUnblocked(temp_v5 + 0x40);
@@ -645,8 +645,8 @@ void FUN_001fdde8(int param_1)
     if (temp_v9 != 0) {
       FUN_003343d8(0xffffffff);
       FUN_0033449c(0);
-      FUN_0022e774();
-      FUN_002c85b0(0);
+      statusPanelClose();
+      gameGlobalsSetSceneState(0);
       campShowSelectedEntryHelp(0);
       FUN_0021b274(3,0xffffffff,0);
       *(unsigned int *)(temp_v5 + 0x24) = 6;
@@ -657,7 +657,7 @@ void FUN_001fdde8(int param_1)
         *(unsigned int *)(temp_v5 + 0x32ac) = 0;
       }
       campTouchRegionsRemoveGroup(temp_v13,0);
-      FUN_0037c8e4(1,0);
+      messageBannerInitCounter(1,0);
       messageRestoreBanner();
       FUN_002f78a0(temp_v5);
       return;
@@ -763,7 +763,7 @@ LAB_001fe40c:
   }
 LAB_001fe410:
   *(unsigned char *)(temp_v5 + 0x3d) = 0;
-  FUN_002cb278(temp_v13,0);
+  campListRegisterTouchRegions(temp_v13,0);
   campShowSelectedEntryHelp(param_1);
   if (temp_v12 == 0 && temp_v10 == 0) {
     campPreviewSelectedEquipment(param_1);

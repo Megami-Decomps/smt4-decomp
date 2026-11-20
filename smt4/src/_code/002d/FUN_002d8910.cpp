@@ -3,7 +3,7 @@
 #include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
-void FUN_00249b18(s32 a, s32 b);
+void partyRestoreGroup(s32 a, s32 b);
 s32 scrWorkGetValue(s32 index);
 void scrWorkSetValue(s32 index, s32 value);
 s32 messageForwardDefaultMode(s32 buffer, s32 message, s32 line, s32 a, s32 b);
@@ -21,7 +21,7 @@ s32 FUN_002d8910(s32 phase)
 {
     if (phase == 0) {
         if (scrGetCommandFrame() == 0) {
-            FUN_00249b18(0, 1);
+            partyRestoreGroup(0, 1);
             asdDebugHookVoid();
             scrWorkSetValue(0, 0);
             scrWorkSetValue(1, 0);
@@ -74,7 +74,7 @@ s32 FUN_002d8910(s32 phase)
         return result;
     }
     if (phase == 1 && scrGetCommandFrame() == 0) {
-        FUN_00249b18(0, 1);
+        partyRestoreGroup(0, 1);
         asdDebugHookVoid();
         scrWorkSetValue(0, 0);
         scrWorkSetValue(1, 0);

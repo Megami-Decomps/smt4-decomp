@@ -1,0 +1,253 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `btlEffectModelJobDispatch` (_code @ 0x3dd1a4, 0x4c4 bytes) from smt4_v1.2.0.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
+#include "romwright_types.h"
+#include "battle/BtlGlobals.h"
+
+extern "C" {
+
+int effectColorInitDefault(...);
+int FUN_002276f8(...);
+int asdModelClearSlotColors(...);
+int modelSetAnimationChannels(...);
+int animPlayerSetLoopPolicy(...);
+int modelPartSetRotationDegrees(...); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
+int btlGetMainState(...);
+int asdLoadFileAsyncSimple(...);
+int lightOwnerRegister(...);
+int libc_strcpy(...);
+int memClear(...);
+void animOwnerSetScale(unsigned int, float);
+int FUN_003da0ec(...);
+int modelAttachmentsUpdateFromParents(...);
+int battleCreateSecondaryModels(...);
+int FUN_003dc924(...);
+int __aeabi_memcpy4(...);
+
+typedef int romwright_code(...);
+/* stack frame of param_4: 3 slot(s), 9 byte(s) */
+typedef struct {
+    unsigned char spA0; /* 0xa0: local_a0 */
+    unsigned int sp124; /* 0x124: local_124 */
+    unsigned int sp128; /* 0x128: local_128 */
+} param_4_stack;
+extern unsigned int g_btlAux; /* 0x435d18 */
+
+/* Supplied declaration required: effectColorInitDefault. */
+/* Supplied declaration required: FUN_002276f8. */
+/* Supplied declaration required: asdModelClearSlotColors. */
+/* Supplied declaration required: modelSetAnimationChannels. */
+extern int keyedRecordFindByName(int);
+extern int libc_strrchr(unsigned char *, unsigned int);
+/* Supplied declaration required: animPlayerSetLoopPolicy. */
+/* Supplied declaration required: modelPartSetRotationDegrees. */
+/* Supplied declaration required: btlGetMainState. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
+/* Supplied declaration required: lightOwnerRegister. */
+extern int modelHasLoadedAttachment(unsigned int);
+/* Supplied declaration required: libc_strcpy. */
+/* Supplied declaration required: memClear. */
+/* Supplied declaration required: animOwnerSetScale. */
+extern int gameObjectFlagIsSet(void);
+/* Supplied declaration required: FUN_003da0ec. */
+/* Supplied declaration required: modelAttachmentsUpdateFromParents. */
+/* Supplied declaration required: battleCreateSecondaryModels. */
+/* Supplied declaration required: FUN_003dc924. */
+/* Supplied declaration required: __aeabi_memcpy4. */
+
+
+unsigned int btlEffectModelJobDispatch(int param_1,unsigned int param_2,unsigned int param_3,int param_4)
+
+{
+/* irregular: 2 goto(s); 18 native warning(s); review required */
+  char temp_v0;
+  unsigned int temp_v1;
+  int temp_v2;
+  int temp_v3;
+  int temp_v4;
+  int temp_v5;
+  int temp_v6;
+  unsigned int *puVar8;
+  unsigned char temp_v7;
+  unsigned char temp_v8 [4];
+  int temp_v9;
+  unsigned char temp_v10 [8];
+  unsigned char temp_v11;
+  
+  if (0 < *(int *)(param_1 + 0x3214)) {
+    *(int *)(param_1 + 0x3214) = *(int *)(param_1 + 0x3214) - 1;
+  }
+  temp_v1 = *(unsigned int *)(param_1 + 0x3028);
+  temp_v7 = (temp_v1 & 2) != 0;
+  if (temp_v7) {
+    temp_v1 = *(unsigned int *)(param_1 + 0x3034);
+  }
+  if (temp_v7 && temp_v1 != 0) {
+    if ((g_btlMain != 0) &&
+       (temp_v0 = *(char *)(param_1 + 0x3038), (temp_v0 == '\x02' || temp_v0 == '\b') || temp_v0 == '\t')) {
+      g_btlMain->flags = g_btlMain->flags | 0x4000000;
+    }
+    (**(romwright_code **)(**(int **)(param_1 + 0x3034) + 8))();
+    temp_v2 = (**(romwright_code **)(**(int **)(param_1 + 0x3034) + 0x14))();
+    if (temp_v2 != 0) {
+      FUN_002276f8(param_1);
+    }
+  }
+  if ((*(unsigned int *)(param_1 + 0x3028) & 4) != 0) {
+    effectColorInitDefault(temp_v8);
+    asdModelClearSlotColors(param_2);
+  }
+  if ((*(unsigned int *)(param_1 + 0x3028) & 8) != 0) {
+    effectColorInitDefault(temp_v8);
+    asdModelClearSlotColors(param_2);
+    temp_v2 = gameObjectFlagIsSet();
+    if (temp_v2 == 0) {
+      *(unsigned int *)(param_1 + 0x3028) = *(unsigned int *)(param_1 + 0x3028) & 0xfffffff7;
+    }
+  }
+  if ((*(unsigned int *)(param_1 + 0x3028) & 0x10) == 0) {
+    temp_v1 = *(unsigned int *)(param_1 + 0x3028);
+  }
+  else {
+    battleCreateSecondaryModels(g_btlAux,*(unsigned int *)(param_1 + 0x302c));
+    temp_v1 = (*(unsigned int *)(param_1 + 0x3028) & 0xffffffef) | 0x20;
+    *(unsigned int *)(param_1 + 0x3028) = temp_v1;
+  }
+  if ((temp_v1 & 0x20) != 0) {
+    if (*(int *)(param_1 + 0x302c) != 0 && *(int *)(param_1 + 0x302c) != 0x16) {
+      temp_v2 = 0;
+      do {
+        temp_v3 = param_1 + temp_v2 * 0x28;
+        if ((*(unsigned int *)(temp_v3 + 0x1b4) & 2) != 0) {
+          temp_v4 = modelHasLoadedAttachment(*(unsigned int *)(temp_v3 + 400));
+          if (temp_v4 == 0) goto LAB_003dd4ac;
+          *(unsigned int *)(temp_v3 + 0x1b4) = *(unsigned int *)(temp_v3 + 0x1b4) | 4;
+        }
+        temp_v2 = temp_v2 + 1;
+      } while (temp_v2 < 0x32);
+    }
+    if (*(int *)(param_1 + 0x302c) != 0 && *(int *)(param_1 + 0x302c) != 0x16) {
+      temp_v2 = 0;
+      do {
+        temp_v3 = btlGetMainState();
+        temp_v3 = temp_v3 + temp_v2 * 0x1c;
+        temp_v4 = *(int *)(temp_v3 + 0x2318);
+        if (-1 < temp_v4) {
+          param_4 = *(int *)(temp_v3 + 0x231c);
+        }
+        if (-1 < temp_v4 && -1 < param_4) {
+          temp_v3 = 0;
+          while( 1 ) {
+            temp_v5 = param_1 + temp_v3 * 0x28;
+            temp_v6 = temp_v5 + 400;
+            temp_v7 = *(int *)(temp_v5 + 0x194) == temp_v4;
+            if (temp_v7) {
+              temp_v6 = *(int *)(temp_v5 + 0x198);
+            }
+            if (temp_v7 && temp_v6 == param_4) break;
+            temp_v3 = temp_v3 + 1;
+            if (temp_v3 >= 0x32) {
+              *(unsigned int *)(param_1 + 0x3028) = (*(unsigned int *)(param_1 + 0x3028) & 0xffffffdf) | 0x10;
+              goto LAB_003dd4ac;
+            }
+          }
+        }
+        temp_v2 = temp_v2 + 1;
+      } while (temp_v2 < 0x6d);
+    }
+    modelAttachmentsUpdateFromParents(param_1);
+    temp_v2 = 0;
+    do {
+      temp_v3 = param_1 + temp_v2 * 0x28;
+      puVar8 = (unsigned int *)(temp_v3 + 400);
+      temp_v1 = *(unsigned int *)(temp_v3 + 0x1b4);
+      temp_v7 = (temp_v1 & 2) != 0;
+      if (temp_v7) {
+        temp_v1 = *puVar8;
+      }
+      if (temp_v7 && temp_v1 != 0) {
+        if (*(int *)(*(int *)(temp_v1 + 8) + 0xc) < 0) {
+          lightOwnerRegister(temp_v1,1);
+        }
+        modelPartSetRotationDegrees(*(unsigned int *)(*puVar8 + 8),0);
+        modelSetAnimationChannels(*puVar8,0);
+        animOwnerSetScale(*puVar8, 0.0f);
+        animPlayerSetLoopPolicy(*(unsigned int *)(*puVar8 + 8),1);
+        puVar8 = (unsigned int *)*puVar8;
+        *puVar8 = *puVar8 | 2;
+        *(unsigned char *)(*(int *)(puVar8[2] + 0x2c) + 0x1f6) = 0;
+        if (-1 < *(int *)(temp_v3 + 0x1ac)) {
+          temp_v4 = param_1 + *(int *)(temp_v3 + 0x1ac) * 8;
+          *(unsigned int *)(temp_v4 + 0x1030) = *(unsigned int *)(temp_v3 + 0x194);
+          *(unsigned int *)(temp_v4 + 0x1034) = *(unsigned int *)(temp_v3 + 0x1ac);
+        }
+      }
+      temp_v2 = temp_v2 + 1;
+    } while (temp_v2 < 0x32);
+    *(unsigned int *)(param_1 + 0x3028) = (*(unsigned int *)(param_1 + 0x3028) & 0xffffffdf) | 0x40;
+  }
+LAB_003dd4ac:
+  if ((*(unsigned int *)(param_1 + 0x3028) & 0x40) == 0) {
+    temp_v1 = *(unsigned int *)(param_1 + 0x3028);
+  }
+  else {
+    FUN_003dc924(param_1,*(unsigned int *)(param_1 + 0x302c),0);
+    temp_v1 = (*(unsigned int *)(param_1 + 0x3028) & 0xffffffbf) | 0x80;
+    *(unsigned int *)(param_1 + 0x3028) = temp_v1;
+  }
+  if ((temp_v1 & 0x80) == 0) {
+    temp_v1 = *(unsigned int *)(param_1 + 0x3028);
+  }
+  else {
+    temp_v2 = 0;
+    while (temp_v2 = temp_v2 + 1, temp_v2 < 0x6d) {
+      if (temp_v2 >= 4) {
+        btlGetMainState();
+      }
+    }
+    temp_v1 = *(unsigned int *)(param_1 + 0x3028) & 0xffffff0f;
+    *(unsigned int *)(param_1 + 0x3028) = temp_v1;
+  }
+  if ((temp_v1 & 0x100) != 0) {
+    temp_v2 = 0;
+    do {
+      memClear(temp_v8,0x80);
+      memClear(temp_v10,0x80);
+      sprintf((char *)temp_v10,"battle/effect/%s.eft","ef_e_ref" + temp_v2 * 0x20);
+      libc_strcpy(temp_v8,temp_v10);
+      temp_v3 = param_1 + temp_v2 * 0x8c;
+      temp_v4 = libc_strrchr(temp_v8,0x2f);
+      libc_strcpy(temp_v3 + 0x25c8,temp_v4 + 1);
+      temp_v4 = keyedRecordFindByName(temp_v3 + 0x25c8);
+      if (temp_v4 == 0xff) {
+        asdLoadFileAsyncSimple(temp_v8,temp_v3 + 0x25c4,0);
+        *(unsigned char *)(temp_v3 + 0x2648) = *(unsigned char *)(temp_v3 + 0x2648) | 1;
+      }
+      temp_v2 = temp_v2 + 1;
+    } while (temp_v2 < 0xb);
+    *(unsigned int *)(param_1 + 0x3028) = (*(unsigned int *)(param_1 + 0x3028) & 0xfffffeff) | 0x200;
+  }
+  temp_v1 = *(unsigned int *)(param_1 + 0x3028);
+  if ((temp_v1 & 0x200) != 0) {
+    temp_v2 = 0;
+    do {
+      __aeabi_memcpy4(temp_v8,param_1 + temp_v2 * 0x8c + 0x25c0,0x8c);
+      if (((temp_v11 & 1) != 0) && (temp_v9 == 0)) {
+        FUN_003da0ec(param_1);
+        if (*(unsigned int *)(param_1 + 0x3030) < 0xffff) {
+          *(unsigned int *)(param_1 + 0x3030) = *(unsigned int *)(param_1 + 0x3030) + 1;
+        }
+        return 0;
+      }
+      temp_v2 = temp_v2 + 1;
+    } while (temp_v2 < 0xb);
+    *(unsigned int *)(param_1 + 0x3028) = (temp_v1 & 0xfffffdff) | 0x400;
+  }
+  FUN_003da0ec(param_1);
+  if (*(unsigned int *)(param_1 + 0x3030) < 0xffff) {
+    *(unsigned int *)(param_1 + 0x3030) = *(unsigned int *)(param_1 + 0x3030) + 1;
+  }
+  return 0;
+}
+
+} /* extern "C" */

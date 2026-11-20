@@ -7,7 +7,7 @@ extern "C" {
 
 
 extern s32 listCursorGetRowIfUnblocked(ScrollSelection *list);
-extern s32 objectApplyIfUnblocked(ScrollSelection *list);
+extern s32 gridNavigationGetItemCount(ScrollSelection *list);
 
 u32 statusCursorIsAtLast(void)
 {
@@ -15,7 +15,7 @@ u32 statusCursorIsAtLast(void)
     if (holder != NULL) {
         s32 position = listCursorGetRowIfUnblocked(&holder->list);
         ScrollSelection *cursor = &holder->list;
-        s32 count = objectApplyIfUnblocked(cursor);
+        s32 count = gridNavigationGetItemCount(cursor);
 
         if (position == count - 1) {
             return 1;

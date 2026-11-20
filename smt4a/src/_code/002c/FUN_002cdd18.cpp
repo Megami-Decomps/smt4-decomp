@@ -4,7 +4,7 @@
 #include "ui/UiSpriteApi.h"
 
 extern "C" {
-s32 FUN_00163e84(s32 index);
+s32 screenFaderIsSettled(s32 index);
 void slotSetRequest(u32 index, u32 value, u32 extra);
 void screenFadeSlotReset(u32 index);
 /* Sets the sprite's visibility.active byte / reads its signed completion flag. */
@@ -62,7 +62,7 @@ extern "C" void FUN_002cdd18(BtlUiObjBA *panel)
         panel->delay--;
         break;
     case 8:
-        if (FUN_00163e84(0)) {
+        if (screenFaderIsSettled(0)) {
             workSetStateByte(&panel->sprites[0], 0);
             workSetStateByte(&panel->sprites[1], 0);
             workSetStateByte(&panel->sprites[2], 0);

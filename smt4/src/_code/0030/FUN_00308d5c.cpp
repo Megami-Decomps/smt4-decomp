@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_00245a7c(...);
+int btlSupportVoiceChoose(...);
 int FUN_00245d0c(int, int);
 int FUN_00246d38(int, int, int, unsigned int);
 int btlUiRefreshSlotRanks(...);
@@ -32,8 +32,8 @@ extern unsigned int g_btlScriptUnit; /* 0x43427c */
 extern int g_btlMainState; /* 0x435d90 */
 extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
-/* Supplied declaration required: FUN_00245a7c. */
-extern unsigned int FUN_00245cc0(unsigned int);
+/* Supplied declaration required: btlSupportVoiceChoose. */
+extern unsigned int mapCategoryToDestinationGroup(unsigned int);
 /* Supplied declaration required: FUN_00245d0c. */
 /* Supplied declaration required: FUN_00246d38. */
 /* Supplied declaration required: btlUiRefreshSlotRanks. */
@@ -147,28 +147,28 @@ LAB_00308fb8:
                 btlAdjustPropertyClamped(temp_v5,0x16,1,0);
               }
               else {
-                temp_v3 = FUN_00245cc0(0x16);
+                temp_v3 = mapCategoryToDestinationGroup(0x16);
                 FUN_00255180(temp_v5,0x16,temp_v3);
               }
               if ((*(unsigned short *)((int)puVar9 + 0x1c6) & 0x40) != 0) {
                 btlAdjustPropertyClamped(temp_v5,0x17,1,0);
               }
               else {
-                temp_v3 = FUN_00245cc0(0x17);
+                temp_v3 = mapCategoryToDestinationGroup(0x17);
                 FUN_00255180(temp_v5,0x17,temp_v3);
               }
               if ((*(unsigned short *)((int)puVar9 + 0x1c6) & 0x100) != 0) {
                 btlAdjustPropertyClamped(temp_v5,0x18,1,0);
               }
               else {
-                temp_v3 = FUN_00245cc0(0x18);
+                temp_v3 = mapCategoryToDestinationGroup(0x18);
                 FUN_00255180(temp_v5,0x18,temp_v3);
               }
               if ((*(unsigned short *)((int)puVar9 + 0x1c6) & 8) != 0) {
                 btlAdjustPropertyClamped(temp_v5,0x19,1,0);
               }
               else {
-                temp_v3 = FUN_00245cc0(0x19);
+                temp_v3 = mapCategoryToDestinationGroup(0x19);
                 FUN_00255180(temp_v5,0x19,temp_v3);
               }
             }
@@ -211,7 +211,7 @@ LAB_00308fb8:
                     if ((temp_v2 & 0x20) != 0 && (temp_v2 & 1) != 0) {
                       if (*(int *)(param_1 + 0x1fc0) + temp_v4 * 0x288 == 0) break;
                       temp_v3 = 1;
-                      FUN_00245a7c(1,*(unsigned int *)(param_1 + 0x49e0));
+                      btlSupportVoiceChoose(1,*(unsigned int *)(param_1 + 0x49e0));
                       *(unsigned int *)(param_1 + 0x49e0) = temp_v3;
                       break;
                     }

@@ -1,0 +1,17 @@
+#include "ui/UiSpriteApi.h"
+#include "shard/PlayScene.h"
+
+extern "C" {
+
+int playSceneSetState(PlayScene *scene, int a, int b);
+int buttonHelpGetMode(void);
+int buttonHelpSetPreset(void);
+
+void btlUiAdvanceFadeIn(PlayScene *scene)
+{
+    buttonHelpGetMode();
+    buttonHelpSetPreset();
+    playSceneSetState(scene, scene->mode, 1);
+}
+
+} /* extern "C" */

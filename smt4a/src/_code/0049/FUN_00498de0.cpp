@@ -37,7 +37,7 @@ struct PlayerEquipmentBlock {
 extern "C" {
 s32 flaggedValueHolderGetTotal(void *holder);
 u32 uiStateHasAnyActiveFlag(void *holder);
-void FUN_002f0384(s32 mode);
+void statusCameraRestore(s32 mode);
 void FUN_0038b5fc(s32 kind, u16 id);
 void __aeabi_memcpy4(void *destination, const void *source, s32 bytes);
 void FUN_003df7c4(PlayerEquipmentBlock *block);
@@ -54,7 +54,7 @@ void FUN_00498de0(EquipMenu *menu)
     if (!(pending == 0 && menu->lastSelectedId == id)) {
         s32 kind = aocEntryGetKindForward(id);
         if (kind == 4 || aocEntryGetKindForward(id) == 5 || aocEntryGetKindForward(id) == 6) {
-            FUN_002f0384(0);
+            statusCameraRestore(0);
             menu->previewing = 0;
             menu->previewActive = 0;
         }
@@ -71,7 +71,7 @@ void FUN_00498de0(EquipMenu *menu)
         menu->previewing = 1;
     } else {
         if (objBStateAllowsAction()) {
-            FUN_002f0384(1);
+            statusCameraRestore(1);
             menu->previewActive = 1;
         }
     }

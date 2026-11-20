@@ -19,7 +19,7 @@ u32 asdListBoxCreate(void *parent, s32 group, s32 x, s32 y, u8 flags);
 void FUN_00192a9c(const Point2 *position, const u32 *handle, u32 value);
 u32 textMeasureFixedWidth(const char *text);
 void jobSetWork7C(u32 list, void (*draw)(const Point2 *, const u32 *, u32), u32 (*measure)(const char *));
-void FUN_002271e8(u32 list, s32 width, s32 height);
+void debugEditorListSetCellSize(u32 list, s32 width, s32 height);
 void jobSetText(u32 list, const char *text);
 void asdListBoxAddItem(u32 list, const char *text);
 void asdListBoxSetFloatItem(u32 list, u32 index, f32 value, s32 minimum, s32 maximum);
@@ -32,7 +32,7 @@ void btlCameraEditorInitializeList(BattleCameraEditorWork *work, u32 unused, voi
     u32 list = asdListBoxCreate(parent, 0xeb, 0x10, 0x20, 4);
     work->list = list;
     jobSetWork7C(list, FUN_00192a9c, textMeasureFixedWidth);
-    FUN_002271e8(list, 0xc, 0x10);
+    debugEditorListSetCellSize(list, 0xc, 0x10);
     if (mode == 0 || mode == 1) {
         g_btlMain->cameraPosition[2] = 0.0f;
         g_btlMain->cameraPosition[1] = 0.0f;

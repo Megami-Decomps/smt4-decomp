@@ -2,9 +2,9 @@
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 
 extern "C" {
-extern SoundActorQueue *DAT_005821a0;
+extern SoundActorQueue *g_soundActorQueue;
 const void *FUN_00314638(u32 index);
-s32 FUN_00379858(void);
+s32 dataTable45GetSection4Count(void);
 s32 gameFlagIsSet(s32 flag);
 void FUN_002dd380(u32 soundId, s32 kind, f32 x, f32 y, f32 z);
 
@@ -17,11 +17,11 @@ void mapAmbientSoundActorsSpawn(s32 map, s32 area)
         s32 sound;
         s16 requiredFlag, forbiddenFlag;
     };
-    SoundActorQueue *queue = DAT_005821a0;
+    SoundActorQueue *queue = g_soundActorQueue;
     queue->enabled = 1;
     queue->count = 0;
     s32 index = 0;
-    if (FUN_00379858() > 0) {
+    if (dataTable45GetSection4Count() > 0) {
         do {
             const Placement *placement = static_cast<const Placement *>(FUN_00314638(index));
             if (placement->map != -1 && placement->map == map && placement->area == area) {
@@ -34,7 +34,7 @@ void mapAmbientSoundActorsSpawn(s32 map, s32 area)
                 }
             }
             ++index;
-        } while (index < FUN_00379858());
+        } while (index < dataTable45GetSection4Count());
     }
     if (map != 10 || area != 5)
         return;

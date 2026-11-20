@@ -45,7 +45,7 @@ typedef struct Task {
 } Task;
 
 int FUN_0010613a(u32 arg0, Target *target);
-u32 FUN_002ecf28(void);
+u32 objectRegistryGetOwnerForCurrent(void);
 
 /* Copies the source's two values into the target, registers the target, and submits `value` to the source's sink with priority 100. */
 void FUN_0010d0d4(Task *task)
@@ -54,7 +54,7 @@ void FUN_0010d0d4(Task *task)
 
     task->request.target->valueA = task->source->valueA;
     task->request.target->valueB = task->source->valueB;
-    FUN_0010613a(FUN_002ecf28(), task->request.target);
+    FUN_0010613a(objectRegistryGetOwnerForCurrent(), task->request.target);
     sink = task->source->holder->sink;
     sink->vtbl->submit(sink, 100, task->request.value);
 }

@@ -4,7 +4,7 @@ extern "C" {
 u32 keyedRecordRegisterName(const char *name);
 u32 FUN_003478dc(u32 id, const char *format);
 s32 textureCachePollReady(void);
-s32 FUN_003c5d8c(void);
+s32 textureCacheGetDirection(void);
 
 /* Starts the battle effect's texture request and returns 1 when the cache is ready. */
 u32 btlPollVersionedEffectTexture(BtlEffectFiles *owner)
@@ -32,7 +32,7 @@ u32 btlPollVersionedEffectTexture(BtlEffectFiles *owner)
         if (flags & ready) {
             return 1;
         }
-        if (FUN_003c5d8c()) {
+        if (textureCacheGetDirection()) {
             owner->flags |= ready;
         }
     }

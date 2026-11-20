@@ -6,17 +6,17 @@ extern AsdGxCommandList *g_asdGxCommandListStack[];
 
 void gxGetCommandListParameter(u32 param, u32 *out);
 void asdGxCommandBufferTerminateAndSubmit(void);
-void asdGxCommandBufferPadAndGetRanges(u32 *a, u32 *b, u32 *c, u32 *d);
+void asdGxCommandBufferPadAndGetRanges(u32 *first, u32 *second, u32 *third, u32 *fourth);
 void asdGxCommandListRefreshCopy(AsdGxCommandList *list);
 void nngxBindCmdlist(u32 cmdList);
 void asdGxCommandBufferPadAndRecordSize(void);
 void nngxGetError(void);
 void asdModelResetCommandBuffer(void);
-void FUN_0017db14(u32 cmdList, void *copy, u32 copySize);
+void nngxImportCmdlist(u32 cmdList, void *copy, u32 copySize);
 
 /* Ends a command list. If another list is still open it becomes the active one again;
  * otherwise the list that was bound before is restored and, when `restoreCopy`, its saved state is replayed. */
-void asdGxCommandListEnd(AsdGxCommandList *list, s32 restoreCopy, u32 unk08, u32 unk0c)
+void asdGxCommandListEnd(AsdGxCommandList *list, s32 restoreCopy)
 {
     AsdGxCommandList *outer;
     u32 bound;
@@ -39,8 +39,8 @@ void asdGxCommandListEnd(AsdGxCommandList *list, s32 restoreCopy, u32 unk08, u32
         asdModelResetCommandBuffer();
         nngxBindCmdlist(list->boundList);
         if (restoreCopy != 0 && list->entries[0].copy != NULL) {
-            gxGetCommandListParameter(0x207, &bound);
-            FUN_0017db14(bound, list->entries[0].copy, list->entries[0].copySize);
+            gxGetCommandListParameter(ASD_GX_CMDLIST_BINDING, &bound);
+            nngxImportCmdlist(bound, list->entries[0].copy, list->entries[0].copySize);
             nngxGetError();
         }
     }

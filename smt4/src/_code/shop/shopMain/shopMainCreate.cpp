@@ -13,7 +13,7 @@ extern const char DAT_004076a0[]; /* "ShopMainDrawUp" */
 extern const char DAT_004076b0[]; /* "ShopMainProc" */
 
 u32 jyoucyuGetTableEntry(s32 index);
-s32 FUN_001d9634(u32 job);
+s32 shopMainUpdatePhase(u32 job);
 void shopMainOnEnd(u32 job);
 s32 shopMainUpdateChild(u32 job);
 s32 shopMainDrawDown(u32 job);
@@ -39,7 +39,7 @@ void shopMainCreate(const u32 *arguments, s32 argumentSize)
     } else {
         shop->mode = 1;
     }
-    shop->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_004076b0), 2, 0, 0, FUN_001d9634,
+    shop->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_004076b0), 2, 0, 0, shopMainUpdatePhase,
                                         shopMainOnEnd, reinterpret_cast<u32>(g_shop));
     taskCreateDraw(reinterpret_cast<const s8 *>(DAT_004076a0), 0x65, 1, 0, shopMainUpdateChild, NULL,
                    reinterpret_cast<u32>(g_shop), reinterpret_cast<void *>(shop->task));

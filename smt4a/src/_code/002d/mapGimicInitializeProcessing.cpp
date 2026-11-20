@@ -1,6 +1,6 @@
 #include "map/MapGimicGlobal.h"
 extern "C" {
-void FUN_003b51a4(void);
+void mapGimicCreateModel(void);
 /* Starts map gimmick processing with empty handles and zero progress. */
 void mapGimicInitializeProcessing(u16 area, u16 subArea)
 {
@@ -21,6 +21,6 @@ void mapGimicInitializeProcessing(u16 area, u16 subArea)
         g_mapGimic->flags[index] = 0;
         g_mapGimic->handles[index] = -1;
     }
-    FUN_003b51a4();
+    mapGimicCreateModel();
 }
 }

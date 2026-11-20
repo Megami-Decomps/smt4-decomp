@@ -49,7 +49,7 @@ void placeWinCreate();
 void messageSetMode(s32 mode);
 void qcMainSetMode(s32 mode);
 s32 gameFlagEntryGetBit(u32 id, u32 bit);
-void FUN_00417e08(u32 id);
+void rosterAddUnit(u32 id);
 void rt_memclr(void* data, u32 size);
 
 void questCenterInitEntry(void* context)
@@ -82,7 +82,7 @@ void questCenterInitEntry(void* context)
     do {
         const QuestRecordA* record = questDataGetRecord(id);
         if (record && !record->kind && !gameFlagEntryGetBit(id, 1)) {
-            FUN_00417e08(id);
+            rosterAddUnit(id);
         }
     } while (++id < 400);
     rt_memclr(work->statecf6, sizeof(work->statecf6));

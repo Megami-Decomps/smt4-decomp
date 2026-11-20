@@ -39,16 +39,16 @@ extern "C" void asdTexTgaLoadNw4c(AsdTexture *texture, const Nw4cTgaHeader *file
         return;
     texture->dimensions.height = static_cast<u16>(file->heightLow + (file->heightHigh << 8));
     texture->dimensions.width = static_cast<u16>(file->widthLow + (file->widthHigh << 8));
-    texture->unk08 = flags;
+    texture->heap = flags;
     texture->target = ASDTEXTURE_TARGET_2D;
     const Nw4cChunkHeader *chunk = reinterpret_cast<const Nw4cChunkHeader *>(reinterpret_cast<const u8 *>(file) + user->offset);
     for (;;) {
         if (libc_strncmp(chunk->identifier, DAT_0053d228, 8) == 0) {
-            texture->storage.unk28 = chunk->bytes - sizeof(Nw4cChunkHeader);
+            texture->storage.bytes = chunk->bytes - sizeof(Nw4cChunkHeader);
             const void *pixels = chunk + 1;
             asdDebugTrace(DAT_0053d234, 73);
-            texture->storage.pixels = asdMemoryAllocAligned(0x10000, 0x100, 0, texture->storage.unk28, 128, 1);
-            rt_memcpy(texture->storage.pixels, pixels, texture->storage.unk28);
+            texture->storage.pixels = asdMemoryAllocAligned(0x10000, 0x100, 0, texture->storage.bytes, 128, 1);
+            rt_memcpy(texture->storage.pixels, pixels, texture->storage.bytes);
         }
         if (libc_strncmp(chunk->identifier, DAT_0053d268, 8) == 0) {
             char format[8] = {};

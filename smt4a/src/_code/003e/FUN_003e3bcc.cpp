@@ -9,19 +9,19 @@ extern "C" {
 int sysPlaySe(...);
 int dataTable01GetRecordWithAocOverride(unsigned int);
 int buttonHelpSetText(...);
-int FUN_0022e774(void);
+int statusPanelClose(void);
 int FUN_0023b45c(...);
 int scrScriptProcessStartEntry(...);
 int FUN_002a5e7c(int);
 int statusDownRestartTransition(void);
-int FUN_002c8538(...);
+int gameGlobalsSetOverlayActive(...);
 int scrSetStringSlot(int, unsigned int);
 int panelSetMode3(int, int);
 int FUN_00333dc8(...);
 int gameGlobalsSetMenuOpenFlag(...);
-int FUN_00359974(int, unsigned int, unsigned int, int);
+int entryTableResetAndInit(int, unsigned int, unsigned int, int);
 int panelSetTarget(int, int);
-int FUN_0037c8e4(int, int);
+int messageBannerInitCounter(int, int);
 int messageDismissNumericBanner(...);
 int messageMainRequestBanner(void); // declcheck: local (romwright prototype; the shared declaration in code/Code003c_Smt4a.h does not compile here: cannot overload functions distinguished by return type alone)
 int messageMainClearBannerRequest(void); // declcheck: local (romwright prototype; the shared declaration in code/Code003c_Smt4a.h does not compile here: cannot overload functions distinguished by return type alone)
@@ -64,24 +64,24 @@ extern unsigned char LAB_003e400c; /* 0x3e400c */
 /* Supplied declaration required: buttonHelpSetText. */
 extern int slotRecordFindById(unsigned short);
 extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_0022e774. */
+/* Supplied declaration required: statusPanelClose. */
 /* Supplied declaration required: FUN_0023b45c. */
-extern int FUN_0026c3a0(void);
+extern int gameGlobalsIsActiveStateFour(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002a4b28(void);
+extern int compendiumEntryIsRegistered(void);
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002a5e7c. */
 /* Supplied declaration required: statusDownRestartTransition. */
-/* Supplied declaration required: FUN_002c8538. */
+/* Supplied declaration required: gameGlobalsSetOverlayActive. */
 /* Supplied declaration required: scrSetStringSlot. */
 /* Supplied declaration required: panelSetMode3. */
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
 extern int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_00359974. */
+/* Supplied declaration required: entryTableResetAndInit. */
 extern int panelStateIs0(void);
 /* Supplied declaration required: panelSetTarget. */
-/* Supplied declaration required: FUN_0037c8e4. */
+/* Supplied declaration required: messageBannerInitCounter. */
 /* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: messageMainRequestBanner. */
 /* Supplied declaration required: messageMainClearBannerRequest. */
@@ -137,7 +137,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
     partyAddMoneyClamped(-*(int *)((int)param_1 + temp_v0 * 0x24 + 0x24));
     temp_v4 = partyFindFirstUnusedEntry();
     uStack_3e = (unsigned short)((unsigned int)temp_v3 >> 0x10);
-    temp_v0 = FUN_002a4b28();
+    temp_v0 = compendiumEntryIsRegistered();
     dispatchIfFound(temp_v4,uStack_3e,0);
     temp_v1 = slotRecordFindById(uStack_3e);
     FUN_004cd4b8(temp_v1,(int)(short)((short)temp_v7 - *(short *)(temp_v1 + 100)));
@@ -225,12 +225,12 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
       param_1->field_0x8 = 10;
       return;
     }
-    FUN_0037c8e4(1,0);
+    messageBannerInitCounter(1,0);
     panelSetTarget(-*(int *)((int)param_1 + *(int *)&param_1[5].field_0x14 * 0x24 + 0x24),0);
     temp_v5 = (unsigned int)*(unsigned short *)((int)param_1 + *(int *)&param_1[5].field_0x14 * 0x24 + 0x22);
     dataTable01GetRecordWithAocOverride(temp_v5);
     scrSetStringSlot(0,temp_v5);
-    FUN_00359974(0x19,*(unsigned int *)((int)param_1 + *(int *)&param_1[5].field_0x14 * 0x24 + 0x24),
+    entryTableResetAndInit(0x19,*(unsigned int *)((int)param_1 + *(int *)&param_1[5].field_0x14 * 0x24 + 0x24),
                  0xffffffff,0);
     messageMainRequestBanner();
     messageMainSetTargetFlags(1);
@@ -252,19 +252,19 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
       param_1->field_0xc = temp_v4;
       return;
     }
-    temp_v0 = FUN_0026c3a0();
+    temp_v0 = gameGlobalsIsActiveStateFour();
     if (temp_v0 == 0) {
       return;
     }
     gameGlobalsSetMenuOpenFlag(0);
     FUN_00333dc8(0);
-    FUN_002c8538(0);
+    gameGlobalsSetOverlayActive(0);
     buttonHelpSetText(0,0xf4f4f4ff);
     temp_v0 = 99;
   }
   else {
     messageDismissNumericBanner(1);
-    FUN_0022e774();
+    statusPanelClose();
     FUN_0023b45c(0);
     statusDownRestartTransition();
     temp_v0 = 0xb;

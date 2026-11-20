@@ -1,39 +1,39 @@
-/* One-time start-up of the system services: configuration and AM services, then the two system initialisers. Any failure
- * is reported to the fatal error handler together with the address it was detected at. */
 #include "nn/Result.h"
 
 extern "C" {
-extern u8 DAT_00589364;
-extern u8 DAT_00536cc3[];
-extern u8 DAT_005c0a80[];
+extern u8 g_sysServicesInitialized;   /* the services are up */
+extern const char g_nimAocServiceName[]; /* "nim:aoc" */
+extern u32 g_nimAocSession;    /* the nim:aoc session handle */
 
-void FUN_00146720(void);
+void fsInitializeUserMount(void);
 void nn_cfg_CTR_Initialize(void);
 s32 nnAmConnectOnce(void);
-s32 FUN_00147088(const void *table, const void *name);
-s32 FUN_001470f0(void);
-void FUN_00189a38(s32 result, u32 address);
+s32 nimAocConnect(u32 *session, const char *name);
+s32 nimAocInitialize(void);
+void errThrowFatal(s32 result, u32 address);
 
 /* Reports a failed result to the fatal error handler, with the address of the check. */
 static inline void throwFatalIfFailed(s32 result, u32 address)
 {
     if (nnResultIsFailure(result)) {
-        FUN_00189a38(result, address);
+        errThrowFatal(result, address);
     }
 }
 
+/* Starts the system services once: the user file system, the configuration and application-manager
+ * services, then the nim:aoc service. A failure is fatal and reported with the address it was detected at. */
 void sysInitializeServices(void)
 {
-    if (DAT_00589364 != 0) {
+    if (g_sysServicesInitialized != 0) {
         return;
     }
-    FUN_00146720();
+    fsInitializeUserMount();
     nn_cfg_CTR_Initialize();
     s32 result = nnAmConnectOnce();
     if (!nnResultIsFailure(result)) {
-        result = FUN_00147088(DAT_005c0a80, DAT_00536cc3);
+        result = nimAocConnect(&g_nimAocSession, g_nimAocServiceName);
         if (!nnResultIsFailure(result)) {
-            result = FUN_001470f0();
+            result = nimAocInitialize();
             if (!nnResultIsFailure(result)) {
                 result = 0;
             }
@@ -43,6 +43,6 @@ void sysInitializeServices(void)
         }
     }
     throwFatalIfFailed(result, __current_pc());
-    DAT_00589364 = 1;
+    g_sysServicesInitialized = 1;
 }
-}
+} /* extern "C" */

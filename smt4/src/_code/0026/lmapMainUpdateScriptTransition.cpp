@@ -9,7 +9,7 @@ s32 FUN_002897e0();
 void FUN_002897d0(s32 enabled);
 s32 FUN_002897c0();
 void FUN_002897b0(s32 enabled);
-s32 FUN_002c1d5c();
+s32 eventIsSkipping();
 void titleSetSlotValueState2(u32 channel, u32 duration);
 
 void messageSlotSet(u32 slot);
@@ -41,7 +41,7 @@ u32 lmapMainUpdateScriptTransition()
             FUN_002897b0(0);
             FUN_002897d0(0);
         }
-        if (FUN_002897e0() && !FUN_002c1d5c()) {
+        if (FUN_002897e0() && !eventIsSkipping()) {
             titleSetSlotValueState2(0, 5);
             titleSetSlotValueState2(1, 5);
             FUN_002897d0(0);

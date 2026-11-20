@@ -17,7 +17,7 @@ int mapIfReleaseSlot2(void);
 int mapIfActivateRecord(int, unsigned int);
 int table23FindRecordByKey(unsigned int, unsigned int, unsigned int);
 int FUN_0027fae4(void);
-int FUN_0027fc14(...);
+int lmapCameraSetMode(...);
 int mapDepartSpawnPlayerEffect(unsigned int);
 int mapSelectContainingRegions(void);
 int FUN_002804ec(...);
@@ -47,10 +47,10 @@ extern unsigned char DAT_0049fb46; /* 0x49fb46 */
 /* Supplied declaration required: mapIfActivateRecord. */
 extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: table23FindRecordByKey. */
-extern int FUN_0027ee9c(void);
+extern int inputConfirmPressed(void);
 /* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fae4. */
-/* Supplied declaration required: FUN_0027fc14. */
+/* Supplied declaration required: lmapCameraSetMode. */
 /* Supplied declaration required: mapDepartSpawnPlayerEffect. */
 /* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
@@ -109,7 +109,7 @@ void FUN_002ea500(void)
               if (temp_v1 == 2) {
                 *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
                 mapIfActivateRecord(1,DAT_0049f99c);
-                temp_v0 = FUN_0027ee9c();
+                temp_v0 = inputConfirmPressed();
                 if (temp_v0 != 0) {
                   table23FindRecordByKey(DAT_0049f990,DAT_0049f994,DAT_0049f998);
                   temp_v0 = g_lmapScene;
@@ -126,7 +126,7 @@ void FUN_002ea500(void)
                     temp_v0 = g_mapCamera;
                     *(unsigned int *)(g_mapCamera + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
                     *(unsigned int *)(temp_v0 + 0xac) = 0;
-                    FUN_0027fc14(0);
+                    lmapCameraSetMode(0);
                     temp_v0 = g_lmapScene;
                     *(unsigned int *)(g_lmapScene + 0x54) = 0;
                     *(unsigned int *)(temp_v0 + 0x58) = 0x40a00000;
@@ -169,7 +169,7 @@ void FUN_002ea500(void)
           *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + mathRemPio2f((temp_v3 + 180.0f) * 0.017453292f) * 110.0f;
           temp_v0 = g_lmapScene;
           *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + libm_cosf((*(float *)(temp_v0 + 0x50) + 180.0f) * 0.017453292f) * 110.0f;
-          FUN_0027fc14(10);
+          lmapCameraSetMode(10);
           *(unsigned int *)(g_mapCamera + 0xac) = 0xffffffff;
           buttonHelpSetPreset(0xdb);
           mapIfActivateRecord(1,DAT_0049f99c);
@@ -305,7 +305,7 @@ LAB_002ea9b4:
         temp_v0 = g_mapCamera;
         *(unsigned int *)(g_mapCamera + 0x18) = *(unsigned int *)(temp_v1 + 0x50);
         *(unsigned int *)(temp_v0 + 0xac) = 0;
-        FUN_0027fc14(0);
+        lmapCameraSetMode(0);
         temp_v0 = g_lmapScene;
       }
       else {

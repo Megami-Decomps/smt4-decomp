@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_0037c8e4(s32 a, s32 b);
+void messageBannerInitCounter(s32 a, s32 b);
 void messageRestoreBanner(void);
 
 
@@ -13,7 +13,7 @@ void campResetScreen(void)
     CampStateA *game;
     s32 i;
 
-    FUN_0037c8e4(1, 0);
+    messageBannerInitCounter(1, 0);
     messageRestoreBanner();
     game = g_camp;
     i = 0;

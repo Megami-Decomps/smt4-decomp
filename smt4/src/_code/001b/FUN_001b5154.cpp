@@ -45,7 +45,7 @@ s32 jobIsValid(u32 job);
 s32 btlReflectCountEntriesById(u32 reflect, u32 id);
 s32 FUN_003adab8(void);
 s32 btlScriptUnitIsPresentAndActive(BtlPickWork *work);
-s32 FUN_002c1658(s32 button, s32 repeat);
+s32 inputQueryButtonState(s32 button, s32 repeat);
 void FUN_0027e874(void);
 void btlHelpQueueModeRequest(s32 a, s32 b);
 s32 FUN_00337324(BtlPickWork *work);
@@ -122,7 +122,7 @@ u32 FUN_001b5154(u32 job)
         return 0;
     }
     if ((*state & PICK_FLAG_ARMED_A) != 0) {
-        if (FUN_002c1658(1, 1) == 0) {
+        if (inputQueryButtonState(1, 1) == 0) {
             return 0;
         }
         FUN_0027e874();
@@ -132,7 +132,7 @@ u32 FUN_001b5154(u32 job)
         return 0;
     }
     if ((*state & PICK_FLAG_ARMED_B) != 0) {
-        if (FUN_002c1658(1, 1) == 0) {
+        if (inputQueryButtonState(1, 1) == 0) {
             return 0;
         }
         FUN_0027e874();
@@ -141,14 +141,14 @@ u32 FUN_001b5154(u32 job)
         eventQueueAddUniqueIfValid(0x100016E);
         return 0;
     }
-    if (FUN_002c1658(7, 1) != 0) {
+    if (inputQueryButtonState(7, 1) != 0) {
         FUN_0027e874();
         btlHelpQueueModeRequest(0, 0);
         *state = *state | PICK_FLAG_ARMED_A;
         eventQueueAddUniqueIfValid(0x100016D);
         return 0;
     }
-    if (FUN_002c1658(8, 1) == 0) {
+    if (inputQueryButtonState(8, 1) == 0) {
         return 0;
     }
     if (FUN_00337324(work) == 0) {

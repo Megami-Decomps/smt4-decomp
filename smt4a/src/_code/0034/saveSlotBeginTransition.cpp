@@ -19,8 +19,8 @@ void saveSlotBeginTransition(SaveSlotTransitionPrefixA *ui, s32 inputCase, u8 op
 
     SaveSlotSelectionPrefixA *selected = saveSlotFindSelected();
     if (selected != 0 &&
-        (FUN_0019acdc(selected->selectionId, 1) == 1 ||
-         FUN_0019acdc(selected->selectionId, 1) == 4)) {
+        (unitMapIdToCategory(selected->selectionId, 1) == 1 ||
+         unitMapIdToCategory(selected->selectionId, 1) == 4)) {
         ui->selectedSlotEligible = 1;
     }
 

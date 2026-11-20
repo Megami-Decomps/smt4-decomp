@@ -30,7 +30,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0012240e. */
 extern unsigned int _ZN12OnlineResultC1ERKj(unsigned char *, char **);
 /* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
-extern int FUN_002ecf28(void);
+extern int objectRegistryGetOwnerForCurrent(void);
 /* Supplied declaration required: FUN_002f4f00. */
 /* Supplied declaration required: FUN_00303cd8. */
 /* Supplied declaration required: listHolderOwnerBack. */
@@ -59,7 +59,7 @@ void FUN_0011c1e4(int *param_1,int param_2,unsigned int param_3,unsigned int par
   iStack_20 = param_2;
   temp_v8 = param_3;
   temp_v9 = param_4;
-  temp_v0 = FUN_002ecf28();
+  temp_v0 = objectRegistryGetOwnerForCurrent();
   FUN_00106098(temp_v0,param_2);
   if (((temp_v0 != 0) || (temp_v0 = (**(romwright_code **)(*temp_v7 + 0x2c))(temp_v7,param_2), temp_v0 != 0)) ||
      (param_2 != 1)) {

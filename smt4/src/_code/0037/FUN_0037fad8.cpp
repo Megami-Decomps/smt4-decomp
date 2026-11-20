@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0015c6bc(...);
-int FUN_002bafb0(...);
+int nw_snd_internal_driver_ChannelManager_GetInstance(...);
 int FUN_00380024(...);
 int nw_snd_internal_driver_ChannelManager_Free(...);
 
@@ -18,7 +18,7 @@ extern int nw_snd_internal_driver_Channel_VoiceCallbackFunc(...); /* 0x2ac2c4 */
 
 /* Supplied declaration required: FUN_0015c6bc. */
 extern int nw_snd_internal_driver_VoiceManager_GetInstance(void);
-/* Supplied declaration required: FUN_002bafb0. */
+/* Supplied declaration required: nw_snd_internal_driver_ChannelManager_GetInstance. */
 /* Supplied declaration required: FUN_00380024. */
 extern int nw_snd_internal_driver_ChannelManager_Alloc(void);
 /* Supplied declaration required: nw_snd_internal_driver_ChannelManager_Free. */
@@ -32,14 +32,14 @@ int FUN_0037fad8(unsigned int param_1,unsigned int param_2,unsigned int param_3,
   int temp_v1;
   unsigned int temp_v2;
   
-  FUN_002bafb0();
+  nw_snd_internal_driver_ChannelManager_GetInstance();
   temp_v0 = nw_snd_internal_driver_ChannelManager_Alloc();
   if (temp_v0 != 0) {
     *(unsigned char *)(temp_v0 + 199) = 1;
     temp_v1 = nw_snd_internal_driver_VoiceManager_GetInstance();
     FUN_0015c6bc(temp_v1,param_1,param_2,nw_snd_internal_driver_Channel_VoiceCallbackFunc,temp_v0);
     if (temp_v1 == 0) {
-      temp_v2 = FUN_002bafb0();
+      temp_v2 = nw_snd_internal_driver_ChannelManager_GetInstance();
       nw_snd_internal_driver_ChannelManager_Free(temp_v2,temp_v0);
       return 0;
     }

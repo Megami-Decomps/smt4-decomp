@@ -18,13 +18,13 @@ typedef char WaveArchiveLoadInfoOffsets[
     offsetof(WaveArchiveLoadInfo, loadIndividual) == 8 && sizeof(WaveArchiveLoadInfo) == 12 ? 1 : -1];
 
 extern "C" {
-u32 FUN_002ac780(void *archive);
+u32 soundArchiveFileEntryIsLoaded(void *archive);
 s32 soundArchiveReadWaveArchiveInfo(void *archive, u32 id, WaveArchiveLoadInfo *info);
 u32 FUN_002a78c0(SoundArchiveLoader *loader, u32 fileId, void *buffer, u32 size, u32 offset, u32 flags);
 u32 nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlockOffset(const void *header);
 u32 nw_snd_internal_WaveArchiveFile_FileHeader_GetInfoBlockOffset(const void *header);
 u32 nnosGetHeapBase(void);
-u32 FUN_002c3984(void);
+u32 nnosGetHeapSize(void);
 void FUN_002a7ac4(WaveArchiveReader *reader, void *file, u32 individual);
 void FUN_00150f34(WaveArchiveReader *reader);
 extern const u32 DAT_004148c4;
@@ -32,7 +32,7 @@ extern const u32 DAT_004148c4;
 // Load the archive header/info and reserve a wave-pointer table instead of copying all wave data.
 void *FUN_00150d2c(SoundArchiveLoader *loader, u32 archiveId, WaveArchiveAllocator *allocator, u32 flags)
 {
-    u32 fileId = FUN_002ac780(loader->archive);
+    u32 fileId = soundArchiveFileEntryIsLoaded(loader->archive);
     void *loaded = loader->vtbl->files.getFile(loader, fileId);
     if (loaded)
         return loaded;
@@ -56,7 +56,7 @@ void *FUN_00150d2c(SoundArchiveLoader *loader, u32 archiveId, WaveArchiveAllocat
     u32 size = fileOffset + waveCount * 4 + 4;
     u8 *data = (u8 *)allocator->allocate(size);
     u32 heapBase = nnosGetHeapBase();
-    u32 heapSize = FUN_002c3984();
+    u32 heapSize = nnosGetHeapSize();
     if ((u32)data < heapBase || (u32)data + size > heapBase + heapSize)
         return 0;
     if (FUN_002a78c0(loader, fileId, data, fileOffset, 0, flags) != fileOffset)

@@ -17,12 +17,12 @@ typedef char SoundSlotTableViewLayoutCheck[offsetof(SoundSlotTableView, slots) =
 
 extern "C" {
 /* Weak like the sound system's other references: retail tests the block's address before using it. */
-extern __weak SoundSlotTableView DAT_0063ea3c;
+extern __weak SoundSlotTableView g_nwSound3DManager;
 
 /* Returns the word at 0xB0 of sound `index`, or -1 when the index is out of range or the slot is empty. */
 u32 asd3dSoundActorGetSlotValue(s32 index)
 {
-    SoundSlotTableView *table = &DAT_0063ea3c;
+    SoundSlotTableView *table = &g_nwSound3DManager;
     u32 value = 0xffffffff;
     if (index >= 0 && index < 16 && table != NULL) {
         SoundSlotView *entry = table->slots[index];

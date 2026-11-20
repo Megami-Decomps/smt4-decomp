@@ -15,5 +15,5 @@ extern "C" void spriteDrawWithOrigin(SpriteDrawOwner *owner, s32 index, const Sp
     adjusted.y -= (-143.0f - (f32)owner->origin->top + (f32)owner->origin->bottom) * scale;
     adjusted.y += g_spriteDrawYOffset;
     SpriteDrawOptions drawOptions = {options.filter, 1, options.flipY};
-    FUN_003fd140(owner, index, &adjusted, flags, drawOptions, time, scale);
+    spriteAnimationPlayAtTime(owner, index, &adjusted, flags, drawOptions, time, scale);
 }

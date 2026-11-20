@@ -23,7 +23,7 @@ extern BtlCameraStatics g_btlCamera;
 extern W5Match8Vec3 g_cameraAlternateProgressStart;
 extern W5Match8Vec3 g_cameraAlternateProgressPrevious;
 extern W5Match8Vec3 g_cameraUnoffsetStartPosition;
-f32 FUN_003d4dd4(s32 mode, s32 duration, s32 frame);
+f32 easeEvaluate(s32 mode, s32 duration, s32 frame);
 
 void FUN_004f2094(W5Match8CameraTransition* camera)
 {
@@ -39,11 +39,11 @@ void FUN_004f2094(W5Match8CameraTransition* camera)
     AlternateTransitionView* state = reinterpret_cast<AlternateTransitionView*>(camera);
     if (g_btlCamera.routingMode == 2) {
         W5Match8Vec3 delta = camera->alternateTarget - g_cameraUnoffsetStartPosition;
-        f32 factor = FUN_003d4dd4(state->mode, state->duration, state->frame);
+        f32 factor = easeEvaluate(state->mode, state->duration, state->frame);
         camera->positionProgress = camera->targetStart + delta * factor;
     } else if (g_btlCamera.routingMode == 1) {
         state->progress = g_cameraAlternateProgressPrevious;
-        f32 factor = FUN_003d4dd4(state->mode, state->duration, state->frame);
+        f32 factor = easeEvaluate(state->mode, state->duration, state->frame);
         state->progress = (camera->alternateTarget - (camera->reference.position - state->progress)) * factor;
         g_cameraAlternateProgressPrevious = state->progress;
         state->progress = g_cameraAlternateProgressStart;
@@ -52,7 +52,7 @@ void FUN_004f2094(W5Match8CameraTransition* camera)
             (camera->alternateTarget.z - g_cameraAlternateProgressStart.z) * factor;
     } else {
         W5Match8Vec3 delta = camera->alternateTarget - (camera->reference.position - state->progress);
-        f32 factor = FUN_003d4dd4(state->mode, state->duration, state->frame);
+        f32 factor = easeEvaluate(state->mode, state->duration, state->frame);
         state->progress = delta * factor;
     }
 }

@@ -24,12 +24,12 @@ typedef struct Runner002681b0 {
 void jobStop(u32 job, s32 flags);
 void ownerUpdateChild(Runner002681b0 *runner);
 
-extern Runner002681b0 *DAT_00588e2c; /* 0x588e2c */
+extern Runner002681b0 *g_saveLoadRunner; /* 0x588e2c */
 
 /* Shuts the runner down once ownerUpdateChild has updated it: stops and releases its child, stops its job and frees it. Returns 0 while it is not running, -1 once shut down. */
 u32 runnerShutdown(void)
 {
-    Runner002681b0 *runner = DAT_00588e2c;
+    Runner002681b0 *runner = g_saveLoadRunner;
     Runner002681b0 *current;
 
     if (runner != NULL) {
@@ -37,7 +37,7 @@ u32 runnerShutdown(void)
         if (runner->running == 0) {
             return 0;
         }
-        current = DAT_00588e2c;
+        current = g_saveLoadRunner;
         if (current != NULL) {
             if (current->child != NULL) {
                 current->child->vtbl->stop(current->child);
@@ -48,9 +48,9 @@ u32 runnerShutdown(void)
             }
             current->running = 1;
             jobStop(current->job, 0);
-            if (DAT_00588e2c != NULL) {
-                asdOperatorDelete(DAT_00588e2c);
-                DAT_00588e2c = NULL;
+            if (g_saveLoadRunner != NULL) {
+                asdOperatorDelete(g_saveLoadRunner);
+                g_saveLoadRunner = NULL;
             }
         }
     }

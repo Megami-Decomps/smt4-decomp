@@ -20,15 +20,15 @@ struct EditorTexture00323df8 {
 
 extern "C" {
 
-extern u8 DAT_0044fce0[];
+extern u8 g_effectEditorObjectTextureTable[];
 
-void FUN_00242f94(void *body, void *texture, const void *table);
+void effectEditorBindTexture(void *body, void *texture, const void *table);
 
-/* Forwards the effect's body (0xe0) with the editor's texture and DAT_0044fce0. */
+/* Forwards the effect's body (0xe0) with the editor's texture and g_effectEditorObjectTextureTable. */
 void effectEditorBindObjectTexture(Object00323df8 *object)
 {
-    u8 *table = DAT_0044fce0;
-    FUN_00242f94(object->effect->body, reinterpret_cast<EditorTexture00323df8 &>(g_effectEditor).texture, table);
+    u8 *table = g_effectEditorObjectTextureTable;
+    effectEditorBindTexture(object->effect->body, reinterpret_cast<EditorTexture00323df8 &>(g_effectEditor).texture, table);
 }
 
 } /* extern "C" */

@@ -171,7 +171,7 @@ typedef struct BtlEntry {
     /* 0x0AE */ s16 modifiers[9];
     /* 0x0C0 */ u8 unk0C0[4];
     /* 0x0C4 */ s32 forcedSlot;         /* 1 + an affinity slot forced on the entry's attacks, 0 when none */
-    /* 0x0C8 */ s32 unk0C8;             /* <= 0 marks a downed live entry (FUN_00229914) */
+    /* 0x0C8 */ s32 unk0C8;             /* <= 0 marks a downed live entry (btlUnitIsDeadAndUncopied) */
     /* 0x0CC */ BtlUnitData data;
 } BtlEntry; /* 0x288 bytes */
 

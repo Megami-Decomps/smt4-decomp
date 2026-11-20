@@ -81,7 +81,7 @@ typedef char SavedUnitSelectionEditorOffsetsCheck[
 extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
-void FUN_00168980(u32 id);
+void buttonHelpTransitionPresetFlags(u32 id);
 #ifdef __cplusplus
 }
 #endif

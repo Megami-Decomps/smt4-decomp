@@ -3,11 +3,11 @@
 extern "C" {
 const Vec3f *FUN_001a7848(const CameraParameterSource *);
 const Vec3f *FUN_001a7818(const CameraParameterSource *);
-const Vec3f *FUN_001a777c(const CameraParameterSource *);
+const Vec3f *cameraGetProviderEntryPayload(const CameraParameterSource *);
 f32 FUN_001a78bc(const CameraParameterSource *);
 void FUN_0019eb14(CameraParameters *);
 void FUN_0019ec04(CameraParameters *);
-void FUN_001a77ac(const CameraParameterSource *, f32 *, f32 *, f32 *, f32 *);
+void cameraExportProviderEntryWords(const CameraParameterSource *, f32 *, f32 *, f32 *, f32 *);
 
 /* Export pose and projection controls from the camera's active orientation mode. */
 void cameraExportParameters(CameraParameters *output, const CameraParameterOwner *owner)
@@ -38,7 +38,7 @@ void cameraExportParameters(CameraParameters *output, const CameraParameterOwner
         break;
     }
     case 2: {
-        const Vec3f *rotation = FUN_001a777c(camera);
+        const Vec3f *rotation = cameraGetProviderEntryPayload(camera);
         output->rotation.x = rotation->x;
         output->rotation.y = rotation->y;
         output->rotation.z = rotation->z;
@@ -46,7 +46,7 @@ void cameraExportParameters(CameraParameters *output, const CameraParameterOwner
         break;
     }
     }
-    FUN_001a77ac(camera, &output->fieldOfView, &output->aspect, &output->nearClip, &output->farClip);
+    cameraExportProviderEntryWords(camera, &output->fieldOfView, &output->aspect, &output->nearClip, &output->farClip);
     output->fieldOfView *= 57.295776f;
 }
 }

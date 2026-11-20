@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0010391c(int);
 int onlineCallContextWait(unsigned char [96], unsigned int);
 int sharedRefRelease(unsigned int);
-int FUN_002ea00c(unsigned char [96]);
+int destroyObj005585a4(unsigned char [96]);
 int onlineJobSetStateDone(void);
 int FUN_002eca44(unsigned char [96]);
 int FUN_002f7290(unsigned int *, unsigned char [96]);
@@ -18,7 +18,7 @@ extern unsigned char DAT_0055b300; /* 0x55b300 */
 /* Supplied declaration required: FUN_0010391c. */
 /* Supplied declaration required: onlineCallContextWait. */
 /* Supplied declaration required: sharedRefRelease. */
-/* Supplied declaration required: FUN_002ea00c. */
+/* Supplied declaration required: destroyObj005585a4. */
 /* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002eca44. */
 /* Supplied declaration required: FUN_002f7290. */
@@ -38,7 +38,7 @@ void FUN_00122b34(unsigned int *param_1)
     FUN_002eca44(temp_v1);
     FUN_002f7290(param_1,temp_v1);
     onlineCallContextWait(temp_v1,0xffffffff);
-    FUN_002ea00c(temp_v1);
+    destroyObj005585a4(temp_v1);
   }
   piVar1 = (int *)param_1[0x52];
   param_1[0x52] = 0;

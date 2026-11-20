@@ -8,7 +8,7 @@ int FUN_0010e05c(...);
 int _ZN9Obj55b28cC1EPv(...);
 int _ZN9Obj55b28cD1Ev(...);
 int FUN_002e93c2(...);
-int FUN_002ea704(...);
+int watcherGetEnabledFlag(...);
 int FUN_002f7270(...);
 int FUN_002f8728(...);
 int FUN_002f874c(...);
@@ -43,9 +43,9 @@ extern unsigned char DAT_005949d8; /* 0x5949d8 */
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002e93c2. */
-/* Supplied declaration required: FUN_002ea704. */
+/* Supplied declaration required: watcherGetEnabledFlag. */
 extern unsigned int onlineGetActiveLock(void);
-extern unsigned int FUN_002eb5f4(void);
+extern unsigned int watcherGetActiveContext(void);
 /* Supplied declaration required: FUN_002f7270. */
 extern int FUN_002f86cc(fn_0010e300_arg0 *, unsigned int);
 /* Supplied declaration required: FUN_002f8728. */
@@ -109,7 +109,7 @@ FUN_0010e300(fn_0010e300_arg0 *param_1,unsigned int param_2,unsigned short *para
     pfVar4 = param_1;
     FUN_0010e05c(param_1,param_2,temp_v4,param_5);
     if (pfVar4 == (fn_0010e300_arg0 *)0x0) {
-      FUN_002ea704();
+      watcherGetEnabledFlag();
       FUN_002f7270();
       _ZN9Obj55b28cD1Ev(temp_v7);
       return 0;
@@ -123,7 +123,7 @@ FUN_0010e300(fn_0010e300_arg0 *param_1,unsigned int param_2,unsigned short *para
         FUN_002e93c2(temp_v1,temp_v4[0]);
         (**(romwright_code **)(*(*(int * *)((unsigned char *)&DAT_005949d8 + 0x2c)) + 0x30))((*(int * *)((unsigned char *)&DAT_005949d8 + 0x2c)),temp_v4[0]);
         temp_v1 = FUN_002f8744(temp_v5);
-        temp_v3 = FUN_002eb5f4();
+        temp_v3 = watcherGetActiveContext();
         FUN_002f8aa8(temp_v3,temp_v1);
         FUN_002f874c(temp_v5);
       }

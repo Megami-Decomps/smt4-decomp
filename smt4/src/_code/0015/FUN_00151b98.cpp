@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002a2e08(unsigned int);
+int fileWorkerQueueRestartIfIdle(unsigned int);
 int fileQueuePush(unsigned int, unsigned char [4]);
 int _ZN9Obj422224C1Ev(unsigned char [4]);
-int FUN_002ba81c(...);
+int stringCopyTruncated(...);
 int libc_strlen(...);
 
 /* stack frame of param_8: 14 slot(s), 56 byte(s) */
@@ -28,10 +28,10 @@ typedef struct {
     unsigned int sp1AC; /* 0x1ac: local_1ac */
 } param_8_stack;
 
-/* Supplied declaration required: FUN_002a2e08. */
+/* Supplied declaration required: fileWorkerQueueRestartIfIdle. */
 /* Supplied declaration required: fileQueuePush. */
 /* Supplied declaration required: _ZN9Obj422224C1Ev. */
-/* Supplied declaration required: FUN_002ba81c. */
+/* Supplied declaration required: stringCopyTruncated. */
 /* Supplied declaration required: libc_strlen. */
 
 
@@ -64,8 +64,8 @@ void FUN_00151b98(unsigned int param_1,unsigned int param_2,int param_3,unsigned
     libc_strlen(param_2);
     libc_strlen(param_3);
     _ZN9Obj422224C1Ev(temp_v9);
-    FUN_002ba81c(temp_v16,param_2,0x40);
-    FUN_002ba81c(temp_v17,param_3,0x40);
+    stringCopyTruncated(temp_v16,param_2,0x40);
+    stringCopyTruncated(temp_v17,param_3,0x40);
     temp_v14 = (unsigned int)param_5;
     temp_v12 = (unsigned int)((unsigned long long)param_5 >> 0x20);
     temp_v10 = temp_v10 | 3;
@@ -77,12 +77,12 @@ void FUN_00151b98(unsigned int param_1,unsigned int param_2,int param_3,unsigned
     temp_v15 = param_7;
     temp_v18 = param_8;
     fileQueuePush(param_1,temp_v9);
-    FUN_002a2e08(param_1);
+    fileWorkerQueueRestartIfIdle(param_1);
     return;
   }
   libc_strlen(param_2);
   _ZN9Obj422224C1Ev(temp_v0);
-  FUN_002ba81c(temp_v7,param_2,0x40);
+  stringCopyTruncated(temp_v7,param_2,0x40);
   temp_v5 = (unsigned int)param_5;
   temp_v3 = (unsigned int)((unsigned long long)param_5 >> 0x20);
   temp_v8 = 0;
@@ -94,7 +94,7 @@ void FUN_00151b98(unsigned int param_1,unsigned int param_2,int param_3,unsigned
   temp_v4 = param_6;
   temp_v6 = param_7;
   fileQueuePush(param_1,temp_v0);
-  FUN_002a2e08(param_1);
+  fileWorkerQueueRestartIfIdle(param_1);
   return;
 }
 

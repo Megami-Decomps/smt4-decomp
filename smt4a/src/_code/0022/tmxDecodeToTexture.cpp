@@ -38,9 +38,9 @@ void tmxDecodeToTexture(AsdTexture *texture, const IndexedImage *image, u32 size
     u32 paletteScale;
     if (image->hasPixels == 0) {
         paletteScale = 4;
-        texture->storage.unk28 = width * height * 4;
+        texture->storage.bytes = width * height * 4;
         asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Tex\\AsdTexTMX.cpp", 95);
-        pixels = (u32 *)asdMemoryAllocTracked(0x100, 0x100, 0, texture->storage.unk28, 1);
+        pixels = (u32 *)asdMemoryAllocTracked(0x100, 0x100, 0, texture->storage.bytes, 1);
     }
     const u32 *palette = image->palette;
     u32 *out = pixels;
@@ -94,14 +94,14 @@ void tmxDecodeToTexture(AsdTexture *texture, const IndexedImage *image, u32 size
         break;
     }
     }
-    texture->unk08 = flags;
+    texture->heap = flags;
     texture->target = ASDTEXTURE_TARGET_2D;
     texture->image.type = 0x1401;
     texture->image.format = 0x6752;
     texture->dimensions.width = width;
     texture->dimensions.height = height;
     asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Tex\\AsdTexTMX.cpp", 232);
-    texture->storage.pixels = memAlloc(0x10000, 0x100, 0, texture->storage.unk28, 0x80, 1);
+    texture->storage.pixels = memAlloc(0x10000, 0x100, 0, texture->storage.bytes, 0x80, 1);
     FUN_00418fe0(texture->dimensions.width, texture->dimensions.height, pixels, texture->storage.pixels);
     asdMemFree(pixels);
 }

@@ -23,7 +23,7 @@ extern "C" {
 extern BtlAuxA *g_btlAux;
 extern AncientTransitionMasks g_btlEncount;
 extern const char DAT_00528558[];
-void FUN_004f7b84(BtlAuxA *effects, const char *name);
+void effectRequestByName(BtlAuxA *effects, const char *name);
 s32 btlPollVersionedEffectTexture(BtlAuxA *effects);
 void FUN_003e2840(BtlStep *step, BtlMainStateA *battle, s32 mode);
 void FUN_004f1c5c(BtlCameraA *camera, u32 duration);
@@ -35,7 +35,7 @@ void FUN_003e0cd4(BtlStep *step, BtlMainStateA *battle);
 void FUN_003e1a30(BtlStep *step, BtlMainStateA *battle)
 {
     if (step->counters.unk0C == 0) {
-        FUN_004f7b84(g_btlAux, DAT_00528558);
+        effectRequestByName(g_btlAux, DAT_00528558);
         g_btlCamera->flags |= 0x4000;
         step->counters.unk0C |= 2;
     }

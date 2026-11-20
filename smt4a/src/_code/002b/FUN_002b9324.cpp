@@ -3,7 +3,7 @@
 #include <stddef.h>
 #include "code/Code001b.h"
 extern "C" {
-s32 FUN_001ba570(void);
+s32 optionsGoalConditionCheck(void);
 s32 recordIsAvailable(u16 id);
 s32 FUN_003df004(u16 id, s32 slot, s32 *values);
 s32 partyEntryFlagsBit1(u16 id);
@@ -42,7 +42,7 @@ s32 FUN_002b9324(void)
             }
         }
     }
-    if (status == 0 && FUN_001ba570())
+    if (status == 0 && optionsGoalConditionCheck())
         status = 3;
     return status;
 }

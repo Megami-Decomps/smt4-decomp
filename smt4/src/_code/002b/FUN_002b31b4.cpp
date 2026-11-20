@@ -14,8 +14,8 @@ int charCodeIsPrivateUseGlyph(int);
 
 typedef int romwright_code(...);
 extern romwright_code *DAT_00464d5c; /* 0x464d5c */
-extern unsigned char DAT_004def18; /* 0x4def18 */
-extern unsigned char DAT_004def28; /* 0x4def28 */
+extern unsigned char g_textControlCallbackCodes; /* 0x4def18 */
+extern unsigned char g_textControlCallbackArgumentCounts; /* 0x4def28 */
 
 #ifndef ROMWRIGHT_PIECE_2_2_DEFINED
 #define ROMWRIGHT_PIECE_2_2_DEFINED
@@ -102,7 +102,7 @@ int FUN_002b31b4(int *param_1)
       temp_v4 = 0;
       do {
         if ((*(int *)(temp_v4 * 4 + 0x4daee8) != 0) &&
-           (*(short *)(&DAT_004def18 + temp_v4 * 2) == temp_v6)) {
+           (*(short *)(&g_textControlCallbackCodes + temp_v4 * 2) == temp_v6)) {
           FUN_00145aa8(param_1);
           break;
         }
@@ -124,7 +124,7 @@ joined_r0x002b3444:
       temp_v8 = 0;
       do {
         if ((*(int *)(temp_v8 * 4 + 0x4daee8) != 0) &&
-           (*(unsigned short *)(&DAT_004def18 + temp_v8 * 2) == temp_v0)) {
+           (*(unsigned short *)(&g_textControlCallbackCodes + temp_v8 * 2) == temp_v0)) {
           temp_v8 = 0;
           goto LAB_002b34c8;
         }
@@ -243,9 +243,9 @@ joined_r0x002b3444:
   return 1;
   while (temp_v8 = temp_v8 + 1, temp_v8 < 8) {
 LAB_002b34c8:
-    if ((*(int *)(temp_v8 * 4 + 0x4daee8) != 0) && (*(unsigned short *)(&DAT_004def18 + temp_v8 * 2) == temp_v0))
+    if ((*(int *)(temp_v8 * 4 + 0x4daee8) != 0) && (*(unsigned short *)(&g_textControlCallbackCodes + temp_v8 * 2) == temp_v0))
     {
-      temp_v7 = *(int *)(&DAT_004def28 + temp_v8 * 4);
+      temp_v7 = *(int *)(&g_textControlCallbackArgumentCounts + temp_v8 * 4);
       if (temp_v7 != 1) {
         if (temp_v7 != 2) {
           if (temp_v7 != 3) {

@@ -19,7 +19,7 @@ int FUN_0029ab54(int, int);
 int FUN_0029acb0(void);
 int flagCountUnlockedSlots(...);
 int FUN_0029dc74(...);
-int FUN_0029ee54(...);
+int gridNavigationGetItemCount(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int skillDataFindById(void);
 int FUN_002b6c34(...);
 int aocIndexValueOrDefault(...);
@@ -55,16 +55,16 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: fadeObjectResetIfActive. */
 /* Supplied declaration required: statusDownDrawSkillRow. */
 /* Supplied declaration required: appGetRemainingCapacity. */
-extern unsigned int FUN_0029a9d4(unsigned short, unsigned int);
+extern unsigned int skillGetDiscountedCost(unsigned short, unsigned int);
 extern int countUnlockedSlots(void);
 /* Supplied declaration required: FUN_0029ab54. */
 extern int FUN_0029ac94(void);
 /* Supplied declaration required: FUN_0029acb0. */
 /* Supplied declaration required: flagCountUnlockedSlots. */
-extern int FUN_0029d644(int);
+extern int uiListGetVisibleCount(int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 /* Supplied declaration required: FUN_0029dc74. */
-extern int FUN_0029e9cc(unsigned short);
-/* Supplied declaration required: FUN_0029ee54. */
+extern int itemIsCollectedWithRelated(unsigned short);
+/* Supplied declaration required: gridNavigationGetItemCount. */
 extern int listCursorGetRowIfUnblocked(void);
 /* Supplied declaration required: skillDataFindById. */
 extern int partyMemberFindById(unsigned short);
@@ -128,7 +128,7 @@ void FUN_00187114(int param_1,int param_2)
   if (temp_v21 != 0xd) {
     if (temp_v21 == 6) {
       puVar5 = (unsigned short *)FUN_0029acb0();
-      temp_v3 = FUN_0029e9cc(*puVar5);
+      temp_v3 = itemIsCollectedWithRelated(*puVar5);
       if (temp_v3 == 0) {
         temp_v8 = 1;
       }
@@ -149,7 +149,7 @@ void FUN_00187114(int param_1,int param_2)
       temp_v9 = 0;
       if (*(int *)(temp_v2 + 0x400) == 4) {
         if (*(int *)(temp_v2 + 0x40c) >= 9) {
-          temp_v5 = FUN_0029d644(temp_v18);
+          temp_v5 = uiListGetVisibleCount(temp_v18);
           if (temp_v5 == temp_v3 + 1) {
             temp_v9 = vec2GetXInt((UiSpriteState *)(temp_v2 + 0x2e4));
           }
@@ -201,7 +201,7 @@ LAB_0018733c:
           temp_v10 = 0xff;
         }
         else if ((((temp_v6 != 4) || (*(int *)(temp_v2 + 0x40c) < 9)) ||
-                 (temp_v6 = FUN_0029d644(temp_v18), temp_v6 != temp_v3 + 1)) &&
+                 (temp_v6 = uiListGetVisibleCount(temp_v18), temp_v6 != temp_v3 + 1)) &&
                 ((*(char *)(temp_v22 + 0x48) == '\0' || (*(int *)(temp_v2 + 0x54c) != temp_v3)))) {
           temp_v10 = 0xff;
           temp_v0 = *(char *)(temp_v2 + temp_v3 + 0x4c2);
@@ -237,7 +237,7 @@ LAB_0018733c:
                    ,0);
       if (temp_v8 == 0) {
         if (*(short *)(temp_v19 + 0x7e) < 0) {
-          temp_v20 = FUN_0029a9d4(*(unsigned short *)(temp_v4 + 0x482),1);
+          temp_v20 = skillGetDiscountedCost(*(unsigned short *)(temp_v4 + 0x482),1);
         }
         else {
           temp_v7 = (unsigned int)*(unsigned short *)(temp_v4 + 0x482);
@@ -282,7 +282,7 @@ LAB_0018733c:
   if (temp_v3 != 3) {
     if (temp_v3 == 6) {
       if (*(int *)(temp_v2 + 0x40c) >= 9) {
-        temp_v3 = FUN_0029ee54(temp_v18);
+        temp_v3 = gridNavigationGetItemCount(temp_v18);
         if (temp_v3 - 1 == temp_v15) goto LAB_001876e0;
         if (*(int *)(temp_v2 + 0x400) == 0xb) goto LAB_00187678;
       }
@@ -290,7 +290,7 @@ LAB_0018733c:
     }
     if (temp_v3 == 0xb) {
 LAB_00187678:
-      temp_v3 = FUN_0029ee54(temp_v18);
+      temp_v3 = gridNavigationGetItemCount(temp_v18);
       if (temp_v3 - 1 != temp_v15) goto LAB_00187690;
       goto LAB_001876e0;
     }
@@ -346,11 +346,11 @@ LAB_001876ec:
               if (temp_v3 != 0) goto LAB_00187b88;
               temp_v8 = 0;
               if ((temp_v9 == 6) || (temp_v9 == 7 || temp_v9 == 8)) {
-                temp_v8 = FUN_0029ee54(temp_v18);
+                temp_v8 = gridNavigationGetItemCount(temp_v18);
                 temp_v8 = temp_v8 - 1;
               }
               if (*(int *)(temp_v2 + 0x400) == 9) {
-                temp_v8 = FUN_0029ee54();
+                temp_v8 = gridNavigationGetItemCount();
               }
               if ((*(int *)(temp_v2 + 0x40c) >= 9) && (temp_v15 == temp_v8)) {
                 temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x50b));
@@ -543,7 +543,7 @@ LAB_001876e0:
   texDrawTableEntryAtStoredOrigin(2,0x1a,0x4e4,temp_v8,param_2,0xb3);
   texDrawTableEntryAtStoredOrigin(2,0x1a,0x4e5,temp_v8,param_2,0xb3);
   texDrawCompositeSprite(2,0x1a,0x13,param_1,param_2,0xb3);
-  if ((*(int *)(temp_v2 + 0x400) == 0xb) && (temp_v4 = FUN_0029ee54(temp_v18), temp_v4 - 1 == temp_v15)) {
+  if ((*(int *)(temp_v2 + 0x400) == 0xb) && (temp_v4 = gridNavigationGetItemCount(temp_v18), temp_v4 - 1 == temp_v15)) {
     statusDownDrawSkillRow(temp_v8,param_2,*(unsigned int *)(temp_v2 + 0x540) & 0xffff,0x435,temp_v17,0,0,0);
   }
   else {
@@ -568,7 +568,7 @@ LAB_001876e0:
                  "%d",temp_v10);
   }
 LAB_00187ce0:
-  temp_v8 = FUN_0029ee54(temp_v18);
+  temp_v8 = gridNavigationGetItemCount(temp_v18);
   if (temp_v8 < 1) {
     texDrawCompositeSprite(2,0x1a,0x1b,param_1,param_2,0xdd);
     temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x544));

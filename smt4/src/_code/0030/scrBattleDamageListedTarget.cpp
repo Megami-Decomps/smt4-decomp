@@ -6,7 +6,7 @@
 #include "battle/BtlGlobals.h"
 
 extern "C" {
-void FUN_00250720(BtlMainState *battle);
+void btlSlotManagerResetAll(BtlMainState *battle);
 void FUN_002551ac(s32 side, ScriptUnit *source, BtlActionRecord *action, s32 kind,
                  s32 amount, s32 first, s32 second, s32 hp, s32 maxHp,
                  s32 a9, s32 a10, s32 a11, s32 a12, s32 a13, s32 a14,
@@ -22,7 +22,7 @@ u32 scrBattleDamageListedTarget(void)
     s32 amount = scrGetArg(1);
     ScriptUnit *source = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     BtlEntry *target = btlMainFindEntryByListedId(btlGetMainState(), targetId);
-    FUN_00250720(btlGetMainState());
+    btlSlotManagerResetAll(btlGetMainState());
     BtlActionRecord *action = &btlGetMainState()->actions[target->ids[0]];
     FUN_002551ac(0, source, action, 0, amount, -1, -1, target->data.hp, target->data.maxHp,
                  0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1);

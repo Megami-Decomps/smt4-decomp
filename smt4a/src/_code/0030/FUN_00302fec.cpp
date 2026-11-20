@@ -9,10 +9,10 @@ struct Data {
     u32 mode;
 };
 void streamWriterWriteArray(void *,const void *,u32,u32);
-void FUN_0030fb34(void *,u32,u32);
+void streamWriterWriteBits(void *,u32,u32);
 void *FUN_00302fec(void *writer,const Data *data) {
     streamWriterWriteArray(writer,&data->count,4,1);
-    if(data->count) FUN_0030fb34(writer,(u32)data->values+data->mode,data->count<<3);
+    if(data->count) streamWriterWriteBits(writer,(u32)data->values+data->mode,data->count<<3);
     return writer;
 }
 }

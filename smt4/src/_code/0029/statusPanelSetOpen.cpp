@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_00258a24(s32 value);
+void statusPanelRefreshSelection(s32 value);
 void statusDownRestoreTabForMode(void);
 void timerStart(void *timer, s32 frames, s32 arg);
 
@@ -35,9 +35,9 @@ void statusPanelSetOpen(s32 open)
         }
     }
     if (data->unk1E67 == 5 || data->unk1E67 == 6) {
-        FUN_00258a24(0);
+        statusPanelRefreshSelection(0);
     } else {
-        FUN_00258a24(data->unk1E62);
+        statusPanelRefreshSelection(data->unk1E62);
     }
 }
 

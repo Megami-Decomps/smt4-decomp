@@ -42,7 +42,7 @@ typedef struct {
 extern unsigned char LAB_001aca08; /* 0x1aca08 */
 extern unsigned char LAB_001acdc0; /* 0x1acdc0 */
 extern int DAT_0049f924; /* 0x49f924 */
-extern unsigned char DAT_004bce8c; /* 0x4bce8c */
+extern unsigned char g_asdMdlBankSet; /* 0x4bce8c */
 extern unsigned char DAT_004bce8d; /* 0x4bce8d */
 extern int DAT_004bcf8c; /* 0x4bcf8c */
 extern unsigned int *DAT_004bcf90; /* 0x4bcf90 */
@@ -335,7 +335,7 @@ LAB_001abfec:
               temp_v8 = (int)temp_v3;
               temp_v1 = (&DAT_004bd0d4)[temp_v6];
               temp_v7 = (int)gameGetMapBlock();
-              (&DAT_004bce8c)[DAT_004bd0d0 * 2] = temp_v4;
+              (&g_asdMdlBankSet)[DAT_004bd0d0 * 2] = temp_v4;
               (&DAT_004bce8d)[DAT_004bd0d0 * 2] = temp_v3;
               DAT_004bd0d0 = DAT_004bd0d0 + 1;
               if (temp_v1 != '\x01') {
@@ -407,7 +407,7 @@ LAB_001abfec:
           temp_v13 = DAT_004bd0d0 - 1;
           temp_v15 = 0;
           DAT_004bd0d0 = temp_v13;
-          *(unsigned char *)(temp_v6 + 0xdd2) = (&DAT_004bce8c)[temp_v7 * 2];
+          *(unsigned char *)(temp_v6 + 0xdd2) = (&g_asdMdlBankSet)[temp_v7 * 2];
           *(unsigned char *)(temp_v6 + 0xdd3) = (&DAT_004bce8d)[temp_v7 * 2];
           if (0 < temp_v13) {
             do {
@@ -418,7 +418,7 @@ LAB_001abfec:
               temp_v13 = temp_v8 * 2;
               temp_v15 = temp_v15 + 1;
               temp_v8 = temp_v8 + 1;
-              *(unsigned short *)(&DAT_004bce8c + temp_v6) = *(unsigned short *)(&DAT_004bce8c + temp_v13);
+              *(unsigned short *)(&g_asdMdlBankSet + temp_v6) = *(unsigned short *)(&g_asdMdlBankSet + temp_v13);
             } while (temp_v15 < DAT_004bd0d0);
           }
         }
@@ -529,7 +529,7 @@ LAB_001ac248:;
         temp_v13 = 0;
         if (0 < DAT_004bd0d8) {
           do {
-            puVar15 = &DAT_004bce8c + temp_v13 * 0xc;
+            puVar15 = &g_asdMdlBankSet + temp_v13 * 0xc;
             temp_v12 = (&DAT_004bcf8c)[temp_v13 * 3];
             if (temp_v12 == temp_v7) {
               puVar8 = (&DAT_004bcf90)[temp_v13 * 3];

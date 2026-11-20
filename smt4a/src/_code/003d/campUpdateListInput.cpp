@@ -28,8 +28,8 @@ void campChangeState(s32 newState);
 void campRebuildEnabledFlagList(s32 mode);
 u32 uiScrollHandleActionsOrTouch(GridNavigation *list, const TextureTableEntryIV *rectangle, const s16 *regions,
                                  s32 firstKey, s32 secondKey, s32 thirdKey, s8 *blockedMode, s32 secondary, s32 notify);
-u8 FUN_00228b04(GridNavigation *list, s32 mode);
-void FUN_002cb278(GridNavigation *list, s32 mode);
+u8 gridNavigationHandleConfirm(GridNavigation *list, s32 mode);
+void campListRegisterTouchRegions(GridNavigation *list, s32 mode);
 s32 resourceRunOperationIfUnblocked(GridNavigation *list); // declcheck: local (the shared prototype takes the opaque Object; the list is a GridNavigation)
 void FUN_0021b274(s32 mode, s32 image, u32 frame);
 u32 FUN_0048144c(s32 id);
@@ -70,7 +70,7 @@ void campUpdateListInput(s32 state)
 
     switch (camp->phase) {
     case 0:
-        FUN_002cb278(list, 1);
+        campListRegisterTouchRegions(list, 1);
         camp->phase++;
         break;
     case 1: {
@@ -80,7 +80,7 @@ void campUpdateListInput(s32 state)
         if (uiScrollHandleActionsOrTouch(list, asdTMTexTableEntryAt(20, 0x56D), camp->touch.rowRegions,
                                          camp->touch.scrollRegions[0], camp->touch.scrollRegions[1],
                                          camp->touch.scrollRegions[2], &touched, 0, 1) ||
-            FUN_00228b04(list, 1)) {
+            gridNavigationHandleConfirm(list, 1)) {
             campShowSelectedEntryHelp(dataTable15GetUnlockedEntryId(camp->menuGroup, listCursorGetRowOfChildIfUnblocked(&camp->menuGrid)));
         } else if ((padQueryLogicalKey(0, 1) || touched) && state == 11) {
             s32 row = resourceRunOperationIfUnblocked(list) + listCursorGetRowIfUnblocked(list);
@@ -133,14 +133,14 @@ void campUpdateListInput(s32 state)
                 break;
             if (state == 11) {
                 sortMenuAcquire(3, 0);
-                FUN_0031f208(12);
-                FUN_0031f208(16);
-                FUN_0031f208(3);
+                useCounterAppendValue(12);
+                useCounterAppendValue(16);
+                useCounterAppendValue(3);
             } else if (state == 14) {
                 sortMenuAcquire(4, 0);
-                FUN_0031f208(33);
-                FUN_0031f208(16);
-                FUN_0031f208(3);
+                useCounterAppendValue(33);
+                useCounterAppendValue(16);
+                useCounterAppendValue(3);
             }
             buttonHelpSetText(NULL, 0xF4F4F4FF);
             camp->buttonHelpValue = ifTouchGetButtonHelpValue();

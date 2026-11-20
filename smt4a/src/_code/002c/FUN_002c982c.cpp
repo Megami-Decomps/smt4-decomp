@@ -71,7 +71,7 @@ extern "C" void FUN_002c982c(MarkerWork *work)
         if (!work->markers[i].active)
             continue;
         MarkerEntry *marker = &work->markers[i];
-        MarkerPlayer *player = reinterpret_cast<MarkerPlayer *>(FUN_002c7e24());
+        MarkerPlayer *player = reinterpret_cast<MarkerPlayer *>(gameGlobalsGetBlock1390());
         if (marker->kindMask != 0) {
             if (player->unitId == marker->unitId) {
                 s32 shown = 0;

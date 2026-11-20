@@ -20,7 +20,7 @@ typedef char EventScriptLaunchWorkOffsets[offsetof(EventScriptLaunchWorkView, by
 
 extern "C" {
 extern EventScriptLaunchGlobalsView DAT_005f16fc;
-void FUN_004b75d0(TransformInterpolation *);
+void transformInterpolationStep(TransformInterpolation *);
 void asdMemFree(void *);
 void messageSetScriptDisplayMode();
 void *asdLoadFileSyncDefault(const char *);
@@ -32,7 +32,7 @@ void scrScriptProcessStartEntry(ScriptProcess *, u32);
 void eventUpdateScriptLaunch(EventScriptLaunchWorkView *work)
 {
     char path[132];
-    FUN_004b75d0(&work->transform);
+    transformInterpolationStep(&work->transform);
     if (work->transform.runtime.phase != 0) {
         if (work->transform.runtime.phase == 1 && scrRunOpcodesStub(work->script) == 2) {
             scrScriptProcessDestroy(work->script);

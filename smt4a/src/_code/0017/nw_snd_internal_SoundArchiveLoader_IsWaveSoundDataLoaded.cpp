@@ -22,7 +22,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00190fc8. */
 extern int soundInfoOwnerReadInfo(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_00194c68. */
-extern unsigned int FUN_001a8e14(int);
+extern unsigned int soundArchiveFileEntryIsLoaded(int);
 extern int nw_snd_internal_WaveSoundFileReader_ReadNoteInfo(unsigned char *, unsigned int *, unsigned int, unsigned int);
 
 
@@ -43,7 +43,7 @@ void nw_snd_internal_SoundArchiveLoader_IsWaveSoundDataLoaded
   unsigned char temp_v9;
   unsigned char temp_v10 [12];
   
-  temp_v0 = FUN_001a8e14(param_1[1]);
+  temp_v0 = soundArchiveFileEntryIsLoaded(param_1[1]);
   temp_v1 = (**(romwright_code **)(*param_1 + 0x10))(param_1,temp_v0);
   if ((((param_3 & 10) == 0) || (temp_v1 != 0)) && ((param_3 & 8) != 0)) {
     temp_v5 = 0;

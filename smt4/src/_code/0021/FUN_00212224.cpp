@@ -12,7 +12,7 @@ struct IntegerCurve {
     /* 0x54 */ IntegerCurveKey keys[4];
 };
 
-extern "C" void FUN_00291008(f32 *value, f32 increment, f32 target);
+extern "C" void mathStepTowards(f32 *value, f32 increment, f32 target);
 
 // Advance a four-key integer curve, skipping non-increasing frame times.
 extern "C" void FUN_00212224(const IntegerCurve *curve, s32 *frame, s8 *keyIndex,
@@ -38,6 +38,6 @@ extern "C" void FUN_00212224(const IntegerCurve *curve, s32 *frame, s8 *keyIndex
             }
         }
     } else {
-        FUN_00291008(value, *increment, *target);
+        mathStepTowards(value, *increment, *target);
     }
 }

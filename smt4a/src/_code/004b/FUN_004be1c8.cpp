@@ -38,7 +38,7 @@ void statusPanelSetOpen(s32 opened);
 void FUN_004be1c8(UnitScreenReadyViewA* work)
 {
     if (!work->resource || !work->infoWindow || !work->scriptResource ||
-        (work->mode != 1 && !FUN_0023b3d0())) {
+        (work->mode != 1 && !gameStateIsNotTransitioning())) {
         return;
     }
     ScriptProcess* script = scrScriptProcessCreate(work->scriptResource, work->infoWindow);

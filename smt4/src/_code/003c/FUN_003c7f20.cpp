@@ -8,7 +8,7 @@
 #include "sys/ResultReport.h"
 
 extern "C" {
-s32 FUN_002c40f8(s32 *signaled, u32 *handles, s32 count, s32 waitAll, s64 timeout);
+s32 svcWaitSynchronizationN(s32 *signaled, u32 *handles, s32 count, s32 waitAll, s64 timeout);
 void FUN_002759bc(void);
 void mdlHandleArrayDestroy(BattleStageModel *stage);
 
@@ -17,7 +17,7 @@ static __inline void stageStopThread(BattleStageModel *stage)
 {
     s32 signaled;
     u32 handles[1] = { stage->thread.handle };
-    s32 result = FUN_002c40f8(&signaled, handles, 1, 0, -1);
+    s32 result = svcWaitSynchronizationN(&signaled, handles, 1, 0, -1);
     bool failed = nnResultIsFailure(result);
     if (failed) {
         resultHandleFailure(result, failed);
@@ -33,7 +33,7 @@ void FUN_003c7f20(BattleStageModel *stage)
 {
     stageStopThread(stage);
     if (stage->stackRegion != NULL) {
-        FUN_002c3f5c(stage->stackRegion);
+        addressSpaceRegionFree(stage->stackRegion);
         delete static_cast<StackRegion *>(stage->stackRegion);
         stage->stackRegion = NULL;
     }

@@ -12,7 +12,7 @@ struct CecSavedEntry {
 
 extern "C" {
 extern CampCecCountState *g_campCec; // declcheck: local (count view of the StreetPass object; kept from FUN_0030bc90)
-CecSavedEntry *FUN_00262f94(void);
+CecSavedEntry *stockFindSelectedUnit(void);
 
 // Returns to the script the current StreetPass count when the argument asks for it, else the selected saved
 // entry's count (0 when there is no StreetPass menu).
@@ -24,7 +24,7 @@ u32 scrCommCecGetCount(void)
     } else if (g_campCec == NULL) {
         scrSetResult(0);
     } else {
-        scrSetResult(FUN_00262f94()->count);
+        scrSetResult(stockFindSelectedUnit()->count);
     }
     return 1;
 }

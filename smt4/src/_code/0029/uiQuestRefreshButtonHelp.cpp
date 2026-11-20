@@ -4,7 +4,7 @@
 extern "C" {
 
 extern void buttonHelpSetPreset(s32 preset);
-extern void FUN_002b8454(s32 a, s32 b, s32 c, s32 d);
+extern void buttonHelpSetSlot(s32 a, s32 b, s32 c, s32 d);
 extern u8 rosterHasLeader(void);
 extern s32 listCursorGetRowIfUnblocked(UiQuestCursor *cursor);
 extern s32 resourceRunOperationIfUnblocked(UiQuestCursor *cursor);
@@ -53,19 +53,19 @@ void uiQuestRefreshButtonHelp(void)
         }
     }
     if (panel->confirming != 0) {
-        FUN_002b8454(5, 1, 0x32, 1);
-        FUN_002b8454(2, 0x12, 0, 1);
+        buttonHelpSetSlot(5, 1, 0x32, 1);
+        buttonHelpSetSlot(2, 0x12, 0, 1);
     }
     current = menu->list[resourceRunOperationIfUnblocked(&menu->cursor) + listCursorGetRowIfUnblocked(&menu->cursor)];
     if (rosterGetLeaderId() == current) {
-        FUN_002b8454(5, 1, 0x33, 1);
+        buttonHelpSetSlot(5, 1, 0x33, 1);
     } else if (panel->confirming == 0) {
-        FUN_002b8454(5, 1, 0x31, 1);
+        buttonHelpSetSlot(5, 1, 0x31, 1);
     }
     if (rosterHasLeader() == 0) {
-        FUN_002b8454(2, 0x12, 0, 1);
+        buttonHelpSetSlot(2, 0x12, 0, 1);
     } else {
-        FUN_002b8454(2, 4, 0x33, 1);
+        buttonHelpSetSlot(2, 4, 0x33, 1);
     }
 }
 

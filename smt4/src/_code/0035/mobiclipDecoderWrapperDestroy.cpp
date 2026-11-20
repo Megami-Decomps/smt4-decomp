@@ -3,7 +3,7 @@
 extern "C" {
 
 int mwmomobiclipDecoderRelease(u32 decoder);
-extern u8 DAT_00420ad0;
+extern u8 g_mobiclipDecoderWrapperVtable;
 
 typedef struct Wrapper {
     /* 0x0 */ const void *vtbl;
@@ -13,7 +13,7 @@ typedef struct Wrapper {
 /* Destructor-style: installs the vtable and releases the decoder. */
 Wrapper *mobiclipDecoderWrapperDestroy(Wrapper *wrapper)
 {
-    wrapper->vtbl = &DAT_00420ad0;
+    wrapper->vtbl = &g_mobiclipDecoderWrapperVtable;
     mwmomobiclipDecoderRelease(wrapper->decoder);
     return wrapper;
 }

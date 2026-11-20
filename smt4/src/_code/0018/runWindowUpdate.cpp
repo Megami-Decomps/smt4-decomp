@@ -3,7 +3,7 @@
 
 extern "C" {
 extern RunWinWork *g_runWin;
-s32 FUN_002c1d5c(void);
+s32 eventIsSkipping(void);
 
 /* Advance the run-command window until its animation or input completes it. */
 s32 runWindowUpdate(void *)
@@ -33,7 +33,7 @@ s32 runWindowUpdate(void *)
         break;
     }
     ++work->counter;
-    if (FUN_002c1d5c() != 0) {
+    if (eventIsSkipping() != 0) {
         work->active = 0;
         work->state = 4;
     }

@@ -8,6 +8,6 @@ void FUN_002009c4(s16 value);
 
 void FUN_0020349c(u16 value);
 
-u32 FUN_00203d74(void);
+u32 inputFastForwardActive(void);
 
 } /* extern "C" */

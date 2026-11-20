@@ -17,16 +17,16 @@ struct ModeDataSourceLocalView {
 };
 
 extern "C" {
-extern const ModeDataSourceLocalView DAT_0053d500;
+extern const ModeDataSourceLocalView g_gpuCommandTemplates;
 void gpuSubmitCommandBlock(void* data, u32 byteCount);
 }
 
 // Copy the three mode-specific data blocks and submit the selected block.
 extern "C" void dataSubmitSelectedPresetBlock(s32 mode)
 {
-    ModeData32LocalView modeZeroData = DAT_0053d500.unk10;
-    ModeData32LocalView modeOneData = DAT_0053d500.unk30;
-    ModeData40LocalView modeTwoData = DAT_0053d500.unk50;
+    ModeData32LocalView modeZeroData = g_gpuCommandTemplates.unk10;
+    ModeData32LocalView modeOneData = g_gpuCommandTemplates.unk30;
+    ModeData40LocalView modeTwoData = g_gpuCommandTemplates.unk50;
 
     if (mode == 0) {
         gpuSubmitCommandBlock(&modeZeroData, sizeof(modeZeroData));

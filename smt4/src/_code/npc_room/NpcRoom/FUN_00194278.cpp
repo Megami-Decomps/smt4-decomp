@@ -245,7 +245,7 @@ s32 FUN_00194278(void)
             if (room->eventCount > 1 && !(room->eventCount == 2 && room->displayCount == 1)) {
                 npcRoomSetState(1);
                 buttonHelpSetContext(0xA0);
-                FUN_00290d5c(0xA0);
+                buttonHelpWorkSetPreset(0xA0);
             } else {
                 slotSetRequest(0, 10, 0xFF);
                 npcRoomSetState(6);

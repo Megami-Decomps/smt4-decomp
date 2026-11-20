@@ -10,7 +10,7 @@ s32 FUN_002897e0(void);
 void FUN_002897d0(s32 enabled);
 s32 FUN_002897c0(void);
 void FUN_002897b0(s32 enabled);
-s32 FUN_002c1d5c(void);
+s32 eventIsSkipping(void);
 void titleSetSlotValueState2(s32 channel, s32 mode);
 
 void messageSlotSet(s32 slot);
@@ -29,7 +29,7 @@ u32 mapMainPollScript(void)
             FUN_002897b0(0);
             FUN_002897d0(0);
         }
-        if (FUN_002897e0() && !FUN_002c1d5c()) {
+        if (FUN_002897e0() && !eventIsSkipping()) {
             titleSetSlotValueState2(0, 5);
             titleSetSlotValueState2(1, 5);
             FUN_002897d0(0);

@@ -3,8 +3,8 @@
 extern "C" {
 
 extern const u8 DAT_0055a8a4[];  /* vtable */
-u8 *FUN_002ea00c(u8 *member);
-void FUN_002ecac4(u8 *member);
+u8 *destroyObj005585a4(u8 *member);
+void deletingDtor_002ecac4(u8 *member);
 
 typedef struct Object55a8a4 {
     /* 0x00 */ const void *vtbl;
@@ -18,8 +18,8 @@ void destroyObj0055a8a4(Object55a8a4 *self)
     u8 *member;
 
     self->vtbl = DAT_0055a8a4;
-    member = FUN_002ea00c(self->member70);
-    FUN_002ecac4(member - 0x70);
+    member = destroyObj005585a4(self->member70);
+    deletingDtor_002ecac4(member - 0x70);
 }
 
 } /* extern "C" */

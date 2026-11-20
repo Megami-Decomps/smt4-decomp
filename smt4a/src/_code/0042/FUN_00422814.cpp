@@ -3,7 +3,7 @@
 #include "shard/W6_W6Match8_LightUniforms.h"
 
 extern "C" {
-extern LockedResourcePool DAT_005880d0;
+extern LockedResourcePool g_soundVoicePool;
 extern u32 g_soundVoiceCriticalSection;
 void nn_os_CriticalSection_Enter(void *);
 void nn_os_CriticalSection_Leave(void *);
@@ -11,21 +11,21 @@ void nn_os_CriticalSection_Leave(void *);
 /* Allocate storage and a protected handle for the first unused pool slot. */
 u32 FUN_00422814(s32 width, s32 height, s32 capacity)
 {
-    for (u32 index = 0; index < DAT_005880d0.count; ++index) {
-        if (DAT_005880d0.slots[index].handle == 0) {
-            DAT_005880d0.slots[index].capacity = capacity;
-            Obj557f00Allocator *allocator = DAT_005880d0.allocator;
-            DAT_005880d0.slots[index].elements = (LockedPoolElement *)
+    for (u32 index = 0; index < g_soundVoicePool.count; ++index) {
+        if (g_soundVoicePool.slots[index].handle == 0) {
+            g_soundVoicePool.slots[index].capacity = capacity;
+            Obj557f00Allocator *allocator = g_soundVoicePool.allocator;
+            g_soundVoicePool.slots[index].elements = (LockedPoolElement *)
                 allocator->vtable->allocate(allocator, capacity * sizeof(LockedPoolElement), 4);
-            if (DAT_005880d0.slots[index].elements == NULL) {
+            if (g_soundVoicePool.slots[index].elements == NULL) {
                 return 0;
             }
             nn_os_CriticalSection_Enter(&g_soundVoiceCriticalSection);
-            DAT_005880d0.slots[index].handle = FUN_001af874(0x80, 0, 0);
+            g_soundVoicePool.slots[index].handle = FUN_001af874(0x80, 0, 0);
             nn_os_CriticalSection_Leave(&g_soundVoiceCriticalSection);
-            LockedResourceSlot *slot = &DAT_005880d0.slots[index];
+            LockedResourceSlot *slot = &g_soundVoicePool.slots[index];
             if (slot->handle == 0) {
-                allocator = DAT_005880d0.allocator;
+                allocator = g_soundVoicePool.allocator;
                 allocator->vtable->release(allocator, slot->elements);
                 return 0;
             }

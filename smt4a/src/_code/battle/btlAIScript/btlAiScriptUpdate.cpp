@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_003e688c(void);
+void btlAiScriptStep(void);
 
 extern BtlAiScript *g_btlAiScript;
 
@@ -12,7 +12,7 @@ void btlAiScriptUpdate(u32 job)
 {
     jobGetWork(job);
     if (g_btlAiScript != NULL) {
-        FUN_003e688c();
+        btlAiScriptStep();
     }
 }
 

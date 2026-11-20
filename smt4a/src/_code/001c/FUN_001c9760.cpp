@@ -30,7 +30,7 @@ typedef char ShaderLightObjectOffsets[
     offsetof(ShaderLightObject, positionY) == 0xA8 && offsetof(ShaderLightObject, direction) == 0x17C ? 1 : -1];
 
 extern "C" {
-f32 FUN_001b63b0(f32 phase);
+f32 phaseCosine(f32 phase);
 void nw_gfx_RenderContext_TransformToViewCoordinate(ShaderLightContext *context, f32 *vector,
                                                     const ShaderLightMatrix *matrix);
 }
@@ -67,7 +67,7 @@ extern "C" void FUN_001c9760(ShaderLightContext *context, s32 index, ShaderLight
             last[3] = 0.0f;
             f32 angle = resource->spot[1];
             if (angle > 0.0f && angle < 3.1415927f) {
-                last[1] = FUN_001b63b0(angle * 40.743664f);
+                last[1] = phaseCosine(angle * 40.743664f);
                 direction.w = 1.0f;
             } else if (angle == 0.0f) {
                 last[1] = 1.00001f;

@@ -9,10 +9,10 @@ struct StatusCameraControls {
 
 extern "C" {
 s32 slotIsActive(u32 input);
-void FUN_00254650(StatusCameraControls *controls, u32 action);
+void campOutfitPreviewHandleAction(StatusCameraControls *controls, u32 action);
 s32 padIsButtonPressed(u32 button);
 void statusCameraApply();
-void FUN_00297684(void *camera);
+void lmapPlayerModelDestroy(void *camera);
 }
 
 // Apply directional camera actions and cycle the status camera's mode.
@@ -21,19 +21,19 @@ extern "C" void statusCameraHandleControls(StatusCameraControls *controls)
     if (controls == NULL)
         return;
     if (slotIsActive(14))
-        FUN_00254650(controls, 0);
+        campOutfitPreviewHandleAction(controls, 0);
     if (slotIsActive(15))
-        FUN_00254650(controls, 1);
+        campOutfitPreviewHandleAction(controls, 1);
     if (slotIsActive(13))
-        FUN_00254650(controls, 3);
+        campOutfitPreviewHandleAction(controls, 3);
     if (slotIsActive(12))
-        FUN_00254650(controls, 2);
+        campOutfitPreviewHandleAction(controls, 2);
     if (padIsButtonPressed(2)) {
         ++controls->mode;
         if (controls->mode >= 3)
             controls->mode = 0;
-        FUN_00254650(controls, 4);
+        campOutfitPreviewHandleAction(controls, 4);
     }
     statusCameraApply();
-    FUN_00297684(controls->camera);
+    lmapPlayerModelDestroy(controls->camera);
 }

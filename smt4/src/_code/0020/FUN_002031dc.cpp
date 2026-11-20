@@ -1,7 +1,7 @@
 /* NON_MATCHING: only the final segment's four key loads differ: retail loads start.frame, start.value, end.frame, end.value and converts the frame count first; the build loads both frames first and converts the value change first. */
 #include "gfx/ScalarCurveTransition.h"
 extern "C" {
-f32 FUN_00291620(s32 mode, s32 maximum, u32 divisor);
+f32 effRandomSignedValue(s32 mode, s32 maximum, u32 divisor);
 
 // Skip duplicate-frame keys and prepare the next randomized scalar segment.
 void FUN_002031dc(ScalarCurveTransition *curve, const ScalarCurveTransition *timeline)
@@ -15,7 +15,7 @@ void FUN_002031dc(ScalarCurveTransition *curve, const ScalarCurveTransition *tim
             continue;
         if (curve->keys[current + step].value != 0 &&
             curve->keys[current + step].randomAmplitude > 0) {
-            f32 adjustment = FUN_00291620(2, curve->keys[current + step].randomAmplitude, 1);
+            f32 adjustment = effRandomSignedValue(2, curve->keys[current + step].randomAmplitude, 1);
             curve->keys[curve->currentKey + step].value -= static_cast<s32>(adjustment);
         }
         s32 currentIndex = curve->currentKey;

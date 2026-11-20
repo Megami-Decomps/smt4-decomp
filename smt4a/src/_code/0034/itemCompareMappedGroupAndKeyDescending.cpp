@@ -1,5 +1,5 @@
 #include "quest_center/QuestRecordA.h"
-extern "C" s32 FUN_002f744c(u8);
+extern "C" s32 itemKindToSortGroup(u8);
 
 // Sorts items by descending mapped group, breaking ties by descending record sort key.
 extern "C" s32 itemCompareMappedGroupAndKeyDescending(const u16* leftId, const u16* rightId)
@@ -12,8 +12,8 @@ extern "C" s32 itemCompareMappedGroupAndKeyDescending(const u16* leftId, const u
     if (right == NULL) {
         return 0;
     }
-    s32 rightGroup = FUN_002f744c(right->kind);
-    s32 leftGroup = FUN_002f744c(left->kind);
+    s32 rightGroup = itemKindToSortGroup(right->kind);
+    s32 leftGroup = itemKindToSortGroup(left->kind);
     s32 result = rightGroup - leftGroup;
     if (result != 0) {
         return result;

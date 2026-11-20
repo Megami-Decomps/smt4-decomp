@@ -92,7 +92,7 @@ typedef struct StatusDownStateA {
     };
     union {
         /* 0x05BC */ u16 selected[8];
-        /* 0x05BC */ u32 selectedWords[4];  /* how FUN_0035da20 clears them */
+        /* 0x05BC */ u32 selectedWords[4];  /* how statusDownSetSelectedIds clears them */
     };
     /* 0x05CC */ s16 pending[8];
     union {

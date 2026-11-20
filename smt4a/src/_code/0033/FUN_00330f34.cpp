@@ -1,9 +1,9 @@
 #include "common.h"
 
-extern "C" s32 FUN_004d0584(void);
+extern "C" s32 inputConfirmPressed(void);
 
-/* Script command: true when FUN_004d0584 reports anything. */
+/* Script command: true when inputConfirmPressed reports anything. */
 extern "C" s32 FUN_00330f34(void)
 {
-    return FUN_004d0584() != 0;
+    return inputConfirmPressed() != 0;
 }

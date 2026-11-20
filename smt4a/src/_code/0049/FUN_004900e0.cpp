@@ -57,7 +57,7 @@ struct MapMarkerScreen {
 extern "C" {
 
 f32 *sub68OwnerGetBlock60(void *scene);
-s32 FUN_002e707c(void);
+s32 lmapDestinationHasAvailableRecord(void);
 s32 dataTableHasMatchingEntry35(u32 reference);
 
 /* Updates one marker list; `half` selects the half-size layout. */
@@ -66,9 +66,9 @@ static __inline void markerListRefresh(MapMarker *list, s32 count, MapMarkerScre
 {
     for (s32 i = 0; i < count; i++) {
         MapMarker *marker = &list[i];
-        if (FUN_004083a8(marker->kind, marker->type) != 0 && marker->mapId == (s32)*((s8 *)screen + 100)
+        if (interactionVariantIsEnabled(marker->kind, marker->type) != 0 && marker->mapId == (s32)*((s8 *)screen + 100)
             && marker->reference != 0) {
-            if (FUN_002e707c() != 0) {
+            if (lmapDestinationHasAvailableRecord() != 0) {
                 marker->visible = 1;
                 marker->flag = 0;
             } else {

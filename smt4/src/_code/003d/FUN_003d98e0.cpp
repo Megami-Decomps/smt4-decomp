@@ -72,7 +72,7 @@ u32 FUN_003d98e0(EffectOwner *owner, u32 effect, u32 arg, s32 index, u32 indexAr
     u32 *slot = findFreeSlot(owner);
     FUN_003947cc(target, 0, kind, position);
     if (kind == 2 || kind == 5 || kind == 7 || kind == 8 || kind == 9 || kind == 12) {
-        return registerHandle(owner, reinterpret_cast<u32>(FUN_00244e1c(effect, slot, position.x, position.y, position.z, 1.0f, 1, 3)));
+        return registerHandle(owner, reinterpret_cast<u32>(spatialEffectTaskCreate(effect, slot, position.x, position.y, position.z, 1.0f, 1, 3)));
     }
     f32 scale = 5.6f;
     if (kind == 11) {
@@ -84,7 +84,7 @@ u32 FUN_003d98e0(EffectOwner *owner, u32 effect, u32 arg, s32 index, u32 indexAr
         FUN_001c2b48(effect);
         owner->flags |= 4;
     }
-    return registerHandle(owner, reinterpret_cast<u32>(FUN_00244e1c(effect, slot, position.x, position.y, position.z, scale, 0, 0)));
+    return registerHandle(owner, reinterpret_cast<u32>(spatialEffectTaskCreate(effect, slot, position.x, position.y, position.z, scale, 0, 0)));
 }
 
 } /* extern "C" */

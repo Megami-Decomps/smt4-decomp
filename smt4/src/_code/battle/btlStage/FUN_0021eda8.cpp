@@ -25,15 +25,15 @@ extern BtlStageGlobals g_btlStage;
 
 s32 jobIsValid(u32 job);
 void jobStop(u32 job, s32 arg);
-void FUN_002c3f5c(AddressSpaceRegion *region);
-s32 FUN_002c40f8(s32 *index, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
+void addressSpaceRegionFree(AddressSpaceRegion *region);
+s32 svcWaitSynchronizationN(s32 *index, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
 void FUN_002759bc(void);
 void mdlHandleArrayDestroy(BattleStageModel *stage);
 }
 
 inline StackRegion::~StackRegion()
 {
-    FUN_002c3f5c(this);
+    addressSpaceRegionFree(this);
 }
 
 inline void StackRegion::operator delete(void *block)
@@ -46,7 +46,7 @@ static __inline void stageStopThread(BattleStageModel *stage)
 {
     s32 signaled;
     u32 handles[1] = { stage->thread.handle };
-    s32 result = FUN_002c40f8(&signaled, handles, 1, 0, -1);
+    s32 result = svcWaitSynchronizationN(&signaled, handles, 1, 0, -1);
     bool failed = nnResultIsFailure(result);
     if (failed) {
         resultHandleFailure(result, failed);
@@ -67,7 +67,7 @@ extern "C" void FUN_0021eda8(u32 handle)
     if (stage != NULL) {
         stageStopThread(stage);
         if (stage->stackRegion != NULL) {
-            FUN_002c3f5c(stage->stackRegion);
+            addressSpaceRegionFree(stage->stackRegion);
             delete static_cast<StackRegion *>(stage->stackRegion);
             stage->stackRegion = NULL;
         }

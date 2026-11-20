@@ -15,7 +15,7 @@ void rt_memcpy(void *destination, const void *source, u32 size);
 u32 popupTryStartActionLabelPrompt(s32 action, s32 count)
 {
     char format[72]; /* the message, copied so the label can be substituted into it */
-    FUN_00152f44();
+    messageVoiceFlagsGet();
     PopupStateA *work = g_popupState;
     if (work->state != 0)
         return 0;

@@ -6,7 +6,7 @@
 
 extern "C" {
 
-extern LmapViewHolder DAT_004474f0; /* the camera module's globals; the word after is g_mapCamera */
+extern LmapViewHolder g_lmapViewHolder; /* the camera module's globals; the word after is g_mapCamera */
 extern LmapView *g_mapCamera;        /* 0x4474f4 */
 
 }

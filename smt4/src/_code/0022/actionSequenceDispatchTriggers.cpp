@@ -7,7 +7,7 @@ void actionCreateKindFive(s32, s32, s32);
 void FUN_0023c700(ActionController *, s32, s32, s32, s32, s32, f32, f32);
 u32 FUN_0023f27c(s32, u32, u32, u32, void *, s32, s32, s32, s32);
 void btlReflectSetValuePair(s32, s32, s32, s32, s32);
-void FUN_00226a90(ActionController *, s16, s32);
+void actionSequenceTriggerRangeAnimation(ActionController *, s16, s32);
 
 // Dispatch sequence actions when the animation reaches their trigger frames.
 void actionSequenceDispatchTriggers(ActionController *controller)
@@ -33,7 +33,7 @@ void actionSequenceDispatchTriggers(ActionController *controller)
             FUN_0023f27c(0, 0, events->entries[1].action, 9, controller->actor, events->entries[1].argument, 0, 0, -1);
         if (events->extraFrame == frame)
             btlReflectSetValuePair(0, 0, events->extraAction, 0, 0);
-        FUN_00226a90(controller, (s16)frame, 3);
+        actionSequenceTriggerRangeAnimation(controller, (s16)frame, 3);
     }
     if (gaugePairIsWithinLimits(controller->animation))
         controller->state = 13;

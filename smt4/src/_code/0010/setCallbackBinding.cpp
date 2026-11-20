@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern CallbackBinding DAT_00465108;
+extern CallbackBinding g_startMenuPostHook;
 
 /* Installs a callback and its context. */
 void setCallbackBinding(CallbackBinding binding)
 {
-    DAT_00465108 = binding;
+    g_startMenuPostHook = binding;
 }
 
 } /* extern "C" */

@@ -74,7 +74,7 @@ extern unsigned int DAT_004efd98; /* 0x4efd98 */
 extern unsigned int dataTableLookupValue0103(unsigned int);
 /* Supplied declaration required: matrixTranslateColumn. */
 /* Supplied declaration required: FUN_002929d8. */
-extern int FUN_002b8660(void);
+extern int resultIsIdle(void);
 extern int FUN_002b8694(void);
 extern int lmapMainIsRunning(void);
 extern int aocJobIsValid(void);
@@ -161,7 +161,7 @@ void FUN_0033e8a8(int param_1)
   temp_v3 = aocJobIsValid();
   if (((((temp_v3 != 0) || (temp_v3 = lmapMainIsRunning(), temp_v3 != 0)) ||
        (temp_v3 = mapMainIsBusy(), temp_v3 != 0)) || (temp_v3 = questCenterPollShutdown(), temp_v3 != 0)) &&
-     ((temp_v3 = FUN_002b8694(), temp_v3 == 0 && (temp_v3 = FUN_002b8660(), temp_v3 != 0)))) {
+     ((temp_v3 = FUN_002b8694(), temp_v3 == 0 && (temp_v3 = resultIsIdle(), temp_v3 != 0)))) {
     temp_v20 = romwright_piece_4_4((int)(temp_v20 >> 0x20),0x3fc00000);
   }
   temp_v8 = 0;

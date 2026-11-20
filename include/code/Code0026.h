@@ -6,7 +6,7 @@ extern "C" {
 
 int saveGetSelectedRecordSlot(int index);
 
-s32 FUN_002621b4(u32 user, s32 target, u32 id, s32 *result);
+s32 skillApplyToTarget(u32 user, s32 target, u32 id, s32 *result);
 
 void *FUN_00267144(u32 index);
 

@@ -43,7 +43,7 @@ void lightOwnerRegister(u32 model, s32 arg);
 void FUN_00341340(MikadoScene* scene, const char* name);
 void FUN_002a09b4(const char* name, s32 arg);
 void FUN_002a04f0(s32 arg);
-u32* FUN_002a86a4(u32 node);
+u32* cameraGetProviderEntryPayload(u32 node);
 s32 FUN_00100c4c(const char* name, const char* prefix);
 void nodeSetTranslation(u32 node, s32 index, Vec3* translation);
 
@@ -77,7 +77,7 @@ void FUN_00234f5c(MikadoScene* scene, const char* name, const char* override)
     scene->cameraPos.x = camera[0x58 / 4];
     scene->cameraPos.y = camera[0x68 / 4];
     scene->cameraPos.z = camera[0x78 / 4];
-    u32* target = FUN_002a86a4(scene->cameraBlock);
+    u32* target = cameraGetProviderEntryPayload(scene->cameraBlock);
     scene->cameraTarget.x = target[0];
     scene->cameraTarget.y = target[1];
     scene->cameraTarget.z = target[2];

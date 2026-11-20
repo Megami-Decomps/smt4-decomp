@@ -26,11 +26,11 @@ union VolumeScale {
 typedef char AudioVolumeStateLayoutCheck[sizeof(AudioVolumeHandle) == 4 &&
     offsetof(AudioVolumeState, handles) == 0x8BC && offsetof(AudioVolumeState, volume) == 0xA89 ? 1 : -1];
 extern "C" {
-extern __weak AudioVolumeState DAT_0063ea3c;
+extern __weak AudioVolumeState g_nwSound3DManager;
 
 void soundApplyVolumeToSlots(u32 volume)
 {
-    AudioVolumeState* system = &DAT_0063ea3c;
+    AudioVolumeState* system = &g_nwSound3DManager;
     if (system == NULL) {
         return;
     }

@@ -20,7 +20,7 @@ void rt_aeabi_memclr(void *dest, u32 size);
 void FUN_0029e774(void);
 void FUN_0028a368(int reset);
 void partyPanelReset(void);
-void FUN_002579bc(s32 mode);
+void partyPanelSetDisabledMode(s32 mode);
 void characterInfoPanelPopulate(u32 panel, const CecProcessSlot *record, void *messages);
 void FUN_003111e8(int flag);
 s32 uiDrawRecordNameLabels(u32 labels, const CecProcessSlot *record);
@@ -97,7 +97,7 @@ s32 campCecEditMessageState(CampCecEdit *edit)
             FUN_0029e774();
             FUN_0028a368(1);
             partyPanelReset();
-            FUN_002579bc(1);
+            partyPanelSetDisabledMode(1);
             edit->message = -1;
             edit->nextMessage = -1;
             result = 2;
@@ -123,7 +123,7 @@ s32 campCecEditMessageState(CampCecEdit *edit)
         if (scrRunOpcodesStub(edit->resource) != 2) {
             break;
         }
-        FUN_002579bc(1);
+        partyPanelSetDisabledMode(1);
         edit->nextState = 3;
         partyPanelReset();
         FUN_003111e8(1);
@@ -163,7 +163,7 @@ s32 campCecEditMessageState(CampCecEdit *edit)
         case 1:
             edit->message = -1;
             edit->nextMessage = -1;
-            FUN_002579bc(1);
+            partyPanelSetDisabledMode(1);
             partyPanelReset();
             FUN_003111e8(1);
             edit->nextState = 3;
@@ -208,7 +208,7 @@ s32 campCecEditMessageState(CampCecEdit *edit)
             edit->unk98 = 0;
             edit->unk9C = 0;
             buttonHelpSetPreset(0xbd);
-            FUN_00295214(0);
+            buttonHelpSetTextVisible(0);
             result = 2;
             break;
         case 1:

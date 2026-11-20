@@ -23,8 +23,8 @@ typedef struct BtlScene {
 
 void FUN_003be7d0(BtlEntry *entry);
 void FUN_00336b98(BtlMainState *state, s32 partnerId);
-s32 FUN_00293230(BtlMainState *state);
-void FUN_00250680(s32 messageId, BtlScene *scene, BtlActionRecord *action, s32 arg);
+s32 btlScriptUnitIsIncapacitated(BtlMainState *state);
+void btlQueueReflectEntryAction(s32 messageId, BtlScene *scene, BtlActionRecord *action, s32 arg);
 
 /* Shows the action message of a listed combatant that is still in the battle. */
 void btlShowListedActionMessage(BtlContext *context, BtlScene *scene, s32 id, u32 unused, s32 baseMessageId)
@@ -43,10 +43,10 @@ void btlShowListedActionMessage(BtlContext *context, BtlScene *scene, s32 id, u3
             FUN_00336b98(context->state, (s16)partner->id); /* retail sign-extends the id here */
         }
     }
-    if (FUN_00293230(context->state)) {
+    if (btlScriptUnitIsIncapacitated(context->state)) {
         messageId = baseMessageId + 15;
     }
-    FUN_00250680(messageId, scene, &context->state->actions[id], 0);
+    btlQueueReflectEntryAction(messageId, scene, &context->state->actions[id], 0);
 }
 
 } /* extern "C" */

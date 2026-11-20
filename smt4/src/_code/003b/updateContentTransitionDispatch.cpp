@@ -21,9 +21,9 @@ void slotSetRequest(s32, s32, u32);
 void messageMainFinishWindow();
 u32 FUN_0022b8c0(void *);
 void FUN_003b875c(ContentTransition *);
-void FUN_0022b778(ContentTransition *);
+void transformInterpolationStep(ContentTransition *);
 void uiClampScrollOffset(ContentTransition *, void *);
-void FUN_00341a3c(u32);
+void moverStepOneFrame(u32);
 
 /* True when any of the move/step request flags is set. */
 static __inline bool transitionHasPendingMove(u32 flags)
@@ -117,9 +117,9 @@ void updateContentTransitionDispatch(ContentTransitionUpdate *update)
             FUN_003b875c(&update->scene);
         }
     }
-    FUN_0022b778(&update->scene);
+    transformInterpolationStep(&update->scene);
     uiClampScrollOffset(&update->scene, update->input);
     if (update->processActive)
-        FUN_00341a3c(update->process);
+        moverStepOneFrame(update->process);
 }
 }

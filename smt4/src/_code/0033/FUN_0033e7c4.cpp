@@ -37,7 +37,7 @@ struct WorldData {
 
 extern "C" {
 extern const char DAT_003ff7e4[];
-s32 FUN_0023e3a4(void *aoc, s32 id, s32 kind);
+s32 aocPackageHasTextureContent(void *aoc, s32 id, s32 kind);
 void *aocLoadWorldDataFile(AocSystem *aoc, s32 id, const char *path);
 void *asdLoadFileSyncDefault(const char *path);
 
@@ -50,7 +50,7 @@ void FUN_0033e7c4(WorldData *world, s32 id)
     world->kind = 12;
     world->index = id - 1;
     void *file;
-    if (FUN_0023e3a4(g_aocSystem, id, 1) != 0) {
+    if (aocPackageHasTextureContent(g_aocSystem, id, 1) != 0) {
         file = aocLoadWorldDataFile(g_aocSystem, id, path);
     } else {
         file = asdLoadFileSyncDefault(path);

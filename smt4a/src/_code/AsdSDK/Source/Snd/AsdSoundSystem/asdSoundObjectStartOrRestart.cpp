@@ -5,7 +5,7 @@
 
 extern "C" {
 extern CriticalSection DAT_0063f4f0;
-void FUN_001b6390(u32, f32);
+void soundVoiceSetVolume(u32, f32);
 void nn_snd_CTR_Voice_SetState(u32, u32);
 void nn_snd_CTR_FreeVoice(u32);
 void nn_snd_CTR_Voice_SetMixParam(u32, const void *);
@@ -24,7 +24,7 @@ void asdSoundObjectStartOrRestart(AsdSndObject *sound, s32 frames, f32 volume, f
             sound->volume = volume;
             sound->fadeElapsed = 0;
             for (s32 i = 0; i < sound->voiceCount; ++i) {
-                FUN_001b6390(sound->voices[i], sound->fadeFrames > 0 ? 0.0f : sound->volume);
+                soundVoiceSetVolume(sound->voices[i], sound->fadeFrames > 0 ? 0.0f : sound->volume);
                 nn_snd_CTR_Voice_SetState(sound->voices[i], 0);
             }
             sound->flags |= 0x40;

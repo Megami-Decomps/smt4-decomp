@@ -3,11 +3,11 @@
 
 extern "C" {
 
-extern u8 DAT_004efca0;
+extern u8 g_rtLocale;
 
 u8 *rt_locale(void)
 {
-    return &DAT_004efca0;
+    return &g_rtLocale;
 }
 
 } /* extern "C" */

@@ -9,7 +9,7 @@
 
 struct BtlSkill;
 extern "C" {
-extern void *DAT_00435d18;
+extern void *g_btlAux;
 extern const char DAT_00400468[]; // battle/army_summon/army_summon.bccam
 void FUN_003d6fd4(BtlCamera *battle, const char *path);
 s32 cameraCreateFromStateResource(BtlCamera *battle);
@@ -40,13 +40,13 @@ u32 FUN_003d1c1c(ActionStateChannelOwner **owner, ActionKindSelection *work)
     case 1:
         if (!cameraCreateFromStateResource(g_btlMain))
             return 0;
-        FUN_003dba3c(DAT_00435d18);
+        FUN_003dba3c(g_btlAux);
         work->sequence.phase = 2;
         break;
     case 2:
-        if (!btlAuxAreResourcesReady(DAT_00435d18))
+        if (!btlAuxAreResourcesReady(g_btlAux))
             return 0;
-        nameEntriesRegisterVerNamesThenContinue(DAT_00435d18);
+        nameEntriesRegisterVerNamesThenContinue(g_btlAux);
         FUN_00339eec(*owner);
         work->sequence.phase = 3;
         break;

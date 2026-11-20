@@ -4,12 +4,12 @@
 extern "C" {
 
 void eventCommandDispatchPendingCleanup(void);
-void FUN_003d9e88(void);
+void btlEffectBeginEncounterFade(void);
 s32 recordAreAllCountsNonpositive(void *object);
 s32 nodeListCountActiveById(s32 value, s32 arg);
 
 extern s32 g_btlActionReflect;
-extern void *DAT_00435d18;
+extern void *g_btlAux;
 
 u32 btlEncountTryFinish(void)
 {
@@ -20,11 +20,11 @@ u32 btlEncountTryFinish(void)
     if (result > 0) {
         done = 0;
     } else {
-        result = recordAreAllCountsNonpositive(DAT_00435d18);
+        result = recordAreAllCountsNonpositive(g_btlAux);
         done = result;
         if (result != 0) {
-            if (DAT_00435d18 != NULL) {
-                FUN_003d9e88();
+            if (g_btlAux != NULL) {
+                btlEffectBeginEncounterFade();
             }
             g_btlMain->flags &= ~0x4000;
             eventCommandDispatchPendingCleanup();

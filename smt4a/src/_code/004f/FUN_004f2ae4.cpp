@@ -10,7 +10,7 @@ static __inline void interpolateVector(W5Match8Vec3 &value, const W5Match8Vec3 &
     value.z = start.z + difference.z * progress;
 }
 
-extern "C" f32 FUN_003d4dd4(u32 mode, u32 duration, u32 frame);
+extern "C" f32 easeEvaluate(u32 mode, u32 duration, u32 frame);
 
 /* Advance the camera's vector and scalar transition channels together. */
 extern "C" void FUN_004f2ae4(W5Match8CameraTransition *camera, u32 frame)
@@ -46,7 +46,7 @@ extern "C" void FUN_004f2ae4(W5Match8CameraTransition *camera, u32 frame)
         offsetof(ChannelView, channels.position) == 0x854 &&
         offsetof(ChannelView, channels.target) == 0x884 && sizeof(ChannelView) == 0x8a8 ? 1 : -1];
     ChannelView *view = reinterpret_cast<ChannelView *>(camera);
-    f32 progress = FUN_003d4dd4(0, view->duration, frame);
+    f32 progress = easeEvaluate(0, view->duration, frame);
     Channels *channels = &view->channels;
     channels->position.update(progress);
     channels->target.update(progress);

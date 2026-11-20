@@ -9,7 +9,7 @@ typedef struct JobBlock {
 
 extern s32 scrGetArg(s32 index);
 extern void asdMemFree(void *ptr);
-extern s32 FUN_00162ea4(void);
+extern s32 eventIsSkipping(void);
 extern void handleSetReset(HandleSet *set);
 
 /* Script command: frees the job block when it is empty (returns 1), else releases its handle set once ready. */
@@ -25,7 +25,7 @@ u32 scrCommReleaseJobBlock(void)
             asdMemFree(block);
             return 1;
         }
-        if (FUN_00162ea4() != 0) {
+        if (eventIsSkipping() != 0) {
             handleSetReset(block->set);
         }
         result = 0;

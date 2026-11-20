@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_0022838c(void);
+void gameWorldResetForNewGame(void);
 void clearTwoWords(u8 *settings);
 void sysMemClear(void *block, s32 size);
 
@@ -20,7 +20,7 @@ void configSettingsResetDefaults(void)
     settings[2] = 2;
     settings[3] = 1;
     settings[4] = 1;
-    FUN_0022838c();
+    gameWorldResetForNewGame();
     sysMemClear(g_gameDataBlocks.saveBlock, 0x80);
 }
 

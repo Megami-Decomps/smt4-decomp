@@ -23,7 +23,7 @@ extern "C" {
 
 const char *dataFindKindRecordWithAocOverrides(u32 id, s32 alternate);
 /* Draws formatted text right-aligned in a field of `digits` characters. */
-void FUN_00180310(s32 font, s32 x, s32 y, s32 align, s32 digits, s32 layer, const char *format, ...);
+void statRowDrawValueImpl(s32 font, s32 x, s32 y, s32 align, s32 digits, s32 layer, const char *format, ...);
 void FUN_002027fc(void);
 void FUN_00214dc4(void);
 /* The other pages of the camp's detail area. */
@@ -68,7 +68,7 @@ static void campDrawItemList(s32 item, s32 x, s32 y, s32 selected, f32 alpha)
     }
     for (s32 row = 0; row < 11; row++) {
         if (resourceRunOperationIfUnblocked(reinterpret_cast<Object *>(grid)) + row >=
-            objectApplyIfUnblocked(reinterpret_cast<Object *>(grid))) {
+            gridNavigationGetItemCount(reinterpret_cast<Object *>(grid))) {
             break;
         }
         u16 id = ids[resourceRunOperationIfUnblocked(reinterpret_cast<Object *>(grid)) + row];
@@ -87,9 +87,9 @@ static void campDrawItemList(s32 item, s32 x, s32 y, s32 selected, f32 alpha)
         }
         TextureTableEntryIV *countAt = asdTMTexTableEntryAt(20, 0x473);
         __2sprintf(count, "%d", flagValueRead(id));
-        FUN_00180310(0, line->x + countAt->x + x, line->y + countAt->y + y, 1, 3, 0x6F, count);
+        statRowDrawValueImpl(0, line->x + countAt->x + x, line->y + countAt->y + y, 1, 3, 0x6F, count);
         TextureTableEntryIV *markAt = asdTMTexTableEntryAt(20, 0x474);
-        FUN_00180310(0, markAt->x + line->x + x, line->y + markAt->y + y, 1, 1, 0x6F, "*");
+        statRowDrawValueImpl(0, markAt->x + line->x + x, line->y + markAt->y + y, 1, 1, 0x6F, "*");
         TextureTableEntryIV *iconAt = asdTMTexTableEntryAt(20, 0x46F);
         uiDrawItemCategoryIcon(static_cast<s16>(id), iconAt->x + line->x + x, line->y + iconAt->y + y, 0x6F, 0);
     }
@@ -115,9 +115,9 @@ static void campDrawItemList(s32 item, s32 x, s32 y, s32 selected, f32 alpha)
         }
         TextureTableEntryIV *countAt = asdTMTexTableEntryAt(20, 0x47A);
         __2sprintf(count, "%d", flagValueRead(id));
-        FUN_00180310(0, line->x + countAt->x + x, line->y + countAt->y + y, 1, 3, 0x83, count);
+        statRowDrawValueImpl(0, line->x + countAt->x + x, line->y + countAt->y + y, 1, 3, 0x83, count);
         TextureTableEntryIV *markAt = asdTMTexTableEntryAt(20, 0x47B);
-        FUN_00180310(0, markAt->x + line->x + x, line->y + markAt->y + y, 1, 1, 0x83, "*");
+        statRowDrawValueImpl(0, markAt->x + line->x + x, line->y + markAt->y + y, 1, 1, 0x83, "*");
         texDrawTableEntryAtStoredOrigin(2, 20, 0x475, line->x + x, line->y + y, 0x83);
         TextureTableEntryIV *iconAt = asdTMTexTableEntryAt(20, 0x476);
         uiDrawItemCategoryIcon(static_cast<s16>(id), iconAt->x + line->x + x, line->y + iconAt->y + y, 0x88, 0);

@@ -11,10 +11,10 @@ void taskInitLists();
 void textureCacheReset(u32);
 void FUN_00317a90();
 void FUN_00221ba8();
-void FUN_002c2044(EffectProcess *, u32);
+void cameraMatrixCacheReset(EffectProcess *, u32);
 void FUN_002c159c(EffectProcess *, f32, f32);
-void FUN_002c1edc(EffectProcess *, const f32 *, const f32 *, const f32 *);
-void FUN_002c1e30(EffectProcess *, u32, f32, f32, f32, f32);
+void cameraMatrixCacheSetLookAt(EffectProcess *, const f32 *, const f32 *, const f32 *);
+void stereoCameraSetPerspective(EffectProcess *, u32, f32, f32, f32, f32);
 s32 FUN_0017fbe4(u32 job);
 void effectProcessDestroy(u32 job);
 s32 renderScopedTaskPhaseOne(u32 job);
@@ -48,10 +48,10 @@ u32 effectProcessCreate(u8 keepScene)
     target[1] = 0.0f;
     target[2] = 0.0f;
     work->scene.fieldOfView = 60.0f;
-    FUN_002c2044(work, 1);
+    cameraMatrixCacheReset(work, 1);
     FUN_002c159c(work, 5.0f, 1.0f);
-    FUN_002c1edc(work, eye, target, up);
-    FUN_002c1e30(work, 1, work->scene.fieldOfView, 0.1f, 25600.0f, 1.66666662693f);
+    cameraMatrixCacheSetLookAt(work, eye, target, up);
+    stereoCameraSetPerspective(work, 1, work->scene.fieldOfView, 0.1f, 25600.0f, 1.66666662693f);
     work->scene.process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EffectProc"), 2, 0, 0, FUN_0017fbe4, effectProcessDestroy, reinterpret_cast<u32>(work));
     if (work->keepScene) {
         work->jobB = taskCreateDraw("EffectDrawDown2D", 0x84, 0, 0, renderScopedTaskPhaseOne, NULL, work, work->scene.process);

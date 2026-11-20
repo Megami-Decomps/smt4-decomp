@@ -9,7 +9,7 @@ void FUN_0026493c(LmapMainState *main);
 void FUN_00265180(void);
 void mapUpdateFollowerModels(LmapMainState *main);
 void FUN_00265f50(LmapMainState *main);
-void FUN_002fb7dc(void);
+void lmapRaiseSceneTransition(void);
 
 
 /* Local map step: runs the external or internal update unless the game state suppresses it, then the common updates; finishes with FUN_00265180 unless the map is 100. */
@@ -19,7 +19,7 @@ void lmapMainStep(void)
 
     if (g_gameState.suppressStep == 0) {
         if (main->external != 0) {
-            FUN_002fb7dc();
+            lmapRaiseSceneTransition();
         } else {
             FUN_0026493c(main);
         }

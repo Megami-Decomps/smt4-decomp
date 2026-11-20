@@ -5,8 +5,8 @@
 extern "C" {
 extern void *g_handleRegistry;
 void ptrListRemoveClearOwner(void *registry, u32 handle);
-void FUN_0041e3a0(SaveSlotHeaderWork *work, s32 resetHeader);
-void FUN_0022e774(void);
+void spriteListMenuResetSprites(SaveSlotHeaderWork *work, s32 resetHeader);
+void statusPanelClose(void);
 
 static void releaseRegisteredHandle(RegisteredHandle *&handle)
 {
@@ -24,15 +24,15 @@ void saveLoadUiWaitPopupDismissed(SaveSlotHeaderWork *work)
 {
     switch (work->step) {
     case 0:
-        FUN_0041e3a0(work, 1);
+        spriteListMenuResetSprites(work, 1);
         ++work->step;
         // Fall through to poll for the dismissal.
     case 1:
         saveLoadUiAdvanceSprites(work);
-        if ((objBStateAllowsAction() || FUN_0022e72c()) && work->popupActive) {
+        if ((objBStateAllowsAction() || gameGlobalsStateIsIdle()) && work->popupActive) {
             work->popupActive = 0;
             releaseRegisteredHandle(work->popup);
-            FUN_0022e774();
+            statusPanelClose();
             ++work->step;
         }
         return;

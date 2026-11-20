@@ -5,9 +5,9 @@ struct FileQueue;
 extern "C" {
 u32 libc_strlen(const char *text);
 void _ZN9Obj422224C1Ev(FileQueueRequest *request);
-char *FUN_002ba81c(char *destination, const char *source, u32 capacity);
+char *stringCopyTruncated(char *destination, const char *source, u32 capacity);
 FileQueueRequest *fileQueuePush(FileQueue *queue, const FileQueueRequest *request);
-void FUN_002a2e08(FileQueue *queue);
+void fileWorkerQueueRestartIfIdle(FileQueue *queue);
 void threadSleepDuration(s64 nanoseconds);
 
 // Submit a single- or paired-path request and wait for its queued operation to finish.
@@ -20,26 +20,26 @@ u32 fileQueueRequestAndWait(FileQueue *queue, const char *path, const char *seco
         libc_strlen(secondPath);
         FileQueueRequest request;
         _ZN9Obj422224C1Ev(&request);
-        FUN_002ba81c(reinterpret_cast<char *>(request.path), path, 0x40);
-        FUN_002ba81c(reinterpret_cast<char *>(request.path + 0x40), secondPath, 0x40);
+        stringCopyTruncated(reinterpret_cast<char *>(request.path), path, 0x40);
+        stringCopyTruncated(reinterpret_cast<char *>(request.path + 0x40), secondPath, 0x40);
         request.mode = mode;
         request.bytes = bytes;
         request.context = context;
         request.flags |= 2;
         operation = fileQueuePush(queue, &request);
-        FUN_002a2e08(queue);
+        fileWorkerQueueRestartIfIdle(queue);
         while (operation->operation.state != 3)
             threadSleepDuration(3000000);
     } else {
         libc_strlen(path);
         FileQueueRequest request;
         _ZN9Obj422224C1Ev(&request);
-        FUN_002ba81c(reinterpret_cast<char *>(request.path), path, 0x40);
+        stringCopyTruncated(reinterpret_cast<char *>(request.path), path, 0x40);
         request.mode = mode;
         request.bytes = bytes;
         request.context = 0;
         operation = fileQueuePush(queue, &request);
-        FUN_002a2e08(queue);
+        fileWorkerQueueRestartIfIdle(queue);
         while (operation->operation.state != 3)
             threadSleepDuration(3000000);
     }

@@ -7,7 +7,7 @@ extern "C" {
 
 extern void gridNavigationConfigure(GridNavigation *widget, s32 count, s32 columns, s32 a, s32 b, s32 c);
 extern void scrollListSetSelectionTracked(GridNavigation *widget, s32 index);
-extern void FUN_003d0bc0(s32 id);
+extern void campRebuildListByMode(s32 id);
 extern void objClearFlagPair(GridNavigation *widget);
 
 /* Rebuilds the selector list for a camp page: gathers the ids whose flags are set and selects the player's current one. */
@@ -95,7 +95,7 @@ void campSelectorRebuildList(s32 id)
         }
     }
     gridNavigationConfigure(widget, count, 9, 1, 1, 0);
-    FUN_003d0bc0(id);
+    campRebuildListByMode(id);
     index = 0;
     for (i = 0; i < count + 1; i++) {
         if (list[i] == selected) {

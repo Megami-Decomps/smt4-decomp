@@ -9,7 +9,7 @@ struct SoundSpatialUpdateView {
 };
 extern "C" {
 void controllerSetDestination(void* controller, const AsdSndListener* destination);
-void FUN_00407598(SoundSpatialUpdateView* work);
+void spatialCameraUpdateLookAt(SoundSpatialUpdateView* work);
 
 // Advance the ten-frame position/rotation transition and update the attached controller.
 void spatialAdvanceTransformTransition(SoundSpatialUpdateView* work)
@@ -38,6 +38,6 @@ void spatialAdvanceTransformTransition(SoundSpatialUpdateView* work)
             }
         }
     }
-    FUN_00407598(work);
+    spatialCameraUpdateLookAt(work);
 }
 }

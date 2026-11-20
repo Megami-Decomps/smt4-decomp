@@ -8,7 +8,7 @@
 #include <string.h>
 
 extern "C" {
-extern u32 DAT_005c149c;
+extern u32 g_amAppSession;
 
 s32 ipcServiceRequest04WithBuffer(u8 mode, u64 handle, void *buffer, u32 size)
 {
@@ -19,7 +19,7 @@ s32 ipcServiceRequest04WithBuffer(u8 mode, u64 handle, void *buffer, u32 size)
     memcpy(&command->words[1], &handle, sizeof(handle));
     command->words[5] = (u32)buffer;
     command->words[4] = ipcMappedBufferDescriptor(size * 2, 10);
-    s32 result = nn::svc::SendSyncRequest(DAT_005c149c);
+    s32 result = nn::svc::SendSyncRequest(g_amAppSession);
     if (nnResultIsSuccess(result)) {
         result = command->words[0];
     }

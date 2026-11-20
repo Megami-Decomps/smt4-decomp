@@ -4,7 +4,7 @@
 
 extern "C" {
 s32 jobIsValid(u32 job);
-void FUN_003592dc(u32 job);
+void asdListBoxJobReset(u32 job);
 u32 jobStop(u32 job, u16 arg);
 u32 asdListBoxCreateDefaultFlags(u32 parent, u32 id, u32 argument, u32 flags);
 void asdListBoxAddItems(u32 list, const AsdListBoxEntry *items, s32 count);
@@ -22,7 +22,7 @@ extern BtlAuxA *g_btlAux;
 void btlReserveEditorOpenList(ReserveEditorWork *work, BtlMainStateA *battle)
 {
     if (jobIsValid(work->listBox)) {
-        FUN_003592dc(work->listBox);
+        asdListBoxJobReset(work->listBox);
         jobStop(work->listBox, 0);
     }
     work->listBox = asdListBoxCreateDefaultFlags(battle->uiJobs.menuJob, 0x75, 0, 0);

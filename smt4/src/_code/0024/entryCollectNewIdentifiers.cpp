@@ -3,7 +3,7 @@
 extern "C" {
 
 int __aeabi_memset4(u32 *dst, int size, u32 value);
-int FUN_0030a728(u32 *dst, int max, u32 seed);
+int versionedResourceCollectIds(u32 *dst, int max, u32 seed);
 int aocLoaderUpdateRecords(void *result, void *obj);
 int btlStateResetEntries(void *obj);
 int entryAddUniqueIdentifier(void *obj, int id);
@@ -42,7 +42,7 @@ void entryCollectNewIdentifiers(Result *result, Obj *obj)
     btlStateResetEntries(obj);
     seed = obj->seed;
     __aeabi_memset4(ids, 0xa8, 0xffffffff);
-    count = FUN_0030a728(ids, 0x2a, seed);
+    count = versionedResourceCollectIds(ids, 0x2a, seed);
     added = 0;
     i = 0;
     if (i < count) {

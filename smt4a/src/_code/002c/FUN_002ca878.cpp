@@ -12,10 +12,10 @@ extern "C" {
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 scale);
 f32 jobGetScalarValue(void);
 void efctSetSpeed(f32 speed);
-u32 FUN_00180114(u32 id);
+u32 table01RecordLookupForContent(u32 id);
 void uiDrawItemOrStatusIcon(u32 id, s32 x, s32 y, u32 flags, u32 arg);
 void drawSetColorFromRGBA8(u32 color);
-void FUN_00180310(s32 a, s32 x, s32 y, s32 b, s32 c, u32 flags, const char *text);
+void statRowDrawValueImpl(s32 a, s32 x, s32 y, s32 b, s32 c, u32 flags, const char *text);
 void gxResetColorQuadToWhite(void);
 s32 fontMeasureLineAdvance(const char *text, s32 mode);
 
@@ -36,7 +36,7 @@ void FUN_002ca878(f32 speed, s32 x, s32 y)
     for (s32 i = 0; i < 4; i++)
         texDrawTableEntryAtStoredOrigin(2, BADGE_BANK, 0xC18 + i, baseX, y, BADGE_FLAGS);
 
-    sprintf(label, "%s", FUN_00180114(0x31F));
+    sprintf(label, "%s", table01RecordLookupForContent(0x31F));
     stereo = (s32)renderCtxCalculateStereoParallax(g_renderCtx, BADGE_STEREO_SCALE);
     TextureTableEntryIV *frame = asdTMTexTableEntryAt(BADGE_BANK, 0xC1C);
     s32 frameX = frame->x + x + stereo;
@@ -54,7 +54,7 @@ void FUN_002ca878(f32 speed, s32 x, s32 y)
     sprintf(digits, "%d", 99);
     frame = asdTMTexTableEntryAt(BADGE_BANK, 0xC22);
     drawSetColorFromRGBA8(0xFFFFFFFF);
-    FUN_00180310(0, iconX + frame->x, frame->y + y, 1, 2, 0xCE, digits);
+    statRowDrawValueImpl(0, iconX + frame->x, frame->y + y, 1, 2, 0xCE, digits);
     gxResetColorQuadToWhite();
 
     frame = asdTMTexTableEntryAt(BADGE_BANK, 0xC1F);

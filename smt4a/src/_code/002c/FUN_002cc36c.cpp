@@ -8,7 +8,7 @@
 
 extern "C" {
 
-int FUN_002a1850(unsigned int *, int, unsigned int);
+int cameraProjectToScreen(unsigned int *, int, unsigned int);
 int FUN_00358e94(...);
 int uiStoreTextureEntryCenter(...);
 int FUN_004a9740(int, int, unsigned int);
@@ -31,7 +31,7 @@ extern int g_btlUiBlock; /* 0x57a9c8 */
 /* Supplied declaration required: pairSetSecondResetFirst. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_002a1850. */
+/* Supplied declaration required: cameraProjectToScreen. */
 /* Supplied declaration required: FUN_00358e94. */
 /* Supplied declaration required: uiStoreTextureEntryCenter. */
 extern int btlScriptUnitHasFlags(void);
@@ -214,7 +214,7 @@ LAB_002cc760:
         temp_v11 = temp_v8;
         if (temp_v0 != '\0') {
           temp_v3 = asdCameraGetSavedRenderPairs();
-          FUN_002a1850(&temp_v10,0,temp_v3);
+          cameraProjectToScreen(&temp_v10,0,temp_v3);
         }
         temp_v5 = temp_v5 + temp_v7 * 0xa0;
         *(unsigned char *)(temp_v5 + 0xb64c) = 1;

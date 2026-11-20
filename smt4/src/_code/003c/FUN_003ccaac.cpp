@@ -16,7 +16,7 @@ int FUN_0023c0d0(...);
 int FUN_0023c154(...);
 int FUN_0023c638(...);
 int FUN_002551ac(...);
-int FUN_0027df30(...);
+int btlQueueSkillReflectActions(...);
 int FUN_0027e3e8(...);
 int btlRollPassiveSkill(void);
 int btlEntryGetNormalizedPercent(...);
@@ -114,7 +114,7 @@ typedef struct {
     unsigned int sp180; /* 0x180: local_180 */
 } param_12_stack;
 
-extern int DAT_00435d18; /* 0x435d18 */
+extern int g_btlAux; /* 0x435d18 */
 extern unsigned int g_btlEvent; /* 0x435d48 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
@@ -130,7 +130,7 @@ extern int valueRangeSameSide(int, int);
 /* Supplied declaration required: resolveBattleValue. */
 extern int btlFindEffectValueByNamePrefix(int);
 /* Supplied declaration required: btlEffectFindSlotId. */
-extern int FUN_00227ecc(int, unsigned int);
+extern int btlEffectFindNamedEntry(int, unsigned int);
 /* Supplied declaration required: FUN_00227fac. */
 /* Supplied declaration required: FUN_002280b0. */
 extern int FUN_0022810c(int, unsigned int);
@@ -141,16 +141,16 @@ extern int FUN_00228808(int, unsigned int, unsigned int);
 /* Supplied declaration required: mathScaleThreeHalves. */
 /* Supplied declaration required: FUN_0022899c. */
 /* Supplied declaration required: frameRangeExtend. */
-extern int FUN_00229914(int *, unsigned int *, int);
+extern int btlUnitIsDeadAndUncopied(int *, unsigned int *, int);
 /* Supplied declaration required: FUN_00229a3c. */
 /* Supplied declaration required: btlTargetSetFlag10. */
 /* Supplied declaration required: FUN_0023c0d0. */
 /* Supplied declaration required: FUN_0023c154. */
 /* Supplied declaration required: FUN_0023c638. */
 extern int FUN_0023c684(unsigned int);
-extern int FUN_0023dcfc(void);
+extern int btlQueueParamLimitForKind(void);
 /* Supplied declaration required: btlReflectInitKind9. */
-extern int FUN_00245cc0(void);
+extern int mapCategoryToDestinationGroup(void);
 /* Supplied declaration required: FUN_00246080. */
 /* Supplied declaration required: btlEntryBuildSummary. */
 extern int btlMainFindActiveEntry(int, int);
@@ -158,12 +158,12 @@ extern int btlMainFindActiveEntry(int, int);
 /* Supplied declaration required: btlAdjustPropertyClamped. */
 extern int battleGetEntryHalfword(int, unsigned int);
 /* Supplied declaration required: FUN_002551ac. */
-/* Supplied declaration required: FUN_0027df30. */
+/* Supplied declaration required: btlQueueSkillReflectActions. */
 /* Supplied declaration required: FUN_0027e3e8. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int FUN_0028299c(int);
 /* Supplied declaration required: passiveSkillLookupRecord. */
-extern int FUN_00293230(int);
+extern int btlScriptUnitIsIncapacitated(int);
 /* Supplied declaration required: skillDataFindById. */
 extern int btlGetApplicableAilmentMask(unsigned int, unsigned int, int, int, unsigned int);
 /* Supplied declaration required: FUN_003bcda0. */
@@ -410,7 +410,7 @@ void FUN_003ccaac(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
        ((*(unsigned int *)(*(int *)(*param_1 + 0x1fc0) +
                   *(short *)(*(int *)(*param_1 + 0x1e98) + param_8 * 0x114 + 0x60) * 0x288) & 0x40)
         != 0)) && (param_9 = 0, temp_v70 == 1)) && (temp_v40 < 0x6d)) {
-    temp_v7 = FUN_002281a4(DAT_00435d18);
+    temp_v7 = FUN_002281a4(g_btlAux);
     temp_v5 = temp_v40;
     if (temp_v7 >= 0) {
       if ((*(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v40 * 0x114 + 0x50) & 0x400) == 0) {
@@ -419,12 +419,12 @@ void FUN_003ccaac(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
       else {
         temp_v26 = 0;
       }
-      temp_v7 = FUN_0028299c(DAT_00435d18);
-      temp_v8 = FUN_002281a4(DAT_00435d18);
+      temp_v7 = FUN_0028299c(g_btlAux);
+      temp_v8 = FUN_002281a4(g_btlAux);
       btlReflectInitKind9(temp_v8 + temp_v7 * param_11,param_2,*(int *)(*param_1 + 0x1e98) + temp_v5 * 0x114,0,
                    temp_v26);
       if (temp_v57 != 0) {
-        temp_v5 = FUN_002281a4(DAT_00435d18);
+        temp_v5 = FUN_002281a4(g_btlAux);
         FUN_00229a3c(temp_v5 + temp_v7 * param_11,param_2,0,0x23,1);
       }
     }
@@ -570,14 +570,14 @@ LAB_003cd124:
     }
     if (!(temp_v70 == 1 || temp_v70 == 2)) {
       if ((temp_v70 == 3) && (temp_v40 < 0x6d)) {
-        temp_v8 = FUN_0022810c(DAT_00435d18,1);
-        temp_v7 = FUN_0028299c(DAT_00435d18);
+        temp_v8 = FUN_0022810c(g_btlAux,1);
+        temp_v7 = FUN_0028299c(g_btlAux);
         temp_v7 = temp_v7 * (param_11 + temp_v35);
         btlAdjustPropertyClamped(temp_v40,1,1,0);
         temp_v5 = 4;
         temp_v7 = temp_v7 + temp_v8;
         FUN_00246080(temp_v7,0,param_2,*(int *)(*param_1 + 0x1e98) + temp_v63 * 4,4);
-        temp_v8 = FUN_00293230(*param_1);
+        temp_v8 = btlScriptUnitIsIncapacitated(*param_1);
         if (temp_v8 != 0) {
           temp_v25 = 0x10001ea;
           temp_v5 = 1;
@@ -586,7 +586,7 @@ LAB_003cd124:
       }
     }
     else if (temp_v40 < 0x6d) {
-      temp_v7 = FUN_002281a4(DAT_00435d18);
+      temp_v7 = FUN_002281a4(g_btlAux);
       if (temp_v7 >= 0) {
         if ((*(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v64) & 0x400) == 0) {
           temp_v5 = 2;
@@ -594,12 +594,12 @@ LAB_003cd124:
         else {
           temp_v5 = 0;
         }
-        temp_v7 = FUN_0028299c(DAT_00435d18);
+        temp_v7 = FUN_0028299c(g_btlAux);
         temp_v7 = temp_v7 * (param_11 + temp_v35);
-        temp_v8 = FUN_002281a4(DAT_00435d18);
+        temp_v8 = FUN_002281a4(g_btlAux);
         btlReflectInitKind9(temp_v8 + temp_v7,param_2,*(int *)(*param_1 + 0x1e98) + temp_v63 * 4);
         if ((temp_v70 == 1) && (temp_v57 != 0)) {
-          temp_v8 = FUN_002281a4(DAT_00435d18);
+          temp_v8 = FUN_002281a4(g_btlAux);
           temp_v5 = 1;
           FUN_00229a3c(temp_v8 + temp_v7,param_2,0,0x23,1);
         }
@@ -618,14 +618,14 @@ LAB_003cd124:
       }
     }
     if ((temp_v56 != 0) && (temp_v40 < 0x6d)) {
-      temp_v8 = FUN_0022810c(DAT_00435d18,1);
-      temp_v7 = FUN_0028299c(DAT_00435d18);
+      temp_v8 = FUN_0022810c(g_btlAux,1);
+      temp_v7 = FUN_0028299c(g_btlAux);
       temp_v14 = param_11 + temp_v35;
       btlAdjustPropertyClamped(param_8,1,1,0);
       temp_v5 = 4;
       temp_v8 = temp_v8 + temp_v7 * temp_v14;
       FUN_00246080(temp_v8,0,param_2,*(int *)(*param_1 + 0x1e98) + temp_v43 * 4,4);
-      temp_v7 = FUN_00293230(*param_1);
+      temp_v7 = btlScriptUnitIsIncapacitated(*param_1);
       if (temp_v7 != 0) {
         temp_v5 = 1;
         btlQueueKeyedScalarReflectAction(temp_v8,0,0x10001ea,0,1,0,0);
@@ -655,17 +655,17 @@ LAB_003cd76c:
       if (temp_v70 == 0 && temp_v6 == 0) {
         temp_v50 = 1;
       }
-      temp_v7 = FUN_0028299c(DAT_00435d18);
+      temp_v7 = FUN_0028299c(g_btlAux);
       temp_v7 = temp_v7 * (param_11 + temp_v35);
       if (param_2[0x166] == 1) {
-        temp_v7 = FUN_0028299c(DAT_00435d18);
+        temp_v7 = FUN_0028299c(g_btlAux);
         temp_v7 = temp_v7 + *(int *)(*(int *)(*param_1 + 0x1e98) + temp_v65);
       }
-      temp_v8 = FUN_00293230(*param_1);
+      temp_v8 = btlScriptUnitIsIncapacitated(*param_1);
       if (temp_v8 != 0) {
         temp_v7 = 0;
       }
-      FUN_002280b0(DAT_00435d18);
+      FUN_002280b0(g_btlAux);
       if (temp_v18 != 1) {
         if (0 < (int)temp_v4) {
           if ((((int)(unsigned int)*(unsigned short *)(temp_v61 + 0xd4) <= (int)temp_v4) &&
@@ -700,7 +700,7 @@ LAB_003cd944:
             }
             *(short *)(temp_v61 + 0xd4) = (short)temp_v8;
           }
-          temp_v8 = FUN_00229914(param_1,param_2,param_8);
+          temp_v8 = btlUnitIsDeadAndUncopied(param_1,param_2,param_8);
           if (temp_v8 != 0) {
             temp_v46 = param_2[0x165];
             temp_v18 = 1;
@@ -756,7 +756,7 @@ LAB_003cd944:
         }
       }
       temp_v49 = puVar11;
-      temp_v8 = FUN_00227ecc(DAT_00435d18,temp_v68);
+      temp_v8 = btlEffectFindNamedEntry(g_btlAux,temp_v68);
       if ((temp_v8 == 0) || (temp_v69 = temp_v7, *(short *)(temp_v8 + 0x12) != 4)) {
         temp_v69 = 0;
       }
@@ -767,7 +767,7 @@ LAB_003cd944:
         temp_v25 = 0;
       }
       if ((temp_v40 < 0x6d) && ((*temp_v49 & 0x40000000) != 0)) {
-        temp_v8 = FUN_00293230(*param_1);
+        temp_v8 = btlScriptUnitIsIncapacitated(*param_1);
         if (temp_v8 == 0) {
           btlAdjustPropertyClamped(param_8,1,1,0);
           if ((*(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v66) & 0x400) == 0) {
@@ -776,10 +776,10 @@ LAB_003cd944:
           else {
             temp_v10 = 0;
           }
-          temp_v5 = FUN_002280b0(DAT_00435d18);
+          temp_v5 = FUN_002280b0(g_btlAux);
           btlReflectInitKind9(temp_v5 + temp_v7 + 5,param_2,*(int *)(*param_1 + 0x1e98) + temp_v43 * 4,10,
                        temp_v10);
-          temp_v8 = FUN_002280b0(DAT_00435d18);
+          temp_v8 = FUN_002280b0(g_btlAux);
           temp_v5 = 0;
           FUN_00229a3c(temp_v8 + temp_v7 + 10,param_2,0,0x22,0);
         }
@@ -795,17 +795,17 @@ LAB_003cd944:
       if ((*(int *)(*param_1 + 0x48b8) != 0) && (*param_12 == 0)) {
         *param_12 = temp_v7;
       }
-      temp_v8 = FUN_003dcad0(DAT_00435d18);
+      temp_v8 = FUN_003dcad0(g_btlAux);
       temp_v8 = temp_v8 + temp_v7;
-      temp_v10 = btlEffectFindSlotId(DAT_00435d18);
-      temp_v14 = FUN_0022810c(DAT_00435d18,1);
+      temp_v10 = btlEffectFindSlotId(g_btlAux);
+      temp_v14 = FUN_0022810c(g_btlAux,1);
       temp_v14 = temp_v14 + temp_v7;
-      temp_v11 = btlFindEffectValueByNamePrefix(DAT_00435d18);
+      temp_v11 = btlFindEffectValueByNamePrefix(g_btlAux);
       temp_v11 = temp_v11 + temp_v7;
-      temp_v12 = FUN_002280b0(DAT_00435d18);
+      temp_v12 = FUN_002280b0(g_btlAux);
       temp_v12 = temp_v12 + temp_v7;
-      temp_v5 = DAT_00435d18;
-      resolveBattleValue(DAT_00435d18,temp_v68);
+      temp_v5 = g_btlAux;
+      resolveBattleValue(g_btlAux,temp_v68);
       if (temp_v70 == 1) {
         temp_v15 = 2;
       }
@@ -847,18 +847,18 @@ LAB_003cd944:
           temp_v8 = temp_v8 + 1;
         } while (temp_v8 < 0x85);
       }
-      if (((temp_v59 & 2) != 0) && (temp_v5 = FUN_00229914(param_1,param_2,param_8), temp_v5 == 0)) {
+      if (((temp_v59 & 2) != 0) && (temp_v5 = btlUnitIsDeadAndUncopied(param_1,param_2,param_8), temp_v5 == 0)) {
         temp_v3 = 0;
         if (temp_v18 != 0) {
           temp_v3 = temp_v28;
         }
         if ((temp_v18 != 0 && temp_v3 != 6) && temp_v3 != 7) {
-          temp_v5 = DAT_00435d18;
-          resolveBattleValue(DAT_00435d18,temp_v68);
+          temp_v5 = g_btlAux;
+          resolveBattleValue(g_btlAux,temp_v68);
           FUN_00229a3c(temp_v5 + temp_v69,param_2,0,0x20,1);
         }
       }
-      temp_v5 = FUN_002280b0(DAT_00435d18);
+      temp_v5 = FUN_002280b0(g_btlAux);
       temp_v16 = temp_v5 + temp_v7;
       if (temp_v5 + temp_v7 <= (int)param_2[7]) {
         temp_v16 = param_2[7];
@@ -870,17 +870,17 @@ LAB_003cd944:
         temp_v5 = btlMainFindActiveEntry(*param_1,temp_v4 * temp_v5 * 0x51eb851f);
         if (temp_v5 != 0) {
           temp_v37 = *(int *)(*param_1 + 0x1e98) + *(short *)(temp_v5 + 8) * 0x114;
-          temp_v14 = FUN_003dcad0(DAT_00435d18);
+          temp_v14 = FUN_003dcad0(g_btlAux);
           temp_v14 = temp_v14 + temp_v7;
-          temp_v26 = btlEffectFindSlotId(DAT_00435d18);
-          temp_v11 = FUN_0022810c(DAT_00435d18,1);
+          temp_v26 = btlEffectFindSlotId(g_btlAux);
+          temp_v11 = FUN_0022810c(g_btlAux,1);
           temp_v11 = temp_v11 + temp_v7;
-          temp_v12 = btlFindEffectValueByNamePrefix(DAT_00435d18);
+          temp_v12 = btlFindEffectValueByNamePrefix(g_btlAux);
           temp_v12 = temp_v12 + temp_v7;
-          temp_v13 = FUN_002280b0(DAT_00435d18);
+          temp_v13 = FUN_002280b0(g_btlAux);
           temp_v13 = temp_v13 + temp_v7;
-          temp_v8 = DAT_00435d18;
-          resolveBattleValue(DAT_00435d18,0);
+          temp_v8 = g_btlAux;
+          resolveBattleValue(g_btlAux,0);
           FUN_002551ac(0,param_2,temp_v37,0,temp_v39,0xffffffff,0xffffffff,
                        *(unsigned short *)((int)param_2 + *(short *)(temp_v37 + 0x62) * 10 + 0x9d4),
                        (int)*(short *)(temp_v5 + 0x1b6),0,0,0,0,1,0,temp_v8 + temp_v69,temp_v13,temp_v12,
@@ -898,8 +898,8 @@ LAB_003cd944:
         }
       }
       else {
-        temp_v5 = DAT_00435d18;
-        resolveBattleValue(DAT_00435d18,temp_v68);
+        temp_v5 = g_btlAux;
+        resolveBattleValue(g_btlAux,temp_v68);
         temp_v8 = *(int *)(*param_1 + 0x1e98) + temp_v43 * 4;
         if (temp_v8 != 0) {
           temp_v5 = temp_v5 + *(int *)(temp_v8 + 0x5c) + temp_v30 + temp_v7 + 10;
@@ -934,13 +934,13 @@ LAB_003cd944:
               temp_v4 = temp_v56;
             }
             if ((temp_v59 == 0 && temp_v4 == 0) && (temp_v70 != 2 && temp_v70 != 3)) {
-              temp_v5 = FUN_0022810c(DAT_00435d18,0);
+              temp_v5 = FUN_0022810c(g_btlAux,0);
               if (-1 < temp_v5) {
-                temp_v7 = FUN_00293230(*param_1);
+                temp_v7 = btlScriptUnitIsIncapacitated(*param_1);
                 if (temp_v7 != 0) {
                   temp_v5 = 0;
                 }
-                temp_v7 = FUN_0028299c(DAT_00435d18);
+                temp_v7 = FUN_0028299c(g_btlAux);
                 temp_v4 = temp_v5 + temp_v7 * (param_11 + temp_v35);
                 FUN_00246080(temp_v4,0,param_2,*(int *)(*param_1 + 0x1e98) + temp_v43 * 4,3);
                 if ((int)temp_v4 <= (int)param_2[7]) {
@@ -1030,18 +1030,18 @@ LAB_003ce46c:
       if (temp_v34 < 0) {
         temp_v34 = -1;
       }
-      temp_v5 = FUN_0028299c(DAT_00435d18);
+      temp_v5 = FUN_0028299c(g_btlAux);
       temp_v5 = temp_v5 * param_11;
-      temp_v26 = btlEffectFindSlotId(DAT_00435d18);
-      temp_v7 = FUN_0022810c(DAT_00435d18,1);
-      temp_v8 = btlFindEffectValueByNamePrefix(DAT_00435d18);
-      FUN_0027df30(0,param_2,*(int *)(*param_1 + 0x1e98) + param_8 * 0x114,0,temp_v42,temp_v34,
+      temp_v26 = btlEffectFindSlotId(g_btlAux);
+      temp_v7 = FUN_0022810c(g_btlAux,1);
+      temp_v8 = btlFindEffectValueByNamePrefix(g_btlAux);
+      btlQueueSkillReflectActions(0,param_2,*(int *)(*param_1 + 0x1e98) + param_8 * 0x114,0,temp_v42,temp_v34,
                    0xffffffff,temp_v38,temp_v8 + temp_v5,temp_v7 + temp_v5,temp_v26,0,0);
       if (0 < temp_v42) {
         FUN_0023c0d0(param_1,param_2,param_8,temp_v42);
       }
       frameRangeExtend(param_1,param_2,param_8,temp_v30,0xf,0x14);
-      temp_v7 = FUN_0022810c(DAT_00435d18,1);
+      temp_v7 = FUN_0022810c(g_btlAux,1);
       temp_v16 = temp_v7 + temp_v5;
       if (temp_v7 + temp_v5 <= (int)param_2[7]) {
         temp_v16 = param_2[7];
@@ -1064,10 +1064,10 @@ LAB_003ce46c:
           if ((temp_v17 && temp_v0 == '\0') && ((*(unsigned char *)(temp_v53 + 0x35) & 2) == 0))
           goto LAB_003ce96c;
         }
-        temp_v26 = btlEffectFindSlotId(DAT_00435d18);
-        temp_v5 = btlFindEffectValueByNamePrefix(DAT_00435d18);
+        temp_v26 = btlEffectFindSlotId(g_btlAux);
+        temp_v5 = btlFindEffectValueByNamePrefix(g_btlAux);
         temp_v5 = temp_v5 + temp_v30;
-        temp_v7 = btlFindEffectValueByNamePrefix(DAT_00435d18);
+        temp_v7 = btlFindEffectValueByNamePrefix(g_btlAux);
         FUN_003dda54(temp_v7 + temp_v30,param_2,temp_v71,
                      *(int *)(*param_1 + 0x1e98) + param_8 * 0x114,temp_v5,temp_v26);
         frameRangeExtend(param_1,param_2,param_8,temp_v30,10,0xf);
@@ -1078,7 +1078,7 @@ LAB_003ce46c:
           temp_v17 = 1;
           if (*(char *)(temp_v53 + 0x32) != '\0') {
             if (*(char *)(temp_v53 + 0x32) >= '\0') {
-              temp_v5 = FUN_0023dcfc();
+              temp_v5 = btlQueueParamLimitForKind();
               temp_v7 = battleGetEntryHalfword(param_8,7);
               if (temp_v5 == temp_v7) {
 LAB_003ce7e4:
@@ -1087,7 +1087,7 @@ LAB_003ce7e4:
               }
             }
             else {
-              temp_v5 = FUN_00245cc0();
+              temp_v5 = mapCategoryToDestinationGroup();
               temp_v7 = battleGetEntryHalfword(param_8,7);
               if (temp_v5 == temp_v7) goto LAB_003ce7e4;
             }
@@ -1097,7 +1097,7 @@ LAB_003ce7e8:
             temp_v0 = *(char *)(temp_v16 + 0x33);
             if (temp_v0 != '\0') {
               if (temp_v0 >= '\x01') {
-                temp_v5 = FUN_0023dcfc();
+                temp_v5 = btlQueueParamLimitForKind();
                 temp_v7 = battleGetEntryHalfword(param_8,10);
                 if (temp_v5 == temp_v7) {
 LAB_003ce844:
@@ -1106,7 +1106,7 @@ LAB_003ce844:
                 }
               }
               else {
-                temp_v5 = FUN_00245cc0();
+                temp_v5 = mapCategoryToDestinationGroup();
                 temp_v7 = battleGetEntryHalfword(param_8,10);
                 if (temp_v5 == temp_v7) goto LAB_003ce844;
               }
@@ -1116,7 +1116,7 @@ LAB_003ce848:
               temp_v0 = *(char *)(temp_v16 + 0x34);
               if (temp_v0 != '\0') {
                 if (temp_v0 >= '\x01') {
-                  temp_v5 = FUN_0023dcfc();
+                  temp_v5 = btlQueueParamLimitForKind();
                   temp_v7 = battleGetEntryHalfword(param_8,0xb);
                   if (temp_v5 == temp_v7) {
 LAB_003ce8b0:
@@ -1128,7 +1128,7 @@ LAB_003ce8b0:
                   }
                 }
                 else {
-                  temp_v5 = FUN_00245cc0();
+                  temp_v5 = mapCategoryToDestinationGroup();
                   temp_v7 = battleGetEntryHalfword(param_8,0xb);
                   if (temp_v5 == temp_v7) goto LAB_003ce8b0;
                 }
@@ -1142,7 +1142,7 @@ LAB_003ce8b0:
            ((*puVar11 & 0x20) != 0)) {
           FUN_0023c638(param_1,param_8,3);
         }
-        temp_v5 = btlFindEffectValueByNamePrefix(DAT_00435d18);
+        temp_v5 = btlFindEffectValueByNamePrefix(g_btlAux);
         temp_v16 = param_2[7];
         if ((int)param_2[7] < (int)(temp_v5 + temp_v30)) {
           temp_v16 = temp_v5 + temp_v30;
@@ -1168,7 +1168,7 @@ LAB_003ce96c:
     if (temp_v51 < 1) {
       temp_v51 = -1;
     }
-    temp_v11 = FUN_00293230(*param_1);
+    temp_v11 = btlScriptUnitIsIncapacitated(*param_1);
     if (temp_v11 != 0) {
       temp_v14 = 0;
     }
@@ -1182,17 +1182,17 @@ LAB_003ce96c:
         temp_v51 = 1;
       }
     }
-    temp_v11 = btlEffectFindSlotId(DAT_00435d18);
+    temp_v11 = btlEffectFindSlotId(g_btlAux);
     temp_v11 = temp_v11 + temp_v14;
-    temp_v12 = FUN_0022810c(DAT_00435d18,1);
-    temp_v13 = btlFindEffectValueByNamePrefix(DAT_00435d18);
-    FUN_0027df30(temp_v30 + temp_v14,param_2,*(int *)(*param_1 + 0x1e98) + temp_v5 * 4,2,temp_v48,
+    temp_v12 = FUN_0022810c(g_btlAux,1);
+    temp_v13 = btlFindEffectValueByNamePrefix(g_btlAux);
+    btlQueueSkillReflectActions(temp_v30 + temp_v14,param_2,*(int *)(*param_1 + 0x1e98) + temp_v5 * 4,2,temp_v48,
                  temp_v51,0xffffffff,0,temp_v13 + temp_v14,temp_v12 + temp_v14,temp_v11,0,0);
     if (0 < temp_v48) {
       FUN_0023c0d0(param_1,param_2,param_7,temp_v48);
     }
     frameRangeExtend(param_1,param_2,param_7,temp_v7,0xf,0x14);
-    temp_v5 = FUN_0022810c(DAT_00435d18,1);
+    temp_v5 = FUN_0022810c(g_btlAux,1);
     temp_v4 = temp_v5 + temp_v14;
     if (temp_v5 + temp_v14 <= (int)param_2[7]) {
       temp_v4 = param_2[7];
@@ -1200,7 +1200,7 @@ LAB_003ce96c:
     param_2[7] = temp_v4;
   }
   if (((temp_v18 == 0) && (temp_v50 != 0)) && (param_2[0xc] == 0)) {
-    temp_v5 = FUN_00229914(param_1,param_2,param_7);
+    temp_v5 = btlUnitIsDeadAndUncopied(param_1,param_2,param_7);
     if (temp_v5 == 0) {
       puVar11 = (unsigned int *)*param_1;
       btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar11), param_8);
@@ -1218,8 +1218,8 @@ LAB_003ce96c:
     FUN_00227d18();
   }
   if (temp_v18 == 1) {
-    temp_v5 = DAT_00435d18;
-    resolveBattleValue(DAT_00435d18,0);
+    temp_v5 = g_btlAux;
+    resolveBattleValue(g_btlAux,0);
     btlShowListedActionMessage(param_1,param_2,param_8,temp_v5,0);
     temp_v5 = *param_1;
     temp_v7 = (int)*(short *)(*(int *)(temp_v5 + 0x1e98) + param_8 * 0x114 + 0x60);

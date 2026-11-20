@@ -21,7 +21,7 @@ typedef struct HandleOwner {
 extern u32 g_handleRegistry;
 
 void ptrListRemoveClearOwner(u32 list, u32 id);
-void FUN_0022e774(void);
+void statusPanelClose(void);
 void FUN_00345718(s32 arg);
 
 void FUN_0049af90(HandleOwner *owner)
@@ -30,7 +30,7 @@ void FUN_0049af90(HandleOwner *owner)
         if (owner->state == 1) {
             owner->state = 4;
         } else {
-            FUN_0022e774();
+            statusPanelClose();
             owner->state = 3;
             FUN_00345718(0);
             if (owner->handle != NULL) {

@@ -28,7 +28,7 @@ typedef char ReflectCutsceneOffsets[
     offsetof(ReflectActionView, sourceId) == 0x5c ? 1 : -1];
 
 extern "C" {
-extern void *DAT_00435d18;
+extern void *g_btlAux;
 extern void *DAT_004398d4;
 
 void FUN_00338358(BtlMainState *state);
@@ -36,7 +36,7 @@ void armySummonResetRootTransform(BtlMainState *state);
 s32 FUN_00293ed0(BtlMainState *state);
 f32 FUN_00338404(BtlMainState *state);
 void btlQueueKeyedScalarReflectAction(s32 channel, void *unit, u32 resource, s32 a4, s32 a5, s32 a6, s32 a7);
-s32 FUN_002c1658(s32 first, s32 second);
+s32 inputQueryButtonState(s32 first, s32 second);
 s32 tableIsSupportedKind(BtlMainState *state, u32 index);
 u32 FUN_0024502c(BtlMainState *state, s32 slot);
 u32 soundSlotStopById(u32 id);
@@ -78,7 +78,7 @@ u32 FUN_003d173c(BtlMainState **block, ActionStateChannel *channel)
         u32 frame = channel->timer;
         if (FUN_00338404(*block) == 40.0f)
             btlQueueKeyedScalarReflectAction(0, channel, 0x10001ee, 0, 0, 0, 0);
-        if (FUN_002c1658(9, 1) != 0 && static_cast<s32>(frame) > 0 &&
+        if (inputQueryButtonState(9, 1) != 0 && static_cast<s32>(frame) > 0 &&
             tableIsSupportedKind(*block, 0) != 0 && FUN_0024502c(*block, 0) != 0) {
             s32 soundSlot = reinterpret_cast<ReflectCutsceneView *>(*block)->soundSlot;
             if (soundSlot >= 0)
@@ -148,7 +148,7 @@ u32 FUN_003d173c(BtlMainState **block, ActionStateChannel *channel)
             actionCreateKindFive(0, channel, 1);
             objectDestroyGfx(g_btlMain);
             FUN_0024082c(g_btlMain, 0);
-            FUN_003dc02c(DAT_00435d18);
+            FUN_003dc02c(g_btlAux);
             FUN_00339dc0(*block);
             FUN_00338fb0(*block);
             objectScriptDestroy(*block);

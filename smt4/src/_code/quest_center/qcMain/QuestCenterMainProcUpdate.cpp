@@ -54,7 +54,7 @@ s32 bgmGetStateById(u32 id);
 s32 objectFlagBitIsSet(u32 object, u32 bit);
 s32 questIsCompleted(u32 quest);
 void titleSetSlotValueState2(s32 first, s32 second);
-void FUN_002a6fb8(void);
+void menuSceneTeardown(void);
 void libc_strcpy(char *destination, const char *source);
 void asdSequenceRequest(u32 kind, const void *argument, u32 size);
 void bgmStopWithoutEntry(void);
@@ -167,7 +167,7 @@ s32 QuestCenterMainProcUpdate(u32 handle)
         work->mode = 4;
         work->done = 1;
         if (work->entry != NULL) {
-            FUN_002a6fb8();
+            menuSceneTeardown();
             asdMemFreeNonNull(work->entry);
             work->entry = NULL;
         }
@@ -185,7 +185,7 @@ s32 QuestCenterMainProcUpdate(u32 handle)
         work->mode = 4;
         work->done = 1;
         if (work->entry != NULL) {
-            FUN_002a6fb8();
+            menuSceneTeardown();
             asdMemFreeNonNull(work->entry);
             work->entry = NULL;
         }

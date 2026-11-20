@@ -6,20 +6,20 @@
 
 extern "C" {
 extern const MapHintRecord DAT_00447ab0[9];
-u32 FUN_002bfdd4(void);
+u32 messageVoiceFlagsGet(void);
 s32 gameFlagIsSet(u32 flag);
 s32 gameCountUnits(void);
 u32 gameCountersGetWord(s32 index);
 s32 FUN_00334038(void);
 s32 FUN_0028d310(void);
-u32 FUN_002bfdc4(void);
-void FUN_002bfc24(u32 layer, u32 message, u32 argument, u32 flags, f32 first, f32 second);
+u32 messageVoiceBankGet(void);
+void voiceRequestPlayFile(u32 layer, u32 message, u32 argument, u32 flags, f32 first, f32 second);
 
 // Select the next idle hint, skipping time/party-inapplicable hints, and queue its message.
 void FUN_001e2be4(void)
 {
     MapSaveBlock *map = gameGetMapBlock();
-    u32 flags = FUN_002bfdd4() | 4;
+    u32 flags = messageVoiceFlagsGet() | 4;
     if (g_gameState.inputBlocked != 0 || g_mapIfTimer->state != 0 || !gameFlagIsSet(22)) {
         return;
     }
@@ -64,7 +64,7 @@ void FUN_001e2be4(void)
     timer->state = 2;
     timer->frames = 0;
     timer->hintLabel = record->label;
-    FUN_002bfc24(1, record->message, FUN_002bfdc4(), flags, 0.707f, 0.707f);
+    voiceRequestPlayFile(1, record->message, messageVoiceBankGet(), flags, 0.707f, 0.707f);
     ++hint;
     if (hint >= 9) {
         hint = 0;

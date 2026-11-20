@@ -58,7 +58,7 @@ extern BattleMainGlobals g_btlMain;
 u32 *btlFindFirstEntryMatchingCategoryAndRequiredMask(BattleFlagsState *battle);
 void FUN_003f26d4(BattleFlagsState *battle);
 void btlUiIdsRefresh(BtlUiA *block);
-void FUN_004a9d1c(BtlUiA *block);
+void btlUiEnterStateEntryStartup(BtlUiA *block);
 void FUN_004fbf90(s32 arg);
 void FUN_003eafa0(BattleFlagsState *battle, s32 arg);
 void FUN_003f22fc(BattleFlagsState *battle, s32 arg);
@@ -93,7 +93,7 @@ void FUN_003f034c(BattleFlagsState *battle)
             g_btlMain.state->phase = 12;
         return;
     }
-    FUN_004a9d1c(g_btlUiBlock);
+    btlUiEnterStateEntryStartup(g_btlUiBlock);
     if (battle->flags & g_btlMain.pendingMask) {
         battle->flags &= ~g_btlMain.pendingMask & ~g_btlMain.clearMaskB;
         bumpByte(&battle->counterA);

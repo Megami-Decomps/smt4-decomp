@@ -6,25 +6,25 @@
 extern "C" {
 s32 flaggedValueHolderGetTotal(Scene3aSlotInfo *);
 u32 uiStateHasAnyActiveFlag(Scene3aSlotInfo *);
-void FUN_002996d8(u32);
+void statusCameraRestore(u32);
 s32 contentGetEntryKind(u32);
 void FUN_0029963c(u32, u16);
 void *__aeabi_memcpy4(void *, const void *, u32);
 void playerRecalcStatsFromEquipment(PlayerDataIV *);
-void FUN_0029a0cc(PlayerDataIV *);
+void btlBuildDemonSnapshotFromSaveRecord(PlayerDataIV *);
 
 void equipmentPreviewUpdateSelection(Scene3a *scene)
 {
     s32 slot = scene->slot;
     u32 item = scene->lists[slot].items[flaggedValueHolderGetTotal(&scene->slotInfo[slot])].id;
     if (uiStateHasAnyActiveFlag(&scene->slotInfo[scene->slot]) || scene->selectedItem != item) {
-        FUN_002996d8(0);
+        statusCameraRestore(0);
         scene->preview.requested = 0;
         scene->preview.ready = 0;
         scene->selectedItem = item;
     } else if (scene->preview.requested) {
         if (FUN_00299fc0()) {
-            FUN_002996d8(1);
+            statusCameraRestore(1);
             scene->preview.ready = 1;
         }
     } else {
@@ -54,7 +54,7 @@ void equipmentPreviewUpdateSelection(Scene3a *scene)
             }
         }
         playerRecalcStatsFromEquipment(&player);
-        FUN_0029a0cc(&player);
+        btlBuildDemonSnapshotFromSaveRecord(&player);
     }
 }
 }

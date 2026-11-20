@@ -14,7 +14,7 @@ void fontMeasureFixedWidth(void);
 void FUN_0021298c(void);
 u32 asdListBoxCreate(u32 parent, s32 width, s32 height, s32 rowHeight, s32 rows);
 void jobSetWork7C(u32 job, void (*first)(void), void (*second)(void));
-void FUN_002e0898(u32 job, s32 x, s32 y);
+void debugEditorListSetCellSize(u32 job, s32 x, s32 y);
 void jobSetText(u32 job, const char *text);
 void asdListBoxAddItem(u32 job, const char *text);
 void asdListBoxSetFloatItem(u32 job, s32 item, f32 value, s32 minimum, s32 maximum);
@@ -28,7 +28,7 @@ void btlCreateCameraEditor(CameraEditorWork *editor, u32 context, u32 parent, u3
     u32 list = asdListBoxCreate(parent, 240, 16, 32, 4);
     editor->list = list;
     jobSetWork7C(list, FUN_0021298c, fontMeasureFixedWidth);
-    FUN_002e0898(list, 12, 12);
+    debugEditorListSetCellSize(list, 12, 12);
     if (mode == 0 || mode == 1) {
         g_btlCamera->vector[2] = 0.0f;
         g_btlCamera->vector[1] = 0.0f;

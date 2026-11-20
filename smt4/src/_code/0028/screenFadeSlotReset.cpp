@@ -5,10 +5,10 @@ namespace { struct Slot { f32 scale; u32 active; u32 value; u32 extra; u8 state;
 
 extern "C" {
 /* Reads or updates the requested object state. */
-extern Slot DAT_004d9758[];
+extern Slot g_screenFadeSlots[];
 void screenFadeSlotReset(u32 index)
 {
-    Slot *slot = &DAT_004d9758[index];
+    Slot *slot = &g_screenFadeSlots[index];
     slot->active = 0;
     slot->value = 0;
     slot->state = 0;

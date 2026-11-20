@@ -8,7 +8,7 @@ int FUN_0015a964(int);
 int FUN_0016e758(void);
 int sysReportCheckFailure(int, int);
 int nn_gxlow_CTR_SaveVramSysArea(void);
-int FUN_00170390(int);
+int sleepAllow(int);
 int sleepQueryAnswer(int);
 int FUN_00170e58(void);
 int FUN_00170ebc(int);
@@ -34,7 +34,7 @@ extern int FUN_0015aba0(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016e758. */
 /* Supplied declaration required: sysReportCheckFailure. */
 /* Supplied declaration required: nn_gxlow_CTR_SaveVramSysArea. */
-/* Supplied declaration required: FUN_00170390. */
+/* Supplied declaration required: sleepAllow. */
 /* Supplied declaration required: sleepQueryAnswer. */
 extern int FUN_001703e8(void);
 /* Supplied declaration required: FUN_00170e58. */
@@ -97,7 +97,7 @@ int FUN_001476ec(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
     if (temp_v0 != 0) {
       temp_v0 = FUN_0018b63c();
       if (temp_v0 == 0) {
-        FUN_00170390(1);
+        sleepAllow(1);
       }
     }
     else {

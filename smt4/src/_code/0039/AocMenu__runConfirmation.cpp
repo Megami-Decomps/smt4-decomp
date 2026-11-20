@@ -45,7 +45,7 @@ s32 messageMainGetChoiceResult(void);
 void FUN_00126fb8(void *owner);
 void bgmStopNoForce(u32 handle, s32 frames);
 s32 sys43e188GetStateB(void);
-s32 FUN_002c1658(s32 id, s32 mode);
+s32 inputQueryButtonState(s32 id, s32 mode);
 void eventQueueAddUniqueIfValid(u32 event);
 void msgWindowReset(void);
 void messageBannerBeginClose(void);
@@ -107,7 +107,7 @@ void AocMenu::runConfirmation()
         if (sys43e188GetStateB() == 0) {
             return;
         }
-        if (FUN_002c1658(1, 1) == 0) {
+        if (inputQueryButtonState(1, 1) == 0) {
             return;
         }
         eventQueueAddUniqueIfValid(0x100016d);

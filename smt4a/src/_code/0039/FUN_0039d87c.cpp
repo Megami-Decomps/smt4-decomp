@@ -9,7 +9,7 @@ extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 s32 btlResolveEntryChoice(s32 choice);
-s32 FUN_003020fc(BtlCombatantEntryA *entry, u32 category);
+s32 btlCombatantMatchesCategory(BtlCombatantEntryA *entry, u32 category);
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 s32 randRange(u32 maximum);
 
@@ -28,13 +28,13 @@ u32 FUN_0039d87c(void)
         u64 flags = entry->flags;
         if ((flags & g_btlCandidateMasks.unavailable) == 0 &&
             (flags & g_btlCandidateMasks.required) != 0 &&
-            (flags & g_btlCandidateMasks.excluded) == 0 && FUN_003020fc(entry, category) != 0) {
+            (flags & g_btlCandidateMasks.excluded) == 0 && btlCombatantMatchesCategory(entry, category) != 0) {
             candidates[candidateCount++] = entry->data.id;
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
         BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
-        if (entry != NULL && FUN_003020fc(entry, category) != 0) {
+        if (entry != NULL && btlCombatantMatchesCategory(entry, category) != 0) {
             candidates[candidateCount++] = entry->data.id;
         }
     }

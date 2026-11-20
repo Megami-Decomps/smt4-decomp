@@ -4,8 +4,8 @@
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
-extern const char DAT_0054baf8[];
-extern const u32 DAT_005c1fb4[4];
+extern const char g_effGeometrySourceFileName[];
+extern const u32 g_effGeomDefaultTint[4];
 void *memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 dataAlignment, u32 clear);
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 void *effGeomBufferCreate(u32 count, u32 flags, s32 mode);
@@ -39,14 +39,14 @@ GeometryResources *effGeomCloneHandle(const GeometryResources *source)
         const EngineView *original = static_cast<const EngineView *>(source->special);
         u32 engineFlags = original->flags;
         u16 count = original->count;
-        asdDebugTrace(DAT_0054baf8, 221);
+        asdDebugTrace(g_effGeometrySourceFileName, 221);
         copy = static_cast<GeometryView *>(memAlloc(0x10000, 0x100, 0, sizeof(GeometryView), 0x10, 1));
         copy->base.flags = 0x300;
         copy->base.vertexCount = 0;
         EngineView *engine = static_cast<EngineView *>(effGeomBufferCreate(count, engineFlags, 0));
         copy->base.special = engine;
         if (engineFlags & 0x80000)
-            memcpy(engine->color, DAT_005c1fb4, sizeof(engine->color));
+            memcpy(engine->color, g_effGeomDefaultTint, sizeof(engine->color));
         static_cast<EngineView *>(copy->base.special)->reset = 0;
         original = static_cast<const EngineView *>(source->special);
         if (original->retained != NULL) {
@@ -57,9 +57,9 @@ GeometryResources *effGeomCloneHandle(const GeometryResources *source)
         const BufferView *original = reinterpret_cast<const BufferView *>(source->buffers);
         u32 format = original->format;
         u32 count = original->count;
-        asdDebugTrace(DAT_0054baf8, 113);
+        asdDebugTrace(g_effGeometrySourceFileName, 113);
         copy = static_cast<GeometryView *>(memAlloc(0x10000, 0x100, 0, sizeof(GeometryView), 0x10, 1));
-        OwnedBufferPair *buffers = static_cast<OwnedBufferPair *>(asdMemoryAllocTraced(sizeof(OwnedBufferPair), DAT_0054baf8, 0x73));
+        OwnedBufferPair *buffers = static_cast<OwnedBufferPair *>(asdMemoryAllocTraced(sizeof(OwnedBufferPair), g_effGeometrySourceFileName, 0x73));
         if (buffers != NULL)
             buffers = slotReset(buffers);
         slotInit(buffers, 0x25, count, format);

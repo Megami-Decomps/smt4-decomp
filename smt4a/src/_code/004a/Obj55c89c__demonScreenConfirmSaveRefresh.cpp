@@ -74,7 +74,7 @@ LiveDemon *slotEntryFindById(u16);
 s32 gameDataCopySaveEntry(u16, SavedDemon *);
 void __aeabi_memcpy4(void *, const void *, u32);
 void gameDataStoreSavedRecord(u16, SavedDemon *);
-void FUN_004a1958(DemonScreen *);
+void demonScreenRebuildEntryList(DemonScreen *);
 u32 buttonHelpGetValue();
 void sysPlaySe(u32);
 void gameGlobalsSetMenuOpenFlag(u32);
@@ -116,7 +116,7 @@ extern "C" void _ZN9Obj55c89c29demonScreenConfirmSaveRefreshEv(DemonScreen *scre
                 gameDataStoreSavedRecord(id, &saved);
             }
         }
-        FUN_004a1958(screen);
+        demonScreenRebuildEntryList(screen);
     }
     sysPlaySe(buttonHelpGetValue());
     gameGlobalsSetMenuOpenFlag(0);

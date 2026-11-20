@@ -43,7 +43,7 @@ void commonBgAcquire(void);
 void messageMainFinishWindow(void);
 s32 messageMainIsWindowActive(void);
 void buttonHelpSetPreset(s32 preset);
-WindowStatusResult FUN_002c40f8(s32 *request, s32 a, s32 b, s32 c, s32 d);
+WindowStatusResult svcWaitSynchronizationN(s32 *request, s32 a, s32 b, s32 c, s32 d);
 void FUN_002e2f14(SaveLoadTask *task);
 
 /* Releases the home-button hold and clears the transient game data flags. */
@@ -119,7 +119,7 @@ u32 FUN_001edcf0(u32 unused, s32 enabled)
             DAT_0043e312 = 1;
         if (task->request != 0) {
             s32 request = task->request;
-            WindowStatusResult result = FUN_002c40f8(&request, 1, 0, 0, 0);
+            WindowStatusResult result = svcWaitSynchronizationN(&request, 1, 0, 0, 0);
             if ((s32)result.code < 0)
                 resultHandleFailure(result.code);
             if ((result.code & 0x3FF) == 0x3FE)

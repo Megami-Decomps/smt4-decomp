@@ -17,6 +17,17 @@ typedef struct StaffRollSize {
 
 typedef void (*StaffRollStateHandler)(void);
 
+/* StaffRollWork.state: the index of the handler machineStep runs. */
+enum {
+    STAFF_ROLL_STATE_FADE_IN = 0,       /* start fading both screens in */
+    STAFF_ROLL_STATE_WAIT_FADE_IN = 1,  /* wait for the fades, then start the music */
+    STAFF_ROLL_STATE_SCROLL = 2,        /* scroll the credit lines */
+    STAFF_ROLL_STATE_FADE_OUT = 3,      /* skipped: start fading both screens out */
+    STAFF_ROLL_STATE_WAIT_FADE_OUT = 4,
+    STAFF_ROLL_STATE_COMPLETE = 5,
+    STAFF_ROLL_STATE_EXIT = 6           /* count down to closing */
+};
+
 /* The staff roll's work area. */
 typedef struct StaffRollWork {
     /* 0x00 */ u32 task;                   /* the screen's task handle */
@@ -30,7 +41,7 @@ typedef struct StaffRollWork {
     /* 0x129 */ u8 unk129[3];
     /* 0x12C */ StaffRollStateHandler handlers[7]; /* one per state, run by machineStep */
     /* 0x148 */ f32 endY;                   /* the roll ends when the last line passes this */
-    /* 0x14C */ s32 state;                  /* roll sequence step */
+    /* 0x14C */ s32 state;                  /* STAFF_ROLL_STATE_*: the handler run this frame */
     /* 0x150 */ f32 speed;                  /* scroll per frame */
     /* 0x154 */ u8 unk154[0x604];
     /* 0x758 */ s32 frames;                 /* frames scrolled */

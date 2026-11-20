@@ -9,7 +9,7 @@
 
 extern "C" {
 s32 FUN_0028809c(s32 source, s32 target, const SkillDataRecordA *skill, s32 preview, s32 flags);
-s32 FUN_003df57c(u32 costParameter, s32 mode);
+s32 skillGetCostWithRankReduction(u32 costParameter, s32 mode);
 
 // Apply a skill to the player and all occupied demon slots, charging MP once if it succeeds.
 u32 FUN_002a690c(s32 source, u32 skillId, s32 preview)
@@ -31,7 +31,7 @@ u32 FUN_002a690c(s32 source, u32 skillId, s32 preview)
             if (preview == 0) {
                 if (source < 0) {
                     PlayerDataA *unit = gameGetPlayerData();
-                    unit->mp -= FUN_003df57c(skill->identity.id, 1);
+                    unit->mp -= skillGetCostWithRankReduction(skill->identity.id, 1);
                     if (unit->mp < 0)
                         unit->mp = 0;
                 } else {

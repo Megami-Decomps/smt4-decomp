@@ -62,7 +62,7 @@ void __aeabi_memcpy4(void *destination, const void *source, s32 size);
 u32 gameGetPlayerName(void);
 void libc_strcpy(void *destination, u32 source);
 u16 recordGetPercentageScaledBase(void);
-void FUN_00253d60(StatGrades *grades, DemonSaveRecord *record);
+void devilBuildAffinitySlots(StatGrades *grades, DemonSaveRecord *record);
 
 /* Builds the battle log's snapshot of a party demon from its save record. */
 void btlBuildDemonSnapshot(DemonSnapshot *snapshot, DemonSaveRecord *record)
@@ -108,7 +108,7 @@ void btlBuildDemonSnapshot(DemonSnapshot *snapshot, DemonSaveRecord *record)
     if (itemTableGetEquipmentRecord(record->skills.values[2]) != NULL) {
         snapshot->skillEffectB = recordGetPercentageScaledBase() + snapshot->skillEffectB;
     }
-    FUN_00253d60(&grades, record);
+    devilBuildAffinitySlots(&grades, record);
     for (u32 i = 0; i < 8; ++i)
         snapshot->statGrades[i] = grades.values[i] >> 10;
     snapshot->cleared[0] = 0;

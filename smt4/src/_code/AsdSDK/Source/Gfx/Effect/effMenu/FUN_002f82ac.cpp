@@ -41,7 +41,7 @@ void effMenuAppendColorRect(u32 x, u32 y, u32 width, u32 height, u32 alpha, u32 
 extern EffMenuLists DAT_004ea7e0;
 u32 sysGetTableWord(s32 index);
 void *asdLoadFileSync(const char *path, u32 *size, u32 flags, u32 alignment);
-extern const char DAT_004102f0[]; /* "%s" */
+extern const char g_formatStringPercentS[]; /* "%s" */
 }
 
 static const s32 kWindowRows = 0x11;
@@ -83,7 +83,7 @@ static __inline void browserEntryPath(EffMenuBrowser *menu, EffMenuTextNode *ent
         if (menu->source->unk04 != 0) {
             __2sprintf(path, "%s%s", menu->source->unk04, entry->name);
         } else {
-            __2sprintf(path, DAT_004102f0, entry->name);
+            __2sprintf(path, g_formatStringPercentS, entry->name);
         }
     }
 }

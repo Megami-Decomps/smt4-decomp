@@ -12,6 +12,6 @@ typedef struct Sys43e0b8 {
     /* 0x04 */ s32 unk04;
 } Sys43e0b8;
 
-extern Sys43e0b8 DAT_0043e0b8;
+extern Sys43e0b8 g_messageFlags;
 
 #endif

@@ -20,7 +20,7 @@ static __inline bool fsResultInRange390(nn::Result result)
 }
 
 extern "C" {
-extern u8 DAT_00465210;
+extern u8 g_contentMounted;
 u32 globalBlockGetFirst();
 nn::Result FUN_00354b88(u32 handle);
 
@@ -29,13 +29,13 @@ u32 FUN_002103dc()
 {
     u32 status = 1;
     nn::Result result;
-    if (DAT_00465210)
+    if (g_contentMounted)
         return 2;
     result = FUN_00354b88(globalBlockGetFirst());
     processResultSetValue(result);
     u32 failed = result & 0x80000000;
     if ((s32)failed >= 0) {
-        DAT_00465210 = 1;
+        g_contentMounted = 1;
     } else {
         if (fsResultInRange340(result) || fsResultInRange360(result) || fsResultInRange390(result))
             status = fsResultInRange340(result) ? 3 : 4;

@@ -47,19 +47,19 @@ s32 getByteTableAValue(void);
 void byteTableASetValue(s8 value);
 s32 byteTableAGetValue3(void);
 void byteTableASetValue3(s8 value);
-s32 FUN_00162ea4(void);
+s32 eventIsSkipping(void);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 u32 tableGroupFindEntryIndex(void *commands, const char *name);
 void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 /* The game flag an event entry raises when it ends. Apocalypse's is a stub returning 0 that armlink
  * inlined at its only call and removed. */
 u32 eventScriptFindCompletionFlag(u32 eventId, const ScriptVmLabel *entry);
-void FUN_0047e430(AocScriptHolder *holder, u8 showButtonHelp);
+void aocBootResetAndReleaseBuffers(AocScriptHolder *holder, u8 showButtonHelp);
 s32 scriptHolderUpdateForward(AocScriptHolder *holder);
 void scriptHolderFree2(AocScriptHolder *holder);
 u8 gameBlockByte27E98Is1To3(void);
 void gameStateSetJumpRequest(u32 map, u32 entrance, u32 object, f32 a, f32 b, f32 c, f32 d, f32 e);
-void FUN_004731d8(void);
+void gameSaveBlockRebuild27E98(void);
 u32 mapRestoreSavedDestination(AocScriptHolder *holder, s32 changeSequence);
 }
 
@@ -144,7 +144,7 @@ extern "C" s32 eventScriptJobUpdate(u32 job)
             byteTableASetValue3(0);
             byteTableASetValue(0);
         }
-        if (getByteTableAValue() && !FUN_00162ea4()) {
+        if (getByteTableAValue() && !eventIsSkipping()) {
             // The script's fade is still running: black both screens out and wait for them.
             titleSetSlotValueState2(0, 5);
             titleSetSlotValueState2(1, 5);
@@ -206,7 +206,7 @@ extern "C" s32 eventScriptJobUpdate(u32 job)
             if (flags & 8)
                 return 0;
             main->flags = flags & ~0x70;
-            FUN_0047e430(&main->scriptHolder, 0);
+            aocBootResetAndReleaseBuffers(&main->scriptHolder, 0);
             work->state = 96;
         }
         return 0;
@@ -252,7 +252,7 @@ extern "C" s32 eventScriptJobUpdate(u32 job)
         }
         g_gameState.savedLocationSet = 0;
         g_gameState.entryValue = 0;
-        FUN_004731d8();
+        gameSaveBlockRebuild27E98();
         eventJobStop();
         work->state = 100;
         break;

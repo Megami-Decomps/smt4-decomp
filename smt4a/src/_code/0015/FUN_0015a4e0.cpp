@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00189a38(int, int);
+int errThrowFatal(int, int);
 int software_interrupt(int);
 
 extern int DAT_005b4480; /* 0x5b4480 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_00189a38. */
+/* Supplied declaration required: errThrowFatal. */
 
 
 int FUN_0015a4e0(void)
@@ -28,7 +28,7 @@ int FUN_0015a4e0(void)
     DAT_005b4480 = 0;
   }
   if (temp_v0 < 0) {
-    FUN_00189a38(temp_v0,0x15a514);
+    errThrowFatal(temp_v0,0x15a514);
   }
   return temp_v0;
 }

@@ -9,10 +9,10 @@ s32 FUN_00293f10(s32 id, s32 mapped);
 /* Initialises the unit record of `slot` for unit `id` (`kind` selects the initial state), when the slot has one. */
 void dispatchIfFound(s32 slot, u32 id, s32 kind);
 
-u32 FUN_0029c43c(u32 value, u8 flag);
+u32 messageBannerSetCountdown(u32 value, u8 flag);
 
 /* Reads or forwards the state of an object (0 when its disabled flag at 0x62 is set). */
-u32 FUN_0029d644(const void *object);
+u32 uiListGetVisibleCount(const void *object);
 
 /* Dispatches the tagged payload at 0x10 of `object` to its specialized handler. */
 s32 FUN_0029e924(void *object);

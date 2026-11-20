@@ -18,7 +18,7 @@ struct FusionCandidateRange {
 extern "C" {
 void sysMemClear(void *memory, u32 size);
 FusionCandidateRange *gameDataGetSmallBlock(void);
-s32 FUN_002a4b28(u16 id);
+s32 compendiumEntryIsRegistered(u16 id);
 
 s32 fusionCollectEligibleDemonsByRace(const FusionRaceSelection *selection, s16 *outIds)
 {
@@ -49,7 +49,7 @@ s32 fusionCollectEligibleDemonsByRace(const FusionRaceSelection *selection, s16 
         s32 first = gameDataGetSmallBlock()->first;
         s32 last = gameDataGetSmallBlock()->last;
         for (s32 id = first; id <= last; ++id) {
-            if (FUN_002a4b28(id) && allowedRaces[nkmBaseGetRecord(static_cast<u16>(id))->race]) {
+            if (compendiumEntryIsRegistered(id) && allowedRaces[nkmBaseGetRecord(static_cast<u16>(id))->race]) {
                 outIds[count++] = id;
             }
         }
@@ -57,7 +57,7 @@ s32 fusionCollectEligibleDemonsByRace(const FusionRaceSelection *selection, s16 
         s32 first = gameDataGetSmallBlock()->first;
         s32 last = gameDataGetSmallBlock()->last;
         for (s32 id = first; id <= last; ++id) {
-            if (FUN_002a4b28(id)) {
+            if (compendiumEntryIsRegistered(id)) {
                 outIds[count++] = id;
             }
         }

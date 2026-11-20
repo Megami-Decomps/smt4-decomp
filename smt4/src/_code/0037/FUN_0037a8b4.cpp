@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00235c70(int, int);
-int FUN_002af3b4(int, int, unsigned int, int, int);
+int nw_snd_internal_SoundArchiveLoader_Load(int, int, unsigned int, int, int);
 int __aeabi_vec_ctor_nocookie_nodtor(unsigned char [32], unsigned char *, int, int);
 int FUN_0037b61c(int, unsigned int, unsigned int);
 int FUN_0037be24(...);
@@ -21,7 +21,7 @@ typedef struct {
 extern unsigned char LAB_0014c240; /* 0x14c240 */
 
 /* Supplied declaration required: FUN_00235c70. */
-/* Supplied declaration required: FUN_002af3b4. */
+/* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_Load. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_0037b61c. */
 /* Supplied declaration required: FUN_0037be24. */
@@ -47,7 +47,7 @@ void FUN_0037a8b4(int param_1)
   
   if ((*(int *)(param_1 + 0x38) == 0) && (temp_v3 = *(int *)(param_1 + 0x34), temp_v3 != -1)) {
     temp_v0 = *(int *)(param_1 + 0x1c) + 0xc;
-    FUN_002af3b4(temp_v0,temp_v3,*(unsigned int *)(param_1 + 0x20),1,0);
+    nw_snd_internal_SoundArchiveLoader_Load(temp_v0,temp_v3,*(unsigned int *)(param_1 + 0x20),1,0);
     if ((temp_v0 == 0) && (*(romwright_code **)(param_1 + 0x24) != (romwright_code *)0x0)) {
       (**(romwright_code **)(param_1 + 0x24))(0,0,0,0,0,*(unsigned int *)(param_1 + 0x28));
       return;
@@ -66,7 +66,7 @@ void FUN_0037a8b4(int param_1)
       temp_v0 = *(int *)(temp_v3 + 0x3c);
       if (temp_v0 != -1) {
         temp_v1 = *(int *)(param_1 + 0x1c) + 0xc;
-        FUN_002af3b4(temp_v1,temp_v0,*(unsigned int *)(param_1 + 0x20),4,0);
+        nw_snd_internal_SoundArchiveLoader_Load(temp_v1,temp_v0,*(unsigned int *)(param_1 + 0x20),4,0);
         if ((temp_v1 == 0) && (*(int *)(param_1 + 0x24) != 0)) {
           (**(romwright_code **)(param_1 + 0x24))(0,0,0,0,0,*(unsigned int *)(param_1 + 0x28));
           return;

@@ -28,7 +28,7 @@ MemberRecord* gameGetSlotRecord(u8 id);
 void FUN_004d0d70(u8 id);
 s32 bitsAt60Test(void* record, u32 bit);
 void bitsAt60Set(void* record, u32 bit);
-void FUN_002a6894(void* record);
+void saveMarkIdListSeen(void* record);
 void qsort(void* base, u32 count, u32 size, s32 (*compare)(const void*, const void*));
 s32 FUN_002c2bf4(const void* a, const void* b);
 u32 getUnlockedSlotCount(void* record);
@@ -55,7 +55,7 @@ u32 FUN_003f33b0(MemberRecord* source, u32 arg, u16* outSkills)
         record->learned[i] |= copy.learned[i];
     }
     if (bitsAt60Test(&copy, 2)) bitsAt60Set(record, 2);
-    FUN_002a6894(record);
+    saveMarkIdListSeen(record);
 
     s32 duplicates = 0;
     s32 added = 0;

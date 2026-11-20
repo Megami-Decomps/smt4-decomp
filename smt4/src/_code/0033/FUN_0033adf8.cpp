@@ -48,7 +48,7 @@ extern "C" {
 
 void FUN_001dd930(void);
 void playerSkillInsertFirstFree(u32 skill);
-void FUN_00295a18(u32 id, u32 count);
+void saveFlagSetOrAddCounter(u32 id, u32 count);
 void playerRecalcStatsFromEquipment(s32 arg);
 void libc_strcpy(char* dst, const char* src);
 void rt_memclr(void* block, u32 size);
@@ -116,7 +116,7 @@ void FUN_0033adf8(BattleMainBlock* battle, u32 row)
     rt_memclr(saveGetUnlockFlagBlock(), 0x104a);
     for (s32 i = 0; i < 5; i++) {
         if (scenario->stock[i].id != 0 && scenario->stock[i].count != 0) {
-            FUN_00295a18(scenario->stock[i].id, scenario->stock[i].count);
+            saveFlagSetOrAddCounter(scenario->stock[i].id, scenario->stock[i].count);
         }
     }
     for (s32 i = 0; i < 8; i++) {

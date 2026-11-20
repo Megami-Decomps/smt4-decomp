@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a46c(...);
+int stringCopyTruncated(...);
 int FUN_001a6c40(...);
 int FUN_001b9fe4(unsigned int);
 int svcSleepThread(unsigned char *, int);
@@ -23,7 +23,7 @@ typedef struct {
 
 extern unsigned char LAB_002dc6c0; /* 0x2dc6c0 */
 
-/* Supplied declaration required: FUN_0019a46c. */
+/* Supplied declaration required: stringCopyTruncated. */
 /* Supplied declaration required: FUN_001a6c40. */
 /* Supplied declaration required: FUN_001b9fe4. */
 extern int FUN_001ba0c8(unsigned int, unsigned char *);
@@ -55,8 +55,8 @@ fileQueueRequestAndWait(unsigned int param_1,unsigned int param_2,int param_3,un
     libc_strlen(param_2);
     libc_strlen(param_3);
     FUN_001a6c40(temp_v6);
-    FUN_0019a46c(temp_v10,param_2,0x40);
-    FUN_0019a46c(temp_v11,param_3,0x40);
+    stringCopyTruncated(temp_v10,param_2,0x40);
+    stringCopyTruncated(temp_v11,param_3,0x40);
     temp_v7 = temp_v7 | 2;
     temp_v8 = param_5;
     temp_v9 = param_6;
@@ -70,7 +70,7 @@ fileQueueRequestAndWait(unsigned int param_1,unsigned int param_2,int param_3,un
   else {
     libc_strlen(param_2);
     FUN_001a6c40(temp_v1);
-    FUN_0019a46c(temp_v4,param_2,0x40);
+    stringCopyTruncated(temp_v4,param_2,0x40);
     temp_v5 = 0;
     temp_v2 = param_5;
     temp_v3 = param_6;

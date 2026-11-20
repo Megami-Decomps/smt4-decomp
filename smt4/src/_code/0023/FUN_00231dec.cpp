@@ -12,7 +12,7 @@ int pairCopy(int, float *);
 int FUN_00231bcc(...);
 int lmapSceneGetObj(int);
 int FUN_0025090c(unsigned int, unsigned int, int, unsigned char [128]);
-int FUN_00288f78(...);
+int mapClassifyPlaceState(...);
 int textDrawString(...);
 int gxResetColorQuadToWhite(void);
 int renderCtxPopState(...);
@@ -46,7 +46,7 @@ extern int DAT_0049f920; /* 0x49f920 */
 /* Supplied declaration required: lmapSceneGetObj. */
 extern unsigned int textMeasureOnLayer(int, unsigned int);
 /* Supplied declaration required: FUN_0025090c. */
-/* Supplied declaration required: FUN_00288f78. */
+/* Supplied declaration required: mapClassifyPlaceState. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 extern unsigned int vec2GetYInt(int);
@@ -118,7 +118,7 @@ void FUN_00231dec(int param_1)
     }
     else {
       temp_v5 = gameFlagIsSet(0x529);
-      if ((temp_v5 != 0) && (temp_v5 = FUN_00288f78(temp_v3), temp_v5 != 3)) {
+      if ((temp_v5 != 0) && (temp_v5 = mapClassifyPlaceState(temp_v3), temp_v5 != 3)) {
         temp_v3 = FUN_002e039c((int)temp_v1);
         libc_strcpy(temp_v9,temp_v3);
       }
@@ -162,7 +162,7 @@ void FUN_00231dec(int param_1)
      ((*(unsigned int *)(param_1 + 0x10) & 0x1000) == 0)) {
     if (*(char *)(param_1 + 0xc) != '\0') {
       NaviMain_GetCurrentMap(temp_v18);
-      temp_v9 = FUN_00288f78();
+      temp_v9 = mapClassifyPlaceState();
       if (temp_v9 != 2 && temp_v9 != 3) {
         temp_v18 = param_1 + 0x12000;
         temp_v9 = 0;
@@ -257,7 +257,7 @@ LAB_002323cc:
       temp_v2 = gameFlagIsSet(0x529);
       if (temp_v2 != 0) {
         NaviMain_GetCurrentMap(temp_v18);
-        temp_v2 = FUN_00288f78();
+        temp_v2 = mapClassifyPlaceState();
         if (temp_v2 != 2 && temp_v2 != 3) {
           temp_v3 = 0xfb7;
           if ('\0' < *(char *)(param_1 + 0x58)) {

@@ -8,7 +8,7 @@
 
 extern "C" {
 
-void FUN_002a1850(Vec3f *position, s32 arg, u32 value);
+void cameraProjectToScreen(Vec3f *position, s32 arg, u32 value);
 u32 FUN_004aaff0(u32 handle, s32 slot);
 void uiStoreTextureEntryCenter(void *sprite, u32 kind, u32 index);
 void FUN_00358e94(void *sprite, s16 x, s16 y);
@@ -21,7 +21,7 @@ void FUN_004a9740(u32 handle, s32 slot, s32 number, u32 unused, Vec3f position, 
     BtlUiNumberSlot *popup;
 
     if (anchored != 0) {
-        FUN_002a1850(&position, 0, asdCameraGetSavedRenderPairs());
+        cameraProjectToScreen(&position, 0, asdCameraGetSavedRenderPairs());
         f32 maxY = 240.0f - (f32)(asdTMTexTableEntryAt(13, 0x41A)->placement->height << 1);
 
         if (position.y > maxY) {

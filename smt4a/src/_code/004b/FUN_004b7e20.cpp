@@ -22,7 +22,7 @@ int linkSlotSetFlag20(unsigned int, int);
 int listSelectItem(unsigned int, int);
 int FUN_00407a80(unsigned int);
 int moveCameraCtrlSnapToNode(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
-int FUN_004b7d88(...);
+int soundPlayCueForContextKind(...);
 int menu4CReset(...);
 int menu4CStartBlock74(...);
 int VectorSignedToFloat(int, int);
@@ -51,7 +51,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: moveCameraCtrlSnapToNode. */
 extern int rosterGetLeaderId(void);
 /* Supplied declaration required: contentTransitionApplyCommand. */
-/* Supplied declaration required: FUN_004b7d88. */
+/* Supplied declaration required: soundPlayCueForContextKind. */
 extern int menu4CGetEntry(int, int);
 extern int FUN_004ba698(int);
 /* Supplied declaration required: menu4CReset. */
@@ -90,7 +90,7 @@ void FUN_004b7e20(int param_1)
           if (temp_v2 == 0x14) {
             if (DAT_0058800c != 0) {
               messageSetMode(1);
-              FUN_004b7d88(param_1);
+              soundPlayCueForContextKind(param_1);
               menu4CStartBlock74(param_1 + 0x9c);
               menu4CReset(param_1 + 0x9c);
               *(unsigned char *)(param_1 + 0xa88) = 0;
@@ -190,7 +190,7 @@ void FUN_004b7e20(int param_1)
         return;
       }
       *(unsigned int *)(param_1 + 0x2c) = 0x1f;
-      FUN_004b7d88(param_1);
+      soundPlayCueForContextKind(param_1);
       menu4CStartBlock74(param_1 + 0x9c);
       menu4CReset(param_1 + 0x9c);
       *(unsigned char *)(param_1 + 0xa88) = 0;

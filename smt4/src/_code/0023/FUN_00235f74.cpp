@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a666c(int *, int, unsigned int);
+int asdGxQueueMemoryTransfer(int *, int, unsigned int);
 int nn_gxlow_CTR_FlushDataCacheForward(int, unsigned int);
 int nnnstdMemCpy(int, int, unsigned int);
 
@@ -16,7 +16,7 @@ typedef struct {
 
 extern romwright_code *g_gfxAllocateCallback; /* 0x44e330 */
 
-/* Supplied declaration required: FUN_002a666c. */
+/* Supplied declaration required: asdGxQueueMemoryTransfer. */
 /* Supplied declaration required: nn_gxlow_CTR_FlushDataCacheForward. */
 /* Supplied declaration required: nnnstdMemCpy. */
 
@@ -59,7 +59,7 @@ void FUN_00235f74(unsigned int param_1,int *param_2,unsigned int param_3)
         temp_v4 = piVar3 == (int *)0x0;
       }
       if (!temp_v4) {
-        FUN_002a666c(piVar3,temp_v1,temp_v3);
+        asdGxQueueMemoryTransfer(piVar3,temp_v1,temp_v3);
       }
       param_2[6] = temp_v1;
       param_2[7] = param_3 & 0x30000;

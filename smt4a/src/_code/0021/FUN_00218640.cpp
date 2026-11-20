@@ -10,7 +10,7 @@
 extern "C" {
 
 int FUN_002ebda8(void);
-int FUN_002f7730(...);
+int questGetDisplayState(...);
 int SBORROW4(...);
 
 int dataFindKindRecordWithAocOverrides(...);
@@ -19,7 +19,7 @@ int effectRenderTransformedInstance(...);
 int textDrawRangeFaded(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
-int FUN_00180310(...);
+int statRowDrawValueImpl(...);
 int renderCtxCalculateStereoParallax(...);
 int gameFlagBlockGet(void);
 int questDataGetRecord(void);
@@ -60,8 +60,8 @@ extern unsigned int dataTableGetNamePayload(unsigned int);
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern unsigned int FUN_00180114(unsigned int);
-/* Supplied declaration required: FUN_00180310. */
+extern unsigned int table01RecordLookupForContent(unsigned int);
+/* Supplied declaration required: statRowDrawValueImpl. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
@@ -75,7 +75,7 @@ extern int resourceRunOperationIfUnblocked(int);
 extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: textFormatFullWidthNumber. */
 /* Supplied declaration required: FUN_002ebda8. */
-/* Supplied declaration required: FUN_002f7730. */
+/* Supplied declaration required: questGetDisplayState. */
 /* Supplied declaration required: partyDrawCategorySelectionIcon. */
 extern int questRecordIsUsable(unsigned int);
 extern int recordIsAvailable(unsigned int);
@@ -266,7 +266,7 @@ void FUN_00218640(void)
       VectorSignedToFloat(*(short *)(temp_v13 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
       textDrawString(2,0xffffffff,temp_v27);
       temp_v12 = (int)temp_v18 + (int)temp_v16;
-      FUN_00180310(0,*(short *)(temp_v13 + 8) + temp_v4 + temp_v12 + 3,
+      statRowDrawValueImpl(0,*(short *)(temp_v13 + 8) + temp_v4 + temp_v12 + 3,
                    (temp_v5 - 1) + (int)*(short *)(temp_v13 + 10),0,7,0x6a);
       textFormatFullWidthNumber(temp_v28,*(unsigned int *)(temp_v19 + 0xf4));
       VectorSignedToFloat(*(short *)(temp_v13 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -397,7 +397,7 @@ LAB_00218d20:
         temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,temp_v9 + 0x48));
         texDrawTableEntryAtStoredOrigin(2,0x1e,0x40,*(short *)(temp_v10 + 8) + temp_v12,*(short *)(temp_v10 + 10) + temp_v5,
                      0x65);
-        temp_v11 = FUN_002f7730(temp_v9,temp_v25);
+        temp_v11 = questGetDisplayState(temp_v9,temp_v25);
         if (temp_v11 != 0) {
           if (temp_v11 != 1) {
             if (temp_v11 != 2) {
@@ -425,7 +425,7 @@ LAB_00218d20:
     } while (temp_v9 < *(int *)(temp_v3 + 0x918));
   }
   efctSetSpeed();
-  temp_v12 = FUN_002f7730(*(unsigned int *)(temp_v3 + 0x910),temp_v25);
+  temp_v12 = questGetDisplayState(*(unsigned int *)(temp_v3 + 0x910),temp_v25);
   if (temp_v12 == 0) {
     temp_v12 = 0;
     do {
@@ -443,7 +443,7 @@ LAB_00218d20:
     texDrawTableEntryAtStoredOrigin(2,0x1e,0x45,(int)*(short *)(temp_v12 + 8) + (int)temp_v18 + temp_v4,
                  *(short *)(temp_v12 + 10) + temp_v5,0x74);
   }
-  temp_v12 = FUN_002f7730(*(unsigned int *)(temp_v3 + 0x910),temp_v25);
+  temp_v12 = questGetDisplayState(*(unsigned int *)(temp_v3 + 0x910),temp_v25);
   if (temp_v12 == 1) {
     temp_v34 = 1;
     temp_v12 = 0;
@@ -484,7 +484,7 @@ LAB_00218d20:
             sprintf((char *)temp_v27,"%s\x81@%s\x81^%s",temp_v19,temp_v33,temp_v31);
           }
           else {
-            temp_v8 = FUN_00180114(temp_v19);
+            temp_v8 = table01RecordLookupForContent(temp_v19);
             sprintf((char *)temp_v27,"%s\x81@%s\x81^%s",temp_v8,temp_v33,temp_v31);
           }
         }
@@ -537,7 +537,7 @@ LAB_00218d20:
     texDrawTableEntryAtStoredOrigin(2,0x1e,0x46,(int)*(short *)(temp_v12 + 8) + (int)temp_v18 + temp_v4,
                  *(short *)(temp_v12 + 10) + temp_v5,0x74);
   }
-  temp_v12 = FUN_002f7730(*(unsigned int *)(temp_v3 + 0x910),temp_v25);
+  temp_v12 = questGetDisplayState(*(unsigned int *)(temp_v3 + 0x910),temp_v25);
   if (temp_v12 == 2) {
     temp_v12 = 0;
     do {
@@ -560,7 +560,7 @@ LAB_00218d20:
     texDrawTableEntryAtStoredOrigin(2,0x1e,0x47,(int)*(short *)(temp_v12 + 8) + (int)temp_v18 + temp_v4,
                  *(short *)(temp_v12 + 10) + temp_v5,0x74);
   }
-  temp_v12 = FUN_002f7730(*(unsigned int *)(temp_v3 + 0x910),temp_v25);
+  temp_v12 = questGetDisplayState(*(unsigned int *)(temp_v3 + 0x910),temp_v25);
   if (temp_v12 == 3) {
     temp_v12 = 0;
     do {

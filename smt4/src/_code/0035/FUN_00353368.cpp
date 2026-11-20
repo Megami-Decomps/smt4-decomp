@@ -23,7 +23,7 @@ extern unsigned char DAT_00407e94; /* 0x407e94 */
 /* Supplied declaration required: libc_strtok. */
 extern int tokenResolveAddress(unsigned int, int *, unsigned int);
 /* Supplied declaration required: stringFormatBounded. */
-extern unsigned int FUN_002b5c44(void);
+extern unsigned int tokenTableGet(void);
 /* Supplied declaration required: libc_strlen. */
 /* Supplied declaration required: nn_boss_TaskOption_TaskOption. */
 
@@ -47,7 +47,7 @@ int FUN_00353368(unsigned int *param_1,int param_2,unsigned int param_3)
   unsigned char temp_v11;
   int temp_v12;
   
-  temp_v2 = FUN_002b5c44();
+  temp_v2 = tokenTableGet();
   temp_v3 = tokenResolveAddress(temp_v2,&temp_v12,*param_1);
   if (-1 < temp_v3) {
     strncpy(temp_v10,param_3,0x20);

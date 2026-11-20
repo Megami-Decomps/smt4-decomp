@@ -32,9 +32,9 @@ typedef struct MotionPlayer {
 
 void quadSourceCopyOut(MotionSource *source, f32 *offset);
 void quadHolderCopyOut(MotionSource *source, f32 *rotation);
-void FUN_0024f7d4(u32 target, f32 *rotation, f32 *offset, f32 weight);
+void xformObjectSetTransform(u32 target, f32 *rotation, f32 *offset, f32 weight);
 void FUN_00267d84(u32 sound, f32 speed);
-void FUN_0024f5ec(u32 target, u16 frame);
+void tiledMeshDraw(u32 target, u16 frame);
 
 /* Applies the source's motion to both targets and syncs them to its current frame. */
 void motionPlayerApplyToTargets(MotionPlayer *player)
@@ -50,15 +50,15 @@ void motionPlayerApplyToTargets(MotionPlayer *player)
     if (player->source->flags & 1) {
         quadSourceCopyOut(player->source, offset);
         quadHolderCopyOut(player->source, rotation);
-        FUN_0024f7d4(targets->first, rotation, offset, 1.0f);
-        FUN_0024f7d4(targets->second, rotation, offset, 1.0f);
+        xformObjectSetTransform(targets->first, rotation, offset, 1.0f);
+        xformObjectSetTransform(targets->second, rotation, offset, 1.0f);
     }
     if (player->sound != 0) {
         FUN_00267d84(player->sound, player->speed * 0.1f);
     }
     u16 frame = info->frame;
-    FUN_0024f5ec(targets->first, frame);
-    FUN_0024f5ec(targets->second, frame);
+    tiledMeshDraw(targets->first, frame);
+    tiledMeshDraw(targets->second, frame);
 }
 
 } /* extern "C" */

@@ -3,14 +3,14 @@
 #include "addon/AocSystemA.h"
 
 extern "C" {
-s32 FUN_002c7e3c();
+s32 gameGlobalsGetFieldState();
 void sysPlaySe(u32 sound);
 s32 fieldStateAllowsAction();
 s32 gameWorkStateGet();
 u32 dataArchiveSetFindFileWithEntry(AocSystemA *system, s32 id);
 u32 dataTableValueOrZero(u32 table);
 void asdTextDrawDirectoryEntry(AsdText *text, s32 font, s32 mode, s32 x, s32 y, u32 directory, s32 index);
-s32 FUN_001688c4(AsdText *text);
+s32 statusDownScanSelectedEntryIndex(AsdText *text);
 void gridNavigationConfigure(GridNavigation *navigation, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys);
 void flagsSetOrClearBit(GridNavigation *navigation, s32 enabled);
 
@@ -19,7 +19,7 @@ void statusDownSetSelectedEntry(s32 selected)
 {
     StatusDownStateA *status = g_statusDown;
     if ((s16)status->selectedEntry < 0 && selected >= 0 && status->tab == 1) {
-        s32 mode = FUN_002c7e3c();
+        s32 mode = gameGlobalsGetFieldState();
         if (mode == 14 || mode == 7) {
             sysPlaySe(0x33);
         } else if (mode == 9 || mode == 10 || mode == 12 || mode == 8) {
@@ -37,7 +37,7 @@ void statusDownSetSelectedEntry(s32 selected)
     } else {
         asdTextDrawDirectoryEntry(status->text, 3, -1, 0, 3, dataTableValueOrZero(0x3F), 0);
     }
-    s32 count = FUN_001688c4(status->text);
+    s32 count = statusDownScanSelectedEntryIndex(status->text);
     gridNavigationConfigure(&status->grid, count, 10, 1, 0, 1);
     flagsSetOrClearBit(&status->grid, 0);
     status->listActive = 1;

@@ -9,7 +9,7 @@ int sysPlaySe(...);
 int eventQueueAddUnique(...);
 int gameGetPlayerData(void);
 int uiSpriteSelectAnim(...);
-int FUN_0020b490(...);
+int resultSetMode(...);
 int roundObjFinish(...);
 
 int qsort(int, int, int, unsigned char *);
@@ -19,7 +19,7 @@ int nkmBaseGetRecord(...);
 int asdMemFree(...);
 int scrScriptProcessDestroy(...);
 int asdLoadFileSyncDefault(void);
-int FUN_0022e774(void);
+int statusPanelClose(void);
 int statusCommitSelectedSkills(int);
 int scrScriptProcessCreate(...);
 int scrScriptProcessStartEntry(...);
@@ -33,7 +33,7 @@ int FUN_00333dc8(...);
 int statusDisplayBindUnitRecord(int, int, int);
 int btlTalkBustUpSetDemonTexture(...);
 int gameClearOwnedSlot(int);
-int FUN_0035da20(...);
+int statusDownSetSelectedIds(...);
 int btlTalkBustUpReleaseTexture(void);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_003f33b0(int, unsigned int, int);
@@ -60,7 +60,7 @@ extern unsigned char LAB_002f5758; /* 0x2f5758 */
 extern unsigned char LAB_00321c94; /* 0x321c94 */
 
 /* Supplied declaration required: qsort. */
-extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
+extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: eventQueueAddUnique. */
@@ -75,16 +75,16 @@ extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 extern int gameGetSlotRecord(int);
 /* Supplied declaration required: asdLoadFileSyncDefault. */
-/* Supplied declaration required: FUN_0020b490. */
+/* Supplied declaration required: resultSetMode. */
 extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_0022e774. */
+/* Supplied declaration required: statusPanelClose. */
 extern int messageMainIsIdle(void);
-extern int FUN_0026c3a0(void);
+extern int gameGlobalsIsActiveStateFour(void);
 /* Supplied declaration required: statusCommitSelectedSkills. */
 /* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00285774. */
-extern int FUN_002a4b28(void);
+extern int compendiumEntryIsRegistered(void);
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002a5e7c. */
 /* Supplied declaration required: statusDownRestartTransition. */
@@ -96,13 +96,13 @@ extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: statusDisplayBindUnitRecord. */
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 /* Supplied declaration required: gameClearOwnedSlot. */
-/* Supplied declaration required: FUN_0035da20. */
+/* Supplied declaration required: statusDownSetSelectedIds. */
 /* Supplied declaration required: btlTalkBustUpReleaseTexture. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: roundObjFinish. */
 /* Supplied declaration required: FUN_003f33b0. */
 extern unsigned int FUN_003f3908(int);
-extern int FUN_004bcaa8(unsigned short, unsigned short, int, unsigned int *, unsigned char);
+extern int statusCollectUnlearnedSkillsAboveLevel(unsigned short, unsigned short, int, unsigned int *, unsigned char);
 /* Supplied declaration required: unitRecordResetCurrentValues. */
 /* Supplied declaration required: unitRecomputeDerivedStats. */
 extern int getUnlockedSlotCount(int);
@@ -162,7 +162,7 @@ void FUN_002f5064(int param_1)
       *(unsigned char *)(temp_v11 + 0x4579) = 0;
       *(unsigned char *)(temp_v11 + 0x457a) = 0;
       temp_v4 = FUN_003f3908(temp_v2);
-      temp_v3 = FUN_002a4b28();
+      temp_v3 = compendiumEntryIsRegistered();
       *(unsigned char *)(param_1 + 0x7f2c) = temp_v3 == 0;
       gameClearOwnedSlot(temp_v2);
       temp_v3 = temp_v2;
@@ -201,9 +201,9 @@ void FUN_002f5064(int param_1)
         temp_v15 = 0;
         temp_v16 = 0;
         temp_v17 = 0;
-        temp_v3 = FUN_004bcaa8(*(unsigned short *)(temp_v2 + 0x62),*(unsigned short *)(temp_v2 + 100),temp_v2 + 0x34
+        temp_v3 = statusCollectUnlearnedSkillsAboveLevel(*(unsigned short *)(temp_v2 + 0x62),*(unsigned short *)(temp_v2 + 100),temp_v2 + 0x34
                              ,(unsigned int *)&temp_v14,*(char *)(temp_v2 + 0x67) != '\0');
-        FUN_0035da20(&temp_v14,(int)(char)temp_v3);
+        statusDownSetSelectedIds(&temp_v14,(int)(char)temp_v3);
         puVar15 = (unsigned int *)(temp_v11 + 0x4564);
         temp_v12 = (unsigned int)*puVar15;
         temp_v0 = '\0';
@@ -252,14 +252,14 @@ void FUN_002f5064(int param_1)
         if ((*(unsigned short *)((unsigned char *)&uStack_ac + 2)) != 0) {
           temp_v0 = temp_v0 + '\x01';
         }
-        FUN_0035da20(&temp_v12,(int)temp_v0);
+        statusDownSetSelectedIds(&temp_v12,(int)temp_v0);
       }
       FUN_00285774();
       temp_v5 = (unsigned int)*(unsigned short *)(temp_v2 + 0x62);
       dataTable01GetRecordWithAocOverride(temp_v5);
       libc_strcpy(temp_v18,temp_v5);
       scrSetStringSlot(8,temp_v18);
-      temp_v4 = FUN_0014bf3c(*(unsigned short *)(temp_v2 + 0x62),0);
+      temp_v4 = demonGetRaceLabel(*(unsigned short *)(temp_v2 + 0x62),0);
       libc_strcpy(temp_v18,temp_v4);
       scrSetStringSlot(0x10,temp_v18);
       scrScriptProcessDestroy(*(unsigned int *)(param_1 + 0x43ac));
@@ -314,7 +314,7 @@ LAB_002f56d4:
     switch(temp_v3) {
     case 0:
       if (*(int *)(temp_v11 + 0x4574) != 2) {
-        FUN_0022e774();
+        statusPanelClose();
         statusDownRestartTransition();
         temp_v2 = *(int *)(param_1 + 0x436c) + 1;
         *(int *)(param_1 + 0x436c) = temp_v2;
@@ -326,7 +326,7 @@ LAB_002f56d4:
       gameGetPlayerData();
       if (((int)(*(unsigned short *)(temp_v5 + 0x30) - 2) <= (int)(unsigned int)*(unsigned short *)(temp_v2 + 100)) &&
          ((unsigned int)*(unsigned short *)(temp_v2 + 100) < (unsigned int)*(unsigned short *)(temp_v5 + 0x30))) {
-        FUN_0022e774();
+        statusPanelClose();
         statusDownRestartTransition();
         *(int *)(param_1 + 0x436c) = *(int *)(param_1 + 0x436c) + 1;
         return;
@@ -334,7 +334,7 @@ LAB_002f56d4:
       *(unsigned int *)(param_1 + 0x436c) = 99;
       break;
     case 1:
-      temp_v3 = FUN_0026c3a0();
+      temp_v3 = gameGlobalsIsActiveStateFour();
       if (temp_v3 != 0) {
         temp_v3 = btlTalkBustUpGetValue();
         if (temp_v3 == 0) {
@@ -411,7 +411,7 @@ LAB_002f56d4:
           if (temp_v2 != 2) {
             return;
           }
-          FUN_0020b490(param_1,0xf);
+          resultSetMode(param_1,0xf);
           return;
         }
         if (temp_v3 != 10) {
@@ -433,7 +433,7 @@ LAB_002f56d4:
           return;
         }
         if (*(char *)(temp_v11 + 0x457a) != '\0') {
-          FUN_0020b490(param_1,0x11);
+          resultSetMode(param_1,0x11);
           return;
         }
         statusDownRestartTransition();

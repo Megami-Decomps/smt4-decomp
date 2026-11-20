@@ -21,23 +21,23 @@ struct ResourceTable27581c {
 
 extern "C" {
 
-extern ResourceTable27581c *DAT_005821a0;
-void FUN_003d5000(u32 handle);
+extern ResourceTable27581c *g_soundActorQueue;
+void resourceHandleRelease(u32 handle);
 
 // Release the handles of every active slot once, after the table has been loaded.
 void resourceTableReleaseHandles(void)
 {
-    if (DAT_005821a0->loaded && !DAT_005821a0->released) {
+    if (g_soundActorQueue->loaded && !g_soundActorQueue->released) {
         s32 i;
-        DAT_005821a0->released = 1;
-        for (i = 0; i < DAT_005821a0->count; i++) {
-            ResourceSlot27581c *slot = &DAT_005821a0->slots[i];
+        g_soundActorQueue->released = 1;
+        for (i = 0; i < g_soundActorQueue->count; i++) {
+            ResourceSlot27581c *slot = &g_soundActorQueue->slots[i];
             if (slot->active) {
                 if (slot->kind == 0) {
-                    FUN_003d5000(slot->handle);
+                    resourceHandleRelease(slot->handle);
                     slot->handle = 0;
                 } else if (slot->kind == 1 && slot->data != 0) {
-                    FUN_003d5000(slot->handle);
+                    resourceHandleRelease(slot->handle);
                     slot->data = 0;
                     slot->unk12 = 0;
                     slot->handle = 0;

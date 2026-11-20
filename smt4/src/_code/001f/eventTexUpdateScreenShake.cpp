@@ -20,7 +20,7 @@ struct EventTexMotionView {
 extern "C" {
 extern EventTex *g_eventTex;
 u32 eventCommandGetPendingCleanup(void);
-void FUN_00257e74(ScreenShakeState *shake);
+void effShakeParticleAdvance(ScreenShakeState *shake);
 const MotionOffset *FUN_0018f654(ScreenShakeState *shake);
 
 // Refresh the current event-texture shake offset when the updated motion is nonzero.
@@ -29,7 +29,7 @@ u32 eventTexUpdateScreenShake(void)
     ScreenShakeState *shake =
         reinterpret_cast<ScreenShakeState *>(eventCommandGetPendingCleanup());
     if (shake != NULL) {
-        FUN_00257e74(shake);
+        effShakeParticleAdvance(shake);
         const MotionOffset *offset = FUN_0018f654(shake);
         if (offset->x != 0.0f || offset->y != 0.0f) {
             EventTexMotionView *texture = reinterpret_cast<EventTexMotionView *>(g_eventTex);

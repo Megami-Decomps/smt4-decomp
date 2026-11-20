@@ -41,7 +41,7 @@ EffEmitter *effEmitterCreateSmall(EffEmitterDesc *desc)
     u32 maxCount = effEmitterGetCapacity(desc);
     EffEmitter *emitter;
     emitter = (EffEmitter *)effAllocCleared(sizeof(EffEmitter) - 0x24);
-    emitter->unk04 = -1;
+    emitter->handle = -1;
     emitter->maxCount = maxCount;
     emitter->scale = 1.0f;
     emitter->unk34 = 1;

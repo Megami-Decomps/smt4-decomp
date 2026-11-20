@@ -3,7 +3,7 @@
 #include "gamedata/FlagsB.h"
 extern "C" {
 void *fileSectionGetData(void *file, u32 id, s32 section);
-s32 FUN_001688c4(void *text);
+s32 statusDownScanSelectedEntryIndex(void *text);
 void gridNavigationConfigure(void *control, s32 count, s32 mode, s32 enabled, s32 initial, s32 step);
 int asdTextDrawDirectoryEntry(void *text, s32 kind, u32 color, s32 alignment, s32 mode, void *file, u32 id);
 void flagsSetOrClearBit(void *control, s32 value);
@@ -17,8 +17,8 @@ void FUN_003f6abc(DirectoryEntryWindow *window)
     u16 textId = window->entry->id;
     fileSectionGetData(window->file, textId, 0);
     asdTextDrawDirectoryEntry(window->text, 3, 0xFFFFFFFF, 0, 3, window->file, textId);
-    window->lineCount = FUN_001688c4(window->text);
-    gridNavigationConfigure(window->textControl, window->lineOffset + FUN_001688c4(window->text), 7, 1, 0, 1);
+    window->lineCount = statusDownScanSelectedEntryIndex(window->text);
+    gridNavigationConfigure(window->textControl, window->lineOffset + statusDownScanSelectedEntryIndex(window->text), 7, 1, 0, 1);
     flagsSetOrClearBit(window->textControl, 0);
     window->scroll = 0;
     if (!flagsBGetBit2(id))

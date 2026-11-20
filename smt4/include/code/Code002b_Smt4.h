@@ -13,12 +13,12 @@ f32 FUN_002b0800(void *text, f32 x, f32 y, f32 depth, f32 opacity);
 
 void FUN_002b011c(void);
 
-u8 FUN_002bfdd4(void);
+u8 messageVoiceFlagsGet(void);
 
 FileHandle * fileHandleClose(FileHandle *file);
 
 void FUN_002b3194(Obj *obj);
 
-void FUN_002b2ae8(Obj *obj, u32 unused, u32 *out);
+void asdMdlNodeGetWorldPosition(Obj *obj, u32 unused, u32 *out);
 
 } /* extern "C" */

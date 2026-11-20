@@ -19,7 +19,7 @@ typedef char FusionCatalogFilterOffsets[offsetof(FusionCatalogState, options.rac
 extern "C" {
 s32 devilIsAvailable(void *, u16);
 s32 itemGetFlagBit1(u16);
-s32 FUN_0029e9cc(u16);
+s32 itemIsCollectedWithRelated(u16);
 s32 arrayContainsU16(const u16 *, s32, u16);
 void rt_memclr(void *, u32);
 s32 devilCompareTablePriority(const void *, const void *);
@@ -39,7 +39,7 @@ void uniteRebuildFusionCatalog(void)
     for (u16 id = 0; id < 1201; ++id) {
         if (devilIsAvailable(work->context, id)) {
             const NkmBaseRecord *record = nkmBaseGetRecord(id);
-            if (itemGetFlagBit1(record->id) || FUN_0029e9cc(record->id)) {
+            if (itemGetFlagBit1(record->id) || itemIsCollectedWithRelated(record->id)) {
                 if (!options->race || options->race == record->race)
                     work->catalogIV.demons[demonCount++] = record->id;
                 if (!arrayContainsU16(work->catalogIV.races, raceCount, record->race))

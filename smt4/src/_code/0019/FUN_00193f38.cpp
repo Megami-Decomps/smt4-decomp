@@ -31,7 +31,7 @@ void FUN_001ee2bc(ColorKeyEffect *effect, u32 arg);
 void FUN_002030bc(ColorKeyEffect *effect, u32 arg);
 void FUN_002031dc(ColorKeyEffect *effect, u32 arg);
 void FUN_002032fc(ColorKeyEffect *effect, u32 arg);
-void FUN_00291008(f32 *output, f32 from, f32 to);
+void mathStepTowards(f32 *output, f32 from, f32 to);
 
 } /* extern "C" */
 
@@ -46,7 +46,7 @@ static inline void advanceColorKeyChannel(ColorKeyEffect *effect, u32 arg)
             effect->param[Value] = 0.0f;
             Restart(effect, arg);
         } else {
-            FUN_00291008(&effect->value[Value], effect->param[Value], effect->target[Value]);
+            mathStepTowards(&effect->value[Value], effect->param[Value], effect->target[Value]);
         }
     }
 }
@@ -63,9 +63,9 @@ static inline void advanceColorKeyRgbChannel(ColorKeyEffect *effect, u32 arg)
             colorKeyTrackAdvanceRgb(reinterpret_cast<ColorKeyTrack *>(effect),
                 reinterpret_cast<const ColorKey *>(arg));
         } else {
-            FUN_00291008(&effect->value[0], effect->param[0], effect->target[0]);
-            FUN_00291008(&effect->value[1], effect->param[1], effect->target[1]);
-            FUN_00291008(&effect->value[2], effect->param[2], effect->target[2]);
+            mathStepTowards(&effect->value[0], effect->param[0], effect->target[0]);
+            mathStepTowards(&effect->value[1], effect->param[1], effect->target[1]);
+            mathStepTowards(&effect->value[2], effect->param[2], effect->target[2]);
         }
     }
 }

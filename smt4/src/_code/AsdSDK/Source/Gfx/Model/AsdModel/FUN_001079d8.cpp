@@ -64,7 +64,7 @@ extern NwCamera *DAT_00464b14;      /* default camera A */
 extern NwCamera *DAT_00464b18;      /* default camera B */
 extern NwCamera *DAT_00464b1c;      /* preview camera */
 extern NwCamera *DAT_00464b34;      /* lens camera */
-extern NwVec2 DAT_00464b3c;         /* lens x, y */
+extern NwVec2 g_asdModelManagerStatic3C;         /* lens x, y */
 extern u32 g_asdModelSlotArray0;
 extern u32 DAT_00464ba0;
 
@@ -119,16 +119,16 @@ void FUN_001079d8(void)
     if (DAT_00464af4 == MODEL_CAMERA_LENS_ORTHOGRAPHIC) {
         eye.set(20.0f, 15.0f, 20.0f);
         target.set(0.0f, 10.0f, 0.0f);
-        NwCamera *camera = FUN_002c05f4((u32)asdMemoryGetDefaultAllocator(), &eye, &target, 0, DAT_00464b3c, lensNear);
+        NwCamera *camera = FUN_002c05f4((u32)asdMemoryGetDefaultAllocator(), &eye, &target, 0, g_asdModelManagerStatic3C, lensNear);
         DAT_00464b34 = camera;
-        camera->distance = 1.0f / DAT_00464b3c.y;
-        drawableSetRectangle(camera, DAT_00464b3c, 1.6666666f);
+        camera->distance = 1.0f / g_asdModelManagerStatic3C.y;
+        drawableSetRectangle(camera, g_asdModelManagerStatic3C, 1.6666666f);
     } else if (DAT_00464af4 == MODEL_CAMERA_LENS_CUSTOM) {
         eye.set(20.0f, 15.0f, 20.0f);
         target.set(0.0f, 10.0f, 0.0f);
         NwVec3 up(0.0f, 0.0f, 0.0f);
         DAT_00464b34 = FUN_00119e54((u32)asdMemoryGetDefaultAllocator(), &eye, &target, &up, DAT_00464af4,
-                                    DAT_00464b3c, 0.0f);
+                                    g_asdModelManagerStatic3C, 0.0f);
     }
     nw_gfx_SceneNode_AttachChild(g_asdModelSlotArray0, (u32)DAT_00464b34);
 

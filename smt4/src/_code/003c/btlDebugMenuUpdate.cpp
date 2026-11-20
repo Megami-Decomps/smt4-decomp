@@ -94,7 +94,7 @@ void asdListBoxSetItemMode3(u32 listBox, u32 id, u32 value, u32 minimum, u32 max
 void jobSetText(u32 job, const char *text);
 u32 jobIsValid(u32 handle);
 u32 jobStop(u32 handle, u16 delay);
-void FUN_0024ef90(u32 handle);
+void asdListBoxJobReset(u32 handle);
 s32 padIsButtonPressed(s32 button);
 s32 dataTable03Sub0GetCount(void);
 s32 dataTable22GetCount(void);
@@ -124,7 +124,7 @@ void btlDebugCreateAttackCameraMenu(DebugMenu *menu, DebugBattle *battle);
 static __inline void closeList(DebugMenu *menu)
 {
     if (jobIsValid(menu->listBox) != 0) {
-        FUN_0024ef90(menu->listBox);
+        asdListBoxJobReset(menu->listBox);
         jobStop(menu->listBox, 0);
     }
 }

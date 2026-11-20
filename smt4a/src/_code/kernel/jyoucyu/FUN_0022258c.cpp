@@ -21,9 +21,9 @@ void commonBgLoadSpritesOnFirstUse(void);
 void campButtonHelpLoad(void);
 void configSettingsResetDefaults(void);
 void FUN_00283d74(s32 value);
-void FUN_00137848(void);
+void gameDataSmallBlockFinalize(void);
 void asdSequenceRequest(s32 sequence, s32 a, s32 b);
-void FUN_00387454(void);
+void effectTexturesLoadOnce(void);
 void dataTableReloadLocked(void);
 void dataTableResolveEntryVariants(void);
 void asdTMTexTableLoadTmx(s32 table, s32 mode);
@@ -56,7 +56,7 @@ void FUN_0022258c(u32 group)
             campButtonHelpLoad();
             configSettingsResetDefaults();
             FUN_00283d74(0);
-            FUN_00137848();
+            gameDataSmallBlockFinalize();
             mapSystemLoadSharedFiles();
             asdSequenceRequest(0x16, 0, 0);
             g_jyoucyu.system = 1;
@@ -64,7 +64,7 @@ void FUN_0022258c(u32 group)
         break;
     case 1:
         if (g_jyoucyu.textures == 0) {
-            FUN_00387454();
+            effectTexturesLoadOnce();
             dataTableReloadLocked();
             dataTableResolveEntryVariants();
             asdDebugHookVoid();

@@ -13,7 +13,7 @@ struct BattleActionDetails {
 extern "C" {
 void btlCommandMenuResolveLayout(BtlUiObjC *, s16 *kind, s16 *id);
 void btlCommandBeginTargetSelection(BtlUiObjC *);
-void FUN_0028bfe4(BtlUiObjC *);
+void btlUiObjCResetToState27(BtlUiObjC *);
 s32 playSceneIsFadeInDone(BtlUiObjA *);
 void playSceneFadeOutStart(BtlUiObjA *);
 void playSceneTimerSubStartReverse(BtlUiObjB *);
@@ -46,7 +46,7 @@ void btlUiRouteSelectedAction(void)
         btlCommandBeginTargetSelection(selection);
     } else {
         ui->panelState.state = 8;
-        FUN_0028bfe4(selection);
+        btlUiObjCResetToState27(selection);
         ui = g_btlUi.ui;
         if (playSceneIsFadeInDone(&ui->objA) && recordQueryStateThree(&ui->objB)) {
             playSceneFadeOutStart(&ui->objA);

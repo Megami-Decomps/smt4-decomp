@@ -17,6 +17,6 @@ bool FUN_003f2448(void)
     if (info == NULL) {
         return false;
     }
-    return FUN_0019acdc(info->id, 0) == 2;
+    return unitMapIdToCategory(info->id, 0) == 2;
 }
 }

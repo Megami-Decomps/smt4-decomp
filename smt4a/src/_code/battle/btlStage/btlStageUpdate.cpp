@@ -9,8 +9,8 @@ extern "C" {
 extern BtlStageGlobals g_btlStage;
 extern CameraRegistry *g_handleRegistry;
 extern const char DAT_0052a9b8[]; // Light_EFT
-void FUN_002c23cc(u32 value);
-void FUN_00400d80(BtlStage *stage, s32 id, s32 variant, u32 flags);
+void frameTexConfigureCaptureTextures(u32 value);
+void btlStageModelLoad(BtlStage *stage, s32 id, s32 variant, u32 flags);
 s32 FUN_00401440(BtlStage *stage);
 void resourceOwnerSetChildEulerAngles(BtlStage *stage, f32 x, f32 y, f32 z);
 u16 resourceNameGroupFindIndex(void *registry, const char *name);
@@ -18,7 +18,7 @@ void FUN_004d8bf8(BtlStage *stage, f32 x, f32 y, f32 z);
 void FUN_004d896c(BtlStage *stage, u32 first, u32 second);
 void frameTexturesRelease(void);
 void objectOwner3Release(BtlStage *stage);
-void FUN_00401198(BtlStage *stage);
+void renderRangeTargetApply(BtlStage *stage);
 void FUN_0040128c(FrameColorUpdateWork *stage);
 
 /* Starts loading the stage model of the stage ID pair (stage 1 variant 1 when either is unset), sharing the
@@ -32,7 +32,7 @@ static __inline void stageStartLoad(BtlStage *stage)
         variant = 1;
     }
     stage->context = g_btlStage.context;
-    FUN_00400d80(stage, id, variant, 0x1C0);
+    btlStageModelLoad(stage, id, variant, 0x1C0);
 }
 
 // Load, initialize, update or release the stage model and saturate its lifecycle frame counter.
@@ -48,7 +48,7 @@ u32 btlStageUpdate(BtlStage *stage, s32 enabled)
     case 0:
         break;
     case 1: {
-        FUN_002c23cc(0);
+        frameTexConfigureCaptureTextures(0);
         stageStartLoad(stage);
         stage->state = 2;
         break;
@@ -75,7 +75,7 @@ u32 btlStageUpdate(BtlStage *stage, s32 enabled)
     case 4:
         btlStageUpdateNodePositions((BattleStageModelA *)stage, ((BattleStageModelA *)stage)->position);
         resourceOwnerSetChildEulerAngles(stage, 0.0f, g_btlCamera->basePose.yaw, 0.0f);
-        FUN_00401198(stage);
+        renderRangeTargetApply(stage);
         FUN_0040128c((FrameColorUpdateWork *)stage);
         break;
     }

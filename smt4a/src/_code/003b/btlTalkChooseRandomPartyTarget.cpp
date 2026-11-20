@@ -24,7 +24,7 @@ extern "C" {
 extern TalkCandidateMasks g_btlMessageFlagMasks;
 s32 scrGetArg(u32);
 void scrSetResult(s32);
-u32 FUN_004bd0d8(SlotRecordA *);
+u32 slotIsReservePick(SlotRecordA *);
 u32 randRange(s32);
 
 u32 btlTalkChooseRandomPartyTarget()
@@ -43,7 +43,7 @@ u32 btlTalkChooseRandomPartyTarget()
                 SlotRecordA *record = gameGetSlotRecord(slot);
                 if (!bitsAt60Test(record, 1) &&
                     !bitsAt60Test(record, 10) && record->id != excludedId) {
-                    if (!FUN_004bd0d8(record)) {
+                    if (!slotIsReservePick(record)) {
                         candidates[available] = slot;
                         ++available;
                     } else {

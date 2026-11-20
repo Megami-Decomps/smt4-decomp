@@ -8,7 +8,7 @@ extern "C" {
 
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void);
-int FUN_0025ef68(int, int, int);
+int mapResolveCollisionSphere(int, int, int);
 int FUN_00294c28(void);
 int FUN_00295108(int);
 int distSpatial(void);
@@ -45,7 +45,7 @@ extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
-/* Supplied declaration required: FUN_0025ef68. */
+/* Supplied declaration required: mapResolveCollisionSphere. */
 extern unsigned int FUN_0029202c(void);
 /* Supplied declaration required: FUN_00294c28. */
 /* Supplied declaration required: FUN_00295108. */
@@ -175,7 +175,7 @@ void FUN_003868dc(int param_1)
         *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v14 * temp_v8;
         *(unsigned int *)(param_1 + 0xc0) = 1;
         if (DAT_005f1c48 == '\0') {
-          FUN_0025ef68(temp_v2 + 0x28,temp_v2 + 0x34,0);
+          mapResolveCollisionSphere(temp_v2 + 0x28,temp_v2 + 0x34,0);
         }
         g_gameState.unk298 = g_gameState.unk298 + (float)((unsigned long long)temp_v13 >> 0x20);
         if ((int)g_gameState.unk298 >= 0x44bb8001) {

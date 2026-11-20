@@ -20,7 +20,7 @@ void asdTextureRelease(AsdTexture* texture);
 extern "C" {
 #endif
 
-void FUN_0028bfe4(PlayScene *scene);
+void btlUiObjCResetToState27(PlayScene *scene);
 
 #ifdef __cplusplus
 }

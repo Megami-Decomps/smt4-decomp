@@ -20,7 +20,7 @@ s32 nw_snd_internal_SoundArchiveFile_FileHeader_GetStringBlockOffset(void *heade
 u32 nw_snd_internal_SoundArchiveFile_FileHeader_GetStringBlockSize(void *header);
 u32 fileHandleSeek(void *stream, s32 offset, s32 origin);
 u32 fileHandleRead(void *stream, u32 destination, u32 size, u32 *bytesRead);
-void FUN_001757c4(void *header, u32 destination);
+void soundArchiveStringBlockSetOffset(void *header, u32 destination);
 
 /* Reads the archive's string block into `destination` (at most `capacity` bytes) and parses it. */
 u32 soundArchiveLoadStringBlock(SoundArchiveReader *reader, u32 destination, u32 capacity)
@@ -46,7 +46,7 @@ u32 soundArchiveLoadStringBlock(SoundArchiveReader *reader, u32 destination, u32
     if (readSize != size) {
         return 0;
     }
-    FUN_001757c4(reader->header, destination);
+    soundArchiveStringBlockSetOffset(reader->header, destination);
     return 1;
 }
 

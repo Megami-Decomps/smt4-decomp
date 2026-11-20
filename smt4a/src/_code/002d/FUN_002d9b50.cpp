@@ -21,7 +21,7 @@ int slotSetRequest(...);
 int popupStateClose(...);
 int mapTrapGetUnk3C(...);
 int FUN_002de104(...);
-int FUN_00303460(...);
+int lmapCameraSetMode(...);
 int FUN_00303bd4(...);
 int mapSetSceneState(...);
 int naviMainSetFlagsAndActivate(...);
@@ -31,14 +31,14 @@ int FUN_00365c94(...);
 int naviMainSetRequestTriple(...);
 int uiPlayGatedActionFeedback(...);
 int table23FindRecordByKey(...);
-int FUN_003d2158(...);
+int soundApplyValueOrStop(...);
 int playerSetClampedValue(...);
 int flagValueSub(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
 int soundVolumeSettingSet(...);
-int FUN_0014af98(...);
+int messageVoiceBankGet(...);
 int FUN_001628c0(...);
 int sysPlaySe(...);
 int libm_cosf(...); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
@@ -83,8 +83,8 @@ extern int DAT_005f1c94; /* 0x5f1c94 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: soundVolumeSettingSet. */
 extern unsigned int soundVolumeSettingGet(void);
-/* Supplied declaration required: FUN_0014af98. */
-extern unsigned int FUN_00152f44(void);
+/* Supplied declaration required: messageVoiceBankGet. */
+extern unsigned int messageVoiceFlagsGet(void);
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: FUN_001628c0. */
 /* Supplied declaration required: FUN_001681c4. */
@@ -105,7 +105,7 @@ extern int gameFlagIsSet(unsigned int);
 extern int pairedAvailabilityBothReady(void);
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_003024a0. */
-/* Supplied declaration required: FUN_00303460. */
+/* Supplied declaration required: lmapCameraSetMode. */
 /* Supplied declaration required: FUN_00303bd4. */
 extern int mapJobIsDone(void);
 /* Supplied declaration required: mapMainStartEntry. */
@@ -125,7 +125,7 @@ extern int dataTableGetRecord23(void);
 /* Supplied declaration required: uiPlayGatedActionFeedback. */
 /* Supplied declaration required: table23FindRecordByKey. */
 /* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: FUN_003d2158. */
+/* Supplied declaration required: soundApplyValueOrStop. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
 /* Supplied declaration required: titleSetSlotValueState2. */
 extern unsigned int FUN_003e0034(void);
@@ -185,8 +185,8 @@ void FUN_002d9b50(void)
         *(unsigned char *)(temp_v6 + 0x6c) = 0;
         libm_sinf();
         libm_cosf();
-        temp_v11 = FUN_00152f44();
-        temp_v1 = FUN_0014af98();
+        temp_v11 = messageVoiceFlagsGet();
+        temp_v1 = messageVoiceBankGet();
         FUN_001628c0("I001019",temp_v1,temp_v11,1);
         temp_v6 = g_lmapScene;
         *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;
@@ -281,7 +281,7 @@ void FUN_002d9b50(void)
                 libm_sinf();
                 libm_cosf();
                 temp_v6 = randBetween(0,1);
-                FUN_0014af98();
+                messageVoiceBankGet();
                 soundVolumeSettingSet();
                 sysPlayVoice(temp_v6 + 0x10002de);
                 soundVolumeSettingSet(temp_v1);
@@ -305,7 +305,7 @@ void FUN_002d9b50(void)
               libm_sinf();
               libm_cosf();
               temp_v6 = randBetween(0,1);
-              FUN_0014af98();
+              messageVoiceBankGet();
               soundVolumeSettingSet();
               sysPlayVoice(temp_v6 + 0x10002e2);
               soundVolumeSettingSet(temp_v1);
@@ -331,7 +331,7 @@ void FUN_002d9b50(void)
               libm_sinf();
               libm_cosf();
               temp_v6 = randBetween(0,1);
-              FUN_0014af98();
+              messageVoiceBankGet();
               soundVolumeSettingSet();
               sysPlayVoice(temp_v6 + 0x10002e0);
               soundVolumeSettingSet(temp_v1);
@@ -389,7 +389,7 @@ LAB_002da3cc:
               libm_sinf();
               libm_cosf();
               temp_v6 = randBetween(0,1);
-              FUN_0014af98();
+              messageVoiceBankGet();
               soundVolumeSettingSet();
               sysPlayVoice(temp_v6 + 0x10002dc);
               soundVolumeSettingSet(temp_v1);
@@ -408,7 +408,7 @@ LAB_002da3cc:
           FUN_002d1f40(10,0x78,0);
           if ((int)(unsigned int)*(unsigned short *)(temp_v0 + 4) <= *(int *)(g_lmapScene + 0x26c)) {
             popupStateClose();
-            FUN_003d2158(*(unsigned int *)(g_lmapScene + 0x264),0);
+            soundApplyValueOrStop(*(unsigned int *)(g_lmapScene + 0x264),0);
             FUN_002de104();
             FUN_00324e38(0);
             temp_v6 = g_lmapScene;
@@ -421,7 +421,7 @@ LAB_002da3cc:
           }
           else {
             popupStateClose();
-            FUN_003d2158(*(unsigned int *)(g_lmapScene + 0x264),0);
+            soundApplyValueOrStop(*(unsigned int *)(g_lmapScene + 0x264),0);
             mapTrapEnable();
             FUN_00324e38(0);
             temp_v6 = g_lmapScene;
@@ -458,14 +458,14 @@ LAB_002da3cc:
         if (*(int *)(temp_v6 + 8) == 1) {
           *(unsigned int *)(temp_v6 + 0x54) = 0;
           *(unsigned int *)(temp_v6 + 0x58) = 0x40400000;
-          temp_v11 = FUN_00152f44();
-          temp_v1 = FUN_0014af98();
+          temp_v11 = messageVoiceFlagsGet();
+          temp_v1 = messageVoiceBankGet();
           FUN_001628c0("I001022",temp_v1,temp_v11,1);
         }
         if (*(int *)(g_lmapScene + 8) >= 6) {
           mapTrapGetUnk3C();
           uiPlayGatedActionFeedback();
-          FUN_00303460(0);
+          lmapCameraSetMode(0);
           mapSetSceneState(1);
           DAT_005f161c = 0;
           DAT_005f1614 = 0;
@@ -600,7 +600,7 @@ LAB_002dad8c:
               temp_v6 = g_lmapScene;
               *(unsigned int *)(g_lmapScene + 4) = 8;
               *(unsigned int *)(temp_v6 + 0x54) = 0x23;
-              FUN_00303460(0x16);
+              lmapCameraSetMode(0x16);
               *(float *)(g_lmapScene + 0x58) = temp_v10;
             }
           }
@@ -611,8 +611,8 @@ LAB_002dad8c:
         *(int *)(g_lmapScene + 8) = temp_v6;
         if (temp_v6 == 5) {
           sysPlayVoice(0x10000c5);
-          temp_v11 = FUN_00152f44();
-          temp_v1 = FUN_0014af98();
+          temp_v11 = messageVoiceFlagsGet();
+          temp_v1 = messageVoiceBankGet();
           FUN_001628c0("I001023",temp_v1,temp_v11,1);
         }
         if (*(int *)(g_lmapScene + 8) == 7) {
@@ -621,7 +621,7 @@ LAB_002dad8c:
         temp_v6 = linkHolderCallFirst(*(unsigned int *)(g_lmapScene + 0x1a8));
         if ((temp_v6 == 0x23) &&
            (temp_v6 = linkHolderCheckFirst(*(unsigned int *)(g_lmapScene + 0x1a8)), temp_v6 != 0)) {
-          FUN_00303460(0x17);
+          lmapCameraSetMode(0x17);
           temp_v6 = g_lmapScene;
           *(unsigned int *)(g_lmapScene + 0x54) = 0x24;
           *(float *)(temp_v6 + 0x58) = temp_v10;
@@ -692,7 +692,7 @@ LAB_002dad8c:
           if (temp_v6 != 0) {
             DAT_005f1adc = 0;
             uiPlayGatedActionFeedback();
-            FUN_00303460(0);
+            lmapCameraSetMode(0);
             mapSetSceneState(1);
             DAT_005f161c = 0;
             DAT_005f1614 = 0;

@@ -81,7 +81,7 @@ u8 refValueIsSet(s32 *valueRef);
 void gfxCommandSetFlushCursor(ModelSlot *model);
 void objectListsClearActive(SlotOwner *owner);
 void FUN_00144ab4(s32 value);
-void FUN_0017dd80(void);
+void asdGxFlushCommandBuffer(void);
 void renderCtxResetFrameState(RenderCtxA *context);
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 FUN_00157e98(ModelSlot *model, ModelAnimationSet *animations);
@@ -139,7 +139,7 @@ u32 FUN_00146048(void)
     }
     FUN_00144ab4(0);
     renderCtxSetStereoMode(g_renderCtx, 0);
-    FUN_0017dd80();
+    asdGxFlushCommandBuffer();
     renderCtxResetFrameState(g_renderCtx);
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     manager = g_handleRegistry;

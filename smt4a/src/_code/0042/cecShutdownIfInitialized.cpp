@@ -12,7 +12,7 @@ struct CecState {
 
 extern CecState g_cecState;
 s32 ipcServiceSessionRelease(void);
-s32 FUN_0042fe18(void);
+s32 cecdServiceCloseHandle(void);
 void FUN_0042fbe4(void);
 
 s32 cecShutdownIfInitialized(void)
@@ -29,7 +29,7 @@ s32 cecShutdownIfInitialized(void)
             g_cecState.unk02 = 0;
             g_cecState.flushPending = 0;
         }
-        s32 stopResult = FUN_0042fe18();
+        s32 stopResult = cecdServiceCloseHandle();
         result = stopResult;
         if (nnResultIsFailure(stopResult)) {
             return stopResult;

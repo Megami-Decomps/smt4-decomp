@@ -7,7 +7,7 @@ extern "C" {
 
 int resultSetMenuState(...);
 int playerRecalcStatsFromEquipment(...);
-int FUN_0029a0cc(void);
+int btlBuildDemonSnapshotFromSaveRecord(void);
 int FUN_0029c424(...);
 int SBORROW4(...);
 
@@ -18,7 +18,7 @@ int ifTouchRegionAdd(int, int, int, int);
 int FUN_0029ede8(int, unsigned int, unsigned int, int);
 int buttonHelpSetText(...);
 int listCursorGetRowIfUnblocked(...);
-int FUN_0029efd8(...);
+int gridNavigationHandleConfirm(...);
 int uiScrollHandleActionsOrTouch(...);
 int messageStatesSetFirst(...);
 int gameGetPlayerData(void);
@@ -27,7 +27,7 @@ int uiSlidingSpriteAdvance(int, int);
 int eventQueueAddUniqueIfValid(...);
 int timerStart(...);
 int uiSpriteAdvanceAnimation(...);
-int FUN_002c1658(...);
+int inputQueryButtonState(...);
 
 /* stack frame of param_1: 10 slot(s), 37 byte(s) */
 typedef struct {
@@ -52,7 +52,7 @@ extern int FUN_0029563c(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: playerRecalcStatsFromEquipment. */
-/* Supplied declaration required: FUN_0029a0cc. */
+/* Supplied declaration required: btlBuildDemonSnapshotFromSaveRecord. */
 /* Supplied declaration required: FUN_0029c424. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
 extern int ifTouchGetSelectionModeForRegion(int);
@@ -60,7 +60,7 @@ extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: listCursorGetRowIfUnblocked. */
-/* Supplied declaration required: FUN_0029efd8. */
+/* Supplied declaration required: gridNavigationHandleConfirm. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: messageStatesSetFirst. */
 /* Supplied declaration required: gameGetPlayerData. */
@@ -75,7 +75,7 @@ extern int buttonHelpGetStatus(void);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c1658. */
+/* Supplied declaration required: inputQueryButtonState. */
 
 
 void FUN_00204358(int param_1)
@@ -267,10 +267,10 @@ LAB_00204838:
     piVar14 = (int *)(param_1 + 0xcfcc);
     if (temp_v12 == 0) {
       temp_v12 = temp_v10;
-      FUN_0029efd8(temp_v10,0);
+      gridNavigationHandleConfirm(temp_v10,0);
       if (temp_v12 == 0) {
         temp_v10 = 4;
-        FUN_002c1658(4,0);
+        inputQueryButtonState(4,0);
         if (temp_v0 || temp_v10 != 0) {
           if (*psVar13 > *psVar18) {
             *psVar13 = *psVar13 - 1;
@@ -283,17 +283,17 @@ LAB_002049f8:
           goto LAB_002049fc;
         }
         temp_v10 = 3;
-        FUN_002c1658(3,0);
+        inputQueryButtonState(3,0);
         if (!(temp_v10 != 0 || temp_v13)) {
           temp_v10 = 1;
-          FUN_002c1658();
+          inputQueryButtonState();
           if (temp_v10 != 0) {
             statusRefundPlayerStatAllocation(param_1);
             temp_v7 = 0x100016e;
             goto LAB_00204cb8;
           }
           temp_v10 = 9;
-          FUN_002c1658(9,1);
+          inputQueryButtonState(9,1);
           temp_v7 = 0x100016d;
           if (temp_v10 != 0) {
             temp_v13 = 1;
@@ -362,7 +362,7 @@ LAB_00204d40:
           }
           else {
             temp_v10 = 0;
-            FUN_002c1658(0,1);
+            inputQueryButtonState(0,1);
             if (temp_v10 != 0) {
               if (*piVar14 != 0) {
                 temp_v10 = gameGetPlayerData();
@@ -382,7 +382,7 @@ LAB_00204d40:
             }
             else {
               temp_v10 = 0;
-              FUN_002c1658(0,1);
+              inputQueryButtonState(0,1);
               if (temp_v10 != 0) {
                 temp_v5 = *piVar14;
                 temp_v13 = temp_v5 == 0;
@@ -426,7 +426,7 @@ LAB_00204d14:
           }
           playerRecalcStatsFromEquipment(0);
           gameGetPlayerData();
-          FUN_0029a0cc();
+          btlBuildDemonSnapshotFromSaveRecord();
           return;
         }
         if (*piVar14 < 1) goto LAB_002049f8;

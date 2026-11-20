@@ -3,9 +3,9 @@
 #include "gamedata/DataTable.h"
 
 extern "C" {
-extern SoundActorQueue *DAT_00448c20;
+extern SoundActorQueue *g_soundActorQueue;
 const void *aocDataTable2dGetEntryKind4(u32 index);
-s32 FUN_002f4814(void);
+s32 dataTable45GetSection4Count(void);
 void FUN_0027ef2c(u32 soundId, s32 kind, f32 x, f32 y, f32 z);
 
 // Queue ambient sound actors for this map and the extra fixed placements in its special area.
@@ -16,11 +16,11 @@ void mapAmbientSoundActorsSpawn(s32 map, s32 area)
         s16 x, y, z;
         s32 sound;
     };
-    SoundActorQueue *queue = DAT_00448c20;
+    SoundActorQueue *queue = g_soundActorQueue;
     queue->enabled = 1;
     queue->count = 0;
     s32 index = 0;
-    if (FUN_002f4814() > 0) {
+    if (dataTable45GetSection4Count() > 0) {
         do {
             const Placement *placement = static_cast<const Placement *>(aocDataTable2dGetEntryKind4(index));
             if (placement->map != -1 && placement->map == map && placement->area == area) {
@@ -30,7 +30,7 @@ void mapAmbientSoundActorsSpawn(s32 map, s32 area)
                              sound != 0, position.x, position.y, position.z);
             }
             ++index;
-        } while (index < FUN_002f4814());
+        } while (index < dataTable45GetSection4Count());
     }
     if (map != 10 || area != 5)
         return;

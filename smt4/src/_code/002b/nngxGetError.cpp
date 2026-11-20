@@ -2,14 +2,14 @@
 
 extern "C" {
 
-extern u32 DAT_0044e328;
+extern u32 g_nngxLastError;
 
 /* Returns the pending value and clears it. */
 u32 nngxGetError(void)
 {
-    u32 value = DAT_0044e328;
+    u32 value = g_nngxLastError;
 
-    DAT_0044e328 = 0;
+    g_nngxLastError = 0;
     return value;
 }
 

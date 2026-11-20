@@ -23,7 +23,7 @@ extern TrigEntry g_sinCosTable[];
 
 u32 scrGetArg(u32 index);
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(f32* dst, f32* matrix, f32* src);
-void FUN_0027fc14(s32 mode);
+void lmapCameraSetMode(s32 mode);
 void lmapSetSceneId(s32 id);
 void FUN_00273840(s32 arg);
 
@@ -82,7 +82,7 @@ u32 FUN_002eef98(void)
 
     if (g_mapCamera->mode != 3) {
         g_mapCamera->enabled = 1;
-        FUN_0027fc14(3);
+        lmapCameraSetMode(3);
         lmapSetSceneId(0x1d);
     }
     FUN_00273840(1);

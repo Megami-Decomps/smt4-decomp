@@ -25,17 +25,17 @@ u32 asdListBoxGetSelectedItemId(u32);
 u32 FUN_003e83b4(BattleDebugDrawWork *, s32, s32);
 void FUN_004d0f48(BattleDebugMenu *, u32);
 void uiDrawFlagLabels(BattleDebugMenu *, u32);
-extern BattleDebugMenuGlobals DAT_005715f8;
+extern BattleDebugMenuGlobals g_btlDebugGlobals;
 }
 
 extern "C" u32 FUN_002ba870(u32 job)
 {
     BattleDebugDrawWork *work = (BattleDebugDrawWork *)jobGetWork(job);
-    BattleDebugMenu *menu = DAT_005715f8.menu;
+    BattleDebugMenu *menu = g_btlDebugGlobals.menu;
     if (menu != NULL) {
         switch (menu->state) {
         case 1:
-            FUN_004d0f48(menu, DAT_005715f8.resource);
+            FUN_004d0f48(menu, g_btlDebugGlobals.resource);
             break;
         case 10:
             if (asdListBoxGetSelectedItemId(menu->list) == 12) {

@@ -35,7 +35,7 @@ int FUN_0043cb0c(int param_1,unsigned int param_2,int param_3,unsigned int param
     FUN_001bcd48(10000000,0);
   }
   if (iVar1 < 0) {
-    FUN_00189a38(iVar1,0x43cbd4);
+    errThrowFatal(iVar1,0x43cbd4);
   }
   FUN_00170e58();
   FUN_00170414(1);

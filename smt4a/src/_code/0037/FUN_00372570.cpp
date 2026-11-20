@@ -3,7 +3,7 @@
 
 extern "C" {
 
-s32 FUN_0026fa30(void);
+s32 partyPanelReconfigureStockGrids(void);
 s32 scrollOwnerSelectIndex(void *cursor, s32 column);
 s32 scrollListSetSelectionTracked(void *cursor, s32 row);
 s32 slotPlacementAssignSlotPosition(PartyPanelWidget *widget, s32 expanded);
@@ -23,7 +23,7 @@ static void partyPanelCollapse(void)
     for (i = 0; i < 0x18; i++) {
         slotPlacementAssignSlotPosition(panel->demons[i], panel->page);
     }
-    FUN_0026fa30();
+    partyPanelReconfigureStockGrids();
 }
 
 /* Flips the expanded flag, shows keyframe 4 and refreshes every header and row handle. */
@@ -40,7 +40,7 @@ static void partyPanelExpand(void)
     for (i = 0; i < 0x18; i++) {
         slotPlacementAssignSlotPosition(panel->demons[i], panel->page);
     }
-    FUN_0026fa30();
+    partyPanelReconfigureStockGrids();
 }
 
 u32 FUN_00372570(s32 force)

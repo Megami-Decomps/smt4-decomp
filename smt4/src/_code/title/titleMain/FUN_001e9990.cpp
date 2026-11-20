@@ -22,7 +22,7 @@ int FUN_0026ff54(void);
 int frameTexCampSetMode(...);
 int FUN_00275dc4(void);
 int animationEvaluateCallback(...); // declcheck: local (romwright prototype; the shared declaration in AsdSDK/Source/Gfx/Model/AsdMotionControlApi.h does not compile here: more than one instance of overloaded function "modelSetScale" has "C" linkage)
-int FUN_00287c34(...);
+int mapSceneResetState(...);
 int uiFadeRelease(void);
 int soundChannelStopAll(...);
 int slotSetRequest(...);
@@ -33,7 +33,7 @@ int jobStop(...);
 int titleConfigCreate(void);
 int FUN_0030a9d8(void);
 
-int FUN_00210194(...);
+int modelOwnerApplyAnimationTime(...);
 int commonBgBeginExit(void);
 int commonBgReset(void);
 int commonBgAcquire(void);
@@ -48,13 +48,13 @@ int lightOwnerRegister(...);
 int modelSlotAttachChild(...);
 int FUN_002a09b4(...);
 int FUN_002a5eb4(void);
-int FUN_002a8638(...);
+int cameraExportProviderEntryWords(...);
 int buttonHelpSetPreset(...);
 int eventQueueAddUnique(...);
-int FUN_002bc0e0(void);
+int gxResetUniformQuadColorsAndScale(void);
 int dataTableGet(...);
 int FUN_002c159c(...);
-int FUN_002c1e30(...);
+int stereoCameraSetPerspective(...);
 int FUN_003bc9d0(unsigned int *);
 int VectorSignedToFloat(int, int);
 
@@ -96,7 +96,7 @@ extern unsigned int DAT_0049fc88; /* 0x49fc88 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0019213c. */
 /* Supplied declaration required: modelEvaluateFirstScalarChannel. */
-/* Supplied declaration required: FUN_00210194. */
+/* Supplied declaration required: modelOwnerApplyAnimationTime. */
 /* Supplied declaration required: commonBgBeginExit. */
 extern int FUN_00215a14(void);
 extern int effIsFinished(unsigned int);
@@ -113,7 +113,7 @@ extern int buttonHelpHasEnabledEntryForId(unsigned int);
 /* Supplied declaration required: FUN_00275dc4. */
 extern int jobWorkerPollAndFree(void);
 /* Supplied declaration required: animationEvaluateCallback. */
-/* Supplied declaration required: FUN_00287c34. */
+/* Supplied declaration required: mapSceneResetState. */
 extern int screenFadesAllReady(void);
 /* Supplied declaration required: commonBgAcquire. */
 /* Supplied declaration required: buttonHelpCreate. */
@@ -134,7 +134,7 @@ extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: FUN_002a09b4. */
 /* Supplied declaration required: FUN_002a5eb4. */
 /* Supplied declaration required: asdModelSlotRelease. */
-/* Supplied declaration required: FUN_002a8638. */
+/* Supplied declaration required: cameraExportProviderEntryWords. */
 extern int modelHasLoadedAttachment(unsigned int);
 /* Supplied declaration required: sndObjectForwardField8. */
 /* Supplied declaration required: buttonHelpSetContext. */
@@ -143,13 +143,13 @@ extern unsigned short ifTouchRegionAddRequested(unsigned int, unsigned int);
 /* Supplied declaration required: ifTouchRegionRemove. */
 extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: eventQueueAddUnique. */
-/* Supplied declaration required: FUN_002bc0e0. */
+/* Supplied declaration required: gxResetUniformQuadColorsAndScale. */
 extern int padIsButtonPressed(unsigned int);
 extern int gameDataBlocksGetSaveData(void);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTableGet. */
 /* Supplied declaration required: FUN_002c159c. */
-/* Supplied declaration required: FUN_002c1e30. */
+/* Supplied declaration required: stereoCameraSetPerspective. */
 /* Supplied declaration required: jobStop. */
 extern unsigned int asdCameraGetSavedRenderPairs(void);
 /* Supplied declaration required: asdSequenceRequest. */
@@ -214,7 +214,7 @@ int FUN_001e9990(unsigned int handle)
     temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v4 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
     *(float *)&puVar13[0x16] = in_s0;
     puVar13[0x17] = temp_v6;
-    FUN_002bc0e0();
+    gxResetUniformQuadColorsAndScale();
     if (*(char *)((int)puVar13 + 0x95) == '\0') {
       temp_v4 = pairedAvailabilityGetState(0);
       if (temp_v4 != 0) {
@@ -293,9 +293,9 @@ int FUN_001e9990(unsigned int handle)
     modelSlotAttachChild(puVar13[0x22],0);
     temp_v6 = asdCameraGetSavedRenderPairs();
     temp_v10 = (unsigned int *)&temp_v12;
-    FUN_002a8638(*(unsigned int *)(puVar13[0x22] + 8),&temp_v13,temp_v14,&temp_v11);
+    cameraExportProviderEntryWords(*(unsigned int *)(puVar13[0x22] + 8),&temp_v13,temp_v14,&temp_v11);
     temp_v13 = (unsigned char *)romwright_f2u((float)((romwright_u2f((unsigned int)(temp_v13)) * 180.0f * 0.31830987f)));
-    FUN_002c1e30(temp_v6,1);
+    stereoCameraSetPerspective(temp_v6,1);
     temp_v5 = 0x3f800000;
     in_s0 = 5.0f;
     FUN_002c159c(temp_v6);
@@ -418,7 +418,7 @@ int FUN_001e9990(unsigned int handle)
         temp_v6 = puVar3[0x23];
         in_s0 = (float)puVar3[0x26];
       }
-      FUN_00210194(temp_v6);
+      modelOwnerApplyAnimationTime(temp_v6);
     }
     temp_v4 = effIsFinished(*(unsigned int *)(puVar3[0x23] + 8));
     if (((temp_v4 != 0) && (temp_v4 = gaugeTaskIsIdle(*(unsigned int *)(puVar3[0x23] + 8)), temp_v4 != 0)) &&
@@ -594,7 +594,7 @@ LAB_001ea4cc:
         else {
           playerInitNewGame(0);
           aocActivateFileGroupFlags(g_aocSystem);
-          FUN_00287c34(0);
+          mapSceneResetState(0);
           DAT_0049fc74 = 0;
           DAT_0049fc88 = 1;
           temp_v10 = (unsigned int *)0x1;
@@ -606,7 +606,7 @@ LAB_001ea4cc:
       }
       else {
         FUN_0026ff54();
-        FUN_00287c34(1);
+        mapSceneResetState(1);
         temp_v4 = gameDataBlocksGetSaveData();
         if (*(unsigned char *)(temp_v4 + 2) >= 2) {
           if (*(unsigned char *)(temp_v4 + 2) == 2) {

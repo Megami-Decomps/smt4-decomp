@@ -10,7 +10,7 @@ extern "C" {
 
 int textDrawString(...);
 int efctSetSpeed(void);
-int FUN_00180310(...);
+int statRowDrawValueImpl(...);
 int FUN_00185e84(...);
 int arrayContainsU16(...);
 int statDrawClampedDelta(...);
@@ -31,7 +31,7 @@ extern unsigned char LAB_003cc19c; /* 0x3cc19c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00180310. */
+/* Supplied declaration required: statRowDrawValueImpl. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00185e84. */
 extern int resourceRunOperationIfUnblocked(void);
@@ -141,7 +141,7 @@ void FUN_003cbd04(int param_1,int param_2,unsigned int param_3,int param_4,int p
     if (param_4 != 0) {
       temp_v0 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x17c));
       temp_v6 = skillGetAdjustedCost(temp_v8,*(unsigned short *)(param_1 + 0x8b70));
-      FUN_00180310(1,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v0 + 8) + param_5,
+      statRowDrawValueImpl(1,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v0 + 8) + param_5,
                    (int)*(short *)(temp_v0 + 10) + (int)*(short *)(temp_v2 + 10) + param_6,1,4,0x79,
                    &LAB_003cc19c,temp_v6);
     }

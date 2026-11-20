@@ -14,7 +14,7 @@ struct PlacedObject {
 
 extern "C" {
 
-void FUN_00297684(void *object);
+void lmapPlayerModelDestroy(void *object);
 s32 objSlotsAllEmpty(void *object);
 void nodeOwnerSetTranslations(void *object, const Vec3f *translation);
 void nodeGroupSetScale(void *object, Vec3f scale);
@@ -27,7 +27,7 @@ s32 FUN_0026f784(PlacedObject *placed)
     s32 applied = 0;
 
     if (placed->object != NULL) {
-        FUN_00297684(placed->object);
+        lmapPlayerModelDestroy(placed->object);
         if (objSlotsAllEmpty(placed->object) != 0) {
             Vec3f position = placed->position;
 

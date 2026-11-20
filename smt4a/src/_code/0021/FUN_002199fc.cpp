@@ -12,7 +12,7 @@ int textDrawString(...);
 int texDrawCompositeSprite(...);
 int vec2GetXInt(...);
 int efctSetSpeed(...);
-int FUN_00180310(...);
+int statRowDrawValueImpl(...);
 int fontMeasureLineAdvance(...);
 int nkmBaseGetRecord(void);
 int gxSetMirroredClippedScissor(...);
@@ -35,18 +35,18 @@ typedef struct {
 
 extern unsigned char LAB_00219e04; /* 0x219e04 */
 extern unsigned char LAB_0021a1f4; /* 0x21a1f4 */
-extern int DAT_0057f2c4; /* 0x57f2c4 */
+extern int g_uniteEffectWork; /* 0x57f2c4 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned int FUN_0014bf3c(short, unsigned int);
+extern unsigned int demonGetRaceLabel(short, unsigned int);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: vec2GetXInt. */
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00180310. */
+/* Supplied declaration required: statRowDrawValueImpl. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: nkmBaseGetRecord. */
@@ -82,8 +82,8 @@ void FUN_002199fc(int param_1,int param_2,int param_3)
   int temp_v16;
   int temp_v17;
   
-  temp_v5 = DAT_0057f2c4;
-  temp_v8 = DAT_0057f2c4 + param_1 * 0x8c;
+  temp_v5 = g_uniteEffectWork;
+  temp_v8 = g_uniteEffectWork + param_1 * 0x8c;
   temp_v14 = temp_v8;
   iStack_30 = param_1;
   temp_v16 = param_2;
@@ -92,7 +92,7 @@ void FUN_002199fc(int param_1,int param_2,int param_3)
   temp_v8 = vec2GetYInt(temp_v8 + 0x3ec);
   temp_v11 = 0xffffffff;
   temp_v10 = 0.0f;
-  temp_v0 = *(short *)(DAT_0057f2c4 + 0x1e);
+  temp_v0 = *(short *)(g_uniteEffectWork + 0x1e);
   if (temp_v0 == 2) {
     temp_v13 = 0x28f;
   }
@@ -145,7 +145,7 @@ void FUN_002199fc(int param_1,int param_2,int param_3)
     texDrawCompositeSprite(2,0x1a,0xc,*(short *)(temp_v2 + 8) + temp_v1,*(short *)(temp_v2 + 10) + temp_v8,0x6a);
     texDrawTableEntryAtStoredOrigin(2,0x1a,0xd8,*(short *)(temp_v2 + 8) + temp_v1,*(short *)(temp_v2 + 10) + temp_v8,0x6a);
     temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xdc));
-    temp_v4 = (unsigned int)FUN_00180114(*psVar5);
+    temp_v4 = (unsigned int)table01RecordLookupForContent(*psVar5);
     sprintf((char *)temp_v12,(const char *)&LAB_00219e04,temp_v4);
     puVar7 = temp_v12;
     fontMeasureLineAdvance(puVar7,1);
@@ -156,7 +156,7 @@ void FUN_002199fc(int param_1,int param_2,int param_3)
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(1,temp_v11,temp_v12);
     temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xdd));
-    temp_v11 = FUN_0014bf3c(*psVar5,0);
+    temp_v11 = demonGetRaceLabel(*psVar5,0);
     sprintf((char *)temp_v12,(const char *)&LAB_00219e04,temp_v11);
     puVar7 = temp_v12;
     fontMeasureLineAdvance(puVar7,2);
@@ -167,7 +167,7 @@ void FUN_002199fc(int param_1,int param_2,int param_3)
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0xffffffff,temp_v12,(int)*(short *)(temp_v2 + 8));
     temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xdf));
-    FUN_00180310(0,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v2 + 8) + temp_v1,
+    statRowDrawValueImpl(0,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v2 + 8) + temp_v1,
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v8,1,2,0x6f,
                  &LAB_0021a1f4,*(unsigned short *)(temp_v15 + 0x16));
     if (temp_v16 != 0) {

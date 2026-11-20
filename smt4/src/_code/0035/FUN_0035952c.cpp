@@ -12,7 +12,7 @@ typedef struct {
     unsigned char sp1C; /* 0x1c: local_1c */
 } param_7_stack;
 
-extern int DAT_0047384c; /* 0x47384c */
+extern int g_cecdUseLocalBackend; /* 0x47384c */
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
@@ -37,8 +37,8 @@ int FUN_0035952c(unsigned int param_1,unsigned char param_2,unsigned int param_3
   *(unsigned int *)(temp_v1 + 0x9c) = (param_7 << 4) | 0xc;
   *(unsigned int *)(temp_v1 + 0xa0) = param_6;
   software_interrupt(0x32);
-  temp_v0 = DAT_0047384c;
-  if (-1 < DAT_0047384c) {
+  temp_v0 = g_cecdUseLocalBackend;
+  if (-1 < g_cecdUseLocalBackend) {
     *param_5 = *(unsigned int *)(temp_v1 + 0x88);
     temp_v0 = *(int *)(temp_v1 + 0x84);
   }

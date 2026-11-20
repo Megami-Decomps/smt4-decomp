@@ -52,7 +52,7 @@ void scriptProcessSetMode(ScriptProcess *script, s32 mode);
 void FUN_0032d0c8(s32 a, s32 b, u16 id, const void *record);
 void unitRecordBuildFromSave(u16 id, u8 *out);
 void panelSetTarget(s32 target, s32 arg);
-void FUN_0037c8e4(s32 a, s32 b);
+void messageBannerInitCounter(s32 a, s32 b);
 void FUN_004a3b48(BibleItemMenu *menu);
 s32 FUN_004a8750(u16 id, u8 flag, s32 a, s32 b, s32 c);
 s32 utilityReturnSuccess(u8 *object);
@@ -75,8 +75,8 @@ void Obj55c89c::confirm()
     if (menu->owned == 0) {
         s16 id = list[flaggedValueHolderGetTotal(menu->holder())].getItemId();
         s32 target = FUN_004a8750((u16)id, menu->confirmed, 0, menu->level >= 100, 0);
-        FUN_0037c8e4(1, 0);
-        if (FUN_002a4b28((u16)id) != 0) {
+        messageBannerInitCounter(1, 0);
+        if (compendiumEntryIsRegistered((u16)id) != 0) {
             panelSetTarget(-target, 0);
         } else {
             messageSetActiveMode(1);
@@ -84,7 +84,7 @@ void Obj55c89c::confirm()
         sysPlaySe(0x2F);
         u8 detail[300];
         unitRecordBuildFromSave((u16)id, detail);
-        if (FUN_002a4b28((u16)id) != 0) {
+        if (compendiumEntryIsRegistered((u16)id) != 0) {
             FUN_0032d0c8(0, 1, (u16)id, detail);
         } else {
             FUN_0032d0c8(0, 2, (u16)id, detail);

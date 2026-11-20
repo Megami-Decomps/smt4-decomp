@@ -32,7 +32,7 @@ void FUN_002b63d0(void)
                     entry->position = entry->basePosition;
                     entry->state = 28;
                     entry->elapsed = 0;
-                    FUN_00377acc(entry, g_gameState.warpId, 4);
+                    mapEnemyRebindModel(entry, g_gameState.warpId, 4);
                     return;
                 }
             }

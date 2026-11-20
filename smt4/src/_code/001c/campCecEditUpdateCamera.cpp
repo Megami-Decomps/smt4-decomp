@@ -23,7 +23,7 @@ union CecEditCameraState {
 extern "C" {
 
 extern CampCecEdit* g_campCecEdit;
-s32 FUN_001ed80c(void);
+s32 partyPanelAcceptsAction(void);
 void actorDetailsDrawPanel(u32 handle, u32 target, f32* scale, s32 flags, s32 value, s32 mode);
 
 static inline void updateCecEditCamera(CecEditCameraState* edit, const CecEditCameraControl* controls)
@@ -37,7 +37,7 @@ static inline void updateCecEditCamera(CecEditCameraState* edit, const CecEditCa
 u32 campCecEditUpdateCamera(void)
 {
     CecEditCameraState* edit = (CecEditCameraState*)g_campCecEdit;
-    if (FUN_001ed80c() == 0) {
+    if (partyPanelAcceptsAction() == 0) {
         updateCecEditCamera(edit, &edit->camera.controls);
     }
     return 0;

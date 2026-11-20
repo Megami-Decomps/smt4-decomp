@@ -5,7 +5,7 @@
 
 extern "C" {
 s32 buttonHelpSetPreset(s32 preset);
-s32 FUN_002579bc(s32 enabled);
+s32 partyPanelSetDisabledMode(s32 enabled);
 s32 FUN_00257a50(void *output, s32 selection, s32 category);
 s32 FUN_0029da34(s32 channel, s32 enabled, u32 value, void *data);
 
@@ -47,18 +47,18 @@ void FUN_00241b40(void)
     if (partyPanelIsActive() != 0) {
         if (camp->menuGroup == 1) {
             buttonHelpSetPreset(2);
-            FUN_002579bc(1);
+            partyPanelSetDisabledMode(1);
         } else {
             buttonHelpSetPreset(4);
-            FUN_002579bc(0);
+            partyPanelSetDisabledMode(0);
         }
     } else {
         if (camp->menuGroup == 1) {
             buttonHelpSetPreset(1);
-            FUN_002579bc(1);
+            partyPanelSetDisabledMode(1);
         } else {
             buttonHelpSetPreset(3);
-            FUN_002579bc(0);
+            partyPanelSetDisabledMode(0);
         }
     }
 }

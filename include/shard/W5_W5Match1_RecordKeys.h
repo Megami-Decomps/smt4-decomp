@@ -346,13 +346,6 @@ struct TitleCommandLists {
     /* 0x0C */ u32 beginList;
 };
 
-struct InitialRequestState {
-    /* 0x00 */ u32 values[6];
-    /* 0x18 */ u32 first;
-    /* 0x1C */ u32 second;
-    /* 0x20 */ u32 third;
-};
-
 
 struct RenderChannelEntry {
     /* 0x000 */ u8 active;
@@ -391,12 +384,6 @@ struct RenderInitialState {
     /* 0x3C */ u32 next;
     /* 0x40 */ u32 count;
     /* 0x44 */ u32 unk44;
-};
-
-struct NpcRoomState {
-    /* 0x00 */ void *object;
-    /* 0x04 */ u8 unk04[0xE4];
-    /* 0xE8 */ u8 active;
 };
 
 #endif

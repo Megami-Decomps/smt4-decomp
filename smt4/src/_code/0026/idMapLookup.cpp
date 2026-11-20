@@ -17,7 +17,7 @@ Entry0026a69c *libc_bsearch(const Entry0026a69c *key, const Entry0026a69c *base,
 
 s32 idMapCompareKeys(const void *left, const void *right);
 
-extern u8 DAT_00404386[]; /* 0x404386 */
+extern u8 g_idMapTable[]; /* 0x404386 */
 
 /* Finds the entry with the given id in data table 6's section 1. */
 static __inline Entry0026a69c *idMapFind(u16 id)
@@ -34,7 +34,7 @@ static __inline Entry0026a69c *idMapFind(u16 id)
 /* Maps the index of the entry with the given id through a byte table. */
 u8 idMapLookup(u16 id)
 {
-    return DAT_00404386[idMapFind(id)->index];
+    return g_idMapTable[idMapFind(id)->index];
 }
 
 } /* extern "C" */

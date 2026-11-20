@@ -30,7 +30,7 @@ typedef struct {
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int onlineGetActiveLock(void);
-extern int FUN_002eb624(void **);
+extern int deletingDtor_002eb624(void **);
 /* Supplied declaration required: FUN_002f27de. */
 
 
@@ -52,7 +52,7 @@ int FUN_0010af50(fn_0010af50_arg0 *param_1)
   _ZN9Obj55b28cC1EPv(temp_v3,temp_v0);
   FUN_002f27de(param_1);
   _ZN9Obj55b28cD1Ev(temp_v3);
-  temp_v1 = FUN_002eb624(&param_1[2].field_0x14);
+  temp_v1 = deletingDtor_002eb624(&param_1[2].field_0x14);
   piVar5 = (int *)(temp_v1 - 0x40);
   temp_v5 = *(int *)(temp_v1 - 0x30);
   if (temp_v5 != 0) {

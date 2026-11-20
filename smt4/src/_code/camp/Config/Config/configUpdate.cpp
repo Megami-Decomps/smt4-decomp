@@ -19,8 +19,8 @@ extern "C" {
 extern ConfigWork *g_config;
 
 u32 resourceRunOperationIfUnblocked(const GridNavigation *cursor);
-s32 FUN_0029efd8(GridNavigation *cursor, s32 mode);
-s32 FUN_002c1658(s32 button, s32 mode);
+s32 gridNavigationHandleConfirm(GridNavigation *cursor, s32 mode);
+s32 inputQueryButtonState(s32 button, s32 mode);
 u8 ifTouchGetSelectionModeForRegion(int region);
 s32 ifTouchRegionAddRequested(u32 file, s32 index);
 void buttonHelpSetText(const char *text, u32 color);
@@ -137,7 +137,7 @@ extern "C" void configUpdate(void)
                 menu->selectedChoice[row] = 0;
             } else if (configRegionTouched(second)) {
                 menu->selectedChoice[row] = 1;
-            } else if (FUN_002c1658(4, 0) != 0 || FUN_002c1658(3, 0) != 0) {
+            } else if (inputQueryButtonState(4, 0) != 0 || inputQueryButtonState(3, 0) != 0) {
                 menu->selectedChoice[row] ^= 1;
                 stepped = true;
             }
@@ -151,11 +151,11 @@ extern "C" void configUpdate(void)
                 menu->selectedChoice[row] = 1;
             } else if (configRegionTouched(third)) {
                 menu->selectedChoice[row] = 2;
-            } else if (FUN_002c1658(4, 0) != 0) {
+            } else if (inputQueryButtonState(4, 0) != 0) {
                 if (--menu->selectedChoice[row] < 0)
                     menu->selectedChoice[row] = 2;
                 stepped = true;
-            } else if (FUN_002c1658(3, 0) != 0) {
+            } else if (inputQueryButtonState(3, 0) != 0) {
                 if (++menu->selectedChoice[row] > 2)
                     menu->selectedChoice[row] = 0;
                 stepped = true;
@@ -168,7 +168,7 @@ extern "C" void configUpdate(void)
                 eventQueueAddUnique(0x100016C);
             return;
         }
-        if (FUN_0029efd8(&config->cursor, 1) != 0) {
+        if (gridNavigationHandleConfirm(&config->cursor, 1) != 0) {
             // The cursor moved to another option.
             menu = g_config;
             row = resourceRunOperationIfUnblocked(&menu->cursor) + listCursorGetRowIfUnblocked(&menu->cursor);
@@ -182,7 +182,7 @@ extern "C" void configUpdate(void)
             return;
         }
         bool confirmed = false;
-        if (FUN_002c1658(0, 1) != 0) {
+        if (inputQueryButtonState(0, 1) != 0) {
             confirmed = true;
         } else {
             menu = g_config;
@@ -206,7 +206,7 @@ extern "C" void configUpdate(void)
             scrScriptProcessStartEntry(menu->resource, 1);
             menu->unkB8 = 0;
             menu->state = 2;
-        } else if (FUN_002c1658(1, 1) != 0) {
+        } else if (inputQueryButtonState(1, 1) != 0) {
             eventQueueAddUniqueIfValid(0x100016E);
             messageMainSetEnabled(1);
             config->state = 3;

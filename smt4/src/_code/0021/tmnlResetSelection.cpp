@@ -6,12 +6,12 @@
 extern "C" {
 
 extern TerminalGlobals g_tmnl;
-extern u32 DAT_00432ce4;
+extern u32 g_tmnlSelectionParam;
 
 /* Request the terminal sequence and forget its saved selection. */
 void tmnlResetSelection(void)
 {
-    asdSequenceRequest(0xD, reinterpret_cast<const void *>(&DAT_00432ce4), 4);
+    asdSequenceRequest(0xD, reinterpret_cast<const void *>(&g_tmnlSelectionParam), 4);
     g_tmnl.selection = -1;
 }
 

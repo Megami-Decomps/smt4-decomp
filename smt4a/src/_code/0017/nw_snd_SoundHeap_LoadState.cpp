@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001912cc(unsigned int, unsigned int);
+int soundRequestQueueDequeueUntilToken(unsigned int, unsigned int);
 int nw_snd_internal_FrameHeap_LoadState(int, unsigned int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
 
 extern unsigned int objectCommandQueueGet(void);
 extern unsigned int soundRequestQueueFlush(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001912cc. */
+/* Supplied declaration required: soundRequestQueueDequeueUntilToken. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: nw_snd_internal_FrameHeap_LoadState. */
@@ -31,7 +31,7 @@ void nw_snd_SoundHeap_LoadState(int param_1,unsigned int param_2)
   nw_snd_internal_FrameHeap_LoadState(param_1 + 0x10,param_2);
   temp_v0 = objectCommandQueueGet();
   temp_v1 = soundRequestQueueFlush(temp_v0,1);
-  FUN_001912cc(temp_v0,temp_v1);
+  soundRequestQueueDequeueUntilToken(temp_v0,temp_v1);
   nn_os_CriticalSection_Leave(param_1 + 4);
   return;
 }

@@ -8,7 +8,7 @@
 static __inline s32 romFileOpen(RomOpenFile *file, const char *path, u32 mode)
 {
     romOpenFileInitialize(file);
-    return archivePathDeviceOpen(&file->unk00, reinterpret_cast<const u16 *>(path), mode);
+    return archivePathDeviceOpen(&file->handle, reinterpret_cast<const u16 *>(path), mode);
 }
 
 // Resolve the path and initialize the ROM file in read or write mode.

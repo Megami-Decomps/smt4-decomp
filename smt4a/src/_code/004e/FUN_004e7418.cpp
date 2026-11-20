@@ -44,7 +44,7 @@ typedef struct BtlCameraBlock {
 extern u32 g_btlEvent;                /* 0x573898 */
 
 extern int isEntryUsable(u32 event);
-extern int FUN_004ab734(BtlUiA *block);
+extern int btlUiRefreshMenuPanel(BtlUiA *block);
 extern int btlReflectCreateKind2e(int a, BtlCommand *cmd, u32 target, int b);
 extern int FUN_004fde5c(int a, BtlCommand *cmd, BtlSkill *skill, int b, int c, int d);
 
@@ -63,7 +63,7 @@ u32 FUN_004e7418(BtlActorRef *ref, BtlCommand *cmd)
             actor->uiState = 1;
         } else {
             actor->uiState = 0;
-            FUN_004ab734(g_btlUiBlock);
+            btlUiRefreshMenuPanel(g_btlUiBlock);
         }
     }
     if ((cmd->skill->hitFlags & 0xFF) != 0) {

@@ -23,7 +23,7 @@ struct ExtendedTransitionView {
     /* 0x80C */ u8 unk80C[0xC];
     /* 0x818 */ VectorTransitionChannel target;
 };
-extern "C" f32 FUN_00227280(s32 kind, u32 mode, u32 frame);
+extern "C" f32 easeEvaluate(s32 kind, u32 mode, u32 frame);
 
 static inline void interpolateVector(VectorTransitionChannel* channel, f32 progress)
 {
@@ -39,7 +39,7 @@ static inline void interpolateVector(VectorTransitionChannel* channel, f32 progr
 // Evaluate the two vector and four scalar channels at the eased frame position.
 extern "C" void FUN_003d7298(ExtendedTransitionView* state, u32 frame)
 {
-    f32 progress = FUN_00227280(0, state->interpolationMode, frame);
+    f32 progress = easeEvaluate(0, state->interpolationMode, frame);
     interpolateVector(&state->position, progress);
     interpolateVector(&state->target, progress);
     state->fourth.current = state->fourth.start + (state->fourth.end - state->fourth.start) * progress;

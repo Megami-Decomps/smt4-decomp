@@ -9,7 +9,7 @@ int padQueryLogicalKey(...);
 int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
 int buttonHelpSetText(...);
-int FUN_00228b04(int, int);
+int gridNavigationHandleConfirm(int, int);
 int scrScriptProcessStartEntry(unsigned int);
 int scrollOwnerSelectIndex(int, int);
 int scrollListSetSelectionTracked(int, int);
@@ -39,7 +39,7 @@ extern unsigned char LAB_004bee70; /* 0x4bee70 */
 extern int partySlotIsOccupied(void);
 /* Supplied declaration required: buttonHelpSetText. */
 extern unsigned int dataTable10FindValue(unsigned short);
-/* Supplied declaration required: FUN_00228b04. */
+/* Supplied declaration required: gridNavigationHandleConfirm. */
 extern int FUN_0022e714(void);
 extern int FUN_0023b3b8(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -74,7 +74,7 @@ void FUN_004bea0c(int param_1)
   unsigned char temp_v5;
   unsigned char temp_v6;
   
-  FUN_00228b04(param_1 + 0x260,1);
+  gridNavigationHandleConfirm(param_1 + 0x260,1);
   temp_v4 = 0;
   temp_v3 = 0;
   do {

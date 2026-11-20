@@ -1,0 +1,12 @@
+#include "gamedata/MapSaveBlockA.h"
+#include "shard/Shard0037.h"
+
+extern "C" {
+
+
+void mapSetActiveEntryId(u16 value)
+{
+    gameFlagsGetBlock()->unk0020 = value;
+}
+
+} /* extern "C" */

@@ -15,8 +15,8 @@ extern const char DAT_00536c61[]; /* ac:u */
 void nn_os_CriticalSection_Enter(void *);
 void nn_os_CriticalSection_Leave(void *);
 void FUN_0014668c(u32);
-s32 FUN_0016f864(void);
-s32 asdModelForwardChecked(u32 *, const char *, u32, u32);
+s32 srvInitialize(void);
+s32 srvGetServiceHandle(u32 *, const char *, u32, u32);
 u32 libc_strlen(const char *);
 }
 
@@ -36,10 +36,10 @@ extern "C" s32 FUN_0013b5c8(void)
         nn_os_CriticalSection_Leave(&g_moduleCriticalSection4);
         return 0x00209FF9;
     }
-    s32 result = FUN_0016f864();
+    s32 result = srvInitialize();
     if (!nnResultIsFailure(result)) {
         u32 length = libc_strlen(DAT_00536c61);
-        result = asdModelForwardChecked(&DAT_005b4438, DAT_00536c61, length, 0);
+        result = srvGetServiceHandle(&DAT_005b4438, DAT_00536c61, length, 0);
         if (!nnResultIsFailure(result)) {
             ++DAT_005891a4.references;
             FUN_0014668c(0x0B0101C8);

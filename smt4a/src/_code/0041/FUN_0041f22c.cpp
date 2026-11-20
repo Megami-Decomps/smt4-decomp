@@ -53,7 +53,7 @@ void eventQueueAddUnique(u32 event);
 void buttonHelpSetText(s32 a, u32 color);
 void FUN_0023b45c(s32 value);
 s32 buttonHelpIsActionActive(s32 value);
-void FUN_002f0384(s32 value);
+void statusCameraRestore(s32 value);
 void FUN_0033449c(s32 value);
 void FUN_0038b5fc(s32 index, u32 value);
 void FUN_0041e2d8(SelectScreen *screen);
@@ -73,14 +73,14 @@ extern "C" void FUN_0041f22c(SelectScreen *screen)
             if (screen->panel.locked != 0) {
                 skip = true;
             } else {
-                FUN_002f0384(1);
+                statusCameraRestore(1);
                 screen->opened = 1;
                 gameGlobalsSetMenuOpenFlag(1);
             }
         }
         if (!skip && screen->panel.locked == 0 && 0 == screen->opened &&
             screen->entryFlags[screen->selected] != 0) {
-            FUN_002f0384(1);
+            statusCameraRestore(1);
             screen->opened = 1;
             gameGlobalsSetMenuOpenFlag(1);
         }
@@ -105,8 +105,8 @@ extern "C" void FUN_0041f22c(SelectScreen *screen)
         eventQueueAddUnique(0x100020F);
         FUN_0033449c(0);
         FUN_0023b45c(1);
-        FUN_002c8538(1);
-        FUN_002f0384(0);
+        gameGlobalsSetOverlayActive(1);
+        statusCameraRestore(0);
         screen->opened = 0;
         if (screen->entryFlags[screen->selected] == 0)
             FUN_0023b45c(0);

@@ -11,7 +11,7 @@ int buttonHelpSetText(int a, int color);
 int uiSpriteSetImageKeyframe(void *block, int a, int b);
 int buttonHelpSetPreset(int a);
 int spriteStartAnimationByIndex(void *block, int a);
-extern int FUN_00293230(void);
+extern int btlScriptUnitIsIncapacitated(void);
 extern int buttonHelpGetStatus(void);
 
 
@@ -51,7 +51,7 @@ void FUN_002cfed0(Scene *scene, u32 a, u8 b, u32 c)
         } while (i < 6);
         if (scene->unk3080 == 0) {
             btlGetMainState();
-            result = FUN_00293230();
+            result = btlScriptUnitIsIncapacitated();
             if ((result == 0) && (result = btlGetMainState(), (((BtlMainState *)result)->battleFlags & 0x200) == 0)) {
                 if (scene->state == 0x17) {
                     FUN_0028cf30(scene, scene->unk305C, c);
@@ -72,7 +72,7 @@ void FUN_002cfed0(Scene *scene, u32 a, u8 b, u32 c)
             result = buttonHelpGetStatus();
             if (result != 0x3d) {
                 btlGetMainState();
-                result = FUN_00293230();
+                result = btlScriptUnitIsIncapacitated();
                 if (result != 0) {
                     buttonHelpSetPreset(0x3d);
                     return;

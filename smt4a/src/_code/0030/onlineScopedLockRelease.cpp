@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_0010d2a6(u32 handle);
+void onlineScopedLockUnlockMember(u32 handle);
 s32 onlineMutexNeedsLock(u32 handle);
 
 typedef struct Holder {
@@ -12,7 +12,7 @@ typedef struct Holder {
     /* 0x08 */ u32 handle;
 } Holder;
 
-/* If active: runs FUN_0010d2a6 on the handle when onlineMutexNeedsLock accepts it, then clears `active`. */
+/* If active: runs onlineScopedLockUnlockMember on the handle when onlineMutexNeedsLock accepts it, then clears `active`. */
 void onlineScopedLockRelease(Holder *object)
 {
     s32 accepted;
@@ -22,7 +22,7 @@ void onlineScopedLockRelease(Holder *object)
         handle = object->handle;
         accepted = onlineMutexNeedsLock(handle);
         if (accepted != 0) {
-            FUN_0010d2a6(handle);
+            onlineScopedLockUnlockMember(handle);
         }
         object->active = 0;
     }

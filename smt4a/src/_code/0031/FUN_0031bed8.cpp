@@ -12,16 +12,16 @@ extern "C" {
 
 s32 scrGetArg(u32 index);
 
-// Step counts are limited to 4 while FUN_00203d74 reports true.
+// Step counts are limited to 4 while inputFastForwardActive reports true.
 static __inline s32 limitSteps(s32 steps)
 {
-    if (FUN_00203d74() != 0 && steps > 4) {
+    if (inputFastForwardActive() != 0 && steps > 4) {
         steps = 4;
     }
     return steps;
 }
 
-// Script command: set a job's slide start/step from a step count (clamped to 4 while FUN_00203d74 reports true).
+// Script command: set a job's slide start/step from a step count (clamped to 4 while inputFastForwardActive reports true).
 u32 FUN_0031bed8(void)
 {
     u32 job = scrGetArg(0);

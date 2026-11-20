@@ -29,7 +29,7 @@ typedef struct {
 
 extern int *g_unite; /* 0x57f290 */
 
-extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
+extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: __aeabi_memset4. */
@@ -119,7 +119,7 @@ unsigned int FUN_003a7d74(void)
         dataTable01GetRecordWithAocOverride(temp_v8);
         libc_strcpy(temp_v10,temp_v8);
         scrSetStringSlot(8,temp_v10);
-        temp_v5 = FUN_0014bf3c(*(unsigned short *)(temp_v4 + 0x1a),0);
+        temp_v5 = demonGetRaceLabel(*(unsigned short *)(temp_v4 + 0x1a),0);
         libc_strcpy(temp_v10,temp_v5);
         scrSetStringSlot(0x10,temp_v10);
         piVar3[0x246c] = piVar3[0x246c] + 1;
@@ -200,7 +200,7 @@ unsigned int FUN_003a7d74(void)
       dataTable01GetRecordWithAocOverride(temp_v4);
       libc_strcpy(temp_v10,temp_v4);
       scrSetStringSlot(8,temp_v10);
-      temp_v5 = FUN_0014bf3c(*puVar8,0);
+      temp_v5 = demonGetRaceLabel(*puVar8,0);
       libc_strcpy(temp_v10,temp_v5);
       scrSetStringSlot(0x10,temp_v10);
     }

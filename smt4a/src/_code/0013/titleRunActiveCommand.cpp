@@ -2,15 +2,15 @@
 
 extern "C" {
 
-void processDispatchFinishedNodes(void);
+void asdProcessRunAuxiliaryPass(void);
 s32 gxIsStereoscopic3dEnabled(void);
 
-/* When gxIsStereoscopic3dEnabled reports 1 and the request flag is set without the blocked flag, runs processDispatchFinishedNodes; always returns 0. */
+/* When gxIsStereoscopic3dEnabled reports 1 and the request flag is set without the blocked flag, runs asdProcessRunAuxiliaryPass; always returns 0. */
 u32 titleRunActiveCommand(void)
 {
     if (gxIsStereoscopic3dEnabled() == 1) {
         if (g_titleFlags.commandActive != 0 && g_titleFlags.disabled == 0) {
-            processDispatchFinishedNodes();
+            asdProcessRunAuxiliaryPass();
         }
     }
     return 0;

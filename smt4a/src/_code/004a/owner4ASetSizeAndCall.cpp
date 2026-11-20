@@ -24,7 +24,7 @@ extern void size40Set(Slot4Obj *object, u32 a, u32 b);
 void owner4ASetSizeAndCall(Owner4A *obj, u32 arg)
 {
     u32 height = FUN_0031d174(obj->block20);
-    u32 width = FUN_002a482c(obj->block20);
+    u32 width = resourceDispatchTaggedOperation(obj->block20);
 
     size40Set(obj->object, width, height);
     obj->object->vtbl->slot4(obj->object, arg);

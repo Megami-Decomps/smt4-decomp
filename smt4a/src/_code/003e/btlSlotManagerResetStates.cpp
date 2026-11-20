@@ -34,7 +34,7 @@ struct SlotManager {
     /* 0x1FFC */ SlotRecord *records;
 };
 
-s32 FUN_004c53fc(u32 kind);
+s32 mapCategoryToDestinationGroup(u32 kind);
 
 static __inline void vec3Clear(Vec3 *v)
 {
@@ -52,7 +52,7 @@ static __inline void slotStateReset(SlotState *state)
 void btlSlotManagerResetStates(void *handle)
 {
     SlotManager *manager = static_cast<SlotManager *>(handle);
-    s16 id = FUN_004c53fc(1);
+    s16 id = mapCategoryToDestinationGroup(1);
 
     for (s32 i = 0; i < SLOT_COUNT; i++) {
         SlotRecord *record = &manager->records[i];

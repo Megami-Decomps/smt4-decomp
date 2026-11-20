@@ -9,7 +9,7 @@ extern "C" {
 
 void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 void FUN_0029c4e4(PartyPanelUnitPreview *unit, s32 arg);
-void FUN_0029a0cc(PlayerDataIV *player);
+void btlBuildDemonSnapshotFromSaveRecord(PlayerDataIV *player);
 
 /* Shows an item's stat boost preview: copies the player's (or a unit's) record into the panel, adds 3 to the stat
  * the item raises (in both its base and its current value) and refreshes the panel. */
@@ -92,7 +92,7 @@ void FUN_0026cba4(s32 id, s32 isUnit, s32 variant)
     if (isUnit != 0) {
         FUN_0029c4e4(&panel->previewUnit, 0);
     } else {
-        FUN_0029a0cc(&panel->previewPlayer);
+        btlBuildDemonSnapshotFromSaveRecord(&panel->previewPlayer);
     }
 }
 

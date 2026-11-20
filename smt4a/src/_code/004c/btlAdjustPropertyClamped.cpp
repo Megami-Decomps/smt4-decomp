@@ -5,7 +5,7 @@
 extern "C" {
 
 s32 btlGetPropertyMaximum(u32 property);
-s32 FUN_004c53fc(u32 category);
+s32 mapCategoryToDestinationGroup(u32 category);
 
 /* Changes property `property` of the battle entry `id` by `delta`, clamped to its range (left alone when `preview` is set); returns the change. */
 s32 btlAdjustPropertyClamped(u32 id, s32 property, s32 delta, s32 preview)
@@ -18,8 +18,8 @@ s32 btlAdjustPropertyClamped(u32 id, s32 property, s32 delta, s32 preview)
     s32 old = entry->properties[property];
     s32 value = old + delta;
 
-    if (value < FUN_004c53fc(property)) {
-        value = FUN_004c53fc(property);
+    if (value < mapCategoryToDestinationGroup(property)) {
+        value = mapCategoryToDestinationGroup(property);
     } else {
         value = value > btlGetPropertyMaximum(property) ? btlGetPropertyMaximum(property) : value;
     }

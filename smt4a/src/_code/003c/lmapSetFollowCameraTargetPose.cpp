@@ -11,12 +11,12 @@ typedef char FollowCameraTargetsOffsetCheck[offsetof(FollowCameraTargets, eye) =
 
 extern "C" {
 extern FollowCameraTargets DAT_005f19fc;
-s32 FUN_003033d4(void);
+s32 lmapResolveContextValue(void);
 f32 libm_sinf(f32);
 
 void lmapSetFollowCameraTargetPose(void)
 {
-    s32 preset = FUN_003033d4();
+    s32 preset = lmapResolveContextValue();
     MapVector target;
     target.x = g_lmapScene->pose.position.x;
     target.z = g_lmapScene->pose.position.z;

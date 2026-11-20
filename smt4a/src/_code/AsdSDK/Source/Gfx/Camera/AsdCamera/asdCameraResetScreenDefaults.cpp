@@ -55,7 +55,7 @@ extern ScreenCameraDefaults DAT_006309c4;
 extern BattleVector3 DAT_006309a0;
 extern BattleVector3 DAT_006309b8;
 extern ScreenCameraGlobals g_asdCamera;
-void FUN_0014f0dc(DefaultScreenCamera*, const BattleVector3* eye,
+void cameraMatrixCacheSetLookAt(DefaultScreenCamera*, const BattleVector3* eye,
                  const BattleVector3* target, const BattleVector3* up);
 GfxTransform* mtx44Perspective(GfxTransform*, f32 fieldOfView, f32 aspect, f32 nearClip, f32 farClip);
 void nn_math_ARMv6_MTX44PivotC_FAST(GfxTransform*, s32 mode);
@@ -84,7 +84,7 @@ void asdCameraResetScreenDefaults(s32 mode, s32 enabled, f32 period)
 
         DefaultScreenCamera* camera = &slot->camera;
         asdCameraInitializeDefaults(reinterpret_cast<AsdCamera *>(camera), 1);
-        FUN_0014f0dc(camera, &slot->eye, &slot->target, &DAT_006309b8);
+        cameraMatrixCacheSetLookAt(camera, &slot->eye, &slot->target, &DAT_006309b8);
         camera->fieldOfView = 18.267f;
         camera->nearClip = slot->nearClip;
         camera->farClip = slot->farClip;

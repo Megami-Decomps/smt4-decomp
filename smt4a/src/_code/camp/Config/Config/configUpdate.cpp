@@ -36,7 +36,7 @@ void stateModeDispatch(u32 mode);
 u8 FUN_003d21dc(void);
 void messageMainSetFlag(u8 value);
 s32 uiSearchPrimary(const GridNavigation *cursor);
-u8 FUN_00228b04(GridNavigation *cursor, s32 mode);
+u8 gridNavigationHandleConfirm(GridNavigation *cursor, s32 mode);
 s32 uiScrollHandleActionsOrTouch(GridNavigation *list, const TextureTableEntryIV *touchArea, const s16 *rowRegions,
                                  s32 thumbRegion, s32 previousRegion, s32 nextRegion, s8 *touched, s32 secondary,
                                  s32 notify);
@@ -174,7 +174,7 @@ void configUpdate(void)
         asdTMTexTableEntryAt(0x24, 0x59);
         scrRunOpcodesStub(config->resource);
         u8 touch = ifTouchGetSelectionMode();
-        if (FUN_00228b04(&config->cursor, 1) != 0 ||
+        if (gridNavigationHandleConfirm(&config->cursor, 1) != 0 ||
             uiScrollHandleActionsOrTouch(&config->cursor, NULL, config->regions, -1, -1, -1,
                                          &blocked, 0, 1) != 0) {
             /* The cursor moved. */

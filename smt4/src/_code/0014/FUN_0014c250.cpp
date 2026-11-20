@@ -28,8 +28,8 @@ extern unsigned int FUN_001522d4(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a4b0c. */
 /* Supplied declaration required: FUN_002a78c0. */
 /* Supplied declaration required: FUN_002a7ac4. */
-extern unsigned int FUN_002ac780(int);
-extern int FUN_002c3984(void);
+extern unsigned int soundArchiveFileEntryIsLoaded(int);
+extern int nnosGetHeapSize(void);
 extern unsigned int nnosGetHeapBase(void);
 /* Supplied declaration required: rt_memcpy. */
 
@@ -54,7 +54,7 @@ FUN_0014c250(int *param_1,unsigned int param_2,unsigned int param_3,int *param_4
   unsigned int uStack_44;
   unsigned int temp_v11;
   
-  temp_v0 = FUN_002ac780(param_1[1]);
+  temp_v0 = soundArchiveFileEntryIsLoaded(param_1[1]);
   piVar2 = (int *)(**(romwright_code **)(*param_1 + 0xc))(param_1,temp_v0);
   if ((piVar2 != (int *)0x0) ||
      (piVar2 = param_1, FUN_00150d2c(param_1,param_2,param_4,param_5), piVar2 != (int *)0x0)) {
@@ -65,7 +65,7 @@ FUN_0014c250(int *param_1,unsigned int param_2,unsigned int param_3,int *param_4
     piVar2 = (int *)FUN_001522ac(temp_v8,param_3);
     temp_v2 = (**(romwright_code **)(*param_4 + 8))(param_4,piVar2 + 8);
     temp_v3 = nnosGetHeapBase();
-    temp_v1 = FUN_002c3984();
+    temp_v1 = nnosGetHeapSize();
     temp_v7 = temp_v2 <= temp_v3;
     temp_v6 = temp_v3 == temp_v2;
     if (!temp_v7 || temp_v6) {

@@ -5,21 +5,21 @@ extern "C" {
 #define RESULT_NOT_INITIALIZED 0xe0810bf8
 
 extern int g_nnCecdHandle;
-extern int DAT_0047384c;
+extern int g_cecdUseLocalBackend;
 
-int FUN_003592b8(u32 arg);
-int FUN_00359730(u32 arg);
+int cecdServiceQueryRequest10A(u32 arg);
+int cecdServiceQueryRequest10B(u32 arg);
 
-/* Dispatches to FUN_00359730(arg) when DAT_0047384c is set, else to FUN_003592b8(arg) when g_nnCecdHandle is set, else fails with an error code. */
+/* Dispatches to cecdServiceQueryRequest10B(arg) when g_cecdUseLocalBackend is set, else to cecdServiceQueryRequest10A(arg) when g_nnCecdHandle is set, else fails with an error code. */
 u32 resourceDispatch2(u32 arg)
 {
-    if (DAT_0047384c != 0) {
-        return FUN_00359730(arg);
+    if (g_cecdUseLocalBackend != 0) {
+        return cecdServiceQueryRequest10B(arg);
     }
     if (g_nnCecdHandle == 0) {
         return RESULT_NOT_INITIALIZED;
     }
-    return FUN_003592b8(arg);
+    return cecdServiceQueryRequest10A(arg);
 }
 
 } /* extern "C" */

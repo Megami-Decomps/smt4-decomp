@@ -39,7 +39,7 @@ public:
 extern "C" {
 extern const char DAT_0040226c[];   /* the "unknown" placeholder name */
 extern const char DAT_00402274[];   /* "%s%s" */
-extern const char *DAT_0043d990[];
+extern const char *g_btlDevilListCallbackContext[];
 s32 uiAnimationAdvanceChannel(void *channels, s32 index);
 void pointConvertToFloat(FloatPoint *point, s32 x, s32 y);
 void buttonHelpSetPreset(s32 preset);
@@ -69,13 +69,13 @@ void Obj4223f8::confirmSelection()
         if (name == NULL) {
             name = DAT_0040226c;
         }
-        __2sprintf(text, DAT_00402274, name, DAT_0043d990[2]);
+        __2sprintf(text, DAT_00402274, name, g_btlDevilListCallbackContext[2]);
         buttonHelpSetText(text, 0x323232FF);
     } else {
         BibleDetailEntry *entries = reinterpret_cast<BibleDetailEntry *>(reinterpret_cast<u8 *>(this) + 0x5A8);
         FUN_0029da34(0, 1, entries[flaggedValueHolderGetTotal(self->holderArea)].itemId);
     }
-    FUN_002a0cc8(0);
+    gameGlobalsSetSubScreenActive(0);
     self->state = 2;
     self->substate = 0;
     pointConvertToFloat(&self->cursor, 0, 0);

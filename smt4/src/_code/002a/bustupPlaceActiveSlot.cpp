@@ -23,7 +23,7 @@ struct Placement {
 };
 
 extern BustupCutAnim *g_bustupCutAnim;
-extern u32 DAT_0043e048[];
+extern u32 g_bustupBoneNameTable[];
 struct ModelBoneAttachmentRoot;
 s32 modelHasLoadedAttachment(const ModelBoneAttachmentRoot *object);
 u32 modelGetBoneTranslationByName(u32 handle, u32 mode, Placement *placement);
@@ -40,7 +40,7 @@ u32 bustupPlaceActiveSlot(Placement *placement, s32 mode)
     if (cut->anim == NULL || modelHasLoadedAttachment(reinterpret_cast<const ModelBoneAttachmentRoot *>(cut->anim)) == 0) {
         return 1;
     }
-    result = modelGetBoneTranslationByName(cut->anim->handle, DAT_0043e048[mode], placement);
+    result = modelGetBoneTranslationByName(cut->anim->handle, g_bustupBoneNameTable[mode], placement);
     if (mode == 0) {
         placement->y += cut->offset;
     }

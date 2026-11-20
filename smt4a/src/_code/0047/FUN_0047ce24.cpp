@@ -14,7 +14,7 @@ int FUN_0019ac70(int *, unsigned int);
 int FUN_0019b770(...);
 int jobGetScalarValue(void);
 int FUN_001a1ee0(void);
-int FUN_001b63b0(void);
+int phaseCosine(void);
 int renderCtxCallB(void);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 int renderStatePop(void);
@@ -80,7 +80,7 @@ extern unsigned int DAT_00630754; /* 0x630754 */
 /* Supplied declaration required: FUN_0019b770. */
 /* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: FUN_001a1ee0. */
-/* Supplied declaration required: FUN_001b63b0. */
+/* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: renderCtxCallB. */
 extern int asdSoundGetOption2(void);
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
@@ -395,7 +395,7 @@ LAB_0047cf80:
             FUN_001a1ee0();
             temp_v13 = (float)VectorSignedToFloat(param_3[2],(unsigned char)(in_fpscr >> 0x16) & 3);
             param_3[2] = (int)(temp_v13 - temp_v12 * temp_v15);
-            FUN_001b63b0();
+            phaseCosine();
             temp_v15 = temp_v11 * temp_v15;
           }
           temp_v11 = (float)VectorSignedToFloat(param_3[1],(unsigned char)(in_fpscr >> 0x16) & 3);

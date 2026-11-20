@@ -12,12 +12,12 @@ extern "C" {
 int asdTMTexLoadMainHeap(int, int);
 int asdLoadFileAsyncSimple(...);
 int statusAcquireSharedResources(void);
-int FUN_002c85b0(...);
+int gameGlobalsSetSceneState(...);
 int campButtonHelpAcquire(void);
 int statusBustUpPortraitAcquire(...);
 int objBMarkAndInit20D4(void);
 int stateHolderMarkAndInit2588(void);
-int FUN_003e4140(...);
+int copyDefaultWordsPair(...);
 int loadSlotRequestAsync(int, int);
 int paramsClearPacket(int);
 
@@ -43,14 +43,14 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: statusDownSwitchTab. */
 /* Supplied declaration required: statusAcquireSharedResources. */
-/* Supplied declaration required: FUN_002c8538. */
-/* Supplied declaration required: FUN_002c85b0. */
+/* Supplied declaration required: gameGlobalsSetOverlayActive. */
+/* Supplied declaration required: gameGlobalsSetSceneState. */
 /* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: FUN_0036b644. */
 /* Supplied declaration required: statusBustUpPortraitAcquire. */
 /* Supplied declaration required: objBMarkAndInit20D4. */
 /* Supplied declaration required: stateHolderMarkAndInit2588. */
-/* Supplied declaration required: FUN_003e4140. */
+/* Supplied declaration required: copyDefaultWordsPair. */
 /* Supplied declaration required: loadSlotRequestAsync. */
 /* Supplied declaration required: paramsClearPacket. */
 
@@ -230,11 +230,11 @@ void FUN_004b6390(int param_1)
   *(unsigned int *)(param_1 + 0x4390) = 0;
   *(unsigned int *)(param_1 + 0x4394) = 0;
   statusAcquireSharedResources();
-  FUN_002c85b0(0);
+  gameGlobalsSetSceneState(0);
   statusDownSwitchTab(0);
-  FUN_002c8538(0);
+  gameGlobalsSetOverlayActive(0);
   campButtonHelpAcquire();
-  FUN_003e4140(param_1 + 0x7f40);
+  copyDefaultWordsPair(param_1 + 0x7f40);
   objBMarkAndInit20D4();
   stateHolderMarkAndInit2588();
   return;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_00254f58(BtlMainState *state);
+extern int battleInitializeTurnOrder(BtlMainState *state);
 extern int FUN_00338060(BtlMainState *state, int arg);
 extern int btlUiInvalidateIndexedEntries(BtlUi *block);
 
@@ -18,7 +18,7 @@ u32 scrComm_BattleUI_SyncCursorPosition(void)
     btlUiInvalidateIndexedEntries(g_btlUiBlock);
     if ((state->battleMask & 0x1000) != 0) {
         state->battleMask &= ~0x1000ULL;
-        FUN_00254f58(state);
+        battleInitializeTurnOrder(state);
     }
     FUN_00338060(state, 1);
     return 1;

@@ -5,11 +5,11 @@ extern "C" {
 
 extern f32 g_sinCosTable[]; /* sine/cosine table: per entry base sine, base cosine, sine slope, cosine slope */
 
-Vec3f *FUN_002a86a4(MovedPart *part);
-void FUN_002a8638(MovedPart *part, f32 *a, f32 *b, f32 *c, f32 *d);
+Vec3f *cameraGetProviderEntryPayload(MovedPart *part);
+void cameraExportProviderEntryWords(MovedPart *part, f32 *a, f32 *b, f32 *c, f32 *d);
 void *asdCameraGetSavedRenderPairs(void);
-void FUN_002c1edc(void *camera, Vec3f *eye, Vec3f *target, Vec3f *up);
-void FUN_002c1e30(void *camera, s32 flag, f32 a, f32 b, f32 c, f32 d);
+void cameraMatrixCacheSetLookAt(void *camera, Vec3f *eye, Vec3f *target, Vec3f *up);
+void stereoCameraSetPerspective(void *camera, s32 flag, f32 a, f32 b, f32 c, f32 d);
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(Vec3f *out, const Mtx34 *m, const Vec3f *in);
 
 enum {
@@ -42,7 +42,7 @@ static void sinCosFromTable(f32 radians, f32 *sine, f32 *cosine)
 void FUN_00341bec(Mover *mover)
 {
     MovedPart *part = mover->parts[mover->slot];
-    Vec3f *rotation = FUN_002a86a4(mover->parts[mover->slot]);
+    Vec3f *rotation = cameraGetProviderEntryPayload(mover->parts[mover->slot]);
     f32 sinX, cosX, sinY, cosY, sinZ, cosZ;
 
     sinCosFromTable(rotation->x, &sinX, &cosX);
@@ -82,10 +82,10 @@ void FUN_00341bec(Mover *mover)
     void *camera = asdCameraGetSavedRenderPairs();
     f32 fov[4];
 
-    FUN_002c1edc(camera, &mover->cameraEye, &mover->cameraTarget, &mover->cameraUp);
-    FUN_002a8638(mover->parts[mover->slot], &fov[0], &fov[3], &fov[1], &fov[2]);
+    cameraMatrixCacheSetLookAt(camera, &mover->cameraEye, &mover->cameraTarget, &mover->cameraUp);
+    cameraExportProviderEntryWords(mover->parts[mover->slot], &fov[0], &fov[3], &fov[1], &fov[2]);
     fov[0] = fov[0] * 180.0f * 0.31830987f;
-    FUN_002c1e30(camera, 1, fov[0], fov[1], fov[2], fov[3]);
+    stereoCameraSetPerspective(camera, 1, fov[0], fov[1], fov[2], fov[3]);
 }
 
 } /* extern "C" */

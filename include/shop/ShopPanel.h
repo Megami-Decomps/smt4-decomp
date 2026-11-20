@@ -14,5 +14,5 @@ public:
     /* 0x40 */ s32 firstRow;
     /* 0x44 */ s32 selectedRow;
 };
-extern "C" void FUN_002332e8(ShopPanel *panel, s32 first, s32 selected);
+extern "C" void shopPanelSetScrollPosition(ShopPanel *panel, s32 first, s32 selected);
 #endif

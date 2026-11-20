@@ -3,14 +3,14 @@
 
 extern "C" {
 
-extern s32 objectApplyIfUnblocked(ScrollSelection *list);
+extern s32 gridNavigationGetItemCount(ScrollSelection *list);
 
 s32 stateHolderCountMinus1(void)
 {
     if (g_statusDown == NULL) {
         return 0;
     }
-    return objectApplyIfUnblocked(&g_statusDown->list) - 1;
+    return gridNavigationGetItemCount(&g_statusDown->list) - 1;
 }
 
 } /* extern "C" */

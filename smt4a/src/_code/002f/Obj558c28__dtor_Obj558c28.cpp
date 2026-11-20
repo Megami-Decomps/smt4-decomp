@@ -2,7 +2,7 @@
 #include "classes/Obj558c28.h"
 extern "C" {
 void asdOperatorDeleteArray(void *memory);
-void FUN_002eb624(void *object);
+void deletingDtor_002eb624(void *object);
 void FUN_00117828(void *object);
 PooledNodeList *nodeListReleaseStorage(PooledNodeList *list);
 Obj558c28Child **arrayElementAddress_002f32d4(Obj558c28Children *array, s32 index);
@@ -10,8 +10,8 @@ void FUN_0012d86c(Obj558c28MapNode **result, Obj558c28MapList *list, Obj558c28Ma
 void FUN_002f3474(Obj558c28MapList *list, Obj558c28MapNode *replacement, u32 invoke);
 }
 
-inline Obj558c28Resource30::~Obj558c28Resource30() { FUN_002eb624(this); }
-inline Obj558c28Resource70::~Obj558c28Resource70() { FUN_002eb624(this); }
+inline Obj558c28Resource30::~Obj558c28Resource30() { deletingDtor_002eb624(this); }
+inline Obj558c28Resource70::~Obj558c28Resource70() { deletingDtor_002eb624(this); }
 inline Obj558c28Resource20::~Obj558c28Resource20() { FUN_00117828(this); }
 inline Obj558c28Pool::~Obj558c28Pool() { nodeListReleaseStorage(this); }
 inline Obj558c28Children::~Obj558c28Children() { asdOperatorDeleteArray(begin); }

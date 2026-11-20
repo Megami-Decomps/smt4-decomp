@@ -113,7 +113,7 @@ struct TextureTableEntryIV *layoutFindTableEntry(void *layout, s32 index);
 extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
-u32 FUN_00203d74(void);
+u32 inputFastForwardActive(void);
 #ifdef __cplusplus
 }
 #endif

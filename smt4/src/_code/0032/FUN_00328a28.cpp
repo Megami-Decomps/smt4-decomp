@@ -6,14 +6,14 @@ extern "C" {
 IndexedRecordBuffer *linkedFindItemByIndex(IndexedRecordList *, s32);
 void __aeabi_memcpy4(void *, const void *, u32);
 u32 FUN_003224c0(EffectEditorSnapshot *, s32);
-extern IndexedRecordSelection DAT_0044f858;
+extern IndexedRecordSelection g_effectEditorState;
 
 // Edit an indexed record through scratch storage and mark flagged results.
 u32 FUN_00328a28(void)
 {
     IndexedRecordBuffer *record = linkedFindItemByIndex(
         static_cast<IndexedRecordList *>(g_effectEditor.list),
-        DAT_0044f858.index + g_effectEditor.index);
+        g_effectEditorState.index + g_effectEditor.index);
     __aeabi_memcpy4(&g_effectEditorSettings, record, sizeof(IndexedRecordBuffer));
     u32 result = FUN_003224c0(&g_effectEditorSettings.snapshot, 1);
     __aeabi_memcpy4(record, &g_effectEditorSettings, sizeof(IndexedRecordBuffer));

@@ -26,7 +26,7 @@ struct EffectKeyTrack : EffectTransformCopyState {
 extern "C" {
 void wordTripleClear(u8 *state);
 void effCopyTransformColorKeys(EffectKeyTrack *destination, const EffectTransformCopyState *source);
-f32 FUN_00291620(s32 mode, s32 range, s32 positive);
+f32 effRandomSignedValue(s32 mode, s32 range, s32 positive);
 void colorKeyTrackAdvanceRgb(EffectKeyTrack *effect, const EffectTransformCopyState *source);
 void FUN_001dd974(EffectKeyTrack *effect, const EffectTransformCopyState *source);
 void FUN_001dda40(EffectKeyTrack *effect, const EffectTransformCopyState *source);
@@ -86,24 +86,24 @@ void FUN_00193c70(EffectKeyTrack *effect, const EffectTransformCopyState *source
     effCopyTransformColorKeys(effect, source);
         if (effect->keys[0].resource != 0) {
         if (effect->keys[0].frame != 0) {
-            s16 frame = effect->keys[0].frame - (s32)FUN_00291620(2, effect->keys[0].resource, 1);
+            s16 frame = effect->keys[0].frame - (s32)effRandomSignedValue(2, effect->keys[0].resource, 1);
             effect->keys[0].frame = frame;
             effect->shadow.frame = (f32)frame;
         }
         if (effect->keys[0].width != 0) {
-            s16 width = effect->keys[0].width - (s32)FUN_00291620(2, effect->keys[0].resource, 1);
+            s16 width = effect->keys[0].width - (s32)effRandomSignedValue(2, effect->keys[0].resource, 1);
             effect->keys[0].width = width;
             effect->metadata[0] = width;
             effect->shadow.width = (f32)width;
         }
         if (effect->keys[0].height != 0) {
-            s16 height = effect->keys[0].height - (s32)FUN_00291620(2, effect->keys[0].resource, 1);
+            s16 height = effect->keys[0].height - (s32)effRandomSignedValue(2, effect->keys[0].resource, 1);
             effect->keys[0].height = height;
             effect->metadata[1] = height;
             effect->shadow.height = (f32)height;
         }
         if (effect->keys[0].mode != 0) {
-            s16 mode = effect->keys[0].mode - (s32)FUN_00291620(2, effect->keys[0].resource, 1);
+            s16 mode = effect->keys[0].mode - (s32)effRandomSignedValue(2, effect->keys[0].resource, 1);
             effect->keys[0].mode = mode;
             effect->metadata[2] = mode;
             effect->shadow.mode = (f32)mode;

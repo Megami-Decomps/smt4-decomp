@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00106074(void);
 int onlineCallContextWait(unsigned char [96], unsigned int);
 int sharedRefRelease(void);
-int FUN_002ea00c(...);
+int destroyObj005585a4(...);
 int onlineUrlDestroy(unsigned int *);
 int FUN_002eca44(unsigned char [96]);
 int FUN_002ecf40(void);
@@ -20,7 +20,7 @@ extern unsigned char DAT_005590bc; /* 0x5590bc */
 /* Supplied declaration required: FUN_00106074. */
 /* Supplied declaration required: onlineCallContextWait. */
 /* Supplied declaration required: sharedRefRelease. */
-/* Supplied declaration required: FUN_002ea00c. */
+/* Supplied declaration required: destroyObj005585a4. */
 /* Supplied declaration required: onlineUrlDestroy. */
 /* Supplied declaration required: FUN_002eca44. */
 /* Supplied declaration required: FUN_002ecf40. */
@@ -40,7 +40,7 @@ void FUN_0010d1e8(unsigned int *param_1)
     FUN_002eca44(temp_v1);
     FUN_002f7290(param_1,temp_v1);
     onlineCallContextWait(temp_v1,0xffffffff);
-    FUN_002ea00c(temp_v1);
+    destroyObj005585a4(temp_v1);
   }
   if (param_1[0x27] != 0) {
     sharedRefRelease();
@@ -74,7 +74,7 @@ void FUN_0010d1e8(unsigned int *param_1)
   FUN_002ecf40();
   param_1 = param_1 + 0x2c;
   onlineUrlDestroy(param_1);
-  temp_v0 = FUN_002ea00c(param_1 + -0x28);
+  temp_v0 = destroyObj005585a4(param_1 + -0x28);
   *(unsigned char *)(temp_v0 - 4) = 0;
   return;
 }

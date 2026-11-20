@@ -9,7 +9,7 @@ extern "C" {
 
 int textDrawString(...);
 int efctSetSpeed(void);
-int FUN_00180310(...);
+int statRowDrawValueImpl(...);
 int FUN_00185e84(...);
 int statDrawClampedDelta(...);
 int VectorSignedToFloat(...);
@@ -30,10 +30,10 @@ extern int g_statusDown; /* 0x588fe8 */
 extern unsigned int aocIndexValueOrDefault(short);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00180310. */
+/* Supplied declaration required: statRowDrawValueImpl. */
 /* Supplied declaration required: FUN_00185e84. */
 /* Supplied declaration required: statDrawClampedDelta. */
-extern unsigned int FUN_003df57c(short, unsigned int);
+extern unsigned int skillGetCostWithRankReduction(short, unsigned int);
 extern unsigned int skillGetAdjustedCost(unsigned int, short);
 
 
@@ -76,7 +76,7 @@ void FUN_002f67c4(int param_1,int param_2,int param_3,int param_4)
     if (*(short *)(temp_v2 + 0x598) < 1) {
       FUN_00185e84((int)temp_v0,*(short *)(temp_v4 + 8) + param_2,*(short *)(temp_v4 + 10) + param_3,
                    param_4 + 10,1,0);
-      temp_v1 = FUN_003df57c(temp_v0,1);
+      temp_v1 = skillGetCostWithRankReduction(temp_v0,1);
     }
     else {
       FUN_00185e84((int)temp_v0,*(short *)(temp_v4 + 8) + param_2,*(short *)(temp_v4 + 10) + param_3,
@@ -93,7 +93,7 @@ void FUN_002f67c4(int param_1,int param_2,int param_3,int param_4)
     VectorSignedToFloat(*(short *)(temp_v2 + 8) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,temp_v5,temp_v6);
     temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x565));
-    FUN_00180310(1,*(short *)(temp_v2 + 8) + param_2,*(short *)(temp_v2 + 10) + param_3,1,4,param_4 + 7,
+    statRowDrawValueImpl(1,*(short *)(temp_v2 + 8) + param_2,*(short *)(temp_v2 + 10) + param_3,1,4,param_4 + 7,
                  &LAB_002f6b94,temp_v1);
     efctSetSpeed();
     return;

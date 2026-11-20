@@ -20,7 +20,7 @@ typedef struct {
 } Registry;
 
 
-/* Appends `entry` unless its id is already registered; counts ids that FUN_002a4b28 accepts. */
+/* Appends `entry` unless its id is already registered; counts ids that compendiumEntryIsRegistered accepts. */
 void FUN_004a833c(Registry *registry, RegistryEntry *entry)
 {
     s32 i;
@@ -32,7 +32,7 @@ void FUN_004a833c(Registry *registry, RegistryEntry *entry)
     }
     registry->entries[registry->count] = *entry;
     registry->count++;
-    if (FUN_002a4b28(entry->id) != 0) {
+    if (compendiumEntryIsRegistered(entry->id) != 0) {
         registry->specialHits++;
     }
 }

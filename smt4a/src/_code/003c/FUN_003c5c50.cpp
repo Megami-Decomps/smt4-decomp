@@ -24,5 +24,5 @@ extern Record DAT_0059ee68[];
 extern "C" void FUN_003c5c50(Object *object)
 {
     Inner *inner = object->inner;
-    FUN_0031ab38(reinterpret_cast<u32 *>(inner->member), inner->value, reinterpret_cast<EffectEditorOptions *>(&DAT_0059ee68[2]), reinterpret_cast<EffectEditorOptions *>(DAT_0059ee68));
+    effectEditorApplyOwnerOptionsPair(reinterpret_cast<u32 *>(inner->member), inner->value, reinterpret_cast<EffectEditorOptions *>(&DAT_0059ee68[2]), reinterpret_cast<EffectEditorOptions *>(DAT_0059ee68));
 }

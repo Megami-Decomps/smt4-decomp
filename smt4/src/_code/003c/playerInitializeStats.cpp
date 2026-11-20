@@ -1,0 +1,91 @@
+#include "gamedata/PlayerInitialization.h"
+#include "gamedata/PlayerGrowthDefaults.h"
+#include "gamedata/GamePlayerData.h"
+#include "gamedata/PlayerInitialization.h"
+
+extern "C" {
+void playerRecalcStatsFromEquipment(s32 mode);
+
+/* The growth record's packed copy; its bytes 0x0A..0x0D are the growth parameters FUN_003c1ab4 reads. */
+typedef struct Table09Info {
+    u8 id[4];    /* 0x00 */
+    u8 valueA;   /* 0x04 */
+    u8 unk05;
+    u8 valueB;   /* 0x06 */
+    u8 unk07;
+    u8 valueC;   /* 0x08 */
+    u8 unk09;
+    u8 valueD;   /* 0x0A */
+    u8 valueE;   /* 0x0B */
+    u32 unk0C;   /* 0x0C */
+} Table09Info;
+
+struct GrowthParameters {
+    u8 unk00[6];   // 0x00
+    u16 firstBase;  // 0x06
+    u16 secondBase; // 0x08
+    u8 firstGain;  // 0x0a
+    u8 secondGain; // 0x0b
+};
+
+struct GrowthValues {
+    s16 first;  // 0x00
+    u16 second; // 0x02
+};
+
+/* Copies the hero's growth record (PlayerGrow.tbb) into info. */
+void FUN_003c1e50(Table09Info *info)
+{
+    void *resource = dataTableGet(9, 0);
+    dataTableGetCount(resource);
+    const PlayerGrowRecord *record = (const PlayerGrowRecord *)dataTableGetEntries(resource);
+    Table09Info result = {0};
+    result.id[0] = record->growth[0];
+    result.id[1] = record->growth[1];
+    result.id[2] = record->growth[2];
+    result.id[3] = record->growth[3];
+    result.valueA = record->growth[4];
+    result.valueB = record->baseHp;
+    result.valueC = record->baseMp;
+    result.valueD = record->hpGrowth;
+    result.valueE = record->mpGrowth;
+    *info = result;
+}
+
+// Calculate the two growth values, applying the second-value percentage and upper cap.
+void FUN_003c1ab4(s16 level, GrowthValues *output, const GrowthParameters *parameters)
+{
+    s32 first = level * parameters->firstGain + parameters->firstBase;
+    u16 firstValue = first <= 9999 ? (u16)first : 9999;
+    output->first = firstValue;
+    s32 second = (level * parameters->secondGain + parameters->secondBase) * 45 / 100;
+    output->second = second <= 9999 ? (u16)second : 9999;
+}
+
+/* Resets player advancement and initial attributes, computes base HP/MP, then restores both. */
+void playerInitializeStats(void)
+{
+    /* A u32 view of the shared byte padding at 0x2E would change that member's alignment. */
+    struct PlayerExperienceView {
+        /* 0x00 */ u8 unk00[0x30];
+        /* 0x30 */ u32 experience;
+    };
+    typedef char PlayerExperienceOffsetCheck[offsetof(PlayerExperienceView, experience) == 0x30 ? 1 : -1];
+    PlayerDataIV *player = gameGetPlayerData();
+    player->level = 1;
+    ((PlayerExperienceView *)player)->experience = 0;
+    player->ailments = 0;
+    const PlayerGrowRecord *initial = playerGrowthDefaults();
+    for (s32 index = 0; index < 5; ++index) {
+        player->baseStats.stats[index] = initial->initialStats[index];
+    }
+    Table09Info info;
+    FUN_003c1e50(&info);
+    // The base HP and MP words (0x0E, 0x10) are the growth output pair.
+    FUN_003c1ab4(player->level, reinterpret_cast<GrowthValues *>(&player->baseStats),
+                 reinterpret_cast<const GrowthParameters *>(&info));
+    playerRecalcStatsFromEquipment(0);
+    player->hp = player->maxHp;
+    player->mp = player->maxMp;
+}
+}

@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_002a6fb8(void);
+int menuSceneTeardown(void);
 int asdMemFreeNonNull(void *entry);
 int jobFind(u32 task);                /* nonzero while the task exists */
 int asdMemFree(void *ptr);               /* heap free */
@@ -24,7 +24,7 @@ u32 questCenterPollShutdown(void)
         if (work != NULL) {
             work->done = 1;
             if (work->entry != 0) {
-                FUN_002a6fb8();
+                menuSceneTeardown();
                 asdMemFreeNonNull(work->entry);
                 work->entry = 0;
             }

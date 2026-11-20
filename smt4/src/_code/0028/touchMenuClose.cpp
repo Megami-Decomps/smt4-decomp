@@ -26,8 +26,8 @@ typedef struct TouchMenuModule {
     /* 0x04 */ TouchMenuWork *work;
 } TouchMenuModule;
 
-void FUN_00220d24(s32 mode);
-void FUN_00295214(s32 mode);
+void buttonHelpSetUseDirectoryText(s32 mode);
+void buttonHelpSetTextVisible(s32 mode);
 void buttonHelpSetText(void *target, u32 color);
 void ifTouchRegionRemove(void);
 
@@ -49,13 +49,13 @@ void touchMenuClose(void)
     }
     if (panel->fadePending) {
         if (panel->fadeOut) {
-            FUN_00220d24(1);
+            buttonHelpSetUseDirectoryText(1);
         } else {
             buttonHelpSetText(work->panel.fadeTarget, 0x323232ff);
         }
         work->panel.fadePending = 0;
     } else {
-        FUN_00295214(0);
+        buttonHelpSetTextVisible(0);
     }
 }
 

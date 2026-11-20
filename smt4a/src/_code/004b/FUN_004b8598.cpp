@@ -53,7 +53,7 @@ extern void moveCameraCtrlCreateEntry(u32 handle, u8 *path, s32 index);
 extern void linkSlotSetFlag1C(u32 handle, s32 enable);
 extern void linkSlotSetFlag20(u32 handle, s32 enable);
 extern void listSelectItem(u32 handle, s32 index);
-extern void FUN_00407ab0(u32 handle, u8 *path, u8 *altPath);
+extern void moveCameraCtrlSetup(u32 handle, u8 *path, u8 *altPath);
 extern void FUN_00407eb0(u32 handle, s32 kind, s32 flag);
 extern void moveCameraCtrlSnapToNode(u32 handle, s32 a, s32 b); // declcheck: local (the shared declaration does not compile here or changes this unit)
 extern void mapSceneInitializeScriptAndEntry(MikadoPanel *panel);
@@ -83,9 +83,9 @@ void FUN_004b8598(MikadoPanel *panel)
             if ((panel->entry->altFlagA != 0 && gameFlagIsSet(panel->entry->altFlagA) != 0) ||
                 (panel->entry->altFlagB != 0 && gameFlagIsSet(panel->entry->altFlagB) != 0)) {
                 sprintf((char *)altPath, "%s%s", g_mikadoPathPrefix, panel->entry->altImage);
-                FUN_00407ab0(panel->cacheHandle, path, altPath);
+                moveCameraCtrlSetup(panel->cacheHandle, path, altPath);
             } else {
-                FUN_00407ab0(panel->cacheHandle, path, NULL);
+                moveCameraCtrlSetup(panel->cacheHandle, path, NULL);
             }
             current = menu4CGetCurrentEntry(panel->menu);
             moveCameraCtrlSnapToNode(panel->cacheHandle, 0, -1);

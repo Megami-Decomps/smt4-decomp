@@ -20,7 +20,7 @@ int questDataGetRecord(void);
 int eventQueueAddUniqueIfValid(...);
 int spriteStartAnimationByIndex(...);
 int soundPlaySeUnpanned(...);
-int FUN_002c1658(...);
+int inputQueryButtonState(...);
 int uiQuestSortListByEntryKind(...);
 int gameStateResetRecord(...);
 int gameOptionsHasEnabledParameters(void);
@@ -69,7 +69,7 @@ extern int messageMainGetChoiceResult(void);
 extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: useCounterRelease. */
 extern int useCounterIsFinished(void);
-extern int FUN_0029ee54(int);
+extern int gridNavigationGetItemCount(int);
 /* Supplied declaration required: listCursorGetRowIfUnblocked. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: buttonHelpGetMode. */
@@ -85,7 +85,7 @@ extern int FUN_0029ee54(int);
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern int gameFlagIsSet(unsigned int);
 extern int randNextInRange(unsigned int);
-/* Supplied declaration required: FUN_002c1658. */
+/* Supplied declaration required: inputQueryButtonState. */
 /* Supplied declaration required: asdMemFree. */
 extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 /* Supplied declaration required: uiQuestSortListByEntryKind. */
@@ -138,7 +138,7 @@ s32 uiQuestCalc(u32 job)
     if (temp_v6 == 0) {
       temp_v5 = 0;
       do {
-        temp_v6 = FUN_0029ee54(temp_v11);
+        temp_v6 = gridNavigationGetItemCount(temp_v11);
         if (temp_v6 <= temp_v5) break;
         temp_v3 = ifTouchRegionAddRequested(0x29,temp_v5 + 0x9e);
         temp_v6 = temp_v5 * 2;
@@ -745,7 +745,7 @@ joined_r0x0019627c:
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 7);
     temp_v11 = 0;
-    FUN_002c1658(0,1);
+    inputQueryButtonState(0,1);
     if (temp_v11 == 0) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -827,7 +827,7 @@ joined_r0x0019627c:
     return 0;
   case 0x15:
     temp_v11 = 0;
-    FUN_002c1658(0,1);
+    inputQueryButtonState(0,1);
     if (temp_v11 == 0) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -942,7 +942,7 @@ joined_r0x0019627c:
       return 0;
     }
     temp_v11 = 8;
-    FUN_002c1658(8,0);
+    inputQueryButtonState(8,0);
     if (temp_v11 != 0) {
       temp_v11 = *(int *)(temp_v1 + 0x5c8) - 1;
       *(int *)(temp_v1 + 0x5cc) = temp_v11;
@@ -962,7 +962,7 @@ joined_r0x0019627c:
     }
     else {
       temp_v11 = 7;
-      FUN_002c1658(7,0);
+      inputQueryButtonState(7,0);
       if (temp_v11 != 0) {
         temp_v11 = *(int *)(temp_v1 + 0x5c8) + 1;
         *(int *)(temp_v1 + 0x5cc) = temp_v11;
@@ -982,10 +982,10 @@ joined_r0x0019627c:
       }
       else {
         temp_v11 = 0;
-        FUN_002c1658(0,1);
+        inputQueryButtonState(0,1);
         if (temp_v11 == 0) {
           temp_v11 = 1;
-          FUN_002c1658();
+          inputQueryButtonState();
           if (temp_v11 == 0) {
             *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
             return 0;
@@ -1027,7 +1027,7 @@ joined_r0x0019627c:
   case 0x1c:
   case 0x1d:
     temp_v11 = 8;
-    FUN_002c1658(8,0);
+    inputQueryButtonState(8,0);
     if (temp_v11 != 0) {
       temp_v11 = *(int *)(temp_v1 + 0x5c8) - 1;
       *(int *)(temp_v1 + 0x5cc) = temp_v11;
@@ -1051,7 +1051,7 @@ joined_r0x0019627c:
     }
     else {
       temp_v11 = 7;
-      FUN_002c1658(7,0);
+      inputQueryButtonState(7,0);
       if (temp_v11 != 0) {
         temp_v11 = *(int *)(temp_v1 + 0x5c8) + 1;
         *(int *)(temp_v1 + 0x5cc) = temp_v11;
@@ -1075,10 +1075,10 @@ joined_r0x0019627c:
       }
       else {
         temp_v11 = 0;
-        FUN_002c1658(0,1);
+        inputQueryButtonState(0,1);
         if (temp_v11 == 0) {
           temp_v11 = 1;
-          FUN_002c1658();
+          inputQueryButtonState();
           if (temp_v11 == 0) {
             *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
             return 0;

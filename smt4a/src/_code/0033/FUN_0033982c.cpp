@@ -49,7 +49,7 @@ extern unsigned int FUN_0029202c(void);
 /* Supplied declaration required: FUN_0030250c. */
 extern int lmapSceneGetUnk0(void);
 /* Supplied declaration required: FUN_0033abb4. */
-extern int FUN_0036d984(float *, unsigned int *, unsigned int);
+extern int mapCollisionRaySegmentTest(float *, unsigned int *, unsigned int);
 extern int inputIsQuestMenuPressed(void);
 
 void FUN_0033982c(void)
@@ -434,7 +434,7 @@ LAB_00339bb4:
   temp_v25 = *(unsigned int *)(g_lmapView + 0x50);
   temp_v26 = *(float *)(g_lmapView + 0x54);
   uStack_4c = *(unsigned int *)(g_lmapView + 0x58);
-  temp_v1 = FUN_0036d984(&temp_v22,(unsigned int *)&temp_v25,0);
+  temp_v1 = mapCollisionRaySegmentTest(&temp_v22,(unsigned int *)&temp_v25,0);
   temp_v22 = *(float *)(g_lmapScene + 0x1c);
   temp_v23 = *(float *)(g_lmapScene + 0x20);
   temp_v24 = *(float *)(g_lmapScene + 0x24);
@@ -449,7 +449,7 @@ LAB_00339bb4:
   temp_v25 = *(unsigned int *)(g_lmapScene + 0x1c);
   uStack_4c = *(unsigned int *)(g_lmapScene + 0x24);
   temp_v26 = *(float *)(g_lmapScene + 0x20) + temp_v13;
-  temp_v4 = FUN_0036d984(&temp_v22,(unsigned int *)&temp_v25,0);
+  temp_v4 = mapCollisionRaySegmentTest(&temp_v22,(unsigned int *)&temp_v25,0);
   if (temp_v1 != -1) {
     temp_v17 = 6.0f;
     if (temp_v4 != -1) {

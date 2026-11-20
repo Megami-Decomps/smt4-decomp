@@ -10,7 +10,7 @@ HalfPair48 *saveGetIndexedMapValue(s32 index);
 s32 gameDataBlockTestFlag(u32 mask);
 void messageInitializeSavedBanner(void);
 u32 FUN_0031e384(void *polling);
-u32 FUN_002228d4(void);
+u32 gameDataGetMenuIdleFlags(void);
 
 /* Dispatch the selected CEC action and maintain idle help, saved banner and visibility flags. */
 u32 campCecMenuIdleState(CampCecMenu *menu)
@@ -60,7 +60,7 @@ u32 campCecMenuIdleState(CampCecMenu *menu)
         messageInitializeSavedBanner();
     }
     if ((FUN_0031e384(menu->polling.work) & 2) != 0) {
-        if ((FUN_002228d4() & 2) != 0)
+        if ((gameDataGetMenuIdleFlags() & 2) != 0)
             g_campCec->card.flags |= 2;
         else
             g_campCec->card.flags &= ~2;

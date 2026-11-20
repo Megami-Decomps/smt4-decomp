@@ -1,4 +1,4 @@
-/* Forwards the string `text` and its length to FUN_001a7a20, using the manager located through the owner's link. */
+/* Forwards the string `text` and its length to nameTableLookupEntry, using the manager located through the owner's link. */
 #include "common.h"
 
 extern "C" {
@@ -25,7 +25,7 @@ typedef struct Owner {
 } Owner;
 
 extern u32 libc_strlen(u32 text);
-extern void FUN_001a7a20(void *buffer, u32 text, u32 length);
+extern void nameTableLookupEntry(void *buffer, u32 text, u32 length);
 
 void FUN_004ffab8(Owner *owner, u32 text)
 {
@@ -36,7 +36,7 @@ void FUN_004ffab8(Owner *owner, u32 text)
         link += 0xC;
     }
     sub = &((Link *)link)->manager->sub;
-    FUN_001a7a20(sub->buffer, text, libc_strlen(text));
+    nameTableLookupEntry(sub->buffer, text, libc_strlen(text));
 }
 
 }

@@ -8,7 +8,7 @@ extern "C" {
 extern ResourceDescriptorPrefixA DAT_0061b000;
 extern u8 DAT_0061c000[];
 
-u32 FUN_0016ccfc(void);
+u32 tokenTableGet(void);
 s32 tokenResolveAddress(u32 token, const ResourceDescriptorRecordPrefixA **record, u32 key);
 s32 initBlockE30(u8 *block);
 s32 clearBlock10808(u8 *block);
@@ -17,7 +17,7 @@ unsigned long long FUN_00302420(const char *text, u32 unused, u32 base);
 s32 FUN_00427e68(u32 key, u32 value)
 {
     const ResourceDescriptorRecordPrefixA *record;
-    const s32 status = tokenResolveAddress(FUN_0016ccfc(), &record, key);
+    const s32 status = tokenResolveAddress(tokenTableGet(), &record, key);
     if (nnResultIsFailure(status))
         return status;
 

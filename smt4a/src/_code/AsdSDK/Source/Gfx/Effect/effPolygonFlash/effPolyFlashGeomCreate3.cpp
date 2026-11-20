@@ -5,7 +5,7 @@
 extern "C" {
 
 PolyGeom *effGeomCreateRepeatedIndexList(u32 count, int w, int h, u8 *table, int tableSize);
-extern u8 DAT_005c1f3a;
+extern u8 g_effPolyFlashIndexTableU8;
 
 /* Builds the geometry block of a flash polygon effect with one segment per parameter segment. */
 PolyGeomBlock *effPolyFlashGeomCreate3(PolyParams *params)
@@ -20,7 +20,7 @@ PolyGeomBlock *effPolyFlashGeomCreate3(PolyParams *params)
     u8 *payload = block->payload;
     block->data = payload;
     block->self = block;
-    block->geom = effGeomCreateRepeatedIndexList((u16)segments, 12, 13, &DAT_005c1f3a, 72);
+    block->geom = effGeomCreateRepeatedIndexList((u16)segments, 12, 13, &g_effPolyFlashIndexTableU8, 72);
     return block;
 }
 

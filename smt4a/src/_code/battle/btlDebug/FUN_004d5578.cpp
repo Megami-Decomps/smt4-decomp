@@ -8,7 +8,7 @@
 #include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlUiCloseState DAT_005715f8;
+extern BtlUiCloseState g_btlDebugGlobals;
 extern const AsdListBoxEntry DAT_00573300[31];
 extern f32 DAT_005e1554[3];
 extern f32 DAT_00571570;
@@ -38,7 +38,7 @@ extern s32 DAT_005715b4;
 extern s32 DAT_0057aa10;
 extern s32 DAT_00571530;
 s32 jobIsValid(u32 job);
-void FUN_003592dc(u32 job);
+void asdListBoxJobReset(u32 job);
 void jobStop(u32 job, s32 mode);
 void asdListBoxAddItems(u32 job, const AsdListBoxEntry *items, u32 count);
 void jobSetText(u32 job, const char *text);
@@ -55,7 +55,7 @@ void FUN_004d5578(BattleDebugPanelWork *work, BtlMainStateA *battle)
         f32 value;
     };
     if (jobIsValid(work->panelJob)) {
-        FUN_003592dc(work->panelJob);
+        asdListBoxJobReset(work->panelJob);
         jobStop(work->panelJob, 0);
     }
     work->panelJob = asdListBoxCreateDefaultFlags(battle->uiJobs.menuJob, 0x75, 0, 0);
@@ -64,7 +64,7 @@ void FUN_004d5578(BattleDebugPanelWork *work, BtlMainStateA *battle)
     jobSetText(work->panelJob, "Attack Camera Menu");
     asdListBoxSetToggleItem(work->panelJob, 0, (g_btlCamera->flags & 0x100) >> 8);
     asdListBoxSetFloatItem(work->panelJob, 1, reinterpret_cast<CameraEffectView *>(g_btlCamera)->value, -10, 10);
-    asdListBoxSetToggleItem(work->panelJob, 2, (battle->markerMasks.bits & DAT_005715f8.markerMask) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 2, (battle->markerMasks.bits & g_btlDebugGlobals.markerMask) != 0);
     asdListBoxSetFloatItem(work->panelJob, 3, DAT_005e1554[0], -100, 100);
     asdListBoxSetFloatItem(work->panelJob, 4, DAT_005e1554[2], -100, 100);
     asdListBoxSetFloatItem(work->panelJob, 5, DAT_00571570, -100, 100);

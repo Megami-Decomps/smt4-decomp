@@ -7,14 +7,14 @@ struct ItemSelection {
 };
 
 extern "C" {
-s32 FUN_0047fc38(s32 parameter);
+s32 equipmentIsFullyUpgraded(s32 parameter);
 
 // Exclude the four special item ids, then check the selected item's parameter.
 s32 itemSelectionCanUse(ItemSelection *selection, s32 index)
 {
     s32 id = selection->ids[index];
     if (id != 0x3d && id != 0xb5 && id != 0x30d && id != 0x295) {
-        if (FUN_0047fc38(selection->parameters[index]) == 0) {
+        if (equipmentIsFullyUpgraded(selection->parameters[index]) == 0) {
             return 1;
         }
     }

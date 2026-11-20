@@ -84,7 +84,7 @@ extern unsigned int FUN_0026e6a0(unsigned int, unsigned int, unsigned int, int);
 /* Supplied declaration required: texTableRecordCallWithParams. */
 /* Supplied declaration required: FUN_002b64b8. */
 /* Supplied declaration required: FUN_002b659c. */
-extern int FUN_002b8660(void);
+extern int resultIsIdle(void);
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
@@ -93,7 +93,7 @@ extern int FUN_002b8660(void);
 /* Supplied declaration required: efctSetSpeed. */
 extern int *jobGetWork(void);
 /* Supplied declaration required: renderCtxApplyTransforms. */
-extern int FUN_002c1d5c(void);
+extern int eventIsSkipping(void);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: spriteDrawAnimationUnplaced. */
 
@@ -150,7 +150,7 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
     temp_v12 = 0.0f;
     temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)((float)piVar2[9] == 0.0f) << 0x1e);
     if ((!romwright_subpiece_4_1_0(temp_v4 >> 0x1e,0)) &&
-       ((temp_v1 = FUN_002c1d5c(), temp_v1 == 0 || (temp_v1 = FUN_002b8660(), temp_v1 == 0)))) {
+       ((temp_v1 = eventIsSkipping(), temp_v1 == 0 || (temp_v1 = resultIsIdle(), temp_v1 == 0)))) {
       temp_v6 = (float)piVar2[6];
       temp_v11 = *(unsigned long long *)(piVar2 + 8);
       renderCtxCalculateStereoParallax(g_titleScene);

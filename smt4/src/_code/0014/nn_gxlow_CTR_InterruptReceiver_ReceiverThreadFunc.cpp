@@ -5,7 +5,7 @@
 extern "C" {
 
 int nn_os_LightEvent_Signal(unsigned int);
-int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
+int svcWaitSynchronizationN(unsigned char *, int *, int, int, unsigned int, unsigned int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int resultHandleFailure(void);
 int hasExclusiveAccess(unsigned int *);
 int software_interrupt(int);
@@ -19,7 +19,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 /* Supplied declaration required: nn_os_LightEvent_Signal. */
-/* Supplied declaration required: FUN_002c40f8. */
+/* Supplied declaration required: svcWaitSynchronizationN. */
 /* Supplied declaration required: resultHandleFailure. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -44,7 +44,7 @@ void nn_gxlow_CTR_InterruptReceiver_ReceiverThreadFunc(unsigned int param_1)
     uStack_28 = *(unsigned int *)(param_1 + 0x2c);
     temp_v4 = 0;
     puVar3 = temp_v5;
-    FUN_002c40f8(puVar3,&uStack_28,1,0,0xffffffff,0xffffffff);
+    svcWaitSynchronizationN(puVar3,&uStack_28,1,0,0xffffffff,0xffffffff);
     if ((int)puVar3 < 0) {
       resultHandleFailure();
     }

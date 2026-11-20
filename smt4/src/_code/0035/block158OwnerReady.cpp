@@ -4,7 +4,7 @@ extern "C" {
 
 int counterPairRemaining(void *block);
 int FUN_0034ee98(void *block);
-extern u32 FUN_0034ee48(void *block);
+extern u32 block158CountReadyEntries(void *block);
 
 typedef struct Obj {
     /* 0x000 */ u8 unk000[0xC];
@@ -24,7 +24,7 @@ u32 block158OwnerReady(Obj *obj)
     }
     if (counterPairRemaining(obj->block) != 0) {
         current = counterPairRemaining(obj->block);
-        limit = FUN_0034ee48(obj->block);
+        limit = block158CountReadyEntries(obj->block);
         if (current <= limit) {
             return 1;
         }

@@ -8,7 +8,7 @@ extern ButtonHelpQueuedSelections DAT_0043da50;
 
 void FUN_00220984(void);
 void FUN_002ae028(u8 *help);
-void FUN_002b8454(u8 slot, u8 kind, u16 value, s32 defer);
+void buttonHelpSetSlot(u8 slot, u8 kind, u16 value, s32 defer);
 void buttonHelpSetPreset(u32 preset);
 
 /* Per-frame update of the button help: runs the current state (1 opens, 2 idles, 3 closes), applies
@@ -70,7 +70,7 @@ u32 FUN_001c0c38(void)
         if (g_buttonHelp.pending < 0) {
             for (s32 i = 0; i < 6; i++) {
                 if (DAT_0043da50.kinds[i] >= 0) {
-                    FUN_002b8454(i, DAT_0043da50.kinds[i], DAT_0043da50.values[i], 1);
+                    buttonHelpSetSlot(i, DAT_0043da50.kinds[i], DAT_0043da50.values[i], 1);
                 }
             }
         }

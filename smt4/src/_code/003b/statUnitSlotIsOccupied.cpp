@@ -1,0 +1,10 @@
+#include "shard/Shard003B.h"
+#include "code/Code003b_Shard003B.h"
+
+/* Report whether the optional object's state flag is set. */
+extern "C" s32 statUnitSlotIsOccupied(const StateFlag46 *object)
+{
+    if (object == NULL)
+        return 0;
+    return object->state != 0;
+}

@@ -35,7 +35,7 @@ void gameDataAddHomeButtonHold(s32 enabled);
 void gameDataBlocksAddFlags(u32 flags);
 void gameDataBlocksOrFlagsClearUnk02(s32 enabled);
 SaveHeader *gameDataBlocksGetSaveData(void);
-void FUN_003712a4(void *);
+void saveLoadProcessCreateTask(void *);
 void work8BufDestroy(void *);
 void saveLoadDrawActivityIcon(void *);
 void asdProcessClearSelectedFlags(void *, u32, u32);
@@ -58,7 +58,7 @@ void *saveLoadProcessCreate(s32 selection, u8 option)
     g_saveLoadProcess.unk04 = 0;
     g_saveLoadProcess.unk08 = 0;
     g_saveLoadProcess.unk06 = 0;
-    work->process = reinterpret_cast<void *>(asdProcessCreateSimple(reinterpret_cast<const s8 *>("Load"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_003712a4), reinterpret_cast<AsdProcFunc>(work8BufDestroy), reinterpret_cast<u32>(work)));
+    work->process = reinterpret_cast<void *>(asdProcessCreateSimple(reinterpret_cast<const s8 *>("Load"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(saveLoadProcessCreateTask), reinterpret_cast<AsdProcFunc>(work8BufDestroy), reinterpret_cast<u32>(work)));
     asdProcessClearSelectedFlags(work->process, 0x80000, 0);
     if (selection <= 1) {
         work->slot = selection;

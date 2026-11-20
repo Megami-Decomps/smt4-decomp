@@ -18,7 +18,7 @@ int FUN_0034ea70(...);
 int FUN_003a6404(...);
 
 int effectDispatchSelector(...);
-int FUN_00180310(...);
+int statRowDrawValueImpl(...);
 int gxResetColorQuadToWhite(void);
 int pairSetHalves(...);
 int jobGetScalarValue(void);
@@ -114,7 +114,7 @@ extern int vec2GetYInt(int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int recordGetScaledMaximum(int);
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_00180310. */
+/* Supplied declaration required: statRowDrawValueImpl. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00183788. */
@@ -502,7 +502,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
             temp_v1 = FUN_002b4dcc(temp_v8);
             temp_v30 = (int)temp_v1;
             temp_v31 = (int)*(short *)(temp_v8 + 0x10);
-            temp_v12 = (unsigned int)FUN_00180114(*(unsigned short *)(temp_v8 + 0x62));
+            temp_v12 = (unsigned int)table01RecordLookupForContent(*(unsigned short *)(temp_v8 + 0x62));
             sprintf((char *)temp_v32,"%s",temp_v12);
             temp_v48 = heldAmountLessThan(temp_v30,*(unsigned short *)(temp_v8 + 0x62));
           }
@@ -512,7 +512,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
           temp_v1 = FUN_002b4dcc();
           temp_v30 = (int)temp_v1;
           temp_v31 = (int)*(short *)(temp_v7 + 0x10);
-          temp_v12 = (unsigned int)FUN_00180114(*(unsigned short *)(temp_v7 + 0x62));
+          temp_v12 = (unsigned int)table01RecordLookupForContent(*(unsigned short *)(temp_v7 + 0x62));
           sprintf((char *)temp_v32,"%s",temp_v12);
           temp_v48 = (unsigned int)(*(short *)(temp_v7 + 0xe) < temp_v30);
         }
@@ -587,21 +587,21 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
       efctSetSpeed();
       temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x20));
       if (temp_v29 >= 10000) {
-        FUN_00180310(0,*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,1,4,0x10,
+        statRowDrawValueImpl(0,*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,1,4,0x10,
                      "9999");
       }
       else {
-        FUN_00180310(0,*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,1,4,0x10,
+        statRowDrawValueImpl(0,*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,1,4,0x10,
                      temp_v36);
       }
       gxResetColorQuadToWhite();
       temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x24));
       if (temp_v8 >= 10000) {
-        FUN_00180310(0,*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,1,4,0x10,
+        statRowDrawValueImpl(0,*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,1,4,0x10,
                      "9999");
       }
       else {
-        FUN_00180310(0,*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,1,4,0x10,
+        statRowDrawValueImpl(0,*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,1,4,0x10,
                      temp_v40);
       }
       if (temp_v50 != 0) {
@@ -848,13 +848,13 @@ LAB_002afb00:
           texDrawTableEntryAtStoredOrigin(2,0xd,500,temp_v6,temp_v5,0x1f);
           texDrawTableEntryAtStoredOrigin(2,0xd,0x1f5,temp_v6,temp_v5,0x1f);
           temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x1f8));
-          FUN_00180310(0,*(short *)(temp_v7 + 8) + temp_v6,*(short *)(temp_v7 + 10) + temp_v5,1,3,0x24,
+          statRowDrawValueImpl(0,*(short *)(temp_v7 + 8) + temp_v6,*(short *)(temp_v7 + 10) + temp_v5,1,3,0x24,
                        temp_v39);
         }
         else {
           texDrawTableEntryAtStoredOrigin(2,0xd,0x3f,temp_v6,temp_v5 - temp_v28,0x1f);
           temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x42));
-          FUN_00180310(0,*(short *)(temp_v7 + 8) + temp_v6,(*(short *)(temp_v7 + 10) + temp_v5) - temp_v28,
+          statRowDrawValueImpl(0,*(short *)(temp_v7 + 8) + temp_v6,(*(short *)(temp_v7 + 10) + temp_v5) - temp_v28,
                        1,2,0x24,temp_v39);
         }
       }
@@ -862,13 +862,13 @@ LAB_002afb00:
         texDrawTableEntryAtStoredOrigin(2,0xd,0x1ef,temp_v6,temp_v5,0x1f);
         texDrawTableEntryAtStoredOrigin(2,0xd,0x1f0,temp_v6,temp_v5,0x1f);
         temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,499));
-        FUN_00180310(0,*(short *)(temp_v7 + 8) + temp_v6,*(short *)(temp_v7 + 10) + temp_v5,1,3,0x24,
+        statRowDrawValueImpl(0,*(short *)(temp_v7 + 8) + temp_v6,*(short *)(temp_v7 + 10) + temp_v5,1,3,0x24,
                      temp_v39);
       }
       else {
         texDrawTableEntryAtStoredOrigin(2,0xd,5,temp_v6,temp_v5,0x1f);
         temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x26));
-        FUN_00180310(0,*(short *)(temp_v7 + 8) + temp_v6,*(short *)(temp_v7 + 10) + temp_v5,1,2,0x24,
+        statRowDrawValueImpl(0,*(short *)(temp_v7 + 8) + temp_v6,*(short *)(temp_v7 + 10) + temp_v5,1,2,0x24,
                      temp_v39);
       }
       temp_v7 = temp_v34 + 0x4b00;

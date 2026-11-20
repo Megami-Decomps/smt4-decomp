@@ -8,7 +8,7 @@
 extern "C" {
 
 s32 rt_memcmp(const void *a, const void *b, u32 size);
-void *FUN_002a4e98(AsdEplTail *tail);
+void *effPartCreateFromSource(AsdEplTail *tail);
 
 extern const char DAT_00409428[];  /* "ATBC" */
 extern const char DAT_00409430[];  /* "EPLSIGN" */
@@ -76,7 +76,7 @@ void asdModelBuildAttributeRecordsForKey(AsdMdlNode *model, u8 *data, s32 key)
                 AsdModelAttrRecord *record = &model->records.items[count];
 
                 record->id = id;
-                record->handle = FUN_002a4e98(tail);
+                record->handle = effPartCreateFromSource(tail);
                 count++;
                 id++;
                 record->flags = entry->flags;

@@ -12,7 +12,7 @@ struct ScalarAnimation {
     /* 0x4C */ ScalarAnimationKey keys[4];
 };
 
-extern "C" void FUN_00291008(f32* value, f32 step, f32 target);
+extern "C" void mathStepTowards(f32* value, f32 step, f32 target);
 
 // Advance a four-key scalar animation, skipping keys with nonincreasing times.
 extern "C" void scalarTimelineUpdate(const ScalarAnimation* animation, s32* elapsed,
@@ -43,6 +43,6 @@ extern "C" void scalarTimelineUpdate(const ScalarAnimation* animation, s32* elap
             }
         }
     } else {
-        FUN_00291008(value, *step, *target);
+        mathStepTowards(value, *step, *target);
     }
 }

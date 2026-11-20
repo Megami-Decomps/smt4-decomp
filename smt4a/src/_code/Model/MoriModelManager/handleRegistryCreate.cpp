@@ -7,7 +7,7 @@ extern HandleRegistry* g_handleRegistry;
 
 void* asdMemoryAllocTraced(u32 size, const char* sourceFile, u32 sourceLine);
 HandleRegistry* _ZN9Obj557c48C1Ev(void* storage);
-void FUN_001463b4(HandleRegistry* registry);
+void modelHandleRegistryInit(HandleRegistry* registry);
 
 void handleRegistryCreate(void)
 {
@@ -18,7 +18,7 @@ void handleRegistryCreate(void)
             registry = _ZN9Obj557c48C1Ev(registry);
         }
         g_handleRegistry = registry;
-        FUN_001463b4(registry);
+        modelHandleRegistryInit(registry);
     }
 }
 }

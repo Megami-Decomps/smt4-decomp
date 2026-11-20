@@ -23,8 +23,8 @@ StatusSkillSlotView *slotRecordFindById(u32);
 u32 getUnlockedSlotCount();
 void *rt_memcpy(void *, const void *, u32);
 void statusReplaceSkills(const u16 *, u8);
-s32 FUN_004bcaa8(u16, u16, u16 *, StatusSkillComparison *, u8);
-void FUN_0035da20(StatusSkillComparison *, s32);
+s32 statusCollectUnlearnedSkillsAboveLevel(u16, u16, u16 *, StatusSkillComparison *, u8);
+void statusDownSetSelectedIds(StatusSkillComparison *, s32);
 
 /* Copy the selected skills and refresh their comparison against the active unit. */
 void statusCommitSelectedSkills(const u16 *skills)
@@ -46,11 +46,11 @@ void statusCommitSelectedSkills(const u16 *skills)
         u8 mode = session->unk2017;
         if (mode == 2 || mode == 0x11 || mode == 3)
             slot = slotRecordFindById(static_cast<u16>(selection->selectedId));
-        s8 result = static_cast<s8>(FUN_004bcaa8(static_cast<u16>(selection->selectedId), selection->comparisonId,
+        s8 result = static_cast<s8>(statusCollectUnlearnedSkillsAboveLevel(static_cast<u16>(selection->selectedId), selection->comparisonId,
                                                selection->skills, &comparison, slot != NULL && slot->special != 0));
-        FUN_0035da20(&comparison, result);
+        statusDownSetSelectedIds(&comparison, result);
     } else {
-        FUN_0035da20(NULL, -1);
+        statusDownSetSelectedIds(NULL, -1);
     }
 }
 }

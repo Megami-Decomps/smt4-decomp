@@ -12,7 +12,7 @@ typedef char DemonIconPanelOffsets[offsetof(DemonIconPanelView, layout) == 0xc8 
 extern "C" {
 void devilDrawIconRelative(void *, s32, s32, s32, u32);
 void uiDrawTableTextureAtRectCorner(void *, s32, s32, s32, u32);
-u32 FUN_002a4b28(u16);
+u32 compendiumEntryIsRegistered(u16);
 s32 gameStockContainsEntry(u16);
 
 // Draw a known demon icon or its unknown substitute, with an optional stock marker.
@@ -32,7 +32,7 @@ void demonIconPanelDrawRow(DemonIconPanelView *panel, s32 markStock, u32 demon, 
         offset = layoutFindTableEntry(panel->layout, 0x495);
     s32 x = offset->x + baseX;
     s32 y = offset->y + baseY;
-    if (FUN_002a4b28(demon) || panel->showUnknown)
+    if (compendiumEntryIsRegistered(demon) || panel->showUnknown)
         devilDrawIconRelative(panel->layout, (s16)demon, x, y, opacity);
     else
         devilDrawIconRelative(panel->layout, 0, x, y, opacity);

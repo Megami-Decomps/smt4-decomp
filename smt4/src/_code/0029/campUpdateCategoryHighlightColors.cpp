@@ -4,7 +4,7 @@
 #include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
-s32 FUN_0029ee54(GridNavigation *controller);
+s32 gridNavigationGetItemCount(GridNavigation *controller);
 s32 listCursorGetRowIfUnblocked(GridNavigation *controller);
 s32 resourceRunOperationIfUnblocked(GridNavigation *controller);
 u32 categoryGetColor(s16 category);
@@ -13,9 +13,9 @@ void FUN_0026dafc(u32 color);
 void campUpdateCategoryHighlightColors()
 {
     CampState *work = g_camp;
-    s32 count = FUN_0029ee54(&work->grids[3]);
-    if (FUN_0029ee54(&work->grids[3]) < count) {
-        count = FUN_0029ee54(&work->grids[3]);
+    s32 count = gridNavigationGetItemCount(&work->grids[3]);
+    if (gridNavigationGetItemCount(&work->grids[3]) < count) {
+        count = gridNavigationGetItemCount(&work->grids[3]);
     }
     u32 processed[25];
     memClear(processed, sizeof(processed));

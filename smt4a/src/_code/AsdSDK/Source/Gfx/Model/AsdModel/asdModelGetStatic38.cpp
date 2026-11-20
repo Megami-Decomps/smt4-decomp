@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern u8 DAT_005b3c3c;
+extern u8 g_asdModelManagerStaticBlock;
 
-/* Returns the address of the model manager's DAT_005b3c3c static. */
+/* Returns the address of the model manager's g_asdModelManagerStaticBlock static. */
 u8 *asdModelGetStatic38(void)
 {
-    return &DAT_005b3c3c;
+    return &g_asdModelManagerStaticBlock;
 }
 
 } /* extern "C" */

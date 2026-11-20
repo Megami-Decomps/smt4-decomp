@@ -28,7 +28,7 @@ inline s32 stepSoundTestSelection(s32 selection, s32 step)
 }
 
 extern "C" {
-extern SoundTestWork *DAT_0044e110;
+extern SoundTestWork *g_soundTestWork;
 u32 padIsButtonPressed(u32 button);
 u32 padIsButtonRepeat(u32 button);
 void jobStop(u32 process, s32 flags);
@@ -41,7 +41,7 @@ void bgmStopNoForce(u32 sound, s32 frames);
 
 u32 soundTestActionMenuUpdate()
 {
-    SoundTestControlView *work = reinterpret_cast<SoundTestControlView *>(DAT_0044e110);
+    SoundTestControlView *work = reinterpret_cast<SoundTestControlView *>(g_soundTestWork);
     if (work->state != 99 && padIsButtonPressed(2)) {
         work->state = 99;
     }
@@ -94,7 +94,7 @@ u32 soundTestActionMenuUpdate()
         }
         break;
     case 99:
-        jobStop(reinterpret_cast<SoundTestControlView *>(DAT_0044e110)->process, 0);
+        jobStop(reinterpret_cast<SoundTestControlView *>(g_soundTestWork)->process, 0);
         return 0xFFFFFFFF;
     }
     return 0;

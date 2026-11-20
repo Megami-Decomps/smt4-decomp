@@ -17,7 +17,7 @@ struct ArchivePathWork {
 };
 
 extern "C" {
-void FUN_0023a170(u64 handle);
+void vtableRunIfPresent(u64 handle);
 void _ZN18WindowStatusResultC1Ej(u32 request, u32 result);
 u32 FUN_003520dc(u32 *archive, ArchivePathWork *, u32 type, u64 id, u32 flags);
 u32 handleRequestSubmit(ArchiveFile *, u32 type, u64 id, u32 zero, u32 flags,
@@ -28,7 +28,7 @@ u32 FUN_00352920(ArchiveFile *);
 void archiveFileReplaceHandle(u32 request, ArchiveFile *file, const ArchiveRequest *source)
 {
     if (file->handle != 0) {
-        FUN_0023a170(file->handle);
+        vtableRunIfPresent(file->handle);
         file->handle = 0;
     }
     if (source->invalid) {
@@ -64,7 +64,7 @@ void archiveFileReplaceHandle(u32 request, ArchiveFile *file, const ArchiveReque
         _ZN18WindowStatusResultC1Ej(request, 0);
         return;
     }
-    FUN_0023a170(file->handle);
+    vtableRunIfPresent(file->handle);
     file->handle = 0;
     _ZN18WindowStatusResultC1Ej(request, result);
 }

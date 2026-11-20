@@ -37,7 +37,7 @@ u32 gameFlagIsSet(u32);
 u32 saveSlotSelectedIsId175();
 u32 mapHasFacingBreakableInReach();
 void moriModelUnitStartMaterialAnimation(MapMotionActor *, u32, u8, f32);
-void FUN_003fd924(MapMotionActor *, u32, u8, f32, f32);
+void motionPlayerStartBlended(MapMotionActor *, u32, u8, f32, f32);
 
 void lmapSceneStartMovement(s8 mode)
 {
@@ -64,7 +64,7 @@ void lmapSceneStartMovement(s8 mode)
             MapMotionActor *actor = ((MapMotionScene *)g_lmapScene)->binding->actor;
             moriModelUnitStartMaterialAnimation(actor, 4, 2, 0.0f);
             ((MapMotionScene *)g_lmapScene)->nextAnimation = 13;
-            FUN_003fd924(actor, 13, 2, 0.0f, 0.0f);
+            motionPlayerStartBlended(actor, 13, 2, 0.0f, 0.0f);
             return;
         }
     } else {

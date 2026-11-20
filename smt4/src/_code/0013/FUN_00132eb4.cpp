@@ -8,7 +8,7 @@ s32 FUN_0014d4ec(void *archive, u32 item, SoundArchiveIdRange *range);
 s32 FUN_0014d478(void *archive, u32 item, u32 *size);
 s32 nw_snd_SoundArchive_GetSoundType(void *archive, u32 item);
 s32 FUN_00141e48(SoundArchiveLoader *loader, u32 item, u32 flags);
-u32 FUN_002ac780(void *archive, u32 item);
+u32 soundArchiveFileEntryIsLoaded(void *archive, u32 item); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv(WaveSoundFileReader *reader, u32 file);
 s32 nw_snd_internal_WaveSoundFileReader_ReadNoteInfo(WaveSoundFileReader *reader, SoundNoteInfo *info, u32 size, u32 arg3);
 s32 FUN_002aa984(SoundArchiveLoader *loader, SoundNoteKey key);
@@ -39,7 +39,7 @@ s32 FUN_00132eb4(SoundArchiveLoader *loader, u32 item, u32 flags)
         }
     } else if (kind == 3) {
         for (u32 id = range.first; id <= range.last; id++) {
-            s32 loaded = loader->vtbl->loadItem(loader, FUN_002ac780(loader->archive, id));
+            s32 loaded = loader->vtbl->loadItem(loader, soundArchiveFileEntryIsLoaded(loader->archive, id));
 
             if ((flags & SOUNDARCHIVE_LOAD_STRICT) != 0 && loaded == 0) {
                 return 0;

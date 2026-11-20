@@ -5,12 +5,12 @@ struct Callbacks1db5ec {
     void (*callback)(void);
 };
 
-extern "C" Callbacks1db5ec DAT_00465108;
+extern "C" Callbacks1db5ec g_startMenuPostHook;
 
 /* Runs the registered callback, if any. */
 extern "C" void FUN_001db5ec(void)
 {
-    if (DAT_00465108.callback != NULL) {
-        DAT_00465108.callback();
+    if (g_startMenuPostHook.callback != NULL) {
+        g_startMenuPostHook.callback();
     }
 }

@@ -33,7 +33,7 @@ struct ReflectTarget {
 
 extern "C" {
 extern u32 g_btlActionReflect;
-extern void *DAT_00435d18;
+extern void *g_btlAux;
 extern void *g_btlEvent;
 s32 nodeListCountActiveById(u32 list, ReflectTarget *target);
 s32 isEntryUsable(void *event); // declcheck: local (the shared declaration in code/Code0027.h does not compile here: argument of type "void *" is incompatible with parameter of type "int *")
@@ -54,7 +54,7 @@ u32 FUN_003cbce4(ReflectActor *actor, ReflectTarget *target)
         }
         ActionKindThread *slot = &reinterpret_cast<ActionKindThread *>(g_btlAction.slots)[actor->unit->slotIndex];
         slot->kind = 1;
-        battleResetCounterAndFlag(DAT_00435d18);
+        battleResetCounterAndFlag(g_btlAux);
         return 1;
     }
     if (unit->state != 4) {

@@ -2,7 +2,7 @@
 #include "gfx/EffectEditorStorage.h"
 #include "AsdSDK/AsdMemCopy.h"
 extern "C" {
-extern EffectSelectionContext DAT_0059e9a8;
+extern EffectSelectionContext g_effectEditorState;
 extern EffectSelectionCatalogEntry *DAT_0059e624[13];
 
 EffectSelectionItem *linkedFindItemByIndex(void *owner, s32 index);
@@ -40,7 +40,7 @@ extern "C" u32 FUN_003c597c()
 {
     // Related-item metadata and the name tail extend beyond the shared item prefix.
     struct ItemView { EffectSelectionItem item; u32 related; u32 flags; char name[1]; };
-    s32 position = DAT_0059e9a8.index + g_effectEditor.index;
+    s32 position = g_effectEditorState.index + g_effectEditor.index;
     EffectSelectionItem *source = linkedFindItemByIndex(g_effectEditor.list, position);
     EffectSelectionItem *copy = FUN_00376628(g_effectEditor.list, source->block);
     g_effectEditor.item = copy;
@@ -63,13 +63,13 @@ extern "C" u32 FUN_003c597c()
     effectEditorApplyHandlerState(instance);
     g_effectEditor.instance = instance;
     g_effectEditor.object = findTemplate(copy->block);
-    g_effectEditor.object->context = &DAT_0059e9a8;
+    g_effectEditor.object->context = &g_effectEditorState;
     u32 count = nodeChainCount(g_effectEditor.list);
     if (count > 21) {
         g_effectEditor.index = count - 21;
-        DAT_0059e9a8.index = 20;
+        g_effectEditorState.index = 20;
     } else {
-        DAT_0059e9a8.index = count - 1;
+        g_effectEditorState.index = count - 1;
         g_effectEditor.index = 0;
     }
     g_effectEditor.unk4c = 0;

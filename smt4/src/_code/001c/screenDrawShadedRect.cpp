@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern QuadVectorState DAT_004d4680;
+extern QuadVectorState g_quadColorState;
 void gfxDrawQuadFourColors(const QuadVector *first, const QuadVector *second, const QuadVector *third,
                   const QuadVector *fourth, f32 x, f32 y, f32 width, f32 height, f32 depth);
 
@@ -17,11 +17,11 @@ void screenDrawShadedRect(s32 x, s32 y, s32 width, s32 height, s32 fade)
     const QuadVector *third = NULL;
     const QuadVector *fourth = NULL;
 
-    if (DAT_004d4680.dirty) {
-        first = &DAT_004d4680.corners[0];
-        second = &DAT_004d4680.corners[1];
-        third = &DAT_004d4680.corners[2];
-        fourth = &DAT_004d4680.corners[3];
+    if (g_quadColorState.dirty) {
+        first = &g_quadColorState.corners[0];
+        second = &g_quadColorState.corners[1];
+        third = &g_quadColorState.corners[2];
+        fourth = &g_quadColorState.corners[3];
     }
     renderCtxSelectTexture(g_titleScene, 0);
     gfxDrawQuadFourColors(first, second, third, fourth, (f32)x, (f32)y, (f32)width, (f32)height,

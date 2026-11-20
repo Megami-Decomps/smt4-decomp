@@ -10,7 +10,7 @@ u32 dataSetFindRequestedFileByKey(AocSystem *system, s32 quest);
 u32 asdLoadFileSyncDefault(const char *path);
 void asdTextDrawDirectoryEntry(u32 text, s32 font, s32 mode, s32 x, s32 y, u32 directory, s32 index);
 void asdTextDrawFormatted(u32 text, s32 font, s32 mode, s32 x, s32 y, const char *format, ...);
-u8 FUN_00241c40(int index);
+u8 questGetDetailPageCount(int index);
 s32 FUN_003336dc(s32 quest, u32 state);
 u8 *textConvertToGlyphPairs(const u8 *source, u8 *output);
 void uiQuestCountDetailPages(s32 quest);
@@ -33,7 +33,7 @@ void FUN_0028fe0c(u16 quest, u32 state)
             menu->panelView.panel.entryOwnership.borrowed = 0;
         }
         asdTextDrawDirectoryEntry(menu->panelView.panel.texts[0], 3, -1, 0, 3, directory, 0);
-        s32 detail = FUN_00241c40(quest);
+        s32 detail = questGetDetailPageCount(quest);
         if (detail > 0)
             asdTextDrawDirectoryEntry(menu->panelView.panel.texts[2], 3, -1, 0, 3, menu->panelView.panel.entryDirectory, detail);
         uiBindRecordRewardText(quest, 1, 0);

@@ -23,7 +23,7 @@ const void *gameDataBlocksGetTable(void);
 void rt_memcpy(void *destination, const void *source, u32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void clockRecordStartSeconds(void);
-void FUN_00247af8(s32 operation, s32 flags, u32 slot, void *buffer, u32 size);
+void saveLoadThreadRequestInit(s32 operation, s32 flags, u32 slot, void *buffer, u32 size);
 extern SaveByteSettings g_byteSettings;
 
 // Build a complete save image, submit it, and publish the asynchronous write result.
@@ -44,7 +44,7 @@ s32 saveLoadProcessSaveUpdate(u32 process)
         body->version = 3;
         body->mode = *(const u8 *)&work->unk14;
         clockRecordStartSeconds();
-        FUN_00247af8(2, 0, work->option, work->buffer, work->bufferSize);
+        saveLoadThreadRequestInit(2, 0, work->option, work->buffer, work->bufferSize);
         work->state = 1;
         break;
     }

@@ -7,7 +7,7 @@
 #include "AsdSDK/Source/Sys/Save/AsdSaveHeader.h"
 
 extern "C" {
-u8 FUN_002228d4();
+u8 gameDataGetMenuIdleFlags();
 u32 cecProcessGetObject();
 u32 FUN_0025981c();
 void saveGetMapFlag(u32 mask, s32 enabled);
@@ -24,7 +24,7 @@ void cecCardBuild(CecProcessSlot *card, s32 unit, u8 mode, u32 selection)
     card->selection = selection;
     card->playSeconds = save->playSeconds;
     card->unk2C = 0;
-    card->flags = FUN_002228d4();
+    card->flags = gameDataGetMenuIdleFlags();
     switch (cecProcessGetObject()) {
     case 1: saveGetMapFlag(8, 1); break;
     case 2: saveGetMapFlag(4, 1); break;

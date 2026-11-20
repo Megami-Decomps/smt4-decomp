@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern s32 FUN_0034ee48(void *queue);
+extern s32 block158CountReadyEntries(void *queue);
 extern void FUN_0034ed64(void *queue);
 extern void FUN_00350f24(MovieSync *sync);
 
@@ -12,7 +12,7 @@ extern void FUN_00350f24(MovieSync *sync);
  * the first stream's timestamp), then waits for the next timestamp (FUN_00350f24). */
 void FUN_00350e30(MovieSync *sync)
 {
-    s32 queued = FUN_0034ee48(sync->queue);
+    s32 queued = block158CountReadyEntries(sync->queue);
     s32 i;
     s32 counter;
 

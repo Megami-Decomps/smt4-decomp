@@ -33,7 +33,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_0023dc38. */
-extern short FUN_0023dcfc(unsigned int);
+extern short btlQueueParamLimitForKind(unsigned int);
 /* Supplied declaration required: battleGetEntryHalfword. */
 extern int FUN_0033f8ec(unsigned int *, int, int, int);
 extern int btlHasReserveReplacement(unsigned int *);
@@ -255,13 +255,13 @@ unsigned int FUN_0023d488(unsigned int *param_1,fn_0023d488_arg1 *param_2,int pa
   }
   if ((temp_v6 & 0x40) != 0) {
     temp_v2 = battleGetEntryHalfword((int)(short)param_1[2],0xb);
-    temp_v3 = FUN_0023dcfc(0xb);
+    temp_v3 = btlQueueParamLimitForKind(0xb);
     if (temp_v2 != temp_v3) {
       temp_v2 = battleGetEntryHalfword((int)(short)param_1[2],10);
-      temp_v3 = FUN_0023dcfc(10);
+      temp_v3 = btlQueueParamLimitForKind(10);
       if (temp_v2 != temp_v3) {
         temp_v2 = battleGetEntryHalfword((int)(short)param_1[2],7);
-        temp_v3 = FUN_0023dcfc(7);
+        temp_v3 = btlQueueParamLimitForKind(7);
         if (temp_v2 != temp_v3) {
           temp_v7 = temp_v7 | 0x40;
         }

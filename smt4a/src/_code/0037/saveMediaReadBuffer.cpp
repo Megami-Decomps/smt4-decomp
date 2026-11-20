@@ -33,7 +33,7 @@ extern StreamTemplate DAT_00557fcc;
 
 u32 romFileStreamOpen(LocalStream *stream, u32 name, u32 mode);
 u32 archiveStreamOpenConverted(LocalStream *stream);
-u32 FUN_0032cab4(LocalStream *stream);
+u32 romFileOpenForWrite(LocalStream *stream);
 u32 requestSubmitRecordById(LocalStream *stream);
 u32 FUN_002e0a6c(LocalStream *stream, u32 offset, u32 buffer, u32 size);
 u32 positionedFileReadAtReport(LocalStream *stream);
@@ -59,7 +59,7 @@ u32 saveMediaReadBuffer(s32 kind, u32 name, u32 buffer, u32 size)
     } else if (kind == 1) {
         result = archiveStreamOpenConverted(&stream);
     } else if (kind == 2) {
-        result = FUN_0032cab4(&stream);
+        result = romFileOpenForWrite(&stream);
     } else if (kind == 3) {
         result = requestSubmitRecordById(&stream);
     } else {

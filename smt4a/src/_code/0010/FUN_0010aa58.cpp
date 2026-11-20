@@ -24,7 +24,7 @@ extern unsigned char DAT_00558c7c; /* 0x558c7c */
 /* Supplied declaration required: FUN_0012dac2. */
 /* Supplied declaration required: FUN_0012fdbc. */
 /* Supplied declaration required: asdOperatorDeleteArray. */
-extern int FUN_002eb624(unsigned int *);
+extern int deletingDtor_002eb624(unsigned int *);
 /* Supplied declaration required: FUN_002eb9ea. */
 
 
@@ -46,7 +46,7 @@ unsigned long long FUN_0010aa58(unsigned int *param_1,unsigned int param_2,int p
   temp_v3 = param_3;
   uStack_10 = param_4;
   FUN_002eb9ea(param_1);
-  temp_v0 = FUN_002eb624(param_1 + -0xd);
+  temp_v0 = deletingDtor_002eb624(param_1 + -0xd);
   piVar4 = (int *)(temp_v0 - 0x28);
   temp_v3 = *(int *)(temp_v0 - 0x18);
   if (temp_v3 != 0) {

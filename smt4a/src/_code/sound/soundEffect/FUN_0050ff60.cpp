@@ -33,9 +33,9 @@ struct SoundEffectReverb {
 extern "C" {
 
 extern u8 entry;
-extern Obj421a58 DAT_006195dc;
-extern SoundEffectSmoothing DAT_0061963c;
-extern SoundEffectReverb DAT_0061975c;
+extern Obj421a58 g_soundDelayEffect;
+extern SoundEffectSmoothing g_soundDelayParameters;
+extern SoundEffectReverb g_soundReverbParameters;
 extern const u32 DAT_006306ec[];
 
 int __aeabi_atexit(void *object, void (*destructor)(void *), void *moduleHandle);
@@ -46,27 +46,27 @@ void _ZN9Obj55be80D1Ev(void *object);
 // sets the default parameters.
 void FUN_0050ff60(void)
 {
-    Obj421a58 *smoothing = new (&DAT_006195dc) Obj421a58();
+    Obj421a58 *smoothing = new (&g_soundDelayEffect) Obj421a58();
     __aeabi_atexit(smoothing, FUN_0045ec40, &entry);
-    DAT_0061963c.interval = 250;
-    DAT_0061963c.rise = 0.4f;
-    DAT_0061963c.fall = 0.5f;
-    DAT_0061963c.enabled = 0;
-    Obj55be80 *reverb = new (&DAT_0061963c + 1) Obj55be80();
+    g_soundDelayParameters.interval = 250;
+    g_soundDelayParameters.rise = 0.4f;
+    g_soundDelayParameters.fall = 0.5f;
+    g_soundDelayParameters.enabled = 0;
+    Obj55be80 *reverb = new (&g_soundDelayParameters + 1) Obj55be80();
     __aeabi_atexit(reverb, _ZN9Obj55be80D1Ev, &entry);
-    DAT_0061975c.time = 60;
-    DAT_0061975c.delay = 4000;
-    DAT_0061975c.volume = 100;
-    DAT_0061975c.fall = 0.5f;
-    DAT_0061975c.rise = 0.4f;
-    DAT_0061975c.source = DAT_006306ec;
-    DAT_0061975c.ratio = 0.6f;
-    DAT_0061975c.gain = 0.4f;
-    DAT_0061975c.enabled = 0;
-    DAT_0061975c.unk21 = 0;
-    DAT_0061975c.sizeA = 0xbe0;
-    DAT_0061975c.sizeB = 0xe60;
-    DAT_0061975c.sizeC = 0x820;
+    g_soundReverbParameters.time = 60;
+    g_soundReverbParameters.delay = 4000;
+    g_soundReverbParameters.volume = 100;
+    g_soundReverbParameters.fall = 0.5f;
+    g_soundReverbParameters.rise = 0.4f;
+    g_soundReverbParameters.source = DAT_006306ec;
+    g_soundReverbParameters.ratio = 0.6f;
+    g_soundReverbParameters.gain = 0.4f;
+    g_soundReverbParameters.enabled = 0;
+    g_soundReverbParameters.unk21 = 0;
+    g_soundReverbParameters.sizeA = 0xbe0;
+    g_soundReverbParameters.sizeB = 0xe60;
+    g_soundReverbParameters.sizeC = 0x820;
 }
 
 }

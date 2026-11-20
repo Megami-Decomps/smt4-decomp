@@ -10,10 +10,10 @@ const char *dataFindKindRecordWithAocOverrides(u32 id, s32 arg);
 const char *dataTable01GetRecordWithAocOverride(u16 id);
 const char *contentEntryDataGet(s16 id, s32 arg);
 const char *aocIndexValueOrDefault(u32 id); // declcheck: local (the shared declaration in AsdSDK/Source/Gfx/Text/AsdText.h does not compile here: argument of type "u32" is incompatible with parameter of type "const char *")
-int FUN_00359974(u32 kind, u32 id, s32 arg0, s32 arg1);
+int entryTableResetAndInit(u32 kind, u32 id, s32 arg0, s32 arg1);
 
 /* Script command: looks up the text for the argument by kind (0-0x1F) and passes it to scrSetStringSlot;
- * kinds 0x18-0x1F go to FUN_00359974 instead. */
+ * kinds 0x18-0x1F go to entryTableResetAndInit instead. */
 u32 FUN_002e49fc(void)
 {
     char text[132];
@@ -70,7 +70,7 @@ u32 FUN_002e49fc(void)
     case 29:
     case 30:
     case 31:
-        FUN_00359974(kind, id, -1, 0);
+        entryTableResetAndInit(kind, id, -1, 0);
         break;
     }
     return 1;

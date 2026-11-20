@@ -8,7 +8,7 @@ int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(int *);
-int FUN_002eb5f4(void);
+int watcherGetActiveContext(void);
 int FUN_002f8aa8(unsigned int, int);
 int FUN_003031f4(int);
 int FUN_00305644(...);
@@ -32,7 +32,7 @@ extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int,
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea41e. */
 extern int FUN_002ea6fc(int);
-/* Supplied declaration required: FUN_002eb5f4. */
+/* Supplied declaration required: watcherGetActiveContext. */
 extern int wordRefsDiffer_002ee774(unsigned int **, unsigned int *);
 extern unsigned int FUN_002ee978(int);
 /* Supplied declaration required: FUN_002f8aa8. */
@@ -78,7 +78,7 @@ LAB_0011f72a:
     temp_v0 = param_1 + 0x194;
     FUN_00305644(temp_v0,*(unsigned int *)(*(int *)(*(int *)(param_1 + 400) + 0x78) + 0x10));
     FUN_003031f4(temp_v0);
-    temp_v1 = FUN_002eb5f4();
+    temp_v1 = watcherGetActiveContext();
     _ZN9Obj55b28cC1EPv(temp_v5,temp_v1 + 0x58);
     temp_v4 = *(unsigned int **)(temp_v1 + 0x98);
     while( 1 ) {
@@ -92,7 +92,7 @@ LAB_0011f72a:
         FUN_00305644(temp_v4 + 2,temp_v3);
       }
     }
-    temp_v3 = FUN_002eb5f4();
+    temp_v3 = watcherGetActiveContext();
     FUN_002f8aa8(temp_v3,temp_v0);
     (**(romwright_code **)(**(int **)(param_1 + 400) + 0xc))();
     temp_v3 = FUN_002ea3c0(temp_v6,&LAB_0011fcb5,0,&LAB_0011f7bc);

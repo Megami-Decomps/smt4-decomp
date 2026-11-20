@@ -11,7 +11,7 @@ extern s32 g_asdLightCount; /* 0x4dad80 */
 extern u32 g_asdModelSlotArray3; /* 0x464bb4 */
 s32 sceneQueryFalse(void);
 void gfxFlushLightRenderCommands(u32 a, u32 b); // declcheck: local (the shared declaration in code/Code0013_Smt4.h does not compile here: argument of type "u32" is incompatible with parameter of type "LightRenderOwner *")
-void FUN_002c3a14(RenderCtx *scene);
+void renderCtxResetFrameStacks(RenderCtx *scene);
 void registerBlockRequestGroups(u32 groups);
 
 // Refresh the title scene when the graphics settings are enabled and lights or the first model slot are active.
@@ -26,7 +26,7 @@ void FUN_0011891c(void)
         if (sceneQueryFalse() != 0) {
             registerBlockRequestGroups(0x3fff);
         }
-        FUN_002c3a14(g_titleScene);
+        renderCtxResetFrameStacks(g_titleScene);
         g_gfxSettings.unk14 = 0;
     }
 }

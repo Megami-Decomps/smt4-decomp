@@ -6,7 +6,7 @@ extern CampCecSceneGlobals g_campCec;
 void *textureGetIndexedResource(u32 slot);
 s32 loadSlotIsLoaded(u32 slot);
 s32 bgmGetStateById(u32 id);
-s32 FUN_002e2114(u32 *holder);
+s32 linkedTargetRunHolderLinks(u32 *holder);
 void campCecResetCameraHolder(u32 *holder);
 void linkHolderApplyFlag(u32 *holder, s32 flags);
 void progressConditionsUpdateUnlocks(void);
@@ -20,7 +20,7 @@ u32 FUN_002e2284(CampCecResumeState *work)
     u32 status = 0;
     if (textureGetIndexedResource(0x2E) && asdTMTexTableNodeIsLoaded(0x2E, 0) &&
         loadSlotIsLoaded(0x4A) && bgmGetStateById(0x1000049) == 1) {
-        if (FUN_002e2114(g_campCec.work->holder)) {
+        if (linkedTargetRunHolderLinks(g_campCec.work->holder)) {
             campCecResetCameraHolder(g_campCec.work->holder);
             linkHolderApplyFlag(g_campCec.work->holder, 0);
             work->launch.script = scrScriptProcessCreate(work->launch.resource, work->launch.entry);

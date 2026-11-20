@@ -8,7 +8,7 @@
 extern "C" {
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
 s32 jobIsValid(u32 handle);
-void FUN_004fc094(s32, ScriptUnit *, s32, BattleRosterRecordA *,
+void btlAdjustPropertyAndQueueAction(s32, ScriptUnit *, s32, BattleRosterRecordA *,
     s32, s32, s32, s32, s32, s32, s32, s32, s32,
     s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
 void btlQueueActionMessage(s32 side, ScriptUnit *source, u32 message, s32, s32, s32, s32);
@@ -31,7 +31,7 @@ u32 FUN_0035f700(void)
     }
     if (entry->ids[0] >= 0) {
         btlSlotManagerResetStates(battle);
-        FUN_004fc094(0, source, 0, &battle->roster[entry->ids[0]],
+        btlAdjustPropertyAndQueueAction(0, source, 0, &battle->roster[entry->ids[0]],
             0, damage, -1, -1, entry->data.hp, entry->data.maxHp,
             0, 0, defeated, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1);
         btlQueueActionMessage(0, source, 0x01000257, 0, 0, 0, 0);

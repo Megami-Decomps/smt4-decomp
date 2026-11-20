@@ -8,8 +8,8 @@ extern "C" {
 
 int asdCameraInitializeDefaults(unsigned int *, int);
 int asdCameraRegister(unsigned int *);
-int FUN_0014f0dc(unsigned int *, unsigned int *, float *, int *);
-int FUN_001523b8(unsigned int *, int);
+int cameraMatrixCacheSetLookAt(unsigned int *, unsigned int *, float *, int *);
+int stereoCameraSetPerspective(unsigned int *, int);
 int eventCommandSetPendingCleanup(void);
 int shakeEffectAlloc(void);
 int FUN_00348c50(int);
@@ -30,8 +30,8 @@ extern int g_freeCamera; /* 0x589144 */
 
 /* Supplied declaration required: asdCameraInitializeDefaults. */
 /* Supplied declaration required: asdCameraRegister. */
-/* Supplied declaration required: FUN_0014f0dc. */
-/* Supplied declaration required: FUN_001523b8. */
+/* Supplied declaration required: cameraMatrixCacheSetLookAt. */
+/* Supplied declaration required: stereoCameraSetPerspective. */
 /* Supplied declaration required: eventCommandSetPendingCleanup. */
 /* Supplied declaration required: shakeEffectAlloc. */
 /* Supplied declaration required: FUN_00348c50. */
@@ -80,8 +80,8 @@ void FUN_004f0e20(unsigned int *param_1)
   param_1[0x15e] = 0x40a00000;
   param_1[0x15f] = 0x3f4ccccd;
   asdCameraInitializeDefaults(param_1 + 0x1b,1);
-  FUN_0014f0dc(param_1 + 0x1b,param_1 + 0x160,&temp_v3,&temp_v6);
-  FUN_001523b8(param_1 + 0x1b,1);
+  cameraMatrixCacheSetLookAt(param_1 + 0x1b,param_1 + 0x160,&temp_v3,&temp_v6);
+  stereoCameraSetPerspective(param_1 + 0x1b,1);
   FUN_0036b824(reinterpret_cast<u32>(param_1 + 0x1b));
   asdCameraRegister(param_1 + 0x1b);
   *(unsigned int **)(g_handleRegistry + 0xc) = param_1 + 0x1b;

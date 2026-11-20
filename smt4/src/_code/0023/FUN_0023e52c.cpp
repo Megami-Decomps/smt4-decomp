@@ -22,7 +22,7 @@ extern unsigned char DAT_00439ad0; /* 0x439ad0 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int randRange(unsigned int);
 /* Supplied declaration required: asdMemFreeIfNotNull. */
-extern int FUN_00293230(int);
+extern int btlScriptUnitIsIncapacitated(int);
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: asdOperatorNewC. */
 
@@ -57,7 +57,7 @@ void FUN_0023e52c(int *param_1,int param_2,int param_3,int param_4,int param_5)
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 0x6d);
-  temp_v2 = FUN_00293230(*param_1);
+  temp_v2 = btlScriptUnitIsIncapacitated(*param_1);
   if (((temp_v2 != 0) || (*(int *)(param_2 + 0x598) = param_3, param_3 == 0xffff)) || (param_3 == 0))
   {
     return;

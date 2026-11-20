@@ -2,12 +2,12 @@
 #include "shard/JobWork.h"
 
 extern "C" {
-extern struct { u32 unk00; u32 unk04; s32 value; } DAT_005715f8;
+extern struct { u32 unk00; u32 unk04; s32 value; } g_btlDebugGlobals;
 
 s32 lmapJobQueryZero(u32 job)
 {
     jobGetWork(job);
-    s32 result = DAT_005715f8.value;
+    s32 result = g_btlDebugGlobals.value;
     if (result != 0)
         result = 0;
     return result;

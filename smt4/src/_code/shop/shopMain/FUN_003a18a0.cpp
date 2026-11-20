@@ -4,19 +4,19 @@
 
 extern "C" {
 
-int FUN_0022fa2c(...);
+int shopMenuHandleCancel(...);
 int FUN_002328b4(void);
 
 int equipmentPreviewUpdateSelection(...);
-int FUN_0022faf8(void);
-int FUN_0022fb64(int);
-int FUN_0022fbc0(int);
+int shopPlaySelectionChangeSound(void);
+int shopDrawSelectedItem(int);
+int shopApplyEntryAndCheckReady(int);
 int FUN_002302d8(int, int);
 int messageWindowStartTimer(int);
 int FUN_00232848(void);
 int FUN_00233240(int, int);
 int FUN_002992e0(int);
-int FUN_002996d8(int);
+int statusCameraRestore(int);
 int gameSetStatusCameraHeightMode(...);
 int nodeSetTranslation3f(unsigned int, int);
 int beginStatusPanelClose(void);
@@ -34,12 +34,12 @@ extern unsigned int DAT_0044e018; /* 0x44e018 */
 extern unsigned int DAT_0044e01c; /* 0x44e01c */
 
 /* Supplied declaration required: equipmentPreviewUpdateSelection. */
-/* Supplied declaration required: FUN_0022fa2c. */
-/* Supplied declaration required: FUN_0022faf8. */
+/* Supplied declaration required: shopMenuHandleCancel. */
+/* Supplied declaration required: shopPlaySelectionChangeSound. */
 extern int inputIsQuestRepeatLeft(void);
 extern int inputIsQuestRepeatRight(void);
-/* Supplied declaration required: FUN_0022fb64. */
-/* Supplied declaration required: FUN_0022fbc0. */
+/* Supplied declaration required: shopDrawSelectedItem. */
+/* Supplied declaration required: shopApplyEntryAndCheckReady. */
 /* Supplied declaration required: FUN_002302d8. */
 /* Supplied declaration required: messageWindowStartTimer. */
 /* Supplied declaration required: FUN_00232848. */
@@ -48,7 +48,7 @@ extern int inputIsQuestRepeatRight(void);
 extern int inputIsQuestCancelPressed(void);
 extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: FUN_002992e0. */
-/* Supplied declaration required: FUN_002996d8. */
+/* Supplied declaration required: statusCameraRestore. */
 /* Supplied declaration required: gameSetStatusCameraHeightMode. */
 extern int FUN_00299fc0(void);
 /* Supplied declaration required: nodeSetTranslation3f. */
@@ -99,8 +99,8 @@ void FUN_003a18a0(int param_1)
       gameSetStatusCameraHeightMode(1);
     }
   }
-  FUN_0022fbc0(param_1);
-  FUN_0022fb64(param_1);
+  shopApplyEntryAndCheckReady(param_1);
+  shopDrawSelectedItem(param_1);
   temp_v0 = inputIsQuestRepeatRight();
   if ((temp_v0 == 0) && (temp_v0 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + 0x15d4c)), temp_v0 != 6)) {
     temp_v0 = inputIsQuestRepeatLeft();
@@ -115,7 +115,7 @@ void FUN_003a18a0(int param_1)
       if (*(int *)(param_1 + 0x860) == 5) {
         FUN_002992e0(2);
       }
-      FUN_002996d8(0);
+      statusCameraRestore(0);
       *(unsigned char *)(param_1 + 0x1e) = 0;
       if (((*(int *)(param_1 + 0x860) != 0) ||
           (((temp_v1 = DAT_0044e014, *(char *)(param_1 + 0x14) == '\0' &&
@@ -131,7 +131,7 @@ void FUN_003a18a0(int param_1)
       else {
         *(unsigned int *)(param_1 + 0x860) = temp_v1;
       }
-      FUN_0022faf8();
+      shopPlaySelectionChangeSound();
       FUN_002302d8(param_1,1);
       if (*(int *)(param_1 + 0x860) != 3) {
         if (*(int *)(param_1 + 0x860) == 5) {
@@ -157,7 +157,7 @@ void FUN_003a18a0(int param_1)
     if (*(int *)(param_1 + 0x860) == 5) {
       FUN_002992e0(2);
     }
-    FUN_002996d8(0);
+    statusCameraRestore(0);
     *(unsigned char *)(param_1 + 0x1e) = 0;
     if (((*(int *)(param_1 + 0x860) != 0) ||
         (((temp_v1 = DAT_0044e010, *(char *)(param_1 + 0x14) == '\0' &&
@@ -172,7 +172,7 @@ void FUN_003a18a0(int param_1)
     else {
       *(unsigned int *)(param_1 + 0x860) = temp_v1;
     }
-    FUN_0022faf8();
+    shopPlaySelectionChangeSound();
     FUN_002302d8(param_1,1);
     if (*(int *)(param_1 + 0x860) != 3) {
       if (*(int *)(param_1 + 0x860) != 5) {
@@ -227,7 +227,7 @@ void FUN_003a18a0(int param_1)
     temp_v0 = inputIsQuestCancelPressed();
     if (temp_v0 != 0) {
       FUN_002328b4();
-      FUN_0022fa2c(param_1);
+      shopMenuHandleCancel(param_1);
     }
   }
   if (*(int *)(param_1 + 0x860) == 7) {

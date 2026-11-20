@@ -84,8 +84,8 @@ u32 FUN_0033004c(void);
 void FUN_0037be64(void);
 void FUN_00330b7c(void);
 u8 FUN_0031cee0(void);
-SlotRecordA *FUN_0031cf00(void);
-Table25Record *FUN_003316b4(s32 id);
+SlotRecordA *stockFindSelectedUnit(void);
+Table25Record *dataTable25Section0FindById(s32 id);
 void slotNameDisplaySetEntry(CampCecReceivedRecord *record, s32 entryId);
 u32 playerSummaryIsIncomplete(CampCecReceivedRecord *record);
 void savedRecordInsertAtFront(const CampCecReceivedRecord *record);
@@ -291,7 +291,7 @@ s32 campCecRecvDownloadState(CampCecRecv *recv)
         }
         progress->count = accepted;
         if (accepted != 0) {
-            FUN_00359974(0, accepted, 0xFFFFFFFF, 0);
+            entryTableResetAndInit(0, accepted, 0xFFFFFFFF, 0);
             scrScriptProcessStartEntry(recv->receive.script, 35);
             progress->state = 13;
             runWinClose();
@@ -366,9 +366,9 @@ s32 campCecRecvDownloadState(CampCecRecv *recv)
             }
             if (FUN_0031cee0() == 1) {
                 /* A demon: one the player can hold and does not have, picked at random. */
-                memcpySrcFirst(FUN_0031cf00(), &recv->receive.unit, sizeof(SlotRecordA));
+                memcpySrcFirst(stockFindSelectedUnit(), &recv->receive.unit, sizeof(SlotRecordA));
                 SaveSlotTableA *table = gameGetSlotTable();
-                if (FUN_0031cf00() != NULL) {
+                if (stockFindSelectedUnit() != NULL) {
                     s32 candidates[CAMPCEC_DEMON_GIFT_COUNT];
                     s32 candidateCount = 0;
                     recv->receive.gift = NULL;
@@ -457,7 +457,7 @@ s32 campCecRecvDownloadState(CampCecRecv *recv)
                         u32 kind = DAT_0052c758[cycle];
                         if (kind == 9) {
                             /* Kind 9 grows with the unit's level. */
-                            SlotRecordA *unit = FUN_0031cf00();
+                            SlotRecordA *unit = stockFindSelectedUnit();
                             if (unit != NULL && unit->level > 20) {
                                 if (unit->level <= 40) {
                                     kind = 10;
@@ -506,7 +506,7 @@ s32 campCecRecvDownloadState(CampCecRecv *recv)
                 demonId = recv->receive.gift->demonId;
             }
             sprintf(path, "camp/CecDevilMsg/%s.mbm",
-                             (const char *)FUN_003316b4((s8)nkmBaseGetRecord(demonId)->talkTone)->unk01);
+                             (const char *)dataTable25Section0FindById((s8)nkmBaseGetRecord(demonId)->talkTone)->unk01);
             asdLoadFileAsyncSimple(path, &recv->receive.talkMessages, 0);
             recv->receive.talkLoading = 1;
             messageDismissNumericBanner(1);

@@ -14,7 +14,7 @@ typedef struct {
 } param_22_stack;
 
 extern unsigned char LAB_00140312; /* 0x140312 */
-extern int DAT_005c0a80; /* 0x5c0a80 */
+extern int g_nimAocSession; /* 0x5c0a80 */
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
@@ -64,8 +64,8 @@ int FUN_004398b4(unsigned int param_1,unsigned int param_2,unsigned int param_3,
   *(unsigned int *)(temp_v1 + 0xf8) = param_21;
   *(unsigned int *)(temp_v1 + 0xf4) = (param_22 << 4) | 0xc;
   software_interrupt(0x32);
-  temp_v0 = DAT_005c0a80;
-  if (-1 < DAT_005c0a80) {
+  temp_v0 = g_nimAocSession;
+  if (-1 < g_nimAocSession) {
     *param_19 = *(unsigned int *)(temp_v1 + 0x88);
     temp_v0 = *(int *)(temp_v1 + 0x84);
   }

@@ -12,11 +12,11 @@ typedef struct Obj {
 extern struct {
     u8 unk0[4];
     Obj *obj;
-} DAT_004474f0;
+} g_lmapViewHolder;
 
 void FUN_003079a0(void)
 {
-    effTimelineIsDone(DAT_004474f0.obj->unk2B4);
+    effTimelineIsDone(g_lmapViewHolder.obj->unk2B4);
 }
 
 } /* extern "C" */

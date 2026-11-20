@@ -47,7 +47,7 @@ extern "C" {
 
 extern const char DAT_00400440[];
 extern u32 g_btlScriptUnit;
-extern BattleEffectState* DAT_00435d18;
+extern BattleEffectState* g_btlAux;
 extern u32 g_btlEvent;
 
 void __ARM_common_memcpy4_9(void* dst, const char* src);
@@ -71,12 +71,12 @@ void scrComm_Battle_PlayPositionedEffect(void)
     EffectRequest request = { 0, 0, 0, NULL, 0, 0, 0, 0 };
     const char* setName = direction < 0 ? "commonDw" : "commonUp";
     __ARM_common_memcpy4_9(&request, setName);
-    FUN_002454c4(DAT_00435d18, &request, 1, 0);
+    FUN_002454c4(g_btlAux, &request, 1, 0);
 
     BattleMain* main = reinterpret_cast<BattleMain *>(btlGetMainState());
     u32 user = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     s32 placed = 0;
-    u8* effectSlots = DAT_00435d18->effectSlots;
+    u8* effectSlots = g_btlAux->effectSlots;
     BattleMain* mainForEntries = main;
     for (s32 unitIndex = 0; unitIndex < 4; unitIndex++) {
         BattleUnitSlot* unit = reinterpret_cast<BattleUnitSlot*>(reinterpret_cast<BattleMain *>(btlGetMainState())->units + unitIndex * 0x288);
@@ -96,7 +96,7 @@ void scrComm_Battle_PlayPositionedEffect(void)
             BattleEffectSlot* effect = reinterpret_cast<BattleEffectSlot*>(effectSlots + slot * 0x16);
             if (libc_strlen(effect->name) == 0 || strcmp(effect->name, DAT_00400440) == 0) continue;
             u32 type = effect->type;
-            s32 base = FUN_0028299c(DAT_00435d18);
+            s32 base = FUN_0028299c(g_btlAux);
             s32 sideCode = direction < 0 ? 3 : 2;
             switch (type) {
             case 0: case 1: case 2: case 3: case 4: case 5: case 0xc: {

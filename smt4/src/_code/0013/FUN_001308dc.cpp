@@ -12,7 +12,7 @@ int _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv(unsigned char [20], int);
 int FUN_002ac4a0(...);
 int FUN_002ac5d8(...);
 int _ZN2nw3snd8internal14BankFileReaderC1EPKv(...);
-int FUN_002af3b4(int *, unsigned int, unsigned int, unsigned int, unsigned int);
+int nw_snd_internal_SoundArchiveLoader_Load(int *, unsigned int, unsigned int, unsigned int, unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 25 slot(s), 88 byte(s) */
@@ -48,7 +48,7 @@ typedef struct {
 extern unsigned int optionalNestedValueGet(unsigned int **);
 /* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
 /* Supplied declaration required: soundArchiveReadBankInfo. */
-extern int FUN_0014d3fc(int, unsigned int, unsigned int *);
+extern int nw_snd_SoundArchive_ReadSoundInfo(int, unsigned int, unsigned int *);
 extern int FUN_0014d478(int, unsigned int, unsigned int *);
 extern int FUN_0014d4ec(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_0014d530. */
@@ -56,7 +56,7 @@ extern int FUN_0014d4ec(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002ac4a0. */
 /* Supplied declaration required: FUN_002ac5d8. */
 /* Supplied declaration required: _ZN2nw3snd8internal14BankFileReaderC1EPKv. */
-/* Supplied declaration required: FUN_002af3b4. */
+/* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_Load. */
 extern int nw_snd_internal_GroupFileReader_ReadGroupItemInfoEx(unsigned int **, unsigned int *, unsigned int);
 extern int nw_snd_internal_GroupFileReader_ReadGroupItemLocationInfo(unsigned int **, unsigned int *, unsigned int);
 extern int nw_snd_internal_WaveSoundFileReader_ReadNoteInfo(unsigned char *, unsigned int *, unsigned int, unsigned int);
@@ -116,7 +116,7 @@ void FUN_001308dc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
         }
         while ((temp_v0 = nw_snd_internal_GroupFileReader_ReadGroupItemInfoEx
                                   (temp_v19,&temp_v6,temp_v2), temp_v0 == 0 ||
-               (piVar2 = param_1, FUN_002af3b4(param_1,temp_v6,param_3,temp_v7,param_4),
+               (piVar2 = param_1, nw_snd_internal_SoundArchiveLoader_Load(param_1,temp_v6,param_3,temp_v7,param_4),
                piVar2 != (int *)0x0))) {
           temp_v2 = temp_v2 + 1;
           if (temp_v1 <= temp_v2) {
@@ -173,7 +173,7 @@ void FUN_001308dc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
             temp_v1 = temp_v13;
             if (temp_v0 != 1) {
               if (((temp_v0 == 3) && (temp_v13 != 0xffffffff)) &&
-                 (temp_v0 = FUN_0014d3fc(param_1[1],temp_v13,(unsigned int *)&temp_v22), temp_v0 != 0)) {
+                 (temp_v0 = nw_snd_SoundArchive_ReadSoundInfo(param_1[1],temp_v13,(unsigned int *)&temp_v22), temp_v0 != 0)) {
                 temp_v14[3] = 0;
                 temp_v14[4] = temp_v14[4] & 0xffff0000;
                 temp_v0 = FUN_0014d478(param_1[1],temp_v1,temp_v14 + 2);

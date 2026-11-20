@@ -15,7 +15,7 @@ typedef struct EditorEntry {
 
 /* Result codes: the values 0x400000-0x400002. */
 
-extern s32 FUN_0037cdcc(const char *path, s32 flags, FileInfo *info);
+extern s32 effectEditorPollTextRequest(const char *path, s32 flags, FileInfo *info);
 extern EditorEntry *FUN_0037667c(void *current, FileInfo *info);
 extern const char **FUN_002b30e4(void);
 extern char *libc_strcpy(char *dst, const char *src);
@@ -27,7 +27,7 @@ u8 *FUN_003c3654(void)
     FileInfo info;
     u8 *result = (u8 *)0x400001;
 
-    FUN_0037cdcc("effect_editor/ep/", 0x20, &info);
+    effectEditorPollTextRequest("effect_editor/ep/", 0x20, &info);
     if (info.type == 2) {
         result = (u8 *)0x400000;
     } else if (info.type == 1) {

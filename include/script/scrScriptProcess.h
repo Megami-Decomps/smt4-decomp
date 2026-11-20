@@ -59,7 +59,7 @@ u32 scrRunOpcodesStub(ScriptProcess *process);
 void FUN_00298d50(u32 value);
 
 /* Canonical declaration (matches the definition). */
-u32 FUN_0022fbc0(void *screen);
+u32 shopApplyEntryAndCheckReady(void *screen);
 
 } /* extern "C" */
 

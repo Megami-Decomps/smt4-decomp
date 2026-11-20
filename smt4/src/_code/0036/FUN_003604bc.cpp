@@ -1,14 +1,14 @@
-/* Calls asdFatalError when FUN_0036083c reports failure (negative result). */
+/* Calls asdFatalError when ipcSendParameterlessCommand0x270000 reports failure (negative result). */
 #include "common.h"
 
 extern "C" {
 
 void asdFatalError(void);
-s32 FUN_0036083c(void);
+s32 ipcSendParameterlessCommand0x270000(void);
 
 void FUN_003604bc(void)
 {
-    bool failed = FUN_0036083c() < 0;
+    bool failed = ipcSendParameterlessCommand0x270000() < 0;
 
     if (failed) {
         asdFatalError();

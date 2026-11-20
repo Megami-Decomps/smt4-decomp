@@ -20,7 +20,7 @@ u8 FUN_0037c5f8(SoundStreamTarget *target, Obj421aa4Node *node);
 extern "C" void soundStreamPostTargetState(SoundStreamOwner *owner)
 {
     SoundStreamTarget *target = owner->target;
-    Obj421aa4Manager *manager = FUN_002bae7c();
+    Obj421aa4Manager *manager = soundStreamCommandManagerGetInstance();
     Obj421aa4Node *node = soundRequestBegin(manager, 0x21);
     node->type = 0x2b;
     u8 value = target->kind;

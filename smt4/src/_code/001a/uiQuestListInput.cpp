@@ -27,12 +27,12 @@
 
 extern "C" {
 
-s32 FUN_002c1658(s32 button, s32 mode);
+s32 inputQueryButtonState(s32 button, s32 mode);
 u32 resourceRunOperationIfUnblocked(const GridNavigation *grid);
 u32 uiScrollHandleActionsOrTouch(GridNavigation *list, const TextureTableEntryIV *touchArea, const s16 *rowRegions,
                                  s32 thumbRegion, s32 previousRegion, s32 nextRegion, s8 *touched, s32 secondary,
                                  s32 notify);
-u8 FUN_0029efd8(GridNavigation *list, s32 notify);
+u8 gridNavigationHandleConfirm(GridNavigation *list, s32 notify);
 void FUN_0028fe0c(u16 quest, u32 state);
 void FUN_00290404(void);
 void uiQuestRefreshButtonHelp(void);
@@ -106,9 +106,9 @@ void uiQuestListInput(void)
         ids = quest->list;
     }
 
-    if (static_cast<s32>(FUN_0029ee54(cursor)) <= 0) {
+    if (static_cast<s32>(gridNavigationGetItemCount(cursor)) <= 0) {
         /* An empty list can only be left. */
-        if (FUN_002c1658(1, 1)) {
+        if (inputQueryButtonState(1, 1)) {
             timerStart(&quest->sprites[0], 2, 0);
             uiQuestEnterState(g_uiQuest, 3);
             eventQueueAddUniqueIfValid(QUEST_SE_CANCEL);
@@ -122,9 +122,9 @@ void uiQuestListInput(void)
                                          quest->touch.scrollDownRegion, &touched, 0, 1)) {
             if (questListCurrentId(cursor, ids) != before)
                 questListSelect(quest, questListCurrentId(cursor, ids));
-        } else if (FUN_0029efd8(cursor, 1)) {
+        } else if (gridNavigationHandleConfirm(cursor, 1)) {
             questListSelect(quest, questListCurrentId(cursor, ids));
-        } else if (FUN_002c1658(8, 0)) {
+        } else if (inputQueryButtonState(8, 0)) {
             /* Previous category. */
             quest->panelView.panel.nextSelection = quest->panelView.panel.selection;
             quest->panelView.panel.nextSelection--;
@@ -135,7 +135,7 @@ void uiQuestListInput(void)
                 uiQuestEnterState(g_uiQuest, 5);
                 eventQueueAddUniqueIfValid(QUEST_SE_PAGE);
             }
-        } else if (FUN_002c1658(7, 0)) {
+        } else if (inputQueryButtonState(7, 0)) {
             /* Next category. */
             quest->panelView.panel.nextSelection = quest->panelView.panel.selection;
             quest->panelView.panel.nextSelection++;
@@ -146,19 +146,19 @@ void uiQuestListInput(void)
                 uiQuestEnterState(g_uiQuest, 5);
                 eventQueueAddUniqueIfValid(QUEST_SE_PAGE);
             }
-        } else if (quest->panelView.panel.detailMode == 0 && FUN_002c1658(9, 1)) {
+        } else if (quest->panelView.panel.detailMode == 0 && inputQueryButtonState(9, 1)) {
             /* The sort menu. */
             eventQueueAddUniqueIfValid(QUEST_SE_DECIDE);
             buttonHelpSetText(NULL, 0x323232FF);
             sortMenuCreate(14, 0);
-            FUN_0029e328(0x22);
-            FUN_0029e328(0x21);
-            FUN_0029e328(0x18);
-            FUN_0029e328(0x19);
-            FUN_0029e328(0x1A);
+            useCounterAppendValue(0x22);
+            useCounterAppendValue(0x21);
+            useCounterAppendValue(0x18);
+            useCounterAppendValue(0x19);
+            useCounterAppendValue(0x1A);
             useCounterStart();
             uiQuestEnterState(g_uiQuest, 30);
-        } else if (quest->panelView.panel.detailMode == 0 && !quest->panelView.panel.confirming && FUN_002c1658(10, 1)) {
+        } else if (quest->panelView.panel.detailMode == 0 && !quest->panelView.panel.confirming && inputQueryButtonState(10, 1)) {
             /* Jump to the quest in progress. */
             if (rosterGetLeaderId() != 0) {
                 uiBindRecordRewardText(rosterGetLeaderId(), 0, 1);
@@ -168,7 +168,7 @@ void uiQuestListInput(void)
                     uiQuestEnterState(g_uiQuest, 7);
                 }
             }
-        } else if (quest->panelView.panel.detailMode == 0 && (FUN_002c1658(0, 1) || touched)) {
+        } else if (quest->panelView.panel.detailMode == 0 && (inputQueryButtonState(0, 1) || touched)) {
             u16 id = questListCurrentId(cursor, ids);
 
             if (quest->panelView.panel.confirming) {
@@ -226,7 +226,7 @@ void uiQuestListInput(void)
                 }
             }
             eventQueueAddUniqueIfValid(QUEST_SE_DECIDE);
-        } else if (!gameFlagIsSet(0x216) && FUN_002c1658(1, 1)) {
+        } else if (!gameFlagIsSet(0x216) && inputQueryButtonState(1, 1)) {
             /* Leave the list. */
             timerStart(&quest->sprites[0], 2, 0);
             uiQuestEnterState(g_uiQuest, 3);

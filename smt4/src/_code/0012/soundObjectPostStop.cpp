@@ -8,7 +8,7 @@ struct SoundStopTarget {
 };
 
 extern "C" {
-void FUN_002b4b94(Obj421aa4Manager *manager, s32 value);
+void soundRequestQueueDequeueUntilToken(Obj421aa4Manager *manager, s32 value);
 }
 
 // Enqueues a type-0x32 sound request for the object, flushes the manager and clears the object's queue state.
@@ -19,7 +19,7 @@ extern "C" void soundObjectPostStop(SoundStopTarget *target)
     node->type = 0x32;
     node->id = (u32)target;
     listAppendNode(manager, node);
-    FUN_002b4b94(manager, soundRequestQueueFlush(manager, 1));
+    soundRequestQueueDequeueUntilToken(manager, soundRequestQueueFlush(manager, 1));
     target->pending = 0;
     target->queued = 0;
 }

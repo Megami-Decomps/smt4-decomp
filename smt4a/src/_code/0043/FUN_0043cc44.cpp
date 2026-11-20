@@ -10,7 +10,7 @@ int FUN_00170474(int);
 int FUN_00170e58(void);
 int FUN_00170ebc(int);
 int FUN_001716c0(void);
-int FUN_00189a38(int, int);
+int errThrowFatal(int, int);
 int nn_applet_CTR_detail_OpenSession(void);
 int nn_applet_CTR_detail_CloseSession(void);
 int svcSleepThread(int, int);
@@ -33,7 +33,7 @@ extern unsigned char DAT_005891b4; /* 0x5891b4 */
 /* Supplied declaration required: FUN_00170e58. */
 /* Supplied declaration required: FUN_00170ebc. */
 /* Supplied declaration required: FUN_001716c0. */
-/* Supplied declaration required: FUN_00189a38. */
+/* Supplied declaration required: errThrowFatal. */
 /* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
 /* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: svcSleepThread. */
@@ -80,7 +80,7 @@ int FUN_0043cc44(int param_1,unsigned int param_2)
     svcSleepThread(10000000,0);
   }
   if (temp_v0 < 0) {
-    FUN_00189a38(temp_v0,0x43cbd4);
+    errThrowFatal(temp_v0,0x43cbd4);
   }
   FUN_00170e58();
   FUN_00170414(1);

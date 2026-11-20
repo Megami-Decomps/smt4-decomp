@@ -6,8 +6,8 @@ extern "C" {
 
 int onlineInstanceTableFind(int, unsigned int);
 int onlineJobSetStateDone(int);
-int FUN_002f3dc4(int, int *, int, int *);
-int FUN_002f3dde(int, int *, int, int *);
+int onlineInstanceCompleteMode2(int, int *, int, int *);
+int onlineInstanceCompleteMode3(int, int *, int, int *);
 int FUN_002f6be2(unsigned int, int *);
 int operatorDeleteArrayNullable(int);
 int strncpy(unsigned char *, int, int);
@@ -27,8 +27,8 @@ extern unsigned char DAT_0062d704; /* 0x62d704 */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: onlineJobSetStateDone. */
-/* Supplied declaration required: FUN_002f3dc4. */
-/* Supplied declaration required: FUN_002f3dde. */
+/* Supplied declaration required: onlineInstanceCompleteMode2. */
+/* Supplied declaration required: onlineInstanceCompleteMode3. */
 extern int _ZNK18OnlineResultRecord7isValidEv(int *);
 /* Supplied declaration required: FUN_002f6be2. */
 /* Supplied declaration required: operatorDeleteArrayNullable. */
@@ -61,13 +61,13 @@ unsigned long long FUN_00307020(int param_1,int *param_2,int param_3,unsigned in
       temp_v2 = *param_2;
       piStack_1c = (int *)param_2[1];
       iStack_18 = param_2[2];
-      FUN_002f3dc4(temp_v0,&temp_v2,iStack_18,&temp_v3);
+      onlineInstanceCompleteMode2(temp_v0,&temp_v2,iStack_18,&temp_v3);
     }
     else {
       temp_v2 = *param_2;
       piStack_1c = (int *)param_2[1];
       iStack_18 = param_2[2];
-      FUN_002f3dde(temp_v0,&temp_v2,iStack_18,&temp_v3);
+      onlineInstanceCompleteMode3(temp_v0,&temp_v2,iStack_18,&temp_v3);
     }
   }
   onlineJobSetStateDone(param_1);

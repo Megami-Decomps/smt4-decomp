@@ -4,7 +4,7 @@ extern "C" {
 
 
 
-extern int FUN_0026ae68(void);
+extern int statusDownRebuildTouchRegions(void);
 
 /* Switches the status screen to state 6, remembering the previous state, and clears its flag after the refresh. */
 void statusDownEnterRefreshState(void)
@@ -16,7 +16,7 @@ void statusDownEnterRefreshState(void)
     previous = status->track.state;
     status->track.state = 6;
     status->track.previous = previous;
-    FUN_0026ae68();
+    statusDownRebuildTouchRegions();
     status->unk2391 = 0;
 }
 

@@ -15,7 +15,7 @@ struct Object {
 
 void onlineSockAddrConstruct(u8 *buffer);
 u32 onlineUrlGetAddress(u32 value);
-Object *FUN_002ea704(void);
+Object *watcherGetEnabledFlag(void);
 void FUN_002fd394(s32 address, u32 value, u8 *buffer);
 
 /* Builds a 32-byte buffer, converts `value` with onlineUrlGetAddress, and hands both to FUN_002fd394 together with the address 0x80 bytes into the current target object's data. */
@@ -28,7 +28,7 @@ void FUN_00111910(u32 unused, u32 value)
 
     onlineSockAddrConstruct(buffer);
     converted = onlineUrlGetAddress(value);
-    object = FUN_002ea704();
+    object = watcherGetEnabledFlag();
     target = object->vtbl->getTarget(object);
     FUN_002fd394(target->base + 0x80, converted, buffer);
 }

@@ -5,11 +5,11 @@ extern "C" {
 
 s32 scriptHolderUpdateForward(AocScriptHolder *holder);
 void scriptHolderFree2(AocScriptHolder *holder);
-void FUN_0047e430(AocScriptHolder *holder, s32 arg);
+void aocBootResetAndReleaseBuffers(AocScriptHolder *holder, s32 arg);
 s32 gameBlockByte27E98Is1To3(void);
-void FUN_004731d8(void);
+void gameSaveBlockRebuild27E98(void);
 void infoWinSetValue(s32 enabled);
-void FUN_004b7d88(AocStep *step);
+void soundPlayCueForContextKind(AocStep *step);
 
 /* Boot step: once no AOC operation is busy, start loading the quest script; when it is loaded, go
  * to state 13 if a game jump is pending, else to state 5. */
@@ -25,7 +25,7 @@ void aocBootStepLoadQuestScript(AocStep *step)
         }
         infoWinSetValue(0);
         g_aocMain->flags &= ~0x70;
-        FUN_0047e430(&g_aocMain->scriptHolder, 1);
+        aocBootResetAndReleaseBuffers(&g_aocMain->scriptHolder, 1);
         step->substate = 1;
         break;
     case 1:
@@ -35,9 +35,9 @@ void aocBootStepLoadQuestScript(AocStep *step)
                 step->state = 13;
                 step->substate = 0;
             } else {
-                FUN_004731d8();
+                gameSaveBlockRebuild27E98();
                 infoWinSetValue(1);
-                FUN_004b7d88(step);
+                soundPlayCueForContextKind(step);
                 step->state = 5;
                 step->substate = 0;
             }

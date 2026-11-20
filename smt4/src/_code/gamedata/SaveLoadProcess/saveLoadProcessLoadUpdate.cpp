@@ -8,7 +8,7 @@
 
 extern "C" {
 s32 FUN_001a1d08();
-void FUN_00247af8(s32 operation, s32 flags, u32 slot, void *buffer, u32 size);
+void saveLoadThreadRequestInit(s32 operation, s32 flags, u32 slot, void *buffer, u32 size);
 void *asdMemoryAlloc(s32 heap, s32 alignment, s32 flags, u32 size, s32 clear);
 void *gameDataBlocksGetTable();
 GameSaveData *gameDataBlocksGetSaveData();
@@ -24,7 +24,7 @@ s32 saveLoadProcessLoadUpdate(u32 job)
         work->bufferSize = sizeof(SaveFilePayloadIV);
         asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\gamedata\\SaveLoadProcess.cpp", 224);
         work->buffer = asdMemoryAlloc(0x100, 0x100, 0, work->bufferSize, 1);
-        FUN_00247af8(3, 0, work->option, work->buffer, work->bufferSize);
+        saveLoadThreadRequestInit(3, 0, work->option, work->buffer, work->bufferSize);
         work->state = 5;
         break;
     case 5:

@@ -8,7 +8,7 @@ extern "C" {
 
 int drawTextAtRelativePosition(...);
 void FUN_00230d2c(const OffsetPosition2D*, u32, s32, s32, s32, s32);
-int FUN_00230d84(int, int, int, int, int);
+int uiDrawBottomRightOffset(int, int, int, int, int);
 void gxSetClippedBottomScreenScissor(int, int, int, int);
 int FUN_00231bcc(...);
 int drawTextAtSnappedRectangle(...);
@@ -43,7 +43,7 @@ extern int FUN_0022f1b8(short);
 /* Supplied declaration required: drawTextAtRelativePosition. */
 extern unsigned int itemGetNameOrFallback(short, unsigned int);
 /* Supplied declaration required: FUN_00230d2c. */
-/* Supplied declaration required: FUN_00230d84. */
+/* Supplied declaration required: uiDrawBottomRightOffset. */
 /* Supplied declaration required: FUN_00231bcc. */
 extern unsigned int aocItemGetPrice(unsigned int *);
 /* Supplied declaration required: drawTextAtSnappedRectangle. */
@@ -95,9 +95,9 @@ void FUN_003a21b8(int param_1,int param_2,int param_3,int param_4)
     temp_v3 = (int)*(short *)(temp_v3 + 10);
     if (param_3 != 0) {
       efctSetSpeed();
-      FUN_00230d84(param_1 + 0x380,0x47,temp_v9,temp_v3,temp_v2);
-      FUN_00230d84(param_1 + 0x380,0x48,temp_v9,temp_v3,temp_v2);
-      FUN_00230d84(param_1 + 0x380,0x49,temp_v9,temp_v3,temp_v2);
+      uiDrawBottomRightOffset(param_1 + 0x380,0x47,temp_v9,temp_v3,temp_v2);
+      uiDrawBottomRightOffset(param_1 + 0x380,0x48,temp_v9,temp_v3,temp_v2);
+      uiDrawBottomRightOffset(param_1 + 0x380,0x49,temp_v9,temp_v3,temp_v2);
       efctSetSpeed();
       FUN_00231bcc(param_1 + 0x380,0x4a,temp_v9,temp_v3,temp_v2,1);
       if (*(char *)(param_1 + 0x839) != '\0') {

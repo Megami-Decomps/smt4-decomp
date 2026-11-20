@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014cbcc(u8 *buffer, int b, int c);
+int aocTextureNodeLoad(u8 *buffer, int b, int c);
 int optionalWorkGetValue(void);
 int asdTextureEntryApply(int resource);
 int asdTextureSelectHeap(int resource, u32 value);
@@ -24,7 +24,7 @@ int aocLoadTextureNode(u32 a, u32 file, u32 id, u32 value)
         found = packageFindFileByTypeAndId(a, found, id, buffer);
         if ((found != 0) && (resource = asdTMTexTableCallFileB(file, id), resource != 0)) {
             optionalWorkGetValue();
-            FUN_0014cbcc(buffer, resource, found);
+            aocTextureNodeLoad(buffer, resource, found);
             asdTextureSelectHeap(resource, value);
             asdTextureEntryApply(resource);
             return resource;

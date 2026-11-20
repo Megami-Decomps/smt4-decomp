@@ -16,8 +16,8 @@ int libc_strcpy(...);
 int asdOperatorNewD(void);
 int asdOperatorDeleteC(...);
 int scrSetStringSlot(...);
-int FUN_00359974(...);
-int FUN_003dea6c(...);
+int entryTableResetAndInit(...);
+int scrMessageSetSpeakerTitle(...);
 int FUN_00417c24(...);
 int flagValueSub(...);
 int FUN_004d0d70(void);
@@ -94,11 +94,11 @@ extern int btlTalkBustUpExists(void);
 /* Supplied declaration required: FUN_00331714. */
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 /* Supplied declaration required: bustupCutAnimSetFlag. */
-/* Supplied declaration required: FUN_00359974. */
-extern int FUN_0035fcbc(void);
+/* Supplied declaration required: entryTableResetAndInit. */
+extern int btlTalkBustUpIsIdle(void);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 extern unsigned int btlTalkBustUpGetId(void);
-/* Supplied declaration required: FUN_003dea6c. */
+/* Supplied declaration required: scrMessageSetSpeakerTitle. */
 /* Supplied declaration required: FUN_003deea4. */
 /* Supplied declaration required: FUN_003df168. */
 /* Supplied declaration required: FUN_00417a60. */
@@ -196,7 +196,7 @@ unsigned int FUN_002ebdcc(void)
   temp_v3 = scrWorkGetValue(0);
   switch(temp_v3) {
   case 0:
-    temp_v2 = FUN_0035fcbc();
+    temp_v2 = btlTalkBustUpIsIdle();
     if (temp_v2 == 0) {
       eventTexSetFlag(0);
       bustupCutAnimSetFlag(0);
@@ -274,7 +274,7 @@ unsigned int FUN_002ebdcc(void)
           dataTable01GetRecordWithAocOverride(temp_v1);
           libc_strcpy(&temp_v13,temp_v1);
           scrSetStringSlot(8,&temp_v13);
-          FUN_00359974(0x18,*(unsigned int *)(temp_v10 + 0x104),0xffffffff,0);
+          entryTableResetAndInit(0x18,*(unsigned int *)(temp_v10 + 0x104),0xffffffff,0);
         }
       }
       else {
@@ -285,7 +285,7 @@ unsigned int FUN_002ebdcc(void)
         dataFindKindRecordWithAocOverrides(temp_v1,1);
         libc_strcpy(&temp_v13,temp_v1);
         scrSetStringSlot(0,&temp_v13);
-        FUN_00359974(0x18,*(unsigned int *)(temp_v10 + 0x104),0xffffffff,0);
+        entryTableResetAndInit(0x18,*(unsigned int *)(temp_v10 + 0x104),0xffffffff,0);
       }
     }
     else {
@@ -295,7 +295,7 @@ unsigned int FUN_002ebdcc(void)
       dataTable01GetRecordWithAocOverride(temp_v1);
       libc_strcpy(&temp_v13,temp_v1);
       scrSetStringSlot(0,&temp_v13);
-      FUN_00359974(0x18,*(unsigned int *)(temp_v4 + temp_v10 * 8 + 0x104),0xffffffff,0);
+      entryTableResetAndInit(0x18,*(unsigned int *)(temp_v4 + temp_v10 * 8 + 0x104),0xffffffff,0);
     }
     messageSetScriptDisplayMode();
     temp_v11 = 1;
@@ -395,7 +395,7 @@ unsigned int FUN_002ebdcc(void)
     temp_v10 = temp_v7 << 1;
     asdOperatorNewD();
     puVar12 = (unsigned short *)(temp_v10 + temp_v6 * 2);
-    FUN_003dea6c(*puVar12,0,1);
+    scrMessageSetSpeakerTitle(*puVar12,0,1);
     messageSetScriptDisplayMode();
     temp_v3 = scrWorkGetValue(1);
     temp_v11 = 0;

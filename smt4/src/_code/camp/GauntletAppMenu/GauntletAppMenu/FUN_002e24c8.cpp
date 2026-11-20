@@ -25,7 +25,7 @@ void spriteStartAnimationByIndex(GauntletSprite *sprite, s32 mode);
 void spriteSetLayer(GauntletSprite *sprite, u16 mode);
 u32 gauntletAppMenuUpdate();
 void gauntletAppMenuDestroy(void);
-void gauntletAppMenuExit(void);
+void gauntletAppMenuDraw(void);
 
 extern GauntletAppMenuWork *g_gauntletAppMenu;
 extern const char DAT_00402a08[];
@@ -61,7 +61,7 @@ u32 FUN_002e24c8(void)
     GauntletAppMenuWork *menu = g_gauntletAppMenu;
     memClear(menu, 0x534);
     menu->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("GauntletApp CALC"), 1, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(gauntletAppMenuUpdate), reinterpret_cast<AsdProcFunc>(gauntletAppMenuDestroy), 0);
-    menu->list.drawTask = taskCreateDraw("GauntletApp DDRAW", 230, 0, 0, gauntletAppMenuExit, NULL, NULL, menu->task);
+    menu->list.drawTask = taskCreateDraw("GauntletApp DDRAW", 230, 0, 0, gauntletAppMenuDraw, NULL, NULL, menu->task);
     if (gameFlagIsSet(0x520)) {
         menu->list.forceFirst = 1;
     }

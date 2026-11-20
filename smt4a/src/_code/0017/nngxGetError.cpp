@@ -2,15 +2,15 @@
 
 extern "C" {
 
-extern u32 DAT_00589184;
+extern u32 g_nngxLastError;
 
 /* Returns the word at 0x589184 and clears it. */
 u32 nngxGetError(void)
 {
     u32 value;
 
-    value = DAT_00589184;
-    DAT_00589184 = 0;
+    value = g_nngxLastError;
+    g_nngxLastError = 0;
     return value;
 }
 

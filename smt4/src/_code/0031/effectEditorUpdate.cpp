@@ -28,7 +28,7 @@ s32 linkedFindItemByIndex(u32 source, s32 offset);
 void namedObjectFormatName(EditorObject0031ba38 *object, s32 offset);
 
 extern EffectEditor0031ba38 g_effectEditor; /* 0x44ea80 */
-extern EditorOffsets0031ba38 DAT_0044f858;  /* 0x44f858 */
+extern EditorOffsets0031ba38 g_effectEditorState;  /* 0x44f858 */
 
 /* Updates the effect editor's object and returns 0x200001 while it keeps running; frees it and returns 0 once it ended (state 1 or 2). */
 u32 effectEditorUpdate(void)
@@ -36,7 +36,7 @@ u32 effectEditorUpdate(void)
     s32 data;
 
     FUN_002f2aa8(g_effectEditor.object);
-    s32 position = DAT_0044f858.extraOffset + g_effectEditor.baseOffset;
+    s32 position = g_effectEditorState.extraOffset + g_effectEditor.baseOffset;
     data = linkedFindItemByIndex(g_effectEditor.source, position);
     s32 nameOffset = data + 0x9c;
     namedObjectFormatName(g_effectEditor.object, nameOffset);

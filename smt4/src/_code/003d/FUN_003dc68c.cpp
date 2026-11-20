@@ -43,7 +43,7 @@ s32 libc_strncmp(const char *a, const char *b, u32 count);
 char *libc_strcpy(char *dest, const char *src);
 void memClear(void *buffer, s32 size);
 void FUN_002276f8(BtlEffectWork *work);
-u32 FUN_00246644(u32 index, u32 a, u32 b);
+u32 filterCreateByKind(u32 index, u32 a, u32 b);
 char *libc_strrchr(const char *text, s32 character);
 s32 keyedRecordFindByName(const char *name);
 void asdLoadFileAsyncSimple(const char *path, void **file, s32 flags);
@@ -84,7 +84,7 @@ extern "C" u32 FUN_003dc68c(BtlEffectWork *work)
                 __2sprintf(buffer, DAT_00400904, g_btlEffect.bufferPrefix, n);
                 if (strcmp(buffer, name) == 0) {
                     FUN_002276f8(work);
-                    work->bufferHandle = FUN_00246644(n & 0xFF, 7, 0);
+                    work->bufferHandle = filterCreateByKind(n & 0xFF, 7, 0);
                     work->bufferIndex = n;
                     found = true;
                     break;

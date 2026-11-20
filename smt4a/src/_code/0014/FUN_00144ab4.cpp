@@ -9,7 +9,7 @@ extern AsdGxFramebuffer DAT_0063fe88;
 void FUN_00154d68(const void *color, const void *depth, s32 width, s32 height);
 void FUN_00154180(s32 x, s32 y, s32 width, s32 height);
 void asdGfxSetMode(u32 mode);
-void FUN_00161074(u32 buffer);
+void asdGfxBindTarget(u32 buffer);
 
 /* Select the screen's framebuffer and apply its scaled viewport and buffer binding. */
 void FUN_00144ab4(s32 target)
@@ -55,7 +55,7 @@ void FUN_00144ab4(s32 target)
     if (g_asdGxPresets.displayMode == 1) {
         s32 index = binding->index;
         asdGfxSetMode(binding->mode);
-        FUN_00161074(binding->buffers[index]);
+        asdGfxBindTarget(binding->buffers[index]);
     }
 }
 }

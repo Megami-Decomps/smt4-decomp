@@ -13,7 +13,7 @@ int nodeReleaseOwnedItemsAndSelf(...);
 int rangeInit(...);
 int FUN_002544d8(...);
 int keyedGetEntryValue(...);
-int FUN_00291310(...);
+int quadEffectCreate(...);
 int nodeTreeReleaseItemClearOwner(...);
 int nodeTreeReleaseItem(...);
 int __aeabi_memcpy4(unsigned char [32], int, int);
@@ -37,7 +37,7 @@ extern int keyedRecordCountGet(void);
 /* Supplied declaration required: FUN_002544d8. */
 /* Supplied declaration required: keyedGetEntryValue. */
 extern unsigned int eventCommandGetPendingCleanup(void);
-/* Supplied declaration required: FUN_00291310. */
+/* Supplied declaration required: quadEffectCreate. */
 /* Supplied declaration required: nodeTreeReleaseItemClearOwner. */
 /* Supplied declaration required: nodeTreeReleaseItem. */
 extern int keyedRecordFindPart(unsigned char, unsigned int);
@@ -140,7 +140,7 @@ void FUN_00200c9c(unsigned int *param_1)
               uStack_230 = temp_v7;
               FUN_002544d8(temp_v8);
               temp_v7 = keyedGetEntryValue(*(unsigned char *)(param_1 + 0xc),temp_v2);
-              FUN_00291310(temp_v7,temp_v9,temp_v11,0,param_1 + 0xd,param_1 + param_1[3] + 0x14
+              quadEffectCreate(temp_v7,temp_v9,temp_v11,0,param_1 + 0xd,param_1 + param_1[3] + 0x14
                            ,param_1[3] & 0xff,*(unsigned char *)(param_1 + 0x54),temp_v1,temp_v3);
               param_1[param_1[3] + 0x14] = temp_v7;
               param_1[3] = param_1[3] + 1;

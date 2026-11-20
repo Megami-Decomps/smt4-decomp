@@ -61,7 +61,7 @@ extern "C" void FUN_002a0028(s32 refreshRegions)
         ifTouchRegionRemove();
         ifTouchRegionRemove();
         ifTouchRegionRemove();
-        for (s32 index = 0; index < 8 && index < (s32)FUN_0029ee54(selection); ++index)
+        for (s32 index = 0; index < 8 && index < (s32)gridNavigationGetItemCount(selection); ++index)
             work->itemRegions[index] = ifTouchRegionAddRequested(36, index + 0xa9);
         work->confirmRegion = ifTouchRegionAddRequested(36, 0x1f0);
         work->previousRegion = ifTouchRegionAddRequested(36, 0x1ee);

@@ -23,7 +23,7 @@ u32 FUN_003c25d0()
     u32 lowMask = ~g_battleMaskPresets.clearMask[0];
     entry->flags[1] &= ~g_battleMaskPresets.clearMask[1];
     entry->flags[0] &= lowMask;
-    FUN_004ab7f4(g_btlUiBlock, 0);
+    btlUiObjCApplyPreset(g_btlUiBlock, 0);
     return 1;
 }
 }

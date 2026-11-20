@@ -7,7 +7,7 @@
 extern "C" {
 
 int sysPlaySe(...);
-int FUN_00183e58(void);
+int buttonHelpTeardownSlots(void);
 int naviRequestSelectedMap(void);
 int FUN_003a35a4(void);
 int sysPlayVoice(...);
@@ -48,7 +48,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00183e58. */
+/* Supplied declaration required: buttonHelpTeardownSlots. */
 extern int FUN_00325064(void);
 /* Supplied declaration required: naviRequestSelectedMap. */
 extern int FUN_00384cf4(void);
@@ -217,7 +217,7 @@ LAB_004899f8:
         *piVar5 = temp_v0;
         if (temp_v0 >= 3) {
           *piVar5 = 0;
-          FUN_00183e58();
+          buttonHelpTeardownSlots();
           temp_v2 = 0x10a;
         }
         else if (temp_v0 != 0) {
@@ -228,11 +228,11 @@ LAB_004899f8:
             *puVar8 = 1;
             return 1;
           }
-          FUN_00183e58();
+          buttonHelpTeardownSlots();
           temp_v2 = 0xf6;
         }
         else {
-          FUN_00183e58();
+          buttonHelpTeardownSlots();
           temp_v2 = 0x10a;
         }
         sysPlaySe(temp_v2);

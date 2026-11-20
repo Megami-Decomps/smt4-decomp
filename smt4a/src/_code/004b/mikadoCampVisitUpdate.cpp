@@ -30,8 +30,8 @@ inline void MikadoTalkWorkA::operator delete(void *block)
 extern "C" {
 extern const char g_mikadoPathPrefix[]; /* "mikado/" */
 
-void FUN_004b75d0(CampScriptPanelResources *work);
-void FUN_004b7d88(CampScriptPanelResources *work); // declcheck: local (code/Code004b_Smt4a.h types the argument as a SoundCueContext view)
+void transformInterpolationStep(CampScriptPanelResources *work);
+void soundPlayCueForContextKind(CampScriptPanelResources *work); // declcheck: local (code/Code004b_Smt4a.h types the argument as a SoundCueContext view)
 void FUN_004b6bc4(CampScriptPanelResources *work, s32 type, s32 group);
 s32 FUN_004ba698(Menu4C *menu);
 void menu4CClearFlag84(Menu4C *menu);
@@ -58,7 +58,7 @@ void sub68OwnerCall4(void);
 void titleSetSlotValueState2(u32 index, u32 value);
 void cameraResourcesRelease(MikadoTalkWorkA *talk);
 void soundResetSpatialState(MikadoTalkWorkA *talk);
-void FUN_00407ab0(MikadoTalkWorkA *talk, const char *cameraName, const char *dataName);
+void moveCameraCtrlSetup(MikadoTalkWorkA *talk, const char *cameraName, const char *dataName);
 void FUN_00407eb0(MikadoTalkWorkA *talk, s32 view, s32 immediate);
 void moveCameraCtrlCreateEntry(MikadoTalkWorkA *talk, const char *name, s32 index);
 void listSelectItem(MikadoTalkWorkA *talk, s32 index);
@@ -70,7 +70,7 @@ void linkSlotSetFlag1C(MikadoTalkWorkA *talk, s32 enable);
  * new quest selection), then either leaves the scene or rebuilds its menu, camera and windows. */
 void mikadoCampVisitUpdate(CampScriptPanelResources *work)
 {
-    FUN_004b75d0(work);
+    transformInterpolationStep(work);
     switch (work->mikado.step) {
     case 0:
         placeWinSetValue(0);
@@ -101,7 +101,7 @@ void mikadoCampVisitUpdate(CampScriptPanelResources *work)
                 }
             }
         }
-        FUN_00214da4();
+        placeWindowStartClose();
         break;
     case 2:
         if (++work->mikado.frame < 10) {
@@ -192,7 +192,7 @@ void mikadoCampVisitUpdate(CampScriptPanelResources *work)
         menu4CStartBlock74(&work->panel.menu);
         menu4CReset(&work->panel.menu);
         work->panel.menu.inputLocked = 0;
-        FUN_004b7d88(work);
+        soundPlayCueForContextKind(work);
         if (!campGetState()->keepSlot && !work->keepUi) {
             titleSetSlotValueState2(1, 10);
         }
@@ -209,9 +209,9 @@ void mikadoCampVisitUpdate(CampScriptPanelResources *work)
             if ((work->panel.record->altFlagA != 0 && gameFlagIsSet(work->panel.record->altFlagA) != 0) ||
                 (work->panel.record->altFlagB != 0 && gameFlagIsSet(work->panel.record->altFlagB) != 0)) {
                 sprintf(altPath, "%s%s", g_mikadoPathPrefix, work->panel.record->altImage);
-                FUN_00407ab0(work->talkWork, path, altPath);
+                moveCameraCtrlSetup(work->talkWork, path, altPath);
             } else {
-                FUN_00407ab0(work->talkWork, path, NULL);
+                moveCameraCtrlSetup(work->talkWork, path, NULL);
             }
             current = menu4CGetCurrentEntry(&work->panel.menu);
             moveCameraCtrlSnapToNode(work->talkWork, 0, -1);

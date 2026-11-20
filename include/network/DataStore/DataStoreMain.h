@@ -124,7 +124,7 @@ u32 objBStateAllowsAction(void);
 }
 
 extern "C" {
-u8 FUN_0022e72c(void);
+u8 gameGlobalsStateIsIdle(void);
 }
 
 #endif

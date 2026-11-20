@@ -5,14 +5,14 @@ extern "C" {
 void eventSetUnderMessageFade(u32 color, s32 duration, s32 fadeIn, f32 alpha);
 s32 scrGetArg(u32 index);
 u32 scrGetCommandFrame(void);
-s32 FUN_00203d74(void);
+s32 inputFastForwardActive(void);
 
 /* Starts the underlay fade out in `color` with the duration from script argument 0. */
 static __inline void underMessageFadeOut(u32 color)
 {
     s32 duration = scrGetArg(0);
 
-    if (FUN_00203d74() != 0 && duration > 4) {
+    if (inputFastForwardActive() != 0 && duration > 4) {
         duration = 4;
     }
     eventSetUnderMessageFade(color, duration, 0, 1.0f);

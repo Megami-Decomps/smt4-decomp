@@ -1,7 +1,7 @@
 /* NON_MATCHING: same rows as retail; the stack frame differs (retail 60 bytes: reader at sp+0, glyph at sp+32; ours 44: reader at sp+4, glyph at sp+16, so the 20 bytes of call-live local slots are missing) plus a register swap around the font-record lookup. */
 #include "font/FontStringReader.h"
 extern "C" {
-extern FontRecordPool DAT_00464a70;
+extern FontRecordPool g_asdFontGlyphSets;
 void nwFontGlyphInit(NwFontGlyph *glyph);
 u32 libc_strlen(const char *text);
 
@@ -13,8 +13,8 @@ f32 fontMeasureTextWidth(const char *text, u32 fontIndex, f32 spacing)
     NwFontGlyph glyph;
     nwFontGlyphInit(&glyph);
     FontRegisteredRecord *record = NULL;
-    if (DAT_00464a70.records != NULL && fontIndex < DAT_00464a70.count)
-        record = &DAT_00464a70.records[fontIndex];
+    if (g_asdFontGlyphSets.records != NULL && fontIndex < g_asdFontGlyphSets.count)
+        record = &g_asdFontGlyphSets.records[fontIndex];
     if (record == NULL)
         return width;
     FontEncodingSource *font = static_cast<FontEncodingSource *>(record->font);

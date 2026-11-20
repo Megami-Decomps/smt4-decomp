@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002f76ca(int, unsigned char *);
+int stringSlotAssign(int, unsigned char *);
 int FUN_002f7824(int);
 
 extern unsigned char LAB_0010d5c8; /* 0x10d5c8 */
 
-/* Supplied declaration required: FUN_002f76ca. */
+/* Supplied declaration required: stringSlotAssign. */
 /* Supplied declaration required: FUN_002f7824. */
 
 
@@ -20,7 +20,7 @@ void FUN_0010d59c(int param_1)
   *(unsigned int *)(param_1 + 0x108) = 0;
   FUN_002f7824(param_1 + 0x10c);
   *(unsigned char *)(param_1 + 0x118) = 0;
-  FUN_002f76ca(param_1 + 0x11c,&LAB_0010d5c8);
+  stringSlotAssign(param_1 + 0x11c,&LAB_0010d5c8);
   *(int *)(param_1 + 0x104) = *(int *)(param_1 + 0x104) + 1;
   return;
 }

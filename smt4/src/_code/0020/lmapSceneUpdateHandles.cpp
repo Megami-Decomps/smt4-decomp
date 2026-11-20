@@ -4,12 +4,12 @@
 extern "C" {
 
 void asdMdlManagerMarkDestroy(AsdMdlObject *model);
-void FUN_00335144(Obj4206e8 *holder);
+void lmapSceneDeactivateHandles(Obj4206e8 *holder);
 
 
 void lmapSceneUpdateHandles(void)
 {
-    FUN_00335144(g_lmapScene->playerModel);
+    lmapSceneDeactivateHandles(g_lmapScene->playerModel);
     if (g_lmapScene->stageModel != NULL) {
         asdMdlManagerMarkDestroy(g_lmapScene->stageModel);
     }

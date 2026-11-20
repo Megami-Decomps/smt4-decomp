@@ -1,7 +1,7 @@
 #include "ui/UiSpriteApi.h"
 #include "ui/SelectionNotification.h"
 
-extern "C" void FUN_0048a378(SelectionNotificationState *work);
+extern "C" void naviRefreshBackgroundAndFeedback(SelectionNotificationState *work);
 extern "C" s32 buttonHelpIsNotActive(void);
 struct ObjectFlagState;
 
@@ -10,7 +10,7 @@ extern "C" void _ZN9Obj53230043selectionNotificationAdvanceEntryAnimationsEv(Sel
     if (work->phase == 0) {
         uiSpriteSetImageKeyframe(&work->headings[0], 3, 0);
         uiSpriteSetImageKeyframe(&work->headings[1], 5, 0);
-        FUN_0048a378(work);
+        naviRefreshBackgroundAndFeedback(work);
         work->phase = 1;
         return;
     }

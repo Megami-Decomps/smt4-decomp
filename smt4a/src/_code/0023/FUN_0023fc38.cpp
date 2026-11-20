@@ -19,7 +19,7 @@ s32 gameFlagIsSet(u32 flag);
 void FUN_0023fc38(void)
 {
     PartyPanelStateA *panel = g_partyPanel;
-    FUN_002c7e24();
+    gameGlobalsGetBlock1390();
     u8 page = panel->panelState;
     bool subPage = true;
     if (page == 0 || page == 1 || page == 0xc || page == 0xd || page == 0xe) {

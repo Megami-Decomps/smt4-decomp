@@ -81,7 +81,7 @@ extern int FUN_0028cb6c(void);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_004bf9a0. */
 /* Supplied declaration required: source4CCopyHalves. */
-extern unsigned int FUN_004c53fc(unsigned int);
+extern unsigned int mapCategoryToDestinationGroup(unsigned int);
 /* Supplied declaration required: FUN_004c60c0. */
 /* Supplied declaration required: FUN_004c8340. */
 
@@ -516,7 +516,7 @@ LAB_004c070c:
         if (temp_v6 <= temp_v5) {
           return 1;
         }
-        temp_v3 = FUN_004c53fc(0x23);
+        temp_v3 = mapCategoryToDestinationGroup(0x23);
         temp_v5 = btlGetMainState();
         btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v5), temp_v8);
         if (temp_v5 != 0) {

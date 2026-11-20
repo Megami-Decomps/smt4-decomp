@@ -8,7 +8,7 @@ struct Obj0036ead8 {
     /* 0x08 */ s32 offset; /* from this field; 0: none */
 };
 
-void FUN_0036eaf0(void *a, void *b, void *c);
+void resourceDispatchResolvePayload(void *a, void *b, void *c);
 
 void relativePtrForward(Obj0036ead8 *o, void *a, void *c)
 {
@@ -18,7 +18,7 @@ void relativePtrForward(Obj0036ead8 *o, void *a, void *c)
     if (target != 0) {
         target += (u32)field;
     }
-    FUN_0036eaf0(a, (void *)target, c);
+    resourceDispatchResolvePayload(a, (void *)target, c);
 }
 
 }

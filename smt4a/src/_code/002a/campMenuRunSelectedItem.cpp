@@ -34,7 +34,7 @@ void partyPanelSetHidden(s32 hidden);
 void bibleOpenMode0(s32 unused);
 void bibleOpenMode1(s32 unused);
 void bibleOpenMode2(s32 unused);
-u32 FUN_0035c810(void);
+u32 gauntletAppMenuCreate(void);
 void buttonHelpSetText(const s8 *text, u32 color);
 void uiQuestCreate(void);
 void FUN_00334560(void);
@@ -43,7 +43,7 @@ u32 uniteRequestGet(void);
 void FUN_002a7b74(void);
 u32 uniteStartOrQueueRequest(s32 request);
 void configOpen(u32 parent, u8 mode);
-void FUN_00215254(void);
+void playLogCreate(void);
 u32 uniteHasPendingIdle(void);
 void uniteSetMode(u8 mode);
 void campReleaseSlotTouchRegions(void);
@@ -102,9 +102,9 @@ void campMenuRunSelectedItem(void)
             current->statusSelection = row;
         }
         messageDismissNumericBanner(1);
-        if (objectApplyIfUnblocked(reinterpret_cast<Object *>(&camp->grids[3])) > 0) {
-            FUN_002c8538(1);
-            FUN_00215bd0();
+        if (gridNavigationGetItemCount(reinterpret_cast<Object *>(&camp->grids[3])) > 0) {
+            gameGlobalsSetOverlayActive(1);
+            unitStatusResetSpriteState();
             FUN_0035dbd4(1);
         }
         camp->pendingState = 0x11;
@@ -121,7 +121,7 @@ void campMenuRunSelectedItem(void)
         } else if (item == 0xe) {
             grid = &camp->grids[2];
         }
-        if (objectApplyIfUnblocked(reinterpret_cast<Object *>(grid)) > 0) {
+        if (gridNavigationGetItemCount(reinterpret_cast<Object *>(grid)) > 0) {
             campSetSpriteAnimationPreset(2, 3, -1, 0);
             FUN_0021b274(1, -1, 0);
             FUN_002a5cf4();
@@ -172,13 +172,13 @@ void campMenuRunSelectedItem(void)
         } else if (item == 0x19) {
             grid = &camp->grids[11];
         }
-        if (objectApplyIfUnblocked(reinterpret_cast<Object *>(grid)) > 0) {
+        if (gridNavigationGetItemCount(reinterpret_cast<Object *>(grid)) > 0) {
             campSetSpriteAnimationPreset(2, 3, -1, 0);
             FUN_0021b274(1, -1, 0);
             FUN_002a5cf4();
             messageDismissNumericBanner(1);
-            FUN_002c8538(1);
-            FUN_00215bd0();
+            gameGlobalsSetOverlayActive(1);
+            unitStatusResetSpriteState();
             camp->pendingState = 0x1d;
             campSelectorRebuildList(0x13);
             campSelectorRebuildList(0x14);
@@ -205,7 +205,7 @@ void campMenuRunSelectedItem(void)
         break;
     case 0x1c:
         gameFlagSetValue(0x48c, 1, 1);
-        camp->unk000C = FUN_0035c810();
+        camp->unk000C = gauntletAppMenuCreate();
         FUN_002a5cf4();
         buttonHelpSetText(NULL, 0xf4f4f4ff);
         campChangeState(0x25);
@@ -268,7 +268,7 @@ void campMenuRunSelectedItem(void)
         campChangeState(4);
         break;
     case 0x2b:
-        FUN_00215254();
+        playLogCreate();
         campSetSpriteAnimationPreset(2, 3, -1, 0);
         FUN_0021b274(0, -1, 0);
         FUN_002a5cf4();
@@ -353,8 +353,8 @@ void campMenuRunSelectedItem(void)
             camp->state = 0x3a;
             s32 hours = (seconds + 59) / 3600;
             s32 minutes = (seconds + 59) % 3600 / 60;
-            FUN_00359974(0, hours, -1, 0);
-            FUN_00359974(1, minutes, 2, 1);
+            entryTableResetAndInit(0, hours, -1, 0);
+            entryTableResetAndInit(1, minutes, 2, 1);
             if (hours > 0) {
                 campCecScriptStart(0x2d);
             } else {
@@ -450,7 +450,7 @@ void campMenuRunSelectedItem(void)
             } else if (item == 0x4e) {
                 grid = &camp->grids[11];
             }
-            if (objectApplyIfUnblocked(reinterpret_cast<Object *>(grid)) > 0) {
+            if (gridNavigationGetItemCount(reinterpret_cast<Object *>(grid)) > 0) {
                 campSetSpriteAnimationPreset(2, 3, -1, 0);
                 FUN_0021b274(1, -1, 0);
                 camp->pendingState = 0x1d;

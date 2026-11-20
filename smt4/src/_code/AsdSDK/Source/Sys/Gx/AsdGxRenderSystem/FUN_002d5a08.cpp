@@ -41,11 +41,11 @@ struct RenderTarget {
 };
 
 extern "C" {
-extern const char DAT_00409a68[];
+extern const char g_asdGxRenderSystemSourceFileName[];
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
 void *asdMemoryAllocAligned(u32 heap, u32 alignment, u32 region, u32 size, u32 pageAlignment, u32 option);
 AsdTexture *asdTextureCreate(u32 option);
-void FUN_002a66e0(u32 format, u32 pixelType, u32 *hardwareFormat);
+void texFormatGetBytesPerPixel(u32 format, u32 pixelType, u32 *hardwareFormat);
 u32 osVirtToPhysAddress(void *address);
 
 /* The internal pixel format a texture (format, type) pair is stored as, or 0. */
@@ -136,17 +136,17 @@ static __inline void *renderAllocSurface(u32 heap, s32 size)
 RenderTarget *FUN_002d5a08(s32 width, s32 height, u32 heap, u32 format, u32 pixelType, u32 depthFormat,
                            u32 depthHeap)
 {
-    asdDebugTrace(DAT_00409a68, 473);
+    asdDebugTrace(g_asdGxRenderSystemSourceFileName, 473);
     RenderTarget *target = (RenderTarget *)asdMemoryAlloc(0x100, 0x100, 0, 0x14, 1);
-    asdDebugTrace(DAT_00409a68, 474);
+    asdDebugTrace(g_asdGxRenderSystemSourceFileName, 474);
     RenderSurfacePair *surfaces = (RenderSurfacePair *)asdMemoryAlloc(0x100, 0x100, 0, 0x30, 1);
     target->texture = asdTextureCreate(0);
     target->texture->dimensions.width = width;
     target->texture->dimensions.height = height;
     target->texture->target = ASDTEXTURE_TARGET_2D;
-    target->texture->unk08 = heap;
+    target->texture->heap = heap;
     target->texture->image.flags = 0x2000000;
-    FUN_002a66e0(format, pixelType, &target->texture->image.hardwareFormat);
+    texFormatGetBytesPerPixel(format, pixelType, &target->texture->image.hardwareFormat);
 
     s32 pixels = width * height;
     u32 internalFormat = renderInternalFormat(format, pixelType);

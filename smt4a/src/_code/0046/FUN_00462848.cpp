@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001753d4(unsigned char *, int, void *, int, int);
+int soundArchiveLoaderLoadItem(unsigned char *, int, void *, int, int);
 int FUN_00461470(unsigned char [12]);
 int FUN_004614b4(unsigned char [12]);
 int FUN_004619b0(...);
@@ -34,7 +34,7 @@ typedef struct {
     unsigned int sp280; /* 0x280: local_280 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001753d4. */
+/* Supplied declaration required: soundArchiveLoaderLoadItem. */
 /* Supplied declaration required: FUN_00461470. */
 /* Supplied declaration required: FUN_004614b4. */
 /* Supplied declaration required: FUN_004619b0. */
@@ -57,7 +57,7 @@ void FUN_00462848(fn_00462848_arg0 *param_1)
   nw_snd_internal_PlayerHeapDataManager_Initialize(temp_v1,*(unsigned int *)&param_1->field_0x1c);
   if ((param_1->field_0x2c == 0) && (temp_v0 = param_1->field_0x28, temp_v0 != -1)) {
     puVar1 = temp_v2;
-    FUN_001753d4(puVar1,temp_v0,param_1->field_0x3c,2,0);
+    soundArchiveLoaderLoadItem(puVar1,temp_v0,param_1->field_0x3c,2,0);
     if (puVar1 == (unsigned char *)0x0) {
       *(unsigned char *)((int)param_1->field_0x3c + 0x18) = 2;
       param_1->field_0x40 = 0;

@@ -19,14 +19,14 @@ int navigationApplyOptionalValue(...);
 int navigationApplyArguments(...);
 int navigationSetFieldValue(...);
 int mapDepartSetTarget(...);
-int FUN_0027d0ec(void);
+int mapAmbientAudioUpdate(void);
 int navigationSetArguments(...);
 int table23FindRecordByKey(...);
 int lmapSetSceneId(...);
-int FUN_0027fc14(...);
+int lmapCameraSetMode(...);
 int naviRegisterTransitionsAndRequest(...);
 int soundPlaySeUnpanned(...);
-int FUN_002c29d8(...);
+int screenFadeStartIn(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
@@ -80,16 +80,16 @@ extern int FUN_0026f950(void);
 /* Supplied declaration required: navigationApplyArguments. */
 /* Supplied declaration required: navigationSetFieldValue. */
 /* Supplied declaration required: mapDepartSetTarget. */
-/* Supplied declaration required: FUN_0027d0ec. */
+/* Supplied declaration required: mapAmbientAudioUpdate. */
 /* Supplied declaration required: navigationSetArguments. */
 extern int dataTableGetRecord23(void);
 /* Supplied declaration required: table23FindRecordByKey. */
 /* Supplied declaration required: lmapSetSceneId. */
-/* Supplied declaration required: FUN_0027fc14. */
+/* Supplied declaration required: lmapCameraSetMode. */
 /* Supplied declaration required: naviRegisterTransitionsAndRequest. */
 extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: soundPlaySeUnpanned. */
-/* Supplied declaration required: FUN_002c29d8. */
+/* Supplied declaration required: screenFadeStartIn. */
 
 
 void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
@@ -239,7 +239,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
     navigationApplyOptionalValue(0);
     mapDepartSetTarget(0xffffffff,0xffffffff);
     battlePrepareEncounter();
-    FUN_0027fc14(0);
+    lmapCameraSetMode(0);
     FUN_00273840(0);
     lmapSetSceneId(1);
     *(unsigned char *)(temp_v2 + 0x47) = 1;
@@ -251,10 +251,10 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
     *(unsigned int *)(temp_v2 + 0x24) = 0x15;
     *(unsigned int *)(temp_v2 + 0x28) = 0;
     mapMainEnterScene();
-    FUN_0027d0ec();
+    mapAmbientAudioUpdate();
     temp_v2 = pairedAvailabilityGetState(0);
     if (temp_v2 == 3) {
-      FUN_002c29d8(0,10,0xff);
+      screenFadeStartIn(0,10,0xff);
     }
     temp_v2 = pairedAvailabilityGetState(1);
     if (temp_v2 != 3) {
@@ -268,7 +268,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
       *(unsigned int *)(temp_v2 + 0x28) = 0;
       return;
     }
-    FUN_0027fc14(0);
+    lmapCameraSetMode(0);
     FUN_00273840(0);
     lmapSetSceneId(1);
     *(unsigned char *)(temp_v2 + 0x47) = 1;
@@ -284,14 +284,14 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
     *(unsigned int *)(temp_v2 + 0x28) = 0;
     temp_v2 = pairedAvailabilityGetState(0);
     if (temp_v2 == 3) {
-      FUN_002c29d8(0,10,0xff);
+      screenFadeStartIn(0,10,0xff);
     }
     temp_v2 = pairedAvailabilityGetState(1);
     if (temp_v2 != 3) {
       return;
     }
   }
-  FUN_002c29d8(1,10,0xff);
+  screenFadeStartIn(1,10,0xff);
   return;
 }
 

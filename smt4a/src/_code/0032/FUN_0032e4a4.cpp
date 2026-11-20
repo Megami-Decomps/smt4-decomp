@@ -87,7 +87,7 @@ unsigned int FUN_0032e4a4(int param_1)
     }
     return uStack_50;
   case 4:
-    iVar9 = FUN_00163e84(0);
+    iVar9 = screenFaderIsSettled(0);
     if (iVar9 == 0) {
       return uStack_50;
     }
@@ -102,7 +102,7 @@ unsigned int FUN_0032e4a4(int param_1)
       }
       iVar3 = (int)*(char *)(iVar9 + iVar12 + 0x1c88);
       *(unsigned char *)(iVar9 + iVar12 + 0x1c88) = 0xff;
-      iVar9 = FUN_002a4b28(uVar2);
+      iVar9 = compendiumEntryIsRegistered(uVar2);
       uStack_4c = (unsigned int)(iVar9 == 0);
       FUN_004bd30c(iVar3,uVar2,0);
       iVar9 = FUN_001ab854(iVar3);
@@ -227,7 +227,7 @@ code_r0x0032e99c:
           iVar11 = iVar11 + 1;
         } while (bVar15 != bVar16);
       }
-      FUN_002a6894(iVar9);
+      saveMarkIdListSeen(iVar9);
       if (uStack_4c != 0) {
         FUN_002a5e7c(*(unsigned short *)(iVar9 + 0x62));
         *(unsigned char *)(param_1 + 0x7d4) = 1;
@@ -281,7 +281,7 @@ code_r0x0032ea88:
     if (iVar9 == 0) {
       return uStack_50;
     }
-    iVar9 = FUN_00163e84(0);
+    iVar9 = screenFaderIsSettled(0);
     if (iVar9 != 0) {
       iVar9 = FUN_00224880(*(unsigned int *)(param_1 + 0x360));
       if (iVar9 == 2) {

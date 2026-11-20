@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern ListNode *FUN_00307dfe(void);
+extern ListNode *listAllocateSentinelNode2(void);
 
 /* Gives the list its sentinel node, linked to itself (an empty list). */
 void listInitEmpty2(ListOwner *owner)
 {
-    ListNode *sentinel = FUN_00307dfe();
+    ListNode *sentinel = listAllocateSentinelNode2();
 
     owner->list.sentinel = sentinel;
     sentinel->next = sentinel;

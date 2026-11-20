@@ -9,7 +9,7 @@
 
 extern "C" {
 
-void FUN_00180310(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
+void statRowDrawValueImpl(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
 void FUN_00185e84(s16 id, s32 x, s32 y, u32 layer, u32 a, u32 b);
 void statDrawClampedDelta(u32 unit, s16 id, s32 x, s32 y, u32 layer, u32 a);
 void partyRecordSetEquippedItemClampRank(u32 unit, u16 id, s32 index);
@@ -44,7 +44,7 @@ void FUN_003c33e8(SkillSlotScreen *screen, s32 index, u32 unit, s32 count, s32 x
     }
     statDrawClampedDelta(unit, screen->slots[index], icon->x + x, icon->y + y, 0x74, 0);
     const TextureTableEntryIV *cost = asdTMTexTableEntryAt(0x1a, 0x17c);
-    FUN_00180310(1, cost->x + x, cost->y + y, 1, 4, 0x79, "%d", skillGetAdjustedCost(unit, screen->slots[index]));
+    statRowDrawValueImpl(1, cost->x + x, cost->y + y, 1, 4, 0x79, "%d", skillGetAdjustedCost(unit, screen->slots[index]));
 }
 
 } /* extern "C" */

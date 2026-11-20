@@ -18,7 +18,7 @@ extern void scrScriptProcessStartEntry(u32 job, s32 value);
 extern s32 scrRunOpcodesStub(u32 job);
 extern void campCommonBgRelease(void);
 extern void campButtonHelpRelease(void);
-extern u32 FUN_003e71a8(StepState *step);
+extern u32 touchToContinueSplashStep(StepState *step);
 
 /* Step: once both pairedAvailabilityGetState inputs report 3, plays the sound, starts the job and moves on to state 9/10 when it finishes. */
 u32 stepStateBattleStart(StepState *step)
@@ -37,7 +37,7 @@ u32 stepStateBattleStart(StepState *step)
             campButtonHelpRelease();
             if (reinterpret_cast<BtlStateB *>(btlGetMainState())->unk4C80 != 1) {
                 step->state = 9;
-                result = FUN_003e71a8(step);
+                result = touchToContinueSplashStep(step);
                 return result;
             }
             result = -1;

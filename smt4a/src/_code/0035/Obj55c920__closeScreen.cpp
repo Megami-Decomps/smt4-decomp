@@ -18,7 +18,7 @@ struct CampCommonWork {
 
 extern "C" {
 void asdMemFree(void *block);
-void FUN_002c85b0(s32 mode);
+void gameGlobalsSetSceneState(s32 mode);
 void gameGlobalsSetMenuOpenFlag(s32 mode);
 void gameGlobalsReleaseReference(void);
 void asdTMTexTableReleaseNode(s32 table, s32 node);
@@ -41,7 +41,7 @@ void _ZN9Obj55c92011closeScreenEv(CampCommonWork *camp)
         asdMemFree(camp->secondBuffer);
         camp->secondBuffer = NULL;
     }
-    FUN_002c85b0(0);
+    gameGlobalsSetSceneState(0);
     gameGlobalsSetMenuOpenFlag(0);
     gameGlobalsReleaseReference();
     if (camp->texturesLoaded) {

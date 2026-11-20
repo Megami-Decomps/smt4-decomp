@@ -27,9 +27,9 @@ int mapIfActivateRecord(int, unsigned int);
 int FUN_0025247c(...);
 int mapInterfaceSetStateTwo(void);
 int mapIfSetMode1(void);
-int FUN_0027f48c(int, int);
+int mapProjectPositionToGround(int, int);
 int lmapSetSceneId(unsigned int);
-int FUN_0027fc14(int);
+int lmapCameraSetMode(int);
 int FUN_002804ec(int);
 int mapEaseSceneHeading(void);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
@@ -63,10 +63,10 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapInterfaceSetStateTwo. */
 extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: mapIfSetMode1. */
-extern int FUN_0027ee9c(void);
-/* Supplied declaration required: FUN_0027f48c. */
+extern int inputConfirmPressed(void);
+/* Supplied declaration required: mapProjectPositionToGround. */
 /* Supplied declaration required: lmapSetSceneId. */
-/* Supplied declaration required: FUN_0027fc14. */
+/* Supplied declaration required: lmapCameraSetMode. */
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: libm_cosf. */
@@ -190,7 +190,7 @@ void FUN_0027fde4(void)
               mathPositionHeadingDegrees();
               *(unsigned int *)(g_lmapScene + 0x50) = temp_v11;
             }
-            FUN_0027fc14(10);
+            lmapCameraSetMode(10);
             *(unsigned int *)(g_mapCamera + 0xac) = 0xffffffff;
             buttonHelpSetPreset(0xdb);
             mapIfActivateRecord(1,g_gameState.f0049f99c);
@@ -223,7 +223,7 @@ void FUN_0027fde4(void)
       else {
         *(int *)(temp_v2 + 8) = *(int *)(temp_v2 + 8) + 1;
         mapIfActivateRecord(1,g_gameState.f0049f99c);
-        temp_v3 = FUN_0027ee9c();
+        temp_v3 = inputConfirmPressed();
         temp_v2 = g_lmapScene;
         if (temp_v3 != 0) {
           *(unsigned int *)(g_lmapScene + 4) = 10;
@@ -235,7 +235,7 @@ void FUN_0027fde4(void)
             temp_v2 = g_mapCamera;
             *(unsigned int *)(g_mapCamera + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
             *(unsigned int *)(temp_v2 + 0xac) = 0;
-            FUN_0027fc14(0);
+            lmapCameraSetMode(0);
             temp_v2 = g_lmapScene;
             *(unsigned int *)(g_lmapScene + 0x54) = 0;
             *(unsigned int *)(temp_v2 + 0x58) = temp_v11;
@@ -288,7 +288,7 @@ void FUN_0027fde4(void)
       temp_v2 = g_mapCamera;
       *(unsigned int *)(g_mapCamera + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
       *(unsigned int *)(temp_v2 + 0xac) = 0;
-      FUN_0027fc14(0);
+      lmapCameraSetMode(0);
       temp_v3 = *(int *)(g_lmapScene + 4);
       temp_v2 = g_lmapScene;
       *(int *)(temp_v2 + 4) = temp_v3 + 1;
@@ -323,7 +323,7 @@ LAB_00280248:
     *(int *)(temp_v2 + 0x38) = (int)((unsigned long long)temp_v8 >> 0x20);
     *(unsigned int *)(temp_v2 + 0x3c) = temp_v10;
     temp_v2 = temp_v2 + 0x28;
-    FUN_0027f48c(temp_v2,temp_v3);
+    mapProjectPositionToGround(temp_v2,temp_v3);
     if (temp_v2 != 0) {
       *(unsigned char *)(g_lmapScene + 0x115) = 0;
     }

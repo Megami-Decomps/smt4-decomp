@@ -17,7 +17,7 @@ struct EffectTable {
 };
 
 extern const char DAT_0040090c[]; /* "NOT_EFT" */
-s32 FUN_00293230(void);
+s32 btlScriptUnitIsIncapacitated(void);
 
 /* Returns the value of the first of four entries named "NOT_EFT"; -1 while busy, 30 if none. */
 s32 FUN_002281a4(EffectTable *table)
@@ -26,7 +26,7 @@ s32 FUN_002281a4(EffectTable *table)
     s32 i;
 
     btlGetMainState();
-    s32 busy = FUN_00293230();
+    s32 busy = btlScriptUnitIsIncapacitated();
     if (busy != 0) {
         return -1;
     }

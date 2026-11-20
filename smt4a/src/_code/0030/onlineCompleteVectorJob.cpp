@@ -30,9 +30,9 @@ OnlineInstanceTable *onlineInstanceTableGetCurrent(void);
 OnlineInstance *onlineInstanceTableFind(OnlineInstanceTable *table, u32 id);
 s32 _ZNK18OnlineResultRecord7isValidEv(s32 *status);
 OnlineValueVector *_ZNSt6vectorI6Elem1212AsdAllocatorIS0_EEaSERKS3_(OnlineValueVector *destination, const OnlineValueVector *source);
-void FUN_002f3dc4(OnlineInstance *instance, const OnlineCallbackResult *result);
-void FUN_002f3dde(OnlineInstance *instance, const OnlineCallbackResult *result);
-u32 FUN_002e9f00(OnlineRequestPrefix *request, u32 error);
+void onlineInstanceCompleteMode2(OnlineInstance *instance, const OnlineCallbackResult *result);
+void onlineInstanceCompleteMode3(OnlineInstance *instance, const OnlineCallbackResult *result);
+u32 onlineInstanceCompleteWithChildren(OnlineRequestPrefix *request, u32 error);
 void onlineJobSetStateDone(OnlineVectorCompletionJob *job);
 
 // Publish successful vector output, notify the instance, then finish the job.
@@ -45,13 +45,13 @@ void onlineCompleteVectorJob(OnlineVectorCompletionJob *job, OnlineCallbackResul
             if (job->output != NULL)
                 _ZNSt6vectorI6Elem1212AsdAllocatorIS0_EEaSERKS3_(job->output, &job->values);
             OnlineCallbackResult copy = *result;
-            FUN_002f3dc4(instance, &copy);
+            onlineInstanceCompleteMode2(instance, &copy);
         } else {
             OnlineCallbackResult copy = *result;
-            FUN_002f3dde(instance, &copy);
+            onlineInstanceCompleteMode3(instance, &copy);
         }
     } else {
-        FUN_002e9f00(&job->request, 4);
+        onlineInstanceCompleteWithChildren(&job->request, 4);
     }
     onlineJobSetStateDone(job);
 }

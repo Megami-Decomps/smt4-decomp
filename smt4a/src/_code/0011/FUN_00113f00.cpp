@@ -34,7 +34,7 @@ extern unsigned char LAB_00113f9c; /* 0x113f9c */
 
 /* Supplied declaration required: maxValueTrackerUpdate. */
 /* Supplied declaration required: _ZN4__rw10__rw_throwEiz. */
-extern unsigned int FUN_002ea704(void);
+extern unsigned int watcherGetEnabledFlag(void);
 extern int FUN_002f14a8(int, unsigned int);
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -55,7 +55,7 @@ unsigned int FUN_00113f00(fn_00113f00_arg0 *param_1,int *param_2)
   temp_v6 = 0;
   if (param_1->field_0x84 != 0) {
     temp_v6 = 0;
-    temp_v0 = FUN_002ea704();
+    temp_v0 = watcherGetEnabledFlag();
     for (temp_v5 = 0; temp_v5 < param_1->field_0x1c; temp_v5 = temp_v5 + 1) {
       __aeabi_uidivmod(param_1->field_0x18 + temp_v5,*(unsigned int *)&param_1->field_0x20);
       temp_v1 = (param_1->field_0xc - param_1->field_0x8) >> 2;

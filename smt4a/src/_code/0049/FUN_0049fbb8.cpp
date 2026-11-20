@@ -2,7 +2,7 @@
 
 extern "C" {
 s32 gameSlotTableFindFree(void);
-s32 FUN_002c7bb0(u32 user, s32 target, u32 id, s32 *result);
+s32 skillApplyToTarget(u32 user, s32 target, u32 id, s32 *result);
 }
 
 /* Test the selected party set, including the protagonist for the applicable modes. */
@@ -10,7 +10,7 @@ extern "C" s32 FUN_0049fbb8(u32 mode, s32 predicate, u16 argument)
 {
     s32 result;
     if ((mode == 0 || mode == 2 || mode == 3) &&
-        FUN_002c7bb0(predicate, -1, argument, &result) == 0) {
+        skillApplyToTarget(predicate, -1, argument, &result) == 0) {
         return 1;
     }
     s32 count;
@@ -30,7 +30,7 @@ extern "C" s32 FUN_0049fbb8(u32 mode, s32 predicate, u16 argument)
         return 0;
     }
     for (s32 i = 0; i < count; ++i) {
-        if (slots[i] >= 0 && FUN_002c7bb0(predicate, slots[i], argument, &result) == 0) {
+        if (slots[i] >= 0 && skillApplyToTarget(predicate, slots[i], argument, &result) == 0) {
             return 1;
         }
     }

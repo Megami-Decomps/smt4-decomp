@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001104b0` (_code @ 0x1104b0, 0x1c8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "nn/applet/SleepModule.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -15,7 +16,6 @@ int FUN_002bb20c(void);
 int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
 int sysReportCheckFailure(int, int);
-int FUN_002c5434(int);
 int sleepQueryAnswer(int);
 int software_interrupt(int);
 
@@ -43,7 +43,7 @@ extern int FUN_002bb2c8(void);
 /* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
 /* Supplied declaration required: sysReportCheckFailure. */
-/* Supplied declaration required: FUN_002c5434. */
+/* Supplied declaration required: sleepAllow. */
 /* Supplied declaration required: sleepQueryAnswer. */
 
 
@@ -91,7 +91,7 @@ int FUN_001104b0(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
     if (temp_v0 != 0) {
       temp_v0 = FUN_002bb0d0();
       if (temp_v0 == 0) {
-        FUN_002c5434(1);
+        sleepAllow(1);
       }
     }
     else {

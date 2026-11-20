@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b4b94(unsigned int, unsigned int);
+int soundRequestQueueDequeueUntilToken(unsigned int, unsigned int);
 int nw_snd_internal_FrameHeap_Clear(int);
 int nw_snd_internal_FrameHeap_Destroy(int);
 
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002b4b94. */
+/* Supplied declaration required: soundRequestQueueDequeueUntilToken. */
 extern unsigned int soundRequestQueueFlush(unsigned int, unsigned int);
 extern unsigned int soundRequestQueueGetInstance(void);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -38,7 +38,7 @@ void nw_snd_SoundHeap_Destroy(int param_1)
     nn_os_CriticalSection_Leave(param_1 + 4);
     temp_v0 = soundRequestQueueGetInstance();
     temp_v1 = soundRequestQueueFlush(temp_v0,1);
-    FUN_002b4b94(temp_v0,temp_v1);
+    soundRequestQueueDequeueUntilToken(temp_v0,temp_v1);
     nw_snd_internal_FrameHeap_Destroy(param_1 + 0x10);
     nn_os_CriticalSection_Leave(temp_v2);
     return;

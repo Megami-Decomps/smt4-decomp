@@ -15,15 +15,15 @@ int FUN_0032d0c8(...);
 int statusDisplayBindUnitRecord(...);
 int objBInitBlock19D0(...);
 
-int FUN_00228b04(...);
-int FUN_0022e774(void);
+int gridNavigationHandleConfirm(...);
+int statusPanelClose(void);
 int uniteStartOrQueueRequest(...);
 int campCecEditReset(void);
 int FUN_00284ee4(...);
 int FUN_002a7b74(void);
 int FUN_002c39dc(...);
 int campCecSetObjectValue(...);
-int FUN_002f3bc4(...);
+int uniteBuildResultUnitRecord(...);
 int FUN_003343c0(...);
 int FUN_0033449c(...);
 int screenSetColor670(...);
@@ -37,7 +37,7 @@ int campShowSelectedEntryHelp(...);
 int scrollOwnerSelectIndex(...);
 int campMenuRunSelectedItem(void);
 int FUN_002a5cf4(void);
-int FUN_002c7e24(void);
+int gameGlobalsGetBlock1390(void);
 int FUN_002e26c4(...);
 int FUN_00319aec(...);
 int FUN_0034c940(...);
@@ -51,17 +51,17 @@ int sysPlaySe(...);
 int gameFlagIsSet(...);
 int buttonHelpSetText(...);
 int campChangeState(...);
-int FUN_00215bd0(void);
+int unitStatusResetSpriteState(void);
 int FUN_0026f7f0(void);
 int recordGetModeForId(...);
 int listCursorGetRowOfChildIfUnblocked(...);
 int campFusionResultCommand(void);
-int FUN_002c8538(...);
+int gameGlobalsSetOverlayActive(...);
 int FUN_002f78a0(...);
 int flaggedEntrySetValueB(...);
 int campCecDestroyOverlay(...);
 int dataTable15Sub0FindEntry(...);
-int FUN_0037c8e4(...);
+int messageBannerInitCounter(...);
 int FUN_0037e1b0(...);
 int messageRestoreBanner(void);
 int dataTable15GetUnlockedEntryId(...); // declcheck: local (romwright prototype; the shared declaration in camp/CampMenuEntry.h does not compile here: more than one instance of overloaded function "FUN_002e26c4" has "C" linkage)
@@ -92,12 +92,12 @@ extern int ifTouchGetButtonHelpValue(void);
 extern int uniteStateIsDone(void);
 /* Supplied declaration required: campChangeState. */
 /* Supplied declaration required: FUN_0020d700. */
-/* Supplied declaration required: FUN_00215bd0. */
+/* Supplied declaration required: unitStatusResetSpriteState. */
 extern int idListAnyValid(void); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
-/* Supplied declaration required: FUN_00228b04. */
+/* Supplied declaration required: gridNavigationHandleConfirm. */
 extern int FUN_0022e714(void);
 extern int FUN_0022e750(void);
-/* Supplied declaration required: FUN_0022e774. */
+/* Supplied declaration required: statusPanelClose. */
 /* Supplied declaration required: campReleaseRegisteredTouchRegions. */
 /* Supplied declaration required: FUN_0023b45c. */
 extern int uniteNotBusy(void);
@@ -120,11 +120,11 @@ extern int uniteRequestGet(void);
 /* Supplied declaration required: campFusionResultCommand. */
 extern int widgetSubCallIfVisible(int);
 /* Supplied declaration required: FUN_002c39dc. */
-/* Supplied declaration required: FUN_002c7e24. */
-/* Supplied declaration required: FUN_002c8538. */
+/* Supplied declaration required: gameGlobalsGetBlock1390. */
+/* Supplied declaration required: gameGlobalsSetOverlayActive. */
 /* Supplied declaration required: campCecSetObjectValue. */
 /* Supplied declaration required: FUN_002e26c4. */
-/* Supplied declaration required: FUN_002f3bc4. */
+/* Supplied declaration required: uniteBuildResultUnitRecord. */
 /* Supplied declaration required: FUN_002f78a0. */
 /* Supplied declaration required: FUN_00319aec. */
 extern unsigned int flaggedEntryGetValueB(int);
@@ -148,7 +148,7 @@ extern int FUN_0035a094(void);
 extern int FUN_0035db94(void);
 extern int uniteIsPhase26Active(void);
 /* Supplied declaration required: dataTable15Sub0FindEntry. */
-/* Supplied declaration required: FUN_0037c8e4. */
+/* Supplied declaration required: messageBannerInitCounter. */
 /* Supplied declaration required: FUN_0037e1b0. */
 /* Supplied declaration required: FUN_0038800c. */
 /* Supplied declaration required: messageRestoreBanner. */
@@ -213,8 +213,8 @@ void FUN_003dc628(void)
     gameFlagSetValue(0x458, 1, 1);
     sysPlaySe(0x52);
     FUN_0037e1b0((int)*(char *)(temp_v9 + 0xb8),1);
-    FUN_002c8538(1);
-    FUN_00215bd0();
+    gameGlobalsSetOverlayActive(1);
+    unitStatusResetSpriteState();
   }
   temp_v5 = uniteStateIsDone();
   if (((temp_v5 == 0) && (temp_v5 = gameFlagIsSet(0x459), temp_v5 == 0)) &&
@@ -381,7 +381,7 @@ void FUN_003dc628(void)
         FUN_0026f7f0();
         temp_v7 = FUN_0034919c();
         if (temp_v7 == 0) {
-          FUN_0037c8e4(1,0);
+          messageBannerInitCounter(1,0);
           messageRestoreBanner();
           FUN_002f78a0(temp_v9);
         }
@@ -389,7 +389,7 @@ void FUN_003dc628(void)
       if ((((temp_v5 == 0x3a || temp_v5 == 0x3b) || (temp_v5 == 0x3c || temp_v5 == 0x3d)) ||
           ((temp_v5 == 0x3e || temp_v5 == 0x3f) || temp_v5 == 0x40)) &&
          (temp_v5 = FUN_0034919c(), temp_v5 == 0)) {
-        FUN_0037c8e4(1,0);
+        messageBannerInitCounter(1,0);
         messageRestoreBanner();
         FUN_002f78a0(temp_v9);
       }
@@ -461,7 +461,7 @@ LAB_003dcd84:
     if (*(char *)(temp_v9 + 0xb7) != '\0') {
       *(char *)(temp_v9 + 0xb9) = temp_v0;
     }
-    FUN_002c7e24();
+    gameGlobalsGetBlock1390();
     temp_v5 = FUN_0035db94();
     if (temp_v5 < 0) {
       campSetSpriteAnimationPreset(2,4,0xffffffff,0);
@@ -538,7 +538,7 @@ LAB_003dcd84:
       if (temp_v7 == 0) {
         if ((*(char *)(temp_v9 + 0xb7) != '\0') && ('\x02' >= *(char *)(temp_v9 + 0xb9))) {
           temp_v5 = FUN_002a73f8();
-          if (((temp_v5 != 0) && (temp_v5 = FUN_0023b3d0(), temp_v5 != 0)) &&
+          if (((temp_v5 != 0) && (temp_v5 = gameStateIsNotTransitioning(), temp_v5 != 0)) &&
              (temp_v5 = FUN_0022e750(), temp_v5 != 0)) {
             FUN_0034c940((int)*(char *)(temp_v9 + 0xb9));
             campSetSpriteAnimationPreset(2,3,0xffffffff,0);
@@ -726,7 +726,7 @@ LAB_003dcd84:
                   campCecEditReset();
                   temp_v8 = FUN_0034919c();
                   if (temp_v8 == 0) {
-                    FUN_0037c8e4(1,0);
+                    messageBannerInitCounter(1,0);
                     messageRestoreBanner();
                     FUN_002f78a0(temp_v9);
                   }
@@ -738,7 +738,7 @@ LAB_003dcd84:
                   FUN_0026f7f0();
                   temp_v8 = FUN_0034919c();
                   if (temp_v8 == 0) {
-                    FUN_0037c8e4(1,0);
+                    messageBannerInitCounter(1,0);
                     messageRestoreBanner();
                     FUN_002f78a0(temp_v9);
                   }
@@ -787,7 +787,7 @@ LAB_003dcd84:
               while (-1 < temp_v3) {
                 if ((temp_v3 == '\x03') ||
                    (puVar10 = &temp_v16,
-                   FUN_002f3bc4(&temp_v16,(int)*(char *)(temp_v9 + 0xb9),
+                   uniteBuildResultUnitRecord(&temp_v16,(int)*(char *)(temp_v9 + 0xb9),
                                 (int)*(char *)(temp_v9 + 0xb8)), puVar10 != (unsigned int *)0x0))
                 goto LAB_003dda0c;
                 temp_v3 = *(char *)(temp_v9 + 0xb9) - '\x01';
@@ -813,7 +813,7 @@ LAB_003dda0c:
                 }
                 while ((temp_v3 != '\x03' &&
                        (puVar10 = &temp_v16,
-                       FUN_002f3bc4(&temp_v16,(int)*(char *)(temp_v9 + 0xb9),
+                       uniteBuildResultUnitRecord(&temp_v16,(int)*(char *)(temp_v9 + 0xb9),
                                     (int)*(char *)(temp_v9 + 0xb8)), puVar10 == (unsigned int *)0x0))) {
                   temp_v3 = *(char *)(temp_v9 + 0xb9) + '\x01';
                   *(char *)(temp_v9 + 0xb9) = temp_v3;
@@ -871,7 +871,7 @@ LAB_003dda0c:
                 padQueryLogicalKey(6,1);
                 if (((temp_v5 == 0) || (temp_v13)) || (temp_v15)) {
                   temp_v5 = temp_v9 + 0x40;
-                  FUN_00228b04(temp_v5,1);
+                  gridNavigationHandleConfirm(temp_v5,1);
                   if (temp_v5 != 0 || temp_v13) {
                     temp_v2 = listCursorGetRowOfChildIfUnblocked(temp_v9 + 0x40);
                     *(unsigned char *)(*(char *)(temp_v9 + 0xa4) + temp_v18) = temp_v2;
@@ -893,7 +893,7 @@ LAB_003dda0c:
                   }
                   while ((temp_v4 != '\x03' &&
                          (puVar10 = &temp_v16,
-                         FUN_002f3bc4(&temp_v16,(int)*(char *)(temp_v9 + 0xb9),
+                         uniteBuildResultUnitRecord(&temp_v16,(int)*(char *)(temp_v9 + 0xb9),
                                       (int)*(char *)(temp_v9 + 0xb8)), puVar10 == (unsigned int *)0x0))) {
                     temp_v4 = *(char *)(temp_v9 + 0xb9) + '\x01';
                     *(char *)(temp_v9 + 0xb9) = temp_v4;
@@ -909,7 +909,7 @@ LAB_003dda0c:
               }
               else {
                 temp_v5 = temp_v9 + 0x40;
-                FUN_00228b04(temp_v5,1);
+                gridNavigationHandleConfirm(temp_v5,1);
                 if (temp_v5 != 0 || temp_v13) {
                   temp_v2 = listCursorGetRowOfChildIfUnblocked(temp_v9 + 0x40);
                   *(unsigned char *)(*(char *)(temp_v9 + 0xa4) + temp_v18) = temp_v2;
@@ -930,7 +930,7 @@ LAB_003dda0c:
               while (-1 < temp_v4) {
                 if ((temp_v4 == '\x03') ||
                    (puVar10 = &temp_v16,
-                   FUN_002f3bc4(&temp_v16,(int)*(char *)(temp_v9 + 0xb9),
+                   uniteBuildResultUnitRecord(&temp_v16,(int)*(char *)(temp_v9 + 0xb9),
                                 (int)*(char *)(temp_v9 + 0xb8)), puVar10 != (unsigned int *)0x0))
                 goto LAB_003ddbfc;
                 temp_v4 = *(char *)(temp_v9 + 0xb9) - '\x01';
@@ -945,7 +945,7 @@ LAB_003ddbfc:
           }
           else {
             temp_v5 = temp_v9 + 0x40;
-            FUN_00228b04(temp_v5,1);
+            gridNavigationHandleConfirm(temp_v5,1);
             if (temp_v5 != 0 || temp_v13) {
               temp_v2 = listCursorGetRowOfChildIfUnblocked(temp_v9 + 0x40);
               *(unsigned char *)(*(char *)(temp_v9 + 0xa4) + temp_v18) = temp_v2;
@@ -967,7 +967,7 @@ LAB_003ddd08:
     return;
   }
   if (temp_v20 == 0) {
-    if ((!temp_v13) || (temp_v5 = FUN_0023b3d0(), temp_v5 != 0)) {
+    if ((!temp_v13) || (temp_v5 = gameStateIsNotTransitioning(), temp_v5 != 0)) {
       if (*(char *)(temp_v9 + 0xb9) == '\x03') {
         if (temp_v0 == '\x03') {
           return;
@@ -984,7 +984,7 @@ LAB_003ddd08:
         }
         FUN_0033449c(0);
         FUN_0037e1b0(0xffffffff,1);
-        FUN_0022e774();
+        statusPanelClose();
         return;
       }
       if ((*(char *)(temp_v9 + 0xb9) != temp_v0) && (temp_v0 == '\x03')) {
@@ -998,11 +998,11 @@ LAB_003ddd08:
           FUN_002a7b74();
           sysPlaySe(0x52);
           FUN_0037e1b0((int)*(char *)(temp_v9 + 0xb8),1);
-          FUN_002c8538(1);
-          FUN_00215bd0();
+          gameGlobalsSetOverlayActive(1);
+          unitStatusResetSpriteState();
         }
       }
-      temp_v5 = FUN_0023b3d0();
+      temp_v5 = gameStateIsNotTransitioning();
       if (temp_v5 == 0) {
         return;
       }
@@ -1013,7 +1013,7 @@ LAB_003ddd08:
       if (temp_v5 != 0) {
         return;
       }
-      FUN_002f3bc4(&temp_v16,(int)*(char *)(temp_v9 + 0xb9),(int)*(char *)(temp_v9 + 0xb8));
+      uniteBuildResultUnitRecord(&temp_v16,(int)*(char *)(temp_v9 + 0xb9),(int)*(char *)(temp_v9 + 0xb8));
       if (puVar12 == (unsigned int *)0x0) {
         return;
       }
@@ -1041,7 +1041,7 @@ LAB_003ddd08:
     FUN_0033449c(0);
     FUN_0037e1b0(0xffffffff,1);
   }
-  FUN_0022e774();
+  statusPanelClose();
   FUN_0023b45c(0);
   return;
 }

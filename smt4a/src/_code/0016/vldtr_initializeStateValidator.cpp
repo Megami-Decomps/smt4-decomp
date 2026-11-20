@@ -10,7 +10,7 @@ typedef struct StateValidator {
 } StateValidator;
 
 void FUN_00178bc8(u8 *member);
-void FUN_0017909c(u8 *member);
+void gxStateValidatorResetDefaults(u8 *member);
 void FUN_0017cbb4(void);
 void FUN_00195ae4(u8 *member);
 extern StateValidator *DAT_00589188;
@@ -22,7 +22,7 @@ u32 vldtr_initializeStateValidator(StateValidator *validator)
     FUN_0017cbb4();
     FUN_00178bc8(DAT_00589188->member04);
     FUN_00195ae4(DAT_00589188->member08);
-    FUN_0017909c(DAT_00589188->member0C);
+    gxStateValidatorResetDefaults(DAT_00589188->member0C);
     return 0;
 }
 

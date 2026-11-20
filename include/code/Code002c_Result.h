@@ -6,6 +6,6 @@
 extern "C" {
 
 /* Acquires another reference of the srv: service, or opens it on the first use. */
-nn::Result FUN_002c1398();
+nn::Result srvInitialize();
 
 } /* extern "C" */

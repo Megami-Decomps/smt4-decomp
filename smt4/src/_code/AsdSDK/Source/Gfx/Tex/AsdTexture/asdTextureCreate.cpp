@@ -27,7 +27,7 @@ AsdTexture *asdTextureCreate(s32 shared)
     }
     memClear(tex, 0x48);
     tex->target = ASDTEXTURE_TARGET_2D;
-    tex->unk08 = 0x10000;
+    tex->heap = 0x10000;
     tex->unk38 = 2;
     tex->unk3c = 0;
     tex->unk40 = 0;

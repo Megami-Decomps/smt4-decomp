@@ -23,7 +23,7 @@ void FUN_0033a780(BattleActionHistoryState *state);
 void btlTalkBustUpDestroy(void);
 void jobStopIfValidB(BtlMainState *state);
 void jobStopIfValidA(BtlMainState *state);
-void FUN_001e1874(BtlMainState *state);
+void btlUiSessionDestroy(BtlMainState *state);
 void eventCommandDispatchPendingCleanup(void);
 u32 gameFlagIsSet(u32 flag);
 u32 FUN_002ef6b8(s32 kind, u32 arg);
@@ -47,7 +47,7 @@ s32 FUN_0023f194(BtlEndTask *task)
             btlTalkBustUpDestroy();
             jobStopIfValidB(state);
             jobStopIfValidA(state);
-            FUN_001e1874(state);
+            btlUiSessionDestroy(state);
             if (g_btlMain != NULL)
                 eventCommandDispatchPendingCleanup();
             if (!(task->flags & 1)) {

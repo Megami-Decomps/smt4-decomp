@@ -1,0 +1,11 @@
+#include "shard/GameGlobals.h"
+
+extern "C" {
+
+/* Reports whether the game's active-state word is clear. */
+bool gameGlobalsStateIsIdle(void)
+{
+    return g_gameGlobals.data->activeState == 0;
+}
+
+} /* extern "C" */

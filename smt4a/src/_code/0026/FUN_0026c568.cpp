@@ -16,7 +16,7 @@ int floatInterpolateOverDuration(void);
 typedef int romwright_code(...);
 extern int g_aocSystem; /* 0x570280 */
 
-extern int FUN_00162ea4(void);
+extern int eventIsSkipping(void);
 extern int jobGetWork(void);
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: uiSpriteReplaceTextureEntry. */
@@ -44,7 +44,7 @@ unsigned int FUN_0026c568(void)
   
   temp_v0 = jobGetWork();
   temp_v1 = 0;
-  if ((*(char *)(temp_v0 + 0x7c) != '\0') && (temp_v1 = FUN_00162ea4(), temp_v1 == 0)) {
+  if ((*(char *)(temp_v0 + 0x7c) != '\0') && (temp_v1 = eventIsSkipping(), temp_v1 == 0)) {
     temp_v1 = aocRunByName(g_aocSystem,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14),1)
     ;
     if (temp_v1 != 0) {

@@ -8,9 +8,9 @@ int FUN_0011b468(...);
 int FUN_0011b498(unsigned int, unsigned int, int, int);
 int mathCopyIdentityMatrix(...);
 int FUN_002bbf8c(void);
-int FUN_002c1e30(...);
-int FUN_002c1edc(...);
-int FUN_002c2044(int, int);
+int stereoCameraSetPerspective(...);
+int cameraMatrixCacheSetLookAt(...);
+int cameraMatrixCacheReset(int, int);
 int asdOperatorNew(void);
 int VectorUnsignedToFloat(unsigned int, int);
 int nn_math_ARMv6_MTX44PivotC_FAST(int, int);
@@ -36,9 +36,9 @@ extern unsigned int FUN_0011b588(void);
 /* Supplied declaration required: FUN_002bbf8c. */
 extern unsigned int asdGxPresetsGetHeightByKind(unsigned int);
 extern unsigned int asdGxPresetsGetByKind(unsigned int);
-/* Supplied declaration required: FUN_002c1e30. */
-/* Supplied declaration required: FUN_002c1edc. */
-/* Supplied declaration required: FUN_002c2044. */
+/* Supplied declaration required: stereoCameraSetPerspective. */
+/* Supplied declaration required: cameraMatrixCacheSetLookAt. */
+/* Supplied declaration required: cameraMatrixCacheReset. */
 /* Supplied declaration required: asdOperatorNew. */
 extern unsigned int asdLoadFileSync(char *, unsigned int *, unsigned int, unsigned int);
 /* Supplied declaration required: nn_math_ARMv6_MTX44PivotC_FAST. */
@@ -116,13 +116,13 @@ void FUN_0010f144(int param_1)
   temp_v11 = temp_v5;
   temp_v12 = temp_v5;
   temp_v13 = temp_v5;
-  FUN_002c2044(temp_v1,1);
-  FUN_002c1edc(temp_v1,&temp_v6,&temp_v11,&temp_v8);
-  FUN_002c1e30(temp_v1,1);
+  cameraMatrixCacheReset(temp_v1,1);
+  cameraMatrixCacheSetLookAt(temp_v1,&temp_v6,&temp_v11,&temp_v8);
+  stereoCameraSetPerspective(temp_v1,1);
   temp_v1 = param_1 + 0xc04;
-  FUN_002c2044(temp_v1,1);
-  FUN_002c1edc(temp_v1,&temp_v6,&temp_v11,&temp_v8);
-  FUN_002c1e30(temp_v1,1);
+  cameraMatrixCacheReset(temp_v1,1);
+  cameraMatrixCacheSetLookAt(temp_v1,&temp_v6,&temp_v11,&temp_v8);
+  stereoCameraSetPerspective(temp_v1,1);
   mathCopyIdentityMatrix(param_1 + 0x5b4);
   temp_v4 = 0;
   do {

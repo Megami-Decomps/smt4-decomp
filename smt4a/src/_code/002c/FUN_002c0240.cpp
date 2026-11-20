@@ -32,7 +32,7 @@ s32 uiSpriteAdvanceAnimation(void *sprite, f32 speed);
 s32 padQueryLogicalKey(u32 input, u32 mode);
 s32 padButtonIsPressed(u32 button);
 u32 gameDataBlocksGetWord27E90();
-void FUN_00359974(s32 index, u32 a, u32 b, u32 c);
+void entryTableResetAndInit(s32 index, u32 a, u32 b, u32 c);
 }
 
 // Drive the ranking screen's open, script, confirmation, and close transitions.
@@ -70,7 +70,7 @@ extern "C" s32 FUN_002c0240()
     case 3:
         if (!padQueryLogicalKey(0, 1) && !padButtonIsPressed(1))
             return 0;
-        FUN_00359974(0, 100 - gameDataBlocksGetWord27E90() % 100, ~0u, 0);
+        entryTableResetAndInit(0, 100 - gameDataBlocksGetWord27E90() % 100, ~0u, 0);
         scrScriptProcessStartEntry(work->process, 32);
         sysPlaySe(160);
         nextState = 5;

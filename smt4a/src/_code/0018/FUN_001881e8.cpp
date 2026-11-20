@@ -10,9 +10,9 @@ extern "C" {
 extern const char DAT_0052607c[];
 void memClearWords(void *destination, u32 size);
 u32 FUN_0019f30c(AsdMdlNode *node, const char *name, RotationQuaternion *rotation);
-void FUN_001b4eb8(void *effect, const EffectAttachmentPosition *position);
-void FUN_001acb48(void *effect, const RotationQuaternion *rotation);
-void FUN_001ac8ec(void *effect, f32 scale);
+void skelNodePoseChain(void *effect, const EffectAttachmentPosition *position);
+void effectTimelinePartApplyRotation(void *effect, const RotationQuaternion *rotation);
+void effectParticleEmitterSetAdvance(void *effect, f32 scale);
 void effectNodeUpdateTransform(void *effect);
 
 // Place each effect at its named model joint, with conjugate rotation and model scale.
@@ -39,15 +39,15 @@ void FUN_001881e8(AsdMdlObject *model, NamedEffectAttachment *attachments)
                 position.x = jointPosition.x;
                 position.y = jointPosition.y;
                 position.z = jointPosition.z;
-                FUN_001b4eb8(effect, &position);
+                skelNodePoseChain(effect, &position);
                 FUN_0019f30c(node, name, &rotation);
                 inverse.x = -rotation.x;
                 inverse.y = -rotation.y;
                 inverse.z = -rotation.z;
                 inverse.w = rotation.w;
-                FUN_001acb48(effect, &inverse);
+                effectTimelinePartApplyRotation(effect, &inverse);
                 const NodeScaleView *scaledNode = reinterpret_cast<const NodeScaleView *>(node);
-                FUN_001ac8ec(effect, scaledNode->scale);
+                effectParticleEmitterSetAdvance(effect, scaledNode->scale);
                 effectNodeUpdateTransform(effect);
             }
         }

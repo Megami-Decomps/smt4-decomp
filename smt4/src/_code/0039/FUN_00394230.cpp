@@ -12,7 +12,7 @@ struct AsyncRequest {
 };
 
 extern "C" {
-s32 FUN_002c40f8(s32 *index, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
+s32 svcWaitSynchronizationN(s32 *index, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
 s32 FUN_002b5820(u32 *handle, u32 resetType);
 s32 FUN_0023793c(void);
 s32 FUN_00351c58(void);
@@ -33,7 +33,7 @@ u32 FUN_00394230(AsyncRequest *request, s32 *result, u32 *error)
     if (request->started != 0) {
         s32 index;
         u32 handle = request->handle;
-        s32 waited = FUN_002c40f8(&index, &handle, 1, 0, 0);
+        s32 waited = svcWaitSynchronizationN(&index, &handle, 1, 0, 0);
         bool failed = nnResultIsFailure(waited);
         if (failed) {
             resultHandleFailure(waited, failed);

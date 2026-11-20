@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_001a6d00(u8 *buffer, s32 entry, s32 data);
+void aocTextureNodeLoad(u8 *buffer, s32 entry, s32 data);
 void asdTextureEntryApply(s32 entry);
 void optionalWorkGetValue(void);
 void asdTextureSelectHeap(s32 entry, u32 arg);
@@ -24,7 +24,7 @@ s32 aocLoadTextureNode(u32 a, u32 b, u32 c, u32 d)
         id = packageFindFileByTypeAndId(a, id, c, buffer);
         if ((id != 0) && (entry = asdTMTexTableGetNode(b, c), entry != 0)) {
             optionalWorkGetValue();
-            FUN_001a6d00(buffer, entry, id);
+            aocTextureNodeLoad(buffer, entry, id);
             asdTextureSelectHeap(entry, d);
             asdTextureEntryApply(entry);
             return entry;

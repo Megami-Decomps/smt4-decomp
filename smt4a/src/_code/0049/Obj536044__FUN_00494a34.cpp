@@ -30,7 +30,7 @@ void buttonHelpSetText(s32 a, u32 color);
 s32 scrRunOpcodesStub(u32 script);
 void scrScriptProcessStartEntry(u32 script, u32 entry);
 void panelSetTarget(s32 offset, s32 frame);
-void FUN_0037c8e4(s32 a, s32 b);
+void messageBannerInitCounter(s32 a, s32 b);
 void FUN_0049a5b4(ShopMain *shop);
 u32 FUN_0049a9a8(void);
 s32 gameFlagIsSet(u32 flag);
@@ -84,7 +84,7 @@ void _ZN9Obj53604412FUN_00494a34Ev(ShopMain *shop)
             sysPlaySe(0xA0);
             return;
         }
-        FUN_0037c8e4(1, 0);
+        messageBannerInitCounter(1, 0);
         panelSetTarget(0, 0);
         shop->previousState = shop->state;
         shop->state = 5;
@@ -106,7 +106,7 @@ void _ZN9Obj53604412FUN_00494a34Ev(ShopMain *shop)
     } else if (shop->step != 3) {
         return;
     }
-    FUN_0037c8e4(1, 0);
+    messageBannerInitCounter(1, 0);
     panelSetTarget(0, 0);
     if (shopHasEntries()) {
         shop->previousState = shop->state;

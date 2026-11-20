@@ -6,7 +6,7 @@
 extern "C" {
 
 int drawTextAtRelativePosition(...);
-int FUN_00230d84(int, int, int, int, int);
+int uiDrawBottomRightOffset(int, int, int, int, int);
 void gxSetClippedBottomScreenScissor(int, int, int, int);
 int FUN_00231bcc(...);
 int nkmEnemyFindById(void);
@@ -32,7 +32,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: drawTextAtRelativePosition. */
-/* Supplied declaration required: FUN_00230d84. */
+/* Supplied declaration required: uiDrawBottomRightOffset. */
 /* Supplied declaration required: FUN_00231bcc. */
 extern int textMeasureOnLayer(unsigned int, unsigned int);
 /* Supplied declaration required: nkmEnemyFindById. */
@@ -85,9 +85,9 @@ void FUN_003aa044(int param_1,int param_2,int param_3,unsigned int param_4)
   temp_v3 = (int)*(short *)(temp_v3 + 10);
   if (param_3 != 0) {
     efctSetSpeed();
-    FUN_00230d84(param_1 + 200,0x103a,temp_v11,temp_v3,temp_v10);
-    FUN_00230d84(param_1 + 200,0x103b,temp_v11,temp_v3,temp_v10);
-    FUN_00230d84(param_1 + 200,0x103c,temp_v11,temp_v3,temp_v10);
+    uiDrawBottomRightOffset(param_1 + 200,0x103a,temp_v11,temp_v3,temp_v10);
+    uiDrawBottomRightOffset(param_1 + 200,0x103b,temp_v11,temp_v3,temp_v10);
+    uiDrawBottomRightOffset(param_1 + 200,0x103c,temp_v11,temp_v3,temp_v10);
     efctSetSpeed();
     FUN_00231bcc(param_1 + 200,0x103d,temp_v11,temp_v3,temp_v10,1);
     FUN_00231bcc(param_1 + 200,0x103e,temp_v11,temp_v3,temp_v10,1);

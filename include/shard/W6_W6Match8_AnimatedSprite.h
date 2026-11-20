@@ -40,7 +40,7 @@ typedef char SpriteDrawOriginLayoutCheck[
 extern "C" {
 void spriteDrawAnimationUnplaced(SpriteDrawOwner *owner, s32 index, const SpriteDrawVector3 *position,
                   u32 flags, s32 filter, f32 time, f32 scale);
-void FUN_003fd140(SpriteDrawOwner *owner, s32 index, const SpriteDrawVector3 *position,
+void spriteAnimationPlayAtTime(SpriteDrawOwner *owner, s32 index, const SpriteDrawVector3 *position,
                   u32 flags, SpriteDrawOptions options, f32 time, f32 scale);
 void FUN_004ff058(SpriteDrawOwner *owner, s32 key, const SpriteDrawVector3 *position,
                   u32 flags, s32 filter, f32 scale);

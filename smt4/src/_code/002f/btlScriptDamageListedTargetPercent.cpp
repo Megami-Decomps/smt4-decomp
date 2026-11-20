@@ -8,7 +8,7 @@
 #include "battle/btlScript.h"
 
 extern "C" {
-void FUN_0027df30(s32 mode, BtlEntry *unit, BtlActionRecord *records, s32 target,
+void btlQueueSkillReflectActions(s32 mode, BtlEntry *unit, BtlActionRecord *records, s32 target,
                   s32 hp, s32 mp, u32 color, u32 flags, s32 first, s32 second,
                   s32 kind, s32 third, s32 fourth);
 void btlQueueKeyedScalarReflectAction(s32 mode, BtlEntry *unit, u32 effect, s32 first, s32 second, s32 third, s32 fourth);
@@ -24,7 +24,7 @@ u32 btlScriptDamageListedTargetPercent(void)
     s32 hp = target->data.maxHp * percent / 100;
     if (hp == 0)
         hp = -1;
-    FUN_0027df30(0, unit, &btlGetMainState()->actions[targetId], 0,
+    btlQueueSkillReflectActions(0, unit, &btlGetMainState()->actions[targetId], 0,
                  hp, -1, ~0u, flags, 0, 0, 9, 0, 0);
     btlQueueKeyedScalarReflectAction(0, unit, 0x10001c1, 0, 0, 0, 0);
     return 1;

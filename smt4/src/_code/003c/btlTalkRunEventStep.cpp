@@ -33,7 +33,7 @@ struct BattleEventStep {
 };
 
 extern "C" {
-extern void *DAT_00435d18;
+extern void *g_btlAux;
 extern void *g_btlActionReflect;
 
 
@@ -60,14 +60,14 @@ s32 btlTalkRunEventStep(BattleEventStep *step)
     case 1:
         switch (step->loadStage) {
         case 0:
-            if (btlEventAreResourcesReady(DAT_00435d18) == 0) {
+            if (btlEventAreResourcesReady(g_btlAux) == 0) {
                 return 0;
             }
-            FUN_003dbe68(DAT_00435d18);
+            FUN_003dbe68(g_btlAux);
             step->loadStage = 1;
             // Continue polling the next loading stage immediately.
         case 1:
-            if (FUN_003dcc34(DAT_00435d18) == 0) {
+            if (FUN_003dcc34(g_btlAux) == 0) {
                 return 0;
             }
             step->loadStage = 2;

@@ -4,7 +4,7 @@
 
 extern "C" {
 MapJumpRequest *gameBlockGetArea27E98(void);
-void FUN_004731d8(void);
+void gameSaveBlockRebuild27E98(void);
 void gameStateSetJumpRequest(s32, s32, s32, f32, f32, f32, f32, f32);
 /* armcc copy helper, called by an opaque name (config alias): the call keeps the dead store retail has */
 void ARM_common_memcpy4_6_call(MapJumpDestination *, const MapJumpDestination *);
@@ -36,7 +36,7 @@ extern "C" void FUN_004b9118(MapJumpTransition *work)
         work->flags |= 0x10;
         break;
     }
-    FUN_004731d8();
+    gameSaveBlockRebuild27E98();
     work->state = 5;
     work->substate = 0;
 }

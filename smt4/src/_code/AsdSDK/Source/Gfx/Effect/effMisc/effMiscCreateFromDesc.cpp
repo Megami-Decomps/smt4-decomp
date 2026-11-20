@@ -1,8 +1,10 @@
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
-extern const char DAT_00410204[]; /* __FILE__ */
+extern const char g_effMiscHeaderSourceFileName[]; /* "...\Effect\./effMisc.h": __FILE__ of the header's allocator */
 
 EffMiscObject *effMiscCreate(u32 kind, void *params);
 void *resourceResolveHeaderPointer(EffMiscDesc *desc);
@@ -10,32 +12,34 @@ u32 *resourceResolveDataPointer(EffMiscDesc *desc);
 void *sysGetTableWord(u32 id);
 void *textureCreateFromImage(u32 *resource);
 void *asdEffectTextureCreate(u32 *resource);
-void *memAlloc(int, int, int, int size, int align, int);
 void rt_memclr(void *block, s32 size);
 
 extern EffMiscKind g_effMiscKinds[];
 
+/* Allocates a zeroed shared-resource record of the given type holding one reference
+ * (effMisc.h line 450: the header's inline allocator). */
 static __inline EffMiscShared *newShared(u32 type, u32 size)
 {
-    asdDebugTrace(DAT_00410204, 450);
-    EffMiscShared *shared = (EffMiscShared *)memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
+    asdDebugTrace(g_effMiscHeaderSourceFileName, 450);
+    EffMiscShared *shared = (EffMiscShared *)memAlloc(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, size, 0x10, 1);
     rt_memclr(shared, size);
     shared->type = type;
     shared->refCount = 1;
     return shared;
 }
 
+/* Creates the resource a shared record of `type` holds and attaches the record to `obj`. */
 static __inline void effMiscAttachShared(EffMiscObject *obj, u32 type, u32 *resource)
 {
     EffMiscShared *shared = newShared(type, sizeof(EffMiscShared));
     switch (type) {
-    case 1:
+    case EFF_MISC_SHARED_TEXTURE_FILE:
         shared->resource = textureCreateFromImage(resource);
         break;
-    case 9:
+    case EFF_MISC_SHARED_EFFECT_TEXTURE:
         shared->resource = asdEffectTextureCreate(resource);
         break;
-    case 4:
+    case EFF_MISC_SHARED_TEXTURE_ID:
         shared->resource = sysGetTableWord(*resource & 0xffff);
         break;
     }

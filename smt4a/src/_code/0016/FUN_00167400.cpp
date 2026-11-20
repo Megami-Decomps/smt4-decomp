@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match2_QuerySlots.h"
 
 extern "C" {
-extern QuerySlot DAT_0061978c[4];
+extern QuerySlot g_soundObjectTable[4];
 
 /* Clears the pending flag of an unprotected slot; returns whether it did. */
 static __inline u32 querySlotClearPending(QuerySlot* slot)
@@ -19,7 +19,7 @@ u32 FUN_00167400()
 {
     u32 changed = 0;
     for (s32 index = 0; index < 4; ++index) {
-        if (querySlotClearPending(querySlotAt(DAT_0061978c, index))) {
+        if (querySlotClearPending(querySlotAt(g_soundObjectTable, index))) {
             changed = 1;
         }
     }

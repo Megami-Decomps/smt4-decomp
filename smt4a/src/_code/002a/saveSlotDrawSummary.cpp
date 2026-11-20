@@ -17,8 +17,8 @@ void texDrawCompositeSprite(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 d
 void FUN_00169a1c(u32 image, s32 x, s32 y, s32 depth);
 u32 FUN_0036fcd0(void *unit, u32 mode);
 void drawSetColorFromRGBA8(u32 color);
-void FUN_00180310(s32 layer, s32 x, s32 y, s32 z, s32 scale, s32 depth, const char *format, ...);
-void FUN_002e1b64(u32 location, s32 x, s32 y, s32 depth);
+void statRowDrawValueImpl(s32 layer, s32 x, s32 y, s32 z, s32 scale, s32 depth, const char *format, ...);
+void digitsDrawPaddedNumber(u32 location, s32 x, s32 y, s32 depth);
 
 /* Draw a save-slot summary, including portraits and the elapsed-play-time fields. */
 void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplayRecord *record,
@@ -70,7 +70,7 @@ void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplay
         FUN_00169a1c(portrait->model, position->x + x, position->y + y, 0x67);
     }
     if (record->secondaryPortrait != 0) {
-        void *unit = reinterpret_cast<void *>(FUN_0019acdc(record->secondaryPortrait, 0));
+        void *unit = reinterpret_cast<void *>(unitMapIdToCategory(record->secondaryPortrait, 0));
         u16 id = FUN_0036fcd0(unit, 0);
         const NkmBaseRecordA *portrait = nkmBaseGetRecord(dataTable10FindValue(id));
         position = asdTMTexTableEntryAt(0x2E, 0x100);
@@ -81,22 +81,22 @@ void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplay
     drawSetColorFromRGBA8(textColor);
     sprintf(text, "%d", record->level);
     position = asdTMTexTableEntryAt(0x2E, 0x74);
-    FUN_00180310(0, position->x + x, position->y + y, 0, 5, 0x6A, text);
+    statRowDrawValueImpl(0, position->x + x, position->y + y, 0, 5, 0x6A, text);
     drawSetColorFromRGBA8(0xB9D7D700);
     u32 hours = record->playSeconds / 3600;
     u32 remainder = record->playSeconds % 3600;
     sprintf(time, "%02d", remainder % 60);
     position = asdTMTexTableEntryAt(0x2E, 0x7C);
-    FUN_00180310(0, position->x + x, position->y + y, 0, 5, 0x67, time);
+    statRowDrawValueImpl(0, position->x + x, position->y + y, 0, 5, 0x67, time);
     sprintf(time, "%c", ':');
     position = asdTMTexTableEntryAt(0x2E, 0x79);
-    FUN_00180310(0, position->x + x, position->y + y, 0, 5, 0x67, time);
+    statRowDrawValueImpl(0, position->x + x, position->y + y, 0, 5, 0x67, time);
     sprintf(time, "%02d", remainder / 60);
     position = asdTMTexTableEntryAt(0x2E, 0x7E);
-    FUN_00180310(0, position->x + x, position->y + y, 0, 5, 0x67, time);
+    statRowDrawValueImpl(0, position->x + x, position->y + y, 0, 5, 0x67, time);
     sprintf(time, "%c", ':');
     position = asdTMTexTableEntryAt(0x2E, 0x7A);
-    FUN_00180310(0, position->x + x, position->y + y, 0, 5, 0x67, time);
+    statRowDrawValueImpl(0, position->x + x, position->y + y, 0, 5, 0x67, time);
     s32 index = 0;
     for (s32 place = 4; place >= 1; ++index, --place) {
         u32 digit = saveSlotDecimalDigit(hours, (u8)place);
@@ -108,9 +108,9 @@ void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplay
     }
     time[index] = '\0';
     position = asdTMTexTableEntryAt(0x2E, 0x82);
-    FUN_00180310(0, position->x + x, position->y + y, 0, 5, 0x67, time);
+    statRowDrawValueImpl(0, position->x + x, position->y + y, 0, 5, 0x67, time);
     position = asdTMTexTableEntryAt(0x2E, 0x89);
-    FUN_002e1b64(record->location, position->x + x, position->y + y, 0x67);
+    digitsDrawPaddedNumber(record->location, position->x + x, position->y + y, 0x67);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
 }

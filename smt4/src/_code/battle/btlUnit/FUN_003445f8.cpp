@@ -11,7 +11,7 @@ int transitionConfigureAndReset(int, unsigned int, int);
 int FUN_0023cd08(...);
 int FUN_00256898(int, unsigned int);
 int btlReflectQueueKind34(int, unsigned int);
-int FUN_002630e0(...);
+int cameraProjectToScreen(...);
 int FUN_003d64dc(...);
 int FUN_003d6b7c(...);
 int FUN_003d710c(...);
@@ -46,7 +46,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_00256898. */
 /* Supplied declaration required: btlReflectQueueKind34. */
 extern int FUN_00256940(int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002630e0. */
+/* Supplied declaration required: cameraProjectToScreen. */
 extern unsigned int asdCameraGetSavedRenderPairs(void);
 /* Supplied declaration required: FUN_003d64dc. */
 /* Supplied declaration required: FUN_003d6b7c. */
@@ -182,7 +182,7 @@ LAB_00344904:
     temp_v11[0] = in_s0;
     temp_v12 = in_s2;
     temp_v4 = asdCameraGetSavedRenderPairs();
-    FUN_002630e0(temp_v11,0,temp_v4);
+    cameraProjectToScreen(temp_v11,0,temp_v4);
     temp_v5 = reinterpret_cast<int>(g_btlMain);
     temp_v6 = (temp_v11[0] - 200.0f) * 0.006666667f;
     if (temp_v6 < 0.0f) {
@@ -330,7 +330,7 @@ LAB_00344904:
       temp_v11[0] = in_s0;
       temp_v12 = in_s2;
       temp_v4 = asdCameraGetSavedRenderPairs();
-      FUN_002630e0(temp_v11,0,temp_v4);
+      cameraProjectToScreen(temp_v11,0,temp_v4);
       temp_v6 = (temp_v11[0] - 200.0f) * 0.006666667f;
       if (temp_v6 < 0.0f) {
         temp_v6 = -temp_v6;

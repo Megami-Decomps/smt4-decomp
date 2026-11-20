@@ -6,7 +6,7 @@
 
 extern "C" {
 f32 scriptReadStackValueAsFloat(u32 index);
-s32 FUN_00162ea4(void);
+s32 eventIsSkipping(void);
 
 // Create a tracked request for the selected event task at the script's float arguments 1-2 with
 // scale argument 3, when task creation is permitted.
@@ -17,11 +17,11 @@ u32 scrCommStartSpatialEventTaskAtXY(void)
     f32 y = scriptReadStackValueAsFloat(2);
     f32 scale = scriptReadStackValueAsFloat(3);
     EventTaskRequest *request = NULL;
-    if (FUN_00162ea4() == 0) {
+    if (eventIsSkipping() == 0) {
         asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\event\\eventCommand.cpp", 1612);
         request = static_cast<EventTaskRequest *>(
             asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(EventTaskRequest), 1));
-        request->task = FUN_0031ba34(kind, &request->active, x, y, 0.0f, scale, 0, 1);
+        request->task = spatialEffectTaskCreate(kind, &request->active, x, y, 0.0f, scale, 0, 1);
     }
     scrSetResult(reinterpret_cast<s32>(request));
     return 1;

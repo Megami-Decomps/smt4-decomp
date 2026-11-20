@@ -32,7 +32,7 @@ void FUN_004bdce0(Obj25C *owner, s32 x, s32 y, f32 alpha)
                 labelAlpha = dimAlpha;
             }
             char text[64];
-            sprintf(text, s_labelFormat, reinterpret_cast<const char *>(FUN_00180114(record->label.nameId)));
+            sprintf(text, s_labelFormat, reinterpret_cast<const char *>(table01RecordLookupForContent(record->label.nameId)));
             TextureTableEntryIV *placement = asdTMTexTableEntryAt(0x11, visible + 0xAE);
             s32 width = fontMeasureLineAdvance(text, 1);
             s32 offset = (placement->placement->width - width) / 2;

@@ -73,7 +73,7 @@ void statusDownDrawSkillRow(s32 x, s32 y, u32 skill, s32 rowId, s32 player, s32 
     }
     if (work->track.state == 0xB || work->track.state == 0xE) {
         /* Picking a skill to replace: the picked row and the last row stay lit. */
-        if (work->selection == cursor || (s32)FUN_0029ee54(list) - 1 == cursor) {
+        if (work->selection == cursor || (s32)gridNavigationGetItemCount(list) - 1 == cursor) {
             color = COLOR_GREEN;
         } else {
             color = COLOR_GRAY;
@@ -117,7 +117,7 @@ void statusDownDrawSkillRow(s32 x, s32 y, u32 skill, s32 rowId, s32 player, s32 
     } else {
         texDrawTableEntryAtStoredOrigin(2, STATUS_SPRITES, 0x423, row->x + x, row->y + y, 0xC4);
         if (work->selectedEntry < 0) {
-            cost = FUN_0029a9d4(skill, 1);
+            cost = skillGetDiscountedCost(skill, 1);
         } else if (FUN_0029ac94() != 6) {
             cost = appGetRemainingCapacity(skill);
         } else {

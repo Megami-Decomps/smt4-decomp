@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
+int svcWaitSynchronizationN(unsigned char *, int *, int, int, unsigned int, unsigned int);
 int resultHandleFailure(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002c40f8. */
+/* Supplied declaration required: svcWaitSynchronizationN. */
 /* Supplied declaration required: resultHandleFailure. */
 
 
@@ -27,7 +27,7 @@ void nn_os_Thread_FinalizeImpl(unsigned int *param_1)
   if (*(char *)(param_1 + 1) == '\0') {
     uStack_10 = *param_1;
     puVar1 = temp_v0;
-    FUN_002c40f8(puVar1,&uStack_10,1,0,0xffffffff,0xffffffff);
+    svcWaitSynchronizationN(puVar1,&uStack_10,1,0,0xffffffff,0xffffffff);
     if ((int)puVar1 < 0) {
       resultHandleFailure();
     }

@@ -4,16 +4,23 @@
 #include "common.h"
 #include <stddef.h>
 
+/* Which of the two BGM request channels is the current one. */
 struct BgmChannelSelection {
     u32 unk00;
-    s32 selected;
+    s32 selected;   /* index of the current channel: 0 or 1 */
+};
+
+/* BgmRequestChannel.flags bits whose meaning is known. */
+enum {
+    BGM_CHANNEL_PLAYING = 0x2,
+    BGM_CHANNEL_FADE_OUT = 0x8   /* fading out over fadeFrames */
 };
 
 struct BgmRequestChannel {
     union {
         u8 unk00[8];
         struct {
-            u32 unk00;
+            u32 index; // 0x00: this channel's index, which becomes BgmChannelSelection.selected
             u32 param; // 0x04
         } play;
     };
@@ -52,7 +59,7 @@ u16 rosterGetLeaderId(void);
 extern "C" {
 #endif
 
-void FUN_00290d5c(u8 value);
+void buttonHelpWorkSetPreset(u8 value);
 
 #ifdef __cplusplus
 }

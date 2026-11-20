@@ -10,7 +10,7 @@ extern "C" {
 int textDrawString(...);
 int texDrawCompositeSprite(int, int, int, int, int, int);
 int efctSetSpeed(void);
-int FUN_00180310(...);
+int statRowDrawValueImpl(...);
 int uiDrawItemOrStatusIcon(...);
 int nkmBaseGetRecord(void);
 int FUN_00185e84(...);
@@ -19,7 +19,7 @@ int unitRecordBuild(...);
 int uiDrawListScrollBar(...);
 int FUN_0037c988(...);
 int drawInteractiveEightRowList(...);
-int FUN_004bcaa8(...);
+int statusCollectUnlearnedSkillsAboveLevel(...);
 int getUnlockedSlotCount(...);
 int VectorSignedToFloat(...);
 
@@ -44,12 +44,12 @@ typedef struct {
 
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned int FUN_0014bf3c(short, unsigned int);
+extern unsigned int demonGetRaceLabel(short, unsigned int);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
-extern unsigned int FUN_00180114(short);
-/* Supplied declaration required: FUN_00180310. */
+extern unsigned int table01RecordLookupForContent(short);
+/* Supplied declaration required: statRowDrawValueImpl. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: nkmBaseGetRecord. */
@@ -61,7 +61,7 @@ extern int uniteGetWork(void);
 extern int uiSearchPrimary(int);
 /* Supplied declaration required: FUN_0037c988. */
 /* Supplied declaration required: drawInteractiveEightRowList. */
-/* Supplied declaration required: FUN_004bcaa8. */
+/* Supplied declaration required: statusCollectUnlearnedSkillsAboveLevel. */
 /* Supplied declaration required: getUnlockedSlotCount. */
 
 
@@ -141,25 +141,25 @@ void FUN_002a968c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
       nkmBaseGetRecord();
     }
     temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x4d));
-    temp_v2 = FUN_00180114(*psVar3);
+    temp_v2 = table01RecordLookupForContent(*psVar3);
     sprintf((char *)temp_v7,"%s",temp_v2);
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0xffffffff,temp_v7);
     temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x4e));
-    temp_v2 = FUN_0014bf3c(*psVar3,0);
+    temp_v2 = demonGetRaceLabel(*psVar3,0);
     sprintf((char *)temp_v7,"%s",temp_v2);
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0x57d8ffff,temp_v7);
     if ((unsigned short)psVar3[3] >= 100) {
       temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x265));
-      FUN_00180310(0,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,1,3,0x8d,
+      statRowDrawValueImpl(0,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,1,3,0x8d,
                    "%d",psVar3[3]);
     }
     else {
       temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x51));
-      FUN_00180310(0,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,1,2,0x8d,
+      statRowDrawValueImpl(0,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,1,2,0x8d,
                    "%d",psVar3[3]);
     }
     temp_v5 = 0;
@@ -186,7 +186,7 @@ void FUN_002a968c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
     temp_v8[5] = 0;
     temp_v8[6] = 0;
     temp_v8[7] = 0;
-    FUN_004bcaa8(*psVar3,psVar3[3],temp_v0 + 0x8b60,temp_v8,0);
+    statusCollectUnlearnedSkillsAboveLevel(*psVar3,psVar3[3],temp_v0 + 0x8b60,temp_v8,0);
     temp_v1 = 0;
     do {
       if (temp_v8[temp_v1] == 0) break;

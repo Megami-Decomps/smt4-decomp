@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00147914(u32 a, u32 b);
+int heapFlushDataCache(u32 a, u32 b);
 
 typedef struct Block {
     /* 0x00 */ u8 unk00[8];
@@ -25,7 +25,7 @@ typedef struct Cursor {
 void heapCloseOpenBlock(Cursor *cursor, Pool *pool)
 {
     cursor->block->size = (((pool->base + pool->top) - (int)cursor->block) - 0x18U) >> 3;
-    FUN_00147914(pool->base, pool->top);
+    heapFlushDataCache(pool->base, pool->top);
     pool->flags = pool->flags | 4;
     pool->top = cursor->next;
     cursor->block = NULL;

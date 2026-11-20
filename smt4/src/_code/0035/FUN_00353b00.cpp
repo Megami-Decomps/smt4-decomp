@@ -44,7 +44,7 @@ extern unsigned long long libc_strtoul(unsigned int, unsigned int, unsigned int)
 extern unsigned int *FUN_00239f84(unsigned char *, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00239fc4. */
 extern int legacyResourceIdRemap(unsigned int *);
-extern unsigned int FUN_002b5c44(void);
+extern unsigned int tokenTableGet(void);
 /* Supplied declaration required: clearWord. */
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern int FUN_002c55b4(void);
@@ -188,7 +188,7 @@ void FUN_00353b00(unsigned int *param_1,unsigned int *param_2,unsigned int *para
         temp_v15[1] = (unsigned int)puStack_54;
         return;
       }
-      temp_v10 = FUN_002b5c44();
+      temp_v10 = tokenTableGet();
       clearWord(&temp_v9);
       temp_v8 = &DAT_004c743c;
       temp_v7 = param_5;

@@ -10,8 +10,8 @@ int drawTextAtSnappedRectangle(...);
 int efctSetSpeed(void);
 int gameGetPlayerData(...);
 int layoutFindTableEntry(...);
-int FUN_0047fc38(void);
-int FUN_0049339c(...);
+int equipmentIsFullyUpgraded(void);
+int uiDrawCompositeSpriteAtRectCorner(...);
 int drawTextAtRelativePosition(...);
 int uiDrawTableTextureAtRectCorner(...);
 int FUN_0049368c(...);
@@ -39,9 +39,9 @@ typedef struct {
 /* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: layoutFindTableEntry. */
 extern unsigned int FUN_001ba3d0(unsigned int);
-/* Supplied declaration required: FUN_0047fc38. */
+/* Supplied declaration required: equipmentIsFullyUpgraded. */
 extern int equipmentHasPositiveUpgrade(unsigned int);
-/* Supplied declaration required: FUN_0049339c. */
+/* Supplied declaration required: uiDrawCompositeSpriteAtRectCorner. */
 /* Supplied declaration required: drawTextAtRelativePosition. */
 /* Supplied declaration required: uiDrawTableTextureAtRectCorner. */
 /* Supplied declaration required: FUN_0049368c. */
@@ -141,7 +141,7 @@ void FUN_00495b04(int param_1,int param_2,int param_3,unsigned short *param_4)
       else {
         temp_v8 = layoutFindTableEntry(param_1 + 0x3a4,0x98);
       }
-      FUN_0049339c(param_1 + 0x3a4,5,*(short *)(temp_v8 + 8) + temp_v16,*(short *)(temp_v8 + 10) + temp_v7,
+      uiDrawCompositeSpriteAtRectCorner(param_1 + 0x3a4,5,*(short *)(temp_v8 + 8) + temp_v16,*(short *)(temp_v8 + 10) + temp_v7,
                    temp_v14);
     }
     if ((param_4[1] & 2) != 0) {
@@ -151,7 +151,7 @@ void FUN_00495b04(int param_1,int param_2,int param_3,unsigned short *param_4)
       else {
         temp_v8 = layoutFindTableEntry(param_1 + 0x3a4,0x9f);
       }
-      FUN_0049339c(param_1 + 0x3a4,6,*(short *)(temp_v8 + 8) + temp_v16,*(short *)(temp_v8 + 10) + temp_v7,
+      uiDrawCompositeSpriteAtRectCorner(param_1 + 0x3a4,6,*(short *)(temp_v8 + 8) + temp_v16,*(short *)(temp_v8 + 10) + temp_v7,
                    temp_v14);
     }
   }
@@ -207,7 +207,7 @@ void FUN_00495b04(int param_1,int param_2,int param_3,unsigned short *param_4)
   temp_v8 = equipmentHasPositiveUpgrade(temp_v6);
   if (temp_v8 != 0) {
     temp_v12 = temp_v6;
-    FUN_0047fc38();
+    equipmentIsFullyUpgraded();
     if (temp_v12 == 0) {
       temp_v15 = 0x8400ff;
     }

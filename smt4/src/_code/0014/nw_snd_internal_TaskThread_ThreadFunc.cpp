@@ -1,17 +1,17 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `nw_snd_internal_TaskThread_ThreadFunc` (_code @ 0x140664, 0x8c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "classes/Obj421aa4Requests.h"
 #include "romwright_types.h"
 
 extern "C" {
 
 int FUN_00140e78(void);
-int FUN_002bae7c(void);
 int FUN_002bb020(void);
 int nw_snd_internal_TaskManager_ExecuteTask(void);
 int nw_snd_internal_TaskManager_WaitTask(void);
 
 /* Supplied declaration required: FUN_00140e78. */
-/* Supplied declaration required: FUN_002bae7c. */
+/* Supplied declaration required: soundStreamCommandManagerGetInstance. */
 /* Supplied declaration required: FUN_002bb020. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -37,7 +37,7 @@ void nw_snd_internal_TaskThread_ThreadFunc(int param_1)
     FUN_002bb020();
     nw_snd_internal_TaskManager_ExecuteTask();
     nn_os_CriticalSection_Leave(param_1 + 8);
-    FUN_002bae7c();
+    soundStreamCommandManagerGetInstance();
     FUN_00140e78();
     temp_v0 = *(char *)(param_1 + 0x14);
   }

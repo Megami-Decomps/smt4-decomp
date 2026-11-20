@@ -19,7 +19,7 @@ struct SpecialRecord {
 extern "C" {
 
 SpecialRecord *dataTable2fSub1GetRecord(s32 id);
-void FUN_00295a18(s32 value, s32 mode);
+void saveFlagSetOrAddCounter(s32 value, s32 mode);
 s32 FUN_00298dc8(u16 quest);
 s32 table1bOr1cGetRecordValue(u16 quest);
 s32 FUN_00287874(u16 quest);
@@ -39,7 +39,7 @@ s32 FUN_001a9104(void)
     u32 firstKindDone = 0;
     if (g_gameState.statusActive != 0) {
         g_gameState.unk0B0 = dataTable2fSub1GetRecord(block->savePoint.tableId)->value;
-        FUN_00295a18(g_gameState.unk0B0, 1);
+        saveFlagSetOrAddCounter(g_gameState.unk0B0, 1);
         g_gameState.statusActive = 0;
         return 4;
     }
@@ -184,7 +184,7 @@ s32 FUN_001a9104(void)
             }
         }
     }
-    if (result == 0 && FUN_00287800() != 0) {
+    if (result == 0 && supportUnitProgressIsComplete() != 0) {
         result = 3;
     }
     block->secondCompletedItem = 0;

@@ -14,7 +14,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00113b7c. */
-extern int FUN_002eb5f4(void);
+extern int watcherGetActiveContext(void);
 extern int wordRefsDiffer_002ee774(unsigned int **, unsigned int *);
 extern int FUN_002ee978(unsigned int *);
 
@@ -33,10 +33,10 @@ void FUN_002fd49c(int param_1,unsigned int param_2)
   
   iStack_1c = param_1;
   temp_v5 = param_2;
-  temp_v0 = FUN_002eb5f4();
-  if (((temp_v0 != 0) && (temp_v0 = FUN_002eb5f4(), *(int *)(temp_v0 + 0xd0) != 0)) &&
+  temp_v0 = watcherGetActiveContext();
+  if (((temp_v0 != 0) && (temp_v0 = watcherGetActiveContext(), *(int *)(temp_v0 + 0xd0) != 0)) &&
      (*(char *)(param_1 + 0x1b0) == '\0')) {
-    temp_v0 = FUN_002eb5f4();
+    temp_v0 = watcherGetActiveContext();
     temp_v2 = 0;
     temp_v0 = *(int *)(temp_v0 + 0xd0);
     temp_v3 = *(unsigned int **)(param_1 + 0x1a0);

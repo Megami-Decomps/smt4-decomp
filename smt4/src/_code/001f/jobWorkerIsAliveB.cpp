@@ -10,10 +10,10 @@ typedef struct Worker {
 } Worker;
 
 /* 1 when the worker exists and its job is still alive (or it was never asked to stop). */
-extern Worker *DAT_0044e110;
+extern Worker *g_soundTestWork;
 u32 jobWorkerIsAliveB(void)
 {
-    Worker *worker = DAT_0044e110;
+    Worker *worker = g_soundTestWork;
 
     if (worker != NULL && (jobFind(worker->job) != 0 || worker->stopRequested == 0)) {
         return 1;

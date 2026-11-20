@@ -17,13 +17,13 @@ struct BattleTransitionSave {
     /* 0x24B29 */ u8 count;
 };
 extern "C" {
-extern void *DAT_00435d18;
+extern void *g_btlAux;
 extern const char DAT_00400a08[];
 extern const char DAT_004009cc[];
 extern const char DAT_004009e8[];
 extern const char DAT_0040098c[];
 extern const char DAT_004009ac[];
-void FUN_003db258(void *context, const char *name);
+void effectRequestByName(void *context, const char *name);
 s32 btlPollVersionedEffectTexture(void *context);
 s32 FUN_003357c0(BattleTransitionSelector *selector);
 BattleTransitionSave *gameDataBlocksGetSaveData();
@@ -41,14 +41,14 @@ extern "C" s32 FUN_00335950(BattleTransitionSelector *selector)
 {
     switch (selector->state) {
     case 0:
-        FUN_003db258(DAT_00435d18, DAT_00400a08);
+        effectRequestByName(g_btlAux, DAT_00400a08);
         selector->state = 1;
-        if (!btlPollVersionedEffectTexture(DAT_00435d18)) return 0;
+        if (!btlPollVersionedEffectTexture(g_btlAux)) return 0;
         selector->step = 0;
         selector->state = 2;
         return FUN_003357c0(selector);
     case 1:
-        if (!btlPollVersionedEffectTexture(DAT_00435d18)) return 0;
+        if (!btlPollVersionedEffectTexture(g_btlAux)) return 0;
         selector->step = 0;
         selector->state = 2;
         return FUN_003357c0(selector);

@@ -49,7 +49,7 @@ extern signed char DAT_0049f941; /* 0x49f941 */
 /* Supplied declaration required: pairCopy. */
 /* Supplied declaration required: FUN_00231dec. */
 extern unsigned int lmapSceneGetObj(void);
-extern int FUN_00288f78(int);
+extern int mapClassifyPlaceState(int);
 extern int flagBitIsSet(unsigned int);
 extern int FUN_002b8694(void);
 /* Supplied declaration required: gxResetColorQuadToWhite. */
@@ -328,7 +328,7 @@ LAB_0039f450:
       }
       if ((((*(char *)(param_1 + 0xa85) != '\0') && (*(char *)(param_1 + 0xa84) == '\0')) ||
           ((g_gameState.mapId == 0x13 && ((DAT_0049f920 == 6 || DAT_0049f920 == 7) || DAT_0049f920 == 8))
-          )) || (temp_v4 = FUN_00288f78(g_gameState.mapId), temp_v4 == 3)) {
+          )) || (temp_v4 = mapClassifyPlaceState(g_gameState.mapId), temp_v4 == 3)) {
         FUN_0039ba2c(param_1);
         return;
       }

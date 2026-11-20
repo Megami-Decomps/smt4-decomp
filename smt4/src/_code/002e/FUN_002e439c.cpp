@@ -3,7 +3,7 @@
 
 extern "C" {
 
-s32 FUN_001eb82c(void);
+s32 buttonHelpIsStateActive(void);
 s32 objectPartRunUnlessLocked(PlayScenePart *part);
 void battleSelectButtonHelpPreset(bool enable);
 void playSceneSetState(PlayScene *scene, s32 state, s32 arg);
@@ -19,7 +19,7 @@ void FUN_002e439c(PlayScene *scene)
             scene->slotCount++;
         }
     }
-    if (FUN_001eb82c() == 0) {
+    if (buttonHelpIsStateActive() == 0) {
         battleSelectButtonHelpPreset(objectPartRunUnlessLocked(&scene->parts[scene->unk305C]) == 0);
     }
     playSceneSetState(scene, 14, 1);

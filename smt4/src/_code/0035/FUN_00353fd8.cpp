@@ -44,7 +44,7 @@ extern union romwright_storage_DAT_004c7074_4_4 DAT_004c7074; /* 0x4c7074 */
 /* Supplied declaration required: FUN_00239ed0. */
 extern int FUN_00239f84(unsigned char *, unsigned char *, unsigned int);
 extern int tokenResolveAddress(unsigned int, int *, int);
-extern unsigned int FUN_002b5c44(void);
+extern unsigned int tokenTableGet(void);
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern int FUN_002c55b4(void);
 extern int appletIsExitRequested(void);
@@ -64,7 +64,7 @@ void FUN_00353fd8(unsigned int param_1,int *param_2)
   temp_v1 = *param_2;
   FUN_00239e14(temp_v1,2);
   if (-1 < temp_v1) {
-    temp_v2 = FUN_002b5c44();
+    temp_v2 = tokenTableGet();
     temp_v1 = tokenResolveAddress(temp_v2,&temp_v3,*param_2);
     temp_v0 = temp_v3;
     if (-1 < temp_v1) {

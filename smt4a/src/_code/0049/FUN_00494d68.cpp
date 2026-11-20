@@ -10,8 +10,8 @@ int drawTextAtSnappedRectangle(...);
 int efctSetSpeed(void);
 int layoutFindTableEntry(...);
 int FUN_001ba3d0(...);
-int FUN_0047fc38(void);
-int FUN_0049339c(...);
+int equipmentIsFullyUpgraded(void);
+int uiDrawCompositeSpriteAtRectCorner(...);
 int drawTextAtRelativePosition(...);
 int uiDrawTableTextureAtRectCorner(...);
 int FUN_0049368c(...);
@@ -37,10 +37,10 @@ typedef struct {
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: layoutFindTableEntry. */
 /* Supplied declaration required: FUN_001ba3d0. */
-/* Supplied declaration required: FUN_0047fc38. */
+/* Supplied declaration required: equipmentIsFullyUpgraded. */
 extern int FUN_0047fe44(unsigned int);
 extern int equipmentHasPositiveUpgrade(unsigned int);
-/* Supplied declaration required: FUN_0049339c. */
+/* Supplied declaration required: uiDrawCompositeSpriteAtRectCorner. */
 /* Supplied declaration required: drawTextAtRelativePosition. */
 /* Supplied declaration required: uiDrawTableTextureAtRectCorner. */
 /* Supplied declaration required: FUN_0049368c. */
@@ -141,7 +141,7 @@ void FUN_00494d68(int param_1,int param_2,int param_3,unsigned short *param_4)
       else {
         temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0x98);
       }
-      FUN_0049339c(param_1 + 0x3a4,5,*(short *)(temp_v4 + 8) + temp_v11,*(short *)(temp_v4 + 10) + temp_v3,
+      uiDrawCompositeSpriteAtRectCorner(param_1 + 0x3a4,5,*(short *)(temp_v4 + 8) + temp_v11,*(short *)(temp_v4 + 10) + temp_v3,
                    temp_v9);
     }
     if ((param_4[1] & 2) != 0) {
@@ -154,10 +154,10 @@ void FUN_00494d68(int param_1,int param_2,int param_3,unsigned short *param_4)
       temp_v8 = *(short *)(temp_v4 + 8) + temp_v11;
       temp_v4 = *(short *)(temp_v4 + 10) + temp_v3;
       if (*(int *)(param_1 + 0xb40) != 8) {
-        FUN_0049339c(param_1 + 0x3a4,6,temp_v8,temp_v4,temp_v9);
+        uiDrawCompositeSpriteAtRectCorner(param_1 + 0x3a4,6,temp_v8,temp_v4,temp_v9);
       }
       else {
-        FUN_0049339c(param_1 + 0x3a4,7,temp_v8,temp_v4,temp_v9);
+        uiDrawCompositeSpriteAtRectCorner(param_1 + 0x3a4,7,temp_v8,temp_v4,temp_v9);
       }
     }
   }
@@ -192,7 +192,7 @@ LAB_00495274:
           temp_v4 = equipmentHasPositiveUpgrade(temp_v12);
           if (temp_v4 != 0) {
             temp_v7 = temp_v12;
-            FUN_0047fc38();
+            equipmentIsFullyUpgraded();
             if (temp_v7 == 0) {
               temp_v10 = 0x8400ff;
             }
@@ -228,7 +228,7 @@ LAB_00495274:
         temp_v4 = equipmentHasPositiveUpgrade(temp_v12);
         if (temp_v4 != 0) {
           temp_v7 = temp_v12;
-          FUN_0047fc38();
+          equipmentIsFullyUpgraded();
           if (temp_v7 == 0) {
             temp_v10 = 0x8400ff;
           }
@@ -248,7 +248,7 @@ LAB_00495274:
         temp_v4 = equipmentHasPositiveUpgrade(temp_v12);
         if (temp_v4 != 0) {
           temp_v7 = temp_v12;
-          FUN_0047fc38();
+          equipmentIsFullyUpgraded();
           if (temp_v7 == 0) {
             temp_v10 = 0x8400ff;
           }

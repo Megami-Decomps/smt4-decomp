@@ -24,7 +24,7 @@ typedef struct QuestEntry {
 
 extern QuestMenu *g_uiQuest;
 
-extern u32 objectApplyIfUnblocked(QuestCursor *cursor);
+extern u32 gridNavigationGetItemCount(QuestCursor *cursor);
 extern void qsort(void *list, u32 count, u32 size, SortCompare compare);
 extern void arraySortQsort(void *list, u32 count, u32 size, SortCompare compare);
 
@@ -32,10 +32,10 @@ extern int dataTable1bOr1cCompareRecordKeys(const void *, const void *);
 extern int dataTableCompareRecordValues(const void *, const void *);
 extern int FUN_002b2b34(const void *, const void *);
 extern int itemCompareMappedGroupAndKeyDescending(const void *, const void *);
-extern int FUN_002fdc2c(const void *, const void *);
+extern int questCompareByKindGroup(const void *, const void *);
 extern int FUN_003759f0(const void *, const void *);
 extern int entryCompareFlagsCategoryOrder(const void *, const void *);
-extern int FUN_002fdb20(const void *, const void *);
+extern int questCompareForDisplayOrder(const void *, const void *);
 
 /* Sorts the menu's list with the comparison of the selected quest entry's kind (the primary or
  * the alternate one). */
@@ -52,30 +52,30 @@ void uiQuestSortListByEntryKind(s32 mode)
 
         if ((*info & 0x7F) == 0x22) {
             if (primary) {
-                qsort(list, objectApplyIfUnblocked(cursor), 2, dataTable1bOr1cCompareRecordKeys);
+                qsort(list, gridNavigationGetItemCount(cursor), 2, dataTable1bOr1cCompareRecordKeys);
             } else {
-                qsort(list, objectApplyIfUnblocked(cursor), 2, dataTableCompareRecordValues);
+                qsort(list, gridNavigationGetItemCount(cursor), 2, dataTableCompareRecordValues);
             }
         }
         if ((*info & 0x7F) == 0x21) {
             if (primary) {
-                qsort(list, objectApplyIfUnblocked(cursor), 2, FUN_002b2b34);
+                qsort(list, gridNavigationGetItemCount(cursor), 2, FUN_002b2b34);
             } else {
-                qsort(list, objectApplyIfUnblocked(cursor), 2, itemCompareMappedGroupAndKeyDescending);
+                qsort(list, gridNavigationGetItemCount(cursor), 2, itemCompareMappedGroupAndKeyDescending);
             }
         }
         if ((*info & 0x7F) == 0x18) {
             if (primary) {
-                qsort(list, objectApplyIfUnblocked(cursor), 2, FUN_002fdc2c);
+                qsort(list, gridNavigationGetItemCount(cursor), 2, questCompareByKindGroup);
             } else {
-                qsort(list, objectApplyIfUnblocked(cursor), 2, FUN_003759f0);
+                qsort(list, gridNavigationGetItemCount(cursor), 2, FUN_003759f0);
             }
         }
         if ((*info & 0x7F) == 0x19) {
             if (primary) {
-                arraySortQsort(list, objectApplyIfUnblocked(cursor), 2, entryCompareFlagsCategoryOrder);
+                arraySortQsort(list, gridNavigationGetItemCount(cursor), 2, entryCompareFlagsCategoryOrder);
             } else {
-                arraySortQsort(list, objectApplyIfUnblocked(cursor), 2, FUN_002fdb20);
+                arraySortQsort(list, gridNavigationGetItemCount(cursor), 2, questCompareForDisplayOrder);
             }
         }
     }

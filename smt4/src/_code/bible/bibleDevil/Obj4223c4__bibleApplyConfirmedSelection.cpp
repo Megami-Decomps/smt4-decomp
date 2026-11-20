@@ -5,13 +5,13 @@
 #include "script/scrScriptProcess.h"
 
 extern "C" {
-extern BibleGlobals DAT_0043d9c8;
+extern BibleGlobals g_bibleDevilCallbackContext;
 s32 messageMainGetChoiceResult();
 s32 flaggedValueHolderGetTotal(void *cursor);
 void FUN_003a7fec(BibleScreen *screen, u32 id);
 s32 flaggedEntryGetValueByState(void *cursor);
 s32 FUN_0029e924(void *cursor);
-void FUN_0022d434(BibleScreen *screen);
+void bibleDevilListRefresh(BibleScreen *screen);
 void panelSetScrollPosition(void *cursor, s32 row, s32 scroll);
 s32 buttonHelpGetMode();
 void buttonHelpSetPreset(s32 mode);
@@ -55,10 +55,10 @@ void Obj4223c4::bibleApplyConfirmedSelection()
         ConfirmationEntry *entries = list->entries;
         s32 selected = flaggedValueHolderGetTotal(screen->cursor);
         FUN_003a7fec(screen, entries[selected].id);
-        DAT_0043d9c8.mode = -1;
+        g_bibleDevilCallbackContext.mode = -1;
         s32 scroll = flaggedEntryGetValueByState(screen->cursor);
         s32 row = FUN_0029e924(screen->cursor);
-        FUN_0022d434(screen);
+        bibleDevilListRefresh(screen);
         if (row > 0)
             --row;
         else if (scroll != 0 && reinterpret_cast<ConfirmationCursorView *>(screen->cursor)->count <= scroll + row)
@@ -66,14 +66,14 @@ void Obj4223c4::bibleApplyConfirmedSelection()
         panelSetScrollPosition(screen->cursor, row, scroll);
     }
     buttonHelpSetPreset(buttonHelpGetMode());
-    FUN_002a0cc8(0);
+    gameGlobalsSetSubScreenActive(0);
     if (list->entries[0].count <= 0) {
         if (list->keepPanel == 0)
             messageDismissNumericBanner(1);
         buttonHelpSetText(0, 0x323232FF);
         beginStatusPanelClose();
         FUN_00233240(reinterpret_cast<ConfirmationPanelView *>(screen)->panel, 1);
-        FUN_002a0cc8(1);
+        gameGlobalsSetSubScreenActive(1);
         screen->state = 11;
         screen->stateArg = 0;
         FUN_00232848();

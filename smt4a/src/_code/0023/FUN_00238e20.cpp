@@ -8,7 +8,7 @@ void particleRingEmitterUpdate();
 void *taskCreate(void (*entry)(), u32, u32, u32, u32, u32, u32, u32, u32);
 void sysMemClear(void *destination, u32 bytes);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
-void FUN_0034a16c(const PositionedLayoutData *layout,
+void effScalarKeyFindNextDistinct(const PositionedLayoutData *layout,
                   void *firstPair, void *secondPair,
                   void *origin, void *dimensions);
 
@@ -29,7 +29,7 @@ InitializedLayoutTaskA *FUN_00238e20(
         task->parameter6 = parameter6;
         task->state234 = 0xFFFFFFFFU;
         task->state230 = 0xFFFFFFFFU;
-        FUN_0034a16c(&task->layout,
+        effScalarKeyFindNextDistinct(&task->layout,
                       task->unk000 + 0x28, task->unk000 + 0x30,
                       task->unk000 + 0x0C, task->unk000 + 0x18);
         task->parameter5 = parameter5;

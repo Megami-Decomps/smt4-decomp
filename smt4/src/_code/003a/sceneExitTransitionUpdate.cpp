@@ -4,7 +4,7 @@
 extern "C" {
 void pointConvertToFloat(f32 *position, s32 x, s32 y);
 void FUN_00233240(void *transition, s32 mode);
-void FUN_00297684(void *script);
+void lmapPlayerModelDestroy(void *script);
 void buttonHelpSetText(s32 mode, u32 color);
 void *lmapSceneGetScript(void);
 s32 objSlotsAllEmpty(void *script);
@@ -13,7 +13,7 @@ s32 objSlotsAllEmpty(void *script);
 void sceneExitTransitionUpdate(SceneExitTransition *work)
 {
     if (lmapSceneGetScript() != NULL)
-        FUN_00297684(lmapSceneGetScript());
+        lmapPlayerModelDestroy(lmapSceneGetScript());
 
     switch (work->phase) {
     case 0:

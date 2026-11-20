@@ -13,10 +13,10 @@ s32 unitCompareByPriorityValue(const void *a, const void *b);
 void qsort(void *array, s32 count, s32 elementSize, s32 (*compare)(const void *, const void *));
 s32 FUN_003d10a0(BtlMainState **block, CommandState *state, BtlEntry **units, s32 count, s32 mode);
 void btlEntryGetPassiveSkillIds(BtlEntry *entry, u16 *skills);
-s32 FUN_0029a9d4(u32 id, s32 arg);
+s32 skillGetDiscountedCost(u32 id, s32 arg);
 s32 appGetRemainingCapacity(u32 id);
 s32 FUN_002277d4(BtlMainState **block, CommandState *state, SkillInfo *info, BtlEntry **units, s32 count, s32 a, s32 b);
-s32 FUN_0029e9cc(u32 skillId);
+s32 itemIsCollectedWithRelated(u32 skillId);
 void btlMarkLowestHpUnit(BtlMainState **block);
 
 /* Picks the AI's command: gathers the units that take part, tries the first-choice behaviour, then walks the
@@ -48,7 +48,7 @@ void FUN_003d06e4(BtlMainState **block, CommandState *state)
         if (skills[i] != 0) {
             SkillInfo *info = reinterpret_cast<SkillInfo *>(skillDataFindById(skills[i]));
             if (info != NULL) {
-                s32 cost = (state->entry->flags & 2) != 0 ? FUN_0029a9d4(skills[i], 1) : appGetRemainingCapacity(skills[i]);
+                s32 cost = (state->entry->flags & 2) != 0 ? skillGetDiscountedCost(skills[i], 1) : appGetRemainingCapacity(skills[i]);
                 if (cost <= state->selection->budget) {
                     if (FUN_002277d4(block, state, info, units, count, 1, 0) != 0) {
                         return;
@@ -64,7 +64,7 @@ void FUN_003d06e4(BtlMainState **block, CommandState *state)
         if (skills[i] != 0) {
             SkillInfo *info = reinterpret_cast<SkillInfo *>(skillDataFindById(skills[i]));
             if (info != NULL) {
-                s32 cost = (state->entry->flags & 2) != 0 ? FUN_0029a9d4(skills[i], 1) : appGetRemainingCapacity(skills[i]);
+                s32 cost = (state->entry->flags & 2) != 0 ? skillGetDiscountedCost(skills[i], 1) : appGetRemainingCapacity(skills[i]);
                 if (cost <= state->selection->budget) {
                     if (FUN_002277d4(block, state, info, units, count, 0, 1) != 0) {
                         return;
@@ -77,7 +77,7 @@ void FUN_003d06e4(BtlMainState **block, CommandState *state)
         if (skills[i] != 0) {
             SkillInfo *info = reinterpret_cast<SkillInfo *>(skillDataFindById(skills[i]));
             if (info != NULL) {
-                s32 cost = (state->entry->flags & 2) != 0 ? FUN_0029a9d4(skills[i], 1) : appGetRemainingCapacity(skills[i]);
+                s32 cost = (state->entry->flags & 2) != 0 ? skillGetDiscountedCost(skills[i], 1) : appGetRemainingCapacity(skills[i]);
                 if (cost <= state->selection->budget) {
                     if (FUN_002277d4(block, state, info, units, count, 0, 2) != 0) {
                         return;
@@ -88,7 +88,7 @@ void FUN_003d06e4(BtlMainState **block, CommandState *state)
     }
     for (s32 i = 0; i < count; i++) {
         BtlEntry *unit = units[i];
-        if ((unit->flags & 0x400) != 0 && FUN_0029e9cc(unit->data.id) != 0) {
+        if ((unit->flags & 0x400) != 0 && itemIsCollectedWithRelated(unit->data.id) != 0) {
             state->selection->kind = 6;
             state->selection->value = 0;
             return;

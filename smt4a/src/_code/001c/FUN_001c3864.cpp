@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a364(int *, int, int);
+int svcReleaseSemaphore(int *, int, int);
 int svcSleepThread(unsigned char *, int);
 int FUN_001cc6d0(int *, int *);
 int resultHandleFailure(void);
@@ -14,7 +14,7 @@ typedef int romwright_code(...);
 extern unsigned char LAB_002dc6c0; /* 0x2dc6c0 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_0019a364. */
+/* Supplied declaration required: svcReleaseSemaphore. */
 /* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: FUN_001cc6d0. */
 /* Supplied declaration required: resultHandleFailure. */
@@ -39,7 +39,7 @@ void FUN_001c3864(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
       }
       temp_v0 = *param_1;
       puVar2 = (unsigned int *)&uStack_20;
-      FUN_0019a364(&uStack_20,*piVar3,1);
+      svcReleaseSemaphore(&uStack_20,*piVar3,1);
       if ((int)puVar2 < 0) {
         resultHandleFailure();
       }
@@ -57,7 +57,7 @@ void FUN_001c3864(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
         }
       }
       puVar2 = (unsigned int *)&uStack_20;
-      FUN_0019a364(&uStack_20,*piVar3,1);
+      svcReleaseSemaphore(&uStack_20,*piVar3,1);
       if ((int)puVar2 < 0) {
         resultHandleFailure();
       }

@@ -31,6 +31,6 @@ s32 FUN_003f25e8()
     ScriptUnitForm* form = unit->data->form;
     if (form == NULL)
         return 0;
-    return FUN_0019acdc(form->id, 0) == 3;
+    return unitMapIdToCategory(form->id, 0) == 3;
 }
 }

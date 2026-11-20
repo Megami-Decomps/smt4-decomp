@@ -8,7 +8,7 @@
 
 extern "C" {
 u32 randNextInRange(u32 maximum);
-s32 FUN_0025b4b0(const MapVector *start, const MapVector *end, MapVector *hit);
+s32 mapCollisionRaySegmentTest(const MapVector *start, const MapVector *end, MapVector *hit);
 f32 mathPositionHeadingDegrees(f32 x, f32 y, f32 z, f32 targetX, f32 targetY, f32 targetZ);
 
 u32 FUN_002dfb48(MapEnemyEntry *entry)
@@ -46,7 +46,7 @@ u32 FUN_002dfb48(MapEnemyEntry *entry)
         start.y += 35.0f;
         MapVector end = candidate;
         end.y += 35.0f;
-        if (FUN_0025b4b0(&start, &end, NULL) == -1) {
+        if (mapCollisionRaySegmentTest(&start, &end, NULL) == -1) {
             entry->position.x = candidate.x;
             entry->position.y = candidate.y;
             entry->position.z = candidate.z;

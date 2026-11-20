@@ -12,7 +12,7 @@ struct RenderCtxStacksA {
 extern "C" {
 void cursorResetFromParam(void);
 void asdModelCommandBlockRelease(void);
-void FUN_003c8538(s32 arg);
+void renderStatesSubmitCached(s32 arg);
 extern RenderCtxStacksA *g_renderCtx;
 extern u32 *g_modelCommandBuffer;
 extern s32 g_modelCommandWordCount;
@@ -38,5 +38,5 @@ void Obj464cb0::post0f0107()
     u32 word = renderStackTop(g_renderCtx, 3) & 0xfffff0ff;
     commandQueuePushPair(word | (u32)this, 0xf0107);
     asdModelCommandBlockRelease();
-    FUN_003c8538(1);
+    renderStatesSubmitCached(1);
 }

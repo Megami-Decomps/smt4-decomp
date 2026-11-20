@@ -59,7 +59,7 @@ s32 scrRunOpcodesStub(u32);
 s32 messageMainGetChoiceResult();
 s32 gameRecordCopy(u16, RefreshSummary *);
 void gameDataStoreRecord(u16, const RefreshSummary *);
-void FUN_0022d434(PartyRefresh *);
+void bibleDevilListRefresh(PartyRefresh *);
 void messageDismissNumericBanner(s32);
 void buttonHelpSetText(s32, u32);
 void beginStatusPanelClose();
@@ -101,17 +101,17 @@ void Obj4223c4::partyRefreshCompleteAndUpdateSummaries()
                 gameDataStoreRecord(id, &summary);
             }
         }
-        FUN_0022d434(work);
+        bibleDevilListRefresh(work);
     }
     buttonHelpSetPreset(buttonHelpGetMode());
-    FUN_002a0cc8(0);
+    gameGlobalsSetSubScreenActive(0);
     if (block->count <= 0) {
         if (!block->keepDisplay)
             messageDismissNumericBanner(1);
         buttonHelpSetText(0, 0x323232ff);
         beginStatusPanelClose();
         FUN_00233240(work->control, 1);
-        FUN_002a0cc8(1);
+        gameGlobalsSetSubScreenActive(1);
         step = 11;
         phase = 0;
         FUN_00232848();

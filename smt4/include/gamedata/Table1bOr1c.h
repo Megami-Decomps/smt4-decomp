@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-void FUN_0027db24(u8 value);
+void gameSaveSetBattleResultCode(u8 value);
 
 #ifdef __cplusplus
 }

@@ -9,7 +9,7 @@ extern "C" {
 s32 gameFlagEntryGetBit(u16 id, u32 bit);
 u32 itemDataGetValue(u16 id);
 
-void FUN_00417b70(u16 id);
+void gameFlagUnlockEntryById(u16 id);
 
 /* Unlocks every entry 100..399 whose required level the player has reached. */
 s32 gameUnlockEntriesByLevel(void)
@@ -25,7 +25,7 @@ s32 gameUnlockEntriesByLevel(void)
                 if (flag != 0) {
                     gameFlagSetValue(flag, 1, 1);
                 }
-                FUN_00417b70(id);
+                gameFlagUnlockEntryById(id);
             }
         }
     }

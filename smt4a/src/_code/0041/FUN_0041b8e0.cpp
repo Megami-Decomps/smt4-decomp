@@ -10,7 +10,7 @@ struct TimeSource {
 
 extern "C" {
 void drawSetColorFromRGBA8(u32 color);
-void FUN_00180310(u32 drawContext, s32 x, s32 y, u32 option0, u32 option1, u32 option2, const char *format, ...);
+void statRowDrawValueImpl(u32 drawContext, s32 x, s32 y, u32 option0, u32 option1, u32 option2, const char *format, ...);
 void gxResetColorQuadToWhite(void);
 
 // Draw an elapsed time as hours:minutes:seconds, right-aligned against `position`.
@@ -26,19 +26,19 @@ void FUN_0041b8e0(u32 unused, TimeSource *source, s32 *position)
     s32 x = position[0] + (frame->x + frame->placement->width);
     x -= 7;
     s32 y = position[1] + frame->y;
-    FUN_00180310(0, x, y, 1, 1, 2, "%d", seconds % 10);
+    statRowDrawValueImpl(0, x, y, 1, 1, 2, "%d", seconds % 10);
     x -= 7;
-    FUN_00180310(0, x, y, 1, 1, 2, "%d", seconds / 10);
+    statRowDrawValueImpl(0, x, y, 1, 1, 2, "%d", seconds / 10);
     x -= 4;
-    FUN_00180310(0, x, y, 1, 1, 2, ":");
+    statRowDrawValueImpl(0, x, y, 1, 1, 2, ":");
     x -= 7;
-    FUN_00180310(0, x, y, 1, 1, 2, "%d", minutes % 10);
+    statRowDrawValueImpl(0, x, y, 1, 1, 2, "%d", minutes % 10);
     x -= 7;
-    FUN_00180310(0, x, y, 1, 1, 2, "%d", minutes / 10);
+    statRowDrawValueImpl(0, x, y, 1, 1, 2, "%d", minutes / 10);
     x -= 4;
-    FUN_00180310(0, x, y, 1, 1, 2, ":");
+    statRowDrawValueImpl(0, x, y, 1, 1, 2, ":");
     x -= 28;
-    FUN_00180310(0, x, y, 1, 4, 2, "%d", hours);
+    statRowDrawValueImpl(0, x, y, 1, 4, 2, "%d", hours);
     gxResetColorQuadToWhite();
 }
 

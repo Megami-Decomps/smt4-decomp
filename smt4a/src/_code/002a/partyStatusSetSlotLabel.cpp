@@ -14,7 +14,7 @@ struct PartyStatusView {
 }
 
 extern "C" {
-void FUN_0023f328(void *work, s32 slot, s32 refreshIndex);
+void partyStatusRefreshSlot(void *work, s32 slot, s32 refreshIndex);
 
 // Set the status label of a slot (id and kind), initialising its color from the unit index the first time.
 void partyStatusSetSlotLabel(PartyStatusView *view, s32 slot, u16 id, u8 kind)
@@ -29,7 +29,7 @@ void partyStatusSetSlotLabel(PartyStatusView *view, s32 slot, u16 id, u8 kind)
     view->labelShown[slot] = 1;
     view->labelId[slot] = id;
     view->labelKind[slot] = kind;
-    FUN_0023f328(view, slot, 1);
+    partyStatusRefreshSlot(view, slot, 1);
 }
 
 } /* extern "C" */

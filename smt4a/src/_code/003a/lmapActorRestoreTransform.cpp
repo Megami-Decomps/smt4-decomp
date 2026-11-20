@@ -5,7 +5,7 @@ extern "C" {
 
 extern u32 g_handleRegistry;
 
-s32 FUN_0040ab8c(LmapActorA *actor);
+s32 moriModelContentIsLoaded(LmapActorA *actor);
 void moriModelContentLoadBody(LmapActorA *actor, s32 arg);
 void moriModelUnitStartMaterialAnimation(u32 controller, s32 arg1, s32 arg2, f32 value);
 void handleRegistryRegisterObject(u32 registry, u32 object);
@@ -17,7 +17,7 @@ bool lmapActorRestoreTransform(void)
 {
     u32 controller;
 
-    if (!FUN_0040ab8c(g_lmapScene->actor)) {
+    if (!moriModelContentIsLoaded(g_lmapScene->actor)) {
         return false;
     }
     g_lmapScene->unk24C = 0;

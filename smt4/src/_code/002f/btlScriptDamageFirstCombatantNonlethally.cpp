@@ -7,7 +7,7 @@
 struct ScriptUnit;
 extern "C" {
 s32 scrGetArg(u32 index);
-void FUN_00250720(BtlMainState *battle);
+void btlSlotManagerResetAll(BtlMainState *battle);
 void FUN_002551ac(s32 actor, ScriptUnit *unit, BtlActionRecord *action, s32 mode,
     s32 damage, s32 first, s32 second, s32 hp, s32 maxHp, s32, s32, s32, s32,
     s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
@@ -19,7 +19,7 @@ u32 btlScriptDamageFirstCombatantNonlethally()
 {
     s32 damage = scrGetArg(0);
     ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
-    FUN_00250720(btlGetMainState());
+    btlSlotManagerResetAll(btlGetMainState());
     if (btlGetMainState()->entries[0].data.hp <= damage)
         damage = btlGetMainState()->entries[0].data.hp - 1;
     s32 maxHp = btlGetMainState()->entries[0].data.maxHp;

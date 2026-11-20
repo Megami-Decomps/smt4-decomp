@@ -20,7 +20,7 @@ union ProjectedPoint {
 extern "C" {
 extern ProjectionScratch g_effectProjectionScratch;
 u32 asdCameraGetSavedRenderPairs(void);
-void FUN_002630e0(Vec3f*, s32, u32, const Vec3f*);
+void cameraProjectToScreen(Vec3f*, s32, u32, const Vec3f*);
 void renderGetCameraViewMatrix(Matrix44*);
 
 /* Project the working point and scale a world-space radius by camera distance. */
@@ -33,7 +33,7 @@ f32 screenEffectProjectWorldRadius(f32 radius)
         g_effectProjectionScratch.point.red, g_effectProjectionScratch.point.green, g_effectProjectionScratch.point.blue
     };
     ProjectedPoint projected;
-    FUN_002630e0(&projected.coordinates, 0, camera, &input);
+    cameraProjectToScreen(&projected.coordinates, 0, camera, &input);
     projected.value.alpha = 0.0f;
     const EffectColor screenPoint = projected.value;
     g_vectorScratch.first.color = screenPoint;

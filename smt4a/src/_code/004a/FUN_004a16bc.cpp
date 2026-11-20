@@ -42,14 +42,14 @@ struct QuestMenu {
 extern "C" {
 extern s32 g_animatedPageSelection[];
 s32 inputIsQuestMenuPressed(void);
-s32 FUN_004d0584(void);
+s32 inputConfirmPressed(void);
 s32 questControlsGetCursorRow(QuestControls *controls);
 s32 inputIsQuestConfirmPressed(void);
 s32 inputIsQuestCancelPressed(void);
 s32 gameGetMode(void);
 void FUN_004d0680(QuestMenu *menu);
 const char *dataTable01GetRecordWithAocOverride(u32 id);
-const char *FUN_0014bf3c(u32 id, u32 option);
+const char *demonGetRaceLabel(u32 id, u32 option);
 char *libc_strcpy(char *destination, const char *source);
 void scrScriptProcessStartEntry(u32 job, u32 entry);
 void sendEvent100020E(void);
@@ -67,7 +67,7 @@ void FUN_004a16bc(QuestMenu *menu)
     s32 cancel = 0;
     s32 menuPressed = inputIsQuestMenuPressed();
     if (menu->rowCount > 0) {
-        selected = FUN_004d0584();
+        selected = inputConfirmPressed();
         confirm = inputIsQuestConfirmPressed();
         cancel = inputIsQuestCancelPressed();
         if (selected == 0) {
@@ -84,7 +84,7 @@ void FUN_004a16bc(QuestMenu *menu)
         u32 id = rows[flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(menu->holder))].id;
         libc_strcpy(text, dataTable01GetRecordWithAocOverride(id));
         scrSetStringSlot(8, text);
-        libc_strcpy(text, FUN_0014bf3c(id, 0));
+        libc_strcpy(text, demonGetRaceLabel(id, 0));
         scrSetStringSlot(16, text);
         scrScriptProcessStartEntry(menu->job, 7);
         gameGlobalsSetMenuOpenFlag(1);

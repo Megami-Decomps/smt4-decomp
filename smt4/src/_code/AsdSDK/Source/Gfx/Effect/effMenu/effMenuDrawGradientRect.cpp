@@ -6,7 +6,7 @@
 
 extern "C" {
 extern TitleScene *g_titleScene;
-extern f32 DAT_004724cc[2];
+extern f32 g_effMenuDrawOffset[2];
 s32 renderCtxPackPassFlags(u32 first, u32 second);
 }
 
@@ -24,8 +24,8 @@ extern "C" {
 void effMenuDrawGradientRect(s32 x, s32 y, s32 width, s32 height, u32 firstColor, u32 secondColor)
 {
     f32 depth = 0.0f;
-    s32 pixelX = (s32)((f32)x + DAT_004724cc[0]);
-    s32 pixelY = (s32)((f32)y + DAT_004724cc[1]);
+    s32 pixelX = (s32)((f32)x + g_effMenuDrawOffset[0]);
+    s32 pixelY = (s32)((f32)y + g_effMenuDrawOffset[1]);
     firstColor = menuReverseColorBytes(firstColor);
     secondColor = menuReverseColorBytes(secondColor);
     RenderCtx *context = g_titleScene;

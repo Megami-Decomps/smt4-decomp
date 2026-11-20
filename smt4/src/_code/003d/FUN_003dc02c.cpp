@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00241d58(int);
+int btlSpritePlacementRelease(int);
 
-/* Supplied declaration required: FUN_00241d58. */
+/* Supplied declaration required: btlSpritePlacementRelease. */
 /* Supplied declaration required: btlFindEntryBlockByMemberId. */
 extern int FUN_00336e44(int, int);
 
@@ -34,7 +34,7 @@ void FUN_003dc02c(int param_1)
           temp_v1 = param_1 + temp_v1 * 0x30;
           *(unsigned int *)(temp_v1 + 0x139c) = 0;
           *(unsigned int *)(temp_v1 + 0x1398) = 0xffffffff;
-          FUN_00241d58(temp_v1 + 0x13a0);
+          btlSpritePlacementRelease(temp_v1 + 0x13a0);
           *(unsigned int *)(temp_v1 + 0x13c4) = 0;
           break;
         }

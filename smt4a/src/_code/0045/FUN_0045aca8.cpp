@@ -6,7 +6,7 @@ extern "C" {
 
 int libc_strlen(void);
 
-extern int FUN_001a7a20(int, unsigned int);
+extern int nameTableLookupEntry(int, unsigned int);
 /* Supplied declaration required: libc_strlen. */
 
 
@@ -36,7 +36,7 @@ unsigned int FUN_0045aca8(int *param_1,int param_2,int param_3)
         if (*(short *)(puVar4 + 1) != 0x33) {
           temp_v2 = *puVar4;
           libc_strlen();
-          temp_v3 = FUN_001a7a20(param_3 + 0x74,temp_v2);
+          temp_v3 = nameTableLookupEntry(param_3 + 0x74,temp_v2);
           if (temp_v3 == 0xffff) {
             temp_v1 = 1;
             *(unsigned short *)(*param_1 + temp_v5 * 2) = 0xffff;

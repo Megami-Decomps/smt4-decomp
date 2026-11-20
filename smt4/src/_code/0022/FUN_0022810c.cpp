@@ -13,7 +13,7 @@ typedef struct {
     Entry *entry;       /* 0x1cfc */
 } Owner;
 
-s32 FUN_00293230(void);
+s32 btlScriptUnitIsIncapacitated(void);
 
 /* Returns the owner's entry index, 0 when the battle editor's option bit 33 is set, or -1 when
  * there is no usable entry. */
@@ -23,14 +23,14 @@ s32 FUN_0022810c(Owner *owner, s32 strict)
         return -1;
     }
     btlGetMainState();
-    if (FUN_00293230() != 0) {
+    if (btlScriptUnitIsIncapacitated() != 0) {
         if (btlGetMainState()->editorMask & (2ULL << 32)) {
             return 0;
         }
     }
     if (strict != 0) {
         btlGetMainState();
-        if (FUN_00293230() != 0) {
+        if (btlScriptUnitIsIncapacitated() != 0) {
             return -1;
         }
     }

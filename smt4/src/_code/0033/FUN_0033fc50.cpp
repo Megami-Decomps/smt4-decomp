@@ -2,7 +2,7 @@
 #include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
-s32 FUN_003bc9b8(const StatBlock *unit);
+s32 statUnitSlotIsOccupied(const StatBlock *unit);
 bool slotUnitIsInActiveParty(StatBlock *unit);
 u8 flagWordTestBit(StatBlock *unit, u32 bit);
 void __aeabi_memset4(void *destination, u32 size, s32 value);
@@ -23,7 +23,7 @@ u32 FUN_0033fc50(void)
     }
     for (i = 0; i < count; i++) {
         StatBlock *unit = gameGetUnitRecord(slots[i]);
-        if (unit != NULL && FUN_003bc9b8(unit) != 0 && !slotUnitIsInActiveParty(unit) &&
+        if (unit != NULL && statUnitSlotIsOccupied(unit) != 0 && !slotUnitIsInActiveParty(unit) &&
             flagWordTestBit(unit, 1) == 0 && flagWordTestBit(unit, 10) == 0 &&
             flagWordTestBit(unit, 2) == 0) {
             return 1;

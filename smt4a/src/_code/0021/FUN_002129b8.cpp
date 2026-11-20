@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002039d0(...);
+int effRandomSignedValue(...);
 int FUN_00213d1c(unsigned int *);
 int FUN_00213fe4(unsigned int *);
 int nodeTreeReleaseItem(void);
@@ -25,7 +25,7 @@ typedef struct {
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_002039d0. */
+/* Supplied declaration required: effRandomSignedValue. */
 /* Supplied declaration required: FUN_00213d1c. */
 /* Supplied declaration required: FUN_00213fe4. */
 /* Supplied declaration required: nodeTreeReleaseItem. */
@@ -89,46 +89,46 @@ void FUN_002129b8(unsigned int *param_1)
     if (temp_v1 != '\x01') {
       if (temp_v1 != '\x02') {
         if (temp_v1 == '\x03') {
-          FUN_002039d0(0,param_1[0x57],1);
+          effRandomSignedValue(0,param_1[0x57],1);
           temp_v6 = (float)VectorSignedToFloat(param_1[0x56],(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v7 <= (float)param_1[0x48]) << 0x1d);
           temp_v9 = (in_s0 + temp_v6) * temp_v9 * temp_v9;
           if (!romwright_subpiece_4_1_0(temp_v3 >> 0x1d,0)) {
             temp_v6 = (float)param_1[0xd2] - temp_v9;
             param_1[0xd2] = (unsigned int)temp_v6;
-            FUN_002039d0(1,param_1[0x55]);
+            effRandomSignedValue(1,param_1[0x55]);
             temp_v6 = (temp_v6 + (float)param_1[0xd2]) * temp_v8;
           }
           else {
             temp_v6 = (float)param_1[0xd2] + temp_v9;
             param_1[0xd2] = (unsigned int)temp_v6;
-            FUN_002039d0(0,param_1[0x55],1);
+            effRandomSignedValue(0,param_1[0x55],1);
             temp_v6 = (temp_v6 + (float)param_1[0xd2]) * temp_v8;
           }
           temp_v3 = (temp_v3 & 0xfffffff) | ((unsigned int)(temp_v7 <= (float)param_1[0x49]) << 0x1d);
           if (!romwright_subpiece_4_1_0(temp_v3 >> 0x1d,0)) {
             temp_v5 = (float)param_1[0xd3] - temp_v9;
             param_1[0xd3] = (unsigned int)temp_v5;
-            FUN_002039d0(1,param_1[0x55]);
+            effRandomSignedValue(1,param_1[0x55]);
             temp_v5 = (temp_v5 + (float)param_1[0xd3]) * temp_v8;
           }
           else {
             temp_v5 = (float)param_1[0xd3] + temp_v9;
             param_1[0xd3] = (unsigned int)temp_v5;
-            FUN_002039d0(0,param_1[0x55],1);
+            effRandomSignedValue(0,param_1[0x55],1);
             temp_v5 = (temp_v5 + (float)param_1[0xd3]) * temp_v8;
           }
           temp_v3 = (temp_v3 & 0xfffffff) | ((unsigned int)(temp_v7 <= (float)param_1[0x4a]) << 0x1d);
           if (!romwright_subpiece_4_1_0(temp_v3 >> 0x1d,0)) {
             temp_v9 = (float)param_1[0xd4] - temp_v9;
             param_1[0xd4] = (unsigned int)temp_v9;
-            FUN_002039d0(1,param_1[0x55]);
+            effRandomSignedValue(1,param_1[0x55]);
             temp_v12 = (temp_v9 + (float)param_1[0xd4]) * temp_v8;
           }
           else {
             temp_v9 = (float)param_1[0xd4] + temp_v9;
             param_1[0xd4] = (unsigned int)temp_v9;
-            FUN_002039d0(0,param_1[0x55],1);
+            effRandomSignedValue(0,param_1[0x55],1);
             temp_v12 = (temp_v9 + (float)param_1[0xd4]) * temp_v8;
           }
           temp_v10 = temp_v6 * *(float *)(param_1[0xd5] + 0x14);
@@ -145,11 +145,11 @@ void FUN_002129b8(unsigned int *param_1)
         }
       }
       else {
-        FUN_002039d0(0,param_1[0x57],1);
+        effRandomSignedValue(0,param_1[0x57],1);
         temp_v6 = (float)VectorSignedToFloat(param_1[0x56],(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v9 = (float)param_1[0xd3] + (in_s0 + temp_v6) * temp_v9 * temp_v9;
         param_1[0xd3] = (unsigned int)temp_v9;
-        FUN_002039d0(0,param_1[0x55],1);
+        effRandomSignedValue(0,param_1[0x55],1);
         temp_v10 = (float)param_1[0xd2] * temp_v8 * *(float *)(param_1[0xd5] + 0x14);
         temp_v11 = (temp_v9 + (float)param_1[0xd3]) * temp_v8 * *(float *)(param_1[0xd5] + 0x14);
         temp_v12 = (float)param_1[0xd4] * temp_v8 * *(float *)(param_1[0xd5] + 0x14);
@@ -164,11 +164,11 @@ void FUN_002129b8(unsigned int *param_1)
       }
     }
     else {
-      FUN_002039d0(0,param_1[0x57],1);
+      effRandomSignedValue(0,param_1[0x57],1);
       temp_v6 = (float)VectorSignedToFloat(param_1[0x56],(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v9 = (float)param_1[0xd3] + (in_s0 + temp_v6) * temp_v9 * temp_v9;
       param_1[0xd3] = (unsigned int)temp_v9;
-      FUN_002039d0(0,param_1[0x55],1);
+      effRandomSignedValue(0,param_1[0x55],1);
       temp_v10 = (float)param_1[0xdc] + (float)param_1[0xd2] * temp_v8;
       param_1[0xdc] = (unsigned int)temp_v10;
       temp_v11 = (float)param_1[0xdd] + (temp_v9 + (float)param_1[0xd3]) * temp_v8;

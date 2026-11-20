@@ -3,7 +3,7 @@
 extern "C" {
 void cursorResetFromParam(void);
 void asdModelCommandBlockRelease(void);
-void FUN_00248ae8(s32 arg);
+void renderStatesSubmitCached(s32 arg);
 extern u32 *g_modelCommandBuffer;
 extern s32 g_modelCommandWordCount;
 }
@@ -16,5 +16,5 @@ void Obj464cb0::post0f0105()
     g_modelCommandBuffer[g_modelCommandWordCount + 1] = 0xf0105;
     g_modelCommandWordCount += 2;
     asdModelCommandBlockRelease();
-    FUN_00248ae8(0);
+    renderStatesSubmitCached(0);
 }

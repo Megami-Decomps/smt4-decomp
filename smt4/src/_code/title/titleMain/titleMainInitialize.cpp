@@ -10,8 +10,8 @@ u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, void *owner);
 s32 FUN_001e9990(u32 handle);
 void titleMainDestroy(u32 handle);
-s32 FUN_0020fec0(u32 handle);
-s32 FUN_0021f468(u32 handle);
+s32 titleMainMarkFreeOnEnd(u32 handle);
+s32 titleMainRequestClose(u32 handle);
 s32 FUN_002ca7fc(u32 handle);
 
 // Initialize title animation state and start the update and three draw tasks.
@@ -91,8 +91,8 @@ void titleMainInitialize(const u8 *mode)
         work->firstRun = 0;
     }
     work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TITLE C"), 2, 0, 0, FUN_001e9990, titleMainDestroy, 0);
-    taskCreateDraw(reinterpret_cast<const s8 *>("TITLE UDrawLeft"), 0x76, 0, 0, FUN_0020fec0, NULL, 0, reinterpret_cast<void *>(work->job));
-    taskCreateDraw(reinterpret_cast<const s8 *>("TITLE UDrawRight"), 0xD4, 0, 0, FUN_0021f468, NULL, 0, reinterpret_cast<void *>(work->job));
+    taskCreateDraw(reinterpret_cast<const s8 *>("TITLE UDrawLeft"), 0x76, 0, 0, titleMainMarkFreeOnEnd, NULL, 0, reinterpret_cast<void *>(work->job));
+    taskCreateDraw(reinterpret_cast<const s8 *>("TITLE UDrawRight"), 0xD4, 0, 0, titleMainRequestClose, NULL, 0, reinterpret_cast<void *>(work->job));
     taskCreateDraw(reinterpret_cast<const s8 *>("TITLE D"), 0xE7, 0, 0, FUN_002ca7fc, NULL, 0, reinterpret_cast<void *>(work->job));
 }
 }

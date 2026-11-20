@@ -6,7 +6,7 @@ int aocHandleButtons(int, int);
 int btlEnsureEnemyDrawResources(int, int);
 
 /* Supplied declaration required: aocHandleButtons. */
-extern int FUN_003fce08(int, unsigned int);
+extern int aocResourceStartOnce(int, unsigned int);
 /* Supplied declaration required: btlEnsureEnemyDrawResources. */
 extern int nkdwLoaderParse(int);
 
@@ -38,7 +38,7 @@ unsigned int btlStartEntries(int param_1)
         }
       }
       if ((*(unsigned int *)(temp_v0 + 0x201c) & 2) == 0) {
-        temp_v1 = FUN_003fce08(temp_v3,0);
+        temp_v1 = aocResourceStartOnce(temp_v3,0);
         if (temp_v1 == 0) {
           temp_v4 = 0;
         }

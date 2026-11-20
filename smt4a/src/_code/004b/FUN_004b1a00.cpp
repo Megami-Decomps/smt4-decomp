@@ -13,7 +13,7 @@ extern "C" {
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(...);
-int FUN_00180310(...);
+int statRowDrawValueImpl(...);
 int FUN_00185e84(...);
 int FUN_002685cc(void);
 int listCursorGetRowIfUnblocked(...);
@@ -66,14 +66,14 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00180310. */
+/* Supplied declaration required: statRowDrawValueImpl. */
 /* Supplied declaration required: FUN_00185e84. */
 extern int padGetMappedValue(unsigned short);
 extern int gameGetSlotRecord(int);
 /* Supplied declaration required: FUN_002685cc. */
 extern int recordGetModeForId(int);
 /* Supplied declaration required: listCursorGetRowIfUnblocked. */
-extern int objectApplyIfUnblocked(int);
+extern int gridNavigationGetItemCount(int);
 /* Supplied declaration required: arrayContainsU16. */
 extern int countUnlockedSlots(void);
 extern int FUN_003dfed4(unsigned short, int);
@@ -166,7 +166,7 @@ void FUN_004b1a00(int param_1,int param_2,int param_3)
   texDrawTableEntryAtStoredOrigin(2,0x1d,0xd4,param_2,param_3,0x65);
   texDrawTableEntryAtStoredOrigin(2,0x1d,0xd5,param_2,param_3,0x6a);
   temp_v1 = (int)asdTMTexTableEntryAt(0x1d,0xd6);
-  temp_v2 = (unsigned int)FUN_00180114(*(unsigned short *)(temp_v13 + 0x62));
+  temp_v2 = (unsigned int)table01RecordLookupForContent(*(unsigned short *)(temp_v13 + 0x62));
   sprintf((char *)temp_v12,(const char *)&LAB_004b1dc8,temp_v2);
   VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -179,7 +179,7 @@ void FUN_004b1a00(int param_1,int param_2,int param_3)
   temp_v26 = param_1 + 0x7640;
   if (temp_v20 != 0) {
     temp_v1 = listCursorGetRowIfUnblocked();
-    temp_v3 = objectApplyIfUnblocked(temp_v26);
+    temp_v3 = gridNavigationGetItemCount(temp_v26);
     if (temp_v3 - 1 <= temp_v1) {
       temp_v15 = 1;
       temp_v1 = (int)asdTMTexTableEntryAt(0x1d,0x169);
@@ -287,7 +287,7 @@ LAB_004b1d78:
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           textDrawString(2,temp_v17,temp_v12,(int)*(short *)(temp_v4 + 8));
           temp_v3 = (int)asdTMTexTableEntryAt(temp_v22,0xe3);
-          FUN_00180310(1,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v8,
+          statRowDrawValueImpl(1,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v8,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v5,1,4,0x79,
                        &LAB_004b25a8,temp_v25);
         }
@@ -374,7 +374,7 @@ LAB_004b1d78:
                    (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v8 + 10) + param_3,0xc9,1,
                    temp_v9);
       temp_v1 = (int)asdTMTexTableEntryAt(temp_v22,0x102);
-      FUN_00180310(1,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
+      statRowDrawValueImpl(1,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
                    (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v1 + 10) + param_3,1,4,0xc9,
                    &LAB_004b25a8,temp_v25);
     }
@@ -442,7 +442,7 @@ LAB_004b1d78:
           textDrawString(2,temp_v17,temp_v12,(int)*(short *)(temp_v3 + 8));
           temp_v25 = skillGetAdjustedCost(temp_v13,*(unsigned short *)(temp_v25 + 0x34));
           temp_v8 = (int)asdTMTexTableEntryAt(temp_v22,0xe3);
-          FUN_00180310(1,(int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
+          statRowDrawValueImpl(1,(int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
                        (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v8 + 10) + param_3,1,4,0xab
                        ,&LAB_004b2a9c,temp_v25);
         }
@@ -525,7 +525,7 @@ LAB_004b1d78:
                  (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v3 + 10) + param_3,0xc9,0,0);
     temp_v10 = skillGetAdjustedCost(temp_v13,*(unsigned short *)(temp_v1 + 0x34));
     temp_v1 = (int)asdTMTexTableEntryAt(temp_v22,0x102);
-    FUN_00180310(1,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
+    statRowDrawValueImpl(1,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v1 + 10) + param_3,1,4,0xc9,
                  &LAB_004b2a9c,temp_v10);
   }

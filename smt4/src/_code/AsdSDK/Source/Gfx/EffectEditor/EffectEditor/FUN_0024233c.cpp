@@ -54,7 +54,7 @@ extern unsigned int DAT_0044ead8; /* 0x44ead8 */
 extern unsigned int DAT_0044eae0; /* 0x44eae0 */
 extern unsigned int DAT_0044eae4; /* 0x44eae4 */
 extern unsigned int DAT_0044eae8; /* 0x44eae8 */
-extern unsigned char DAT_0044f858; /* 0x44f858 */
+extern unsigned char g_effectEditorState; /* 0x44f858 */
 extern int DAT_0044f864; /* 0x44f864 */
 extern unsigned int DAT_0044f8c8; /* 0x44f8c8 */
 extern unsigned int DAT_0044f8cc; /* 0x44f8cc */
@@ -238,7 +238,7 @@ LAB_002424b8:
       DAT_0044ea8c = 0;
     }
     puVar9 = (unsigned char *)0x800000;
-    *(unsigned char **)(piVar3[1] + 0x34) = &DAT_0044f858;
+    *(unsigned char **)(piVar3[1] + 0x34) = &g_effectEditorState;
     DAT_0044eacc = 0;
     DAT_0044ead0 = 0;
     DAT_0044ead4 = 1;

@@ -12,7 +12,7 @@ struct MazeGenState {
 };
 
 extern "C" {
-extern MazeGenState DAT_004bce8c;
+extern MazeGenState g_asdMdlBankSet;
 u16 randNextInRange(u16 range);
 
 /* Lays out the maze grid: walls on the border and on even rows/columns, then picks the four exit cells. */
@@ -26,15 +26,15 @@ void FUN_002852f0(s32 keepSize)
     }
     block->maze.startX = 5;
     block->maze.startY = 5;
-    DAT_004bce8c.floor = 0;
-    DAT_004bce8c.mode = 0;
+    g_asdMdlBankSet.floor = 0;
+    g_asdMdlBankSet.mode = 0;
     block->maze.specialCount = 0;
     block->maze.ready = 0;
     block->maze.displayX = 0;
     block->maze.displayY = 0;
-    DAT_004bce8c.startX = 5;
-    DAT_004bce8c.startY = 5;
-    DAT_004bce8c.active = 1;
+    g_asdMdlBankSet.startX = 5;
+    g_asdMdlBankSet.startY = 5;
+    g_asdMdlBankSet.active = 1;
 
     for (s32 y = 0; y < block->maze.height; y++) {
         for (s32 x = 0; x < block->maze.width; x++) {

@@ -12,7 +12,7 @@ int scrRunOpcodesStub(...);
 int shopSelectEntryStart(...);
 int FUN_0022e818(...);
 int dataTable17Sub0GetRecord(...);
-int FUN_0022fcb8(...);
+int shopScreenRebuildForSelection(...);
 int FUN_00230234(...);
 int FUN_002302d8(...);
 int pointConvertToFloat(...);
@@ -34,7 +34,7 @@ extern unsigned char LAB_003a3798; /* 0x3a3798 */
 /* Supplied declaration required: shopSelectEntryStart. */
 /* Supplied declaration required: FUN_0022e818. */
 /* Supplied declaration required: dataTable17Sub0GetRecord. */
-/* Supplied declaration required: FUN_0022fcb8. */
+/* Supplied declaration required: shopScreenRebuildForSelection. */
 /* Supplied declaration required: FUN_00230234. */
 /* Supplied declaration required: FUN_002302d8. */
 /* Supplied declaration required: pointConvertToFloat. */
@@ -164,7 +164,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
                 return;
               }
               param_1[0x218] = 8;
-              FUN_0022fcb8(param_1,1);
+              shopScreenRebuildForSelection(param_1,1);
               param_1[1] = 4;
               param_1[2] = 0;
               messageMainFinishWindow();

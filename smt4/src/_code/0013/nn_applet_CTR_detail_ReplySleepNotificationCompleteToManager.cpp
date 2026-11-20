@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002bb100(void);
 int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
-int FUN_002c131c(int, int);
+int errThrowFatal(int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ extern int FUN_00148438(void);
 /* Supplied declaration required: FUN_002bb100. */
 /* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
-/* Supplied declaration required: FUN_002c131c. */
+/* Supplied declaration required: errThrowFatal. */
 
 
 void nn_applet_CTR_detail_ReplySleepNotificationCompleteToManager(void)
@@ -31,7 +31,7 @@ void nn_applet_CTR_detail_ReplySleepNotificationCompleteToManager(void)
   FUN_002bb100();
   temp_v0 = FUN_00148438();
   if (temp_v0 < 0) {
-    FUN_002c131c(temp_v0,0x13b8b8);
+    errThrowFatal(temp_v0,0x13b8b8);
   }
   nn_applet_CTR_detail_CloseSession();
   return;

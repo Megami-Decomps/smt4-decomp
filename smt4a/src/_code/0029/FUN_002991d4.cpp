@@ -26,14 +26,14 @@ int mapJobIsDone(void);
 int mapMainStartEntry(...);
 int messageBannerRestartOrClear(void);
 int mapIfRequestById(...);
-int FUN_00359974(...);
+int entryTableResetAndInit(...);
 int messageCounterBeginTransition(...);
 int gameFlagsBitSet(...);
 int FUN_003689d0(void);
 int FUN_00377158(...);
 int messageDismissNumericBanner(...);
 int scrCommResetPanel(void);
-int FUN_003d2158(...);
+int soundApplyValueOrStop(...);
 int gameCounterAddSaturating(...);
 int gameScaleCategoryAmount(...);
 int flagValueAdd(...);
@@ -57,7 +57,7 @@ int mapSetSceneState(...);
 int gameFlagsWriteBlockBit(int, int);
 int FUN_003774e8(int, unsigned char *, unsigned char *, unsigned int *);
 int FUN_003799d0(void);
-int FUN_0037c8e4(...);
+int messageBannerInitCounter(...);
 int mapIfStartNavigation(...);
 int FUN_003a6b10(...);
 int FUN_003ca244(void);
@@ -110,10 +110,10 @@ extern unsigned int DAT_005f1dc4; /* 0x5f1dc4 */
 extern short DAT_005f1e18; /* 0x5f1e18 */
 extern short DAT_005f1e1a; /* 0x5f1e1a */
 
-extern unsigned int FUN_0014af98(void);
+extern unsigned int messageVoiceBankGet(void);
 /* Supplied declaration required: asdTMTexTablePrepareNodeImage. */
 extern int randRange(unsigned int);
-extern unsigned int FUN_00152f44(void);
+extern unsigned int messageVoiceFlagsGet(void);
 extern int asdTMTexTableGetHeaderValue(unsigned int);
 /* Supplied declaration required: FUN_001628c0. */
 extern int infoWinHasValue(void);
@@ -157,7 +157,7 @@ extern int __aeabi_uldivmod(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: messageBannerRestartOrClear. */
 /* Supplied declaration required: mapIfRequestById. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_00359974. */
+/* Supplied declaration required: entryTableResetAndInit. */
 /* Supplied declaration required: messageCounterBeginTransition. */
 /* Supplied declaration required: gameFlagsBitSet. */
 /* Supplied declaration required: FUN_003689d0. */
@@ -166,7 +166,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_003799d0. */
 extern int panelStateIs0(void);
 /* Supplied declaration required: panelSetTarget. */
-/* Supplied declaration required: FUN_0037c8e4. */
+/* Supplied declaration required: messageBannerInitCounter. */
 /* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: mapIfStartNavigation. */
 extern int dataTable20FindAddonRecord(unsigned short);
@@ -175,7 +175,7 @@ extern unsigned short *dataTable20GetEntry(int);
 /* Supplied declaration required: scrCommResetPanel. */
 /* Supplied declaration required: FUN_003ca244. */
 /* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: FUN_003d2158. */
+/* Supplied declaration required: soundApplyValueOrStop. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
 /* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: gameScaleCategoryAmount. */
@@ -183,7 +183,7 @@ extern unsigned short *dataTable20GetEntry(int);
 /* Supplied declaration required: flagValueAdd. */
 /* Supplied declaration required: partyAddMoneyClamped. */
 extern int inputIsQuestMenuPressed(void);
-extern int FUN_004d0584(void);
+extern int inputConfirmPressed(void);
 
 unsigned int FUN_002991d4(void)
 
@@ -499,7 +499,7 @@ unsigned int FUN_002991d4(void)
 LAB_00299da8:
       if (*(int *)(temp_v4 + 0x4c) == 9) {
         if ((*(unsigned int *)(temp_v4 + 0xc) >= 2) && (*(char *)(temp_v4 + 0x4c8) != '\x01')) goto LAB_00299e1c;
-        FUN_0037c8e4(1,0);
+        messageBannerInitCounter(1,0);
         FUN_003a6b10(*(unsigned int *)(temp_v4 + 0xb8));
       }
       if (*(int *)(temp_v4 + 0x4c) == 0xd) {
@@ -556,18 +556,18 @@ LAB_00299e1c:
                   temp_v17[0] = 1;
                   temp_v17[1] = 0;
                   mapIfStartNavigation(0xaf,&LAB_0029a23c,0);
-                  temp_v12 = FUN_00152f44();
+                  temp_v12 = messageVoiceFlagsGet();
                   temp_v11 = randRange(99);
                   if (temp_v11 < 0x21) {
-                    temp_v9 = FUN_0014af98();
+                    temp_v9 = messageVoiceBankGet();
                     temp_v10 = 0x29a268;
                   }
                   else if (0x41 >= temp_v11) {
-                    temp_v9 = FUN_0014af98();
+                    temp_v9 = messageVoiceBankGet();
                     temp_v10 = 0x29a270;
                   }
                   else {
-                    temp_v9 = FUN_0014af98();
+                    temp_v9 = messageVoiceBankGet();
                     temp_v10 = 0x29a278;
                   }
                   FUN_001628c0(temp_v10,temp_v9,temp_v12,1);
@@ -577,18 +577,18 @@ LAB_00299e1c:
                 temp_v17[0] = 1;
                 temp_v17[1] = 0;
                 mapIfStartNavigation(0xaf,&LAB_0029a23c,0);
-                temp_v12 = FUN_00152f44();
+                temp_v12 = messageVoiceFlagsGet();
                 temp_v11 = randRange(99);
                 if (temp_v11 < 0x21) {
-                  temp_v9 = FUN_0014af98();
+                  temp_v9 = messageVoiceBankGet();
                   temp_v10 = 0x29a268;
                 }
                 else if (temp_v11 < 0x42) {
-                  temp_v9 = FUN_0014af98();
+                  temp_v9 = messageVoiceBankGet();
                   temp_v10 = 0x29a270;
                 }
                 else {
-                  temp_v9 = FUN_0014af98();
+                  temp_v9 = messageVoiceBankGet();
                   temp_v10 = 0x29a278;
                 }
                 FUN_001628c0(temp_v10,temp_v9,temp_v12,1);
@@ -685,7 +685,7 @@ LAB_0029a094:
             return 0;
           }
         }
-        temp_v11 = FUN_004d0584();
+        temp_v11 = inputConfirmPressed();
         if ((temp_v11 == 0) && (temp_v11 = inputIsQuestMenuPressed(), temp_v11 == 0)) {
           return 0;
         }
@@ -841,7 +841,7 @@ LAB_0029a094:
         FUN_003689d0();
         puVar6 = (unsigned short *)dataTable20GetEntry((int)*(short *)(temp_v11 + 0x14));
         temp_v11 = dataTable20FindAddonRecord(*puVar6);
-        FUN_00359974(0x18,(int)*(char *)(temp_v11 + 7),0xffffffff,0);
+        entryTableResetAndInit(0x18,(int)*(char *)(temp_v11 + 7),0xffffffff,0);
         uiSpriteSetKeyframe(temp_v4 + 0x148,0);
         *(unsigned int *)(temp_v4 + 0x490) = 1;
         temp_v12 = FUN_002e5c2c();
@@ -873,14 +873,14 @@ LAB_0029a094:
         if (temp_v6 < temp_v7 || temp_v7 - temp_v6 < (unsigned int)temp_v16) {
           temp_v11 = FUN_002e5c2c(temp_v7 - (temp_v6 + !temp_v16));
           *(int *)(temp_v4 + 0x494) = temp_v11 << 0xc;
-          FUN_003d2158(*(unsigned int *)(temp_v4 + 0x49c),0);
+          soundApplyValueOrStop(*(unsigned int *)(temp_v4 + 0x49c),0);
         }
         temp_v11 = messageMainIsIdle();
         if (temp_v11 != 0) {
-          FUN_003d2158(*(unsigned int *)(temp_v4 + 0x49c),0);
+          soundApplyValueOrStop(*(unsigned int *)(temp_v4 + 0x49c),0);
           temp_v11 = FUN_002e5c2c();
           *(int *)(temp_v4 + 0x494) = temp_v11 << 0xc;
-          FUN_003d2158(*(unsigned int *)(temp_v4 + 0x49c),0);
+          soundApplyValueOrStop(*(unsigned int *)(temp_v4 + 0x49c),0);
           uiSpriteSetKeyframe(temp_v4 + 0x148,1,0);
           *(unsigned int *)(temp_v4 + 0x490) = 3;
         }
@@ -889,7 +889,7 @@ LAB_0029a094:
         temp_v11 = uiSpriteAdvanceAnimation(temp_v4 + 0x148);
         if (temp_v11 != 0) {
           *(unsigned int *)(temp_v4 + 0x490) = 4;
-          FUN_003d2158(*(unsigned int *)(temp_v4 + 0x49c),0);
+          soundApplyValueOrStop(*(unsigned int *)(temp_v4 + 0x49c),0);
         }
         break;
       case 4:
@@ -958,7 +958,7 @@ LAB_0029a094:
     else {
 LAB_002993c0:
       if (*(int *)(temp_v4 + 0x4c) == 9) {
-        FUN_0037c8e4(1,0);
+        messageBannerInitCounter(1,0);
       }
       if (*(int *)(temp_v4 + 0x4c) == 0xd) {
         *(unsigned char *)(temp_v4 + 0x50) = 1;
@@ -982,7 +982,7 @@ LAB_002993c0:
     if (*(char *)(temp_v4 + 0x60) == '\0') {
       return 0;
     }
-    temp_v11 = FUN_004d0584();
+    temp_v11 = inputConfirmPressed();
     if ((temp_v11 == 0) && (temp_v11 = inputIsQuestMenuPressed(), temp_v11 == 0)) {
       return 0;
     }

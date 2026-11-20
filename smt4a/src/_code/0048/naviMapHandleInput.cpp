@@ -16,7 +16,7 @@ u32 padGetNormalizedAnalogStick(f32 *outX, f32 *outY, u32 index);
 u32 padButtonIsPressed(u32 button);
 s32 inputIsQuestCancelPressed(void);
 s32 inputIsQuestMenuPressed(void);
-s32 FUN_004d0584(void);
+s32 inputConfirmPressed(void);
 f32 naviMainGetValue(void *scene);
 NavigationPoint *sub68OwnerGetBlock60(void *scene);
 void naviMainSetValuePair(void *scene, const NavigationPoint *value); // declcheck: local (takes the scene and the work's NavigationPoint, as in the proven sibling FUN_0048a4c0; the shared header's u32/NaviValuePair form needs a cast at every call)
@@ -103,7 +103,7 @@ void naviMapHandleInput(NavigationFadeWork *work)
             work->interpolation.drag.cancelTimer = 5;
             work->flag7B90 = 1;
             work->flag7B91 = 1;
-        } else if (FUN_004d0584()) {
+        } else if (inputConfirmPressed()) {
             if (g_gameState.naviMapPending && !FUN_00384cf4())
                 return;
             sysPlayVoice(0x100020e);

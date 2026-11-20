@@ -21,7 +21,7 @@ extern u32 FUN_00292bf0(void);
 extern u32 *gameGetSlotTable(void);
 extern int gameReleaseDataReference(void);
 extern int statusDownSwitchTab(int);
-extern int FUN_00295214(int);
+extern int buttonHelpSetTextVisible(int);
 extern int scrScriptProcessStartEntry(u32 script, int entry);
 extern int gameGlobalsSetSelected(int);
 extern int FUN_0029c4c8(int);
@@ -101,7 +101,7 @@ done:
             return;
         }
     }
-    FUN_00295214(0);
+    buttonHelpSetTextVisible(0);
     buttonHelpSetContext(3);
 }
 

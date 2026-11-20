@@ -36,4 +36,32 @@ typedef char EffectTimelinePartColorOffsetCheck[
     offsetof(EffectTimelinePart, tint.color) == 0x64 &&
     sizeof(EffectTimelinePart) == 0xB0 ? 1 : -1];
 
+/* Duration the resource's type handler reports, -1 when its type has none. */
+static __inline s32 resourceGetDuration(Resource *resource)
+{
+    s32 (*duration)(void *) = g_handlerTable[resource->type].duration;
+    if (duration == NULL) {
+        return -1;
+    }
+    return duration(resource->data);
+}
+
+/* Latest end frame over a part's children (-1 when it has none); 0 as soon as one child reports a
+ * zero duration. smt4a effectTimelineComputeDuration is this body out of line. */
+static __inline s32 effectTimelineChildrenEnd(const EffectTimelinePart *part)
+{
+    s32 longest = -1;
+    for (const EffectTimelinePart *child = part->children; child != NULL; child = child->next) {
+        s32 length = resourceGetDuration(child->block);
+        if (length == 0) {
+            return 0;
+        }
+        s32 end = length + child->startFrame;
+        if (longest < end) {
+            longest = end;
+        }
+    }
+    return longest;
+}
+
 #endif

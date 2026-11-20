@@ -8,7 +8,7 @@ struct PlaybackTaskState {
 
 extern "C" {
 extern PlaybackTaskState *g_titleDbgBg;
-void FUN_001692d4(void);
+void gxResetUniformQuadColorsAndScale(void);
 void jobStop(u32 job, s32 mode);
 
 // Initialize the task on state zero and stop its owner at terminal state99.
@@ -17,7 +17,7 @@ u32 taskRunInitializationState(void)
     PlaybackTaskState *task = g_titleDbgBg;
     switch (task->state) {
     case 0:
-        FUN_001692d4();
+        gxResetUniformQuadColorsAndScale();
         ++task->state;
         break;
     case 1:

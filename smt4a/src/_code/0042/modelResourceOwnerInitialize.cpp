@@ -9,7 +9,7 @@ void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 ModelResourceList *modelListInit(ModelResourceList *models);
 void FUN_0040a884(ModelResourceList *models, void *source, u32 flags);
 u32 ownerSlotSetText(ModelResourceItem *item, const void *name);
-void FUN_003fd924(ModelResourceItem *item, u32 index, u32 mode, f32 first, f32 second);
+void motionPlayerStartBlended(ModelResourceItem *item, u32 index, u32 mode, f32 first, f32 second);
 u32 FUN_001a79e8(ModelResourceItem *item, const void *name);
 void moriModelUnitStartMaterialAnimation(ModelResourceItem *item, u32 index, u32 mode, f32 value);
 
@@ -36,7 +36,7 @@ void modelResourceOwnerInitialize(ModelResourceOwner *owner)
                 const void *name = reinterpret_cast<const void *>(FUN_003fdadc(item));
                 u32 channel = ownerSlotSetText(item, name);
                 if (channel != 0xFFFF) {
-                    FUN_003fd924(item, channel, 2, 1.0f, 1.0f);
+                    motionPlayerStartBlended(item, channel, 2, 1.0f, 1.0f);
                 }
                 channel = FUN_001a79e8(item, name);
                 if (channel != 0xFFFF) {

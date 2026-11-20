@@ -6,9 +6,9 @@
 #include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
-void FUN_00283f30(UnitSummarySkills *, s32);
+void playerCollectPassiveSkillBits(UnitSummarySkills *, s32);
 void gridNavigationConfigure(GridNavigation *, u32, s32, s32, s32, s32);
-void FUN_00282f80(s32);
+void campRebuildCategoryList(s32);
 
 void FUN_00262d40()
 {
@@ -17,7 +17,7 @@ void FUN_00262d40()
     u32 count = 0;
     memClear(work->skills, sizeof(work->skills));
     UnitSummarySkills playerSkills;
-    FUN_00283f30(&playerSkills, 0);
+    playerCollectPassiveSkillBits(&playerSkills, 0);
     for (s32 index = 0; index < 8; ++index) {
         u16 skill = playerSkills.ids[index];
         if (skill) {
@@ -42,6 +42,6 @@ void FUN_00262d40()
         }
     }
     gridNavigationConfigure(&work->grids[3], count, 11, 1, 1, 1);
-    FUN_00282f80(9);
+    campRebuildCategoryList(9);
 }
 }

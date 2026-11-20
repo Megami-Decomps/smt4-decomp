@@ -7,7 +7,7 @@ extern const char g_effPolygonFlashSourceFileName[]; /* "c:\SMT4\XRD686\sdds4\Pa
 
 void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *effGeomCreateRepeatedIndexList(s32 count, s32 w, s32 h, const s16 *table, u16 tag);
-extern const s16 DAT_00473768[];
+extern const s16 g_effPolyFlashIndexTableS16[];
 
 /* Builds the geometry block of a flash polygon effect with one segment per parameter segment. */
 PolyGeomBlock *effPolyFlashGeomCreate2(PolyParams *params)
@@ -22,7 +22,7 @@ PolyGeomBlock *effPolyFlashGeomCreate2(PolyParams *params)
     u8 *payload = block->payload;
     block->data = payload;
     block->self = block;
-    block->geom = effGeomCreateRepeatedIndexList(segments & 0xffff, 3, 5, DAT_00473768, 72);
+    block->geom = effGeomCreateRepeatedIndexList(segments & 0xffff, 3, 5, g_effPolyFlashIndexTableS16, 72);
     return block;
 }
 

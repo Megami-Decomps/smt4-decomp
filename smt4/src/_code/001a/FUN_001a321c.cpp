@@ -123,7 +123,7 @@ extern unsigned int FUN_00288ddc(int, int);
 /* Supplied declaration required: table8Type5GetValue. */
 /* Supplied declaration required: unitGetStereoScreenPosition. */
 /* Supplied declaration required: FUN_00293ac0. */
-extern int FUN_0029e9cc(unsigned short);
+extern int itemIsCollectedWithRelated(unsigned short);
 /* Supplied declaration required: uiDrawTableTextureSized. */
 /* Supplied declaration required: FUN_002b64b8. */
 /* Supplied declaration required: FUN_002b659c. */
@@ -568,7 +568,7 @@ LAB_001a3ea8:
           psVar24 = (short *)(int)temp_v3;
           if ((*pcVar21 == '\r') ||
              ((psVar12 = (short *)(int)temp_v2, *pcVar21 == '\x06' &&
-              (temp_v10 = FUN_0029e9cc(*puVar22), temp_v10 == 0)))) {
+              (temp_v10 = itemIsCollectedWithRelated(*puVar22), temp_v10 == 0)))) {
             psVar12 = psVar24;
           }
           temp_v25 = 0.0f;
@@ -608,7 +608,7 @@ LAB_001a3ea8:
           }
           temp_v36 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x37));
           if ((*pcVar21 != '\r') &&
-             ((*pcVar21 != '\x06' || (temp_v10 = FUN_0029e9cc(*puVar22), temp_v10 != 0)))) {
+             ((*pcVar21 != '\x06' || (temp_v10 = itemIsCollectedWithRelated(*puVar22), temp_v10 != 0)))) {
             temp_v0 = *temp_v38;
             temp_v15 = temp_v0 == '\x04';
             if (temp_v15) {
@@ -650,7 +650,7 @@ LAB_001a3ea8:
           }
           temp_v36 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x32));
           if ((*pcVar21 != '\r') &&
-             ((*pcVar21 != '\x06' || (temp_v10 = FUN_0029e9cc(*puVar22), temp_v10 != 0)))) {
+             ((*pcVar21 != '\x06' || (temp_v10 = itemIsCollectedWithRelated(*puVar22), temp_v10 != 0)))) {
             temp_v22 = psVar24;
             FUN_002bdf94(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v36 + 8)),
                          (int)temp_v30 + (int)*(short *)(temp_v36 + 10),1,4,0xdd,&LAB_001a43f4);
@@ -718,7 +718,7 @@ LAB_001a3ea8:
           temp_v33 = (short *)(int)*(short *)(temp_v7 + 0x130a);
           temp_v29 = (short *)(int)*(short *)(temp_v7 + 0x130e);
           if ((*pcVar21 == '\r') ||
-             ((*pcVar21 == '\x06' && (temp_v10 = FUN_0029e9cc(*puVar22), temp_v10 == 0)))) {
+             ((*pcVar21 == '\x06' && (temp_v10 = itemIsCollectedWithRelated(*puVar22), temp_v10 == 0)))) {
             temp_v33 = temp_v29;
           }
           if (*(char *)(temp_v5 + 0x1e62) != '\0') {
@@ -746,7 +746,7 @@ LAB_001a3ea8:
           }
           temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x42));
           if ((*pcVar21 != '\r') &&
-             ((*pcVar21 != '\x06' || (temp_v11 = FUN_0029e9cc(*puVar22), temp_v11 != 0)))) {
+             ((*pcVar21 != '\x06' || (temp_v11 = itemIsCollectedWithRelated(*puVar22), temp_v11 != 0)))) {
             temp_v0 = *temp_v38;
             temp_v15 = temp_v0 == '\x04';
             if (temp_v15) {
@@ -768,7 +768,7 @@ LAB_001a3ea8:
           }
           temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x3d));
           if ((*pcVar21 != '\r') &&
-             ((*pcVar21 != '\x06' || (temp_v11 = FUN_0029e9cc(*puVar22), temp_v11 != 0)))) {
+             ((*pcVar21 != '\x06' || (temp_v11 = itemIsCollectedWithRelated(*puVar22), temp_v11 != 0)))) {
             temp_v22 = temp_v29;
             FUN_002bdf94(0,(unsigned char *)((int)*(short *)(temp_v10 + 8) + (int)temp_v28),
                          (int)temp_v30 + (int)*(short *)(temp_v10 + 10),1,4,0xdd,&LAB_001a4c78);
@@ -861,7 +861,7 @@ LAB_001a3ea8:
               temp_v13 = 0x4e;
             }
             if ((*pcVar21 == '\r') ||
-               ((*pcVar21 == '\x06' && (temp_v9 = FUN_0029e9cc(*puVar22), temp_v9 == 0)))) {
+               ((*pcVar21 == '\x06' && (temp_v9 = itemIsCollectedWithRelated(*puVar22), temp_v9 == 0)))) {
               temp_v13 = 0x51;
             }
             if ((*(char *)(temp_v5 + 0x1e62) != '\0') &&
@@ -1020,7 +1020,7 @@ LAB_001a3ea8:
               }
             }
             if ((*pcVar21 != '\r') &&
-               ((*pcVar21 != '\x06' || (temp_v10 = FUN_0029e9cc(*puVar22), temp_v10 != 0)))) {
+               ((*pcVar21 != '\x06' || (temp_v10 = itemIsCollectedWithRelated(*puVar22), temp_v10 != 0)))) {
               temp_v22 = psVar24;
               FUN_002bdf94(0,(unsigned char *)((int)*(short *)((int)temp_v23 + 8) + (int)temp_v28),
                            (int)temp_v30 +
@@ -1075,7 +1075,7 @@ LAB_001a3ea8:
             temp_v36 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,temp_v13 + 0x7b));
             temp_v23 = (short *)reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x6e));
             if ((*pcVar21 != '\r') &&
-               ((*pcVar21 != '\x06' || (temp_v10 = FUN_0029e9cc(*puVar22), temp_v10 != 0)))) {
+               ((*pcVar21 != '\x06' || (temp_v10 = itemIsCollectedWithRelated(*puVar22), temp_v10 != 0)))) {
               if ((int)psVar24 < 200) {
                 temp_v10 = (int)temp_v33 - (int)psVar12;
                 temp_v23 = (short *)(int)(short)temp_v10;
@@ -1547,7 +1547,7 @@ LAB_001a3ea8:
           temp_v13 = 0;
           if ((*(char *)(temp_v5 + 0x1e71) != '\0') ||
              ((*pcVar21 != '\r' &&
-              ((*pcVar21 != '\x06' || (temp_v11 = FUN_0029e9cc(*puVar22), temp_v11 != 0)))))) {
+              ((*pcVar21 != '\x06' || (temp_v11 = itemIsCollectedWithRelated(*puVar22), temp_v11 != 0)))))) {
             temp_v8 = 1;
             temp_v11 = 0;
             temp_v12 = 5;

@@ -9,7 +9,7 @@ int FUN_001137c8(int, unsigned int);
 int FUN_002e93c2(int, unsigned int);
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
-int FUN_002ea704(void);
+int watcherGetEnabledFlag(void);
 int FUN_002eb338(int *, unsigned char [8], unsigned int);
 int onlineTimeGetNow(unsigned char [8]);
 int FUN_002fa434(unsigned char [24], unsigned int);
@@ -36,10 +36,10 @@ extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-/* Supplied declaration required: FUN_002ea704. */
+/* Supplied declaration required: watcherGetEnabledFlag. */
 /* Supplied declaration required: FUN_002eb338. */
 /* Supplied declaration required: onlineTimeGetNow. */
-extern int FUN_002eb5f4(void);
+extern int watcherGetActiveContext(void);
 extern unsigned int FUN_002f8744(int);
 /* Supplied declaration required: FUN_002fa434. */
 
@@ -62,16 +62,16 @@ void FUN_0010f424(int param_1)
   unsigned char temp_v10 [16];
   unsigned char temp_v11 [20];
   
-  temp_v0 = FUN_002eb5f4();
-  if ((temp_v0 != 0) && (temp_v0 = FUN_002ea704(), temp_v0 != 0)) {
+  temp_v0 = watcherGetActiveContext();
+  if ((temp_v0 != 0) && (temp_v0 = watcherGetEnabledFlag(), temp_v0 != 0)) {
     temp_v0 = onlineInstanceTableGetCurrent();
     onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
     if (temp_v0 != 0) {
-      temp_v0 = FUN_002eb5f4();
+      temp_v0 = watcherGetActiveContext();
       temp_v0 = *(int *)(temp_v0 + 0xd0);
       piVar4 = *(int **)(temp_v0 + 8);
       if (piVar4 != (int *)0x0) {
-        temp_v1 = FUN_002ea704();
+        temp_v1 = watcherGetEnabledFlag();
         FUN_002fa434(temp_v3,temp_v1);
         temp_v2 = param_1 + 0xf0;
         FUN_002e93c2(temp_v2,((unsigned int)temp_v4 + temp_v5) & 0xffff);
@@ -84,7 +84,7 @@ void FUN_0010f424(int param_1)
         }
         temp_v1 = FUN_002ea3c0(temp_v10,&LAB_0010f2b1,0,&LAB_0010f500);
         FUN_002ea3d0(param_1,temp_v1);
-        FUN_002ea704();
+        watcherGetEnabledFlag();
         temp_v1 = FUN_0010a0fc();
         onlineTimeGetNow(temp_v9);
         FUN_002eb338(&temp_v7,temp_v9,temp_v1);

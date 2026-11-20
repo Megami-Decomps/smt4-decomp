@@ -42,7 +42,7 @@ void gridNavigationConfigure(ScrollSelection *list, s32 count, s32 visible, s32 
                   s32 enable, s32 colors);
 FusionRecipeEntry *contentEntryFindById(u32 id);
 u32 histogramFindHighestSupportedValue(void *context);
-void FUN_0022e774();
+void statusPanelClose();
 void FUN_002a7b74();
 void uniteStartOrQueueRequest(s32 mode);
 void FUN_0020b908(s32 id, s32 enabled);
@@ -81,7 +81,7 @@ void fusionPrepareSpecialRecipeList()
         ++work->candidates.count;
     }
     recipes->maximumLevel = histogramFindHighestSupportedValue(work->context);
-    FUN_0022e774();
+    statusPanelClose();
     recipes->progress = 0;
     FUN_002a7b74();
     uniteStartOrQueueRequest(18);

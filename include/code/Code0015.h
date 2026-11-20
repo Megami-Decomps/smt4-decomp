@@ -4,7 +4,7 @@
 /* Functions in the 0x00150000 code block whose subsystem is not known yet; each declaration matches its definition. */
 extern "C" {
 
-u8 FUN_00152f44(void);
+u8 messageVoiceFlagsGet(void);
 
 u32 asdCameraGetSavedRenderPairs(void);
 

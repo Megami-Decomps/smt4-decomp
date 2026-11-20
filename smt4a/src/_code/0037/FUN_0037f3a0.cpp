@@ -6,9 +6,9 @@
 
 extern "C" {
 
-s32 FUN_003248e4(BtlCombatantEntryA *entry);
+s32 btlCombatantTestApplicableActions(BtlCombatantEntryA *entry);
 
-/* Script: sets 1 when an unavailable, required, non-excluded battle entry passes FUN_003248e4, else 0. */
+/* Script: sets 1 when an unavailable, required, non-excluded battle entry passes btlCombatantTestApplicableActions, else 0. */
 u32 FUN_0037f3a0(void)
 {
     for (s32 i = 0; i < 109; i++) {
@@ -16,7 +16,7 @@ u32 FUN_0037f3a0(void)
         if ((g_btlCandidateMasks.unavailable & entry->flags) &&
             (g_btlCandidateMasks.required & entry->flags) &&
             !(g_btlCandidateMasks.excluded & entry->flags) &&
-            FUN_003248e4(entry)) {
+            btlCombatantTestApplicableActions(entry)) {
             scrSetResult(1);
             return 1;
         }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_0017909c; not written yet. */
+/* NON_MATCHING: found outside every function: branched to by gxStateValidatorResetDefaults; not written yet. */
 /* romwright 0.5.0 decompilation of FUN_00195110 for reference (not compiled; its own view of the boundaries):
 
 void FUN_00195110(void)

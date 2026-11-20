@@ -20,7 +20,7 @@ s32 gameGlobalsSetSelected(u32 arg);
 s32 statusDownSwitchTab(s32 arg);
 s32 FUN_0029c4c8(s32 arg);
 s32 FUN_0029a0e8(PlayerDataIV *player);
-s32 FUN_0029a0cc(PlayerDataIV *player);
+s32 btlBuildDemonSnapshotFromSaveRecord(PlayerDataIV *player);
 s32 messageWindowStartTimer(s32 arg);
 s32 placeWinSetValue(s32 arg);
 void *asdMdlManagerCreateSecondList(const char *name, u32 arg);
@@ -42,7 +42,7 @@ void FUN_00230234(Scene *scene)
     player = gameGetPlayerData();
     FUN_0029c4c8(1);
     FUN_0029a0e8(player);
-    FUN_0029a0cc(player);
+    btlBuildDemonSnapshotFromSaveRecord(player);
     scene->active = 1;
     messageWindowStartTimer(1);
     placeWinSetValue(0);

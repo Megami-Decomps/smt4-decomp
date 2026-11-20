@@ -10,7 +10,7 @@ struct InterpolationTrack {
     u8 unk00[0x54];
     InterpolationKey keys[4]; // 0x54
 };
-extern "C" void FUN_00229264(f32 *current, f32 slope, f32 target);
+extern "C" void mathStepTowards(f32 *current, f32 slope, f32 target);
 
 // Advance a four-key scalar track, skipping coincident key times.
 extern "C" void FUN_002e5de0(const InterpolationTrack *track, s32 *frame, s8 *index, s32 *duration, f32 *current, f32 *slope, f32 *target)
@@ -36,5 +36,5 @@ extern "C" void FUN_002e5de0(const InterpolationTrack *track, s32 *frame, s8 *in
         }
         return;
     }
-    FUN_00229264(current, *slope, *target);
+    mathStepTowards(current, *slope, *target);
 }

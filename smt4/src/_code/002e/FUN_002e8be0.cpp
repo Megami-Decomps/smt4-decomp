@@ -21,9 +21,9 @@ s32 mapIfHasSelection(void);
 void mapInterfaceSetStateTwo(void);
 s32 inputIsQuestMenuPressed(void);
 void mapIfSetMode1(void);
-s32 FUN_0027ee9c(void);
+s32 inputConfirmPressed(void);
 void lmapSetSceneId(u32 id);
-void FUN_0027fc14(s32 mode);
+void lmapCameraSetMode(s32 mode);
 void mapSelectContainingRegions(f32 x, f32 z);
 void FUN_002804ec(MapVector *position);
 void buttonHelpSetPreset(s32 preset);
@@ -48,7 +48,7 @@ void FUN_002e8be0(void)
         g_lmapScene->pose.targetPosition.x = g_lmapScene->pose.targetPosition.x + mathRemPio2f(g_gameState.heading * DEGREES_TO_RADIANS) * 40.0f;
         g_lmapScene->pose.targetPosition.z = g_lmapScene->pose.targetPosition.z + libm_cosf(g_gameState.heading * DEGREES_TO_RADIANS) * 40.0f;
         g_lmapScene->pose.targetHeading = g_gameState.overviewHeading;
-        FUN_0027fc14(11);
+        lmapCameraSetMode(11);
         g_mapCamera->contextMode = -2;
         buttonHelpSetPreset(0xdb);
         mapIfActivateRecord(1, g_gameState.overviewRecord);
@@ -75,13 +75,13 @@ void FUN_002e8be0(void)
     case 2:
         scene->stateTime++;
         mapIfActivateRecord(1, g_gameState.overviewRecord);
-        if (FUN_0027ee9c()) {
+        if (inputConfirmPressed()) {
             g_lmapScene->state = 10;
             g_lmapScene->stateTime = 0;
         } else if (padIsButtonPressed(5) || inputIsQuestMenuPressed()) {
             g_mapCamera->heading = g_lmapScene->pose.targetHeading;
             g_mapCamera->contextMode = 0;
-            FUN_0027fc14(0);
+            lmapCameraSetMode(0);
             g_lmapScene->moveMode = 0;
             g_lmapScene->moveSpeed = 5.0f;
             mapIfActivateRecord(0, g_gameState.overviewRecord);
@@ -111,7 +111,7 @@ void FUN_002e8be0(void)
             mapIfReleaseSlot1();
             g_mapCamera->heading = g_lmapScene->pose.targetHeading;
             g_mapCamera->contextMode = 0;
-            FUN_0027fc14(0);
+            lmapCameraSetMode(0);
             g_lmapScene->state = g_lmapScene->state + 1;
             g_lmapScene->stateTime = 0;
         }

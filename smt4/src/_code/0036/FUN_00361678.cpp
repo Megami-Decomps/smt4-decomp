@@ -20,7 +20,7 @@ typedef struct {
 } param_9_stack;
 
 extern int FUN_003617f8(...); /* 0x3617f8 */
-extern int DAT_0044e368; /* 0x44e368 */
+extern int g_appletCloseReason; /* 0x44e368 */
 extern int DAT_0044e7d0; /* 0x44e7d0 */
 extern unsigned int DAT_0044e7d8; /* 0x44e7d8 */
 extern unsigned int DAT_0044e7dc; /* 0x44e7dc */
@@ -52,7 +52,7 @@ FUN_00361678(unsigned char *param_1,int param_2,int param_3,int param_4,unsigned
   int temp_v5;
   unsigned int temp_v6 [2];
   
-  temp_v3 = DAT_0044e368;
+  temp_v3 = g_appletCloseReason;
   temp_v5 = 0;
   temp_v6[0] = 0;
   temp_v0 = nn_swkbd_CTR_SetInputData(param_2,param_3,param_4,param_5,param_6,param_7,param_8);

@@ -21,7 +21,7 @@ typedef char BattleMarkerOptionMasksLayoutCheck[offsetof(BattleMarkerOptionMasks
 }
 
 extern "C" {
-extern const BattleMarkerOptionMasks DAT_005715f8;
+extern const BattleMarkerOptionMasks g_btlDebugGlobals;
 u32 asdListBoxGetSelectedItemId(u32 listBox);
 s32 listBoxItemHasOwner(u32 listBox, u32 item);
 s32 *asdListBoxGetIntValuePtr(u32 listBox, u32 item); // declcheck: local (the shared header's s32 types make this function worse (104 -> 151 diff lines))
@@ -36,20 +36,20 @@ void FUN_004d3360(BattleMarkerMenu *menu, BtlMainStateA *state)
     switch (item) {
     case 0:
         if (listBoxItemHasOwner(menu->listBox, item) != 0) {
-            flags |= DAT_005715f8.first;
+            flags |= g_btlDebugGlobals.first;
         } else {
-            flags &= ~DAT_005715f8.first;
+            flags &= ~g_btlDebugGlobals.first;
         }
         break;
     case 1: {
         u64 updatedFlags;
         if (listBoxItemHasOwner(menu->listBox, item) != 0) {
-            updatedFlags = flags | DAT_005715f8.bust;
+            updatedFlags = flags | g_btlDebugGlobals.bust;
         } else {
-            updatedFlags = flags & ~DAT_005715f8.bust;
+            updatedFlags = flags & ~g_btlDebugGlobals.bust;
         }
         flags = updatedFlags;
-        if ((updatedFlags & DAT_005715f8.bust) == 0 && battleTalkGetBustState() != 0) {
+        if ((updatedFlags & g_btlDebugGlobals.bust) == 0 && battleTalkGetBustState() != 0) {
             btlTalkBustUpReleaseAllSlots();
             messageMainApplyClose();
         }
@@ -60,16 +60,16 @@ void FUN_004d3360(BattleMarkerMenu *menu, BtlMainStateA *state)
         break;
     case 3:
         if (listBoxItemHasOwner(menu->listBox, item) != 0) {
-            flags |= DAT_005715f8.third;
+            flags |= g_btlDebugGlobals.third;
         } else {
-            flags &= ~DAT_005715f8.third;
+            flags &= ~g_btlDebugGlobals.third;
         }
         break;
     case 4:
         if (listBoxItemHasOwner(menu->listBox, item) != 0) {
-            flags |= DAT_005715f8.fifth;
+            flags |= g_btlDebugGlobals.fifth;
         } else {
-            flags &= ~DAT_005715f8.fifth;
+            flags &= ~g_btlDebugGlobals.fifth;
         }
         break;
     }

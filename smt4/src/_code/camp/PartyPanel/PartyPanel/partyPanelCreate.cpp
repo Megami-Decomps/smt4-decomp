@@ -62,8 +62,8 @@ s32 FUN_001c3fd4(u32 job);
 void digitsNotifyNoop(u32 job);
 s32 FUN_00212538(u32 job);
 void statusAcquireSharedResources(void);
-void FUN_0029e788(void);
-UniteCtrl *FUN_003c9c94(UniteCtrl *unite);
+void campMenuSessionReset(void);
+UniteCtrl *uniteCtrlBuildRaceLists(UniteCtrl *unite);
 void slotPlacementSetSlot(SlotPlacement *placement, s32 slot);
 void partyPanelSortEntries(void);
 void FUN_0026b9bc(void);
@@ -96,14 +96,14 @@ void partyPanelCreate(s32 showIcons)
     statusAcquireSharedResources();
     if (showIcons) {
         gameSetIconDisplayEnabled(1);
-        FUN_0029e788();
+        campMenuSessionReset();
     } else {
         gameSetIconDisplayEnabled(0);
     }
 
     UniteCtrl *unite = static_cast<UniteCtrl *>(asdOperatorNew(0x180, owner));
     if (unite != NULL) {
-        unite = FUN_003c9c94(unite);
+        unite = uniteCtrlBuildRaceLists(unite);
     }
     panel->unite = unite;
     uniteCtrlSetIncludeSameRace(unite, 1);

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00114ce8(...);
 int FUN_002f4ffc(...);
-int FUN_003026b0(...);
+int streamReaderAdvanceU32(...);
 int FUN_00310224(...);
 
 typedef struct fn_00310888_arg1 fn_00310888_arg1;
@@ -41,7 +41,7 @@ extern unsigned char DAT_00559748; /* 0x559748 */
 extern int FUN_002ea974(unsigned char *);
 /* Supplied declaration required: FUN_002f4ffc. */
 extern int FUN_002fd5d4(unsigned int *, unsigned char *);
-/* Supplied declaration required: FUN_003026b0. */
+/* Supplied declaration required: streamReaderAdvanceU32. */
 extern unsigned int *FUN_00306e84(fn_00310888_arg1 *, unsigned int);
 /* Supplied declaration required: FUN_00310224. */
 
@@ -69,7 +69,7 @@ void FUN_00310888(unsigned int param_1,fn_00310888_arg1 *param_2)
   pfStack_18 = param_2;
   FUN_00310224(param_2);
   temp_v7 = 0;
-  FUN_003026b0(temp_v10,&temp_v7);
+  streamReaderAdvanceU32(temp_v10,&temp_v7);
   temp_v8 = &DAT_00559748;
   temp_v9 = temp_v4;
   temp_v6 = &DAT_00558dd4;

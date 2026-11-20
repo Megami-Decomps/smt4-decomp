@@ -9,13 +9,13 @@ typedef struct Owner001d25c8 {
 } Owner001d25c8;
 
 void FUN_001b5154(void);
-void FUN_0020ed98(void);
+void dialogTaskStopInfoWin(void);
 u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, void (*update)(void), void (*draw)(void), void *owner, u32 id);
 
 /* Creates the owner's "btlAuto Calc" draw task. */
 void btlAutoCalcTaskCreate(Owner001d25c8 *owner)
 {
-    owner->drawTask = taskCreateDraw("btlAuto Calc", 2, 0, 0, FUN_001b5154, FUN_0020ed98, owner, owner->id);
+    owner->drawTask = taskCreateDraw("btlAuto Calc", 2, 0, 0, FUN_001b5154, dialogTaskStopInfoWin, owner, owner->id);
 }
 
 } /* extern "C" */

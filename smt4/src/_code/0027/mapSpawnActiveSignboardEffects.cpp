@@ -25,7 +25,7 @@ void mapSpawnActiveSignboardEffects(void)
             mathSinCos(&sine, &cosine, slot->unk1c * (256.0f / 360.0f));
             position.x += sine * 60.0f;
             position.z += cosine * 60.0f;
-            u32 effect = FUN_00263cb8(0, 0, reinterpret_cast<u32>("KANBAN"), 30, 12, slot->id + 0x1000,
+            u32 effect = mapEffectReserveAndSpawn(0, 0, reinterpret_cast<u32>("KANBAN"), 30, 12, slot->id + 0x1000,
                 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
                 position.x, position.y, position.z, 200.0f, 200.0f, 100.0f, slot->unk1c);
             if (slot->unk2c != 0)

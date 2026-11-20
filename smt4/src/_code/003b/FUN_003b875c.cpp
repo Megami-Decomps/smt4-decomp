@@ -82,7 +82,7 @@ s32 FUN_003bb620(void *selection);
 s32 flaggedValueHolderGetTotal(void *selection);
 void modelSetVisible(PanelModelOwner *owner, s32 visible);
 void nodeOwnerSetEnabled(PanelModelOwner *owner, s32 enabled);
-void FUN_00234cd8(PanelModelOwner *owner, s32 kind, s32 flag);
+void moverRetargetToSlot(PanelModelOwner *owner, s32 kind, s32 flag);
 void objModelDestroy(PanelModelOwner *owner);
 void objModelCreateFromSource(PanelModelOwner *owner, u32 file, u32 size);
 void FUN_002328b4(void);
@@ -138,7 +138,7 @@ void FUN_003b875c(PanelWork *work)
 
             if (!(work->mode == 4 || work->mode == 3) || (kind != 0 && kind != 6) ||
                 (previous->kind != 0 && previous->kind != 6)) {
-                FUN_00234cd8(work->modelOwner, kind, 0);
+                moverRetargetToSlot(work->modelOwner, kind, 0);
             }
             if (current->modelIndex >= 0) {
                 objModelDestroy(work->modelOwner);

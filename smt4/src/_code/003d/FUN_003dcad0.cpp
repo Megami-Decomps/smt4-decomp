@@ -4,8 +4,8 @@
 
 extern "C" {
 
-s32 FUN_00227668(void *unit);
-s32 FUN_00293230(void);
+s32 btlEffectOwnerGetBestSlotValue(void *unit);
+s32 btlScriptUnitIsIncapacitated(void);
 
 typedef struct {
     u8 unk0[0x10];
@@ -52,16 +52,16 @@ s32 FUN_003dcad0(BtlBonusUnit *unit)
     s32 value;
 
     reinterpret_cast<s32>(btlGetMainState());
-    if (FUN_00293230() != 0) {
+    if (btlScriptUnitIsIncapacitated() != 0) {
         return -1;
     }
     value = 0;
     entry = btlFindNameBonus(unit);
     if (entry != NULL) {
-        value = FUN_00227668(unit) + entry->bonus;
+        value = btlEffectOwnerGetBestSlotValue(unit) + entry->bonus;
     }
     if (value == 0) {
-        value = FUN_00227668(unit);
+        value = btlEffectOwnerGetBestSlotValue(unit);
     }
     return value;
 }

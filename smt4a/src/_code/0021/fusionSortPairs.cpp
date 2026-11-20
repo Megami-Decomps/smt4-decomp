@@ -24,7 +24,7 @@ extern "C" {
 s32 FUN_002b27d4(const void *a, const void *b);
 s32 FUN_0034f0b4(const void *a, const void *b);
 s32 uniteComparePairsAscending(const void *a, const void *b);
-s32 FUN_002fd93c(const void *a, const void *b);
+s32 fusionPairCompare(const void *a, const void *b);
 s32 FUN_002b28d8(const void *a, const void *b);
 s32 fusionComparePairPriority(const void *a, const void *b);
 s32 fusionComparePairsByTablePriority(const void *a, const void *b);
@@ -49,7 +49,7 @@ void fusionSortPairs(void)
         if (ascending) {
             qsort(work->pairSort.sortedPairs, work->pairSort.sortedCount, sizeof(u16), uniteComparePairsAscending);
         } else {
-            qsort(work->pairSort.sortedPairs, work->pairSort.sortedCount, sizeof(u16), FUN_002fd93c);
+            qsort(work->pairSort.sortedPairs, work->pairSort.sortedCount, sizeof(u16), fusionPairCompare);
         }
     }
     if ((*setting & 0x7f) == 7) {

@@ -8,7 +8,7 @@
 #include "gamedata/SaveSlotTable.h"
 
 extern "C" {
-void FUN_00152f44(void);
+void messageVoiceFlagsGet(void);
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(s32 maximum);
 const char *popupSelectWeightedMessage(u32 kind, u16 slot);
@@ -21,7 +21,7 @@ void partyTryOpenLevelLimitPopup(void)
         u8 record[0x12C];
         u16 id;
     };
-    FUN_00152f44();
+    messageVoiceFlagsGet();
     if (g_popupState->state != 0) {
         return;
     }

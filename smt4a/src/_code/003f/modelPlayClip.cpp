@@ -29,7 +29,7 @@ struct AnimatedModel {
 
 extern "C" {
 
-void FUN_003fd924(AnimatedModel* model, u32 index, u8 flags, f32 time, f32 blend);
+void motionPlayerStartBlended(AnimatedModel* model, u32 index, u8 flags, f32 time, f32 blend);
 void moriModelUnitStartMaterialAnimation(AnimatedModel* model, u32 index, u8 flags, f32 time);
 void FUN_0045adc0(AnimationPlayback* playback, AnimationClip* clip, u32 mode);
 void modelEffectsSelect(void* effects, u32 index);
@@ -37,7 +37,7 @@ void modelEffectsSelect(void* effects, u32 index);
 // Plays clip `index` on the model: starts both motion layers, selects the clip and its effects.
 void modelPlayClip(AnimatedModel* model, u32 index, u8 flags, f32 time, f32 blend)
 {
-    FUN_003fd924(model, index, flags, time, blend);
+    motionPlayerStartBlended(model, index, flags, time, blend);
     moriModelUnitStartMaterialAnimation(model, index, flags, time);
 
     ModelResource* resource = model->resources != NULL ? &model->resources->resource : NULL;

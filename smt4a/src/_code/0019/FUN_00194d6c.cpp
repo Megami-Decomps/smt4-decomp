@@ -24,7 +24,7 @@ typedef struct {
 extern int FUN_0019472c(int, unsigned int, unsigned int *);
 extern unsigned int *FUN_00194834(unsigned char *);
 /* Supplied declaration required: FUN_00194c68. */
-extern unsigned int FUN_001a8e14(int);
+extern unsigned int soundArchiveFileEntryIsLoaded(int);
 
 
 unsigned int FUN_00194d6c(int *param_1,unsigned int param_2,unsigned int param_3)
@@ -44,7 +44,7 @@ unsigned int FUN_00194d6c(int *param_1,unsigned int param_2,unsigned int param_3
   unsigned char temp_v8 [16];
   
   if ((param_3 & 1) != 0) {
-    temp_v0 = FUN_001a8e14(param_1[1]);
+    temp_v0 = soundArchiveFileEntryIsLoaded(param_1[1]);
     temp_v1 = (**(romwright_code **)(*param_1 + 0x10))(param_1,temp_v0);
     if (temp_v1 == 0) {
       return 0;
@@ -66,7 +66,7 @@ unsigned int FUN_00194d6c(int *param_1,unsigned int param_2,unsigned int param_3
     temp_v3 = 0;
     do {
       if (temp_v5[temp_v3] != -1) {
-        temp_v0 = FUN_001a8e14(param_1[1]);
+        temp_v0 = soundArchiveFileEntryIsLoaded(param_1[1]);
         temp_v1 = (**(romwright_code **)(*param_1 + 0x10))(param_1,temp_v0);
         if (((param_3 & 0xc) != 0) && (temp_v1 == 0)) {
           return 0;

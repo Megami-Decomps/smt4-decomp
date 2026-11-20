@@ -4,11 +4,11 @@
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
-s32 FUN_002c1d5c(void);
+s32 eventIsSkipping(void);
 s32 asd3dSoundActorIsPlaying(s32 slot);
 void asd3dSoundActorSetPosition(u32 slot, const SoundActorQueuePosition *position);
 void asd3dSoundActorStart(u32 sound, s32 slot);
-void FUN_002cc08c(u32 sound, s32 slot);
+void spatialSoundActorStart(u32 sound, s32 slot);
 void *asd3dSoundActorGetSlotValue(s32 slot);
 
 /* Find an idle sound actor, or replace the player with the greatest priority value. */
@@ -18,7 +18,7 @@ u32 soundActorStartOnFreeChannel(u32 sound, SoundActorQueuePosition position)
     bool started = false;
     s32 greatestPriority = -1;
     s32 replacement = -1;
-    if (jyoucyuGetTableEntry(1) == 0 && FUN_002c1d5c() == 0) {
+    if (jyoucyuGetTableEntry(1) == 0 && eventIsSkipping() == 0) {
         for (s32 slot = 0; slot < 16; ++slot) {
             if (asd3dSoundActorIsPlaying(slot) == 0) {
                 asd3dSoundActorSetPosition(selected = slot, &position);
@@ -26,7 +26,7 @@ u32 soundActorStartOnFreeChannel(u32 sound, SoundActorQueuePosition position)
                     asd3dSoundActorStart(sound, selected);
                     selected += 100000;
                 } else if (sound - 0x0100016C <= 251) {
-                    FUN_002cc08c(sound, selected);
+                    spatialSoundActorStart(sound, selected);
                     break;
                 }
                 started = true;
@@ -41,7 +41,7 @@ u32 soundActorStartOnFreeChannel(u32 sound, SoundActorQueuePosition position)
                 }
             }
             if (replacement != -1)
-                FUN_002cc08c(sound, replacement);
+                spatialSoundActorStart(sound, replacement);
         }
     }
     return selected;

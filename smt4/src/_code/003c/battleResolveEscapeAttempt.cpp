@@ -35,11 +35,11 @@ struct BattleRetreatResourceFields {
 };
 
 extern "C" {
-extern BattleVersionResources *DAT_00435d18;
+extern BattleVersionResources *g_btlAux;
 extern BtlEvent *g_btlEvent;
 bool FUN_00256940(BtlCamera *, const BtlMainState *, s32);
 void btlReflectQueueKind34(s16, u32);
-u32 FUN_0026beb4(u32, u32, u32, u32, u32);
+u32 btlMenuCursorStepReflectAction(u32, u32, u32, u32, u32);
 s32 FUN_003bf1e4();
 u32 randRange(s32);
 void gameCounterAddSaturating(s32, u32);
@@ -61,13 +61,13 @@ void battleResolveEscapeAttempt(BattleRetreatOwner *owner, BattleRetreatAction *
         FUN_00256940(main, script, 1))
         btlReflectQueueKind34(0, 0);
     FUN_00256898(1, 0);
-    FUN_0026beb4(0, reinterpret_cast<u32>(action), 15, action->argument, 1);
+    btlMenuCursorStepReflectAction(0, reinterpret_cast<u32>(action), 15, action->argument, 1);
     s32 chance = FUN_003bf1e4();
     s32 roll = randRange(99);
     bool success = roll < chance;
 
     ++reinterpret_cast<BattleRetreatScriptFields *>(owner->script)->attempts;
-    BattleVersionResources *resources = DAT_00435d18;
+    BattleVersionResources *resources = g_btlAux;
     if (reinterpret_cast<BattleRetreatResourceFields *>(resources)->flags & 0x400)
         FUN_00240614(resources);
 

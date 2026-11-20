@@ -25,7 +25,7 @@ int aocIndexValueOrDefault(...); // declcheck: local (romwright prototype; the s
 int dataFindKindRecordWithAocOverrides(...);
 int textDrawString(...);
 int efctSetSpeed(void);
-int FUN_00180310(...);
+int statRowDrawValueImpl(...);
 int texDrawTableEntryAtStoredOrigin(...);
 int FUN_00185e84(...);
 int gameGetSlotRecord(...);
@@ -76,7 +76,7 @@ extern unsigned int DAT_00573bfc; /* 0x573bfc */
 /* Supplied declaration required: effectDispatchSelector. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00167860. */
-/* Supplied declaration required: FUN_00180310. */
+/* Supplied declaration required: statRowDrawValueImpl. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
 /* Supplied declaration required: nkmBaseGetRecord. */
@@ -89,7 +89,7 @@ extern int recordGetModeForId(int);
 extern int btlMainGetUnk14(void);
 extern int resourceRunOperationIfUnblocked(unsigned int);
 extern int listCursorGetRowIfUnblocked(unsigned int);
-extern int objectApplyIfUnblocked(unsigned int);
+extern int gridNavigationGetItemCount(unsigned int);
 extern int FUN_002cc9e0(int, unsigned int);
 extern unsigned int FUN_002ccd74(int, int);
 /* Supplied declaration required: FUN_002ccdb4. */
@@ -101,7 +101,7 @@ extern int uiSearchPrimary(unsigned int);
 /* Supplied declaration required: dataRecordGetKindValue. */
 /* Supplied declaration required: playerSecondaryGetKindValue. */
 /* Supplied declaration required: playerPrimaryGetKindValue. */
-extern unsigned int FUN_003df57c(int, unsigned int);
+extern unsigned int skillGetCostWithRankReduction(int, unsigned int);
 /* Supplied declaration required: gameDataFlagTestBit. */
 /* Supplied declaration required: halfTableGet. */
 /* Supplied declaration required: FUN_0040082c. */
@@ -237,7 +237,7 @@ void FUN_0028d270(int param_1)
                   temp_v15 = (int)(short)*temp_v29;
                   temp_v6 = aocIndexValueOrDefault();
                   sprintf((char *)temp_v20,"%s",temp_v6);
-                  temp_v6 = FUN_003df57c(temp_v15,1);
+                  temp_v6 = skillGetCostWithRankReduction(temp_v15,1);
                   temp_v23 = FUN_002ccdb4(0xffffffff,temp_v15);
                   temp_v14[0] = (unsigned char *)0x3d;
                   texDrawTableEntryAtStoredOrigin(2,0xd,0x76,*(short *)(temp_v3 + 8) + temp_v1,
@@ -263,7 +263,7 @@ void FUN_0028d270(int param_1)
                   temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x86));
                   temp_v14[0] = (unsigned char *)0x49;
                   temp_v14[2] = (unsigned char *)temp_v6;
-                  FUN_00180310(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
+                  statRowDrawValueImpl(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
                                (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,1,4
                               );
                 }
@@ -353,12 +353,12 @@ void FUN_0028d270(int param_1)
               ;
               temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x8a));
               temp_v14[0] = (unsigned char *)0x74;
-              FUN_00180310(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
+              statRowDrawValueImpl(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
                            (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,1,1);
               temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x8a));
               temp_v14[0] = (unsigned char *)0x49;
               temp_v14[2] = (unsigned char *)temp_v6;
-              FUN_00180310(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
+              statRowDrawValueImpl(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
                            (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,1,4);
             }
           }
@@ -397,7 +397,7 @@ void FUN_0028d270(int param_1)
             temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x86));
             temp_v14[0] = (unsigned char *)0x49;
             temp_v14[2] = (unsigned char *)0x0;
-            FUN_00180310(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
+            statRowDrawValueImpl(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                          (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,1,4);
           }
         }
@@ -479,14 +479,14 @@ void FUN_0028d270(int param_1)
                   temp_v15 = (int)(short)((short)(temp_v4 + temp_v9) + 1);
                   temp_v6 = aocIndexValueOrDefault(temp_v15);
                   sprintf((char *)temp_v20,"%s",temp_v6);
-                  temp_v26 = FUN_003df57c(temp_v15,1);
+                  temp_v26 = skillGetCostWithRankReduction(temp_v15,1);
                 }
                 else {
                   temp_v15 = (int)*(short *)(param_1 + *temp_v25 * 0x10 + (temp_v4 + temp_v9) * 2 +
                                             0x3c44);
                   temp_v6 = aocIndexValueOrDefault(temp_v15);
                   sprintf((char *)temp_v20,"%s",temp_v6);
-                  temp_v26 = FUN_003df57c(temp_v15,1);
+                  temp_v26 = skillGetCostWithRankReduction(temp_v15,1);
                 }
                 temp_v23 = FUN_002ccdb4(0xffffffff,temp_v15);
               }
@@ -598,7 +598,7 @@ LAB_0028d9e0:
           temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x86));
           temp_v14[0] = (unsigned char *)0x49;
           temp_v14[2] = (unsigned char *)temp_v26;
-          FUN_00180310(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
+          statRowDrawValueImpl(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
                        (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,1,4);
         }
         efctSetSpeed();
@@ -676,7 +676,7 @@ LAB_0028d9e0:
             temp_v9 = (int)(short)*temp_v29;
             temp_v6 = aocIndexValueOrDefault(temp_v9);
             sprintf((char *)temp_v20,"%s",temp_v6);
-            temp_v6 = FUN_003df57c(temp_v9,1);
+            temp_v6 = skillGetCostWithRankReduction(temp_v9,1);
             temp_v3 = FUN_002ccdb4(0xffffffff,temp_v9);
             temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0xa9));
             temp_v14[0] = (unsigned char *)0x0;
@@ -698,7 +698,7 @@ LAB_0028d9e0:
             temp_v14[0] = (unsigned char *)0x74;
             temp_v14[1] = &LAB_0028f73c;
             temp_v14[2] = (unsigned char *)temp_v6;
-            FUN_00180310(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
+            statRowDrawValueImpl(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
                          (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v2,1,4);
           }
         }
@@ -796,12 +796,12 @@ LAB_0028d9e0:
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v2,0x74,0);
         temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0xa7));
         temp_v14[0] = (unsigned char *)0x74;
-        FUN_00180310(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
+        statRowDrawValueImpl(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v2,1,1);
         temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0xa7));
         temp_v14[0] = (unsigned char *)0x74;
         temp_v14[2] = (unsigned char *)temp_v6;
-        FUN_00180310(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
+        statRowDrawValueImpl(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v2,1,4);
       }
     }
@@ -840,7 +840,7 @@ LAB_0028d9e0:
       temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0xa3));
       temp_v14[0] = (unsigned char *)0x74;
       temp_v14[2] = (unsigned char *)0x0;
-      FUN_00180310(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
+      statRowDrawValueImpl(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
                    (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v2,1,4);
     }
   }
@@ -923,13 +923,13 @@ LAB_0028d9e0:
             temp_v15 = (int)(short)((short)(temp_v10 + temp_v3) + 1);
             temp_v6 = aocIndexValueOrDefault();
             sprintf((char *)temp_v20,"%s",temp_v6);
-            temp_v6 = FUN_003df57c(temp_v15,1);
+            temp_v6 = skillGetCostWithRankReduction(temp_v15,1);
           }
           else {
             temp_v15 = (int)*(short *)(param_1 + *temp_v25 * 0x10 + (temp_v10 + temp_v3) * 2 + 0x3c44);
             temp_v6 = aocIndexValueOrDefault();
             sprintf((char *)temp_v20,"%s",temp_v6);
-            temp_v6 = FUN_003df57c(temp_v15,1);
+            temp_v6 = skillGetCostWithRankReduction(temp_v15,1);
           }
           temp_v23 = FUN_002ccdb4(0xffffffff,temp_v15);
           temp_v13 = 1;
@@ -1001,10 +1001,10 @@ LAB_0028d9e0:
     temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0xa3));
     temp_v14[0] = (unsigned char *)0x74;
     temp_v14[2] = (unsigned char *)temp_v6;
-    FUN_00180310(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
+    statRowDrawValueImpl(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
                  (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v2,1,4);
   }
-  temp_v11 = objectApplyIfUnblocked(*temp_v24);
+  temp_v11 = gridNavigationGetItemCount(*temp_v24);
   if (temp_v11 >= 7) {
     if (*temp_v25 == 1) {
       temp_v6 = 200;

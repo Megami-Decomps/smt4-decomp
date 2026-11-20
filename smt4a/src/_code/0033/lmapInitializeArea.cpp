@@ -18,12 +18,12 @@ extern "C" {
 u32 table23FindRecordByKey(s32 category, s32 subtype, u32 variant);
 Table23Record *dataTableGetRecord23(u32 index);
 void mapPlaceSet(s32, s32, s32);
-void FUN_00227a70();
-void FUN_002a2e98(s32, u32, u32, u32);
+void mapCollisionRelease();
+void mapCollisionLoad(s32, u32, u32, u32);
 void lmapUpdateMapBgm();
 void lmapApplyMapAndArea();
 void FUN_00378000();
-void FUN_00483acc(LmapObj *);
+void objectPoolDestroyAll(LmapObj *);
 void stateSetterSetFromBase(LmapObj *, s32, u32);
 void fieldBuildAreaPlacementList(LmapObj *);
 void FUN_004bc95c(s32, u32);
@@ -54,16 +54,16 @@ void lmapInitializeArea(u32 area, u32 spawnId)
     g_lmapScene->pose.previousPosition = position;
     g_lmapScene->pose.heading = 180.0f;
     g_lmapScene->pose.targetHeading = 180.0f;
-    FUN_00227a70();
+    mapCollisionRelease();
     if (state->mapId == 101) {
-        FUN_002a2e98(state->mapId, state->areaId, 101, 10);
+        mapCollisionLoad(state->mapId, state->areaId, 101, 10);
     } else {
-        FUN_002a2e98(state->mapId, state->areaId, 0, 0);
+        mapCollisionLoad(state->mapId, state->areaId, 0, 0);
     }
     lmapUpdateMapBgm();
     lmapApplyMapAndArea();
     FUN_00378000();
-    FUN_00483acc(&state->obj);
+    objectPoolDestroyAll(&state->obj);
     stateSetterSetFromBase(&state->obj, state->mapId - 100, state->areaId);
     fieldBuildAreaPlacementList(&state->obj);
     FUN_004bc95c(state->mapId, area);

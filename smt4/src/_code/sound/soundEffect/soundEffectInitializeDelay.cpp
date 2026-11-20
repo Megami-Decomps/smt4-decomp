@@ -3,31 +3,34 @@
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
-SoundEffectDelay DAT_004c5484;
-SoundEffectDelayParameters DAT_004c54e4;
-extern void *g_soundEffectBuffers;
-extern const char DAT_004076c8[];
-void FUN_00110d54(SoundEffectDelay *effect, const SoundEffectDelayParameters *parameters);
+SoundEffectDelay g_soundDelayEffect;
+SoundEffectDelayParameters g_soundDelayParameters;
+extern void *g_soundEffectBuffers[2]; /* [0] delay, [1] reverb work buffer */
+extern const char g_soundEffectSourceFileName[];
+void nw_snd_FxDelay_SetParam(SoundEffectDelay *effect, const SoundEffectDelayParameters *parameters);
 u32 nw_snd_FxDelay_GetRequiredMemSize(SoundEffectDelay *effect);
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
 void nw_snd_FxDelay_AssignWorkBuffer(SoundEffectDelay *effect, void *buffer, u32 size);
 void soundSourceQueueReadyRequest(u32 bus, SoundEffectDelay *effect);
 void soundEffectInitializeReverb();
 
+/* Sets up the delay effect on auxiliary bus 0 (A) unless resident entry 1 is present, then the
+ * reverb. */
 void soundEffectInitializeDelay()
 {
     if (jyoucyuGetTableEntry(1) == 0) {
-        DAT_004c54e4.unk00 = 150;
-        DAT_004c54e4.unk04 = 0.1f;
-        DAT_004c54e4.unk08 = 0.7f;
-        DAT_004c54e4.unk0c = 1;
-        FUN_00110d54(&DAT_004c5484, &DAT_004c54e4);
-        u32 size = nw_snd_FxDelay_GetRequiredMemSize(&DAT_004c5484);
-        asdDebugTrace(DAT_004076c8, 71);
-        g_soundEffectBuffers = asdMemoryAlloc(0x10000, 0x100, 0, size, 1);
-        nw_snd_FxDelay_AssignWorkBuffer(&DAT_004c5484, g_soundEffectBuffers, size);
-        soundSourceQueueReadyRequest(0, &DAT_004c5484);
+        g_soundDelayParameters.time = 150; /* milliseconds */
+        g_soundDelayParameters.feedback = 0.1f;
+        g_soundDelayParameters.damping = 0.7f;
+        g_soundDelayParameters.surround = 1;
+        nw_snd_FxDelay_SetParam(&g_soundDelayEffect, &g_soundDelayParameters);
+        u32 bufferSize = nw_snd_FxDelay_GetRequiredMemSize(&g_soundDelayEffect);
+        asdDebugTrace(g_soundEffectSourceFileName, 71);
+        g_soundEffectBuffers[0] = asdMemoryAlloc(0x10000, 0x100, 0, bufferSize, 1);
+        nw_snd_FxDelay_AssignWorkBuffer(&g_soundDelayEffect, g_soundEffectBuffers[0], bufferSize);
+        soundSourceQueueReadyRequest(0, &g_soundDelayEffect);
     }
     soundEffectInitializeReverb();
 }
-}
+
+} /* extern "C" */

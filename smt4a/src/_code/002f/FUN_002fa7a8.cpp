@@ -10,8 +10,8 @@ int itemTableGetItemRecord(...);
 int skillDataFindById(void);
 int btlCommandMenuEnterMode(int, int, int);
 int btlCommandResolveSelectedTarget(...);
-int FUN_002c7bb0(...);
-int FUN_002ccde8(...);
+int skillApplyToTarget(...);
+int btlMenuResolveHighlightedCommand(...);
 int flaggedEntrySetValueB(...);
 int FUN_004000a8(...);
 int FUN_00400164(...);
@@ -39,8 +39,8 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: btlCommandMenuEnterMode. */
 /* Supplied declaration required: btlCommandResolveSelectedTarget. */
 extern int listCursorGetRowOfChildIfUnblocked(int);
-/* Supplied declaration required: FUN_002c7bb0. */
-/* Supplied declaration required: FUN_002ccde8. */
+/* Supplied declaration required: skillApplyToTarget. */
+/* Supplied declaration required: btlMenuResolveHighlightedCommand. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
 /* Supplied declaration required: FUN_004000a8. */
 /* Supplied declaration required: FUN_00400164. */
@@ -80,7 +80,7 @@ void FUN_002fa7a8(int param_1)
   sysPlaySe(0x3a);
   temp_v14[0] = 0;
   temp_v8[0] = 0;
-  FUN_002ccde8(param_1,temp_v14,temp_v8);
+  btlMenuResolveHighlightedCommand(param_1,temp_v14,temp_v8);
   puVar9 = (unsigned int *)(param_1 + 0x3c84);
   *puVar9 = 0x1010101;
   temp_v17 = param_1 + 0x3c00;
@@ -98,12 +98,12 @@ void FUN_002fa7a8(int param_1)
       *puVar10 = 0x23;
       temp_v16[0] = 0;
       temp_v9[0] = 0;
-      FUN_002ccde8(param_1,temp_v16,temp_v9);
-      FUN_002c7bb0(*puVar8 - 1,0xffffffff,(int)temp_v9[0],temp_v5);
+      btlMenuResolveHighlightedCommand(param_1,temp_v16,temp_v9);
+      skillApplyToTarget(*puVar8 - 1,0xffffffff,(int)temp_v9[0],temp_v5);
       temp_v6 = 1;
       do {
         temp_v3 = gameGetSlotTable();
-        FUN_002c7bb0(*puVar8 - 1,(int)*(char *)(temp_v3 + temp_v6 + 0x1c9f),(int)temp_v9[0],
+        skillApplyToTarget(*puVar8 - 1,(int)*(char *)(temp_v3 + temp_v6 + 0x1c9f),(int)temp_v9[0],
                      param_1 + temp_v6 * 4 + 0x3c88);
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < 4);
@@ -164,12 +164,12 @@ void FUN_002fa7a8(int param_1)
         *puVar10 = 0x23;
         temp_v16[0] = 0;
         temp_v10[0] = 0;
-        FUN_002ccde8(param_1,temp_v16,temp_v10);
-        FUN_002c7bb0(*puVar8 - 1,0xffffffff,(int)temp_v10[0],temp_v5);
+        btlMenuResolveHighlightedCommand(param_1,temp_v16,temp_v10);
+        skillApplyToTarget(*puVar8 - 1,0xffffffff,(int)temp_v10[0],temp_v5);
         temp_v5 = 1;
         do {
           temp_v2 = gameGetSlotTable();
-          FUN_002c7bb0(*puVar8 - 1,(int)*(char *)(temp_v2 + temp_v5 + 0x1c9f),(int)temp_v10[0],
+          skillApplyToTarget(*puVar8 - 1,(int)*(char *)(temp_v2 + temp_v5 + 0x1c9f),(int)temp_v10[0],
                        param_1 + temp_v5 * 4 + 0x3c88);
           temp_v5 = temp_v5 + 1;
         } while (temp_v5 < 4);
@@ -225,7 +225,7 @@ void FUN_002fa7a8(int param_1)
         *puVar10 = 0x23;
         temp_v15[0] = 0;
         temp_v13[0] = 0;
-        FUN_002ccde8(param_1,temp_v15,temp_v13);
+        btlMenuResolveHighlightedCommand(param_1,temp_v15,temp_v13);
         btlItemComputeValues(0xffffffff,(int)temp_v13[0],temp_v5,temp_v6);
         temp_v5 = 1;
         do {
@@ -240,7 +240,7 @@ void FUN_002fa7a8(int param_1)
         *puVar10 = 0x23;
         temp_v10[0] = 0;
         temp_v11[0] = 0;
-        FUN_002ccde8(param_1,temp_v10,temp_v11);
+        btlMenuResolveHighlightedCommand(param_1,temp_v10,temp_v11);
         btlItemComputeValues(0xffffffff,(int)temp_v11[0],temp_v5,temp_v6);
         temp_v5 = 1;
         do {
@@ -254,7 +254,7 @@ void FUN_002fa7a8(int param_1)
       else {
         temp_v15[0] = 0;
         temp_v10[0] = 0;
-        FUN_002ccde8(param_1,temp_v15,temp_v10);
+        btlMenuResolveHighlightedCommand(param_1,temp_v15,temp_v10);
         temp_v3 = listCursorGetRowOfChildIfUnblocked(temp_v12);
         if (temp_v3 != 0) {
           temp_v5 = gameGetSlotTable();

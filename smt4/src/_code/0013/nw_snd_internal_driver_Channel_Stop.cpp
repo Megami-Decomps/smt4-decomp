@@ -5,7 +5,7 @@ extern "C" {
 int nw_snd_internal_driver_ChannelManager_Free(void *manager, SndChannel *channel);
 int nw_snd_internal_driver_Voice_Free(void *voice);
 int nw_snd_internal_driver_Voice_Stop(void *voice);
-extern void *FUN_002bafb0(void);
+extern void *nw_snd_internal_driver_ChannelManager_GetInstance(void);
 
 /* Stops and frees the channel's voice, notifies the callback, and returns the channel to its manager. */
 void nw_snd_internal_driver_Channel_Stop(SndChannel *channel)
@@ -21,7 +21,7 @@ void nw_snd_internal_driver_Channel_Stop(SndChannel *channel)
         }
         if (channel->allocated != 0) {
             channel->allocated = 0;
-            nw_snd_internal_driver_ChannelManager_Free(FUN_002bafb0(), channel);
+            nw_snd_internal_driver_ChannelManager_Free(nw_snd_internal_driver_ChannelManager_GetInstance(), channel);
         }
     }
 }

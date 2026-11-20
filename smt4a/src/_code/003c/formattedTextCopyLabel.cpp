@@ -1,8 +1,8 @@
 #include "shard/W6_W6Match2_FormattedTextSource.h"
 
 extern "C" {
-extern const char DAT_00544ab8[];
-extern const char DAT_00544ac0[];
+extern const char g_formatStringPrefixedText[];
+extern const char g_formatStringPercentS[];
 
 // Format the current item with its optional prefix, and return the item's ID.
 u32 formattedTextCopyLabel(FormattedTextSource* source, char* output)
@@ -13,9 +13,9 @@ u32 formattedTextCopyLabel(FormattedTextSource* source, char* output)
     }
     const char* prefix = source->prefix->text;
     if (prefix != NULL) {
-        __2sprintf(output, DAT_00544ab8, prefix, item->text);
+        __2sprintf(output, g_formatStringPrefixedText, prefix, item->text);
     } else {
-        __2sprintf(output, DAT_00544ac0, item->text);
+        __2sprintf(output, g_formatStringPercentS, item->text);
     }
     return source->item->id;
 }

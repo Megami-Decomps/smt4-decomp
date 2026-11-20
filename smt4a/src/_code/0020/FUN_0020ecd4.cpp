@@ -23,7 +23,7 @@ void *rt_memcpy(void *dest, const void *src, u32 size);
 u32 FUN_0020ecd4(void)
 {
     char name[0x48];
-    FUN_00152f44();
+    messageVoiceFlagsGet();
     if (playerHasFlagBit(5) != 0 || playerHasFlagBit(9) != 0) {
         if (g_gameState.statusTimer != 0) {
             g_gameState.statusTimer = g_gameState.statusTimer + 1;

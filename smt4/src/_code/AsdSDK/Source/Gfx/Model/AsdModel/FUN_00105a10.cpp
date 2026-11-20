@@ -8,7 +8,7 @@ extern "C" {
 extern void *DAT_00471c40;
 extern AsdModelLimits DAT_004dadb0;
 extern void *g_asdModelSlotArray3[2];
-extern void *DAT_00464b7c[2];
+extern void *g_asdModelSceneRoots[2];
 extern LightCount g_asdLightCount[2];
 
 void *FUN_00111724(void *allocator, const AsdModelSlotConfig *config);
@@ -40,14 +40,14 @@ void FUN_00105a10(const AsdModelSettings *settings)
         DAT_004dadb0.unk34 = settings->unk80;
         DAT_004dadb0.unk38 = settings->unk88;
     }
-    DAT_00464b7c[0] = FUN_001113b0(asdMemoryGetDefaultAllocator(), &DAT_004dadb0);
+    g_asdModelSceneRoots[0] = FUN_001113b0(asdMemoryGetDefaultAllocator(), &DAT_004dadb0);
     DAT_004dadb0.unk3c = 0x100;
     DAT_004dadb0.unk40 = 0x100;
     DAT_004dadb0.unk44 = 0x100;
     DAT_004dadb0.unk5c = 10;
     DAT_004dadb0.unk6c = 0x100;
     DAT_004dadb0.unk50 = 10;
-    DAT_00464b7c[1] = FUN_001113b0(asdMemoryGetDefaultAllocator(), (const AsdModelLimits *)&DAT_004dadb0.unk3c);
+    g_asdModelSceneRoots[1] = FUN_001113b0(asdMemoryGetDefaultAllocator(), (const AsdModelLimits *)&DAT_004dadb0.unk3c);
 
     for (s32 i = 0; i < 2; i++) {
         LightCount *scene = &g_asdLightCount[i];

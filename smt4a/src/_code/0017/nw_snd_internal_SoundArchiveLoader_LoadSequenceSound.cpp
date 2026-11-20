@@ -22,7 +22,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00190c24. */
 extern int FUN_0019472c(unsigned int, unsigned int, unsigned int *);
-extern unsigned int FUN_001a8e14(unsigned int);
+extern unsigned int soundArchiveFileEntryIsLoaded(unsigned int);
 /* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_LoadImpl. */
 
 
@@ -40,7 +40,7 @@ void nw_snd_internal_SoundArchiveLoader_LoadSequenceSound
   unsigned char temp_v6;
   
   if ((param_4 & 1) != 0) {
-    temp_v0 = FUN_001a8e14(*(unsigned int *)(param_1 + 4));
+    temp_v0 = soundArchiveFileEntryIsLoaded(*(unsigned int *)(param_1 + 4));
     temp_v1 = param_1;
     nw_snd_internal_SoundArchiveLoader_LoadImpl(param_1,temp_v0,param_3,param_5,0);
     if (temp_v1 == 0) {

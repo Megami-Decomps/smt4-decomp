@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(int, double);
 int FUN_001a1ee0(void);
 int effGetFrameStep(void);
-int FUN_001b63b0(void);
+int phaseCosine(void);
 int gfxQuaternionWorkspaceBuildMatrix(void);
 int FUN_0027134c(int, float *);
 int FUN_002fe2e8(int, float *);
@@ -66,7 +66,7 @@ extern float DAT_00647348; /* 0x647348 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: effGetFrameStep. */
-/* Supplied declaration required: FUN_001b63b0. */
+/* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: FUN_0027134c. */
 /* Supplied declaration required: FUN_002fe2e8. */
@@ -187,7 +187,7 @@ void FUN_00361c50(int param_1)
             pfVar8[8] = pfVar8[8] + pfVar8[9] * temp_v13;
             temp_v16 = temp_v16 * (float)((unsigned long long)temp_v25 >> 0x20);
             temp_v12 = temp_v16;
-            FUN_001b63b0();
+            phaseCosine();
             temp_v15 = pfVar8[7];
             temp_v16 = temp_v16 * pfVar8[8];
             FUN_001a1ee0();
@@ -243,7 +243,7 @@ void FUN_00361c50(int param_1)
             temp_v12 = (float)((unsigned long long)temp_v25 >> 0x20);
             pfVar8[0xc] = ((temp_v14 - pfVar11[0x3a]) + temp_v16 * pfVar11[0x3a]) * pfVar11[0x39];
             temp_v15 = pfVar8[10] * temp_v12;
-            FUN_001b63b0();
+            phaseCosine();
             temp_v14 = 0.0f;
             temp_v12 = pfVar8[10] * temp_v12;
             FUN_001a1ee0();
@@ -339,7 +339,7 @@ void FUN_00361c50(int param_1)
               pfVar8[7] = (pfVar8[7] + pfVar8[0xc] * temp_v12) -
                           (float)((unsigned long long)temp_v17 >> 0x20) * temp_v12 * temp_v12 * 0.5f;
               temp_v16 = pfVar8[10] * temp_v4;
-              FUN_001b63b0();
+              phaseCosine();
               temp_v15 = pfVar8[7];
               temp_v16 = temp_v16 * pfVar8[8];
               temp_v4 = pfVar8[10] * temp_v4;

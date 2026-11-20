@@ -13,7 +13,7 @@ typedef struct Object {
     /* 0xFC */ u8 callback[1];
 } Object;
 
-extern void FUN_002f76ca(void *slot, const char *name);
+extern void stringSlotAssign(void *slot, const char *name);
 extern void FUN_002f7824(void *listener);
 
 void FUN_00116cdc(Object *obj)
@@ -21,7 +21,7 @@ void FUN_00116cdc(Object *obj)
     obj->pending = 0;
     FUN_002f7824(obj->listener);
     obj->flag = 0;
-    FUN_002f76ca(obj->callback, "");
+    stringSlotAssign(obj->callback, "");
     obj->refCount++;
 }
 

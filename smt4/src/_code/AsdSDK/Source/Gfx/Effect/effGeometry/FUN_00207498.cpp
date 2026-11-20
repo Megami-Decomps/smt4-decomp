@@ -3,7 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
-extern const char DAT_00414954[];
+extern const char g_effGeometrySourceFileName[];
 void *memAlloc(u32 size, u32 alignment, u32 region, u32 heap, u32 pageSize, u32 flags);
 void recordPrepareActive(EffGeomRecord *record, u32 buffer, s32 indexCount, s32 vertexCount);
 void matrix44SetIdentity(f32 *matrix);
@@ -12,14 +12,14 @@ void matrix44SetIdentity(f32 *matrix);
 // rows x columns element layout.
 EffGeomPointHandle *FUN_00207498(s32 count, u16 rows, s16 columns, s16 flags)
 {
-    asdDebugTrace(DAT_00414954, 506);
+    asdDebugTrace(g_effGeometrySourceFileName, 506);
     EffGeomPointHandle *handle = (EffGeomPointHandle *)memAlloc(0x10000, 0x100, 0, 0x5c, 0x10, 1);
     EffGeomRecord *record = new (count) EffGeomRecord();
     s32 elementCount = columns * count;
     s32 vertexCount = rows * count;
     recordPrepareActive(record, 0x25, elementCount * 3, vertexCount);
     handle->record = record;
-    asdDebugTrace(DAT_00414954, 513);
+    asdDebugTrace(g_effGeometrySourceFileName, 513);
     handle->points = (f32 *)memAlloc(0x10000, 0x100, 0, count << 4, 0x10, 1);
     if (count > 0) {
         u16 i = 0;

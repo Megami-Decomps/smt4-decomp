@@ -75,7 +75,7 @@ extern "C" {
 
 void btlTargetSetFlag10(BtlStateRecords *state, s32 id, s32 value);
 BtlStatusEntry *btlMainFindEntryByListedId(BtlStateRecords *state, s32 id);
-u16 FUN_00245cc0(s32 kind);
+u16 mapCategoryToDestinationGroup(s32 kind);
 void FUN_0033b1ac(BtlStateRecords *state, s32 value);
 
 /* Sets (set != 0) or clears the status bits `status` on the entry with the listed id, mirroring them
@@ -138,7 +138,7 @@ void FUN_003bcdb0(s32 id, s32 set, u16 status)
                     entry->linkedC->ailments = entry->linkedC->ailments & ~status;
                 }
                 if ((status & STATUS_BIT_B) != 0) {
-                    u16 value = FUN_00245cc0(22);
+                    u16 value = mapCategoryToDestinationGroup(22);
                     BtlStateRecords *other = reinterpret_cast<BtlStateRecords *>(btlGetMainState());
                     BtlStatusEntry *target = btlMainFindEntryByListedId(other, id);
 
@@ -147,7 +147,7 @@ void FUN_003bcdb0(s32 id, s32 set, u16 status)
                     }
                 }
                 if ((status & STATUS_BIT_A) != 0) {
-                    u16 value = FUN_00245cc0(23);
+                    u16 value = mapCategoryToDestinationGroup(23);
                     BtlStateRecords *other = reinterpret_cast<BtlStateRecords *>(btlGetMainState());
                     BtlStatusEntry *target = btlMainFindEntryByListedId(other, id);
 
@@ -156,7 +156,7 @@ void FUN_003bcdb0(s32 id, s32 set, u16 status)
                     }
                 }
                 if ((status & STATUS_BIT_C) != 0) {
-                    u16 value = FUN_00245cc0(24);
+                    u16 value = mapCategoryToDestinationGroup(24);
                     BtlStateRecords *other = reinterpret_cast<BtlStateRecords *>(btlGetMainState());
                     BtlStatusEntry *target = btlMainFindEntryByListedId(other, id);
 
@@ -165,7 +165,7 @@ void FUN_003bcdb0(s32 id, s32 set, u16 status)
                     }
                 }
                 if ((status & STATUS_BIT_D) != 0) {
-                    u16 value = FUN_00245cc0(25);
+                    u16 value = mapCategoryToDestinationGroup(25);
                     BtlStateRecords *other = reinterpret_cast<BtlStateRecords *>(btlGetMainState());
                     BtlStatusEntry *target = btlMainFindEntryByListedId(other, id);
 

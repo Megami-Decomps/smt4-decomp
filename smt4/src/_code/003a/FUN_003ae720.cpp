@@ -4,7 +4,7 @@
 extern "C" {
 void memFill8(void *destination, u32 value);
 u16 slotFindNonnegativeRank(void *owner, u32 index);
-void FUN_002ad8a8(BtlUiObjC *window, BtlUiSettings *settings);
+void btlUiCopyIdList(BtlUiObjC *window, BtlUiSettings *settings);
 void FUN_002dc464(BtlUiObjC *window);
 void FUN_002e439c(BtlUiObjC *window);
 
@@ -17,7 +17,7 @@ void FUN_003ae720(void *unused, s32 immediate)
     ui->settings.slotRanks[1] = slotFindNonnegativeRank(ui->owner, 1);
     ui->settings.slotRanks[2] = slotFindNonnegativeRank(ui->owner, 2);
     ui->settings.slotRanks[3] = slotFindNonnegativeRank(ui->owner, 3);
-    FUN_002ad8a8(&ui->objC, &ui->settings);
+    btlUiCopyIdList(&ui->objC, &ui->settings);
     if (immediate != 0) {
         FUN_002dc464(&ui->objC);
     } else {

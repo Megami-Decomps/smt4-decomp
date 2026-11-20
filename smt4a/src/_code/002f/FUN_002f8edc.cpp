@@ -12,7 +12,7 @@ int btlQueueActionMessage(...);
 int btlQueueKeyedScalarReflectAction(...);
 int btlReflectCreateKind10(...);
 int FUN_004fbfbc(...);
-int FUN_004fc094(int, unsigned int, int, int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int);
+int btlAdjustPropertyAndQueueAction(int, unsigned int, int, int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int);
 
 /* stack frame of void: 18 slot(s), 72 byte(s) */
 typedef struct {
@@ -48,7 +48,7 @@ extern int scrGetArg(unsigned int);
 /* Supplied declaration required: btlQueueKeyedScalarReflectAction. */
 /* Supplied declaration required: btlReflectCreateKind10. */
 /* Supplied declaration required: FUN_004fbfbc. */
-/* Supplied declaration required: FUN_004fc094. */
+/* Supplied declaration required: btlAdjustPropertyAndQueueAction. */
 
 
 unsigned int FUN_002f8edc(void)
@@ -69,7 +69,7 @@ unsigned int FUN_002f8edc(void)
     btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v2), temp_v0);
     reinterpret_cast<int>(btlGetMainState());
     btlSlotManagerResetStates();
-    FUN_004fc094(0,temp_v1,0,temp_v3,0,*(unsigned int *)(temp_v2 + 0x25c),0xffffffff,0xffffffff,
+    btlAdjustPropertyAndQueueAction(0,temp_v1,0,temp_v3,0,*(unsigned int *)(temp_v2 + 0x25c),0xffffffff,0xffffffff,
                  *(unsigned int *)(temp_v2 + 600),*(unsigned int *)(temp_v2 + 0x25c),0,0,1,0,0,0,0,0,0,0,1,0
                  ,1,1,0,1);
     btlQueueKeyedScalarReflectAction(0x19,temp_v1,temp_v3,0);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00189a38(unsigned int, unsigned int);
+int errThrowFatal(unsigned int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 
 extern unsigned char DAT_005891b0; /* 0x5891b0 */
 
-/* Supplied declaration required: FUN_00189a38. */
+/* Supplied declaration required: errThrowFatal. */
 extern unsigned int nn_gxlow_CTR_AcquireGpuRight(void);
 extern unsigned int nn_gxlow_CTR_ReleaseGpuRight(void);
 
@@ -49,7 +49,7 @@ void FUN_00170ebc(int param_1)
   if (-1 < (int)temp_v0) {
     return;
   }
-  FUN_00189a38(temp_v0,temp_v1);
+  errThrowFatal(temp_v0,temp_v1);
   return;
 }
 

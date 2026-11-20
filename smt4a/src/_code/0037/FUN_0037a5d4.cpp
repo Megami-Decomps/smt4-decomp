@@ -5,7 +5,7 @@
 
 extern "C" {
 extern u32 DAT_00588fcc;
-u32 FUN_001029da(const void *descriptor);
+u32 scriptParseIntArgumentPreservingErrno(const void *descriptor);
 u32 FUN_001566a8(u32 group, u32 id, u32 kind, u8 flags, u8 priority, f32 leftGain, f32 rightGain);
 
 u32 FUN_0037a5d4(u32 selector)
@@ -21,7 +21,7 @@ u32 FUN_0037a5d4(u32 selector)
     typedef char RequestControlLayoutCheck[sizeof(RequestStatus) == 0x78 &&
         sizeof(RequestDescriptor) == 0xc && offsetof(RequestControlView, descriptors) == 0x1e0 &&
         offsetof(RequestControlView, flags) == 0x1e4 ? 1 : -1];
-    RequestControlView *requests = (RequestControlView *)&DAT_0061978c;
+    RequestControlView *requests = (RequestControlView *)&g_soundObjectTable;
     if (scrGetCommandFrame() != 0) {
         RequestStatus *status = DAT_00588fcc < 4 ? &requests->slots[DAT_00588fcc] : NULL;
         if (status->state != 2) {
@@ -34,7 +34,7 @@ u32 FUN_0037a5d4(u32 selector)
         }
         if (descriptor != NULL) {
             u8 flags = requests->flags | 4;
-            u32 id = FUN_001029da(descriptor);
+            u32 id = scriptParseIntArgumentPreservingErrno(descriptor);
             f32 leftGain = 0.707f;
             f32 rightGain = 0.707f;
             if (descriptor->channel == 0) {

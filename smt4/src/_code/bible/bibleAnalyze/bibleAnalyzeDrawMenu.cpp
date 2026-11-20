@@ -1,0 +1,106 @@
+/* NON_MATCHING: VFP argument setup (the sliding-offset float and the text position) and the pool-constant loads are scheduled differently; the draw sequence is the same. */
+#include "common.h"
+#include <stdio.h>
+
+extern "C" {
+
+/* One list row (0x20 bytes): its id is the short at 4. */
+typedef struct AnalyzeRow {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s16 id;
+    /* 0x06 */ u8 unk06[0x1A];
+} AnalyzeRow;
+
+/* A text layout record: a position at 8/10 and a pointer to the box size. */
+typedef struct AnalyzeTextBox {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+    /* 0x0C */ s16 *size;
+} AnalyzeTextBox;
+
+/* The analyze screen's work block (only the fields drawn here). */
+typedef struct AnalyzeWork {
+    /* 0x000 */ u8 unk000[0x14];
+    /* 0x014 */ s32 mode;               /* 2: a row is selected */
+    /* 0x018 */ u8 unk018[8];
+    /* 0x020 */ u8 list[4];             /* the scroll list state */
+    /* 0x024 */ s32 visibleRows;
+    /* 0x028 */ s32 rowCount;
+    /* 0x02C */ u8 unk02c[0x9C];
+    /* 0x0C8 */ u8 panel[0x4CC];
+    /* 0x594 */ s32 slide;              /* the panel's slide-in offset, 0..256 */
+    /* 0x598 */ u8 unk598[0x10];
+    /* 0x5A8 */ AnalyzeRow rows[1];
+} AnalyzeWork;
+
+typedef struct AnalyzeWorkView {
+    u8 unk0000[0xA5B4];
+    u32 targetId;
+} AnalyzeWorkView;
+
+typedef struct AnalyzeFlagView {
+    u8 unk0000[0xA6BE];
+    u8 secondTab;
+} AnalyzeFlagView;
+
+extern u32 g_btlDevilListCallbackContext[];
+
+void uiRectDrawAtBottomRight(void *panel, s32 id, s32 a, s32 b, s32 slide, f32 offset);
+void FUN_00231bcc(void *panel, s32 id, s32 a, s32 b, s32 slide, s32 c);
+u32 dataLookupDisplayName(u8 *out, u32 id);
+AnalyzeTextBox *layoutFindTableEntry(void *panel, u32 id);
+s32 textMeasureOnLayer(const char *text, s32 mode);
+void drawTextAtSnappedRectangle(void *panel, f32 x, f32 y, s32 a, s32 b, const char *text, f32 scale, f32 c, f32 d);
+s32 FUN_0029e924(void *list);
+s32 flaggedEntryGetValueByState(void *list);
+void FUN_003aa044(AnalyzeWork *work, s32 index, s32 selected, s32 id);
+void scrollMenuDrawLayer(AnalyzeWork *work, s32 step);
+
+/* Draws the analyze panel: the slid-in frame, the two tab headers, the target's name centred in
+ * its box, and the visible rows (the selected row last). */
+void bibleAnalyzeDrawMenu(AnalyzeWork *work)
+{
+    s32 slide = work->slide;
+    f32 offset = (f32)(0x100 - slide);
+    f32 scale = offset * (1.0f / 256.0f);
+
+    uiRectDrawAtBottomRight(work->panel, 13, 0, 0, slide, offset);
+    s32 tab = ((AnalyzeFlagView *)work)->secondTab == 0 ? 0x1025 : 0x1023;
+    FUN_00231bcc(work->panel, tab - 4, 0, 0, slide, 1);
+    FUN_00231bcc(work->panel, tab, 0, 0, slide, 1);
+    tab = ((AnalyzeFlagView *)work)->secondTab == 1 ? 0x1026 : 0x1024;
+    FUN_00231bcc(work->panel, tab - 4, 0, 0, slide, 1);
+    FUN_00231bcc(work->panel, tab, 0, 0, slide, 1);
+
+    u8 nameBuffer[8];
+    char text[64];
+    u32 name = dataLookupDisplayName(nameBuffer, ((AnalyzeWorkView *)work)->targetId);
+
+    sprintf(text, "%s%s", name, g_btlDevilListCallbackContext[1]);
+    AnalyzeTextBox *box = layoutFindTableEntry(work->panel, 0x102B);
+    s32 width = textMeasureOnLayer(text, 2);
+
+    drawTextAtSnappedRectangle(work->panel, (f32)(box->x + *box->size / 2 - width / 2), (f32)box->y, 2, -1, text,
+                 scale, 1.0f, 0.0f);
+
+    s32 first = FUN_0029e924(work->list);
+    s32 visible = work->rowCount;
+    if (work->visibleRows < visible)
+        visible = work->visibleRows;
+    AnalyzeRow *rows = work->rows;
+
+    for (s32 i = 0; i < visible; i++) {
+        if (work->mode != 2 || flaggedEntryGetValueByState(work->list) != i) {
+            FUN_003aa044(work, i + 1, 0, rows[first + i].id);
+        }
+    }
+    if (work->rowCount > 0 && work->mode == 2) {
+        s32 id = rows[flaggedEntryGetValueByState(work->list) + first].id;
+
+        FUN_003aa044(work, flaggedEntryGetValueByState(work->list) + 1, 1, id);
+    }
+    scrollMenuDrawLayer(work, slide + 1);
+}
+
+}

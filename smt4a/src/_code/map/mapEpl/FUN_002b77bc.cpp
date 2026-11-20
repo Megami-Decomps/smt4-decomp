@@ -14,11 +14,11 @@ extern "C" {
 extern MapEpl *g_mapEpl;
 extern const char DAT_005319ec[];
 void *asdMemoryAllocTracked(s32 heap, s32 alignment, s32 flags, u32 size, s32 clear);
-s32 FUN_0038589c(void);
+s32 dataTable45GetSection3Count(void);
 const MapEplPlacementRecord *aocDataTable2dGetEntryKind3(u32 index);
 s32 gameFlagIsSet(s32 flag);
-void *FUN_001abbc4(void *data);
-void FUN_001b4eb8(void *object, const f32 *position);
+void *effPartCreateFromSource(void *data);
+void skelNodePoseChain(void *object, const f32 *position);
 }
 static inline s32 loadMapEffect(const char *path)
 {
@@ -28,7 +28,7 @@ static inline s32 loadMapEffect(const char *path)
         if (!entry->object) {
             u32 size;
             entry->data = asdLoadFileSyncNoContext(path, &size, 1, 0x80);
-            entry->object = FUN_001abbc4(entry->data);
+            entry->object = effPartCreateFromSource(entry->data);
             return slot;
         }
     }
@@ -53,7 +53,7 @@ extern "C" void FUN_002b77bc(s32 map, s32 area)
             entry->position[3] = 0.0f;
         }
     }
-    for (s32 i = 0; i < FUN_0038589c(); ++i) {
+    for (s32 i = 0; i < dataTable45GetSection3Count(); ++i) {
         const MapEplPlacementRecord *record = aocDataTable2dGetEntryKind3(i);
         if (record->map != -1 &&
             (!record->requiredFlag || gameFlagIsSet(record->requiredFlag)) &&
@@ -68,7 +68,7 @@ extern "C" void FUN_002b77bc(s32 map, s32 area)
                 entry->position[3] = 0.0f;
                 entry->position[1] = y;
                 entry->position[2] = z;
-                FUN_001b4eb8(entry->object, entry->position);
+                skelNodePoseChain(entry->object, entry->position);
             }
         }
     }

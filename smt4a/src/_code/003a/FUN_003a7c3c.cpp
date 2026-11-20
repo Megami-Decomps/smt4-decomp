@@ -3,7 +3,7 @@
 #include "shard/W6_W6Match3_ScrollSelection.h"
 
 extern "C" {
-s32 objectApplyIfUnblocked(void *cursor);
+s32 gridNavigationGetItemCount(void *cursor);
 void uiQuestSpritesCreate(void);
 void FUN_003d498c(u32 quest, s32 mode);
 void uiSpriteSetKeyframe(void *sprite, s32 sequence, s32 mode);
@@ -28,7 +28,7 @@ void FUN_003a7c3c(u32 quest)
         cursor = work->cursor;
         ids = work->list;
     }
-    for (s32 index = 0; index < objectApplyIfUnblocked(cursor); ++index) {
+    for (s32 index = 0; index < gridNavigationGetItemCount(cursor); ++index) {
         if (ids[index] == quest) {
             scrollListSetSelectionTracked(reinterpret_cast<ScrollSelection *>(cursor), index);
             break;

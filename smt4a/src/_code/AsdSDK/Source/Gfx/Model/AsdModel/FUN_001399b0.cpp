@@ -8,7 +8,7 @@
 extern "C" {
 struct Triple;
 extern Triple DAT_00636ebc;
-extern Triple DAT_00636ec8;
+extern Triple g_asdMdlObjectList;
 extern u32 DAT_00636e30[];
 extern u32 DAT_00636e6c[];
 extern ModelSlotList* g_asdModelSlotArray0[2];
@@ -26,14 +26,14 @@ bool nw_gfx_SceneNode_AttachChild(ModelSlotList* parent, u32 child);
 void FUN_001399b0(const u32* settings, u32 options)
 {
     tripleClear(&DAT_00636ebc);
-    tripleClear(&DAT_00636ec8);
+    tripleClear(&g_asdMdlObjectList);
     GfxSettings *state = &g_gfxSettings;
     state->unk1C = 0;
     state->attachInfo[0] = FUN_0014850c(asdMemoryGetDefaultAllocator(), DAT_00636e30);
     state->attachInfo[1] = FUN_0014850c(asdMemoryGetDefaultAllocator(), DAT_00636e6c);
     FUN_0013d42c(settings, options);
     for (s32 i = 0; i < 2; ++i) {
-        FUN_001767a4(state->attachInfo[i], state->transformBuilder[i]);
+        asdScenePassVisit(state->attachInfo[i], state->transformBuilder[i]);
         FUN_00176538(state->attachInfo[i]);
     }
     FUN_001445d4();

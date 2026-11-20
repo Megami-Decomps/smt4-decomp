@@ -10,13 +10,13 @@ extern struct {
     u8 unk30[0x38];
     u8 widget;
 } *g_naviMain;
-void FUN_0048821c(void *widget, u32 value);
+void naviSwitchTextureSetForMap(void *widget, u32 value);
 
 /* Changes navigation selection and resets its progress counter. */
 void naviMainSetSelectionResetProgress(u32 value)
 {
     MapCounter current = {value, 0};
     g_naviMain->current = current;
-    FUN_0048821c(&g_naviMain->widget, value);
+    naviSwitchTextureSetForMap(&g_naviMain->widget, value);
 }
 }

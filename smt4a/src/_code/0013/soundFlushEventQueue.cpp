@@ -4,7 +4,7 @@
 extern "C" {
 extern u8 g_soundVolumeSetting;
 extern u32 g_eventQueueEntries[32]; // sound ids queued for this frame, 0 when free
-s32 FUN_00162ea4(void);
+s32 eventIsSkipping(void);
 void asdSndPlaySlotA(u32 id, u32 volume, u32 flags);
 void asdSndPlaySlotB(u32 id, u32 volume, u32 flags, f32 volumeScale, f32 pan);
 void asdSoundDetachAllHandles(void);
@@ -12,7 +12,7 @@ void asdSoundDetachAllHandles(void);
 /* Plays a sound effect, panned by the source position for the positional ids. */
 static __inline void soundPlaySe(u32 id, u32 position)
 {
-    if (jyoucyuGetTableEntry(1) == 0 && FUN_00162ea4() == 0) {
+    if (jyoucyuGetTableEntry(1) == 0 && eventIsSkipping() == 0) {
         if (id >= 0x100007C && id <= 0x100020C) {
             asdSndPlaySlotA(id, g_soundVolumeSetting, 0);
         } else if (id >= 0x100020D && id <= 0x1000312) {
@@ -54,7 +54,7 @@ void soundFlushEventQueue(void)
         soundPlaySe(id, 0);
         g_eventQueueEntries[i] = 0;
     }
-    if (FUN_00162ea4() != 0) {
+    if (eventIsSkipping() != 0) {
         asdSoundDetachAllHandles();
     }
 }

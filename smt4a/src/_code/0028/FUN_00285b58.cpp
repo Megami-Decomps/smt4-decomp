@@ -11,7 +11,7 @@ extern "C" {
 
 int textDrawString(...);
 int efctSetSpeed(void);
-int FUN_00180310(...);
+int statRowDrawValueImpl(...);
 int uiDrawDataEntryRow(...);
 int uniteDrawOptionRow(...);
 int FUN_0023dcec(...);
@@ -37,7 +37,7 @@ extern unsigned char LAB_00285f24; /* 0x285f24 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00180310. */
+/* Supplied declaration required: statRowDrawValueImpl. */
 extern int uniteGetWork(void);
 /* Supplied declaration required: uiDrawDataEntryRow. */
 /* Supplied declaration required: uniteDrawOptionRow. */
@@ -105,14 +105,14 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
         texDrawTableEntryAtStoredOrigin(2,0x1a,0x4a,param_1,param_2,0x65);
         temp_v1 = (int)asdTMTexTableEntryAt(0x1a,0x253);
         temp_v3 = computeCountLimit();
-        FUN_00180310(0,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,1,3,0x65,
+        statRowDrawValueImpl(0,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,1,3,0x65,
                      &LAB_00285f24,temp_v3);
       }
       else {
         texDrawTableEntryAtStoredOrigin(2,0x1a,0x4a,param_1,param_2,0x65);
         temp_v1 = (int)asdTMTexTableEntryAt(0x1a,0x4c);
         temp_v3 = computeCountLimit();
-        FUN_00180310(0,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,1,2,0x65,
+        statRowDrawValueImpl(0,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,1,2,0x65,
                      &LAB_00285f24,temp_v3);
       }
     }

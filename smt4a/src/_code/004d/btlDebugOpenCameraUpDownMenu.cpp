@@ -6,10 +6,10 @@
 extern "C" {
 extern const AsdListBoxEntry DAT_005736e0[8];
 extern const char DAT_00528088[];
-extern f32 DAT_0057150c;
-extern f32 DAT_00571510;
+extern f32 g_btlCameraDebugOffset;
+extern f32 g_btlCameraDebugUpDown;
 s32 jobIsValid(u32 job);
-void FUN_003592dc(u32 job);
+void asdListBoxJobReset(u32 job);
 void jobStop(u32 job, s32 mode);
 u32 asdListBoxCreateDefaultFlags(u32 parent, u32 id, u32 argument, u32 flags);
 void asdListBoxAddItems(u32 job, const AsdListBoxEntry *items, u32 count);
@@ -22,7 +22,7 @@ void asdListBoxSetFloatItem(u32 job, s32 item, f32 value, s32 minimum, s32 maxim
 void btlDebugOpenCameraUpDownMenu(BattleDebugPanelWork *work, BattleDebugPanelParent *parent)
 {
     if (jobIsValid(work->panelJob)) {
-        FUN_003592dc(work->panelJob);
+        asdListBoxJobReset(work->panelJob);
         jobStop(work->panelJob, 0);
     }
     work->panelJob = asdListBoxCreateDefaultFlags(parent->job, 117, 0, 0);
@@ -32,8 +32,8 @@ void btlDebugOpenCameraUpDownMenu(BattleDebugPanelWork *work, BattleDebugPanelPa
     asdListBoxSetToggleItem(work->panelJob, 0, (g_btlCamera->flags & 0x20) >> 5);
     asdListBoxSetToggleItem(work->panelJob, 1, (g_btlCamera->flags & 0x40) >> 6);
     asdListBoxSetToggleItem(work->panelJob, 2, (g_btlCamera->flags & 0x80) >> 7);
-    asdListBoxSetFloatItem(work->panelJob, 3, DAT_0057150c, -10, 10);
-    asdListBoxSetFloatItem(work->panelJob, 4, DAT_00571510, 0, 10);
+    asdListBoxSetFloatItem(work->panelJob, 3, g_btlCameraDebugOffset, -10, 10);
+    asdListBoxSetFloatItem(work->panelJob, 4, g_btlCameraDebugUpDown, 0, 10);
     asdListBoxSetFloatItem(work->panelJob, 5, g_btlCamera->vector[0], -999, 999);
     asdListBoxSetFloatItem(work->panelJob, 6, g_btlCamera->vector[1], -999, 999);
     asdListBoxSetFloatItem(work->panelJob, 7, g_btlCamera->vector[2], -999, 999);

@@ -9,7 +9,7 @@ struct ResolvedNumericEntry {
 };
 
 extern "C" {
-u32 FUN_0016ccfc(void);
+u32 tokenTableGet(void);
 s32 tokenResolveAddress(u32 context, ResolvedNumericEntry **address, u32 token);
 u32 FUN_004285d4(FormattedNumericEntry *output, const char *text, const NumericEntryFormat *format);
 
@@ -23,7 +23,7 @@ WindowStatusResult FUN_00428060(void *owner, void *output, const void *identifie
         return WindowStatusResult(static_cast<u32>(ownerStatus));
 
     ResolvedNumericEntry *entry;
-    s32 status = tokenResolveAddress(FUN_0016ccfc(), &entry, *static_cast<u32 *>(owner));
+    s32 status = tokenResolveAddress(tokenTableGet(), &entry, *static_cast<u32 *>(owner));
     if (!nnResultIsFailure(status)) {
         status = static_cast<s32>(FUN_004285d4(entryOutput, text, &entry->format));
         if (!nnResultIsFailure(status))

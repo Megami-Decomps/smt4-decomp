@@ -8,8 +8,8 @@ extern "C" {
 int asdMemoryAllocTraced(int, unsigned char *, int);
 int lmapApplyAreaHandleVisibility(void);
 int ptrVectorAt(unsigned int, int);
-int FUN_0040a908(void);
-int FUN_0040a918(int, int);
+int moriModelContentSetRequestFirst(void);
+int moriModelContentSetRequestSecond(int, int);
 int moriModelContentCreateBinding(int);
 int FUN_0040a9a0(int, unsigned int);
 int FUN_0040ab9c(unsigned int, unsigned int);
@@ -53,8 +53,8 @@ extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: lmapApplyAreaHandleVisibility. */
 extern int FUN_003fdadc(void);
 /* Supplied declaration required: ptrVectorAt. */
-/* Supplied declaration required: FUN_0040a908. */
-/* Supplied declaration required: FUN_0040a918. */
+/* Supplied declaration required: moriModelContentSetRequestFirst. */
+/* Supplied declaration required: moriModelContentSetRequestSecond. */
 /* Supplied declaration required: moriModelContentCreateBinding. */
 /* Supplied declaration required: FUN_0040a9a0. */
 /* Supplied declaration required: FUN_0040ab9c. */
@@ -115,8 +115,8 @@ void FUN_00379d58(void)
     }
     piVar6 = (int *)(temp_v0 + 0xae4);
     *(unsigned int *)(temp_v0 + 0xae4) = temp_v2;
-    FUN_0040a908();
-    FUN_0040a918(*piVar6,0x10000);
+    moriModelContentSetRequestFirst();
+    moriModelContentSetRequestSecond(*piVar6,0x10000);
     FUN_0040a9a0(*piVar6,temp_v5);
     FUN_0040ab9c(*(unsigned int *)(temp_v0 + 0xae0),*(unsigned int *)(*piVar6 + 0xc));
     FUN_00416168(*(unsigned int *)(*piVar6 + 0xc),*(unsigned int *)(*(int *)(temp_v0 + 0xae0) + 0xc));

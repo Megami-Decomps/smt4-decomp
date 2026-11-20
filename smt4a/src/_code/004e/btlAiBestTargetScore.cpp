@@ -27,7 +27,7 @@ typedef struct BtlContextA {
 extern BtlActionState g_btlAction;
 
 BtlUnitScores *btlUnitGet(BtlContextA *context);
-s32 FUN_004e83ac(BtlContextA *context, BtlUnitScores *unit, s32 unitIndex);
+s32 btlActionTargetSlotScore(BtlContextA *context, BtlUnitScores *unit, s32 unitIndex);
 
 /* Returns the best score among the unit's entries whose combatant matches the action's target flags. */
 s32 btlAiBestTargetScore(BtlContextA *context)
@@ -41,7 +41,7 @@ s32 btlAiBestTargetScore(BtlContextA *context)
             BtlCombatantEntryA *entry = &context->state->entries[unit->scores[i].entry];
 
             if ((entry->flags & g_btlAction.targetFlags) != 0 &&
-                FUN_004e83ac(context, unit, entry->ids[0]) == 0 && unit->scores[i].score > best) {
+                btlActionTargetSlotScore(context, unit, entry->ids[0]) == 0 && unit->scores[i].score > best) {
                 best = unit->scores[i].score;
             }
         }

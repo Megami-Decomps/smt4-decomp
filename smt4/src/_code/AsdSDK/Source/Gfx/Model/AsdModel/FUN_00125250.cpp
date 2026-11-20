@@ -9,7 +9,7 @@ int FUN_00131a2c(unsigned int);
 int FUN_001411bc(int, int);
 int FUN_00141a18(unsigned int, unsigned int, unsigned int, int);
 int _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_(void);
-int FUN_002c2968(unsigned int, unsigned int);
+int asdScenePassVisit(unsigned int, unsigned int);
 int asdCameraGetSavedRenderPairs(void);
 int nw_gfx_Camera_UpdateCameraMatrix(...);
 int nw_gfx_SceneNode_IsCircularReference(void);
@@ -39,7 +39,7 @@ extern unsigned int DAT_00464b18; /* 0x464b18 */
 extern int DAT_00464b1c; /* 0x464b1c */
 extern unsigned int DAT_00464b34; /* 0x464b34 */
 extern unsigned int g_asdModelSlotFlags; /* 0x464b74 */
-extern unsigned int DAT_00464b7c; /* 0x464b7c */
+extern unsigned int g_asdModelSceneRoots; /* 0x464b7c */
 extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
 extern unsigned int sceneGroup1Root; /* 0x464b8c */
 extern unsigned int sceneGroup2Root; /* 0x464b94 */
@@ -57,7 +57,7 @@ extern int DAT_004dad98; /* 0x4dad98 */
 /* Supplied declaration required: FUN_00141a18. */
 extern int FUN_002af294(int, int);
 /* Supplied declaration required: _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_. */
-/* Supplied declaration required: FUN_002c2968. */
+/* Supplied declaration required: asdScenePassVisit. */
 /* Supplied declaration required: asdCameraGetSavedRenderPairs. */
 extern int gxIsStereoscopic3dEnabled(void);
 /* Supplied declaration required: nw_gfx_Camera_UpdateCameraMatrix. */
@@ -187,7 +187,7 @@ void FUN_00125250(unsigned int param_1,unsigned int param_2,int *param_3)
           if (piVar4 != piVar5) {
             piVar8[3] = 0;
           }
-          FUN_002c2968((&DAT_00464b7c)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
+          asdScenePassVisit((&g_asdModelSceneRoots)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
         }
       }
       else if ((&DAT_004dad94)[temp_v0] != '\0') {
@@ -279,9 +279,9 @@ void FUN_00125250(unsigned int param_1,unsigned int param_2,int *param_3)
         if (piVar4 != piVar5) {
           piVar8[3] = 0;
         }
-        FUN_002c2968((&DAT_00464b7c)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
+        asdScenePassVisit((&g_asdModelSceneRoots)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
       }
-      FUN_00131a2c((&DAT_00464b7c)[temp_v3]);
+      FUN_00131a2c((&g_asdModelSceneRoots)[temp_v3]);
       if ((&DAT_004dad84)[temp_v0] != '\0') {
         if ((&DAT_004dad85)[temp_v0] == '\0') {
           temp_v4 = (&g_asdModelTransformBuilder)[temp_v3];
@@ -368,7 +368,7 @@ LAB_00125884:
             }
           }
 LAB_00125c3c:
-          FUN_002c2968((&DAT_00464b7c)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
+          asdScenePassVisit((&g_asdModelSceneRoots)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
         }
       }
       else if ((&DAT_004dad94)[temp_v0] != '\0') {
@@ -483,7 +483,7 @@ LAB_00125b80:
             *(unsigned int *)(temp_v1 + 0xc) = *(unsigned int *)(temp_v4 + 0x10);
           }
         }
-        FUN_002c2968((&DAT_00464b7c)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
+        asdScenePassVisit((&g_asdModelSceneRoots)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
       }
     }
     temp_v3 = temp_v3 + 1;

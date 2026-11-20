@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001767a4(...);
+int asdScenePassVisit(...);
 int asdModelSlotSetActive(...);
 int asdModelGetSlotHandle(...);
 int FUN_0047e610(...);
@@ -36,7 +36,7 @@ typedef struct {
 
 extern unsigned int g_asdModelTransformBuilder; /* 0x5b3c88 */
 
-/* Supplied declaration required: FUN_001767a4. */
+/* Supplied declaration required: asdScenePassVisit. */
 extern int FUN_001aa528(int, int);
 extern unsigned int asdModelGetSlotArray3(fn_003d502c_arg0 *);
 /* Supplied declaration required: asdModelSlotSetActive. */
@@ -206,7 +206,7 @@ LAB_003d53ac:
 LAB_003d5490:
     temp_v8 = (int)(short)((short)temp_v8 + 1);
     if (temp_v8 >= 4) {
-      FUN_001767a4(temp_v3,(&g_asdModelTransformBuilder)[(int)param_1]);
+      asdScenePassVisit(temp_v3,(&g_asdModelTransformBuilder)[(int)param_1]);
       asdModelSlotSetActive(param_1);
       FUN_0047e610(temp_v0,temp_v1,(int)param_1 * 0x40 + 0x636d60,temp_v2);
       return;

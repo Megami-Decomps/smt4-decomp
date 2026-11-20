@@ -3,11 +3,11 @@
 
 extern "C" {
 
-s32 FUN_002a4b28(u32 value);
+s32 compendiumEntryIsRegistered(u32 value);
 
 void FUN_002d8b34(u32 value)
 {
-    if (FUN_002a4b28(value & 0xFFFF) == 0) {
+    if (compendiumEntryIsRegistered(value & 0xFFFF) == 0) {
         g_gameState.unk308 = value;
     }
 }

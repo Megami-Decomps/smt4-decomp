@@ -20,7 +20,7 @@ int btlTalkBustUpSetDemonTexture(...);
 int textEncodeFontSlot(...);
 int scrScriptProcessStartEntry(...);
 int FUN_0029bbc8(int);
-int FUN_0029bde4(...);
+int saveMarkIdListSeen(...);
 int FUN_0029bed8(...);
 int slotSetRequest(int, int, unsigned int);
 int unitRecalculateEffectiveStats(...);
@@ -70,7 +70,7 @@ extern int btlTalkBustUpGetValue(void);
 extern int randBetween(unsigned int, int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_0029bbc8. */
-/* Supplied declaration required: FUN_0029bde4. */
+/* Supplied declaration required: saveMarkIdListSeen. */
 /* Supplied declaration required: FUN_0029bed8. */
 /* Supplied declaration required: dispatchIfFound. */
 /* Supplied declaration required: slotSetRequest. */
@@ -81,7 +81,7 @@ extern int itemGetFlagBit1(unsigned short);
 /* Supplied declaration required: titleSetSlotValueState2. */
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
-extern int FUN_002b89a4(unsigned int);
+extern int screenFaderIsSettled(unsigned int);
 /* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: FUN_002bd158. */
@@ -182,7 +182,7 @@ unsigned int FUN_001ebedc(int param_1)
     }
     return temp_v18;
   case 4:
-    temp_v7 = FUN_002b89a4(0);
+    temp_v7 = screenFaderIsSettled(0);
     if (temp_v7 == 0) {
       return temp_v18;
     }
@@ -340,7 +340,7 @@ LAB_001ec410:
           temp_v2 = temp_v2 + 1;
         } while (temp_v13 != temp_v14);
       }
-      FUN_0029bde4(temp_v7);
+      saveMarkIdListSeen(temp_v7);
       if (temp_v19 != 0) {
         FUN_0029bed8(*(unsigned short *)(temp_v7 + 0x46));
         *(unsigned char *)(param_1 + 0xd64) = 1;
@@ -389,7 +389,7 @@ LAB_001ec4d0:
     if (temp_v7 == 0) {
       return temp_v18;
     }
-    temp_v7 = FUN_002b89a4(0);
+    temp_v7 = screenFaderIsSettled(0);
     if (temp_v7 != 0) {
       temp_v7 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xd04));
       if (temp_v7 == 2) {

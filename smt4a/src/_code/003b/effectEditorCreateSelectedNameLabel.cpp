@@ -5,7 +5,7 @@
 #include "AsdSDK/Source/Util/AsdListHelpers_LinkedItems.h"
 
 extern "C" {
-extern EffectSelectionTemplate DAT_0059e9a8;
+extern EffectSelectionTemplate g_effectEditorState;
 void engineFreeCallback(void *memory);
 void effEditorSetTextValue(EffMenuNode *node, const char *text);
 
@@ -20,7 +20,7 @@ void effectEditorCreateSelectedNameLabel()
     node->unk04 = 200;
     node->initialKind = 194;
     g_effectEditor.name->unk14 = 9;
-    s32 position = DAT_0059e9a8.indices.extraOffset + g_effectEditor.index;
+    s32 position = g_effectEditorState.indices.extraOffset + g_effectEditor.index;
     effEditorSetTextValue(g_effectEditor.name, linkedFindItemByIndex(
         (LinkedItems *)g_effectEditor.list, position)->label.text);
 }

@@ -19,14 +19,14 @@ extern "C" {
 
 
 void positionStateSet(u32 object, u32 first, u32 second, f32 scale);
-int FUN_0034a544(...);
-int FUN_003e4140(...);
+int statusDownCreateScreen(...);
+int copyDefaultWordsPair(...);
 
 
 
 extern int FUN_00208c08(...); /* 0x208c08 */
-extern int FUN_0022b2d4(...); /* 0x22b2d4 */
-extern int FUN_0026c1a8(...); /* 0x26c1a8 */
+extern int statusDrawJobUpdate(...); /* 0x22b2d4 */
+extern int unitDrawStatusEffectIcons(...); /* 0x26c1a8 */
 extern const char DAT_00536860[];
 static const UiSpritePositionKey sPositionKeys[] = {
     {0, 0, 0, 0, 0, 0, 0},
@@ -129,11 +129,11 @@ void statusAcquireSharedResources(void)
     workWords = reinterpret_cast<u32 *>(g_gameGlobals.instance);
     sysMemClear(workWords,0x20f4);
     *workWords = asdProcessCreateSimple(reinterpret_cast<const s8 *>("Status Calc"),4,0,0,reinterpret_cast<AsdProcUpdateFunc>(FUN_00208c08),0,0);
-    taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawBackUpLeft"),0x65,0,0,reinterpret_cast<AsdProcUpdateFunc>(FUN_0026c1a8),0,0,reinterpret_cast<void *>(*workWords));
-    taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawBackUpRight"),0xcc,0,0,reinterpret_cast<AsdProcUpdateFunc>(FUN_0026c1a8),0,0,reinterpret_cast<void *>(*workWords));
-    taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawUpLeft"),0x81,0,0,reinterpret_cast<AsdProcUpdateFunc>(FUN_0022b2d4),0,0,reinterpret_cast<void *>(*workWords));
-    taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawUpRight"),0xdd,0,0,reinterpret_cast<AsdProcUpdateFunc>(FUN_0022b2d4),0,0,reinterpret_cast<void *>(*workWords));
-    FUN_0034a544();
+    taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawBackUpLeft"),0x65,0,0,reinterpret_cast<AsdProcUpdateFunc>(unitDrawStatusEffectIcons),0,0,reinterpret_cast<void *>(*workWords));
+    taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawBackUpRight"),0xcc,0,0,reinterpret_cast<AsdProcUpdateFunc>(unitDrawStatusEffectIcons),0,0,reinterpret_cast<void *>(*workWords));
+    taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawUpLeft"),0x81,0,0,reinterpret_cast<AsdProcUpdateFunc>(statusDrawJobUpdate),0,0,reinterpret_cast<void *>(*workWords));
+    taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawUpRight"),0xdd,0,0,reinterpret_cast<AsdProcUpdateFunc>(statusDrawJobUpdate),0,0,reinterpret_cast<void *>(*workWords));
+    statusDownCreateScreen();
     workWords = reinterpret_cast<u32 *>(g_gameGlobals.instance);
     *(unsigned short *)(reinterpret_cast<u32 *>(g_gameGlobals.instance) + 0x4e3) = 0;
     *reinterpret_cast<s16 *>(reinterpret_cast<ObjB *>(workWords)->unk138E) = -1;
@@ -211,7 +211,7 @@ void statusAcquireSharedResources(void)
     workWords = reinterpret_cast<u32 *>(g_gameGlobals.instance);
     if (reinterpret_cast<u32 *>(g_gameGlobals.instance) != (unsigned int *)0x0) {
       *(unsigned char *)((int)reinterpret_cast<u32 *>(g_gameGlobals.instance) + 0x20d1) = 0;
-      FUN_003e4140(workWords + 0x835);
+      copyDefaultWordsPair(workWords + 0x835);
     }
   }
   ++g_gameGlobals.unk00;

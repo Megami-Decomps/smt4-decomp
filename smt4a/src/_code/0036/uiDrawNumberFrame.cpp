@@ -14,7 +14,7 @@ void texDrawCompositeSprite(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 d
 void efctSetSpeed(f32 alpha);
 void gxResetColorQuadToWhite(void);
 void drawSetColorFromRGBA8(u32 color);
-void FUN_002e1b64(u32 value, s32 x, s32 y, s32 depth);
+void digitsDrawPaddedNumber(u32 value, s32 x, s32 y, s32 depth);
 
 /* Draws a frame (image 8 when selected, 7 otherwise) with a number on it, faded by the placement's alpha. */
 void uiDrawNumberFrame(DrawPlacement *placement, s32 x, s32 y, u32 value, s32 selected)
@@ -32,7 +32,7 @@ void uiDrawNumberFrame(DrawPlacement *placement, s32 x, s32 y, u32 value, s32 se
     }
     drawSetColorFromRGBA8(0x82fff500);
     rect = asdTMTexTableEntryAt(46, 83);
-    FUN_002e1b64(value, rect->x + x, rect->y + y, 103);
+    digitsDrawPaddedNumber(value, rect->x + x, rect->y + y, 103);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
 }

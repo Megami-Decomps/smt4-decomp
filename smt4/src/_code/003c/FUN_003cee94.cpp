@@ -14,7 +14,7 @@ struct BattleActionDescription {
 };
 struct BattleResourceLookupView { u8 unk00[0x28]; u32 attributes; };
 extern "C" {
-extern BattleResourceOwner *DAT_00435d18;
+extern BattleResourceOwner *g_btlAux;
 BattleActionDescription btlEntryBuildSummary(BtlMainState *, BtlEntry *);
 void aocEntryBlockStore(BattleResourceOwner *, u32, u32, s32, u32);
 void objectSetResultFromLookup(BattleResourceOwner *, u32, u32, u32);
@@ -31,7 +31,7 @@ void FUN_003cee94(BtlMainState **battle, ActionKindSelection *selection)
             enabled = 0;
         u16 id = btlEntryBuildSummary(*battle, reinterpret_cast<BtlEntry *>(selection->entry)).id;
         u8 category = btlEntryBuildSummary(*battle, reinterpret_cast<BtlEntry *>(selection->entry)).category;
-        aocEntryBlockStore(DAT_00435d18, category, enabled, 0, id);
+        aocEntryBlockStore(g_btlAux, category, enabled, 0, id);
         return;
     }
     if (kind != 2 && kind != 3) {
@@ -41,7 +41,7 @@ void FUN_003cee94(BtlMainState **battle, ActionKindSelection *selection)
         if (!itemResource) {
             if (reinterpret_cast<BtlEntry *>(selection->entry)->flags & 0x10)
                 enabled = 0;
-            FUN_003daf3c(DAT_00435d18, resourceId, enabled, 0);
+            FUN_003daf3c(g_btlAux, resourceId, enabled, 0);
             return;
         }
         resourceId = itemResource;
@@ -53,6 +53,6 @@ void FUN_003cee94(BtlMainState **battle, ActionKindSelection *selection)
         enabled = !normal;
     else if (reinterpret_cast<BtlEntry *>(selection->entry)->flags & 0x10)
         enabled = normal;
-    objectSetResultFromLookup(DAT_00435d18, resourceId, enabled, 0);
+    objectSetResultFromLookup(g_btlAux, resourceId, enabled, 0);
 }
 }

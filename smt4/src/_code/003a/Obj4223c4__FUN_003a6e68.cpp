@@ -70,7 +70,7 @@ void Obj4223c4::FUN_003a6e68()
     else
         buttonHelpSetPreset(block->source == 1 ? 0x4C : 0x4D);
     FUN_0029d960(screen);
-    FUN_002a0cc8(0);
+    gameGlobalsSetSubScreenActive(0);
     view->state = 2;
     view->timer = 0;
     pointConvertToFloat(&view->position, 0, 0);

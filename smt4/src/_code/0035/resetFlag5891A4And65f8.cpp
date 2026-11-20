@@ -3,7 +3,7 @@
 extern "C" {
 
 int ipcServiceSessionRelease(void);
-int FUN_00351f7c(void);
+int cecServiceSendRequest7(void);
 int FUN_0035ae34(void);
 extern s8 g_archiveModuleState;
 
@@ -14,7 +14,7 @@ void resetFlag5891A4And65f8(void)
         g_archiveModuleState = 0;
         ipcServiceSessionRelease();
     }
-    FUN_00351f7c();
+    cecServiceSendRequest7();
 }
 
 } /* extern "C" */

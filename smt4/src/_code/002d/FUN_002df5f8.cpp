@@ -13,12 +13,12 @@ struct LayoutCoordinateGlobals {
     u32 unk00;
     LayoutCoordinateDefaults *work;
 };
-extern "C" LayoutCoordinateGlobals DAT_004474f0;
+extern "C" LayoutCoordinateGlobals g_lmapViewHolder;
 
 /* Set the ten layout entries' positions, angles, values and common height. */
 extern "C" void FUN_002df5f8(void)
 {
-    LayoutCoordinateDefaults *layout = DAT_004474f0.work;
+    LayoutCoordinateDefaults *layout = g_lmapViewHolder.work;
     layout->x[0] = 145.0f;
     layout->y[0] = 165.0f;
     layout->rotation[0] = 40.0f;

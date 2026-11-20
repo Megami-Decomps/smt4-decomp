@@ -44,7 +44,7 @@ static __inline u16 shopListItemGetId(const BibleDevilRow *row)
 
 extern "C" {
 
-extern BibleDevilTasks DAT_0043d9c8;
+extern BibleDevilTasks g_bibleDevilCallbackContext;
 
 s32 useCounterIsFinished(void);
 void uiAnimationAdvanceChannel(BibleDevilWidget *, s32);
@@ -60,12 +60,12 @@ u32 flaggedEntryGetValueByState(void *);
 s32 FUN_00293b8c(void);
 s32 inputIsQuestConfirmPressed(void);
 void FUN_002328b4(void);
-void FUN_0022de74(BibleDevilScreen *);
+void devilListUpdatePreview(BibleDevilScreen *);
 void buttonHelpGetStatus(void);
 void buttonHelpSetPreset(void);
 void listCursorStepForward(void *);
 void listCursorStepBack(void *);
-void FUN_002b8454(s32, s32, s32, s32);
+void buttonHelpSetSlot(s32, s32, s32, s32);
 void FUN_00233404(void);
 
 /* Per-frame update of the devil bible: moves the cursor between pages/entries and starts the buy flow when the navigation state allows it. */
@@ -118,16 +118,16 @@ void FUN_003a72a4(BibleDevilScreen *screen)
         }
         FUN_002328b4();
         screen->pageChanged = 1;
-        DAT_0043d9c8.selected = -1;
-        FUN_0022de74(screen);
+        g_bibleDevilCallbackContext.selected = -1;
+        devilListUpdatePreview(screen);
         buttonHelpGetStatus();
         buttonHelpSetPreset();
     }
     if (screen->mode == 1) {
         if (screen->page == 1) {
-            FUN_002b8454(2, 4, 0x40, 1);
+            buttonHelpSetSlot(2, 4, 0x40, 1);
         } else {
-            FUN_002b8454(2, 4, 0x41, 1);
+            buttonHelpSetSlot(2, 4, 0x41, 1);
         }
     }
     if (FUN_0029e924(screen->cursor) == selection && flaggedEntryGetValueByState(screen->cursor) == scroll) {

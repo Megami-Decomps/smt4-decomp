@@ -6,7 +6,7 @@
 #include "AsdSDK/Source/Gfx/Effect/effParticleParamCopy.h"
 
 extern "C" {
-extern const char DAT_00410380[];
+extern const char g_effMiscHeaderNestedSourceFileName[];
 void *memAlloc(u32 pool, u32 category, u32 options, u32 size,
                u32 alignment, u32 count);
 void rt_memclr(void *destination, u32 size);
@@ -17,7 +17,7 @@ void *effGeomCloneHandle(void *source);
 
 static ParticleInstanceIV *allocateParticleInstance(u32 size)
 {
-    asdDebugTrace(DAT_00410380, 450);
+    asdDebugTrace(g_effMiscHeaderNestedSourceFileName, 450);
     ParticleInstanceIV *instance = static_cast<ParticleInstanceIV *>(memAlloc(0x10000, 0x100, 0, size, 0x10, 1));
     rt_memclr(instance, size);
     return instance;

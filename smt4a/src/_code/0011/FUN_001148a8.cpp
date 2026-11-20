@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_00114504(void);
-int FUN_002ea704(void);
+int watcherGetEnabledFlag(void);
 int onlineTimeGetNow(int *);
 int FUN_002fa434(...);
 int watcherRefreshEnabledState(void);
@@ -20,9 +20,9 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00114504. */
-/* Supplied declaration required: FUN_002ea704. */
+/* Supplied declaration required: watcherGetEnabledFlag. */
 /* Supplied declaration required: onlineTimeGetNow. */
-extern int FUN_002eb5f4(void);
+extern int watcherGetActiveContext(void);
 extern unsigned long long FUN_002ecfe4(int);
 /* Supplied declaration required: FUN_002fa434. */
 extern int FUN_002fdb0c(unsigned char *);
@@ -45,11 +45,11 @@ void FUN_001148a8(int param_1)
   int temp_v7;
   unsigned int temp_v8;
   
-  temp_v1 = FUN_002eb5f4();
+  temp_v1 = watcherGetActiveContext();
   if (temp_v1 == 0) {
     return;
   }
-  temp_v1 = FUN_002ea704();
+  temp_v1 = watcherGetEnabledFlag();
   if (temp_v1 == 0) {
     return;
   }
@@ -68,7 +68,7 @@ void FUN_001148a8(int param_1)
       if (temp_v1 == 0) {
         return;
       }
-      temp_v1 = FUN_002eb5f4();
+      temp_v1 = watcherGetActiveContext();
       *(unsigned char *)(*(int *)(temp_v1 + 0xd0) + 0x11a) = 1;
     }
     else {
@@ -76,12 +76,12 @@ void FUN_001148a8(int param_1)
       if (temp_v1 == 0) {
         return;
       }
-      temp_v2 = FUN_002ea704();
+      temp_v2 = watcherGetEnabledFlag();
       FUN_002fa434(temp_v6,temp_v2);
       temp_v1 = FUN_002fdb0c(temp_v6);
       (((Obj558b24 *)(temp_v6))->Obj558b24::~Obj558b24(), (int)(temp_v6));
       if (temp_v1 != 2) {
-        temp_v1 = FUN_002eb5f4();
+        temp_v1 = watcherGetActiveContext();
         *(unsigned char *)(*(int *)(temp_v1 + 0xd0) + 0x11a) = 1;
       }
     }
@@ -92,21 +92,21 @@ void FUN_001148a8(int param_1)
       return;
     }
   }
-  temp_v1 = FUN_002eb5f4();
+  temp_v1 = watcherGetActiveContext();
   temp_v1 = *(int *)(temp_v1 + 0xe4);
   temp_v3 = FUN_002ecfe4(param_1 + 0x80);
   *(unsigned long long *)(temp_v1 + 0x30) = temp_v3;
   onlineTimeGetNow(&temp_v7);
   *(unsigned int *)(temp_v1 + 0x2c) = temp_v8;
   *(unsigned int *)(temp_v1 + 0x28) = temp_v7;
-  piVar3 = (int *)FUN_002ea704();
+  piVar3 = (int *)watcherGetEnabledFlag();
   temp_v1 = (**(romwright_code **)(*piVar3 + 0x2c))();
   *(unsigned int *)(*(int *)(temp_v1 + 4) + 0x40) = *(unsigned int *)(param_1 + 0x9c);
-  temp_v2 = FUN_002ea704();
+  temp_v2 = watcherGetEnabledFlag();
   FUN_002fa434(temp_v4,temp_v2);
   temp_v1 = FUN_002fdb0c(temp_v4);
   if ((temp_v1 == 2) && (temp_v5 != 1)) {
-    temp_v1 = FUN_002eb5f4();
+    temp_v1 = watcherGetActiveContext();
     *(unsigned char *)(*(int *)(temp_v1 + 0xd0) + 0x11a) = 1;
   }
   FUN_00114504();

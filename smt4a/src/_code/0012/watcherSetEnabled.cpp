@@ -3,7 +3,7 @@
 extern "C" {
 
 void FUN_00310284(void);
-u32 FUN_002eb5f4(void);
+u32 watcherGetActiveContext(void);
 u8 FUN_00306d18(s32 handle, void *owner, u32 a, u32 b);
 
 typedef struct Owner {
@@ -20,7 +20,7 @@ typedef struct Watcher {
     /* 0x0C */ u32 stamp;
 } Watcher;
 
-/* Enables or disables the watcher: enabling registers it with its owner (when the owner has a handle) and records FUN_002eb5f4's stamp; disabling calls FUN_00310284. */
+/* Enables or disables the watcher: enabling registers it with its owner (when the owner has a handle) and records watcherGetActiveContext's stamp; disabling calls FUN_00310284. */
 void watcherSetEnabled(Watcher *watcher, s32 enable)
 {
     s32 handle;
@@ -31,7 +31,7 @@ void watcherSetEnabled(Watcher *watcher, s32 enable)
         if (handle != 0) {
             watcher->registered = FUN_00306d18(handle, watcher->owner, 0xF, 0);
         }
-        watcher->stamp = FUN_002eb5f4();
+        watcher->stamp = watcherGetActiveContext();
         return;
     }
     FUN_00310284();

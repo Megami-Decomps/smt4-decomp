@@ -3,7 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
-extern const char DAT_00410204[]; /* __FILE__ */
+extern const char g_effMiscHeaderSourceFileName[]; /* __FILE__ */
 
 void *memAlloc(int, int, int, int size, int align, int);
 void rt_memclr(void *block, s32 size);
@@ -17,7 +17,7 @@ EffMiscObject *effMiscCreate(u32 kind, void *params)
 {
     s32 workSize = g_effMiscKinds[kind].workSize;
     s32 objectSize = workSize + 0x30;
-    asdDebugTrace(DAT_00410204, 450);
+    asdDebugTrace(g_effMiscHeaderSourceFileName, 450);
     EffMiscObject *obj = (EffMiscObject *)memAlloc(0x10000, 0x100, 0, objectSize, 0x10, 1);
     rt_memclr(obj, objectSize);
     obj->unk10 = -1;

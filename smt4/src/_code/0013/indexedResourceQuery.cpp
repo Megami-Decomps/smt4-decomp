@@ -6,7 +6,7 @@ struct IndexedResourceQuery {
     /* 0x3C */ u32 handle;
 };
 extern "C" {
-s32 FUN_00141bdc(u32 handle);
+s32 soundArchiveFindIndexedResource(u32 handle);
 s32 indexedResourceGetEntry(void *resource, s32 index);
 }
 
@@ -16,7 +16,7 @@ extern "C" s32 indexedResourceQuery(IndexedResourceQuery *owner)
     if (owner->resource == NULL) {
         return 0;
     }
-    s32 index = FUN_00141bdc(owner->handle);
+    s32 index = soundArchiveFindIndexedResource(owner->handle);
     if (index == -1) {
         return 0;
     }

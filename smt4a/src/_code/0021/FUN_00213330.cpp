@@ -5,13 +5,13 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_002039d0(...);
-int FUN_00237da0(double, float *, float *, int, double, float *, unsigned int, int, int, double);
+int effRandomSignedValue(...);
+int quadEffectCreate(double, float *, float *, int, double, float *, unsigned int, int, int, double);
 int nodeTreeReleaseItemClearOwner(double);
-int FUN_00283328(...);
+int randomSignedRatio(...);
 int nodeTreeReleaseItem(...);
-int FUN_0034a16c(float *, float *, float *, float *, float *);
-int FUN_0035cc80(...);
+int effScalarKeyFindNextDistinct(float *, float *, float *, float *, float *);
+int effScalarChannelAdvance(...);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -93,15 +93,15 @@ static float romwright_fabs_4(float value)
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002039d0. */
-/* Supplied declaration required: FUN_00237da0. */
+/* Supplied declaration required: effRandomSignedValue. */
+/* Supplied declaration required: quadEffectCreate. */
 /* Supplied declaration required: nodeTreeReleaseItemClearOwner. */
-extern unsigned int FUN_0028324c(unsigned int, float, unsigned int);
-/* Supplied declaration required: FUN_00283328. */
+extern unsigned int randomSignedScaledRange(unsigned int, float, unsigned int);
+/* Supplied declaration required: randomSignedRatio. */
 /* Supplied declaration required: nodeTreeReleaseItem. */
 extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: FUN_0034a16c. */
-/* Supplied declaration required: FUN_0035cc80. */
+/* Supplied declaration required: effScalarKeyFindNextDistinct. */
+/* Supplied declaration required: effScalarChannelAdvance. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
@@ -196,7 +196,7 @@ void FUN_00213330(float *param_1)
       param_1[0xb] = 0.0f;
       param_1[0xc] = 0.0f;
       param_1[0xd] = 0.0f;
-      FUN_0034a16c(param_1 + 0x5b,param_1 + 10,param_1 + 0xc,param_1 + 3,param_1 + 6);
+      effScalarKeyFindNextDistinct(param_1 + 0x5b,param_1 + 10,param_1 + 0xc,param_1 + 3,param_1 + 6);
     }
     return;
   }
@@ -225,10 +225,10 @@ void FUN_00213330(float *param_1)
       temp_v9 = (float)(int)(param_1[0x5f] * (float)((unsigned long long)temp_v26 >> 0x20));
       temp_v3 = param_1[0x89];
       temp_v10 = temp_v9;
-      FUN_00237da0(temp_v3,param_1 + 0xe,param_1 + 0x5b,3,param_1[0x87],param_1 + (int)temp_v6 + 0x8e,
+      quadEffectCreate(temp_v3,param_1 + 0xe,param_1 + 0x5b,3,param_1[0x87],param_1 + (int)temp_v6 + 0x8e,
                    (unsigned int)temp_v6 & 0xff,*(unsigned char *)(param_1 + 0x8b),1,param_1[0x88]);
       param_1[(int)temp_v6 + 0x8e] = temp_v3;
-      temp_v4 = FUN_0028324c(0,temp_v9,10);
+      temp_v4 = randomSignedScaledRange(0,temp_v9,10);
       temp_v25 = (unsigned int)((unsigned long long)temp_v26 >> 0x20);
       temp_v23 = (unsigned int)temp_v24;
       temp_v10 = temp_v10 * *(float *)((int)temp_v3 + 500);
@@ -238,11 +238,11 @@ void FUN_00213330(float *param_1)
         temp_v4 = (unsigned int)*(unsigned char *)((int)param_1 + 0x217);
       }
       if (!(temp_v1 == -0x4c && temp_v4 == 0xb4)) {
-        FUN_002039d0(2,temp_v1,1);
+        effRandomSignedValue(2,temp_v1,1);
         temp_v24 = CONCAT44(temp_v10,temp_v23);
-        FUN_002039d0(2,*(unsigned char *)((int)param_1 + 0x217),1);
+        effRandomSignedValue(2,*(unsigned char *)((int)param_1 + 0x217),1);
         temp_v26 = CONCAT44(temp_v25,temp_v10);
-        FUN_002039d0(0,param_1[0x60],100);
+        effRandomSignedValue(0,param_1[0x60],100);
         temp_v30 = (float)((unsigned long long)temp_v27 >> 0x20);
         temp_v29 = temp_v22;
         temp_v31 = temp_v22;
@@ -319,7 +319,7 @@ void FUN_00213330(float *param_1)
         *(float *)((int)temp_v3 + 0x124) = *(float *)((int)temp_v3 + 0x124) + temp_v30 * temp_v10;
         *(float *)((int)temp_v3 + 0x128) = *(float *)((int)temp_v3 + 0x128) + temp_v31 * temp_v10;
         temp_v9 = temp_v31;
-        FUN_002039d0(0,(int)param_1[0x62] - (int)param_1[0x86],1);
+        effRandomSignedValue(0,(int)param_1[0x62] - (int)param_1[0x86],1);
         temp_v10 = (float)VectorSignedToFloat(param_1[0x86],(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v10 = temp_v10 + temp_v9;
         *(float *)((int)temp_v3 + 0x348) = temp_v29 * temp_v10;
@@ -329,24 +329,24 @@ void FUN_00213330(float *param_1)
       }
       else {
         temp_v9 = param_1[0x60];
-        FUN_002039d0(2,temp_v9,100);
+        effRandomSignedValue(2,temp_v9,100);
         temp_v10 = temp_v10 + *(float *)((int)temp_v3 + 0x120);
         *(float *)((int)temp_v3 + 0x120) = temp_v10;
-        FUN_002039d0(2,temp_v9,100);
+        effRandomSignedValue(2,temp_v9,100);
         temp_v10 = temp_v10 + *(float *)((int)temp_v3 + 0x124);
         *(float *)((int)temp_v3 + 0x124) = temp_v10;
-        FUN_002039d0(2,temp_v9,100);
+        effRandomSignedValue(2,temp_v9,100);
         *(float *)((int)temp_v3 + 0x128) = temp_v10 + *(float *)((int)temp_v3 + 0x128);
         temp_v10 = *(float *)((int)temp_v3 + 0x120) - param_1[0x56];
         temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v22 <= temp_v10) << 0x1d);
         if (!romwright_subpiece_4_1_0(temp_v4 >> 0x1d,0)) {
-          FUN_002039d0(1,(int)param_1[0x62] - (int)param_1[0x86],1);
+          effRandomSignedValue(1,(int)param_1[0x62] - (int)param_1[0x86],1);
           *(float *)((int)temp_v3 + 0x348) = temp_v10;
           temp_v9 = (float)VectorSignedToFloat(param_1[0x86],(unsigned char)(temp_v4 >> 0x16) & 3);
           temp_v10 = temp_v10 - temp_v9;
         }
         else {
-          FUN_002039d0(0,(int)param_1[0x62] - (int)param_1[0x86],1);
+          effRandomSignedValue(0,(int)param_1[0x62] - (int)param_1[0x86],1);
           *(float *)((int)temp_v3 + 0x348) = temp_v10;
           temp_v9 = (float)VectorSignedToFloat(param_1[0x86],(unsigned char)(temp_v4 >> 0x16) & 3);
           temp_v10 = temp_v10 + temp_v9;
@@ -355,13 +355,13 @@ void FUN_00213330(float *param_1)
         temp_v10 = *(float *)((int)temp_v3 + 0x124) - param_1[0x57];
         temp_v4 = (temp_v4 & 0xfffffff) | ((unsigned int)(temp_v22 <= temp_v10) << 0x1d);
         if (!romwright_subpiece_4_1_0(temp_v4 >> 0x1d,0)) {
-          FUN_002039d0(1,(int)param_1[0x62] - (int)param_1[0x86],1);
+          effRandomSignedValue(1,(int)param_1[0x62] - (int)param_1[0x86],1);
           *(float *)((int)temp_v3 + 0x34c) = temp_v10;
           temp_v9 = (float)VectorSignedToFloat(param_1[0x86],(unsigned char)(temp_v4 >> 0x16) & 3);
           temp_v10 = temp_v10 - temp_v9;
         }
         else {
-          FUN_002039d0(0,(int)param_1[0x62] - (int)param_1[0x86],1);
+          effRandomSignedValue(0,(int)param_1[0x62] - (int)param_1[0x86],1);
           *(float *)((int)temp_v3 + 0x34c) = temp_v10;
           temp_v9 = (float)VectorSignedToFloat(param_1[0x86],(unsigned char)(temp_v4 >> 0x16) & 3);
           temp_v10 = temp_v10 + temp_v9;
@@ -370,32 +370,32 @@ void FUN_00213330(float *param_1)
         temp_v10 = *(float *)((int)temp_v3 + 0x128) - param_1[0x58];
         in_fpscr = (temp_v4 & 0xfffffff) | ((unsigned int)(temp_v22 <= temp_v10) << 0x1d);
         if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) {
-          FUN_002039d0(1,(int)param_1[0x62] - (int)param_1[0x86],1);
+          effRandomSignedValue(1,(int)param_1[0x62] - (int)param_1[0x86],1);
           *(float *)((int)temp_v3 + 0x350) = temp_v10;
           temp_v9 = (float)VectorSignedToFloat(param_1[0x86],(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v10 = temp_v10 - temp_v9;
         }
         else {
-          FUN_002039d0(0,(int)param_1[0x62] - (int)param_1[0x86],1);
+          effRandomSignedValue(0,(int)param_1[0x62] - (int)param_1[0x86],1);
           *(float *)((int)temp_v3 + 0x350) = temp_v10;
           temp_v9 = (float)VectorSignedToFloat(param_1[0x86],(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v10 = temp_v10 + temp_v9;
         }
         *(float *)((int)temp_v3 + 0x350) = temp_v10;
       }
-      FUN_002039d0(0,param_1[0x5c],100);
+      effRandomSignedValue(0,param_1[0x5c],100);
       temp_v9 = (float)VectorSignedToFloat(param_1[0x5b],(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v10 = temp_v10 + temp_v9 * (float)temp_v27;
       *(float *)((int)temp_v3 + 0x340) = temp_v10;
       *(float *)((int)temp_v3 + 0x33c) = temp_v22;
-      FUN_00283328(2,param_1[0x5d],100);
+      randomSignedRatio(2,param_1[0x5d],100);
       *(float *)((int)temp_v3 + 0x344) = temp_v10;
       temp_v7 = temp_v7 + 1;
       param_1[0xd] = (float)((int)param_1[0xd] + 1);
       param_1[0x8d] = temp_v6;
     } while (temp_v7 < (int)temp_v8 - (int)temp_v2);
   }
-  FUN_0035cc80(param_1 + 0x5b,param_1 + 0xb,param_1 + 10,param_1 + 0xc,param_1,param_1 + 3,
+  effScalarChannelAdvance(param_1 + 0x5b,param_1 + 0xb,param_1 + 10,param_1 + 0xc,param_1,param_1 + 3,
                param_1 + 6,param_1 + 0xd);
   param_1[9] = (float)((int)param_1[9] + 1);
   return;

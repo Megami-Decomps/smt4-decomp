@@ -12,7 +12,7 @@ extern LightCount g_asdLightCount;
 extern ModelOwner *g_asdModelSlotArray3[2];
 extern SceneNode *g_asdModelTransformBuilder[2];
 extern SceneNode *sceneGroup1Root[2];
-extern u32 DAT_00464b7c[2];
+extern u32 g_asdModelSceneRoots[2];
 extern u32 DAT_00464bbc[2];
 extern u32 DAT_00464b10;
 extern u32 DAT_00464b14;
@@ -30,7 +30,7 @@ s32 gxIsStereoscopic3dEnabled();
 void nw_gfx_RenderContext_ResetState_2B7478(void *context);
 s32 sceneQueryFalse();
 void registerBlockRequestGroups(u32 groups);
-void FUN_002c3a14(RenderCtx *scene);
+void renderCtxResetFrameStacks(RenderCtx *scene);
 
 /* Render the first model pass, temporarily excluding the light-only scene root when required. */
 void FUN_00117604()
@@ -40,7 +40,7 @@ void FUN_00117604()
         return;
     }
     void *context = g_asdModelSlotArray3[0]->slot;
-    FUN_001325c4(g_asdModelSlotArray3[0], DAT_00464b7c[0], DAT_00464b10, DAT_00464bbc[0]);
+    FUN_001325c4(g_asdModelSlotArray3[0], g_asdModelSceneRoots[0], DAT_00464b10, DAT_00464bbc[0]);
     if (g_asdLightCount.render.active != 0 && g_asdLightCount.render.dirty == 0) {
         SceneNode *builder = g_asdModelTransformBuilder[0];
         SceneNode *root = sceneGroup1Root[0];
@@ -58,15 +58,15 @@ void FUN_00117604()
         if (oldEnd != newEnd) {
             root->parent = NULL;
         }
-        sceneTraverserVisit(DAT_00464b7c[0], g_asdModelTransformBuilder[0]);
+        sceneTraverserVisit(g_asdModelSceneRoots[0], g_asdModelTransformBuilder[0]);
     }
     const u8 *skipPass = reinterpret_cast<const u8 *>(&g_asdLightCount.render.unk14);
     if (*skipPass == 0) {
-        FUN_00131c98(g_asdModelSlotArray3[0], DAT_00464b7c[0], DAT_00464bbc[0]);
+        FUN_00131c98(g_asdModelSlotArray3[0], g_asdModelSceneRoots[0], DAT_00464bbc[0]);
     }
     if (g_asdLightCount.render.active != 0 && g_asdLightCount.render.dirty == 0) {
         nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder[0], sceneGroup1Root[0]);
-        sceneTraverserVisit(DAT_00464b7c[0], g_asdModelTransformBuilder[0]);
+        sceneTraverserVisit(g_asdModelSceneRoots[0], g_asdModelTransformBuilder[0]);
     }
     if (gxIsStereoscopic3dEnabled() != 1) {
         FUN_0013231c(g_asdModelSlotArray3[0], DAT_00464b10, 1, 0);
@@ -77,7 +77,7 @@ void FUN_00117604()
     if (sceneQueryFalse() != 0) {
         registerBlockRequestGroups(0x3fff);
     }
-    FUN_002c3a14(g_titleScene);
+    renderCtxResetFrameStacks(g_titleScene);
     DAT_00464b00 = 0;
 }
 }

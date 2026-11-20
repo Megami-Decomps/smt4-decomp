@@ -18,7 +18,7 @@ void FUN_0033f2b8(NpcPackageWork* work, s32 id)
     work->kind = 4;
     work->sourceId = id;
     NpcPackageHeader* file;
-    if (FUN_0023e330(reinterpret_cast<u32>(g_aocSystem), id, 1)) {
+    if (aocPackageHasVoiceContent(reinterpret_cast<u32>(g_aocSystem), id, 1)) {
         file = static_cast<NpcPackageHeader*>(FUN_00387a08(g_aocSystem, id, path));
     } else {
         file = static_cast<NpcPackageHeader*>(asdLoadFileSyncDefault(path));

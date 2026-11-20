@@ -42,7 +42,7 @@ int btlEncountInitialize(...);
 int FUN_0021ae40(...);
 int btlUiRefreshSlotRanks(...);
 int pickerAdvance(...);
-int FUN_00254f58(...);
+int battleInitializeTurnOrder(...);
 int btlAdjustPropertyClamped(...);
 int battleGetEntryHalfword(...);
 int FUN_00255180(...);
@@ -109,7 +109,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned int g_btlScriptUnit; /* 0x43427c */
-extern int DAT_00435d18; /* 0x435d18 */
+extern int g_btlAux; /* 0x435d18 */
 extern unsigned int *g_btlEvent; /* 0x435d48 */
 extern int g_btlMainState; /* 0x435d90 */
 extern unsigned int DAT_004398d4; /* 0x4398d4 */
@@ -137,7 +137,7 @@ extern int gameDataEntryGetLevel(short);
 /* Supplied declaration required: messageForwardDefaultMode. */
 /* Supplied declaration required: btlUiRefreshSlotRanks. */
 /* Supplied declaration required: pickerAdvance. */
-/* Supplied declaration required: FUN_00254f58. */
+/* Supplied declaration required: battleInitializeTurnOrder. */
 /* Supplied declaration required: btlAdjustPropertyClamped. */
 /* Supplied declaration required: battleGetEntryHalfword. */
 /* Supplied declaration required: FUN_00255180. */
@@ -540,7 +540,7 @@ void FUN_001fc6e8(unsigned int param_1)
       *puVar9 = *puVar9 & 0xffdfffff;
     }
     else {
-      FUN_00254f58(temp_v4);
+      battleInitializeTurnOrder(temp_v4);
     }
     temp_v10 = *puVar9;
     temp_v8 = 0;
@@ -578,7 +578,7 @@ void FUN_001fc6e8(unsigned int param_1)
       puVar5 = g_btlEvent;
       *g_btlEvent = 9;
       *(unsigned char *)(puVar5 + 0xb) = 0;
-      *(unsigned int *)(DAT_00435d18 + 0x2f98) = 0;
+      *(unsigned int *)(g_btlAux + 0x2f98) = 0;
       return;
     }
     break;
@@ -625,7 +625,7 @@ void FUN_001fc6e8(unsigned int param_1)
     return;
   case 0xe:
     *(unsigned int *)(temp_v4 + 0x88) = 0;
-    FUN_00254f58(temp_v4);
+    battleInitializeTurnOrder(temp_v4);
     if (g_btlMainState != 0) {
       *(unsigned int *)(g_btlMainState + 0x68) = 0xc;
     }
@@ -717,7 +717,7 @@ LAB_001fd348:
         puVar5 = g_btlEvent;
         *g_btlEvent = 9;
         *(unsigned char *)(puVar5 + 0xb) = 0;
-        *(unsigned int *)(DAT_00435d18 + 0x2f98) = 0;
+        *(unsigned int *)(g_btlAux + 0x2f98) = 0;
         return;
       }
       break;
@@ -739,7 +739,7 @@ LAB_001fd348:
     break;
   case 0x14:
     soundChannelStopAll(0xf);
-    btlEffectReleaseResources(DAT_00435d18,temp_v4);
+    btlEffectReleaseResources(g_btlAux,temp_v4);
     temp_v3 = dialogIsActive();
     if (temp_v3 != 0) {
       infoWinStartTimer(1);

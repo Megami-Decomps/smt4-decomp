@@ -7,14 +7,14 @@ s32 scrGetArg(s32 index);
 s32 scrGetCommandFrame(void);
 s32 frameTextureGetState(void);
 void slotSetRequest(u32 screen, s32 duration, u32 color);
-s32 FUN_00162ea4(void);
+s32 eventIsSkipping(void);
 void titleRestartSlotState3(u32 screen, u32 color);
 
 u32 FUN_00314d18(void)
 {
     s32 duration = scrGetArg(1);
     if (scrGetCommandFrame() == 0) {
-        if (FUN_00203d74() && duration > 4)
+        if (inputFastForwardActive() && duration > 4)
             duration = 4;
         s32 colorMode = scrGetArg(0);
         switch (colorMode) {
@@ -33,13 +33,13 @@ u32 FUN_00314d18(void)
         }
     } else {
         if (frameTextureGetState()) {
-            if (FUN_00163e84(1))
+            if (screenFaderIsSettled(1))
                 return 1;
         } else {
-            if (FUN_00163e84(0) && FUN_00163e84(1))
+            if (screenFaderIsSettled(0) && screenFaderIsSettled(1))
                 return 1;
         }
-        if (FUN_00162ea4()) {
+        if (eventIsSkipping()) {
             s32 colorMode = scrGetArg(0);
             switch (colorMode) {
             case 0:

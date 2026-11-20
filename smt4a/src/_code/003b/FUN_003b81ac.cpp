@@ -6,7 +6,7 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-s32 FUN_003248e4(BtlCombatantEntryA *entry);
+s32 btlCombatantTestApplicableActions(BtlCombatantEntryA *entry);
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 void scrSetResult(s32 result);
 
@@ -19,14 +19,14 @@ u32 FUN_003b81ac(void)
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
             (entry->flags & g_btlCandidateMasks.required) && !(g_btlCandidateMasks.excluded & entry->flags) &&
-            FUN_003248e4(entry) != 0) {
+            btlCombatantTestApplicableActions(entry) != 0) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
         BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
-        if (entry != NULL && FUN_003248e4(entry) != 0) {
+        if (entry != NULL && btlCombatantTestApplicableActions(entry) != 0) {
             scrSetResult(1);
             return 1;
         }

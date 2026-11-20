@@ -11,7 +11,7 @@ void packageFileDisableByKindName(AocSystemA *system, s32 mode, s32 index);
 void aocClearFlagD_C(AocSystemA *system, s32 id);
 void aocClearFlagD_10(AocSystemA *system, s32 id);
 void asdMemFree(void *memory);
-void FUN_00419e38(void *resource);
+void effectRecordSetsDestroyAll(void *resource);
 
 // Release table-managed and independent textures, then clear the owner's loaded allocations.
 void gfxResourceTableReleaseTexturesAndBuffers(ResourceTableView *table)
@@ -71,7 +71,7 @@ void gfxResourceTableReleaseTexturesAndBuffers(ResourceTableView *table)
         owner->staging = 0;
     }
     if (owner->resource) {
-        FUN_00419e38(owner->resource);
+        effectRecordSetsDestroyAll(owner->resource);
         if (owner->resource) {
             asdMemFree(owner->resource);
             owner->resource = 0;

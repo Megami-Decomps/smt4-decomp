@@ -8,7 +8,7 @@
 
 extern "C" {
 /* Takes `amount` of counter `flag` (an item count) from the player. */
-void FUN_00250d84(u32 flag, u32 amount);
+void saveFlagClearOrSubtractCounter(u32 flag, u32 amount);
 /* The party slot of the active unit `id`. */
 s32 partyFindActiveSlotById(u32 id);
 /* Removes the unit in that slot from the stock. */
@@ -20,7 +20,7 @@ static __inline void questTakeRequirements(QuestRecord *record)
 {
     for (s32 i = 0; i < 6; i++) {
         if (record->requirements[i].kind == 1) {
-            FUN_00250d84(record->requirements[i].id, record->requirements[i].count);
+            saveFlagClearOrSubtractCounter(record->requirements[i].id, record->requirements[i].count);
         } else if (record->requirements[i].kind == 2) {
             FUN_0029bbc8(partyFindActiveSlotById(record->requirements[i].id));
         }

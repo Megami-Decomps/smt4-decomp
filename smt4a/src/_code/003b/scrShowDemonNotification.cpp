@@ -33,12 +33,12 @@ u32 scrShowDemonNotification()
         }
         if (!saveSlotFindById((u16)id)) {
             FUN_004bd410((u16)id);
-            FUN_003e48dc((u16)id);
+            partySlotClearInactiveFlag((u16)id);
         }
         const GuestParamRecord *record = FUN_00370ecc((u16)id);
         if (record && record->parentId != id) {
             FUN_004bd410((u16)id);
-            FUN_003e48dc((u16)id);
+            partySlotClearInactiveFlag((u16)id);
         }
         banner->queueStates[banner->queueIndex] = 0;
         banner->queueIds[banner->queueIndex] = id;

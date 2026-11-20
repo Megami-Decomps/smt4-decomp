@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern int FUN_0010f498(void);
+extern int questCenterTestFlag(void);
 extern int gameTestFlagBit32(char);
 extern unsigned short *dataTableFindCategoryVariant(char, char, short);
 extern int gameFlagIsSet(unsigned int);
@@ -135,7 +135,7 @@ LAB_001074d8:
               *(unsigned char *)((int)puVar7 + 3) =
                    ((unsigned char)puVar8[temp_v7 * 3 + 4] & 0x1f) | (*(unsigned char *)((int)puVar7 + 3) & 0xe0);
               if (temp_v2 != '\0') {
-                temp_v7 = FUN_0010f498();
+                temp_v7 = questCenterTestFlag();
               }
               else {
                 temp_v7 = gameTestFlagBit32(temp_v1);

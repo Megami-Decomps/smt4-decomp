@@ -9,7 +9,7 @@ int asdCameraInitAreas(void);
 int asdMemFree(void *ptr);               /* heap free */
 int lmapSceneGetScript(void);
 int FUN_00303710(void);
-int FUN_00292b84(void);
+int lmapCameraUpdate(void);
 
 extern void *g_uniteCamera;
 
@@ -23,7 +23,7 @@ void uniteCameraDestroy(void)
     g_uniteCamera = NULL;
     if (lmapSceneGetScript() != 0) {
         FUN_00303710();
-        FUN_00292b84();
+        lmapCameraUpdate();
     }
 }
 

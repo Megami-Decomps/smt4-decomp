@@ -2,6 +2,10 @@
 #include "common.h"
 
 /* Path building. */
+
+/* The result file operations record when pathBuildWide fails (an nn::fs path error). */
+enum { FILE_RESULT_PATH_TOO_LONG = 0xe0e046bc };
+
 extern "C" {
 
 /* Prefixes `input` with the archive root `root` (0-3) and widens it into `output`, a 496-byte buffer

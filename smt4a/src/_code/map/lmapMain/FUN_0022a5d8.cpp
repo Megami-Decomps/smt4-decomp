@@ -66,7 +66,7 @@ extern int recordGetModeForId(int);
 extern int resourceRunOperationIfUnblocked(int);
 extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: textGetNameToken. */
-extern int objectApplyIfUnblocked(int);
+extern int gridNavigationGetItemCount(int);
 /* Supplied declaration required: uiDrawListScrollBar. */
 extern int uiSearchPrimary(int);
 extern int FUN_00358e28(unsigned int);
@@ -415,7 +415,7 @@ unsigned int FUN_0022a5d8(void)
         textDrawString(3,temp_v8,temp_v17,temp_v7);
       }
     }
-    temp_v8 = objectApplyIfUnblocked(temp_v19);
+    temp_v8 = gridNavigationGetItemCount(temp_v19);
     temp_v2 = uiSearchPrimary(temp_v19);
     if (temp_v2 < temp_v8) {
       efctSetSpeed();

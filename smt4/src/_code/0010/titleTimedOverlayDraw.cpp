@@ -7,7 +7,7 @@
 
 extern "C" {
 u32 asdTMTexTableGetNodeTexture(u32 group, u32 resource);
-void FUN_002c1ac8(const f32 *first, const f32 *second, const f32 *third,
+void gxSubmitFloatColoredQuad(const f32 *first, const f32 *second, const f32 *third,
                   f32 x, f32 y, f32 width, f32 height, f32 firstDepth, f32 secondDepth,
                   f32 firstScale, f32 secondScale, const f32 *fourth, f32 rotation);
 void renderCtxResetColorScale(RenderCtx *context);
@@ -34,7 +34,7 @@ u32 titleTimedOverlayDraw()
         if (color[3] > 0.0f) {
             u32 resource = asdTMTexTableGetNodeTexture(0x2c, 0);
             renderCtxSelectTexture(g_titleScene, reinterpret_cast<AsdTexture *>(resource));
-            FUN_002c1ac8(color, color, color, 128.0f, 88.0f, 64.0f, 64.0f,
+            gxSubmitFloatColoredQuad(color, color, color, 128.0f, 88.0f, 64.0f, 64.0f,
                           0.0f, 0.0f, 1.0f, 1.0f, color, 0.0f);
             renderCtxApplyTransforms(g_titleScene);
             renderCtxResetColorScale(g_titleScene);

@@ -18,7 +18,7 @@ s32 FUN_0031c080(void)
     s32 job = scrGetArg(0);
     s32 steps = scrGetArg(1);
 
-    if (FUN_00203d74() != 0 && steps > 4) {
+    if (inputFastForwardActive() != 0 && steps > 4) {
         steps = 4;
     }
     FadeWork *work = (FadeWork *)jobGetWork(job);

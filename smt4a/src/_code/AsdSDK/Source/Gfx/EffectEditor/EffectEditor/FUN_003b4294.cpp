@@ -5,7 +5,7 @@ extern "C" {
 
 int CONCAT44(double, double);
 int FUN_001a1ee0(void);
-int FUN_001b63b0(void);
+int phaseCosine(void);
 int gfxQuaternionWorkspaceBuildMatrix(void);
 int matrixGetTranslation(float *);
 int FUN_0037ee54(void);
@@ -91,7 +91,7 @@ static float romwright_sqrt_4(float value)
 #endif
 /* Supplied declaration required: FUN_001a1ee0. */
 extern int effGetFrameStep(void);
-/* Supplied declaration required: FUN_001b63b0. */
+/* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: matrixGetTranslation. */
 /* Supplied declaration required: FUN_0037ee54. */
@@ -385,7 +385,7 @@ void FUN_003b4294(fn_003b4294_arg0 *param_1)
                        temp_v11 * (float)puVar10[0x5b];
                   temp_v12 = temp_v41;
                   FUN_001a1ee0();
-                  FUN_001b63b0();
+                  phaseCosine();
                   temp_v24 = temp_v24 + temp_v25;
                   temp_v18 = (unsigned long long)(unsigned int)temp_v8;
                   temp_v4 = 0;

@@ -11,7 +11,7 @@ extern "C" {
 bool aocRunByName(u32 arg0, u32 name, u32 arg2, int checked);
 s32 texTableRequestNamedTextureLoad(AocSystem *system, s32 table, u32 entry, s32 flags);
 s32 asdTMTexTablePrepareNodeImage(s32 table, u32 entry);
-s32 FUN_0032c3fc(BtlTalkBustUp *bustUp);
+s32 btlTalkBustUpApplyTexturePlacement(BtlTalkBustUp *bustUp);
 s32 panelSetupButtons(BtlTalkBustUp *bustUp);
 
 void btlTalkBustUpSetDemonTexture(s32 devilId, s32 asynchronous)
@@ -38,7 +38,7 @@ void btlTalkBustUpSetDemonTexture(s32 devilId, s32 asynchronous)
         else
             asdTMTexTablePrepareNodeImage(0x18, bustUp->textureNode);
 
-        FUN_0032c3fc(bustUp);
+        btlTalkBustUpApplyTexturePlacement(bustUp);
         panelSetupButtons(bustUp);
         bustUp->state = 2;
         bustUp->stateCounter = 0;

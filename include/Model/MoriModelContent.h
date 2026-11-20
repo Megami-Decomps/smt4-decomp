@@ -6,7 +6,7 @@
  * deleting destructor is FUN_0040ac3c, vtable slot 1, so owners release it with `delete`).
  * resourceOwnerLoadFileSync reads the file, moriModelContentLoadBody creates the resource and the
  * body from it. The three request settings are passed on to the resource request and can only be
- * changed while there is no body (FUN_0040ab7c, FUN_0040a908, FUN_0040a918). */
+ * changed while there is no body (FUN_0040ab7c, moriModelContentSetRequestFirst, moriModelContentSetRequestSecond). */
 #ifndef MODEL_MORIMODELCONTENT_H
 #define MODEL_MORIMODELCONTENT_H
 
@@ -65,10 +65,10 @@ void moriModelContentCopyBody(MoriModelContent *content, MoriModelContent *sourc
 
 /* Request settings; ignored once the body exists. */
 void FUN_0040ab7c(MoriModelContent *content, u32 mode);
-void FUN_0040a908(MoriModelContent *content, u32 value);
-void FUN_0040a918(MoriModelContent *content, u32 value);
+void moriModelContentSetRequestFirst(MoriModelContent *content, u32 value);
+void moriModelContentSetRequestSecond(MoriModelContent *content, u32 value);
 /* Whether the content's file is loaded. */
-u8 FUN_0040ab8c(MoriModelContent *content);
+u8 moriModelContentIsLoaded(MoriModelContent *content);
 
 }
 

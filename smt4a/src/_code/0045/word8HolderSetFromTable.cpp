@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u32 DAT_0054bcdc[];
+extern u32 g_word8HolderTable[];
 
 void word8HolderSetFromTable(Word8Holder *obj, s32 index)
 {
-    obj->unk10 = DAT_0054bcdc[index];
+    obj->unk10 = g_word8HolderTable[index];
 }
 
 } /* extern "C" */

@@ -7,7 +7,7 @@ extern "C" {
 
 AocMusicJob *jobGetWork(void);
 u16 *aocContentGetIndexedRecord(void *table, u32 index);
-s32 FUN_002c1d5c(void);
+s32 eventIsSkipping(void);
 s32 aocRunByName(AocSystem *system, AocTrackId track, s32 arg);
 int aocLoadTextureNode(AocSystem *system, AocTrackId track, s32 arg); // declcheck: local (the shared declaration in AsdSDK/Source/Gfx/Model/AsdModel.h does not compile here: argument of type "AocSystem *" is incompatible with parameter of type "u32")
 int asdTMTexTablePrepareNodeImage(AocTrackId track);
@@ -39,7 +39,7 @@ void aocSelectMusicTrack(void *unused, u32 index, s32 queue)
         job->previous = -1;
         return;
     }
-    if (FUN_002c1d5c() != 0) {
+    if (eventIsSkipping() != 0) {
         job->muted = 1;
         job->previous = -1;
         return;

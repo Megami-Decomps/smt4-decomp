@@ -30,7 +30,7 @@ typedef char CampCecThreadWorkOffsets[
 
 extern "C" {
 extern CampCecThreadWork *g_campCec;
-s32 FUN_002c40f8(s32 *signaled, u32 *handles, s32 count, s32 waitAll, s64 timeout);
+s32 svcWaitSynchronizationN(s32 *signaled, u32 *handles, s32 count, s32 waitAll, s64 timeout);
 u8 FUN_0026f784(void *scene);
 void campCecResetViewState(void *scene);
 void linkHolderApplyFlag(void *scene, u32 flag);
@@ -45,7 +45,7 @@ static __inline void campCecStopThread(CampCecThreadWork *work)
 {
     s32 signaled;
     u32 handles[1] = { work->thread.handle };
-    s32 result = FUN_002c40f8(&signaled, handles, 1, 0, -1);
+    s32 result = svcWaitSynchronizationN(&signaled, handles, 1, 0, -1);
     bool failed = nnResultIsFailure(result);
     if (failed) {
         resultHandleFailure(result, failed);
@@ -65,7 +65,7 @@ s32 campCecStopCommThread(CampCecThreadWork *work)
     if (work->threadState == 2 && FUN_0026f784(g_campCec->modelScene)) {
         work->threadStopRequested = 1;
         campCecStopThread(work);
-        FUN_002c3f5c(work->stackRegion);
+        addressSpaceRegionFree(work->stackRegion);
         delete static_cast<StackRegion *>(work->stackRegion);
         work->stackRegion = NULL;
         asdMemFree(work->threadStack);

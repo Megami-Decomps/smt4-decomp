@@ -5,13 +5,13 @@
 
 extern "C" {
 /* Uses the indexed add-on value, falling back to the built-in table. */
-extern u32 DAT_00446548[];
+extern u32 g_aocIndexValueTable[];
 s32 dataTableFindKeyedPayload(void *system, u32 index);
 u32 aocIndexValueOrDefault(u32 index)
 {
     s32 result = dataTableFindKeyedPayload(g_aocSystem, index);
     if (result == 0) {
-        return DAT_00446548[index];
+        return g_aocIndexValueTable[index];
     }
     return result;
 }

@@ -7,7 +7,7 @@
 extern "C" {
 
 s32 ifTouchGetSelectionModeForRegion(s32 region);
-s32 FUN_0029ee54(u32 list);
+s32 gridNavigationGetItemCount(u32 list);
 s32 resourceRunOperationIfUnblocked(u32 list);
 void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, s32 flag);
 
@@ -21,7 +21,7 @@ void FUN_0028f870(u32 list, s32 x, s32 y, s32 wide)
     s32 previousSprite;
     s32 nextSprite;
     if (wide != 0) {
-        if (FUN_0029ee54(list) <= 11) {
+        if (gridNavigationGetItemCount(list) <= 11) {
             return;
         }
         texDrawTableEntryAtStoredOrigin(2, 0x1d, 0x41c, x, y, 0x6f);
@@ -34,7 +34,7 @@ void FUN_0028f870(u32 list, s32 x, s32 y, s32 wide)
             nextSprite = 0x41b;
         }
     } else {
-        if (FUN_0029ee54(list) <= 9) {
+        if (gridNavigationGetItemCount(list) <= 9) {
             return;
         }
         texDrawTableEntryAtStoredOrigin(2, 0x1d, 0x423, x, y, 0x6f);
@@ -55,11 +55,11 @@ void FUN_0028f870(u32 list, s32 x, s32 y, s32 wide)
     } else {
         track = asdTMTexTableEntryAt(0x1d, 0x424);
     }
-    s32 thumbHeight = ((track->placement->height << 12) / FUN_0029ee54(list)) * (s32)FUN_0029d644((const void *)(list)) >> 12;
+    s32 thumbHeight = ((track->placement->height << 12) / gridNavigationGetItemCount(list)) * (s32)uiListGetVisibleCount((const void *)(list)) >> 12;
     if (thumbHeight < 1) {
         thumbHeight = 1;
     }
-    s32 thumbOffset = ((track->placement->height << 12) / FUN_0029ee54(list)) * resourceRunOperationIfUnblocked(list) >> 12;
+    s32 thumbOffset = ((track->placement->height << 12) / gridNavigationGetItemCount(list)) * resourceRunOperationIfUnblocked(list) >> 12;
     renderStackSet(&g_titleScene->scissor, 3);
     gxSetMirroredClippedScissor(x + track->x, track->y + y + thumbOffset, track->placement->width, thumbHeight, 1);
     s32 thumbSprite;

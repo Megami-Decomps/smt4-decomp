@@ -6,9 +6,9 @@ u32 scrGetArg(u32 index);
 s32 scrGetCommandFrame(void);
 void scrWorkSetValue(s32 index, s32 value);
 s32 scrWorkGetValue(s32 index);
-void FUN_00417e08(u16 id);
+void rosterAddUnit(u16 id);
 s32 dataTableValueOrZero(u32 index);
-void FUN_003dea6c(u16 id, s32 mode, s32 enabled);
+void scrMessageSetSpeakerTitle(u16 id, s32 mode, s32 enabled);
 void messageSetScriptDisplayMode(void);
 s32 messageForwardDefaultMode(s32 message, s32 mode, s32 frame, s32 flags, s32 unused);
 s32 rosterHasLeader(void);
@@ -20,13 +20,13 @@ u32 messageScriptAdvanceSpeaker(void)
 {
     u16 speakerId = scrGetArg(0);
     if (scrGetCommandFrame() == 0) {
-        FUN_00417e08(speakerId);
+        rosterAddUnit(speakerId);
         scrWorkSetValue(0, 0);
         scrWorkSetValue(1, 0);
     }
     s32 message = dataTableValueOrZero(0x1e);
     if (scrWorkGetValue(0) == 0) {
-        FUN_003dea6c(speakerId, 0, 1);
+        scrMessageSetSpeakerTitle(speakerId, 0, 1);
         messageSetScriptDisplayMode();
         s32 result = messageForwardDefaultMode(message, 0, scrWorkGetValue(1), 6, 0);
         scrWorkSetValue(1, scrWorkGetValue(1) + 1);

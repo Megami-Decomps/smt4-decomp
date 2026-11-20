@@ -7,8 +7,8 @@ extern "C" {
 int _ZN18OnlineResultRecordaSERKS_(int, unsigned int *);
 int onlineInstanceTableFind(int, unsigned int);
 int onlineJobSetStateDone(int);
-int FUN_002f3dc4(void);
-int FUN_002f3dde(int, unsigned int **, unsigned int, unsigned char *);
+int onlineInstanceCompleteMode2(void);
+int onlineInstanceCompleteMode3(int, unsigned int **, unsigned int, unsigned char *);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,8 +19,8 @@ extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: onlineJobSetStateDone. */
-/* Supplied declaration required: FUN_002f3dc4. */
-/* Supplied declaration required: FUN_002f3dde. */
+/* Supplied declaration required: onlineInstanceCompleteMode2. */
+/* Supplied declaration required: onlineInstanceCompleteMode3. */
 extern int _ZNK18OnlineResultRecord7isValidEv(unsigned int *);
 
 
@@ -47,10 +47,10 @@ void FUN_002ea214(int param_1,unsigned int *param_2,unsigned int param_3,unsigne
     uStack_1c = param_2[1];
     uStack_18 = param_2[2];
     if (temp_v1 != 0) {
-      FUN_002f3dc4();
+      onlineInstanceCompleteMode2();
     }
     else {
-      FUN_002f3dde(temp_v0,&temp_v2,uStack_18,&uStack_14);
+      onlineInstanceCompleteMode3(temp_v0,&temp_v2,uStack_18,&uStack_14);
     }
   }
   if (*(char *)(param_1 + 0x22) != '\x05') {

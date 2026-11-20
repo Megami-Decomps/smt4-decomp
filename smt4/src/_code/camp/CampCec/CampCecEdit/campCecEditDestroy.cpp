@@ -9,8 +9,8 @@ extern "C" {
 int asdMemFreeSlot(u32 handle);
 int asdMemFree(void *ptr);               /* heap free */
 int jobStop(u32 task, int flags);     /* kill a task */
-int FUN_00309e94(u32 handle);
-int FUN_0031b970(u32 handle);
+int handleObjectFree(u32 handle);
+int campCecEditDestroyResources(u32 handle);
 
 extern CampCecEdit *g_campCecEdit;
 
@@ -23,8 +23,8 @@ void campCecEditDestroy(void)
     asdMemFree(edit->heapC);
     asdMemFreeSlot(edit->handleE);
     scrScriptProcessDestroy(edit->resource);
-    FUN_0031b970(edit->handleD);
-    FUN_00309e94(edit->handleC);
+    campCecEditDestroyResources(edit->handleD);
+    handleObjectFree(edit->handleC);
     jobStop(edit->task, 0);
     asdMemFree(edit);
     g_campCecEdit = NULL;

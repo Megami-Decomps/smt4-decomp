@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 extern "C" {
-void FUN_00180310(u32 palette, s32 x, s32 y, u32 option0, u32 option1, u32 option2,
+void statRowDrawValueImpl(u32 palette, s32 x, s32 y, u32 option0, u32 option1, u32 option2,
                   const char *format, ...);
 
 /* Draws a nonzero signed change ("+n" in palette 8, "-n" in palette 7) at a position. */
@@ -25,7 +25,7 @@ void FUN_00186008(s32 x, s32 y, s32 depth, s32 value)
         } else {
             sprintf(text, "+%d", magnitude);
         }
-        FUN_00180310(palette, x, y, 0, 1, depth + 1, text);
+        statRowDrawValueImpl(palette, x, y, 0, 1, depth + 1, text);
     }
 }
 }

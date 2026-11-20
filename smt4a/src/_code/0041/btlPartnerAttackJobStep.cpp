@@ -1,0 +1,72 @@
+/* NON_MATCHING: only the state reload after btlGetMainState differs: retail loads it into r1 before copying the battle pointer, the build copies first and loads into r0. */
+#include "battle/BtlMainAccess.h"
+#include "shard/Shard0034.h"
+
+namespace {
+// BtlStep ends at 0x30; this controller additionally reads a callback argument at that offset.
+struct BattleAnimationControllerView {
+    s32 state;
+    s32 previous;
+    s32 requested;
+    u32 frames;
+    u32 unk10;
+    u32 unk14;
+    u8 unk18[0x18];
+    void *callbackArgument;
+};
+typedef char BattleAnimationControllerViewOffsetsCheck[
+    __INTADDR__(&((BattleAnimationControllerView *)0)->frames) == 0xC &&
+    __INTADDR__(&((BattleAnimationControllerView *)0)->callbackArgument) == 0x30 ? 1 : -1];
+}
+
+extern "C" {
+void FUN_00410f84(BattleAnimationControllerView *controller);
+void btlIntroUpdate(BattleAnimationControllerView *controller);
+void messageIndicatorsUpdate(void *argument);
+f32 asdAnimGetTrackLastFrame(void *animation, u32 track);
+
+// Apply state transitions, advance looping animation slots and saturate the elapsed-frame count.
+u32 btlPartnerAttackJobStep(BattleAnimationControllerView *controller)
+{
+    s32 requested = controller->requested;
+    if (controller->state != requested) {
+        controller->previous = controller->state;
+        controller->state = requested;
+        FUN_00410f84(controller);
+        controller->frames = 0;
+        controller->unk10 = 0;
+        controller->unk14 = 0;
+    }
+    btlIntroUpdate(controller);
+    BtlStateB *battle = reinterpret_cast<BtlStateB *>(btlGetMainState());
+    if (controller->state != 1 && controller->state != 2) {
+        for (s32 index = 0; index < 12; ++index) {
+            LinkEntry10 *entry = &battle->entries4D78[index];
+            void *animation = entry->obj;
+            if (animation != NULL) {
+                entry->animation.frame += 2;
+                f32 lastFrame = asdAnimGetTrackLastFrame(animation, entry->animation.track);
+                f32 frame = (f32)entry->animation.frame;
+                if (lastFrame <= frame) {
+                    entry->animation.frame = (s32)((f32)entry->animation.frame - lastFrame);
+                }
+                if ((f32)entry->animation.frame >= lastFrame) {
+                    entry->animation.frame = 0;
+                }
+                if (entry->animation.remaining > 0 && --entry->animation.remaining <= 0 && entry->animation.track > 0) {
+                    entry->animation.track = 0;
+                    entry->animation.frame = 0;
+                }
+            }
+        }
+    }
+    ++controller->frames;
+    if (controller->frames >= 0x10000) {
+        controller->frames = 0xFFFF;
+    }
+    if (controller->callbackArgument != NULL) {
+        messageIndicatorsUpdate(controller->callbackArgument);
+    }
+    return 0;
+}
+}

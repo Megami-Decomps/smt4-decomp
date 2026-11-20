@@ -20,10 +20,10 @@ u32 FUN_002bb020(void);
 void FUN_002b4e64(void);
 void _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 void FUN_002c37f0(void);
-void FUN_002bafb0(void);
+void nw_snd_internal_driver_ChannelManager_GetInstance(void);
 void nw_snd_internal_driver_VoiceManager_GetInstance(void);
 void soundRequestQueueGetInstance(void);
-void FUN_002bae7c(void);
+void soundStreamCommandManagerGetInstance(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void FUN_001216bc(void *obj);
 void FUN_00121970(void);
 void nw_snd_internal_TaskThread_Destroy(void);
@@ -45,7 +45,7 @@ void sndSystemFinalize(void)
         nw_snd_internal_driver_SoundThread_Destroy();
         _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
         FUN_002c37f0();
-        FUN_002bafb0();
+        nw_snd_internal_driver_ChannelManager_GetInstance();
         nw_snd_internal_driver_ChannelManager_Finalize();
         nw_snd_internal_driver_VoiceManager_GetInstance();
         nw_snd_internal_driver_VoiceManager_Finalize();
@@ -55,7 +55,7 @@ void sndSystemFinalize(void)
         nw_snd_internal_driver_SoundThread_Finalize();
         soundRequestQueueGetInstance();
         FUN_00121970();
-        FUN_002bae7c();
+        soundStreamCommandManagerGetInstance();
         FUN_00121970();
         g_nwSoundSystemInitFlags.flag = 0;
         g_nwSoundSystemInitFlags.initialized = 0;

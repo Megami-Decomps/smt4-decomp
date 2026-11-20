@@ -4,7 +4,7 @@ extern "C" {
 PositionedLayoutTaskWork *taskCreate(void (*update)(void *), u32, u32, u32, u32, u32 size, u32 list, u32, u32);
 void sysMemClear(void *work, u32 bytes);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
-void FUN_0034a16c(void *layout, f32 *firstPair, f32 *secondPair, f32 *origin, f32 *dimensions);
+void effScalarKeyFindNextDistinct(void *layout, f32 *firstPair, f32 *secondPair, f32 *origin, f32 *dimensions);
 void FUN_00260158(void *work);
 
 // Create a positioned layout task using the caller's parameter and layout blocks.
@@ -25,7 +25,7 @@ __softfp PositionedLayoutTaskWork *FUN_002a39a4(u32 owner, const PositionedLayou
         work->kind = kind;
         work->secondState = -1;
         work->firstState = -1;
-        FUN_0034a16c(&work->layout, work->firstPair, work->secondPair, work->origin, work->dimensions);
+        effScalarKeyFindNextDistinct(&work->layout, work->firstPair, work->secondPair, work->origin, work->dimensions);
         work->scale = scale;
         work->startFrame = frame;
         work->frame = frame;

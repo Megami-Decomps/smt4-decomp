@@ -40,7 +40,7 @@ typedef struct SmokeFadeGlobals {
 extern SmokeFadeGlobals g_smokeFadeState;
 extern SmokeFadeRecord DAT_0057f498;
 
-s32 FUN_00162ea4(void);
+s32 eventIsSkipping(void);
 f32 mathInterpolateTimed(f32 from, f32 to, s32 duration, s32 elapsed);
 void titleSetSlotValueState2(s32 slot, s32 value);
 
@@ -78,7 +78,7 @@ u32 smokeFadeUpdate(void)
     SmokeFade *state = g_smokeFadeState.state;
     SmokeFadeRecord *record;
 
-    if (smokeFadeImagesLoaded() == 2 && state->records != NULL && FUN_00162ea4() != 0) {
+    if (smokeFadeImagesLoaded() == 2 && state->records != NULL && eventIsSkipping() != 0) {
         state->active = 0;
         state->phase = 3;
     }
@@ -90,7 +90,7 @@ u32 smokeFadeUpdate(void)
         if (state->records == NULL) {
             return 0;
         }
-        state->useDefault = FUN_00203d74() != 0;
+        state->useDefault = inputFastForwardActive() != 0;
         record = smokeFadeRecord(state);
         if (state->skipIn != 0) {
             state->levelB = 0.0f;

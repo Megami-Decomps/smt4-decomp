@@ -13,7 +13,7 @@ int clearFlags310To31F(void);
 int mathDistanceBetweenPoints(void);
 int lightOwnerRegister(unsigned int, int);
 int gameFlagIsSet(...);
-int FUN_002f3c28(void);
+int mapNaviUpdateSlots(void);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -46,7 +46,7 @@ extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: gameFlagIsSet. */
 extern int randNextInRange(unsigned int);
-/* Supplied declaration required: FUN_002f3c28. */
+/* Supplied declaration required: mapNaviUpdateSlots. */
 
 
 unsigned int FUN_001f9334(int param_1)
@@ -137,7 +137,7 @@ unsigned int FUN_001f9334(int param_1)
               temp_v6 = temp_v5 + temp_v11 * 0x14;
               temp_v12 = 1;
               if ((*(unsigned char *)(temp_v6 + 0xf20) & 8) != 0) {
-                FUN_002f3c28();
+                mapNaviUpdateSlots();
               }
               *(unsigned char *)(temp_v6 + 0xf20) = *(unsigned char *)(temp_v6 + 0xf20) & 0xdf;
               temp_v7 = (int)*(short *)(temp_v6 + 0xf24);

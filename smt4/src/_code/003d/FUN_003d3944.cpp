@@ -79,7 +79,7 @@ struct BtlMainFlags {
 extern "C" {
 
 extern BtlMainFlags *g_btlMain;
-extern u32 DAT_00435d18;
+extern u32 g_btlAux;
 
 void FUN_002569ac(BtlMainState **battle, u32 value);
 void btlEntryValuesCopy(BtlMainState **battle, BtlSetupEntry *entry);
@@ -90,7 +90,7 @@ void FUN_003d9d74(u32 table);
 void FUN_003cee94(BtlMainState **battle, BtlSetupEntry *entry);
 void runFourUpdates(u32 table);
 s32 btlFindNthActiveSpecialEntry(BtlMainState *state, s32 flag);
-BtlSoundRecord *FUN_00227ecc(u32 table, s32 flag);
+BtlSoundRecord *btlEffectFindNamedEntry(u32 table, s32 flag);
 void FUN_0023e52c(BtlMainState **battle, BtlSetupEntry *entry, u32 first, u32 second);
 void FUN_003cc944(BtlMainState **battle, BtlSetupEntry *entry, s32 flag);
 void modelSetResetSlots(u32 table);
@@ -150,15 +150,15 @@ void FUN_003d3944(BtlMainState **battle, BtlSetupEntry *entry, u32 unused3, u32 
         }
     }
     entryInvalidateStateTable(*battle);
-    entryTableInvalidate(DAT_00435d18);
-    FUN_003da890(DAT_00435d18);
+    entryTableInvalidate(g_btlAux);
+    FUN_003da890(g_btlAux);
     if (entry->musicKind == 9) {
-        FUN_003d9d74(DAT_00435d18);
+        FUN_003d9d74(g_btlAux);
     }
     FUN_003cee94(battle, entry);
-    runFourUpdates(DAT_00435d18);
+    runFourUpdates(g_btlAux);
     {
-        BtlSoundRecord *sound = FUN_00227ecc(DAT_00435d18, btlFindNthActiveSpecialEntry(*battle, 1) >= 0);
+        BtlSoundRecord *sound = btlEffectFindNamedEntry(g_btlAux, btlFindNthActiveSpecialEntry(*battle, 1) >= 0);
 
         if (sound != NULL) {
             FUN_0023e52c(battle, entry, sound->first, sound->second);
@@ -167,7 +167,7 @@ void FUN_003d3944(BtlMainState **battle, BtlSetupEntry *entry, u32 unused3, u32 
         }
     }
     FUN_003cc944(battle, entry, 0);
-    modelSetResetSlots(DAT_00435d18);
+    modelSetResetSlots(g_btlAux);
     g_btlMain->flags = (g_btlMain->flags & 0xFEFFFFFF) | 0x4000;
     switch ((u16)entry->unit->kind) {
     case 1:

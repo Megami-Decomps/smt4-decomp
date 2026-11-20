@@ -47,7 +47,7 @@ s32 FUN_002897e0(void);
 void FUN_002897d0(u8 value);
 s32 FUN_002897c0(void);
 void FUN_002897b0(u8 value);
-int FUN_002c1d5c(void);
+int eventIsSkipping(void);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 u32 tableGroupFindEntryIndex(void *commands, const char *name);
 void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
@@ -131,7 +131,7 @@ extern "C" s32 eventScriptJobUpdate(u32 job)
             FUN_002897b0(0);
             FUN_002897d0(0);
         }
-        if (FUN_002897e0() && !FUN_002c1d5c()) {
+        if (FUN_002897e0() && !eventIsSkipping()) {
             // The script's fade is still running: black both screens out and wait for them.
             titleSetSlotValueState2(0, 5);
             titleSetSlotValueState2(1, 5);
@@ -181,13 +181,13 @@ extern "C" s32 eventScriptJobUpdate(u32 job)
             if (flags & 8)
                 return 0;
             main->flags = flags & ~0x70;
-            FUN_00289608(&main->scriptHolder, 0);
+            aocScriptHolderReset(&main->scriptHolder, 0);
             work->state = 96;
         }
         return 0;
     case 96:
         if (questSysUpdateLoad(&g_aocMain->scriptHolder)) {
-            FUN_002895a8(&g_aocMain->scriptHolder);
+            aocScriptHolderRelease(&g_aocMain->scriptHolder);
             if (gameJumpRequestIsPending())
                 work->state = 97;
             else

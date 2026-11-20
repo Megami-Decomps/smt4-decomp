@@ -20,7 +20,7 @@ typedef char MovieAdpcmDecoderLayout[
     offsetof(MovieAdpcmDecoder, channels) == 0x18 && sizeof(MovieAdpcmContext) == 8 ? 1 : -1];
 
 extern "C" {
-extern MovieAdpcmAllocator DAT_00589508;
+extern MovieAdpcmAllocator g_moAllocator;
 u32 FUN_00439e0c(u32 bytes, s32 encoding, s32 channels);
 void __ARM_common_memcpy4_6(MovieAdpcmContext *destination, const void *source);
 void nn_snd_CTR_DecodeAdpcmData(const u8 *source, s16 *destination, const void *coefficients, MovieAdpcmContext *context, u32 samples);
@@ -35,9 +35,9 @@ u32 FUN_00512f0c(MovieAdpcmDecoder *decoder, const u8 *data, u32 bytes)
         return 1;
     if (channels > 1 && samples > decoder->channelCapacity) {
         if (decoder->channelBuffer)
-            DAT_00589508.release(decoder->channelBuffer);
+            g_moAllocator.release(decoder->channelBuffer);
         decoder->channelCapacity = 0;
-        decoder->channelBuffer = (s16 *)DAT_00589508.allocate(samples * sizeof(s16));
+        decoder->channelBuffer = (s16 *)g_moAllocator.allocate(samples * sizeof(s16));
         if (!decoder->channelBuffer)
             return 0;
         decoder->channelCapacity = samples;
@@ -46,9 +46,9 @@ u32 FUN_00512f0c(MovieAdpcmDecoder *decoder, const u8 *data, u32 bytes)
     u32 requiredBytes = channels == 1 ? samples * sizeof(s16) : outputBytes;
     if (decoder->outputCapacity < requiredBytes) {
         if (decoder->output)
-            DAT_00589508.release(decoder->output);
+            g_moAllocator.release(decoder->output);
         decoder->outputCapacity = 0;
-        decoder->output = (s16 *)DAT_00589508.allocate(requiredBytes);
+        decoder->output = (s16 *)g_moAllocator.allocate(requiredBytes);
         if (!decoder->output)
             return 0;
         decoder->outputCapacity = requiredBytes;

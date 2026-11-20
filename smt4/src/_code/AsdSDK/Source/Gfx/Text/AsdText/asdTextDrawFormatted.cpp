@@ -8,7 +8,7 @@ extern "C" {
 void asdMemFree(void *ptr);
 u32 libc_strlen(const void *text);
 s32 FUN_002b23bc(s8 *buffer, u32 size, const char *format, va_list args);
-void FUN_002869e8(u32 a0, u32 a1, u32 a2, u32 a3, s32 a4, s8 *text);
+void asdTextDrawFormattedCore(u32 a0, u32 a1, u32 a2, u32 a3, s32 a4, s8 *text);
 
 /* Formats a message into a temporary 4 KiB buffer, terminates it with the 0xFF 0xFF 0xFF end code, and draws it. */
 void asdTextDrawFormatted(u32 a0, u32 a1, u32 a2, u32 a3, s32 a4, const char *format, ...)
@@ -34,7 +34,7 @@ void asdTextDrawFormatted(u32 a0, u32 a1, u32 a2, u32 a3, s32 a4, const char *fo
         text[length + 2] = -1;
         text[length + 3] = 0;
     }
-    FUN_002869e8(a0, a1, a2, a3, a4, text);
+    asdTextDrawFormattedCore(a0, a1, a2, a3, a4, text);
     asdMemFree(text);
 }
 

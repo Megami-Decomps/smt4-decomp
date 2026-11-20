@@ -9,7 +9,7 @@ struct LeveledLists;
 extern "C" {
 const u8 *dataFindSymmetricPair(u32 firstRace, u32 secondRace);
 const u8 *dataTable05Sub0GetEntries();
-u16 FUN_003c9948(LeveledLists *owner, s32 race, u8 level);
+u16 fusionFindClosestLevelEntry(LeveledLists *owner, s32 race, u8 level);
 
 u32 FUN_003c8ffc(LeveledLists *owner, u16 firstId, u16 secondId,
                  PackedIdentifiers *output)
@@ -24,7 +24,7 @@ u32 FUN_003c8ffc(LeveledLists *owner, u16 firstId, u16 secondId,
     u32 level = first->level + second->level;
     if ((first->level + second->level) % 2 == 1)
         ++level;
-    u16 result = FUN_003c9948(owner, pair[2], table[0] + level / 2);
+    u16 result = fusionFindClosestLevelEntry(owner, pair[2], table[0] + level / 2);
     if (first->id == result || second->id == result || result == 0)
         return 0;
 

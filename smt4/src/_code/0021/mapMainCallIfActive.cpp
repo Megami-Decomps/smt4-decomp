@@ -2,14 +2,14 @@
 
 extern "C" {
 
-void FUN_0027d0ec(void);
+void mapAmbientAudioUpdate(void);
 
 extern MapMain *g_mapMain;
 
 void mapMainCallIfActive(void)
 {
     if (g_mapMain != NULL) {
-        FUN_0027d0ec();
+        mapAmbientAudioUpdate();
     }
 }
 

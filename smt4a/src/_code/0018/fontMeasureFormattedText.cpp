@@ -1,7 +1,7 @@
 #include "common.h"
 #include <stdarg.h>
 
-extern "C" s32 FUN_00100348(char* buffer, u32 capacity, const char* format, va_list arguments);
+extern "C" s32 textFormatProcessRange(char* buffer, u32 capacity, const char* format, va_list arguments);
 
 // Format the variadic text and scale its reported length by the category's width.
 extern "C" s32 fontMeasureFormattedText(u32 category, const char* format, ...)
@@ -9,7 +9,7 @@ extern "C" s32 fontMeasureFormattedText(u32 category, const char* format, ...)
     char buffer[32];
     va_list arguments;
     va_start(arguments, format);
-    s32 length = FUN_00100348(buffer, sizeof(buffer), format, arguments);
+    s32 length = textFormatProcessRange(buffer, sizeof(buffer), format, arguments);
     va_end(arguments);
 
     s32 width;

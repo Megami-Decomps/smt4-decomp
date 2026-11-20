@@ -7,7 +7,7 @@ extern "C" {
 
 u32 FUN_00340f80(Obj557ae8 *object);
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
-void FUN_003e573c(Obj557ae8 *object, s32 index, const char *name, u16 kind);
+void namedResourceSlotAssign(Obj557ae8 *object, s32 index, const char *name, u16 kind);
 
 /* Steps the player model: finishes loading the owned model, then advances each of the three slots
  * through its states (1 loading, 2 releasing, 3 released, 4 retry, 5 queued). */
@@ -15,7 +15,7 @@ void FUN_003e5858(Obj557ae8 *object)
 {
     if (object->unk04 != 0 && object->unk04 == 1) {
         if (object->owned != NULL) {
-            if (FUN_0040ab8c(object->owned) != 0) {
+            if (moriModelContentIsLoaded(object->owned) != 0) {
                 FUN_0040ab7c(object->owned, 2);
                 moriModelContentLoadBody(object->owned, NULL);
                 Obj557b18 *model = object->owned->body;
@@ -34,7 +34,7 @@ void FUN_003e5858(Obj557ae8 *object)
         Obj557ae8Slot *slot = &object->slots[i];
         switch (slot->state) {
         case 1:
-            if (FUN_0040ab8c(slot->child) != 0) {
+            if (moriModelContentIsLoaded(slot->child) != 0) {
                 FUN_0040ab7c(slot->child, 2);
                 moriModelContentLoadBody(slot->child, object->owned->body);
                 Obj557b18 *model = slot->child->body;
@@ -60,12 +60,12 @@ void FUN_003e5858(Obj557ae8 *object)
             if (slot->name[0] != '\0') {
                 void *storage = asdMemoryAllocTraced(0x20, "c:\\SMT4F\\SMT4F\\sdds4\\program\\player_model\\playerModel.cpp", 906);
                 slot->child = storage != NULL ? modelListInit(storage) : NULL;
-                FUN_003e573c(object, i, slot->name, slot->kind);
+                namedResourceSlotAssign(object, i, slot->name, slot->kind);
             }
             break;
         case 5:
-            if (object->unk04 == 0 && FUN_0040ab8c(object->owned) != 0) {
-                FUN_003e573c(object, i, slot->name, slot->kind);
+            if (object->unk04 == 0 && moriModelContentIsLoaded(object->owned) != 0) {
+                namedResourceSlotAssign(object, i, slot->name, slot->kind);
             }
             break;
         case 4:

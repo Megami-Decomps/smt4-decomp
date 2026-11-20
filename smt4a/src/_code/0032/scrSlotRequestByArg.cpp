@@ -3,10 +3,10 @@
 extern "C" {
 
 s32 scrGetArg(s32 index);
-s32 FUN_00203d74(void);
+s32 inputFastForwardActive(void);
 s32 scrGetCommandFrame(void);
-s32 FUN_00163e84(s32 a);
-s32 FUN_00162ea4(void);
+s32 screenFaderIsSettled(s32 a);
+s32 eventIsSkipping(void);
 void titleRestartSlotState3(s32 a, s32 value);
 void slotSetRequest(s32 slot, s32 count, s32 value);
 
@@ -16,7 +16,7 @@ u32 scrSlotRequestByArg(void)
 {
     s32 count = scrGetArg(1);
 
-    if (FUN_00203d74() != 0 && count > 4) {
+    if (inputFastForwardActive() != 0 && count > 4) {
         count = 4;
     }
     if (scrGetCommandFrame() == 0) {
@@ -31,10 +31,10 @@ u32 scrSlotRequestByArg(void)
             return 1;
         }
     } else {
-        if (FUN_00163e84(0) != 0) {
+        if (screenFaderIsSettled(0) != 0) {
             return 1;
         }
-        if (FUN_00162ea4() != 0) {
+        if (eventIsSkipping() != 0) {
             switch (scrGetArg(0)) {
             case 0:
                 titleRestartSlotState3(0, 0xff);

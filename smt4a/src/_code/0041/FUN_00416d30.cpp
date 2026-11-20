@@ -14,7 +14,7 @@ struct DemonMessageArchiveRow {
 extern "C" {
 PartyTextureSlot *saveSlotFindById(u32);
 const char *dataTable01GetRecordWithAocOverride(u32);
-const char *FUN_0014bf3c(u16, u32);
+const char *demonGetRaceLabel(u16, u32);
 char *libc_strcpy(char *, const char *);
 u8 devilGetVoiceCategory(const NkmBaseRecordA *record);
 extern const char DAT_00533c9c[];
@@ -34,7 +34,7 @@ void FUN_00416d30(ResultInputWork *work)
         if (slot != NULL) {
             libc_strcpy(name, dataTable01GetRecordWithAocOverride(slot->id));
             scrSetStringSlot(8, name);
-            libc_strcpy(name, FUN_0014bf3c(slot->id, 0));
+            libc_strcpy(name, demonGetRaceLabel(slot->id, 0));
             scrSetStringSlot(0x10, name);
             asdLoadFileAsyncSimple(DAT_00533c70, reinterpret_cast<u32 *>(&work->resources.levelUpScript), 0);
             s8 voiceCategory = (s8)devilGetVoiceCategory(nkmBaseGetRecord(slot->id));

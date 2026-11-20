@@ -10,7 +10,7 @@ struct DigitArea {
     f32 height;
 };
 
-void FUN_002e72c8(s32 x, s32 y, u32 color, const s8 *digits);
+void digitsDrawString(s32 x, s32 y, u32 color, const s8 *digits);
 
 /* Draw a digit string at an offset from the area's far corner. */
 void digitsDrawAtAreaCorner(const DigitArea *area, s32 offsetX, s32 offsetY, u32 color, const s8 *digits)
@@ -18,7 +18,7 @@ void digitsDrawAtAreaCorner(const DigitArea *area, s32 offsetX, s32 offsetY, u32
     s32 x = (s32)(area->x + area->width + offsetX);
     s32 y = (s32)(area->y + area->height + offsetY);
 
-    FUN_002e72c8(x, y, color, digits);
+    digitsDrawString(x, y, color, digits);
 }
 
 } /* extern "C" */

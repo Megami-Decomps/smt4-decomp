@@ -9,7 +9,7 @@ struct DrawParameterState {
     /* 0x70 */ DrawFloatTriple values;
 };
 
-extern "C" void FUN_00401198(DrawParameterState *state);
+extern "C" void renderRangeTargetApply(DrawParameterState *state);
 
 /* Store the draw parameters before rebuilding the render state. */
 extern "C" void drawStoreAndApplyParameters(DrawParameterState *state, DrawIntegerTriple options,
@@ -18,5 +18,5 @@ extern "C" void drawStoreAndApplyParameters(DrawParameterState *state, DrawInteg
     state->options = options;
     state->values = values;
     state->position = position;
-    FUN_00401198(state);
+    renderRangeTargetApply(state);
 }

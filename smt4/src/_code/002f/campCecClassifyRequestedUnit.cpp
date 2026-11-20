@@ -6,7 +6,7 @@
 #include "event/2dEvent/EventEffect.h"
 
 extern "C" {
-void FUN_002579bc(s32 index);
+void partyPanelSetDisabledMode(s32 index);
 
 // Queue the edit screen's next message for the requested demon: 5 when it is an unflagged active party member, 2 when it is a flagged stock demon, otherwise 4.
 s32 campCecClassifyRequestedUnit(CampCecEdit *work)
@@ -36,7 +36,7 @@ s32 campCecClassifyRequestedUnit(CampCecEdit *work)
                 }
             }
             if (work->nextMessage == -1) {
-                FUN_002579bc(0);
+                partyPanelSetDisabledMode(0);
                 work->nextMessage = 4;
             }
         }

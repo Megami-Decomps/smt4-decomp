@@ -3,7 +3,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-void FUN_00336aec(BtlUiObjCA *, u32, s32, u32, u32, s32);
+void btlUiSlotTrackerEnableSlot(BtlUiObjCA *, u32, s32, u32, u32, s32);
 }
 
 /* Adds the slot layout's origin and submits the request at zero depth. */
@@ -11,7 +11,7 @@ extern "C" u32 btlUiQueueSlotPositionRequest(BtlUiA *, s32 category, u32 text, u
                              u8 style, s32 enabled, s32 x, s32 y)
 {
     BtlUiA *ui = g_btlUi.ui;
-    FUN_00336aec(&ui->objC, text, category, color, style, 1);
+    btlUiSlotTrackerEnableSlot(&ui->objC, text, category, color, style, 1);
     u32 frame = 0;
     if (category == 0) frame = 0x3FA;
     else if (category == 1) frame = 0x403;

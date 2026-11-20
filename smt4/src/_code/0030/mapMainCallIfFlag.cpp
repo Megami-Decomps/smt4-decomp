@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_002cc07c(s32 arg);
+void gfxSettingsSetReady(s32 arg);
 
 extern MapMain *g_mapMain;
 
@@ -16,7 +16,7 @@ void mapMainCallIfFlag(s32 arg)
     if (g_mapMain == NULL || flag == 0) {
         return;
     }
-    FUN_002cc07c(arg);
+    gfxSettingsSetReady(arg);
 }
 
 } /* extern "C" */

@@ -30,7 +30,7 @@ extern int romFileStreamOpen(unsigned char **, unsigned int, unsigned int);
 /* Supplied declaration required: holderReleaseObject. */
 /* Supplied declaration required: taggedObjectRelease. */
 /* Supplied declaration required: taggedOwnerRelease. */
-extern int FUN_0032cab4(unsigned char **);
+extern int romFileOpenForWrite(unsigned char **);
 /* Supplied declaration required: taggedOwnerRelease2. */
 
 
@@ -63,7 +63,7 @@ unsigned int FUN_003416a0(int param_1,unsigned int param_2)
         }
       }
       else {
-        temp_v0 = FUN_0032cab4(&temp_v1);
+        temp_v0 = romFileOpenForWrite(&temp_v1);
       }
     }
     else {

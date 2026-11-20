@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_0026ae68(void);
+int statusDownRebuildTouchRegions(void);
 
 static __inline void stateTransitionSet(StatusDownTrack *transition, s32 next)
 {
@@ -15,7 +15,7 @@ void statusDownEnterState4(void)
 {
     g_statusDown->stateTimer = 0;
     stateTransitionSet(&g_statusDown->track, 4);
-    FUN_0026ae68();
+    statusDownRebuildTouchRegions();
 }
 
 } /* extern "C" */

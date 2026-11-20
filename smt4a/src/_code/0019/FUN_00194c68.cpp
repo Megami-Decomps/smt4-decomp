@@ -19,7 +19,7 @@ typedef struct {
 extern int FUN_001a8930(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_001a8d40. */
 extern unsigned int optionalWordGetValue(unsigned char *);
-extern unsigned int FUN_001a8e14(int);
+extern unsigned int soundArchiveFileEntryIsLoaded(int);
 
 
 unsigned int FUN_00194c68(int *param_1,unsigned int param_2,int param_3)
@@ -36,7 +36,7 @@ unsigned int FUN_00194c68(int *param_1,unsigned int param_2,int param_3)
   unsigned int temp_v7 [2];
   char temp_v8;
   
-  temp_v0 = FUN_001a8e14(param_1[1]);
+  temp_v0 = soundArchiveFileEntryIsLoaded(param_1[1]);
   temp_v1 = (**(romwright_code **)(*param_1 + 0x10))(param_1,temp_v0);
   if (temp_v1 == 0) {
     return 0;

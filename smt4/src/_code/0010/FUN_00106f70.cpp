@@ -22,7 +22,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } void_stack;
 
-extern unsigned int DAT_0044e368; /* 0x44e368 */
+extern unsigned int g_appletCloseReason; /* 0x44e368 */
 extern signed char g_appletSleepModuleState; /* 0x44e3b0 */
 extern romwright_code *DAT_0044e3e8; /* 0x44e3e8 */
 extern int DAT_0044e440; /* 0x44e440 */
@@ -68,11 +68,11 @@ void FUN_00106f70(void)
   }
   if (!(temp_v4 != 0 && temp_v4 != temp_v0)) {
     nn_applet_CTR_detail_PrepareToJumpToHomeMenu();
-    FUN_00110180(0,0,DAT_0044e368);
+    FUN_00110180(0,0,g_appletCloseReason);
   }
   else {
     FUN_0011072c();
-    FUN_001104b0(temp_v4,0,0,DAT_0044e368);
+    FUN_001104b0(temp_v4,0,0,g_appletCloseReason);
   }
   temp_v4 = DAT_0044e440;
   uStack_1c = DAT_0044e444;

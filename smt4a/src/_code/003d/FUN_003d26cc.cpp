@@ -8,7 +8,7 @@ extern "C" {
 
 int renderCtxResetColorScale(int);
 int FUN_001a1ee0(void);
-int FUN_001b63b0(void);
+int phaseCosine(void);
 int FUN_003fba4c(unsigned int, int, unsigned int, float *, int, int);
 int FUN_0050dda4(void);
 int VectorFloatToUnsigned(double, int);
@@ -27,7 +27,7 @@ typedef struct {
     unsigned int sp88; /* 0x88: local_88 */
 } void_stack;
 
-extern int DAT_0057f2c4; /* 0x57f2c4 */
+extern int g_uniteEffectWork; /* 0x57f2c4 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
@@ -44,7 +44,7 @@ static float romwright_sqrt_4(float value)
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_001a1ee0. */
-/* Supplied declaration required: FUN_001b63b0. */
+/* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: FUN_003fba4c. */
 /* Supplied declaration required: FUN_0050dda4. */
 /* Supplied declaration required: __aeabi_memcpy4. */
@@ -77,7 +77,7 @@ unsigned int FUN_003d26cc(void)
   float temp_v18;
   
   temp_v3 = g_renderCtx;
-  temp_v1 = DAT_0057f2c4;
+  temp_v1 = g_uniteEffectWork;
   temp_v2 = renderCtxPackPassFlags(1,0);
   piVar7 = (int *)(temp_v3 + 0x1258);
   temp_v4 = *piVar7;
@@ -133,7 +133,7 @@ unsigned int FUN_003d26cc(void)
   FUN_001a1ee0();
   temp_v12 = -10.0f;
   temp_v11 = temp_v11 * -10.0f;
-  FUN_001b63b0();
+  phaseCosine();
   temp_v7 = temp_v11 - temp_v7;
   temp_v10 = 1.0f;
   temp_v17 = temp_v6 * temp_v12 - temp_v17;

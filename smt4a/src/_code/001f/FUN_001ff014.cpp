@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_002a6894(...);
+int saveMarkIdListSeen(...);
 int gameCounterAddSaturating(...);
 
 int qsort(...);
@@ -61,9 +61,9 @@ extern unsigned short recordGetScaledMaximum(int);
 /* Supplied declaration required: slotRecordFindById. */
 extern int gameGetSlotRecord(void);
 /* Supplied declaration required: partyFindSlotById. */
-extern int FUN_002a4b28(unsigned int);
+extern int compendiumEntryIsRegistered(unsigned int);
 /* Supplied declaration required: FUN_002a5e7c. */
-/* Supplied declaration required: FUN_002a6894. */
+/* Supplied declaration required: saveMarkIdListSeen. */
 /* Supplied declaration required: arrayContainsU16. */
 /* Supplied declaration required: unitRecordBuildFromSave. */
 /* Supplied declaration required: findSkillMetadataById. */
@@ -195,7 +195,7 @@ unsigned char FUN_001ff014(int param_1)
     FUN_004d0d70();
   }
   temp_v3 = partyFindFirstUnusedEntry();
-  temp_v1 = FUN_002a4b28((piVar1[param_1 * 2 + 0x4ef] & 0x1ffffU) >> 2);
+  temp_v1 = compendiumEntryIsRegistered((piVar1[param_1 * 2 + 0x4ef] & 0x1ffffU) >> 2);
   dispatchIfFound(temp_v3,(piVar1[param_1 * 2 + 0x4ef] & 0x1ffffU) >> 2,0);
   if (temp_v10 != 0) {
     temp_v35 = (unsigned short)((unsigned int)(piVar1[param_1 * 2 + 0x4ef] << 0xf) >> 0x11);
@@ -382,7 +382,7 @@ unsigned char FUN_001ff014(int param_1)
   if (temp_v10 != 0) {
     gameCounterAddSaturating(0x27,1);
   }
-  FUN_002a6894(temp_v4);
+  saveMarkIdListSeen(temp_v4);
   return temp_v10;
 }
 

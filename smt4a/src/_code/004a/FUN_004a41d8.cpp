@@ -49,14 +49,14 @@ void messageSetActiveMode(s32 mode);
 s32 inputIsQuestMenuPressed(void);
 s32 inputIsQuestConfirmPressed(void);
 s32 inputIsQuestCancelPressed(void);
-s32 FUN_004d0584(void);
+s32 inputConfirmPressed(void);
 s32 questControlsGetCursorRow(u8* controls);
 s32 gameGetMode(void);
 void FUN_004d0680(StatusScreen* screen);
-void FUN_00359974(s32 a, s32 b, s32 c, s32 d);
+void entryTableResetAndInit(s32 a, s32 b, s32 c, s32 d);
 s32 FUN_004a34a0(StatusScreen* screen, u32 id);
 u32 dataTable01GetRecordWithAocOverride(u32 id);
-u32 FUN_0014bf3c(u32 id, s32 arg);
+u32 demonGetRaceLabel(u32 id, s32 arg);
 void libc_strcpy(char* dst, u32 src);
 void scrScriptProcessStartEntry(u32 process, s32 entry);
 void sendEvent100020F(void);
@@ -87,7 +87,7 @@ void FUN_004a41d8(StatusScreen* screen)
     s32 select = 0;
     s32 cancel = 0;
     s16 id = currentId(screen);
-    if (FUN_002a4b28((u16)id) != 0) {
+    if (compendiumEntryIsRegistered((u16)id) != 0) {
         panelSetTarget(-FUN_004a8750((u16)id, screen->page, 0, (s8)SCREEN_BYTE(screen, 0x94) >= 100, 0), 0);
     } else {
         messageSetActiveMode(1);
@@ -95,7 +95,7 @@ void FUN_004a41d8(StatusScreen* screen)
     s32 menu = inputIsQuestMenuPressed();
     s32 confirm = inputIsQuestConfirmPressed();
     if (SCREEN_HALF(screen, 0x864) > 0) {
-        select = FUN_004d0584();
+        select = inputConfirmPressed();
         cancel = inputIsQuestCancelPressed();
         if (select == 0) select = questControlsGetCursorRow(screen->unk818);
     }
@@ -105,13 +105,13 @@ void FUN_004a41d8(StatusScreen* screen)
     }
     if (select != 0) {
         id = currentId(screen);
-        FUN_00359974(0x18, FUN_004a8750((u16)id, screen->page, 0, (s8)SCREEN_BYTE(screen, 0x94) >= 100, 0), -1, 0);
+        entryTableResetAndInit(0x18, FUN_004a8750((u16)id, screen->page, 0, (s8)SCREEN_BYTE(screen, 0x94) >= 100, 0), -1, 0);
         u8* mode = &SCREEN_BYTE(screen, 0xa870);
         if (FUN_004a34a0(screen, (u16)id) != 0) {
             char text[128];
             libc_strcpy(text, dataTable01GetRecordWithAocOverride((u16)id));
             scrSetStringSlot(8, text);
-            libc_strcpy(text, FUN_0014bf3c((u16)id, 0));
+            libc_strcpy(text, demonGetRaceLabel((u16)id, 0));
             scrSetStringSlot(0x10, text);
             scrScriptProcessStartEntry(screen->process, *mode == 7);
             screen->state = 3;
@@ -148,10 +148,10 @@ void FUN_004a41d8(StatusScreen* screen)
     if (cancel != 0) {
         g_animatedPageSelection.page = -1;
         sortMenuAcquire(0xf, 0);
-        FUN_0031f208(1);
-        FUN_0031f208(2);
-        FUN_0031f208(7);
-        FUN_0031f208(3);
+        useCounterAppendValue(1);
+        useCounterAppendValue(2);
+        useCounterAppendValue(7);
+        useCounterAppendValue(3);
         useCounterStart();
         gameGlobalsSetMenuOpenFlag(1);
         screen->state = 7;

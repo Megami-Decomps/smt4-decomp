@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002399ec(int *);
 int _ZN12CecMessageIdC1Ev(unsigned char [8]);
-int FUN_002ad66c(int *, int **);
+int asdSaveHeaderBuildCalendarTime(int *, int **);
 int __ARM_common_memcpy4_8(...);
 int clockGetTicksAsMicroseconds(int **);
 int FUN_003588fc(void);
@@ -42,7 +42,7 @@ extern unsigned int FUN_002393a4(unsigned int *, unsigned int *);
 extern int *handlerRefForward(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002399ec. */
 /* Supplied declaration required: _ZN12CecMessageIdC1Ev. */
-/* Supplied declaration required: FUN_002ad66c. */
+/* Supplied declaration required: asdSaveHeaderBuildCalendarTime. */
 /* Supplied declaration required: __ARM_common_memcpy4_8. */
 /* Supplied declaration required: clockGetTicksAsMicroseconds. */
 /* Supplied declaration required: FUN_003588fc. */
@@ -145,7 +145,7 @@ int * FUN_00357a38(int *param_1,int param_2,int param_3,unsigned int param_4,int
     clockGetTicksAsMicroseconds(&temp_v21);
     temp_v19 = temp_v21;
     temp_v20 = temp_v22;
-    FUN_002ad66c(&temp_v9,&temp_v19);
+    asdSaveHeaderBuildCalendarTime(&temp_v9,&temp_v19);
     temp_v11 = temp_v9;
     uStack_7c = iStack_f4;
     puStack_78 = puStack_f0;

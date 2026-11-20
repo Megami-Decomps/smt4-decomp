@@ -4,7 +4,7 @@ extern "C" {
 
 void soundVolumeSettingSet(u32 volume);
 u32 soundVolumeSettingGet(void);
-s32 FUN_002bf09c(void);
+s32 soundArchiveLookupItemByLabel(void);
 void scrSetResult(u32 value);
 u32 scrGetArg(u32 index);
 u32 scrGetArgString(u32 index);
@@ -18,7 +18,7 @@ u32 scrPlayVoiceScaled(void)
 
     soundVolumeSettingSet((u8)(u32)((f32)percent * (f32)volume * 0.0125f));
     scrGetArgString(0);
-    if (FUN_002bf09c() < 0) {
+    if (soundArchiveLookupItemByLabel() < 0) {
         return 1;
     }
     u32 result = sysPlayVoice();

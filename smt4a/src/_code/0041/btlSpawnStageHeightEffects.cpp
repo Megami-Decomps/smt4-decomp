@@ -5,7 +5,7 @@ struct StageEffectOrigin { u8 unk00[0x18]; f32 height; };
 extern "C" {
 extern void *g_btlAux;
 extern StageEffectOrigin DAT_00529780[];
-void FUN_004aaa94(BtlUiA *ui);
+void btlUiEnterStateSpawnEffects(BtlUiA *ui);
 s32 btlStageGetModeIndex(u32 stage);
 void FUN_004f5238(void *context, u32 first, u32 second, u32 kind, u32 enabled, u32 mode, u32 flags, u32 active, u32 extra, f32 x, f32 y);
 void btlQueueActionMessage(u32 first, u32 second, u32 id, u32 enabled, u32 flags, u32 mode, u32 extra);
@@ -13,7 +13,7 @@ void btlQueueActionMessage(u32 first, u32 second, u32 id, u32 enabled, u32 flags
 // Spawn the three stage-height-relative battle effects and their associated effect resource.
 void btlSpawnStageHeightEffects(u32 stage)
 {
-    FUN_004aaa94(g_btlUiBlock);
+    btlUiEnterStateSpawnEffects(g_btlUiBlock);
     f32 height = 0.0f;
     s32 index = btlStageGetModeIndex(stage);
     if (index >= 0)

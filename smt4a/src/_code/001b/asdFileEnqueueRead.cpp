@@ -18,7 +18,7 @@ struct FileReadParameters {
 };
 
 extern "C" {
-void FUN_001c5b68(FileReadParameters* parameters);
+void fileReadRequestReset(FileReadParameters* parameters);
 void pathSetWithRomPrefix(FileReadParameters* parameters, const char* path);
 void* asdFileAddEntry(const FileReadParameters* parameters);
 
@@ -26,7 +26,7 @@ void* asdFileAddEntry(const FileReadParameters* parameters);
 void* asdFileEnqueueRead(const char* path, u8 flag, void (*onDone)(void*), void* onDoneArg)
 {
     FileReadParameters parameters;
-    FUN_001c5b68(&parameters);
+    fileReadRequestReset(&parameters);
     pathSetWithRomPrefix(&parameters, path);
     parameters.flag = flag;
     parameters.onDone = onDone;

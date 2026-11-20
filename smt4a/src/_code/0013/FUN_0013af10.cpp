@@ -1,4 +1,4 @@
-/* NON_MATCHING: 206 rows against 205; the table is read through `DAT_0061978c.at(index)` (unsigned bound check) and the replace-case release is the call-free clear block, so only register numbering remains: retail loads the table literal into r4 before the first call and derives `objects` (add r9, r4, #0) and the flag anchor (add sl, r4, #256) from it. */
+/* NON_MATCHING: 206 rows against 205; the table is read through `g_soundObjectTable.at(index)` (unsigned bound check) and the replace-case release is the call-free clear block, so only register numbering remains: retail loads the table literal into r4 before the first call and derives `objects` (add r9, r4, #0) and the flag anchor (add sl, r4, #256) from it. */
 #include "code/Code0014.h"
 typedef unsigned char u8;
 typedef signed char s8;
@@ -51,7 +51,7 @@ struct SoundObjectTable {
     s8 enabled;                          /* 0x619972 */
 };
 
-extern SoundObjectTable DAT_0061978c;
+extern SoundObjectTable g_soundObjectTable;
 
 s32 jyoucyuGetTableEntry(u32 index);
 s32 objectGetFlagBit1(AsdSndObject *handle);
@@ -61,7 +61,7 @@ s32 asdSoundObjectFadeOut(AsdSndObject *handle);
 s32 asdMemFree(u32 memory);
 s32 FUN_00152bf8(AsdSndObject *handle);
 void rt_aeabi_memclr(void *memory, s32 size);
-s32 FUN_00162ea4(void);
+s32 eventIsSkipping(void);
 s32 padQueryLogicalKey(s32 a, s32 b);
 s32 slotIsActive(s32 a);
 
@@ -89,7 +89,7 @@ void FUN_0013af10(void)
         return;
     }
     for (s32 i = 0; i < SOUND_OBJECTS; i++) {
-        SoundObject *object = DAT_0061978c.at(i);
+        SoundObject *object = g_soundObjectTable.at(i);
 
         if (object->kind != 2) {
             continue;
@@ -99,7 +99,7 @@ void FUN_0013af10(void)
             if ((object->options & 2) != 0) {
                 s32 anyPlaying = 0;
                 for (s32 j = 0; j < SOUND_OBJECTS; j++) {
-                    SoundObject *other = DAT_0061978c.at(j);
+                    SoundObject *other = g_soundObjectTable.at(j);
                     if (objectGetFlagBit1(other->handle) != 0) {
                         anyPlaying = other != 0;
                         break;
@@ -107,7 +107,7 @@ void FUN_0013af10(void)
                 }
                 if (anyPlaying) {
                     for (s32 k = 0; k < SOUND_OBJECTS; k++) {
-                        SoundObject *other = DAT_0061978c.at(k);
+                        SoundObject *other = g_soundObjectTable.at(k);
                         if (objectGetFlagBit1(other->handle) != 0 && other->mode != 4) {
                             other->flags = other->flags | OBJ_FADE_REQ;
                             other->fadeKind = 0;
@@ -115,7 +115,7 @@ void FUN_0013af10(void)
                     }
                 } else {
                     for (s32 j = 0; j < SOUND_OBJECTS; j++) {
-                        if (DAT_0061978c.at(j)->kind == 1) {
+                        if (g_soundObjectTable.at(j)->kind == 1) {
                             if (object->data != 0) {
                                 asdMemFree(object->data);
                             }
@@ -141,7 +141,7 @@ void FUN_0013af10(void)
             }
             object->flags = (object->flags & ~OBJ_ACTIVE) | OBJ_STARTED;
         } else if ((object->flags & OBJ_STARTED) != 0) {
-            if ((DAT_0061978c.enabled != 0 || FUN_00162ea4() != 0) && object->mode != 4) {
+            if ((g_soundObjectTable.enabled != 0 || eventIsSkipping() != 0) && object->mode != 4) {
                 object->flags = object->flags | OBJ_FADE_REQ;
                 object->fadeKind = 0;
             }
@@ -164,8 +164,8 @@ void FUN_0013af10(void)
             soundObjectRelease(object, loop);
         }
     }
-    if (DAT_0061978c.enabled == 1 && padQueryLogicalKey(9, 2) == 0 && slotIsActive(6) == 0) {
-        DAT_0061978c.enabled = 0;
+    if (g_soundObjectTable.enabled == 1 && padQueryLogicalKey(9, 2) == 0 && slotIsActive(6) == 0) {
+        g_soundObjectTable.enabled = 0;
     }
 }
 

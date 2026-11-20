@@ -53,7 +53,7 @@ extern u8 DAT_005c1eec[];
 
 
 void *memAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment, u32 zero);
-ThunderStrip *FUN_00350d90(u32 segments, const u8 *signature, u32 valuesPerVertex, u32 vertexSize);
+ThunderStrip *effGeomBuildGridMesh(u32 segments, const u8 *signature, u32 valuesPerVertex, u32 vertexSize);
 
 /* Allocates the strip block of `bytes` bytes, recording the allocation site first. */
 static ThunderBlock *allocStripBlock(u32 bytes)
@@ -89,7 +89,7 @@ ThunderBlock *FUN_003cae90(ThunderParams *params)
 
     ThunderEntry *entry = block->entries;
     for (u32 strip = 0; strip < stripCount; strip++) {
-        ThunderStrip *bolt = FUN_00350d90((u16)params->segments, DAT_005c1eec, 5, 0x48);
+        ThunderStrip *bolt = effGeomBuildGridMesh((u16)params->segments, DAT_005c1eec, 5, 0x48);
         entry->strip = bolt;
         u32 vertexCount = bolt->vertexValues / 5;
         ThunderVertex *vertex = bolt->buffer->vertices;

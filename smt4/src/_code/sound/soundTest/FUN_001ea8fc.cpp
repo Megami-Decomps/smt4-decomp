@@ -13,7 +13,7 @@ struct SoundTestWork {
     u32 playingSound; // 0x10
 };
 extern "C" {
-extern SoundTestWork *DAT_0044e110;
+extern SoundTestWork *g_soundTestWork;
 u32 taskCreateDraw(const char *name, u32 priority, u32 workSize, u32 flags, void (*update)(), void (*destroy)(), u32 argument, u32 parent);
 void soundTestActionMenuUpdate();
 void callbackStateEnable();
@@ -24,7 +24,7 @@ void FUN_002f4b34();
 void FUN_001ea8fc()
 {
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\sound\\soundTest.cpp", 49);
-    SoundTestWork *work = DAT_0044e110 = (SoundTestWork *)asdMemAlloc(0x100, 0x100, 0, sizeof(SoundTestWork), 1);
+    SoundTestWork *work = g_soundTestWork = (SoundTestWork *)asdMemAlloc(0x100, 0x100, 0, sizeof(SoundTestWork), 1);
     work->selectedSound = 0;
     work->selectedBank = 0;
     work->playingSound = 0;

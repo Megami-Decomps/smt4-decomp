@@ -22,8 +22,8 @@ extern signed char DAT_00471ac0; /* 0x471ac0 */
 extern unsigned int DAT_00472ab0; /* 0x472ab0 */
 
 extern int FUN_00128c30(unsigned int *, unsigned int *, unsigned int *, unsigned int *, unsigned int *, unsigned int *);
-extern int asdModelForwardChecked(unsigned int *, unsigned int, unsigned int, unsigned int);
-extern unsigned int FUN_002c1398(unsigned int);
+extern int srvGetServiceHandle(unsigned int *, unsigned int, unsigned int, unsigned int); // declcheck: local (the shared declaration does not compile here or changes this unit)
+extern unsigned int srvInitialize(unsigned int);
 extern unsigned int libc_strlen(unsigned int);
 /* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: nn_os_SharedMemoryBlock_AttachAndMap. */
@@ -53,12 +53,12 @@ unsigned int FUN_0011c320(unsigned int *param_1,unsigned int param_2)
     temp_v0 = 0xe0a04ff9;
   }
   else {
-    temp_v1 = FUN_002c1398(0);
+    temp_v1 = srvInitialize(0);
     if ((temp_v1 & 0x3ff) != 0x3f9 && (int)temp_v1 < 0) {
       asdFatalError();
     }
     temp_v0 = libc_strlen(param_2);
-    temp_v2 = asdModelForwardChecked(&DAT_00472ab0,param_2,temp_v0,0);
+    temp_v2 = srvGetServiceHandle(&DAT_00472ab0,param_2,temp_v0,0);
     if (temp_v2 < 0) {
       asdFatalError();
     }

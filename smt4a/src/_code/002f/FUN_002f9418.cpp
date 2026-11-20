@@ -13,9 +13,9 @@ int nkmBaseGetRecord(void);
 int nkmEnemyFindById(void);
 int FUN_0021a6c8(int);
 int statusPanelSetOpen(...);
-int FUN_002c7e24(void);
+int gameGlobalsGetBlock1390(void);
 int FUN_002c982c(...);
-int FUN_002f0420(...);
+int statusScreenRefreshForSelection(...);
 int FUN_0032d0c8(...);
 int statusDisplayBindUnitRecord(...);
 int gameGlobalsSetMenuOpenFlag(...);
@@ -52,10 +52,10 @@ extern int ifTouchGetSelectedRegion(void);
 extern int itemIsCollectedWithRelated(unsigned short);
 /* Supplied declaration required: statusPanelSetOpen. */
 extern int FUN_002a7410(void);
-/* Supplied declaration required: FUN_002c7e24. */
+/* Supplied declaration required: gameGlobalsGetBlock1390. */
 /* Supplied declaration required: FUN_002c982c. */
 extern int ifTouchGetActiveCounter(void);
-/* Supplied declaration required: FUN_002f0420. */
+/* Supplied declaration required: statusScreenRefreshForSelection. */
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: statusDisplayBindUnitRecord. */
 /* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
@@ -186,9 +186,9 @@ LAB_002f9458:
     temp_v2 = uiSpriteAdvanceAnimation(param_1 + 0x12b8);
     if (temp_v2 == 0) break;
     statusIconSetKind(param_1,0);
-    temp_v2 = FUN_0023b3d0();
+    temp_v2 = gameStateIsNotTransitioning();
     if (temp_v2 == 0) break;
-    psVar8 = (short *)FUN_002c7e24();
+    psVar8 = (short *)gameGlobalsGetBlock1390();
     temp_v2 = 0;
     if (0 < (int)*puVar13) {
       do {
@@ -198,10 +198,10 @@ LAB_002f9458:
           if (((int)*psVar8 != (unsigned int)*(unsigned short *)(temp_v2 + 0x4858)) ||
              (psVar8[0xe] != *(short *)(temp_v2 + 0x485e))) {
             unitInitializeFromTemplate(*(unsigned short *)(temp_v2 + 0x4858),temp_v11);
-            puVar9 = (unsigned short *)FUN_002c7e24();
+            puVar9 = (unsigned short *)gameGlobalsGetBlock1390();
             temp_v6 = (unsigned int)*puVar9;
             nkmEnemyFindById();
-            psVar8 = (short *)FUN_002c7e24();
+            psVar8 = (short *)gameGlobalsGetBlock1390();
             if ((*psVar8 < 1) || ((temp_v6 == 0 || ((*(unsigned short *)(temp_v6 + 0x16) & 1) != 0)))) {
               temp_v6 = (unsigned int)*(unsigned short *)(temp_v2 + 0x4858);
               nkmEnemyFindById();
@@ -336,11 +336,11 @@ LAB_002f9924:
           temp_v8 = 0;
         } while (temp_v2 < (int)*puVar13);
       }
-      psVar8 = (short *)FUN_002c7e24();
+      psVar8 = (short *)gameGlobalsGetBlock1390();
       param_1 = param_1 + temp_v8 * 0x40;
       if ((int)*psVar8 != (unsigned int)*(unsigned short *)(param_1 + 0x4858)) {
         unitInitializeFromTemplate((unsigned int)*(unsigned short *)(param_1 + 0x4858),temp_v11);
-        puVar9 = (unsigned short *)FUN_002c7e24();
+        puVar9 = (unsigned short *)gameGlobalsGetBlock1390();
         temp_v6 = (unsigned int)*puVar9;
         nkmEnemyFindById();
         if ((temp_v6 != 0) && ((*(unsigned short *)(temp_v6 + 0x16) & 1) == 0)) {
@@ -353,7 +353,7 @@ LAB_002f9924:
         temp_v13 = *(unsigned short *)(param_1 + 0x485c);
         temp_v18 = *(unsigned short *)(param_1 + 0x485e);
         statusDisplayBindUnitRecord(temp_v11,1,0,param_1 + 0x4871);
-        FUN_002f0420(0);
+        statusScreenRefreshForSelection(0);
         statusPanelSetOpen(1);
         *temp_v21 = 0;
         *temp_v20 = 0;
@@ -372,8 +372,8 @@ LAB_002f9924:
           statusIconSetKind(param_1,0xc);
         }
       }
-      puVar7 = (unsigned short *)FUN_002c7e24();
-      puVar9 = (unsigned short *)FUN_002c7e24();
+      puVar7 = (unsigned short *)gameGlobalsGetBlock1390();
+      puVar9 = (unsigned short *)gameGlobalsGetBlock1390();
       temp_v6 = (unsigned int)*puVar9;
       nkmBaseGetRecord();
       sysPlaySe(0x35);

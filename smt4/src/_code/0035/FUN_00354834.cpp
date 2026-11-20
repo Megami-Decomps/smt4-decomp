@@ -5,13 +5,13 @@
 extern "C" {
 
 int libc_strncmp(...);
-int FUN_002c131c(unsigned int, int);
+int errThrowFatal(unsigned int, int);
 
 extern unsigned char LAB_003549cc; /* 0x3549cc */
 extern unsigned char LAB_003549fc; /* 0x3549fc */
 
 /* Supplied declaration required: libc_strncmp. */
-/* Supplied declaration required: FUN_002c131c. */
+/* Supplied declaration required: errThrowFatal. */
 
 
 unsigned int FUN_00354834(int param_1)
@@ -44,7 +44,7 @@ unsigned int FUN_00354834(int param_1)
   }
   temp_v0 = 0;
 LAB_00354890:
-  FUN_002c131c(0xf9613903,0x35489c);
+  errThrowFatal(0xf9613903,0x35489c);
 LAB_0035489c:
   temp_v1 = libc_strncmp("REDEEMABLE",temp_v0,0xb);
   if (temp_v1 != 0) {
@@ -80,7 +80,7 @@ LAB_0035489c:
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < temp_v5);
     }
-    FUN_002c131c(0xf9613903,0x354978);
+    errThrowFatal(0xf9613903,0x354978);
 LAB_00354978:
     temp_v0 = libc_strncmp("GUNIT",temp_v4,6);
     temp_v3 = 0;

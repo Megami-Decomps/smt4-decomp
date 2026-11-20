@@ -17,7 +17,7 @@ int mapDestroyOverlayModel(void);
 int mapIfReleaseSlot3(void);
 int mapIfActivateRecord(int, unsigned int);
 int lmapSetSceneId(...);
-int FUN_0027fc14(...);
+int lmapCameraSetMode(...);
 int mapSelectContainingRegions(void);
 int FUN_002804ec(...);
 int mapEaseSceneHeading(void);
@@ -47,10 +47,10 @@ extern int g_lmapScene; /* 0x447e88 */
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapInterfaceSetStateTwo. */
 extern int inputIsQuestMenuPressed(void);
-extern int FUN_0027ee9c(void);
+extern int inputConfirmPressed(void);
 /* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fae4. */
-/* Supplied declaration required: FUN_0027fc14. */
+/* Supplied declaration required: lmapCameraSetMode. */
 /* Supplied declaration required: mapDepartSpawnPlayerEffect. */
 /* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
@@ -136,7 +136,7 @@ void FUN_002d424c(void)
           }
           *(unsigned int *)(g_mapCamera + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
           *(unsigned int *)(temp_v0 + 0xac) = 0;
-          FUN_0027fc14(0);
+          lmapCameraSetMode(0);
           temp_v0 = g_lmapScene;
           *(unsigned int *)(g_lmapScene + 0x54) = 0;
           *(unsigned int *)(temp_v0 + 0x58) = temp_v4;
@@ -178,7 +178,7 @@ void FUN_002d424c(void)
           if (temp_v2 == 2) {
             *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
             mapIfActivateRecord(1,g_gameState.overviewRecord);
-            temp_v2 = FUN_0027ee9c();
+            temp_v2 = inputConfirmPressed();
             temp_v0 = g_lmapScene;
             if (temp_v2 != 0) {
               *(unsigned int *)(g_lmapScene + 4) = 10;
@@ -190,7 +190,7 @@ void FUN_002d424c(void)
                 temp_v0 = g_mapCamera;
                 *(unsigned int *)(g_mapCamera + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
                 *(unsigned int *)(temp_v0 + 0xac) = 0;
-                FUN_0027fc14(0);
+                lmapCameraSetMode(0);
                 temp_v0 = g_lmapScene;
                 *(unsigned int *)(g_lmapScene + 0x54) = 0;
                 *(unsigned int *)(temp_v0 + 0x58) = temp_v4;
@@ -227,7 +227,7 @@ void FUN_002d424c(void)
       *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + libm_cosf(g_gameState.heading * 0.017453292f) * 25.0f;
       temp_v0 = g_lmapScene;
       *(f32 *)(temp_v0 + 0x50) = g_gameState.overviewHeading;
-      FUN_0027fc14(0xd);
+      lmapCameraSetMode(0xd);
       *(unsigned int *)(g_mapCamera + 0xac) = 1;
       buttonHelpSetPreset(0xda);
       mapIfActivateRecord(1,g_gameState.overviewRecord);
@@ -259,7 +259,7 @@ void FUN_002d424c(void)
       temp_v0 = g_mapCamera;
       *(unsigned int *)(g_mapCamera + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
       *(unsigned int *)(temp_v0 + 0xac) = 0;
-      FUN_0027fc14(0);
+      lmapCameraSetMode(0);
     }
     else {
       temp_v0 = *(int *)(g_lmapScene + 8) + 1;

@@ -19,7 +19,7 @@ struct BattleCameraAngle {
 extern "C" {
 extern BtlAuxA *g_btlAux;
 extern BattleCameraAngle *g_btlCamera;
-f32 FUN_004fad68(BtlAuxA *, u32 kind, s32 x, s32 y);
+f32 btlApplyDirectionBucketEffect(BtlAuxA *, u32 kind, s32 x, s32 y);
 void btlQueueActionMessage(u32 unused, u32 handle, u32 flags, s32 a, s32 b, s32 direction, s32 c);
 
 static bool isBelow(f32 value, f32 limit)
@@ -39,7 +39,7 @@ void btlApplyDirectionBucket(u32 unused, BattleDirectionEntry *entry)
     s32 x = entry->x;
     s32 y = entry->y;
     u32 flags = entry->flags;
-    f32 angle = FUN_004fad68(g_btlAux, kind, x, y);
+    f32 angle = btlApplyDirectionBucketEffect(g_btlAux, kind, x, y);
     btlGetMainState();
     s32 direction;
     switch (kind) {

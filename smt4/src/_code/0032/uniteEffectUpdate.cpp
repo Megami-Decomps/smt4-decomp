@@ -48,7 +48,7 @@ void btlTalkBustUpReleaseTexture();
 void titleSetSlotValueState2(u32 index, u32 value);
 void soundChannelRequestIfEnabled(u32 soundId, u32 channel, u32 frames);
 void soundChannelStopAll(u32 channel);
-s32 FUN_002c1658(s32 button, s32 mode);
+s32 inputQueryButtonState(s32 button, s32 mode);
 void titleRestartSlotState3(u32 index, u32 extra);
 void resourceReleaseReference(Obj4207c0Resource *resource);
 char *libc_strcpy(char *destination, const char *source); // declcheck: local (C string contract; EntrySequence.h uses word pointers)
@@ -77,9 +77,9 @@ static __inline void enterEffectState(s32 state)
 static __inline void bindMaterialTexture(UniteEffectWork *work, u32 index, const char *material)
 {
     work->renderTarget.texture = work->devilTextures[index];
-    FUN_00258618(&work->renderTarget);
-    FUN_00258408(material);
-    FUN_00258170(&work->renderTarget);
+    titleLogoDraw(&work->renderTarget);
+    uniteEffectCollectMaterialPairs(material);
+    uniteEffectApplyScrollToModel(&work->renderTarget);
 }
 
 } // namespace
@@ -116,7 +116,7 @@ extern "C" s32 uniteEffectUpdate(u32)
                 uiSlidingSpriteAdvance(&work->sprites[i], 0);
         }
         uiSpriteAdvanceAnimation(&work->panel);
-        if (FUN_002b89a4(0) && FUN_002b89a4(1) && uiSpriteGetCompletionState(&work->sprites[5])) {
+        if (screenFaderIsSettled(0) && screenFaderIsSettled(1) && uiSpriteGetCompletionState(&work->sprites[5])) {
             lightOwnerRegister(work->model, 1);
             modelSlotAttachChild(reinterpret_cast<ModelSlotOwner *>(work->camera), 0);
             enterEffectState(3);
@@ -192,7 +192,7 @@ extern "C" s32 uniteEffectUpdate(u32)
         }
 
         f32 animationFrame = sndObjectForwardField8(work->model);
-        if (FUN_002c1658(9, 1) || FUN_002c1658(6, 1)) {
+        if (inputQueryButtonState(9, 1) || inputQueryButtonState(6, 1)) {
             s32 end;
             if (work->sacrifice) {
                 end = fusionEffectEndFrame(work->materialCount, false);
@@ -208,7 +208,7 @@ extern "C" s32 uniteEffectUpdate(u32)
                 end = fusionEffectEndFrame(work->materialCount, false);
             }
             if (animationFrame < (f32)end) {
-                FUN_00210194(reinterpret_cast<ModelOwner *>(work->model), (f32)end);
+                modelOwnerApplyAnimationTime(reinterpret_cast<ModelOwner *>(work->model), (f32)end);
                 AsdMotionInstance *motion = work->camera->motion;
                 f32 blend = motion->interpolate(motion->interpolateContext, motion->blendFrom, motion->blendLimit, (f32)end);
                 motion->previousBlend = motion->blend;
@@ -289,7 +289,7 @@ extern "C" s32 uniteEffectUpdate(u32)
         }
         break;
     case 7:
-        if (FUN_002b89a4(0) && FUN_002b89a4(1)) {
+        if (screenFaderIsSettled(0) && screenFaderIsSettled(1)) {
             scrScriptProcessDestroy(work->script);
             asdMemFree(work->messageFile);
             asdMemFree(work->scriptFile);
@@ -298,7 +298,7 @@ extern "C" s32 uniteEffectUpdate(u32)
                 resourceReleaseReference(reinterpret_cast<Obj4207c0Resource *>(work->devilTextures[i]));
                 work->devilTextures[i] = NULL;
             }
-            FUN_00241d58(reinterpret_cast<Obj *>(&work->renderTarget));
+            btlSpritePlacementRelease(reinterpret_cast<Obj *>(&work->renderTarget));
             resourceReleaseReference(reinterpret_cast<Obj4207c0Resource *>(const_cast<AnimationTracks *>(work->resultTexture)));
             work->resultTexture = NULL;
             btlTalkBustUpReleaseTexture();

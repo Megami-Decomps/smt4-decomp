@@ -2,7 +2,7 @@
 
 extern "C" {
 s32 soundArchiveLoaderIsItemLoaded(SoundLoader* loader, u32 id, u32 flags);
-s32 FUN_001753d4(SoundLoader* loader, u32 id, void* heap, u32 flags, u32 blockSize);
+s32 soundArchiveLoaderLoadItem(SoundLoader* loader, u32 id, void* heap, u32 flags, u32 blockSize);
 
 u32 asdSoundEnsureArchiveItemLoaded(u32 id)
 {
@@ -13,7 +13,7 @@ u32 asdSoundEnsureArchiveItemLoaded(u32 id)
         if (soundArchiveLoaderIsItemLoaded(&system->loaderState.loader, id, 0xffffffff)) {
             result = 1;
         } else {
-            result = FUN_001753d4(&system->loaderState.loader, id, slot->heap, 0xffffffff, 0);
+            result = soundArchiveLoaderLoadItem(&system->loaderState.loader, id, slot->heap, 0xffffffff, 0);
         }
     }
     return result;

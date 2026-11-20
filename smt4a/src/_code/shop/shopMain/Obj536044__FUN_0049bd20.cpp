@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_002f0384(...);
+int statusCameraRestore(...);
 int FUN_0038b57c(...);
 int FUN_004964e0(...);
 int sendEvent1000210(void);
@@ -48,7 +48,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int recordGetModeForId(int);
-/* Supplied declaration required: FUN_002f0384. */
+/* Supplied declaration required: statusCameraRestore. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: gameSetStatusCameraHeightMode. */
@@ -56,7 +56,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0038b57c. */
 /* Supplied declaration required: controllerSetPositionXyz. */
 /* Supplied declaration required: moriModelContentLoadBody. */
-extern int FUN_0040ab8c(void);
+extern int moriModelContentIsLoaded(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_004954e8. */
 /* Supplied declaration required: FUN_004964e0. */
@@ -76,7 +76,7 @@ extern int inputIsQuestRepeatRight(void);
 extern int FUN_004d0494(void);
 extern int inputIsQuestCancelPressed(void);
 extern int inputIsQuestMenuPressed(void);
-extern int FUN_004d0584(void);
+extern int inputConfirmPressed(void);
 /* Supplied declaration required: releaseEntriesA. */
 /* Supplied declaration required: releaseEntriesB. */
 
@@ -100,7 +100,7 @@ void _ZN9Obj53604412FUN_0049bd20Ev(int param_1)
     return;
   }
   if (*(int *)(param_1 + 0x16028) != 0) {
-    temp_v1 = FUN_0040ab8c();
+    temp_v1 = moriModelContentIsLoaded();
     if (temp_v1 == 0) {
       return;
     }
@@ -127,7 +127,7 @@ void _ZN9Obj53604412FUN_0049bd20Ev(int param_1)
   temp_v1 = FUN_004954e8(param_1);
   messageChoiceShowCurrent(param_1);
   if ((0 < *(int *)(param_1 + *(int *)(param_1 + 0xb40) * 0x74 + 0xb68)) &&
-     (temp_v3 = FUN_004d0584(), temp_v3 != 0)) {
+     (temp_v3 = inputConfirmPressed(), temp_v3 != 0)) {
     temp_v1 = 1;
   }
   temp_v3 = *(int *)(param_1 + 0xb40);
@@ -262,13 +262,13 @@ LAB_0049be70:
         if (temp_v1 != 5) {
           temp_v1 = *(int *)(temp_v1 * 8 + 0x588ef0);
           if ((temp_v1 == 3 || temp_v1 == 4) || temp_v1 == 5) {
-            FUN_002f0384(0);
+            statusCameraRestore(0);
             *(unsigned char *)(param_1 + 0x22) = 0;
           }
         }
         else {
           FUN_0038b57c(2);
-          FUN_002f0384(0);
+          statusCameraRestore(0);
           *(unsigned char *)(param_1 + 0x22) = 0;
         }
       }
@@ -277,7 +277,7 @@ LAB_0049be70:
         if (*(int *)(param_1 + 0xb40) == 5) {
           FUN_0038b57c(2);
         }
-        FUN_002f0384(0);
+        statusCameraRestore(0);
         *(unsigned char *)(param_1 + 0x22) = 0;
       }
     }
@@ -289,7 +289,7 @@ LAB_0049be70:
       if (*(int *)(param_1 + 0xb40) == 5) {
         FUN_0038b57c(2);
       }
-      FUN_002f0384(0);
+      statusCameraRestore(0);
       *(unsigned char *)(param_1 + 0x22) = 0;
     }
     if ((*(int *)(param_1 + 0xb40) == 0) &&
@@ -340,14 +340,14 @@ LAB_0049be70:
         if (temp_v1 != 5) {
           temp_v1 = *(int *)(temp_v1 * 8 + 0x588ef0);
           if ((temp_v1 == 3 || temp_v1 == 4) || temp_v1 == 5) {
-            FUN_002f0384(0);
+            statusCameraRestore(0);
             *(unsigned char *)(param_1 + 0x22) = 0;
             *(unsigned char *)(param_1 + 0x23) = 0;
           }
         }
         else {
           FUN_0038b57c(2);
-          FUN_002f0384(0);
+          statusCameraRestore(0);
           *(unsigned char *)(param_1 + 0x22) = 0;
           *(unsigned char *)(param_1 + 0x23) = 0;
         }
@@ -357,7 +357,7 @@ LAB_0049be70:
         if (*(int *)(param_1 + 0xb40) == 5) {
           FUN_0038b57c(2);
         }
-        FUN_002f0384(0);
+        statusCameraRestore(0);
         *(unsigned char *)(param_1 + 0x22) = 0;
         *(unsigned char *)(param_1 + 0x23) = 0;
       }
@@ -370,7 +370,7 @@ LAB_0049be70:
       if (*(int *)(param_1 + 0xb40) == 5) {
         FUN_0038b57c(2);
       }
-      FUN_002f0384(0);
+      statusCameraRestore(0);
       *(unsigned char *)(param_1 + 0x22) = 0;
       *(unsigned char *)(param_1 + 0x23) = 0;
     }

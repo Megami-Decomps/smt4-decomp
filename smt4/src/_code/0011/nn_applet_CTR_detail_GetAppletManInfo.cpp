@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0011d798(int, unsigned char [4], int *, int *, unsigned int [2]);
 int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
-int FUN_002c131c(void);
+int errThrowFatal(void);
 
 /* stack frame of param_5: 5 slot(s), 17 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0011d798. */
 /* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
-/* Supplied declaration required: FUN_002c131c. */
+/* Supplied declaration required: errThrowFatal. */
 
 
 void nn_applet_CTR_detail_GetAppletManInfo
@@ -38,7 +38,7 @@ void nn_applet_CTR_detail_GetAppletManInfo
   FUN_002bb378();
   FUN_0011d798(param_1,temp_v0,&temp_v1,&temp_v2,temp_v3);
   if (param_1 < 0) {
-    FUN_002c131c();
+    errThrowFatal();
   }
   nn_applet_CTR_detail_CloseSession();
   if (param_2 != (unsigned char *)0x0) {

@@ -16,7 +16,7 @@ struct MenuState {
     /* 0x38b4 */ u8 unk38b4[8];
     /* 0x38bc */ MenuItem items[1];
 };
-void FUN_003756c8(s32 enabled);
+void btlPlayMenuConfirmSe(s32 enabled);
 void btlCommandMenuEnterMode(MenuState *menu, s32 kind, s32 enabled);
 
 /* Activates the menu, counts its used entries, refreshes the button help and switches to state 14. */
@@ -29,8 +29,8 @@ void uiMenuActivateAndCountEntries(MenuState *menu)
             menu->count++;
         }
     }
-    if (FUN_002a21c8() == 0) {
-        FUN_003756c8(listCursorGetRowOfChildIfUnblocked(&menu->items[menu->selectedIndex]) == 0);
+    if (buttonHelpIsStateActive() == 0) {
+        btlPlayMenuConfirmSe(listCursorGetRowOfChildIfUnblocked(&menu->items[menu->selectedIndex]) == 0);
     }
     btlCommandMenuEnterMode(menu, 14, 1);
 }

@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_0013cab8(int, int, int);
+int screenFadeStartIn(int, int, int);
 int dataTableGetEntries(void);
 int dataTableFileGetTable(...);
 int frameTexRequestFade(int);
@@ -17,10 +17,10 @@ int FUN_004aa2e0(unsigned int, int);
 int cameraBeginScalarTransition(...);
 int FUN_004f41b0(int, int, int);
 int btlPollVersionedEffectTexture(void);
-int FUN_004f7b84(...);
+int effectRequestByName(...);
 int btlQueueDuplicateSuppressedAction(...);
 int FUN_004fd268(...);
-int FUN_004fdcd8(...);
+int btlQueueMessageTableReflectAction(...);
 
 /* stack frame of param_3: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -42,7 +42,7 @@ extern unsigned int DAT_00573890; /* 0x573890 */
 extern unsigned int DAT_00573894; /* 0x573894 */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
-/* Supplied declaration required: FUN_0013cab8. */
+/* Supplied declaration required: screenFadeStartIn. */
 extern int pairedAvailabilityGetState(unsigned int);
 extern int dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
@@ -58,10 +58,10 @@ extern int chainCountIdUnflagged(unsigned int, unsigned int *);
 /* Supplied declaration required: cameraBeginScalarTransition. */
 /* Supplied declaration required: FUN_004f41b0. */
 /* Supplied declaration required: btlPollVersionedEffectTexture. */
-/* Supplied declaration required: FUN_004f7b84. */
+/* Supplied declaration required: effectRequestByName. */
 /* Supplied declaration required: btlQueueDuplicateSuppressedAction. */
 /* Supplied declaration required: FUN_004fd268. */
-/* Supplied declaration required: FUN_004fdcd8. */
+/* Supplied declaration required: btlQueueMessageTableReflectAction. */
 
 
 void FUN_003e1b80(unsigned int *param_1,int param_2,int param_3)
@@ -114,11 +114,11 @@ void FUN_003e1b80(unsigned int *param_1,int param_2,int param_3)
         }
         temp_v0 = pairedAvailabilityGetState(0);
         if (temp_v0 == 3) {
-          FUN_0013cab8(0,10,0xff);
+          screenFadeStartIn(0,10,0xff);
         }
         temp_v0 = pairedAvailabilityGetState(1);
         if (temp_v0 == 3) {
-          FUN_0013cab8(1,10,0xff);
+          screenFadeStartIn(1,10,0xff);
         }
         temp_v0 = *(int *)(param_2 + 0x2290);
         if (temp_v0 == 0) {
@@ -160,7 +160,7 @@ LAB_003e1f28:
           *puVar10 = temp_v5;
         }
         FUN_004f41b0(reinterpret_cast<int>(g_btlCamera),0,(int)(short)piVar3[2]);
-        FUN_004fdcd8((int)*(short *)((int)piVar3 + 10),param_1,0,0,7,0,6,0);
+        btlQueueMessageTableReflectAction((int)*(short *)((int)piVar3 + 10),param_1,0,0,7,0,6,0);
         btlQueueDuplicateSuppressedAction((int)(short)piVar3[4],param_1,(int)*(short *)((int)piVar3 + 0x12));
       }
     }
@@ -204,10 +204,10 @@ LAB_003e1f28:
     } while (temp_v7 < 0x36);
     if (param_1[3] == 0) {
       if ((*(unsigned int *)(param_2 + 0x110) & 0x80) != 0) {
-        FUN_004f7b84(g_btlAux,"ef_Ancient_02");
+        effectRequestByName(g_btlAux,"ef_Ancient_02");
       }
       else {
-        FUN_004f7b84(g_btlAux,"ef_gboss001");
+        effectRequestByName(g_btlAux,"ef_gboss001");
       }
       g_btlCamera->flags = g_btlCamera->flags | 0x4000;
       param_1[3] = param_1[3] | 2;

@@ -40,16 +40,16 @@ void gameGlobalsSetMenuOpenFlag(s32 owner);
 void messageBannerRestartOrClear(void);
 s32 messageMainGetValue(void);
 void sysPlaySe(s32 id);
-void FUN_003e4e4c(u32 devil);
+void saveSlotTableSetPreferredId(u32 devil);
 void FUN_0035d03c(s32 flag);
-void FUN_00228b04(void *list, s32 flag);
+void gridNavigationHandleConfirm(void *list, s32 flag);
 s32 padQueryLogicalKey(s32 a, s32 b);
 void dialogClose(s32 flag);
 void eventQueueAddUniqueIfValid(s32 event);
 s32 tableGroupFindEntryIndex(u32 group, const char *name);
 void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
-void FUN_002c8538(s32 flag);
-void FUN_0022e774(void);
+void gameGlobalsSetOverlayActive(s32 flag);
+void statusPanelClose(void);
 
 /* Steps the partner select menu: hands the list and confirm states to their handlers and runs the
  * confirm/cancel scripts. Always returns 0. */
@@ -101,7 +101,7 @@ u32 FUN_004be608(PartnerMenuFull *menu)
         u8 *devil = (u8 *)partyGetSlot(*(u32 *)((u8 *)menu + 0x2C4 + menu->cursor * 4) & 0xFFFF);
         if (devil == NULL)
             return 0;
-        FUN_003e4e4c(*(u16 *)(devil + 300));
+        saveSlotTableSetPreferredId(*(u16 *)(devil + 300));
         menu->shownDevil = menu->cursor;
         FUN_0035d03c(0);
         if (menu->fromTitle == 1) {
@@ -124,14 +124,14 @@ u32 FUN_004be608(PartnerMenuFull *menu)
         menu->state = 8;
         break;
     case 8:
-        FUN_003e4e4c(0);
+        saveSlotTableSetPreferredId(0);
         menu->shownDevil = -1;
         FUN_0035d03c(0);
         sysPlaySe(0xF0);
         menu->state = 3;
         break;
     case 9:
-        FUN_00228b04(menu->list, 1);
+        gridNavigationHandleConfirm(menu->list, 1);
         menu->selection = listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(menu->list));
         menu->cursor = menu->selection;
         if (padQueryLogicalKey(0, 1) != 0) {
@@ -153,8 +153,8 @@ u32 FUN_004be608(PartnerMenuFull *menu)
     case 11:
     case 13:
         if (menu->fromTitle != 1) {
-            FUN_002c8538(0);
-            FUN_0022e774();
+            gameGlobalsSetOverlayActive(0);
+            statusPanelClose();
         }
         if (menu->script != 0) {
             scrScriptProcessDestroy(menu->script);

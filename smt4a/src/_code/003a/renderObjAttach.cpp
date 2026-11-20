@@ -12,7 +12,7 @@ typedef struct RenderRes {
 extern BtlPartnerAttackA *g_btlPartnerAttack;
 extern void jobGetWork(u32 job);
 extern RenderRes *asdTMTexTableGetNode(s32 a, s32 b);
-extern void FUN_00416664(void *p);
+extern void btlLabelDrawActiveEntries(void *p);
 
 u32 renderObjAttach(u32 job)
 {
@@ -25,7 +25,7 @@ u32 renderObjAttach(u32 job)
         res = asdTMTexTableGetNode(8, 0);
         renderCtxSelectTexture(g_renderCtx, res->texture);
         renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
-        FUN_00416664(obj->entries);
+        btlLabelDrawActiveEntries(obj->entries);
     }
     return 0;
 }

@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_002eb624(void);
+int deletingDtor_002eb624(void);
 
-/* Supplied declaration required: FUN_002eb624. */
+/* Supplied declaration required: deletingDtor_002eb624. */
 
 
 void FUN_002f5966(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_002eb624();
+  deletingDtor_002eb624();
   return;
 }
 

@@ -43,7 +43,7 @@ int FUN_004aa3d4(...);
 int FUN_004e5f2c(...);
 int btlReflectCreateKind25(...);
 int btlQueueKeyedScalarReflectAction(...);
-int FUN_004fc094(...);
+int btlAdjustPropertyAndQueueAction(...);
 unsigned int btlReflectQueuePairedParameters(int actor, unsigned int flags, unsigned int value,
                          unsigned int parameter, unsigned int target, unsigned int first,
                          unsigned int second, unsigned int third, unsigned int fourth);
@@ -65,7 +65,7 @@ int FUN_004fbeac(...);
 int btlReflectCreateKind15(...);
 int FUN_004fd508(...);
 int btlReflectCreateKind34(...);
-int FUN_004fdcd8(...);
+int btlQueueMessageTableReflectAction(...);
 int btlActionReflectSetStateArg(...);
 int FUN_004fe7b0(...);
 
@@ -75,7 +75,7 @@ int gameGetSlotTable(void);
 int skillDataFindById(void);
 int FUN_00222488(unsigned int *);
 int sysMemClear(int, int);
-int FUN_003756c8(int);
+int btlPlayMenuConfirmSe(int);
 int messageDismissNumericBanner(...);
 int btlEntryBuildSummary(...);
 int btlMainFindEntryByListedId(...);
@@ -175,10 +175,10 @@ extern unsigned int gameGetSaveSlotData(int);
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_0034919c(void);
 /* Supplied declaration required: dataTable41FindById. */
-/* Supplied declaration required: FUN_003756c8. */
+/* Supplied declaration required: btlPlayMenuConfirmSe. */
 /* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: eventCommandClearPending. */
-extern unsigned int FUN_003df57c(unsigned int, unsigned int);
+extern unsigned int skillGetCostWithRankReduction(unsigned int, unsigned int);
 extern short partyCountActiveSlots(void);
 extern unsigned int words3Clear(void);
 extern int btlScriptUnitHasFlags(int);
@@ -224,7 +224,7 @@ extern int isEntryUsable(int);
 /* Supplied declaration required: btlUnitClearRecordFields. */
 /* Supplied declaration required: FUN_004e6b64. */
 /* Supplied declaration required: FUN_004e7168. */
-extern int FUN_004e83ac(int *, unsigned int *, int);
+extern int btlActionTargetSlotScore(int *, unsigned int *, int);
 /* Supplied declaration required: FUN_004e8454. */
 extern int FUN_004ea0c0(int *, unsigned int *);
 /* Supplied declaration required: FUN_004eaa68. */
@@ -251,14 +251,14 @@ extern unsigned int FUN_004fa030(int);
 /* Supplied declaration required: btlQueueDuplicateSuppressedAction. */
 /* Supplied declaration required: btlQueueKeyedScalarReflectAction. */
 /* Supplied declaration required: FUN_004fbeac. */
-/* Supplied declaration required: FUN_004fc094. */
+/* Supplied declaration required: btlAdjustPropertyAndQueueAction. */
 /* Supplied declaration required: FUN_004fcde0. */
 /* Supplied declaration required: btlReflectCreateKind15. */
 /* Supplied declaration required: FUN_004fd508. */
 /* Supplied declaration required: btlReflectCreateKind34. */
 /* Supplied declaration required: FUN_004fda78. */
 /* Supplied declaration required: btlReflectQueueValueAction. */
-/* Supplied declaration required: FUN_004fdcd8. */
+/* Supplied declaration required: btlQueueMessageTableReflectAction. */
 /* Supplied declaration required: FUN_004fe618. */
 /* Supplied declaration required: btlReflectSetValuePair. */
 /* Supplied declaration required: FUN_004feecc. */
@@ -377,7 +377,7 @@ void FUN_004eb928(int *param_1,unsigned int param_2)
       }
     }
     else if ((temp_v3 != 0xb5) && (temp_v3 != 0xb6)) {
-      FUN_003756c8(0);
+      btlPlayMenuConfirmSe(0);
     }
     *(unsigned short *)(g_btlUiBlock + 0x73e2) = 0xffff;
     return;
@@ -745,7 +745,7 @@ LAB_004ebd00:
                      ((*puVar20 & DAT_00571150) == 0 && (puVar20[1] & DAT_00571154) == 0)) break;
                 }
                 temp_v14 = temp_v21 + temp_v10 * 0x16;
-                FUN_004fdcd8((int)*(short *)(temp_v14 + 0x68) + temp_v5 + temp_v13 * temp_v22,puVar29,
+                btlQueueMessageTableReflectAction((int)*(short *)(temp_v14 + 0x68) + temp_v5 + temp_v13 * temp_v22,puVar29,
                              (int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),(int)*psVar17,1,temp_v10,
                              *(unsigned short *)(temp_v14 + 0x6a),temp_v14 + 0x58);
               }
@@ -775,7 +775,7 @@ code_r0x004ef594:
           if ((*(char *)((int)puVar25 + temp_v13 + 0x38) != '\0') &&
              ((puVar20 = (unsigned int *)(*(int *)(*piVar16 + 0x1ffc) + temp_v13 * 0x408),
               (puVar20[1] & DAT_0057117c) != 0 || (DAT_00571178 & *puVar20) != 0 ||
-              (temp_v14 = FUN_004e83ac(piVar16,puVar25,temp_v13), temp_v14 != 0)))) {
+              (temp_v14 = btlActionTargetSlotScore(piVar16,puVar25,temp_v13), temp_v14 != 0)))) {
             *(unsigned char *)((int)puVar25 + temp_v13 + 0x38) = 0;
           }
           temp_v13 = temp_v13 + 1;
@@ -879,7 +879,7 @@ code_r0x004ef7f0:
         if (-1 < temp_v10) {
           temp_v10 = temp_v21 + temp_v7 * 0x16;
           if (*(unsigned short *)(temp_v10 + 0x6a) - 6 < 6) {
-            FUN_004fdcd8(*(short *)(temp_v10 + 0x68) + temp_v5,puVar29,
+            btlQueueMessageTableReflectAction(*(short *)(temp_v10 + 0x68) + temp_v5,puVar29,
                          (int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0xffffffff,1,temp_v7,
                          (unsigned int)*(unsigned short *)(temp_v10 + 0x6a),temp_v10 + 0x58);
           }
@@ -1007,7 +1007,7 @@ code_r0x004ef7f0:
         temp_v22 = FUN_004f80e4(g_btlAux);
         if (-1 < temp_v22) {
           temp_v22 = temp_v6 + temp_v3 * 0x16;
-          FUN_004fdcd8(*(short *)(temp_v22 + 0x10) + temp_v5,puVar29,
+          btlQueueMessageTableReflectAction(*(short *)(temp_v22 + 0x10) + temp_v5,puVar29,
                        (int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0,0,temp_v3,
                        *(unsigned short *)(temp_v22 + 0x12),temp_v22);
         }
@@ -1026,7 +1026,7 @@ code_r0x004ef7f0:
             FUN_004fbd30(temp_v22 + temp_v5,puVar29);
           }
           else if (*(int *)(temp_v20 + 0x598) != 0) {
-            FUN_004fdcd8(*(short *)(temp_v7 + 0x118) + temp_v5,puVar29,
+            btlQueueMessageTableReflectAction(*(short *)(temp_v7 + 0x118) + temp_v5,puVar29,
                          (int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0,3,temp_v3,
                          *(unsigned short *)(temp_v7 + 0x11a),temp_v7 + 0x108);
           }
@@ -1199,7 +1199,7 @@ code_r0x004f054c:
         if ((*(unsigned int *)(temp_v17 + 0x3c) & 0x400) != 0) {
           temp_v3 = *(int *)(temp_v5 + 0xf4) - 1;
           btlSlotManagerResetStates(temp_v22);
-          FUN_004fc094(uStack_288,puVar25,0,*(unsigned int *)(temp_v20 + 0x28),0,temp_v3,0xffffffff,
+          btlAdjustPropertyAndQueueAction(uStack_288,puVar25,0,*(unsigned int *)(temp_v20 + 0x28),0,temp_v3,0xffffffff,
                        0xffffffff,*(unsigned int *)(*(int *)(temp_v20 + 0x2c) + 0xf4),
                        *(unsigned int *)(*(int *)(temp_v20 + 0x2c) + 0xf8),0,0,0,0,0,0,0,0,0,0xffffffff,
                        1,0,1,0,0,1);
@@ -1212,7 +1212,7 @@ code_r0x004f054c:
         if ((*(unsigned int *)(temp_v17 + 0x3c) & 0x200) != 0) {
           temp_v3 = *(int *)(*(int *)(temp_v20 + 0x2c) + 0xf8);
           btlSlotManagerResetStates(*piStack_30);
-          FUN_004fc094(uStack_288,puVar25,0,*(unsigned int *)(temp_v20 + 0x28),0,temp_v3,0xffffffff,
+          btlAdjustPropertyAndQueueAction(uStack_288,puVar25,0,*(unsigned int *)(temp_v20 + 0x28),0,temp_v3,0xffffffff,
                        0xffffffff,*(unsigned int *)(*(int *)(temp_v20 + 0x2c) + 0xf4),
                        *(unsigned int *)(*(int *)(temp_v20 + 0x2c) + 0xf8),0,0,0,0,0,0,0,0,0,0xffffffff,
                        1,0,1,0,0,1);
@@ -1224,7 +1224,7 @@ code_r0x004f054c:
           puVar29 = *(unsigned int **)(temp_v20 + 0x24);
           if ((DAT_00571168 & *puVar29) == 0 && (DAT_0057116c & puVar29[1]) == 0) {
             if (!((puVar29[1] & DAT_00571154) == 0 && (*puVar29 & DAT_00571150) == 0)) {
-              temp_v17 = FUN_003df57c(uStack_74,1);
+              temp_v17 = skillGetCostWithRankReduction(uStack_74,1);
               temp_v3 = btlFindEntryValue((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0x24);
             }
             else {

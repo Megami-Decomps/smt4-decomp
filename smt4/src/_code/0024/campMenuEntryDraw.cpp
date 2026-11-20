@@ -12,7 +12,7 @@ struct MenuEntryDraw {
 };
 
 extern "C" {
-extern const s8 DAT_0043dc48[];
+extern const s8 g_campMenuRowOffsets[];
 void texDrawCompositeSprite(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 priority);
 f32 floatInterpolateOverDuration(f32 start, f32 end, f32 duration, f32 time);
 void efctSetSpeed(f32 speed);
@@ -26,7 +26,7 @@ void campMenuEntryDraw(MenuEntryDraw *entry, s32 priority)
         texDrawTableEntryAtStoredOrigin(2, 45, 17, 0, 0, priority + 2);
         texDrawTableEntryAtStoredOrigin(2, 45, 19, 0, 0, priority + 4);
     } else {
-        s32 offsetY = DAT_0043dc48[entry->row];
+        s32 offsetY = g_campMenuRowOffsets[entry->row];
         texDrawTableEntryAtStoredOrigin(2, 45, 17, 0, offsetY, priority + 2);
         f32 alpha = entry->frame < 20 ? floatInterpolateOverDuration(0.0f, 0.8f, 20.0f, (f32)entry->frame)
                                       : floatInterpolateOverDuration(0.8f, 0.0f, 40.0f, (f32)(entry->frame - 20));

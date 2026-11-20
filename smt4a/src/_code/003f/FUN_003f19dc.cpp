@@ -23,7 +23,7 @@ struct StreamWorker {
 
 extern "C" {
 
-void FUN_001469a8(AddressSpaceRegion *region);
+void addressSpaceRegionFree(AddressSpaceRegion *region);
 void asdOperatorDelete(void *block);
 void asdMemFree(void *block);
 s32 svcWaitSynchronization1(u32 handle, s64 timeout); /* svc 0x24 */
@@ -32,7 +32,7 @@ s32 svcWaitSynchronization1(u32 handle, s64 timeout); /* svc 0x24 */
 
 inline StackRegion::~StackRegion()
 {
-    FUN_001469a8(this);
+    addressSpaceRegionFree(this);
 }
 
 inline void StackRegion::operator delete(void *block)
@@ -53,7 +53,7 @@ void FUN_003f19dc(StreamWorker *worker)
     worker->thread.joined = 1;
     worker->thread.~NnOsThread();
     if (worker->stack != NULL) {
-        FUN_001469a8(worker->stack);
+        addressSpaceRegionFree(worker->stack);
         StackRegion *stack = worker->stack;
         delete stack;
         worker->stack = NULL;

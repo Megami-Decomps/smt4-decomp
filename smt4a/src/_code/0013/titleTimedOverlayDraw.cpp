@@ -4,7 +4,7 @@
 
 extern "C" {
 void renderBindPreset(u32);
-void FUN_001640cc(const EffectColor *, const EffectColor *, const EffectColor *,
+void gxSubmitFloatColoredQuad(const EffectColor *, const EffectColor *, const EffectColor *,
                   f32, f32, f32, f32, f32, f32, f32, f32, const EffectColor *, f32);
 void renderCtxResetColorScale(void *);
 void renderCtxSelectTexture(void *, u32);
@@ -31,7 +31,7 @@ u32 titleTimedOverlayDraw(void)
         if (0.0f < color.alpha) {
             u32 texture = asdTMTexTableGetHeaderValue(33, 0);
             renderCtxSelectTexture(g_renderCtx, texture);
-            FUN_001640cc(&color, &color, &color,
+            gxSubmitFloatColoredQuad(&color, &color, &color,
                          128.0f, 88.0f, 64.0f, 64.0f, 0.0f, 0.0f, 1.0f, 1.0f, &color, 0.0f);
             skinObjectUpdateMatrices(g_renderCtx);
             renderCtxResetColorScale(g_renderCtx);

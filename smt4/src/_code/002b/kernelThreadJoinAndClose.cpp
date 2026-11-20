@@ -11,7 +11,7 @@ void kernelThreadJoinAndClose(KernelThreadObject *thread)
     if (thread->handle != 0) {
         u32 handle = thread->handle;
         s32 index;
-        s32 result = FUN_002c40f8(&index, &handle, 1, 0, -1);
+        s32 result = svcWaitSynchronizationN(&index, &handle, 1, 0, -1);
         bool failed = nnResultIsFailure(result);
         if (failed) {
             resultHandleFailure(result, failed);

@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern UiCallbackContext *DAT_0043d9c8;
+extern UiCallbackContext *g_bibleDevilCallbackContext;
 
 /* Updates the context's UI object. */
 s32 uiCallbackUpdate()
 {
-    DAT_0043d9c8->object->update();
+    g_bibleDevilCallbackContext->object->update();
     return 0;
 }
 

@@ -7,7 +7,7 @@
 extern "C" {
 void FUN_0029dfc0(u32);
 void gameSetIconDisplayEnabled(u32);
-void FUN_002996d8(u32);
+void statusCameraRestore(u32);
 void __aeabi_memcpy4(void *, const void *, u32);
 char *libc_strcpy(char *, const char *);
 void *gameDataBlocksGetSaveData(void);
@@ -40,13 +40,13 @@ void saveUiRefreshSelectedSlotPreview(void)
     if (!work->preview.available[selected]) {
         FUN_0029dfc0(0);
         gameSetIconDisplayEnabled(1);
-        FUN_002996d8(0);
+        statusCameraRestore(0);
         return;
     }
     work->preview.pending = 1;
     FUN_0029dfc0(1);
     gameSetIconDisplayEnabled(1);
-    FUN_002996d8(0);
+    statusCameraRestore(0);
     PlayerDataIV *player = work->preview.player;
     const SavePreviewSlot *slot = &work->preview.slots[globals->selected];
     memcpy(player->equipment, slot->equipment, sizeof(player->equipment));

@@ -16,12 +16,12 @@ typedef char ContentDepartureWorkLayout[offsetof(ContentDepartureWork, specialMa
 
 extern "C" {
 s32 screenFadeIsBusy();
-void FUN_00249b18(u32 party, s32 force);
+void partyRestoreGroup(u32 party, s32 force);
 void titleSetSlotValueState2(u32 slot, u32 value);
 void mapDepartSetTarget(s32 map, s32 area, u32 place);
 void __ARM_common_memcpy4_6(void *destination, const void *source);
 void mikadoLoadSceneResources(ContentTransition *transition);
-void FUN_003b8b0c(ContentTransition *transition);
+void campScriptCleanupRelease(ContentTransition *transition);
 
 /* Whether either of two flag bits is set. */
 static __inline bool flagsAny(u32 flags, u32 first, u32 second)
@@ -44,7 +44,7 @@ void contentTransitionProcessDeparture(ContentDepartureWork *work)
     if (flags & 0x400000) {
         ++work->delayFrames;
         if (work->delayFrames >= 30) {
-            FUN_00249b18(0, 1);
+            partyRestoreGroup(0, 1);
             titleSetSlotValueState2(0, 10);
             work->flags &= ~0x400000u;
             work->step = contentTransitionStep(5, 0);
@@ -75,7 +75,7 @@ void contentTransitionProcessDeparture(ContentDepartureWork *work)
         work->step.phase = 0;
         return;
     } else {
-        FUN_003b8b0c(work);
+        campScriptCleanupRelease(work);
         __ARM_common_memcpy4_6(&work->sourceMap, &work->destination);
         mikadoLoadSceneResources(work);
         work->step = contentTransitionStep(2, 0);

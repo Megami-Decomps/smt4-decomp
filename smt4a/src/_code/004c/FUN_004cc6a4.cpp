@@ -3,11 +3,11 @@
 
 struct ValuePair { u16 first, second; };
 extern "C" {
-u32 FUN_003daaf8(s32 level, const StatGrowthParameters *parameters);
+u32 statGrowthAccumulate(s32 level, const StatGrowthParameters *parameters);
 
 void FUN_004cc6a4(s32 level, ValuePair *output, const StatGrowthParameters *parameters)
 {
     output->first = (u16)unitComputeMaximumHpAtLevel(level, parameters);
-    output->second = (u16)FUN_003daaf8(level, parameters);
+    output->second = (u16)statGrowthAccumulate(level, parameters);
 }
 }

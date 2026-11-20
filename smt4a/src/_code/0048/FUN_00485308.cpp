@@ -10,7 +10,7 @@ u32 scrRunOpcodesStub(u32 process);
 s32 messageGetChoiceResult(void);
 u32 messageMainIsIdle(void);
 void scrScriptProcessStartEntry(u32 process, u32 entry);
-void FUN_00183e58(void);
+void buttonHelpTeardownSlots(void);
 void stateSetterEnterState(StateSetterSpriteWork* work, s32 state);
 
 // Run the name-confirmation script and restore the saved name when the choice requires it.
@@ -53,7 +53,7 @@ void FUN_00485308(StateSetterSpriteWork* work)
                 } else {
                     confirmation->editing = 0;
                     uiSpriteSetImageKeyframe(&confirmation->sprite, 0, 1);
-                    FUN_00183e58();
+                    buttonHelpTeardownSlots();
                     stateSetterEnterState(work, 8);
                     return;
                 }

@@ -19,7 +19,7 @@ extern unsigned int optionalWordGetValue(unsigned char *);
 extern int soundArchiveReadWaveArchiveInfo(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002a7a3c. */
 /* Supplied declaration required: FUN_002a7ac4. */
-extern unsigned int FUN_002ac780(int);
+extern unsigned int soundArchiveFileEntryIsLoaded(int);
 
 
 unsigned int FUN_002aa984(int *param_1,unsigned int param_2,int param_3)
@@ -36,7 +36,7 @@ unsigned int FUN_002aa984(int *param_1,unsigned int param_2,int param_3)
   unsigned int temp_v7 [2];
   char temp_v8;
   
-  temp_v0 = FUN_002ac780(param_1[1]);
+  temp_v0 = soundArchiveFileEntryIsLoaded(param_1[1]);
   temp_v1 = (**(romwright_code **)(*param_1 + 0x10))(param_1,temp_v0);
   if (temp_v1 == 0) {
     return 0;

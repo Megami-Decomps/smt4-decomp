@@ -14,7 +14,7 @@ int FUN_0019ac70(unsigned char [92], unsigned int);
 int FUN_0019b770(...);
 int FUN_0019f678(...);
 int FUN_001a1ee0(void);
-int FUN_001b63b0(void);
+int phaseCosine(void);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -82,7 +82,7 @@ extern unsigned int DAT_0063098c; /* 0x63098c */
 /* Supplied declaration required: FUN_0019b770. */
 /* Supplied declaration required: FUN_0019f678. */
 /* Supplied declaration required: FUN_001a1ee0. */
-/* Supplied declaration required: FUN_001b63b0. */
+/* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
@@ -402,7 +402,7 @@ LAB_00185068:
             FUN_001a1ee0();
             temp_v18 = (float)VectorSignedToFloat(param_3[2],(unsigned char)(in_fpscr >> 0x16) & 3);
             param_3[2] = (int)(temp_v18 - temp_v16 * temp_v17);
-            FUN_001b63b0();
+            phaseCosine();
             temp_v17 = temp_v11 * temp_v17;
           }
           temp_v11 = (float)VectorSignedToFloat(param_3[1],(unsigned char)(in_fpscr >> 0x16) & 3);

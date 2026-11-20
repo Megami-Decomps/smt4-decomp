@@ -23,7 +23,7 @@ extern u32 g_aocSystem;
 
 EntryWork *jobGetWork(void *job);
 u16 *dataTable19FindAddonWord(void *table, u32 index);
-s32 FUN_00162ea4(void);
+s32 eventIsSkipping(void);
 s32 aocRunByName(u32 system, u32 kind, u32 entryId, u32 flags);
 
 void entryWorkSwitchTo(void *job, u32 index, s32 setPending)
@@ -55,7 +55,7 @@ void entryWorkSwitchTo(void *job, u32 index, s32 setPending)
         return;
     }
 
-    if (FUN_00162ea4() != 0) {
+    if (eventIsSkipping() != 0) {
         work->mode = 1;
         work->previous = -1;
         return;

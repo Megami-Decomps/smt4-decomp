@@ -41,7 +41,7 @@ s32 messageGetChoiceResult(void);
 void obj04Finish(void);
 s32 FUN_003df4a4(u16 skillId);
 s32 partySlotMatchesSelected(void);
-void FUN_003e4e4c(u32 id);
+void saveSlotTableSetPreferredId(u32 id);
 s32 recordContainsPairedId(SaveSlot *slot, u16 skillId);
 u32 FUN_004bd068(SaveSlot *slot);
 void partyRecordSetEquippedItemClampRank(SaveSlot *slot, u16 skillId, u32 value);
@@ -81,7 +81,7 @@ u32 FUN_0041774c(SkillLearnTask *task)
             break;
         }
         FUN_00333dc8(1);
-        scrSetStringSlot(0, reinterpret_cast<const char *>(FUN_00180114(slot->demonId)));
+        scrSetStringSlot(0, reinterpret_cast<const char *>(table01RecordLookupForContent(slot->demonId)));
         scrScriptProcessStartEntry(task->script, 0x13);
         task->step = 3;
     }
@@ -89,9 +89,9 @@ u32 FUN_0041774c(SkillLearnTask *task)
     case 3:
         if (scrRunOpcodesStub(task->script) == 2) {
             if (messageGetChoiceResult() == 0) {
-                FUN_003e4e4c(task->slotId & 0xffff);
+                saveSlotTableSetPreferredId(task->slotId & 0xffff);
                 SaveSlot *slot = saveSlotFindById(task->slotId & 0xffff);
-                scrSetStringSlot(0, reinterpret_cast<const char *>(FUN_00180114(slot->demonId)));
+                scrSetStringSlot(0, reinterpret_cast<const char *>(table01RecordLookupForContent(slot->demonId)));
                 scrScriptProcessStartEntry(task->script, 0x14);
                 task->step = 4;
                 break;

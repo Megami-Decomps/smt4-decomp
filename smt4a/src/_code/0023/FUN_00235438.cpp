@@ -19,7 +19,7 @@ int mapIfDispatchCommand(...);
 int mapIfStartTransition(...);
 int FUN_003deea4(...);
 int partyEntryTriggerIfLevelAndFlag3(...);
-int FUN_00417b70(...);
+int gameFlagUnlockEntryById(...);
 int partyEntryFlagsBit3(...);
 int gameFlagSlotSetEnableBit(...);
 int flagValueAdd(int, int);
@@ -58,7 +58,7 @@ extern int FUN_003dedf0(unsigned int);
 /* Supplied declaration required: FUN_003deea4. */
 extern int FUN_003df004(unsigned int, int, unsigned int *);
 /* Supplied declaration required: partyEntryTriggerIfLevelAndFlag3. */
-/* Supplied declaration required: FUN_00417b70. */
+/* Supplied declaration required: gameFlagUnlockEntryById. */
 extern int partyEntryBitsBit5(unsigned int);
 /* Supplied declaration required: partyEntryFlagsBit3. */
 /* Supplied declaration required: gameFlagSlotSetEnableBit. */
@@ -320,7 +320,7 @@ LAB_002358f0:
             if (temp_v12) {
               temp_v2 = table1bOr1cGetRecordValue(temp_v10);
               if ((temp_v2 == 10) && (temp_v2 = goalConditionsSatisfied(temp_v10), temp_v2 != 0)) {
-                FUN_00417b70(temp_v10);
+                gameFlagUnlockEntryById(temp_v10);
                 temp_v17 = 99;
               }
               else {
@@ -351,7 +351,7 @@ LAB_002359c4:
         temp_v2 = 0;
         if (temp_v2 < temp_v16) {
           do {
-            FUN_00417b70(temp_v15[temp_v2]);
+            gameFlagUnlockEntryById(temp_v15[temp_v2]);
             temp_v2 = temp_v2 + 1;
           } while (temp_v2 < temp_v16);
         }

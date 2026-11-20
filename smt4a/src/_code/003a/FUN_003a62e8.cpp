@@ -3,7 +3,7 @@
 
 extern "C" {
 s32 recordContainsPairedId(const PairedIdList *, u32 id);
-u16 FUN_003f3104(const void *owner);
+u16 characterPickRandomEntryValue(const void *owner);
 
 static s32 findOrAllocateSelection(u16 id)
 {
@@ -50,7 +50,7 @@ void FUN_003a62e8(const void *record)
             s32 slot = findOrAllocateSelection(owner->id);
             if (slot < 0)
                 return;
-            u16 replacement = FUN_003f3104(owner);
+            u16 replacement = characterPickRandomEntryValue(owner);
             if (replacement != 0) {
                 saveGetSelectedRecordSlot(slot)->values[0] = owner->id;
                 saveGetSelectedRecordSlot(slot)->values[3] = replacement;

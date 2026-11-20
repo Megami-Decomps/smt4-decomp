@@ -6,7 +6,7 @@
 extern "C" {
 
 int renderCtxSelectDisplayAreaForStereoMode(int);
-int FUN_001640cc(...);
+int gxSubmitFloatColoredQuad(...);
 int efctSetSpeed(void);
 int renderCtxSelectTexture(...);
 int gxResetColorQuadToWhite(void);
@@ -46,7 +46,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 extern unsigned int asdTMTexTableGetHeaderValue(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectDisplayAreaForStereoMode. */
-/* Supplied declaration required: FUN_001640cc. */
+/* Supplied declaration required: gxSubmitFloatColoredQuad. */
 extern int jobGetWork(void);
 /* Supplied declaration required: efctSetSpeed. */
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
@@ -224,7 +224,7 @@ unsigned int FUN_002835f4(void)
   renderCtxSelectTexture(g_renderCtx,temp_v4);
   VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x30),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x34),(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_001640cc(&temp_v11,&temp_v15,&temp_v19,&temp_v23);
+  gxSubmitFloatColoredQuad(&temp_v11,&temp_v15,&temp_v19,&temp_v23);
   temp_v0 = *(int *)(temp_v0 + 0x28);
   if (temp_v0 != 0) {
     temp_v4 = 0xffffff00;

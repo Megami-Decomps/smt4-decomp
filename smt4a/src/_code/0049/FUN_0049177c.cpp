@@ -103,7 +103,7 @@ void FUN_0049177c(MapScreenWork *work)
     for (s32 i = 0; i < iconCount; i++) {
         MapIcon *icon = &work->icons[i];
         if (g_gameState.showAllEntries == 0
-            && (FUN_004083a8(icon->kind, icon->unlockType) == 0
+            && (interactionVariantIsEnabled(icon->kind, icon->unlockType) == 0
                 || (icon->requireFlag != 0 && gameFlagIsSet(icon->requireFlag) == 0)
                 || (icon->excludeFlag != 0 && gameFlagIsSet(icon->excludeFlag) != 0)))
             icon->visible = 0;

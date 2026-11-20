@@ -50,13 +50,13 @@ extern void *g_btlAux;
 s32 idSetFindSubjectIndex(BtlSlotBattle *battle, BtlSpawnEntry *entry);
 BtlIdTable *btlFindEntryBlockByMemberId(BtlSlotBattle *battle, s32 index);
 s32 uiHasEntryId(BtlSlotBattle *battle, u32 id);
-u32 FUN_00409fe8(u32 id, s32 flag);
+u32 resourceCacheGetOrLoadModel(u32 id, s32 flag);
 void valueSlotsInsert(BtlSlotBattle *battle, u32 value);
 void uiInsertIdInFirstFreeSlot(BtlSlotBattle *battle, s32 id);
 u32 stateEntryFindById(BtlSlotBattle *battle, u32 id);
 s32 nkdwLoaderParse(u32 state);
 void aocHandleButtons(u32 state, s32 mode);
-s32 FUN_003fce08(u32 state, s32 flag);
+s32 aocResourceStartOnce(u32 state, s32 flag);
 void btlEnsureEnemyDrawResources(u32 state, s32 flag);
 void btlUiAddRequest(BtlUiA *block, u32 request);
 void FUN_004f7fe8(void *aux, BtlSpawnEntry *entry, u32 id);
@@ -100,7 +100,7 @@ void FUN_004cb64c(BtlSlotBattle *battle, BtlSpawnEntry *entry)
             id = table->ids[index];
             if (uiHasEntryId(battle, id) == 0) {
                 entry->flags &= ~(u64)ENTRY_ID_BOTH;
-                valueSlotsInsert(battle, FUN_00409fe8(id, 1));
+                valueSlotsInsert(battle, resourceCacheGetOrLoadModel(id, 1));
                 uiInsertIdInFirstFreeSlot(battle, (s16)id);
             } else {
                 entry->flags |= ENTRY_ID_BOTH;
@@ -123,7 +123,7 @@ void FUN_004cb64c(BtlSlotBattle *battle, BtlSpawnEntry *entry)
             aocHandleButtons(state, 7);
         }
         if ((entry->flags & ENTRY_ID_SHOWN) == 0) {
-            if (FUN_003fce08(state, 1) == 0) {
+            if (aocResourceStartOnce(state, 1) == 0) {
                 releaseDelay(entry);
                 return;
             }

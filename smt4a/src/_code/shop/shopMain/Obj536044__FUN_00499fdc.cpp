@@ -59,7 +59,7 @@ s32 scrRunOpcodesStub(u32 script);
 u32 panelSetTarget(u32 target, u8 flag);
 s32 FUN_004954e8(ShopMainWork *work);
 void messageChoiceShowCurrent(ShopMainWork *work);
-s32 FUN_004d0584(void);
+s32 inputConfirmPressed(void);
 s32 FUN_00498408(ShopMainWork *work, u16 item);
 s32 FUN_001ba3d0(u16 item);
 s32 FUN_0047fe44(u16 item);
@@ -100,7 +100,7 @@ void _ZN9Obj53604412FUN_00499fdcEv(ShopMainWork *work)
     s32 blocked = FUN_004954e8(work);
 
     messageChoiceShowCurrent(work);
-    if (work->tabs[work->tab].range.count > 0 && FUN_004d0584() != 0) {
+    if (work->tabs[work->tab].range.count > 0 && inputConfirmPressed() != 0) {
         blocked = 1;
     }
     s32 tab = work->tab;
@@ -148,7 +148,7 @@ void _ZN9Obj53604412FUN_00499fdcEv(ShopMainWork *work)
         menuOpenCommandList(work);
         return;
     }
-    if (FUN_004d0584() != 0) {
+    if (inputConfirmPressed() != 0) {
         sendEvent100020F();
     }
 }

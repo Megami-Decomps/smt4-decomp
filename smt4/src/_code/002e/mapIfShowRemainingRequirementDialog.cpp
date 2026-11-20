@@ -8,14 +8,14 @@ extern "C" {
 void textFormatFullWidthTwoDigits(s32 count, char *text);
 const char *textConvertToGlyphPairs(void *record, s32 variant);
 void dialogSetText(const char *text);
-u32 FUN_002bfdc4(void);
-void FUN_002bfc24(s32 group, u32 sound, u32 voice, u32 flags, f32 leftVolume, f32 rightVolume);
+u32 messageVoiceBankGet(void);
+void voiceRequestPlayFile(s32 group, u32 sound, u32 voice, u32 flags, f32 leftVolume, f32 rightVolume);
 
 void mapIfShowRemainingRequirementDialog(u32 kind, u32 item, s32 count)
 {
     MapIfState *work = g_mapIf.state;
     u32 sound = 0;
-    u32 flags = FUN_002bfdd4() | 4;
+    u32 flags = messageVoiceFlagsGet() | 4;
     char text[128];
     char number[8];
     work->unk18 = 1;
@@ -54,7 +54,7 @@ void mapIfShowRemainingRequirementDialog(u32 kind, u32 item, s32 count)
         else if (count == 20) sound = 0x7A8F7;
         else sound = 0x7A8F8;
     }
-    u32 voice = FUN_002bfdc4();
-    FUN_002bfc24(1, sound, voice, flags, 0.707f, 0.707f);
+    u32 voice = messageVoiceBankGet();
+    voiceRequestPlayFile(1, sound, voice, flags, 0.707f, 0.707f);
 }
 }

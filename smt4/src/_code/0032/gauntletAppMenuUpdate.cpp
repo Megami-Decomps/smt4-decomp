@@ -37,8 +37,8 @@ u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 s32 ifTouchRegionAddRequested(u32 file, s32 index);
 u32 padIsButtonPressed(u32 button);
 u32 padIsButtonRepeat(u32 button);
-s32 FUN_002c1658(s32 button, s32 mode);
-u8 FUN_0029efd8(void *list, s32 notify);
+s32 inputQueryButtonState(s32 button, s32 mode);
+u8 gridNavigationHandleConfirm(void *list, s32 notify);
 u32 resourceRunOperationIfUnblocked(const void *list);
 u32 appTryPurchase(u32 id, s32 ignoreRequirements, s32 checkOnly);
 u8 appCheckPurchaseRequirements(u32 id);
@@ -114,14 +114,14 @@ static s32 gauntletUpdateTop(GauntletAppMenuWork *menu)
             row = 0;
         }
         scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(menu->list.controller), row);
-        FUN_0029efd8(menu->list.controller, 1);
+        gridNavigationHandleConfirm(menu->list.controller, 1);
     } else if (uiPointerHitsRect(160, 198, 200, 32, 2)) {
         s32 row = listCursorGetRowIfUnblocked(menu->list.controller) + 1;
-        if (row >= static_cast<s32>(FUN_0029ee54(menu->list.controller))) {
+        if (row >= static_cast<s32>(gridNavigationGetItemCount(menu->list.controller))) {
             row--;
         }
         scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(menu->list.controller), row);
-        FUN_0029efd8(menu->list.controller, 1);
+        gridNavigationHandleConfirm(menu->list.controller, 1);
     }
     return 0;
 }
@@ -129,7 +129,7 @@ static s32 gauntletUpdateTop(GauntletAppMenuWork *menu)
 /* The category screen: the cursor moves, A opens the apps the category can still buy, B goes back. */
 static s32 gauntletUpdateCategory(GauntletAppMenuWork *menu)
 {
-    if (FUN_0029efd8(menu->list.controller, 1)) {
+    if (gridNavigationHandleConfirm(menu->list.controller, 1)) {
         FUN_00242000(reinterpret_cast<MenuScreen *>(menu));
     } else if (padIsButtonPressed(0)) {
         if (appTryPurchase(gauntletCursorEntry(menu), 0, 0)) {
@@ -175,9 +175,9 @@ static s32 gauntletUpdateList(GauntletAppMenuWork *menu)
     if (uiScrollHandleActionsOrTouch(menu->list.controller, asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x575),
                                      menu->touch.regions, menu->touch.regions[13], menu->touch.regions[11],
                                      menu->touch.regions[12], &decide, 0, 1) ||
-        FUN_0029efd8(menu->list.controller, 1)) {
+        gridNavigationHandleConfirm(menu->list.controller, 1)) {
         FUN_00242000(reinterpret_cast<MenuScreen *>(menu));
-    } else if (FUN_002c1658(0, 1) || decide) {
+    } else if (inputQueryButtonState(0, 1) || decide) {
         u32 id = gauntletCursorEntry(menu);
         if (appTryPurchase(id, 0, 1)) {
             textEncodeFontSlot(0, reinterpret_cast<const u8 *>(dataTable0BFindById(id)));
@@ -188,18 +188,18 @@ static s32 gauntletUpdateList(GauntletAppMenuWork *menu)
         } else {
             eventQueueAddUnique(GAUNTLET_SE_CANCEL);
         }
-    } else if (FUN_002c1658(1, 1)) {
+    } else if (inputQueryButtonState(1, 1)) {
         if (!gauntletMenuIsForced(menu)) {
             FUN_00248738(menu, 7);
             eventQueueAddUniqueIfValid(GAUNTLET_SE_CANCEL);
         }
-    } else if (FUN_002c1658(9, 1)) {
+    } else if (inputQueryButtonState(9, 1)) {
         eventQueueAddUniqueIfValid(GAUNTLET_SE_DECIDE);
         sortMenuCreate(13, 0);
-        FUN_0029e328(0x21);
-        FUN_0029e328(0x15);
-        FUN_0029e328(0x16);
-        FUN_0029e328(3);
+        useCounterAppendValue(0x21);
+        useCounterAppendValue(0x15);
+        useCounterAppendValue(0x16);
+        useCounterAppendValue(3);
         useCounterStart();
         FUN_00248738(menu, 6);
     }
@@ -221,7 +221,7 @@ s32 gauntletAppMenuUpdate(void)
             FUN_00242000(reinterpret_cast<MenuScreen *>(menu));
             FUN_00248738(menu, 3);
             for (s32 i = 0; i < 10; i++) {
-                if (i >= static_cast<s32>(FUN_0029ee54(menu->list.controller))) {
+                if (i >= static_cast<s32>(gridNavigationGetItemCount(menu->list.controller))) {
                     break;
                 }
                 menu->touch.regions[i] = ifTouchRegionAddRequested(GAUNTLET_TEXTURES, i + 0x40E);

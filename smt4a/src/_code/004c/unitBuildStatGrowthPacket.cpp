@@ -4,7 +4,7 @@
 
 extern "C" {
 
-u32 FUN_003daaf8(s32 level, const StatGrowthParameters *parameters);
+u32 statGrowthAccumulate(s32 level, const StatGrowthParameters *parameters);
 
 u32 saveSlotIsActiveWithId(u32 id);
 
@@ -23,7 +23,7 @@ void unitBuildStatGrowthPacket(u32 *packet, u32 id)
     parameters.hpGrowth = record->hpGrowth;
     parameters.mpGrowth = record->mpGrowth;
     parameters.hp = (u16)unitComputeMaximumHpAtLevel(record->level, &parameters);
-    parameters.mp = (u16)FUN_003daaf8(record->level, &parameters);
+    parameters.mp = (u16)statGrowthAccumulate(record->level, &parameters);
     parameters.kind = saveSlotIsActiveWithId(id) != 0 ? 3 : 2;
     const u8 *bytes = reinterpret_cast<const u8 *>(&parameters);
     // Publish the packed packet without assuming a wider alignment for its two-byte tail.

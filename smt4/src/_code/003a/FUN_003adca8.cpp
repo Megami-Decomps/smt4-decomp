@@ -7,7 +7,7 @@
 extern "C" {
 
 u32 asdCameraGetSavedRenderPairs(void);
-void FUN_002630e0(f32 *vector, s32 a, u32 stereo);
+void cameraProjectToScreen(f32 *vector, s32 a, u32 stereo);
 void uiStoreTextureEntryCenter(UiSpriteState *sprite, s32 group, s32 part);
 void FUN_002963ec(UiSpriteState *sprite, s32 x, s32 y);
 s32 __aeabi_idivmod(s32 a, s32 b);
@@ -21,7 +21,7 @@ void FUN_003adca8(u32 unused1, s32 slot, s32 value, u32 unused2, f32 x, f32 y, f
     f32 position[3] = { x, y, z };
     BtlUi *ui = g_btlUi.ui;
     if (stereo != 0)
-        FUN_002630e0(position, 0, asdCameraGetSavedRenderPairs());
+        cameraProjectToScreen(position, 0, asdCameraGetSavedRenderPairs());
     BtlUiNumberSlot *popup = &ui->objD.numbers.slots[slot];
     popup->active = 1;
     popup->anchored = (u8)stereo;

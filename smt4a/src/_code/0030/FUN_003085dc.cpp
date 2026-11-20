@@ -22,7 +22,7 @@ typedef struct {
 } param_5_stack;
 
 extern int lessU32(unsigned char *, unsigned int *, int);
-extern char *FUN_00308576(fn_003085dc_arg1 *);
+extern char *listAllocateNode(fn_003085dc_arg1 *);
 /* Supplied declaration required: rbTreeRotateRight_0030898c. */
 /* Supplied declaration required: rbTreeRotateLeft_003089be. */
 
@@ -39,7 +39,7 @@ void FUN_003085dc(unsigned int *param_1,fn_003085dc_arg1 *param_2,int param_3,in
   char *pcVar5;
   char *pcVar6;
   
-  pcVar1 = (char *)FUN_00308576(param_2);
+  pcVar1 = (char *)listAllocateNode(param_2);
   if (pcVar1 + 0x10 != (char *)0x0) {
     *(unsigned int *)(pcVar1 + 0x10) = *param_5;
     *(unsigned int *)(pcVar1 + 0x14) = param_5[1];

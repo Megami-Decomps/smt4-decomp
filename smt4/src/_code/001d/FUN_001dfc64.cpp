@@ -55,16 +55,16 @@ static float romwright_fabs_4(float value)
 extern int asdAnimGetTrackLastFrame(int, unsigned int);
 /* Supplied declaration required: aocHandleButtons. */
 extern unsigned int eventResourceCacheAcquire(int, unsigned int);
-extern int FUN_00294fe0(unsigned int);
+extern int aocTextureEntryLoadOnce(unsigned int);
 extern int nkdwHeaderParse(unsigned int);
 extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: aocLoadTextureNode. */
 extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
-extern int FUN_002b8660(void);
+extern int resultIsIdle(void);
 /* Supplied declaration required: eventQueueAddUnique. */
 extern int jobGetWork(void);
-extern int FUN_002c1d5c(void);
+extern int eventIsSkipping(void);
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: asdTMTexTablePrepareNodeImage. */
 
@@ -88,7 +88,7 @@ unsigned int FUN_001dfc64(fn_001dfc64_arg0 *param_1)
   temp_v1 = *(int *)(temp_v0 + 0xc);
   if (temp_v1 != 0) {
     if (temp_v1 == 1) {
-      temp_v1 = FUN_002c1d5c();
+      temp_v1 = eventIsSkipping();
       if (temp_v1 != 0) {
         return 0;
       }
@@ -137,7 +137,7 @@ unsigned int FUN_001dfc64(fn_001dfc64_arg0 *param_1)
     if (temp_v1 != 3) {
       return 0;
     }
-    temp_v1 = FUN_00294fe0(*(unsigned int *)(temp_v0 + 0x48));
+    temp_v1 = aocTextureEntryLoadOnce(*(unsigned int *)(temp_v0 + 0x48));
     if (temp_v1 == 0) {
       return 0;
     }
@@ -235,9 +235,9 @@ unsigned int FUN_001dfc64(fn_001dfc64_arg0 *param_1)
     *(unsigned int *)(temp_v0 + 0x24) = 0x3f800000;
     *(float *)(temp_v0 + 0x28) = temp_v6;
   }
-  temp_v1 = FUN_002c1d5c();
+  temp_v1 = eventIsSkipping();
   if (temp_v1 != 0) {
-    temp_v1 = FUN_002b8660();
+    temp_v1 = resultIsIdle();
     if (temp_v1 == 0) {
       *(unsigned int *)(temp_v0 + 0x24) = temp_v7;
       *(float *)(temp_v0 + 0x28) = temp_v6;

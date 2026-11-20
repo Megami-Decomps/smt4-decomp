@@ -14,14 +14,14 @@ struct ValueRecord {
     /* 0x18 */ u32 second;
 };
 
-extern Allocator DAT_00589508;
+extern Allocator g_moAllocator;
 
 s32 moCreateValueRecord(ValueRecord **record, u32 first, u32 second)
 {
-    if (DAT_00589508.allocate == NULL || DAT_00589508.free == NULL) {
+    if (g_moAllocator.allocate == NULL || g_moAllocator.free == NULL) {
         return 0;
     }
-    ValueRecord *created = (ValueRecord *)DAT_00589508.allocate(sizeof(ValueRecord));
+    ValueRecord *created = (ValueRecord *)g_moAllocator.allocate(sizeof(ValueRecord));
     if (created == NULL) {
         return 0;
     }

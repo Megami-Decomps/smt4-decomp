@@ -67,7 +67,7 @@ void FUN_003f6fec(void);
 u32 FUN_003f6f68(u32 (*callback)(u32), const u32 *value);
 s32 FUN_002bcc60(void *thread, const ThreadArgumentDescriptor *descriptor, void (*entry)(UniteWork *),
                  UniteWork **argument, u32 stackTop, s32 priority, s32 processor, u32 flags);
-UniteCtrl *FUN_003c9c94(UniteCtrl *unite);
+UniteCtrl *uniteCtrlBuildRaceLists(UniteCtrl *unite);
 s32 FUN_0029aef0(void);
 void uniteRebuildFusionCatalog(void);
 void mapMainCallIfFlag(s32 flag);
@@ -114,7 +114,7 @@ void uniteCreate(void)
 
     UniteCtrl *ctrl = static_cast<UniteCtrl *>(asdOperatorNew(0x180, owner));
     if (ctrl != NULL) {
-        ctrl = FUN_003c9c94(ctrl);
+        ctrl = uniteCtrlBuildRaceLists(ctrl);
     }
     work->sprites.ctrl = ctrl;
     work->unk9464 = FUN_0029aef0();

@@ -5,7 +5,7 @@ extern "C" {
 s32 gameFlagIsSet(u32);
 
 s32 flagValueIsPositive(u32);
-void FUN_00295a18(u32, s32);
+void saveFlagSetOrAddCounter(u32, s32);
 void *jyoucyuGetTableEntry(u32);
 
 // Activate flag requests attached to loaded file groups.
@@ -29,7 +29,7 @@ void aocActivateFileGroupFlags(AocSystem *owner)
             } else {
                 u32 flag = record->value;
                 if (!flagValueIsPositive(flag)) {
-                    FUN_00295a18(flag, 1);
+                    saveFlagSetOrAddCounter(flag, 1);
                     jyoucyuGetTableEntry(0);
                 }
             }

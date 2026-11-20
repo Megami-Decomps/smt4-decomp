@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_3_stack;
 
-extern unsigned int asdModelForwardChecked(unsigned int *, unsigned int, unsigned int, unsigned int);
+extern unsigned int srvGetServiceHandle(unsigned int *, unsigned int, unsigned int, unsigned int);
 
 
 unsigned int FUN_0043a08c(unsigned int *param_1,unsigned int param_2,unsigned int param_3)
@@ -19,7 +19,7 @@ unsigned int FUN_0043a08c(unsigned int *param_1,unsigned int param_2,unsigned in
   int temp_v1;
   
   temp_v1 = 0;
-  temp_v0 = asdModelForwardChecked((unsigned int *)&temp_v1,param_2,param_3,0);
+  temp_v0 = srvGetServiceHandle((unsigned int *)&temp_v1,param_2,param_3,0);
   if ((temp_v0 & 0x80000000) == 0) {
     *param_1 = temp_v1;
   }

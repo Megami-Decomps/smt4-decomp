@@ -7,8 +7,8 @@
 extern "C" {
 extern AsdListBoxEntry DAT_00435be8[];
 extern const char DAT_004004f8[];
-extern f32 DAT_004342cc;
-extern f32 DAT_004342d0;
+extern f32 g_btlCameraDebugOffset;
+extern f32 g_btlCameraDebugUpDown;
 void asdListBoxAddItems(u32 listBox, const AsdListBoxEntry* entries, u32 count);
 void asdListBoxSetByteValue(u32 listBox, u8 value);
 void jobSetText(u32 job, const char* text);
@@ -26,8 +26,8 @@ void FUN_003c5eb0(BattleDebugWork* work, const BattleDebugOwnerView* owner)
     asdListBoxSetItemMode2(work->listBox, 0, (g_btlMain->flags & 0x20) >> 5);
     asdListBoxSetItemMode2(work->listBox, 1, (g_btlMain->flags & 0x40) >> 6);
     asdListBoxSetItemMode2(work->listBox, 2, (g_btlMain->flags & 0x80) >> 7);
-    asdListBoxSetFloatItem(work->listBox, 3, DAT_004342cc, -10, 10);
-    asdListBoxSetFloatItem(work->listBox, 4, DAT_004342d0, 0, 10);
+    asdListBoxSetFloatItem(work->listBox, 3, g_btlCameraDebugOffset, -10, 10);
+    asdListBoxSetFloatItem(work->listBox, 4, g_btlCameraDebugUpDown, 0, 10);
     asdListBoxSetFloatItem(work->listBox, 5, g_btlMain->cameraPosition[0], -999, 999);
     asdListBoxSetFloatItem(work->listBox, 6, g_btlMain->cameraPosition[1], -999, 999);
     asdListBoxSetFloatItem(work->listBox, 7, g_btlMain->cameraPosition[2], -999, 999);

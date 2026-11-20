@@ -64,7 +64,7 @@ static __inline s32 stageMenuFirstHidden(void)
 }
 
 s32 jobIsValid(u32 job);
-void FUN_003592dc(u32 job);
+void asdListBoxJobReset(u32 job);
 void jobStop(u32 job, s32 arg);
 u32 asdListBoxCreateDefaultFlags(u32 parent, s32 type, s32 flags, s32 extra);
 void asdListBoxAddItems(u32 box, const void *items, s32 count);
@@ -77,7 +77,7 @@ s32 FUN_00400d68(BtlStageModel *model);
 void FUN_004d3950(StageMenuOwner *owner, StageMenuParent *parent)
 {
     if (jobIsValid(owner->listBox) != 0) {
-        FUN_003592dc(owner->listBox);
+        asdListBoxJobReset(owner->listBox);
         jobStop(owner->listBox, 0);
     }
     owner->listBox = asdListBoxCreateDefaultFlags(parent->parentJob, 0x75, 0, 0);

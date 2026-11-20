@@ -10,7 +10,7 @@ u32 spriteHandleCreate(u32);
 void asdTextFormatStream(u32, s32, u32, s32, s32, const char *);
 void asdTMTexTableLoadSprites(u32);
 s32 FUN_0031a5e4(u32 process);
-s32 FUN_0036dff4(u32 process);
+s32 campCommonBgRenderFrame(u32 process);
 void ref208Destroy(u32 process);
 u32 taskCreateDraw(const char *, s32, u16, u16, s32 (*)(u32), void (*)(u32), CommonBgState *, u32);
 
@@ -30,6 +30,6 @@ void campCreateCommonBackground(void)
     asdTMTexTableLoadSprites(34);
     asdTMTexTablePrepareNodeImage(34, 0);
     work->job = taskCreateDraw("COMBG EVE CALC", 4, 8, 0, FUN_0031a5e4, ref208Destroy, work, g_commonBg.owner->job);
-    taskCreateDraw("COMBG DDRAW", 235, 8, 0, FUN_0036dff4, NULL, work, work->job);
+    taskCreateDraw("COMBG DDRAW", 235, 8, 0, campCommonBgRenderFrame, NULL, work, work->job);
 }
 }

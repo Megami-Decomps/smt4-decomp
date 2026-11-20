@@ -27,7 +27,7 @@ extern unsigned char DAT_005949d8; /* 0x5949d8 */
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002eaba4. */
-extern int FUN_002eb5f4(void);
+extern int watcherGetActiveContext(void);
 /* Supplied declaration required: pairCopyIfNotNull. */
 /* Supplied declaration required: FUN_002efb9e. */
 /* Supplied declaration required: FUN_002efbd8. */
@@ -47,9 +47,9 @@ void FUN_002ef268(int *param_1,int param_2)
   int temp_v6;
   
   param_1[0x30] = param_2;
-  temp_v0 = FUN_002eb5f4();
+  temp_v0 = watcherGetActiveContext();
   _ZN9Obj55b28cC1EPv(temp_v4,temp_v0 + 0x394);
-  temp_v0 = FUN_002eb5f4();
+  temp_v0 = watcherGetActiveContext();
   temp_v6 = param_1[0x1e];
   temp_v1 = *(int *)(temp_v0 + 0x38c);
   temp_v5 = param_1;

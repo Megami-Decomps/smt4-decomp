@@ -32,8 +32,8 @@ struct EffectNode {
 
 extern "C" {
 
-s32 FUN_0025c8f0(EffectNode *node, const Vector4 *position, f32 *matrix);
-void FUN_002a3958(EffectNode *node, const f32 *matrix);
+s32 renderVectorOverrideResolve(EffectNode *node, const Vector4 *position, f32 *matrix);
+void effectTimelinePartApplyRotation(EffectNode *node, const f32 *matrix);
 
 /* Places the effect node and updates every child that has started, with the title scene's render state
  * duplicated for the duration; the node's "placed" flag is cleared afterwards. */
@@ -61,8 +61,8 @@ void effectNodeUpdatePlacedChildren(EffectNode *node)
     if ((flags & 0x60) != 0 && (flags & EFFECT_NODE_PLACED) == 0) {
         Vector4 orientation = node->orientation;
 
-        FUN_0025c8f0(node, &position, matrix);
-        FUN_002a3958(node, matrix);
+        renderVectorOverrideResolve(node, &position, matrix);
+        effectTimelinePartApplyRotation(node, matrix);
         node->orientation = orientation;
     }
     lastFrame = node->frame - 1;
@@ -102,7 +102,7 @@ void effectNodeUpdatePlacedChildren(EffectNode *node)
             if ((child->flags & 0x60) != 0) {
                 ResourceHandler *handler;
 
-                FUN_0025c8f0(child, &position, matrix);
+                renderVectorOverrideResolve(child, &position, matrix);
                 handler = &g_handlerTable[child->resource->type];
                 if (handler->setOrientation != NULL) {
                     handler->setOrientation(child->resource->data, matrix);

@@ -2,7 +2,7 @@
 #include "script/ScriptArgs.h"
 extern "C" {
 void jobSetParent(u32, u32);
-u32 FUN_0036c580(f32*, f32*, f32, f32);
+u32 bustupStartUniformShake(f32*, f32*, f32, f32);
 s32 jobIsValid(u32);
 extern const ShakeAmplitudes DAT_0052f6b4;
 extern BustupCutAnimA* g_bustupCutAnim;
@@ -13,7 +13,7 @@ u32 FUN_0031c2b4(void)
     s32 strength = scrGetArg(0);
     s32 duration = scrGetArg(1);
     ShakeAmplitudes amplitudes = DAT_0052f6b4;
-    u32 job = FUN_0036c580(&g_bustupCutAnim->shakeX, &g_bustupCutAnim->shakeY,
+    u32 job = bustupStartUniformShake(&g_bustupCutAnim->shakeX, &g_bustupCutAnim->shakeY,
                          amplitudes.values[strength], (f32)duration);
     if (jobIsValid(job)) {
         jobSetParent(g_bustupCutAnim->job, job);

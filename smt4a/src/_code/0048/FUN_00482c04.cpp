@@ -44,7 +44,7 @@ struct TalkTargetSet {
 extern "C" {
 
 u8 *gameGetPlayerData(void);
-void FUN_00376fa4(u32 id);
+void mapSetActiveEntryId(u32 id);
 void sequenceRequestDefer(s32 sequence, u32 arg);
 void soundActorStartOnFreeChannel(u32 id);
 s32 gameDataFlagTestBit(u32 flag);
@@ -86,7 +86,7 @@ u32 FUN_00482c04(TalkTargetSet *set)
                         sequenceRequestDefer(target->sequence, target->sequenceArg);
                     }
                 }
-                FUN_00376fa4(target->id);
+                mapSetActiveEntryId(target->id);
                 chosen = target->id;
                 if (target->marker > 0) {
                     g_gameState.talkMarkerArg = target->markerArg;

@@ -8,7 +8,7 @@ int FUN_002bb140(int);
 int threadSleepDuration(int, int);
 int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
-int FUN_002c5434(int);
+int sleepAllow(int);
 int sleepQueryAnswer(int);
 
 extern int FUN_0015007c(unsigned int);
@@ -17,7 +17,7 @@ extern int FUN_002bb0d0(void);
 /* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
-/* Supplied declaration required: FUN_002c5434. */
+/* Supplied declaration required: sleepAllow. */
 /* Supplied declaration required: sleepQueryAnswer. */
 
 
@@ -43,7 +43,7 @@ int FUN_002a808c(unsigned int param_1)
   if (temp_v0 != 0) {
     temp_v0 = FUN_002bb0d0();
     if (temp_v0 == 0) {
-      FUN_002c5434(1);
+      sleepAllow(1);
     }
   }
   else {

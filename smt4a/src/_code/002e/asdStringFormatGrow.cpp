@@ -4,7 +4,7 @@ extern "C" {
 
 void* asdOperatorNewC(u32 size);
 void asdOperatorDeleteB(void* buffer);
-s32 FUN_00100df4(char* buffer, s32 capacity, const char* format, va_list arguments);
+s32 libc_vsnprintf(char* buffer, s32 capacity, const char* format, va_list arguments);
 
 char* asdStringFormatGrow(char* buffer, s32 capacity, const char* format, va_list arguments)
 {
@@ -18,7 +18,7 @@ char* asdStringFormatGrow(char* buffer, s32 capacity, const char* format, va_lis
         buffer = (char*)asdOperatorNewC(size);
     }
     for (;;) {
-        s32 result = FUN_00100df4(buffer, size, format, arguments);
+        s32 result = libc_vsnprintf(buffer, size, format, arguments);
         if (result < 0) {
             buffer[0] = '\0';
             break;

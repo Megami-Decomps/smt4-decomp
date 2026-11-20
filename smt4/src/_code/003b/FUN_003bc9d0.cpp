@@ -1,4 +1,4 @@
-/* NON_MATCHING: with the radians-to-degrees conversion as its own function the two multiplies and their constants match; the FUN_002a8638 out-pointer setup (retail forms &fov last) and the frame-counter load before the two flag stores are scheduled differently. */
+/* NON_MATCHING: with the radians-to-degrees conversion as its own function the two multiplies and their constants match; the cameraExportProviderEntryWords out-pointer setup (retail forms &fov last) and the frame-counter load before the two flag stores are scheduled differently. */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "script/scrScriptProcess.h"
 #include "code/Code0038.h"
@@ -53,8 +53,8 @@ typedef struct CameraView {
 void FUN_002a09b4(const char *path, s32 flags);
 void modelSlotAttachChild(TitleIntroCamera *camera, s32 index);
 void *asdCameraGetSavedRenderPairs(void);
-void FUN_002a8638(void *node, f32 *a, f32 *b, f32 *c, f32 *d);
-void FUN_002c1e30(void *camera, s32 flag, CameraView view);
+void cameraExportProviderEntryWords(void *node, f32 *a, f32 *b, f32 *c, f32 *d);
+void stereoCameraSetPerspective(void *camera, s32 flag, CameraView view);
 
 s32 modelHasLoadedAttachment(AsdMdlObject *model);
 
@@ -87,9 +87,9 @@ void FUN_003bc9d0(TitleIntro *intro)
         modelSlotAttachChild(intro->camera, 0);
         void *camera = asdCameraGetSavedRenderPairs();
         CameraView view;
-        FUN_002a8638(intro->camera->node, &view.fov, &view.v[2], &view.v[0], &view.v[1]);
+        cameraExportProviderEntryWords(intro->camera->node, &view.fov, &view.v[2], &view.v[0], &view.v[1]);
         view.fov = radiansToDegrees(view.fov);
-        FUN_002c1e30(camera, 1, view);
+        stereoCameraSetPerspective(camera, 1, view);
         FUN_00298d50(reinterpret_cast<u32>(camera));
         intro->model = asdMdlManagerCreateLoaded(DAT_00407d9c, 0x38);
         if (modelHasLoadedAttachment(intro->model) != 0) {

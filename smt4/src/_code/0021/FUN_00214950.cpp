@@ -31,14 +31,14 @@ u32 FUN_00214950(u32 context, s32 message)
         // These events retain the default classification.
     } else if (eventIsInRange(event, 17, 390, 399)) {
         if (message != 0) {
-            FUN_002f530c(0, message);
+            archivePathRequestSucceeded(0, message);
         }
         result = 1;
     } else if (eventIsInRange(event, 17, 230, 339)) {
         // These events retain the default classification.
     } else if (eventIsInRange(event, 17, 200, 219)) {
         if (message != 0) {
-            FUN_002f530c(0, message);
+            archivePathRequestSucceeded(0, message);
         }
         result = 1;
     }

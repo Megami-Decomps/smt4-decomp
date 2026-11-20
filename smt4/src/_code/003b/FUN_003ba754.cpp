@@ -30,7 +30,7 @@ struct MapSceneView {
 
 extern "C" {
 
-void FUN_0022b29c(MapSceneView *scene, s32 mode, u32 flag);
+void contentMenuRebuildGroup(MapSceneView *scene, s32 mode, u32 flag);
 void bgmReleaseStopped(void);
 void mapDepartSetTarget(s32 first, s32 second, u32 third);
 s32 FUN_0027d8c8(void);
@@ -53,7 +53,7 @@ void FUN_003ba754(MapSceneView *scene)
     if (quest != 0 && table1bOr1cGetRecordValue(quest) == 6) {
         restoreFlag = 1;
     }
-    FUN_0022b29c(scene, mode, 0xffffffff);
+    contentMenuRebuildGroup(scene, mode, 0xffffffff);
     scene->cursorX = 400.0f;
     scene->cursorY = 240.0f;
     if (pairedAvailabilityGetState(0) == 3) {
@@ -94,10 +94,10 @@ void FUN_003ba754(MapSceneView *scene)
             }
         } else if (g_aocMain->skipRestore != 0 || FUN_0027d98c() == 6) {
             gameRestoreWorkSave(2);
-            FUN_0027db24(0);
+            gameSaveSetBattleResultCode(0);
         } else if (FUN_0027d98c() == 1) {
             gameRestoreWorkSave(1);
-            FUN_0027db24(0);
+            gameSaveSetBattleResultCode(0);
             if (FUN_0027d8c8() != 0) {
                 scene->result = 3;
             } else {
@@ -105,7 +105,7 @@ void FUN_003ba754(MapSceneView *scene)
             }
         } else if (FUN_0027d98c() == 5) {
             gameRestoreWorkSave(1);
-            FUN_0027db24(0);
+            gameSaveSetBattleResultCode(0);
             scene->result = 4;
         }
     }

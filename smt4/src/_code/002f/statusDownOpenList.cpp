@@ -4,11 +4,11 @@ extern "C" {
 
 
 
-s32 FUN_0029ee54(ScrollSelection *list);
+s32 gridNavigationGetItemCount(ScrollSelection *list);
 void gridNavigationConfigure(ScrollSelection *list, s32 count, s32 a, s32 b, s32 c, s32 d);
 void ifTouchRegionRemove(void);
 void *__aeabi_memset4(void *dest, s32 size, s32 value);
-void FUN_0026ae68(void);
+void statusDownRebuildTouchRegions(void);
 
 static __inline ScrollSelection *statusGetList(StatusDownState *status)
 {
@@ -23,8 +23,8 @@ void statusDownOpenList(u32 first, u32 second)
 
     status->selection = first;
     status->unk540 = second;
-    gridNavigationConfigure(statusGetList(status), FUN_0029ee54(statusGetList(status)) + 1, 9, 1, 0, 1);
-    scrollListSetSelectionMarkChanged(statusGetList(status), FUN_0029ee54(statusGetList(status)) - 1);
+    gridNavigationConfigure(statusGetList(status), gridNavigationGetItemCount(statusGetList(status)) + 1, 9, 1, 0, 1);
+    scrollListSetSelectionMarkChanged(statusGetList(status), gridNavigationGetItemCount(statusGetList(status)) - 1);
     status->listActive = 1;
     current = g_statusDown;
     for (s32 i = 0; i < current->touchRegionCount; i++) {
@@ -36,7 +36,7 @@ void statusDownOpenList(u32 first, u32 second)
     current->stateTimer = 0;
     current->track.previous = current->track.state;
     current->track.state = 11;
-    FUN_0026ae68();
+    statusDownRebuildTouchRegions();
 }
 
 } /* extern "C" */

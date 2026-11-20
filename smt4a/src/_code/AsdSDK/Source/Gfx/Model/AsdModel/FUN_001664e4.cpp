@@ -8,7 +8,7 @@
 extern "C" {
 
 int FUN_00176538(unsigned int);
-int FUN_001767a4(unsigned int, unsigned int);
+int asdScenePassVisit(unsigned int, unsigned int);
 int FUN_00191bec(int, int);
 void FUN_00192484(u32 context, u32 firstCamera, u32 secondCamera, u32 sourceCamera, f32 stereoParameter, f32 stereoScale);
 int _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_(void);
@@ -55,7 +55,7 @@ extern int DAT_00636e18; /* 0x636e18 */
 
 /* Supplied declaration required: asdCameraGetSavedRenderPairs. */
 /* Supplied declaration required: FUN_00176538. */
-/* Supplied declaration required: FUN_001767a4. */
+/* Supplied declaration required: asdScenePassVisit. */
 /* Supplied declaration required: FUN_00191bec. */
 /* Supplied declaration required: FUN_00192484. */
 /* Supplied declaration required: _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_. */
@@ -188,7 +188,7 @@ void FUN_001664e4(unsigned int param_1,unsigned int param_2,int *param_3)
           if (piVar4 != piVar5) {
             piVar8[3] = 0;
           }
-          FUN_001767a4((&g_effAsdLightHandle)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
+          asdScenePassVisit((&g_effAsdLightHandle)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
         }
       }
       else if ((&DAT_00636e14)[temp_v0] != '\0') {
@@ -280,7 +280,7 @@ void FUN_001664e4(unsigned int param_1,unsigned int param_2,int *param_3)
         if (piVar4 != piVar5) {
           piVar8[3] = 0;
         }
-        FUN_001767a4((&g_effAsdLightHandle)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
+        asdScenePassVisit((&g_effAsdLightHandle)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
       }
       FUN_00176538((&g_effAsdLightHandle)[temp_v3]);
       if ((&DAT_00636e04)[temp_v0] != '\0') {
@@ -369,7 +369,7 @@ LAB_00166b18:
             }
           }
 LAB_00166ed0:
-          FUN_001767a4((&g_effAsdLightHandle)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
+          asdScenePassVisit((&g_effAsdLightHandle)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
         }
       }
       else if ((&DAT_00636e14)[temp_v0] != '\0') {
@@ -484,7 +484,7 @@ LAB_00166e14:
             *(unsigned int *)(temp_v1 + 0xc) = *(unsigned int *)(temp_v4 + 0x10);
           }
         }
-        FUN_001767a4((&g_effAsdLightHandle)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
+        asdScenePassVisit((&g_effAsdLightHandle)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
       }
     }
     temp_v3 = temp_v3 + 1;

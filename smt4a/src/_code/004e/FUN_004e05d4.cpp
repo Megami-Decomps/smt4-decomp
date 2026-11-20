@@ -23,7 +23,7 @@ int btlAdjustPropertyClamped(...);
 int FUN_004c9160(...);
 int FUN_004cab9c(void);
 int FUN_004e5830(int *, unsigned int *, unsigned int);
-int FUN_004e83ac(...);
+int btlActionTargetSlotScore(...);
 int FUN_004fcffc(...);
 int FUN_004fdb18(...);
 int FUN_004fe7e4(int, unsigned int *, int);
@@ -85,7 +85,7 @@ extern int FUN_004c8a9c(void);
 /* Supplied declaration required: FUN_004cab9c. */
 /* Supplied declaration required: FUN_004e5830. */
 /* Supplied declaration required: FUN_004e76cc. */
-/* Supplied declaration required: FUN_004e83ac. */
+/* Supplied declaration required: btlActionTargetSlotScore. */
 /* Supplied declaration required: FUN_004fcde0. */
 /* Supplied declaration required: FUN_004fcffc. */
 /* Supplied declaration required: FUN_004fdb18. */
@@ -125,7 +125,7 @@ unsigned int FUN_004e05d4(int *param_1,unsigned int *param_2)
     temp_v2 = 0;
     do {
       if (((*(unsigned int *)(*(int *)(*param_1 + 0x1ed4) + temp_v2 * 0x1d0 + 0x50) & 1) != 0) &&
-         (temp_v3 = FUN_004e83ac(param_1,param_2,temp_v2), temp_v3 == 0)) {
+         (temp_v3 = btlActionTargetSlotScore(param_1,param_2,temp_v2), temp_v3 == 0)) {
         temp_v3 = *param_1;
         btlMainFindEntryByListedId((BtlMainStateA *)temp_v3,temp_v2);
         if ((*(short *)(temp_v3 + 0x276) != 0) &&
@@ -148,7 +148,7 @@ unsigned int FUN_004e05d4(int *param_1,unsigned int *param_2)
       }
       if (*(int *)(param_2[8] + 0x400) != 0) {
         temp_v0 = *(unsigned short *)(*(int *)(param_2[8] + 0x400) + 300);
-        temp_v5 = FUN_0019acdc(temp_v0, 1);
+        temp_v5 = unitMapIdToCategory(temp_v0, 1);
         temp_v2 = *param_1;
         if ((*(unsigned int *)(temp_v2 + 0x45a4) & DAT_005712a4) == 0 &&
             (*(unsigned int *)(temp_v2 + 0x45a0) & DAT_005712a0) == 0) {
@@ -244,7 +244,7 @@ unsigned int FUN_004e05d4(int *param_1,unsigned int *param_2)
   if (temp_v4 < temp_v7) {
     do {
       if (((*(unsigned int *)(*(int *)(*param_1 + 0x1ed4) + temp_v4 * 0x1d0 + 0x50) & 1) != 0) &&
-         (temp_v2 = FUN_004e83ac(param_1,param_2,temp_v4), temp_v2 == 0)) goto LAB_004e0ac0;
+         (temp_v2 = btlActionTargetSlotScore(param_1,param_2,temp_v4), temp_v2 == 0)) goto LAB_004e0ac0;
       temp_v4 = temp_v4 + 1;
     } while ((int)temp_v4 < (int)temp_v7);
   }
@@ -262,7 +262,7 @@ LAB_004e0ac0:
     temp_v10 = 0;
     do {
       if (((*(unsigned int *)(*(int *)(*param_1 + 0x1ed4) + temp_v2 * 0x1d0 + 0x50) & 1) != 0) &&
-         (temp_v3 = FUN_004e83ac(param_1,param_2,temp_v2), temp_v3 == 0)) {
+         (temp_v3 = btlActionTargetSlotScore(param_1,param_2,temp_v2), temp_v3 == 0)) {
         puVar7 = (unsigned int *)*param_1;
         btlMainFindEntryByListedId((BtlMainStateA *)puVar7,temp_v2);
         temp_v12 = puVar7;
@@ -295,7 +295,7 @@ LAB_004e0ac0:
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 0x6d);
   }
-  temp_v2 = FUN_004e83ac(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a));
+  temp_v2 = btlActionTargetSlotScore(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a));
   if (((temp_v2 == 0) && ((*param_2 & 4) == 0)) && (temp_v2 = btlStateHasSelectionGateFlag(*param_1), temp_v2 == 0)) {
     temp_v4 = *(unsigned int *)(*param_1 + 0x45a0);
     temp_v7 = *(unsigned int *)(*param_1 + 0x45a4);
@@ -309,7 +309,7 @@ LAB_004e0ac0:
         }
       }
       else {
-        temp_v5 = FUN_004c53fc(0x1b);
+        temp_v5 = mapCategoryToDestinationGroup(0x1b);
         btlSlotSetStoreValue(temp_v2,0x1b,temp_v5);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x40) != 0) {
@@ -320,7 +320,7 @@ LAB_004e0ac0:
         }
       }
       else {
-        temp_v5 = FUN_004c53fc(0x1c);
+        temp_v5 = mapCategoryToDestinationGroup(0x1c);
         btlSlotSetStoreValue(temp_v2,0x1c,temp_v5);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x100) != 0) {
@@ -331,7 +331,7 @@ LAB_004e0ac0:
         }
       }
       else {
-        temp_v5 = FUN_004c53fc(0x1d);
+        temp_v5 = mapCategoryToDestinationGroup(0x1d);
         btlSlotSetStoreValue(temp_v2,0x1d,temp_v5);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 8) != 0) {
@@ -342,7 +342,7 @@ LAB_004e0ac0:
         }
       }
       else {
-        temp_v5 = FUN_004c53fc(0x1e);
+        temp_v5 = mapCategoryToDestinationGroup(0x1e);
         btlSlotSetStoreValue(temp_v2,0x1e,temp_v5);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x800) != 0) {
@@ -353,11 +353,11 @@ LAB_004e0ac0:
         }
       }
       else {
-        temp_v5 = FUN_004c53fc(0x1f);
+        temp_v5 = mapCategoryToDestinationGroup(0x1f);
         btlSlotSetStoreValue(temp_v2,0x1f,temp_v5);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x1000) == 0) {
-        temp_v5 = FUN_004c53fc(0x20);
+        temp_v5 = mapCategoryToDestinationGroup(0x20);
         btlSlotSetStoreValue(temp_v2,0x20,temp_v5);
       }
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x2000) != 0) {
@@ -368,12 +368,12 @@ LAB_004e0ac0:
         }
       }
       else {
-        temp_v5 = FUN_004c53fc(0x21);
+        temp_v5 = mapCategoryToDestinationGroup(0x21);
         btlSlotSetStoreValue(temp_v2,0x21,temp_v5);
       }
     }
   }
-  temp_v2 = FUN_004e83ac(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a));
+  temp_v2 = btlActionTargetSlotScore(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a));
   if ((temp_v2 == 0) && ((*(unsigned short *)(param_2[10] + 0x110) & 0x20) != 0)) {
     if (*(short *)(param_2[9] + 0x6a) < 4) {
       temp_v4 = 4;
@@ -387,7 +387,7 @@ LAB_004e0ac0:
     if (temp_v4 < temp_v7) {
       do {
         if (((*(unsigned int *)(*(int *)(*param_1 + 0x1ed4) + temp_v4 * 0x1d0 + 0x50) & 1) != 0) &&
-           (temp_v2 = FUN_004e83ac(param_1,param_2,temp_v4), temp_v2 == 0)) {
+           (temp_v2 = btlActionTargetSlotScore(param_1,param_2,temp_v4), temp_v2 == 0)) {
           if (*(int *)(*param_1 + 0xa8) == 0) {
             temp_v7 = *(unsigned int *)param_2[8];
             temp_v4 = ((unsigned int *)param_2[8])[1];

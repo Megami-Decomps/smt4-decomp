@@ -31,9 +31,9 @@ s32 gameFlagIsSet(u32 flag);
 void btlUiClearSelectionSlots(BtlUiA *block);
 void FUN_003ebc08(BtlMainStateA *state, s32 arg);
 
-void FUN_003756c8(s32 arg);
+void btlPlayMenuConfirmSe(s32 arg);
 void btlStageResetAndClearCameraFlag(u32 aux);
-void FUN_004ab734(BtlUiA *block);
+void btlUiRefreshMenuPanel(BtlUiA *block);
 
 /* Drives the continue prompt: loads and starts its script, waits for it to finish, then restores the battle flags. */
 u32 FUN_003e69ac(ContinueState *continueState)
@@ -84,9 +84,9 @@ u32 FUN_003e69ac(ContinueState *continueState)
                 return 0;
             }
         }
-        FUN_003756c8(0);
+        btlPlayMenuConfirmSe(0);
         btlStageResetAndClearCameraFlag(g_btlAux);
-        FUN_004ab734(g_btlUiBlock);
+        btlUiRefreshMenuPanel(g_btlUiBlock);
         next = 5;
         break;
     case 5:

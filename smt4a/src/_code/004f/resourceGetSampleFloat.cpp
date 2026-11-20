@@ -5,7 +5,7 @@ using namespace ResourceSampleLookup;
 
 
 extern "C" {
-extern u8 DAT_00527248[];
+extern u8 g_resourceSampleTable[];
 
 f32 resourceGetSampleFloat(LookupOwner* owner)
 {
@@ -14,6 +14,6 @@ f32 resourceGetSampleFloat(LookupOwner* owner)
         return 0.0f;
     }
 
-    return static_cast<f32>(static_cast<u32>(DAT_00527248[entry->index]));
+    return static_cast<f32>(static_cast<u32>(g_resourceSampleTable[entry->index]));
 }
 }

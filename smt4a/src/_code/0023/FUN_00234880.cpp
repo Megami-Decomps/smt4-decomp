@@ -29,7 +29,7 @@ const char *popupSelectWeightedMessage(s32 kind, s32 id);
 // Opens the popup for the first ratio message matching the selected slot.
 void FUN_00234880(void)
 {
-    FUN_00152f44();
+    messageVoiceFlagsGet();
     if (g_popupState->state != 0) return;
     SaveSlot* slot = reinterpret_cast<SaveSlot*>(saveSlotFindSelected());
     if (slot == NULL) return;

@@ -23,7 +23,7 @@ void asdTextDrawFormatted(u32 text, s32 kind, u32 color, s32 x, s32 y, const cha
 void asdTMTexTablePrepareNodeImage(u32 id, s32 option);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                   AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, void *owner);
-s32 FUN_00221310(u32 handle);
+s32 commonBgIntroUpdate(u32 handle);
 void commonBgDestroyJobWork(u32 handle);
 s32 FUN_002ed628(u32 handle);
 
@@ -55,7 +55,7 @@ void commonBgCreate(void)
         "\x81\x40\x82\x89\x82\x83\x82\x8F\x82\x8E\x81\x44");
     asdTMTexTableLoadSprites(0x2D);
     asdTMTexTablePrepareNodeImage(0x2D, 0);
-    u32 job = taskCreateDraw(reinterpret_cast<const s8 *>("COMBG EVE CALC"), 2, 8, 0, FUN_00221310,
+    u32 job = taskCreateDraw(reinterpret_cast<const s8 *>("COMBG EVE CALC"), 2, 8, 0, commonBgIntroUpdate,
         commonBgDestroyJobWork, reinterpret_cast<u32>(work), reinterpret_cast<void *>(g_commonBg.background->counters.unk00));
     work->job = job;
     taskCreateDraw(reinterpret_cast<const s8 *>("COMBG DDRAW"), 0xE7, 8, 0, FUN_002ed628, NULL, reinterpret_cast<u32>(work), reinterpret_cast<void *>(job));

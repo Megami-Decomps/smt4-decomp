@@ -38,7 +38,7 @@ extern BattleMaskPresets g_battleMaskPresets;
 
 s32 FUN_003e0154(void);
 s32 FUN_003e0164(void);
-void FUN_004fb798(s32 a, s32 b, s32 c, u8* unit, s32 d, u32 e, u32 f, s32 g, u32 mask, s32 h, s32 i, s32 j, s32 k, s32 l, s32 m);
+void btlRecoverHpMpByPercent(s32 a, s32 b, s32 c, u8* unit, s32 d, u32 e, u32 f, s32 g, u32 mask, s32 h, s32 i, s32 j, s32 k, s32 l, s32 m);
 s32 gameDataBlocksGetTableFlag(void);
 s32 gameDataFlagTestBit(u32 bit);
 u8* gameGetSlotTable(void);
@@ -56,7 +56,7 @@ u32 FUN_0035f2f4(void)
     BattleMain* battle = reinterpret_cast<BattleMain *>(btlGetMainState());
     s32 first = FUN_003e0154();
     s32 second = FUN_003e0164();
-    FUN_004fb798(0, 0, 0, *reinterpret_cast<u8**>(reinterpret_cast<u8*>(battle) + 0x1ed4), 0, first, second, -1, 2, 0, 0, 9, 0, 0, 1);
+    btlRecoverHpMpByPercent(0, 0, 0, *reinterpret_cast<u8**>(reinterpret_cast<u8*>(battle) + 0x1ed4), 0, first, second, -1, 2, 0, 0, 9, 0, 0, 1);
 
     s32 tableFlag = gameDataBlocksGetTableFlag();
     if (tableFlag == 4 || gameDataFlagTestBit(0x80) != 0) {
@@ -68,7 +68,7 @@ u32 FUN_0035f2f4(void)
                     if (bit == 1 || bit == 3) continue;
                     mask |= 1 << (bit + 1);
                 }
-                FUN_004fb798(0, 0, 0, battle->units + (s16)side->unitIndex * 0x1d0, 0, side->spriteA, side->spriteB, -1, mask, 0, 0, 9, 0, 0, 1);
+                btlRecoverHpMpByPercent(0, 0, 0, battle->units + (s16)side->unitIndex * 0x1d0, 0, side->spriteA, side->spriteB, -1, mask, 0, 0, 9, 0, 0, 1);
             }
         }
     }

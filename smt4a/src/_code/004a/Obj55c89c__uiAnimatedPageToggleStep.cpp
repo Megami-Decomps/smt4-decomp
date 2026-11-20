@@ -28,7 +28,7 @@ void entryDispatchUpdate(void *animation, s32 track);
 void pointConvertToFloat(void *point, s32 x, s32 y);
 void uiSpriteBankApplyPreset(void *animation, s32 preset);
 s32 objectGetIndexedSignedFlag(void *animation, s32 track);
-void FUN_004a1958(AnimatedPage *page);
+void demonScreenRebuildEntryList(AnimatedPage *page);
 void FUN_004a3e04(AnimatedPage *page);
 void FUN_0032cfe0(AnimatedPage *page);
 
@@ -57,8 +57,8 @@ void Obj55c89c::uiAnimatedPageToggleStep()
         page->phase = 2;
     } else if (objectGetIndexedSignedFlag(page->animation, page->track) && page->phase == 2) {
         page->alternate = !page->alternate;
-        FUN_004a1958(page);
-        g_animatedPageSelection.selection = FUN_002a482c(page->selector) + 1;
+        demonScreenRebuildEntryList(page);
+        g_animatedPageSelection.selection = resourceDispatchTaggedOperation(page->selector) + 1;
         FUN_004a3e04(page);
         FUN_0032cfe0(page);
         pageSelectTrack(page, 8);

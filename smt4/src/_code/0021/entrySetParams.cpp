@@ -16,15 +16,15 @@ struct EntryTableInfo {
     /* 0x4 */ s32 count;
 };
 
-extern EntryTableInfo DAT_00447a28;
-extern TableEntry DAT_004a1264[];
+extern EntryTableInfo g_entryTableInfo;
+extern TableEntry g_namedEntryTable[];
 
 void entrySetParams(s32 id, u16 first, u16 second)
 {
-    for (s32 i = 0; i < DAT_00447a28.count; i++) {
-        if (DAT_004a1264[i].id == id) {
-            DAT_004a1264[i].first = first;
-            DAT_004a1264[i].second = second;
+    for (s32 i = 0; i < g_entryTableInfo.count; i++) {
+        if (g_namedEntryTable[i].id == id) {
+            g_namedEntryTable[i].first = first;
+            g_namedEntryTable[i].second = second;
             return;
         }
     }

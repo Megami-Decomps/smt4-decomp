@@ -53,7 +53,7 @@ void FUN_00410d44(ShiftEffectWork *work)
 
     switch (work->step) {
     case 0:
-        if (FUN_00163e84(0) != 0) {
+        if (screenFaderIsSettled(0) != 0) {
             if (pairedAvailabilityGetState(0) != 0) {
                 titleSetSlotValueState2(0, 10);
             }
@@ -61,7 +61,7 @@ void FUN_00410d44(ShiftEffectWork *work)
         }
         break;
     case 1:
-        if (FUN_00163e84(0) != 0) {
+        if (screenFaderIsSettled(0) != 0) {
             s32 member = 0;
 
             for (u32 i = 0; i < 12; i++) {
@@ -71,7 +71,7 @@ void FUN_00410d44(ShiftEffectWork *work)
                     u32 info;
                     u32 effectId;
 
-                    FUN_003f1b3c(state, FUN_0019acdc(slot->id, 1), 4, &info, &effectId);
+                    FUN_003f1b3c(state, unitMapIdToCategory(slot->id, 1), 4, &info, &effectId);
                     f32 value = work->members[member].value;
                     ShiftRange table[7];
 

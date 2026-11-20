@@ -56,14 +56,14 @@ void FUN_00270104(void *menu);
 u32 FUN_002cc9e0(void *menu, s32 inBattle);
 void screenSetContextHint(void *owner, s32 kind, s32 alternate);
 u8 gameDataFlagTestBit(u32 bit);
-void FUN_003756c8(s32 alternate);
+void btlPlayMenuConfirmSe(s32 alternate);
 s32 listCursorGetRowOfChildIfUnblocked(void *object);
 void ifTouchRegionRemove(void);
 void __aeabi_memset4(void *destination, u32 size, u32 value);
 s32 widgetSubCallIfVisible(ScrollSelection *list);
 s32 ifTouchRegionAddRequested(u32 file, u32 index);
 s32 uiSearchPrimary(ScrollSelection *list);
-s32 objectApplyIfUnblocked(ScrollSelection *list);
+s32 gridNavigationGetItemCount(ScrollSelection *list);
 
 /* Registers a touch region for the selection's buttons, centred on the visible count. */
 static __inline void addSelectionRegions(CommandMenuScreen *work)
@@ -105,9 +105,9 @@ void btlCommandMenuEnterMode(CommandMenuScreen *work, s32 mode, s32 rememberPrev
     if (mode == 2) {
         sysPlaySe(gameDataFlagTestBit(0x10) != 0 ? 0xB0 : 0xB1);
     } else if (mode == 9 || mode == 8 || mode == 0xB || mode == 10 || mode == 0xD || mode == 0xC) {
-        FUN_003756c8(0);
+        btlPlayMenuConfirmSe(0);
     } else if (mode == 1) {
-        FUN_003756c8(listCursorGetRowOfChildIfUnblocked(&work->lists[*selected]) == 0);
+        btlPlayMenuConfirmSe(listCursorGetRowOfChildIfUnblocked(&work->lists[*selected]) == 0);
     }
     if (rememberPrevious != 0)
         *previous = *current;
@@ -132,7 +132,7 @@ void btlCommandMenuEnterMode(CommandMenuScreen *work, s32 mode, s32 rememberPrev
             work->regions[0x16 / 2 + i] = ifTouchRegionAddRequested(0xD, first + i);
             work->regionCount++;
         }
-        if (uiSearchPrimary(work->current) < objectApplyIfUnblocked(work->current)) {
+        if (uiSearchPrimary(work->current) < gridNavigationGetItemCount(work->current)) {
             if (*selected == 1) {
                 work->regions[0x10 / 2] = ifTouchRegionAddRequested(0xD, 0x199);
                 work->regions[0x12 / 2] = ifTouchRegionAddRequested(0xD, 0x197);

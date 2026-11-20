@@ -9,9 +9,9 @@ extern "C" {
 int FUN_001628c0(unsigned char *, unsigned int, unsigned int, int);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void);
-int FUN_0025ef68(int, int, int);
+int mapResolveCollisionSphere(int, int, int);
 int FUN_002e364c(int);
-int FUN_00303460(...);
+int lmapCameraSetMode(...);
 int mapSetSceneState(int);
 int naviMainSetFlagsAndActivate(int, int, int, int, int, int);
 int mathPositionHeadingDegrees(void);
@@ -34,9 +34,9 @@ extern unsigned char DAT_005f1a4e; /* 0x5f1a4e */
 /* Supplied declaration required: FUN_001628c0. */
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
-/* Supplied declaration required: FUN_0025ef68. */
+/* Supplied declaration required: mapResolveCollisionSphere. */
 /* Supplied declaration required: FUN_002e364c. */
-/* Supplied declaration required: FUN_00303460. */
+/* Supplied declaration required: lmapCameraSetMode. */
 /* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: naviMainSetFlagsAndActivate. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
@@ -85,7 +85,7 @@ void FUN_002d91cc(void)
     *(float *)(temp_v0 + 0x20) = temp_v5 + (temp_v6 - temp_v5) * 0.16666667f;
     if (temp_v1 != 2) {
       *(float *)(temp_v0 + 0x2c) = temp_v6 - 5.0f;
-      FUN_0025ef68(temp_v0 + 0x28,temp_v0 + 0x34,0);
+      mapResolveCollisionSphere(temp_v0 + 0x28,temp_v0 + 0x34,0);
       temp_v0 = g_lmapScene;
       puVar6 = (unsigned int *)(g_lmapScene + 0x38);
       temp_v2 = *(unsigned int *)(g_lmapScene + 0x3c);
@@ -114,10 +114,10 @@ void FUN_002d91cc(void)
     }
     else {
       if (*(int *)(g_lmapScene + 8) == 2) {
-        temp_v9 = FUN_00152f44();
-        temp_v2 = FUN_0014af98();
+        temp_v9 = messageVoiceFlagsGet();
+        temp_v2 = messageVoiceBankGet();
         FUN_001628c0(&LAB_002d94f8,temp_v2,temp_v9,1);
-        FUN_00303460(0x12);
+        lmapCameraSetMode(0x12);
       }
       if (*(int *)(g_lmapScene + 8) >= 2) {
         temp_v10 = *(float *)(g_lmapScene + 0x1c);
@@ -143,7 +143,7 @@ void FUN_002d91cc(void)
           *(unsigned int *)(temp_v0 + 0x2c) = 0x445f4000;
           *(unsigned int *)(temp_v0 + 0x30) = 0x45051000;
           linkHolderSetFlag(*(unsigned int *)(temp_v0 + 0x1a8));
-          FUN_0025ef68(g_lmapScene + 0x28,g_lmapScene + 0x34,0);
+          mapResolveCollisionSphere(g_lmapScene + 0x28,g_lmapScene + 0x34,0);
           temp_v0 = g_lmapScene;
           puVar6 = (unsigned int *)(g_lmapScene + 0x38);
           temp_v9 = *(unsigned int *)(g_lmapScene + 0x3c);
@@ -151,7 +151,7 @@ void FUN_002d91cc(void)
           *(unsigned int *)(temp_v0 + 0x2c) = *puVar6;
           *(unsigned int *)(temp_v0 + 0x30) = temp_v9;
           *(unsigned char *)(g_lmapView + 0xb4) = 0;
-          FUN_00303460(0x13);
+          lmapCameraSetMode(0x13);
           temp_v4 = 180.0f;
           temp_v10 = (*(float *)(g_lmapScene + 0x50) + 180.0f) * temp_v3;
           libm_sinf();
@@ -180,7 +180,7 @@ void FUN_002d91cc(void)
       *(unsigned int *)(temp_v0 + 0x28) = 0xc4618000;
       *(unsigned int *)(temp_v0 + 0x2c) = 0x4466c000;
       *(unsigned int *)(temp_v0 + 0x30) = 0x450b5000;
-      FUN_0025ef68(temp_v0 + 0x28,temp_v0 + 0x34,0);
+      mapResolveCollisionSphere(temp_v0 + 0x28,temp_v0 + 0x34,0);
       temp_v0 = g_lmapScene;
       puVar6 = (unsigned int *)(g_lmapScene + 0x38);
       temp_v9 = *(unsigned int *)(g_lmapScene + 0x3c);
@@ -204,7 +204,7 @@ void FUN_002d91cc(void)
     if (*(int *)(temp_v0 + 8) >= 0x29) {
       *(int *)(temp_v0 + 4) = *(int *)(temp_v0 + 4) + 1;
       *(unsigned int *)(temp_v0 + 8) = 0;
-      FUN_00303460(0x14);
+      lmapCameraSetMode(0x14);
       return;
     }
     break;
@@ -231,7 +231,7 @@ void FUN_002d91cc(void)
     *(unsigned int *)(temp_v0 + 0x28) = *(unsigned int *)(temp_v0 + 0x1c);
     *(unsigned int *)(temp_v0 + 0x2c) = 0xc2be0000;
     *(float *)(temp_v0 + 0x30) = temp_v10;
-    FUN_0025ef68(temp_v0 + 0x28,temp_v0 + 0x34,0);
+    mapResolveCollisionSphere(temp_v0 + 0x28,temp_v0 + 0x34,0);
     temp_v0 = g_lmapScene;
     puVar6 = (unsigned int *)(g_lmapScene + 0x34);
     puVar5 = (unsigned int *)(g_lmapScene + 0x28);
@@ -252,7 +252,7 @@ void FUN_002d91cc(void)
       *(unsigned int *)(temp_v0 + 0x58) = temp_v9;
       *(int *)(temp_v0 + 4) = *(int *)(temp_v0 + 4) + 1;
       *(unsigned int *)(temp_v0 + 8) = 0;
-      FUN_00303460(0x15);
+      lmapCameraSetMode(0x15);
       return;
     }
     break;
@@ -262,7 +262,7 @@ void FUN_002d91cc(void)
       *(unsigned char *)(g_lmapScene + 0x6c) = 0;
       DAT_005f1a4e = 0;
       mapSetSceneState(1);
-      FUN_00303460(0);
+      lmapCameraSetMode(0);
       return;
     }
   }

@@ -5,7 +5,7 @@
 extern "C" {
 extern BgmRequestChannel g_bgmRequestChannels[2];
 extern BgmChannelSelection g_resourceSharedFlag;
-s32 FUN_00162ea4();
+s32 eventIsSkipping();
 
 /* Start or queue a track on the two BGM channels while preserving their fade state. */
 u32 soundChannelRequest(u32 track, s32 parameter)
@@ -15,7 +15,7 @@ u32 soundChannelRequest(u32 track, s32 parameter)
     u32 result = 0;
     if (jyoucyuGetTableEntry(1) != NULL || track == 0)
         return 0;
-    if (FUN_00162ea4())
+    if (eventIsSkipping())
         bgmStop(-1, 0, 1);
 
     BgmRequestChannel *active = NULL;
@@ -68,7 +68,7 @@ u32 soundChannelRequest(u32 track, s32 parameter)
                 active->flags = 5;
                 active->track.currentId = track;
                 active->play.param = parameter;
-                g_resourceSharedFlag.selected = active->play.unk00;
+                g_resourceSharedFlag.selected = active->play.index;
             }
         }
     } else {
@@ -76,7 +76,7 @@ u32 soundChannelRequest(u32 track, s32 parameter)
         other->flags = flags;
         other->track.currentId = track;
         other->play.param = parameter;
-        g_resourceSharedFlag.selected = other->play.unk00;
+        g_resourceSharedFlag.selected = other->play.index;
         if (fading)
             other->flags = flags | 0x800;
         result = 1;

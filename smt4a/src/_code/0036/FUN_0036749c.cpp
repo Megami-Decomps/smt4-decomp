@@ -30,7 +30,7 @@ extern "C" {
 
 void FUN_00233e10(s32 active, u32 record);
 void mapSetSceneState(u32 scene);
-void FUN_00303460(s32 mode);
+void lmapCameraSetMode(s32 mode);
 void FUN_00324e38(s32 mode);
 void FUN_00327ee8(void);
 void FUN_002e364c(f32 *position);
@@ -40,7 +40,7 @@ f32 distSpatial(void);
 f32 mathPositionHeadingDegrees(void);
 void sysPlaySe(u32 sound);
 s32 inputIsQuestMenuPressed(void);
-s32 FUN_004d0584(void);
+s32 inputConfirmPressed(void);
 s32 padButtonIsPressed(u32 button);
 
 /* Moves the target to the spawn position, pushed out behind `heading`. */
@@ -75,7 +75,7 @@ void FUN_0036749c(void)
             scene->pose.targetHeading = mathPositionHeadingDegrees();
             lmapPlaceBehind(scene, scene->pose.targetHeading);
         }
-        FUN_00303460(10);
+        lmapCameraSetMode(10);
         g_lmapView->contextMode = -1;
         sysPlaySe(LMAP_SOUND_ENTER);
         FUN_00233e10(1, g_gameState.overviewRecord);
@@ -99,13 +99,13 @@ void FUN_0036749c(void)
     case LMAP_STATE_WAIT:
         scene->stateTime++;
         FUN_00233e10(1, g_gameState.overviewRecord);
-        if (FUN_004d0584() != 0) {
+        if (inputConfirmPressed() != 0) {
             g_lmapScene->state = LMAP_STATE_ENTER;
             g_lmapScene->stateTime = 0;
         } else if (padButtonIsPressed(LMAP_BUTTON_ACCEPT) != 0 || inputIsQuestMenuPressed() != 0) {
             g_lmapView->heading = g_lmapScene->pose.targetHeading;
             g_lmapView->contextMode = 0;
-            FUN_00303460(0);
+            lmapCameraSetMode(0);
             g_lmapScene->moveMode = 0;
             g_lmapScene->moveSpeed = 5.0f;
             FUN_00233e10(0, g_gameState.overviewRecord);

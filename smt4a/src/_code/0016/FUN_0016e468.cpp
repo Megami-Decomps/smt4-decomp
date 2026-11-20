@@ -9,8 +9,8 @@ int sysFatalBreak(void);
 extern unsigned char DAT_005b4790; /* 0x5b4790 */
 extern int DAT_005b479c; /* 0x5b479c */
 
-extern int FUN_0016f864(void);
-extern unsigned int asdModelForwardChecked(unsigned int *, char *, unsigned int, unsigned int);
+extern int srvInitialize(void);
+extern unsigned int srvGetServiceHandle(unsigned int *, char *, unsigned int, unsigned int);
 /* Supplied declaration required: sysFatalBreak. */
 extern unsigned int FUN_001a0e10(void);
 extern unsigned int libc_strlen(char *);
@@ -30,7 +30,7 @@ unsigned int FUN_0016e468(void)
   temp_v0 = FUN_001a0e10();
   nn_os_CriticalSection_Enter(temp_v0);
   if ((*(int *)((unsigned char *)&DAT_005b4790 + 0x8)) == 0) {
-    temp_v1 = FUN_0016f864();
+    temp_v1 = srvInitialize();
     if (temp_v1 < 0) {
       sysFatalBreak();
     }
@@ -39,7 +39,7 @@ unsigned int FUN_0016e468(void)
     }
     else {
       temp_v2 = libc_strlen("cfg:u");
-      temp_v3 = asdModelForwardChecked((unsigned int *)&DAT_005b479c,"cfg:u",temp_v2,0);
+      temp_v3 = srvGetServiceHandle((unsigned int *)&DAT_005b479c,"cfg:u",temp_v2,0);
       if ((temp_v3 & 0x80000000) != 0) {
         temp_v3 = 0xd92103fb;
       }

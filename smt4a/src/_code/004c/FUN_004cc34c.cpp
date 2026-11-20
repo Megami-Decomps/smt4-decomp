@@ -25,10 +25,10 @@ s32 loadSlotIsLoaded(u32 slot);
 void FUN_004cbb38(CallbackWorkflow *work);
 void FUN_004cbd70(CallbackWorkflow *work);
 u16 *saveGetSelectedRecordSlot(u32 region);
-void FUN_0022e774();
+void statusPanelClose();
 void statusDownRestartTransition();
 void countersAddSaturating(u32 index, s32 value);
-s32 FUN_0026c3a0();
+s32 gameGlobalsIsActiveStateFour();
 s32 FUN_002effbc();
 s32 btlTalkBustUpGetValue();
 void btlTalkBustUpSetDemonTexture(u16 entry, u32 option);
@@ -36,7 +36,7 @@ void btlTalkBustUpSetUnk2F4(u32 value);
 void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 s32 btlTalkBustupMatchesEntry(u16 entry);
 s32 bgmGetStateById(u32 id);
-void FUN_002c85b0(u32 value);
+void gameGlobalsSetSceneState(u32 value);
 void FUN_002c39dc(u32 first, u32 second, u32 third);
 void FUN_00284ee4(u32 value);
 void FUN_00215bbc();
@@ -83,13 +83,13 @@ extern "C" s32 FUN_004cc34c(CallbackWorkflow *work)
         SlotRecordA *record = gameGetSlotRecord(work->slot);
         switch (work->step) {
         case 0:
-            FUN_0022e774();
+            statusPanelClose();
             statusDownRestartTransition();
             countersAddSaturating(6, 1);
             ++work->step;
             break;
         case 1:
-            if (!FUN_0026c3a0() || !FUN_002effbc())
+            if (!gameGlobalsIsActiveStateFour() || !FUN_002effbc())
                 break;
             if (!btlTalkBustUpGetValue()) {
                 btlTalkBustUpSetDemonTexture(record->id, 1);
@@ -121,7 +121,7 @@ extern "C" s32 FUN_004cc34c(CallbackWorkflow *work)
         region[2] = 0;
         region[3] = 0;
         work->region = ~0u;
-        FUN_002c85b0(0);
+        gameGlobalsSetSceneState(0);
         FUN_002c39dc(17, 0, ~0u);
         FUN_00284ee4(1);
         FUN_00215bbc();

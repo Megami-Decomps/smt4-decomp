@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_002e9f00(u8 *member, s32 value);
+void onlineInstanceCompleteWithChildren(u8 *member, s32 value);
 u32 *ptrTake(u32 *slot);
 
 typedef struct Object Object;
@@ -24,7 +24,7 @@ typedef struct Owner {
     /* 0x1A8 */ Object *object;
 } Owner;
 
-/* Destroys the objects taken out of the two slots at 0x90 and 0x98, then runs FUN_002e9f00 on the member at 0xD0 and destroys and clears the object at 0x1A8. */
+/* Destroys the objects taken out of the two slots at 0x90 and 0x98, then runs onlineInstanceCompleteWithChildren on the member at 0xD0 and destroys and clears the object at 0x1A8. */
 void FUN_002faf62(Owner *owner)
 {
     Object *object;
@@ -37,7 +37,7 @@ void FUN_002faf62(Owner *owner)
         (object = (Object *)ptrTake(&owner->slotB), object != NULL)) {
         object->vtbl->destroy(object);
     }
-    FUN_002e9f00(owner->memberD0, 4);
+    onlineInstanceCompleteWithChildren(owner->memberD0, 4);
     if (owner->object != NULL) {
         owner->object->vtbl->destroy(owner->object);
         owner->object = NULL;

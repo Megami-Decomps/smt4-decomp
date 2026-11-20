@@ -50,7 +50,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: skeletonUpdateWorldMatrices. */
-extern int FUN_001a7a20(int, unsigned char *, unsigned int);
+extern int nameTableLookupEntry(int, unsigned char *, unsigned int);
 extern unsigned int libc_strlen(unsigned char *);
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: __hardfp_atan2f. */
@@ -127,7 +127,7 @@ void FUN_003a2904(void)
         temp_v4 = *(int *)(*(int *)(temp_v0 + 0xa8) + 4);
         temp_v0 = *(int *)(temp_v4 + 0x210);
         temp_v1 = libc_strlen(&LAB_003a2e90);
-        temp_v0 = FUN_001a7a20(temp_v0 + 0x74,&LAB_003a2e90,temp_v1);
+        temp_v0 = nameTableLookupEntry(temp_v0 + 0x74,&LAB_003a2e90,temp_v1);
         temp_v5 = *(int *)(temp_v4 + 0x108);
         temp_v2 = *(int *)(temp_v5 + 0xc);
         temp_v7 = *(float *)(g_lmapScene + 0x1c);
@@ -183,7 +183,7 @@ void FUN_003a2904(void)
         temp_v0 = *(int *)(temp_v4 + 0x210);
         temp_v7 = temp_v22;
         temp_v1 = libc_strlen(&LAB_003a2c30);
-        temp_v0 = FUN_001a7a20(temp_v0 + 0x74,&LAB_003a2c30,temp_v1);
+        temp_v0 = nameTableLookupEntry(temp_v0 + 0x74,&LAB_003a2c30,temp_v1);
         temp_v5 = *(int *)(temp_v4 + 0x108);
         temp_v2 = *(int *)(temp_v5 + 0xc);
         temp_v9 = *(float *)(g_lmapScene + 0x1c);

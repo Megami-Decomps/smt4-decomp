@@ -23,7 +23,7 @@ extern unsigned char DAT_005595c8; /* 0x5595c8 */
 /* Supplied declaration required: FUN_0013175e. */
 /* Supplied declaration required: asdOperatorDeleteArray. */
 extern int _ZN9Obj55aff4D1Ev(unsigned int *);
-extern int FUN_002ea00c(int);
+extern int destroyObj005585a4(int);
 extern int FUN_002f8760(int);
 /* Supplied declaration required: FUN_002fe97c. */
 extern int _ZN9Obj558aacD1Ev(int);
@@ -59,7 +59,7 @@ unsigned long long FUN_00113c60(unsigned int *param_1,unsigned int param_2,int p
       asdOperatorDeleteArray(piVar3);
     }
   }
-  temp_v0 = FUN_002ea00c(temp_v0 - 0x90);
+  temp_v0 = destroyObj005585a4(temp_v0 - 0x90);
   temp_v0 = _ZN9Obj558aacD1Ev(temp_v0 - 0x30);
   temp_v0 = _ZN9Obj558aacD1Ev(temp_v0 - 0x1c);
   temp_v0 = FUN_002f8760(temp_v0 - 0x18);

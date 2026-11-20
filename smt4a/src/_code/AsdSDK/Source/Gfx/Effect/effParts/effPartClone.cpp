@@ -47,9 +47,9 @@ extern "C" {
 void sysMemClear(void *block, s32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void effPartInitDefaults(void *part);
-void FUN_001b4eb8(EffPartList *part, const EffOrientation *orientation);
-void FUN_001acb48(EffPartList *part, const EffOrientation *orientation);
-void FUN_001ac8ec(EffPartList *part, f32 scale);
+void skelNodePoseChain(EffPartList *part, const EffOrientation *orientation);
+void effectTimelinePartApplyRotation(EffPartList *part, const EffOrientation *orientation);
+void effectParticleEmitterSetAdvance(EffPartList *part, f32 scale);
 void FUN_001b4c1c(EffPartList *part, s32 value);
 
 /* Create an empty part (the body of effPartCreate). */
@@ -113,9 +113,9 @@ EffPartList *effPartClone(EffPartList *source)
     orientation.y = 0;
     orientation.z = 0;
     orientation.w = unitScale;
-    FUN_001b4eb8(part, &orientation);
-    FUN_001acb48(part, &orientation);
-    FUN_001ac8ec(part, unitScale);
+    skelNodePoseChain(part, &orientation);
+    effectTimelinePartApplyRotation(part, &orientation);
+    effectParticleEmitterSetAdvance(part, unitScale);
     FUN_001b4c1c(part, -1);
     return part;
 }

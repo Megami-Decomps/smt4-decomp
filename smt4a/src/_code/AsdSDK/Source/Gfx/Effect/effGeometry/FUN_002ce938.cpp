@@ -21,7 +21,7 @@ typedef char EffectGeometryBatchLayout[sizeof(EffectGeometryBatchView) == 0x5c &
     offsetof(EffectGeometryBatchView, matrix) == 0x18 ? 1 : -1];
 
 extern "C" {
-extern const char DAT_0054baf8[];
+extern const char g_effGeometrySourceFileName[];
 void *memAlloc(u32, u32, u32, u32, u32, u32);
 void *asdMemoryAllocTraced(u32, const char *, u32);
 EffectGeometrySlotView *slotReset(EffectGeometrySlotView *);
@@ -31,15 +31,15 @@ void matrix44SetIdentity(f32 *);
 /* Allocate a geometry batch, its vertex slot and opaque white per-item colors. */
 EffectGeometryBatchView *FUN_002ce938(s32 count, s32 verticesPerItem, s32 trianglesPerItem, u16 flags)
 {
-    asdDebugTrace(DAT_0054baf8, 504);
+    asdDebugTrace(g_effGeometrySourceFileName, 504);
     EffectGeometryBatchView *batch = static_cast<EffectGeometryBatchView *>(memAlloc(0x10000, 0x100, 0, sizeof(EffectGeometryBatchView), 0x10, 1));
-    EffectGeometrySlotView *slotMemory = static_cast<EffectGeometrySlotView *>(asdMemoryAllocTraced(sizeof(EffectGeometrySlotView), DAT_0054baf8, 506));
+    EffectGeometrySlotView *slotMemory = static_cast<EffectGeometrySlotView *>(asdMemoryAllocTraced(sizeof(EffectGeometrySlotView), g_effGeometrySourceFileName, 506));
     EffectGeometrySlotView *slot = (slotMemory != NULL) ? slotReset(slotMemory) : NULL;
     s32 triangles = trianglesPerItem * count;
     s32 vertices = verticesPerItem * count;
     slotInit(slot, 0x25, triangles * 3, vertices);
     batch->slot = slot;
-    asdDebugTrace(DAT_0054baf8, 511);
+    asdDebugTrace(g_effGeometrySourceFileName, 511);
     batch->colors = static_cast<EffectColor *>(memAlloc(0x10000, 0x100, 0, count * sizeof(EffectColor), 0x10, 1));
     for (u16 i = 0; i < count; ++i) {
         EffectColor *color = &batch->colors[i];

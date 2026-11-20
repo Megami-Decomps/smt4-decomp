@@ -25,9 +25,9 @@ void battleSaveCameraVectors(BtlMainState *context);
 void vec3CopyFromOffsetC(void *main);
 s32 pairedEntryTableContains(BtlMainState *context, u16 id);
 void btlQueueKeyedScalarReflectAction(s32, s32, s32, s32, s32, s32, s32);
-void FUN_00254f58(BtlMainState *context);
+void battleInitializeTurnOrder(BtlMainState *context);
 void btlSetSelectedListedValue(s32 value);
-void FUN_002c29d8(u32 channel, u32 frames, u32 volume);
+void screenFadeStartIn(u32 channel, u32 frames, u32 volume);
 
 /* Starts loading the arrangement file for the encounter. */
 static __inline void battleEncounterLoadArrangement(BattleEncounterQuery *query, BtlMainState *context)
@@ -84,17 +84,17 @@ void FUN_0023f500(BattleEncounterQuery *query, BtlMainState *context)
                 }
             }
             btlQueueKeyedScalarReflectAction(0, 0, 0x100017b, 0, 0, 0, 0);
-            FUN_00254f58(context);
+            battleInitializeTurnOrder(context);
             context->battleFlags |= 0x200000;
             if (!(context->encounter.flagsE4 & 0x20)) {
                 btlSetSelectedListedValue(3);
             }
         }
         if (pairedAvailabilityGetState(0) == 3) {
-            FUN_002c29d8(0, 10, 0xff);
+            screenFadeStartIn(0, 10, 0xff);
         }
         if (pairedAvailabilityGetState(1) == 3) {
-            FUN_002c29d8(1, 10, 0xff);
+            screenFadeStartIn(1, 10, 0xff);
         }
         if (screenFadesAllReady() != 0) {
             query->step = 0xe;

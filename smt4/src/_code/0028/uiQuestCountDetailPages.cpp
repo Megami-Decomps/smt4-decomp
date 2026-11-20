@@ -2,7 +2,7 @@
 #include "quest_center/QuestRecord.h"
 
 extern "C" {
-s32 FUN_00241c40(s32 id);
+s32 questGetDetailPageCount(s32 id);
 s32 FUN_00298dc8(s32 id);
 s32 idIsAtLeast350(s32 id);
 
@@ -16,7 +16,7 @@ void uiQuestCountDetailPages(u16 id)
     if (quest->panelView.panel.detailMode != 0) {
         if (questDataGetRecord(id)->flags & 0x40)
             ++quest->panelView.panel.page;
-        if (FUN_00241c40(id) > 0)
+        if (questGetDetailPageCount(id) > 0)
             ++quest->panelView.panel.page;
     }
     if (quest->panelView.panel.detailMode == 0) {
@@ -26,7 +26,7 @@ void uiQuestCountDetailPages(u16 id)
         if (FUN_00298dc8(id) | defaultKind) {
             if (questDataGetRecord(id)->flags & 0x40)
                 ++quest->panelView.panel.page;
-            if (FUN_00241c40(id) > 0)
+            if (questGetDetailPageCount(id) > 0)
                 ++quest->panelView.panel.page;
         }
     }

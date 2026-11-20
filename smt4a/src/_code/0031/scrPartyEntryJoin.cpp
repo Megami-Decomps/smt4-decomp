@@ -5,7 +5,7 @@ extern "C" {
 extern u32 scrGetArg(u32 index);
 extern s32 scrGetCommandFrame(void);
 extern void partyEntrySetBit0AndFlag80(u32 id);
-extern s32 FUN_00162ea4(void);
+extern s32 eventIsSkipping(void);
 extern void uiQuestCreate(void);
 extern void FUN_003a7c3c(u32 id);
 extern s32 stateHolder4IsZero2(void);
@@ -20,7 +20,7 @@ s32 scrPartyEntryJoin(void)
 
     if (scrGetCommandFrame() == 0) {
         partyEntrySetBit0AndFlag80(id);
-        if (FUN_00162ea4() != 0) {
+        if (eventIsSkipping() != 0) {
             return 1;
         }
         uiQuestCreate();

@@ -8,6 +8,6 @@ void FUN_0014375c(void *work, f32 left, f32 right);
 
 void effectRestoreSavedRenderPairs(void *owner, void *resource);
 
-u8 FUN_0014af98(void);
+u8 messageVoiceBankGet(void);
 
 } /* extern "C" */

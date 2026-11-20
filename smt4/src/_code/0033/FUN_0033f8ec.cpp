@@ -3,8 +3,8 @@
 #include "battle/btlHelp.h"
 
 extern "C" {
-extern u32 FUN_0023dcfc(u32 kind);
-extern s32 FUN_00245cc0(u32 stat);
+extern u32 btlQueueParamLimitForKind(u32 kind);
+extern s32 mapCategoryToDestinationGroup(u32 stat);
 }
 
 /* A battle entry; its id selects the stat row. */
@@ -26,13 +26,13 @@ static __inline bool statMeetsCondition(s16 value, s32 condition, u32 stat)
         return value <= 0;
     }
     if (condition > 0) {
-        s16 cap = (s16)FUN_0023dcfc(stat);
+        s16 cap = (s16)btlQueueParamLimitForKind(stat);
         return value >= cap;
     }
     if (condition >= 0) {
         return false;
     }
-    s16 floor = (s16)FUN_00245cc0(stat);
+    s16 floor = (s16)mapCategoryToDestinationGroup(stat);
     return floor >= value;
 }
 

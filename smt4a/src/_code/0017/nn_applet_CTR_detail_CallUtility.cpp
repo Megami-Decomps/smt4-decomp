@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00189a38(int, int);
+int errThrowFatal(int, int);
 int nn_applet_CTR_detail_OpenSession(void);
 int nn_applet_CTR_detail_CloseSession(void);
 
@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_6_stack;
 
-/* Supplied declaration required: FUN_00189a38. */
+/* Supplied declaration required: errThrowFatal. */
 /* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
 /* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 extern int FUN_0018baec(unsigned int, unsigned int *);
@@ -41,7 +41,7 @@ int nn_applet_CTR_detail_CallUtility(unsigned int param_1,unsigned int *param_2,
   }
   temp_v0 = FUN_0018baec(param_1,param_2);
   if (temp_v0 < 0) {
-    FUN_00189a38(temp_v0,0x170e1c);
+    errThrowFatal(temp_v0,0x170e1c);
   }
   if (param_4 == 0 || param_5 == 0) {
     temp_v3 = 0;

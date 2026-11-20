@@ -9,7 +9,7 @@ void *asdTMTexLoadMainHeap(u32 node, s32 entry);
 void packageFileDisableByKindName(AocSystemA *system, u32 node, s32 entry);
 bool aocRunByName(AocSystemA *system, u32 node, u32 entry, s32 checked);
 void *texTableRequestNamedTextureLoad(AocSystemA *system, u32 node, s32 entry, u32 size);
-bool FUN_00162ea4();
+bool eventIsSkipping();
 void bustupSpriteStartTransition(TextureSwap *work, s32 state, s32 arg);
 
 void uiSpriteReplaceTextureEntry(TextureSwap *work, s32 entry, s32 transition)
@@ -35,7 +35,7 @@ void uiSpriteReplaceTextureEntry(TextureSwap *work, s32 entry, s32 transition)
                 packageFileDisableByKindName(g_aocSystem, work->node, work->entry);
                 work->texture = NULL;
             }
-            if (FUN_00162ea4()) {
+            if (eventIsSkipping()) {
                 work->deferred = 1;
             } else {
                 if (work->texture != NULL) {

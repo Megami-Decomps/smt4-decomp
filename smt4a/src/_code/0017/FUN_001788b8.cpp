@@ -6,7 +6,7 @@ extern "C" {
 extern s32 soundGroupUpdate(void *archive, u32 id, u32 *range);
 extern s32 nw_snd_SoundArchive_GetSoundType(void *archive, u32 id);
 extern s32 FUN_00194d6c(SoundLoader *loader, u32 id, u32 flags);
-extern u32 FUN_001a8e14(void *archive, u32 id);
+extern u32 soundArchiveFileEntryIsLoaded(void *archive, u32 id);
 extern s32 soundInfoOwnerReadInfo(void *archive, u32 id, u32 *size);
 extern void FUN_00190fc8(u8 reader[20], u32 fileData);
 extern s32 nw_snd_internal_WaveSoundFileReader_ReadNoteInfo(u8 reader[20], WaveNoteInfo *info, u32 size, u32 flag);
@@ -36,7 +36,7 @@ s32 FUN_001788b8(SoundLoader *loader, u32 id, u32 flags)
         }
     } else if (type == SND_SOUND_TYPE_WAVE) {
         for (sound = range[0]; sound <= range[1]; sound++) {
-            s32 loaded = loader->vtbl->isFileLoaded(loader, FUN_001a8e14(loader->archive, sound));
+            s32 loaded = loader->vtbl->isFileLoaded(loader, soundArchiveFileEntryIsLoaded(loader->archive, sound));
 
             if ((flags & 10) != 0 && loaded == 0) {
                 return 0;

@@ -5,7 +5,7 @@
 
 extern "C" {
 
-extern s32 FUN_0029a9d4(s32 arg, s32 mode);
+extern s32 skillGetDiscountedCost(s32 arg, s32 mode);
 extern s32 appGetRemainingCapacity(s32 arg);
 
 /* Compares `arg`'s value with the limit of unit `unit` (the player's data when `unit` is negative):
@@ -17,7 +17,7 @@ s32 FUN_002987d8(s32 unit, s32 arg)
     skillDataFindById(arg);
     if (unit < 0) {
         PlayerDataIV *player = gameGetPlayerData();
-        if (FUN_0029a9d4(arg, 1) <= player->mp) {
+        if (skillGetDiscountedCost(arg, 1) <= player->mp) {
             result = 1;
         }
     } else {

@@ -21,14 +21,14 @@ struct MovieAudioState {
     u32 voiceCount;
 };
 extern "C" {
-extern MovieAudioState DAT_0044d0f8;
+extern MovieAudioState g_soundVoicePool;
 extern AsdCriticalSectionInit DAT_004c40f8;
 extern ThreadHandleState DAT_0044d128;
 void nn_snd_CTR_Voice_SetState(u32, u32);
-s32 FUN_002c40f8(s32 *, const u32 *, s32, u32, s64);
+s32 svcWaitSynchronizationN(s32 *, const u32 *, s32, u32, s64);
 void nn_os_Thread_FinalizeImpl(ThreadHandleState *);
 void svcCloseHandle(u32);
-void FUN_002c3f5c(void *);
+void addressSpaceRegionFree(void *);
 void asdMemFreeNonNull(void *);
 void asdMemFree(void *);
 void sndVoiceFree(u32);
@@ -56,7 +56,7 @@ static __inline void releaseVoice(MovieAudioState *state, s32 index)
 
 void mobiclipAudioDeviceFinalize()
 {
-    MovieAudioState *state = &DAT_0044d0f8;
+    MovieAudioState *state = &g_soundVoicePool;
     if (!state->allocator)
         return;
     nn_os_CriticalSection_Enter((CriticalSection *)&DAT_004c40f8);
@@ -68,7 +68,7 @@ void mobiclipAudioDeviceFinalize()
     state->running = 0;
     u32 handle = DAT_0044d128.handle;
     s32 index;
-    s32 result = FUN_002c40f8(&index, &handle, 1, 0, -1);
+    s32 result = svcWaitSynchronizationN(&index, &handle, 1, 0, -1);
     bool failed = nnResultIsFailure(result);
     if (failed)
         resultHandleFailure(result, failed);
@@ -78,10 +78,10 @@ void mobiclipAudioDeviceFinalize()
         svcCloseHandle(DAT_0044d128.handle);
         DAT_0044d128.handle = 0;
     }
-    FUN_002c3f5c(state->threadObject);
+    addressSpaceRegionFree(state->threadObject);
     void *thread = state->threadObject;
     if (thread) {
-        FUN_002c3f5c(thread);
+        addressSpaceRegionFree(thread);
         asdMemFreeNonNull(thread);
     }
     state->threadObject = NULL;

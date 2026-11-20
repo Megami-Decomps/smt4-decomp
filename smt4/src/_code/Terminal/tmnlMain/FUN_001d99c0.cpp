@@ -12,21 +12,21 @@ extern "C" {
 int asdModelSlotSetColor(...);
 int asdModelSlotSetTint(...);
 int floatInterpolateOverDuration(...);
-int FUN_00297684(void); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
+int lmapPlayerModelDestroy(void); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
 int buttonHelpSetContext(...);
 int VectorSignedToFloat(...);
 
 int asdMdlManagerMarkDestroy(void);
 int gameStateClearFlag(void);
 int gfxObjectDestroy(...);
-int FUN_002636b0(void);
-int FUN_002636d0(...);
+int placeWindowStartClose(void);
+int buttonHelpSetPanelState(...);
 int mapDepartSetTarget(...);
 void mdlPartsRelease(void *model);
 int touchMenuClose(void);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
-int FUN_0029ae60(...);
+int linkHolderClearFlagGroup(...);
 int gameCounterAddSaturating(...);
 void modelRemoveFromSlotList(...);
 int soundChannelStopAll(...);
@@ -51,19 +51,19 @@ int titleRestartSlotState3(...);
 int FUN_00287030(...);
 int scrScriptProcessStartEntry(...);
 int scrScriptProcessCreate(...);
-int FUN_0029b8ec(...);
+int linkHolderSetFlagGroup(...);
 int FUN_0029bb08(...);
 int slotSetRequest(...);
 int useCounterRelease(void);
 int useCounterStart(void);
-int FUN_0029e328(...);
+int useCounterAppendValue(...);
 int sortMenuCreate(...);
 int titleSetSlotValueState2(...);
-int FUN_002a5704(...);
+int modelHolderSelectPrimaryMotion(...);
 int resOwnerRunNodeHandlers(...);
 int buttonHelpSetPreset(...);
-int FUN_002c1658(...);
-int FUN_002c29d8(...);
+int inputQueryButtonState(...);
+int screenFadeStartIn(...);
 int obj7ECSetPair(...);
 int FUN_002fc008(...);
 
@@ -82,13 +82,13 @@ int soundChannelRequestIfEnabled(...);
 int lightOwnerRegister(...);
 int FUN_002a04f0(int);
 int FUN_002a09b4(unsigned char *, int);
-int FUN_002a3ab0(void);
-int FUN_002a4e98(void);
+int skelNodePoseChain(void);
+int effPartCreateFromSource(void);
 int cameraExportParameters(short [6], unsigned int);
 int FUN_002c159c(unsigned int *);
-int FUN_002c1e30(...);
-int FUN_002c1edc(...);
-int FUN_002c2044(unsigned int *, int);
+int stereoCameraSetPerspective(...);
+int cameraMatrixCacheSetLookAt(...);
+int cameraMatrixCacheReset(unsigned int *, int);
 int asdOperatorNew(void);
 int FUN_002e2948(...);
 
@@ -134,8 +134,8 @@ extern int FUN_0025a030(unsigned int);
 /* Supplied declaration required: gfxObjectDestroy. */
 /* Supplied declaration required: asdModelSlotSetColor. */
 /* Supplied declaration required: asdModelSlotSetTint. */
-/* Supplied declaration required: FUN_002636b0. */
-/* Supplied declaration required: FUN_002636d0. */
+/* Supplied declaration required: placeWindowStartClose. */
+/* Supplied declaration required: buttonHelpSetPanelState. */
 extern int effectAreAllCompletionChecksReady(unsigned int);
 extern int effTimelineIsDone(unsigned int);
 /* Supplied declaration required: placeWinCreate. */
@@ -162,11 +162,11 @@ extern unsigned int *_ZN9Obj4206e8C1Ev(void);
 /* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: scrScriptProcessCreate. */
-/* Supplied declaration required: FUN_00297684. */
+/* Supplied declaration required: lmapPlayerModelDestroy. */
 /* Supplied declaration required: FUN_00298d50. */
 extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_0029ae60. */
-/* Supplied declaration required: FUN_0029b8ec. */
+/* Supplied declaration required: linkHolderClearFlagGroup. */
+/* Supplied declaration required: linkHolderSetFlagGroup. */
 /* Supplied declaration required: FUN_0029bb08. */
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: gameCounterAddSaturating. */
@@ -177,17 +177,17 @@ extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: useCounterRelease. */
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
-/* Supplied declaration required: FUN_0029e328. */
+/* Supplied declaration required: useCounterAppendValue. */
 /* Supplied declaration required: sortMenuCreate. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: titleSetSlotValueState2. */
 /* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: FUN_002a04f0. */
 /* Supplied declaration required: FUN_002a09b4. */
-/* Supplied declaration required: FUN_002a3ab0. */
+/* Supplied declaration required: skelNodePoseChain. */
 /* Supplied declaration required: asdWorkAreaReset. */
-/* Supplied declaration required: FUN_002a4e98. */
-/* Supplied declaration required: FUN_002a5704. */
+/* Supplied declaration required: effPartCreateFromSource. */
+/* Supplied declaration required: modelHolderSelectPrimaryMotion. */
 /* Supplied declaration required: messageStatesSetFirst. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdModelSlotRelease. */
@@ -204,19 +204,19 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: messageSetConfirmDisplayMode. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c159c. */
-/* Supplied declaration required: FUN_002c1658. */
-/* Supplied declaration required: FUN_002c1e30. */
-/* Supplied declaration required: FUN_002c1edc. */
-/* Supplied declaration required: FUN_002c2044. */
+/* Supplied declaration required: inputQueryButtonState. */
+/* Supplied declaration required: stereoCameraSetPerspective. */
+/* Supplied declaration required: cameraMatrixCacheSetLookAt. */
+/* Supplied declaration required: cameraMatrixCacheReset. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: resourceListDestroy. */
-/* Supplied declaration required: FUN_002c29d8. */
+/* Supplied declaration required: screenFadeStartIn. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: asdSequenceRequest. */
 extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 extern unsigned int asdLoadFileSync(unsigned char *, unsigned char *, unsigned int, unsigned int);
-extern int FUN_002c79c4(unsigned int);
+extern int effectTimelineChildrenFit(unsigned int);
 /* Supplied declaration required: useCounterSelectMode2. */
 /* Supplied declaration required: obj7ECSetPair. */
 /* Supplied declaration required: FUN_002e2948. */
@@ -271,14 +271,14 @@ unsigned int FUN_001d99c0(void)
   if ((unsigned int)g_tmnl[4] >= 2) {
     cameraExportParameters(temp_v7,g_tmnl[g_tmnl[0x154] + 0xf]);
     FUN_002c159c(puVar2 + 0x12);
-    FUN_002c1edc(puVar2 + 0x12,temp_v7,temp_v8,temp_v9);
-    FUN_002c1e30(puVar2 + 0x12,1);
+    cameraMatrixCacheSetLookAt(puVar2 + 0x12,temp_v7,temp_v8,temp_v9);
+    stereoCameraSetPerspective(puVar2 + 0x12,1);
     temp_v6 = 0;
     in_s0 = temp_v10;
     do {
       if (*(char *)(puVar2 + temp_v6 * 3 + 0x15b) != '\0') {
         effectNodeUpdateTransform(puVar2[temp_v6 * 3 + 0x15a]);
-        temp_v2 = FUN_002c79c4(puVar2[temp_v6 * 3 + 0x15a]);
+        temp_v2 = effectTimelineChildrenFit(puVar2[temp_v6 * 3 + 0x15a]);
         if (temp_v2 != 0) {
           *(unsigned char *)(puVar2 + temp_v6 * 3 + 0x15b) = 0;
         }
@@ -336,11 +336,11 @@ unsigned int FUN_001d99c0(void)
         FUN_002a09b4(&LAB_001d9df4,0);
         FUN_002a04f0(0);
         FUN_00263988(puVar7,2);
-        FUN_002c2044(puVar7 + 0x12,1);
+        cameraMatrixCacheReset(puVar7 + 0x12,1);
         cameraExportParameters(temp_v7,puVar7[puVar7[0x154] + 0xf]);
         FUN_002c159c(puVar7 + 0x12);
-        FUN_002c1edc(puVar7 + 0x12,temp_v7,temp_v8,temp_v9);
-        FUN_002c1e30(puVar7 + 0x12,1);
+        cameraMatrixCacheSetLookAt(puVar7 + 0x12,temp_v7,temp_v8,temp_v9);
+        stereoCameraSetPerspective(puVar7 + 0x12,1);
         FUN_00298d50(puVar7 + 0x12);
         placeWinCreate();
         commonBgAcquire();
@@ -372,9 +372,9 @@ unsigned int FUN_001d99c0(void)
         temp_v6 = 0;
         do {
           temp_v3 = puVar7[temp_v6 * 3 + 0x159];
-          FUN_002a4e98();
+          effPartCreateFromSource();
           puVar7[temp_v6 * 3 + 0x15a] = temp_v3;
-          FUN_002a3ab0();
+          skelNodePoseChain();
           temp_v2 = temp_v6 + 1;
           *(unsigned char *)(puVar7 + temp_v6 * 3 + 0x15b) = 0;
           temp_v6 = temp_v2;
@@ -438,7 +438,7 @@ unsigned int FUN_001d99c0(void)
           *(char *)((int)puVar2 + 9) = temp_v1;
         }
         temp_v6 = 0;
-        FUN_002c1658(0,1);
+        inputQueryButtonState(0,1);
         if (temp_v6 != 0) {
           puVar2[4] = 0;
           puVar2[5] = 0;
@@ -449,7 +449,7 @@ unsigned int FUN_001d99c0(void)
       case 2:
         temp_v6 = objSlotsAllEmpty(puVar2[0xc]);
         if (temp_v6 != 0) {
-          FUN_002a5704(puVar2[0xc],0);
+          modelHolderSelectPrimaryMotion(puVar2[0xc],0);
           FUN_0029bb08(puVar2[0xc]);
           puVar2[6] = g_gameState.mapId;
           puVar2[7] = DAT_0049f920;
@@ -472,11 +472,11 @@ unsigned int FUN_001d99c0(void)
           puVar2[0xb] = temp_v3;
           temp_v6 = pairedAvailabilityGetState(0);
           if (temp_v6 == 3) {
-            FUN_002c29d8(0,10,0xff);
+            screenFadeStartIn(0,10,0xff);
           }
           temp_v6 = pairedAvailabilityGetState(1);
           if (temp_v6 == 3) {
-            FUN_002c29d8(1,10,0xff);
+            screenFadeStartIn(1,10,0xff);
           }
           FUN_002fc008(puVar2);
           if (*(unsigned char *)((int)g_tmnl + 9) != 0) {
@@ -578,7 +578,7 @@ unsigned int FUN_001d99c0(void)
                   temp_v3 = 0x4a;
                 }
               }
-              FUN_0029e328(temp_v3);
+              useCounterAppendValue(temp_v3);
 LAB_001da45c:
               temp_v6 = temp_v6 + 1;
             } while (temp_v6 < (int)puVar2[0x179]);
@@ -660,13 +660,13 @@ LAB_001da638:
           FUN_0020ffe8(puVar2[0xc],0);
         }
         temp_v6 = 6;
-        FUN_002c1658(6,2);
+        inputQueryButtonState(6,2);
         if (temp_v6 == 0) {
           temp_v6 = 9;
-          FUN_002c1658(9,2);
+          inputQueryButtonState(9,2);
           if (temp_v6 == 0) {
             temp_v6 = 1;
-            FUN_002c1658();
+            inputQueryButtonState();
             if (temp_v6 == 0) {
               temp_v6 = effTimelineIsDone(puVar2[puVar2[0x154] + 0xf]);
               if ((temp_v6 == 0) || (temp_v6 = effectAreAllCompletionChecksReady(puVar2[puVar2[0x158] + 0xd]), temp_v6 == 0)
@@ -682,7 +682,7 @@ LAB_001da638:
                 else {
                   if (temp_v6 != 0x13f) {
                     if (temp_v6 == 0x144) {
-                      FUN_0029b8ec(puVar2[0xc]);
+                      linkHolderSetFlagGroup(puVar2[0xc]);
                       break;
                     }
                     if (temp_v6 != 0x17f) break;
@@ -739,7 +739,7 @@ LAB_001da638:
                 scrScriptProcessStartEntry(puVar2[10],0x18);
                 puVar2[4] = 5;
                 buttonHelpSetPreset(0xbd);
-                FUN_002636d0(0);
+                buttonHelpSetPanelState(0);
                 puVar2[5] = 0;
               }
             }
@@ -775,7 +775,7 @@ LAB_001da638:
           FUN_00263988(puVar2,2);
           *(unsigned char *)(puVar2 + 0x155) = 1;
           puVar2[0x156] = 0x78;
-          FUN_002a5704(puVar2[0xc],0x1a);
+          modelHolderSelectPrimaryMotion(puVar2[0xc],0x1a);
           titleSetSlotValueState2(0,10);
           titleSetSlotValueState2(1,10);
         }
@@ -783,7 +783,7 @@ LAB_001da638:
           FUN_00263988(puVar2,1);
           *(unsigned char *)(puVar2 + 0x155) = 1;
           puVar2[0x156] = 0;
-          FUN_002a5704(puVar2[0xc],0x1a);
+          modelHolderSelectPrimaryMotion(puVar2[0xc],0x1a);
           titleSetSlotValueState2(0,0x14);
           titleSetSlotValueState2(1,0x14);
         }
@@ -897,12 +897,12 @@ LAB_001da638:
             gameCounterAddSaturating(0x21,1);
             *(unsigned char *)(puVar2 + 0x157) = 0;
             soundPlaySeUnpanned(0x10000a8);
-            FUN_002636b0();
+            placeWindowStartClose();
             buttonHelpSetPreset(0x57);
             puVar2[4] = 8;
             puVar2[5] = 0;
             if (*(char *)(puVar2 + 0x155) != '\0') {
-              FUN_0029ae60(puVar2[0xc]);
+              linkHolderClearFlagGroup(puVar2[0xc]);
               FUN_0020ffe8(puVar2[0xc],0x13);
               *(unsigned char *)(puVar2 + 0x155) = 0;
             }
@@ -912,7 +912,7 @@ LAB_001da638:
             *(unsigned char *)(puVar2 + 0x161) = 0;
             *(unsigned char *)(puVar2 + 0x164) = 0;
             FUN_00263988(puVar2,0);
-            FUN_002a5704(puVar2[0xc],0x13);
+            modelHolderSelectPrimaryMotion(puVar2[0xc],0x13);
             temp_v3 = puVar2[0xc];
             FUN_0029bb08(temp_v3);
           }
@@ -942,8 +942,8 @@ LAB_001da638:
     if (temp_v6 == 0) {
       touchMenuClose();
       useCounterRelease();
-      FUN_002636d0(0);
-      FUN_0029b8ec(puVar2[0xc]);
+      buttonHelpSetPanelState(0);
+      linkHolderSetFlagGroup(puVar2[0xc]);
       *(unsigned char *)(puVar2 + 0x15b) = 0;
       *(unsigned char *)(puVar2 + 0x15e) = 0;
       temp_v6 = puVar2[3];
@@ -968,7 +968,7 @@ LAB_001da638:
   }
 LAB_001dacc8:
   if (puVar2[0xc] != 0) {
-    FUN_00297684();
+    lmapPlayerModelDestroy();
   }
   if (*(char *)(puVar2 + 0x155) != '\0') {
     temp_v2 = puVar2[0x156];
@@ -994,8 +994,8 @@ LAB_001dacc8:
       resOwnerRunNodeHandlers(puVar2[0x163]);
     }
     if (puVar2[0x156] == 0x87) {
-      FUN_0029ae60(puVar2[0xc]);
-      FUN_002a5704(puVar2[0xc],0x1a);
+      linkHolderClearFlagGroup(puVar2[0xc]);
+      modelHolderSelectPrimaryMotion(puVar2[0xc],0x1a);
       FUN_0029bb08(puVar2[0xc]);
     }
     if (((int)puVar2[0x156] >= 0x88) && (temp_v6 = FUN_0025a030(puVar2[0xc]), temp_v6 != 0)) {

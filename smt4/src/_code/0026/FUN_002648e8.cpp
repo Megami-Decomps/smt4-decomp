@@ -10,9 +10,9 @@ typedef struct Timer {
 } Timer;
 
 extern void FUN_003965f0(Timer *timer);
-extern void FUN_00396b08(Timer *timer, s32 arg);
+extern void mapSpawnerSpawnAtRandomPoint(Timer *timer, s32 arg);
 
-/* Counts one frame unless flag 2 is set; after 120 frames restarts the counter via FUN_00396b08. */
+/* Counts one frame unless flag 2 is set; after 120 frames restarts the counter via mapSpawnerSpawnAtRandomPoint. */
 static __inline void timerAdvance(Timer *timer)
 {
     if ((timer->flags & 2) != 0) {
@@ -21,11 +21,11 @@ static __inline void timerAdvance(Timer *timer)
     timer->frame++;
     if (timer->frame >= 120) {
         timer->frame = 0;
-        FUN_00396b08(timer, 2);
+        mapSpawnerSpawnAtRandomPoint(timer, 2);
     }
 }
 
-/* Unless flag 1 is set: advances the frame counter (unless flag 2), restarting it through FUN_00396b08 after 120 frames, then runs FUN_003965f0. */
+/* Unless flag 1 is set: advances the frame counter (unless flag 2), restarting it through mapSpawnerSpawnAtRandomPoint after 120 frames, then runs FUN_003965f0. */
 void FUN_002648e8(Timer *timer)
 {
     if ((timer->flags & 1) == 0) {

@@ -8,7 +8,7 @@ extern "C" {
 int FUN_001029f4(...);
 int FUN_00102bbc(...);
 int jyoucyuGetTableEntry(...);
-int FUN_0019a46c(...);
+int stringCopyTruncated(...);
 int nn_fnd_DateTime_DateToDays(int, int, int);
 int libc_strcpy(...);
 int asdOperatorDeleteB(...);
@@ -76,7 +76,7 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: FUN_001029f4. */
 /* Supplied declaration required: FUN_00102bbc. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
-/* Supplied declaration required: FUN_0019a46c. */
+/* Supplied declaration required: stringCopyTruncated. */
 /* Supplied declaration required: nn_fnd_DateTime_DateToDays. */
 extern unsigned char objGetFlagBit0(int);
 extern unsigned char objGetFlagBit1(int);
@@ -505,7 +505,7 @@ int FUN_00474d0c(int param_1)
           if (temp_v9 < 0) {
             return temp_v9;
           }
-          FUN_0019a46c(temp_v4 + 0x980,&uStack_1ba8,0x20);
+          stringCopyTruncated(temp_v4 + 0x980,&uStack_1ba8,0x20);
         }
         else {
           *(unsigned char *)(temp_v4 + 0x9b0) = 0;

@@ -10,7 +10,7 @@ struct UnitStockTable {
 
 extern "C" {
 UnitStockTable *gameGetSlotTable();
-bool FUN_003bc9b8(const StatBlock *unit);
+bool statUnitSlotIsOccupied(const StatBlock *unit);
 
 s32 partyFindFreeStockSlot()
 {
@@ -29,7 +29,7 @@ s32 partyFindFreeStockSlot()
     }
     table = gameGetSlotTable();
     for (s32 index = 0; index < 24; ++index) {
-        if (!FUN_003bc9b8(&table->units[index])) {
+        if (!statUnitSlotIsOccupied(&table->units[index])) {
             return index;
         }
     }

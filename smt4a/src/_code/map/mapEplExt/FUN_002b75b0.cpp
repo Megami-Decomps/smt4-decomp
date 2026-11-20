@@ -9,7 +9,7 @@ extern const char DAT_00531a18[];
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
 void tripleClear(void *triple);
 void *asdLoadFileSyncNoContext(const char *path, u32 *sizes, u32 mode, u32 alignment);
-void *FUN_001abbc4(void *buffer);
+void *effPartCreateFromSource(void *buffer);
 
 void FUN_002b75b0(void)
 {
@@ -52,7 +52,7 @@ void FUN_002b75b0(void)
         EplSlot *slot = &g_eplSlots->slots[0];
         if (slot->list == NULL) {
             slot->buffer = asdLoadFileSyncNoContext(path, &size, 1, 0x80);
-            slot->list = FUN_001abbc4(slot->buffer);
+            slot->list = effPartCreateFromSource(slot->buffer);
         }
     }
     if (g_gameState.mapId == 0x2B || g_gameState.mapId == 0x2C || g_gameState.mapId == 0x2F) {
@@ -60,13 +60,13 @@ void FUN_002b75b0(void)
         EplSlot *slot = &g_eplSlots->slots[0];
         if (slot->list == NULL) {
             slot->buffer = asdLoadFileSyncNoContext(path, &size, 1, 0x80);
-            slot->list = FUN_001abbc4(slot->buffer);
+            slot->list = effPartCreateFromSource(slot->buffer);
         }
     }
     EplSlot *slot = &g_eplSlots->slots[3];
     if (slot->list == NULL) {
         slot->buffer = asdLoadFileSyncNoContext("effect_editor/NB_003.EPL", &size, 1, 0x80);
-        slot->list = FUN_001abbc4(slot->buffer);
+        slot->list = effPartCreateFromSource(slot->buffer);
     }
 }
 }

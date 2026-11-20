@@ -20,7 +20,7 @@ typedef struct EntryList {
 
 s32 dataTableGetRecordFortyOne(void);
 Table41Entry *dataTable29Sub0GetEntryWithAoc(s32 index);
-void FUN_00396b08(EntryList *list, s32 step);
+void mapSpawnerSpawnAtRandomPoint(EntryList *list, s32 step);
 void FUN_003966b8(EntryList *list);
 
 /* Collects the indices of the table-41 entries matching the list's keys, then advances the list four steps. */
@@ -42,7 +42,7 @@ void entryListCollectMatches(EntryList *list)
         }
     }
     for (i = 0; i < 4; i++) {
-        FUN_00396b08(list, 1);
+        mapSpawnerSpawnAtRandomPoint(list, 1);
     }
     FUN_003966b8(list);
 }

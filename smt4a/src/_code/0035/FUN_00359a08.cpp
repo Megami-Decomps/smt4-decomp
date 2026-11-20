@@ -4,7 +4,7 @@
 
 extern "C" {
 s32 scrollOwnerSetValue(void *cursor, s32 value);
-s32 objectApplyIfUnblocked(void *cursor);
+s32 gridNavigationGetItemCount(void *cursor);
 s32 uiSearchPrimary(const void *cursor);
 s32 flaggedEntrySetValueA(void *cursor, s32 value);
 void skillHelpUpdateAttributeAndTarget(s32 id);
@@ -26,7 +26,7 @@ void FUN_00359a08(SkillSlotScreen *screen)
             break;
         }
     }
-    if (emptySlot < objectApplyIfUnblocked(screen->slotCursor)) {
+    if (emptySlot < gridNavigationGetItemCount(screen->slotCursor)) {
         scrollOwnerSetValue(screen->slotCursor, 0);
         scrollListSetSelectionTracked(reinterpret_cast<ScrollSelection *>(screen->slotCursor), emptySlot);
     } else {
@@ -42,7 +42,7 @@ void FUN_00359a08(SkillSlotScreen *screen)
         }
     }
     s32 limit = uiSearchPrimary(screen->candidateCursor) - 2;
-    s32 last = objectApplyIfUnblocked(screen->candidateCursor) - 2;
+    s32 last = gridNavigationGetItemCount(screen->candidateCursor) - 2;
     s32 scroll = 0;
     if (index > limit) {
         scroll = index - limit;

@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_002ea668(unsigned char [88]);
-int FUN_002ea6bc(unsigned char [88], unsigned int, int);
-int FUN_002ea6cc(unsigned char [88]);
+int lazyStaticInitOnce(unsigned char [88], unsigned int, int);
+int lazyMemberInitOnce(unsigned char [88]);
 int FUN_002ec674(unsigned int);
 int rt_memcpy(...);
 
 /* Supplied declaration required: FUN_002ea668. */
-/* Supplied declaration required: FUN_002ea6bc. */
-/* Supplied declaration required: FUN_002ea6cc. */
+/* Supplied declaration required: lazyStaticInitOnce. */
+/* Supplied declaration required: lazyMemberInitOnce. */
 /* Supplied declaration required: FUN_002ec674. */
 extern unsigned int FUN_002ecaee(int);
 /* Supplied declaration required: rt_memcpy. */
@@ -36,15 +36,15 @@ void FUN_002ecc3c(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   temp_v2 = *(int *)(param_2 + 0x10);
   temp_v0 = *(int *)(param_2 + 0xc);
   temp_v1 = FUN_002ecaee(param_2);
-  FUN_002ea6bc(temp_v3,temp_v1,temp_v2 - temp_v0);
+  lazyStaticInitOnce(temp_v3,temp_v1,temp_v2 - temp_v0);
   temp_v2 = *(int *)(param_2 + 0x10);
   temp_v0 = *(int *)(param_2 + 0xc);
   temp_v1 = FUN_002ecaee(param_2);
-  FUN_002ea6bc(temp_v5,temp_v1,temp_v2 - temp_v0);
-  FUN_002ea6bc(temp_v3,param_3,8);
-  FUN_002ea6bc(temp_v5,param_4,8);
-  FUN_002ea6cc(temp_v3);
-  FUN_002ea6cc(temp_v5);
+  lazyStaticInitOnce(temp_v5,temp_v1,temp_v2 - temp_v0);
+  lazyStaticInitOnce(temp_v3,param_3,8);
+  lazyStaticInitOnce(temp_v5,param_4,8);
+  lazyMemberInitOnce(temp_v3);
+  lazyMemberInitOnce(temp_v5);
   temp_v1 = FUN_002ec674(param_5);
   rt_memcpy(temp_v1,temp_v4,0x10);
   temp_v0 = FUN_002ec674(param_5);

@@ -7,7 +7,7 @@ extern "C" {
 s32 renderCtxPackPassFlags(u32 kind, u32 flags);
 s32 getFloatPairValue(void);
 s32 displayIsStereoActive(void);
-void FUN_00280840(u32 style, f32 x, f32 y, f32 depth, f32 size, u32 firstColor, u32 secondColor);
+void debugGuideDrawGrid(u32 style, f32 x, f32 y, f32 depth, f32 size, u32 firstColor, u32 secondColor);
 
 // Render the editor scene in a temporary state and draw its enabled overlay.
 void renderEditorSceneDrawOverlay(void)
@@ -22,7 +22,7 @@ void renderEditorSceneDrawOverlay(void)
     effMenuCallHandler(0, mono);
     renderStackPop(&g_renderCtx->stackA);
     if (g_effectEditor.overlayEnabled) {
-        FUN_00280840(30, 0.0f, 0.0f, 0.0f, 17.5f, 0x606060FF, 0x909090FF);
+        debugGuideDrawGrid(30, 0.0f, 0.0f, 0.0f, 17.5f, 0x606060FF, 0x909090FF);
     }
 }
 }

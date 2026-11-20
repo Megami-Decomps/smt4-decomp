@@ -17,8 +17,8 @@ extern "C" {
 s32 ifTouchGetSelectionModeForRegion(s16 id);
 s32 resourceRunOperationIfUnblocked(ScrollList *list);
 s32 resourceRunEmbeddedOperationIfUnblocked(ScrollList *list);
-s32 FUN_0029ee54(ScrollList *list);
-s32 FUN_0029e958(ScrollList *list);
+s32 gridNavigationGetItemCount(ScrollList *list);
+s32 uiGridNavigationEntryCount(ScrollList *list);
 s32 objectPartRunUnlessLocked(ScrollList *list);
 s32 listCursorGetRowIfUnblocked(ScrollList *list);
 void scrollOwnerSelectIndex(ScrollList *list, s32 value);
@@ -52,12 +52,12 @@ u32 FUN_0026ab64(ScrollList *list, ScrollPoint touch, ScrollPoint barSize, s16 b
         s32 position = resourceRunOperationIfUnblocked(list) + listCursorGetRowIfUnblocked(list) + 1;
         if (horizontal != 0) {
             position = resourceRunEmbeddedOperationIfUnblocked(list) + objectPartRunUnlessLocked(list) + 1;
-            if (FUN_0029e958(list) <= position) {
+            if (uiGridNavigationEntryCount(list) <= position) {
                 return 1;
             }
             scrollOwnerSelectIndex(list, position);
         } else {
-            if (FUN_0029ee54(list) <= position) {
+            if (gridNavigationGetItemCount(list) <= position) {
                 return 1;
             }
             scrollListSetSelectionMarkChanged(list, position);
@@ -66,10 +66,10 @@ u32 FUN_0026ab64(ScrollList *list, ScrollPoint touch, ScrollPoint barSize, s16 b
         if (barMode == 0) {
             return 0;
         }
-        s32 total = FUN_0029ee54(list);
+        s32 total = gridNavigationGetItemCount(list);
         s16 y = FUN_001c36a0() - touch.y;
         if (horizontal != 0) {
-            total = FUN_0029e958(list);
+            total = uiGridNavigationEntryCount(list);
             s16 x = FUN_001c3688() - touch.x;
             if (x < 0 || barSize.x <= x) {
                 return 1;

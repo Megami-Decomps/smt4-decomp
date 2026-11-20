@@ -82,7 +82,7 @@ extern int _Znwj(unsigned int);
 extern int onlineBufferGetData(void);
 extern int FUN_002eac34(unsigned char);
 /* Supplied declaration required: onlineTimeGetNow. */
-extern int FUN_002eb5f4(void);
+extern int watcherGetActiveContext(void);
 extern int wordRefsDiffer_002eb690(unsigned int *, int *);
 extern int FUN_002eb6ae(unsigned int, unsigned int);
 /* Supplied declaration required: listIteratorNext. */
@@ -238,7 +238,7 @@ LAB_00109b02:
       temp_v11 = (int *)((unsigned int)temp_v11 & 0xffff0000);
       strHolderAssignOneWide(piVar3,&temp_v11);
     }
-    temp_v1 = FUN_002eb5f4();
+    temp_v1 = watcherGetActiveContext();
     temp_v11 = (int *)(temp_v1 + 0xd4);
     temp_v13 = temp_v25 + 0x120;
     while( 1 ) {

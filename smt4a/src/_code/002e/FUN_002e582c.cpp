@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002bf09c(void);
+int soundArchiveLookupItemByLabel(void);
 int soundChannelRequestIfEnabled(void);
 
 extern int scrGetArgString(void);
-/* Supplied declaration required: FUN_002bf09c. */
+/* Supplied declaration required: soundArchiveLookupItemByLabel. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 
 
@@ -19,7 +19,7 @@ void FUN_002e582c(void)
   int temp_v0;
   
   temp_v0 = scrGetArgString();
-  FUN_002bf09c();
+  soundArchiveLookupItemByLabel();
   if (-1 < temp_v0) {
     soundChannelRequestIfEnabled();
   }

@@ -1,7 +1,7 @@
 #include "classes/Obj532300.h"
 
 extern "C" {
-void FUN_0048a378(Obj532300 *panel);
+void naviRefreshBackgroundAndFeedback(Obj532300 *panel);
 u8 buttonHelpIsNotActive(void);
 }
 
@@ -15,7 +15,7 @@ void Obj532300::FUN_0048d1c8()
 {
     s32 next;
     if (state == 0) {
-        FUN_0048a378(this);
+        naviRefreshBackgroundAndFeedback(this);
         next = 1;
     } else if (state == 1) {
         if (buttonHelpIsNotActive() != 0) {

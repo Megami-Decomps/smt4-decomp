@@ -49,7 +49,7 @@ void FUN_004116a0(ScriptOwner *owner)
     u16 pick = partyPickRandomId();
 
     BtlMainStateExtA *battle = btlGetMainStateExt();
-    u32 voice = FUN_0019acdc(pick, 1);
+    u32 voice = unitMapIdToCategory(pick, 1);
     u32 text;
     u32 colorSet;
     FUN_003f1b3c(battle, voice, 2, &text, &colorSet);

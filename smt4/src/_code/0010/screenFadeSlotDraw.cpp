@@ -4,7 +4,7 @@
 #include "camp/RenderCtxTitle.h"
 
 extern "C" {
-extern W6Match3SlotState DAT_004d9758[2];
+extern W6Match3SlotState g_screenFadeSlots[2];
 s32 renderCtxPackPassFlags(u32, u32);
 u32 asdGxPresetsGetByKind(u32);
 u32 asdGxPresetsGetHeightByKind(u32);
@@ -12,7 +12,7 @@ u32 asdGxPresetsGetHeightByKind(u32);
 /* Draw the selected screen-fade color with its current interpolated opacity. */
 void screenFadeSlotDraw(s32 index)
 {
-    W6Match3SlotState *fade = &DAT_004d9758[index];
+    W6Match3SlotState *fade = &g_screenFadeSlots[index];
     u32 color = fade->index;
     u32 alpha = static_cast<u32>(fade->value * static_cast<f32>(color & 0xFF));
     if (alpha == 0)

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00188ca4(void);
+int nnosGetHeapBase(void);
 int sysFatalBreak(void);
 int FUN_001af3b8(void);
 int FUN_0043a89c(unsigned int, unsigned int, unsigned int, unsigned int);
@@ -14,8 +14,8 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_3_stack;
 
-extern int FUN_00188c94(void);
-/* Supplied declaration required: FUN_00188ca4. */
+extern int nnosGetHeapSize(void);
+/* Supplied declaration required: nnosGetHeapBase. */
 /* Supplied declaration required: sysFatalBreak. */
 extern int FUN_001a0ca4(void);
 extern int FUN_001af3a8(void);
@@ -31,10 +31,10 @@ void FUN_0043a338(unsigned int param_1,unsigned int param_2,unsigned int param_3
   int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_00188ca4();
+  temp_v0 = nnosGetHeapBase();
   if (temp_v0 <= param_1) {
-    temp_v1 = FUN_00188ca4();
-    temp_v2 = FUN_00188c94();
+    temp_v1 = nnosGetHeapBase();
+    temp_v2 = nnosGetHeapSize();
     if (param_1 < (unsigned int)(temp_v1 + temp_v2)) goto LAB_0043a3b8;
   }
   temp_v1 = FUN_001a0ca4();

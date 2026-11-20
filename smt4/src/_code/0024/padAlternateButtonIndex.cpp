@@ -3,11 +3,11 @@
 
 extern "C" {
 
-extern u8 DAT_00409ba8[];
+extern u8 g_padAlternateButtonTable[];
 
 u8 padAlternateButtonIndex(int index)
 {
-    return DAT_00409ba8[index];
+    return g_padAlternateButtonTable[index];
 }
 
 } /* extern "C" */

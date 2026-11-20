@@ -57,19 +57,19 @@ void uiDrawListScrollBar(Object *widget, s32 x, s32 y, u32 group, u32 frameId, u
         renderStackSet(&g_renderCtx->scissor, 3);
         gxSetMirroredClippedScissor(record->x + x + offset, record->y + y, length, record->placement->height, 1);
     } else {
-        s32 total = objectApplyIfUnblocked(widget);
+        s32 total = gridNavigationGetItemCount(widget);
         s32 shown = uiSearchPrimary(widget);
         s32 length;
         if (total <= shown) {
             length = record->placement->height;
         } else {
-            f32 ratio = (f32)record->placement->height / (f32)objectApplyIfUnblocked(widget);
+            f32 ratio = (f32)record->placement->height / (f32)gridNavigationGetItemCount(widget);
             length = (s32)((f32)uiSearchPrimary(widget) * ratio);
             if (length < 1) {
                 length = 1;
             }
             offset = (s32)((f32)resourceRunOperationIfUnblocked(widget) * ratio);
-            if (resourceRunOperationIfUnblocked(widget) + uiSearchPrimary(widget) == objectApplyIfUnblocked(widget) &&
+            if (resourceRunOperationIfUnblocked(widget) + uiSearchPrimary(widget) == gridNavigationGetItemCount(widget) &&
                 offset + length < record->placement->height) {
                 offset = record->placement->height - length;
             }

@@ -31,8 +31,8 @@ s32 ifTouchRegionAddRequested(u32 file, s32 index);
 u32 uiScrollHandleActionsOrTouch(GridNavigation *list, const TextureTableEntryIV *sprite, const s16 *rows,
                                  s32 thumb, s32 previous, s32 next, s8 *decide, s32 alternateAxis, s32 notify);
 /* Moves the list's cursor from the pad. */
-u8 FUN_0029efd8(GridNavigation *list, s32 notify);
-s32 FUN_002c1658(s32 button, s32 mode);
+u8 gridNavigationHandleConfirm(GridNavigation *list, s32 notify);
+s32 inputQueryButtonState(s32 button, s32 mode);
 
 /* Advances the frame and, when the list scrolls, the scroll bar. */
 static __inline void sortMenuAdvanceFrame(SortMenuWork *work)
@@ -40,7 +40,7 @@ static __inline void sortMenuAdvanceFrame(SortMenuWork *work)
     uiSpriteAdvanceAnimation(&work->sprites[10]);
     uiSpriteAdvanceAnimation(&work->sprites[11]);
     GridNavigation *list = &work->list;
-    if (static_cast<s32>(FUN_0029ee54(list)) > static_cast<s32>(FUN_0029d644(list))) {
+    if (static_cast<s32>(gridNavigationGetItemCount(list)) > static_cast<s32>(uiListGetVisibleCount(list))) {
         uiSpriteAdvanceAnimation(&work->sprites[12]);
     }
 }
@@ -67,13 +67,13 @@ static __inline void sortMenuClose(void)
     }
     if (work->helpSaved) {
         if (work->helpIsDefault) {
-            FUN_00220d24(1);
+            buttonHelpSetUseDirectoryText(1);
         } else {
             buttonHelpSetText(work->helpText, SORT_MENU_HELP_COLOR);
         }
         work->helpSaved = 0;
     } else {
-        FUN_00295214(0);
+        buttonHelpSetTextVisible(0);
     }
 }
 
@@ -136,7 +136,7 @@ s32 sortMenuUpdate(u32 job)
                 help = key >= SORT_MENU_KEY_COUNT ? NULL : sortMenuFindKey(key)->help;
             }
             buttonHelpSetText(help, SORT_MENU_HELP_COLOR);
-            if (static_cast<s32>(FUN_0029ee54(list)) > static_cast<s32>(FUN_0029d644(list))) {
+            if (static_cast<s32>(gridNavigationGetItemCount(list)) > static_cast<s32>(uiListGetVisibleCount(list))) {
                 work->ids[0] = ifTouchRegionAddRequested(SORT_MENU_TEXTURES, 70);
                 work->ids[1] = ifTouchRegionAddRequested(SORT_MENU_TEXTURES, 71);
                 work->ids[2] = ifTouchRegionAddRequested(SORT_MENU_TEXTURES, 72);
@@ -166,7 +166,7 @@ s32 sortMenuUpdate(u32 job)
                 key = sortMenuCursorKey(work, list);
                 buttonHelpSetText(key >= SORT_MENU_KEY_COUNT ? NULL : sortMenuFindKey(key)->help, SORT_MENU_HELP_COLOR);
             }
-        } else if (FUN_0029efd8(list, 1)) {
+        } else if (gridNavigationHandleConfirm(list, 1)) {
             work->ascending = 1;
             if (work->option == 2) {
                 key = sortMenuCursorKey(work, list);
@@ -178,7 +178,7 @@ s32 sortMenuUpdate(u32 job)
                 key = sortMenuCursorKey(work, list);
                 buttonHelpSetText(key >= SORT_MENU_KEY_COUNT ? NULL : sortMenuFindKey(key)->help, SORT_MENU_HELP_COLOR);
             }
-        } else if (FUN_002c1658(0, 1) || decide) {
+        } else if (inputQueryButtonState(0, 1) || decide) {
             /* Decided: the preference keeps the key in its low seven bits and "descending" in bit 7. */
             work->decided = 1;
             work->state = 3;
@@ -192,7 +192,7 @@ s32 sortMenuUpdate(u32 job)
                 }
             }
             eventQueueAddUniqueIfValid(0x100016D);
-        } else if (FUN_002c1658(1, 1)) {
+        } else if (inputQueryButtonState(1, 1)) {
             sortMenuClose();
             eventQueueAddUniqueIfValid(0x100016E);
         }

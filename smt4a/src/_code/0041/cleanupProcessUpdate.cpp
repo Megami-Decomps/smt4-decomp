@@ -28,7 +28,7 @@ void sysPlayVoice(u32 value);
 s32 stateHolderStateIsNot4(void);
 void FUN_0034a968(void);
 void sysPlaySe(u32 sound);
-void FUN_0022e774(void);
+void statusPanelClose(void);
 void statusDownRestartTransition(void);
 s32 aocDataBlockHasEntries(void);
 void buttonHelpSetText(u32 first, u32 color);
@@ -51,7 +51,7 @@ extern "C" s32 cleanupProcessUpdate(CleanupProcessState *process)
             process->stage = 1;
         case 1:
             scrRunOpcodesStub(process->script);
-            if (!stateHolderStateIsNot4() || !FUN_0023b3d0())
+            if (!stateHolderStateIsNot4() || !gameStateIsNotTransitioning())
                 break;
             FUN_0034a968();
             process->stage = 2;
@@ -70,11 +70,11 @@ extern "C" s32 cleanupProcessUpdate(CleanupProcessState *process)
     case 6:
         switch (process->stage) {
         case 0:
-            FUN_0022e774();
+            statusPanelClose();
             statusDownRestartTransition();
             process->stage = 1;
         case 1:
-            if (!FUN_0026c3a0() || !FUN_002effbc())
+            if (!gameGlobalsIsActiveStateFour() || !FUN_002effbc())
                 break;
             process->stage = 2;
         case 2:

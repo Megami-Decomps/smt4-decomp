@@ -1,4 +1,4 @@
-/* NON_MATCHING: structured rebuild of the sound list update (retail is goto-laden: list unlink, fade-in/out and the per-entry counter share tails); the two float arguments of FUN_00147370 (progress of the fade) are inferred from the conversion order and not verified. */
+/* NON_MATCHING: structured rebuild of the sound list update (retail is goto-laden: list unlink, fade-in/out and the per-entry counter share tails); the two float arguments of soundVoiceSetVolume (progress of the fade) are inferred from the conversion order and not verified. */
 #include "common.h"
 
 /* One playing sound of the list (a doubly linked list through +0x70/+0x74). */
@@ -32,7 +32,7 @@ void nn_os_CriticalSection_Enter(void *section);
 void nn_os_CriticalSection_Leave(void *section);
 void nn_snd_CTR_Voice_SetState(SoundVoiceInfo *voice, s32 state);
 s32 FUN_001329d4(SoundVoiceInfo *voice);
-void FUN_00147370(SoundVoiceInfo *voice, f32 a, f32 b);
+void soundVoiceSetVolume(SoundVoiceInfo *voice, f32 a, f32 b);
 void sndVoiceFree(void);
 void asdMemFree(void *block);
 
@@ -102,14 +102,14 @@ void FUN_001198a4(void)
                 continue;
             } else if (entry->flags & 0x20) {
                 if (entry->position >= entry->counter)
-                    FUN_00147370(entry->voice, (f32)entry->counter, (f32)entry->position);
+                    soundVoiceSetVolume(entry->voice, (f32)entry->counter, (f32)entry->position);
                 else {
-                    FUN_00147370(entry->voice, 0.0f, 0.0f);
+                    soundVoiceSetVolume(entry->voice, 0.0f, 0.0f);
                     entry->flags &= ~0x20u;
                 }
             } else if (entry->flags & 0x10) {
                 if (entry->position >= entry->counter) {
-                    FUN_00147370(entry->voice, (f32)entry->counter, (f32)entry->position);
+                    soundVoiceSetVolume(entry->voice, (f32)entry->counter, (f32)entry->position);
                 } else {
                     entry->flags &= ~0x10u;
                     if (entry->flags & 0x100) {

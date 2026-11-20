@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002f9d6a(int *, unsigned int *, int *);
+int sharedRefAcquireFromOwner(int *, unsigned int *, int *);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 
 extern unsigned char DAT_0055b08c; /* 0x55b08c */
 
-/* Supplied declaration required: FUN_002f9d6a. */
+/* Supplied declaration required: sharedRefAcquireFromOwner. */
 
 
 unsigned int * FUN_0012cf84(unsigned int *param_1,unsigned int param_2,int param_3)
@@ -30,7 +30,7 @@ unsigned int * FUN_0012cf84(unsigned int *param_1,unsigned int param_2,int param
   temp_v2 = param_1[1];
   temp_v1 = param_3;
   while (temp_v2 != temp_v0) {
-    FUN_002f9d6a(&temp_v1,param_1,&temp_v2);
+    sharedRefAcquireFromOwner(&temp_v1,param_1,&temp_v2);
     temp_v2 = temp_v1;
   }
   return param_1;

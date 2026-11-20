@@ -17,13 +17,13 @@ extern "C" {
 StatBlock *saveResolvePartySlot(u32 partySlot);
 s32 gameSlotFindByCategory(const StatBlock *record);
 extern void *g_btlEvent;
-extern VersionedTextureOwner *DAT_00435d18;
+extern VersionedTextureOwner *g_btlAux;
 
 void btlAiScriptCall(u32 argument);
 void FUN_00227b14(void *ui, u32 windowId, u32 kind, u32 mode);
 void FUN_00229098(BtlMainState **block);
 u8 buttonHelpGetStatus(void);
-s32 FUN_00293230(BtlMainState *state);
+s32 btlScriptUnitIsIncapacitated(BtlMainState *state);
 void battleSelectButtonHelpPreset(u32 preset);
 void FUN_002569ac(BtlMainState **block, s32 bank);
 void btlEntryValuesCopy(BtlMainState **block, CommandState *work);
@@ -39,7 +39,7 @@ void FUN_00256898(s32 a, s32 b);
 u32 FUN_003d3ba8(BtlMainState **block, CommandState *work);
 u32 FUN_001d2710(BtlMainState *state, CommandState *work, s32 a, s32 target);
 u32 btlResolveCommandEvent(BtlMainState **block, CommandState *work);
-void FUN_0026beb4(s32 chance, CommandState *work, s32 a, BtlActionRecord *record, s32 b);
+void btlMenuCursorStepReflectAction(s32 chance, CommandState *work, s32 a, BtlActionRecord *record, s32 b);
 s32 questGetCurrentRecordHalf4(void);
 u32 btlReflectCreateKind10(s32 a, CommandState *work, s32 value, s32 b);
 void frameRangeExtend(BtlMainState **block, CommandState *work, s32 id, s32 a, s32 b, s32 c);
@@ -81,7 +81,7 @@ void btlCommandEnterPhase(BtlMainState **block, s32 phase)
         memClear(work->targetMarks, 0x85);
         FUN_00229098(block);
         s32 status = buttonHelpGetStatus();
-        if (FUN_00293230(*block) != 0) {
+        if (btlScriptUnitIsIncapacitated(*block) != 0) {
             if (status != 61)
                 buttonHelpSetPreset(61);
         } else if (status != 179 && status != 180) {
@@ -178,7 +178,7 @@ void btlCommandEnterPhase(BtlMainState **block, s32 phase)
         return;
     case 18: {
         s32 chance = (work->flags & 0x1080) == 0 ? 50 : 0;
-        FUN_0026beb4(chance, work, 0, NULL, 1);
+        btlMenuCursorStepReflectAction(chance, work, 0, NULL, 1);
         s32 value = questGetCurrentRecordHalf4();
         if (value != 0)
             btlReflectCreateKind10(0, work, value, -1);
@@ -188,10 +188,10 @@ void btlCommandEnterPhase(BtlMainState **block, s32 phase)
         s32 chance = (work->flags & 0x1080) == 0 ? 50 : 0;
         s32 kind = work->selection->kind;
         if (kind == 6) {
-            FUN_0026beb4(0, work, 1, work->record, 1);
+            btlMenuCursorStepReflectAction(0, work, 1, work->record, 1);
             frameRangeExtend(block, work, work->record->memberId, 0, 5, 5);
         } else if (kind == 15) {
-            FUN_0026beb4(chance, work, 0, work->record, 1);
+            btlMenuCursorStepReflectAction(chance, work, 0, work->record, 1);
             frameRangeExtend(block, work, work->record->memberId, 0, 5, 5);
         }
         return;
@@ -212,7 +212,7 @@ void btlCommandEnterPhase(BtlMainState **block, s32 phase)
         FUN_0027e38c(g_btlEvent);
         return;
     case 31:
-        FUN_003dbb40(DAT_00435d18);
+        FUN_003dbb40(g_btlAux);
         return;
     case 32:
         FUN_003ca32c(block, work);
@@ -235,12 +235,12 @@ void btlCommandEnterPhase(BtlMainState **block, s32 phase)
     case 35:
         if ((work->entry->flags & 0x10) == 0)
             btlUiRecountParty(g_btlUiBlock);
-        objDestroyChild(DAT_00435d18);
-        FUN_002276f8(DAT_00435d18);
-        DAT_00435d18->flags &= ~0x8000u;
-        battleResetCounterAndFlag(reinterpret_cast<ResetCounterOwner *>(DAT_00435d18));
-        modelManagerReleaseSlots(DAT_00435d18);
-        modelSetResetSlots(DAT_00435d18);
+        objDestroyChild(g_btlAux);
+        FUN_002276f8(g_btlAux);
+        g_btlAux->flags &= ~0x8000u;
+        battleResetCounterAndFlag(reinterpret_cast<ResetCounterOwner *>(g_btlAux));
+        modelManagerReleaseSlots(g_btlAux);
+        modelSetResetSlots(g_btlAux);
         g_btlMain->flags &= ~0x4000u;
         eventCommandDispatchPendingCleanup();
         FUN_00394b8c();

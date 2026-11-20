@@ -39,7 +39,7 @@ extern s16 DAT_005e205a[];
 
 s32 objFlagsSetBits(u32 object, s32 bits);
 s32 msgBoxFlagsClear(u32 object, s32 bits);
-void FUN_00165088(MessageBox* box, s32 kind);
+void uiPanelCloseStateSection(MessageBox* box, s32 kind);
 void sysPlaySe(s32 id);
 void buttonHelpSetEnabled(void);
 void FUN_00203da4(MessageBox* box, u32 a, s32 b, s32 kind, s32 c, s32 d, f32 e);
@@ -48,8 +48,8 @@ void FUN_0028b350(MessageBox* box, s32 kind);
 void scrCommMessageSetMode(u32 mode);
 void scrSetResult(u32 value);
 s32 engineCleanupIsDone(void);
-s32 FUN_00162ea4(void);
-u32 FUN_001688c4(u32 object);
+s32 eventIsSkipping(void);
+u32 statusDownScanSelectedEntryIndex(u32 object);
 u16 ifTouchGetButtonHelpValue(void);
 u16 screenGetSlotValue(u32 slot);
 u8 screenGetSlotFlag(u32 slot);
@@ -116,7 +116,7 @@ u32 messageWindowShowOrPoll(u32 owner, s32 index, s32 poll, s32 kind, s32 lockIn
             scrSetResult(box->result);
             return 1;
         }
-        if (FUN_00162ea4() == 0) return 0;
+        if (eventIsSkipping() == 0) return 0;
         s8 current = 0;
         if (engineCleanupIsDone() != 0) current = box->state;
         if (engineCleanupIsDone() == 0 || current == 3 || current == 0) return 0;
@@ -130,9 +130,9 @@ u32 messageWindowShowOrPoll(u32 owner, s32 index, s32 poll, s32 kind, s32 lockIn
         u32 state = 0;
         if (box != NULL) state = box->state;
         if (box == NULL || state == 0) {
-            if (FUN_00162ea4() != 0 && engineCleanupIsDone() != 0) return 1;
+            if (eventIsSkipping() != 0 && engineCleanupIsDone() != 0) return 1;
             FUN_00203da4(box, owner, index, kind, 0x1a, 1, extra);
-            if (kind == 0xb || kind == 0x14) box->sprite = FUN_001688c4(box->object);
+            if (kind == 0xb || kind == 0x14) box->sprite = statusDownScanSelectedEntryIndex(box->object);
             if (box->hasText == 0) FUN_0028b350(box, box->kind);
             if (lockInput != 0) {
                 objFlagsSetBits(box->object, 0x20);
@@ -154,7 +154,7 @@ u32 messageWindowShowOrPoll(u32 owner, s32 index, s32 poll, s32 kind, s32 lockIn
         }
         box->reopen = 1;
     }
-    FUN_00165088(box, box->kind);
+    uiPanelCloseStateSection(box, box->kind);
     box->state = 3;
     box->hasText = 0;
     return 0;

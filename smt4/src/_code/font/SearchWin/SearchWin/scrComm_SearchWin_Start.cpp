@@ -4,19 +4,19 @@
 extern "C" {
 void soundPlaySeUnpanned(u32);
 void searchWinInitialize(void);
-extern SearchWinWork* DAT_0043e170;
+extern SearchWinWork* g_searchWin;
 extern const char DAT_00403cb0[];
 extern const char DAT_00403cc4[];
 s32 scrGetArg(u32);
-s32 FUN_002c1d5c(void);
+s32 eventIsSkipping(void);
 
 // Opens the search window with the requested wireless-operation message.
 u32 scrComm_SearchWin_Start(void)
 {
-    if (DAT_0043e170 == NULL && FUN_002c1d5c() == 0) {
+    if (g_searchWin == NULL && eventIsSkipping() == 0) {
         searchWinInitialize();
         s32 mode = scrGetArg(0);
-        SearchWinWork* window = DAT_0043e170;
+        SearchWinWork* window = g_searchWin;
         if (mode == 0) {
             __2sprintf((char *)window->text, DAT_00403cb0);
         } else if (mode == 1) {

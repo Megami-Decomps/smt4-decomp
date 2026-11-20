@@ -6,7 +6,7 @@ extern "C" {
 
 s32 FUN_003e0024(void);
 
-void FUN_003e4e4c(s32 value);
+void saveSlotTableSetPreferredId(s32 value);
 
 void FUN_003e7840(void);
 

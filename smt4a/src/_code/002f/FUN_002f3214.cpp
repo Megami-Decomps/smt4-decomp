@@ -8,7 +8,7 @@ int _ZN9Obj55b28cC1EPv(unsigned char [12], unsigned int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int packNibbles(int *, unsigned int, unsigned int);
 int FUN_002f9dd4(int, unsigned int [2]);
-int FUN_0030337e(unsigned int *, int *);
+int sortedByteEntriesFind(unsigned int *, int *);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ typedef struct {
 extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: packNibbles. */
 /* Supplied declaration required: FUN_002f9dd4. */
-/* Supplied declaration required: FUN_0030337e. */
+/* Supplied declaration required: sortedByteEntriesFind. */
 
 
 unsigned int FUN_002f3214(int param_1,unsigned int param_2,unsigned int param_3)
@@ -45,7 +45,7 @@ unsigned int FUN_002f3214(int param_1,unsigned int param_2,unsigned int param_3)
   FUN_002f9dd4(param_1,temp_v4);
   if (temp_v1 != 0) {
     puVar5 = (unsigned int *)(param_1 + 4);
-    FUN_0030337e(puVar5,&temp_v3);
+    sortedByteEntriesFind(puVar5,&temp_v3);
     puVar4 = *(unsigned int **)(param_1 + 0xc);
     if ((puVar4 != puVar5) && (*(unsigned int **)(param_1 + 8) != puVar4)) {
       puVar3 = puVar5 + 2;

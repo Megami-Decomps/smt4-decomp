@@ -27,7 +27,7 @@ extern Table003c5c34 DAT_0059ee68;
 void FUN_003c5c34(Object003c5c34 *object)
 {
     Effect003c5c34 *effect = object->effect;
-    FUN_0031ab38(reinterpret_cast<u32 *>(effect->body), effect->value, reinterpret_cast<EffectEditorOptions *>(DAT_0059ee68.entry), reinterpret_cast<EffectEditorOptions *>(&DAT_0059ee68));
+    effectEditorApplyOwnerOptionsPair(reinterpret_cast<u32 *>(effect->body), effect->value, reinterpret_cast<EffectEditorOptions *>(DAT_0059ee68.entry), reinterpret_cast<EffectEditorOptions *>(&DAT_0059ee68));
 }
 
 } /* extern "C" */

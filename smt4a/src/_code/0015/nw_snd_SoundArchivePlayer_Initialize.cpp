@@ -2,8 +2,8 @@
 
 extern "C" {
 s32 FUN_001739c4(void);
-u32 FUN_00188ca4(void);
-u32 FUN_00188c94(void);
+u32 nnosGetHeapBase(void);
+u32 nnosGetHeapSize(void);
 s32 nw_snd_SoundArchivePlayer_SetupMram(StreamSetupStateA *state, u32 soundId, u32 mode, u32 options, u32 userData);
 s32 nw_snd_SoundArchive_ReadSoundArchivePlayerInfo(u32 soundId, StreamSetupInfoA *info);
 void nw_snd_internal_driver_StreamBufferPool_Initialize(void *pool, void *buffer, u32 size, u32 channels);
@@ -42,8 +42,8 @@ u32 nw_snd_SoundArchivePlayer_Initialize(StreamSetupStateA *state, u32 soundId, 
         return 0;
     if (size != 0) {
         u32 bufferAddr = reinterpret_cast<u32>(buffer);
-        u32 start = FUN_00188ca4();
-        u32 end = start + FUN_00188c94();
+        u32 start = nnosGetHeapBase();
+        u32 end = start + nnosGetHeapSize();
         if (bufferAddr < start)
             return 0;
         if (bufferAddr + size > end)

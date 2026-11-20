@@ -26,9 +26,9 @@ struct WindowRequestBuffer {
 extern "C" {
 void *__aeabi_memcpy4(void *dest, const void *src, u32 size);
 void sysMemClear(void *block, u32 size);
-void FUN_0019a46c(void *dest, const char *src, u32 size);
+void stringCopyTruncated(void *dest, const char *src, u32 size);
 nn::Result FUN_00427e68(u32 token, u32 mode);
-u32 FUN_0016ccfc(void);
+u32 tokenTableGet(void);
 s32 tokenResolveAddress(u32 context, WindowRequestEntry **entry, u32 token);
 s32 appletIsExitRequested(void);
 s32 FUN_0015a410(void);
@@ -42,12 +42,12 @@ WindowStatusResult FUN_00429048(const u32 *token, const char *name)
     nn::Result status = FUN_00427e68(*token, 2);
     if (!nnResultIsFailure(status)) {
         WindowRequestEntry *entry;
-        status = tokenResolveAddress(FUN_0016ccfc(), &entry, *token);
+        status = tokenResolveAddress(tokenTableGet(), &entry, *token);
         if (!nnResultIsFailure(status)) {
             __aeabi_memcpy4(DAT_0061b030.payload, entry->payload, 0x44);
             DAT_0061b030.confirmed = entry->confirmed;
             if (name != NULL) {
-                FUN_0019a46c(DAT_0061b030.name, name, 0xF);
+                stringCopyTruncated(DAT_0061b030.name, name, 0xF);
             } else {
                 sysMemClear(DAT_0061b030.name, 0xF);
             }

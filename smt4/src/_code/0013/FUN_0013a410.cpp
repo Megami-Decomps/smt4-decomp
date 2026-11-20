@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c131c(unsigned int, int);
+int errThrowFatal(unsigned int, int);
 
 typedef int romwright_code(...);
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -23,7 +23,7 @@ extern unsigned char *DAT_0044e470; /* 0x44e470 */
 extern unsigned int DAT_0044e474; /* 0x44e474 */
 extern unsigned char DAT_004c6484; /* 0x4c6484 */
 
-/* Supplied declaration required: FUN_002c131c. */
+/* Supplied declaration required: errThrowFatal. */
 extern unsigned int nn_dsp_CTR_DSP_LoadComponent(unsigned int, unsigned char *, unsigned int, unsigned short, unsigned short, unsigned char *);
 
 
@@ -45,7 +45,7 @@ void FUN_0013a410(void)
                          (unsigned char *)&DAT_0044e459);
     }
     if ((int)temp_v0 < 0) {
-      FUN_002c131c(temp_v0,0x13a464);
+      errThrowFatal(temp_v0,0x13a464);
     }
     temp_v1 = 0;
     do {

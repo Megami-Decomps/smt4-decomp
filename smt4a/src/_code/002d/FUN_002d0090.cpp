@@ -35,17 +35,17 @@ extern "C" s32 FUN_002d0090()
     BattleViewState *state = gameFlagIsSet(0x4d0) ? &g_battleViewState : NULL;
     if (state == NULL)
         return 1;
-    s32 ready = FUN_0040ab8c(state->attachments.primary[0]);
+    s32 ready = moriModelContentIsLoaded(state->attachments.primary[0]);
     if (!ready) return ready;
-    ready = FUN_0040ab8c(state->attachments.primary[1]);
+    ready = moriModelContentIsLoaded(state->attachments.primary[1]);
     if (!ready) return ready;
-    ready = FUN_0040ab8c(state->attachments.primary[2]);
+    ready = moriModelContentIsLoaded(state->attachments.primary[2]);
     if (!ready) return ready;
-    ready = FUN_0040ab8c(state->children[0]);
+    ready = moriModelContentIsLoaded(state->children[0]);
     if (!ready) return ready;
-    ready = FUN_0040ab8c(state->children[1]);
+    ready = moriModelContentIsLoaded(state->children[1]);
     if (!ready) return ready;
-    ready = FUN_0040ab8c(state->children[2]);
+    ready = moriModelContentIsLoaded(state->children[2]);
     if (!ready) return ready;
     FUN_0040ab7c(state->attachments.primary[0], 2);
     activateBattleView(&state->attachments.primary[0]);

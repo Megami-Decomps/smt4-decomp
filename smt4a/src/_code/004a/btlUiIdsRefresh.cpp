@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_001a9104(BtlUiObjCA *obj, u16 *ids);
+void btlUiCopyIdList(BtlUiObjCA *obj, u16 *ids);
 void fillTwoWordsWithByte(u16 *ids, s32 value);
 u16 uiFindValidIdOrdinal(u32 owner, s32 index);
 
@@ -16,7 +16,7 @@ void btlUiIdsRefresh(void)
     ui->ids[1] = uiFindValidIdOrdinal(ui->owner, 1);
     ui->ids[2] = uiFindValidIdOrdinal(ui->owner, 2);
     ui->ids[3] = uiFindValidIdOrdinal(ui->owner, 3);
-    FUN_001a9104(&ui->objC, ui->ids);
+    btlUiCopyIdList(&ui->objC, ui->ids);
 }
 
 } /* extern "C" */

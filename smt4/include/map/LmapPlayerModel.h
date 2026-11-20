@@ -12,7 +12,7 @@ void nodeOwnerSetTranslations(Obj4206e8 *owner, const MapVector *position);
 void nodeGroupSetScale(Obj4206e8 *owner, NodeVec3 scale);
 void FUN_003351e0(Obj4206e8 *owner, NodeVec3 rotation);
 u32 FUN_00335118(const Obj4206e8 *owner);
-void FUN_00297684(Obj4206e8 *owner);
+void lmapPlayerModelDestroy(Obj4206e8 *owner);
 void modelPartSetRotationDegrees(AsdMdlNode *node, s32 part, NodeVec3 rotation);
 void modelSelectSecondaryMotion(AsdMdlNode *node, s32 motion, f32 blend);
 void asdModelSelectSecondaryMotion(ModelPropertyController *controller, s32 motion, f32 time);

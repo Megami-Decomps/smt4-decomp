@@ -8,7 +8,7 @@ extern AsdFileGlobals g_asdFile;
 extern u32 g_asdFileMutex; /* nn::os mutex handle guarding the loader's lists */
 
 void syncWaitHandleForever(u32 *handle);
-s32 FUN_0019a364(s32 *previousCount, u32 handle, s32 releaseCount);
+s32 svcReleaseSemaphore(s32 *previousCount, u32 handle, s32 releaseCount);
 void *asdMemoryAllocTracked(s32 heap, s32 alignmentClass, s32 flags, u32 size, s32 fromFront);
 void sysMemClear(void *block, u32 size);
 void memcpySrcFirst(const void *src, void *dst, u32 size);
@@ -17,7 +17,7 @@ void memcpySrcFirst(const void *src, void *dst, u32 size);
 static void syncReleaseMutex(u32 *handle)
 {
     s32 previousCount;
-    s32 result = FUN_0019a364(&previousCount, *handle, 1);
+    s32 result = svcReleaseSemaphore(&previousCount, *handle, 1);
 
     if (nnResultIsFailure(result)) {
         resultHandleFailure(result);

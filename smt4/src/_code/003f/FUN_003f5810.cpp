@@ -2,12 +2,12 @@
 #include "common.h"
 
 extern "C" {
-extern u32 DAT_0044e918;
+extern u32 g_moAllocator;
 extern u32 DAT_0044e91c;
 
 void FUN_003f5810(u32 firstValue, u32 secondValue)
 {
-    DAT_0044e918 = firstValue;
+    g_moAllocator = firstValue;
     DAT_0044e91c = secondValue;
 }
 }

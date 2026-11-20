@@ -15,14 +15,14 @@ struct Obj323dd8 {
 };
 
 extern "C" {
-extern EffectEditorOptions DAT_0044fce0;
+extern EffectEditorOptions g_effectEditorObjectTextureTable;
 
-u32 FUN_00242f94(f32 *selection, u32 value, EffectEditorOptions *options);
+u32 effectEditorBindTexture(f32 *selection, u32 value, EffectEditorOptions *options);
 
-/* Runs FUN_00242f94 on the parent's selection with the editor's +0x30 value and the options table. */
+/* Runs effectEditorBindTexture on the parent's selection with the editor's +0x30 value and the options table. */
 void FUN_00323dd8(Obj323dd8 *obj)
 {
-    EffectEditorOptions *options = &DAT_0044fce0;
-    FUN_00242f94(obj->parent->selection, (u32)g_effectEditor.texture, options);
+    EffectEditorOptions *options = &g_effectEditorObjectTextureTable;
+    effectEditorBindTexture(obj->parent->selection, (u32)g_effectEditor.texture, options);
 }
 }

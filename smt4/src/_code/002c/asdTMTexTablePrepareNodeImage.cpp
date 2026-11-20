@@ -14,7 +14,7 @@ void *asdTMTexTablePrepareNodeImage(s32 tableIndex, s32 nodeIndex)
     if (node != NULL) {
         texTableEntryLoadSync(node);
         if (node->loaded.texture != NULL) {
-            node->loaded.texture->unk08 = kind;
+            node->loaded.texture->heap = kind;
             if (node->loaded.texture != NULL) {
                 asdTextureSetImage(node->loaded.texture);
                 node->loaded.state |= 4;

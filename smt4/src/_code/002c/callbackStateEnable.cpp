@@ -8,7 +8,7 @@ struct CallbackState {
 }
 
 extern "C" {
-extern CallbackState *DAT_0044e110;
+extern CallbackState *g_soundTestWork;
 
 static __inline void callbackStateSetEnabled(CallbackState *state, u8 enabled)
 {
@@ -18,6 +18,6 @@ static __inline void callbackStateSetEnabled(CallbackState *state, u8 enabled)
 /* Enables the callback state. */
 void callbackStateEnable(void)
 {
-    callbackStateSetEnabled(DAT_0044e110, 1);
+    callbackStateSetEnabled(g_soundTestWork, 1);
 }
 }

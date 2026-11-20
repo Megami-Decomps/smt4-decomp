@@ -47,7 +47,7 @@ static __inline s32 effectManagerRecordHandle(BtlEffectManager *manager, s32 han
 }
 
 s32 FUN_00320b44(f32 *scale, s32 index, u32 value);
-Vector3 FUN_004fad68(BtlEffectManager *manager, s32 mode, u32 param, s32 index);
+Vector3 btlApplyDirectionBucketEffect(BtlEffectManager *manager, s32 mode, u32 param, s32 index);
 void FUN_0047ed10(u32 value, s32 a, s32 mode, f32 x, f32 y, f32 z);
 void FUN_00260030(s32 entry);
 
@@ -72,7 +72,7 @@ s32 FUN_004f5750(BtlEffectManager *manager, s32 effect, u32 param, s32 index, Ve
     if (mode != 6 && index >= 0) {
         hasInfo = FUN_00320b44(&info, index, infoValue);
     }
-    offset = FUN_004fad68(manager, mode, param, index);
+    offset = btlApplyDirectionBucketEffect(manager, mode, param, index);
     position.x = offset.x + start.x;
     position.y = offset.y + start.y;
     position.z = offset.z;
@@ -91,7 +91,7 @@ s32 FUN_004f5750(BtlEffectManager *manager, s32 effect, u32 param, s32 index, Ve
         FUN_0047ed10(targetValue, 0, mode, position.x, position.y, position.z);
     }
     if (mode == 2 || mode == 5 || mode == 7 || mode == 8 || mode == 9 || mode == 12 || mode == 15) {
-        handle = reinterpret_cast<s32>(FUN_0031ba34(effect, freeSlot, position.x, position.y, position.z, 1.0f, 1, 3));
+        handle = reinterpret_cast<s32>(spatialEffectTaskCreate(effect, freeSlot, position.x, position.y, position.z, 1.0f, 1, 3));
         return effectManagerRecordHandle(manager, handle);
     } else {
         f32 scale = 5.6f;
@@ -115,7 +115,7 @@ s32 FUN_004f5750(BtlEffectManager *manager, s32 effect, u32 param, s32 index, Ve
             scale = 1.0f;
             flag = 1;
         }
-        handle = reinterpret_cast<s32>(FUN_0031ba34(effect, freeSlot, position.x, position.y, position.z, scale, 0, flag));
+        handle = reinterpret_cast<s32>(spatialEffectTaskCreate(effect, freeSlot, position.x, position.y, position.z, scale, 0, flag));
     }
     return effectManagerRecordHandle(manager, handle);
 }

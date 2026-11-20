@@ -28,12 +28,12 @@ typedef char SoundVolumeStateLayoutCheck[sizeof(SoundHandle) == 4 &&
     offsetof(SoundVolumeStateView, handles) == 0x87C && offsetof(SoundVolumeStateView, volume) == 0xA49 ? 1 : -1];
 
 extern "C" {
-extern __weak SoundVolumeStateView DAT_004e26ec;
+extern __weak SoundVolumeStateView g_nwSound3DManager;
 
 // Store the capped volume and apply its normalized gain to each occupied sound slot.
 void soundApplyVolumeToSlots(u32 volume)
 {
-    SoundVolumeStateView* system = &DAT_004e26ec;
+    SoundVolumeStateView* system = &g_nwSound3DManager;
     if (system == NULL) {
         return;
     }

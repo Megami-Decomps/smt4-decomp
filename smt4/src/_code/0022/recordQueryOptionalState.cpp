@@ -9,13 +9,13 @@ struct StateCheckWork {
 };
 
 extern StateCheckWork *g_bustupCutAnim;
-void FUN_002fc29c(void);
+void bustupCutAnimEnsureBlock(void);
 
 /* Returns whether the cut animation is in state 1; reports the missing work when it isn't allocated. */
 s32 recordQueryOptionalState(void)
 {
     if (g_bustupCutAnim == NULL) {
-        FUN_002fc29c();
+        bustupCutAnimEnsureBlock();
     } else {
         return g_bustupCutAnim->state == 1;
     }

@@ -2,15 +2,15 @@
 
 extern "C" {
 
-extern UiCallbackContext *DAT_0043d990;
+extern UiCallbackContext *g_btlDevilListCallbackContext;
 s32 asdMemFree(void *memory);
 
 /* Releases the UI callback context if it exists. */
 void FUN_003ac710()
 {
-    if (DAT_0043d990 != NULL) {
-        asdMemFree(DAT_0043d990);
-        DAT_0043d990 = NULL;
+    if (g_btlDevilListCallbackContext != NULL) {
+        asdMemFree(g_btlDevilListCallbackContext);
+        g_btlDevilListCallbackContext = NULL;
     }
 }
 

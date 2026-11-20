@@ -14,7 +14,7 @@ int mapPlayActorKindSound(char *, int);
 int distSpatial(void);
 int FUN_0033abb4(void);
 int mathPositionHeadingDegrees(void);
-int FUN_00376fa4(unsigned int);
+int mapSetActiveEntryId(unsigned int);
 int sequenceRequestDefer(int, unsigned int);
 int sysClearCachedFlag(void);
 int soundActorStartOnFreeChannel(int);
@@ -59,7 +59,7 @@ extern unsigned int gameDataGetTableValue(void);
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_0033abb4. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
-/* Supplied declaration required: FUN_00376fa4. */
+/* Supplied declaration required: mapSetActiveEntryId. */
 /* Supplied declaration required: sequenceRequestDefer. */
 /* Supplied declaration required: sysClearCachedFlag. */
 extern int FUN_003d21dc(void);
@@ -131,7 +131,7 @@ unsigned int FUN_0033b7c4(void)
           else {
             sysClearCachedFlag();
           }
-          FUN_00376fa4(*(unsigned int *)(temp_v4 + 0xa4));
+          mapSetActiveEntryId(*(unsigned int *)(temp_v4 + 0xa4));
           if (0 < *(int *)(temp_v4 + 0x90)) {
             DAT_005f17ec = *(unsigned int *)(temp_v4 + 0x94);
             DAT_005f17e8 = *(int *)(temp_v4 + 0x90);
@@ -209,7 +209,7 @@ LAB_0033baac:
                 else if (*(int *)(temp_v6 + 0x9c) != 0) {
                   sequenceRequestDefer(*(int *)(temp_v6 + 0x9c),*(unsigned int *)(temp_v6 + 0xa0));
                 }
-                FUN_00376fa4(*(unsigned int *)(temp_v6 + 0xa4));
+                mapSetActiveEntryId(*(unsigned int *)(temp_v6 + 0xa4));
                 if (0 < *(int *)(temp_v6 + 0x90)) {
                   DAT_005f17ec = *(unsigned int *)(temp_v6 + 0x94);
                   DAT_005f17e8 = *(int *)(temp_v6 + 0x90);

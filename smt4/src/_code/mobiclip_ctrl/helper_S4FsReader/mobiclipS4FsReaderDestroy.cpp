@@ -5,8 +5,8 @@
 extern "C" {
 
 int asdMemFreeNonNull(int);
-int FUN_002c3f5c(...);
-int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
+int addressSpaceRegionFree(...);
+int svcWaitSynchronizationN(unsigned char *, int *, int, int, unsigned int, unsigned int);
 int asdMemFree(unsigned int);
 int resultHandleFailure(void);
 int software_interrupt(int);
@@ -22,8 +22,8 @@ extern int DAT_0044d134; /* 0x44d134 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: asdMemFreeNonNull. */
-/* Supplied declaration required: FUN_002c3f5c. */
-/* Supplied declaration required: FUN_002c40f8. */
+/* Supplied declaration required: addressSpaceRegionFree. */
+/* Supplied declaration required: svcWaitSynchronizationN. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: resultHandleFailure. */
 extern void nn_os_Thread_FinalizeImpl(unsigned int);
@@ -45,7 +45,7 @@ void mobiclipS4FsReaderDestroy(unsigned int *param_1)
     }
     uStack_20 = param_1[0xc];
     puVar2 = temp_v1;
-    FUN_002c40f8(puVar2,&uStack_20,1,0,0xffffffff,0xffffffff);
+    svcWaitSynchronizationN(puVar2,&uStack_20,1,0,0xffffffff,0xffffffff);
     if ((int)puVar2 < 0) {
       resultHandleFailure();
     }
@@ -55,10 +55,10 @@ void mobiclipS4FsReaderDestroy(unsigned int *param_1)
       software_interrupt(0x23);
       param_1[0xc] = 0;
     }
-    FUN_002c3f5c(DAT_0044d134);
+    addressSpaceRegionFree(DAT_0044d134);
     temp_v0 = DAT_0044d134;
     if (DAT_0044d134 != 0) {
-      FUN_002c3f5c();
+      addressSpaceRegionFree();
       asdMemFreeNonNull(temp_v0);
     }
     DAT_0044d134 = 0;

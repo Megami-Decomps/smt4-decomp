@@ -22,7 +22,7 @@ struct CecCardPlacement {
 extern "C" {
 void texDrawCompositeSprite(s32 mode, u32 file, u32 sprite, s32 x, s32 y, u32 layer);
 void drawSetColorFromRGBA8(u32 color);
-void FUN_002e1b64(u32 display, s32 x, s32 y, u32 layer);
+void digitsDrawPaddedNumber(u32 display, s32 x, s32 y, u32 layer);
 void gxResetColorQuadToWhite();
 }
 
@@ -42,7 +42,7 @@ extern "C" void cecCardDrawBackgroundAndLabel(CecCardLabel *label, const CecCard
     }
     drawSetColorFromRGBA8(0x82fff500);
     const TextureTableEntryIV *entrySprite = asdTMTexTableEntryAt(46, 83);
-    FUN_002e1b64(entry->display, placement->x + entrySprite->x + x,
+    digitsDrawPaddedNumber(entry->display, placement->x + entrySprite->x + x,
                   placement->y + entrySprite->y + y, 101);
     gxResetColorQuadToWhite();
     texDrawCompositeSprite(2, 46, 14, placement->x + x, placement->y + y, 101);

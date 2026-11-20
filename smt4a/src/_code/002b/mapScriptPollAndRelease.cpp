@@ -21,7 +21,7 @@ s32 getByteTableAValue();
 void byteTableASetValue(s32 enabled);
 s32 byteTableAGetValue3();
 void byteTableASetValue3(s32 enabled);
-s32 FUN_00162ea4();
+s32 eventIsSkipping();
 void titleSetSlotValueState2(s32 channel, s32 mode);
 
 void messageSlotSet(s32 slot);
@@ -39,7 +39,7 @@ u32 mapScriptPollAndRelease()
             byteTableASetValue3(0);
             byteTableASetValue(0);
         }
-        if (getByteTableAValue() && !FUN_00162ea4()) {
+        if (getByteTableAValue() && !eventIsSkipping()) {
             titleSetSlotValueState2(0, 5);
             titleSetSlotValueState2(1, 5);
             byteTableASetValue(0);

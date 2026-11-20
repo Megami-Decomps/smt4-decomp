@@ -7,7 +7,7 @@ extern "C" {
 int coproc_movefrom_User_R_Thread_and_Process_ID(void);
 int software_interrupt(int);
 
-extern unsigned int DAT_00472a58; /* 0x472a58 */
+extern unsigned int g_amAppSession; /* 0x472a58 */
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
@@ -29,8 +29,8 @@ unsigned int FUN_003520d8(unsigned int param_1,unsigned char param_2,unsigned in
   *(unsigned int *)(temp_v1 + 0x98) = param_1;
   *(unsigned int *)(temp_v1 + 0x94) = (param_4 * 0x180) | 0xc;
   software_interrupt(0x32);
-  temp_v0 = DAT_00472a58;
-  if ((DAT_00472a58 & 0x80000000) == 0) {
+  temp_v0 = g_amAppSession;
+  if ((g_amAppSession & 0x80000000) == 0) {
     temp_v0 = *(unsigned int *)(temp_v1 + 0x84);
   }
   return temp_v0;

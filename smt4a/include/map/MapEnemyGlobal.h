@@ -11,7 +11,7 @@ extern MapEnemyA *g_mapEnemy;
 extern u8 DAT_005806e0[];
 
 /* Releases the entry's previous model and binds the spawn of table `kind` (1-4) whose owner is `id`. */
-void FUN_00377acc(MapEnemyEntryA *entry, s32 id, u32 kind);
+void mapEnemyRebindModel(MapEnemyEntryA *entry, s32 id, u32 kind);
 }
 
 /* map/mapEnemy.cpp's module statics: g_mapEnemy and the word after it (no symbol of its own yet),

@@ -25,7 +25,7 @@ extern "C" PartySlotA *FUN_00187068(u32 rank)
             if (slot && slot->id) {
                 records[i].value = i;
                 records[i].secondary = slot->id;
-                records[i].primary = FUN_0019acdc(slot->id, 0);
+                records[i].primary = unitMapIdToCategory(slot->id, 0);
             } else {
                 records[i].value = i;
                 records[i].secondary = 0;

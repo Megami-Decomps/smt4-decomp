@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002fb208(void);
+int threadGetCurrentId(void);
 int FUN_0030ce60(unsigned int *, int);
 int FUN_0030ceb8(void);
 int FUN_0030cf36(unsigned int *, int *);
@@ -35,7 +35,7 @@ extern unsigned char DAT_00559038; /* 0x559038 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern int FUN_002f5928(unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_002fb208. */
+/* Supplied declaration required: threadGetCurrentId. */
 extern int FUN_0030cdfa(void);
 /* Supplied declaration required: FUN_0030ce60. */
 extern unsigned int *_ZN9Obj559608C1Ev(fn_001290e8_arg0 *);
@@ -77,7 +77,7 @@ unsigned long long FUN_001290e8(fn_001290e8_arg0 *param_1,int param_2,unsigned i
   *(int *)(*(int *)(temp_v0 + 0x40) + 8) = *(int *)(temp_v0 + 0x40);
   temp_v1 = *(int *)(temp_v0 + 0x40);
   *(int *)(temp_v1 + 0xc) = temp_v1;
-  FUN_002fb208();
+  threadGetCurrentId();
   temp_v3 = temp_v1;
   FUN_0030cf36((unsigned int *)(temp_v0 + 0x30),&temp_v3);
   FUN_0030ceb8();

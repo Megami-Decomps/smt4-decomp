@@ -8,7 +8,7 @@
 extern "C" {
 void efctSetSpeed(f32 speed);
 void drawSetColorFromRGBA8(u32 color);
-void FUN_00180310(u32 font, s32 x, s32 y, u32 flags, u32 kind, u32 parameter,
+void statRowDrawValueImpl(u32 font, s32 x, s32 y, u32 flags, u32 kind, u32 parameter,
     const char* format, ...);
 
 void FUN_003f533c(u32 unused, s32 x, s32 y, u32 parameter, s32 number,
@@ -30,9 +30,9 @@ void FUN_003f533c(u32 unused, s32 x, s32 y, u32 parameter, s32 number,
     s32 ones = number % 10;
     sprite = asdTMTexTableEntryAt(0x31, onesLayout);
     x += parallax;
-    FUN_00180310(6, sprite->x + x, sprite->y + y, 0, 4, parameter, "%d", ones);
+    statRowDrawValueImpl(6, sprite->x + x, sprite->y + y, 0, 4, parameter, "%d", ones);
     sprite = asdTMTexTableEntryAt(0x31, tensLayout);
-    FUN_00180310(6, sprite->x + x, sprite->y + y, 0, 4, parameter, "%d", tens);
+    statRowDrawValueImpl(6, sprite->x + x, sprite->y + y, 0, 4, parameter, "%d", tens);
     drawSetColorFromRGBA8(0xFFFFFFFF);
     efctSetSpeed(1.0f);
 }

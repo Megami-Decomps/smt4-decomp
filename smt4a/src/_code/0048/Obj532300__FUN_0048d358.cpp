@@ -18,7 +18,7 @@ typedef struct PresetCursorView {
 
 void pointConvertToFloat(void *point, s32 x, s32 y);
 void uiSpriteBankApplyPreset(void *bank, s32 preset);
-void FUN_00168980(s32 sound);
+void buttonHelpTransitionPresetFlags(s32 sound);
 
 /* Shows the view (state 0 -> 1), then follows its cursor until it settles (state 1 -> 2). */
 void _ZN9Obj53230012FUN_0048d358Ev(PresetCursorView *view)
@@ -27,7 +27,7 @@ void _ZN9Obj53230012FUN_0048d358Ev(PresetCursorView *view)
     case 0:
         uiSpriteBankApplyPreset(view->sprites, 1);
         if (g_gameState.menuOpen == 0) {
-            FUN_00168980(0x1b);
+            buttonHelpTransitionPresetFlags(0x1b);
         }
         view->flags |= 0x1000000;
         view->state = 1;

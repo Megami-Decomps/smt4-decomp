@@ -12,7 +12,7 @@ struct ModeResetView {
 };
 
 extern "C" {
-void FUN_0021af2c(void);
+void gameTransitionStartStep(void);
 
 // Resets mode-specific state when leaving mode eight or nine.
 void FUN_002c8550(s32 mode)
@@ -28,7 +28,7 @@ void FUN_002c8550(s32 mode)
         return;
     }
     data->step = 0;
-    FUN_0021af2c();
+    gameTransitionStartStep();
     data->pending = 0;
 }
 }

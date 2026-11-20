@@ -4,15 +4,15 @@ extern "C" {
 
 s32 scrGetArg(u32 index);
 void sequenceRequestClearDeferred(void);
-void FUN_0027d8b4(s32 value);
+void mapSetActiveEntryId(s32 value);
 void mapSaveSceneReturnSnapshot(void);
 
-/* Script command: clears the deferred sequence request, runs FUN_0027d8b4 on argument zero, then mapSaveSceneReturnSnapshot. */
+/* Script command: clears the deferred sequence request, runs mapSetActiveEntryId on argument zero, then mapSaveSceneReturnSnapshot. */
 s32 FUN_002f61c0(void)
 {
     s32 value = scrGetArg(0);
     sequenceRequestClearDeferred();
-    FUN_0027d8b4(value);
+    mapSetActiveEntryId(value);
     mapSaveSceneReturnSnapshot();
     return 1;
 }

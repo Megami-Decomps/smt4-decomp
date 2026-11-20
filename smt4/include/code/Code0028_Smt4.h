@@ -24,9 +24,9 @@ void FUN_0028cf30(PlayScene *scene, int value, int flag);
 
 void FUN_0028d664(ScriptHelpOwner *owner, u8 mode);
 
-s32 FUN_0028cfbc(Widget *widget);
+s32 widgetGetVisibleLength(Widget *widget);
 
-void FUN_00283f30(Dest *dest, int withSource);
+void playerCollectPassiveSkillBits(Dest *dest, int withSource);
 
 s32 FUN_0028299c(Owner *owner);
 

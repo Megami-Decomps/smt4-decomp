@@ -2,10 +2,10 @@
 
 extern "C" {
 
-void FUN_003d2158(u32 a, u32 b);
+void soundApplyValueOrStop(u32 a, u32 b);
 s32 scrGetArg(...);
 
-/* Script command: forwards the script arguments 0 and 1 to FUN_003d2158; always returns 1. */
+/* Script command: forwards the script arguments 0 and 1 to soundApplyValueOrStop; always returns 1. */
 u32 FUN_002613bc(void)
 {
     u32 first;
@@ -13,7 +13,7 @@ u32 FUN_002613bc(void)
 
     first = scrGetArg(0);
     second = scrGetArg(1);
-    FUN_003d2158(first, second);
+    soundApplyValueOrStop(first, second);
     return 1;
 }
 

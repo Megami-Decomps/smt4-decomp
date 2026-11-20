@@ -12,7 +12,7 @@ struct Table25Record {
 extern "C" {
 #endif
 
-Table25Record* FUN_002cdecc(s32 id);
+Table25Record* dataTable25Section0FindById(s32 id);
 
 #ifdef __cplusplus
 }

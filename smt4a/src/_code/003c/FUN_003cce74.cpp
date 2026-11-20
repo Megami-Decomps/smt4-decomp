@@ -16,7 +16,7 @@ struct GridDetailView {
 };
 
 extern "C" {
-void FUN_00180310(s32 a, s32 x, s32 y, s32 b, s32 c, u32 flags, const char *format, u32 value);
+void statRowDrawValueImpl(s32 a, s32 x, s32 y, s32 b, s32 c, u32 flags, const char *format, u32 value);
 void FUN_00185e84(s32 id, s32 x, s32 y, u32 flags, s32 a, s32 b);
 void largeGridDrawButtonStrip(GridDetailView *view, s32 x, s32 y, s32 slot, f32 speed);
 void statDrawClampedDelta(void *owner, s32 id, s32 x, s32 y, u32 flags, s32 arg);
@@ -58,7 +58,7 @@ void FUN_003cce74(GridDetailView *view, void *owner, s32 x, s32 y, f32 speed)
         statDrawClampedDelta(owner, entry, frame->x + icon->x + x, icon->y + frame->y + y, 0x74, 0);
         TextureTableEntryIV *value = asdTMTexTableEntryAt(0x1A, 0x1A6);
         u32 amount = skillGetAdjustedCost(owner, entry);
-        FUN_00180310(1, frame->x + value->x + x, value->y + frame->y + y, 1, 4, 0x79, "%d", amount);
+        statRowDrawValueImpl(1, frame->x + value->x + x, value->y + frame->y + y, 1, 4, 0x79, "%d", amount);
     } else {
         s32 mode = recordGetModeForId(view->slotIds[button]);
         if (mode == 1 || mode == 2 || mode == 6)

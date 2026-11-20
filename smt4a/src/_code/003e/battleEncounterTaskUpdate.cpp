@@ -18,7 +18,7 @@ extern void *g_btlAux;
 s32 isEntryUsable(BtlStep *event); // declcheck: local (takes the event step; the shared prototype has the decompiler's s32 *)
 s32 FUN_004d7a70(BtlStep *event, u32 kind, u32 value, u32 flags);
 void frameTexRequestFade(u32 state);
-void FUN_0013cab8(u32 index, u32 first, u32 second);
+void screenFadeStartIn(u32 index, u32 first, u32 second);
 void FUN_004d7fe4(BtlStep *event);
 s32 FUN_003e11ac(BtlStep *step, BtlMainStateA *state);
 s32 loadSlotIsLoaded(u32 slot);
@@ -81,7 +81,7 @@ extern "C" s32 battleEncounterTaskUpdate(BtlStep *step, BtlMainStateA *state)
                 frameTexRequestFade(2);
                 state->stateFlags64.bits = g_btlEncount.initializedMask | state->stateFlags64.bits;
                 if (pairedAvailabilityGetState(1) == 3)
-                    FUN_0013cab8(1, 10, 0xff);
+                    screenFadeStartIn(1, 10, 0xff);
             }
             FUN_004d7fe4(g_btlEvent);
         }

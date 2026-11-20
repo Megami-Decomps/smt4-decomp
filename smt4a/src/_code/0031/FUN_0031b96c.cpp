@@ -12,7 +12,7 @@ extern void FUN_002c1664(void *work);
 extern TaskWork *taskCreate(void (*update)(void *), u32 a, u32 b, u32 c, u32 d, u32 size, u32 list, u32 e, u32 f);
 extern int sysMemClear(void *buffer, u32 size);
 
-extern TaskWork *DAT_00570ab4; /* 0x570ab4 */
+extern TaskWork *g_effectColorOverride; /* 0x570ab4 */
 
 /* Creates the task running FUN_002c1664 with a cleared 0x70-byte work area, disabled. */
 void FUN_0031b96c(void)
@@ -21,7 +21,7 @@ void FUN_0031b96c(void)
 
     if (work != NULL) {
         sysMemClear(work, 0x70);
-        DAT_00570ab4 = work;
+        g_effectColorOverride = work;
         work->enabled = 0;
     }
 }

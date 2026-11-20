@@ -64,9 +64,9 @@ void sysPlaySe(s32 id);
 void FUN_00182054(void);
 void scrScriptProcessCreate(StatusResource *resource, u32 size);
 void linkHolderApplyFlag(LinkHolder *links, s32 flag);
-void FUN_002e1c94(void *work, s32 count, u32 frame, f32 start, f32 end);
-void FUN_002e207c(void);
-void FUN_002e2114(void);
+void timedValueInterpolateStep(void *work, s32 count, u32 frame, f32 start, f32 end);
+void linkControllerResetScaleAndCancel(void);
+void linkedTargetRunHolderLinks(void);
 void outfitPreviewConfigureEquipment(struct OutfitPreview *preview, const struct OutfitPreviewEquipment *equipment);
 StatusScene *overlayGetStatusScene(void);
 u32 overlayGetBuffer1(void);
@@ -99,11 +99,11 @@ u32 FUN_00359dc4(StatusScreen *screen)
         outfitPreviewConfigureEquipment(reinterpret_cast<OutfitPreview *>(overlayGetStatusScene()),
                      reinterpret_cast<const OutfitPreviewEquipment *>(playerData));
         overlayGetStatusScene();
-        FUN_002e207c();
+        linkControllerResetScaleAndCancel();
         screen->resourcesReleased = 1;
     }
     LinkHolder *links = screen->links;
-    FUN_002e2114();
+    linkedTargetRunHolderLinks();
     if (links != NULL && screen->resource != NULL && screen->resourceSize != 0 && screen->resourceExtra != 0) {
         u32 ready = screen->character->ready;
         FUN_00182054();
@@ -129,7 +129,7 @@ u32 FUN_00359dc4(StatusScreen *screen)
                     modelApplyNonzeroGroupRotation(screen->links->handle, screen->links->controller);
                 }
                 for (s32 i = 0; i < 2; i++) {
-                    FUN_002e1c94(screen->timers[i].work, 4, screen->timers[i].frame, 0.0f, 1.0f);
+                    timedValueInterpolateStep(screen->timers[i].work, 4, screen->timers[i].frame, 0.0f, 1.0f);
                     screen->timers[i].frame++;
                 }
                 overlayIsNotBusy();

@@ -12,7 +12,7 @@ extern BtlEffectOwnerA *g_btlAux;
 extern BattleMessageFlagMasks g_btlMessageFlagMasks;
 s32 isEntryUsable(u32 event);
 s32 FUN_004f5a78(BtlEffectOwnerA *owner);
-void FUN_002980e4(s32 message, s32 enabled);
+void btlAuxQueryCommonUpDownPair(s32 message, s32 enabled);
 void FUN_004fb6f4(s32 slot, s32 mode, BattleRosterRecordA *record, u32 effect,
     s32 message, s32 target, u32 flags);
 void btlEmitMessageTableEntries(s32 message, ScriptUnit *unit, BtlEffectSlotBlock *slots,
@@ -26,7 +26,7 @@ u32 FUN_003a969c()
     if (isEntryUsable(g_btlEvent) && !FUN_004f5a78(g_btlAux))
         return 0;
     if (message != 0) {
-        FUN_002980e4(message, 1);
+        btlAuxQueryCommonUpDownPair(message, 1);
         BtlMainStateA *battle = btlGetMainState();
         ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
         BtlEffectSlotBlock *slots = g_btlAux->slots;

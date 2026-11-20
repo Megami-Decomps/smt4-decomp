@@ -45,7 +45,7 @@ typedef char DrawCallbackRecordSize[sizeof(DrawCallbackRecord) == 0x10 ? 1 : -1]
 extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
-void FUN_00167eb0(void *request);
+void asdGxCommandListReplayCopy(void *request);
 #ifdef __cplusplus
 }
 #endif

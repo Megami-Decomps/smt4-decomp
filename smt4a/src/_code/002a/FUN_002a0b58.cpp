@@ -195,7 +195,7 @@ code_r0x002a0ee4:
       if (uVar9 >= 2) {
         if (uVar9 == 2) {
           FUN_00164288();
-          uVar8 = FUN_0014af98();
+          uVar8 = messageVoiceBankGet();
           FUN_001628c0(0x2a1318,uVar8,2,1);
         }
       }
@@ -205,7 +205,7 @@ code_r0x002a0ee4:
     }
     else {
       iVar3 = iVar6 + 0xf0;
-      FUN_00228b04(iVar3,1);
+      gridNavigationHandleConfirm(iVar3,1);
       iVar2 = DAT_00589164;
       if (iVar3 != 0) {
         iVar6 = resourceRunOperationIfUnblocked(DAT_00589164 + 0xf0);

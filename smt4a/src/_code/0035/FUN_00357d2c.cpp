@@ -21,9 +21,9 @@ u32 FUN_00357d2c(void)
                 break;
             }
         }
-        FUN_003e4e4c(index < 12 ? candidate->id : 0);
+        saveSlotTableSetPreferredId(index < 12 ? candidate->id : 0);
     }
-    FUN_003e48dc((u16)requestedValue);
+    partySlotClearInactiveFlag((u16)requestedValue);
     return 1;
 }
 }

@@ -16,13 +16,13 @@ static __inline MaterialNamedResource *materialGetResource(const NamedMaterialRe
 }
 
 extern "C" {
-extern MaterialNameSelection *DAT_0057f2c4;
+extern MaterialNameSelection *g_uniteEffectWork;
 char *FUN_00102c30(char *text, const char *pattern);
 
 // Collect each material whose resource name contains the requested substring.
 void FUN_003d2a00(const char *pattern)
 {
-    MaterialNameSelection *selection = DAT_0057f2c4;
+    MaterialNameSelection *selection = g_uniteEffectWork;
     selection->current = 0;
     selection->count = 0;
     s32 bindingCount = selection->owner->model->metadata->bindingCount;

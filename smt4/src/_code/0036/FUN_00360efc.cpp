@@ -28,7 +28,7 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } param_3_stack;
 
-extern unsigned int *DAT_0044e368; /* 0x44e368 */
+extern unsigned int *g_appletCloseReason; /* 0x44e368 */
 extern unsigned int DAT_004719d8; /* 0x4719d8 */
 extern unsigned int DAT_004719dc; /* 0x4719dc */
 extern unsigned char DAT_004c4b40; /* 0x4c4b40 */
@@ -66,7 +66,7 @@ unsigned int FUN_00360efc(unsigned char *param_1,unsigned int param_2,int param_
   unsigned char temp_v12;
   unsigned int temp_v13 [5];
   
-  puVar2 = DAT_0044e368;
+  puVar2 = g_appletCloseReason;
   temp_v4 = 0;
   temp_v13[0] = 0;
   temp_v6 = 0;

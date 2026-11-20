@@ -9,7 +9,7 @@ struct BtlEntryRef {
 
 extern "C" {
 s16 btlGetPropertyMaximum(s32 property);
-s16 FUN_004c53fc(s32 property);
+s16 mapCategoryToDestinationGroup(s32 property);
 }
 
 /* Whether a stat-change request (`change`) can take effect on a property whose current value is `value`. */
@@ -25,7 +25,7 @@ static __inline bool statChangeApplies(s32 property, s32 change, s32 value)
         return value < btlGetPropertyMaximum(property);
     if (change >= 0)
         return true;
-    return FUN_004c53fc(property) < value;
+    return mapCategoryToDestinationGroup(property) < value;
 }
 
 /* Returns whether none of the requested stat changes (properties 7, 8, 10, 11) would have any effect. */

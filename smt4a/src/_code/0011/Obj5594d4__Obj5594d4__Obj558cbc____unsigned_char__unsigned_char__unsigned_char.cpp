@@ -42,7 +42,7 @@ extern unsigned int *FUN_00116854(void);
 extern unsigned int _ZN9Obj55aff4C1EPKt(unsigned char *, unsigned char *);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern int onlineSockAddrConstruct(unsigned int *);
-extern int *FUN_002ea704(void);
+extern int *watcherGetEnabledFlag(void);
 extern unsigned int FUN_002eb56c(void);
 /* Supplied declaration required: FUN_002eb924. */
 extern unsigned int *FUN_002fd1e8(unsigned int *, unsigned int);
@@ -89,19 +89,19 @@ int _ZN9Obj5594d4C1EP9Obj558cbchhh(fn_0011169c_arg0 *param_1,unsigned int param_
   temp_v0 = FUN_002eb56c();
   *(unsigned int *)(temp_v1 - 0x54) = temp_v0;
   FUN_002fd210(temp_v1 - 0x50);
-  piVar4 = (int *)FUN_002ea704();
+  piVar4 = (int *)watcherGetEnabledFlag();
   temp_v2 = (**(romwright_code **)(*piVar4 + 0x28))();
   FUN_002eb924(*(int *)(temp_v2 + 0xc) + 0x80);
-  piVar4 = (int *)FUN_002ea704();
+  piVar4 = (int *)watcherGetEnabledFlag();
   temp_v0 = (**(romwright_code **)(*piVar4 + 0x28))();
   FUN_002fd25e(temp_v0,0);
   temp_v3 = *(char *)(temp_v1 + 0x1d) == '\0';
   if (!temp_v3) {
-    piVar4 = (int *)FUN_002ea704();
+    piVar4 = (int *)watcherGetEnabledFlag();
     temp_v0 = (**(romwright_code **)(*piVar4 + 0x28))();
   }
   else {
-    piVar4 = (int *)FUN_002ea704();
+    piVar4 = (int *)watcherGetEnabledFlag();
     temp_v0 = (**(romwright_code **)(*piVar4 + 0x28))();
   }
   FUN_002fd25e(temp_v0,!temp_v3);

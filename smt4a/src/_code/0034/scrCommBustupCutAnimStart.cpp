@@ -3,7 +3,7 @@
 extern "C" {
 
 extern u32 scrGetArg(s32 index);
-extern u32 FUN_0037b280(void);
+extern u32 bustupCutAnimCreate(void);
 extern void bustupCutAnimSetJobParam(void);
 extern void bustupCutAnimSetPlacement(u32 id, s32 a, s32 b, s32 c, s32 d);
 extern void scrSetResult(u32 value);
@@ -14,7 +14,7 @@ s32 scrCommBustupCutAnimStart(void)
     u32 id;
 
     scrGetArg(0);
-    id = FUN_0037b280();
+    id = bustupCutAnimCreate();
     bustupCutAnimSetJobParam();
     bustupCutAnimSetPlacement(id, 0, 0, 0, 0);
     scrSetResult(id);

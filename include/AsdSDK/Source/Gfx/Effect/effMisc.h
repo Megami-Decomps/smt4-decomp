@@ -26,9 +26,16 @@ typedef struct EffMiscKind {
     /* 0x14 */ s32 workSize;
 } EffMiscKind;
 
+/* EffMiscShared.type: what kind of resource an object shares with its clones. */
+enum {
+    EFF_MISC_SHARED_TEXTURE_FILE = 1,   /* a texture created from the description's image */
+    EFF_MISC_SHARED_TEXTURE_ID = 4,     /* a texture looked up by id in the runtime table */
+    EFF_MISC_SHARED_EFFECT_TEXTURE = 9  /* an effect texture created from the image */
+};
+
 /* A resource shared between an object and its clones. */
 typedef struct EffMiscShared {
-    /* 0x00 */ u32 type;       /* 1 texture file, 4 texture id, 9 effect texture */
+    /* 0x00 */ u32 type;       /* EFF_MISC_SHARED_* */
     /* 0x04 */ s32 refCount;
     /* 0x08 */ void *resource;
 } EffMiscShared;
@@ -49,7 +56,7 @@ struct EffMiscObject {
 /* Common head of an emitter object: how many particles it can hold. */
 typedef struct EffEmitter {
     /* 0x00 */ u32 maxCount;
-    /* 0x04 */ s32 unk04;           /* -1 when created */
+    /* 0x04 */ s32 handle;          /* -1 (none) when created */
     /* 0x08 */ f32 scale;           /* 1.0 when created */
     union {
         /* 0x0C */ u8 unk0c[0x28];

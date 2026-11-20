@@ -10,8 +10,8 @@ int asdMemoryAllocTraced(...);
 void FUN_0035d1e0(float x, float z, float heading);
 int controllerSetPosition(...);
 int modelPlayClip(...);
-int FUN_0040a908(...);
-int FUN_0040a918(...);
+int moriModelContentSetRequestFirst(...);
+int moriModelContentSetRequestSecond(...);
 int resourceOwnerLoadFileSync(void);
 int moriModelContentCopyBody(...);
 int moriModelContentLoadBody(...);
@@ -57,8 +57,8 @@ extern int lmapGetSpawnIndex(void);
 extern unsigned int FUN_003857c8(int);
 /* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: modelPlayClip. */
-/* Supplied declaration required: FUN_0040a908. */
-/* Supplied declaration required: FUN_0040a918. */
+/* Supplied declaration required: moriModelContentSetRequestFirst. */
+/* Supplied declaration required: moriModelContentSetRequestSecond. */
 /* Supplied declaration required: resourceOwnerLoadFileSync. */
 /* Supplied declaration required: moriModelContentCopyBody. */
 /* Supplied declaration required: moriModelContentLoadBody. */
@@ -288,8 +288,8 @@ void FUN_002c553c(void)
           uRam0060ffcc = temp_v6;
           resourceOwnerLoadFileSync();
           FUN_0040ab7c(*(unsigned int *)(temp_v14 + 0x3b4),2);
-          FUN_0040a908(*(unsigned int *)(temp_v14 + 0x3b4),0x10000);
-          FUN_0040a918(*(unsigned int *)(temp_v14 + 0x3b4),0x20000);
+          moriModelContentSetRequestFirst(*(unsigned int *)(temp_v14 + 0x3b4),0x10000);
+          moriModelContentSetRequestSecond(*(unsigned int *)(temp_v14 + 0x3b4),0x20000);
           moriModelContentLoadBody(*(unsigned int *)(temp_v14 + 0x3b4),0);
           temp_v6 = *(unsigned int *)(*(int *)(temp_v14 + 0x3b4) + 4);
           modelPlayClip(temp_v6,0,2);
@@ -307,8 +307,8 @@ void FUN_002c553c(void)
         *(unsigned int *)(temp_v3 + 0x60ffbc) = temp_v6;
         resourceOwnerLoadFileSync();
         FUN_0040ab7c(*(unsigned int *)(temp_v3 + 0x60ffbc),2);
-        FUN_0040a908(*(unsigned int *)(temp_v3 + 0x60ffbc),0x10000);
-        FUN_0040a918(*(unsigned int *)(temp_v3 + 0x60ffbc),0x20000);
+        moriModelContentSetRequestFirst(*(unsigned int *)(temp_v3 + 0x60ffbc),0x10000);
+        moriModelContentSetRequestSecond(*(unsigned int *)(temp_v3 + 0x60ffbc),0x20000);
         moriModelContentLoadBody(*(unsigned int *)(temp_v3 + 0x60ffbc),0);
         temp_v6 = *(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4);
         modelPlayClip(temp_v6,0,2);

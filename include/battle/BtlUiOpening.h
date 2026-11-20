@@ -32,13 +32,13 @@ extern BtlUiGlobalsA g_btlUi;
 void btlUiStartCommandSelection(u32 unused, s32 mode, s8 first, s8 second, bool firstStrike, bool options);
 void FUN_004abe2c(BtlUiA *unused, s32 mode, s8 first, s8 second, bool firstStrike, bool options);
 void eventPanelSelectSpritePreset(BtlUiObjBA *panel, s32 mode, u8 optionB, u8 optionA, u8 animated);
-void FUN_002cd118(BtlUiObjAA *panel, s32 mode, s32 first, s32 second);
-void FUN_00227af0(const char *message);
+void statusPanelResetRows(BtlUiObjAA *panel, s32 mode, s32 first, s32 second);
+void btlMenuSetMessageText(const char *message);
 void menuStateReset();
 void menuStateStartSelect(s32 selection);
 void fillTwoWordsWithByte(void *destination, u32 value);
 u16 uiFindValidIdOrdinal(u32 owner, u32 ordinal);
-void FUN_001a9104(BtlUiObjCA *panel, u16 *ids);
+void btlUiCopyIdList(BtlUiObjCA *panel, u16 *ids);
 void menu32Advance(BtlUiObjCA *panel);
 void uiMenuActivateAndCountEntries(BtlUiObjCA *panel);
 }

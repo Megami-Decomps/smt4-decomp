@@ -5,13 +5,13 @@
 extern "C" {
 
 int onlineInstanceTableFind(int, int);
-int FUN_002e9f00(int *, int);
+int onlineInstanceCompleteWithChildren(int *, int);
 int FUN_002ea3d0(int *, unsigned int);
 int FUN_002ea41e(int *, int *);
 int onlineJobSetStateDone(int *);
 int FUN_002ec738(int);
 int _ZN9Obj55afc44stopEv(int *);
-int FUN_002f3dde(int, int *);
+int onlineInstanceCompleteMode3(int, int *);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -25,14 +25,14 @@ extern unsigned int DAT_00594eb0; /* 0x594eb0 */
 
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
-/* Supplied declaration required: FUN_002e9f00. */
+/* Supplied declaration required: onlineInstanceCompleteWithChildren. */
 extern unsigned int FUN_002ea3c0(unsigned int *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea41e. */
 /* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002ec738. */
 /* Supplied declaration required: _ZN9Obj55afc44stopEv. */
-/* Supplied declaration required: FUN_002f3dde. */
+/* Supplied declaration required: onlineInstanceCompleteMode3. */
 extern int _ZNK18OnlineResultRecord7isValidEv(unsigned int *);
 
 
@@ -58,7 +58,7 @@ void FUN_0010dc80(int *param_1)
     _ZN9Obj55afc44stopEv(param_1 + 0x22);
     if ((char)param_1[0x8c] != '\x03') {
       if ((char)param_1[0x8c] == '\x01') {
-        FUN_002e9f00(piVar4,4);
+        onlineInstanceCompleteWithChildren(piVar4,4);
       }
       (**(romwright_code **)(*param_1 + 0x3c))(&temp_v3,param_1);
       temp_v1 = _ZNK18OnlineResultRecord7isValidEv((unsigned int *)&temp_v3);
@@ -81,12 +81,12 @@ void FUN_0010dc80(int *param_1)
     else {
       FUN_002ea41e(&temp_v4,piVar4);
     }
-    FUN_002f3dde(temp_v0,&temp_v4);
+    onlineInstanceCompleteMode3(temp_v0,&temp_v4);
   }
   else {
     _ZN9Obj55afc44stopEv(param_1 + 0x22);
     if ((char)param_1[0x8c] == '\x01') {
-      FUN_002e9f00(piVar4,4);
+      onlineInstanceCompleteWithChildren(piVar4,4);
     }
   }
   onlineJobSetStateDone(param_1);

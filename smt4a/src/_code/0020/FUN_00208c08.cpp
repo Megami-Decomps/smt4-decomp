@@ -7,7 +7,7 @@
 
 extern "C" {
 
-int FUN_00167458(...);
+int uiSpriteSlideFromSide(...);
 int FUN_00340a94(...);
 int asdAnimGetTrackLastFrame(...);
 int __aeabi_uidivmod(...);
@@ -17,7 +17,7 @@ int eventQueueAddUniqueIfValid(...);
 int eventQueueAddUnique(...);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
-int FUN_0021af2c(void);
+int gameTransitionStartStep(void);
 int statusCameraApply(void);
 int linkHolderRunAll(...);
 int FUN_003e5558(...);
@@ -41,7 +41,7 @@ int statusBustUpPortraitRelease(...);
 int FUN_003e40d0(...);
 int linkHolderApplyFirst(...);
 int linkHolderClearFlag(...);
-int FUN_003fce08(...);
+int aocResourceStartOnce(...);
 int resourceReleaseReference(void);
 int resourceOwnerLoadNamed(...);
 int FUN_0040b27c(...);
@@ -62,7 +62,7 @@ typedef struct {
 extern unsigned char LAB_002092ac; /* 0x2092ac */
 extern unsigned char DAT_00557c60; /* 0x557c60 */
 extern int g_handleRegistry; /* 0x56fcc0 */
-extern int DAT_00588e2c; /* 0x588e2c */
+extern int g_saveLoadRunner; /* 0x588e2c */
 extern unsigned char DAT_00588fd2; /* 0x588fd2 */
 extern int DAT_00588fd4; /* 0x588fd4 */
 
@@ -76,7 +76,7 @@ extern int slotIsActive(unsigned int);
 extern int lmapMainIsRunning(void);
 extern unsigned int vec2GetXInt(int);
 extern int padButtonIsPressed(unsigned int);
-/* Supplied declaration required: FUN_00167458. */
+/* Supplied declaration required: uiSpriteSlideFromSide. */
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
@@ -86,7 +86,7 @@ extern unsigned int dataTableGetEntries(void);
 extern unsigned int markerKindGetColor(unsigned int);
 extern unsigned int dataTableFileGetTable(int, unsigned int);
 /* Supplied declaration required: gameStateChange. */
-/* Supplied declaration required: FUN_0021af2c. */
+/* Supplied declaration required: gameTransitionStartStep. */
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: FUN_00240170. */
 extern int itemIsCollectedWithRelated(unsigned short);
@@ -119,9 +119,9 @@ extern int fourPtrsAllNull(unsigned int);
 /* Supplied declaration required: modelApplyNonzeroGroupRotation. */
 extern unsigned int _ZN9Obj557ae8C1Ev(void);
 /* Supplied declaration required: aocHandleButtons. */
-/* Supplied declaration required: FUN_003fce08. */
+/* Supplied declaration required: aocResourceStartOnce. */
 extern int nkdwLoaderParse(unsigned int);
-extern unsigned int FUN_00409fe8(int, unsigned int);
+extern unsigned int resourceCacheGetOrLoadModel(int, unsigned int);
 /* Supplied declaration required: resourceReleaseReference. */
 /* Supplied declaration required: FUN_0040ae70. */
 extern int FUN_0040af60(int);
@@ -224,7 +224,7 @@ unsigned int FUN_00208c08(void)
         *(unsigned char *)(temp_v2 + 0x2030) = 0;
       }
       if (*(char *)(temp_v2 + 0x2031) != '\0') {
-        temp_v3 = FUN_003fce08(*(unsigned int *)(temp_v2 + 0x2028),1);
+        temp_v3 = aocResourceStartOnce(*(unsigned int *)(temp_v2 + 0x2028),1);
         if (temp_v3 == 0) break;
         *(unsigned char *)(temp_v2 + 0x2031) = 0;
       }
@@ -279,7 +279,7 @@ unsigned int FUN_00208c08(void)
           *(short *)(temp_v2 + 0x138e) = *(short *)(temp_v8 + 0xa6);
         }
         if (0 < *(short *)(temp_v2 + 0x138e)) {
-          temp_v4 = FUN_00409fe8((int)*(short *)(temp_v2 + 0x138e),1);
+          temp_v4 = resourceCacheGetOrLoadModel((int)*(short *)(temp_v2 + 0x138e),1);
           *(unsigned int *)(temp_v2 + 0x2028) = temp_v4;
           *(unsigned int *)(temp_v2 + 0x202c) = 0;
           temp_v4 = 6;
@@ -393,7 +393,7 @@ unsigned int FUN_00208c08(void)
           break;
         }
         if ((*(short *)(temp_v2 + 0x138e) < 1) ||
-           (temp_v3 = FUN_003fce08(*(int *)(temp_v2 + 0x2028),1), temp_v3 != 0)) {
+           (temp_v3 = aocResourceStartOnce(*(int *)(temp_v2 + 0x2028),1), temp_v3 != 0)) {
           *(unsigned char *)(temp_v2 + 0x2030) = 0;
           *(unsigned char *)(temp_v2 + 0x2031) = 0;
           goto LAB_002093e4;
@@ -469,7 +469,7 @@ LAB_002093e4:
             if ((temp_v0 == '\t' || temp_v0 == '\n') ||
                ((temp_v0 == '\v' || temp_v0 == '\f') || temp_v0 == '\b')) {
               *(unsigned int *)(temp_v2 + 0x1378) = 1;
-              FUN_0021af2c();
+              gameTransitionStartStep();
             }
           }
           else {
@@ -502,7 +502,7 @@ LAB_002093e4:
     if (temp_v0 != '\n') {
       if (temp_v0 != '\x03') {
         if (((temp_v0 == '\n') && (*(char *)(temp_v2 + 0x2011) != '\0')) &&
-           ((*(char *)(temp_v2 + 0x2015) == '\0' || (*(char *)(DAT_00588e2c + 0xc) != '\0')))) {
+           ((*(char *)(temp_v2 + 0x2015) == '\0' || (*(char *)(g_saveLoadRunner + 0xc) != '\0')))) {
 LAB_002097e0:
           if (*(short *)(temp_v2 + 0x138e) < 0) {
             temp_v3 = slotIsActive(0xe);
@@ -637,7 +637,7 @@ LAB_00209b8c:
                 *(int *)(temp_v2 + 0x1374) = temp_v3;
               }
               *(unsigned int *)(temp_v2 + 0x1378) = 0xffffffff;
-              FUN_0021af2c();
+              gameTransitionStartStep();
               temp_v4 = 0x1000210;
               goto LAB_00209b8c;
             }
@@ -662,7 +662,7 @@ LAB_00209b8c:
                 *(unsigned int *)(temp_v2 + 0x1374) = 0;
               }
               *(unsigned int *)(temp_v2 + 0x1378) = 1;
-              FUN_0021af2c();
+              gameTransitionStartStep();
               temp_v4 = 0x1000210;
               goto LAB_00209b8c;
             }
@@ -684,7 +684,7 @@ LAB_00209b8c:
               if (*(char *)(temp_v2 + 0x2018) != '\r') {
                 *(unsigned int *)(temp_v2 + 0x1378) = 1;
                 *(unsigned int *)(temp_v2 + 0x1374) = 0;
-                FUN_0021af2c();
+                gameTransitionStartStep();
                 temp_v4 = 0x100020f;
                 eventQueueAddUniqueIfValid(temp_v4);
               }
@@ -736,8 +736,8 @@ LAB_00209dc4:
   if (*(char *)(temp_v2 + 0x2018) != '\n') {
     if (*(int *)(temp_v2 + 0x1368) >= 5) {
       if ((*(int *)(temp_v2 + 0x18) >= 10) && (*(char *)(temp_v2 + 0xd62) != '\0')) {
-        FUN_00167458(temp_v2 + 0x7ec,1);
-        FUN_00167458(temp_v2 + 0xd64,0);
+        uiSpriteSlideFromSide(temp_v2 + 0x7ec,1);
+        uiSpriteSlideFromSide(temp_v2 + 0xd64,0);
       }
       else {
         temp_v3 = 0;
@@ -775,16 +775,16 @@ LAB_00209dc4:
       *(int *)(temp_v2 + 0x1c) = *(int *)(temp_v2 + 0x1c) + 1;
     }
     if ((*(int *)(temp_v2 + 0x18) >= 10) && (*(char *)(temp_v2 + 0xd62) != '\0')) {
-      FUN_00167458(temp_v2 + 0x7ec,1);
-      FUN_00167458(temp_v2 + 0xd64,0);
+      uiSpriteSlideFromSide(temp_v2 + 0x7ec,1);
+      uiSpriteSlideFromSide(temp_v2 + 0xd64,0);
     }
     else {
       temp_v3 = 0;
       do {
         if (temp_v3 <= *(int *)(temp_v2 + 0x18)) {
           temp_v7 = temp_v2 + temp_v3 * 0x8c;
-          FUN_00167458(temp_v7 + 0x7ec,1);
-          FUN_00167458(temp_v7 + 0xd64,0);
+          uiSpriteSlideFromSide(temp_v7 + 0x7ec,1);
+          uiSpriteSlideFromSide(temp_v7 + 0xd64,0);
         }
         temp_v12 = (float)temp_v13;
         temp_v3 = temp_v3 + 1;

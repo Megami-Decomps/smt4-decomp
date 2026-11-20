@@ -10,7 +10,7 @@
 struct AsdTexture;
 
 extern "C" {
-extern MenuDrawPoint DAT_004724cc;
+extern MenuDrawPoint g_effMenuDrawOffset;
 
 u32 renderCtxPackPassFlags(u32 value, bool enabled);
 void FUN_0021025c(u32 color0, u32 color1, u32 color2, u32 color3,
@@ -30,8 +30,8 @@ extern "C" void menuDrawRectangle(s32 x, s32 y, s32 width, s32 height,
     fill.word = fillColor;
     RgbaWord outline;
     outline.word = outlineColor;
-    s32 adjustedX = static_cast<s32>(static_cast<f32>(x) + DAT_004724cc.x);
-    s32 adjustedY = static_cast<s32>(static_cast<f32>(y) + DAT_004724cc.y);
+    s32 adjustedX = static_cast<s32>(static_cast<f32>(x) + g_effMenuDrawOffset.x);
+    s32 adjustedY = static_cast<s32>(static_cast<f32>(y) + g_effMenuDrawOffset.y);
     renderCtxPushA(context, renderCtxPackPassFlags(1, true));
     renderCtxSelectTexture(g_titleScene, NULL);
     u32 fillR = fill.rgba.r, fillG = fill.rgba.g, fillB = fill.rgba.b, fillA = fill.rgba.a;

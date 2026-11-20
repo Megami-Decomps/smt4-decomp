@@ -30,8 +30,8 @@ struct CullVolumeCounts {
 
 
 extern "C" {
-extern CullVolumeCounts DAT_00447a28;
-extern CullVolume DAT_004a1264[160];
+extern CullVolumeCounts g_entryTableInfo;
+extern CullVolume g_namedEntryTable[160];
 
 /* Clears every culling volume and the volume counts. */
 void FUN_00281788(void)
@@ -39,9 +39,9 @@ void FUN_00281788(void)
     f32 zero = 0.0f;
     s32 i;
     s32 j;
-    DAT_00447a28.count = 0;
+    g_entryTableInfo.count = 0;
     for (i = 0; i < 160; i++) {
-        CullVolume *volume = &DAT_004a1264[i];
+        CullVolume *volume = &g_namedEntryTable[i];
         for (j = 0; j < 8; j++) {
             volume->corners[j].x = zero;
             volume->corners[j].y = zero;
@@ -65,7 +65,7 @@ void FUN_00281788(void)
         volume->unk16c = 0;
         volume->unk16d = 0;
     }
-    DAT_00447a28.unk04 = 0;
+    g_entryTableInfo.unk04 = 0;
     g_gameState.area = -1;
 }
 }

@@ -16,7 +16,7 @@ void jobDestroyGlobal(u32 job);
 s32 FUN_00330a60(u32 job);
 s32 FUN_00330a58(u32 job);
 
-extern GameOverWorkPrefixA *DAT_0057f678;
+extern GameOverWorkPrefixA *g_gameOverJobRecord;
 extern const char DAT_00530f28[];
 extern const char DAT_00530f18[];
 extern const char DAT_00530f08[];
@@ -39,8 +39,8 @@ typedef char GameOverWorkSize[sizeof(GameOverWork) == 0x3C ? 1 : -1];
 /* Creates the game-over work and its process and draw tasks. */
 void FUN_00231464(void)
 {
-    DAT_0057f678 = new (asdOperatorNew(sizeof(GameOverWork))) GameOverWork;
-    GameOverWorkPrefixA *state = DAT_0057f678;
+    g_gameOverJobRecord = new (asdOperatorNew(sizeof(GameOverWork))) GameOverWork;
+    GameOverWorkPrefixA *state = g_gameOverJobRecord;
     state->processToken = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00530f28), 4, 0, 0, btlGameOverPollSequence, jobDestroyGlobal, 0);
 
     taskCreateDraw(DAT_00530f18, 0x7E, 0, 0, FUN_00330a60,

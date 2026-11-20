@@ -4,7 +4,7 @@
 #include "common.h"
 
 extern "C" {
-u32 FUN_00163e84(s32 index);
+u32 screenFaderIsSettled(s32 index);
 }
 
 #endif

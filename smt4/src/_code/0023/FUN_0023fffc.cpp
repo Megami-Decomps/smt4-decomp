@@ -99,8 +99,8 @@ void FUN_0023fffc(BattleLoadState* state, BattleMain* battle)
         frameTexApplyMode(2);
         battle->flags |= 0x40000000;
     }
-    if (pairedAvailabilityGetState(0) == 3) FUN_002c29d8(0, 10, 0xff);
-    if (pairedAvailabilityGetState(1) == 3) FUN_002c29d8(1, 10, 0xff);
+    if (pairedAvailabilityGetState(0) == 3) screenFadeStartIn(0, 10, 0xff);
+    if (pairedAvailabilityGetState(1) == 3) screenFadeStartIn(1, 10, 0xff);
     if (screenFadesAllReady() != 0) {
         state->phase = 0xe;
         state->unk0c = 0;

@@ -15,8 +15,8 @@ struct DevilEffectRecord {
 extern "C" {
 extern u32 g_devilRaceEffectCounts[4];
 
-u32 FUN_002bfdc4(void);
-void FUN_002bfc24(s32 group, s32 effect, u32 context, s32 mode, f32 xScale, f32 yScale);
+u32 messageVoiceBankGet(void);
+void voiceRequestPlayFile(s32 group, s32 effect, u32 context, s32 mode, f32 xScale, f32 yScale);
 
 // Select a nonzero race-specific effect from one of four lists.
 void devilCreateRaceEffect(u32 devilId, s32 group)
@@ -51,8 +51,8 @@ void devilCreateRaceEffect(u32 devilId, s32 group)
             if (last >= 0) {
                 s8 index = randRange(static_cast<u16>(last));
                 s32 effect = effects[index];
-                u32 context = FUN_002bfdc4();
-                FUN_002bfc24(1, effect, context, 4, 0.707000017f, 0.707000017f);
+                u32 context = messageVoiceBankGet();
+                voiceRequestPlayFile(1, effect, context, 4, 0.707000017f, 0.707000017f);
             }
         }
     }

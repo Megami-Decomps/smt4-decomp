@@ -9,7 +9,7 @@ static inline bool gameOverMaskMatches(u64 flags, const u32 mask[2])
 }
 
 extern "C" {
-extern BtlGameOverGlobalsA DAT_0057f678;
+extern BtlGameOverGlobalsA g_gameOverJobRecord;
 void FUN_00231464();
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataFlagTestBit(u32 flag);
@@ -26,11 +26,11 @@ void FUN_0031cd00(BtlMainStateA *state)
     };
     typedef char SequenceResetOffset[offsetof(SequenceView, reset) == 0x25 ? 1 : -1];
     FUN_00231464();
-    SequenceView *work = reinterpret_cast<SequenceView *>(DAT_0057f678.state);
+    SequenceView *work = reinterpret_cast<SequenceView *>(g_gameOverJobRecord.state);
     if (state->commandFilter.mode != 2 ||
-        (!gameOverMaskMatches(state->markerMasks.bits, DAT_0057f678.forcedStates) &&
-         (gameOverMaskMatches(state->stateFlags64.bits, DAT_0057f678.blockedStates) ||
-          gameOverMaskMatches(state->stateFlags64.bits, DAT_0057f678.blockedTransitions)))) {
+        (!gameOverMaskMatches(state->markerMasks.bits, g_gameOverJobRecord.forcedStates) &&
+         (gameOverMaskMatches(state->stateFlags64.bits, g_gameOverJobRecord.blockedStates) ||
+          gameOverMaskMatches(state->stateFlags64.bits, g_gameOverJobRecord.blockedTransitions)))) {
         work->sequence.state = 3;
         work->sequence.phase = 0;
         return;

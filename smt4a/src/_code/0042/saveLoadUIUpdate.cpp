@@ -32,7 +32,7 @@ void savedUnitEditorApplyOrClose(SaveSlotHeaderWork *ui);
 void saveLoadUiSuspendOrRestart(SaveSlotHeaderWork *ui);
 void saveLoadUiRestartSpritesAndWait(SaveSlotHeaderWork *ui);
 void saveLoadUiRestartSlotSpritesAndWait(SaveSlotHeaderWork *ui);
-void FUN_0041e3a0(SaveSlotHeaderWork *ui, s32 resetHeader);
+void spriteListMenuResetSprites(SaveSlotHeaderWork *ui, s32 resetHeader);
 void FUN_0041dbdc(SaveSlotHeaderWork *ui, s32 flag);
 void saveMenuCacheSlotHeadersStep(SaveSlotHeaderWork *ui);
 void scrScriptProcessStartEntry(ScriptProcess *script, s32 index);
@@ -41,7 +41,7 @@ DataBlockTable *gameDataBlocksGetTable(void);
 void messageMainSetFlag(s32 value);
 void sysPlaySe(s32 id);
 void gameDataIncrementCounterCapped(void);
-void FUN_002ac390(void);
+void saveLoadUiSnapshotGameData(void);
 }
 
 /* Copies the edited tables, settings and save data back into the game. */
@@ -71,7 +71,7 @@ extern "C" void saveLoadUIUpdate(SaveSlotHeaderWork *ui)
         saveLoadUiWaitPopupDismissed(ui);
         break;
     case 6:
-        if (FUN_0026c3a0() == 0) {
+        if (gameGlobalsIsActiveStateFour() == 0) {
             break;
         }
         saveLoadUiCommit(ui);
@@ -81,7 +81,7 @@ extern "C" void saveLoadUIUpdate(SaveSlotHeaderWork *ui)
         if (g_saveLoadUIBase.setFlag471 != 0 && !gameFlagIsSet(0x471)) {
             gameFlagSetValue(0x471, 1, 1);
         }
-        FUN_00168980(3);
+        buttonHelpTransitionPresetFlags(3);
         ui->selected = g_saveLoadUIBase.selectedValue;
         saveLoadUiSetMode(ui, 22, 0);
         /* Fall through: the flow is finished. */
@@ -107,7 +107,7 @@ extern "C" void saveLoadUIUpdate(SaveSlotHeaderWork *ui)
             if (buttonHelpStateIsNot3() == 0) {
                 return;
             }
-            if (FUN_0026c3a0() == 0) {
+            if (gameGlobalsIsActiveStateFour() == 0) {
                 return;
             }
             slotSetRequest(0, 12, 255);
@@ -120,7 +120,7 @@ extern "C" void saveLoadUIUpdate(SaveSlotHeaderWork *ui)
             if (gameDataBlocksGetTable()->mode == 2) {
                 gameDataIncrementCounterCapped();
             }
-            FUN_002ac390();
+            saveLoadUiSnapshotGameData();
             saveLoadUiCommit(ui);
             saveLoadUiChangeMode(ui, 22, 0);
             break;
@@ -138,7 +138,7 @@ extern "C" void saveLoadUIUpdate(SaveSlotHeaderWork *ui)
         saveLoadUiSuspendOrRestart(ui);
         break;
     case 12:
-        if (FUN_0026c3a0() != 0) {
+        if (gameGlobalsIsActiveStateFour() != 0) {
             saveLoadUiChangeMode(ui, 22, 0);
         }
         break;
@@ -152,13 +152,13 @@ extern "C" void saveLoadUIUpdate(SaveSlotHeaderWork *ui)
         saveLoadUiWaitSprites(ui);
         break;
     case 16:
-        FUN_0041e3a0(ui, 1);
+        spriteListMenuResetSprites(ui, 1);
         /* Waits in mode 18; the pending mode stays queued. */
         saveLoadUiChangeMode(ui, 18, ui->phase);
         saveLoadUiWaitSprites(ui);
         break;
     case 17:
-        FUN_0041e3a0(ui, 0);
+        spriteListMenuResetSprites(ui, 0);
         saveLoadUiChangeMode(ui, 18, ui->phase);
         saveLoadUiWaitSprites(ui);
         break;

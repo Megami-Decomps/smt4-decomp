@@ -16,12 +16,12 @@ typedef struct Holder {
     /* 0x08 */ Target *target;
 } Holder;
 
-extern Holder *DAT_00588e2c;
+extern Holder *g_saveLoadRunner;
 
 /* Draw-update task of the save/load screen; invoke the child's update phase. */
 s32 saveLoadDrawUpdate(u32 job)
 {
-    Holder *holder = DAT_00588e2c;
+    Holder *holder = g_saveLoadRunner;
 
     if (holder == NULL)
         return 0;

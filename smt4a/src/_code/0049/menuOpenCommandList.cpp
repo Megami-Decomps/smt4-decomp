@@ -14,7 +14,7 @@ typedef struct MenuState {
 
 void gameGlobalsSetMenuOpenFlag(s32 a);
 void sortMenuAcquire(s32 menu, s32 a);
-void FUN_0031f208(s32 item);
+void useCounterAppendValue(s32 item);
 void useCounterStart(void);
 void sysPlaySe(s32 se);
 void buttonHelpSetText(s32 a, u32 color);
@@ -25,19 +25,19 @@ void menuOpenCommandList(MenuState *state)
     gameGlobalsSetMenuOpenFlag(1);
     sortMenuAcquire(12, 0);
     if (state->mode != 8) {
-        FUN_0031f208(28);
-        FUN_0031f208(7);
-        FUN_0031f208(3);
-        FUN_0031f208(12);
-        FUN_0031f208(16);
+        useCounterAppendValue(28);
+        useCounterAppendValue(7);
+        useCounterAppendValue(3);
+        useCounterAppendValue(12);
+        useCounterAppendValue(16);
         if (state->mode == 0 || state->mode == 1 || state->mode == 2) {
-            FUN_0031f208(15);
+            useCounterAppendValue(15);
         }
     } else {
-        FUN_0031f208(12);
-        FUN_0031f208(7);
-        FUN_0031f208(16);
-        FUN_0031f208(15);
+        useCounterAppendValue(12);
+        useCounterAppendValue(7);
+        useCounterAppendValue(16);
+        useCounterAppendValue(15);
     }
     useCounterStart();
     sysPlaySe(5);

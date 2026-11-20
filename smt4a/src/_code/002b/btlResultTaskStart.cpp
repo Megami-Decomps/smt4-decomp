@@ -21,12 +21,12 @@ typedef struct BtlResultOwner {
 u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, void (*update)(u32), void (*draw)(u32), void *owner, u32 id);
 void cleanupCompletionCallback(u32 job);
 void jobStopChild(u32 job);
-void FUN_002c52d8(void);
+void debugHookStub(void);
 void FUN_002ed428(void *panel);
 void FUN_0031e6f4(void *list);
 void FUN_00331c60(ResultItem *item);
 void btlUiPanelStart(BtlUiA *block);
-void FUN_004ac044(BtlUiA *block);
+void btlUiEnterState27(BtlUiA *block);
 
 /* Starts the battle result job, resets its panel, list and items, and starts the battle UI panel. */
 void btlResultTaskStart(BtlResultOwner *owner)
@@ -34,7 +34,7 @@ void btlResultTaskStart(BtlResultOwner *owner)
     s32 i;
 
     owner->job = taskCreateDraw("btlResult Calc", 4, 0, 0, cleanupCompletionCallback, jobStopChild, owner, owner->id);
-    FUN_002c52d8();
+    debugHookStub();
     FUN_002ed428(owner->panel);
     FUN_0031e6f4(owner->list);
     for (i = 0; i < owner->itemCount; i++) {
@@ -42,7 +42,7 @@ void btlResultTaskStart(BtlResultOwner *owner)
     }
     owner->itemCount = 0;
     btlUiPanelStart(g_btlUiBlock);
-    FUN_004ac044(g_btlUiBlock);
+    btlUiEnterState27(g_btlUiBlock);
 }
 
 } /* extern "C" */

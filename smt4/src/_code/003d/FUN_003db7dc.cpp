@@ -17,7 +17,7 @@ void memClear(void *buffer, s32 size);
 char *libc_strrchr(char *text, s32 character);
 s32 keyedRecordFindByName(const char *key);
 void FUN_002276f8(BtlEffectWork *work);
-u32 FUN_00246644(u32 first, u32 second, u32 third);
+u32 filterCreateByKind(u32 first, u32 second, u32 third);
 void asdLoadFileAsyncSimple(const char *path, void **resource, s32 mode);
 
 static __inline bool isIgnoredName(const char *name)
@@ -38,7 +38,7 @@ static __inline bool hasIgnoredPrefix(const char *name)
 static __inline void selectNumberedEffect(BtlEffectWork *work, s32 number)
 {
     FUN_002276f8(work);
-    work->numberedEffect = FUN_00246644(number & 0xff, 7, 0);
+    work->numberedEffect = filterCreateByKind(number & 0xff, 7, 0);
     work->numberedIndex = number;
 }
 

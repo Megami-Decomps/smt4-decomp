@@ -3,7 +3,7 @@
 
 extern "C" {
 u32 FUN_00334044();
-void FUN_0021af2c(void);
+void gameTransitionStartStep(void);
 
 // Clamp the selection to the last entry, update the display, and clear refresh.
 void FUN_00372048(s32 index)
@@ -13,7 +13,7 @@ void FUN_00372048(s32 index)
         session->unk1374 = index;
     else
         session->unk1374 = FUN_00334044() - 1;
-    FUN_0021af2c();
+    gameTransitionStartStep();
     session->mode = 0;
 }
 }

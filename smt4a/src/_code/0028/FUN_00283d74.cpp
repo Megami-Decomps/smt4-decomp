@@ -29,7 +29,7 @@ typedef struct NewGameSlotTable {
 
 extern const char DAT_005311fc[];
 
-void FUN_0022838c(void);
+void gameWorldResetForNewGame(void);
 NewGameSlotTable *gameGetSlotTable(void);
 void flagValueAdd(s32 flag, s32 amount);
 void sysMemClear(void *block, u32 size);
@@ -38,18 +38,18 @@ void playerResetToStartingStats(s32 arg);
 void FUN_003df7c4(s32 arg);
 void FUN_00284fdc(void);
 void gameDataBlocksClearSlots(void);
-void FUN_00417b70(s32 arg);
-void FUN_00417e08(s32 arg);
+void gameFlagUnlockEntryById(s32 arg);
+void rosterAddUnit(s32 arg);
 void saveNameBlockReset(void);
 
 void FUN_003e45bc(s32 a, s32 b, s32 c);
-void FUN_00353b00(s32 arg);
+void popupMarkNewlySeenEntries(s32 arg);
 
 /* Sets up a new game when `loaded` is zero: the starting demon stock, the player record and name,
  * the opening story flags and the starting unlocks. */
 void FUN_00283d74(s32 loaded)
 {
-    FUN_0022838c();
+    gameWorldResetForNewGame();
     NewGameSlotTable *slots = gameGetSlotTable();
 
     if (loaded != 0) {
@@ -83,8 +83,8 @@ void FUN_00283d74(s32 loaded)
     gameDataBlocksClearSlots();
     sprintf((char *)(gameDataGetPlayerName()), DAT_005311fc + 15);
     flagValueAdd(0x33F, 1);
-    FUN_00417b70(1);
-    FUN_00417e08(1);
+    gameFlagUnlockEntryById(1);
+    rosterAddUnit(1);
     saveNameBlockReset();
     gameFlagSetValue(0x52B, 1, 1);
     gameFlagSetValue(0x418, 0, 1);
@@ -111,7 +111,7 @@ void FUN_00283d74(s32 loaded)
     FUN_003e45bc(0x18, 1, 0);
     FUN_003e45bc(0x2E, 1, 0);
     FUN_003e45bc(0x76, 1, 0);
-    FUN_00353b00(1);
+    popupMarkNewlySeenEntries(1);
 }
 
 }

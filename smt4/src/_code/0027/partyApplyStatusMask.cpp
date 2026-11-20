@@ -24,7 +24,7 @@ StatusPlayer *gameGetPlayerData();
 StatusSlotTable *gameGetSlotTable();
 s32 gameCountUnits();
 s32 randNextInRange(s32 maximum);
-void FUN_00253d60(PlayerStatusResult *output, StatusPlayer *player);
+void devilBuildAffinitySlots(PlayerStatusResult *output, StatusPlayer *player);
 void affinityResolveUnitSlot(UnitStatusResult *output, StatBlock *unit, s32 selector);
 }
 
@@ -58,7 +58,7 @@ extern "C" void partyApplyStatusMask(s32 group, s32 bit, s32 probability)
         s32 permitted = 1;
         if (bit == 5) {
             PlayerStatusResult result;
-            FUN_00253d60(&result, gameGetPlayerData());
+            devilBuildAffinitySlots(&result, gameGetPlayerData());
             permitted = statusAffinityAllows(result.category);
         }
         if (permitted)

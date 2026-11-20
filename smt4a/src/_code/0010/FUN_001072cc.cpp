@@ -22,7 +22,7 @@ typedef struct {
 extern unsigned char DAT_00594978; /* 0x594978 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int FUN_002ea704(void);
+extern int watcherGetEnabledFlag(void);
 extern unsigned long long _ZmiRK15OnlineTimestampS1_(unsigned char *, int *);
 /* Supplied declaration required: FUN_002eb164. */
 /* Supplied declaration required: onlineTimeGetNow. */
@@ -53,7 +53,7 @@ void FUN_001072cc(int *param_1)
   onlineTimeGetNow(temp_v7);
   temp_v1 = param_1[0x30];
   if (temp_v1 == 0) {
-    temp_v1 = FUN_002ea704();
+    temp_v1 = watcherGetEnabledFlag();
     if (*(char *)(temp_v1 + 0x10e) != '\0') {
       (**(romwright_code **)(*param_1 + 0x88))(param_1,3,1);
       return;

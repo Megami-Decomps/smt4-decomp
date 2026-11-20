@@ -62,7 +62,7 @@ extern unsigned char mathHeadingToDirectionCode(int context, float angle);
 /* Supplied declaration required: FUN_00231dec. */
 /* Supplied declaration required: titleScissorApplyOrClearRequests. */
 extern float *lmapSceneGetObj(int);
-extern int FUN_00288f78(int);
+extern int mapClassifyPlaceState(int);
 /* Supplied declaration required: FUN_002b04e8. */
 extern int FUN_002b8694(void);
 extern int gameFlagIsSet(unsigned int);
@@ -149,7 +149,7 @@ void FUN_00399d0c(int param_1)
   if (temp_v4 == 0) {
     return;
   }
-  temp_v4 = FUN_00288f78(temp_v3);
+  temp_v4 = mapClassifyPlaceState(temp_v3);
   temp_v12 = (unsigned int)(temp_v4 == 2 || temp_v4 == 3);
   titleScissorApplyOrClearRequests(temp_v44,1);
   temp_v15 = (float)((unsigned long long)temp_v22 >> 0x20);

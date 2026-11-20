@@ -50,7 +50,7 @@ void listScrollToId(void *list, s32 id);
 s32 listGetEntryCount(const void *list);
 void __ARM_common_memcpy4_6(void *cursor, u16 *vector);
 void messageMainFinishWindow(void);
-void FUN_0022b29c(ListWindow *window, s32 selected, s32 kind);
+void contentMenuRebuildGroup(ListWindow *window, s32 selected, s32 kind);
 void FUN_0022afc4(u32 animation, s32 a, s32 b);
 
 /* Runs the entry's availability script and reports whether the entry is currently available. */
@@ -120,9 +120,9 @@ void FUN_003b9c00(ListWindow *window)
     case 6:
     case 7:
         if ((window->flags & 0x10000000) != 0) {
-            FUN_0022b29c(window, window->selected, 4);
+            contentMenuRebuildGroup(window, window->selected, 4);
         } else {
-            FUN_0022b29c(window, window->selected, 3);
+            contentMenuRebuildGroup(window, window->selected, 3);
         }
         window->counter = 0;
         window->mode = 4;

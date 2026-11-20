@@ -13,7 +13,7 @@ u32 placeWindowUpdateAnimation(void)
     case 2:
         break;
     case 1:
-        if (FUN_00167458(&window->animation, 1)) {
+        if (uiSpriteSlideFromSide(&window->animation, 1)) {
             window->state = 2;
             window->frame = 0;
         }

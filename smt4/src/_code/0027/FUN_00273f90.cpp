@@ -8,11 +8,11 @@ void FUN_00202254(void);
 extern struct {
     u8 unk000[0x250];
     s8 unk250;
-} DAT_004bce8c;
+} g_asdMdlBankSet;
 
 void FUN_00273f90(void)
 {
-    if (DAT_004bce8c.unk250 != 0 && g_gameState.returning != 0) {
+    if (g_asdMdlBankSet.unk250 != 0 && g_gameState.returning != 0) {
         FUN_00202254();
     }
 }

@@ -3,7 +3,7 @@
 #include "sys/TokenRegistry.h"
 
 extern "C" {
-void* FUN_0016ccfc(void);
+void* tokenTableGet(void);
 s32 tokenResolveAddress(void* manager, TokenRegistryTable** table, u32 token);
 
 /* Copies the table entry matching the request's kind, id and subtype; false when there is none. */
@@ -26,7 +26,7 @@ s32 FUN_0050028c(const u32* token, TokenRegistryEntry* output,
                  const TokenRegistryEntry* requests, u32 count)
 {
     TokenRegistryTable* table;
-    s32 result = tokenResolveAddress(FUN_0016ccfc(), &table, *token);
+    s32 result = tokenResolveAddress(tokenTableGet(), &table, *token);
     if (nnResultIsFailure(result)) {
         return result;
     }

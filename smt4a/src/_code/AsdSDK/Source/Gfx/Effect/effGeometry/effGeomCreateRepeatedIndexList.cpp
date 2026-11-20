@@ -6,7 +6,7 @@
 
 extern "C" {
 
-extern const char DAT_0054baf8[]; /* "c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Effect\\effGeometry.cpp": __FILE__ */
+extern const char g_effGeometrySourceFileName[]; /* "c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Effect\\effGeometry.cpp": __FILE__ */
 
 /* A primitive slot: 0x4C bytes, its index buffer at 0x48. */
 typedef struct GeomSlot {
@@ -32,9 +32,9 @@ GeomObject *effGeomCreateRepeatedIndexList(s32 count, s32 triangles, s32 vertexS
     s32 vertexCount = count * vertexStride;
     s32 indexCount = count * triangles * 3;
     s32 indicesPerTriangleList = triangles * 3;
-    asdDebugTrace(DAT_0054baf8, 113);
+    asdDebugTrace(g_effGeometrySourceFileName, 113);
     GeomObject *object = (GeomObject *)memAlloc(0x10000, 0x100, 0, 0x58, 0x10, 1);
-    void *memory = asdMemoryAllocTraced(0x4C, DAT_0054baf8, 115);
+    void *memory = asdMemoryAllocTraced(0x4C, g_effGeometrySourceFileName, 115);
     GeomSlot *slot = memory != NULL ? slotReset(memory) : NULL;
     slotInit(slot, 0x25, indexCount, vertexCount);
     object->kind = kind;

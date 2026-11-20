@@ -72,6 +72,6 @@ void FUN_0021b6ec(CommandMenu *menu)
     }
     qsort(entries, count, sizeof(CommandEntry), dataCompareSignedWordKeys);
     for (s32 i = 0; i < count; i++)
-        FUN_0031f208(entries[i].code);
+        useCounterAppendValue(entries[i].code);
 }
 }

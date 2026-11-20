@@ -11,8 +11,8 @@ int __hardfp_atan2f(void);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
 int mathRemPio2f(void);
 int FUN_002c159c(unsigned char *);
-int FUN_002c1e30(unsigned char *, int);
-int FUN_002c1edc(unsigned char *, int, int, int);
+int stereoCameraSetPerspective(unsigned char *, int);
+int cameraMatrixCacheSetLookAt(unsigned char *, int, int, int);
 int FUN_002fcae0(int, float *, float *);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
@@ -46,8 +46,8 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: FUN_00298d50. */
 /* Supplied declaration required: FUN_002c159c. */
-/* Supplied declaration required: FUN_002c1e30. */
-/* Supplied declaration required: FUN_002c1edc. */
+/* Supplied declaration required: stereoCameraSetPerspective. */
+/* Supplied declaration required: cameraMatrixCacheSetLookAt. */
 /* Supplied declaration required: FUN_002fcae0. */
 
 
@@ -225,8 +225,8 @@ void FUN_00265f50(int param_1)
   }
   FUN_00298d50(reinterpret_cast<u32>(&g_fixedCamera));
   FUN_002c159c(&g_fixedCamera);
-  FUN_002c1e30(&g_fixedCamera,1);
-  FUN_002c1edc(&g_fixedCamera,param_1 + 0x78,param_1 + 0x84,param_1 + 0x54);
+  stereoCameraSetPerspective(&g_fixedCamera,1);
+  cameraMatrixCacheSetLookAt(&g_fixedCamera,param_1 + 0x78,param_1 + 0x84,param_1 + 0x54);
   temp_v0 = g_mapCamera;
   temp_v1 = *(unsigned int *)(param_1 + 0x88);
   temp_v2 = *(unsigned int *)(param_1 + 0x8c);

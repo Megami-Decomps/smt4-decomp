@@ -5,7 +5,7 @@
 extern "C" {
 
 int sharedRefRelease(int);
-int FUN_002f2a22(undefined4, int);
+int ownerRunOperationLocked(undefined4, int);
 
 typedef struct fn_0010979e_arg0 fn_0010979e_arg0;
 struct fn_0010979e_arg0 {
@@ -23,7 +23,7 @@ struct fn_0010979e_arg0 {
 
 extern int FUN_00121398(fn_0010979e_arg0 *, void *);
 /* Supplied declaration required: sharedRefRelease. */
-/* Supplied declaration required: FUN_002f2a22. */
+/* Supplied declaration required: ownerRunOperationLocked. */
 
 
 int FUN_0010979e(fn_0010979e_arg0 *param_1)
@@ -65,7 +65,7 @@ int FUN_0010979e(fn_0010979e_arg0 *param_1)
   if (!temp_v0) {
     if (temp_v3 != 0) {
       if (pfVar5->field_0x140 != 0) {
-        FUN_002f2a22(pfVar5->field_0x140,temp_v3);
+        ownerRunOperationLocked(pfVar5->field_0x140,temp_v3);
       }
       else {
         sharedRefRelease(temp_v3);

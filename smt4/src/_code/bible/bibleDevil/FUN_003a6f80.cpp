@@ -42,11 +42,11 @@ typedef struct DevilListInputView {
     u16 targetId;
 } DevilListInputView;
 
-extern u32 DAT_0043d9c8[];
+extern u32 g_bibleDevilCallbackContext[];
 
 s32 inputIsQuestMenuPressed(void);
 s8 uiSubStateGetReady(const void *subState);
-s32 FUN_0027ee9c(void);
+s32 inputConfirmPressed(void);
 s32 inputIsQuestConfirmPressed(void);
 s32 inputIsQuestCancelPressed(void);
 s32 gameGetNavigationState(void);
@@ -81,7 +81,7 @@ void FUN_003a6f80(DevilListInput *work)
     const DevilListBlock *block = reinterpret_cast<const DevilListBlock *>(reinterpret_cast<u8 *>(work) + 0x500);
 
     if (block->count > 0) {
-        select = FUN_0027ee9c();
+        select = inputConfirmPressed();
         confirm = inputIsQuestConfirmPressed();
         cancel = inputIsQuestCancelPressed();
         if (select == 0) {
@@ -109,7 +109,7 @@ void FUN_003a6f80(DevilListInput *work)
         libc_strcpy(reinterpret_cast<unsigned int *>(record), reinterpret_cast<unsigned int *>(demonGetRaceLabel(id, 1)));
         textEncodeFontSlot(0x10, record);
         scrScriptProcessStartEntry(work->script, 6);
-        FUN_002a0cc8(1);
+        gameGlobalsSetSubScreenActive(1);
         work->mode = 7;
         work->step = 0;
         FUN_002328b4();
@@ -121,7 +121,7 @@ void FUN_003a6f80(DevilListInput *work)
             buttonHelpSetText(0, 0x323232FF);
             beginStatusPanelClose();
             FUN_00233240((u8 *)work + 0xDC, 1);
-            FUN_002a0cc8(1);
+            gameGlobalsSetSubScreenActive(1);
             work->mode = 11;
             work->step = 0;
             FUN_00232848();
@@ -129,7 +129,7 @@ void FUN_003a6f80(DevilListInput *work)
             return;
         }
         if (confirm != 0) {
-            DAT_0043d9c8[1] = 0xFFFFFFFF;
+            g_bibleDevilCallbackContext[1] = 0xFFFFFFFF;
             work->previewMode++;
             if (work->previewMode > 1) {
                 work->previewMode = 0;
@@ -149,8 +149,8 @@ void FUN_003a6f80(DevilListInput *work)
             return;
         }
         if (cancel != 0) {
-            DAT_0043d9c8[1] = 0xFFFFFFFF;
-            FUN_002a0cc8(1);
+            g_bibleDevilCallbackContext[1] = 0xFFFFFFFF;
+            gameGlobalsSetSubScreenActive(1);
             work->mode = 8;
             work->step = 0;
             scrScriptProcessStartEntry(work->script, 7);

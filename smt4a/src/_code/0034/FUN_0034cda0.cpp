@@ -17,7 +17,7 @@ void FUN_0034cda0(void)
     if (FUN_002a7410() == 0) {
         PartyPanelStateA *panel = g_partyPanel;
         bool refresh = false;
-        FUN_002c7e24();
+        gameGlobalsGetBlock1390();
         u32 help = ifTouchGetButtonHelpValue();
         s32 slot = FUN_002cad18();
         s32 demon = partyPanelGetSelectedDemonId();

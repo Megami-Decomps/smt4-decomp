@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c40f8(...);
+int svcWaitSynchronizationN(...);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 int nn_os(...);
 
@@ -19,7 +19,7 @@ typedef struct {
 extern unsigned char LAB_0013b628; /* 0x13b628 */
 extern int FUN_00357628(...); /* 0x357628 */
 
-/* Supplied declaration required: FUN_002c40f8. */
+/* Supplied declaration required: svcWaitSynchronizationN. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: nn_os. */
 
@@ -52,7 +52,7 @@ void FUN_003573a4(unsigned int param_1,unsigned int *param_2,unsigned int param_
     }
     temp_v1 = param_5;
     puStack_44 = (unsigned int *)param_6;
-    FUN_002c40f8(param_1,&temp_v2,param_3,param_4);
+    svcWaitSynchronizationN(param_1,&temp_v2,param_3,param_4);
     return;
   }
   temp_v3[0] = (unsigned char)param_4;

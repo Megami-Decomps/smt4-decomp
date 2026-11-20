@@ -1,4 +1,4 @@
-/* NON_MATCHING: all 93 instructions match except one compiler nop before the final FUN_003e4e4c(0) fallback call. */
+/* NON_MATCHING: all 93 instructions match except one compiler nop before the final saveSlotTableSetPreferredId(0) fallback call. */
 #include "ui/UiSpriteApi.h"
 #include "ui/MessageMainA.h"
 #include "gamedata/GameSaveDataA.h"
@@ -48,10 +48,10 @@ extern "C" u32 FUN_003bf938(void)
                 FUN_004bd410((u16)id);
                 panel->queueIds[i] = 0;
             } else {
-                FUN_003e48dc((u16)id);
+                partySlotClearInactiveFlag((u16)id);
                 panel->queueIds[i] = 0;
                 if (saveSlotFindSelected()->id == id) {
-                    FUN_003e4e4c(findRemainingSelectedUnit(id));
+                    saveSlotTableSetPreferredId(findRemainingSelectedUnit(id));
                 }
             }
         }

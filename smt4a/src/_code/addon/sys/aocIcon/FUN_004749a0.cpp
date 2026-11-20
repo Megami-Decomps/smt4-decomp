@@ -20,7 +20,7 @@ void FUN_004749a0(AocIcon *icon, const u8 *source)
     icon->texture = asdTextureCreate(0);
     FUN_00281024();
     icon->texture->target = ASDTEXTURE_TARGET_2D;
-    icon->texture->unk08 = 0x10000;
+    icon->texture->heap = 0x10000;
     icon->texture->image.flags = 0x1000000;
     icon->texture->image.mip.level = 0;
     icon->texture->dimensions.width = 64;
@@ -28,7 +28,7 @@ void FUN_004749a0(AocIcon *icon, const u8 *source)
     icon->texture->image.format = 0x6754;
     icon->texture->image.type = 0x8363;
     icon->texture->storage.pixels = icon->pixels;
-    icon->texture->storage.unk28 = 0x2000;
+    icon->texture->storage.bytes = 0x2000;
     asdTextureSetImage(icon->texture);
 }
 }

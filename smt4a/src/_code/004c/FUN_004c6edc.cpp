@@ -11,7 +11,7 @@ int recordSetClampedCurrent(...);
 int recordGetScaledMaximum(...);
 int skillDataFindById(void);
 int btlMainFindEntryByListedId(...);
-int FUN_004c53fc(...);
+int mapCategoryToDestinationGroup(...);
 int btlAdjustPropertyClamped(...);
 
 typedef struct fn_004c6edc_arg0 fn_004c6edc_arg0;
@@ -102,7 +102,7 @@ extern unsigned int DAT_00571414; /* 0x571414 */
 extern int FUN_003ea278(unsigned int *, unsigned int *);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: recordSetClampedCurrent. */
-/* Supplied declaration required: FUN_004c53fc. */
+/* Supplied declaration required: mapCategoryToDestinationGroup. */
 /* Supplied declaration required: btlAdjustPropertyClamped. */
 
 
@@ -141,7 +141,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
     else {
       temp_v1 = 0;
     }
-    temp_v2 = FUN_004c53fc(0x2d);
+    temp_v2 = mapCategoryToDestinationGroup(0x2d);
     if (temp_v1 == temp_v2) {
       temp_v1 = (int)param_2->field_0x33;
       if (temp_v1 != -5) {
@@ -154,7 +154,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
               }
             }
             else {
-              temp_v2 = FUN_004c53fc(7);
+              temp_v2 = mapCategoryToDestinationGroup(7);
               temp_v1 = reinterpret_cast<int>(btlGetMainState());
               btlMainFindEntryByListedId(temp_v1,param_1);
               unaff_r8 = temp_v2;
@@ -247,7 +247,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
     else {
       temp_v1 = 0;
     }
-    temp_v2 = FUN_004c53fc(0x2e);
+    temp_v2 = mapCategoryToDestinationGroup(0x2e);
     if (temp_v1 == temp_v2) {
       temp_v1 = (int)param_2->field_0x32;
       if (temp_v1 != -5) {
@@ -261,7 +261,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
               temp_v6 = temp_v6 + temp_v1;
             }
             else {
-              unaff_r8 = FUN_004c53fc(8);
+              unaff_r8 = mapCategoryToDestinationGroup(8);
               temp_v1 = reinterpret_cast<int>(btlGetMainState());
               btlMainFindEntryByListedId(temp_v1,param_1);
               if (temp_v1 != 0) {
@@ -350,7 +350,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
     else {
       temp_v1 = 0;
     }
-    temp_v2 = FUN_004c53fc(0x2f);
+    temp_v2 = mapCategoryToDestinationGroup(0x2f);
     if (temp_v1 == temp_v2) {
       temp_v1 = (int)param_2->field_0x35;
       if (temp_v1 != -5) {
@@ -365,13 +365,13 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
               btlAdjustPropertyClamped(param_1,9,(int)param_2->field_0x35,param_3);
             }
             else {
-              temp_v4 = FUN_004c53fc(0xb);
+              temp_v4 = mapCategoryToDestinationGroup(0xb);
               temp_v1 = reinterpret_cast<int>(btlGetMainState());
               btlMainFindEntryByListedId(temp_v1,param_1);
               if (temp_v1 != 0) {
                 *(unsigned int *)(temp_v1 + 0xa0) = temp_v4;
               }
-              unaff_r8 = FUN_004c53fc(9);
+              unaff_r8 = mapCategoryToDestinationGroup(9);
               temp_v1 = reinterpret_cast<int>(btlGetMainState());
               btlMainFindEntryByListedId(temp_v1,param_1);
               if (temp_v1 != 0) {
@@ -496,7 +496,7 @@ joined_r0x004c7570:
     else {
       temp_v1 = 0;
     }
-    temp_v2 = FUN_004c53fc(0x30);
+    temp_v2 = mapCategoryToDestinationGroup(0x30);
     if (temp_v1 == temp_v2) {
       temp_v1 = (int)param_2->field_0x34;
       if (temp_v1 != -5) {
@@ -510,7 +510,7 @@ joined_r0x004c7570:
               temp_v6 = temp_v6 + temp_v1;
             }
             else {
-              temp_v4 = FUN_004c53fc(10);
+              temp_v4 = mapCategoryToDestinationGroup(10);
               temp_v1 = reinterpret_cast<int>(btlGetMainState());
               btlMainFindEntryByListedId(temp_v1,param_1);
               if (temp_v1 != 0) {
@@ -823,37 +823,37 @@ joined_r0x004c7570:
     temp_v6 = temp_v6 + temp_v7;
   }
   if ((param_2->field_0x39 & 0x10) != 0) {
-    temp_v4 = FUN_004c53fc(0x13);
+    temp_v4 = mapCategoryToDestinationGroup(0x13);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0xc0) = temp_v4;
     }
-    temp_v4 = FUN_004c53fc(0x16);
+    temp_v4 = mapCategoryToDestinationGroup(0x16);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0xcc) = temp_v4;
     }
-    temp_v4 = FUN_004c53fc(0x11);
+    temp_v4 = mapCategoryToDestinationGroup(0x11);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0xb8) = temp_v4;
     }
-    temp_v4 = FUN_004c53fc(0xf);
+    temp_v4 = mapCategoryToDestinationGroup(0xf);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0xb0) = temp_v4;
     }
-    temp_v4 = FUN_004c53fc(0x10);
+    temp_v4 = mapCategoryToDestinationGroup(0x10);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0xb4) = temp_v4;
     }
-    temp_v4 = FUN_004c53fc(0xe);
+    temp_v4 = mapCategoryToDestinationGroup(0xe);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
@@ -870,43 +870,43 @@ joined_r0x004c7570:
         recordSetClampedCurrent(puVar3[0xff],(int)(short)temp_v8);
       }
     }
-    temp_v4 = FUN_004c53fc(0x18);
+    temp_v4 = mapCategoryToDestinationGroup(0x18);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0xd4) = temp_v4;
     }
-    temp_v4 = FUN_004c53fc(0x19);
+    temp_v4 = mapCategoryToDestinationGroup(0x19);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0xd8) = temp_v4;
     }
-    temp_v4 = FUN_004c53fc(0xd);
+    temp_v4 = mapCategoryToDestinationGroup(0xd);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0xa8) = temp_v4;
     }
-    temp_v4 = FUN_004c53fc(0x2a);
+    temp_v4 = mapCategoryToDestinationGroup(0x2a);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0x11c) = temp_v4;
     }
-    temp_v4 = FUN_004c53fc(0x27);
+    temp_v4 = mapCategoryToDestinationGroup(0x27);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0x110) = temp_v4;
     }
-    temp_v4 = FUN_004c53fc(0x28);
+    temp_v4 = mapCategoryToDestinationGroup(0x28);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {
       *(unsigned int *)(temp_v7 + 0x114) = temp_v4;
     }
-    temp_v4 = FUN_004c53fc(0x29);
+    temp_v4 = mapCategoryToDestinationGroup(0x29);
     temp_v7 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(temp_v7,param_1);
     if (temp_v7 != 0) {

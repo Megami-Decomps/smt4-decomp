@@ -15,7 +15,7 @@ int FUN_00298d28(...);
 int partyPanelHasSlotValue(...);
 int FUN_00262d40(void);
 int campRebuildOwnedInventoryCategory(...);
-int FUN_00282f80(...);
+int campRebuildCategoryList(...);
 int table8Type5GetValue(void);
 int commonBgAcquire(void);
 int partyPanelCreate(...);
@@ -70,7 +70,7 @@ extern int FUN_00262cb0(unsigned int);
 /* Supplied declaration required: campRebuildOwnedInventoryCategory. */
 extern unsigned int statusGetAvailableChoiceCount(void);
 /* Supplied declaration required: FUN_0026c868. */
-/* Supplied declaration required: FUN_00282f80. */
+/* Supplied declaration required: campRebuildCategoryList. */
 /* Supplied declaration required: table8Type5GetValue. */
 /* Supplied declaration required: commonBgAcquire. */
 /* Supplied declaration required: partyPanelCreate. */
@@ -88,7 +88,7 @@ extern unsigned int objectPartRunUnlessLocked(void);
 /* Supplied declaration required: scrollListSetSelectionMarkChanged. */
 extern unsigned int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: gridNavigationConfigure. */
-/* Supplied declaration required: FUN_002a0cc8. */
+/* Supplied declaration required: gameGlobalsSetSubScreenActive. */
 /* Supplied declaration required: gameGetSlotTable. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: uiSpriteStateInitFromSource. */
@@ -193,7 +193,7 @@ void FUN_0028a420(void)
   }
   temp_v2 = statusGetAvailableChoiceCount();
   gridNavigationConfigure(puVar1 + 0x90,temp_v2,0xb,1,1,1);
-  FUN_00282f80(10);
+  campRebuildCategoryList(10);
   campRefreshEquipmentCategory(0x11);
   campRefreshEquipmentCategory(0x12);
   campRefreshEquipmentCategory(0x13);
@@ -441,7 +441,7 @@ LAB_0028b6d0:
     *(int *)(temp_v0 + 0x1c) = temp_v6;
     *(unsigned int *)(temp_v0 + 0x18) = 0;
     if (temp_v6 == 0x17) {
-      FUN_002a0cc8(0);
+      gameGlobalsSetSubScreenActive(0);
       temp_v6 = *(int *)(temp_v0 + 0x1c);
     }
     if (temp_v6 == 0x13) {

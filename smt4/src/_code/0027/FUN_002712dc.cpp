@@ -38,13 +38,13 @@ void mapFastModelCreate(f32 x, f32 y, f32 z, f32 heading);
 
 void lmapSetSceneId(u32 sceneId);
 void mapEaseSceneHeading(void);
-void FUN_0027fc14(s32 mode);
+void lmapCameraSetMode(s32 mode);
 void FUN_0027fae4(f32 x, f32 y, f32 z);
 u32 FUN_002804ec(MapVector *position);
 void mapSelectContainingRegions(f32 x, f32 z);
 void FUN_002879dc(s32 identifier, s32 amount, s32 priority);
 bool FUN_0027f848(MapVector *out, MapVector position);
-u32 FUN_0027f48c(MapVector *position, MapVector *previous);
+u32 mapProjectPositionToGround(MapVector *position, MapVector *previous);
 void placementUpdateSceneState(void);
 void mapModelRequest(void);
 void mapIfMarkModelDestroy(void);
@@ -264,7 +264,7 @@ void FUN_002712dc(void)
                 g_lmapScene->pose.targetHeading =
                     mathPositionHeadingDegrees(g_lmapScene->pose.position, g_gameState.overviewPosition);
             }
-            FUN_0027fc14(14);
+            lmapCameraSetMode(14);
             buttonHelpSetPreset(219);
             lmapSceneNextState();
             break;
@@ -379,7 +379,7 @@ void FUN_002712dc(void)
         case 0:
             g_lmapScene->moveMode = 7;
             g_lmapScene->moveSpeed = 0.0f;
-            FUN_0027fc14(8);
+            lmapCameraSetMode(8);
             lmapSceneNextState();
             break;
         case 1:
@@ -392,7 +392,7 @@ void FUN_002712dc(void)
                 lmapScenePlayWarpInSounds();
             }
             if (g_lmapScene->stateTime > 35) {
-                FUN_0027fc14(9);
+                lmapCameraSetMode(9);
                 g_lmapScene->moveMode = 0;
                 g_lmapScene->moveSpeed = 5.0f;
                 lmapSceneNextState();
@@ -400,7 +400,7 @@ void FUN_002712dc(void)
             break;
         case 2:
             if (++g_lmapScene->stateTime > 30) {
-                FUN_0027fc14(0);
+                lmapCameraSetMode(0);
                 lmapSetSceneId(1);
             }
             break;
@@ -496,7 +496,7 @@ void FUN_002712dc(void)
         g_lmapScene->pose.previousPosition = previous;
         if (!g_gameState.unk3CC && g_gameState.unk021 && moved) {
             g_lmapScene->pose.targetPosition.y -= 2.0f;
-            FUN_0027f48c(&g_lmapScene->pose.targetPosition, &g_lmapScene->pose.previousPosition);
+            mapProjectPositionToGround(&g_lmapScene->pose.targetPosition, &g_lmapScene->pose.previousPosition);
         }
         lmapSceneEasePosition(1.0f / 3.0f, 1.0f / 3.0f);
         g_lmapScene->pose.lastPosition = g_lmapScene->pose.position;
@@ -647,7 +647,7 @@ void FUN_002712dc(void)
         case 0:
             g_lmapScene->moveMode = 33;
             g_lmapScene->moveSpeed = 0.0f;
-            FUN_0027fc14(5);
+            lmapCameraSetMode(5);
             mapFastModelCreate(g_lmapScene->pose.position.x, g_lmapScene->pose.position.y, g_lmapScene->pose.position.z,
                          g_lmapScene->pose.heading);
             g_lmapScene->pose.targetHeading = g_lmapScene->pose.heading;
@@ -683,7 +683,7 @@ void FUN_002712dc(void)
             return;
         case 3:
             if (screenFadesAllReady()) {
-                FUN_0027fc14(0);
+                lmapCameraSetMode(0);
                 g_lmapScene->moveMode = 0;
                 g_lmapScene->moveSpeed = 5.0f;
                 mapIfMarkModelDestroy();
@@ -698,7 +698,7 @@ void FUN_002712dc(void)
             g_lmapScene->moveMode = 0;
             g_lmapScene->moveSpeed = 0.0f;
             if (!g_gameState.map.actionOption) {
-                FUN_002c29d8(0, 10, 255);
+                screenFadeStartIn(0, 10, 255);
             }
             lmapSceneNextState();
             return;
@@ -731,7 +731,7 @@ void FUN_002712dc(void)
             g_lmapScene->pose.targetHeading = g_lmapScene->pose.heading = g_gameState.heading;
             g_lmapScene->pose.targetPosition = g_lmapScene->pose.position = g_gameState.overviewPosition;
             g_lmapScene->unk06C = 0;
-            FUN_0027fc14(6);
+            lmapCameraSetMode(6);
             lmapSceneNextState();
             break;
         case 1:
@@ -766,7 +766,7 @@ void FUN_002712dc(void)
             lmapSceneEasePosition(0.1f, 0.1f);
             if (++g_lmapScene->stateTime == 1) {
                 if (g_gameState.areaId == 3 || g_gameState.areaId == 7) {
-                    FUN_0027fc14(7);
+                    lmapCameraSetMode(7);
                 }
             }
             if (g_gameState.areaId == 3 ? g_lmapScene->stateTime > 15 : g_lmapScene->stateTime > 7) {
@@ -820,7 +820,7 @@ void FUN_002712dc(void)
             libm_cosf(g_lmapScene->pose.targetHeading * DEGREES_TO_RADIANS) * g_lmapScene->slideStep;
         g_lmapScene->pose.previousPosition = previous;
         if (!g_gameState.unk3CC && g_gameState.unk021) {
-            if (FUN_0027f48c(&g_lmapScene->pose.targetPosition, &g_lmapScene->pose.previousPosition)) {
+            if (mapProjectPositionToGround(&g_lmapScene->pose.targetPosition, &g_lmapScene->pose.previousPosition)) {
                 g_lmapScene->unk068 = 0.0f;
             } else {
                 g_lmapScene->unk068 += 2.0f;
@@ -836,7 +836,7 @@ void FUN_002712dc(void)
         mapEaseSceneHeading();
         g_lmapScene->pose.lastPosition = g_lmapScene->pose.position;
         g_lmapScene->pose.previousPosition = previous;
-        FUN_0027fc14(15);
+        lmapCameraSetMode(15);
         return;
     }
     case 38:

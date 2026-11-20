@@ -26,7 +26,7 @@ s32 dataTableCompareIdsByOrder(const u16 *a, const u16 *b);
 void rangeSelectionSelectEndpoint(UiSpriteState *sprite, s32 index, s32 reverse);
 void gridNavigationConfigure(GridNavigation *work, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys);
 void FUN_0020d3d4(ActorCardAnimationsA *card);
-void FUN_0023f328(ActorCardAnimationsA *card, s32 slot, s32 reset);
+void partyStatusRefreshSlot(ActorCardAnimationsA *card, s32 slot, s32 reset);
 void FUN_0023f788(ActorCardAnimationsA *card);
 u32 dataSet16LoadAndSort(void);
 void campButtonHelpLoad(void);
@@ -377,11 +377,11 @@ void btlUiPartyDisplayInit(ActorCardAnimationsA *card, u32 unit)
     }
     card->unitIndices[4] = -4;
     card->unk4BAC = 0;
-    FUN_0023f328(card, 0, 1);
-    FUN_0023f328(card, 1, 1);
-    FUN_0023f328(card, 2, 1);
-    FUN_0023f328(card, 3, 1);
-    FUN_0023f328(card, 4, 1);
+    partyStatusRefreshSlot(card, 0, 1);
+    partyStatusRefreshSlot(card, 1, 1);
+    partyStatusRefreshSlot(card, 2, 1);
+    partyStatusRefreshSlot(card, 3, 1);
+    partyStatusRefreshSlot(card, 4, 1);
     /* A party panel is vacant without a usable unit. */
     for (i = 1; i < 4; i++) {
         SlotRecordA *record;

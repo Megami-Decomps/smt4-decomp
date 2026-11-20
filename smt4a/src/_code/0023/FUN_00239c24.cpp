@@ -16,7 +16,7 @@ int FUN_00281b94(...);
 int mapRebuildWallAutoTiles(void);
 int FUN_002c553c(void);
 int FUN_002c670c(int);
-int FUN_002ddea0(void);
+int lmapUpdateEngineRecordNavigation(void);
 int FUN_002de4d4(int, int, int);
 int FUN_002edf08(void);
 int FUN_002ef048(void);
@@ -49,7 +49,7 @@ extern int gameDataIsFlagByteSet(int);
 /* Supplied declaration required: mapRebuildWallAutoTiles. */
 /* Supplied declaration required: FUN_002c553c. */
 /* Supplied declaration required: FUN_002c670c. */
-/* Supplied declaration required: FUN_002ddea0. */
+/* Supplied declaration required: lmapUpdateEngineRecordNavigation. */
 /* Supplied declaration required: FUN_002de4d4. */
 /* Supplied declaration required: FUN_002edf08. */
 /* Supplied declaration required: FUN_002ef048. */
@@ -265,7 +265,7 @@ void FUN_00239c24(void)
       }
       else {
         FUN_003276f0(temp_v4 + 0x186,0);
-        FUN_002ddea0();
+        lmapUpdateEngineRecordNavigation();
       }
       FUN_00281b94((int)(short)(int)temp_v17);
     }

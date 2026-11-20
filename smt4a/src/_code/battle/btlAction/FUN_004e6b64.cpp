@@ -50,7 +50,7 @@ extern u64 DAT_00571188;
 extern u64 DAT_00571260;
 
 void btlEntryBuildSummary(BattleActionInfo *info, BtlMainStateA *battle, u64 *unitFlags);
-s32 FUN_004e83ac(EnemyAiContext *context, EnemyTurnWork *work, s32 target);
+s32 btlActionTargetSlotScore(EnemyAiContext *context, EnemyTurnWork *work, s32 target);
 s32 FUN_004de7a0(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate *candidates, s32 count);
 
 /* Fills `out` (0x85 id/weight pairs, ids -1 when unused) with the targets the enemy may pick this
@@ -90,7 +90,7 @@ void FUN_004e6b64(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate 
     for (s32 target = 0; target < 0x6D; target++) {
         if (work->allowed[target]) {
             BtlCombatantEntryA *unit = &context->battle->entries[target];
-            if ((unit->flags & DAT_00571178) || FUN_004e83ac(context, work, target))
+            if ((unit->flags & DAT_00571178) || btlActionTargetSlotScore(context, work, target))
                 work->allowed[target] = 0;
         }
     }

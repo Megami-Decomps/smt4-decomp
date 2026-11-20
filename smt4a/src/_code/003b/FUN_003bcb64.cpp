@@ -16,7 +16,7 @@ extern RecruitmentMasks g_btlMessageFlagMasks;
 u32 randRange(u32 maximum);
 void sysMemClear(void *memory, u32 bytes);
 void scrSetResult(s32 result);
-u32 FUN_002a4b28(u32 id);
+u32 compendiumEntryIsRegistered(u32 id);
 
 u32 FUN_003bcb64(void)
 {
@@ -40,7 +40,7 @@ u32 FUN_003bcb64(void)
                     entry->data.unk116 <= actor->data.unk116) {
                 if (!gameStockContainsEntry(entry->data.id) && entry->data.candidate &&
                         (entry->data.candidate->flags & 0x40) && actor->data.id != entry->data.id) {
-                    if (fallback ? FUN_002a4b28(actor->data.id) : !FUN_002a4b28(actor->data.id))
+                    if (fallback ? compendiumEntryIsRegistered(actor->data.id) : !compendiumEntryIsRegistered(actor->data.id))
                         candidates[count++] = entry;
                 }
             }

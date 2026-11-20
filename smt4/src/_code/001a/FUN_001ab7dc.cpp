@@ -28,7 +28,7 @@ extern "C" {
 
 Task1ab7dc *taskCreate(void (*update)(Task1ab7dc *), u32 a, u32 b, u32 c, u32 d, u32 size, u32 list, u32 e, u32 f);
 void __aeabi_memcpy4(void *, const void *, u32);
-void FUN_00291340(void *params, void *a, void *b, void *c, void *d);
+void effScalarKeyFindNextDistinct(void *params, void *a, void *b, void *c, void *d);
 void FUN_00193440(Task1ab7dc *task);
 
 // Create the task that runs FUN_00193440 with copies of the given data and parameter blocks.
@@ -46,7 +46,7 @@ Task1ab7dc *FUN_001ab7dc(u32 arg0, const void *data, const void *params, u32 arg
         task->unk22C = arg5;
         task->unk234 = -1;
         task->unk230 = -1;
-        FUN_00291340(task->params, task->unk028, task->unk030, task->unk00C, task->unk018);
+        effScalarKeyFindNextDistinct(task->params, task->unk028, task->unk030, task->unk00C, task->unk018);
         task->unk228 = arg4;
         task->unk302 = arg6;
         task->unk300 = arg6;

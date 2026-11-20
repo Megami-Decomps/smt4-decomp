@@ -64,8 +64,8 @@ PartnerUnit *FUN_00187068(s32 index);
 PartnerUnit *partyGetSlot(u16 index);
 void asdLoadFileAsyncSimple(const char *path, u32 *out, s32 arg);
 void gridNavigationConfigure(void *list, s32 count, s32 rows, s32 columns, s32 a, s32 b);
-void FUN_002c8538(s32 arg);
-void FUN_00215bd0(void);
+void gameGlobalsSetOverlayActive(s32 arg);
+void unitStatusResetSpriteState(void);
 void sysPlaySe(u32 id);
 void buttonHelpSelectSlot(s32 a, s32 b, s32 c);
 void paramsClearPacket(void *packet);
@@ -120,8 +120,8 @@ void FUN_004bd794(PartnerScreen *screen, u8 mode)
             rows++;
         }
         gridNavigationConfigure(screen->list, count, rows, 4, 1, 1);
-        FUN_002c8538(1);
-        FUN_00215bd0();
+        gameGlobalsSetOverlayActive(1);
+        unitStatusResetSpriteState();
         if (screen->mode != 2) {
             if (screen->partnerCount >= 1) {
                 if (screen->partners[screen->initial] != screen->partners[screen->current]) {

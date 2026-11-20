@@ -52,7 +52,7 @@ struct ShopTabIcons {
 
 extern "C" {
 extern ShopTabIcons DAT_00588f78[];
-void FUN_0049339c(void *header, u32 id, s32 dx, s32 dy, u32 flags);
+void uiDrawCompositeSpriteAtRectCorner(void *header, u32 id, s32 dx, s32 dy, u32 flags);
 void FUN_0049368c(void *header, u32 id, s32 dx, s32 dy, u32 color, u32 flags);
 void FUN_00494d68(ShopScreen *screen, s32 index, s32 flag, ShopSlot *slot);
 void size40Set(ShopPanel *panel, s32 first, s32 second);
@@ -87,7 +87,7 @@ void FUN_00497a6c(ShopScreen *screen, u32 sprite)
         sprite = 4;
         break;
     }
-    FUN_0049339c(screen->header, sprite, 0, 0, color);
+    uiDrawCompositeSpriteAtRectCorner(screen->header, sprite, 0, 0, color);
     FUN_0049368c(screen->header, screen->tab + 0x61, 0, 0, color, 1);
     FUN_0049368c(screen->header, 0x65, 0, 0, color, 1);
     FUN_0049368c(screen->header, 0x66, 0, 0, color, 1);
@@ -102,7 +102,7 @@ void FUN_00497a6c(ShopScreen *screen, u32 sprite)
                   ((screen->mode) == 17 || (screen->mode) == 18);
     ShopCategoryList *list = &screen->lists[screen->category];
     ShopSlot *slots = reinterpret_cast<ShopSlot *>(screen->slotTables[screen->category]);
-    s32 first = FUN_002a482c(list);
+    s32 first = resourceDispatchTaggedOperation(list);
     s32 count = rangeGetMinimumLimit(list);
     for (s32 i = 0; i < count; ++i) {
         if (!compact || FUN_0031d174(list) != i)
@@ -110,7 +110,7 @@ void FUN_00497a6c(ShopScreen *screen, u32 sprite)
     }
     if (compact && list->limit > 0)
         FUN_00494d68(screen, FUN_0031d174(list) + 1, 1, &slots[flaggedValueHolderGetTotal(list)]);
-    size40Set(screen->panel, FUN_002a482c(list), FUN_0031d174(list));
+    size40Set(screen->panel, resourceDispatchTaggedOperation(list), FUN_0031d174(list));
     screen->panel->refresh(color);
 }
 

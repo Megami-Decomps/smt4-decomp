@@ -2,7 +2,7 @@
 #include "addon/aocMain.h"
 
 extern "C" {
-void FUN_001b3428(AocWorkerThread *thread);
+void nnOsThreadImplDestroy(AocWorkerThread *thread);
 void asdOperatorDelete(void *memory);
 }
 
@@ -14,5 +14,5 @@ inline void Obj4221bc::operator delete(void *memory)
 /* Release the resources associated with this status window. */
 Obj4221bc::~Obj4221bc()
 {
-    FUN_001b3428(&g_aocMain->thread);
+    nnOsThreadImplDestroy(&g_aocMain->thread);
 }

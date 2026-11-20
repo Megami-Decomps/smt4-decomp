@@ -29,7 +29,7 @@ extern BtlCameraStatics g_btlMain;
 extern BattleVector3 DAT_00493530;
 extern BattleVector3 DAT_0049353c;
 extern BattleVector3 DAT_00493548;
-f32 FUN_00227280(u32 mode, s32 duration, s32 frame);
+f32 easeEvaluate(u32 mode, s32 duration, s32 frame);
 
 /* Update the alternate vector channel, preserving its previous result in mode one. */
 void FUN_003d6e20(BattleVectorTransition *work)
@@ -37,12 +37,12 @@ void FUN_003d6e20(BattleVectorTransition *work)
     if (g_btlMain.routingMode == 2) {
         BattleVector3 difference;
         vectorSubtract(&difference, &work->alternateDestination, &DAT_00493548);
-        f32 factor = FUN_00227280(work->mode, work->target, work->frame);
+        f32 factor = easeEvaluate(work->mode, work->target, work->frame);
         vectorScale(&difference, &difference, factor);
         vectorAdd(&work->elapsed, &work->elapsedData.alternateElapsed, &difference);
     } else if (g_btlMain.routingMode == 1) {
         work->current = DAT_0049353c;
-        f32 factor = FUN_00227280(work->mode, work->target, work->frame);
+        f32 factor = easeEvaluate(work->mode, work->target, work->frame);
         BattleVector3 offset;
         vectorSubtract(&offset, &work->reference.position, &work->current);
         vectorSubtract(&offset, &work->alternateDestination, &offset);

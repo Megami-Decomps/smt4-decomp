@@ -7,8 +7,8 @@ extern "C" {
 void *asdMemoryAllocTracked(u32, u32, u32, u32, s32);
 void sysMemClear(void *, u32);
 void *FUN_00283498(u32);
-s32 FUN_00162ea4(void);
-NpcPortraitResource *FUN_00409fe8(s32, s32, s32);
+s32 eventIsSkipping(void);
+NpcPortraitResource *resourceCacheGetOrLoadModel(s32, s32, s32);
 s32 FUN_002897cc(u32);
 void FUN_0034da3c(u32);
 extern const s8 DAT_0052f4f0[];
@@ -36,10 +36,10 @@ u32 npc2dCreatePortraitJob(u32 npcId, u32 option, s32 x, s32 y, f32 alpha)
     for (s32 index = 0; index < 6; ++index)
         work->unk70[index] = 0;
     work->portraitId = -static_cast<s32>(static_cast<NpcTableEntry *>(FUN_00283498(npcId))->portraitId);
-    if (FUN_00162ea4()) {
+    if (eventIsSkipping()) {
         work->resourceState = 1;
     } else {
-        work->portrait = FUN_00409fe8(work->portraitId, 1, 1);
+        work->portrait = resourceCacheGetOrLoadModel(work->portraitId, 1, 1);
         work->resourceState = 2;
     }
     work->unk00 = npcId;

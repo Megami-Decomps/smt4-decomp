@@ -21,7 +21,7 @@ extern "C" {
 extern DspSoundFlags g_sndSystemState;
 extern u8 g_dspsndState;
 extern u8 g_nnSndMasterManager;
-void FUN_00129214(u8 *state, s32 flag);
+void nn_snd_CTR_Dspsnd_Initialize(u8 *state, s32 flag);
 void nnSndMasterManagerSetMode(u8 *manager, s8 value);
 void nn_os_LightEvent_Signal(u8 *event);
 
@@ -29,7 +29,7 @@ void nn_os_LightEvent_Signal(u8 *event);
 void dspsndHandlePendingRequest(void)
 {
     if ((g_sndSystemState.enabled & g_sndSystemState.pending) != 0) {
-        FUN_00129214(&g_dspsndState, 1);
+        nn_snd_CTR_Dspsnd_Initialize(&g_dspsndState, 1);
         s8 status = ((DspRegisters *)0x1ff81000)->status;
         g_sndSystemState.status = status;
         nnSndMasterManagerSetMode(&g_nnSndMasterManager, status);

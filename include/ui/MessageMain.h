@@ -7,7 +7,7 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include <stddef.h>
 
-/* One message window (0xA3C bytes, allocated by FUN_002c4a34). The dialogue window, the banner and
+/* One message window (0xA3C bytes, allocated by messageWindowCreate). The dialogue window, the banner and
  * the auxiliary window are all of this type. */
 struct MessageWindow {
     /* 0x000 */ u32 job;                 /* calculation job (MESS_C) */
@@ -105,7 +105,7 @@ extern "C" {
 
 void FUN_001a1648(void);
 /* Allocates a message window with its text box and jobs. */
-MessageWindow *FUN_002c4a34(void);
+MessageWindow *messageWindowCreate(void);
 
 #ifdef __cplusplus
 }

@@ -34,18 +34,18 @@ void campResetScreen(void);
 s32 uiSearchPrimary(GridNavigation *list);
 u32 uiScrollHandleActionsOrTouch(GridNavigation *list, const TextureTableEntryIV *rectangle, const s16 *regions,
                                  s32 firstKey, s32 secondKey, s32 thirdKey, s8 *blockedMode, s32 secondary, s32 notify);
-u8 FUN_00228b04(GridNavigation *list, s32 mode);
-void FUN_002cb278(GridNavigation *list, s32 mode);
+u8 gridNavigationHandleConfirm(GridNavigation *list, s32 mode);
+void campListRegisterTouchRegions(GridNavigation *list, s32 mode);
 /* One-instruction getters armlink inlined (config/inlined.txt). */
 s32 uiStateGetFirstFlag(const void *block);
 s32 uiStateGetSecondFlag(const void *block);
-void FUN_0022e774(void);
+void statusPanelClose(void);
 s8 FUN_0022e714(void);
 void FUN_0035dbd4(u32 value);
 s32 FUN_0035db94(void);
 void FUN_0021b274(s32 mode, s32 image, u32 frame);
 void FUN_003d386c(s32 useSelector);
-s32 FUN_003df57c(u32 id, s32 useSkillRank);
+s32 skillGetCostWithRankReduction(u32 id, s32 useSkillRank);
 u32 FUN_002684d0(s32 skillId, s32 target);
 void FUN_0031f718(s32 id, s32 useBaseStats, u32 flags);
 void statusPanelSetOpen(s32 open);
@@ -65,7 +65,7 @@ static __inline s32 campSelectedSkillMpChange(void)
     s32 row = campSkillListRow(camp);
 
     if (camp->entries[row].unit < 0) {
-        return -FUN_003df57c(camp->entries[row].id, 1);
+        return -skillGetCostWithRankReduction(camp->entries[row].id, 1);
     }
     return -skillGetAdjustedCost(gameGetSlotRecord(camp->entries[row].unit), camp->entries[row].id);
 }
@@ -75,7 +75,7 @@ static __inline void campPaySkillCost(CampStateA *camp, s32 row)
 {
     if (camp->entries[row].unit < 0) {
         PlayerDataA *player = gameGetPlayerData();
-        player->mp -= FUN_003df57c(camp->entries[row].id, 1);
+        player->mp -= skillGetCostWithRankReduction(camp->entries[row].id, 1);
         if (player->mp < 0) {
             player->mp = 0;
         }
@@ -132,7 +132,7 @@ extern "C" void campSkillListUpdate(void)
     CampStateA *camp = g_camp;
 
     if (camp->phase == 0) {
-        if (!FUN_0023b3d0()) {
+        if (!gameStateIsNotTransitioning()) {
             return;
         }
         statusPreviewMpChange(0, campSelectedSkillMpChange());
@@ -142,7 +142,7 @@ extern "C" void campSkillListUpdate(void)
         if (current != NULL) {
             current->statusSelection = row;
         }
-        FUN_002cb278(&camp->grids[3], 1);
+        campListRegisterTouchRegions(&camp->grids[3], 1);
         camp->phase++;
         return;
     }
@@ -150,11 +150,11 @@ extern "C" void campSkillListUpdate(void)
         return;
     }
 
-    if (objectApplyIfUnblocked(reinterpret_cast<Object *>(&camp->grids[3])) <= 0) {
+    if (gridNavigationGetItemCount(reinterpret_cast<Object *>(&camp->grids[3])) <= 0) {
         /* The list is empty: only cancel works. */
         if (padQueryLogicalKey(1, 1)) {
             campTouchRegionsRemoveGroup(&camp->grids[3], 1);
-            FUN_0022e774();
+            statusPanelClose();
             FUN_0035dbd4(0);
             campShowSelectedEntryHelp(0);
             FUN_0021b274(3, -1, 0);
@@ -171,7 +171,7 @@ extern "C" void campSkillListUpdate(void)
     bool scrolling = false;
     if (uiStateGetSecondFlag(&camp->grids[3]) || uiStateGetFirstFlag(&camp->grids[3])) {
         scrolling = true;
-        const s16 *shown = reinterpret_cast<const s16 *>(FUN_002c7e24());
+        const s16 *shown = reinterpret_cast<const s16 *>(gameGlobalsGetBlock1390());
         if ((*shown < 0 && camp->entries[row].unit >= 0) ||
             (*shown >= 0 && (camp->entries[row].unit < 0 || gameGetSlotRecord(camp->entries[row].unit)->id != *shown))) {
             FUN_0023b45c(0);
@@ -192,7 +192,7 @@ extern "C" void campSkillListUpdate(void)
             }
         }
         if (FUN_002a7410()) {
-            FUN_002c7e24();
+            gameGlobalsGetBlock1390();
             campTouchRegionsRemoveGroup(&camp->grids[3], 1);
             for (s32 i = 0; i < uiSearchPrimary(&camp->grids[3]); i++) {
                 ifTouchRegionRemove();
@@ -217,7 +217,7 @@ extern "C" void campSkillListUpdate(void)
                                          camp->touch.scrollRegions[0], camp->touch.scrollRegions[1],
                                          camp->touch.scrollRegions[2], &touched, 0, 1)) {
             campRefreshEntryHelp(camp);
-        } else if (FUN_00228b04(&camp->grids[3], 1)) {
+        } else if (gridNavigationHandleConfirm(&camp->grids[3], 1)) {
             campRefreshEntryHelp(camp);
         } else if ((padQueryLogicalKey(0, 1) || touched) && FUN_0022e714()) {
             if (FUN_002684d0(camp->entries[row].id, static_cast<s16>(camp->entries[row].unit)) &&
@@ -273,7 +273,7 @@ extern "C" void campSkillListUpdate(void)
             campTouchRegionsRemoveGroup(&camp->grids[3], 1);
             campRestoreMenuGroup(camp);
             statusPreviewMpChange(0, 0);
-            FUN_0022e774();
+            statusPanelClose();
             FUN_0035dbd4(0);
             campShowSelectedEntryHelp(0);
             FUN_0021b274(3, -1, 0);
@@ -283,12 +283,12 @@ extern "C" void campSkillListUpdate(void)
             eventQueueAddUniqueIfValid(0x100020F);
         } else if (!scrolling && padQueryLogicalKey(9, 1)) {
             sortMenuAcquire(1, 0);
-            FUN_0031f208(11);
-            FUN_0031f208(32);
-            FUN_0031f208(13);
-            FUN_0031f208(15);
-            FUN_0031f208(17);
-            FUN_0031f208(3);
+            useCounterAppendValue(11);
+            useCounterAppendValue(32);
+            useCounterAppendValue(13);
+            useCounterAppendValue(15);
+            useCounterAppendValue(17);
+            useCounterAppendValue(3);
             buttonHelpSetText(NULL, 0xF4F4F4FF);
             camp->buttonHelpValue = ifTouchGetButtonHelpValue();
             campChangeState(43);

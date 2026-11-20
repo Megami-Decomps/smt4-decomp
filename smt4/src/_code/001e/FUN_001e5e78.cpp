@@ -70,7 +70,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_0025a8d8. */
 extern int FUN_0025b408(void);
 /* Supplied declaration required: mapFlagIsSet. */
-extern int FUN_0025b4b0(float *, unsigned int *, unsigned int);
+extern int mapCollisionRaySegmentTest(float *, unsigned int *, unsigned int);
 /* Supplied declaration required: randomGetNormalizedFloat. */
 /* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
@@ -252,7 +252,7 @@ LAB_001e6120:
               uStack_c8 = *(unsigned int *)(temp_v12 + 0x234);
               temp_v25[3] = *(float *)(g_lmapScene + 0x20) + temp_v16;
               temp_v27 = *(float *)(temp_v12 + 0x230) + temp_v16;
-              temp_v9 = FUN_0025b4b0(temp_v25 + 2,(unsigned int *)&temp_v26,0);
+              temp_v9 = mapCollisionRaySegmentTest(temp_v25 + 2,(unsigned int *)&temp_v26,0);
               if (temp_v9 != -1) goto LAB_001e6260;
             }
             if (*(int *)(temp_v12 + 0x1e4) >= 0x22) {

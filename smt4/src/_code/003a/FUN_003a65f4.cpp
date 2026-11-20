@@ -8,11 +8,11 @@ typedef struct PartySlotTable {
     /* 0x9108 */ s8 reserve[3];    /* slot index of each reserve member */
 } PartySlotTable;
 
-s32 FUN_002621b4(s32 id, s32 slot, s32 arg, s32 *out);
+s32 skillApplyToTarget(s32 id, s32 slot, s32 arg, s32 *out);
 PartySlotTable *gameGetSlotTable(void);
 s32 gameCountUnits(void);
 
-/* Whether FUN_002621b4 accepts (returns 0) `id` for the player (modes 0, 2, 3), a party member
+/* Whether skillApplyToTarget accepts (returns 0) `id` for the player (modes 0, 2, 3), a party member
  * (modes 0, 1) or a reserve member (modes 2, 3). */
 s32 FUN_003a65f4(u32 mode, s32 id, s32 arg)
 {
@@ -20,7 +20,7 @@ s32 FUN_003a65f4(u32 mode, s32 id, s32 arg)
     s32 count;
     s8 *slots;
 
-    if ((mode == 0 || mode == 2 || mode == 3) && FUN_002621b4(id, -1, arg, &result) == 0) {
+    if ((mode == 0 || mode == 2 || mode == 3) && skillApplyToTarget(id, -1, arg, &result) == 0) {
         return 1;
     }
     switch (mode) {
@@ -38,7 +38,7 @@ s32 FUN_003a65f4(u32 mode, s32 id, s32 arg)
         return 0;
     }
     for (s32 i = 0; i < count; i++) {
-        if (slots[i] >= 0 && FUN_002621b4(id, slots[i], arg, &result) == 0) {
+        if (slots[i] >= 0 && skillApplyToTarget(id, slots[i], arg, &result) == 0) {
             return 1;
         }
     }

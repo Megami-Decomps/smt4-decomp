@@ -20,9 +20,9 @@ union TextCommandCallback {
     void (*four)(u32, u32, u32, u32);
 };
 extern "C" {
-extern TextCommandCallback DAT_00636f68[8];
-extern u16 DAT_0063af98[8];
-extern u32 DAT_0063afa8[8];
+extern TextCommandCallback g_textControlCallbacks[8];
+extern u16 g_textControlCallbackCodes[8];
+extern u32 g_textControlCallbackArgumentCounts[8];
 
 static __inline u16 nextTextCommandArgument(TextCommandCursor &cursor)
 {
@@ -35,27 +35,27 @@ static __inline u16 nextTextCommandArgument(TextCommandCursor &cursor)
 void asdTextDispatchRegisteredCommand(TextCommandCursor *cursor, u32 code)
 {
     for (s32 i = 0; i < 8; ++i) {
-        if (DAT_00636f68[i].none && DAT_0063af98[i] == code) {
-            switch (DAT_0063afa8[i]) {
+        if (g_textControlCallbacks[i].none && g_textControlCallbackCodes[i] == code) {
+            switch (g_textControlCallbackArgumentCounts[i]) {
             case 0:
-                DAT_00636f68[i].none();
+                g_textControlCallbacks[i].none();
                 return;
             case 1: {
                 u16 first = nextTextCommandArgument(*cursor);
-                DAT_00636f68[i].one(first);
+                g_textControlCallbacks[i].one(first);
                 return;
             }
             case 2: {
                 u16 first = nextTextCommandArgument(*cursor);
                 u16 second = nextTextCommandArgument(*cursor);
-                DAT_00636f68[i].two(first, second);
+                g_textControlCallbacks[i].two(first, second);
                 return;
             }
             case 3: {
                 u16 first = nextTextCommandArgument(*cursor);
                 u16 second = nextTextCommandArgument(*cursor);
                 u16 third = nextTextCommandArgument(*cursor);
-                DAT_00636f68[i].three(first, second, third);
+                g_textControlCallbacks[i].three(first, second, third);
                 return;
             }
             case 4: {
@@ -63,7 +63,7 @@ void asdTextDispatchRegisteredCommand(TextCommandCursor *cursor, u32 code)
                 u16 second = nextTextCommandArgument(*cursor);
                 u16 third = nextTextCommandArgument(*cursor);
                 u16 fourth = nextTextCommandArgument(*cursor);
-                DAT_00636f68[i].four(first, second, third, fourth);
+                g_textControlCallbacks[i].four(first, second, third, fourth);
                 return;
             }
             }

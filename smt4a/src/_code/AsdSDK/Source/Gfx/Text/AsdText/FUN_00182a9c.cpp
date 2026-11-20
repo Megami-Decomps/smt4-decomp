@@ -32,7 +32,7 @@ typedef struct {
 
 extern romwright_code *DAT_005b3d68; /* 0x5b3d68 */
 extern romwright_code *DAT_005b3d6c; /* 0x5b3d6c */
-extern unsigned char DAT_0063af98; /* 0x63af98 */
+extern unsigned char g_textControlCallbackCodes; /* 0x63af98 */
 
 #ifndef ROMWRIGHT_PIECE_2_2_DEFINED
 #define ROMWRIGHT_PIECE_2_2_DEFINED
@@ -174,7 +174,7 @@ int FUN_00182a9c(int *param_1)
       temp_v3 = 0;
       do {
         if ((*(int *)(temp_v3 * 4 + 0x636f68) != 0) &&
-           (*(short *)(&DAT_0063af98 + temp_v3 * 2) == temp_v9)) {
+           (*(short *)(&g_textControlCallbackCodes + temp_v3 * 2) == temp_v9)) {
           asdTextDispatchRegisteredCommand(param_1,temp_v9);
           break;
         }
@@ -196,7 +196,7 @@ LAB_00182db8:
         temp_v8 = 0;
         do {
           if ((*(int *)(temp_v8 * 4 + 0x636f68) != 0) &&
-             (*(short *)(&DAT_0063af98 + temp_v8 * 2) == temp_v9)) {
+             (*(short *)(&g_textControlCallbackCodes + temp_v8 * 2) == temp_v9)) {
             asdTextDispatchRegisteredCommand(param_1,temp_v9);
             goto LAB_00183248;
           }

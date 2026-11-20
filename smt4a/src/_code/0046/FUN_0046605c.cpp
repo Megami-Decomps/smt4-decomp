@@ -8,7 +8,7 @@ int FUN_001a08d0(int);
 int nn_os_LightEvent_TryWait(void);
 int FUN_001b6660(unsigned int, int);
 int FUN_001cc644(int);
-int FUN_0045b96c(void);
+int linkListInsertByKind(void);
 int wordsFlag8Reset(unsigned int);
 int wordsFlagReset(unsigned int);
 int nw_ut_internal_LinkListImpl_insert(int, int, int);
@@ -18,7 +18,7 @@ int nw_ut_internal_LinkListImpl_insert(int, int, int);
 /* Supplied declaration required: FUN_001b6660. */
 extern unsigned int FUN_001c35d8(void);
 /* Supplied declaration required: FUN_001cc644. */
-/* Supplied declaration required: FUN_0045b96c. */
+/* Supplied declaration required: linkListInsertByKind. */
 /* Supplied declaration required: wordsFlag8Reset. */
 /* Supplied declaration required: wordsFlagReset. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
@@ -58,7 +58,7 @@ void FUN_0046605c(int param_1)
     nn_os_LightEvent_TryWait();
     if (temp_v1 != 0) {
       if (*(int *)(temp_v3 + 0x78) != 0) {
-        FUN_0045b96c();
+        linkListInsertByKind();
       }
       nw_ut_internal_LinkListImpl_insert(temp_v4 + 0x14,temp_v4 + 0x18,temp_v3 + 0x80);
     }

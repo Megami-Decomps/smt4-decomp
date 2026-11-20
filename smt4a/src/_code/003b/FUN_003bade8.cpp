@@ -6,7 +6,7 @@
 extern "C" {
 extern s32 DAT_0059e9b4;
 extern u32 DAT_0059e69c;
-extern EffectSelectionTemplate DAT_0059e9a8;
+extern EffectSelectionTemplate g_effectEditorState;
 LinkedItem* effPartCloneAfter(LinkedItems* list, LinkedItem* after);
 
 // Duplicate the selected effect part and select the scratch template.
@@ -19,7 +19,7 @@ u32 FUN_003bade8(void)
         static_cast<LinkedItems*>(g_effectEditor.list), selected);
     DAT_0059e69c = 0;
     copy->data = selected->data;
-    g_effectEditor.object = &DAT_0059e9a8;
+    g_effectEditor.object = &g_effectEditorState;
     return 0;
 }
 }

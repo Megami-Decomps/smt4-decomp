@@ -88,7 +88,7 @@ void FUN_004a5344(PanelWork *work)
         return;
     }
     efctSetSpeed(scale);
-    s32 first = FUN_002a482c(work->list);
+    s32 first = resourceDispatchTaggedOperation(work->list);
     s32 visible = rangeGetMinimumLimit(work->list);
     PanelRow *rows = ((PanelWorkView *)work)->rows;
 

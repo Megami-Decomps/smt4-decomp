@@ -4,12 +4,12 @@
 
 extern "C" {
 s32 inputTestEnabledRule(u32 id);
-s32 FUN_00228b04(SdCardMenuList *list, s32 mode);
+s32 gridNavigationHandleConfirm(SdCardMenuList *list, s32 mode);
 s32 resourceRunOperationIfUnblocked(SdCardMenuList *list);
-s32 objectApplyIfUnblocked(SdCardMenuList *list);
+s32 gridNavigationGetItemCount(SdCardMenuList *list);
 void scrollOwnerSetValue(SdCardMenuList *list, s32 position);
 void flaggedEntrySetValueA(SdCardMenuList *list, s32 value);
-void FUN_002f0384(s32 value);
+void statusCameraRestore(s32 value);
 
 /* Updates the menu list's scroll position and refreshes the entry icons. */
 void FUN_0041e7c0(SdCardMenu *menu)
@@ -17,10 +17,10 @@ void FUN_0041e7c0(SdCardMenu *menu)
     if (inputTestEnabledRule(5) != 0 || inputTestEnabledRule(6) != 0 || inputTestEnabledRule(4) != 0 || inputTestEnabledRule(3) != 0 ||
         inputTestEnabledRule(0xC) != 0 || inputTestEnabledRule(0xD) != 0 || inputTestEnabledRule(0xE) != 0 || inputTestEnabledRule(0xF) != 0)
         menu->valid = 0;
-    if (FUN_00228b04(&menu->list, 1) != 0) {
+    if (gridNavigationHandleConfirm(&menu->list, 1) != 0) {
         s32 position = resourceRunOperationIfUnblocked(&menu->list);
         s32 value = flaggedEntryGetValueA(reinterpret_cast<FlaggedEntry *>(&menu->list));
-        s32 span = objectApplyIfUnblocked(&menu->list);
+        s32 span = gridNavigationGetItemCount(&menu->list);
         s32 offset = menu->offset;
         s32 total = position + value + offset;
         menu->total = total;
@@ -42,7 +42,7 @@ void FUN_0041e7c0(SdCardMenu *menu)
         menu->previousTotal = menu->total;
         menu->total = listValue + menu->listPosition + menu->offset;
         menu->valid = 1;
-        FUN_002f0384(0);
+        statusCameraRestore(0);
         menu->busy = 0;
         for (s32 i = 0; i < menu->entryCount; i++) {
             bool scrolled = sdCardMenuEntryScrolled(menu, i);

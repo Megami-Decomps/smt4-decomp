@@ -88,14 +88,14 @@ struct BtlMainEffectState {
 extern "C" {
 extern u32 g_btlScriptUnit;
 extern BtlMainFlags *g_btlMain;
-extern BattleVersionResources *DAT_00435d18;
+extern BattleVersionResources *g_btlAux;
 extern BtlMainEffectState *g_btlMainState;
 extern u32 DAT_00439a24, DAT_00439a28, DAT_00439a38, DAT_00439cf8;
 
 u32 idSlotsFindEntryById(BtlSummonState *state, s32 id);
 s32 nkdwHeaderParse(u32 resource);
 void aocHandleButtons(u32 resource, s32 mode);
-s32 FUN_00294fe0(u32 resource);
+s32 aocTextureEntryLoadOnce(u32 resource);
 void modelAnimationEnsureData(u32 resource);
 SummonResource *eventResourceCacheAcquire(s32 id, s32 flag);
 void FUN_0024057c(BtlSummonState *state, SummonEffect *effect, s32 flag);
@@ -143,8 +143,8 @@ u32 btlSummonLoadAndSpawn(BtlSummonState *state, u32 request)
             state->slots[0].id = source->summonId;
         }
         g_btlMain->flags |= 0x4000;
-        if ((*reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(DAT_00435d18) + 0x3028) & 0x400) != 0)
-            FUN_00240614(DAT_00435d18);
+        if ((*reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(g_btlAux) + 0x3028) & 0x400) != 0)
+            FUN_00240614(g_btlAux);
         state->state = SUMMON_STATE_SPAWN;
         return 0;
     }
@@ -159,7 +159,7 @@ u32 btlSummonLoadAndSpawn(BtlSummonState *state, u32 request)
         aocHandleButtons(resource, 7);
     }
     if ((state->slots[0].flags & SUMMON_RESOURCE_READY) == 0) {
-        if (FUN_00294fe0(resource) == 0)
+        if (aocTextureEntryLoadOnce(resource) == 0)
             return 0;
         modelAnimationEnsureData(resource);
         state->slots[0].flags |= SUMMON_RESOURCE_READY;

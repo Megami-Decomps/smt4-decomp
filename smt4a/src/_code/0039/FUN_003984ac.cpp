@@ -73,7 +73,7 @@ extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 extern int saveSlotFindSelected(void);
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 extern int gameFlagIsSet(unsigned int);
-extern int FUN_0019acdc(unsigned short, unsigned int);
+extern int unitMapIdToCategory(unsigned short, unsigned int);
 /* Supplied declaration required: skillDataFindById. */
 extern int FUN_003e48bc(void);
 extern int FUN_003e4978(void);
@@ -85,7 +85,7 @@ extern int FUN_003e4978(void);
 /* Supplied declaration required: btlUiIdsRefresh. */
 /* Supplied declaration required: FUN_004c1114. */
 /* Supplied declaration required: btlSlotSetStoreValue. */
-extern unsigned int FUN_004c53fc(unsigned int);
+extern unsigned int mapCategoryToDestinationGroup(unsigned int);
 /* Supplied declaration required: btlAdjustPropertyClamped. */
 /* Supplied declaration required: btlSelectSourceTriggeredSkill. */
 /* Supplied declaration required: hasFlag80Or1000. */
@@ -217,7 +217,7 @@ LAB_003987dc:
                 }
               }
               else {
-                temp_v2 = FUN_004c53fc(0x22);
+                temp_v2 = mapCategoryToDestinationGroup(0x22);
                 btlSlotSetStoreValue((int)(short)puVar10[2],0x22,temp_v2);
               }
             }
@@ -296,49 +296,49 @@ LAB_00398c7c:
                     btlAdjustPropertyClamped(temp_v7,0x1b,1,0);
                   }
                   else {
-                    temp_v2 = FUN_004c53fc(0x1b);
+                    temp_v2 = mapCategoryToDestinationGroup(0x1b);
                     btlSlotSetStoreValue(temp_v7,0x1b,temp_v2);
                   }
                   if ((puVar10[0x9d] & 0x40) != 0) {
                     btlAdjustPropertyClamped(temp_v7,0x1c,1,0);
                   }
                   else {
-                    temp_v2 = FUN_004c53fc(0x1c);
+                    temp_v2 = mapCategoryToDestinationGroup(0x1c);
                     btlSlotSetStoreValue(temp_v7,0x1c,temp_v2);
                   }
                   if ((puVar10[0x9d] & 0x100) != 0) {
                     btlAdjustPropertyClamped(temp_v7,0x1d,1,0);
                   }
                   else {
-                    temp_v2 = FUN_004c53fc(0x1d);
+                    temp_v2 = mapCategoryToDestinationGroup(0x1d);
                     btlSlotSetStoreValue(temp_v7,0x1d,temp_v2);
                   }
                   if ((puVar10[0x9d] & 8) != 0) {
                     btlAdjustPropertyClamped(temp_v7,0x1e,1,0);
                   }
                   else {
-                    temp_v2 = FUN_004c53fc(0x1e);
+                    temp_v2 = mapCategoryToDestinationGroup(0x1e);
                     btlSlotSetStoreValue(temp_v7,0x1e,temp_v2);
                   }
                   if ((puVar10[0x9d] & 0x800) != 0) {
                     btlAdjustPropertyClamped(temp_v7,0x1f,1,0);
                   }
                   else {
-                    temp_v2 = FUN_004c53fc(0x1f);
+                    temp_v2 = mapCategoryToDestinationGroup(0x1f);
                     btlSlotSetStoreValue(temp_v7,0x1f,temp_v2);
                   }
                   if ((puVar10[0x9d] & 0x1000) != 0) {
                     btlAdjustPropertyClamped(temp_v7,0x20,1,0);
                   }
                   else {
-                    temp_v2 = FUN_004c53fc(0x20);
+                    temp_v2 = mapCategoryToDestinationGroup(0x20);
                     btlSlotSetStoreValue(temp_v7,0x20,temp_v2);
                   }
                   if ((puVar10[0x9d] & 0x2000) != 0) {
                     btlAdjustPropertyClamped(temp_v7,0x21,1,0);
                   }
                   else {
-                    temp_v2 = FUN_004c53fc(0x21);
+                    temp_v2 = mapCategoryToDestinationGroup(0x21);
                     btlSlotSetStoreValue(temp_v7,0x21,temp_v2);
                   }
                 }
@@ -441,8 +441,8 @@ LAB_00398c7c:
         if ((temp_v6 == 0) || (temp_v6 = hasFlag80Or1000(g_btlScriptUnit,(unsigned int *)temp_v6), temp_v6 == 0)) {
           jyoucyuGetTableEntry(1);
           if ((*piVar11 != 0) &&
-             ((((temp_v6 = FUN_0019acdc(*(unsigned short *)(*piVar11 + 300),0), temp_v6 == 1 ||
-                (temp_v6 = FUN_0019acdc(*(unsigned short *)(*piVar11 + 300),0), temp_v6 == 4)) &&
+             ((((temp_v6 = unitMapIdToCategory(*(unsigned short *)(*piVar11 + 300),0), temp_v6 == 1 ||
+                (temp_v6 = unitMapIdToCategory(*(unsigned short *)(*piVar11 + 300),0), temp_v6 == 4)) &&
                (temp_v6 = gameFlagIsSet(0xd1), temp_v6 != 0)) &&
               ((temp_v6 = gameFlagIsSet(0xed), temp_v6 == 0 &&
                ((*puVar6 & DAT_00573a50) == 0 && (*(unsigned int *)(param_1 + 0x45a4) & DAT_00573a54) == 0))

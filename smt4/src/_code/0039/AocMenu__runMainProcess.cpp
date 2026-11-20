@@ -36,7 +36,7 @@ bool _ZN13ObjBase3c2ef07vfunc0cEv(Obj4221a4 *panel, FlaggedValueHolder *holder);
 u8 aocIsEntryIndexValid(const AocMain *main, u32 index);
 u32 statusDecodeActivityState(const StatusBytes *status);
 RelativeDirectory *FUN_0023478c(AocMain *main, s32 index); // declcheck: local (the header's variant drops the returned directory)
-void FUN_002869e8(AsdText *text, u32 font, s32 mode, s32 x, s32 y, const char *message);
+void asdTextDrawFormattedCore(AsdText *text, u32 font, s32 mode, s32 x, s32 y, const char *message);
 void aocMenuSetButtonHelp(AocMenu *menu, u32 selection, s32 mode);
 s32 bgmGetStateById(u32 id);
 void bgmResumeOrRequestTrack(u32 id);
@@ -96,7 +96,7 @@ static __inline void showDescription(AocMenu *menu, AsdText **text)
         if (record->flags[7] != 0) {
             asdTextDrawDirectoryEntry(*text, 3, -1, 0, 3, FUN_0023478c(g_aocMain, -1), 12);
         } else {
-            FUN_002869e8(*text, 3, -1, 0, 3, reinterpret_cast<const char *>(record->contents));
+            asdTextDrawFormattedCore(*text, 3, -1, 0, 3, reinterpret_cast<const char *>(record->contents));
         }
     }
 }

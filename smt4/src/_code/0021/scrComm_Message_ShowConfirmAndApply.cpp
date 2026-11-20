@@ -7,13 +7,13 @@ void scrWorkSetValue(s32 index, s32 value);
 s32 messageForwardDefaultMode(s32 buffer, s32 size, u32 value, s32 kind, s32 flag);
 void uiBindRecordRewardText(u32 arg, s32 a, s32 b);
 void messageSetConfirmDisplayMode(void);
-s32 FUN_00348a1c(u32 arg);
+s32 gameFlagEntryResetIfActive(u32 arg);
 s32 scrGetCommandFrame(void);
 u32 scrGetArg(u32 index);
 s32 fileSlotGetBuffer(u32 slot);
 
 /* Shows the confirm message; on the first frame resets work value 0 and starts the message, then
- * counts work value 0 up. Returns 1 (after passing the script argument to FUN_00348a1c) when the answer is 1. */
+ * counts work value 0 up. Returns 1 (after passing the script argument to gameFlagEntryResetIfActive) when the answer is 1. */
 u8 scrComm_Message_ShowConfirmAndApply(void)
 {
     u16 arg = scrGetArg(0);
@@ -31,7 +31,7 @@ u8 scrComm_Message_ShowConfirmAndApply(void)
     answer = messageForwardDefaultMode(buffer, 0x10, frame, 6, 0);
     scrWorkSetValue(0, scrWorkGetValue(0) + 1);
     if (answer == 1) {
-        FUN_00348a1c(arg);
+        gameFlagEntryResetIfActive(arg);
         return 1;
     }
     return 0;

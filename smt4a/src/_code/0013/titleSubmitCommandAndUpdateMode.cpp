@@ -1,17 +1,22 @@
 #include "shard/W6_W6Match2_TitleCommand.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 extern "C" {
 s32 gxIsStereoscopic3dEnabled(void);
-void FUN_00167eb0(u32);
-void renderBindPreset(s32);
+void asdGxCommandListReplayCopy(u32 commandList); // declcheck: local (the title keeps the AsdGxCommandList as a u32 handle)
+void renderBindPreset(s32 display);
 
-// Submit the active title command list when enabled, then update the title mode.
+/* In stereoscopic 3D, replays the title command list's saved copy when the list is enabled and active,
+ * then binds the right-eye display. */
 u32 titleSubmitCommandAndUpdateMode(void)
 {
-    if (!g_titleFlags.disabled && gxIsStereoscopic3dEnabled() == 1 && g_titleFlags.commandActive)
-        FUN_00167eb0(g_titleFlags.commandList);
-    if (gxIsStereoscopic3dEnabled() == 1)
-        renderBindPreset(0x410);
+    if (g_titleFlags.disabled == 0 && gxIsStereoscopic3dEnabled() == 1 && g_titleFlags.commandActive != 0) {
+        asdGxCommandListReplayCopy(g_titleFlags.commandList);
+    }
+    if (gxIsStereoscopic3dEnabled() == 1) {
+        renderBindPreset(ASD_GX_DISPLAY_TOP_RIGHT);
+    }
     return 0;
 }
-}
+
+} /* extern "C" */

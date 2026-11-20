@@ -8,13 +8,13 @@ typedef struct EffectInstance {
 } EffectInstance;
 
 extern s32 effGetFrameStep(void);
-extern void FUN_003516e4(EffectInstance *effect);
+extern void effJobComputeQuadVertices(EffectInstance *effect);
 
-/* Advances the effect's frame counter by this frame's step, then updates it (FUN_003516e4). */
+/* Advances the effect's frame counter by this frame's step, then updates it (effJobComputeQuadVertices). */
 void effectAdvanceFrame(EffectInstance *effect)
 {
     effect->frame += effGetFrameStep();
-    FUN_003516e4(effect);
+    effJobComputeQuadVertices(effect);
 }
 
 } /* extern "C" */

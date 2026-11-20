@@ -17,15 +17,15 @@ struct ConditionalMapEntryCount {
 };
 }
 extern "C" {
-extern ConditionalMapEntryCount DAT_00447a28;
-extern ConditionalMapEntry DAT_004a1264[];
+extern ConditionalMapEntryCount g_entryTableInfo;
+extern ConditionalMapEntry g_namedEntryTable[];
 u32 gameFlagIsSet(s32 flag);
 
 /* Disables populated entries whose required flag is absent or whose forbidden flag is set. */
 void FUN_002644a8(void)
 {
-    for (s32 i = 0; i < DAT_00447a28.count; ++i) {
-        ConditionalMapEntry *entry = &DAT_004a1264[i];
+    for (s32 i = 0; i < g_entryTableInfo.count; ++i) {
+        ConditionalMapEntry *entry = &g_namedEntryTable[i];
         if (entry->disabled == 0 && entry->unk12C != 0 &&
             ((entry->requiredFlag != 0 && !gameFlagIsSet(entry->requiredFlag)) ||
              (entry->forbiddenFlag != 0 && gameFlagIsSet(entry->forbiddenFlag)))) {

@@ -16,8 +16,8 @@ int FUN_00274a30(void);
 int FUN_002941c8(...);
 int FUN_002d1f40(int, int, int);
 int FUN_002d8a48(void);
-int FUN_00303460(...);
-int FUN_00319f64(int);
+int lmapCameraSetMode(...);
+int mapCollisionDisableByTag(int);
 int entryTableFlagTargetsOfId203(unsigned int);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -85,9 +85,9 @@ extern int g_lmapScene; /* 0x581288 */
 /* Supplied declaration required: FUN_002b63d0. */
 /* Supplied declaration required: FUN_002d1f40. */
 /* Supplied declaration required: FUN_002d8a48. */
-/* Supplied declaration required: FUN_00303460. */
+/* Supplied declaration required: lmapCameraSetMode. */
 /* Supplied declaration required: mapSetSceneState. */
-/* Supplied declaration required: FUN_00319f64. */
+/* Supplied declaration required: mapCollisionDisableByTag. */
 extern int mapHasFacingBreakableInReach(void);
 /* Supplied declaration required: FUN_0032714c. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
@@ -340,7 +340,7 @@ LAB_00233a04:
           FUN_002d1f40(0xf,0x1e,1);
         }
         if (*(int *)(temp_v5 + 100) == 0xf) {
-          FUN_00319f64((int)(short)*(unsigned int *)(temp_v5 + 0x94));
+          mapCollisionDisableByTag((int)(short)*(unsigned int *)(temp_v5 + 0x94));
         }
         temp_v4 = (int)*(short *)(temp_v5 + 0xac);
         temp_v10 = (float)temp_v14;
@@ -395,7 +395,7 @@ LAB_00233a04:
         }
         if (temp_v8 && temp_v3 == 2) {
           g_gameState.unk3EF = 1;
-          FUN_00303460(0x1f);
+          lmapCameraSetMode(0x1f);
         }
         if (*(short *)(temp_v5 + 0xae) >= 0x28) {
           *(unsigned int *)(temp_v5 + 0x78) = 1;

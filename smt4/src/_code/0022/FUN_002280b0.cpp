@@ -11,7 +11,7 @@ struct BattleParameterOwner {
 };
 
 extern "C" {
-s32 FUN_00293230(void);
+s32 btlScriptUnitIsIncapacitated(void);
 
 // Returns the selected nonnegative parameter, or zero while the script unit suppresses it.
 s32 FUN_002280b0(BattleParameterOwner* owner)
@@ -20,6 +20,6 @@ s32 FUN_002280b0(BattleParameterOwner* owner)
         return -1;
     }
     static_cast<void *>(btlGetMainState());
-    return FUN_00293230() != 0 ? 0 : owner->selected->value;
+    return btlScriptUnitIsIncapacitated() != 0 ? 0 : owner->selected->value;
 }
 }

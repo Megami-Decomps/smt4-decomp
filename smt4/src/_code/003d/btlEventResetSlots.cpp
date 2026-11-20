@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00241d58(int slot);
+int btlSpritePlacementRelease(int slot);
 
 void btlEventResetSlots(int base)
 {
@@ -13,7 +13,7 @@ void btlEventResetSlots(int base)
         entry = base + i * 0x30;
         *(u32 *)(entry + 0x139c) = 0;
         *(u32 *)(entry + 0x1398) = 0xffffffff;
-        FUN_00241d58(entry + 0x13a0);
+        btlSpritePlacementRelease(entry + 0x13a0);
         i = i + 1;
         *(u32 *)(entry + 0x13c4) = 0;
     } while (i < 0x32);

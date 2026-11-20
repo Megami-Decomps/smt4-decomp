@@ -37,7 +37,7 @@ extern int gameGetSlotRecord(void);
 /* Supplied declaration required: FUN_003f24e0. */
 /* Supplied declaration required: FUN_003f2aac. */
 /* Supplied declaration required: countersAddSaturating. */
-extern unsigned int FUN_004c53fc(unsigned int);
+extern unsigned int mapCategoryToDestinationGroup(unsigned int);
 
 
 void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
@@ -176,7 +176,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
     *(unsigned short *)(temp_v2 + 0x60) = *(unsigned short *)(temp_v2 + 0x60) & ~param_3;
   }
   if ((param_3 & 0x80) != 0) {
-    temp_v3 = FUN_004c53fc(0x1b);
+    temp_v3 = mapCategoryToDestinationGroup(0x1b);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v1), param_1);
     if (temp_v1 != 0) {
@@ -184,7 +184,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
     }
   }
   if ((param_3 & 0x40) != 0) {
-    temp_v3 = FUN_004c53fc(0x1c);
+    temp_v3 = mapCategoryToDestinationGroup(0x1c);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v1), param_1);
     if (temp_v1 != 0) {
@@ -192,7 +192,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
     }
   }
   if ((param_3 & 0x100) != 0) {
-    temp_v3 = FUN_004c53fc(0x1d);
+    temp_v3 = mapCategoryToDestinationGroup(0x1d);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v1), param_1);
     if (temp_v1 != 0) {
@@ -200,7 +200,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
     }
   }
   if ((param_3 & 8) != 0) {
-    temp_v3 = FUN_004c53fc(0x1e);
+    temp_v3 = mapCategoryToDestinationGroup(0x1e);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v1), param_1);
     if (temp_v1 != 0) {
@@ -208,7 +208,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
     }
   }
   if ((param_3 & 0x800) != 0) {
-    temp_v3 = FUN_004c53fc(0x1f);
+    temp_v3 = mapCategoryToDestinationGroup(0x1f);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v1), param_1);
     if (temp_v1 != 0) {
@@ -216,7 +216,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
     }
   }
   if ((param_3 & 0x1000) != 0) {
-    temp_v3 = FUN_004c53fc(0x20);
+    temp_v3 = mapCategoryToDestinationGroup(0x20);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v1), param_1);
     if (temp_v1 != 0) {
@@ -224,7 +224,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
     }
   }
   if ((param_3 & 0x2000) != 0) {
-    temp_v3 = FUN_004c53fc(0x21);
+    temp_v3 = mapCategoryToDestinationGroup(0x21);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v1), param_1);
     if (temp_v1 != 0) {
@@ -232,7 +232,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
     }
   }
   if ((param_3 & 0x10) != 0) {
-    temp_v3 = FUN_004c53fc(0x22);
+    temp_v3 = mapCategoryToDestinationGroup(0x22);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v1), param_1);
     if (temp_v1 != 0) {

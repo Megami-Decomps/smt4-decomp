@@ -47,7 +47,7 @@ void uniteOptionListDraw(s32 x, s32 y)
     texDrawTableEntryAtStoredOrigin(2, UNITE_SPRITES, 0x1d2, x, y, 0x6a);
 
     s32 top = resourceRunOperationIfUnblocked(&work->optionListIV.list);
-    for (s32 row = 0; row < (s32)FUN_0029d644(&work->optionListIV.list); row++) {
+    for (s32 row = 0; row < (s32)uiListGetVisibleCount(&work->optionListIV.list); row++) {
         if (uiSpriteGetCompletionState(&work->sprites.open) != 0 && listCursorGetRowIfUnblocked(&work->optionListIV.list) == row) {
             continue;
         }

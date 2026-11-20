@@ -5,7 +5,7 @@
 extern "C" {
 
 int cecProcessDestroy(void);
-int FUN_00220f5c(void *obj);
+int campCecOverlayTeardown(void *obj);
 int btlTalkBustUpDestroy(void);
 int bgmFadeOut(int id);
 int soundChannelStopAll(int id);
@@ -93,7 +93,7 @@ void campCecDestroyOverlay(void)
     asdTMTexTableReleaseNode(0x39, 0);
     asdTMTexTableFreeEntry(0x39);
     runWinDestroy();
-    FUN_00220f5c(g_campCec->sub);
+    campCecOverlayTeardown(g_campCec->sub);
     jobStop(scene->job, 0);
     asdMemFree((u32)scene);
     g_campCec = NULL;

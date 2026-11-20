@@ -35,14 +35,14 @@ void _ZN9Obj53604429panelUpdatePageExitTransitionEv(SpriteTransitionWork *work)
         work->phase = 1;
     } else if (work->phase == 1) {
         void *motion = work->motion;
-        FUN_00167458((UiSpriteState *)motion, 0);
+        uiSpriteSlideFromSide((UiSpriteState *)motion, 0);
         s32 y = vec2GetYInt((const UiSpriteState *)motion);
         s32 x = vec2GetXInt((const UiSpriteState *)motion);
         pointConvertToFloat(work->position, x, y);
         if (uiSpriteGetCompletionState((const UiSpriteState *)(reinterpret_cast<const ObjectFlagState *>(motion)))) {
             switch (work->page) {
             case 0: case 1: case 2: case 3: case 4: case 5: case 6:
-                if (!FUN_0023b3d0())
+                if (!gameStateIsNotTransitioning())
                     return;
                 // Fall through to the common completion state.
             case 7:

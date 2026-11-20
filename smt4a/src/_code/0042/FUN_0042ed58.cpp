@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00193038(unsigned char **, int *);
+int asdSaveHeaderBuildCalendarTime(unsigned char **, int *);
 int sysMemClear(int *, int);
 int clockGetTicksAsMicroseconds(int *);
 int FUN_0042d5b4(int);
@@ -26,7 +26,7 @@ typedef struct {
 extern unsigned char g_asdCecModuleFlags; /* 0x5b448b */
 extern signed char DAT_005b448c; /* 0x5b448c */
 
-/* Supplied declaration required: FUN_00193038. */
+/* Supplied declaration required: asdSaveHeaderBuildCalendarTime. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: clockGetTicksAsMicroseconds. */
 /* Supplied declaration required: FUN_0042d5b4. */
@@ -149,7 +149,7 @@ unsigned int FUN_0042ed58(int *param_1,unsigned int param_2,int param_3,int para
             clockGetTicksAsMicroseconds(&temp_v8);
             temp_v5 = temp_v8;
             uStack_4c = uStack_3c;
-            FUN_00193038(&temp_v3,&temp_v5);
+            asdSaveHeaderBuildCalendarTime(&temp_v3,&temp_v5);
             param_1[0x74] = (int)temp_v3;
             param_1[0x75] = temp_v4;
             param_1[0x76] = iStack_58;

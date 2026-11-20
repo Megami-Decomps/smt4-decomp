@@ -38,7 +38,7 @@ extern "C" {
 
 extern UniteScreen* g_unite;
 
-s32 FUN_002c40f8(s32 *signalled, const s32 *handles, s32 count, s32 waitAll, s64 timeout);
+s32 svcWaitSynchronizationN(s32 *signalled, const s32 *handles, s32 count, s32 waitAll, s64 timeout);
 void gameCounterAddSaturating(s32 counter, s32 amount);
 s32 lmapSceneGetScript(void);
 s32 lmapMainIsRunning(void);
@@ -61,7 +61,7 @@ static __inline void uniteWaitForThread(u32 thread)
 {
     s32 handle = thread;
     s32 signalled;
-    u32 result = FUN_002c40f8(&signalled, &handle, 1, 0, -1LL);
+    u32 result = svcWaitSynchronizationN(&signalled, &handle, 1, 0, -1LL);
     bool failed = nnResultIsFailure(result);
     if (failed)
         resultHandleFailure(result, failed);
@@ -78,7 +78,7 @@ void uniteScreenDestroy(void)
     screen->thread.joined = 1;
     screen->thread.finalize();
     screen->thread.NnOsHandle::~NnOsHandle();
-    FUN_002c3f5c(screen->stack);
+    addressSpaceRegionFree(screen->stack);
     delete static_cast<StackRegion *>(screen->stack);
     screen->stack = NULL;
     asdMemFree(screen->threadBuffer);

@@ -28,7 +28,7 @@ struct SaveLoadThreadWork {
 };
 
 s32 FUN_002c52dc(u32 *out, u32 initialCount, u32 maxCount);
-s32 FUN_002c5254(u32 *out, u32 semaphore, u32 releaseCount);
+s32 svcReleaseSemaphore(u32 *out, u32 semaphore, u32 releaseCount);
 s32 FUN_002cbe5c(s32 result);
 void *memAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, u32 alignment, u32 category);
 s32 FUN_002bcc60(void *thread, const ThreadArgTraits *traits, void (*entry)(void *), ThreadBoundArgs *args,
@@ -56,7 +56,7 @@ static __inline s32 createSemaphore(u32 *out, u32 initialCount, u32 maxCount)
 static __inline s32 releaseSemaphore(u32 semaphore, u32 releaseCount)
 {
     u32 previousCount;
-    return FUN_002c5254(&previousCount, semaphore, releaseCount);
+    return svcReleaseSemaphore(&previousCount, semaphore, releaseCount);
 }
 
 // Runs `entry` on the worker thread with the work block bound as its argument; failures are reported.

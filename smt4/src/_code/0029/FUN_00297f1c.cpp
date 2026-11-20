@@ -6,7 +6,7 @@
 extern "C" {
 void FUN_0028cf30(PlayScene *scene, u32 argument, u32 flag);
 void FUN_0028e9ec(PlayScene *scene);
-s32 FUN_00293230(void);
+s32 btlScriptUnitIsIncapacitated(void);
 void FUN_00297b94(PlayScene *scene, u32 first, u32 second);
 u32 FUN_00297ca4(PlayScene *scene, u32 flag);
 void playSceneSetState(PlayScene *scene, s32 state, s32 flag);
@@ -30,7 +30,7 @@ void FUN_00297f1c(PlayScene *scene, u32 argument, s32 button, u32 other)
         return;
     }
     btlGetMainState();
-    if (FUN_00293230() != 0 || (btlGetMainState()->battleFlags & 0x200) != 0) {
+    if (btlScriptUnitIsIncapacitated() != 0 || (btlGetMainState()->battleFlags & 0x200) != 0) {
         FUN_002cfed0(scene, argument, 1, other);
         return;
     }
@@ -43,7 +43,7 @@ void FUN_00297f1c(PlayScene *scene, u32 argument, s32 button, u32 other)
             }
             if (scene->state != 0x11) {
                 btlGetMainState();
-                if (FUN_00293230() == 0 && (btlGetMainState()->battleFlags & 0x200) == 0) {
+                if (btlScriptUnitIsIncapacitated() == 0 && (btlGetMainState()->battleFlags & 0x200) == 0) {
                     FUN_002cfed0(scene, argument, 1, other);
                     return;
                 }

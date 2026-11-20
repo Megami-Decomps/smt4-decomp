@@ -16,7 +16,7 @@ typedef struct RecordList {
 } RecordList;
 
 extern RecordList DAT_00580c90;
-extern Record DAT_005f32a0[];
+extern Record g_recordTable[];
 extern char *libc_strcpy(char *dst, const char *src);
 
 /* Finds the record with id `id` and sets its value and name. */
@@ -25,9 +25,9 @@ void recordSetValueAndName(s32 id, u32 value, const char *name)
     s32 i;
 
     for (i = 0; i < DAT_00580c90.count; i++) {
-        if (DAT_005f32a0[i].id == id) {
-            DAT_005f32a0[i].value = value;
-            libc_strcpy(DAT_005f32a0[i].name, name);
+        if (g_recordTable[i].id == id) {
+            g_recordTable[i].value = value;
+            libc_strcpy(g_recordTable[i].name, name);
             return;
         }
     }

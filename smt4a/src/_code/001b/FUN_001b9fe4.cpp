@@ -5,7 +5,7 @@
 
 extern "C" {
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
-void FUN_001b3428(void *thread);
+void nnOsThreadImplDestroy(void *thread);
 u32 FUN_002fb0d4(ThreadHandleState *thread, const ThreadArgumentDescriptor *descriptor,
     ThreadEntryPoint entry, const void *argument, void *stackTop, u32 priority, s32 processor, u8 owned);
 void FUN_001c3864(void *queue);
@@ -26,7 +26,7 @@ void FUN_001b9fe4(FileQueue *queue)
         if (!nnResultIsNotTimeout(result))
             return;
     }
-    FUN_001b3428(thread);
+    nnOsThreadImplDestroy(thread);
     FileQueue *argument = queue;
     ThreadArgumentDescriptor descriptor;
     descriptor.argumentSize = sizeof(argument);

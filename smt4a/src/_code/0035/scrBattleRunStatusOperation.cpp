@@ -10,13 +10,13 @@ void flagBitmapSetBit(u32 id, s32 value);
 void flagValueAdd(u32 id, s32 value);
 void flagValueSub(u32 id, s32 value);
 void statusAcquireSharedResources(void);
-void FUN_002c8538(s32 mode);
+void gameGlobalsSetOverlayActive(s32 mode);
 void statusDownEnterState1(u16 id, s32 mode);
-void FUN_002fb404(BtlUiObjCA *widget);
+void btlUiWidgetEnterStatusMode(BtlUiObjCA *widget);
 s32 stateHolderIsMissingOrState0(void);
 s32 statusDownGetValue(void);
-void FUN_0022e774(s32 value);
-s32 FUN_0026c3a0(void);
+void statusPanelClose(s32 value);
+s32 gameGlobalsIsActiveStateFour(void);
 void gameGlobalsReleaseReference(void);
 void FUN_0038e4c4(BtlUiObjCA *widget);
 
@@ -38,18 +38,18 @@ u32 scrBattleRunStatusOperation(void)
     case 1:
         scrWorkSetValue(0, 2);
         statusAcquireSharedResources();
-        FUN_002c8538(0);
+        gameGlobalsSetOverlayActive(0);
         statusDownEnterState1(static_cast<u16>(id), 0);
-        FUN_002fb404(&g_btlUiBlock->objC);
+        btlUiWidgetEnterStatusMode(&g_btlUiBlock->objC);
         break;
     case 2:
         if (stateHolderIsMissingOrState0() != 0) {
-            FUN_0022e774(statusDownGetValue());
+            statusPanelClose(statusDownGetValue());
             scrWorkSetValue(0, 3);
         }
         break;
     case 3:
-        if (FUN_0026c3a0() != 0) {
+        if (gameGlobalsIsActiveStateFour() != 0) {
             gameGlobalsReleaseReference();
             FUN_0038e4c4(&g_btlUiBlock->objC);
             scrWorkSetValue(0, 4);

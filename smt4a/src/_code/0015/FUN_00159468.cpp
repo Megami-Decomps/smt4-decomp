@@ -22,8 +22,8 @@ extern signed char DAT_005c0ac0; /* 0x5c0ac0 */
 extern unsigned int g_ipcServiceInitResult; /* 0x5c14bc */
 
 extern int FUN_0016f06c(unsigned int *, unsigned int *, unsigned int *, unsigned int *, unsigned int *, unsigned int *);
-extern unsigned int FUN_0016f864(unsigned int);
-extern int asdModelForwardChecked(unsigned int *, unsigned int, unsigned int, unsigned int);
+extern unsigned int srvInitialize(unsigned int);
+extern int srvGetServiceHandle(unsigned int *, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: sysFatalBreak. */
 extern unsigned int libc_strlen(unsigned int);
 /* Supplied declaration required: nn_os_SharedMemoryBlock_AttachAndMap. */
@@ -53,12 +53,12 @@ unsigned int FUN_00159468(unsigned int *param_1,unsigned int param_2)
     temp_v0 = 0xe0a04ff9;
   }
   else {
-    temp_v1 = FUN_0016f864(0);
+    temp_v1 = srvInitialize(0);
     if ((temp_v1 & 0x3ff) != 0x3f9 && (int)temp_v1 < 0) {
       sysFatalBreak();
     }
     temp_v0 = libc_strlen(param_2);
-    temp_v2 = asdModelForwardChecked(&g_ipcServiceInitResult,param_2,temp_v0,0);
+    temp_v2 = srvGetServiceHandle(&g_ipcServiceInitResult,param_2,temp_v0,0);
     if (temp_v2 < 0) {
       sysFatalBreak();
     }

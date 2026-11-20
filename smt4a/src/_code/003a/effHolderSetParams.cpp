@@ -18,8 +18,8 @@ typedef struct EffHolder {
     /* 0x30 */ u32 userData;
 } EffHolder;
 
-extern EffObject *effEmitterAllocate(u32 owner);
-extern int FUN_0035105c(EffObject *effect, u32 owner, u32 kind);
+extern EffObject *effEmitterCreate(u32 owner);
+extern int geometryOwnerSetGeometry(EffObject *effect, u32 owner, u32 kind);
 extern int effTlpReplace(EffObject *effect, u32 *params);
 extern int objResourceReplace(EffObject *effect, u32 *params);
 extern void FUN_00390570(TextureAttachment *effect, const void *image);
@@ -32,20 +32,20 @@ extern int effParticleParamRebuildHandles3c(EffObject *effect, u32 *params);
 void effHolderSetParams(EffHolder *holder, u32 kind, u32 *params)
 {
     if (holder->effect == NULL) {
-        holder->effect = effEmitterAllocate(holder->owner);
+        holder->effect = effEmitterCreate(holder->owner);
         holder->effect->userData = holder->userData;
     }
     switch (kind) {
     case 1:
-        FUN_0035105c(holder->effect, holder->owner, kind);
+        geometryOwnerSetGeometry(holder->effect, holder->owner, kind);
         FUN_00390570(reinterpret_cast<TextureAttachment *>(holder->effect), params);
         break;
     case 2:
-        FUN_0035105c(holder->effect, holder->owner, kind);
+        geometryOwnerSetGeometry(holder->effect, holder->owner, kind);
         objResourceReplace(holder->effect, params);
         break;
     case 4:
-        FUN_0035105c(holder->effect, holder->owner, kind);
+        geometryOwnerSetGeometry(holder->effect, holder->owner, kind);
         FUN_003b9138(holder->effect, *params);
         break;
     case 5:
@@ -55,11 +55,11 @@ void effHolderSetParams(EffHolder *holder, u32 kind, u32 *params)
         effParticleParamRebuildHandles3c(holder->effect, params);
         break;
     case 7:
-        FUN_0035105c(holder->effect, holder->owner, kind);
+        geometryOwnerSetGeometry(holder->effect, holder->owner, kind);
         effTlpReplace(holder->effect, params);
         break;
     case 9:
-        FUN_0035105c(holder->effect, holder->owner, kind);
+        geometryOwnerSetGeometry(holder->effect, holder->owner, kind);
         textureAttachmentSetEffectImage(holder->effect, params);
         break;
     }

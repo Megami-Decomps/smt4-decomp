@@ -6,7 +6,7 @@
 
 extern "C" {
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
-void FUN_001469a8(void *thread);
+void addressSpaceRegionFree(void *thread);
 void asdMemFree(void *memory);
 
 void FUN_0036d41c()
@@ -20,7 +20,7 @@ void FUN_0036d41c()
         }
         work->thread.joined = 1;
         work->thread.~NnOsThread();
-        FUN_001469a8(work->stack);
+        addressSpaceRegionFree(work->stack);
         if (work->buffer != 0) {
             asdMemFree(work->buffer);
             work->buffer = 0;

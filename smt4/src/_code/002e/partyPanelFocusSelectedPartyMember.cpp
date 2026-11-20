@@ -5,7 +5,7 @@
 
 extern "C" {
 void slotPlacementAssignSlotAndPosition(PartyPanelWidget *, u32);
-void FUN_002937e0();
+void partyPanelConfigureGridNavigation();
 void scrollOwnerSelectIndex(GridNavigation *, s32);
 void scrollListSetSelectionMarkChanged(ScrollSelection *, s32);
 }
@@ -24,7 +24,7 @@ static void partyPanelCollapse(void)
     for (i = 0; i < 24; i++) {
         slotPlacementAssignSlotAndPosition(panel->demons[i], panel->page);
     }
-    FUN_002937e0();
+    partyPanelConfigureGridNavigation();
 }
 
 /* Flips the page flag, plays animation 4 and refreshes every character and demon widget. */
@@ -41,7 +41,7 @@ static void partyPanelExpand(void)
     for (i = 0; i < 24; i++) {
         slotPlacementAssignSlotAndPosition(panel->demons[i], panel->page);
     }
-    FUN_002937e0();
+    partyPanelConfigureGridNavigation();
 }
 
 /* Moves the panel cursor onto the selected party member's roster slot, switching pages unless `force`

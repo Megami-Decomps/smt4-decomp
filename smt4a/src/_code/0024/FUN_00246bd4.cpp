@@ -4,7 +4,7 @@
 extern "C" {
 
 int FUN_0030250c(...);
-int FUN_003033d4(...);
+int lmapResolveContextValue(...);
 int mathVec3Dot(...);
 int FUN_00330108(...);
 int FUN_00352568(...);
@@ -14,7 +14,7 @@ int controllerSetRotationEulerDegrees(...);
 int VectorFloatToUnsigned(...);
 int nn_math_ARMv6_VEC3TransformAsm_2AD44C(...);
 
-int FUN_0013cab8(...);
+int screenFadeStartIn(...);
 int asdMemoryAllocTracked(...);
 int asdMemoryAllocTraced(...);
 int mapFastModelCreate(...);
@@ -29,7 +29,7 @@ int FUN_0033982c(...);
 int FUN_0033a374(...);
 int linkHolderSetFlag(...);
 int linkHolderClearFlag(...);
-int FUN_003fd924(...);
+int motionPlayerStartBlended(...);
 int modelPlayClip(...);
 int itemTableClear(...);
 int FUN_0045adc0(...);
@@ -70,7 +70,7 @@ int FUN_002de104(...);
 int FUN_003024a0(...);
 int mapMainStartEntry(...);
 int mapTrapGetUnk38(...);
-int FUN_003d2158(...);
+int soundApplyValueOrStop(...);
 int linkHolderApplyFirst(...);
 
 int mapIfSetMode1(...);
@@ -88,12 +88,12 @@ int mapIfReleaseSlot1(...);
 int table23FindRecordByKey(...);
 
 int soundVolumeSettingSet(...);
-int FUN_0014af98(...);
+int messageVoiceBankGet(...);
 int sysPlaySe(...);
 int FUN_00233e10(...);
 int mapIfSpawnManholeAction(...);
 int FUN_002d1f40(...);
-int FUN_00303460(...);
+int lmapCameraSetMode(...);
 int FUN_003250ac(...);
 int FUN_0033abd4(...);
 int mathPositionHeadingDegrees(...);
@@ -122,7 +122,7 @@ int randBetween(...);
 int libm_cosf(...); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(...);
 int FUN_002469d0(...);
-int FUN_0025ef68(...);
+int mapResolveCollisionSphere(...);
 float mathSnapHeading16(float angle);
 float calcHeadingRoundedTo32Directions(float angle);
 int FUN_00294c28(...);
@@ -292,10 +292,10 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: soundVolumeSettingSet. */
-/* Supplied declaration required: FUN_0013cab8. */
+/* Supplied declaration required: screenFadeStartIn. */
 /* Supplied declaration required: soundVolumeSettingGet. */
-/* Supplied declaration required: FUN_0014af98. */
-extern unsigned int FUN_00152f44(void);
+/* Supplied declaration required: messageVoiceBankGet. */
+extern unsigned int messageVoiceFlagsGet(void);
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: FUN_001628c0. */
 /* Supplied declaration required: gameFlagsGetBlock. */
@@ -319,7 +319,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00246014. */
 /* Supplied declaration required: popupStateClose. */
 /* Supplied declaration required: FUN_002469d0. */
-/* Supplied declaration required: FUN_0025ef68. */
+/* Supplied declaration required: mapResolveCollisionSphere. */
 /* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
 /* Supplied declaration required: effPartClone. */
 extern unsigned int FUN_0029202c(void);
@@ -352,8 +352,8 @@ extern int saveSlotSelectedIsId175(void);
 /* Supplied declaration required: FUN_003024a0. */
 /* Supplied declaration required: FUN_0030250c. */
 /* Supplied declaration required: FUN_003026d8. */
-/* Supplied declaration required: FUN_003033d4. */
-/* Supplied declaration required: FUN_00303460. */
+/* Supplied declaration required: lmapResolveContextValue. */
+/* Supplied declaration required: lmapCameraSetMode. */
 /* Supplied declaration required: FUN_00303bd4. */
 /* Supplied declaration required: FUN_003128d8. */
 /* Supplied declaration required: mapIfReleaseSlot2. */
@@ -395,7 +395,7 @@ extern int dataTableGetRecord23(void);
 extern unsigned int asdModelGetStatic38(void);
 /* Supplied declaration required: table23FindRecordByKey. */
 /* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: FUN_003d2158. */
+/* Supplied declaration required: soundApplyValueOrStop. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
 /* Supplied declaration required: titleSetSlotValueState2. */
 extern unsigned int FUN_003e0034(void);
@@ -412,7 +412,7 @@ extern int linkHolderCheckFirst(int);
 /* Supplied declaration required: linkHolderClearFlag. */
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: moriModelUnitStartMaterialAnimation. */
-/* Supplied declaration required: FUN_003fd924. */
+/* Supplied declaration required: motionPlayerStartBlended. */
 /* Supplied declaration required: controllerSetRotationEulerDegrees. */
 /* Supplied declaration required: modelPlayClip. */
 /* Supplied declaration required: gameCounterAddSaturating. */
@@ -427,7 +427,7 @@ extern int linkHolderCheckFirst(int);
 extern int partyAnyMemberHasFlagBit(unsigned int, unsigned int);
 extern int inputIsQuestCancelPressed(void);
 extern int inputIsQuestMenuPressed(void);
-extern int FUN_004d0584(void);
+extern int inputConfirmPressed(void);
 extern unsigned int slots4FGetActiveValue(void);
 /* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: mapIfReleaseHandle. */
@@ -879,7 +879,7 @@ LAB_002b82a8:
     piVar18[0xf] = temp_v12;
     if (((DAT_005f1c48 == '\0') && (DAT_005f161e != '\0')) && ((temp_v5 & ~temp_v10) == 0)) {
       piVar7 = piVar18 + 10;
-      FUN_0025ef68(piVar7,piVar18 + 0xd,0);
+      mapResolveCollisionSphere(piVar7,piVar18 + 0xd,0);
       piVar18 = g_lmapScene;
       piVar10 = (int *)0x0;
       if (piVar7 != (int *)0x0) {
@@ -1477,7 +1477,7 @@ LAB_00326fcc:
         if (((DAT_005f1c48 == '\0') && (DAT_005f161e != '\0')) &&
            ((uStack_68 & ~(unsigned int)piVar10) == 0)) {
           piVar7 = piVar18 + 10;
-          FUN_0025ef68(piVar7,piVar18 + 0xd,0);
+          mapResolveCollisionSphere(piVar7,piVar18 + 0xd,0);
           piVar18 = g_lmapScene;
           piVar10 = (int *)0x0;
           if (piVar7 != (int *)0x0) {
@@ -1626,7 +1626,7 @@ LAB_00326fcc:
                 libm_cosf();
                 temp_v32 = randBetween(0,1);
                 if (g_lmapScene[0x74] != 10) {
-                  FUN_0014af98();
+                  messageVoiceBankGet();
                   soundVolumeSettingSet();
                   sysPlayVoice(temp_v32 + 0x10002e2);
                   soundVolumeSettingSet(temp_v17);
@@ -1667,7 +1667,7 @@ LAB_00326870:
               libm_cosf();
               temp_v32 = randBetween(0,1);
               if (g_lmapScene[0x74] != 10) {
-                FUN_0014af98();
+                messageVoiceBankGet();
                 soundVolumeSettingSet();
                 sysPlayVoice(temp_v32 + 0x10002e0);
                 soundVolumeSettingSet(temp_v17);
@@ -1692,7 +1692,7 @@ LAB_003267fc:
               libm_cosf();
               temp_v32 = randBetween(0,1);
               if (g_lmapScene[0x74] != 10) {
-                FUN_0014af98();
+                messageVoiceBankGet();
                 soundVolumeSettingSet();
                 sysPlayVoice(temp_v32 + 0x10002de);
                 soundVolumeSettingSet(temp_v17);
@@ -1723,7 +1723,7 @@ LAB_003268e4:
             libm_cosf();
             temp_v32 = randBetween(0,1);
             if (g_lmapScene[0x74] != 10) {
-              FUN_0014af98();
+              messageVoiceBankGet();
               soundVolumeSettingSet();
               sysPlayVoice(temp_v32 + 0x10002dc);
               soundVolumeSettingSet(temp_v17);
@@ -2010,7 +2010,7 @@ LAB_003270bc:
         mathPositionHeadingDegrees();
         g_lmapScene[0x14] = temp_v32;
       }
-      FUN_00303460(0xe);
+      lmapCameraSetMode(0xe);
       sysPlaySe(0xdd);
       piVar18 = g_lmapScene;
       g_lmapScene[1] = g_lmapScene[1] + 1;
@@ -2094,7 +2094,7 @@ LAB_003270bc:
             FUN_00324e38(0xffffffff);
             libm_sinf();
             libm_cosf();
-            FUN_0014af98();
+            messageVoiceBankGet();
             soundVolumeSettingSet();
             sysPlayVoice(0x10002e6);
             soundVolumeSettingSet(temp_v17);
@@ -2139,7 +2139,7 @@ LAB_003270bc:
           FUN_00324e38(0xffffffff);
           libm_sinf();
           libm_cosf();
-          FUN_0014af98();
+          messageVoiceBankGet();
           soundVolumeSettingSet();
           sysPlayVoice(0x10002e5);
           soundVolumeSettingSet(temp_v17);
@@ -2252,7 +2252,7 @@ LAB_003270bc:
                 mathPositionHeadingDegrees();
                 g_lmapScene[0x14] = temp_v32;
               }
-              FUN_00303460(10);
+              lmapCameraSetMode(10);
               g_lmapView[0x2c] = -1;
               sysPlaySe(0xdd);
               FUN_00233e10(1,DAT_005f16ac);
@@ -2285,7 +2285,7 @@ LAB_003270bc:
         else {
           piVar18[2] = piVar18[2] + 1;
           FUN_00233e10(1,DAT_005f16ac);
-          temp_v32 = FUN_004d0584();
+          temp_v32 = inputConfirmPressed();
           piVar18 = g_lmapScene;
           if (temp_v32 != 0) {
             g_lmapScene[1] = 10;
@@ -2297,7 +2297,7 @@ LAB_003270bc:
               piVar18 = g_lmapView;
               g_lmapView[6] = g_lmapScene[0x14];
               piVar18[0x2c] = 0;
-              FUN_00303460(0);
+              lmapCameraSetMode(0);
               piVar18 = g_lmapScene;
               g_lmapScene[0x15] = 0;
               piVar18[0x16] = temp_v12;
@@ -2350,7 +2350,7 @@ LAB_003270bc:
         piVar18 = g_lmapView;
         g_lmapView[6] = g_lmapScene[0x14];
         piVar18[0x2c] = 0;
-        FUN_00303460(0);
+        lmapCameraSetMode(0);
         temp_v32 = g_lmapScene[1];
         piVar18 = g_lmapScene;
         piVar18[1] = temp_v32 + 1;
@@ -2383,7 +2383,7 @@ LAB_003270bc:
       piVar18[0xe] = (int)((unsigned long long)temp_v33 >> 0x20);
       piVar18[0xf] = temp_v6;
       piVar18 = piVar18 + 10;
-      FUN_0025ef68(piVar18,piVar10,0);
+      mapResolveCollisionSphere(piVar18,piVar10,0);
       if (piVar18 != (int *)0x0) {
         *(unsigned char *)((int)g_lmapScene + 0x115) = 0;
       }
@@ -2443,7 +2443,7 @@ LAB_003270bc:
               piVar18 = g_lmapScene;
               g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v25 * temp_v19);
               piVar18[0x14] = (int)DAT_005f16bc;
-              FUN_00303460(0xb);
+              lmapCameraSetMode(0xb);
               g_lmapView[0x2c] = -2;
               sysPlaySe(0xdd);
               FUN_00233e10(1,DAT_005f16ac);
@@ -2480,7 +2480,7 @@ LAB_003270bc:
         else {
           piVar18[2] = piVar18[2] + 1;
           FUN_00233e10(1,DAT_005f16ac);
-          temp_v32 = FUN_004d0584();
+          temp_v32 = inputConfirmPressed();
           piVar18 = g_lmapScene;
           if (temp_v32 != 0) {
             g_lmapScene[1] = 10;
@@ -2492,7 +2492,7 @@ LAB_003270bc:
               piVar18 = g_lmapView;
               g_lmapView[6] = g_lmapScene[0x14];
               piVar18[0x2c] = 0;
-              FUN_00303460(0);
+              lmapCameraSetMode(0);
               piVar18 = g_lmapScene;
               g_lmapScene[0x15] = 0;
               piVar18[0x16] = temp_v6;
@@ -2545,7 +2545,7 @@ LAB_003270bc:
         piVar18 = g_lmapView;
         g_lmapView[6] = g_lmapScene[0x14];
         piVar18[0x2c] = 0;
-        FUN_00303460(0);
+        lmapCameraSetMode(0);
         temp_v32 = g_lmapScene[1];
         piVar18 = g_lmapScene;
         piVar18[1] = temp_v32 + 1;
@@ -2591,7 +2591,7 @@ LAB_003270bc:
           piVar18 = g_lmapView;
           g_lmapView[6] = piVar10[0x14];
           piVar18[0x2c] = 0;
-          FUN_00303460(0);
+          lmapCameraSetMode(0);
           piVar18 = g_lmapScene;
           temp_v32 = piVar18[1];
           piVar18[1] = temp_v32 + 1;
@@ -2749,7 +2749,7 @@ LAB_003270bc:
         piVar18[0xb] = (int)temp_v18;
         piVar18[0xc] = (int)temp_v19;
         piVar18[0x14] = (int)DAT_005f16bc;
-        FUN_00303460(0xc);
+        lmapCameraSetMode(0xc);
         g_lmapView[0x2c] = -3;
         sysPlaySe(0xdd);
         FUN_00233e10(1,DAT_005f16ac);
@@ -2776,7 +2776,7 @@ LAB_003270bc:
       case 2:
         g_lmapScene[2] = g_lmapScene[2] + 1;
         FUN_00233e10(1,DAT_005f16ac);
-        temp_v32 = FUN_004d0584();
+        temp_v32 = inputConfirmPressed();
         if (temp_v32 != 0) {
           table23FindRecordByKey(DAT_005f16a0,DAT_005f16a4,DAT_005f16a8);
           temp_v32 = dataTableGetRecord23();
@@ -2815,7 +2815,7 @@ LAB_003270bc:
             piVar18 = g_lmapView;
             g_lmapView[6] = g_lmapScene[0x14];
             piVar18[0x2c] = 0;
-            FUN_00303460(0);
+            lmapCameraSetMode(0);
             piVar18 = g_lmapScene;
             g_lmapScene[0x15] = 0;
             piVar18[0x16] = 0x40a00000;
@@ -2879,7 +2879,7 @@ LAB_00366704:
         FUN_00324e38(0xffffffff);
         libm_sinf();
         libm_cosf();
-        FUN_0014af98();
+        messageVoiceBankGet();
         soundVolumeSettingSet();
         sysPlayVoice(0x10002e5);
         soundVolumeSettingSet((*(unsigned int *)((unsigned char *)&uStack_5c + 4)));
@@ -2956,7 +2956,7 @@ LAB_00366704:
           piVar18 = g_lmapView;
           g_lmapView[6] = g_lmapScene[0x14];
           piVar18[0x2c] = 0;
-          FUN_00303460(0);
+          lmapCameraSetMode(0);
           *(unsigned char *)(g_lmapView + 0x2a) = 1;
         }
         if (g_lmapScene[2] == 3) {
@@ -2991,7 +2991,7 @@ LAB_00366704:
           FUN_00324e38(0xffffffff);
           libm_sinf();
           libm_cosf();
-          FUN_0014af98();
+          messageVoiceBankGet();
           soundVolumeSettingSet();
           sysPlayVoice(0x10002e6);
           soundVolumeSettingSet((*(unsigned int *)((unsigned char *)&uStack_5c + 4)));
@@ -3081,7 +3081,7 @@ LAB_00366704:
                   FUN_00324e38(0xffffffff);
                   libm_sinf();
                   libm_cosf();
-                  FUN_0014af98();
+                  messageVoiceBankGet();
                   soundVolumeSettingSet();
                   sysPlayVoice(0x10002e7);
                   soundVolumeSettingSet(temp_v17);
@@ -3111,7 +3111,7 @@ LAB_00366704:
             else {
               g_lmapScene[2] = g_lmapScene[2] + 1;
               FUN_00233e10(1,DAT_005f16ac);
-              temp_v32 = FUN_004d0584();
+              temp_v32 = inputConfirmPressed();
               piVar18 = g_lmapScene;
               if (temp_v32 != 0) {
                 g_lmapScene[1] = 10;
@@ -3156,7 +3156,7 @@ LAB_00366704:
                   piVar18 = g_lmapView;
                   g_lmapView[6] = g_lmapScene[0x14];
                   piVar18[0x2c] = 0;
-                  FUN_00303460(0);
+                  lmapCameraSetMode(0);
                   piVar18 = g_lmapScene;
                   g_lmapScene[0x15] = 0;
                   piVar18[0x16] = 0x40a00000;
@@ -3192,7 +3192,7 @@ LAB_00366704:
           piVar18[0xb] = (int)temp_v18;
           piVar18[0xc] = (int)temp_v19;
           piVar18[0x14] = (int)DAT_005f16bc;
-          FUN_00303460(0xc);
+          lmapCameraSetMode(0xc);
           g_lmapView[0x2c] = -3;
           sysPlaySe(0xdd);
           FUN_00233e10(1,DAT_005f16ac);
@@ -3261,7 +3261,7 @@ LAB_00366704:
         piVar18 = g_lmapView;
         g_lmapView[6] = (int)((float)g_lmapScene[0x14] + temp_v18);
         piVar18[0x2c] = 0;
-        FUN_00303460(0);
+        lmapCameraSetMode(0);
         piVar18 = g_lmapScene;
         g_lmapScene[0x15] = 0;
         piVar18[0x16] = (int)temp_v19;
@@ -3305,7 +3305,7 @@ LAB_00366704:
             else {
               piVar18[2] = piVar18[2] + 1;
               FUN_00233e10(1,DAT_005f16ac);
-              temp_v32 = FUN_004d0584();
+              temp_v32 = inputConfirmPressed();
               piVar18 = g_lmapScene;
               if (temp_v32 != 0) {
                 g_lmapScene[1] = 10;
@@ -3317,7 +3317,7 @@ LAB_00366704:
                   piVar18 = g_lmapView;
                   g_lmapView[6] = g_lmapScene[0x14];
                   piVar18[0x2c] = 0;
-                  FUN_00303460(0);
+                  lmapCameraSetMode(0);
                   piVar18 = g_lmapScene;
                   g_lmapScene[0x15] = 0;
                   piVar18[0x16] = temp_v6;
@@ -3387,7 +3387,7 @@ LAB_00366704:
             libm_cosf();
             g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v35 * temp_v27);
           }
-          FUN_00303460(10);
+          lmapCameraSetMode(10);
           g_lmapView[0x2c] = -1;
           sysPlaySe(0xdd);
           FUN_00233e10(1,DAT_005f16ac);
@@ -3450,7 +3450,7 @@ LAB_00366704:
                 if (temp_v32 == 2) {
                   g_lmapScene[2] = g_lmapScene[2] + 1;
                   FUN_00233e10(1,DAT_005f16ac);
-                  temp_v32 = FUN_004d0584();
+                  temp_v32 = inputConfirmPressed();
                   if (temp_v32 != 0) {
                     table23FindRecordByKey(DAT_005f16a0,DAT_005f16a4,DAT_005f16a8);
                     piVar18 = g_lmapScene;
@@ -3467,7 +3467,7 @@ LAB_00366704:
                       piVar18 = g_lmapView;
                       g_lmapView[6] = g_lmapScene[0x14];
                       piVar18[0x2c] = 0;
-                      FUN_00303460(0);
+                      lmapCameraSetMode(0);
                       piVar18 = g_lmapScene;
                       g_lmapScene[0x15] = 0;
                       piVar18[0x16] = 0x40a00000;
@@ -3515,7 +3515,7 @@ LAB_00366704:
               temp_v18 = ((float)piVar18[0x14] + temp_v37) * temp_v18;
               libm_cosf();
               g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v18 * temp_v25);
-              FUN_00303460(10);
+              lmapCameraSetMode(10);
               g_lmapView[0x2c] = -1;
               sysPlaySe(0xdd);
               FUN_00233e10(1,DAT_005f16ac);
@@ -3583,7 +3583,7 @@ LAB_00366704:
           FUN_00324e38(0xffffffff);
           libm_sinf();
           libm_cosf();
-          FUN_0014af98();
+          messageVoiceBankGet();
           soundVolumeSettingSet();
           sysPlayVoice(0x10002e5);
           soundVolumeSettingSet(temp_v17);
@@ -3626,7 +3626,7 @@ LAB_00366704:
           piVar18 = g_lmapView;
           g_lmapView[6] = piVar10[0x14];
           piVar18[0x2c] = 0;
-          FUN_00303460(0);
+          lmapCameraSetMode(0);
           piVar18 = g_lmapScene;
           temp_v32 = piVar18[1];
           piVar18[1] = temp_v32 + 1;
@@ -3713,7 +3713,7 @@ LAB_00367f20:
                 if (temp_v32 == 2) {
                   g_lmapScene[2] = g_lmapScene[2] + 1;
                   FUN_00233e10(1,DAT_005f16ac);
-                  temp_v32 = FUN_004d0584();
+                  temp_v32 = inputConfirmPressed();
                   piVar18 = g_lmapScene;
                   if (temp_v32 != 0) {
                     g_lmapScene[1] = 10;
@@ -3725,7 +3725,7 @@ LAB_00367f20:
                       piVar18 = g_lmapView;
                       g_lmapView[6] = g_lmapScene[0x14];
                       piVar18[0x2c] = 0;
-                      FUN_00303460(0);
+                      lmapCameraSetMode(0);
                       piVar18 = g_lmapScene;
                       g_lmapScene[0x15] = 0;
                       piVar18[0x16] = temp_v6;
@@ -3769,7 +3769,7 @@ LAB_00367f20:
               piVar18 = g_lmapScene;
               g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v18 * temp_v25);
               piVar18[0x14] = (int)DAT_005f16bc;
-              FUN_00303460(0xd);
+              lmapCameraSetMode(0xd);
               g_lmapView[0x2c] = 1;
               sysPlaySe(0xdc);
               FUN_00233e10(1,DAT_005f16ac);
@@ -3787,7 +3787,7 @@ LAB_00367f20:
                 piVar18 = g_lmapView;
                 g_lmapView[6] = g_lmapScene[0x14];
                 piVar18[0x2c] = 0;
-                FUN_00303460(0);
+                lmapCameraSetMode(0);
                 temp_v32 = g_lmapScene[1];
                 piVar18 = g_lmapScene;
                 piVar18[1] = temp_v32 + 1;
@@ -3829,7 +3829,7 @@ LAB_00367f20:
             FUN_00324e38(0xffffffff);
             libm_sinf();
             libm_cosf();
-            FUN_0014af98();
+            messageVoiceBankGet();
             soundVolumeSettingSet();
             sysPlayVoice(0x10002e5);
             soundVolumeSettingSet(temp_v17);
@@ -3888,7 +3888,7 @@ LAB_00367f20:
           if (temp_v32 != 0) {
             g_lmapView[6] = g_lmapScene[0x14];
             piVar18[0x2c] = 0;
-            FUN_00303460(0);
+            lmapCameraSetMode(0);
             piVar18 = g_lmapScene;
             g_lmapScene[0x15] = 0;
             piVar18[0x16] = temp_v6;
@@ -3963,7 +3963,7 @@ LAB_0033eae8:
                   FUN_00324e38(0xffffffff);
                   libm_sinf();
                   libm_cosf();
-                  FUN_0014af98();
+                  messageVoiceBankGet();
                   soundVolumeSettingSet();
                   sysPlayVoice(0x10002e7);
                   soundVolumeSettingSet(temp_v17);
@@ -3993,7 +3993,7 @@ LAB_0033eae8:
             else {
               g_lmapScene[2] = g_lmapScene[2] + 1;
               FUN_00233e10(1,DAT_005f16ac);
-              temp_v32 = FUN_004d0584();
+              temp_v32 = inputConfirmPressed();
               piVar18 = g_lmapScene;
               if (temp_v32 != 0) {
                 g_lmapScene[1] = 10;
@@ -4032,7 +4032,7 @@ LAB_0033eae8:
                   piVar18 = g_lmapView;
                   g_lmapView[6] = g_lmapScene[0x14];
                   piVar18[0x2c] = 0;
-                  FUN_00303460(0);
+                  lmapCameraSetMode(0);
                   piVar18 = g_lmapScene;
                   g_lmapScene[0x15] = 0;
                   piVar18[0x16] = 0x40a00000;
@@ -4075,7 +4075,7 @@ LAB_0033eae8:
           piVar18 = g_lmapScene;
           g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v19 * temp_v25);
           piVar18[0x14] = (int)DAT_005f16bc;
-          FUN_00303460(0xd);
+          lmapCameraSetMode(0xd);
           g_lmapView[0x2c] = 1;
           sysPlaySe(0xdc);
           FUN_00233e10(1,DAT_005f16ac);
@@ -4142,7 +4142,7 @@ LAB_0033eae8:
         piVar18 = g_lmapView;
         g_lmapView[6] = g_lmapScene[0x14];
         piVar18[0x2c] = 0;
-        FUN_00303460(0);
+        lmapCameraSetMode(0);
         piVar18 = g_lmapScene;
         g_lmapScene[0x15] = 0;
         piVar18[0x16] = (int)temp_v18;
@@ -4204,7 +4204,7 @@ LAB_0033eae8:
           FUN_00324e38(0xffffffff);
           libm_sinf();
           libm_cosf();
-          FUN_0014af98();
+          messageVoiceBankGet();
           soundVolumeSettingSet();
           sysPlayVoice(0x10002e6);
           soundVolumeSettingSet(temp_v17);
@@ -4236,7 +4236,7 @@ LAB_0033eae8:
       if (temp_v32 != 1) {
         if ((temp_v32 == 2) &&
            (temp_v32 = g_lmapScene[2], g_lmapScene[2] = temp_v32 + 1, temp_v32 + 1 >= 0x1f)) {
-          FUN_00303460(0);
+          lmapCameraSetMode(0);
           mapSetSceneState(1);
         }
       }
@@ -4278,13 +4278,13 @@ LAB_0033eae8:
           FUN_00324e38(0xffffffff);
           libm_sinf();
           libm_cosf();
-          FUN_0014af98();
+          messageVoiceBankGet();
           soundVolumeSettingSet();
           sysPlayVoice(0x10002e6);
           soundVolumeSettingSet(temp_v17);
         }
         if (g_lmapScene[2] >= 0x24) {
-          FUN_00303460(9);
+          lmapCameraSetMode(9);
           piVar18 = g_lmapScene;
           g_lmapScene[0x15] = 0;
           piVar18[0x16] = 0x40a00000;
@@ -4296,7 +4296,7 @@ LAB_0033eae8:
     else {
       g_lmapScene[0x15] = 7;
       piVar18[0x16] = 0;
-      FUN_00303460(8);
+      lmapCameraSetMode(8);
       piVar18 = g_lmapScene;
       g_lmapScene[1] = g_lmapScene[1] + 1;
       piVar18[2] = 0;
@@ -4394,7 +4394,7 @@ LAB_0033eae8:
       FUN_00324e38(0xffffffff);
       libm_sinf();
       libm_cosf();
-      FUN_0014af98();
+      messageVoiceBankGet();
       soundVolumeSettingSet();
       sysPlayVoice(0x10002e6);
       soundVolumeSettingSet(temp_v17);
@@ -4476,7 +4476,7 @@ LAB_0033eae8:
 joined_r0x00248750:
     if (((DAT_005f1c48 == '\0') && (DAT_005f161e != '\0')) && (pfVar8 != (float *)0x0)) {
       *(float *)((int)piVar18 + 0x2c) = afStack_1a8[2] - 2.0f;
-      FUN_0025ef68((int *)((int)piVar18 + 0x28),(int *)((int)piVar18 + 0x34),0);
+      mapResolveCollisionSphere((int *)((int)piVar18 + 0x28),(int *)((int)piVar18 + 0x34),0);
     }
     piVar18 = g_lmapScene;
     piVar10 = g_lmapScene + 7;
@@ -4560,8 +4560,8 @@ joined_r0x00248750:
           *(unsigned char *)(piVar18 + 0x1b) = 0;
           libm_sinf();
           libm_cosf();
-          temp_v17 = FUN_00152f44();
-          temp_v3 = FUN_0014af98();
+          temp_v17 = messageVoiceFlagsGet();
+          temp_v3 = messageVoiceBankGet();
           FUN_001628c0(&LAB_002d9eec,temp_v3,temp_v17,1);
           piVar18 = g_lmapScene;
           g_lmapScene[1] = g_lmapScene[1] + 1;
@@ -4648,7 +4648,7 @@ joined_r0x00248750:
                   libm_sinf();
                   libm_cosf();
                   uStack_60 = randBetween(0,1);
-                  FUN_0014af98();
+                  messageVoiceBankGet();
                   soundVolumeSettingSet();
                   sysPlayVoice(uStack_60 + 0x10002e2);
                   soundVolumeSettingSet((unsigned int)uStack_54);
@@ -4688,7 +4688,7 @@ LAB_002da1e4:
                 libm_sinf();
                 libm_cosf();
                 uStack_60 = randBetween(0,1);
-                FUN_0014af98();
+                messageVoiceBankGet();
                 soundVolumeSettingSet();
                 sysPlayVoice(uStack_60 + 0x10002e0);
                 soundVolumeSettingSet((unsigned int)uStack_54);
@@ -4710,7 +4710,7 @@ LAB_002da2b0:
                   libm_sinf();
                   libm_cosf();
                   uStack_60 = randBetween(0,1);
-                  FUN_0014af98();
+                  messageVoiceBankGet();
                   soundVolumeSettingSet();
                   sysPlayVoice(uStack_60 + 0x10002de);
                   soundVolumeSettingSet((unsigned int)uStack_54);
@@ -4758,7 +4758,7 @@ LAB_002da3cc:
                 libm_sinf();
                 libm_cosf();
                 uStack_60 = randBetween(0,1);
-                FUN_0014af98();
+                messageVoiceBankGet();
                 soundVolumeSettingSet();
                 sysPlayVoice(uStack_60 + 0x10002dc);
                 soundVolumeSettingSet((unsigned int)uStack_54);
@@ -4776,7 +4776,7 @@ LAB_002da3cc:
             FUN_002d1f40(10,0x78,0);
             if (g_lmapScene[0x9b] >= (int)(unsigned int)*(unsigned short *)(temp_v6 + 4)) {
               popupStateClose();
-              FUN_003d2158(g_lmapScene[0x99],0);
+              soundApplyValueOrStop(g_lmapScene[0x99],0);
               FUN_002de104();
               FUN_00324e38(0);
               piVar18 = g_lmapScene;
@@ -4789,7 +4789,7 @@ LAB_002da3cc:
             }
             else {
               popupStateClose();
-              FUN_003d2158(g_lmapScene[0x99],0);
+              soundApplyValueOrStop(g_lmapScene[0x99],0);
               mapTrapEnable();
               FUN_00324e38(0);
               piVar18 = g_lmapScene;
@@ -4827,14 +4827,14 @@ LAB_002da3cc:
           if (piVar18[2] == 1) {
             piVar18[0x15] = 0;
             piVar18[0x16] = 0x40400000;
-            temp_v17 = FUN_00152f44();
-            temp_v3 = FUN_0014af98();
+            temp_v17 = messageVoiceFlagsGet();
+            temp_v3 = messageVoiceBankGet();
             FUN_001628c0(&LAB_002da77c,temp_v3,temp_v17,1);
           }
           if (g_lmapScene[2] >= 6) {
             mapTrapGetUnk3C();
             uiPlayGatedActionFeedback();
-            FUN_00303460(0);
+            lmapCameraSetMode(0);
             mapSetSceneState(1);
             DAT_005f161c = 0;
             DAT_005f1614 = '\0';
@@ -4976,7 +4976,7 @@ LAB_002dad8c:
                 piVar18 = g_lmapScene;
                 g_lmapScene[1] = 8;
                 piVar18[0x15] = 0x23;
-                FUN_00303460(0x16);
+                lmapCameraSetMode(0x16);
                 g_lmapScene[0x16] = (int)temp_v18;
               }
             }
@@ -4987,8 +4987,8 @@ LAB_002dad8c:
           g_lmapScene[2] = temp_v32 + 1;
           if (temp_v32 + 1 == 5) {
             sysPlayVoice(0x10000c5);
-            temp_v17 = FUN_00152f44();
-            temp_v3 = FUN_0014af98();
+            temp_v17 = messageVoiceFlagsGet();
+            temp_v3 = messageVoiceBankGet();
             FUN_001628c0(&LAB_002dae38,temp_v3,temp_v17,1);
           }
           if (g_lmapScene[2] == 7) {
@@ -4996,7 +4996,7 @@ LAB_002dad8c:
           }
           temp_v32 = linkHolderCallFirst(g_lmapScene[0x6a]);
           if ((temp_v32 == 0x23) && (temp_v32 = linkHolderCheckFirst(g_lmapScene[0x6a]), temp_v32 != 0)) {
-            FUN_00303460(0x17);
+            lmapCameraSetMode(0x17);
             piVar18 = g_lmapScene;
             g_lmapScene[0x15] = 0x24;
             piVar18[0x16] = (int)temp_v18;
@@ -5065,7 +5065,7 @@ LAB_002dad8c:
             if (temp_v32 != 0) {
               DAT_005f1adc = 0;
               uiPlayGatedActionFeedback();
-              FUN_00303460(0);
+              lmapCameraSetMode(0);
               mapSetSceneState(1);
               DAT_005f161c = 0;
               DAT_005f1614 = '\0';
@@ -5203,7 +5203,7 @@ LAB_002dad8c:
       libm_cosf();
       temp_v32 = randBetween(0,1);
       if (temp_v32 == 0) {
-        FUN_0014af98();
+        messageVoiceBankGet();
         soundVolumeSettingSet();
         sysPlayVoice(0x10002e4);
         soundVolumeSettingSet(temp_v17);
@@ -5247,7 +5247,7 @@ LAB_002dad8c:
       piVar18[0x16] = 0;
       fStack_20 = temp_v35;
       fStack_1c = temp_v37;
-      FUN_00303460(5);
+      lmapCameraSetMode(5);
       mapFastModelCreate();
       piVar18 = g_lmapScene;
       piVar10 = g_lmapScene + 10;
@@ -5304,7 +5304,7 @@ LAB_002dad8c:
       fStack_1c = temp_v37;
       temp_v32 = pairedAvailabilityBothReady();
       if (temp_v32 != 0) {
-        FUN_00303460(0);
+        lmapCameraSetMode(0);
         piVar18 = g_lmapScene;
         g_lmapScene[0x15] = 0;
         piVar18[0x16] = 0x40a00000;
@@ -5328,7 +5328,7 @@ LAB_002dad8c:
       g_lmapScene[0x15] = 0;
       piVar18[0x16] = 0;
       if (DAT_005f188c == '\0') {
-        FUN_0013cab8(0,10,0xff);
+        screenFadeStartIn(0,10,0xff);
       }
       piVar18 = g_lmapScene;
       g_lmapScene[1] = g_lmapScene[1] + 1;
@@ -5384,7 +5384,7 @@ code_r0x00313648:
       piVar18[0xb] = (int)temp_v19;
       piVar18[0xc] = (int)temp_v25;
       *(unsigned char *)(piVar18 + 0x1b) = 0;
-      FUN_00303460(6);
+      lmapCameraSetMode(6);
       piVar18 = g_lmapScene;
       g_lmapScene[1] = g_lmapScene[1] + 1;
       piVar18[2] = 0;
@@ -5443,8 +5443,8 @@ code_r0x00313648:
             FUN_00324e38(0);
             libm_sinf();
             libm_cosf();
-            temp_v17 = FUN_00152f44();
-            temp_v3 = FUN_0014af98();
+            temp_v17 = messageVoiceFlagsGet();
+            temp_v3 = messageVoiceBankGet();
             FUN_001628c0(0x2483f0,temp_v3,temp_v17,1);
           }
           piVar18 = g_lmapScene;
@@ -5492,7 +5492,7 @@ code_r0x00313648:
         if ((DAT_005f1600 != (unsigned int *)0x3) && (DAT_005f1600 != (unsigned int *)0x7)) {
           return;
         }
-        FUN_00303460(7);
+        lmapCameraSetMode(7);
       }
       if (DAT_005f1600 != (unsigned int *)0x3) {
         if (g_lmapScene[2] >= 8) {
@@ -5548,7 +5548,7 @@ code_r0x00313648:
     piVar18[0xf] = temp_v32;
     if ((DAT_005f1c48 == '\0') && (DAT_005f161e != '\0')) {
       piVar10 = piVar18 + 10;
-      FUN_0025ef68(piVar10,piVar18 + 0xd,0);
+      mapResolveCollisionSphere(piVar10,piVar18 + 0xd,0);
       piVar18 = g_lmapScene;
       if (piVar10 != (int *)0x0) {
         g_lmapScene[0x1a] = 0;
@@ -5774,7 +5774,7 @@ code_r0x00313648:
         mathPositionHeadingDegrees();
         g_lmapScene[0x14] = temp_v32;
       }
-      FUN_00303460(0xe);
+      lmapCameraSetMode(0xe);
       sysPlaySe(0xdd);
       piVar18 = g_lmapScene;
       g_lmapScene[1] = g_lmapScene[1] + 1;
@@ -5845,7 +5845,7 @@ code_r0x00313648:
       piVar18[8] = (int)(temp_v20 + (temp_v31 - temp_v20) * 0.16666667f);
       if (temp_v32 != 2) {
         piVar18[0xb] = (int)(temp_v31 - 5.0f);
-        FUN_0025ef68(piVar18 + 10,piVar18 + 0xd,0);
+        mapResolveCollisionSphere(piVar18 + 10,piVar18 + 0xd,0);
         piVar18 = g_lmapScene;
         piVar10 = g_lmapScene + 0xe;
         temp_v32 = g_lmapScene[0xf];
@@ -5874,10 +5874,10 @@ code_r0x00313648:
       }
       else {
         if (g_lmapScene[2] == 2) {
-          temp_v17 = FUN_00152f44();
-          temp_v3 = FUN_0014af98();
+          temp_v17 = messageVoiceFlagsGet();
+          temp_v3 = messageVoiceBankGet();
           FUN_001628c0(&LAB_002d94f8,temp_v3,temp_v17,1);
-          FUN_00303460(0x12);
+          lmapCameraSetMode(0x12);
         }
         if (g_lmapScene[2] >= 2) {
           temp_v18 = (float)g_lmapScene[7];
@@ -5903,7 +5903,7 @@ code_r0x00313648:
             piVar18[0xb] = 0x445f4000;
             piVar18[0xc] = 0x45051000;
             linkHolderSetFlag(piVar18[0x6a]);
-            FUN_0025ef68(g_lmapScene + 10,g_lmapScene + 0xd,0);
+            mapResolveCollisionSphere(g_lmapScene + 10,g_lmapScene + 0xd,0);
             piVar18 = g_lmapScene;
             piVar10 = g_lmapScene + 0xe;
             temp_v32 = g_lmapScene[0xf];
@@ -5911,7 +5911,7 @@ code_r0x00313648:
             piVar18[0xb] = *piVar10;
             piVar18[0xc] = temp_v32;
             *(unsigned char *)(g_lmapView + 0x2d) = 0;
-            FUN_00303460(0x13);
+            lmapCameraSetMode(0x13);
             temp_v25 = 180.0f;
             temp_v18 = ((float)g_lmapScene[0x14] + 180.0f) * temp_v19;
             libm_sinf();
@@ -5942,7 +5942,7 @@ code_r0x00313648:
       piVar18[10] = -0x3b9e8000;
       piVar18[0xb] = 0x4466c000;
       piVar18[0xc] = 0x450b5000;
-      FUN_0025ef68(piVar18 + 10,piVar18 + 0xd,0);
+      mapResolveCollisionSphere(piVar18 + 10,piVar18 + 0xd,0);
       piVar18 = g_lmapScene;
       piVar10 = g_lmapScene + 0xe;
       temp_v32 = g_lmapScene[0xf];
@@ -5996,7 +5996,7 @@ code_r0x00313648:
       piVar18[10] = piVar18[7];
       piVar18[0xb] = -0x3d420000;
       piVar18[0xc] = (int)temp_v18;
-      FUN_0025ef68(piVar18 + 10,piVar18 + 0xd,0);
+      mapResolveCollisionSphere(piVar18 + 10,piVar18 + 0xd,0);
       piVar18 = g_lmapScene;
       piVar10 = g_lmapScene + 0xd;
       piVar7 = g_lmapScene + 10;
@@ -6056,7 +6056,7 @@ code_r0x00313648:
       piVar18[0x15] = 0;
       piVar18[0x16] = 0x40400000;
       *(unsigned char *)(piVar18 + 0x1b) = 0;
-      FUN_00303460(0x1a);
+      lmapCameraSetMode(0x1a);
       DAT_005f1a4e = 1;
       piVar18 = g_lmapScene;
       g_lmapScene[1] = g_lmapScene[1] + 1;
@@ -6105,7 +6105,7 @@ code_r0x00313648:
       linkedTargetSetFloat(piVar18[0x6a]);
       DAT_005f1a4e = 0;
       mapSetSceneState(1);
-      FUN_00303460(0);
+      lmapCameraSetMode(0);
       return;
     }
     temp_v6 = g_lmapScene[2] + 1;
@@ -6133,7 +6133,7 @@ code_r0x00313648:
       temp_v5 = slots4FGetActiveValue();
       fStack_20 = temp_v35;
       fStack_1c = temp_v37;
-      FUN_003fd924();
+      motionPlayerStartBlended();
       moriModelUnitStartMaterialAnimation(temp_v32,temp_v5,0);
       temp_v6 = *(int *)(temp_v32 + 0x20c);
       if (temp_v6 != 0) {
@@ -6316,7 +6316,7 @@ code_r0x00313648:
     piVar18[9] = (int)((float)piVar18[9] + ((float)piVar18[0xc] - (float)piVar18[9]) * 0.33333334f);
     if (piVar18[1] == 0) {
       FUN_00324e38(1);
-      FUN_00303460(0x1d);
+      lmapCameraSetMode(0x1d);
       piVar18 = g_lmapScene;
       g_lmapScene[0x15] = 0x29;
       piVar18[0x16] = 0x40a00000;
@@ -7118,7 +7118,7 @@ code_r0x00303460:
       }
       break;
     case 0x15:
-      temp_v32 = FUN_003033d4();
+      temp_v32 = lmapResolveContextValue();
       piVar18 = g_lmapView;
       if (g_lmapView[1] != 0) {
         if ((g_lmapView[1] == 1) &&
@@ -7256,7 +7256,7 @@ code_r0x00303460:
       }
       break;
     case 0x17:
-      temp_v32 = FUN_003033d4();
+      temp_v32 = lmapResolveContextValue();
       piVar18 = g_lmapView;
       if (g_lmapView[1] != 0) {
         if (g_lmapView[1] == 1) {
@@ -7338,7 +7338,7 @@ joined_r0x00397538:
       }
       break;
     case 0x18:
-      temp_v32 = FUN_003033d4();
+      temp_v32 = lmapResolveContextValue();
       piVar18 = g_lmapView;
       if (g_lmapView[1] != 0) {
         if (g_lmapView[1] == 1) {
@@ -7406,7 +7406,7 @@ joined_r0x00397538:
       }
       break;
     case 0x19:
-      FUN_003033d4();
+      lmapResolveContextValue();
       temp_v32 = g_lmapView[1];
       if (temp_v32 != 0) {
         if ((temp_v32 == 1) && (FUN_0033a374(), piVar10 = g_lmapView, temp_v32 != 0)) {
@@ -7464,7 +7464,7 @@ joined_r0x00397538:
       }
       break;
     case 0x1a:
-      FUN_003033d4();
+      lmapResolveContextValue();
       piVar18 = g_lmapView;
       if (g_lmapView[1] != 0) {
         if ((g_lmapView[1] == 1) &&
@@ -7986,7 +7986,7 @@ joined_r0x00397538:
           if (temp_v32 != 0) {
             g_lmapScene[0x16] = 0x40a00000;
             mapSetSceneState(1);
-            FUN_00303460(0);
+            lmapCameraSetMode(0);
           }
         }
       }
@@ -8003,7 +8003,7 @@ joined_r0x00397538:
         }
         temp_v32 = linkHolderCallFirst(g_lmapScene[0x6a]);
         if ((temp_v32 == 0x23) && (temp_v32 = linkHolderCheckFirst(g_lmapScene[0x6a]), temp_v32 != 0)) {
-          FUN_00303460(0x17);
+          lmapCameraSetMode(0x17);
           piVar18 = g_lmapScene;
           g_lmapScene[0x15] = 0x24;
           piVar18[0x16] = 0;
@@ -8017,7 +8017,7 @@ joined_r0x00397538:
       piVar18[0x16] = 0;
       fStack_20 = temp_v35;
       fStack_1c = temp_v37;
-      FUN_00303460(0x16);
+      lmapCameraSetMode(0x16);
       piVar18 = g_lmapScene;
       g_lmapScene[1] = g_lmapScene[1] + 1;
       piVar18[2] = 0;
@@ -8063,7 +8063,7 @@ joined_r0x00397538:
       piVar18 = g_lmapScene;
       g_lmapScene[0x14] = temp_v32;
       *(unsigned char *)(piVar18 + 0x1b) = 0;
-      FUN_00303460(0x20);
+      lmapCameraSetMode(0x20);
       sysPlayVoice(0x1000145);
     }
 code_r0x0024947c:
@@ -8205,7 +8205,7 @@ joined_r0x002495a4:
       controllerSetRotationEulerDegrees(temp_v32);
       *(unsigned int *)(temp_v32 + 0x1fc) = 0x3f400000;
       moriModelUnitStartMaterialAnimation(temp_v32,0,2);
-      FUN_003fd924(temp_v32,0,2);
+      motionPlayerStartBlended(temp_v32,0,2);
       piVar18 = g_lmapScene;
       g_lmapScene[1] = g_lmapScene[1] + 1;
       piVar18[2] = 0;

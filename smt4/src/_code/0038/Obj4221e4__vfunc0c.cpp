@@ -3,8 +3,8 @@
 #include "nn/Result.h"
 
 extern "C" {
-void FUN_00123934(void);
-WindowStatusResult FUN_0035398c(void *owner);
+void asdGxWaitForPreviousFrame(void);
+WindowStatusResult recordQueryAndValidatePair(void *owner);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
 
 // Query the AOC service and classify its status. The object itself is not touched.
@@ -12,8 +12,8 @@ WindowStatusOperationResult _ZN9Obj4221e47vfunc0cEv(Obj4221e4 *)
 {
     WindowStatusOperationResult output(1);
     AocMain *main = g_aocMain;
-    FUN_00123934();
-    output.result = FUN_0035398c(&main->service);
+    asdGxWaitForPreviousFrame();
+    output.result = recordQueryAndValidatePair(&main->service);
     bool succeeded = !nnResultIsFailureBool(legacyResourceIdRemap(&output.result));
     if (succeeded) {
         output.status = 0;

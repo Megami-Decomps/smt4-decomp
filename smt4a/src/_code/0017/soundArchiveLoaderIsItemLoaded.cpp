@@ -9,7 +9,7 @@ extern s32 nw_snd_internal_SoundArchiveLoader_IsWaveSoundDataLoaded(SoundLoader 
 extern s32 FUN_001788b8(SoundLoader *loader, u32 id, u32 flags);
 extern s32 FUN_001785f0(SoundLoader *loader, u32 id, u32 flags);
 extern s32 FUN_00194c68(SoundLoader *loader, u32 waveArchiveId, u32 waveIndex);
-extern u32 FUN_001a8e14(void *archive, u32 id);
+extern u32 soundArchiveFileEntryIsLoaded(void *archive, u32 id);
 
 /* Dispatches on the kind of archive item `id` names and loads (or checks) its data;
  * returns 0 for unknown ids. */
@@ -33,7 +33,7 @@ s32 soundArchiveLoaderIsItemLoaded(SoundLoader *loader, u32 id, u32 flags)
         case SND_ITEM_WAVE_ARCHIVE:
             return FUN_00194c68(loader, id, 0xffffffff);
         case SND_ITEM_GROUP:
-            return loader->vtbl->isFileLoaded(loader, FUN_001a8e14(loader->archive, id)) != 0;
+            return loader->vtbl->isFileLoaded(loader, soundArchiveFileEntryIsLoaded(loader->archive, id)) != 0;
         case SND_ITEM_SOUND_GROUP:
             return FUN_001788b8(loader, id, flags);
         }

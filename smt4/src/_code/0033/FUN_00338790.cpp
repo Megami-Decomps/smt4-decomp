@@ -8,7 +8,7 @@ int recordClampCurrentCount(int, int);
 int halves34Copy(int, unsigned short [30]); // declcheck: local (romwright prototype; the shared declaration in code/Code0024_Smt4.h does not compile here: argument of type "int" is incompatible with parameter of type "Source *")
 int padClearBits(int);
 int passiveSkillLookupRecord(void);
-int FUN_00283f30(unsigned short [30], int);
+int playerCollectPassiveSkillBits(unsigned short [30], int);
 int playerSetClampedStat(int);
 int playerSetClampedValue(int);
 int selectionStateSetClamped(int, int);
@@ -43,7 +43,7 @@ typedef struct {
 /* Supplied declaration required: halves34Copy. */
 /* Supplied declaration required: padClearBits. */
 /* Supplied declaration required: passiveSkillLookupRecord. */
-/* Supplied declaration required: FUN_00283f30. */
+/* Supplied declaration required: playerCollectPassiveSkillBits. */
 extern short FUN_0028d310(void);
 extern int playerPadTestBit(unsigned int);
 extern int flagWordTestBit(int, unsigned int);
@@ -88,7 +88,7 @@ void FUN_00338790(fn_00338790_arg0 *param_1)
     temp_v12 = 0.0f;
     temp_v9 = temp_v12;
     temp_v10 = temp_v12;
-    FUN_00283f30(temp_v19,1);
+    playerCollectPassiveSkillBits(temp_v19,1);
     temp_v13 = 10.0f;
     temp_v14 = 7.0f;
     temp_v15 = 5.0f;

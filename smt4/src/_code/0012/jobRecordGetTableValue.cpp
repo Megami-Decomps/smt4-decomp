@@ -3,13 +3,13 @@
 
 extern "C" {
 
-extern u8 DAT_00403794[];
+extern u8 g_jobRecordTable[];
 
 /* Looks up the indexed byte within the job-selected record table. */
 u32 jobRecordGetTableValue(u32 job, u32 index)
 {
     JobRecordBase *work = (JobRecordBase *)jobGetWork(job);
-    return DAT_00403794[work->base + index * 3 - 4];
+    return g_jobRecordTable[work->base + index * 3 - 4];
 }
 
 } /* extern "C" */

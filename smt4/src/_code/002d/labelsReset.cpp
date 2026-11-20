@@ -3,13 +3,13 @@
 
 extern "C" {
 /* Reads or updates the requested state. */
-extern Labels DAT_00465278;
+extern Labels g_stickDirectionTable;
 void labelsReset(void)
 {
-    DAT_00465278.flag = 0;
-    DAT_00465278.entries[0].text = 45;
-    DAT_00465278.entries[1].text = 45;
-    DAT_00465278.entries[2].text = 45;
-    DAT_00465278.entries[3].text = 45;
+    g_stickDirectionTable.flag = 0;
+    g_stickDirectionTable.entries[0].text = 45;
+    g_stickDirectionTable.entries[1].text = 45;
+    g_stickDirectionTable.entries[2].text = 45;
+    g_stickDirectionTable.entries[3].text = 45;
 }
 }

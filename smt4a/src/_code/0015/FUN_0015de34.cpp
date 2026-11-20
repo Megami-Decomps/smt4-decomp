@@ -47,7 +47,7 @@ int FUN_00175bb8(int, int, int);
 int FUN_00175c30(int, u32);
 int FUN_00175c3c(void);
 int FUN_00175cd8(void);
-int FUN_00191330(void);
+int soundStreamCommandManagerGetInstance(void);
 int FUN_00191548(void);
 int FUN_001b1998(void);
 int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
@@ -66,7 +66,7 @@ void FUN_0015de34(SndInitConfig *cfg, int offset)
             int commandStart = queueStart + cfg->cmdQueueSize;
             int queuesSize = cfg->cmdQueueSize + cfg->commandSize;
             FUN_0017561c(objectCommandQueueGet(), queueStart, cfg->cmdQueueSize);
-            FUN_0017561c(FUN_00191330(), commandStart, cfg->commandSize);
+            FUN_0017561c(soundStreamCommandManagerGetInstance(), commandStart, cfg->commandSize);
             offset += queuesSize;
             DAT_0059dba4.commandsQueued = 1;
         }

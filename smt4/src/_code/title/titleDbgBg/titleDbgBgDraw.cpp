@@ -16,7 +16,7 @@ struct TitleDebugBackgroundView {
 }
 extern "C" {
 extern TitleDebugBackgroundView *g_titleDbgBg;
-f32 FUN_002aed34(s32 layer, void *parameters, f32 x, f32 y);
+f32 asdTextDrawDebugSlotString(s32 layer, void *parameters, f32 x, f32 y);
 
 // Draw the title debug background, PC/ROM loading indicator and the game title label.
 u32 titleDbgBgDraw()
@@ -40,7 +40,7 @@ u32 titleDbgBgDraw()
     }
     // Shift-JIS: the Japanese Shin Megami Tensei IV title.
     textDrawString(296.0f, 208.0f, 0.0f, 3, 1.0f, 0xFFFFFFFF, 1.0f, "\x90\x5E\x81\x45\x8F\x97\x90\x5F\x93\x5D\x90\xB6\x87\x57");
-    FUN_002aed34(1, work->parameters, 228.0f, 228.0f);
+    asdTextDrawDebugSlotString(1, work->parameters, 228.0f, 228.0f);
     return 0;
 }
 }

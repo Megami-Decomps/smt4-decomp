@@ -42,9 +42,9 @@ void s4LoadDrawProfilePanel(s32 selected)
     rt_aeabi_memclr(scratch, sizeof(scratch));
     if (work != NULL && selected >= 0) {
         if (selected == 0)
-            FUN_00359974(0, 1, -1, 0);
+            entryTableResetAndInit(0, 1, -1, 0);
         else
-            FUN_00359974(0, 2, -1, 0);
+            entryTableResetAndInit(0, 2, -1, 0);
         const SlotPresenceView *presence = reinterpret_cast<const SlotPresenceView *>(work);
         if (!presence->available[selected]) {
             asdTextDrawDirectoryEntry(reinterpret_cast<AsdText *>(work->unk2B8), 4, -1, 0,
@@ -55,15 +55,15 @@ void s4LoadDrawProfilePanel(s32 selected)
         char name[0x12];
         memcpySrcFirst(view->profiles[selected].name, name, 0x12);
         scrSetStringSlot(1, name);
-        FUN_00359974(2, view->profiles[selected].enabled, -1, 0); // This profile byte is the displayed level.
+        entryTableResetAndInit(2, view->profiles[selected].enabled, -1, 0); // This profile byte is the displayed level.
         u32 seconds = view->profiles[selected].playSeconds;
         u32 hours = seconds / 3600;
         u32 minutes = (seconds / 60) % 60;
         u32 remainder = seconds % 60;
-        FUN_00359974(3, hours, 2, 1);
-        FUN_00359974(4, minutes, 2, 1);
-        FUN_00359974(5, remainder, 2, 1);
-        FUN_00359974(6, view->profiles[selected].location, -1, 0);
+        entryTableResetAndInit(3, hours, 2, 1);
+        entryTableResetAndInit(4, minutes, 2, 1);
+        entryTableResetAndInit(5, remainder, 2, 1);
+        entryTableResetAndInit(6, view->profiles[selected].location, -1, 0);
         LoadProfileLabels labels = DAT_00536bdc;
         u8 markers = view->profiles[selected].markers;
         s32 shown = 0;

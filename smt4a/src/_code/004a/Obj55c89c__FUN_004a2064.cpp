@@ -13,7 +13,7 @@ s32 rangeGetMinimumLimit(const FlaggedValueHolder *);
 void uiOpenStartAnimations(void *);
 void unitRecordBuildFromSave(u32, UnitRecord *);
 UnitRecord *slotRecordFindById(u32);
-s32 FUN_002a4b28(u32);
+s32 compendiumEntryIsRegistered(u32);
 void FUN_0032d0c8(s32, s32, u32, const UnitRecord *);
 void FUN_004a16bc(void *);
 void FUN_004a1db4(void *);
@@ -71,7 +71,7 @@ void Obj55c89c::FUN_004a2064()
         if (selected != previous) {
             if (tail->savedList == 0) {
                 unitRecordBuildFromSave((u16)selected, &unit);
-                if (FUN_002a4b28((u16)selected))
+                if (compendiumEntryIsRegistered((u16)selected))
                     FUN_0032d0c8(0, 1, (u16)selected, &unit);
                 else
                     FUN_0032d0c8(0, 2, (u16)selected, &unit);
@@ -95,7 +95,7 @@ void Obj55c89c::FUN_004a2064()
     words4At20Clear(&menu->party);
     s32 count = rangeGetMinimumLimit(&menu->range);
     for (s32 index = 0; index < count; ++index) {
-        partyIdsActivateEntry(&menu->party, (u16)shopListItemGetId(&rows[FUN_002a482c(&menu->range) + index]));
+        partyIdsActivateEntry(&menu->party, (u16)shopListItemGetId(&rows[resourceDispatchTaggedOperation(&menu->range) + index]));
     }
     FUN_004a6cfc(&menu->party);
 }

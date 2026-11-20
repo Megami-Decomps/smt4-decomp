@@ -12,8 +12,8 @@ void FUN_0028dcf4(MessageWindow *window, u32 layout);
 void FUN_0028e6d0(MessageWindow *window, u32 a, u32 b, u32 kind, u32 c, u32 d, u32 options);
 int buttonHelpSetEnabled(void);
 u32 FUN_002b753c(u32 object);
-s32 FUN_002b8660(void);
-s32 FUN_002c1d5c(void);
+s32 resultIsIdle(void);
+s32 eventIsSkipping(void);
 void buttonHelpSetPreset(s32 preset);
 u32 buttonHelpGetStatus(void);
 u32 buttonHelpGetEntryValue(u32 entry);
@@ -95,11 +95,11 @@ u32 messageWindowShowOrPoll(u32 a, u32 b, s32 wait, s32 kind, s32 priority, u32 
             scrSetResult(win->value);
             return 1;
         }
-        if (FUN_002c1d5c() == 0) {
+        if (eventIsSkipping() == 0) {
             return 0;
         }
         {
-            s32 busy = FUN_002b8660();
+            s32 busy = resultIsIdle();
             u8 now = 0;
             if (busy != 0) {
                 now = win->state;
@@ -120,7 +120,7 @@ u32 messageWindowShowOrPoll(u32 a, u32 b, s32 wait, s32 kind, s32 priority, u32 
             state = win->state;
         }
         if (win == 0 || state == 0) {
-            if (FUN_002c1d5c() != 0 && FUN_002b8660() != 0) {
+            if (eventIsSkipping() != 0 && resultIsIdle() != 0) {
                 return 1;
             }
             FUN_0028e6d0(win, a, b, kind, 26, 1, options);

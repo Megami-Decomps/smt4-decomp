@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0016b118(int);
 
 typedef int romwright_code(...);
-extern romwright_code *DAT_0044e930; /* 0x44e930 */
+extern romwright_code *g_moAllocationHooks; /* 0x44e930 */
 extern romwright_code *DAT_0044e934; /* 0x44e934 */
 
 /* Supplied declaration required: FUN_0016b118. */
@@ -30,7 +30,7 @@ unsigned int FUN_003f5c60(int *param_1,int param_2,int param_3)
     if (param_1[1] != 0) {
       (*DAT_0044e934)();
     }
-    temp_v0 = (*DAT_0044e930)(param_1[2]);
+    temp_v0 = (*g_moAllocationHooks)(param_1[2]);
     param_1[1] = temp_v0;
     if (temp_v0 == 0) {
       return 0;

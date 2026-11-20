@@ -32,7 +32,7 @@ struct ListRefreshState {
 };
 
 extern "C" {
-void FUN_0049339c(void *transition, s32 steps, s32 start, s32 end, u32 argument);
+void uiDrawCompositeSpriteAtRectCorner(void *transition, s32 steps, s32 start, s32 end, u32 argument);
 s32 rangeGetMinimumLimit(ListRange *);
 s32 FUN_0031d174(ListRange *);
 u32 flaggedValueHolderGetTotal(ListRange *);
@@ -48,13 +48,13 @@ void listRefreshDirtyRows(ListRefreshState *state)
 {
     if (state->flags & 0x100) {
         u32 argument = state->argument;
-        FUN_0049339c(state->transition, 10, 0, 0, argument);
+        uiDrawCompositeSpriteAtRectCorner(state->transition, 10, 0, 0, argument);
         bool selectedMode = false;
         if (state->mode == 4) {
             selectedMode = true;
         }
         ListRange *range = &state->range;
-        s32 start = FUN_002a482c(range);
+        s32 start = resourceDispatchTaggedOperation(range);
         s32 visible = rangeGetMinimumLimit(range);
         for (s32 row = 0; row < visible; ++row) {
             if (!selectedMode || FUN_0031d174(range) != row) {
@@ -67,7 +67,7 @@ void listRefreshDirtyRows(ListRefreshState *state)
             FUN_00497d20(state, row + 1, 1, value);
         }
         s32 selection = FUN_0031d174(range);
-        s32 first = FUN_002a482c(range);
+        s32 first = resourceDispatchTaggedOperation(range);
         size40Set(state->renderer, first, selection);
         state->renderer->apply(argument);
     } else if (state->flags & 0x200) {

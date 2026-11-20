@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_0010d29c(void);
-int FUN_0010d2a6(void);
+int onlineScopedLockUnlockMember(void);
 int _ZN9Obj559f087vfunc00Ev(int, unsigned int);
 int asdOperatorNew(void);
 int _ZN9Obj557c908setStateEj(void);
@@ -22,7 +22,7 @@ extern unsigned char DAT_0055a808; /* 0x55a808 */
 extern unsigned int DAT_005949a0; /* 0x5949a0 */
 
 /* Supplied declaration required: FUN_0010d29c. */
-/* Supplied declaration required: FUN_0010d2a6. */
+/* Supplied declaration required: onlineScopedLockUnlockMember. */
 /* Supplied declaration required: _ZN9Obj559f087vfunc00Ev. */
 extern int FUN_0012bc90(unsigned int *);
 /* Supplied declaration required: asdOperatorNew. */
@@ -93,7 +93,7 @@ void FUN_003fa6a4(int param_1)
     if ((*(char *)(temp_v2 + 0x84) == '\x02') ||
        (((*(char *)(temp_v2 + 0x84) == '\x01' && (*(unsigned int *)(temp_v2 + 0x80) != 0)) &&
         ((*(unsigned int *)(temp_v2 + 0x80) & ~DAT_005949a0) == 0)))) {
-      FUN_0010d2a6();
+      onlineScopedLockUnlockMember();
     }
   }
   *(int *)(param_1 + 0x44) = temp_v0;

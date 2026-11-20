@@ -29,7 +29,7 @@ int FUN_0026f7f0(...);
 void campSetSpriteAnimationPreset(int, int, int, unsigned int);
 int FUN_002a2cb4(...);
 int listCursorGetRowOfChildIfUnblocked(...);
-int FUN_002c8538(...);
+int gameGlobalsSetOverlayActive(...);
 int FUN_002e5c48(...);
 int sysMemClear(...);
 int FUN_002f78a0(...);
@@ -88,11 +88,11 @@ extern unsigned char DAT_005e1eba; /* 0x5e1eba */
 extern unsigned int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: scrollListSetSelectionTracked. */
-/* Supplied declaration required: FUN_002c8538. */
+/* Supplied declaration required: gameGlobalsSetOverlayActive. */
 extern int FUN_002e27b8(void);
 /* Supplied declaration required: FUN_002e5c48. */
 /* Supplied declaration required: sysMemClear. */
-extern int FUN_002ef9f0(void);
+extern int mapRndMazeTaskIsActive(void);
 /* Supplied declaration required: FUN_002f78a0. */
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
@@ -281,7 +281,7 @@ void FUN_002c3398(void)
     *(unsigned short *)(temp_v6 + temp_v2 * 8 + 0xa84) = 0;
   } while (temp_v1 < 0x18);
   *(unsigned int *)(temp_v6 + 0x20) = 1;
-  FUN_002c8538(0);
+  gameGlobalsSetOverlayActive(0);
   if (*(int *)(temp_v6 + 0x20) == 8) {
     if (*(char *)(temp_v6 + 0x42) != '\0') {
       temp_v5 = temp_v6 + 0xdb4;
@@ -489,7 +489,7 @@ LAB_002c4a2c:
       *(unsigned int *)(temp_v1 + 0x1c) = 0x1c;
       return;
     }
-    temp_v6 = FUN_002ef9f0();
+    temp_v6 = mapRndMazeTaskIsActive();
     if (temp_v6 == 0) {
       gameGlobalsSetMenuOpenFlag();
     }

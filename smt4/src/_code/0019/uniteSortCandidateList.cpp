@@ -5,13 +5,13 @@ extern "C" {
 s32 devilCompareRaceLevelDescending(const u16 *, const u16 *);
 s32 devilCompareByRankGradeId(const u16 *, const u16 *);
 s32 FUN_001d1d78(const u16 *, const u16 *);
-s32 FUN_002c6e90(const u16 *, const u16 *);
+s32 uniteCandidateCompare(const u16 *, const u16 *);
 s32 devilCompareBySetCategoryGrade(const u16 *, const u16 *);
 s32 devilCompare(const u16 *, const u16 *);
 s32 devilCompareTablePriority(const u16 *, const u16 *);
 s32 devilCompareByEntryValue(const u16 *, const u16 *);
 void qsort(void *entries, u32 count, u32 stride, s32 (*compare)(const u16 *, const u16 *));
-void FUN_0027f3dc(void *entries, u32 count, u32 stride, s32 (*compare)(const u16 *, const u16 *));
+void arraySortQsort(void *entries, u32 count, u32 stride, s32 (*compare)(const u16 *, const u16 *));
 
 // Apply the saved ascending/descending sort preference to the fusion demon list.
 void uniteSortCandidateList(void)
@@ -33,7 +33,7 @@ void uniteSortCandidateList(void)
         if (ascending)
             qsort(work->portraitSelectionIV.desired, work->portraitSelectionIV.candidateCount, sizeof(u16), FUN_001d1d78);
         else
-            qsort(work->portraitSelectionIV.desired, work->portraitSelectionIV.candidateCount, sizeof(u16), FUN_002c6e90);
+            qsort(work->portraitSelectionIV.desired, work->portraitSelectionIV.candidateCount, sizeof(u16), uniteCandidateCompare);
     }
     if ((*preference & 0x7f) == 0x31) {
         if (ascending)
@@ -43,9 +43,9 @@ void uniteSortCandidateList(void)
     }
     if ((*preference & 0x7f) == 3) {
         if (ascending)
-            FUN_0027f3dc(work->portraitSelectionIV.desired, work->portraitSelectionIV.candidateCount, sizeof(u16), devilCompareTablePriority);
+            arraySortQsort(work->portraitSelectionIV.desired, work->portraitSelectionIV.candidateCount, sizeof(u16), devilCompareTablePriority);
         else
-            FUN_0027f3dc(work->portraitSelectionIV.desired, work->portraitSelectionIV.candidateCount, sizeof(u16), devilCompareByEntryValue);
+            arraySortQsort(work->portraitSelectionIV.desired, work->portraitSelectionIV.candidateCount, sizeof(u16), devilCompareByEntryValue);
     }
 }
 }

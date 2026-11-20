@@ -3,13 +3,13 @@
 extern "C" {
 
 struct SoundHandle;
-extern SoundHeapOwner DAT_004e2f68;
+extern SoundHeapOwner g_asdSndSlotSelection;
 void basicSoundStopOrFadeOut(SoundHandle *handle, s32 frames);
 
 /* Apply a transition to an existing slot handle; an empty valid slot still succeeds. */
 s32 soundSlotApplyTransition(u32 index, s32 frames)
 {
-    AsdSndSlotB *slot = DAT_004e2f68.slot;
+    AsdSndSlotB *slot = g_asdSndSlotSelection.slot;
     s32 result = 0;
     if (index >= 8 || slot == NULL) {
         return result;

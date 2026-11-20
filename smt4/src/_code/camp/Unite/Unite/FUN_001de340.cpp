@@ -64,7 +64,7 @@ extern int FUN_001d1d78(...); /* 0x1d1d78 */
 extern int devilCompareTablePriority(...); /* 0x1f6524 */
 extern int devilCompareRaceLevelDescending(...); /* 0x2073e4 */
 extern int devilCompareBySetCategoryGrade(...); /* 0x219720 */
-extern int FUN_002c6e90(...); /* 0x2c6e90 */
+extern int uniteCandidateCompare(...); /* 0x2c6e90 */
 extern int FUN_002d0544(...); /* 0x2d0544 */
 extern int devilCompareByEntryValue(...); /* 0x2dcf14 */
 extern unsigned char LAB_002dcf9c; /* 0x2dcf9c */
@@ -82,7 +82,7 @@ extern int *g_unite; /* 0x43dd68 */
 /* Supplied declaration required: FUN_00269bc4. */
 /* Supplied declaration required: gameRecordCopy. */
 /* Supplied declaration required: statusPanelSetOpen. */
-extern int FUN_0029dde0(void);
+extern int fusionPlayerLevelCapGet(void);
 /* Supplied declaration required: FUN_0029defc. */
 extern int itemGetFlagBit1(unsigned short);
 extern int flagWordTestBit(int, unsigned int);
@@ -261,7 +261,7 @@ void FUN_001de340(int *param_1)
       }
       if (!(temp_v16 || temp_v2 == 2)) {
         if (*temp_v26 >= 0) {
-          temp_v2 = FUN_0029dde0();
+          temp_v2 = fusionPlayerLevelCapGet();
           if (*temp_v33 < temp_v2) {
             temp_v2 = *temp_v33;
           }
@@ -341,7 +341,7 @@ LAB_001dea48:
           temp_v3 = *piVar9;
           temp_v17 = temp_v13;
           fusionCollectAvailableRacePartners(temp_v3,temp_v13);
-          temp_v18 = FUN_0029dde0();
+          temp_v18 = fusionPlayerLevelCapGet();
           if (piVar9[0x2519] < temp_v18) {
             temp_v18 = piVar9[0x2519];
           }
@@ -726,7 +726,7 @@ LAB_001df3cc:
               qsort(piVar9 + 0x189e,piVar9[0x199c],2,FUN_001d1d78);
             }
             else {
-              qsort(piVar9 + 0x189e,piVar9[0x199c],2,FUN_002c6e90);
+              qsort(piVar9 + 0x189e,piVar9[0x199c],2,uniteCandidateCompare);
             }
           }
           if ((*pbVar20 & 0x7f) == 0x31) {

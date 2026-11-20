@@ -29,7 +29,7 @@ struct Request9 {
 
 extern "C" {
 
-extern u32 DAT_004719e8; /* service session handle */
+extern u32 g_nimAocSession; /* service session handle */
 
 /* IPC request 0x0009 with eleven parameters and ten buffers: three static buffers (64, 64 and 8
  * byte records), three read-only mapped buffers (320, 320 and 192 byte records) and two writable
@@ -67,7 +67,7 @@ s32 FUN_0035fbec(Request9 request)
     nn::os::SetIpcWord(cmd, 25, (u32)request.writeA);
     nn::os::SetIpcWord(cmd, 26, (request.writeSizeB << 4) | 0xc);
     nn::os::SetIpcWord(cmd, 27, (u32)request.writeB);
-    s32 result = nn::svc::SendSyncRequest(DAT_004719e8);
+    s32 result = nn::svc::SendSyncRequest(g_nimAocSession);
     if (nnResultIsSuccess(result)) {
         *request.out = cmd->words[1];
         result = cmd->words[0];

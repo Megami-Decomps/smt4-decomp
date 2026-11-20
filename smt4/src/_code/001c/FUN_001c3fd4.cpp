@@ -20,7 +20,7 @@ int FUN_0029bbc8(void);
 int partyFindActiveSlotById(...);
 int gameCounterAddSaturating(...);
 int FUN_0029bed8(...);
-int dispatchIfFound(...); // declcheck: local (romwright prototype; the shared declaration in code/Code0029.h does not compile here: more than one instance of overloaded function "FUN_0029c43c" has "C" linkage)
+int dispatchIfFound(...); // declcheck: local (romwright prototype; the shared declaration in code/Code0029.h does not compile here: more than one instance of overloaded function "messageBannerSetCountdown" has "C" linkage)
 int unitRecalculateEffectiveStats(...);
 int useCounterRelease(void);
 int eventQueueAddUnique(...);
@@ -28,7 +28,7 @@ int FUN_002e3378(...);
 int FUN_003ae34c(...);
 
 int scrRunOpcodesStub(...);
-int FUN_0026beb4(...);
+int btlMenuCursorStepReflectAction(...);
 int FUN_0026c214(void);
 int FUN_0026c464(...);
 int uniteLoadPreviewRoomModel(void);
@@ -37,7 +37,7 @@ int FUN_0028d1f4(...);
 int uiStoreTextureEntryCenter(...); // declcheck: local (romwright prototype; its types do not fit ui/UiTexturePlacement.h: including it fails to compile)
 int gameGlobalsSetSelected(...);
 int FUN_0029bd4c(void);
-int FUN_0029c43c(...);
+int messageBannerSetCountdown(...);
 int FUN_0029c4ac(...);
 int FUN_0029c4c8(...);
 int buttonHelpSetText(...);
@@ -57,7 +57,7 @@ int FUN_0026c9c0(void);
 int obj48Arm(...); // declcheck: local (romwright prototype; the shared declaration in code/Code0029_Smt4.h does not compile here: more than one instance of overloaded function "FUN_0029c4e4" has "C" linkage)
 int scrScriptProcessStartEntry(...);
 int FUN_00298d28(...);
-int FUN_0029a0cc(...);
+int btlBuildDemonSnapshotFromSaveRecord(...);
 int FUN_0029c4e4(...);
 int beginStatusPanelClose(void);
 int buttonHelpSetPreset(...);
@@ -84,10 +84,10 @@ int FUN_0029defc(...);
 int FUN_0029dfc0(...);
 int scrollOwnerSelectIndex(...);
 int objectPartRunUnlessLocked(...); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
-int FUN_0029efd8(...);
+int gridNavigationHandleConfirm(...);
 int gameGetUnitRecord(...);
 int eventQueueAddUniqueIfValid(...);
-int FUN_002c1658(...);
+int inputQueryButtonState(...);
 
 int FUN_0026cf4c(void);
 int FUN_0026d6a4(...);
@@ -96,7 +96,7 @@ unsigned int partyPanelPollSelectedStatusColor(void);
 int partyPanelSetState(...);
 int partyPanelRebuildTouchRegions(void);
 int objClearFlagPair(int);
-int FUN_002937e0(void);
+int partyPanelConfigureGridNavigation(void);
 int messageMainFinishWindow(void);
 int scrScriptProcessCreate(unsigned int, unsigned int);
 int FUN_0029acb0(void);
@@ -125,7 +125,7 @@ extern int FUN_002015a4(void);
 /* Supplied declaration required: FUN_0026b7c0. */
 /* Supplied declaration required: FUN_0026b9bc. */
 /* Supplied declaration required: partyPanelSortEntries. */
-/* Supplied declaration required: FUN_0026beb4. */
+/* Supplied declaration required: btlMenuCursorStepReflectAction. */
 /* Supplied declaration required: FUN_0026c214. */
 /* Supplied declaration required: FUN_0026c464. */
 /* Supplied declaration required: uniteLoadPreviewRoomModel. */
@@ -161,7 +161,7 @@ extern int flagValueRead(unsigned short);
 /* Supplied declaration required: partyPanelRebuildTouchRegions. */
 /* Supplied declaration required: slotPlacementAssignSlotAndPosition. */
 /* Supplied declaration required: objClearFlagPair. */
-/* Supplied declaration required: FUN_002937e0. */
+/* Supplied declaration required: partyPanelConfigureGridNavigation. */
 extern int FUN_0029563c(void);
 /* Supplied declaration required: uiStoreTextureEntryCenter. */
 /* Supplied declaration required: messageMainFinishWindow. */
@@ -170,7 +170,7 @@ extern int FUN_0029563c(void);
 extern int messageMainGetChoiceResult(void);
 extern int FUN_002987d8(int, unsigned short);
 /* Supplied declaration required: FUN_00298d28. */
-/* Supplied declaration required: FUN_0029a0cc. */
+/* Supplied declaration required: btlBuildDemonSnapshotFromSaveRecord. */
 /* Supplied declaration required: gameGlobalsSetSelected. */
 /* Supplied declaration required: FUN_0029acb0. */
 extern int FUN_0029ae44(void);
@@ -184,7 +184,7 @@ extern unsigned int FUN_0029c0c0(unsigned int, int);
 extern unsigned int partyFindFreeStockSlot(void);
 extern int messageMainTargetIsClear(void);
 extern int FUN_0029c40c(void);
-/* Supplied declaration required: FUN_0029c43c. */
+/* Supplied declaration required: messageBannerSetCountdown. */
 extern int FUN_0029c46c(void);
 extern int FUN_0029c48c(void);
 /* Supplied declaration required: FUN_0029c4ac. */
@@ -196,7 +196,7 @@ extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: statusPanelSetOpen. */
 /* Supplied declaration required: FUN_0029d8f4. */
 /* Supplied declaration required: menuSetModeAndResetTransitions. */
-extern unsigned int FUN_0029dde0(void);
+extern unsigned int fusionPlayerLevelCapGet(void);
 /* Supplied declaration required: FUN_0029defc. */
 extern int FUN_0029dfa8(void);
 /* Supplied declaration required: FUN_0029dfc0. */
@@ -213,9 +213,9 @@ extern int itemGetFlagBit1(unsigned short);
 /* Supplied declaration required: scrollListSetSelectionMarkChanged. */
 /* Supplied declaration required: buttonHelpSetText. */
 extern int listCursorGetRowIfUnblocked(int);
-/* Supplied declaration required: FUN_0029efd8. */
+/* Supplied declaration required: gridNavigationHandleConfirm. */
 /* Supplied declaration required: buttonHelpGetMode. */
-/* Supplied declaration required: FUN_002a0cc8. */
+/* Supplied declaration required: gameGlobalsSetSubScreenActive. */
 extern int sys43e188GetState(void);
 /* Supplied declaration required: gameGetUnitRecord. */
 /* Supplied declaration required: gameGetSlotTable. */
@@ -233,7 +233,7 @@ extern int ifTouchGetSelectionMode(void);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_002c1658. */
+/* Supplied declaration required: inputQueryButtonState. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002e3378. */
@@ -298,7 +298,7 @@ unsigned int FUN_001c3fd4(void)
   else {
     temp_v7 = 0;
   }
-  FUN_002a0cc8(temp_v7);
+  gameGlobalsSetSubScreenActive(temp_v7);
   temp_v6 = *(int *)(temp_v1 + 0x1c);
   if (((temp_v6 != 0 && temp_v6 != 0x15) && ((temp_v6 != 0x17 && temp_v6 != 0xb) && temp_v6 != 0xd)) &&
      ((*(char *)(temp_v1 + 0x43) == '\0' &&
@@ -370,7 +370,7 @@ joined_r0x001c43a0:
               temp_v6 = *(int *)(temp_v1 + 0xc);
             }
             if (temp_v22 && temp_v6 != 0) {
-              FUN_002937e0();
+              partyPanelConfigureGridNavigation();
               objClearFlagPair(temp_v1 + 0x940);
               objClearFlagPair(temp_v1 + 0xa08);
               if (*(int *)(temp_v1 + 0x20) != 1) {
@@ -517,7 +517,7 @@ joined_r0x001c43a0:
       else {
         FUN_002932d8(temp_v4);
       }
-      FUN_002937e0();
+      partyPanelConfigureGridNavigation();
       partyPanelSetState(3,1);
       temp_v7 = 0x100016f;
       eventQueueAddUniqueIfValid(temp_v7);
@@ -534,10 +534,10 @@ LAB_001c4748:
       }
       else {
         temp_v24 = temp_v4;
-        FUN_0029efd8(temp_v4,1);
+        gridNavigationHandleConfirm(temp_v4,1);
         if (temp_v24 == 0) {
           temp_v24 = 0;
-          FUN_002c1658(0,1);
+          inputQueryButtonState(0,1);
           if ((temp_v24 != 0) || ((temp_v6 == 6 && (3 >= (int)temp_v10)))) {
             temp_v6 = objectPartRunUnlessLocked(temp_v4);
             if (*(char *)(temp_v6 + temp_v1 + 0x678) != '\0') {
@@ -561,7 +561,7 @@ LAB_001c4748:
           }
           else {
             temp_v6 = 1;
-            FUN_002c1658();
+            inputQueryButtonState();
             if (temp_v6 != 0) {
               *(unsigned char *)(temp_v1 + 0x34) = 0;
               FUN_0029dfc0(0);
@@ -749,7 +749,7 @@ LAB_001c4748:
       else {
         FUN_002932d8(temp_v24);
       }
-      FUN_002937e0();
+      partyPanelConfigureGridNavigation();
       FUN_0029dfc0(0);
       partyPanelSetState(3,1);
       eventQueueAddUniqueIfValid(0x100016f);
@@ -764,7 +764,7 @@ LAB_001c4df0:
         goto LAB_001c5040;
       }
       temp_v11 = temp_v24;
-      FUN_0029efd8(temp_v24,1);
+      gridNavigationHandleConfirm(temp_v24,1);
       if (temp_v11 != 0) {
         if (*(char *)(temp_v1 + 0x42) != '\0') {
           temp_v11 = objectPartRunUnlessLocked();
@@ -783,7 +783,7 @@ LAB_001c4df0:
       }
       else {
         temp_v16 = 0;
-        FUN_002c1658(0,1);
+        inputQueryButtonState(0,1);
         if ((temp_v16 != 0) || ((temp_v6 == 6 && (0x17 >= temp_v10 - 4)))) {
           if (*(char *)(temp_v1 + 0x42) != '\0') {
             temp_v4 = objectPartRunUnlessLocked();
@@ -821,7 +821,7 @@ LAB_001c4df0:
         }
         else {
           temp_v6 = 1;
-          FUN_002c1658();
+          inputQueryButtonState();
           if (temp_v6 != 0) {
             if (*(char *)(temp_v1 + 0x66c) == '\x02' || *(char *)(temp_v1 + 0x66c) == '\x04') {
               if (-1 < *(char *)(*(int *)(temp_v1 + 0x670) + temp_v4 + 0x9107)) {
@@ -1126,7 +1126,7 @@ LAB_001c545c:
       else {
         FUN_002932d8(temp_v8);
       }
-      FUN_002937e0();
+      partyPanelConfigureGridNavigation();
       temp_v6 = listCursorGetRowIfUnblocked(temp_v8);
       if ((0 < temp_v6) && (*(char *)(temp_v1 + 0x66c) != '\v')) {
         FUN_0029dfc0(0);
@@ -1153,7 +1153,7 @@ LAB_001c659c:
       }
       else {
         temp_v16 = temp_v8;
-        FUN_0029efd8(temp_v8,1);
+        gridNavigationHandleConfirm(temp_v8,1);
         if (!(temp_v16 == 0 && !temp_v22)) {
           if (temp_v22) {
             temp_v6 = objectPartRunUnlessLocked(temp_v8);
@@ -1188,7 +1188,7 @@ LAB_001c659c:
           if (temp_v0 != '\f') {
             if (temp_v0 != '\r' && temp_v0 != '\x0e') {
               temp_v16 = 0;
-              FUN_002c1658(0,1);
+              inputQueryButtonState(0,1);
               if ((temp_v16 != 0) || ((temp_v6 == 6 && (temp_v10 < 0x1c)))) {
                 temp_v6 = listCursorGetRowIfUnblocked(temp_v8);
                 if (temp_v6 < 1) {
@@ -1219,13 +1219,13 @@ LAB_001c659c:
                                     temp_v6 = gameGetUnitRecord((int)*(char *)(temp_v4 + 0x9107));
                                     *(unsigned short *)(temp_v1 + 0x3c) = *(unsigned short *)(temp_v6 + 0x46);
                                     partyPanelSetState(0x16,1);
-                                    FUN_002a0cc8(1);
+                                    gameGlobalsSetSubScreenActive(1);
                                   }
                                   else {
                                     temp_v6 = gameGetUnitRecord((int)*(char *)(temp_v4 + 0x9107));
                                     *(unsigned short *)(temp_v1 + 0x3e) = *(unsigned short *)(temp_v6 + 0x46);
                                     *(short *)(temp_v1 + 0x40) = (short)*(char *)(temp_v4 + 0x9107);
-                                    FUN_002a0cc8(1);
+                                    gameGlobalsSetSubScreenActive(1);
                                     temp_v7 = 0x16;
                                     partyPanelSetState(temp_v7,1);
                                   }
@@ -1238,7 +1238,7 @@ LAB_001c659c:
                                   *(int *)(temp_v1 + 0x670) = temp_v6;
                                   temp_v6 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x14),0);
                                   if (temp_v6 != 0) {
-                                    FUN_002a0cc8(1);
+                                    gameGlobalsSetSubScreenActive(1);
                                     temp_v7 = 0x12;
                                     partyPanelSetState(temp_v7,1);
                                   }
@@ -1274,7 +1274,7 @@ LAB_001c659c:
                             }
                           }
                           else {
-                            FUN_002a0cc8(1);
+                            gameGlobalsSetSubScreenActive(1);
                             if (temp_v6 != 0) {
                               temp_v4 = temp_v4 + temp_v6;
                               temp_v6 = (int)*(short *)(temp_v1 + 0x38);
@@ -1317,7 +1317,7 @@ LAB_001c659c:
                           }
                         }
                         else {
-                          FUN_002a0cc8(1);
+                          gameGlobalsSetSubScreenActive(1);
                           if (temp_v6 != 0) {
                             temp_v4 = temp_v4 + temp_v6;
                             temp_v6 = (int)*(char *)(temp_v4 + 0x9107);
@@ -1360,7 +1360,7 @@ LAB_001c6598:
                               obj48Arm(*(unsigned int *)(temp_v1 + 0x6c8),0xff);
                               temp_v7 = gameGetPlayerData();
                               __aeabi_memcpy4(temp_v1 + 0x1160,temp_v7,0x8c);
-                              FUN_0029a0cc(temp_v1 + 0x1160);
+                              btlBuildDemonSnapshotFromSaveRecord(temp_v1 + 0x1160);
                               partyPanelSetState(0x13,1);
                               goto LAB_001c6598;
                             }
@@ -1459,14 +1459,14 @@ LAB_001c6598:
                                     temp_v6 = gameGetUnitRecord(*(unsigned int *)(temp_v6 + 0x738));
                                     *(unsigned short *)(temp_v1 + 0x3c) = *(unsigned short *)(temp_v6 + 0x46);
                                     partyPanelSetState(0x16,1);
-                                    FUN_002a0cc8(1);
+                                    gameGlobalsSetSubScreenActive(1);
                                   }
                                   else {
                                     temp_v4 = gameGetUnitRecord(*(unsigned int *)(temp_v6 + 0x738));
                                     *(unsigned short *)(temp_v1 + 0x3e) = *(unsigned short *)(temp_v4 + 0x46);
                                     *(short *)(temp_v1 + 0x40) = (short)*(unsigned int *)(temp_v6 + 0x738)
                                     ;
-                                    FUN_002a0cc8(1);
+                                    gameGlobalsSetSubScreenActive(1);
                                     temp_v7 = 0x16;
                                     partyPanelSetState(temp_v7,1);
                                   }
@@ -1479,7 +1479,7 @@ LAB_001c6598:
                                   *(int *)(temp_v1 + 0x674) = temp_v4;
                                   temp_v6 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x14),0);
                                   if (temp_v6 != 0) {
-                                    FUN_002a0cc8(1);
+                                    gameGlobalsSetSubScreenActive(1);
                                     temp_v7 = 0x12;
                                     partyPanelSetState(temp_v7,1);
                                   }
@@ -1495,7 +1495,7 @@ LAB_001c6598:
                             }
                           }
                           else {
-                            FUN_002a0cc8(1);
+                            gameGlobalsSetSubScreenActive(1);
                             temp_v4 = (int)*(short *)(temp_v1 + 0x38);
                             FUN_0026c654(temp_v4,*(unsigned int *)(temp_v6 + 0x738),
                                          *(unsigned short *)(temp_v1 + 0x36),1);
@@ -1517,7 +1517,7 @@ LAB_001c6598:
                           }
                         }
                         else {
-                          FUN_002a0cc8(1);
+                          gameGlobalsSetSubScreenActive(1);
                           temp_v4 = *(int *)(temp_v6 + 0x738);
                           FUN_0026c710(temp_v4,*(unsigned short *)(temp_v1 + 0x36),1);
                           if (temp_v4 == 0) {
@@ -1609,7 +1609,7 @@ LAB_001c6680:
             temp_v24 = gameFlagIsSet(0x401);
             if (temp_v24 != 0) {
               temp_v24 = 0;
-              FUN_002c1658(0,1);
+              inputQueryButtonState(0,1);
               if ((temp_v24 != 0) || ((temp_v6 == 6 && (temp_v10 < 0x1c)))) {
                 *(unsigned char *)(temp_v1 + 0x34) = 0;
                 *(unsigned short *)(temp_v1 + 0x6bc) = 1;
@@ -1620,7 +1620,7 @@ LAB_001c6680:
             }
           }
           temp_v24 = 1;
-          FUN_002c1658();
+          inputQueryButtonState();
           temp_v6 = g_partyPanel;
           temp_v0 = *(char *)(temp_v1 + 0x66c);
           if (temp_v24 != 0) {
@@ -1659,7 +1659,7 @@ LAB_001c6680:
                 buttonHelpSetPreset(0x5d);
                 messageMainFinishWindow();
                 FUN_0029dfc0(0);
-                FUN_002a0cc8(0);
+                gameGlobalsSetSubScreenActive(0);
                 *(unsigned char *)(temp_v1 + 0x66c) = 10;
                 *(unsigned char *)(temp_v1 + 0xb42) = 2;
                 *(unsigned int *)(temp_v1 + 0x20) = 0xb;
@@ -1816,10 +1816,10 @@ LAB_001c6680:
     } while (temp_v4 < 0x18);
     if (*(char *)(temp_v1 + 0x43) == '\0') {
       temp_v4 = 0;
-      FUN_002c1658(0,1);
+      inputQueryButtonState(0,1);
       if ((temp_v4 == 0) && (temp_v6 != 6)) {
         temp_v4 = 1;
-        FUN_002c1658();
+        inputQueryButtonState();
         temp_v6 = g_partyPanel;
         if (temp_v4 != 0) {
           *(unsigned char *)(temp_v1 + 0x34) = 0;
@@ -1840,7 +1840,7 @@ LAB_001c6f54:
 LAB_001c6f28:
               FUN_002932d8(0);
             }
-            FUN_002937e0();
+            partyPanelConfigureGridNavigation();
           }
           else {
 LAB_001c6eb8:
@@ -1848,10 +1848,10 @@ LAB_001c6eb8:
             if (temp_v6 == 0) {
               if ((*(char *)(g_partyPanel + 0x42) == '\0') && (*(int *)(g_partyPanel + 0x30) >= 2)) {
                 temp_v6 = 4;
-                FUN_002c1658(4,1);
+                inputQueryButtonState(4,1);
                 if (temp_v6 != 0) goto LAB_001c6f28;
                 temp_v6 = 3;
-                FUN_002c1658(3,1);
+                inputQueryButtonState(3,1);
                 if (temp_v6 != 0) goto LAB_001c6f54;
               }
               FUN_0026d6a4(1);
@@ -1877,13 +1877,13 @@ LAB_001c6eb8:
             else {
               FUN_0026c464((int)*(short *)(temp_v1 + 0x38),*(unsigned short *)(temp_v1 + 0x36),0);
               temp_v6 = FUN_0028d1f4(*(unsigned short *)(temp_v1 + 0x36));
-              FUN_0029c43c(-temp_v6,0);
+              messageBannerSetCountdown(-temp_v6,0);
               partyPanelSetState(0x11,1);
             }
             temp_v7 = 0x100016d;
           }
           else {
-            FUN_002a0cc8(1);
+            gameGlobalsSetSubScreenActive(1);
             temp_v6 = (int)*(short *)(temp_v1 + 0x38);
             FUN_0026c464(temp_v6,*(unsigned short *)(temp_v1 + 0x36),1);
             if (temp_v6 == 0) {
@@ -1903,7 +1903,7 @@ LAB_001c6d64:
           }
         }
         else {
-          FUN_002a0cc8(1);
+          gameGlobalsSetSubScreenActive(1);
           temp_v15 = (unsigned int)*(unsigned short *)(temp_v1 + 0x36);
           table08ApplyToParty(temp_v15,1);
           if (temp_v15 != 0) {
@@ -1950,7 +1950,7 @@ LAB_001c6d98:
         FUN_0029defc((int)*(short *)(temp_v1 + 0xb96),0);
         FUN_0029c4e4(temp_v1 + 0xb50,0);
         FUN_0029c4ac(0);
-        temp_v15 = FUN_0029dde0();
+        temp_v15 = fusionPlayerLevelCapGet();
         if (temp_v15 < *(unsigned char *)(temp_v1 + 0xb98)) {
           temp_v7 = 10;
         }
@@ -1978,11 +1978,11 @@ LAB_001c6d98:
       }
       else {
         temp_v6 = 0;
-        FUN_002c1658(0,1);
+        inputQueryButtonState(0,1);
         if (temp_v6 != 0) {
           temp_v15 = (*(unsigned int *)(temp_v1 + 0xb4c) & 0x1ffff) >> 2;
           nkmBaseGetRecord();
-          temp_v10 = FUN_0029dde0();
+          temp_v10 = fusionPlayerLevelCapGet();
           if (temp_v10 >= *(unsigned char *)(temp_v15 + 3)) {
             temp_v6 = 0;
             do {
@@ -2037,7 +2037,7 @@ joined_r0x001c7220:
           temp_v6 = FUN_0029c40c();
           if (temp_v6 == 0) {
             temp_v6 = 1;
-            FUN_002c1658();
+            inputQueryButtonState();
             if (temp_v6 != 0) {
               temp_v24 = 0;
               temp_v6 = *(int *)(temp_v1 + 0xb3c) - 1;
@@ -2157,7 +2157,7 @@ joined_r0x001c7220:
       if (*(int *)(g_partyPanel + 0x2c) == 1) {
         FUN_002932d8(g_partyPanel + 0x940);
 LAB_001c7700:
-        FUN_002937e0();
+        partyPanelConfigureGridNavigation();
         FUN_0029dfc0(0);
         partyPanelSetState(3,1);
         *(unsigned int *)(temp_v1 + 0x24) = 0xe;
@@ -2174,7 +2174,7 @@ LAB_001c7720:
       }
     }
     else {
-      FUN_0026beb4(0,0,0,0,1);
+      btlMenuCursorStepReflectAction(0,0,0,0,1);
       temp_v6 = 0;
       do {
         if ((-1 < *(int *)(temp_v1 + temp_v6 * 8 + 0x738)) &&
@@ -2202,7 +2202,7 @@ LAB_001c7720:
     temp_v6 = useCounterIsFinished();
     if (temp_v6 != 0) {
       useCounterRelease();
-      FUN_002a0cc8(0);
+      gameGlobalsSetSubScreenActive(0);
       if (*(char *)(temp_v1 + 0x66c) != '\x01') {
         FUN_0026c214();
       }
@@ -2408,9 +2408,9 @@ LAB_001c7c50:
     }
     break;
   case 0x13:
-    FUN_002a0cc8(1);
+    gameGlobalsSetSubScreenActive(1);
     if (*(int *)(temp_v1 + 0x18) >= 0xf) {
-      FUN_002a0cc8(0);
+      gameGlobalsSetSubScreenActive(0);
       if (*(char *)(temp_v1 + 0x66c) != '\t') {
         if (*(char *)(temp_v1 + 0x66c) == '\x06') {
           temp_v6 = FUN_002987d8((int)*(short *)(temp_v1 + 0x38),*(unsigned short *)(temp_v1 + 0x36));
@@ -2530,9 +2530,9 @@ LAB_001c7c50:
     }
     break;
   case 0x14:
-    FUN_002a0cc8(1);
+    gameGlobalsSetSubScreenActive(1);
     if (*(int *)(temp_v1 + 0x18) >= 0xf) {
-      FUN_002a0cc8(0);
+      gameGlobalsSetSubScreenActive(0);
       if (*(char *)(temp_v1 + 0x66c) != '\t') {
         if (*(char *)(temp_v1 + 0x66c) != '\x06') break;
         temp_v6 = FUN_002987d8((int)*(short *)(temp_v1 + 0x38),*(unsigned short *)(temp_v1 + 0x36));

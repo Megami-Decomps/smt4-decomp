@@ -12,7 +12,7 @@ int asdTMTexTableReleaseNode(int);
 int packageFileDisableByKindName(...);
 int uiSpriteScreenSetupForMode(int);
 int objectSetPosition(int);
-int FUN_003d44ac(...);
+int btlTalkBustUpApplyTexturePlacement(...);
 int VectorSignedToFloat(int, int);
 
 extern unsigned int g_aocSystem; /* 0x570280 */
@@ -25,7 +25,7 @@ extern int randRange(unsigned int);
 /* Supplied declaration required: packageFileDisableByKindName. */
 /* Supplied declaration required: uiSpriteScreenSetupForMode. */
 /* Supplied declaration required: objectSetPosition. */
-/* Supplied declaration required: FUN_003d44ac. */
+/* Supplied declaration required: btlTalkBustUpApplyTexturePlacement. */
 
 
 unsigned int FUN_002cd414(void)
@@ -223,7 +223,7 @@ unsigned int FUN_002cd414(void)
   else {
     temp_v1 = asdTMTexTableNodeIsLoaded(0x10,*(unsigned int *)(((int)g_btlTalkBustUp) + 0x2f8));
     if (temp_v1 != 0) {
-      FUN_003d44ac(temp_v0);
+      btlTalkBustUpApplyTexturePlacement(temp_v0);
       *(unsigned int *)(temp_v0 + 0x2e8) = 2;
       *(unsigned int *)(temp_v0 + 0x2ec) = 0;
       *(unsigned char *)(temp_v0 + 0x2f5) = 0;

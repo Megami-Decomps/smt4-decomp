@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern u8 FUN_00306d0e(void *handle, u8 index, u32 mode);
+extern u8 onlineHandleWatcherCheck(void *handle, u8 index, u32 mode);
 
 /* Clears `pending` once the source's handle reports ready. */
 void handleWatcherPoll(HandleWatcher *watcher)
@@ -14,7 +14,7 @@ void handleWatcherPoll(HandleWatcher *watcher)
         source = watcher->source;
         handle = source->handle;
         if (handle != NULL) {
-            watcher->pending = FUN_00306d0e(handle, source->index, 1) ^ 1;
+            watcher->pending = onlineHandleWatcherCheck(handle, source->index, 1) ^ 1;
         }
     }
 }

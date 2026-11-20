@@ -9,7 +9,7 @@ int memAlloc(...);
 int asdTextureRelease(...);
 int resourceListDestroy(...);
 int asdMemFree(...);
-int FUN_001abbc4(void);
+int effPartCreateFromSource(void);
 int refCountIncrement(...);
 int spriteGroupCreateFromFile(void);
 int handleBlockRefDrop(void);
@@ -21,7 +21,7 @@ int effPartClone(void);
 int effBehaviorCreate(unsigned int, unsigned int, unsigned int);
 int objectBufferFree(void);
 int rt_memclr(void);
-int FUN_0035105c(...);
+int geometryOwnerSetGeometry(...);
 int asdEffectTextureCreate(void);
 int VectorSignedToFloat(...);
 
@@ -49,7 +49,7 @@ typedef struct {
 /* Supplied declaration required: asdTextureRelease. */
 /* Supplied declaration required: resourceListDestroy. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_001abbc4. */
+/* Supplied declaration required: effPartCreateFromSource. */
 /* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: spriteGroupCreateFromFile. */
 /* Supplied declaration required: handleBlockRefDrop. */
@@ -63,7 +63,7 @@ extern unsigned int *resourceResolveDataPointer(fn_003510dc_arg0 *);
 /* Supplied declaration required: objectBufferFree. */
 extern unsigned int resourceResolveHeaderPointer(void);
 /* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: FUN_0035105c. */
+/* Supplied declaration required: geometryOwnerSetGeometry. */
 extern int textureCreateFromImage(unsigned int *);
 extern int sysGetTableWord(unsigned int);
 /* Supplied declaration required: asdEffectTextureCreate. */
@@ -108,7 +108,7 @@ unsigned int * FUN_003510dc(fn_003510dc_arg0 *param_1)
   if ((*puVar3 != 0) && (puVar4 = (unsigned int *)resourceResolveDataPointer(param_1), puVar4 != (unsigned int *)0x0)) {
     switch(param_1->field_0x1c) {
     case 1:
-      FUN_0035105c(puVar3,*(unsigned int *)(puVar3[0x13] + 8),1);
+      geometryOwnerSetGeometry(puVar3,*(unsigned int *)(puVar3[0x13] + 8),1);
       temp_v1 = textureCreateFromImage(puVar4);
       temp_v4 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v1 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3)
       ;
@@ -121,7 +121,7 @@ unsigned int * FUN_003510dc(fn_003510dc_arg0 *param_1)
       asdTextureRelease(temp_v1);
       break;
     case 2:
-      FUN_0035105c(puVar3,*(unsigned int *)(puVar3[0x13] + 8),2);
+      geometryOwnerSetGeometry(puVar3,*(unsigned int *)(puVar3[0x13] + 8),2);
       if (puVar3[0x11] != 0) {
         handleBlockRefDrop();
       }
@@ -129,7 +129,7 @@ unsigned int * FUN_003510dc(fn_003510dc_arg0 *param_1)
       puVar3[0x11] = (unsigned int)puVar4;
       break;
     case 4:
-      FUN_0035105c(puVar3,*(unsigned int *)(puVar3[0x13] + 8),4);
+      geometryOwnerSetGeometry(puVar3,*(unsigned int *)(puVar3[0x13] + 8),4);
       temp_v1 = sysGetTableWord(*puVar4 & 0xffff);
       temp_v4 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v1 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3)
       ;
@@ -203,7 +203,7 @@ unsigned int * FUN_003510dc(fn_003510dc_arg0 *param_1)
         memAlloc(0x10000,0x100,0,temp_v0 << 2,0x10,1);
         puVar3[0x10] = temp_v3;
         puVar3[0xf] = temp_v3;
-        FUN_001abbc4();
+        effPartCreateFromSource();
         temp_v3 = 1;
         *(unsigned int **)puVar3[0xf] = puVar4;
         if (temp_v0 >= 2) {
@@ -217,7 +217,7 @@ unsigned int * FUN_003510dc(fn_003510dc_arg0 *param_1)
       }
       break;
     case 7:
-      FUN_0035105c(puVar3,*(unsigned int *)(puVar3[0x13] + 8),7);
+      geometryOwnerSetGeometry(puVar3,*(unsigned int *)(puVar3[0x13] + 8),7);
       if (puVar3[0x12] != 0) {
         handleBlockUnref();
       }
@@ -225,7 +225,7 @@ unsigned int * FUN_003510dc(fn_003510dc_arg0 *param_1)
       puVar3[0x12] = (unsigned int)puVar4;
       break;
     case 9:
-      FUN_0035105c(puVar3,*(unsigned int *)(puVar3[0x13] + 8),9);
+      geometryOwnerSetGeometry(puVar3,*(unsigned int *)(puVar3[0x13] + 8),9);
       asdEffectTextureCreate();
       temp_v5 = (float)VectorSignedToFloat(puVar4[5],(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v4 = (float)VectorSignedToFloat(puVar4[6],(unsigned char)(in_fpscr >> 0x16) & 3);

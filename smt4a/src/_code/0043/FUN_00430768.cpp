@@ -4,7 +4,7 @@
 #include "nn/os/IpcStaticBuffer.h"
 
 extern "C" {
-extern u32 DAT_005c1fc8;
+extern u32 g_cecdUseLocalBackend;
 
 u32 FUN_00430768(u32 first, u32 second, s32 third, u32 fourth)
 {
@@ -15,7 +15,7 @@ u32 FUN_00430768(u32 first, u32 second, s32 third, u32 fourth)
     command->words[2] = fourth;
     command->words[3] = ipcMappedBufferDescriptor(third, 10);
     command->words[4] = second;
-    s32 result = nn::svc::SendSyncRequest(DAT_005c1fc8);
+    s32 result = nn::svc::SendSyncRequest(g_cecdUseLocalBackend);
     if ((s32)(result & 0x80000000) >= 0) {
         result = command->words[0];
     }

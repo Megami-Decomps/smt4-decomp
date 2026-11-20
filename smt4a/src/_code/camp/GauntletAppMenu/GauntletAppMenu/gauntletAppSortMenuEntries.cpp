@@ -1,53 +1,60 @@
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
 #include "event/2dEvent/2dEventTex.h"
+#include "shard/W6_W6Match6_SortMenu.h"
 
 extern "C" {
 extern GauntletAppMenuWork *g_gauntletAppMenu;
-u32 objectApplyIfUnblocked(const void *controller);
+u32 gridNavigationGetItemCount(const void *controller);
 void qsort(void *entries, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 void arraySortQsort(void *entries, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 itemCompareCategoryThenValue(const void *, const void *);
 s32 gauntletAppCompareCategoryAndValueDescending(const void *, const void *);
 s32 appComparePurchaseOrder(const void *, const void *);
 s32 entryRefCompareByKindLevelOrder(const void *, const void *);
-s32 FUN_00221a08(const void *, const void *);
-s32 FUN_002b2c44(const void *, const void *);
+s32 appCompareFlagsThenSortKey(const void *, const void *);
+s32 appCompareFlagsThenSortKeyDescending(const void *, const void *);
 s32 gauntletAppCompareBySortKeys(const void *, const void *);
 s32 gauntletAppCompareBySortKeysDescending(const void *, const void *);
 
-void gauntletAppSortMenuEntries()
+/* Sorts the menu's entries by the menu's sort preference: its key picks the comparison, bit 7 the order. */
+void gauntletAppSortMenuEntries(void)
 {
     GauntletAppMenuWork *menu = g_gauntletAppMenu;
-    struct SortSettings { u8 prefix[13]; u8 mode; };
-    const u8 &sortMode = static_cast<const SortSettings *>(reinterpret_cast<const void *>(saveGetUserSettingsBlock()))->mode;
-    u8 ascending = (sortMode & 0x80) == 0;
-    if ((sortMode & 0x7f) == 0x21) {
+    const u8 *preference = &saveGetUserSettingsBlock()[GAUNTLET_APP_SORT_PREFERENCE];
+    u8 ascending = (*preference & SORT_PREFERENCE_DESCENDING) == 0;
+
+    /* Key 0x21: item category, then value. */
+    if ((*preference & SORT_PREFERENCE_KEY_MASK) == 0x21) {
         if (ascending != 0) {
-            qsort(menu->list.entries, objectApplyIfUnblocked(menu->list.controller), 4, itemCompareCategoryThenValue);
+            qsort(menu->list.entries, gridNavigationGetItemCount(menu->list.controller), 4, itemCompareCategoryThenValue);
         } else {
-            qsort(menu->list.entries, objectApplyIfUnblocked(menu->list.controller), 4, gauntletAppCompareCategoryAndValueDescending);
+            qsort(menu->list.entries, gridNavigationGetItemCount(menu->list.controller), 4, gauntletAppCompareCategoryAndValueDescending);
         }
     }
-    if ((sortMode & 0x7f) == 0x15) {
+    /* Key 0x15: purchasable first, then the record order. */
+    if ((*preference & SORT_PREFERENCE_KEY_MASK) == 0x15) {
         if (ascending != 0) {
-            qsort(menu->list.entries, objectApplyIfUnblocked(menu->list.controller), 4, appComparePurchaseOrder);
+            qsort(menu->list.entries, gridNavigationGetItemCount(menu->list.controller), 4, appComparePurchaseOrder);
         } else {
-            qsort(menu->list.entries, objectApplyIfUnblocked(menu->list.controller), 4, entryRefCompareByKindLevelOrder);
+            qsort(menu->list.entries, gridNavigationGetItemCount(menu->list.controller), 4, entryRefCompareByKindLevelOrder);
         }
     }
-    if ((sortMode & 0x7f) == 0x16) {
+    /* Key 0x16: flagged entries first, then the record's sort key. */
+    if ((*preference & SORT_PREFERENCE_KEY_MASK) == 0x16) {
         if (ascending != 0) {
-            qsort(menu->list.entries, objectApplyIfUnblocked(menu->list.controller), 4, FUN_00221a08);
+            qsort(menu->list.entries, gridNavigationGetItemCount(menu->list.controller), 4, appCompareFlagsThenSortKey);
         } else {
-            qsort(menu->list.entries, objectApplyIfUnblocked(menu->list.controller), 4, FUN_002b2c44);
+            qsort(menu->list.entries, gridNavigationGetItemCount(menu->list.controller), 4, appCompareFlagsThenSortKeyDescending);
         }
     }
-    if ((sortMode & 0x7f) == 3) {
+    /* Key 3: the record's primary, then secondary key. */
+    if ((*preference & SORT_PREFERENCE_KEY_MASK) == 3) {
         if (ascending != 0) {
-            arraySortQsort(menu->list.entries, objectApplyIfUnblocked(menu->list.controller), 4, gauntletAppCompareBySortKeys);
+            arraySortQsort(menu->list.entries, gridNavigationGetItemCount(menu->list.controller), 4, gauntletAppCompareBySortKeys);
         } else {
-            arraySortQsort(menu->list.entries, objectApplyIfUnblocked(menu->list.controller), 4, gauntletAppCompareBySortKeysDescending);
+            arraySortQsort(menu->list.entries, gridNavigationGetItemCount(menu->list.controller), 4, gauntletAppCompareBySortKeysDescending);
         }
     }
 }
-}
+
+} /* extern "C" */

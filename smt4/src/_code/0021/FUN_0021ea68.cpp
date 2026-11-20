@@ -5,8 +5,8 @@
 extern "C" {
 s32 frameTextureGetState(void);
 void slotSetRequest(u32 slot, u32 duration, u32 color);
-u32 FUN_002b89a4(s32 slot);
-s32 FUN_002c1d5c(void);
+u32 screenFaderIsSettled(s32 slot);
+s32 eventIsSkipping(void);
 void titleRestartSlotState3(s32 slot, u32 color);
 
 // Start the requested black/white fade on the active screens, then wait or finish it immediately.
@@ -28,13 +28,13 @@ u32 FUN_0021ea68(void)
         }
     } else {
         if (frameTextureGetState() != 0) {
-            if (FUN_002b89a4(1))
+            if (screenFaderIsSettled(1))
                 return 1;
         } else {
-            if (FUN_002b89a4(0) && FUN_002b89a4(1))
+            if (screenFaderIsSettled(0) && screenFaderIsSettled(1))
                 return 1;
         }
-        if (FUN_002c1d5c()) {
+        if (eventIsSkipping()) {
             s32 mode = scrGetArg(0);
             if (mode == 0) {
                 if (frameTextureGetState() == 0)

@@ -2,16 +2,16 @@
 
 extern "C" {
 
-u8 FUN_003d3738(void);
+u8 spriteWindowAdvanceOrCancel(void);
 int sWinHasValue(void);
 int scrGetCommandFrame(void);
 void taskWindowRelease(int arg);
 
-/* Runs FUN_003d3738 if scrGetCommandFrame reports 0; returns true (after calling taskWindowRelease) when sWinHasValue reports 0. */
+/* Runs spriteWindowAdvanceOrCancel if scrGetCommandFrame reports 0; returns true (after calling taskWindowRelease) when sWinHasValue reports 0. */
 bool scrCommPollWindowAndReleaseTask(void)
 {
     if (scrGetCommandFrame() == 0) {
-        FUN_003d3738();
+        spriteWindowAdvanceOrCancel();
     }
     int result = sWinHasValue();
     if (result == 0) {

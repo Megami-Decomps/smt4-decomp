@@ -1,6 +1,6 @@
 /* NON_MATCHING: the mode change and the sprite wait agree with retail. Retail clears the transition's two integer words
  * with one stm of two zero registers (mov r2, r1): that is armcc's 64-bit zero store, so the words are one 64-bit value
- * (an 8-aligned u64 view of them reproduces it here and makes FUN_0041e3a0 IDENTICAL), but 0x6ec is only 4-aligned in
+ * (an 8-aligned u64 view of them reproduces it here and makes spriteListMenuResetSprites IDENTICAL), but 0x6ec is only 4-aligned in
  * this record, so a plain u64 member cannot sit there until the record's real base is known; this build stores them with
  * two str. Retail also loads the keyframe 5 after the sprite's address. */
 #include "shard/SaveSlotHeaderWork.h"

@@ -1,7 +1,7 @@
 #include "battle/btlGameOver.h"
 
 extern "C" {
-extern BtlGameOverSequence *DAT_0057f678;
+extern BtlGameOverSequence *g_gameOverJobRecord;
 s32 jobIsValid(u32 job);
 s32 FUN_004cef24(BtlGameOverSequence *sequence);
 u32 btlGameOverRunEyeSequence(BtlGameOverSequence *sequence);
@@ -9,7 +9,7 @@ u32 btlGameOverRunEyeSequence(BtlGameOverSequence *sequence);
 /* Dispatches the game-over sequence and reports completion after its owner job stops. */
 s32 btlGameOverPollSequence(u32 job)
 {
-    BtlGameOverSequence *sequence = DAT_0057f678;
+    BtlGameOverSequence *sequence = g_gameOverJobRecord;
     if (sequence == NULL) {
         return 0;
     }

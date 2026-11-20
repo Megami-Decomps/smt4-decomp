@@ -3,12 +3,12 @@
 extern "C" {
 
 void sharedRefRelease(void);
-void FUN_002eb5f4(void);
+void watcherGetActiveContext(void);
 
-/* Runs FUN_002eb5f4, then sharedRefRelease. */
+/* Runs watcherGetActiveContext, then sharedRefRelease. */
 void FUN_002f4364(void)
 {
-    FUN_002eb5f4();
+    watcherGetActiveContext();
     sharedRefRelease();
 }
 

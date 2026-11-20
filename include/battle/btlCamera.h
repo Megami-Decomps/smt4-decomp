@@ -27,13 +27,13 @@ typedef struct BtlCameraPose {
     /* 0x40 */ f32 fov;
 } BtlCameraPose;
 
-/* A screen-shake generator (20 bytes; FUN_00257e74 steps it, pairSourceGet reads its offset). */
+/* A screen-shake generator (20 bytes; effShakeParticleAdvance steps it, pairSourceGet reads its offset). */
 typedef struct BtlCameraShake {
     /* 0x00 */ u32 words[5];
 } BtlCameraShake;
 
 /* The battle camera's work block (Shin Megami Tensei IV; g_btlMain at 0x4342c8 points at it, 0x848 bytes).
- * Every channel is a value the per-frame update (btlCameraUpdate) recomputes from a curve (FUN_00227280(mode,
+ * Every channel is a value the per-frame update (btlCameraUpdate) recomputes from a curve (easeEvaluate(mode,
  * duration, frame)) while its bit of `flags` is set, and then adds to the pose. The current pose (0x568-0x5AC)
  * has BtlCameraPose's layout. */
 typedef struct BtlCamera {

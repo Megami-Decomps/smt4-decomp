@@ -19,12 +19,12 @@ extern "C" {
 
 s32 scrGetArg(u32 index);
 
-// Script command: set a job's fade rates from a step count (clamped to 4 while FUN_00203d74 reports true).
+// Script command: set a job's fade rates from a step count (clamped to 4 while inputFastForwardActive reports true).
 u32 FUN_002e5478(void)
 {
     u32 job = scrGetArg(0);
     s32 steps = scrGetArg(1);
-    if (FUN_00203d74() != 0 && steps > 4) {
+    if (inputFastForwardActive() != 0 && steps > 4) {
         steps = 4;
     }
     FadeJob *work = (FadeJob *)jobGetWork(job);

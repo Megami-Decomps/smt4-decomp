@@ -91,7 +91,7 @@ void qcNpcSelectStep(DummyAttachmentWork *work)
         if (work->selected != NULL) {
             if (!selectedNpcIsFinished(work))
                 return;
-            FUN_00210194(selectedNpcModel(work), 0.0f);
+            modelOwnerApplyAnimationTime(selectedNpcModel(work), 0.0f);
             animOwnerSetScale(selectedNpcModel(work), 0.0f);
             FUN_002e1230(selectedNpcAnim(work), 0);
             work->selected = NULL;
@@ -118,7 +118,7 @@ void qcNpcSelectStep(DummyAttachmentWork *work)
             work->step = 0;
             return;
         }
-        FUN_00290d5c(0xa0);
+        buttonHelpWorkSetPreset(0xa0);
         scrScriptProcessStartMappedEntry(work, "qc_NpcSelect");
         messageMainRequestBanner();
         break;
@@ -175,7 +175,7 @@ void qcNpcSelectStep(DummyAttachmentWork *work)
             return;
         if (!selectedNpcIsFinished(work))
             return;
-        FUN_00210194(selectedNpcModel(work), work->unkD44);
+        modelOwnerApplyAnimationTime(selectedNpcModel(work), work->unkD44);
         animOwnerSetScale(selectedNpcModel(work), 0.0f);
         FUN_002e1230(selectedNpcAnim(work), 0);
         work->npcScript = scrScriptProcessCreate((void *)work->npcScriptFile, (void *)work->npcMessageFile);

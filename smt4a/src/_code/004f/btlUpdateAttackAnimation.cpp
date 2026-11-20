@@ -47,7 +47,7 @@ u32 state2CIs4(AnimationVisualState *);
 f32 animationGetModeChannelValue(AnimationVisualState *);
 void FUN_00420f08(AnimationVisualState *);
 s32 FUN_004f5238(BtlAuxA *, u32, u32, s32, s32, u32, s32, u32, u32, f32, f32);
-void FUN_004f6254(BtlAuxA *, s32, s32);
+void actionSequenceTriggerRangeAnimation(BtlAuxA *, s32, s32);
 void FUN_004fa414(BtlAuxA *);
 u32 btlQueueActionMessage(s16, u32, u32, s32, s32, s32, s32);
 
@@ -80,7 +80,7 @@ void btlUpdateAttackAnimation(BtlAuxA *battle)
             FUN_004f5238(battle, step->target->index, step->target->index, 6, 0, 3, 0, 1, 0,
                          (f32)resource->x, (f32)resource->y);
         }
-        FUN_004f6254(battle, frame, 2);
+        actionSequenceTriggerRangeAnimation(battle, frame, 2);
         step->previousFrame = (s16)(s32)animationGetModeChannelValue(step->animation);
     }
     if (!state2CIs4(step->animation) || (step->flags & 0x1000)) {

@@ -5,15 +5,15 @@ extern "C" {
 u32 screenFadeSlotReset(s32 mode);
 s32 scrGetArg(u32 index);
 u32 titleSetSlotValueState2(s32 channel, s32 duration);
-s32 FUN_00162ea4(void);
-s32 FUN_00203d74(void);
+s32 eventIsSkipping(void);
+s32 inputFastForwardActive(void);
 s32 scrGetCommandFrame(void);
 
 // Start the requested channel transition on entry and wait for it to become idle.
 u32 FUN_00314c8c(void)
 {
     s32 duration = scrGetArg(1);
-    if (FUN_00203d74() != 0 && duration > 4) {
+    if (inputFastForwardActive() != 0 && duration > 4) {
         duration = 4;
     }
     if (scrGetCommandFrame() == 0) {
@@ -23,10 +23,10 @@ u32 FUN_00314c8c(void)
         }
         titleSetSlotValueState2(0, duration);
     } else {
-        if (FUN_00163e84(0) != 0) {
+        if (screenFaderIsSettled(0) != 0) {
             return 1;
         }
-        if (FUN_00162ea4() != 0) {
+        if (eventIsSkipping() != 0) {
             screenFadeSlotReset(0);
         }
     }

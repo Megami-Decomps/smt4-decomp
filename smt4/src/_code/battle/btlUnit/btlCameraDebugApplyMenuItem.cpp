@@ -9,8 +9,8 @@ typedef struct OptionScreen {
     /* 0x10 */ u32 listBox;
 } OptionScreen;
 
-extern f32 DAT_004342cc;     /* 0x4342cc */
-extern f32 DAT_004342d0;     /* 0x4342d0 */
+extern f32 g_btlCameraDebugOffset;     /* 0x4342cc */
+extern f32 g_btlCameraDebugUpDown;     /* 0x4342d0 */
 
 extern void transitionResetPosition(BtlCamera *state);
 
@@ -48,10 +48,10 @@ void btlCameraDebugApplyMenuItem(OptionScreen *screen, u32 unused, u32 item)
         }
         return;
     case 3:
-        DAT_004342cc = *optionFloatValue(screen->listBox, item);
+        g_btlCameraDebugOffset = *optionFloatValue(screen->listBox, item);
         break;
     case 4:
-        DAT_004342d0 = *optionFloatValue(screen->listBox, item);
+        g_btlCameraDebugUpDown = *optionFloatValue(screen->listBox, item);
         break;
     case 5:
         g_btlMain->cameraPosition[0] = *optionFloatValue(screen->listBox, item);

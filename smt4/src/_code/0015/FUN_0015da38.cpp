@@ -15,7 +15,7 @@ extern int nw_snd_internal_driver_Voice_SdkVoiceDropCallbackFuncMulti(...); /* 0
 /* Unsupported intrinsic, declaration required: UnsignedSaturate (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: UnsignedDoesSaturate (CALLOTHER). */
 extern unsigned int nw_snd_internal_driver_VoiceManager_GetInstance(void);
-extern int FUN_002bd29c(unsigned int, romwright_code *, int *);
+extern int nwSoundVoiceAllocate(unsigned int, romwright_code *, int *); // declcheck: local (the shared declaration does not compile here or changes this unit)
 /* Supplied declaration required: sndVoiceFree. */
 extern int nw_snd_internal_driver_VoiceManager_DropLowestPriorityVoice(unsigned int, unsigned int);
 
@@ -49,7 +49,7 @@ unsigned int FUN_0015da38(int *param_1,int param_2,unsigned int param_3,int para
     if (0 < unaff_r7) {
 LAB_0015da90:
       do {
-        temp_v1 = FUN_002bd29c(temp_v0,nw_snd_internal_driver_Voice_SdkVoiceDropCallbackFuncMulti,
+        temp_v1 = nwSoundVoiceAllocate(temp_v0,nw_snd_internal_driver_Voice_SdkVoiceDropCallbackFuncMulti,
                              param_1);
         if (temp_v1 == 0) {
           temp_v2 = nw_snd_internal_driver_VoiceManager_GetInstance();
@@ -99,7 +99,7 @@ LAB_0015db58:
     }
   }
   else {
-    temp_v4 = FUN_002bd29c(temp_v0,nw_snd_internal_driver_Voice_SdkVoiceDropCallbackFunc,param_1);
+    temp_v4 = nwSoundVoiceAllocate(temp_v0,nw_snd_internal_driver_Voice_SdkVoiceDropCallbackFunc,param_1);
     if (temp_v4 != 0) {
       *param_1 = temp_v4;
       param_1[2] = 1;

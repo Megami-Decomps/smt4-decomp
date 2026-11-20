@@ -17,16 +17,16 @@ typedef char ScrollPageOwnerOffsetsCheck[
 
 extern "C" {
 s32 resourceRunOperationIfUnblocked(ScrollList *list);
-s32 FUN_00228b04(ScrollList *list, s32 wrap);
-s32 objectApplyIfUnblocked(ScrollList *list);
+s32 gridNavigationHandleConfirm(ScrollList *list, s32 wrap);
+s32 gridNavigationGetItemCount(ScrollList *list);
 void eventQueueAddUniqueIfValid(u32 event);
 
 // Advance a page without stopping on an unchanged scroll position or a partial page.
 void FUN_003f6f68(ScrollPageOwner *owner, s32 pageSize)
 {
     s32 oldTop = resourceRunOperationIfUnblocked(&owner->list);
-    if (FUN_00228b04(&owner->list, 0) != 0) {
-        if (objectApplyIfUnblocked(&owner->list) > pageSize) {
+    if (gridNavigationHandleConfirm(&owner->list, 0) != 0) {
+        if (gridNavigationGetItemCount(&owner->list) > pageSize) {
             resourceRunOperationIfUnblocked(&owner->list);
             if (listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&owner->list)) != pageSize - 1 && listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&owner->list)) != 0) {
                 eventQueueAddUniqueIfValid(0x100020D);
@@ -36,11 +36,11 @@ void FUN_003f6f68(ScrollPageOwner *owner, s32 pageSize)
                      (resourceRunOperationIfUnblocked(&owner->list) != 0 || listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&owner->list)) != 0);
                  top = resourceRunOperationIfUnblocked(&owner->list)) {
                 top = resourceRunOperationIfUnblocked(&owner->list);
-                s32 count = objectApplyIfUnblocked(&owner->list);
+                s32 count = gridNavigationGetItemCount(&owner->list);
                 if (top == count - pageSize && listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&owner->list)) == pageSize - 1) {
                     break;
                 }
-                FUN_00228b04(&owner->list, 0);
+                gridNavigationHandleConfirm(&owner->list, 0);
             }
         }
         owner->savedTop = resourceRunOperationIfUnblocked(&owner->list);

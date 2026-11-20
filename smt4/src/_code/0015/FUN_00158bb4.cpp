@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0015c81c(int *, int *);
 int threadSleepDuration(unsigned char *, int);
-int FUN_002c40f8(unsigned char *, int *, int, int);
-int FUN_002c5254(int *, int, int);
+int svcWaitSynchronizationN(unsigned char *, int *, int, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
+int svcReleaseSemaphore(int *, int, int);
 int resultHandleFailure(void);
 
 typedef int romwright_code(...);
@@ -20,8 +20,8 @@ extern unsigned char LAB_002dc6c0; /* 0x2dc6c0 */
 
 /* Supplied declaration required: FUN_0015c81c. */
 /* Supplied declaration required: threadSleepDuration. */
-/* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c5254. */
+/* Supplied declaration required: svcWaitSynchronizationN. */
+/* Supplied declaration required: svcReleaseSemaphore. */
 /* Supplied declaration required: resultHandleFailure. */
 
 
@@ -45,13 +45,13 @@ void FUN_00158bb4(int *param_1)
       temp_v1 = 0xffffffff;
       uStack_24 = 0xffffffff;
       puVar1 = temp_v2;
-      FUN_002c40f8(puVar1,&iStack_20,1,0);
+      svcWaitSynchronizationN(puVar1,&iStack_20,1,0);
       if ((int)puVar1 < 0) {
         resultHandleFailure();
       }
       temp_v0 = *param_1;
       puVar3 = (unsigned int *)&temp_v1;
-      FUN_002c5254(&temp_v1,*piVar4,1);
+      svcReleaseSemaphore(&temp_v1,*piVar4,1);
       if ((int)puVar3 < 0) {
         resultHandleFailure();
       }
@@ -60,7 +60,7 @@ void FUN_00158bb4(int *param_1)
       temp_v1 = 0xffffffff;
       uStack_24 = 0xffffffff;
       puVar1 = temp_v2;
-      FUN_002c40f8(puVar1,&iStack_20,1,0);
+      svcWaitSynchronizationN(puVar1,&iStack_20,1,0);
       if ((int)puVar1 < 0) {
         resultHandleFailure();
       }
@@ -73,7 +73,7 @@ void FUN_00158bb4(int *param_1)
         }
       }
       puVar3 = (unsigned int *)&temp_v1;
-      FUN_002c5254(&temp_v1,*piVar4,1);
+      svcReleaseSemaphore(&temp_v1,*piVar4,1);
       if ((int)puVar3 < 0) {
         resultHandleFailure();
       }

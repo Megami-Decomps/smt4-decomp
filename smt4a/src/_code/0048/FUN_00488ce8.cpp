@@ -8,7 +8,7 @@ extern "C" {
 int uiSpriteSetKeyframe(...);
 
 int sysPlaySe(...);
-int FUN_00183e58(void);
+int buttonHelpTeardownSlots(void);
 int padGetNormalizedAnalogStick(...);
 int naviRequestSelectedMap(void);
 int FUN_003a35a4(void);
@@ -76,7 +76,7 @@ static float romwright_fabs_4(float value)
 #endif
 extern int FUN_00167c0c(unsigned int **, int *);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00183e58. */
+/* Supplied declaration required: buttonHelpTeardownSlots. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: naviRequestSelectedMap. */
@@ -99,7 +99,7 @@ extern int FUN_004d04c4(void);
 extern int inputIsQuestCancelPressed(void);
 extern int inputIsQuestConfirmPressed(void);
 extern int inputIsQuestMenuPressed(void);
-extern int FUN_004d0584(void);
+extern int inputConfirmPressed(void);
 /* Supplied declaration required: NaviMain_GetCurrentMap. */
 
 
@@ -330,7 +330,7 @@ unsigned int FUN_00488ce8(int param_1)
           }
         }
         else {
-          temp_v1 = FUN_004d0584();
+          temp_v1 = inputConfirmPressed();
           if (temp_v1 != 0) {
             sysPlayVoice(0x100020e);
             piVar9 = (int *)(temp_v0 + 0x1514);
@@ -344,11 +344,11 @@ unsigned int FUN_00488ce8(int param_1)
               if (*piVar9 != 1) {
                 return 0;
               }
-              FUN_00183e58();
+              buttonHelpTeardownSlots();
               temp_v7 = 0xf6;
             }
             else {
-              FUN_00183e58();
+              buttonHelpTeardownSlots();
               temp_v7 = 0x10a;
             }
             sysPlaySe(temp_v7);

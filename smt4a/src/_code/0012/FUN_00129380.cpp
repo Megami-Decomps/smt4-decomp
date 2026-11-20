@@ -11,7 +11,7 @@ typedef struct {
 
 extern u8 DAT_0055909c;
 
-u8 *FUN_002eb624(u8 *subObject);
+u8 *deletingDtor_002eb624(u8 *subObject);
 u8 *FUN_002f8760(u8 *member);
 
 MemberOwner *FUN_00129380(MemberOwner *self)
@@ -20,7 +20,7 @@ MemberOwner *FUN_00129380(MemberOwner *self)
 
     self->vtbl = &DAT_0055909c;
     subObject = FUN_002f8760(self->member) - 0x30;
-    return (MemberOwner *)(FUN_002eb624(subObject) - 4);
+    return (MemberOwner *)(deletingDtor_002eb624(subObject) - 4);
 }
 
 } /* extern "C" */

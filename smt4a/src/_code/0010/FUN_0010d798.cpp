@@ -12,7 +12,7 @@ int _ZN9Obj55aff4C1ERKS_(...);
 int _ZN9Obj55aff4C1Ev(...);
 int FUN_002ea2e8(...);
 int FUN_002ea3a8(...);
-int FUN_002ec70c(...);
+int deletingDtor_002ec70c(...);
 int destroyObj0055ae64(...);
 int strDestroy(...);
 int FUN_002ee818(...);
@@ -50,7 +50,7 @@ extern unsigned char LAB_0010da30; /* 0x10da30 */
 extern unsigned int _ZN9Obj55aff4C1EPKc(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002ea2e8. */
 /* Supplied declaration required: FUN_002ea3a8. */
-/* Supplied declaration required: FUN_002ec70c. */
+/* Supplied declaration required: deletingDtor_002ec70c. */
 /* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ee818. */
@@ -109,7 +109,7 @@ void FUN_0010d798(int param_1)
   destroyObj0055ae64(temp_v8);
   FUN_002f7af2(temp_v6,param_1 + 0x7c,temp_v11);
   _ZN9Obj55aff4D1Ev(temp_v7);
-  FUN_002ec70c(temp_v6);
+  deletingDtor_002ec70c(temp_v6);
   strInit(temp_v12);
   FUN_002f7a28(temp_v6);
   _ZN9Obj55aff4C1ERKS_(temp_v9);
@@ -123,7 +123,7 @@ void FUN_0010d798(int param_1)
   destroyObj0055ae64(temp_v7);
   FUN_002f7af2(temp_v6,param_1 + 0x7c,temp_v12);
   _ZN9Obj55aff4D1Ev(temp_v9);
-  FUN_002ec70c(temp_v6);
+  deletingDtor_002ec70c(temp_v6);
   _ZN9Obj55aff4C1Ev(temp_v17);
   onlineFormatWideString(temp_v17,&LAB_0010d9f0,*(unsigned int *)(param_1 + 0x128));
   temp_v2 = _ZN9Obj55aff4C1EPKc(temp_v16,&LAB_0010d9f8);

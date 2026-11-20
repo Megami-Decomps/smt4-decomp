@@ -4,7 +4,7 @@
 
 extern "C" {
 void *libc_bsearch(const void *, const void *, u32, u32, s32 (*)(const void *, const void *));
-s32 FUN_00476dfc(const void *, const void *);
+s32 compareU16KeyAscending(const void *, const void *);
 s32 asdFsIsSdCardDetected(void);
 u32 objGetFlagBit16(void *);
 
@@ -19,7 +19,7 @@ u32 FUN_00471f64(AocSystemA *system, s16 id)
     AocTableSearchRecordA key;
     key.id = id;
     AocTableSearchRecordA *record = searchAocRecords(&key, system->table1bRecords, g_aocSystem->table1bCount,
-                                         FUN_00476dfc);
+                                         compareU16KeyAscending);
     if (record == NULL) {
         return 1;
     }

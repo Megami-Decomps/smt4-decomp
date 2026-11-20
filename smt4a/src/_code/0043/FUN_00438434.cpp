@@ -123,7 +123,7 @@ s32 FUN_00438434(PatternGraph *graph, PatternGroup **out, PatternSource **source
                 }
                 token = reinterpret_cast<u32>(created);
             }
-            if (FUN_005153f0(reinterpret_cast<Variant *>(&child->memberFirst),
+            if (variantCopyWithToken(reinterpret_cast<Variant *>(&child->memberFirst),
                 reinterpret_cast<const Variant *>(&member->source), &token, graph->memberPool) == 0) {
                 return 0;
             }

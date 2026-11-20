@@ -69,7 +69,7 @@ typedef struct ObjB {
     /* 0x1380 */ u8 unk1380[0x1];
     /* 0x1381 */ s8 unk1381;
     /* 0x1382 */ u8 unk1382;
-    /* 0x1383 */ u8 selectionWasEight; /* FUN_002c85b0 stored 8 as 3 */
+    /* 0x1383 */ u8 selectionWasEight; /* gameGlobalsSetSceneState stored 8 as 3 */
     /* 0x1384 */ u8 unk1384;
     /* 0x1385 */ u8 unk1385[0x7];
     /* 0x138C */ s16 unk138C;

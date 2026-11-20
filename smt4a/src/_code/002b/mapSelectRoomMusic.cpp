@@ -57,7 +57,7 @@ void mapSelectRoomMusic(void)
         g_gameState.bgmReleased = 1;
         return;
     }
-    if (FUN_002b950c() == 0) {
+    if (soundActorQueueIsEnabled() == 0) {
         mapAmbientSoundActorsSpawn(map->area, map->sub);
     } else if (map->mode != 23 && map->mode != 24) {
         soundActorQueueStartPending();

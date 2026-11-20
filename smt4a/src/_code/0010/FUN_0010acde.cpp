@@ -38,7 +38,7 @@ typedef struct {
 /* Supplied declaration required: sharedRefRelease. */
 extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002eb310. */
-extern int FUN_002eb5f4(void);
+extern int watcherGetActiveContext(void);
 /* Supplied declaration required: wordMoveOut_002f1324. */
 /* Supplied declaration required: FUN_002f3df8. */
 extern int wordRefsDiffer_002f3e5a(int *, unsigned int *);
@@ -97,9 +97,9 @@ void FUN_0010acde(int param_1,int param_2,int param_3)
         temp_v3 = *(int *)(temp_v14 + 0x14) - 1;
         *(int *)(temp_v14 + 0x14) = temp_v3;
         if (temp_v3 == 0) {
-          temp_v3 = FUN_002eb5f4();
+          temp_v3 = watcherGetActiveContext();
           _ZN9Obj55b28cC1EPv(temp_v13,temp_v3 + 0x358);
-          temp_v3 = FUN_002eb5f4();
+          temp_v3 = watcherGetActiveContext();
           FUN_002eb310(temp_v3 + 0x34c,&temp_v5);
           FUN_002f3edc(&temp_v8,param_3,&temp_v5);
           temp_v7 = temp_v8;

@@ -7,9 +7,9 @@ extern "C" {
 extern const char g_effPolygonRingSourceFileName[]; /* effPolygonRing.cpp: __FILE__ */
 
 void *memAlloc(int, int, int, int size, int align, int);
-PolyGeom *FUN_0024505c(u32 segments, u8 *table, int w, int tableSize);
+PolyGeom *effGeomBuildGridMesh(u32 segments, u8 *table, int w, int tableSize);
 
-extern u8 DAT_00473708;
+extern u8 g_effPolyGeomIndexTable;
 
 /* Builds the geometry of a ring polygon effect (at least 3 segments) and colors every quad's
  * vertices from the parameter block. Returns a block holding just the geometry pointer. */
@@ -26,7 +26,7 @@ PolyGeom **effPolyRingGeomCreate1(PolyParams *params)
 
     segments = segments > 3 ? segments : 3;
     params->segments = segments;
-    geom = FUN_0024505c(segments & 0xffff, &DAT_00473708, 4, 0x48);
+    geom = effGeomBuildGridMesh(segments & 0xffff, &g_effPolyGeomIndexTable, 4, 0x48);
     *block = geom;
     quads = geom->size / 4;
     vertices = (PackedColorBytes *)geom->buf->colors;

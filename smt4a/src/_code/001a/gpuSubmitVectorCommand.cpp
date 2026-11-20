@@ -13,13 +13,13 @@ struct GpuCommandTemplates {
 
 extern "C" {
 
-extern const GpuCommandTemplates DAT_0053d500;
+extern const GpuCommandTemplates g_gpuCommandTemplates;
 void gpuSubmitCommandBlock(const void *commands, u32 byteCount);
 
 /* Builds a GPU command block from the default one with the words taken from three vectors (stored z, y, x) and submits it. */
 void gpuSubmitVectorCommand(const u32 *first, const u32 *second, const u32 *third)
 {
-    GpuCommandBlock command = DAT_0053d500.command;
+    GpuCommandBlock command = g_gpuCommandTemplates.command;
 
     command.words[0] = first[2];
     command.words[2] = first[1];

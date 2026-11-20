@@ -39,7 +39,7 @@ typedef struct BtlScriptUnitView {
 
 extern u32 g_btlScriptUnit;
 
-s32 FUN_004aba3c(BtlUiA *block);
+s32 btlUiObjCGetSelectedSkillDemonId(BtlUiA *block);
 
 /* Whether the script unit's character is of the given kind. */
 static __inline bool scriptUnitIsKind(s32 kind)
@@ -47,7 +47,7 @@ static __inline bool scriptUnitIsKind(s32 kind)
     BtlScriptUnitView *unit = reinterpret_cast<BtlScriptUnitView *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
 
     return unit != NULL && unit->owner != NULL && unit->owner->character != NULL &&
-        FUN_0019acdc(unit->owner->character->id, 0) == kind;
+        unitMapIdToCategory(unit->owner->character->id, 0) == kind;
 }
 
 /* Script command: for the selected skill, returns its word for the script unit's kind when that skill exists. */
@@ -59,8 +59,8 @@ s32 btlScriptGetSelectedSkillDemonId(void)
     if (!scriptUnitIsKind(1) && !scriptUnitIsKind(4) && !scriptUnitIsKind(3)) {
         return 0;
     }
-    if (FUN_004aba3c(g_btlUiBlock) != -1) {
-        skillId = FUN_004aba3c(g_btlUiBlock);
+    if (btlUiObjCGetSelectedSkillDemonId(g_btlUiBlock) != -1) {
+        skillId = btlUiObjCGetSelectedSkillDemonId(g_btlUiBlock);
     } else {
         ScriptUnitMode *stats = reinterpret_cast<BtlScriptUnitView *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->stats;
 

@@ -68,7 +68,7 @@ typedef struct Entry2C {
     /* 0x00 */ u8 data[0x2C];
 } Entry2C;
 
-/* Global block (DAT_006306f8). */
+/* Global block (g_quadColorState). */
 typedef struct FlagsAt6C {
     /* 0x00 */ u8 unk00[0x6C];
     /* 0x6C */ u8 value;

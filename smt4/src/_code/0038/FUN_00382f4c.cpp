@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild of a shop/menu choice handler (the draft's lost return of FUN_002c1658 restored as its condition; the two small byte tables it indexes are read as the draft's raw addresses); armcc here shares the result tail and the choice-result reloads differently. */
+/* NON_MATCHING: readable rebuild of a shop/menu choice handler (the draft's lost return of inputQueryButtonState restored as its condition; the two small byte tables it indexes are read as the draft's raw addresses); armcc here shares the result tail and the choice-result reloads differently. */
 #include "common.h"
 #include "code/Code0023_Smt4.h"
 
@@ -33,12 +33,12 @@ void messageDismissNumericBanner(s32 flag);
 void messageBannerInitSelection(s32 a, s32 b);
 void messageTargetSetValue(u32 value, s32 flag);
 void messageMainSetTargetFlags(s32 flags);
-s32 FUN_002c1658(s32 a, s32 b);
+s32 inputQueryButtonState(s32 a, s32 b);
 s32 gameFlagIsSet(u32 flag);
 void eventQueueAddUnique(s32 event);
 void uiQuestCreate(void);
 void FUN_00223cf0(void);
-void FUN_002636b0(void);
+void placeWindowStartClose(void);
 void FUN_002f6208(void);
 s32 messageMainGetChoiceResult(void);
 void messageBannerBeginClose(void);
@@ -63,11 +63,11 @@ void FUN_00382f4c(ChoiceMenu *menu)
                         messageMainSetTargetFlags(1);
                     }
                 }
-                if (FUN_002c1658(10, 1) != 0 && gameFlagIsSet(0x24) != 0) {
+                if (inputQueryButtonState(10, 1) != 0 && gameFlagIsSet(0x24) != 0) {
                     eventQueueAddUnique(0x100016F);
                     uiQuestCreate();
                     FUN_00223cf0();
-                    FUN_002636b0();
+                    placeWindowStartClose();
                     menu->closed = 0;
                     menu->result = messageTargetGetValue();
                     if (menu->inTown != 0 && messageTargetGetValue() == 0) {
@@ -87,28 +87,28 @@ void FUN_00382f4c(ChoiceMenu *menu)
     if (menu->inTown != 0) {
         switch (choice) {
         case 0:
-            FUN_002636b0();
+            placeWindowStartClose();
             menu->state = 7;
             menu->subState = 0;
             break;
         case 1:
             if (FUN_002485b8() != 0)
                 messageDismissNumericBanner(0);
-            FUN_002636b0();
+            placeWindowStartClose();
             menu->state = 8;
             menu->subState = 0;
             break;
         case 2:
             if (FUN_002485b8() != 0)
                 messageDismissNumericBanner(0);
-            FUN_002636b0();
+            placeWindowStartClose();
             menu->subState = 0;
             menu->state = 9;
             break;
         case 3:
             if (FUN_002485b8() != 0)
                 messageDismissNumericBanner(0);
-            FUN_002636b0();
+            placeWindowStartClose();
             menu->state = 10;
             menu->subState = 0;
             messageDismissNumericBanner(0);
@@ -124,15 +124,15 @@ void FUN_00382f4c(ChoiceMenu *menu)
     } else {
         if (choice != -1) {
             if (choice == 0) {
-                FUN_002636b0();
+                placeWindowStartClose();
                 menu->state = 8;
                 menu->subState = 0;
             } else if (choice == 1) {
-                FUN_002636b0();
+                placeWindowStartClose();
                 menu->state = 9;
                 menu->subState = 0;
             } else if (choice == 2) {
-                FUN_002636b0();
+                placeWindowStartClose();
                 menu->state = 10;
                 menu->subState = 0;
             }

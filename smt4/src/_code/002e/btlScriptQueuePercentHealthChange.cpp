@@ -6,7 +6,7 @@
 
 extern "C" {
 void btlQueueKeyedScalarReflectAction(s32, void *, u32, s32, s32, s32, s32);
-void FUN_00250720(BtlMainState *state);
+void btlSlotManagerResetAll(BtlMainState *state);
 void FUN_002551ac(s32, void *, BtlActionRecord *, s32, s32, u32, u32, s32, s32,
                   s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
 extern u32 g_btlScriptUnit;
@@ -22,7 +22,7 @@ u32 btlScriptQueuePercentHealthChange()
     s32 amount = entry->data.maxHp * percent / 100;
     void *unit = btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit));
     if (entry->ids[0] >= 0) {
-        FUN_00250720(state);
+        btlSlotManagerResetAll(state);
         FUN_002551ac(0, unit, &state->actions[entry->ids[0]], 0,
                      amount, 0xffffffff, 0xffffffff, entry->data.hp, entry->data.maxHp,
                      0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1);

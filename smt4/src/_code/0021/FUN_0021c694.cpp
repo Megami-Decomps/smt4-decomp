@@ -35,8 +35,8 @@ extern unsigned int g_sinCosTable; /* 0x407ed0 */
 extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
-extern int DAT_00447a28; /* 0x447a28 */
-extern unsigned char DAT_004a1264; /* 0x4a1264 */
+extern int g_entryTableInfo; /* 0x447a28 */
+extern unsigned char g_namedEntryTable; /* 0x4a1264 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -132,10 +132,10 @@ int FUN_0021c694(int param_1)
   unsigned char temp_v56 [12];
   unsigned char temp_v57 [152];
   
-  temp_v0 = DAT_00447a28;
+  temp_v0 = g_entryTableInfo;
   temp_v26 = -0.5f;
   temp_v29 = 0x3f800000;
-  *(int *)(DAT_00447a28 * 4 + 0x4a0fe4) = param_1;
+  *(int *)(g_entryTableInfo * 4 + 0x4a0fe4) = param_1;
   temp_v28 = 0.5f;
   temp_v9 = 0.0f;
   piVar4 = *(int **)(*(int *)(param_1 + 0x14) + 0x1c);
@@ -225,7 +225,7 @@ int FUN_0021c694(int param_1)
       nn_math_ARMv6_VEC3TransformAsm_2AD44C(temp_v57,&temp_v39,&temp_v32);
       temp_v4 = 0;
       temp_v0 = temp_v0 * 0x178;
-      pfVar9 = (float *)(&DAT_004a1264 + temp_v0);
+      pfVar9 = (float *)(&g_namedEntryTable + temp_v0);
       do {
         temp_v2 = temp_v4 * 0xc;
         pfVar3 = pfVar9 + temp_v4 * 3;
@@ -430,7 +430,7 @@ int FUN_0021c694(int param_1)
     temp_v34 = temp_v9;
     nn_math_ARMv6_VEC3TransformAsm_2AD44C(temp_v53,&temp_v39,&temp_v32);
     temp_v0 = temp_v0 * 0x178;
-    pfVar9 = (float *)(&DAT_004a1264 + temp_v0);
+    pfVar9 = (float *)(&g_namedEntryTable + temp_v0);
     temp_v4 = 0;
     do {
       temp_v2 = temp_v4 + 1;
@@ -672,8 +672,8 @@ int FUN_0021c694(int param_1)
       }
     }
   }
-  temp_v0 = DAT_00447a28;
-  DAT_00447a28 = DAT_00447a28 + 1;
+  temp_v0 = g_entryTableInfo;
+  g_entryTableInfo = g_entryTableInfo + 1;
   return temp_v0;
 }
 

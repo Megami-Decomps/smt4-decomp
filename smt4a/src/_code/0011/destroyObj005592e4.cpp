@@ -6,11 +6,11 @@ extern const u8 DAT_005592e4[];  /* vtable */
 void operatorDeleteArrayNullable(u32 handle);
 void FUN_002faf62(void *self);
 u8 *FUN_002fb028(u8 *member);
-u8 *FUN_002ea00c(u8 *member);
+u8 *destroyObj005585a4(u8 *member);
 u8 *destroyObj0055ae64(u8 *member);
 u8 *ptrHolderDestroy(u8 *member);
 u8 *_ZN9Obj55aff4D1Ev(u8 *member);
-void FUN_002ecac4(u8 *member);
+void deletingDtor_002ecac4(u8 *member);
 
 typedef struct Object5592e4 {
     /* 0x000 */ const void *vtbl;
@@ -29,14 +29,14 @@ void destroyObj005592e4(Object5592e4 *self)
     operatorDeleteArrayNullable(self->handle);
     FUN_002faf62(self);
     member = FUN_002fb028(self->member130);
-    member = FUN_002ea00c(member - 0x60);
+    member = destroyObj005585a4(member - 0x60);
     member = destroyObj0055ae64(member - 0x24);
     member = ptrHolderDestroy(member - 0x10);
     member = ptrHolderDestroy(member - 8);
     member = ptrHolderDestroy(member - 8);
     member = _ZN9Obj55aff4D1Ev(member - 0xC);
     member = _ZN9Obj55aff4D1Ev(member - 0x10);
-    FUN_002ecac4(member - 0x70);
+    deletingDtor_002ecac4(member - 0x70);
 }
 
 } /* extern "C" */

@@ -6,7 +6,7 @@
 
 extern "C" {
 extern EntryPoolCountersA DAT_00580c90;
-extern EntryPoolRecordA DAT_005f32a0[160];
+extern EntryPoolRecordA g_recordTable[160];
 
 /* Clears a three-float vector. */
 static __inline void vec3Clear(f32 *vector)
@@ -21,7 +21,7 @@ void FUN_00244acc(void)
 {
     DAT_00580c90.first = 0;
     for (s32 i = 0; i < 160; ++i) {
-        EntryPoolRecordA &entry = DAT_005f32a0[i];
+        EntryPoolRecordA &entry = g_recordTable[i];
         for (s32 j = 0; j < 8; ++j) {
             vec3Clear(entry.primaryVectors[j]);
         }

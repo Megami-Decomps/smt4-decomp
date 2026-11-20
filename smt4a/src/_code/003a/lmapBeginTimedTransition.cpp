@@ -3,7 +3,7 @@
 extern "C" {
 void mapSetSceneState(s32 state);
 void titleSetSlotValueState2(u32 index, s32 frames);
-void FUN_00303460(u32 state);
+void lmapCameraSetMode(u32 state);
 
 // Start the scene transition, configure both delays and queue its next state.
 void lmapBeginTimedTransition()
@@ -17,6 +17,6 @@ void lmapBeginTimedTransition()
     scene = g_lmapScene;
     scene->moveMode = 35;
     scene->moveSpeed = 0.0f;
-    FUN_00303460(22);
+    lmapCameraSetMode(22);
 }
 }

@@ -10,7 +10,7 @@ extern const char DAT_005361d4[];
 extern const char DAT_005361c4[];
 extern const char DAT_005361b0[];
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 tracked);
-s32 FUN_0027dda4(u32 process);
+s32 shopMainUpdatePhase(u32 process);
 void shopProcessMarkFinished(u32 process);
 s32 shopMainUpdateChild(u32 process);
 s32 ownerChildNotifyEarlyState(u32 process);
@@ -38,7 +38,7 @@ extern "C" void shopCreateProcessAndDrawTasks(const u32 *arguments, s32 bytes)
     } else {
         work->mode = 1;
     }
-    work->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_005361d4), 4, 0, NULL, FUN_0027dda4, shopProcessMarkFinished, reinterpret_cast<u32>(g_shop));
+    work->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_005361d4), 4, 0, NULL, shopMainUpdatePhase, shopProcessMarkFinished, reinterpret_cast<u32>(g_shop));
     taskCreateDraw(DAT_005361c4, 101, 1, 0, shopMainUpdateChild, NULL, g_shop, work->task);
     taskCreateDraw(DAT_005361c4, 204, 1, 0, shopMainUpdateChild, NULL, g_shop, work->task);
     taskCreateDraw(DAT_005361b0, 235, 1, 0, ownerChildNotifyEarlyState, NULL, g_shop, work->task);

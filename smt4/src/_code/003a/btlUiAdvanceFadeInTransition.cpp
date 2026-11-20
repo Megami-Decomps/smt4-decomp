@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_002251d4(BtlUiObjC *obj);
+void btlUiAdvanceFadeIn(BtlUiObjC *obj);
 void playSceneTimerSubStart(BtlUiObjB *obj);
 void playSceneFadeInStart(BtlUiObjA *obj);
 s32 uiSpriteOperationIsComplete(BtlUiObjB *obj);
@@ -17,7 +17,7 @@ void btlUiAdvanceFadeInTransition(void)
 
     if (*state == 9) {
         FUN_0033c6f8(ui->panelState.unk20);
-        FUN_002251d4(&ui->objC);
+        btlUiAdvanceFadeIn(&ui->objC);
         *state = 7;
         ui = g_btlUi.ui;
         if (playSceneIsFadeOutDone(&ui->objA) != 0 && uiSpriteOperationIsComplete(&ui->objB) != 0) {

@@ -16,7 +16,7 @@ void FUN_002fa4dc(ActorCardAnimationsA *scene, s32 forceFull);
 void FUN_003741cc(ActorCardAnimationsA *scene);
 void FUN_0028f740(ActorCardAnimationsA *scene);
 void FUN_0028d270(ActorCardAnimationsA *scene);
-void FUN_003743a4(ActorCardAnimationsA *scene);
+void btlUiPartyDisplayDrawEntry(ActorCardAnimationsA *scene);
 void saveSlotDrawClippedGaugeFrame(ActorCardAnimationsA *scene, s32 amount);
 void selectionPanelDrawMarkers(ActorCardAnimationsA *scene, s32 drawAll);
 
@@ -90,7 +90,7 @@ void btlUiPartyDisplayDraw(ActorCardAnimationsA *scene)
         FUN_003741cc(scene);
         FUN_0028f740(scene);
         FUN_0028d270(scene);
-        FUN_003743a4(scene);
+        btlUiPartyDisplayDrawEntry(scene);
         break;
     case 22:
         FUN_002ae5cc(scene, 0, 1, 0, 0);
@@ -194,7 +194,7 @@ void btlUiPartyDisplayDraw(ActorCardAnimationsA *scene)
         break;
     }
     if (scene->state == 6) {
-        FUN_003743a4(scene);
+        btlUiPartyDisplayDrawEntry(scene);
     }
     RenderCtxA *context = g_renderCtx;
     renderCtxSetB(context, packNibblesAndByte(6, 7, 0));

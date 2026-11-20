@@ -16,7 +16,7 @@ int libm_cosf(void); // declcheck: local (romwright prototype; the shared declar
 int libm_sinf(void);
 int FUN_001f3f34(void);
 int soundAllocateSpatialActor(...);
-int FUN_0025ef68(int *, int *, int);
+int mapResolveCollisionSphere(int *, int *, int);
 int FUN_002826dc(int *, int *, int, int);
 int distSpatial(void);
 int FUN_002d1f40(int, int, int);
@@ -24,7 +24,7 @@ int FUN_003250ac(int *);
 int mathPositionHeadingDegrees(void);
 int soundActorStartOnFreeChannel(...);
 int moriModelUnitStartMaterialAnimation(...);
-int FUN_003fd924(...);
+int motionPlayerStartBlended(...);
 int controllerSetRotationEulerDegrees(...);
 int itemListGetCurrentIdOrInvalid(...);
 int VectorSignedToFloat(int, int);
@@ -84,7 +84,7 @@ extern signed char DAT_005f1c7e; /* 0x5f1c7e */
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_001f3f34. */
 /* Supplied declaration required: soundAllocateSpatialActor. */
-/* Supplied declaration required: FUN_0025ef68. */
+/* Supplied declaration required: mapResolveCollisionSphere. */
 /* Supplied declaration required: eplSlotStartRequest. */
 /* Supplied declaration required: FUN_002826dc. */
 /* Supplied declaration required: mapEplSetSlotPosition. */
@@ -95,7 +95,7 @@ extern signed char DAT_005f1c7e; /* 0x5f1c7e */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: moriModelUnitStartMaterialAnimation. */
-/* Supplied declaration required: FUN_003fd924. */
+/* Supplied declaration required: motionPlayerStartBlended. */
 /* Supplied declaration required: animationSelectClip. */
 /* Supplied declaration required: controllerSetRotationEulerDegrees. */
 /* Supplied declaration required: itemListGetCurrentIdOrInvalid. */
@@ -338,7 +338,7 @@ LAB_002db724:
           controllerSetRotationEulerDegrees(*(unsigned int *)(piVar2[0x60] + 4));
           controllerSetRotationEulerDegrees(*(unsigned int *)(g_lmapScene[99] + 4));
           DAT_0058128c = temp_v9;
-          FUN_003fd924(*(unsigned int *)(g_lmapScene[0x60] + 4),1,2);
+          motionPlayerStartBlended(*(unsigned int *)(g_lmapScene[0x60] + 4),1,2);
           return;
         }
         temp_v5 = *(unsigned int *)(g_lmapScene[0x60] + 4);
@@ -454,7 +454,7 @@ LAB_002db724:
         FUN_002826dc(piVar2,&temp_v22,0,1);
         if (piVar2 == (int *)0x0) {
           piVar2 = &temp_v27;
-          FUN_0025ef68(piVar2,&temp_v22,1);
+          mapResolveCollisionSphere(piVar2,&temp_v22,1);
           if (piVar2 != (int *)0x0) goto LAB_002dba80;
         }
         else {
@@ -551,7 +551,7 @@ LAB_002dba80:
       FUN_002826dc(piVar2,&temp_v21,0,1);
       if (piVar2 == (int *)0x0) {
         piVar2 = &temp_v23;
-        FUN_0025ef68(piVar2,&temp_v21,1);
+        mapResolveCollisionSphere(piVar2,&temp_v21,1);
         if (piVar2 != (int *)0x0) goto LAB_002dbd84;
       }
       else {
@@ -942,7 +942,7 @@ joined_r0x002dc288:
       g_lmapScene[0x8a] = 6;
       temp_v5 = *(unsigned int *)(piVar2[99] + 4);
       moriModelUnitStartMaterialAnimation(temp_v5,0,2);
-      FUN_003fd924(temp_v5,6,2);
+      motionPlayerStartBlended(temp_v5,6,2);
     }
     else if (g_lmapScene[0x75] == 0x3c) {
       g_lmapScene[0x74] = 0xb;
@@ -974,7 +974,7 @@ joined_r0x002dc288:
     if (piVar2[0x8a] != 2) {
       piVar2[0x8a] = 2;
       moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar2[0x60] + 4),1,2);
-      FUN_003fd924(*(unsigned int *)(g_lmapScene[99] + 4),2);
+      motionPlayerStartBlended(*(unsigned int *)(g_lmapScene[99] + 4),2);
     }
     else {
       piVar2[0x75] = piVar2[0x75] + 1;
@@ -1045,7 +1045,7 @@ LAB_002dcd94:
   controllerSetDestination(temp_v5,g_lmapScene + 0x7c);
   temp_v0 = itemListGetCurrentIdOrInvalid(temp_v5);
   if ((temp_v0 != g_lmapScene[0x8a]) || ((char)g_lmapScene[0x8b] != '\0')) {
-    FUN_003fd924(temp_v5,g_lmapScene[0x8a],2);
+    motionPlayerStartBlended(temp_v5,g_lmapScene[0x8a],2);
     *(unsigned char *)(g_lmapScene + 0x8b) = 0;
   }
   temp_v29 = g_lmapScene[0x7c];
@@ -1055,7 +1055,7 @@ LAB_002dcd94:
   controllerSetDestination(temp_v5,&temp_v29);
   temp_v0 = itemListGetCurrentIdOrInvalid(temp_v5);
   if ((temp_v0 != g_lmapScene[0x8e]) || ((char)g_lmapScene[0x8f] != '\0')) {
-    FUN_003fd924(temp_v5,g_lmapScene[0x8e],2);
+    motionPlayerStartBlended(temp_v5,g_lmapScene[0x8e],2);
     animationSelectClip(temp_v5,0,2);
     *(unsigned char *)(g_lmapScene + 0x8f) = 0;
   }

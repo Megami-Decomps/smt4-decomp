@@ -6,15 +6,15 @@ extern "C" {
 
 int FUN_00132764(int);
 int sharedRefRelease(void);
-int FUN_002ecac4(int);
+int deletingDtor_002ecac4(int);
 
 extern unsigned char DAT_0055955c; /* 0x55955c */
 
 extern int FUN_0010eec4(int);
 /* Supplied declaration required: FUN_00132764. */
 /* Supplied declaration required: sharedRefRelease. */
-extern int FUN_002ea00c(int);
-/* Supplied declaration required: FUN_002ecac4. */
+extern int destroyObj005585a4(int);
+/* Supplied declaration required: deletingDtor_002ecac4. */
 extern int FUN_002f8760(unsigned int *);
 
 
@@ -32,12 +32,12 @@ void FUN_0011234c(unsigned int *param_1)
     sharedRefRelease();
   }
   temp_v0 = FUN_002f8760(param_1 + 100);
-  temp_v0 = FUN_002ea00c(temp_v0 - 0x78);
-  temp_v0 = FUN_002ea00c(temp_v0 - 0x60);
+  temp_v0 = destroyObj005585a4(temp_v0 - 0x78);
+  temp_v0 = destroyObj005585a4(temp_v0 - 0x60);
   temp_v0 = temp_v0 - 0x1c;
   FUN_00132764(temp_v0);
   temp_v0 = FUN_0010eec4(temp_v0 - 0x34);
-  FUN_002ecac4(temp_v0 - 0x68);
+  deletingDtor_002ecac4(temp_v0 - 0x68);
   return;
 }
 

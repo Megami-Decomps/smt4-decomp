@@ -22,7 +22,7 @@ void armySummonSetCommandTransform(ArmySummonState *state)
         }
         nodeOwnerSetTranslations(state->commands, position);
         FUN_003351e0(state->commands, 0.0f, 0.0f, 0.0f);
-        FUN_002a5704(state->commands, 25, 0.0f);
+        modelHolderSelectPrimaryMotion(state->commands, 25, 0.0f);
     }
 }
 }

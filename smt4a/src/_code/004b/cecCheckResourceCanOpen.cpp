@@ -1,0 +1,14 @@
+#include "common.h"
+
+extern "C" {
+u32 cecMakeResourceId(u32 id);
+void asdCecCanOpenMessageBox(u32 resource, u32 context);
+extern u32 g_resourceDispatchContext;
+
+/* Dispatches resource 0x19A2 with the active context. */
+void cecCheckResourceCanOpen()
+{
+    u32 resource = cecMakeResourceId(0x19A2);
+    asdCecCanOpenMessageBox(resource, g_resourceDispatchContext);
+}
+}

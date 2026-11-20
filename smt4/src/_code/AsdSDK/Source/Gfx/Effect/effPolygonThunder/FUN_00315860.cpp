@@ -19,17 +19,17 @@ struct ThunderBoltBlock {
 };
 
 extern "C" {
-extern const char DAT_0041052c[]; /* effect source file name (__FILE__) */
+extern const char g_effPolygonThunderSourceFileName[]; /* effect source file name (__FILE__) */
 void *memAlloc(int, int, int, int size, int align, int);
 void rt_memclr(void *block, int size);
-PolyGeom *FUN_0024505c(u32 segments, u8 *table, int w, int tableSize);
+PolyGeom *effGeomBuildGridMesh(u32 segments, u8 *table, int w, int tableSize);
 
 extern u8 DAT_0047372c;
 
 /* Allocates the bolt block of `bytes` bytes, recording the allocation site first. */
 static ThunderBoltBlock *allocBoltBlock(u32 bytes)
 {
-    asdDebugTrace(DAT_0041052c, 695);
+    asdDebugTrace(g_effPolygonThunderSourceFileName, 695);
     return (ThunderBoltBlock *)memAlloc(0x10000, 0x100, 0, bytes, 0x10, 1);
 }
 
@@ -50,7 +50,7 @@ ThunderBoltBlock *FUN_00315860(ThunderBoltParams *params)
     s32 rampOut = (s32)(params->rampOut * span);
     ThunderBolt *bolt = block->bolts;
     for (u32 i = 0; i < count; i++) {
-        PolyGeom *geom = FUN_0024505c((u16)params->level, &DAT_0047372c, 5, 0x48);
+        PolyGeom *geom = effGeomBuildGridMesh((u16)params->level, &DAT_0047372c, 5, 0x48);
         bolt->geom = geom;
         thunderBoltFillColors(geom, &colors, rampIn, rampOut);
         bolt->id = -4 * (s32)i - 1;

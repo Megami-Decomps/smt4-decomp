@@ -22,13 +22,13 @@ void effectEditorObjectDestroy(Obj *obj);
 
 void halves34Copy(Source *source, u16 *dst);
 
-void FUN_002493a4(GeometryOwner *owner, u32 id, u32 kind);
+void geometryOwnerSetGeometry(GeometryOwner *owner, u32 id, u32 kind);
 
 u32 partyHasStoredDemon(u32 id);
 
 void mdlHandleArrayDestroy(Obj *obj);
 
-void FUN_00241d58(Obj *obj);
+void btlSpritePlacementRelease(Obj *obj);
 
 void bufferObjDestroy(Obj *obj);
 

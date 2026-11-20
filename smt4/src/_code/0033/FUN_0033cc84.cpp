@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_00247f0c(void);
 int FUN_002b7638(int *);
-int FUN_002bc0e0(void);
+int gxResetUniformQuadColorsAndScale(void);
 int efctSetSpeed(void);
 int renderCtxSelectTexture(unsigned int, int);
 int FUN_0033c72c(...);
@@ -28,7 +28,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00247f0c. */
 /* Supplied declaration required: FUN_002b7638. */
-/* Supplied declaration required: FUN_002bc0e0. */
+/* Supplied declaration required: gxResetUniformQuadColorsAndScale. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_0033c72c. */
@@ -61,7 +61,7 @@ void FUN_0033cc84(int param_1)
     ;
     renderCtxSelectTexture(g_titleScene,0);
     FUN_002b7638(&temp_v8);
-    FUN_002bc0e0();
+    gxResetUniformQuadColorsAndScale();
     efctSetSpeed();
     temp_v7 = (int)(temp_v6 + (4.0f - *(float *)(param_1 + 0x39c)) * 20.0f);
     texDrawTableEntryAtStoredOrigin(2,0x14,0x54,0,temp_v7,0x23);

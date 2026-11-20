@@ -24,7 +24,7 @@ struct SocketConnectionView {
 };
 
 extern "C" {
-NetworkStateView *FUN_002ea704(void);
+NetworkStateView *watcherGetEnabledFlag(void);
 u32 FUN_002f8208(SocketState *socket, u32 option);
 u32 FUN_002f2dfc(SocketState *socket, SocketAddressView *address, u32 option);
 u32 FUN_0010de3c(SocketConnectionView *connection);
@@ -32,7 +32,7 @@ u32 FUN_0010de3c(SocketConnectionView *connection);
 // Resolve the active socket address, or use the default connection handler.
 u32 FUN_002ffdb0(SocketConnectionView *connection)
 {
-    if (FUN_002ea704() != NULL && FUN_002ea704()->active != 0) {
+    if (watcherGetEnabledFlag() != NULL && watcherGetEnabledFlag()->active != 0) {
         SocketState *socket = reinterpret_cast<SocketState *>(connection->socket);
         u32 result = FUN_002f8208(socket, 1);
         if (result != 0) {

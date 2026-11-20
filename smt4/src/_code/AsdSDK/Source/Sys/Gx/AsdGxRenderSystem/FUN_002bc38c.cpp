@@ -15,7 +15,7 @@ typedef char AsdGxSurfaceDescriptionSize[sizeof(AsdGxSurfaceDescription) == 0x18
 extern "C" {
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
 void *asdMemoryAllocAligned(u32, u32, u32, u32, u32, u32);
-extern const char DAT_00409a68[];
+extern const char g_asdGxRenderSystemSourceFileName[];
 
 void FUN_002bc38c(AsdGxFramebuffer *framebuffer,
     const AsdGxSurfaceDescription *description, s32 allocate)
@@ -79,15 +79,15 @@ void FUN_002bc38c(AsdGxFramebuffer *framebuffer,
             void *data = NULL;
             switch (source->location) {
             case ASD_HEAP_EXTRA:
-                asdDebugTrace(DAT_00409a68, 2654);
+                asdDebugTrace(g_asdGxRenderSystemSourceFileName, 2654);
                 data = asdMemoryAllocAligned(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, bytes, 0x40, 1);
                 break;
             case ASD_HEAP_VRAM_A:
-                asdDebugTrace(DAT_00409a68, 2655);
+                asdDebugTrace(g_asdGxRenderSystemSourceFileName, 2655);
                 data = asdMemoryAlloc(ASD_HEAP_VRAM_A, ASD_ALIGN_DEFAULT, 0, bytes, 1);
                 break;
             case ASD_HEAP_VRAM_B:
-                asdDebugTrace(DAT_00409a68, 2656);
+                asdDebugTrace(g_asdGxRenderSystemSourceFileName, 2656);
                 data = asdMemoryAlloc(ASD_HEAP_VRAM_B, ASD_ALIGN_DEFAULT, 0, bytes, 1);
                 break;
             }

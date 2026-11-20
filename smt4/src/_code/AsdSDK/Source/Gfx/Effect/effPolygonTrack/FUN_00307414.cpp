@@ -35,7 +35,7 @@ extern u8 DAT_00472563;
 /* The curve sampler: (curve, envelope, frame, duration); the emitter's own color is sampled with only its first two arguments. */
 u32 FUN_00269694(const void *curve, const void *envelope, ...);
 void FUN_002f81d4(PolygonTrackPrimitive *primitive, const f32 *rotation, const f32 *scale);
-void FUN_0024f5ec(PolygonTrackPrimitive *primitive, u32 drawMode);
+void tiledMeshDraw(PolygonTrackPrimitive *primitive, u32 drawMode);
 
 /* Fills a polygon track's per-vertex colors for the current frame: each vertex that is still inside
  * the emitter's duration gets the sampled curve color times the job and emitter colors, the rest the
@@ -84,6 +84,6 @@ void FUN_00307414(RenderSubmission *submission)
     } else {
         primitive->flags &= ~0x100;
     }
-    FUN_0024f5ec(primitive, (u16)emitter->drawMode);
+    tiledMeshDraw(primitive, (u16)emitter->drawMode);
 }
 }

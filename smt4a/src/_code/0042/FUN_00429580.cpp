@@ -37,10 +37,10 @@ extern "C" {
 extern RequestBlock DAT_0061b030;
 extern u8 DAT_0061b000;
 
-void FUN_0019a46c(void *destination, const void *source, u32 bytes);
+void stringCopyTruncated(void *destination, const void *source, u32 bytes);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 nn::Result FUN_00427e68(s32 handle, u32 mode);
-u32 FUN_0016ccfc(void);
+u32 tokenTableGet(void);
 nn::Result tokenResolveAddress(u32 token, u8 **resolved, s32 handle);
 s32 appletIsExitRequested(void);
 s32 FUN_0015a410(void);
@@ -80,11 +80,11 @@ WindowStatusResult FUN_00429580(s32 *handle, const RequestSettings *settings, co
             u32 high = size | 0x40000;
             DAT_0061b030.entries[i].descriptor = (u64)high << 32 | (u64)attributes | (u64)media;
             DAT_0061b030.entries[i].key = sources[i].key;
-            FUN_0019a46c(DAT_0061b030.entries[i].payload, sources[i].payload, 0x14);
+            stringCopyTruncated(DAT_0061b030.entries[i].payload, sources[i].payload, 0x14);
         }
         DAT_0061b030.count = count;
         u8 *resolved;
-        result = tokenResolveAddress(FUN_0016ccfc(), &resolved, *handle);
+        result = tokenResolveAddress(tokenTableGet(), &resolved, *handle);
         if (!nnResultIsFailure(result)) {
             __aeabi_memcpy4(&DAT_0061b030, resolved + 0x54, 0x44);
             DAT_0061b030.unk2C8[0] = resolved[0x98];

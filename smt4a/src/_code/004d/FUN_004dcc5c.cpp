@@ -6,8 +6,8 @@
 #include "battle/btlDebug.h"
 #include "battle/BtlGlobals.h"
 extern "C" {
-void FUN_004fdcd8(s32 delay, u32 group, s32 first, s32 last, s32 kind, s32 mode, s32 duration, s32 flags);
-void FUN_004fb798(s32 kind, u32 group, s32 mode, BattleRosterRecordA *record, s32 flags, s32 hp, s32 mp, u32 mask, s32 extra, s32 firstDelay, s32 lastDelay, s32 duration, s32 enabled, s32 variant, s32 finish);
+void btlQueueMessageTableReflectAction(s32 delay, u32 group, s32 first, s32 last, s32 kind, s32 mode, s32 duration, s32 flags);
+void btlRecoverHpMpByPercent(s32 kind, u32 group, s32 mode, BattleRosterRecordA *record, s32 flags, s32 hp, s32 mp, u32 mask, s32 extra, s32 firstDelay, s32 lastDelay, s32 duration, s32 enabled, s32 variant, s32 finish);
 
 void FUN_004dcc5c(BtlMainStateA *const *owner, u32 group)
 {
@@ -28,8 +28,8 @@ void FUN_004dcc5c(BtlMainStateA *const *owner, u32 group)
             if (mp > 0 && (entry->data.statusFlags & 8))
                 mp = 1;
             s32 delay = restored * 5;
-            FUN_004fdcd8(delay, group, entry->ids[0], entry->ids[0], 8, 0, 5, 0);
-            FUN_004fb798(5, group, 0, &(*owner)->roster[entry->ids[0]], 0, hp, mp, 0xFFFFFFFF, 0, delay, delay, 9, 1, 0, 1);
+            btlQueueMessageTableReflectAction(delay, group, entry->ids[0], entry->ids[0], 8, 0, 5, 0);
+            btlRecoverHpMpByPercent(5, group, 0, &(*owner)->roster[entry->ids[0]], 0, hp, mp, 0xFFFFFFFF, 0, delay, delay, 9, 1, 0, 1);
             ++restored;
         }
     }

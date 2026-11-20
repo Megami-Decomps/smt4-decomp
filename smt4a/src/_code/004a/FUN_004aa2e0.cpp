@@ -4,7 +4,7 @@
 extern "C" {
 void fillTwoWordsWithByte(void *destination, u32 value);
 u16 uiFindValidIdOrdinal(u32 source, u32 ordinal);
-void FUN_001a9104(BtlUiObjCA *menu, const u16 *ids);
+void btlUiCopyIdList(BtlUiObjCA *menu, const u16 *ids);
 void menu32Advance(BtlUiObjCA *menu);
 void uiMenuActivateAndCountEntries(BtlUiObjCA *menu);
 
@@ -16,7 +16,7 @@ void FUN_004aa2e0(void *context, s32 advance)
     ui->ids[1] = uiFindValidIdOrdinal(ui->owner, 1);
     ui->ids[2] = uiFindValidIdOrdinal(ui->owner, 2);
     ui->ids[3] = uiFindValidIdOrdinal(ui->owner, 3);
-    FUN_001a9104(&ui->objC, ui->ids);
+    btlUiCopyIdList(&ui->objC, ui->ids);
     if (advance) {
         menu32Advance(&ui->objC);
     } else {

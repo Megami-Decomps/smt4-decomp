@@ -13,14 +13,14 @@ typedef struct Row00394750 {
 void asdSoundSelectSlotB(s32 value);
 void asdSndEnsureCurrentSlotData(u32 value);
 
-extern Row00394750 DAT_0043988c[3]; /* 0x43988c */
+extern Row00394750 g_jyoucyuRowTable[3]; /* 0x43988c */
 
 /* The table row with the given id, or NULL. */
 static __inline Row00394750 *findRow(u32 id)
 {
     s32 index = 0;
     while (index < 3) {
-        Row00394750 *row = &DAT_0043988c[index];
+        Row00394750 *row = &g_jyoucyuRowTable[index];
         if (row->id == id) {
             return row;
         }

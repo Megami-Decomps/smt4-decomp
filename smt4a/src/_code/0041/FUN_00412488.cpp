@@ -13,7 +13,7 @@ void FUN_00412488(void)
 {
     u16 selected = partyPickRandomId();
     BtlMainStateExtA *state = btlGetMainStateExt();
-    u32 message = FUN_0019acdc(selected, 1);
+    u32 message = unitMapIdToCategory(selected, 1);
     u32 text, color;
     FUN_003f1b3c(state, message, 3, &text, &color);
     FUN_0047f4cc(color, 1.0f, 0.707f, 0.707f);

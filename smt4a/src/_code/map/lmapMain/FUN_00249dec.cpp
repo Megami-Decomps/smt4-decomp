@@ -140,7 +140,7 @@ extern unsigned int FUN_00480738(unsigned int);
 extern unsigned int FUN_00480c28(void);
 /* Supplied declaration required: flagValueAdd. */
 /* Supplied declaration required: gamePackedFlagTest. */
-extern int FUN_004d0584(void);
+extern int inputConfirmPressed(void);
 
 unsigned int FUN_00249dec(void)
 
@@ -235,7 +235,7 @@ joined_r0x00249fd4:
           }
           if ((DAT_005f1bc4 == '\0') && (DAT_005f1614 == '\0')) {
             if ((DAT_005f161d == '\0') && ((DAT_005f1be4 == 0 || (DAT_005f1be4 == 4)))) {
-              temp_v4 = FUN_004d0584();
+              temp_v4 = inputConfirmPressed();
               temp_v5 = (*(unsigned int *)&s__a_a_00587f08.u1[0]);
               if ((temp_v4 != 0) && ((*(char *)(g_lmapView + 0xb4) == '\0' && (temp_v11)))) {
                 DAT_005f1768 = '\0';

@@ -4,7 +4,7 @@ extern "C" {
 void rowWidgetInit(RowWidget *widget, s32 visible, u32 count);
 void colorSlotSet(RowWidget *widget, u8 first, u8 second, u8 third, u8 fourth);
 void colorHolderSet(RowWidget *widget, u8 first, u8 second, u8 third, u8 fourth);
-void FUN_0038755c(RowWidget *widget, u32 mode);
+void rowWidgetSetMode(RowWidget *widget, u32 mode);
 
 // Configure the row and column navigation ranges, directional inputs and optional alternate keys.
 void gridNavigationConfigure(GridNavigation *work, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys)
@@ -45,7 +45,7 @@ void gridNavigationConfigure(GridNavigation *work, s32 count, s32 visibleRows, s
         colorHolderSet(&work->columns, 12, 13, 32, 32);
     work->row = 0;
     work->column = 0;
-    FUN_0038755c(&work->rows, 1);
-    FUN_0038755c(&work->columns, 1);
+    rowWidgetSetMode(&work->rows, 1);
+    rowWidgetSetMode(&work->columns, 1);
 }
 }

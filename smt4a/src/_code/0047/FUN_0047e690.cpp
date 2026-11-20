@@ -292,7 +292,7 @@ unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned 
             if ((temp_v2 & 0xff) != 0) {
               __2sprintf((char *)temp_v22,"%s%s");
             }
-            temp_v0 = FUN_0014af98();
+            temp_v0 = messageVoiceBankGet();
             temp_v17 = (float)VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v2 = VectorFloatToUnsigned(temp_v17 * temp_v18,3);
             puVar10 = temp_v22;

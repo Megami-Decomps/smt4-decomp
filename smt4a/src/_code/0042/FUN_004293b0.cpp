@@ -19,11 +19,11 @@ typedef char AsyncMapPacketOffsetsCheck[offsetof(AsyncMapPacket, descriptor) == 
     offsetof(AsyncMapPacket, name) == 0x50 && offsetof(AsyncMapPacket, value) == 0x70 ? 1 : -1];
 extern "C" {
 nn::Result FUN_00427e68(s32 handle, s32 operation);
-u32 FUN_0016ccfc();
+u32 tokenTableGet();
 nn::Result tokenResolveAddress(u32 context, const AsyncMapHandleObject **object, s32 handle);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 s32 libc_toupper(s32 character);
-void FUN_0019a46c(void *destination, const void *source, u32 size);
+void stringCopyTruncated(void *destination, const void *source, u32 size);
 s32 appletIsExitRequested();
 s32 FUN_0015a410();
 extern AsyncMapPacket DAT_0061b030;
@@ -45,7 +45,7 @@ WindowStatusResult FUN_004293b0(const s32 *handle, const AsyncMapParameters *par
     if (!nnResultIsFailure(status)) {
         AsyncMapPacket *packet = &DAT_0061b030;
         const AsyncMapHandleObject *object;
-        status = tokenResolveAddress(FUN_0016ccfc(), &object, *handle);
+        status = tokenResolveAddress(tokenTableGet(), &object, *handle);
         if (!nnResultIsFailure(status)) {
             __aeabi_memcpy4(packet->header, object->header, 0x44);
             u32 format;
@@ -63,7 +63,7 @@ WindowStatusResult FUN_004293b0(const s32 *handle, const AsyncMapParameters *par
             packet->descriptor = (u64)high << 32 | (u64)(attributes & 0x0fffffff) | (u64)storage;
             copyUpperName(packet->name, name, 31);
             packet->value = metadata->value;
-            FUN_0019a46c(packet->signature, metadata->signature, 20);
+            stringCopyTruncated(packet->signature, metadata->signature, 20);
             u32 token;
             status = FUN_00427e28(&token, DAT_0061b000, 0);
             if (!nnResultIsFailure(status)) {

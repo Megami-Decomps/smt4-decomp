@@ -26,13 +26,13 @@ union ObjectParticleCreationView {
     } creation;
 };
 extern "C" {
-extern const char DAT_00544ac4[], DAT_00544af8[];
+extern const char DAT_00544ac4[], g_effObjectParticleSourceFileName[];
 ObjectParticleHeaderView *resourceResolveHeaderPointer(ObjectParticleResourceView *);
 const u8 *resourceResolveDataPointer(ObjectParticleResourceView *);
 void *memAlloc(u32, u32, u32, u32, u32, u32);
 void rt_memclr(void *, u32);
 void __aeabi_memcpy4(void *, const void *, u32);
-void FUN_003aa57c(EffObjectParticle *, u16, EffEmitterDesc *);
+void effObjectParticleSetSource(EffObjectParticle *, u16, EffEmitterDesc *);
 void FUN_003b8ecc(EffObjectParticle *);
 AsdMdlObject *asdMdlManagerCreateFromSource(void *, u32, u32);
 
@@ -52,14 +52,14 @@ EffObjectParticle *FUN_003aa6c0(ObjectParticleResourceView *resource)
     particle->creation.maxCount = maximum;
     particle->creation.scale = 1.0f;
     __aeabi_memcpy4(particle->creation.initialization, header, 0x44);
-    FUN_003aa57c(&particle->object, resource->description.kind, &header->emission);
+    effObjectParticleSetSource(&particle->object, resource->description.kind, &header->emission);
     if (particle->object.source->count) {
         const u8 *data = resourceResolveDataPointer(resource);
         if (data) {
             if (resource->description.resourceType == 3 && resource) {
                 u32 size = resource->dataSize;
                 if (data[0] == 'C' && data[1] == 'G' && data[2] == 'F' && data[3] == 'X') {
-                    asdDebugTrace(DAT_00544af8, 0x279);
+                    asdDebugTrace(g_effObjectParticleSourceFileName, 0x279);
                     particle->creation.modelData = memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
                     memcpySrcFirst(data, particle->creation.modelData, size);
                     AsdMdlObject *model = asdMdlManagerCreateFromSource(particle->creation.modelData, size, 7);

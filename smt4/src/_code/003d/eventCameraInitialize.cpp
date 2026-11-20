@@ -31,9 +31,9 @@ enum {
 extern "C" {
 
 void FUN_003d84d8(EventCamera* camera, s32 mode, s32 arg);
-void FUN_002c2044(void* node, s32 flag);
-void FUN_002c1edc(void* node, void* position, f32* target, s32* result);
-void FUN_002c1e30(void* node, s32 flag);
+void cameraMatrixCacheReset(void* node, s32 flag);
+void cameraMatrixCacheSetLookAt(void* node, void* position, f32* target, s32* result);
+void stereoCameraSetPerspective(void* node, s32 flag);
 void asdCameraRegister(void* node);
 s32 shakeEffectAlloc(void);
 void eventCommandSetPendingCleanup(void);
@@ -68,9 +68,9 @@ void eventCameraInitialize(EventCamera* camera)
     w[0x169].f = 0.0f;
     w[CAM_ZOOM].f = 5.0f;
     w[CAM_BLEND].f = 0.8f;
-    FUN_002c2044(&w[0x16], 1);
-    FUN_002c1edc(&w[0x16], &w[CAM_POSITION], target, &result);
-    FUN_002c1e30(&w[0x16], 1);
+    cameraMatrixCacheReset(&w[0x16], 1);
+    cameraMatrixCacheSetLookAt(&w[0x16], &w[CAM_POSITION], target, &result);
+    stereoCameraSetPerspective(&w[0x16], 1);
     FUN_00298d50(reinterpret_cast<u32>(&w[0x16]));
     asdCameraRegister(&w[0x16]);
 

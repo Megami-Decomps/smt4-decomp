@@ -11,7 +11,7 @@ int onlineSockAddrSetHost(int, unsigned char *);
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int onlineJobSetStateDone(int);
-int FUN_002ea704(void);
+int watcherGetEnabledFlag(void);
 int FUN_002ec738(int);
 int _ZN9Obj55afc44stopEv(int);
 int FUN_002fa18c(int);
@@ -48,7 +48,7 @@ extern int onlineInstanceTableGetCurrent(void);
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: onlineJobSetStateDone. */
-/* Supplied declaration required: FUN_002ea704. */
+/* Supplied declaration required: watcherGetEnabledFlag. */
 /* Supplied declaration required: FUN_002ec738. */
 /* Supplied declaration required: _ZN9Obj55afc44stopEv. */
 /* Supplied declaration required: FUN_002fa18c. */
@@ -74,7 +74,7 @@ void FUN_00112a0c(int param_1)
     onlineJobSetStateDone(param_1);
     return;
   }
-  temp_v2 = FUN_002ea704();
+  temp_v2 = watcherGetEnabledFlag();
   if (temp_v2 != 0) {
     _ZN9Obj55afc44stopEv(param_1 + 0x1ac);
     temp_v0 = *(char *)(param_1 + 0x198);
@@ -86,11 +86,11 @@ void FUN_00112a0c(int param_1)
           return;
         }
         if (*(char *)(param_1 + 0x3ac) == '\0') {
-          temp_v3 = FUN_002ea704();
+          temp_v3 = watcherGetEnabledFlag();
           FUN_002fa434(temp_v4,temp_v3);
           temp_v6 = (unsigned short)*(unsigned int *)(param_1 + 0x374);
           temp_v5 = (*(unsigned short *)(param_1 + 0x13e) << 8) | (*(unsigned short *)(param_1 + 0x13e) >> 8);
-          temp_v3 = FUN_002ea704();
+          temp_v3 = watcherGetEnabledFlag();
           FUN_002fd784(temp_v3,temp_v4);
           (((Obj558b24 *)(temp_v4))->Obj558b24::~Obj558b24(), (int)(temp_v4));
         }

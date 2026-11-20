@@ -5,7 +5,7 @@
 extern "C" {
 
 void FUN_00277d2c(u32 mapId, u32 areaId);
-void FUN_0027ae90(void);
+void mapObjectSpawnAmbientEffects(void);
 void FUN_0027b1b4(void);
 void FUN_0027b2b4(u32 mapId, u32 areaId, u32 third, u32 fourth);
 s32 gameFlagIsSet(u32 flag);
@@ -29,7 +29,7 @@ void FUN_002fb234(void)
     }
     mapRangeEntriesRun();
     FUN_0027b1b4();
-    FUN_0027ae90();
+    mapObjectSpawnAmbientEffects();
     mapGimicUpdateVisualBounds();
     FUN_00277d2c(map->mapId, map->areaId);
 }

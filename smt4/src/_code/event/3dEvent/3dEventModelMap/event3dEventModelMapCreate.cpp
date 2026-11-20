@@ -26,12 +26,12 @@ extern const char DAT_00403634[]; /* "battle/battle_map/e%03d_%02d.bcenv" */
 extern const char DAT_00403610[]; /* "battle/battle_map/b%03d_%02d.bam" */
 extern const char DAT_00403698[]; /* "Event3dModelMap_Calc" */
 
-void FUN_002c2044(void *object, s32 mode);
+void cameraMatrixCacheReset(void *object, s32 mode);
 void FUN_0018a104(Event3dModelMap *map);
-s32 FUN_002c1d5c(void);
+s32 eventIsSkipping(void);
 void FUN_002a09b4(char *path, s32 mode);
 u32 asdMdlManagerCreateSecondList(char *path, u32 count);
-s32 FUN_00221e1c(u32 handle);
+s32 battleStageLoadJobUpdate(u32 handle);
 void modelWorkDestroy(u32 handle);
 
 /* Creates the model-map state for battle map (mapId, variant), loads its environment and model list, and starts its calc process. */
@@ -42,9 +42,9 @@ void event3dEventModelMapCreate(u32 mapId, u32 variant)
     memClear(map, sizeof(Event3dModelMap));
     map->mapId = mapId;
     map->variant = variant;
-    FUN_002c2044(map->unk020, 1);
+    cameraMatrixCacheReset(map->unk020, 1);
     FUN_0018a104(map);
-    if (FUN_002c1d5c() != 0) {
+    if (eventIsSkipping() != 0) {
         map->loaded = 0;
     } else {
         char path[64];
@@ -56,6 +56,6 @@ void event3dEventModelMapCreate(u32 mapId, u32 variant)
         map->unk00C = 0;
         map->loaded = 1;
     }
-    map->process = asdProcessCreateSimple((const s8 *)DAT_00403698, 2, 0, 0, FUN_00221e1c, modelWorkDestroy, (u32)map);
+    map->process = asdProcessCreateSimple((const s8 *)DAT_00403698, 2, 0, 0, battleStageLoadJobUpdate, modelWorkDestroy, (u32)map);
 }
 }

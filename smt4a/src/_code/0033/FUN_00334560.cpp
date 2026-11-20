@@ -7,7 +7,7 @@ s32 listCursorGetRowIfUnblocked(void *cursor);
 void FUN_003d498c(u32 id, u32 mode);
 u32 partyEntryBitsBit4(s32 id);
 s32 questHasSpecialDetailPage(u32 id);
-s32 FUN_002f7730(s32 index, u32 id);
+s32 questGetDisplayState(s32 index, u32 id);
 void questMarkSelectedSpecialDetail(void);
 void uiSpriteSetKeyframe(void *sprite, s32 frame, s32 flags);
 void uiSpriteSetImageKeyframe(void *sprite, s32 image, s32 flags);
@@ -22,7 +22,7 @@ static __inline void uiQuestSelectSpecialDetailPage(u16 id)
     if (!partyEntryBitsBit4(id) && questHasSpecialDetailPage(id)) {
         s32 index;
         for (index = 0; index < quest->listState.count; ++index) {
-            if (FUN_002f7730(index, id) == 3)
+            if (questGetDisplayState(index, id) == 3)
                 break;
         }
         if (index >= quest->listState.count)

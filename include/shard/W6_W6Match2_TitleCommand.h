@@ -8,9 +8,10 @@ struct TitleCommandState {
     u8 disabled;       // 0x00
     u8 commandActive;  // 0x01
     union {
-        u8 unk02[0x0a];   // 0x02
+        u8 unk02[0x06];   // 0x02
         u8 overlayActive; // 0x02
     };
+    /* 0x08 */ u32 sceneList;   /* AsdGxCommandList whose saved copy titleSceneStep replays */
     u32 commandList;   // 0x0c
     union {
         u8 unk10[8];      // 0x10
@@ -23,6 +24,7 @@ struct TitleCommandState {
 };
 typedef char TitleCommandOverlayLayout[
     offsetof(TitleCommandState, overlayActive) == 2 &&
+    offsetof(TitleCommandState, sceneList) == 8 && offsetof(TitleCommandState, commandList) == 0xc &&
     offsetof(TitleCommandState, overlay.frame) == 0x14 &&
     sizeof(TitleCommandState) == 0x1c ? 1 : -1];
 

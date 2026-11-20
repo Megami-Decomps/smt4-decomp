@@ -1,10 +1,10 @@
 #include "common.h"
 
 extern "C" {
-extern u32 DAT_004d96f0[];
+extern u32 g_sysWordTable[];
 
 u32 sysGetTableWord(s32 index)
 {
-    return DAT_004d96f0[index];
+    return g_sysWordTable[index];
 }
 }

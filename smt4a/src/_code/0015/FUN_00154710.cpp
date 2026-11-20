@@ -4,7 +4,7 @@
 
 extern "C" {
 f32 FUN_001a1ee0(f32 angle);
-f32 FUN_001b63b0(f32 angle);
+f32 phaseCosine(f32 angle);
 void FUN_00173b2c(u8 *listener, const Matrix34Data *matrix);
 
 /* Places the 3D listener at `position` facing `heading` and rebuilds its view matrix. */
@@ -20,7 +20,7 @@ void FUN_00154710(const AsdSndListener *position, f32 heading)
     state->listenerHeading = heading;
     AsdSndListener up = state->listenerUp;
     f32 angle = heading * 0.7111111f;
-    AsdSndListener offset = { -FUN_001a1ee0(angle), 0.0f, -FUN_001b63b0(angle) };
+    AsdSndListener offset = { -FUN_001a1ee0(angle), 0.0f, -phaseCosine(angle) };
     AsdSndListener target = { x + offset.x, y + offset.y, z + offset.z };
     AsdSndListener forward = { x - target.x, y - target.y, z - target.z };
     f32 inverseLength = 1.0f / sqrtf(forward.x * forward.x + forward.y * forward.y + forward.z * forward.z);

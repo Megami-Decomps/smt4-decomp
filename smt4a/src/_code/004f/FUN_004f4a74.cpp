@@ -52,7 +52,7 @@ unsigned int FUN_004f4a74(unsigned int *param_1,int param_2)
     FUN_0028033c(uVar2,0xf0,0x10,0x20);
     param_1[3] = uVar2;
     FUN_0037a854();
-    FUN_002e0898(param_1[3],0xc);
+    debugEditorListSetCellSize(param_1[3],0xc);
     FUN_002ea508(param_1[3],0x52821c);
     FUN_002a1b00(param_1[3],0x528214);
     FUN_002a1b00(param_1[3],0x52820c);
@@ -149,7 +149,7 @@ code_r0x004f4c54:
     FUN_0028033c(uVar2,0xf0,0x10,0x20);
     param_1[3] = uVar2;
     FUN_0037a854();
-    FUN_002e0898(param_1[3],0xc);
+    debugEditorListSetCellSize(param_1[3],0xc);
     FUN_002ea508(param_1[3],"MODE");
     FUN_002a1b00(param_1[3],"슌쪕튕垏");
     FUN_002a1b00(param_1[3],"䪃膃覃튕垏");
@@ -242,7 +242,7 @@ code_r0x004f4d58:
     FUN_0028033c(uVar2,0xf0,0x10,0x20);
     param_1[3] = uVar2;
     FUN_0037a854();
-    FUN_002e0898(param_1[3],0xc);
+    debugEditorListSetCellSize(param_1[3],0xc);
     FUN_002ea508(param_1[3],"CAMERA");
     FUN_002a1b00(param_1[3],0x52815c);
     FUN_002a1b00(param_1[3],0x528154);

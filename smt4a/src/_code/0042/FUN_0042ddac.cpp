@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00193038(int *, int **);
+int asdSaveHeaderBuildCalendarTime(int *, int **);
 int __ARM_common_memcpy4_8(...);
 int clockGetTicksAsMicroseconds(int **);
 int FUN_0042f79c(void);
@@ -38,7 +38,7 @@ typedef struct {
 
 extern unsigned int g_asdCecMessageBoxCriticalSection; /* 0x6426c0 */
 
-/* Supplied declaration required: FUN_00193038. */
+/* Supplied declaration required: asdSaveHeaderBuildCalendarTime. */
 /* Supplied declaration required: __ARM_common_memcpy4_8. */
 /* Supplied declaration required: clockGetTicksAsMicroseconds. */
 /* Supplied declaration required: FUN_0042f79c. */
@@ -145,7 +145,7 @@ int * FUN_0042ddac(int *param_1,int param_2,int param_3,unsigned int param_4,int
     clockGetTicksAsMicroseconds(&temp_v21);
     temp_v19 = temp_v21;
     temp_v20 = temp_v22;
-    FUN_00193038(&temp_v9,&temp_v19);
+    asdSaveHeaderBuildCalendarTime(&temp_v9,&temp_v19);
     temp_v11 = temp_v9;
     uStack_7c = iStack_f4;
     puStack_78 = puStack_f0;

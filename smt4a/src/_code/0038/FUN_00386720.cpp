@@ -24,14 +24,14 @@ struct MapElevationView {
 typedef char MapElevationOffsets[offsetof(MapElevationView, phase) == 0x18 &&
     offsetof(MapElevationView, opacity) == 0xDC && offsetof(MapElevationView, flags) == 0xF4 ? 1 : -1];
 extern "C" {
-void FUN_00227a70(void);
-void FUN_002a2e98(s32 map, u32 variant, u32 specialMap, u32 mode);
+void mapCollisionRelease(void);
+void mapCollisionLoad(s32 map, u32 variant, u32 specialMap, u32 mode);
 void FUN_0033feb8(LmapMainStateA *state);
 void lmapUpdateMapBgm(void);
 void FUN_00244ac8(void);
-void FUN_002747dc(void);
+void mapIfResetRecords(void);
 void FUN_00364740(s32 map, u32 variant);
-void FUN_002ddea0(void);
+void lmapUpdateEngineRecordNavigation(void);
 void stateSetterSetFromBase(LmapObj *object, s32 map, u32 variant);
 void fieldBuildAreaPlacementList(LmapObj *object);
 
@@ -48,8 +48,8 @@ u32 FUN_00386720(void)
         state->dirty = 1;
         state->variant = 99;
         g_gameState.areaId = 99;
-        FUN_00227a70();
-        FUN_002a2e98(state->map, state->variant, state->map == 101 ? 101 : 0, state->map == 101 ? 10 : 0);
+        mapCollisionRelease();
+        mapCollisionLoad(state->map, state->variant, state->map == 101 ? 101 : 0, state->map == 101 ? 10 : 0);
         state->phase = 1;
         state->frame = 0;
         break;
@@ -82,10 +82,10 @@ u32 FUN_00386720(void)
         {
             s32 map = state->map;
             LmapMainStateA *current = g_lmapMainState;
-            FUN_002747dc();
+            mapIfResetRecords();
             FUN_00364740(map, ((MapElevationView *)current)->variant);
         }
-        FUN_002ddea0();
+        lmapUpdateEngineRecordNavigation();
         stateSetterSetFromBase((LmapObj *)&state->flags, state->map - 100, state->variant);
         fieldBuildAreaPlacementList((LmapObj *)&state->flags);
         g_gameState.inputBlocked = 0;

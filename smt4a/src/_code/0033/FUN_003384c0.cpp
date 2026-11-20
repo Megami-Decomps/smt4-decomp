@@ -6,7 +6,7 @@ extern "C" {
 void *memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 blockAlignment, s32 kind);
 void rt_memclr(void *memory, u32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-void FUN_003aa57c(EffEmitter *emitter, u16 kind, EffEmitterDesc *description);
+void effObjectParticleSetSource(EffEmitter *emitter, u16 kind, EffEmitterDesc *description);
 void FUN_003b8ecc(EffEmitter *emitter);
 void asdMdlManagerDestroy(EmitterCloneModel *model);
 EmitterCloneModel *asdMdlManagerClone(EmitterCloneModel *model, u32 flags);
@@ -46,7 +46,7 @@ EffEmitter *FUN_003384c0(EffEmitter *source)
     clone->scale = 1.0f;
     __aeabi_memcpy4(clone->parameters, original->parameters, sizeof(clone->parameters));
     EffEmitter *emitter = reinterpret_cast<EffEmitter *>(clone);
-    FUN_003aa57c(emitter, original->resource->kind, description);
+    effObjectParticleSetSource(emitter, original->resource->kind, description);
     if (clone->resource->data != NULL) {
         if (original->kind == 3) {
             if (clone->model != NULL) {

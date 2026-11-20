@@ -42,7 +42,7 @@ extern MapHeading g_localCameraPosition;
 void asdTMTexTableReleaseNode(u32 table, u32 node);
 u32 asdTMTexTableGetHeaderValue(u32 table, u32 node);
 void FUN_00235bfc(u32 a, s32 b, u32 c, u32 d, f32 e, f32 f, f32 g, f32 h, f32 i, f32 j);
-void FUN_00297024(u32 enabled, u32 arg14, u32 arg15, u32 arg16, u32 arg17,
+void mapEnvironmentSetLight(u32 enabled, u32 arg14, u32 arg15, u32 arg16, u32 arg17,
                   u32 arg18, u32 arg19, u32 arg20, u32 arg21, u32 arg22,
                   u32 arg23, s32 arg24, s32 arg26, f32 arg1A, f32 arg1C);
 void FUN_0033f42c(void);
@@ -99,7 +99,7 @@ void mapEnvironmentApplyPreset(u32 preset, s32 transition)
     FUN_00235bfc(entry->unk08, entry->unk0E, entry->unk09, entry->unk0A, (f32)entry->unk09,
                  (f32)entry->unk0A, (f32)entry->unk0B, (f32)entry->unk0C * 100.0f,
                  (f32)entry->unk0E * 100.0f, entry->unk10);
-    FUN_00297024(0, entry->unk14, entry->unk15, entry->unk16, entry->unk17,
+    mapEnvironmentSetLight(0, entry->unk14, entry->unk15, entry->unk16, entry->unk17,
                  entry->unk18, entry->unk19, entry->unk20, entry->unk21,
                  entry->unk22, entry->unk23, entry->unk24, entry->unk26,
                  (f32)entry->unk1A, entry->unk1C);

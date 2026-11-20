@@ -2,15 +2,15 @@
 
 extern "C" {
 
-extern ParameterTriple DAT_00640388;
+extern ParameterTriple g_startMenuProcessGroup;
 
 /* Stores three parameters and resets their pending state. */
 void paramTripleSet(u32 first, u32 second, u32 third)
 {
-    DAT_00640388.first = first;
-    DAT_00640388.second = second;
-    DAT_00640388.third = third;
-    DAT_00640388.state = 0;
+    g_startMenuProcessGroup.first = first;
+    g_startMenuProcessGroup.second = second;
+    g_startMenuProcessGroup.third = third;
+    g_startMenuProcessGroup.state = 0;
 }
 
 } /* extern "C" */

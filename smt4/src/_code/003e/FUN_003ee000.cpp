@@ -21,7 +21,7 @@ struct SecondElement {
 
 extern "C" {
 extern InitializationCounters DAT_00447a40;
-extern FirstElement DAT_004a1264[160];
+extern FirstElement g_namedEntryTable[160];
 extern SecondElement DAT_004afd64[160];
 void FUN_0033b614(void* element);
 void FUN_003494ec(void* element);
@@ -38,7 +38,7 @@ void* FUN_003ee000(u32 first, u32 second, InitializationArguments* arguments)
     DAT_00447a40.first = 0;
     DAT_00447a40.second = 0;
     __aeabi_vec_ctor_nocookie_nodtor(
-        DAT_004a1264, FUN_0033b614, sizeof(FirstElement), 160);
+        g_namedEntryTable, FUN_0033b614, sizeof(FirstElement), 160);
     return FUN_002c5d54(
         DAT_004afd64, FUN_003494ec, sizeof(SecondElement), 160);
 }

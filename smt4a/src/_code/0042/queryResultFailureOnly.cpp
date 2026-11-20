@@ -3,13 +3,13 @@
 extern "C" {
 
 extern int tokenResolveAddress(u32 handle, u32 *out, u32 value);
-extern u32 FUN_0016ccfc(void);
+extern u32 tokenTableGet(void);
 
 /* Queries with the object's first word and keeps only the failure code (0 on success); the queried value is unused. */
 int queryResultFailureOnly(const u32 *object)
 {
     u32 out;
-    int result = tokenResolveAddress(FUN_0016ccfc(), &out, *object);
+    int result = tokenResolveAddress(tokenTableGet(), &out, *object);
 
     if (!nnResultIsFailure(result)) {
         result = 0;

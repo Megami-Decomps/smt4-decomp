@@ -7,7 +7,7 @@ int nn_fnd_DateTime_DateToDays(...);
 int legacyResourceIdRemap(...);
 int FUN_00426e18(...);
 int FUN_00426eb8(...);
-int FUN_00426fe4(int *, int, int);
+int aocOpenPackedArchive(int *, int, int);
 int recordClearWideHandle(...);
 int _ZN9Obj4279d4C1Ejj(int [3], unsigned char [1024], int);
 int FUN_00427ff4(...);
@@ -39,7 +39,7 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: legacyResourceIdRemap. */
 /* Supplied declaration required: FUN_00426e18. */
 /* Supplied declaration required: FUN_00426eb8. */
-/* Supplied declaration required: FUN_00426fe4. */
+/* Supplied declaration required: aocOpenPackedArchive. */
 extern unsigned int halfPair48LowByteA(int);
 extern unsigned int halfPair48LowByteB(int);
 /* Supplied declaration required: recordClearWideHandle. */
@@ -111,7 +111,7 @@ void FUN_004767a8(int param_1)
   unsigned int uStack_34;
   
   temp_v0 = g_aocMain;
-  FUN_00426fe4(&temp_v8,g_aocMain + 0x28,g_aocMain + 0x18);
+  aocOpenPackedArchive(&temp_v8,g_aocMain + 0x28,g_aocMain + 0x18);
   *(unsigned int *)(param_1 + 0xc) = temp_v8;
   *(unsigned int *)(param_1 + 0x10) = uStack_f4;
   temp_v1 = legacyResourceIdRemap(param_1 + 0xc);

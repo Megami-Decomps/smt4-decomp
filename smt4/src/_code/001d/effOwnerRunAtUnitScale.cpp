@@ -9,14 +9,14 @@ typedef struct {
 } Owner;
 
 int effBehaviorRun(void *effect);
-int FUN_002c74ac(Owner *owner, f32 scale);
+int effTreeStepAtScale(Owner *owner, f32 scale);
 
-/* If the owner has an effect record, runs effBehaviorRun on it and then FUN_002c74ac with scale 1.0. */
+/* If the owner has an effect record, runs effBehaviorRun on it and then effTreeStepAtScale with scale 1.0. */
 void effOwnerRunAtUnitScale(Owner *owner)
 {
     if (owner->effect != NULL) {
         effBehaviorRun(owner->effect);
-        FUN_002c74ac(owner, 1.0f);
+        effTreeStepAtScale(owner, 1.0f);
     }
 }
 

@@ -10,11 +10,11 @@ extern "C" {
 int dataFindKindRecordWithAocOverrides(int, int);
 int textDrawString(...);
 int effectDispatchSelector(...);
-int FUN_00180310(...);
+int statRowDrawValueImpl(...);
 int gxResetColorQuadToWhite(void);
 int drawSetColorFromRGBA8(...);
 int itemTableGetEquipmentRecord(void);
-int FUN_0047fc38(void);
+int equipmentIsFullyUpgraded(void);
 int equipmentGetCappedUpgradeBonuses(...);
 int VectorSignedToFloat(...);
 
@@ -56,14 +56,14 @@ extern unsigned char LAB_002acdbc; /* 0x2acdbc */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: effectDispatchSelector. */
 extern unsigned short *gameGetPlayerData(void);
-/* Supplied declaration required: FUN_00180310. */
+/* Supplied declaration required: statRowDrawValueImpl. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: itemTableGetEquipmentRecord. */
 extern unsigned int flagValueRead(int);
 extern int unitMatchesAlignment(int);
-/* Supplied declaration required: FUN_0047fc38. */
+/* Supplied declaration required: equipmentIsFullyUpgraded. */
 /* Supplied declaration required: equipmentGetCappedUpgradeBonuses. */
 extern int equipmentHasPositiveUpgrade(int);
 
@@ -134,7 +134,7 @@ void FUN_002ac470(int param_1,int param_2,int param_3,int param_4,int param_5,un
     if (temp_v3 != 0) {
       temp_v9 = 0x8400ff;
       temp_v3 = temp_v21;
-      FUN_0047fc38();
+      equipmentIsFullyUpgraded();
       if (temp_v3 != 0) {
         temp_v9 = 0xfbeb39ff;
       }
@@ -149,7 +149,7 @@ void FUN_002ac470(int param_1,int param_2,int param_3,int param_4,int param_5,un
   temp_v9 = flagValueRead(temp_v21);
   sprintf((char *)temp_v10,(const char *)&LAB_002ac904,temp_v9);
   drawSetColorFromRGBA8(param_6);
-  FUN_00180310(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v11 + 8) + param_4,
+  statRowDrawValueImpl(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v11 + 8) + param_4,
                (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v11 + 10) + param_5,1,2,0x6f,
                temp_v10);
   gxResetColorQuadToWhite();
@@ -201,7 +201,7 @@ LAB_002aca54:
       }
       temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x535));
       sprintf((char *)temp_v10,(const char *)&LAB_002ac904,*(unsigned int *)(temp_v6 + 0x24) & 0x3ff);
-      FUN_00180310(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + param_4,
+      statRowDrawValueImpl(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + param_4,
                    (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v2 + 10) + param_5,1,4,0x6f,
                    temp_v10);
       gxResetColorQuadToWhite();
@@ -229,7 +229,7 @@ LAB_002aca54:
       }
       drawSetColorFromRGBA8(param_6);
       temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x539));
-      FUN_00180310(0,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v2 + 8) + param_4,
+      statRowDrawValueImpl(0,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v2 + 8) + param_4,
                    (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v2 + 10) + param_5,1,3,0x6f,
                    temp_v10);
       gxResetColorQuadToWhite();
@@ -271,7 +271,7 @@ LAB_002acc48:
       }
       temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x54f));
       sprintf((char *)temp_v10,(const char *)&LAB_002acdbc,temp_v4);
-      FUN_00180310(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v6 + 8) + param_4,
+      statRowDrawValueImpl(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v6 + 8) + param_4,
                    (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v6 + 10) + param_5,1,5,0x6f,
                    temp_v10);
       gxResetColorQuadToWhite();
@@ -288,7 +288,7 @@ LAB_002acc48:
       }
       temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x554));
       sprintf((char *)temp_v10,(const char *)&LAB_002acdbc,temp_v16);
-      FUN_00180310(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v6 + 8) + param_4,
+      statRowDrawValueImpl(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v6 + 8) + param_4,
                    (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v6 + 10) + param_5,1,5,0x6f,
                    temp_v10);
       gxResetColorQuadToWhite();
@@ -323,7 +323,7 @@ LAB_002ac704:
   }
   temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x518));
   sprintf((char *)temp_v10,(const char *)&LAB_002ac904,*(unsigned int *)(temp_v6 + 0x24) & 0x3ff);
-  FUN_00180310(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + param_4,
+  statRowDrawValueImpl(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + param_4,
                (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v2 + 10) + param_5,1,4,0x6f,
                temp_v10);
   gxResetColorQuadToWhite();

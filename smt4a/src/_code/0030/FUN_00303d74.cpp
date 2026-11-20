@@ -8,7 +8,7 @@ int FUN_0010b744(int);
 int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002e9b30(int, int, unsigned int, int);
-int FUN_002f3dde(int, int *, unsigned int, int *);
+int onlineInstanceCompleteMode3(int, int *, unsigned int, int *);
 int FUN_002f4db0(int *, int, unsigned int, int);
 
 /* stack frame of param_3: 6 slot(s), 21 byte(s) */
@@ -29,7 +29,7 @@ extern unsigned int _ZN12OnlineResultC1ERKj(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_002e9b30. */
 extern int FUN_002ea6fc(unsigned int *, unsigned char *);
 extern unsigned int streamWriterFinish(unsigned int);
-/* Supplied declaration required: FUN_002f3dde. */
+/* Supplied declaration required: onlineInstanceCompleteMode3. */
 extern int FUN_002f4d9c(int, unsigned short);
 /* Supplied declaration required: FUN_002f4db0. */
 
@@ -100,7 +100,7 @@ LAB_00303db6:
   temp_v3 = temp_v8;
   temp_v4 = uStack_28;
   temp_v5 = uStack_24;
-  FUN_002f3dde(param_2,&temp_v3,uStack_24,&temp_v6);
+  onlineInstanceCompleteMode3(param_2,&temp_v3,uStack_24,&temp_v6);
   _ZN9Obj55b28cD1Ev(temp_v9);
   return;
 }

@@ -2,7 +2,7 @@
 
 extern "C" {
 extern void (*DAT_0044e450)(u32, u32, u32, u32, u32, u32);
-u32 FUN_0014e66c(u32 reason, u32 first, u32 second);
+u32 svcBreakTrap(u32 reason, u32 first, u32 second);
 
 // Consume the one-shot break callback before issuing the break request.
 u32 sysBreakWithCallback(u32 reason, u32, u32 detail)
@@ -12,6 +12,6 @@ u32 sysBreakWithCallback(u32 reason, u32, u32 detail)
         DAT_0044e450 = NULL;
         callback(reason, 0, 0, 0, 0, detail);
     }
-    return FUN_0014e66c(reason, 0, 0);
+    return svcBreakTrap(reason, 0, 0);
 }
 }

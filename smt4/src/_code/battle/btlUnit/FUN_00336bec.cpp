@@ -14,7 +14,7 @@ struct BattleAppearanceTiming {
     s32 baseDelay;
 };
 extern "C" {
-extern BattleVersionResources *DAT_00435d18;
+extern BattleVersionResources *g_btlAux;
 extern BattleAppearanceTiming DAT_00439a20;
 s32 compareDistanceFromOrigin(const void *left, const void *right);
 void qsort(void *entries, s32 count, u32 size, s32 (*compare)(const void *, const void *));
@@ -25,7 +25,7 @@ void FUN_0024082c(BtlCamera *main, s32 duration);
 void FUN_00336bec(BtlMainState *state)
 {
     g_btlMain->flags |= 0x4000;
-    FUN_00240614(DAT_00435d18);
+    FUN_00240614(g_btlAux);
     BtlActionRecord *actions[50];
     s32 count = 0;
     for (s32 i = 4; i < 54; ++i) {

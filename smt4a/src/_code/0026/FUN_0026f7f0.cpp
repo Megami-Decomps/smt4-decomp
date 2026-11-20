@@ -6,7 +6,7 @@ extern "C" {
 void sysMemClear(void *memory, u32 size);
 void playerGetWords(u16 *words, s32 kind);
 void gridNavigationConfigure(void *view, u32 count, u32 a, u32 b, u32 c, u32 d);
-void FUN_003d0bc0(s32 mode);
+void campRebuildListByMode(s32 mode);
 
 /* Rebuild the camp list of every skill id the player and the party slots hold. */
 void FUN_0026f7f0(void)
@@ -41,6 +41,6 @@ void FUN_0026f7f0(void)
         }
     }
     gridNavigationConfigure(&camp->grids[3], count, 11, 1, 1, 1);
-    FUN_003d0bc0(9);
+    campRebuildListByMode(9);
 }
 }

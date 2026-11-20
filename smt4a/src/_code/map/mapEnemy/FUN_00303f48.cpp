@@ -18,7 +18,7 @@ int nkmEnemyFindById(void);
 int distSpatial(void);
 int FUN_002b64c0(...);
 int FUN_002b67a0(int);
-int FUN_00356308(void);
+int fieldFindAreaPlacementRecord(void);
 int contentEntryGetB(void);
 int contentEntryGetC(void);
 int FUN_003a30e8(void);
@@ -92,7 +92,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002b67a0. */
 extern int mapEnemyLoadExtraModel(unsigned int);
 extern char *FUN_00332fcc(void);
-/* Supplied declaration required: FUN_00356308. */
+/* Supplied declaration required: fieldFindAreaPlacementRecord. */
 extern char *FUN_00371058(void);
 extern int lmapGetSpawnIndex(void);
 /* Supplied declaration required: contentEntryGetB. */
@@ -315,7 +315,7 @@ void FUN_00303f48(void)
   else {
     temp_v17 = (char *)dataTableGetRecordFortyOne();
     temp_v18 = (char *)0x0;
-    FUN_00356308();
+    fieldFindAreaPlacementRecord();
     temp_v16 = *(int *)(temp_v6 + 0xc);
     temp_v1 = *(int *)(temp_v6 + 0x10);
   }
@@ -527,7 +527,7 @@ LAB_0030444c:
   }
   else {
     pcVar7 = pcVar14;
-    FUN_00356308();
+    fieldFindAreaPlacementRecord();
     temp_v18 = pcVar7;
     if (((*pcVar7 != -1) && ((int)*pcVar7 == *(int *)(temp_v6 + 0xc))) &&
        ((int)pcVar7[1] == *(int *)(temp_v6 + 0x10))) goto LAB_0030444c;

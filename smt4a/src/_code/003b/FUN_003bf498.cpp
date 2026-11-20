@@ -3,9 +3,9 @@
 
 extern "C" {
 
-void FUN_00303460(s32 value);
+void lmapCameraSetMode(s32 value);
 
-/* Clears the twelve floats at 0x41c of the game state, its word at 0x44c and flag at 0x450, then runs FUN_00303460(0). */
+/* Clears the twelve floats at 0x41c of the game state, its word at 0x44c and flag at 0x450, then runs lmapCameraSetMode(0). */
 void FUN_003bf498(void)
 {
     g_gameState.followCameraPose.eye.x = 0.0f;
@@ -22,7 +22,7 @@ void FUN_003bf498(void)
     g_gameState.followCameraTargetPose.target.z = 0.0f;
     g_gameState.unk44C = 0;
     g_gameState.unk450 = 0;
-    FUN_00303460(0);
+    lmapCameraSetMode(0);
 }
 
 } /* extern "C" */

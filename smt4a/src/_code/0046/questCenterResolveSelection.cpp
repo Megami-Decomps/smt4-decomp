@@ -6,7 +6,7 @@
 
 extern "C" {
 u8 FUN_002a746c();
-s32 FUN_002f153c();
+s32 uiQuestGetPendingAction();
 u8 uiQuestGetPanelMode();
 s32 uiQuestGetActive();
 u8 uiQuestGetState();
@@ -16,7 +16,7 @@ u16 FUN_00372140();
 u16 uiQuestRunEnabledAction();
 void buttonHelpBeginExit(s32);
 void buttonHelpSetText(s32, u32);
-void FUN_0037c8e4(s32, s32);
+void messageBannerInitCounter(s32, s32);
 void panelSetTarget(s32, s32);
 void messageMainSetTargetFlags(s32);
 void FUN_003a7630(s32);
@@ -51,7 +51,7 @@ void questCenterResolveSelection(PickObjectResources *owner)
     work->questState = uiQuestGetState();
     work->quest = uiQuestRunEnabledAction();
     work->result = FUN_00372140();
-    s32 action = FUN_002f153c();
+    s32 action = uiQuestGetPendingAction();
     work->panelMode = uiQuestGetPanelMode();
     uiQuestGetActive();
     if (work->questState) {
@@ -83,7 +83,7 @@ void questCenterResolveSelection(PickObjectResources *owner)
         return;
     }
     if (work->panelOpen) {
-        FUN_0037c8e4(1, 0);
+        messageBannerInitCounter(1, 0);
         panelSetTarget(-FUN_00467df8(), 0);
         messageMainSetTargetFlags(1);
         work->panelOpen = 0;

@@ -12,10 +12,10 @@ struct BattleTextureResourceRecord {
 }
 extern "C" {
 BattleTextureResourceRecord *dataTable25FindById(u32 id);
-s32 FUN_002c1d5c();
+s32 eventIsSkipping();
 u32 eventResourceCacheAcquire(s32 textureId, s32 flags);
 u32 uiStepAnimatedContentTask(void *job);
-u32 FUN_001e023c(void *job);
+u32 eventFadeJobDraw(void *job);
 void jobWorkRelease(void *job);
 void *taskCreateDraw(const char *name, s32 priority, s32 flags, s32 owner,
     u32 (*draw)(void *), void (*destroy)(void *), void *work, void *process);
@@ -34,7 +34,7 @@ void *eventCreateResourceBattleTexture(u32 id, f32 x, f32 y)
     work->stopWhenTransparent = 0;
     work->unk17 = 0;
     work->textureId = -dataTable25FindById(id)->textureId;
-    if (FUN_002c1d5c()) {
+    if (eventIsSkipping()) {
         work->state = 1;
     } else {
         work->resource = eventResourceCacheAcquire(work->textureId, 1);
@@ -58,7 +58,7 @@ void *eventCreateResourceBattleTexture(u32 id, f32 x, f32 y)
     work->enabled = 1;
     work->unk15 = 0;
     void *process = reinterpret_cast<void *>(asdProcessCreateSimple(reinterpret_cast<const s8 *>(k_eventBattleTextureProcessName), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(uiStepAnimatedContentTask), reinterpret_cast<AsdProcFunc>(jobWorkRelease), reinterpret_cast<u32>(work)));
-    taskCreateDraw(k_eventBattleTextureDrawName, 0x6F, 0, 0, FUN_001e023c, 0, work, process);
+    taskCreateDraw(k_eventBattleTextureDrawName, 0x6F, 0, 0, eventFadeJobDraw, 0, work, process);
     return process;
 }
 }

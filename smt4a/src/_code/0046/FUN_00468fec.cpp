@@ -54,7 +54,7 @@ s32 messageWindowIsState1(void);
 s32 messageMainGetValue(void);
 const s8 *dataTable28Type1GetEntry(const void *token, u8 index);
 void buttonHelpSetText(const s8 *text, u32 color);
-void FUN_0037c8e4(s32 first, s32 second);
+void messageBannerInitCounter(s32 first, s32 second);
 void messageMainSetTargetFlags(s32 flags);
 s32 panelIsActiveState2(void);
 u8 gameFlagIsSet(u32 flag);
@@ -92,7 +92,7 @@ void FUN_00468fec(QuestChoiceWork *work)
         }
         if (value == 0) {
             if (FUN_0034919c() == 0) {
-                FUN_0037c8e4(1, 0);
+                messageBannerInitCounter(1, 0);
                 u32 target = FUN_00467df8();
                 if (target != 0) {
                     panelSetTarget(-target, 0);
@@ -134,7 +134,7 @@ void FUN_00468fec(QuestChoiceWork *work)
                 work->slots[i].second = records[i].unk53;
             }
         }
-        FUN_00214da4();
+        placeWindowStartClose();
         work->state = 8;
         work->counter = 0;
         return;
@@ -150,7 +150,7 @@ void FUN_00468fec(QuestChoiceWork *work)
         work->counter = 0;
         break;
     case 0:
-        FUN_00214da4();
+        placeWindowStartClose();
         work->counter = 0;
         work->state = 7;
         break;
@@ -158,7 +158,7 @@ void FUN_00468fec(QuestChoiceWork *work)
         if (FUN_0034919c() != 0) {
             messageDismissNumericBanner(0);
         }
-        FUN_00214da4();
+        placeWindowStartClose();
         work->state = 8;
         work->counter = 0;
         break;
@@ -166,7 +166,7 @@ void FUN_00468fec(QuestChoiceWork *work)
         if (FUN_0034919c() != 0) {
             messageDismissNumericBanner(0);
         }
-        FUN_00214da4();
+        placeWindowStartClose();
         work->state = 9;
         work->counter = 0;
         messageDismissNumericBanner(0);
@@ -175,7 +175,7 @@ void FUN_00468fec(QuestChoiceWork *work)
         if (FUN_0034919c() != 0) {
             messageDismissNumericBanner(0);
         }
-        FUN_00214da4();
+        placeWindowStartClose();
         work->state = 10;
         work->counter = 0;
         Obj557b18 *model = work->pointerHolder->body;

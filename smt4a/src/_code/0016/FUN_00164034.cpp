@@ -2,21 +2,21 @@
 #include "code/Code0016.h"
 
 extern "C" {
-extern u32 DAT_005b3ce8;
+extern u32 g_defaultDrawColor;
 void gpuSubmitDefaultPacket(void);
-void FUN_00186244(u32 first, u32 second, u32 third, u32 fourth, f32 value0, f32 value1, f32 value2, f32 value3, f32 value4, f32 value5, f32 value6, f32 value7, f32 value8);
+void gpuSubmitFloatColoredQuad(u32 first, u32 second, u32 third, u32 fourth, f32 value0, f32 value1, f32 value2, f32 value3, f32 value4, f32 value5, f32 value6, f32 value7, f32 value8);
 void effectSubmitDefaultParameters(void);
 
 /* Substitutes the shared default for empty integer parameters and submits the scalar parameter block. */
 /* The four floats are declared before the colours (ABI-equal: r0-r3 and s0-s4): the order its callers schedule the arguments in. */
 void FUN_00164034(f32 value0, f32 value1, f32 value2, f32 value3, u32 first, u32 second, u32 third, u32 fourth, f32 value4)
 {
-    if (first == 0) first = DAT_005b3ce8;
-    if (second == 0) second = DAT_005b3ce8;
-    if (third == 0) third = DAT_005b3ce8;
-    if (fourth == 0) fourth = DAT_005b3ce8;
+    if (first == 0) first = g_defaultDrawColor;
+    if (second == 0) second = g_defaultDrawColor;
+    if (third == 0) third = g_defaultDrawColor;
+    if (fourth == 0) fourth = g_defaultDrawColor;
     gpuSubmitDefaultPacket();
-    FUN_00186244(first, second, third, fourth, value0, value1, value2, value3, 0.0f, 0.0f, 0.0f, 0.0f, value4);
+    gpuSubmitFloatColoredQuad(first, second, third, fourth, value0, value1, value2, value3, 0.0f, 0.0f, 0.0f, 0.0f, value4);
     effectSubmitDefaultParameters();
 }
 }

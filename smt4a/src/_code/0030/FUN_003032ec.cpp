@@ -21,12 +21,12 @@ struct ValueCollection {
 
 extern "C" {
 extern const u32 DAT_00559144[];
-ValueNode* FUN_00307d00(ValueCollection* collection, s32 mode, ValueNode** position, const NodeValue* value);
+ValueNode* listAllocateSentinelNode(ValueCollection* collection, s32 mode, ValueNode** position, const NodeValue* value);
 
 // Copy a value into a new list node and insert it before the requested position.
 void FUN_003032ec(ValueNode** result, ValueCollection* collection, ValueNode** position, const NodeValue* value)
 {
-    ValueNode* node = FUN_00307d00(collection, 0, position, value);
+    ValueNode* node = listAllocateSentinelNode(collection, 0, position, value);
     NodeValue* copy = &node->value;
     copy->vtable = DAT_00559144;
     copy->first = value->first;

@@ -18,7 +18,7 @@ typedef struct Dialog {
 
 extern int sysPlaySe(u32 se);
 extern int buttonHelpSetText(int a, u32 color);
-extern int FUN_002ebce4(void);
+extern int partyPanelIsOutsideDialogState(void);
 extern int screenStartOrClear(u32 screen, u32 start);
 
 /* Enters `state` with `arg`: plays the sound it calls for and, for the choice states, starts the screen. */
@@ -59,7 +59,7 @@ void dialogEnterState(Dialog *dialog, u32 state, u32 arg)
         break;
     }
     sysPlaySe(se);
-    if (FUN_002ebce4() != 0) {
+    if (partyPanelIsOutsideDialogState() != 0) {
         screenStartOrClear(dialog->screen, start);
     }
 }

@@ -40,7 +40,7 @@ extern "C" void soundStreamPostTargetLevel(SoundStreamOwner *owner)
     if (target->suppressed != 0) {
         return;
     }
-    Obj421aa4Manager *manager = FUN_002bae7c();
+    Obj421aa4Manager *manager = soundStreamCommandManagerGetInstance();
     Obj421aa4Node *node = soundRequestBegin(manager, 0x14);
     node->type = 0x2c;
     u8 value = target->kind;

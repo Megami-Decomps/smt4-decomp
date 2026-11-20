@@ -49,7 +49,7 @@ char *libc_strcpy(char *dest, const char *src);
 void sysMemClear(void *buffer, u32 bytes);
 char *libc_strrchr(const char *text, s32 character);
 void btlCameraFinishTransition(BtlEffectWork *work);
-u32 FUN_002282c8(u32 effect, u32 a, u32 b);
+u32 filterCreateByKind(u32 effect, u32 a, u32 b);
 
 /* Requests the loading of every effect the battle names; returns 0 when it has no name table. */
 u32 FUN_004f9764(BtlEffectWork *work)
@@ -80,7 +80,7 @@ u32 FUN_004f9764(BtlEffectWork *work)
                     __2sprintf(text, DAT_00528534, g_btlEffect.prefix, n);
                     if (strcmp(text, name) == 0) {
                         btlCameraFinishTransition(work);
-                        work->transition = FUN_002282c8(n & 0xff, 7, 0);
+                        work->transition = filterCreateByKind(n & 0xff, 7, 0);
                         work->transitionEffect = n;
                         break;
                     }

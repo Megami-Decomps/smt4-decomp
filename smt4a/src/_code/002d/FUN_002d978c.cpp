@@ -22,7 +22,7 @@ void soundActorStartOnFreeChannel(u32 event);
 void FUN_00324e38(u32 value);
 void libm_sinf(void);
 void libm_cosf(void); // declcheck: local (the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
-void FUN_0014af98(void);
+void messageVoiceBankGet(void);
 void FUN_002e364c(f32 *target);
 void FUN_00327ee8(void);
 
@@ -42,7 +42,7 @@ static __inline void lmapIntroAnnounce(const u32 *events, u32 voice, u32 volume)
     FUN_00324e38(0xFFFFFFFF);
     libm_sinf();
     libm_cosf();
-    FUN_0014af98();
+    messageVoiceBankGet();
     soundVolumeSettingSet(0);
     sysPlayVoice(voice);
     soundVolumeSettingSet(volume);

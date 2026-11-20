@@ -3,13 +3,13 @@
 
 extern "C" {
 
-void FUN_002d7e44(void);
+void titleSceneDrawEffectEditor(void);
 
 /* Finish updating the title scene before advancing its transition. */
 s32 titleSceneUpdateAndAdvanceTransition(void *)
 {
     renderCtxSelectStereoLayout(g_titleScene);
-    FUN_002d7e44();
+    titleSceneDrawEffectEditor();
     return 0;
 }
 }

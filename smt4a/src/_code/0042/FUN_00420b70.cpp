@@ -33,7 +33,7 @@ void msgWindowReset(void);
 void ptrListRemoveClearOwner(HandleRegistry *registry, u32 handle);
 void ifTouchRegionRemove(void);
 void fillThreeWordsWithByte(void *words, u32 value);
-void FUN_002c85b0(s32 mode);
+void gameGlobalsSetSceneState(s32 mode);
 void FUN_0033440c(u32 value);
 void gameGlobalsReleaseReference(void);
 void buttonHelpSetText(s32 layer, u32 color);
@@ -90,7 +90,7 @@ void FUN_00420b70(SaveLoadControllerA *work)
     work->pending = 0;
     work->confirmed = 0;
     work->canceled = 0;
-    FUN_002c85b0(0);
+    gameGlobalsSetSceneState(0);
     FUN_0033440c(-1);
     gameGlobalsReleaseReference();
     buttonHelpSetText(0, 0xf4f4f4ff);

@@ -10,7 +10,7 @@ void nw_snd_internal_FrameHeap_Destroy(u32 *heap);
 u32 *nw_snd_internal_FrameHeap_FrameHeap_sub_object_3802B0(u32 *heap);
 u32 soundRequestQueueGetInstance(void);
 u32 soundRequestQueueFlush(u32 arg0, u32 arg1);
-void FUN_002b4b94(u32 arg0, u32 arg1);
+void soundRequestQueueDequeueUntilToken(u32 arg0, u32 arg1);
 
 extern const u8 DAT_00421f5c;  /* vtable */
 
@@ -30,7 +30,7 @@ static __inline void soundHeapObjDestroyHeap(SoundHeapObj *self)
     if (self->heap != 0) {
         soundHeapObjClear(self);
         u32 heapOwner = soundRequestQueueGetInstance();
-        FUN_002b4b94(heapOwner, soundRequestQueueFlush(heapOwner, 1));
+        soundRequestQueueDequeueUntilToken(heapOwner, soundRequestQueueFlush(heapOwner, 1));
         nw_snd_internal_FrameHeap_Destroy(&self->heap);
         nn_os_CriticalSection_Leave(lock);
     } else {

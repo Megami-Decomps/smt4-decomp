@@ -7,8 +7,8 @@ extern "C" {
 int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int onlineInstanceTableFind(int, unsigned int);
-int FUN_002f3dc4(void);
-int FUN_002f3dde(int, int *, unsigned int, unsigned char [4]);
+int onlineInstanceCompleteMode2(void);
+int onlineInstanceCompleteMode3(int, int *, unsigned int, unsigned char [4]);
 int FUN_002f674e(unsigned int);
 
 /* stack frame of param_3: 2 slot(s), 5 byte(s) */
@@ -23,8 +23,8 @@ extern int onlineContextGetInstance(void);
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 extern int FUN_002ea6fc(unsigned int *);
-/* Supplied declaration required: FUN_002f3dc4. */
-/* Supplied declaration required: FUN_002f3dde. */
+/* Supplied declaration required: onlineInstanceCompleteMode2. */
+/* Supplied declaration required: onlineInstanceCompleteMode3. */
 /* Supplied declaration required: FUN_002f674e. */
 
 
@@ -52,10 +52,10 @@ void FUN_00123474(unsigned int param_1,unsigned int *param_2,unsigned int *param
     uStack_1c = param_2[1];
     uStack_18 = param_2[2];
     if (temp_v1 != 0) {
-      FUN_002f3dc4();
+      onlineInstanceCompleteMode2();
     }
     else {
-      FUN_002f3dde(temp_v0,&temp_v4,uStack_18,temp_v5);
+      onlineInstanceCompleteMode3(temp_v0,&temp_v4,uStack_18,temp_v5);
     }
   }
   FUN_002f674e(param_1);

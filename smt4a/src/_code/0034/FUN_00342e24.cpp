@@ -383,14 +383,14 @@ code_r0x00343274:
       *(unsigned int *)(param_1 + 0xec) = 0xffffffff;
     }
     iVar4 = *(int *)(param_1 + 4);
-    FUN_002e2114();
+    linkedTargetRunHolderLinks();
     if ((iVar4 != 0) && (*(char *)(param_1 + 0x188) == '\0')) {
       FUN_00281720(*(unsigned int *)(param_1 + 4),1);
       *(unsigned char *)(param_1 + 0x188) = 1;
       return uVar6;
     }
     iVar4 = *(int *)(param_1 + 4);
-    FUN_002e2114();
+    linkedTargetRunHolderLinks();
     if (iVar4 != 0) {
       return uVar6;
     }
@@ -445,12 +445,12 @@ code_r0x00343274:
       break;
     }
     iVar4 = *(int *)(param_1 + 4);
-    FUN_002e2114();
+    linkedTargetRunHolderLinks();
     if (iVar4 == 0) {
       FUN_00281720(*(unsigned int *)(param_1 + 4),0);
     }
     iVar4 = *(int *)(param_1 + 4);
-    FUN_002e2114();
+    linkedTargetRunHolderLinks();
     if (iVar4 == 0) {
       return 0;
     }

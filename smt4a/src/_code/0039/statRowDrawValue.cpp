@@ -15,7 +15,7 @@ typedef struct StatListWork {
 
 f32 jobGetScalarValue(void);
 s32 itemIsCollectedWithRelated(u32 selection);
-void FUN_00180310(s32 a, s32 x, s32 y, s32 b, s32 c, s32 d, const char *format, ...);
+void statRowDrawValueImpl(s32 a, s32 x, s32 y, s32 b, s32 c, s32 d, const char *format, ...);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
 
@@ -28,27 +28,27 @@ void statRowDrawValue(StatListWork *work, s32 row, s32 x, s32 y, s32 value, s32 
     TextureTableEntryIV *base = asdTMTexTableEntryAt(18, 0x7A);
 
     if (work->mode == 14 || (work->mode == 7 && itemIsCollectedWithRelated(work->selection) == 0) || work->mode == 16) {
-        FUN_00180310(0, base->x + x, offset->y + base->y + y, 1, 3, 0xDD, "??");
+        statRowDrawValueImpl(0, base->x + x, offset->y + base->y + y, 1, 3, 0xDD, "??");
     } else if (value >= 1000) {
-        FUN_00180310(0, base->x + x, offset->y + base->y + y, 1, 3, 0xDD, "999");
+        statRowDrawValueImpl(0, base->x + x, offset->y + base->y + y, 1, 3, 0xDD, "999");
     } else {
-        FUN_00180310(0, base->x + x, base->y + offset->y + y, 1, 3, 0xDD, "%d", value);
+        statRowDrawValueImpl(0, base->x + x, base->y + offset->y + y, 1, 3, 0xDD, "%d", value);
     }
     if (work->compareEnabled != 0) {
         TextureTableEntryIV *diffOffset = asdTMTexTableEntryAt(18, row + 0x85);
         TextureTableEntryIV *diffBase = asdTMTexTableEntryAt(18, 0x84);
 
         if (difference > 0) {
-            FUN_00180310(0, diffBase->x + diffOffset->x + x, diffOffset->y + diffBase->y + y, 1, 1, 0xDD, "+");
+            statRowDrawValueImpl(0, diffBase->x + diffOffset->x + x, diffOffset->y + diffBase->y + y, 1, 1, 0xDD, "+");
         } else if (difference < 0) {
-            FUN_00180310(0, diffBase->x + diffOffset->x + x, diffOffset->y + diffBase->y + y, 1, 1, 0xDD, "-");
+            statRowDrawValueImpl(0, diffBase->x + diffOffset->x + x, diffOffset->y + diffBase->y + y, 1, 1, 0xDD, "-");
         }
         TextureTableEntryIV *numberBase = asdTMTexTableEntryAt(18, 0x83);
 
         if (difference > 0) {
-            FUN_00180310(0, diffOffset->x + numberBase->x + x, diffOffset->y + numberBase->y + y, 1, 3, 0xDD, "%d", difference);
+            statRowDrawValueImpl(0, diffOffset->x + numberBase->x + x, diffOffset->y + numberBase->y + y, 1, 3, 0xDD, "%d", difference);
         } else if (difference < 0) {
-            FUN_00180310(0, diffOffset->x + numberBase->x + x, diffOffset->y + numberBase->y + y, 1, 3, 0xDD, "%d", -difference);
+            statRowDrawValueImpl(0, diffOffset->x + numberBase->x + x, diffOffset->y + numberBase->y + y, 1, 3, 0xDD, "%d", -difference);
         }
     }
     efctSetSpeed(savedSpeed);

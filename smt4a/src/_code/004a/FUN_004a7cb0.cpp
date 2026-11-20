@@ -15,7 +15,7 @@ struct PanelLayoutOwnerView {
 }
 
 extern "C" {
-u32 FUN_0014bf3c(u16 textId, u32 flags);
+u32 demonGetRaceLabel(u16 textId, u32 flags);
 s32 textMeasureOnLayer(u32 textValue, u32 style);
 void drawTextAtSnappedRectangle(TextLayoutContextA *context, f32 x,
                                 f32 y, u32 style,
@@ -44,7 +44,7 @@ void FUN_004a7cb0(PanelLayoutOwnerView *panel, u32 textId,
     }
     s16 baseX = base->x;
     s16 baseY = base->y;
-    u32 textValue = FUN_0014bf3c(static_cast<u16>(textId), 0);
+    u32 textValue = demonGetRaceLabel(static_cast<u16>(textId), 0);
     s32 textWidth = textMeasureOnLayer(textValue, 2);
     const CenteredPanelEntryView *offset = reinterpret_cast<const CenteredPanelEntryView *>(
         layoutFindTableEntry(reinterpret_cast<TextLayoutContextA *>(panel->layout), offsetEntry));

@@ -22,7 +22,7 @@ struct ResourceCacheWork {
 };
 
 extern "C" {
-void *FUN_0041aca8(void *context, u32 source);
+void *particleEmitterSpawnOne(void *context, u32 source);
 
 void resourceEnsureCachedObject(ResourceCacheWork *work, s32 id)
 {
@@ -30,7 +30,7 @@ void resourceEnsureCachedObject(ResourceCacheWork *work, s32 id)
         ResourceCacheRecord *record = &work->first[index];
         if (record->id == id) {
             if (!record->object) {
-                record->object = FUN_0041aca8(work->context, record->source);
+                record->object = particleEmitterSpawnOne(work->context, record->source);
             }
             return;
         }
@@ -39,7 +39,7 @@ void resourceEnsureCachedObject(ResourceCacheWork *work, s32 id)
         ResourceCacheRecordSmall *record = &work->second[index];
         if (record->id == id) {
             if (!record->object) {
-                record->object = FUN_0041aca8(work->context, record->source);
+                record->object = particleEmitterSpawnOne(work->context, record->source);
             }
             return;
         }

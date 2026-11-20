@@ -12,7 +12,7 @@ s32 tableCompareHalfwordKeys(const void *, const void *);
 s32 idMapCompareKeys(const void *, const void *);
 s32 dataCompareSignedWordKeys(const void *, const void *);
 extern int *fileSlotGetBuffer(int table);
-extern void FUN_0027f3dc(void *entries, u32 count, int stride, s32 (*compare)(const void *, const void *));
+extern void arraySortQsort(void *entries, u32 count, int stride, s32 (*compare)(const void *, const void *));
 }
 
 template <typename Record>
@@ -35,5 +35,5 @@ extern "C" void dataTableSortLookupSections(void)
     sortTableSection<u32[5]>(5, 8, tableCompareHalfwordKeys);
     sortTableSection<u32>(6, 1, idMapCompareKeys);
     int *block = fileSlotGetBuffer(0x1f);
-    FUN_0027f3dc(block + 1, (*block - 4U) >> 3, 8, dataCompareSignedWordKeys);
+    arraySortQsort(block + 1, (*block - 4U) >> 3, 8, dataCompareSignedWordKeys);
 }

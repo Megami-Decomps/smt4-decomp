@@ -29,7 +29,7 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned char LAB_00109a88; /* 0x109a88 */
-extern unsigned int DAT_00476628; /* 0x476628 */
+extern unsigned int g_asdSoundListenerGuard; /* 0x476628 */
 extern unsigned char g_asdSound; /* 0x4e1f68 */
 extern unsigned char DAT_004e2094; /* 0x4e2094 */
 extern unsigned char DAT_004e20ec; /* 0x4e20ec */
@@ -39,7 +39,7 @@ extern unsigned int DAT_004e23d4; /* 0x4e23d4 */
 extern unsigned int DAT_004e23d8; /* 0x4e23d8 */
 extern unsigned int DAT_004e23dc; /* 0x4e23dc */
 extern unsigned char DAT_004e23e4; /* 0x4e23e4 */
-extern unsigned char DAT_004e26ec; /* 0x4e26ec */
+extern unsigned char g_nwSound3DManager; /* 0x4e26ec */
 extern unsigned char DAT_004e26f8; /* 0x4e26f8 */
 extern unsigned char DAT_004e26fc; /* 0x4e26fc */
 extern unsigned int DAT_004e2708; /* 0x4e2708 */
@@ -146,14 +146,14 @@ unsigned int FUN_001096ec(unsigned int param_1,int param_2,unsigned char *param_
   DAT_004e23dc = temp_v1;
   nw_snd_SoundArchivePlayer_Initialize(&DAT_004e20ec,&g_asdSound,&DAT_004e21ac,DAT_004e23d8);
   if (param_2 != 0) {
-    puVar4 = &DAT_004e26ec;
+    puVar4 = &g_nwSound3DManager;
     DAT_004e3134 = '\x01';
-    nw_snd_Sound3DManager_GetRequiredMemSize(&DAT_004e26ec,&g_asdSound);
+    nw_snd_Sound3DManager_GetRequiredMemSize(&g_nwSound3DManager,&g_asdSound);
     temp_v1 = 0x10000;
     temp_v5 = (unsigned char *)0x1;
     asdMemoryAlloc(0x10000,0x100,0,puVar4);
     DAT_004e3130 = temp_v1;
-    nw_snd_Sound3DManager_Initialize_120F48(&DAT_004e26ec,&g_asdSound,temp_v1,puVar4);
+    nw_snd_Sound3DManager_Initialize_120F48(&g_nwSound3DManager,&g_asdSound,temp_v1,puVar4);
     temp_v1 = 0;
     DAT_004e2708 = 0x20;
     DAT_004e2710 = 0x40b55555;
@@ -178,9 +178,9 @@ unsigned int FUN_001096ec(unsigned int param_1,int param_2,unsigned char *param_
     temp_v3 = 0;
     DAT_004e312c = 0;
     do {
-      nw_snd_Sound3DActor_Initialize(temp_v3 * 0x84 + 0x4e2728,&DAT_004e20ec,&DAT_004e26ec);
+      nw_snd_Sound3DActor_Initialize(temp_v3 * 0x84 + 0x4e2728,&DAT_004e20ec,&g_nwSound3DManager);
       if ((DAT_004e3134 != '\0') && (temp_v3 < 0x10)) {
-        if (((DAT_00476628 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476628), temp_v0 != 0)) {
+        if (((g_asdSoundListenerGuard & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&g_asdSoundListenerGuard), temp_v0 != 0)) {
           g_asdSoundListener = (unsigned int)temp_v4;
           DAT_004efd30 = g_asdSoundListener;
           DAT_004efd34 = g_asdSoundListener;

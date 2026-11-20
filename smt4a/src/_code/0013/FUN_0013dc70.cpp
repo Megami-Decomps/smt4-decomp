@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_0014a960(s32 enable);
+void frameTexDrawXfadeCapture(s32 enable);
 
 /* "XFADEDL" draw: advances the white cross-fade by one frame, ending it after fadeDuration frames. */
 s32 FUN_0013dc70(u32 job)
@@ -29,7 +29,7 @@ s32 FUN_0013dc70(u32 job)
         alpha = 0;
     }
     work->fadeColor = 0xFFFFFF00 | alpha;
-    FUN_0014a960(1);
+    frameTexDrawXfadeCapture(1);
     return 0;
 }
 

@@ -4,7 +4,7 @@
 #include "font/ComWin/ComWin.h"
 
 extern "C" {
-s32 FUN_00293230(u32);
+s32 btlScriptUnitIsIncapacitated(u32);
 }
 
 /* Reset one card's animation channels and select its default sprite animations. */
@@ -20,7 +20,7 @@ extern "C" void FUN_001f4e54(ActorCardAnimations *owner, s32 slot)
     owner->animation.counters[3][slot] = 0;
     owner->animation.counters[4][slot] = 0;
     owner->animation.counters[5][slot] = 0;
-    if (FUN_00293230(owner->unit) != 0) {
+    if (btlScriptUnitIsIncapacitated(owner->unit) != 0) {
         owner->animation.blocked[slot] = 1;
         owner->animation.states[slot] = 5;
         return;

@@ -7,7 +7,7 @@
  * (bgmReleased, scriptPending/scriptId/scriptName, tick, darkZone, transitionCompleted,
  * mapRegistrationPending, mapLoadActive, destinationSet, stage/stageGroup); IV's 0x2F8-0x338 saved and
  * target location sits at 0x574-0x5B4 and its environment and overlay block (0x390-0x3F0) at
- * 0x610-0x670. Types follow retail's loads: menuOpen (0x295) is s8 (FUN_0048a378's `add r6, r0, #0`). */
+ * 0x610-0x670. Types follow retail's loads: menuOpen (0x295) is s8 (naviRefreshBackgroundAndFeedback's `add r6, r0, #0`). */
 #ifndef GAME_GAMESTATEA_H
 #define GAME_GAMESTATEA_H
 

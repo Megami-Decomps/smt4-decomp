@@ -5,7 +5,7 @@ struct SoundDataResolver;
 extern "C" {
 extern AsdSoundSystem g_asdSound;
 void* soundArchiveLoaderIsItemLoaded(SoundDataResolver* resolver, u32 soundId, s32 selector);
-bool FUN_002af3b4(SoundDataResolver* resolver, u32 soundId, void* heap, s32 selector, u32 flags);
+bool nw_snd_internal_SoundArchiveLoader_Load(SoundDataResolver* resolver, u32 soundId, void* heap, s32 selector, u32 flags);
 
 // Ensures the sound's data is loaded into the current eight-handle slot.
 bool asdSndEnsureCurrentSlotData(u32 soundId)
@@ -17,7 +17,7 @@ bool asdSndEnsureCurrentSlotData(u32 soundId)
         if (soundArchiveLoaderIsItemLoaded(reinterpret_cast<SoundDataResolver*>(sound->dataManager + 0x0c), soundId, -1) != NULL) {
             loaded = true;
         } else {
-            loaded = FUN_002af3b4(reinterpret_cast<SoundDataResolver*>(sound->dataManager + 0x0c), soundId, slot, -1, 0);
+            loaded = nw_snd_internal_SoundArchiveLoader_Load(reinterpret_cast<SoundDataResolver*>(sound->dataManager + 0x0c), soundId, slot, -1, 0);
         }
     }
     return loaded;

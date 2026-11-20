@@ -15,7 +15,7 @@ struct RadialGradientWork {
 extern "C" {
 s32 renderCtxPackPassFlags(s32 first, s32 second);
 void FUN_00186940(void);
-f32 FUN_001b63b0(f32 angle);
+f32 phaseCosine(f32 angle);
 f32 FUN_001a1ee0(f32 angle);
 void effectSpawnPositionDefault(u32 color, f32 x, f32 y, f32 z);
 void FUN_002371b0(void);
@@ -40,7 +40,7 @@ void FUN_002b3178(RadialGradientWork *work)
     effectSpawnPositionDefault(color, centerX, centerY, 0.0f);
     for (s32 vertex = 0; vertex < 19; ++vertex) {
         f32 angle = (f32)vertex * 6.283185307179586f * (1.0f / 18.0f) * 40.7436654315252f;
-        f32 x = centerX + radius * FUN_001b63b0(angle);
+        f32 x = centerX + radius * phaseCosine(angle);
         f32 y = centerY + radius * FUN_001a1ee0(angle);
         effectSpawnPositionDefault(rimColor, x, y, 0.0f);
     }

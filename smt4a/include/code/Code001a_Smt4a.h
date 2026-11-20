@@ -11,6 +11,6 @@ void FUN_001a1244(Holder *object);
 
 s32 bustupPlaceActiveSlot(BustupPlacement *placement, s32 slot);
 
-void FUN_001ab8e0(Record *record, u32 a, u32 b, u32 c, u32 d);
+void requestParamsInitialize(Record *record, u32 a, u32 b, u32 c, u32 d);
 
 } /* extern "C" */

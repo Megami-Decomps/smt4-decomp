@@ -44,7 +44,7 @@ typedef struct StatusDownState {
     /* 0x0482 */ u16 ids[16];               /* the listed skill ids (statusReplaceSkills) */
     union {
         /* 0x04A2 */ u16 selected[8];
-        /* 0x04A2 */ StatusDownIdWords selectedWords;  /* how FUN_0026a978 clears and fills them */
+        /* 0x04A2 */ StatusDownIdWords selectedWords;  /* how statusDownSetSelectedIds clears and fills them */
     };
     /* 0x04B2 */ u16 pending[8];
     /* 0x04C2 */ u8 scratch[16];            /* 1 marks a newly listed id */

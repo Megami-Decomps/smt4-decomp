@@ -30,7 +30,7 @@ typedef char CommandPhaseViewOffsets[
 extern "C" {
 extern u32 g_btlAiScript;
 extern u32 g_btlActionReflect;
-extern void *DAT_00435d18;
+extern void *g_btlAux;
 extern void *g_btlEvent;
 
 u32 FUN_003d317c(BtlMainState **block, CommandState *work);
@@ -184,16 +184,16 @@ u32 FUN_003d28d0(BtlMainState **block, u32 phase)
         return btlAiWaitUiAndUpdatePartyGroup4Latch(block, work);
     case 31:
         if (channel->timer == 0) {
-            void *object = DAT_00435d18;
+            void *object = g_btlAux;
             if (FUN_003dcbf4(object) == 0)
                 return 0;
-            eftLoadFileRegisterAndParseHeader(DAT_00435d18);
+            eftLoadFileRegisterAndParseHeader(g_btlAux);
             ++channel->timer;
             return 0;
         }
         if (channel->timer != 1)
             return 0;
-        if (FUN_003dcfc8(DAT_00435d18) == 0)
+        if (FUN_003dcfc8(g_btlAux) == 0)
             return 0;
         setPendingAction(block, 32);
         return 1;

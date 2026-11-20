@@ -22,7 +22,7 @@ s32 eventFilterUpdate(u32 process)
     case 1:
         break;
     case 2:
-        if (work->duration > 0 && FUN_00203d74() == 0) {
+        if (work->duration > 0 && inputFastForwardActive() == 0) {
             work->opacity = (f32)work->frame / (f32)work->duration;
             if (work->opacity < 1.0f)
                 break;
@@ -40,7 +40,7 @@ s32 eventFilterUpdate(u32 process)
     case 4:
         {
             bool finished = true;
-            if (work->duration > 0 && FUN_00203d74() == 0) {
+            if (work->duration > 0 && inputFastForwardActive() == 0) {
                 work->opacity = (f32)(work->duration - work->frame) / (f32)work->duration;
                 finished = work->opacity <= 0.0f;
             }

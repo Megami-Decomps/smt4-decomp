@@ -3,16 +3,16 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 /* Functions in the 0x002c0000 code block whose subsystem is not known yet; each declaration matches its definition. */
-struct ScenePass;
-struct Visitor;
+struct AsdScenePass;
+struct AsdSceneVisitor;
 struct Obj;
 extern "C" {
 
-unsigned int FUN_002c40f8(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4, unsigned int param_5);
+unsigned int svcWaitSynchronizationN(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4, unsigned int param_5);
 
-void FUN_002c29d8(u32 index, u32 value, u32 extra);
+void screenFadeStartIn(u32 index, u32 value, u32 extra);
 
-void FUN_002c2968(ScenePass *pass, Visitor *visitor);
+void asdScenePassVisit(AsdScenePass *pass, AsdSceneVisitor *visitor);
 
 u32 objectGetFlagBit1(Obj *obj);
 

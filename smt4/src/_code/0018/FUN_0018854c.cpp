@@ -8,7 +8,7 @@ extern "C" {
 
 int messageInitializeSavedBanner(void);
 int guestWinRequestOpen(void);
-int FUN_00299bc4(...);
+int campListRegisterTouchRegions(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int gameSetStatusCameraHeightMode(...);
 int campRefreshEquipmentCategory(...);
 int beginStatusPanelClose(void);
@@ -19,29 +19,29 @@ int campReleaseScreenTouchRegions(...);
 int flaggedEntrySetValueB(...);
 int FUN_002992e0(...);
 int playerRecalcStatsFromEquipment(...);
-int FUN_0029e328(...);
+int useCounterAppendValue(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int sortMenuCreate(...);
 int objectPartRunUnlessLocked(...); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 int buttonHelpSetText(...);
 int buttonHelpSetPreset(...);
 int soundPlaySeUnpanned(...);
 
-int FUN_002996d8(...);
+int statusCameraRestore(...);
 int campPreviewSelectedEquipment(...);
-int FUN_00299900(...);
+int campListShowSelectedHelp(...);
 int nodeSetTranslation3f(...);
 int FUN_0029a084(...);
-int FUN_0029a0cc(...);
+int btlBuildDemonSnapshotFromSaveRecord(...);
 int FUN_0029a0e8(...);
 int gameGlobalsSetSelected(...);
 int FUN_0029a164(...);
 int FUN_0029c4c8(...);
 int statusPanelSetOpen(int);
-int FUN_0029efd8(...);
+int gridNavigationHandleConfirm(...);
 int uiScrollHandleActionsOrTouch(...);
 int lightOwnerRegister(...);
 int eventQueueAddUniqueIfValid(...);
-int FUN_002c1658(...);
+int inputQueryButtonState(...);
 
 /* stack frame of param_1: 4 slot(s), 13 byte(s) */
 typedef struct {
@@ -63,17 +63,17 @@ extern unsigned int dataTable15GetUnlockedEntryId(int, unsigned int);
 /* Supplied declaration required: playerRecalcStatsFromEquipment. */
 extern int recordAcceptsStickDirection(short);
 extern unsigned int FUN_0029963c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002996d8. */
+/* Supplied declaration required: statusCameraRestore. */
 /* Supplied declaration required: campPreviewSelectedEquipment. */
-/* Supplied declaration required: FUN_00299900. */
-/* Supplied declaration required: FUN_00299bc4. */
+/* Supplied declaration required: campListShowSelectedHelp. */
+/* Supplied declaration required: campListRegisterTouchRegions. */
 /* Supplied declaration required: gameSetStatusCameraHeightMode. */
 /* Supplied declaration required: campRefreshEquipmentCategory. */
 extern int FUN_00299fc0(void);
 /* Supplied declaration required: nodeSetTranslation3f. */
 extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0029a084. */
-/* Supplied declaration required: FUN_0029a0cc. */
+/* Supplied declaration required: btlBuildDemonSnapshotFromSaveRecord. */
 /* Supplied declaration required: FUN_0029a0e8. */
 /* Supplied declaration required: gameGlobalsSetSelected. */
 /* Supplied declaration required: FUN_0029a164. */
@@ -83,15 +83,15 @@ extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: statusPanelSetOpen. */
 extern int FUN_0029dfa8(void);
 extern int FUN_0029e0f8(void);
-/* Supplied declaration required: FUN_0029e328. */
+/* Supplied declaration required: useCounterAppendValue. */
 /* Supplied declaration required: sortMenuCreate. */
 /* Supplied declaration required: messageBannerInitSelection. */
 /* Supplied declaration required: objectPartRunUnlessLocked. */
-extern int FUN_0029e958(int); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
+extern int uiGridNavigationEntryCount(int); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 /* Supplied declaration required: buttonHelpSetText. */
 extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
-/* Supplied declaration required: FUN_0029efd8. */
+/* Supplied declaration required: gridNavigationHandleConfirm. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
@@ -103,7 +103,7 @@ extern unsigned char buttonHelpGetStatus(void);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: soundPlaySeUnpanned. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_002c1658. */
+/* Supplied declaration required: inputQueryButtonState. */
 
 
 /* WARNING: Removing unreachable block (ram,0x00189088) */
@@ -208,7 +208,7 @@ void FUN_0018854c(unsigned int param_1)
     gameGlobalsSetSelected(3);
     FUN_0029c4c8(1);
     FUN_0029a0e8(psVar3);
-    FUN_0029a0cc(psVar3);
+    btlBuildDemonSnapshotFromSaveRecord(psVar3);
     statusPanelSetOpen(1);
     temp_v4 = resourceRunOperationIfUnblocked(temp_v11);
     temp_v11 = listCursorGetRowIfUnblocked(temp_v11);
@@ -268,7 +268,7 @@ void FUN_0018854c(unsigned int param_1)
     if (*(int *)(temp_v5 + 0x24) == 0x29) {
       *(unsigned int *)(temp_v5 + 0x24) = 0x1a;
       if (temp_v12) {
-        FUN_002996d8(0);
+        statusCameraRestore(0);
         *(unsigned char *)(temp_v5 + 0x32) = 1;
       }
       else {
@@ -277,7 +277,7 @@ void FUN_0018854c(unsigned int param_1)
     }
     if ((*(char *)(temp_v11 + 0x61) != '\0') || (*(char *)(temp_v11 + 0x60) != '\0')) {
       if (temp_v12) {
-        FUN_002996d8(0);
+        statusCameraRestore(0);
         *(unsigned char *)(temp_v5 + 0x32) = 1;
       }
     }
@@ -309,7 +309,7 @@ void FUN_0018854c(unsigned int param_1)
     else {
       temp_v4 = FUN_00299fc0();
       if (temp_v4 != 0) {
-        FUN_002996d8(1);
+        statusCameraRestore(1);
       }
     }
     temp_v4 = FUN_00299fc0();
@@ -321,13 +321,13 @@ void FUN_0018854c(unsigned int param_1)
     temp_v4 = temp_v11;
     uiScrollHandleActionsOrTouch(temp_v11,temp_v2,temp_v5 + 0xe0c,(int)*(short *)(temp_v5 + 0xe02),
                  (int)*(short *)(temp_v5 + 0xe04),(int)*(short *)(temp_v5 + 0xe06),temp_v13,0,1);
-    if ((temp_v4 != 0) || (temp_v4 = temp_v11, FUN_0029efd8(temp_v11,1), temp_v4 != 0)) {
-      FUN_00299900(param_1);
+    if ((temp_v4 != 0) || (temp_v4 = temp_v11, gridNavigationHandleConfirm(temp_v11,1), temp_v4 != 0)) {
+      campListShowSelectedHelp(param_1);
       campPreviewSelectedEquipment(param_1);
       return;
     }
     temp_v4 = 0;
-    FUN_002c1658(0,1);
+    inputQueryButtonState(0,1);
     if (temp_v4 != 0 || temp_v13[0] != '\0') {
       temp_v5 = resourceRunOperationIfUnblocked(temp_v11);
       temp_v11 = listCursorGetRowIfUnblocked(temp_v11);
@@ -395,15 +395,15 @@ void FUN_0018854c(unsigned int param_1)
         return;
       }
       FUN_0029a0e8(psVar3);
-      FUN_0029a0cc(psVar3);
+      btlBuildDemonSnapshotFromSaveRecord(psVar3);
       eventQueueAddUniqueIfValid(0x100016d);
       soundPlaySeUnpanned(0x100025f);
       return;
     }
     temp_v4 = 1;
-    FUN_002c1658();
+    inputQueryButtonState();
     if (temp_v4 != 0) {
-      FUN_002996d8(0);
+      statusCameraRestore(0);
       FUN_002992e0(0);
       FUN_002992e0(1);
       FUN_002992e0(2);
@@ -412,13 +412,13 @@ void FUN_0018854c(unsigned int param_1)
     }
     else {
       temp_v4 = 8;
-      FUN_002c1658(8,0);
+      inputQueryButtonState(8,0);
       if ((temp_v4 == 0) && (temp_v4 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v5 + 0xe08)), temp_v4 != 6)) {
         temp_v4 = 7;
-        FUN_002c1658(7,0);
+        inputQueryButtonState(7,0);
         if ((temp_v4 == 0) && (temp_v4 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v5 + 0xe0a)), temp_v4 != 6)) {
           temp_v9 = 9;
-          FUN_002c1658(9,1);
+          inputQueryButtonState(9,1);
           if (temp_v9 == 0) {
             return;
           }
@@ -427,50 +427,50 @@ void FUN_0018854c(unsigned int param_1)
               if (param_1 != 0x13) {
                 if ((param_1 == 0x14) || (param_1 == 0x16)) {
                   sortMenuCreate();
-                  FUN_0029e328(4);
-                  FUN_0029e328(0x24);
-                  FUN_0029e328(0x25);
-                  FUN_0029e328(0x26);
-                  FUN_0029e328(0x27);
-                  FUN_0029e328(0x28);
-                  FUN_0029e328(3);
+                  useCounterAppendValue(4);
+                  useCounterAppendValue(0x24);
+                  useCounterAppendValue(0x25);
+                  useCounterAppendValue(0x26);
+                  useCounterAppendValue(0x27);
+                  useCounterAppendValue(0x28);
+                  useCounterAppendValue(3);
                 }
                 if (param_1 != 0x15) {
                   if (param_1 == 0x17) {
                     sortMenuCreate(0xb,0);
-                    FUN_0029e328(0x33);
-                    FUN_0029e328(3);
+                    useCounterAppendValue(0x33);
+                    useCounterAppendValue(3);
                   }
                 }
                 else {
                   sortMenuCreate(9,0);
-                  FUN_0029e328(4);
-                  FUN_0029e328(0x32);
-                  FUN_0029e328(3);
+                  useCounterAppendValue(4);
+                  useCounterAppendValue(0x32);
+                  useCounterAppendValue(3);
                 }
               }
               else {
                 sortMenuCreate(7,0);
-                FUN_0029e328(6);
-                FUN_0029e328(0x1f);
-                FUN_0029e328(0x13);
-                FUN_0029e328(3);
+                useCounterAppendValue(6);
+                useCounterAppendValue(0x1f);
+                useCounterAppendValue(0x13);
+                useCounterAppendValue(3);
               }
             }
             else {
               sortMenuCreate(6,0);
-              FUN_0029e328(6);
-              FUN_0029e328(0x11);
-              FUN_0029e328(0x12);
-              FUN_0029e328(3);
+              useCounterAppendValue(6);
+              useCounterAppendValue(0x11);
+              useCounterAppendValue(0x12);
+              useCounterAppendValue(3);
             }
           }
           else {
             sortMenuCreate(5,0);
-            FUN_0029e328(6);
-            FUN_0029e328(0x11);
-            FUN_0029e328(0x12);
-            FUN_0029e328(3);
+            useCounterAppendValue(6);
+            useCounterAppendValue(0x11);
+            useCounterAppendValue(0x12);
+            useCounterAppendValue(3);
           }
           *(unsigned char *)(temp_v5 + 0x33) = 1;
           buttonHelpSetText(0,0x323232ff);
@@ -494,46 +494,46 @@ void FUN_0018854c(unsigned int param_1)
             if ((param_1 == 0x16) && (psVar3[5] != *(short *)(temp_v9 + temp_v6 * 2))) {
               temp_v2 = 2;
               FUN_002992e0(temp_v2);
-              FUN_002996d8(0);
+              statusCameraRestore(0);
               *(unsigned char *)(temp_v5 + 0x32) = 1;
             }
           }
           else if (psVar3[4] != *(short *)(temp_v9 + temp_v6 * 2)) {
             temp_v2 = 1;
             FUN_002992e0(temp_v2);
-            FUN_002996d8(0);
+            statusCameraRestore(0);
             *(unsigned char *)(temp_v5 + 0x32) = 1;
           }
         }
         else if (psVar3[3] != *(short *)(temp_v9 + temp_v6 * 2)) {
-          FUN_002996d8(0);
+          statusCameraRestore(0);
           *(unsigned char *)(temp_v5 + 0x32) = 1;
         }
         temp_v9 = objectPartRunUnlessLocked(temp_v5 + 0x34);
         temp_v6 = 0;
-        temp_v4 = FUN_0029e958(temp_v5 + 0x34);
+        temp_v4 = uiGridNavigationEntryCount(temp_v5 + 0x34);
         if (0 < temp_v4) {
           do {
             temp_v9 = temp_v9 + 1;
-            temp_v4 = FUN_0029e958(temp_v5 + 0x34);
+            temp_v4 = uiGridNavigationEntryCount(temp_v5 + 0x34);
             if (temp_v4 <= temp_v9) {
               temp_v9 = 0;
             }
             temp_v10 = temp_v5 + temp_v9 * 100;
-            temp_v4 = FUN_0029e958(temp_v10 + 0x2a4);
+            temp_v4 = uiGridNavigationEntryCount(temp_v10 + 0x2a4);
             temp_v7 = gameFlagIsSet(0x410);
             if ((temp_v7 == 0) && (0 < temp_v9)) {
-              temp_v4 = FUN_0029e958(temp_v10 + 0x36c);
+              temp_v4 = uiGridNavigationEntryCount(temp_v10 + 0x36c);
             }
             if (0 < temp_v4) {
               flaggedEntrySetValueB(temp_v5 + 0x34,temp_v9);
               temp_v2 = objectPartRunUnlessLocked(temp_v5 + 0x34);
               param_1 = dataTable15GetUnlockedEntryId((int)*(char *)(temp_v5 + 0x98),temp_v2);
-              FUN_00299900();
+              campListShowSelectedHelp();
               break;
             }
             temp_v6 = temp_v6 + 1;
-            temp_v4 = FUN_0029e958(temp_v5 + 0x34);
+            temp_v4 = uiGridNavigationEntryCount(temp_v5 + 0x34);
           } while (temp_v6 < temp_v4);
         }
         campReleaseScreenTouchRegions(temp_v11,0);
@@ -608,48 +608,48 @@ joined_r0x00188f3c:
         if (param_1 != 0x14) {
           if (param_1 != 0x15) {
             if ((param_1 == 0x16) && (psVar3[5] != *(short *)(temp_v9 + temp_v6 * 2))) {
-              FUN_002996d8(0);
+              statusCameraRestore(0);
               *(unsigned char *)(temp_v5 + 0x32) = 1;
             }
           }
           else if (psVar3[4] != *(short *)(temp_v9 + temp_v6 * 2)) {
             temp_v2 = 1;
             FUN_002992e0(temp_v2);
-            FUN_002996d8(0);
+            statusCameraRestore(0);
             *(unsigned char *)(temp_v5 + 0x32) = 1;
           }
         }
         else if (psVar3[3] != *(short *)(temp_v9 + temp_v6 * 2)) {
           temp_v2 = 0;
           FUN_002992e0(temp_v2);
-          FUN_002996d8(0);
+          statusCameraRestore(0);
           *(unsigned char *)(temp_v5 + 0x32) = 1;
         }
         temp_v9 = objectPartRunUnlessLocked(temp_v5 + 0x34);
         temp_v6 = 0;
-        temp_v4 = FUN_0029e958(temp_v5 + 0x34);
+        temp_v4 = uiGridNavigationEntryCount(temp_v5 + 0x34);
         if (0 < temp_v4) {
           do {
             temp_v9 = temp_v9 - 1;
             if (temp_v9 < 0) {
-              temp_v9 = FUN_0029e958(temp_v5 + 0x34);
+              temp_v9 = uiGridNavigationEntryCount(temp_v5 + 0x34);
               temp_v9 = temp_v9 - 1;
             }
             temp_v10 = temp_v5 + temp_v9 * 100;
-            temp_v4 = FUN_0029e958(temp_v10 + 0x2a4);
+            temp_v4 = uiGridNavigationEntryCount(temp_v10 + 0x2a4);
             temp_v7 = gameFlagIsSet(0x410);
             if ((temp_v7 == 0) && (0 < temp_v9)) {
-              temp_v4 = FUN_0029e958(temp_v10 + 0x36c);
+              temp_v4 = uiGridNavigationEntryCount(temp_v10 + 0x36c);
             }
             if (0 < temp_v4) {
               flaggedEntrySetValueB(temp_v5 + 0x34,temp_v9);
               temp_v2 = objectPartRunUnlessLocked(temp_v5 + 0x34);
               param_1 = dataTable15GetUnlockedEntryId((int)*(char *)(temp_v5 + 0x98),temp_v2);
-              FUN_00299900();
+              campListShowSelectedHelp();
               break;
             }
             temp_v6 = temp_v6 + 1;
-            temp_v4 = FUN_0029e958(temp_v5 + 0x34);
+            temp_v4 = uiGridNavigationEntryCount(temp_v5 + 0x34);
           } while (temp_v6 < temp_v4);
         }
         campReleaseScreenTouchRegions(temp_v11,0);
@@ -710,7 +710,7 @@ joined_r0x00188f3c:
       FUN_0029c4c8(0);
       beginStatusPanelClose();
       gameGlobalsSetSelected(0);
-      FUN_00299900(0);
+      campListShowSelectedHelp(0);
       timerStart((UiSpriteState *)(temp_v5 + 0x6d4),3,0);
       *(unsigned int *)(temp_v5 + 0x20) = 6;
       temp_v9 = g_camp;
@@ -764,8 +764,8 @@ joined_r0x00188f3c:
     gameSetStatusCameraHeightMode(0);
   }
   *(unsigned char *)(temp_v5 + 0x33) = 0;
-  FUN_00299bc4(temp_v11,0);
-  FUN_00299900(param_1);
+  campListRegisterTouchRegions(temp_v11,0);
+  campListShowSelectedHelp(param_1);
   if (!temp_v12) {
     campPreviewSelectedEquipment();
   }

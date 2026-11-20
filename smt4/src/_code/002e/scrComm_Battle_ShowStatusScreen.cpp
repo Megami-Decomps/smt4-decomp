@@ -7,8 +7,8 @@ s32 scrGetCommandFrame();
 s32 scrWorkGetValue(u32 slot);
 void scrWorkSetValue(u32 slot, s32 value);
 void stateSetBitFlag(u32 unit, s32 mode);
-void FUN_00295a18(u32 unit, s32 mode);
-void FUN_00250d84(u32 unit, s32 mode);
+void saveFlagSetOrAddCounter(u32 unit, s32 mode);
+void saveFlagClearOrSubtractCounter(u32 unit, s32 mode);
 void statusAcquireSharedResources();
 void gameSetIconDisplayEnabled(s32 mode);
 void statusOpenSkillSelection(u16 unit, s32 mode);
@@ -33,8 +33,8 @@ u32 scrComm_Battle_ShowStatusScreen()
     switch (scrWorkGetValue(0)) {
     case 0:
         stateSetBitFlag(unit, 1);
-        FUN_00295a18(unit, 1);
-        FUN_00250d84(unit, 1);
+        saveFlagSetOrAddCounter(unit, 1);
+        saveFlagClearOrSubtractCounter(unit, 1);
         scrWorkSetValue(0, 1);
         break;
     case 1:

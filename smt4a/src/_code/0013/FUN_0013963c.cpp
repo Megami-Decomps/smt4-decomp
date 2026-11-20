@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_0013cab8(s32 channel, s32 a, s32 b);
+void screenFadeStartIn(s32 channel, s32 a, s32 b);
 void asdSequenceStart(s32 id, u8 *table, s32 size);
 void paramTripleSet(s32 id, u8 *table, s32 size);
 void sysSetCachedPair(u8 *start, u8 *end);
@@ -19,10 +19,10 @@ void FUN_0013963c(void)
     paramTripleSet(0xC9, DAT_00580150, 0x16);
     sysSetCachedPair(&LAB_0015110c, &LAB_00151230);
     if (pairedAvailabilityGetState(0) == 3) {
-        FUN_0013cab8(0, 10, 0xFF);
+        screenFadeStartIn(0, 10, 0xFF);
     }
     if (pairedAvailabilityGetState(1) == 3) {
-        FUN_0013cab8(1, 10, 0xFF);
+        screenFadeStartIn(1, 10, 0xFF);
         return;
     }
 }

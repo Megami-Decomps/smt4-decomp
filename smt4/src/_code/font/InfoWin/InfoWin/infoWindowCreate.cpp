@@ -16,7 +16,7 @@ void drawParameterBlockClear(UiResourceParameters *parameters);
 void *asdTextCreate(u32 flags);
 void asdTextSetBaseColor(void *text, u32 color);
 void positionStateSet(void *text, u32 mode, u32 color, f32 position);
-extern const u8 DAT_00403a04[];
+extern const u8 g_infoWindowDefaultParams[];
 
 // Create the information popup process, stereo draw tasks, sprite timers and text state.
 void infoWindowCreate()
@@ -33,7 +33,7 @@ void infoWindowCreate()
     taskCreateDraw(reinterpret_cast<const s8 *>("InfoWin DrawUpRight"), 0xDF, 0, 0, infoWinDraw, NULL, 0, work->task);
     work = g_infoWin;
     drawParameterBlockClear(&work->parameters);
-    paramsInit(&work->parameters, DAT_00403a04, 0x24, 0, 0, 0, 0, 0, 0, 0, 0);
+    paramsInit(&work->parameters, g_infoWindowDefaultParams, 0x24, 0, 0, 0, 0, 0, 0, 0, 0);
     uiSpriteStateInitFromSource(&work->background, 0xE, 0x87, &work->parameters, 1, 1.0f);
     timerStart(&work->background, 0, 0);
     uiSpriteStateInitFromSource(&work->content, 0xE, 0x87, &work->parameters, 1, 1.0f);

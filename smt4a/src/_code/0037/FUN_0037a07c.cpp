@@ -17,7 +17,7 @@ void FUN_00274e4c(f32 x, f32 y, f32 z, f32 heading);
 void FUN_00234b30(void);
 void FUN_0023534c(void);
 void FUN_002737a8(void);
-void FUN_00292b84(void);
+void lmapCameraUpdate(void);
 void FUN_00296530(void);
 void FUN_002b7490(void);
 void FUN_00243ea0(void);
@@ -48,7 +48,7 @@ void FUN_0037a07c(void)
     FUN_00234b30();
     FUN_0023534c();
     FUN_002737a8();
-    FUN_00292b84();
+    lmapCameraUpdate();
     FUN_00296530();
     FUN_002b7490();
     FUN_00243ea0();

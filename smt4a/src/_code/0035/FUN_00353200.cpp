@@ -10,8 +10,8 @@ extern "C" {
 
 u32 randRange(u32 limit);
 f32 libm_sinf(f32 radians);
-s32 FUN_0036d984(MapVector *start, MapVector *end, s32 flags);
-s32 FUN_0025ef68(MapVector *position, MapVector *ground, s32 flags);
+s32 mapCollisionRaySegmentTest(MapVector *start, MapVector *end, s32 flags);
+s32 mapResolveCollisionSphere(MapVector *position, MapVector *ground, s32 flags);
 
 /* Tries up to four spots around the player (alternating left/right of the view heading, further out and
  * with a tighter spread after twelve attempts) and places the enemy on the first one the probe reaches
@@ -65,9 +65,9 @@ u32 FUN_00353200(MapEnemyEntryA *enemy)
         start = g_lmapScene->pose.position;
         end.y = end.y + 35.0f;
         start.y = start.y + 35.0f;
-        if (FUN_0036d984(&start, &end, 0) == -1) {
+        if (mapCollisionRaySegmentTest(&start, &end, 0) == -1) {
             origin.y = origin.y - 5.0f;
-            if (FUN_0025ef68(&origin, &ground, 0) != 0) {
+            if (mapResolveCollisionSphere(&origin, &ground, 0) != 0) {
                 enemy->position = ground;
                 enemy->heading = mathPositionHeadingDegrees(end, start);
                 return 1;

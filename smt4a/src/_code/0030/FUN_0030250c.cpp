@@ -38,7 +38,7 @@ extern int g_lmapScene; /* 0x581288 */
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_0029406c. */
 /* Supplied declaration required: FUN_002e34a4. */
-extern int FUN_003033d4(void);
+extern int lmapResolveContextValue(void);
 
 
 void FUN_0030250c(void)
@@ -81,7 +81,7 @@ void FUN_0030250c(void)
     temp_v4 = temp_v5;
     temp_v16 = temp_v6;
     temp_v19 = temp_v7;
-    temp_v0 = FUN_003033d4();
+    temp_v0 = lmapResolveContextValue();
     temp_v1 = *(float *)((*(int *)((unsigned char *)&g_lmapViewHolder + 0x4)) + 0x18) * 0.017453292f;
     libm_sinf();
     temp_v1 = *(float *)(g_lmapScene + 0x1c) - temp_v1 * *(float *)((*(int *)((unsigned char *)&g_lmapViewHolder + 0x4)) + temp_v0 * 4 + 0x18c);

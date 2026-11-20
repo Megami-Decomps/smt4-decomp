@@ -17,7 +17,7 @@ struct BtlUiWork {
 
 
 void menuStateBeginSelect(s16 id);
-void FUN_00227af0(const char *text);
+void btlMenuSetMessageText(const char *text);
 void menuStateStartSelect(u8 selection);
 
 /* Opens the battle selection menu for `id`, titled with its name. */
@@ -34,7 +34,7 @@ void FUN_004a99bc(BtlUiA *unused, u16 id, s32 owner)
     title[0] = 0;
     sprintf(title, "%s", FUN_00186f54(work->id));
     menuStateBeginSelect(id);
-    FUN_00227af0(title);
+    btlMenuSetMessageText(title);
     menuStateStartSelect(0);
 }
 

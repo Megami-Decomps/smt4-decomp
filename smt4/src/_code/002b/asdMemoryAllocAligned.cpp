@@ -14,7 +14,7 @@ typedef struct AsdMemoryBlock {
 
 void nn_os_CriticalSection_Enter(void *section);
 void nn_os_CriticalSection_Leave(void *section);
-AsdMemoryBlock *FUN_002b24d8(u32 heap, u32 kind, u32 flags, u32 size, s32 tag);
+AsdMemoryBlock *asdMemoryAllocFromHeap(u32 heap, u32 kind, u32 flags, u32 size, s32 tag);
 void asdMemoryTrackAllocation(AsdMemoryBlock *block);
 void rt_memclr(void *dest, u32 size);
 
@@ -44,7 +44,7 @@ void *asdMemoryAllocAligned(u32 heap, u32 kind, u32 flags, u32 size, u32 alignme
     }
     u32 mask = -alignment;
     u32 total = (size + alignment + alignment + sizeof(AsdMemoryBlock) - 1) & mask;
-    AsdMemoryBlock *block = FUN_002b24d8(heap, kind, flags, total, tag);
+    AsdMemoryBlock *block = asdMemoryAllocFromHeap(heap, kind, flags, total, tag);
     void *data = asdMemoryBlockInit(block, total, alignment, 0);
     rt_memclr(data, size);
     nn_os_CriticalSection_Leave(g_asdMemState.lock);

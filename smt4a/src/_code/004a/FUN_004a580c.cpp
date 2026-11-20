@@ -72,7 +72,7 @@ void useCounterStart(void);
 void buttonHelpSetText(s32 a, u32 color);
 void sendEvent100020E(void);
 void sendEvent100020F(void);
-void FUN_0022e774(void);
+void statusPanelClose(void);
 void FUN_00212724(void);
 
 #define QUEST_COLOR_FADE 0xF4F4F4FF
@@ -137,11 +137,11 @@ void FUN_004a580c(QuestMenu *menu)
         if (cancelPressed == 0)
             return;
         sortMenuAcquire(0xC, 0);
-        FUN_0031f208(1);
-        FUN_0031f208(2);
-        FUN_0031f208(4);
-        FUN_0031f208(5);
-        FUN_0031f208(3);
+        useCounterAppendValue(1);
+        useCounterAppendValue(2);
+        useCounterAppendValue(4);
+        useCounterAppendValue(5);
+        useCounterAppendValue(3);
         useCounterStart();
         gameGlobalsSetMenuOpenFlag(1);
         menu->state = 3;
@@ -150,7 +150,7 @@ void FUN_004a580c(QuestMenu *menu)
         sendEvent100020E();
         return;
     }
-    FUN_0022e774();
+    statusPanelClose();
     if (menu->tabsActive == 0)
         FUN_00212724();
     buttonHelpSetText(0, QUEST_COLOR_FADE);

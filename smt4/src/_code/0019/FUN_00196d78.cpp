@@ -30,7 +30,7 @@ s32 FUN_001e1540(const void *a, const void *b);
 s32 FUN_002d02b0(const void *a, const void *b);
 u32 FUN_0029ce60(u32 id, s32 a, s32 b, s32 c, s32 d);
 void qsort(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
-void FUN_0027f3dc(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
+void arraySortQsort(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 
 /* Sort the fusion pair list by the key the player selected. */
 void FUN_00196d78(void)
@@ -74,9 +74,9 @@ void FUN_00196d78(void)
     }
     if ((*setting & 0x7f) == 3) {
         if (ascending) {
-            FUN_0027f3dc(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), FUN_001e1540);
+            arraySortQsort(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), FUN_001e1540);
         } else {
-            FUN_0027f3dc(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), FUN_002d02b0);
+            arraySortQsort(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), FUN_002d02b0);
         }
     }
 }

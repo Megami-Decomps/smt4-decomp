@@ -5,7 +5,7 @@
 
 extern "C" {
 AocHandleJob *_ZN21WindowOperationResultC1Eh(u32 job, u32 kind);
-WindowStatusResult FUN_003df5d0(u32 *parameters, AocEnumerationResult *enumeration,
+WindowStatusResult aocEnumerateContentWindow(u32 *parameters, AocEnumerationResult *enumeration,
                               AocContentRecord *records, s32 capacity, s32 offset);
 u32 legacyResourceIdRemap(WindowStatusResult *result);
 s32 objGetFlagBit1(const AocContentRecord *record);
@@ -25,7 +25,7 @@ void aocEnumerateContentRecords(u32 job, AocContentEnumeration *content)
     AocContentRecord records[32];
     AocEnumerationResult enumeration;
     enumeration.count = 0;
-    request->result = FUN_003df5d0(content->parameters, &enumeration, records, 32, 0);
+    request->result = aocEnumerateContentWindow(content->parameters, &enumeration, records, 32, 0);
     if (nnResultIsFailure(legacyResourceIdRemap(&request->result))) {
         request->state = 100;
         if (legacyResourceIdRemap(&request->result) == 0xC9413915) {

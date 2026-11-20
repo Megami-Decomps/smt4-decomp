@@ -18,7 +18,7 @@ int dataFindKindRecordWithAocOverrides(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
-int FUN_00180310(...);
+int statRowDrawValueImpl(...);
 int uiDrawItemOrStatusIcon(...);
 int fontMeasureLineAdvance(...);
 int nkmBaseGetRecord(void);
@@ -27,7 +27,7 @@ int statusDownDrawIndicatorPairs(...);
 int resourceRunOperationIfUnblocked(...);
 int uiDrawListScrollBar(...);
 int FUN_003d3a4c(...);
-int FUN_0047fc38(void);
+int equipmentIsFullyUpgraded(void);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -55,7 +55,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: textDrawRangeFaded. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00180310. */
+/* Supplied declaration required: statRowDrawValueImpl. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
@@ -66,11 +66,11 @@ extern int gameFlagIsSet(unsigned int);
 extern int itemIsCollectedWithRelated(unsigned short);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int listCursorGetRowIfUnblocked(int);
-extern unsigned short *FUN_002c7e24(void);
-extern int FUN_002c7e3c(void);
+extern unsigned short *gameGlobalsGetBlock1390(void);
+extern int gameGlobalsGetFieldState(void);
 /* Supplied declaration required: uiDrawListScrollBar. */
 /* Supplied declaration required: FUN_003d3a4c. */
-/* Supplied declaration required: FUN_0047fc38. */
+/* Supplied declaration required: equipmentIsFullyUpgraded. */
 extern int equipmentHasPositiveUpgrade(unsigned int);
 
 
@@ -219,7 +219,7 @@ LAB_0026b298:
       if (temp_v2 != 0) {
         temp_v13 = 0x8400ff;
         temp_v3 = temp_v9;
-        FUN_0047fc38();
+        equipmentIsFullyUpgraded();
         if (temp_v3 != 0) {
           temp_v13 = 0xfbeb39ff;
         }
@@ -304,7 +304,7 @@ LAB_0026b644:
       if (temp_v4 != 0) {
         temp_v13 = 0x8400ff;
         temp_v3 = temp_v18;
-        FUN_0047fc38();
+        equipmentIsFullyUpgraded();
         if (temp_v3 != 0) {
           temp_v13 = 0xfbeb39ff;
         }
@@ -390,7 +390,7 @@ LAB_0026b644:
                        0xba);
           temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x4ad));
           temp_v18 = (unsigned int)*(unsigned short *)(temp_v10 + 0xf4a);
-          FUN_00180310(2,(int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v0,
+          statRowDrawValueImpl(2,(int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v0,
                        (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v1,1,6,0xba);
         }
         else {
@@ -399,7 +399,7 @@ LAB_0026b644:
           texDrawTableEntryAtStoredOrigin(2,0x12,0x4a6,*(short *)(temp_v5 + 8) + temp_v0,*(short *)(temp_v5 + 10) + temp_v1,
                        0xba);
           temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x4ad));
-          FUN_00180310(2,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v0,
+          statRowDrawValueImpl(2,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v0,
                        (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v1,1,6,0xba);
         }
         temp_v2 = temp_v2 + 1;
@@ -477,7 +477,7 @@ LAB_0026b644:
       }
     }
     temp_v15 = 0;
-    temp_v11 = FUN_002c7e3c();
+    temp_v11 = gameGlobalsGetFieldState();
     if (temp_v11 != 0xe) {
       if (temp_v11 != 7) {
         if (temp_v11 == 0x10) {
@@ -485,7 +485,7 @@ LAB_0026b644:
         }
       }
       else {
-        puVar12 = (unsigned short *)FUN_002c7e24();
+        puVar12 = (unsigned short *)gameGlobalsGetBlock1390();
         temp_v11 = itemIsCollectedWithRelated(*puVar12);
         if (temp_v11 == 0) {
           temp_v15 = 1;

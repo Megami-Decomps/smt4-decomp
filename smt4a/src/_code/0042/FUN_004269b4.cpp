@@ -6,7 +6,7 @@
 
 extern "C" {
 
-extern u32 DAT_005c149c; /* service session handle */
+extern u32 g_amAppSession; /* service session handle */
 
 /* IPC request 0x1005 with a flag byte, a count, a buffer of count 8-byte records read from `input`
  * and a buffer of count 24-byte records written to `output`; returns the transport result, or the
@@ -21,7 +21,7 @@ s32 FUN_004269b4(void *output, u8 flag, const void *input, s32 count)
     cmd->words[3] = (u32)input;
     cmd->words[4] = ipcMappedBufferDescriptor(count * 24, 12);
     cmd->words[5] = (u32)output;
-    s32 result = nn::svc::SendSyncRequest(DAT_005c149c);
+    s32 result = nn::svc::SendSyncRequest(g_amAppSession);
     if (nnResultIsSuccess(result)) {
         result = cmd->words[0];
     }

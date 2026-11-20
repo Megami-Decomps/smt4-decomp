@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u32 FUN_003c5d8c(void);
+extern u32 textureCacheGetDirection(void);
 
 u8 FUN_004fa0d8(void)
 {
-    return FUN_003c5d8c() != 0;
+    return textureCacheGetDirection() != 0;
 }
 
 } /* extern "C" */

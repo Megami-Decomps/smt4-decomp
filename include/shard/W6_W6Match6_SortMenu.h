@@ -48,6 +48,12 @@ typedef char SortMenuWorkPacketLayoutCheck[
 /* The sort keys from here on have no row in the key table. */
 #define SORT_MENU_KEY_COUNT 0x4C
 
+/* A sort preference byte (gameDataGetSortPreferences()[owner]): the key in the low seven bits, the order in bit 7. */
+enum {
+    SORT_PREFERENCE_KEY_MASK = 0x7F,
+    SORT_PREFERENCE_DESCENDING = 0x80
+};
+
 extern "C" {
 s32 recordCompareSignedValue(const void *left, const void *right);
 }

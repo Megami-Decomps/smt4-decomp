@@ -3,7 +3,7 @@
 #include "gfx/VectorScratch.h"
 
 extern "C" {
-f32 FUN_001b63b0(f32);
+f32 phaseCosine(f32);
 f32 FUN_001a1ee0(f32);
 }
 
@@ -11,13 +11,13 @@ f32 FUN_001a1ee0(f32);
 extern "C" void FUN_001bc2f0(f32 x, f32 y, f32 z)
 {
     f32 halfX = x * -0.5f * 40.743664f;
-    f32 cosX = FUN_001b63b0(halfX);
+    f32 cosX = phaseCosine(halfX);
     f32 sinX = FUN_001a1ee0(halfX);
     f32 halfY = y * -0.5f * 40.743664f;
-    f32 cosY = FUN_001b63b0(halfY);
+    f32 cosY = phaseCosine(halfY);
     f32 sinY = FUN_001a1ee0(halfY);
     f32 halfZ = z * -0.5f * 40.743664f;
-    f32 cosZ = FUN_001b63b0(halfZ);
+    f32 cosZ = phaseCosine(halfZ);
     f32 sinZ = FUN_001a1ee0(halfZ);
     RotationQuaternion rotation;
     rotation.x = sinZ * sinY * cosX + cosZ * cosY * sinX;

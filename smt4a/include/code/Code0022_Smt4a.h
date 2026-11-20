@@ -6,7 +6,7 @@ extern "C" {
 
 u32 FUN_0022a030(s32 slot, u32 skill);
 
-void FUN_00227af0(const char *text);
+void btlMenuSetMessageText(const char *text);
 
 u8 FUN_0022e750(void);
 

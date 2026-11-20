@@ -74,7 +74,7 @@ extern UniteShutdownState *g_unite;
 extern u32 g_handleRegistry;
 
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
-void FUN_001469a8(AddressSpaceRegion *region);
+void addressSpaceRegionFree(AddressSpaceRegion *region);
 void asdOperatorDelete(void *block);
 void gameCounterAddSaturating(s32 id, s32 value);
 void resourceOwnerReleaseAndReset(u32 registry);
@@ -88,7 +88,7 @@ void mapSettings5BSetValueIfActive(s32 value);
 
 inline StackRegion::~StackRegion()
 {
-    FUN_001469a8(this);
+    addressSpaceRegionFree(this);
 }
 
 inline void StackRegion::operator delete(void *block)
@@ -119,7 +119,7 @@ extern "C" void FUN_0031fb04(void)
     threadWait(&unite->thread.handle);
     unite->thread.joined = 1;
     unite->thread.~NnOsThread();
-    FUN_001469a8(unite->stackRegion);
+    addressSpaceRegionFree(unite->stackRegion);
     StackRegion *region = unite->stackRegion;
     delete region;
     unite->stackRegion = NULL;

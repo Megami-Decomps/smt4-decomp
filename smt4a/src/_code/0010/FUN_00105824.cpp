@@ -7,8 +7,8 @@ extern "C" {
 int sysMemClear(int, int);
 int rt_memclr(int, int);
 int FUN_002ea668(int [22]);
-int FUN_002ea6bc(int [22], unsigned char *, int);
-int FUN_002ea6cc(int [22]);
+int lazyStaticInitOnce(int [22], unsigned char *, int);
+int lazyMemberInitOnce(int [22]);
 int rt_memcpy(int, unsigned char *, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -19,8 +19,8 @@ typedef struct {
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_002ea668. */
-/* Supplied declaration required: FUN_002ea6bc. */
-/* Supplied declaration required: FUN_002ea6cc. */
+/* Supplied declaration required: lazyStaticInitOnce. */
+/* Supplied declaration required: lazyMemberInitOnce. */
 extern unsigned char *FUN_002ec674(int);
 /* Supplied declaration required: rt_memcpy. */
 
@@ -39,8 +39,8 @@ void FUN_00105824(int param_1)
   temp_v1 = *(int *)(param_1 + 0x1c) - *(int *)(param_1 + 0x18);
   if (temp_v1 >= 0x41) {
     FUN_002ea668(temp_v2);
-    FUN_002ea6bc(temp_v2,puVar1,temp_v1);
-    FUN_002ea6cc(temp_v2);
+    lazyStaticInitOnce(temp_v2,puVar1,temp_v1);
+    lazyMemberInitOnce(temp_v2);
     temp_v1 = 0x10;
     puVar1 = temp_v3;
   }

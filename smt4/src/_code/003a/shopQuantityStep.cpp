@@ -34,7 +34,7 @@ s32 aocItemGetPrice(const ShopSlot *item);
 u32 messageTargetSetValue(u32 value, u8 flag);
 void FUN_002937c8(ShopCategoryList *list);
 void FUN_0029212c(int id);
-s32 FUN_0027ee9c(void);
+s32 inputConfirmPressed(void);
 void messageMainFinishWindow(void);
 void messageMainSetEnabled(u8 value);
 s32 inputIsQuestMenuPressed(void);
@@ -52,15 +52,15 @@ void messageMainSetTargetFlags(u8 value);
 u8 gameGlobalsDataExists(void);
 u32 messageMainGetChoiceResult(void);
 u8 messageMainTargetIsClear(void);
-void FUN_002306f8(const ShopSlot *item, s32 quantity, s32 settleMoney);
+void inventoryApplyTransaction(const ShopSlot *item, s32 quantity, s32 settleMoney);
 int FUN_0028e9d0(unsigned id); // declcheck: local (declared in the BGM channel's header)
-void FUN_0022fcb8(ShopScreen *screen, u32 mode);
+void shopScreenRebuildForSelection(ShopScreen *screen, u32 mode);
 void panelSetScrollPosition(ShopCategoryList *list, u32 first, u32 row);
 void playerRecalcStatsFromEquipment(PlayerDataIV *player);
 void FUN_0029a0e8(PlayerDataIV *player);
-void FUN_0029a0cc(PlayerDataIV *player);
+void btlBuildDemonSnapshotFromSaveRecord(PlayerDataIV *player);
 void soundPlaySeUnpanned(unsigned int id);
-void FUN_002996d8(s32 usePreset);
+void statusCameraRestore(s32 usePreset);
 
 /* The item under the current category's cursor. */
 static __inline ShopSlot *shopSelectedItem(ShopScreen *screen)
@@ -152,7 +152,7 @@ void shopQuantityStep(ShopScreen *screen)
         }
         FUN_0029212c(shopSelectedItem(screen)->id);
         shopShowPriceChange(screen);
-        if (FUN_0027ee9c() != 0 && screen->quantityIndex == index) {
+        if (inputConfirmPressed() != 0 && screen->quantityIndex == index) {
             if (screen->quantity.value > 0) {
                 if (screen->slot == 7 || screen->slot == 8) {
                     messageMainFinishWindow();
@@ -305,7 +305,7 @@ void shopQuantityStep(ShopScreen *screen)
         if (screen->slot == 8) {
             change = -change;
         }
-        FUN_0029c43c(change, 0);
+        messageBannerSetCountdown(change, 0);
         screen->substep = 8;
         shopStartScript(screen, "shop_Decide");
         scrRunOpcodesStub(screen->process);
@@ -332,14 +332,14 @@ void shopQuantityStep(ShopScreen *screen)
             if (screen->slot == 8) {
                 quantity = -quantity;
             }
-            FUN_002306f8(item, quantity, 1);
+            inventoryApplyTransaction(item, quantity, 1);
             screen->substep = 9;
             if (screen->slot == 8 && FUN_0028e9d0(item->id) == 0) {
                 ShopCategoryList *list = &screen->slotInfo[screen->slot];
                 s32 row = flaggedEntryGetValueByState(list);
                 s32 first = FUN_0029e924(list);
 
-                FUN_0022fcb8(screen, 0);
+                shopScreenRebuildForSelection(screen, 0);
                 if (first > 0) {
                     first--;
                 } else if (row != 0 && list->range.count <= row + first) {
@@ -403,7 +403,7 @@ void shopQuantityStep(ShopScreen *screen)
             }
             playerRecalcStatsFromEquipment(NULL);
             FUN_0029a0e8(player);
-            FUN_0029a0cc(player);
+            btlBuildDemonSnapshotFromSaveRecord(player);
             soundPlaySeUnpanned(0x100025f);
         }
         if (gameGlobalsDataExists() != 0) {
@@ -413,7 +413,7 @@ void shopQuantityStep(ShopScreen *screen)
         break;
     }
     if (gameGlobalsDataExists() != 0 && FUN_00299fc0() != 0 && screen->preview.ready == 0 && !previewPending) {
-        FUN_002996d8(1);
+        statusCameraRestore(1);
         screen->preview.ready = 1;
     }
 }

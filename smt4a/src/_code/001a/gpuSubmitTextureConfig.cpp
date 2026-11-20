@@ -2,13 +2,13 @@
 #include "shard/TextureCommandTemplates.h"
 
 extern "C" {
-extern const TextureCommandTemplates DAT_0053d500;
+extern const TextureCommandTemplates g_gpuCommandTemplates;
 void gpuSubmitCommandBlock(const void *commands, u32 bytes);
 
 void gpuSubmitTextureConfig(u32 width, u32 height, u32 format, u32 address)
 {
-    TextureCommandBlock formats = DAT_0053d500.formats;
-    TextureCommandBlock command = DAT_0053d500.command;
+    TextureCommandBlock formats = g_gpuCommandTemplates.formats;
+    TextureCommandBlock command = g_gpuCommandTemplates.command;
     command.words[2] = (width << 16) | height;
     command.words[5] = address >> 3;
     command.words[3] = formats.words[format] | 0x2200;

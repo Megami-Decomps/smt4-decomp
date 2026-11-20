@@ -1,19 +1,19 @@
-#include "shard/W5_W5Match1_RecordKeys.h"
+#include "npc_room/NpcRoom.h"
 
 extern "C" {
 
-extern NpcRoomState *g_npcRoom;
-extern void FUN_0026dcd4(u32 kind);
+extern NpcRoom *g_npcRoom;
+void npcRoomCreate(u32 room);
 
-/* Selects an NPC-room entry, or activates the default room when no entry is supplied. */
+/* Opens the NPC room of `entry`, or room 0 as the default room when there is no entry. */
 void npcRoomSelectEntry(const u16 *entry)
 {
     if (entry != NULL) {
-        FUN_0026dcd4(*entry);
-        g_npcRoom->active = 0;
+        npcRoomCreate(*entry);
+        g_npcRoom->defaultRoom = 0;
     } else {
-        FUN_0026dcd4(0);
-        g_npcRoom->active = 1;
+        npcRoomCreate(0);
+        g_npcRoom->defaultRoom = 1;
     }
 }
 

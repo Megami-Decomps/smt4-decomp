@@ -2,13 +2,13 @@
 
 extern "C" {
 
-extern void FUN_002c1398(void);
+extern void srvInitialize(void);
 extern u32 FUN_0010ffdc(void);
 
-/* Runs FUN_002c1398, then registers the callbacks (FUN_0010ffdc). */
+/* Runs srvInitialize, then registers the callbacks (FUN_0010ffdc). */
 u32 FUN_0010ffcc(void)
 {
-    FUN_002c1398();
+    srvInitialize();
     return FUN_0010ffdc();
 }
 

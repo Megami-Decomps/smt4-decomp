@@ -2,6 +2,6 @@
 #include "nn/Result.h"
 #include "nn/svc.h"
 #include "nn/os/IpcCommandBuffer.h"
-extern "C" {extern u32 DAT_005c0a80;void rt_memcpy(void*,const void*,u32);
+extern "C" {extern u32 g_nimAocSession;void rt_memcpy(void*,const void*,u32);
 /* Queries the service's 64-byte response block. */
-s32 FUN_00439870(void *output){nn::os::IpcCommandBuffer *command=nn::os::GetIpcCommandBuffer();nn::os::SetIpcWord(command, 0, 0x180000);s32 result=nn::svc::SendSyncRequest(DAT_005c0a80);if (nnResultIsSuccess(result)){rt_memcpy(output,&command->words[1],64);result=command->words[0];}return result;}}
+s32 FUN_00439870(void *output){nn::os::IpcCommandBuffer *command=nn::os::GetIpcCommandBuffer();nn::os::SetIpcWord(command, 0, 0x180000);s32 result=nn::svc::SendSyncRequest(g_nimAocSession);if (nnResultIsSuccess(result)){rt_memcpy(output,&command->words[1],64);result=command->words[0];}return result;}}

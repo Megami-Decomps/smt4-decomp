@@ -12,8 +12,8 @@ int VectorSignedToFloat(...);
 
 int asdMemoryAllocTraced(...);
 int FUN_003689d0(void);
-int FUN_0040a908(...);
-int FUN_0040a918(...);
+int moriModelContentSetRequestFirst(...);
+int moriModelContentSetRequestSecond(...);
 int resourceOwnerLoadFileSync(void);
 int moriModelContentLoadBody(...);
 
@@ -45,12 +45,12 @@ extern int gameFlagsTestSecondBank(int);
 /* Supplied declaration required: FUN_003689d0. */
 extern int dataTableGetRecordFortyNine(void);
 /* Supplied declaration required: controllerSetPosition. */
-/* Supplied declaration required: FUN_0040a908. */
-/* Supplied declaration required: FUN_0040a918. */
+/* Supplied declaration required: moriModelContentSetRequestFirst. */
+/* Supplied declaration required: moriModelContentSetRequestSecond. */
 /* Supplied declaration required: resourceOwnerLoadFileSync. */
 /* Supplied declaration required: moriModelContentCopyBody. */
 /* Supplied declaration required: moriModelContentLoadBody. */
-extern int FUN_0040ab8c(unsigned int);
+extern int moriModelContentIsLoaded(unsigned int);
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
 
@@ -86,7 +86,7 @@ unsigned int FUN_00356674(void)
       }
       temp_v1 = (int)*(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10);
       if (((temp_v1 != 0) && (temp_v1 != 1 && temp_v1 != 3)) &&
-         (temp_v1 = FUN_0040ab8c(*(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + temp_v1 * 8 + 0x20)),
+         (temp_v1 = moriModelContentIsLoaded(*(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + temp_v1 * 8 + 0x20)),
          temp_v1 == 0)) {
         return 0;
       }
@@ -207,11 +207,11 @@ unsigned int FUN_00356674(void)
                                ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
                                0x20) = temp_v2;
                               resourceOwnerLoadFileSync();
-                              FUN_0040a908(*(unsigned int *)
+                              moriModelContentSetRequestFirst(*(unsigned int *)
                                             ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                              *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                                            0x10000);
-                              FUN_0040a918(*(unsigned int *)
+                              moriModelContentSetRequestSecond(*(unsigned int *)
                                             ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                              *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                                            0x30000);
@@ -230,11 +230,11 @@ unsigned int FUN_00356674(void)
                                ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
                                0x20) = temp_v2;
                               resourceOwnerLoadFileSync();
-                              FUN_0040a908(*(unsigned int *)
+                              moriModelContentSetRequestFirst(*(unsigned int *)
                                             ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                              *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                                            0x10000);
-                              FUN_0040a918(*(unsigned int *)
+                              moriModelContentSetRequestSecond(*(unsigned int *)
                                             ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                              *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                                            0x10000);
@@ -254,11 +254,11 @@ unsigned int FUN_00356674(void)
                              ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
                              0x20) = temp_v2;
                             resourceOwnerLoadFileSync();
-                            FUN_0040a908(*(unsigned int *)
+                            moriModelContentSetRequestFirst(*(unsigned int *)
                                           ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                            *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                                          0x10000);
-                            FUN_0040a918(*(unsigned int *)
+                            moriModelContentSetRequestSecond(*(unsigned int *)
                                           ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                            *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                                          0x10000);
@@ -278,11 +278,11 @@ unsigned int FUN_00356674(void)
                            ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
                            0x20) = temp_v2;
                           resourceOwnerLoadFileSync();
-                          FUN_0040a908(*(unsigned int *)
+                          moriModelContentSetRequestFirst(*(unsigned int *)
                                         ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                          *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0x10000)
                           ;
-                          FUN_0040a918(*(unsigned int *)
+                          moriModelContentSetRequestSecond(*(unsigned int *)
                                         ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                          *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0x10000)
                           ;
@@ -302,10 +302,10 @@ unsigned int FUN_00356674(void)
                          ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20)
                              = temp_v2;
                         resourceOwnerLoadFileSync();
-                        FUN_0040a908(*(unsigned int *)
+                        moriModelContentSetRequestFirst(*(unsigned int *)
                                       ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                        *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0x10000);
-                        FUN_0040a918(*(unsigned int *)
+                        moriModelContentSetRequestSecond(*(unsigned int *)
                                       ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                        *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0x10000);
                         moriModelContentLoadBody(*(unsigned int *)
@@ -324,10 +324,10 @@ unsigned int FUN_00356674(void)
                        ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) =
                            temp_v2;
                       resourceOwnerLoadFileSync();
-                      FUN_0040a908(*(unsigned int *)
+                      moriModelContentSetRequestFirst(*(unsigned int *)
                                     ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                      *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0x10000);
-                      FUN_0040a918(*(unsigned int *)
+                      moriModelContentSetRequestSecond(*(unsigned int *)
                                     ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                      *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0x10000);
                       moriModelContentLoadBody(*(unsigned int *)
@@ -346,10 +346,10 @@ unsigned int FUN_00356674(void)
                      ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) =
                          temp_v2;
                     resourceOwnerLoadFileSync();
-                    FUN_0040a908(*(unsigned int *)
+                    moriModelContentSetRequestFirst(*(unsigned int *)
                                   ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                    *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0x10000);
-                    FUN_0040a918(*(unsigned int *)
+                    moriModelContentSetRequestSecond(*(unsigned int *)
                                   ((*(unsigned int *)&s__a_a_00587f08.u1[0]) +
                                    *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),0x10000);
                     moriModelContentLoadBody(*(unsigned int *)
@@ -368,10 +368,10 @@ unsigned int FUN_00356674(void)
                    ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) =
                        temp_v2;
                   resourceOwnerLoadFileSync();
-                  FUN_0040a908(*(unsigned int *)
+                  moriModelContentSetRequestFirst(*(unsigned int *)
                                 ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8
                                 + 0x20),0x10000);
-                  FUN_0040a918(*(unsigned int *)
+                  moriModelContentSetRequestSecond(*(unsigned int *)
                                 ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8
                                 + 0x20),0x10000);
                   moriModelContentLoadBody(*(unsigned int *)
@@ -390,10 +390,10 @@ unsigned int FUN_00356674(void)
                  ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) = temp_v2
                 ;
                 resourceOwnerLoadFileSync();
-                FUN_0040a908(*(unsigned int *)
+                moriModelContentSetRequestFirst(*(unsigned int *)
                               ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
                               0x20),0x10000);
-                FUN_0040a918(*(unsigned int *)
+                moriModelContentSetRequestSecond(*(unsigned int *)
                               ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
                               0x20),0x30000);
                 moriModelContentLoadBody(*(unsigned int *)
@@ -411,10 +411,10 @@ unsigned int FUN_00356674(void)
               *(unsigned int *)
                ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) = temp_v2;
               resourceOwnerLoadFileSync();
-              FUN_0040a908(*(unsigned int *)
+              moriModelContentSetRequestFirst(*(unsigned int *)
                             ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
                             0x20),0x10000);
-              FUN_0040a918(*(unsigned int *)
+              moriModelContentSetRequestSecond(*(unsigned int *)
                             ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
                             0x20),0x30000);
               moriModelContentLoadBody(*(unsigned int *)
@@ -433,10 +433,10 @@ joined_r0x00356bb0:
             *(unsigned int *)
              ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) = temp_v2;
             resourceOwnerLoadFileSync();
-            FUN_0040a908(*(unsigned int *)
+            moriModelContentSetRequestFirst(*(unsigned int *)
                           ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20
                           ),0x10000);
-            FUN_0040a918(*(unsigned int *)
+            moriModelContentSetRequestSecond(*(unsigned int *)
                           ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20
                           ),0x10000);
             moriModelContentLoadBody(*(unsigned int *)
@@ -455,10 +455,10 @@ joined_r0x00356b80:
           *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20)
                = temp_v2;
           resourceOwnerLoadFileSync();
-          FUN_0040a908(*(unsigned int *)
+          moriModelContentSetRequestFirst(*(unsigned int *)
                         ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                        0x10000);
-          FUN_0040a918(*(unsigned int *)
+          moriModelContentSetRequestSecond(*(unsigned int *)
                         ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                        0x20000);
           moriModelContentLoadBody(*(unsigned int *)
@@ -476,10 +476,10 @@ joined_r0x00356b80:
         *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) =
              temp_v2;
         resourceOwnerLoadFileSync();
-        FUN_0040a908(*(unsigned int *)
+        moriModelContentSetRequestFirst(*(unsigned int *)
                       ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                      0x10000);
-        FUN_0040a918(*(unsigned int *)
+        moriModelContentSetRequestSecond(*(unsigned int *)
                       ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                      0x20000);
         moriModelContentLoadBody(*(unsigned int *)
@@ -497,10 +497,10 @@ joined_r0x00356b80:
       *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) =
            temp_v2;
       resourceOwnerLoadFileSync();
-      FUN_0040a908(*(unsigned int *)
+      moriModelContentSetRequestFirst(*(unsigned int *)
                     ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                    0x10000);
-      FUN_0040a918(*(unsigned int *)
+      moriModelContentSetRequestSecond(*(unsigned int *)
                     ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                    0x20000);
       moriModelContentLoadBody(*(unsigned int *)
@@ -517,10 +517,10 @@ joined_r0x00356b80:
     *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) =
          temp_v2;
     resourceOwnerLoadFileSync();
-    FUN_0040a908(*(unsigned int *)
+    moriModelContentSetRequestFirst(*(unsigned int *)
                   ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                  0x10000);
-    FUN_0040a918(*(unsigned int *)
+    moriModelContentSetRequestSecond(*(unsigned int *)
                   ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20),
                  0x20000);
     moriModelContentLoadBody(*(unsigned int *)

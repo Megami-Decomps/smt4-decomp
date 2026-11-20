@@ -17,7 +17,7 @@ void messageWindowShowOrPoll(u32, u32, u32, s32, s32, s32);
 void asdTextFormatStream(u32, s32, u32, s32, s32, const u8 *, const u8 *);
 void msgBoxFlagsSetBit7(u32 box);
 void sortMenuAcquire(u32, s32);
-void FUN_0031f208(u8 label);
+void useCounterAppendValue(u8 label);
 void useCounterStart(void);
 s32 useCounterGetCurrentValue(void);
 s32 useCounterIsFinished(void);
@@ -56,7 +56,7 @@ u32 FUN_003884d4(void)
         work->flags |= 0x20;
         sortMenuAcquire(0xffffffff, 3);
         for (s32 i = 0; i < 5; ++i)
-            if (i != excluded && gameFlagIsSet(choices.flags[i])) FUN_0031f208(labels[i]);
+            if (i != excluded && gameFlagIsSet(choices.flags[i])) useCounterAppendValue(labels[i]);
         useCounterStart();
     }
     s32 result = useCounterGetCurrentValue();

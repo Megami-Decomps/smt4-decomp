@@ -7,7 +7,7 @@ struct StatusNotification {
     u16 padding;
 };
 extern "C" {
-s32 FUN_002c7e3c(void);
+s32 gameGlobalsGetFieldState(void);
 s32 fieldStateAllowsAction(void);
 void sysPlaySe(u32);
 void gridNavigationConfigure(void *, s32, s32, s32, s32, s32);
@@ -17,7 +17,7 @@ extern "C" void FUN_002f001c(const StatusNotification *notification)
 {
     StatusDownStateA *status = g_statusDown;
     if (s16(status->selectedEntry) >= 0 && status->tab == 1) {
-        s32 state = FUN_002c7e3c();
+        s32 state = gameGlobalsGetFieldState();
         if (state != 14 && state != 7) {
             sysPlaySe(fieldStateAllowsAction() ? 0xF9 : 0x1F);
         } else {

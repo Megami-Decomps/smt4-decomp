@@ -29,13 +29,13 @@ struct StatusFlagEditor {
 };
 
 extern "C" {
-extern BtlUiCloseState DAT_005715f8;
+extern BtlUiCloseState g_btlDebugGlobals;
 
 u32 asdListBoxGetSelectedItemId(u32 listBox);
 BtlCombatantEntryA *FUN_003e83b4(BtlMainStateA *state, s32 index, s32 matches);
 u32 FUN_004fdb18(s32 actor, u32 options, BattleRosterRecordA *target, u32 parameter, s32 checkStatus);
 u32 FUN_004fcffc(s32 actor, u32 options, BattleRosterRecordA *target, u32 mask);
-bool FUN_004bd0d8(SlotRecordA *demon);
+bool slotIsReservePick(SlotRecordA *demon);
 }
 
 /* Queues the screen's status flags for every member of an entry. */
@@ -161,9 +161,9 @@ extern "C" void btlDebugStatusFlagEditorApply(StatusFlagEditor *screen, BtlMainS
                 BtlCombatantEntryA *entry = FUN_003e83b4(battle, index, 1);
                 if (entry == NULL)
                     continue;
-                if (screen->onlyAllies != 0 && (DAT_005715f8.editableMask & entry->flags) != 0)
+                if (screen->onlyAllies != 0 && (g_btlDebugGlobals.editableMask & entry->flags) != 0)
                     continue;
-                if (screen->onlyEnemies != 0 && (entry->flags & DAT_005715f8.editableMask) == 0)
+                if (screen->onlyEnemies != 0 && (entry->flags & g_btlDebugGlobals.editableMask) == 0)
                     continue;
                 addEntryFlags(screen, battle, entry);
             }
@@ -177,7 +177,7 @@ extern "C" void btlDebugStatusFlagEditorApply(StatusFlagEditor *screen, BtlMainS
                 SlotRecordA *record = gameGetSlotRecord(slot);
                 if (record == NULL)
                     continue;
-                if (FUN_004bd0d8(record))
+                if (slotIsReservePick(record))
                     continue;
                 for (s32 bit = 0; bit < 14; ++bit) {
                     if (screen->mask & (1 << bit))
@@ -199,9 +199,9 @@ extern "C" void btlDebugStatusFlagEditorApply(StatusFlagEditor *screen, BtlMainS
                 BtlCombatantEntryA *entry = FUN_003e83b4(battle, index, 1);
                 if (entry == NULL)
                     continue;
-                if (screen->onlyAllies != 0 && (entry->flags & DAT_005715f8.editableMask) != 0)
+                if (screen->onlyAllies != 0 && (entry->flags & g_btlDebugGlobals.editableMask) != 0)
                     continue;
-                if (screen->onlyEnemies != 0 && (DAT_005715f8.editableMask & entry->flags) == 0)
+                if (screen->onlyEnemies != 0 && (g_btlDebugGlobals.editableMask & entry->flags) == 0)
                     continue;
                 removeEntryFlags(screen, battle, entry);
             }
@@ -215,7 +215,7 @@ extern "C" void btlDebugStatusFlagEditorApply(StatusFlagEditor *screen, BtlMainS
                 SlotRecordA *record = gameGetSlotRecord(slot);
                 if (record == NULL)
                     continue;
-                if (FUN_004bd0d8(record))
+                if (slotIsReservePick(record))
                     continue;
                 bitsAt60Clear(record, screen->mask);
             }

@@ -262,7 +262,7 @@ void FUN_003881b0(unsigned int param_1,unsigned int param_2,unsigned int param_3
             puVar4 = (unsigned int *)0x0;
           }
           uVar3 = FUN_002b93b0(*param_4,param_3);
-          FUN_002a6d1c(auStack_78,uVar5,0,0,(int)*(short *)(param_4 + 0xe));
+          requestParamsInitialize(auStack_78,uVar5,0,0,(int)*(short *)(param_4 + 0xe));
           FUN_002a8ac4(**(unsigned int **)(*(int *)*puVar4 + 4),auStack_78,uVar3);
         }
         FUN_002bf538();

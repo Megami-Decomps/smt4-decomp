@@ -7,11 +7,11 @@
 #include "battle/btlDebug.h"
 
 extern "C" {
-extern BtlUiCloseState DAT_005715f8;
+extern BtlUiCloseState g_btlDebugGlobals;
 extern const AsdListBoxEntry DAT_00572a80[5];
 extern const char DAT_005280e8[];
 s32 jobIsValid(u32 job);
-void FUN_003592dc(u32 job);
+void asdListBoxJobReset(u32 job);
 void jobStop(u32 job, s32 mode);
 void asdListBoxAddItems(u32 job, const AsdListBoxEntry *items, u32 count);
 void jobSetText(u32 job, const char *text);
@@ -21,17 +21,17 @@ void asdListBoxSetToggleItem(u32 job, s32 item, s32 value);
 void FUN_004d2124(BattleDebugPanelWork *work, BtlMainStateA *battle)
 {
     if (jobIsValid(work->panelJob)) {
-        FUN_003592dc(work->panelJob);
+        asdListBoxJobReset(work->panelJob);
         jobStop(work->panelJob, 0);
     }
     work->panelJob = asdListBoxCreateDefaultFlags(battle->uiJobs.menuJob, 117, 0, 0);
     asdListBoxAddItems(work->panelJob, DAT_00572a80, 5);
     asdListBoxSetByteValue(work->panelJob, 1);
     jobSetText(work->panelJob, DAT_005280e8);
-    asdListBoxSetToggleItem(work->panelJob, 0, (battle->markerMasks.bits & DAT_005715f8.talkAll) != 0);
-    asdListBoxSetToggleItem(work->panelJob, 1, (battle->markerMasks.bits & DAT_005715f8.bustup) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 0, (battle->markerMasks.bits & g_btlDebugGlobals.talkAll) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 1, (battle->markerMasks.bits & g_btlDebugGlobals.bustup) != 0);
     asdListBoxSetIntItem(work->panelJob, 2, battle->negotiation.bustupIndex, 0, 600, 0);
-    asdListBoxSetToggleItem(work->panelJob, 3, (battle->stateFlags64.bits & DAT_005715f8.messageWindow) != 0);
-    asdListBoxSetToggleItem(work->panelJob, 4, (battle->markerMasks.bits & DAT_005715f8.talkBeginningLife) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 3, (battle->stateFlags64.bits & g_btlDebugGlobals.messageWindow) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 4, (battle->markerMasks.bits & g_btlDebugGlobals.talkBeginningLife) != 0);
 }
 }

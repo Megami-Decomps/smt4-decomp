@@ -18,7 +18,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00237adc. */
 /* Supplied declaration required: FUN_00237d78. */
 /* Supplied declaration required: FUN_00238aac. */
-extern int FUN_003f718c(int *, int, int *, int);
+extern int variantCopyWithToken(int *, int, int *, int);
 
 
 unsigned int FUN_00237adc(int *param_1,unsigned int *param_2,int *param_3,int *param_4)
@@ -95,7 +95,7 @@ unsigned int FUN_00237adc(int *param_1,unsigned int *param_2,int *param_3,int *p
             *piVar7 = (int)piVar2;
             *(int **)(*piVar2 + 4) = piVar2;
             temp_v3 = piVar5[3];
-            temp_v0 = FUN_003f718c(piVar2 + 2,temp_v2 + 8,&temp_v3,param_1[4]);
+            temp_v0 = variantCopyWithToken(piVar2 + 2,temp_v2 + 8,&temp_v3,param_1[4]);
           }
           else {
             temp_v4 = 0;
@@ -120,7 +120,7 @@ unsigned int FUN_00237adc(int *param_1,unsigned int *param_2,int *param_3,int *p
             *piVar2 = (int)piVar5;
             *(int **)(*piVar5 + 4) = piVar5;
             temp_v3 = temp_v4;
-            temp_v0 = FUN_003f718c(piVar5 + 2,temp_v2 + 8,&temp_v3,param_1[4]);
+            temp_v0 = variantCopyWithToken(piVar5 + 2,temp_v2 + 8,&temp_v3,param_1[4]);
           }
           if (temp_v0 == 0) {
             return 0;

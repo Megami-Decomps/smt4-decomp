@@ -15,7 +15,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_00155634. */
-extern int *FUN_002bafb0(void);
+extern int *nw_snd_internal_driver_ChannelManager_GetInstance(void);
 /* Supplied declaration required: nw_snd_internal_driver_Voice_Free. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2B743C. */
 
@@ -49,7 +49,7 @@ void nw_snd_internal_driver_Channel_VoiceCallbackFunc(unsigned int param_1,int p
   *(unsigned char *)((int)param_3 + 0xc5) = 0;
   *(unsigned char *)((int)param_3 + 0xc6) = 0;
   *(unsigned char *)((int)param_3 + 199) = 0;
-  piVar1 = (int *)FUN_002bafb0();
+  piVar1 = (int *)nw_snd_internal_driver_ChannelManager_GetInstance();
   nw_ut_internal_LinkListImpl_erase_2B743C(piVar1 + 1,param_3 + 0x4f);
   if (param_3 != (int *)0x0) {
     FUN_00155634(param_3);

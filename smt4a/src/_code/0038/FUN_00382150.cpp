@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(double, double);
 int FUN_001a1ee0(void);
-int FUN_001b63b0(void);
+int phaseCosine(void);
 int asdGxSetEffectColorFromRGBA8(unsigned int);
 int randomAdvanceShiftRegister(void);
 int shiftRandomNextFraction(...);
@@ -66,7 +66,7 @@ static float romwright_sqrt_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_001a1ee0. */
 extern unsigned int effGetFrameStep(void);
-/* Supplied declaration required: FUN_001b63b0. */
+/* Supplied declaration required: phaseCosine. */
 extern unsigned int FUN_00221cb0(void);
 /* Supplied declaration required: asdGxSetEffectColorFromRGBA8. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
@@ -207,7 +207,7 @@ void FUN_00382150(int param_1)
                 temp_v30 = (float)((unsigned long long)temp_v31 >> 0x20);
                 temp_v28 = (pfVar20[1] + (pfVar20[2] + temp_v28 * temp_v25 * temp_v40) * temp_v25) * temp_v38;
                 temp_v25 = temp_v28;
-                FUN_001b63b0();
+                phaseCosine();
                 FUN_001a1ee0();
                 temp_v31 = CONCAT44(temp_v30,temp_v37);
                 DAT_006472dc = temp_v28 * temp_v27;

@@ -4,7 +4,7 @@ extern "C" {
 bool FUN_0034c9a0(void *animation);
 f32 animationGetFurthestFrame(void *animation);
 void FUN_003ddb50(s32 a, s32 b, s32 frame, f32 red, f32 green, f32 blue);
-void FUN_00226a90(ActionController *controller, s16 frame, s32 phase);
+void actionSequenceTriggerRangeAnimation(ActionController *controller, s16 frame, s32 phase);
 void animationSelectSecondPart(void *animation);
 void actionSequenceUpdateLoopTransition(ActionController *controller);
 
@@ -18,7 +18,7 @@ void FUN_00226fc0(ActionController *controller)
             FUN_003ddb50(0, 0, controller->tracks[0].startFrame, controller->sequence->color[0] * 0.01f,
                          controller->sequence->color[1] * 0.01f, controller->sequence->color[2] * 0.01f);
         }
-        FUN_00226a90(controller, frame, 1);
+        actionSequenceTriggerRangeAnimation(controller, frame, 1);
     }
     if (FUN_0034c9a0(controller->animation)) {
         animationSelectSecondPart(controller->animation);

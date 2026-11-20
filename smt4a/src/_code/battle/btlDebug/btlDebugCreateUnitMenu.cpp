@@ -23,7 +23,7 @@ struct BattleDebugMasks {
 extern "C" {
 
 extern AsdListBoxEntry DAT_00571f60[];
-extern BattleDebugMasks DAT_005715f8;
+extern BattleDebugMasks g_btlDebugGlobals;
 extern f32 DAT_00573974;
 extern u32 DAT_0057aa0c;
 /* The effect settings are read as separate globals here: this is the first colour channel at 0x57aa00. */
@@ -37,7 +37,7 @@ extern u32 DAT_0057aa1c;
 extern s16 DAT_0057a664[12];
 
 s32 jobIsValid(u32 job);
-void FUN_003592dc(u32 job);
+void asdListBoxJobReset(u32 job);
 void jobStop(u32 job, s32 arg);
 void asdListBoxAddItems(u32 listBox, const AsdListBoxEntry *entries, u32 count);
 void asdListBoxSetByteValue(u32 listBox, u32 value);
@@ -50,7 +50,7 @@ void asdListBoxSetIntItem(u32 listBox, s32 index, s32 value, s32 minimum, s32 ma
 void btlDebugCreateUnitMenu(DebugState* debug, BattleDebugOwner* owner)
 {
     if (jobIsValid(debug->listBox) != 0) {
-        FUN_003592dc(debug->listBox);
+        asdListBoxJobReset(debug->listBox);
         jobStop(debug->listBox, 0);
     }
     debug->listBox = asdListBoxCreateDefaultFlags(owner->listBoxHandle, 0x75, 0, 0);
@@ -58,7 +58,7 @@ void btlDebugCreateUnitMenu(DebugState* debug, BattleDebugOwner* owner)
     asdListBoxSetByteValue(debug->listBox, 1);
     jobSetText(debug->listBox, "btl Unit Menu");
     asdListBoxSetFloatItem(debug->listBox, 0, DAT_00573974, -255, 255);
-    asdListBoxSetToggleItem(debug->listBox, 1, (owner->pendingMask & DAT_005715f8.mask) != 0);
+    asdListBoxSetToggleItem(debug->listBox, 1, (owner->pendingMask & g_btlDebugGlobals.mask) != 0);
     asdListBoxSetIntItem(debug->listBox, 2, DAT_0057aa0c, -1, 2, 0);
 
     u32 color = DAT_0057aa1c;

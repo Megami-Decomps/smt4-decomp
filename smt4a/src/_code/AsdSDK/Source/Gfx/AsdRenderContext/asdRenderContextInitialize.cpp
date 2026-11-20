@@ -5,8 +5,8 @@
 extern "C" {
 
 int asdCameraInitializeDefaults(...);
-int FUN_0014f0dc(...);
-int FUN_001523b8(...);
+int cameraMatrixCacheSetLookAt(...);
+int stereoCameraSetPerspective(...);
 int FUN_00156fd8(...);
 int FUN_001579dc(...);
 int FUN_0015a050(...);
@@ -30,8 +30,8 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: asdCameraInitializeDefaults. */
-/* Supplied declaration required: FUN_0014f0dc. */
-/* Supplied declaration required: FUN_001523b8. */
+/* Supplied declaration required: cameraMatrixCacheSetLookAt. */
+/* Supplied declaration required: stereoCameraSetPerspective. */
 extern unsigned int FUN_00154c94(unsigned int);
 /* Supplied declaration required: FUN_00156fd8. */
 /* Supplied declaration required: FUN_001579dc. */
@@ -120,12 +120,12 @@ void asdRenderContextInitialize(int param_1)
   temp_v12 = temp_v5;
   temp_v13 = temp_v5;
   asdCameraInitializeDefaults(temp_v1,1);
-  FUN_0014f0dc(temp_v1,&temp_v6,&temp_v11,&temp_v8);
-  FUN_001523b8(temp_v1,1);
+  cameraMatrixCacheSetLookAt(temp_v1,&temp_v6,&temp_v11,&temp_v8);
+  stereoCameraSetPerspective(temp_v1,1);
   temp_v1 = param_1 + 0xc0c;
   asdCameraInitializeDefaults(temp_v1,1);
-  FUN_0014f0dc(temp_v1,&temp_v6,&temp_v11,&temp_v8);
-  FUN_001523b8(temp_v1,1);
+  cameraMatrixCacheSetLookAt(temp_v1,&temp_v6,&temp_v11,&temp_v8);
+  stereoCameraSetPerspective(temp_v1,1);
   mathCopyIdentityMatrix(param_1 + 0x5b8);
   temp_v4 = 0;
   do {

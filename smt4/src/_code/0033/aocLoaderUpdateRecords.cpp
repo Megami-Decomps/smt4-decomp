@@ -47,7 +47,7 @@ extern "C" {
 
 AocRecord *idSlotsFindEntryById(AocLoader *loader, u32 id);
 s32 nkdwHeaderParse(AocRecord *record);
-s32 FUN_00294fe0(AocRecord *record);
+s32 aocTextureEntryLoadOnce(AocRecord *record);
 void aocHandleButtons(AocRecord *record, s32 mode);
 void modelAnimationEnsureData(AocRecord *record);
 AocLoaderTask *FUN_00334228(AocLoaderTask *task, AocLoader *loader);
@@ -76,7 +76,7 @@ AocLoaderTask *aocLoaderUpdateRecords(AocLoaderTask *task, AocLoader *loader)
             }
         }
         if ((slot->state & 2) == 0) {
-            if (FUN_00294fe0(record) == 0) {
+            if (aocTextureEntryLoadOnce(record) == 0) {
                 ready = 0;
             } else {
                 modelAnimationEnsureData(record);

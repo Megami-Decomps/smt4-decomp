@@ -95,7 +95,7 @@ ResourceContent *eventResourceCacheAcquire(s32 id, s32 queueLoad, u32 unused, u3
             content->file = NULL;
             content->kind = 4;
             content->index = npcId;
-            if (FUN_0023e330(g_aocSystem, npcId, 1) != 0) {
+            if (aocPackageHasVoiceContent(g_aocSystem, npcId, 1) != 0) {
                 aocQueueType0c(reinterpret_cast<AocSystem *>(g_aocSystem), npcId, &content->file, name);
             } else {
                 asdLoadFileAsyncSimple(name, &content->file, 0);
@@ -106,7 +106,7 @@ ResourceContent *eventResourceCacheAcquire(s32 id, s32 queueLoad, u32 unused, u3
             content->file = NULL;
             content->kind = 12;
             content->index = id - 1;
-            if (FUN_0023e3a4(g_aocSystem, id, 1) != 0) {
+            if (aocPackageHasTextureContent(g_aocSystem, id, 1) != 0) {
                 aocDisplayQueueFormattedEntry(g_aocSystem, id, &content->file, name);
             } else {
                 asdLoadFileAsyncSimple(name, &content->file, 0);

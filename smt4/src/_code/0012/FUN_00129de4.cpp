@@ -12,10 +12,10 @@ int FUN_0013b88c(void);
 int FUN_002ad234(void);
 int FUN_002b563c(int, int, int, int, int);
 int FUN_002b5904(int);
-int FUN_002bb460(unsigned int);
+int appletSetUnlockFlag(unsigned int);
 int FUN_002c12d0(void);
 int FUN_002c130c(...);
-int FUN_002c131c(unsigned int, int);
+int errThrowFatal(unsigned int, int);
 int nn_applet_CTR_detail_CancelParameter(int, int, int);
 int nn_applet_CTR_detail_ReplySleepQueryToManager(int);
 int software_interrupt(int);
@@ -73,11 +73,11 @@ extern int FUN_0013b82c(void);
 /* Supplied declaration required: FUN_002ad234. */
 /* Supplied declaration required: FUN_002b563c. */
 /* Supplied declaration required: FUN_002b5904. */
-/* Supplied declaration required: FUN_002bb460. */
+/* Supplied declaration required: appletSetUnlockFlag. */
 extern int FUN_002bc7e4(void);
 /* Supplied declaration required: FUN_002c12d0. */
 /* Supplied declaration required: FUN_002c130c. */
-/* Supplied declaration required: FUN_002c131c. */
+/* Supplied declaration required: errThrowFatal. */
 extern int FUN_002c55b4(void);
 extern int appletIsExitRequested(void);
 /* Supplied declaration required: nn_applet_CTR_detail_CancelParameter. */
@@ -126,7 +126,7 @@ unsigned int FUN_00129de4(void)
     if (((DAT_0044e3bc == (romwright_code *)0x0) ||
         (temp_v1 = (*DAT_0044e3bc)(DAT_0044e3fc,temp_v0,temp_v2), temp_v1 != 0)) &&
        ((temp_v0 != 0 && (temp_v0 = FUN_002c12d0(), temp_v0 == 0)))) {
-      FUN_002bb460(temp_v2);
+      appletSetUnlockFlag(temp_v2);
       temp_v0 = FUN_002c12d0();
       if (temp_v0 != 1) {
         FUN_002c12d0();
@@ -149,7 +149,7 @@ unsigned int FUN_00129de4(void)
     temp_v3 = nn_applet_CTR_detail_Glance
                       ((unsigned int)&temp_v7,temp_v9,(unsigned char *)&DAT_0042c000,0x1000,(int *)&temp_v8,(unsigned int)&temp_v6);
     if ((int)temp_v3 < 0) {
-      FUN_002c131c(temp_v3,0x12a13c);
+      errThrowFatal(temp_v3,0x12a13c);
     }
     temp_v0 = temp_v6;
     if (temp_v9[0] != 2) {

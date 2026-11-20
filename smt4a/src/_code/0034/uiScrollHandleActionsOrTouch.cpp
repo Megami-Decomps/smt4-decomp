@@ -13,7 +13,7 @@
 extern "C" {
 s32 uiSearchPrimary(const FlaggedEntry *);
 s32 uiSearchSecondary(const FlaggedEntry *);
-u32 FUN_002e2848(FlaggedEntry *, Obj422594Pair, u32, u32, u32, s32, s32);
+u32 scrollListHandleTouch(FlaggedEntry *, Obj422594Pair, u32, u32, u32, s32, s32);
 
 /* Apply the first accepted mode or touch selection, reporting blocked modes and optional changes. */
 u32 uiScrollHandleActionsOrTouch(FlaggedEntry *entry, const TextureTableEntryIV *rectangle,
@@ -56,7 +56,7 @@ u32 uiScrollHandleActionsOrTouch(FlaggedEntry *entry, const TextureTableEntryIV 
             rectangle->x, rectangle->y,
             rectangle->placement->width, rectangle->placement->height
         };
-        result = FUN_002e2848(entry, bounds, firstKey, secondKey, thirdKey,
+        result = scrollListHandleTouch(entry, bounds, firstKey, secondKey, thirdKey,
                               secondary, notify);
     }
     if (notify) {

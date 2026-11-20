@@ -3,7 +3,7 @@
 
 extern "C" {
 u32 libc_strlen(const char *text);
-u32 FUN_001a7a20(ResourceNameDictionary *dictionary, const char *name, u32 length);
+u32 nameTableLookupEntry(ResourceNameDictionary *dictionary, const char *name, u32 length);
 
 /* Binds named targets, preserving sentinel entries and reporting partial or total failure. */
 u32 FUN_0045ab90(ResourceNameBinding *binding, ResourceNameTargets *source,
@@ -19,7 +19,7 @@ u32 FUN_0045ab90(ResourceNameBinding *binding, ResourceNameTargets *source,
         if (target->kind != 51) {
             const char *name = target->name;
             u32 length = libc_strlen(name);
-            u32 resolved = FUN_001a7a20(&owner->dictionary, name, length);
+            u32 resolved = nameTableLookupEntry(&owner->dictionary, name, length);
             if (resolved == 0xFFFF) {
                 missing = true;
                 binding->indices[index] = 0xFFFF;

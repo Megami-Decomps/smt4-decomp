@@ -12,7 +12,7 @@ extern const char *const DAT_00439b70[];
 extern const char DAT_004017dc[];
 extern const char DAT_004017c0[];
 extern const char DAT_004017ac[];
-extern u32 DAT_00435d18;
+extern u32 g_btlAux;
 const BattleTalkUnitReference *btlFindEntryBlockByMemberId(u32 unitId, u32 selector);
 void FUN_003dadd8(u32 value);
 s32 FUN_00256940(BtlMainState *battle, u32 unitId, u32 flags);
@@ -41,7 +41,7 @@ u32 FUN_003c06ac(BattleTalkWork *work)
     const BattleTalkUnitReference *unit = btlFindEntryBlockByMemberId(work->unitId, work->selector);
     const NkmBaseRecord *record = reinterpret_cast<const NkmBaseRecord *>(nkmBaseGetRecord(unit->id));
     battleTalkLoadFiles(work, record);
-    FUN_003dadd8(DAT_00435d18);
+    FUN_003dadd8(g_btlAux);
     work->ready = 1;
     BtlMainState *battle = g_btlMain;
     if (battle->talk.unitIndex >= 0 && FUN_00256940(battle, work->unitId, 1)) {

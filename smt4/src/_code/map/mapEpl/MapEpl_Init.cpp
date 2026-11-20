@@ -18,9 +18,9 @@ extern "C" {
 extern MapEpl *g_mapEpl;
 extern const char g_mapEplSourceFileName[];
 void *asdLoadFileSync(const char *path, u32 *size, u32 heap, u32 alignment);
-void *FUN_002a4e98(void *data);
-void FUN_002a3ab0(void *object, const f32 *position);
-s32 FUN_002fb3f4(void);
+void *effPartCreateFromSource(void *data);
+void skelNodePoseChain(void *object, const f32 *position);
+s32 dataTable45GetSection3Count(void);
 MapEffectPlacementRecord *aocDataTable2dGetEntryKind3(u32 index);
 
 void MapEpl_Init(s32 map, s32 area)
@@ -41,7 +41,7 @@ void MapEpl_Init(s32 map, s32 area)
             entry->position[3] = 0.0f;
         }
     }
-    for (s32 index = 0; index < FUN_002fb3f4(); ++index) {
+    for (s32 index = 0; index < dataTable45GetSection3Count(); ++index) {
         MapEffectPlacementRecord *placement = aocDataTable2dGetEntryKind3(index);
         if (placement->map != -1 && placement->map == map && placement->area == area) {
             char path[32];
@@ -52,7 +52,7 @@ void MapEpl_Init(s32 map, s32 area)
                 MapEplEntry *entry = &g_mapEpl->entries[candidate];
                 if (entry->object == NULL) {
                     entry->data = asdLoadFileSync(path, &fileSize, 1, 0x80);
-                    entry->object = FUN_002a4e98(entry->data);
+                    entry->object = effPartCreateFromSource(entry->data);
                     slot = candidate;
                     break;
                 }
@@ -63,7 +63,7 @@ void MapEpl_Init(s32 map, s32 area)
                 entry->position[0] = (f32)placement->x;
                 entry->position[1] = (f32)placement->y;
                 entry->position[2] = (f32)placement->z;
-                FUN_002a3ab0(entry->object, entry->position);
+                skelNodePoseChain(entry->object, entry->position);
             }
         }
     }

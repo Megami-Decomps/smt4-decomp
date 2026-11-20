@@ -11,7 +11,7 @@ u32 FUN_00246134(s32, u32, s32, s32);
 u32 btlGetPassiveAffinityOverride(u32, u32);
 s32 randRange(u16);
 void FUN_00246e24(u32, u32, BtlActionRecord *, u32, s32);
-void FUN_0022a5d8(u32, BtlEntry *, s32);
+void btlSubmitAction(u32, BtlEntry *, s32);
 
 void FUN_003cefe0(BtlMainState **owner, u32 action, u32 parameter)
 {
@@ -44,7 +44,7 @@ void FUN_003cefe0(BtlMainState **owner, u32 action, u32 parameter)
         BtlEntry *entry = btlMainFindEntryByListedId(*owner, record->memberId);
         entry->data.primaryFlags = 0;
         entry->data.alternateFlags |= 0x10;
-        FUN_0022a5d8(0x1C, entry, 1);
+        btlSubmitAction(0x1C, entry, 1);
     }
     asdMemFreeIfNotNull(candidates);
 }

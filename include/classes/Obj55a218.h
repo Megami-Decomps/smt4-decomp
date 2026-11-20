@@ -4,7 +4,7 @@
 #include "common.h"
 
 /* The shared-reference holder (vtable at 0x55ae24, named after it until its real name is known)
- * that Obj55a218 derives from; its destructor is FUN_002eb7c0. */
+ * that Obj55a218 derives from; its destructor is deletingDtor_002eb7c0. */
 class Obj55ae24 {
 public:
     virtual ~Obj55ae24();

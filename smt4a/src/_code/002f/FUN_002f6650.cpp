@@ -7,8 +7,8 @@ extern "C" {
 int FUN_001208fe(...);
 int FUN_001223c8(...);
 int FUN_002ea668(...);
-int FUN_002ea6bc(...);
-int FUN_002ea6cc(...);
+int lazyStaticInitOnce(...);
+int lazyMemberInitOnce(...);
 int clockGetTicksAsMicroseconds(...);
 int __aeabi_memcpy4(...);
 
@@ -42,8 +42,8 @@ extern unsigned long long FUN_0012237c(void);
 extern unsigned long long FUN_001780a4(unsigned long long *, unsigned int, unsigned int, unsigned int, unsigned int);
 extern unsigned long long rt_lmul(int, int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ea668. */
-/* Supplied declaration required: FUN_002ea6bc. */
-/* Supplied declaration required: FUN_002ea6cc. */
+/* Supplied declaration required: lazyStaticInitOnce. */
+/* Supplied declaration required: lazyMemberInitOnce. */
 /* Supplied declaration required: clockGetTicksAsMicroseconds. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
@@ -89,8 +89,8 @@ unsigned int FUN_002f6650(void)
   temp_v7 = (unsigned int)temp_v2 ^ temp_v7;
   temp_v8 = (unsigned int)((unsigned long long)temp_v2 >> 0x20) ^ temp_v8;
   FUN_002ea668(temp_v17);
-  FUN_002ea6bc(temp_v17,&temp_v3,0x18);
-  FUN_002ea6cc(temp_v17);
+  lazyStaticInitOnce(temp_v17,&temp_v3,0x18);
+  lazyMemberInitOnce(temp_v17);
   FUN_001208fe(temp_v17,&temp_v13);
   return temp_v13 ^ temp_v14 ^ temp_v15 ^ temp_v16;
 }

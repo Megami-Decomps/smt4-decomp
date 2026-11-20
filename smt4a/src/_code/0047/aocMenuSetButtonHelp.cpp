@@ -7,7 +7,7 @@
 extern "C" {
 
 void sysPlaySe(u32 id);
-void FUN_00182084(void);
+void buttonHelpPrepareSlots(void);
 void buttonHelpBeginExit(s32 clearKinds);
 void buttonHelpSelectSlot(u32 index, u32 kind, u32 value, u32 queue);
 void ifTouchDecrementTimer(void);
@@ -65,14 +65,14 @@ void aocMenuSetButtonHelp(AocMenu *menu, u32 selection, s32 mode)
         menu->flags |= AOC_MENU_HELP_SHOWN;
         sysPlaySe(0xcb);
         releaseTouchRegistrations();
-        FUN_00182084();
+        buttonHelpPrepareSlots();
         return;
     case 1:
         menu->flags |= AOC_MENU_HELP_SHOWN;
         if (mode != 0) {
             sysPlaySe(0xcc);
             releaseTouchRegistrations();
-            FUN_00182084();
+            buttonHelpPrepareSlots();
         }
         buttonHelpSelectSlot(0, 0x11, 0, 1);
         buttonHelpSelectSlot(1, 0, 0, 1);
@@ -88,7 +88,7 @@ void aocMenuSetButtonHelp(AocMenu *menu, u32 selection, s32 mode)
         if (mode != 0) {
             sysPlaySe(0xcd);
             releaseTouchRegistrations();
-            FUN_00182084();
+            buttonHelpPrepareSlots();
         }
         buttonHelpSelectSlot(0, 0xa, 0x4a, 1);
         buttonHelpSelectSlot(1, 0, 0, 1);
@@ -124,7 +124,7 @@ void aocMenuSetButtonHelp(AocMenu *menu, u32 selection, s32 mode)
         if (mode != 0) {
             sysPlaySe(0xcc);
             releaseTouchRegistrations();
-            FUN_00182084();
+            buttonHelpPrepareSlots();
         }
         buttonHelpSelectSlot(0, 0x11, 0, 1);
         buttonHelpSelectSlot(1, 0, 0, 1);

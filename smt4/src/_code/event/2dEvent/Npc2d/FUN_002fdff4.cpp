@@ -12,7 +12,7 @@
 extern "C" {
 extern const char DAT_0040357c[];
 extern const char DAT_00403570[];
-s32 FUN_002c1d5c(void);
+s32 eventIsSkipping(void);
 s32 aocRunByName(AocSystem *system, s32 table, s32 node, s32 enabled);
 void asdTMTexTablePrepareNodeImage(s32 table, s32 node);
 s32 FUN_001dfc64(u32 handle);
@@ -34,7 +34,7 @@ void FUN_002fdff4(s32 npc)
     work->y = -8;
     work->textureNode = images.entries[npc - 1];
     work->x = -56;
-    if (FUN_002c1d5c()) {
+    if (eventIsSkipping()) {
         work->deferred = 1;
     } else {
         work->deferred = 0;

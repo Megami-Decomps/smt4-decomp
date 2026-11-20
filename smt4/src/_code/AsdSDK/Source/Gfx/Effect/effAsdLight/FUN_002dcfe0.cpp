@@ -15,7 +15,7 @@ struct AsdModelGroupLink;
 
 extern "C" {
 extern const char DAT_004101c0[];
-extern void* DAT_00464b7c[2];
+extern void* g_asdModelSceneRoots[2];
 extern void* g_asdModelTransformBuilder[2];
 void* memAlloc(u32 heap, u32 alignClass, u32 flags, u32 size, u32 alignment, u32 fromFront);
 void* rt_memcpy(void* destination, const void* source, u32 size);
@@ -63,7 +63,7 @@ EffAsdLight* FUN_002dcfe0(const EffAsdLightDesc* resource)
         FUN_002e113c(reinterpret_cast<AsdModelGroupLink*>(ambient), 0);
         light->ownedAmbient = ambient;
     }
-    sceneTraverserVisit(DAT_00464b7c[0], g_asdModelTransformBuilder[0]);
+    sceneTraverserVisit(g_asdModelSceneRoots[0], g_asdModelTransformBuilder[0]);
     return reinterpret_cast<EffAsdLight*>(light);
 }
 }

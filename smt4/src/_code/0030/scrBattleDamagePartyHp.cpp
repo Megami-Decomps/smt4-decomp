@@ -6,7 +6,7 @@
 struct SlotManager;
 extern "C" {
 extern u32 g_btlScriptUnit;
-void FUN_00250720(SlotManager *manager);
+void btlSlotManagerResetAll(SlotManager *manager);
 void btlQueueKeyedScalarReflectAction(s32, void *, u32, s32, s32, s32, s32);
 void FUN_002551ac(s32, void *, BtlActionRecord *, s32, s32, s32, s32, s32, s32,
                   s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
@@ -29,7 +29,7 @@ u32 scrBattleDamagePartyHp()
             }
             if (damage >= target->data.hp)
                 damage = target->data.hp - 1;
-            FUN_00250720(reinterpret_cast<SlotManager *>(btlGetMainState()));
+            btlSlotManagerResetAll(reinterpret_cast<SlotManager *>(btlGetMainState()));
             battle = btlGetMainState();
             BtlActionRecord *unit = &battle->actions[target->ids[0]];
             FUN_002551ac(0, source, unit, 0, damage, -1, -1, target->data.hp, target->data.maxHp,

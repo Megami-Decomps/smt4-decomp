@@ -42,13 +42,13 @@ unsigned int FUN_00128170(void)
   
   FUN_002c52f4();
   uVar4 = DAT_00471b60;
-  FUN_002ad888();
+  fileSystemRequireReady();
   FUN_002ad80c(uVar4,extraout_r1,0x14,0);
   if ((int)uVar4 >= 0) {
     clockGetTicksAsMicroseconds(&uStack_a8);
     uStack_18 = uStack_a8;
     uStack_14 = uStack_a4;
-    FUN_002ad66c(&uStack_6c,&uStack_18);
+    asdSaveHeaderBuildCalendarTime(&uStack_6c,&uStack_18);
     uStack_78 = uStack_6c;
     puVar2 = &uStack_38;
     uStack_74 = uStack_68 & 0xffffff;

@@ -21,11 +21,11 @@ u32 FUN_002021b4()
         *counter = 0xffffffff;
     }
     if (counterId == 2) {
-        FUN_00343a74(amount);
+        questCenterCounterAddSaturating14(amount);
     } else if (counterId == 9) {
         questCenterAddPoints(amount);
     } else if (counterId == 19) {
-        FUN_00343a04(amount);
+        questCenterCounterAddSaturating1A(amount);
     } else if (counterId == 38) {
         gameAddPointsClamped(amount);
     }

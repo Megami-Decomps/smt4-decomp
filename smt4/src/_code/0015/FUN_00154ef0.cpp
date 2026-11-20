@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00147370(void);
+int soundVoiceSetVolume(void);
 int nn_snd_CTR_Voice_SetMonoFilterCoefficients(int, unsigned int);
 int nw_snd_internal_driver_HardwareManager_GetOutputVolume(unsigned char *);
 int nw_snd_internal_driver_Voice_CalcMix(int);
@@ -12,7 +12,7 @@ int nw_snd_internal_driver_Voice_CalcMix(int);
 typedef int romwright_code(...);
 extern unsigned char DAT_004ea168; /* 0x4ea168 */
 
-/* Supplied declaration required: FUN_00147370. */
+/* Supplied declaration required: soundVoiceSetVolume. */
 extern unsigned int FUN_00157220(void);
 extern void nn_snd_CTR_Voice_EnableBiquadFilter(unsigned int, unsigned char);
 extern void nn_snd_CTR_Voice_EnableMonoFilter(unsigned int, unsigned char);
@@ -58,7 +58,7 @@ void FUN_00154ef0(int param_1,float param_2)
       if (temp_v3 < *(int *)(param_1 + 8)) {
         do {
           if (*(int *)(param_1 + temp_v3 * 4) != 0) {
-            FUN_00147370();
+            soundVoiceSetVolume();
           }
           temp_v3 = temp_v3 + 1;
         } while (temp_v3 < *(int *)(param_1 + 8));

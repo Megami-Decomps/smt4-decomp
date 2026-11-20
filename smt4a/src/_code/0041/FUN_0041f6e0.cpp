@@ -61,12 +61,12 @@ extern PlayerData *gameGetPlayerData(void);
 extern void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 extern void sysMemClear(void *block, s32 size);
 extern void __ARM_common_memcpy4_8(void *dest, void *src);
-extern s32 FUN_0040ab8c(u32 request);
+extern s32 moriModelContentIsLoaded(u32 request);
 extern void saveLoadProcessCreate(s32 step, s32 arg);
 extern void scrScriptProcessCreate(void);
 extern void statusPanelSetOpen(s32 arg);
 extern void FUN_0023b45c(s32 arg);
-extern void FUN_002f0384(s32 arg);
+extern void statusCameraRestore(s32 arg);
 extern void FUN_0041eb94(SaveLoadTask *task);
 
 /* Steps the load: reads each slot's snapshot (states 0 and 1), then applies the snapshots once their resources are loaded (state 2). */
@@ -130,7 +130,7 @@ void FUN_0041f6e0(SaveLoadTask *task)
         task->state = task->state + 1;
         /* fall through */
     case 2:
-        if (FUN_0040ab8c(task->request) != 0) {
+        if (moriModelContentIsLoaded(task->request) != 0) {
             s32 loaded = asdTMTexTableNodeIsLoaded(0x2B, 0);
             u32 handle = 0;
 
@@ -165,8 +165,8 @@ void FUN_0041f6e0(SaveLoadTask *task)
                 task->applied = 1;
                 if (task->slotValid[task->selectedSlot] == 0) {
                     FUN_0023b45c(0);
-                    FUN_002c8538(1);
-                    FUN_002f0384(0);
+                    gameGlobalsSetOverlayActive(1);
+                    statusCameraRestore(0);
                     task->unk68 = 0;
                 }
                 previous = task->mode;

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002fb208(void);
+int threadGetCurrentId(void);
 
-/* Supplied declaration required: FUN_002fb208. */
+/* Supplied declaration required: threadGetCurrentId. */
 
 
 unsigned int FUN_0030f84e(int param_1)
@@ -16,7 +16,7 @@ unsigned int FUN_0030f84e(int param_1)
   int temp_v0;
   
   temp_v0 = param_1;
-  FUN_002fb208();
+  threadGetCurrentId();
   if (temp_v0 == *(int *)(param_1 + 0x1d4)) {
     return 1;
   }

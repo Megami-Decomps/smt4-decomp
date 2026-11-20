@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_0022af9c(s32 arg);
+void infoWinSetShown(s32 arg);
 void buttonHelpSelectByProgress(AocStep *step);
 void gameJumpRequestClear(void);
 s32 gameJumpRequestIsPending(void);
@@ -11,7 +11,7 @@ s32 gameJumpRequestIsPending(void);
 void aocBootStep(AocStep *step)
 {
     if (step->substate == 0) {
-        FUN_0022af9c(0);
+        infoWinSetShown(0);
         scrLoaderResetWithFlag(&g_aocMain->scriptHolder, 1);
         step->substate = 1;
         return;
@@ -20,7 +20,7 @@ void aocBootStep(AocStep *step)
         scrLoaderRelease(&g_aocMain->scriptHolder);
         if (gameJumpRequestIsPending() == 0) {
             gameJumpRequestClear();
-            FUN_0022af9c(1);
+            infoWinSetShown(1);
             buttonHelpSelectByProgress(step);
             step->state = 5;
             step->substate = 0;

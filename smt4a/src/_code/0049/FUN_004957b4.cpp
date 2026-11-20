@@ -6,7 +6,7 @@
 
 extern "C" {
 s32 FUN_0031d174(const void *selection);
-void FUN_0049339c(void *group, u32 sprite, s32 x, s32 y, s32 depth);
+void uiDrawCompositeSpriteAtRectCorner(void *group, u32 sprite, s32 x, s32 y, s32 depth);
 void FUN_0049368c(void *group, u32 sprite, s32 x, s32 y, s32 depth, s32 enabled);
 void drawTextAtRelativePosition(void *group, u32 font, s32 x, s32 y, s32 mode,
     s32 alignment, u32 color, s32 depth, const char *text);
@@ -43,9 +43,9 @@ void FUN_004957b4(ShopWork *base)
     const TextureTableEntryIV *origin = layoutFindTableEntry(work->sprites, 200);
     s32 x = origin->x + positionX, y = positionY + origin->y;
     if (work->category == 8)
-        FUN_0049339c(work->sprites, 9, x, y, depth);
+        uiDrawCompositeSpriteAtRectCorner(work->sprites, 9, x, y, depth);
     else
-        FUN_0049339c(work->sprites, 8, x, y, depth);
+        uiDrawCompositeSpriteAtRectCorner(work->sprites, 8, x, y, depth);
     FUN_0049368c(work->sprites, 0xC2, x, y, depth, 1);
     FUN_0049368c(work->sprites, 0xC3, x, y, depth, 1);
     if (work->showDecrease)

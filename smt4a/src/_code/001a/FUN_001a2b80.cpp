@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00189a38(int, int);
+int errThrowFatal(int, int);
 int nn_applet_CTR_detail_OpenSession(void);
 int nn_applet_CTR_detail_CloseSession(void);
 int svcSleepThread(int, int);
@@ -28,7 +28,7 @@ extern unsigned int DAT_005891d4; /* 0x5891d4 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00189a38. */
+/* Supplied declaration required: errThrowFatal. */
 /* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
 /* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 extern int FUN_0018ba70(unsigned int, unsigned int *);
@@ -68,7 +68,7 @@ unsigned int FUN_001a2b80(unsigned int param_1,unsigned int param_2,unsigned int
     nn_applet_CTR_detail_OpenSession();
     temp_v2 = FUN_0018ba70(param_1,(unsigned int *)&temp_v7);
     if (temp_v2 < 0) {
-      FUN_00189a38(temp_v2,0x1a2c04);
+      errThrowFatal(temp_v2,0x1a2c04);
     }
     nn_applet_CTR_detail_CloseSession();
     if ((char)temp_v7 != '\0') break;

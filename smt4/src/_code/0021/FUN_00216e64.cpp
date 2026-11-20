@@ -15,7 +15,7 @@ int spriteStartAnimationByIndex(...);
 int statusReplaceSkillList(int);
 int FUN_001ddbbc(void);
 int FUN_00215b40(int);
-int FUN_0026a978(...);
+int statusDownSetSelectedIds(...);
 int btlTalkBustUpReleaseTexture(void);
 int FUN_002954bc(...);
 int btlTalkBustUpSetUnk2F4(...);
@@ -59,8 +59,8 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: statusReplaceSkillList. */
 /* Supplied declaration required: FUN_001ddbbc. */
 /* Supplied declaration required: FUN_00215b40. */
-/* Supplied declaration required: FUN_0026a978. */
-extern int FUN_0026a9cc(unsigned short, unsigned char, int, short *, unsigned char);
+/* Supplied declaration required: statusDownSetSelectedIds. */
+extern int statusCollectUnlearnedSkillsAboveLevel(unsigned short, unsigned char, int, short *, unsigned char);
 /* Supplied declaration required: btlTalkBustUpReleaseTexture. */
 /* Supplied declaration required: resultUnitStepFinish. */
 /* Supplied declaration required: FUN_002954bc. */
@@ -195,9 +195,9 @@ void FUN_00216e64(int param_1)
         temp_v15[5] = 0;
         temp_v15[6] = 0;
         temp_v15[7] = 0;
-        temp_v3 = FUN_0026a9cc(*(unsigned short *)(temp_v2 + 0x46),*(unsigned char *)(temp_v2 + 0x48),
+        temp_v3 = statusCollectUnlearnedSkillsAboveLevel(*(unsigned short *)(temp_v2 + 0x46),*(unsigned char *)(temp_v2 + 0x48),
                              temp_v2 + 0x34,temp_v15,*(char *)(temp_v2 + 0x4b) != '\0');
-        FUN_0026a978(temp_v15,(int)(char)temp_v3);
+        statusDownSetSelectedIds(temp_v15,(int)(char)temp_v3);
         temp_v13 = *(int *)(temp_v11 + 0x3c5c);
         uStack_b4 = *(unsigned int *)(temp_v11 + 0x3c60);
         uStack_b0 = *(unsigned int *)(temp_v11 + 0x3c64);
@@ -238,7 +238,7 @@ void FUN_00216e64(int param_1)
         if ((*(unsigned short *)((unsigned char *)&uStack_ac + 2)) != 0) {
           temp_v1 = temp_v1 + '\x01';
         }
-        FUN_0026a978(&temp_v13,(int)temp_v1);
+        statusDownSetSelectedIds(&temp_v13,(int)temp_v1);
       }
       FUN_001ddbbc();
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v2 + 0x46);

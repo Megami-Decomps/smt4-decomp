@@ -55,7 +55,7 @@ const char *dataTable4AGetEntry2C(u32 id);
 const char *fileSectionGetData(void *file, u32 entry, u32 table);
 const char *dataFindKindRecordWithAocOverrides(u32 equipment, u32 flags);
 const char *dataTable01GetRecordWithAocOverride(u32 demon);
-const char *FUN_0014bf3c(u32 demon, u32 flags);
+const char *demonGetRaceLabel(u32 demon, u32 flags);
 void FUN_001a90f0(char *destination, const char *source);
 f32 fontMeasureTextWidth(const char *text, u32 font, f32 spacing);
 void statusBustUpPortraitRelease(s32 id, u32 kind);
@@ -121,7 +121,7 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanelA *panel, const Cha
     asdTextFormatStream(panel->demonName, 1, -1u, 0, 0, buffer);
     panel->demonNameWidth = (s32)fontMeasureTextWidth(buffer, 1, 0.0f);
     if (record->owner)
-        textExpandGlyphsToBuffer(FUN_0014bf3c(record->demon, 0), buffer, 0);
+        textExpandGlyphsToBuffer(demonGetRaceLabel(record->demon, 0), buffer, 0);
     else
         FUN_001a90f0(buffer, "\x81\x7c\x81\x7c");
     asdTextFormatStream(panel->race, 2, -1u, 0, 0, buffer);
@@ -152,7 +152,7 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanelA *panel, const Cha
         clearCharacterPreviewA(panel);
     }
     if (record->specialItem) {
-        void *item = reinterpret_cast<void *>(FUN_0019acdc(record->specialItem, 0));
+        void *item = reinterpret_cast<void *>(unitMapIdToCategory(record->specialItem, 0));
         u16 id = FUN_0036fcd0(item, 0);
         textExpandGlyphsToBuffer(dataTable01GetRecordWithAocOverride(dataTable10FindValue(id)), buffer, 0);
         asdTextFormatStream(panel->specialItemName, 2, -1u, 0, 0, buffer);

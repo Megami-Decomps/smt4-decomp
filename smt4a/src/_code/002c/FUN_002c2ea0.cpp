@@ -10,7 +10,7 @@ struct KeyVec4 {
 extern "C" {
 
 void vectorKeyPrepareNextStep(u32 key, s32 *step, s32 *length, KeyVec4 *from, KeyVec4 *to);
-void FUN_00229264(f32 *out, f32 from, f32 to);
+void mathStepTowards(f32 *out, f32 from, f32 to);
 
 static __inline void keyVecSetNeutral(KeyVec4 *vec)
 {
@@ -33,9 +33,9 @@ void FUN_002c2ea0(u32 key, s32 *frame, s32 *step, s32 *length, KeyVec4 *out, Key
         vectorKeyPrepareNextStep(key, step, length, from, to);
         return;
     }
-    FUN_00229264(&out->x, from->x, to->x);
-    FUN_00229264(&out->y, from->y, to->y);
-    FUN_00229264(&out->z, from->z, to->z);
+    mathStepTowards(&out->x, from->x, to->x);
+    mathStepTowards(&out->y, from->y, to->y);
+    mathStepTowards(&out->z, from->z, to->z);
 }
 
 } /* extern "C" */

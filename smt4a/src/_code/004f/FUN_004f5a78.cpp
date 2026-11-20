@@ -17,7 +17,7 @@ void __aeabi_memcpy4(void *, const void *, u32);
 u32 keyedRecordRegisterName(const char *);
 u32 FUN_003478dc(u32, const void *);
 void textureCachePollReady(void);
-s32 FUN_003c5d8c(void);
+s32 textureCacheGetDirection(void);
 
 // Load and register the four common battle movement effects, then wait for their setup to finish.
 u32 FUN_004f5a78(BattleMovementEffects *work)
@@ -69,7 +69,7 @@ u32 FUN_004f5a78(BattleMovementEffects *work)
         textureCachePollReady();
         work->loadState = 2;
     }
-    if (FUN_003c5d8c()) {
+    if (textureCacheGetDirection()) {
         work->loadState = 3;
         return 1;
     }

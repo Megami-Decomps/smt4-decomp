@@ -9,7 +9,7 @@ int FUN_0015f258(...);
 int aocThreadAllocateStorage(...);
 int FUN_0016ccb4(...);
 int FUN_0016ce28(...);
-int FUN_0019a46c(...);
+int stringCopyTruncated(...);
 int nn_os_LightEvent_Initialize(...);
 int _ZN18WindowStatusResultC1Ej(...);
 int sysMemClear(...);
@@ -36,7 +36,7 @@ extern int FUN_0015f448(int);
 extern int FUN_0016cd08(int);
 extern int FUN_0016cd0c(int);
 /* Supplied declaration required: FUN_0016ce28. */
-/* Supplied declaration required: FUN_0019a46c. */
+/* Supplied declaration required: stringCopyTruncated. */
 /* Supplied declaration required: nn_os_LightEvent_Initialize. */
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern unsigned int *_ZN18WindowStatusResultC1Ev(int);
@@ -102,7 +102,7 @@ unsigned int * FUN_001482c0(int param_1)
   puVar2[-0x1d0] = (unsigned int)puVar4 & 0xff000000;
   FUN_0016ccb4(puVar2 + -0x1b7);
   sysMemClear(puVar2 + -0x1d6,0xb);
-  FUN_0019a46c(puVar2 + -0x1d6,&LAB_001484e4,0xb);
+  stringCopyTruncated(puVar2 + -0x1d6,&LAB_001484e4,0xb);
   puVar2[-0x32] = 0;
   puVar2[-0x31] = 0;
   puVar2[-0x30] = 0;

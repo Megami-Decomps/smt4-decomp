@@ -59,7 +59,7 @@ s32 flaggedEntryGetValueB(PickList *list);
 void flaggedEntrySetValueA(PickList *list, s32 value);
 void flaggedEntrySetValueB(PickList *list, s32 value);
 void eventQueueAddUniqueIfValid(u32 event);
-s32 FUN_0029ee54(PickList *list);
+s32 gridNavigationGetItemCount(PickList *list);
 s32 listCursorGetRowIfUnblocked(PickList *list);
 s32 resourceRunOperationIfUnblocked(PickList *list);
 PickSliderInfo *asdTMTexTableEntryAt(u32 group, u32 id);
@@ -137,10 +137,10 @@ void FUN_00398fa8(PickScreen *screen)
                 scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(pagedList), 0);
         } else if (screen->regions[PICK_REGION_SCROLL_DOWN] == region) {
             s32 next = listCursorGetRowIfUnblocked(pagedList) + resourceRunOperationIfUnblocked(pagedList) + 1;
-            if (next < FUN_0029ee54(pagedList))
+            if (next < gridNavigationGetItemCount(pagedList))
                 scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(pagedList), next);
         } else if (screen->regions[PICK_REGION_SLIDER] == region) {
-            s32 total = FUN_0029ee54(pagedList);
+            s32 total = gridNavigationGetItemCount(pagedList);
             PickSliderInfo *slider = asdTMTexTableEntryAt(0x2E, 0x14E);
             s32 offset = (s16)(FUN_001c36a0() - slider->first);
             if (offset >= 0 && offset < slider->range->count)

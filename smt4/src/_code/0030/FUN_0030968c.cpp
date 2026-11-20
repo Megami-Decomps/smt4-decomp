@@ -7,7 +7,7 @@ extern u32 *g_modelCommandBuffer;
 extern s32 g_modelCommandWordCount;
 void cursorResetFromParam(void);
 void asdModelCommandBlockRelease(void);
-void FUN_00248ae8(s32);
+void renderStatesSubmitCached(s32);
 }
 
 /* Emit blend-state and alpha-mode commands for the title scene. */
@@ -27,5 +27,5 @@ extern "C" void FUN_0030968c(u32 flags)
     commands[g_modelCommandWordCount + 1] = 0x80126;
     g_modelCommandWordCount += 2;
     asdModelCommandBlockRelease();
-    FUN_00248ae8(1);
+    renderStatesSubmitCached(1);
 }

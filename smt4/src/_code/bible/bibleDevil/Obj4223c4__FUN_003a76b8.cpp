@@ -17,8 +17,8 @@ s32 FUN_0029ce60(u16 id, u32 source, s32 a, s32 specialMode, s32 b);
 void messageTargetSetValue(s32 target, s32 mode);
 void unitInitializeFromSavedRecord(u16 id, StatBlock *unit);
 void FUN_00233240(void *timers, s32 index);
-void FUN_0022de74(Obj42247c *view);
-extern s32 DAT_0043d9c8[2];
+void devilListUpdatePreview(Obj42247c *view);
+extern s32 g_bibleDevilCallbackContext[2];
 
 }
 
@@ -70,7 +70,7 @@ void Obj4223c4::FUN_003a76b8()
         }
         FUN_00233240(state->timers, 0);
         FUN_00233240(state->timers, 1);
-        DAT_0043d9c8[1] = -1;
-        FUN_0022de74(view);
+        g_bibleDevilCallbackContext[1] = -1;
+        devilListUpdatePreview(view);
     }
 }

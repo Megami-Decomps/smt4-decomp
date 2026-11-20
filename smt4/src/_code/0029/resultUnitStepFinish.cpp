@@ -18,7 +18,7 @@ extern "C" {
 
 void btlTalkBustUpDestroy(void);
 void resultSetMenuState(ResultScreenExit *result, s32 state);
-void FUN_0029e788(void);
+void campMenuSessionReset(void);
 void gameSetIconDisplayEnabled(s32 value);
 
 // Ends the current unit's result step: moves on to the next unit or to the closing menu state.
@@ -34,7 +34,7 @@ u32 resultUnitStepFinish(ResultScreenExit *result)
         return 0;
     }
     gameSetIconDisplayEnabled(1);
-    FUN_0029e788();
+    campMenuSessionReset();
     resultSetMenuState(result, 9);
     return 1;
 }

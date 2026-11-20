@@ -60,7 +60,7 @@ void FUN_0048d418(SelectableList *list, s32 kind)
                 continue;
             if (record->excludedFlag != 0 && gameFlagIsSet(record->excludedFlag))
                 continue;
-            if (!FUN_004083a8(record->first, record->second))
+            if (!interactionVariantIsEnabled(record->first, record->second))
                 continue;
         }
         for (j = 0; j < count; j++) {

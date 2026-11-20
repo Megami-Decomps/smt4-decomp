@@ -28,7 +28,7 @@ typedef char RegisteredBoundsOffsets[
     offsetof(RegisteredBoundsSource, shape) == 0x1c &&
     offsetof(RegisteredBoundsRegistry, records) == 0x280 ? 1 : -1];
 extern "C" {
-extern s32 DAT_00447a28;
+extern s32 g_entryTableInfo;
 extern RegisteredBoundsRegistry DAT_004a0fe4;
 void rectangleForwardExpanded(u32, f32, f32, f32, f32, f32, f32);
 }
@@ -51,7 +51,7 @@ static inline void drawRegisteredBoundsNormal(const RegisteredBoundsRecord *reco
 
 extern "C" void FUN_002f3904()
 {
-    for (s32 index = 0; index < DAT_00447a28; ++index) {
+    for (s32 index = 0; index < g_entryTableInfo; ++index) {
         const RegisteredBoundsSource *source = DAT_004a0fe4.objects[index]->source;
         switch (source->shape->type) {
         case 1: {

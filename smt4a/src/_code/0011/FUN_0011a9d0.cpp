@@ -10,7 +10,7 @@ int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int sharedRefRelease(void);
 int onlineUrlDestroy(void);
-int FUN_002eb7c0(int);
+int deletingDtor_002eb7c0(int);
 int FUN_00306eac(unsigned char [4], int *, int *, unsigned int **);
 
 typedef int romwright_code(...);
@@ -28,9 +28,9 @@ extern int onlineContextGetInstance(void);
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
-extern int FUN_002ea00c(unsigned int *);
+extern int destroyObj005585a4(unsigned int *);
 /* Supplied declaration required: onlineUrlDestroy. */
-/* Supplied declaration required: FUN_002eb7c0. */
+/* Supplied declaration required: deletingDtor_002eb7c0. */
 extern int FUN_002fb028(int);
 /* Supplied declaration required: FUN_00306eac. */
 
@@ -91,10 +91,10 @@ void FUN_0011a9d0(unsigned int *param_1)
     param_1[-4] = 0;
     param_1[-3] = 0;
   }
-  temp_v0 = FUN_002ea00c(param_1 + -0x20);
+  temp_v0 = destroyObj005585a4(param_1 + -0x20);
   temp_v0 = FUN_002fb028(temp_v0 - 0x78);
   temp_v0 = FUN_002fb028(temp_v0 - 0x88);
-  FUN_002eb7c0(temp_v0 - 0x40);
+  deletingDtor_002eb7c0(temp_v0 - 0x40);
   return;
 }
 

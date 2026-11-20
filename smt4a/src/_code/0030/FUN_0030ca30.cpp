@@ -18,9 +18,9 @@ extern "C" {
 OnlineInstanceTable* onlineInstanceTableGetCurrent(void);
 OnlineInstance* onlineInstanceTableFind(OnlineInstanceTable* table, u32 id);
 s32 _ZNK18OnlineResultRecord7isValidEv(s32* status);
-void FUN_002f3dc4(OnlineInstance* instance, const OnlineCallbackResult* result);
-void FUN_002f3dde(OnlineInstance* instance, const OnlineCallbackResult* result);
-u32 FUN_002e9f00(OnlineCallbackRequest* request, u32 state);
+void onlineInstanceCompleteMode2(OnlineInstance* instance, const OnlineCallbackResult* result);
+void onlineInstanceCompleteMode3(OnlineInstance* instance, const OnlineCallbackResult* result);
+u32 onlineInstanceCompleteWithChildren(OnlineCallbackRequest* request, u32 state);
 void onlineJobSetStateDone(OnlineOutputCallbackJob* job);
 
 void FUN_0030ca30(OnlineOutputCallbackJob* job, OnlineCallbackResult* result)
@@ -32,13 +32,13 @@ void FUN_0030ca30(OnlineOutputCallbackJob* job, OnlineCallbackResult* result)
                 *job->output = job->value;
             }
             OnlineCallbackResult copy = *result;
-            FUN_002f3dc4(instance, &copy);
+            onlineInstanceCompleteMode2(instance, &copy);
         } else {
             OnlineCallbackResult copy = *result;
-            FUN_002f3dde(instance, &copy);
+            onlineInstanceCompleteMode3(instance, &copy);
         }
     } else {
-        FUN_002e9f00(reinterpret_cast<OnlineCallbackRequest*>(job->request), 4);
+        onlineInstanceCompleteWithChildren(reinterpret_cast<OnlineCallbackRequest*>(job->request), 4);
     }
     onlineJobSetStateDone(job);
 }

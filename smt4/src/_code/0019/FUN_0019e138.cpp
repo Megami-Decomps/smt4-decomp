@@ -36,7 +36,7 @@ int VectorSignedToFloat(...);
 
 int FUN_001ed64c(int, unsigned int, int);
 int messageMainApplyClose(void);
-int FUN_002251d4(...);
+int btlUiAdvanceFadeIn(...);
 int FUN_0028a368(...);
 int FUN_0028a924(...);
 int partyPanelCreate(...);
@@ -48,7 +48,7 @@ int btlCommandMenuResolveLayout(...);
 int btlTalkBustUpSetUnk2F4(int);
 int btlTalkBustUpSetDemonTexture(int, int);
 int nkmEnemyFindById(void);
-int FUN_002c1658(...);
+int inputQueryButtonState(...);
 int FUN_00318c5c(...);
 int FUN_0033c6f8(...);
 
@@ -61,7 +61,7 @@ int FUN_00206b80(unsigned int);
 int recordQueryStateThree(void);
 int playSceneTimerSubStartReverse(unsigned int);
 int playSceneFadeOutStart(unsigned int);
-int FUN_0028bfe4(int);
+int btlUiObjCResetToState27(int);
 int FUN_0028c028(...);
 int statusAcquireSharedResources(void);
 int gameGlobalsSetSelected(int);
@@ -104,7 +104,7 @@ extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: FUN_00206b80. */
 /* Supplied declaration required: btlUiTargetListStep. */
 /* Supplied declaration required: FUN_00222b5c. */
-/* Supplied declaration required: FUN_002251d4. */
+/* Supplied declaration required: btlUiAdvanceFadeIn. */
 /* Supplied declaration required: playSceneResumeState. */
 extern int FUN_00225220(int);
 extern int battleTalkGetBustState(void);
@@ -125,21 +125,21 @@ extern int playSceneIsFadeOutDone(int);
 /* Supplied declaration required: btlTalkBustUpReleaseTexture. */
 /* Supplied declaration required: playSceneTimerSubStartReverse. */
 /* Supplied declaration required: playSceneFadeOutStart. */
-/* Supplied declaration required: FUN_0028bfe4. */
+/* Supplied declaration required: btlUiObjCResetToState27. */
 /* Supplied declaration required: FUN_0028c028. */
 /* Supplied declaration required: statusAcquireSharedResources. */
 extern int playSceneIsFadeInDone(int);
-extern int FUN_0028c600(int);
+extern int btlUiObjCStateIsNotFourteen(int);
 /* Supplied declaration required: btlCommandMenuResolveLayout. */
 /* Supplied declaration required: uiFadeRelease. */
 /* Supplied declaration required: gameReleaseDataReference. */
-extern int FUN_00293230(void);
+extern int btlScriptUnitIsIncapacitated(void);
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 extern int FUN_00295618(void);
 /* Supplied declaration required: gameGlobalsSetSelected. */
-/* Supplied declaration required: FUN_002a0cc8. */
+/* Supplied declaration required: gameGlobalsSetSubScreenActive. */
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
@@ -155,7 +155,7 @@ extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern int jobGetWork(unsigned int job);
 /* Supplied declaration required: randNextInRange. */
-/* Supplied declaration required: FUN_002c1658. */
+/* Supplied declaration required: inputQueryButtonState. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jobStop. */
 extern unsigned int partyPanelGetStatusValue(void);
@@ -298,10 +298,10 @@ int FUN_0019e138(unsigned int job)
   switch(*(unsigned int *)(temp_v0 + 0x7e38)) {
   case 1:
     if (*(int *)(temp_v0 + 0x7e3c) != 0) {
-      temp_v4 = FUN_0028c600(temp_v0 + 0x2460);
+      temp_v4 = btlUiObjCStateIsNotFourteen(temp_v0 + 0x2460);
     }
     else {
-      temp_v4 = FUN_0028c600(temp_v0 + 0x2460);
+      temp_v4 = btlUiObjCStateIsNotFourteen(temp_v0 + 0x2460);
     }
     if (temp_v4 != 0) {
       *(unsigned int *)(temp_v0 + 0x7e38) = 0;
@@ -317,7 +317,7 @@ int FUN_0019e138(unsigned int job)
   case 3:
     temp_v4 = FUN_00225220(temp_v0 + 8);
     if (temp_v4 == 0) break;
-    temp_v4 = FUN_0028c600(temp_v0 + 0x2460);
+    temp_v4 = btlUiObjCStateIsNotFourteen(temp_v0 + 0x2460);
     if (temp_v4 != 0) {
       *(unsigned int *)(temp_v0 + 0x7e38) = 0;
     }
@@ -373,7 +373,7 @@ int FUN_0019e138(unsigned int job)
         temp_v11 = FUN_0028c028(temp_v12);
         if (temp_v11 != 0) {
           *(unsigned int *)(temp_v0 + 0x7e38) = 8;
-          FUN_0028bfe4(temp_v12);
+          btlUiObjCResetToState27(temp_v12);
           temp_v8 = g_btlUiBlock;
           temp_v12 = playSceneIsFadeInDone(g_btlUiBlock + 8);
           if (temp_v12 != 0) {
@@ -490,7 +490,7 @@ int FUN_0019e138(unsigned int job)
     break;
   case 9:
     temp_v4 = 1;
-    FUN_002c1658();
+    inputQueryButtonState();
     temp_v8 = g_btlUiBlock;
     if ((temp_v4 != 0) && (temp_v4 = playSceneIsFadeOutDone(g_btlUiBlock + 8), temp_v4 != 0)) {
       temp_v4 = temp_v8 + 0x2200;
@@ -500,11 +500,11 @@ int FUN_0019e138(unsigned int job)
     else {
 LAB_0019e7b8:
       reinterpret_cast<int>(btlGetMainState());
-      temp_v4 = FUN_00293230();
+      temp_v4 = btlScriptUnitIsIncapacitated();
       if (temp_v4 == 0) break;
     }
     FUN_0033c6f8(*(unsigned int *)(temp_v0 + 0x7e20));
-    FUN_002251d4(temp_v0 + 0x2460);
+    btlUiAdvanceFadeIn(temp_v0 + 0x2460);
     *(unsigned int *)(temp_v0 + 0x7e38) = 7;
     temp_v8 = g_btlUiBlock;
     temp_v4 = playSceneIsFadeOutDone(g_btlUiBlock + 8);
@@ -527,13 +527,13 @@ LAB_0019e7b8:
     else {
       temp_v7 = 0;
     }
-    FUN_002a0cc8(temp_v7);
+    gameGlobalsSetSubScreenActive(temp_v7);
     break;
   case 0xb:
     temp_v4 = FUN_00295618();
     if (temp_v4 != 0) {
       gameReleaseDataReference();
-      FUN_002a0cc8(0);
+      gameGlobalsSetSubScreenActive(0);
       *(unsigned int *)(temp_v0 + 0x7e38) = 7;
     }
     break;
@@ -647,7 +647,7 @@ LAB_0019e7b8:
           }
           else {
             temp_v4 = 10;
-            FUN_002c1658(10,1);
+            inputQueryButtonState(10,1);
             if (temp_v4 != 0) {
               asdTMTexTableReleaseNode(0xf,*(unsigned short *)(DAT_00439c90 * 2 + 0x439cc0));
               playSceneFadeInStart(temp_v0 + 8);

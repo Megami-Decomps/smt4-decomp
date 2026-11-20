@@ -4,7 +4,7 @@ extern "C" {
 
 
 int ifTouchRegionRemove(void);
-s32 FUN_0029d644(u32 arg);
+s32 uiListGetVisibleCount(u32 arg);
 
 /* Removes the camp screen's touch regions: the fixed ones, each used slot's, and (when `keepExtra` is 0) two more. */
 void campReleaseScreenTouchRegions(u32 arg, s32 keepExtra)
@@ -20,7 +20,7 @@ void campReleaseScreenTouchRegions(u32 arg, s32 keepExtra)
     camp->touch.scrollRegions[2] = -1;
     camp->touch.scrollRegions[3] = -1;
     camp->touch.scrollRegions[4] = -1;
-    for (i = 0; i < FUN_0029d644(arg); i++) {
+    for (i = 0; i < uiListGetVisibleCount(arg); i++) {
         if (camp->touch.rowRegions[i] >= 0) {
             ifTouchRegionRemove();
             camp->touch.rowRegions[i] = -1;

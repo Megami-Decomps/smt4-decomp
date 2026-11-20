@@ -40,7 +40,7 @@ s32 FUN_00156478(void)
         }
         break;
     case 2:
-        FUN_00167458(&window->label, 0);
+        uiSpriteSlideFromSide(&window->label, 0);
         window->labelX = vec2GetXInt(&window->label);
         if (window->labelX <= 0) {
             window->labelX = 0;

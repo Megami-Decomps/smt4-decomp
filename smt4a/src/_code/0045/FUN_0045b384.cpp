@@ -3,7 +3,7 @@
 
 extern "C" {
 u32 libc_strlen(const char* string);
-u32 FUN_001a7a20(const void* index, const char* name, u32 length);
+u32 nameTableLookupEntry(const void* index, const char* name, u32 length);
 
 // Fill unresolved resource bindings, distinguishing complete failure from partial success.
 u32 FUN_0045b384(NamedResourceBindingArray* bindings,
@@ -20,7 +20,7 @@ u32 FUN_0045b384(NamedResourceBindingArray* bindings,
             NamedResourceDirectoryData* directory = &owner->directory->data;
             void* resource = NULL;
             const char* name = request->names[index];
-            u32 resourceIndex = FUN_001a7a20(directory->nameIndex, name, libc_strlen(name));
+            u32 resourceIndex = nameTableLookupEntry(directory->nameIndex, name, libc_strlen(name));
             if (resourceIndex != 0xFFFF)
                 resource = owner->directory->data.resources[resourceIndex];
             if (resource == NULL)

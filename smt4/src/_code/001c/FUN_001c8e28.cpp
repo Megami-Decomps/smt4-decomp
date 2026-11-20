@@ -24,7 +24,7 @@ unsigned int FUN_001c8e28(void)
   puVar4 = DAT_0044de2c;
   switch(puVar2[2]) {
   case 0:
-    FUN_002a0cc8(1);
+    gameGlobalsSetSubScreenActive(1);
     iVar8 = 0;
     puVar2[3] = 0;
     puVar2[2] = 1;
@@ -38,8 +38,8 @@ unsigned int FUN_001c8e28(void)
       FUN_0029c4c8(0);
       FUN_0029dfc0(1);
       gameSetIconDisplayEnabled(1);
-      FUN_002996d8(0);
-      FUN_0029e788();
+      statusCameraRestore(0);
+      campMenuSessionReset();
       saveStartLoadProcess(1);
       iVar8 = puVar2[4] + 1;
       puVar2[4] = iVar8;
@@ -152,7 +152,7 @@ unsigned int FUN_001c8e28(void)
         FUN_0029dfc0(0);
         gameSetIconDisplayEnabled(1);
       }
-      FUN_002996d8(!bVar13);
+      statusCameraRestore(!bVar13);
       FUN_0029a084(1,*(unsigned short *)(puVar4[0xd4] + 8));
       FUN_0029a084(2,*(unsigned short *)(puVar4[0xd4] + 10));
       FUN_0029a084(0,*(unsigned short *)(puVar4[0xd4] + 6));
@@ -169,7 +169,7 @@ unsigned int FUN_001c8e28(void)
          (puVar2[4] = puVar2[4] + 1, *(char *)((int)DAT_0044de2c + DAT_0044de30 + 0x34c) == '\0')) {
         FUN_0029dfc0(0);
         gameSetIconDisplayEnabled(1);
-        FUN_002996d8(0);
+        statusCameraRestore(0);
       }
       break;
     case 5:
@@ -179,7 +179,7 @@ unsigned int FUN_001c8e28(void)
     case 6:
       if (*(char *)((int)DAT_0044de2c + DAT_0044de30 + 0x34c) == '\0') {
         FUN_0029dfc0(0);
-        FUN_002996d8(0);
+        statusCameraRestore(0);
       }
       iVar8 = func_0x001ddc24();
       puVar4 = DAT_0044de2c;
@@ -201,7 +201,7 @@ unsigned int FUN_001c8e28(void)
         puVar2[4] = puVar2[4] + 1;
         if (*(char *)((int)DAT_0044de2c + DAT_0044de30 + 0x34c) == '\0') {
           FUN_0029dfc0(0);
-          FUN_002996d8(0);
+          statusCameraRestore(0);
         }
       }
       break;
@@ -221,7 +221,7 @@ unsigned int FUN_001c8e28(void)
       uiSpriteAdvanceAnimation(puVar4 + 0x4a);
       uiSpriteAdvanceAnimation(puVar4 + 0x6d);
       if (*(char *)(puVar2 + 0x1c) != '\0') {
-        FUN_002a0cc8(0);
+        gameGlobalsSetSubScreenActive(0);
         *(unsigned char *)(puVar2 + 0xd5) = 1;
         puVar2[3] = 0;
         puVar2[2] = 2;
@@ -238,18 +238,18 @@ unsigned int FUN_001c8e28(void)
     iVar8 = FUN_00299fc0();
     if ((iVar8 != 0) && (*(char *)((int)puVar2 + 0x355) != '\0')) {
       *(unsigned char *)((int)puVar2 + 0x355) = 0;
-      FUN_002996d8(1);
-      FUN_002a0cc8(0);
+      statusCameraRestore(1);
+      gameGlobalsSetSubScreenActive(0);
     }
     iVar8 = FUN_00299fc0();
     if ((iVar8 != 0) &&
        ((iVar8 = FUN_002bfde4(1), iVar8 != 0 || (iVar8 = buttonHelpHasEnabledEntryForId(2), iVar8 != 0)))) {
       FUN_002b8e84(0x100016e);
-      FUN_002a0cc8(0);
+      gameGlobalsSetSubScreenActive(0);
       FUN_0029c4c8(0);
       FUN_0029dfc0(1);
       gameSetIconDisplayEnabled(1);
-      FUN_002996d8(0);
+      statusCameraRestore(0);
       if (*(char *)((int)DAT_0044de2c + DAT_0044de30 + 0x34c) == '\0') {
         FUN_0029dfc0(0);
       }
@@ -296,18 +296,18 @@ unsigned int FUN_001c8e28(void)
        ((*(unsigned char *)(puVar4 + 10) = 0, puVar4[6] == DAT_0044de30 &&
         (*(char *)((int)DAT_0044de2c + DAT_0044de30 + 0x34c) != '\0')))) {
       FUN_0029dfc0(1);
-      FUN_002996d8(1);
+      statusCameraRestore(1);
     }
     iVar6 = FUN_002b8cec(5);
     if (iVar6 != 0) {
       DAT_0044de30 = DAT_0044de30 - 1;
-      FUN_002996d8(0);
+      statusCameraRestore(0);
       *(unsigned char *)(puVar4 + 10) = 1;
     }
     iVar6 = FUN_002b8cec(6);
     if (iVar6 != 0) {
       DAT_0044de30 = DAT_0044de30 + 1;
-      FUN_002996d8(0);
+      statusCameraRestore(0);
       *(unsigned char *)(puVar4 + 10) = 1;
     }
     DAT_0044de30 = (DAT_0044de30 + 2) % 2;
@@ -356,7 +356,7 @@ code_r0x001c9900:
         *(unsigned char *)(puVar4 + 0x15) = 1;
         iVar8 = FUN_00299fc0();
         if ((iVar8 != 0) && (*(char *)((int)DAT_0044de2c + DAT_0044de30 + 0x34c) != '\0')) {
-          FUN_002996d8(1);
+          statusCameraRestore(1);
         }
         if (puVar4[0x92] == 0) {
           uVar9 = puVar4[0x90];
@@ -403,7 +403,7 @@ code_r0x001c9900:
         puVar2[3] = 0;
         messageMainSetEnabled(0);
       }
-      FUN_002a0cc8(1);
+      gameGlobalsSetSubScreenActive(1);
     }
     break;
   case 3:
@@ -464,7 +464,7 @@ code_r0x001c9900:
     iVar8 = FUN_00299fc0();
     if ((iVar8 != 0) && (*(char *)((int)puVar2 + 0x355) != '\0')) {
       *(unsigned char *)((int)puVar2 + 0x355) = 0;
-      FUN_002996d8(1);
+      statusCameraRestore(1);
     }
     puVar4 = DAT_0044de2c;
     if (*(char *)((int)DAT_0044de2c + 0x72) != '\0') {
@@ -563,7 +563,7 @@ code_r0x001c9900:
   case 8:
     iVar8 = FUN_00299fc0();
     if ((iVar8 != 0) && (*(char *)((int)DAT_0044de2c + DAT_0044de30 + 0x34c) != '\0')) {
-      FUN_002996d8(1);
+      statusCameraRestore(1);
     }
     puVar4 = DAT_0044de2c;
     cVar1 = *(char *)((int)DAT_0044de2c + 0x55);
@@ -605,7 +605,7 @@ code_r0x001c9900:
         FUN_0029c4c8(0);
         FUN_0029dfc0(1);
         gameSetIconDisplayEnabled(1);
-        FUN_002996d8(0);
+        statusCameraRestore(0);
         FUN_0029963c(1,*(unsigned short *)(puVar4[0xd4] + 8));
         FUN_0029963c(2,*(unsigned short *)(puVar4[0xd4] + 10));
         FUN_0029963c(0,*(unsigned short *)(puVar4[0xd4] + 6));
@@ -614,7 +614,7 @@ code_r0x001c9900:
       }
       if ((*(char *)((int)puVar4 + 0x355) != '\0') && (iVar8 = FUN_00299fc0(), iVar8 != 0)) {
         *(unsigned char *)((int)puVar4 + 0x355) = 0;
-        FUN_002996d8(1);
+        statusCameraRestore(1);
       }
       uVar7 = FUN_0019e0c0(puVar4[0x92]);
       bVar13 = uVar7 == 2;
@@ -677,7 +677,7 @@ code_r0x001c9900:
       FUN_002bd8e8(puVar2 + 0x6d,2,0);
     }
     else if (*(char *)(puVar2 + 0x15) == '\0') {
-      FUN_002a0cc8(0);
+      gameGlobalsSetSubScreenActive(0);
       puVar2[2] = 2;
       puVar2[3] = 0;
       *(unsigned char *)((int)puVar2 + 0x37a) = 1;

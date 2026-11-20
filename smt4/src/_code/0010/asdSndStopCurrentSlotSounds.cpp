@@ -7,14 +7,14 @@ struct SoundSlotSelection {
 
 extern "C" {
 
-extern SoundSlotSelection DAT_004e2f68;
+extern SoundSlotSelection g_asdSndSlotSelection;
 extern void basicSoundStopOrFadeOut(s32 handle, s32 fadeFrames);
 extern void nw_snd_SoundHandle_DetachSound(s32 *handle);
 
 /* Stops and detaches all sounds in the current eight-handle slot. */
 void asdSndStopCurrentSlotSounds(void)
 {
-    AsdSndSlotB *slot = DAT_004e2f68.slot;
+    AsdSndSlotB *slot = g_asdSndSlotSelection.slot;
     if (slot != NULL) {
         for (u8 index = 0; index < 8; ++index) {
             if (slot->handles[index] != 0) {

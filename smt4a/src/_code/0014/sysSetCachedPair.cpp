@@ -6,12 +6,12 @@ struct StoredValues {
 };
 
 extern "C" {
-extern StoredValues DAT_005b4020;
+extern StoredValues g_startMenuPostHook;
 extern u32 DAT_005b4024;
 
 void sysSetCachedPair(u32 firstValue, u32 secondValue)
 {
-    DAT_005b4020.first = firstValue;
-    DAT_005b4020.second = secondValue;
+    g_startMenuPostHook.first = firstValue;
+    g_startMenuPostHook.second = secondValue;
 }
 }

@@ -4,7 +4,7 @@
 #include "battle/btlReflect.h"
 
 extern "C" {
-s32 FUN_00293230(BtlMainState *battle);
+s32 btlScriptUnitIsIncapacitated(BtlMainState *battle);
 void FUN_0023c1bc(s32 side, u32 options, u32 actor);
 
 
@@ -14,7 +14,7 @@ u32 FUN_002267b8(u32 actor, u32 options, u32 target)
     s16 actorId = (s16)actor;
     u32 secondValue;
     ReflectAction *action;
-    if (FUN_00293230(btlGetMainState()) != 0) {
+    if (btlScriptUnitIsIncapacitated(btlGetMainState()) != 0) {
         FUN_0023c1bc(0, options, actor);
         secondValue = 0;
         action = btlQueueReflectAction(g_btlActionReflect, actorId, 0, options);

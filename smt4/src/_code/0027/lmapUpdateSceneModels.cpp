@@ -103,7 +103,7 @@ extern "C" void lmapUpdateSceneModels(void)
             playerModelLoadPart(reinterpret_cast<u32>(scene->playerModel), 2, partDrawMask);
         }
     }
-    FUN_00297684(g_lmapScene->playerModel);
+    lmapPlayerModelDestroy(g_lmapScene->playerModel);
 
     if (g_lmapScene->mode == 29 || g_lmapScene->mode == 33 || g_gameState.loading) {
         MapVector hiddenPosition;

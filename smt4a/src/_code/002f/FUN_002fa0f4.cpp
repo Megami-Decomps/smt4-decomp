@@ -8,7 +8,7 @@ int _ZN9Obj558bd0D1Ev(unsigned int *);
 
 extern unsigned char DAT_005597dc; /* 0x5597dc */
 
-extern int FUN_002eb624(unsigned int *);
+extern int deletingDtor_002eb624(unsigned int *);
 /* Supplied declaration required: _ZN9Obj558bd0D1Ev. */
 
 
@@ -23,7 +23,7 @@ int FUN_002fa0f4(unsigned int *param_1)
   _ZN9Obj558bd0D1Ev(param_1);
   param_1 = param_1 + -0x1c;
   _ZN9Obj558bd0D1Ev(param_1);
-  temp_v0 = FUN_002eb624(param_1 + -0xc);
+  temp_v0 = deletingDtor_002eb624(param_1 + -0xc);
   return temp_v0 - 0x10;
 }
 

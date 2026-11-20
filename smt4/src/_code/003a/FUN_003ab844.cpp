@@ -24,7 +24,7 @@ int asdTMTexTablePrepareNodeImage(u32 id, s32 index);
 int statusAcquireSharedResources(void);
 int gameGlobalsSetSelected(s32 arg);
 int gameSetIconDisplayEnabled(s32 arg);
-int FUN_0029e788(void);
+int campMenuSessionReset(void);
 int asdLoadFileAsyncSimple(const char *path, void **slot, s32 arg);
 
 /* Prepares the bible screen: button help, the two sprite tables and the bible.bf / bible.mbm files. */
@@ -52,8 +52,8 @@ void FUN_003ab844(BibleScreen *screen)
     statusAcquireSharedResources();
     gameGlobalsSetSelected(8);
     gameSetIconDisplayEnabled(1);
-    FUN_0029e788();
-    FUN_002a0cc8(1);
+    campMenuSessionReset();
+    gameGlobalsSetSubScreenActive(1);
     asdLoadFileAsyncSimple("bible/bible.bf", &screen->file0, 0);
     asdLoadFileAsyncSimple("bible/bible.mbm", &screen->file1, 0);
 }

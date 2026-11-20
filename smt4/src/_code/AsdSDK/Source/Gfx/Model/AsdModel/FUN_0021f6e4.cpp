@@ -51,7 +51,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char g_asdModelBanks; /* 0x4d9880 */
-extern unsigned char DAT_004d9d88; /* 0x4d9d88 */
+extern unsigned char g_asdModelSlotBanks; /* 0x4d9d88 */
 extern unsigned char g_asdModelIdLists; /* 0x4daca0 */
 extern unsigned char DAT_004dace0; /* 0x4dace0 */
 
@@ -147,7 +147,7 @@ void FUN_0021f6e4(int *param_1,fn_0021f6e4_arg1 *param_2)
   if (temp_v7 != temp_v10) {
     temp_v27 = (short *)((int)param_2 * 0x284 + 0x4da798);
     temp_v28 = (short *)((int)param_2 * 0x284 + 0x4da290);
-    temp_v29 = (short *)(&DAT_004d9d88 + (int)param_2 * 0x284);
+    temp_v29 = (short *)(&g_asdModelSlotBanks + (int)param_2 * 0x284);
     psVar22 = (short *)(&g_asdModelBanks + (int)param_2 * 0x284);
     do {
       if (*(int *)(temp_v7 + 0xc) != 0) {

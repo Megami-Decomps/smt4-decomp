@@ -92,7 +92,7 @@ s32 titleConfigDraw(void)
 
     texDrawCompositeSprite(2, 0x2f, 0xc, x, y, 0xb);
     s32 selected = resourceRunOperationIfUnblocked(config->cursor) + listCursorGetRowIfUnblocked(config->cursor);
-    for (s32 row = 0; row < (s32)FUN_0029d644(config->cursor); row++) {
+    for (s32 row = 0; row < (s32)uiListGetVisibleCount(config->cursor); row++) {
         memset(text, 0, sizeof(text));
         bool isSelected = false;
         u32 color = 0xe09800ff;

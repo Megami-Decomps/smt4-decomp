@@ -11,7 +11,7 @@ extern "C" {
 
 s32 FUN_004038e0(u32 unused, s32 level);
 
-void FUN_0040a3c8(s32 amount);
+void questCenterCounterAddSaturating14(s32 amount);
 
 void playerModelStartBaseMotion(Object *obj);
 

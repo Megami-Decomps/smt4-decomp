@@ -1,7 +1,7 @@
 /* NON_MATCHING: loop head now matches (`s32 offset = 1` before the `*nextKey < 3` guard folds the cc chain); remaining: argument loads (retail `ldm` of the stack args into r5/lr/r4, lr as a general register) and per-key loads are not coalesced into ldrd/ldm in retail */
 #include "shard/W6_W6Match8_ColorKeys.h"
 
-extern "C" void FUN_00229264(f32 *value, f32 step, f32 target);
+extern "C" void mathStepTowards(f32 *value, f32 step, f32 target);
 
 /* Advance the scalar key track, skipping keys that do not advance its frame count. */
 extern "C" void scalarTimelineUpdate(const ScalarTimeline *timeline, s32 *elapsed, s8 *nextKey,
@@ -29,5 +29,5 @@ extern "C" void scalarTimelineUpdate(const ScalarTimeline *timeline, s32 *elapse
         }
         return;
     }
-    FUN_00229264(value, *step, *target);
+    mathStepTowards(value, *step, *target);
 }

@@ -112,7 +112,7 @@ u32 FUN_00313138(void)
     case 12: {
         MapObjRecord *record = mapObjGetCombinedEntry(work->cursor);
         MapObjSlot *slot = &work->slots[work->slot];
-        if (FUN_0040ab8c(slot->model) == 0) {
+        if (moriModelContentIsLoaded(slot->model) == 0) {
             return 0;
         }
         moriModelContentLoadBody(slot->model, 0);

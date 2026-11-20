@@ -23,7 +23,7 @@ s32 histogramFindHighestSupportedValue(void)
     u8 histogram[1000];
     sysMemClear(histogram, sizeof(histogram));
     for (s32 index = first; index <= last; ++index) {
-        if (FUN_002a4b28(static_cast<u16>(index))) {
+        if (compendiumEntryIsRegistered(static_cast<u16>(index))) {
             const HistogramSaveViewA *save = reinterpret_cast<const HistogramSaveViewA *>(reinterpret_cast<GameSaveDataA *>(gameDataBlocksGetSaveData()));
             u32 value = save->records[index].value;
             if (value - 1 < 999 && histogram[value] < 20)

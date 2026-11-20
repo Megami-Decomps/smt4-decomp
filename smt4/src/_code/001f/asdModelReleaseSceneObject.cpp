@@ -16,7 +16,7 @@ typedef struct Object {
     /* 0x10C */ void *resource;
 } Object;
 
-extern u32 DAT_00464b7c;
+extern u32 g_asdModelSceneRoots;
 extern u32 g_asdModelTransformBuilder;
 
 extern void sceneTraverserVisit(u32 a, u32 b);
@@ -31,7 +31,7 @@ void asdModelReleaseSceneObject(Object *obj)
         asdModelGroupLinkDestroy(obj->resource);
     }
     asdMemFree(obj);
-    sceneTraverserVisit(DAT_00464b7c, g_asdModelTransformBuilder);
+    sceneTraverserVisit(g_asdModelSceneRoots, g_asdModelTransformBuilder);
 }
 
 }

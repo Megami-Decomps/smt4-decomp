@@ -56,7 +56,7 @@ int asdMemFree(void);
 int skillDataFindById(void);
 int scrScriptProcessStartEntry(...);
 int sysMemClear(...);
-int FUN_003756c8(void);
+int btlPlayMenuConfirmSe(void);
 int stateAtCIs4(...);
 int btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
 int btlHasFilteredCommand(void);
@@ -65,7 +65,7 @@ int FUN_003f034c(...);
 int FUN_003f26d4(unsigned int);
 int chainCountIdUnflagged(...);
 int jyoucyuEnsureResidentEntry(void);
-int FUN_004a9d1c(...);
+int btlUiEnterStateEntryStartup(...);
 int FUN_004aa2e0(unsigned int, int);
 int FUN_004ac0bc(...);
 int FUN_004c5da4(int, int);
@@ -75,7 +75,7 @@ int FUN_004d7fe4(void);
 int state4DStart(int);
 unsigned int hasFlag80Or1000(unsigned int, unsigned int *);
 int btlUnitGet(...);
-int FUN_004fb798(...);
+int btlRecoverHpMpByPercent(...);
 
 /* stack frame of void: 12 slot(s), 48 byte(s) */
 typedef struct {
@@ -206,7 +206,7 @@ extern int gameStateIsFlagSetAndLarge(void);
 extern int btlEncountCheck(unsigned int);
 /* Supplied declaration required: gameSavedItemsPromoteFlagState. */
 /* Supplied declaration required: FUN_00339270. */
-/* Supplied declaration required: FUN_003756c8. */
+/* Supplied declaration required: btlPlayMenuConfirmSe. */
 /* Supplied declaration required: sequenceRequestFlushDeferred. */
 extern int sequenceRequestIsPending(void);
 /* Supplied declaration required: FUN_003848a4. */
@@ -234,7 +234,7 @@ extern int isZero(unsigned int);
 /* Supplied declaration required: FUN_0047dd4c. */
 /* Supplied declaration required: jyoucyuEnsureResidentEntry. */
 /* Supplied declaration required: callJyoucyuGetTableEntry1. */
-/* Supplied declaration required: FUN_004a9d1c. */
+/* Supplied declaration required: btlUiEnterStateEntryStartup. */
 /* Supplied declaration required: FUN_004aa2e0. */
 extern int FUN_004aaa4c(unsigned int);
 extern int FUN_004aaf94(unsigned int);
@@ -266,7 +266,7 @@ extern int isEntryUsable(int);
 /* Supplied declaration required: obj4FSlots28Reset. */
 /* Supplied declaration required: FUN_004f8fa0. */
 /* Supplied declaration required: FUN_004fa01c. */
-/* Supplied declaration required: FUN_004fb798. */
+/* Supplied declaration required: btlRecoverHpMpByPercent. */
 /* Supplied declaration required: FUN_0050d7ac. */
 /* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
@@ -491,7 +491,7 @@ joined_r0x0024c078:
     temp_v3 = g_btlEvent;
     FUN_004d7a70(g_btlEvent,0,0xffffffff);
     if (temp_v3 == 0) {
-      FUN_003756c8();
+      btlPlayMenuConfirmSe();
     }
     temp_v6 = 8;
     break;
@@ -569,7 +569,7 @@ joined_r0x0024c078:
           temp_v17 = 0;
           temp_v19 = 0xffffffff;
           temp_v23 = temp_v22;
-          FUN_004fb798(0,0,0,*(int *)(temp_v2 + 0x1ed4) + (short)puVar16[2] * 0x1d0);
+          btlRecoverHpMpByPercent(0,0,0,*(int *)(temp_v2 + 0x1ed4) + (short)puVar16[2] * 0x1d0);
         }
         temp_v10 = temp_v10 + 1;
       } while (temp_v10 < 4);
@@ -752,7 +752,7 @@ joined_r0x0024cba8:
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < 0xc);
       FUN_004ac0bc(g_btlUiBlock);
-      FUN_004a9d1c(g_btlUiBlock);
+      btlUiEnterStateEntryStartup(g_btlUiBlock);
       if (*(int *)(temp_v2 + 0x1ec4) != 0) {
         asdMemFree();
         *(int *)(temp_v2 + 0x1ec4) = 0;

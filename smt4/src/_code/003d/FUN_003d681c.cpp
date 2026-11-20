@@ -2,7 +2,7 @@
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 
 extern "C" {
-f32 FUN_00227280(u32 mode, s32 duration, s32 frame);
+f32 easeEvaluate(u32 mode, s32 duration, s32 frame);
 
 static __inline void addScaled(BattleVector3 *result, const BattleVector3 *delta, f32 factor)
 {
@@ -23,7 +23,7 @@ void FUN_003d681c(BattleVectorTransition *work)
 {
     BattleVector3 difference;
     vectorSubtract(&difference, &work->axisDestination, &work->axis.current);
-    f32 factor = FUN_00227280(work->axisMode, work->axisTarget, work->axisFrame);
+    f32 factor = easeEvaluate(work->axisMode, work->axisTarget, work->axisFrame);
     work->axis.current.x += difference.x * factor;
     work->axis.current.y += difference.y * factor;
     work->axis.current.z += difference.z * factor;

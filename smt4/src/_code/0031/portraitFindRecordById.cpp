@@ -7,7 +7,7 @@ extern "C" {
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
                    s32 (*compare)(const void *, const void *));
 s32 dataTable00CompareRecordIds(const void *left, const void *right);
-u32 FUN_0038971c(AocSystem *system, u32 id);
+u32 portraitModelIsReady(AocSystem *system, u32 id);
 
 static __inline NkmEnemyRecord *searchTable00(const NkmEnemyRecord *key, const void *records, u32 count,
                                              s32 (*compare)(const void *, const void *))
@@ -23,7 +23,7 @@ NkmEnemyRecord *portraitFindRecordById(u32 id)
     if (g_aocSystem->table00Records != NULL) {
         NkmEnemyRecord *record = searchTable00(&key,
             g_aocSystem->table00Records, g_aocSystem->table00Count, dataTable00CompareRecordIds);
-        if (record != NULL && FUN_0038971c(g_aocSystem, id) != 0) {
+        if (record != NULL && portraitModelIsReady(g_aocSystem, id) != 0) {
             return record;
         }
     }

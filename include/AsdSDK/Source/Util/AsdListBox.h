@@ -1,6 +1,6 @@
 /* AsdSDK/Source/Util/AsdListBox.cpp: the engine's scrolling list box (debug menus).
  *
- * A list box is a process (callbacks FUN_001fe640-style update/end) that owns an AsdListBoxModel:
+ * A list box is a process (callbacks asdListBoxUpdate-style update/end) that owns an AsdListBoxModel:
  * a list of AsdListBoxItems and the widget that draws them. Items are described by
  * AsdListBoxEntry tables and come in four kinds. */
 #ifndef ASDSDK_SOURCE_UTIL_ASDLISTBOX_H
@@ -65,13 +65,18 @@ typedef struct AsdListBoxModel {
     /* 0x70 */ u32 nextItemId;
 } AsdListBoxModel;
 
+/* AsdListBox.flags */
+enum {
+    ASD_LISTBOX_FLAG_MOVABLE = 4 /* the circle pad moves the box (2 pixels a frame) */
+};
+
 /* The list box object (0x18c bytes). */
 typedef struct AsdListBox {
     /* 0x000 */ u8 unk000[0xc];
     /* 0x00c */ u8 widget[0x28];             /* row widget, set up by rowWidgetInit/colorSetRgba */
-    /* 0x034 */ s32 unk34;
-    /* 0x038 */ u32 flags;
-    /* 0x03c */ u8 unk3c;
+    /* 0x034 */ s32 state;                   /* the update callback's state machine, 0 when created */
+    /* 0x038 */ u32 flags;                   /* ASD_LISTBOX_FLAG_* */
+    /* 0x03c */ u8 colorScheme;              /* row of the 0x10-byte colour table the box draws with */
     /* 0x03d */ u8 pad3d[0xb];
     /* 0x048 */ f32 x;
     /* 0x04c */ f32 y;
@@ -80,12 +85,12 @@ typedef struct AsdListBox {
     /* 0x058 */ s32 rowCount;
     /* 0x05c */ s32 rowHeight;
     /* 0x060 */ u8 unk60[8];
-    /* 0x068 */ s32 unk68;
+    /* 0x068 */ s32 visibleRows;             /* rows shown from the scroll position on */
     /* 0x06c */ u8 unk6c[0x120];
 } AsdListBox;
 
 extern "C" {
-u8 FUN_002a21c8(void);
+u8 buttonHelpIsStateActive(void);
 }
 
 #endif

@@ -1,5 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019a4f4` (_code @ 0x19a4f4, 0x3230 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "status/StatusCamera.h"
+#include "code/Code0029.h"
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -44,7 +46,7 @@ int FUN_00292f4c(...);
 int FUN_002987d8(...);
 int useCounterRelease(void);
 int useCounterStart(void);
-int FUN_0029e328(...);
+int useCounterAppendValue(...);
 int sortMenuCreate(...);
 int listCursorGetRowIfUnblocked(...);
 int resourceRunOperationIfUnblocked(...);
@@ -61,14 +63,14 @@ int playSceneSetState(...);
 int scrollOwnerSelectIndex(...);
 int objectPartRunUnlessLocked(...); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 int scrollListSetSelectionMarkChanged(char *, int);
-int FUN_0029efd8(...);
+int gridNavigationHandleConfirm(...);
 int uiScrollHandleActionsOrTouch(...);
 int gridNavigationConfigure(...);
 int gameGetSlotTable(void);
 int gameGetPlayerData(void);
 int eventQueueAddUniqueIfValid(...);
 int uiSpriteAdvanceAnimation(...);
-int FUN_002c1658(...);
+int inputQueryButtonState(...);
 
 /* stack frame of param_3: 14 slot(s), 50 byte(s) */
 typedef struct {
@@ -107,14 +109,14 @@ extern int statusScreenIsClosed(void);
 /* Supplied declaration required: btlCommandMenuResolveLayout. */
 /* Supplied declaration required: btlCommandResolveSelectedTarget. */
 /* Supplied declaration required: FUN_0028cf30. */
-extern int FUN_0028cfbc(int);
+extern int widgetGetVisibleLength(int);
 /* Supplied declaration required: FUN_0028cfd8. */
 extern unsigned long long FUN_0028d1f4(unsigned short);
 extern unsigned int FUN_0028d24c(void);
 extern unsigned int listGetU16OrZero(unsigned int, int);
 /* Supplied declaration required: FUN_0028d310. */
 /* Supplied declaration required: FUN_0028d320. */
-extern int FUN_0028d594(void);
+extern int buttonHelpTextIsVisible(void);
 /* Supplied declaration required: touchMenuClose. */
 /* Supplied declaration required: partyStatusRefreshSlot. */
 extern int btlActorIsDown(unsigned int);
@@ -133,27 +135,25 @@ extern int FUN_00295618(void);
 /* Supplied declaration required: playSceneSetState. */
 /* Supplied declaration required: FUN_002987d8. */
 extern int appGetRemainingCapacity(unsigned int);
-extern int FUN_0029a9d4(unsigned int, unsigned int);
 extern int messageMainTargetIsClear(void);
 /* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: messageDismissNumericBanner. */
-extern int FUN_0029d644(char *);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: useCounterRelease. */
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
-/* Supplied declaration required: FUN_0029e328. */
+/* Supplied declaration required: useCounterAppendValue. */
 /* Supplied declaration required: sortMenuCreate. */
 /* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: objectPartRunUnlessLocked. */
-extern int FUN_0029e958(int); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
+extern int uiGridNavigationEntryCount(int); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 /* Supplied declaration required: scrollListSetSelectionMarkChanged. */
 extern int flagWordTestBit(unsigned int *, unsigned int);
 /* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: listCursorGetRowIfUnblocked. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
-/* Supplied declaration required: FUN_0029efd8. */
+/* Supplied declaration required: gridNavigationHandleConfirm. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: gridNavigationConfigure. */
 /* Supplied declaration required: gameGetUnitRecord. */
@@ -176,7 +176,7 @@ extern short vec2GetXInt(int);
 /* Supplied declaration required: soundPlaySeUnpanned. */
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_002c1658. */
+/* Supplied declaration required: inputQueryButtonState. */
 /* Supplied declaration required: FUN_00338bd4. */
 /* Supplied declaration required: FUN_00338c38. */
 /* Supplied declaration required: __aeabi_idivmod. */
@@ -414,7 +414,7 @@ LAB_0019a82c:
       break;
     }
     temp_v17 = param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088;
-    FUN_0029efd8(temp_v17,1);
+    gridNavigationHandleConfirm(temp_v17,1);
     if (temp_v17 != 0) {
       temp_v9 = FUN_00297ca4(param_1,1);
       FUN_00297b94(param_1,temp_v9,*(unsigned int *)(param_1 + 0x305c));
@@ -434,13 +434,13 @@ joined_r0x0019aa34:
       break;
     }
     temp_v5 = 0;
-    FUN_002c1658(0,1);
+    inputQueryButtonState(0,1);
     if (temp_v5 != 0) {
       *(unsigned char *)(param_1 + 0x3060) = 0;
     }
     if (temp_v5 == 0 && temp_v37[0] == '\0') {
       temp_v5 = 1;
-      FUN_002c1658(1,1);
+      inputQueryButtonState(1,1);
       if (temp_v5 != 0) {
         *(unsigned char *)(param_1 + 0x3060) = 1;
         if (*(char *)(param_1 + 0x3082) != '\0') {
@@ -461,7 +461,7 @@ joined_r0x0019aa34:
         break;
       }
       temp_v5 = 9;
-      FUN_002c1658(9,1);
+      inputQueryButtonState(9,1);
       if (temp_v5 != 0) {
         *(unsigned char *)(param_1 + 0x3060) = 9;
         playSceneSetState(param_1,2,1);
@@ -472,7 +472,7 @@ joined_r0x0019aa34:
       temp_v5 = flagBitIsSet(0x7f);
       if (temp_v5 == 0) break;
       temp_v5 = 10;
-      FUN_002c1658(10,1);
+      inputQueryButtonState(10,1);
       if (temp_v5 == 0) break;
       *(unsigned char *)(param_1 + 0x3060) = 10;
       playSceneSetState(param_1,3,1);
@@ -492,8 +492,8 @@ joined_r0x0019aa34:
   case 3:
     playSceneSetState(param_1,4,0);
     sortMenuCreate(0xffffffff,1);
-    FUN_0029e328(10);
-    FUN_0029e328(9);
+    useCounterAppendValue(10);
+    useCounterAppendValue(9);
     useCounterStart();
     break;
   case 4:
@@ -539,7 +539,7 @@ joined_r0x0019aa34:
     playSceneSetState(param_1,8);
     FUN_00292f4c(param_1);
 LAB_0019ade4:
-    temp_v5 = FUN_0028d594();
+    temp_v5 = buttonHelpTextIsVisible();
     if (temp_v5 == 0) {
       FUN_00292f4c(param_1);
     }
@@ -558,7 +558,7 @@ LAB_0019ade4:
       uiScrollHandleActionsOrTouch(temp_v17,temp_v9,param_3,(int)*(short *)(param_1 + 0x5726));
       if (temp_v17 == 0) {
         temp_v17 = *(int *)(param_1 + 0x340c);
-        FUN_0029efd8(temp_v17,1);
+        gridNavigationHandleConfirm(temp_v17,1);
         if (temp_v17 == 0) goto LAB_0019aebc;
       }
       FUN_00292f4c(param_1);
@@ -570,7 +570,7 @@ LAB_0019ade4:
     }
 LAB_0019aebc:
     temp_v17 = 0;
-    FUN_002c1658(0,1);
+    inputQueryButtonState(0,1);
     if (temp_v17 != 0) {
       *(unsigned char *)(param_1 + 0x3060) = 0;
     }
@@ -684,7 +684,7 @@ LAB_0019aebc:
             }
             piVar14 = (int *)(param_1 + 0x3504);
             *piVar14 = 0;
-            temp_v5 = FUN_0029a9d4(*(unsigned int *)(param_1 + 0x3068),1);
+            temp_v5 = skillGetDiscountedCost(*(unsigned int *)(param_1 + 0x3068),1);
             param_3 = *(unsigned int *)(param_1 + 0x305c);
             temp_v10 = -temp_v5;
             *(unsigned int *)(param_1 + param_3 * 4 + 0x3470) = temp_v10;
@@ -785,7 +785,7 @@ LAB_0019b2b0:
     else {
       if (temp_v5 != 0) break;
       temp_v5 = 1;
-      FUN_002c1658(1,1);
+      inputQueryButtonState(1,1);
       if (temp_v5 != 0) {
         *(unsigned char *)(param_1 + 0x3060) = 1;
         *(unsigned int *)(param_1 + 0x3504) = 0;
@@ -800,12 +800,12 @@ LAB_0019b2b0:
         break;
       }
       temp_v5 = 9;
-      FUN_002c1658(9,1);
+      inputQueryButtonState(9,1);
       if (temp_v5 == 0) {
         temp_v5 = flagBitIsSet(0x7f);
         if (temp_v5 != 0) {
           temp_v5 = 10;
-          FUN_002c1658(10,1);
+          inputQueryButtonState(10,1);
           if (temp_v5 != 0) {
             *(unsigned char *)(param_1 + 0x3060) = 10;
             playSceneSetState(param_1,3,1);
@@ -841,7 +841,7 @@ LAB_0019b58c:
           }
         }
         else {
-          FUN_0029efd8(temp_v7,1);
+          gridNavigationHandleConfirm(temp_v7,1);
           if (temp_v7 != 0) goto LAB_0019b58c;
         }
         temp_v5 = resourceRunOperationIfUnblocked(*(unsigned int *)(param_1 + 0x340c));
@@ -927,7 +927,7 @@ LAB_0019b58c:
         if (temp_v5 != 0) {
           FUN_0028d320(temp_v6);
         }
-        temp_v5 = FUN_0029a9d4(temp_v6,1);
+        temp_v5 = skillGetDiscountedCost(temp_v6,1);
         *(int *)(param_1 + *(int *)(param_1 + 0x305c) * 4 + 0x3470) = -temp_v5;
         if ((*(unsigned int *)(temp_v10 + 0x38) & 0x200) != 0) {
           temp_v5 = FUN_0028d310();
@@ -953,7 +953,7 @@ LAB_0019b58c:
     playSceneSetState(param_1,10,1);
     FUN_00292f4c(param_1);
 LAB_0019b924:
-    temp_v17 = FUN_0028d594();
+    temp_v17 = buttonHelpTextIsVisible();
     if (temp_v17 == 0) {
       FUN_00292f4c(param_1);
     }
@@ -972,13 +972,13 @@ LAB_0019b924:
       break;
     }
     temp_v17 = *piVar14;
-    FUN_0029efd8(temp_v17,1);
+    gridNavigationHandleConfirm(temp_v17,1);
     if (temp_v17 != 0) {
       FUN_00292f4c(param_1);
       break;
     }
     temp_v17 = 0;
-    FUN_002c1658(0,1);
+    inputQueryButtonState(0,1);
     if (temp_v17 != 0) {
       *(unsigned char *)(param_1 + 0x3060) = 0;
     }
@@ -1044,10 +1044,10 @@ LAB_0019b924:
       break;
     }
     temp_v5 = 1;
-    FUN_002c1658(1,1);
+    inputQueryButtonState(1,1);
     if (temp_v5 == 0) {
       temp_v5 = 9;
-      FUN_002c1658(9,1);
+      inputQueryButtonState(9,1);
       if (temp_v5 != 0) {
         *(unsigned char *)(param_1 + 0x3060) = 9;
         playSceneSetState(param_1,2,1);
@@ -1057,7 +1057,7 @@ LAB_0019b924:
       temp_v5 = flagBitIsSet(0x7f);
       if (temp_v5 != 0) {
         temp_v5 = 10;
-        FUN_002c1658(10,1);
+        inputQueryButtonState(10,1);
         if (temp_v5 != 0) {
           *(unsigned char *)(param_1 + 0x3060) = 10;
           playSceneSetState(param_1,3,1);
@@ -1079,7 +1079,7 @@ LAB_0019b924:
       }
       else {
         temp_v5 = param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088;
-        FUN_0029efd8(temp_v5,1);
+        gridNavigationHandleConfirm(temp_v5,1);
         if (temp_v5 == 0) break;
       }
       playSceneSetState(param_1,1);
@@ -1117,13 +1117,13 @@ LAB_0019bce0:
       break;
     }
     temp_v5 = *(int *)(param_1 + 0x340c);
-    FUN_0029efd8(temp_v5,1);
+    gridNavigationHandleConfirm(temp_v5,1);
     if (temp_v5 != 0) {
       FUN_00292f4c(param_1);
       break;
     }
     temp_v5 = 0;
-    FUN_002c1658(0,1);
+    inputQueryButtonState(0,1);
     if (temp_v5 != 0) {
       *(unsigned char *)(param_1 + 0x3060) = 0;
     }
@@ -1134,10 +1134,10 @@ LAB_0019bce0:
       break;
     }
     temp_v5 = 1;
-    FUN_002c1658(1,1);
+    inputQueryButtonState(1,1);
     if (temp_v5 == 0) {
       temp_v5 = 9;
-      FUN_002c1658(9,1);
+      inputQueryButtonState(9,1);
       if (temp_v5 != 0) {
         *(unsigned char *)(param_1 + 0x3060) = 9;
         playSceneSetState(param_1,2,1);
@@ -1148,7 +1148,7 @@ LAB_0019bce0:
       temp_v5 = flagBitIsSet(0x7f);
       if (temp_v5 != 0) {
         temp_v5 = 10;
-        FUN_002c1658(10,1);
+        inputQueryButtonState(10,1);
         if (temp_v5 == 0) goto LAB_0019be74;
         *(unsigned char *)(param_1 + 0x3060) = 10;
         playSceneSetState(param_1,3,1);
@@ -1170,7 +1170,7 @@ LAB_0019be74:
         if (temp_v17 == temp_v5) break;
       }
       else {
-        FUN_0029efd8(temp_v7,1);
+        gridNavigationHandleConfirm(temp_v7,1);
         if (temp_v7 == 0) break;
       }
       playSceneSetState(param_1,1);
@@ -1221,8 +1221,8 @@ LAB_0019be74:
     break;
   case 0x10:
     uiSlidingSpriteAdvance(param_1 + 0x20,0);
-    temp_v5 = FUN_0028cfbc(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
-    temp_v17 = FUN_0029d644(temp_v33);
+    temp_v5 = widgetGetVisibleLength(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
+    temp_v17 = uiListGetVisibleCount(temp_v33);
     temp_v7 = 0;
     do {
       if ((temp_v5 <= temp_v7) || (temp_v7 <= *(int *)(param_1 + 0x3044) - 1)) {
@@ -1295,10 +1295,10 @@ LAB_0019be74:
     }
     temp_v15 = 0;
     temp_v5 = 0;
-    FUN_002c1658(0,1);
+    inputQueryButtonState(0,1);
     if (temp_v5 == 0) {
       temp_v5 = 1;
-      FUN_002c1658(1,1);
+      inputQueryButtonState(1,1);
       goto joined_r0x0019c3c8;
     }
     *(unsigned char *)(param_1 + 0x3060) = temp_v15;
@@ -1306,10 +1306,10 @@ LAB_0019be74:
   case 0x16:
     temp_v15 = 0;
     temp_v5 = 0;
-    FUN_002c1658(0,1);
+    inputQueryButtonState(0,1);
     if (temp_v5 == 0) {
       temp_v5 = 1;
-      FUN_002c1658(1,1);
+      inputQueryButtonState(1,1);
 joined_r0x0019c3c8:
       temp_v15 = 1;
       if (temp_v5 == 0) break;
@@ -1407,16 +1407,16 @@ joined_r0x0019c3c8:
       break;
     }
     temp_v5 = 0;
-    FUN_002c1658(0,1);
+    inputQueryButtonState(0,1);
     if (temp_v5 != 0) {
       *(unsigned char *)(param_1 + 0x3060) = 0;
     }
     if (temp_v5 == 0 && temp_v36[0] == '\0') {
       temp_v5 = 1;
-      FUN_002c1658(1,1);
+      inputQueryButtonState(1,1);
       if (temp_v5 == 0) {
         temp_v5 = temp_v17;
-        FUN_0029efd8(temp_v17,1);
+        gridNavigationHandleConfirm(temp_v17,1);
         if (temp_v5 != 0) {
           do {
             spriteStartAnimationByIndex(param_1 + 0xac,1);
@@ -1455,7 +1455,7 @@ joined_r0x0019c3c8:
                   (*(short *)(temp_v5 + 0x62) != 0)) || ((*(unsigned char *)(temp_v5 + 0x6a) & 0x7f) == 1))
               break;
             }
-            FUN_0029efd8(temp_v17,0);
+            gridNavigationHandleConfirm(temp_v17,0);
           } while( 1 );
         }
         break;
@@ -1495,7 +1495,7 @@ LAB_0019c714:
     break;
   case 0x23:
     temp_v17 = 0;
-    temp_v5 = FUN_0029e958(param_1 + 0x33a8);
+    temp_v5 = uiGridNavigationEntryCount(param_1 + 0x33a8);
     if (0 < temp_v5) {
       do {
         temp_v5 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + temp_v17 * 2 + 0x574e));
@@ -1504,11 +1504,11 @@ LAB_0019c714:
           break;
         }
         temp_v17 = temp_v17 + 1;
-        temp_v5 = FUN_0029e958(param_1 + 0x33a8);
+        temp_v5 = uiGridNavigationEntryCount(param_1 + 0x33a8);
       } while (temp_v17 < temp_v5);
     }
     temp_v5 = 0;
-    FUN_002c1658(0,1);
+    inputQueryButtonState(0,1);
     if (temp_v5 != 0) {
       *(unsigned char *)(param_1 + 0x3060) = 0;
     }
@@ -1525,7 +1525,7 @@ LAB_0019c9b8:
       goto LAB_0019c714;
     }
     temp_v5 = 1;
-    FUN_002c1658(1,1);
+    inputQueryButtonState(1,1);
     if (temp_v5 == 0) break;
     *(unsigned char *)(param_1 + 0x3060) = 1;
     *(unsigned int *)(param_1 + 0x3460) = 0;
@@ -1546,13 +1546,13 @@ LAB_0019c9b8:
     if (temp_v5 == 6) {
       temp_v36[0] = '\x01';
     }
-    FUN_002c1658(0,1);
+    inputQueryButtonState(0,1);
     if (temp_v17 != 0) {
       *(unsigned char *)(param_1 + 0x3060) = 0;
     }
     if (temp_v17 == 0 && temp_v36[0] == '\0') {
       temp_v5 = 1;
-      FUN_002c1658(1,1);
+      inputQueryButtonState(1,1);
       if (temp_v5 == 0) break;
       *(unsigned char *)(param_1 + 0x3060) = 1;
       playSceneSetState(param_1,*(unsigned int *)(param_1 + 0x304c),1);
@@ -1639,10 +1639,10 @@ LAB_0019c9b8:
     }
     else {
       temp_v5 = temp_v17;
-      FUN_0029efd8(temp_v17,1);
+      gridNavigationHandleConfirm(temp_v17,1);
       if (temp_v5 == 0) {
         temp_v5 = 0;
-        FUN_002c1658(0,1);
+        inputQueryButtonState(0,1);
         if (temp_v5 != 0) {
           *(unsigned char *)(param_1 + 0x3060) = 0;
         }

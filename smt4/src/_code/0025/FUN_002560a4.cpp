@@ -13,7 +13,7 @@ struct SupportUnitData {
 };
 
 SupportUnitData *gameGetSupportUnitData(void);
-void FUN_001a7dbc(SupportUnitData *data, s32 a, s32 id, s32 b);
+void unitRecordInitialize(SupportUnitData *data, s32 a, s32 id, s32 b);
 
 
 /* Clears the support unit and, for two special ids, marks its story flag. */
@@ -22,7 +22,7 @@ void FUN_002560a4(s32 id)
     SupportUnitData *data = gameGetSupportUnitData();
 
     if ((data->flags & 1) != 0) {
-        FUN_001a7dbc(data, -1, id, 3);
+        unitRecordInitialize(data, -1, id, 3);
         data->state = 0;
         if (id == 0x2A3) {
             gameFlagSetValue(0x262, 1, 1);

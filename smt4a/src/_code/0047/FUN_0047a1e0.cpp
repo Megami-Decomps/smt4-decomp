@@ -3,7 +3,7 @@
 
 extern "C" {
 
-s32 FUN_00167458(void *loader, s32 arg);
+s32 uiSpriteSlideFromSide(void *loader, s32 arg);
 u32 FUN_0019d890(u32 group, u32 item);
 s32 entryDispatchUpdate(void *fade, s32 arg);
 
@@ -15,7 +15,7 @@ s32 FUN_0047a1e0(u32 job)
     switch (work->state) {
     case 0:
         void *loader = work->loader;
-        if (FUN_00167458(loader, 0) != 0) {
+        if (uiSpriteSlideFromSide(loader, 0) != 0) {
             work->state = 1;
             work->flags |= 0x2000;
             work->message = FUN_0019d890(0x2f, 0x45);

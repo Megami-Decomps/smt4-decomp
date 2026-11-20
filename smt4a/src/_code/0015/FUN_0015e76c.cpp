@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0017fc38(int *);
+int interpolationStateEvaluate(int *);
 int VectorSignedToFloat(unsigned int, int);
 
 typedef struct fn_0015e76c_arg0 fn_0015e76c_arg0;
@@ -21,7 +21,7 @@ struct fn_0015e76c_arg0 {
 };
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0017fc38. */
+/* Supplied declaration required: interpolationStateEvaluate. */
 
 
 void FUN_0015e76c(fn_0015e76c_arg0 *param_1,int param_2,unsigned int param_3)
@@ -39,7 +39,7 @@ void FUN_0015e76c(fn_0015e76c_arg0 *param_1,int param_2,unsigned int param_3)
   temp_v0 = param_1->field_0xa1;
   if (param_2 != 0) {
     if ((temp_v0 < 2) || ((temp_v0 != 2 && (temp_v0 == 3)))) {
-      FUN_0017fc38(&param_1->field_0x78);
+      interpolationStateEvaluate(&param_1->field_0x78);
       temp_v4 = 0;
       temp_v3 = (float)VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v2 = (int)(in_s0 * temp_v3);
@@ -47,7 +47,7 @@ void FUN_0015e76c(fn_0015e76c_arg0 *param_1,int param_2,unsigned int param_3)
       if (temp_v2 < 1) {
         temp_v1 = 1;
       }
-      FUN_0017fc38(&param_1->field_0x78);
+      interpolationStateEvaluate(&param_1->field_0x78);
       param_1->field_0x78 = temp_v2;
       param_1->field_0x7c = temp_v4;
       param_1->field_0x80 = temp_v1;
@@ -57,7 +57,7 @@ void FUN_0015e76c(fn_0015e76c_arg0 *param_1,int param_2,unsigned int param_3)
     }
   }
   else if ((temp_v0 != 0) && ((temp_v0 == 1 || temp_v0 == 2) || temp_v0 == 3)) {
-    FUN_0017fc38(&param_1->field_0x78);
+    interpolationStateEvaluate(&param_1->field_0x78);
     temp_v4 = 0x3f800000;
     temp_v3 = (float)VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v2 = (int)((1.0f - in_s0) * temp_v3);
@@ -65,7 +65,7 @@ void FUN_0015e76c(fn_0015e76c_arg0 *param_1,int param_2,unsigned int param_3)
     if (temp_v2 < 1) {
       temp_v1 = 1;
     }
-    FUN_0017fc38(&param_1->field_0x78);
+    interpolationStateEvaluate(&param_1->field_0x78);
     param_1->field_0x78 = temp_v2;
     param_1->field_0x7c = temp_v4;
     param_1->field_0x80 = temp_v1;

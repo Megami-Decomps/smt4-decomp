@@ -37,7 +37,7 @@ struct CombatantEditableWord {
 }
 
 extern "C" {
-extern BtlUiCloseState DAT_005715f8;
+extern BtlUiCloseState g_btlDebugGlobals;
 u32 asdListBoxGetSelectedItemId(u32 listBox);
 s32 *asdListBoxGetIntValuePtr(u32 listBox, u32 id);
 f32 *asdListBoxGetFloatValuePtr(u32 listBox, u32 id);
@@ -73,13 +73,13 @@ void FUN_004d3df0(CombatantEditor *editor, BtlMainStateA *battle)
             asdListBoxSetIntItem(editor->listBox, 7, vitals->parameter[2], 1, 999, 0);
             asdListBoxSetIntItem(editor->listBox, 8, vitals->parameter[3], 1, 999, 0);
             asdListBoxSetIntItem(editor->listBox, 9, vitals->parameter[4], 1, 999, 0);
-            asdListBoxSetToggleItem(editor->listBox, 10, (DAT_005715f8.toggleMaskA & entry->flags) != 0);
-            asdListBoxSetToggleItem(editor->listBox, 11, (entry->flags & DAT_005715f8.toggleMaskB) != 0);
-            if ((entry->flags & DAT_005715f8.editableMask) != 0)
+            asdListBoxSetToggleItem(editor->listBox, 10, (g_btlDebugGlobals.toggleMaskA & entry->flags) != 0);
+            asdListBoxSetToggleItem(editor->listBox, 11, (entry->flags & g_btlDebugGlobals.toggleMaskB) != 0);
+            if ((entry->flags & g_btlDebugGlobals.editableMask) != 0)
                 asdListBoxSetIntItem(editor->listBox, 12, saveIsRecordValueBounded(entry->data.id), 0, 100, 0);
             else
                 asdListBoxSetIntItem(editor->listBox, 12, 0, 0, 100, 0);
-            if (entry->ids[0] >= 0 && (DAT_005715f8.editableMask & entry->flags) != 0) {
+            if (entry->ids[0] >= 0 && (g_btlDebugGlobals.editableMask & entry->flags) != 0) {
                 BattleRosterRecordA *record = &btlGetMainState()->roster[entry->ids[0]];
                 asdListBoxSetFloatItem(editor->listBox, 13, -50, 50, record->spriteOffset.x);
                 asdListBoxSetFloatItem(editor->listBox, 14, -50, 50, record->spriteOffset.y);
@@ -159,36 +159,36 @@ void FUN_004d3df0(CombatantEditor *editor, BtlMainStateA *battle)
     case 10:
         if (entry != NULL) {
             if (listBoxItemHasOwner(editor->listBox, selected))
-                entry->flags |= DAT_005715f8.toggleMaskA;
+                entry->flags |= g_btlDebugGlobals.toggleMaskA;
             else
-                entry->flags = ~DAT_005715f8.toggleMaskA & entry->flags;
+                entry->flags = ~g_btlDebugGlobals.toggleMaskA & entry->flags;
             return;
         }
         break;
     case 11:
         if (entry != NULL) {
             if (listBoxItemHasOwner(editor->listBox, selected))
-                entry->flags = DAT_005715f8.toggleMaskB | entry->flags;
+                entry->flags = g_btlDebugGlobals.toggleMaskB | entry->flags;
             else
-                entry->flags = ~DAT_005715f8.toggleMaskB & entry->flags;
+                entry->flags = ~g_btlDebugGlobals.toggleMaskB & entry->flags;
             return;
         }
         break;
     case 12:
-        if (entry != NULL && (entry->flags & DAT_005715f8.editableMask) != 0) {
+        if (entry != NULL && (entry->flags & g_btlDebugGlobals.editableMask) != 0) {
             gameRecordSetValueClamped(entry->data.id, *asdListBoxGetIntValuePtr(editor->listBox, selected));
             return;
         }
         break;
     case 13:
-        if (entry != NULL && entry->ids[0] >= 0 && (entry->flags & DAT_005715f8.editableMask) != 0) {
+        if (entry != NULL && entry->ids[0] >= 0 && (entry->flags & g_btlDebugGlobals.editableMask) != 0) {
             BattleRosterRecordA *record = &btlGetMainState()->roster[entry->ids[0]];
             record->spriteOffset.x = *asdListBoxGetFloatValuePtr(editor->listBox, selected);
             return;
         }
         break;
     case 14:
-        if (entry != NULL && entry->ids[0] >= 0 && (entry->flags & DAT_005715f8.editableMask) != 0) {
+        if (entry != NULL && entry->ids[0] >= 0 && (entry->flags & g_btlDebugGlobals.editableMask) != 0) {
             BattleRosterRecordA *record = &btlGetMainState()->roster[entry->ids[0]];
             record->spriteOffset.y = *asdListBoxGetFloatValuePtr(editor->listBox, selected);
             return;

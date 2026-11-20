@@ -5,6 +5,6 @@
 /* Bust-up slot control. */
 extern "C" {
 
-s32 bustupCutStartSlotTransition(s32 workId, s32 frame, s32 enabled, s32 available, s32 transition);
+s32 bustupCutStartSlotTransition(s32 workId, s32 index, s32 row, s32 column, s32 transition);
 
 } /* extern "C" */

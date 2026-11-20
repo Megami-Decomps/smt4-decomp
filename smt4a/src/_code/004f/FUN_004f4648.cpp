@@ -3,7 +3,7 @@
 extern "C" {
 u32 asdListBoxCreate(u32, s32, s32, s32, s32);
 void jobSetWork7C(u32, void *, void *);
-void FUN_002e0898(u32, s32, s32);
+void debugEditorListSetCellSize(u32, s32, s32);
 void jobSetText(u32, const char *);
 void asdListBoxAddItem(u32, const char *);
 const EnemyEditorUnit *btlFindEntryBlockByMemberId(EnemyEditorResourceA *, s32 id);
@@ -20,7 +20,7 @@ void FUN_004f4648(EnemyEditorWork *work, EnemyEditorResourceA *resource, u32 par
     u32 list = asdListBoxCreate(parent, 0xf0, 16, 32, 4);
     work->list = list;
     jobSetWork7C(list, reinterpret_cast<void *>(FUN_0021298c), reinterpret_cast<void *>(fontMeasureFixedWidth));
-    FUN_002e0898(list, 12, 12);
+    debugEditorListSetCellSize(list, 12, 12);
     jobSetText(list, DAT_005281f8);
     asdListBoxAddItem(list, DAT_005281ec);
     asdListBoxAddItem(list, DAT_005281dc);

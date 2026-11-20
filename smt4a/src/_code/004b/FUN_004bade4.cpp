@@ -57,7 +57,7 @@ void FUN_004bade4(SlotMenu *menu)
             efctSetSpeed(vec2GetSpeed((UiSpriteState *)(&menu->accent)));
             texDrawCompositeSprite(2, 0x1f, menu->spriteAccent, sx, sy, 0x20);
         }
-        s32 first = FUN_002a482c(menu);
+        s32 first = resourceDispatchTaggedOperation(menu);
         s32 count = rangeGetMinimumLimit(menu);
         for (s32 i = 0; i < count; i++) {
             if (FUN_0031d174(menu) != i) {

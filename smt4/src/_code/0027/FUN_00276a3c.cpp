@@ -19,8 +19,8 @@ int mathDistanceBetweenPoints(void);
 int FUN_00298d50(...);
 int cameraExportParameters(float [3], int);
 int FUN_002c159c(unsigned char *);
-int FUN_002c1e30(...);
-int FUN_002c1edc(...);
+int stereoCameraSetPerspective(...);
+int cameraMatrixCacheSetLookAt(...);
 int VectorUnsignedToFloat(unsigned int, int);
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
@@ -70,8 +70,8 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_00298d50. */
 /* Supplied declaration required: cameraExportParameters. */
 /* Supplied declaration required: FUN_002c159c. */
-/* Supplied declaration required: FUN_002c1e30. */
-/* Supplied declaration required: FUN_002c1edc. */
+/* Supplied declaration required: stereoCameraSetPerspective. */
+/* Supplied declaration required: cameraMatrixCacheSetLookAt. */
 /* Supplied declaration required: gameGetMapBlock. */
 extern short __aeabi_idivmod(short, int);
 
@@ -232,7 +232,7 @@ void FUN_00276a3c(void)
   temp_v19 = 1.0f;
   if (temp_v3 == 3) {
     FUN_002c159c(&g_fixedCamera);
-    FUN_002c1e30(&g_fixedCamera,1);
+    stereoCameraSetPerspective(&g_fixedCamera,1);
     FUN_0025c238();
     FUN_00298d50(&g_fixedCamera);
     __hardfp_atan2f();
@@ -242,8 +242,8 @@ void FUN_00276a3c(void)
   temp_v20 = 45.0f;
   if (temp_v3 == 4) {
     FUN_002c159c(&g_fixedCamera);
-    FUN_002c1e30(&g_fixedCamera,1);
-    FUN_002c1edc(&g_fixedCamera,g_mapCamera + 0x20,g_mapCamera + 0x23,g_mapCamera + 7);
+    stereoCameraSetPerspective(&g_fixedCamera,1);
+    cameraMatrixCacheSetLookAt(&g_fixedCamera,g_mapCamera + 0x20,g_mapCamera + 0x23,g_mapCamera + 7);
     FUN_0025c238();
     FUN_00298d50(&g_fixedCamera);
     __hardfp_atan2f();
@@ -604,17 +604,17 @@ void FUN_00276a3c(void)
     else {
       FUN_002c159c(&g_fixedCamera);
     }
-    FUN_002c1e30(&g_fixedCamera,1);
+    stereoCameraSetPerspective(&g_fixedCamera,1);
     temp_v3 = *g_mapCamera;
     if (!((temp_v3 == 7 || temp_v3 == 8) || temp_v3 == 9)) {
       FUN_0025c238();
     }
     else {
-      FUN_002c1edc(&g_fixedCamera,g_mapCamera + 0x13,g_mapCamera + 0x16,g_mapCamera + 10);
+      cameraMatrixCacheSetLookAt(&g_fixedCamera,g_mapCamera + 0x13,g_mapCamera + 0x16,g_mapCamera + 10);
     }
   }
   else {
-    FUN_002c1edc(&g_fixedCamera,g_mapCamera + 0x13,g_mapCamera + 0x16,g_mapCamera + 7);
+    cameraMatrixCacheSetLookAt(&g_fixedCamera,g_mapCamera + 0x13,g_mapCamera + 0x16,g_mapCamera + 7);
     FUN_0025c238();
     FUN_00298d50(&g_fixedCamera);
   }

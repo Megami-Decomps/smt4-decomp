@@ -5,7 +5,7 @@
 #include "nn/Result.h"
 
 extern "C" {
-void FUN_00161a10();
+void asdGxWaitForPreviousFrame();
 void table30GetEntryB(ItemPropertyResource **out, void *table, u32 index);
 ItemCodeInfo FUN_005000c4(ItemPropertyResource **resource);
 WindowStatusResult FUN_00429178(void *owner, void *request, void *parameters);
@@ -16,7 +16,7 @@ WindowStatusOperationResult Obj4221fc::vfunc0c(const void *)
 {
     WindowStatusOperationResult output(1);
     AocMain *manager = g_aocMain;
-    FUN_00161a10();
+    asdGxWaitForPreviousFrame();
     TableEntryRef ref;
     table30GetEntryB(&ref.entry, manager->contentRequest, state);
     ItemCodeInfo request = FUN_005000c4(&ref.entry);

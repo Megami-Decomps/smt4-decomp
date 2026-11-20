@@ -32,6 +32,22 @@ typedef char ShopCreateWorkSizeCheck[sizeof(ShopCreateWork) == sizeof(ShopWork) 
 typedef char ShopCreateWorkModeOffsetCheck[offsetof(ShopCreateWork, mode) == 8 ? 1 : -1];
 typedef char ShopCreateWorkResultOffsetCheck[offsetof(ShopCreateWork, result) == 0x18 ? 1 : -1];
 
+/* The queued shop request (8 bytes, allocated on first use): the shop main leaves the screen it
+ * showed pending, and a script that requests the shop without arguments reopens it. */
+typedef struct ShopSequenceRequest {
+    /* 0x00 */ u8 pending;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ s32 screen;
+} ShopSequenceRequest;
+
+typedef char ShopSequenceRequestLayoutCheck[
+    sizeof(ShopSequenceRequest) == 8 && offsetof(ShopSequenceRequest, screen) == 4 ? 1 : -1];
+
+enum {
+    SHOP_SEQUENCE = 10,                /* the game sequence state that runs the shop */
+    SHOP_SCREEN_SECOND_CATEGORY = 100  /* screens of script category 1 are numbered from here */
+};
+
 typedef struct ShopGlobals {
     /* 0x00 */ ShopWork *work;
 } ShopGlobals;

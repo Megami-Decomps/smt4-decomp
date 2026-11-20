@@ -3,7 +3,7 @@
 #include "sys/ResultReport.h"
 
 extern "C" {
-extern ThreadHandleState DAT_0044e7b4;
+extern ThreadHandleState g_currentThreadHandleState;
 extern const u32 DAT_00408ee0;
 s32 FUN_0015f858(u32* handle, u32 original);
 void _ZN10NnOsThreadD1Ev(void* object);
@@ -28,7 +28,7 @@ static __inline ThreadHandleState* initializeCurrentThread(ThreadHandleState* th
 // Duplicate the current thread handle and register the thread object's cleanup.
 void sysRegisterCurrentThreadCleanup(void)
 {
-    __aeabi_atexit(initializeCurrentThread(&DAT_0044e7b4),
+    __aeabi_atexit(initializeCurrentThread(&g_currentThreadHandleState),
                     _ZN10NnOsThreadD1Ev, reinterpret_cast<void*>(entry));
 }
 }

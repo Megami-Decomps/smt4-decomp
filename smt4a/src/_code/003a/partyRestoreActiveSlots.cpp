@@ -10,8 +10,8 @@ struct ActiveSlotView {
 
 extern "C" {
 void rt_aeabi_memclr(void *memory, u32 size);
-void FUN_003e48dc(s32 id);
-void FUN_003e4e4c(u32 mode);
+void partySlotClearInactiveFlag(s32 id);
+void saveSlotTableSetPreferredId(u32 mode);
 ActiveSlotView *partyGetSlotPreferredFirst(u16 slot);
 
 void *gameDataBlocksGetSaveData(void);
@@ -32,13 +32,13 @@ u32 partyRestoreActiveSlots(void)
             saved->ids[count++] = slot->id;
         }
     }
-    FUN_003e4e4c(0);
+    saveSlotTableSetPreferredId(0);
     for (s32 index = 0; index < 12; ++index) {
         u16 id = saved->ids[index];
         if (id != 0) {
             void *slot = saveSlotFindById(id);
             if (slot != NULL && partySlotIsOccupied(slot)) {
-                FUN_003e48dc(id);
+                partySlotClearInactiveFlag(id);
             }
         }
     }

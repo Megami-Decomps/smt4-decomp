@@ -8,13 +8,13 @@ using namespace ResourceKeyLookup;
 struct LookupManager;
 
 extern "C" {
-LookupManager* FUN_002b5c44(void);
+LookupManager* tokenTableGet(void);
 s32 tokenResolveAddress(LookupManager* manager, LookupEntry** entry, u32 key);
 
 s32 FUN_003df37c(const u32* key, u32* value)
 {
     LookupEntry* entry;
-    s32 result = tokenResolveAddress(FUN_002b5c44(), &entry, *key);
+    s32 result = tokenResolveAddress(tokenTableGet(), &entry, *key);
     if (nnResultIsFailure(result)) {
         return result;
     }
