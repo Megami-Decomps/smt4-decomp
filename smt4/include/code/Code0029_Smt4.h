@@ -12,6 +12,8 @@ struct ScriptFile;
 struct ScriptProcessWork;
 extern "C" {
 
+u32 resourceRunEmbeddedOperationIfUnblocked(const void *object); /* IV only: Apocalypse's takes an Object (code/Code002a_Smt4a.h) */
+
 CampComRecord *FUN_00292844(u32 id);
 
 void pair40Set(Obj *obj, u32 a, u32 b);

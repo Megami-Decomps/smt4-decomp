@@ -11,7 +11,7 @@ static __inline u64 CONCAT44(u32 high, u32 low)
 }
 
 int FUN_0021a1a4(unsigned short *, int, int);
-int FUN_00256a50(...);
+int renderSubmissionDrawPacket(...);
 int matrixScaleRows(...);
 int gfxResolveTimedTextureFrame(...);
 int FUN_00256dbc(...);
@@ -119,7 +119,7 @@ extern float DAT_004efdd4; /* 0x4efdd4 */
 extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 
 /* Supplied declaration required: FUN_0021a1a4. */
-/* Supplied declaration required: FUN_00256a50. */
+/* Supplied declaration required: renderSubmissionDrawPacket. */
 /* Supplied declaration required: matrixScaleRows. */
 /* Supplied declaration required: gfxResolveTimedTextureFrame. */
 /* Supplied declaration required: FUN_00256dbc. */
@@ -449,7 +449,7 @@ void effEmitterUpdate(EffectEmitter *emitter)
     temp_v0 = *puVar8 & 0xfeff;
   }
   *puVar8 = temp_v0;
-  FUN_00256a50(puVar8,emitter->flags & 0xffff);
+  renderSubmissionDrawPacket(puVar8,emitter->flags & 0xffff);
   return;
 }
 

@@ -85,7 +85,6 @@ void asdGxFlushCommandBuffer(void);
 void renderCtxResetFrameState(RenderCtxA *context);
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 FUN_00157e98(ModelSlot *model, ModelAnimationSet *animations);
-void renderCtxSetStereoMode(RenderCtxA *context, s32 mode);
 void holderFlushPending(u32 handle);
 
 /* The animation set in use: the override's embedded record when it is fully enabled, else the manager's own. */

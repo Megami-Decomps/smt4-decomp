@@ -1,38 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `skillDataFindByIdImpl` (_code @ 0x1b2e34, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "util/BinarySearch.h"
+
+struct SkillDataRecordEntry {
+    u8 unk00[0x20];
+    u16 id;
+    u8 unk22[0x66];
+};
+typedef char SkillDataRecordEntrySizeCheck[sizeof(SkillDataRecordEntry) == 0x88 ? 1 : -1];
+
+struct SkillDataTableHeader {
+    u32 count;
+    const SkillDataRecordEntry *entries;
+};
+
+struct SkillDataTableOwner {
+    u8 unk000[0x434];
+    SkillDataTableHeader table;
+};
 
 extern "C" {
+s32 dataCompareRecordKeys(const void *lhs, const void *rhs);
 
-int libc_bsearch(unsigned char [32], unsigned int, unsigned int, int, unsigned char *);
-
-/* stack frame of param_2: 3 slot(s), 10 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-    unsigned short sp70; /* 0x70: local_70 */
-    unsigned int sp98; /* 0x98: local_98 */
-} param_2_stack;
-
-extern unsigned char LAB_001b9fd4; /* 0x1b9fd4 */
-
-/* Supplied declaration required: libc_bsearch. */
-
-
-void skillDataFindByIdImpl(int param_1,unsigned short param_2)
-
+/* Looks up a skill record by ID via binary search, returning NULL if the table is empty. */
+void *skillDataFindByIdImpl(const SkillDataTableOwner *owner, u16 id)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned char temp_v0 [32];
-  unsigned short temp_v1;
-  
-  if (*(int *)(param_1 + 0x434) != 0) {
-    temp_v1 = param_2;
-    libc_bsearch(temp_v0,*(unsigned int *)(param_1 + 0x438),*(unsigned int *)(param_1 + 0x434),0x88,
-                 &LAB_001b9fd4);
-                    /* WARNING: Treating indirect jump as return */
-    return;
-  }
-  return;
+    if (owner->table.count == 0) {
+        return NULL;
+    }
+    SkillDataRecordEntry key;
+    key.id = id;
+    return libc_bsearch(&key, owner->table.entries, owner->table.count, sizeof(SkillDataRecordEntry), dataCompareRecordKeys);
 }
-
-} /* extern "C" */
+}

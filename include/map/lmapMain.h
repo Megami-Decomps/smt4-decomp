@@ -167,7 +167,7 @@ typedef struct LmapScene {
     /* 0x090 */ u32 unk090;
     /* 0x094 */ f32 unk094;
     /* 0x098 */ u8 unk098[0x9C];
-    /* 0x134 */ u8 updateModels;
+    /* 0x134 */ s8 updateModels;
     /* 0x135 */ u8 unk135[3];
     /* 0x138 */ LmapScenePositionTransition transition;
     /* 0x15C */ f32 nearClip;  /* 100 */
@@ -199,7 +199,7 @@ typedef struct LmapScene {
     /* 0x18C */ s32 positionalSound;
     /* 0x190 */ s32 positionalSoundFrames;
     /* 0x194 */ Obj4206e8 *playerModel; /* a derived holder owns the root and three outfit parts */
-    /* 0x198 */ u8 restoreChannelValues;
+    /* 0x198 */ s8 restoreChannelValues;
     /* 0x199 */ u8 unk199[3];
     /* 0x19C */ u32 channelValues[3];    /* the player model's three part channels */
     /* 0x1A8 */ u32 requestedChannelValues[3];
@@ -440,13 +440,16 @@ typedef struct LmapSceneA {
     /* 0x1D0 */ s32 movementState;     /* the scripted movement's state (4: moving to the destination) */
     /* 0x1D4 */ u32 unk1D4;
     /* 0x1D8 */ MapVector movement;      /* the path follower FUN_003250ac steps */
-    /* 0x1E4 */ u32 resumeState;
+    union {
+        /* 0x1E4 */ u32 resumeState;  /* saved representation */
+        /* 0x1E4 */ f32 movementStepSize;
+    };
     /* 0x1E8 */ f32 unk1E8;
     /* 0x1EC */ f32 unk1EC;
     /* 0x1F0 */ MapVector movementCurrent;
     /* 0x1FC */ MapVector movementDestination;
     /* 0x208 */ MapVector unk208;
-    /* 0x214 */ u8 unk214;
+    /* 0x214 */ s8 unk214;
     /* 0x215 */ u8 unk215[3];
     /* 0x218 */ f32 movementHeading;
     /* 0x21C */ f32 unk21C;

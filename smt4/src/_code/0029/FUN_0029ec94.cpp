@@ -1,5 +1,6 @@
 /* NON_MATCHING: the four membership comparisons of the first (loaded-slot) loop use reversed operands; every other instruction matches. */
 #include "camp/Unite/UniteGlobals.h"
+#include "code/Code0029_Smt4.h"
 
 extern "C" {
 s32 FUN_00293f10(s32 id, s32 byDevilId);

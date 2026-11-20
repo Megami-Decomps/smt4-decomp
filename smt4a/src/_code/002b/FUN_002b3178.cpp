@@ -1,48 +1,64 @@
-/* NON_MATCHING: The angle is retained across trig calls, render-state push address scheduling and saved float registers differ. */
+/* NON_MATCHING: the 0.0f spawn depth is loaded into s23 at the top in retail (here after FUN_00186940), the colour word/alpha loads use different registers, and the pool loads of the angle constants are ordered differently (same residue as smt4 FUN_001f67ec). */
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
+#include "shard/Shard0036.h"
 
-struct RadialGradientWork {
-    u8 unk00[0xC];
-    union {
-        u32 packed;
-        struct { u8 r, g, b, a; } channels;
-    } color;
-    u32 unk10;
-    f32 firstX, firstY;
-    f32 lastX, lastY;
+struct TitleGradientPoint {
+    f32 x, y;
 };
+struct TitleGradientBlock {
+    RgbaWord color;
+    u8 unk04[4];
+    TitleGradientPoint first;
+    TitleGradientPoint last;
+};
+struct TitleRadialGradient {
+    u8 prefix[0xC];
+    TitleGradientBlock block;
+};
+typedef char TitleRadialGradientOffsets[offsetof(TitleRadialGradient, block) == 0xC &&
+    offsetof(TitleGradientBlock, first) == 8 && offsetof(TitleGradientBlock, last) == 0x10 ? 1 : -1];
+
 extern "C" {
 s32 renderCtxPackPassFlags(s32 first, s32 second);
 void FUN_00186940(void);
-f32 phaseCosine(f32 angle);
-f32 FUN_001a1ee0(f32 angle);
 void effectSpawnPositionDefault(u32 color, f32 x, f32 y, f32 z);
+f32 phaseCosine(f32);
+f32 FUN_001a1ee0(f32);
 void FUN_002371b0(void);
 
-/* Draws a colored center and an eighteen-segment transparent rim under a temporary render state. */
-void FUN_002b3178(RadialGradientWork *work)
+/* Angle of the i-th of the 19 points on the ring (a full turn in 18 steps, in the interpolation tables' units). */
+static __inline f32 titleRingPhase(s32 i)
 {
-    u32 packed = work->color.packed;
-    u8 alpha = work->color.channels.a;
-    u32 color = (packed << 24) | (((packed >> 8) & 0xFF) << 16) |
-                (((packed >> 16) & 0xFF) << 8) | alpha;
-    u32 rimColor = color & ~0xFF;
+    return static_cast<f32>(i) * 6.2831855f * (1.0f / 18.0f) * 40.743664f;
+}
+
+/* The gradient colour with its stored byte order swapped, alpha byte kept as stored. */
+static __inline u32 titleGradientColorWord(const RgbaWord *color)
+{
+    return (__rev(color->word) & ~0xFFu) | color->rgba.a;
+}
+
+/* Draws a coloured centre and an eighteen-segment transparent rim under a temporary render state. */
+void FUN_002b3178(const TitleRadialGradient *gradient)
+{
+    const TitleGradientBlock *block = &gradient->block;
+    RgbaWord centerColor;
+    centerColor.word = titleGradientColorWord(&block->color);
+    RgbaWord edgeColor;
+    edgeColor.word = centerColor.word & ~0xFFu;
     renderCtxSelectTexture(g_renderCtx, 0);
     RenderCtxA *context = g_renderCtx;
     renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
-    f32 width = work->lastX - work->firstX;
-    f32 height = work->lastY - work->firstY;
-    f32 centerX = work->firstX + width * 0.5f;
-    f32 centerY = work->firstY + height * 0.5f;
-    f32 radius = width * 0.5f;
+    f32 centerX = block->first.x + (block->last.x - block->first.x) * 0.5f;
+    f32 centerY = block->first.y + (block->last.y - block->first.y) * 0.5f;
+    f32 radius = (block->last.x - block->first.x) * 0.5f;
     FUN_00186940();
-    effectSpawnPositionDefault(color, centerX, centerY, 0.0f);
-    for (s32 vertex = 0; vertex < 19; ++vertex) {
-        f32 angle = (f32)vertex * 6.283185307179586f * (1.0f / 18.0f) * 40.7436654315252f;
-        f32 x = centerX + radius * phaseCosine(angle);
-        f32 y = centerY + radius * FUN_001a1ee0(angle);
-        effectSpawnPositionDefault(rimColor, x, y, 0.0f);
+    effectSpawnPositionDefault(centerColor.word, centerX, centerY, 0.0f);
+    for (s32 i = 0; i < 19; ++i) {
+        f32 x = centerX + radius * phaseCosine(titleRingPhase(i));
+        f32 y = centerY + radius * FUN_001a1ee0(titleRingPhase(i));
+        effectSpawnPositionDefault(edgeColor.word, x, y, 0.0f);
     }
     FUN_002371b0();
     renderStackPop(&g_renderCtx->stackA);

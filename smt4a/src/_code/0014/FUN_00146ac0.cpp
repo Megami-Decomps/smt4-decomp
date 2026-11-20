@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014a948(int *, unsigned int);
+int svcGetResourceLimit(int *, unsigned int);
 int software_interrupt(int);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -20,7 +20,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_0014a948. */
+/* Supplied declaration required: svcGetResourceLimit. */
 
 
 unsigned long long FUN_00146ac0(void)
@@ -33,7 +33,7 @@ unsigned long long FUN_00146ac0(void)
   
   temp_v1 = 0;
   temp_v2 = 1;
-  FUN_0014a948(&temp_v1,0xffff8001);
+  svcGetResourceLimit(&temp_v1,0xffff8001);
   software_interrupt(0x3a);
   software_interrupt(0x23);
                     /* WARNING: Treating indirect jump as return */

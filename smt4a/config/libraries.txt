@@ -26,3 +26,9 @@ arm 0x15e1ec 0x15e278 NintendoWare-snd Sound3DManager Initialize; placed before 
 # third-party 0x19a300 (svc 0x2d); armcc never pushes an argument register alone around an svc.
 arm 0x19a364 0x19a37c CTR-SDK svcReleaseSemaphore: push {r0}; svc 0x16; ldr r2, [sp]; str r1, [r2]; add sp, sp, #4
 arm 0x17fd20 0x17fd38 CTR-SDK svcCreateEvent: push {r0}; svc 0x17; ldr r2, [sp]; str r1, [r2]; add sp, sp, #4 (nn::os::Event::Initialize's call)
+# armlib's ll_sdiv (signed 64-bit division), the same 20 instructions as smt4's 0x2b5960: asrs/eor sign packing,
+# __aeabi_uldivmod, rsbs/rsc negations; armcc never emits this from C.
+arm 0x1623dc 0x16242c armlib ll_sdiv: asrs/eor sign packing and rsbs/rsc negations around __aeabi_uldivmod
+# Two more of the CTR-SDK's hand-written svc wrappers returning an output handle (`push {r0}; svc N; ldr r2, [sp];
+# str r1, [r2]; add sp, sp, #4; bx lr`): svc 0x15 CreateSemaphore (smt4's 0x2c52dc) and svc 0x38 GetResourceLimit.
+arm 0x14a930 0x14a960 CTR-SDK svcCreateSemaphore (svc 0x15) and svcGetResourceLimit (svc 0x38): push {r0}; svc N; ldr r2, [sp]; str r1, [r2]

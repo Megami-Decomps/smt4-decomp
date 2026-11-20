@@ -5,8 +5,6 @@ extern "C" {
 void pair40Set(PartyPanelWidget *widget, s32 first, s32 second);
 void obj48Arm(PartyPanelWidget *widget, u32 value); // declcheck: local (the shared declaration in code/Code0029_Smt4.h does not compile here: more than one instance of overloaded function "pair40Set" has "C" linkage)
 void FUN_00298d28(s32, s32);
-void partyWidgetSetTransitionActive(PartyPanelWidget *widget, u8 value);
-void partyWidgetSetTransitionPending(PartyPanelWidget *widget, u8 value);
 
 // Enter a party panel state, resetting and revealing the appropriate widgets.
 void partyPanelSetState(s32 state, s32 rememberPrevious)

@@ -11,10 +11,9 @@ extern "C" {
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle)
 {
     for (s32 i = 0; i < 109; i++) {
-        BtlCombatantEntryA *entry = &battle->entries[i];
-        if ((entry->flags & g_btlMain.actorCategories[3]) != 0) {
-            if ((entry->flags & g_btlMain.combatantMasks.required) != 0) {
-                return entry;
+        if ((battle->entries[i].flags & g_btlMain.actorCategories[3]) != 0) {
+            if ((battle->entries[i].flags & g_btlMain.combatantMasks.required) != 0) {
+                return &battle->entries[i];
             }
         }
     }

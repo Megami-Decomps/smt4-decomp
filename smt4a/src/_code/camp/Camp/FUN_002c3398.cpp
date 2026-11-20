@@ -35,7 +35,7 @@ int sysMemClear(...);
 int FUN_002f78a0(...);
 int campCommonBgAcquire(...);
 int campButtonHelpAcquire(...);
-int FUN_003423e8(...);
+int buttonHelpSetPanelMode(...);
 int partyPanelCreate(...);
 int FUN_0038b1c4(...);
 int FUN_003a7040(...);
@@ -98,7 +98,7 @@ extern int mapRndMazeTaskIsActive(void);
 /* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
 /* Supplied declaration required: statusPreviewMpChange. */
 /* Supplied declaration required: campButtonHelpAcquire. */
-/* Supplied declaration required: FUN_003423e8. */
+/* Supplied declaration required: buttonHelpSetPanelMode. */
 /* Supplied declaration required: partyPanelCreate. */
 extern unsigned char FUN_0036d134(void);
 /* Supplied declaration required: FUN_0038b1c4. */
@@ -160,7 +160,7 @@ void FUN_002c3398(void)
   FUN_003a7040();
   FUN_002e5c48();
   campButtonHelpAcquire();
-  FUN_003423e8(0);
+  buttonHelpSetPanelMode(0);
   puVar4 = puVar2 + 0x18e;
   paramsClearPacket();
   paramsInit(reinterpret_cast<UiResourceParameters *>(puVar4),&DAT_0052b8bc,0xb4,&DAT_0052b970,0x150,&DAT_0052bac0,0x30,0,0,&DAT_0052baf0,

@@ -1,8 +1,9 @@
 #include "gfx/StereoParallax.h"
-/* NON_MATCHING: readable rewrite from retail disassembly compiles (206 vs 184 rows); retail keeps the panel base and parallax values in more callee-saved registers and shares the draw-state ring updates differently */
+/* NON_MATCHING: readable rewrite from retail disassembly compiles (206 vs 199 rows); retail keeps the panel base and parallax values in more callee-saved registers and shares the draw-state ring updates differently */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "util/BitsAndBytes.h"
+#include "ui/UiSpriteApi.h"
 
 struct DrawRing {
     s32 index;              // 0x00
@@ -18,17 +19,11 @@ struct RenderCtx {
     DrawRing ring;          // 0x12b8
 };
 
-// UI sprite header: only the alpha and the visibility byte are touched here.
-struct UiSprite {
-    u8 unk00[0x20];
-    f32 alpha;              // 0x20
-    u8 unk24[0x18];
-    u8 visible;             // 0x3c
-};
-
-// Panel with four card sprites (offsets of the sprites inside the panel are kept as constants).
+// Panel with seven sprites: the header, the body frame and the cards.
 struct CardPanel {
-    u8 unk000[0x3f8];
+    u8 unk000[0x20];
+    UiSpriteState sprites[7];   // 0x20
+    u8 unk3f4[4];
     s32 mode;                   // 0x3f8: 7 = slide-in animation
     u8 unk3fc[4];
     u8 showHeader;              // 0x400
@@ -59,23 +54,25 @@ static void setDrawState(s32 value)
     }
 }
 
-#define PANEL_SPRITE(panel, offset) (reinterpret_cast<UiSprite*>(reinterpret_cast<u8*>(panel) + (offset)))
-
 // Draws the panel: header and body frames, then the four cards (sliding in when mode is 7).
 void FUN_003b21a4(CardPanel* panel)
 {
     renderCtxCalculateStereoParallax(g_renderCtx, 0.29f);
     s32 shift = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.29f);
-    if (panel->showHeader != 0 && PANEL_SPRITE(panel, 0x20)->alpha > 1.0f) {
-        efctSetSpeed(PANEL_SPRITE(panel, 0x20)->alpha);
-        texDrawTableEntryAtStoredOrigin(2, 12, 1000, shift, 0, 31);
-        if (PANEL_SPRITE(panel, 0x138)->alpha > 1.0f) {
-            efctSetSpeed(PANEL_SPRITE(panel, 0x138)->alpha);
-            setDrawState(packNibblesAndByte(6, 1, 0));
-            texDrawTableEntryAtStoredOrigin(2, 12, 0x3e9, shift, 0, 36);
-            setDrawState(packNibblesAndByte(6, 7, 0));
+    if (panel->showHeader != 0) {
+        f32 headerAlpha = vec2GetSpeed(&panel->sprites[0]);
+        if (headerAlpha > 1.0f) {
+            efctSetSpeed(headerAlpha);
+            texDrawTableEntryAtStoredOrigin(2, 12, 1000, shift, 0, 31);
+            f32 bodyAlpha = vec2GetSpeed(&panel->sprites[2]);
+            if (bodyAlpha > 1.0f) {
+                efctSetSpeed(bodyAlpha);
+                setDrawState(packNibblesAndByte(6, 1, 0));
+                texDrawTableEntryAtStoredOrigin(2, 12, 0x3e9, shift, 0, 36);
+                setDrawState(packNibblesAndByte(6, 7, 0));
+            }
+            efctSetSpeed(1.0f);
         }
-        efctSetSpeed(1.0f);
     }
 
     s32 x = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.29f);
@@ -92,27 +89,27 @@ void FUN_003b21a4(CardPanel* panel)
         } else {
             offsetX = (s32)slide;
         }
-        PANEL_SPRITE(panel, 0x20)->visible = 0;
-        PANEL_SPRITE(panel, 0xac)->visible = 0;
-        PANEL_SPRITE(panel, 0x368)->visible = 0;
-        PANEL_SPRITE(panel, 0x1c4)->visible = 0;
-        pairSetHalves(PANEL_SPRITE(panel, 0x20), (s16)offsetY, (s16)offsetX);
-        pairSetHalves(PANEL_SPRITE(panel, 0xac), (s16)offsetY, (s16)offsetX);
-        pairSetHalves(PANEL_SPRITE(panel, 0x368), (s16)offsetY, (s16)offsetX);
-        pairSetHalves(PANEL_SPRITE(panel, 0x1c4), (s16)offsetY, (s16)offsetX);
+        spriteSetVisible(&panel->sprites[0], 0);
+        spriteSetVisible(&panel->sprites[1], 0);
+        spriteSetVisible(&panel->sprites[6], 0);
+        spriteSetVisible(&panel->sprites[3], 0);
+        pairSetHalves(&panel->sprites[0], (s16)offsetY, (s16)offsetX);
+        pairSetHalves(&panel->sprites[1], (s16)offsetY, (s16)offsetX);
+        pairSetHalves(&panel->sprites[6], (s16)offsetY, (s16)offsetX);
+        pairSetHalves(&panel->sprites[3], (s16)offsetY, (s16)offsetX);
     }
-    effectRenderTransformedInstance(PANEL_SPRITE(panel, 0x20), (f32)x);
-    uiStoreTextureEntryCenter(PANEL_SPRITE(panel, 0x20), 12, 41);
-    PANEL_SPRITE(panel, 0x20)->visible = 1;
-    effectRenderTransformedInstance(PANEL_SPRITE(panel, 0x1c4), (f32)x);
-    uiStoreTextureEntryCenter(PANEL_SPRITE(panel, 0x1c4), 12, 45);
-    PANEL_SPRITE(panel, 0x1c4)->visible = 1;
-    effectRenderTransformedInstance(PANEL_SPRITE(panel, 0xac), (f32)x);
-    uiStoreTextureEntryCenter(PANEL_SPRITE(panel, 0xac), 12, 43);
-    PANEL_SPRITE(panel, 0xac)->visible = 1;
-    effectRenderTransformedInstance(PANEL_SPRITE(panel, 0x368), (f32)x);
-    uiStoreTextureEntryCenter(PANEL_SPRITE(panel, 0x368), 12, 41);
-    FUN_0036b63c(PANEL_SPRITE(panel, 0x368), 1);
+    effectRenderTransformedInstance(&panel->sprites[0], (f32)x);
+    uiStoreTextureEntryCenter(&panel->sprites[0], 12, 41);
+    spriteSetVisible(&panel->sprites[0], 1);
+    effectRenderTransformedInstance(&panel->sprites[3], (f32)x);
+    uiStoreTextureEntryCenter(&panel->sprites[3], 12, 45);
+    spriteSetVisible(&panel->sprites[3], 1);
+    effectRenderTransformedInstance(&panel->sprites[1], (f32)x);
+    uiStoreTextureEntryCenter(&panel->sprites[1], 12, 43);
+    spriteSetVisible(&panel->sprites[1], 1);
+    effectRenderTransformedInstance(&panel->sprites[6], (f32)x);
+    uiStoreTextureEntryCenter(&panel->sprites[6], 12, 41);
+    FUN_0036b63c(&panel->sprites[6], 1);
 }
 
 } /* extern "C" */

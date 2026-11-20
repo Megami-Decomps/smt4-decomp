@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the zero constant of the selected-sprite reset loop differs (retail materialises it with a fresh mov r0,#0 instead of reusing the register holding 0, shifting the literal pool by one word) and the stm base register of the process arguments. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -44,14 +43,34 @@ u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, void *work, u32 owner);
 void FUN_002e1698(u32 job);
 s32 FUN_002e169c(u32 job);
-void FUN_0025ccc0(u32 job);
+s32 FUN_0025ccc0(u32 job);
 void paramsClearPacket(UiResourceParameters *packet);
 
 void uiGetLayoutPointDifference(UiSpriteState *sprite, u32 group, u32 image, s32 kind);
 void uiStoreTextureEntryCenter(UiSpriteState *sprite, u32 group, s32 arg);
-void spriteSetVisible(UiSpriteState *sprite, u8 visible);
 u32 spriteHandleCreate(u32 arg);
 void positionStateSet(u32 handle, s32 arg, u32 color, f32 value);
+
+/* buttonHelpSetPanelMode's body: stores the help mode, resetting the four panel sprites for modes 0 and 2 or hiding them. */
+static __inline void buttonHelpSetPanelMode(u8 mode)
+{
+    ButtonHelpWorkA *work = g_buttonHelp.work;
+    work->mode = mode;
+    if (mode == 0 || mode == 2) {
+        for (s32 i = 0; i < 4; ++i) {
+            spriteSetLayer(&work->panelSprites[i], 2);
+            uiStoreTextureEntryCenter(&work->panelSprites[i], 10, 0);
+            spriteSetVisible(&work->panelSprites[i], 1);
+            work->panelSprites[i].x = 0;
+            work->panelSprites[i].y = 0;
+            work->panelSprites[i].z = 0;
+        }
+    } else {
+        for (s32 i = 0; i < 4; ++i) {
+            spriteSetVisible(&work->panelSprites[i], 0);
+        }
+    }
+}
 
 /* Takes a reference on the button help; the first one builds its work area, jobs and sprites. */
 void campButtonHelpAcquire(void)
@@ -64,8 +83,8 @@ void campButtonHelpAcquire(void)
         }
         ButtonHelpWorkA *work = g_buttonHelp.work;
         sysMemClear(work, sizeof(ButtonHelpWorkA));
-        work->calcProcess = asdProcessCreateSimple(reinterpret_cast<const s8 *>("ButtonHelp CALC"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002e1698), FUN_0025ccc0, NULL);
-        work->drawTask = taskCreateDraw(reinterpret_cast<const s8 *>("ButtonHelp DRAW"), 234, 0, 0,
+        work->calcProcess = asdProcessCreateSimple(reinterpret_cast<const s8 *>("ButtonHelp CALC"), 3, 0, 0, FUN_0025ccc0, FUN_002e1698, NULL);
+        work->drawTask = taskCreateDraw(reinterpret_cast<const s8 *>("ButtonHelp DDRAW"), 234, 0, 0,
                                         FUN_002e169c, NULL, NULL, work->calcProcess);
         ButtonHelpWorkA *panel = g_buttonHelp.work;
         paramsClearPacket(&panel->resources);
@@ -79,16 +98,7 @@ void campButtonHelpAcquire(void)
         uiSpriteStateInitFromSource(&panel->panelSprites[1], 10, 1, &panel->resources, 16, 1.0f);
         uiSpriteStateInitFromSource(&panel->panelSprites[2], 10, 163, &panel->resources, 16, 1.0f);
         uiSpriteStateInitFromSource(&panel->panelSprites[3], 10, 164, &panel->resources, 16, 1.0f);
-        ButtonHelpWorkA *current = g_buttonHelp.work;
-        current->mode = 0;
-        for (s32 i = 0; i < 4; i++) {
-            spriteSetLayer(&current->panelSprites[i], 2);
-            uiStoreTextureEntryCenter(&current->panelSprites[i], 10, 0);
-            spriteSetVisible(&current->panelSprites[i], 1);
-            current->panelSprites[i].x = 0;
-            current->panelSprites[i].y = 0;
-            current->panelSprites[i].z = 0;
-        }
+        buttonHelpSetPanelMode(0);
         panel->panelState = 0;
         panel->panelSliding = 1;
         panel->drawEnabled = 1;

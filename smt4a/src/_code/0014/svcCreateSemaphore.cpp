@@ -4,7 +4,7 @@
 extern "C" {
 
 /* Creates a semaphore through svc 0x15 and stores its handle in *out (the arguments pass through). */
-s32 FUN_0014a930(u32 *out, u32 initialCount, u32 maxCount)
+s32 svcCreateSemaphore(u32 *out, u32 initialCount, u32 maxCount)
 {
     nn::svc::ResultAndValue r = nn::svc::CreateSemaphoreRaw((u32)out, initialCount, maxCount);
     *out = r.value;

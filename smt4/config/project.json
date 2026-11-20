@@ -31346,12 +31346,12 @@
     },
     {
       "address": "0x21ea68",
-      "function": "FUN_0021ea68",
+      "function": "scrCommScreenFade",
       "module": "_code",
-      "object": "build/obj/_code/0021/FUN_0021ea68.o",
+      "object": "build/obj/_code/0021/scrCommScreenFade.o",
       "size": 420,
-      "source": "src/_code/0021/FUN_0021ea68.cpp",
-      "target": "orig/target/_code/0021/FUN_0021ea68.o",
+      "source": "src/_code/0021/scrCommScreenFade.cpp",
+      "target": "orig/target/_code/0021/scrCommScreenFade.o",
       "thumb": false
     },
     {
@@ -41645,12 +41645,12 @@
     },
     {
       "address": "0x256a50",
-      "function": "FUN_00256a50",
+      "function": "renderSubmissionDrawPacket",
       "module": "_code",
-      "object": "build/obj/_code/0025/FUN_00256a50.o",
+      "object": "build/obj/_code/0025/renderSubmissionDrawPacket.o",
       "size": 568,
-      "source": "src/_code/0025/FUN_00256a50.cpp",
-      "target": "orig/target/_code/0025/FUN_00256a50.o",
+      "source": "src/_code/0025/renderSubmissionDrawPacket.cpp",
+      "target": "orig/target/_code/0025/renderSubmissionDrawPacket.o",
       "thumb": false
     },
     {
@@ -45227,12 +45227,12 @@
     },
     {
       "address": "0x27398c",
-      "function": "FUN_0027398c",
+      "function": "itemEventStartupUpdate",
       "module": "_code",
-      "object": "build/obj/_code/0027/FUN_0027398c.o",
+      "object": "build/obj/_code/0027/itemEventStartupUpdate.o",
       "size": 428,
-      "source": "src/_code/0027/FUN_0027398c.cpp",
-      "target": "orig/target/_code/0027/FUN_0027398c.o",
+      "source": "src/_code/0027/itemEventStartupUpdate.cpp",
+      "target": "orig/target/_code/0027/itemEventStartupUpdate.o",
       "thumb": false
     },
     {
@@ -48102,12 +48102,12 @@
     },
     {
       "address": "0x289c98",
-      "function": "FUN_00289c98",
+      "function": "buttonHelpClosePanel",
       "module": "_code",
-      "object": "build/obj/_code/0028/FUN_00289c98.o",
+      "object": "build/obj/_code/0028/buttonHelpClosePanel.o",
       "size": 188,
-      "source": "src/_code/0028/FUN_00289c98.cpp",
-      "target": "orig/target/_code/0028/FUN_00289c98.o",
+      "source": "src/_code/0028/buttonHelpClosePanel.cpp",
+      "target": "orig/target/_code/0028/buttonHelpClosePanel.o",
       "thumb": false
     },
     {
@@ -64071,12 +64071,12 @@
     },
     {
       "address": "0x2d666c",
-      "function": "FUN_002d666c",
+      "function": "buttonHelpSetPanelMode",
       "module": "_code",
-      "object": "build/obj/_code/002d/FUN_002d666c.o",
+      "object": "build/obj/_code/002d/buttonHelpSetPanelMode.o",
       "size": 156,
-      "source": "src/_code/002d/FUN_002d666c.cpp",
-      "target": "orig/target/_code/002d/FUN_002d666c.o",
+      "source": "src/_code/002d/buttonHelpSetPanelMode.cpp",
+      "target": "orig/target/_code/002d/buttonHelpSetPanelMode.o",
       "thumb": false
     },
     {
@@ -69287,12 +69287,12 @@
     },
     {
       "address": "0x2f3b14",
-      "function": "FUN_002f3b14",
+      "function": "mapIfActivateNearbyMarker",
       "module": "_code",
-      "object": "build/obj/_code/002f/FUN_002f3b14.o",
+      "object": "build/obj/_code/002f/mapIfActivateNearbyMarker.o",
       "size": 164,
-      "source": "src/_code/002f/FUN_002f3b14.cpp",
-      "target": "orig/target/_code/002f/FUN_002f3b14.o",
+      "source": "src/_code/002f/mapIfActivateNearbyMarker.cpp",
+      "target": "orig/target/_code/002f/mapIfActivateNearbyMarker.o",
       "thumb": false
     },
     {
@@ -81164,12 +81164,12 @@
     },
     {
       "address": "0x343324",
-      "function": "FUN_00343324",
+      "function": "renderCtxSetMatrices",
       "module": "_code",
-      "object": "build/obj/_code/0034/FUN_00343324.o",
+      "object": "build/obj/_code/0034/renderCtxSetMatrices.o",
       "size": 40,
-      "source": "src/_code/0034/FUN_00343324.cpp",
-      "target": "orig/target/_code/0034/FUN_00343324.o",
+      "source": "src/_code/0034/renderCtxSetMatrices.cpp",
+      "target": "orig/target/_code/0034/renderCtxSetMatrices.o",
       "thumb": false
     },
     {
@@ -81610,12 +81610,12 @@
     },
     {
       "address": "0x347198",
-      "function": "FUN_00347198",
+      "function": "dynamicMeshFlushAttributes",
       "module": "_code",
-      "object": "build/obj/_code/0034/FUN_00347198.o",
+      "object": "build/obj/_code/0034/dynamicMeshFlushAttributes.o",
       "size": 180,
-      "source": "src/_code/0034/FUN_00347198.cpp",
-      "target": "orig/target/_code/0034/FUN_00347198.o",
+      "source": "src/_code/0034/dynamicMeshFlushAttributes.cpp",
+      "target": "orig/target/_code/0034/dynamicMeshFlushAttributes.o",
       "thumb": false
     },
     {
@@ -84438,7 +84438,18 @@
       "size": 140,
       "source": "src/_code/0035/aocServiceRunItemCodeRequest.cpp",
       "target": "orig/target/_code/0035/aocServiceRunItemCodeRequest.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x353b00",
@@ -95547,12 +95558,12 @@
     },
     {
       "address": "0x38ae30",
-      "function": "FUN_0038ae30",
+      "function": "aocListJobSubmitFlaggedIds",
       "module": "_code",
-      "object": "build/obj/_code/0038/FUN_0038ae30.o",
+      "object": "build/obj/_code/0038/aocListJobSubmitFlaggedIds.o",
       "size": 360,
-      "source": "src/_code/0038/FUN_0038ae30.cpp",
-      "target": "orig/target/_code/0038/FUN_0038ae30.o",
+      "source": "src/_code/0038/aocListJobSubmitFlaggedIds.cpp",
+      "target": "orig/target/_code/0038/aocListJobSubmitFlaggedIds.o",
       "thumb": false
     },
     {
@@ -103133,12 +103144,12 @@
     },
     {
       "address": "0x3c33c8",
-      "function": "FUN_003c33c8",
+      "function": "btlDebugStatusFlagEditorApply",
       "module": "_code",
-      "object": "build/obj/_code/003c/FUN_003c33c8.o",
+      "object": "build/obj/_code/003c/btlDebugStatusFlagEditorApply.o",
       "size": 1584,
-      "source": "src/_code/003c/FUN_003c33c8.cpp",
-      "target": "orig/target/_code/003c/FUN_003c33c8.o",
+      "source": "src/_code/003c/btlDebugStatusFlagEditorApply.cpp",
+      "target": "orig/target/_code/003c/btlDebugStatusFlagEditorApply.o",
       "thumb": false
     },
     {

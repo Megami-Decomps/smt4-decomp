@@ -56,7 +56,6 @@ void uniteResultLoadTexture(UniteRenderTarget *target, u32 extent, u32 options, 
 void statusBustUpPortraitAcquire(s32 id, u32 kind);
 
 void uiSpriteSetScaleKeyframe(UiSpriteState *sprite, s32 a, s32 b);
-void spriteSetVisible(UiSpriteState *sprite, u8 visible);
 
 /* Starts the fusion-result screen: loads the result devils' textures, the stage model and camera
    (by how many devils are fused), the message script and builds its sprites. */

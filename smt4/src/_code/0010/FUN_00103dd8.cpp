@@ -13,7 +13,6 @@ extern int renderCtxResetFrameState(int mode);
 extern void asdGxFlushCommandBuffer(void);
 extern int renderTargetClear(int a, int b);
 extern int renderCtxResetFrameStacks(RenderCtx *scene);
-void renderCtxSetStereoMode(RenderCtx *scene, u32 mode);
 
 /* Switches the title scene to phase 2 and refreshes it. */
 u32 FUN_00103dd8(void)

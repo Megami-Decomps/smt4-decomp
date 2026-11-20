@@ -1,24 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `linkListInsertByKind` (_code @ 0x45b96c, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc folds &list->end directly from owner (+40/+28) rather than from list (+4). */
+#include "common.h"
+
+struct LinkListNode {
+    LinkListNode *next;
+    LinkListNode *prev;
+};
+
+struct LinkListIter {
+    LinkListNode *node;
+    explicit LinkListIter(LinkListNode *n) : node(n) {}
+};
+
+struct LinkListImpl;
+extern "C" void nw_ut_internal_LinkListImpl_insert(LinkListImpl *list, LinkListIter pos, LinkListNode *node);
+
+struct LinkListImpl {
+    u32 count;
+    LinkListNode end;
+    void pushBack(LinkListNode *node)
+    {
+        nw_ut_internal_LinkListImpl_insert(this, LinkListIter(&end), node);
+    }
+};
+
+struct LinkListOwner {
+    u8 unk00[0x18];
+    LinkListImpl primary;   /* 0x18 */
+    LinkListImpl secondary; /* 0x24 */
+};
+
+struct LinkListItem {
+    u8 unk00[0x18];
+    u8 kind;                /* 0x18 */
+    u8 unk19[3];
+    LinkListNode node;      /* 0x1C */
+};
 
 extern "C" {
-
-int nw_ut_internal_LinkListImpl_insert(int, int, int);
-
-/* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
-
-
-void linkListInsertByKind(int param_1,int param_2)
-
+/* Inserts an item into the primary list when kind == 2, otherwise into the secondary list. */
+void linkListInsertByKind(LinkListOwner *owner, LinkListItem *item)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(char *)(param_2 + 0x18) != '\x02') {
-    nw_ut_internal_LinkListImpl_insert(param_1 + 0x24,param_1 + 0x28,param_2 + 0x1c);
-    return;
-  }
-  nw_ut_internal_LinkListImpl_insert(param_1 + 0x18,param_1 + 0x1c,param_2 + 0x1c);
-  return;
+    if (item->kind != 2) {
+        owner->secondary.pushBack(&item->node);
+    } else {
+        owner->primary.pushBack(&item->node);
+    }
 }
-
-} /* extern "C" */
+}

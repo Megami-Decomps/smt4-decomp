@@ -103,7 +103,7 @@ s32 dataTable22GetCount(void);
 
 
 void FUN_003c3360(DebugMenu *menu, DebugBattle *battle);
-void FUN_003c33c8(DebugMenu *menu, DebugBattle *battle);
+void btlDebugStatusFlagEditorApply(DebugMenu *menu, DebugBattle *battle);
 void FUN_003c39fc(DebugMenu *menu, DebugBattle *battle);
 void FUN_003c40ac(DebugMenu *menu, DebugBattle *battle);
 void FUN_003c4524(DebugMenu *menu, DebugBattle *battle);
@@ -530,7 +530,7 @@ u32 btlDebugMenuUpdate(DebugMenu *menu, DebugBattle *battle)
         menu->mask = 0;
         break;
     case 0xe:
-        FUN_003c33c8(menu, battle);
+        btlDebugStatusFlagEditorApply(menu, battle);
         if (padIsButtonPressed(0) == 0)
             return 0;
         next = DEBUG_STATE_DONE;

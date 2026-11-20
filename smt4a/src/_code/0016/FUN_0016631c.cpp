@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 extern const char DAT_0052fa28[];
@@ -47,7 +48,7 @@ void FUN_0016631c(MenuState *menu, const TextureTableEntryIV *layout)
     s32 left = (layout->placement->width - (labelWidth + numberWidth + 13 + signWidth)) / 2;
     const TextureTableEntryIV *labelMetric = asdTMTexTableEntryAt(8, 0x68);
     textDrawString((f32)(left + 13 + signWidth), (f32)labelMetric->y, 0.57f, 4,
-        0.0f, -1, caption->sprite.alpha, caption->label);
+        0.0f, -1, vec2GetSpeed(&caption->sprite), caption->label);
     const TextureTableEntryIV *numberMetric = asdTMTexTableEntryAt(8, 0x19D);
     FUN_00186008(left + labelWidth + 13 + signWidth, numberMetric->y, 0x79, caption->value);
     FUN_00185e84(caption->icon, left + signWidth, 8, 0x79, 0, 0);

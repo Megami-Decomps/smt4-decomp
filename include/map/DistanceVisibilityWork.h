@@ -28,6 +28,7 @@ struct DistanceVisibilityWork {
     DistanceVisibilityActor *actor;
     MapVector offset;
     s32 mode;
+    f32 speed;
 };
 typedef char DistanceVisibilityOffsets[
     offsetof(DistanceVisibilityActor, block.flags) == 0x28 &&
@@ -36,5 +37,8 @@ typedef char DistanceVisibilityOffsets[
     offsetof(DistanceVisibilityActor, tail.category) == 0x8b &&
     offsetof(DistanceVisibilityWork, actor) == 0xc &&
     offsetof(DistanceVisibilityWork, offset) == 0x10 &&
-    offsetof(DistanceVisibilityWork, mode) == 0x1c ? 1 : -1];
+    offsetof(DistanceVisibilityWork, mode) == 0x1c &&
+    offsetof(DistanceVisibilityWork, speed) == 0x20 ? 1 : -1];
+
+extern "C" void FUN_00481ba8(DistanceVisibilityWork *work);
 #endif

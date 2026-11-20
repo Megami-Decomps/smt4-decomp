@@ -1,4 +1,4 @@
-/* NON_MATCHING: typed input/touch results recovered; control-flow and register allocation differ. */
+/* NON_MATCHING: control flow matches; remaining are register choices (the held-frame increment in r1, the 2/0x14A constants in sl/fp swapped). */
 #include "status/StatusCamera.h"
 #include "ui/UiControl.h"
 #include "shard/S1ListPanel.h"
@@ -37,7 +37,7 @@ u32 FUN_00220d58(void *base)
         ++work->heldFrames;
     } else {
         if (uiPointerHitsRect(button->x, button->y, button->placement->width, button->placement->height, 3) &&
-            work->heldFrames - 1u < 15)
+            work->heldFrames - 1 <= 14) /* released after 1 to 15 frames */
             shortTap = true;
         work->heldFrames = 0;
     }
@@ -51,7 +51,10 @@ u32 FUN_00220d58(void *base)
         soundPlaySeUnpanned(0x100016E);
         result = 2;
     } else if (padIsButtonRepeat(10) || buttonHelpHasEnabledEntryForId(4)) {
-        work->showControls = work->showControls == 0;
+        if (work->showControls != 0)
+            work->showControls = 0;
+        else
+            work->showControls = 1;
         work->frame = 0;
         work->sprite = 0x14A;
         soundPlaySeUnpanned(0x100016D);

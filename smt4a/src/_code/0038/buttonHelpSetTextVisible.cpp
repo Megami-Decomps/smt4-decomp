@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void buttonHelpSetMode(u8 value)
+void buttonHelpSetTextVisible(u8 value)
 {
     g_buttonHelp.work->textVisible = value;
 }

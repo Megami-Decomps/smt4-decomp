@@ -55,7 +55,7 @@ int recordGetModeForId(...);
 int statusDownSwitchTab(...);
 int flaggedEntryGetValueA(...);
 int flaggedEntrySetValueA(...);
-int FUN_003423e8(...);
+int buttonHelpSetPanelMode(...);
 int uiScrollHandleActionsOrTouch(...);
 int uiStoreTextureEntryCenter(...);
 int statusDownInitializeSkillList(int);
@@ -135,7 +135,7 @@ extern int FUN_00334044(void);
 /* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
 /* Supplied declaration required: statusSkillsCommitOnDialogResult. */
 /* Supplied declaration required: screenShowMessage. */
-/* Supplied declaration required: FUN_003423e8. */
+/* Supplied declaration required: buttonHelpSetPanelMode. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: obj04Finish. */
 extern int asdSoundIsBankHandleLoaded(unsigned int);
@@ -387,7 +387,7 @@ LAB_00268c6c:
               }
               if ((((!temp_v16 || temp_v6 != 3) && (temp_v6 = gameGlobalsGetSceneState(), temp_v6 != 5)) &&
                   (temp_v6 = gameGlobalsGetSceneState(), temp_v6 != 6)) && (temp_v6 = gameGlobalsGetSceneState(), temp_v6 != 7)) {
-                FUN_003423e8(temp_v12);
+                buttonHelpSetPanelMode(temp_v12);
                 sysPlaySe(temp_v7);
               }
             }
@@ -397,7 +397,7 @@ LAB_00268c6c:
       else {
         temp_v6 = FUN_0037b564();
         if (temp_v6 == 2) {
-          FUN_003423e8(0);
+          buttonHelpSetPanelMode(0);
         }
         temp_v6 = g_statusDown;
         *(unsigned int *)(g_statusDown + 0x524) = 0;

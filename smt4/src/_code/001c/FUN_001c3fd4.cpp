@@ -8,6 +8,8 @@
 #include "status/StatusCamera.h"
 #include "font/ComWin/ComWin.h"
 #include "code/Code0017_Smt4.h"
+#include "shard/W6_W6Match6_PartyPanel.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -424,7 +426,7 @@ joined_r0x001c43a0:
     }
     break;
   case 3:
-    if (*(short *)(temp_v1 + 0x1d0) != 5) {
+    if (uiSpriteGetOperationMode((UiSpriteState *)(temp_v1 + 0x180)) != 5) {
       temp_v6 = uiSlidingSpriteAdvance((UiSpriteState *)(temp_v1 + 0x180),0);
     }
     else {
@@ -568,12 +570,12 @@ LAB_001c4748:
               partyPanelSetState(8,1);
               temp_v6 = 0;
               do {
-                *(unsigned char *)(*(int *)(temp_v1 + temp_v6 * 4 + 0x6c8) + 0x27) = 0;
+                partyWidgetSetTransitionPending(*(PartyPanelWidget **)(temp_v1 + temp_v6 * 4 + 0x6c8), 0);
                 temp_v6 = temp_v6 + 1;
               } while (temp_v6 < 4);
               temp_v6 = 0;
               do {
-                *(unsigned char *)(*(int *)(temp_v1 + temp_v6 * 4 + 0x6d8) + 0x27) = 0;
+                partyWidgetSetTransitionPending(*(PartyPanelWidget **)(temp_v1 + temp_v6 * 4 + 0x6d8), 0);
                 temp_v6 = temp_v6 + 1;
               } while (temp_v6 < 0x18);
               temp_v7 = 0x100016e;
@@ -839,13 +841,13 @@ LAB_001c4df0:
               }
               temp_v6 = 0;
               do {
-                *(unsigned char *)(*(int *)(temp_v1 + temp_v6 * 4 + 0x6c8) + 0x27) = 0;
+                partyWidgetSetTransitionPending(*(PartyPanelWidget **)(temp_v1 + temp_v6 * 4 + 0x6c8), 0);
                 temp_v6 = temp_v6 + 1;
               } while (temp_v6 < 4);
               temp_v6 = 0;
               do {
                 temp_v4 = temp_v1 + temp_v6 * 4;
-                *(unsigned char *)(*(int *)(temp_v4 + 0x6d8) + 0x27) = 0;
+                partyWidgetSetTransitionPending(*(PartyPanelWidget **)(temp_v4 + 0x6d8), 0);
                 pair40Set(*(unsigned int *)(temp_v4 + 0x6d8),0);
                 temp_v6 = temp_v6 + 1;
               } while (temp_v6 < 0x18);
@@ -1168,14 +1170,14 @@ LAB_001c659c:
           do {
             temp_v4 = temp_v1 + temp_v6 * 4;
             pair40Set(*(unsigned int *)(temp_v4 + 0x6c8),0);
-            *(unsigned char *)(*(int *)(temp_v4 + 0x6c8) + 0x27) = 0;
+            partyWidgetSetTransitionPending(*(PartyPanelWidget **)(temp_v4 + 0x6c8), 0);
             temp_v6 = temp_v6 + 1;
           } while (temp_v6 < 4);
           temp_v6 = 0;
           do {
             temp_v4 = temp_v1 + temp_v6 * 4;
             pair40Set(*(unsigned int *)(temp_v4 + 0x6d8),0);
-            *(unsigned char *)(*(int *)(temp_v4 + 0x6d8) + 0x27) = 0;
+            partyWidgetSetTransitionPending(*(PartyPanelWidget **)(temp_v4 + 0x6d8), 0);
             temp_v6 = temp_v6 + 1;
           } while (temp_v6 < 0x18);
           FUN_00298d28(0);
@@ -1196,7 +1198,7 @@ LAB_001c659c:
                   temp_v24 = temp_v1 + temp_v6;
                   if (*(char *)(temp_v24 + 0x678) != '\0') {
                     temp_v16 = temp_v1 + temp_v6 * 4;
-                    *(unsigned char *)(*(int *)(temp_v16 + 0x6c8) + 0x27) = 1;
+                    partyWidgetSetTransitionPending(*(PartyPanelWidget **)(temp_v16 + 0x6c8), 1);
                     temp_v0 = *(char *)(temp_v1 + 0x66c);
                     if (temp_v0 != '\n') {
                       if (temp_v0 != '\v') {
@@ -1440,7 +1442,7 @@ LAB_001c6598:
                   }
                   else {
                     temp_v16 = temp_v1 + temp_v4 * 4;
-                    *(unsigned char *)(*(int *)(temp_v16 + 0x6d8) + 0x27) = 1;
+                    partyWidgetSetTransitionPending(*(PartyPanelWidget **)(temp_v16 + 0x6d8), 1);
                     temp_v0 = *(char *)(temp_v1 + 0x66c);
                     if (temp_v0 != '\n') {
                       if (temp_v0 != '\v') {
@@ -1678,7 +1680,7 @@ LAB_001c6680:
                      (temp_v24 = gameGetUnitRecord(),
                      (unsigned int)*(unsigned short *)(temp_v24 + 0x46) ==
                      *(unsigned int *)(temp_v1 + *(int *)(temp_v1 + 0xb3c) * 4 + 0xb34))) {
-                    *(unsigned char *)(*(int *)(temp_v1 + temp_v6 * 4 + 0x6c8) + 0x27) = 0;
+                    partyWidgetSetTransitionPending(*(PartyPanelWidget **)(temp_v1 + temp_v6 * 4 + 0x6c8), 0);
                     break;
                   }
                   temp_v6 = temp_v6 + 1;
@@ -1690,7 +1692,7 @@ LAB_001c6680:
                      (temp_v4 = gameGetUnitRecord(),
                      (unsigned int)*(unsigned short *)(temp_v4 + 0x46) ==
                      *(unsigned int *)(temp_v1 + *(int *)(temp_v1 + 0xb3c) * 4 + 0xb34))) {
-                    *(unsigned char *)(*(int *)(temp_v1 + temp_v6 * 4 + 0x6d8) + 0x27) = 0;
+                    partyWidgetSetTransitionPending(*(PartyPanelWidget **)(temp_v1 + temp_v6 * 4 + 0x6d8), 0);
                     break;
                   }
                   temp_v6 = temp_v6 + 1;
@@ -1801,7 +1803,7 @@ LAB_001c6680:
       temp_v24 = temp_v1 + temp_v4 * 4;
       if ((*(char *)(*(int *)(temp_v24 + 0x6c8) + 0x20) == '\0') &&
          (*(char *)(*(int *)(temp_v24 + 0x6c8) + 0x23) == '\0')) {
-        *(unsigned char *)(*(int *)(temp_v24 + 0x6c8) + 0x27) = 1;
+        partyWidgetSetTransitionPending(*(PartyPanelWidget **)(temp_v24 + 0x6c8), 1);
       }
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 4);
@@ -1810,7 +1812,7 @@ LAB_001c6680:
       temp_v24 = temp_v1 + temp_v4 * 4;
       if ((*(char *)(*(int *)(temp_v24 + 0x6d8) + 0x20) == '\0') &&
          (*(char *)(*(int *)(temp_v24 + 0x6d8) + 0x23) == '\0')) {
-        *(unsigned char *)(*(int *)(temp_v24 + 0x6d8) + 0x27) = 1;
+        partyWidgetSetTransitionPending(*(PartyPanelWidget **)(temp_v24 + 0x6d8), 1);
       }
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 0x18);
@@ -2048,7 +2050,7 @@ joined_r0x001c7220:
                      (temp_v6 = gameGetUnitRecord(),
                      (unsigned int)*(unsigned short *)(temp_v6 + 0x46) ==
                      *(unsigned int *)(temp_v1 + *(int *)(temp_v1 + 0xb3c) * 4 + 0xb34))) {
-                    *(unsigned char *)(*(int *)(temp_v1 + temp_v24 * 4 + 0x6c8) + 0x27) = 0;
+                    partyWidgetSetTransitionPending(*(PartyPanelWidget **)(temp_v1 + temp_v24 * 4 + 0x6c8), 0);
                     break;
                   }
                   temp_v24 = temp_v24 + 1;
@@ -2060,7 +2062,7 @@ joined_r0x001c7220:
                      (temp_v6 = gameGetUnitRecord(),
                      (unsigned int)*(unsigned short *)(temp_v6 + 0x46) ==
                      *(unsigned int *)(temp_v1 + *(int *)(temp_v1 + 0xb3c) * 4 + 0xb34))) {
-                    *(unsigned char *)(*(int *)(temp_v1 + temp_v24 * 4 + 0x6d8) + 0x27) = 0;
+                    partyWidgetSetTransitionPending(*(PartyPanelWidget **)(temp_v1 + temp_v24 * 4 + 0x6d8), 0);
                     break;
                   }
                   temp_v24 = temp_v24 + 1;
@@ -2112,7 +2114,7 @@ joined_r0x001c7220:
                (temp_v24 = gameGetUnitRecord(),
                (unsigned int)*(unsigned short *)(temp_v24 + 0x46) ==
                *(unsigned int *)(temp_v1 + *(int *)(temp_v1 + 0xb3c) * 4 + 0xb34))) {
-              *(unsigned char *)(*(int *)(temp_v1 + temp_v6 * 4 + 0x6c8) + 0x27) = 0;
+              partyWidgetSetTransitionPending(*(PartyPanelWidget **)(temp_v1 + temp_v6 * 4 + 0x6c8), 0);
               break;
             }
             temp_v6 = temp_v6 + 1;
@@ -2124,7 +2126,7 @@ joined_r0x001c7220:
                (temp_v4 = gameGetUnitRecord(),
                (unsigned int)*(unsigned short *)(temp_v4 + 0x46) ==
                *(unsigned int *)(temp_v1 + *(int *)(temp_v1 + 0xb3c) * 4 + 0xb34))) {
-              *(unsigned char *)(*(int *)(temp_v1 + temp_v6 * 4 + 0x6d8) + 0x27) = 0;
+              partyWidgetSetTransitionPending(*(PartyPanelWidget **)(temp_v1 + temp_v6 * 4 + 0x6d8), 0);
               break;
             }
             temp_v6 = temp_v6 + 1;
@@ -2258,7 +2260,7 @@ LAB_001c7990:
         } while (temp_v6 < 0x18);
       }
       else if (0 < *(int *)(temp_v1 + 0x670)) {
-        *(unsigned char *)(*(int *)(temp_v1 + temp_v6 * 4 + 0x6c8) + 0x27) = 1;
+        partyWidgetSetTransitionPending(*(PartyPanelWidget **)(temp_v1 + temp_v6 * 4 + 0x6c8), 1);
       }
     }
     reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v1 + 0x7fc), 0x70));
@@ -2356,7 +2358,7 @@ LAB_001c7c50:
         do {
           temp_v4 = temp_v1 + temp_v6 * 4;
           *(unsigned char *)(*(int *)(temp_v4 + 0x6c8) + 0x25) = 0;
-          *(unsigned char *)(*(int *)(temp_v4 + 0x6c8) + 0x27) = 0;
+          partyWidgetSetTransitionPending(*(PartyPanelWidget **)(temp_v4 + 0x6c8), 0);
           *(unsigned char *)(*(int *)(temp_v4 + 0x6c8) + 0x26) = 0;
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < 4);
@@ -2364,7 +2366,7 @@ LAB_001c7c50:
         do {
           temp_v4 = temp_v1 + temp_v6 * 4;
           *(unsigned char *)(*(int *)(temp_v4 + 0x6d8) + 0x25) = 0;
-          *(unsigned char *)(*(int *)(temp_v4 + 0x6d8) + 0x27) = 0;
+          partyWidgetSetTransitionPending(*(PartyPanelWidget **)(temp_v4 + 0x6d8), 0);
           *(unsigned char *)(*(int *)(temp_v4 + 0x6d8) + 0x26) = 0;
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < 0x18);

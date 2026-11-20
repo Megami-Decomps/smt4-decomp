@@ -9,6 +9,8 @@ extern "C" {
 extern RenderCtx *g_titleScene;
 /* Returns context->stereoMode (a getter armlink inlines at every call; Apocalypse's is in camp/RenderCtxA.h). */
 s32 renderCtxGetStereoMode(RenderCtx *context);
+/* Sets context->stereoMode (likewise inlined). */
+void renderCtxSetStereoMode(RenderCtx *context, u32 mode);
 }
 
 #endif

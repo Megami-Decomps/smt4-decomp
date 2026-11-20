@@ -52,7 +52,7 @@ extern int recordGetModeForId(unsigned int);
 extern int compendiumEntryIsRegistered(unsigned short);
 
 
-void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsigned int param_5)
+void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsigned int param_5,float param_6)
 
 {
 /* irregular: irregular input(s): in_fpscr; 14 native warning(s); review required */

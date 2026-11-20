@@ -81,7 +81,7 @@ int mapIfReleasePanel(...);
 int mapIfOverlayRelease(...);
 int mapIfReleaseSlot2(...);
 int mapIfReleaseSlot3(...);
-int FUN_00325ba4(...);
+int mapObjFindNearestPointByCategory(...);
 int mapIfReleaseRequestObject(...);
 int FUN_00352308(...);
 int mapIfReleaseSlot1(...);
@@ -372,7 +372,7 @@ extern int mapJobIsDone(void);
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_003250ac. */
 /* Supplied declaration required: FUN_00325998. */
-/* Supplied declaration required: FUN_00325ba4. */
+/* Supplied declaration required: mapObjFindNearestPointByCategory. */
 /* Supplied declaration required: mapTrapEnable. */
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: FUN_00330108. */
@@ -3127,7 +3127,7 @@ LAB_00366704:
                 iStack_38 = piVar18[0xc];
                 uStack_4c = romwright_piece_4_4(&fStack_34,(unsigned int)uStack_4c);
                 uStack_44 = romwright_piece_4_4(piVar18[10],0xffffffff);
-                FUN_00325ba4(2,10,0x66,(int)&uStack_44 + 4);
+                mapObjFindNearestPointByCategory(2,10,0x66,(int)&uStack_44 + 4);
                 piVar18 = g_lmapScene;
                 fStack_34 = fStack_34 + temp_v18;
                 if (fStack_34 < temp_v19) {
@@ -4003,7 +4003,7 @@ LAB_0033eae8:
                 iStack_38 = piVar18[0xc];
                 uStack_4c = romwright_piece_4_4(&fStack_34,(unsigned int)uStack_4c);
                 uStack_44 = romwright_piece_4_4(piVar18[10],1);
-                FUN_00325ba4(2,10,0x66,(int)&uStack_44 + 4);
+                mapObjFindNearestPointByCategory(2,10,0x66,(int)&uStack_44 + 4);
                 piVar18 = g_lmapScene;
                 temp_v35 = 180.0f;
                 fStack_34 = fStack_34 + 180.0f;

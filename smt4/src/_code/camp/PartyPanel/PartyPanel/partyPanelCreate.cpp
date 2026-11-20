@@ -70,9 +70,6 @@ void FUN_0026b9bc(void);
 void gridNavigationConfigure(GridNavigation *grid, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys);
 /* One-instruction setters armlink inlined at every call (no copy is left in the image). */
 void uniteCtrlSetIncludeSameRace(UniteCtrl *unite, u8 include);
-void partyWidgetSetEmpty(PartyPanelWidget *widget, u8 empty);
-void partyWidgetSetIsCharacter(PartyPanelWidget *widget, u8 isCharacter);
-void partyWidgetSetUnitId(PartyPanelWidget *widget, s32 unitId);
 
 /* Creates the party panel: its work, jobs and files, the fusion control, the 28 slot widgets, the
  * sprites and the cursor grids sized to the demon stock. `showIcons` also shows the status icons. */

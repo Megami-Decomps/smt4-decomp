@@ -5,7 +5,6 @@
 
 extern "C" {
 void uiStoreTextureEntryCenter(UiSpriteState *sprite, s32 mode, s32 id);
-void spriteSetVisible(UiSpriteState *sprite, u8 visible);
 
 /* Advances the three-sprite banner: builds the sprites, plays them until the first one finishes, then ends. */
 s32 aocBoardUpdateAnimation(u32 job)

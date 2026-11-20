@@ -96,9 +96,6 @@ void FUN_00230ac0(s32 mode, s32 imageFrame, u32 flags, s32 resetAuxiliary);
 void gridNavigationConfigure(GridNavigation *grid, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys);
 /* One-instruction setters armlink inlined at every call (no copy is left in the image). */
 void fusionRaceSelectionSetIncludeSameRace(FusionRaceSelection *selection, u8 include);
-void partyWidgetSetEmpty(PartyPanelWidget *widget, u8 empty);
-void partyWidgetSetIsCharacter(PartyPanelWidget *widget, u8 isCharacter);
-void partyWidgetSetUnitId(PartyPanelWidget *widget, s32 unitId);
 
 /* Creates the party panel: its work, jobs and files, the fusion race selection, the 28 slot widgets,
  * the sprites and the cursor grids sized to the demon stock. `showIcons` also shows the status icons. */

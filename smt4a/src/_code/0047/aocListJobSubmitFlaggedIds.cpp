@@ -1,4 +1,3 @@
-/* NON_MATCHING: restored uninitialised nothrow tag; retail struct-return temporaries reserve72 bytes versus56 here, and item ID read bypasses its accessor. */
 #include "addon/aocMain.h"
 #include "classes/WindowStatus.h"
 #include "AsdSDK/AsdDebugHooks.h"
@@ -37,10 +36,11 @@ WindowStatusResult FUN_005003b4(void *handle, void *buffer, u32 count);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
 u8 objGetFlagBit0(AocListItem *item);
 int jyoucyuGetTableEntry(s32 index);
+u16 contentIndexGetValue(const u16 *index);
 void asdOperatorDeleteB(void *ptr);
 
 // Build the list of flagged item ids of the job's content entry and hand it to the file service.
-void FUN_004733cc(AocListJob *job)
+void aocListJobSubmitFlaggedIds(AocListJob *job)
 {
     AocMain *aoc = g_aocMain;
     job->result = sdkCreateEncodedResourceDescriptor((u8 *)aoc + 0x20, (u8 *)aoc + 0x18);
@@ -66,7 +66,7 @@ void FUN_004733cc(AocListJob *job)
                 return;
             }
             if (objGetFlagBit0(&item)) {
-                ids[kept++] = item.id;
+                ids[kept++] = contentIndexGetValue(&item.id);
             }
         }
         job->result = FUN_005003b4((u8 *)aoc + 0x20, ids, kept);

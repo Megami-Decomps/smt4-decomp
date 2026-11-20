@@ -57,7 +57,7 @@ extern "C" {
 u32 FUN_00269694(ParticleDefinition *definition, const void *gradient);
 void matrixInitializeWithScaleAndOffset(void *matrix, const void *scale, const void *offset);
 void matrixApplyByMode(void *transform, const void *matrix, s32 flag);
-void FUN_00256a50(ParticleSprite *sprite, u32 frame);
+void renderSubmissionDrawPacket(ParticleSprite *sprite, u32 frame);
 
 /* Splits an ARGB word into floats scaled by `scale`. */
 static __inline Color4 colorUnpack(u32 argb, f32 scale)
@@ -105,7 +105,7 @@ void FUN_00305004(ParticleEffect *effect)
             sprite->flags |= PARTICLE_FLAG_VISIBLE;
         else
             sprite->flags &= ~PARTICLE_FLAG_VISIBLE;
-        FUN_00256a50(sprite, definition->frame & 0xFFFF);
+        renderSubmissionDrawPacket(sprite, definition->frame & 0xFFFF);
     }
 }
 

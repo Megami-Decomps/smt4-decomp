@@ -10,7 +10,7 @@ void ifTouchDecrementTimer(void);
 void uiSpriteSetScaleKeyframe(UiSpriteState *part, s32 arg1, s32 arg2);
 
 /* Hide the button help panel: hide its buttons, drop (or just count down) its touch regions, close its arrows. */
-void FUN_00289c98(s32 clearTouches)
+void buttonHelpClosePanel(s32 clearTouches)
 {
     ButtonHelpWork *panel = g_buttonHelp.work;
     for (s32 i = 0; i < 6; ++i) {

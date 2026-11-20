@@ -95,7 +95,6 @@ void FUN_001fc348(UniteRenderTarget *target);
 void statusBustUpPortraitAcquire(s32 id, u32 kind);
 
 void uiSpriteSetScaleKeyframe(UniteSprite *sprite, s32 a, s32 b);
-void spriteSetVisible(UniteSprite *sprite, u8 visible);
 void uiStoreTextureEntryCenter(UniteSprite *sprite, s32 kind, s32 count);
 void sysPlaySe(s32 preset);
 
@@ -196,7 +195,7 @@ void uniteResultInitialize(void)
     uiSpriteSetScaleKeyframe(&work->panel, 0, 0);
     spriteSetLayer(reinterpret_cast<UiSpriteState *>(&work->panel), 2);
     uiStoreTextureEntryCenter(&work->panel, 0x1a, 0x21c);
-    spriteSetVisible(&work->panel, 1);
+    spriteSetVisible(reinterpret_cast<UiSpriteState *>(&work->panel), 1);
     uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(&work->cursor), 0x1a, 0, &work->resources, 1, 1.0f);
     uiSpriteSelectAnim(reinterpret_cast<UiSpriteState *>(&work->cursor), 2);
     sysPlaySe(99);

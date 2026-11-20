@@ -1,6 +1,7 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b358c` (_code @ 0x2b358c, 0x5cc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: the colour-scale call, attribute channel pairs, and view-matrix extent are recovered;
+ * the per-vertex transform still has an incomplete stack layout and call arguments. */
 #include "romwright_types.h"
+#include "gfx/RenderColorScale.h"
 
 extern "C" {
 
@@ -15,8 +16,6 @@ int renderGetCameraViewMatrix(...);
 int mtx44TransformPosition(...);
 int FUN_002371b0(void);
 int FUN_002b3538(...);
-int FUN_00409c60(...);
-int VectorUnsignedToFloat(unsigned int, int);
 int nn_math_ARMv6_MTX44TransposeAsm(...);
 
 typedef struct fn_002b358c_arg0 fn_002b358c_arg0;
@@ -131,7 +130,6 @@ typedef struct {
 
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
@@ -143,14 +141,13 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: mtx44TransformPosition. */
 /* Supplied declaration required: FUN_002371b0. */
 /* Supplied declaration required: FUN_002b3538. */
-/* Supplied declaration required: FUN_00409c60. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44TransposeAsm. */
 
 
 void FUN_002b358c(fn_002b358c_arg0 *param_1)
 
 {
-/* irregular: irregular input(s): in_fpscr; 14 native warning(s); review required */
+/* The per-vertex work below still uses recovered temporaries. */
   float *pfVar1;
   unsigned int *puVar2;
   fn_002b358c_arg0_p18 *pfVar3;
@@ -159,16 +156,13 @@ void FUN_002b358c(fn_002b358c_arg0 *param_1)
   float *pfVar6;
   float *pfVar7;
   unsigned int *puVar8;
-  unsigned int in_fpscr;
   float temp_v1;
   float temp_v2;
   float temp_v3;
-  unsigned long long temp_v4;
   float temp_v5;
-  unsigned long long temp_v6;
   int temp_v7;
-  float *temp_v8;
-  int temp_v9;
+  /* Each attribute lookup returns a data address and its stride in bytes. */
+  u32 positionChannel[2];
   int temp_v10;
   int temp_v11;
   float temp_v12;
@@ -183,20 +177,11 @@ void FUN_002b358c(fn_002b358c_arg0 *param_1)
   float temp_v20;
   float temp_v21;
   float temp_v22;
-  unsigned char temp_v23 [12];
-  unsigned int temp_v24;
-  unsigned int temp_v25;
-  unsigned int temp_v26;
-  unsigned int temp_v27;
-  unsigned int temp_v28;
-  unsigned int temp_v29;
-  unsigned int temp_v30;
+  f32 viewMatrix[16];
   unsigned int temp_v31;
   int temp_v32;
-  unsigned int *temp_v33;
-  int iStack_134;
-  float *temp_v34;
-  int temp_v35;
+  u32 uvChannel[2];
+  u32 sizeChannel[2];
   float temp_v36;
   float temp_v37;
   float temp_v38;
@@ -226,10 +211,8 @@ void FUN_002b358c(fn_002b358c_arg0 *param_1)
   float temp_v61;
   float temp_v62;
   unsigned char temp_v63 [64];
-  unsigned int *temp_v64;
-  int iStack_64;
-  int temp_v65;
-  int temp_v66;
+  u32 colorChannel[2];
+  u32 extraChannel[2];
   fn_002b358c_arg0 *temp_v67;
   int temp_v68;
   unsigned int *temp_v69;
@@ -242,34 +225,32 @@ void FUN_002b358c(fn_002b358c_arg0 *param_1)
     temp_v7 = param_1->field_0x60;
   }
   if ((param_1->field_0x14 & 1) != 0) {
-    FUN_002b3538(param_1,1,&temp_v8);
+    FUN_002b3538(param_1,1,positionChannel);
   }
   if ((param_1->field_0x14 & 2) != 0) {
-    FUN_002b3538(param_1,2,&temp_v64);
+    FUN_002b3538(param_1,2,colorChannel);
   }
   if ((param_1->field_0x14 & 4) != 0) {
-    FUN_002b3538(param_1,4,&temp_v34);
+    FUN_002b3538(param_1,4,sizeChannel);
   }
   if ((param_1->field_0x14 & 0x20) != 0) {
-    FUN_002b3538(param_1,0x20,&temp_v65);
+    FUN_002b3538(param_1,0x20,extraChannel);
   }
   if ((param_1->field_0x14 & 0x80) != 0) {
-    FUN_002b3538(param_1,0x80,&temp_v33);
+    FUN_002b3538(param_1,0x80,uvChannel);
   }
   if ((param_1->field_0x14 & 8) != 0) {
-    FUN_002b3538(param_1,8,&temp_v33);
+    FUN_002b3538(param_1,8,uvChannel);
   }
   else if ((param_1->field_0x14 & 0x80000) != 0) {
-    temp_v33 = (unsigned int *)&param_1->field_0x40;
-    iStack_134 = 0;
+    uvChannel[0] = (u32)&param_1->field_0x40;
+    uvChannel[1] = 0;
   }
   renderCtxSelectTexture(g_renderCtx,*(unsigned int *)&param_1[1].field_0x8);
-  VectorUnsignedToFloat((unsigned int)param_1->field_0x67,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorUnsignedToFloat((unsigned int)param_1->field_0x66,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorUnsignedToFloat((unsigned int)param_1->field_0x65,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorUnsignedToFloat((unsigned int)param_1->field_0x64,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00409c60(g_renderCtx,(unsigned int)param_1->field_0x66,(unsigned int)param_1->field_0x65,
-               (unsigned int)param_1->field_0x64);
+  const f32 byteToUnit = 1.0f / 255.0f;
+  FUN_00409c60((RenderCtxA *)g_renderCtx,
+               param_1->field_0x64 * byteToUnit, param_1->field_0x65 * byteToUnit,
+               param_1->field_0x66 * byteToUnit, param_1->field_0x67 * byteToUnit);
   temp_v67 = (fn_002b358c_arg0 *)0x0;
   pfVar3 = param_1->field_0x18;
   temp_v68 = pfVar3->field_0x30;
@@ -278,31 +259,29 @@ void FUN_002b358c(fn_002b358c_arg0 *param_1)
   if ((param_1->field_0xa8 & 2) != 0) {
     temp_v67 = param_1 + 1;
   }
-  renderGetCameraViewMatrix(temp_v23);
-  temp_v4 = 0x3f800000;
-  temp_v24 = 0;
-  temp_v25 = 0;
-  temp_v26 = 0;
-  temp_v27 = 0;
-  temp_v28 = 0;
-  temp_v29 = 0;
-  temp_v30 = 0x3f800000;
-  nn_math_ARMv6_MTX44TransposeAsm(temp_v23);
+  renderGetCameraViewMatrix(viewMatrix);
+  viewMatrix[3] = 0.0f;
+  viewMatrix[7] = 0.0f;
+  viewMatrix[11] = 0.0f;
+  viewMatrix[12] = 0.0f;
+  viewMatrix[13] = 0.0f;
+  viewMatrix[14] = 0.0f;
+  viewMatrix[15] = 1.0f;
+  nn_math_ARMv6_MTX44TransposeAsm(viewMatrix, viewMatrix);
   temp_v10 = 0;
   if (0 < temp_v7) {
     temp_v3 = -1.0f;
-    temp_v6 = 0x3f000000;
     do {
-      puVar2 = temp_v33;
-      pfVar1 = temp_v8;
-      temp_v5 = (float)((unsigned long long)temp_v4 >> 0x20);
+      puVar2 = (u32 *)uvChannel[0];
+      pfVar1 = (float *)positionChannel[0];
+      temp_v5 = 0.0f;
       pfVar7 = (float *)(temp_v68 + temp_v10 * 0x30);
       puVar8 = (unsigned int *)(temp_v11 + temp_v10 * 0x10);
       temp_v69 = (unsigned int *)(temp_v32 + temp_v10 * 0x20);
-      temp_v0 = *temp_v64;
-      temp_v1 = *temp_v34 * (float)temp_v6;
-      temp_v2 = temp_v34[1] * (float)temp_v6;
-      temp_v31 = (unsigned int)*(unsigned char *)((int)temp_v64 + 3) |
+      temp_v0 = *(u32 *)colorChannel[0];
+      temp_v1 = *(float *)sizeChannel[0] * 0.5f;
+      temp_v2 = ((float *)sizeChannel[0])[1] * 0.5f;
+      temp_v31 = (unsigned int)*(unsigned char *)(colorChannel[0] + 3) |
                   (temp_v0 << 0x18) | (((temp_v0 >> 8) & 0xff) << 0x10) |
                   (((temp_v0 >> 0x10) & 0xff) << 8);
       temp_v18 = temp_v5;
@@ -324,7 +303,7 @@ void FUN_002b358c(fn_002b358c_arg0 *param_1)
       temp_v21 = temp_v13;
       temp_v22 = temp_v5;
       mathSinCos(&temp_v70,temp_v71);
-      temp_v62 = (float)temp_v4;
+      temp_v62 = 1.0f;
       temp_v1 = temp_v62 - temp_v71[0];
       temp_v48 = temp_v71[0] + temp_v1 * temp_v5;
       temp_v57 = temp_v71[0] + temp_v1 * temp_v62;
@@ -343,7 +322,7 @@ void FUN_002b358c(fn_002b358c_arg0 *param_1)
       temp_v59 = temp_v5;
       temp_v60 = temp_v5;
       temp_v61 = temp_v5;
-      nn_math_ARMv6_MTX44MultAsm(temp_v63,temp_v23,&temp_v48);
+      nn_math_ARMv6_MTX44MultAsm(temp_v63,viewMatrix,&temp_v48);
       pfVar5 = &temp_v36;
       pfVar6 = &temp_v12;
       temp_v0 = 0;
@@ -384,11 +363,11 @@ void FUN_002b358c(fn_002b358c_arg0 *param_1)
       FUN_00184c4c(puVar8[3]);
       FUN_002371b0();
       temp_v10 = temp_v10 + 1;
-      temp_v8 = (float *)((int)temp_v8 + temp_v9);
-      temp_v64 = (unsigned int *)((int)temp_v64 + iStack_64);
-      temp_v34 = (float *)(temp_v35 + (int)temp_v34);
-      temp_v65 = temp_v66 + temp_v65;
-      temp_v33 = (unsigned int *)((int)temp_v33 + iStack_134);
+      positionChannel[0] += positionChannel[1];
+      colorChannel[0] += colorChannel[1];
+      sizeChannel[0] += sizeChannel[1];
+      extraChannel[0] += extraChannel[1];
+      uvChannel[0] += uvChannel[1];
     } while (temp_v10 < temp_v7);
   }
   renderCtxResetColorScale(g_renderCtx);

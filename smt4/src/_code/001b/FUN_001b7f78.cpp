@@ -518,7 +518,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapInterfaceSetStateTwo. */
 /* Supplied declaration required: FUN_00273840. */
 /* Supplied declaration required: saveSetNavigationPosition. */
-extern int FUN_0027398c(int);
+extern int itemEventStartupUpdate(int);
 /* Supplied declaration required: mapMainEnterScene. */
 /* Supplied declaration required: mapUpdatePendingAvailabilityFlags. */
 /* Supplied declaration required: mapUpdateLocationAvailability. */
@@ -3125,7 +3125,7 @@ LAB_001bb1d4:
       puVar14[10] = puVar14[10] + 1;
       return 0;
     }
-    temp_v9 = FUN_0027398c(g_aocMain + 0xa8);
+    temp_v9 = itemEventStartupUpdate(g_aocMain + 0xa8);
     if (temp_v9 != 0) {
       helpResourcesRelease(g_aocMain + 0xa8);
       if ((int)DAT_0049fd14 >= 0) {

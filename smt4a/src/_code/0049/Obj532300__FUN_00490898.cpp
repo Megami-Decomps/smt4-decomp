@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail computes the scene address before the position call and keeps it in r4, copies the position pair with two ldr/str pairs (the copy is overwritten right after), loads 1.0f separately from the sprite fade value and loads g_gameState once up front; this build copies with ldrd/strd, shares the 1.0f in s16 and reloads g_gameState. */
+/* NON_MATCHING: only scheduling of the g_gameState base load before the flag stores differs
+ * (declaring GameStateA::alternateNaviMap s8 matches here, but breaks 4 IDENTICAL u8 users). */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "game/GameStateA.h"
 #include "map/NavigationFadeWork.h"
@@ -11,8 +12,8 @@ void FUN_002d22c0(s32 value);
 void lmapEnableSceneState(void);
 void dialogClose(s32 immediate);
 
-// Navigation fade step: the first call plays the feedback sound; the second fades the sprites in
-// and, when the last one finished, resets the cursor and moves on.
+/* Navigation fade step: the first call plays the feedback sound; the second fades the sprites in
+ * and, when the last one finished, resets the cursor and moves on. */
 void _ZN9Obj53230012FUN_00490898Ev(NavigationFadeWork *work)
 {
     switch (work->interpolation.progress.substep) {
@@ -29,10 +30,10 @@ void _ZN9Obj53230012FUN_00490898Ev(NavigationFadeWork *work)
         if (uiSpriteGetCompletionState(&work->sprites[5]) != 0) {
             if (g_gameState.paused) {
                 NavigationPoint point = *sub68OwnerGetBlock60(work->scene);
-                point.x = 1.0f;
-                point.y = 1.0f;
+                point.x = 0.0f;
+                point.y = 0.0f;
                 naviMainSetValuePair(work->scene, &point);
-                *(u8 *)&work->interpolation.unk02C[0x38] = (u8)work->cursorMode;
+                work->interpolation.drag.selection = (s8)work->cursorMode;
                 work->flag7B90 = 1;
                 work->flag7B91 = 1;
                 if (g_gameState.alternateNaviMap) {

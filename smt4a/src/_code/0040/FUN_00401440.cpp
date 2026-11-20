@@ -1,7 +1,22 @@
-/* NON_MATCHING: retail's zero-vector additions are omitted; VFP constants and position loads differ. */
+/* NON_MATCHING: vldr+add vs add+vldmia for position x inside inlined updateNodePositions. */
 #include "Model/ModelActivationGroup.h"
 #include "Model/MoriModelManager.h"
 #include "gfx/ControllerModel.h"
+
+/* Matches real sibling btlStageUpdateNodePositions in 0040/btlStageUpdateNodePositions.cpp. */
+static __inline void updateNodePositions(ModelActivationGroup *group, ModelActivationPosition pos)
+{
+    for (s32 index = 0; index < 3; ++index) {
+        MoriModelContent *node = group->models[index];
+        if (node != NULL) {
+            const ModelActivationPosition *offset = &group->positions[index];
+            controllerSetPositionXyz(node->body,
+                offset->x + pos.x,
+                offset->y + pos.y,
+                offset->z + pos.z);
+        }
+    }
+}
 
 extern "C" {
 
@@ -27,14 +42,11 @@ u32 FUN_00401440(ModelActivationGroup *group)
     group->scale.x = 1.0f;
     group->scale.y = 1.0f;
     group->scale.z = 1.0f;
-    for (s32 index = 0; index < 3; ++index) {
-        if (group->models[index] != NULL) {
-            controllerSetPositionXyz(group->models[index]->body,
-                group->positions[index].x,
-                group->positions[index].y,
-                group->positions[index].z);
-        }
-    }
+    ModelActivationPosition zero;
+    zero.x = 0.0f;
+    zero.y = 0.0f;
+    zero.z = 0.0f;
+    updateNodePositions(group, zero);
     return 1;
 }
 }

@@ -8,7 +8,7 @@ extern "C" {
 s32 buttonHelpGetPanelMode(void);
 s32 buttonHelpGetPanelState(void);
 const char *screenGetEntry(u32);
-void buttonHelpSetMode(s32);
+void buttonHelpSetTextVisible(s32);
 void sysPlaySe(s32);
 extern Obj7ECRef g_useCounter;
 
@@ -52,7 +52,7 @@ void useCounterStart(void)
             const char *second = screenGetEntry(1);
             sprintf(work->savedText, "%s\n%s", first, second);
         }
-        buttonHelpSetMode(0);
+        buttonHelpSetTextVisible(0);
     }
     sysPlaySe(5);
 }

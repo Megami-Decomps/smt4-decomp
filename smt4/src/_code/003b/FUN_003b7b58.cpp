@@ -4,8 +4,10 @@
 #include "romwright_types.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "camp/PartyPanel/PartyPanel.h"
+#include "ui/UiSpriteState.h"
 
 extern "C" {
+void spriteSetLayer(UiSpriteState *sprite, u16 layer); // declcheck: local (romwright unit: ui/UiSpriteApi.h conflicts with its variadic sprite prototypes)
 
 int statusAcquireSharedResources(void);
 int buttonHelpCreate(void);
@@ -162,7 +164,7 @@ void FUN_003b7b58(int param_1)
     *(unsigned char *)(param_1 + temp_v1 + 0xd517) = 0;
     temp_v2 = param_1 + temp_v1 * 0x8c;
     uiSpriteStateInitFromSource(temp_v2 + 0x1fd8,0x28,0x1a,param_1,0xc9);
-    *(unsigned short *)(temp_v2 + 0x2012) = 2;
+    spriteSetLayer((UiSpriteState *)(temp_v2 + 0x1fd8), 2);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x19);
   temp_v1 = 0;
@@ -183,7 +185,7 @@ void FUN_003b7b58(int param_1)
     spriteStartAnimationByIndex(temp_v2 + 0x2d84,8);
     uiSpriteStateInitFromSource(temp_v2 + 0x3158,0x28,0x119,param_1,0xf1);
     spriteStartAnimationByIndex(temp_v2 + 0x3158,9);
-    *(unsigned short *)(temp_v2 + 0x3192) = 2;
+    spriteSetLayer((UiSpriteState *)(temp_v2 + 0x3158), 2);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 6);
   *(unsigned int *)(param_1 + 0x3548) = 0;

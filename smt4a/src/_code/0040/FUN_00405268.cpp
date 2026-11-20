@@ -98,7 +98,7 @@ extern "C" u32 FUN_00405268(ContentListState* list)
                 list->firstFlag = 0;
                 list->secondFlag = 0;
             } else {
-                s16 frame = list->thirdSprite.positionKey == 7 ? 4 : 5;
+                s16 frame = uiSpriteGetOperationMode(&list->thirdSprite) == 7 ? 4 : 5;
                 uiSpriteSetKeyframe(&list->thirdSprite, frame, 0);
                 uiSpriteSetImageKeyframe(&list->thirdSprite, 0, 0);
                 if (++list->animationPhase > 1) {

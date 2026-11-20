@@ -1,5 +1,6 @@
-/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 69 diff lines remain, scheduling/register allocation only. */
+/* NON_MATCHING: the final render-stack pop loads its context into r4 instead of retail's r0. */
 #include "gfx/TiledIndexMesh.h"
+#include "gfx/DynamicMesh.h"
 #include "camp/RenderCtx.h"
 #include "shard/W5_W5Match2_PlainData.h"
 #include "camp/RenderCtxTitle.h"
@@ -26,7 +27,6 @@ extern "C" {
 void camSetMatrixB(RenderCtx *context, const Matrix44 *matrix);
 void renderCtxSelectBlendPreset(u32 mode);
 s32 renderCtxPackPassFlags(u32 kind, u32 value);
-void FUN_00347198(TiledIndexMesh *mesh);
 void vertexAttributeUploadStreams(TiledIndexMesh *mesh);
 void FUN_00343778(RenderCtx *context, const TiledMeshRowDrawState *row);
 void FUN_0023b724(TiledIndexMesh *mesh, s32 mode, s32 firstIndex, s32 indexCount);
@@ -48,8 +48,8 @@ void tiledMeshDraw(TiledMeshDrawWork *work, u32 mode)
     } else {
         renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     }
-    if (work->dirty != 0) {
-        FUN_00347198(work->mesh);
+    if (u32 dirtyMask = work->dirty) {
+        dynamicMeshFlushAttributes((DynamicMesh *)work->mesh, dirtyMask);
         work->dirty = 0;
     }
     vertexAttributeUploadStreams(work->mesh);

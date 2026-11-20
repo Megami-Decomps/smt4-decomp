@@ -2,6 +2,7 @@
 #include "code/Code0029.h"
 #include "code/Code0029_VariantA.h"
 #include "camp/Unite/UniteWork.h"
+#include "code/Code0029_Smt4.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxTitle.h"
 #include "shard/TextureDrawCall.h"

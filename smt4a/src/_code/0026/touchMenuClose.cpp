@@ -7,7 +7,7 @@ extern Obj7ECRef g_useCounter;
 void ifTouchRegionRemove(void);
 void buttonHelpSetText(void *target, u32 color);
 void buttonHelpSetHelpState(s32 mode);
-void buttonHelpSetMode(s32 mode);
+void buttonHelpSetTextVisible(s32 mode);
 
 /* The part of the object from 0x700: screen mode, touch regions and the pending fade. */
 struct Obj7ECPanel {
@@ -51,7 +51,7 @@ void touchMenuClose(void)
         }
         object->panel.fadePending = 0;
     } else {
-        buttonHelpSetMode(0);
+        buttonHelpSetTextVisible(0);
     }
 }
 

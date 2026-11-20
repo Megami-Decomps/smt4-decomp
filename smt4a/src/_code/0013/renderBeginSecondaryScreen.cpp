@@ -7,7 +7,6 @@ extern void FUN_00144ab4(s32 target);
 extern void asdGxFlushCommandBuffer(void);
 extern void renderTargetClear(s32 a, s32 b);
 extern void renderCtxResetFrameState(RenderCtxA *ctx);
-void renderCtxSetStereoMode(RenderCtxA *ctx, u32 mode);
 
 /* Script command: prepares the secondary screen (target 2) and starts rendering it. */
 u32 renderBeginSecondaryScreen(void)

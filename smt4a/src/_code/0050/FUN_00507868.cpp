@@ -37,22 +37,27 @@ typedef struct RangeOwner {
     /* 0x4C */ u32 capacity;
 } RangeOwner;
 
-void FUN_0045b4d0(u32 allocation[3], BufferRange *range, u32 capacity, s32 alignment);
+/* Allocation result returned by value from FUN_0045b4d0. */
+typedef struct AllocationSpan {
+    /* 0x0 */ u32 data;
+    /* 0x4 */ u32 size;
+} AllocationSpan;
+
+AllocationSpan FUN_0045b4d0(BufferRange *range, u32 capacity, s32 alignment);
 void nnnstdMemCpy(u32 destination, u32 source, u32 size);
 
 /* Allocates room for a bit buffer inside the owner at `offset`, copies the buffer into it and returns the advanced position. */
 BufferWriteResult FUN_00507868(BitSource *source, BitCopy *copy, u32 offset, RangeOwner *owner)
 {
-    u32 allocation[3];
     BufferRange range;
     BufferWriteResult result;
 
     range.begin = offset;
     range.end = owner->base + offset;
-    FUN_0045b4d0(allocation, &range, owner->capacity, 4);
-    copy->data = allocation[0];
+    AllocationSpan span = FUN_0045b4d0(&range, owner->capacity, 4);
+    copy->data = span.data;
     copy->bitCount = source->bitCount;
-    nnnstdMemCpy(allocation[0], source->words, (source->bitCount + 7) >> 3);
+    nnnstdMemCpy(span.data, source->words, (source->bitCount + 7) >> 3);
     copy->owned = 1;
     result.position = range.begin;
     result.unk04 = 0;

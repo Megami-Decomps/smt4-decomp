@@ -1,6 +1,7 @@
 /* NON_MATCHING: recovered touch-selection flow still differs in predicate and helper-call scheduling. */
 #include "classes/Obj55ca08.h"
 #include "camp/Unite/UniteWork.h"
+#include "code/Code0029_Smt4.h"
 
 struct Obj55ca08Selection {
     u8 type;

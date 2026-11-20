@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "skill/SkillSlotScreen.h"
+#include "camp/Unite/UniteWork.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
@@ -16,12 +16,12 @@ s32 recordContainsPairedId(u32 unit, u16 id);
 u32 skillGetAdjustedCost(u32 unit, u16 id);
 
 /* Draws one skill row of the skill screen: the skill's name, icon and cost, or the empty-slot label. */
-void skillScreenDrawSlotRow(SkillSlotScreen *screen, s32 index, u32 unit, s32 count, s32 x, s32 y, f32 effect)
+void skillScreenDrawSlotRow(UniteWorkA *work, s32 index, u32 unit, s32 count, s32 x, s32 y, f32 effect)
 {
     char text[64];
     u32 color = 0xffffffff;
 
-    if (screen->slots[index] == 0) {
+    if (work->inheritanceA.slots[index] == 0) {
         sprintf(text, "\x81\x7c \x81\x7c \x81\x7c");
         const TextureTableEntryIV *label = asdTMTexTableEntryAt(0x1a, 0x178);
         textDrawString(label->x + x, label->y + y, 0.0f, 2, 0.0f, 0xffffffff, effect, text);
@@ -30,20 +30,20 @@ void skillScreenDrawSlotRow(SkillSlotScreen *screen, s32 index, u32 unit, s32 co
     texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x174, x, y, 0x6a);
     texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x175, x, y, 0x6a);
     texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x176, x, y, 0x6f);
-    if (index < count - screen->freedCount) {
+    if (index < count - work->inheritanceA.freedCount) {
         color = 0x9fe7ffff;
     }
-    sprintf(text, "%s", aocIndexValueOrDefault(screen->slots[index]));
+    sprintf(text, "%s", aocIndexValueOrDefault(work->inheritanceA.slots[index]));
     const TextureTableEntryIV *part = asdTMTexTableEntryAt(0x1a, 0x178);
     textDrawString(part->x + x, part->y + y, 0.0f, 2, 0.0f, color, effect, text);
     part = asdTMTexTableEntryAt(0x1a, 0x177);
-    FUN_00185e84(screen->slots[index], part->x + x, part->y + y, 0x74, 0, 0);
-    if (recordContainsPairedId(unit, screen->slots[index]) == 0) {
-        partyRecordSetEquippedItemClampRank(unit, screen->slots[index], index);
+    FUN_00185e84(work->inheritanceA.slots[index], part->x + x, part->y + y, 0x74, 0, 0);
+    if (recordContainsPairedId(unit, work->inheritanceA.slots[index]) == 0) {
+        partyRecordSetEquippedItemClampRank(unit, work->inheritanceA.slots[index], index);
     }
-    statDrawClampedDelta(unit, screen->slots[index], part->x + x, part->y + y, 0x74, 0);
+    statDrawClampedDelta(unit, work->inheritanceA.slots[index], part->x + x, part->y + y, 0x74, 0);
     part = asdTMTexTableEntryAt(0x1a, 0x17c);
-    statRowDrawValueImpl(1, part->x + x, part->y + y, 1, 4, 0x79, "%d", skillGetAdjustedCost(unit, screen->slots[index]));
+    statRowDrawValueImpl(1, part->x + x, part->y + y, 1, 4, 0x79, "%d", skillGetAdjustedCost(unit, work->inheritanceA.slots[index]));
 }
 
 } /* extern "C" */

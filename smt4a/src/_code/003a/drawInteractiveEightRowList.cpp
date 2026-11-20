@@ -17,7 +17,7 @@ s32 resourceRunOperationIfUnblocked(FlaggedEntry *);
 void uniteDrawSelectionButtonStrip(s32, s32, f32);
 void uiDrawLayeredSpriteEffect(s32, s32, f32);
 void FUN_003cbd04(EightRowListDraw *, u32, u32, s32, s32, s32, u32, f32);
-void FUN_003cdeb0(EightRowListDraw *, u32, s32, s32, f32);
+void skillScreenDrawCandidateRow(EightRowListDraw *, u32, s32, s32, f32);
 void efctSetSpeed(f32);
 
 void drawInteractiveEightRowList(EightRowListDraw *work, u32 style, s32 interactive, s32 x, s32 y, f32 scale)
@@ -41,6 +41,6 @@ void drawInteractiveEightRowList(EightRowListDraw *work, u32 style, s32 interact
         }
     }
     if (!headerSelected && work->selectionActive && interactive)
-        FUN_003cdeb0(work, style, x, y, scale);
+        skillScreenDrawCandidateRow(work, style, x, y, scale);
 }
 }

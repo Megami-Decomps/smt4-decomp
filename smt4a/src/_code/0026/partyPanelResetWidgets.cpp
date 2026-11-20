@@ -10,14 +10,6 @@ extern "C" {
 void slotPlacementAssignSlotPosition(PartyPanelWidget *widget, u32 toggle);
 void slotPlacementStartTransition(PartyPanelWidget *widget, s32 alternate);
 void slotPlacementSetSlot(PartyPanelWidget *widget, s32 slot);
-void partyWidgetSetEmpty(PartyPanelWidget *widget, u8 empty);
-void partyWidgetSetUnitId(PartyPanelWidget *widget, s32 unitId);
-void partyWidgetSetHasTag(PartyPanelWidget *widget, u8 value);
-void partyWidgetSetFlagA(PartyPanelWidget *widget, u8 value);
-void partyWidgetSetTransitionActive(PartyPanelWidget *widget, u8 value);
-void partyWidgetSetTransitionHeld(PartyPanelWidget *widget, u8 value);
-void partyWidgetSetTransitionPending(PartyPanelWidget *widget, u8 value);
-void partyWidgetSetFlagB(PartyPanelWidget *widget, u8 value);
 s32 slotIsReservePick(void);
 void partyPanelRefreshFusionAvailability(void);
 void partyPanelRefreshFilterMarks(void);

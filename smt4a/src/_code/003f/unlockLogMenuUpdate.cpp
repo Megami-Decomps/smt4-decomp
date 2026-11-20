@@ -1,6 +1,7 @@
 /* NON_MATCHING: compiler folds keyframe-mode conversion, changes signed key loads and lays out state branches differently. */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
 
 struct UnlockLogUpdateWork {
     /* 0x000 */ u8 unk000[0x10];
@@ -68,17 +69,17 @@ extern "C" s32 unlockLogMenuUpdate(UnlockLogUpdateWork *work)
         u32 firstDone = uiSpriteAdvanceAnimation(&work->fifth, 1.0f);
         u32 secondDone = uiSpriteAdvanceAnimation(&work->second, 1.0f);
         if (firstDone & secondDone)
-            dialogEnterState(work, work->second.alphaKey == 1 ? work->nextState : 7, 0);
+            dialogEnterState(work, uiSpriteGetMode(&work->second) == 1 ? work->nextState : 7, 0);
         break;
     }
     case 6:
         if (uiSpriteAdvanceAnimation(&work->third, 1.0f)) {
-            if (work->third.alphaKey != 1) {
+            if (uiSpriteGetMode(&work->third) != 1) {
                 dialogEnterState(work, 7, 0);
                 work->firstFlag = 0;
                 work->secondFlag = 0;
             } else {
-                uiSpriteSetKeyframe(&work->third, work->third.positionKey != 3, 0);
+                uiSpriteSetKeyframe(&work->third, uiSpriteGetOperationMode(&work->third) != 3, 0);
                 uiSpriteSetImageKeyframe(&work->third, 0, 0);
                 if (++work->counter >= 2)
                     work->counter = 0;

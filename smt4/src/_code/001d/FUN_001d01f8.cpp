@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation and compare layout only - retail keeps the cost in s0 and the running score in s16, branches to the take path with a shared tail, and loads the kind bytes in the opposite register order; the logic and calls are identical. */
+/* NON_MATCHING: control flow matches except the score test's branch (retail skips the take with bgt, the ordered bestScore > score; bestScore <= score gives bhi, and only an empty else-if arm for the ordered test gives bgt); retail converts the cost once (vcvt into s0, copied to the score in s16) where this converts it twice, and compares the two categories in the other register order. */
 #include "common.h"
 #include "gamedata/SkillFlags.h"
 #include "gamedata/SkillDataLookup.h"
@@ -38,9 +38,9 @@ u32 FUN_001d01f8(SkillPicker *picker)
         dataTable06Sub1GetRecord(picker->candidates[i]);
         u32 id = picker->candidates[i];
         SkillFlagsRecord *record = dataTable06Sub1GetRecord(id);
-        f32 cost = (f32)(u32)(record->flags & 0x1f);
-        f32 score = cost;
-        score += cost * 0.01f;
+        u32 cost = record->flags & 0x1f;
+        f32 score = (f32)cost;
+        score += (f32)cost * 0.01f;
         s32 element = idMapLookup(id);
         if (picker->element == element) {
             score += 1.0f;
@@ -62,10 +62,14 @@ u32 FUN_001d01f8(SkillPicker *picker)
                 score -= 1.0f;
             }
         }
-        bool keep = best >= 0 && (bestScore > score || (bestScore == score && picker->candidates[i] > picker->candidates[best]));
-        if (!keep) {
+        if (best < 0) {
             bestScore = score;
             best = i;
+        } else if (bestScore <= score) {
+            if (bestScore != score || picker->candidates[i] <= picker->candidates[best]) {
+                bestScore = score;
+                best = i;
+            }
         }
     }
     if (best >= 0) {

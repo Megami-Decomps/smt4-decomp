@@ -1,4 +1,4 @@
-/* NON_MATCHING: the duration add, the element base address (computed before the total query) and the clamp now match retail; retail keeps no zero register (state/frame stores are separate, the last two result words are two stm pairs) where the build merges them into one stm with a hoisted zero. */
+/* NON_MATCHING: the duration add, the element base address and the clamp match retail, and the branch layout too (category 8 tested with ==); retail keeps no zero register (state/frame zeros materialised where stored, the last four words as two stm pairs) where the build hoists one zero into r8. */
 #include "gamedata/EquipmentSortPower.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 
@@ -28,6 +28,8 @@ s32 btlRollClamped(u16, u32);
 s32 playerSlotHoldsEntry(SelectionRollWork *, u16);
 }
 
+/* Enters `mode` and sets up the quantity selection for the highlighted item: up to the owned count
+ * (category 8) or the affordable count. */
 extern "C" void FUN_0022e648(SelectionRollWork *work, u32 mode)
 {
     work->state = 0;
@@ -38,9 +40,7 @@ extern "C" void FUN_0022e648(SelectionRollWork *work, u32 mode)
     s32 selected = flaggedValueHolderGetTotal(&work->holders[work->category]);
     u16 *entry = &values[selected * 2];
     s32 result;
-    if (work->category != 8) {
-        result = btlRollClamped(*entry, shopSlotGetPrice(entry));
-    } else {
+    if (work->category == 8) {
         s32 value = itemGetOwnedCount(*entry);
         if (value < 0) {
             value = 0;
@@ -51,6 +51,8 @@ extern "C" void FUN_0022e648(SelectionRollWork *work, u32 mode)
         if (playerSlotHoldsEntry(work, *entry)) {
             --result;
         }
+    } else {
+        result = btlRollClamped(*entry, shopSlotGetPrice(entry));
     }
     work->hasResult = result != 0;
     work->result = result;

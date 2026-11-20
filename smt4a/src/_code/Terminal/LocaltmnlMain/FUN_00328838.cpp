@@ -30,7 +30,7 @@ int mapPlaceSet(...);
 int gameStateSetJumpRequest(...);
 int campCommonBgRelease(void);
 int campButtonHelpRelease(void);
-int buttonHelpSetMode(...);
+int buttonHelpSetTextVisible(...);
 int sysPlayVoice(...);
 int soundApplyValueOrStop(...);
 int soundChannelStopAll(...);
@@ -171,7 +171,7 @@ extern int effectTimelineChildrenFit(unsigned int);
 /* Supplied declaration required: campCommonBgRelease. */
 /* Supplied declaration required: FUN_0036b824. */
 /* Supplied declaration required: campButtonHelpRelease. */
-/* Supplied declaration required: buttonHelpSetMode. */
+/* Supplied declaration required: buttonHelpSetTextVisible. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: soundApplyValueOrStop. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
@@ -639,9 +639,9 @@ unsigned int FUN_00328838(void)
     if (temp_v4 != 2) break;
     *(unsigned char *)(temp_v0 + 0x558) = 0;
     sysPlayVoice(0x10000b2);
-    buttonHelpSetMode(0);
+    buttonHelpSetTextVisible(0);
     sysPlaySe(0x59);
-    buttonHelpSetMode(0);
+    buttonHelpSetTextVisible(0);
     *(unsigned int *)(temp_v0 + 8) = 5;
     *(unsigned int *)(temp_v0 + 0xc) = 0;
     placeWindowStartClose();

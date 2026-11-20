@@ -14,7 +14,7 @@ void fsInitializeUserMount();
 u32 resourceCallDefaultOptions(u32 first, u32 second, u32 mode);
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 pool, u32 size, u32 flags);
 void fsMountRomFs(u32 first, u32 second, void *buffer, u32 size, u32 mode); // declcheck: local (the shared declaration in shard/W6_W6Match7_SoundInit.h does not compile here: argument of type "void *" is incompatible with parameter of type "u32")
-u32 FUN_0014a930(u32 *handle, u32 initial, u32 maximum);
+u32 svcCreateSemaphore(u32 *handle, u32 initial, u32 maximum);
 u32 svcReleaseSemaphore(u32 *handle, u32 mutex, u32 mode);
 void nn_os_LightEvent_Initialize(void *event, u32 mode);
 void FUN_0014287c();
@@ -34,7 +34,7 @@ void FUN_00136df8()
     if (g_asdFile.semaphore) {
         result = 0xe0a0183b;
     } else {
-        result = FUN_0014a930(&handle, 0, 2);
+        result = svcCreateSemaphore(&handle, 0, 2);
         if ((s32)!nnResultIsFailure(result)) {
             g_asdFile.semaphore = handle;
             result = 0;

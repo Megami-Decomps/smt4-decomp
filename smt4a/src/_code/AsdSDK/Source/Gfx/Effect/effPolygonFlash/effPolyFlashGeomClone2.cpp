@@ -32,8 +32,8 @@ PolyGeomBlock *effPolyFlashGeomClone2(PolyObject *obj)
     params->unk70 = (params->unk70 <= 1) ? 1 : params->unk70;
     geom = effGeomCloneHandle(srcBlock->geom);
     block->geom = geom;
-    u32 segments = params->segments;
-    if (segments != 0) {
+    if (params->segments != 0) {
+        u32 segments = params->segments;
         PolyQuadUV *uv = geom->buf->uv;
         u32 i;
 

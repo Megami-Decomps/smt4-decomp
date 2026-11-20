@@ -4,6 +4,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "shard/W6_W6Match6_PartyPanel.h"
 
 extern "C" {
 
@@ -183,7 +184,7 @@ unsigned int FUN_00212538(void)
           do {
             temp_v3 = temp_v1 + temp_v2 * 4;
             if ((*(char *)(*(int *)(temp_v3 + 0x6c8) + 0x20) == '\0') &&
-               (*(int *)(*(int *)(temp_v3 + 0x6c8) + 0x34) == (int)*(short *)(temp_v1 + 0x38))) {
+               (partyWidgetGetUnitId(*(PartyPanelWidget **)(temp_v3 + 0x6c8)) == (int)*(short *)(temp_v1 + 0x38))) {
               FUN_0025117c(temp_v2,temp_v4,temp_v5,0x79,0);
             }
             temp_v2 = temp_v2 + 1;
@@ -199,7 +200,7 @@ unsigned int FUN_00212538(void)
           do {
             temp_v3 = temp_v1 + temp_v2 * 4;
             if ((*(char *)(*(int *)(temp_v3 + 0x6c8) + 0x20) == '\0') &&
-               (*(int *)(*(int *)(temp_v3 + 0x6c8) + 0x34) == (int)*(short *)(temp_v1 + 0x38))) {
+               (partyWidgetGetUnitId(*(PartyPanelWidget **)(temp_v3 + 0x6c8)) == (int)*(short *)(temp_v1 + 0x38))) {
               FUN_0025117c(temp_v2,temp_v4,temp_v5,0x79,0);
             }
             temp_v2 = temp_v2 + 1;
@@ -218,7 +219,7 @@ unsigned int FUN_00212538(void)
           do {
             temp_v6 = temp_v1 + temp_v3 * 4;
             if ((*(char *)(*(int *)(temp_v6 + 0x6c8) + 0x20) == '\0') &&
-               (*(int *)(*(int *)(temp_v6 + 0x6c8) + 0x34) == (int)*(short *)(temp_v1 + 0x38))) {
+               (partyWidgetGetUnitId(*(PartyPanelWidget **)(temp_v6 + 0x6c8)) == (int)*(short *)(temp_v1 + 0x38))) {
               FUN_0025117c(temp_v3,temp_v4,temp_v5,0x79,0);
               temp_v2 = 1;
             }
@@ -229,7 +230,7 @@ unsigned int FUN_00212538(void)
             do {
               temp_v3 = temp_v1 + temp_v2 * 4;
               if ((*(char *)(*(int *)(temp_v3 + 0x6d8) + 0x20) == '\0') &&
-                 (*(int *)(*(int *)(temp_v3 + 0x6d8) + 0x34) == (int)*(short *)(temp_v1 + 0x38))) {
+                 (partyWidgetGetUnitId(*(PartyPanelWidget **)(temp_v3 + 0x6d8)) == (int)*(short *)(temp_v1 + 0x38))) {
                 FUN_0025117c(temp_v2 + 4,temp_v4,temp_v5,0x79,0);
               }
               temp_v2 = temp_v2 + 1;
@@ -242,7 +243,7 @@ unsigned int FUN_00212538(void)
           do {
             temp_v3 = temp_v1 + temp_v2 * 4;
             if ((*(char *)(*(int *)(temp_v3 + 0x6c8) + 0x20) == '\0') &&
-               (*(int *)(*(int *)(temp_v3 + 0x6c8) + 0x34) == (int)*(short *)(temp_v1 + 0x38))) {
+               (partyWidgetGetUnitId(*(PartyPanelWidget **)(temp_v3 + 0x6c8)) == (int)*(short *)(temp_v1 + 0x38))) {
               FUN_0025117c(temp_v2,temp_v4,temp_v5,0x79,0);
             }
             temp_v2 = temp_v2 + 1;
@@ -280,7 +281,7 @@ unsigned int FUN_00212538(void)
         do {
           temp_v6 = temp_v1 + temp_v3 * 4;
           if ((*(char *)(*(int *)(temp_v6 + 0x6c8) + 0x20) == '\0') &&
-             (*(int *)(*(int *)(temp_v6 + 0x6c8) + 0x34) == (int)*(short *)(temp_v1 + 0x38))) {
+             (partyWidgetGetUnitId(*(PartyPanelWidget **)(temp_v6 + 0x6c8)) == (int)*(short *)(temp_v1 + 0x38))) {
             FUN_0025117c(temp_v3,temp_v4,temp_v5,0x79,0);
             temp_v2 = 1;
           }
@@ -291,7 +292,7 @@ unsigned int FUN_00212538(void)
           do {
             temp_v3 = temp_v1 + temp_v2 * 4;
             if ((*(char *)(*(int *)(temp_v3 + 0x6d8) + 0x20) == '\0') &&
-               (*(int *)(*(int *)(temp_v3 + 0x6d8) + 0x34) == (int)*(short *)(temp_v1 + 0x38))) {
+               (partyWidgetGetUnitId(*(PartyPanelWidget **)(temp_v3 + 0x6d8)) == (int)*(short *)(temp_v1 + 0x38))) {
               FUN_0025117c(temp_v2 + 4,temp_v4,temp_v5,0x79,0);
             }
             temp_v2 = temp_v2 + 1;
@@ -619,7 +620,7 @@ unsigned int FUN_00212538(void)
           do {
             temp_v3 = temp_v1 + temp_v2 * 4;
             if ((*(char *)(*(int *)(temp_v3 + 0x6c8) + 0x20) == '\0') &&
-               (*(int *)(*(int *)(temp_v3 + 0x6c8) + 0x34) == (int)*(short *)(temp_v1 + 0x38))) {
+               (partyWidgetGetUnitId(*(PartyPanelWidget **)(temp_v3 + 0x6c8)) == (int)*(short *)(temp_v1 + 0x38))) {
               FUN_002512c4(temp_v2,0,0,0x79,0);
             }
             temp_v2 = temp_v2 + 1;
@@ -635,7 +636,7 @@ unsigned int FUN_00212538(void)
           do {
             temp_v3 = temp_v1 + temp_v2 * 4;
             if ((*(char *)(*(int *)(temp_v3 + 0x6c8) + 0x20) == '\0') &&
-               (*(int *)(*(int *)(temp_v3 + 0x6c8) + 0x34) == (int)*(short *)(temp_v1 + 0x38))) {
+               (partyWidgetGetUnitId(*(PartyPanelWidget **)(temp_v3 + 0x6c8)) == (int)*(short *)(temp_v1 + 0x38))) {
               FUN_002512c4(temp_v2,0,0,0x79,0);
             }
             temp_v2 = temp_v2 + 1;
@@ -654,7 +655,7 @@ unsigned int FUN_00212538(void)
           do {
             temp_v10 = temp_v1 + temp_v7 * 4;
             if ((*(char *)(*(int *)(temp_v10 + 0x6c8) + 0x20) == '\0') &&
-               (*(int *)(*(int *)(temp_v10 + 0x6c8) + 0x34) == (int)*(short *)(temp_v1 + 0x38))) {
+               (partyWidgetGetUnitId(*(PartyPanelWidget **)(temp_v10 + 0x6c8)) == (int)*(short *)(temp_v1 + 0x38))) {
               FUN_002512c4(temp_v7,0,0,0x79,0);
               temp_v6 = 1;
             }
@@ -664,7 +665,7 @@ unsigned int FUN_00212538(void)
             for (; temp_v2 < (int)temp_v9; temp_v2 = temp_v2 + 1) {
               temp_v6 = temp_v1 + temp_v2 * 4;
               if ((*(char *)(*(int *)(temp_v6 + 0x6d8) + 0x20) == '\0') &&
-                 (*(int *)(*(int *)(temp_v6 + 0x6d8) + 0x34) == (int)*(short *)(temp_v1 + 0x38))) {
+                 (partyWidgetGetUnitId(*(PartyPanelWidget **)(temp_v6 + 0x6d8)) == (int)*(short *)(temp_v1 + 0x38))) {
                 FUN_002512c4(temp_v2 + temp_v3 * -0xc + 4,0,0,0x79,0);
               }
             }
@@ -676,7 +677,7 @@ unsigned int FUN_00212538(void)
           do {
             temp_v3 = temp_v1 + temp_v2 * 4;
             if ((*(char *)(*(int *)(temp_v3 + 0x6c8) + 0x20) == '\0') &&
-               (*(int *)(*(int *)(temp_v3 + 0x6c8) + 0x34) == (int)*(short *)(temp_v1 + 0x38))) {
+               (partyWidgetGetUnitId(*(PartyPanelWidget **)(temp_v3 + 0x6c8)) == (int)*(short *)(temp_v1 + 0x38))) {
               FUN_002512c4(temp_v2,0,0,0x79,0);
             }
             temp_v2 = temp_v2 + 1;
@@ -715,7 +716,7 @@ unsigned int FUN_00212538(void)
         do {
           temp_v10 = temp_v1 + temp_v7 * 4;
           if ((*(char *)(*(int *)(temp_v10 + 0x6c8) + 0x20) == '\0') &&
-             (*(int *)(*(int *)(temp_v10 + 0x6c8) + 0x34) == (int)*(short *)(temp_v1 + 0x38))) {
+             (partyWidgetGetUnitId(*(PartyPanelWidget **)(temp_v10 + 0x6c8)) == (int)*(short *)(temp_v1 + 0x38))) {
             FUN_002512c4(temp_v7,0,0,0x79,0);
             temp_v6 = 1;
           }
@@ -725,7 +726,7 @@ unsigned int FUN_00212538(void)
           for (; temp_v2 < (int)temp_v9; temp_v2 = temp_v2 + 1) {
             temp_v6 = temp_v1 + temp_v2 * 4;
             if ((*(char *)(*(int *)(temp_v6 + 0x6d8) + 0x20) == '\0') &&
-               (*(int *)(*(int *)(temp_v6 + 0x6d8) + 0x34) == (int)*(short *)(temp_v1 + 0x38))) {
+               (partyWidgetGetUnitId(*(PartyPanelWidget **)(temp_v6 + 0x6d8)) == (int)*(short *)(temp_v1 + 0x38))) {
               FUN_002512c4(temp_v2 + temp_v3 * -0xc + 4,0,0,0x79,0);
             }
           }

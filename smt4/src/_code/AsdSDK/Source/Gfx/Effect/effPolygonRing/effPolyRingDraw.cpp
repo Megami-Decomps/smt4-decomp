@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_00256a50(PolyGeom *geom, u32 value);
+void renderSubmissionDrawPacket(PolyGeom *geom, u32 value);
 void FUN_00246afc(PolyGeom *geom, PolyVec4 *rotation0, PolyVec4 *rotation1, PolyVec4 *color);
 u32 FUN_00269694(void *work, void *colorRamp);
 
@@ -60,7 +60,7 @@ void effPolyRingDraw(PolyObject *obj)
             } else {
                 geom->drawFlags &= 0xfeff;
             }
-            FUN_00256a50(geom, work->unk28 & 0xffff);
+            renderSubmissionDrawPacket(geom, work->unk28 & 0xffff);
         }
     }
 }

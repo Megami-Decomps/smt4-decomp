@@ -20,7 +20,7 @@ int FUN_002a5e7c(...);
 void statusReplaceSkills(const u16 *skills, u8 count);
 int statusDownOpenList(...);
 int statusDownEnterState3(void);
-int buttonHelpSetMode(...);
+int buttonHelpSetTextVisible(...);
 int stateHolderEnterState7(void);
 int statusDownEnterState11(...);
 int FUN_003b0744(void);
@@ -279,7 +279,7 @@ extern int statusCursorIsAtLast(void);
 /* Supplied declaration required: statusDownEnterState3. */
 /* Supplied declaration required: FUN_0037e12c. */
 /* Supplied declaration required: uiStoreTextureEntryCenter. */
-/* Supplied declaration required: buttonHelpSetMode. */
+/* Supplied declaration required: buttonHelpSetTextVisible. */
 /* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: statusBustUpPortraitRelease. */
 extern int aocDataBlockHasEntries(void);
@@ -2132,7 +2132,7 @@ joined_r0x002073c8:
             temp_v0 = *(char *)(temp_v27 + 0x457a);
             goto joined_r0x002075ac;
           }
-          buttonHelpSetMode(0);
+          buttonHelpSetTextVisible(0);
           resultSetMode(temp_v6,0xd);
         }
       }
@@ -2747,7 +2747,7 @@ LAB_00207d0c:
   case 0x16:
     temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43a0));
     if (temp_v7 == 2) {
-      buttonHelpSetMode(0);
+      buttonHelpSetTextVisible(0);
       buttonHelpTransitionPresetFlags(3);
       *(unsigned int *)(temp_v6 + 0x4364) = 0x17;
     }

@@ -1,27 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `listAllocateSentinelNode` (_code @ 0x307d00, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only register choice for end pointer differs (retail r2, built r1). */
+#include "common.h"
+
+struct PoolNode {
+    PoolNode *next;
+    u8 unk04[0x14];
+};
+
+struct NodePool {
+    u32 unk00;
+    PoolNode *freeList;
+    PoolNode *cursor;
+    PoolNode *end;
+};
 
 extern "C" {
+void FUN_001326ae(NodePool *pool);
 
-int FUN_001326ae(int);
-
-/* Supplied declaration required: FUN_001326ae. */
-
-
-void listAllocateSentinelNode(int param_1)
-
+/* Pops a node from the free list, or grows the backing chunk and takes the next slot. */
+PoolNode *listAllocateSentinelNode(NodePool *pool)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(unsigned int **)(param_1 + 4) != (unsigned int *)0x0) {
-    *(unsigned int *)(param_1 + 4) = **(unsigned int **)(param_1 + 4);
-    return;
-  }
-  if (*(int *)(param_1 + 8) == *(int *)(param_1 + 0xc)) {
-    FUN_001326ae(param_1);
-  }
-  *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 0x18;
-  return;
+    if (pool->freeList != NULL) {
+        PoolNode *node = pool->freeList;
+        pool->freeList = node->next;
+        return node;
+    }
+    if (pool->cursor == pool->end) {
+        FUN_001326ae(pool);
+    }
+    return pool->cursor++;
 }
-
-} /* extern "C" */
+}

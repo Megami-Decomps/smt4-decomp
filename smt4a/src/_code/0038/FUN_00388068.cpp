@@ -29,8 +29,9 @@ void FUN_00388068()
                 BtlEquip *unit = slotRecordFindById(id);
                 if (unit != NULL && bitsAt60Test(unit, 1) == 0) {
                     s32 maximum = recordGetScaledMaximum(unit);
-                    unit->hp = static_cast<s16>(maximum - unit->maxHp + unit->hp);
-                    unit->hp = static_cast<s16>(unit->hp > maximum ? maximum : unit->hp);
+                    s16 hp = (s16)(maximum - unit->maxHp + unit->hp);
+                    unit->hp = hp;
+                    unit->hp = (s16)(hp > maximum ? maximum : hp);
                 }
             }
         }

@@ -5,7 +5,7 @@ extern "C" {
 void FUN_00246afc(RenderSubmissionPacket *, const f32 *, const f32 *, const f32 *);
 void FUN_00246bd4(void);
 void asdSetNormalizedColorRgba(u32 color);
-void FUN_00256a50(RenderSubmissionPacket *, u32 mode);
+void renderSubmissionDrawPacket(RenderSubmissionPacket *, u32 mode);
 u32 FUN_00269694(RenderSubmissionOwner *, const u32 *color, u32 frame, u32 duration);
 u32 FUN_00246c28(void);
 
@@ -35,6 +35,6 @@ void FUN_002f974c(RenderSubmission *submission)
     } else {
         packet->flags &= ~0x100;
     }
-    FUN_00256a50(packet, (u16)owner->drawMode);
+    renderSubmissionDrawPacket(packet, (u16)owner->drawMode);
 }
 }

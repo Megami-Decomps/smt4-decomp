@@ -62,6 +62,11 @@ difference a register tie-break.
 
 - A value retail keeps live in `r1`/`r2` across a call is usually an argument the decompiler dropped:
   read the callers and the callee. Recover return types too (`s32` against `void`, `bool`, `u16`).
+- A flag word retail loads into `r1` and tests before a call (`ldr r1, [obj, #N]; cmp r1, #0; … bl f`) where the
+  build tests it in another register is often the callee's second argument: the dirty mask `FUN_00347198(mesh, mask)`
+  reads (smt4 `gfx/DynamicMesh.h`). Take the prototype from the callee's body and pass the tested value,
+  `if (u32 dirtyMask = packet->pending) FUN_00347198(mesh, dirtyMask);` (wave 55: smt4 `FUN_00256a50` IDENTICAL,
+  `tiledMeshDraw` 63 → 4).
 - Width and signedness: `u16`/`u8` parameters, `s8` flags, buffers sized to what is copied into them
   (`char name[0x12]`), halfword stack parameters that retail loads with `ldr` (they are `u32`), and
   `u64` parameters for values passed in `r2:r3`.
@@ -293,6 +298,10 @@ asks for.
 - nn::math's header inlines are helpers with evidence: `MTX44PerspectivePivotDeg` (`MTX44Perspective` of the angle
   in radians, then `MTX44PivotC`) written as a `static __inline` at both call sites gave retail's projection code in
   `stereoCameraSetPerspective` (both games), and `MTX44Transpose` returns its destination.
+- An inlined orthographic projection (zero stores early, then elements 0/3/5/7/10/11, pooled as 0.0, far, 1.0, 2.0)
+  is `MTX44Ortho` in the SDK's fast C form: the three reciprocals and the six computed elements into locals first,
+  then the ten constant stores, then the six computed ones. smt4a keeps an out-of-line copy, `FUN_0015a050`
+  (32 → 20 with that body); smt4 `titleLogoDraw` inlines it (93 → 44). Neither matches yet.
 - A thread start (`nn::os::Thread::Start`) inlined into its caller is a `static __inline` helper that
   takes the thread's bound argument by value and passes its address (`&argument`) with the argument
   descriptor, then reports a failed result (`uniteStartThread`, `campCecStartThread`,
@@ -369,6 +378,10 @@ More on classes, constructors and destructors is in [C++](style-and-naming.md#c)
   one-instruction accessor. Write the calls and add the rows after checking each call site's word in the image
   (`partyWidgetSet*`/`partyWidgetGetUnitId` in both games: smt4a `FUN_0026f3a0` and `partyPanelRefreshFilterMarks`,
   smt4 `FUN_001d13b0` and `partyPanelPollSelectedStatusColor`, wave 53).
+  To find more sites, scan each unmatched unit's retail bytes for an `inlined.txt` word whose base register was set
+  just before it (`mov r0, rN` or `add r0, rN, #off`, then the lone load or store); the generic words
+  (`ldr r0, [r0, #0]`, `#4`, `#8`) are noise. Writing the calls made wave 55's smt4a `FUN_0021c1e0`
+  (`partyWidgetGetUnitId`) and `FUN_003423e8` (`spriteSetLayer`/`spriteSetVisible`) IDENTICAL.
 - A NULL test retail repeats right before a few stores through a pointer the function has already dereferenced is a
   small real function with its own NULL check, inlined there: write that function's body as a `static __inline`
   copy (smt4 `partyRestoreGroup`, with `FUN_002954bc`'s `if (unit != NULL) { hp = maxHp; mp = maxMp; }`).

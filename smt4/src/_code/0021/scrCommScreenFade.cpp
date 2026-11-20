@@ -1,4 +1,3 @@
-/* NON_MATCHING: first-frame color branches and the shared completion return are laid out differently. */
 #include "common.h"
 #include "script/ScriptArgs.h"
 
@@ -9,8 +8,8 @@ u32 screenFaderIsSettled(s32 slot);
 s32 eventIsSkipping(void);
 void titleRestartSlotState3(s32 slot, u32 color);
 
-// Start the requested black/white fade on the active screens, then wait or finish it immediately.
-u32 FUN_0021ea68(void)
+/* Starts a black or white screen fade and waits for the active screens to settle. */
+u32 scrCommScreenFade(void)
 {
     u32 duration = scrGetArg(1);
     if (scrGetCommandFrame() == 0) {
@@ -27,26 +26,29 @@ u32 FUN_0021ea68(void)
             return 1;
         }
     } else {
-        if (frameTextureGetState() != 0) {
-            if (screenFaderIsSettled(1))
+        if (!frameTextureGetState()) {
+            if (screenFaderIsSettled(0) && screenFaderIsSettled(1))
                 return 1;
         } else {
-            if (screenFaderIsSettled(0) && screenFaderIsSettled(1))
+            if (screenFaderIsSettled(1))
                 return 1;
         }
         if (eventIsSkipping()) {
-            s32 mode = scrGetArg(0);
-            if (mode == 0) {
+            switch (scrGetArg(0)) {
+            case 0:
                 if (frameTextureGetState() == 0)
                     titleRestartSlotState3(0, 0xff);
                 titleRestartSlotState3(1, 0xff);
-            } else if (mode == 1) {
+                break;
+            case 1:
                 if (frameTextureGetState() == 0)
                     titleRestartSlotState3(0, ~0u);
                 titleRestartSlotState3(1, ~0u);
+                break;
             }
         }
     }
     return 0;
 }
-}
+
+} /* extern "C" */

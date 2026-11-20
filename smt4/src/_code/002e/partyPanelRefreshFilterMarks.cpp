@@ -9,7 +9,6 @@
 extern "C" {
 const StatBlock *partyMemberFindById(u16); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void __aeabi_memset4(void *, u32, s32);
-void partyWidgetSetTransitionKind(PartyPanelWidget *widget, u8 value);
 
 /* Marks the party rows and stock cells that hold a demon already picked as a fusion parent, and the empty
  * stock cells. */

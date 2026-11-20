@@ -32,10 +32,7 @@ static __inline u32 experienceForLevel(s32 level)
 s32 FUN_004ccc7c(s32 startingLevel, u32 *experience)
 {
     s32 level = startingLevel;
-    for (;;) {
-        if (level >= gameGetUnlockedCountLimit()) {
-            break;
-        }
+    while (level < gameGetUnlockedCountLimit()) {
         u32 required = experienceForLevel(level);
         if (*experience < required) {
             break;

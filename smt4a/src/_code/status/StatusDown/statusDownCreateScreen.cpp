@@ -1,4 +1,4 @@
-/* NON_MATCHING: the zeroed-field stores, the sprite setup scheduling and the pooled constants are laid out differently from retail (252 vs 249 rows); the screen setup is the same. */
+/* NON_MATCHING: the zeroed-field stores, the sprite setup scheduling and the pooled constants are laid out differently from retail (248 vs 251 rows); the screen setup is the same. */
 #include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "util/MemoryHelpers.h"
@@ -63,7 +63,7 @@ void statusDownCreateScreen(void)
     uiSpriteSetKeyframe(&down->sprites[5], 1, 0);
     uiSpriteInitializeState(&down->sprites[6], 0x12, -1, 0x1C, &down->packet, 0xC9, 1.0f);
     uiSpriteSelectAnim(&down->sprites[6], 2);
-    *(u16 *)((u8 *)&down->sprites[6] + 0x3A) = 2; /* the sprite's layer (spriteSetLayer); UiSpriteState has no field for it yet */
+    spriteSetLayer(&down->sprites[6], 2);
     uiSpriteStateInitFromSource(&down->sprites[7], 0x12, 0x556, &down->packet, 1, 1.0f);
     uiSpriteStateInitFromSource(&down->sprites[8], 0x12, 0x556, &down->packet, 1, 1.0f);
     down->text = spriteHandleCreate(0);

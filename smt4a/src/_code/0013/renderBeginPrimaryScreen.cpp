@@ -9,7 +9,6 @@ extern void asdGxFlushCommandBuffer(void);
 extern void renderTargetClear(s32 a, s32 b);
 extern void renderCtxResetFrameState(RenderCtxA *ctx);
 extern void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *ctx);
-void renderCtxSetStereoMode(RenderCtxA *ctx, u32 mode);
 
 s32 renderBeginPrimaryScreen(void)
 {

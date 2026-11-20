@@ -77,7 +77,7 @@ void campDrawCommandNewMark(s32 menu, s32 x, s32 y, u32 flags, s32 plain)
     TextureTableEntryIV *frame = asdTMTexTableEntryAt(CAMP_NOTICE_HEADER, CAMP_NOTICE_FRAME_ANIMATED);
     texDrawTableEntryAtStoredOrigin(2, CAMP_NOTICE_HEADER, CAMP_NOTICE_ICON, frame->x + x, frame->y + y, flags);
     u32 active = jobGetScalarValue() != 0.0f;
-    efctSetSpeed(g_camp->sprites[37].alpha * (f32)active); /* the icon sprite's speed */
+    efctSetSpeed(vec2GetSpeed(&g_camp->sprites[37]) * (f32)active); /* the icon sprite's speed */
     RenderCtxA *context = g_renderCtx;
     s32 state = packNibblesAndByte(6, 1, 0);
     renderStackSet(&context->stackB, state);

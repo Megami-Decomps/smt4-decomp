@@ -1,6 +1,7 @@
-/* NON_MATCHING: calibration copy and aggregate vector clears use different ARM/VFP stores. */
+/* NON_MATCHING: the calibration copy uses core registers, and the four vector clears share an integer zero. Retail copies calibration through VFP and reloads the float zero into the core register for each vector. */
 #include "AsdSDK/Source/Gfx/Camera/AsdCamera.h"
 #include "nn/Result.h"
+#include <string.h>
 
 struct StereoCalibrationConfig {
     /* 0x00 */ u8 unk00[0x10];
@@ -14,16 +15,7 @@ extern "C" s32 FUN_00189738(void *data, u32 size, u32 blockId);
 extern "C" void sysFatalBreak();
 extern "C" void FUN_001a0eb0();
 
-static __inline AsdCameraVec3 cameraFilledVector(f32 value)
-{
-    AsdCameraVec3 vector;
-    vector.x = value;
-    vector.y = value;
-    vector.z = value;
-    return vector;
-}
-
-// Load the device's stereo calibration once and reset per-camera stereo parameters.
+/* Loads the device's stereo calibration once and resets the camera's stereo parameters. */
 extern "C" void asdCameraInitializeStereo(AsdCameraStereo *stereo)
 {
     if (DAT_00589504 == 0) {
@@ -46,8 +38,5 @@ extern "C" void asdCameraInitializeStereo(AsdCameraStereo *stereo)
     stereo->state.stereo.parameters[3] = 0.0f;
     stereo->state.stereo.parameters[4] = 0.0f;
     stereo->state.stereo.parameters[5] = 0.0f;
-    stereo->state.stereo.vectors[0] = cameraFilledVector(0.0f);
-    stereo->state.stereo.vectors[1] = cameraFilledVector(0.0f);
-    stereo->state.stereo.vectors[2] = cameraFilledVector(0.0f);
-    stereo->state.stereo.vectors[3] = cameraFilledVector(0.0f);
+    memset(stereo->state.stereo.vectors, 0, sizeof(stereo->state.stereo.vectors));
 }

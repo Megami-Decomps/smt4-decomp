@@ -16,7 +16,7 @@ int gridNavigationHandleConfirm(int, int);
 int gridNavigationGetItemCount(...);
 int buttonHelpSetHelpState(int);
 int uiScrollHandleActionsOrTouch(int, unsigned int, int, int, int, int, char [16], int, int);
-int buttonHelpSetMode(...);
+int buttonHelpSetTextVisible(...);
 
 /* stack frame of void: 4 slot(s), 13 byte(s) */
 typedef struct {
@@ -42,7 +42,7 @@ extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: buttonHelpSetHelpState. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 extern int uiSearchPrimary(int);
-/* Supplied declaration required: buttonHelpSetMode. */
+/* Supplied declaration required: buttonHelpSetTextVisible. */
 
 
 unsigned int sortMenuCalcUpdate(void)
@@ -204,7 +204,7 @@ unsigned int sortMenuCalcUpdate(void)
               *(unsigned char *)(temp_v8 + 0x7f4) = 0;
             }
             else {
-              buttonHelpSetMode(0);
+              buttonHelpSetTextVisible(0);
             }
           }
           temp_v7 = 0x100020f;

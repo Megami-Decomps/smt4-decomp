@@ -1,4 +1,4 @@
-/* NON_MATCHING: Cache-store timing, command-header constant loading and relative-payload argument scheduling differ. */
+/* NON_MATCHING: retail hoists both header constants (0xf00e6 as 0xf01c5 - 223) and the zero above the index test, stores the cache entry before the push and reloads the cursor for the copy; this build loads the constants per arm and passes the cursor it computed. */
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
 
 extern "C" {
@@ -11,24 +11,26 @@ void FUN_002a1e08(const AsdEnvironmentCommands *commands, u32 index)
 {
     if (DAT_004e9dc8[index] != commands) {
         DAT_004e9dc8[index] = commands;
-        u32 *payload = g_commandBufferCursor + 2;
+        u32 *cursor = g_commandBufferCursor;
         if (index == 23) {
-            g_commandBufferCursor[0] = 0;
-            g_commandBufferCursor[1] = 0xf00e6;
+            cursor[0] = 0;
+            cursor[1] = 0xf00e6;
         } else {
             if (index >= 7) {
                 ++index;
             }
-            g_commandBufferCursor[0] = index * 0x100;
-            g_commandBufferCursor[1] = 0xf01c5;
+            cursor[0] = index * 0x100;
+            cursor[1] = 0xf01c5;
         }
-        const void *data = NULL;
+        g_commandBufferCursor = cursor + 2;
+        const void *data;
         if (commands->dataOffset != 0) {
             data = (const u8 *)&commands->dataOffset + commands->dataOffset;
+        } else {
+            data = NULL;
         }
         u32 size = commands->size;
-        g_commandBufferCursor = payload;
-        nnnstdMemCpy(payload, data, size);
+        nnnstdMemCpy(g_commandBufferCursor, data, size);
         g_commandBufferCursor = (u32 *)((u8 *)g_commandBufferCursor + (size & ~3U));
     }
 }

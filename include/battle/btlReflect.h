@@ -145,6 +145,28 @@ static __inline void btlReflectQueueStatusChange(s16 actor, u32 options, const v
     action->parameter = mask;
 }
 
+/* Queues a target action of `kind` with an integer payload. Shared by the action builders for kinds
+ * 0x35 (FUN_004fb5dc) and 0x36 (FUN_004fb6f4). */
+static __inline ReflectAction *btlReflectQueueTargetAction(u32 kind, s32 actor, u32 options,
+    const void *target, u32 value)
+{
+    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
+    action->kind = kind;
+    action->target = (u32)target;
+    action->value = value;
+    return action;
+}
+
+/* Queues a kind-7 follow-up action on a resolved combatant entry (shared by FUN_004fb5dc and
+ * FUN_004fb6f4). */
+static __inline void btlReflectQueueKind7(s32 actor, u32 options, const void *entry, s32 value)
+{
+    ReflectAction *followup = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
+    followup->kind = 7;
+    followup->wordValues.unk18 = (u32)entry;
+    followup->value = value;
+}
+
 #ifdef __cplusplus
 extern "C" {
 #endif

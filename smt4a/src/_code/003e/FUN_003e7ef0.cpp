@@ -14,9 +14,9 @@ void FUN_003e7ef0(BtlMainStateA* battle)
     for (s32 i = 0; i < 12; ++i) {
         s32 index = battle->turnOrder.indices[i];
         if (index >= 0) {
-            u64 flags = battle->entries[index].flags;
-            if ((flags & required) == 0 || (flags & excluded) != 0 ||
-                (flags & turnExcluded) != 0) {
+            if ((battle->entries[index].flags & required) == 0 ||
+                (battle->entries[index].flags & excluded) != 0 ||
+                (battle->entries[index].flags & turnExcluded) != 0) {
                 battle->turnOrder.indices[i] = -1;
             }
         }

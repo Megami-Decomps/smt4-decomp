@@ -5,6 +5,7 @@
 #include "romwright_types.h"
 #include "ui/UiControl.h"
 #include "code/Code002c.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -199,7 +200,7 @@ void FUN_004b6390(int param_1)
     *(unsigned char *)(temp_v2 + 0x788f) = 0;
     temp_v2 = param_1 + temp_v1 * 0x8c;
     uiSpriteStateInitFromSource((UiSpriteState *)(temp_v2 + 0x24c4),0x1d,0x1a, (UiResourceParameters *)(param_1),0xc9, 1.0f);
-    *(unsigned short *)(temp_v2 + 0x24fe) = 2;
+    spriteSetLayer((UiSpriteState *)(temp_v2 + 0x24c4), 2);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x25);
   temp_v1 = 0;
@@ -220,7 +221,7 @@ void FUN_004b6390(int param_1)
     uiSpriteSelectAnim((UiSpriteState *)((void *)(temp_v2 + 0x3900)),9);
     uiSpriteStateInitFromSource((UiSpriteState *)(temp_v2 + 0x3cd4),0x1d,0x119, (UiResourceParameters *)(param_1),0xf1, 1.0f);
     uiSpriteSelectAnim((UiSpriteState *)((void *)(temp_v2 + 0x3cd4)),10);
-    *(unsigned short *)(temp_v2 + 0x3d0e) = 2;
+    spriteSetLayer((UiSpriteState *)(temp_v2 + 0x3cd4), 2);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 6);
   *(unsigned int *)(param_1 + 0x4380) = 0;

@@ -12,7 +12,7 @@ int renderCtxApplyTransforms(...);
 int renderCtxSelectTexture(...);
 int FUN_002f5288(void *, int *);
 int packNibbleFields(...);
-int FUN_00343324(int, float *, int);
+int renderCtxSetMatrices(int, float *, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int VectorSignedToFloat(...);
 
 typedef struct fn_00340c90_arg0 fn_00340c90_arg0;
@@ -68,7 +68,7 @@ extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002f5288. */
 /* Supplied declaration required: packNibbleFields. */
-/* Supplied declaration required: FUN_00343324. */
+/* Supplied declaration required: renderCtxSetMatrices. */
 extern unsigned int FUN_003deab0(void *, unsigned int);
 
 
@@ -145,7 +145,7 @@ void FUN_00340c90(fn_00340c90_arg0 *param_1)
   temp_v26 = temp_v11;
   temp_v27 = temp_v11;
   fStack_4c = temp_v12;
-  FUN_00343324(g_titleScene,&temp_v13,0);
+  renderCtxSetMatrices(g_titleScene,&temp_v13,0);
   temp_v0 = g_titleScene;
   temp_v1 = packNibblesAndByte(6,7,0);
   piVar5 = (int *)(temp_v0 + 0x12ac);

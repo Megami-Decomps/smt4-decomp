@@ -4,8 +4,6 @@
 
 extern "C" {
 void btlItemComputeValues(s32 unit, u16 item, s32 *first, s32 *second);
-s32 partyWidgetGetX(PartyPanelWidget *widget);
-s32 partyWidgetGetCost(PartyPanelWidget *widget);
 void pair40Set(PartyPanelWidget *widget, s32 first, s32 second);
 void FUN_00298d28(s32 x, s32 y);
 

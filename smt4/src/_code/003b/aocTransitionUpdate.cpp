@@ -12,7 +12,7 @@ struct NavigationPosition {
 };
 extern "C" {
 void FUN_0028d664(AocScriptHolder *, u32);
-s32 FUN_0027398c(AocScriptHolder *);
+s32 itemEventStartupUpdate(AocScriptHolder *);
 void helpResourcesRelease(AocScriptHolder *);
 void saveSetNavigationPosition(const NavigationPosition *);
 void gameCopyPersistentSave();
@@ -42,7 +42,7 @@ extern "C" void aocTransitionUpdate(ContentTransition *scene)
     }
     if (scene->step.phase != 1)
         return;
-    s32 status = FUN_0027398c(&g_aocMain->scriptHolder);
+    s32 status = itemEventStartupUpdate(&g_aocMain->scriptHolder);
     if (status) {
         helpResourcesRelease(&g_aocMain->scriptHolder);
         if (g_mapSelection.selection.group >= 0) {

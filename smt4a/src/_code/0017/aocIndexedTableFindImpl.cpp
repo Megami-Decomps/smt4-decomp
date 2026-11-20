@@ -1,37 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `aocIndexedTableFindImpl` (_code @ 0x17628c, 0x44 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "util/BinarySearch.h"
+
+struct AocIndexedRecord {
+    u16 id;
+    u8 payload[0x1E];
+};
+typedef char AocIndexedRecordSizeCheck[sizeof(AocIndexedRecord) == 0x20 ? 1 : -1];
+
+struct AocIndexedTableHeader {
+    u32 count;
+    const AocIndexedRecord *entries;
+};
+
+struct AocIndexedTableOwner {
+    u8 unk000[0x42C];
+    AocIndexedTableHeader table;
+};
 
 extern "C" {
+s32 FUN_00191f58(const void *lhs, const void *rhs);
 
-int libc_bsearch(unsigned short [20], unsigned int, int, int, unsigned char *);
-
-/* stack frame of param_2: 3 slot(s), 10 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-    unsigned short sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_2_stack;
-
-extern unsigned char LAB_00191f58; /* 0x191f58 */
-
-/* Supplied declaration required: libc_bsearch. */
-
-
-void aocIndexedTableFindImpl(int param_1,unsigned short param_2)
-
+/* Looks up an AOC indexed record by ID via binary search and returns a pointer to its payload, or NULL. */
+void *aocIndexedTableFindImpl(const AocIndexedTableOwner *owner, u16 id)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned short temp_v0 [20];
-  
-  if (*(int *)(param_1 + 0x42c) != 0) {
-    temp_v0[0] = param_2;
-    libc_bsearch(temp_v0,*(unsigned int *)(param_1 + 0x430),*(int *)(param_1 + 0x42c),0x20,
-                 &LAB_00191f58);
-                    /* WARNING: Treating indirect jump as return */
-    return;
-  }
-  return;
+    if (owner->table.count == 0) {
+        return NULL;
+    }
+    AocIndexedRecord key;
+    key.id = id;
+    AocIndexedRecord *found = (AocIndexedRecord *)libc_bsearch(
+        &key, owner->table.entries, owner->table.count, sizeof(AocIndexedRecord), FUN_00191f58);
+    if (found != NULL) {
+        return found->payload;
+    }
+    return NULL;
 }
-
-} /* extern "C" */
+}

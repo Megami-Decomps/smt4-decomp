@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014a930(...);
+int svcCreateSemaphore(...);
 int asdProcessCreateSimple(...);
 int aocThreadAllocateStorage(...);
 int resultHandleFailure(...);
@@ -20,7 +20,7 @@ typedef struct {
 extern int FUN_0015f0f4(...); /* 0x15f0f4 */
 extern int FUN_001a6c40(...); /* 0x1a6c40 */
 
-/* Supplied declaration required: FUN_0014a930. */
+/* Supplied declaration required: svcCreateSemaphore. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: aocThreadAllocateStorage. */
 extern int FUN_0015f434(int);
@@ -57,7 +57,7 @@ int FUN_001481e4(int param_1)
     ppcVar3 = (romwright_code **)0xe0a0183b;
   }
   else {
-    FUN_0014a930(&temp_v1,1,1);
+    svcCreateSemaphore(&temp_v1,1,1);
     if (-1 < (int)ppcVar3) {
       ppcVar3 = (romwright_code **)0x0;
       *(romwright_code **)(temp_v0 + 0x10) = temp_v1;

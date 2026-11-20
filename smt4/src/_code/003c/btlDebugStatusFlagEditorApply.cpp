@@ -1,4 +1,8 @@
-/* NON_MATCHING: typed rewrite of the status-flag editor item handler (405 vs 397 rows); retail copies the screen into r5 and keeps the battle state spilled while armcc copies both at entry, and the per-entry loops compile with different register numbering. */
+/* NON_MATCHING: 106 lines (20 by shape). The item switch, the party loops and the member loops (written in place:
+ * retail copies the entry into r6 at its NULL test and computes &battle->actions once before the 109-entry loop)
+ * agree. What differs: in items 13 and 14 retail tests the two filters with one predicated chain (ldrbeq/cmpeq)
+ * where this build branches, one instruction more each, which shifts every later address; and the single-entry
+ * loop of item 13 computes the action's address through r2/r1 where this build uses r1/r2. */
 #include "battle/BtlMainAccess.h"
 #include "battle/BattleUnitSlot.h"
 #include "battle/btlAction.h"
@@ -31,27 +35,10 @@ s32 slotUnitIsInActiveParty(void *record);
 void objectFlagSetBit(void *record, s32 bit);
 void objectFlagsClear(void *record, u32 flags);
 
-/* Adds the flag mask to every action of an entry. */
-static __inline void addEntryFlags(BtlMainState *battle, BtlEntry *entry, u32 mask)
-{
-    for (s32 slot = 0; slot < 50; ++slot) {
-        s32 action = entry->ids[slot];
-        if (action >= 0)
-            FUN_00246e24(0, btlUnitGet(g_btlScriptUnit), &battle->actions[action], mask, 1);
-    }
-}
-
-/* Removes the flag mask from every action of an entry. */
-static __inline void removeEntryFlags(BtlMainState *battle, BtlEntry *entry, u32 mask)
-{
-    for (s32 slot = 0; slot < 50; ++slot) {
-        s32 action = entry->ids[slot];
-        if (action >= 0)
-            FUN_00246d38(0, btlUnitGet(g_btlScriptUnit), &battle->actions[action], mask);
-    }
-}
-
-void FUN_003c33c8(StatusFlagEditor *screen, BtlMainState *battle)
+/* The status-flag editor's item handler (Apocalypse's btlDebugStatusFlagEditorApply): items 0-3 pick the entry
+ * and the filters, 4-12 toggle a bit of the mask, 13 adds the mask to the chosen entries (and the party) and
+ * 14 removes it. */
+void btlDebugStatusFlagEditorApply(StatusFlagEditor *screen, BtlMainState *battle)
 {
     u32 item = asdListBoxGetSelectedItemId(screen->listBox);
     s32 index = 0;
@@ -126,13 +113,23 @@ void FUN_003c33c8(StatusFlagEditor *screen, BtlMainState *battle)
         if (slotIsActive(0) == 0)
             return;
         if (screen->onlyAllies != 0 || screen->onlyEnemies != 0) {
-            do {
+            for (; index < 109; ++index) {
                 BtlEntry *entry = FUN_002561d8(battle, index, 1);
-                if (entry != NULL && (screen->onlyAllies == 0 || (entry->flags & 0x10) == 0) &&
-                    (screen->onlyEnemies == 0 || (entry->flags & 0x10) != 0))
-                    addEntryFlags(battle, entry, screen->mask);
-                ++index;
-            } while (index < 109);
+                if (entry == NULL)
+                    continue;
+                if (screen->onlyAllies != 0 && (entry->flags & 0x10) != 0)
+                    continue;
+                if (screen->onlyEnemies != 0 && (entry->flags & 0x10) == 0)
+                    continue;
+                /* Adds the flag mask to every action of the entry. */
+                for (s32 slot = 0; slot < 50; ++slot) {
+                    s32 action = entry->ids[slot];
+                    if (action >= 0) {
+                        BtlActionRecord *target = &battle->actions[action];
+                        FUN_00246e24(0, btlUnitGet(g_btlScriptUnit), target, screen->mask, 1);
+                    }
+                }
+            }
         }
         if (screen->includeParty != 0) {
             u8 count = gameGetSlotTable()->stockCount;
@@ -151,21 +148,38 @@ void FUN_003c33c8(StatusFlagEditor *screen, BtlMainState *battle)
         }
         if (screen->onlyAllies == 0 && screen->onlyEnemies == 0 && screen->entryIndex >= 0) {
             BtlEntry *entry = FUN_002561d8(battle, screen->entryIndex, 1);
-            if (entry != NULL)
-                addEntryFlags(battle, entry, screen->mask);
+            if (entry != NULL) {
+                for (s32 slot = 0; slot < 50; ++slot) {
+                    s32 action = entry->ids[slot];
+                    if (action >= 0) {
+                        BtlActionRecord *target = &battle->actions[action];
+                        FUN_00246e24(0, btlUnitGet(g_btlScriptUnit), target, screen->mask, 1);
+                    }
+                }
+            }
         }
         return;
     case 14:
         if (slotIsActive(0) == 0)
             return;
         if (screen->onlyAllies != 0 || screen->onlyEnemies != 0) {
-            do {
+            for (; index < 109; ++index) {
                 BtlEntry *entry = FUN_002561d8(battle, index, 1);
-                if (entry != NULL && (screen->onlyAllies == 0 || (entry->flags & 0x10) == 0) &&
-                    (screen->onlyEnemies == 0 || (entry->flags & 0x10) != 0))
-                    removeEntryFlags(battle, entry, screen->mask);
-                ++index;
-            } while (index < 109);
+                if (entry == NULL)
+                    continue;
+                if (screen->onlyAllies != 0 && (entry->flags & 0x10) != 0)
+                    continue;
+                if (screen->onlyEnemies != 0 && (entry->flags & 0x10) == 0)
+                    continue;
+                /* Removes the flag mask from every action of the entry. */
+                for (s32 slot = 0; slot < 50; ++slot) {
+                    s32 action = entry->ids[slot];
+                    if (action >= 0) {
+                        BtlActionRecord *target = &battle->actions[action];
+                        FUN_00246d38(0, btlUnitGet(g_btlScriptUnit), target, screen->mask);
+                    }
+                }
+            }
         }
         if (screen->includeParty != 0) {
             u8 count = gameGetSlotTable()->stockCount;
@@ -180,8 +194,15 @@ void FUN_003c33c8(StatusFlagEditor *screen, BtlMainState *battle)
         }
         if (screen->onlyAllies == 0 && screen->onlyEnemies == 0 && screen->entryIndex >= 0) {
             BtlEntry *entry = FUN_002561d8(battle, screen->entryIndex, 1);
-            if (entry != NULL)
-                removeEntryFlags(battle, entry, screen->mask);
+            if (entry != NULL) {
+                for (s32 slot = 0; slot < 50; ++slot) {
+                    s32 action = entry->ids[slot];
+                    if (action >= 0) {
+                        BtlActionRecord *target = &battle->actions[action];
+                        FUN_00246d38(0, btlUnitGet(g_btlScriptUnit), target, screen->mask);
+                    }
+                }
+            }
         }
         return;
     default:

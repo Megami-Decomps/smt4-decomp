@@ -5,7 +5,7 @@
 #include "sys/ResultReport.h"
 
 extern "C" {
-s32 FUN_0014a930(u32 *handle, u32 initialCount, u32 maxCount);
+s32 svcCreateSemaphore(u32 *handle, u32 initialCount, u32 maxCount);
 s32 svcReleaseSemaphore(u32 *previousCount, u32 semaphore, u32 releaseCount);
 void *memAlloc(u32 heap, u32 alignmentClass, u32 option, u32 size, u32 alignment, u32 fromFront);
 void resultReportIfFailed(ThreadStackStorage *stack, void *buffer, u32 size);
@@ -26,7 +26,7 @@ static inline s32 initializeSaveSemaphore(u32 *semaphore)
     u32 handle = 0;
     if (*semaphore != 0)
         return (s32)0xe0a0183b;
-    s32 result = FUN_0014a930(&handle, 0, 1);
+    s32 result = svcCreateSemaphore(&handle, 0, 1);
     if (nnResultIsSuccess(result)) {
         *semaphore = handle;
         result = 0;

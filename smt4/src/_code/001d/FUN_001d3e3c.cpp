@@ -397,7 +397,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapInterfaceSetStateTwo. */
 /* Supplied declaration required: FUN_00273840. */
 /* Supplied declaration required: saveSetNavigationPosition. */
-extern int FUN_0027398c(int);
+extern int itemEventStartupUpdate(int);
 /* Supplied declaration required: mapUpdatePendingAvailabilityFlags. */
 /* Supplied declaration required: mapUpdateLocationAvailability. */
 /* Supplied declaration required: clearFlags310To31F. */
@@ -1580,7 +1580,7 @@ joined_r0x001d535c:
   case 0x10:
     lmapMainStep();
     if (puVar7[4] != 0) {
-      temp_v6 = FUN_0027398c(g_aocMain + 0xa8);
+      temp_v6 = itemEventStartupUpdate(g_aocMain + 0xa8);
       if (temp_v6 != 0) {
         helpResourcesRelease(g_aocMain + 0xa8);
         if (g_mapSelection.selection.group >= 0) {

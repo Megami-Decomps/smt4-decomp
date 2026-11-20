@@ -1,5 +1,6 @@
 #include "gfx/TrackedRecord.h"
 #include "camp/Unite/UniteWork.h"
+#include "code/Code0029_Smt4.h"
 
 extern "C" {
 void recordTrackDirtyValue(FlaggedEntry *record, u32 value);

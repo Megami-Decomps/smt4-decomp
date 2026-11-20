@@ -8447,3 +8447,15 @@
 00429178 aocServiceRunItemRequest inferred twin of smt4 0x3540d8
 004289cc aocServiceRunItemCodeRequest inferred twin of smt4 0x353a74
 002d1f40 lmapRequestTimedEffect inferred twin of smt4 0x2879dc
+003423e8 buttonHelpSetPanelMode inferred twin of smt4 0x2d666c (four panel sprites, modes 0 and 2); campButtonHelpAcquire inlines its body
+00387ac4 buttonHelpSetTextVisible inferred stores g_buttonHelp.work->textVisible, the body of smt4's buttonHelpSetTextVisible (0x295214); it never touched the mode
+004733cc aocListJobSubmitFlaggedIds inferred twin of smt4 0x38ae30
+00314d18 scrCommScreenFade inferred twin of smt4 0x21ea68
+002b3c9c renderSubmissionDrawPacket inferred twin of smt4 0x256a50
+00325ba4 mapObjFindNearestPointByCategory inferred finds the nearest table-45 point of one of three categories on this map, optionally above or below the origin, and returns its position and heading
+003cdeb0 skillScreenDrawCandidateRow inferred draws the highlighted candidate row: button strip, frame, name in its state colour, icon and cost, or the empty marker
+003cce74 skillScreenDrawSelectedSlotRow inferred draws the highlighted slot row: button strip and, for a filled slot, frame, name, icon and cost
+0014a930 svcCreateSemaphore evidence svc 0x15 (CreateSemaphore), output handle stored through the first argument; smt4's svcCreateSemaphore is 0x2c52dc
+0014a948 svcGetResourceLimit evidence svc 0x38 (GetResourceLimit), output handle stored through the first argument
+0047e150 itemEventStartupUpdate inferred the ItemEventStartup state machine's update (loads event/e%03d's .bf/.mbm, runs and ends the event); twin of smt4 0x27398c
+00497a6c shopScreenRedrawHeaderAndSlots inferred redraws the shop screen's header icons and the visible slots of the current category

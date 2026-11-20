@@ -13,8 +13,6 @@
 extern "C" {
 
 u32 compendiumEntryIsRegistered(u32 index);
-void partyWidgetSetTransitionPending(PartyPanelWidget *widget, u8 value);
-void partyWidgetSetTransitionKind(PartyPanelWidget *widget, u8 value);
 void __aeabi_memset4(void *destination, u32 size, s32 value);
 
 /* Refreshes the fusion availability flags and icons of the panel's reserve rows and slot cells. */

@@ -1,38 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `dataTable41FindByIdImpl` (_code @ 0x1b2e78, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "util/BinarySearch.h"
+
+struct Table41Record {
+    u8 unk00[0x20];
+    u16 id;
+    u8 unk22[0x26];
+};
+typedef char Table41RecordSizeCheck[sizeof(Table41Record) == 0x48 ? 1 : -1];
+
+struct Table41Header {
+    u32 count;
+    const Table41Record *entries;
+};
+
+struct Table41Owner {
+    u8 unk000[0x43C];
+    Table41Header table;
+};
 
 extern "C" {
+s32 FUN_001b9fc4(const void *lhs, const void *rhs);
 
-int libc_bsearch(unsigned char [32], unsigned int, unsigned int, int, unsigned char *);
-
-/* stack frame of param_2: 3 slot(s), 10 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-    unsigned short sp30; /* 0x30: local_30 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_2_stack;
-
-extern unsigned char LAB_001b9fc4; /* 0x1b9fc4 */
-
-/* Supplied declaration required: libc_bsearch. */
-
-
-void dataTable41FindByIdImpl(int param_1,unsigned short param_2)
-
+/* Looks up a record by ID in table 41 via binary search, returning NULL if the table is empty. */
+void *dataTable41FindByIdImpl(const Table41Owner *owner, u16 id)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned char temp_v0 [32];
-  unsigned short temp_v1;
-  
-  if (*(int *)(param_1 + 0x43c) != 0) {
-    temp_v1 = param_2;
-    libc_bsearch(temp_v0,*(unsigned int *)(param_1 + 0x440),*(unsigned int *)(param_1 + 0x43c),0x48,
-                 &LAB_001b9fc4);
-                    /* WARNING: Treating indirect jump as return */
-    return;
-  }
-  return;
+    if (owner->table.count == 0) {
+        return NULL;
+    }
+    Table41Record key;
+    key.id = id;
+    return libc_bsearch(&key, owner->table.entries, owner->table.count, sizeof(Table41Record), FUN_001b9fc4);
 }
-
-} /* extern "C" */
+}

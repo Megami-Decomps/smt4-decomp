@@ -1,7 +1,9 @@
-/* NON_MATCHING: same structure as Apocalypse's FUN_00217f14 (152 raw / 98 shape rows). Retail spills both hoisted
- * layout bases (sp+28/sp+32), which leaves fp for the command id inside the icon helper and in the highlight pass;
- * the build keeps the even base in fp and spills the id. The row position is in sl/r9 where the build has r9/sl,
- * and the highlight sums are made in place (r6/r7) where the build takes new registers. */
+/* NON_MATCHING: same structure as Apocalypse's campDrawCommandMenu (112 raw / 74 shape rows, from 152 / 98). The row
+ * loop now spills both hoisted layout bases as retail does (sp+28/sp+32) and keeps the command id in fp inside the
+ * icon helper. What differs: the row position is in sl/r9 where the build has r9/sl; in the highlight pass retail
+ * keeps the command id in fp (the build spills it to sp+16), the row position in r9/sl (the build: sl/fp) and makes
+ * the highlight sums in place in r6/r7 where the build takes new registers; and the first blend-state change
+ * moves the packed state to r1 before locating the stack (the second matches). */
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTableEntry.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
@@ -70,9 +72,11 @@ extern "C" void campDrawCommandMenu(void)
         }
 
         const u32 command = dataTable15GetUnlockedEntryId(camp->menuGroup, row);
-        const s32 evenLayout = 4 + (8 - count) / 2;
-        const s32 oddLayout = 20 + (7 - count) / 2;
-        const s32 layout = (count & 1) != 0 ? oddLayout : evenLayout;
+        s32 layout;
+        if ((count & 1) == 0)
+            layout = 4 + (8 - count) / 2;
+        else
+            layout = 20 + (7 - count) / 2;
         const TextureTableEntryIV *entry = asdTMTexTableEntryAt(29, layout + row);
         texDrawTableEntryAtStoredOrigin(2, 29, 34, entry->x + x, entry->y + y, 206);
         campDrawCommandIcon(command, entry->x + x, entry->y + y, 211);

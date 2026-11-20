@@ -5,7 +5,7 @@ extern "C" {
 void FUN_00338330(RenderSubmissionPacket *, const f32 *, const f32 *, const f32 *);
 void FUN_002f8a54();
 void asdGxSetEffectColorFromRGBA8(u32 color);
-void FUN_002b3c9c(RenderSubmissionPacket *, u32 mode);
+void renderSubmissionDrawPacket(RenderSubmissionPacket *, u32 mode);
 u32 FUN_0038136c(RenderSubmissionOwner *, const u32 *color, u32 frame, u32 duration);
 u32 FUN_00221cb0();
 
@@ -35,6 +35,6 @@ void FUN_003bde08(RenderSubmission *submission)
     } else {
         packet->flags &= ~0x100;
     }
-    FUN_002b3c9c(packet, static_cast<u16>(owner->drawMode));
+    renderSubmissionDrawPacket(packet, static_cast<u16>(owner->drawMode));
 }
 }

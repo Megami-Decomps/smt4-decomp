@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the zero arguments in a callee-saved register (r5/r6 split, 5-register frame) and orders the stack-argument stores differently. */
+/* NON_MATCHING: the frame and the shared zero now match; retail stores the three stack arguments one by one (work first, from r0) and loads the name last, where the build stores them with one stm. */
 #include "classes/AllocatorState.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
@@ -12,17 +12,16 @@ s32 jobClearCachedWork(u32 job);
 void jobSetParent(void *parent, void *job);
 void jobStop(void *job, s32 mode);
 
-/* Starts a debug process parented to the root and remembers it as the latest one. */
-static __inline void *memoryDebugStartProcess(const char *name, s32 id, u32 (*update)(),
+/* Starts a debug process under `parent` (NULL: the root) and remembers it as the latest one. */
+static __inline void *memoryDebugStartProcess(const char *name, s32 id, void *parent, u32 (*update)(),
                                               s32 (*finish)(u32), void *work)
 {
-    AllocatorStateA *allocationAddressRangesPtr = &g_asdMemState;
     void *process = reinterpret_cast<void *>(asdProcessCreateSimple(reinterpret_cast<const s8 *>(name), id, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(update), reinterpret_cast<AsdProcFunc>(finish), reinterpret_cast<u32>(work)));
     if (process == NULL) {
         return NULL;
     }
-    jobSetParent(NULL, process);
-    allocationAddressRangesPtr->lastMapProcess = process;
+    jobSetParent(parent, process);
+    g_asdMemState.lastMapProcess = process;
     return process;
 }
 
@@ -38,8 +37,8 @@ void FUN_0013778c(void)
     g_asdMemState.usage->limit = 0x08800000;
     g_asdMemState.usage->debugFlags |= 1;
     DAT_005b4068 = 0;
-    g_asdMemState.mapProcess = memoryDebugStartProcess(
-        DAT_0053d898, 0x15e, memoryDebugRefresh, jobClearCachedWork, &DAT_005b4068);
+    g_asdMemState.mapProcess = memoryDebugStartProcess(DAT_0053d898, 0x15e, NULL, memoryDebugRefresh,
+                                                      jobClearCachedWork, &DAT_005b4068);
 }
 
 } /* extern "C" */

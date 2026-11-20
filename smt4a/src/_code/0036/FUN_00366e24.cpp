@@ -21,7 +21,7 @@ int FUN_002e364c(int);
 int lmapCameraSetMode(int);
 int mapIfReleaseSlot3(void);
 int FUN_00324e38(unsigned int);
-int FUN_00325ba4(int, int, int, int *, float [7], unsigned int);
+int mapObjFindNearestPointByCategory(int, int, int, int *, float [7], unsigned int);
 int FUN_00327ee8(void);
 int sysPlayVoice(int);
 int soundActorStartOnFreeChannel(...);
@@ -61,7 +61,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapIfReleaseSlot3. */
 /* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: FUN_00324e38. */
-/* Supplied declaration required: FUN_00325ba4. */
+/* Supplied declaration required: mapObjFindNearestPointByCategory. */
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
@@ -167,7 +167,7 @@ void FUN_00366e24(void)
               temp_v9 = *(unsigned int *)(temp_v2 + 0x28);
               fStack_3c = *(float *)(temp_v2 + 0x2c);
               uStack_38 = *(unsigned int *)(temp_v2 + 0x30);
-              FUN_00325ba4(2,10,0x66,&temp_v9,temp_v10,0xffffffff);
+              mapObjFindNearestPointByCategory(2,10,0x66,&temp_v9,temp_v10,0xffffffff);
               temp_v2 = g_lmapScene;
               temp_v10[0] = temp_v10[0] + temp_v4;
               if (temp_v10[0] < temp_v7) {

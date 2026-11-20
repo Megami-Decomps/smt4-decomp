@@ -25,9 +25,6 @@ s32 appGetRemainingCapacity(u16 item);
 s32 skillGetDiscountedCost(u16 item, u32 flag);
 s32 listCursorGetRowIfUnblocked(void *selection);
 s32 objectPartRunUnlessLocked(void *selection);
-void partyWidgetSetValue(PartyPanelWidget *widget, s32 value);
-void partyWidgetSetCost(PartyPanelWidget *widget, s32 cost);
-s32 partyWidgetGetCost(PartyPanelWidget *widget);
 
 // Set the price shown beside every preview widget affected by the selected item, then compute the
 // value for the selected active-party or stock unit and publish it on that unit's widget.

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_TextHistory.h"
 #include "sys/RuntimeObjects.h"
 
@@ -183,7 +184,7 @@ void FUN_0028b350(int param_1,int param_2)
       uiSpriteSetScaleKeyframe(param_1 + 0x240,1,0);
       uiGetLayoutPointDifference(param_1 + 0x240,8,0x7d5,0x7d1);
     }
-    *(unsigned short *)(param_1 + 0x27a) = 2;
+    spriteSetLayer((UiSpriteState *)(param_1 + 0x240), 2);
     return;
   case 6:
     pairSetSecondResetFirst((UiSpriteState *)(param_1 + 0x1b4),0x10);
@@ -196,8 +197,8 @@ void FUN_0028b350(int param_1,int param_2)
       uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x1b4),0);
     }
     uiStoreTextureEntryCenter(param_1 + 0x1b4,8,0x111);
-    *(unsigned char *)(param_1 + 0x1f0) = 1;
-    *(unsigned short *)(param_1 + 0x1ee) = 2;
+    spriteSetVisible((UiSpriteState *)(param_1 + 0x1b4), 1);
+    spriteSetLayer((UiSpriteState *)(param_1 + 0x1b4), 2);
     pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + 0x3e4)),7);
     uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x3e4),4);
     uiStoreTextureEntryCenter(param_1 + 0x3e4,8,0x47);
@@ -206,10 +207,10 @@ void FUN_0028b350(int param_1,int param_2)
   case 8:
     pairSetSecondResetFirst((UiSpriteState *)(param_1 + 0x1b4),6);
     uiStoreTextureEntryCenter(param_1 + 0x1b4,8,0x36);
-    *(unsigned char *)(param_1 + 0x1f0) = 1;
+    spriteSetVisible((UiSpriteState *)(param_1 + 0x1b4), 1);
     pairSetSecondResetFirst((UiSpriteState *)temp_v6,7);
     uiStoreTextureEntryCenter(temp_v6,8,0x36);
-    *(unsigned char *)(param_1 + 0x538) = 1;
+    spriteSetVisible((UiSpriteState *)(param_1 + 0x4fc), 1);
     temp_v7 = 9;
     padQueryLogicalKey(9,2);
     if (temp_v7 == 0) {
@@ -228,10 +229,10 @@ joined_r0x0028baa4:
   case 9:
     pairSetSecondResetFirst((UiSpriteState *)(param_1 + 0x1b4),4);
     uiStoreTextureEntryCenter(param_1 + 0x1b4,8,0x22);
-    *(unsigned char *)(param_1 + 0x1f0) = 1;
+    spriteSetVisible((UiSpriteState *)(param_1 + 0x1b4), 1);
     pairSetSecondResetFirst((UiSpriteState *)temp_v6,5);
     uiStoreTextureEntryCenter(temp_v6,8,0x36);
-    *(unsigned char *)(param_1 + 0x538) = 1;
+    spriteSetVisible((UiSpriteState *)(param_1 + 0x4fc), 1);
     temp_v7 = 9;
     padQueryLogicalKey(9,2);
     if (temp_v7 == 0) {
@@ -250,7 +251,7 @@ joined_r0x0028baa4:
       uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x1b4),5);
     }
     uiStoreTextureEntryCenter(param_1 + 0x1b4,8,0x15);
-    *(unsigned char *)(param_1 + 0x1f0) = 1;
+    spriteSetVisible((UiSpriteState *)(param_1 + 0x1b4), 1);
     return;
   case 0xb:
     pairSetSecondResetFirst((UiSpriteState *)(param_1 + 0x1b4),0xb);

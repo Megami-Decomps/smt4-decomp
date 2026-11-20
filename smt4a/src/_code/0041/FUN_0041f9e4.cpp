@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler duplicates the row-render call rather than merging it into retail's shared call; 71 versus 65 instructions. */
+/* NON_MATCHING: all 65 instructions match; only the else block placement (inline vs after epilogue branch) differs. */
 #include "common.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -36,7 +36,9 @@ void FUN_0041f9e4(MenuRowRefreshView *menu)
     for (s32 row = 0; row < menu->visibleCount; ++row) {
         s32 recordIndex = menu->firstIndex + menu->pageOffset + row;
         const TextureTableEntryIV *layout = asdTMTexTableEntryAt(0x2b, baseIndex + row);
-        s32 selected = menu->selectedRow == row;
+        s32 selected = 0;
+        if (menu->selectedRow == row)
+            selected = 1;
         if (menu->occupied[recordIndex]) {
             FUN_0041b360(&menu->rows[row], &menu->records[recordIndex], layout,
                         recordIndex + 1, selected, 1);

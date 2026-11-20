@@ -4,6 +4,7 @@
 #include "code/Code002a.h"
 #include "camp/CampStateA.h"
 #include "camp/CampMenuEntry.h"
+#include "ui/UiSpriteApi.h"
 
 #define CAMP_MENU_SUB 0x47
 #define CAMP_MENU_UNITE_FIRST 0x20
@@ -18,9 +19,7 @@ void campDrawDetailArea(s32 item, u32 mode);
 void campDrawCommandMenu(void);
 void FUN_00288538(s32 flag);
 s32 uniteGetState(void);
-s32 vec2GetXInt(void);
-s32 vec2GetYInt(void *origin);
-void FUN_002aa56c(s32 x, s32 y, s32 column, s32 row, s32 value);
+void FUN_002aa56c(s32 x, s32 y, s32 column, s32 row, s32 value, f32 alpha);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 
@@ -32,9 +31,10 @@ static __inline s32 campCursorItem(CampStateA *camp)
 
 static __inline void campDrawBar(CampStateA *camp)
 {
-    s32 x = vec2GetXInt();
+    s32 x = vec2GetXInt(&camp->sprites[4]);
     s32 y = vec2GetYInt(&camp->sprites[4]);
-    FUN_002aa56c(x, y, camp->unitSelectIndex, camp->unitSelectSource, camp->touch.unitRegions[camp->unitSelectIndex]);
+    FUN_002aa56c(x, y, camp->unitSelectIndex, camp->unitSelectSource, camp->touch.unitRegions[camp->unitSelectIndex],
+                 vec2GetSpeed(&camp->sprites[4]));
 }
 
 /* Draws the detail area for menus that show an item description. */

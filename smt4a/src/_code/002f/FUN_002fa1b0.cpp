@@ -37,7 +37,7 @@ void FUN_002fa1b0(IconPanel *panel, u32 kind, s32 x, s32 y, f32 speed, s32 alter
         texDrawTableEntryAtStoredOrigin(2, 13, 171, offsetX, offsetY, 52);
         texDrawTableEntryAtStoredOrigin(2, 13, 222, offsetX, offsetY, 53);
         if (panel->styled == 1) {
-            efctSetSpeed(panel->position.alpha * speed);
+            efctSetSpeed(vec2GetSpeed(&panel->position) * speed);
             RenderCtxA *render = g_renderCtx;
             u32 blend = packNibblesAndByte(6, 1, 0);
             renderCtxSetB(render, blend);

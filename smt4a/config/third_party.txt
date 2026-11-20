@@ -2334,6 +2334,8 @@
 0x00149a88 FUN_00149a88 between
 0x00149ae0 FUN_00149ae0 between
 0x0014a784 nngxRunCmdlist name
+0x0014a930 FUN_0014a930 library
+0x0014a948 FUN_0014a948 library
 0x0014f280 wstrBufferPutChar name
 0x001582dc mobiclipPlayerReleaseHandle name
 0x00158624 FUN_00158624 callers
@@ -2475,6 +2477,7 @@
 0x001623b4 FUN_001623b4 between
 0x001623d0 FUN_001623d0 between
 0x001623d4 svcGetSystemTick name
+0x001623dc ll_sdiv library
 0x0016cb50 FUN_0016cb50 callers
 0x0016ccb4 FUN_0016ccb4 between
 0x0016cccc FUN_0016cccc between
@@ -3702,6 +3705,7 @@
 0x001cc198 FUN_001cc198 between
 0x001cc1d0 FUN_001cc1d0 callers
 0x001cc570 FUN_001cc570 callers
+0x001ccf7c FUN_001ccf7c callers
 0x001cd1e8 FUN_001cd1e8 callers
 0x001cd210 slotTableFillResult callers
 0x001cd260 FUN_001cd260 callers
@@ -4030,6 +4034,7 @@
 0x002e4e86 _ZSt3maxIjERKT_S2_S2_ name
 0x002e4e92 rt_vec_delete name
 0x002e4ea4 __aeabi_idivmod name
+0x002e5550 FUN_002e5550 callers
 0x002e5684 FUN_002e5684 library
 0x002e5694 FUN_002e5694 library
 0x002e56a8 FUN_002e56a8 library

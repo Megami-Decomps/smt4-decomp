@@ -1566,6 +1566,7 @@
 0x002b5838 nn_applet_CTR_detail_CallUtility name
 0x002b5904 FUN_002b5904 between
 0x002b5954 FUN_002b5954 between
+0x002b5960 ll_sdiv library
 0x002b59b0 _ZN2nn3fnd8DateTimeC1Eiiiiiii name
 0x002b59e8 nn_dsp_CTR_DSP_LoadComponent name
 0x002b5a48 wstrlenU16 name
@@ -1961,6 +1962,7 @@
 0x00356bbc FUN_00356bbc between
 0x00356bec nn_fs_ipc_Directory_Read name
 0x00356c40 nn_fs_ipc_Directory_Close name
+0x00356d98 FUN_00356d98 library
 0x00356f80 nn_gr_CTR_Vertex_DisableAttr name
 0x0035708c FUN_0035708c between
 0x00357194 vertexLoadArrayInstall between

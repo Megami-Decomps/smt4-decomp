@@ -1,4 +1,4 @@
-/* NON_MATCHING: config stores, color stores, self-relative addressing and VFP register allocation differ. */
+/* NON_MATCHING: the self-relative parameters pointer now matches (AsdResOffset::toPtr); retail stores the create info's last two words with one strd, writes the colour with a write-back vstmia and numbers the fog-range VFP registers differently. */
 #include "AsdSDK/AsdSceneFog.h"
 #include "AsdSDK/AsdDebug.h"
 

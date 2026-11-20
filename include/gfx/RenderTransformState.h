@@ -9,7 +9,9 @@ struct RenderTransformState {
     Matrix44 transform;
     Matrix44 inverse;
     u8 dirty;
-    u8 unk5B1[0xB5B];
+    u8 unk5B1[0x43];
+    /* 0x5F4 */ u8 cameraType; /* RenderCtx's cameraSelection.type: 0 once the matrices come from the caller */
+    u8 unk5F5[0xB17];
     Matrix44 view;
     Matrix44 projection;
     Matrix44 combined;
@@ -19,7 +21,15 @@ typedef char RenderTransformStateOffsets[
     offsetof(RenderTransformState, transform) == 0x530 &&
     offsetof(RenderTransformState, inverse) == 0x570 &&
     offsetof(RenderTransformState, dirty) == 0x5B0 &&
+    offsetof(RenderTransformState, cameraType) == 0x5F4 &&
     offsetof(RenderTransformState, view) == 0x110C &&
     offsetof(RenderTransformState, projection) == 0x114C &&
     offsetof(RenderTransformState, combined) == 0x118C ? 1 : -1];
+
+extern "C" {
+/* Composes the context's matrices from the given ones (NULL where the caller has none), uploads the combined
+   matrix and clears the selected camera type. */
+void renderCtxSetMatrices(RenderTransformState *context, const Matrix44 *projection, const Matrix44 *view, const Matrix44 *transform);
+}
+
 #endif

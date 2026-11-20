@@ -1,89 +1,72 @@
-/* NON_MATCHING: retail hoists zero/85.0f and uses a saved register for motion4; divide scratch selection and constant scheduling differ by one row. */
+/* NON_MATCHING: literal scheduling and the breakable animation index's lifetime differ. */
 #include "gamedata/MapSaveBlockA.h"
-#include "shard/W5_W5Match7_SceneState.h"
-
-struct MapMotionActor {
-    u8 unk000[0x1fc];
-    f32 playbackScale;
-};
-struct MapMotionBinding {
-    u32 unk00;
-    MapMotionActor *actor;
-};
-struct MapMotionScene {
-    u8 unk000[0x18c];
-    MapMotionBinding *binding;
-    u8 unk190[0x40];
-    s32 state;
-    u32 counter;
-    u8 unk1d8[0xc];
-    f32 stepSize;
-    u8 unk1e8[4];
-    f32 targetStep;
-    u8 unk1f0[0x24];
-    s8 mode;
-    u8 unk215[0xf];
-    u8 active;
-    u8 unk225[3];
-    s32 animation;
-    u8 unk22c[0xc];
-    s32 nextAnimation;
-    u8 unk23c[4];
-    f32 transition;
-};
+#include "map/LmapGlobals.h"
+#include "gfx/ControllerModel.h"
 
 extern "C" {
 u32 gameFlagIsSet(u32);
 u32 saveSlotSelectedIsId175();
 u32 mapHasFacingBreakableInReach();
-void moriModelUnitStartMaterialAnimation(MapMotionActor *, u32, u8, f32);
-void motionPlayerStartBlended(MapMotionActor *, u32, u8, f32, f32);
 
+/* Starts the map movement effect, selecting the breakable variant when needed. */
 void lmapSceneStartMovement(s8 mode)
 {
+    enum {
+        OPTIONAL_EFFECT_MODEL = 7,
+        BREAKABLE_ANIMATION = 4,
+        BREAKABLE_NEXT_ANIMATION = 13,
+        MOVEMENT_ANIMATION = 10,
+        MOVEMENT_ALTERNATE_ANIMATION = 5,
+        DEFAULT_ANIMATION = 0
+    };
     const MapSaveBlockA *flags = (const MapSaveBlockA *)gameFlagsGetBlock();
     if (!flags->fadeActive) {
         return;
     }
+
+    const f32 defaultSpeed = 85.0f;
+    const f32 noBlend = 0.0f;
     f32 distance = flags->moveDistance;
-    MapMotionScene *scene = (MapMotionScene *)g_lmapScene;
-    scene->counter = 0;
-    scene->targetStep = (f32)(s32)(distance / scene->stepSize);
-    scene->active = 1;
+    LmapSceneA *scene = g_lmapScene;
+    scene->unk1D4 = 0;
+    scene->unk1EC = (f32)(s32)(distance / scene->movementStepSize);
+    scene->unk224 = 1;
     if (mapHasFacingBreakableInReach()) {
-        scene = (MapMotionScene *)g_lmapScene;
-        scene->state = 10;
-        scene->mode = mode;
+        scene = g_lmapScene;
+        scene->movementState = 10;
+        scene->unk214 = mode;
         if (!gameFlagIsSet(0x4c9) || saveSlotSelectedIsId175()) {
-            scene = (MapMotionScene *)g_lmapScene;
-            scene->animation = 4;
-            scene->nextAnimation = 4;
+            scene = g_lmapScene;
+            scene->unk228 = BREAKABLE_ANIMATION;
+            scene->unk238 = BREAKABLE_ANIMATION;
         }
-        ((MapMotionScene *)g_lmapScene)->transition = 2.0f;
+        g_lmapScene->unk240 = 2.0f;
         if (gameFlagIsSet(0x4c9) && !saveSlotSelectedIsId175()) {
-            MapMotionActor *actor = ((MapMotionScene *)g_lmapScene)->binding->actor;
-            moriModelUnitStartMaterialAnimation(actor, 4, 2, 0.0f);
-            ((MapMotionScene *)g_lmapScene)->nextAnimation = 13;
-            motionPlayerStartBlended(actor, 13, 2, 0.0f, 0.0f);
+            Obj557b18 *actor = (Obj557b18 *)g_lmapScene->models[OPTIONAL_EFFECT_MODEL]->controller;
+            moriModelUnitStartMaterialAnimation(actor, BREAKABLE_ANIMATION, 2, noBlend);
+            g_lmapScene->unk238 = BREAKABLE_NEXT_ANIMATION;
+            motionPlayerStartBlended(actor, BREAKABLE_NEXT_ANIMATION, 2, noBlend, noBlend);
             return;
         }
     } else {
-        scene = (MapMotionScene *)g_lmapScene;
-        scene->state = 2;
-        scene->mode = mode;
+        scene = g_lmapScene;
+        scene->movementState = 2;
+        scene->unk214 = mode;
         if (!gameFlagIsSet(0x4c9) || saveSlotSelectedIsId175()) {
-            scene = (MapMotionScene *)g_lmapScene;
-            scene->animation = 10;
-            scene->nextAnimation = 10;
+            scene = g_lmapScene;
+            scene->unk228 = MOVEMENT_ANIMATION;
+            scene->unk238 = MOVEMENT_ANIMATION;
         }
-        ((MapMotionScene *)g_lmapScene)->transition = 0.0f;
+        g_lmapScene->unk240 = noBlend;
         if (gameFlagIsSet(0x4c9) && !saveSlotSelectedIsId175()) {
-            MapMotionActor *actor = ((MapMotionScene *)g_lmapScene)->binding->actor;
-            actor->playbackScale = 1.0f;
-            moriModelUnitStartMaterialAnimation(actor, 5, 2, 19.0f);
+            Obj557b18 *actor = (Obj557b18 *)g_lmapScene->models[OPTIONAL_EFFECT_MODEL]->controller;
+            actor->speed = 1.0f;
+            moriModelUnitStartMaterialAnimation(actor, MOVEMENT_ALTERNATE_ANIMATION, 2, 19.0f);
             return;
         }
     }
-    moriModelUnitStartMaterialAnimation(((MapMotionScene *)g_lmapScene)->binding->actor, 0, 2, 85.0f);
+    moriModelUnitStartMaterialAnimation((Obj557b18 *)g_lmapScene->models[OPTIONAL_EFFECT_MODEL]->controller,
+                                      DEFAULT_ANIMATION, 2, defaultSpeed);
 }
-}
+
+} /* extern "C" */

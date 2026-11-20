@@ -8,7 +8,7 @@ int handlerTableCallWithValue(...);
 void requestDispatch(void *request);
 int quadHolderCopyOut(...);
 int quadSourceCopyOut(...);
-int FUN_00256a50(...);
+int renderSubmissionDrawPacket(...);
 int FUN_00256dbc(...);
 int entryListSetPhase(...);
 int renderCtxSelectBlendPreset(...);
@@ -108,7 +108,7 @@ extern int effectQuerySelectedBehavior(void *);
 /* Supplied declaration required: requestDispatch. */
 /* Supplied declaration required: quadHolderCopyOut. */
 /* Supplied declaration required: quadSourceCopyOut. */
-/* Supplied declaration required: FUN_00256a50. */
+/* Supplied declaration required: renderSubmissionDrawPacket. */
 /* Supplied declaration required: FUN_00256dbc. */
 /* Supplied declaration required: entryListSetPhase. */
 /* Supplied declaration required: renderCtxSelectBlendPreset. */
@@ -385,7 +385,7 @@ void FUN_00267d84(fn_00267d84_arg0 *param_1)
              (((temp_v0 >> 0x10) & 0xff) << 0x10) | (temp_v0 & 0xff) | (((temp_v0 >> 8) & 0xff) << 8) |
              (temp_v0 & 0xff000000);
         renderCtxSelectBlendPreset(*(unsigned int *)(temp_v1 + 0x54) & 0xffff);
-        FUN_00256a50(*(unsigned int *)(param_1 + 1),*(unsigned int *)(temp_v1 + 0x54) & 0xffff);
+        renderSubmissionDrawPacket(*(unsigned int *)(param_1 + 1),*(unsigned int *)(temp_v1 + 0x54) & 0xffff);
       }
       break;
     case 2:
@@ -609,7 +609,7 @@ void FUN_00267d84(fn_00267d84_arg0 *param_1)
              (temp_v0 & 0xff000000);
         *(int *)(temp_v34 + 0x60) = temp_v8;
         renderCtxSelectBlendPreset(*(unsigned int *)(temp_v7 + 0x54) & 0xffff);
-        FUN_00256a50(*(unsigned int *)(param_1 + 1),*(unsigned int *)(temp_v7 + 0x54) & 0xffff);
+        renderSubmissionDrawPacket(*(unsigned int *)(param_1 + 1),*(unsigned int *)(temp_v7 + 0x54) & 0xffff);
         return;
       }
       break;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: closer (-1 slots as s16, the flag-bit store before the special test, if/else special): remaining are the prologue store order, retail holding the 0x100 skill-array offset in r1, and armcc strength-reducing the definition side of the skill loop to a post-incremented pointer where retail indexes it. */
+/* NON_MATCHING: closer (-1 slots as s16, the flag-bit store before the special test, if/else special, a u32 skill index so the definition side stays indexed); remaining are the prologue store order, retail holding the 0x100 skill-array offset in r1 from the top, and the skill loop's own count-down counter (subs/bne) where the build compares the index (cmp/bcc). */
 #include "battle/btlUnit.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -74,7 +74,7 @@ void FUN_0023ebc8(BtlMainState *battle, BtlUnitData *data, const EnemyBattleDefi
     unit->state = 0;
     for (s32 index = 0; index < 14; ++index)
         unit->counters[index] = 0;
-    for (s32 index = 0; index < 18; ++index) {
+    for (u32 index = 0; index < 18; ++index) {
         u16 *skill = &unit->skills[index];
         skill[0] = definition->skills[index];
         skill[18] = definition->skills[index]; /* initialSkills[index] */

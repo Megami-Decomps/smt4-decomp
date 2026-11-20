@@ -1,5 +1,11 @@
-/* NON_MATCHING: motion-frame tests, pose argument scheduling and the encounter marker's
- * game-state loads still compile differently from retail. */
+/* NON_MATCHING: 201 lines (167 by shape). The frame (one 12-byte position shared by the three blocks), the model
+ * flags (s8: retail reads them through scene + 0x100) and the player model's pose calls agree. What differs:
+ * the equipment tests keep the scene and the equipped id in other registers; the motion-frame tests move the
+ * frame's bits out of s16 after each test of the previous frame where this build hoists the move above it, and
+ * lay the two step effects out in another order; the marker and stage-model rotations load the model before the
+ * heading; and retail reaches the event block's words through g_gameState itself (r7) and only its s8 flags
+ * through g_gameState + 0x100 (its own pool word) where this build goes through one event pointer (reading
+ * g_gameState.event directly gives retail's addressing but swaps r6 and r7 for the rest of the function). */
 #include "AsdSDK/Source/Gfx/Model/AsdMotionControlApi.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMotionValueApi.h"
 #include "AsdSDK/Source/Snd/AsdSnd3dPosition.h"
@@ -114,8 +120,7 @@ extern "C" void lmapUpdateSceneModels(void)
     } else {
         MapVector position = g_lmapScene->pose.position;
         nodeOwnerSetTranslations(g_lmapScene->playerModel, &position);
-        const NodeVec3 rotation = { 0.0f, g_lmapScene->pose.heading, 0.0f };
-        FUN_003351e0(g_lmapScene->playerModel, rotation);
+        FUN_003351e0(g_lmapScene->playerModel, nodeVec3(0.0f, g_lmapScene->pose.heading, 0.0f));
         nodeGroupSetScale(g_lmapScene->playerModel, nodeVec3(1.0f, 1.0f, 1.0f));
     }
 
@@ -149,11 +154,11 @@ extern "C" void lmapUpdateSceneModels(void)
     if (g_lmapScene->markers.mapFile5 == NULL || g_lmapScene->markers.mapFile6 == NULL || g_lmapScene->stageModel == NULL)
         return;
 
-    MapVector markerPosition;
     if (g_gameState.inputBlocked) {
         setMapModelVisible(g_lmapScene->markers.mapFile5, false);
         setMapModelVisible(g_lmapScene->markers.mapFile6, false);
     } else {
+        MapVector markerPosition;
         setMapModelVisible(g_lmapScene->markers.mapFile5, g_lmapScene->markerState.showFile5 != 0);
         markerPosition = g_lmapScene->pose.position;
         nodeSetTranslation(g_lmapScene->markers.mapFile5->node, 0, &markerPosition.x);

@@ -7,10 +7,6 @@ void FUN_00298d28(u32 a, u32 b);
 s32 appGetRemainingCapacity(u16 action);
 s32 skillGetDiscountedCost(u16 action, u32 mode);
 s32 skillApplyToTarget(u32 user, s32 target, u32 action, s32 *result);
-s32 partyWidgetGetX(void *widget);
-s32 partyWidgetGetCost(void *widget);
-void partyWidgetSetValue(void *widget, s32 value);
-void partyWidgetSetCost(void *widget, s32 cost);
 
 void FUN_0026b7c0(void)
 {

@@ -1,4 +1,4 @@
-/* NON_MATCHING: identical control flow and rectangle arithmetic; retail loads the last two stack arguments with one ldrd and keeps the draw-request pointer in r6 (this build uses ldm pairs and r4), so the stores are scheduled differently. */
+/* NON_MATCHING: registers and control flow match; retail clears the texture pointer before the ldrne (mov r6, #0) where this build sets it after (moveq), and starts the texture-chain loads before the flag update. */
 #include "common.h"
 
 /* Texture description: the pixel size sits at +0x14. */
@@ -29,8 +29,8 @@ struct TextureFileRef {
 };
 
 struct Extent {
-    s32 width;
-    s32 height;
+    /* 0x00 */ s32 width;
+    /* 0x04 */ s32 height;
 };
 
 /* The draw request: flags, then the source/destination rectangle at +0x14. */
@@ -52,23 +52,21 @@ void *asdTMTexTableCallFileB(s32 table, void *name);
 void requestParamsInitialize(SpriteDrawRequest *request, u32 a, s32 b, s32 c, u32 d);
 void FUN_002a8ac4(TextureSize *size, SpriteDrawRequest *request, void *node);
 
-void FUN_00389f74(void *package, u32 p2, u32 a, void *name, s32 x0, s32 y0, u32 scale, s32 x1, s32 y1, Extent extent)
+void FUN_00389f74(void *package, u32 p2, u32 a, void *name, s32 x0, s32 y0, u32 scale, s32 x1, s32 y1, s32 width, s32 height)
 {
     TextureFileRef *ref = packageFindFileRefByName(package, 23, name);
-    TextureLink0 *texture = NULL;
-    if (ref != NULL) {
-        texture = ref->texture;
-    }
+    TextureLink0 *texture = ref != NULL ? ref->texture : NULL;
     void *node = asdTMTexTableCallFileB(23, name);
     SpriteDrawRequest request;
     requestParamsInitialize(&request, a, x1, y1, scale);
     request.flags |= 0x28000;
     TextureSize *size = &texture->next->next->next->info->size;
     request.left = size->width + (x1 - x0);
-    request.right = request.left + extent.width;
+    request.right = request.left + width;
     request.top = size->height + (y1 - y0);
-    request.bottom = request.top + extent.height;
-    request.source = extent;
+    request.bottom = request.top + height;
+    request.source.width = width;
+    request.source.height = height;
     FUN_002a8ac4(size, &request, node);
 }
 

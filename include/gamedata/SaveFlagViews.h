@@ -36,11 +36,24 @@ typedef char ProgressFlagViewSizeCheck[sizeof(ProgressFlagView) == 0x22FE ? 1 : 
 
 /* Thirty-two 100-byte saved records; removing one shifts the remaining entries. */
 struct SavedRecord100 {
-    /* 0x00 */ u8 bytes[100];
+    union {
+        /* 0x00 */ u8 bytes[100];
+        struct {
+            /* 0x00 */ u8 unk00[0x34];
+            /* 0x34 */ u16 first;
+            /* 0x36 */ u8 unk36[0x2A];
+            /* 0x60 */ u16 second;
+        } occupancy;
+    };
+};
+struct SavedRecordBody {
+    /* 0x00000 */ u8 unk00000[0x27184];
+    /* 0x27184 */ SavedRecord100 records[32];
 };
 struct SavedRecordTable {
-    /* 0x00000 */ u8 unk00000[0x2720C];
-    /* 0x2720C */ SavedRecord100 records[32];
+    /* 0x00000 */ u8 header[0x88];
+    /* 0x00088 */ SavedRecordBody body;
 };
+typedef char SavedRecord100SizeCheck[sizeof(SavedRecord100) == 100 ? 1 : -1];
 
 #endif

@@ -1,6 +1,7 @@
 /* NON_MATCHING: only the four comparisons of a loaded portrait against the desired ones use reversed CMP operands (retail cmp id, desired). */
 #include "camp/Unite/UniteGlobals.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
+#include "code/Code002a_Smt4a.h"
 
 extern "C" {
 void statusBustUpPortraitRelease(s32 demonId, s32 bank);
@@ -10,9 +11,9 @@ void statusBustUpPortraitAcquire(s32 demonId, s32 bank);
 void FUN_00231574(void)
 {
     UniteWorkA* work = g_unite;
-    s32 selected = resourceRunEmbeddedOperationIfUnblocked(work->portraitSelectionA.cursor);
+    s32 selected = resourceRunEmbeddedOperationIfUnblocked((Object *)work->portraitSelectionA.cursor);
     if (work->menu.mode == 2) {
-        selected = resourceRunEmbeddedOperationIfUnblocked(work->portraitSelectionA.alternateCursor);
+        selected = resourceRunEmbeddedOperationIfUnblocked((Object *)work->portraitSelectionA.alternateCursor);
     }
     for (s32 slot = 0; slot < 4; ++slot) {
         u16 id = static_cast<u16>(work->portraitSelectionA.loaded[slot]);

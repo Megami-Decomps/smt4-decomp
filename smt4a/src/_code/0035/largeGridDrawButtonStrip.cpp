@@ -1,43 +1,42 @@
-/* NON_MATCHING: retail repeats an already-decided button-type test and duplicates offset drawing paths; the readable version shares those paths. */
+#include "camp/Unite/UniteWork.h"
+#include "camp/Unite/UniteDraw.h"
 #include "ui/UiSpriteApi.h"
-#include "common.h"
+#include "ui/AnimatedMessage.h"
 #include "gamedata/GameDataAccess.h"
 #include "shard/TextureDrawCall.h"
 
-struct LargeGridButtonDraw {
-    u8 unk000[0x44];
-    f32 alpha;
-    u8 unk048[0x68];
-    UiSpriteState slide; // 0x0b0
-    u8 unk13c[0x2fc];
-    s16 touches[145]; // 0x438
-};
 extern "C" {
-void efctSetSpeed(f32);
 
-void largeGridDrawButtonStrip(LargeGridButtonDraw *work, s32 x, s32 y, s32 button, f32 scale)
+/* Draws a list button's strip: the frame at the screen's fade, the plate and caption (the highlighted set for
+ * the button kinds 1, 2 and 6) and the shine at the slide sprite's offset and opacity. */
+void largeGridDrawButtonStrip(UniteWorkA *work, s32 x, s32 y, f32 scale, s32 button)
 {
-    efctSetSpeed(work->alpha * scale);
+    efctSetSpeed(vec2GetSpeed(&work->sprites.fade) * scale);
     texDrawTableEntryAtStoredOrigin(2, 26, 408, x, y, 121);
     texDrawTableEntryAtStoredOrigin(2, 26, 409, x, y, 121);
     texDrawTableEntryAtStoredOrigin(2, 26, 410, x, y, 121);
     efctSetSpeed(scale);
     texDrawTableEntryAtStoredOrigin(2, 26, 411, x, y, 126);
-    s32 type = recordGetModeForId(work->touches[button]);
-    bool highlighted = type == 1 || type == 2 || type == 6;
-    if (highlighted) {
+    s32 kind = recordGetModeForId(work->buttonsA.regions[button]);
+    if (kind == 1 || kind == 2 || kind == 6) {
         texDrawTableEntryAtStoredOrigin(2, 26, 660, x, y, 126);
+    } else {
+        texDrawTableEntryAtStoredOrigin(2, 26, 587, x, y, 126);
+    }
+    if (kind == 1 || kind == 2 || kind == 6) {
         texDrawTableEntryAtStoredOrigin(2, 26, 657, x, y, 126);
         texDrawTableEntryAtStoredOrigin(2, 26, 658, x, y, 126);
     } else {
-        texDrawTableEntryAtStoredOrigin(2, 26, 587, x, y, 126);
         texDrawTableEntryAtStoredOrigin(2, 26, 412, x, y, 126);
         texDrawTableEntryAtStoredOrigin(2, 26, 413, x, y, 126);
     }
-    efctSetSpeed(work->slide.alpha * scale);
-    s32 offsetY = vec2GetYInt(&work->slide);
-    s32 offsetX = vec2GetXInt(&work->slide);
-    texDrawTableEntryAtStoredOrigin(2, 26, highlighted ? 659 : 414, x + offsetX, y + offsetY, 131);
+    efctSetSpeed(vec2GetSpeed(&work->sprites.slide) * scale);
+    if (kind == 1 || kind == 2 || kind == 6) {
+        texDrawTableEntryAtStoredOrigin(2, 26, 659, x + vec2GetXInt(&work->sprites.slide), y + vec2GetYInt(&work->sprites.slide), 131);
+    } else {
+        texDrawTableEntryAtStoredOrigin(2, 26, 414, x + vec2GetXInt(&work->sprites.slide), y + vec2GetYInt(&work->sprites.slide), 131);
+    }
     efctSetSpeed(scale);
 }
-}
+
+} /* extern "C" */

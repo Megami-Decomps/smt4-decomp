@@ -5888,3 +5888,13 @@
 003540d8 aocServiceRunItemRequest inferred validates and runs one content request for an item on the AOC service, returning the translated result
 00353a74 aocServiceRunItemCodeRequest inferred the variant that also passes the entered content code
 002879dc lmapRequestTimedEffect inferred clears or replaces the map view's pending request (priority, id, scaled timers)
+002d666c buttonHelpSetPanelMode inferred stores the help mode and resets the two panel sprites for mode 0 or hides them; buttonHelpCreate inlines its body; twin of smt4a 0x3423e8
+00289c98 buttonHelpClosePanel inferred hides the button-help panel: plays the buttons' close animation, drops or counts down their touch regions, closes the panel sprites and enters state 3
+002f3b14 mapIfActivateNearbyMarker inferred sets state 18 on the first active marker of categories 29/30/31/37/38 within 10 units of the point
+0038ae30 aocListJobSubmitFlaggedIds inferred collects the flagged item ids of the job's content entry and hands them to the file service; twin of smt4a 0x4733cc
+0021ea68 scrCommScreenFade inferred script command: starts a black (0) or white (1) fade of the active screens, then waits for them to settle; twin of smt4a 0x314d18
+00256a50 renderSubmissionDrawPacket inferred draws a RenderSubmissionPacket under render state 5 or 1: its prebuilt shape, or its primitive batch with the placement matrix and tint; twin of smt4a 0x2b3c9c
+00347198 dynamicMeshFlushAttributes inferred flushes the DynamicMesh attribute arrays (positions, colours, packed, texture coordinates, indices) selected by the dirty mask
+003c33c8 btlDebugStatusFlagEditorApply inferred twin of smt4a btlDebugStatusFlagEditorApply (0x4d1470): the same item switch, filters and member loops
+00343324 renderCtxSetMatrices inferred composes the RenderTransformState's matrices from the projection, view and transform, uploads the combined one and clears the camera type
+0027398c itemEventStartupUpdate inferred twin of smt4a 0x47e150

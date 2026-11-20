@@ -6073,3 +6073,12 @@
 003540d8 aocServiceRunItemRequest
 00353a74 aocServiceRunItemCodeRequest
 002879dc lmapRequestTimedEffect
+002d666c buttonHelpSetPanelMode
+00289c98 buttonHelpClosePanel
+002f3b14 mapIfActivateNearbyMarker
+0038ae30 aocListJobSubmitFlaggedIds
+00256a50 renderSubmissionDrawPacket
+00347198 dynamicMeshFlushAttributes
+003c33c8 btlDebugStatusFlagEditorApply
+00343324 renderCtxSetMatrices
+0027398c itemEventStartupUpdate

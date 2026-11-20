@@ -116,7 +116,7 @@ int statusDisplayBindUnitRecord(...);
 int FUN_003343c0(...);
 int objBInitBlock19D0(...);
 int FUN_0033449c(...);
-int FUN_003423e8(...);
+int buttonHelpSetPanelMode(...);
 int FUN_003dc628(void);
 
 int uiSpriteAdvanceAnimation(...);
@@ -296,7 +296,7 @@ extern int gameGlobalsGetState(void);
 extern int uiQuestGetActive(void);
 extern char uiQuestGetState(void);
 extern int uiQuestGetMode(void);
-/* Supplied declaration required: FUN_003423e8. */
+/* Supplied declaration required: buttonHelpSetPanelMode. */
 extern int FUN_0034919c(void);
 /* Supplied declaration required: FUN_003492dc. */
 extern int partyPanelIsActive(void);
@@ -746,7 +746,7 @@ unsigned int FUN_003d56dc(void)
             campChangeState(temp_v4);
             break;
           }
-          FUN_003423e8(2);
+          buttonHelpSetPanelMode(2);
           temp_v4 = gameDataBlocksGetTable();
           if (*(short *)(temp_v4 + 0x66) == 0) {
             temp_v5 = 0x9a;
@@ -776,7 +776,7 @@ unsigned int FUN_003d56dc(void)
     }
     if (puVar2[10] == 0x2f) {
       playLogDestroy();
-      FUN_003423e8(0);
+      buttonHelpSetPanelMode(0);
     }
     temp_v4 = puVar2[9];
     if (temp_v4 != 0x12) {

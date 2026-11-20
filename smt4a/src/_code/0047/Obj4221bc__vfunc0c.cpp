@@ -15,7 +15,7 @@ s32 threadTryJoinAndClose(AocWorkerThread *thread);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
 s32 FUN_002fb0d4(AocWorkerThread *thread, const ThreadArgumentDescriptor *descriptor, void (*entry)(Obj4221bc *),
                  Obj4221bc **argument, u32 stackTop, s32 priority, s32 processor, u32 flags);
-void FUN_004733cc(Obj4221bc *operation);
+void aocListJobSubmitFlaggedIds(Obj4221bc *operation);
 }
 
 /* nn::os::Thread::Start: runs `entry(argument)` on the AOC worker thread's stack; a failure is reported. */
@@ -50,7 +50,7 @@ WindowStatusOperationResult Obj4221bc::vfunc0c(const void *)
     } else {
         reserved = 1;
         AocWorkerThread *thread = &manager->thread;
-        aocStartWorkerThread(thread, FUN_004733cc, this, *thread->stack, 0x11, -2);
+        aocStartWorkerThread(thread, aocListJobSubmitFlaggedIds, this, *thread->stack, 0x11, -2);
     }
     return output;
 }

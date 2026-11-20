@@ -5,7 +5,7 @@
 
 extern "C" {
 void FUN_00338330(RenderSubmissionPacket* packet, const f32* position, const f32* rotation, const f32* scale);
-void FUN_002b3c9c(RenderSubmissionPacket* packet, u32 mode);
+void renderSubmissionDrawPacket(RenderSubmissionPacket* packet, u32 mode);
 u32 FUN_0038136c(RenderSubmissionOwner* owner, const u32* color);
 
 // Apply the owner's color and draw settings to a current-frame submission (colors inlined).
@@ -37,7 +37,7 @@ void FUN_00391df4(RenderSubmission* submission)
             packet->flags |= 0x100;
         else
             packet->flags &= ~0x100;
-        FUN_002b3c9c(packet, (u16)owner->drawMode);
+        renderSubmissionDrawPacket(packet, (u16)owner->drawMode);
     }
 }
 }

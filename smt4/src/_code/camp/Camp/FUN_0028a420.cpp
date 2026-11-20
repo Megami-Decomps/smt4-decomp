@@ -36,7 +36,7 @@ int __aeabi_memset4(...);
 int memClear(void);
 int asdMemAlloc(int, int, int, int, int);
 int taskCreateDraw(...);
-int FUN_002d666c(...);
+int buttonHelpSetPanelMode(...);
 int words3Clear(unsigned char *);
 int drawParameterBlockClear(void);
 
@@ -99,7 +99,7 @@ extern unsigned int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_002d666c. */
+/* Supplied declaration required: buttonHelpSetPanelMode. */
 /* Supplied declaration required: words3Clear. */
 /* Supplied declaration required: drawParameterBlockClear. */
 
@@ -145,7 +145,7 @@ void FUN_0028a420(void)
   DAT_0049f950 = 0;
   FUN_00297408();
   buttonHelpCreate();
-  FUN_002d666c(0);
+  buttonHelpSetPanelMode(0);
   puVar3 = puVar1 + 0x18a;
   drawParameterBlockClear();
   paramsInit(reinterpret_cast<UiResourceParameters *>(puVar3),&DAT_00402648,0x6c,&DAT_004026b4,0x30,0,0,0,0,&DAT_004026e4,0x150);

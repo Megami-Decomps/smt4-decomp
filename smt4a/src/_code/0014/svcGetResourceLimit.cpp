@@ -4,7 +4,7 @@
 extern "C" {
 
 /* Reads a resource-limit handle through svc 0x38. */
-s32 FUN_0014a948(u32 *out, u32 process)
+s32 svcGetResourceLimit(u32 *out, u32 process)
 {
     nn::svc::ResultAndValue r = nn::svc::GetResourceLimitRaw((u32)out, process);
     *out = r.value;

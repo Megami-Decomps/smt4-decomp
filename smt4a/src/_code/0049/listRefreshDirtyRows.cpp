@@ -40,7 +40,7 @@ void FUN_00497d20(ListRefreshState *, s32 row, s32 selected, u32 value);
 void size40Set(ListRangeRenderer *, u32 start, u32 selection);
 void FUN_004986b0(ListRefreshState *);
 void shopDrawEquipmentList(ListRefreshState *);
-void FUN_00497a6c(ListRefreshState *);
+void shopScreenRedrawHeaderAndSlots(ListRefreshState *);
 void FUN_004957b4(ListRefreshState *);
 
 // Refresh visible list rows and the selected renderer, then handle other dirty-state modes.
@@ -75,7 +75,7 @@ void listRefreshDirtyRows(ListRefreshState *state)
     } else if (state->flags & 0x400) {
         shopDrawEquipmentList(state);
     } else if (state->flags & 0x800) {
-        FUN_00497a6c(state);
+        shopScreenRedrawHeaderAndSlots(state);
     }
     if (state->flags & 0x1000) {
         FUN_004957b4(state);

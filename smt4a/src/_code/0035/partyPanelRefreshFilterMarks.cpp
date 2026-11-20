@@ -5,7 +5,6 @@
 
 extern "C" {
 void __aeabi_memset4(void *, u32 bytes, s32 value);
-void partyWidgetSetTransitionKind(PartyPanelWidget *widget, u8 value);
 
 /* Marks the party rows and stock cells that hold a demon already picked as a fusion parent, and the empty
  * stock cells. */

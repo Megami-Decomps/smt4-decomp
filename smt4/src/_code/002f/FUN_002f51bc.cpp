@@ -1,4 +1,4 @@
-/* NON_MATCHING: the preset symbols now match retail (g_asdGxPresets / g_asdGxPresetsDisplay1); retail takes the rectangle in d0/d1, parks it in d8/d9 and stores it after the saved preset is read, the build keeps it in s0-s3. */
+/* NON_MATCHING: retail copies the rectangle from d0/d1 into d8/d9 at entry and stores it with one vstmia of s16-s19; the build moves s2-s4 separately and splits the store. */
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxTitle.h"
@@ -11,7 +11,6 @@ struct TitleRect {
 
 extern "C" {
 extern AsdGxDisplayBuffers g_asdGxPresetsDisplay1; /* g_asdGxPresets.displays[1] */
-extern AsdGxDisplayBuffers *DAT_004e3b4c; /* g_asdGxPresets.selectedDisplay */
 void renderCtxResetFrameStacks(RenderCtx *scene);
 void FUN_00343364(RenderCtx *scene, const TitleRect *rectangle, u32 mode, u32 flags, f32 opacity);
 
@@ -19,19 +18,19 @@ void FUN_00343364(RenderCtx *scene, const TitleRect *rectangle, u32 mode, u32 fl
 void FUN_002f51bc(u32 mode, u32 flags, TitleRect rect, f32 opacity)
 {
     TitleRect rectangle;
-    s32 savedPreset = g_titleScene->stereoMode;
+    s32 savedPreset = renderCtxGetStereoMode(g_titleScene);
     rectangle = rect;
     s32 preset;
-    if (DAT_004e3b4c == &g_asdGxPresets.displays[0])
+    if (g_asdGxPresets.selectedDisplay == &g_asdGxPresets.displays[0])
         preset = 0;
-    else if (DAT_004e3b4c == &g_asdGxPresetsDisplay1)
+    else if (g_asdGxPresets.selectedDisplay == &g_asdGxPresetsDisplay1)
         preset = 1;
     else
         preset = 2;
-    g_titleScene->stereoMode = preset;
+    renderCtxSetStereoMode(g_titleScene, preset);
     renderCtxResetFrameStacks(g_titleScene);
     renderCtxSelectStereoLayout(g_titleScene);
     FUN_00343364(g_titleScene, &rectangle, mode, flags, opacity);
-    g_titleScene->stereoMode = savedPreset;
+    renderCtxSetStereoMode(g_titleScene, savedPreset);
 }
 }

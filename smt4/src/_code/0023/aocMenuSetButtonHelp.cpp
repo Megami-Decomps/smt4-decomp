@@ -8,7 +8,7 @@ extern "C" {
 
 void buttonHelpSetPreset(u32 preset);
 void buttonHelpRebuildTouchRegions(void);
-void FUN_00289c98(s32 clearKinds);
+void buttonHelpClosePanel(s32 clearKinds);
 void buttonHelpSetSlot(u32 index, u32 kind, u32 value, u32 queue);
 void ifTouchDecrementTimer(void);
 void buttonHelpSetText(const s8 *text, u32 color);
@@ -57,7 +57,7 @@ void aocMenuSetButtonHelp(AocMenu *menu, u32 selection, s32 mode)
     case 0xffffffff:
         if ((menu->flags & AOC_MENU_HELP_SHOWN) != 0) {
             menu->flags &= ~AOC_MENU_HELP_SHOWN;
-            FUN_00289c98(0);
+            buttonHelpClosePanel(0);
             releaseTouchRegistrations();
         }
         return;

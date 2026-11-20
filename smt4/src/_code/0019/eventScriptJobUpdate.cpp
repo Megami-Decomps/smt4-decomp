@@ -33,7 +33,7 @@ void messageSlotSet(s32 value);
 void msgWindowReset(void);
 void titleSetSlotValueState2(u32 index, u32 value);
 u8 campButtonHelpIsActive(void);
-void FUN_00289c98(s32 clearTouches);
+void buttonHelpClosePanel(s32 clearTouches);
 void commonBgAcquire(void);
 void uiFadeRelease(void);
 void buttonHelpCreate(void);
@@ -100,7 +100,7 @@ extern "C" s32 eventScriptJobUpdate(u32 job)
                 if (pairedAvailabilityGetState(1) == 3)
                     titleSetSlotValueState2(1, 5);
                 if (campButtonHelpIsActive())
-                    FUN_00289c98(1);
+                    buttonHelpClosePanel(1);
                 break;
             }
         } else {

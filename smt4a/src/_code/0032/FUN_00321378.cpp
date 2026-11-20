@@ -1,4 +1,4 @@
-/* NON_MATCHING: ARMCC predicates opening-loop setup and merges the immediate/deferred pair-setting paths; retail outlines the deferred branch after the closing loop. */
+/* NON_MATCHING: retail keeps the marker sequence in a register and outlines the deferred preset call; opening- and closing-loop setup also differs. */
 #include "ui/UiSpriteApi.h"
 #include "sys/RuntimeObjects.h"
 
@@ -22,7 +22,7 @@ extern "C" {
 s32 btlIsDefeatSuppressed(void);
 }
 
-// Select opening and closing animations for the active rows and their markers.
+/* Selects opening and closing animations for the active rows and their markers. */
 extern "C" void FUN_00321378(RowTransitionSprites* sprites, s16 addedRows, s16 closingRows)
 {
     if (sprites == NULL) {
@@ -30,22 +30,21 @@ extern "C" void FUN_00321378(RowTransitionSprites* sprites, s16 addedRows, s16 c
     }
     sprites->rowCount += addedRows;
     sprites->closingCount += closingRows;
+    enum { LAST_MARKER = 3, IMMEDIATE_PRESET = 1, DEFEAT_PRESET = 0xFB0 };
     for (s32 index = 0; index < sprites->rowCount; ++index) {
+        UiSpriteState *face = &sprites->primary[index];
         uiSpriteSelectAnim(&sprites->tertiary[index], 6);
         uiSpriteSelectAnim(&sprites->quaternary[index], 4);
         uiSpriteSelectAnim(&sprites->secondary[index], 0);
-        uiSpriteSelectAnim(&sprites->primary[index], 2);
-        if (index < 4) {
+        uiSpriteSelectAnim(face, 2);
+        if (index <= LAST_MARKER) {
             if (index == 0) {
                 uiSpriteSelectAnim(&sprites->heading, 12);
             }
             uiSpriteSelectAnim(&sprites->markers[index], 12);
         }
-        if (sprites->immediate) {
-            pairSetFirstResetSecond(&sprites->primary[index], 1);
-        } else {
-            pairSetFirstResetSecond(&sprites->primary[index], btlIsDefeatSuppressed() ? 0xFB0 : 0);
-        }
+        u32 preset = sprites->immediate ? IMMEDIATE_PRESET : (btlIsDefeatSuppressed() ? DEFEAT_PRESET : 0);
+        pairSetFirstResetSecond(face, preset);
     }
     for (s32 index = 0; index < sprites->closingCount; ++index) {
         s32 row = sprites->rowCount - index - 1;

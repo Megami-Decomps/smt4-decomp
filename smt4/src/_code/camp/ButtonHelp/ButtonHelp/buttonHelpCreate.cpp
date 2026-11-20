@@ -1,4 +1,3 @@
-/* NON_MATCHING: the resource packets are now defined here in retail's order (presets + packet A, packets B and C, packet E), so paramsInit's pointers derive from one literal by the same chained subtraction; remaining: callee-saved register numbering (retail keeps g_buttonHelp in r9, the work in r8, constants 1/0 in fp/sl). */
 #include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "AsdSDK/AsdDebug.h"
@@ -45,24 +44,43 @@ void buttonHelpNotifyNoop(u32 handle);
 s32 FUN_001c0c38(u32 handle);
 s32 FUN_002109cc(u32 handle);
 
+/* buttonHelpSetPanelMode's body: stores the help mode, resetting the two panel sprites for mode 0 or hiding them. */
+static __inline void buttonHelpSetPanelMode(u8 mode)
+{
+    ButtonHelpWork *work = g_buttonHelp.work;
+    work->mode = mode;
+    if (mode == 0) {
+        for (s32 i = 0; i < 2; ++i) {
+            spriteSetLayer(&work->panelSprites[i], 2);
+            uiStoreTextureEntryCenter(&work->panelSprites[i], 18, 0);
+            spriteSetVisible(&work->panelSprites[i], 1);
+            work->panelSprites[i].x = 0;
+            work->panelSprites[i].y = 0;
+            work->panelSprites[i].z = 0;
+        }
+    } else {
+        for (s32 i = 0; i < 2; ++i) {
+            spriteSetVisible(&work->panelSprites[i], 0);
+        }
+    }
+}
+
 /* Allocates the button-help work on first use: calc process, draw task, the six selection
  * animations and the two display units, then bumps the reference count. */
 void buttonHelpCreate(void)
 {
-    ButtonHelpGlobals *globals = &g_buttonHelp;
-
-    if (globals->references <= 0) {
-        if (globals->work == NULL) {
+    if (g_buttonHelp.references <= 0) {
+        if (g_buttonHelp.work == NULL) {
             asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\camp\\ButtonHelp\\ButtonHelp.cpp", 832);
-            globals->work = (ButtonHelpWork *)asdMemAlloc(0x100, 0x100, 0, sizeof(ButtonHelpWork), 1);
+            g_buttonHelp.work = (ButtonHelpWork *)asdMemAlloc(0x100, 0x100, 0, sizeof(ButtonHelpWork), 1);
         }
-        ButtonHelpWork *work = globals->work;
+        ButtonHelpWork *work = g_buttonHelp.work;
         memClear(work, sizeof(ButtonHelpWork));
         work->calcProcess = asdProcessCreateSimple((const s8 *)"ButtonHelp CALC", 1, 0, 0, FUN_001c0c38, buttonHelpNotifyNoop, 0);
-        work->drawTask = taskCreateDraw((const s8 *)"ButtonHelp DRAW", 0xE6, 0, 0, FUN_002109cc,
+        work->drawTask = taskCreateDraw((const s8 *)"ButtonHelp DDRAW", 0xE6, 0, 0, FUN_002109cc,
                                              NULL, 0, work->calcProcess);
 
-        ButtonHelpWork *help = globals->work;
+        ButtonHelpWork *help = g_buttonHelp.work;
         drawParameterBlockClear(&help->resources);
         paramsInit(&help->resources, sButtonHelpPresets.packetA, 0x30, &sButtonHelpPacketB, 0xC,
                    &sButtonHelpPacketC, 0xC, NULL, 0, sButtonHelpPacketE, 0xA8);
@@ -73,16 +91,7 @@ void buttonHelpCreate(void)
         uiSpriteStateInitFromSource(&help->panelSprites[0], 0x12, 0, &help->resources, 0x10, 1.0f);
         uiSpriteStateInitFromSource(&help->panelSprites[1], 0x12, 1, &help->resources, 0x10, 1.0f);
 
-        ButtonHelpWork *units = globals->work;
-        units->mode = 0;
-        for (s32 i = 0; i < 2; i++) {
-            units->panelSprites[i].layer = 2;
-            uiStoreTextureEntryCenter(&units->panelSprites[i], 0x12, 0);
-            units->panelSprites[i].active = 1;
-            units->panelSprites[i].x = 0;
-            units->panelSprites[i].y = 0;
-            units->panelSprites[i].z = 0;
-        }
+        buttonHelpSetPanelMode(0);
         help->panelState = 0;
         help->panelSliding = 1;
         help->drawEnabled = 1;
@@ -91,9 +100,9 @@ void buttonHelpCreate(void)
         work->text.directoryText = asdTextCreate(0);
         asdTextSetBaseColor(work->text.directoryText, 0x323232FF);
         positionStateSet(work->text.directoryText, 0, 0x646464FF, 0.0f);
-        work->scriptProcess = scrScriptProcessCreate(globals->bf, globals->mbm);
+        work->scriptProcess = scrScriptProcessCreate(g_buttonHelp.bf, g_buttonHelp.mbm);
     }
-    globals->references++;
+    g_buttonHelp.references++;
 }
 
 } /* extern "C" */

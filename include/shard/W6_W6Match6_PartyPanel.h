@@ -35,6 +35,30 @@ typedef char PartyPanelWidgetOffsetsCheck[
     __INTADDR__(&((PartyPanelWidget *)0)->ailmentCursor) == 0x1C && __INTADDR__(&((PartyPanelWidget *)0)->origin) == 0x2C &&
     __INTADDR__(&((PartyPanelWidget *)0)->slot) == 0x34 && __INTADDR__(&((PartyPanelWidget *)0)->result) == 0x40 &&
     __INTADDR__(&((PartyPanelWidget *)0)->tintKind) == 0x4C ? 1 : -1];
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* The widget's one-instruction accessors: armlink inlined every call (config/inlined.txt). */
+void partyWidgetSetEmpty(PartyPanelWidget *widget, u8 empty);
+void partyWidgetSetIsCharacter(PartyPanelWidget *widget, u8 isCharacter);
+void partyWidgetSetHasTag(PartyPanelWidget *widget, u8 value);
+void partyWidgetSetFlagA(PartyPanelWidget *widget, u8 value);
+void partyWidgetSetTransitionActive(PartyPanelWidget *widget, u8 value);
+void partyWidgetSetTransitionHeld(PartyPanelWidget *widget, u8 value);
+void partyWidgetSetTransitionPending(PartyPanelWidget *widget, u8 value);
+void partyWidgetSetTransitionKind(PartyPanelWidget *widget, u8 value);
+void partyWidgetSetFlagB(PartyPanelWidget *widget, u8 value);
+void partyWidgetSetUnitId(PartyPanelWidget *widget, s32 unitId);
+s32 partyWidgetGetUnitId(PartyPanelWidget *widget);
+void partyWidgetSetValue(PartyPanelWidget *widget, u32 value); /* result */
+s32 partyWidgetGetX(PartyPanelWidget *widget);                  /* result */
+void partyWidgetSetCost(PartyPanelWidget *widget, s32 cost);    /* value */
+s32 partyWidgetGetCost(PartyPanelWidget *widget);               /* value */
+
+#ifdef __cplusplus
+}
+#endif
 struct PartyPanelEntry {
     u16 available; // 0x00
     u8 unk02[6];

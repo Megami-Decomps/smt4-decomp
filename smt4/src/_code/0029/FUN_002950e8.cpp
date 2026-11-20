@@ -1,4 +1,4 @@
-/* NON_MATCHING: initial frame branch placement, displacement negation and completion-result pointer allocation differ. */
+/* NON_MATCHING: only the tail differs: retail copies the sprite pointer into r0 in both arms of the finished store and reads `finished` back after the `updated` store (ldrb [r0]); this build reads it through r4 before that store. */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 
 extern "C" {
@@ -13,7 +13,9 @@ u32 FUN_002950e8(UiSpriteState *sprite, s32 fromBelow)
         if (!fromBelow)
             sprite->y = -sprite->y;
     }
-    s32 speed = fromBelow ? 11 : -11;
+    s32 speed = 11;
+    if (!fromBelow)
+        speed = -11;
     if (frame > 0) {
         if (fromBelow) {
             speed -= frame;
@@ -25,7 +27,7 @@ u32 FUN_002950e8(UiSpriteState *sprite, s32 fromBelow)
                 speed = 0;
         }
     }
-    sprite->y -= speed * 0x1000;
+    sprite->y -= speed << 12;
     s32 position = sprite->y >> 12;
     if ((fromBelow && position <= 0) || (!fromBelow && position >= 0)) {
         sprite->y = 0;

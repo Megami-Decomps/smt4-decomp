@@ -1,4 +1,3 @@
-/* NON_MATCHING: block layout: retail places the shared `return 1` and the command-frame-zero arm between the two frameTextureGetState arms of the other branch; swapping the if/else order does not reproduce it. */
 #include "common.h"
 #include "camp/Unite/UniteEffect.h"
 #include "code/Code0020.h"
@@ -10,7 +9,8 @@ void slotSetRequest(u32 screen, s32 duration, u32 color);
 s32 eventIsSkipping(void);
 void titleRestartSlotState3(u32 screen, u32 color);
 
-u32 FUN_00314d18(void)
+/* Starts a black or white screen fade and waits for the active screens to settle. */
+u32 scrCommScreenFade(void)
 {
     s32 duration = scrGetArg(1);
     if (scrGetCommandFrame() == 0) {
@@ -32,11 +32,11 @@ u32 FUN_00314d18(void)
             return 1;
         }
     } else {
-        if (frameTextureGetState()) {
-            if (screenFaderIsSettled(1))
+        if (!frameTextureGetState()) {
+            if (screenFaderIsSettled(0) && screenFaderIsSettled(1))
                 return 1;
         } else {
-            if (screenFaderIsSettled(0) && screenFaderIsSettled(1))
+            if (screenFaderIsSettled(1))
                 return 1;
         }
         if (eventIsSkipping()) {
@@ -57,4 +57,5 @@ u32 FUN_00314d18(void)
     }
     return 0;
 }
-}
+
+} /* extern "C" */

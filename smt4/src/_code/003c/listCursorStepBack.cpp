@@ -1,6 +1,7 @@
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "camp/Unite/UniteWork.h"
+#include "code/Code0029_Smt4.h"
 
 extern "C" {
 s32 resourceRunOperationIfUnblocked(FlaggedEntry *entry);

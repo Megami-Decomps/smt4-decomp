@@ -1,7 +1,6 @@
 #include "ui/PartyPanelStateA.h"
 
 extern "C" {
-void partyWidgetSetUnitId(PartyPanelWidget *widget, s32 unitId);
 void partyPanelRefreshFromSlotTable(void);
 void FUN_0023f900(void);
 

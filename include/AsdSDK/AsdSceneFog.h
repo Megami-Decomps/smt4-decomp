@@ -11,16 +11,26 @@ struct AsdFogParameters {
     /* 0x0c */ f32 density;
 };
 
+/* A self-relative offset in a binary resource (NintendoWare's ut::Offset): 0 is a null pointer. */
+struct AsdResOffset {
+    /* 0x00 */ s32 offset;
+
+    void *toPtr() {
+        if (offset == 0) {
+            return NULL;
+        }
+        return reinterpret_cast<u8 *>(this) + offset;
+    }
+};
+
 struct AsdFogResource {
     /* 0x00 */ u8 unk00[0xb4];
     /* 0xb4 */ f32 color[4];
     /* 0xc4 */ u8 unkC4[4];
-    /* 0xc8 */ s32 parametersOffset;
+    /* 0xc8 */ AsdResOffset parametersOffset;
 
     AsdFogParameters *parameters() {
-        return parametersOffset != 0
-            ? reinterpret_cast<AsdFogParameters *>(reinterpret_cast<u8 *>(&parametersOffset) + parametersOffset)
-            : NULL;
+        return reinterpret_cast<AsdFogParameters *>(parametersOffset.toPtr());
     }
 };
 

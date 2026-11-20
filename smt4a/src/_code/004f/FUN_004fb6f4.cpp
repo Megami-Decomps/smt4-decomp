@@ -1,4 +1,3 @@
-/* NON_MATCHING: the stack follow-up pair loads with LDM into r5/r6 instead of retail's LDRD into r4/r5; callee-saved registers rotate accordingly. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlReflect.h"
 #include "battle/btlMain.h"
@@ -15,22 +14,17 @@ extern "C" {
 
 /* Queues a target action with an integer payload and an optional battle-unit follow-up. */
 u32 FUN_004fb6f4(u32 actorId, u32 options, ReflectTargetA *target, u32 value, u32 parameter,
-                          s32 followupActor, s32 followupValue)
+    s32 followupActor, s32 followupValue)
 {
-    ReflectAction *request = btlQueueReflectAction(g_btlActionReflect, static_cast<s16>(actorId), 0, options);
-    request->kind = 0x36;
-    request->target = reinterpret_cast<u32>(target);
-    request->value = value;
+    ReflectAction *request = btlReflectQueueTargetAction(0x36, actorId, options, target, value);
     request->parameter = parameter;
     if (followupActor >= 0) {
         BtlCombatantEntryA *entry = btlMainFindEntryByListedId(btlGetMainState(), target->listedId);
         if (entry != NULL && followupValue >= 0) {
-            request = btlQueueReflectAction(g_btlActionReflect, static_cast<s16>(followupActor), 0, options);
-            request->kind = 7;
-            request->wordValues.unk18 = reinterpret_cast<u32>(entry);
-            request->value = followupValue;
+            btlReflectQueueKind7(followupActor, options, entry, followupValue);
         }
     }
     return 1;
 }
-}
+
+} /* extern "C" */

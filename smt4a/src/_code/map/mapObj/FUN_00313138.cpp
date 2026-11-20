@@ -4,19 +4,7 @@
 #include "shard/W9_W9Match7_EnemyModelSources.h"
 #include "code/Code001c.h"
 #include "Model/MoriModelManager.h"
-
-/* A record of the map object table (data table 45): its key, kind, position and name. */
-struct MapObjRecord {
-    /* 0x00 */ s16 id;
-    /* 0x02 */ s16 sub;
-    /* 0x04 */ s16 kind;
-    /* 0x06 */ s16 x;
-    /* 0x08 */ s16 y;
-    /* 0x0A */ s16 z;
-    /* 0x0C */ s16 scale;
-    /* 0x0E */ s16 height;
-    /* 0x10 */ char name[0x10];
-};
+#include "map/MapObjectRecords.h"
 
 /* One placed map object (0x48 bytes). */
 struct MapObjSlot {
@@ -55,7 +43,6 @@ extern "C" {
 extern MapObjWork *g_mapObj;
 
 s32 dataTableGetRecordFortyFive(void);
-MapObjRecord *mapObjGetCombinedEntry(s32 index);
 void *asdMemoryAllocTraced(u32, const char *, u32);
 char *libc_strcpy(char *, const char *);
 
@@ -68,7 +55,7 @@ u32 FUN_00313138(void)
         for (s32 index = work->cursor; index < dataTableGetRecordFortyFive(); index++) {
             MapObjRecord *record = mapObjGetCombinedEntry(index);
             work = g_mapObj;
-            if (record->id >= 0 && record->id == work->id && record->sub == work->sub && record->kind < 100) {
+            if (record->map >= 0 && record->map == work->id && record->object == work->sub && record->kind < 100) {
                 work->cursor = index;
                 s32 free;
                 for (free = 0; free < 24; free++) {
@@ -120,7 +107,7 @@ u32 FUN_00313138(void)
         slot->x = (f32)record->x;
         slot->y = (f32)record->y;
         slot->z = (f32)record->z;
-        slot->scale = (f32)record->scale;
+        slot->scale = (f32)record->placement;
         slot->originX = (f32)record->x;
         slot->height = (f32)(slot->kind == 6 ? record->height : record->y);
         slot->depth = (f32)record->z;

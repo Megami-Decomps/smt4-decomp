@@ -18,7 +18,7 @@ void gameGlobalsSetSceneState(u8 value);
 void gameGlobalsReleaseReference(void);
 void FUN_0033449c(u8 value);
 void FUN_00371f18(void);
-void buttonHelpSetMode(s32 mode);
+void buttonHelpSetTextVisible(s32 mode);
 void FUN_003a7b2c(void);
 u32 gameDataBlocksGetWord(void);
 s32 aocDataBlockHasEntries(void);
@@ -82,7 +82,7 @@ void resultSetMode(ResultWorkA *result, s32 mode)
                 sysPlaySe(0x92);
                 scrScriptProcessStartEntry(work->script, 5);
             } else {
-                buttonHelpSetMode(0);
+                buttonHelpSetTextVisible(0);
                 buttonHelpTransitionPresetFlags(3);
             }
         } else {

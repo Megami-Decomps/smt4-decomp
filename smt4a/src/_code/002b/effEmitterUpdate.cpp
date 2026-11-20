@@ -13,7 +13,7 @@ int refCountIncrement(...);
 int FUN_00290c28(...);
 int entryListSetPhase(...);
 int gfxResolveTimedTextureFrame(...);
-int FUN_002b3c9c(...);
+int renderSubmissionDrawPacket(...);
 int FUN_002ff7ac(unsigned short *, int, int);
 int FUN_0034f8b4(...);
 int FUN_0038136c(unsigned int, int, int, int);
@@ -131,7 +131,7 @@ extern unsigned int DAT_0064c0c0; /* 0x64c0c0 */
 /* Supplied declaration required: FUN_00290c28. */
 /* Supplied declaration required: entryListSetPhase. */
 /* Supplied declaration required: gfxResolveTimedTextureFrame. */
-/* Supplied declaration required: FUN_002b3c9c. */
+/* Supplied declaration required: renderSubmissionDrawPacket. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002ff7ac. */
 /* Supplied declaration required: FUN_0034f8b4. */
@@ -462,7 +462,7 @@ void effEmitterUpdate(int param_1)
     temp_v0 = *puVar8 & 0xfeff;
   }
   *puVar8 = temp_v0;
-  FUN_002b3c9c(puVar8,*(unsigned int *)(param_1 + 0x58) & 0xffff);
+  renderSubmissionDrawPacket(puVar8,*(unsigned int *)(param_1 + 0x58) & 0xffff);
   return;
 }
 

@@ -5109,7 +5109,7 @@
 003aeaf0 buttonHelpGetEntryValue
 00318df4 buttonHelpSetHelpState
 003423cc buttonHelpSetSelectedId
-00387ac4 buttonHelpSetMode
+00387ac4 buttonHelpSetTextVisible
 0027db84 qcMainRunEntryIfLoaded
 002bd4bc shopMainUpdateChild
 00239480 messageMainIsWindowActive
@@ -7785,3 +7785,14 @@
 00429178 aocServiceRunItemRequest
 004289cc aocServiceRunItemCodeRequest
 002d1f40 lmapRequestTimedEffect
+003423e8 buttonHelpSetPanelMode
+004733cc aocListJobSubmitFlaggedIds
+00314d18 scrCommScreenFade
+002b3c9c renderSubmissionDrawPacket
+00325ba4 mapObjFindNearestPointByCategory
+003cdeb0 skillScreenDrawCandidateRow
+003cce74 skillScreenDrawSelectedSlotRow
+0014a930 svcCreateSemaphore
+0014a948 svcGetResourceLimit
+0047e150 itemEventStartupUpdate
+00497a6c shopScreenRedrawHeaderAndSlots

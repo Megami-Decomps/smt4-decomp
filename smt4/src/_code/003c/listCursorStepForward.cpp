@@ -1,5 +1,6 @@
 #include "shard/Shard0031.h"
 #include "camp/Unite/UniteWork.h"
+#include "code/Code0029_Smt4.h"
 
 struct BoundedCounter {
     u8 kind;

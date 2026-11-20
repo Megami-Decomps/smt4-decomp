@@ -6,7 +6,6 @@ extern "C" {
 void FUN_0033c468(PartyPanelWidget* widget);
 u16* FUN_0029acb0();
 s32 FUN_0028dbe0(PartyPanelWidget* widget);
-s32 partyWidgetGetUnitId(PartyPanelWidget *widget);
 }
 
 /* Polls every party row and stock cell and returns the status colour of the last one that shows the selected

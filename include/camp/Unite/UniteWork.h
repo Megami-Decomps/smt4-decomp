@@ -426,12 +426,24 @@ struct UniteWorkA {
             u8 prefix438[0x8C40];
             /* 0x9078 */ UnitePairEntry pairs[1];
         } resultPairsA;
+        /* the skill inheritance screen: the eight slots the result learns and the candidate list */
         struct {
-            u8 prefix438[0x8738];
-            /* 0x8B70 */ u16 skills[24];
-            /* 0x8BA0 */ u8 unk8BA0[0x274];
+            u8 prefix438[0x8728];
+            /* 0x8B60 */ u16 slots[8];             /* 0 = empty */
+            /* 0x8B70 */ u16 skills[0x60];         /* the candidate skills */
+            /* 0x8C30 */ u8 unk8C30[0x180];
+            /* 0x8DB0 */ ScrollSelection slotList;  /* the cursor over `slots` */
             /* 0x8E14 */ ScrollSelection skillList; /* the cursor over `skills` */
+            /* 0x8E78 */ u8 unk8E78[4];
+            /* 0x8E7C */ s32 freedCount;           /* entries of freedSlots in use */
+            /* 0x8E80 */ s32 skillCount;           /* candidate skills in `skills` */
+            /* 0x8E84 */ u8 unk8E84[8];
+            /* 0x8E8C */ s32 freedSlots[8];        /* the slots emptied, last first; -1 = none */
         } inheritanceA;
+        struct {
+            /* 0x438 */ s16 regions[0x40];      /* the touch region of each list button: the rows, then 29-31 the
+                                                   scroll arrows and thumb, then the skill screen's slot buttons */
+        } buttonsA;
         struct {
             /* 0x438 */ s16 rowRegions[29];     /* touch regions of the visible list rows, as in IV */
             /* 0x472 */ s16 scrollUpRegion;
@@ -561,6 +573,11 @@ typedef char UniteWorkResultBuildAOffsets[
     offsetof(UniteWorkA, inheritanceA.skills) == 0x8B70 &&
     sizeof(UniteWork) == 0x95F8 ? 1 : -1];
 
+typedef char UniteWorkAInheritanceOffsets[offsetof(UniteWorkA, inheritanceA.slots) == 0x8B60 &&
+    offsetof(UniteWorkA, inheritanceA.slotList) == 0x8DB0 && offsetof(UniteWorkA, inheritanceA.freedCount) == 0x8E7C &&
+    offsetof(UniteWorkA, inheritanceA.skillCount) == 0x8E80 && offsetof(UniteWorkA, inheritanceA.freedSlots) == 0x8E8C &&
+    offsetof(UniteWorkA, buttonsA.regions) == 0x438 ? 1 : -1];
+
 typedef char UniteWorkAHelpOffsetCheck[offsetof(UniteWorkA, inheritanceA.skillList) == 0x8E14 &&
     offsetof(UniteWorkA, returnState.helpShown) == 0x9070 && offsetof(UniteWorkA, returnState.helpAvailable) == 0x9071 ? 1 : -1];
 
@@ -571,15 +588,6 @@ static __inline bool uniteRequest18Active(const UniteWorkA *unite)
 }
 
 typedef char UniteWorkASizeCheck[sizeof(UniteWorkA) == 0x92C0 && offsetof(UniteWorkA, pairSort.pairList) == 0x67CC && offsetof(UniteWorkA, selectionCountA.selectedCount) == 0x8F7A && offsetof(UniteWorkA, registered.handle) == 0x920C ? 1 : -1];
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-/* Canonical declaration (matches the definition). */
-u32 resourceRunEmbeddedOperationIfUnblocked(const void *object);
-#ifdef __cplusplus
-}
-#endif
 
 #ifdef __cplusplus
 extern "C" {

@@ -13,7 +13,7 @@ void buttonHelpSetPreset(u32 preset);
 
 /* Per-frame update of the button help: runs the current state (1 opens, 2 idles, 3 closes), applies
  * a preset that was waiting and the queued selections, then advances the frame counter. */
-u32 FUN_001c0c38(void)
+s32 FUN_001c0c38(u32 job)
 {
     ButtonHelpWork *work = g_buttonHelp.work;
     s32 last = 0;

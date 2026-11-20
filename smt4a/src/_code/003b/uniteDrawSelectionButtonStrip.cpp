@@ -1,5 +1,6 @@
 #include "common.h"
 #include "camp/Unite/UniteWork.h"
+#include "camp/Unite/UniteDraw.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -7,8 +8,6 @@ extern "C" {
 UniteWorkA *uniteGetWork();
 void efctSetSpeed(f32 speed);
 u8 recordGetModeForId(s32 recordId);
-void largeGridDrawButtonStrip(UniteWorkA *work, s32 x, s32 y,
-                              s32 selectedIndex, f32 speed);
 extern u8 g_layeredSpriteEffectResource[];
 
 // Draw the fusion button strip and tint its caption for the selected touch region.
@@ -24,7 +23,7 @@ f32 uniteDrawSelectionButtonStrip(s32 x, s32 y, f32 speed)
 
     const TextureTableEntryIV *strip = asdTMTexTableEntryAt(0x1a, 0x1af);
     largeGridDrawButtonStrip(work, strip->x + x, strip->y + y,
-                            work->selectionA.selectedIndex, speed);
+                            speed, work->selectionA.selectedIndex);
     efctSetSpeed(speed);
     const TextureTableEntryIV *effect = asdTMTexTableEntryAt(0x1a, 0x1a2);
 

@@ -1,4 +1,3 @@
-/* NON_MATCHING: allocation head (allocGeomBlock), the add r0,#60 / ldm clone-source load and the cached segment count match retail; remaining: retail's VFP constant registers (s0 = 1.0, s1 = 0, s2 = 0.5) and the paired vstmia stores of the texture-coordinate arms use another register assignment, and `mov r1, r0` reuses the geometry result. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -36,8 +35,8 @@ PolyGeomBlock *effPolyFlashGeomClone3(PolyCloneOwner *owner)
 
     geom = effGeomCloneHandle(srcBlock->geom);
     block->geom = geom;
-    u32 segments = params->segments;
-    if (segments != 0) {
+    if (params->segments != 0) {
+        u32 segments = params->segments;
         PolyQuadUV *uv = geom->buf->uv;
         u32 i;
 

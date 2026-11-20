@@ -40,6 +40,7 @@ static __inline u32 titleGradientColorWord(const RgbaWord *color)
     return (__rev(color->word) & ~0xFFu) | color->rgba.a;
 }
 
+/* Draws a coloured centre and an eighteen-segment transparent rim under a temporary render state. */
 void FUN_001f67ec(const TitleRadialGradient *gradient)
 {
     const TitleGradientBlock *block = &gradient->block;

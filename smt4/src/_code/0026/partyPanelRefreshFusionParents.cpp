@@ -11,8 +11,6 @@
 extern "C" {
 const StatBlock *partyMemberFindById(u32 id); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void __aeabi_memset4(void *destination, u32 size, s32 value);
-void partyWidgetSetTransitionPending(PartyPanelWidget *widget, u8 value);
-void partyWidgetSetTransitionKind(PartyPanelWidget *widget, u8 value);
 
 /* Resets which party rows and stock cells can be picked as a fusion parent: empty rows, demons with ailment
  * bits 2 or 10 and the parents already picked are disabled. */

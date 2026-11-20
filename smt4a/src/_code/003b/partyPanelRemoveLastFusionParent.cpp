@@ -12,7 +12,6 @@ void partyPanelRefreshFusionAvailability(void);
 void partyPanelChangeState(s32 mode, s32 enabled);
 void FUN_0020d934(void);
 void FUN_0023fc38(void);
-void partyWidgetSetTransitionPending(PartyPanelWidget *widget, u8 value);
 
 /* Takes the last fusion parent off the panel's list, clears the pending transition of its widget (a party row
  * or a stock cell) and refreshes the panel's fusion marks. */

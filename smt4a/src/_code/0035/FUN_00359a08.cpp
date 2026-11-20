@@ -1,5 +1,5 @@
 /* NON_MATCHING: only the zero constants differ: retail gives emptySlot its own mov r6, #0 and starts the slot search from it, the build shares the slot-clearing zero. */
-#include "skill/SkillSlotScreen.h"
+#include "camp/Unite/UniteWork.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
 
 extern "C" {
@@ -11,38 +11,38 @@ void skillHelpUpdateAttributeAndTarget(s32 id);
 
 // Take the last freed slot back: clear it, park both cursors on the first empty slot and on the
 // skill's candidate entry (scrolled into view), then refresh the skill help for that skill.
-void FUN_00359a08(SkillSlotScreen *screen)
+void FUN_00359a08(UniteWorkA *work)
 {
-    screen->freedCount--;
-    s32 freed = screen->freedSlots[screen->freedCount];
-    u16 skill = screen->slots[freed];
-    screen->slots[freed] = 0;
-    screen->freedSlots[screen->freedCount] = -1;
+    work->inheritanceA.freedCount--;
+    s32 freed = work->inheritanceA.freedSlots[work->inheritanceA.freedCount];
+    u16 skill = work->inheritanceA.slots[freed];
+    work->inheritanceA.slots[freed] = 0;
+    work->inheritanceA.freedSlots[work->inheritanceA.freedCount] = -1;
 
     s32 emptySlot = 0;
     for (s32 i = 0; i < 8; i++) {
-        if (screen->slots[i] == 0) {
+        if (work->inheritanceA.slots[i] == 0) {
             emptySlot = i;
             break;
         }
     }
-    if (emptySlot < gridNavigationGetItemCount(screen->slotCursor)) {
-        scrollOwnerSetValue(screen->slotCursor, 0);
-        scrollListSetSelectionTracked(reinterpret_cast<ScrollSelection *>(screen->slotCursor), emptySlot);
+    if (emptySlot < gridNavigationGetItemCount(&work->inheritanceA.slotList)) {
+        scrollOwnerSetValue(&work->inheritanceA.slotList, 0);
+        scrollListSetSelectionTracked(&work->inheritanceA.slotList, emptySlot);
     } else {
-        scrollOwnerSetValue(screen->slotCursor, 0);
-        scrollListSetSelectionTracked(reinterpret_cast<ScrollSelection *>(screen->slotCursor), 0);
+        scrollOwnerSetValue(&work->inheritanceA.slotList, 0);
+        scrollListSetSelectionTracked(&work->inheritanceA.slotList, 0);
     }
 
     s32 index = 0;
     for (s32 i = 0; i < 0x60; i++) {
-        if (screen->candidates[i] == skill) {
+        if (work->inheritanceA.skills[i] == skill) {
             index = i;
             break;
         }
     }
-    s32 limit = uiSearchPrimary(screen->candidateCursor) - 2;
-    s32 last = gridNavigationGetItemCount(screen->candidateCursor) - 2;
+    s32 limit = uiSearchPrimary(&work->inheritanceA.skillList) - 2;
+    s32 last = gridNavigationGetItemCount(&work->inheritanceA.skillList) - 2;
     s32 scroll = 0;
     if (index > limit) {
         scroll = index - limit;
@@ -52,8 +52,8 @@ void FUN_00359a08(SkillSlotScreen *screen)
         scroll++;
         offset--;
     }
-    scrollOwnerSetValue(screen->candidateCursor, scroll);
-    flaggedEntrySetValueA(screen->candidateCursor, offset);
+    scrollOwnerSetValue(&work->inheritanceA.skillList, scroll);
+    flaggedEntrySetValueA(&work->inheritanceA.skillList, offset);
     skillHelpUpdateAttributeAndTarget(skill);
 }
 

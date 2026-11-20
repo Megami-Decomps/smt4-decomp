@@ -6,8 +6,10 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteState.h"
 
 extern "C" {
+s16 uiSpriteGetOperationMode(const UiSpriteState *sprite); // declcheck: local (romwright unit: ui/UiSpriteApi.h conflicts with its variadic sprite prototypes)
 
 float fontMeasureTextWidth(const char *, unsigned int, float); // declcheck: local (romwright prototype; the shared declaration in ui/AnimatedMessage.h does not compile here: more than one instance of overloaded function "textDrawString" has "C" linkage)
 int textFormatFullWidthNumber(...);
@@ -516,7 +518,7 @@ LAB_00198de4:
     temp_v14 = 4;
     temp_v19 = 5;
     if (*(int *)(temp_v3 + 4) == 5 || *(int *)(temp_v3 + 4) == 4) {
-      temp_v2 = *(short *)(temp_v3 + 0x228);
+      temp_v2 = uiSpriteGetOperationMode((UiSpriteState *)(temp_v3 + 0x1d8));
       if (temp_v2 == 3 || temp_v2 == 1) {
         temp_v14 = 6;
       }

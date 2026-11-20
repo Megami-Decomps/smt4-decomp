@@ -25,10 +25,6 @@ s32 skillGetCostWithRankReduction(u32 skillId, s32 flag); // declcheck: local (t
 SlotRecordA *btlMainGetUnk14(void);
 s32 listCursorGetRowIfUnblocked(u32 id); // declcheck: local (the shared declaration does not compile here or changes this unit)
 s32 skillApplyToTarget(s32 target, s32 slot, u32 skillId, u32 *out); // declcheck: local (the shared declaration does not compile here or changes this unit)
-s32 partyWidgetGetUnitId(PartyPanelWidget *widget);
-s32 partyWidgetGetCost(PartyPanelWidget *widget);
-void partyWidgetSetCost(PartyPanelWidget *widget, s32 cost);
-void partyWidgetSetValue(PartyPanelWidget *widget, u32 value);
 
 /* Refreshes the skill-cost preview of the party panel rows for the current skill/target and the
  * entry of list position `id` (`direct` selects the unpaged layout). */

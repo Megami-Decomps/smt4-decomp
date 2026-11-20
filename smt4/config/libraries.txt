@@ -25,3 +25,11 @@ arm 0x3eb078 0x3eb0fc armlib ceilf: exponent test against 23, 1.0e30f + x > 0 in
 # 0x15 CreateSemaphore; smt4a's twins are 0x19a364 and the third-party 0x19a300 (svc 0x2d).
 arm 0x2c5254 0x2c526c CTR-SDK svcReleaseSemaphore: push {r0}; svc 0x16; ldr r2, [sp]; str r1, [r2]; add sp, sp, #4
 arm 0x2c52dc 0x2c52f4 CTR-SDK svcCreateSemaphore: push {r0}; svc 0x15; ldr r2, [sp]; str r1, [r2]; add sp, sp, #4
+# armlib's ll_sdiv (signed 64-bit division): it packs both signs with `asrs r4, r1, #1; eor r4, r4, r3, lsr #1`, divides
+# the magnitudes with __aeabi_uldivmod and negates quotient and remainder from the packed bits (rsbs/rsc), a shape armcc
+# never emits from C; smt4a's twin is 0x1623dc.
+arm 0x2b5960 0x2b59b0 armlib ll_sdiv: asrs/eor sign packing and rsbs/rsc negations around __aeabi_uldivmod
+# nn::gr: a GPU command builder that only stores PICA register command words through the cursor (0x80310112,
+# 0x000f0101, ...); its twin, smt4a's 0x42c3c4, is third-party (between nn_fs_ipc_Directory_Close and
+# nn_gr_CTR_Vertex_DisableAttr with nothing first-party between).
+arm 0x356d98 0x356e1c nn::gr CTR command builder: PICA register command words only; smt4a's twin 0x42c3c4 is third-party

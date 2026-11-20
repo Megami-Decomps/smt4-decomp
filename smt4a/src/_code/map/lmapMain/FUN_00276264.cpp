@@ -590,7 +590,7 @@ extern int gameBlockByte27E98Is1To3(void);
 /* Supplied declaration required: scriptHolderBReset. */
 extern unsigned int scriptHolderUpdateForward(ScriptHolder *);
 extern unsigned int scriptHolderUpdate(ScriptHolder *);
-extern int FUN_0047e150(int);
+extern int itemEventStartupUpdate(int);
 /* Supplied declaration required: scriptHolderFree2. */
 /* Supplied declaration required: scriptHolderReset. */
 /* Supplied declaration required: scriptHolderFree3. */
@@ -2433,7 +2433,7 @@ LAB_00279444:
   case 0x12:
     FUN_00387014();
     if (puVar2[4] != 0) {
-      temp_v8 = FUN_0047e150(g_aocMain + 0xa8);
+      temp_v8 = itemEventStartupUpdate(g_aocMain + 0xa8);
       if (temp_v8 != 0) {
         helpResourcesRelease(g_aocMain + 0xa8);
         if (temp_v8 != 2) {

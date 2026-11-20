@@ -26,7 +26,7 @@ void renderGetCameraViewMatrix(void *destination)
         u8 unk208[0x80];
         Matrix3x4 tertiary;
     };
-    s32 mode = g_titleScene->stereoMode;
+    s32 mode = renderCtxGetStereoMode(g_titleScene);
     bool special = false;
     CameraMatrixViews *camera;
     if (g_titleScene->cameraSelection.type == 3) {

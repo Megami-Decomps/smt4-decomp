@@ -53,7 +53,7 @@ struct TintEffect {
 u32 FUN_0038136c(TintBlock *block, u32 *colorSource);
 void matrixInitializeWithScaleAndOffset(u8 *matrix, TintEffect *effect, s32 offset, f32 scale);
 void matrixApplyByMode(u8 *transform, u8 *matrix, s32 flag);
-void FUN_002b3c9c(TintObject *object, u32 frame);
+void renderSubmissionDrawPacket(TintObject *object, u32 frame);
 
 /* A packed colour word addressed by its byte channels. */
 union TintColor {
@@ -126,7 +126,7 @@ void FUN_003c7d1c(TintEffect *effect)
                 } else {
                     object->flags = object->flags & 0xFEFF;
                 }
-                FUN_002b3c9c(object, block->frameId & 0xFFFF);
+                renderSubmissionDrawPacket(object, block->frameId & 0xFFFF);
             }
         }
     }

@@ -8,7 +8,7 @@
 
 extern "C" {
 void infoWinSetValue(s32);
-s32 FUN_0047e150(AocScriptHolder *);
+s32 itemEventStartupUpdate(AocScriptHolder *);
 void helpResourcesRelease(AocScriptHolder *);
 void gameDataSaveSetValues(const MapJumpRequest *);
 void gameDataCopySaveToWork();
@@ -42,7 +42,7 @@ void FUN_004b8f18(MapJumpTransition *work)
         FUN_00341fa4(&g_aocMain->scriptHolder, 1);
         work->substate = 1;
     } else if (work->substate == 1) {
-        s32 result = FUN_0047e150(&g_aocMain->scriptHolder);
+        s32 result = itemEventStartupUpdate(&g_aocMain->scriptHolder);
         if (result) {
             helpResourcesRelease(&g_aocMain->scriptHolder);
             if (g_mapSelection.id >= 0) {

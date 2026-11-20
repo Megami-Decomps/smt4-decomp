@@ -46,7 +46,6 @@ static const SpriteAnimationCommand sPanelKeysD[] = {
 
 
 void uiStoreTextureEntryCenter(UiSpriteState *sprite, u32 group, u32 image);
-void spriteSetVisible(UiSpriteState *sprite, u8 visible);
 
 /* Builds the panel's six sprites and their resource parameters. */
 void btlEventPanelInitialize(BtlUiObjBA *panel)

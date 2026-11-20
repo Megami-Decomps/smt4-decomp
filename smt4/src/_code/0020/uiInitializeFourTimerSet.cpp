@@ -43,7 +43,6 @@ void drawParameterBlockClear(UiResourceParameters *resources);
 
 void uiStoreTextureEntryCenter(UiSpriteState *timer, s32 kind, s32 count);
 void pairSetHalves(UiSpriteState *timer, s32 x, s32 y);
-void spriteSetVisible(UiSpriteState *sprite, u8 visible);
 }
 
 /* Builds the four-timer sprite set: its resource packets, then the four timers' layers, positions and start animations. */

@@ -7,14 +7,6 @@ void slotPlacementSetSlot(PartyPanelWidget *placement, s32 slot);
 void slotPlacementStartTransition(PartyPanelWidget *placement, s32 immediate);
 void slotPlacementAssignSlotAndPosition(PartyPanelWidget *placement, u32 arg);
 s32 slotUnitIsInActiveParty(StatBlock *unit);
-void partyWidgetSetEmpty(PartyPanelWidget *widget, u8 empty);
-void partyWidgetSetUnitId(PartyPanelWidget *widget, s32 unitId);
-void partyWidgetSetHasTag(PartyPanelWidget *widget, u8 value);
-void partyWidgetSetFlagA(PartyPanelWidget *widget, u8 value);
-void partyWidgetSetTransitionActive(PartyPanelWidget *widget, u8 value);
-void partyWidgetSetTransitionHeld(PartyPanelWidget *widget, u8 value);
-void partyWidgetSetTransitionPending(PartyPanelWidget *widget, u8 value);
-void partyWidgetSetFlagB(PartyPanelWidget *widget, u8 value);
 void partyPanelRefreshFusionParents(void);
 void partyPanelRefreshFilterMarks(void);
 

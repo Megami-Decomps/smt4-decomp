@@ -34,7 +34,7 @@ s32 getUnlockedSlotCount(u32 argument);
 void FUN_003b6354(SlotScreen *screen, s32 slot, s32 mode, u32 argument, f32 scale, s32 iconX, s32 iconY,
                   s32 *x, s32 *y, u8 *extra);
 void skillScreenDrawSlotRow(SlotScreen *screen, s32 slot, u32 argument, u32 flags, f32 scale, s32 x, s32 y);
-void FUN_003cce74(SlotScreen *screen, u32 argument, s32 x, s32 y, f32 scale);
+void skillScreenDrawSelectedSlotRow(SlotScreen *screen, u32 argument, s32 x, s32 y, f32 scale);
 s32 resourceRunOperationIfUnblocked(u32 *cursor);
 void efctSetSpeed(f32 speed);
 
@@ -76,7 +76,7 @@ void FUN_0037c988(SlotScreen *screen, u32 argument, s32 drawExtra, s32 mode, u32
         }
     }
     if (screen->locked == 0 && drawExtra != 0) {
-        FUN_003cce74(screen, argument, offset.x, offset.y, scale);
+        skillScreenDrawSelectedSlotRow(screen, argument, offset.x, offset.y, scale);
     }
 }
 

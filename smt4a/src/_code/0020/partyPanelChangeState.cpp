@@ -8,8 +8,6 @@ s32 aocDataBlockHasEntries();
 int gameGlobalsSetMenuOpenFlag(int value);
 void pair40Set(PartyPanelWidget *widget, s32 first, s32 second);
 void obj48Arm(PartyPanelWidget *widget, u8 value);
-void partyWidgetSetTransitionActive(PartyPanelWidget *widget, u8 value);
-void partyWidgetSetTransitionPending(PartyPanelWidget *widget, u8 value);
 
 void partyPanelChangeState(s32 state, s32 rememberPrevious)
 {

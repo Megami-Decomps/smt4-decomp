@@ -1,4 +1,4 @@
-/* NON_MATCHING: only register allocation/pool order differs (retail loads the colour with a writeback LDR and the icon-table pointer in r0/r1; the icon tables are also read from the image's constant data at DAT_00588f78-relative rodata where this build emits its own copy). */
+/* NON_MATCHING: only 2 instructions differ at header/category load (retail uses writeback ldr r9, [r0, #928]!; ldr r2, [r0, #1952], same as sibling shopDrawEquipmentList). */
 #include "common.h"
 #include <stddef.h>
 #include "code/Code002a.h"
@@ -31,18 +31,29 @@ struct ShopScreen {
     /* 0x0000 */ u8 unk0000[4];
     /* 0x0004 */ s32 mode;
     /* 0x0008 */ u8 unk0008[0x398];
-    /* 0x03A0 */ u32 color;
-    /* 0x03A4 */ u8 header[0x798];
-    /* 0x0B3C */ ShopPanel *panel;
-    /* 0x0B40 */ s32 category;
-    /* 0x0B44 */ s32 tab;
+    /* 0x03A0 */ struct Detail {
+        /* 0x000 */ u32 color;
+        /* 0x004 */ u8 header[0x798];
+        /* 0x79C */ ShopPanel *panel;
+        /* 0x7A0 */ s32 category;
+        /* 0x7A4 */ s32 tab;
+    } detail;
     /* 0x0B48 */ u8 unk0B48[0x18];
     /* 0x0B60 */ ShopCategoryList lists[9];
     /* 0x0F74 */ u8 slotTables[9][0x1002];
 };
 typedef char ShopScreenOffsets[
-    offsetof(ShopScreen, header) == 0x3A4 && offsetof(ShopScreen, panel) == 0xB3C &&
+    offsetof(ShopScreen, detail.header) == 0x3A4 && offsetof(ShopScreen, detail.panel) == 0xB3C &&
     offsetof(ShopScreen, lists) == 0xB60 && sizeof(ShopCategoryList) == 0x74 ? 1 : -1];
+
+struct ShopIconGroup {
+    u32 ids[4];
+};
+struct ShopMainIconTables {
+    u8 unk00[0xF8];
+    ShopIconGroup firstIcons;
+    ShopIconGroup secondIcons;
+};
 
 /* The two sprite choices each tab makes (indices into the icon table). */
 struct ShopTabIcons {
@@ -51,6 +62,7 @@ struct ShopTabIcons {
 };
 
 extern "C" {
+extern const ShopMainIconTables g_equipMenuStateHandlerInit;
 extern ShopTabIcons DAT_00588f78[];
 void uiDrawCompositeSpriteAtRectCorner(void *header, u32 id, s32 dx, s32 dy, u32 flags);
 void FUN_0049368c(void *header, u32 id, s32 dx, s32 dy, u32 color, u32 flags);
@@ -61,10 +73,12 @@ s32 rangeGetMinimumLimit(ShopCategoryList *list);
 s32 flaggedValueHolderGetTotal(ShopCategoryList *list);
 
 /* Redraws the shop screen's header icons and the visible slots of the current category. */
-void FUN_00497a6c(ShopScreen *screen, u32 sprite)
+void shopScreenRedrawHeaderAndSlots(ShopScreen *screen)
 {
-    u32 color = screen->color;
-    switch (screen->category) {
+    u32 sprite;
+    ShopScreen::Detail *detail = &screen->detail;
+    u32 color = detail->color;
+    switch (detail->category) {
     case 0:
         sprite = 0;
         break;
@@ -87,21 +101,21 @@ void FUN_00497a6c(ShopScreen *screen, u32 sprite)
         sprite = 4;
         break;
     }
-    uiDrawCompositeSpriteAtRectCorner(screen->header, sprite, 0, 0, color);
-    FUN_0049368c(screen->header, screen->tab + 0x61, 0, 0, color, 1);
-    FUN_0049368c(screen->header, 0x65, 0, 0, color, 1);
-    FUN_0049368c(screen->header, 0x66, 0, 0, color, 1);
-    s32 firstIndex = DAT_00588f78[screen->tab].first;
-    s32 secondIndex = DAT_00588f78[screen->tab].second;
-    u32 firstIcons[4] = {0x6F, 0x6E, 0x71, 0x70};
-    u32 secondIcons[4] = {0x7A, 0x79, 0x7C, 0x7B};
-    FUN_0049368c(screen->header, firstIcons[firstIndex], 0, 0, color, 1);
-    FUN_0049368c(screen->header, secondIcons[secondIndex], 0, 0, color, 1);
+    uiDrawCompositeSpriteAtRectCorner(screen->detail.header, sprite, 0, 0, color);
+    FUN_0049368c(screen->detail.header, screen->detail.tab + 0x61, 0, 0, color, 1);
+    FUN_0049368c(screen->detail.header, 0x65, 0, 0, color, 1);
+    FUN_0049368c(screen->detail.header, 0x66, 0, 0, color, 1);
+    s32 firstIndex = DAT_00588f78[screen->detail.tab].first;
+    s32 secondIndex = DAT_00588f78[screen->detail.tab].second;
+    ShopIconGroup firstIcons = g_equipMenuStateHandlerInit.firstIcons;
+    ShopIconGroup secondIcons = g_equipMenuStateHandlerInit.secondIcons;
+    FUN_0049368c(screen->detail.header, firstIcons.ids[firstIndex], 0, 0, color, 1);
+    FUN_0049368c(screen->detail.header, secondIcons.ids[secondIndex], 0, 0, color, 1);
 
     s32 compact = ((screen->mode) == 7 || (screen->mode) == 11) || ((screen->mode) == 8 || (screen->mode) == 12) || ((screen->mode) == 9 || (screen->mode) == 13) ||
                   ((screen->mode) == 17 || (screen->mode) == 18);
-    ShopCategoryList *list = &screen->lists[screen->category];
-    ShopSlot *slots = reinterpret_cast<ShopSlot *>(screen->slotTables[screen->category]);
+    ShopCategoryList *list = &screen->lists[screen->detail.category];
+    ShopSlot *slots = reinterpret_cast<ShopSlot *>(screen->slotTables[screen->detail.category]);
     s32 first = resourceDispatchTaggedOperation(list);
     s32 count = rangeGetMinimumLimit(list);
     for (s32 i = 0; i < count; ++i) {
@@ -110,8 +124,8 @@ void FUN_00497a6c(ShopScreen *screen, u32 sprite)
     }
     if (compact && list->limit > 0)
         FUN_00494d68(screen, FUN_0031d174(list) + 1, 1, &slots[flaggedValueHolderGetTotal(list)]);
-    size40Set(screen->panel, resourceDispatchTaggedOperation(list), FUN_0031d174(list));
-    screen->panel->refresh(color);
+    size40Set(screen->detail.panel, resourceDispatchTaggedOperation(list), FUN_0031d174(list));
+    screen->detail.panel->refresh(color);
 }
 
 } /* extern "C" */

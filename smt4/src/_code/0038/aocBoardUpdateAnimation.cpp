@@ -4,7 +4,6 @@
 
 extern "C" {
 void uiStoreTextureEntryCenter(UiSpriteState *sprite, u32 group, u32 image);
-void spriteSetVisible(UiSpriteState *sprite, u8 visible);
 
 /* Per-frame update: plays the three sprites in sequence (fade in, hold, fade out). */
 s32 aocBoardUpdateAnimation(u32 job)

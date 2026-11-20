@@ -1,29 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `predicateTableAppendRow` (_code @ 0x352fd8, 0xb8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: list/table owner locals restore retail layout; only third/fourth string arguments swap r7/r8 (same as smt4a twin). */
+#include "common.h"
+
+namespace {
+struct TextRowList {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ s32 count;
+};
+
+/* One row of five 64-byte strings. */
+struct TextRow {
+    /* 0x000 */ char columns[5][0x40];
+};
+}
 
 extern "C" {
 
-int stringCopyTruncated(...);
+extern TextRowList DAT_00471a50;
+extern TextRow DAT_004e675c[];
+void stringCopyTruncated(char *dst, const char *src, u32 size);
 
-extern int DAT_00471a54; /* 0x471a54 */
-extern unsigned char DAT_004e675c; /* 0x4e675c */
-
-/* Supplied declaration required: stringCopyTruncated. */
-
-
-void predicateTableAppendRow(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5)
-
+/* Append a row of five strings to the text table. */
+void predicateTableAppendRow(const char *first, const char *second, const char *third, const char *fourth, const char *fifth)
 {
-/* irregular: 1 native warning(s); review required */
-  stringCopyTruncated(&DAT_004e675c + DAT_00471a54 * 0x140,param_1,0x40);
-  stringCopyTruncated(DAT_00471a54 * 0x140 + 0x4e679c,param_2,0x40);
-  stringCopyTruncated(DAT_00471a54 * 0x140 + 0x4e67dc,param_3,0x40);
-  stringCopyTruncated(DAT_00471a54 * 0x140 + 0x4e681c,param_4,0x40);
-  stringCopyTruncated(DAT_00471a54 * 0x140 + 0x4e685c,param_5,0x40);
-  DAT_00471a54 = DAT_00471a54 + 1;
-  return;
+    TextRowList *list = &DAT_00471a50;
+    TextRow *rows = DAT_004e675c;
+    stringCopyTruncated(rows[list->count].columns[0], first, 0x40);
+    stringCopyTruncated(rows[list->count].columns[1], second, 0x40);
+    stringCopyTruncated(rows[list->count].columns[2], third, 0x40);
+    stringCopyTruncated(rows[list->count].columns[3], fourth, 0x40);
+    stringCopyTruncated(rows[list->count].columns[4], fifth, 0x40);
+    list->count++;
 }
 
 } /* extern "C" */

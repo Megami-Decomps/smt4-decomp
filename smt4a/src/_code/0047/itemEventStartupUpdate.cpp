@@ -1,4 +1,4 @@
-/* NON_MATCHING: switch return blocks merge differently, process-mode constant is saved, and argument loads are rescheduled. */
+/* NON_MATCHING: only case-0 state-4 branch target sharing and case-1 sprintf argument load order differ. */
 #include <stdio.h>
 #include "addon/ItemEventStartup.h"
 #include "script/scrScriptProcess.h"
@@ -15,32 +15,32 @@ u32 tableGroupFindEntryIndex(void *, const char *);
 void scrScriptProcessStartEntry(ScriptProcess *, u32);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 
-u32 FUN_0047e150(ItemEventStartup *work)
+u32 itemEventStartupUpdate(ItemEventStartup *work)
 {
     char path[128];
     char messagesPath[128];
     switch (work->state) {
     case 0: {
         QuestRecordA *item = questDataGetRecord(rosterGetLeaderId());
-        if (!item || item->event.package == 0) {
-            work->state = 3;
-            return 0;
-        }
-        u32 package = item->event.package;
-        sprintf(path, "event/e%03d/e%03d.bf", package, package);
-        sprintf(messagesPath, "event/e%03d/e%03d.mbm", package, package);
-        if (aocPackageGrantsItem(g_aocSystem, item->event.package, 1)) {
-            aocQueueType07(g_aocSystem, package, &work->script, 0);
-            aocQueueType08(g_aocSystem, package, &work->messages, 0);
-            work->state = 1;
+        if (item && item->event.package != 0) {
+            u32 package = item->event.package;
+            sprintf(path, "event/e%03d/e%03d.bf", package, package);
+            sprintf(messagesPath, "event/e%03d/e%03d.mbm", package, package);
+            if (aocPackageGrantsItem(g_aocSystem, item->event.package, 1)) {
+                aocQueueType07(g_aocSystem, package, &work->script, 0);
+                aocQueueType08(g_aocSystem, package, &work->messages, 0);
+                work->state = 1;
+            } else {
+                work->state = 4;
+            }
         } else {
-            work->state = 4;
+            work->state = 3;
         }
         break;
     }
     case 1: {
         if (!work->script || !work->messages)
-            return 0;
+            break;
         QuestRecordA *item = questDataGetRecord(rosterGetLeaderId());
         if (!item)
             work->state = 3;

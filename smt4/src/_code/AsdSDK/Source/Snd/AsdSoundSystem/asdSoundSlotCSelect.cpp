@@ -1,15 +1,8 @@
-/* NON_MATCHING: retail derives g_asdSound from g_asdSndSlotSelection (`sub r1, r5, #4096`) and loads one fewer literal, i.e. g_asdSound (0x1000 bytes) and g_asdSndSlotSelection were defined in the same file; only the base-register/literal handling differs. */
+/* NON_MATCHING: the output pointers are AsdSoundSystem::outputC (retail's g_asdSndSlotSelection word is g_asdSound+0x1000, from which branch 1 derives g_asdSound with `sub r1, r5, #4096`); armcc here keeps g_asdSound in r8 and adds 0x1000 instead of pooling g_asdSound+0x1000, so it saves two more registers. Matching also needs g_asdSound sized over that word in symbols.txt. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
 extern AsdSoundSystem g_asdSound;
-/* The tail of the sound system block (0x1000 on): the two slots currently selected for output. */
-struct SoundOutputTail {
-    u8 unk000[0x210];
-    AsdSndSlotC *outputC0;
-    AsdSndSlotC *outputC1;
-};
-extern SoundOutputTail g_asdSndSlotSelection;
 
 void basicSoundStopOrFadeOut(s32 handle, s32 unk);
 
@@ -27,9 +20,9 @@ void asdSoundSlotCSelect(u32 first, u32 second)
         slot->unk08 = 0;
         slot->volume = ASD_SND_VOLUME_DEFAULT;
         slot->flag = 0;
-        g_asdSndSlotSelection.outputC0 = slot;
+        g_asdSound.outputC[0] = slot;
     } else {
-        g_asdSndSlotSelection.outputC0 = NULL;
+        g_asdSound.outputC[0] = NULL;
     }
 
     if (second != 0xffffffff && second < 2) {
@@ -40,10 +33,10 @@ void asdSoundSlotCSelect(u32 first, u32 second)
         slot->unk08 = 0;
         slot->volume = ASD_SND_VOLUME_DEFAULT;
         slot->flag = 0;
-        g_asdSndSlotSelection.outputC1 = slot;
+        g_asdSound.outputC[1] = slot;
         return;
     }
-    g_asdSndSlotSelection.outputC1 = NULL;
+    g_asdSound.outputC[1] = NULL;
 }
 
 } /* extern "C" */

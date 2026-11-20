@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
+#include "shard/W6_W6Match6_PartyPanel.h"
 
 extern "C" {
 
@@ -106,7 +107,7 @@ void FUN_0028a924(int param_1,unsigned int param_2,unsigned short param_3)
   temp_v3 = 0;
   do {
     temp_v9 = temp_v0 + temp_v3 * 4;
-    *(unsigned char *)(*(int *)(temp_v9 + 0x6c8) + 0x25) = 0;
+    partyWidgetSetTransitionActive(*(PartyPanelWidget **)(temp_v9 + 0x6c8), 0);
     *(unsigned char *)(*(int *)(temp_v9 + 0x6c8) + 0x27) = 0;
     *(unsigned char *)(*(int *)(temp_v9 + 0x6c8) + 0x26) = 0;
     pair40Set(*(unsigned int *)(temp_v9 + 0x6c8),0);
@@ -115,7 +116,7 @@ void FUN_0028a924(int param_1,unsigned int param_2,unsigned short param_3)
   temp_v3 = 0;
   do {
     temp_v9 = temp_v0 + temp_v3 * 4;
-    *(unsigned char *)(*(int *)(temp_v9 + 0x6d8) + 0x25) = 0;
+    partyWidgetSetTransitionActive(*(PartyPanelWidget **)(temp_v9 + 0x6d8), 0);
     *(unsigned char *)(*(int *)(temp_v9 + 0x6d8) + 0x27) = 0;
     *(unsigned char *)(*(int *)(temp_v9 + 0x6d8) + 0x26) = 0;
     pair40Set(*(unsigned int *)(temp_v9 + 0x6d8),0);

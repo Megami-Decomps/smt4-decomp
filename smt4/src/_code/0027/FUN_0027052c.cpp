@@ -22,7 +22,7 @@ int libc_strcpy(unsigned char *, int);
 int soundPlaySeUnpanned(int);
 int mapFlagsWriteBit(int, int);
 int FUN_002e8a78(void);
-int FUN_002f3b14(void);
+int mapIfActivateNearbyMarker(void);
 int FUN_002f3bc0(void);
 int MapDepart_Init(int [2], int);
 
@@ -76,7 +76,7 @@ extern int mathCirclesOverlap(void);
 /* Supplied declaration required: soundPlaySeUnpanned. */
 /* Supplied declaration required: mapFlagsWriteBit. */
 /* Supplied declaration required: FUN_002e8a78. */
-/* Supplied declaration required: FUN_002f3b14. */
+/* Supplied declaration required: mapIfActivateNearbyMarker. */
 /* Supplied declaration required: FUN_002f3bc0. */
 /* Supplied declaration required: MapDepart_Init. */
 
@@ -312,7 +312,7 @@ LAB_002709b8:
           else {
             temp_v0 = *(short *)(temp_v6 + 0x7c);
             if ((!(temp_v0 == 3 || temp_v0 == 4)) && (!(temp_v0 == 5 || temp_v0 == 7))) {
-              FUN_002f3b14();
+              mapIfActivateNearbyMarker();
               if (*(char *)(temp_v6 + 0x84) != '\0') {
                 if (*(int *)(temp_v6 + 0x88) == 0) {
                   DAT_0049fa60 = 0;
@@ -334,7 +334,7 @@ LAB_002709b8:
               *(unsigned char *)(temp_v6 + 0x78) = 1;
               *(unsigned int *)(temp_v6 + 0x5c) = 6;
               *(unsigned int *)(temp_v6 + 0x74) = 2;
-              FUN_002f3b14();
+              mapIfActivateNearbyMarker();
             }
           }
           DAT_0049fa60 = 0;

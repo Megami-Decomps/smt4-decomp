@@ -5,7 +5,6 @@
 #include "shard/W6_W6Match1_PositionedStream.h"
 
 extern "C" {
-void FUN_00481ba8(DistanceVisibilityWork *);
 
 void FUN_00481c28(DistanceVisibilityWork *work)
 {

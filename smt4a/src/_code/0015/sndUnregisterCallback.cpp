@@ -1,29 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `sndUnregisterCallback` (_code @ 0x1590c0, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc uses ip + offset #32 instead of retail's add r2, r2, #32 when clearing the two trailing arrays. */
+#include "common.h"
+
+struct SoundCallbackTables {
+    void *args[8];
+    void *funcs[8];
+};
 
 extern "C" {
+extern void *g_dspCallbackSlots[8];
+extern SoundCallbackTables DAT_0061a664;
 
-extern unsigned char DAT_0061a664; /* 0x61a664 */
-extern unsigned char g_callbackFuncs; /* 0x61a684 */
-
-
-unsigned int sndUnregisterCallback(int param_1)
-
+/* Unregisters a callback matching `target`, clearing its slot and returning 1 if found. */
+u32 sndUnregisterCallback(void *target)
 {
-  int temp_v0;
-  
-  temp_v0 = 0;
-  do {
-    if (*(int *)(temp_v0 * 4 + 0x61a644) == param_1) {
-      *(unsigned int *)(temp_v0 * 4 + 0x61a644) = 0;
-      *(unsigned int *)(&DAT_0061a664 + temp_v0 * 4) = 0;
-      *(unsigned int *)(&g_callbackFuncs + temp_v0 * 4) = 0;
-      return 1;
+    for (s32 i = 0; i < 8; ++i) {
+        if (g_dspCallbackSlots[i] == target) {
+            g_dspCallbackSlots[i] = NULL;
+            DAT_0061a664.args[i] = NULL;
+            DAT_0061a664.funcs[i] = NULL;
+            return 1;
+        }
     }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 8);
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}
