@@ -186,7 +186,11 @@ are not counted. `python -B tools/scope.py` lists them in `config/third_party.tx
 third-party names (mostly from matching Nintendo's SDK code, plus the C library's standard names),
 library blocks recorded with their evidence in `config/libraries.txt` (Apocalypse's OnlineCore Thumb
 code), functions reached only from third-party code, and unnamed functions linked between
-third-party ones. Anything uncertain stays counted. Run it again after naming passes.
+third-party ones of the same instruction set. A function and its twin in the other game
+(`tools/shared.py`) get one answer: where the two games' neighbours or callers disagree, both stay
+counted until a `libraries.txt` block gives evidence (a block reaches the exact twins in the other
+game). Anything uncertain stays counted. Run it again after naming passes; it needs both dumps.
+Never edit `third_party.txt` by hand: fix `libraries.txt` or the rules, then rerun.
 
 ## Progress site
 

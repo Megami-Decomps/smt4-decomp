@@ -89,3 +89,17 @@ arm 0x23b4f4 0x23b5dc nn::math VEC3TransformCoordArray: VEC3TransformCoord loop 
 # -1/tan in odd quadrants. Exact twins of smt4a's 0x1bbde0 and 0x50dda4.
 arm 0x2881bc 0x28832c armlib tanf: 2/pi reduction, ARM_fpclassifyf and __set_errno, -1/tan for odd quadrants; twin of smt4a 0x50dda4
 arm 0x28836c 0x288460 armlib acosf: __set_errno for |x| > 1, pi/2 for tiny x, sqrtf((1 - |x|) / 2) above 0.5; twin of smt4a 0x1bbde0
+# NintendoWare sound: nw::snd::FsSoundArchive (the file-system sound archive): the file-header reader, LoadHeader
+# (soundArchiveLoadInfoBlock), LoadLabelStringData (soundArchiveLoadStringBlock), Open (FUN_00121824: opens the CSAR,
+# reads the header, sets nw_snd_SoundArchive_SetExternalFileRoot from the path's directory with libc_strlen) and Close,
+# linked between nw_snd_internal_TaskThread_Destroy and nw_snd_internal_driver_SoundThread_Destroy; the same functions
+# (near twins) sit at the same place in smt4a (0x15e8c0-0x15eb94).
+arm 0x1216bc 0x121990 NintendoWare-snd FsSoundArchive LoadFileHeader/LoadHeader/LoadLabelStringData/Open/Close; between TaskThread_Destroy and SoundThread_Destroy
+# CTR-SDK service clients (nn::<service>::CTR IPC wrappers): the result check, the session open/close through
+# srvGetServiceHandle/srvInitialize, and one-command IPC calls that write a command header (0x00270000, 0x002b0000,
+# 0x002c0000, ...) to the thread command buffer and return the result word; every failure goes to the SDK's fatal
+# break (asdFatalError here, sysFatalBreak in smt4a). Linked between nn_snd_CTR_VoiceImpl_VoiceImpl_sub_object and
+# nn_math_ARMv6_MTX34ToQUATC_FAST, as their exact and near twins are in smt4a (0x43a31c-0x43ad40, between nn::snd and
+# nn::math); nothing here calls game code. The folder anchors of 0x360364/0x3603f8 (AsdModel) come from the TU
+# assignment, not from evidence.
+arm 0x360294 0x360ac8 CTR-SDK service IPC clients: srv session, command-header IPC calls, fatal break on failure; between nn::snd and nn::math as in smt4a

@@ -73,3 +73,19 @@ arm 0x1c3bb8 0x1c3d20 nn::gr/nw::gfx shader bind-symbol search: nn_gr_CTR_Shader
 # mathlib_ceilf and the runtime block and calls the third-party FUN_001c4370 / FUN_001c4360.
 arm 0x1bbde0 0x1bbed4 armlib acosf: __set_errno for |x| > 1, pi/2 for tiny x, sqrtf((1 - |x|) / 2) above 0.5; twin of smt4 0x28836c
 arm 0x50dda4 0x50df14 armlib tanf: 2/pi reduction, ARM_fpclassifyf and __set_errno, -1/tan for odd quadrants; twin of smt4 0x2881bc
+# NintendoWare sound: nw::snd::FsSoundArchive (file-header reader, LoadHeader, LoadLabelStringData, Open, Close),
+# between nw_snd_FxReverb/TaskThread code and nw_snd_internal_driver_SoundThread_Destroy; near twins of smt4's
+# 0x1216bc-0x121990 block at the same place.
+arm 0x15e8c0 0x15eb94 NintendoWare-snd FsSoundArchive LoadFileHeader/LoadHeader/LoadLabelStringData/Open/Close; before SoundThread_Destroy
+# CTR-SDK service clients and nn::math: the IPC wrappers of smt4's 0x360294-0x360ac8 block (result check, srv
+# session, one-command IPC calls, sysFatalBreak on failure), then service wrappers smt4 does not link and nn::math's
+# VEC4Transform (vec4Transform, 0x43b5b4), up to nn_math_VEC3SafeNormalize: linked between nn::snd
+# (nn_snd_CTR_VoiceImpl_VoiceImpl_sub_object) and nn::math, calling only srvGetServiceHandle/srvInitialize and the
+# fatal break.
+arm 0x43a31c 0x43b658 CTR-SDK service IPC clients and nn::math VEC4Transform; between nn::snd and nn_math_VEC3SafeNormalize, twins of smt4 0x360294-0x360ac8
+# NintendoWare gfx resources (nw::gfx::res): the Setup/Cleanup/binding functions of the vertex, texture and
+# texture-coordinator resources (resTextureBindReferencedImages, ...) linked between
+# nw_gfx_res_ResVertexAttribute_Setup and nw_gfx_res_ResFog_Cleanup, reached only through resource vtables (no direct
+# callers); the two hand-listed smt4 blocks 0x36ef0c and 0x36fc08 are twins of functions inside it.
+arm 0x45181c 0x452300 NintendoWare-gfx res Setup/Cleanup after ResVertexAttribute_Setup, up to ResTextureCoordinatorData; vtable-only entry points
+arm 0x452470 0x4529a0 NintendoWare-gfx res Setup/Cleanup after ResTextureCoordinatorData, before ResFog_Cleanup; vtable-only entry points
