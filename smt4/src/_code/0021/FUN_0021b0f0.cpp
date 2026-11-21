@@ -41,7 +41,7 @@ void FUN_0021b0f0(void)
             }
         }
         const f32 degreesToRadians = 0.017453292f;
-        f32 x = g_lmapScene->pose.position.x - mathRemPio2f(g_lmapViewHolder.view->heading * degreesToRadians) *
+        f32 x = g_lmapScene->pose.position.x - libm_sinf(g_lmapViewHolder.view->heading * degreesToRadians) *
                 g_lmapViewHolder.view->rearDistance[preset];
         f32 z = g_lmapScene->pose.position.z - libm_cosf(g_lmapViewHolder.view->heading * degreesToRadians) *
                 g_lmapViewHolder.view->rearDistance[preset];

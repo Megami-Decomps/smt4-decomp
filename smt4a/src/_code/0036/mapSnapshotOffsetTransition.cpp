@@ -6,7 +6,6 @@
 
 extern "C" {
 extern MapMainA *g_mapMain;
-f32 libm_sinf(f32 angle);
 
 // Save the departure point behind the player and the corresponding arrival point.
 void mapSnapshotOffsetTransition(void)

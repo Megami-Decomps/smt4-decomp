@@ -6,11 +6,10 @@
 
 extern "C" {
 
-
 int FUN_004ffaf0(...);
 
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
-int libm_sinf(void);
+int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int FUN_001f3f34(void);
 int mapResolveCollisionSphere(...);
 int FUN_002826dc(...);
@@ -41,23 +40,6 @@ extern int g_lmapView; /* 0x5806a4 */
 extern int *g_lmapScene; /* 0x581288 */
 extern float DAT_0058128c; /* 0x58128c */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 extern signed char DAT_005f1c7e; /* 0x5f1c7e */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -81,7 +63,6 @@ extern int itemListGetCurrentIdOrInvalid(unsigned int);
 extern int animationIsClipComplete(unsigned int);
 extern int FUN_004ffa14(unsigned int);
 /* Supplied declaration required: FUN_004ffaf0. */
-
 
 void FUN_003541c0(void)
 

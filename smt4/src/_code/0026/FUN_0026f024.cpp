@@ -17,7 +17,7 @@ u32 FUN_0026f024(s32 *output, s32 start, s32 end, s32 duration, s32 elapsed, s32
     f32 angle = ratio * 1.5707964f;
     f32 progress;
     if (easeOut != 0) {
-        progress = mathRemPio2f(angle);
+        progress = libm_sinf(angle);
     } else {
         progress = 1.0f - libm_cosf(angle);
     }

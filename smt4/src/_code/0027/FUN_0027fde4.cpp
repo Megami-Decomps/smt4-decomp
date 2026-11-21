@@ -32,8 +32,8 @@ int lmapSetSceneId(unsigned int);
 int lmapCameraSetMode(int);
 int FUN_002804ec(int);
 int mapEaseSceneHeading(void);
-int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
-int mathRemPio2f(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "libm_sinf" has "C" linkage)
+int libm_sinf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int mathDistanceBetweenPoints(void);
 int mathPositionHeadingDegrees(void);
 int buttonHelpSetPreset(int);
@@ -70,7 +70,7 @@ extern int inputConfirmPressed(void);
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: libm_cosf. */
-/* Supplied declaration required: mathRemPio2f. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -158,7 +158,7 @@ void FUN_0027fde4(void)
             *(unsigned int *)(temp_v2 + 0x120) = temp_v4;
             if ((int)temp_v6 < 0x42700000) {
               temp_v6 = (*(float *)(temp_v2 + 0x4c) + 180.0f) * 0.017453292f;
-              mathRemPio2f();
+              libm_sinf();
               temp_v2 = g_lmapScene;
               *(float *)(g_lmapScene + 0x118) = *(float *)(g_lmapScene + 0x118) + temp_v6 * temp_v15;
               temp_v7 = (*(float *)(temp_v2 + 0x4c) + temp_v12) * temp_v7;
@@ -175,7 +175,7 @@ void FUN_0027fde4(void)
             }
             else {
               temp_v6 = (*(float *)(temp_v2 + 0x50) + 180.0f) * 0.017453292f;
-              mathRemPio2f();
+              libm_sinf();
               temp_v2 = g_lmapScene;
               *(float *)(g_lmapScene + 0x118) = *(float *)(g_lmapScene + 0x118) + temp_v6 * temp_v15;
               temp_v7 = (*(float *)(temp_v2 + 0x50) + temp_v12) * temp_v7;

@@ -10,7 +10,7 @@ extern "C" {
 
 int randRange(...);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
-int libm_sinf(int, int);
+int libm_sinf(int, int); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int FUN_002296b0(int);
 int FUN_00281b94(...);
 int mapRebuildWallAutoTiles(void);

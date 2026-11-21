@@ -8,7 +8,7 @@ s32 __set_errno(s32 error);
 f32 FUN_003eb2c8(s32 *quadrant, u32 bits, f32 value);
 
 // Evaluate sine with quadrant reduction, short polynomials, and IEEE exceptional cases.
-f32 mathRemPio2f(f32 value)
+f32 libm_sinf(f32 value)
 {
     union FloatWord { f32 value; u32 bits; } word;
     word.value = value;

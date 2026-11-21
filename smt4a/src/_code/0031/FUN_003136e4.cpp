@@ -8,7 +8,7 @@
 using nw::math::MTX34;
 
 extern "C" {
-f32 libm_sinf(f32 radians);
+
 void eplSlotStartRequest(s32 slot);
 void mapEplSetSlotPosition(s32 slot, f32 x, f32 y, f32 z);
 void nn_math_ARMv6_MTX34CopyAsm(MTX34 *dest, const MTX34 *source);

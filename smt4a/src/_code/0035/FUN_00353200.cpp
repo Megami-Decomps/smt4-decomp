@@ -9,7 +9,7 @@
 extern "C" {
 
 u32 randRange(u32 limit);
-f32 libm_sinf(f32 radians);
+
 s32 mapCollisionRaySegmentTest(MapVector *start, MapVector *end, s32 flags);
 s32 mapResolveCollisionSphere(MapVector *position, MapVector *ground, s32 flags);
 

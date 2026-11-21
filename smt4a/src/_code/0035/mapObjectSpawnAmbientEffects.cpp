@@ -6,7 +6,7 @@
 
 extern "C" {
 extern MapObjectState *g_mapObj;
-f32 libm_sinf(f32 radians);
+
 void FUN_00281b94(s32 slot, MapVector position, f32 heading, f32 a, f32 b, f32 c);
 }
 

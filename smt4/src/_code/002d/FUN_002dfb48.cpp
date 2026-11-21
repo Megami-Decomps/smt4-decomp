@@ -39,7 +39,7 @@ u32 FUN_002dfb48(MapEnemyEntry *entry)
                 radius = static_cast<f32>(randNextInRange(50)) + 560.0f;
         }
         heading *= 0.017453292f;
-        candidate.x += mathRemPio2f(heading) * radius;
+        candidate.x += libm_sinf(heading) * radius;
         candidate.z += libm_cosf(heading) * radius;
         ++enemies->spawnAttempts;
         MapVector start = g_lmapScene->pose.position;

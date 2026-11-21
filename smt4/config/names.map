@@ -5083,7 +5083,7 @@
 001f7380 effEmitterUpdate
 003934d0 aocTexCtrlParseResource
 0028a22c partyPanelReleaseResources
-0028250c mathRemPio2f
+0028250c libm_sinf
 002bf288 texDrawTableEntryAtStoredOrigin
 0025bed8 groupedFileTablesCountRecordsOfKind
 002bf818 uiSpriteAdvanceAnimation

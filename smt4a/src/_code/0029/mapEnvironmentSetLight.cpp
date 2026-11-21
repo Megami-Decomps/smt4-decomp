@@ -6,7 +6,7 @@ extern "C" {
 
 int itemGroupHasEnabledItem(unsigned int, int);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
-int libm_sinf(void);
+int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int FUN_0033f42c(void);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -68,7 +68,6 @@ extern float DAT_00610b00; /* 0x610b00 */
 /* Supplied declaration required: FUN_0033f42c. */
 extern int sceneFindRecordByName(unsigned int, int, unsigned char *);
 extern short resourceNameGroupFindIndex(unsigned int, unsigned char *);
-
 
 void mapEnvironmentSetLight(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
                  unsigned int param_5,unsigned int param_6,unsigned int param_7)

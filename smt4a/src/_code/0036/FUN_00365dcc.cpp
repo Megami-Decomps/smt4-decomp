@@ -8,7 +8,6 @@
 /* The map scene as the overview camera drives it. */
 #define DEGREES_TO_RADIANS 0.017453292f
 
-
 extern "C" {
 
 void mapEaseSceneHeading(void);
@@ -26,7 +25,7 @@ void lmapCameraSetMode(s32 mode);
 void FUN_00324e38(s32 mode);
 void FUN_00327ee8(f32 x, f32 z);
 void FUN_002e364c(MapVector *position);
-f32 libm_sinf(f32 angle);
+
 void sysPlaySe(s32 id);
 s32 padButtonIsPressed(u32 button);
 

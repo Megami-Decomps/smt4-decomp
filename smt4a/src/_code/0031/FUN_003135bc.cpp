@@ -3,7 +3,7 @@
 #include "util/TrigF32.h"
 
 extern "C" {
-f32 libm_sinf(f32 radians);
+
 void FUN_003136e4(f32 angle, f32 distance);
 s32 FUN_003644bc(void);
 void effectSpawnKindTen(f32 x, f32 y, f32 z);

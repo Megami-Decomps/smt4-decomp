@@ -19,7 +19,6 @@ extern "C" {
 
 extern ViewState g_battleViewState;
 
-f32 libm_sinf(f32 radians);
 s32 FUN_00330108(Vector3 *end, Vector3 *start, u8 *hit);
 f32 distSpatial(Vector3 start, Vector3 end);
 f32 calcHeadingRoundedToCardinalDirection(f32 heading);

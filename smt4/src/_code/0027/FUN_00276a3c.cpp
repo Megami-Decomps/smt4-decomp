@@ -13,8 +13,8 @@ int residentApplyFallbackValues(void);
 int FUN_00266c5c(int *, int *, float *);
 int randomGetNormalizedFloat(void);
 int __hardfp_atan2f(void);
-int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
-int mathRemPio2f(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "libm_sinf" has "C" linkage)
+int libm_sinf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int mathDistanceBetweenPoints(void);
 int FUN_00298d50(...);
 int cameraExportParameters(float [3], int);
@@ -65,7 +65,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: randomGetNormalizedFloat. */
 /* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: libm_cosf. */
-/* Supplied declaration required: mathRemPio2f. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: FUN_00298d50. */
 /* Supplied declaration required: cameraExportParameters. */
@@ -309,7 +309,7 @@ void FUN_00276a3c(void)
     g_mapCamera[0x10] = *(int *)(g_lmapScene + 0x1c);
     piVar4[0x12] = *(int *)(temp_v3 + 0x24);
     temp_v9 = (float)piVar4[6] * 0.017453292f;
-    mathRemPio2f();
+    libm_sinf();
     piVar4 = g_mapCamera;
     g_mapCamera[0xd] =
          (int)(*(float *)(g_lmapScene + 0x1c) - temp_v9 * (float)g_mapCamera[temp_v4 + 0x62]);
@@ -323,7 +323,7 @@ void FUN_00276a3c(void)
     piVar4[0x11] = (int)(*(float *)(temp_v3 + 0x20) + (float)piVar4[temp_v4 + 0x32]);
     piVar4[0xe] = (int)(*(float *)(temp_v3 + 0x20) + (float)piVar4[temp_v4 + 0x42]);
     temp_v9 = ((float)piVar4[6] - 90.0f) * temp_v12;
-    mathRemPio2f();
+    libm_sinf();
     piVar4 = g_mapCamera;
     g_mapCamera[0x10] =
          (int)((float)g_mapCamera[0x10] + temp_v9 * (float)g_mapCamera[temp_v4 + 0x52]);
@@ -333,7 +333,7 @@ void FUN_00276a3c(void)
     g_mapCamera[0x12] =
          (int)((float)g_mapCamera[0x12] + temp_v9 * (float)g_mapCamera[temp_v4 + 0x52]);
     temp_v9 = ((float)piVar4[6] - temp_v14) * temp_v12;
-    mathRemPio2f();
+    libm_sinf();
     piVar4 = g_mapCamera;
     g_mapCamera[0xd] =
          (int)((float)g_mapCamera[0xd] + temp_v9 * (float)g_mapCamera[temp_v4 + 0x52]);

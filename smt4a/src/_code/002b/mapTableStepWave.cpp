@@ -11,7 +11,7 @@ extern "C" {
 
 extern MapZoomState g_mapTable;
 
-f32 libm_sinf(f32 phase);
+#include "util/TrigF32.h"
 
 /* Advances the phase by the mode's step (0.1, 0.2 or 0.05) and derives the offset from it, with an
  * amplitude of 32 for modes 1-3 and 48 for modes 4-6. */

@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00282228(int *);
-int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
-int mathRemPio2f(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "libm_sinf" has "C" linkage)
+int libm_sinf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* stack frame of void: 13 slot(s), 52 byte(s) */
 typedef struct {
@@ -31,7 +31,7 @@ extern int g_lmapScene; /* 0x447e88 */
 extern int vectorPairTransitionStep(void);
 /* Supplied declaration required: FUN_00282228. */
 /* Supplied declaration required: libm_cosf. */
-/* Supplied declaration required: mathRemPio2f. */
+/* Supplied declaration required: libm_sinf. */
 
 
 void mapDepartAdvanceCameraSequence(void)
@@ -93,7 +93,7 @@ void mapDepartAdvanceCameraSequence(void)
     temp_v12 = *(float *)(g_lmapScene + 0x20);
     temp_v4 = *(float *)(g_lmapScene + 0x4c) * 0.017453292f;
     temp_v10 = *(float *)(g_lmapScene + 0x24);
-    mathRemPio2f();
+    libm_sinf();
     temp_v13 = 300.0f;
     temp_v12 = temp_v12 + temp_v7;
     temp_v8 = temp_v8 + temp_v4 * 300.0f;
@@ -106,7 +106,7 @@ void mapDepartAdvanceCameraSequence(void)
     temp_v4 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
     temp_v18 = temp_v8;
     temp_v19 = temp_v12;
-    mathRemPio2f();
+    libm_sinf();
     temp_v7 = temp_v7 + temp_v4 * temp_v11;
     temp_v13 = temp_v13 + temp_v9;
     temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
@@ -137,7 +137,7 @@ void mapDepartAdvanceCameraSequence(void)
       temp_v11 = *(float *)(g_lmapScene + 0x20);
       temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
       temp_v10 = *(float *)(g_lmapScene + 0x24);
-      mathRemPio2f();
+      libm_sinf();
       temp_v8 = temp_v8 + temp_v4 * temp_v12;
       temp_v11 = temp_v11 + temp_v7;
       temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
@@ -149,7 +149,7 @@ void mapDepartAdvanceCameraSequence(void)
       temp_v4 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
       temp_v18 = temp_v8;
       temp_v19 = temp_v11;
-      mathRemPio2f();
+      libm_sinf();
       temp_v8 = 200.0f;
       temp_v12 = temp_v12 + temp_v9;
       temp_v7 = temp_v7 + temp_v4 * 200.0f;
@@ -181,7 +181,7 @@ void mapDepartAdvanceCameraSequence(void)
       temp_v10 = *(float *)(g_lmapScene + 0x20);
       temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
       temp_v7 = *(float *)(g_lmapScene + 0x24);
-      mathRemPio2f();
+      libm_sinf();
       temp_v8 = temp_v8 + temp_v4 * temp_v12;
       temp_v10 = temp_v10 + temp_v13;
       temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
@@ -193,7 +193,7 @@ void mapDepartAdvanceCameraSequence(void)
       temp_v4 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
       temp_v18 = temp_v8;
       temp_v19 = temp_v10;
-      mathRemPio2f();
+      libm_sinf();
       temp_v7 = temp_v7 + temp_v4 * temp_v11;
       temp_v12 = temp_v12 + temp_v11;
       temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
@@ -224,7 +224,7 @@ void mapDepartAdvanceCameraSequence(void)
       temp_v10 = *(float *)(g_lmapScene + 0x20);
       temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
       temp_v7 = *(float *)(g_lmapScene + 0x24);
-      mathRemPio2f();
+      libm_sinf();
       temp_v8 = temp_v8 + temp_v4 * temp_v12;
       temp_v10 = temp_v10 + temp_v13;
       temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
@@ -236,7 +236,7 @@ void mapDepartAdvanceCameraSequence(void)
       temp_v4 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
       temp_v18 = temp_v8;
       temp_v19 = temp_v10;
-      mathRemPio2f();
+      libm_sinf();
       temp_v9 = temp_v9 + temp_v4 * temp_v11;
       temp_v12 = temp_v12 + 280.0f;
       temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
@@ -268,7 +268,7 @@ void mapDepartAdvanceCameraSequence(void)
       temp_v12 = *(float *)(g_lmapScene + 0x20);
       temp_v11 = *(float *)(g_lmapScene + 0x24);
       temp_v3 = (*(float *)(g_lmapScene + 0x4c) - 15.0f) * temp_v2;
-      mathRemPio2f();
+      libm_sinf();
       temp_v7 = temp_v7 + temp_v3 * temp_v4;
       temp_v19 = temp_v12 + temp_v10;
       temp_v3 = (*(float *)(g_lmapScene + 0x4c) - temp_v13) * temp_v2;
@@ -279,7 +279,7 @@ void mapDepartAdvanceCameraSequence(void)
       temp_v10 = *(float *)(g_lmapScene + 0x24);
       temp_v3 = (*(float *)(g_lmapScene + 0x4c) - temp_v9) * temp_v2;
       temp_v18 = temp_v7;
-      mathRemPio2f();
+      libm_sinf();
       temp_v4 = temp_v4 + temp_v3 * temp_v8;
       temp_v11 = temp_v11 + temp_v8;
       temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v9) * temp_v2;
@@ -311,7 +311,7 @@ void mapDepartAdvanceCameraSequence(void)
       temp_v12 = *(float *)(g_lmapScene + 0x20);
       temp_v11 = *(float *)(g_lmapScene + 0x24);
       temp_v3 = (*(float *)(g_lmapScene + 0x4c) - 18.0f) * temp_v2;
-      mathRemPio2f();
+      libm_sinf();
       temp_v9 = temp_v9 + temp_v3 * temp_v4;
       temp_v12 = temp_v12 + temp_v10;
       temp_v3 = (*(float *)(g_lmapScene + 0x4c) - temp_v13) * temp_v2;
@@ -323,7 +323,7 @@ void mapDepartAdvanceCameraSequence(void)
       temp_v3 = (*(float *)(g_lmapScene + 0x4c) - 165.0f) * temp_v2;
       temp_v18 = temp_v9;
       temp_v19 = temp_v12;
-      mathRemPio2f();
+      libm_sinf();
       temp_v3 = (float)temp_v5 + temp_v3 * temp_v7;
       temp_v8 = (float)((unsigned long long)temp_v5 >> 0x20) + temp_v8;
       temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v10) * temp_v2;

@@ -12,7 +12,6 @@ typedef char FollowCameraTargetsOffsetCheck[offsetof(FollowCameraTargets, eye) =
 extern "C" {
 extern FollowCameraTargets DAT_005f19fc;
 s32 lmapResolveContextValue(void);
-f32 libm_sinf(f32);
 
 void lmapSetFollowCameraTargetPose(void)
 {

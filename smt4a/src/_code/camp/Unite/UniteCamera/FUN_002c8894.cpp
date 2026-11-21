@@ -19,7 +19,7 @@ struct UniteCamera {
 
 extern "C" {
 extern UniteCamera *g_uniteCamera;
-f32 libm_sinf(f32 angle);
+
 void cameraMatrixCacheSetLookAt(UniteCamera *camera, UniteCameraTarget *target, const Vec3 *eye, const Vec3 *lookAt);
 void FUN_00280070(UniteCamera *camera, s32 mode, Vec3 up);
 

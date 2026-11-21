@@ -20,7 +20,7 @@ static __inline void spawnOffsetEffect(const MapObjectSlot *object, f32 height, 
 {
     MapVector position = mapObjectPosition(object);
     position.y -= height;
-    position.x += mathRemPio2f(object->unk1c * 0.017453292f) * distance;
+    position.x += libm_sinf(object->unk1c * 0.017453292f) * distance;
     position.z += libm_cosf(object->unk1c * 0.017453292f) * distance;
     FUN_002671f4(0, position, object->unk1c, a, b, c);
 }

@@ -24,9 +24,7 @@
 #define LMAP_BUTTON_ACCEPT 5
 #define LMAP_SOUND_ENTER 0xDD
 
-
 extern "C" {
-
 
 void FUN_00233e10(s32 active, u32 record);
 void mapSetSceneState(u32 scene);
@@ -35,7 +33,7 @@ void FUN_00324e38(s32 mode);
 void FUN_00327ee8(void);
 void FUN_002e364c(f32 *position);
 void mapEaseSceneHeading(void);
-f32 libm_sinf(f32 angle);
+
 f32 distSpatial(void);
 f32 mathPositionHeadingDegrees(void);
 void sysPlaySe(u32 sound);

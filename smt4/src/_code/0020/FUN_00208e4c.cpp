@@ -17,8 +17,8 @@ int FUN_002533f4(...);
 int effectSpawnTypeTen(void);
 int vec4Forward(...);
 int FUN_0027eee0(void);
-int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
-int mathRemPio2f(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "libm_sinf" has "C" linkage)
+int libm_sinf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int mathAbsHeadingErrorToPoint(void);
 int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
@@ -104,7 +104,7 @@ extern int spriteTemplateGetPreferredDevilId(void);
 /* Supplied declaration required: FUN_0027eee0. */
 /* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: libm_cosf. */
-/* Supplied declaration required: mathRemPio2f. */
+/* Supplied declaration required: libm_sinf. */
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: lmapRequestTimedEffect. */
 /* Supplied declaration required: mathAbsHeadingErrorToPoint. */
@@ -1038,7 +1038,7 @@ LAB_0020a4b4:
           temp_v20 = 0.017453292f;
           *(float *)(temp_v3 + 0x60) = temp_v22;
           temp_v22 = temp_v22 * 0.017453292f;
-          mathRemPio2f();
+          libm_sinf();
           temp_v30 = temp_v30 + temp_v22 * *(float *)(temp_v3 + 0xe8);
           temp_v20 = *(float *)(temp_v3 + 0x60) * temp_v20;
           libm_cosf();
@@ -1194,7 +1194,7 @@ LAB_0020a9e0:
                   temp_v20 = 0.017453292f;
                   *(float *)(temp_v3 + 0x60) = temp_v22;
                   temp_v22 = temp_v22 * 0.017453292f;
-                  mathRemPio2f();
+                  libm_sinf();
                   temp_v30 = temp_v30 + temp_v22 * *(float *)(temp_v3 + 0xe8);
                   temp_v20 = *(float *)(temp_v3 + 0x60) * temp_v20;
                   libm_cosf();
@@ -1678,7 +1678,7 @@ LAB_0020b4ec:
             temp_v34 = temp_v31;
             temp_v35 = temp_v32;
             temp_v11 = temp_v22;
-            mathRemPio2f();
+            libm_sinf();
             temp_v27 = 100.0f;
             temp_v33 = temp_v33 + temp_v22 * 100.0f;
             libm_cosf();
@@ -1789,7 +1789,7 @@ LAB_0020b4ec:
         }
         temp_v20 = 0.017453292f;
         temp_v22 = *(float *)(temp_v3 + 0x128) * 0.017453292f;
-        mathRemPio2f();
+        libm_sinf();
         temp_v30 = temp_v30 + temp_v22 * *(float *)(temp_v3 + 0x108);
         temp_v20 = *(float *)(temp_v3 + 0x128) * temp_v20;
         libm_cosf();
@@ -1989,7 +1989,7 @@ LAB_0020bd68:
               }
               temp_v20 = 0.017453292f;
               temp_v22 = *(float *)(temp_v3 + 0x128) * 0.017453292f;
-              mathRemPio2f();
+              libm_sinf();
               temp_v30 = temp_v30 + temp_v22 * *(float *)(temp_v3 + 0x108);
               temp_v20 = *(float *)(temp_v3 + 0x128) * temp_v20;
               libm_cosf();
@@ -2092,7 +2092,7 @@ LAB_0020c014:
             temp_v40 = temp_v31;
             temp_v41 = temp_v32;
             temp_v11 = *(float *)(temp_v3 + 0x104) * 0.017453292f;
-            mathRemPio2f();
+            libm_sinf();
             temp_v26 = 100.0f;
             temp_v39 = temp_v39 + temp_v11 * 100.0f;
             temp_v11 = *(float *)(temp_v3 + 0x104) * temp_v27;
@@ -2105,7 +2105,7 @@ LAB_0020c014:
             temp_v6 = mapCollisionRaySegmentTest(&temp_v33,&temp_v39,0);
             if (temp_v6 == -1) {
               temp_v18 = *(float *)(temp_v3 + 0x60) * temp_v27;
-              mathRemPio2f();
+              libm_sinf();
               temp_v30 = temp_v30 + temp_v18 * *(float *)(temp_v3 + 0xe8);
               temp_v27 = *(float *)(temp_v3 + 0x60) * temp_v27;
               libm_cosf();
@@ -2499,7 +2499,7 @@ LAB_0020a934:
                                               (unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v22 = *(float *)(temp_v3 + 0x168);
           temp_v18 = (180.0f / *(float *)(temp_v3 + 0x158)) * temp_v18 * 0.017453292f;
-          mathRemPio2f();
+          libm_sinf();
           temp_v31 = temp_v31 + temp_v18 * temp_v22;
           *(float *)(temp_v3 + 0x54) = temp_v30;
           *(float *)(temp_v3 + 0x58) = temp_v31;

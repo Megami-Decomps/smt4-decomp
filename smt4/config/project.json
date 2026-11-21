@@ -46867,12 +46867,12 @@
     },
     {
       "address": "0x28250c",
-      "function": "mathRemPio2f",
+      "function": "libm_sinf",
       "module": "_code",
-      "object": "build/obj/_code/0028/mathRemPio2f.o",
+      "object": "build/obj/_code/0028/libm_sinf.o",
       "size": 392,
-      "source": "src/_code/0028/mathRemPio2f.cpp",
-      "target": "orig/target/_code/0028/mathRemPio2f.o",
+      "source": "src/_code/0028/libm_sinf.cpp",
+      "target": "orig/target/_code/0028/libm_sinf.o",
       "thumb": false
     },
     {

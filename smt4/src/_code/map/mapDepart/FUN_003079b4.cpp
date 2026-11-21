@@ -9,8 +9,8 @@ int FUN_0021b0f0(void);
 int FUN_0021b2ec(void);
 int FUN_00282228(int *);
 int calcHeadingRoundedToCardinalDirection(void);
-int libm_cosf(void); // declcheck: local (the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
-int mathRemPio2f(void);
+int libm_cosf(void); // declcheck: local (the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "libm_sinf" has "C" linkage)
+int libm_sinf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int mathGetShortestAngleDelta(void);
 int FUN_002d1e4c(void);
 
@@ -66,7 +66,7 @@ extern int vectorPairTransitionStep(void);
 /* Supplied declaration required: FUN_00282228. */
 /* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
 /* Supplied declaration required: libm_cosf. */
-/* Supplied declaration required: mathRemPio2f. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: mathGetShortestAngleDelta. */
 /* Supplied declaration required: FUN_002c5be8. */
 /* Supplied declaration required: FUN_002d1e4c. */
@@ -203,7 +203,7 @@ void FUN_003079b4(void)
     piVar7[0x15] = temp_v11;
     piVar7[0x14] = (int)(temp_v24 + 150.0f);
     temp_v24 = *(float *)(temp_v6 + 0x50) * 0.017453292f;
-    mathRemPio2f();
+    libm_sinf();
     temp_v26 = 600.0f;
     g_mapCamera[0x13] = (int)((float)g_mapCamera[0x13] + temp_v24 * 600.0f);
     temp_v25 = *(float *)(g_lmapScene + 0x50) * temp_v25;
@@ -221,7 +221,7 @@ void FUN_003079b4(void)
     }
     temp_v25 = (float)g_mapCamera[0xa4] * 0.017453292f;
     if (!(temp_v11 != 0x5a && temp_v6 != 0xe)) {
-      mathRemPio2f();
+      libm_sinf();
       piVar7 = g_mapCamera;
       g_mapCamera[0xc] = (int)temp_v25;
       temp_v24 = (float)piVar7[0xa4] * temp_v24;
@@ -231,7 +231,7 @@ void FUN_003079b4(void)
       piVar7[10] = 0;
     }
     else {
-      mathRemPio2f();
+      libm_sinf();
       piVar7 = g_mapCamera;
       g_mapCamera[10] = (int)temp_v25;
       temp_v24 = (float)piVar7[0xa4] * temp_v24;
@@ -259,7 +259,7 @@ void FUN_003079b4(void)
     }
     temp_v25 = (float)g_mapCamera[0xa4] * 0.017453292f;
     if (!(temp_v11 != 0x5a && temp_v6 != 0xe)) {
-      mathRemPio2f();
+      libm_sinf();
       piVar7 = g_mapCamera;
       g_mapCamera[0xc] = (int)temp_v25;
       temp_v24 = (float)piVar7[0xa4] * temp_v24;
@@ -269,7 +269,7 @@ void FUN_003079b4(void)
       piVar7[10] = 0;
     }
     else {
-      mathRemPio2f();
+      libm_sinf();
       piVar7 = g_mapCamera;
       g_mapCamera[10] = (int)temp_v25;
       temp_v24 = (float)piVar7[0xa4] * temp_v24;
@@ -300,7 +300,7 @@ void FUN_003079b4(void)
     }
     temp_v25 = (float)g_mapCamera[0xa4] * 0.017453292f;
     if (!(temp_v11 != 0x5a && temp_v6 != 0xe)) {
-      mathRemPio2f();
+      libm_sinf();
       piVar7 = g_mapCamera;
       g_mapCamera[0xc] = (int)temp_v25;
       temp_v24 = (float)piVar7[0xa4] * temp_v24;
@@ -310,7 +310,7 @@ void FUN_003079b4(void)
       piVar7[10] = 0;
     }
     else {
-      mathRemPio2f();
+      libm_sinf();
       piVar7 = g_mapCamera;
       g_mapCamera[10] = (int)temp_v25;
       temp_v24 = (float)piVar7[0xa4] * temp_v24;
@@ -346,7 +346,7 @@ void FUN_003079b4(void)
       temp_v30 = *(float *)(g_lmapScene + 0x2c);
       temp_v24 = *(float *)(g_lmapScene + 0x50) * 0.017453292f;
       temp_v28 = *(float *)(g_lmapScene + 0x30);
-      mathRemPio2f();
+      libm_sinf();
       temp_v29 = 90.0f;
       temp_v26 = temp_v26 + temp_v24 * 90.0f;
       temp_v30 = temp_v30 + 75.0f;
@@ -360,7 +360,7 @@ void FUN_003079b4(void)
       temp_v24 = (*(float *)(g_lmapScene + 0x50) - 110.0f) * temp_v25;
       temp_v34 = temp_v26;
       temp_v35 = temp_v30;
-      mathRemPio2f();
+      libm_sinf();
       temp_v26 = 120.0f;
       temp_v28 = temp_v28 + temp_v24 * 120.0f;
       temp_v14 = temp_v14 + 210.0f;
@@ -393,7 +393,7 @@ void FUN_003079b4(void)
         temp_v26 = *(float *)(g_lmapScene + 0x30);
         temp_v24 = *(float *)(g_lmapScene + 0x50) * 0.017453292f;
         temp_v27 = *(unsigned long long *)(g_lmapScene + 0x28);
-        mathRemPio2f();
+        libm_sinf();
         temp_v30 = 90.0f;
         temp_v28 = (float)temp_v27 + temp_v24 * 90.0f;
         temp_v29 = (float)((unsigned long long)temp_v27 >> 0x20) + 65.0f;
@@ -406,7 +406,7 @@ void FUN_003079b4(void)
         temp_v24 = (*(float *)(g_lmapScene + 0x50) - 110.0f) * temp_v25;
         temp_v34 = temp_v28;
         temp_v35 = temp_v29;
-        mathRemPio2f();
+        libm_sinf();
         temp_v29 = 120.0f;
         temp_v24 = (float)temp_v27 + temp_v24 * 120.0f;
         temp_v28 = (float)((unsigned long long)temp_v27 >> 0x20) + 250.0f;
@@ -447,7 +447,7 @@ void FUN_003079b4(void)
       temp_v24 = *(float *)(g_lmapScene + 0x50) * 0.017453292f;
       temp_v29 = *(float *)(g_lmapScene + 0x28);
       temp_v14 = *(float *)(g_lmapScene + 0x2c);
-      mathRemPio2f();
+      libm_sinf();
       temp_v28 = 120.0f;
       temp_v29 = temp_v29 + temp_v24 * 120.0f;
       temp_v14 = temp_v14 + 70.0f;
@@ -460,7 +460,7 @@ void FUN_003079b4(void)
       temp_v24 = (*(float *)(g_lmapScene + 0x50) - temp_v28) * temp_v25;
       temp_v34 = temp_v29;
       temp_v35 = temp_v14;
-      mathRemPio2f();
+      libm_sinf();
       temp_v29 = 140.0f;
       temp_v30 = temp_v30 + temp_v24 * 140.0f;
       temp_v15 = temp_v15 + 200.0f;
@@ -494,7 +494,7 @@ void FUN_003079b4(void)
         temp_v14 = *(float *)(g_lmapScene + 0x2c);
         temp_v24 = *(float *)(g_lmapScene + 0x50) * 0.017453292f;
         temp_v28 = *(float *)(g_lmapScene + 0x30);
-        mathRemPio2f();
+        libm_sinf();
         temp_v29 = 120.0f;
         temp_v26 = temp_v26 + temp_v24 * 120.0f;
         temp_v14 = temp_v14 + 70.0f;
@@ -507,7 +507,7 @@ void FUN_003079b4(void)
         temp_v24 = (*(float *)(g_lmapScene + 0x50) - temp_v29) * temp_v25;
         temp_v34 = temp_v26;
         temp_v35 = temp_v14;
-        mathRemPio2f();
+        libm_sinf();
         temp_v26 = 140.0f;
         temp_v37 = temp_v28 + temp_v24 * 140.0f;
         temp_v15 = temp_v15 + 200.0f;
@@ -554,7 +554,7 @@ void FUN_003079b4(void)
       temp_v28 = *(float *)(g_lmapScene + 0x2c);
       temp_v24 = *(float *)(g_lmapScene + 0x50) * 0.017453292f;
       temp_v26 = *(float *)(g_lmapScene + 0x30);
-      mathRemPio2f();
+      libm_sinf();
       temp_v30 = 40.0f;
       temp_v35 = temp_v28 + 20.0f;
       temp_v34 = temp_v29 + temp_v24 * 40.0f;
@@ -568,7 +568,7 @@ void FUN_003079b4(void)
       temp_v26 = *(float *)(g_lmapScene + 0x28);
       temp_v27 = *(unsigned long long *)(g_lmapScene + 0x2c);
       temp_v24 = (*(float *)(g_lmapScene + 0x50) - 160.0f) * temp_v25;
-      mathRemPio2f();
+      libm_sinf();
       temp_v28 = 180.0f;
       temp_v37 = temp_v26 + temp_v24 * 180.0f;
       temp_v26 = (float)((unsigned long long)temp_v27 >> 0x20);
@@ -604,7 +604,7 @@ void FUN_003079b4(void)
         temp_v24 = *(float *)(g_lmapScene + 0x50) * 0.017453292f;
         temp_v26 = *(float *)(g_lmapScene + 0x28);
         temp_v27 = *(unsigned long long *)(g_lmapScene + 0x2c);
-        mathRemPio2f();
+        libm_sinf();
         temp_v28 = 40.0f;
         temp_v36 = (float)((unsigned long long)temp_v27 >> 0x20);
         temp_v35 = (float)temp_v27 + 20.0f;
@@ -619,7 +619,7 @@ void FUN_003079b4(void)
         temp_v26 = *(float *)(g_lmapScene + 0x28);
         temp_v27 = *(unsigned long long *)(g_lmapScene + 0x2c);
         temp_v24 = (*(float *)(g_lmapScene + 0x50) - 170.0f) * temp_v25;
-        mathRemPio2f();
+        libm_sinf();
         temp_v29 = 180.0f;
         temp_v26 = temp_v26 + temp_v24 * 180.0f;
         temp_v28 = (float)((unsigned long long)temp_v27 >> 0x20);

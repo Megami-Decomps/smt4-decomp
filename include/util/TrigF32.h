@@ -3,6 +3,9 @@
 
 extern "C" {
 
+/* Single-precision sine (armlib sinf); the angle is in radians. */
+f32 libm_sinf(f32 radians);
+
 /* Single-precision arc cosine (armlib acosf, named libm_acosf in build/w66_names.txt); the result is in radians. */
 f32 libm_acosf(f32 value);
 

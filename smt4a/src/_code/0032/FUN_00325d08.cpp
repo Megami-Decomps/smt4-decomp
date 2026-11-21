@@ -28,7 +28,7 @@ int gameCounterAddSaturating(...);
 int SBORROW4(...);
 
 int soundVolumeSettingGet(void);
-int libm_sinf(void);
+int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int mapEaseSceneHeading(void);
 int FUN_003135bc(...);
 int mapSetSceneState(...);

@@ -10,7 +10,7 @@ int randomGetNormalizedFloat(void);
 
 int CONCAT44(double, double);
 int mathSinCos(...);
-int libm_sinf(void);
+int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int distSpatial(void);
 int mathAngleDeltaDegrees(void);
 int gameFlagIsSetByBlock(...);

@@ -55,7 +55,7 @@ extern int inputConfirmPressed(void);
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: libm_cosf. */
-/* Supplied declaration required: mathRemPio2f. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int padIsButtonPressed(unsigned int);
@@ -111,7 +111,7 @@ void FUN_002e9b60(void)
                 soundActorStartOnFreeChannel(0x1000212, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
                 mapDepartSpawnPlayerEffect(0xffffffff);
                 SoundActorQueuePosition position;
-                position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
+                position.x = *(float *)(g_lmapScene + 0x1c) + libm_sinf(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
                 position.z = *(float *)(g_lmapScene + 0x24) + libm_cosf(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
                 position.y = *(float *)(g_lmapScene + 0x20) + 150.0f;
                 soundActorStartOnFreeChannel(0x1000240, position);
@@ -160,7 +160,7 @@ void FUN_002e9b60(void)
               *(float *)(g_lmapScene + 0x50) = nearestYaw;
               *(Vec3f *)(temp_v0 + 0x28) = nearestPoint;
               *(float *)(temp_v0 + 0x2c) = nearestPoint.y - 142.0f;
-              *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + mathRemPio2f((nearestYaw + 180.0f) * 0.017453292f) * 35.0f;
+              *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + libm_sinf((nearestYaw + 180.0f) * 0.017453292f) * 35.0f;
               temp_v0 = g_lmapScene;
               *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + libm_cosf((*(float *)(temp_v0 + 0x50) + 180.0f) * 0.017453292f) * 35.0f;
             }
@@ -211,7 +211,7 @@ void FUN_002e9b60(void)
         buttonHelpSetPreset(0xdb);
         mapIfActivateRecord(1,g_gameState.overviewRecord);
         MapMarkerPosition marker;
-        marker.x = g_gameState.overviewPosition.x + mathRemPio2f(g_gameState.overviewHeading * 0.017453292f) * 150.0f;
+        marker.x = g_gameState.overviewPosition.x + libm_sinf(g_gameState.overviewHeading * 0.017453292f) * 150.0f;
         marker.y = g_gameState.overviewPosition.y;
         marker.z = g_gameState.overviewPosition.z + libm_cosf(g_gameState.overviewHeading * 0.017453292f) * 150.0f;
         marker.w = g_gameState.heading;

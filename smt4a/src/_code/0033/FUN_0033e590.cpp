@@ -6,7 +6,6 @@
 
 extern "C" {
 
-
 int slotSetRequest(...);
 int mapIfReleaseResource(void);
 int mapSetSceneState(...);
@@ -15,7 +14,7 @@ int soundVolumeSettingSet(...);
 int messageVoiceBankGet(void);
 int sysPlaySe(int);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
-int libm_sinf(void);
+int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int mapIfShowActionMarker(void);
 int FUN_00233e10(...);
 int FUN_002342b8(void);
@@ -36,14 +35,6 @@ typedef struct {
 
 extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
-
-
-
-
-
-
-
-
 
 /* Supplied declaration required: soundVolumeSettingSet. */
 extern unsigned int soundVolumeSettingGet(void);
@@ -71,7 +62,6 @@ extern int pairedAvailabilityBothReady(void);
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int inputIsQuestMenuPressed(void);
 extern int inputConfirmPressed(void);
-
 
 void FUN_0033e590(void)
 

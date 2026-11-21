@@ -6,7 +6,7 @@
 #include "util/TrigF32.h"
 
 extern "C" {
-f32 libm_sinf(f32 radians);
+
 void FUN_002d1e44(const VectorPairTransitionA *parameters);
 u32 FUN_0033a374(void);
 }

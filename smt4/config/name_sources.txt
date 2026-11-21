@@ -6015,3 +6015,4 @@
 003a0f88 shopDrawQuantityPanel inferred draws the shop's quantity panel at the selected row, the stepper's active arrows and the quantity
 0031eba0 portraitDrawClipped inferred draws a unit's portrait clipped to a window, through the add-on system when it owns the unit (sibling textureLoadOptionalDemonModel)
 002d28a4 lmapCameraSetMapPresets inferred resets the map camera presets and widens presets 2-4 on the wide-view maps
+0028250c libm_sinf evidence twin of smt4a libm_sinf (sinf, size 0x188); the shared TrigF32.h declaration was replaced in wave 66

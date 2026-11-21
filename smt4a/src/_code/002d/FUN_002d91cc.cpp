@@ -8,7 +8,7 @@ extern "C" {
 
 int FUN_001628c0(unsigned char *, unsigned int, unsigned int, int);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
-int libm_sinf(void);
+int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int mapResolveCollisionSphere(int, int, int);
 int FUN_002e364c(int);
 int lmapCameraSetMode(...);
@@ -43,7 +43,6 @@ extern unsigned char DAT_005f1a4e; /* 0x5f1a4e */
 extern int linkHolderCheckFirst(unsigned int);
 /* Supplied declaration required: linkHolderSetFlag. */
 /* Supplied declaration required: linkHolderClearFlag. */
-
 
 void FUN_002d91cc(void)
 

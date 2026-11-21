@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int mathRemPio2f(void);
+int libm_sinf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int FUN_002ba1e0(...);
 int mapIfDrawBackground(void);
 int VectorFloatToUnsigned(...);
@@ -81,7 +81,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: mathRemPio2f. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_002ba1e0. */
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -214,7 +214,7 @@ void FUN_0020dd98(void)
     else {
       temp_v16 = (float)VectorSignedToFloat(temp_v1 - 0xf,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v16 = temp_v16 * 1.57f * 0.06666667f;
-      mathRemPio2f();
+      libm_sinf();
       temp_v16 = (temp_v13 - temp_v16) * 64.0f;
       temp_v46 = (unsigned int)temp_v16;
       if ((int)temp_v46 < 0) {
@@ -228,7 +228,7 @@ void FUN_0020dd98(void)
   else {
     temp_v10 = (float)VectorSignedToFloat(temp_v1 - 0xf,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v10 = temp_v10 * 1.57f * 0.06666667f;
-    mathRemPio2f();
+    libm_sinf();
     temp_v16 = (temp_v13 - temp_v10) * temp_v16;
     temp_v46 = (unsigned int)temp_v16;
     if ((int)temp_v46 < 0) {

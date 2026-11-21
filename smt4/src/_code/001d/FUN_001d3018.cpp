@@ -8,8 +8,8 @@ extern "C" {
 
 int CONCAT44(double, double);
 int FUN_00208e4c(void);
-int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
-int mathRemPio2f(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "libm_sinf" has "C" linkage)
+int libm_sinf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
 int modelPartSetRotationDegrees(unsigned int, int); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
@@ -56,7 +56,7 @@ static float romwright_sqrt_4(float value)
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00208e4c. */
 /* Supplied declaration required: libm_cosf. */
-/* Supplied declaration required: mathRemPio2f. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: mathGetShortestAngleDelta. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: modelPartSetRotationDegrees. */
@@ -156,7 +156,7 @@ void FUN_001d3018(void)
     temp_v10 = *(float *)(temp_v3 + 0x50);
     *(float *)(temp_v2 + 0x24) = temp_v10;
     temp_v10 = temp_v10 * 0.017453292f;
-    mathRemPio2f();
+    libm_sinf();
     *(float *)(temp_v2 + 0x28) = temp_v10 * *(float *)(temp_v2 + 0x20);
     *(unsigned int *)(temp_v2 + 0x2c) = temp_v20;
     temp_v18 = *(float *)(temp_v2 + 0x24) * temp_v18;

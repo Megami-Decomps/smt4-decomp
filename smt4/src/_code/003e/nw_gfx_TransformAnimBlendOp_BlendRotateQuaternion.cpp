@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int mathRemPio2f(void);
+int libm_sinf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int libm_acosf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int nn_math_ARMv6_MTX34CopyAsm(float *);
 int nn_math_ARMv6_MTX34ToQUATC_FAST(float *);
@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_3_stack;
 
-/* Supplied declaration required: mathRemPio2f. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: libm_acosf. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34ToQUATC_FAST. */
@@ -79,12 +79,12 @@ void nw_gfx_TransformAnimBlendOp_BlendRotateQuaternion
       else {
         libm_acosf();
         temp_v7 = temp_v0;
-        mathRemPio2f();
+        libm_sinf();
         temp_v6 = (temp_v6 - temp_v1) * temp_v7;
-        mathRemPio2f();
+        libm_sinf();
         temp_v6 = temp_v6 / temp_v0;
         temp_v1 = temp_v1 * temp_v7;
-        mathRemPio2f();
+        libm_sinf();
         temp_v5 = (temp_v1 / temp_v0) * temp_v5;
       }
       temp_v0 = (float)((unsigned long long)temp_v3 >> 0x20) * temp_v6 + temp_v5 * temp_v10;

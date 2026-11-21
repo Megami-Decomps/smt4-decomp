@@ -5,7 +5,7 @@
 extern "C" {
 
 int libm_acosf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
-int libm_sinf(void);
+int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int nn_math_ARMv6_MTX34CopyAsm(float *);
 int nn_math_ARMv6_MTX34ToQUATC_FAST(float *);
 
@@ -21,7 +21,6 @@ typedef struct {
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34ToQUATC_FAST. */
-
 
 void nw_gfx_TransformAnimBlendOp_BlendRotateQuaternion
                (unsigned int param_1,float *param_2,float *param_3)

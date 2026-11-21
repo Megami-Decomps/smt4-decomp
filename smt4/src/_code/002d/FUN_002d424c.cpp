@@ -56,7 +56,7 @@ extern int inputConfirmPressed(void);
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: libm_cosf. */
-/* Supplied declaration required: mathRemPio2f. */
+/* Supplied declaration required: libm_sinf. */
 extern int screenFadesAllReady(void);
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int randBetween(unsigned int, unsigned int);
@@ -223,7 +223,7 @@ void FUN_002d424c(void)
       *(unsigned int *)(temp_v0 + 0x58) = 0x40400000;
       *(unsigned char *)(temp_v0 + 0x6c) = 0;
       *(MapVector *)(temp_v0 + 0x28) = g_gameState.overviewPosition;
-      *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + mathRemPio2f(g_gameState.heading * 0.017453292f) * 25.0f;
+      *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + libm_sinf(g_gameState.heading * 0.017453292f) * 25.0f;
       *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + libm_cosf(g_gameState.heading * 0.017453292f) * 25.0f;
       temp_v0 = g_lmapScene;
       *(f32 *)(temp_v0 + 0x50) = g_gameState.overviewHeading;
@@ -294,7 +294,7 @@ void FUN_002d424c(void)
       }
       mapDepartSpawnPlayerEffect(0xffffffff);
       SoundActorQueuePosition position;
-      position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
+      position.x = *(float *)(g_lmapScene + 0x1c) + libm_sinf(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
       position.z = *(float *)(g_lmapScene + 0x24) + libm_cosf(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
       position.y = *(float *)(g_lmapScene + 0x20) + 150.0f;
       temp_v0 = randBetween(0,1);

@@ -92629,13 +92629,13 @@
       "target_path": "orig/target/_code/0028/libm_cosf.o"
     },
     {
-      "base_path": "build/obj/_code/0028/mathRemPio2f.o",
+      "base_path": "build/obj/_code/0028/libm_sinf.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "mathRemPio2f",
+            "name": "libm_sinf",
             "size": 392,
             "vram": "0x28250c"
           }
@@ -92643,10 +92643,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0028/mathRemPio2f.cpp"
+        "source_path": "src/_code/0028/libm_sinf.cpp"
       },
-      "name": "_code/0028/mathRemPio2f",
-      "target_path": "orig/target/_code/0028/mathRemPio2f.o"
+      "name": "_code/0028/libm_sinf",
+      "target_path": "orig/target/_code/0028/libm_sinf.o"
     },
     {
       "base_path": "build/obj/_code/AsdSDK/Source/Gfx/Effect/effMenu/effMenuAppendColorRect.o",

@@ -11,8 +11,8 @@ int asdMdlManagerMarkDestroy(void);
 int engineRecordsRankNearest(void);
 int FUN_0027ee24(void);
 int FUN_0027eee0(void);
-int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
-int mathRemPio2f(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "libm_sinf" has "C" linkage)
+int libm_sinf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int mathAbsHeadingErrorToPoint(void);
 int saveFlagSetOrAddCounter(int, int);
 int gameCounterAddSaturating(int, int);
@@ -66,7 +66,7 @@ extern unsigned int lmapSceneGetUnk0(void);
 /* Supplied declaration required: FUN_0027eee0. */
 extern int mathCirclesOverlap(void);
 /* Supplied declaration required: libm_cosf. */
-/* Supplied declaration required: mathRemPio2f. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: mathAbsHeadingErrorToPoint. */
 /* Supplied declaration required: saveFlagSetOrAddCounter. */
 /* Supplied declaration required: gameCounterAddSaturating. */
@@ -209,7 +209,7 @@ joined_r0x002706c8:
                       temp_v14 = *(float *)(temp_v6 + 100);
                       temp_v11 = *(float *)(temp_v6 + 0x70) * (float)((unsigned long long)temp_v12 >> 0x20);
                       temp_v15 = *(float *)(temp_v6 + 0x6c);
-                      mathRemPio2f();
+                      libm_sinf();
                       temp_v14 = temp_v14 + temp_v11 * temp_v13;
                       temp_v11 = *(float *)(temp_v6 + 0x70) * (float)((unsigned long long)temp_v12 >> 0x20);
                       libm_cosf();

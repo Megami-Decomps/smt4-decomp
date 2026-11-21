@@ -7,8 +7,8 @@
 extern "C" {
 
 int __hardfp_atan2f(void);
-int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
-int mathRemPio2f(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "libm_sinf" has "C" linkage)
+int libm_sinf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int FUN_002ba1e0(...);
 int renderCtxSelectTexture(...);
 int VectorFloatToUnsigned(...);
@@ -75,7 +75,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: libm_cosf. */
-/* Supplied declaration required: mathRemPio2f. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_002ba1e0. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 extern int lmapMainIsAtLeastHalf(void);
@@ -177,14 +177,14 @@ void FUN_0020f6c8(void)
     temp_v15 = *(float *)(g_lmapScene + 0x20);
     temp_v14 = *(float *)(g_lmapScene + 0x24);
     temp_v17 = *(float *)(g_mapCamera + 0x18) * temp_v18;
-    mathRemPio2f();
+    libm_sinf();
     temp_v13 = temp_v13 + temp_v17 * temp_v16;
     temp_v18 = *(float *)(g_mapCamera + 0x18) * temp_v18;
     libm_cosf();
     temp_v14 = temp_v14 + temp_v18 * temp_v16;
     temp_v15 = temp_v15 + 400.0f;
     temp_v18 = DAT_00447a84;
-    mathRemPio2f();
+    libm_sinf();
     temp_v13 = temp_v13 + *(float *)(temp_v1 + 0xcccc);
     temp_v14 = temp_v14 + *(float *)(temp_v1 + 0xccd4);
     temp_v18 = temp_v15 + temp_v18 * 25.0f + *(float *)(temp_v1 + 0xccd0);
@@ -196,7 +196,7 @@ void FUN_0020f6c8(void)
     if (*(char *)(temp_v2 + 0x1d) != '\x02') {
       temp_v10 = 90.0f;
       temp_v17 = (*(float *)(g_mapCamera + 0x18) + 90.0f) * 0.017453292f;
-      mathRemPio2f();
+      libm_sinf();
       temp_v9 = 50.0f;
       temp_v13 = temp_v13 + temp_v17 * 50.0f;
       temp_v18 = (*(float *)(g_mapCamera + 0x18) + temp_v10) * temp_v18;
@@ -204,7 +204,7 @@ void FUN_0020f6c8(void)
       temp_v14 = temp_v14 + temp_v18 * temp_v9;
       temp_v15 = temp_v15 + temp_v16;
       temp_v18 = DAT_00447a84;
-      mathRemPio2f();
+      libm_sinf();
       temp_v13 = temp_v13 + *(float *)(temp_v1 + 0xcccc);
       temp_v16 = 13.0f;
       temp_v14 = temp_v14 + *(float *)(temp_v1 + 0xccd4);
@@ -213,7 +213,7 @@ void FUN_0020f6c8(void)
     else {
       temp_v10 = 130.0f;
       temp_v16 = (*(float *)(g_mapCamera + 0x18) + 130.0f) * 0.017453292f;
-      mathRemPio2f();
+      libm_sinf();
       temp_v9 = 30.0f;
       temp_v13 = temp_v13 + temp_v16 * 30.0f;
       temp_v18 = (*(float *)(g_mapCamera + 0x18) + temp_v10) * temp_v18;
@@ -221,7 +221,7 @@ void FUN_0020f6c8(void)
       temp_v14 = temp_v14 + temp_v18 * temp_v9;
       temp_v15 = temp_v15 + 150.0f;
       temp_v18 = DAT_00447a84;
-      mathRemPio2f();
+      libm_sinf();
       temp_v16 = 8.0f;
       temp_v13 = temp_v13 + *(float *)(temp_v1 + 0xcccc) * temp_v17;
       temp_v14 = temp_v14 + *(float *)(temp_v1 + 0xccd4) * temp_v17;

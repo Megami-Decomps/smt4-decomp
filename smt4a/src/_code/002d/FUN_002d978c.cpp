@@ -20,7 +20,7 @@ void soundVolumeSettingSet(u32 volume);
 void FUN_0033abd4(void);
 void soundActorStartOnFreeChannel(u32 event);
 void FUN_00324e38(u32 value);
-void libm_sinf(void);
+void libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 void libm_cosf(void); // declcheck: local (the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 void messageVoiceBankGet(void);
 void FUN_002e364c(f32 *target);

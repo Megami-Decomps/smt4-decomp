@@ -22,11 +22,10 @@ typedef struct CameraMoveRequest {
     /* 0x6C */ f32 unk6c;
 } CameraMoveRequest;
 
-
 s32 lmapResolveContextValue(void);
 s32 FUN_0033a374(LmapViewA *view);
 void lmapCameraSetMode(s32 arg);
-f32 libm_sinf(f32 radians);
+
 s32 FUN_00330108(MapVec3 *from, MapVec3 *to, MapVec3 *out);
 void FUN_002d1e44(CameraMoveRequest *request);
 

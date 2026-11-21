@@ -73,7 +73,7 @@ void FUN_002d508c(PlayerController* player)
         MapVector before = scene->pose.position;
         scene->pose.targetPosition = scene->pose.position;
         f32 stride = (player->speed / (f32)steps) * speedScale;
-        scene->pose.targetPosition.x += mathRemPio2f(scene->pose.targetHeading * 0.017453292f) * stride;
+        scene->pose.targetPosition.x += libm_sinf(scene->pose.targetHeading * 0.017453292f) * stride;
         scene = g_lmapScene;
         scene->pose.targetPosition.z += libm_cosf(scene->pose.targetHeading * 0.017453292f) * stride;
         scene = g_lmapScene;

@@ -128,7 +128,7 @@ static __forceinline void lmapScenePlayWarpOutSounds(void)
     }
     mapDepartSpawnPlayerEffect(-1);
     SoundActorQueuePosition position = lmapSceneSoundPosition();
-    position.x += mathRemPio2f(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 50.0f;
+    position.x += libm_sinf(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 50.0f;
     position.z += libm_cosf(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 50.0f;
     position.y += 150.0f;
     soundActorStartOnFreeChannel(randBetween(0, 1) + 0x100023c, position);
@@ -156,7 +156,7 @@ static __forceinline void lmapScenePlayWarpInSounds(void)
     }
     mapDepartSpawnPlayerEffect(-1);
     SoundActorQueuePosition position = lmapSceneSoundPosition();
-    position.x += mathRemPio2f(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 50.0f;
+    position.x += libm_sinf(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 50.0f;
     position.z += libm_cosf(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 50.0f;
     position.y += 100.0f;
     soundActorStartOnFreeChannel(randBetween(0, 1) + 0x100023e, position);
@@ -539,7 +539,7 @@ void FUN_002712dc(void)
             g_lmapScene->unk06C = 0;
             {
                 SoundActorQueuePosition position = lmapSceneSoundPosition();
-                position.x += mathRemPio2f(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 50.0f;
+                position.x += libm_sinf(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 50.0f;
                 position.z += libm_cosf(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 50.0f;
                 position.y += 150.0f;
                 soundActorStartOnFreeChannel(0x100023a, position);
@@ -611,7 +611,7 @@ void FUN_002712dc(void)
             soundActorStartOnFreeChannel(0x1000186, lmapSceneSoundPosition());
             {
                 SoundActorQueuePosition position = lmapSceneSoundPosition();
-    position.x += mathRemPio2f(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 50.0f;
+    position.x += libm_sinf(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 50.0f;
     position.z += libm_cosf(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 50.0f;
     position.y += 150.0f;
                 soundActorStartOnFreeChannel(randBetween(0, 1) + 0x1000238, position);
@@ -787,7 +787,7 @@ void FUN_002712dc(void)
             if (g_lmapScene->stateTime == 4) {
                 mapDepartSpawnPlayerEffect(0);
                 SoundActorQueuePosition position = lmapSceneSoundPosition();
-                position.x += mathRemPio2f(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 10.0f;
+                position.x += libm_sinf(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 10.0f;
                 position.z += libm_cosf(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 10.0f;
                 position.y += 150.0f;
                 soundActorStartOnFreeChannel(0x100023b, position);
@@ -815,7 +815,7 @@ void FUN_002712dc(void)
             g_lmapScene->slideStep = 4.0f;
         }
         g_lmapScene->pose.targetPosition.x +=
-            mathRemPio2f(g_lmapScene->pose.targetHeading * DEGREES_TO_RADIANS) * g_lmapScene->slideStep;
+            libm_sinf(g_lmapScene->pose.targetHeading * DEGREES_TO_RADIANS) * g_lmapScene->slideStep;
         g_lmapScene->pose.targetPosition.z +=
             libm_cosf(g_lmapScene->pose.targetHeading * DEGREES_TO_RADIANS) * g_lmapScene->slideStep;
         g_lmapScene->pose.previousPosition = previous;

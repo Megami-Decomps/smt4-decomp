@@ -120,7 +120,7 @@ int CONCAT44(...);
 int gameFlagsGetBlock(...);
 int randBetween(...);
 int libm_cosf(...); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
-int libm_sinf(...);
+int libm_sinf(...); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int FUN_002469d0(...);
 int mapResolveCollisionSphere(...);
 float mathSnapHeading16(float angle);
@@ -434,7 +434,6 @@ extern unsigned int slots4FGetActiveValue(void);
 /* Supplied declaration required: mapInterfaceUnregisterHandle. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 /* Supplied declaration required: __aeabi_memcpy4. */
-
 
 /* WARNING: Removing unreachable block (ram,0x00397c1c) */
 /* WARNING: Removing unreachable block (ram,0x002da738) */

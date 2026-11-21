@@ -12,7 +12,7 @@ int FUN_0025a1fc(...);
 int FUN_0025a8d8(...);
 int mapFlagIsSet(...);
 int randomGetNormalizedFloat(void);
-int mathRemPio2f(void);
+int libm_sinf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int mathDistanceBetweenPoints(void);
 int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
@@ -72,7 +72,7 @@ extern int FUN_0025b408(void);
 /* Supplied declaration required: mapFlagIsSet. */
 extern int mapCollisionRaySegmentTest(float *, unsigned int *, unsigned int);
 /* Supplied declaration required: randomGetNormalizedFloat. */
-/* Supplied declaration required: mathRemPio2f. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: mathGetShortestAngleDelta. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
@@ -337,7 +337,7 @@ LAB_001e6120:
           temp_v16 = temp_v16 + 0.2f;
           *(float *)(temp_v12 + 0x200) = temp_v16;
         }
-        mathRemPio2f();
+        libm_sinf();
         *(float *)(temp_v12 + 0x238) =
              *(float *)(temp_v12 + 0x238) +
              (*(float *)(temp_v12 + 0x22c) - *(float *)(temp_v12 + 0x238)) * 0.25f;
@@ -387,7 +387,7 @@ LAB_001e6120:
         *(unsigned short *)(temp_v12 + 0x1dc) = 2;
         temp_v31 = 1;
         *(float *)(temp_v12 + 0x200) = temp_v16;
-        mathRemPio2f();
+        libm_sinf();
         *(float *)(temp_v12 + 0x238) =
              *(float *)(temp_v12 + 0x238) +
              (*(float *)(temp_v12 + 0x22c) - *(float *)(temp_v12 + 0x238)) * 0.25f;
@@ -446,7 +446,7 @@ LAB_001e6120:
           temp_v16 = temp_v16 + 0.2f;
           *(float *)(temp_v12 + 0x200) = temp_v16;
         }
-        mathRemPio2f();
+        libm_sinf();
         *(float *)(temp_v12 + 0x238) =
              *(float *)(temp_v12 + 0x238) +
              (*(float *)(temp_v12 + 0x22c) - *(float *)(temp_v12 + 0x238)) * 0.25f;
@@ -499,7 +499,7 @@ LAB_001e6120:
         }
         temp_v16 = *(float *)(temp_v12 + 0x200);
         if (*(int *)(temp_v12 + 0x1e4) >= 0x22) {
-          mathRemPio2f();
+          libm_sinf();
           temp_v16 = *(float *)(temp_v12 + 0x230) + temp_v16 * 35.0f + 200.0f;
           if (*(int *)(temp_v12 + 0x1d8) != 0) {
             *(float *)(temp_v12 + 0x238) = *(float *)(temp_v12 + 0x22c);
@@ -524,7 +524,7 @@ LAB_001e6120:
           }
         }
         else {
-          mathRemPio2f();
+          libm_sinf();
           *(float *)(temp_v12 + 0x238) =
                *(float *)(temp_v12 + 0x238) +
                (*(float *)(temp_v12 + 0x22c) - *(float *)(temp_v12 + 0x238)) * 0.25f;
@@ -564,7 +564,7 @@ LAB_001e6120:
         if (*(int *)(temp_v12 + 0x1e4) >= 0x22) {
           *(unsigned short *)(temp_v12 + 0x1dc) = 0x11;
           temp_v16 = *(float *)(temp_v12 + 0x200);
-          mathRemPio2f();
+          libm_sinf();
           temp_v9 = (int)*(short *)(temp_v12 + 0x1fc);
           temp_v16 = temp_v16 * 35.0f;
           temp_v14 = *(float *)(temp_v12 + 0x230) + temp_v16;
@@ -615,7 +615,7 @@ LAB_001e6120:
         }
         else {
           temp_v16 = *(float *)(temp_v12 + 0x200);
-          mathRemPio2f();
+          libm_sinf();
           temp_v16 = *(float *)(temp_v12 + 0x230) + temp_v16 * 5.0f;
           switch(*(unsigned int *)(temp_v12 + 0x1f0)) {
           case 0:
@@ -690,7 +690,7 @@ LAB_001e6120:
         }
         temp_v16 = *(float *)(temp_v12 + 0x200);
         if (*(int *)(temp_v12 + 0x1e4) >= 0x22) {
-          mathRemPio2f();
+          libm_sinf();
           *(float *)(temp_v12 + 0x238) =
                *(float *)(temp_v12 + 0x238) +
                (*(float *)(temp_v12 + 0x22c) - *(float *)(temp_v12 + 0x238)) * 0.25f;
@@ -711,7 +711,7 @@ LAB_001e6120:
           FUN_0025a1fc(pcVar13);
         }
         else {
-          mathRemPio2f();
+          libm_sinf();
           temp_v16 = *(float *)(temp_v12 + 0x230) + temp_v16 * 5.0f;
           switch(*(unsigned int *)(temp_v12 + 0x1f0)) {
           case 0:
@@ -753,7 +753,7 @@ LAB_001e6120:
       case 9:
         *(unsigned short *)(temp_v12 + 0x1dc) = 7;
         temp_v16 = *(float *)(temp_v12 + 0x200);
-        mathRemPio2f();
+        libm_sinf();
         temp_v16 = *(float *)(temp_v12 + 0x230) + temp_v16 * 5.0f;
         if (*(short *)(temp_v12 + 0x1fc) >= 4) {
           temp_v16 = temp_v16 + 25.0f;
@@ -834,7 +834,7 @@ LAB_001e6120:
           temp_v16 = temp_v16 + 0.2f;
           *(float *)(temp_v12 + 0x200) = temp_v16;
         }
-        mathRemPio2f();
+        libm_sinf();
         *(float *)(temp_v12 + 0x238) =
              *(float *)(temp_v12 + 0x238) +
              (*(float *)(temp_v12 + 0x22c) - *(float *)(temp_v12 + 0x238)) * 0.25f;
@@ -872,7 +872,7 @@ LAB_001e6120:
       case 0xb:
         *(unsigned short *)(temp_v12 + 0x1dc) = 9;
         temp_v16 = *(float *)(temp_v12 + 0x200);
-        mathRemPio2f();
+        libm_sinf();
         temp_v16 = *(float *)(temp_v12 + 0x230) + temp_v16 * 5.0f;
         if (*(short *)(temp_v12 + 0x1fc) >= 4) {
           temp_v16 = temp_v16 + 35.0f;
@@ -948,7 +948,7 @@ LAB_001e6120:
           temp_v16 = temp_v16 + 0.2f;
           *(float *)(temp_v12 + 0x200) = temp_v16;
         }
-        mathRemPio2f();
+        libm_sinf();
         *(float *)(temp_v12 + 0x238) =
              *(float *)(temp_v12 + 0x238) +
              (*(float *)(temp_v12 + 0x22c) - *(float *)(temp_v12 + 0x238)) * 0.25f;
@@ -984,7 +984,7 @@ LAB_001e6120:
       case 0xd:
         *(unsigned short *)(temp_v12 + 0x1dc) = 0xb;
         temp_v16 = *(float *)(temp_v12 + 0x200);
-        mathRemPio2f();
+        libm_sinf();
         temp_v14 = (float)temp_v22;
         *(float *)(temp_v12 + 0x238) =
              *(float *)(temp_v12 + 0x238) +
@@ -1050,7 +1050,7 @@ joined_r0x001e7e00:
           temp_v16 = temp_v16 + 0.2f;
           *(float *)(temp_v12 + 0x200) = temp_v16;
         }
-        mathRemPio2f();
+        libm_sinf();
         *(float *)(temp_v12 + 0x238) =
              *(float *)(temp_v12 + 0x238) +
              (*(float *)(temp_v12 + 0x22c) - *(float *)(temp_v12 + 0x238)) * 0.25f;
@@ -1080,7 +1080,7 @@ joined_r0x001e7e00:
       case 0xf:
         *(unsigned short *)(temp_v12 + 0x1dc) = 0xd;
         temp_v16 = *(float *)(temp_v12 + 0x200);
-        mathRemPio2f();
+        libm_sinf();
         temp_v16 = *(float *)(temp_v12 + 0x230) + temp_v16 * 5.0f;
         switch(*(unsigned int *)(temp_v12 + 0x1f0)) {
         case 0:
@@ -1115,7 +1115,7 @@ joined_r0x001e7e00:
           temp_v16 = temp_v16 + 0.2f;
           *(float *)(temp_v12 + 0x200) = temp_v16;
         }
-        mathRemPio2f();
+        libm_sinf();
         temp_v16 = *(float *)(temp_v12 + 0x230) + temp_v16 * 5.0f;
         switch(*(unsigned int *)(temp_v12 + 0x1f0)) {
         case 0:
@@ -1148,7 +1148,7 @@ joined_r0x001e7e00:
         }
         temp_v16 = *(float *)(temp_v12 + 0x200);
         if (*(int *)(temp_v12 + 0x1e4) >= 0x22) {
-          mathRemPio2f();
+          libm_sinf();
           *(float *)(temp_v12 + 0x238) =
                *(float *)(temp_v12 + 0x238) +
                (*(float *)(temp_v12 + 0x22c) - *(float *)(temp_v12 + 0x238)) * 0.25f;
@@ -1169,7 +1169,7 @@ joined_r0x001e7e00:
           FUN_0025a8d8(pcVar13);
         }
         else {
-          mathRemPio2f();
+          libm_sinf();
           *(float *)(temp_v12 + 0x238) =
                *(float *)(temp_v12 + 0x238) +
                (*(float *)(temp_v12 + 0x22c) - *(float *)(temp_v12 + 0x238)) * 0.25f;

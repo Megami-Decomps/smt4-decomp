@@ -7,7 +7,7 @@
 extern "C" {
 
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
-int libm_sinf(void);
+int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int FUN_00281b94(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -15,11 +15,9 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_00281b94. */
-
 
 void FUN_00378000(void)
 

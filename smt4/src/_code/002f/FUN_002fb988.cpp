@@ -15,8 +15,8 @@ int FUN_0026413c(void);
 int mapProjectPositionToGround(int, int);
 int padGetNormalizedAnalogStick(float *, unsigned int [12], int);
 int __hardfp_atan2f(void);
-int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
-int mathRemPio2f(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "libm_sinf" has "C" linkage)
+int libm_sinf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int mathDistanceBetweenPoints(void);
 int gameCounterAddSaturating(int, int);
 int FUN_002d4fa0(void);
@@ -57,7 +57,7 @@ extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: libm_cosf. */
-/* Supplied declaration required: mathRemPio2f. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: gameCounterAddSaturating. */
 extern int padIsButtonRepeat(unsigned int);
@@ -168,7 +168,7 @@ void FUN_002fb988(int param_1)
       temp_v14 = 0.017453292f;
       *(float *)(g_lmapScene + 0x50) = -temp_v12;
       temp_v12 = -temp_v12 * 0.017453292f;
-      mathRemPio2f();
+      libm_sinf();
       temp_v2 = g_lmapScene;
       *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + temp_v12 * temp_v8;
       temp_v14 = *(float *)(temp_v2 + 0x50) * temp_v14;

@@ -7,7 +7,6 @@ extern "C" {
 extern BattleViewState g_battleViewState;
 
 s32 gameFlagIsSet(u32 flag);
-f32 libm_sinf(f32 radians);
 
 /* Places the battle view 150 units out from `target` along `heading` (+30 degrees) and turns it to face the target. */
 void FUN_002d02cc(BattleViewVec3 target, f32 heading)

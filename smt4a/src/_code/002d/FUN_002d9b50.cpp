@@ -42,7 +42,7 @@ int messageVoiceBankGet(...);
 int FUN_001628c0(...);
 int sysPlaySe(...);
 int libm_cosf(...); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
-int libm_sinf(...);
+int libm_sinf(...); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 void FUN_00297f00(int value, int count);
 int mapTrapArm(...);
 int FUN_002c2d44(...);

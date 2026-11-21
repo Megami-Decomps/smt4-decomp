@@ -29,7 +29,7 @@ u32 FUN_00253968(MapEnemyEntry *enemy)
         bool approaching = isSourceApproaching(enemy->position);
         if (!approaching && (enemy->kind == 6 || enemy->kind == 16) && enemy->behavior == 4) {
             MapVector shifted = enemy->position;
-            shifted.x += mathRemPio2f(enemy->heading * 0.0174532924f) * 100.0f;
+            shifted.x += libm_sinf(enemy->heading * 0.0174532924f) * 100.0f;
             shifted.z += libm_cosf(enemy->heading * 0.0174532924f) * 100.0f;
             approaching = isSourceApproaching(shifted);
         }

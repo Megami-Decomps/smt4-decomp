@@ -19,12 +19,11 @@ struct GameStateView {
 };
 extern GameStateView g_gameState;
 
-
 int mathVec3Dot(void);
 
 int sysPlaySe(int);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
-int libm_sinf(void);
+int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int mapIfSetMode1(void);
 int FUN_00233e10(int, unsigned int);
 int FUN_002342b8(void);
@@ -47,12 +46,6 @@ typedef struct {
 
 extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
-
-
-
-
-
-
 
 extern int DAT_006160dc; /* 0x6160dc */
 
@@ -82,7 +75,6 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapIfReleaseSlot1. */
 extern int inputIsQuestMenuPressed(void);
 extern int inputConfirmPressed(void);
-
 
 void FUN_00327964(void)
 

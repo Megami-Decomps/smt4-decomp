@@ -7,7 +7,7 @@
 extern "C" {
 
 int FUN_0019e3d0(...);
-int libm_sinf(void);
+int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int mapIfDrawBackground(void);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);

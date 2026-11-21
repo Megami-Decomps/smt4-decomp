@@ -65,7 +65,7 @@ extern int inputConfirmPressed(void);
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: libm_cosf. */
-/* Supplied declaration required: mathRemPio2f. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: lmapRequestTimedEffect. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int randBetween(unsigned int, unsigned int);
@@ -280,7 +280,7 @@ void FUN_002e8fdc(void)
       mapIfActivateRecord(1,DAT_0049f99c);
       {
       MapMarkerPosition marker;
-      marker.x = *(float *)&DAT_0049f9a0 + mathRemPio2f(*(float *)&DAT_0049f9ac * 0.017453292f) * 150.0f;
+      marker.x = *(float *)&DAT_0049f9a0 + libm_sinf(*(float *)&DAT_0049f9ac * 0.017453292f) * 150.0f;
       marker.y = *(float *)&DAT_0049f9a4;
       marker.z = *(float *)&DAT_0049f9a8 + libm_cosf(*(float *)&DAT_0049f9ac * 0.017453292f) * 150.0f;
       marker.w = DAT_0049f9bc;
@@ -312,7 +312,7 @@ void FUN_002e8fdc(void)
         temp_v1 = dataTableGetRecord23();
         temp_v0 = g_lmapScene;
         if (DAT_0049f968 != 0) {
-          *(float *)(g_lmapScene + 0xa0) = *(float *)(g_lmapScene + 0x28) + mathRemPio2f(*(float *)(g_lmapScene + 0x50) * 0.017453292f) * 250.0f;
+          *(float *)(g_lmapScene + 0xa0) = *(float *)(g_lmapScene + 0x28) + libm_sinf(*(float *)(g_lmapScene + 0x50) * 0.017453292f) * 250.0f;
           temp_v0 = g_lmapScene;
           *(float *)(temp_v0 + 0xa4) = *(float *)(temp_v0 + 0x2c) - 500.0f;
           *(float *)(g_lmapScene + 0xa8) = *(float *)(g_lmapScene + 0x30) + libm_cosf(*(float *)(temp_v0 + 0x50) * 0.017453292f) * 250.0f;
@@ -399,7 +399,7 @@ LAB_002e94f0:
       mapDepartSpawnPlayerEffect(0xffffffff);
       {
       SoundActorQueuePosition position;
-      position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
+      position.x = *(float *)(g_lmapScene + 0x1c) + libm_sinf(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
       position.z = *(float *)(g_lmapScene + 0x24) + libm_cosf(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
       position.y = *(float *)(g_lmapScene + 0x20) + 150.0f;
       temp_v0 = randBetween(0,1);
@@ -503,7 +503,7 @@ LAB_002e9794:
         mapDepartSpawnPlayerEffect(0xffffffff);
         {
         SoundActorQueuePosition position;
-        position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
+        position.x = *(float *)(g_lmapScene + 0x1c) + libm_sinf(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
         position.z = *(float *)(g_lmapScene + 0x24) + libm_cosf(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
         position.y = *(float *)(g_lmapScene + 0x20) + 100.0f;
         temp_v0 = randBetween(0,1);

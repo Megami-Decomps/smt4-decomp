@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001b4128(unsigned int *, int, int);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
-int libm_sinf(void);
+int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 
 /* stack frame of param_6: 59 slot(s), 236 byte(s) */
 typedef struct {
@@ -83,7 +83,6 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_001b4128. */
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
-
 
 unsigned int * FUN_001adf78(unsigned int param_1,unsigned int *param_2,unsigned int *param_3,unsigned int *param_4,unsigned int *param_5,
                    unsigned int *param_6)

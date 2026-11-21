@@ -4,7 +4,6 @@
 #include "util/TrigF32.h"
 
 extern "C" {
-f32 libm_sinf(f32 angle);
 
 // Ease an integer between endpoints, reporting when the destination is reached.
 u32 FUN_0039a2d8(s32 *output, s32 start, s32 end, s32 duration, s32 elapsed, s32 easeOut)

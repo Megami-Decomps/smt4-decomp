@@ -6,7 +6,7 @@ extern "C" {
 
 int itemGroupHasEnabledItem(unsigned int, int);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
-int libm_sinf(void);
+int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int mapApplySceneFog(int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -52,7 +52,6 @@ extern float DAT_00610afc; /* 0x610afc */
 /* Supplied declaration required: mapApplySceneFog. */
 extern int sceneFindRecordByName(unsigned int, int, unsigned char *);
 extern short resourceNameGroupFindIndex(unsigned int, unsigned char *);
-
 
 void FUN_0031416c(int param_1,int param_2,int param_3)
 

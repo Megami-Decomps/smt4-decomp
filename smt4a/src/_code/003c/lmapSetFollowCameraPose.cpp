@@ -8,7 +8,7 @@ struct MapFollowCameraOutput {
 };
 extern "C" {
 s32 lmapResolveContextValue();
-f32 libm_sinf(f32 radians);
+
 extern MapFollowCameraOutput DAT_005f19fc;
 
 void lmapSetFollowCameraPose()

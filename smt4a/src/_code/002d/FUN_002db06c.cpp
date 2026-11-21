@@ -13,7 +13,7 @@ int animationSelectClip(...);
 
 int soundVolumeSettingGet(void);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
-int libm_sinf(void);
+int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int FUN_001f3f34(void);
 int soundAllocateSpatialActor(...);
 int mapResolveCollisionSphere(int *, int *, int);
@@ -100,7 +100,6 @@ extern signed char DAT_005f1c7e; /* 0x5f1c7e */
 /* Supplied declaration required: controllerSetRotationEulerDegrees. */
 /* Supplied declaration required: itemListGetCurrentIdOrInvalid. */
 extern int FUN_004ffa14(unsigned int);
-
 
 void FUN_002db06c(void)
 

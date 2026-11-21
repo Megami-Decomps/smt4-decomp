@@ -10,7 +10,7 @@ int mapIfRequestById(...);
 
 int gameFlagIsSet(void);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
-int libm_sinf(void);
+int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int sceneRegisterBoxEffect(...);
 int FUN_0035363c(...);
 int sceneLoadParameterPreset(int, unsigned char [8]);
@@ -100,7 +100,6 @@ extern int dataTable23Type4CountWithAoc(void);
 /* Supplied declaration required: dataTable2FType1Count. */
 /* Supplied declaration required: dataTable2FType2Count. */
 /* Supplied declaration required: partyEntryFlagsBit1. */
-
 
 void FUN_00364740(int param_1,unsigned int *param_2,unsigned int *param_3)
 

@@ -24,8 +24,8 @@ int lmapSetSceneId(...);
 int mapSelectContainingRegions(void);
 int FUN_002804ec(...);
 int __hardfp_atan2f(void);
-int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
-int mathRemPio2f(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "libm_sinf" has "C" linkage)
+int libm_sinf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int mathDistanceBetweenPoints(void);
 int mathGetShortestAngleDelta(void);
 int gameCounterAddSaturating(...);
@@ -72,7 +72,7 @@ extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: libm_cosf. */
-/* Supplied declaration required: mathRemPio2f. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: mathGetShortestAngleDelta. */
 /* Supplied declaration required: gameCounterAddSaturating. */
@@ -322,7 +322,7 @@ void FUN_001fa8e4(void)
       temp_v13 = temp_v13 * 0.017453292f;
       *(unsigned char *)(temp_v8 + 0x6c) = 1;
       *(int *)(temp_v8 + 0x7c) = (int)((unsigned long long)temp_v16 >> 0x20);
-      mathRemPio2f();
+      libm_sinf();
       temp_v8 = g_lmapScene;
       temp_v18 = (float)temp_v19;
       *(float *)(g_lmapScene + 0x28) =

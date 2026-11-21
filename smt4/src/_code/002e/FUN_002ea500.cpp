@@ -56,7 +56,7 @@ extern int inputConfirmPressed(void);
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: libm_cosf. */
-/* Supplied declaration required: mathRemPio2f. */
+/* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 extern int screenFadesAllReady(void);
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
@@ -166,7 +166,7 @@ void FUN_002ea500(void)
           *(unsigned int *)(temp_v0 + 0x28) = DAT_0049f9a0;
           *(float *)(temp_v0 + 0x2c) = temp_v4;
           *(unsigned int *)(temp_v0 + 0x30) = temp_v6;
-          *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + mathRemPio2f((temp_v3 + 180.0f) * 0.017453292f) * 110.0f;
+          *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + libm_sinf((temp_v3 + 180.0f) * 0.017453292f) * 110.0f;
           temp_v0 = g_lmapScene;
           *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + libm_cosf((*(float *)(temp_v0 + 0x50) + 180.0f) * 0.017453292f) * 110.0f;
           lmapCameraSetMode(10);
@@ -175,7 +175,7 @@ void FUN_002ea500(void)
           mapIfActivateRecord(1,DAT_0049f99c);
           {
           MapMarkerPosition marker;
-          marker.x = *(float *)&DAT_0049f9a0 + mathRemPio2f(*(float *)(g_lmapScene + 0x50) * 0.017453292f) * 20.0f;
+          marker.x = *(float *)&DAT_0049f9a0 + libm_sinf(*(float *)(g_lmapScene + 0x50) * 0.017453292f) * 20.0f;
           marker.y = *(float *)&DAT_0049f9a4 + 10.0f;
           marker.z = *(float *)&DAT_0049f9a8 + libm_cosf(*(float *)(g_lmapScene + 0x50) * 0.017453292f) * 20.0f;
           marker.w = *(float *)(g_lmapScene + 0x50) + 180.0f;
@@ -250,7 +250,7 @@ LAB_002ea9b4:
         mapDepartSpawnPlayerEffect(0xffffffff);
         {
         SoundActorQueuePosition position;
-        position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
+        position.x = *(float *)(g_lmapScene + 0x1c) + libm_sinf(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
         position.z = *(float *)(g_lmapScene + 0x24) + libm_cosf(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
         position.y = *(float *)(g_lmapScene + 0x20) + 150.0f;
         temp_v0 = randBetween(0,1);

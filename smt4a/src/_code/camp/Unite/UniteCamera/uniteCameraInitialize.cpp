@@ -22,7 +22,7 @@ extern UniteCameraRegistryView *g_handleRegistry;
 void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
 void sysMemClear(void *, u32);
 void asdGxSetViewport(s32, s32, s32, s32);
-f32 libm_sinf(f32);
+
 void asdCameraInitializeDefaults(ManagedCamera *, s32);
 void cameraMatrixCacheSetLookAt(ManagedCamera *, const Vec3f *, const Vec3f *, const Vec3f *);
 void stereoCameraSetPerspective(ManagedCamera *, s32, f32, f32, f32, f32);

@@ -35,7 +35,7 @@ struct LmapSceneGlobals {
 extern "C" {
 extern LmapSceneGlobals g_lmapScene;
 
-f32 libm_sinf(f32 value);
+#include "util/TrigF32.h"
 f32 floatInterpolateOverDuration(f32 start, f32 end, f32 duration, f32 time);
 void controllerSetDestination(EffectController *controller, const Vec3F *destination);
 

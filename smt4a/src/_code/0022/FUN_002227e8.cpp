@@ -6,11 +6,10 @@
 
 extern "C" {
 
-
 void FUN_00297f00(int value, int count);
 
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
-int libm_sinf(void);
+int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int FUN_00223fac(void);
 int FUN_002240f0(void);
 int FUN_002826dc(float *, float *, int, int);
@@ -74,8 +73,6 @@ extern int DAT_005f0d28; /* 0x5f0d28 */
 extern int DAT_005f0d38; /* 0x5f0d38 */
 extern unsigned int DAT_005f0d3c; /* 0x5f0d3c */
 
-
-
 extern int DAT_005f1c64; /* 0x5f1c64 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -99,7 +96,6 @@ extern int mapEnemyTryStartApproach(void);
 extern int linkHolderCallFirst(unsigned int);
 extern int itemListGetCurrentIdOrInvalid(unsigned int);
 extern int FUN_004ffa14(unsigned int);
-
 
 void FUN_002227e8(void)
 

@@ -27,7 +27,7 @@ extern HakaiBoxState *g_mapHakai;
 
 s32 gameFlagIsSet(u32 flag);
 s32 gameFlagsTestFirstBank(s32 flag);
-f32 libm_sinf(f32 angle);
+
 void FUN_00244c70(u32 id, u32 kind, s32 variant, u32 option, f32 x, f32 y, f32 z, f32 yaw);
 s32 sceneRegisterBoxEffect(u32 id, u32 value, const char *name, u32 resource,
     u32 effect, s32 variant, u8 option0, u8 option1, u8 option2,

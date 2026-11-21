@@ -25,7 +25,7 @@ extern s8 DAT_005f1c48;
 void padGetNormalizedAnalogStick(f32* stickX, f32* stickY, s32 arg);
 void FUN_0033f9f4(void);
 f32 __hardfp_atan2f(f32 y, f32 x);
-f32 libm_sinf(f32 angle);
+
 s32 FUN_0036d5e0(MapVector* candidate, MapVector* previous);
 
 // Moves the player on the field from the analog stick: accelerates while held,
