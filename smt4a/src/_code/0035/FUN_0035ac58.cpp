@@ -18,7 +18,7 @@ typedef struct SlotSource {
 s32 gameFlagIsSet(u32 flag);
 SlotRecord *saveGetSelectedRecordSlot(s32 index);
 s32 skillChooseRandomFlaggedSlot(u16 *values);
-u16 FUN_003f36a4(u16 *values, s32 index, u16 id);
+u16 skillRollRandomMutatedSkill(u16 *values, s32 index, u16 id);
 
 /* Returns the record slot holding id, else the first free slot (cleared), else -1. */
 static __inline s32 slotRecordFind(u16 id)
@@ -58,7 +58,7 @@ s32 FUN_0035ac58(SlotSource *source)
         return 0;
     }
     index = skillChooseRandomFlaggedSlot(source->values);
-    count = FUN_003f36a4(source->values, index, source->id);
+    count = skillRollRandomMutatedSkill(source->values, index, source->id);
     if (count == 0) {
         return 0;
     }

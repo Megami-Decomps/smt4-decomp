@@ -87,7 +87,7 @@ void AocMenu::runQueryProcess()
         return;
     }
     case 0: {
-        AocQueryHandler *created = reinterpret_cast<AocQueryHandler *>(FUN_00233fcc(menu->handlerStorage, 0));
+        AocQueryHandler *created = reinterpret_cast<AocQueryHandler *>(windowCreateStatusOperation(menu->handlerStorage, 0));
         menu->step = 1;
         menu->handler = created;
         return;
@@ -95,7 +95,7 @@ void AocMenu::runQueryProcess()
     case 2: {
         if (menu->handler != NULL)
             delete menu->handler;
-        AocQueryHandler *created = reinterpret_cast<AocQueryHandler *>(FUN_00233fcc(menu->handlerStorage, 4));
+        AocQueryHandler *created = reinterpret_cast<AocQueryHandler *>(windowCreateStatusOperation(menu->handlerStorage, 4));
         menu->handler = created;
         s32 slot = flaggedValueHolderGetTotal(menu->slotHolder);
         ((AocQueryHandlerState *)created)->slotValue = aocMain->records[slot].contentId;

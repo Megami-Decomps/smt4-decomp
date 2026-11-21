@@ -54,9 +54,9 @@ void AocMenu::runWindowOperation()
             ifTouchRegionClearAll(job + 0xba);
             releaseEntriesA(job + 0xad);
             aocLoadingTaskStart(job, 0);
-            FUN_00233fcc(job + 0x83, 0);
+            void *created = windowCreateStatusOperation(job + 0x83, 0);
             job[2] = 2;
-            job[0x82] = reinterpret_cast<u32>(job + 0x83);
+            job[0x82] = reinterpret_cast<u32>(created);
         }
         return;
     case 2:
@@ -90,15 +90,16 @@ void AocMenu::runWindowOperation()
             }
         }
         return;
-    case 3:
+    case 3: {
         if (operation != NULL) {
             operation->release();
         }
-        FUN_00233fcc(job + 0x83, 1);
+        void *created = windowCreateStatusOperation(job + 0x83, 1);
         job[2] = 4;
-        job[0x82] = reinterpret_cast<u32>(job + 0x83);
+        job[0x82] = reinterpret_cast<u32>(created);
         aocLoadingTaskStart(job, 1);
         return;
+    }
     case 4: {
         RequestParameters polled = operation->getEvent();
         event = polled;

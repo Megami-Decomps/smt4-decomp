@@ -7,12 +7,17 @@
 
 struct AocMenuObject;
 
+/* A five-word result record: the first byte is its kind (0 = none, >= 100 = a command). */
+struct AocResult {
+    /* 0x00 */ u32 words[5];
+};
+
 /* The object a menu owns for its current screen: slot 1 destroys it, slot 3 reads its pending result. */
 struct AocMenuObjectVtable {
     /* 0x00 */ void *unk00;
     /* 0x04 */ void (*destroy)(AocMenuObject *object);
     /* 0x08 */ void *unk08;
-    /* 0x0C */ void (*readResult)(AocMenuObject *object, u32 *result);
+    /* 0x0C */ AocResult (*readResult)(AocMenuObject *object);
 };
 
 /* The screen object is embedded in the process; once the screen ends its place holds the result record. */
@@ -21,10 +26,6 @@ struct AocMenuObject {
     /* 0x04 */ u32 result[5];
 };
 
-/* A five-word result record: the first byte is its kind (0 = none, >= 100 = a command). */
-struct AocResult {
-    /* 0x00 */ u32 words[5];
-};
 
 /* A script-driven menu process of the AOC part. */
 struct AocMenuProcess {
@@ -78,8 +79,7 @@ void AocMenu::runScriptMenu()
     case 1:
         if (buttonHelpStateIsNot3() != 0 && (process->flags & 0x200) != 0) {
             scrRunOpcodesStub(process->script);
-            AocMenuObject *object = (AocMenuObject *)&process->unk20C;
-            FUN_00233fcc(object, 3);
+            AocMenuObject *object = (AocMenuObject *)windowCreateStatusOperation(&process->unk20C, 3);
             process->active = object;
             object->result[4] = aoc->records[flaggedValueHolderGetTotal(process->holder)].contentId;
             process->phase = 2;
@@ -88,13 +88,13 @@ void AocMenu::runScriptMenu()
         return;
     case 2: {
         scrRunOpcodesStub(process->script);
-        AocResult raw;
-        process->active->vtable->readResult(process->active, raw.words);
+        AocResult raw = process->active->vtable->readResult(process->active);
         record = reinterpret_cast<const RequestParameters &>(raw);
         if (strIsEmpty(&record.word(0)) != 0) {
             jobStopAndClearFlags(process);
             messageMainFinishWindow();
             process->phase = 3;
+            return;
         } else if (byteIsAtLeast100(&record.word(0)) != 0) {
             jobStopAndClearFlags(process);
             messageMainFinishWindow();

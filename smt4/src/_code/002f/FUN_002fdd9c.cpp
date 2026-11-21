@@ -1,10 +1,11 @@
-/* NON_MATCHING: track scan is unrolled, template/count values reload inside the effect loop, and multiply uses MLA rather than SMLABB. */
+/* NON_MATCHING: the track scan peels its last iteration where retail peels the first, and retail addresses the
+ * timeline fields from hoisted offset registers. Retail keeps the five-track scan as a loop of two pairs; the u8
+ * index keeps that loop (80 lines), an s32 or u32 index unrolls all five passes (99). */
 #include "shard/W6_W6Match7_KeyedRecordStorage.h"
 
 extern "C" {
 extern s32 g_keyedRecordCount;
 extern KeyedRecordStorage g_keyedRecords[];
-void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 // Find the latest track or repeated effect endpoint in a keyed effect timeline.
 u32 FUN_002fdd9c(s32 index)
@@ -13,7 +14,7 @@ u32 FUN_002fdd9c(s32 index)
         return 0;
     const KeyedRecordStorage *storage = &g_keyedRecords[index];
     u32 maximum = 0;
-    for (s32 track = 0; track < 5; ++track) {
+    for (u8 track = 0; track < 5; ++track) {
         if (maximum < storage->timing.tracks[track].frames)
             maximum = storage->timing.tracks[track].frames;
     }
@@ -21,8 +22,7 @@ u32 FUN_002fdd9c(s32 index)
         maximum = storage->timing.lastFrame;
     const EffectTimelineEntry *timeline = storage->timeline;
     for (s32 entry = 0; entry < storage->timing.count; ++entry) {
-        EffectTimelineRecord record;
-        __aeabi_memcpy4(&record, &storage->timing.templates[timeline[entry].recordIndex], sizeof(record));
+        EffectTimelineRecord record = storage->timing.templates[timeline[entry].recordIndex];
         s16 repetitions = timeline[entry].repetitions;
         repetitions = repetitions < 1 ? 1 : repetitions;
         s16 duration = 0;
@@ -31,7 +31,7 @@ u32 FUN_002fdd9c(s32 index)
         else if (record.kind == 1 || record.kind == 2 || record.kind == 3)
             duration = record.secondDuration;
         s32 endFrame = repetitions * duration + timeline[entry].startFrame;
-        if ((s32)maximum < endFrame)
+        if (endFrame > (s32)maximum)
             maximum = endFrame;
     }
     return maximum;

@@ -7,7 +7,7 @@
 
 extern "C" {
 
-int FUN_001f9188(void);
+int mapEnemyStartScriptedMove(void);
 int mapEaseSceneHeading(void);
 int mapEnemyAdvancePursuit(void);
 
@@ -57,7 +57,7 @@ extern int DAT_0049fd04; /* 0x49fd04 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: mapIdleHintStep. */
-/* Supplied declaration required: FUN_001f9188. */
+/* Supplied declaration required: mapEnemyStartScriptedMove. */
 /* Supplied declaration required: FUN_002562e4. */
 /* Supplied declaration required: partyApplyNonlethalAilmentDamage. */
 extern int inputIsQuestCancelPressed(void);
@@ -460,7 +460,7 @@ void FUN_001fa8e4(void)
       mapEnemyAdvancePursuit();
     }
     if ((temp_v9 & 0x2000) != 0) {
-      FUN_001f9188();
+      mapEnemyStartScriptedMove();
     }
     temp_v8 = g_lmapScene;
     if (temp_v0) {

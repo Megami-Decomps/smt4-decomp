@@ -6184,3 +6184,16 @@
 003a0f88 shopDrawQuantityPanel
 0031eba0 portraitDrawClipped
 002d28a4 lmapCameraSetMapPresets
+0015f870 __aeabi_llsr
+0026fe0c mapRestoreSavedSelection
+00257a50 uniteBuildResultUnitRecord
+00247fc0 textFontGetGlyphSheet
+0022be6c bitReaderRead
+001f9188 mapEnemyStartScriptedMove
+002c52f4 sysRequestFatalBreak
+003852c8 questInteractionResetSteps
+00394230 asyncRequestPoll
+00233fcc windowCreateStatusOperation
+003ae418 btlUiReserveActionSlot
+0033be90 skillRollRandomMutatedSkill
+003cfc84 btlEnemyGroupColorTransitionStep

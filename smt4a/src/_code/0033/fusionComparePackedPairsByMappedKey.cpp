@@ -1,44 +1,42 @@
-/* NON_MATCHING: pair-table address folding adds a 0x13b8 literal and member-ID/record register lifetimes differ. */
+/* NON_MATCHING: register lifetimes of the member ids differ (retail keeps a second copy of each id for the reloads: r9, and r5/r7 in the second pass). */
 #include "camp/Unite/UniteGlobals.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 
-extern "C" {
-}
-
-static inline s32 compareFusionPairMember(u16 first, u16 second)
+static __inline s32 comparePairMember(u32 firstId, u32 secondId)
 {
-    const NkmBaseRecordA *a = nkmBaseGetRecord(first);
-    const NkmBaseRecordA *b = nkmBaseGetRecord(second);
-    s32 firstKey = dataTableGetEntry0102Value(a->id);
-    s32 secondKey = dataTableGetEntry0102Value(b->id);
-    s32 result = secondKey - firstKey;
+    const NkmBaseRecordA *first = nkmBaseGetRecord(firstId);
+    const NkmBaseRecordA *second = nkmBaseGetRecord(secondId);
+    s32 result = second->race - first->race;
     if (result == 0) {
-        a = nkmBaseGetRecord(first);
-        b = nkmBaseGetRecord(second);
-        result = b->race - a->race;
-        if (result == 0) {
-            result = a->level - b->level;
-            if (result == 0) {
-                result = b->id - a->id;
-            }
-        }
+        result = first->level - second->level;
+        if (result == 0)
+            result = second->id - first->id;
     }
     return result;
 }
 
-extern "C" s32 fusionComparePackedPairsByMappedKey(const void *left, const void *right)
+static __inline s32 compareFusionPairMember(u32 firstId, u32 secondId)
 {
-    const u16 *first = (const u16 *)left;
-    const u16 *second = (const u16 *)right;
+    const NkmBaseRecordA *first = nkmBaseGetRecord(firstId);
+    const NkmBaseRecordA *second = nkmBaseGetRecord(secondId);
+    s32 firstKey = dataTableGetEntry0102Value(first->id);
+    s32 secondKey = dataTableGetEntry0102Value(second->id);
+    s32 result = secondKey - firstKey;
+    if (result == 0)
+        result = comparePairMember(firstId, secondId);
+    return result;
+}
+
+extern "C" s32 fusionComparePackedPairsByMappedKey(const u16 *first, const u16 *second)
+{
     UniteWorkA *work = g_unite;
-    u32 firstPacked = work->pairList.pairs[*first].packedIds;
-    u32 secondPacked = work->pairList.pairs[*second].packedIds;
-    s32 result = compareFusionPairMember(firstPacked & 0x7fff, secondPacked & 0x7fff);
+    u16 firstId = work->pairList.pairs[*first].packedIds & 0x7fff;
+    u16 secondId = work->pairList.pairs[*second].packedIds & 0x7fff;
+    s32 result = compareFusionPairMember(firstId, secondId);
     if (result == 0) {
-        firstPacked = work->pairList.pairs[*first].packedIds;
-        secondPacked = work->pairList.pairs[*second].packedIds;
-        result = compareFusionPairMember((firstPacked & 0x3fffffff) >> 15,
-                                         (secondPacked & 0x3fffffff) >> 15);
+        firstId = (work->pairList.pairs[*first].packedIds & 0x3fffffff) >> 15;
+        secondId = (work->pairList.pairs[*second].packedIds & 0x3fffffff) >> 15;
+        result = compareFusionPairMember(firstId, secondId);
     }
     return result;
 }

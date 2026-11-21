@@ -1,9 +1,23 @@
-/* NON_MATCHING: slot-relative addresses, aggregate copy and mask-update scheduling differ. */
+/* NON_MATCHING: register allocation (retail keeps the UI in r4 and the slot base in r5, the build swaps them) and the projected-position copy (retail moves it through VFP registers, the build through ldm/stm). */
 #include "ui/UiSpriteApi.h"
 #include "battle/BtlUiGlobal.h"
 #include "shard/W6_W6Match6_ProjectionCamera.h"
 #include "code/Code0015.h"
 #include "battle/BattleHelpers_VariantB.h"
+
+/* Clears a 3-float vector. */
+static __inline void vec3Zero(f32 *v)
+{
+    v[0] = v[1] = v[2] = 0.0f;
+}
+
+/* Sets a 3-float vector (the body of gfx/SpiralEmitter.h's vec3Set). */
+static __inline void vec3Set(f32 *v, f32 x, f32 y, f32 z)
+{
+    v[0] = x;
+    v[1] = y;
+    v[2] = z;
+}
 
 static inline u32 findActionSlot(BtlUiA *ui)
 {
@@ -18,12 +32,8 @@ extern "C" {
 void cameraProjectToScreen(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
 
 // Reserve a projected effect slot and synchronize the owner's completion-mask bit.
-u32 FUN_004a9d68(u32 request, u64 *ownerFlags, f32 x, f32 y, f32 z)
+u32 btlUiReserveActionSlot(u32 request, u64 *ownerFlags, f32 x, f32 y, f32 z)
 {
-    // The completion mask is beyond BtlUiGlobalsA's shared pointer-only prefix.
-    struct GlobalsView { u8 prefix[0x38]; u64 completionMask; };
-    typedef char GlobalsMaskOffsetCheck[offsetof(GlobalsView, completionMask) == 0x38 ? 1 : -1];
-    const GlobalsView *globals = reinterpret_cast<const GlobalsView *>(&g_btlUi);
     BtlUiA *ui = g_btlUi.ui;
     u32 index = findActionSlot(ui);
     if (index >= 12)
@@ -34,15 +44,15 @@ u32 FUN_004a9d68(u32 request, u64 *ownerFlags, f32 x, f32 y, f32 z)
     ui->actionRequests.slots[index].active = 0;
     BattleUiActionVector position = {x, y, z};
     cameraProjectToScreen(&position.x, 0, reinterpret_cast<ProjectionMatrices *>(asdCameraGetSavedRenderPairs()), &position.x);
-    ui->actionRequests.slots[index].projected = position;
-    ui->actionRequests.slots[index].velocity[0] = ui->actionRequests.slots[index].velocity[1] = ui->actionRequests.slots[index].velocity[2] = 0.0f;
-    ui->actionRequests.slots[index].acceleration[0] = ui->actionRequests.slots[index].acceleration[1] = ui->actionRequests.slots[index].acceleration[2] = 0.0f;
+    vec3Set(ui->actionRequests.slots[index].position, position.x, position.y, position.z);
+    vec3Zero(ui->actionRequests.slots[index].velocity);
+    vec3Zero(ui->actionRequests.slots[index].acceleration);
     ui->actionRequests.slots[index].ownerFlags = reinterpret_cast<u32 *>(ownerFlags);
-    *ownerFlags &= ~globals->completionMask;
+    *reinterpret_cast<u64 *>(ui->actionRequests.slots[index].ownerFlags) &= ~g_btlUi.completionMask;
     if (btlScriptUnitHasFlags(reinterpret_cast<const BtlMainStateA *>(ui->owner))) {
         ui->actionRequests.slots[index].active = 0;
         ui->actionRequests.slots[index].state = 5;
-        *reinterpret_cast<u64 *>(ui->actionRequests.slots[index].ownerFlags) |= globals->completionMask;
+        *reinterpret_cast<u64 *>(ui->actionRequests.slots[index].ownerFlags) |= g_btlUi.completionMask;
     } else {
         uiSpriteSelectAnim(&ui->actionRequests.slots[index].firstSprite, 10);
         uiSpriteSelectAnim(&ui->actionRequests.slots[index].secondSprite, 11);

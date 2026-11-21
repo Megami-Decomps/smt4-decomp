@@ -201,7 +201,8 @@ typedef char TextureBindingPrefixIVLayoutCheck[
     offsetof(TextureBindingPrefixIV, object) == 0xC &&
     sizeof(TextureBindingPrefixIV) == 0x10 ? 1 : -1];
 
-/* Descriptor passed to FUN_0036ec8c. The trailing bytes are not initialized. */
+/* Descriptor passed to FUN_0036ec8c. The trailing bytes are not initialized. Its constructor sets every
+ * field (FUN_00340ad4 stores the defaults of the fields it then overwrites). */
 struct TextureCreateInfoIV {
     s32 height;
     s32 width;
@@ -211,6 +212,13 @@ struct TextureCreateInfoIV {
     u32 hardwareFormat;
     u8 flag18;
     u8 flag19;
+
+#ifdef __cplusplus
+    TextureCreateInfoIV()
+        : height(0), width(0), unk08(1), unk0C(0x02020000), data(NULL), hardwareFormat(0), flag18(0), flag19(1)
+    {
+    }
+#endif
 };
 typedef char TextureCreateInfoIVLayoutCheck[
     offsetof(TextureCreateInfoIV, height) == 0 &&

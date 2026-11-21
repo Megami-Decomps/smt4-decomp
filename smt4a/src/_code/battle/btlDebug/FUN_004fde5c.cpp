@@ -8,7 +8,7 @@ extern "C" {
 
 int btlGetMainState(...);
 int FUN_003f0254(...);
-int FUN_003f06b4(...);
+int btlHasDuplicateEnemyDemonId(...);
 int FUN_004d7a60(...);
 int FUN_004fd3f0(...);
 int btlReflectQueueMemberAction(...);
@@ -50,7 +50,7 @@ extern unsigned int DAT_00573c3c; /* 0x573c3c */
 /* Supplied declaration required: btlFindEntryBlockByMemberId. */
 extern int idSetFindSubjectIndex(unsigned int, int);
 /* Supplied declaration required: FUN_003f0254. */
-/* Supplied declaration required: FUN_003f06b4. */
+/* Supplied declaration required: btlHasDuplicateEnemyDemonId. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_004d7a60. */
 /* Supplied declaration required: FUN_004fd3f0. */
@@ -82,7 +82,7 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
   puVar2 = (unsigned int *)btlGetMainState();
   temp_v8 = (param_3->field_0x50 & 0x10) >> 4;
   temp_v1 = FUN_004d7a60(g_btlEvent,param_3,1);
-  if ((temp_v1 != 0) && (puVar4 = puVar2, FUN_003f06b4(puVar2,param_3), puVar4 != (unsigned int *)0x0)) {
+  if ((temp_v1 != 0) && (puVar4 = puVar2, btlHasDuplicateEnemyDemonId(puVar2,param_3), puVar4 != (unsigned int *)0x0)) {
     puVar4 = puVar2;
     btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(puVar2), (int)param_3->field_0x6a);
     temp_v9 = *puVar4 | DAT_00573c38;

@@ -17,7 +17,7 @@ int configUpdate(void);
 int FUN_0020e79c(void);
 int stateModeDispatch(...);
 int configDestroy(void);
-int FUN_00283d74(...);
+int playerInitNewGame(...);
 int s4LoadCreate(void);
 int gameApplyFlagTriggers(void);
 int FUN_00324c94(...);
@@ -109,7 +109,7 @@ extern int configIsClosed(void);
 /* Supplied declaration required: configDestroy. */
 extern int s4LoadIsActive(void);
 extern int screenFadeIsBusy(void);
-/* Supplied declaration required: FUN_00283d74. */
+/* Supplied declaration required: playerInitNewGame. */
 extern int recordGetModeForId(int);
 extern int menuAreModeTexturesLoaded(unsigned int *);
 /* Supplied declaration required: s4LoadCreate. */
@@ -881,7 +881,7 @@ LAB_0029fb00:
           }
         }
         else {
-          FUN_00283d74(0);
+          playerInitNewGame(0);
           FUN_00363c58(0);
           gameFlagsSetFlagsFromTaggedGroupEntries(g_aocSystem);
           stateModeDispatch(puVar4[0x25]);

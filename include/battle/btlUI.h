@@ -365,6 +365,8 @@ typedef struct BtlUiA {
 typedef struct BtlUiGlobalsA {
     /* 0x00 */ u8 unk00[0x10];
     /* 0x10 */ BtlUiA *ui;
+    /* 0x14 */ u8 unk14[0x24];
+    /* 0x38 */ u64 completionMask;     /* the owner flag bit an action slot sets when it completes (btlUiReserveActionSlot) */
 } BtlUiGlobalsA;
 
 typedef char BtlUiUnitRecordLayoutCheck[sizeof(BtlUiUnitRecord) == 0x604 &&

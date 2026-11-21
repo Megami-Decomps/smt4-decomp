@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack frame (retail reserves 108 bytes and an extra saved register), VFP argument setup and pool-constant loads are scheduled differently; the draw sequence is the same. */
+/* NON_MATCHING: stack frame (retail reserves 108 bytes, the name buffer at sp+20 and the text at sp+24, and saves r9 for slide + 1), register allocation and VFP argument scheduling differ; the draw sequence is the same. */
 #include "common.h"
 #include <stdio.h>
 #include "code/Code002a.h"
@@ -67,18 +67,22 @@ void bibleAnalyzeDrawMenu(AnalyzeWork *work)
     FUN_0049368c(work->panel, tab - 4, 0, 0, slide, 1);
     FUN_0049368c(work->panel, tab, 0, 0, slide, 1);
 
-    u8 nameBuffer[8];
+    u8 nameBuffer[4];
     char text[64];
     u32 name = dataLookupDisplayName(nameBuffer, ((AnalyzeWorkView *)work)->targetId);
 
     sprintf(text, "%s%s", name, DAT_0057f0a0[1]);
     TextureTableEntryIV *box = layoutFindTableEntry(work->panel, 0x102B);
 
-    drawTextAtSnappedRectangle(work->panel, (f32)(box->x + box->placement->width / 2 - textMeasureOnLayer(text, 2) / 2), (f32)box->y, 2, -1, text,
+    s32 width = textMeasureOnLayer(text, 2);
+
+    drawTextAtSnappedRectangle(work->panel, (f32)(box->x + box->placement->width / 2 - width / 2), (f32)box->y, 2, -1, text,
                  opacity, 1.0f, 0.0f);
 
     s32 first = resourceDispatchTaggedOperation(work->list);
-    s32 visible = work->rowCount < work->visibleRows ? work->rowCount : work->visibleRows;
+    s32 visible = work->rowCount;
+    if (work->visibleRows < visible)
+        visible = work->visibleRows;
 
     for (s32 i = 0; i < visible; i++) {
         if (work->mode != 2 || FUN_0031d174(work->list) != i) {

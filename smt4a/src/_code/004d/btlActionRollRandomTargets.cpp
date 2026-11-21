@@ -1,4 +1,3 @@
-/* NON_MATCHING: probabilistic target filtering register allocation differs from retail. */
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -10,24 +9,26 @@ struct BattleTargetSelectionView {
     BtlMainStateA *battle;
 };
 }
+
 extern "C" {
 void btlActionMarkRandomTargetableUnit(BattleTargetSelectionView *context);
 void FUN_004e6ed8(BattleTargetSelectionView *context, s32 mode);
 void FUN_004e7d20(BattleTargetSelectionView *context, s32 count);
 
 /* Probabilistically filter eligible combatants, then choose a one-, two- or three-target action. */
-void FUN_004dffe4(BattleTargetSelectionView *context)
+void btlActionRollRandomTargets(BattleTargetSelectionView *context)
 {
     s32 roll = (s32)lcgRandomRange(99);
     s32 remaining = 0;
+
     for (s32 index = 0; index < 109; ++index) {
-        BtlCombatantEntryA *entry = &context->battle->entries[index];
-        if ((g_btlAction.clearedFlags.mask & entry->flags) != 0) {
-            s32 chance = btlFindEntryNonzeroRecordValue(entry->ids[0]);
-            if (chance > 0 && (s32)lcgRandomRange(99) > chance)
+        if ((g_btlAction.clearedFlags.mask & context->battle->entries[index].flags) != 0) {
+            s32 chance = btlFindEntryNonzeroRecordValue(context->battle->entries[index].ids[0]);
+            if (chance > 0 && (s32)lcgRandomRange(99) > chance) {
                 context->battle->entries[index].flags &= ~g_btlAction.clearedFlags.mask;
-            else
+            } else {
                 remaining++;
+            }
         }
     }
     if (remaining >= 3) {
@@ -51,4 +52,4 @@ void FUN_004dffe4(BattleTargetSelectionView *context)
     }
     FUN_004e6ed8(context, 0);
 }
-}
+} /* extern "C" */

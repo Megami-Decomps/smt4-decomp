@@ -3748,7 +3748,7 @@
 0x001d3edc FUN_001d3edc callers
 0x001d3ef8 FUN_001d3ef8 between
 0x001d3f10 svcSetThreadPriority name
-0x001d3f18 FUN_001d3f18 between
+0x001d3f18 __aeabi_llsr name
 0x001d3f40 FUN_001d3f40 between
 0x001d4328 FUN_001d4328 between
 0x001d4a60 FUN_001d4a60 between

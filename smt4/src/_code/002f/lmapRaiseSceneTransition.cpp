@@ -1,10 +1,12 @@
-/* NON_MATCHING: jump table now matches (labels 0..5); the vector copies use ldm/stm where retail uses ldrd/strd and the map ternaries share a zero register differently. */
+/* NON_MATCHING: retail loads case 0's 800.0f target height at entry, before the switch (the build loads it in
+ * case 0, which shifts the case offsets and registers), and sets the secondary map's 0 by copying the mode's zero
+ * (movne r2, r3) where the build writes movne r2, #0. */
 #include "map/LmapMainGlobals.h"
 #include "game/GameState.h"
 
 extern "C" {
 void mapCollisionRelease();
-void FUN_0027b2b4(s32 map, u32 entry, s32 secondaryMap, s32 mode);
+void FUN_0027b2b4(s32 map, u32 entry, s32 secondaryMap, u32 mode);
 void FUN_002d508c(LmapMainState *state);
 void lmapUpdateMapBgm();
 void FUN_00281784();
@@ -51,12 +53,12 @@ u32 lmapRaiseSceneTransition()
         g_gameState.areaId = 99;
         mapCollisionRelease();
         FUN_0027b2b4(transition->map, transition->entry,
-            transition->map == 101 ? 101 : 0, transition->map == 101 ? 10 : 0);
+            transition->map != 101 ? 0 : 101, transition->map != 101 ? 0 : 10);
         transition->phase = 1;
         transition->frame = 0;
         break;
     case 1:
-        FUN_002d508c(g_lmapMainState);
+        FUN_002d508c((LmapMainState *)transition);
         ++transition->frame;
         g_lmapScene->pose.position.y = transition->start.y +
             (transition->end.y - transition->start.y) * (f32)transition->frame * 0.033333335f;
@@ -69,7 +71,7 @@ u32 lmapRaiseSceneTransition()
         }
         break;
     case 2:
-        FUN_002d508c(g_lmapMainState);
+        FUN_002d508c((LmapMainState *)transition);
         break;
     case 3:
     case 4:
@@ -82,9 +84,8 @@ u32 lmapRaiseSceneTransition()
         transition->trackerFlags &= ~2;
         FUN_00281784();
         mapInitializeStoryMarkerEffects(transition->map);
-        LmapObj *tracker = reinterpret_cast<LmapObj *>(&transition->trackerFlags);
-        objSetBaseAndValue(tracker, transition->map - 100, transition->entry);
-        entryListCollectMatches(tracker);
+        objSetBaseAndValue((LmapObj *)&transition->trackerFlags, transition->map - 100, transition->entry);
+        entryListCollectMatches((LmapObj *)&transition->trackerFlags);
         g_gameState.inputBlocked = 0;
         g_gameState.map.transitionCompleted = 1;
         break;

@@ -1,4 +1,5 @@
-/* NON_MATCHING: recovered combatant lookup and channel interpolation still differ in VFP and integer register scheduling. */
+/* NON_MATCHING: retail converts the three status channels strictly in order (the build starts with green)
+ * and packs the colour left to right before or-ing in the alpha. */
 #include "classes/Obj4209d8.h"
 
 struct Obj4209d8Combatant {
@@ -12,9 +13,7 @@ struct Obj4209d8Combatant {
 extern "C" {
 Obj4209d8Combatant *btlMainFindEntryByListedId(Obj4209d8Owner *owner, s32 id);
 u32 FUN_0026e6a0(u32 first, u32 second, u32 duration, u32 phase, u32 mode);
-extern u8 DAT_00439ce0, DAT_00439ce1, DAT_00439ce2, DAT_00439ce3;
-extern u32 DAT_00439cf0;
-extern f32 s______00439cf4;
+extern Obj4209d8ColorDefaults DAT_00439ce0;
 }
 
 u32 Obj4209d8::getCellColor(s32 index) const
@@ -30,13 +29,13 @@ u32 Obj4209d8::getCellColor(s32 index) const
         return value << 24 | value << 16 | value << 8;
     }
     if (combatant != NULL && (combatant->flags & 0x2000000) != 0 && (combatant->statusFlags & 0x10) != 0) {
-        u32 red = (u32)((f32)DAT_00439ce0 * s______00439cf4);
-        u32 green = (u32)((f32)DAT_00439ce1 * s______00439cf4);
-        u32 blue = (u32)((f32)DAT_00439ce2 * s______00439cf4);
-        red = FUN_0026e6a0(red & 255, DAT_00439ce0, DAT_00439cf0, cell->colorPhase, 0);
-        green = FUN_0026e6a0(green & 255, DAT_00439ce1, DAT_00439cf0, cell->colorPhase, 0);
-        blue = FUN_0026e6a0(blue & 255, DAT_00439ce2, DAT_00439cf0, cell->colorPhase, 0);
-        return red << 24 | (green & 255) << 16 | (blue & 255) << 8 | DAT_00439ce3;
+        u8 red = (u8)((f32)DAT_00439ce0.statusRed * DAT_00439ce0.statusDepth);
+        u8 green = (u8)((f32)DAT_00439ce0.statusGreen * DAT_00439ce0.statusDepth);
+        u8 blue = (u8)((f32)DAT_00439ce0.statusBlue * DAT_00439ce0.statusDepth);
+        red = FUN_0026e6a0(red, DAT_00439ce0.statusRed, DAT_00439ce0.statusDuration, cell->colorPhase, 0);
+        green = FUN_0026e6a0(green, DAT_00439ce0.statusGreen, DAT_00439ce0.statusDuration, cell->colorPhase, 0);
+        blue = FUN_0026e6a0(blue, DAT_00439ce0.statusBlue, DAT_00439ce0.statusDuration, cell->colorPhase, 0);
+        return red << 24 | green << 16 | blue << 8 | DAT_00439ce0.statusAlpha;
     }
     return 0;
 }

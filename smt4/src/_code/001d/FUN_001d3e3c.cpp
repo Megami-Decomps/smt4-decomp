@@ -23,7 +23,7 @@ int FUN_0026f960(...);
 int bgmReleaseStopped(void);
 int FUN_0026fa30(...);
 int FUN_0026faa4(void);
-int FUN_0026fe0c(void);
+int mapRestoreSavedSelection(void);
 int FUN_0026ff54(void);
 int frameTexApplyMode(...);
 int navigationRequestFieldMode(...);
@@ -377,7 +377,7 @@ extern int lmapMainUpdateScriptTransition(void);
 /* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: FUN_0026fa30. */
 /* Supplied declaration required: FUN_0026faa4. */
-/* Supplied declaration required: FUN_0026fe0c. */
+/* Supplied declaration required: mapRestoreSavedSelection. */
 /* Supplied declaration required: FUN_0026ff54. */
 /* Supplied declaration required: mapTableRelease. */
 /* Supplied declaration required: frameTexApplyMode. */
@@ -3290,7 +3290,7 @@ joined_r0x001d8c24:
     if (DAT_0049f950 != '\0') {
       FUN_0026ff54();
       mapSceneResetState(1);
-      FUN_0026fe0c();
+      mapRestoreSavedSelection();
       FUN_0026faa4();
       if ((DAT_0049f950 != '\0') && (temp_v6 = gameDataBlocksGetSaveData(), *(char *)(temp_v6 + 2) == '\x02')) {
         bgmReleaseStopped();

@@ -6,7 +6,7 @@
 extern "C" {
 s32 buttonHelpSetPreset(s32 preset);
 s32 partyPanelSetDisabledMode(s32 enabled);
-s32 FUN_00257a50(void *output, s32 selection, s32 category);
+s32 uniteBuildResultUnitRecord(void *output, s32 selection, s32 category);
 s32 FUN_0029da34(s32 channel, s32 enabled, u32 value, void *data);
 
 // Selects the camp button-help preset for the special-help, party-panel and navigation states.
@@ -34,7 +34,7 @@ void FUN_00241b40(void)
         if (camp->unitSelectIndex != 3) {
             buttonHelpSetPreset(0x50);
             OutputStorage output;
-            if (FUN_00257a50(output.bytes, camp->unitSelectIndex,
+            if (uniteBuildResultUnitRecord(output.bytes, camp->unitSelectIndex,
                             camp->unitSelectSource) != 0) {
                 FUN_0029da34(0, 1, output.prefix.value46, output.bytes);
             }

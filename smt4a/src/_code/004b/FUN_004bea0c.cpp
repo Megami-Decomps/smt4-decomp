@@ -19,7 +19,7 @@ int gameGlobalsSetMenuOpenFlag(int);
 int screenShowMessage(...);
 int FUN_0035d03c(int);
 int partyGetSlot(...);
-int FUN_004be49c(int);
+int statusUseHealItemOnSelectedUnit(int);
 int FUN_004be990(...);
 int SBORROW4(int, int);
 int SCARRY4(int, int);
@@ -58,7 +58,7 @@ extern int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 extern int FUN_0035db94(void);
 /* Supplied declaration required: partyGetSlot. */
 extern int itemApplyPercentageHpHeal(int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_004be49c. */
+/* Supplied declaration required: statusUseHealItemOnSelectedUnit. */
 /* Supplied declaration required: FUN_004be990. */
 
 
@@ -137,7 +137,7 @@ void FUN_004bea0c(int param_1)
               temp_v2 = 0x100021c;
             }
             eventQueueAddUniqueIfValid(temp_v2);
-            FUN_004be49c(param_1);
+            statusUseHealItemOnSelectedUnit(param_1);
             return;
           }
           eventQueueAddUniqueIfValid(0x100020f);

@@ -1,11 +1,7 @@
 /* NON_MATCHING: rewritten as the real Obj4209d8 member over its cell table; retail reloads the cell array pointer for the tint and the color separately and interleaves the four channel conversions (armcc here hoists the cell address and orders the conversions differently). */
 #include "classes/Obj4209d8.h"
 
-struct ModelColorDefaults {
-    /* 0x00 */ u8 unk00[0x18];
-    /* 0x18 */ u32 unmodulated;
-};
-extern "C" ModelColorDefaults DAT_00439ce0;
+extern "C" Obj4209d8ColorDefaults DAT_00439ce0;
 
 /* Modulate each packed color channel of a cell's color by its tint unless the cell uses the default tint. */
 u32 Obj4209d8::getTint(u32 index) const

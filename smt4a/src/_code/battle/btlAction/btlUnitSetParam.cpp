@@ -8,7 +8,7 @@ extern "C" {
 
 int itemTableGetItemRecord(void);
 int btlEntryBuildSummary(unsigned int [112], int);
-int FUN_004dffe4(int *);
+int btlActionRollRandomTargets(int *);
 int btlActionMarkRandomStatusTarget(...);
 int btlActionMarkRandomTargetableUnit(...);
 int FUN_004e6ed8(int *, int);
@@ -45,7 +45,7 @@ extern int DAT_00571194; /* 0x571194 */
 extern int lcgRandomRange(short);
 /* Supplied declaration required: itemTableGetItemRecord. */
 /* Supplied declaration required: btlEntryBuildSummary. */
-/* Supplied declaration required: FUN_004dffe4. */
+/* Supplied declaration required: btlActionRollRandomTargets. */
 /* Supplied declaration required: btlActionMarkRandomStatusTarget. */
 /* Supplied declaration required: btlActionMarkRandomTargetableUnit. */
 /* Supplied declaration required: FUN_004e6ed8. */
@@ -152,7 +152,7 @@ void btlUnitSetParam(int *param_1,int param_2,unsigned int param_3,int param_4)
   temp_v16 = param_1;
   switch(temp_v17) {
   case 1:
-    FUN_004dffe4(param_1);
+    btlActionRollRandomTargets(param_1);
     break;
   case 2:
     btlActionMarkRandomTargetableUnit(param_1);

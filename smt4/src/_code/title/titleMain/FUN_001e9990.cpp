@@ -17,7 +17,7 @@ int sndObjectForwardField8(...);
 int modelEvaluateFirstScalarChannel(...);
 int aocActivateFileGroupFlags(...);
 int playerInitNewGame(...);
-int FUN_0026fe0c(void);
+int mapRestoreSavedSelection(void);
 int FUN_0026ff54(void);
 int frameTexCampSetMode(...);
 int FUN_00275dc4(void);
@@ -107,7 +107,7 @@ extern unsigned int asdCameraLoadFromFile(unsigned char *);
 extern int buttonHelpHasEnabledEntryForId(unsigned int);
 /* Supplied declaration required: playerInitNewGame. */
 /* Supplied declaration required: FUN_0026faa4. */
-/* Supplied declaration required: FUN_0026fe0c. */
+/* Supplied declaration required: mapRestoreSavedSelection. */
 /* Supplied declaration required: FUN_0026ff54. */
 /* Supplied declaration required: frameTexCampSetMode. */
 /* Supplied declaration required: FUN_00275dc4. */
@@ -623,7 +623,7 @@ LAB_001ea4cc:
           }
         }
         else {
-          FUN_0026fe0c();
+          mapRestoreSavedSelection();
           FUN_0026faa4();
           if (g_mapSelection.selection.group >= 200) {
             temp_v10 = (unsigned int *)(g_mapSelection.selection.group - 200);

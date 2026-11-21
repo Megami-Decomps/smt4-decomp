@@ -1,5 +1,7 @@
-/* NON_MATCHING: the 2-stream loop is unrolled in the build and not in retail (which also reloads entryIndex after the ring copy). */
+/* NON_MATCHING: retail swaps r1/r2 (entry pointer and value) through the stream loop and tests firstTime
+ * with two loads (high word first) where the build uses ldm; the tail call is NOPed in retail. */
 #include "shard/S2MovieSync.h"
+#include <string.h>
 
 extern "C" {
 
@@ -28,7 +30,7 @@ void FUN_00425448(MovieSync *sync)
             continue;
         }
         if (sync->firstTime == 0) {
-            sync->firstTime = sync->ring[i][sync->readPos[i] % MOVIE_SYNC_RING_SIZE];
+            memcpy(&sync->firstTime, &sync->ring[i][sync->readPos[i] % MOVIE_SYNC_RING_SIZE], sizeof(u64));
         }
         slots = movieSyncEntrySlots(sync, sync->entryIndex[i]);
         sync->readPos[i] += slots;

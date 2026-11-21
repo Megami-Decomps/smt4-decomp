@@ -1,5 +1,8 @@
-/* NON_MATCHING: scalar vector subtraction/scaling does not reproduce retail's inlined vector-helper loads and saved-register allocation. */
+/* NON_MATCHING: retail loads the move's end through three separate vldr and its start through vldmia with
+ * writeback, then stores the difference field by field; the build loads both with vldmia and stores it with vstmia,
+ * and the scale's base registers differ (r2/r3). */
 #include "map/MapEnemyGlobal.h"
+#include "game/GameState.h"
 
 namespace {
 struct EnemyMotionRecord {
@@ -8,19 +11,15 @@ struct EnemyMotionRecord {
     s16 endX, endY, endZ, endHeading;
     s16 duration, wait;
 };
-struct EnemyMotionSelection {
-    u8 unk00[0x46];
-    s16 contentId;
-};
 }
 
 extern "C" {
-extern EnemyMotionSelection DAT_0049fb1c;
 
-void FUN_001f9188(void)
+/* Starts the scripted move of the first active enemy waiting for one (state 2), from the current content entry. */
+void mapEnemyStartScriptedMove(void)
 {
     MapEnemy *map = g_mapEnemy;
-    EnemyMotionRecord *motion = reinterpret_cast<EnemyMotionRecord *>(contentEntryGetD(DAT_0049fb1c.contentId));
+    EnemyMotionRecord *motion = reinterpret_cast<EnemyMotionRecord *>(contentEntryGetD(g_gameState.map.contentId));
     for (s32 i = 0; i < MAP_ENEMY_COUNT; ++i) {
         MapEnemyEntry *enemy = &map->entries[i];
         if (enemy->active != 0 && enemy->kind != 0 && enemy->kind < 11 && enemy->state == 2) {
@@ -33,13 +32,8 @@ void FUN_001f9188(void)
             enemy->end.z = motion->endZ;
             enemy->endHeading = motion->endHeading;
             enemy->duration = motion->duration;
-            enemy->velocity.x = enemy->end.x - enemy->start.x;
-            enemy->velocity.y = enemy->end.y - enemy->start.y;
-            enemy->velocity.z = enemy->end.z - enemy->start.z;
-            f32 inverseDuration = 1.0f / enemy->duration;
-            enemy->velocity.x *= inverseDuration;
-            enemy->velocity.y *= inverseDuration;
-            enemy->velocity.z *= inverseDuration;
+            enemy->velocity = mapVectorSub(enemy->end, enemy->start);
+            mapVectorScale(&enemy->velocity, &enemy->velocity, 1.0f / enemy->duration);
             enemy->wait = motion->wait;
             enemy->basePosition = enemy->start;
             enemy->position = enemy->start;

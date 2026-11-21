@@ -1,4 +1,4 @@
-/* NON_MATCHING: grid selection is predicated, row-offset subtraction folds into the load, and result tails reorder; -O2 candidate. */
+/* NON_MATCHING: the stock-grid selection (mode 6) is predicated where retail threads it into the helper's alternate test, the row-offset subtraction folds into the load, and result tails reorder; -O2 candidate. */
 #include "ui/PartyPanelStateA.h"
 #include "code/Code002a.h"
 #include "code/Code002a_VariantA.h"
@@ -29,8 +29,12 @@ extern "C" s32 partyPanelGetSelectedDemonId()
     s32 mode = panel->pendingState;
     s32 slot = 0;
     if (mode == 6 || panel->sceneState == 6) {
-        GridNavigation *grid = panel->alternate ? &panel->stockGridAlternate : &panel->stockGrid;
-        slot = static_cast<s32>(panel->entries[selectionGridIndex(panel, grid)].packedIndex);
+        s32 index;
+        if (panel->alternate)
+            index = selectionGridIndex(panel, &panel->stockGridAlternate);
+        else
+            index = selectionGridIndex(panel, &panel->stockGrid);
+        slot = static_cast<s32>(panel->entries[index].packedIndex);
     } else if (mode == 4 || panel->sceneState == 4) {
         s32 column = listCursorGetRowOfChildIfUnblocked(&panel->partyGrid);
         if (!column)
@@ -38,7 +42,7 @@ extern "C" s32 partyPanelGetSelectedDemonId()
         slot = gameGetSlotTable()->indices[column];
     } else if (mode == 8 || panel->sceneState == 8) {
         GridNavigation *grid = panel->alternate ? &panel->fullGridAlternate : &panel->fullGrid;
-        if (listCursorGetRowIfUnblocked(grid) <= 0) {
+        if (listCursorGetRowIfUnblocked(grid) < 1) {
             s32 column = listCursorGetRowOfChildIfUnblocked(grid);
             if (g_partyPanel && g_partyPanel->panelState == 20) {
                 slot = reinterpret_cast<PartySelectionObject *>(panel->characters[column])->slot;

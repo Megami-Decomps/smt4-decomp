@@ -21,7 +21,7 @@ static __inline UnitePairBits *unitePairBits(UnitePairEntryIV *entry)
 }
 
 extern "C" {
-void FUN_00257a50(void *cursor, s32 index, s32 mode);
+void uniteBuildResultUnitRecord(void *cursor, s32 index, s32 mode);
 void FUN_0029defc(s32 id, s32 mode);
 void FUN_0029c4e4(void *cursor, s32 mode);
 void menuSetModeAndResetTransitions(s32 mode);
@@ -38,7 +38,7 @@ void uniteConfirmResultPair(s32 index)
 {
     UniteWork *work = g_unite;
     work->eventFlagsIV.ready = 1;
-    FUN_00257a50(work->resultSelectionIV.cursor, index, 0);
+    uniteBuildResultUnitRecord(work->resultSelectionIV.cursor, index, 0);
     memcpy(work->resultSnapshotIV.words, work->resultSelectionIV.selected.words,
         sizeof(work->resultSnapshotIV.words));
     unitePairBits(&work->pairListIV.pairs[0])->resultId = unitePairBits(&work->resultPairsIV.pairs[index])->resultId;

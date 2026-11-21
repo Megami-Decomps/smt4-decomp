@@ -36,7 +36,7 @@ int FUN_003e7fa4(...);
 int FUN_0040c64c(...);
 int FUN_00410410(...);
 int FUN_0047effc(...);
-int FUN_004a9d68(...);
+int btlUiReserveActionSlot(...);
 int FUN_004aa008(...);
 int FUN_004c0850(...);
 int FUN_004c6edc(...);
@@ -226,7 +226,7 @@ extern unsigned int FUN_0047fa50(unsigned int);
 /* Supplied declaration required: partyAddMoneyClamped. */
 /* Supplied declaration required: FUN_004a96fc. */
 /* Supplied declaration required: btlUiSetDefaultLimits. */
-/* Supplied declaration required: FUN_004a9d68. */
+/* Supplied declaration required: btlUiReserveActionSlot. */
 /* Supplied declaration required: FUN_004aa008. */
 /* Supplied declaration required: FUN_004ab6f4. */
 /* Supplied declaration required: FUN_004c0850. */
@@ -1044,7 +1044,7 @@ LAB_0040f258:
             btlQueueActionMessage(0,*(unsigned int *)(psVar2 + 4),0x1000275,0,1,0,0);
           }
           FUN_003e7fa4(*param_1,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
-          FUN_004a9d68(g_btlUiBlock,puVar6);
+          btlUiReserveActionSlot(g_btlUiBlock,puVar6);
         }
       }
       else {

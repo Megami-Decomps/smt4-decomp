@@ -8,7 +8,7 @@ int asdMemoryAllocTracked(int, int, int, int, int);
 int FUN_00182a9c(void);
 int asdMemFree(void);
 int recordTableGet(...);
-int FUN_002a1970(...);
+int textFontGetGlyphSheet(...);
 int FUN_002a1cec(char *, unsigned char *, int);
 int FUN_00341968(unsigned char *, unsigned char *, int);
 int VectorSignedToFloat(unsigned int, int);
@@ -39,7 +39,7 @@ extern unsigned char g_textControlCallbackArgumentCounts; /* 0x63afa8 */
 /* Supplied declaration required: asdMemFree. */
 extern int charCodeIsPrivateUseGlyph(unsigned int);
 /* Supplied declaration required: recordTableGet. */
-/* Supplied declaration required: FUN_002a1970. */
+/* Supplied declaration required: textFontGetGlyphSheet. */
 /* Supplied declaration required: FUN_002a1cec. */
 /* Supplied declaration required: FUN_00341968. */
 
@@ -258,7 +258,7 @@ LAB_0036c494:
                 }
                 (**(romwright_code **)(*temp_v5 + 0x40))(temp_v5,puVar7 + 2,temp_v1);
                 temp_v2 = param_1[0x15];
-                FUN_002a1970(temp_v2,temp_v1);
+                textFontGetGlyphSheet(temp_v2,temp_v1);
                 *(int *)(puVar7 + 0xe) = temp_v2;
               }
             }
@@ -270,13 +270,13 @@ LAB_0036c494:
               if ((DAT_005b3d78 != 0) && (DAT_005b3d78 == temp_v1)) {
                 (**(romwright_code **)(*piVar4 + 0x40))(piVar4,puVar7 + 2,0x8140);
                 temp_v2 = param_1[5];
-                FUN_002a1970(temp_v2,0x8140);
+                textFontGetGlyphSheet(temp_v2,0x8140);
                 *(int *)(puVar7 + 0xe) = temp_v2;
               }
               else {
                 (**(romwright_code **)(*piVar4 + 0x40))(piVar4,puVar7 + 2,temp_v1);
                 temp_v2 = param_1[5];
-                FUN_002a1970(temp_v2,temp_v1);
+                textFontGetGlyphSheet(temp_v2,temp_v1);
                 *(int *)(puVar7 + 0xe) = temp_v2;
               }
             }
@@ -288,7 +288,7 @@ LAB_0036c494:
             }
             (**(romwright_code **)(*temp_v6 + 0x40))(temp_v6,puVar7 + 2,temp_v1);
             temp_v2 = param_1[0x29];
-            FUN_002a1970(temp_v2,temp_v1);
+            textFontGetGlyphSheet(temp_v2,temp_v1);
             *(int *)(puVar7 + 0xe) = temp_v2;
           }
         }

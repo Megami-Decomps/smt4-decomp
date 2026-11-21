@@ -1,4 +1,6 @@
-/* NON_MATCHING: retail initialises the 18 slots in a one-per-iteration loop that reloads each halfword before storing 100; armcc unrolls the bitfield stores by two. */
+/* NON_MATCHING: retail stores the incoming response 0 to its stack slot before a five-entry jump table and places
+ * the case blocks (5, 1, 3, 4) after the kind switch, sharing one store; the build tests 1..4 in a compare chain.
+ * The slot initialisation loop now matches. */
 #include "common.h"
 #include "shard/PassiveSkill.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
@@ -90,8 +92,9 @@ static __inline u32 resolvePassiveAffinity(const u16 *skills, u8 kind)
 void devilBuildAffinitySlots(AffinitySlot *slots, u32 devilId)
 {
     for (s32 i = 0; i < 18; i++) {
-        slots[i].id = 100;
-        slots[i].state = 0;
+        AffinitySlot *slot = &slots[i];
+        slot->id = 100;
+        slot->state = 0;
     }
     FUN_00394edc(devilId, slots);
     if (slots[6].state != 2 && slots[6].state != 3) {

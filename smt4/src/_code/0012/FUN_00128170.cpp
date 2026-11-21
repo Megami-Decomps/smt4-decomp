@@ -40,7 +40,7 @@ unsigned int FUN_00128170(void)
   int uStack_18;
   unsigned int uStack_14;
   
-  FUN_002c52f4();
+  sysRequestFatalBreak();
   uVar4 = DAT_00471b60;
   fileSystemRequireReady();
   FUN_002ad80c(uVar4,extraout_r1,0x14,0);

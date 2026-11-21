@@ -26,7 +26,7 @@ int statusDownEnterState11(...);
 int FUN_003b0744(void);
 int statusDownSelectListIndex(...);
 int engineGetFloatTableValue(...);
-int FUN_003f36a4(...);
+int skillRollRandomMutatedSkill(...);
 int skillChooseRandomFlaggedSlot(void);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(...);
@@ -308,7 +308,7 @@ extern int partySlotMatchesSelected(unsigned int);
 /* Supplied declaration required: FUN_003f3048. */
 extern unsigned int characterPickRandomEntryValue(int);
 extern unsigned int btlGetDemonEvolutionStatus(int);
-/* Supplied declaration required: FUN_003f36a4. */
+/* Supplied declaration required: skillRollRandomMutatedSkill. */
 /* Supplied declaration required: skillChooseRandomFlaggedSlot. */
 /* Supplied declaration required: flagValueAdd. */
 /* Supplied declaration required: partyAddMoneyClamped. */
@@ -1974,7 +1974,7 @@ joined_r0x002075ac:
         skillChooseRandomFlaggedSlot();
         *(int *)(temp_v6 + 0x75c8) = temp_v16;
         temp_v27 = temp_v7 + 0x34;
-        FUN_003f36a4(temp_v27,temp_v16,*(unsigned short *)(temp_v7 + 0x62));
+        skillRollRandomMutatedSkill(temp_v27,temp_v16,*(unsigned short *)(temp_v7 + 0x62));
         *(int *)(temp_v6 + 0x75cc) = temp_v27;
         if (temp_v27 == 0) {
           temp_v7 = 100;

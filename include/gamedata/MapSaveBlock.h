@@ -14,7 +14,7 @@
 
 /* IV: the map block (0x10E4 bytes). */
 typedef struct MapSaveBlock {
-    /* 0x000 */ s8 resumeMode;     /* GameState.resumeMode when saved: 1 local map, 2 field, 3 by id only */
+    /* 0x000 */ u8 resumeMode;     /* GameState.resumeMode when saved: 1 local map, 2 field, 3 by id only */
     /* 0x001 */ u8 resumeMapId;
     /* 0x002 */ u8 resumeAreaId;
     /* 0x003 */ u8 departureIndex; /* mapGetDepartureIndex */

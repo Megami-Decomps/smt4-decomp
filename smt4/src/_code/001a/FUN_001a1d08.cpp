@@ -1,7 +1,10 @@
-/* NON_MATCHING: structure and calls match retail; the nn wait-result test (lsl #22 compare vs lsl/lsr/sub), the `mov r3,#0` argument of extSaveDataRecreateOnError (armcc reuses r2) and the sp-slot stm grouping of svcWaitSynchronizationN's stack arguments differ. */
+/* NON_MATCHING: the loaded-files test reads modelFile and scriptProcess into r1/r2 where the build reuses r0, and
+ * the fade case's "no script" store keeps its own mov r0, #9 where retail branches into the script case's copy. */
 #include "nn/Result.h"
 #include "common.h"
 #include "sys/ResultReport.h"
+#include "sys/HandleWait.h"
+#include "code/Code001c_Smt4.h"
 
 /* The event being played: its resources, state and script process. */
 struct EventRequest {
@@ -31,7 +34,7 @@ struct EventPlayerState {
     /* 0x01 */ s8 skipScript;
     /* 0x02 */ u8 unk02[2];
     /* 0x04 */ EventRequest *request;
-    /* 0x08 */ s32 unk08;
+    /* 0x08 */ const char *iconPath; /* the extra save data icon */
     /* 0x0C */ s32 scriptEntry;     /* -1: none */
 };
 
@@ -51,15 +54,13 @@ s32 FUN_00223898(EventRequest *request, s32 kind);
 s32 scrScriptProcessStartEntry(void *process, s32 entry);
 ScriptProcessState *scrScriptProcessCreate(void);
 void scrScriptProcessDestroy(void *process);
-u32 svcWaitSynchronizationN(u32 *signalledCount, s32 *handles, s32 count, s32 waitAll, u32 timeoutLow, u32 timeoutHigh);
 void asdMemFree(void *block);
 void gameDataFlagsClear(s32 flag);
 void gameDataFlagsClearAndRefresh(s32 flag);
 void gameDataRemoveHomeButtonHold(s32 flag);
 void FUN_002e2f14(EventRequest *request);
-void extSaveDataRecreateOnError(u32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
+nn::Result extSaveDataRecreateOnError(nn::Result result, u64 id, u32 directories, u32 files, const char *iconPath);
 s32 scrRunOpcodesStub(void *process);
-u32 FUN_001c0954(u32 id, u32 arg);
 
 /* Steps the event once per frame; returns 1 when it is finished and released. */
 u32 FUN_001a1d08(void)
@@ -76,49 +77,46 @@ u32 FUN_001a1d08(void)
         process->state = 2;
     }
 
-    u32 next;
     switch (request->state) {
     case EVENT_START:
         if (g_saveLoadThread.request->file == 1) {
-            u32 sound = FUN_001c0954(0xFF2AE, 0);
-            extSaveDataRecreateOnError(sound, 6, 0xFF2AE, 0, 6, 0, g_saveLoadThread.unk08);
+            nn::Result result = FUN_001c0954(0xFF2AE);
+            extSaveDataRecreateOnError(result, 0xFF2AE, 6, 0, g_saveLoadThread.iconPath);
         }
         /* fall through */
     case EVENT_INTRO_DONE:
         FUN_00223898(request, request->kind);
-        next = EVENT_FADE;
+        request->state = EVENT_FADE;
         break;
-    default:
-        request->frames++;
-        return 0;
-    case EVENT_FADE:
+    case EVENT_FADE: {
+        bool fading = false;
         if (request->fadeId != 0) {
-            u32 signalledCount;
-            s32 id = request->fadeId;
-            u32 result = svcWaitSynchronizationN(&signalledCount, &id, 1, 0, 0, 0);
-            bool failed = nnResultIsFailure(result);
-            if (failed)
-                resultHandleFailure(result, failed);
-            if (!nnResultIsNotTimeout(result)) {
-                request->frames++;
-                return 0;
-            }
+            s32 result = handleWait(request->fadeId, 0);
+            fading = nnResultIsNotTimeout(result) != 1;
         }
+        if (fading)
+            break;
         FUN_002e2f14(request);
-        if (g_saveLoadThread.skipScript == 0) {
-            if (g_saveLoadThread.scriptEntry != -1) {
-                gameDataRemoveHomeButtonHold(1);
-                gameDataFlagsClearAndRefresh(1);
-                gameDataFlagsClear(1);
-                request->state = EVENT_SCRIPT;
-                scrScriptProcessStartEntry(request->scriptProcess, g_saveLoadThread.scriptEntry);
-                request->frames++;
-                return 0;
-            }
-            next = EVENT_NO_SCRIPT;
+        if (g_saveLoadThread.skipScript != 0) {
+            request->state = EVENT_END;
+        } else if (g_saveLoadThread.scriptEntry != -1) {
+            gameDataRemoveHomeButtonHold(1);
+            gameDataFlagsClearAndRefresh(1);
+            gameDataFlagsClear(1);
+            request->state = EVENT_SCRIPT;
+            scrScriptProcessStartEntry(request->scriptProcess, g_saveLoadThread.scriptEntry);
         } else {
-            next = EVENT_END;
+            request->state = EVENT_NO_SCRIPT;
         }
+        break;
+    }
+    case EVENT_SCRIPT:
+        if (scrRunOpcodesStub(request->scriptProcess) != 2)
+            break;
+        request->state = EVENT_NO_SCRIPT;
+        break;
+    case EVENT_NO_SCRIPT:
+        request->state = EVENT_END;
         break;
     case EVENT_END:
         if (g_saveLoadThread.request->file == 1)
@@ -140,19 +138,7 @@ u32 FUN_001a1d08(void)
             asdMemFree(g_saveLoadThread.request);
         g_saveLoadThread.request = NULL;
         return 1;
-    case EVENT_NO_SCRIPT:
-        request->state = EVENT_END;
-        request->frames++;
-        return 0;
-    case EVENT_SCRIPT:
-        if (scrRunOpcodesStub(request->scriptProcess) != 2) {
-            request->frames++;
-            return 0;
-        }
-        next = EVENT_NO_SCRIPT;
-        break;
     }
-    request->state = next;
     request->frames++;
     return 0;
 }

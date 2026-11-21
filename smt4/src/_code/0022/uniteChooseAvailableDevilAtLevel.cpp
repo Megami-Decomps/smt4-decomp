@@ -1,4 +1,5 @@
-/* NON_MATCHING: compendium-call merging, 24 fewer stack bytes and return-tail folding differ; an optimization flag may explain them. */
+/* NON_MATCHING: retail's frame is 24 bytes larger (the saved record at sp+8, the candidates at sp+64, against
+ * sp+40 and sp in the build), and the party-slot id compare loads the unit's id first. */
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "shard/W6_W6Match2_RecordValue.h"
@@ -33,11 +34,15 @@ u32 uniteChooseAvailableDevilAtLevel(u32 firstId, u32 secondId, u32 previousId, 
             continue;
         }
         if (definition->prerequisite & 1) {
-            u32 registryId = (definition->prerequisite & 0xfffe) ?
-                definition->prerequisite >> 1 : definition->id;
             GameSavedItem saved;
-            if (!gameRecordCopy(registryId, &saved) || !(saved.flags & 0xfc)) {
-                continue;
+            if (definition->prerequisite & ~1) {
+                if (!gameRecordCopy(definition->prerequisite >> 1, &saved) || !(saved.flags & 0xfc)) {
+                    continue;
+                }
+            } else {
+                if (!gameRecordCopy(definition->id, &saved) || !(saved.flags & 0xfc)) {
+                    continue;
+                }
             }
         }
         if (!(definition->flags & 1)) {
@@ -61,9 +66,9 @@ u32 uniteChooseAvailableDevilAtLevel(u32 firstId, u32 secondId, u32 previousId, 
     if (candidateCount == 1) {
         return candidates[0];
     }
-    if (candidateCount < 2) {
-        return 0;
+    if (candidateCount > 1) {
+        return candidates[randNextInRange((u16)(candidateCount - 1))];
     }
-    return candidates[randNextInRange((u16)(candidateCount - 1))];
+    return 0;
 }
 }

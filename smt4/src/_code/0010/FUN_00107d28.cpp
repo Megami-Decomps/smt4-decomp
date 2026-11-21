@@ -13,6 +13,12 @@ struct TouchRect {
     s16 h;
 };
 
+// A touch position or velocity in screen pixels.
+struct TouchPoint {
+    s32 x;
+    s32 y;
+};
+
 // Touch-driven list/scroll widget. Item rectangles start at +0x0a with an 8-byte stride.
 struct TouchWidget {
     u8 unk00[8];
@@ -27,14 +33,10 @@ struct TouchWidget {
     s16 unk652;
     u16 frame;                  // 0x654
     u8 unk656[2];
-    s32 startX;                 // 0x658
-    s32 startY;                 // 0x65c
-    s32 curX;                   // 0x660
-    s32 curY;                   // 0x664
-    s32 lastX;                  // 0x668
-    s32 lastY;                  // 0x66c
-    s32 velX;                   // 0x670
-    s32 velY;                   // 0x674
+    TouchPoint start;           // 0x658
+    TouchPoint cur;             // 0x660
+    TouchPoint last;            // 0x668
+    TouchPoint vel;             // 0x670
     s32 unk678;
 };
 
@@ -59,7 +61,7 @@ u32 FUN_00107d28(void)
     TouchWidget* t = g_ifTouch.widget;
     switch (t->state) {
     case 0:
-        if (touchGetPointByMode(&t->startX, &t->startY, 1) != 0) {
+        if (touchGetPointByMode(&t->start.x, &t->start.y, 1) != 0) {
             for (s16 i = 0; i < t->itemCount; i++) {
                 if (i >= 10 || i < t->hitLimit) {
                     TouchRect* r = itemRect(t, i);
@@ -72,19 +74,19 @@ u32 FUN_00107d28(void)
                 }
             }
         }
-        t->lastX = t->startX;
-        t->lastY = t->startY;
+        t->last.x = t->start.x;
+        t->last.y = t->start.y;
         t->unk678 = 0;
-        t->curX = t->startX;
-        t->curY = t->startY;
+        t->cur.x = t->start.x;
+        t->cur.y = t->start.y;
         break;
     case 1:
         t->holdTime = t->holdTime + 1;
         if (t->holdTime >= 10) {
             t->state = 2;
-        } else if (touchGetPointByMode(&t->curX, &t->curY, 0) != 0) {
-            s32 dx = t->curX - t->startX;
-            s32 dy = t->curY - t->startY;
+        } else if (touchGetPointByMode(&t->cur.x, &t->cur.y, 0) != 0) {
+            s32 dx = t->cur.x - t->start.x;
+            s32 dy = t->cur.y - t->start.y;
             if ((u32)sqrt((double)(dx * dx + dy * dy)) > 8) {
                 t->state = 2;
             }
@@ -96,7 +98,7 @@ u32 FUN_00107d28(void)
         break;
     case 2:
         t->holdTime = t->holdTime + 1;
-        if (touchGetPointByMode(&t->curX, &t->curY, 0) == 0) {
+        if (touchGetPointByMode(&t->cur.x, &t->cur.y, 0) == 0) {
             t->state = 0;
             t->holdTime = 0;
         } else {
@@ -112,32 +114,32 @@ u32 FUN_00107d28(void)
         }
         break;
     case 4:
-        t->curX += t->velX;
-        if (t->velX < 0) {
-            if ((t->frame & 1) == 0) t->velX++;
-            if (t->velX > -5) t->velX = -5;
-            if ((s16)(t->curX - t->startX) < -320) t->state = 0;
+        t->cur.x += t->vel.x;
+        if (t->vel.x < 0) {
+            if ((t->frame & 1) == 0) t->vel.x++;
+            if (t->vel.x > -5) t->vel.x = -5;
+            if ((s16)(t->cur.x - t->start.x) < -320) t->state = 0;
         }
-        if (t->velX > 0) {
-            if ((t->frame & 1) == 0) t->velX--;
-            if (t->velX <= 5) t->velX = 5;
-            if ((s16)(t->curX - t->startX) > 320) t->state = 0;
+        if (t->vel.x > 0) {
+            if ((t->frame & 1) == 0) t->vel.x--;
+            if (t->vel.x <= 5) t->vel.x = 5;
+            if ((s16)(t->cur.x - t->start.x) > 320) t->state = 0;
         }
         t->frame++;
         break;
     case 5:
-        t->curY += t->velY;
-        if (t->velY < 0) {
-            t->velY++;
-            if (t->velY < 0) {
+        t->cur.y += t->vel.y;
+        if (t->vel.y < 0) {
+            t->vel.y++;
+            if (t->vel.y < 0) {
                 t->frame++;
                 break;
             }
             t->state = 0;
         }
-        if (t->velY > 0) {
-            t->velY--;
-            if (t->velY <= 0) t->state = 0;
+        if (t->vel.y > 0) {
+            t->vel.y--;
+            if (t->vel.y <= 0) t->state = 0;
         }
         t->frame++;
         break;

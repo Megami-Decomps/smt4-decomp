@@ -1,22 +1,27 @@
-/* NON_MATCHING: the pitch/pan arguments are copied as one double (retail copies them singly into s17/s16), the null-slot return value is -1 directly (retail returns the index variable) and the first g_asdSound call uses a separate literal in retail. */
+/* NON_MATCHING: the free-handle search keeps the index in r0 and copies it to r5 (retail searches in r5 and loads
+ * -1 into r2 for the not-found exit), and BasicSound's SetPitch/SetPan stay calls: retail has armlink's inlined
+ * vstrne s0, [r0, #0xb8] / [r0, #0xb4] (inlined.txt rows proposed: 0xed800a2e at 0x126688/0x1266bc,
+ * 0xed800a2d at 0x126698/0x1266cc). */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "code/Code002b.h"
-
-/* The native BasicSound scalar controls are not described by the archive slot prefix. */
-struct BasicSoundControlView {
-    u8 unk00[0xb4];
-    f32 pan;
-    f32 pitch;
-};
+#include "AsdSDK/Source/Snd/AsdSoundVolume.h"
 
 extern "C" {
 extern AsdSoundSystem g_asdSound;
-s32 nw_snd_SoundArchive_GetSoundType(AsdSoundSystem *sound, u32 soundId);
+u32 nw_snd_SoundArchive_GetSoundType(void *archive, s32 id);
 bool asdSndEnsureCurrentSlotData(u32 soundId);
-u32 nw_snd_SoundStartable_StartSound(void *player, s32 *handle, u32 soundId, const void *info);
-void nw_snd_internal_BasicSound_SetVolume(BasicSoundControlView *sound, s32 fadeFrames, f32 volume);
+u32 nw_snd_SoundStartable_StartSound(void *player, s32 *handle, s32 id, u32 flags);
 
-s32 asdSndPlaySlotB(u32 soundId, u32 level, s32 fadeFrames, f32 pitch, f32 pan)
+/* Whether the sound archive is open and has a sound `id`. */
+static __inline bool asdSndSoundExists(s32 id)
+{
+    AsdSoundSystem *sound = &g_asdSound;
+    return nw_snd_SoundArchive_IsAvailable(sound) && nw_snd_SoundArchive_GetSoundType(sound, id) != 0;
+}
+
+/* Plays sound `id` in the current B slot's first free handle at `volume` (0-127, 64 = unity) faded in over
+ * `fadeFrames`, with its pitch and pan. Returns the handle index, or -1 when the sound did not start. */
+s32 asdSndPlaySlotB(s32 id, u32 volume, s32 fadeFrames, f32 pitch, f32 pan)
 {
     AsdSoundSystem *sound = &g_asdSound;
     AsdSndSlotB *slot = g_asdSound.currentSlotB;
@@ -30,32 +35,30 @@ s32 asdSndPlaySlotB(u32 soundId, u32 level, s32 fadeFrames, f32 pitch, f32 pan)
         }
     }
     if (index == -1)
-        return -1;
-    if (!nw_snd_SoundArchive_IsAvailable(sound) || !nw_snd_SoundArchive_GetSoundType(sound, soundId))
         return index;
-    if (!asdSndEnsureCurrentSlotData(soundId))
+    if (!asdSndSoundExists(id))
+        return index;
+    if (!asdSndEnsureCurrentSlotData(id))
         return -1;
-    s32 *handle = &slot->handles[index];
-    bool started = (u8)nw_snd_SoundStartable_StartSound(sound->player, handle, soundId, 0) == 0;
-    union { f32 value; s32 bits; } volume;
-    volume.value = 0.0f;
-    if (level) {
-        volume.value = 1.0f + ((f32)level - 64.0f) * (1.0f / 63.5f);
-        if (volume.bits > 0x40000000)
-            volume.value = 2.0f;
+    bool success = (u8)nw_snd_SoundStartable_StartSound(sound->player, &slot->handles[index], id, 0) == 0;
+    f32 gain;
+    if (volume) {
+        gain = ((f32)volume - 64.0f) * 0.015748031f + 1.0f;
+        if (gain > 2.0f) {
+            gain = 2.0f;
+        }
+    } else {
+        gain = 0.0f;
     }
-    if (*handle)
-        nw_snd_internal_BasicSound_SetVolume((BasicSoundControlView *)*handle, 0, 0.0f);
-    if (*handle)
-        ((BasicSoundControlView *)*handle)->pitch = 1.0f;
-    if (*handle)
-        ((BasicSoundControlView *)*handle)->pan = 0.0f;
-    if (*handle)
-        nw_snd_internal_BasicSound_SetVolume((BasicSoundControlView *)*handle, fadeFrames, volume.value);
-    if (*handle)
-        ((BasicSoundControlView *)*handle)->pitch = pitch;
-    if (*handle)
-        ((BasicSoundControlView *)*handle)->pan = pan;
-    return started ? index : -1;
+    asdSoundHandleSetVolume(slot->handles[index], 0, 0.0f);
+    asdSoundHandleSetPitch(slot->handles[index], 1.0f);
+    asdSoundHandleSetPan(slot->handles[index], 0.0f);
+    asdSoundHandleSetVolume(slot->handles[index], fadeFrames, gain);
+    asdSoundHandleSetPitch(slot->handles[index], pitch);
+    asdSoundHandleSetPan(slot->handles[index], pan);
+    if (!success) {
+        index = -1;
+    }
+    return index;
 }
 }

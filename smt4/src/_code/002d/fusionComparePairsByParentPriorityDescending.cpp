@@ -1,4 +1,4 @@
-/* NON_MATCHING: pair-field address folding and saved comparator ID/record registers differ. */
+/* NON_MATCHING: register lifetimes of the member ids differ (retail keeps a second copy of each id for the reloads: r9, and r5/r7 in the second pass); the Apocalypse twin fusionComparePackedPairsByMappedKey has the same difference. */
 #include "camp/Unite/UniteGlobals.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 
@@ -37,10 +37,11 @@ s32 fusionComparePairsByParentPriorityDescending(const u16 *left, const u16 *rig
     u16 leftId = work->pairListIV.pairs[*left].firstId;
     u16 rightId = work->pairListIV.pairs[*right].firstId;
     s32 result = compareFusionDemons(leftId, rightId);
-    if (result == 0)
-        result = compareFusionDemons(
-            static_cast<u16>(work->pairListIV.pairs[*left].secondId),
-            static_cast<u16>(work->pairListIV.pairs[*right].secondId));
+    if (result == 0) {
+        leftId = work->pairListIV.pairs[*left].secondId;
+        rightId = work->pairListIV.pairs[*right].secondId;
+        result = compareFusionDemons(leftId, rightId);
+    }
     return result;
 }
 }

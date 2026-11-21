@@ -14,7 +14,7 @@ void FUN_002758d8(void)
     };
     MapSaveBlock *save = gameGetMapBlock();
     GameState *context = &g_gameState;
-    u8 type = (u8)context->resumeMode;
+    s32 type = (u8)context->resumeMode;
     save->resumeMode = type;
     switch (type) {
     case 1:

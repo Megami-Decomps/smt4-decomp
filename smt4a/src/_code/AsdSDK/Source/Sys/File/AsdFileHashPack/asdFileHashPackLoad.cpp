@@ -1,5 +1,8 @@
-/* NON_MATCHING: the retail build has a stripped debug call (file/line setup + nop) before the stream allocation; the stream constructor is inlined there. */
+/* NON_MATCHING: the stream is now built and destroyed as an Obj55813c; retail constructs its file base through a this+4 pointer (str with writeback) and keeps the new object in r1 behind a predicated NULL test, stores the zero size just before asdLoadFileSync, and allocates registers differently around the header pointers. */
+#include <new>
 #include <stdio.h>
+#include "classes/Obj55813c.h"
+#include "nn/Result.h"
 #include "AsdSDK/Source/Sys/File/AsdFileHashPack.h"
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 #include "sys/RuntimeObjects.h"
@@ -18,8 +21,6 @@ s32 asdFileHashPackLoad(AsdFileHashPack *pack, const char *path, const char *str
 {
     s32 result = 0;
     u32 size = 0;
-    AsdFileStream *stream;
-    char fullPath[ASD_FILE_PATH_LEN];
 
     if (pack->data != NULL) {
         asdMemFree(pack->data);
@@ -29,41 +30,39 @@ s32 asdFileHashPackLoad(AsdFileHashPack *pack, const char *path, const char *str
         pack->names = NULL;
     }
 
-    stream = pack->stream;
+    /* the stream is an Obj55813c (AsdFileStream is the view its readers use) */
+    Obj55813c *stream = (Obj55813c *)pack->stream;
     if (stream != NULL) {
-        if ((stream->handle & ~1) != 0) {
-            if ((stream->handle & 1) != 0) {
+        if ((stream->handle & ~1u) != 0) {
+            if (stream->handle & 1) {
                 sysFatalBreak();
             }
-            vcallSlot12IfValid(stream->handle & ~1);
+            vcallSlot12IfValid(stream->handle & ~1u);
             stream->handle = 0;
-            if (pack->stream != NULL) {
-                ((void (*)(AsdFileStream *))pack->stream->vtable[1])(pack->stream);
-            }
-        } else {
-            ((void (*)(AsdFileStream *))pack->stream->vtable[1])(pack->stream);
         }
+        delete (Obj55813c *)pack->stream;
         pack->stream = NULL;
     }
 
     pack->data = asdLoadFileSync(&result, 0, path, &size, arg, 4);
-    if (result < 0) {
+    if (!nnResultIsSuccess(result)) {
         return result;
     }
     pack->hashes = (u32 *)((u8 *)pack->data + 0x18);
     pack->entries = pack->hashes + pack->data->hashCount;
     pack->names = (u8 *)pack->entries + pack->data->entryCount * 16;
 
-    stream = (AsdFileStream *)asdMemoryAllocTraced(sizeof(AsdFileStream), "c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Sys\\File\\AsdFileHashPack.cpp", 159);
-    pack->stream = stream;
+    pack->stream = (AsdFileStream *)new (asdMemoryAllocTraced(sizeof(Obj55813c), "c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Sys\\File\\AsdFileHashPack.cpp", 159)) Obj55813c;
 
     if (asdLoadFileHasDevice(streamPath) != 0) {
         result = FUN_00158900((u8 *)pack->stream + 4, streamPath, 1);
-        return result;
+    } else {
+        /* block scope: retail reuses the path buffer's slot for asdLoadFileSync's stack arguments */
+        char fullPath[ASD_FILE_PATH_LEN];
+        rt_aeabi_memclr(fullPath, ASD_FILE_PATH_LEN);
+        sprintf(fullPath, "rom:/%s", streamPath);
+        result = FUN_00158900((u8 *)pack->stream + 4, fullPath, 1);
     }
-    rt_aeabi_memclr(fullPath, ASD_FILE_PATH_LEN);
-    sprintf(fullPath, "rom:/%s", streamPath);
-    result = FUN_00158900((u8 *)pack->stream + 4, fullPath, 1);
     return result;
 }
 

@@ -15,13 +15,13 @@ void playerInitializeStats(u32 mode);
 void playerRecalcStatsFromEquipment(u32 slot);
 void FUN_001dd930(void);
 char *gameDataGetPlayerName(void);
-extern const InitialEquipment DAT_00404378;
+extern const InitialEquipment g_initialEquipment;
 /* The default player name and the format the player's display name is built with. */
 struct DefaultPlayerTexts {
     char name[11];
     char nameFormat[13];
 };
-extern const DefaultPlayerTexts DAT_00404360;
+extern const DefaultPlayerTexts g_defaultPlayerTexts;
 
 // Initialize a new game's player record, starting equipment, and inventory capacity.
 void playerInitNewGame(s32 mode)
@@ -31,14 +31,14 @@ void playerInitNewGame(s32 mode)
     if (mode == 0) {
         slots->money = 0;
         slots->stockCount = 8;
-        InitialEquipment equipment = DAT_00404378;
+        InitialEquipment equipment = g_initialEquipment;
         u32 index = 0;
         while (index < 7) {
             if (equipment.ids[index] != 0)
                 saveFlagSetOrAddCounter(equipment.ids[index], 1);
             ++index;
         }
-        const DefaultPlayerTexts *texts = &DAT_00404360;
+        const DefaultPlayerTexts *texts = &g_defaultPlayerTexts;
         PlayerDataIV *player = gameGetPlayerData();
         memClear(player, sizeof(*player));
         player->level = 1;

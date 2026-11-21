@@ -1,4 +1,6 @@
-/* NON_MATCHING: scoped lock matches retail; the build hoists &info into an extra saved register (r8) and tests Result with a masked compare (retail: ands/bmi), shifting registers and the frame by a word. */
+/* NON_MATCHING: the build hoists &info into an extra saved register (r8), shifting the frame by a word, and
+ * its info[0] store keeps view->id from being reused for the reset call (retail loads id and the vtable
+ * slot once before choosing the box). */
 #include "shard/W6_W6Match6_CecMessageBox.h"
 #include "nn/Result.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
@@ -26,20 +28,20 @@ nn::Result FUN_00358664(AsdCecMessageBox *box, s32 kind)
     u32 info[2];
     info[0] = 0;
     s32 result;
-    if (kind != 1) {
-        result = reinterpret_cast<MutationCallbacks *>(box->vtable)->reset(box, view->id, 12, kind, 0);
-        if (nnResultIsSuccess(result)) {
-            reinterpret_cast<MutationCallbacks *>(box->vtable)->read(box, view->id, 12, 8, info);
-            nn_cec_CTR_MessageBox_WriteBoxInfo(box, 0, &view->inbox.header, view->inbox.ids);
-        }
-    } else {
+    if (kind == 1) {
         result = reinterpret_cast<MutationCallbacks *>(box->vtable)->reset(box, view->id, 13, 1, 0);
-        if (nnResultIsSuccess(result)) {
+        if ((s32)(result & 0x80000000) >= 0) {
             reinterpret_cast<MutationCallbacks *>(box->vtable)->read(box, view->id, 13, 8, info);
             nn_cec_CTR_MessageBox_WriteBoxInfo(box, 1, &view->outbox.header, view->outbox.ids);
             s32 refreshResult = reinterpret_cast<MutationCallbacks *>(box->vtable)->refresh(box, view->id, 0, 0, 0);
             if (nnResultIsSuccess(refreshResult))
                 nn_cec_CTR_MessageBox_ReadOutBoxIndex(box);
+        }
+    } else {
+        result = reinterpret_cast<MutationCallbacks *>(box->vtable)->reset(box, view->id, 12, kind, 0);
+        if ((s32)(result & 0x80000000) >= 0) {
+            reinterpret_cast<MutationCallbacks *>(box->vtable)->read(box, view->id, 12, 8, info);
+            nn_cec_CTR_MessageBox_WriteBoxInfo(box, 0, &view->inbox.header, view->inbox.ids);
         }
     }
     return result;

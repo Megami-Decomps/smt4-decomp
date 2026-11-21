@@ -20,7 +20,7 @@ void saveLoadEnsureResources(void);
 void commonBgLoadSpritesOnFirstUse(void);
 void campButtonHelpLoad(void);
 void configSettingsResetDefaults(void);
-void FUN_00283d74(s32 value);
+void playerInitNewGame(s32 value);
 void gameDataSmallBlockFinalize(void);
 void asdSequenceRequest(s32 sequence, s32 a, s32 b);
 void effectTexturesLoadOnce(void);
@@ -55,7 +55,7 @@ void FUN_0022258c(u32 group)
             commonBgLoadSpritesOnFirstUse();
             campButtonHelpLoad();
             configSettingsResetDefaults();
-            FUN_00283d74(0);
+            playerInitNewGame(0);
             gameDataSmallBlockFinalize();
             mapSystemLoadSharedFiles();
             asdSequenceRequest(0x16, 0, 0);

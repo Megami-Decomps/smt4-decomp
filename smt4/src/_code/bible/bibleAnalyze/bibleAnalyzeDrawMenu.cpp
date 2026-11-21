@@ -1,4 +1,4 @@
-/* NON_MATCHING: VFP argument setup (the sliding-offset float and the text position) and the pool-constant loads are scheduled differently; the draw sequence is the same. */
+/* NON_MATCHING: register allocation differs (slide in r7 rather than r4, the tab-flag base folds +190), retail keeps slide + 1 in r9 from before the loop and computes the row base only when rows are visible; the draw sequence is the same. */
 #include "common.h"
 #include <stdio.h>
 
@@ -73,7 +73,7 @@ void bibleAnalyzeDrawMenu(AnalyzeWork *work)
     FUN_00231bcc(work->panel, tab - 4, 0, 0, slide, 1);
     FUN_00231bcc(work->panel, tab, 0, 0, slide, 1);
 
-    u8 nameBuffer[8];
+    u8 nameBuffer[4];
     char text[64];
     u32 name = dataLookupDisplayName(nameBuffer, ((AnalyzeWorkView *)work)->targetId);
 
@@ -96,7 +96,7 @@ void bibleAnalyzeDrawMenu(AnalyzeWork *work)
         }
     }
     if (work->rowCount > 0 && work->mode == 2) {
-        s32 id = rows[flaggedEntryGetValueByState(work->list) + first].id;
+        s32 id = work->rows[flaggedEntryGetValueByState(work->list) + first].id;
 
         FUN_003aa044(work, flaggedEntryGetValueByState(work->list) + 1, 1, id);
     }

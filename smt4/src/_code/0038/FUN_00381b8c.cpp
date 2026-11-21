@@ -46,7 +46,7 @@ const QuestCenterDrawDefaultsIV DAT_004057a8 = {
      -1, 0, -1, -1, 0, -1, 0, -3, 0, -3, 1, 0, -3, 0,
      -3, 0, -3, -3, 0, -3, 0, -1, 0, -1, -1, 0, -1, 0}
 };
-void FUN_003852c8(void);
+void questInteractionResetSteps(void);
 void asdLoadFileAsyncSimple(const char *path, u32 *result, u32 options);
 void drawParameterBlockClear(UiResourceParameters *parameters);
 
@@ -62,7 +62,7 @@ void gameFlagEntryActivate(u32 id);
 // Initialize the quest-center screen resources and enable eligible late quest entries.
 void FUN_00381b8c(QuestCenterScreenStateIV *work)
 {
-    FUN_003852c8();
+    questInteractionResetSteps();
     work->flags = 0;
     work->frame = 0;
     work->state = 0;

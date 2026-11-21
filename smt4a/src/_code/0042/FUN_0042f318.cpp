@@ -1,4 +1,5 @@
-/* NON_MATCHING: CEC buffer stack placement, Result tests, and virtual-call/register scheduling differ. */
+/* NON_MATCHING: retail keeps the critical section in r5 (as smt4's ScopedCriticalLock twin), loads view->id and
+ * the reset slot once before choosing the box, and addresses info at sp+4 without a saved register. */
 #include "shard/W6_W6Match6_CecMessageBox.h"
 #include "nn/Result.h"
 
@@ -30,7 +31,7 @@ s32 FUN_0042f318(AsdCecMessageBox *box, s32 kind)
     s32 result;
     if (kind == 1) {
         result = reinterpret_cast<MutationCallbacks *>(box->vtable)->reset(box, view->id, 13, 1, 0);
-        if (nnResultIsSuccess(result)) {
+        if ((s32)(result & 0x80000000) >= 0) {
             reinterpret_cast<MutationCallbacks *>(box->vtable)->read(box, view->id, 13, 8, info);
             nn_cec_CTR_MessageBox_WriteBoxInfo(box, 1, &view->outbox.header, view->outbox.ids);
             s32 refreshResult = reinterpret_cast<MutationCallbacks *>(box->vtable)->refresh(box, view->id, 0, 0, 0);
@@ -39,7 +40,7 @@ s32 FUN_0042f318(AsdCecMessageBox *box, s32 kind)
         }
     } else {
         result = reinterpret_cast<MutationCallbacks *>(box->vtable)->reset(box, view->id, 12, kind, 0);
-        if (nnResultIsSuccess(result)) {
+        if ((s32)(result & 0x80000000) >= 0) {
             reinterpret_cast<MutationCallbacks *>(box->vtable)->read(box, view->id, 12, 8, info);
             nn_cec_CTR_MessageBox_WriteBoxInfo(box, 0, &view->inbox.header, view->inbox.ids);
         }

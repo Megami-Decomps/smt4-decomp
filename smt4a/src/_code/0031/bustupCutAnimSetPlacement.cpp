@@ -1,4 +1,4 @@
-/* NON_MATCHING: transition-case block placement, job/coordinate register allocation and pair-copy store splitting differ; alternate optimization may explain these differences. */
+/* NON_MATCHING: the job handle and x are allocated to swapped registers (r5/r6), the idle path splits the current-offset copy into two str where retail uses strd, and case 3 stores the state before loading the base position. */
 #include "shard/S1Mover.h"
 #include "addon/aocMain.h"
 #include "shard/JobWork.h"
@@ -65,32 +65,7 @@ void bustupCutAnimSetPlacement(u32 job, s32 slot, s32 snap, s32 x, s32 y)
     work->destination.y = (f32)y * -50.0f * 0.001953125f;
 
     const s32 result = bustupCutAnimAssignSlot(job, slot);
-    if (result != 0) {
-        if (result == 1) {
-            bustupSpriteStartTransition(work, 2, 0);
-            work->state = 2;
-            return;
-        }
-        if (result == 2) {
-            if (snap != 0) {
-                bustupSpriteStartTransition(work, 6, 0);
-            } else {
-                bustupSpriteStartTransition(work, 7, 0);
-            }
-            work->state = 2;
-            work->previous = work->destination;
-            work->current = work->destination;
-            return;
-        }
-        if (result == 3) {
-            bustupSpriteStartTransition(work, 5, 0);
-            BustupPlacementWork* active = (BustupPlacementWork*)jobGetWork(job);
-            active->state = 1;
-            active->startPosition = active->basePosition;
-            bustupPlaceActiveSlot(&work->position, work->slot);
-            return;
-        }
-    } else {
+    if (result == 0) {
         work->operation = 0;
         if (work->state != 0) {
             work->state = 1;
@@ -100,6 +75,24 @@ void bustupCutAnimSetPlacement(u32 job, s32 slot, s32 snap, s32 x, s32 y)
             work->current = work->destination;
             work->previous = work->destination;
         }
+    } else if (result == 1) {
+        bustupSpriteStartTransition(work, 2, 0);
+        work->state = 2;
+    } else if (result == 2) {
+        if (snap == 0) {
+            bustupSpriteStartTransition(work, 7, 0);
+        } else {
+            bustupSpriteStartTransition(work, 6, 0);
+        }
+        work->state = 2;
+        work->previous = work->destination;
+        work->current = work->destination;
+    } else if (result == 3) {
+        bustupSpriteStartTransition(work, 5, 0);
+        BustupPlacementWork* active = (BustupPlacementWork*)jobGetWork(job);
+        active->startPosition = active->basePosition;
+        active->state = 1;
+        bustupPlaceActiveSlot(&work->position, work->slot);
     }
 }
 }

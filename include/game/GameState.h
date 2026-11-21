@@ -111,7 +111,7 @@ struct GameStateMapBlock {
     /* 0x3C */ u32 destinationFloor;
     /* 0x40 */ s32 destinationKind;
     /* 0x44 */ u16 unk44;
-    /* 0x46 */ u16 unk46;
+    /* 0x46 */ s16 contentId;      /* the content entry whose enemy motion mapEnemyStartScriptedMove starts */
     /* 0x48 */ s32 actionState;
     /* 0x4C */ s8 actionOption;
     /* 0x4D */ u8 unk4D[4];

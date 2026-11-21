@@ -40,7 +40,7 @@ extern int g_aocMain; /* 0x432fc8 */
 /* Supplied declaration required: jobStopAndClearFlags. */
 /* Supplied declaration required: aocLoadingTaskStart. */
 /* Supplied declaration required: FUN_00233e70. */
-/* Supplied declaration required: FUN_00233fcc. */
+/* Supplied declaration required: windowCreateStatusOperation. */
 /* Supplied declaration required: FUN_00234124. */
 extern int buttonHelpHasEnabledEntryForId(unsigned int);
 extern int strIsEmpty(unsigned int *);
@@ -162,7 +162,7 @@ void AocMenu::runConnectedProcess()
         asdFsIsSdCardDetected();
         if (temp_v0 != 0) {
           puVar2 = param_1 + 0x83;
-          FUN_00233fcc(puVar2,0);
+          windowCreateStatusOperation(puVar2,0);
           param_1[2] = 1;
           param_1[0x82] = (unsigned int)puVar2;
           aocLoadingTaskStart(param_1,0);

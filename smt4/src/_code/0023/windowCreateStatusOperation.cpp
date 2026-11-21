@@ -5,7 +5,7 @@
 extern "C" void *asdOperatorNew(u32);
 
 /* Construct the requested concrete status operation. */
-extern "C" Obj42217c *FUN_00233fcc(u32 unused, u32 kind)
+extern "C" Obj42217c *windowCreateStatusOperation(u32 unused, u32 kind)
 {
     /* Two concrete classes keep an opaque trailing word beyond their shared prefixes. */
     switch (kind) {

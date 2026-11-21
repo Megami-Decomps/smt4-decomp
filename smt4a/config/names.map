@@ -7908,3 +7908,15 @@
 003cb744 mapGimicRegisterYhvhCollision
 002d0394 btlViewUpdateNavigationPoint
 002df4a8 sceneQueryFalse
+001d3f18 __aeabi_llsr
+00283d74 playerInitNewGame
+002a1970 textFontGetGlyphSheet
+004acc1c bitReaderRead
+004a9d68 btlUiReserveActionSlot
+002ef048 mapRndMazeCreateEntranceMarker
+003f36a4 skillRollRandomMutatedSkill
+004e753c btlEnemyGroupColorTransitionStep
+004dffe4 btlActionRollRandomTargets
+003f22fc btlClearActiveCombatantActions
+004be49c statusUseHealItemOnSelectedUnit
+003f06b4 btlHasDuplicateEnemyDemonId

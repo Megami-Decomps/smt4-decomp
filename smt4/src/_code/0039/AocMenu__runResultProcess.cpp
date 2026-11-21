@@ -7,12 +7,17 @@
 
 struct AocMenuObject;
 
+/* A five-word result record: the first byte is its kind (0 = none, >= 100 = a command). */
+struct AocResult {
+    /* 0x00 */ u32 words[5];
+};
+
 /* The object a menu owns for its current screen: slot 1 destroys it, slot 3 reads its pending result. */
 struct AocMenuObjectVtable {
     /* 0x00 */ void *unk00;
     /* 0x04 */ void (*destroy)(AocMenuObject *object);
     /* 0x08 */ void *unk08;
-    /* 0x0C */ void (*readResult)(AocMenuObject *object, u32 *result);
+    /* 0x0C */ AocResult (*readResult)(AocMenuObject *object);
 };
 
 /* The screen object is embedded in the process; once the screen ends its place holds the result record. */
@@ -21,10 +26,6 @@ struct AocMenuObject {
     /* 0x04 */ u32 result[5];
 };
 
-/* A five-word result record: the first byte is its kind (0 = none, >= 100 = a command). */
-struct AocResult {
-    /* 0x00 */ u32 words[5];
-};
 
 /* A script-driven menu process of the AOC part. */
 struct AocMenuProcess {
@@ -61,15 +62,13 @@ void AocMenu::runResultProcess()
     AocMain *aoc = g_aocMain;
     switch (process->phase) {
     case 0: {
-        AocMenuObject *object = (AocMenuObject *)&process->unk20C;
-        FUN_00233fcc(object, 0);
+        AocMenuObject *object = (AocMenuObject *)windowCreateStatusOperation(&process->unk20C, 0);
         process->phase = 1;
         process->active = object;
         return;
     }
     case 1: {
-        AocResult raw;
-        process->active->vtable->readResult(process->active, raw.words);
+        AocResult raw = process->active->vtable->readResult(process->active);
         record = reinterpret_cast<const RequestParameters &>(raw);
         if (strIsEmpty(&record.word(0)) != 0) {
             process->phase = 2;
@@ -96,16 +95,14 @@ void AocMenu::runResultProcess()
         if (process->active != 0) {
             process->active->vtable->destroy(process->active);
         }
-        AocMenuObject *object = (AocMenuObject *)&process->unk20C;
-        FUN_00233fcc(object, 2);
+        AocMenuObject *object = (AocMenuObject *)windowCreateStatusOperation(&process->unk20C, 2);
         process->active = object;
         object->result[4] = aoc->records[flaggedValueHolderGetTotal(process->holder)].contentId;
         process->phase = 3;
         return;
     }
     case 3: {
-        AocResult raw;
-        process->active->vtable->readResult(process->active, raw.words);
+        AocResult raw = process->active->vtable->readResult(process->active);
         record = reinterpret_cast<const RequestParameters &>(raw);
         if (strIsEmpty(&record.word(0)) != 0) {
             AocMenuObject *object = process->active;

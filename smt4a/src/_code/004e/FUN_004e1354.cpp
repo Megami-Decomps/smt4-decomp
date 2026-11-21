@@ -48,7 +48,7 @@ extern u32 g_btlActionReflect; /* 0x5712f0 */
 
 s32 chainCountIdUnflagged(u32 chain, BtlCommand *command);
 s32 isEntryUsable(u32 event);
-s32 FUN_004e753c(BtlActorRef *ref, BtlCommand *command, s32 mode);
+s32 btlEnemyGroupColorTransitionStep(BtlActorRef *ref, BtlCommand *command, s32 mode);
 void btlCameraRunTimedCues(BtlActorRef *ref, BtlCommand *command, s32 mode);
 void btlStageResetAndClearCameraFlag(u32 block);
 void FUN_004fbeac(s32, BtlCommand *, s32, s32, s32);
@@ -75,7 +75,7 @@ u32 FUN_004e1354(BtlActorRef *ref, BtlCommand *command)
     }
     if (actor->uiState != 4) {
         btlCameraRunTimedCues(ref, command, 0);
-        handled = FUN_004e753c(ref, command, 0);
+        handled = btlEnemyGroupColorTransitionStep(ref, command, 0);
         if (command->frame == 0x20) {
             FUN_004fe764(0, command, ref->actor->unk1ED4, 9, 0xb);
         }
@@ -98,7 +98,7 @@ u32 FUN_004e1354(BtlActorRef *ref, BtlCommand *command)
     }
     if (isEntryUsable(g_btlEvent) == 0) {
         btlCameraRunTimedCues(ref, command, 1);
-        handled = FUN_004e753c(ref, command, 1);
+        handled = btlEnemyGroupColorTransitionStep(ref, command, 1);
         command->frame++;
         if (chainCountIdUnflagged(g_btlActionReflect, command) <= 0 && handled != 0) {
             command->phase = 0x1e;

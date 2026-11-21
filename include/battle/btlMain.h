@@ -134,7 +134,7 @@ typedef struct BtlMainState {
         } emergencyAction;
         struct {
             u8 unk1FC4[4];
-            /* 0x1FC8 */ s16 kind;
+            /* 0x1FC8 */ s16 kind;     /* the entry whose turn it is (battleInitializeTurnOrder sets it) */
             /* 0x1FCA */ s16 second;
         } resolution;
     };
@@ -186,7 +186,8 @@ typedef struct BtlMainState {
         } debugMenu;
         struct {
             u8 unk1FD8[0xF2E];
-            /* 0x2F06 */ s16 order[12];
+            /* 0x2F06 */ s16 order[12];    /* entry index of each turn, -1 = empty */
+            /* 0x2F1E */ s16 cursor;       /* the current turn, -1 = none */
         } turnOrder;
         struct {
             u8 prefix1FD8[0xF5C];

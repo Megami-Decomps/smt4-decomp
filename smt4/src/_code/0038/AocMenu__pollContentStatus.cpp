@@ -48,7 +48,7 @@ void AocMenu::pollContentStatus()
     switch (menu->step) {
     case 0:
         {
-            AocPollHandler *created = reinterpret_cast<AocPollHandler *>(FUN_00233fcc(menu->handlerStorage, 0));
+            AocPollHandler *created = reinterpret_cast<AocPollHandler *>(windowCreateStatusOperation(menu->handlerStorage, 0));
             menu->step = 1;
             menu->handler = created;
         }
@@ -58,7 +58,7 @@ void AocMenu::pollContentStatus()
             delete menu->handler;
         }
         {
-            AocPollHandler *created = reinterpret_cast<AocPollHandler *>(FUN_00233fcc(menu->handlerStorage, 5));
+            AocPollHandler *created = reinterpret_cast<AocPollHandler *>(windowCreateStatusOperation(menu->handlerStorage, 5));
             menu->step = 3;
             menu->handler = created;
         }

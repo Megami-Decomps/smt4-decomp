@@ -50,7 +50,7 @@ void placeWindowStartClose(void);
 void FUN_0028a420(s32 a, s32 b);
 void mapSceneResetState(s32 mode);
 void FUN_0026ff54(void);
-void FUN_0026fe0c(void);
+void mapRestoreSavedSelection(void);
 void FUN_0026faa4(void);
 s32 FUN_002b8694(void);
 u32 screenFadeIsBusy(void);
@@ -164,7 +164,7 @@ void mikadoCampVisitUpdate(MikadoCamera *camera)
             switch (gameDataBlocksGetSaveData()[2]) {
             case 0:
             case 1:
-                FUN_0026fe0c();
+                mapRestoreSavedSelection();
                 FUN_0026faa4();
                 if (g_mapSelection.selection.group >= 200) {
                     camera->exitRequest[2] = 1;

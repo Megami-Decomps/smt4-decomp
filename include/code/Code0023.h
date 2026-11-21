@@ -1,5 +1,7 @@
 #pragma once
 #include "common.h"
+/* windowCreateStatusOperation is declared per game: its callers in each game use different argument types. */
+#include "code/Code0023_WindowStatusOperation.h"
 
 /* Functions in the 0x00230000 code block whose subsystem is not known yet; each declaration matches its definition. */
 extern "C" {
@@ -7,8 +9,6 @@ extern "C" {
 void FUN_00230df0(u8 value);
 
 void FUN_00232848(void);
-
-void *FUN_00233fcc(void *unused, u32 kind);
 
 void *FUN_00239218(u32 index);
 

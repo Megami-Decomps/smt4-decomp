@@ -96,6 +96,9 @@ difference a register tie-break.
 - A caller that sign-extends a value it passes (`sxth`) usually means the field it came from is
   `s16`; change the field and the prototypes together.
 - A bitfield read as `ldrd …; lsl #15; orr …, lsr #17` belongs to a `u64`-based bitfield struct.
+- Test such a field as a plain condition, `if (pair.resultId)`: retail's single masked word test. `!= 0` reads the
+  whole 64-bit field (`ldrd`, then shifts; 92 and 44 lines off in smt4 `FUN_00257a50` and smt4a
+  `uniteBuildResultUnitRecord`, both IDENTICAL with the plain test, wave 67). No `(bool)` cast is needed.
 - A pre-indexed load with writeback followed by its neighbour (`ldr rA, [rB, #N]!; ldr rC, [rB, #4]`) is
   an 8-byte struct copied by value into a local (`ModelCommandList list = source->commandList;`, smt4a
   `FUN_00157c3c`); two field reads compile to two plain offsets.
@@ -379,6 +382,11 @@ asks for.
 - nn::math's header inlines are helpers with evidence: `MTX44PerspectivePivotDeg` (`MTX44Perspective` of the angle
   in radians, then `MTX44PivotC`) written as a `static __inline` at both call sites gave retail's projection code in
   `stereoCameraSetPerspective` (both games), and `MTX44Transpose` returns its destination.
+- A glyph lookup over a font's code maps (direct, table and binary-searched scan maps, `0xffff` falling back to the
+  font's alternate glyph) is nw::font's `ResFontBase::GetGlyphIndex` → `FindGlyphIndex(c)` → `FindGlyphIndex(map, c)`
+  chain inlined: write the three as `static __inline` helpers in the library's form (`text/TextFont.h`; the scan as
+  `if (md->code < c) … else if (c < md->code) … else { index = md->glyphIndex; break; }`). smt4 `FUN_00247fc0` and
+  smt4a `FUN_002a1970` are IDENTICAL with it (wave 67).
 - nn::math's `VEC4Transform` (`nw/math/VEC4.h`) is written as the SDK has it: the four row dot products into a
   temporary `VEC4`, then copied to `pOut`, which it returns (pOut may alias the input): smt4 `FUN_0026e768` and smt4a
   `FUN_0043b5b4` (wave 59).
@@ -422,7 +430,8 @@ asks for.
   it; a `u32` index gives retail's count-down loop; an `entry = &entries[i]` local can stop armcc
   unrolling a search.
 - armcc rerolls consecutive copies from an indexed source array into a loop: name the entries as
-  struct members.
+  struct members (smt4 `FUN_003852c8`'s sixteen step-function copies from its constant table, one member per
+  state, wave 67).
 - A byte copy that retail peels and unrolls by two (one copy before the loop, then pairs) is a `do { *dst++ = *src++; }
   while (--count > 0);` over an unsigned count; a `while`/`for` copy compiles to a plain loop (the nn::cx `UncompressRL`
   copies, `rleDecompress`: 101 and 133 -> 8 lines in the two games, wave 65).

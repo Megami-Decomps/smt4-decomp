@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_004ac83c(int);
-int FUN_004acc1c(...);
+int bitReaderRead(...);
 int _ZN6MoLive10RingBufferINS_12ObjectHandleEE6insertERKPKS1_S6_(...);
 int rt_memcpy(...);
 
@@ -36,7 +36,7 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_004ac83c. */
-/* Supplied declaration required: FUN_004acc1c. */
+/* Supplied declaration required: bitReaderRead. */
 extern int containerGrowCapacity(unsigned int, unsigned int);
 /* Supplied declaration required: _ZN6MoLive10RingBufferINS_12ObjectHandleEE6insertERKPKS1_S6_. */
 extern int moLiveRingBufferReallocate(int, unsigned int, unsigned int, unsigned int);
@@ -118,10 +118,10 @@ unsigned int FUN_004af3b4(long long *param_1,int param_2,unsigned int *param_3,u
   iStack_30 = param_2;
   puStack_2c = param_3;
   temp_v24 = param_4;
-  while (temp_v8 = FUN_004acc1c(&temp_v16,1), temp_v8 == 0) {
+  while (temp_v8 = bitReaderRead(&temp_v16,1), temp_v8 == 0) {
     temp_v5 = temp_v5 + 1;
   }
-  temp_v0 = FUN_004acc1c(&temp_v16,temp_v5);
+  temp_v0 = bitReaderRead(&temp_v16,temp_v5);
   temp_v20 = (int)param_1[0x286];
   temp_v5 = *(int *)((int)param_1[0x286] + 4);
   while (temp_v5 != 0) {
@@ -175,22 +175,22 @@ unsigned int FUN_004af3b4(long long *param_1,int param_2,unsigned int *param_3,u
       } while (temp_v5 != temp_v21);
       if (temp_v3 != 0) {
         temp_v5 = *(int *)(temp_v3 + 0x10);
-        aiStack_44[1] = FUN_004acc1c(&temp_v16,1);
+        aiStack_44[1] = bitReaderRead(&temp_v16,1);
         FUN_004ac83c(temp_v5);
         if (aiStack_44[1] != 0) {
           temp_v11[0] = (unsigned int *)&temp_v16;
           temp_v3 = 1;
-          while (temp_v8 = FUN_004acc1c(temp_v11[0],1), temp_v8 == 0) {
+          while (temp_v8 = bitReaderRead(temp_v11[0],1), temp_v8 == 0) {
             temp_v3 = temp_v3 + 1;
           }
-          temp_v12 = FUN_004acc1c(temp_v11[0],temp_v3);
-          temp_v15 = FUN_004acc1c(&temp_v16,1);
+          temp_v12 = bitReaderRead(temp_v11[0],temp_v3);
+          temp_v15 = bitReaderRead(&temp_v16,1);
           temp_v11[0] = (unsigned int *)&temp_v16;
           temp_v3 = 0x1c;
-          while (temp_v8 = FUN_004acc1c(temp_v11[0],1), temp_v8 == 0) {
+          while (temp_v8 = bitReaderRead(temp_v11[0],1), temp_v8 == 0) {
             temp_v3 = temp_v3 + 2;
           }
-          temp_v8 = FUN_004acc1c(temp_v11[0],temp_v3);
+          temp_v8 = bitReaderRead(temp_v11[0],temp_v3);
           if (temp_v15 != 0) {
             temp_v8 = romwright_piece_4_4(-((int)((unsigned long long)temp_v8 >> 0x20) + (unsigned int)((int)temp_v8 != 0)),
                               -(int)temp_v8);
@@ -198,7 +198,7 @@ unsigned int FUN_004af3b4(long long *param_1,int param_2,unsigned int *param_3,u
           *(char *)(*(int *)(temp_v5 + 0x48) + 0x10) = (char)temp_v12;
           **(long long **)(temp_v5 + 0x48) = temp_v8 + *param_1;
         }
-        temp_v3 = FUN_004acc1c(&temp_v16,0xd);
+        temp_v3 = bitReaderRead(&temp_v16,0xd);
         temp_v0 = temp_v19 - param_2;
         *param_3 = temp_v0;
         temp_v3 = temp_v3 + 1;

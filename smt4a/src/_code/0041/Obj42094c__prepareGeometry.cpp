@@ -1,4 +1,5 @@
-/* NON_MATCHING: particle state and floating-point operations are recovered; VFP register and paired-store scheduling still differ. */
+/* NON_MATCHING: retail fills the matrix from integer registers (no 1.0f in its pool), keeps the speed's
+ * product and sum apart (no vmla) and reloads the direction before scaling it. */
 #include "classes/Obj42094c.h"
 extern "C" {
 s32 randBetween(s32 minimum, s32 maximum);
@@ -26,21 +27,22 @@ void Obj42094c::prepareGeometry()
             motion->y *= speed;
             motion->z *= speed;
         }
-        motion->matrix[0] = 1;
-        motion->matrix[1] = 0;
-        motion->matrix[2] = 0;
-        motion->matrix[3] = motion->x;
-        motion->matrix[4] = 0;
-        motion->matrix[5] = 1;
-        motion->matrix[6] = 0;
-        motion->matrix[7] = motion->y;
-        motion->matrix[8] = 0;
-        motion->matrix[9] = 0;
-        motion->matrix[10] = 1;
-        motion->matrix[11] = motion->z;
-        motion->matrix[12] = 0;
-        motion->matrix[13] = 0;
-        motion->matrix[14] = 0;
-        motion->matrix[15] = 1;
+        f32 *m = motion->matrix;
+        m[0] = 1;
+        m[1] = 0;
+        m[2] = 0;
+        m[3] = motion->x;
+        m[4] = 0;
+        m[5] = 1;
+        m[6] = 0;
+        m[7] = motion->y;
+        m[8] = 0;
+        m[9] = 0;
+        m[10] = 1;
+        m[11] = motion->z;
+        m[12] = 0;
+        m[13] = 0;
+        m[14] = 0;
+        m[15] = 1;
     }
 }

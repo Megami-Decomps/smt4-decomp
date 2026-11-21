@@ -8,7 +8,7 @@
 extern "C" {
 
 int FUN_003f0254(...);
-int FUN_003f06b4(...);
+int btlHasDuplicateEnemyDemonId(...);
 int FUN_004c14c8(void);
 int battleRecordUnitMaskHistoryEvents(void);
 int FUN_004c5848(void);
@@ -244,7 +244,7 @@ extern int btlStateHasSelectionGateFlag(unsigned int);
 extern int FUN_003ec668(unsigned int, int, int);
 extern int FUN_003eca48(unsigned int, unsigned short);
 /* Supplied declaration required: FUN_003f0254. */
-/* Supplied declaration required: FUN_003f06b4. */
+/* Supplied declaration required: btlHasDuplicateEnemyDemonId. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_003f21ec. */
 /* Supplied declaration required: FUN_003f2aac. */
@@ -1850,7 +1850,7 @@ LAB_004e5308:
     temp_v5 = FUN_004d7a60(g_btlEvent,*(int *)(*param_1 + 0x1ed4) + param_8 * 0x1d0,1);
     if (temp_v5 != 0) {
       temp_v6 = *param_1;
-      FUN_003f06b4(temp_v6,*(int *)(temp_v6 + 0x1ed4) + param_8 * 0x1d0);
+      btlHasDuplicateEnemyDemonId(temp_v6,*(int *)(temp_v6 + 0x1ed4) + param_8 * 0x1d0);
       if (temp_v6 != 0) {
         temp_v6 = *param_1;
         FUN_003f0254(temp_v6,*(int *)(temp_v6 + 0x1ed4) + param_8 * 0x1d0);

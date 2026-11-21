@@ -21,7 +21,7 @@ int FUN_002f6728(void);
 int FUN_0030aacc(void);
 int FUN_0030ab34(...);
 int FUN_00317e34(void);
-int FUN_0033be90(...);
+int skillRollRandomMutatedSkill(...);
 int skillChooseRandomFlaggedSlot(void);
 
 int FUN_00216e64(...);
@@ -266,7 +266,7 @@ extern int statusDownGetCursorIndex(void);
 /* Supplied declaration required: FUN_0033b838. */
 extern unsigned int devilRollDropItem(int);
 extern unsigned int partyClassifyDemonLevelRequirement(int);
-/* Supplied declaration required: FUN_0033be90. */
+/* Supplied declaration required: skillRollRandomMutatedSkill. */
 /* Supplied declaration required: skillChooseRandomFlaggedSlot. */
 /* Supplied declaration required: unitApplyLevelGrowth. */
 extern int devilLevelUpsAffordable(unsigned short, unsigned char, int);
@@ -1634,7 +1634,7 @@ joined_r0x0018edf0:
         skillChooseRandomFlaggedSlot();
         *(int *)(temp_v2 + 0xd038) = temp_v8;
         temp_v18 = temp_v4 + 0x34;
-        FUN_0033be90(temp_v18,temp_v8,*(unsigned short *)(temp_v4 + 0x46));
+        skillRollRandomMutatedSkill(temp_v18,temp_v8,*(unsigned short *)(temp_v4 + 0x46));
         *(int *)(temp_v2 + 0xd03c) = temp_v18;
         if (temp_v18 == 0) {
           temp_v4 = 100;

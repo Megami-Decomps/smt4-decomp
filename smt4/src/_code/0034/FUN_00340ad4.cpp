@@ -1,4 +1,5 @@
-/* NON_MATCHING: dimension helper registers, descriptor constructor's redundant zero stores, and allocator argument scheduling differ. */
+/* NON_MATCHING: retail saves one more register (sl) for the size search, so its frame is a word smaller,
+ * and pairs the descriptor constructor's width/unk08 stores into strd. */
 #include "AsdSDK/Source/Gfx/Effect/EffectBounds.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
@@ -59,10 +60,6 @@ void FUN_00340ad4(EffectBoundsSource *source, u32 parameter, u32 flags, const Ef
     binding->resource = FUN_002d5a08(width, height, parameter, 0x1908, 0x8033, 0x81A5, flags);
     MemoryAllocator *allocator = reinterpret_cast<MemoryAllocator *>(asdMemoryGetAllocatorA());
     TextureCreateInfoIV info;
-    info.unk08 = 0;
-    info.unk0C = 0x02020000;
-    info.flag18 = 0;
-    info.flag19 = 1;
     info.data = binding->resource->data;
     info.hardwareFormat = (u8)binding->resource->texture->image.hardwareFormat;
     info.width = binding->resource->texture->dimensions.width;

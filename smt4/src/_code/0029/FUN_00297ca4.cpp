@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail lays the per-kind availability checks out as a goto web (kind 5 locked check first, kind 3 jumping into the shared FUN_0023dcb8 tail) and keeps menu+0x3000 in r5; the equivalent nested ifs compile to a different block order and register assignment. */
+/* NON_MATCHING: block order now matches retail; retail keeps menu+0x3000 in r5 and the command in r6 (the build
+ * swaps them) and branches to the kind-2 checks with bne/b where the build uses beq/b. */
 #include "battle/BattleCommandMenu.h"
 #include "code/Code0029_Smt4.h"
 #include "gamedata/UnitRecordAccess.h"
@@ -27,35 +28,21 @@ u32 FUN_00297ca4(BattleCommandMenu *menu, s32 confirm)
             unit = gameGetUnitRecord(gameGetSlotTable()[0x9107 + menu->cursor]);
         if (!battleCommandIsAvailable(command))
             continue;
-        if (command->kind != 5) {
-            if (command->kind == 2) {
-                if (FUN_00293988(btlGetMainState()) == 0)
-                    continue;
-                if ((btlGetMainState()->battleFlags & 0x40000) != 0)
-                    continue;
-            }
-            if (command->kind == 3) {
-                if (menu->cursor == 0) {
-                    if (FUN_0023dcb8() != 0)
-                        continue;
-                } else if (unit != 0) {
-                    if (idOwnerHasActiveObject(unit) == 0)
-                        continue;
-                }
-            } else if (command->kind != 6 && command->kind != 8) {
-                if (menu->cursor == 0) {
-                    if (FUN_0023dcb8() != 0)
-                        continue;
-                }
-            }
-        } else {
+        if (command->kind == 5) {
             if (state->slotCommandLocked != 0)
                 continue;
-            if (menu->cursor == 0) {
-                if (FUN_0023dcb8() != 0)
-                    continue;
-            }
+        } else if (command->kind == 2) {
+            if (FUN_00293988(btlGetMainState()) == 0)
+                continue;
+            if ((btlGetMainState()->battleFlags & 0x40000) != 0)
+                continue;
         }
+        if (command->kind == 3 && menu->cursor != 0) {
+            if (unit != 0 && idOwnerHasActiveObject(unit) == 0)
+                continue;
+        }
+        if (command->kind != 6 && command->kind != 8 && menu->cursor == 0 && FUN_0023dcb8() != 0)
+            continue;
         if (objectPartRunUnlessLocked(&menu->counters[menu->cursor]) == count)
             break;
         count++;

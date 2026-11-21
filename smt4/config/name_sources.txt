@@ -6016,3 +6016,18 @@
 0031eba0 portraitDrawClipped inferred draws a unit's portrait clipped to a window, through the add-on system when it owns the unit (sibling textureLoadOptionalDemonModel)
 002d28a4 lmapCameraSetMapPresets inferred resets the map camera presets and widens presets 2-4 on the wide-view maps
 0028250c libm_sinf evidence twin of smt4a libm_sinf (sinf, size 0x188); the shared TrigF32.h declaration was replaced in wave 66
+0015f870 __aeabi_llsr inferred armlib __aeabi_llsr (64-bit logical shift right, 0x28 bytes); exact twin of smt4a 0x1d3f18
+00404360 g_defaultPlayerTexts inferred size:0x18 the default player name (11 bytes) and the display-name format (13 bytes) playerInitNewGame copies (DefaultPlayerTexts)
+00404378 g_initialEquipment inferred size:0x10 the seven starting equipment ids and a 0xFFFF terminator playerInitNewGame copies as one block (InitialEquipment)
+0026fe0c mapRestoreSavedSelection inferred twin of smt4a mapRestoreSavedSelection (same source): restores the map selection by the saved resume mode
+00257a50 uniteBuildResultUnitRecord inferred twin of smt4a uniteBuildResultUnitRecord (same source)
+00247fc0 textFontGetGlyphSheet inferred the texture sheet of a character's glyph (nw::font GetGlyphIndex / cells per sheet); twin of smt4a FUN_002a1970
+0022be6c bitReaderRead inferred reads the next N (at most 64) bits of a bit reader, most significant first; twin of smt4a FUN_004acc1c
+001f9188 mapEnemyStartScriptedMove inferred starts the scripted move of the first active enemy waiting for one, from the current content entry
+002c52f4 sysRequestFatalBreak inferred counterpart of smt4a sysRequestFatalBreak (noreturn fatal-break request, its hook removed in IV)
+003852c8 questInteractionResetSteps inferred resets a quest interaction's step table (every state empty, then states 1-16) and starts it in state 1
+00394230 asyncRequestPoll inferred polls an async request: 0 while its event is unsignaled, then collects the result
+00233fcc windowCreateStatusOperation inferred twin of smt4a windowCreateStatusOperation (same size, AocMenu callers use the returned object)
+003ae418 btlUiReserveActionSlot inferred reserves a screen-space action slot and marks the owner complete when the UI is already closing; twin of smt4a FUN_004a9d68
+0033be90 skillRollRandomMutatedSkill inferred twin of smt4a FUN_003f36a4: a random learnable skill of a rank shifted -2..+2 from a source skill
+003cfc84 btlEnemyGroupColorTransitionStep inferred queues the enemy group's timed colour transition at frames 20/30 and reports when the mode's wait is over; twin of smt4a FUN_004e753c

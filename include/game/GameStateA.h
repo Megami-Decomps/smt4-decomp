@@ -159,11 +159,11 @@ struct GameStateA {
     /* 0x254 */ s32 tick;
     /* 0x258 */ s16 selection;
     /* 0x25A */ s16 previousSelection;
-    /* 0x25C */ u8 darkZone;
+    /* 0x25C */ s8 darkZone;
     /* 0x25D */ s8 unk25D;
     /* 0x25E */ u8 transitionCompleted;
     /* 0x25F */ s8 mapRegistrationPending;
-    /* 0x260 */ u8 mapLoadActive;        /* set from the departure's tenth frame until the map is loaded */
+    /* 0x260 */ s8 mapLoadActive;        /* set from the departure's tenth frame until the map is loaded */
     /* 0x261 */ u8 destinationSet;       /* also: the group update flag */
     /* 0x262 */ s8 dialogRequested;
     /* 0x263 */ u8 unk263;

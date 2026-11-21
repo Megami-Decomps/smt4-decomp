@@ -1,4 +1,4 @@
-/* NON_MATCHING: material and UV animations are now real sub-blocks (MaterialSlot/UvSlot, base pointers in r5 as in retail) and the material block is duplicated into both arms of the unk1B0 test as retail does; retail keeps the constants 1 and 0 in r6/r7 for the whole function (r4-r9 saved, 150 rows) and ends through a shared return block, the build has 128 rows and a conditional tail call. */
+/* NON_MATCHING: the material and UV blocks are written in both arms of the unk1B0 test as retail cross-jumps them; retail still keeps the constants 1 and 0 in r6/r7 for the whole function (r4-r9 saved), copies outMatrix into r5 before the inverse, and tail-calls FUN_001881c8 where the build uses blne. */
 #include "shard/W6_W6Match7_MaterialAnimationFlags.h"
 
 struct MatrixSlot {
@@ -106,7 +106,7 @@ static __inline void updateMaterialAnimation(ModelInstance *model, f32 dt)
 /* Advances the material and UV animations of a model and rebuilds its world and normal matrices. */
 void FUN_00156994(ModelInstance *model, void *outMatrix, f32 dt)
 {
-    u8 scratch[0x3C];
+    u8 scratch[0x30];
 
     if (model->flags & 2)
         return;
@@ -115,13 +115,18 @@ void FUN_00156994(ModelInstance *model, void *outMatrix, f32 dt)
     if (model->unk1B0 == 0) {
         FUN_0016a220(model, dt);
         updateMaterialAnimation(model, dt);
+        UvSlot *uv = &model->uv;
+        if (uv->anim != NULL) {
+            FUN_001782c8(uv->anim, model->uvStates, uv->bindings, uv->track.time);
+            trackAdvance(&uv->track, dt);
+        }
     } else {
         updateMaterialAnimation(model, dt);
-    }
-    UvSlot *uv = &model->uv;
-    if (uv->anim != NULL) {
-        FUN_001782c8(uv->anim, model->uvStates, uv->bindings, uv->track.time);
-        trackAdvance(&uv->track, dt);
+        UvSlot *uv = &model->uv;
+        if (uv->anim != NULL) {
+            FUN_001782c8(uv->anim, model->uvStates, uv->bindings, uv->track.time);
+            trackAdvance(&uv->track, dt);
+        }
     }
 
     AnimBinding *slot = *(AnimBinding **)((u8 *)model + model->currentSlot * 0x30 + 0x30);

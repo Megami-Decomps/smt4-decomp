@@ -8588,3 +8588,17 @@
 002d0394 btlViewUpdateNavigationPoint inferred activates the camera navigation point while the player is within 90 units and facing it within 80 degrees
 002df4a8 sceneQueryFalse inferred twin of smt4 sceneQueryFalse (0x20f3a0): the mov r0,#0; bx lr stub BTLMAIN D registers as its draw callback; armlink inlined its calls in renderSceneUpdate and asdModelRenderLightPass
 00536bec g_titleConfigDefaultParams inferred size:0x60 the title config window's two 0x30-byte paramsInit tables (FUN_0037a2e4 passes DAT+0 and DAT+0x30 from one pool word at +0x30); twin of smt4 g_titleConfigDefaultParams
+001d3f18 __aeabi_llsr inferred armlib __aeabi_llsr (64-bit logical shift right, 0x28 bytes); exact twin of smt4 0x15f870
+005311fc g_defaultPlayerTexts inferred size:0x1c the default player name (15 bytes) and the display-name format (13 bytes) FUN_00283d74 copies (DefaultPlayerTextsA)
+00531218 g_initialEquipment inferred size:0x10 the seven starting equipment ids and a 0xFFFF terminator FUN_00283d74 copies as one block (InitialEquipmentA)
+00283d74 playerInitNewGame inferred twin of smt4 playerInitNewGame (same source shape)
+002a1970 textFontGetGlyphSheet inferred twin of smt4 FUN_00247fc0 (same source)
+004acc1c bitReaderRead inferred twin of smt4 FUN_0022be6c (same source)
+004a9d68 btlUiReserveActionSlot inferred twin of smt4 FUN_003ae418
+002ef048 mapRndMazeCreateEntranceMarker inferred creates the maze entrance marker model (map/unit/u025.bam) at the entrance, facing its cardinal heading
+003f36a4 skillRollRandomMutatedSkill inferred a random learnable skill of a rank shifted -2..+2 (percentage table) from the source skill, skipping known skills
+004e753c btlEnemyGroupColorTransitionStep inferred queues the enemy group's timed colour transition at frames 20/30 and reports when the mode's wait is over
+004dffe4 btlActionRollRandomTargets inferred drops each flagged target whose record chance fails, then marks one random target or picks two or three by roll
+003f22fc btlClearActiveCombatantActions inferred clears the queued action of every active combatant of the category (0 ordinary, 1 special, other: all)
+004be49c statusUseHealItemOnSelectedUnit inferred spends the item on the selected unit's percentage heal, then moves the status cursor to the next unit that can take it
+003f06b4 btlHasDuplicateEnemyDemonId inferred 1 when another active enemy combatant shares the selector entry's demon id

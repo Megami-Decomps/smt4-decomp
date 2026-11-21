@@ -131,4 +131,10 @@ static __inline s16 btlUnitTurnSpeedA(const BtlUnitDataA *data)
     return data->agility + data->speedBonus;
 }
 
+/* Encoded kind stored in bits 10..15 of a unit's per-slot value table (FUN_0038b8b8, FUN_003bc83c). */
+static __inline s32 btlEntryGetEncodedCategoryA(const BtlCombatantEntryA *entry, s32 column)
+{
+    return entry->data.values[column] >> 10;
+}
+
 #endif

@@ -52662,12 +52662,12 @@
     },
     {
       "address": "0x1d3f18",
-      "function": "FUN_001d3f18",
+      "function": "__aeabi_llsr",
       "module": "_code",
-      "object": "build/obj/_code/001d/FUN_001d3f18.o",
+      "object": "build/obj/_code/001d/__aeabi_llsr.o",
       "size": 40,
-      "source": "src/_code/001d/FUN_001d3f18.cpp",
-      "target": "orig/target/_code/001d/FUN_001d3f18.o",
+      "source": "src/_code/001d/__aeabi_llsr.cpp",
+      "target": "orig/target/_code/001d/__aeabi_llsr.o",
       "thumb": false
     },
     {
@@ -62790,12 +62790,12 @@
     },
     {
       "address": "0x283d74",
-      "function": "FUN_00283d74",
+      "function": "playerInitNewGame",
       "module": "_code",
-      "object": "build/obj/_code/0028/FUN_00283d74.o",
+      "object": "build/obj/_code/0028/playerInitNewGame.o",
       "size": 736,
-      "source": "src/_code/0028/FUN_00283d74.cpp",
-      "target": "orig/target/_code/0028/FUN_00283d74.o",
+      "source": "src/_code/0028/playerInitNewGame.cpp",
+      "target": "orig/target/_code/0028/playerInitNewGame.o",
       "thumb": false
     },
     {
@@ -64835,12 +64835,12 @@
     },
     {
       "address": "0x2a1970",
-      "function": "FUN_002a1970",
+      "function": "textFontGetGlyphSheet",
       "module": "_code",
-      "object": "build/obj/_code/002a/FUN_002a1970.o",
+      "object": "build/obj/_code/002a/textFontGetGlyphSheet.o",
       "size": 260,
-      "source": "src/_code/002a/FUN_002a1970.cpp",
-      "target": "orig/target/_code/002a/FUN_002a1970.o",
+      "source": "src/_code/002a/textFontGetGlyphSheet.cpp",
+      "target": "orig/target/_code/002a/textFontGetGlyphSheet.o",
       "thumb": false
     },
     {
@@ -77870,12 +77870,12 @@
     {
       "address": "0x2ef048",
       "file": "map/mapRndMaze",
-      "function": "FUN_002ef048",
+      "function": "mapRndMazeCreateEntranceMarker",
       "module": "_code",
-      "object": "build/obj/_code/map/mapRndMaze/FUN_002ef048.o",
+      "object": "build/obj/_code/map/mapRndMaze/mapRndMazeCreateEntranceMarker.o",
       "size": 444,
-      "source": "src/_code/map/mapRndMaze/FUN_002ef048.cpp",
-      "target": "orig/target/_code/map/mapRndMaze/FUN_002ef048.o",
+      "source": "src/_code/map/mapRndMaze/mapRndMazeCreateEntranceMarker.cpp",
+      "target": "orig/target/_code/map/mapRndMaze/mapRndMazeCreateEntranceMarker.o",
       "thumb": false
     },
     {
@@ -130429,12 +130429,12 @@
     },
     {
       "address": "0x3f06b4",
-      "function": "FUN_003f06b4",
+      "function": "btlHasDuplicateEnemyDemonId",
       "module": "_code",
-      "object": "build/obj/_code/003f/FUN_003f06b4.o",
+      "object": "build/obj/_code/003f/btlHasDuplicateEnemyDemonId.o",
       "size": 216,
-      "source": "src/_code/003f/FUN_003f06b4.cpp",
-      "target": "orig/target/_code/003f/FUN_003f06b4.o",
+      "source": "src/_code/003f/btlHasDuplicateEnemyDemonId.cpp",
+      "target": "orig/target/_code/003f/btlHasDuplicateEnemyDemonId.o",
       "thumb": false
     },
     {
@@ -130781,12 +130781,12 @@
     },
     {
       "address": "0x3f22fc",
-      "function": "FUN_003f22fc",
+      "function": "btlClearActiveCombatantActions",
       "module": "_code",
-      "object": "build/obj/_code/003f/FUN_003f22fc.o",
+      "object": "build/obj/_code/003f/btlClearActiveCombatantActions.o",
       "size": 252,
-      "source": "src/_code/003f/FUN_003f22fc.cpp",
-      "target": "orig/target/_code/003f/FUN_003f22fc.o",
+      "source": "src/_code/003f/btlClearActiveCombatantActions.cpp",
+      "target": "orig/target/_code/003f/btlClearActiveCombatantActions.o",
       "thumb": false
     },
     {
@@ -131072,12 +131072,12 @@
     },
     {
       "address": "0x3f36a4",
-      "function": "FUN_003f36a4",
+      "function": "skillRollRandomMutatedSkill",
       "module": "_code",
-      "object": "build/obj/_code/003f/FUN_003f36a4.o",
+      "object": "build/obj/_code/003f/skillRollRandomMutatedSkill.o",
       "size": 612,
-      "source": "src/_code/003f/FUN_003f36a4.cpp",
-      "target": "orig/target/_code/003f/FUN_003f36a4.o",
+      "source": "src/_code/003f/skillRollRandomMutatedSkill.cpp",
+      "target": "orig/target/_code/003f/skillRollRandomMutatedSkill.o",
       "thumb": false
     },
     {
@@ -161231,12 +161231,12 @@
     },
     {
       "address": "0x4a9d68",
-      "function": "FUN_004a9d68",
+      "function": "btlUiReserveActionSlot",
       "module": "_code",
-      "object": "build/obj/_code/004a/FUN_004a9d68.o",
+      "object": "build/obj/_code/004a/btlUiReserveActionSlot.o",
       "size": 400,
-      "source": "src/_code/004a/FUN_004a9d68.cpp",
-      "target": "orig/target/_code/004a/FUN_004a9d68.o",
+      "source": "src/_code/004a/btlUiReserveActionSlot.cpp",
+      "target": "orig/target/_code/004a/btlUiReserveActionSlot.o",
       "thumb": false
     },
     {
@@ -161991,12 +161991,12 @@
     },
     {
       "address": "0x4acc1c",
-      "function": "FUN_004acc1c",
+      "function": "bitReaderRead",
       "module": "_code",
-      "object": "build/obj/_code/004a/FUN_004acc1c.o",
+      "object": "build/obj/_code/004a/bitReaderRead.o",
       "size": 408,
-      "source": "src/_code/004a/FUN_004acc1c.cpp",
-      "target": "orig/target/_code/004a/FUN_004acc1c.o",
+      "source": "src/_code/004a/bitReaderRead.cpp",
+      "target": "orig/target/_code/004a/bitReaderRead.o",
       "thumb": false
     },
     {
@@ -163761,12 +163761,12 @@
     },
     {
       "address": "0x4be49c",
-      "function": "FUN_004be49c",
+      "function": "statusUseHealItemOnSelectedUnit",
       "module": "_code",
-      "object": "build/obj/_code/004b/FUN_004be49c.o",
+      "object": "build/obj/_code/004b/statusUseHealItemOnSelectedUnit.o",
       "size": 364,
-      "source": "src/_code/004b/FUN_004be49c.cpp",
-      "target": "orig/target/_code/004b/FUN_004be49c.o",
+      "source": "src/_code/004b/statusUseHealItemOnSelectedUnit.cpp",
+      "target": "orig/target/_code/004b/statusUseHealItemOnSelectedUnit.o",
       "thumb": false
     },
     {
@@ -167587,12 +167587,12 @@
     },
     {
       "address": "0x4dffe4",
-      "function": "FUN_004dffe4",
+      "function": "btlActionRollRandomTargets",
       "module": "_code",
-      "object": "build/obj/_code/004d/FUN_004dffe4.o",
+      "object": "build/obj/_code/004d/btlActionRollRandomTargets.o",
       "size": 300,
-      "source": "src/_code/004d/FUN_004dffe4.cpp",
-      "target": "orig/target/_code/004d/FUN_004dffe4.o",
+      "source": "src/_code/004d/btlActionRollRandomTargets.cpp",
+      "target": "orig/target/_code/004d/btlActionRollRandomTargets.o",
       "thumb": false
     },
     {
@@ -167895,12 +167895,12 @@
     },
     {
       "address": "0x4e753c",
-      "function": "FUN_004e753c",
+      "function": "btlEnemyGroupColorTransitionStep",
       "module": "_code",
-      "object": "build/obj/_code/004e/FUN_004e753c.o",
+      "object": "build/obj/_code/004e/btlEnemyGroupColorTransitionStep.o",
       "size": 400,
-      "source": "src/_code/004e/FUN_004e753c.cpp",
-      "target": "orig/target/_code/004e/FUN_004e753c.o",
+      "source": "src/_code/004e/btlEnemyGroupColorTransitionStep.cpp",
+      "target": "orig/target/_code/004e/btlEnemyGroupColorTransitionStep.o",
       "thumb": false
     },
     {

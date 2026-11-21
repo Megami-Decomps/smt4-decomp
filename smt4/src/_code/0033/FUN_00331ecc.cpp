@@ -631,7 +631,7 @@ LAB_003323f0:
               if (cVar4 != '\x03') {
                 do {
                   piVar11 = &iStack_634;
-                  FUN_00257a50(&iStack_634,(int)*(char *)(iVar12 + 0xad),
+                  uniteBuildResultUnitRecord(&iStack_634,(int)*(char *)(iVar12 + 0xad),
                                (int)*(char *)(iVar12 + 0xac));
                   if (piVar11 != (int *)0x0) break;
                   cVar4 = *(char *)(iVar12 + 0xad) - '\x01';
@@ -662,7 +662,7 @@ joined_r0x00333130:
               if (cVar4 != '\x03') {
                 do {
                   piVar11 = &iStack_634;
-                  FUN_00257a50(&iStack_634,(int)*(char *)(iVar12 + 0xad),
+                  uniteBuildResultUnitRecord(&iStack_634,(int)*(char *)(iVar12 + 0xad),
                                (int)*(char *)(iVar12 + 0xac));
                   if (piVar11 != (int *)0x0) break;
                   cVar4 = *(char *)(iVar12 + 0xad) + '\x01';
@@ -713,7 +713,7 @@ joined_r0x00333130:
                 if (cVar5 != '\x03') {
                   do {
                     piVar11 = &iStack_634;
-                    FUN_00257a50(&iStack_634,(int)*(char *)(iVar12 + 0xad),
+                    uniteBuildResultUnitRecord(&iStack_634,(int)*(char *)(iVar12 + 0xad),
                                  (int)*(char *)(iVar12 + 0xac));
                     if (piVar11 != (int *)0x0) break;
                     cVar5 = *(char *)(iVar12 + 0xad) - '\x01';
@@ -747,7 +747,7 @@ joined_r0x00333130:
                 if (cVar5 != '\x03') {
                   do {
                     piVar11 = &iStack_634;
-                    FUN_00257a50(&iStack_634,(int)*(char *)(iVar12 + 0xad),
+                    uniteBuildResultUnitRecord(&iStack_634,(int)*(char *)(iVar12 + 0xad),
                                  (int)*(char *)(iVar12 + 0xac));
                     if (piVar11 != (int *)0x0) break;
                     cVar5 = *(char *)(iVar12 + 0xad) + '\x01';
@@ -799,7 +799,7 @@ LAB_003333b4:
         iVar7 = FUN_0029e0f8();
         if ((((iVar7 != 0) && (*(int *)(iVar12 + 0x18) == 6)) &&
             (iVar7 = FUN_0029dfa8(), iVar7 == 0)) &&
-           (FUN_00257a50(&iStack_638,(int)*(char *)(iVar12 + 0xad),(int)*(char *)(iVar12 + 0xac)),
+           (uniteBuildResultUnitRecord(&iStack_638,(int)*(char *)(iVar12 + 0xad),(int)*(char *)(iVar12 + 0xac)),
            piVar6 != (int *)0x0)) {
           if (*(char *)(iVar12 + 0xac) != '\0') {
             FUN_0029c4ac();

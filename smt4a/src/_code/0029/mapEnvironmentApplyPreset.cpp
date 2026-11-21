@@ -1,4 +1,4 @@
-/* NON_MATCHING: only block layout and scheduling differ - retail lays the immediate (frames == 0) branch out of line after the tail and keeps the entry's third halfword and the float scale constants in different registers; every store and call is the same. */
+/* NON_MATCHING: scheduling only - retail loads entry->unk06 for the record store before the fade branch, reuses one g_gameState base for the environment stores, and converts the fog arguments in another register order; every store and call is the same. */
 #include "map/MapEnvironment.h"
 #include "game/GameStateA.h"
 #include "event/bustupEvent/BustupTex.h"
@@ -71,13 +71,13 @@ void mapEnvironmentApplyPreset(u32 preset, s32 transition)
     g_gameState.unk620 = entry->unk04;
     g_gameState.unk624 = entry->unk06;
     s32 id = entry->id;
-    if (frames != 0) {
+    if (frames == 0) {
+        g_mapTable.fade = 1.0f;
+        g_mapTable.previous = id;
+    } else {
         g_mapTable.fade = 0.0f;
         g_mapTable.previous = g_mapTable.current;
         g_mapTable.fadeSpeed = (f32)frames;
-    } else {
-        g_mapTable.fade = 1.0f;
-        g_mapTable.previous = id;
     }
     g_mapTable.current = id;
     g_mapTable.records[id].unk000 = entry->unk06;

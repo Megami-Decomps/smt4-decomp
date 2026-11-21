@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0022b92c(...);
 int FUN_0022bc54(...);
 int moLiveByteVectorResizeFill(...);
-int FUN_0022be6c(...);
+int bitReaderRead(...);
 int poolNodeUnlink(...);
 int FUN_003fb694(...);
 
@@ -52,7 +52,7 @@ extern unsigned char LAB_003b27b8; /* 0x3b27b8 */
 /* Supplied declaration required: FUN_0022b92c. */
 /* Supplied declaration required: FUN_0022bc54. */
 /* Supplied declaration required: moLiveByteVectorResizeFill. */
-/* Supplied declaration required: FUN_0022be6c. */
+/* Supplied declaration required: bitReaderRead. */
 /* Supplied declaration required: poolNodeUnlink. */
 extern int moLiveNodeSourceAcquireHeader(int);
 /* Supplied declaration required: FUN_003fb694. */
@@ -145,10 +145,10 @@ unsigned int FUN_003b2318(long long *param_1,int param_2,unsigned int *param_3,u
   iStack_30 = param_2;
   puStack_2c = param_3;
   temp_v33 = param_4;
-  while (temp_v10 = FUN_0022be6c(&temp_v20,1), temp_v10 == 0) {
+  while (temp_v10 = bitReaderRead(&temp_v20,1), temp_v10 == 0) {
     temp_v6 = temp_v6 + 1;
   }
-  temp_v4 = FUN_0022be6c(&temp_v20,temp_v6);
+  temp_v4 = bitReaderRead(&temp_v20,temp_v6);
   temp_v18 = (int)param_1[0x285];
   temp_v6 = *(int *)((int)param_1[0x285] + 4);
   while (temp_v6 != 0) {
@@ -215,23 +215,23 @@ unsigned int FUN_003b2318(long long *param_1,int param_2,unsigned int *param_3,u
     } while (temp_v6 != temp_v19);
     if (temp_v5 != 0) {
       temp_v5 = *(int *)(temp_v5 + 0x10);
-      temp_v27 = FUN_0022be6c(&temp_v20,1);
+      temp_v27 = bitReaderRead(&temp_v20,1);
       temp_v6 = moLiveNodeSourceAcquireHeader(temp_v5);
       if (temp_v6 != 0) {
         if (temp_v27 != 0) {
           temp_v12 = (unsigned int *)&temp_v20;
           temp_v6 = 1;
-          while (temp_v10 = FUN_0022be6c(temp_v12,1), temp_v10 == 0) {
+          while (temp_v10 = bitReaderRead(temp_v12,1), temp_v10 == 0) {
             temp_v6 = temp_v6 + 1;
           }
-          temp_v13 = FUN_0022be6c(temp_v12,temp_v6);
-          temp_v15 = FUN_0022be6c(&temp_v20,1);
+          temp_v13 = bitReaderRead(temp_v12,temp_v6);
+          temp_v15 = bitReaderRead(&temp_v20,1);
           temp_v12 = (unsigned int *)&temp_v20;
           temp_v6 = 0x1c;
-          while (temp_v10 = FUN_0022be6c(temp_v12,1), temp_v10 == 0) {
+          while (temp_v10 = bitReaderRead(temp_v12,1), temp_v10 == 0) {
             temp_v6 = temp_v6 + 2;
           }
-          temp_v10 = FUN_0022be6c(temp_v12,temp_v6);
+          temp_v10 = bitReaderRead(temp_v12,temp_v6);
           if (temp_v15 != 0) {
             temp_v10 = romwright_piece_4_4(-((int)((unsigned long long)temp_v10 >> 0x20) + (unsigned int)((int)temp_v10 != 0)),
                               -(int)temp_v10);
@@ -239,7 +239,7 @@ unsigned int FUN_003b2318(long long *param_1,int param_2,unsigned int *param_3,u
           *(unsigned int *)(*(int *)(temp_v5 + 0x50) + 0x10) = temp_v13;
           **(long long **)(temp_v5 + 0x50) = temp_v10 + *param_1;
         }
-        temp_v6 = FUN_0022be6c(&temp_v20,0xd);
+        temp_v6 = bitReaderRead(&temp_v20,0xd);
         temp_v6 = temp_v6 + 1;
         *param_3 = temp_v23 - param_2;
         if (temp_v33 < (unsigned int)((temp_v23 - param_2) + temp_v6)) {

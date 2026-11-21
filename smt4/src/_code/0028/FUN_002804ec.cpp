@@ -96,7 +96,7 @@ unsigned int FUN_002804ec(float *param_1)
                             (float)in_d10 <= temp_v11[0])))) {
                           mapFlagSlotsRetireByKey((int)*(short *)(temp_v4 + 6));
                           mapCollisionDisableByTag((int)*(short *)(temp_v4 + 6));
-                          g_gameState.map.unk46 = *(unsigned short *)(temp_v4 + 10);
+                          g_gameState.map.contentId = *(unsigned short *)(temp_v4 + 10);
                           temp_v6 = temp_v6 | 0x2000;
                         }
                       }

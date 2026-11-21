@@ -7,6 +7,10 @@
  * the reporter itself only consumes the first two arguments. */
 extern "C" void sysReportCheckFailure(s32 result, u32 location, ...);
 
+/* Requests the fatal break (smt4 sysRequestFatalBreak runs a removed noreturn hook, smt4a
+ * sysRequestFatalBreak tail-calls sysFatalBreak): it does not return. */
+extern "C" __declspec(noreturn) void sysRequestFatalBreak(void);
+
 /* The pending fault record (smt4 DAT_004d4200, smt4a DAT_0062d200) the reporters fill before
  * running the fault handler on it. */
 struct FaultRecord {

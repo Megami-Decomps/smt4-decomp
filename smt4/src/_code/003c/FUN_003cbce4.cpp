@@ -39,7 +39,7 @@ s32 nodeListCountActiveById(u32 list, ReflectTarget *target);
 s32 isEntryUsable(void *event); // declcheck: local (the shared declaration in code/Code0027.h does not compile here: argument of type "void *" is incompatible with parameter of type "int *")
 void battleResetCounterAndFlag(void *owner);
 void btlReflectInitKind9(s32 layer, ReflectTarget *target, u32 context, u32 kind, u32 mode);
-void *FUN_003cfc84(ReflectActor *actor, ReflectTarget *target, s32 alternate);
+void *btlEnemyGroupColorTransitionStep(ReflectActor *actor, ReflectTarget *target, s32 alternate);
 void btlCameraRunTimedCues(ReflectActor *actor, ReflectTarget *target, s32 alternate);
 void FUN_00229a3c(s32 a, ReflectTarget *target, s32 b, s32 c, s32 d);
 void frameRangeExtend(ReflectActor *actor, ReflectTarget *target, s32 id, s32 a, s32 b, s32 c);
@@ -59,7 +59,7 @@ u32 FUN_003cbce4(ReflectActor *actor, ReflectTarget *target)
     }
     if (unit->state != 4) {
         btlCameraRunTimedCues(actor, target, 0);
-        void *ready = FUN_003cfc84(actor, target, 0);
+        void *ready = btlEnemyGroupColorTransitionStep(actor, target, 0);
         if (target->step == 0x20) {
             btlReflectInitKind9(0, target, actor->unit->reflectContext, 9, 11);
         }
@@ -82,7 +82,7 @@ u32 FUN_003cbce4(ReflectActor *actor, ReflectTarget *target)
     }
     if (isEntryUsable(g_btlEvent) == 0) {
         btlCameraRunTimedCues(actor, target, 1);
-        void *ready = FUN_003cfc84(actor, target, 1);
+        void *ready = btlEnemyGroupColorTransitionStep(actor, target, 1);
         target->step = target->step + 1;
         if (nodeListCountActiveById(g_btlActionReflect, target) <= 0 && ready != NULL) {
             target->delay = 0x1e;

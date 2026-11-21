@@ -1,4 +1,3 @@
-/* NON_MATCHING: only game-state base address reuse across formatting calls differs. */
 #include "runtime/Stdio.h"
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
@@ -18,6 +17,7 @@ s32 FUN_0040af60(ResourceOwner *);
 void FUN_0040afe0(ResourceOwner *, s32, s32);
 void FUN_0040ae70(ResourceOwner *, s32);
 
+/* Builds the scene's environment and model paths (the dark-zone, progress or map/area variant) and loads its model. */
 void FUN_002bceb0(MapSceneResourceView *scene)
 {
     char environmentPath[128];

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001eb584(char *, unsigned char *, int);
-int FUN_00247fc0(...);
+int textFontGetGlyphSheet(...);
 int recordTableGet(...);
 int asdMemFree(void);
 int asdMemAlloc(int, int, int, int, int);
@@ -34,7 +34,7 @@ extern unsigned char g_textControlCallbackArgumentCounts; /* 0x4def28 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001eb584. */
-/* Supplied declaration required: FUN_00247fc0. */
+/* Supplied declaration required: textFontGetGlyphSheet. */
 extern int charCodeIsPrivateUseGlyph(unsigned int);
 /* Supplied declaration required: recordTableGet. */
 extern int FUN_002b31b4(int *);
@@ -238,7 +238,7 @@ LAB_00286e50:
                 }
                 (**(romwright_code **)(*temp_v5 + 0x40))(temp_v5,puVar7 + 2,temp_v1);
                 temp_v2 = param_1[0x15];
-                FUN_00247fc0(temp_v2,temp_v1);
+                textFontGetGlyphSheet(temp_v2,temp_v1);
                 *(int *)(puVar7 + 0xe) = temp_v2;
               }
             }
@@ -250,13 +250,13 @@ LAB_00286e50:
               if ((DAT_00464d68 != 0) && (DAT_00464d68 == temp_v1)) {
                 (**(romwright_code **)(*piVar4 + 0x40))(piVar4,puVar7 + 2,0x8140);
                 temp_v2 = param_1[5];
-                FUN_00247fc0(temp_v2,0x8140);
+                textFontGetGlyphSheet(temp_v2,0x8140);
                 *(int *)(puVar7 + 0xe) = temp_v2;
               }
               else {
                 (**(romwright_code **)(*piVar4 + 0x40))(piVar4,puVar7 + 2,temp_v1);
                 temp_v2 = param_1[5];
-                FUN_00247fc0(temp_v2,temp_v1);
+                textFontGetGlyphSheet(temp_v2,temp_v1);
                 *(int *)(puVar7 + 0xe) = temp_v2;
               }
             }
@@ -268,7 +268,7 @@ LAB_00286e50:
             }
             (**(romwright_code **)(*temp_v6 + 0x40))(temp_v6,puVar7 + 2,temp_v1);
             temp_v2 = param_1[0x29];
-            FUN_00247fc0(temp_v2,temp_v1);
+            textFontGetGlyphSheet(temp_v2,temp_v1);
             *(int *)(puVar7 + 0xe) = temp_v2;
           }
         }

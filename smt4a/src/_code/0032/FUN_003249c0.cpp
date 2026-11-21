@@ -1,4 +1,4 @@
-/* NON_MATCHING: action loop unrolls correctly, but loads are hoisted into additional registers and two extra saves. */
+/* NON_MATCHING: retail loads the unavailable mask with ldm and singleAction with two ldr (the build swaps them), and its pair-unrolled loop needs two fewer saved registers. */
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 
@@ -6,15 +6,13 @@
 extern "C" s32 FUN_003249c0(const BtlCombatantEntryA *entry, s32 id)
 {
     s32 count = 0;
-    if ((g_btlCandidateMasks.unavailable & entry->flags) ||
-        (entry->flags & g_btlCandidateMasks.singleAction)) {
-        const BtlCombatantActionA *action = &entry->data.actionList.single;
-        if ((action->kind == 2 || action->kind == 3) && action->id == id)
-            count = 1;
+    if ((entry->flags & g_btlCandidateMasks.unavailable) != 0 ||
+        (entry->flags & g_btlCandidateMasks.singleAction) != 0) {
+        if ((entry->data.actionList.single.kind == 2 || entry->data.actionList.single.kind == 3) && entry->data.actionList.single.id == id)
+            return 1;
     } else {
-        const BtlCombatantActionA *action = entry->data.actionList.available;
-        for (s32 remaining = 10; remaining; --remaining, ++action) {
-            if ((action->kind == 2 || action->kind == 3) && action->id == id)
+        for (s32 i = 0; i < 10; ++i) {
+            if ((entry->data.actionList.available[i].kind == 2 || entry->data.actionList.available[i].kind == 3) && entry->data.actionList.available[i].id == id)
                 ++count;
         }
     }

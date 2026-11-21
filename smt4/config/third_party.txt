@@ -1143,7 +1143,7 @@
 0x0015f834 svcCloseHandle name
 0x0015f83c FUN_0015f83c callers
 0x0015f858 FUN_0015f858 between
-0x0015f870 FUN_0015f870 between
+0x0015f870 __aeabi_llsr name
 0x0015f898 rt_lmul name
 0x0015f8b0 FUN_0015f8b0 between
 0x0015fc98 FUN_0015fc98 between

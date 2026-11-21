@@ -51,7 +51,7 @@ int btlScriptUnitIsIncapacitated(...);
 int FUN_00338060(...);
 int FUN_003445f8(...);
 int btlUiInitializeDisplayChannel(...);
-int FUN_003ae418(...);
+int btlUiReserveActionSlot(...);
 int FUN_003bcdb0(...);
 int btlAddClampedVital(...);
 unsigned int btlDispatchTargetActionKind(int target, int kind, unsigned int argument);
@@ -167,7 +167,7 @@ extern unsigned int FUN_0039474c(void);
 /* Supplied declaration required: resourcePairApply. */
 /* Supplied declaration required: FUN_003adc64. */
 /* Supplied declaration required: btlUiInitializeDisplayChannel. */
-/* Supplied declaration required: FUN_003ae418. */
+/* Supplied declaration required: btlUiReserveActionSlot. */
 /* Supplied declaration required: FUN_003ae574. */
 /* Supplied declaration required: btlUiInitializeIndexedSlots. */
 /* Supplied declaration required: FUN_003bcdb0. */
@@ -788,7 +788,7 @@ LAB_00345938:
           btlQueueKeyedScalarReflectAction(0,*(unsigned int *)(psVar2 + 4),0x10001d3,0,1,0,0);
         }
         FUN_0023cd08(*param_1,(int)*(short *)(*(int *)(psVar2 + 10) + 0x62));
-        FUN_003ae418(g_btlUiBlock,puVar9);
+        btlUiReserveActionSlot(g_btlUiBlock,puVar9);
       }
     }
     break;

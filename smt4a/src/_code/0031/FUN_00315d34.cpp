@@ -1,4 +1,4 @@
-/* NON_MATCHING: overlay/text argument contracts and the 128-byte text buffer match retail; cached zero/global registers, overlay scheduling and the early loop epilogue still differ. */
+/* NON_MATCHING: overlay/text argument contracts and the 128-byte text buffer match retail; the zero and g_mapIf registers are swapped (r6/r7) and the slide-out cases' idle return gets its own epilogue copy where retail branches to the shared one. */
 #include "camp/RenderCtx.h"
 #include "gfx/ColoredQuad.h"
 #include "shard/TextureDrawCall.h"
@@ -98,10 +98,10 @@ s32 FUN_00315d34(u32 handle)
     }
 
     for (s32 i = 0; i < dataTable2ECount(); i++) {
-        s32 id = dataTable2EGetEntry(i)->id;
-        if (id == NOTICE_ENTRY_NONE)
+        MapNoticeEntry *entry = dataTable2EGetEntry(i);
+        if (entry->id == NOTICE_ENTRY_NONE)
             return 0;
-        if (screen->notice.id == id)
+        if (entry->id == screen->notice.id)
             break;
     }
 

@@ -118,7 +118,7 @@ unsigned int FUN_0032c8d4(void)
             *(unsigned short *)((int)puVar17 + iVar7 * 6 + 0xe2a) = 0xffff;
             puVar12 = auStack_640;
             *(unsigned short *)((int)puVar17 + iVar7 * 6 + 0xe2c) = 0xffff;
-            FUN_00257a50(puVar12,iVar7,0);
+            uniteBuildResultUnitRecord(puVar12,iVar7,0);
             if (puVar12 != (unsigned char *)0x0) {
               iVar19 = asdTMTexTableEntryAt(0x24,iVar7 + 0x87);
               uVar5 = ifTouchRegionAddRequested(0x24,iVar7 + 0x87);
@@ -499,7 +499,7 @@ code_r0x0032d518:
         *(unsigned char *)(puVar2 + 0x2b) = uVar4;
       }
       puVar12 = auStack_640;
-      FUN_00257a50(auStack_640,(int)*(char *)((int)puVar2 + 0xad),(int)*(char *)(puVar2 + 0x2b));
+      uniteBuildResultUnitRecord(auStack_640,(int)*(char *)((int)puVar2 + 0xad),(int)*(char *)(puVar2 + 0x2b));
       if (puVar12 != (unsigned char *)0x0) {
         if (*(char *)(puVar2 + 0x2b) != '\0') {
           FUN_0029c4c8(0);
@@ -576,7 +576,7 @@ code_r0x0032d518:
       puVar17[6] = 6;
       if (*(char *)((int)puVar2 + 0xad) != 3) {
         puVar12 = auStack_640;
-        FUN_00257a50(auStack_640,(int)*(char *)((int)puVar2 + 0xad),(int)*(char *)(puVar2 + 0x2b));
+        uniteBuildResultUnitRecord(auStack_640,(int)*(char *)((int)puVar2 + 0xad),(int)*(char *)(puVar2 + 0x2b));
         if (puVar12 != (unsigned char *)0x0) {
           FUN_0029da34(0,1,uStack_5fa,auStack_640);
         }
@@ -1198,7 +1198,7 @@ code_r0x0032d518:
     iVar7 = func_0x0021697c();
     if (iVar7 != 0) {
       puVar12 = auStack_640;
-      FUN_00257a50(auStack_640,(int)*(char *)((int)puVar2 + 0xad),(int)*(char *)(puVar2 + 0x2b));
+      uniteBuildResultUnitRecord(auStack_640,(int)*(char *)((int)puVar2 + 0xad),(int)*(char *)(puVar2 + 0x2b));
       if (puVar12 != (unsigned char *)0x0) {
         iVar7 = FUN_0026dae4();
         if (iVar7 != 0) {

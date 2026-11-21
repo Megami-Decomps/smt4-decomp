@@ -22,7 +22,7 @@ extern "C" {
 s32 isEmptyString(RequestParameters *event);
 s32 byteIsAtLeast100(RequestParameters *event);
 void jobFlagsWorkStop(u32 *job);
-void windowCreateStatusOperation(void *operation, s32 mode);
+void *windowCreateStatusOperation(void *operation, s32 mode); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void aocLoadingTaskStart(u32 *job, s32 mode);
 void aocMenuSetButtonHelp(u32 *job, s32 a, s32 b);
 void FUN_0047bc90(u32 *job, RequestParameters *event);
@@ -53,9 +53,9 @@ void AocMenu::runWindowOperation()
             releaseEntriesB(job + 0xba);
             releaseEntriesA(job + 0xad);
             aocLoadingTaskStart(job, 0);
-            windowCreateStatusOperation(job + 0x83, 0);
+            void *created = windowCreateStatusOperation(job + 0x83, 0);
             job[2] = 2;
-            job[0x82] = reinterpret_cast<u32>(job + 0x83);
+            job[0x82] = reinterpret_cast<u32>(created);
         }
         return;
     case 2:
@@ -89,15 +89,16 @@ void AocMenu::runWindowOperation()
             }
         }
         return;
-    case 3:
+    case 3: {
         if (operation != NULL) {
             operation->release();
         }
-        windowCreateStatusOperation(job + 0x83, 1);
+        void *created = windowCreateStatusOperation(job + 0x83, 1);
         job[2] = 4;
-        job[0x82] = reinterpret_cast<u32>(job + 0x83);
+        job[0x82] = reinterpret_cast<u32>(created);
         aocLoadingTaskStart(job, 1);
         return;
+    }
     case 4: {
         RequestParameters polled = operation->getEvent();
         event = polled;

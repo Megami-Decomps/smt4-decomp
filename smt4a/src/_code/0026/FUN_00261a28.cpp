@@ -13,7 +13,7 @@ int gameFlagIsSet(...);
 int FUN_001f50fc(...);
 int gameDataSetTableFlag(...);
 int gameDataCopySaveToWork(void);
-int FUN_00283d74(int);
+int playerInitNewGame(int);
 int gameValueBlockSet(...);
 int FUN_002c7ad8(void);
 int gameDataAddCappedPoints(...);
@@ -85,7 +85,7 @@ extern unsigned int flagValueRead(unsigned int);
 extern int gameDataBlocksGetTableFlag(void);
 /* Supplied declaration required: gameDataSetTableFlag. */
 /* Supplied declaration required: gameDataCopySaveToWork. */
-/* Supplied declaration required: FUN_00283d74. */
+/* Supplied declaration required: playerInitNewGame. */
 /* Supplied declaration required: gameValueBlockSet. */
 extern int gameDataBlocksValueGet(void);
 /* Supplied declaration required: FUN_002c7ad8. */
@@ -292,7 +292,7 @@ void FUN_00261a28(const u8 *options)
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 0x17);
   gameDataCopySaveToWork();
-  FUN_00283d74(0);
+  playerInitNewGame(0);
   FUN_00363c58(0);
   temp_v0 = gameDataBlocksGetSaveData();
   temp_v1 = gameDataBlocksValueGet();

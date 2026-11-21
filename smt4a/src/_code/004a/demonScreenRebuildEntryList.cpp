@@ -1,12 +1,14 @@
-/* NON_MATCHING: retail hoists the header and list address computations above releaseEntriesA; built differs in frame size (28 vs 52 bytes); the party branch is now written first like retail's layout. */
+/* NON_MATCHING: 75 lines; fixed releaseEntriesA/slotPoolResetTrackedState pointers and 32-byte CampUnitComparison frame, remaining: showUnowned LICM spill, mode==1 r7/r8 swap, and panel->flags pre-indexed ldrh. */
 #include "common.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "event/2dEvent/2dEventTex.h"
+#include "camp/UnitComparison.h"
+#include "camp/CampStateQueries_UnitComparison.h"
+#include "code/Code004d_Smt4a.h"
 
 extern "C" {
 
-/* The list panel object the screen drives through its virtual table. */
 class ListPanel {
 public:
     virtual void v0();
@@ -15,28 +17,29 @@ public:
     /* 0x04 */ u16 flags;
 };
 
-/* A compendium entry record (only the fields read here). */
-/* A party slot record (0x12C bytes; only the fields read here). */
+typedef struct DemonSlotData {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ u16 entryId;
+} DemonSlotData;
+
 typedef struct PartySlot {
-    u8 unk00[0x68];
-    u8 unk68[0x62];
-    u16 entryId;                     /* 0xCA */
-    u8 unkCC[0x60];
+    /* 0x00 */ u8 unk00[0x68];
+    /* 0x68 */ DemonSlotData demon;
+    /* 0xCC */ u8 unkCC[0x60];
 } PartySlot;
 
 typedef struct SlotTable {
-    u8 unk0000[0x1C88];
-    s8 party[0x1B];                  /* 0x1C88 */
-    u8 partyCount;                   /* 0x1CA3 */
-    u8 unk1CA4[0x24];
+    /* 0x0000 */ u8 unk0000[0x1C88];
+    /* 0x1C88 */ s8 party[0x1B];
+    /* 0x1CA3 */ u8 partyCount;
+    /* 0x1CA4 */ u8 unk1CA4[0x24];
 } SlotTable;
 
 typedef struct EntryList {
-    s16 count;
-    u8 unk02[0x62];
+    /* 0x00 */ s16 count;
+    /* 0x02 */ u8 unk02[0x62];
 } EntryList;
 
-/* The screen block (only the fields used here, by their offsets). */
 typedef struct EntryScreen {
     /* 0x0000 */ u8 unk0000[0x20];
     /* 0x0020 */ u8 layout[8];
@@ -62,15 +65,13 @@ typedef struct EntryScreen {
 } EntryScreen;
 
 void releaseEntriesB(void *panel);
-void releaseEntriesA(void);
-void slotPoolResetTrackedState(void);
+void slotPoolResetTrackedState(EntryList *list);
 SlotTable *gameGetSlotTable(void);
 NkmBaseRecordA *dataTable0ProbeEntryById(u16 index);
-s32 FUN_0032fbd0(void *slot);
+s32 FUN_0032fbd0(DemonSlotData *slot);
 s32 compendiumEntryIsRegistered(u16 id);
-void campFillUnitComparison(u8 *out, u16 id, s32 flag);
 u32 FUN_004a8750(u16 id, u8 category, s32 flag, s32 full, s32 extra);
-void inventoryListAppend(EntryList *list, u8 *entry);
+void inventoryListAppend(EntryList *list, const CampUnitComparison *entry);
 void entryCollectionSortByMode(EntryList *list, s32 mode);
 void listScrollerInitialize(void *layout, s32 columns, s32 count, s32 a, s32 b, s32 c);
 u8 gaugePercent(EntryList *list);
@@ -79,30 +80,28 @@ void messageIdListSetRange(void *header, s32 a, s32 b, s32 count);
 s32 gameFlagIsSet(u32 flag);
 void jyoucyuGetTableEntry(s32 arg);
 
-/* Rebuilds the entry list for the screen: scans every record (or the party for mode 1), appends
- * the listed ones with their display data, then updates the column layout, the completion
- * percentage and the header count. */
+/* Rebuilds the demon compendium or party entry list, recalculates completion percentage, and refreshes the panel. */
 void demonScreenRebuildEntryList(EntryScreen *screen)
 {
     releaseEntriesB(screen->panel);
-    releaseEntriesA();
+    releaseEntriesA((CountAt30 *)screen->header);
+    slotPoolResetTrackedState(&screen->list);
     if (screen->mode == 1) {
-        slotPoolResetTrackedState();
         SlotTable *table = gameGetSlotTable();
 
-        for (u32 i = 0; i < table->partyCount; i = (u16)(i + 1)) {
+        for (u16 i = 0; i < table->partyCount; i++) {
             s32 member = table->party[i];
 
             if (member >= 0) {
-                PartySlot *slot = (PartySlot *)((u8 *)table + member * 300);
+                DemonSlotData *slot = &((PartySlot *)((u8 *)table + member * 300))->demon;
 
-                if (FUN_0032fbd0((u8 *)slot + 0x68) == 0) {
+                if (FUN_0032fbd0(slot) == 0) {
                     NkmBaseRecordA *record = nkmBaseGetRecord(slot->entryId);
-                    u8 entry[8];
+                    CampUnitComparison entry;
 
-                    campFillUnitComparison(entry, record->id, 1);
-                    FUN_004a8750(record->id, screen->category, 0, screen->percent >= 100, 0);
-                    inventoryListAppend(&screen->list, entry);
+                    campFillUnitComparison(&entry, record->id, 1);
+                    *(u32 *)((u8 *)&entry + 8) = FUN_004a8750(record->id, screen->category, 0, screen->percent >= 100, 0);
+                    inventoryListAppend(&screen->list, &entry);
                 }
             }
         }
@@ -110,8 +109,8 @@ void demonScreenRebuildEntryList(EntryScreen *screen)
         listScrollerInitialize(screen->layout, 10, screen->list.count, 0, 1, 1);
         asdDebugHookPtrInt(screen->layout, 1);
         screen->dirty = 1;
-        s32 total = 0;
         s32 owned = 0;
+        s32 total = 0;
 
         for (s32 index = 0; index < 0x4FF; index++) {
             NkmBaseRecordA *record = dataTable0ProbeEntryById((u16)(index + 1));
@@ -126,33 +125,29 @@ void demonScreenRebuildEntryList(EntryScreen *screen)
         screen->percent = calcPercentClamped(owned, total);
         jyoucyuGetTableEntry(0);
     } else {
-        slotPoolResetTrackedState();
-        s16 listed = 0;
-        s32 index = 0;
+        s32 listed = 0;
 
-        do {
+        for (s32 index = 0; index < 0x4FF; index++) {
             NkmBaseRecordA *record = nkmBaseGetRecord((u16)(index + 1));
 
             if (record != NULL && (record->flags & 1) != 0) {
                 if (index == 9 && gameFlagIsSet(0x441) == 0) {
-                    index = 10;
                     continue;
                 }
                 listed++;
                 if (compendiumEntryIsRegistered(record->id) != 0 || screen->showUnowned != 0) {
-                    u8 entry[8];
+                    CampUnitComparison entry;
 
-                    campFillUnitComparison(entry, record->id, 0);
-                    FUN_004a8750(record->id, screen->category, 0, screen->percent >= 100, 0);
-                    inventoryListAppend(&screen->list, entry);
+                    campFillUnitComparison(&entry, record->id, 0);
+                    *(u32 *)((u8 *)&entry + 8) = FUN_004a8750(record->id, screen->category, 0, screen->percent >= 100, 0);
+                    inventoryListAppend(&screen->list, &entry);
                 }
             }
-            index++;
-        } while (index < 0x4FF);
+        }
         screen->listedCount = listed;
         if (screen->list.count != 0) {
             u8 *flagsByte = saveGetUserSettingsBlock() + 0xF;
-            s32 mode;
+            s8 mode;
 
             switch (*flagsByte & 0x7F) {
             case 1:
@@ -169,7 +164,8 @@ void demonScreenRebuildEntryList(EntryScreen *screen)
                 break;
             default:
                 mode = 6;
-                *flagsByte = (*flagsByte & 0x80) | 1;
+                *flagsByte = (*flagsByte & ~0x7F) | 1;
+                break;
             }
             if ((*flagsByte & 0x80) != 0) {
                 mode++;
@@ -184,9 +180,9 @@ void demonScreenRebuildEntryList(EntryScreen *screen)
     }
     screen->panel->rebuild(screen->layout);
     screen->panel->flags |= 0x1000;
-    messageIdListSetRange(screen->header, 20, 0x40E, screen->selected > 10 ? 10 : screen->selected);
+    messageIdListSetRange(screen->header, 20, 0x40E, screen->selected >= 10 ? 10 : screen->selected);
     screen->headerShown = 1;
     jyoucyuGetTableEntry(0);
 }
 
-}
+} /* extern "C" */

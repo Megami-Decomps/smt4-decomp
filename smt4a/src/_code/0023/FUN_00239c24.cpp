@@ -19,7 +19,7 @@ int FUN_002c670c(int);
 int lmapUpdateEngineRecordNavigation(void);
 int FUN_002de4d4(int, int, int);
 int FUN_002edf08(void);
-int FUN_002ef048(void);
+int mapRndMazeCreateEntranceMarker(void);
 int naviMainSetFlagsAndActivate(int, int, int, int, int, int);
 int FUN_003273ac(int);
 int FUN_003276f0(...);
@@ -52,7 +52,7 @@ extern int gameDataIsFlagByteSet(int);
 /* Supplied declaration required: lmapUpdateEngineRecordNavigation. */
 /* Supplied declaration required: FUN_002de4d4. */
 /* Supplied declaration required: FUN_002edf08. */
-/* Supplied declaration required: FUN_002ef048. */
+/* Supplied declaration required: mapRndMazeCreateEntranceMarker. */
 extern int flagCategoryIsAvailable(int);
 /* Supplied declaration required: naviMainSetFlagsAndActivate. */
 /* Supplied declaration required: FUN_003273ac. */
@@ -212,7 +212,7 @@ void FUN_00239c24(void)
     temp_v3 = FUN_003683b8((int)*(float *)(temp_v3 + 0x15c4));
     if (temp_v3 != 1) {
       if (temp_v3 == 2) {
-        FUN_002ef048();
+        mapRndMazeCreateEntranceMarker();
       }
     }
     else {

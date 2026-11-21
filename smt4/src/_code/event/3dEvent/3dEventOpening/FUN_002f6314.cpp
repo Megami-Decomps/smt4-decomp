@@ -1,4 +1,5 @@
-/* NON_MATCHING: camera parameter vector-store grouping and saved address registers differ; retail also retains an unused result comparison. */
+/* NON_MATCHING: retail keeps the eye/target/up pointers in sl/r6/r9 (the build r6/r8/r7) and stores state and
+ * frame with one stm of a fresh 1 and the zero register. */
 #include "gfx/CameraManager.h"
 #include "gfx/CameraParameters.h"
 #include "gfx/MoveCameraCtrl.h"
@@ -50,29 +51,37 @@ u32 FUN_002f6314(void)
         g_event3dOpening = work;
         memClear(work, sizeof(*work));
         cameraMatrixCacheReset(&work->camera, 1);
-        work->parameters.eye.x = 0.0f;
-        work->parameters.eye.y = 0.0f;
-        work->parameters.eye.z = 0.0f;
-        work->parameters.target.x = 0.0f;
-        work->parameters.target.y = 0.0f;
-        work->parameters.target.z = 5.0f;
+        Vec3f *eye = &work->parameters.eye;
+        Vec3f *target = &work->parameters.target;
+        Vec3f *up = &work->parameters.up;
+        eye->x = 0.0f;
+        eye->y = 0.0f;
+        eye->z = 0.0f;
+        target->x = 0.0f;
+        target->y = 0.0f;
+        target->z = 5.0f;
         work->parameters.fieldOfView = 30.0f;
         work->parameters.nearClip = 1.0f;
         work->parameters.farClip = 10000.0f;
-        work->parameters.up.x = 0.0f;
-        work->parameters.up.y = 1.0f;
-        work->parameters.up.z = 0.0f;
+        up->x = 0.0f;
+        up->y = 1.0f;
+        up->z = 0.0f;
         work->parameters.aspect = 1.6666666f;
         work->distance = 5.0f;
         FUN_002c159c(&work->camera, 5.0f, 1.0f);
-        cameraMatrixCacheSetLookAt(&work->camera, &work->parameters.eye, &work->parameters.target, &work->parameters.up);
+        cameraMatrixCacheSetLookAt(&work->camera, eye, target, up);
         stereoCameraSetPerspective(&work->camera, 1, work->parameters.fieldOfView, work->parameters.nearClip,
             work->parameters.farClip, work->parameters.aspect);
         FUN_00298d50(reinterpret_cast<u32>(&work->camera));
         work->process = asdProcessCreateSimple((const s8 *)"3dEventOpening Calc", 2, 0, 0, FUN_00205184, event3dOpeningDestroy, reinterpret_cast<u32>(work));
-        eventIsSkipping();
-        work->state = 1;
-        work->frame = 0;
+        /* Retail keeps the skip test although both outcomes start the same way. */
+        if (eventIsSkipping()) {
+            work->state = 1;
+            work->frame = 0;
+        } else {
+            work->state = 1;
+            work->frame = 0;
+        }
         FUN_002a09b4(DAT_004036f8, 0);
         work->selectedCamera = 0;
         work->loopCamera = static_cast<MoveCameraResource *>(asdCameraLoadFromFile(DAT_004036e0));
