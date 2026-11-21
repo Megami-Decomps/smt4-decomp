@@ -1,4 +1,5 @@
-/* NON_MATCHING: retry-loop branch layout and final mask/result register allocation differ. */
+/* NON_MATCHING: register allocation of the tail only: retail keeps the chosen index in r2 and builds the bit in r0
+ * (moveq r0, r2), where this build loads the index straight into r0. */
 #include "common.h"
 #include <stddef.h>
 #include "util/Random.h"
@@ -20,37 +21,19 @@ u32 FUN_003819b8(RandomChoiceStateView *state)
         state->usedMask = 0;
     s32 skip = randNextInRange(3);
     u8 used = state->usedMask;
-    for (;;) {
-        if (!(used & 1)) {
-            if (skip != 0)
-                --skip;
-            else if (state->previousChoice != 0) {
-                state->previousChoice = 0;
-                break;
-            }
-        }
-        if (!(used & 2)) {
-            if (skip != 0)
-                --skip;
-            else if (state->previousChoice != 1) {
-                state->previousChoice = 1;
-                break;
-            }
-        }
-        if (!(used & 4)) {
-            if (skip != 0)
-                --skip;
-            else if (state->previousChoice != 2) {
-                state->previousChoice = 2;
-                break;
-            }
-        }
-        if (!(used & 8)) {
-            if (skip != 0)
-                --skip;
-            else if (state->previousChoice != 3) {
-                state->previousChoice = 3;
-                break;
+    bool searching = true;
+    while (searching) {
+        for (s32 i = 0; i < 4; i++) {
+            if (!(used & (1 << i))) {
+                if (skip == 0) {
+                    if (state->previousChoice != i) {
+                        state->previousChoice = i;
+                        searching = false;
+                        break;
+                    }
+                } else {
+                    --skip;
+                }
             }
         }
     }

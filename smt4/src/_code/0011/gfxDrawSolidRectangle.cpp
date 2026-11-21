@@ -1,11 +1,9 @@
 #include "shard/W6_W6Match3_EffectColor.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxTitle.h"
+#include "gfx/ColoredQuad.h"
 
 extern "C" {
-void gfxDrawQuadFourColors(const EffectColor *topLeft, const EffectColor *topRight,
-                  const EffectColor *bottomLeft, const EffectColor *bottomRight,
-                  f32 x, f32 y, f32 width, f32 height, f32 depth);
 
 // Draw a solid-color rectangle, converting packed ARGB into normalized channels.
 void gfxDrawSolidRectangle(s32 left, s32 top, s32 right, s32 bottom, u32 color)
@@ -26,7 +24,6 @@ void gfxDrawSolidRectangle(s32 left, s32 top, s32 right, s32 bottom, u32 color)
         }
         color >>= 8;
     }
-    gfxDrawQuadFourColors(&channels, &channels, &channels, &channels,
-                  (f32)left, (f32)top, (f32)(right - left), (f32)(bottom - top), 0.0f);
+    gfxDrawQuadFourColors((f32)left, (f32)top, (f32)(right - left), (f32)(bottom - top), &channels, &channels, &channels, &channels, 0.0f);
 }
 }

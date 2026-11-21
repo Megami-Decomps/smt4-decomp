@@ -1,39 +1,44 @@
-/* NON_MATCHING: -O2 candidate; clipping branches fold, coordinate packing merges, and zero/origin register roles differ. */
+/* NON_MATCHING: 28 lines: retail does not thread the empty-span case (start + extent < 0) past the final limit test (it branches back to that test, and for y shares the y = 0 store with the start < 0 case), and hoists the zero for the state-change flag later. */
 #include "camp/RenderCtxA.h"
+#include "gfx/ScissorCoordinates.h"
 
 
-namespace {
-inline void clipScissorAxis(s32& start, s32& extent, s32 maximum)
+static __inline void clipScissorAxis(s32 &position, s32 &extent, s32 limit)
 {
-    if (start + extent < 0) {
-        start = extent = 0;
-    } else if (start < 0) {
-        extent += start;
-        start = 0;
-    } else if (start > maximum) {
-        start = extent = 0;
+    if (position + extent < 0) {
+        position = 0;
+        extent = 0;
+    } else if (position < 0) {
+        extent += position;
+        position = 0;
+    } else if (position > limit) {
+        extent = position = 0;
         return;
     }
-    if (start + extent > maximum) {
-        extent = static_cast<s32>(static_cast<f32>(maximum) - static_cast<f32>(start));
+    if (position + extent > limit) {
+        extent = (s32)((f32)limit - (f32)position);
     }
 }
-}
 
-extern "C" void renderSetClippedScissor(s32 x, s32 y, s32 width, s32 height)
+extern "C" {
+
+/* Clips the rectangle to the 320x240 bottom screen and sets it as the scissor (origin measured from the far corner). */
+void renderSetClippedScissor(s32 x, s32 y, s32 width, s32 height)
 {
     clipScissorAxis(x, width, 320);
     clipScissorAxis(y, height, 240);
-
-    const f32 right = static_cast<f32>(x + width);
-    const f32 bottom = static_cast<f32>(y + height);
-    const s32 originX = static_cast<s32>(320.0f - right);
-    const s32 originY = static_cast<s32>(240.0f - bottom);
+    s32 right = (s32)(320.0f - (f32)(x + width));
+    s32 bottom = (s32)(240.0f - (f32)(y + height));
     renderStackSet(&g_renderCtx->scissor, 3);
-    renderStackSet(&g_renderCtx->scissorMinimum,
-                   static_cast<s32>(static_cast<u32>(originX) |
-                                    (static_cast<u32>(originY) << 16)));
-    renderStackSet(&g_renderCtx->scissorMaximum,
-                   static_cast<s32>(static_cast<u32>(width) |
-                                    (static_cast<u32>(height) << 16)));
+    {
+        RenderCtxA *scene = g_renderCtx;
+        u32 packed = packScissorCoordinates(right, bottom);
+        renderStackSet(&scene->scissorMinimum, (s32)packed);
+    }
+    {
+        RenderCtxA *scene = g_renderCtx;
+        u32 packed = packScissorCoordinates(width, height);
+        renderStackSet(&scene->scissorMaximum, (s32)packed);
+    }
+}
 }

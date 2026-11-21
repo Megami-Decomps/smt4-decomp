@@ -7,7 +7,6 @@ extern "C" {
 s32 loadSlotIsLoaded(u32 slot);
 void resultInputLoadScripts(ResultInputWork *work);
 u32 scrScriptProcessCreate(const void *script, const void *messages);
-u32 FUN_003df4a4(u32 skill);
 s32 playerStockHasFreeSlot(void);
 s32 countUnlockedSlots(void);
 }
@@ -62,7 +61,7 @@ extern "C" u32 FUN_00416e60(ResultInputWork *work)
             work->preparation.phase = 0;
         } else {
             s32 slot;
-            if (FUN_003df4a4(work->preparation.skill) != 0) {
+            if (playerHasSkill(work->preparation.skill) != 0) {
                 slot = findPlayerSkillSlot(work);
             } else {
                 if (playerStockHasFreeSlot() == 0) {

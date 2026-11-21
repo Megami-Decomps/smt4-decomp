@@ -14,7 +14,7 @@ void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite();
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
 void texDrawCompositeSprite(s32 layer, s32 sheet, s32 part, s32 x, s32 y, s32 priority);
-void FUN_002bdce0(s32 value, s32 x, s32 y, s32 flag);
+void uiDrawGroupedNumber(s32 value, s32 x, s32 y, s32 flag);
 s32 renderCtxPopState(RenderCtx *context, s32 stack);
 
 /* Draws the banner's title-style frame, optional second plate and optional third plate. */
@@ -40,7 +40,7 @@ void FUN_00124d24(s32 wide)
             part = asdTMTexTableEntryAt(14, 192);
         }
         texDrawCompositeSprite(2, 14, 0, part->x + x, part->y + y, 11);
-        FUN_002bdce0(g_messageMain.banner->counterValue, part->x + x, part->y + y, 0);
+        uiDrawGroupedNumber(g_messageMain.banner->counterValue, part->x + x, part->y + y, 0);
 
         if (g_messageMain.banner->unk080) {
             if (wide)
@@ -48,7 +48,7 @@ void FUN_00124d24(s32 wide)
             else
                 part = asdTMTexTableEntryAt(14, 287);
             texDrawCompositeSprite(2, 14, 12, part->x + x, part->y + y, 11);
-            FUN_002bdce0(g_messageMain.banner->counterElapsed, part->x + x, part->y + y, 1);
+            uiDrawGroupedNumber(g_messageMain.banner->counterElapsed, part->x + x, part->y + y, 1);
         }
 
         MessageWindow *banner = g_messageMain.banner;
@@ -58,7 +58,7 @@ void FUN_00124d24(s32 wide)
             s32 px = static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.27f) + bx);
             part = asdTMTexTableEntryAt(14, 256);
             texDrawCompositeSprite(2, 14, 22, part->x + px, part->y + by, 11);
-            FUN_002bdce0(-banner->unk09C, part->x + px, part->y + by, 1);
+            uiDrawGroupedNumber(-banner->unk09C, part->x + px, part->y + by, 1);
         }
         efctSetSpeed(1.0f);
         gxResetColorQuadToWhite();

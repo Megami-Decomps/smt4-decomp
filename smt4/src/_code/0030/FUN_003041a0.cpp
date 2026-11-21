@@ -16,7 +16,7 @@ extern "C" {
 /* Callees without a shared declaration: FUN_00245ed0 transforms the scratch vector by the scratch
  * matrix, FUN_00245f48 is asinf, FUN_002484e0 sets the scratch matrix to an X rotation and
  * FUN_002482d4 premultiplies it by the stored one (matrixSetRotationY), matrixCopySelectedToGlobal
- * sets it to a rotation about an axis, FUN_00360e64 is an arctangent in 1/256 turns. */
+ * sets it to a rotation about an axis, mathAtanAngle256 is an arctangent in 1/256 turns. */
 void matrixGetTranslation(Vector4 *out);
 void FUN_00245ed0(void);
 f32 FUN_00245f48(f32 x);
@@ -25,7 +25,7 @@ void FUN_002484e0(f32 angle);
 void matrixCopySelectedToGlobal(const Vector4 *axis, f32 angle);
 f32 phaseCosInterpolate(f32 phase);
 f32 mathSinFixedAngle(f32 phase);
-f32 FUN_00360e64(f32 x);
+f32 mathAtanAngle256(f32 x);
 
 /* A four-float temporary next to the scratch block (.data). */
 extern Vector4 DAT_00472550;
@@ -318,7 +318,7 @@ void FUN_003041a0(LightningEffect *effect)
                 f32 length = sqrtf(g_vectorScratch.first.vector.x * g_vectorScratch.first.vector.x +
                                    g_vectorScratch.first.vector.y * g_vectorScratch.first.vector.y +
                                    g_vectorScratch.first.vector.z * g_vectorScratch.first.vector.z);
-                f32 spread = FUN_00360e64((nextAngle - angle) * 0.5f) * (PI / 128.0f);
+                f32 spread = mathAtanAngle256((nextAngle - angle) * 0.5f) * (PI / 128.0f);
                 sine = nextSine;
                 angle = nextAngle;
                 g_vectorScratch.third.vector = rotated;

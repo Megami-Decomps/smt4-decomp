@@ -5174,13 +5174,13 @@
       "target_path": "orig/target/_code/0010/soundSetVolumeSetting.o"
     },
     {
-      "base_path": "build/obj/_code/0010/FUN_00108b6c.o",
+      "base_path": "build/obj/_code/0010/touchInputUpdate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00108b6c",
+            "name": "touchInputUpdate",
             "size": 236,
             "vram": "0x108b6c"
           }
@@ -5188,10 +5188,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0010/FUN_00108b6c.cpp"
+        "source_path": "src/_code/0010/touchInputUpdate.cpp"
       },
-      "name": "_code/0010/FUN_00108b6c",
-      "target_path": "orig/target/_code/0010/FUN_00108b6c.o"
+      "name": "_code/0010/touchInputUpdate",
+      "target_path": "orig/target/_code/0010/touchInputUpdate.o"
     },
     {
       "base_path": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_00108c5c.o",
@@ -75024,13 +75024,13 @@
       "target_path": "orig/target/_code/0023/FUN_0023fffc.o"
     },
     {
-      "base_path": "build/obj/_code/0024/FUN_002402c4.o",
+      "base_path": "build/obj/_code/0024/fileExistsPatchOrRom.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002402c4",
+            "name": "fileExistsPatchOrRom",
             "size": 364,
             "vram": "0x2402c4"
           }
@@ -75038,10 +75038,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0024/FUN_002402c4.cpp"
+        "source_path": "src/_code/0024/fileExistsPatchOrRom.cpp"
       },
-      "name": "_code/0024/FUN_002402c4",
-      "target_path": "orig/target/_code/0024/FUN_002402c4.o"
+      "name": "_code/0024/fileExistsPatchOrRom",
+      "target_path": "orig/target/_code/0024/fileExistsPatchOrRom.o"
     },
     {
       "base_path": "build/obj/_code/0024/btlPosArrangeGetFilePath.o",
@@ -79267,13 +79267,13 @@
       "target_path": "orig/target/_code/0024/resourceResolveHeaderPointer.o"
     },
     {
-      "base_path": "build/obj/_code/0024/FUN_0024c418.o",
+      "base_path": "build/obj/_code/0024/mathAtan2Angle256.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0024c418",
+            "name": "mathAtan2Angle256",
             "size": 256,
             "vram": "0x24c418"
           }
@@ -79281,10 +79281,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0024/FUN_0024c418.cpp"
+        "source_path": "src/_code/0024/mathAtan2Angle256.cpp"
       },
-      "name": "_code/0024/FUN_0024c418",
-      "target_path": "orig/target/_code/0024/FUN_0024c418.o"
+      "name": "_code/0024/mathAtan2Angle256",
+      "target_path": "orig/target/_code/0024/mathAtan2Angle256.o"
     },
     {
       "base_path": "build/obj/_code/0024/itemGetSortCategory.o",
@@ -87461,13 +87461,13 @@
       "target_path": "orig/target/_code/gamedata/SaveLoadProcess/saveStartLoadProcess.o"
     },
     {
-      "base_path": "build/obj/_code/0026/FUN_0026b738.o",
+      "base_path": "build/obj/_code/0026/playerHasSkill.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0026b738",
+            "name": "playerHasSkill",
             "size": 72,
             "vram": "0x26b738"
           }
@@ -87475,10 +87475,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0026/FUN_0026b738.cpp"
+        "source_path": "src/_code/0026/playerHasSkill.cpp"
       },
-      "name": "_code/0026/FUN_0026b738",
-      "target_path": "orig/target/_code/0026/FUN_0026b738.o"
+      "name": "_code/0026/playerHasSkill",
+      "target_path": "orig/target/_code/0026/playerHasSkill.o"
     },
     {
       "base_path": "build/obj/_code/0026/recordContainsPairedId.o",
@@ -87861,13 +87861,13 @@
       "target_path": "orig/target/_code/0026/partyPanelHandleCursorEdgeInput.o"
     },
     {
-      "base_path": "build/obj/_code/0026/FUN_0026cf4c.o",
+      "base_path": "build/obj/_code/0026/partyPanelPollHelpRefresh.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0026cf4c",
+            "name": "partyPanelPollHelpRefresh",
             "size": 500,
             "vram": "0x26cf4c"
           }
@@ -87875,10 +87875,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0026/FUN_0026cf4c.cpp"
+        "source_path": "src/_code/0026/partyPanelPollHelpRefresh.cpp"
       },
-      "name": "_code/0026/FUN_0026cf4c",
-      "target_path": "orig/target/_code/0026/FUN_0026cf4c.o"
+      "name": "_code/0026/partyPanelPollHelpRefresh",
+      "target_path": "orig/target/_code/0026/partyPanelPollHelpRefresh.o"
     },
     {
       "base_path": "build/obj/_code/0026/FUN_0026d144.o",
@@ -116030,13 +116030,13 @@
       "target_path": "orig/target/_code/002b/asdGxCommandBufferTerminateAndSubmit.o"
     },
     {
-      "base_path": "build/obj/_code/002b/FUN_002bdce0.o",
+      "base_path": "build/obj/_code/002b/uiDrawGroupedNumber.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002bdce0",
+            "name": "uiDrawGroupedNumber",
             "size": 668,
             "vram": "0x2bdce0"
           }
@@ -116044,10 +116044,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002b/FUN_002bdce0.cpp"
+        "source_path": "src/_code/002b/uiDrawGroupedNumber.cpp"
       },
-      "name": "_code/002b/FUN_002bdce0",
-      "target_path": "orig/target/_code/002b/FUN_002bdce0.o"
+      "name": "_code/002b/uiDrawGroupedNumber",
+      "target_path": "orig/target/_code/002b/uiDrawGroupedNumber.o"
     },
     {
       "base_path": "build/obj/_code/002b/FUN_002bdf94.o",
@@ -174293,13 +174293,13 @@
       "target_path": "orig/target/_code/0036/nn_math_ARMv6_QUATToMTX34C_FAST.o"
     },
     {
-      "base_path": "build/obj/_code/0036/FUN_00360d38.o",
+      "base_path": "build/obj/_code/0036/mathAtan2AngleU16.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00360d38",
+            "name": "mathAtan2AngleU16",
             "size": 280,
             "vram": "0x360d38"
           }
@@ -174307,19 +174307,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0036/FUN_00360d38.cpp"
+        "source_path": "src/_code/0036/mathAtan2AngleU16.cpp"
       },
-      "name": "_code/0036/FUN_00360d38",
-      "target_path": "orig/target/_code/0036/FUN_00360d38.o"
+      "name": "_code/0036/mathAtan2AngleU16",
+      "target_path": "orig/target/_code/0036/mathAtan2AngleU16.o"
     },
     {
-      "base_path": "build/obj/_code/0036/FUN_00360e64.o",
+      "base_path": "build/obj/_code/0036/mathAtanAngle256.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00360e64",
+            "name": "mathAtanAngle256",
             "size": 128,
             "vram": "0x360e64"
           }
@@ -174327,10 +174327,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0036/FUN_00360e64.cpp"
+        "source_path": "src/_code/0036/mathAtanAngle256.cpp"
       },
-      "name": "_code/0036/FUN_00360e64",
-      "target_path": "orig/target/_code/0036/FUN_00360e64.o"
+      "name": "_code/0036/mathAtanAngle256",
+      "target_path": "orig/target/_code/0036/mathAtanAngle256.o"
     },
     {
       "base_path": "build/obj/_code/0036/FUN_00360efc.o",

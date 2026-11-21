@@ -1,4 +1,5 @@
-/* NON_MATCHING: validation result-code merging, predicate formation and register lifetimes differ. */
+/* NON_MATCHING: armcc keeps the first failure's store (6) predicated and shares the last (5), where retail shares the
+   first four and predicates the fifth; the mode test reads into r2 instead of r1. */
 #include "shard/Shard004A.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "code/Code002a_Smt4a.h"
@@ -11,7 +12,7 @@ s32 gameStockContainsEntry(u32 id);
 s32 partyFindFirstUnusedEntry();
 
 /* Set the reason a stock selection cannot proceed, allowing the override-warning result. */
-u32 FUN_004a34a0(Screen4A *screen, u32 id)
+u32 demonPurchaseValidate(Screen4A *screen, u32 id)
 {
     struct Candidate { u16 id; u8 unk02[0x1e]; };
     // Naming fields in the shared byte span beginning at 0x861 would raise its alignment.
@@ -33,34 +34,24 @@ u32 FUN_004a34a0(Screen4A *screen, u32 id)
     if (view->mode == 0) {
         nkmBaseGetRecord(selected->id);
     }
-    u8 reason;
     if (!compendiumEntryIsRegistered(id)) {
-        reason = 6;
+        screen->unkA870 = 6;
     } else if (FUN_004d05b4() < cost && flagValueRead(0x7c3) <= 0) {
-        reason = 1;
+        screen->unkA870 = 1;
     } else if (gameStockContainsEntry(id)) {
-        reason = 2;
+        screen->unkA870 = 2;
     } else if (view->mode == 2) {
-        reason = 3;
+        screen->unkA870 = 3;
+    } else if (partyFindFirstUnusedEntry() == -1) {
+        screen->unkA870 = 5;
     } else {
-        if (partyFindFirstUnusedEntry() == -1) {
-            screen->unkA870 = 5;
-            return 0;
+        if (screen->unkA870 == 0 && FUN_004d05b4() < cost && flagValueRead(0x7c3) > 0) {
+            screen->unkA870 = 7;
         }
-        reason = screen->unkA870;
-        if (reason == 0) {
-            if (FUN_004d05b4() < cost && flagValueRead(0x7c3) > 0) {
-                screen->unkA870 = 7;
-                return 1;
-            }
-            reason = screen->unkA870;
-            if (reason == 0) {
-                return 1;
-            }
+        if (screen->unkA870 == 0 || screen->unkA870 == 7) {
+            return 1;
         }
-        return reason == 7;
     }
-    screen->unkA870 = reason;
     return 0;
 }
 }

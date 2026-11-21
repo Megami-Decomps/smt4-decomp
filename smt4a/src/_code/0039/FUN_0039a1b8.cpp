@@ -14,13 +14,15 @@ void FUN_0039a1b8(UiControlDrawPosition *position, s32 x, s32 y,
     s32 hiddenRows = rowCount - 11;
     texDrawTableEntryAtStoredOrigin(2, 0x2e, 0xf8, position->x + x, y, 100);
     texDrawTableEntryAtStoredOrigin(2, 0x2e, 0xf5, position->x + x, y, 100);
-    texDrawTableEntryAtStoredOrigin(2, 0x2e, firstActive ? 0xf3 : 0xf1, position->x + x, y, 101);
-    texDrawTableEntryAtStoredOrigin(2, 0x2e, secondActive ? 0xf4 : 0xf2, position->x + x, y, 101);
-    u32 sprite = trackActive ? 0xf7 : 0xf6;
-    TexturePlacementPrefixIV *size = asdTMTexTableEntryAt(0x2e, sprite)->placement;
+    s32 firstArrow = firstActive != 0 ? 0xf3 : 0xf1;
+    texDrawTableEntryAtStoredOrigin(2, 0x2e, firstArrow, position->x + x, y, 101);
+    s32 secondArrow = secondActive != 0 ? 0xf4 : 0xf2;
+    texDrawTableEntryAtStoredOrigin(2, 0x2e, secondArrow, position->x + x, y, 101);
+    u32 thumb = trackActive != 0 ? 0xf7 : 0xf6;
+    TexturePlacementPrefixIV *size = asdTMTexTableEntryAt(0x2e, thumb)->placement;
     s32 height = size->height;
-    s32 rowHeight = height / subdivisions;
-    texDrawTableEntrySized(2, 0x2e, sprite, position->x + x, firstRow * rowHeight + y,
-                 size->width, height - rowHeight * hiddenRows, 101);
+    s32 step = height / subdivisions;
+    texDrawTableEntrySized(2, 0x2e, thumb, position->x + x, step * firstRow + y,
+                 size->width, height - step * hiddenRows, 101);
 }
 }

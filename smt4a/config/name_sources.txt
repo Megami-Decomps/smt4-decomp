@@ -8522,3 +8522,13 @@
 0036fad8 eventSnowNoiseStart inferred starts the snow-noise event effect ("EvtSnowNoise Calc" / "EvtSnowNoise DrawUp*" task names)
 003f6f68 scrollListAdvancePage inferred advances a scroll list by a page, stepping while the top row is unchanged
 004c6bd0 btlDemonSkillCategoryModifier inferred a demon's modifier for a skill's category (NkmBase categoryModifiers), 0 without one
+001b640c mathAtan2Angle256 inferred signed planar heading of (y, x) in 256-unit angles; twin of smt4 0x24c418
+0043bc74 mathAtanAngle256 inferred arctangent of a ratio in 256-unit angles; twin of smt4 0x360e64
+0043bb48 mathAtan2AngleU16 inferred planar heading as an unsigned 16-bit angle; twin of smt4 0x360d38
+0034cda0 partyPanelPollHelpRefresh inferred party panel help/selection refresh; twin of smt4 0x26cf4c
+00169e38 uiDrawGroupedNumber inferred draws a number with thousands marks, optionally signed; twin of smt4 0x2bdce0
+0013d33c touchInputUpdate inferred touch-panel state update; twin of smt4 0x108b6c
+003df4a4 playerHasSkill inferred whether the player knows skill id; twin of smt4 0x26b738
+0039e338 btlScriptSetPartyStatus inferred battle script command: sets (with the response check and message) or clears status bit arg0 on the four party entries
+004a34a0 demonPurchaseValidate inferred sets the reason a stock/compendium selection cannot proceed; the same price, stock, mode-2 and free-slot checks as smt4 demonPurchaseValidate (0x3a7ec8) plus the compendium and flag-0x7c3 override tests
+0045ab90 resourceNameBindingBind inferred binds named targets through the owner's name list, filling sentinels and reporting partial (0x4000) or total (0x80008000) failure

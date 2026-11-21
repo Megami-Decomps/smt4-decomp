@@ -1,4 +1,5 @@
-/* NON_MATCHING: ASCII-version arithmetic, live ranges, and constant-pool scheduling differ. */
+/* NON_MATCHING: scheduling: retail finishes the version sum (in r1, digits loaded into r6/r4) before the header loads and
+ * snapshot clears; this build interleaves its tail with the float stores and uses other registers. */
 #include "battle/btlMain.h"
 
 struct BattleCameraSnapshot;
@@ -11,8 +12,10 @@ void battleRestoreCameraVectors(const BattleCameraSnapshot* snapshot);
 void FUN_004f5144(const BattleRosterCacheConfig* config, BtlMainStateA* battle,
                   const BattleRosterCacheFileHeader* file)
 {
-    s32 version = (file->version[0] - '0') * 1000 + (file->version[1] - '0') * 100 +
-                  (file->version[2] - '0') * 10 + file->version[3] - '0';
+    s32 version = (file->version[0] - '0') * 1000;
+    version += (file->version[1] - '0') * 100;
+    version += (file->version[2] - '0') * 10;
+    version += file->version[3] - '0';
     u32 dataSize = file->dataSize;
     const u8* payload = reinterpret_cast<const u8*>(file) + file->dataOffset;
     BattleRosterCacheSnapshotA& saved = battle->rosterSnapshot.saved;

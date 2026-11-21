@@ -1,4 +1,4 @@
-/* NON_MATCHING: decimal helper guard lowering, loop signedness, and draw argument spills differ. */
+/* NON_MATCHING: 72 lines: retail tests number == 0 out of line (the place == 1 return shares a zero kept in fp with the terminator store), keeps the digit's u8 mask, puts the buffer at sp+16 and reloads x and y from the argument spill; registers differ throughout. */
 #include "common.h"
 #include "runtime/Stdio.h"
 
@@ -8,19 +8,19 @@ void FUN_002bdf94(s32, u32, u32, s32, s32, u32, const char *);
 }
 
 /* A missing leading digit is represented by 10, outside the decimal range. */
-static __inline u8 decimalDisplayDigit(u32 number, u8 place)
+static __inline s32 decimalDisplayDigit(u32 number, u8 place)
 {
     if (number == 0 && place == 1) {
         return 0;
     }
     u32 magnitude = 1;
-    for (u32 i = 1; i < place; ++i) {
+    for (u32 i = 1; i != place; ++i) {
         magnitude *= 10;
     }
     if (number < magnitude) {
         return 10;
     }
-    for (u32 i = 1; i < place; ++i) {
+    for (u32 i = 1; i != place; ++i) {
         number /= 10;
     }
     return number % 10;

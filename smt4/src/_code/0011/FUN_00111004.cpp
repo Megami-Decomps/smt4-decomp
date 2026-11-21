@@ -1,4 +1,6 @@
-/* NON_MATCHING: request construction, by-reference queueRequest ABI and the wait/timeout logic match; remaining: stack slot reuse between the request block and the wait block, zero register allocation, and the result tests (lsrs scratch register, description compare) compile differently. */
+/* NON_MATCHING: the request's constructor and the second kind/word3/result store sequence retail repeats after it now
+ * follow retail; remaining: retail reuses one stack slot for both WindowStatusResult temporaries and shares slots between
+ * the request block and the wait block (frame 48), zero register allocation, and the result tests. */
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
 #include "nn/Result.h"
@@ -22,7 +24,7 @@ u32 FUN_00111004(u32 handle)
         FUN_00121e50(g_aocSystem) != 0 && FUN_002ad1e0(&g_aocMain->operationDone) != 0) {
         g_aocMain->flags &= ~0x10000u;
         aocReleasePackageOwner(g_aocSystem);
-        RequestParameters request;
+        RequestParameters request(1);
         request.kind = 1;
         request.word3 = 0;
         request.result = WindowStatusResult(0);

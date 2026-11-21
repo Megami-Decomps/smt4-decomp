@@ -11,7 +11,7 @@ static __inline void vector4Copy(const Vector4 *source, Vector4 *destination)
 extern "C" {
 void FUN_001b4abc(u32 source, f32 *direction);
 f32 mathRemPio2f(f32 value);
-f32 FUN_001b640c(f32 first, f32 second);
+f32 mathAtan2Angle256(f32 first, f32 second);
 void FUN_001bc2f0(f32 pitch, f32 yaw, f32 roll);
 void gfxQuaternionScratchMultiply(void);
 
@@ -28,7 +28,7 @@ void renderVectorOverrideResolve(RenderVectorOverride *override, u32 source, Vec
         } else {
             pitch = mathRemPio2f(-direction[1]);
         }
-        f32 yaw = FUN_001b640c(direction[0], direction[2]);
+        f32 yaw = mathAtan2Angle256(direction[0], direction[2]);
         FUN_001bc2f0(pitch, yaw * 0.02454369328916073f, 0.0f);
         if (override->flags & 0x40) {
             vector4Copy(&g_vectorScratch.first.vector, &g_vectorScratch.second.vector);

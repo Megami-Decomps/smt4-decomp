@@ -1,15 +1,17 @@
-/* NON_MATCHING: cast folding, relative-pointer arithmetic, and lookup-failure epilogue differ. */
+/* NON_MATCHING: retail materialises the cast result as its own pointer (mov r1, r0; bics; movne r1, #0) and resolves
+ * the payload offset twice (base + offset for the test, offset + base for the value); this build folds both. */
 #include "gfx/ResourceDispatch.h"
+#include "gfx/GfxResult.h"
 
 extern "C" {
 void FUN_0013fec8(DispatchResourceReference *reference, DispatchResource *resource, u32 flags);
 void FUN_002a7c80(DispatchResourceLookup *result, const DispatchResourceReference *reference);
 u32 FUN_002bd498(DispatchResource **resource, u32 allocator, u32 flags);
 
-// Resolve a resource's embedded payload, loading it on demand before dispatch.
-u32 resourceDispatchResolvePayload(u32 allocator, DispatchResource *resource, u32 flags)
+/* Resolves a resource's embedded payload, loading it on demand before dispatch; 0x80000001 when the reference is not found. */
+GfxResult resourceDispatchResolvePayload(u32 allocator, DispatchResource *resource, u32 flags)
 {
-    u32 result = 0;
+    GfxResult result;
     DispatchResource *payload = NULL;
     if (resource != NULL) {
         bool ready = true;

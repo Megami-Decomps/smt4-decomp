@@ -1,4 +1,5 @@
 /* NON_MATCHING: slot scan, countdown duplicate scan, unrolled shift/clear loops and the self tail call match retail; retail additionally spills the swapped flag and slot (strd) and addresses dirty[slot] through the literal 0xd2d0, so registers and 11 rows differ. */
+#include "shard/W5_W5Match2_PairedIds.h"
 #include "common.h"
 
 extern "C" {
@@ -24,7 +25,6 @@ typedef struct SkillSource {
 
 void qsort(void *base, s32 count, s32 size, s32 (*compare)(const u16 *, const u16 *));
 s32 FUN_002c6e64(const u16 *left, const u16 *right);
-s32 FUN_0026b738(u16 skill);
 s32 recordContainsPairedId(u32 record, u16 skill);
 
 /* Removes the entry equal to pool[0] from the rest of the pool (it moved to the front). */
@@ -71,11 +71,11 @@ void FUN_001c8a7c(SkillSlots *slots, u32 record, SkillSource *source, s32 swapIn
             slots->pool[0] = 0;
             qsort(slots->pool, 8, 2, FUN_002c6e64);
         }
-        if (FUN_0026b738(replaced) == 0 || recordContainsPairedId(record, source->skills[slot]) != 0) {
-            if (FUN_0026b738(replaced) == 0 && recordContainsPairedId(record, source->skills[slot]) != 0) {
+        if (playerHasSkill(replaced) == 0 || recordContainsPairedId(record, source->skills[slot]) != 0) {
+            if (playerHasSkill(replaced) == 0 && recordContainsPairedId(record, source->skills[slot]) != 0) {
                 slots->passiveCount++;
                 slots->passiveFlag[slot] = 1;
-            } else if ((FUN_0026b738(replaced) == 0 && recordContainsPairedId(record, source->skills[slot]) == 0) ||
+            } else if ((playerHasSkill(replaced) == 0 && recordContainsPairedId(record, source->skills[slot]) == 0) ||
                        source->skills[slot] == 0) {
                 slots->poolCount--;
             }

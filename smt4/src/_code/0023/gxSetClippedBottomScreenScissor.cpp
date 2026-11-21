@@ -1,17 +1,18 @@
-/* NON_MATCHING: -O2 candidate; clipping predicates fold/reorder, packed-argument moves disappear, and integer/VFP live ranges differ from retail. */
+/* NON_MATCHING: 28 lines: retail does not thread the empty-span case (start + extent < 0) past the final limit test (it branches back to that test, and for y shares the y = 0 store with the start < 0 case), and hoists the zero for the state-change flag later. */
 #include "camp/RenderCtxTitle.h"
+#include "gfx/ScissorCoordinates.h"
 
 
 static __inline void clipScissorAxis(s32 &position, s32 &extent, s32 limit)
 {
-    s32 end = position + extent;
-    if (end < 0) {
-        position = extent = 0;
+    if (position + extent < 0) {
+        position = 0;
+        extent = 0;
     } else if (position < 0) {
         extent += position;
         position = 0;
     } else if (position > limit) {
-        position = extent = 0;
+        extent = position = 0;
         return;
     }
     if (position + extent > limit) {
@@ -21,6 +22,7 @@ static __inline void clipScissorAxis(s32 &position, s32 &extent, s32 limit)
 
 extern "C" {
 
+/* Clips the rectangle to the 320x240 bottom screen and sets it as the scissor (origin measured from the far corner). */
 void gxSetClippedBottomScreenScissor(s32 x, s32 y, s32 width, s32 height)
 {
     clipScissorAxis(x, width, 320);
@@ -28,7 +30,15 @@ void gxSetClippedBottomScreenScissor(s32 x, s32 y, s32 width, s32 height)
     s32 right = (s32)(320.0f - (f32)(x + width));
     s32 bottom = (s32)(240.0f - (f32)(y + height));
     renderStackSet(&g_titleScene->scissor, 3);
-    renderStackSet(&g_titleScene->scissorMinimum, (u32)right | ((u32)bottom << 16));
-    renderStackSet(&g_titleScene->scissorMaximum, (u32)width | ((u32)height << 16));
+    {
+        RenderCtx *scene = g_titleScene;
+        u32 packed = packScissorCoordinates(right, bottom);
+        renderStackSet(&scene->scissorMinimum, (s32)packed);
+    }
+    {
+        RenderCtx *scene = g_titleScene;
+        u32 packed = packScissorCoordinates(width, height);
+        renderStackSet(&scene->scissorMaximum, (s32)packed);
+    }
 }
 }

@@ -7,7 +7,7 @@
 
 extern "C" {
 
-int FUN_002bdce0(...);
+int uiDrawGroupedNumber(...);
 int SBORROW4(...);
 
 int FUN_001189a4(int);
@@ -42,7 +42,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_001189a4. */
 /* Supplied declaration required: FUN_00124d24. */
 /* Supplied declaration required: titleOverlayDraw. */
-/* Supplied declaration required: FUN_002bdce0. */
+/* Supplied declaration required: uiDrawGroupedNumber. */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
@@ -153,7 +153,7 @@ unsigned int FUN_0010a9c8(void)
     gxResetColorQuadToWhite();
     temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0xc0));
     texDrawCompositeSprite(2,0xe,0x11,*(short *)(temp_v5 + 8) + temp_v4,*(short *)(temp_v5 + 10) + temp_v2,0xb);
-    FUN_002bdce0(*(unsigned short *)(temp_v1 + 0x90),*(short *)(temp_v5 + 8) + temp_v4,
+    uiDrawGroupedNumber(*(unsigned short *)(temp_v1 + 0x90),*(short *)(temp_v5 + 8) + temp_v4,
                  *(short *)(temp_v5 + 10) + temp_v2,0);
     temp_v7 = 100000000;
     temp_v8 = (unsigned int)*(unsigned short *)(temp_v1 + 0x90);

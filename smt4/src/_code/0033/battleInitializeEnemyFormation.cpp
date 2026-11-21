@@ -1,4 +1,6 @@
-/* NON_MATCHING: the 64-bit flag loop uses different unroll indexing, zero registers and store grouping; a formation-ID reload is coalesced and the larger saved-register set changes the frame. */
+/* NON_MATCHING: the unrolled flagMask clear stores the first entry's words with two str of one zero register (retail)
+ * where this build uses stm; the formation-ID test and its reload are coalesced here (retail addresses them two ways),
+ * and the lookup result is tested with movs. */
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "battle/btlMain.h"
@@ -25,9 +27,6 @@ struct BattleUnitPayloadView {
     u8 unk000[0xcc];
     u8 data[0x18c];
 };
-struct BattleUnitFlagPrefix {
-    u64 flags;
-};
 struct BattleEnemyRuntimeView {
     u8 unk0000[0x48bc];
     u8 data[0xa8];
@@ -51,15 +50,10 @@ static __inline u8 *battleUnitPayload(BtlEntry *unit)
     return reinterpret_cast<BattleUnitPayloadView *>(unit)->data;
 }
 
-static __inline void battleUnitClearFlags(BtlEntry *unit)
-{
-    reinterpret_cast<BattleUnitFlagPrefix *>(unit)->flags = 0;
-}
-
 extern "C" void battleInitializeEnemyFormation(BtlMainState *state)
 {
     for (s32 index = 0; index < 50; ++index) {
-        battleUnitClearFlags(&state->entries[index + 4]);
+        state->entries[index + 4].flagMask = 0;
     }
     BattleEnemyFormation *formation = battleEnemyFormation(state);
     memClear(formation, sizeof(*formation));

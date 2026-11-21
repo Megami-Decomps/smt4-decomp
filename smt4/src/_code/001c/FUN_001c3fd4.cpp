@@ -91,7 +91,7 @@ int gameGetUnitRecord(...);
 int eventQueueAddUniqueIfValid(...);
 int inputQueryButtonState(...);
 
-int FUN_0026cf4c(void);
+int partyPanelPollHelpRefresh(void);
 int FUN_0026d6a4(...);
 void FUN_0026dafc(unsigned int color);
 unsigned int partyPanelPollSelectedStatusColor(void);
@@ -141,7 +141,7 @@ extern int gameGetNavigationState(void);
 /* Supplied declaration required: partyPanelRefreshFusionParents. */
 /* Supplied declaration required: FUN_0026cba4. */
 /* Supplied declaration required: partyPanelHandleCursorEdgeInput. */
-/* Supplied declaration required: FUN_0026cf4c. */
+/* Supplied declaration required: partyPanelPollHelpRefresh. */
 /* Supplied declaration required: FUN_0026d144. */
 /* Supplied declaration required: partyPanelRefreshSelectedItemValues. */
 /* Supplied declaration required: FUN_0026d5a4. */
@@ -402,7 +402,7 @@ joined_r0x001c43a0:
   case 1:
     if ((((*(char *)(temp_v1 + 0x66c) == '\x01') && (temp_v6 = FUN_0026d6a4(1), temp_v6 != 0)) &&
         (temp_v6 = FUN_0029dfa8(), temp_v6 != 0)) && (temp_v6 = campCecIsActive(), temp_v6 != 0)) {
-      FUN_0026cf4c();
+      partyPanelPollHelpRefresh();
     }
     break;
   case 2:
@@ -609,7 +609,7 @@ LAB_001c4748:
     } while (temp_v6 < 0x18);
     temp_v6 = objectPartRunUnlessLocked(temp_v4);
     *(unsigned char *)(*(int *)(temp_v1 + temp_v6 * 4 + 0x6c8) + 0x25) = 1;
-    FUN_0026cf4c();
+    partyPanelPollHelpRefresh();
     break;
   case 6:
     temp_v24 = temp_v1 + 0x940;
@@ -895,7 +895,7 @@ LAB_001c5040:
     temp_v6 = objectPartRunUnlessLocked(temp_v24);
     temp_v4 = listCursorGetRowIfUnblocked(temp_v24);
     *(unsigned char *)(*(int *)(temp_v1 + (temp_v6 + temp_v4 * 4) * 4 + 0x6d8) + 0x25) = 1;
-    FUN_0026cf4c();
+    partyPanelPollHelpRefresh();
     break;
   case 8:
     *(unsigned short *)(temp_v1 + 0x6bc) = 0;
@@ -1766,7 +1766,7 @@ LAB_001c6680:
       }
     }
     if (*(char *)(temp_v1 + 0x66c) != '\v') {
-      FUN_0026cf4c();
+      partyPanelPollHelpRefresh();
       break;
     }
     scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x14));
@@ -1857,7 +1857,7 @@ LAB_001c6eb8:
                 if (temp_v6 != 0) goto LAB_001c6f54;
               }
               FUN_0026d6a4(1);
-              FUN_0026cf4c();
+              partyPanelPollHelpRefresh();
               break;
             }
           }
@@ -1898,7 +1898,7 @@ LAB_001c6d64:
               temp_v7 = 0x100017c;
               eventQueueAddUniqueIfValid(temp_v7);
               gameGlobalsSetSelected(0);
-              FUN_0026cf4c();
+              partyPanelPollHelpRefresh();
               break;
             }
             temp_v7 = 0x100016e;
@@ -1912,7 +1912,7 @@ LAB_001c6d64:
             temp_v7 = 0x100016e;
             eventQueueAddUniqueIfValid(temp_v7);
             gameGlobalsSetSelected(0);
-            FUN_0026cf4c();
+            partyPanelPollHelpRefresh();
             break;
           }
           table08ApplyToParty(*(unsigned short *)(temp_v1 + 0x36),0);
@@ -1928,7 +1928,7 @@ LAB_001c6d98:
         gameGlobalsSetSelected(0);
       }
     }
-    FUN_0026cf4c();
+    partyPanelPollHelpRefresh();
     break;
   case 0xb:
     temp_v6 = gameGetFlagByte12e8();

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail fills the command words at fixed offsets from one base and derives the register ids arithmetically in another order; the build walks the pointer with writeback. */
+/* NON_MATCHING: 75 lines: retail fills the command words at fixed offsets from a base it advances once (stm, then add r0, r0, #4 and offsets from there) where this build walks the cursor with writeback, and it derives the register ids in another order. */
 #include "common.h"
 
 extern "C" {
@@ -28,7 +28,7 @@ void FUN_0011a258(GxBufferDesc *color, GxBufferDesc *depth, u32 format, s32 leve
     *cmd++ = 0xF0110;
     *cmd++ = color->height | (color->width << 16);
     *cmd++ = 0xF0117;
-    mode = ((levels - 1) << 12) | format | 0x1000000;
+    mode = (levels * 0x1000 - 0x1000U) | format | 0x1000000;
     *cmd++ = color->address >> 3;
     *cmd++ = 0xF011D;
     *cmd++ = mode;

@@ -5955,3 +5955,11 @@
 003c1e50 playerGetGrowthParameters inferred twin of smt4a playerGetGrowthParameters: the hero's growth parameters from data table 9
 003c1ab4 statMaximumsAtLevel inferred computes HP and MP at a level from growth parameters (capped at 9999, MP at 45%)
 003c1cfc demonGetGrowthParameters inferred returns a demon's growth parameters with HP and MP at its base level
+0024c418 mathAtan2Angle256 inferred signed planar heading of (y, x) in 256-unit angles (octant fold around FUN_002378fc); twin of smt4a 0x1b640c
+00360e64 mathAtanAngle256 inferred arctangent of a ratio in 256-unit angles, reducing |x| > 1 through the reciprocal; twin of smt4a 0x43bc74
+00360d38 mathAtan2AngleU16 inferred planar heading of (y, x) as an unsigned 16-bit angle (octant fold, base angles in [0, 256)); twin of smt4a 0x43bb48
+0026cf4c partyPanelPollHelpRefresh inferred refreshes the party panel's help on a navigation button for the current mode/side and restarts the panel on a selection or help-mode change; twin of smt4a 0x34cda0
+002bdce0 uiDrawGroupedNumber inferred draws a number in digit sprites with thousands marks, optionally coloured by sign with a +/- prefix; twin of smt4a 0x169e38
+00108b6c touchInputUpdate inferred updates the touch-panel state (current/previous sample, hold count, repeat); twin of smt4a 0x13d33c
+002402c4 fileExistsPatchOrRom inferred tells whether a named file opens from patch:/ or else rom:/
+0026b738 playerHasSkill inferred whether the player knows skill id (scan of the eight skill slots); twin of smt4a 0x3df4a4

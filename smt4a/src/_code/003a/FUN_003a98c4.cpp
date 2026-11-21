@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail uses fewer saved registers and a differently scheduled eligibility loop with a shared tail return. */
+/* NON_MATCHING: registers only: retail keeps the masks pointer in r6 and the unit id in sl, and pairs the later masks'
+   loads into ldrd (r8:r9) where armcc uses ldm. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -17,12 +18,13 @@ extern "C" u32 FUN_003a98c4()
     u32 unitId = scrGetArg(0);
     u32 value = scrGetArg(1);
     BtlMainStateA *battle = btlGetMainState();
+    const BattleMaskPresets *masks = &g_battleMaskPresets;
     for (s32 i = 4; i < 54; ++i) {
         BtlCombatantEntryA *entry = &battle->entries[i];
         u64 flags = entry->flags;
-        if ((flags & g_battleMaskPresets.eligibility.active) &&
-            !(flags & g_battleMaskPresets.eligibility.excluded) &&
-            (flags & g_battleMaskPresets.eligibility.required) && entry->data.id == unitId) {
+        if ((flags & masks->eligibility.active) &&
+            !(flags & masks->eligibility.excluded) &&
+            (flags & masks->eligibility.required) && entry->data.id == unitId) {
             ((ScriptCombatantValueView *)entry)->value = value;
             break;
         }

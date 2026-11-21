@@ -1,4 +1,3 @@
-/* NON_MATCHING: status-index predicate register, clear/apply block layout and merged message call differ. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/BattleMessageMasks.h"
@@ -19,7 +18,7 @@ void FUN_004fcffc(s32 mode, void *source, BattleRosterRecordA *target, u32 statu
 void btlQueueActionMessage(s32 mode, void *source, u32 message, s32 first,
                   s32 second, s32 third, s32 fourth);
 
-u32 FUN_0039e338()
+u32 btlScriptSetPartyStatus()
 {
     u32 status = scrGetArg(0);
     s32 enable = scrGetArg(1);
@@ -31,7 +30,9 @@ u32 FUN_0039e338()
         BtlCombatantEntryA *entry = &state->entries[index];
         if ((entry->flags & g_btlMessageFlagMasks.required) &&
             !(entry->flags & g_btlMessageFlagMasks.excluded) && entry->ids[0] >= 0) {
-            if (enable) {
+            if (!enable) {
+                FUN_004fcffc(0, source, &state->roster[entry->ids[0]], mask);
+            } else {
                 if (checkResponse &&
                     (FUN_004c8340(-1, entry->ids[0], FUN_004bf9a0(status), 2, -1) & 0x10000)) {
                     FUN_004fda78(0, 0, source, &state->roster[entry->ids[0]], 4, 0);
@@ -39,9 +40,11 @@ u32 FUN_0039e338()
                     continue;
                 }
                 FUN_004fdb18(0, source, &state->roster[entry->ids[0]], mask, 1);
-                btlQueueActionMessage(0, source, status == 4 ? 0x1000275 : 0x100025F, 0, 0, 0, 0);
-            } else {
-                FUN_004fcffc(0, source, &state->roster[entry->ids[0]], mask);
+                if (status == 4) {
+                    btlQueueActionMessage(0, source, 0x1000275, 0, 0, 0, 0);
+                } else {
+                    btlQueueActionMessage(0, source, 0x100025F, 0, 0, 0, 0);
+                }
             }
         }
     }

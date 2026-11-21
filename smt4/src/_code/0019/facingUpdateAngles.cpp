@@ -1,7 +1,7 @@
 /* NON_MATCHING (b1454): target pair now loads with vldmia like retail (named direction/target locals); only the order of the two direction loads before it (retail y then x) differs. */
 #include "shard/W6_W6Match7_FacingAngles.h"
 
-extern "C" u32 FUN_00360d38(f32 y, f32 x);
+extern "C" u32 mathAtan2AngleU16(f32 y, f32 x);
 
 // Update quantized facing angles or aim toward the supplied target position.
 extern "C" void facingUpdateAngles(FacingAngles *state, s32 reverse)
@@ -43,7 +43,7 @@ extern "C" void facingUpdateAngles(FacingAngles *state, s32 reverse)
         f32 directionY = state->direction.y;
         f32 targetX = state->target.x;
         f32 targetY = state->target.y;
-        u32 angle = FUN_00360d38(directionY - targetY, directionX - targetX);
+        u32 angle = mathAtan2AngleU16(directionY - targetY, directionX - targetX);
         u32 degrees = (static_cast<u16>(angle - 0x4000) * 360u) >> 16;
         state->yaw = degrees;
         if (reverse) {

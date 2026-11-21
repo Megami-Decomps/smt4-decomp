@@ -9,7 +9,7 @@ extern "C" {
 int CONCAT44(double, double);
 int effMenuQueueVectorEffect(...);
 int FUN_00249678(void);
-int FUN_0024c418(void);
+int mathAtan2Angle256(void);
 int asdDebugLog(...);
 int padAlternateButtonIndex(...);
 int libm_sinf(void);
@@ -98,7 +98,7 @@ static float romwright_sqrt_4(float value)
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: effMenuQueueVectorEffect. */
 /* Supplied declaration required: FUN_00249678. */
-/* Supplied declaration required: FUN_0024c418. */
+/* Supplied declaration required: mathAtan2Angle256. */
 /* Supplied declaration required: asdDebugLog. */
 /* Supplied declaration required: padAlternateButtonIndex. */
 /* Supplied declaration required: effMenuListAppend. */
@@ -418,7 +418,7 @@ LAB_00321f54:
   }
   DAT_004ea930 = temp_v16;
   if ((temp_v12 & 2) != 0) {
-    FUN_0024c418();
+    mathAtan2Angle256();
     libm_sinf();
     FUN_003f6b88();
     VectorSignedToFloat((int)DAT_0044ea84,(unsigned char)(temp_v14 >> 0x16) & 3);

@@ -46,7 +46,7 @@ void bitsAt60Set(EffectUnit *unit, u32 bit);
 u32 levelGetExpRequirement(u16 level);
 u32 FUN_004cc8d8(u16 level, u16 race);
 void gameDataAddCappedPoints(u16 points);
-s32 FUN_003df4a4(void);
+s32 playerHasSkill(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void FUN_004bd17c(EffectUnit *unit);
 
 /* Applies a consumable's secondary effects to the player (target < 0) or a party unit: the chance
@@ -141,7 +141,7 @@ u32 FUN_0035e03c(s32 target, ItemEffect *effect, s32 check, s32 preview)
     }
     if (effect->id == 0x7b6) {
         result = 0;
-        if (player == NULL || effect->requirement == 0 || FUN_003df4a4() != 0) {
+        if (player == NULL || effect->requirement == 0 || playerHasSkill() != 0) {
             result = 1;
         }
     }

@@ -9,7 +9,7 @@ int padButtonIsPressed(...);
 int memAlloc(int, int, int, int, int, int);
 int FUN_001a1ee0(void);
 int phaseCosine(void);
-int FUN_001b640c(void);
+int mathAtan2Angle256(void);
 int mathRemPio2f(void);
 int FUN_001bc2f0(...);
 int gfxQuaternionScratchMultiply(void);
@@ -99,7 +99,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: phaseCosine. */
-/* Supplied declaration required: FUN_001b640c. */
+/* Supplied declaration required: mathAtan2Angle256. */
 /* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: FUN_001bc2f0. */
 /* Supplied declaration required: gfxQuaternionScratchMultiply. */
@@ -453,7 +453,7 @@ LAB_003c01a8:
   }
   DAT_006472f0 = temp_v15;
   if ((temp_v12 & 2) != 0) {
-    FUN_001b640c();
+    mathAtan2Angle256();
     mathRemPio2f();
     FUN_001bc2f0();
     VectorSignedToFloat((int)DAT_0059dbe4,(unsigned char)(temp_v13 >> 0x16) & 3);

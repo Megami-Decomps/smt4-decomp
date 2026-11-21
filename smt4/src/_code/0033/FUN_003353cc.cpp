@@ -1,16 +1,16 @@
-/* NON_MATCHING: the offset helper reads the field once and the entry is read before the store (matches retail's writeback addressing); retail keeps one zero register for every null target and reuses the entry pointer, this build re-materialises zero and addresses with different registers. */
+/* NON_MATCHING: retail tests the record list for NULL as its own step after resolving it (this build threads the test
+ * into the offset check), resolves the entry offset as offset + base (the list as base + offset), and keeps one zero
+ * register for every NULL. */
 #include "common.h"
 
 /* Self-relative offsets: a field holding the distance from itself to its target (0 = no target). */
 static __inline void *relativeTarget(const s32 *field)
 {
-    u8 *base = (u8 *)field;
     s32 offset = *field;
-    u8 *target = NULL;
-    if (offset != 0) {
-        target = base + offset;
+    if (offset == 0) {
+        return NULL;
     }
-    return target;
+    return (u8 *)field + offset;
 }
 
 struct ResourceEntry {

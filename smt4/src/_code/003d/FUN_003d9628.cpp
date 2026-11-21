@@ -1,4 +1,6 @@
-/* NON_MATCHING: signed version digits and the float-zeroed header words now follow retail; armcc picks smulbb for the *100 term (retail: the *1000 term), keeps extra temporaries (r9/sl) and the retail order of the header clear and 1100 check differs. */
+/* NON_MATCHING: the version digits now give retail's smulbb on the *1000 term; retail reaches the snapshot at 0x1EA4
+ * through one base register (a sub-struct: see the Apocalypse twin FUN_004f5144's BattleRosterCacheSnapshotA), keeps
+ * fewer temporaries and finishes the version sum before the header loads. */
 #include "common.h"
 
 extern "C" {
@@ -30,9 +32,10 @@ void FUN_003d9628(const void *limits, void *destination, const void *file)
     RecordLoadView *state = static_cast<RecordLoadView *>(destination);
     const u8 *data = static_cast<const u8 *>(file) + header->dataOffset;
     u32 dataSize = header->dataSize;
-    s32 version = (header->version[0] - '0') * 1000 +
-                  (header->version[1] - '0') * 100 +
-                  (header->version[2] - '0') * 10 + header->version[3] - '0';
+    s32 version = (header->version[0] - '0') * 1000;
+    version += (header->version[1] - '0') * 100;
+    version += (header->version[2] - '0') * 10;
+    version += header->version[3] - '0';
     state->header[0] = 0.0f;
     state->header[1] = 0.0f;
     state->header[2] = 0.0f;

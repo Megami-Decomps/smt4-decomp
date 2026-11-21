@@ -10,7 +10,7 @@ int FUN_001a1ee0(void);
 int phaseCosine(void);
 int matrixGetTranslation(float *);
 int FUN_0037ee54(void);
-int FUN_0043bc74(void);
+int mathAtanAngle256(void);
 int FUN_0050d7ac(void);
 int randomAdvanceShiftRegister(...);
 int shiftRandomNextFraction(...);
@@ -106,7 +106,7 @@ extern int effGetFrameStep(void);
 /* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: matrixGetTranslation. */
 /* Supplied declaration required: FUN_0037ee54. */
-/* Supplied declaration required: FUN_0043bc74. */
+/* Supplied declaration required: mathAtanAngle256. */
 /* Supplied declaration required: FUN_0050d7ac. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: shiftRandomNextFraction. */
@@ -461,7 +461,7 @@ void FUN_00392070(fn_00392070_arg0 *param_1)
                   temp_v7 = DAT_006472e8;
                   DAT_006472e8 = temp_v9 - temp_v15;
                   DAT_006472f8 = temp_v15;
-                  FUN_0043bc74();
+                  mathAtanAngle256();
                   temp_v3 = 0;
                   DAT_006472fc = temp_v10;
                   DAT_00647300 = temp_v18;

@@ -1,6 +1,44 @@
-/* NON_MATCHING: compiler hoists animation/key pointers across channel stores and uses r6 rather than lr for sequence scanning. */
+/* NON_MATCHING: 38 lines: the opacity and scale starters are the same file's uiSpriteSetImageKeyframe and uiSpriteSetScaleKeyframe bodies, but retail schedules the key-table address after the flag stores, and the frame-sequence search keeps its entry in lr where this build saves r6. */
 #include "ui/UiSpriteApi.h"
 #include "ui/UiSpriteSequence.h"
+
+/* uiSpriteSetImageKeyframe's body (the same file's function, inlined here; this ternary form compiles
+ * that function out of line identically). */
+static __inline void spriteStartAlphaKey(UiSpriteState *sprite, s16 key, s32 reverse)
+{
+    const UiSpriteScalarKey *value;
+
+    if (sprite->alphaKeys != NULL) {
+        sprite->alphaKey = key;
+        sprite->alphaFrame = 0;
+        sprite->alphaDone = 0;
+        value = &sprite->alphaKeys[sprite->alphaKey];
+        sprite->finished = 0;
+        sprite->alphaReverse = reverse;
+        sprite->alpha = reverse != 0 ? value->last : value->first;
+    }
+}
+
+/* uiSpriteSetScaleKeyframe's body (the same file's function, inlined here; this ternary form compiles
+ * that function out of line identically). */
+static __inline void spriteStartScaleKey(UiSpriteState *sprite, s16 key, s32 reverse)
+{
+    const UiSpriteScalarKey *value;
+    f32 scale;
+
+    if (sprite->scaleKeys != NULL) {
+        sprite->scaleKey = key;
+        sprite->scaleFrame = 0;
+        sprite->scaleDone = 0;
+        value = &sprite->scaleKeys[sprite->scaleKey];
+        sprite->finished = 0;
+        sprite->scaleReverse = reverse;
+        scale = reverse != 0 ? value->last : value->first;
+        sprite->scale[0] = scale;
+        sprite->scale[1] = scale;
+        sprite->scale[2] = scale;
+    }
+}
 
 /* Runs a command list: starts the key each track's first command names. */
 extern "C" void uiSpriteSetAnimationCommand(UiSpriteState *sprite, const SpriteAnimationCommand *command)
@@ -15,35 +53,10 @@ extern "C" void uiSpriteSetAnimationCommand(UiSpriteState *sprite, const SpriteA
     sprite->commandsRunning = 1;
     if (command->positionKey > -1)
         uiSpriteSetKeyframe(sprite, (s16)command->positionKey, command->positionReverse);
-    if (sprite->commands->alphaKey > -1) {
-        s16 key = sprite->commands->alphaKey;
-        s8 reverse = sprite->commands->alphaReverse;
-        if (sprite->alphaKeys != NULL) {
-            sprite->alphaKey = key;
-            sprite->alphaFrame = 0;
-            sprite->alphaDone = 0;
-            sprite->finished = 0;
-            sprite->alphaReverse = reverse;
-            const UiSpriteScalarKey *value = &sprite->alphaKeys[sprite->alphaKey];
-            sprite->alpha = reverse == 0 ? value->first : value->last;
-        }
-    }
-    if (sprite->commands->scaleKey > -1) {
-        s16 key = sprite->commands->scaleKey;
-        s8 reverse = sprite->commands->scaleReverse;
-        if (sprite->scaleKeys != NULL) {
-            sprite->scaleKey = key;
-            sprite->scaleFrame = 0;
-            sprite->scaleDone = 0;
-            sprite->finished = 0;
-            sprite->scaleReverse = reverse;
-            const UiSpriteScalarKey *value = &sprite->scaleKeys[sprite->scaleKey];
-            f32 scale = reverse == 0 ? value->first : value->last;
-            sprite->scale[0] = scale;
-            sprite->scale[1] = scale;
-            sprite->scale[2] = scale;
-        }
-    }
+    if (sprite->commands->alphaKey > -1)
+        spriteStartAlphaKey(sprite, (s16)sprite->commands->alphaKey, sprite->commands->alphaReverse);
+    if (sprite->commands->scaleKey > -1)
+        spriteStartScaleKey(sprite, (s16)sprite->commands->scaleKey, sprite->commands->scaleReverse);
     if (sprite->commands->frameSequence > -1) {
         sprite->frameKeys = uiSpriteFindFrameSequence(sprite->resources, (s16)sprite->commands->frameSequence);
         if (sprite->frameKeys != NULL) {

@@ -34,7 +34,7 @@ static __inline bool floatBitsGreater(f32 value, s32 limitBits)
 
 extern "C" {
 
-f32 FUN_0024c418(f32 y, f32 x);
+f32 mathAtan2Angle256(f32 y, f32 x);
 
 // Heading of the camera's horizontal view direction in degrees, wrapped into the 0..360 range.
 f32 FUN_00231d2c(void)
@@ -42,7 +42,7 @@ f32 FUN_00231d2c(void)
     CameraView *camera = reinterpret_cast<CameraView *>(asdCameraGetSavedRenderPairs());
     Vec3 direction(camera->target.x - camera->eye.x, 0.0f, camera->target.z - camera->eye.z);
     direction.normalize();
-    f32 degrees = 360.0f + FUN_0024c418(direction.x, direction.z) * 1.40625f;
+    f32 degrees = 360.0f + mathAtan2Angle256(direction.x, direction.z) * 1.40625f;
     if (floatBitsGreater(degrees, 0x43b40000)) {
         degrees -= 360.0f;
     }

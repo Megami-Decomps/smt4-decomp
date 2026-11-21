@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail computes the state pointer before the frame setup, keeps a zero in r8 and loads g_btlEffect inside each state branch; armcc here hoists the global load above the state tests and tail-merges the return-1 paths. */
+/* NON_MATCHING: 68 lines: the state switch, fall-through and shared return-1 tail now follow retail; retail keeps a zero in r8 from entry, loads g_btlEffect inside each case (this build hoists its address into r7), and keeps the formatted-name and path buffer addresses and the name table entry in saved registers. */
 #include "runtime/Stdio.h"
 #include "battle/BtlEffectLoad.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
@@ -14,7 +14,7 @@ void memClear(void *buffer, s32 size);
 char *libc_strrchr(char *text, s32 character);
 s32 keyedRecordFindByName(const char *key);
 u32 keyedRecordRegisterName(const char *key);
-u32 FUN_00249e54(u32 handle, const void *file);
+u32 FUN_00249e54(u32 handle, const char *file);
 void asdMemFree(void);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 s32 textureCacheGetDirection(void);
@@ -41,19 +41,10 @@ extern "C" {
 u32 FUN_0024550c(MoveOutEffectWork *loader)
 {
     s32 i;
-
     MoveOutEffectWork *effects;
-    if (loader->state != 0) {
-        if (loader->state != 1) {
-            if (loader->state != 2)
-                return 1;
-            if (textureCacheGetDirection() != 0) {
-                loader->state = 3;
-                return 1;
-            }
-            return 0;
-        }
-    } else {
+
+    switch (loader->state) {
+    case 0:
         effects = g_btlEffect.work;
         for (i = 0; i < 5; i++) {
             BtlEffectFileSlot *slot = &effects->slots[i];
@@ -77,27 +68,33 @@ u32 FUN_0024550c(MoveOutEffectWork *loader)
             }
         }
         loader->state = 1;
-    }
-    effects = g_btlEffect.work;
-    for (i = 0; i < 5; i++) {
-        BtlEffectFileSlot slot = effects->slots[i];
-        if ((slot.flags & 1) && slot.file == NULL)
-            return 0;
-    }
-    for (i = 0; i < 5; i++) {
-        BtlEffectFileSlot *slot = &effects->slots[i];
-        const char *file = (const char *)slot->file;
-        if (file[0] == 'V' && file[1] == 'E' && file[2] == 'R') {
-            slot->handle = keyedRecordRegisterName(slot->name);
-            slot->handle = FUN_00249e54(slot->handle, file);
+        /* fall through */
+    case 1:
+        effects = g_btlEffect.work;
+        for (i = 0; i < 5; i++) {
+            BtlEffectFileSlot slot = effects->slots[i];
+            if ((slot.flags & 1) && slot.file == NULL)
+                return 0;
         }
+        for (i = 0; i < 5; i++) {
+            BtlEffectFileSlot *slot = &effects->slots[i];
+            const char *file = (const char *)slot->file;
+            if (file[0] == 'V' && file[1] == 'E' && file[2] == 'R') {
+                u32 handle = keyedRecordRegisterName(slot->name);
+                slot->handle = (u8)handle;
+                slot->handle = (u8)FUN_00249e54(handle, file);
+            }
+        }
+        textureCachePollReady();
+        loader->state = 2;
+        /* fall through */
+    case 2:
+        if (textureCacheGetDirection() != 0) {
+            loader->state = 3;
+            break;
+        }
+        return 0;
     }
-    textureCachePollReady();
-    loader->state = 2;
-    if (textureCacheGetDirection() != 0) {
-        loader->state = 3;
-        return 1;
-    }
-    return 0;
+    return 1;
 }
 }

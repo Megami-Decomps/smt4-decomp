@@ -1,76 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `resourceDispatchResolvePayload` (_code @ 0x45092c, 0xd0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail materialises the cast result as its own pointer (mov r1, r0; bics; movne r1, #0) and resolves
+ * the payload offset twice (base + offset for the test, offset + base for the value); this build folds both. */
+#include "gfx/ResourceDispatch.h"
+#include "gfx/GfxResult.h"
 
 extern "C" {
+void FUN_0018e0cc(DispatchResourceReference *reference, DispatchResource *resource, u32 flags);
+void FUN_001a90f0(DispatchResourceLookup *result, const DispatchResourceReference *reference);
+u32 FUN_0015d8e0(DispatchResource **resource, u32 allocator, u32 flags);
 
-int FUN_0018e0cc(unsigned char [8], unsigned int *, unsigned int);
-int FUN_001a90f0(unsigned int **, unsigned char [8]);
-
-/* stack frame of param_3: 3 slot(s), 9 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned char sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_3_stack;
-
-extern unsigned int FUN_0015d8e0(unsigned int **, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0018e0cc. */
-/* Supplied declaration required: FUN_001a90f0. */
-
-
-unsigned int resourceDispatchResolvePayload(unsigned int param_1,unsigned int *param_2,unsigned int param_3)
-
+/* Resolves a resource's embedded payload, loading it on demand before dispatch; 0x80000001 when the reference is not found. */
+GfxResult resourceDispatchResolvePayload(u32 allocator, DispatchResource *resource, u32 flags)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int *puVar3;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int *temp_v3;
-  char temp_v4;
-  unsigned int *temp_v5 [2];
-  unsigned char temp_v6 [8];
-  
-  temp_v2 = 0;
-  temp_v5[0] = (unsigned int *)0x0;
-  if (param_2 != (unsigned int *)0x0) {
-    puVar3 = param_2;
-    if ((~*param_2 & 0x20000004) != 0) {
-      puVar3 = (unsigned int *)0x0;
-    }
-    puVar1 = param_2;
-    if (puVar3 != (unsigned int *)0x0) {
-      temp_v1 = puVar3[7];
-      if (temp_v1 != 0) {
-        temp_v0 = (int)puVar3 + temp_v1 + 0x1c;
-      }
-      else {
-        temp_v0 = 0;
-      }
-      if (temp_v0 != 0) {
-        puVar1 = (unsigned int *)0x0;
-        if (temp_v1 != 0) {
-          puVar1 = (unsigned int *)((int)puVar3 + temp_v1 + 0x1c);
+    GfxResult result;
+    DispatchResource *payload = NULL;
+    if (resource != NULL) {
+        bool ready = true;
+        DispatchResource *container = DispatchResource::cast(resource);
+        if (container != NULL) {
+            if (container->payload.get() != NULL) {
+                payload = (DispatchResource *)container->payload.get();
+            } else {
+                DispatchResourceLookup lookup;
+                lookup.resource = NULL;
+                lookup.found = 0;
+                DispatchResourceReference reference;
+                FUN_0018e0cc(&reference, container, flags);
+                FUN_001a90f0(&lookup, &reference);
+                if (!lookup.found) {
+                    result |= 0x80000001;
+                    ready = false;
+                } else {
+                    payload = lookup.resource;
+                }
+            }
+        } else {
+            payload = resource;
         }
-      }
-      else {
-        temp_v3 = (unsigned int *)0x0;
-        temp_v4 = '\0';
-        FUN_0018e0cc(temp_v6,puVar3,param_3);
-        FUN_001a90f0(&temp_v3,temp_v6);
-        if (temp_v4 == '\0') {
-          return 0x80000001;
-        }
-        temp_v5[0] = temp_v3;
-        puVar1 = temp_v5[0];
-      }
+        if (ready)
+            result |= FUN_0015d8e0(&payload, allocator, flags);
     }
-    temp_v5[0] = puVar1;
-    temp_v2 = FUN_0015d8e0(temp_v5,param_1,param_3);
-  }
-  return temp_v2;
+    return result;
 }
-
-} /* extern "C" */
+}

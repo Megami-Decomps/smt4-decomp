@@ -54,7 +54,7 @@ s32 questControlsGetCursorRow(u8* controls);
 s32 gameGetMode(void);
 void FUN_004d0680(StatusScreen* screen);
 void entryTableResetAndInit(s32 a, s32 b, s32 c, s32 d);
-s32 FUN_004a34a0(StatusScreen* screen, u32 id);
+s32 demonPurchaseValidate(StatusScreen* screen, u32 id);
 u32 dataTable01GetRecordWithAocOverride(u32 id);
 u32 demonGetRaceLabel(u32 id, s32 arg);
 void libc_strcpy(char* dst, u32 src);
@@ -107,7 +107,7 @@ void compendiumUpdateSelectedEntry(StatusScreen* screen)
     if (select != 0) {
         id = currentId(screen);
         entryTableResetAndInit(0x18, FUN_004a8750((u16)id, screen->page, 0, (s8)SCREEN_BYTE(screen, 0x94) >= 100, 0), -1, 0);
-        if (FUN_004a34a0(screen, (u16)id) != 0) {
+        if (demonPurchaseValidate(screen, (u16)id) != 0) {
             char text[128];
             libc_strcpy(text, dataTable01GetRecordWithAocOverride((u16)id));
             scrSetStringSlot(8, text);

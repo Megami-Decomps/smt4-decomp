@@ -1,7 +1,8 @@
-/* NON_MATCHING: jump table and the white colour initialisation now match retail; the VFP registers holding 0.0f and 1.0f (s16/s17) are swapped and the argument setup schedules differently. */
+/* NON_MATCHING: 28 lines: the jump table, the white colour initialisation and the draw call's argument order now match retail; the VFP registers holding 0.0f and 1.0f (s16/s17) are swapped, which also reorders the literal pool. */
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match3_EffectColor.h"
 #include "camp/RenderCtxTitle.h"
+#include "gfx/ColoredQuad.h"
 
 struct CampCecOverlayWork {
     u8 unk000[0xd28];
@@ -15,9 +16,6 @@ extern CampCecOverlayWork *g_campCec;
 void gxResetColorQuadToWhite();
 s32 renderCtxPackPassFlags(u32 mode, u32 option);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
-void gfxDrawQuadFourColors(const EffectColor *first, const EffectColor *second,
-                  const EffectColor *third, const EffectColor *fourth,
-                  f32 x, f32 y, f32 width, f32 height, f32 depth);
 void efctSetSpeed(f32 alpha);
 
 u32 campCecDrawDimmingOverlay()
@@ -47,8 +45,7 @@ u32 campCecDrawDimmingOverlay()
             color.alpha = 0.5f;
             renderCtxSelectTexture(g_titleScene, 0);
             f32 offset = renderCtxCalculateStereoParallax(g_titleScene, 0.35f);
-            gfxDrawQuadFourColors(&color, &color, &color, &color,
-                          (f32)(s32)offset, 0.0f, 400.0f, 240.0f, 0.95703125f);
+            gfxDrawQuadFourColors((f32)(s32)offset, 0.0f, 400.0f, 240.0f, &color, &color, &color, &color, 0.95703125f);
             efctSetSpeed(1.0f);
             renderStackPop(&g_titleScene->stackA);
         }

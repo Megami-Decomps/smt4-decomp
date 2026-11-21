@@ -1,4 +1,5 @@
-/* NON_MATCHING: unk1381 is an s8 (retail splits its offset as +4864/[129]); the constant-return tails (mov r0,#3 shared by three branches) are laid out differently. */
+/* NON_MATCHING: the tests and their order match; the constant-return blocks are laid out differently (retail puts
+   `return 1` first, then 2, then mode 0's test and `return 3`). */
 #include "shard/Shard0033.h"
 #include "game/GameGlobalsRef.h"
 
@@ -18,15 +19,20 @@ u32 FUN_00334044()
         return g_gameGlobals.instance->unk1381 == 0 ? 3 : 2;
     }
     if (mode == 4) return 2;
-    if (mode != 7) {
-        if (mode == 9 || mode == 10) return 2;
-        if (mode == 11 || mode == 12 || mode == 8) return 2;
-        if (mode == 15) return 1;
-        if (mode == 14) {
-            return g_gameGlobals.instance->unk1381 == 0 ? 3 : 2;
-        }
-        if (g_gameGlobals.instance->unk1381 != 0) return 2;
+    if (mode == 7) {
+        if (g_gameGlobals.instance->sessionDisplay.active != 0) return 3;
+        return 2;
     }
-    return g_gameGlobals.instance->sessionDisplay.active != 0 ? 3 : 2;
+    if (mode == 9 || mode == 10) return 2;
+    if (mode == 11 || mode == 12 || mode == 8) return 2;
+    if (mode == 15) return 1;
+    if (mode == 14) {
+        if (g_gameGlobals.instance->unk1381 == 0) return 3;
+        return 2;
+    }
+    if (g_gameGlobals.instance->unk1381 == 0) {
+        if (g_gameGlobals.instance->sessionDisplay.active != 0) return 3;
+    }
+    return 2;
 }
 }

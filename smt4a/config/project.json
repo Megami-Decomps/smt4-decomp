@@ -24840,12 +24840,12 @@
     },
     {
       "address": "0x13d33c",
-      "function": "FUN_0013d33c",
+      "function": "touchInputUpdate",
       "module": "_code",
-      "object": "build/obj/_code/0013/FUN_0013d33c.o",
+      "object": "build/obj/_code/0013/touchInputUpdate.o",
       "size": 236,
-      "source": "src/_code/0013/FUN_0013d33c.cpp",
-      "target": "orig/target/_code/0013/FUN_0013d33c.o",
+      "source": "src/_code/0013/touchInputUpdate.cpp",
+      "target": "orig/target/_code/0013/touchInputUpdate.o",
       "thumb": false
     },
     {
@@ -32712,12 +32712,12 @@
     },
     {
       "address": "0x169e38",
-      "function": "FUN_00169e38",
+      "function": "uiDrawGroupedNumber",
       "module": "_code",
-      "object": "build/obj/_code/0016/FUN_00169e38.o",
+      "object": "build/obj/_code/0016/uiDrawGroupedNumber.o",
       "size": 668,
-      "source": "src/_code/0016/FUN_00169e38.cpp",
-      "target": "orig/target/_code/0016/FUN_00169e38.o",
+      "source": "src/_code/0016/uiDrawGroupedNumber.cpp",
+      "target": "orig/target/_code/0016/uiDrawGroupedNumber.o",
       "thumb": false
     },
     {
@@ -47580,12 +47580,12 @@
     },
     {
       "address": "0x1b640c",
-      "function": "FUN_001b640c",
+      "function": "mathAtan2Angle256",
       "module": "_code",
-      "object": "build/obj/_code/001b/FUN_001b640c.o",
+      "object": "build/obj/_code/001b/mathAtan2Angle256.o",
       "size": 256,
-      "source": "src/_code/001b/FUN_001b640c.cpp",
-      "target": "orig/target/_code/001b/FUN_001b640c.o",
+      "source": "src/_code/001b/mathAtan2Angle256.cpp",
+      "target": "orig/target/_code/001b/mathAtan2Angle256.o",
       "thumb": false
     },
     {
@@ -103174,12 +103174,12 @@
     },
     {
       "address": "0x34cda0",
-      "function": "FUN_0034cda0",
+      "function": "partyPanelPollHelpRefresh",
       "module": "_code",
-      "object": "build/obj/_code/0034/FUN_0034cda0.o",
+      "object": "build/obj/_code/0034/partyPanelPollHelpRefresh.o",
       "size": 540,
-      "source": "src/_code/0034/FUN_0034cda0.cpp",
-      "target": "orig/target/_code/0034/FUN_0034cda0.o",
+      "source": "src/_code/0034/partyPanelPollHelpRefresh.cpp",
+      "target": "orig/target/_code/0034/partyPanelPollHelpRefresh.o",
       "thumb": false
     },
     {
@@ -117541,12 +117541,12 @@
     },
     {
       "address": "0x39e338",
-      "function": "FUN_0039e338",
+      "function": "btlScriptSetPartyStatus",
       "module": "_code",
-      "object": "build/obj/_code/0039/FUN_0039e338.o",
+      "object": "build/obj/_code/0039/btlScriptSetPartyStatus.o",
       "size": 508,
-      "source": "src/_code/0039/FUN_0039e338.cpp",
-      "target": "orig/target/_code/0039/FUN_0039e338.o",
+      "source": "src/_code/0039/btlScriptSetPartyStatus.cpp",
+      "target": "orig/target/_code/0039/btlScriptSetPartyStatus.o",
       "thumb": false
     },
     {
@@ -127697,12 +127697,12 @@
     },
     {
       "address": "0x3df4a4",
-      "function": "FUN_003df4a4",
+      "function": "playerHasSkill",
       "module": "_code",
-      "object": "build/obj/_code/003d/FUN_003df4a4.o",
+      "object": "build/obj/_code/003d/playerHasSkill.o",
       "size": 72,
-      "source": "src/_code/003d/FUN_003df4a4.cpp",
-      "target": "orig/target/_code/003d/FUN_003df4a4.o",
+      "source": "src/_code/003d/playerHasSkill.cpp",
+      "target": "orig/target/_code/003d/playerHasSkill.o",
       "thumb": false
     },
     {
@@ -144820,22 +144820,22 @@
     },
     {
       "address": "0x43bb48",
-      "function": "FUN_0043bb48",
+      "function": "mathAtan2AngleU16",
       "module": "_code",
-      "object": "build/obj/_code/0043/FUN_0043bb48.o",
+      "object": "build/obj/_code/0043/mathAtan2AngleU16.o",
       "size": 280,
-      "source": "src/_code/0043/FUN_0043bb48.cpp",
-      "target": "orig/target/_code/0043/FUN_0043bb48.o",
+      "source": "src/_code/0043/mathAtan2AngleU16.cpp",
+      "target": "orig/target/_code/0043/mathAtan2AngleU16.o",
       "thumb": false
     },
     {
       "address": "0x43bc74",
-      "function": "FUN_0043bc74",
+      "function": "mathAtanAngle256",
       "module": "_code",
-      "object": "build/obj/_code/0043/FUN_0043bc74.o",
+      "object": "build/obj/_code/0043/mathAtanAngle256.o",
       "size": 128,
-      "source": "src/_code/0043/FUN_0043bc74.cpp",
-      "target": "orig/target/_code/0043/FUN_0043bc74.o",
+      "source": "src/_code/0043/mathAtanAngle256.cpp",
+      "target": "orig/target/_code/0043/mathAtanAngle256.o",
       "thumb": false
     },
     {
@@ -149016,12 +149016,12 @@
     },
     {
       "address": "0x45ab90",
-      "function": "FUN_0045ab90",
+      "function": "resourceNameBindingBind",
       "module": "_code",
-      "object": "build/obj/_code/0045/FUN_0045ab90.o",
+      "object": "build/obj/_code/0045/resourceNameBindingBind.o",
       "size": 272,
-      "source": "src/_code/0045/FUN_0045ab90.cpp",
-      "target": "orig/target/_code/0045/FUN_0045ab90.o",
+      "source": "src/_code/0045/resourceNameBindingBind.cpp",
+      "target": "orig/target/_code/0045/resourceNameBindingBind.o",
       "thumb": false
     },
     {
@@ -159799,12 +159799,12 @@
     },
     {
       "address": "0x4a34a0",
-      "function": "FUN_004a34a0",
+      "function": "demonPurchaseValidate",
       "module": "_code",
-      "object": "build/obj/_code/004a/FUN_004a34a0.o",
+      "object": "build/obj/_code/004a/demonPurchaseValidate.o",
       "size": 320,
-      "source": "src/_code/004a/FUN_004a34a0.cpp",
-      "target": "orig/target/_code/004a/FUN_004a34a0.o",
+      "source": "src/_code/004a/demonPurchaseValidate.cpp",
+      "target": "orig/target/_code/004a/demonPurchaseValidate.o",
       "thumb": false
     },
     {

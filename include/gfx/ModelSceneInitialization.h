@@ -21,6 +21,10 @@ struct ModelScenePoolDescription {
     u32 buffers;
     u32 lists;
     u32 alignment;
+    /* The defaults every pool description starts from (RGBA8 format, 1 MiB buffer, 0x200 entries). */
+    ModelScenePoolDescription()
+        : format(0x8058), bufferBytes(0x100000), entryCount(0x200), unk0C(0), unk10(0), options(0x700),
+          buffers(2), lists(2), alignment(8) {}
 };
 struct ModelSceneCapacity {
     u32 modelCount;

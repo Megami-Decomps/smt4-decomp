@@ -46,7 +46,7 @@ int statusDownRestartTransition(void);
 int flaggedEntrySetValueA(...);
 int arrayContainsU16(...);
 int whisperEffectFinish(void);
-int FUN_003df4a4(...);
+int playerHasSkill(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int recordContainsPairedId(...);
 
 /* stack frame of param_1: 17 slot(s), 63 byte(s) */
@@ -130,7 +130,7 @@ extern int btlTalkBustupMatchesEntry(unsigned short);
 /* Supplied declaration required: roundObjFinish. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
-/* Supplied declaration required: FUN_003df4a4. */
+/* Supplied declaration required: playerHasSkill. */
 /* Supplied declaration required: gamePlayerClearPairedId. */
 /* Supplied declaration required: countUnlockedSlots. */
 /* Supplied declaration required: FUN_003e0174. */
@@ -277,7 +277,7 @@ void FUN_0026cbb8(int param_1)
                 *(short *)(param_1 + 0x76c4) = (short)temp_v23;
               }
               *(unsigned short *)(temp_v29 + 0xb4) = 1;
-              temp_v9 = FUN_003df4a4(temp_v7);
+              temp_v9 = playerHasSkill(temp_v7);
               if (temp_v9 == 0) {
                 *piVar22 = *piVar22 + 1;
               }
@@ -287,7 +287,7 @@ void FUN_0026cbb8(int param_1)
             else {
               temp_v20 = recordContainsPairedId(temp_v5,temp_v7);
               temp_v9 = temp_v14;
-              if ((temp_v20 != 0) && (temp_v20 = FUN_003df4a4(temp_v7), temp_v9 = temp_v14, temp_v20 != 0)) {
+              if ((temp_v20 != 0) && (temp_v20 = playerHasSkill(temp_v7), temp_v9 = temp_v14, temp_v20 != 0)) {
                 *piVar22 = *piVar22 - 1;
               }
               temp_v7 = *puVar27;
@@ -325,14 +325,14 @@ void FUN_0026cbb8(int param_1)
       do {
         temp_v9 = param_1 + temp_v6 * 2;
         if (*(short *)(temp_v9 + 0x76a4) != 0) {
-          temp_v14 = FUN_003df4a4();
+          temp_v14 = playerHasSkill();
           if ((temp_v14 != 0) &&
              (temp_v14 = recordContainsPairedId(temp_v5,*(unsigned short *)(temp_v9 + 0x76a4)), temp_v14 != 0)) {
             *puVar27 = *puVar27 + 1;
             *piVar22 = *piVar22 + 1;
           }
           else {
-            temp_v14 = FUN_003df4a4(*(unsigned short *)(temp_v9 + 0x76a4));
+            temp_v14 = playerHasSkill(*(unsigned short *)(temp_v9 + 0x76a4));
             if ((temp_v14 == 0) &&
                (temp_v9 = recordContainsPairedId(temp_v5,*(unsigned short *)(temp_v9 + 0x76a4)), temp_v9 != 0)) {
               *puVar27 = *puVar27 + 1;
@@ -516,14 +516,14 @@ LAB_0026e1e4:
           do {
             temp_v9 = param_1 + temp_v6 * 2;
             if (*(short *)(temp_v9 + 0x76a4) != 0) {
-              temp_v14 = FUN_003df4a4();
+              temp_v14 = playerHasSkill();
               if ((temp_v14 != 0) &&
                  (temp_v14 = recordContainsPairedId(temp_v5,*(unsigned short *)(temp_v9 + 0x76a4)), temp_v14 != 0)) {
                 *puVar27 = *puVar27 + 1;
                 *piVar22 = *piVar22 + 1;
               }
               else {
-                temp_v14 = FUN_003df4a4(*(unsigned short *)(temp_v9 + 0x76a4));
+                temp_v14 = playerHasSkill(*(unsigned short *)(temp_v9 + 0x76a4));
                 if ((temp_v14 == 0) &&
                    (temp_v9 = recordContainsPairedId(temp_v5,*(unsigned short *)(temp_v9 + 0x76a4)), temp_v9 != 0)) {
                   *puVar27 = *puVar27 + 1;
@@ -774,7 +774,7 @@ LAB_0026e044:
         do {
           temp_v7 = countUnlockedSlots();
           temp_v5 = param_1 + temp_v26 * 2;
-          temp_v9 = FUN_003df4a4(*(unsigned short *)(temp_v5 + 0x76c4));
+          temp_v9 = playerHasSkill(*(unsigned short *)(temp_v5 + 0x76c4));
           if (temp_v9 == 0) {
             temp_v9 = 0;
             if ((int)temp_v7 < 1) {
@@ -1199,10 +1199,10 @@ LAB_0026d4c4:
               *puVar27 = temp_v7 - 1;
               *(unsigned short *)(param_1 + temp_v14 * 2 + 0x76c4) = 0;
               *(unsigned short *)(temp_v9 + 0x76b4) = 0;
-              temp_v14 = FUN_003df4a4(*(unsigned short *)(temp_v9 + 0x76a4));
+              temp_v14 = playerHasSkill(*(unsigned short *)(temp_v9 + 0x76a4));
               if (temp_v14 != 0) {
                 temp_v14 = listCursorGetRowIfUnblocked(temp_v26);
-                temp_v14 = FUN_003df4a4(*(unsigned short *)(temp_v5 + temp_v14 * 2 + 0x34));
+                temp_v14 = playerHasSkill(*(unsigned short *)(temp_v5 + temp_v14 * 2 + 0x34));
                 if (temp_v14 == 0) {
                   *piVar22 = *piVar22 - 1;
                 }

@@ -6135,3 +6135,11 @@
 003c1e50 playerGetGrowthParameters
 003c1ab4 statMaximumsAtLevel
 003c1cfc demonGetGrowthParameters
+0024c418 mathAtan2Angle256
+00360e64 mathAtanAngle256
+00360d38 mathAtan2AngleU16
+0026cf4c partyPanelPollHelpRefresh
+002bdce0 uiDrawGroupedNumber
+00108b6c touchInputUpdate
+002402c4 fileExistsPatchOrRom
+0026b738 playerHasSkill

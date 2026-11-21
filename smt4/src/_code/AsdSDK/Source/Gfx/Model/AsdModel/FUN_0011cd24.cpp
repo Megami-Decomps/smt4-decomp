@@ -1,4 +1,4 @@
-/* NON_MATCHING: the wait now goes through handleWait on the NnOsHandle global (one load of its handle, as retail); retail still builds the wait arguments in a 16-byte frame whose first word is also the key buffer for FUN_00129684 (armcc gives the key its own slot, 24 bytes), and the registry walk is scheduled differently. */
+/* NON_MATCHING: 70 lines: retail keeps every NULL test of the registry walk as its own branch (a zero hoisted into r5 for the end-of-list result, each exit joining one entry != NULL test) where this build predicates and merges them. */
 #include "nn/Result.h"
 #include "nn/os/Handle.h"
 #include "sys/HandleWait.h"
@@ -37,28 +37,28 @@ __declspec(noreturn) void FUN_0011cd24(void)
 {
     for (;;) {
         handleWait(g_modelWorkHandle.handle, -1);
-        u32 key;
-        s32 result = FUN_00129684(&key);
-        if (nnResultIsSuccess(result)) {
-            ModelRegistryEntry *entry = NULL;
-            if (g_modelWorkList != NULL) {
-                ModelRegistryEntry *end = modelRegistryGetEntry(g_modelWorkList->next);
-                entry = modelRegistryGetEntry(g_modelWorkList);
+        /* The request key's scope ends before the next wait: retail gives it the wait's stack-argument slot. */
+        {
+            u32 key;
+            s32 result = FUN_00129684(&key);
+            if (nnResultIsSuccess(result)) {
+                ModelRegistryEntry *entry = g_modelWorkList != NULL ? modelRegistryGetEntry(g_modelWorkList) : NULL;
                 while (entry != NULL && entry->parameter != key) {
-                    if (entry == end) {
+                    /* The last entry is re-read from the list head at every step. */
+                    if (entry == (g_modelWorkList != NULL ? modelRegistryGetEntry(g_modelWorkList->next) : NULL)) {
                         entry = NULL;
                         break;
                     }
                     entry = modelRegistryGetEntry(modelRegistryGetLink(entry)->previous);
                 }
+                if (entry != NULL) {
+                    entry->FUN_0011cd24_dispatch();
+                }
+                result = 0;
             }
-            if (entry != NULL) {
-                entry->FUN_0011cd24_dispatch();
+            if (nnResultIsFailure(result)) {
+                asdFatalError();
             }
-            result = 0;
-        }
-        if (nnResultIsFailure(result)) {
-            asdFatalError();
         }
     }
 }

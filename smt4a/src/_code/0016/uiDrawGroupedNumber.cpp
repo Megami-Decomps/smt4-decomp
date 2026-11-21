@@ -1,17 +1,14 @@
-/* NON_MATCHING: logic matches retail; armcc lays out the digit-2/digit-5 comma blocks and the zero case in a different order and emits strd for the glyph args */
 #include "common.h"
+#include <stdlib.h>
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/AnimatedMessage.h"
 
 extern "C" {
-
-
-void gxResetColorQuadToWhite(void);
 void drawSetColorFromRGBA8(u32 packed);
-s32 __aeabi_idivmod(s32 numerator, s32 denominator);
 
-/* Draws `value` as digits with thousands marks at (x, y); with `signed` the number is coloured by sign and prefixed with +/-. */
-void FUN_00169e38(s32 value, s32 x, s32 y, s32 signedDisplay)
+/* Draws `value` as digits with thousands marks at (x, y); with `signedDisplay` the number is coloured by sign and prefixed with +/-. */
+void uiDrawGroupedNumber(s32 value, s32 x, s32 y, s32 signedDisplay)
 {
     TextureTableEntryIV *sprite = NULL;
     s32 digit = 0;
@@ -20,20 +17,25 @@ void FUN_00169e38(s32 value, s32 x, s32 y, s32 signedDisplay)
     if (signedDisplay != 0) {
         if (value < 0) {
             drawSetColorFromRGBA8(0xDC0F14FF);
+        } else if (value > 0) {
+            drawSetColorFromRGBA8(0x72E027FF);
         } else {
-            drawSetColorFromRGBA8(value > 0 ? 0x72E027FF : 0xFFFFFFFF);
+            drawSetColorFromRGBA8(0xFFFFFFFF);
         }
     } else {
         drawSetColorFromRGBA8(0xFFFFFFFF);
     }
     if (value < 0) {
         remaining = -value;
+        drawSetColorFromRGBA8(0xFF0000FF);
     }
-    drawSetColorFromRGBA8(0xFF0000FF);
-    if (remaining != 0) {
+    if (remaining == 0) {
+        sprite = asdTMTexTableEntryAt(8, 0x5C);
+        texDrawTableEntryAtStoredOrigin(2, 7, 0, sprite->x + x, sprite->y + y, 16);
+    } else {
         s32 divisor = 100000000;
         do {
-            if ((value < 0 ? -value : value) >= divisor) {
+            if (abs(value) >= divisor) {
                 if (firstDigit < 0) {
                     firstDigit = digit;
                 }
@@ -52,9 +54,6 @@ void FUN_00169e38(s32 value, s32 x, s32 y, s32 signedDisplay)
             digit++;
             divisor /= 10;
         } while (divisor > 0);
-    } else {
-        sprite = asdTMTexTableEntryAt(8, 0x5C);
-        texDrawTableEntryAtStoredOrigin(2, 7, 0, sprite->x + x, sprite->y + y, 16);
     }
     if (signedDisplay != 0) {
         if (firstDigit >= 0) {

@@ -11,7 +11,7 @@ extern "C" {
 
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
-int FUN_00169e38(...);
+int uiDrawGroupedNumber(...);
 int renderCtxPopState(...);
 int renderStackPushIndexed(RenderCtxA *, int, unsigned int);
 int gxResetColorQuadToWhite(void);
@@ -32,7 +32,7 @@ typedef struct {
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00169e38. */
+/* Supplied declaration required: uiDrawGroupedNumber. */
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
@@ -86,7 +86,7 @@ void FUN_00164490(int param_1)
       temp_v4 = (int)asdTMTexTableEntryAt(8,0xc0);
     }
     texDrawCompositeSprite(2,8,0,*(short *)(temp_v4 + 8) + temp_v2,*(short *)(temp_v4 + 10) + temp_v3,0xb);
-    FUN_00169e38(*(unsigned int *)(((int)g_messageMain.banner) + 0x7c),*(short *)(temp_v4 + 8) + temp_v2,
+    uiDrawGroupedNumber(*(unsigned int *)(((int)g_messageMain.banner) + 0x7c),*(short *)(temp_v4 + 8) + temp_v2,
                  *(short *)(temp_v4 + 10) + temp_v3,0);
     if (*(char *)(((int)g_messageMain.banner) + 0x92) != '\0') {
       if (param_1 != 0) {
@@ -116,7 +116,7 @@ void FUN_00164490(int param_1)
         gxResetColorQuadToWhite();
       }
       else {
-        FUN_00169e38(*(unsigned int *)(((int)g_messageMain.banner) + 0x84),*(short *)(temp_v4 + 8) + temp_v2,
+        uiDrawGroupedNumber(*(unsigned int *)(((int)g_messageMain.banner) + 0x84),*(short *)(temp_v4 + 8) + temp_v2,
                      *(short *)(temp_v4 + 10) + temp_v3,1);
       }
     }
@@ -132,7 +132,7 @@ void FUN_00164490(int param_1)
       temp_v4 = (int)asdTMTexTableEntryAt(8,0x100);
       texDrawCompositeSprite(2,8,0x16,(int)*(short *)(temp_v4 + 8) + (int)(temp_v14 + temp_v13),
                    *(short *)(temp_v4 + 10) + temp_v3,0xb);
-      FUN_00169e38(-*(int *)(temp_v2 + 0x168),(int)*(short *)(temp_v4 + 8) + (int)(temp_v14 + temp_v13),
+      uiDrawGroupedNumber(-*(int *)(temp_v2 + 0x168),(int)*(short *)(temp_v4 + 8) + (int)(temp_v14 + temp_v13),
                    *(short *)(temp_v4 + 10) + temp_v3,1);
     }
     temp_v2 = ((int)g_messageMain.banner);

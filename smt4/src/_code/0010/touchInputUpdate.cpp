@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail copies the reader and previous status with ldm/stm and loads the state base after the reader call; built uses ldrd/strd */
+/* NON_MATCHING: 40 lines: retail reads the repeating flag before incrementing the hold count (and compares repeatDelay against it with cmp/strle), and the reader's -1 and the held-state constants get other registers. */
 #include "common.h"
 
 extern "C" {
@@ -22,11 +22,11 @@ typedef struct {
     s32 repeatDelay;    /* 0x1c */
 } TouchInput;
 
+/* The touch panel reader: the panel and the last sample it read (index and tick, -1 before the first read). */
 typedef struct {
-    u32 handle;
-    s32 unk4;
-    s32 unk8;
-    s32 unkC;
+    /* 0x00 */ u32 handle;
+    /* 0x04 */ s32 lastIndex;
+    /* 0x08 */ s64 lastTick;
 } TouchReader;
 
 extern TouchInput g_touchInput;
@@ -35,14 +35,13 @@ u32 FUN_0011c448(void);
 u8 nn_hid_CTR_TouchPanelReader_ReadLatest(TouchReader *reader, TouchStatus *status);
 
 /* Samples the touch panel and updates the held state and the key-repeat style trigger. */
-s32 FUN_00108b6c(void)
+s32 touchInputUpdate(void)
 {
     TouchReader reader;
 
     reader.handle = FUN_0011c448();
-    reader.unk4 = -1;
-    reader.unk8 = -1;
-    reader.unkC = -1;
+    reader.lastIndex = -1;
+    reader.lastTick = -1;
     g_touchInput.prev = g_touchInput.cur;
     g_touchInput.prevHeld = g_touchInput.held;
     if (g_touchInput.cur.touch == 1) {

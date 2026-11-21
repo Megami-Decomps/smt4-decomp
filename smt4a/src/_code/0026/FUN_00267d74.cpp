@@ -1,4 +1,5 @@
 /* NON_MATCHING: resolves duplicate devils when a party slot is replaced (swap the displaced id into the matching slot, keep the reserve list sorted and de-duplicated, adjust the counters); written from the decompilation, the compiler-unrolled shift/zero loops are written as plain loops */
+#include "shard/W5_W5Match2_PairedIds.h"
 #include "common.h"
 
 #define PARTY_SLOT_COUNT 8
@@ -25,7 +26,6 @@ struct PartyIncoming {
 extern "C" {
 void qsort(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 FUN_00321c94(const void *a, const void *b);
-s32 FUN_003df4a4(u16 id);
 s32 recordContainsPairedId(u32 record, u16 id);
 
 /* Removes the id at the head of the reserve from the rest of it and keeps it sorted. */
@@ -75,13 +75,13 @@ void FUN_00267d74(PartyIds *party, u32 record, PartyIncoming *incoming, s32 swap
             qsort(party->reserve, PARTY_SLOT_COUNT, sizeof(s16), FUN_00321c94);
         }
 
-        s32 displacedKnown = FUN_003df4a4(displaced);
+        s32 displacedKnown = playerHasSkill(displaced);
         s32 incomingPaired = recordContainsPairedId(record, incoming->ids[slot]);
         if (displacedKnown == 0 || incomingPaired != 0) {
-            if (FUN_003df4a4(displaced) == 0 && recordContainsPairedId(record, incoming->ids[slot]) != 0) {
+            if (playerHasSkill(displaced) == 0 && recordContainsPairedId(record, incoming->ids[slot]) != 0) {
                 party->filledCount++;
                 party->slotMarks[slot] = 1;
-            } else if ((FUN_003df4a4(displaced) == 0 && recordContainsPairedId(record, incoming->ids[slot]) == 0)
+            } else if ((playerHasSkill(displaced) == 0 && recordContainsPairedId(record, incoming->ids[slot]) == 0)
                        || incoming->ids[slot] == 0) {
                 party->reserveCount--;
             }

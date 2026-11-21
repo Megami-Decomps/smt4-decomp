@@ -13,7 +13,7 @@ const char *btlPosArrangeGetFilePath(BtlMainState *context);
 char *libc_strcpy(char *output, const char *input);
 void asdMemFree(void *allocation);
 void asdLoadFileAsyncSimple(const char *path, void **output, u32 flags);
-s32 FUN_002402c4(BtlMainState *context, const char *path);
+s32 fileExistsPatchOrRom(BtlMainState *context, const char *path);
 u32 FUN_0023fffc(BattleEncounterQuery *query, BtlMainState *context);
 u32 FUN_0023fbdc(BattleEncounterQuery *query, BtlMainState *context);
 void frameTexApplyMode(s32 mode);
@@ -53,7 +53,7 @@ u32 battleEncounterStepSetup(BattleEncounterQuery *query, BtlMainState *context)
 
     memClear(path, sizeof(path));
     libc_strcpy(path, btlPosArrangeGetFilePath(context));
-    if (FUN_002402c4(context, path) != 0) {
+    if (fileExistsPatchOrRom(context, path) != 0) {
         return battleEncounterLoadArrangement(query, context);
     } else {
         query->step = 0xd;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail addresses input/result state through separate global relocations; the aggregate accesses also change stack layout and loop codegen. */
+/* NON_MATCHING: word count, input copy loop and library result test now match retail; remaining: retail reaches the result array through its own literal (g_asdNgc+0x1000 as a separate object) while the build derives it from the g_asdNgc base, which shifts the frame and register allocation. */
 #include "AsdSDK/Source/Net/Ngc/AsdNgc.h"
 
 extern "C" {
@@ -23,14 +23,14 @@ u32 *asdNgcCheckWords(const u32 *words, s32 count)
     g_asdNgc.unk10d8 = 0;
     g_asdNgc.wordCount = count;
     g_asdNgc.capacity = ASD_NGC_MAX_WORDS;
-    if (!(count > ASD_NGC_MAX_WORDS)) {
+    if (count > ASD_NGC_MAX_WORDS) {
+        n = ASD_NGC_MAX_WORDS;
+    } else {
         s32 unused = ASD_NGC_MAX_WORDS - count;
         n = ASD_NGC_MAX_WORDS - unused;
         if (n == 0) {
             return NULL;
         }
-    } else {
-        n = ASD_NGC_MAX_WORDS;
     }
 
     for (i = 0; i < ASD_NGC_MAX_WORDS; i++) {
@@ -40,10 +40,10 @@ u32 *asdNgcCheckWords(const u32 *words, s32 count)
         g_asdNgc.result[i] = 0;
     }
     for (i = 0; i < n; i++) {
-        g_asdNgc.input[i] = words[i];
+        g_asdNgc.input[i] = g_asdNgc.words[i];
     }
 
-    if (FUN_00438c34(g_asdNgc.work, results, 1, g_asdNgc.input, n) < 0) {
+    if ((s32)(FUN_00438c34(g_asdNgc.work, results, 1, g_asdNgc.input, n) & 0x80000000) < 0) {
         g_asdNgc.status |= ASD_NGC_FAILED;
         return NULL;
     }

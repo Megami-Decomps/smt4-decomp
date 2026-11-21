@@ -111,8 +111,8 @@ public:
             next = NULL;
         }
         object = NULL;
-        previous = this;
         next = this;
+        previous = this;
     }
 
     /* 0x00 */ Allocator *allocator;

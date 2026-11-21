@@ -1,4 +1,5 @@
 /* NON_MATCHING: case 3/4 cross-jumping now matches; only case 5 differs (retail uses strd r0, [r4, #12] with hoisted 0 in r0). */
+#include "shard/W5_W5Match2_PairedIds.h"
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "addon/LookupRecord.h"
@@ -39,7 +40,6 @@ void scrScriptProcessStartEntry(u32 script, s32 entry);
 s32 scrRunOpcodesStub(u32 script);
 s32 messageGetChoiceResult(void);
 void obj04Finish(void);
-s32 FUN_003df4a4(u16 skillId);
 s32 partySlotMatchesSelected(void);
 void saveSlotTableSetPreferredId(u32 id);
 s32 recordContainsPairedId(SaveSlot *slot, u16 skillId);
@@ -59,7 +59,7 @@ u32 FUN_0041774c(SkillLearnTask *task)
             eventQueueAddUniqueIfValid(0x100020e);
             obj04Finish();
             if (task->placeInParty != 0) {
-                if (task->partyIndex >= 0 && FUN_003df4a4(task->skillId) == 0) {
+                if (task->partyIndex >= 0 && playerHasSkill(task->skillId) == 0) {
                     PlayerDataA *party = gameGetPlayerData();
                     party->skills[task->partyIndex] = task->skillId;
                     party->skillRanks[task->partyIndex] = 1;

@@ -1,4 +1,5 @@
-/* NON_MATCHING: script-start inline NOPs, global load ordering and merged state/timer stores differ from retail. */
+/* NON_MATCHING: retail clears skipRestore through a split base (add r0, r0, #168; strb with a fresh zero, as if through
+ * the script holder), gives case 2 its own operation-clearing tail, and loads the message record before the window. */
 #include "camp/CampScriptCleanup.h"
 #include "ui/UiControl.h"
 #include "addon/aocMain.h"
@@ -80,7 +81,8 @@ void FUN_003b8c40(CampResultStateView *work)
         work->resultProcess = scrScriptProcessCreate(work->resultScript, work->resultMessages);
         work->resultProcess->mode = 3;
         scrScriptProcessStartEntry(work->resultProcess, tableGroupFindEntryIndex(work->resultScript, "ProcCharonRequestFirst"));
-        break;
+        work->operation = 0;
+        return;
     case 4:
         dialogOpen(0, 0);
         infoWinSetMessage(work->informationWindow, work->message->message);

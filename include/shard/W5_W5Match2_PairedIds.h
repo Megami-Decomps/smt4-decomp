@@ -9,7 +9,7 @@ struct PairedIdList {
 extern "C" {
 #endif
 
-u32 FUN_003df4a4(u32 id);
+u32 playerHasSkill(u32 id);
 
 #ifdef __cplusplus
 }

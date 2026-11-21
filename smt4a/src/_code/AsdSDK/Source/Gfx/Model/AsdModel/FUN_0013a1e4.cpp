@@ -1,4 +1,6 @@
-/* NON_MATCHING: descriptor initialization saves extra registers; capacity stores and command-list address calculation schedule differently. */
+/* NON_MATCHING: the pool description now matches (its default constructor); the capacity stores schedule differently
+ * (retail stores listCount last, before the configuration test) and the command-list loop computes its slot address
+ * before the first call in retail. */
 #include "gfx/ModelSceneInitialization.h"
 #include "shard/S1Light.h"
 extern "C" {
@@ -16,15 +18,6 @@ void FUN_0013a1e4(const ModelSceneConfiguration *configuration)
     DAT_00636e30.enabled = 1;
     DAT_00636e30.commandBytes = 0x280;
     ModelScenePoolDescription description;
-    description.unk0C = 0;
-    description.unk10 = 0;
-    description.format = 0x8058;
-    description.bufferBytes = 0x100000;
-    description.entryCount = 0x200;
-    description.options = 0x700;
-    description.buffers = 2;
-    description.lists = 2;
-    description.alignment = 8;
     if (configuration != NULL)
         description.format = configuration->format;
     description.options |= 2;

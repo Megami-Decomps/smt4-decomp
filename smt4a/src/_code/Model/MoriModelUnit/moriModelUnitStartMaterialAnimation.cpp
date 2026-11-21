@@ -5,7 +5,7 @@
 
 extern "C" {
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, s32 kind);
-void FUN_0045ab90(MaterialFlagBindingArray *binding, const MaterialFlagAnimation *animation, void *metadata);
+void resourceNameBindingBind(MaterialFlagBindingArray *binding, const MaterialFlagAnimation *animation, void *metadata);
 void FUN_0045b384(void *samples, const MaterialFlagAnimation *animation, void *model);
 void FUN_0045b498(void *samples, void *storage, u32 count);
 extern const char g_moriModelUnitSourceFileName[];
@@ -64,7 +64,7 @@ void moriModelUnitStartMaterialAnimation(MoriModelUnit *unit, u32 index, u8 mode
             view->state.index = index;
             view->state.speed = speed;
             view->state.animation = animation;
-            FUN_0045ab90(&view->state.binding, &animation->header, view->metadata);
+            resourceNameBindingBind(&view->state.binding, &animation->header, view->metadata);
             gfxMarkMaterialAnimationCapabilities(&animation->header, &view->materials, &view->state.binding);
             view->state.mode = mode;
             animation = view->state.animation;

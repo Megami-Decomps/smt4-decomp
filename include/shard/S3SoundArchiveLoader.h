@@ -36,6 +36,24 @@ typedef struct SoundArchiveLoader {
     /* 0x04 */ void *archive;
 } SoundArchiveLoader;
 
+/* Apocalypse's loader vtable: the file-table getter sits one slot later (0x10) than in IV. */
+struct SoundArchiveLoaderA;
+
+typedef struct SoundArchiveLoaderVtblA {
+    /* 0x00 */ void *unk00[2];
+    /* 0x08 */ void (*registerFile)(SoundArchiveLoaderA *self, u32 fileId, void *data);
+    /* 0x0C */ void *unk0c;
+    /* 0x10 */ void *(*getFile)(SoundArchiveLoaderA *self, u32 fileId);
+} SoundArchiveLoaderVtblA;
+typedef char SoundArchiveLoaderVtblAOffsets[
+    offsetof(SoundArchiveLoaderVtblA, registerFile) == 8 &&
+    offsetof(SoundArchiveLoaderVtblA, getFile) == 0x10 ? 1 : -1];
+
+typedef struct SoundArchiveLoaderA {
+    /* 0x00 */ const SoundArchiveLoaderVtblA *vtbl;
+    /* 0x04 */ void *archive;
+} SoundArchiveLoaderA;
+
 /* Id range of a group-like item, as filled by FUN_0014d4ec. */
 typedef struct SoundArchiveIdRange {
     /* 0x00 */ u32 first;

@@ -219,6 +219,12 @@ difference a register tie-break.
   order can be one result variable assigned in each arm and returned once (smt4 `FUN_00293ac0`).
 - A comparator written with early returns (`if (order != 0) return order;`) can match where the
   nested-if form does not.
+- A body wrapped in `if (f() == 0) { … }` and the same body after an early `if (f() != 0) return;` group the later
+  `cmp`/`cmpne` chains differently (retail 1, 2, 2 compares per chain against the build's 2, 3): the early return made
+  smt4 `FUN_0026cf4c` and smt4a `FUN_0034cda0` IDENTICAL (wave 61).
+- An octant fold (atan2 into a ratio of the minor over the major axis plus a base angle) assigns the base offset
+  explicitly in every arm, `offset = 0.0f;` included, and the ratio's numerator into its own variable, not an
+  `f32 offset = 0.0f;` initialiser with the zero arms left out: smt4 `FUN_0024c418` and smt4a `FUN_001b640c` (wave 61).
 - A search loop that sets `bool found = true; break;` and tests `found` afterwards is jump-threaded
   into retail's in-loop layout.
 - A condition computed inside a guarded block and tested after the blocks join is a flag:
@@ -232,6 +238,10 @@ difference a register tie-break.
   member, with a `u32` index (`s32` compiles differently). See `uiQuestEnterMenuState`.
 - An address-taken local declared at function scope stops every tail call in the function; declared in
   the nested block that uses it, the earlier tail calls come back.
+- A block scope around a local needs retail evidence besides the score: retail reusing the local's stack slot for a
+  later call's outgoing stack arguments (the slot can only be shared when the local's scope excludes that call). Say so
+  in a comment at the block. smt4 `FUN_00150d2c`: the wave-archive load info lives at `[sp]`, the next read's two
+  stack arguments go to `[sp]` and `[sp, #4]`. A block found only by its score is steering.
 
 ### Locals, constants and literal pools
 
@@ -263,6 +273,10 @@ difference a register tie-break.
   integer stores, float members included, where field-by-field `0.0f` stores use VFP registers.
 - Reading `table->count` at each use instead of caching it in a local changes which registers the
   loop's values get; try both before calling a difference allocation.
+- Masks or table fields that retail reloads inside a loop, where armcc hoists them all, come back as in-loop loads
+  through a local pointer to the global (`const BattleMaskPresets *masks = &g_battleMaskPresets;`): armcc then hoists
+  only the unconditional first test. It moved four smt4a near misses (`FUN_003ec6d8`, `FUN_003a98c4`,
+  `FUN_00272310`, `FUN_002b4dcc`, wave 61), none to IDENTICAL yet.
 - A halved value retail keeps in its own register (`asr r1, r0, #1`) at two draws, where it folds the
   shift into the add elsewhere, is one variable assigned in both blocks (`s32 centre;` declared once,
   `centre = (width - textWidth) / 2;` in each), not two block-local temporaries (`uniteDrawResultPanel`).
@@ -452,6 +466,9 @@ More on classes, constructors and destructors is in [C++](style-and-naming.md#c)
   declaration order, so relink cannot place them (`fdiff` is IDENTICAL either way).
 - armcc's hex escapes are greedy: `"\x82e"` is the single escape `\x82e` (one byte), not 0x82 then
   `e`. Write `"\x82\x65"` or split the literal (`"\x82" "e"`); check Shift-JIS strings against the image.
+- A magnitude test that retail compiles as `cmp rV, #0; ldrlt r0, [sp, #N]; movge r0, rV` (reusing a negation it
+  already computed) is `abs(value)` from `<stdlib.h>`, not a ternary: smt4a `FUN_00169e38` and its IV twin
+  `FUN_002bdce0` are IDENTICAL with it (wave 61).
 - A lone `mov r0, #const` where a call would be, followed by a reload of a value the call would have
   clobbered, is a linker-inlined constant getter: write the call and add an `inlined.txt` row
   (`titleConfigUpdate`'s default volumes).

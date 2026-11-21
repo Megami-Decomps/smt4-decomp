@@ -48,13 +48,14 @@ struct EffGeomBuffer {
     /* 0x64 */ u8 color[4];
     /* 0x68 */ nw::math::MTX44 transform;
     /* 0xA8 */ u32 owner;
-    /* 0xAC */ u8 unkac[0xc];
+    /* 0xAC */ u8 unkac[8];
+    /* 0xB4 */ void *shared;        /* reference counted; a clone references it again */
 };
 
 typedef char EffGeomBufferLayoutCheck[offsetof(EffGeomBuffer, attr80) == 0x38 &&
     offsetof(EffGeomBuffer, tint) == 0x40 && offsetof(EffGeomBuffer, unk60) == 0x60 &&
     offsetof(EffGeomBuffer, color) == 0x64 && offsetof(EffGeomBuffer, transform) == 0x68 &&
-    offsetof(EffGeomBuffer, owner) == 0xA8 && sizeof(EffGeomBuffer) == 0xB8 ? 1 : -1];
+    offsetof(EffGeomBuffer, owner) == 0xA8 && offsetof(EffGeomBuffer, shared) == 0xB4 && sizeof(EffGeomBuffer) == 0xB8 ? 1 : -1];
 
 extern "C" {
 EffGeomBuffer *effGeomBufferCreate(u32 count, u32 flags, u32 owner);

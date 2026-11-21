@@ -1,4 +1,4 @@
-/* NON_MATCHING: aligned scratch frame, count/register lifetimes, heap-bound branch lowering and marker-store addressing differ. */
+/* NON_MATCHING: 53 lines: retail's frame is 140 bytes with the header scratch at sp+16 (104 bytes) below the reader at sp+120, where this build puts the reader first; the heap-bound test is one predicated compare chain in retail, and the wave count, allocator and size get other registers. */
 #include "shard/S3SoundArchiveLoader.h"
 #include "shard/W6_W6Match3_WaveArchiveReader.h"
 
@@ -36,15 +36,20 @@ void *FUN_00150d2c(SoundArchiveLoader *loader, u32 archiveId, WaveArchiveAllocat
     void *loaded = loader->vtbl->files.getFile(loader, fileId);
     if (loaded)
         return loaded;
-    WaveArchiveLoadInfo info;
-    info.fileId = 0xFFFFFFFF;
-    info.loadIndividual = 0;
-    if (!soundArchiveReadWaveArchiveInfo(loader->archive, archiveId, &info))
-        return 0;
-    u32 waveCount = info.waveCount;
-    if (!waveCount)
-        return 0;
-    // The archive reader requires a 32-byte-aligned temporary header.
+    u32 waveCount;
+    /* The load info's scope ends before the header read: retail reuses its slots at [sp] and
+     * [sp, #4] for that call's stack arguments. */
+    {
+        WaveArchiveLoadInfo info;
+        info.fileId = 0xFFFFFFFF;
+        info.loadIndividual = 0;
+        if (!soundArchiveReadWaveArchiveInfo(loader->archive, archiveId, &info))
+            return 0;
+        if (!info.waveCount)
+            return 0;
+        waveCount = info.waveCount;
+    }
+    /* The archive reader requires a 32-byte-aligned temporary header. */
     u8 storage[0x2C + 31];
     void *header = (void *)(((u32)storage + 31) & ~31u);
     if (FUN_002a78c0(loader, fileId, header, 0x2C, 0, flags) != 0x2C)

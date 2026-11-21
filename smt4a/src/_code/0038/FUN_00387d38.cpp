@@ -1,4 +1,5 @@
-/* NON_MATCHING: shared success-block placement, saved registers and final return epilogues differ. */
+/* NON_MATCHING: only registers: retail keeps the state+0x100 base in r7 and the slot pointer in r8 (swapped here) and
+   loads the record id into r0 before the selected id. */
 #include "camp/CampCec/CharacterRefreshWork.h"
 #include "shard/Shard0031.h"
 #include "gamedata/GameSaveDataA.h"
@@ -36,6 +37,7 @@ u32 FUN_00387d38(CharacterRefreshWork *work)
         u8 cancelled;
     };
     ReturnState *state = reinterpret_cast<ReturnState *>(work);
+    u32 result = 0;
     if (partyPanelGetRequestedUnitId() != 0) {
         state->previousId = state->selectedId;
         state->selectedId = partyPanelGetRequestedUnitId();
@@ -60,26 +62,26 @@ u32 FUN_00387d38(CharacterRefreshWork *work)
                     break;
                 }
             }
-            if (state->destination == -1) {
-                FUN_00331380(0);
-                state->destination = 4;
-            }
+        }
+        if (state->destination == -1) {
+            FUN_00331380(0);
+            state->destination = 4;
         }
         sysPlaySe(0xE4);
         state->phase = 2;
-        return 3;
+        result = 3;
+    } else if (partyPanelExists() && FUN_00284e94()) {
+        campCecSetObjectValue(0);
+        state->cancelled = 1;
+        FUN_00331380(0);
+        linkHolderApplyFlag(state->link, 1);
+        state->returnMode = 1;
+        state->previousChoice = -1;
+        state->phase = 5;
+        state->destination = -1;
+        state->command = 0;
+        result = 3;
     }
-    if (!partyPanelExists() || !FUN_00284e94())
-        return 0;
-    campCecSetObjectValue(0);
-    state->cancelled = 1;
-    FUN_00331380(0);
-    linkHolderApplyFlag(state->link, 1);
-    state->returnMode = 1;
-    state->previousChoice = -1;
-    state->phase = 5;
-    state->destination = -1;
-    state->command = 0;
-    return 3;
+    return result;
 }
 }

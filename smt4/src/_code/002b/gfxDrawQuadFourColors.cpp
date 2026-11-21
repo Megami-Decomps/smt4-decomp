@@ -1,22 +1,24 @@
 #include "common.h"
 #include "code/Code002b.h"
+#include "gfx/ColoredQuad.h"
 
 extern "C" {
-extern u32 g_defaultDrawColor;
+extern const EffectColor *g_defaultDrawColor;
 void gpuSubmitDefaultPacket(void);
-void gpuSubmitFloatColoredQuad(u32 first, u32 second, u32 third, u32 fourth, f32 value0, f32 value1, f32 value2, f32 value3, f32 value4, f32 value5, f32 value6, f32 value7, f32 value8);
+void gpuSubmitFloatColoredQuad(const EffectColor *first, const EffectColor *second, const EffectColor *third, const EffectColor *fourth, f32 value0, f32 value1, f32 value2, f32 value3, f32 value4, f32 value5, f32 value6, f32 value7, f32 value8);
 void submitDefaultFloatParameters(void);
 
-/* Substitutes the shared default for empty integer parameters and submits the scalar parameter block. */
-/* The fourth colour is declared after the first four floats: ABI-equal (r3), and it is the order retail copies the arguments in. */
-void gfxDrawQuadFourColors(u32 first, u32 second, u32 third, f32 value0, f32 value1, f32 value2, f32 value3, u32 fourth, f32 value4)
+/* Draws a quad with one colour per corner, substituting the default colour for missing corners, then
+ * restores the default float parameters. */
+void gfxDrawQuadFourColors(f32 x, f32 y, f32 width, f32 height, const EffectColor *first, const EffectColor *second,
+                           const EffectColor *third, const EffectColor *fourth, f32 depth)
 {
-    if (first == 0) first = g_defaultDrawColor;
-    if (second == 0) second = g_defaultDrawColor;
-    if (third == 0) third = g_defaultDrawColor;
-    if (fourth == 0) fourth = g_defaultDrawColor;
+    if (first == NULL) first = g_defaultDrawColor;
+    if (second == NULL) second = g_defaultDrawColor;
+    if (third == NULL) third = g_defaultDrawColor;
+    if (fourth == NULL) fourth = g_defaultDrawColor;
     gpuSubmitDefaultPacket();
-    gpuSubmitFloatColoredQuad(first, second, third, fourth, value0, value1, value2, value3, 0.0f, 0.0f, 0.0f, 0.0f, value4);
+    gpuSubmitFloatColoredQuad(first, second, third, fourth, x, y, width, height, 0.0f, 0.0f, 0.0f, 0.0f, depth);
     submitDefaultFloatParameters();
 }
 }

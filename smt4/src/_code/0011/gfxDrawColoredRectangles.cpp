@@ -1,6 +1,7 @@
 #include "shard/W6_W6Match3_EffectColor.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxTitle.h"
+#include "gfx/ColoredQuad.h"
 
 struct ColoredRectangle {
     f32 left;
@@ -11,9 +12,6 @@ struct ColoredRectangle {
 };
 
 extern "C" {
-void gfxDrawQuadFourColors(const EffectColor *topLeft, const EffectColor *topRight,
-                  const EffectColor *bottomLeft, const EffectColor *bottomRight,
-                  f32 x, f32 y, f32 width, f32 height, f32 depth); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Draw inclusive-coordinate rectangles, unpacking each packed RGBA color. */
 void gfxDrawColoredRectangles(const ColoredRectangle *rectangles, u32 count)
@@ -45,8 +43,7 @@ void gfxDrawColoredRectangles(const ColoredRectangle *rectangles, u32 count)
             height += 1.0f;
         else
             height -= 1.0f;
-        gfxDrawQuadFourColors(&color, &color, &color, &color,
-                      x, y, width, height, 0.0f);
+        gfxDrawQuadFourColors(x, y, width, height, &color, &color, &color, &color, 0.0f);
     }
 }
 }

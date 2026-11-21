@@ -1,5 +1,3 @@
-/* NON_MATCHING: only the rank arm's add differs: retail shares the last flag arm's `add` (discount += bonus) where armcc
-   folds the zero discount into a mov. */
 #include "gamedata/SkillDataRecord.h"
 #include "shard/Shard004B.h"
 #include "status/StatusCamera.h"
@@ -54,7 +52,10 @@ s32 skillGetDiscountedCost(u32 skillId, s32 useLearnedRank)
         if (flagBitIsSet(15) != 0) {
             discount += appCostRecordFindById(15)->discount;
         }
-    } else {
+    }
+    /* Its own test after the flag block: retail adds the rank bonus with the add the last flag shares, which an
+       else arm (discount known to be zero) folds into a mov. */
+    if (useLearnedRank != 0) {
         discount += skillSumRankBonuses(skill, findLearnedSkillRank(skillId), 4);
     }
     s32 cost = baseCost - discount;

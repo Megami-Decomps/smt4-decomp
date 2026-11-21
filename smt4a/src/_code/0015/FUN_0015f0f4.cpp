@@ -1,4 +1,6 @@
-/* NON_MATCHING: svc 0x24 (wrapper) matches and the request construction and queueRequest call match; armcc keeps a zero in r6 from the top (retail frame 48, predicated wait arguments) where it hoists less and uses a 56-byte frame. */
+/* NON_MATCHING: the request's constructor and the second kind/word3/result store sequence retail repeats after it now
+ * follow retail; remaining: retail reuses one stack slot for both WindowStatusResult temporaries (frame 48), keeps zero
+ * in r6 from the top, predicates the wait arguments and materialises the timeout test as a bool (movne/moveq; teq #1). */
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
 #include "nn/Result.h"
@@ -23,7 +25,7 @@ u32 FUN_0015f0f4(u32 job)
         FUN_00176474(g_aocSystem) != 0 && sysLightEventTryWait(&g_aocMain->operationDone) != 0) {
         g_aocMain->flags &= ~0x10000u;
         aocReleasePackageOwner(g_aocSystem);
-        RequestParameters request;
+        RequestParameters request(1);
         request.kind = 1;
         request.word3 = 0;
         request.result = WindowStatusResult(0);
@@ -36,9 +38,7 @@ u32 FUN_0015f0f4(u32 job)
         if (failed) {
             resultHandleFailure(result, failed);
         }
-        nnResultFields code;
-        code.value = result;
-        if (code.fields.description != 0x3fe && work->requestId == work->completedId) {
+        if (!nnResultIsNotTimeout(result) && work->requestId == work->completedId) {
             nnOsThreadImplDestroy(&work->waitHandle);
         }
     }

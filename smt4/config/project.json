@@ -2396,12 +2396,12 @@
     },
     {
       "address": "0x108b6c",
-      "function": "FUN_00108b6c",
+      "function": "touchInputUpdate",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_00108b6c.o",
+      "object": "build/obj/_code/0010/touchInputUpdate.o",
       "size": 236,
-      "source": "src/_code/0010/FUN_00108b6c.cpp",
-      "target": "orig/target/_code/0010/FUN_00108b6c.o",
+      "source": "src/_code/0010/touchInputUpdate.cpp",
+      "target": "orig/target/_code/0010/touchInputUpdate.o",
       "thumb": false
     },
     {
@@ -37885,12 +37885,12 @@
     },
     {
       "address": "0x2402c4",
-      "function": "FUN_002402c4",
+      "function": "fileExistsPatchOrRom",
       "module": "_code",
-      "object": "build/obj/_code/0024/FUN_002402c4.o",
+      "object": "build/obj/_code/0024/fileExistsPatchOrRom.o",
       "size": 364,
-      "source": "src/_code/0024/FUN_002402c4.cpp",
-      "target": "orig/target/_code/0024/FUN_002402c4.o",
+      "source": "src/_code/0024/fileExistsPatchOrRom.cpp",
+      "target": "orig/target/_code/0024/fileExistsPatchOrRom.o",
       "thumb": false
     },
     {
@@ -40058,12 +40058,12 @@
     },
     {
       "address": "0x24c418",
-      "function": "FUN_0024c418",
+      "function": "mathAtan2Angle256",
       "module": "_code",
-      "object": "build/obj/_code/0024/FUN_0024c418.o",
+      "object": "build/obj/_code/0024/mathAtan2Angle256.o",
       "size": 256,
-      "source": "src/_code/0024/FUN_0024c418.cpp",
-      "target": "orig/target/_code/0024/FUN_0024c418.o",
+      "source": "src/_code/0024/mathAtan2Angle256.cpp",
+      "target": "orig/target/_code/0024/mathAtan2Angle256.o",
       "thumb": false
     },
     {
@@ -44236,12 +44236,12 @@
     },
     {
       "address": "0x26b738",
-      "function": "FUN_0026b738",
+      "function": "playerHasSkill",
       "module": "_code",
-      "object": "build/obj/_code/0026/FUN_0026b738.o",
+      "object": "build/obj/_code/0026/playerHasSkill.o",
       "size": 72,
-      "source": "src/_code/0026/FUN_0026b738.cpp",
-      "target": "orig/target/_code/0026/FUN_0026b738.o",
+      "source": "src/_code/0026/playerHasSkill.cpp",
+      "target": "orig/target/_code/0026/playerHasSkill.o",
       "thumb": false
     },
     {
@@ -44446,12 +44446,12 @@
     },
     {
       "address": "0x26cf4c",
-      "function": "FUN_0026cf4c",
+      "function": "partyPanelPollHelpRefresh",
       "module": "_code",
-      "object": "build/obj/_code/0026/FUN_0026cf4c.o",
+      "object": "build/obj/_code/0026/partyPanelPollHelpRefresh.o",
       "size": 500,
-      "source": "src/_code/0026/FUN_0026cf4c.cpp",
-      "target": "orig/target/_code/0026/FUN_0026cf4c.o",
+      "source": "src/_code/0026/partyPanelPollHelpRefresh.cpp",
+      "target": "orig/target/_code/0026/partyPanelPollHelpRefresh.o",
       "thumb": false
     },
     {
@@ -58742,12 +58742,12 @@
     },
     {
       "address": "0x2bdce0",
-      "function": "FUN_002bdce0",
+      "function": "uiDrawGroupedNumber",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002bdce0.o",
+      "object": "build/obj/_code/002b/uiDrawGroupedNumber.o",
       "size": 668,
-      "source": "src/_code/002b/FUN_002bdce0.cpp",
-      "target": "orig/target/_code/002b/FUN_002bdce0.o",
+      "source": "src/_code/002b/uiDrawGroupedNumber.cpp",
+      "target": "orig/target/_code/002b/uiDrawGroupedNumber.o",
       "thumb": false
     },
     {
@@ -88437,22 +88437,22 @@
     },
     {
       "address": "0x360d38",
-      "function": "FUN_00360d38",
+      "function": "mathAtan2AngleU16",
       "module": "_code",
-      "object": "build/obj/_code/0036/FUN_00360d38.o",
+      "object": "build/obj/_code/0036/mathAtan2AngleU16.o",
       "size": 280,
-      "source": "src/_code/0036/FUN_00360d38.cpp",
-      "target": "orig/target/_code/0036/FUN_00360d38.o",
+      "source": "src/_code/0036/mathAtan2AngleU16.cpp",
+      "target": "orig/target/_code/0036/mathAtan2AngleU16.o",
       "thumb": false
     },
     {
       "address": "0x360e64",
-      "function": "FUN_00360e64",
+      "function": "mathAtanAngle256",
       "module": "_code",
-      "object": "build/obj/_code/0036/FUN_00360e64.o",
+      "object": "build/obj/_code/0036/mathAtanAngle256.o",
       "size": 128,
-      "source": "src/_code/0036/FUN_00360e64.cpp",
-      "target": "orig/target/_code/0036/FUN_00360e64.o",
+      "source": "src/_code/0036/mathAtanAngle256.cpp",
+      "target": "orig/target/_code/0036/mathAtanAngle256.o",
       "thumb": false
     },
     {

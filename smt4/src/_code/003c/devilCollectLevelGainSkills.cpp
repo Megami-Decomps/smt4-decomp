@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail retains redundant scan/skill counters and keeps the threshold in r2 across the range test; readable compaction merges the counters (73 diff lines). */
+/* NON_MATCHING: register allocation only (22 lines): the counters are initialised in another order (retail: complete,
+ * levelIndex, skillIndex) and the second loop's level compares swap r0/r2. */
 #include "shard/W5_W5Match2_PairedIds.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 
@@ -39,30 +40,32 @@ u32 devilCollectLevelGainSkills(void* context, s32 levelGain, u16* output)
     const DevilLearningRecord* record = reinterpret_cast<const DevilLearningRecord*>(nkmBaseGetRecord(unit->id));
     LearnedSkill pending[8] = {};
     s32 pendingCount = 0;
+    s32 skillIndex = 0;
     s32 levelIndex = 0;
     u32 complete = 1;
     for (s32 i = 0; i < 8; ++i) {
         if (record->learned[i].id && record->learned[i].level > static_cast<u32>(unit->level)) {
             if (recordContainsPairedId(&unit->skills, record->learned[i].id)) {
-                // Known future skills do not consume the next available learning level.
+                /* Known future skills do not consume the next available learning level. */
+                ++skillIndex;
                 continue;
             }
             pending[pendingCount].level = record->learned[levelIndex].level;
-            pending[pendingCount].id = record->learned[i].id;
+            pending[pendingCount].id = record->learned[skillIndex].id;
             ++pendingCount;
         }
+        ++skillIndex;
         ++levelIndex;
     }
 
     s32 outputCount = 0;
     for (s32 i = 0; i < 8; ++i) {
         if (pending[i].id) {
-            const u32 level = pending[i].level;
-            if (unit->level < level && static_cast<s32>(level) <= unit->level + levelGain
+            if (unit->level < pending[i].level && pending[i].level <= unit->level + levelGain
                 && !recordContainsPairedId(&unit->skills, pending[i].id)) {
                 output[outputCount++] = pending[i].id;
             }
-            if (unit->level + levelGain < static_cast<s32>(pending[i].level)
+            if (unit->level + levelGain < pending[i].level
                 && !recordContainsPairedId(&unit->skills, pending[i].id)) {
                 complete = 0;
             }

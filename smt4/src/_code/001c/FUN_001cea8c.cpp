@@ -29,7 +29,7 @@ int SBORROW4(...);
 int scrRunOpcodesStub(...);
 int FUN_001c8a7c(int, int, int, int);
 int buttonHelpResetSlots(void);
-int FUN_0026b738(...);
+int playerHasSkill(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int recordContainsPairedId(...);
 int btlTalkBustUpSetUnk2F4(...);
 int btlTalkBustUpSetDemonTexture(...);
@@ -67,7 +67,7 @@ extern unsigned char LAB_002c6e64; /* 0x2c6e64 */
 extern int whisperEffectIsIdle(void);
 /* Supplied declaration required: buttonHelpResetSlots. */
 /* Supplied declaration required: contentEntryFlagTest. */
-/* Supplied declaration required: FUN_0026b738. */
+/* Supplied declaration required: playerHasSkill. */
 /* Supplied declaration required: recordContainsPairedId. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: infoWinSetMessage. */
@@ -238,7 +238,7 @@ void FUN_001cea8c(int param_1)
                 *(unsigned short *)(param_1 + 0xd134) = temp_v2;
               }
               *(unsigned short *)(temp_v10 + 0xd124) = 1;
-              temp_v4 = FUN_0026b738(temp_v13);
+              temp_v4 = playerHasSkill(temp_v13);
               if (temp_v4 == 0) {
                 *(int *)(param_1 + 0xd2c8) = *(int *)(param_1 + 0xd2c8) + 1;
               }
@@ -248,7 +248,7 @@ void FUN_001cea8c(int param_1)
             else {
               temp_v9 = recordContainsPairedId(temp_v5,temp_v13);
               temp_v4 = temp_v15;
-              if ((temp_v9 != 0) && (temp_v9 = FUN_0026b738(temp_v13), temp_v4 = temp_v15, temp_v9 != 0)) {
+              if ((temp_v9 != 0) && (temp_v9 = playerHasSkill(temp_v13), temp_v4 = temp_v15, temp_v9 != 0)) {
                 *(int *)(param_1 + 0xd2c8) = *(int *)(param_1 + 0xd2c8) - 1;
               }
               temp_v24 = 1;
@@ -281,14 +281,14 @@ void FUN_001cea8c(int param_1)
       do {
         temp_v6 = param_1 + temp_v4 * 2;
         if (*(short *)(temp_v6 + 0xd114) != 0) {
-          temp_v7 = FUN_0026b738();
+          temp_v7 = playerHasSkill();
           if ((temp_v7 != 0) &&
              (temp_v7 = recordContainsPairedId(temp_v5,*(unsigned short *)(temp_v6 + 0xd114)), temp_v7 != 0)) {
             *(int *)(param_1 + 0xd2c4) = *(int *)(param_1 + 0xd2c4) + 1;
             *(int *)(param_1 + 0xd2c8) = *(int *)(param_1 + 0xd2c8) + 1;
           }
           else {
-            temp_v7 = FUN_0026b738(*(unsigned short *)(temp_v6 + 0xd114));
+            temp_v7 = playerHasSkill(*(unsigned short *)(temp_v6 + 0xd114));
             if ((temp_v7 == 0) &&
                (temp_v6 = recordContainsPairedId(temp_v5,*(unsigned short *)(temp_v6 + 0xd114)), temp_v6 != 0)) {
               *(int *)(param_1 + 0xd2c4) = *(int *)(param_1 + 0xd2c4) + 1;
@@ -548,7 +548,7 @@ joined_r0x001cec14:
         do {
           temp_v13 = countUnlockedSlots();
           temp_v15 = param_1 + temp_v5 * 2;
-          temp_v9 = FUN_0026b738(*(unsigned short *)(temp_v15 + 0xd134));
+          temp_v9 = playerHasSkill(*(unsigned short *)(temp_v15 + 0xd134));
           if (temp_v9 == 0) {
             temp_v9 = 0;
             if ((int)temp_v13 < 1) {
@@ -860,10 +860,10 @@ LAB_001cf28c:
               *(int *)(param_1 + 0xd2c4) = temp_v18 - 1;
               *(unsigned short *)(param_1 + temp_v9 * 2 + 0xd134) = 0;
               *(unsigned short *)(temp_v15 + 0xd124) = 0;
-              temp_v9 = FUN_0026b738(*(unsigned short *)(temp_v15 + 0xd114));
+              temp_v9 = playerHasSkill(*(unsigned short *)(temp_v15 + 0xd114));
               if (temp_v9 != 0) {
                 temp_v9 = listCursorGetRowIfUnblocked(temp_v10);
-                temp_v9 = FUN_0026b738(*(unsigned short *)(temp_v5 + temp_v9 * 2 + 0x34));
+                temp_v9 = playerHasSkill(*(unsigned short *)(temp_v5 + temp_v9 * 2 + 0x34));
                 if (temp_v9 == 0) {
                   *(int *)(param_1 + 0xd2c8) = *(int *)(param_1 + 0xd2c8) - 1;
                 }

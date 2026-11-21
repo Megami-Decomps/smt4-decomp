@@ -13,7 +13,7 @@ extern "C" {
 
 int messageCreatePanelEffects(...);
 int messageDrawPairedFrameSprites(...);
-int FUN_00169e38(...);
+int uiDrawGroupedNumber(...);
 int SBORROW4(...);
 
 int FUN_00151e4c(int);
@@ -54,7 +54,7 @@ extern unsigned char LAB_0013fbc0; /* 0x13fbc0 */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: messageWindowDrawSprites. */
 extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00169e38. */
+/* Supplied declaration required: uiDrawGroupedNumber. */
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: statRowDrawValueImpl. */
@@ -155,7 +155,7 @@ unsigned int FUN_0013f7c4(void)
     gxResetColorQuadToWhite();
     temp_v5 = (int)asdTMTexTableEntryAt(8,0xc0);
     texDrawCompositeSprite(2,8,0x11,*(short *)(temp_v5 + 8) + temp_v2,*(short *)(temp_v5 + 10) + temp_v4,0xb);
-    FUN_00169e38(*(unsigned short *)(temp_v1 + 0x15c),*(short *)(temp_v5 + 8) + temp_v2,
+    uiDrawGroupedNumber(*(unsigned short *)(temp_v1 + 0x15c),*(short *)(temp_v5 + 8) + temp_v2,
                  *(short *)(temp_v5 + 10) + temp_v4,0);
     temp_v6 = 100000000;
     temp_v8 = (unsigned int)*(unsigned short *)(temp_v1 + 0x15c);

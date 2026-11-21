@@ -1,4 +1,5 @@
-/* NON_MATCHING: live-parent search block placement, pointer registers, and the first translation load order differ from retail. */
+/* NON_MATCHING: block layout matches; register allocation differs (retail: state r5, index r6, attachment r7, parent
+ * r4) and the first translation add loads its operands in the other order. */
 #include "common.h"
 
 struct AttachedModel {
@@ -53,15 +54,17 @@ u32 modelAttachmentsUpdateFromParents(AttachedModelState *state)
     for (s32 index = 0; index < 50; ++index) {
         ModelAttachment *attachment = &state->attachments[index];
         if ((attachment->flags & 2) != 0) {
-            s32 parent = 0;
-            while (state->parents[parent].id != attachment->parentId ||
-                   (state->parents[parent].flags & 1) == 0) {
-                ++parent;
-                if (parent >= 50) {
-                    return 0;
+            bool found = false;
+            for (s32 live = 0; live < 50; ++live) {
+                if (state->parents[live].id == attachment->parentId && (state->parents[live].flags & 1) != 0) {
+                    found = true;
+                    break;
                 }
             }
-            for (parent = 0; parent < 50; ++parent) {
+            if (!found) {
+                return 0;
+            }
+            for (s32 parent = 0; parent < 50; ++parent) {
                 ModelParent *source = &state->parents[parent];
                 if (source->id == attachment->parentId) {
                     effectComputeScaledImageBounds(source->transform, &position, attachment->blend);

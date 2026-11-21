@@ -1,4 +1,5 @@
-/* NON_MATCHING: shared case-1/2 script launch, default-choice retention branch, AOC flag addressing and mode/frame store grouping differ. */
+/* NON_MATCHING: written as the IV twin FUN_003b8c40; retail clears skipRestore through a split base (add r0, r0, #168;
+ * strb with a fresh zero), gives case 2 its own choice-clearing tail, and allocates the remaining registers differently. */
 #include "script/scrScriptProcess.h"
 #include "ui/UiControl.h"
 #include "addon/aocMain.h"
@@ -61,14 +62,17 @@ void FUN_004b7b74(MapMenuCompletionWork *work)
         work->frame = 0;
         return;
     }
-    s32 choice = work->choice;
-    switch (choice) {
+    switch (work->choice) {
     case 1:
+        work->mode = 9;
+        work->frame = 0;
+        scrScriptProcessStartEntry(work->battleProcess,
+            tableGroupFindEntryIndex(work->battleTable, "scr_sbq_sysbtl"));
+        break;
     case 2:
         work->mode = 9;
         work->frame = 0;
-        if (choice == 2)
-            sysPlaySe(0xa0);
+        sysPlaySe(0xa0);
         scrScriptProcessStartEntry(work->battleProcess,
             tableGroupFindEntryIndex(work->battleTable, "scr_sbq_sysbtl"));
         break;
@@ -81,15 +85,20 @@ void FUN_004b7b74(MapMenuCompletionWork *work)
         work->resultProcess->mode = 3;
         scrScriptProcessStartEntry(work->resultProcess,
             tableGroupFindEntryIndex(work->resultTable, "ProcCharonRequestFirst"));
+        work->choice = 0;
+        return;
+    case 4:
+        dialogOpen(0, 0);
+        infoWinSetText(reinterpret_cast<const char *>(work->info), work->record->textId);
+        work->mode = 5;
+        work->frame = 0;
         break;
     default:
         dialogOpen(0, 0);
         infoWinSetText(reinterpret_cast<const char *>(work->info), work->record->textId);
         work->mode = 5;
         work->frame = 0;
-        if (choice != 4)
-            return;
-        break;
+        return;
     }
     work->choice = 0;
 }

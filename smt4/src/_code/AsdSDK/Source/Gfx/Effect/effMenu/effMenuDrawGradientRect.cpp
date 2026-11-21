@@ -1,13 +1,15 @@
-/* NON_MATCHING: byte swaps no longer become REV and the 0.0 depth now lives in s18 like retail; remaining: width/height saved registers swap (retail height r5, width r6), the origin adds take their operands in the other order, and the swap shifts are scheduled differently. */
+/* NON_MATCHING: the origin adds now take retail's operand order (the float position adjusted in place); remaining:
+ * width/height saved registers swap (retail height r5, width r6) and the two byte swaps are scheduled one after the
+ * other where retail interleaves them. */
 #include "camp/RenderCtx.h"
 #include "gfx/ColoredQuad.h"
+#include "ui/AnimatedMessage.h"
 #include "title/titleMain.h"
 #include "shard/Shard0036.h"
 
 extern "C" {
 extern TitleScene *g_titleScene;
 extern f32 g_effMenuDrawOffset[2];
-s32 renderCtxPackPassFlags(u32 first, u32 second);
 }
 
 /* The colour with its byte order reversed (0xAABBGGRR <-> 0xRRGGBBAA). */
@@ -24,8 +26,11 @@ extern "C" {
 void effMenuDrawGradientRect(s32 x, s32 y, s32 width, s32 height, u32 firstColor, u32 secondColor)
 {
     f32 depth = 0.0f;
-    s32 pixelX = (s32)((f32)x + g_effMenuDrawOffset[0]);
-    s32 pixelY = (s32)((f32)y + g_effMenuDrawOffset[1]);
+    f32 position[2] = {(f32)x, (f32)y};
+    position[0] += g_effMenuDrawOffset[0];
+    position[1] += g_effMenuDrawOffset[1];
+    s32 pixelX = (s32)position[0];
+    s32 pixelY = (s32)position[1];
     firstColor = menuReverseColorBytes(firstColor);
     secondColor = menuReverseColorBytes(secondColor);
     RenderCtx *context = g_titleScene;

@@ -7854,3 +7854,13 @@
 0036fad8 eventSnowNoiseStart
 003f6f68 scrollListAdvancePage
 004c6bd0 btlDemonSkillCategoryModifier
+001b640c mathAtan2Angle256
+0043bc74 mathAtanAngle256
+0043bb48 mathAtan2AngleU16
+0034cda0 partyPanelPollHelpRefresh
+00169e38 uiDrawGroupedNumber
+0013d33c touchInputUpdate
+003df4a4 playerHasSkill
+0039e338 btlScriptSetPartyStatus
+004a34a0 demonPurchaseValidate
+0045ab90 resourceNameBindingBind

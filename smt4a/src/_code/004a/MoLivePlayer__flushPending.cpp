@@ -1,4 +1,5 @@
-/* NON_MATCHING: needs the renames of _ZN12MoLivePlayer12flushPendingEv and _ZN6MoLive10RingBufferINS_12ObjectHandleEE6insertERKPKS1_S6_ (rename_S2.tsv); with them the body matches except loop shape and two registers: retail tests the map once before the loop and again at the bottom (constants r9/sl set conditionally in the preheader), the build jumps to a bottom test, and the stream/data pointers are swapped between r5 and r6. */
+/* NON_MATCHING: retail guards the loop with one load of the map header (begin and end from the same load, the store
+   constants set under that test) where armcc reloads it, and the stream/data pointers are swapped between r5 and r6. */
 #include "mobiclip/MoLivePlayer.h"
 
 using namespace MoLive;
@@ -7,7 +8,8 @@ using namespace MoLive;
 bool MoLivePlayer::flushPending()
 {
     bool queued = true;
-    for (ObjectHandleMap::iterator it = streams.begin(); it != streams.end(); ++it) {
+    ObjectHandleMap::iterator it = streams.begin();
+    while (it != streams.end()) {
         Stream *stream = static_cast<StreamEntry *>(it->second.object)->stream;
         StreamData *data = static_cast<StreamData *>(stream->current.object);
         if (data != NULL && data->size != 0) {
@@ -19,6 +21,7 @@ bool MoLivePlayer::flushPending()
             stream->current.detach();
             data->ready = 1;
         }
+        ++it;
     }
     return queued;
 }

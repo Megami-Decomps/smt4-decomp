@@ -21,7 +21,7 @@ typedef char BattleStageAccessoryLayout[sizeof(BattleStageAccessoryPart) == 0x24
 #define BATTLE_STAGE_DIRECTORY "battle/battle_map/"
 extern "C" {
 extern void *g_mapAccessoryTable;
-s32 FUN_002402c4(BtlMainState *state, const char *path);
+s32 fileExistsPatchOrRom(BtlMainState *state, const char *path);
 void FUN_002a09b4(const char *path, u32 mode);
 void *dataTableFileGetTable(void *file, u32 section);
 
@@ -31,14 +31,14 @@ void btlStageModelLoad(BattleStageModel *stage, u32 area, u32 variant, u32 optio
     stage->key0 = area;
     stage->key1 = variant;
     sprintf(path, "%se%03d_%02d.bcenv", BATTLE_STAGE_DIRECTORY, area, variant);
-    if (!FUN_002402c4(btlGetMainState(), path)) {
+    if (!fileExistsPatchOrRom(btlGetMainState(), path)) {
         sprintf(path, "%se%03d_%02d.bcenv", BATTLE_STAGE_DIRECTORY, 1, 1);
         stage->key0 = 1;
         stage->key1 = 1;
     }
     FUN_002a09b4(path, 0);
     sprintf(path, "%sb%03d_%02d.bam", BATTLE_STAGE_DIRECTORY, area, variant);
-    if (!FUN_002402c4(btlGetMainState(), path)) {
+    if (!fileExistsPatchOrRom(btlGetMainState(), path)) {
         sprintf(path, "%sb%03d_%02d.bam", BATTLE_STAGE_DIRECTORY, 1, 1);
         stage->key0 = 1;
         stage->key1 = 1;

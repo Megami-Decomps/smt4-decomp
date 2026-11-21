@@ -1,6 +1,7 @@
 /* NON_MATCHING: rewritten from the draft (nw::gfx::Fog::Initialize); same flow, checks and updater swap, but retail keeps the result in r5, the allocator in r6 and rematerialises the clearing zero in r4. */
 #include "common.h"
 #include <new>
+#include "gfx/GfxResult.h"
 
 /* nw::os::IAllocator: slot 2 allocates, slot 3 frees. */
 class FogAllocator {
@@ -9,19 +10,6 @@ public:
     virtual void unk04();
     virtual void *allocate(u32 size, u32 alignment);   /* +0x08 */
     virtual void free(void *block);                    /* +0x0C */
-};
-
-/* A graphics result: the top bit marks failure; results accumulate with |=. */
-struct GfxResult {
-    GfxResult() : value(0) {}
-    GfxResult(u32 code) : value(code) {}
-    GfxResult &operator|=(GfxResult other)
-    {
-        value |= other.value;
-        return *this;
-    }
-    bool isFailure() const { return (s32)(value & 0x80000000) < 0; }
-    u32 value;
 };
 
 /* The fog's 16-byte updater block. */

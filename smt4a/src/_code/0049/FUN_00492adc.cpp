@@ -26,7 +26,7 @@ struct DirectionVector {
 
 extern "C" {
 extern NaviMainView* g_naviMain;
-f32 FUN_001b640c(f32 directionX, f32 directionZ);
+f32 mathAtan2Angle256(f32 directionX, f32 directionZ);
 }
 
 // Normalize the horizontal direction and compute its angle, allowing the navigation override.
@@ -43,7 +43,7 @@ extern "C" f32 FUN_00492adc(void)
     direction.x *= inverseLength;
     direction.z *= inverseLength;
 
-    f32 angle = 360.0f + FUN_001b640c(direction.x, direction.z) * 1.40625f;
+    f32 angle = 360.0f + mathAtan2Angle256(direction.x, direction.z) * 1.40625f;
     union {
         f32 value;
         s32 bits;

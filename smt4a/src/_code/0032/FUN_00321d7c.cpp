@@ -3,7 +3,7 @@
 #include "gfx/VectorScratch.h"
 extern "C" {
 void FUN_002cf548(void);
-f32 FUN_001b640c(f32 y, f32 x);
+f32 mathAtan2Angle256(f32 y, f32 x);
 f32 FUN_0034f8b4(const void *curve, s32 frame, s32 duration);
 u32 FUN_0038136c(const void *curve, const u32 *opacity, s32 frame, s32 duration);
 
@@ -35,7 +35,7 @@ void FUN_00321d7c(ParticleTransformSample *sample, ParticleTransformCurves *curv
         if (x == 0.0f && y == 0.0f) {
             sample->angle = 0.0f;
         } else {
-            sample->angle = FUN_001b640c(y, x) * 0.024543693f;
+            sample->angle = mathAtan2Angle256(y, x) * 0.024543693f;
         }
     }
 }

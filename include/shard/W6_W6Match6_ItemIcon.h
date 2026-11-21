@@ -15,16 +15,6 @@ void FUN_00493344(const OffsetPosition2D *position, u32 id, s32 x, s32 y,
 extern "C" {
 #endif
 
-void gfxDrawQuadFourColors(u32 first, u32 second, u32 third, f32 firstValue, f32 secondValue, f32 thirdValue, f32 fourthValue, u32 fourth, f32 lastValue);
-
-#ifdef __cplusplus
-}
-#endif
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 void messageSetScriptDisplayMode(void);
 
 #ifdef __cplusplus

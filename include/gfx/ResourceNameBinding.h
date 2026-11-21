@@ -22,14 +22,19 @@ struct ResourceNameTargets {
     /* 0x0C */ ResourceNamedTarget **targets;
     /* 0x10 */ u32 count;
 };
+/* A name list: a header word followed by the dictionary nameTableLookupEntry searches. */
+struct ResourceNameList {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ ResourceNameDictionary dictionary;
+};
 struct ResourceNameDictionaryOwner {
-    /* 0x00 */ u8 unk00[0x38];
-    /* 0x38 */ ResourceNameDictionary dictionary;
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ ResourceNameList names;
 };
 typedef char ResourceNameBindingOffsetsCheck[
     offsetof(ResourceNameTargets, targets) == 0xC &&
     offsetof(ResourceNameTargets, count) == 0x10 &&
-    offsetof(ResourceNameDictionaryOwner, dictionary) == 0x38 &&
+    offsetof(ResourceNameDictionaryOwner, names.dictionary) == 0x38 &&
     sizeof(ResourceNameBinding) == 8 ? 1 : -1];
 
 #endif

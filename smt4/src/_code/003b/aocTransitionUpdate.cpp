@@ -1,20 +1,16 @@
-/* NON_MATCHING: the navigation position now zeroes its fields through a constructor (matches retail's byte/float stores); retail uses a 36-byte frame, no hoisted 0xf constant, g_aocMain in r8 and a branch (not predication) for the map < 200 flags. */
+/* NON_MATCHING: register allocation only: retail keeps &g_aocMain in r8 and &g_mapSelection in r7 (swapped here) and
+ * extracts the closing bit from the flags register directly. */
 #include "addon/aocMain.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match6_ContentTransition.h"
 #include "battle/btlHelp.h"
 #include "game/GameState.h"
+#include "gamedata/NavigationSavePosition.h"
 
-struct NavigationPosition {
-    NavigationPosition() : map(0), area(0), reserved(0), x(0.0f), y(0.0f), z(0.0f) {}
-    u8 kind, map, area, reserved;
-    f32 x, y, z;
-};
 extern "C" {
 void FUN_0028d664(AocScriptHolder *, u32);
 s32 itemEventStartupUpdate(AocScriptHolder *);
 void helpResourcesRelease(AocScriptHolder *);
-void saveSetNavigationPosition(const NavigationPosition *);
 void gameCopyPersistentSave();
 void gameSynchronizeMapState(ContentTransition *);
 void gameJumpRequestClear();
@@ -24,10 +20,10 @@ void __ARM_common_memcpy4_6(ShortJumpDestination *, const ShortJumpDestination *
 
 static inline void saveSourcePosition(ContentTransition *scene)
 {
-    NavigationPosition position;
+    MapJumpRequest position;
     position.kind = 3;
     position.map = scene->sourceMap;
-    position.area = scene->sourceArea;
+    position.entrance = scene->sourceArea;
     saveSetNavigationPosition(&position);
     gameCopyPersistentSave();
 }
@@ -51,8 +47,10 @@ extern "C" void aocTransitionUpdate(ContentTransition *scene)
                                                  (u16)g_mapSelection.selection.target};
             __ARM_common_memcpy4_6(&scene->destination, &destination);
             scene->flags |= 0x10;
-            if (g_mapSelection.selection.group < 200)
-                scene->flags |= 0x100100;
+            if (g_mapSelection.selection.group < 200) {
+                scene->flags |= 0x100000;
+                scene->flags |= 0x100;
+            }
             scene->step.phase = 0;
             scene->step.state = 5;
         } else if (g_gameState.entryValue) {
@@ -68,16 +66,15 @@ extern "C" void aocTransitionUpdate(ContentTransition *scene)
             scene->step.phase = 0;
             scene->step.state = 5;
         }
-        if (status == 2) {
-            scene->step.state = 15;
-            scene->step.phase = 0;
+    }
+    if (status != 2) {
+        u32 flags = g_aocMain->flags;
+        u32 closing = (flags & 0x10) >> 4;
+        g_aocMain->flags = flags & ~0x70u;
+        if (!closing) {
             return;
         }
     }
-    u32 flags = g_aocMain->flags;
-    g_aocMain->flags = flags & ~0x70u;
-    if (flags & 0x10) {
-        scene->step.state = 15;
-        scene->step.phase = 0;
-    }
+    scene->step.state = 15;
+    scene->step.phase = 0;
 }

@@ -1,4 +1,6 @@
-/* NON_MATCHING: six-channel scan unrolls by two and saves an extra GPR; capability cases and record offsets match retail. */
+/* NON_MATCHING: six-channel scan unrolls by two and saves an extra GPR; capability cases and record offsets match retail.
+ * Retail's rolled loop and state addressing come back only with single-use temporaries (the shift `channel * 4` and
+ * `states->data` each in their own local), which the rules reject. */
 #include "shard/W6_W6Match7_MaterialAnimationFlags.h"
 
 extern "C" void gfxMarkMaterialAnimationCapabilities(const MaterialFlagAnimation* animation,
