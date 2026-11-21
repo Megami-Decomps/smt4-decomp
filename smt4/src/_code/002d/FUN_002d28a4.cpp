@@ -3,12 +3,12 @@
 #include "map/LmapViewGlobals.h"
 
 extern "C" {
-void FUN_002df5f8(void);
+void lmapCameraSetPresetDefaults(void);
 
 void FUN_002d28a4(s32 map, s32 area)
 {
     g_lmapViewHolder.view->presetEnabled = 0;
-    FUN_002df5f8();
+    lmapCameraSetPresetDefaults();
     if (map == 10 && area == 8) {
         LmapView *work = g_lmapViewHolder.view;
         work->targetHeight[3] = 100.0f;

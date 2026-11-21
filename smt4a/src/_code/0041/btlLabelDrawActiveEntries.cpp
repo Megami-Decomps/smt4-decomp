@@ -1,4 +1,4 @@
-/* NON_MATCHING: render-stack push temporaries, cached render-context address and draw-loop register allocation differ from retail. */
+/* NON_MATCHING: retail reloads g_renderCtx from the pool at each use (the build keeps its address in fp), loads alphaDone before the scale getter and keeps the text arguments in other registers. */
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
@@ -6,10 +6,7 @@
 
 struct BattleLabelEntryViewA {
     u8 unk00[0x14];
-    union {
-        UiSpriteState sprite;
-        struct { u8 unk14[0x18]; s16 x; s16 y; } position;
-    };
+    UiSpriteState sprite;
     u8 active;
     u8 unkA1[3];
     s32 kind;
@@ -19,7 +16,7 @@ struct BattleLabelEntryViewA {
 struct BattleLabelDimensionsA { s16 width; };
 typedef char BattleLabelEntryLayoutA[
     sizeof(BattleLabelEntryViewA) == 0xB0 && offsetof(BattleLabelEntryViewA, active) == 0xA0 &&
-    offsetof(BattleLabelEntryViewA, position.x) == 0x2C ? 1 : -1];
+    offsetof(BattleLabelEntryViewA, sprite.centerX) == 0x2C ? 1 : -1];
 
 extern "C" {
 s32 renderCtxPackPassFlags(u32 first, u32 second);
@@ -42,13 +39,14 @@ void btlLabelDrawActiveEntries(BattleLabelEntryViewA *entries)
             effectRenderTransformedInstance(&entry->sprite, offset);
         }
         if (entry->active) {
+            UiSpriteState *sprite = &entry->sprite;
             s32 offset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.27f);
             const TextureTableEntryIV *anchor = asdTMTexTableEntryAt(8, 142);
             s32 centerX = anchor->x + anchor->placement->width / 2;
             s32 y = anchor->y;
-            if (entry->kind == 2 && (uiSpriteGetScaleDone(&entry->sprite) & (s8)entry->sprite.alphaDone)) {
-                textDrawRangeFaded(entry->message, entry->position.x + centerX - entry->textWidth / 2 + offset,
-                             entry->position.y + y, 61, 6, 0, 1.0f);
+            if (entry->kind == 2 && (uiSpriteGetScaleDone(sprite) & (s8)sprite->alphaDone)) {
+                textDrawRangeFaded(entry->message, sprite->centerX + centerX - entry->textWidth / 2 + offset,
+                             sprite->centerY + y, 61, 6, 0, 1.0f);
             }
         }
     }

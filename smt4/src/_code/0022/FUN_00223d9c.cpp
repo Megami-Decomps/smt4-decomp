@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern u32 FUN_0029aef0(void *value);
+extern u32 partyFindSupportedLevel(void *value);
 
 void FUN_00223d9c(void)
 {
@@ -10,7 +10,7 @@ void FUN_00223d9c(void)
     u32 value;
 
     if (obj != NULL) {
-        value = FUN_0029aef0(obj->context);
+        value = partyFindSupportedLevel(obj->context);
         obj->unk9464 = value;
     }
 }

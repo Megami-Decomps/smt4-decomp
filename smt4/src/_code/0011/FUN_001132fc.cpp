@@ -1,6 +1,5 @@
-/* NON_MATCHING: the quad's corner constants now sit in saved registers as in retail; retail reads the right-capture
- * flag through a split base (`add r2, r0, #3840`), keeps the default extent in a separate copy and orders the two
- * divisions and the final argument moves differently. */
+/* NON_MATCHING: written as its Apocalypse twin frameTexDrawXfadeCapture; the corner constants and the two UV
+ * ratios get other saved VFP registers and the argument moves before FUN_002ba1e0 are scheduled differently. */
 #include "ui/UiSpriteApi.h"
 #include "frame_tex/FrameTex.h"
 #include "camp/RenderCtx.h"
@@ -23,17 +22,20 @@ void FUN_001132fc(s32 alternate)
     const f32 bottom = 240.0f;
     const f32 depth = 0.0f;
     u32 color = work->fadeColor;
-    f32 textureExtent = work->fadeCaptureResult ? 240.0f : 480.0f;
+    f32 textureExtent = 240.0f;
+    if (work->fadeCaptureResult == 0)
+        textureExtent = 480.0f;
     AsdTexture *surface;
     if (alternate == 0 && work->fadeCapturedRight) {
         surface = work->surfaceRight;
     } else {
         surface = work->surfaceLeft;
     }
+    /* Retail reads the size before marking the target filtered. */
+    f32 v = 400.0f / static_cast<f32>(surface->dimensions.height);
+    f32 u = textureExtent / static_cast<f32>(surface->dimensions.width);
     surface->filterX = 1;
     surface->filterY = 1;
-    f32 u = textureExtent / static_cast<f32>(surface->dimensions.width);
-    f32 v = 400.0f / static_cast<f32>(surface->dimensions.height);
     renderCtxSelectTexture(g_titleScene, surface);
     FUN_002ba1e0(color, color, color, color,
         left, top, depth, right, top, depth,

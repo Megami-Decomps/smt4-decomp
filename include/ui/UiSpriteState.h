@@ -75,7 +75,9 @@ struct UiSpriteState {
     /* 0x0C */ s32 x;              /* 20.12 fixed point */
     /* 0x10 */ s32 y;
     /* 0x14 */ s32 z;
-    /* 0x18 */ u8 unk18[8];
+    /* 0x18 */ s16 centerX;        /* a texture entry's centre (uiStoreTextureEntryCenter, through PointDeltaWork) */
+    /* 0x1A */ s16 centerY;
+    /* 0x1C */ u8 unk1C[4];
     /* 0x20 */ f32 alpha;
     /* 0x24 */ f32 scale[3];       /* the scale track sets all three */
     union {

@@ -56,7 +56,7 @@ void qcGetCenterSlotGroups(u32 area);
 s32 timerStampIsExpired(void);
 void sysResetTimestampState(void);
 s32 storyModeCanProceed(u8 area);
-void FUN_00287528(s32 flag);
+void questCompletionSetTierFlags(s32 flag);
 void titleRestartSlotState3(s32 slot, s32 value);
 
 void FUN_003840f4(QuestCounterScene *scene, s32 questId, u8 unused, u8 mode)
@@ -143,7 +143,7 @@ void FUN_003840f4(QuestCounterScene *scene, s32 questId, u8 unused, u8 mode)
         }
     }
     if (storyModeCanProceed(scene->area) != 0)
-        FUN_00287528(0);
+        questCompletionSetTierFlags(0);
     titleRestartSlotState3(0, 0xFF);
     titleRestartSlotState3(1, 0xFF);
     gameCounterAddSaturating(0x1C, 1);

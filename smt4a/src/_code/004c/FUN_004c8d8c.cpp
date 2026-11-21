@@ -7,24 +7,12 @@ extern "C" {
 u32 FUN_00200a68(s32 kind, s32 message, s32 arg2, s32 arg3, s32 mode, s32 arg5, s32 category, u32 options);
 extern BtlHelpGlobalsA g_btlHelp;
 
-// The help globals' blocking masks as 64-bit flag sets.
-struct BattleHelpMasksView {
-    u8 unk00[0x20];
-    u64 blockedStates;      // 0x20
-    u64 blockedTransitions; // 0x28
-};
-
-static __inline const BattleHelpMasksView *helpMasks(void)
-{
-    return reinterpret_cast<const BattleHelpMasksView *>(&g_btlHelp);
-}
-
 // Submit a help message only while no blocking battle state or transition is active.
 u32 FUN_004c8d8c(s32 message, s32 mode, u32 options)
 {
     BtlMainStateA *battle = btlGetMainState();
-    if ((battle->stateFlags64.bits & helpMasks()->blockedStates) ||
-        (battle->stateFlags64.bits & helpMasks()->blockedTransitions)) {
+    if ((battle->stateFlags64.bits & g_btlHelp.blockedStates) ||
+        (battle->stateFlags64.bits & g_btlHelp.blockedTransitions)) {
         return 0;
     }
     s32 category = -1;

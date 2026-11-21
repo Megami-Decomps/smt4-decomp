@@ -1,4 +1,3 @@
-/* NON_MATCHING: category switch case order and shared high-ID/highlight branch placement differ from retail. */
 #include "common.h"
 #include "code/Code001b.h"
 #include "quest_center/QuestRecordA.h"
@@ -22,9 +21,7 @@ void partyDrawCategorySelectionIcon(s32 id, u32 x, u32 y, u32 flags)
     s32 highlighted = partyEntryFlagsBit3(id);
     if (dataTable1bOr1cRecordHasFlag1(id)) {
         sprite = highlighted ? 0x40f : 0x408;
-    } else if (idIsAtLeast350(id)) {
-        sprite = highlighted ? 0x41b : 0x41a;
-    } else {
+    } else if (!idIsAtLeast350(id)) {
         switch (reinterpret_cast<PartyCategoryRecord *>(questDataGetRecord(id))->category) {
         case 0:
             sprite = highlighted ? 0x40a : 0x403;
@@ -33,13 +30,13 @@ void partyDrawCategorySelectionIcon(s32 id, u32 x, u32 y, u32 flags)
         case 6:
             sprite = highlighted ? 0x40b : 0x404;
             break;
-        case 2:
-        case 3:
-            sprite = highlighted ? 0x40d : 0x406;
-            break;
         case 4:
         case 5:
             sprite = highlighted ? 0x40c : 0x405;
+            break;
+        case 2:
+        case 3:
+            sprite = highlighted ? 0x40d : 0x406;
             break;
         case 8:
         case 9:
@@ -52,6 +49,8 @@ void partyDrawCategorySelectionIcon(s32 id, u32 x, u32 y, u32 flags)
         case 12:
             return;
         }
+    } else {
+        sprite = highlighted ? 0x41b : 0x41a;
     }
     if (highlighted) {
         drawSetColorFromRGBA8(0x57d8ffff);

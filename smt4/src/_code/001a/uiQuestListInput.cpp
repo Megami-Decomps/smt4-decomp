@@ -34,7 +34,7 @@ u32 uiScrollHandleActionsOrTouch(GridNavigation *list, const TextureTableEntryIV
                                  s32 notify);
 u8 gridNavigationHandleConfirm(GridNavigation *list, s32 notify);
 void FUN_0028fe0c(u16 quest, u32 state);
-void FUN_00290404(void);
+void uiQuestShowStatusHelp(void);
 void uiQuestRefreshButtonHelp(void);
 void questClearOwnerModeBitsIfEligible(UiQuest *quest);
 void buttonHelpSetText(const s8 *text, u32 style);
@@ -73,7 +73,7 @@ static __inline void questListSelect(UiQuest *quest, u16 id)
 {
     questPanelReleaseDirectory(&quest->panelView.panel);
     FUN_0028fe0c(id, 1);
-    FUN_00290404();
+    uiQuestShowStatusHelp();
     uiQuestRefreshButtonHelp();
     if (quest->selectedId != id && quest->detailMode > 2)
         questClearOwnerModeBitsIfEligible(quest);

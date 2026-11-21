@@ -104145,12 +104145,12 @@
     },
     {
       "address": "0x352a14",
-      "function": "FUN_00352a14",
+      "function": "lmapCameraSetPresetDefaults",
       "module": "_code",
-      "object": "build/obj/_code/0035/FUN_00352a14.o",
+      "object": "build/obj/_code/0035/lmapCameraSetPresetDefaults.o",
       "size": 332,
-      "source": "src/_code/0035/FUN_00352a14.cpp",
-      "target": "orig/target/_code/0035/FUN_00352a14.o",
+      "source": "src/_code/0035/lmapCameraSetPresetDefaults.cpp",
+      "target": "orig/target/_code/0035/lmapCameraSetPresetDefaults.o",
       "thumb": false
     },
     {
@@ -177069,12 +177069,12 @@
     },
     {
       "address": "0x51e270",
-      "function": "FUN_0051e270",
+      "function": "curveSampleLinear",
       "module": "_code",
-      "object": "build/obj/_code/0051/FUN_0051e270.o",
+      "object": "build/obj/_code/0051/curveSampleLinear.o",
       "size": 252,
-      "source": "src/_code/0051/FUN_0051e270.cpp",
-      "target": "orig/target/_code/0051/FUN_0051e270.o",
+      "source": "src/_code/0051/curveSampleLinear.cpp",
+      "target": "orig/target/_code/0051/curveSampleLinear.o",
       "thumb": false
     },
     {
@@ -177099,12 +177099,12 @@
     },
     {
       "address": "0x51e540",
-      "function": "FUN_0051e540",
+      "function": "curveSampleLinear16",
       "module": "_code",
-      "object": "build/obj/_code/0051/FUN_0051e540.o",
+      "object": "build/obj/_code/0051/curveSampleLinear16.o",
       "size": 252,
-      "source": "src/_code/0051/FUN_0051e540.cpp",
-      "target": "orig/target/_code/0051/FUN_0051e540.o",
+      "source": "src/_code/0051/curveSampleLinear16.cpp",
+      "target": "orig/target/_code/0051/curveSampleLinear16.o",
       "thumb": false
     },
     {

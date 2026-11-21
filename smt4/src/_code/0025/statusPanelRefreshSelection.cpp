@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail retains a separate primary-skill base and different saved registers; refresh behavior is reconstructed. */
 #include "shard/GameGlobals.h"
 #include "bible/bibleDevil.h"
 
@@ -28,27 +27,32 @@ void statusBuildFlaggedDemonList(const u8 *flags);
 void FUN_001ee8b4(const u8 *inventory);
 void FUN_0026ae64();
 
+/* The primary status selection record, stored at 0x1300 of the game data (the alternate one is at 0x18B0). */
+static __inline StatusSelectionRecord *statusPrimarySelection(GameData *data)
+{
+    return (StatusSelectionRecord *)&data->unk1300;
+}
+
 // Refresh either stored status selection and synchronize its skill, description and inventory tabs.
 void statusPanelRefreshSelection(s32 alternate)
 {
     GameData *data = g_gameGlobals.data;
-    StatusSelectionRecord *primary = reinterpret_cast<StatusSelectionRecord *>(&data->unk1300);
-    StatusSelectionRecord *selection = primary;
+    StatusSelectionRecord *selection = statusPrimarySelection(data);
     if (alternate != 0)
         selection = reinterpret_cast<StatusSelectionRecord *>(data->unk18B0);
     u32 count = 8;
-    if (primary->memberId < 0)
+    if (statusPrimarySelection(data)->memberId < 0)
         count = countUnlockedSlots();
-    else if (primary->memberId > 0 && data->unk1E66 != 6)
+    else if (statusPrimarySelection(data)->memberId > 0 && data->unk1E66 != 6)
         count = flagCountUnlockedSlots(0);
-    statusReplaceSkills(primary->skills, count);
+    statusReplaceSkills(statusPrimarySelection(data)->skills, count);
     if (alternate != 0)
         FUN_002e2fb0(reinterpret_cast<StatusSelectionRecord *>(data->unk18B0)->skills, count);
     u32 result[4] = {0, 0, 0, 0};
     if (selection->memberId > 0 && data->unk1E66 != 6) {
         s32 skip;
         if (data->unk1E66 == 2 || data->unk1E66 == 3) {
-            StatusRefreshMemberView *member = partyMemberFindById((u16)primary->memberId);
+            StatusRefreshMemberView *member = partyMemberFindById((u16)statusPrimarySelection(data)->memberId);
             skip = member != NULL && member->available != 0;
         } else {
             skip = 0;

@@ -36,7 +36,7 @@ s32 uiBindRecordRewardText(u32 id, s32 a, s32 b);
 void gameOptionsEnableAndReset(void);
 void gameFlagEntryActivate(u32 id);
 void uiQuestCountDetailPages(u32 id);
-void FUN_00290404(void);
+void uiQuestShowStatusHelp(void);
 void gameGetOptionProgressStatus(void);
 void buttonHelpSetPreset(s32 preset);
 s32 scrScriptProcessStartEntry(u32 script, s32 entry);
@@ -64,7 +64,7 @@ void uiQuestStartSelected(void)
     uiBindRecordRewardText(id, 0, 1);
     if (scrScriptProcessStartEntry(quest->script, 3) != 0) {
         buttonHelpSetPreset(0x9e);
-        FUN_00290404();
+        uiQuestShowStatusHelp();
         uiQuestEnterState(&g_uiQuest->track, 0xc);
     }
 }

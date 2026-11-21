@@ -1,4 +1,5 @@
-/* NON_MATCHING: canonical render context, animation getter and native add-on menu member callbacks recovered; render-state pop expression/register order still differs. */
+/* NON_MATCHING: only the render-state pops' stack address differs: retail loads g_titleScene into r0 and adds the
+ * stack offset into r4 (ldr r0; add r4, r0, #4096), this build loads it into r4 directly. */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "classes/AocMenu.h"
@@ -39,9 +40,9 @@ void aocMenuDrawScreen(AocMenu* screen)
     for (s32 i = 0; i < 24; i++) {
         effectRenderTransformedInstance(screen->animated.effects[i], (f32)shift);
     }
-    renderStackPop(&g_titleScene->stackB);
-    renderStackPop(&g_titleScene->stackB);
-    renderStackPopChecked(&g_titleScene->stackA);
+    renderStackPopCounted(&g_titleScene->stackB);
+    renderStackPopCounted(&g_titleScene->stackB);
+    renderStackPopCounted(&g_titleScene->stackA);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     renderCtxApplyTransforms(g_titleScene);

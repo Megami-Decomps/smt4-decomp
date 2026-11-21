@@ -1,4 +1,4 @@
-/* NON_MATCHING: Placement-entry rebasing and subject-id liveness differ from retail. */
+/* NON_MATCHING: owner/action register swap, the active-entry loop addresses through an entry pointer (retail folds 0x398 into each load), and retail keeps the zero result and the id in callee-saved registers. */
 #include "battle/BtlMainAccess.h"
 #include "battle/BtlEntryLookup.h"
 #include "battle/btlMain.h"
@@ -39,9 +39,10 @@ s32 FUN_004f7924(void *owner, BtlActionRecord *action)
     }
     BtlMainStateA *battle = btlGetMainState();
     s32 subject = idSetFindSubjectIndex(battle, action);
-    subject = subject < 0 ? 0 : subject;
+    if (subject < 0)
+        subject = 0;
     BtlUnitDataA *subjects = btlFindEntryBlockByMemberId(battle, action->apocalypse.memberId);
-    u16 id = subjects->id;
+    s32 id = subjects->id;
     s32 key = subjects->parts[subject];
     PlacementOwnerView *placements = (PlacementOwnerView *)owner;
     for (s32 index = 0; index < 50; ++index) {
@@ -51,19 +52,19 @@ s32 FUN_004f7924(void *owner, BtlActionRecord *action)
         }
     }
     for (s32 index = 0; index < 50; ++index) {
-        PlacementEntry *entry = &placements->entries[index];
-        if (entry->key == key) {
-            if (entry->resource != NULL) {
-                entry->placement.sprite = entry->resource;
+        if (placements->entries[index].key == key) {
+            if (placements->entries[index].resource != NULL) {
+                BattleSpritePlacement *placement = &placements->entries[index].placement;
+                placement->sprite = placements->entries[index].resource;
                 u32 value = 0;
                 s32 actor = ((ActorView *)battle)->actor;
                 if (actor >= 0) {
                     value = tableFileFindByKeyPair(battle, (s16)actor, id);
                 }
-                FUN_00401d18(&entry->placement, 0x20000, 0x20000, value);
-                FUN_00402290(&entry->placement);
+                FUN_00401d18(placement, 0x20000, 0x20000, value);
+                FUN_00402290(placement);
             }
-            entry->flags |= 1;
+            placements->entries[index].flags |= 1;
             return 1;
         }
     }

@@ -68,7 +68,7 @@ u32 FUN_003f6f68(u32 (*callback)(u32), const u32 *value);
 s32 FUN_002bcc60(void *thread, const ThreadArgumentDescriptor *descriptor, void (*entry)(UniteWork *),
                  UniteWork **argument, u32 stackTop, s32 priority, s32 processor, u32 flags);
 UniteCtrl *uniteCtrlBuildRaceLists(UniteCtrl *unite);
-s32 FUN_0029aef0(void);
+s32 partyFindSupportedLevel(void);
 void uniteRebuildFusionCatalog(void);
 void mapMainCallIfFlag(s32 flag);
 u32 fileSlotLoad(u32 id);
@@ -117,7 +117,7 @@ void uniteCreate(void)
         ctrl = uniteCtrlBuildRaceLists(ctrl);
     }
     work->sprites.ctrl = ctrl;
-    work->unk9464 = FUN_0029aef0();
+    work->unk9464 = partyFindSupportedLevel();
 
     /* The thread that builds the fusion catalog. */
     work->stopRequested = 0;

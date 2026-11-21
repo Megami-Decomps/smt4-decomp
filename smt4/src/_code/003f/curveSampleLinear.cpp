@@ -1,5 +1,3 @@
-/* NON_MATCHING: the search and the blend match; retail computes the last-key pointer after the search, where this build
- * computes it first (declaring `last` after the search matches, but its sibling FUN_003f972c needs the opposite order). */
 #include "common.h"
 
 struct CurveKey {
@@ -15,7 +13,7 @@ struct Curve {
     /* 0x08 */ CurveKey keys[1];
 };
 
-/* Finds the last key not after `time`, searching from an interpolated guess (the same search as FUN_003f972c's). */
+/* Finds the last key not after `time`, searching from an interpolated guess (the same search as curveSampleLinear16's). */
 static const CurveKey *curveFindKey(const Curve *curve, f32 time)
 {
     const CurveKey *key = curve->keys;
@@ -43,8 +41,8 @@ static const CurveKey *curveFindKey(const Curve *curve, f32 time)
 /* Samples the curve at `time`, blending linearly with the next key. */
 extern "C" f32 curveSampleLinear(const Curve *curve, f32 time)
 {
-    const CurveKey *last = &curve->keys[curve->count - 1];
     const CurveKey *key = curveFindKey(curve, time);
+    const CurveKey *last = &curve->keys[curve->count - 1];
     f32 keyTime = key->time;
     if (keyTime == time || key == last) {
         return key->value;

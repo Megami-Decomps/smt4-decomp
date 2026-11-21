@@ -2,6 +2,7 @@
 #include "map/mapDepart.h"
 #include "map/NavigationInterpolation.h"
 #include "game/GameState.h"
+#include "title/TitleSceneTuning.h"
 
 /* The navigation object seen as the touch-drag scroller that FUN_0039b370 drives. */
 struct NavigationDrag {
@@ -30,7 +31,6 @@ struct TouchSample {
 };
 
 extern "C" {
-extern f32 DAT_0044cdc8; /* velocity damping per frame */
 
 s32 FUN_0039b648(NavigationDrag *drag);
 s32 FUN_002bffd8(s32 *x, s32 *y);
@@ -97,8 +97,8 @@ u32 FUN_0039b370(NavigationDrag *drag)
             drag->velocity.y = 0.0f;
             return 0;
         }
-        drag->velocity.x = vx * DAT_0044cdc8;
-        drag->velocity.y = drag->velocity.y * DAT_0044cdc8;
+        drag->velocity.x = vx * DAT_0044cdc8.dragFriction;
+        drag->velocity.y = drag->velocity.y * DAT_0044cdc8.dragFriction;
         NavigationPoint position = *NaviMain_GetCursorPos(cursor);
         position.x += drag->velocity.x;
         position.y += drag->velocity.y;

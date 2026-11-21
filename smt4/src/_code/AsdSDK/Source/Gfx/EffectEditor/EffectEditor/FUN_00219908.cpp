@@ -23,31 +23,31 @@ void FUN_00219908(void)
     PhaseVector eye;
 
     if (padIsButtonPressed(27) != 0) {
-        g_effectEditorCameraDefaults.offset.x = 0.0f;
-        g_effectEditorCameraDefaults.offset.y = 0.0f;
-        g_effectEditorCameraDefaults.offset.z = 0.0f;
-        g_effectEditorCameraDefaults.rotation.x = 0.0f;
-        g_effectEditorCameraDefaults.rotation.y = 0.0f;
-        g_effectEditorCameraDefaults.rotation.z = 0.0f;
+        g_effectEditorCameraOffset.x = 0.0f;
+        g_effectEditorCameraOffset.y = 0.0f;
+        g_effectEditorCameraOffset.z = 0.0f;
+        g_effectEditorCameraRotation.x = 0.0f;
+        g_effectEditorCameraRotation.y = 0.0f;
+        g_effectEditorCameraRotation.z = 0.0f;
     }
-    g_effectEditorCameraDefaults.rotation.y += stick[2] * 3.2f;
-    g_effectEditorCameraDefaults.rotation.x -= stick[3] * 3.2f;
+    g_effectEditorCameraRotation.y += stick[2] * 3.2f;
+    g_effectEditorCameraRotation.x -= stick[3] * 3.2f;
     if (slotIsActive(28) == 0) {
-        g_effectEditorCameraDefaults.offset.x += stick[0] * 10.0f;
-        g_effectEditorCameraDefaults.offset.z -= stick[1] * 10.0f;
+        g_effectEditorCameraOffset.x += stick[0] * 10.0f;
+        g_effectEditorCameraOffset.z -= stick[1] * 10.0f;
     }
     if (slotIsActive(23) != 0) {
-        g_effectEditorCameraDefaults.offset.y -= 5.0f;
+        g_effectEditorCameraOffset.y -= 5.0f;
     }
     if (slotIsActive(18) != 0) {
-        g_effectEditorCameraDefaults.offset.y += 5.0f;
+        g_effectEditorCameraOffset.y += 5.0f;
     }
-    offset.x = g_effectEditorCameraDefaults.eye.x - g_effectEditorCameraDefaults.target.x;
-    offset.y = g_effectEditorCameraDefaults.eye.y - g_effectEditorCameraDefaults.target.y;
-    offset.z = g_effectEditorCameraDefaults.eye.z - g_effectEditorCameraDefaults.target.z;
-    PhaseSinCos a = samplePhase(g_sinCosTable, g_effectEditorCameraDefaults.rotation.x * 0.71111107f);
-    PhaseSinCos b = samplePhase(g_sinCosTable, g_effectEditorCameraDefaults.rotation.y * 0.71111107f);
-    PhaseSinCos c = samplePhase(g_sinCosTable, g_effectEditorCameraDefaults.rotation.z * 0.71111107f);
+    offset.x = g_effectEditorCameraEye.x - g_effectEditorCameraTarget.x;
+    offset.y = g_effectEditorCameraEye.y - g_effectEditorCameraTarget.y;
+    offset.z = g_effectEditorCameraEye.z - g_effectEditorCameraTarget.z;
+    PhaseSinCos a = samplePhase(g_sinCosTable, g_effectEditorCameraRotation.x * 0.71111107f);
+    PhaseSinCos b = samplePhase(g_sinCosTable, g_effectEditorCameraRotation.y * 0.71111107f);
+    PhaseSinCos c = samplePhase(g_sinCosTable, g_effectEditorCameraRotation.z * 0.71111107f);
 
     matrix[0] = c.cosine * b.cosine;
     matrix[1] = a.sine * c.cosine * b.sine - a.cosine * c.sine;
@@ -62,13 +62,13 @@ void FUN_00219908(void)
     matrix[10] = a.cosine * b.cosine;
     matrix[11] = 0.0f;
     nn_math_ARMv6_VEC3TransformAsm_2AD44C(&offset, matrix);
-    center.x = g_effectEditorCameraDefaults.target.x + g_effectEditorCameraDefaults.offset.x;
-    center.y = g_effectEditorCameraDefaults.target.y + g_effectEditorCameraDefaults.offset.y;
-    center.z = g_effectEditorCameraDefaults.target.z + g_effectEditorCameraDefaults.offset.z;
+    center.x = g_effectEditorCameraTarget.x + g_effectEditorCameraOffset.x;
+    center.y = g_effectEditorCameraTarget.y + g_effectEditorCameraOffset.y;
+    center.z = g_effectEditorCameraTarget.z + g_effectEditorCameraOffset.z;
     eye.x = center.x + offset.x;
     eye.y = center.y + offset.y;
     eye.z = center.z + offset.z;
-    cameraMatrixCacheSetLookAt(&g_effectEditorCamera, &eye, &center, &g_effectEditorCameraDefaults.up);
+    cameraMatrixCacheSetLookAt(&g_effectEditorCamera, &eye, &center, &g_effectEditorCameraUp);
 }
 
 }

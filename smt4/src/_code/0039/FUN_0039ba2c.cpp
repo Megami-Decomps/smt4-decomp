@@ -4,6 +4,7 @@
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/RenderCtxTitle.h"
+#include "title/TitleSceneTuning.h"
 struct TitleBannerView {
     u8 prefix[0x164];
     Point2 origin;
@@ -14,11 +15,9 @@ struct TitleBannerView {
     u8 unkA87;
     UiSpriteState sprite;
 };
-struct TitleTextColor { u8 prefix[0xC]; u32 color; };
 typedef char TitleBannerSpriteOffset[offsetof(TitleBannerView, sprite) == 0xA88 ? 1 : -1];
 extern "C" {
 extern const u8 DAT_00404c48[];
-extern TitleTextColor DAT_0044cdc8;
 void pairCopy(const Point2 *source, Point2 *destination);
 u32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 state);
@@ -44,7 +43,7 @@ void FUN_0039ba2c(TitleBannerView *banner)
     s32 textWidth = (s32)fontMeasureTextWidth(text, 2, 0.0f);
     f32 center = (f32)((info->placement->width - textWidth) / 2);
     f32 x = (f32)(vec2GetXInt(&banner->sprite) + info->x) + center + origin.x;
-    textDrawString(x, (f32)info->y + origin.y, 0.0f, 2, 0.0f, DAT_0044cdc8.color, 1.0f, reinterpret_cast<const char *>(text));
+    textDrawString(x, (f32)info->y + origin.y, 0.0f, 2, 0.0f, DAT_0044cdc8.bannerCaptionColor, 1.0f, reinterpret_cast<const char *>(text));
     renderCtxPopState(g_titleScene, 3);
     efctSetSpeed(1.0f);
     uiSpriteAdvanceAnimation(&banner->sprite);

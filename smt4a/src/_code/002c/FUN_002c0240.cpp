@@ -1,4 +1,5 @@
-/* NON_MATCHING: ranking transitions and helper arguments are recovered; resource predicates, shared state commits, and switch branch placement differ. */
+/* NON_MATCHING: cases in retail's block order; retail tests heapB in its own block and shares the state stores and the
+   final return between cases differently. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/W6_W6Match3_FormatBuffer.h"
@@ -75,11 +76,6 @@ extern "C" s32 FUN_002c0240()
         sysPlaySe(160);
         nextState = 5;
         break;
-    case 4:
-        if (!uiSpriteAdvanceAnimation(work->sprite, 1))
-            return 0;
-        work->state = 6;
-        return 0;
     case 5:
         if (scrRunOpcodesStub(work->process) != 2)
             return 0;
@@ -87,6 +83,11 @@ extern "C" s32 FUN_002c0240()
         uiSpriteSetImageKeyframe(work->sprite, 20, 0);
         nextState = 4;
         break;
+    case 4:
+        if (!uiSpriteAdvanceAnimation(work->sprite, 1))
+            return 0;
+        work->state = 6;
+        return 0;
     case 6:
         campCecSetObjectValue(0);
         work->done = 1;

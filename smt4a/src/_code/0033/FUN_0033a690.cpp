@@ -4,7 +4,7 @@
 #include "map/LmapViewGlobals.h"
 
 extern "C" {
-void FUN_00352a14(void);
+void lmapCameraSetPresetDefaults(void);
 s32 gameFlagIsSet(u32 flag);
 
 /* Lays out the screen's anchor rows for the current map mode (g_gameState.mapId/submode); (10, 8) as arguments
@@ -13,7 +13,7 @@ void FUN_0033a690(s32 mode, s32 subMode)
 {
     LmapViewA *view = g_lmapViewHolder.view;
     view->unk305 = 0;
-    FUN_00352a14();
+    lmapCameraSetPresetDefaults();
     if (mode == 10 && subMode == 8) {
         view = g_lmapViewHolder.view;
         view->targetHeight[3] = 100.0f;

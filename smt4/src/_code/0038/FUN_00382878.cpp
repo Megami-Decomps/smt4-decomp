@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_00287528(unsigned char **);
+int questCompletionSetTierFlags(unsigned char **);
 int asdTextDrawFormatted(...);
 int libc_strcat(...);
 int FUN_002bcf4c(void);
@@ -27,7 +27,7 @@ extern unsigned char LAB_00382cd0; /* 0x382cd0 */
 
 extern int storyModeCanProceed(unsigned char);
 extern int dataTable26GroupGetRecord(int, unsigned char, unsigned int);
-/* Supplied declaration required: FUN_00287528. */
+/* Supplied declaration required: questCompletionSetTierFlags. */
 extern int objectFlagBitIsSet(unsigned int, unsigned int);
 /* Supplied declaration required: asdTextDrawFormatted. */
 /* Supplied declaration required: libc_strcat. */
@@ -63,7 +63,7 @@ void FUN_00382878(int param_1)
   temp_v1 = storyModeCanProceed(*(unsigned char *)(param_1 + 0x18));
   if (temp_v1 != 0) {
     temp_v9 = (unsigned char *)0xffffffff;
-    FUN_00287528(&temp_v9);
+    questCompletionSetTierFlags(&temp_v9);
     if (*(unsigned char **)(param_1 + 0x1c) != temp_v9) {
       *(unsigned char **)(param_1 + 0x1c) = temp_v9;
       qcGetCenterSlotGroups(*(unsigned char *)(param_1 + 0x18));

@@ -1,4 +1,4 @@
-/* NON_MATCHING: per-plane VFP argument setup and region-table/count literal anchoring differ. */
+/* NON_MATCHING: retail reaches the region count (0x6160dc, its own global in FUN_002de124) from the region table's address as a file static (anchor DAT_00614d7c + 0x1000 here), which moves the saved registers; x and the zero swap VFP registers. */
 #include "map/SelectionRegion.h"
 #include "game/GameStateA.h"
 
@@ -10,6 +10,10 @@ f32 mathVec3Dot(MapVector left, MapVector right);
 /* Find the last containing primary and secondary regions for a point on the map. */
 void FUN_00327ee8(f32 x, f32 z)
 {
+    MapVector point;
+    point.x = x;
+    point.y = 0.0f;
+    point.z = z;
     /* The second signed override is inside the shared opaque range. */
     GameStateA *overrides = &g_gameState;
     overrides->overrideKinds[0] = -1;
@@ -19,7 +23,6 @@ void FUN_00327ee8(f32 x, f32 z)
         bool inside = true;
         for (s32 side = 0; side < 4; ++side) {
             MapVector normal;
-            MapVector point = {x, 0.0f, z};
             MapVector direction;
             switch (side) {
             case 0:

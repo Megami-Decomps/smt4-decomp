@@ -1,4 +1,3 @@
-/* NON_MATCHING: block layout only: retail resolves the member (gameGetSlotRecord inline path) after the shared checks, lays the 'status cure' tail (orr #4 / tst #1 / 0x1b test) out after the exit branch and sets up result/wanted in a different order. */
 #include "common.h"
 #include "gamedata/GamePlayerData.h"
 #include "gamedata/SaveSlotRecord.h"
@@ -24,6 +23,14 @@ s32 FUN_002b4dcc(SlotRecordA *record);
 void FUN_003ff524(u16 *flags, s32 kind);
 u32 btlCanSelectReservePartyMember(const void *entry);
 s32 FUN_003ff888(void);
+
+/* The ailment flags an effect condition cures. */
+static __inline u16 conditionCuredAilments(u32 condition)
+{
+    u16 ailments = 0;
+    FUN_003ff524(&ailments, condition);
+    return ailments;
+}
 
 /* Checks whether the effect would do anything to the member: 0 when it would, 3 when it would not. */
 u32 FUN_00400564(s32 slot, s32 fromSave, EffectDefinition *effect)
@@ -62,12 +69,11 @@ u32 FUN_00400564(s32 slot, s32 fromSave, EffectDefinition *effect)
                     useful |= 1;
                 }
             } else if ((useful & 1) != 0) {
-                u16 other = 0;
-                FUN_003ff524(&other, effect->condition & 0x7f);
-                if ((other & 2) != 0 || (useful |= 4, (useful & 1) != 0)) {
-                    if ((effect->condition & 0x7f) == 0x1b) {
-                        useful |= 4;
-                    }
+                if ((conditionCuredAilments(effect->condition & 0x7f) & 2) == 0) {
+                    useful |= 4;
+                }
+                if ((useful & 1) != 0 && (effect->condition & 0x7f) == 0x1b) {
+                    useful |= 4;
                 }
             }
         }
@@ -78,10 +84,10 @@ u32 FUN_00400564(s32 slot, s32 fromSave, EffectDefinition *effect)
         SlotRecordA *member;
         if (slot < 0 && btlIsDefeatSuppressed() != 0) {
             member = btlMainGetUnk14();
-        } else if (fromSave != 0) {
-            member = gameGetSaveSlotData(slot);
-        } else {
+        } else if (fromSave == 0) {
             member = gameGetSlotRecord(slot);
+        } else {
+            member = gameGetSaveSlotData(slot);
         }
         if (member == 0) {
             return 3;
@@ -100,12 +106,11 @@ u32 FUN_00400564(s32 slot, s32 fromSave, EffectDefinition *effect)
                     useful |= 1;
                 }
             } else if ((useful & 1) != 0) {
-                u16 other = 0;
-                FUN_003ff524(&other, effect->condition & 0x7f);
-                if ((other & 2) != 0 || (useful |= 4, (useful & 1) != 0)) {
-                    if ((effect->condition & 0x7f) == 0x1b) {
-                        useful |= 4;
-                    }
+                if ((conditionCuredAilments(effect->condition & 0x7f) & 2) == 0) {
+                    useful |= 4;
+                }
+                if ((useful & 1) != 0 && (effect->condition & 0x7f) == 0x1b) {
+                    useful |= 4;
                 }
             }
         }

@@ -12,59 +12,47 @@ BtlHelpEntryA *FUN_00200a68(u32 id, u16 message, u32 first, u32 second, const vo
                             u32 argument, u32 context);
 BtlHelpEntryA *FUN_004c8e30(u32 first, u32 second, u32 third);
 
-// Queues a help entry showing two combatant snapshots side by side; with one snapshot (or none) it falls back to the
-// single-combatant help entry. Returns NULL while a blocked battle state is active.
-BtlHelpEntryA *FUN_004c9220(u32 first, const void *snapshotA, const void *snapshotB, u8 mode)
+// The shared entry's byte padding ends at 0x872; keep a word-aligned local view.
+struct PairedHelpEntryView {
+    u16 type;
+    s16 kind;
+    u16 state;
+    u16 phase;
+    u32 first;
+    f32 context;
+    u8 snapshotA[0x408];
+    u8 snapshotB[0x408];
+    u8 mode;
+    u8 unk821[3];
+    u32 row;
+    u32 column;
+    u32 values[16];
+    u32 counter;
+    u16 frame;
+    s16 dialogIndex;
+    BtlHelpEntryA *next;
+    BtlHelpEntryA *prev;
+    u32 unk87C;
+};
+typedef char PairedHelpEntryViewOffsets[offsetof(PairedHelpEntryView, mode) == 0x820 &&
+                                                offsetof(PairedHelpEntryView, values) == 0x82C &&
+                                                offsetof(PairedHelpEntryView, next) == 0x874 &&
+                                                sizeof(PairedHelpEntryView) == 0x880
+                                            ? 1
+                                            : -1];
+
+/* Creates a type-`type` entry holding two snapshots and appends it to the help list (btlHelp.cpp's creator for
+ * this message, inlined here as FUN_00200a68's creator is not; retail keeps its constant arguments in saved
+ * registers across the allocation).
+ * The trace lines are those of a run of creators above their callers (FUN_00200a68's at 150, then 191, 237, 275):
+ * btlHelpAppendMessage (0x4c8894) traces 237 but FUN_004c9220 (0x4c9220), placed after it, traces 191. */
+static __inline BtlHelpEntryA *helpPairedEntryCreate(u16 type, u32 first, f32 context, const void *snapshotA,
+    const void *snapshotB, u8 mode, u32 row, u32 column)
 {
-    // The shared entry's byte padding ends at 0x872; keep a word-aligned local view.
-    struct PairedHelpEntryView {
-        u16 type;
-        s16 kind;
-        u16 state;
-        u16 phase;
-        u32 first;
-        f32 context;
-        u8 snapshotA[0x408];
-        u8 snapshotB[0x408];
-        u8 mode;
-        u8 unk821[3];
-        u32 row;
-        u32 column;
-        u32 values[16];
-        u32 counter;
-        u16 frame;
-        s16 dialogIndex;
-        BtlHelpEntryA *next;
-        BtlHelpEntryA *prev;
-        u32 unk87C;
-    };
-    typedef char PairedHelpEntryViewOffsets[offsetof(PairedHelpEntryView, mode) == 0x820 &&
-                                                    offsetof(PairedHelpEntryView, values) == 0x82C &&
-                                                    offsetof(PairedHelpEntryView, next) == 0x874 &&
-                                                    sizeof(PairedHelpEntryView) == 0x880
-                                                ? 1
-                                                : -1];
-
-    BtlMainStateA *battle = btlGetMainState();
-    u64 blockedStates = static_cast<u64>(g_btlHelp.blockedStates[0]) |
-                        (static_cast<u64>(g_btlHelp.blockedStates[1]) << 32);
-    u64 blockedTransitions = static_cast<u64>(g_btlHelp.blockedTransitions[0]) |
-                             (static_cast<u64>(g_btlHelp.blockedTransitions[1]) << 32);
-    if ((battle->stateFlags64.bits & blockedStates) != 0 || (battle->stateFlags64.bits & blockedTransitions) != 0) {
-        return NULL;
-    }
-    if (snapshotA == NULL) {
-        return FUN_004c8e30(first, 0, mode);
-    }
-    if (snapshotB == NULL) {
-        return FUN_00200a68(1, 0, first, battle->helpMessages.context, snapshotA, mode, 13, 0);
-    }
-
-    f32 context = *reinterpret_cast<f32 *>(&battle->helpMessages.context);
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlHelp.cpp", 191);
     PairedHelpEntryView *entry = static_cast<PairedHelpEntryView *>(
         asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(PairedHelpEntryView), 1));
-    entry->type = 2;
+    entry->type = type;
     entry->kind = 0;
     entry->state = 0;
     entry->phase = 0;
@@ -74,8 +62,8 @@ BtlHelpEntryA *FUN_004c9220(u32 first, const void *snapshotA, const void *snapsh
     __aeabi_memcpy4(entry->snapshotB, snapshotB, sizeof(entry->snapshotB));
     entry->mode = mode;
     entry->counter = 0;
-    entry->row = 13;
-    entry->column = 14;
+    entry->row = row;
+    entry->column = column;
     entry->frame = 0;
     entry->dialogIndex = 1;
     for (s32 i = 0; i < 16; ++i) {
@@ -97,5 +85,24 @@ BtlHelpEntryA *FUN_004c9220(u32 first, const void *snapshotA, const void *snapsh
     }
     list->count++;
     return message;
+}
+
+// Queues a help entry showing two combatant snapshots side by side; with one snapshot (or none) it falls back to the
+// single-combatant help entry. Returns NULL while a blocked battle state is active.
+BtlHelpEntryA *FUN_004c9220(u32 first, const void *snapshotA, const void *snapshotB, u8 mode)
+{
+    BtlMainStateA *battle = btlGetMainState();
+    if ((battle->stateFlags64.bits & g_btlHelp.blockedStates) != 0 || (battle->stateFlags64.bits & g_btlHelp.blockedTransitions) != 0) {
+        return NULL;
+    }
+    if (snapshotA == NULL) {
+        return FUN_004c8e30(first, 0, mode);
+    }
+    if (snapshotB == NULL) {
+        return FUN_00200a68(1, 0, first, battle->helpMessages.context, snapshotA, mode, 13, 0);
+    }
+
+    return helpPairedEntryCreate(2, first, *reinterpret_cast<f32 *>(&battle->helpMessages.context), snapshotA, snapshotB,
+                                 mode, 13, 14);
 }
 }

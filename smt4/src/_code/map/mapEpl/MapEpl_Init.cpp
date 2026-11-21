@@ -1,4 +1,5 @@
-/* NON_MATCHING: free-slot sentinel lifetime, path/file-size stack slots and position conversion/store grouping differ. */
+/* NON_MATCHING: written as Apocalypse's FUN_002b77bc (the free-slot load as an inline returning -1); retail keeps the -1
+   in fp (one more saved register, a 44-byte frame) and builds the path address in r0 where this build uses ip. */
 #include <stdio.h>
 #include "map/mapEpl.h"
 #include "AsdSDK/AsdDebug.h"
@@ -23,12 +24,28 @@ void skelNodePoseChain(void *object, const f32 *position);
 s32 dataTable45GetSection3Count(void);
 MapEffectPlacementRecord *aocDataTable2dGetEntryKind3(u32 index);
 
+/* Loads an EPL file into the first free entry; returns the slot, or -1 when the table is full. */
+static __inline s32 loadMapEffect(const char *path)
+{
+    for (s32 slot = 0; slot < MAP_EPL_ENTRIES; ++slot) {
+        MapEplEntry *entry = &g_mapEpl->entries[slot];
+        if (entry->object == NULL) {
+            u32 fileSize;
+            entry->data = asdLoadFileSync(path, &fileSize, 1, 0x80);
+            entry->object = effPartCreateFromSource(entry->data);
+            return slot;
+        }
+    }
+    return -1;
+}
+
 void MapEpl_Init(s32 map, s32 area)
 {
+    char path[32];
     if (g_mapEpl == NULL) {
         asdDebugTrace(g_mapEplSourceFileName, 67);
-        MapEpl *work = (MapEpl *)asdMemAlloc(0x100, 0x100, 0, sizeof(MapEpl), 1);
-        g_mapEpl = work;
+        g_mapEpl = (MapEpl *)asdMemAlloc(0x100, 0x100, 0, sizeof(MapEpl), 1);
+        MapEpl *work = g_mapEpl;
         work->state[0] = 0;
         work->state[1] = 0;
         for (s32 index = 0; index < MAP_EPL_ENTRIES; ++index) {
@@ -44,25 +61,18 @@ void MapEpl_Init(s32 map, s32 area)
     for (s32 index = 0; index < dataTable45GetSection3Count(); ++index) {
         MapEffectPlacementRecord *placement = aocDataTable2dGetEntryKind3(index);
         if (placement->map != -1 && placement->map == map && placement->area == area) {
-            char path[32];
-            u32 fileSize;
             sprintf(path, "effect_editor/%s.EPL", placement->name);
-            s32 slot = -1;
-            for (s32 candidate = 0; candidate < MAP_EPL_ENTRIES; ++candidate) {
-                MapEplEntry *entry = &g_mapEpl->entries[candidate];
-                if (entry->object == NULL) {
-                    entry->data = asdLoadFileSync(path, &fileSize, 1, 0x80);
-                    entry->object = effPartCreateFromSource(entry->data);
-                    slot = candidate;
-                    break;
-                }
-            }
+            s32 slot = loadMapEffect(path);
             MapEplEntry *entry = &g_mapEpl->entries[slot];
+            /* The placement's position is converted before the entry is checked. */
+            f32 x = placement->x;
+            f32 y = placement->y;
+            f32 z = placement->z;
             if (entry->object != NULL) {
                 entry->position[3] = 0.0f;
-                entry->position[0] = (f32)placement->x;
-                entry->position[1] = (f32)placement->y;
-                entry->position[2] = (f32)placement->z;
+                entry->position[0] = x;
+                entry->position[1] = y;
+                entry->position[2] = z;
                 skelNodePoseChain(entry->object, entry->position);
             }
         }

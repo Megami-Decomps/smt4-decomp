@@ -47,7 +47,7 @@ s32 gameFlagIsSet(u32 flag);
 s32 gameStateIsFlagSetAndLarge(void);
 s32 FUN_00287304(void);
 void bgmResumeOrRequestTrack(u32 bgm);
-void FUN_00287528(s32 mode);
+void questCompletionSetTierFlags(s32 mode);
 void commonBgStopChildAndBeginTransition(void);
 void commonBgAcquire(void);
 s32 bgmGetStateById(u32 id);
@@ -101,7 +101,7 @@ s32 QuestCenterMainProcUpdate(u32 handle)
         if (g_qcMain.resident == 0) {
             if (kind == 1 && gameFlagIsSet(0x235)) {
                 if (!gameFlagIsSet(0x1c0) || !gameFlagIsSet(0x424) || objectFlagBitIsSet(qcGetCenterSlotGroups(1), 4)) {
-                    FUN_00287528(0);
+                    questCompletionSetTierFlags(0);
                 }
             }
             for (u32 i = 0; i < 3; i++) {

@@ -1,5 +1,5 @@
-/* NON_MATCHING: the quad's corner constants sit in saved registers as in retail (as smt4 FUN_001132fc); target
- * selection and the UV-ratio divisions are scheduled differently. */
+/* NON_MATCHING: only the colour and corner argument moves before FUN_0019e3d0 differ (retail copies the bottom
+ * constant to s10 then s7 and sets r2 early), likely the callee's real parameter order. */
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "frame_tex/FrameTexA.h"
@@ -21,17 +21,20 @@ void frameTexDrawXfadeCapture(s32 mode)
     const f32 bottom = 240.0f;
     const f32 depth = 0.0f;
     u32 color = work->fadeColor;
-    f32 logicalWidth = work->fadeCaptureResult ? 240.0f : 480.0f;
+    f32 logicalWidth = 240.0f;
+    if (work->fadeCaptureResult == 0)
+        logicalWidth = 480.0f;
     AsdTexture *target;
     if (mode == 0 && work->fadeCapturedRight) {
         target = work->surfaceRight;
     } else {
         target = work->surfaceLeft;
     }
+    /* Retail reads the size before marking the target filtered. */
+    f32 v = 400.0f / (f32)target->dimensions.height;
+    f32 u = logicalWidth / (f32)target->dimensions.width;
     target->filterX = 1;
     target->filterY = 1;
-    f32 u = logicalWidth / (f32)target->dimensions.width;
-    f32 v = 400.0f / (f32)target->dimensions.height;
     renderCtxSelectTexture(g_renderCtx, target);
     FUN_0019e3d0(color, color, color, color,
         left, top, depth, right, top, depth,

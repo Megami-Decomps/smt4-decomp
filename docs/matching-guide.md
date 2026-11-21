@@ -227,6 +227,10 @@ difference a register tie-break.
   `f32 offset = 0.0f;` initialiser with the zero arms left out: smt4 `FUN_0024c418` and smt4a `FUN_001b640c` (wave 61).
 - A search loop that sets `bool found = true; break;` and tests `found` afterwards is jump-threaded
   into retail's in-loop layout.
+- In a nested search (an inner loop whose hit ends the outer one too), set the result variable before each
+  `break`, break the outer loop on it and apply the default once after both: `result = level; break;` …
+  `if (result != 0) break;` … `return result != 0 ? result : 1;`. smt4 `FUN_0029aef0` is IDENTICAL with it and
+  39 lines off with `return level;` inside the loops (wave 63).
 - A condition computed inside a guarded block and tested after the blocks join is a flag:
   `bool changed = false; if (ready && enabled) changed = memcmp(...) != 0; if (changed) { ... }`
   (smt4 `FUN_001ec6e0`). Nesting the test inside the guard gives a different branch layout.
@@ -256,6 +260,9 @@ difference a register tie-break.
   *g_commandBufferCursor++ = 0x8025E;`, with the context's fields read through `g_asdGfxContext.cmdBuffer->` at
   each use: a cached cursor or buffer local merges the two stores into `stm` and moves the registers (wave 52:
   the pad/terminate/submit functions of both games, `asdGxCommandBufferPadAndGetRanges` and siblings).
+  The same holds for a pointer held in a global: `g_lmapViewHolder.view->fieldOfView[1] = 42.0f;` written at every
+  store made the camera-preset setters smt4 `FUN_002df5f8` and smt4a `FUN_00352a14` IDENTICAL (wave 63); a cached
+  `LmapView *view` local is 84 lines off, a local pointer to the holder 60.
 - A field set to one of two constants is an if/else of two stores (`if (delta < 0.0f) work->alpha = 0.0f; else
   work->alpha = 1.0f;`), not a ternary into the field: retail keeps each store in its arm (`eventMessUnderFadeJobStep`,
   both games; the same form moved about ten near misses).

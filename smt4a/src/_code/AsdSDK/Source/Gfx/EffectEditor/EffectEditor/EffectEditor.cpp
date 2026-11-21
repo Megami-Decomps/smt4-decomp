@@ -33,7 +33,11 @@ static EffectEditorVector g_effectEditorInitialVector;
 static EffectEditorSnapshot g_effectEditorWorkingSnapshot;
 static EffectEditorSnapshot g_effectEditorSavedSnapshot;
 static EffectEditorCamera g_effectEditorCamera;
-static EffectEditorCameraDefaults g_effectEditorCameraDefaults;
+static PhaseVector g_effectEditorCameraEye;
+static PhaseVector g_effectEditorCameraUp;
+static PhaseVector g_effectEditorCameraTarget;
+static PhaseVector g_effectEditorCameraOffset;
+static PhaseVector g_effectEditorCameraRotation;
 /* Retail leaves 0xc bytes here in IV and 8 in Apocalypse: the vector is 16-byte aligned. */
 __align(16) static EffectEditorVector g_effectEditorVector;
 static EffectEditorVector g_effectEditorRotation;
@@ -126,28 +130,28 @@ extern "C" u32 effectPollResourceFileDialog(void)
     return state;
 }
 
-/* NON_MATCHING: vector initialization grouping and camera argument-base recovery differ. */
+/* Sets the three components of a camera vector. */
+static void phaseVectorSet(PhaseVector *vector, f32 x, f32 y, f32 z)
+{
+    vector->x = x;
+    vector->y = y;
+    vector->z = z;
+}
+
+/* NON_MATCHING: the vector stores and the camera argument bases now follow retail (as smt4 effectEditorInitialize);
+ * the literal pool holds one more word, the perspective constants load in another order and the editor state
+ * stores use other registers. */
 extern "C" void FUN_002830cc(void)
 {
     randomStateSeed(0, 0x12345678);
     effectTexturesLoadOnce();
-    g_effectEditorCameraDefaults.eye.x = 0.0f;
-    g_effectEditorCameraDefaults.eye.y = 100.0f;
-    g_effectEditorCameraDefaults.eye.z = 600.0f;
-    g_effectEditorCameraDefaults.up.x = 0.0f;
-    g_effectEditorCameraDefaults.up.y = 1.0f;
-    g_effectEditorCameraDefaults.up.z = 0.0f;
-    g_effectEditorCameraDefaults.target.x = 0.0f;
-    g_effectEditorCameraDefaults.target.y = 0.0f;
-    g_effectEditorCameraDefaults.target.z = 0.0f;
-    g_effectEditorCameraDefaults.offset.x = 0.0f;
-    g_effectEditorCameraDefaults.offset.y = 0.0f;
-    g_effectEditorCameraDefaults.offset.z = 0.0f;
-    g_effectEditorCameraDefaults.rotation.x = 0.0f;
-    g_effectEditorCameraDefaults.rotation.y = 0.0f;
-    g_effectEditorCameraDefaults.rotation.z = 0.0f;
+    phaseVectorSet(&g_effectEditorCameraEye, 0.0f, 100.0f, 600.0f);
+    phaseVectorSet(&g_effectEditorCameraUp, 0.0f, 1.0f, 0.0f);
+    phaseVectorSet(&g_effectEditorCameraTarget, 0.0f, 0.0f, 0.0f);
+    phaseVectorSet(&g_effectEditorCameraOffset, 0.0f, 0.0f, 0.0f);
+    phaseVectorSet(&g_effectEditorCameraRotation, 0.0f, 0.0f, 0.0f);
     asdCameraInitializeDefaults(&g_effectEditorCamera, 1);
-    cameraMatrixCacheSetLookAt(&g_effectEditorCamera, &g_effectEditorCameraDefaults.eye, &g_effectEditorCameraDefaults.target, &g_effectEditorCameraDefaults.up);
+    cameraMatrixCacheSetLookAt(&g_effectEditorCamera, &g_effectEditorCameraEye, &g_effectEditorCameraTarget, &g_effectEditorCameraUp);
     stereoCameraSetPerspective(&g_effectEditorCamera, 1, 30.0f, 20.0f, 25600.0f, 5.0f / 3.0f);
     FUN_0036b824(reinterpret_cast<u32>(&g_effectEditorCamera));
     EditorResetStateView *startup = reinterpret_cast<EditorResetStateView *>(&g_effectEditor);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: the linked-id update is a helper taking the value, which reproduces retail's hoisted constant 1 (r6); remaining: retail orders the two flag-byte updates differently (`orr` before the second `bic`) and allocates the bitmap index/bit/byte to r0/r1/r2 (built r1/r2/r0). */
+/* NON_MATCHING: the linked-id update goes through the siblings' gameFlagWrite inline (retail's hoisted constant 1 in r6); remaining: retail stores flag byte 0 before byte 2 and allocates the bit and the constant 1 to r1/r3 (built r3/r2). */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
 #include "code/Code001b.h"
@@ -28,16 +28,20 @@ s32 itemDataIsFlagClear(s32 id);
 s32 rosterAddUnit(s32 id);
 s32 encounterRefreshOnFlagChange(u32 id, s32 arg);
 
-/* Marks the linked id as set: tells the flag system and sets its bit in the bitmap. */
-static __inline void setBitmapFlag(u32 linked, s32 value)
+/* Reports a game flag change to encounterRefreshOnFlagChange, then sets or clears the flag's bit (the sibling
+ * FUN_00417a60, FUN_00417c24 and FUN_00418070 write flags through the same inline). */
+static __inline void gameFlagWrite(u32 flag, s32 value)
 {
     FlagBlock *block = reinterpret_cast<FlagBlock *>(gameFlagBlockGet());
 
-    encounterRefreshOnFlagChange(linked, value);
-    u32 byteIndex = linked >> 3;
-    u32 bit = linked & 7;
-    u8 bits = block->bitmap[byteIndex];
-    block->bitmap[byteIndex] = bits | (1 << bit);
+    encounterRefreshOnFlagChange(flag, value);
+    u32 index = flag >> 3;
+    if (value) {
+        block->bitmap[index] |= 1 << (flag & 7);
+    } else {
+        s32 keep = ~(1 << (flag & 7));
+        block->bitmap[index] &= keep;
+    }
 }
 
 /* Marks entry `id` as seen and active, runs rosterAddUnit for ids that qualify, and sets the linked id's bit in the bitmap. */
@@ -59,7 +63,7 @@ void gameFlagUnlockEntryById(s32 id)
     }
     u32 linked = itemDataGetValue(id);
     if (linked != 0) {
-        setBitmapFlag(linked, 1);
+        gameFlagWrite(linked, 1);
     }
 }
 

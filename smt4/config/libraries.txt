@@ -60,3 +60,12 @@ thumb 0x2522f8 0x25232e armlib __2snprintf: Thumb snprintf entry; exact twin of 
 # armlib's qsort (Thumb) and its partition helper: the 0x1fe-byte helper and the 0x88-byte qsort are the twins of
 # smt4a's FUN_0010043c and qsort, which sit between libc_printfStr and the __rw allocator; Thumb library code among ARM game code.
 thumb 0x2b79cc 0x2b7c52 armlib qsort and partition helper: twins of smt4a's third-party FUN_0010043c/qsort (0x10043c-0x1006c2)
+# armlib's wide-character classifier (Thumb, movs register moves): reads the locale through rt_ctype_table, calls the
+# neighbouring classifier when the locale flag is clear, else binary-searches a packed range table below 0x10000;
+# right after the crt0's nninitRegion; exact twin of smt4a's FUN_0010004a at the same address.
+thumb 0x10004a 0x1000e8 armlib wide-character classifier: Thumb, calls rt_ctype_table, binary search of packed ranges; twin of smt4a 0x10004a
+# armlib's fplib cosf (libm_cosf): range reduction through a helper, __set_errno for infinities; exact twin of smt4a's 0x1bbf0c.
+arm 0x282390 0x2824cc armlib libm_cosf: fplib cosf, range reducer call and __set_errno; twin of smt4a 0x1bbf0c
+# armlib locale code (Thumb): two locale-table parsers ("*" then hex words) linked between libcLocaleGetCategory and
+# rt_locale; exact twins of smt4a's third-party FUN_002e2f6a/FUN_002e2fce.
+thumb 0x2c6902 0x2c69fa armlib locale table parsers: Thumb, before rt_locale; twins of smt4a's third-party 0x2e2f6a/0x2e2fce

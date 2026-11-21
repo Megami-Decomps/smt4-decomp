@@ -1,4 +1,4 @@
-/* NON_MATCHING: the search and the interpolation now match; retail derives the last key from base + count * 16 at each use and keeps the first key's address in r3 for the early return, where this build holds the last key in r2 from the start. */
+/* NON_MATCHING: only the last-key compare differs: retail compares key against last (cmpne r0, r1), this build last against key; writing key == last reallocates the whole search. */
 #include "common.h"
 
 struct CurveKey {
@@ -43,12 +43,12 @@ static const CurveKey *curveFindKey(const Curve *curve, f32 time)
 extern "C" {
 
 /* Samples the keyframe curve at the given time, interpolating linearly between neighbouring keys. */
-f32 FUN_003f972c(const Curve *curve, f32 time)
+f32 curveSampleLinear16(const Curve *curve, f32 time)
 {
-    const CurveKey *last = &curve->keys[curve->count - 1];
     const CurveKey *key = curveFindKey(curve, time);
     f32 keyTime = key->time;
-    if (keyTime == time || key == last) {
+    const CurveKey *last = &curve->keys[curve->count - 1];
+    if (keyTime == time || last == key) {
         return key->value;
     }
     const CurveKey *next = key + 1;

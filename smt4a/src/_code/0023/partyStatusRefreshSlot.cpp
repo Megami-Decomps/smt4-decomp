@@ -1,4 +1,5 @@
-/* NON_MATCHING: the per-slot array addressing is rebuilt from different base registers in retail and the early-return paths merge differently; the slot refresh logic is the same. */
+/* NON_MATCHING: the slot switch and slot-indexed stores follow IV's matched partyStatusRefreshSlot; retail still keeps
+   the -1/-4 reset value in a register (mvn) and the slot-4 base differently, and allocates the per-slot bases otherwise. */
 #include "common.h"
 #include "code/Code0018.h"
 #include "gamedata/GamePlayerData.h"
@@ -49,45 +50,48 @@ void partyStatusRefreshSlot(SlotScreen *screen, s32 slot, s32 reset)
     if (reset != 0) {
         screen->slotRef[slot] = value;
     }
-    if (slot == 0) {
+    switch (slot) {
+    case 0:
         if (screen->mode == 0) {
             PlayerDataA *player = gameGetPlayerData();
 
-            screen->statA[0] = player->hp;
-            screen->statB[0] = player->mp;
-            screen->statC[0] = player->level;
-            screen->slotRef[0] = 0xFFFF;
-            screen->word[0] = 0xFFFFFFFF;
-            screen->unavailable[0] = (player->ailments & 2) != 0 ? 1 : 0;
+            screen->statA[slot] = player->hp;
+            screen->statB[slot] = player->mp;
+            screen->statC[slot] = player->level;
+            screen->slotRef[slot] = 0xFFFF;
+            screen->word[slot] = 0xFFFFFFFF;
+            screen->unavailable[slot] = (player->ailments & 2) != 0 ? 1 : 0;
             return;
         }
         if (screen->mode == 1) {
             SlotRecordA *unit = btlMainGetUnk14();
 
             if (unit == NULL) {
-                screen->unavailable[0] = 1;
+                screen->unavailable[slot] = 1;
                 return;
             }
             if (reset != 0) {
-                screen->slotRef[0] = 0xFFFE;
+                screen->slotRef[slot] = 0xFFFE;
             }
-            screen->statA[0] = unit->hp;
-            screen->statB[0] = unit->mp;
-            screen->statC[0] = unit->level;
-            screen->word[0] = unit->id;
-            screen->unavailable[0] = bitsAt60Test(unit, 1) != 0 ? 1 : 0;
+            screen->statA[slot] = unit->hp;
+            screen->statB[slot] = unit->mp;
+            screen->statC[slot] = unit->level;
+            screen->word[slot] = unit->id;
+            screen->unavailable[slot] = bitsAt60Test(unit, 1) != 0 ? 1 : 0;
             return;
         }
-    } else if (slot == 4) {
+        break;
+    case 4: {
         PartySlotA *saved = saveSlotFindSelected();
 
         if (partySlotIsOccupied(saved) == 0) {
             return;
         }
-        screen->statA[4] = saved->record.hp;
-        screen->slotRef[4] = 0xFFFD;
-        screen->word[4] = saved->record.id;
+        screen->statA[slot] = saved->record.hp;
+        screen->slotRef[slot] = 0xFFFD;
+        screen->word[slot] = saved->record.id;
         return;
+    }
     }
     SaveSlotTableA *table = gameGetSlotTable();
 

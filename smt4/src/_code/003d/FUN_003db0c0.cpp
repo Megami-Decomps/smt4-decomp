@@ -1,4 +1,5 @@
-/* NON_MATCHING: slot address formation in the first scan now matches (offsets folded into the loads); armcc unrolls both 50-entry scans by two where retail keeps them rolled, and the saved registers differ. */
+/* NON_MATCHING: both scans now stay rolled as in retail; the placement kind gets ip instead of a saved register (r5),
+ * the zero the not-found return shares with the variant default is not hoisted, and the placement pointer is r5 for r6. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
@@ -22,30 +23,35 @@ u32 FUN_003db0c0(MaterialMergeOwner *owner, BtlActionRecord *action)
         variantIndex = 0;
     }
     BtlUnitData *variants = btlFindEntryBlockByMemberId(state, action->memberId);
-    u16 kind = variants->id;
+    u32 kind = variants->id;
     s32 key = variants->parts[variantIndex];
+    bool active = false;
     for (s32 i = 0; i < 50; ++i) {
         if (owner->placements.entries[i].key == key && (owner->placements.entries[i].activation.flags & 1)) {
-            return 1;
+            active = true;
+            break;
         }
     }
+    if (active) {
+        return 1;
+    }
     for (s32 i = 0; i < 50; ++i) {
-        MaterialMergePlacement &slot = owner->placements.entries[i];
-        if (slot.key == key) {
-            if (slot.resource) {
-                slot.placement.sprite = slot.resource;
-                // The shared state's byte padding starts at an odd address; keep this view local.
+        if (owner->placements.entries[i].key == key) {
+            if (owner->placements.entries[i].resource) {
+                BattleSpritePlacement *placement = &owner->placements.entries[i].placement;
+                placement->sprite = owner->placements.entries[i].resource;
+                /* The shared state's byte padding starts at an odd address; keep this view local. */
                 struct SelectionView { u8 unk000[0xc4]; s32 index; };
                 typedef char SelectionViewOffset[offsetof(SelectionView, index) == 0xc4 ? 1 : -1];
-                u32 selection = reinterpret_cast<SelectionView *>(state)->index;
+                s32 selection = reinterpret_cast<SelectionView *>(state)->index;
                 u32 variant = 0;
                 if (selection >= 0) {
                     variant = tableFileFindByKeyPair(state, (s16)selection, kind);
                 }
-                FUN_00340ad4(&slot.placement, 0x20000, 0x20000, variant);
-                FUN_00340c90(&slot.placement);
+                FUN_00340ad4(placement, 0x20000, 0x20000, variant);
+                FUN_00340c90(placement);
             }
-            slot.activation.flags |= 1;
+            owner->placements.entries[i].activation.flags |= 1;
             return 1;
         }
     }

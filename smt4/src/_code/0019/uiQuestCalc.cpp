@@ -28,7 +28,7 @@ int SBORROW4(...);
 int VectorUnsignedToFloat(...);
 
 int uiQuestListInput(void);
-int FUN_00290404(void);
+int uiQuestShowStatusHelp(void);
 int uiQuestRefreshButtonHelp(void);
 int scrScriptProcessStartEntry(...);
 int scrScriptProcessCreate(unsigned int, unsigned int);
@@ -61,7 +61,7 @@ extern unsigned char FUN_00290248(unsigned short);
 /* Supplied declaration required: FUN_002902a0. */
 extern int gameJumpRequestIsPending(void);
 /* Supplied declaration required: rosterGetLeaderId. */
-/* Supplied declaration required: FUN_00290404. */
+/* Supplied declaration required: uiQuestShowStatusHelp. */
 /* Supplied declaration required: uiQuestRefreshButtonHelp. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: scrScriptProcessCreate. */
@@ -154,7 +154,7 @@ s32 uiQuestCalc(u32 job)
       *(unsigned short *)(temp_v1 + 0x9f6) = temp_v3;
       *(short *)(temp_v1 + 0x9f8) = *(short *)(temp_v1 + 0x9f8) + 3;
       uiQuestRefreshButtonHelp();
-      FUN_00290404();
+      uiQuestShowStatusHelp();
       temp_v11 = gameFlagIsSet(0x215);
       if (temp_v11 == 0) {
         temp_v7 = 2;
@@ -396,7 +396,7 @@ s32 uiQuestCalc(u32 job)
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + (temp_v5 + temp_v11) * 2 + 0x78a);
     temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 != 0) {
-      FUN_00290404();
+      uiQuestShowStatusHelp();
       uiQuestRefreshButtonHelp();
       temp_v7 = 2;
       break;
@@ -439,7 +439,7 @@ s32 uiQuestCalc(u32 job)
     listCursorGetRowIfUnblocked(temp_v1 + 0x660);
     temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 != 0) {
-      FUN_00290404();
+      uiQuestShowStatusHelp();
       uiQuestRefreshButtonHelp();
       temp_v7 = 2;
       break;
@@ -474,7 +474,7 @@ s32 uiQuestCalc(u32 job)
     listCursorGetRowIfUnblocked(temp_v1 + 0x660);
     temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 != 0) {
-      FUN_00290404();
+      uiQuestShowStatusHelp();
       uiQuestRefreshButtonHelp();
       temp_v7 = 2;
       break;
@@ -521,7 +521,7 @@ s32 uiQuestCalc(u32 job)
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    FUN_00290404();
+    uiQuestShowStatusHelp();
     uiQuestRefreshButtonHelp();
     temp_v7 = 2;
     break;
@@ -542,7 +542,7 @@ s32 uiQuestCalc(u32 job)
     }
     temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 != 0) {
-      FUN_00290404();
+      uiQuestShowStatusHelp();
       uiQuestRefreshButtonHelp();
       temp_v7 = 2;
       break;
@@ -575,7 +575,7 @@ s32 uiQuestCalc(u32 job)
     }
     temp_v11 = gameFlagIsSet(0x216);
     if (temp_v11 == 0) {
-      FUN_00290404();
+      uiQuestShowStatusHelp();
       uiQuestRefreshButtonHelp();
       temp_v11 = resourceRunOperationIfUnblocked(temp_v1 + 0x660);
       temp_v5 = listCursorGetRowIfUnblocked(temp_v1 + 0x660);
@@ -623,7 +623,7 @@ s32 uiQuestCalc(u32 job)
       temp_v0 = *(char *)(temp_v1 + 0x5f5);
 joined_r0x0019627c:
       if (temp_v0 == '\0') {
-        FUN_00290404();
+        uiQuestShowStatusHelp();
         uiQuestRefreshButtonHelp();
         temp_v7 = 2;
         break;
@@ -672,7 +672,7 @@ joined_r0x0019627c:
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    FUN_00290404();
+    uiQuestShowStatusHelp();
     uiQuestRefreshButtonHelp();
     temp_v7 = 2;
     break;
@@ -850,7 +850,7 @@ joined_r0x0019627c:
     }
     if (*(char *)(temp_v1 + 0x5f0) == '\0') {
       uiQuestRefreshButtonHelp();
-      FUN_00290404();
+      uiQuestShowStatusHelp();
       if (*(char *)(temp_v1 + 0x5f6) != '\0') {
         temp_v11 = resourceRunOperationIfUnblocked(temp_v1 + 0x660);
         temp_v5 = listCursorGetRowIfUnblocked(temp_v1 + 0x660);
@@ -1123,7 +1123,7 @@ joined_r0x0019627c:
     }
     useCounterRelease();
     uiQuestRefreshButtonHelp();
-    FUN_00290404();
+    uiQuestShowStatusHelp();
     temp_v7 = 2;
   }
   temp_v11 = g_uiQuest;

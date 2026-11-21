@@ -136,7 +136,8 @@ typedef char SavePartySectionASizeCheck[sizeof(SavePartySectionA) == 0x2D30 ? 1 
 
 /* Apocalypse: one saved item record (0x50 bytes, 0x501 of them). */
 typedef struct GameSavedItemA {
-    /* 0x00 */ u8 unk00[0x16];
+    /* 0x00 */ u16 variant;        /* copied from the registered demon's variant (FUN_002a5e7c) */
+    /* 0x02 */ u8 unk02[0x14];
     /* 0x16 */ s8 flags;
     /* 0x17 */ u8 unk17[0x1F];
     /* 0x36 */ u16 bits;

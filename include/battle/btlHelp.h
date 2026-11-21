@@ -80,8 +80,8 @@ typedef struct BtlHelpListA {
 struct BtlHelpGlobalsA {
     /* 0x00 */ BtlHelpListA *list;
     /* 0x04 */ u8 unk04[0x1c];
-    /* 0x20 */ u32 blockedStates[2];
-    /* 0x28 */ u32 blockedTransitions[2];
+    /* 0x20 */ u64 blockedStates;      /* battle state bits that suppress new messages */
+    /* 0x28 */ u64 blockedTransitions;
 };
 
 typedef char BtlHelpGlobalsAMasksOffsetCheck[

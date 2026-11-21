@@ -5974,3 +5974,14 @@
 00335950 btlTransitionStep inferred battle transition state machine: loads and runs the transition scripts and effect textures, then hands off or reports completion
 003dbc1c btlEffectResolveNames inferred resolves the four effect names to effect ids (skips empty/special names, copies reference slots, registers VER records); twin of smt4a 0x4f8790
 001fc0a8 engineRecordsRankNearest inferred ranks the three nearest active eligible records and publishes their scene positions; twin of smt4a 0x2ba170
+0029aef0 partyFindSupportedLevel inferred finds the highest registered level with three or more supporting units among it and the five levels below
+00287528 questCompletionSetTierFlags inferred sets the cumulative completion-tier flags (0x533-0x535) from the completion value and picks the tier's reward index
+00290404 uiQuestShowStatusHelp inferred sets the button help text to the selected quest's status label
+002df5f8 lmapCameraSetPresetDefaults inferred sets camera presets 1-10 (target/eye heights, lateral/rear distances, field of view) of g_lmapViewHolder.view
+003f972c curveSampleLinear16 inferred curveSampleLinear over 16-byte keys
+004d9228 DAT_004d9228 inferred the 0x3c-byte record is five separate vectors (rows below; effectEditorInitialize 87 -> 47 lines with them, FUN_00219908 395 -> 359)
+004d9228 g_effectEditorCameraEye inferred size:0xc the effect editor's free-camera eye (0, 100, 600), effectEditorInitialize
+004d9234 g_effectEditorCameraUp inferred size:0xc the free camera's up vector (0, 1, 0), effectEditorInitialize
+004d9240 g_effectEditorCameraTarget inferred size:0xc the free camera's target, effectEditorInitialize
+004d924c g_effectEditorCameraOffset inferred size:0xc the free camera's orbit offset moved by the sticks, FUN_00219908
+004d9258 g_effectEditorCameraRotation inferred size:0xc the free camera's three rotation angles, FUN_00219908

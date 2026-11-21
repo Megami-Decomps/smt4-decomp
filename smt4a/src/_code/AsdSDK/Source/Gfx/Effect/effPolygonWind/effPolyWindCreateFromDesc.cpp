@@ -1,24 +1,39 @@
-/* NON_MATCHING: color copy and quaternion initialization differ from inlined retail constructors; descriptor type test differs. */
+/* NON_MATCHING: written like effPolyRingCreate; retail moves the resolved resource from r5 to fp after the header
+ * lookup and keeps the kind in r5, so the saved registers are numbered differently and the object's field stores schedule
+ * differently. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonWind.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/AsdMemCopy.h"
+
+static __inline void quaternionSetIdentity(PolyVec4 *quaternion)
+{
+    PolyVec4 zero = {0, 0, 0, 0};
+    *quaternion = zero;
+    quaternion->w = 1.0f;
+}
 
 extern "C" {
-void *memAlloc(u32 heap, u32 type, u32 options, u32 size, u32 alignment, u32 clear);
-void rt_memcpy(void *destination, const void *source, u32 size);
-s32 resourceResolveDataPointer(const PolyWindDesc *description);
-void *resourceResolveHeaderPointer(const PolyWindDesc *description);
+u32 *resourceResolveDataPointer(PolyWindDesc *desc);
+void *resourceResolveHeaderPointer(PolyWindDesc *desc);
 extern PolyWindKind g_polyWindKinds[];
 extern PolyVec4 g_polyDefaultColor;
 extern const char DAT_00544cd8[];
 
-// Allocate the selected wind effect, copy its parameters, then create and start its state.
-PolyObject *effPolyWindCreateFromDesc(PolyWindDesc *description)
+/* Create and start the descriptor's wind kind, retaining its resolved resource. */
+PolyObject *effPolyWindCreateFromDesc(PolyWindDesc *desc)
 {
-    s32 flags = resourceResolveDataPointer(description);
-    if (description->type == 4)
-        flags = 0;
-    void *parameters = resourceResolveHeaderPointer(description);
-    u32 kind = description->kind;
+    u32 *resource = resourceResolveDataPointer(desc);
+    /* Native and indexed resources have different ownership at creation time. */
+    switch (desc->type) {
+    case 1:
+        break;
+    case 4:
+        resource = NULL;
+        break;
+    }
+    void *params = resourceResolveHeaderPointer(desc);
+    u32 kind = desc->kind;
     s32 workSize = g_polyWindKinds[kind].workSize;
     asdDebugTrace(DAT_00544cd8, 1517);
     PolyObject *object = (PolyObject *)memAlloc(0x10000, 0x100, 0, workSize + 0x50, 0x10, 1);
@@ -27,16 +42,10 @@ PolyObject *effPolyWindCreateFromDesc(PolyWindDesc *description)
     object->frame = 0;
     object->kind = kind;
     object->color = g_polyDefaultColor;
-    object->rotation0.x = 0;
-    object->rotation0.y = 0;
-    object->rotation0.z = 0;
-    object->rotation0.w = 1.0f;
-    object->rotation1.x = 0;
-    object->rotation1.y = 0;
-    object->rotation1.z = 0;
-    object->rotation1.w = 1.0f;
-    rt_memcpy(object->workData, parameters, workSize);
-    object->state = g_polyWindKinds[kind].create(parameters, flags);
+    quaternionSetIdentity(&object->rotation0);
+    quaternionSetIdentity(&object->rotation1);
+    rt_memcpy(object->work, params, workSize);
+    object->state = g_polyWindKinds[kind].create(params, (s32)resource);
     g_polyWindKinds[kind].start(object);
     return object;
 }

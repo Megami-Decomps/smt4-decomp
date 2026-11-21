@@ -1,6 +1,7 @@
 # Third-party functions, not counted in progress: written by tools/scope.py.
 # <address> <name at the time> <evidence: name | library | linker | callers | between>
 0x00100000 entry library
+0x0010004a FUN_0010004a library
 0x001002c2 FUN_001002c2 callers
 0x0010031c copyValueIfDestination between
 0x00100326 FUN_00100326 between
@@ -3464,6 +3465,7 @@
 0x001bbd40 nw_snd_internal_SoundArchiveFile_FileInfo_GetFileLocationType name
 0x001bbd64 nw_snd_internal_SoundArchiveFile_FileInfo_GetInternalFileInfo name
 0x001bbd8c nw_anim_res_ResAnim_IsFullBakedAnim name
+0x001bbf0c libm_cosf library
 0x001bc5ac FUN_001bc5ac library
 0x001bc604 rt_fpResultDispatch name
 0x001bc6a4 FUN_001bc6a4 between

@@ -84,6 +84,23 @@ static __inline void renderStackPop(RenderStateStack *st)
     }
 }
 
+/* The same pop with the depth read once into a local (as renderStackPushCounted): retail computes the new depth
+ * before loading the old top (`sub r1, r0, #1` ahead of the load), where renderStackPop loads it first
+ * (smt4 aocMenuDrawScreen, smt4a runWinDraw). */
+static __inline void renderStackPopCounted(RenderStateStack *st)
+{
+    int top = st->count;
+    int previous = st->entries[top];
+
+    top = top - 1;
+    st->count = top;
+    int current = st->entries[top];
+    if (renderStackNeedsApply(st, previous, current)) {
+        st->apply(current);
+        st->dirty = 0;
+    }
+}
+
 /* Pops the top state and uses the shared state-change predicate, as in the layered sprite draws. */
 static __inline void renderStackPopChecked(RenderStateStack *st)
 {

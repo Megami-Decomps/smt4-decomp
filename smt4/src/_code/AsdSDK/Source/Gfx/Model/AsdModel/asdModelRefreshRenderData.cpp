@@ -1,4 +1,4 @@
-/* NON_MATCHING: same code and row count as retail (including its unreachable negative node-count clamp); armcc stores the two command words as one strd where retail stores them separately, and keeps the node pointer/clamp in different registers (retail also hoists the constant 1 for the texture update). */
+/* NON_MATCHING: same code and row count as retail (including its unreachable negative node-count clamp); armcc stores the two command words with one stm where retail stores the header word first, and keeps the clamp in other registers (retail also hoists the 0 for the colour reset and the 1 for the texture update, predicating the texture store). */
 #include "shard/W6_W6Match8_ModelRefresh.h"
 
 extern "C" {
@@ -29,10 +29,9 @@ void asdModelRefreshRenderData(ModelRefreshState *state)
                 FUN_0015ab84(state, index, state->materials[index]);
             }
             u32 color = DAT_00472104 | (DAT_00472108 << 8) | (DAT_0047210c << 24);
-            u32 *cursor = g_commandBufferCursor;
-            cursor[1] = 0xb01c4;
-            cursor[0] = color;
-            g_commandBufferCursor = cursor + 2;
+            g_commandBufferCursor[0] = color;
+            g_commandBufferCursor[1] = 0xb01c4;
+            g_commandBufferCursor += 2;
         }
         if (state->stateDirty) {
             shaderEmitLightVectors(state);

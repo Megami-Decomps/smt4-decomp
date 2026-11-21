@@ -1,4 +1,3 @@
-/* NON_MATCHING: slot/cache register roles and early 0x3800 base hoisting differ; signed 0x38CC flag now matches folded byte access. */
 #include "battle/BtlEntry.h"
 #include "gamedata/GameDataAccess.h"
 #include "gamedata/GamePlayerData.h"
@@ -47,45 +46,49 @@ void partyStatusRefreshSlot(void* work, s32 slot, s32 refreshIndex)
     if (refreshIndex) {
         cache->unitIndex[slot] = -1;
     }
-    if (slot == 0) {
+    switch (slot) {
+    case 0: {
         const PlayerDataIV* player = gameGetPlayerData();
-        cache->hp[0] = player->hp;
-        cache->mp[0] = player->mp;
-        cache->level[0] = player->level;
-        cache->unitIndex[0] = -1;
+        cache->hp[slot] = player->hp;
+        cache->mp[slot] = player->mp;
+        cache->level[slot] = player->level;
+        cache->unitIndex[slot] = -1;
         if (player->ailments & 2) {
-            cache->unavailable[0] = 1;
+            cache->unavailable[slot] = 1;
         } else {
-            cache->unavailable[0] = 0;
+            cache->unavailable[slot] = 0;
         }
-        return;
+        break;
     }
-    if (slot == 4) {
+    case 4: {
         const BtlEquip* extra = reinterpret_cast<const BtlEquip*>(gameGetSupportUnitData());
-        cache->hp[4] = extra->hp;
-        cache->unitIndex[4] = -1;
-        return;
+        cache->hp[slot] = extra->hp;
+        cache->unitIndex[slot] = -1;
+        break;
     }
-
-    PartySlotTable* table = reinterpret_cast<PartySlotTable*>(gameGetSlotTable());
-    if (cache->slotState[slot] > 0) {
-        if (refreshIndex) {
-            cache->unitIndex[slot] = table->partyIndices[slot - 1];
-        }
-        if (cache->unitIndex[slot] >= 0) {
-            const PartyUnitRecord* unit = gameGetUnitRecord(cache->unitIndex[slot]);
-            if (!(unit->flags & 0x400)) {
-                cache->hp[slot] = unit->vitals.hp;
-                cache->mp[slot] = unit->vitals.mp;
-                cache->level[slot] = unit->level;
-                cache->unavailable[slot] = 0;
-                return;
+    default: {
+        PartySlotTable* table = reinterpret_cast<PartySlotTable*>(gameGetSlotTable());
+        if (cache->slotState[slot] > 0) {
+            if (refreshIndex) {
+                cache->unitIndex[slot] = table->partyIndices[slot - 1];
             }
-            table->partyIndices[slot - 1] = -1;
-            cache->unavailable[slot] = 1;
-        } else if (!cache->unk37BC[slot] && !cache->unk38CC[slot]) {
-            cache->unavailable[slot] = 1;
+            if (cache->unitIndex[slot] >= 0) {
+                const PartyUnitRecord* unit = gameGetUnitRecord(cache->unitIndex[slot]);
+                if (!(unit->flags & 0x400)) {
+                    cache->hp[slot] = unit->vitals.hp;
+                    cache->mp[slot] = unit->vitals.mp;
+                    cache->level[slot] = unit->level;
+                    cache->unavailable[slot] = 0;
+                    return;
+                }
+                table->partyIndices[slot - 1] = -1;
+                cache->unavailable[slot] = 1;
+            } else if (!cache->unk37BC[slot] && !cache->unk38CC[slot]) {
+                cache->unavailable[slot] = 1;
+            }
         }
+        break;
+    }
     }
 }
 } // extern "C"

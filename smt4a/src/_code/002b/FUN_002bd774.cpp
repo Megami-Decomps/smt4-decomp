@@ -1,4 +1,4 @@
-/* NON_MATCHING: completed/waiting return values are immediate rather than saved-register values; comparison branch placement differs. */
+/* NON_MATCHING: the result constant now lives in r6 as in retail; retail still lays the mode-1 win/lose arms out after the waiting path, each with its own return, and keeps the waiting 0 in r4. */
 #include "event/CyclicChoice.h"
 
 extern "C" {
@@ -14,6 +14,7 @@ void eventQueueAddUnique(u32 event);
 u32 FUN_002bd774(void)
 {
     u16 mode = scrGetArg(0);
+    u32 result = 1;
     if (mode != 0) {
         if (mode == 1) {
             CyclicChoiceState *state = DAT_00589148.state;
@@ -25,13 +26,13 @@ u32 FUN_002bd774(void)
                 if ((u16)(choice - other) != 1) {
                     scrSetResult(1);
                     state->result = 1;
-                    return 1;
+                } else {
+                    scrSetResult(-1);
+                    state->result = -1;
                 }
-                scrSetResult(-1);
-                state->result = -1;
-                return 1;
+            } else {
+                scrSetResult(0);
             }
-            scrSetResult(0);
         }
     } else {
         CyclicChoiceState *state = DAT_00589148.state;
@@ -45,6 +46,6 @@ u32 FUN_002bd774(void)
             eventQueueAddUnique(0x1000210);
         }
     }
-    return 1;
+    return result;
 }
 }

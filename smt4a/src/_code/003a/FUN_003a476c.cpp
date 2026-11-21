@@ -1,4 +1,5 @@
-/* NON_MATCHING: Result failure tests, error constant sharing, and box-state store/branch layout differ. */
+/* NON_MATCHING: retail tests the open results with ands/bpl (this build and/cmp), keeps the successful reopen's
+ * close in line and the success arm out of line, and numbers the saved registers differently. */
 #include "shard/W6_W6Match6_CecMessageBox.h"
 
 extern "C" {
@@ -16,22 +17,23 @@ u32 FUN_003a476c(u32 id, u32 tag, u32 options, u32 mode, u32 icon, const u16 *na
     u32 status = 5;
     s32 result = asdCecMessageBoxOpen(g_asdCec.cec->box, id, tag);
     if (static_cast<s32>(result & 0x80000000) < 0) {
-        if (result != static_cast<s32>(0xc8810bef)) {
+        if (result == static_cast<s32>(0xc8810bef)) {
+            u32 nameBytes = wstrlenU16(name) * 2;
+            result = FUN_0042ed58(g_asdCec.cec->box, id, tag, options, mode, icon, name, nameBytes,
+                                  0x80000, 0x80000, inboxCapacity, outboxCapacity, 0x19000);
+            if (result == static_cast<s32>(0xc8e10868))
+                status = 3;
+            else if (result == static_cast<s32>(0xc8e10867))
+                status = 4;
+            result = asdCecMessageBoxOpen(g_asdCec.cec->box, id, tag);
+            if (static_cast<s32>(result & 0x80000000) < 0)
+                return status;
+            status = 1;
+        } else {
             if (result == static_cast<s32>(0xc8810bea))
                 status = 2;
             return status;
         }
-        u32 nameBytes = wstrlenU16(name) * 2;
-        result = FUN_0042ed58(g_asdCec.cec->box, id, tag, options, mode, icon, name, nameBytes,
-                              0x80000, 0x80000, inboxCapacity, outboxCapacity, 0x19000);
-        if (result == static_cast<s32>(0xc8e10868))
-            status = 3;
-        if (result == static_cast<s32>(0xc8e10867))
-            status = 4;
-        result = asdCecMessageBoxOpen(g_asdCec.cec->box, id, tag);
-        if (static_cast<s32>(result & 0x80000000) < 0)
-            return status;
-        status = 1;
     } else {
         status = 6;
     }

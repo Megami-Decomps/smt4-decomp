@@ -3,6 +3,7 @@
 #include "map/NaviDisplayTransition.h"
 #include "map/mapDepart.h"
 #include "game/GameState.h"
+#include "title/TitleSceneTuning.h"
 
 struct CursorPosition {
     f32 x;
@@ -10,7 +11,6 @@ struct CursorPosition {
 };
 
 extern "C" {
-extern f32 DAT_0044cdc8;  // scroll friction
 
 s32 FUN_002bffd8(s32 *x, s32 *y);
 f32 naviMainGetParameter(u16 *state);
@@ -66,8 +66,8 @@ void mapNaviDisplayUpdateDragScroll(MapNaviDisplay *display)
     if (fabsf(work->velocityX) <= 0.5f && fabsf(work->velocityY) <= 0.5f) {
         naviStopScroll(work);
     } else {
-        work->velocityX = work->velocityX * DAT_0044cdc8;
-        work->velocityY = work->velocityY * DAT_0044cdc8;
+        work->velocityX = work->velocityX * DAT_0044cdc8.dragFriction;
+        work->velocityY = work->velocityY * DAT_0044cdc8.dragFriction;
         f32 scale = naviMainGetParameter(mapState);
         CursorPosition position = *NaviMain_GetCursorPos(mapState);
         position.x = work->velocityX / scale + position.x;

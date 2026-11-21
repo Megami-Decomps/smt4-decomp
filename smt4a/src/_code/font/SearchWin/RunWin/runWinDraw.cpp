@@ -1,4 +1,5 @@
-/* NON_MATCHING: the label draw and the dot grid match; only the lit-dot computation differs: retail keeps frame / 5 in r0 and adds 4 to it before storing the first predecessor (build: r1, added after the store). */
+/* NON_MATCHING: only the stack-B pop's address differs: retail loads g_renderCtx into r0 and adds the offset into r5
+ * (ldr r0; add r5, r0, #4096), this build loads it into r5 directly (the same residue as smt4 aocMenuDrawScreen). */
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
@@ -51,7 +52,7 @@ u8 runWinDraw(void)
         renderStackPushCountedDirect(&scene->stackB, state);
         texDrawTableEntryAtStoredOrigin(2, 8, 0x150, x, 0, 111);
         texDrawTableEntryAtStoredOrigin(2, 8, 0x151, x, 0, 111);
-        renderStackPop(&g_renderCtx->stackB);
+        renderStackPopCounted(&g_renderCtx->stackB);
         TextureTableEntryIV *labelPoint = asdTMTexTableEntryAt(8, 0x153);
         textDrawString((f32)(labelPoint->x + (x - 20)), (f32)(labelPoint->y + y), 0.56640625f, 4, 0.0f, 0x57D8FFFF, win->alpha, (const char *)win->label);
         s32 lit = (win->frame / 5) % 8;

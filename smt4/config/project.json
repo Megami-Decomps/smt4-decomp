@@ -47425,12 +47425,12 @@
     },
     {
       "address": "0x287528",
-      "function": "FUN_00287528",
+      "function": "questCompletionSetTierFlags",
       "module": "_code",
-      "object": "build/obj/_code/0028/FUN_00287528.o",
+      "object": "build/obj/_code/0028/questCompletionSetTierFlags.o",
       "size": 432,
-      "source": "src/_code/0028/FUN_00287528.cpp",
-      "target": "orig/target/_code/0028/FUN_00287528.o",
+      "source": "src/_code/0028/questCompletionSetTierFlags.cpp",
+      "target": "orig/target/_code/0028/questCompletionSetTierFlags.o",
       "thumb": false
     },
     {
@@ -49038,12 +49038,12 @@
     },
     {
       "address": "0x290404",
-      "function": "FUN_00290404",
+      "function": "uiQuestShowStatusHelp",
       "module": "_code",
-      "object": "build/obj/_code/0029/FUN_00290404.o",
+      "object": "build/obj/_code/0029/uiQuestShowStatusHelp.o",
       "size": 452,
-      "source": "src/_code/0029/FUN_00290404.cpp",
-      "target": "orig/target/_code/0029/FUN_00290404.o",
+      "source": "src/_code/0029/uiQuestShowStatusHelp.cpp",
+      "target": "orig/target/_code/0029/uiQuestShowStatusHelp.o",
       "thumb": false
     },
     {
@@ -51157,12 +51157,12 @@
     },
     {
       "address": "0x29aef0",
-      "function": "FUN_0029aef0",
+      "function": "partyFindSupportedLevel",
       "module": "_code",
-      "object": "build/obj/_code/0029/FUN_0029aef0.o",
+      "object": "build/obj/_code/0029/partyFindSupportedLevel.o",
       "size": 388,
-      "source": "src/_code/0029/FUN_0029aef0.cpp",
-      "target": "orig/target/_code/0029/FUN_0029aef0.o",
+      "source": "src/_code/0029/partyFindSupportedLevel.cpp",
+      "target": "orig/target/_code/0029/partyFindSupportedLevel.o",
       "thumb": false
     },
     {
@@ -65496,12 +65496,12 @@
     },
     {
       "address": "0x2df5f8",
-      "function": "FUN_002df5f8",
+      "function": "lmapCameraSetPresetDefaults",
       "module": "_code",
-      "object": "build/obj/_code/002d/FUN_002df5f8.o",
+      "object": "build/obj/_code/002d/lmapCameraSetPresetDefaults.o",
       "size": 308,
-      "source": "src/_code/002d/FUN_002df5f8.cpp",
-      "target": "orig/target/_code/002d/FUN_002df5f8.o",
+      "source": "src/_code/002d/lmapCameraSetPresetDefaults.cpp",
+      "target": "orig/target/_code/002d/lmapCameraSetPresetDefaults.o",
       "thumb": false
     },
     {
@@ -110831,12 +110831,12 @@
     },
     {
       "address": "0x3f972c",
-      "function": "FUN_003f972c",
+      "function": "curveSampleLinear16",
       "module": "_code",
-      "object": "build/obj/_code/003f/FUN_003f972c.o",
+      "object": "build/obj/_code/003f/curveSampleLinear16.o",
       "size": 252,
-      "source": "src/_code/003f/FUN_003f972c.cpp",
-      "target": "orig/target/_code/003f/FUN_003f972c.o",
+      "source": "src/_code/003f/curveSampleLinear16.cpp",
+      "target": "orig/target/_code/003f/curveSampleLinear16.o",
       "thumb": false
     },
     {

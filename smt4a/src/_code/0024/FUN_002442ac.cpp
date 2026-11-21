@@ -2,7 +2,7 @@
 
 extern "C" {
 void lmapCameraResetLocal(void);
-void FUN_00352a14(void);
+void lmapCameraSetPresetDefaults(void);
 extern Obj557c48 *g_handleRegistry;
 
 static LmapViewA *mapCameraView()
@@ -61,7 +61,7 @@ void FUN_002442ac(void)
     camera->axis.x = 0.0f;
     camera->axis.y = 0.0f;
     camera->axis.z = 1.0f;
-    FUN_00352a14();
+    lmapCameraSetPresetDefaults();
     camera = mapCameraView();
     camera->clip = NULL;
     camera->modelManager = g_handleRegistry;

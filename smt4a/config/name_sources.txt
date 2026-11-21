@@ -8547,3 +8547,12 @@
 00303710 lmapCameraResetLocal inferred resets the local map camera: look-at vectors, projection and the view's camera parameters
 002ba170 engineRecordsRankNearest inferred ranks the three nearest active eligible records; twin of smt4 0x1fc0a8
 00500d38 gxEmitBlendCommands inferred appends the blend state's GPU commands (and optionally the framebuffer access masks) to a command list
+00352a14 lmapCameraSetPresetDefaults inferred twin of smt4 lmapCameraSetPresetDefaults (presets 1-11)
+0051e270 curveSampleLinear inferred twin of smt4 curveSampleLinear
+0051e540 curveSampleLinear16 inferred twin of smt4 curveSampleLinear16 (FUN_003f972c)
+006352ac DAT_006352ac inferred the 0x3c-byte record is five separate vectors as in smt4 (rows below; FUN_002830cc 87 -> 49 lines, FUN_002fe590 393 -> 359)
+006352ac g_effectEditorCameraEye inferred size:0xc twin of smt4 g_effectEditorCameraEye
+006352b8 g_effectEditorCameraUp inferred size:0xc twin of smt4 g_effectEditorCameraUp
+006352c4 g_effectEditorCameraTarget inferred size:0xc twin of smt4 g_effectEditorCameraTarget
+006352d0 g_effectEditorCameraOffset inferred size:0xc twin of smt4 g_effectEditorCameraOffset
+006352dc g_effectEditorCameraRotation inferred size:0xc twin of smt4 g_effectEditorCameraRotation

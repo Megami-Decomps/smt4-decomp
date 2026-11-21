@@ -1,4 +1,6 @@
-/* NON_MATCHING: retail's constant-false path is omitted; label lookup and panel-address scheduling differ. */
+/* NON_MATCHING: retail tests questIsOfferable(quest) || questQueryFalse() (the linker-inlined mov r0, #0 at 0x124, as in
+   uiQuestListInput); with that call written the score is worse (94 against 92), so it is left out until the branch
+   layout (early return of the uncompleted detail quest, the predicated label lookup) is solved. */
 #include "shard/W4_W4Match2_UiQuest.h"
 #include "quest_center/QuestRecord.h"
 #include "gamedata/DataTable.h"
@@ -21,7 +23,7 @@ u32 resourceRunOperationIfUnblocked(const void *cursor);
 u32 listCursorGetRowIfUnblocked(const void *cursor);
 void buttonHelpSetText(const u8 *text, u32 color);
 
-void FUN_00290404()
+void uiQuestShowStatusHelp()
 {
     UiQuest *menu = g_uiQuest;
     UiQuestPanel *panel = &menu->panelView.panel;

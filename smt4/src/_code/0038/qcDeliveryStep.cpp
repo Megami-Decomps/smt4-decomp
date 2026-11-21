@@ -43,7 +43,7 @@ void scrResultStopJobAndReleaseUi(void);
 void messageSetConfirmDisplayMode(void);
 u32 gameFlagEntryActivate(u32 id);
 u8 questDeactivate(u32 id);
-void FUN_00287528(u32 *reward);
+void questCompletionSetTierFlags(u32 *reward);
 
 /* The id of the quest chosen for delivery (qcGetDeliveryQuestId's body). */
 static u16 deliveryQuestId(DummyAttachmentWork *work)
@@ -208,7 +208,7 @@ void qcDeliveryStep(DummyAttachmentWork *work)
         if (questIsCompleted(0x6f) != 0 && questIsCompleted(0xd4) != 0 && questIsCompleted(0xd5) != 0) {
             gameFlagSetValue(0x669, 1, 1);
         }
-        FUN_00287528(NULL);
+        questCompletionSetTierFlags(NULL);
         const QcDeliveryEvent *events = DAT_0044db24;
         const QcDeliveryEvent *event;
         bool found = false;

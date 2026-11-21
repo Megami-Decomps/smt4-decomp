@@ -1,11 +1,19 @@
-/* NON_MATCHING: resolved resource lifetime, object address writeback and default-color VFP scheduling differ. */
+/* NON_MATCHING: written like effPolyRingCreate; retail moves the resolved resource from r5 to fp after the header
+ * lookup and keeps the kind in r5, so the saved registers are numbered differently and the object's field stores schedule
+ * differently. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonWind.h"
 #include "AsdSDK/AsdDebug.h"
-#include <string.h>
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/AsdMemCopy.h"
+
+static __inline void quaternionSetIdentity(PolyVec4 *quaternion)
+{
+    PolyVec4 zero = {0, 0, 0, 0};
+    *quaternion = zero;
+    quaternion->w = 1.0f;
+}
 
 extern "C" {
-void *memAlloc(s32 heap, s32 category, s32 flags, s32 bytes, s32 alignment, s32 count);
-void rt_memcpy(void *destination, const void *source, s32 bytes);
 u32 *resourceResolveDataPointer(PolyWindDesc *desc);
 void *resourceResolveHeaderPointer(PolyWindDesc *desc);
 extern PolyWindKind g_polyWindKinds[];
@@ -34,10 +42,8 @@ PolyObject *effPolyWindCreateFromDesc(PolyWindDesc *desc)
     object->frame = 0;
     object->kind = kind;
     object->color = g_polyDefaultColor;
-    memset(&object->rotation0, 0, sizeof(object->rotation0));
-    object->rotation0.w = 1.0f;
-    memset(&object->rotation1, 0, sizeof(object->rotation1));
-    object->rotation1.w = 1.0f;
+    quaternionSetIdentity(&object->rotation0);
+    quaternionSetIdentity(&object->rotation1);
     rt_memcpy(object->work, params, workSize);
     object->state = g_polyWindKinds[kind].create(params, (s32)resource);
     g_polyWindKinds[kind].start(object);

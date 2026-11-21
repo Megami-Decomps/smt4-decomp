@@ -6154,3 +6154,8 @@
 00335950 btlTransitionStep
 003dbc1c btlEffectResolveNames
 001fc0a8 engineRecordsRankNearest
+0029aef0 partyFindSupportedLevel
+00287528 questCompletionSetTierFlags
+00290404 uiQuestShowStatusHelp
+002df5f8 lmapCameraSetPresetDefaults
+003f972c curveSampleLinear16

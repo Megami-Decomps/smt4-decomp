@@ -22,21 +22,9 @@ union EffectEditorVector {
         value.w = 1.0f;
     }
 };
-struct EffectEditorCameraDefaults {
-    PhaseVector eye;       // 0x00
-    PhaseVector up;        // 0x0c
-    PhaseVector target;    // 0x18
-    PhaseVector offset;    // 0x24
-    PhaseVector rotation;  // 0x30
-};
 typedef char EffectEditorStorageLayoutCheck[
     sizeof(EffectEditorVector) == 0x10 &&
-    sizeof(EffectEditorSnapshot) == 0x80 &&
-    offsetof(EffectEditorCameraDefaults, up) == 0x0c &&
-    offsetof(EffectEditorCameraDefaults, target) == 0x18 &&
-    offsetof(EffectEditorCameraDefaults, offset) == 0x24 &&
-    offsetof(EffectEditorCameraDefaults, rotation) == 0x30 &&
-    sizeof(EffectEditorCameraDefaults) == 0x3c ? 1 : -1];
+    sizeof(EffectEditorSnapshot) == 0x80 ? 1 : -1];
 
 /* The original EffectEditor.cpp owns these objects with internal linkage. */
 #ifndef EFFECT_EDITOR_STORAGE_DEFINITIONS
@@ -47,7 +35,13 @@ extern EffectEditorVector g_effectEditorInitialVector;
 extern EffectEditorSnapshot g_effectEditorWorkingSnapshot;
 extern EffectEditorSnapshot g_effectEditorSavedSnapshot;
 extern EffectEditorCamera g_effectEditorCamera;
-extern EffectEditorCameraDefaults g_effectEditorCameraDefaults;
+/* The free camera's eye, up, target, orbit offset and rotation: five separate 12-byte objects (written as one
+ * struct, effectEditorInitialize does not give retail's per-vector stores). */
+extern PhaseVector g_effectEditorCameraEye;
+extern PhaseVector g_effectEditorCameraUp;
+extern PhaseVector g_effectEditorCameraTarget;
+extern PhaseVector g_effectEditorCameraOffset;
+extern PhaseVector g_effectEditorCameraRotation;
 extern EffectEditorVector g_effectEditorVector;
 extern EffectEditorVector g_effectEditorRotation;
 }

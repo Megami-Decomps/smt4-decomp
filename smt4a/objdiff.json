@@ -203655,13 +203655,13 @@
       "target_path": "orig/target/_code/0035/FUN_00352568.o"
     },
     {
-      "base_path": "build/obj/_code/0035/FUN_00352a14.o",
+      "base_path": "build/obj/_code/0035/lmapCameraSetPresetDefaults.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00352a14",
+            "name": "lmapCameraSetPresetDefaults",
             "size": 332,
             "vram": "0x352a14"
           }
@@ -203669,10 +203669,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0035/FUN_00352a14.cpp"
+        "source_path": "src/_code/0035/lmapCameraSetPresetDefaults.cpp"
       },
-      "name": "_code/0035/FUN_00352a14",
-      "target_path": "orig/target/_code/0035/FUN_00352a14.o"
+      "name": "_code/0035/lmapCameraSetPresetDefaults",
+      "target_path": "orig/target/_code/0035/lmapCameraSetPresetDefaults.o"
     },
     {
       "base_path": "build/obj/_code/0035/mathPositionHeadingDegrees.o",
@@ -347457,13 +347457,13 @@
       "target_path": "orig/target/_code/0051/FUN_0051e190.o"
     },
     {
-      "base_path": "build/obj/_code/0051/FUN_0051e270.o",
+      "base_path": "build/obj/_code/0051/curveSampleLinear.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0051e270",
+            "name": "curveSampleLinear",
             "size": 252,
             "vram": "0x51e270"
           }
@@ -347471,10 +347471,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0051/FUN_0051e270.cpp"
+        "source_path": "src/_code/0051/curveSampleLinear.cpp"
       },
-      "name": "_code/0051/FUN_0051e270",
-      "target_path": "orig/target/_code/0051/FUN_0051e270.o"
+      "name": "_code/0051/curveSampleLinear",
+      "target_path": "orig/target/_code/0051/curveSampleLinear.o"
     },
     {
       "base_path": "build/obj/_code/0051/FUN_0051e370.o",
@@ -347517,13 +347517,13 @@
       "target_path": "orig/target/_code/0051/FUN_0051e464.o"
     },
     {
-      "base_path": "build/obj/_code/0051/FUN_0051e540.o",
+      "base_path": "build/obj/_code/0051/curveSampleLinear16.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0051e540",
+            "name": "curveSampleLinear16",
             "size": 252,
             "vram": "0x51e540"
           }
@@ -347531,10 +347531,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0051/FUN_0051e540.cpp"
+        "source_path": "src/_code/0051/curveSampleLinear16.cpp"
       },
-      "name": "_code/0051/FUN_0051e540",
-      "target_path": "orig/target/_code/0051/FUN_0051e540.o"
+      "name": "_code/0051/curveSampleLinear16",
+      "target_path": "orig/target/_code/0051/curveSampleLinear16.o"
     },
     {
       "base_path": "build/obj/_code/0051/FUN_0051e640.o",

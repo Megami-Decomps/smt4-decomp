@@ -7879,3 +7879,6 @@
 00303710 lmapCameraResetLocal
 002ba170 engineRecordsRankNearest
 00500d38 gxEmitBlendCommands
+00352a14 lmapCameraSetPresetDefaults
+0051e270 curveSampleLinear
+0051e540 curveSampleLinear16

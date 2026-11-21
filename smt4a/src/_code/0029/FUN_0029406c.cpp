@@ -1,4 +1,4 @@
-/* NON_MATCHING: VFP expression scheduling/registers differ and the epsilon test reuses one bit-copy; 80 versus retail 81 instructions. */
+/* NON_MATCHING: the VFP loads, products and divides are scheduled into other registers; retail also computes z - firstIntersectionZ before the epsilon test. */
 #include "common.h"
 #include <math.h>
 
@@ -36,10 +36,8 @@ extern "C" f32 FUN_0029406c(const f32 *vertexX, const f32 *vertexY, const f32 *v
     f32 secondIntersectionZ = secondZ * secondDistance / secondLength + originZ;
     f32 firstIntersectionY = firstY * firstDistance / firstLength + originY;
     f32 secondIntersectionY = secondY * secondDistance / secondLength + originY;
-    union FloatBits { f32 value; s32 signedBits; u32 bits; } span;
-    span.value = secondIntersectionZ - firstIntersectionZ;
-    // Match the engine's IEEE-754 near-zero test, including its signed-bit ordering.
-    if (span.signedBits >= 0x3a83126f || span.bits >= 0xba83126fu)
-        return firstIntersectionY + (secondIntersectionY - firstIntersectionY) * (z - firstIntersectionZ) / span.value;
+    f32 span = secondIntersectionZ - firstIntersectionZ;
+    if (span >= 0.001f || span <= -0.001f)
+        return firstIntersectionY + (secondIntersectionY - firstIntersectionY) * (z - firstIntersectionZ) / span;
     return firstIntersectionY;
 }

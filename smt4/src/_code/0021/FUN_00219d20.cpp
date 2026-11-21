@@ -1,4 +1,6 @@
-/* NON_MATCHING: rename polling stack grouping and callback scheduling have not yet been matched. */
+/* NON_MATCHING: retail frees the keyboard only when a confirmed name passes questQueryFalse (a cancel keeps it), and
+   after creating the keyboard it falls into the result tests with the result word unset; written without that
+   uninitialised read, the branch layout and registers differ. */
 #include <stdio.h>
 #include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match2_EffectEditor.h"

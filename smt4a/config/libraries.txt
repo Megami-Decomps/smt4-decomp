@@ -48,3 +48,9 @@ arm 0x524fb4 0x525008 armlib __aeabi_f2ulz: float to u64 conversion called by ar
 # armlib's qsort (Thumb, 0x88 bytes): insertion pass after the partition helper FUN_0010043c (already third-party) for
 # arrays over 10 elements; linked between libc_printfStr and the __rw allocator (_ZN4__rw13__rw_allocateEji).
 thumb 0x10063a 0x1006c2 armlib qsort: Thumb, between libc_printfStr/FUN_0010043c and __rw_allocate; smt4 twin 0x2b7bca
+# armlib's wide-character classifier (Thumb, movs register moves): reads the locale through rt_ctype_table, calls the
+# neighbouring classifier when the locale flag is clear, else binary-searches a packed range table below 0x10000;
+# right after the crt0's nninitRegion; exact twin of smt4's FUN_0010004a at the same address.
+thumb 0x10004a 0x1000e8 armlib wide-character classifier: Thumb, calls rt_ctype_table, binary search of packed ranges; twin of smt4 0x10004a
+# armlib's fplib cosf (libm_cosf): range reduction through a helper, __set_errno for infinities; exact twin of smt4's 0x282390.
+arm 0x1bbf0c 0x1bc048 armlib libm_cosf: fplib cosf, range reducer call and __set_errno; twin of smt4 0x282390

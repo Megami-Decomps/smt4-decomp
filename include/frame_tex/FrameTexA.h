@@ -57,7 +57,7 @@ struct FrameTexWorkA {
     /* 0x144C */ s8 unk144C;
     /* 0x144D */ s8 encEffAlternate;         /* selects the second ENCEFF capture set */
     /* 0x144E */ s8 fadeEnabled;             /* the XFADE set */
-    /* 0x144F */ u8 fadeCaptureResult;
+    /* 0x144F */ s8 fadeCaptureResult;
     /* 0x1450 */ s8 fadeCapturedLeft;
     /* 0x1451 */ s8 fadeCapturedRight;
     /* 0x1452 */ s8 fadePendingRight;

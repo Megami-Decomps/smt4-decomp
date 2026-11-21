@@ -1,7 +1,7 @@
 #include "map/LmapViewGlobals.h"
 
 extern "C" {
-void FUN_002df5f8(void);
+void lmapCameraSetPresetDefaults(void);
 
 /* Resets map camera controls, scalar tracks, and transition defaults. */
 void mapCameraResetControls(void)
@@ -51,6 +51,6 @@ void mapCameraResetControls(void)
     work->turnStart = 0.0f;
     work->turnTarget = 0.0f;
     work->turnDirection = 1.0f;
-    FUN_002df5f8();
+    lmapCameraSetPresetDefaults();
 }
 }

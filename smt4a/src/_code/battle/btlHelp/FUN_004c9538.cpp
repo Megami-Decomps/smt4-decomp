@@ -31,21 +31,16 @@ extern BtlHelpGlobalsA g_btlHelp;
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 char *libc_strcpy(char *destination, const char *source);
 
-BtlHelpEntryA *FUN_004c9538(u32 id, const void *payload, const char *caption, u8 mode)
+/* Creates a type-`type` text entry and appends it to the help list (btlHelp.cpp's creator for this message, inlined
+ * here as FUN_00200a68's creator is not; retail keeps its constant arguments in saved registers across the allocation).
+ * The trace lines are those of a run of creators above their callers (FUN_00200a68's at 150, then 191, 237, 275):
+ * btlHelpAppendMessage (0x4c8894) traces 237 but FUN_004c9220 (0x4c9220), placed after it, traces 191. */
+static __inline BtlHelpEntryA *helpTextEntryCreate(u16 type, u32 id, u32 context, const void *payload, const char *caption, u8 mode, u32 row, u32 column)
 {
-    BtlMainStateA *battle = btlGetMainState();
-    u64 blockedStates = static_cast<u64>(g_btlHelp.blockedStates[0]) |
-                        (static_cast<u64>(g_btlHelp.blockedStates[1]) << 32);
-    u64 blockedTransitions = static_cast<u64>(g_btlHelp.blockedTransitions[0]) |
-                             (static_cast<u64>(g_btlHelp.blockedTransitions[1]) << 32);
-    if ((battle->stateFlags64.bits & blockedStates) != 0 ||
-        (battle->stateFlags64.bits & blockedTransitions) != 0 || payload == NULL)
-        return NULL;
-    u32 context = battle->helpMessages.context;
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlHelp.cpp", 275);
     BtlHelpTextEntryView *entry = static_cast<BtlHelpTextEntryView *>(
         asdMemoryAllocTracked(0x100, 0x100, 0, 0x880, 1));
-    entry->type = 7;
+    entry->type = type;
     entry->kind = 0;
     entry->state = 0;
     entry->phase = 0;
@@ -54,8 +49,8 @@ BtlHelpEntryA *FUN_004c9538(u32 id, const void *payload, const char *caption, u8
     __aeabi_memcpy4(entry->payload, payload, sizeof(entry->payload));
     entry->mode = mode;
     entry->counter = 0;
-    entry->row = 13;
-    entry->column = 14;
+    entry->row = row;
+    entry->column = column;
     entry->frame = 0;
     entry->dialogIndex = 1;
     libc_strcpy(entry->caption, caption);
@@ -74,5 +69,14 @@ BtlHelpEntryA *FUN_004c9538(u32 id, const void *payload, const char *caption, u8
     }
     list->count++;
     return message;
+}
+
+BtlHelpEntryA *FUN_004c9538(u32 id, const void *payload, const char *caption, u8 mode)
+{
+    BtlMainStateA *battle = btlGetMainState();
+    if ((battle->stateFlags64.bits & g_btlHelp.blockedStates) != 0 ||
+        (battle->stateFlags64.bits & g_btlHelp.blockedTransitions) != 0 || payload == NULL)
+        return NULL;
+    return helpTextEntryCreate(7, id, battle->helpMessages.context, payload, caption, mode, 13, 14);
 }
 }

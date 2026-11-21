@@ -93737,13 +93737,13 @@
       "target_path": "orig/target/_code/0028/bgmGetStateById.o"
     },
     {
-      "base_path": "build/obj/_code/0028/FUN_00287528.o",
+      "base_path": "build/obj/_code/0028/questCompletionSetTierFlags.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00287528",
+            "name": "questCompletionSetTierFlags",
             "size": 432,
             "vram": "0x287528"
           }
@@ -93751,10 +93751,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0028/FUN_00287528.cpp"
+        "source_path": "src/_code/0028/questCompletionSetTierFlags.cpp"
       },
-      "name": "_code/0028/FUN_00287528",
-      "target_path": "orig/target/_code/0028/FUN_00287528.o"
+      "name": "_code/0028/questCompletionSetTierFlags",
+      "target_path": "orig/target/_code/0028/questCompletionSetTierFlags.o"
     },
     {
       "base_path": "build/obj/_code/0028/objectFlagBitIsSet.o",
@@ -96927,13 +96927,13 @@
       "target_path": "orig/target/_code/0029/rosterGetLeaderId.o"
     },
     {
-      "base_path": "build/obj/_code/0029/FUN_00290404.o",
+      "base_path": "build/obj/_code/0029/uiQuestShowStatusHelp.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00290404",
+            "name": "uiQuestShowStatusHelp",
             "size": 452,
             "vram": "0x290404"
           }
@@ -96941,10 +96941,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0029/FUN_00290404.cpp"
+        "source_path": "src/_code/0029/uiQuestShowStatusHelp.cpp"
       },
-      "name": "_code/0029/FUN_00290404",
-      "target_path": "orig/target/_code/0029/FUN_00290404.o"
+      "name": "_code/0029/uiQuestShowStatusHelp",
+      "target_path": "orig/target/_code/0029/uiQuestShowStatusHelp.o"
     },
     {
       "base_path": "build/obj/_code/0029/uiQuestRefreshButtonHelp.o",
@@ -101096,13 +101096,13 @@
       "target_path": "orig/target/_code/0029/linkHolderClearFlagGroup.o"
     },
     {
-      "base_path": "build/obj/_code/0029/FUN_0029aef0.o",
+      "base_path": "build/obj/_code/0029/partyFindSupportedLevel.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0029aef0",
+            "name": "partyFindSupportedLevel",
             "size": 388,
             "vram": "0x29aef0"
           }
@@ -101110,10 +101110,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0029/FUN_0029aef0.cpp"
+        "source_path": "src/_code/0029/partyFindSupportedLevel.cpp"
       },
-      "name": "_code/0029/FUN_0029aef0",
-      "target_path": "orig/target/_code/0029/FUN_0029aef0.o"
+      "name": "_code/0029/partyFindSupportedLevel",
+      "target_path": "orig/target/_code/0029/partyFindSupportedLevel.o"
     },
     {
       "base_path": "build/obj/_code/0029/scrResultStopJobAndReleaseUi.o",
@@ -129263,13 +129263,13 @@
       "target_path": "orig/target/_code/002d/mapCameraLoad.o"
     },
     {
-      "base_path": "build/obj/_code/002d/FUN_002df5f8.o",
+      "base_path": "build/obj/_code/002d/lmapCameraSetPresetDefaults.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002df5f8",
+            "name": "lmapCameraSetPresetDefaults",
             "size": 308,
             "vram": "0x2df5f8"
           }
@@ -129277,10 +129277,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002d/FUN_002df5f8.cpp"
+        "source_path": "src/_code/002d/lmapCameraSetPresetDefaults.cpp"
       },
-      "name": "_code/002d/FUN_002df5f8",
-      "target_path": "orig/target/_code/002d/FUN_002df5f8.o"
+      "name": "_code/002d/lmapCameraSetPresetDefaults",
+      "target_path": "orig/target/_code/002d/lmapCameraSetPresetDefaults.o"
     },
     {
       "base_path": "build/obj/_code/002d/gameStateSelectKind.o",
@@ -218700,13 +218700,13 @@
       "target_path": "orig/target/_code/003f/FUN_003f9654.o"
     },
     {
-      "base_path": "build/obj/_code/003f/FUN_003f972c.o",
+      "base_path": "build/obj/_code/003f/curveSampleLinear16.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_003f972c",
+            "name": "curveSampleLinear16",
             "size": 252,
             "vram": "0x3f972c"
           }
@@ -218714,10 +218714,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003f/FUN_003f972c.cpp"
+        "source_path": "src/_code/003f/curveSampleLinear16.cpp"
       },
-      "name": "_code/003f/FUN_003f972c",
-      "target_path": "orig/target/_code/003f/FUN_003f972c.o"
+      "name": "_code/003f/curveSampleLinear16",
+      "target_path": "orig/target/_code/003f/curveSampleLinear16.o"
     },
     {
       "base_path": "build/obj/_code/003f/FUN_003f982c.o",
