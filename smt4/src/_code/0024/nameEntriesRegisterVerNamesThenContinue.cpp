@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/W6_W6Match7_KeyedRecordStorage.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ struct NameOwner {
     /* 0x2bc4 */ NameEntry entries[2];
 };
 
-u8 keyedRecordRegisterName(NameRecord *record);
 u8 FUN_00249e54(u8 id, const char *name);
 void textureCachePollReady(void);
 
@@ -32,7 +32,7 @@ void nameEntriesRegisterVerNamesThenContinue(NameOwner *owner)
         const char *name = entry->name;
 
         if (name[0] == 'V' && name[1] == 'E' && name[2] == 'R') {
-            entry->id = keyedRecordRegisterName(&entry->record);
+            entry->id = keyedRecordRegisterName((const char *)&entry->record);
             entry->id = FUN_00249e54(entry->id, name);
         }
     }

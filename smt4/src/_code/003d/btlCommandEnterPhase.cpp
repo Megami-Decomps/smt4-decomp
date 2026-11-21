@@ -31,7 +31,7 @@ u32 isEntryUsable(void *event); // declcheck: local (the shared declaration in c
 void FUN_0027e38c(void *event);
 void FUN_003ca6c4(BtlMainState **block, CommandState *work);
 void btlUiRouteSelectedAction(BtlUi *ui);
-u32 FUN_00246454(s32 a, u32 options, BtlEntry *entry);
+u32 btlReflectQueueSelectionMarks(s32 a, u32 options, BtlEntry *entry);
 u32 FUN_003d3944(BtlMainState **block, CommandState *work);
 void FUN_0033a780(BtlMainState *state);
 void btlResetTransitionProgress(BtlCamera *camera);
@@ -122,7 +122,7 @@ void btlCommandEnterPhase(BtlMainState **block, s32 phase)
                     }
                 }
                 if (!found)
-                    FUN_00246454(0, reinterpret_cast<u32>(work), entry);
+                    btlReflectQueueSelectionMarks(0, reinterpret_cast<u32>(work), entry);
             }
         }
         return;

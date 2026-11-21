@@ -133,6 +133,75 @@ extern "C" ReflectContext *g_btlActionReflect;
 extern "C" ReflectAction *btlQueueReflectAction(ReflectContext *context,
     s32 actor, s32 secondary, u32 options);
 
+/* Copies of the queue builders btlReflectCreateKind21, btlReflectCreateKind22 (kind 0x22) and btlReflectCreateKind24 for
+ * the callers retail compiled with them inlined. They stay plain `static`: armcc inlines them late, which gives
+ * retail's schedule (as `static __inline` they schedule differently). */
+static void reflectCreateKind21(s32 id, u32 flags, u32 target, u32 parameter, u32 value, s32 enabled)
+{
+    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, flags);
+    if (enabled == 0) {
+        action->flagView.flags |= 4;
+    }
+    action->kind = 0x21;
+    action->target = target;
+    action->value = value;
+    action->parameter = parameter;
+}
+
+static void reflectCreateKind22(s32 actor, u32 flags, u32 target, u32 parameter, u32 payload, s32 enabled)
+{
+    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, flags);
+    if (!enabled)
+        action->flagView.flags |= 4;
+    action->target = target;
+    action->kind = 0x22;
+    action->value = payload;
+    action->parameter = parameter;
+}
+
+static ReflectAction *reflectCreateKind24(s32 slot, u32 extra, u32 first, u32 second)
+{
+    ReflectAction *entry = btlQueueReflectAction(g_btlActionReflect, (s16)slot, 0, extra);
+    entry->kind = 36;
+    entry->wordValues.unk18 = first;
+    entry->value = second;
+    return entry;
+}
+
+/* Apocalypse's copies, of btlReflectCreateKind2b (kind 0x2b), btlReflectQueueKind44 (kind 0x2c) and btlReflectCreateKind2e,
+ * the same builders under that game's kind numbers. */
+static void reflectCreateKind2b(s32 id, u32 flags, u32 target, u32 parameter, u32 value, s32 enabled)
+{
+    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, flags);
+    if (enabled == 0) {
+        action->flagView.flags |= 4;
+    }
+    action->kind = 0x2b;
+    action->target = target;
+    action->value = value;
+    action->parameter = parameter;
+}
+
+static void reflectCreateKind2c(s32 actor, u32 flags, u32 target, u32 parameter, u32 payload, s32 enabled)
+{
+    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, flags);
+    if (!enabled)
+        action->flagView.flags |= 4;
+    action->target = target;
+    action->kind = 0x2c;
+    action->value = payload;
+    action->parameter = parameter;
+}
+
+static ReflectAction *reflectCreateKind2e(s32 id, u32 options, u32 first, u32 second)
+{
+    ReflectAction *entry = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, options);
+    entry->kind = 46;
+    entry->wordValues.unk18 = first;
+    entry->value = second;
+    return entry;
+}
+
 /* Queues a status change (action 29) on `target`: `value` and the status `mask`. Inlined into the
  * action builders, which evaluate the value and mask before the queue call. */
 static __inline void btlReflectQueueStatusChange(s16 actor, u32 options, const void *target,

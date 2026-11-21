@@ -39,7 +39,7 @@ struct ActionWork {
 extern "C" {
 u8 *gameGetSlotTable(void);
 s32 partyHasEligibleMember(BattleSideInfo *side);
-void FUN_00246454(s32 offset, ActionWork *work, BattleUnit *unit);
+void btlReflectQueueSelectionMarks(s32 offset, ActionWork *work, BattleUnit *unit);
 void FUN_0024b888(s32 offset, ActionWork *work, s32 down, s32 pick, f32 scale, s32 zero);
 void frameRangeExtend(BattleContext *context, ActionWork *work, s32 skill, s32 base, s32 a, s32 b);
 
@@ -85,7 +85,7 @@ u32 FUN_003d13d4(BattleContext *context, ActionWork *work, u32 a, u32 b, f32 sca
             BattleUnit *unit = &context->side->units[target];
             if (unit != NULL && (unit->flags & UNIT_PRESENT) && !(unit->flags & UNIT_TAKEN)) {
                 selected = 5;
-                FUN_00246454(step * placed + base + 5, work, unit);
+                btlReflectQueueSelectionMarks(step * placed + base + 5, work, unit);
                 placed = (s8)(placed + 1);
                 unit->flags |= UNIT_TAKEN;
             }
@@ -95,7 +95,7 @@ u32 FUN_003d13d4(BattleContext *context, ActionWork *work, u32 a, u32 b, f32 sca
             BattleUnit *unit = &context->side->units[target];
             if (unit != NULL && (unit->flags & UNIT_PRESENT)) {
                 selected = 5;
-                FUN_00246454(step * count + base + 5, work, unit);
+                btlReflectQueueSelectionMarks(step * count + base + 5, work, unit);
                 chosen = unit;
             }
             break;

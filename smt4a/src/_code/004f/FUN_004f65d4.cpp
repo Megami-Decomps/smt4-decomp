@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "battle/btlMain.h"
+#include "shard/W6_W6Match7_KeyedRecordStorage.h"
 
 extern "C" {
 
@@ -48,7 +49,6 @@ extern int g_btlStageModel; /* 0x57a4f8 */
 /* Supplied declaration required: asdMemoryAllocTraced. */
 /* Supplied declaration required: FUN_001a79e8. */
 extern int rangeIsValid(void);
-extern unsigned int keyedRecordRegisterName(int);
 /* Supplied declaration required: FUN_003478dc. */
 /* Supplied declaration required: textureCachePollReady. */
 extern int textureCacheGetDirection(void);
@@ -160,7 +160,7 @@ void FUN_004f65d4(int param_1)
         temp_v8 = pcVar8[2] == 'R';
       }
       if (temp_v8) {
-        temp_v9 = keyedRecordRegisterName(temp_v5 + 0x33ec);
+        temp_v9 = keyedRecordRegisterName((const char *)(temp_v5 + 0x33ec));
         *(char *)(temp_v5 + 0x33e4) = (char)temp_v9;
         FUN_003478dc(temp_v9,pcVar8);
         *(char *)(temp_v5 + 0x33e4) = (char)temp_v9;
@@ -185,7 +185,7 @@ void FUN_004f65d4(int param_1)
         temp_v8 = pcVar8[2] == 'R';
       }
       if (temp_v8) {
-        temp_v9 = keyedRecordRegisterName(temp_v5 + 0x33ec);
+        temp_v9 = keyedRecordRegisterName((const char *)(temp_v5 + 0x33ec));
         *(char *)(temp_v5 + 0x33e4) = (char)temp_v9;
         FUN_003478dc(temp_v9,pcVar8);
         *(char *)(temp_v5 + 0x33e4) = (char)temp_v9;

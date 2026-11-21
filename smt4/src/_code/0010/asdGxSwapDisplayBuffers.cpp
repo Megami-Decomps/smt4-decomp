@@ -1,4 +1,4 @@
-/* NON_MATCHING: conditional preset addressing now matches; incoming arguments, first ring pointer, and value use different saved registers. */
+/* NON_MATCHING: only the entry differs: retail loads g_asdGxPresets into r0 and copies it to r4 (primary), reading the first index through r0; the build loads it into r4 and copies it to r0. */
 #include "AsdSDK/Source/Gfx/AsdGfxHelpersSmt4.h"
 #include "gfx/AsdGxPresetRing.h"
 
@@ -18,7 +18,10 @@ void asdGxSwapDisplayBuffers(s32 refresh, s32 secondaryEnabled)
     asdGfxSetMode(0x400);
     asdGfxBindTarget(value);
     u32 previous = asdGxPresetPrevious(secondaryPreset);
-    value = secondaryEnabled ? secondaryPreset->buffers[previous] : primary->buffers[previous];
+    if (secondaryEnabled)
+        value = secondaryPreset->buffers[previous];
+    else
+        value = primary->buffers[previous];
     asdGfxSetMode(0x410);
     asdGfxBindTarget(value);
     value = output->buffers[asdGxPresetPrevious(output)];

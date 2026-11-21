@@ -1,4 +1,4 @@
-/* NON_MATCHING: the entry flags are one u64 mask (ldrd test as retail in the kind-1 path); in the kind-2 path retail loads the two words separately (high then low) and re-reads the low word for the player-name test, and the frame-counter update and list unlink use different registers. */
+/* NON_MATCHING: the entry flags are one u64 mask (ldrd test as retail in the kind-1 path); in the kind-2 path retail loads the two words separately (high then low), and the frame-counter update takes its base in r1 with the result moved to r0 first where this uses r0. */
 #include "common.h"
 
 /* One queued help message (Shin Megami Tensei IV layout, observed fields). */
@@ -45,6 +45,23 @@ void infoWinSetMessage(u32 window, u32 message);
 void dialogOpen(s32 index, s32 flag);
 void infoWinOpenEntry(u16 value);
 
+/* Unlinks a help entry from the help list (btlHelpFreeEntries does the same). */
+static __inline BtlHelpEntry *btlHelpListRemove(BtlHelpList *list, BtlHelpEntry *entry)
+{
+    if (entry->prev == NULL) {
+        list->head = entry->next;
+    } else {
+        entry->prev->next = entry->next;
+    }
+    if (entry->next == NULL) {
+        list->tail = entry->prev;
+    } else {
+        entry->next->prev = entry->prev;
+    }
+    --list->count;
+    return entry;
+}
+
 /* Per-frame update of the battle help queue: drops finished messages from the front, then starts
  * the first waiting one (opening its dialog) and counts the frames the others have shown. */
 u32 FUN_001b5498(void)
@@ -86,7 +103,7 @@ u32 FUN_001b5498(void)
                             if ((entry->flags & 2) != 0) {
                                 libc_strcpy(name, gameGetPlayerName());
                             } else {
-                                    libc_strcpy(name, dataTable01FindByIdWithAoc(entry->nameId));
+                                libc_strcpy(name, dataTable01FindByIdWithAoc(entry->nameId));
                             }
                             textEncodeFontSlot(entry->textSlot, name);
                         }
@@ -109,20 +126,7 @@ u32 FUN_001b5498(void)
             entry->shownCount++;
             return result;
         }
-        BtlHelpList *list = g_btlHelpList;
-
-        if (entry->prev == NULL) {
-            list->head = next;
-        } else {
-            entry->prev->next = next;
-        }
-        if (entry->next == NULL) {
-            list->tail = entry->prev;
-        } else {
-            entry->next->prev = entry->prev;
-        }
-        list->count--;
-        asdMemFree(entry);
+        asdMemFree(btlHelpListRemove(g_btlHelpList, entry));
         entry = next;
     }
     return result;

@@ -12,7 +12,7 @@ int naviRequestSelectedMap(void);
 int FUN_003a35a4(void);
 int sysPlayVoice(...);
 int listGetAdjacentEntryId(...);
-int FUN_0048d248(...);
+int naviSelectRequestedCategory(...);
 int rectRecRead(...);
 int sub68OwnerGetBlock60(...);
 int naviMainSetValuePair(...);
@@ -55,7 +55,7 @@ extern int FUN_00384cf4(void);
 /* Supplied declaration required: FUN_003a35a4. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: listGetAdjacentEntryId. */
-/* Supplied declaration required: FUN_0048d248. */
+/* Supplied declaration required: naviSelectRequestedCategory. */
 /* Supplied declaration required: rectRecRead. */
 /* Supplied declaration required: sub68OwnerGetBlock60. */
 extern int naviGetActiveStateValue(int);
@@ -359,7 +359,7 @@ LAB_004899f8:
             if (g_gameState.naviMapPending != '\0') {
               *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
               temp_v2 = FUN_00492c84(temp_v7);
-              FUN_0048d248(param_1,temp_v2);
+              naviSelectRequestedCategory(param_1,temp_v2);
               sub68OwnerGetBlock60(temp_v7);
               temp_v4 = puVar9;
               temp_v5 = puVar9;
@@ -387,7 +387,7 @@ LAB_004899f8:
           if (g_gameState.naviMapPending != '\0') {
             *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
             temp_v2 = FUN_00492c84(temp_v7);
-            FUN_0048d248(param_1,temp_v2);
+            naviSelectRequestedCategory(param_1,temp_v2);
             sub68OwnerGetBlock60(temp_v7);
             temp_v4 = puVar9;
             temp_v5 = puVar9;

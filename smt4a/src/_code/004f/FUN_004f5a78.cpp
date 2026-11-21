@@ -4,6 +4,7 @@
 #include "battle/btlEffect.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "gamedata/GameDataAccess.h"
+#include "shard/W6_W6Match7_KeyedRecordStorage.h"
 
 extern "C" {
 extern BtlEffectGlobals g_btlEffect;
@@ -14,7 +15,6 @@ void asdMemFree(void *);
 char *libc_strcpy(char *, const char *);
 char *libc_strrchr(char *, s32);
 void __aeabi_memcpy4(void *, const void *, u32);
-u32 keyedRecordRegisterName(const char *);
 u32 FUN_003478dc(u32, const void *);
 void textureCachePollReady(void);
 s32 textureCacheGetDirection(void);

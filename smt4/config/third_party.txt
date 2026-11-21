@@ -1611,6 +1611,8 @@
 0x002b76d0 FUN_002b76d0 between
 0x002b7768 nn_math_ARMv6_MTX44TransposeAsm name
 0x002b7830 nn_math_ARMv6_MTX34LookAtC_FAST name
+0x002b79cc FUN_002b79cc library
+0x002b7bca qsort library
 0x002b90b0 nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile name
 0x002bae30 nw_ut_internal_LinkListImpl_erase_2BAE30 name
 0x002bae7c FUN_002bae7c between

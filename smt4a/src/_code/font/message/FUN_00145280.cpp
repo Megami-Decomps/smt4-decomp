@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail clears the many state fields through a handful of shared base registers (the large offsets are derived from one constant) with one more saved register and a 28-byte frame; the field values, call sequence and parameter tables are the same. */
+/* NON_MATCHING: retail clears the many state fields through a handful of shared base registers (the large offsets are derived from one constant) with one more saved register and a 28-byte frame; the field values, call sequence and parameter tables are the same. The word store at 0x1A0C is retail's (it was missing; adding it raised the diff from 77 to 94 lines, since armcc derives the late offsets differently). */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
@@ -230,6 +230,7 @@ MessageWindow *FUN_00145280(void)
     *(u32 *)(raw + 0x19FC) = 0;
     *(u32 *)(raw + 0x1A04) = 0;
     raw[0x1A08] = 0;
+    *(u32 *)(raw + 0x1A0C) = 0;
     window->unk33 = 0;
     *(s32 *)(raw + 0x19EC) = -2;
     raw[0x1A10] = 0;

@@ -52,7 +52,7 @@ extern Allocator* DAT_00471c40;
 
 void nw_gfx_ShaderBinaryInfo_AnalyzeBinary(void);
 u32 FUN_003e2af8(void* binding);
-void FUN_003e2264(void* binding, void* cache, void* allocator);
+void nw_gfx_ShaderBinaryInfo_BuildCommonCommand(void* binding, void* cache, void* allocator);
 void FUN_0036fd04(MaterialRecord** material, Allocator* allocator);
 
 static inline u8* relocate(void* base, u32 offset, u32 bias)
@@ -99,7 +99,7 @@ u32 FUN_0036f464(Allocator* allocator, ModelResource* resource, u32 unused, s32 
     nw_gfx_ShaderBinaryInfo_AnalyzeBinary();
     u32 cacheSize = FUN_003e2af8(binding);
     void* cache = allocator->vtable->allocate(allocator, cacheSize, 4);
-    FUN_003e2264(binding, cache, binding);
+    nw_gfx_ShaderBinaryInfo_BuildCommonCommand(binding, cache, binding);
     res->runtimeCache = binding;
     res->runtimeSet = reinterpret_cast<u32>(cache);
 

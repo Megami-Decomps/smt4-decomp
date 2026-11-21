@@ -51,7 +51,7 @@ void FUN_00336bec(BtlMainState *state)
             }
             s16 baseDelay = (s16)DAT_00439a20.baseDelay;
             FUN_0024057c(state, action, 0, 0, kind);
-            FUN_002451c4(order * interval + delay + baseDelay, 0, reinterpret_cast<u32>(action), 255, kind, 0);
+            btlReflectCreateKind22(order * interval + delay + baseDelay, 0, reinterpret_cast<u32>(action), 255, kind, 0);
             u32 effect = (action->status & 0x10) ? 7 : 6;
             btlReflectInitKind9(order * interval + baseDelay, 0, action, effect, 13);
             ++order;

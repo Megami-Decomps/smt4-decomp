@@ -1,4 +1,4 @@
-/* NON_MATCHING: button-order constant storage, active-slot register allocation and transition-tail scheduling differ. */
+/* NON_MATCHING: retail copies the button order from a .constdata block (DAT_004024f8+8) where this builds it from a pc-relative literal, the preset and the two records take other saved registers, and the panel-state tails materialise their constants separately. */
 #include "ui/ButtonHelpGlobal.h"
 #include "quest_center/qcMain.h"
 
@@ -17,9 +17,8 @@ void buttonHelpSetPreset(u32 preset)
         return;
     }
     if (g_buttonHelp.pending < 0) {
-        const ButtonHelpWork *current = g_buttonHelp.work;
         for (s32 index = 0; index < 6; ++index) {
-            if (current->touchPressed[index] != 0) {
+            if (work->touchPressed[index] != 0) {
                 g_buttonHelp.pending = preset;
                 return;
             }
@@ -37,9 +36,10 @@ void buttonHelpSetPreset(u32 preset)
     u8 buttonOrder[8] = { 5, 6, 4, 3, 2, 1, 0, 0 };
     for (s32 index = 0; index < 6; ++index) {
         u16 value = next->buttons[index];
-        u8 kind = value != 0 ? buttonOrder[index] : 18;
-        u8 label = value != 0 ? static_cast<u8>(value) : 81;
-        buttonHelpSetSlot(static_cast<u8>(index), kind, label, 0);
+        if (value != 0)
+            buttonHelpSetSlot(static_cast<u8>(index), buttonOrder[index], static_cast<u8>(value), 0);
+        else
+            buttonHelpSetSlot(static_cast<u8>(index), 18, 81, 0);
     }
     if (previous->shown != 0) {
         if (next->shown != 0) {

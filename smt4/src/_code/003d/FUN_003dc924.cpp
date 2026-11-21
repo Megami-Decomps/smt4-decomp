@@ -1,4 +1,4 @@
-/* NON_MATCHING: reserved slots are excluded directly; loop setup, cached-slot addressing and member-ID spills differ. */
+/* NON_MATCHING: reserved slots are excluded directly (retail starts at 0 and skips index < 4, which compiles closer but scores 78 here); the 0x50 status offset is hoisted into a saved register where retail keeps the member ID there instead of spilling it. */
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
@@ -25,10 +25,10 @@ void FUN_003dc924(MaterialMergeOwner *owner, s32 effectKind, s32 allActors)
         if (!(btlGetMainState()->actions[index].status & 1))
             continue;
         u32 status = battle->actions[index].status;
-        if (allActors) {
-            if (!(status & 0x8000))
+        if (allActors == 0) {
+            if (!(status & 0x400))
                 continue;
-        } else if (!(status & 0x400)) {
+        } else if (!(status & 0x8000)) {
             continue;
         }
         if (effectKind == 0 || effectKind == 22)

@@ -11,7 +11,7 @@ void *FUN_003f0254(BtlMainStateA *, BtlActionRecord *);
 void *FUN_003f06b4(BtlMainStateA *, BtlActionRecord *);
 s32 FUN_004d7a60(void *, BtlActionRecord *, u32);
 
-/* Queues a reflection action of kind 0x2E on the entry (twin of smt4 btlQueueReflectEntryAction, sibling FUN_004fcde0). */
+/* Queues a reflection action of kind 0x2E on the entry (twin of smt4 btlQueueReflectEntryAction, sibling btlReflectQueueSelectionMarks). */
 static __inline void queueEntryAction(s32 actorId, u32 parameter, BtlCombatantEntryA *entry, s32 value)
 {
     ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actorId, 0, parameter);

@@ -130,7 +130,7 @@ void FUN_0023fbdc(ReflectTask *task, ReflectBattle *battle)
                     s16 style = (s16)layout->style;
                     s16 offsetX = (s16)DAT_00439a20.offsetX;
                     FUN_0024057c(battle, unit, 0, 0, style);
-                    FUN_002451c4(started * spacing + offsetY + offsetX, reinterpret_cast<u32>(task), reinterpret_cast<u32>(unit), 0xff, style, 0);
+                    btlReflectCreateKind22(started * spacing + offsetY + offsetX, reinterpret_cast<u32>(task), reinterpret_cast<u32>(unit), 0xff, style, 0);
                     btlReflectInitKind9(started * spacing + offsetX, task, unit, (unit->flags & 0x10) != 0 ? 7 : 6, 13);
                     if (firstStarted == 0) {
                         btlQueueKeyedScalarReflectAction(started * spacing, task, 0x10001d4, 0, 0, 0, 0);

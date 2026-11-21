@@ -54,7 +54,7 @@ int btlQueueActionMessage(...);
 int btlRecoverHpMpByPercent(...);
 int FUN_004fd508(...);
 int btlReflectQueuePendingRosterFade(...);
-int FUN_004fe900(...);
+int btlReflectQueueTransitionPair(...);
 
 int btlScriptUnitHasFlags(...);
 int stateFinishIfPresent(...);
@@ -288,7 +288,7 @@ extern int FUN_004fa7bc(int);
 /* Supplied declaration required: btlReflectCreateKind19. */
 /* Supplied declaration required: FUN_004fd508. */
 /* Supplied declaration required: btlReflectQueuePendingRosterFade. */
-/* Supplied declaration required: FUN_004fe900. */
+/* Supplied declaration required: btlReflectQueueTransitionPair. */
 /* Supplied declaration required: btlReflectSetValuePair. */
 /* Supplied declaration required: btlReflectRequestPairScalar. */
 extern int animationChannelsAllFinished(unsigned int);
@@ -1150,7 +1150,7 @@ joined_r0x0040f750:
     *(int *)(psVar2 + 0x26) = *(int *)(psVar2 + 0x26) + 1;
 LAB_0040f684:
     *(unsigned int *)(*(int *)(psVar2 + 10) + 0x50) = *(unsigned int *)(*(int *)(psVar2 + 10) + 0x50) | 0x100000;
-    FUN_004fe900(0,*(unsigned int *)(psVar2 + 4),*(unsigned int *)(psVar2 + 10),0,0,0,0,0);
+    btlReflectQueueTransitionPair(0,*(unsigned int *)(psVar2 + 4),*(unsigned int *)(psVar2 + 10),0,0,0,0,0);
     btlResetMatchingBoundObjects(g_btlAux,(int)psVar2[0x12],*(unsigned int *)(*(int *)(psVar2 + 10) + 100));
     FUN_0047effc(*(unsigned int *)(psVar2 + 0x14) & 0xffff,*(unsigned int *)(psVar2 + 4));
     *(int *)(psVar2 + 0x26) = *(int *)(psVar2 + 0x26) + 1;

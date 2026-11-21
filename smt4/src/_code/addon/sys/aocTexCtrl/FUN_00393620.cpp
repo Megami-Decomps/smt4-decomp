@@ -1,4 +1,4 @@
-/* NON_MATCHING: header copy (two 8-word VFP blocks) and the reloaded list header now match; retail keeps the node header size 12 in a saved register and one more saved register overall, the node construction is scheduled differently. */
+/* NON_MATCHING: header copy, list header reload and the values allocation (if/else as in the smt4a twin) follow retail; retail stores the values pointer once after both arms, keeps the node header size 12 in a saved register for the input advance (12 + count * 20 added at once) and schedules it among the link stores. */
 #include "addon/sys/aocTexCtrl.h"
 #include "AsdSDK/AsdDebug.h"
 #include <stddef.h>
@@ -56,20 +56,20 @@ void FUN_00393620(AocTexCtrl *control, const AocTextureFile *file)
         node->id = input->id;
         node->count = input->count;
         node->mode = input->mode;
-        AocTextureListValue *values = NULL;
         if (node->count > 0) {
             asdDebugTrace(DAT_003ff788, 111);
-            values = static_cast<AocTextureListValue *>(asdMemAlloc(0x100, 0x100, 0, node->count * sizeof(*values), 1));
+            node->values = static_cast<AocTextureListValue *>(asdMemAlloc(0x100, 0x100, 0, node->count * sizeof(AocTextureListValue), 1));
+        } else {
+            node->values = NULL;
         }
-        node->values = values;
         if (node->count > 0)
-            __aeabi_memcpy4(node->values, input->values, node->count * sizeof(*values));
+            __aeabi_memcpy4(node->values, input->values, node->count * sizeof(AocTextureListValue));
         if (previous == NULL)
             reinterpret_cast<AocTextureListStateView *>(control->state)->head = node;
         else
             previous->next = node;
         input = reinterpret_cast<const AocTextureSerializedNode *>(
-            reinterpret_cast<const u8 *>(input) + 12 + node->count * sizeof(*values));
+            reinterpret_cast<const u8 *>(input) + 12 + node->count * sizeof(AocTextureListValue));
         previous = node;
     }
 }

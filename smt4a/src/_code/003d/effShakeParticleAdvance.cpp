@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rewrite of the shaking particle update; the clear now matches retail's five integer stores; the delay-path store order and the sign/scale values kept in s17-s20/r5-r8 still differ. */
+/* NON_MATCHING: readable rewrite of the shaking particle update; remaining differences are VFP register choices in the end-of-life fade and the amplitude arguments, and the order of the two velocity loads against the first compare. */
 #include "common.h"
 
 // A particle that jitters around its anchor: amplitude range, current velocity, and its lifetime counters.
@@ -22,17 +22,14 @@ void effShakeParticleAdvance(ShakeParticle *particle)
     s32 frame = particle->frame;
     if (lifetime != -1 && lifetime <= frame) {
         if (particle != NULL) {
-            u32 *words = reinterpret_cast<u32 *>(particle);
-            for (s32 i = 0; i < 5; ++i)
-                words[i] = 0;
+            *particle = ShakeParticle();
         }
         return;
     }
-    f32 zero = 0.0f;
     if (frame < 0) {
         particle->frame = frame + 1;
-        particle->velocityX = zero;
-        particle->velocityY = zero;
+        particle->velocityX = 0.0f;
+        particle->velocityY = 0.0f;
         return;
     }
     f32 amplitudeX = particle->amplitudeX;
@@ -44,18 +41,21 @@ void effShakeParticleAdvance(ShakeParticle *particle)
             amplitudeY = (f32)remaining * amplitudeY * 0.25f;
         }
     }
-    f32 magnitudeX = (f32)randBetween((s32)(amplitudeX * 0.5f * 100.0f), (s32)(amplitudeX * 100.0f)) * 0.01f;
-    f32 magnitudeY = (f32)randBetween((s32)(amplitudeY * 0.5f * 100.0f), (s32)(amplitudeY * 100.0f)) * 0.01f;
+    f32 magnitudeX = (f32)randBetween((s32)(amplitudeX * 0.5f * 100.0f), (s32)(amplitudeX * 100.0f));
+    f32 magnitudeY = (f32)randBetween((s32)(amplitudeY * 0.5f * 100.0f), (s32)(amplitudeY * 100.0f));
+    /* the random magnitudes are drawn in hundredths */
+    magnitudeX *= 0.01f;
+    magnitudeY *= 0.01f;
     s32 randomX = randBetween(0, 1) * 2 - 1;
     s32 randomY = randBetween(0, 1) * 2 - 1;
     f32 oldX = particle->velocityX;
     f32 oldY = particle->velocityY;
-    s32 keepX = oldX > zero ? 1 : -1;
-    s32 keepY = oldY > zero ? 1 : -1;
-    if (oldX == zero && oldY == zero) {
+    s32 keepX = oldX > 0.0f ? 1 : -1;
+    s32 keepY = oldY > 0.0f ? 1 : -1;
+    if (oldX == 0.0f && oldY == 0.0f) {
         particle->velocityX = magnitudeX * (f32)randomX;
         particle->velocityY = magnitudeY * (f32)randomY;
-    } else if (!(oldX != zero && (oldY == zero || randBetween(0, 1) != 0))) {
+    } else if (oldX == 0.0f || (oldY != 0.0f && randBetween(0, 1) == 0)) {
         particle->velocityX = magnitudeX * (f32)randomX;
         particle->velocityY = magnitudeY * (f32)keepY;
     } else {

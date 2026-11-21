@@ -28,7 +28,7 @@ void FUN_003c05e8(s32 value);
 void FUN_00229a3c(s32 a, CommandState *work, s32 b, s32 c, s32 d);
 s32 randRange(s32 range);
 s32 FUN_003cfe14(BtlMainState **block, CommandState *work, s32 value);
-void FUN_00246454(s32 a, CommandState *work, BtlEntry *entry);
+void btlReflectQueueSelectionMarks(s32 a, CommandState *work, BtlEntry *entry);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 s32 battleGetEntryHalfword(s32 id, s32 kind);
 s32 questGetCurrentRecordValue6(void);
@@ -176,7 +176,7 @@ u32 btlCommandTurnEnd(BtlMainState **block, CommandState *work)
         BtlEntry *entry = &(*block)->entries[i];
         if ((entry->flags & 1) != 0 && (entry->flags & 0x40) == 0 && (entry->data.statusFlags & 0x400) != 0) {
             btlSubmitAction(22, entry, 1);
-            FUN_00246454(0, work, entry);
+            btlReflectQueueSelectionMarks(0, work, entry);
             handled = true;
         }
     }

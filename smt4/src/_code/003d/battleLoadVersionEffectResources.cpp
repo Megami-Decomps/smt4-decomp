@@ -4,6 +4,7 @@
 #include "AsdSDK/AsdMemUtil.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include <string.h>
+#include "shard/W6_W6Match7_KeyedRecordStorage.h"
 
 struct VersionEffectNames : EffectNameTable {
     char versionNames[4][0x16]; // 0x108
@@ -28,7 +29,6 @@ static __inline bool nameEquals(const char *name, const char *other)
     return name && !strcmp(name, other);
 }
 
-u32 keyedRecordRegisterName(void *);
 u32 FUN_00249e54(u32, const char *);
 
 void battleLoadVersionEffectResources(VersionEffectLoader *loader)
@@ -60,7 +60,7 @@ void battleLoadVersionEffectResources(VersionEffectLoader *loader)
                 EffectResource *resource = &loader->versionResources[slot];
                 const char *version = resource->version;
                 if (version[0] == 'V' && version[1] == 'E' && version[2] == 'R') {
-                    u32 handle = keyedRecordRegisterName(resource->storage);
+                    u32 handle = keyedRecordRegisterName((const char *)resource->storage);
                     resource->handle = handle;
                     resource->handle = FUN_00249e54(handle, version);
                 }

@@ -15,7 +15,7 @@ int FUN_003a35a4(void);
 int sysPlayVoice(...);
 int FUN_00489480(int);
 int FUN_0048981c(void);
-int FUN_0048d248(...);
+int naviSelectRequestedCategory(...);
 int rectRecRead(int, int, int *, unsigned int **);
 int naviMainGetValue(...);
 int sub68OwnerGetBlock60(...);
@@ -84,7 +84,7 @@ extern int FUN_00167c0c(unsigned int **, int *);
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_00489480. */
 /* Supplied declaration required: FUN_0048981c. */
-/* Supplied declaration required: FUN_0048d248. */
+/* Supplied declaration required: naviSelectRequestedCategory. */
 /* Supplied declaration required: rectRecRead. */
 /* Supplied declaration required: naviMainGetValue. */
 /* Supplied declaration required: sub68OwnerGetBlock60. */
@@ -297,7 +297,7 @@ unsigned int FUN_00488ce8(int param_1)
         if (DAT_005f1a5e != '\0') {
           *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
           temp_v3 = FUN_00492c84(temp_v14);
-          FUN_0048d248(param_1,temp_v3);
+          naviSelectRequestedCategory(param_1,temp_v3);
           sub68OwnerGetBlock60(temp_v14);
           temp_v16 = temp_v7;
           temp_v17 = temp_v7;

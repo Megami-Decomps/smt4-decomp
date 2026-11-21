@@ -91,7 +91,7 @@ int FUN_003f3048(...);
 int flagValueAdd(...);
 int partyAddMoneyClamped(...);
 int bitsAt60Test(...);
-int FUN_004cd0c8(...);
+int unitCollectSkillsLearnedWithin(...);
 int FUN_004cd4b8(...);
 
 int uiSpriteSlideFromSide(...);
@@ -324,7 +324,7 @@ extern int FUN_004cc8d8(unsigned short, unsigned short);
 extern int FUN_004cc9dc(unsigned short, unsigned short, int);
 /* Supplied declaration required: levelGetExpRequirement. */
 /* Supplied declaration required: FUN_004ccc7c. */
-/* Supplied declaration required: FUN_004cd0c8. */
+/* Supplied declaration required: unitCollectSkillsLearnedWithin. */
 /* Supplied declaration required: FUN_004cd238. */
 /* Supplied declaration required: FUN_004cd4b8. */
 /* Supplied declaration required: __aeabi_idivmod. */
@@ -1042,7 +1042,7 @@ LAB_00205528:
                 *(unsigned char *)(temp_v52 + 0x78ba) = 1;
                 temp_v10 = (int)(short)temp_v44;
                 temp_v9 = temp_v8;
-                FUN_004cd0c8(temp_v8,temp_v10,temp_v27 + 0x46b4);
+                unitCollectSkillsLearnedWithin(temp_v8,temp_v10,temp_v27 + 0x46b4);
                 if (temp_v9 != 0) {
                   if (*(char *)(temp_v8 + 0x67) != '\0') {
                     *(unsigned char *)((int)*(char *)(temp_v16 + 0x1c88) + (int)temp_v50) = 1;
@@ -1128,7 +1128,7 @@ LAB_00205528:
               if (temp_v8 != 0) {
                 *(unsigned char *)(temp_v16 + 0x7892) = 1;
                 *(char *)(temp_v27 + 0x442c) = (char)temp_v7;
-                FUN_004cd0c8(temp_v13,(int)(short)temp_v8,temp_v27 + 0x4564);
+                unitCollectSkillsLearnedWithin(temp_v13,(int)(short)temp_v8,temp_v27 + 0x4564);
                 FUN_004cd4b8(temp_v13,(int)(short)temp_v8);
                 *(unsigned short *)(temp_v27 + 0x4490) = 0;
               }

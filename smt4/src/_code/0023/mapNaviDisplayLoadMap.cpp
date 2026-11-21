@@ -1,4 +1,4 @@
-/* NON_MATCHING: clear-loop counter reuse adds one row, and category-center load scheduling/GPR allocation differ; alternate optimization may explain these differences. */
+/* NON_MATCHING: one index serves all three loops (retail reuses the clear loop's spent counter as the category index); only the scheduling of the two centre computations differs (retail interleaves the x and y spans with the category loads). */
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/MapSystemTable.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
@@ -47,12 +47,13 @@ void FUN_0039d69c(MapNaviDisplay* display, s32 map);
 
 void mapNaviDisplayLoadMap(MapNaviDisplay* display, s32 map)
 {
+    s32 i;
     if (display->textureIndex != 0) {
         asdTMTexTableReleaseNode(0x33, display->textureIndex);
         display->textureIndex = 0;
     }
 
-    for (s32 i = 0; i < dataTable2eSub2GetCount(); ++i) {
+    for (i = 0; i < dataTable2eSub2GetCount(); ++i) {
         const MapSystemMapRecord* record = dataTable2eSub2GetRecord(i);
         if (record->mapId == -1) {
             break;
@@ -66,7 +67,7 @@ void mapNaviDisplayLoadMap(MapNaviDisplay* display, s32 map)
     asdTMTexTablePrepareNodeImage(0x33, display->textureIndex);
     asdTMTexTableGetNodeTexture(0x33, display->textureIndex)->unk3c = 1;
 
-    for (s32 i = 0; i < 32; ++i) {
+    for (i = 0; i < 32; ++i) {
         display->iconPositions[i].x = 0;
         display->iconPositions[i].y = 0;
         display->centers[i].x = 0;
@@ -76,15 +77,13 @@ void mapNaviDisplayLoadMap(MapNaviDisplay* display, s32 map)
     }
 
     MapNaviTable table;
-    for (s32 i = 0; i < MapNaviTable_GetCategoryCount(&table); ++i) {
+    for (i = 0; i < MapNaviTable_GetCategoryCount(&table); ++i) {
         const MapNaviCategoryRecord* record = MapNaviTable_GetCategoryRecord(&table, i);
         if (record->map == map) {
             display->iconPositions[record->category].x = record->originX + record->offsetX;
             display->iconPositions[record->category].y = record->originY + record->offsetY;
-            const u32 width = (record->maxX - record->minX) * 12;
-            const s32 height = (record->maxY - record->minY) * 12;
-            display->centers[record->category].x = record->originX + width / 2;
-            display->centers[record->category].y = record->originY + height / 2;
+            display->centers[record->category].x = record->originX + (record->maxX - record->minX) * 12 / 2;
+            display->centers[record->category].y = record->originY + (record->maxY - record->minY) * 12 / 2;
             display->gridOrigins[record->category].x = record->minX;
             display->gridOrigins[record->category].y = record->minY;
         }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: ring pointer/register allocation and secondary-ring selection instructions differ. */
+/* NON_MATCHING: only the entry differs: retail loads g_asdGxPresets into r0 and copies it to r4 (primary), reading the first index through r0; the build loads it into r4 and copies it to r0. */
 #include "gfx/AsdGxPresetRing.h"
 
 extern "C" {
@@ -18,8 +18,10 @@ void asdGxSwapDisplayBuffers(s32 refresh, s32 secondaryEnabled)
     asdGfxSetMode(0x400);
     asdGfxBindTarget(value);
     u32 previous = asdGxPresetPrevious(secondaryPreset);
-    AsdGxDisplayBuffers* secondary = secondaryEnabled ? secondaryPreset : primary;
-    value = secondary->buffers[previous];
+    if (secondaryEnabled)
+        value = secondaryPreset->buffers[previous];
+    else
+        value = primary->buffers[previous];
     asdGfxSetMode(0x410);
     asdGfxBindTarget(value);
     value = output->buffers[asdGxPresetPrevious(output)];

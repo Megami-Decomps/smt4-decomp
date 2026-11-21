@@ -1,4 +1,4 @@
-/* NON_MATCHING: flag booleanization, width expression and draw-argument scheduling differ. */
+/* NON_MATCHING: the sign test now matches; retail sums the caption width as ((label + number) + 13) + sign and keeps left + 13 + sign in a saved register across the label lookup, where armcc folds the 13 separately; draw-argument scheduling differs. */
 #include "shard/Shard0033.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "text/TextDraw.h"
@@ -36,10 +36,9 @@ void FUN_0016631c(MenuState *menu, const TextureTableEntryIV *layout)
     s32 numberWidth = 0;
     s32 signWidth = 0;
     bool showPlus = false;
-    if (caption->showSign) {
-        showPlus = caption->value >= 0;
-        if (showPlus)
-            signWidth = asdTMTexTableEntryAt(8, 0x1A3)->placement->width + 12;
+    if (caption->showSign && caption->value >= 0) {
+        showPlus = true;
+        signWidth = asdTMTexTableEntryAt(8, 0x1A3)->placement->width + 12;
     }
     if (caption->value != 0) {
         labelWidth += asdTMTexTableEntryAt(8, 0x19C)->placement->width;

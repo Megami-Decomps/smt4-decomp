@@ -21,9 +21,9 @@ u32 FUN_00312730(void)
         if ((flags & 0x1) && (flags & 0x80) && (flags & 0x400) &&
             (!(flags & 0x10) || !(action->stateFlags & 2))) {
             if (!show) {
-                FUN_002451c4(0, 0, reinterpret_cast<u32>(action), 0, 20, 0);
+                btlReflectCreateKind22(0, 0, reinterpret_cast<u32>(action), 0, 20, 0);
             } else {
-                FUN_002451c4(0, 0, reinterpret_cast<u32>(action), 0xff, 20, 0);
+                btlReflectCreateKind22(0, 0, reinterpret_cast<u32>(action), 0xff, 20, 0);
             }
         }
     }

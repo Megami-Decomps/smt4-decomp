@@ -1,4 +1,4 @@
-/* NON_MATCHING: the two list-position counters use exchanged registers; resource compare order matches. */
+/* NON_MATCHING: only the two findReference walks after the index compare differ: retail keeps the resource in r1 and the flags in r0 (r0/r2 in the second walk), the build exchanges them. */
 #include "shard/W5_W5Match2_LinkedItems.h"
 #include "AsdSDK/Source/Gfx/Effect/effPartsBlock.h"
 #include "shard/W6_W6Match6_CompactSortRecord.h"
@@ -12,11 +12,13 @@ void linkedItemsRedirectToReplacement(LinkedItems *items, LinkedItem *item, Link
 // Position of `item` in the list (0 when it is not linked).
 static u32 linkedIndexOf(LinkedItems *items, LinkedItem *item)
 {
+    LinkedItem *current = items->head;
     u32 index = 0;
-    for (LinkedItem *current = items->head; current != NULL; current = current->next) {
+    while (current != NULL) {
         if (current == item)
             return index;
         index++;
+        current = current->next;
     }
     return 0;
 }

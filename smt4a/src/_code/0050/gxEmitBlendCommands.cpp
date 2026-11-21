@@ -1,10 +1,10 @@
-/* NON_MATCHING: retail 48 vs built 49 rows; blend-state loads/stores and output-cursor registers differ. */
+/* NON_MATCHING: the words go through the cursor as retail's post-indexed stores do; armcc merges the three equation bytes into one word load (retail loads them one by one, as it does not for the colour), which costs four extra saved registers. */
 #include "common.h"
 
 extern "C" {
 u32 *gxEmitFramebufferAccessMasks(const void *, u32 *, s32);
 
-u32 *FUN_00500d38(const void *blendState, u32 *commands, s32 appendAccess)
+u32 *gxEmitBlendCommands(const void *blendState, u32 *commands, s32 appendAccess)
 {
     struct FramebufferMasksView {
         u8 unk00[0x7C];
@@ -22,27 +22,25 @@ u32 *FUN_00500d38(const void *blendState, u32 *commands, s32 appendAccess)
         FramebufferMasksView *owner;
     };
     const BlendCommandStateView *state = static_cast<const BlendCommandStateView *>(blendState);
-    commands[0] = 0xE40100;
-    commands[1] = 0x30100;
-    u32 *end;
+    *commands++ = 0xE40100;
     if (state->enabled) {
-        commands[2] = state->equation[0] | (state->equation[1] << 8) |
+        *commands++ = 0x30100;
+        *commands++ = state->equation[0] | (state->equation[1] << 8) |
                       (state->equation[2] << 16) | (state->destination << 20) |
                       (static_cast<u32>(state->source) << 24) | (static_cast<u32>(state->alpha) << 28);
-        commands[3] = 0xF0101;
-        commands[4] = 6;
-        commands[5] = 0xF0102;
-        commands[6] = state->color[0] | (state->color[1] << 8) |
+        *commands++ = 0xF0101;
+        *commands++ = 6;
+        *commands++ = 0xF0102;
+        *commands++ = state->color[0] | (state->color[1] << 8) |
                       (state->color[2] << 16) | (static_cast<u32>(state->colorAlpha) << 24);
-        commands[7] = 0xF0103;
-        end = commands + 8;
+        *commands++ = 0xF0103;
     } else {
-        commands[2] = 0x1010000;
-        commands[3] = 0xF0101;
-        end = commands + 4;
+        *commands++ = 0x30100;
+        *commands++ = 0x1010000;
+        *commands++ = 0xF0101;
     }
     if (appendAccess)
-        return gxEmitFramebufferAccessMasks(state->owner->access, end, 1);
-    return end;
+        return gxEmitFramebufferAccessMasks(state->owner->access, commands, 1);
+    return commands;
 }
 }

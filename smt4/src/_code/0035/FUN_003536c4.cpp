@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_003df37c(int, unsigned int *);
-int FUN_003df3b4(int, unsigned int *, unsigned int);
+int tokenRegistryCopyEntries(int, unsigned int *, unsigned int);
 int FUN_003df478(int, unsigned char [4], unsigned int *, int, unsigned int);
 
 /* stack frame of param_3: 5 slot(s), 14 byte(s) */
@@ -21,7 +21,7 @@ extern unsigned int DAT_0044e5f0; /* 0x44e5f0 */
 extern unsigned char DAT_004d4000; /* 0x4d4000 */
 
 /* Supplied declaration required: FUN_003df37c. */
-/* Supplied declaration required: FUN_003df3b4. */
+/* Supplied declaration required: tokenRegistryCopyEntries. */
 /* Supplied declaration required: FUN_003df478. */
 
 
@@ -46,7 +46,7 @@ void FUN_003536c4(int param_1,int param_2,unsigned int param_3)
       temp_v2 = 0;
       do {
         temp_v0 = param_1;
-        FUN_003df3b4(param_1,&temp_v5,param_2 + temp_v2 * 8);
+        tokenRegistryCopyEntries(param_1,&temp_v5,param_2 + temp_v2 * 8);
         if (temp_v0 < 0) {
           return;
         }

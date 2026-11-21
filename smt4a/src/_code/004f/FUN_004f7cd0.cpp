@@ -3,6 +3,7 @@
 #include "battle/btlEffect.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 #include <string.h>
+#include "shard/W6_W6Match7_KeyedRecordStorage.h"
 
 namespace {
 /* The version slots are beyond the canonical effect owner's shared prefix. */
@@ -20,7 +21,6 @@ u32 libc_strlen(const char *text);
 s32 libc_strncmp(const char *first, const char *second, u32 bytes);
 void sysMemClear(void *memory, u32 bytes);
 char *libc_strcpy(char *destination, const char *source);
-u32 keyedRecordRegisterName(const char *name);
 u32 FUN_003478dc(u32 key, const void *data);
 
 static __inline bool nameHasPrefix(const char *name, const char *prefix)

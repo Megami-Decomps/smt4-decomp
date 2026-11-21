@@ -3,9 +3,9 @@
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
-void FUN_004fe900(u32 owner, BattleUnitSlotState *slot, BattleRosterRecordA *record, u32 value,
+void btlReflectQueueTransitionPair(u32 owner, BattleUnitSlotState *slot, BattleRosterRecordA *record, u32 value,
     s32 firstDuration, s32 secondDuration, s32 mode, s32 enabled);
-void FUN_004fd268(u32 owner, BattleUnitSlotState *slot, BattleRosterRecordA *record, u32 value,
+void btlReflectCreateKind2b(u32 owner, BattleUnitSlotState *slot, BattleRosterRecordA *record, u32 value,
     s32 duration, s32 enabled);
 }
 
@@ -23,7 +23,7 @@ extern "C" u32 FUN_004e753c(BattleUnitRecordState *work, BattleUnitSlotState *sl
             for (s32 i = 4; i < 54; ++i) {
                 BattleRosterRecordA *record = &work->battle->roster[i];
                 if (rosterUsesTimedEffect(record)) {
-                    FUN_004fe900(0, slot, record, 0, 10, 10, 2, 1);
+                    btlReflectQueueTransitionPair(0, slot, record, 0, 10, 10, 2, 1);
                 }
             }
         }
@@ -35,14 +35,14 @@ extern "C" u32 FUN_004e753c(BattleUnitRecordState *work, BattleUnitSlotState *sl
             for (s32 i = 4; i < 54; ++i) {
                 BattleRosterRecordA *record = &work->battle->roster[i];
                 if (rosterUsesTimedEffect(record)) {
-                    FUN_004fd268(0, slot, record, 0, 10, 1);
+                    btlReflectCreateKind2b(0, slot, record, 0, 10, 1);
                 }
             }
         } else if (slot->effectTiming.frame == 30) {
             for (s32 i = 4; i < 54; ++i) {
                 BattleRosterRecordA *record = &work->battle->roster[i];
                 if (rosterUsesTimedEffect(record)) {
-                    FUN_004fd268(0, slot, record, record->render.value70, 5, 1);
+                    btlReflectCreateKind2b(0, slot, record, record->render.value70, 5, 1);
                 }
             }
         }

@@ -47,7 +47,7 @@ int btlAdjustPropertyAndQueueAction(...);
 unsigned int btlReflectQueuePairedParameters(int actor, unsigned int flags, unsigned int value,
                          unsigned int parameter, unsigned int target, unsigned int first,
                          unsigned int second, unsigned int third, unsigned int fourth);
-int FUN_004fe618(...);
+int btlReflectQueueDepthOverlays(...);
 void btlReflectInitKind3(int first, int second, unsigned int flags, unsigned int value,
                   unsigned int option, unsigned int auxiliary, unsigned int target);
 int btlReflectSetValuePair(...);
@@ -92,7 +92,7 @@ int FUN_004e8454(int *);
 int FUN_004eaa68(...);
 int FUN_004ee5b4(int *, unsigned int *);
 int btlQueueDuplicateSuppressedAction(...);
-int FUN_004fcde0(...);
+int btlReflectQueueSelectionMarks(...);
 int FUN_004fda78(...);
 int FUN_004feecc(...);
 int FUN_004fb5a8(...);
@@ -252,14 +252,14 @@ extern unsigned int FUN_004fa030(int);
 /* Supplied declaration required: btlQueueKeyedScalarReflectAction. */
 /* Supplied declaration required: FUN_004fbeac. */
 /* Supplied declaration required: btlAdjustPropertyAndQueueAction. */
-/* Supplied declaration required: FUN_004fcde0. */
+/* Supplied declaration required: btlReflectQueueSelectionMarks. */
 /* Supplied declaration required: btlReflectCreateKind15. */
 /* Supplied declaration required: FUN_004fd508. */
 /* Supplied declaration required: btlReflectCreateKind34. */
 /* Supplied declaration required: FUN_004fda78. */
 /* Supplied declaration required: btlReflectQueueValueAction. */
 /* Supplied declaration required: btlQueueMessageTableReflectAction. */
-/* Supplied declaration required: FUN_004fe618. */
+/* Supplied declaration required: btlReflectQueueDepthOverlays. */
 /* Supplied declaration required: btlReflectSetValuePair. */
 /* Supplied declaration required: FUN_004feecc. */
 /* Supplied declaration required: btlActionReflectSetStateArg. */
@@ -416,7 +416,7 @@ void FUN_004eb928(int *param_1,unsigned int param_2)
           }
           temp_v5 = temp_v5 + 1;
         } while (temp_v5 < 3);
-        FUN_004fcde0(0,puVar25,puVar29);
+        btlReflectQueueSelectionMarks(0,puVar25,puVar29);
       }
 LAB_004ebd00:
       temp_v20 = temp_v20 + 1;
@@ -597,7 +597,7 @@ LAB_004ebd00:
           *(int *)(temp_v20 + 0x14) = temp_v10;
         }
         else if ((*puVar20 & DAT_00571148) != 0 || (puVar20[1] & DAT_0057114c) != 0) {
-          FUN_004fcde0(temp_v10 + temp_v14,puVar25,puVar20);
+          btlReflectQueueSelectionMarks(temp_v10 + temp_v14,puVar25,puVar20);
         }
         iStack_50 = (int)(char)((char)iStack_50 + '\x01');
         break;
@@ -612,7 +612,7 @@ LAB_004ebd00:
         temp_v2 = *psVar17;
         temp_v13 = *piStack_30;
         btlMainFindEntryByListedId(temp_v13,(int)temp_v2);
-        FUN_004fcde0(temp_v10 + temp_v5 + 0x28,puVar25,temp_v13);
+        btlReflectQueueSelectionMarks(temp_v10 + temp_v5 + 0x28,puVar25,temp_v13);
         btlCommandExtendAnimationWindow((BtlActorRef*)piVar16,(BtlCommand*)puVar25,(int)temp_v2,temp_v10 + temp_v5,0x1e,0x1e);
         break;
       case 0xc:
@@ -1155,7 +1155,7 @@ code_r0x004ef7f0:
     else {
 code_r0x004f054c:
       if ((temp_v3 != 0) && ((*puVar25 & 0x1080) == 0)) {
-        FUN_004fe618(0,puVar29,5);
+        btlReflectQueueDepthOverlays(0,puVar29,5);
       }
     }
     temp_v18 = 0;

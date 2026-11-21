@@ -5963,3 +5963,14 @@
 00108b6c touchInputUpdate inferred updates the touch-panel state (current/previous sample, hold count, repeat); twin of smt4a 0x13d33c
 002402c4 fileExistsPatchOrRom inferred tells whether a named file opens from patch:/ or else rom:/
 0026b738 playerHasSkill inferred whether the player knows skill id (scan of the eight skill slots); twin of smt4a 0x3df4a4
+002451c4 btlReflectCreateKind22 inferred queues a kind-0x22 reflect action (target, payload, parameter; immediate unless enabled); sibling of btlReflectCreateKind21, Apocalypse's kind-0x2c btlReflectQueueKind44
+003de60c btlReflectQueueDepthOverlays inferred queues a kind-0x22 overlay for each other participating record in front of the reference (by depth) and a kind-0x21 one for those behind; twin of smt4a 0x4fe618
+0023c368 btlReflectQueueTransitionPair inferred queues a start/end action pair (kinds 0x21 and 0x22) on one target; twin of smt4a 0x4fe900
+00246454 btlReflectQueueSelectionMarks inferred queues a kind-0x22 mark on every active record targeting the unit's selected combatant, then marks the unit and queues its kind-0x24 action; twin of smt4a 0x4fcde0
+003de9e4 btlReflectQueueFlaggedRecords inferred queues a kind-0x22 action (parameter 0xff) for every action record 67-108 with status bit 0x8000
+00337c20 btlClearEntryStatusModifiers inferred clears the status modifier words of every active unit's battle entry (mode 0: entries without 0x10/0x20, mode 1: with 0x10, else all)
+003df3b4 tokenRegistryCopyEntries inferred looks up each key in the token's registry table and copies the matching entries out (0xC8813890 when one is missing); twin of smt4a 0x50028c
+003e2264 nw_gfx_ShaderBinaryInfo_BuildCommonCommand inferred NintendoWare gfx: writes the shader's common GPU commands (geometry-pass switch, each pass's reset and register block) through SafeBuffer_Write and returns the bytes written; placed among nw_gfx_ShaderBinaryInfo_SearchUniformIndex/BuildConstRegCommand/BuildShaderProgramCommand; twin of smt4a 0x503d9c
+00335950 btlTransitionStep inferred battle transition state machine: loads and runs the transition scripts and effect textures, then hands off or reports completion
+003dbc1c btlEffectResolveNames inferred resolves the four effect names to effect ids (skips empty/special names, copies reference slots, registers VER records); twin of smt4a 0x4f8790
+001fc0a8 engineRecordsRankNearest inferred ranks the three nearest active eligible records and publishes their scene positions; twin of smt4a 0x2ba170

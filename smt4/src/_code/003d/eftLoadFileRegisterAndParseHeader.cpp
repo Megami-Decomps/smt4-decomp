@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/W6_W6Match7_KeyedRecordStorage.h"
 
 struct EffectFileHeader {
     u8 recordIndex; // 0x00
@@ -12,7 +13,6 @@ struct EffectFileOwner {
 };
 
 extern "C" {
-u32 keyedRecordRegisterName(const char *name);
 u32 FUN_00249e54(u32 index, char *data);
 u32 textureCachePollReady(void);
 

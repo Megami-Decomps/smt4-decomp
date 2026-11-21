@@ -34,7 +34,7 @@ void btlReflectQueueKind44(s32 actor, u32 flags, u32 target, u32 parameter, u32 
 extern "C" {
 #endif
 
-void FUN_004fd268(s32 id, u32 argument, u32 target, u32 option, u32 value, s32 enabled);
+void btlReflectCreateKind2b(s32 id, u32 argument, u32 target, u32 option, u32 value, s32 enabled);
 
 #ifdef __cplusplus
 }

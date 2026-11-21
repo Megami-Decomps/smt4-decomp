@@ -1,4 +1,4 @@
-/* NON_MATCHING: block layout and register allocation differ - retail shares one `return 0` epilogue between the states, finds the free slot inside the entry scan with the slot index in r0, and reuses the g_mapObj pointer loaded for the entry test. */
+/* NON_MATCHING: retail tests the entry scan twice (count > index before the loop, index < count at its foot) where this while loop jumps back to one test, so the entry-index load is predicated into the dispatch; state 11 shares state 12's return-0 epilogue in retail. */
 #include "common.h"
 #include <stdio.h>
 
@@ -76,24 +76,22 @@ u32 FUN_0021e4bc(void)
     switch (g_mapObj->state) {
     case 10: {
         s32 index = g_mapObj->entryIndex;
-        if (dataTableGetRecordFortyFive() > index) {
-            do {
-                MapObjEntry *entry = mapObjGetCombinedEntry(index);
-                if (entry->mapId >= 0) {
-                    MapObjWork *work = g_mapObj;
-                    if (entry->mapId == work->mapId && entry->areaId == work->areaId && entry->kind < 100) {
-                        work->entryIndex = index;
-                        work->slot = findFreeSlot(work);
-                        if (work->slot == -1) {
-                            work->state = 99;
-                            return 1;
-                        }
-                        work->state = 11;
-                        return 0;
+        while (index < dataTableGetRecordFortyFive()) {
+            MapObjEntry *entry = mapObjGetCombinedEntry(index);
+            if (entry->mapId >= 0) {
+                MapObjWork *work = g_mapObj;
+                if (entry->mapId == work->mapId && entry->areaId == work->areaId && entry->kind < 100) {
+                    work->entryIndex = index;
+                    work->slot = findFreeSlot(work);
+                    if (work->slot == -1) {
+                        work->state = 99;
+                        return 1;
                     }
+                    work->state = 11;
+                    return 0;
                 }
-                index++;
-            } while (index < dataTableGetRecordFortyFive());
+            }
+            index++;
         }
         g_mapObj->state = 99;
         return 1;

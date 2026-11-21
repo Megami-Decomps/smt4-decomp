@@ -1,5 +1,6 @@
 #include "common.h"
 #include "code/Code004f_Smt4a.h"
+#include "shard/W6_W6Match7_KeyedRecordStorage.h"
 
 struct NameSlot {
     u8 code;            // 0x00
@@ -15,7 +16,6 @@ struct NameOwner {
 
 extern "C" {
 
-u8 keyedRecordRegisterName(void *record);
 u8 FUN_003478dc(u32 code, const char *name);
 void textureCachePollReady(void);
 
@@ -26,7 +26,7 @@ u32 FUN_004f89e8(NameOwner *owner)
         NameSlot *slot = &owner->slots[i];
         const char *name = slot->name;
         if (name[0] == 'V' && name[1] == 'E' && name[2] == 'R') {
-            slot->code = keyedRecordRegisterName(slot->record);
+            slot->code = keyedRecordRegisterName((const char *)slot->record);
             slot->code = FUN_003478dc(slot->code, name);
         }
     }

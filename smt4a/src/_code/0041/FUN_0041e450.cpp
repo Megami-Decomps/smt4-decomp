@@ -1,4 +1,4 @@
-/* NON_MATCHING: selection stores combine and the visible-row count is cached rather than reloaded. */
+/* NON_MATCHING: the row sprites are 0x44-byte records from 0x664 (sprite ids at +0x3C); retail stores `previous` before reading first/scroll (ours pairs both stores in one stm), materialises the row test as a 0/1 flag, and groups the stacked call arguments differently. */
 #include "saveLoadUI/SaveLoadControllerA.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -13,8 +13,8 @@ s32 recordGetModeForId(s32 id);
 void FUN_0041e450(SaveLoadControllerA *controller)
 {
     struct RowSprites {
+        u8 unk00[0x3c];
         u32 first, second;
-        u8 unk08[0x3c];
     };
     // The row sprites extend beyond the shared save-load controller prefix.
     struct ScrollView {
@@ -32,11 +32,11 @@ void FUN_0041e450(SaveLoadControllerA *controller)
         s16 left, top, width, slotId;
         u8 unk448[4];
         u8 flags[3];
-        u8 unk44f[0x251];
+        u8 unk44f[0x215];
         RowSprites rows[1];
     };
     typedef char ScrollViewLayout[offsetof(ScrollView, control) == 0x3d8 &&
-        offsetof(ScrollView, rows) == 0x6a0 ? 1 : -1];
+        offsetof(ScrollView, rows) == 0x664 ? 1 : -1];
     ScrollView *view = reinterpret_cast<ScrollView *>(controller);
     TextureTableEntryIV *sprite = asdTMTexTableEntryAt(0x2b, 0xd);
     if (uiScrollHandleActionsOrTouch(view->control, sprite, &view->limits, view->width,
@@ -46,12 +46,13 @@ void FUN_0041e450(SaveLoadControllerA *controller)
         view->previous = view->selected;
         view->selected = view->row + view->scroll + view->first;
         for (s32 index = 0; index < view->count; ++index) {
+            RowSprites *row = &view->rows[index];
             if (view->scroll + view->first + index >= 1) {
-                view->rows[index].first = 0x86;
-                view->rows[index].second = 0x98;
+                row->first = 0x86;
+                row->second = 0x98;
             } else {
-                view->rows[index].first = 0x85;
-                view->rows[index].second = 0x97;
+                row->first = 0x85;
+                row->second = 0x97;
             }
         }
     }

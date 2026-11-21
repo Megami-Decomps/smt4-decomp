@@ -16,7 +16,7 @@ struct EntryRecordView {
 }
 
 extern "C" s32 FUN_003df37c(s32 handle, EntryCountView* countInfo);
-extern "C" s32 FUN_003df3b4(s32 handle, EntryRecordView* record, u32 selector, u32 mode);
+extern "C" s32 tokenRegistryCopyEntries(s32 handle, EntryRecordView* record, u32 selector, u32 mode);
 
 // Checks each reported record's 16-bit value, propagating error statuses.
 extern "C" s32 FUN_0035361c(s32 handle, u32 selector, u32 expectedValue)
@@ -30,7 +30,7 @@ extern "C" s32 FUN_0035361c(s32 handle, u32 selector, u32 expectedValue)
     }
 
     for (u32 index = 0; index < countInfo.count; ++index) {
-        result = FUN_003df3b4(handle, &record, selector, 1);
+        result = tokenRegistryCopyEntries(handle, &record, selector, 1);
         if (nnResultIsFailure(result)) {
             return result;
         }

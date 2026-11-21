@@ -38,7 +38,7 @@ void uiSpriteBankApplyPreset(void *bank, s32 preset);
 void FUN_002d22c0(s32 value);
 void naviSwitchTextureSetForMap(NaviMenu *menu, u32 map);
 void naviRefreshBackgroundAndFeedback(NaviMenu *menu);
-void FUN_0048d248(NaviMenu *menu, u32 value);
+void naviSelectRequestedCategory(NaviMenu *menu, u32 value);
 void naviMainSetCurrentMap(void *state, u32 map);
 u32 naviMainGetRequestedMap(void *state);
 void pointConvertToFloat(void *point, s32 x, s32 y);
@@ -64,7 +64,7 @@ void _ZN9Obj53230012FUN_0048bad0Ev(NaviMenu *menu)
             FUN_00492ac8(reinterpret_cast<u32>(menu->mapState), 0);
             naviSwitchTextureSetForMap(menu, map);
         }
-        FUN_0048d248(menu, FUN_00492c84(menu->mapState));
+        naviSelectRequestedCategory(menu, FUN_00492c84(menu->mapState));
         uiSpriteSetImageKeyframe(&menu->imageSpriteA, 3, 0);
         uiSpriteSetImageKeyframe((UiSpriteState *)menu->imageSpriteB, 5, 0);
         naviRefreshBackgroundAndFeedback(menu);

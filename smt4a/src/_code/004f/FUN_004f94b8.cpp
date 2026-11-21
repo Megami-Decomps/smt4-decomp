@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/W6_W6Match7_KeyedRecordStorage.h"
 
 struct VersionLoadRequest {
     u8 recordId; // 0x00
@@ -12,7 +13,6 @@ struct VersionLoadState {
 };
 
 extern "C" {
-u32 keyedRecordRegisterName(const char *);
 u32 FUN_003478dc(u32, const char *);
 u32 textureCachePollReady(void);
 

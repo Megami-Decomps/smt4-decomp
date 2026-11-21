@@ -1,7 +1,8 @@
-/* NON_MATCHING: retail keeps &formatted (sp+128) in saved sl for the whole loop and spills the inlined reference search's `name` to the stack slot at sp+128 (reused after formatted); ours keeps name in fp and recomputes the address (147 rows against 150). */
+/* NON_MATCHING: retail hoists &formatted into sl before the loop and spills the inlined reference search's name into formatted's stack slot (sp+128); ours keeps name in fp and recomputes the address (one instruction short). */
 #include "common.h"
 #include "runtime/Stdio.h"
 #include <string.h>
+#include "shard/W6_W6Match7_KeyedRecordStorage.h"
 
 /* One effect slot of the battle effect set (0x8C bytes). */
 struct BtlEffectEntry {
@@ -32,13 +33,18 @@ s32 libc_strlen(const char *text);
 s32 libc_strncmp(const char *first, const char *second, s32 count);
 void libc_strcpy(char *destination, const char *source);
 void sysMemClear(void *memory, u32 size);
-u32 keyedRecordRegisterName(u8 *key);
 u32 FUN_003478dc(u32 value, const char *script);
 
-/* True when `name` is set and equals `text`. */
-static inline bool nameIs(const char *name, const char *text)
+/* True when `name` is set and starts with battle effect name `kind`. */
+static __inline bool nameStartsWithEffect(const char *name, s32 kind)
 {
-    return name != NULL && strcmp(name, text) == 0;
+    return name != NULL && libc_strncmp(name, g_btlEffect[kind], libc_strlen(g_btlEffect[kind])) == 0;
+}
+
+/* True when `name` is set and equals battle effect name `kind`. */
+static __inline bool nameIsEffect(const char *name, s32 kind)
+{
+    return name != NULL && strcmp(name, g_btlEffect[kind]) == 0;
 }
 
 /* Index of the reference effect whose name starts `name`, or -1. */
@@ -58,7 +64,7 @@ static s32 findReferenceEffect(const char *name)
 
 /* Resolves the four effect names of the battle effect set: a name that is not a plain effect file
  * takes the id of the matching reference effect, or a VER script name is registered as a key. */
-void FUN_004f8790(BtlEffectWork *work)
+void btlEffectResolveNames(BtlEffectWork *work)
 {
     char path[128];
     char formatted[128];
@@ -76,16 +82,16 @@ void FUN_004f8790(BtlEffectWork *work)
         if (libc_strlen(name) == 0 || strcmp(name, "0") == 0 || strcmp(DAT_0052853c, name) == 0) {
             continue;
         }
-        if (name != NULL && libc_strncmp(name, g_btlEffect[0], libc_strlen(g_btlEffect[0])) == 0) {
+        if (nameStartsWithEffect(name, 0)) {
             continue;
         }
-        if (nameIs(name, g_btlEffect[4])) {
+        if (nameIsEffect(name, 4)) {
             continue;
         }
-        if (name != NULL && libc_strncmp(name, g_btlEffect[3], libc_strlen(g_btlEffect[3])) == 0) {
+        if (nameStartsWithEffect(name, 3)) {
             continue;
         }
-        if (nameIs(name, g_btlEffect[5])) {
+        if (nameIsEffect(name, 5)) {
             continue;
         }
         sysMemClear(path, 0x80);
@@ -103,7 +109,7 @@ void FUN_004f8790(BtlEffectWork *work)
         entry = &work->active[i];
         script = entry->script;
         if (script[0] == 'V' && script[1] == 'E' && script[2] == 'R') {
-            entry->id = keyedRecordRegisterName(entry->key);
+            entry->id = keyedRecordRegisterName((const char *)entry->key);
             entry->id = FUN_003478dc(entry->id, script);
         }
     }

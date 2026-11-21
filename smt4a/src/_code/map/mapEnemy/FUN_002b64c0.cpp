@@ -11,7 +11,7 @@
 extern "C" {
 extern EnemyExtraModelSource DAT_00582204[];
 void *asdMemoryAllocTraced(u32, const char *, u32);
-s32 FUN_004bc2dc(s32 kind, s32 flag);
+s32 encountPickWeightedGroup(s32 kind, s32 flag);
 }
 
 struct ModelFlags {
@@ -55,7 +55,7 @@ extern "C" s32 FUN_002b64c0(s32 owner, s32 kind, s32 group)
             if (entry->owner == -1) {
                 entry->owner = owner;
                 for (s32 j = 0; j < 16; j++) {
-                    entry->encounterIds[j] = FUN_004bc2dc(kind, 0);
+                    entry->encounterIds[j] = encountPickWeightedGroup(kind, 0);
                     entry->enemyIds[j] = dataSelectPrioritizedCandidate(entry->encounterIds[j]);
                     u32 modelSlot = DAT_005806e0[entry->enemyIds[j]];
                     entry->kinds[j] = modelSlot;
@@ -75,7 +75,7 @@ extern "C" s32 FUN_002b64c0(s32 owner, s32 kind, s32 group)
         }
         if (reservation->owner == -1) {
             reservation->owner = owner;
-            reservation->encounterId = FUN_004bc2dc(kind, 0);
+            reservation->encounterId = encountPickWeightedGroup(kind, 0);
             reservation->enemyId = dataSelectPrioritizedCandidate(reservation->encounterId);
             u32 modelSlot = DAT_005806e0[reservation->enemyId];
             reservation->kind = modelSlot;

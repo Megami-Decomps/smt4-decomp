@@ -20,7 +20,7 @@ int eventQueueAddUnique(...);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void);
 int FUN_002941c8(int *, int);
-int FUN_002ba170(void);
+int engineRecordsRankNearest(void);
 int libc_strcpy(unsigned char *, int);
 int FUN_003146ac(int, int, int);
 int FUN_0033abb4(void);
@@ -115,7 +115,7 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_002941c8. */
 extern int mapDepartIsRunning(void);
-/* Supplied declaration required: FUN_002ba170. */
+/* Supplied declaration required: engineRecordsRankNearest. */
 /* Supplied declaration required: libc_strcpy. */
 extern int lmapSceneGetUnk0(void);
 /* Supplied declaration required: FUN_003146ac. */
@@ -195,7 +195,7 @@ unsigned int FUN_00249dec(void)
   
   temp_v10 = 0;
   temp_v44 = (int)gameFlagsGetBlock();
-  FUN_002ba170();
+  engineRecordsRankNearest();
   temp_v9 = 0;
   temp_v7 = 0;
   do {

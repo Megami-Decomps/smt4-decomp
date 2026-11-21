@@ -19,7 +19,7 @@ int FUN_004f41b0(int, int, int);
 int btlPollVersionedEffectTexture(void);
 int effectRequestByName(...);
 int btlQueueDuplicateSuppressedAction(...);
-int FUN_004fd268(...);
+int btlReflectCreateKind2b(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int btlQueueMessageTableReflectAction(...);
 
 /* stack frame of param_3: 4 slot(s), 16 byte(s) */
@@ -60,7 +60,7 @@ extern int chainCountIdUnflagged(unsigned int, unsigned int *);
 /* Supplied declaration required: btlPollVersionedEffectTexture. */
 /* Supplied declaration required: effectRequestByName. */
 /* Supplied declaration required: btlQueueDuplicateSuppressedAction. */
-/* Supplied declaration required: FUN_004fd268. */
+/* Supplied declaration required: btlReflectCreateKind2b. */
 /* Supplied declaration required: btlQueueMessageTableReflectAction. */
 
 
@@ -148,7 +148,7 @@ LAB_003e1f28:
         do {
           temp_v0 = *(int *)(param_2 + 0x1ed4) + temp_v7 * 0x1d0;
           if ((*(unsigned int *)(temp_v0 + 0x50) & 1) != 0 && (*(unsigned int *)(temp_v0 + 0x50) & 2) != 0) {
-            FUN_004fd268((int)(short)piVar3[3],param_1,temp_v0,*(unsigned int *)(temp_v0 + 0x70),
+            btlReflectCreateKind2b((int)(short)piVar3[3],param_1,temp_v0,*(unsigned int *)(temp_v0 + 0x70),
                          (int)*(short *)((int)piVar3 + 0xe),1);
           }
           temp_v7 = temp_v7 + 1;
@@ -198,7 +198,7 @@ LAB_003e1f28:
       temp_v0 = *(int *)(param_2 + 0x1ed4) + temp_v7 * 0x1d0;
       temp_v5 = *(unsigned int *)(temp_v0 + 0x50);
       if ((temp_v5 & 1) != 0 && (temp_v5 & 2) != 0) {
-        FUN_004fd268(0,param_1,temp_v0,0,0,1);
+        btlReflectCreateKind2b(0,param_1,temp_v0,0,0,1);
       }
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 0x36);

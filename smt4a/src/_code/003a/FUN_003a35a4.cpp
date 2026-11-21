@@ -9,7 +9,7 @@ const u8* gameFlagsGetWord1590Ptr(u32);
 const NaviDestinationRecord* dataTableGetEntry49(u8);
 void pair20638Set(NaviTransitionState*, s32, s32, s32);
 void menuEnterState11(NaviTransitionState*);
-void FUN_0048d248(NaviTransitionState*, s32);
+void naviSelectRequestedCategory(NaviTransitionState*, s32);
 
 void FUN_003a35a4(void)
 {
@@ -27,7 +27,7 @@ void FUN_003a35a4(void)
         menuEnterState11(&main->transition);
     } else {
         g_gameState.naviMapPending = 1;
-        FUN_0048d248(&main->transition, destination->unk32);
+        naviSelectRequestedCategory(&main->transition, destination->unk32);
     }
 }
 }

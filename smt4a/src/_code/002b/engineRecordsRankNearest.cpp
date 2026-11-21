@@ -1,4 +1,4 @@
-/* NON_MATCHING: nearest-index/constant register allocation and selected-record base addressing differ. */
+/* NON_MATCHING: the first loop's list/index registers are swapped (r0/r1) and distSpatial's two vectors load in the other order; the nearest-slot copy computes the slot and record addresses in the other registers. */
 #include "gfx/EngineRecordList.h"
 #include "map/LmapGlobals.h"
 
@@ -6,7 +6,7 @@ extern "C" {
 extern EngineRecordList* g_engineRecordList;
 f32 distSpatial(f32 x1, f32 y1, f32 z1, f32 x2, f32 y2, f32 z2);
 
-void FUN_002ba170(void)
+void engineRecordsRankNearest(void)
 {
     if (g_engineRecordList->capacity != 101) {
         return;
@@ -33,12 +33,13 @@ void FUN_002ba170(void)
             }
         }
         EngineEffectRecord* record = &work->records[nearest];
+        EngineEffectRecord* slot = &work->nearest[order];
         record->proximity.selectedOrder = order;
         record->proximity.order = order;
-        work->nearest[order].spatial.position = record->spatial.position;
-        work->nearest[order].spatial.fourth = record->spatial.fourth;
-        work->nearest[order].variant = record->variant;
-        work->nearest[order].visible = 1;
+        slot->spatial.position = record->spatial.position;
+        slot->spatial.fourth = record->spatial.fourth;
+        slot->variant = record->variant;
+        slot->visible = 1;
     }
     for (s32 index = 0; index < 32; ++index) {
         EngineEffectRecord* record = &work->records[index];

@@ -6143,3 +6143,14 @@
 00108b6c touchInputUpdate
 002402c4 fileExistsPatchOrRom
 0026b738 playerHasSkill
+002451c4 btlReflectCreateKind22
+003de60c btlReflectQueueDepthOverlays
+0023c368 btlReflectQueueTransitionPair
+00246454 btlReflectQueueSelectionMarks
+003de9e4 btlReflectQueueFlaggedRecords
+00337c20 btlClearEntryStatusModifiers
+003df3b4 tokenRegistryCopyEntries
+003e2264 nw_gfx_ShaderBinaryInfo_BuildCommonCommand
+00335950 btlTransitionStep
+003dbc1c btlEffectResolveNames
+001fc0a8 engineRecordsRankNearest

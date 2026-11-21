@@ -7,7 +7,7 @@
 extern "C" {
 s32 partyRecordClampEquippedRankUp(u32);
 s32 partyRecordClampEquippedRankDown(u32);
-void FUN_004cd0c8(PartySlotA *, s16, u16 *);
+void unitCollectSkillsLearnedWithin(PartySlotA *, s16, u16 *);
 void FUN_004cd4b8(PartySlotA *, s16);
 
 static __inline PartySlotA *getPartySlot(u16 index)
@@ -33,7 +33,7 @@ u32 partySlotLevelUpTo(u32 id, s32 targetLevel, s32 maximumIncrease)
     if (maximumIncrease < increase)
         increase = maximumIncrease;
     u16 learned[8] = {};
-    FUN_004cd0c8(slot, (s16)increase, learned);
+    unitCollectSkillsLearnedWithin(slot, (s16)increase, learned);
     s32 nextSlot = 0;
     for (s32 count = 0; count < 8 && slot->record.skills[count]; ++count)
         ++nextSlot;

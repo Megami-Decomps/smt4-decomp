@@ -1,7 +1,7 @@
 #include "battle/BtlEffectFiles.h"
+#include "shard/W6_W6Match7_KeyedRecordStorage.h"
 
 extern "C" {
-u32 keyedRecordRegisterName(const char *name);
 u32 FUN_003478dc(u32 id, const char *format);
 s32 textureCachePollReady(void);
 s32 textureCacheGetDirection(void);

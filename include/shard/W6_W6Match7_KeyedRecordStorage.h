@@ -87,4 +87,8 @@ typedef char EffectTimelineLayoutCheck[
     offsetof(KeyedRecordStorage, timing.lastFrame) == 0xA8 &&
     offsetof(KeyedRecordStorage, timeline) == 0x13C ? 1 : -1];
 
+/* Clears the next keyed record, stores the name (without its extension) and
+ * returns the record's index; retail returns the index masked to a byte. */
+extern "C" u8 keyedRecordRegisterName(const char *name);
+
 #endif

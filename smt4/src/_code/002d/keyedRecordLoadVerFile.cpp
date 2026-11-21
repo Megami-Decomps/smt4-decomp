@@ -1,8 +1,8 @@
 #include "common.h"
+#include "shard/W6_W6Match7_KeyedRecordStorage.h"
 
 extern "C" {
 s32 FUN_00249e54(s32 index, const char *data);
-s32 keyedRecordRegisterName(const char *name);
 s32 keyedRecordFindByName(const char *name);
 const char *libc_strrchr(const char *text, s32 character);
 void asdMemFree(void *allocation);

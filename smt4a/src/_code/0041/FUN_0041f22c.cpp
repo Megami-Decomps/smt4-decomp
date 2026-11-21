@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail hoists screen+0x300 and screen+0x2EC into registers (extra saved regs) and shares the open-request tail; the build addresses fields directly and allocates registers differently. */
+/* NON_MATCHING: 0x6EC is one 64-bit field (retail clears it with mov r2, r1; stm at a 4-aligned offset); retail folds the pulse copy at 0x6F4 into the same stm (loading the pulse first), ours stores it after, which also moves the pulse timer's 30 into r0. The screen is SaveLoadControllerA (FUN_0041e9d4 takes it), whose shared layout stops at 0x450. */
 #include "common.h"
 #include "network/DataStore/DataStoreMain.h"
 #include "code/Code002c.h"
@@ -36,14 +36,13 @@ struct SelectScreen {
         s8 locked;          // 0x30C
         u8 unk0D[0x13F];
     } panel;                // 0x300
-    u8 confirmHeld;         // 0x44C
-    u8 cancelHeld;          // 0x44D
+    s8 confirmHeld;         // 0x44C
+    s8 cancelHeld;          // 0x44D
     u8 unk44E[0x1CA];
     s32 pulseTimer;         // 0x618
     f32 pulse;              // 0x61C
     u8 unk620[0xCC];
-    s32 reserved6EC;
-    s32 reserved6F0;
+    __packed u64 reserved6EC; // 0x6EC: cleared as one 64-bit store (mov r2, r1; stm)
     f32 pulseCopy;          // 0x6F4
 };
 
@@ -62,6 +61,16 @@ void FUN_0041e7c0(SelectScreen *screen);
 void FUN_0041e9d4(SelectScreen *screen);
 void FUN_0041fc24(SelectScreen *screen);
 void __aeabi_memcpy4(void *dest, const void *src, u32 size);
+}
+
+/* Moves the screen to `state`, remembering the one it leaves (FUN_0041e9d4 makes the same transition). */
+static __inline void selectScreenChangeState(SelectScreen *screen, u8 state)
+{
+    u8 previous = screen->state;
+    screen->state = state;
+    screen->previousState = previous;
+    screen->stateTimer = 0;
+    screen->unk0C = 0;
 }
 
 extern "C" void FUN_0041f22c(SelectScreen *screen)
@@ -86,7 +95,7 @@ extern "C" void FUN_0041f22c(SelectScreen *screen)
         }
     }
     screen->pulseTimer--;
-    if (screen->pulseTimer < 1) {
+    if (screen->pulseTimer <= 0) {
         screen->pulseTimer = 30;
         screen->pulse = 1.0f;
     }
@@ -95,7 +104,6 @@ extern "C" void FUN_0041f22c(SelectScreen *screen)
     if (screen->pulseTimer < 15)
         screen->pulse = screen->pulse + 0.06666667f;
     screen->reserved6EC = 0;
-    screen->reserved6F0 = 0;
     screen->pulseCopy = screen->pulse;
     FUN_0041e450(screen);
     FUN_0041e7c0(screen);
@@ -116,11 +124,7 @@ extern "C" void FUN_0041f22c(SelectScreen *screen)
         FUN_0038b5fc(0, screen->ids.idA);
         screen->openRequested = 1;
         buttonHelpSetText(0, 0xF4F4F4FF);
-        u8 previous = screen->state;
-        screen->state = 5;
-        screen->previousState = previous;
-        screen->stateTimer = 0;
-        screen->unk0C = 0;
+        selectScreenChangeState(screen, 5);
     } else {
         if (padButtonIsPressed(0) != 0 || screen->confirmHeld != 0 || buttonHelpIsActionActive(1) != 0) {
             FUN_0041e9d4(screen);

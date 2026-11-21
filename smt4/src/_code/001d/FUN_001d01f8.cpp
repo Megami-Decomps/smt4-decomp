@@ -1,25 +1,9 @@
-/* NON_MATCHING: control flow matches except the score test's branch (retail skips the take with bgt, the ordered bestScore > score; bestScore <= score gives bhi, and only an empty else-if arm for the ordered test gives bgt); retail converts the cost once (vcvt into s0, copied to the score in s16) where this converts it twice, and compares the two categories in the other register order. */
+/* NON_MATCHING: control flow matches; retail converts the cost once (vcvt into s0, copied to the score in s16) where this converts it twice (a float local gives the single vcvt but keeps the score in s0), and compares the two categories in the other register order (either source order gives cmp r0, r1). */
 #include "common.h"
 #include "gamedata/SkillFlags.h"
 #include "gamedata/SkillDataLookup.h"
 #include "shard/PassiveSkill.h"
-
-namespace {
-/* The skill inheritance picker's work: the candidate skills, the passive skills that may follow them and
-   the skills already chosen. */
-struct SkillPicker {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u16 *candidates;
-    /* 0x08 */ s32 candidateCount;
-    /* 0x0c */ u16 *passives;
-    /* 0x10 */ s32 passiveCount;
-    /* 0x14 */ u8 unk14[8];
-    /* 0x1c */ u16 *chosen;
-    /* 0x20 */ s32 chosenCount;
-    /* 0x24 */ u8 unk24[8];
-    /* 0x2c */ u8 element;
-};
-}
+#include "gamedata/SkillPicker.h"
 
 extern "C" {
 s32 idMapLookup(u32 id);
@@ -31,62 +15,62 @@ u32 FUN_001d01f8(SkillPicker *picker)
 {
     s32 best = -1;
     f32 bestScore = 0.0f;
-    for (s32 i = 0; i < picker->candidateCount; i++) {
-        if (picker->candidates[i] == 0) {
+    for (s32 i = 0; i < picker->candidates.count; i++) {
+        if (picker->candidates.ids[i] == 0) {
             continue;
         }
-        dataTable06Sub1GetRecord(picker->candidates[i]);
-        u32 id = picker->candidates[i];
+        dataTable06Sub1GetRecord(picker->candidates.ids[i]);
+        u32 id = picker->candidates.ids[i];
         SkillFlagsRecord *record = dataTable06Sub1GetRecord(id);
         u32 cost = record->flags & 0x1f;
         f32 score = (f32)cost;
         score += (f32)cost * 0.01f;
         s32 element = idMapLookup(id);
-        if (picker->element == element) {
+        if (picker->preferredElement == element) {
             score += 1.0f;
         }
         const SkillDataRecord *match = skillDataFindById(id);
         if (match != NULL) {
-            for (s32 j = 0; j < picker->passiveCount; j++) {
-                if (picker->passives[j] != 0 && FUN_0026a604(passiveSkillLookupRecord(picker->passives[j]), match) != 0) {
+            for (s32 j = 0; j < picker->passives.count; j++) {
+                if (picker->passives.ids[j] != 0 && FUN_0026a604(passiveSkillLookupRecord(picker->passives.ids[j]), match) != 0) {
                     score += 1.0f;
                     break;
                 }
             }
         }
-        for (s32 j = 0; j < picker->chosenCount; j++) {
-            if (idMapLookup(picker->chosen[j]) == element) {
+        for (s32 j = 0; j < picker->chosen.count; j++) {
+            if (idMapLookup(picker->chosen.ids[j]) == element) {
                 score -= 1.0f;
             }
-            if (dataTable06Sub1GetRecord(picker->chosen[j])->category == record->category) {
+            if (dataTable06Sub1GetRecord(picker->chosen.ids[j])->category == record->category) {
                 score -= 1.0f;
             }
         }
         if (best < 0) {
             bestScore = score;
             best = i;
-        } else if (bestScore <= score) {
-            if (bestScore != score || picker->candidates[i] <= picker->candidates[best]) {
-                bestScore = score;
-                best = i;
-            }
+        } else if (bestScore > score) {
+            continue;
+        } else if (bestScore != score || picker->candidates.ids[i] <= picker->candidates.ids[best]) {
+            bestScore = score;
+            best = i;
         }
     }
     if (best >= 0) {
-        picker->chosen[picker->chosenCount] = picker->candidates[best];
-        picker->chosenCount++;
-        const SkillDataRecord *match = skillDataFindById(picker->candidates[best]);
+        picker->chosen.ids[picker->chosen.count] = picker->candidates.ids[best];
+        picker->chosen.count++;
+        const SkillDataRecord *match = skillDataFindById(picker->candidates.ids[best]);
         if (match != NULL) {
-            for (s32 j = 0; j < picker->passiveCount; j++) {
-                if (picker->passives[j] != 0 && FUN_0026a604(passiveSkillLookupRecord(picker->passives[j]), match) != 0) {
-                    picker->chosen[picker->chosenCount] = picker->passives[j];
-                    picker->chosenCount++;
-                    picker->passives[j] = 0;
+            for (s32 j = 0; j < picker->passives.count; j++) {
+                if (picker->passives.ids[j] != 0 && FUN_0026a604(passiveSkillLookupRecord(picker->passives.ids[j]), match) != 0) {
+                    picker->chosen.ids[picker->chosen.count] = picker->passives.ids[j];
+                    picker->chosen.count++;
+                    picker->passives.ids[j] = 0;
                     break;
                 }
             }
         }
-        picker->candidates[best] = 0;
+        picker->candidates.ids[best] = 0;
         return 1;
     }
     return 0;

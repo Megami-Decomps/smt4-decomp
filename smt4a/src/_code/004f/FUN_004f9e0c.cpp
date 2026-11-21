@@ -2,6 +2,7 @@
 #include "common.h"
 #include "runtime/Stdio.h"
 #include <string.h>
+#include "shard/W6_W6Match7_KeyedRecordStorage.h"
 
 struct BattleNameRecord {
     u8 value;               // 0x00
@@ -19,7 +20,6 @@ s32 libc_strlen(const char* text);
 s32 libc_strncmp(const char* a, const char* b, u32 count);
 char* libc_strcpy(char* dest, const char* src);
 void sysMemClear(void* memory, u32 size);
-u8 keyedRecordRegisterName(void* name);
 u8 FUN_003478dc(u8 key, const char* path);
 
 // Whether `name` is the effect name `g_btlEffect[index]`.
@@ -87,7 +87,7 @@ void FUN_004f9e0c(u8* world)
         BattleNameRecord* record = reinterpret_cast<BattleNameRecord*>(world + 0x25ec + i * 140);
         const char* path = record->path;
         if (path[0] == 'V' && path[1] == 'E' && path[2] == 'R') {
-            record->value = keyedRecordRegisterName(record->key);
+            record->value = keyedRecordRegisterName((const char *)record->key);
             record->value = FUN_003478dc(record->value, path);
         }
     }

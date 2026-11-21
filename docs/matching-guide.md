@@ -329,6 +329,11 @@ asks for.
   `FUN_001569d8` and its smt4a twin `FUN_004491fc` (15 calls of `resetCursorRewind`, `current = begin`) are
   IDENTICAL with it and 60 lines off with the same body as `static __inline` (wave 58). A plain `static`
   search helper also gave retail's pair-unrolled loop in smt4 `FUN_0024d434`/`FUN_0023cd08`.
+  The same holds for real builder functions a caller inlined: plain `static` copies of the reflect-queue builders'
+  bodies (`btlReflectCreateKind21`/`22`/`24`, Apocalypse's `2b`/`2c`/`2e`, in `battle/btlReflect.h`) called with the
+  caller's arguments made seven queue functions IDENTICAL (smt4 `FUN_00246454`, `FUN_003de60c`, `FUN_003de9e4`,
+  `FUN_0023c368`; smt4a `FUN_004fe618`, `FUN_004fe900`, `FUN_004fcde0`, wave 62). Keep each copy's body equal to
+  its out-of-line function; the inlined copies show the source's store order where the out-of-line code does not.
 - A bounds-checked row getter (`if (i >= count) return NULL; return base + i * size;`) as a
   `static __inline` gives retail's `movcs r0, rN; bcs`.
 - A state machine's `stepEnter(step, state)` helper that clears the counters and then stores the

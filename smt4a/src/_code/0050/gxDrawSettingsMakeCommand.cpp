@@ -36,7 +36,7 @@ struct GxDrawPacketFields {
 };
 
 extern "C" {
-u32 *FUN_00500d38(GxDrawSettings *, u32 *, s32);
+u32 *gxEmitBlendCommands(GxDrawSettings *, u32 *, s32);
 u32 *gpuEmitDepthBufferCommands(const GpuDepthState *, u32 *, s32, s32);
 u32 *FUN_00177abc(const GpuDepthViewport *, u32 *);
 u32 *gxEmitFramebufferAccessMasks(u32 *, u32 *, s32);
@@ -62,7 +62,7 @@ u32 *gxDrawSettingsMakeCommand(GxDrawSettings *settings, u32 *commands, s32 rese
     }
     *commands++ = outputMode;
     *commands++ = 0x000f0040;
-    commands = FUN_00500d38(settings, commands, 0);
+    commands = gxEmitBlendCommands(settings, commands, 0);
     if (settings->fragment.logicEnabled) {
         *commands++ = 0x00e40000;
         *commands++ = 0x00030100;

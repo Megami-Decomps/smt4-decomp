@@ -57,3 +57,6 @@ arm 0x1527b4 0x15284c armlib ll_udiv10: 64-bit reciprocal divide by ten; smt4a t
 # armlib's __2snprintf (snprintf entry, Thumb): the exact 0x36-byte twin of smt4a's third-party FUN_001028b8; callers
 # written with <stdio.h> snprintf (effectTextureRequestsPump and three effect texture loaders) differ only in its name.
 thumb 0x2522f8 0x25232e armlib __2snprintf: Thumb snprintf entry; exact twin of smt4a's third-party FUN_001028b8
+# armlib's qsort (Thumb) and its partition helper: the 0x1fe-byte helper and the 0x88-byte qsort are the twins of
+# smt4a's FUN_0010043c and qsort, which sit between libc_printfStr and the __rw allocator; Thumb library code among ARM game code.
+thumb 0x2b79cc 0x2b7c52 armlib qsort and partition helper: twins of smt4a's third-party FUN_0010043c/qsort (0x10043c-0x1006c2)

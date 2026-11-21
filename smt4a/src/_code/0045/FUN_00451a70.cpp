@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0045247c(int *, int *);
-int FUN_00503d9c(int *, unsigned int, int *);
+int nw_gfx_ShaderBinaryInfo_BuildCommonCommand(int *, unsigned int, int *);
 int FUN_00504630(int *);
 int nw_gfx_ShaderBinaryInfo_AnalyzeBinary(void);
 
@@ -16,7 +16,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_0045247c. */
-/* Supplied declaration required: FUN_00503d9c. */
+/* Supplied declaration required: nw_gfx_ShaderBinaryInfo_BuildCommonCommand. */
 /* Supplied declaration required: FUN_00504630. */
 /* Supplied declaration required: nw_gfx_ShaderBinaryInfo_AnalyzeBinary. */
 
@@ -94,7 +94,7 @@ unsigned int FUN_00451a70(int *param_1,unsigned int *param_2,unsigned int param_
     FUN_00504630(piVar1);
     temp_v1 = (**(romwright_code **)(*param_1 + 8))(param_1,piVar3,4);
     temp_v8 = 0x451bbc;
-    FUN_00503d9c(piVar1,temp_v1,piVar3);
+    nw_gfx_ShaderBinaryInfo_BuildCommonCommand(piVar1,temp_v1,piVar3);
     puVar10[0xf] = (unsigned int)piVar1;
     puVar10[0xe] = temp_v1;
     temp_v5 = 0;

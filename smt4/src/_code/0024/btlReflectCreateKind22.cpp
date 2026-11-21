@@ -3,7 +3,7 @@ extern "C" {
 
 
 // Create action34 with its target, integer payload and additional parameter.
-void FUN_002451c4(s32 actor, u32 flags, u32 target, u32 parameter, u32 payload, s32 enabled)
+void btlReflectCreateKind22(s32 actor, u32 flags, u32 target, u32 parameter, u32 payload, s32 enabled)
 {
     ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, flags);
     if (!enabled)

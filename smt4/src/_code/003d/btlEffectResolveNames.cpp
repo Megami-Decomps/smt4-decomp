@@ -1,9 +1,10 @@
-/* NON_MATCHING: name-compare helpers restore retail's repeated null tests; retail keeps the &formatted pointer in a callee-saved register across the loop, spills the inlined search's name and loads each g_btlEffect prefix after its null test. */
+/* NON_MATCHING: retail hoists &formatted into sl before the loop and spills the inlined reference search's name into formatted's stack slot (sp+128); ours keeps name in fp and recomputes the address (one instruction short). */
 #include "common.h"
 #include "runtime/Stdio.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include <string.h>
+#include "shard/W6_W6Match7_KeyedRecordStorage.h"
 
 extern "C" {
 
@@ -29,7 +30,6 @@ extern const char DAT_004008c4[];           /* "battle/effect/%s.eft" */
 
 u32 libc_strlen(const char *s);
 s32 libc_strncmp(const char *a, const char *b, u32 n);
-u32 keyedRecordRegisterName(void *record);
 u32 FUN_00249e54(u32 id, const char *name);
 
 /* Index of the reference effect whose name starts `name`, or -1. */
@@ -45,20 +45,22 @@ static s32 findReferenceEffect(const char *name)
     return -1;
 }
 
-static __inline bool nameStartsWith(const char *name, const char *prefix)
+/* True when `name` is set and starts with battle effect name `kind`. */
+static __inline bool nameStartsWithEffect(const char *name, s32 kind)
 {
-    return name != NULL && libc_strncmp(name, prefix, libc_strlen(prefix)) == 0;
+    return name != NULL && libc_strncmp(name, g_btlEffect[kind], libc_strlen(g_btlEffect[kind])) == 0;
 }
 
-static __inline bool nameEquals(const char *name, const char *other)
+/* True when `name` is set and equals battle effect name `kind`. */
+static __inline bool nameIsEffect(const char *name, s32 kind)
 {
-    return name != NULL && strcmp(name, other) == 0;
+    return name != NULL && strcmp(name, g_btlEffect[kind]) == 0;
 }
 
 /* Resolves each of the four effect names to an effect id: names that are empty or special are
  * skipped, names naming a reference slot copy that slot's id, and names starting with "VER"
  * register a record. */
-void FUN_003dbc1c(EffectWork *work)
+void btlEffectResolveNames(EffectWork *work)
 {
     if (work->names == NULL) {
         return;
@@ -75,16 +77,7 @@ void FUN_003dbc1c(EffectWork *work)
         if (strcmp(DAT_0040090c, name) == 0) {
             continue;
         }
-        if (nameStartsWith(name, g_btlEffect[0])) {
-            continue;
-        }
-        if (nameEquals(name, g_btlEffect[4])) {
-            continue;
-        }
-        if (nameStartsWith(name, g_btlEffect[3])) {
-            continue;
-        }
-        if (nameEquals(name, g_btlEffect[5])) {
+        if (nameStartsWithEffect(name, 0) || nameIsEffect(name, 4) || nameStartsWithEffect(name, 3) || nameIsEffect(name, 5)) {
             continue;
         }
         char path[128];
@@ -106,7 +99,7 @@ void FUN_003dbc1c(EffectWork *work)
         const char *slotName = slot->name;
 
         if (slotName[0] == 'V' && slotName[1] == 'E' && slotName[2] == 'R') {
-            slot->id = (u8)keyedRecordRegisterName(slot->record);
+            slot->id = keyedRecordRegisterName((const char *)slot->record);
             slot->id = (u8)FUN_00249e54(slot->id, slotName);
         }
     }

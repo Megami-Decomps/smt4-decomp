@@ -1,7 +1,7 @@
 #include "gfx/VersionedTextureRequest.h"
+#include "shard/W6_W6Match7_KeyedRecordStorage.h"
 
 extern "C" {
-u32 keyedRecordRegisterName(const char *name);
 u32 FUN_00249e54(u32 id, const char *format);
 s32 textureCachePollReady(void);
 s32 textureCacheGetDirection(void);

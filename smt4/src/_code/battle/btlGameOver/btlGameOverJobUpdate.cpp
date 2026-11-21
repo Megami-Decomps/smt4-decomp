@@ -5,7 +5,7 @@
 extern "C" {
 extern BtlGameOver* g_btlGameOver;
 s32 asdProcessGetFrames(u32);
-s32 FUN_00335950(BtlGameOver*);
+s32 btlTransitionStep(BtlGameOver*);
 
 // Advances the game-over timer and runs its state machine when the job can update.
 s32 btlGameOverJobUpdate(u32 job)
@@ -19,7 +19,7 @@ s32 btlGameOverJobUpdate(u32 job)
             state->frameCounter = 0xFFFF;
         }
         if (work->mode == 2 && (work->flags & 0x400040000ULL) == 0) {
-            return FUN_00335950(state);
+            return btlTransitionStep(state);
         }
         if (asdProcessGetFrames(work->job) != 0) {
             result = -1;

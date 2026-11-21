@@ -1,4 +1,4 @@
-/* NON_MATCHING: payload validation remains inline instead of moving after the epilogue; initialization stores and saved registers differ. */
+/* NON_MATCHING: the ATBC validation now sits after the epilogue as in retail; the file and payload copies take r5/r6 the other way round, the trace's string address is scheduled earlier, and the payload pointer comes from a writeback load. */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/ModelContainer.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
@@ -18,20 +18,22 @@ s32 rt_memcmp(const void *left, const void *right, u32 size);
 // An unwrapped model already points at its payload; ATBC adds a validated header.
 static __inline void *modelContainerGetPayload(u8 *file, u32 *payloadSize)
 {
-    if (rt_memcmp(file, DAT_00409428, 4) != 0) {
-        return file;
+    void *payload = file;
+    if (rt_memcmp(file, DAT_00409428, 4) == 0) {
+        AsdModelContainerHeader *container = reinterpret_cast<AsdModelContainerHeader *>(file);
+        u32 offset = container->payloadOffset;
+        if (offset == 0) {
+            offset = container->fallbackOffset;
+        }
+        AsdModelPayloadHeader *header = reinterpret_cast<AsdModelPayloadHeader *>(file + offset);
+        if (rt_memcmp(header, DAT_00409438, 7) == 0) {
+            *payloadSize = header->payloadSize;
+            payload = header + 1;
+        } else {
+            payload = NULL;
+        }
     }
-    AsdModelContainerHeader *container = reinterpret_cast<AsdModelContainerHeader *>(file);
-    u32 offset = container->payloadOffset;
-    if (offset == 0) {
-        offset = container->fallbackOffset;
-    }
-    AsdModelPayloadHeader *header = reinterpret_cast<AsdModelPayloadHeader *>(file + offset);
-    if (rt_memcmp(header, DAT_00409438, 7) == 0) {
-        *payloadSize = header->payloadSize;
-        return header + 1;
-    }
-    return NULL;
+    return payload;
 }
 
 // Register a model image, accepting either raw data or an ATBC-wrapped MDLSIGN payload.

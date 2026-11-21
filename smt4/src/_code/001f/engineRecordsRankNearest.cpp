@@ -1,4 +1,4 @@
-/* NON_MATCHING: selected-slot base is retained separately from its parent, changing registers and one address add; distance arguments schedule differently. */
+/* NON_MATCHING: the first loop's list/index registers are swapped (r0/r1) and the distance arguments load in the other order; the selected-slot copy computes the slot and record addresses in the other registers. */
 #include "map/MapStateSlots.h"
 #include "map/LmapGlobals.h"
 #include "util/MathFunctions.h"
@@ -7,7 +7,7 @@ extern "C" {
 extern MapStateSlots *g_mapStateSlots;
 
 // Rank the three nearest active eligible map slots and publish their scene positions.
-void FUN_001fc0a8(void)
+void engineRecordsRankNearest(void)
 {
     if (g_mapStateSlots->unk04 != 101) {
         return;
@@ -40,9 +40,9 @@ void FUN_001fc0a8(void)
             }
         }
         MapStateSlot *slot = &work->slots[nearest];
+        MapStateSlot *selected = &((SelectedSlotsView *)work)->selected[rank];
         slot->ranking.pendingRank = rank;
         slot->ranking.rank = rank;
-        MapStateSlot *selected = &((SelectedSlotsView *)work)->selected[rank];
         selected->motion.point = slot->motion.point;
         selected->motion.heading = slot->motion.heading;
         selected->motion.elapsed = slot->motion.elapsed;

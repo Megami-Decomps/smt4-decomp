@@ -9,8 +9,8 @@ extern "C" void btlReflectCreateKind21(s32 id, u32 flags, u32 target,
     if (enabled == 0) {
         action->flagView.flags |= 4;
     }
-    action->target = target;
     action->kind = 0x21;
+    action->target = target;
     action->value = value;
     action->parameter = parameter;
 }

@@ -14,7 +14,7 @@ int pickerAdvance(...);
 int btlAdjustPropertyClamped(...);
 int FUN_00255180(...);
 int FUN_0027de98(void);
-int FUN_00337c20(...);
+int btlClearEntryStatusModifiers(...);
 int FUN_0033b100(...);
 int FUN_003ae3cc(...);
 int FUN_003af0c4(...);
@@ -42,7 +42,7 @@ extern unsigned int mapCategoryToDestinationGroup(unsigned int);
 /* Supplied declaration required: FUN_00255180. */
 /* Supplied declaration required: FUN_0027de98. */
 extern int jyoucyuGetTableEntry(unsigned int);
-/* Supplied declaration required: FUN_00337c20. */
+/* Supplied declaration required: btlClearEntryStatusModifiers. */
 /* Supplied declaration required: FUN_0033b100. */
 /* Supplied declaration required: FUN_003ae3cc. */
 /* Supplied declaration required: FUN_003af0c4. */
@@ -248,7 +248,7 @@ LAB_003092e8:
             if (g_btlMainState != 0) {
               *(unsigned int *)(g_btlMainState + 0x68) = 0x11;
             }
-            FUN_00337c20(param_1,0);
+            btlClearEntryStatusModifiers(param_1,0);
             FUN_0033b100(param_1,1);
           }
           else {
@@ -263,7 +263,7 @@ LAB_003092e8:
             if (g_btlMainState != 0) {
               *(unsigned int *)(g_btlMainState + 0x68) = 0x11;
             }
-            FUN_00337c20(param_1,1);
+            btlClearEntryStatusModifiers(param_1,1);
             FUN_0033b100(param_1,0);
           }
           return;

@@ -8,7 +8,7 @@ int cameraRegistryRemove(void *camera);
 int asdCameraInitAreas(void);
 int asdMemFree(void *ptr);               /* heap free */
 int lmapSceneGetScript(void);
-int FUN_00303710(void);
+int lmapCameraResetLocal(void);
 int lmapCameraUpdate(void);
 
 extern void *g_uniteCamera;
@@ -22,7 +22,7 @@ void uniteCameraDestroy(void)
     asdMemFree(camera);
     g_uniteCamera = NULL;
     if (lmapSceneGetScript() != 0) {
-        FUN_00303710();
+        lmapCameraResetLocal();
         lmapCameraUpdate();
     }
 }

@@ -12,7 +12,7 @@ struct CommandEventChoice {
     CommandEventData *command;
 };
 extern "C" {
-void FUN_00246454(u32, CommandEventChoice *, BtlEntry *);
+void btlReflectQueueSelectionMarks(u32, CommandEventChoice *, BtlEntry *);
 void btlMenuCursorStepReflectAction(u32, CommandEventChoice *, u32, u32, u32);
 void FUN_002569ac(CommandEventContext *, u32);
 void btlEntryValuesCopy(CommandEventContext *, CommandEventChoice *);
@@ -56,7 +56,7 @@ void btlResolveCommandEvent(CommandEventContext *context, CommandEventChoice *ch
         if (battle->commandEvent.targetMode == 2) {
             BtlEntry *unit = btlMainFindEntryByListedId(battle, battle->playerCheck.checkId);
             if (unit)
-                FUN_00246454(0, choice, unit);
+                btlReflectQueueSelectionMarks(0, choice, unit);
         }
         if (queueEffect)
             btlMenuCursorStepReflectAction(0, choice, effect, choice->effectHandle, 1);

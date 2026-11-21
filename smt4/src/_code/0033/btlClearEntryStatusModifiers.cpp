@@ -1,4 +1,3 @@
-/* NON_MATCHING: same stores; retail tests the entry flag bits one at a time (tst #1, tst #0x40, tst #0x10/#0x20) with 0xcc kept in r8, where armcc here combines the tests and allocates differently. */
 #include "common.h"
 
 namespace {
@@ -35,7 +34,7 @@ struct BtlMainStateView {
 extern "C" {
 
 /* Clear the status modifiers of every active unit's entry (mode 0: neither 0x10 nor 0x20 set, mode 1: 0x10 set, other modes: all). */
-void FUN_00337c20(BtlMainStateView *state, s32 mode)
+void btlClearEntryStatusModifiers(BtlMainStateView *state, s32 mode)
 {
     for (s32 i = 0; i < 109; ++i) {
         s16 index = state->units[i].entryIndex;
@@ -49,7 +48,7 @@ void FUN_00337c20(BtlMainStateView *state, s32 mode)
         if (entry->flags & 0x40) {
             continue;
         }
-        BtlEntryStatus *status = &entry->status;
+        BtlEntryStatus *status = &state->entries[index].status;
         if (status == NULL) {
             continue;
         }

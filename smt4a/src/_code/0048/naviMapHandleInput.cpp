@@ -24,7 +24,7 @@ u32 naviMainGetRequestedMap(void *scene);
 u32 naviGetActiveStateValue(void *scene); // declcheck: local (its header also declares the other naviMainSetValuePair form)
 void naviRequestSelectedMap(void);
 s32 listGetAdjacentEntryId(NavigationFadeWork *work, s32 direction);
-void FUN_0048d248(NavigationFadeWork *work, u32 category);
+void naviSelectRequestedCategory(NavigationFadeWork *work, u32 category);
 void FUN_003a35a4(void);
 u32 FUN_004d040c(s32 x, s32 y, u32 width, u32 height);
 void FUN_004d03c8(s32 *x, s32 *y);
@@ -83,7 +83,7 @@ void naviMapHandleInput(NavigationFadeWork *work)
             sysPlayVoice(0x1000229);
             if (g_gameState.naviMapPending) {
                 work->interpolation.flags &= ~0x30000;
-                FUN_0048d248(work, FUN_00492c84(work->scene));
+                naviSelectRequestedCategory(work, FUN_00492c84(work->scene));
                 NavigationPoint point = *sub68OwnerGetBlock60(work->scene);
                 point.x = 0.0f;
                 point.y = 0.0f;

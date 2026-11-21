@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: retail keeps the 0xffffffff text color/0x6b in sl/r9 (set after the null check) and the switch flag in r1 */
+/* NON_MATCHING: register allocation only: retail keeps the name pointer in r7 below the text position (r8/r9), the switch flag in r1, and schedules efctPlayVariantSet's speed before its stacked arguments. */
 #include "common.h"
 #include <stdio.h>
 #include "addon/PackageSelection.h"
@@ -30,10 +30,13 @@ void FUN_00404050(u32 effect, f32 speed, u32 handle, s32 x, s32 y, s32 useFirstS
     s32 framed;
     s32 frameX;
     s32 frameY;
+    s32 textX;
+    s32 textY;
     const char *name;
-    u32 textColor = 0xffffffff;
+    u32 textColor;
 
     if (entry != NULL) {
+        textColor = 0xffffffff;
         sysMemClear(text, sizeof(text));
         efctSetSpeed(speed);
         placement = asdTMTexTableEntryAt(0x32, 99);
@@ -74,13 +77,15 @@ void FUN_00404050(u32 effect, f32 speed, u32 handle, s32 x, s32 y, s32 useFirstS
             texDrawTableEntryAtStoredOrigin(2, 0x32, frameId, frameX, frameY, 0x6b);
         }
         placement = asdTMTexTableEntryAt(0x32, 100);
+        textX = placement->x + x;
+        textY = placement->y + y;
         name = entry->content.name;
         if (strcmp(name, DAT_0052d134) == 0) {
             gameGetPlayerData();
             name = gameGetPlayerName();
         }
         sprintf(text, "%s", name);
-        textDrawString((f32)(placement->x + x), (f32)(placement->y + y), 0.56640625f, 2, 0.0f, textColor, speed, text);
+        textDrawString((f32)textX, (f32)textY, 0.56640625f, 2, 0.0f, textColor, speed, text);
         placement = asdTMTexTableEntryAt(0x32, 0x65);
         efctPlayVariantSet(effect, placement->x + x, placement->y + y, 0x79, useFirstSet, useSecondSet, speed);
         if (entry->content.badge != 0) {

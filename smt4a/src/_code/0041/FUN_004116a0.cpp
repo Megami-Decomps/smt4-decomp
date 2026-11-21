@@ -28,7 +28,7 @@ void FUN_0047f4cc(u32 handle, f32 red, f32 green, f32 blue);
 void uiNavigatorStart(s32 id, s32 a, s32 b, s32 c, s32 d);
 void infoWinSetTimer(s32 frames);
 void FUN_004fbdd4(s32 a, s32 b, s32 c, f32 red, f32 green, f32 blue);
-u32 FUN_004fe618(s32 actor, u32 options, u32 value, const BattleRosterRecordA *source);
+u32 btlReflectQueueDepthOverlays(s32 actor, u32 options, u32 value, const BattleRosterRecordA *source);
 
 /* Starts the "victory pose" presentation: picks a random party member that can speak (or the
  * selected save slot's), shows their line in the info window, and dims the field except the
@@ -61,7 +61,7 @@ void FUN_004116a0(ScriptOwner *owner)
     for (s32 i = 4; i < 54; i++) {
         BattleRosterRecordA *record = &battle->roster[i];
         if (record != NULL && (record->liveFlags.unk50 & 1) && (record->liveFlags.unk50 & 2))
-            FUN_004fe618(0, 0, 5, record);
+            btlReflectQueueDepthOverlays(0, 0, 5, record);
     }
     g_btlCamera->flags |= 0x4000;
 }

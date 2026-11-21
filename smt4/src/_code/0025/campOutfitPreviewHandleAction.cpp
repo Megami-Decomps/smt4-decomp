@@ -1,5 +1,6 @@
-/* NON_MATCHING: zoom helper merges eye arguments; VFP constants and scale-load scheduling differ. */
+/* NON_MATCHING: the eye now follows FUN_00294d6c's CameraPosition form; retail pools 0.08 before the other constants (so the saved VFP registers and the pool order differ), and case 1 loads the scale with ldr for its compare where this uses vldr then vmov. */
 #include "camp/CampCec/OutfitPreview.h"
+#include "gfx/CameraVector3.h"
 /* Interaction fields extend beyond the shared model-preview prefix. */
 struct PreviewInteractionView {
     OutfitPreview preview;
@@ -19,10 +20,10 @@ void objSetAnglesDegrees(void *model, const f32 *angles);
 static inline void updatePreviewZoom(PreviewInteractionView *work)
 {
     nodeGroupSetScale(work->preview.modelGroup, work->preview.scale, work->preview.scale, work->preview.scale);
-    f32 eyeY = 6.3f;
+    CameraPosition eye(0.0f, 6.3f, 4.5f);
     if (work->zoomSteps > 0)
-        eyeY += static_cast<f32>(work->zoomSteps) * 0.08f;
-    statusCameraSetEye(0.0f, eyeY, 4.5f);
+        eye.y = 6.3f + (f32)work->zoomSteps * 0.08f;
+    statusCameraSetEye(eye.x, eye.y, eye.z);
 }
 extern "C" void campOutfitPreviewHandleAction(PreviewInteractionView *work, u32 action)
 {

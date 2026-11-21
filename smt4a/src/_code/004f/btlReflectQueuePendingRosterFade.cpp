@@ -6,7 +6,7 @@
 
 extern "C" {
 
-/* Sibling of btlReflectCreateKind25 / FUN_004fe618 (parameter before duration). */
+/* Sibling of btlReflectCreateKind25 / btlReflectQueueDepthOverlays (parameter before duration). */
 static __inline void btlReflectQueueKind2B(s32 actorId, u32 argument, BattleRosterRecordA *record,
                                            f32 parameter, u32 duration)
 {
@@ -18,7 +18,7 @@ static __inline void btlReflectQueueKind2B(s32 actorId, u32 argument, BattleRost
     action->parameterScalar = parameter;
 }
 
-/* Sibling of btlReflectCreateKind25 / FUN_004fe618 (parameter before duration). */
+/* Sibling of btlReflectCreateKind25 / btlReflectQueueDepthOverlays (parameter before duration). */
 static __inline void btlReflectQueueKind2C(s32 actorId, u32 argument, BattleRosterRecordA *record,
                                            u32 parameter, u32 duration)
 {

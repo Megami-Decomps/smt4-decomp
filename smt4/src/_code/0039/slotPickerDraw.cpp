@@ -1,4 +1,4 @@
-/* NON_MATCHING: corrected fade base from0x394 to0x794, restored linker-inlined speed getter and three-byte glyph buffer; remaining stack operations and blink division registers differ. */
+/* NON_MATCHING: fade base 0x794, linker-inlined speed getter and three-byte glyph buffer recovered; remaining: the first stack-B set moves its state into r1 (retail keeps r0), the blink modulo and label-copy scratch registers differ. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
@@ -45,14 +45,17 @@ void slotPickerDraw(SlotPicker *picker)
     gxResetColorQuadToWhite();
     RenderCtx *context = g_titleScene;
     s32 state = renderCtxPackPassFlags(1, 0);
-    renderStackPushCountedDirect(&context->stackA, state);
+    renderStackPush(&context->stackA, state);
     renderCtxSelectTexture(g_titleScene, 0);
     texDrawTableEntryAtStoredOrigin(2, 0x2E, 0, parallax, 0, 0xB);
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
     texDrawTableEntryAtStoredOrigin(2, 0x2E, 1, parallax, 0, 0xB);
     texDrawTableEntryAtStoredOrigin(2, 0x2E, 2, parallax, 0, 0xB);
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
-    char label[3] = {0, 0, 0};
+    char label[3];
+    label[0] = 0;
+    label[1] = 0;
+    label[2] = 0;
 
     for (s32 i = 0; i < 8; i++) {
         TextureTableEntryIV *slot = asdTMTexTableEntryAt(0x2E, i + 8);

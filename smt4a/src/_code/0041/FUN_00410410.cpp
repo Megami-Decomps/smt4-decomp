@@ -70,7 +70,7 @@ void FUN_00410410(BattleActionContext *context, const CapacityAction *action)
     u64 flags = context->state->battle.stateFlags64.bits;
     if ((g_btlActionReflect.blockedMask & flags) != 0 || (g_btlActionReflect.stoppedMask & flags) != 0)
         return;
-    if (!(!(!((flags & g_btlActionReflect.depletedMask) != 0)))) {
+    if ((flags & g_btlActionReflect.depletedMask) == 0) {
         if (context->state->battle.targetCapacity.counts[0] != 0 || context->state->battle.targetCapacity.counts[1] != 0) {
             s32 lowest = action->first;
             if (action->first >= action->second)

@@ -8,7 +8,7 @@
 extern "C" {
 
 int asdMdlManagerMarkDestroy(void);
-int FUN_001fc0a8(void);
+int engineRecordsRankNearest(void);
 int FUN_0027ee24(void);
 int FUN_0027eee0(void);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
@@ -57,7 +57,7 @@ extern unsigned int DAT_0049fc1c; /* 0x49fc1c */
 extern int DAT_0049fc84; /* 0x49fc84 */
 
 /* Supplied declaration required: asdMdlManagerMarkDestroy. */
-/* Supplied declaration required: FUN_001fc0a8. */
+/* Supplied declaration required: engineRecordsRankNearest. */
 extern int mapRewardRollAndAward(int, unsigned int);
 extern int mapDepartIsRunning(void);
 /* Supplied declaration required: FUN_0027ee24. */
@@ -113,7 +113,7 @@ unsigned int FUN_0027052c(void)
   
   temp_v8 = 0;
   temp_v1 = (int)gameGetMapBlock();
-  FUN_001fc0a8();
+  engineRecordsRankNearest();
   temp_v9 = 0;
   temp_v12 = 0x3c8efa3500000000;
   temp_v13 = 100.0f;

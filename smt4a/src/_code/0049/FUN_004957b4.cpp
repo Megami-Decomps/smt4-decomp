@@ -1,4 +1,4 @@
-/* NON_MATCHING: the category branch layout now matches (the 9-sprite arm is out of line); retail reaches the show flags through a second base at +0xB00, reloads the category from the object and keeps fewer saved registers (no fp). */
+/* NON_MATCHING: the show flags are s8 (retail's +0xB00 base) and the label position is summed before the format; armcc still precomputes &work->category into r7 for the second category test (retail reads [r4, #0xB40] there) and schedules the selection address after the category compares. */
 #include "runtime/Stdio.h"
 #include "shop/shopMain.h"
 #include "shard/S1ListPanel.h"
@@ -24,7 +24,7 @@ void FUN_004957b4(ShopWork *base)
         s32 category;
         u32 unkB44, quantity, maximum;
         u8 unkB50[8];
-        u8 showDecrease, showIncrease;
+        s8 showDecrease, showIncrease;
         u8 unkB5A[6];
         u8 selections[9][0x74];
     };
@@ -55,11 +55,11 @@ void FUN_004957b4(ShopWork *base)
     u32 quantity = work->quantity;
     const TextureTableEntryIV *label = layoutFindTableEntry(work->sprites, 199);
     u32 color = 0xFFFFFFFF;
-    s16 labelX = label->x, labelY = label->y;
     if (work->quantity == work->maximum)
         color = 0x57D8FFFF;
+    s32 textX = label->x + x, textY = label->y + y;
     char text[32];
     __2sprintf(text, DAT_0053617c, quantity);
-    drawTextAtRelativePosition(work->sprites, 0, labelX + x, labelY + y, 0, 7, color, depth, text);
+    drawTextAtRelativePosition(work->sprites, 0, textX, textY, 0, 7, color, depth, text);
 }
 }

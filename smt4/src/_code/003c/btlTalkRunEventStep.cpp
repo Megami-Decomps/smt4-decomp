@@ -1,5 +1,6 @@
-/* NON_MATCHING: state publication hoists constant 2 and duplicates the return-zero epilogue instead of retail's shared state-store exit; result-copy and flag-clear scratch allocation also differs. */
+/* NON_MATCHING: armcc hoists the constant 2 (both state = 2 stores and loadStage = 2) into r6, where retail rematerialises it and cross-jumps every state store into one shared store-state exit; the result-copy scratch registers also differ. */
 #include "script/scrScriptProcess.h"
+#include "script/ScriptVm.h"
 #include "code/Code0024.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/BtlUiGlobal.h"
@@ -37,7 +38,7 @@ extern void *g_btlAux;
 extern void *g_btlActionReflect;
 
 
-u32 FUN_00246454(s32 actor, u32 options, BtlEntry *unit);
+u32 btlReflectQueueSelectionMarks(s32 actor, u32 options, BtlEntry *unit);
 void battleSelectButtonHelpPreset(s32 preset);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
@@ -56,7 +57,7 @@ s32 btlTalkRunEventStep(BattleEventStep *step)
     switch (step->state) {
     case 0:
         FUN_003c06ac(step);
-        return 0;
+        break;
     case 1:
         switch (step->loadStage) {
         case 0:
@@ -94,7 +95,7 @@ s32 btlTalkRunEventStep(BattleEventStep *step)
             for (s32 slot = 4; slot < 0x36; slot++) {
                 BtlEntry *actor = &step->context->actors[slot];
                 if ((actor->flags & 1) != 0 && (actor->flags & 0x40) == 0 && actor != NULL) {
-                    FUN_00246454(0, 0, actor);
+                    btlReflectQueueSelectionMarks(0, 0, actor);
                 }
             }
         }
@@ -104,7 +105,7 @@ s32 btlTalkRunEventStep(BattleEventStep *step)
         if (step->script == NULL) {
             return 0;
         }
-        *reinterpret_cast<void **>(reinterpret_cast<u8 *>(step->process) + 0xc0) = step->script;
+        step->process->commandOwner = (u32)step->script;
         step->state = 2;
         break;
     case 4:

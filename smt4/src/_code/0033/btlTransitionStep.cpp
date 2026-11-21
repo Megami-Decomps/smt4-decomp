@@ -1,4 +1,4 @@
-/* NON_MATCHING: Battle transition resource/script state machine is reconstructed; switch return blocks, save-counter address setup, and final completion branch layout differ. */
+/* NON_MATCHING: mode 7 is its own function (retail returns its result through a copy, no tail call); remaining: the texture-wait cases store state before step (retail step first), the file-name selects predicate in the other order, and the mode-7 not-ready return is laid out at the shared exit. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
@@ -36,8 +36,26 @@ void buttonHelpRelease();
 s32 FUN_0023ed64(BattleTransitionSelector *selector);
 }
 
+/* Mode 7: waits for the transition script, releases the fade and button help, then finishes the
+ * battle (state 9) or starts the hand-off (state 8). Retail inlines this as its own body: the
+ * hand-off call is not a tail call and its result is copied out through r1 to a shared exit. */
+static s32 transitionFinishScript(BattleTransitionSelector *selector)
+{
+    if (scrRunOpcodesStub(selector->scriptProcess) != 2) return 0;
+    uiFadeRelease();
+    buttonHelpRelease();
+    BtlMainState *battle = btlGetMainState();
+    if ((selector->flags & 1) || battle->completion.complete == 1) {
+        battle->completion.complete = 1;
+        selector->state = 9;
+        return -1;
+    }
+    selector->state = 8;
+    return FUN_0023ed64(selector);
+}
+
 /* Load and run the battle transition scripts, then hand off or report completion. */
-extern "C" s32 FUN_00335950(BattleTransitionSelector *selector)
+extern "C" s32 btlTransitionStep(BattleTransitionSelector *selector)
 {
     switch (selector->state) {
     case 0:
@@ -72,19 +90,8 @@ extern "C" s32 FUN_00335950(BattleTransitionSelector *selector)
         return FUN_0023f074(selector);
     case 6:
         return FUN_0023f074(selector);
-    case 7: {
-        if (scrRunOpcodesStub(selector->scriptProcess) != 2) return 0;
-        uiFadeRelease();
-        buttonHelpRelease();
-        BtlMainState *battle = btlGetMainState();
-        if ((selector->flags & 1) || battle->completion.complete == 1) {
-            battle->completion.complete = 1;
-            selector->state = 9;
-            return -1;
-        }
-        selector->state = 8;
-        return FUN_0023ed64(selector);
-    }
+    case 7:
+        return transitionFinishScript(selector);
     case 8:
         return FUN_0023ed64(selector);
     case 9:

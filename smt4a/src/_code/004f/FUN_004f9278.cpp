@@ -2,6 +2,7 @@
 #include "runtime/Stdio.h"
 #include "battle/btlEffect.h"
 #include <string.h>
+#include "shard/W6_W6Match7_KeyedRecordStorage.h"
 
 extern "C" {
 extern BtlEffectGlobals g_btlEffect;
@@ -12,7 +13,6 @@ u32 libc_strlen(const char *text);
 s32 libc_strncmp(const char *first, const char *second, u32 length);
 char *libc_strcpy(char *destination, const char *source);
 void sysMemClear(void *memory, u32 bytes);
-u32 keyedRecordRegisterName(const char *name);
 u32 FUN_003478dc(u32 id, const char *version);
 }
 

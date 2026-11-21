@@ -227,7 +227,7 @@ void FUN_004eea40(int *param_1,unsigned int *param_2)
         param_2[4] = uVar17;
       }
       else if ((*puVar18 & DAT_00571148) != 0 || (puVar18[1] & DAT_0057114c) != 0) {
-        FUN_004fcde0(iVar9 + iVar13,param_2,puVar18);
+        btlReflectQueueSelectionMarks(iVar9 + iVar13,param_2,puVar18);
       }
       iStack_50 = (int)(char)((char)iStack_50 + '\x01');
       break;
@@ -242,7 +242,7 @@ void FUN_004eea40(int *param_1,unsigned int *param_2)
       sVar3 = *psVar15;
       iVar12 = *piStack_30;
       btlMainFindEntryByListedId(iVar12,(int)sVar3);
-      FUN_004fcde0(iVar9 + iVar4 + 0x28,param_2,iVar12);
+      btlReflectQueueSelectionMarks(iVar9 + iVar4 + 0x28,param_2,iVar12);
       FUN_004e0114(piVar14,param_2,(int)sVar3,iVar9 + iVar4,0x1e,0x1e);
       break;
     case 0xc:
@@ -778,7 +778,7 @@ LAB_004ef7f0:
   else {
 LAB_004f054c:
     if ((uVar20 != 0) && ((*param_2 & 0x1080) == 0)) {
-      FUN_004fe618(0,puVar25,5);
+      btlReflectQueueDepthOverlays(0,puVar25,5);
     }
   }
   uVar20 = 0;

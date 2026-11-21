@@ -13,6 +13,7 @@
 0x001003e2 FUN_001003e2 between
 0x001003ea libc_printfStr name
 0x0010043c FUN_0010043c between
+0x0010063a qsort library
 0x001006c2 _ZN4__rw13__rw_allocateEji name
 0x001006e4 FUN_001006e4 linker
 0x001006ec _ZN4__rw15__rw_deallocateEPvji name

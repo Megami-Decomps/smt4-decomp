@@ -1,4 +1,4 @@
-/* NON_MATCHING: result flags/switch/media bits/64-bit descriptor/limit-31 loop now follow retail (nn::Result status, five-label table, shared exit); remaining: callee-saved register numbering, `lsrs r2` vs `r1` temporaries and the non-tail final result constructor. */
+/* NON_MATCHING: result flags/switch/media bits/64-bit descriptor/limit-31 loop now follow retail (nn::Result status, five-label table, shared exit); the token is declared at function scope (retail's final result constructor is not a tail call); remaining: callee-saved register numbering (retail: handle r4, parameters r6, metadata r7, name r8) and `lsrs r2` vs `r1` temporaries. */
 #include "classes/WindowStatus.h"
 #include "nn/Result.h"
 #include "sys/ProgramId.h"
@@ -41,6 +41,7 @@ static void copyUpperName(char *destination, const s8 *name, u32 limit)
 WindowStatusResult FUN_004293b0(const s32 *handle, const AsyncMapParameters *parameters,
     const AsyncMapMetadata *metadata, const s8 *name)
 {
+    u32 token;
     nn::Result status = FUN_00427e68(*handle, 6);
     if (!nnResultIsFailure(status)) {
         AsyncMapPacket *packet = &DAT_0061b030;
@@ -64,7 +65,6 @@ WindowStatusResult FUN_004293b0(const s32 *handle, const AsyncMapParameters *par
             copyUpperName(packet->name, name, 31);
             packet->value = metadata->value;
             stringCopyTruncated(packet->signature, metadata->signature, 20);
-            u32 token;
             status = FUN_00427e28(&token, DAT_0061b000, 0);
             if (!nnResultIsFailure(status)) {
                 if (appletIsExitRequested() || FUN_0015a410())

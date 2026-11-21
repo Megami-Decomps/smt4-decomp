@@ -63,7 +63,7 @@ extern u32 DAT_005711b8, DAT_005711bc;     /* claimed mask of an object */
 
 s8 *gameGetSlotTable(void);
 s32 gameSlotsCountValidIds(BtlActorState *state);
-void FUN_004fcde0(s32 frame, BtlCommand *command, BtlObject *object);
+void btlReflectQueueSelectionMarks(s32 frame, BtlCommand *command, BtlObject *object);
 void FUN_004fcf0c(s32 frame, BtlCommand *command, s32 immune, s32 victim, u32 argument, s32 flag);
 
 static __inline bool objectInUse(const BtlObject *object)
@@ -119,7 +119,7 @@ u32 FUN_004eaa68(BtlActorRef *actor, BtlCommand *command, u32 unused, u32 unused
         if (group) {
             if (object != NULL && objectInUse(object) && !objectClaimed(object)) {
                 pending = HIT_LEAD_FRAMES;
-                FUN_004fcde0(spacing * hitCount + baseFrame + HIT_LEAD_FRAMES, command, object);
+                btlReflectQueueSelectionMarks(spacing * hitCount + baseFrame + HIT_LEAD_FRAMES, command, object);
                 hitCount = (s8)(hitCount + 1);
                 object->flagsLow |= DAT_005711b8;
                 object->flagsHigh |= DAT_005711bc;
@@ -128,7 +128,7 @@ u32 FUN_004eaa68(BtlActorRef *actor, BtlCommand *command, u32 unused, u32 unused
             if (object == NULL || !objectInUse(object))
                 break;
             pending = HIT_LEAD_FRAMES;
-            FUN_004fcde0(spacing * skip + baseFrame + HIT_LEAD_FRAMES, command, object);
+            btlReflectQueueSelectionMarks(spacing * skip + baseFrame + HIT_LEAD_FRAMES, command, object);
             single = object;
             break;
         } else {

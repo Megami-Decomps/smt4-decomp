@@ -16,7 +16,7 @@ int sysMemClear(unsigned char *, int);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 int FUN_0045b170(unsigned int *, unsigned int *, int, int);
 int FUN_00500cac(...);
-unsigned int* FUN_00500d38(unsigned int [4], unsigned int*, int);
+unsigned int* gxEmitBlendCommands(unsigned int [4], unsigned int*, int);
 unsigned int* FUN_00500e74(const GpuLogicState*, unsigned int*, int);
 int FUN_00500ee4(...);
 int gxEmitColorDepthMask(...);
@@ -245,7 +245,7 @@ void FUN_0045a6a4(int *param_1,unsigned int *param_2,int *param_3)
       temp_v8[0] = romwright_piece_3_1((((unsigned int)(temp_v8[0]) >> 8) & 0xffffffU),1);
     }
     temp_v20 = (unsigned char *)FUN_00500df8(temp_v14,temp_v20,0);
-    temp_v20 = reinterpret_cast<unsigned char*>(FUN_00500d38(
+    temp_v20 = reinterpret_cast<unsigned char*>(gxEmitBlendCommands(
         temp_v8, reinterpret_cast<unsigned int*>(temp_v20), 0));
     temp_v20 = reinterpret_cast<unsigned char*>(FUN_00500e74(
         reinterpret_cast<const GpuLogicState*>(temp_v9),

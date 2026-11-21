@@ -4,7 +4,7 @@
 #include "battle/btlUnit.h"
 
 extern "C" {
-void FUN_0023c368(s32, BattleUnitSlotState *, BtlActionRecord *, s32, s32, s32, s32, s32);
+void btlReflectQueueTransitionPair(s32, BattleUnitSlotState *, BtlActionRecord *, s32, s32, s32, s32, s32);
 
 u32 FUN_003cfc84(BtlMainState **battle, BattleUnitSlotState *work, s32 alternate)
 {
@@ -15,7 +15,7 @@ u32 FUN_003cfc84(BtlMainState **battle, BattleUnitSlotState *work, s32 alternate
                 BtlActionRecord *target = &(*battle)->actions[i];
                 u32 status = target->status;
                 if ((status & 1) && (status & 2) && (status & 0x400))
-                    FUN_0023c368(0, work, target, 0, 10, 10, 2, 1);
+                    btlReflectQueueTransitionPair(0, work, target, 0, 10, 10, 2, 1);
             }
         }
         return work->effectTiming.frame > 40;

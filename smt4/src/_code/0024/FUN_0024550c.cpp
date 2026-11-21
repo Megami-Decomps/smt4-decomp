@@ -3,6 +3,7 @@
 #include "battle/BtlEffectLoad.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include <string.h>
+#include "shard/W6_W6Match7_KeyedRecordStorage.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ char *libc_strcpy(char *destination, const char *source);
 void memClear(void *buffer, s32 size);
 char *libc_strrchr(char *text, s32 character);
 s32 keyedRecordFindByName(const char *key);
-u32 keyedRecordRegisterName(const char *key);
 u32 FUN_00249e54(u32 handle, const char *file);
 void asdMemFree(void);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);

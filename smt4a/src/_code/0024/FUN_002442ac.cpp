@@ -1,7 +1,7 @@
 #include "map/LmapViewGlobals.h"
 
 extern "C" {
-void FUN_00303710(void);
+void lmapCameraResetLocal(void);
 void FUN_00352a14(void);
 extern Obj557c48 *g_handleRegistry;
 
@@ -65,6 +65,6 @@ void FUN_002442ac(void)
     camera = mapCameraView();
     camera->clip = NULL;
     camera->modelManager = g_handleRegistry;
-    FUN_00303710();
+    lmapCameraResetLocal();
 }
 }

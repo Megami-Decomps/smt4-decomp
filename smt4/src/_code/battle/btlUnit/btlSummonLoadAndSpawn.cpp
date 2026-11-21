@@ -199,7 +199,7 @@ u32 btlSummonLoadAndSpawn(BtlSummonState *state, u32 request)
     s16 offsetB = (s16)DAT_00439a38;
     s16 offsetC = (s16)DAT_00439a28;
     FUN_0024057c(state, effect, 0);
-    FUN_002451c4(offsetB + offsetA, reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit))), reinterpret_cast<u32>(effect), 0xFF, offsetC, 0);
+    btlReflectCreateKind22(offsetB + offsetA, reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit))), reinterpret_cast<u32>(effect), 0xFF, offsetC, 0);
     u32 reflectKind = (effect->flags & 0x10) != 0 ? 7 : 6;
     btlReflectInitKind9(offsetB, reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit))), effect, reflectKind, 0xD);
     return 1;

@@ -82,7 +82,7 @@ struct BtlActionMasks {
 extern "C" {
 extern BtlActionMasks g_btlAction;
 BtlUnitRecord *btlMainFindEntryByListedId(BtlBattleData *data, s32 index);
-void FUN_004fcde0(s32 arg, BtlAiAction *action, BtlUnitRecord *record);
+void btlReflectQueueSelectionMarks(s32 arg, BtlAiAction *action, BtlUnitRecord *record);
 void FUN_004fd508(s32 arg, BtlAiAction *action, u32 kind, u32 uiIndex, s32 flag);
 
 /* Per-actor battle step: raises the priority high-water mark, applies the current phase's flag changes
@@ -131,7 +131,7 @@ void FUN_004e7168(BtlUnitHandle *handle, BtlAiAction *action)
         if (handle->data->trigger == 2) {
             BtlUnitRecord *record = btlMainFindEntryByListedId(handle->data, handle->data->actor);
             if (record != NULL) {
-                FUN_004fcde0(0, action, record);
+                btlReflectQueueSelectionMarks(0, action, record);
             }
         }
         if (command) {

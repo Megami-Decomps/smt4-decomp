@@ -1,4 +1,4 @@
-/* NON_MATCHING: Adjusted-text fraction registers and return predication differ. */
+/* NON_MATCHING: retail computes 256 - adjustment before the push and keeps the result and the zero constant in separate registers (s17/s21). */
 #include "common.h"
 #include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
@@ -14,29 +14,29 @@ f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 fraction);
 extern "C" f32 FUN_00163ec4(TextDrawStatePrefixA *state, s32 x, s32 y,
                             s32 adjustment, f32 opacity)
 {
-    const f32 fraction = static_cast<f32>(
-        static_cast<s32>(256u - static_cast<u32>(adjustment))) * (1.0f / 256.0f);
-    const f32 originalX = static_cast<f32>(x);
-    const f32 drawY = static_cast<f32>(y);
+    f32 fraction = (f32)(256 - adjustment) / 256.0f;
+    f32 originalX = (f32)x;
+    f32 drawY = (f32)y;
+    f32 result = 0.0f;
 
-    if (state->enabled == 0 || state->text[0] == 0)
-        return 0.0f;
+    if (state->enabled != 0 && state->text[0] != 0) {
+        u32 alpha;
+        if (opacity == 0.0f)
+            alpha = 0;
+        else if (opacity == 1.0f)
+            alpha = 255;
+        else
+            alpha = (u32)(opacity * 255.0f) & 255u;
 
-    u32 alpha;
-    if (opacity == 0.0f)
-        alpha = 0;
-    else if (opacity == 1.0f)
-        alpha = 255;
-    else
-        alpha = static_cast<u32>(opacity * 255.0f) & 255u;
+        u32 color = g_asdTextDefaults.colorBits | alpha;
+        f32 drawX = originalX;
+        if (g_asdTextDefaults.adjustmentEnabled != 0)
+            drawX = renderCtxCalculateStereoParallax(g_renderCtx, fraction) + drawX;
 
-    const u32 color = g_asdTextDefaults.colorBits | alpha;
-    f32 drawX = originalX;
-    if (g_asdTextDefaults.adjustmentEnabled != 0)
-        drawX = renderCtxCalculateStereoParallax(g_renderCtx, fraction) + drawX;
-
-    const f32 advance = textDrawString(drawX, drawY, 0.0f,
-                                    state->resource, state->scale, color, opacity, state->text);
-    const f32 displacement = (advance + drawX) - originalX;
-    return displacement > 0.0f ? displacement : 0.0f;
+        f32 advance = textDrawString(drawX, drawY, 0.0f,
+                                     state->resource, state->scale, color, opacity, state->text);
+        f32 displacement = (advance + drawX) - originalX;
+        result = displacement > 0.0f ? displacement : 0.0f;
+    }
+    return result;
 }

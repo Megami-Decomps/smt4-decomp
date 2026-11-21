@@ -10,7 +10,7 @@
 extern "C" {
 
 int FUN_004e76cc(...);
-int FUN_004fcde0(...);
+int btlReflectQueueSelectionMarks(...);
 
 int infoWinSetText(unsigned int, unsigned int);
 int uiNavigatorStart(int, int, int, int, int);
@@ -86,7 +86,7 @@ extern int FUN_004c8a9c(void);
 /* Supplied declaration required: FUN_004e5830. */
 /* Supplied declaration required: FUN_004e76cc. */
 /* Supplied declaration required: btlActionTargetSlotScore. */
-/* Supplied declaration required: FUN_004fcde0. */
+/* Supplied declaration required: btlReflectQueueSelectionMarks. */
 /* Supplied declaration required: FUN_004fcffc. */
 /* Supplied declaration required: FUN_004fdb18. */
 /* Supplied declaration required: btlReflectQueuePendingRosterFade. */
@@ -420,7 +420,7 @@ LAB_004e0ac0:
         ((*puVar7 & DAT_00571178) == 0 && (puVar7[1] & DAT_0057117c) == 0)) &&
        ((puVar7[0x9d] & 0x400) != 0)) {
       FUN_004c9160(0x16,puVar7,0,1);
-      FUN_004fcde0(0,param_2,puVar7);
+      btlReflectQueueSelectionMarks(0,param_2,puVar7);
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 0x6d);

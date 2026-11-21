@@ -34,7 +34,7 @@ void dialogClose(s32 arg);
 void FUN_002d22c0(s32 arg);
 void naviSwitchTextureSetForMap(MapScreen* screen, s32 mapIndex);
 void naviRefreshBackgroundAndFeedback(MapScreen* screen);
-void FUN_0048d248(MapScreen* screen, u32 value);
+void naviSelectRequestedCategory(MapScreen* screen, u32 value);
 void naviMainSetCurrentMap(void* cursor, s32 mapIndex);
 void pointConvertToFloat(void* pointer, u32 x, u32 y);
 
@@ -76,7 +76,7 @@ void FUN_0048bdec(MapScreen* screen)
             *dirtyB = 1;
         } else {
             g_gameState.naviMapPending = 1;
-            FUN_0048d248(screen, FUN_00492c84(SCREEN_PTR(screen, 0x4cc)));
+            naviSelectRequestedCategory(screen, FUN_00492c84(SCREEN_PTR(screen, 0x4cc)));
         }
         naviRefreshBackgroundAndFeedback(screen);
         if (list->active != 0) {

@@ -23,7 +23,7 @@ int FUN_0020ffd8(...);
 int FUN_0023c154(...);
 int FUN_0023c1bc(...);
 int FUN_0023c24c(...);
-int FUN_0023c368(...);
+int btlReflectQueueTransitionPair(...);
 int FUN_0023c428(...);
 int modelSetAnimationChannels(...);
 int FUN_0024057c(...);
@@ -111,7 +111,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0023c154. */
 /* Supplied declaration required: FUN_0023c1bc. */
 /* Supplied declaration required: FUN_0023c24c. */
-/* Supplied declaration required: FUN_0023c368. */
+/* Supplied declaration required: btlReflectQueueTransitionPair. */
 /* Supplied declaration required: FUN_0023c428. */
 /* Supplied declaration required: btlReflectSetValuePair. */
 /* Supplied declaration required: FUN_0023c5c0. */
@@ -884,7 +884,7 @@ joined_r0x0034611c:
       FUN_0023c428(g_btlAux,(int)*(short *)(*(int *)(psVar2 + 10) + 0x62));
       *(int *)(psVar2 + 0x26) = *(int *)(psVar2 + 0x26) + 1;
     }
-    FUN_0023c368(0,*(unsigned int *)(psVar2 + 4),*(unsigned int *)(psVar2 + 10),0,0,0,0,0);
+    btlReflectQueueTransitionPair(0,*(unsigned int *)(psVar2 + 4),*(unsigned int *)(psVar2 + 10),0,0,0,0,0);
     FUN_0023c24c(g_btlAux,(int)psVar2[0x12],*(unsigned int *)(*(int *)(psVar2 + 10) + 0x5c));
     FUN_0023c1bc(*(unsigned int *)(psVar2 + 0x14) & 0xffff,*(unsigned int *)(psVar2 + 4));
     temp_v5 = *(int *)(psVar2 + 0x26) + 1;
@@ -917,7 +917,7 @@ joined_r0x0034611c:
       FUN_003d9f74(g_btlAux,temp_v9);
       *(int *)(psVar2 + 0x26) = *(int *)(psVar2 + 0x26) + 1;
     }
-    FUN_0023c368(0,*(unsigned int *)(psVar2 + 4),*(unsigned int *)(psVar2 + 10),0,0,0,0,0);
+    btlReflectQueueTransitionPair(0,*(unsigned int *)(psVar2 + 4),*(unsigned int *)(psVar2 + 10),0,0,0,0,0);
     FUN_0023c24c(g_btlAux,(int)psVar2[0x12],*(unsigned int *)(*(int *)(psVar2 + 10) + 0x5c));
     FUN_0023c1bc(*(unsigned int *)(psVar2 + 0x14) & 0xffff,*(unsigned int *)(psVar2 + 4));
     *(int *)(psVar2 + 0x26) = *(int *)(psVar2 + 0x26) + 1;

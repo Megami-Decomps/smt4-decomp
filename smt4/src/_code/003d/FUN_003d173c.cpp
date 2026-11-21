@@ -57,7 +57,7 @@ void btlUiPlaySceneFadeOutWhenReady(BtlUi *uiBlock);
 void slotResetIdle(BtlMainState *state, s32 slot, u32 value);
 void FUN_003ddb50(u32 actor, void *options, u32 value, f32 red, f32 green, f32 blue);
 void FUN_00282820(s32 a1, s32 a2, s32 a3, s32 a4, s32 a5, s32 a6, s32 a7, s32 a8);
-u32 FUN_003de9e4(s32 actor, void *options, u32 value);
+u32 btlReflectQueueFlaggedRecords(s32 actor, void *options, u32 value);
 void btlActionReflectRun(s32 actionId, void *argument);
 void actionCreateKindFive(s32 id, void *argument, u32 value);
 void FUN_00244fb0(BtlMainState *state, u32 slot, u32 palette, u32 param, u32 alpha);
@@ -141,7 +141,7 @@ u32 FUN_003d173c(BtlMainState **block, ActionStateChannel *channel)
         FUN_00282820(0, 0, 0, 0, 5, 0, 6, 0);
         break;
     case 228:
-        FUN_003de9e4(0, channel, 0);
+        btlReflectQueueFlaggedRecords(0, channel, 0);
         btlActionReflectRun(1, channel);
         break;
     case 229:

@@ -1,18 +1,18 @@
-/* NON_MATCHING: sentinel loop remains rolled instead of retail's 48 byte stores; global-load scheduling differs. */
+/* NON_MATCHING: the slot-default loop stays rolled where retail unrolls it into 48 descending byte stores; the global-address loads are scheduled around the argument copy differently. */
+#include <stdio.h>
 #include "shard/W6_W6Match7_KeyedRecordStorage.h"
 
 extern "C" {
 void sysMemClear(void*, u32);
-s32 __2snprintf(u8*, u32, const char*, ...);
 const u8* libc_strrchr(const u8*, u32);
 extern u32 g_keyedRecordCount;
 extern KeyedRecordStorage g_keyedRecords[];
 
-u32 keyedRecordRegisterName(const char* name)
+u8 keyedRecordRegisterName(const char* name)
 {
     sysMemClear(&g_keyedRecords[g_keyedRecordCount], sizeof(KeyedRecordStorage));
     u8* storedName = g_keyedRecords[g_keyedRecordCount].name;
-    __2snprintf(storedName, sizeof(g_keyedRecords[0].name), "%s", name);
+    snprintf((char *)storedName, sizeof(g_keyedRecords[0].name), "%s", name);
     const u8* extension = libc_strrchr(storedName, '.');
     if (extension != NULL) {
         *const_cast<u8*>(extension) = 0;

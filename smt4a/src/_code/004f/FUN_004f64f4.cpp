@@ -1,6 +1,7 @@
 /* NON_MATCHING: the request stride product (i * 35) lands in r1 in retail; armcc reuses r0. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "shard/W6_W6Match7_KeyedRecordStorage.h"
 
 struct VersionLoadRequest {
     u8 recordId; // 0x00
@@ -16,9 +17,8 @@ struct VersionLoadSet {
 extern "C" {
 struct BtlMainStateA;
 s32 btlScriptUnitHasFlags(void);
-u32 keyedRecordRegisterName(const char *);
 u32 FUN_003478dc(u32, const char *);
-void FUN_004f8790(VersionLoadSet *set);
+void btlEffectResolveNames(VersionLoadSet *set);
 void FUN_004f7cd0(VersionLoadSet *set);
 void FUN_004f9278(VersionLoadSet *set);
 void FUN_004f9e0c(VersionLoadSet *set);
@@ -40,7 +40,7 @@ void FUN_004f64f4(VersionLoadSet *set)
             request->recordId = FUN_003478dc(id, command);
         }
     }
-    FUN_004f8790(set);
+    btlEffectResolveNames(set);
     FUN_004f7cd0(set);
     FUN_004f9278(set);
     FUN_004f9e0c(set);

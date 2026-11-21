@@ -75,7 +75,7 @@ void scrScriptProcessStartEntry(u32 process, s32 entry);
 void sysPlaySe(s32 id);
 s32 scrRunOpcodesStub(u32 process);
 void btlPlayMenuConfirmSe(s32 arg);
-void FUN_004fcde0(s32 a, s32 b);
+void btlReflectQueueSelectionMarks(s32 a, s32 b);
 s32 chainCountIdUnflagged(u32 chain, s32 arg);
 
 // Per-frame state machine of the battle talk window: loads the tone resources, starts the
@@ -128,7 +128,7 @@ s32 btlTalkWindowStep(BtlTalkWindow* window, s32 unused)
             for (s32 i = 4; i < 0x36; i++) {
                 BattleSide* side = &window->battle->sides[i];
                 if ((g_btlTalk.targetMask & side->flags) != 0 && (g_btlTalk.excludeMask & side->flags) == 0 && side != NULL) {
-                    FUN_004fcde0(0, 0);
+                    btlReflectQueueSelectionMarks(0, 0);
                 }
             }
         }

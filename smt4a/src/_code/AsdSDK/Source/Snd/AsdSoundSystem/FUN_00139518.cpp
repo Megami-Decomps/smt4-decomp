@@ -1,4 +1,4 @@
-/* NON_MATCHING: the barrier (mcr c7, c10, 5) now matches via nn/svc.h; retail keeps the sound-system address in r7 from entry and the status pointer in r5/r6 (ldrb [r5,#25]) where armcc folds it into the duck base here. */
+/* NON_MATCHING: the barrier (mcr c7, c10, 5) matches via nn/svc.h; retail loads g_asdSoundSystem into r7 at entry and resets the duck through r0 (status derived from it), where armcc keeps the duck base and folds the status offsets into it. */
 #include "common.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 #include "nn/svc.h"
@@ -60,17 +60,18 @@ extern "C" void FUN_00139518(void)
     FUN_00150784();
     FUN_00141b24();
     asdSoundDuckReset(&g_asdSoundDuck.duck);
-    if (g_asdSoundDuck.status.ready != 0) {
+    AsdSndStatusApoc *status = &g_asdSoundDuck.status;
+    if (status->ready != 0) {
         SoundThreadView *soundThread = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
         soundThread->requestLow = 0;
         nn::os::DataMemoryBarrier();
         soundThread->requestHigh = 0;
 
-        for (s32 i = 0; i < g_asdSoundDuck.status.objectCount; ++i) {
+        for (s32 i = 0; i < status->objectCount; ++i) {
             FUN_00152bf8(asdSoundObjectAt(i));
         }
-        g_asdSoundDuck.status.ready = 0;
-        g_asdSoundDuck.status.section.unk08 = -1;
+        status->ready = 0;
+        status->section.unk08 = -1;
     }
     if (g_asdSoundSystem.workBuffer != NULL) {
         asdMemFree(g_asdSoundSystem.workBuffer);

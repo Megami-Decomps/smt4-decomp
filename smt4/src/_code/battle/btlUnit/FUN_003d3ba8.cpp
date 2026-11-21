@@ -25,7 +25,7 @@ int FUN_0033b33c(...);
 int btlLookupEffectValue(...);
 int FUN_003ddae8(...);
 int btlReflectCreateKindf(...);
-int FUN_003de60c(...);
+int btlReflectQueueDepthOverlays(...);
 int FUN_003de978(...);
 
 int btlEffectOwnerGetBestSlotValue(...);
@@ -35,7 +35,7 @@ int frameRangeExtend(...);
 int FUN_00229a3c(...);
 int btlTargetSetFlag10(...);
 int FUN_00246080(...);
-int FUN_00246454(...);
+int btlReflectQueueSelectionMarks(...);
 int btlEntryBuildSummary(short *, unsigned int, unsigned int);
 int FUN_00255180(...);
 int FUN_00256898(...);
@@ -131,7 +131,7 @@ extern unsigned int btlQueueParamLimitForKind(unsigned int);
 extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_0023f27c. */
 /* Supplied declaration required: FUN_00246080. */
-/* Supplied declaration required: FUN_00246454. */
+/* Supplied declaration required: btlReflectQueueSelectionMarks. */
 /* Supplied declaration required: btlEntryBuildSummary. */
 extern int FUN_002485b8(void);
 /* Supplied declaration required: btlQueueReflectEntryAction. */
@@ -169,7 +169,7 @@ extern unsigned int btlFindEffectNameValue(int);
 /* Supplied declaration required: FUN_003ddae8. */
 /* Supplied declaration required: btlReflectCreateKindf. */
 /* Supplied declaration required: btlReflectCreateKind2a. */
-/* Supplied declaration required: FUN_003de60c. */
+/* Supplied declaration required: btlReflectQueueDepthOverlays. */
 /* Supplied declaration required: FUN_003de874. */
 /* Supplied declaration required: FUN_003de978. */
 extern unsigned int FUN_003de9b0(unsigned int, unsigned int *, unsigned int);
@@ -339,7 +339,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       temp_v4 = FUN_002281a4(g_btlAux);
       if ((*puVar7 & 8) != 0) {
         if ((*puVar7 & 1) != 0) {
-          FUN_00246454(temp_v4 + temp_v21,param_2,puVar7);
+          btlReflectQueueSelectionMarks(temp_v4 + temp_v21,param_2,puVar7);
         }
       }
       else {
@@ -364,7 +364,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       temp_v9 = *psVar12;
       temp_v12 = *param_1;
       btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v12), (int)temp_v9);
-      FUN_00246454(temp_v3 + 0x28,param_2,temp_v12);
+      btlReflectQueueSelectionMarks(temp_v3 + 0x28,param_2,temp_v12);
       frameRangeExtend(param_1,param_2,(int)temp_v9,temp_v3,0x1e,0x1e);
       break;
     case 0xc:
@@ -808,14 +808,14 @@ LAB_003d444c:
         temp_v11 = temp_v12 + *(short *)(*piVar1 + temp_v11 * 0x288 + 8) * 0x114;
         if ((temp_v11 != 0) && (temp_v12 = *param_2, (temp_v12 & 0x1080) == 0)) {
           temp_v12 = 0;
-          FUN_003de60c(0,param_2,5);
+          btlReflectQueueDepthOverlays(0,param_2,5);
         }
       }
     }
   }
   else if ((temp_v11 != 0) && (temp_v12 = *param_2, (temp_v12 & 0x1080) == 0)) {
     temp_v12 = 0;
-    FUN_003de60c(0,param_2,5);
+    btlReflectQueueDepthOverlays(0,param_2,5);
   }
   if ((temp_v13 != 0) && (temp_v12 = btlFindEffectNameValue(g_btlAux), -1 < (int)temp_v12)) {
     temp_v12 = FUN_003de9b0(temp_v12,param_2,5);

@@ -1,9 +1,9 @@
 #include "common.h"
 #include "gamedata/GameDataAccess.h"
+#include "shard/W6_W6Match7_KeyedRecordStorage.h"
 
 extern "C" {
 s32 FUN_003478dc(s32 index, const char *data);
-s32 keyedRecordRegisterName(const char *name);
 const char *libc_strrchr(const char *text, u32 character);
 void asdMemFree(void *allocation);
 char *asdLoadFileSyncDefault(const char *path);

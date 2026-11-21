@@ -103,7 +103,7 @@ void FUN_00343f44(u32, BattleQueuedActionStep *work)
             const s16 second = static_cast<s16>(DAT_00439a20.second);
             const s16 priority = static_cast<s16>(DAT_00439a20.priority);
             FUN_0024057c(reinterpret_cast<u32>(state), reinterpret_cast<ColorFadeWork *>(action), 0, 0);
-            FUN_002451c4(second + first, work->context, reinterpret_cast<u32>(action), 0xFF, priority, 0);
+            btlReflectCreateKind22(second + first, work->context, reinterpret_cast<u32>(action), 0xFF, priority, 0);
             u32 kind = 6;
             if ((action->status & 0x10) != 0) {
                 kind = 7;
