@@ -1,4 +1,6 @@
-/* NON_MATCHING: restored signed side index and selected-record reset argument; battle-mask loads and count-argument stack marshalling still differ. */
+/* NON_MATCHING: restored signed side index, selected-record reset argument, the linker-inlined pending-count getter and
+ * the by-value word pair; the battle-mask loads, the mask loop's counter register and the first call's stack marshalling
+ * still differ. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 
@@ -38,7 +40,12 @@ extern BattleMaskPresets g_battleMaskPresets;
 
 s32 FUN_003e0154(void);
 s32 FUN_003e0164(void);
-void btlRecoverHpMpByPercent(s32 a, s32 b, s32 c, u8* unit, s32 d, u32 e, u32 f, s32 g, u32 mask, s32 h, s32 i, s32 j, s32 k, s32 l, s32 m);
+/* unit-local: the two words btlRecoverHpMpByPercent takes by value (its definition is not written yet) */
+struct RecoverPair {
+    u32 first;
+    u32 second;
+};
+void btlRecoverHpMpByPercent(s32 a, s32 b, s32 c, u8* unit, s32 d, RecoverPair pair, s32 g, u32 mask, s32 h, s32 i, s32 j, s32 k, s32 l, s32 m);
 s32 gameDataBlocksGetTableFlag(void);
 s32 gameDataFlagTestBit(u32 bit);
 u8* gameGetSlotTable(void);
@@ -49,6 +56,14 @@ void* saveSlotFindSelected(void);
 void saveSlotApplySelected(BattleMain* battle);
 void btlClearMode4D74(BattleMain* battle);
 void btlEffectsRelease(BattleMain* battle);
+s32 loadStepGetPendingSlots(BattleMain *battle);
+
+/* Builds the by-value pair (retail copies the two sprite words with vldr/vstmia, as an 8-byte aggregate). */
+static __inline RecoverPair pairOf(u32 first, u32 second)
+{
+    RecoverPair pair = {first, second};
+    return pair;
+}
 
 // Refreshes the battle unit visuals after a state change and re-normalises the party records.
 u32 FUN_0035f2f4(void)
@@ -56,7 +71,7 @@ u32 FUN_0035f2f4(void)
     BattleMain* battle = reinterpret_cast<BattleMain *>(btlGetMainState());
     s32 first = FUN_003e0154();
     s32 second = FUN_003e0164();
-    btlRecoverHpMpByPercent(0, 0, 0, *reinterpret_cast<u8**>(reinterpret_cast<u8*>(battle) + 0x1ed4), 0, first, second, -1, 2, 0, 0, 9, 0, 0, 1);
+    btlRecoverHpMpByPercent(0, 0, 0, battle->units, 0, pairOf(first, second), -1, 2, 0, 0, 9, 0, 0, 1);
 
     s32 tableFlag = gameDataBlocksGetTableFlag();
     if (tableFlag == 4 || gameDataFlagTestBit(0x80) != 0) {
@@ -68,7 +83,7 @@ u32 FUN_0035f2f4(void)
                     if (bit == 1 || bit == 3) continue;
                     mask |= 1 << (bit + 1);
                 }
-                btlRecoverHpMpByPercent(0, 0, 0, battle->units + (s16)side->unitIndex * 0x1d0, 0, side->spriteA, side->spriteB, -1, mask, 0, 0, 9, 0, 0, 1);
+                btlRecoverHpMpByPercent(0, 0, 0, battle->units + (s16)side->unitIndex * 0x1d0, 0, pairOf(side->spriteA, side->spriteB), -1, mask, 0, 0, 9, 0, 0, 1);
             }
         }
     }
@@ -95,7 +110,7 @@ u32 FUN_0035f2f4(void)
         saveSlotApplySelected(battle);
         btlClearMode4D74(battle);
     }
-    if (battle->effectCount > 0) btlEffectsRelease(battle);
+    if (loadStepGetPendingSlots(battle) > 0) btlEffectsRelease(battle);
     return 1;
 }
 

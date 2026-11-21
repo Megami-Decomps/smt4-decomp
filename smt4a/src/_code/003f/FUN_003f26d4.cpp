@@ -13,7 +13,7 @@ extern "C" {
 
 void btlSelectSingleRandomTarget(BtlAiState *state);
 void FUN_003efc40(BtlAiState *state);
-void FUN_003f2aec(BtlAiState *state, s32 flag);
+void battleSortTurnOrder(BtlAiState *state, s32 flag);
 s16 FUN_0034ef58(s32 minimum, s32 maximum);
 
 /* Picks the AI's candidate targets for the current turn and the one it acts on first. */
@@ -68,7 +68,7 @@ void FUN_003f26d4(BtlAiState *state)
     }
     if (found > 0) {
         state->turnOrder.position = 0;
-        FUN_003f2aec(state, 0);
+        battleSortTurnOrder(state, 0);
         state->commandEntry.selection = state->turnOrder.indices[state->turnOrder.position];
         return;
     }

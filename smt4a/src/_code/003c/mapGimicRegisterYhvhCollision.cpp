@@ -1,5 +1,3 @@
-/* NON_MATCHING: trigonometric zero initialization uses a saved GPR rather than retail VFP zero, changing live-register allocation. */
-/* Registers the active YHVH actor's forward-offset collision box. */
 #include "map/MapGimicGlobal.h"
 
 extern "C" {
@@ -10,19 +8,20 @@ s32 sceneRegisterBoxEffect(u32 id, u32 value, const char *name, u32 resource,
     u32 data0, u32 data1, s32 data2, u32 priority,
     f32 x, f32 y, f32 z, f32 extent0, f32 extent1, f32 extent2, f32 yaw);
 
-void FUN_003cb744(void)
+/* Registers the active YHVH actor's collision box, 100 units ahead of it along its heading. */
+void mapGimicRegisterYhvhCollision(void)
 {
-    f32 phase[2] = {0.0f, 0.0f};
     MapGimicStageActorA *actor = &g_mapGimic->stageActor;
+    f32 sine = 0.0f;
+    f32 cosine = 0.0f;
     if (actor->active) {
-        f32 x = actor->position.x;
-        f32 y = actor->position.y;
-        f32 z = actor->position.z;
-        mathSinCos(&phase[0], &phase[1], actor->heading * (256.0f / 360.0f));
+        MapVector position = actor->position;
+        mathSinCos(&sine, &cosine, actor->heading * (256.0f / 360.0f));
+        position.x += sine * 100.0f;
+        position.z += cosine * 100.0f;
         sceneRegisterBoxEffect(520, 0, "YHVH", 87, 12, -1,
             0, 0, 0, 0, 0, 0, 0, -1, 1, 1, 1, -1, 0,
-            x + phase[0] * 100.0f, y, z + phase[1] * 100.0f,
-            300.0f, 200.0f, 120.0f, actor->heading);
+            position.x, position.y, position.z, 300.0f, 200.0f, 120.0f, actor->heading);
     }
 }
 }

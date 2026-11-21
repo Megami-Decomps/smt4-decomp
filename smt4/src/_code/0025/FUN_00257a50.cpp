@@ -10,7 +10,6 @@ StatBlock *partyMemberFindById(u32 id);
 void FUN_0029dc74(u32 id, StatBlock *result);
 void uniteMergeInheritedSkillsAndStats(void *context, const StatBlock *first,
     const StatBlock *second, const StatBlock *third, StatBlock *result);
-void uniteBuildInheritedSkillCandidates(u32 id, const StatBlock *first, const StatBlock *second);
 s32 flagCountUnlockedSlots(const StatBlock *unit);
 void unitRecalculateEffectiveStats(StatBlock *unit);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);

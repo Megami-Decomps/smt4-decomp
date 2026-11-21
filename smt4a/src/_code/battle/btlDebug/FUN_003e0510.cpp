@@ -12,7 +12,7 @@ int FUN_003e3188(unsigned int *, int);
 int FUN_003eba0c(int, int);
 int FUN_003edaf0(int, int);
 int btlFindSelectionIndexByOrdinal(int, int);
-int FUN_0050dda4(void);
+int libm_tanf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int __aeabi_memcpy4(...);
 
 /* stack frame of param_2: 18 slot(s), 72 byte(s) */
@@ -51,7 +51,7 @@ extern unsigned int DAT_0057aa1c; /* 0x57aa1c */
 /* Supplied declaration required: FUN_003edaf0. */
 /* Supplied declaration required: btlFindSelectionIndexByOrdinal. */
 extern int idSetFindSubjectIndex(int, int);
-/* Supplied declaration required: FUN_0050dda4. */
+/* Supplied declaration required: libm_tanf. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -120,7 +120,7 @@ void FUN_003e0510(unsigned int *param_1,int param_2)
     temp_v17 = -20.0f;
   }
   temp_v16 = 0.30543265f;
-  FUN_0050dda4();
+  libm_tanf();
   if (0 < temp_v3) {
     temp_v8 = 0;
     temp_v9 = temp_v3;

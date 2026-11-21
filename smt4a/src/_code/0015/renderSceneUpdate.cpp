@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail uses a separate model-slot address point and retains a fixed-zero debug-dispatch test whose original hook is unknown. */
+/* NON_MATCHING: retail uses a separate model-slot address point; the fixed-zero debug-dispatch test is the call to the
+ * mov r0,#0 stub sceneQueryFalse armlink inlined (the smt4 twin FUN_0011891c calls it). */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "camp/RenderCtxA.h"
@@ -30,6 +31,8 @@ void nw_gfx_SceneNode_AttachChild(void *builder, u32 tree);
 void FUN_00176e84(ModelOwner *owner, u32 mask, s32 mode, s32 flags);
 void nw_gfx_RenderContext_ResetState_2B7478(void *context);
 void renderCtxResetFrameState(RenderCtxA *context);
+s32 sceneQueryFalse(void);
+void registerBlockRequestGroups(u32 groups);
 }
 
 /* Traverse the active model scene and reset the render context after submission. */
@@ -52,6 +55,8 @@ extern "C" void renderSceneUpdate(void)
     }
     FUN_00176e84(g_gfxSettings.owner[1], g_gfxSettings.node1, 2, 0);
     nw_gfx_RenderContext_ResetState_2B7478(context);
+    if (sceneQueryFalse() != 0)
+        registerBlockRequestGroups(0x3fff);
     renderCtxResetFrameState(g_renderCtx);
     g_gfxSettings.pending = 0;
 }

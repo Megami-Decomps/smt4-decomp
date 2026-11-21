@@ -32,7 +32,7 @@ typedef struct CandidateState {
 /* The slice of g_btlMain holding the masks tested against the flag words. */
 
 
-void FUN_003f2aec(CandidateState *state, s32 count);
+void battleSortTurnOrder(CandidateState *state, s32 count);
 s16 FUN_0034ef58(s32 low, s32 high);
 
 enum {
@@ -96,7 +96,7 @@ void FUN_003efc40(CandidateState *state)
     u16 result = found > 0 ? 0 : 0xFFFF;
     state->chosen = result;
     if (found > 0) {
-        FUN_003f2aec(state, i);
+        battleSortTurnOrder(state, i);
         result = state->candidates[state->chosen];
     }
     state->result = result;

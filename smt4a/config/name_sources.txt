@@ -8580,3 +8580,11 @@
 001aec9c nn_cx_UncompressRL inferred CTR-SDK nn::cx UncompressRL (twin of smt4 0x14f2c8)
 001aeddc nn_cx_UncompressHuffman inferred CTR-SDK nn::cx UncompressHuffman (twin of smt4 0x14f408)
 001aeecc nn_cx_GetUncompressedSize inferred CTR-SDK nn::cx GetUncompressedSize (twin of smt4 0x14f4f8)
+001bbde0 libm_acosf inferred armlib acosf, exact twin of smt4 0x28836c (the old name and include/util/TrigF32.h's "sine" were wrong)
+0050dda4 libm_tanf inferred armlib tanf, exact twin of smt4 0x2881bc (between __hardfp_atan2f/mathlib_ceilf and the runtime block)
+003f2aec battleSortTurnOrder inferred twin of smt4 battleSortTurnOrder (same source): sorts the turn order from a start slot by speed, then id
+004b82a0 sceneTransitionStartRequestedSequence inferred twin of smt4 FUN_003b92b4
+003cb744 mapGimicRegisterYhvhCollision inferred registers the active YHVH actor's collision box ("YHVH") 100 units ahead along its heading
+002d0394 btlViewUpdateNavigationPoint inferred activates the camera navigation point while the player is within 90 units and facing it within 80 degrees
+002df4a8 sceneQueryFalse inferred twin of smt4 sceneQueryFalse (0x20f3a0): the mov r0,#0; bx lr stub BTLMAIN D registers as its draw callback; armlink inlined its calls in renderSceneUpdate and asdModelRenderLightPass
+00536bec g_titleConfigDefaultParams inferred size:0x60 the title config window's two 0x30-byte paramsInit tables (FUN_0037a2e4 passes DAT+0 and DAT+0x30 from one pool word at +0x30); twin of smt4 g_titleConfigDefaultParams

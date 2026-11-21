@@ -11,7 +11,7 @@ void shopDrawAppraisalRow(SelectMenu *menu, s32 index, s32 marked, s32 value);
 void shopDrawEquippedItemPage(SelectMenu *menu);
 void FUN_003a1d04(SelectMenu *menu);
 void shopScreenRedraw(SelectMenu *menu);
-void FUN_003a0f88(SelectMenu *menu);
+void shopDrawQuantityPanel(SelectMenu *menu);
 
 /* Handle the menu's pending request: refresh the list entries, or run the cancel, confirm or scroll
  * handler; then close the menu when asked to. */
@@ -52,7 +52,7 @@ void selectMenuHandlePendingRequest(SelectMenu *menu)
         shopScreenRedraw(menu);
     }
     if (menu->flags & MENU_CLOSE) {
-        FUN_003a0f88(menu);
+        shopDrawQuantityPanel(menu);
     }
 }
 

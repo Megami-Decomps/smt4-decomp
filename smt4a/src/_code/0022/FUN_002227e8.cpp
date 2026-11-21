@@ -15,7 +15,7 @@ int FUN_00223fac(void);
 int FUN_002240f0(void);
 int FUN_002826dc(float *, float *, int, int);
 int distSpatial(void);
-int FUN_002d0394(void);
+int btlViewUpdateNavigationPoint(void);
 int FUN_002d8614(...);
 int padGetNormalizedAnalogStick(float *, float *, int);
 int mathPositionHeadingDegrees(void);
@@ -88,7 +88,7 @@ extern int DAT_005f1c64; /* 0x5f1c64 */
 extern unsigned int FUN_0029202c(void);
 /* Supplied declaration required: FUN_00297f00. */
 /* Supplied declaration required: distSpatial. */
-/* Supplied declaration required: FUN_002d0394. */
+/* Supplied declaration required: btlViewUpdateNavigationPoint. */
 /* Supplied declaration required: FUN_002d8614. */
 extern int lmapSceneGetUnk0(void);
 /* Supplied declaration required: padGetNormalizedAnalogStick. */
@@ -228,7 +228,7 @@ LAB_00222b78:
         DAT_005f0d28 = DAT_005f0d28 - 1;
       }
       else {
-        FUN_002d0394();
+        btlViewUpdateNavigationPoint();
       }
       temp_v5 = *(float *)(g_lmapScene + 0x1c);
       distSpatial();
@@ -375,7 +375,7 @@ LAB_00222b78:
   case 7:
     temp_v1 = mapEnemyTryStartApproach();
     if (temp_v1 == 0) {
-      FUN_002d0394();
+      btlViewUpdateNavigationPoint();
       if (DAT_005f0cc0 != '\0') {
         return;
       }

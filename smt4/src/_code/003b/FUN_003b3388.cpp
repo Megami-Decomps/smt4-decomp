@@ -25,7 +25,7 @@ int drawSetColorFromRGBA8(...);
 int textDrawString(...);
 int gxResetColorQuadToWhite(void);
 int texDrawCompositeSprite(...);
-int FUN_0031eba0(...);
+int portraitDrawClipped(...);
 int VectorSignedToFloat(...);
 int __aeabi_idivmod(...);
 
@@ -88,7 +88,7 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0031eba0. */
+/* Supplied declaration required: portraitDrawClipped. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
 void FUN_003b3388(int param_1,int param_2,int param_3)
@@ -266,7 +266,7 @@ LAB_003b35ac:
         temp_v24 = temp_v5;
         drawSetColorFromRGBA8(temp_v5);
       }
-      FUN_0031eba0((int)(short)(int)temp_v22,aiStack_108[temp_v21] + (int)*(short *)(temp_v14 + 8) + temp_v6,
+      portraitDrawClipped((int)(short)(int)temp_v22,aiStack_108[temp_v21] + (int)*(short *)(temp_v14 + 8) + temp_v6,
                    aiStack_f8[temp_v21] + (int)*(short *)(temp_v14 + 10) + param_3,0x6d,1,
                    aiStack_108[temp_v21] + temp_v6,aiStack_f8[temp_v21] + param_3,
                    (int)**(short **)(temp_v26 + 0xc),(int)(*(short **)(temp_v26 + 0xc))[1]);

@@ -76,6 +76,9 @@ difference a register tie-break.
   `AsdSndSlotC` made retail's split base (`add r0, r1, #1536` then `[r0, #130]`/`[r0, #146]`, smt4
   `FUN_0010d3f8`), where a `u8` addresses each slot from the sound base.
 - A flag read with `ldrb` through a split large-offset base and tested against 0 is `s8`.
+- So is one read through a pool-loaded offset (`ldr r0, =0x1168; ldrb r0, [r0, r4]`), where a `u8` gives
+  `add r5, r4, #0x1000; ldrb r0, [r5, #360]`: smt4a `FUN_004b82a0`'s `returnToMap` (47 against 88 lines), and the
+  same `s8` made its IV twin `FUN_003b92b4` IDENTICAL (63 lines as `u8`; wave 66).
 - Two byte fields of an array element that retail reads through one shared base register (`active`, then `pass`)
   are both `s8`; index the element at each use (`scene->numbers[slot].active`) rather than caching a pointer
   (smt4 `btlDrawFloatingNumbers`, wave 64).
@@ -254,6 +257,10 @@ difference a register tie-break.
 
 - In a `switch` on a mode, a work pointer declared inside each `case` (`T *work = g_x;`) puts the
   global's pool word before the float constants the cases share; one declared at the top puts it after.
+- A second pool word for the same global, loaded into another register for just a couple of calls, is an inlined
+  helper with its own local pointer: armcc does not share a literal across the inline boundary. The archive check
+  `asdSndSoundExists(id)` (`&g_asdSound`, then `IsAvailable` and `GetSoundType`) gave the retail literal pool of
+  smt4 `asdSndPlaySlotA`, `FUN_0010ddcc` and smt4a `asdSndPlaySlotA` (wave 66; registers still differ).
 - A local pointer to a global moves its pool word earlier; a constant passed through a
   `static __inline` helper's parameter moves it later, or keeps it in a callee-saved register;
   named locals declared in retail's pool order fix the order of constants.

@@ -12,7 +12,7 @@ void FUN_002c670c(s32 enabled);
 void lmapUpdateEngineRecordNavigation(void);
 void FUN_002b7ce0(void);
 void mapSpawnActiveSignboardEffects(void);
-void FUN_003cb744(void);
+void mapGimicRegisterYhvhCollision(void);
 void mapIfRestartActiveRecords(s32 enabled);
 
 void FUN_003b5d20(void)
@@ -44,7 +44,7 @@ void FUN_003b5d20(void)
         mapSpawnActiveSignboardEffects();
         lmapUpdateEngineRecordNavigation();
         FUN_002b7ce0();
-        FUN_003cb744();
+        mapGimicRegisterYhvhCollision();
     }
     mapIfRestartActiveRecords(1);
 }

@@ -1,4 +1,5 @@
-/* NON_MATCHING: frame texture quad draw; retail reaches the flag/blend fields through a second base register (tex + 0xF00), keeps the filter flag in one compare and divides in a different register order */
+/* NON_MATCHING: 99 lines: frame texture quad draw; retail reaches the filter flag through a second base register
+ * (tex + 0xE00), loads the surface's width and height with one vldmia and divides in a different register order. */
 #include "ui/UiSpriteApi.h"
 #include "camp/RenderCtx.h"
 #include "util/BitsAndBytes_VariantA.h"
@@ -56,32 +57,24 @@ void FUN_00117a70(s32 wide)
     RenderCtx *context = g_titleScene;
     s32 state = renderCtxPackPassFlags(1, 0);
     renderStackPushCounted(context->stacks + RENDER_STACK_A, state);
-    context = g_titleScene;
     switch (tex->hdr.blendMode) {
     case 0:
-        state = packNibblesAndByte(6, 7, 0);
-        renderStackSet(context->stacks + RENDER_STACK_B, state);
+        renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
         break;
     case 1:
-        state = packNibblesAndByte(6, 1, 0);
-        renderStackSet(context->stacks + RENDER_STACK_B, state);
+        renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
         break;
     case 2:
-        state = packNibblesAndByte(6, 1, 2);
-        renderStackSet(context->stacks + RENDER_STACK_B, state);
+        renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 2));
         break;
     }
     renderCtxSelectTexture(g_titleScene, surface);
-    u32 color = tex->hdr.color;
-    f32 z = tex->hdr.depth;
-    FUN_002ba1e0(color, color, color, color,
-                 tex->hdr.x[0], tex->hdr.y[0], z, tex->hdr.x[1], tex->hdr.y[1], z,
-                 tex->hdr.x[2], tex->hdr.y[2], z, tex->hdr.x[3], tex->hdr.y[3], z,
+    FUN_002ba1e0(tex->hdr.color, tex->hdr.color, tex->hdr.color, tex->hdr.color,
+                 tex->hdr.x[0], tex->hdr.y[0], tex->hdr.depth, tex->hdr.x[1], tex->hdr.y[1], tex->hdr.depth,
+                 tex->hdr.x[2], tex->hdr.y[2], tex->hdr.depth, tex->hdr.x[3], tex->hdr.y[3], tex->hdr.depth,
                  maxU, 0.0f, maxU, maxV, 0.0f, 0.0f, 0.0f, maxV);
-    context = g_titleScene;
     if (tex->hdr.blendMode != 0) {
-        state = packNibblesAndByte(6, 7, 0);
-        renderStackSet(context->stacks + RENDER_STACK_B, state);
+        renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
     }
     renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
 }

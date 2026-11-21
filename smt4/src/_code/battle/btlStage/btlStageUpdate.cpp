@@ -10,7 +10,7 @@ extern const char DAT_004017a0[]; // "Light_EFT"
 void mdlHandleArrayDestroy(BattleStageModel *stage);
 void asdModelSlotSetColor(u32 slot, u32 bank, f32 red, f32 green, f32 blue);
 void FUN_002759bc(void);
-void FUN_00280ac0(s32 mode);
+void frameTexConfigureCaptureTextures(s32 mode);
 void FUN_00340350(BattleStageModel *stage);
 void FUN_0034043c(BattleStageModel *stage);
 void mapSetThreeTargetRotations(BattleStageModel *stage, f32 x, f32 y, f32 z);
@@ -42,7 +42,7 @@ u32 btlStageUpdate(BattleStageModel *stage, u32 work)
     case 0:
         break;
     case 1:
-        FUN_00280ac0(0);
+        frameTexConfigureCaptureTextures(0);
         FUN_003c8058(stage);
         stage->state = 2;
         break;

@@ -48251,12 +48251,12 @@
     },
     {
       "address": "0x1bbde0",
-      "function": "mathRemPio2f",
+      "function": "libm_acosf",
       "module": "_code",
-      "object": "build/obj/_code/001b/mathRemPio2f.o",
+      "object": "build/obj/_code/001b/libm_acosf.o",
       "size": 244,
-      "source": "src/_code/001b/mathRemPio2f.cpp",
-      "target": "orig/target/_code/001b/mathRemPio2f.o",
+      "source": "src/_code/001b/libm_acosf.cpp",
+      "target": "orig/target/_code/001b/libm_acosf.o",
       "thumb": false
     },
     {
@@ -70282,12 +70282,12 @@
     },
     {
       "address": "0x2d0394",
-      "function": "FUN_002d0394",
+      "function": "btlViewUpdateNavigationPoint",
       "module": "_code",
-      "object": "build/obj/_code/002d/FUN_002d0394.o",
+      "object": "build/obj/_code/002d/btlViewUpdateNavigationPoint.o",
       "size": 220,
-      "source": "src/_code/002d/FUN_002d0394.cpp",
-      "target": "orig/target/_code/002d/FUN_002d0394.o",
+      "source": "src/_code/002d/btlViewUpdateNavigationPoint.cpp",
+      "target": "orig/target/_code/002d/btlViewUpdateNavigationPoint.o",
       "thumb": false
     },
     {
@@ -71133,12 +71133,12 @@
     },
     {
       "address": "0x2df4a8",
-      "function": "FUN_002df4a8",
+      "function": "sceneQueryFalse",
       "module": "_code",
-      "object": "build/obj/_code/002d/FUN_002df4a8.o",
+      "object": "build/obj/_code/002d/sceneQueryFalse.o",
       "size": 8,
-      "source": "src/_code/002d/FUN_002df4a8.cpp",
-      "target": "orig/target/_code/002d/FUN_002df4a8.o",
+      "source": "src/_code/002d/sceneQueryFalse.cpp",
+      "target": "orig/target/_code/002d/sceneQueryFalse.o",
       "thumb": false
     },
     {
@@ -125645,12 +125645,12 @@
     },
     {
       "address": "0x3cb744",
-      "function": "FUN_003cb744",
+      "function": "mapGimicRegisterYhvhCollision",
       "module": "_code",
-      "object": "build/obj/_code/003c/FUN_003cb744.o",
+      "object": "build/obj/_code/003c/mapGimicRegisterYhvhCollision.o",
       "size": 228,
-      "source": "src/_code/003c/FUN_003cb744.cpp",
-      "target": "orig/target/_code/003c/FUN_003cb744.o",
+      "source": "src/_code/003c/mapGimicRegisterYhvhCollision.cpp",
+      "target": "orig/target/_code/003c/mapGimicRegisterYhvhCollision.o",
       "thumb": false
     },
     {
@@ -130911,12 +130911,12 @@
     },
     {
       "address": "0x3f2aec",
-      "function": "FUN_003f2aec",
+      "function": "battleSortTurnOrder",
       "module": "_code",
-      "object": "build/obj/_code/003f/FUN_003f2aec.o",
+      "object": "build/obj/_code/003f/battleSortTurnOrder.o",
       "size": 248,
-      "source": "src/_code/003f/FUN_003f2aec.cpp",
-      "target": "orig/target/_code/003f/FUN_003f2aec.o",
+      "source": "src/_code/003f/battleSortTurnOrder.cpp",
+      "target": "orig/target/_code/003f/battleSortTurnOrder.o",
       "thumb": false
     },
     {
@@ -162611,12 +162611,12 @@
     },
     {
       "address": "0x4b82a0",
-      "function": "FUN_004b82a0",
+      "function": "sceneTransitionStartRequestedSequence",
       "module": "_code",
-      "object": "build/obj/_code/004b/FUN_004b82a0.o",
+      "object": "build/obj/_code/004b/sceneTransitionStartRequestedSequence.o",
       "size": 736,
-      "source": "src/_code/004b/FUN_004b82a0.cpp",
-      "target": "orig/target/_code/004b/FUN_004b82a0.o",
+      "source": "src/_code/004b/sceneTransitionStartRequestedSequence.cpp",
+      "target": "orig/target/_code/004b/sceneTransitionStartRequestedSequence.o",
       "thumb": false
     },
     {
@@ -174573,12 +174573,12 @@
     },
     {
       "address": "0x50dda4",
-      "function": "FUN_0050dda4",
+      "function": "libm_tanf",
       "module": "_code",
-      "object": "build/obj/_code/0050/FUN_0050dda4.o",
+      "object": "build/obj/_code/0050/libm_tanf.o",
       "size": 368,
-      "source": "src/_code/0050/FUN_0050dda4.cpp",
-      "target": "orig/target/_code/0050/FUN_0050dda4.o",
+      "source": "src/_code/0050/libm_tanf.cpp",
+      "target": "orig/target/_code/0050/libm_tanf.o",
       "thumb": false
     },
     {

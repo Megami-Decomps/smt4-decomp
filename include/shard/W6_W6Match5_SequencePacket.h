@@ -16,4 +16,11 @@ struct ScriptSequencePacket {
     }
 };
 
+/* A named sequence request (kind 4): the scene id, the save slot (-1: none) and the scene name. */
+struct NamedSceneSequence {
+    /* 0x00 */ u32 id;
+    /* 0x04 */ s32 slot;
+    /* 0x08 */ char name[24];
+};
+
 #endif

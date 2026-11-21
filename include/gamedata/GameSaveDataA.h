@@ -215,7 +215,7 @@ typedef struct GameSaveBodyA {
     union {
         /* 0x27E90 */ u8 unk27E90[0x288C];
         struct {
-            /* 0x27E90 */ u8 values[4];    /* the title configuration's saved setting bytes */
+            /* 0x27E90 */ s8 values[4];    /* the title configuration's saved setting bytes */
             /* 0x27E94 */ u8 saved;        /* nonzero once the settings were saved */
         } titleConfig;
         struct {

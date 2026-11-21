@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0023f410(int, int, int);
 int FUN_00240520(int, unsigned int);
-int FUN_002881bc(void);
+int libm_tanf(void);
 int modelGetBoneTranslationByName(unsigned int, unsigned char *, float *);
 int nkmEnemyFindById(void);
 
@@ -36,7 +36,7 @@ static float romwright_sqrt_4(float value)
 #endif
 /* Supplied declaration required: FUN_0023f410. */
 /* Supplied declaration required: FUN_00240520. */
-/* Supplied declaration required: FUN_002881bc. */
+/* Supplied declaration required: libm_tanf. */
 /* Supplied declaration required: modelGetBoneTranslationByName. */
 /* Supplied declaration required: nkmEnemyFindById. */
 
@@ -118,7 +118,7 @@ void FUN_003392cc(int param_1)
   temp_v12 = 44.5f;
   temp_v14 = 44.5f - *(float *)(param_1 + 0x43a4);
   temp_v7 = 0.30543265f;
-  FUN_002881bc();
+  libm_tanf();
   temp_v2 = 0;
   temp_v10 = temp_v13;
   if (0 < (int)temp_v3) {

@@ -5019,7 +5019,7 @@
 003f9e30 libcVformat
 002a6114 texTableEntryStartLoad
 002ae9ec texTableRecordCallWithParams
-0028836c libm_sinf
+0028836c libm_acosf
 002c6a50 rt_ctype_table
 001317c8 idEntryTableFindById
 002a3d58 effPartInitDefaults
@@ -6175,3 +6175,12 @@
 0023b4f4 nn_math_VEC3TransformCoordArray
 0039f874 terminalWindowInitTouchRegions
 002e2fb0 statusRefreshSkillsMarkNew
+002881bc libm_tanf
+00240678 battleEncounterStepAwaitCompletion
+00280ac0 frameTexConfigureCaptureTextures
+002cf3b4 sortModesResetDefaults
+003b92b4 sceneTransitionStartRequestedSequence
+0010889c panelUpdateAnimatedScale
+003a0f88 shopDrawQuantityPanel
+0031eba0 portraitDrawClipped
+002d28a4 lmapCameraSetMapPresets

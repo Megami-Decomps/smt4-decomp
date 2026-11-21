@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail contains a provably unreachable registerBlockRequestGroups branch after MOV r0,#0; dead source code is not reproduced. */
+/* NON_MATCHING: the debug hook's test is written as the call (sceneQueryFalse, the mov r0,#0 stub armlink inlined; the
+ * smt4 twin FUN_00117604 calls it); the rest of the pass schedules and allocates differently (107 lines). */
 #include "shard/S1GfxModel.h"
 #include "gfx/GfxSettings.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
@@ -34,6 +35,8 @@ void FUN_00176e84(void*, u32, u32, u32);
 void FUN_0017721c(void*, u32, u32, u32);
 void nw_gfx_RenderContext_ResetState_2B7478(void*);
 void renderCtxResetFrameState(RenderCtxA *);
+s32 sceneQueryFalse(void);
+void registerBlockRequestGroups(u32 groups);
 
 /* Slot 0's pass owner (its render context at +4) and transform builder (its visit parameters at +0x10). */
 static inline ModelLightPassOwner* passOwner(const GfxSettings* settings)
@@ -69,6 +72,9 @@ void asdModelRenderLightPass(void)
         nw_gfx_RenderContext_ResetState_2B7478(savedContext);
     } else {
         FUN_00176e84(passOwner(settings), settings->node0, 1, 0);
+    }
+    if (sceneQueryFalse() != 0) {
+        registerBlockRequestGroups(0x3fff);
     }
     renderCtxResetFrameState(g_renderCtx);
     settings->pendingPass = 0;

@@ -1,10 +1,10 @@
-/* NON_MATCHING: retail retains an extra clear/set of the last preference before its final store, changing byte-load scheduling and saved registers. */
 #include "shard/GameModeFlags.h"
 #include "status/StatusCamera.h"
 
 extern "C" {
 
-void FUN_002cf3b4(void)
+/* Restores the default order of every collection sort mode. */
+void sortModesResetDefaults(void)
 {
     GameModeFlags *settings = reinterpret_cast<GameModeFlags *>(gameDataGetSortPreferences());
     settings->sortModes[20].order = 0;
@@ -33,6 +33,9 @@ void FUN_002cf3b4(void)
     settings->sortModes[22].order = 1;
     settings->sortModes[24].order = 1;
     settings->sortModes[25].order = 35;
+    /* Entry 26 is set twice: retail loads it and computes the 33 a second time (the first store is dead, the
+     * update is not). */
+    settings->sortModes[26].order = 33;
     settings->sortModes[26].order = 33;
 }
 }

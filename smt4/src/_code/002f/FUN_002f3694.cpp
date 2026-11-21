@@ -1,4 +1,6 @@
-/* NON_MATCHING: mark bit is captured before the map lookup and candidate counter lifetime matches; bit-address scratch registers and kind-test folding differ. */
+/* NON_MATCHING: the mark bits go through FUN_002f364c's inlined body and the slot bit helpers name the word and bit
+ * as retail computes them; remaining: the timer slot address takes the other register order, and retail tests the
+ * pickable kinds (0, 6) with branches where the build predicates them. */
 #include "gamedata/MapSaveBlock.h"
 #include "map/mapDepart.h"
 #include "gamedata/MapSystemTable.h"
@@ -23,19 +25,30 @@ AreaSlotRecord *FUN_0027ee24(s32 index);
 s32 randNextInRange(u32 maximum);
 void FUN_001fc314(s32 areaId);
 
-static __inline void markBitSet(MapSaveBlock *block, s32 index)
+/* FUN_002f364c's body: sets or clears one bit of the map block's mark flags. */
+static __inline void markBitWrite(s32 flagIndex, s32 enabled)
 {
-    block->markBits[index / 32] |= 1 << (index % 32);
+    MapSaveBlock *map = gameGetMapBlock();
+    s32 word = flagIndex / 32;
+    if (enabled != 0) {
+        map->markBits[word] |= 1 << (flagIndex % 32);
+    } else {
+        map->markBits[word] &= ~(1 << (flagIndex % 32));
+    }
 }
 
 static __inline void slotBitSet(MapSaveBlock *block, s32 index)
 {
-    block->slotBits[index / 32] |= 1 << (index % 32);
+    s32 word = index / 32;
+    s32 bit = index % 32;
+    block->slotBits[word] |= 1 << bit;
 }
 
 static __inline void slotBitClear(MapSaveBlock *block, s32 index)
 {
-    block->slotBits[index / 32] &= ~(1 << (index % 32));
+    s32 word = index / 32;
+    s32 bit = index % 32;
+    block->slotBits[word] &= ~(1 << bit);
 }
 
 /* Starts the area events whose area is the current one and whose timer has run out: marks the area's flag bits and
@@ -63,8 +76,7 @@ void FUN_002f3694(void)
                     MsSearchRecord *mark = FUN_0025b670(j);
 
                     if (mark->id != -1 && mark->areaId == areaId) {
-                        s32 bit = mark->markBit;
-                        markBitSet(gameGetMapBlock(), bit);
+                        markBitWrite(mark->markBit, 1);
                     }
                 }
                 for (group = 0; group < 16; group++) {

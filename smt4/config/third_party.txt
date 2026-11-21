@@ -1392,6 +1392,8 @@
 0x00286180 nn_math_ARMv6_MTX33CopyAsm name
 0x00286198 FUN_00286198 between
 0x00286390 nn_math_ARMv6_MTX34InvTransposeAsm name
+0x002881bc FUN_002881bc library
+0x0028836c libm_sinf library
 0x002a0d24 nn_fnd_ExpHeapBase_Finalize name
 0x002a1544 nw_snd_internal_PoolImpl_AllocImpl name
 0x002a155c FUN_002a155c callers

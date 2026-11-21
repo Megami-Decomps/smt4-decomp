@@ -1,4 +1,5 @@
-/* NON_MATCHING: selected-list address scheduling and cold model-request branch placement differ; -O2 candidate. */
+/* NON_MATCHING: 14 lines: only the scheduling of the list and cursor address arithmetic around the first call differs
+ * (retail interleaves the two index multiplies and reloads the slot into r1 before the item load). */
 #include "shard/S2Scene3a.h"
 #include "code/Code0029_Smt4.h"
 #include "gamedata/GamePlayerData.h"
@@ -15,19 +16,14 @@ void btlBuildDemonSnapshotFromSaveRecord(PlayerDataIV *);
 
 void equipmentPreviewUpdateSelection(Scene3a *scene)
 {
-    s32 slot = scene->slot;
-    u32 item = scene->lists[slot].items[flaggedValueHolderGetTotal(&scene->slotInfo[slot])].id;
+    Scene3aList *list = &scene->lists[scene->slot];
+    u32 item = list->items[flaggedValueHolderGetTotal(&scene->slotInfo[scene->slot])].id;
     if (uiStateHasAnyActiveFlag(&scene->slotInfo[scene->slot]) || scene->selectedItem != item) {
         statusCameraRestore(0);
         scene->preview.requested = 0;
         scene->preview.ready = 0;
         scene->selectedItem = item;
-    } else if (scene->preview.requested) {
-        if (FUN_00299fc0()) {
-            statusCameraRestore(1);
-            scene->preview.ready = 1;
-        }
-    } else {
+    } else if (scene->preview.requested == 0) {
         if (item) {
             if (contentGetEntryKind(item) == 4)
                 FUN_0029963c(0, item);
@@ -37,6 +33,11 @@ void equipmentPreviewUpdateSelection(Scene3a *scene)
                 FUN_0029963c(2, item);
         }
         scene->preview.requested = 1;
+    } else {
+        if (FUN_00299fc0()) {
+            statusCameraRestore(1);
+            scene->preview.ready = 1;
+        }
     }
     if (scene->state && scene->equipmentPreview.item != item) {
         scene->equipmentPreview.item = item;

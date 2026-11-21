@@ -1,4 +1,6 @@
-/* NON_MATCHING: nameStartsWith/nameEquals keep retail's repeated null tests; retail loads each g_btlEffect prefix after its test, keeps the &formatted pointer in a callee-saved register and uses a 260-byte frame. */
+/* NON_MATCHING: nameStartsWith/nameEquals keep retail's repeated null tests and, taking the g_btlEffect entry by
+ * reference, read each name after its test; remaining: the build forms the entries' addresses before the tests,
+ * keeps the &formatted pointer out of a callee-saved register (retail sl, with a 260-byte frame). */
 #include "runtime/Stdio.h"
 #include "shard/W6_W6Match6_EffectLoader.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -19,12 +21,12 @@ extern const char DAT_00400914[], DAT_0040090c[], DAT_004008c4[];
 u32 libc_strlen(const char *);
 s32 libc_strncmp(const char *, const char *, u32);
 
-static __inline bool nameStartsWith(const char *name, const char *prefix)
+static __inline bool nameStartsWith(const char *name, const char *const &prefix)
 {
     return name && !libc_strncmp(name, prefix, libc_strlen(prefix));
 }
 
-static __inline bool nameEquals(const char *name, const char *other)
+static __inline bool nameEquals(const char *name, const char *const &other)
 {
     return name && !strcmp(name, other);
 }

@@ -42,7 +42,7 @@ extern u32 DAT_00439cf8;     /* action tint colour */
 
 s32 idSetFindSubjectIndex(void *unit, BtlUnitAction *action);
 s32 btlFindNthActiveSpecialEntry(void *unit, s32 arg);
-f32 FUN_002881bc(void);
+f32 libm_tanf(void);
 s32 asdAnimGetTrackLastFrame(u32 track, s32 index);
 u16 randNextInRange(u32 maximum);
 
@@ -91,7 +91,7 @@ void FUN_003c0ae0(u8 *unit, BtlUnitAction *action)
             frames = camera->offset.z;
             s8 kind = action->cameraKind;
             f32 fov = camera->fov * 0.5f * 0.0055555557f * 3.1415927f;
-            FUN_002881bc();
+            libm_tanf();
             frames = frames / (120.0f / fov);
             f32 speed = frames;
             if (kind != 0) {

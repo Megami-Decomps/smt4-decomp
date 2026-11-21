@@ -1,4 +1,7 @@
-/* NON_MATCHING: VFP register allocation of the easing temporaries, the table-copy (ldm/str pairs vs retail's grouped stm) and the early-return merging differ; the transition logic is the same. */
+/* NON_MATCHING: VFP register allocation of the easing temporaries, the table-copy (ldm/str pairs vs retail's grouped stm)
+ * and the early-return merging differ; retail also clears each item's updated flag through a linker-inlined setter
+ * (the item address formed with add #84, then strb [r0, #133]) that config/inlined.txt does not list yet. The Apocalypse
+ * twin panelUpdateAnimatedScale matches with the third guard as a nested if. */
 #include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "frame_tex/FrameTex.h"
@@ -10,7 +13,7 @@ void FUN_0011340c(s32 arg);
 
 /* Ticks the menu's open/close transition: eases the two scales, steps the item animations and
  * their widgets, and finishes by notifying the controller. Always returns 0. */
-s32 FUN_0010889c(u32 job)
+s32 panelUpdateAnimatedScale(u32 job)
 {
     FrameTexWork *work = (FrameTexWork *)jobGetWork(job);
 
@@ -32,7 +35,7 @@ s32 FUN_0010889c(u32 job)
         }
         work->campWidthScale = work->campWidthScale > 0.25f ? work->campWidthScale : 0.25f;
         if (work->campHeightScale > 0.25f) {
-            work->campHeightScale -= 0.11f / work->campSpeed;
+            work->campHeightScale -= 0.110000014f / work->campSpeed;
         }
         work->campHeightScale = work->campHeightScale > 0.25f ? work->campHeightScale : 0.25f;
         for (s32 i = 0; i < 24; i++) {
@@ -45,11 +48,11 @@ s32 FUN_0010889c(u32 job)
         }
     } else {
         if (work->campWidthScale < 0.38f) {
-            work->campWidthScale += 0.13f / work->campSpeed;
+            work->campWidthScale = 0.13f / work->campSpeed + work->campWidthScale;
         }
-        work->campWidthScale = work->campWidthScale > 0.38f ? 0.38f : work->campWidthScale;
+        work->campWidthScale = work->campWidthScale <= 0.38f ? work->campWidthScale : 0.38f;
         if (work->campHeightScale < 0.36f) {
-            work->campHeightScale += 0.11f / work->campSpeed;
+            work->campHeightScale = 0.110000014f / work->campSpeed + work->campHeightScale;
         }
         work->campHeightScale = work->campHeightScale > 0.36f ? 0.36f : work->campHeightScale;
         if (uiSpriteAdvanceAnimation(&work->campFrameWidget) == 0) {

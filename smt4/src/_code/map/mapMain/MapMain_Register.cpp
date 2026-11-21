@@ -32,7 +32,7 @@ typedef char MapMainInitializationOffsets[sizeof(MapMainInitializationView) == s
 
 extern "C" {
 extern MapMain *g_mapMain;
-void FUN_00280ac0(s32 mode);
+void frameTexConfigureCaptureTextures(s32 mode);
 void MapEpl_InitState(void);
 void FUN_001b4764(void);
 void mapCameraResetControls(void);
@@ -53,7 +53,7 @@ void MapMain_Register(void)
     g_mapMain = static_cast<MapMain *>(asdMemAlloc(0x100, 0x100, 0, sizeof(MapMain), 1));
     MapMainInitializationView *map = reinterpret_cast<MapMainInitializationView *>(g_mapMain);
     MapSaveBlock *save = gameGetMapBlock();
-    FUN_00280ac0(1);
+    frameTexConfigureCaptureTextures(1);
     map->startupFlags[0] = 0;
     map->startupFlags[1] = 0;
     map->startupFlags[2] = 0;

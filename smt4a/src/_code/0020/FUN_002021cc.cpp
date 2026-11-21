@@ -1,4 +1,6 @@
-/* NON_MATCHING: retail peels the i == 0 slide iteration, keeps -330 as the hoisted constant (330 = 0 - it) and addresses slides[1].done through r5 + 0x100; the peeling/constant choice is not reproduced. */
+/* NON_MATCHING: the first slide's step is its own copy as in retail (the loop enters it directly); remaining: retail
+ * keeps -330 in a register and forms 330 as 0 - it, addresses slides[1].done through r5 + 0x100 and shares one
+ * epilogue between the two returns. */
 #include "shard/Shard0031.h"
 
 extern "C" {
@@ -25,12 +27,15 @@ u32 FUN_002021cc(void)
         FUN_003e5858(scene->object);
     }
     if (overlay->unk1A0 == 2) {
-        s32 start = 330;
-        if (overlay->unk1A4 != 0) {
-            start = -330;
-        }
+        s32 start = overlay->unk1A4 != 0 ? -330 : 330;
         for (s32 i = 0; i < 2; i++) {
-            if (i == 0 || overlay->slides[i - 1].elapsed > 2) {
+            if (i == 0) {
+                if (FUN_0039a2d8(&overlay->slides[i].offset, start, 0, 4, overlay->slides[i].elapsed, 1) != 0) {
+                    overlay->slides[i].done = 1;
+                } else {
+                    overlay->slides[i].elapsed++;
+                }
+            } else if (overlay->slides[i - 1].elapsed > 2) {
                 if (FUN_0039a2d8(&overlay->slides[i].offset, start, 0, 4, overlay->slides[i].elapsed, 1) != 0) {
                     overlay->slides[i].done = 1;
                 } else {

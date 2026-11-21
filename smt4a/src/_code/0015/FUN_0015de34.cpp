@@ -1,5 +1,7 @@
-/* NON_MATCHING: register allocation: retail keeps the pre-advance cursor in a fresh register (mov r6,r5; add r5,..,r6);
- * the task stack pair is set through the linker-inlined soundInitStackSet (its stm and call padding now match). */
+/* NON_MATCHING: the block is now carved sequentially as retail does (each region's start kept while the cursor
+ * advances); remaining: retail adds the two command queue sizes into its own register and advances the cursor after
+ * the queue setup calls, and keeps the cursor in r5 through the channel region (the build moves it to fp).
+ * The task stack pair is set through the linker-inlined soundInitStackSet. */
 #include "AsdSDK/AsdDebugHooks.h"
 #include "shard/W6_W6Match7_SoundInit.h"
 
@@ -52,44 +54,44 @@ int nw_snd_internal_driver_VoiceManager_GetInstance(void);
 int nw_snd_internal_TaskManager_Initialize(void);
 int nw_snd_internal_driver_SoundThread_SetProfileBuffer(int, int, s32);
 
-// Lay out the sound system's memory block after `offset` and start the sound thread.
-void FUN_0015de34(SndInitConfig *cfg, int offset)
+/* Lays out the sound system's memory block from `work` on and starts the sound thread. */
+void FUN_0015de34(SndInitConfig *cfg, int work)
 {
     asdDebugHookPtrInt(NULL, 0x04000163);
     if (DAT_0059dba4.initialized == 0) {
         FUN_00175a88(&DAT_00646b38);
         if (DAT_0059dba4.commandsQueued == 0) {
-            int queueStart = offset;
-            int commandStart = queueStart + cfg->cmdQueueSize;
-            int queuesSize = cfg->cmdQueueSize + cfg->commandSize;
+            int queueStart = work;
+            int commandStart = work + cfg->cmdQueueSize;
+            work += cfg->cmdQueueSize + cfg->commandSize;
             FUN_0017561c(objectCommandQueueGet(), queueStart, cfg->cmdQueueSize);
             FUN_0017561c(soundStreamCommandManagerGetInstance(), commandStart, cfg->commandSize);
-            offset += queuesSize;
             DAT_0059dba4.commandsQueued = 1;
         }
         int workA = 0;
         int workB = 0;
         if (cfg->workEnabled != 0) {
-            workA = offset;
-            offset = cfg->workSize + workA;
+            workA = work;
+            work += cfg->workSize;
             if (cfg->workMode == 1 && cfg->subWorkEnabled != 0) {
-                workB = offset;
-                offset = cfg->workSize + workB;
+                workB = work;
+                work += cfg->workSize;
             }
         }
         _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
         FUN_001757fc();
-        int base = offset;
-        offset = cfg->managerSize + base;
+        int base = work;
+        work += cfg->managerSize;
         FUN_001b1998();
         nw_snd_internal_TaskManager_Initialize();
         soundInitStackSet(&DAT_0059dbac, (u8 *)base, cfg->managerSize);
-        int voiceEnd = FUN_00175c30(nw_snd_internal_driver_VoiceManager_GetInstance(), DAT_0059dba4.voiceCount) + offset;
-        int voiceSize = FUN_00175c30(nw_snd_internal_driver_VoiceManager_GetInstance(), DAT_0059dba4.voiceCount);
-        FUN_00175bb8(nw_snd_internal_driver_VoiceManager_GetInstance(), offset, voiceSize);
-        int profileBase = FUN_00175a78(FUN_00191548(), DAT_0059dba4.voiceCount) + voiceEnd;
-        int channelSize = FUN_00175a78(FUN_00191548(), DAT_0059dba4.voiceCount);
-        FUN_00175a38(FUN_00191548(), voiceEnd, channelSize);
+        int voiceWork = work;
+        work += FUN_00175c30(nw_snd_internal_driver_VoiceManager_GetInstance(), DAT_0059dba4.voiceCount);
+        FUN_00175bb8(nw_snd_internal_driver_VoiceManager_GetInstance(), voiceWork,
+                     FUN_00175c30(nw_snd_internal_driver_VoiceManager_GetInstance(), DAT_0059dba4.voiceCount));
+        int channelWork = work;
+        work += FUN_00175a78(FUN_00191548(), DAT_0059dba4.voiceCount);
+        FUN_00175a38(FUN_00191548(), channelWork, FUN_00175a78(FUN_00191548(), DAT_0059dba4.voiceCount));
         FUN_00175c3c();
         FUN_00174b5c(FUN_00174ae0(), cfg->taskParam, &DAT_0059dbac);
         if (cfg->workEnabled != 0) {
@@ -99,7 +101,7 @@ void FUN_0015de34(SndInitConfig *cfg, int offset)
         }
         if (cfg->profileEnabled != 0 && cfg->profileSize > 0) {
             nw_snd_internal_driver_SoundThread_SetProfileBuffer(
-                _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(), profileBase, cfg->profileSize);
+                _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(), work, cfg->profileSize);
         }
         FUN_00175cd8();
         DAT_0059dba4.workEnabled = cfg->workEnabled;

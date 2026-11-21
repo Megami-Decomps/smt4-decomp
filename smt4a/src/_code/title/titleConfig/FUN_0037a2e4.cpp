@@ -1,4 +1,6 @@
-/* NON_MATCHING: the save-block byte reads (0x27E90..0x27E94) and the settings global take different registers/address forms (retail loads each offset from a literal, ours shares one base), and the frame needs r7 */
+/* NON_MATCHING: the saved setting bytes are s8 (retail addresses them through literal offsets), but retail loads the
+ * first one with ldrb where the u32 parameter makes it ldrsb; the u64 copy splits 0x27E90 differently, the process
+ * arguments load in another order, and g_titleConfigDefaultParams needs a size:0x60 for its +0x30 pool word to print alike. */
 #include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "title/titleConfig.h"
@@ -12,7 +14,7 @@
 extern "C" {
 
 extern TitleConfigA *g_titleConfig;
-extern u8 DAT_00536bec[0x60]; /* two 0x30-byte tables */
+extern u8 g_titleConfigDefaultParams[0x60]; /* two 0x30-byte tables */
 
 extern TitleConfigValues g_titleConfigValues;
 
@@ -42,7 +44,7 @@ void FUN_0037a2e4(void)
     config->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TITLE_CONFIG_MAIN"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002a0b58), reinterpret_cast<AsdProcFunc>(titleConfigDestroy), reinterpret_cast<u32>(config));
     taskCreateDraw("TITLE_CONFIG D", 0xea, 0, 0, titleConfigDraw, NULL, NULL, config->job);
     paramsClearPacket(&config->params);
-    paramsInit(&config->params, DAT_00536bec, 0x30, DAT_00536bec + 0x30, 0x30, 0, 0, 0, 0, 0, 0);
+    paramsInit(&config->params, g_titleConfigDefaultParams, 0x30, g_titleConfigDefaultParams + 0x30, 0x30, 0, 0, 0, 0, 0, 0);
     uiSpriteStateInitFromSource(&config->window, 36, 0, &config->params, 201, 1.0f);
     uiSpriteSetKeyframe(&config->window, 2, 0);
     uiSpriteSetImageKeyframe(&config->window, 0, 0);

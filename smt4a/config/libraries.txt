@@ -68,3 +68,8 @@ arm 0x43b6c0 0x43b7a8 nn::math VEC3TransformCoordArray: VEC3TransformCoord loop 
 # 0x2c1400) except one member offset (ldr r5, [r0, #16] against #12), so the same SDK search over another shader
 # object's symbol table.
 arm 0x1c3bb8 0x1c3d20 nn::gr/nw::gfx shader bind-symbol search: nn_gr_CTR_Shader_SearchBindSymbol's code with one member offset changed
+# armlib's fplib acosf and tanf (named libm_acosf / libm_tanf in build/w66_names.txt), exact twins of smt4's 0x28836c and
+# 0x2881bc: acosf sits beside libm_cosf at 0x1bbf0c and calls the third-party sqrtf FUN_001c459c; tanf sits between
+# mathlib_ceilf and the runtime block and calls the third-party FUN_001c4370 / FUN_001c4360.
+arm 0x1bbde0 0x1bbed4 armlib acosf: __set_errno for |x| > 1, pi/2 for tiny x, sqrtf((1 - |x|) / 2) above 0.5; twin of smt4 0x28836c
+arm 0x50dda4 0x50df14 armlib tanf: 2/pi reduction, ARM_fpclassifyf and __set_errno, -1/tan for odd quadrants; twin of smt4 0x2881bc

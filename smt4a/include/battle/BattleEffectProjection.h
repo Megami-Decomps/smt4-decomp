@@ -4,7 +4,7 @@
 #include "battle/btlCamera.h"
 #include "battle/BtlGlobals.h"
 
-extern "C" f32 FUN_0050dda4(f32 angle);
+extern "C" f32 libm_tanf(f32 angle);
 
 enum {
     BATTLE_EFFECT_NEAR_PLANE_OFFSET = 15,
@@ -20,7 +20,7 @@ static __inline f32 battleCameraProjectionScale(s32 plane)
     f32 halfAngle = camera->basePose.distance * 0.5f;
     f32 halfTurn = halfAngle / 180.0f;
     f32 angle = halfTurn * 3.1415927f;
-    f32 tangent = FUN_0050dda4(angle);
+    f32 tangent = libm_tanf(angle);
     f32 projected = height / (120.0f / tangent);
     switch (plane) {
     case 0:

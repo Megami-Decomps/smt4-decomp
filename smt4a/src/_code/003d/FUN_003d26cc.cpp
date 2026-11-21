@@ -10,7 +10,7 @@ int renderCtxResetColorScale(int);
 int FUN_001a1ee0(void);
 int phaseCosine(void);
 int FUN_003fba4c(unsigned int, int, unsigned int, float *, int, int);
-int FUN_0050dda4(void);
+int libm_tanf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(unsigned int, int);
 int __aeabi_memcpy4(float [2], int, int);
@@ -46,7 +46,7 @@ extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: FUN_003fba4c. */
-/* Supplied declaration required: FUN_0050dda4. */
+/* Supplied declaration required: libm_tanf. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -141,7 +141,7 @@ unsigned int FUN_003d26cc(void)
   temp_v13 = temp_v11 + temp_v7 * temp_v8 * 20.0f;
   temp_v14 = temp_v9 * temp_v8 * 20.0f + -7.5f;
   temp_v15 = temp_v6 * temp_v12 + temp_v17 * temp_v8 * 20.0f;
-  FUN_0050dda4();
+  libm_tanf();
   if (*(int *)(temp_v1 + 4) == 6) {
     temp_v9 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v10 = temp_v10 - temp_v9 * 0.05f;

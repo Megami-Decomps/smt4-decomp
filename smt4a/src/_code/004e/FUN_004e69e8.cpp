@@ -1,4 +1,5 @@
-/* NON_MATCHING: instruction count matches (95 rows); retail shares one function-end return for every early exit, and the 64-bit mask loads and register allocation differ. */
+/* NON_MATCHING: the masks are g_btlAction's fields at 0xD8/0x188/0xE0/0xF0 (the old view read 0x138 bytes too far);
+ * retail loads the state flags with ldm and tests the entry pointer for NULL in the target loop, and allocates differently. */
 #include "battle/btlAction.h"
 #include "battle/btlUnit.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -8,19 +9,9 @@
 
 extern "C" {
 
-// Select an action's camera mode unless battle-state or marked-target flags suppress it.
+/* Selects an action's camera mode unless battle-state or marked-target flags suppress it. */
 void FUN_004e69e8(BtlMainStateA **owner, BtlUnitA *unit, s32 forced)
 {
-    struct ActionMasksView {
-        BtlActionGlobalsA action;
-        u8 padding80[0x58];
-        u64 required;
-        u64 excluded;
-        u8 paddingE8[8];
-        u64 cameraExcluded;
-        u8 paddingF8[0x90];
-        u64 overrideRequired;
-    };
     struct RecordCameraView {
         u8 prefix[0x61];
         u8 mode;
@@ -35,10 +26,10 @@ void FUN_004e69e8(BtlMainStateA **owner, BtlUnitA *unit, s32 forced)
         unit->cameraMode = 0x16;
         return;
     }
-    ActionMasksView *masks = reinterpret_cast<ActionMasksView *>(&g_btlAction);
+    const BtlActionGlobalsA *action = &g_btlAction;
     u64 flags = state->stateFlags64.bits;
-    if (((flags & masks->required) != 0 && (flags & masks->overrideRequired) == 0) ||
-        (flags & masks->excluded) != 0 || (flags & masks->cameraExcluded) != 0 ||
+    if (((flags & action->aiActMask) != 0 && (flags & action->aiTargetMask) == 0) ||
+        (flags & action->cameraExcludedMask) != 0 || (flags & action->cameraExcludedMaskB) != 0 ||
         (state->encounter.statusFlags & 0x8000000) != 0)
         return;
     for (s16 index = 4; index < 0x36; ++index) {

@@ -12,7 +12,7 @@ int FUN_00249678(void);
 int mathAtan2Angle256(void);
 int asdDebugLog(...);
 int padAlternateButtonIndex(...);
-int libm_sinf(void);
+int libm_acosf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int gfxQuaternionScratchMultiply(void);
 int phaseCosInterpolate(void);
 int mathSinFixedAngle(void);
@@ -102,7 +102,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: asdDebugLog. */
 /* Supplied declaration required: padAlternateButtonIndex. */
 /* Supplied declaration required: effMenuListAppend. */
-/* Supplied declaration required: libm_sinf. */
+/* Supplied declaration required: libm_acosf. */
 /* Supplied declaration required: gfxQuaternionScratchMultiply. */
 /* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: mathSinFixedAngle. */
@@ -419,7 +419,7 @@ LAB_00321f54:
   DAT_004ea930 = temp_v16;
   if ((temp_v12 & 2) != 0) {
     mathAtan2Angle256();
-    libm_sinf();
+    libm_acosf();
     FUN_003f6b88();
     VectorSignedToFloat((int)DAT_0044ea84,(unsigned char)(temp_v14 >> 0x16) & 3);
     temp_v24 = DAT_004ea91c;

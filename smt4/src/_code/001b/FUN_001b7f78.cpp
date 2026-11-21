@@ -139,7 +139,7 @@ int mapDepartSyncModelVisibility(void);
 int FUN_00275bc8(void);
 int frameTexCampSetMode(...);
 int frameTexResetFlags(void);
-int FUN_00280ac0(...);
+int frameTexConfigureCaptureTextures(...);
 int FUN_0028a420(...);
 int FUN_00294834(...);
 int linkHolderClearFlagGroup(...);
@@ -218,7 +218,7 @@ int FUN_0027b65c(...);
 int mapSpawnActiveSlotEffects(void);
 int mapIfResetRecords(void);
 int asdLoadFileSyncDefault(...);
-int FUN_002d28a4(...);
+int lmapCameraSetMapPresets(...);
 int FUN_003079b4(void);
 int MapEnemy_Register(...);
 int mapEnemyResetUpdateState(void);
@@ -606,7 +606,7 @@ extern int mapDepartIsRunning(void);
 /* Supplied declaration required: lmapCameraSetMode. */
 /* Supplied declaration required: mapDepartSpawnPlayerEffect. */
 /* Supplied declaration required: FUN_002804ec. */
-/* Supplied declaration required: FUN_00280ac0. */
+/* Supplied declaration required: frameTexConfigureCaptureTextures. */
 /* Supplied declaration required: FUN_00280ccc. */
 /* Supplied declaration required: FUN_00281784. */
 /* Supplied declaration required: FUN_00281788. */
@@ -678,7 +678,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: modelGroupsMarkActiveDestroy. */
 extern int aocDataTable23Section3GetEntry(void);
 extern int naviFlag404Active(void);
-/* Supplied declaration required: FUN_002d28a4. */
+/* Supplied declaration required: lmapCameraSetMapPresets. */
 extern int FUN_002d400c(void);
 /* Supplied declaration required: mapBlockLoadTableRecord. */
 extern int FUN_002eb134(void);
@@ -1411,7 +1411,7 @@ LAB_001b8e80:
       FUN_00277b5c(g_gameState.mapId,DAT_0049f920);
     }
     FUN_0021be00();
-    FUN_002d28a4(g_gameState.mapId,DAT_0049f920);
+    lmapCameraSetMapPresets(g_gameState.mapId,DAT_0049f920);
     mapModeInitialize();
     FUN_003079b4();
     FUN_00276a3c();
@@ -2994,7 +2994,7 @@ LAB_001bb1d4:
       return 0;
     }
     DAT_0049fb48 = 0;
-    FUN_00280ac0(1);
+    frameTexConfigureCaptureTextures(1);
     DAT_0049f93e = 0;
     FUN_002757a8();
     soundActorQueueStartPending();
@@ -5211,7 +5211,7 @@ LAB_001bec78:
     if (temp_v10 == 0) {
       return 0;
     }
-    FUN_002d28a4(g_gameState.mapId,DAT_0049f920);
+    lmapCameraSetMapPresets(g_gameState.mapId,DAT_0049f920);
     mapModeInitialize();
     puVar14[9] = puVar14[9] + 1;
 LAB_001bf48c:

@@ -1,4 +1,5 @@
-/* NON_MATCHING: debug-layout locals and retail's unused first-entry boolean differ. */
+/* NON_MATCHING: retail duplicates the spacing selection into two arms (ldm from the alternate spacing, post-indexed
+ * loads from the normal one) where the build selects the base with addne; the registers differ from there. */
 #include "battle/btlMain.h"
 #include "battle/btlCamera.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
@@ -34,6 +35,7 @@ void FUN_003e89bc(BtlMainStateA *battle)
     }
     qsort(records, count, sizeof(records[0]), FUN_00221b34);
     s16 position = 0;
+    bool first = false; /* retail keeps this flag (sl) though nothing reads it */
     for (s32 index = 0; index < count; ++index) {
         BattleRosterRecordA *record = records[index];
         if ((record->render.flags & 1) != 0 && (record->render.flags & 2) != 0 &&
@@ -50,6 +52,8 @@ void FUN_003e89bc(BtlMainStateA *battle)
             u32 icon = (record->render.flags & 0x10) != 0 ? 7 : 6;
             FUN_004fe764(position * step + origin, 0, record, icon, 13);
             position++;
+            if (!first)
+                first = true;
         }
     }
     FUN_004f1c5c(g_btlCamera, 120);

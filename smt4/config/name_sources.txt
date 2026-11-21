@@ -6005,3 +6005,13 @@
 0014f2c8 nn_cx_UncompressRL inferred CTR-SDK nn::cx UncompressRL: 0x80 run flag, run of count+3, copy of count+1
 0014f408 nn_cx_UncompressHuffman inferred CTR-SDK nn::cx UncompressHuffman: 4/8-bit symbols, 4 + (dataBit & 7) symbols per output word
 0014f4f8 nn_cx_GetUncompressedSize inferred CTR-SDK nn::cx GetUncompressedSize: the header's 24-bit size, else the following word
+0028836c libm_acosf inferred armlib acosf (fdlibm e_acosf shape): |x|>1 -> __set_errno and 0/0, tiny x -> pi/2 (0x3fc90fdb), |x|>0.5 through sqrtf((1-|x|)/2), pi - for negatives; exact twin of smt4a 0x1bbde0
+002881bc libm_tanf inferred armlib tanf: reduction by 2/pi (0x3f22f983) in three parts or FUN_003eb2c8, ARM_fpclassifyf/__set_errno for non-finite input, odd quadrant returns -1/tan; exact twin of smt4a 0x50dda4
+00240678 battleEncounterStepAwaitCompletion inferred step 15 of battleEncounterTaskUpdate: waits for the reflect queue, aux counts and UI, marks the encounter's enemies, publishes the battle result and enters step 16
+00280ac0 frameTexConfigureCaptureTextures inferred twin of smt4a frameTexConfigureCaptureTextures (same source, FrameTex.cpp trace lines)
+002cf3b4 sortModesResetDefaults inferred restores the default order of every collection sort mode (27 seven-bit order fields)
+003b92b4 sceneTransitionStartRequestedSequence inferred starts the sequence the scene requested (event, quest, named scene, counter or ending packets via asdSequenceRequest); twin of smt4a FUN_004b82a0
+0010889c panelUpdateAnimatedScale inferred IV counterpart of smt4a panelUpdateAnimatedScale (CAMP panel open/close scale easing, item and widget animations)
+003a0f88 shopDrawQuantityPanel inferred draws the shop's quantity panel at the selected row, the stepper's active arrows and the quantity
+0031eba0 portraitDrawClipped inferred draws a unit's portrait clipped to a window, through the add-on system when it owns the unit (sibling textureLoadOptionalDemonModel)
+002d28a4 lmapCameraSetMapPresets inferred resets the map camera presets and widens presets 2-4 on the wide-view maps

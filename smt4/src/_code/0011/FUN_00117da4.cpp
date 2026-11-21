@@ -1,4 +1,5 @@
-/* NON_MATCHING: structure now matches retail (branch-duplicated surface copy, 480-wide view when the single-view flag is clear and the primary surface is used); scheduling of the scale divisions/VFP conversions and of the g_titleScene loads still differs */
+/* NON_MATCHING: 30 lines: retail converts the width before the filter test and the height after it (this build loads
+ * the height first), and addresses the quad corners through ip where this build uses r1. */
 #include "ui/UiSpriteApi.h"
 #include "camp/RenderCtx.h"
 #include "util/BitsAndBytes_VariantA.h"
@@ -47,8 +48,12 @@ void FUN_00117da4(s32 usePrimary)
         viewWidth = FRAME_COPY_WIDTH_UNFILTERED;
     }
     f32 scale = FUN_002b99b8(2.0f, 1.0f);
-    f32 viewV = viewHeight / scale;
+    viewHeight /= scale;
+    viewWidth /= scale;
     f32 width = (f32)work->dimensions.width;
+    f32 height = (f32)work->dimensions.height;
+    f32 maxU = viewWidth / width;
+    f32 maxV = viewHeight / height;
     if (tex->zan.filtered != 0) {
         work->filterX = 1;
         work->filterY = 1;
@@ -56,39 +61,26 @@ void FUN_00117da4(s32 usePrimary)
         work->filterX = 0;
         work->filterY = 0;
     }
-    f32 height = (f32)work->dimensions.height;
-    f32 maxU = (viewWidth / scale) / width;
-    f32 maxV = viewV / height;
 
-    RenderCtx *context = g_titleScene;
-    s32 state = renderCtxPackPassFlags(1, 0);
-    renderStackPush(context->stacks + RENDER_STACK_A, state);
-    context = g_titleScene;
+    renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
     switch (tex->zan.blendMode) {
     case 0:
-        state = packNibblesAndByte(6, 7, 0);
-        renderStackSet(context->stacks + RENDER_STACK_B, state);
+        renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
         break;
     case 1:
-        state = packNibblesAndByte(6, 1, 0);
-        renderStackSet(context->stacks + RENDER_STACK_B, state);
+        renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
         break;
     case 2:
-        state = packNibblesAndByte(6, 1, 2);
-        renderStackSet(context->stacks + RENDER_STACK_B, state);
+        renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 2));
         break;
     }
     renderCtxSelectTexture(g_titleScene, work);
-    u32 color = tex->zan.color;
-    f32 z = tex->zan.depth;
-    FUN_002ba1e0(color, color, color, color,
-                 tex->zan.x[0], tex->zan.y[0], z, tex->zan.x[1], tex->zan.y[1], z,
-                 tex->zan.x[2], tex->zan.y[2], z, tex->zan.x[3], tex->zan.y[3], z,
+    FUN_002ba1e0(tex->zan.color, tex->zan.color, tex->zan.color, tex->zan.color,
+                 tex->zan.x[0], tex->zan.y[0], tex->zan.depth, tex->zan.x[1], tex->zan.y[1], tex->zan.depth,
+                 tex->zan.x[2], tex->zan.y[2], tex->zan.depth, tex->zan.x[3], tex->zan.y[3], tex->zan.depth,
                  maxU, 0.0f, maxU, maxV, 0.0f, 0.0f, 0.0f, maxV);
-    context = g_titleScene;
     if (tex->zan.blendMode != 0) {
-        state = packNibblesAndByte(6, 7, 0);
-        renderStackSet(context->stacks + RENDER_STACK_B, state);
+        renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
     }
     renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
 }

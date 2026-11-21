@@ -5,7 +5,7 @@
 extern "C" int __set_errno(int error);
 extern "C" __softfp f32 FUN_001c459c(f32 value);
 
-extern "C" f32 mathRemPio2f(f32 value)
+extern "C" f32 libm_acosf(f32 value)
 {
     union { f32 value; u32 bits; } input;
     input.value = value;

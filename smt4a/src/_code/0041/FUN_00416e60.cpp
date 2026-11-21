@@ -1,4 +1,5 @@
-/* NON_MATCHING: player skill search uses one induction variable rather than retail's separate slot/count pair; final state stores merge differently. */
+/* NON_MATCHING: the skill search now keeps retail's separate slot/count pair; the build hoists the state constants 2
+ * and 3 into callee-saved registers (two more pushed) and stores state first, where retail rematerialises them. */
 #include "result/ResultInput.h"
 #include "shard/W5_W5Match2_PairedIds.h"
 #include "gamedata/PlayerDataBlock.h"
@@ -15,9 +16,9 @@ namespace {
 inline s32 findPlayerSkillSlot(ResultInputWork *work)
 {
     PairedIdList *player = reinterpret_cast<PairedIdList *>(gameGetPlayerData());
-    const s32 count = countUnlockedSlots();
     s32 slot = 0;
-    for (; slot < count; ++slot) {
+    const s32 count = countUnlockedSlots();
+    for (s32 i = 0; i < count; ++i, ++slot) {
         const u16 skill = player->ids[slot];
         if (skill == work->preparation.skill || skill == 0) {
             break;

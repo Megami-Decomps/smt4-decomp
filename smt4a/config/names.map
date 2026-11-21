@@ -6670,7 +6670,7 @@
 004834b0 enemySpawnChooseCandidates
 003b61ec commonBgStopChildAndBeginTransition
 00261440 saveGetIndexedFlagBytes
-001bbde0 mathRemPio2f
+001bbde0 libm_acosf
 00128648 zlib_inflateReset2
 0042d734 cecShutdownIfInitialized
 0039af48 npc2dCreatePortraitJob
@@ -7902,3 +7902,9 @@
 003eb0cc btlClearPartitionSlotFlags
 004042fc uiDrawStereoListScrollBar
 003b7960 uiDrawMaskedSprite
+0050dda4 libm_tanf
+003f2aec battleSortTurnOrder
+004b82a0 sceneTransitionStartRequestedSequence
+003cb744 mapGimicRegisterYhvhCollision
+002d0394 btlViewUpdateNavigationPoint
+002df4a8 sceneQueryFalse

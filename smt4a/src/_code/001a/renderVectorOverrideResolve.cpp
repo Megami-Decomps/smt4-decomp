@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail loads direction[0] before direction[2] for the yaw call, and reuses the scratch slot's address (r0) for the override copy where the build forms it again in ip. */
+#include "util/TrigF32.h"
 #include "shard/W9_W9Match7_RenderVectorOverride.h"
 #include "gfx/VectorScratch.h"
 
@@ -10,7 +11,6 @@ static __inline void vector4Copy(const Vector4 *source, Vector4 *destination)
 
 extern "C" {
 void FUN_001b4abc(u32 source, f32 *direction);
-f32 mathRemPio2f(f32 value);
 f32 mathAtan2Angle256(f32 first, f32 second);
 void FUN_001bc2f0(f32 pitch, f32 yaw, f32 roll);
 void gfxQuaternionScratchMultiply(void);
@@ -26,7 +26,7 @@ void renderVectorOverrideResolve(RenderVectorOverride *override, u32 source, Vec
         if (override->flags & 0x40) {
             pitch = 0.0f;
         } else {
-            pitch = mathRemPio2f(-direction[1]);
+            pitch = libm_acosf(-direction[1]);
         }
         f32 yaw = mathAtan2Angle256(direction[0], direction[2]);
         FUN_001bc2f0(pitch, yaw * 0.02454369328916073f, 0.0f);

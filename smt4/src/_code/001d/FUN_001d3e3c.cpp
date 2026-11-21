@@ -101,7 +101,7 @@ int FUN_00275dc4(void);
 int buttonHelpSelectMapPreset(void);
 int mapEntryTriggerForScene(...);
 int frameTexResetFlags(void);
-int FUN_00280ac0(...);
+int frameTexConfigureCaptureTextures(...);
 int FUN_00281784(void);
 int gameJumpRequestClear(void);
 int FUN_0028a420(...);
@@ -451,7 +451,7 @@ extern int FUN_0027d8c8(void);
 extern int mapDepartIsRunning(void);
 extern int inputConfirmPressed(void);
 /* Supplied declaration required: lmapSetSceneId. */
-/* Supplied declaration required: FUN_00280ac0. */
+/* Supplied declaration required: frameTexConfigureCaptureTextures. */
 /* Supplied declaration required: FUN_00280ccc. */
 /* Supplied declaration required: FUN_00281784. */
 /* Supplied declaration required: FUN_00281788. */
@@ -1473,7 +1473,7 @@ joined_r0x001d535c:
       return 0;
     }
     DAT_0049fb48 = 0;
-    FUN_00280ac0(1);
+    frameTexConfigureCaptureTextures(1);
     DAT_0049f93e = 0;
     FUN_00265f50(puVar7);
     FUN_002757a8();

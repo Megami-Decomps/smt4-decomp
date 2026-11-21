@@ -4,7 +4,7 @@
 #include "battle/BtlGlobals.h"
 
 extern "C" {
-f32 FUN_002881bc(f32 angle);
+f32 libm_tanf(f32 angle);
 
 /* Returns the battle camera's visible width for a layer: 0 at the camera distance, 1 for the
  * layer 15 units nearer, 2 for the layer 20 units farther; 0.1 for any other layer. */
@@ -14,7 +14,7 @@ f32 FUN_003c1964(s32 layer)
     f32 width = 0.1f;
     f32 distance = camera->offset.z;
     f32 halfFov = camera->fov * 0.5f;
-    f32 tangent = FUN_002881bc(halfFov * (1.0f / 180.0f) * 3.14159274f);
+    f32 tangent = libm_tanf(halfFov * (1.0f / 180.0f) * 3.14159274f);
     f32 visible = distance / (120.0f / tangent);
     switch (layer) {
     case 0:

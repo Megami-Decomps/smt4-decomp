@@ -1,4 +1,6 @@
-/* NON_MATCHING: register allocation and block layout differ (retail keeps the scratch buffer pointer in fp and the effect-name table in r9, and the slot base is not hoisted); logic equivalent. */
+/* NON_MATCHING: the name helpers take the g_btlEffect entry by reference, so each name is read after the NULL test as
+ * retail does; remaining: the build forms the entry's address before the test, keeps the table in sl (retail r9)
+ * and hoists the slot base instead of the scratch buffer pointer (retail fp = sp + 128). */
 #include "common.h"
 #include "runtime/Stdio.h"
 #include <string.h>
@@ -49,12 +51,12 @@ s32 keyedRecordFindByName(const char *name);
 void asdLoadFileAsyncSimple(const char *path, void **file, s32 flags);
 }
 
-static __inline bool nameEquals(const char *name, const char *other)
+static __inline bool nameEquals(const char *name, const char *const &other)
 {
     return name != 0 && strcmp(name, other) == 0;
 }
 
-static __inline bool nameStartsWith(const char *name, const char *prefix)
+static __inline bool nameStartsWith(const char *name, const char *const &prefix)
 {
     return name != 0 && libc_strncmp(name, prefix, libc_strlen(prefix)) == 0;
 }

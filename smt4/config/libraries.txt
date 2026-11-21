@@ -83,3 +83,9 @@ arm 0x14f16c 0x14f528 CTR-SDK nn::cx decompression: UncompressLZ/RL/Huffman and 
 # products, 1/w, three products) through a local destination pointer, returning pOut; exact twin of smt4a's 0x43b6c0,
 # which sits inside the nn::math block (between nn_math_VEC3SafeNormalize and nn_math_ARMv6_HermiteC_FAST).
 arm 0x23b4f4 0x23b5dc nn::math VEC3TransformCoordArray: VEC3TransformCoord loop returning pOut; twin of smt4a 0x43b6c0
+# armlib's fplib acosf and tanf (named libm_acosf / libm_tanf in build/w66_names.txt): acosf raises __set_errno for
+# |x| > 1, returns pi/2 (0x3fc90fdb) for tiny x and goes through the third-party sqrtf FUN_003f6d64 for |x| > 0.5;
+# tanf reduces by 2/pi (0x3f22f983) or the third-party FUN_003eb2c8, calls ARM_fpclassifyf/__set_errno and returns
+# -1/tan in odd quadrants. Exact twins of smt4a's 0x1bbde0 and 0x50dda4.
+arm 0x2881bc 0x28832c armlib tanf: 2/pi reduction, ARM_fpclassifyf and __set_errno, -1/tan for odd quadrants; twin of smt4a 0x50dda4
+arm 0x28836c 0x288460 armlib acosf: __set_errno for |x| > 1, pi/2 for tiny x, sqrtf((1 - |x|) / 2) above 0.5; twin of smt4a 0x1bbde0

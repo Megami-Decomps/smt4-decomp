@@ -1,6 +1,6 @@
-/* NON_MATCHING: the result register, the second selector check (FUN_0010c5b0's slot getter) and the volume steps
- * match; retail loads &g_asdSound into r7 at entry and again for the archive calls, keeps the stop call's zero
- * argument unpredicated and branches past the level-0 test after clamping to 127. */
+/* NON_MATCHING: 53 lines: the three &g_asdSound literals (entry, archive check, output slot) now match; retail keeps the
+ * entry one in r7 (here r8), keeps the stop call's zero argument unpredicated and branches past the level-0 test after
+ * clamping to 127. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "AsdSDK/Source/Snd/AsdSoundVolume.h"
 #include "code/Code002b.h"
@@ -19,17 +19,24 @@ static __inline AsdSndSlotC *soundOutputC(u32 index)
     return NULL;
 }
 
+/* Whether the sound archive is open and has a sound `id`. */
+static __inline bool asdSndSoundExists(s32 id)
+{
+    AsdSoundSystem *sound = &g_asdSound;
+    return nw_snd_SoundArchive_IsAvailable(sound) && nw_snd_SoundArchive_GetSoundType(sound, id) != 0;
+}
+
 /* Starts `sound` in one-sound slot `slotIndex` (0 or 1), replacing what it played, and fades it to `level`. */
 u32 FUN_0010ddcc(u32 slotIndex, s32 sound, u32 level, s32 frames)
 {
+    AsdSoundSystem *system = &g_asdSound;
     u32 result = 0;
-    if ((slotIndex == 0 || slotIndex == 1) && nw_snd_SoundArchive_IsAvailable(&g_asdSound) &&
-        nw_snd_SoundArchive_GetSoundType(&g_asdSound, sound)) {
+    if ((slotIndex == 0 || slotIndex == 1) && asdSndSoundExists(sound)) {
         AsdSndSlotC *slot = soundOutputC(slotIndex);
         if (slot != NULL) {
             if (slot->handle)
                 basicSoundStopOrFadeOut(slot->handle, 0);
-            if (!(u8)nw_snd_SoundStartable_StartSound(g_asdSound.player, &slot->handle, sound, NULL)) {
+            if (!(u8)nw_snd_SoundStartable_StartSound(system->player, &slot->handle, sound, NULL)) {
                 result = 1;
                 asdSoundHandleSetVolume(slot->handle, 0, 0.0f);
                 slot->volume = (u8)level;

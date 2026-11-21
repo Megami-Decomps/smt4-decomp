@@ -65,7 +65,7 @@ void battleInitializeTurnOrder(ReflectBattle *battle);
 s32 btlFindNthActiveSpecialEntry(ReflectBattle *battle, s32 mode);
 void btlSetSelectedListedValue(s32 value);
 void FUN_003ae720(BtlUi *block, s32 mode);
-void FUN_00240678(ReflectTask *task, ReflectBattle *battle);
+void battleEncounterStepAwaitCompletion(ReflectTask *task, ReflectBattle *battle);
 void qsort(ReflectUnit **list, s32 count, s32 stride, void *compare);
 void FUN_0019d7d4(void);
 s32 pairedEntryTableContains(ReflectBattle *battle, u16 id);
@@ -97,7 +97,7 @@ void FUN_0023fbdc(ReflectTask *task, ReflectBattle *battle)
         }
         task->flags = 0;
         task->state = 15;
-        FUN_00240678(task, battle);
+        battleEncounterStepAwaitCompletion(task, battle);
         return;
     }
     if (task->flags == 0 && (g_btlAux->flags & 0x400) != 0) {
@@ -152,7 +152,7 @@ void FUN_0023fbdc(ReflectTask *task, ReflectBattle *battle)
         }
         task->flags = 0;
         task->state = 15;
-        FUN_00240678(task, battle);
+        battleEncounterStepAwaitCompletion(task, battle);
     }
 }
 

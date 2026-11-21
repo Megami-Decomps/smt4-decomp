@@ -1,60 +1,43 @@
-/* NON_MATCHING: skill clearing becomes memclr, shared-loop pointer setup and sort-key bitfield packing differ; -O2 candidate. */
+/* NON_MATCHING: 34 lines: only the sort key's bitfield packing differs (retail updates the two words separately with a
+ * shared 0xFFFDFFFF mask and stores them with one strd; this build loads both words with ldm and shifts the first). */
 #include "camp/Unite/UniteGlobals.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "gamedata/SkillFlags.h"
+#include "gamedata/UnitStats.h"
 
-struct FusionSkillWork {
-    u8 unk0000[0x9020];
-    u16 inherited[24];
-    u8 unk9050[0x1b4];
-    u8 selector[1]; // 0x9204
-};
-struct FusionSkillDemon {
-    u8 unk00[0x34];
-    u16 skills[8];
-    u16 unk44;
-    u16 id;
-};
-struct FusionSkillSortKey {
-    u32 first : 15;
-    u32 second : 15;
-    u32 kind : 2;
-    u32 mode : 2;
-    u32 result : 15;
-    u32 reserved : 15;
-};
 extern "C" {
 void gridNavigationConfigure(void *, s32, s32, s32, s32, s32);
-void FUN_0029b130(u16 *, s32, const FusionSkillSortKey *, u32);
+void FUN_0029b130(u16 *, s32, const UnitePairEntryIV *, u32);
 }
 
-static inline s32 appendInheritedSkills(FusionSkillWork *work, const FusionSkillDemon *parent,
-                                        const NkmBaseRecord *result, s32 count)
+/* Fills the candidate list with the skills of both parents that can be inherited (flag 0x20) and that neither the list
+ * nor the result already has, then sorts it by the fusion pair. */
+extern "C" void uniteBuildInheritedSkillCandidates(u16 resultId, const StatBlock *first, const StatBlock *second)
 {
-    for (s32 i = 0; i < 8; ++i) {
-        if (parent->skills[i] && (dataTable06Sub1GetRecord(parent->skills[i])->flags & 0x20) &&
-            !arrayContainsU16(work->inherited, 24, parent->skills[i]) &&
-            !arrayContainsU16(result->skills, 8, parent->skills[i]))
-            work->inherited[count++] = parent->skills[i];
-    }
-    return count;
-}
-
-extern "C" void uniteBuildInheritedSkillCandidates(u32 resultId, const FusionSkillDemon *first, const FusionSkillDemon *second)
-{
-    FusionSkillWork *work = (FusionSkillWork *)g_unite;
+    UniteWork *work = g_unite;
+    s32 count = 0;
     const NkmBaseRecord *result = nkmBaseGetRecord(resultId);
     for (s32 i = 0; i < 24; ++i)
-        work->inherited[i] = 0;
-    s32 count = appendInheritedSkills(work, first, result, 0);
-    count = appendInheritedSkills(work, second, result, count);
-    gridNavigationConfigure(work->selector, count, 8, 1, 1, 1);
-    FusionSkillSortKey key;
-    key.first = first->id;
-    key.second = second->id;
-    key.kind = 1;
-    key.mode = 1;
-    key.result = resultId;
-    FUN_0029b130(work->inherited, count, &key, 0);
+        work->secondListIV.indices[i] = 0;
+    for (s32 i = 0; i < 8; ++i) {
+        if (first->skills.ids[i] && (dataTable06Sub1GetRecord(first->skills.ids[i])->flags & 0x20) &&
+            !arrayContainsU16(work->secondListIV.indices, 24, first->skills.ids[i]) &&
+            !arrayContainsU16(result->skills, 8, first->skills.ids[i]))
+            work->secondListIV.indices[count++] = first->skills.ids[i];
+    }
+    for (s32 i = 0; i < 8; ++i) {
+        if (second->skills.ids[i] && (dataTable06Sub1GetRecord(second->skills.ids[i])->flags & 0x20) &&
+            !arrayContainsU16(work->secondListIV.indices, 24, second->skills.ids[i]) &&
+            !arrayContainsU16(result->skills, 8, second->skills.ids[i]))
+            work->secondListIV.indices[count++] = second->skills.ids[i];
+    }
+    gridNavigationConfigure(work->secondListIV.cursor, count, 8, 1, 1, 1);
+    UnitePairEntryIV key;
+    key.firstId = first->id;
+    key.secondId = second->id;
+    key.firstType = 1;
+    key.secondType = 1;
+    key.resultId = resultId;
+    FUN_0029b130(work->secondListIV.indices, count, &key, 0);
 }

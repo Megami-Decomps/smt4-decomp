@@ -5,8 +5,8 @@
 
 extern "C" {
 
-int FUN_002881bc(void);
-int libm_sinf(void);
+int libm_tanf(void);
+int libm_acosf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
 #define ROMWRIGHT_SQRT_4_DEFINED
@@ -17,8 +17,8 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 extern int btlMainIsRunning(void);
-/* Supplied declaration required: FUN_002881bc. */
-/* Supplied declaration required: libm_sinf. */
+/* Supplied declaration required: libm_tanf. */
+/* Supplied declaration required: libm_acosf. */
 
 
 void FUN_001a79a8(int param_1)
@@ -61,7 +61,7 @@ void FUN_001a79a8(int param_1)
       *(unsigned int *)(param_1 + 0x28) = 0x43000000;
     }
     else {
-      libm_sinf();
+      libm_acosf();
       *(float *)(param_1 + 0x28) = temp_v3 * temp_v13;
       if (temp_v7 * temp_v4 - temp_v6 * temp_v2 < temp_v6) {
         *(float *)(param_1 + 0x28) = -*(float *)(param_1 + 0x28);
@@ -92,7 +92,7 @@ void FUN_001a79a8(int param_1)
         *(unsigned int *)(param_1 + 0x28) = 0x43000000;
       }
       else {
-        libm_sinf();
+        libm_acosf();
         *(float *)(param_1 + 0x28) = temp_v4 * temp_v13;
         if (temp_v7 * temp_v11 - temp_v10 * temp_v2 < temp_v10) {
           temp_v6 = -*(float *)(param_1 + 0x28);
@@ -132,7 +132,7 @@ void FUN_001a79a8(int param_1)
     temp_v3 = temp_v3 - *(float *)(param_1 + 0x30);
   }
   temp_v6 = *(float *)(temp_v0 + 0x28) * 0.5f * 0.0055555557f * 3.1415927f;
-  FUN_002881bc();
+  libm_tanf();
   *(float *)(param_1 + 0x24) = temp_v3 / (120.0f / temp_v6);
   return;
 }

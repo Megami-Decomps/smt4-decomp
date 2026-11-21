@@ -1,4 +1,6 @@
-/* NON_MATCHING: first portrait lookup spills the record pointer and second validation uses different scratch registers. */
+/* NON_MATCHING: written as textureLoadOptionalDemonModel (the lookup open-coded, then the same lookup's loaded test as
+ * an inline helper); only the clip's left edge differs: retail adds x - sourceX into the register holding originX and
+ * loads the colour argument into r2, the build adds into r2 and uses r1. */
 #include "gamedata/NkmBaseRecord.h"
 #include "gamedata/NkmEnemyRecord.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -18,45 +20,63 @@ void FUN_002b04e8(s32, u32, s32, s32, s32, u32, const PortraitClipBounds *);
 void FUN_00389f74(void *, s32, s32, s32, s32, s32, u32, s32, s32, s32, s32);
 }
 
-static inline bool resolveClippedPortrait(s32 unit, s32 lookup, u32 &bank, s32 &image)
+/* Whether the portrait texture of `unit` (its model, or its override portrait) is loaded; the same lookup as
+ * textureLoadOptionalDemonModel's. */
+static inline s32 isPortraitTextureLoaded(s32 unit, s32 lookup)
 {
-    bank = 23;
-    image = unit;
+    u32 bank = 23;
+    s32 image = unit;
     if (lookup) {
         if (unit < 0) {
             image = 0;
         } else {
             const NkmBaseRecord *devil = reinterpret_cast<const NkmBaseRecord *>(nkmBaseGetRecord(static_cast<u16>(unit)));
             if (!devil)
-                return false;
+                return 0;
             const NkmEnemyRecord *record = nkmEnemyFindById(static_cast<u16>(unit));
             if (record->levelFlags & 1) {
                 image = record->portraitId;
                 bank = 35;
                 if (image >= 129)
-                    return false;
+                    return 0;
             } else {
                 image = devil->model + 1;
                 if (image >= 614)
-                    return false;
+                    return 0;
             }
         }
     }
-    return true;
+    return asdTMTexTableNodeIsLoaded(bank, image);
 }
 
-extern "C" void FUN_0031eba0(s32 unit, s32 sourceX, s32 sourceY, u32 color, s32 lookup,
+/* Draws the portrait of `unit` clipped to a width x height window at (x, y), through the add-on system when it owns
+ * the portrait. */
+extern "C" void portraitDrawClipped(s32 unit, s32 sourceX, s32 sourceY, u32 color, s32 lookup,
                               s32 x, s32 y, s32 width, s32 height)
 {
-    u32 bank;
-    s32 image;
-    if (!resolveClippedPortrait(unit, lookup, bank, image))
-        return;
-    u32 loadedBank;
-    s32 loadedImage;
-    if (!resolveClippedPortrait(unit, lookup, loadedBank, loadedImage))
-        return;
-    if (!asdTMTexTableNodeIsLoaded(loadedBank, loadedImage))
+    s32 image = unit;
+    u32 bank = 23;
+    if (lookup) {
+        if (unit < 0) {
+            image = 0;
+        } else {
+            const NkmBaseRecord *devil = reinterpret_cast<const NkmBaseRecord *>(nkmBaseGetRecord(static_cast<u16>(unit)));
+            if (!devil)
+                return;
+            const NkmEnemyRecord *record = nkmEnemyFindById(static_cast<u16>(unit));
+            if (record->levelFlags & 1) {
+                image = record->portraitId;
+                bank = 35;
+                if (image >= 129)
+                    return;
+            } else {
+                image = devil->model + 1;
+                if (image >= 614)
+                    return;
+            }
+        }
+    }
+    if (!isPortraitTextureLoaded(unit, lookup))
         return;
     if (!recordPrepareLinkedOwner(g_aocSystem, bank, image)) {
         s32 sprite = image * 1000 + 1;

@@ -1,4 +1,6 @@
-/* NON_MATCHING: retail keeps the shown/next slots in stack slots, spills r0-r3 in the prologue and recomputes the cycle target per slot; the marker drawing is the same (180 vs 184 rows). */
+/* NON_MATCHING: retail keeps the shown/next slots in stack slots, spills r0-r3 in the prologue, reuses the owned == 1
+ * compare for the owned <= 1 exit, sign-extends the shown slot before the tail call and recomputes the slide per draw;
+ * the selection address is formed after the unit lookup as in retail. */
 #include "common.h"
 #include "camp/RenderCtxTitle.h"
 #include "ui/UiControl.h"
@@ -19,12 +21,12 @@ void FUN_003b6da4(u8 *work, s32 unit, s32 x, s32 y)
     s32 owned = 0;
     s32 shown = 0;
     s32 nextShown = 0;
-    s32 *selection = (s32 *)(work + 0xD5E0 + unit * 4);
     s32 *counter;
 
     if (unit >= 0) {
         mask = gameGetUnitRecord(unit)->ailments;
     }
+    s32 *selection = (s32 *)(work + 0xD5E0 + unit * 4);
     for (s32 slot = 1; slot <= 10; slot++) {
         if ((mask & (1 << slot)) != 0) {
             if (*selection == owned) {

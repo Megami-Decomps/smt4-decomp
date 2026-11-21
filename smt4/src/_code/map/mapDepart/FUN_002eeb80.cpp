@@ -30,7 +30,7 @@ void FUN_00275dc4(void);
 void mapUpdatePerFrame(void);
 void mapEntryTriggerForScene(u32 scene);
 void frameTexResetFlags(void);
-void FUN_00280ac0(s32 arg);
+void frameTexConfigureCaptureTextures(s32 arg);
 void FUN_00294834(s32 r0, s32 g0, s32 b0, s32 r1, s32 g1, s32 b1, s32 r2, s32 g2, s32 b2, s32 r3, s32 g3, s32 b3,
                   f32 f0, f32 f1, f32 f2, f32 f3, f32 f4, f32 f5, f32 f6, f32 f7, f32 f8);
 void FUN_0028a420(s32 mode, s32 option);
@@ -108,7 +108,7 @@ u32 FUN_002eeb80(void)
         }
     } else if (FUN_002b8694() == 0) {
         g_gameState.map.mapLoadActive = 0;
-        FUN_00280ac0(1);
+        frameTexConfigureCaptureTextures(1);
         g_gameState.loading = 0;
         FUN_002757a8();
         soundActorQueueStartPending();

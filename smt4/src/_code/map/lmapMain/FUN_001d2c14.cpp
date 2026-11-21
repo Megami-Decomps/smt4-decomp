@@ -8,7 +8,7 @@
 
 extern "C" {
 
-void FUN_00280ac0(s32 value);
+void frameTexConfigureCaptureTextures(s32 value);
 void controllerPoolReset(LmapObj *obj);
 void mapCameraResetControls(void);
 u32 FUN_001d3e3c();
@@ -30,7 +30,7 @@ void FUN_001d2c14(void)
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\map\\lmapMain.cpp", 546);
     g_lmapMainState = state = (LmapMainState *)asdMemAlloc(0x100, 0x100, 0, 0x4F04, 1);
     save = gameGetMapBlock();
-    FUN_00280ac0(1);
+    frameTexConfigureCaptureTextures(1);
     state->unk09 = 0;
     state->unk0A = 0;
     state->external = 0;

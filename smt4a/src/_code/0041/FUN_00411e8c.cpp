@@ -1,4 +1,6 @@
 /* NON_MATCHING: VFP register allocation and the grouping of the multiply-accumulate chains of the rotated offsets differ from retail; the algorithm is the same. */
+#include "util/TrigF32.h"
+#include "battle/BattleEffectProjection.h"
 #include "common.h"
 #include "code/Code0015.h"
 
@@ -29,8 +31,6 @@ typedef struct OrbitCamera {
 
 extern const f32 g_sinCosTable[]; /* sine/cosine table: per entry base sine, base cosine, sine slope, cosine slope */
 
-f32 mathRemPio2f(f32 value);
-f32 FUN_0050dda4(f32 value);
 extern f32 __sqrtf(f32);
 
 /* Aims the orbit camera along the look-at camera's horizontal direction: derives the yaw from the
@@ -54,7 +54,7 @@ void FUN_00411e8c(void *unused, OrbitCamera *out)
     } else if (facing == -1.0f) {
         out->yaw = 128.0f;
     } else {
-        out->yaw = mathRemPio2f(facing) * 40.743664f;
+        out->yaw = libm_acosf(facing) * 40.743664f;
         if (dy > -1.0f * nx - dy * nz) {
             out->yaw = -out->yaw;
         }
@@ -82,7 +82,7 @@ void FUN_00411e8c(void *unused, OrbitCamera *out)
     out->position[2] = out->position[2] + nz * back;
     f32 halfFov = look->fov * 0.5f * 0.0055555557f * 3.1415927f;
 
-    out->zoom = length / (120.0f / FUN_0050dda4(halfFov));
+    out->zoom = length / (120.0f / libm_tanf(halfFov));
 }
 
 }

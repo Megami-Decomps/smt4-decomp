@@ -1,41 +1,46 @@
-/* NON_MATCHING: key-search VFP comparisons and final Hermite tail-call lowering differ from retail. */
+/* NON_MATCHING: written as FUN_003f9d34 (the same key search, with retail's by-value frame copies); retail keeps the
+ * key in r0 and calls HermiteC_FAST with bl inside a push {r4, lr} frame where armcc tail-calls it. */
 #include "gfx/CompactHermiteTrack.h"
 
 extern "C" {
 f32 nn_math_ARMv6_HermiteC_FAST(f32, f32, f32, f32, f32, f32);
 
-/* Estimate the containing interval, correct it, and sample the Hermite track. */
+/* Finds the last key not after `frame`, searching from an interpolated guess (curveSampleLinear16's search). */
+static const CompactHermiteKey *compactHermiteFindKey(const CompactHermiteTrack *track, f32 frame)
+{
+    const CompactHermiteKey *key = track->keys;
+    if (key->frame > frame) {
+        return key;
+    }
+    key = &track->keys[track->count - 1];
+    if (key->frame <= frame) {
+        return key;
+    }
+    key = &track->keys[(u32)(track->inverseDuration * ((f32)(s32)(track->count - 1) * frame))];
+    if (key->frame > frame) {
+        do {
+            key--;
+        } while (key->frame > frame);
+    } else {
+        do {
+            key++;
+        } while (key->frame <= frame);
+        key--;
+    }
+    return key;
+}
+
+/* Samples a compact Hermite track (one tangent per key) at `frame`. */
 f32 FUN_003f9a30(const CompactHermiteTrack *track, f32 frame)
 {
-    s32 count = track->count;
-    const CompactHermiteKey *last = &track->keys[count - 1];
-    const CompactHermiteKey *key;
-    if (track->keys[0].frame > frame) {
-        key = track->keys;
-    } else if (last->frame <= frame) {
-        key = last;
-    } else {
-        u32 index = (u32)(track->inverseDuration * ((f32)(count - 1) * frame));
-        key = &track->keys[index];
-        if (key->frame > frame) {
-            do {
-                --key;
-            } while (key->frame > frame);
-        } else {
-            do {
-                ++key;
-            } while (key->frame <= frame);
-            --key;
-        }
+    const CompactHermiteKey *key = compactHermiteFindKey(track, frame);
+    f32 keyFrame = key->frame;
+    const CompactHermiteKey *last = &track->keys[track->count - 1];
+    if (keyFrame == frame || last == key) {
+        return key->value;
     }
-    f32 value;
-    if (key->frame != frame && key != last) {
-        value = nn_math_ARMv6_HermiteC_FAST(
-            key->value, key->tangent, key[1].value, key[1].tangent,
-            frame - key->frame, key[1].frame - key->frame);
-    } else {
-        value = key->value;
-    }
-    return value;
+    const CompactHermiteKey *next = key + 1;
+    return nn_math_ARMv6_HermiteC_FAST(key->value, key->tangent, next->value, next->tangent,
+                                       frame - keyFrame, next->frame - keyFrame);
 }
 }

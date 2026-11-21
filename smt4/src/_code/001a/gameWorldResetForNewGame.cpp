@@ -147,7 +147,7 @@ void FUN_0033f81c(void);
 void FUN_002c4924(void);
 void inventoryResetSavedTableEntries(void);
 void statisticsRollAll(void);
-void FUN_002cf3b4(void);
+void sortModesResetDefaults(void);
 
 /* Resets the whole game world for a new game: clears the main blocks, restores the party slot defaults, rebuilds
    the per-demon table from the demon records and zeroes the runtime state, then resets the dependent systems. */
@@ -299,7 +299,7 @@ void gameWorldResetForNewGame(void)
     inventoryResetSavedTableEntries();
     statisticsRollAll();
     rt_memclr(reinterpret_cast<u8 *>(world) + 0x1ec18, 0x80);
-    FUN_002cf3b4();
+    sortModesResetDefaults();
 }
 
 } /* extern "C" */

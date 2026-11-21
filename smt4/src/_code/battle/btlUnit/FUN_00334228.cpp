@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00240520(int, int);
 int FUN_002408ac(unsigned int *, int);
 int btlFindNthActiveSpecialEntry(int, int);
-int FUN_002881bc(void);
+int libm_tanf(void);
 int nkmEnemyFindById(void);
 int qsort(int *, int, int, unsigned char *);
 int FUN_002fe394(int, int, unsigned int, int);
@@ -40,7 +40,7 @@ extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 /* Supplied declaration required: FUN_002408ac. */
 extern int idSetFindSubjectIndex(int, int);
 /* Supplied declaration required: btlFindNthActiveSpecialEntry. */
-/* Supplied declaration required: FUN_002881bc. */
+/* Supplied declaration required: libm_tanf. */
 /* Supplied declaration required: nkmEnemyFindById. */
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_002fe394. */
@@ -106,7 +106,7 @@ void FUN_00334228(unsigned int *param_1,int param_2)
   if ((temp_v0 >= 2) && (temp_v0 == 2)) {
     temp_v14 = -20.0f;
   }
-  FUN_002881bc();
+  libm_tanf();
   if (0 < temp_v15) {
     temp_v4 = 0;
     temp_v7 = temp_v15;

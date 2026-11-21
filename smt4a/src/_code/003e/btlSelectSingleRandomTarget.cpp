@@ -20,7 +20,7 @@ struct RandomTargetState {
     s16 index; // 0x301e
 };
 extern "C" {
-void FUN_003f2aec(BtlMainStateA *, u32);
+void battleSortTurnOrder(BtlMainStateA *, u32);
 
 void btlSelectSingleRandomTarget(BtlMainStateA *battle)
 {
@@ -59,7 +59,7 @@ void btlSelectSingleRandomTarget(BtlMainStateA *battle)
             fields->actionParameters[3] = 0;
         }
     }
-    FUN_003f2aec(battle, 0);
+    battleSortTurnOrder(battle, 0);
     state->selected = state->candidates[state->index];
 }
 }

@@ -3469,6 +3469,7 @@
 0x001bbd40 nw_snd_internal_SoundArchiveFile_FileInfo_GetFileLocationType name
 0x001bbd64 nw_snd_internal_SoundArchiveFile_FileInfo_GetInternalFileInfo name
 0x001bbd8c nw_anim_res_ResAnim_IsFullBakedAnim name
+0x001bbde0 mathRemPio2f library
 0x001bbf0c libm_cosf library
 0x001bc5ac FUN_001bc5ac library
 0x001bc604 rt_fpResultDispatch name
@@ -7554,6 +7555,7 @@
 0x0050d71c clearTwoWords between
 0x0050db54 mathlib_ceilf between
 0x0050dbe4 FUN_0050dbe4 callers
+0x0050dda4 FUN_0050dda4 library
 0x00512850 returnMinusOne1 callers
 0x00512858 returnMinusOne2 callers
 0x00512860 returnMinusOne3 callers

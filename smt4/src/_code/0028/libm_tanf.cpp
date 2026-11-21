@@ -7,7 +7,7 @@ s32 __softfp ARM_fpclassifyf(f32 value);
 void FUN_002a438c(void);
 void __set_errno(s32 error);
 
-f32 FUN_002881bc(f32 value)
+f32 libm_tanf(f32 value)
 {
     union { f32 value; u32 bits; } representation;
     representation.value = value;

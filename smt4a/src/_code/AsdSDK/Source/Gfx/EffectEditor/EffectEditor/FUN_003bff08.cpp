@@ -10,7 +10,7 @@ int memAlloc(int, int, int, int, int, int);
 int FUN_001a1ee0(void);
 int phaseCosine(void);
 int mathAtan2Angle256(void);
-int mathRemPio2f(void);
+int libm_acosf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int FUN_001bc2f0(...);
 int gfxQuaternionScratchMultiply(void);
 int FUN_00202178(...);
@@ -100,7 +100,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: mathAtan2Angle256. */
-/* Supplied declaration required: mathRemPio2f. */
+/* Supplied declaration required: libm_acosf. */
 /* Supplied declaration required: FUN_001bc2f0. */
 /* Supplied declaration required: gfxQuaternionScratchMultiply. */
 /* Supplied declaration required: FUN_00202178. */
@@ -454,7 +454,7 @@ LAB_003c01a8:
   DAT_006472f0 = temp_v15;
   if ((temp_v12 & 2) != 0) {
     mathAtan2Angle256();
-    mathRemPio2f();
+    libm_acosf();
     FUN_001bc2f0();
     VectorSignedToFloat((int)DAT_0059dbe4,(unsigned char)(temp_v13 >> 0x16) & 3);
     temp_v18 = DAT_006472dc;

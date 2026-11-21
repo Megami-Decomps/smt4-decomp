@@ -1,5 +1,7 @@
 #include "ui/UiSpriteApi.h"
-/* NON_MATCHING: corrected next-dot snapshot, native aligned label copy, and signed animation getter; font-settings ownership, stack layout and saved work/context registers still differ. */
+/* NON_MATCHING: corrected next-dot snapshot, native aligned label copy, signed animation getter and s8 request flag;
+ * the anchor's spill slot and the label buffer sit at other frame offsets (frame 124 against 116) and the dot coordinates
+ * load as two vldr where retail uses vldmia. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
@@ -9,7 +11,7 @@
 /* The menu work block (only the fields the spinner uses). */
 struct SpinnerWork {
     /* 0x0000 */ u8 unk0000[0x12D1];
-    /* 0x12D1 */ u8 requested;
+    /* 0x12D1 */ s8 requested;      /* s8: retail reads it through a literal offset register */
     /* 0x12D2 */ u8 shown;
     /* 0x12D3 */ u8 unk12D3;
     /* 0x12D4 */ s32 tick;

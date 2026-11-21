@@ -36,7 +36,7 @@ extern int frameTexHdrCaptureLeft(unsigned int job); /* 0x10835c */
 extern int frameTexHdrCaptureRight(unsigned int job); /* 0x10854c */
 extern int titleJobRefreshSurface(...); /* 0x108754 */
 extern int titleJobRefreshOverlaySurface(...); /* 0x1087f4 */
-extern s32 FUN_0010889c(u32 job);
+extern s32 panelUpdateAnimatedScale(u32 job);
 extern int FUN_00108b0c(...); /* 0x108b0c */
 extern int FUN_00109348(...); /* 0x109348 */
 extern int FUN_001093e8(...); /* 0x1093e8 */
@@ -122,7 +122,7 @@ void FUN_001043c8(void)
   taskCreateDraw("ZanDR",0xd0,0,0,FUN_0010821c,0,g_frameTex,*puVar2);
   taskCreateDraw("CAMPCL",0x78,0,0,FUN_00109348,0,g_frameTex,*puVar2);
   taskCreateDraw("CAMPCR",0xd6,0,0,FUN_001093e8,0,g_frameTex,*puVar2);
-  taskCreateDraw("CAMPDL",0x65,0,0,FUN_0010889c,0,g_frameTex,*puVar2);
+  taskCreateDraw("CAMPDL",0x65,0,0,panelUpdateAnimatedScale,0,g_frameTex,*puVar2);
   taskCreateDraw("CAMPDR",0xcc,0,0,FUN_00108b0c,0,g_frameTex,*puVar2);
   taskCreateDraw("ENCEFFCL",0x77,0,0,titleBackdropRender,0,g_frameTex,*puVar2);
   taskCreateDraw("ENCEFFCR",0xd5,0,0,titleCaptureHalfSizeSurfaceOnce,0,g_frameTex,*puVar2);

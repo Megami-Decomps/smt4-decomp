@@ -1,4 +1,6 @@
-/* NON_MATCHING: the inlined sort (battleSortTurnOrder's body) keeps the same open problem as that function: retail lays the faster-speed swap out after the speed compare and loads the candidate first; the slot search before it schedules its registers differently. */
+/* NON_MATCHING: the inlined sort lays its swap out as retail does, but the temp-swap form that makes
+ * battleSortTurnOrder IDENTICAL scores worse here (105 against 68); the slot search before it and the sort's
+ * index registers schedule differently. */
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
@@ -33,7 +35,11 @@ static void sortTurnOrder(BtlMainState *state, s32 start)
                 if (currentSpeed < candidateSpeed) {
                     state->turnOrder.order[first] = candidate;
                     state->turnOrder.order[second] = current;
-                } else if (currentSpeed == candidateSpeed && state->entries[current].ids[0] > state->entries[candidate].ids[0]) {
+                } else {
+                    if (currentSpeed != candidateSpeed)
+                        continue;
+                    if (state->entries[current].ids[0] <= state->entries[candidate].ids[0])
+                        continue;
                     state->turnOrder.order[first] = candidate;
                     state->turnOrder.order[second] = current;
                 }

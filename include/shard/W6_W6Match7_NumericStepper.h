@@ -10,8 +10,8 @@ struct NumericStepper {
     /* 0x04 */ s32 maximum;
     /* 0x08 */ s32 minimum;
     /* 0x0c */ s32 row;            /* the list row the stepper is drawn on (its touch regions follow it) */
-    /* 0x10 */ u8 incrementActive;
-    /* 0x11 */ u8 decrementActive;
+    /* 0x10 */ s8 incrementActive;
+    /* 0x11 */ s8 decrementActive;
     /* 0x12 */ s16 incrementKey;
     /* 0x14 */ s16 decrementKey;
     /* 0x16 */ u8 unk16[2];

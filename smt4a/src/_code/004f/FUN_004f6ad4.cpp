@@ -1,19 +1,17 @@
-/* NON_MATCHING: the null checks on the name come out as `cmp; beq` with the argument moved afterwards, where retail tests the argument register itself (`movs r0, r6`) and loads the table field after the test; the frame setup and the hoisted slot base register differ accordingly */
+/* NON_MATCHING: the name tests now repeat retail's NULL tests (header helpers); retail keeps the file buffer's address
+ * in fp and work/path in r6 where the build hoists the work's +0x3000 base into fp, and the frame is set up earlier. */
 #include "runtime/Stdio.h"
-#include "battle/BtlEffectLoad.h"
+#include "battle/BtlEffectNameTests.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "gamedata/GameDataAccess.h"
 #include <string.h>
 
 extern "C" {
 
-extern BtlEffectNames g_btlEffect;
 extern const char DAT_0052853c[];
 extern const char DAT_00528534[];
 extern const char DAT_005284c0[];
 
-u32 libc_strlen(const char *text);
-s32 libc_strncmp(const char *a, const char *b, u32 count);
 char *libc_strcpy(char *destination, const char *source);
 void sysMemClear(void *buffer, s32 size);
 char *libc_strrchr(char *text, s32 character);
@@ -33,31 +31,27 @@ u32 FUN_004f6ad4(BtlEffectWorkA *work)
         char file[128];
 
         if (libc_strlen(name) != 0 && strcmp(name, "0") != 0) {
-            if (strcmp(DAT_0052853c, name) != 0 && (name == NULL || strcmp(name, g_btlEffect.ignoredName) != 0)) {
-                if (name != NULL) {
-                    if (libc_strncmp(name, g_btlEffect.ignoredPrefix, libc_strlen(g_btlEffect.ignoredPrefix)) == 0) {
+            if (strcmp(DAT_0052853c, name) != 0 && !btlEffectIsIgnoredName(name)) {
+                if (btlEffectHasIgnoredPrefix(name)) {
+                    continue;
+                }
+                if (btlEffectHasNumberedPrefix(name)) {
+                    bool found = false;
+                    for (s32 n = 0; n < 11; n++) {
+                        __2sprintf(file, DAT_00528534, g_btlEffect.numberedPrefix, n);
+                        if (strcmp(file, name) == 0) {
+                            btlCameraFinishTransition(work);
+                            work->numberedEffect = filterCreateByKind(n & 0xff, 7, 0);
+                            work->numberedIndex = n;
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found) {
                         continue;
                     }
                 }
-                if (name != NULL) {
-                    if (libc_strncmp(name, g_btlEffect.numberedPrefix, libc_strlen(g_btlEffect.numberedPrefix)) == 0) {
-                        bool found = false;
-                        for (s32 n = 0; n < 11; n++) {
-                            __2sprintf(file, DAT_00528534, g_btlEffect.numberedPrefix, n);
-                            if (strcmp(file, name) == 0) {
-                                btlCameraFinishTransition(work);
-                                work->numberedEffect = filterCreateByKind(n & 0xff, 7, 0);
-                                work->numberedIndex = n;
-                                found = true;
-                                break;
-                            }
-                        }
-                        if (found) {
-                            continue;
-                        }
-                    }
-                }
-                if (name == NULL || strcmp(name, g_btlEffect.ignoredNameB) != 0) {
+                if (!btlEffectIsIgnoredNameB(name)) {
                     sysMemClear(path, 0x80);
                     sysMemClear(file, 0x80);
                     __2sprintf(file, DAT_005284c0, name);

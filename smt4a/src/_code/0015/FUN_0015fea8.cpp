@@ -1,4 +1,6 @@
-/* NON_MATCHING: pool-count common loads and multiply strength reduction differ; -O2 retains multiplies but changes frame/register allocation. */
+/* NON_MATCHING: the pool sizes go through plain static helpers that armcc inlines late, which gives retail's reloaded
+ * counts and multiplies; remaining: retail rounds the player heap and the last pool (strength-reduced, the 31 kept in sl)
+ * inline, where the build inlines those late too and saves one register less. */
 #include "nw/snd/ArchivePool.h"
 #include "shard/SoundArchiveWrapper.h"
 
@@ -7,9 +9,14 @@ struct ArchivePlayerInfo {
     u32 playableSoundMax;
     u32 playerHeapSize;
 };
-static __inline u32 alignSoundPoolBytes(u32 size)
+static u32 alignSoundPoolBytes(u32 size)
 {
     return (size + 31) & ~31u;
+}
+/* The rounded size of a pool of `count` objects of `size` bytes. */
+static u32 soundPoolBytes(u32 count, u32 size)
+{
+    return alignSoundPoolBytes(count * size);
 }
 }
 
@@ -32,12 +39,12 @@ u32 FUN_0015fea8(void *, SoundArchiveWrapper *archive, u32 userDataSize)
     }
     ArchivePoolCountsA counts;
     if (nw_snd_SoundArchive_ReadSoundArchivePlayerInfo(archive, &counts) != 0) {
-        size += alignSoundPoolBytes(counts.firstCount * 0x2D8);
-        size += alignSoundPoolBytes(counts.firstCount * 0x88);
-        size += alignSoundPoolBytes(counts.thirdCount * 0x1E8);
-        size += alignSoundPoolBytes(counts.thirdCount * 0x4C);
-        size += alignSoundPoolBytes(counts.secondCount * 0x3298);
-        size += alignSoundPoolBytes(counts.unk04 * 0x138);
+        size += soundPoolBytes(counts.firstCount, 0x2D8);
+        size += soundPoolBytes(counts.firstCount, 0x88);
+        size += soundPoolBytes(counts.thirdCount, 0x1E8);
+        size += soundPoolBytes(counts.thirdCount, 0x4C);
+        size += soundPoolBytes(counts.secondCount, 0x3298);
+        size += soundPoolBytes(counts.unk04, 0x138);
     }
     if (userDataSize != 0)
         size += ((userDataSize + 3) & ~3u) * (counts.firstCount + counts.thirdCount + counts.secondCount);

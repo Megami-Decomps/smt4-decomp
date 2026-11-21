@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002881bc(void);
-int libm_sinf(void);
+int libm_tanf(void);
+int libm_acosf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int statusCameraApply(void);
 int renderCtxResetColorScale(int);
 int renderCtxApplyTransforms(int);
@@ -35,8 +35,8 @@ static float romwright_sqrt_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_002881bc. */
-/* Supplied declaration required: libm_sinf. */
+/* Supplied declaration required: libm_tanf. */
+/* Supplied declaration required: libm_acosf. */
 /* Supplied declaration required: statusCameraApply. */
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
@@ -120,13 +120,13 @@ unsigned int FUN_0032ae80(void)
   temp_v9 = temp_v9 * 0.0f;
   temp_v7 = temp_v8 * 0.0f + temp_v9 * 0.0f + temp_v6 * -1.0f;
   if ((temp_v7 != 1.0f) && (temp_v7 != -1.0f)) {
-    libm_sinf();
+    libm_acosf();
     in_fpscr = in_fpscr & 0xfffffff;
   }
   temp_v11 = *(float *)(temp_v3 + 0x10) + temp_v8 * 20.0f;
   temp_v12 = temp_v9 * 20.0f + -7.5f;
   temp_v13 = *(float *)(temp_v3 + 0x18) + temp_v6 * 20.0f;
-  FUN_002881bc();
+  libm_tanf();
   if (*(int *)(temp_v1 + 4) == 6) {
     temp_v6 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v10 = temp_v10 - temp_v6 * 0.05f;

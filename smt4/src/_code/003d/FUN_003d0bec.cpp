@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail selects side values before storing; conditional-store tail sharing and saved-register allocation differ. */
+/* NON_MATCHING: retail keeps 1 and 0 in r1/r0 across the switch and selects each side with tst/mov/movne
+ * or branches into shared store tails; the build folds the side ternaries into bic/lsr bit arithmetic. */
 #include "battle/BtlEntry.h"
 #include "gamedata/EquipmentTable.h"
 #include "gamedata/SkillDataLookup.h"
@@ -19,62 +20,38 @@ void FUN_003d0bec(u32 unused, const BtlEntry *entry, u32 itemId, u32 *side, u32 
     const ItemTargetView *target = reinterpret_cast<const ItemTargetView *>(item);
     switch ((target->target >> 5) & 0xF) {
     case 0:
-        if (entry->flags & 0x10)
-            *side = 0;
-        else
-            *side = 1;
+        *side = (entry->flags & 0x10) ? 0 : 1;
         *scope = 0;
         return;
     case 1:
-        if (entry->flags & 0x10)
-            *side = 0;
-        else
-            *side = 1;
+        *side = (entry->flags & 0x10) ? 0 : 1;
         *scope = 1;
         return;
     case 2:
-        if (entry->flags & 0x10)
-            *side = 1;
-        else
-            *side = 0;
+        *side = (entry->flags & 0x10) ? 1 : 0;
         *scope = 0;
         return;
     case 3:
-        if (entry->flags & 0x10)
-            *side = 1;
-        else
-            *side = 0;
+        *side = (entry->flags & 0x10) ? 1 : 0;
         *scope = 1;
         return;
     case 4:
-        if (entry->flags & 0x10)
-            *side = 1;
-        else
-            *side = 0;
+        *side = (entry->flags & 0x10) ? 1 : 0;
         *scope = 0;
         return;
     case 5:
         *scope = 2;
         return;
     case 6:
-        if (entry->flags & 0x10)
-            *side = 0;
-        else
-            *side = 1;
+        *side = (entry->flags & 0x10) ? 0 : 1;
         *scope = 1;
         return;
     case 7:
-        if (entry->flags & 0x10)
-            *side = 1;
-        else
-            *side = 0;
+        *side = (entry->flags & 0x10) ? 1 : 0;
         *scope = 0;
         return;
     case 8:
-        if (entry->flags & 0x10)
-            *side = 1;
-        else
-            *side = 0;
+        *side = (entry->flags & 0x10) ? 1 : 0;
         *scope = 1;
         return;
     }
