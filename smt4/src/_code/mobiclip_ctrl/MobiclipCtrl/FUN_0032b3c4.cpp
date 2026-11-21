@@ -1,4 +1,4 @@
-/* NON_MATCHING: the result test now matches (nnResultIsFailure: lsrs + blne); remaining: retail keeps the constants 0 (r9) and 1 (r8) in registers, derives 0x105 as r8 + 260 and the open-file globals from one base (r7), so its saved-register set is r4-sl and the global address reuse differs. */
+/* NON_MATCHING: retail keeps 0, 1 (0x105 derived as 1 + 260) and the open-file pointer (loaded at entry) in callee-saved registers, derives the addresses of DAT_004c4080/DAT_004c40e0 and DAT_004c3a38/DAT_004c3a50/DAT_004c3af8/g_mobiclipPlayer from one base each (they are one object in the original; the symbols still split them), and its backend pool word names the reader field's own symbol. */
 #include "mobiclip_ctrl/MobiclipPlaybackStart.h"
 #include "nn/fs/ArchivePath.h"
 #include "nn/Result.h"
@@ -51,8 +51,10 @@ void FUN_0032b3c4(const char *filename)
     FUN_00351498(&g_mobiclipPlayer, DAT_004c3a38,
                 DAT_0044d024.reader, DAT_0044d024.player,
                 DAT_004c3a50, DAT_004c3af8);
+    s32 state;
     do {
         mobiclipYieldPlaybackThread(&g_mobiclipPlayer);
-    } while (g_mobiclipPlayer.state != 7 && g_mobiclipPlayer.state != 1);
+        state = g_mobiclipPlayer.state;
+    } while (state != 7 && state != 1);
 }
 }

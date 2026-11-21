@@ -28,7 +28,7 @@ extern "C" s32 uiSlidingSpriteAdvance(UiSpriteState *sprite, s32 reverse)
         sprite->finished = 0;
     }
     sprite->positionFrame = frame + 1;
-    FUN_002b1e08(sprite);
+    uiSpriteAdvanceAlphaTrack(sprite);
     controllerUpdateUniformScaleTrack(sprite);
     spriteSequencePlayerAdvance(sprite);
     if (sprite->positionDone && sprite->alphaDone && sprite->scaleDone && sprite->frameDone)

@@ -1,4 +1,4 @@
-/* NON_MATCHING: same calls and flow (101 vs 100 rows); registers now agree for `holder` (r4) but retail keeps the vector math in r1/r2/r3 differently (it also keeps -16 in r2 across the assignment), computes (position + 1) - begin without folding it into (position - begin) + 16 and updates the vector size from a register. */
+/* NON_MATCHING: same calls and flow (101 vs 100 rows); registers now agree for `holder` (r4) but retail keeps the vector math in r1/r2/r3 differently (it also keeps -16 in r2 across the assignment), and keeps &holder->spare in r5 for the erase calls (the erase is written as erase(first, first + 1) with the new size taken before the shift). */
 #include "classes/MarkerRef.h"
 
 struct MarkerRefVector;
@@ -36,13 +36,14 @@ s32 FUN_004ac83c(MarkerHolder *holder)
             holder->marker = holder->spare.begin[holder->spare.size - 1];
             {
                 /* Erase the last spare: shift the ones after it down (none), destroy the last one. */
-                MarkerRef *position = &holder->spare.begin[holder->spare.size - 1];
-                MarkerRef *after = position + 1;
-                s32 first = position - holder->spare.begin;
-                s32 next = after - holder->spare.begin;
-                FUN_00521d90(&holder->spare.begin[first], &holder->spare.begin[next], holder->spare.size - next);
-                FUN_00521d14(&holder->spare, holder->spare.size - 1, holder->spare.size);
-                holder->spare.size = holder->spare.size - 1;
+                MarkerRef *first = &holder->spare.begin[holder->spare.size - 1];
+                MarkerRef *last = first + 1;
+                s32 firstIndex = first - holder->spare.begin;
+                s32 lastIndex = last - holder->spare.begin;
+                s32 newSize = holder->spare.size - (last - first);
+                FUN_00521d90(&holder->spare.begin[firstIndex], &holder->spare.begin[lastIndex], holder->spare.size - lastIndex);
+                FUN_00521d14(&holder->spare, newSize, holder->spare.size);
+                holder->spare.size = newSize;
             }
             holder->marker.object->unk08 = 0;
             holder->marker.object->unk0c = 0;

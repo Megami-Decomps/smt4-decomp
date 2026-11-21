@@ -57,7 +57,7 @@ typedef struct ButtonHelpWork {
     /* 0x4BE */ u8 touchSelected[6];     /* the slot's region is selected in the other modes */
     /* 0x4C4 */ u8 drawEnabled;
     /* 0x4C5 */ s8 panelState;
-    /* 0x4C6 */ u8 panelSliding;         /* mode 1 slides the panel sprites in */
+    /* 0x4C6 */ s8 panelSliding;         /* mode 1 slides the panel sprites in (s8: read through a work + 0x400 base) */
     /* 0x4C7 */ u8 touchSuspended;       /* nonzero: the touch update leaves the slot flags alone */
     /* 0x4C8 */ u8 mode;
     /* 0x4C9 */ u8 preset;               /* data table 0x0E entry shown */
@@ -83,7 +83,7 @@ typedef struct ButtonHelpWorkA {
     /* 0x5DA */ u8 touchSelected[6];
     /* 0x5E0 */ u8 drawEnabled;
     /* 0x5E1 */ s8 panelState;
-    /* 0x5E2 */ u8 panelSliding;
+    /* 0x5E2 */ s8 panelSliding;         /* s8: read through a work + 0x500 base */
     /* 0x5E3 */ u8 touchSuspended;
     /* 0x5E4 */ u8 mode;
     /* 0x5E5 */ u8 unk5E5;
@@ -153,6 +153,11 @@ extern "C" {
 #endif
 
 u8 buttonHelpStateIsNot3(void);
+/* Shows `kind`/`value` in slot `slot`, or with `defer` queues it while a slot animation runs.
+ * Callers narrow the arguments to u8, u8 and u16 (the slot record's widths). IV: buttonHelpSetSlot,
+ * Apocalypse: buttonHelpSelectSlot. */
+void buttonHelpSetSlot(u8 slot, u8 kind, u16 value, s32 defer);
+void buttonHelpSelectSlot(u8 slot, u8 kind, u16 value, s32 defer);
 
 #ifdef __cplusplus
 }

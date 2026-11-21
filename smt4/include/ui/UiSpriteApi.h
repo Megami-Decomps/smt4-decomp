@@ -42,7 +42,7 @@ void spriteStartAnimationByIndex(UiSpriteState *sprite, s32 index);
 /* Advances every track by a frame and returns the finished flag; a sprite without images is finished. */
 s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite);
 /* The opacity, scale and image-frame tracks' advance. */
-void FUN_002b1e08(UiSpriteState *sprite);
+void uiSpriteAdvanceAlphaTrack(UiSpriteState *sprite);
 void controllerUpdateUniformScaleTrack(UiSpriteState *sprite);
 void spriteSequencePlayerAdvance(UiSpriteState *sprite);
 /* Starts frame sequence `sequence` of the sprite's resource. */

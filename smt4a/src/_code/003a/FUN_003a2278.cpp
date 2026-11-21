@@ -1,11 +1,11 @@
 /* NON_MATCHING: only the arm layout differs: retail shares the sysPlaySe call of the first 0xD3 arm with the final else arm and places the second 0xD3 arm, the 0x105 arm and the final arm after the main path. */
+#include "ui/ButtonHelp.h"
 #include "common.h"
 #include "game/GameStateA.h"
 
 extern "C" {
 
 void sysPlaySe(u32 id);
-void buttonHelpSelectSlot(s32 a, s32 b, s32 c, s32 d);
 s32 gameFlagIsSet(u32 flag);
 s32 sub68OwnerCall2(void);
 void sub68OwnerCall3(void);

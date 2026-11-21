@@ -1,4 +1,4 @@
-/* NON_MATCHING: instruction count and control flow match (90 rows); the retained-roster entry address is formed differently (retail adds the 0x2418 constant from a register to the scaled index, the build folds it into the base pointer) and the subject index copy and unsigned loop-exit branch differ. */
+/* NON_MATCHING: same flow except the alternate-flag layout (retail keeps the 0x8000 test inline and moves the 0x400 test out of line) and register choices for the subject and the retained-roster addressing (retail adds the 0x2418 constant to the scaled index, then the state). */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
@@ -34,16 +34,17 @@ void FUN_004e1f58(BtlMainGlobalsA *globals, const BtlUnitA *action, s32 alternat
         if (subjectIndex < 0)
             subjectIndex = 0;
         s32 id = subject->parts[subjectIndex];
-        BattleRetainedRosterEntry *entries = globals->state->retainedRoster.entries;
-        u32 existing;
-        for (existing = 0; existing < 109; ++existing) {
-            if (entries[existing].id == id && record->modelMatch.key == entries[existing].key)
+        bool found = false;
+        for (s32 existing = 0; existing < 109; ++existing) {
+            if (globals->state->retainedRoster.entries[existing].id == id && record->modelMatch.key == globals->state->retainedRoster.entries[existing].key) {
+                found = true;
                 break;
+            }
         }
-        if (existing < 109)
+        if (found)
             continue;
         for (s32 index = 0; index < 109; ++index) {
-            BattleRetainedRosterEntry *entry = &entries[index];
+            BattleRetainedRosterEntry *entry = &globals->state->retainedRoster.entries[index];
             if (entry->id < 0) {
                 entry->id = id;
                 entry->key = record->modelMatch.key;

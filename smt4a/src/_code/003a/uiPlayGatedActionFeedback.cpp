@@ -1,3 +1,4 @@
+#include "ui/ButtonHelp.h"
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 
@@ -5,7 +6,6 @@ extern "C" {
 s32 gameFlagIsSet(u32 flag);
 s32 playerCanAffordRecoverySkill();
 void sysPlaySe(u32 id);
-void buttonHelpSelectSlot(u32 mode, u32 first, u32 second, u32 enabled);
 
 // Play blocked, unavailable or successful action feedback according to map mode and story flags.
 void uiPlayGatedActionFeedback()

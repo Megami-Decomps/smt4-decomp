@@ -76,6 +76,9 @@ difference a register tie-break.
   `AsdSndSlotC` made retail's split base (`add r0, r1, #1536` then `[r0, #130]`/`[r0, #146]`, smt4
   `FUN_0010d3f8`), where a `u8` addresses each slot from the sound base.
 - A flag read with `ldrb` through a split large-offset base and tested against 0 is `s8`.
+- Two byte fields of an array element that retail reads through one shared base register (`active`, then `pass`)
+  are both `s8`; index the element at each use (`scene->numbers[slot].active`) rather than caching a pointer
+  (smt4 `btlDrawFloatingNumbers`, wave 64).
 - A one-shot skip flag in a global that retail tests and clears through two loads of the global's address (`ldr r0, =g;
   ldrb r0, [r0, #N]; ldr r5, =g` before the `push` returns, where the build loads the address once or copies it with
   `add r5, r0, #0`) is `s8` too: `GameStateMapBlock::skipReturnSnapshot` (smt4) and `GameStateA::skipTransitionSnapshot`
@@ -270,6 +273,9 @@ difference a register tie-break.
   `checked = ok ? resource : NULL;`) and the same as an `if` assign through different registers; try
   both (about forty near misses moved). Not for globals, and an `else if` chain stays a chain: don't
   split it into an `else` holding a ternary.
+- A clamp retail repeats in every `switch` arm (store, compare, store in each case) is written in each case,
+  `progress->remaining = progress->remaining > 0 ? progress->remaining : 0;`, not once after the switch: the quest
+  requirement resolvers smt4 `FUN_00298e40` and smt4a `FUN_003df004` are IDENTICAL with it (wave 64).
 - Locals declared at the top of the function (C89 style), or one loop index reused by two loops,
   change their registers.
 - Assigning a global and then reading it back into a local (`g = alloc(); T *p = g;`) gives retail's
@@ -343,6 +349,10 @@ asks for.
   its out-of-line function; the inlined copies show the source's store order where the out-of-line code does not.
 - A bounds-checked row getter (`if (i >= count) return NULL; return base + i * size;`) as a
   `static __inline` gives retail's `movcs r0, rN; bcs`.
+- Two calls that fill a zeroed out-parameter, one scheduled `strh zero; ldr arg` and the other `ldr arg; strh zero`
+  in the same function, are an open-coded call and a `static __inline` helper returning the value (its argument is
+  evaluated before its body): `cureMask(event)` in smt4 `itemEffectCheckApplicable` (wave 64). Use the helper only
+  where retail shows the second order.
 - A state machine's `stepEnter(step, state)` helper that clears the counters and then stores the
   state gives retail's store order.
 - `mov rN, #state; mov rM, #0; strd rN, rM, [rX, #off]` is a two-word state/phase record assigned

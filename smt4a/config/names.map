@@ -7882,3 +7882,16 @@
 00352a14 lmapCameraSetPresetDefaults
 0051e270 curveSampleLinear
 0051e540 curveSampleLinear16
+0016c744 modelShaderCommitCommands
+001579dc modelShaderLoad
+0025ccc0 buttonHelpCalc
+001807a0 uiSpriteAdvanceAlphaTrack
+003999ac gxEmitScissorMaximum
+00399ab4 gxEmitScissorRect
+0051e09c curveSampleLinearPacked
+00177abc gpuDepthRangeEmitCommands
+00460b30 _ZN9Obj55c00cD1Ev
+00460b2c _ZN9Obj55bff8D1Ev
+00460e00 _ZN9Obj55c0e0D1Ev
+004611e4 _ZN9Obj55c130D1Ev
+004611e8 _ZN9Obj55c144D1Ev

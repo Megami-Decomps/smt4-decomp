@@ -1,4 +1,4 @@
-/* NON_MATCHING: state machine, per-mode views (Obj4223c4(mode), Obj4223f8, Obj422448) and virtual calls match; armcc loads the size constants into different registers and emits the five-way `new` blocks in a different order from retail's switch table, so the jump-table offsets differ. */
+/* NON_MATCHING: the per-mode views (Obj4223c4(mode), Obj4223f8, Obj422448) and the shared store-and-start tail after case 4 match; retail loads work->view only on the default path (the build loads it before the jump table), loads the mode before the size constant, and shares one `return 0` block where the build returns from case 0 directly. */
 #include "bible/bibleMain.h"
 #include "classes/Obj4223c4.h"
 #include "classes/Obj4223f8.h"
@@ -9,38 +9,31 @@ extern BibleGlobals g_bible;
 
 /* The bible screen's state machine: builds the view for the requested mode (0), runs it (1), then
  * closes and destroys it (2); returns -1 once finished (3). */
-u32 FUN_001e4734(void)
+u32 bibleStepViewState(void)
 {
     BibleWork *work = g_bible.work;
 
     switch (work->unk0d) {
     case 0: {
-        BibleView *view;
+        BibleView *view = work->view;
         switch (g_bible.mode) {
         case 0:
             view = new Obj4223c4(0);
-            work->view = view;
             break;
         case 1:
             view = new Obj4223c4(1);
-            work->view = view;
             break;
         case 2:
             view = new Obj4223f8;
-            work->view = view;
             break;
         case 3:
             view = new Obj422448;
-            work->view = view;
             break;
         case 4:
             view = new Obj4223f8(work->unk10);
-            work->view = view;
-            break;
-        default:
-            view = work->view;
             break;
         }
+        work->view = view;
         view->start();
         work->unk0d = 1;
         return 0;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: prologue, per-table lookups (inlined) and stack layout match; retail keeps a separate null/payload check (cmp; nop; beq) per case with one shared +0x20 tail, built merges/predicates them */
+/* NON_MATCHING: each case now runs its own null/payload check like retail (tables 9-11 never offset); remaining: the item and equipment cases fold the null test into the payload test (cmp; cmpne; beq to the shared return of r0) where retail keeps `cmp; nop; beq` to its NULL return, which shifts the shared +0x20 tail. */
 #include "common.h"
 #include "gamedata/DataTable.h"
 #include "addon/AocSystem.h"
@@ -112,10 +112,18 @@ static inline u8 *getTable08Sub5Record(u32 id)
     return record;
 }
 
+/* The record itself, or with `payload` its payload at +0x20; NULL stays NULL. */
+static __inline u8 *recordPayload(u8 *record, int payload)
+{
+    if (record == NULL) {
+        return NULL;
+    }
+    return payload != 0 ? record + 0x20 : record;
+}
+
 /* Looks up the record `id` in the data table selected by the current content mode; with `payload` returns the record's payload at +0x20. */
 u8 *dataFindKindRecordWithAocOverrides(u32 id, int payload)
 {
-    u8 *record;
     int info;
     u8 mode;
 
@@ -129,11 +137,9 @@ u8 *dataFindKindRecordWithAocOverrides(u32 id, int payload)
     }
     switch (mode) {
     case 0:
-        record = getTable08Sub0Record(id);
-        break;
+        return recordPayload(getTable08Sub0Record(id), payload);
     case 1:
-        record = (u8 *)itemTableGetItemRecord(id);
-        break;
+        return recordPayload((u8 *)itemTableGetItemRecord(id), payload);
     case 2:
     case 3:
     case 4:
@@ -141,21 +147,16 @@ u8 *dataFindKindRecordWithAocOverrides(u32 id, int payload)
     case 6:
     case 7:
     case 8:
-        record = (u8 *)itemTableGetEquipmentRecord(id);
-        break;
+        return recordPayload((u8 *)itemTableGetEquipmentRecord(id), payload);
     case 9:
-        return getTable08Sub3Record(id);
+        return recordPayload(getTable08Sub3Record(id), 0);
     case 10:
-        return getTable08Sub4Record(id);
+        return recordPayload(getTable08Sub4Record(id), 0);
     case 11:
-        return getTable08Sub5Record(id);
+        return recordPayload(getTable08Sub5Record(id), 0);
     default:
         return NULL;
     }
-    if (record == NULL) {
-        return NULL;
-    }
-    return payload != 0 ? record + 0x20 : record;
 }
 
 } /* extern "C" */

@@ -1,4 +1,4 @@
-/* NON_MATCHING: channel-relative pointer bases and vector component scheduling differ from retail. */
+/* NON_MATCHING: retail reloads each start component after computing the delta (and stores the components one by one); armcc keeps them and uses vldmia/vstmia. */
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 
 // This layout extends past the published BattleVectorTransition prefix.
@@ -25,23 +25,26 @@ struct ExtendedTransitionView {
 };
 extern "C" f32 easeEvaluate(s32 kind, u32 mode, u32 frame);
 
-static inline void interpolateVector(VectorTransitionChannel* channel, f32 progress)
+static __inline void vectorSubtract(BattleVector3 *result, const BattleVector3 *left, const BattleVector3 *right)
 {
-    BattleVector3 delta;
-    delta.x = channel->end.x - channel->start.x;
-    delta.y = channel->end.y - channel->start.y;
-    delta.z = channel->end.z - channel->start.z;
-    channel->current.x = channel->start.x + delta.x * progress;
-    channel->current.y = channel->start.y + delta.y * progress;
-    channel->current.z = channel->start.z + delta.z * progress;
+    result->x = left->x - right->x;
+    result->y = left->y - right->y;
+    result->z = left->z - right->z;
 }
 
 // Evaluate the two vector and four scalar channels at the eased frame position.
 extern "C" void FUN_003d7298(ExtendedTransitionView* state, u32 frame)
 {
     f32 progress = easeEvaluate(0, state->interpolationMode, frame);
-    interpolateVector(&state->position, progress);
-    interpolateVector(&state->target, progress);
+    BattleVector3 delta;
+    vectorSubtract(&delta, &state->position.end, &state->position.start);
+    state->position.current.x = state->position.start.x + delta.x * progress;
+    state->position.current.y = state->position.start.y + delta.y * progress;
+    state->position.current.z = state->position.start.z + delta.z * progress;
+    vectorSubtract(&delta, &state->target.end, &state->target.start);
+    state->target.current.x = state->target.start.x + delta.x * progress;
+    state->target.current.y = state->target.start.y + delta.y * progress;
+    state->target.current.z = state->target.start.z + delta.z * progress;
     state->fourth.current = state->fourth.start + (state->fourth.end - state->fourth.start) * progress;
     state->third.current = state->third.start + (state->third.end - state->third.start) * progress;
     state->second.current = state->second.start + (state->second.end - state->second.start) * progress;

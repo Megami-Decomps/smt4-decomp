@@ -1,4 +1,4 @@
-/* NON_MATCHING: float conversions are allocated directly to preserved registers, argument lifetimes differ, and loop-count scheduling moves; candidate -O2. */
+/* NON_MATCHING: the origin's x and y swap saved VFP registers (s21/s20), and retail increments the index before the count call. */
 #include "shard/S1Mover.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "util/MathFunctions.h"
@@ -44,9 +44,7 @@ void lmapFindNearestMatchingTargetPoint(s32 firstKind, s32 secondKind, s32 third
                                            position.x, position.y, position.z);
             if (distance < nearest) {
                 nearest = distance;
-                output->x = position.x;
-                output->y = position.y;
-                output->z = position.z;
+                *output = position;
                 *yaw = (f32)point->yaw;
             }
         } while (++index < (s32)dataTableGetRecordFortyFive());

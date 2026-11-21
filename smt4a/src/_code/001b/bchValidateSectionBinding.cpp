@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rewrite of the BCH section binder; the frame layout (retail keeps the lookup result at sp+40 above the two ranges), the sign test (asr/cmn) and the reuse of the copied request words in VFP registers for the later arguments differ. */
+/* NON_MATCHING: readable rewrite of the BCH section binder; the frame layout (retail keeps the lookup result at sp+40, 8 bytes above the two ranges) and the lookup's failure test (asr #31; cmn #1, then a reload) differ, and the part loop indexes through a copy of the counter. */
 /* Validates a BCH section request against its file header and, when it is acceptable, binds the
  * request into `out` and flags the parts of the bound object. Returns 0 or a status mask whose top
  * bit marks a hard failure. */
@@ -23,7 +23,7 @@ struct BchPart {
 struct BchObject {
     /* 0x00 */ u8 unk00[0xC];
     /* 0x0C */ BchPart **parts;
-    /* 0x10 */ s16 partCount;
+    /* 0x10 */ u16 partCount;
 };
 
 struct BchSectionRequest {
@@ -88,10 +88,10 @@ u32 bchValidateSectionBinding(BchSectionBinding *out, BchHeader *header, const B
     first.start = request->start;
     first.end = first.start + header->unk38;
     BchRange second;
-    second.start = request->unk24;
-    if (second.start == 0) {
+    if (request->unk24 != 0)
+        second.start = request->unk24;
+    else
         second.start = request->unk1C;
-    }
     second.end = second.start + header->unk3C;
     BchLookupResult found = FUN_001b8bb4(out, request->unk14, header->unk34 >> 2, request, header, &first);
     if (found.status < 0) {
@@ -100,8 +100,8 @@ u32 bchValidateSectionBinding(BchSectionBinding *out, BchHeader *header, const B
     out->request = *request;
     out->handle = found.handle;
     out->header = header;
-    out->object = request->object;
-    FUN_001b8798(out, &first, &second, request->unk24, request->unk1C);
+    out->object = out->request.object;
+    FUN_001b8798(out, &first, &second, out->request.unk24, out->request.unk1C);
     if (request->deferred == 0) {
         u32 index = 0;
         if (out->object->partCount != 0) {

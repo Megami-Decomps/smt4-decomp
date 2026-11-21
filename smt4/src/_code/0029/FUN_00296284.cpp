@@ -49,7 +49,7 @@ s32 FUN_00296284(UiSpriteState *sprite, s32 reverse, s32 vertical)
         }
     }
     sprite->positionFrame = frame + 1;
-    FUN_002b1e08(sprite);
+    uiSpriteAdvanceAlphaTrack(sprite);
     controllerUpdateUniformScaleTrack(sprite);
     spriteSequencePlayerAdvance(sprite);
     if (sprite->positionDone && sprite->alphaDone && sprite->scaleDone && sprite->frameDone)

@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rewrite compiles (172 vs 173 rows); retail uses a larger callee-saved set (push {r3-r9,lr}) and different register allocation */
+#include "ui/ButtonHelp.h"
 #include "common.h"
 #include "code/Code002a.h"
 #include "ui/UiSpriteApi.h"
@@ -51,7 +52,6 @@ void ifTouchGetButtonHelpValue(void);
 void sysPlaySe(void);
 void listCursorStepForward(void* list);
 void listCursorStepBack(void* list);
-void buttonHelpSelectSlot(s32 a, s32 b, s32 c, s32 d);
 
 #define MENU_BYTE(menu, offset) (*(reinterpret_cast<u8*>(menu) + (offset)))
 

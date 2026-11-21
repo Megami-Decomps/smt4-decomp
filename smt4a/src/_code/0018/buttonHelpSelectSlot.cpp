@@ -48,7 +48,7 @@ static __inline void helpSelect(ButtonHelpWorkA *work, u32 index, s32 kind, s32 
     unit->image = -1;
 }
 
-void buttonHelpSelectSlot(u32 index, s32 kind, s32 value, s32 queue)
+void buttonHelpSelectSlot(u8 index, u8 kind, u16 value, s32 queue)
 {
     if (index >= 6)
         return;

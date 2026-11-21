@@ -5,6 +5,8 @@
 #include "common.h"
 #include <stddef.h>
 #include "map/lmapMain.h"
+#include "ui/UiSpriteState.h"
+#include "status/StatusCamera.h"
 
 typedef struct GameData {
     /* 0x0000 */ u32 job;
@@ -14,9 +16,8 @@ typedef struct GameData {
     /* 0x0274 */ u8 unk274[1];
     /* 0x0275 */ u8 unk0275[0x8B];
     /* 0x0300 */ u8 unk300[1];
-    /* 0x0301 */ u8 unk0301[0x4EB];
-    /* 0x07EC */ u8 statusTimer[1];
-    /* 0x07ED */ u8 unk07ED[0xAEF];
+    /* 0x0301 */ u8 unk0301[0x8B];
+    /* 0x038C */ UiSpriteState panelSprites[28]; /* the status panel's sprites */
     /* 0x12DC */ s32 activeState;
     /* 0x12E0 */ u32 unk12E0;
     /* 0x12E4 */ s32 unk12E4;
@@ -60,7 +61,8 @@ typedef struct GameData {
     /* 0x1E74 */ void *resource;
     /* 0x1E78 */ u8 unk1E78[8];
     /* 0x1E80 */ u32 unk1E80;
-    /* 0x1E84 */ u8 unk1E84[0x1C];
+    /* 0x1E84 */ Vec3 statusModelPosition; /* where the status model stands; raised by 1000 when the panel closes */
+    /* 0x1E90 */ u8 unk1E90[0x10];
     /* 0x1EA0 */ s32 statusCameraHeightOffset;
     /* 0x1EA4 */ u8 statusCameraHeightMode;
     /* 0x1EA5 */ u8 unk1EA5[0x3];
@@ -87,7 +89,7 @@ extern GameGlobals g_gameGlobals;
 typedef char GameGlobalsLayoutCheck[sizeof(GameGlobals) == 8 && sizeof(GameData) == 0x1EBC ? 1 : -1];
 
 typedef char GameGlobalsOffsets[offsetof(GameGlobals, data) == 4 && offsetof(GameData, activeState) == 0x12DC && offsetof(GameData, statusCameraHeightOffset) == 0x1EA0 && offsetof(GameData, statusCameraHeightMode) == 0x1EA4 ? 1 : -1];
-typedef char GameDataTimerOffsets[offsetof(GameData, statusTimer) == 0x7EC && offsetof(GameData, restoreTabPending) == 0x12E8 ? 1 : -1];
+typedef char GameDataPanelOffsets[offsetof(GameData, panelSprites) == 0x38C && offsetof(GameData, restoreTabPending) == 0x12E8 ? 1 : -1];
 
 #ifdef __cplusplus
 extern "C" {

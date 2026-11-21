@@ -1,21 +1,25 @@
-/* NON_MATCHING: Popup-event selection is reconstructed; state guard lowering and table traversal preserve a different register set. */
+/* NON_MATCHING: retail keeps g_popupState in r9 and the zero in r8 (reused as the NULL of the bounds-checked table row, movcs), stores the speaker before setting up the kind argument and tests the loop as i < count; the build swaps r8/r9 and uses movls #0 / bgt. */
 #include "gamedata/PartnerInfoTable.h"
 #include "code/Code0015.h"
 #include "gamedata/SaveSlotTable.h"
 #include "map/PopupStateA.h"
-
-struct PopupSaveSlot {
-    /* 0x000 */ u8 unk000[0x12c];
-    /* 0x12C */ u16 selection;
-};
+#include "util/Random.h"
 
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
-s32 randRange(s32 maximum);
-const char *popupSelectWeightedMessage(s32 type);
+const char *popupSelectWeightedMessage(u32 kind, u16 id);
 }
 
-/* Queue a selected-slot popup, subject to its flags and probability table. */
+/* Shows popup message `kind` for `speakerId` (popup state 4). */
+static __inline void popupShowSpeaker(u32 kind, u16 speakerId)
+{
+    g_popupState->speakerId = speakerId;
+    g_popupState->message = popupSelectWeightedMessage(kind, speakerId);
+    g_popupState->timer = 0;
+    g_popupState->state = 4;
+}
+
+/* Queues a selected-slot popup, subject to its flags and probability table. */
 extern "C" void FUN_00294a84(s32 immediate)
 {
     messageVoiceFlagsGet();
@@ -23,25 +27,25 @@ extern "C" void FUN_00294a84(s32 immediate)
         return;
     if (g_popupState->state != 0)
         return;
-    PopupSaveSlot *slot = reinterpret_cast<PopupSaveSlot *>(saveSlotFindSelected());
+    PartySlotA *slot = saveSlotFindSelected();
     if (slot == NULL) {
         return;
     }
-    if (gameFlagIsSet(0x1a2) && randRange(99) + 1 <= 50) {
-        return;
+    if (gameFlagIsSet(0x1a2)) {
+        s32 roll = randRange(99) + 1;
+        if (roll <= 50) {
+            return;
+        }
     }
     if (immediate != 0) {
-        g_popupState->speakerId = slot->selection;
-        g_popupState->message = popupSelectWeightedMessage(6);
-        g_popupState->timer = 0;
-        g_popupState->state = 4;
+        popupShowSpeaker(6, slot->id);
         return;
     }
     DataTableView<PartnerInfoRecord> table(0x43, 0);
     for (s32 i = 0; i < static_cast<s32>(table.count); ++i) {
         DataTableView<PartnerInfoRecord> currentTable(0x43, 0);
         const PartnerInfoRecord *entry = currentTable.at(i);
-        if (entry->kind != 5 || entry->partnerId != slot->selection) {
+        if (entry->kind != 5 || entry->partnerId != slot->id) {
             continue;
         }
         if (entry->requiredFlag != 0 && !gameFlagIsSet(entry->requiredFlag)) {
@@ -50,13 +54,11 @@ extern "C" void FUN_00294a84(s32 immediate)
         if (entry->excludedFlag != 0 && gameFlagIsSet(entry->excludedFlag)) {
             continue;
         }
-        if (entry->argument < randRange(99) + 1) {
+        s32 roll = randRange(99) + 1;
+        if (entry->argument < roll) {
             continue;
         }
-        g_popupState->speakerId = slot->selection;
-        g_popupState->message = popupSelectWeightedMessage(5);
-        g_popupState->timer = 0;
-        g_popupState->state = 4;
+        popupShowSpeaker(5, slot->id);
         return;
     }
 }

@@ -1,4 +1,4 @@
-/* The depth-range object whose GPU command block (depth scale and offset, float24) FUN_003dfaf0 writes. */
+/* The depth-range object whose GPU command block (depth scale and offset, float24) gpuDepthRangeEmitCommands writes. */
 #ifndef GFX_GPUDEPTHRANGE_H
 #define GFX_GPUDEPTHRANGE_H
 
@@ -24,8 +24,10 @@ static __inline u32 gpuEncodeFloat24Flush(f32 value)
     union { f32 value; u32 bits; } encoding;
     encoding.value = value;
     u32 bits = encoding.bits;
-    s32 exponent = 0;
-    if ((bits & 0x7FFFFFFF) != 0) {
+    s32 exponent;
+    if ((bits & 0x7FFFFFFF) == 0) {
+        exponent = 0;
+    } else {
         exponent = ((bits >> 23) & 0xFF) - 0x40;
         if (exponent < 0)
             return (bits >> 31) << 23;

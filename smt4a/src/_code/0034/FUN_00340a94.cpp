@@ -50,7 +50,7 @@ s32 FUN_00340a94(UiSpriteState *sprite, s32 reverse, s32 vertical)
         }
     }
     sprite->positionFrame = frame + 1;
-    FUN_001807a0(sprite, 1.0f);
+    uiSpriteAdvanceAlphaTrack(sprite, 1.0f);
     FUN_00182348(sprite, 1.0f);
     spriteSequencePlayerAdvance(sprite, 1.0f);
     if (sprite->positionDone != 0 && sprite->alphaDone != 0 &&

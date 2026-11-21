@@ -6159,3 +6159,14 @@
 00290404 uiQuestShowStatusHelp
 002df5f8 lmapCameraSetPresetDefaults
 003f972c curveSampleLinear16
+00126d14 modelShaderCommitCommands
+0011b498 modelShaderLoad
+001c0c38 buttonHelpCalc
+001e4734 bibleStepViewState
+002b1e08 uiSpriteAdvanceAlphaTrack
+003097ac gxEmitScissorMaximum
+003098b4 gxEmitScissorRect
+00309a60 extSaveDataRecreateOnError
+002d02b0 fusionComparePairsByParentPriorityDescending
+003f92a4 curveSampleLinearPacked
+003dfaf0 gpuDepthRangeEmitCommands

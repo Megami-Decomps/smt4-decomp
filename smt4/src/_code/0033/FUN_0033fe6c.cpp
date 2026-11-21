@@ -1,4 +1,3 @@
-/* NON_MATCHING: HP/MP coupling matches the retail guards; effect/target saved registers and the shared party-unit lookup exit still differ. */
 #include "common.h"
 #include "gamedata/GamePlayerData.h"
 #include "gamedata/UnitRecordAccess.h"
@@ -62,7 +61,11 @@ u32 FUN_0033fe6c(s32 index, s32 fromParty, const RecoveryEffect *effect, u32 use
                 changes |= CURE_STATUS;
         }
     } else {
-        StatBlock *unit = fromParty != 0 ? saveResolvePartySlot(index) : gameGetUnitRecord(index);
+        StatBlock *unit;
+        if (fromParty == 0)
+            unit = gameGetUnitRecord(index);
+        else
+            unit = saveResolvePartySlot(index);
         if (unit == NULL)
             return 3;
         if ((wanted & RECOVER_HP) && (unit->ailments & 0x406) == 0 && btlLinkGetMaxHp(unit) != unit->hp)

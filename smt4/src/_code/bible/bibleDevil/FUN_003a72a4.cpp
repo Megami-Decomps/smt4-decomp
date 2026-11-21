@@ -1,4 +1,5 @@
 /* NON_MATCHING: after FUN_002328b4 the pageChanged/selected stores use swapped scratch registers (retail r1 for the constant and the pointer, this build r0). The row-id getter is an inline definition: armlink inlined and removed shopListItemGetId, and retail's `mov r2, #0` before its ldrh shows the caller saw its body. */
+#include "ui/ButtonHelp.h"
 #include "common.h"
 #include "bible/bibleDevil.h"
 #include "code/Code0029.h"
@@ -65,7 +66,6 @@ void buttonHelpGetStatus(void);
 void buttonHelpSetPreset(void);
 void listCursorStepForward(void *);
 void listCursorStepBack(void *);
-void buttonHelpSetSlot(s32, s32, s32, s32);
 void FUN_00233404(void);
 
 /* Per-frame update of the devil bible: moves the cursor between pages/entries and starts the buy flow when the navigation state allows it. */

@@ -1,4 +1,5 @@
 /* NON_MATCHING: the entry-count quarter rounding, the partner-slot scan and the sound selection branches are scheduled and laid out differently; the setup sequence is the same. */
+#include "ui/ButtonHelp.h"
 #include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
@@ -67,7 +68,6 @@ void gridNavigationConfigure(void *list, s32 count, s32 rows, s32 columns, s32 a
 void gameGlobalsSetOverlayActive(s32 arg);
 void unitStatusResetSpriteState(void);
 void sysPlaySe(u32 id);
-void buttonHelpSelectSlot(s32 a, s32 b, s32 c);
 void paramsClearPacket(void *packet);
 
 void FUN_004be990(PartnerScreen *screen, s32 a, s32 b);
@@ -134,7 +134,7 @@ void FUN_004bd794(PartnerScreen *screen, u8 mode)
             }
         } else if (screen->partnerCount >= 1) {
             sysPlaySe(0xF0);
-            buttonHelpSelectSlot(5, 1, 1);
+            buttonHelpSelectSlot(5, 1, 1, 1);
         } else {
             sysPlaySe(0x118);
         }

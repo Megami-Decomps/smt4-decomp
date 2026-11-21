@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00114474` (_code @ 0x114474, 0x1800 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/ButtonHelp.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
@@ -14,7 +15,6 @@ int msgBoxFlagsSetBit7(...);
 int bustupCutAnimFinish(void);
 int buttonHelpSetEnabled(...);
 int buttonHelpSetContext(...);
-int buttonHelpSetSlot(...);
 int buttonHelpSetPreset(...);
 int buttonHelpGetStatus(void);
 int titleOverlaySetModeAnimation(...);
@@ -59,7 +59,6 @@ extern int msgBoxIsState2(unsigned int);
 /* Supplied declaration required: msgBoxFlagsSetBit7. */
 /* Supplied declaration required: buttonHelpSetEnabled. */
 /* Supplied declaration required: buttonHelpSetContext. */
-/* Supplied declaration required: buttonHelpSetSlot. */
 extern unsigned short ifTouchRegionAddRequested(unsigned int, unsigned int);
 extern int FUN_002b8694(void);
 extern int lmapMainIsRunning(void);

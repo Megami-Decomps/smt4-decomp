@@ -37,7 +37,7 @@ struct BattleRosterRecordA {
         } script;
         struct {
             /* 0x000 */ u8 unk000[0x1C8];
-            /* 0x1C8 */ u16 category;
+            /* 0x1C8 */ s16 category;
         } classification;
         struct {
             /* 0x000 */ u8 unk000[0x44];

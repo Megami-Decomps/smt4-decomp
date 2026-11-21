@@ -1,4 +1,4 @@
-/* NON_MATCHING: all workflow calls and state transitions are recovered; the state-2 reset block is tail-merged at the front instead of the end, with a few register differences. */
+/* NON_MATCHING: only scratch registers differ: retail computes the step increment of step 2 and the state constants 7 and 2 in r1, the build in r0. */
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "script/scrScriptProcess.h"
 
@@ -53,6 +53,13 @@ void bgmFadeOut(u32 duration);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 }
 
+/* Moves the workflow to `state`, restarting its step counter. */
+static void workflowEnterState(CallbackWorkflow *work, u8 state)
+{
+    work->step = 0;
+    work->state = state;
+}
+
 // Drive the callback's resource, dialogue, and return-to-map workflow.
 extern "C" s32 FUN_004cc34c(CallbackWorkflow *work)
 {
@@ -69,8 +76,7 @@ extern "C" s32 FUN_004cc34c(CallbackWorkflow *work)
             work->script = scrScriptProcessCreate(work->heapA, work->heapB);
             scriptProcessSetMode(work->script, 0);
         }
-        work->step = 0;
-        work->state = 2;
+        workflowEnterState(work, 2);
         break;
     case 3:
         FUN_004cbb38(work);
@@ -105,46 +111,44 @@ extern "C" s32 FUN_004cc34c(CallbackWorkflow *work)
         case 3:
             if (scrRunOpcodesStub(work->process) == 2) {
                 statusDownRestartTransition();
-                work->step = 0;
-                work->state = 7;
+                workflowEnterState(work, 7);
             }
             break;
         }
         break;
     }
     case 7: {
-        if (!FUN_002effbc())
-            break;
-        u16 *region = saveGetSelectedRecordSlot(work->region);
-        region[0] = 0;
-        region[1] = 0;
-        region[2] = 0;
-        region[3] = 0;
-        work->region = ~0u;
-        gameGlobalsSetSceneState(0);
-        FUN_002c39dc(17, 0, ~0u);
-        FUN_00284ee4(1);
-        FUN_00215bbc();
-        if (work->process != NULL) {
-            scrScriptProcessDestroy(work->process);
-            work->process = NULL;
+        if (FUN_002effbc()) {
+            u16 *region = saveGetSelectedRecordSlot(work->region);
+            region[0] = 0;
+            region[1] = 0;
+            region[2] = 0;
+            region[3] = 0;
+            work->region = ~0u;
+            gameGlobalsSetSceneState(0);
+            FUN_002c39dc(17, 0, ~0u);
+            FUN_00284ee4(1);
+            FUN_00215bbc();
+            if (work->process != NULL) {
+                scrScriptProcessDestroy(work->process);
+                work->process = NULL;
+            }
+            if (work->allocation != NULL) {
+                asdMemFree(work->allocation);
+                work->allocation = NULL;
+            }
+            btlTalkBustUpDestroy();
+            soundChannelStopAll(0);
+            if (mapMainIsBusy())
+                mapSelectRoomMusicIfActive();
+            else if (lmapMainIsRunning())
+                lmapMainCallIfActive();
+            else if (mikadoPollShutdown())
+                mikadoRequestSoundChannel();
+            else
+                bgmFadeOut(45);
+            workflowEnterState(work, 2);
         }
-        if (work->allocation != NULL) {
-            asdMemFree(work->allocation);
-            work->allocation = NULL;
-        }
-        btlTalkBustUpDestroy();
-        soundChannelStopAll(0);
-        if (mapMainIsBusy())
-            mapSelectRoomMusicIfActive();
-        else if (lmapMainIsRunning())
-            lmapMainCallIfActive();
-        else if (mikadoPollShutdown())
-            mikadoRequestSoundChannel();
-        else
-            bgmFadeOut(45);
-        work->step = 0;
-        work->state = 2;
         break;
     }
     }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: native conversions are restored; VFP scheduling, packed-mode branches and final scalar copies differ. */
+/* NON_MATCHING: the packed mode word is now built with bitfield inserts as in retail; retail hoists the zero/one constants and loads the parameter as a float to store zero, one and parameter with one vstmia (a three-float value at 0x184), sets the default mode 0 before the compare chain and keeps start in s1. */
 #include "gfx/RenderRangeState.h"
 
 extern "C" RenderRangeRegistry *g_handleRegistry;
@@ -19,14 +19,17 @@ extern "C" void renderRangeTargetApply(const RenderRangeInput *input)
         end = input->overrideEnd;
     }
     RenderPackedMode packed;
-    packed.bytes.first = static_cast<u8>(input->first);
-    packed.bytes.second = static_cast<u8>(input->second);
-    packed.bytes.third = static_cast<u8>(input->third);
+    packed.bits.first = input->first;
+    packed.bits.second = input->second;
+    packed.bits.third = input->third;
+    u32 mode;
     switch (input->mode) {
-    case 1: packed.bytes.mode = 1; break;
-    case 2: packed.bytes.mode = 2; break;
-    default: packed.bytes.mode = 0; break;
+    case 0: mode = 0; break;
+    case 1: mode = 1; break;
+    case 2: mode = 2; break;
+    default: mode = 0; break;
     }
+    packed.bits.mode = mode;
     target->begin = begin;
     target->end = end;
     target->zero = 0.0f;

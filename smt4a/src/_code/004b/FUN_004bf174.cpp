@@ -1,3 +1,4 @@
+#include "ui/ButtonHelp.h"
 #include "common.h"
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
 #include "gamedata/SaveSlotTable.h"
@@ -29,7 +30,6 @@ extern s32 FUN_0023b3b8(void);
 extern s32 FUN_0035db94(void);
 extern void statusPanelSetOpen(s32 arg);
 extern void FUN_0023b45c(s32 arg);
-extern void buttonHelpSelectSlot(s32 a, s32 b, s32 c, s32 d);
 extern void FUN_004be990(PickMenu *menu, s32 a, s32 b, s32 c);
 extern void flaggedEntrySetValueA(void *entry, s32 value);
 extern void flaggedEntrySetValueB(void *entry, s32 value);

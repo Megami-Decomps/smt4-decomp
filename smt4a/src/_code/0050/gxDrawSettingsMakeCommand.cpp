@@ -38,7 +38,7 @@ struct GxDrawPacketFields {
 extern "C" {
 u32 *gxEmitBlendCommands(GxDrawSettings *, u32 *, s32);
 u32 *gpuEmitDepthBufferCommands(const GpuDepthState *, u32 *, s32, s32);
-u32 *FUN_00177abc(const GpuDepthViewport *, u32 *);
+u32 *gpuDepthRangeEmitCommands(const GpuDepthViewport *, u32 *);
 u32 *gxEmitFramebufferAccessMasks(u32 *, u32 *, s32);
 
 u32 *gxDrawSettingsMakeCommand(GxDrawSettings *settings, u32 *commands, s32 reset)
@@ -87,7 +87,7 @@ u32 *gxDrawSettingsMakeCommand(GxDrawSettings *settings, u32 *commands, s32 rese
                   ((colorMask & 4) ? 0x400 : 0) | ((colorMask & 8) ? 0x800 : 0) |
                   (settings->depthWrite ? 0x1000 : 0);
     *commands++ = 0x000f0107;
-    commands = FUN_00177abc(&packet->viewport, commands);
+    commands = gpuDepthRangeEmitCommands(&packet->viewport, commands);
     return gxEmitFramebufferAccessMasks(&packet->colorState, commands, 0);
 }
 }

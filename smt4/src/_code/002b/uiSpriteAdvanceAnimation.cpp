@@ -57,7 +57,7 @@ s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite)
             sprite->positionFrame++;
         }
     }
-    FUN_002b1e08(sprite);
+    uiSpriteAdvanceAlphaTrack(sprite);
     controllerUpdateUniformScaleTrack(sprite);
     spriteSequencePlayerAdvance(sprite);
     if (sprite->positionDone != 0 && sprite->alphaDone != 0 &&

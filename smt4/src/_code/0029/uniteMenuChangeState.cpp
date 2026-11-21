@@ -1,3 +1,4 @@
+#include "ui/ButtonHelp.h"
 #include "camp/Unite/UniteGlobals.h"
 #include "status/StatusCamera.h"
 #include "code/Code0029_Smt4.h"
@@ -17,7 +18,6 @@ const void *partyMemberFindById(u32 id);
 void FUN_0029da34(u32 mode, u32 enabled, u32 id, const void *member);
 void buttonHelpShowSkillDetails(u32 id);
 void menuSetModeAndResetTransitions(s32 mode);
-void buttonHelpSetSlot(s32 first, s32 second, s32 third, s32 enabled);
 void uiSpriteSetKeyframe(void *timer, s32 period, s32 value); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Row `index` of the unite help texts (data table 0x24, section 2: 0x55-byte strings), or NULL past the end. */

@@ -34,7 +34,7 @@ static bool isIdentity(const f32 *m)
 }
 
 extern "C" {
-void FUN_00126d14(u32 shader);
+void modelShaderCommitCommands(u32 shader);
 void gpuWriteVertexUniformVec4(u32 shader, void *colors);
 void mathCopyIdentityMatrix(void *matrix);
 void cameraComposeMatrices(RenderCtx *ctx, void *a, void *b, void *matrix);
@@ -61,7 +61,7 @@ void renderCtxResetFrameStacks(RenderCtx *ctx)
     for (s32 i = 0; i < 12; i++) {
         ctxByte(ctx, i * 0x20 + 0x1204) = 1;
     }
-    FUN_00126d14(ctxWord(ctx, 0x52c));
+    modelShaderCommitCommands(ctxWord(ctx, 0x52c));
     if (ctxByte(ctx, 0x11dc) != 0 || ctxFloat(ctx, 0x11cc) != 1.0f || ctxFloat(ctx, 0x11d0) != 1.0f ||
         ctxFloat(ctx, 0x11d4) != 1.0f || ctxFloat(ctx, 0x11d8) != 1.0f) {
         ctxFloat(ctx, 0x11cc) = 1.0f;

@@ -1751,6 +1751,15 @@
 0x002c6644 __aeabi_errno_addr name
 0x002c66c4 FUN_002c66c4 linker
 0x002c66cc __aeabi_vec_dtor name
+0x002c66f2 libcLocaleGetCategory library
+0x002c6700 FUN_002c6700 library
+0x002c67b0 scrSignExtendOperand library
+0x002c67c6 FUN_002c67c6 library
+0x002c67dc FUN_002c67dc library
+0x002c6808 FUN_002c6808 library
+0x002c682a libcFormatAppendByte library
+0x002c683e FUN_002c683e library
+0x002c6864 FUN_002c6864 callers
 0x002c6902 FUN_002c6902 library
 0x002c6966 FUN_002c6966 library
 0x002c6a04 rt_locale name

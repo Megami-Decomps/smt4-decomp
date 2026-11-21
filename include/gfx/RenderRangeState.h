@@ -6,6 +6,7 @@
 union RenderPackedMode {
     u32 word;
     struct { u8 first, second, third, mode; } bytes;
+    struct { u32 first : 8; u32 second : 8; u32 third : 8; u32 mode : 8; } bits;
 };
 struct RenderRangeTarget {
     u8 prefix[0xCC];

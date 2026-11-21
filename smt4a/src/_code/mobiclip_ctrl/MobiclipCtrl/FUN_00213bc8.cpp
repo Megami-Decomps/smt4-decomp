@@ -1,4 +1,4 @@
-/* NON_MATCHING: saved-register set, global-address reuse, and backend argument scheduling differ. */
+/* NON_MATCHING: retail keeps 0, 1 (0x105 derived as 1 + 260) and the open-file pointer (loaded at entry) in callee-saved registers, derives the addresses of DAT_006184a0/DAT_00618500 and DAT_00617e58/DAT_00617e70/DAT_00617f18/g_mobiclipPlayer from one base each (they are one object in the original; the symbols still split them), and its backend pool word names the reader field's own symbol. */
 #include "mobiclip_ctrl/MobiclipPlaybackStart.h"
 #include "nn/fs/ArchivePath.h"
 #include "nn/Result.h"
@@ -50,8 +50,10 @@ void FUN_00213bc8(const char *filename)
     FUN_00513d64(&DAT_00588024, streamId, DAT_006184a0);
     FUN_00425ab0(&g_mobiclipPlayer, DAT_00617e58, DAT_00588024.reader,
                  DAT_00588024.player, DAT_00617e70, DAT_00617f18);
+    s32 state;
     do {
         mobiclipYieldPlaybackThread(&g_mobiclipPlayer);
-    } while (g_mobiclipPlayer.state != 7 && g_mobiclipPlayer.state != 1);
+        state = g_mobiclipPlayer.state;
+    } while (state != 7 && state != 1);
 }
 }

@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail shares one buttonHelpSetPreset call across the leaves and places the help-pin tail after it (field 0x17F0 via a literal-pool offset); ours reaches the tail with an add-immediate pair and emits extra nop hints. */
+#include "ui/ButtonHelp.h"
 #include "ui/PartyPanelState.h"
 #include "shard/W4_Match1b_RegisteredHandle.h"
 
@@ -7,7 +8,6 @@ extern "C" {
 int FUN_00282ccc(void);
 int FUN_00282e70(void);
 int FUN_0029dfa8(void);
-int buttonHelpSetSlot(s32, s32, s32, s32);
 int buttonHelpSetPreset(u32 preset);
 int campCecIsActive(void);
 int gameFlagIsSet(u32 flag);

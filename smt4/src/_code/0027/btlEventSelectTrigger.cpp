@@ -1,4 +1,4 @@
-/* NON_MATCHING: condition switch lowers to comparisons, initialization stores reorder and controller registers differ; -O2 candidate. */
+/* NON_MATCHING: 4 lines: retail forms the battle mask address in r1 (add r1, r0, #0x4000; add r1, r1, #0x4A0) where the build reuses r0. */
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/W4_Match6_BtlScript.h"
@@ -42,10 +42,21 @@ u32 btlEventSelectTrigger(BattleEventController *controller, u32 type, s32 slot,
     for (s32 i = 0; i < controller->eventCount; ++i, ++event) {
         if (event->type != type)
             continue;
-        if (((type == 3 || type == 4) || (type == 7 || type == 5)) && slot >= 0) {
+        bool unitEvent = false;
+        switch (type) {
+        case 3:
+        case 4:
+        case 5:
+        case 7:
+            unitEvent = true;
+            break;
+        }
+        if (unitEvent && slot >= 0) {
             s32 special = isOutsideRange4To53(slot);
             BtlEntry *unit = &battle->entries[slot];
             switch (event->condition) {
+            case 0:
+                break;
             case 1:
                 if (special || unit->data.id != event->unitId)
                     continue;
@@ -72,7 +83,7 @@ u32 btlEventSelectTrigger(BattleEventController *controller, u32 type, s32 slot,
             case 7:
             case 8:
             case 9:
-                ((BtlMainState *)battle)->battleMask |= 0x100000;
+                battle->battleMask |= 0x100000;
                 break;
             }
         }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: same phase logic and code layout as retail; the build schedules the 64-bit mask test, the sl/fp constants and the marker-layout loads differently (retail also folds the slot-pair offset into an ldrd with #8 and keeps the aux flag offset in a pool constant). */
+/* NON_MATCHING: same flow as retail (phase 2 now falls into the phase-3 tail); retail predicates the phase-3 store after FUN_003f1534 (strbne), loads the marker layout words left/offset/top in that order and pairs the 64-bit mask words differently. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "battle/BtlUiObjCQuery.h"
@@ -103,7 +103,7 @@ void FUN_0040c64c(u32 unused, UnitSelectStep *step)
             }
         } else {
             FUN_003ed238(state, 0x200);
-            if ((g_btlActionReflect.blocked & state->flags) != 0) {
+            if ((state->flags & g_btlActionReflect.blocked) != 0) {
                 step->result = 0;
                 return;
             }
@@ -121,9 +121,9 @@ void FUN_0040c64c(u32 unused, UnitSelectStep *step)
                 return;
             }
             step->phase = 3;
-            u16 a = DAT_0057a634.left;
+            s16 a = DAT_0057a634.left;
             s16 b = DAT_0057a634.offset;
-            u16 c = DAT_0057a634.top;
+            s16 c = DAT_0057a634.top;
             FUN_004cae0c(state, unit, 0, 0);
             btlReflectQueueKind44(b + a, step->id, unit, 0xff, c, 0);
             u32 style = 6;
@@ -136,9 +136,6 @@ void FUN_0040c64c(u32 unused, UnitSelectStep *step)
     if (step->phase == 2) {
         if (FUN_004aa750(g_btlUiBlock) != 0) {
             step->phase = 3;
-            FUN_003f24e0(state, step->unit);
-            step->result = 0;
-            return;
         }
     }
     if (step->phase != 3) {

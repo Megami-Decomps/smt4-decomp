@@ -1,3 +1,4 @@
+#include "ui/ButtonHelp.h"
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "classes/Obj422214Owner.h"
@@ -9,7 +10,6 @@ extern "C" {
 void sysPlaySe(u32 id);
 void buttonHelpPrepareSlots(void);
 void buttonHelpBeginExit(s32 clearKinds);
-void buttonHelpSelectSlot(u32 index, u32 kind, u32 value, u32 queue);
 void ifTouchDecrementTimer(void);
 void buttonHelpSetText(const s8 *text, u32 color);
 void buttonHelpSetPanelState(u8 value);

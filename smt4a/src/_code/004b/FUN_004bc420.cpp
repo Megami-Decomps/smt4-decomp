@@ -1,4 +1,4 @@
-/* NON_MATCHING: default-result stack slot, table selection and weighted-loop saved registers differ. */
+/* NON_MATCHING: the result is a default-0 local returned once as in retail, but retail spills it to [sp] (saving r3), keeps the loop bound 30 in r8 and the table in r7 (selected with movne/addeq); the build keeps the result in fp and saves ip. */
 #include "gamedata/EncountData.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/NkmEnemyRecord.h"
@@ -29,6 +29,7 @@ static bool groupHasPortrait(u16 id)
 
 extern "C" u16 FUN_004bc420(u32 first, u32 second, s32 excludePortraitGroups)
 {
+    u16 result = 0;
     s32 index = gameDataGetTableEntry(first, second)->value;
     if (!index) {
         weightedTableRollNextValue(first, second, 1);
@@ -51,9 +52,11 @@ extern "C" u16 FUN_004bc420(u32 first, u32 second, s32 excludePortraitGroups)
         const EncountChoice *entry = &table->choices[i];
         if (entry->groupId) {
             random -= entry->weight;
-            if (random < 0)
-                return entry->groupId;
+            if (random < 0) {
+                result = entry->groupId;
+                break;
+            }
         }
     }
-    return 0;
+    return result;
 }

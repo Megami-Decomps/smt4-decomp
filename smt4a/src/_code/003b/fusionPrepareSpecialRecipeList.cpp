@@ -1,10 +1,11 @@
-/* NON_MATCHING: retail retains one shared indexed work base and literal array offsets; this build rematerializes both addresses, saving one fewer register and using an 8-byte rather than 12-byte frame. -O2 candidate. */
+/* NON_MATCHING: only the result copy in the loop differs: retail loads the recipe's resultId into r1 before the 0x62a0 literal (r0), the build loads the literal into r1 first. */
 #include "camp/Unite/UniteGlobals.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
 #include "map/lmapMain.h"
 #include "event/2dEvent/2dEventTex.h"
 #include "map/MapSceneAccess.h"
+#include "gamedata/GameDataAccess_ContentWordList.h"
 struct LinkHolder;
 
 struct FusionSavedSelection {
@@ -15,32 +16,11 @@ struct FusionSavedPreferences {
     u8 unk00[0x20];
     FusionSavedSelection selection;
 };
-struct FusionRecipeEntry {
-    u16 id;
-    u16 ingredients[12];
-    u16 resultId;
-};
-// A view of the recipe-list span; the backing UniteWorkA remains unchanged.
-struct FusionRecipeWorkView {
-    u8 unk0000[0x48c];
-    u32 soundChannel;
-    u8 unk0490[0x8a20];
-    ScrollSelection list;           // 0x8eb0
-    ScrollSelection pages;          // 0x8f14
-    u16 count;                      // 0x8f78
-    u16 unk8f7a;
-    u16 recipeIds[0x94];            // 0x8f7c..0x90a3: span before the next known field
-    u32 maximumLevel;               // 0x90a4
-    u8 unk90a8[0x108];
-    u32 progress;                   // 0x91b0
-};
-
 extern "C" {
 void soundChannelRequestIfEnabled(u32 channel, u32 mode, u32 duration);
 u32 fusionListAvailableSpecialRecipes(void *context, u16 *recipes);
 void gridNavigationConfigure(ScrollSelection *list, s32 count, s32 visible, s32 columns,
                   s32 enable, s32 colors);
-FusionRecipeEntry *contentEntryFindById(u32 id);
 u32 histogramFindHighestSupportedValue(void *context);
 void statusPanelClose();
 void FUN_002a7b74();
@@ -49,13 +29,12 @@ void uniteMenuChangeState(s32 id, s32 enabled);
 LmapScript *lmapSceneGetScript();
 void linkHolderClearFlag(LinkHolder *holder);
 
-// Validate the saved ingredients and populate the special-fusion recipe/result lists.
+/* Validates the saved ingredients and fills the special-fusion recipe and result lists. */
 void fusionPrepareSpecialRecipeList()
 {
     UniteWorkA *work = g_unite;
-    FusionRecipeWorkView *recipes = reinterpret_cast<FusionRecipeWorkView *>(work);
     FusionSavedSelection *selection = &reinterpret_cast<FusionSavedPreferences *>(saveGetUserSettingsBlock())->selection;
-    soundChannelRequestIfEnabled(recipes->soundChannel, 0, 60);
+    soundChannelRequestIfEnabled(work->returnState.soundChannel, 0, 60);
     if (selection->slots[0] >= 0) {
         const SlotRecordA *slot = gameGetSlotRecord(selection->slots[0]);
         if (slot == NULL || slot->id != selection->ids[0]) {
@@ -70,19 +49,19 @@ void fusionPrepareSpecialRecipeList()
             selection->ids[1] = 0;
         }
     }
-    u32 count = fusionListAvailableSpecialRecipes(work->context, recipes->recipeIds);
-    recipes->count = (u16)count;
-    gridNavigationConfigure(&recipes->list, count, 10, 1, 1, 1);
-    gridNavigationConfigure(&recipes->pages, recipes->count, 1, 4, 1, 1);
+    u32 count = fusionListAvailableSpecialRecipes(work->context, work->specialRecipes.recipeIds);
+    work->specialRecipes.count = (u16)count;
+    gridNavigationConfigure(&work->specialRecipes.list, count, 10, 1, 1, 1);
+    gridNavigationConfigure(&work->specialRecipes.pages, work->specialRecipes.count, 1, 4, 1, 1);
     work->candidates.count = 0;
-    for (s32 index = 0; index < recipes->count; ++index) {
+    for (s32 index = 0; index < work->specialRecipes.count; ++index) {
         work->candidates.devilIds[index] =
-            contentEntryFindById(recipes->recipeIds[index])->resultId;
+            contentEntryFindById(work->specialRecipes.recipeIds[index])->value;
         ++work->candidates.count;
     }
-    recipes->maximumLevel = histogramFindHighestSupportedValue(work->context);
+    work->specialRecipes.maximumLevel = histogramFindHighestSupportedValue(work->context);
     statusPanelClose();
-    recipes->progress = 0;
+    work->specialRecipes.progress = 0;
     FUN_002a7b74();
     uniteStartOrQueueRequest(18);
     uniteMenuChangeState(0x26, 1);

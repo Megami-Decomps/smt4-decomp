@@ -50,7 +50,7 @@ typedef char PipelineCommandStateViewOffsets[sizeof(PipelineCommandStateView) ==
 extern "C" {
 u32 *FUN_003dfa2c(const void *blend, u32 *commands, s32 includeTarget);
 u32 *gpuEmitDepthBufferCommands(const GpuDepthState *depth, u32 *commands, s32 first, s32 enabled);
-u32 *FUN_003dfaf0(const PipelineDepthBiasView *bias, u32 *commands);
+u32 *gpuDepthRangeEmitCommands(const PipelineDepthBiasView *bias, u32 *commands);
 u32 *FUN_002265ac(GxDrawSettings **owner, u32 *commands, s32 reset);
 
 /* The body of Apocalypse's FUN_00500f3c without its access-mask refresh: appends the depth test and the
@@ -104,7 +104,7 @@ u32 *gxDrawSettingsEmitCommands(GxDrawSettings *settings, u32 *commands, s32 res
         ((u32)state->stencil.passOperation << 8) | state->stencil.failOperation;
     *commands++ = 0xF0106;
     commands = gxEmitColorDepthMask(state, commands);
-    commands = FUN_003dfaf0(&state->depthBias, commands);
+    commands = gpuDepthRangeEmitCommands(&state->depthBias, commands);
     return FUN_002265ac(&state->owner, commands, reset);
 }
 }

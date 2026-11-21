@@ -1,4 +1,4 @@
-/* NON_MATCHING: packed-ID load grouping and placement of the parent tie-break cold blocks differ. */
+/* NON_MATCHING: the block layout matches; the two tie-breaks that read both words of a pair (resultId, secondType) differ: retail loads the words one at a time, interleaved between the pairs, where the build loads a pair with ldm. */
 #include "camp/Unite/UniteWork.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 
@@ -19,36 +19,29 @@ extern "C" s32 FUN_00337110(const UnitePairEntryIV *firstPair, const UnitePairEn
     const NkmBaseRecordA *a = nkmBaseGetRecord(first->resultId);
     const NkmBaseRecordA *b = nkmBaseGetRecord(second->resultId);
     s32 result = a->race - b->race;
-    if (!result) {
+    if (result == 0)
         result = b->level - a->level;
-        if (!result)
-            result = first->resultId - second->resultId;
-    }
+    if (result == 0)
+        result = first->resultId - second->resultId;
     a = nkmBaseGetRecord(first->firstId);
     b = nkmBaseGetRecord(second->firstId);
-    if (!result) {
+    if (result == 0)
         result = a->race - b->race;
-        if (!result) {
-            result = b->level - a->level;
-            if (!result) {
-                result = first->firstId - second->firstId;
-                if (!result)
-                    result = first->firstType - second->firstType;
-            }
-        }
-    }
+    if (result == 0)
+        result = b->level - a->level;
+    if (result == 0)
+        result = first->firstId - second->firstId;
+    if (result == 0)
+        result = first->firstType - second->firstType;
     a = nkmBaseGetRecord(first->secondId);
     b = nkmBaseGetRecord(second->secondId);
-    if (!result) {
+    if (result == 0)
         result = a->race - b->race;
-        if (!result) {
-            result = b->level - a->level;
-            if (!result) {
-                result = first->secondId - second->secondId;
-                if (!result)
-                    result = first->secondType - second->secondType;
-            }
-        }
-    }
+    if (result == 0)
+        result = b->level - a->level;
+    if (result == 0)
+        result = first->secondId - second->secondId;
+    if (result == 0)
+        result = first->secondType - second->secondType;
     return result;
 }

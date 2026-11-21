@@ -1,3 +1,4 @@
+#include "ui/ButtonHelp.h"
 #include "ui/PartyPanelStateA.h"
 #include "code/Code002c.h"
 #include "code/Code0037.h"
@@ -6,7 +7,6 @@
 extern "C" {
 
 void sysPlaySe(u32 sound);
-void buttonHelpSelectSlot(s32 a, s32 b, s32 c, s32 d);
 s32 FUN_002cad18(void);
 s32 partyPanelGetSelectedDemonId(void);
 s8 FUN_0022e714(void);

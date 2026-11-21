@@ -1,4 +1,4 @@
-/* NON_MATCHING: status-bit loop control, cycle-array addressing and scratch registers differ. */
+/* NON_MATCHING: only two registers are swapped: retail keeps the visited array base (sp) in sl and the constant 1 in fp, the build the other way round. */
 #include "camp/CampStateA.h"
 #include "gamedata/SelectedUnitQuery.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
@@ -63,9 +63,13 @@ void FUN_003d386c(s32 useSelector)
                 if (bit != 2 && (status & (1u << bit)) != 0)
                     ++statusCount;
             }
+            if (statusCount == 0)
+                status = 0;
         }
         s32 ordinal = 0;
-        if ((slot < 0 || statusCount != 0) && status != 0) {
+        if (status == 0) {
+            cycles->colors[slot + 1] = 0xFFFFFFFF;
+        } else {
             for (s32 bit = 1; bit < 14; ++bit) {
                 if (bit == 2)
                     continue;
@@ -77,8 +81,6 @@ void FUN_003d386c(s32 useSelector)
                     ++ordinal;
                 }
             }
-        } else {
-            cycles->colors[slot + 1] = 0xFFFFFFFF;
         }
         if (++cycles->elapsed[slot + 1] >= 24) {
             /* Retail uses the ordinal reached by the scan, not the initial popcount. */

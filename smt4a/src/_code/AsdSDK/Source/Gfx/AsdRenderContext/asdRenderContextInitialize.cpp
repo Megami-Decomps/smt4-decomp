@@ -8,7 +8,7 @@ int asdCameraInitializeDefaults(...);
 int cameraMatrixCacheSetLookAt(...);
 int stereoCameraSetPerspective(...);
 int FUN_00156fd8(...);
-int FUN_001579dc(...);
+int modelShaderLoad(...);
 int mtx44OrthoC(...);
 int asdLoadFileSyncNoContext(...);
 int asdMemoryAllocTraced(...);
@@ -34,7 +34,7 @@ typedef struct {
 /* Supplied declaration required: stereoCameraSetPerspective. */
 extern unsigned int FUN_00154c94(unsigned int);
 /* Supplied declaration required: FUN_00156fd8. */
-/* Supplied declaration required: FUN_001579dc. */
+/* Supplied declaration required: modelShaderLoad. */
 extern unsigned int FUN_00157acc(void);
 /* Supplied declaration required: mtx44OrthoC. */
 /* Supplied declaration required: asdLoadFileSyncNoContext. */
@@ -91,7 +91,7 @@ void asdRenderContextInitialize(int param_1)
   *(unsigned int *)(param_1 + 0x530) = temp_v0;
   pcVar2 = "DefaultTextureVS.shbin";
   asdLoadFileSyncNoContext("DefaultTextureVS.shbin",&temp_v6,1,0x80);
-  FUN_001579dc(*(unsigned int *)(param_1 + 0x530),pcVar2,temp_v6,0);
+  modelShaderLoad(*(unsigned int *)(param_1 + 0x530),pcVar2,temp_v6,0);
   temp_v0 = asdGxPresetsGetHeightByKind(0);
   VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v0 = asdGxPresetsGetByKind(0);

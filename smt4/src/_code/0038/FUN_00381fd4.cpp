@@ -1,4 +1,4 @@
-/* NON_MATCHING: anchor operand allocation and repeated mode-comparison scheduling differ; process modes use the real inlined setter. */
+/* NON_MATCHING: the anchor loop keeps the table entry in r1 in retail, the first offset loop adds y with its operands in other registers, and retail predicates the state (moveq 14/movne 3) ahead of one shared state/frame store. */
 #include "ui/SpriteAnchorGroup.h"
 #include "script/scrScriptProcess.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
@@ -38,13 +38,16 @@ void FUN_00381fd4(SpriteAnchorGroupWork *work)
         scriptProcessSetMode(work->firstProcess, 2);
         work->secondProcess = scrScriptProcessCreate(work->secondBuffer, work->secondArguments);
         scriptProcessSetMode(work->secondProcess, 2);
-        work->state = work->mode == 1 || work->mode == 2 ? 14 : 3;
-        work->frame = 0;
         if (work->mode != 1 && work->mode != 2) {
+            work->state = 3;
+            work->frame = 0;
             if (pairedAvailabilityGetState(0) == 3)
                 titleSetSlotValueState2(0, 10);
             if (pairedAvailabilityGetState(1) == 3)
                 titleSetSlotValueState2(1, 10);
+        } else {
+            work->state = 14;
+            work->frame = 0;
         }
     }
 }

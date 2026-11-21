@@ -5032,12 +5032,12 @@
     },
     {
       "address": "0x11b498",
-      "function": "FUN_0011b498",
+      "function": "modelShaderLoad",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_0011b498.o",
+      "object": "build/obj/_code/0011/modelShaderLoad.o",
       "size": 200,
-      "source": "src/_code/0011/FUN_0011b498.cpp",
-      "target": "orig/target/_code/0011/FUN_0011b498.o",
+      "source": "src/_code/0011/modelShaderLoad.cpp",
+      "target": "orig/target/_code/0011/modelShaderLoad.o",
       "thumb": false
     },
     {
@@ -7453,12 +7453,12 @@
     },
     {
       "address": "0x126d14",
-      "function": "FUN_00126d14",
+      "function": "modelShaderCommitCommands",
       "module": "_code",
-      "object": "build/obj/_code/0012/FUN_00126d14.o",
+      "object": "build/obj/_code/0012/modelShaderCommitCommands.o",
       "size": 300,
-      "source": "src/_code/0012/FUN_00126d14.cpp",
-      "target": "orig/target/_code/0012/FUN_00126d14.o",
+      "source": "src/_code/0012/modelShaderCommitCommands.cpp",
+      "target": "orig/target/_code/0012/modelShaderCommitCommands.o",
       "thumb": false
     },
     {
@@ -23054,12 +23054,12 @@
     },
     {
       "address": "0x1c0c38",
-      "function": "FUN_001c0c38",
+      "function": "buttonHelpCalc",
       "module": "_code",
-      "object": "build/obj/_code/001c/FUN_001c0c38.o",
+      "object": "build/obj/_code/001c/buttonHelpCalc.o",
       "size": 604,
-      "source": "src/_code/001c/FUN_001c0c38.cpp",
-      "target": "orig/target/_code/001c/FUN_001c0c38.o",
+      "source": "src/_code/001c/buttonHelpCalc.cpp",
+      "target": "orig/target/_code/001c/buttonHelpCalc.o",
       "thumb": false
     },
     {
@@ -25511,12 +25511,12 @@
     },
     {
       "address": "0x1e4734",
-      "function": "FUN_001e4734",
+      "function": "bibleStepViewState",
       "module": "_code",
-      "object": "build/obj/_code/001e/FUN_001e4734.o",
+      "object": "build/obj/_code/001e/bibleStepViewState.o",
       "size": 400,
-      "source": "src/_code/001e/FUN_001e4734.cpp",
-      "target": "orig/target/_code/001e/FUN_001e4734.o",
+      "source": "src/_code/001e/bibleStepViewState.cpp",
+      "target": "orig/target/_code/001e/bibleStepViewState.o",
       "thumb": false
     },
     {
@@ -55674,12 +55674,12 @@
     },
     {
       "address": "0x2b1e08",
-      "function": "FUN_002b1e08",
+      "function": "uiSpriteAdvanceAlphaTrack",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002b1e08.o",
+      "object": "build/obj/_code/002b/uiSpriteAdvanceAlphaTrack.o",
       "size": 444,
-      "source": "src/_code/002b/FUN_002b1e08.cpp",
-      "target": "orig/target/_code/002b/FUN_002b1e08.o",
+      "source": "src/_code/002b/uiSpriteAdvanceAlphaTrack.cpp",
+      "target": "orig/target/_code/002b/uiSpriteAdvanceAlphaTrack.o",
       "thumb": false
     },
     {
@@ -63182,12 +63182,12 @@
     },
     {
       "address": "0x2d02b0",
-      "function": "FUN_002d02b0",
+      "function": "fusionComparePairsByParentPriorityDescending",
       "module": "_code",
-      "object": "build/obj/_code/002d/FUN_002d02b0.o",
+      "object": "build/obj/_code/002d/fusionComparePairsByParentPriorityDescending.o",
       "size": 376,
-      "source": "src/_code/002d/FUN_002d02b0.cpp",
-      "target": "orig/target/_code/002d/FUN_002d02b0.o",
+      "source": "src/_code/002d/fusionComparePairsByParentPriorityDescending.cpp",
+      "target": "orig/target/_code/002d/fusionComparePairsByParentPriorityDescending.o",
       "thumb": false
     },
     {
@@ -72398,22 +72398,22 @@
     },
     {
       "address": "0x3097ac",
-      "function": "FUN_003097ac",
+      "function": "gxEmitScissorMaximum",
       "module": "_code",
-      "object": "build/obj/_code/0030/FUN_003097ac.o",
+      "object": "build/obj/_code/0030/gxEmitScissorMaximum.o",
       "size": 240,
-      "source": "src/_code/0030/FUN_003097ac.cpp",
-      "target": "orig/target/_code/0030/FUN_003097ac.o",
+      "source": "src/_code/0030/gxEmitScissorMaximum.cpp",
+      "target": "orig/target/_code/0030/gxEmitScissorMaximum.o",
       "thumb": false
     },
     {
       "address": "0x3098b4",
-      "function": "FUN_003098b4",
+      "function": "gxEmitScissorRect",
       "module": "_code",
-      "object": "build/obj/_code/0030/FUN_003098b4.o",
+      "object": "build/obj/_code/0030/gxEmitScissorRect.o",
       "size": 320,
-      "source": "src/_code/0030/FUN_003098b4.cpp",
-      "target": "orig/target/_code/0030/FUN_003098b4.o",
+      "source": "src/_code/0030/gxEmitScissorRect.cpp",
+      "target": "orig/target/_code/0030/gxEmitScissorRect.o",
       "thumb": false
     },
     {
@@ -72428,12 +72428,12 @@
     },
     {
       "address": "0x309a60",
-      "function": "FUN_00309a60",
+      "function": "extSaveDataRecreateOnError",
       "module": "_code",
-      "object": "build/obj/_code/0030/FUN_00309a60.o",
+      "object": "build/obj/_code/0030/extSaveDataRecreateOnError.o",
       "size": 312,
-      "source": "src/_code/0030/FUN_00309a60.cpp",
-      "target": "orig/target/_code/0030/FUN_00309a60.o",
+      "source": "src/_code/0030/extSaveDataRecreateOnError.cpp",
+      "target": "orig/target/_code/0030/extSaveDataRecreateOnError.o",
       "thumb": false
     },
     {
@@ -105929,12 +105929,12 @@
     },
     {
       "address": "0x3dfaf0",
-      "function": "FUN_003dfaf0",
+      "function": "gpuDepthRangeEmitCommands",
       "module": "_code",
-      "object": "build/obj/_code/003d/FUN_003dfaf0.o",
+      "object": "build/obj/_code/003d/gpuDepthRangeEmitCommands.o",
       "size": 528,
-      "source": "src/_code/003d/FUN_003dfaf0.cpp",
-      "target": "orig/target/_code/003d/FUN_003dfaf0.o",
+      "source": "src/_code/003d/gpuDepthRangeEmitCommands.cpp",
+      "target": "orig/target/_code/003d/gpuDepthRangeEmitCommands.o",
       "thumb": false
     },
     {
@@ -110781,12 +110781,12 @@
     },
     {
       "address": "0x3f92a4",
-      "function": "FUN_003f92a4",
+      "function": "curveSampleLinearPacked",
       "module": "_code",
-      "object": "build/obj/_code/003f/FUN_003f92a4.o",
+      "object": "build/obj/_code/003f/curveSampleLinearPacked.o",
       "size": 228,
-      "source": "src/_code/003f/FUN_003f92a4.cpp",
-      "target": "orig/target/_code/003f/FUN_003f92a4.o",
+      "source": "src/_code/003f/curveSampleLinearPacked.cpp",
+      "target": "orig/target/_code/003f/curveSampleLinearPacked.o",
       "thumb": false
     },
     {

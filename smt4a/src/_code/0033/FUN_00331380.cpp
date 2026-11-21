@@ -1,9 +1,9 @@
 /* NON_MATCHING: Retail ldr r1, [pc, #128] differs from recovered ldr r1, [pc, #112]. */
+#include "ui/ButtonHelp.h"
 #include "ui/PartyPanelStateA.h"
 #include "shard/W4_Match1b_RegisteredHandle.h"
 
 extern "C" {
-s32 buttonHelpSelectSlot(s32 group, s32 command, s32 value, s32 enabled);
 
 // Update the panel flag and issue the corresponding group-3 command.
 void FUN_00331380(s32 active)

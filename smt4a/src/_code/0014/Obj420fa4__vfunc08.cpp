@@ -1,43 +1,30 @@
-/* NON_MATCHING: recovered filesystem result checks and RAII layout still have different stack/register scheduling. */
+/* NON_MATCHING: the stream construction through the VTT, the wide path literal and the pc-tagged result checks match; retail destroys the stream with an out-of-line call FUN_001585ec(&stream, 0) at both exits where the header's inline destructor is expanded here, and it lays the locals out read, value, size (sp+24/28/32) where the build puts size first. */
 #include "classes/Obj420fa4.h"
-#include "nn/fs/ArchivePath.h"
+#include "classes/Obj55813c.h"
+#include "nn/Result.h"
+#include "util/PlatformResultCheck.h"
 
-struct Obj420fa4File {
-    /* The retail pool contains this address as literal data, not a relocation. */
-    u32 vtable;
-    u32 handle[5];
-};
 extern "C" {
-extern const u8 LAB_00147060;
-void FUN_001585ec(Obj420fa4File *file, u32 mode);
-void sysReportCheckFailure(u32 result, u32 site);
 u32 nn_fs_detail_FileBase_TryGetSize(u32 *file, s64 *size);
 u32 nn_fs_detail_FileBase_TryRead(u32 *file, s32 *read, void *destination, u32 size);
 }
 
+/* Reads the NG-word list version (one word) from ngword:/version.dat; 0 when it cannot be read. */
 u32 Obj420fa4::vfunc08()
 {
-    Obj420fa4File file = {0x558144, {0, 0, 0, 0, 0}};
-    s32 result = archivePathDeviceOpen(file.handle, reinterpret_cast<const u16 *>(&LAB_00147060), 1);
-    if (result >= 0) {
+    Obj55813c stream;
+    s32 result = stream.TryInitialize(L"ngword:/version.dat", 1);
+    if (nnResultIsSuccess(result)) {
         s64 size;
-        u32 status = nn_fs_detail_FileBase_TryGetSize(file.handle, &size);
-        if ((s32)status < 0) {
-            sysReportCheckFailure(status, 0x146fe0);
-        }
+        checkPlatformResult(nn_fs_detail_FileBase_TryGetSize(&stream.handle, &size), __current_pc());
         if (size == 4) {
             u32 value = 0;
             s32 read;
-            status = nn_fs_detail_FileBase_TryRead(file.handle, &read, &value, 4);
-            if ((s32)status < 0) {
-                sysReportCheckFailure(status, 0x147018);
-            }
+            checkPlatformResult(nn_fs_detail_FileBase_TryRead(&stream.handle, &read, &value, 4), __current_pc());
             if (read == 4) {
-                FUN_001585ec(&file, 0);
                 return value;
             }
         }
     }
-    FUN_001585ec(&file, 0);
     return 0;
 }

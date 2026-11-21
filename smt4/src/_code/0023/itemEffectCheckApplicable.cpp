@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation and branch layout differ (retail reuses r8/r9 zeros, shares the cure-mask arrays at sp/sp+4 and merges the two owner branches' tails); logic equivalent. */
 #include "common.h"
 #include "battle/BattleHelpers_VariantA.h"
 #include "gamedata/UnitRecordAccess.h"
@@ -37,11 +36,17 @@ s32 saveResolvePartySlot(void);
 s32 gameGetPlayerData(void);
 s32 FUN_0033fc50(void);
 
+/* The status bits a cure event clears (FUN_0023dc38 adds them to an empty mask). */
+static __inline u16 cureMask(u32 event)
+{
+    u16 mask = 0;
+    FUN_0023dc38(&mask, event);
+    return mask;
+}
+
 /* Returns 0 when the item has an effect on the target, otherwise 3. */
 u32 itemEffectCheckApplicable(s32 owner, s32 fromSave, ItemEffect *effect)
 {
-    u16 cureAgain[4];
-    u16 cure[2];
     u32 result = 0;
     u32 applicable = 0;
     u32 needs = 0;
@@ -60,44 +65,40 @@ u32 itemEffectCheckApplicable(s32 owner, s32 fromSave, ItemEffect *effect)
         if ((needs & NEED_HEAL) != 0 && (*reinterpret_cast<u16 *>(unit + 0x72) & 2) == 0 && btlSourceGetMaxHp(unit) != reinterpret_cast<UnitHpView *>(unit)->hp)
             applicable = NEED_HEAL;
         if ((needs & NEED_CURE) != 0) {
-            cure[0] = 0;
-            FUN_0023dc38(cure, effect->statusCure & 0x7F);
-            if ((cure[0] & *reinterpret_cast<u16 *>(unit + 0x72)) != 0)
+            u16 cure = 0;
+            FUN_0023dc38(&cure, effect->statusCure & 0x7F);
+            if ((cure & *reinterpret_cast<u16 *>(unit + 0x72)) != 0)
                 applicable |= NEED_CURE;
             if ((applicable & NEED_CURE) != 0) {
                 if ((needs & NEED_HEAL) != 0)
                     applicable |= NEED_HEAL;
             } else if ((applicable & NEED_HEAL) != 0) {
-                cureAgain[0] = 0;
-                FUN_0023dc38(cureAgain, effect->statusCure & 0x7F);
-                if ((cureAgain[0] & 2) == 0)
+                if ((cureMask(effect->statusCure & 0x7F) & 2) == 0)
                     applicable |= NEED_CURE;
-                if ((effect->statusCure & 0x7F) == 0x11)
+                if ((applicable & NEED_HEAL) != 0 && (effect->statusCure & 0x7F) == 0x11)
                     applicable |= NEED_CURE;
             }
         }
         if ((needs & NEED_DEAD) != 0 && *reinterpret_cast<u16 *>(unit + 0x72) == 0)
             applicable |= NEED_DEAD;
     } else {
-        s32 unit = fromSave != 0 ? saveResolvePartySlot() : reinterpret_cast<s32>(gameGetUnitRecord(owner));
+        s32 unit = fromSave == 0 ? reinterpret_cast<s32>(gameGetUnitRecord(owner)) : saveResolvePartySlot();
         if (unit == 0)
             return 3;
         if ((needs & NEED_HEAL) != 0 && (*reinterpret_cast<u16 *>(unit + 0x44) & 0x406) == 0 && btlLinkGetMaxHp(unit) != reinterpret_cast<UnitHpView *>(unit)->hp)
             applicable = NEED_HEAL;
         if ((needs & NEED_CURE) != 0) {
-            cure[0] = 0;
-            FUN_0023dc38(cure, effect->statusCure & 0x7F);
-            if ((cure[0] & *reinterpret_cast<u16 *>(unit + 0x44)) != 0)
+            u16 cure = 0;
+            FUN_0023dc38(&cure, effect->statusCure & 0x7F);
+            if ((cure & *reinterpret_cast<u16 *>(unit + 0x44)) != 0)
                 applicable |= NEED_CURE;
             if ((applicable & NEED_CURE) != 0) {
                 if ((needs & NEED_HEAL) != 0)
                     applicable |= NEED_HEAL;
             } else if ((applicable & NEED_HEAL) != 0) {
-                cureAgain[0] = 0;
-                FUN_0023dc38(cureAgain, effect->statusCure & 0x7F);
-                if ((cureAgain[0] & 2) == 0)
+                if ((cureMask(effect->statusCure & 0x7F) & 2) == 0)
                     applicable |= NEED_CURE;
-                if ((effect->statusCure & 0x7F) == 0x11)
+                if ((applicable & NEED_HEAL) != 0 && (effect->statusCure & 0x7F) == 0x11)
                     applicable |= NEED_CURE;
             }
         }

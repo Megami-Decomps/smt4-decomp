@@ -1,4 +1,4 @@
-/* NON_MATCHING: identical instruction sequence to retail except for register numbering (retail keeps the result in r6, the reward record in r7 and the loop counter in r1; the build uses r8/r6/r2 and reorders the parameter moves). */
+/* NON_MATCHING: only the loot-weight total differs: retail keeps the two unrolled accumulators in ip/r5 and walks the slots from r1/r0, the build uses r0/r3 and r1/r5. */
 #include "gamedata/SubQuestLootTable.h"
 #include "quest_center/QuestRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
@@ -19,7 +19,7 @@ u32 gameGetUnlockedCountLimit(void);
 u32 levelGetExpRequirement(u32 level);
 
 // The drop table entry `id`: from the add-on content when it provides one, else from the base game's table.
-static __inline SubQuestLootRecordA *findDropEntry(u16 id)
+static SubQuestLootRecordA *findDropEntry(u16 id)
 {
     AocDropEntry *aoc = (AocDropEntry *)g_aocSystem->entries;
     if (aoc != NULL) {
@@ -80,12 +80,12 @@ void FUN_003df168(ResultSpoilsA *result, s32 index)
         result->value = record->base;
     } else {
         PlayerDataA *player = gameGetPlayerData();
-        u32 scaled;
-        scaled = gameGetUnlockedCountLimit() > player->level
-            ? levelGetExpRequirement(player->level)
-            : levelGetExpRequirement(gameGetUnlockedCountLimit() - 1);
-        result->value = scaled;
-        result->value = scaled * record->percent / 100;
+        if (gameGetUnlockedCountLimit() <= player->level) {
+            result->value = levelGetExpRequirement(gameGetUnlockedCountLimit() - 1);
+        } else {
+            result->value = levelGetExpRequirement(player->level);
+        }
+        result->value = result->value * record->percent / 100;
     }
     result->source = index;
 }

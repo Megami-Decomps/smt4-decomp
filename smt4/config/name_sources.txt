@@ -5985,3 +5985,14 @@
 004d9240 g_effectEditorCameraTarget inferred size:0xc the free camera's target, effectEditorInitialize
 004d924c g_effectEditorCameraOffset inferred size:0xc the free camera's orbit offset moved by the sticks, FUN_00219908
 004d9258 g_effectEditorCameraRotation inferred size:0xc the free camera's three rotation angles, FUN_00219908
+00126d14 modelShaderCommitCommands inferred commits the model shader's uniform and attribute register commands (gfx/ModelShader.h; modelCmdPutRegister at five sites)
+0011b498 modelShaderLoad inferred loads the model shader binary and binds aPosition/aTexCoord/aColor/uMatrix/uMaterialColor (gfx/ModelShader.h)
+001c0c38 buttonHelpCalc inferred the button help's per-frame update (the "ButtonHelp CALC" process): runs the open/idle/close state, applies a waiting preset and the queued slot selections (ui/ButtonHelp.h)
+001e4734 bibleStepViewState inferred the bible screen's state machine: builds the view for the requested mode, runs it, then tears it down
+002b1e08 uiSpriteAdvanceAlphaTrack inferred advances a sprite's opacity track: interpolates its key, then loops it or continues with the next command
+003097ac gxEmitScissorMaximum inferred emits the scissor's inclusive maximum (origin plus extent, clamped to the viewport) from the render context's scissor stacks
+003098b4 gxEmitScissorRect inferred emits the scissor origin and inclusive maximum, clamped to the viewport, from the render context's scissor stacks
+00309a60 extSaveDataRecreateOnError inferred recreates the extra save data (FUN_001db820), deleting it first for the corrupted ranges, when the result is an nn::fs not-found/corrupted failure
+002d02b0 fusionComparePairsByParentPriorityDescending inferred qsort comparator for fusion sort key 3 descending (FUN_00196d78): parent priority, then race, level and id
+003f92a4 curveSampleLinearPacked inferred curveSampleLinear over twelve-bit packed keys (sibling of curveSampleLinear/curveSampleLinear16)
+003dfaf0 gpuDepthRangeEmitCommands inferred writes the depth-range scale and offset commands (registers 0x6D/0x6E, float24 via gpuEncodeFloat24Flush)

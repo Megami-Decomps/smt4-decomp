@@ -1,4 +1,3 @@
-/* NON_MATCHING: number/label bases are hoisted and member address generation differs; -O2 candidate. */
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "gfx/StereoParallax.h"
@@ -9,7 +8,7 @@ struct FloatingNumber {
     NumberSprite digits[5];
     NumberSprite symbolA, symbolB;
     u8 unk3d4[0xc];
-    u8 active;
+    s8 active;
     s8 pass;
     u8 unk3e2[2];
     u32 priority;
@@ -20,7 +19,7 @@ struct FloatingNumber {
 struct FloatingLabel {
     NumberSprite sprite;
     u8 unk8c[0xc];
-    u8 active;
+    s8 active;
     s8 pass;
     u8 unk9a[6];
 };
@@ -39,6 +38,7 @@ void effectRenderTransformedInstance(NumberSprite *, f32);
 s32 btlFloatingNumberComparePriorityDescending(const void *, const void *);
 void qsort(void *, u32, u32, s32 (*)(const void *, const void *));
 
+/* Draws the active floating damage numbers and labels of one stereo pass, highest priority first. */
 void btlDrawFloatingNumbers(FloatingNumberScene *scene, s32 pass)
 {
     NumberDrawOrder order[16];
@@ -54,23 +54,21 @@ void btlDrawFloatingNumbers(FloatingNumberScene *scene, s32 pass)
     qsort(order, 16, sizeof(NumberDrawOrder), btlFloatingNumberComparePriorityDescending);
     for (s32 i = 0; i < 16; ++i) {
         s32 slot = order[i].index;
-        FloatingNumber *number = &scene->numbers[slot];
-        if (number->active && number->pass == pass) {
-            if (number->value >= 10000)
-                effectRenderTransformedInstance(&number->digits[4], (f32)parallax);
-            if (number->value >= 1000)
-                effectRenderTransformedInstance(&number->digits[3], (f32)parallax);
-            if (number->value >= 100)
-                effectRenderTransformedInstance(&number->digits[2], (f32)parallax);
-            if (number->value >= 10)
-                effectRenderTransformedInstance(&number->digits[1], (f32)parallax);
-            effectRenderTransformedInstance(&number->digits[0], (f32)parallax);
-            effectRenderTransformedInstance(&number->symbolA, (f32)parallax);
-            effectRenderTransformedInstance(&number->symbolB, (f32)parallax);
+        if (scene->numbers[slot].active && scene->numbers[slot].pass == pass) {
+            if (scene->numbers[slot].value >= 10000)
+                effectRenderTransformedInstance(&scene->numbers[slot].digits[4], (f32)parallax);
+            if (scene->numbers[slot].value >= 1000)
+                effectRenderTransformedInstance(&scene->numbers[slot].digits[3], (f32)parallax);
+            if (scene->numbers[slot].value >= 100)
+                effectRenderTransformedInstance(&scene->numbers[slot].digits[2], (f32)parallax);
+            if (scene->numbers[slot].value >= 10)
+                effectRenderTransformedInstance(&scene->numbers[slot].digits[1], (f32)parallax);
+            effectRenderTransformedInstance(&scene->numbers[slot].digits[0], (f32)parallax);
+            effectRenderTransformedInstance(&scene->numbers[slot].symbolA, (f32)parallax);
+            effectRenderTransformedInstance(&scene->numbers[slot].symbolB, (f32)parallax);
         }
-        FloatingLabel *label = &scene->labels[slot];
-        if (label->active && label->pass == pass)
-            effectRenderTransformedInstance(&label->sprite, (f32)parallax);
+        if (scene->labels[slot].active && scene->labels[slot].pass == pass)
+            effectRenderTransformedInstance(&scene->labels[slot].sprite, (f32)parallax);
     }
 }
 }

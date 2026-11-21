@@ -1,4 +1,5 @@
 /* NON_MATCHING: Retail forms the list address in r0 and copies it to r6; armcc forms it in r6 and copies it to r0. */
+#include "ui/ButtonHelp.h"
 #include "common.h"
 #include "quest_center/QuestRecordA.h"
 #include "game/GameStateA.h"
@@ -36,7 +37,6 @@ extern "C" {
 extern QuestUi *g_uiQuest;
 
 void sysPlaySe(u32 id);
-void buttonHelpSelectSlot(s32 a, s32 b, s32 c, s32 d);
 s32 resourceRunOperationIfUnblocked(void *list);
 s32 partyEntryFlagsBit3(u32 id);
 u32 rosterGetLeaderId(void);

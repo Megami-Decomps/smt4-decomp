@@ -35,7 +35,7 @@ struct GxResetContext {
 };
 
 extern "C" {
-void FUN_0016c744(u32 target);
+void modelShaderCommitCommands(u32 target);
 void gpuWriteVertexUniformVec4(u32 target, f32 *colorScale);
 void modelCmdAppendPacked(s32 a, s32 b, s32 c, s32 d);
 void mathCopyIdentityMatrix(MTX44 *matrix);
@@ -77,7 +77,7 @@ s32 renderCtxResetFrameState(GxResetContext *context)
         context->stacks[i].dirty = 1;
         context->stacks[i + 1].dirty = 1;
     }
-    FUN_0016c744(context->colorTarget);
+    modelShaderCommitCommands(context->colorTarget);
 
     f32 unit = 1.0f;
     if (context->colorScaleDirty != 0 || !sameValue(context->colorScale[0], unit) ||

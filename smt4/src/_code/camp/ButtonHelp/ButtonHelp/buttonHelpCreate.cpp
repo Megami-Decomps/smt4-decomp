@@ -41,7 +41,7 @@ u32 asdTextCreate(s32 arg);
 void asdTextSetBaseColor(u32 text, u32 color);
 void positionStateSet(u32 text, s32 arg, u32 color, f32 value);
 void buttonHelpNotifyNoop(u32 handle);
-s32 FUN_001c0c38(u32 handle);
+s32 buttonHelpCalc(u32 handle);
 s32 FUN_002109cc(u32 handle);
 
 /* buttonHelpSetPanelMode's body: stores the help mode, resetting the two panel sprites for mode 0 or hiding them. */
@@ -76,7 +76,7 @@ void buttonHelpCreate(void)
         }
         ButtonHelpWork *work = g_buttonHelp.work;
         memClear(work, sizeof(ButtonHelpWork));
-        work->calcProcess = asdProcessCreateSimple((const s8 *)"ButtonHelp CALC", 1, 0, 0, FUN_001c0c38, buttonHelpNotifyNoop, 0);
+        work->calcProcess = asdProcessCreateSimple((const s8 *)"ButtonHelp CALC", 1, 0, 0, buttonHelpCalc, buttonHelpNotifyNoop, 0);
         work->drawTask = taskCreateDraw((const s8 *)"ButtonHelp DDRAW", 0xE6, 0, 0, FUN_002109cc,
                                              NULL, 0, work->calcProcess);
 

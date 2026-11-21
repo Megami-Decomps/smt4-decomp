@@ -1,4 +1,4 @@
-/* NON_MATCHING: the step tail call is now placed out of line like retail; remaining: leaf register saves (retail saves lr and spills differently) and retail's redundant key-limit check (cmp #3 / addlt / cmplt #4) before the skip loop. */
+/* NON_MATCHING: the frame test is an if/else with the step tail call out of line and the skip loop guarded by `*key < 3` like retail; remaining: retail saves lr and uses it as a work register (the build saves r9 and returns with bx lr), which renumbers every register, and it predicates the key guard (cmp #3 / addlt / cmplt #4). */
 #include "AsdSDK/Source/Gfx/Effect/EffectScalarKeys.h"
 
 extern "C" {
@@ -16,19 +16,20 @@ void effScalarChannelAdvance(const EffectIntegerKeySource *source, s32 *frame, s
         *step = 0.0f;
         *value = 0.0f;
         *flags = 0;
-        for (s32 skip = 1; *key + skip < 4; ++skip) {
-            *duration = source->keys[*key + skip].frame - source->keys[*key].frame;
-            if (*duration > 0) {
-                *step = (f32)source->keys[*key].value /
-                        (f32)(source->keys[*key + skip].frame - source->keys[*key].frame);
-                *target = (f32)source->keys[*key].value;
-                *key += skip;
-                return;
+        if (*key < 3) {
+            for (s32 skip = 1; *key + skip < 4; ++skip) {
+                *duration = source->keys[*key + skip].frame - source->keys[*key].frame;
+                if (*duration > 0) {
+                    *step = (f32)source->keys[*key].value /
+                            (f32)(source->keys[*key + skip].frame - source->keys[*key].frame);
+                    *target = (f32)source->keys[*key].value;
+                    *key += skip;
+                    return;
+                }
             }
         }
-        return;
+    } else {
+        mathStepTowards(value, *step, *target);
     }
-    mathStepTowards(value, *step, *target);
 }
 }
-

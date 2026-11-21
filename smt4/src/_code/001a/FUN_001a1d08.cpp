@@ -1,4 +1,4 @@
-/* NON_MATCHING: structure and calls match retail; the nn wait-result test (lsl #22 compare vs lsl/lsr/sub), the `mov r3,#0` argument of FUN_00309a60 (armcc reuses r2) and the sp-slot stm grouping of svcWaitSynchronizationN's stack arguments differ. */
+/* NON_MATCHING: structure and calls match retail; the nn wait-result test (lsl #22 compare vs lsl/lsr/sub), the `mov r3,#0` argument of extSaveDataRecreateOnError (armcc reuses r2) and the sp-slot stm grouping of svcWaitSynchronizationN's stack arguments differ. */
 #include "nn/Result.h"
 #include "common.h"
 #include "sys/ResultReport.h"
@@ -57,7 +57,7 @@ void gameDataFlagsClear(s32 flag);
 void gameDataFlagsClearAndRefresh(s32 flag);
 void gameDataRemoveHomeButtonHold(s32 flag);
 void FUN_002e2f14(EventRequest *request);
-void FUN_00309a60(u32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
+void extSaveDataRecreateOnError(u32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
 s32 scrRunOpcodesStub(void *process);
 u32 FUN_001c0954(u32 id, u32 arg);
 
@@ -81,7 +81,7 @@ u32 FUN_001a1d08(void)
     case EVENT_START:
         if (g_saveLoadThread.request->file == 1) {
             u32 sound = FUN_001c0954(0xFF2AE, 0);
-            FUN_00309a60(sound, 6, 0xFF2AE, 0, 6, 0, g_saveLoadThread.unk08);
+            extSaveDataRecreateOnError(sound, 6, 0xFF2AE, 0, 6, 0, g_saveLoadThread.unk08);
         }
         /* fall through */
     case EVENT_INTRO_DONE:

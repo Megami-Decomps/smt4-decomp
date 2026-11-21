@@ -1,4 +1,5 @@
-/* NON_MATCHING: initial registration branch layout and zero/one constant registers differ; -O2 candidate. */
+/* NON_MATCHING: only the two hoisted constant registers are swapped: retail keeps 1 in r7 and 0 in r8, the build 1 in r8 and 0 in r7. */
+#include <string.h>
 #include "gamedata/GuestParamTable.h"
 #include "ui/UiSpriteApi.h"
 #include "ui/MessageMainA.h"
@@ -16,20 +17,18 @@ u32 scrShowDemonNotification()
     MessageWindowA *banner = g_messageMain.banner;
     u32 id = scrGetArg(0);
     if (scrGetCommandFrame() == 0) {
-        if (banner->shown) {
-            ++banner->queueIndex;
-            banner->queueTimer = 20;
-        } else {
+        if (!banner->shown) {
             MessageWindowA *current = g_messageMain.banner;
             current->shown = 1;
             current->counterState = 1;
             uiSpriteStateInitFromSource(&current->sprites[17], 20, 3001, &current->parameters, 11, 1.0f);
             uiSpriteSelectAnim(&current->sprites[17], 0);
-            /* The states and ids are cleared as one block of 15 words. */
-            u32 *queueWords = reinterpret_cast<u32 *>(current->queueStates);
-            for (s32 i = 0; i < 15; ++i)
-                queueWords[i] = 0;
+            /* The states and ids are cleared as one block. */
+            memset(current->queueStates, 0, sizeof(current->queueStates) + sizeof(current->queueIds));
             banner->queueIndex = 0;
+        } else {
+            ++banner->queueIndex;
+            banner->queueTimer = 20;
         }
         if (!saveSlotFindById((u16)id)) {
             FUN_004bd410((u16)id);

@@ -8556,3 +8556,16 @@
 006352c4 g_effectEditorCameraTarget inferred size:0xc twin of smt4 g_effectEditorCameraTarget
 006352d0 g_effectEditorCameraOffset inferred size:0xc twin of smt4 g_effectEditorCameraOffset
 006352dc g_effectEditorCameraRotation inferred size:0xc twin of smt4 g_effectEditorCameraRotation
+0016c744 modelShaderCommitCommands inferred twin of smt4 modelShaderCommitCommands
+001579dc modelShaderLoad inferred twin of smt4 modelShaderLoad
+0025ccc0 buttonHelpCalc inferred twin of smt4 buttonHelpCalc
+001807a0 uiSpriteAdvanceAlphaTrack inferred twin of smt4 uiSpriteAdvanceAlphaTrack
+003999ac gxEmitScissorMaximum inferred twin of smt4 gxEmitScissorMaximum
+00399ab4 gxEmitScissorRect inferred twin of smt4 gxEmitScissorRect
+0051e09c curveSampleLinearPacked inferred twin of smt4 curveSampleLinearPacked
+00177abc gpuDepthRangeEmitCommands inferred twin of smt4 gpuDepthRangeEmitCommands
+00460b30 _ZN9Obj55c00cD1Ev evidence the static initialiser FUN_00512388 stores _ZTV9Obj55c00c+8 into the object at 0x5c0f6c and registers this function (vtable slot 0) with __aeabi_atexit; source is the native destructor (classes/Obj55c00c.h)
+00460b2c _ZN9Obj55bff8D1Ev evidence FUN_00512388 stores _ZTV9Obj55bff8+8 into 0x5c0f70 and registers this function (vtable slot 0) with __aeabi_atexit; native destructor (classes/Obj55bff8.h)
+00460e00 _ZN9Obj55c0e0D1Ev evidence FUN_00512388 stores _ZTV9Obj55c0e0+8 into 0x5c0f74 and registers this function (vtable slot 0) with __aeabi_atexit; native destructor (classes/Obj55c0e0.h)
+004611e4 _ZN9Obj55c130D1Ev evidence FUN_00512388 stores _ZTV9Obj55c130+8 into 0x5c0f78 and registers this function (vtable slot 0) with __aeabi_atexit; native destructor (classes/Obj55c130.h)
+004611e8 _ZN9Obj55c144D1Ev evidence FUN_00512388 stores _ZTV9Obj55c144+8 into 0x5c0f7c and registers this function (vtable slot 0) with __aeabi_atexit; native destructor (classes/Obj55c144.h)

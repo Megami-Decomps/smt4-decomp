@@ -6,7 +6,7 @@ extern "C" {
 extern ButtonHelpQueuedSelections DAT_0043da50;
 
 // Set an indexed help item immediately, or defer it until active help animations finish.
-void buttonHelpSetSlot(u32 slot, s32 kind, s32 value, s32 defer)
+void buttonHelpSetSlot(u8 slot, u8 kind, u16 value, s32 defer)
 {
     if (slot >= 6)
         return;

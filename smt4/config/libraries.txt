@@ -66,6 +66,11 @@ thumb 0x2b79cc 0x2b7c52 armlib qsort and partition helper: twins of smt4a's thir
 thumb 0x10004a 0x1000e8 armlib wide-character classifier: Thumb, calls rt_ctype_table, binary search of packed ranges; twin of smt4a 0x10004a
 # armlib's fplib cosf (libm_cosf): range reduction through a helper, __set_errno for infinities; exact twin of smt4a's 0x1bbf0c.
 arm 0x282390 0x2824cc armlib libm_cosf: fplib cosf, range reducer call and __set_errno; twin of smt4a 0x1bbf0c
+# armlib printf helpers (Thumb): the locale category getter, the integer writer FUN_002c6700 (padding, prefix,
+# precision zeros, digits), the sign extender and the padding/character emitters it calls, linked between
+# __aeabi_vec_dtor and the locale table parsers; each is an exact twin of smt4a's third-party Thumb library code
+# (0x2e3c36, 0x2e358c, 0x2e3534, 0x2e354a, 0x2e31ea, 0x2e3216, 0x2e31e0, 0x2e31ba).
+thumb 0x2c66f2 0x2c6864 armlib printf helpers: Thumb, exact twins of smt4a's third-party 0x2e358c/0x2e31ea/0x2e3216 and neighbours
 # armlib locale code (Thumb): two locale-table parsers ("*" then hex words) linked between libcLocaleGetCategory and
 # rt_locale; exact twins of smt4a's third-party FUN_002e2f6a/FUN_002e2fce.
 thumb 0x2c6902 0x2c69fa armlib locale table parsers: Thumb, before rt_locale; twins of smt4a's third-party 0x2e2f6a/0x2e2fce

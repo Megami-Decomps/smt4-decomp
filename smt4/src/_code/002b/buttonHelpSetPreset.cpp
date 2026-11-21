@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail copies the button order from a .constdata block (DAT_004024f8+8) where this builds it from a pc-relative literal, the preset and the two records take other saved registers, and the panel-state tails materialise their constants separately. */
+#include "ui/ButtonHelp.h"
 #include "ui/ButtonHelpGlobal.h"
 #include "quest_center/qcMain.h"
 
@@ -6,7 +7,6 @@ struct ButtonHelpPresetRecord { u16 buttons[6]; u8 shown; };
 extern "C" {
 const ButtonHelpPresetRecord *dataTableGetEntry0e(u32 preset);
 void buttonHelpSetContext(u32 preset);
-void buttonHelpSetSlot(u8 slot, u8 kind, u8 value, s32 sound);
 void FUN_001385f8();
 void buttonHelpRebuildTouchRegions();
 

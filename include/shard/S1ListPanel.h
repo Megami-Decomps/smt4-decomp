@@ -36,14 +36,34 @@ typedef char RenderCtxScissorLayoutCheck[
     offsetof(RenderCtxA, scissorMinimum) == 0x1338 &&
     offsetof(RenderCtxA, scissorMaximum) == 0x1358 ? 1 : -1];
 
+/* IV's draw context seen the same way: its 12 RenderStateStacks start at 0x11EC (index 9 = scissor at 0x130C). */
+struct RenderCtxStateStacks {
+    /* 0x0000 */ u8 unk0000[0x11EC];
+    /* 0x11EC */ RenderStateStack stacks[12];
+};
+
+typedef char RenderCtxStateStacksLayoutCheck[
+    sizeof(RenderCtxStateStacks) == sizeof(RenderCtx) &&
+    offsetof(RenderCtxStateStacks, stacks) == offsetof(RenderCtx, depthStacks.stackD) &&
+    offsetof(RenderCtxStateStacks, stacks[9]) == offsetof(RenderCtx, scissor) ? 1 : -1];
+
 enum {
     RENDER_STACK_SCISSOR = 9,
+    RENDER_STACK_SCISSOR_MINIMUM = 10,
+    RENDER_STACK_SCISSOR_MAXIMUM = 11,
     RENDER_STATE_SCISSOR = 3
 };
 
 static __inline s32 renderCtxGetStateStackTop(RenderCtxScissorA *ctx, s32 stackIndex)
 {
     RenderCtxStateStacksA *table = (RenderCtxStateStacksA *)ctx;
+    return table->stacks[stackIndex].entries[table->stacks[stackIndex].count];
+}
+
+/* renderCtxGetStateStackTop for IV's context. */
+static __inline s32 renderCtxIvGetStateStackTop(RenderCtx *ctx, s32 stackIndex)
+{
+    RenderCtxStateStacks *table = (RenderCtxStateStacks *)ctx;
     return table->stacks[stackIndex].entries[table->stacks[stackIndex].count];
 }
 

@@ -25,7 +25,7 @@ void statusPanelSetOpen(s32 open)
             data->activeState = 4;
             data->unk12E0 = 8;
         }
-        uiSpriteSetKeyframe(data->statusTimer, 4, 0);
+        uiSpriteSetKeyframe(&data->panelSprites[8], 4, 0);
     } else {
         u8 tab = data->unk1E66;
 

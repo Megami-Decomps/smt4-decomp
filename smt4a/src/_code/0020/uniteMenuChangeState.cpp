@@ -1,5 +1,6 @@
 /* NON_MATCHING: one instruction. In state 0x1B's request test retail reads the pending request through its copy
  * of the work pointer (ldrne r0, [r0, #0x488]); the build reads it through the function's own pointer (r4). */
+#include "ui/ButtonHelp.h"
 #include "common.h"
 #include <stddef.h>
 #include "gamedata/DataTable.h"
@@ -19,7 +20,6 @@ void unitRecordBuildFromSave(u32 id, UnitRecord *unit);
 void FUN_0032d0c8(void *directory, u32 index, u16 id, void *record);
 void skillHelpUpdateAttributeAndTarget(s32 id);
 void FUN_002c8550(s32 mode);
-void buttonHelpSelectSlot(u32 index, s32 kind, s32 value, s32 queue);
 void FUN_00184b90(u8 *owner, s32 direction); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void gameGlobalsSetMenuOpenFlag(u8 value); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void FUN_00333dc8(u8 value); // declcheck: local (the shared declaration does not compile here or changes this unit)

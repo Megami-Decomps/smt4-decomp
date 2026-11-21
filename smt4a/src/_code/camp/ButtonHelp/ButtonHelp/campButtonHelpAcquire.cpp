@@ -43,7 +43,7 @@ u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, void *work, u32 owner);
 void FUN_002e1698(u32 job);
 s32 FUN_002e169c(u32 job);
-s32 FUN_0025ccc0(u32 job);
+s32 buttonHelpCalc(u32 job);
 void paramsClearPacket(UiResourceParameters *packet);
 
 void uiGetLayoutPointDifference(UiSpriteState *sprite, u32 group, u32 image, s32 kind);
@@ -83,7 +83,7 @@ void campButtonHelpAcquire(void)
         }
         ButtonHelpWorkA *work = g_buttonHelp.work;
         sysMemClear(work, sizeof(ButtonHelpWorkA));
-        work->calcProcess = asdProcessCreateSimple(reinterpret_cast<const s8 *>("ButtonHelp CALC"), 3, 0, 0, FUN_0025ccc0, FUN_002e1698, NULL);
+        work->calcProcess = asdProcessCreateSimple(reinterpret_cast<const s8 *>("ButtonHelp CALC"), 3, 0, 0, buttonHelpCalc, FUN_002e1698, NULL);
         work->drawTask = taskCreateDraw(reinterpret_cast<const s8 *>("ButtonHelp DDRAW"), 234, 0, 0,
                                         FUN_002e169c, NULL, NULL, work->calcProcess);
         ButtonHelpWorkA *panel = g_buttonHelp.work;

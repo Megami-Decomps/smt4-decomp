@@ -1,4 +1,5 @@
 /* NON_MATCHING: register allocation and the channel scan differ - retail walks the six channel slots with two incrementing pointers and a down-counter and keeps different values in r5-r9; same stores and calls. */
+#include "ui/ButtonHelp.h"
 #include "ui/ButtonHelpGlobal.h"
 
 namespace {
@@ -13,7 +14,6 @@ extern "C" {
 SoundSceneEntry *dataTableGetEntry0e(u32 id);
 void buttonHelpBeginExit(s32 mode);
 void buttonHelpTeardownSlots(void);
-void buttonHelpSelectSlot(u32 channel, u32 kind, u32 value, u32 arg);
 void FUN_00183c0c(void);
 void buttonHelpPrepareSlots(void);
 

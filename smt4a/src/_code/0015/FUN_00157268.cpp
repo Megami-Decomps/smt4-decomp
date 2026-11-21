@@ -3,7 +3,7 @@
 extern "C" {
 void _ZN9SlotStateC1Ev(RenderPassViewportState *state);
 u32 *gpuEmitDepthBufferCommands(RenderPassDepthState *state, u32 *commands, s32 first, s32 second);
-u32 *FUN_00177abc(RenderPassColorState *state, u32 *commands);
+u32 *gpuDepthRangeEmitCommands(RenderPassColorState *state, u32 *commands);
 void FUN_0016bb74(RenderPassQueue *queue, s32 pass);
 void FUN_0016b8a8(RenderPassQueue *queue, s32 pass);
 void FUN_0016b078(RenderPassQueue *queue, RenderPassItem *item);
@@ -27,7 +27,7 @@ void FUN_00157268(RenderPassQueue *queue)
     states.depth.enabled = 0;
     states.color.value = 0.0f;
     *commands = gpuEmitDepthBufferCommands(&states.depth, *commands, 1, 1);
-    *commands = FUN_00177abc(&states.color, *commands);
+    *commands = gpuDepthRangeEmitCommands(&states.color, *commands);
     for (s32 pass = 0; pass < 4; ++pass) {
         FUN_0016bb74(queue, pass);
         RenderPassBlend *blend = &queue->blend;

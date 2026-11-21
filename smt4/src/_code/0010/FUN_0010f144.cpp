@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0011b468(...);
-int FUN_0011b498(unsigned int, unsigned int, int, int);
+int modelShaderLoad(unsigned int, unsigned int, int, int);
 int mathCopyIdentityMatrix(...);
 int mtx44OrthoC(void);
 int stereoCameraSetPerspective(...);
@@ -30,7 +30,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 extern unsigned int FUN_0011a1a8(unsigned int);
 /* Supplied declaration required: FUN_0011b468. */
-/* Supplied declaration required: FUN_0011b498. */
+/* Supplied declaration required: modelShaderLoad. */
 extern unsigned int FUN_0011b588(void);
 /* Supplied declaration required: mathCopyIdentityMatrix. */
 /* Supplied declaration required: mtx44OrthoC. */
@@ -88,7 +88,7 @@ void FUN_0010f144(int param_1)
   }
   *(unsigned int *)(param_1 + 0x52c) = temp_v0;
   temp_v0 = asdLoadFileSync("DefaultTextureVS.shbin",(unsigned int *)&temp_v6,1,0x80);
-  FUN_0011b498(*(unsigned int *)(param_1 + 0x52c),temp_v0,temp_v6,0);
+  modelShaderLoad(*(unsigned int *)(param_1 + 0x52c),temp_v0,temp_v6,0);
   temp_v0 = asdGxPresetsGetHeightByKind(0);
   VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v0 = asdGxPresetsGetByKind(0);

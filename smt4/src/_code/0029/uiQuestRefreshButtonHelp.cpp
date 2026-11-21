@@ -1,10 +1,10 @@
+#include "ui/ButtonHelp.h"
 #include "shard/W4_W4Match2_UiQuest.h"
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
 
 extern "C" {
 
 extern void buttonHelpSetPreset(s32 preset);
-extern void buttonHelpSetSlot(s32 a, s32 b, s32 c, s32 d);
 extern u8 rosterHasLeader(void);
 extern s32 listCursorGetRowIfUnblocked(UiQuestCursor *cursor);
 extern s32 resourceRunOperationIfUnblocked(UiQuestCursor *cursor);

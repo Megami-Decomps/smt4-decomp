@@ -1,4 +1,4 @@
-/* NON_MATCHING: retained-id scan unrolling, owner register allocation, and final mask stores differ. */
+/* NON_MATCHING: register allocation only in the scan (retail keeps the cache in r6 and loads the pending id before the model's); the unit-mask clear also allocates differently. */
 #include "common.h"
 #include <stddef.h>
 #include "AsdSDK/AsdMemUtil.h"
@@ -13,7 +13,7 @@ extern "C" void FUN_00338fb0(void *context)
     struct PendingModel { u32 unk00; s32 id; u8 unk08[0x40]; };
     struct ActionFlag { u32 flags; u8 unk04[0x110]; };
     struct ActionFlags { u8 unk0000[0x488c]; ActionFlag entries[42]; };
-    struct UnitMask { u32 words[2]; u8 unk08[0x280]; };
+    struct UnitMask { u64 mask; u8 unk08[0x280]; };
     struct UnitMasks { u8 unk0000[0xa998]; UnitMask entries[42]; };
     struct CacheView {
         u8 unk0000[0x1e98];
@@ -41,13 +41,15 @@ extern "C" void FUN_00338fb0(void *context)
         for (s32 pending = 0; pending < 50; ++pending) {
             CachedModel *model = cache->models[slot];
             if (model != NULL && cache->pending[pending].id == model->id) {
-                u32 retained;
-                for (retained = 0; retained < 42; retained += 2) {
+                bool found = false;
+                for (s32 retained = 0; retained < 42; retained += 2) {
                     if (cache->retainedIds[retained] == static_cast<s16>(model->id) ||
-                        cache->retainedIds[retained + 1] == static_cast<s16>(model->id))
+                        cache->retainedIds[retained + 1] == static_cast<s16>(model->id)) {
+                        found = true;
                         break;
+                    }
                 }
-                if (retained == 42) {
+                if (!found) {
                     resourceReleaseReference(model);
                     cache->models[slot] = NULL;
                 }
@@ -57,7 +59,6 @@ extern "C" void FUN_00338fb0(void *context)
     memClear(cache->pending, sizeof(cache->pending));
     for (s32 index = 0; index < 42; ++index) {
         cache->actions->entries[index].flags = 0;
-        cache->units->entries[index].words[0] = 0;
-        cache->units->entries[index].words[1] = 0;
+        cache->units->entries[index].mask = 0;
     }
 }

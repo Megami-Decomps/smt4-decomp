@@ -363,6 +363,18 @@ struct UniteWorkA {
             /* 0x90A8 */ u8 unk90A8[0x108];
             /* 0x91B0 */ u32 unk91B0;
         } returnState;
+        /* The special-fusion recipe list (fusionPrepareSpecialRecipeList). */
+        struct {
+            /* 0x0438 */ u8 unk0438[0x8A78];
+            /* 0x8EB0 */ ScrollSelection list;      /* the recipes, ten rows */
+            /* 0x8F14 */ ScrollSelection pages;     /* four columns, one row */
+            /* 0x8F78 */ u16 count;
+            /* 0x8F7A */ u16 unk8F7A;
+            /* 0x8F7C */ u16 recipeIds[0x94];
+            /* 0x90A4 */ u32 maximumLevel;
+            /* 0x90A8 */ u8 unk90A8[0x108];
+            /* 0x91B0 */ u32 progress;
+        } specialRecipes;
         struct {
             /* 0x0438 */ u8 unk0438[0x8dd4];
             RegisteredHandle *handle; /* 0x920c */
@@ -531,6 +543,7 @@ typedef char UniteWorkPreviewOffsetCheck[offsetof(UniteWorkA, previewA.firstMode
 typedef char UniteWorkIVFlagsOffsetCheck[offsetof(UniteWork, eventFlagsIV.ready) == 0x9431 ? 1 : -1];
 
 typedef char UniteRequestOffsets[offsetof(UniteWork, menu.scriptProcess) == 0x42C && offsetof(UniteWork, menu.active) == 0x430 && offsetof(UniteWork, scriptIV.pendingRequest) == 0x478 && offsetof(UniteWorkA, scriptA.pendingRequest) == 0x488 && offsetof(UniteWork, unk9464) == 0x9464 && offsetof(UniteWork, unk95D8) == 0x95D8 && sizeof(UniteWork) == 0x95F8 ? 1 : -1];
+typedef char UniteWorkSpecialRecipesOffsets[offsetof(UniteWorkA, specialRecipes.list) == 0x8EB0 && offsetof(UniteWorkA, specialRecipes.pages) == 0x8F14 && offsetof(UniteWorkA, specialRecipes.recipeIds) == 0x8F7C && offsetof(UniteWorkA, specialRecipes.maximumLevel) == 0x90A4 && offsetof(UniteWorkA, specialRecipes.progress) == 0x91B0 ? 1 : -1];
 typedef char UniteWorkReturnStateOffsets[offsetof(UniteWorkA, returnState.soundChannel) == 0x48C && offsetof(UniteWorkA, returnState.unk90A4) == 0x90A4 && offsetof(UniteWorkA, returnState.unk91B0) == 0x91B0 ? 1 : -1];
 typedef char UniteWorkIVSelectionOffsets[offsetof(UniteWork, selectionIV.selectedCount) == 0x933A && offsetof(UniteWork, preview.sub) == 0x9500 && offsetof(UniteWork, firstListIV.unk6C78) == 0x6C78 ? 1 : -1];
 typedef char UniteWorkIVPreviewOffsets[offsetof(UniteWork, preview.previewSound) == 0x95C8 && offsetof(UniteWork, preview.previewModel) == 0x95CC ? 1 : -1];

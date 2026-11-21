@@ -1,4 +1,3 @@
-/* NON_MATCHING: the supported-kind result is set at the top of each case and returned from one exit like retail; retail duplicates the remaining-count clamp (store, compare, store) into every case arm and keeps ip/fp in the push list. */
 #include "quest_center/QuestRequirement.h"
 #include "quest_center/QuestRecordA.h"
 #include "gamedata/GameDataAccess_Smt4a.h"
@@ -19,54 +18,53 @@ s32 FUN_003df004(u32 quest, s32 index, QuestRequirementProgress *progress)
     progress->unk07 = 0;
     QuestRecordA *definition = questDataGetRecord(quest);
     if (definition == NULL) {
-        return result;
+        return 0;
     }
-    QuestRequirement *objective = &definition->requirements[index];
-    switch ((u16)objective->kind) {
+    switch ((u16)definition->requirements[index].kind) {
     case 1:
         result = 1;
-        progress->current = flagValueRead(objective->id);
+        progress->current = flagValueRead(definition->requirements[index].id);
         progress->isItem = 1;
-        progress->id = objective->id;
-        progress->remaining = objective->count - progress->current;
+        progress->id = definition->requirements[index].id;
+        progress->remaining = definition->requirements[index].count - progress->current;
+        progress->remaining = progress->remaining > 0 ? progress->remaining : 0;
         break;
     case 2:
         result = 1;
         progress->isItem = 0;
-        progress->id = objective->id;
+        progress->id = definition->requirements[index].id;
         if (definition->kind == 1) {
             QuestObjectiveCountsA *saved = (QuestObjectiveCountsA *)gameFindRosterEntry(quest);
             progress->current = saved->counts[index];
-            progress->remaining = objective->count - progress->current;
+            progress->remaining = definition->requirements[index].count - progress->current;
+            progress->remaining = progress->remaining > 0 ? progress->remaining : 0;
         } else {
-            if (partyFindSlotById(objective->id) >= 0) {
-                progress->current = 1;
-                progress->remaining = 0;
-            } else {
+            if (partyFindSlotById(definition->requirements[index].id) < 0) {
                 progress->remaining = 1;
                 progress->current = 0;
+            } else {
+                progress->current = 1;
+                progress->remaining = 0;
             }
-            return result;
         }
         break;
     case 7:
         result = 1;
         progress->isItem = 1;
-        progress->id = objective->id;
-        progress->remaining = objective->count - progress->current;
+        progress->id = definition->requirements[index].id;
+        progress->remaining = definition->requirements[index].count - progress->current;
+        progress->remaining = progress->remaining > 0 ? progress->remaining : 0;
         break;
     case 8:
         result = 1;
-        progress->id = objective->id;
-        progress->current = gameCountersGetWord(objective->id & 0xFF);
-        progress->remaining = objective->count - progress->current;
+        progress->id = definition->requirements[index].id;
+        progress->current = gameCountersGetWord(progress->id & 0xFF);
+        progress->remaining = definition->requirements[index].count - progress->current;
         progress->unk07 = 1;
+        progress->remaining = progress->remaining > 0 ? progress->remaining : 0;
         break;
     default:
-        return result;
-    }
-    if (progress->remaining < 1) {
-        progress->remaining = 0;
+        break;
     }
     return result;
 }

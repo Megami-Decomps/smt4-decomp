@@ -8,7 +8,7 @@ int gfxCombinerStateInitialize(unsigned char *);
 int FUN_0015fcec(unsigned char *, unsigned int);
 int asdMemoryAlloc(int, int, int, int);
 int _ZN9SlotStateC1Ev(unsigned char [24]);
-int FUN_00177abc(float *, unsigned char *);
+int gpuDepthRangeEmitCommands(float *, unsigned char *);
 int gpuEmitDepthBufferCommands(unsigned char *, unsigned char *, int);
 int mathSinCos(float *, unsigned int **);
 int asdMemoryAllocAligned(...);
@@ -100,7 +100,7 @@ extern unsigned int DAT_0056fcc4; /* 0x56fcc4 */
 /* Supplied declaration required: FUN_0015fcec. */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: _ZN9SlotStateC1Ev. */
-/* Supplied declaration required: FUN_00177abc. */
+/* Supplied declaration required: gpuDepthRangeEmitCommands. */
 /* Supplied declaration required: gpuEmitDepthBufferCommands. */
 /* Supplied declaration required: mathSinCos. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
@@ -277,7 +277,7 @@ void FUN_003fed38(int param_1,fn_003fed38_arg1 *param_2)
   puVar5 = temp_v43;
   gpuEmitDepthBufferCommands(puVar5,puVar4,1);
   pfVar6 = temp_v45;
-  FUN_00177abc(pfVar6,puVar5);
+  gpuDepthRangeEmitCommands(pfVar6,puVar5);
   temp_v2 = (((int)pfVar6 - temp_v1) & 0xfffffffcU) + 8;
   if (((temp_v2 & 0xf) != 0) && (temp_v2 = 4 - ((temp_v2 & 0xf) >> 2), 0 < (int)temp_v2)) {
     pfVar7 = pfVar6 + -1;

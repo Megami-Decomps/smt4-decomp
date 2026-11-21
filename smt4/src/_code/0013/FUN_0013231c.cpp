@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack layout of the dump line buffer and the load order of the job's record list (retail uses one ldrd for the list and state words) differ; the call sequence is the same. The pass-state array is labelled g_asdLightCount in the symbol table. */
+/* NON_MATCHING: the records are drawn through the same inline as FUN_001326b4 (one ldrd for the list and state words) and the dump format is the image's DAT_0041065c string; remaining: retail loads the record range with ldm into r0 and moves begin to r1 at each draw, tests the dumped range with subs/bls where the build divides the byte difference, and lays out the pass-0 record start differently. The pass-state array is labelled g_asdLightCount in the symbol table. */
 #include "gfx/DrawCallbackRecord.h"
 
 /* The two words the draw dispatch functor carries (context, state). */
@@ -59,6 +59,7 @@ extern u32 sceneGroup1Root[2];
 extern u32 sceneGroup2Root[2];
 extern SceneRootPair *g_asdModelSceneRoots[2];
 extern u32 *g_commandBufferCursor;
+extern const char DAT_0041065c[]; /* "0x%08x, " */
 
 DrawDispatchArgs _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_(DrawCallbackRecord *first,
                                                                                     DrawCallbackRecord *last,
@@ -75,6 +76,14 @@ void FUN_00138c94(u32 *recorder);
 void gfxUploadShaderMatricesIfChanged(u32 renderer, u32 state, s32 arg);
 void nw_gfx_RenderContext_ResetState_2B7478(u32 renderer);
 void gfxDispatchBufferIfNonEmpty(u32 *recorder);
+
+/* Draws the job's callback records with the renderer. */
+static __inline void sceneDrawJobRecords(SceneDrawJob *job, u32 renderer)
+{
+    SceneDrawRecords *records = job->records;
+    DrawDispatchArgs functor = {renderer, job->state};
+    _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_(records->begin, records->end, functor);
+}
 
 /* The two-pass variant of the scene draw: `which` (1 or not) picks the pass; the pass builds its scene graph
  * on first use, then draws the job's callback records into the command buffer (optionally dumping the
@@ -93,8 +102,7 @@ void FUN_0013231c(SceneDrawJob *job, u32 stateA, s32 which, s32 dumpCommands)
         builder->visit(roots->second);
         nw_gfx_SceneTraverser_End(roots->second);
         asdGxCommandListBegin(state->commandList);
-        DrawDispatchArgs first = {renderer, job->state};
-        _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_(job->records->begin, job->records->end, first);
+        sceneDrawJobRecords(job, renderer);
         asdGxCommandListEnd(state->commandList, 0);
         nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder[pass], sceneGroup1Root[pass]);
         asdModelSlotVectorRemove((u8 *)g_asdModelTransformBuilder[pass] + 16, sceneGroup2Root[pass]);
@@ -111,27 +119,24 @@ void FUN_0013231c(SceneDrawJob *job, u32 stateA, s32 which, s32 dumpCommands)
         } else {
             asdGxCommandListStartRecord(state->recorder);
         }
-        DrawDispatchArgs functor = {renderer, job->state};
         if (dumpCommands != 0) {
             u32 *cursor = g_commandBufferCursor;
-            char line[260];
-
-            _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_(job->records->begin, job->records->end, functor);
+            sceneDrawJobRecords(job, renderer);
             u32 *end = cursor != NULL ? g_commandBufferCursor : NULL;
-            if (cursor != NULL && end != NULL && end != cursor) {
+            if (cursor != NULL && end != NULL && end - cursor > 0) {
+                char line[260];
                 s32 length = 0;
                 s32 words = 0;
 
                 for (; cursor < end; cursor++) {
-                    length += FUN_0013c6c0(line + length, 0x100 - length, 0xFF - length, "0x%08x, ", *cursor);
+                    length += FUN_0013c6c0(line + length, 0x100 - length, 0xFF - length, DAT_0041065c, *cursor);
                     if (++words == 4) {
-                        words = 0;
-                        length = 0;
+                        words = length = 0;
                     }
                 }
             }
         } else {
-            _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_(job->records->begin, job->records->end, functor);
+            sceneDrawJobRecords(job, renderer);
         }
         if (pass == 0) {
             FUN_00138c94(state->recorder);

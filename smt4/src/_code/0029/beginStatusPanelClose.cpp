@@ -1,4 +1,4 @@
-/* NON_MATCHING: model-cleanup control flow matches retail; state-pointer register (r5 vs r4), the origin vector transfer and cached sprite-base addressing differ. */
+/* NON_MATCHING: 12 lines in the raised model position: retail copies x through a core register but loads y and z into VFP registers and stores them with one vstmia; the build copies z through a core register too. */
 #include "shard/GameGlobals.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "status/StatusCamera.h"
@@ -32,8 +32,8 @@ void beginStatusPanelClose()
 void *script = lmapSceneGetScript();
         if (script) {
             if (state->unk1E80) {
-                const Vec3 *origin = (const Vec3 *)state->unk1E84;
-                Vec3 position = { origin->x, origin->y + 1000.0f, origin->z };
+                Vec3 position = { state->statusModelPosition.x, state->statusModelPosition.y + 1000.0f,
+                                  state->statusModelPosition.z };
                 nodeOwnerSetTranslations((StatusScreenModel *)state->unk1E80, &position);
                 lmapSceneSetUnk134(1);
             }
@@ -47,18 +47,17 @@ void *script = lmapSceneGetScript();
         if (state->unk1E80)
             statusCameraDestroy();
     }
-    UiSpriteState *sprites = (UiSpriteState *)(state->unk0301 + 0x8b); // 0x38c
-    uiSpriteSetKeyframe(&sprites[0], 5, 0);
-    spriteStartAnimationByIndex(&sprites[1], 3);
-    spriteStartAnimationByIndex(&sprites[2], 3);
-    spriteStartAnimationByIndex(&sprites[3], 3);
-    uiSpriteSetKeyframe(&sprites[4], 5, 0);
-    uiSpriteSetKeyframe(&sprites[5], 5, 0);
-    uiSpriteSetKeyframe(&sprites[6], 5, 0);
-    spriteStartAnimationByIndex(&sprites[7], 3);
+    uiSpriteSetKeyframe(&state->panelSprites[0], 5, 0);
+    spriteStartAnimationByIndex(&state->panelSprites[1], 3);
+    spriteStartAnimationByIndex(&state->panelSprites[2], 3);
+    spriteStartAnimationByIndex(&state->panelSprites[3], 3);
+    uiSpriteSetKeyframe(&state->panelSprites[4], 5, 0);
+    uiSpriteSetKeyframe(&state->panelSprites[5], 5, 0);
+    uiSpriteSetKeyframe(&state->panelSprites[6], 5, 0);
+    spriteStartAnimationByIndex(&state->panelSprites[7], 3);
     for (s32 i = 0; i < 10; ++i) {
-        uiSpriteSetKeyframe(&sprites[8 + i], 5, 0);
-        uiSpriteSetKeyframe(&sprites[18 + i], 5, 0);
+        uiSpriteSetKeyframe(&state->panelSprites[8 + i], 5, 0);
+        uiSpriteSetKeyframe(&state->panelSprites[18 + i], 5, 0);
     }
     gameSetState(2);
 }

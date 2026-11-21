@@ -12,7 +12,7 @@ typedef void (*VoidFunc)(void);
 
 u32 taskCreateDraw(const char *name, int priority, int arg2, int arg3, VoidFunc cb, int arg5, void *work, u32 parent);
 u32 jyoucyuGetTableEntry(int index);               /* heap handle `index` */
-void FUN_001e4734(void);
+void bibleStepViewState(void);
 void bibleQueryFalse(void);
 void bibleCloseCurrentView(void);
 void callbackNoPendingWork(void);
@@ -29,7 +29,7 @@ void bibleStart(void)
     work->done = 0;
     work->unk10 = 1;
     work->unk14 = 1;
-    work->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("BibleMainProc"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001e4734), reinterpret_cast<AsdProcFunc>(bibleCloseCurrentView), reinterpret_cast<u32>(work));
+    work->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("BibleMainProc"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(bibleStepViewState), reinterpret_cast<AsdProcFunc>(bibleCloseCurrentView), reinterpret_cast<u32>(work));
     work->drawTaskA = taskCreateDraw("BibleDrawUp", 0x6f, 1, 0, bibleQueryFalse, 0, g_bible.work, work->task);
     work->drawTaskB = taskCreateDraw("BibleDrawDown", 0xe6, 1, 0, callbackNoPendingWork, 0, g_bible.work, work->task);
 }
