@@ -1,4 +1,4 @@
-/* NON_MATCHING: Obj4223f8::confirmSelection matches in logic, calls and the virtual panel rebind; retail keeps this+0x500 in a register for the mode flag, passes the shared strings through registers hoisted early, and addresses the state/substate pair with strd, so scheduling and frame size (68 vs 76) differ. */
+/* NON_MATCHING: retail preloads the placeholder name before dataLookupDisplayName and picks it with movs/moveq, zero-extends the item id (uxth) after its load, stores state/substate with one strd and re-reads the detail panel after the virtual rebind (ldrh with writeback). */
 #include "runtime/Stdio.h"
 #include "ui/UiSpriteApi.h"
 #include "classes/Obj4223f8.h"
@@ -46,7 +46,7 @@ void buttonHelpSetPreset(s32 preset);
 const char *dataLookupDisplayName(u8 *scratch, u32 id);
 void buttonHelpSetText(const char *text, u32 color);
 u32 flaggedValueHolderGetTotal(const void *holder);
-void FUN_0029da34(s32 a, s32 b, u32 id);
+void FUN_0029da34(s32 a, s32 b, u16 id, s32 c);
 void messageIdListInit(void *selection, s32 a, s32 b, s32 count);
 }
 
@@ -63,32 +63,24 @@ void Obj4223f8::confirmSelection()
     }
     buttonHelpSetPreset(flag5A4 == 0 ? 0x2E : 0x46);
     if (flag5A4 != 0) {
-        u8 scratch[8];
+        u8 scratch[4];
         char text[64];
         const char *name = dataLookupDisplayName(scratch, value);
-        if (name == NULL) {
-            name = DAT_0040226c;
-        }
-        __2sprintf(text, DAT_00402274, name, g_btlDevilListCallbackContext[2]);
+        __2sprintf(text, DAT_00402274, name == NULL ? DAT_0040226c : name, g_btlDevilListCallbackContext[2]);
         buttonHelpSetText(text, 0x323232FF);
     } else {
         BibleDetailEntry *entries = reinterpret_cast<BibleDetailEntry *>(reinterpret_cast<u8 *>(this) + 0x5A8);
-        FUN_0029da34(0, 1, entries[flaggedValueHolderGetTotal(self->holderArea)].itemId);
+        FUN_0029da34(0, 1, entries[flaggedValueHolderGetTotal(self->holderArea)].itemId, 0);
     }
     gameGlobalsSetSubScreenActive(0);
     self->state = 2;
     self->substate = 0;
     pointConvertToFloat(&self->cursor, 0, 0);
-    BibleDetailPanel *panel = reinterpret_cast<BibleDetailPanel *>(touchSelection.unk34);
-    panel->rebind(self->holderArea);
-    panel->flags |= 0x1000;
-    s32 shown = self->count;
-    if (shown >= 10) {
-        shown = 10;
-    }
+    reinterpret_cast<BibleDetailPanel *>(touchSelection.unk34)->rebind(self->holderArea);
+    reinterpret_cast<BibleDetailPanel *>(touchSelection.unk34)->flags |= 0x1000;
     if (flag5A4 == 0) {
-        messageIdListInit(&touchSelection, 0x1D, 0x40E, shown);
+        messageIdListInit(&touchSelection, 0x1D, 0x40E, self->count >= 10 ? 10 : self->count);
     } else {
-        messageIdListInit(&touchSelection, 0x1C, 0x1030, shown);
+        messageIdListInit(&touchSelection, 0x1C, 0x1030, self->count >= 10 ? 10 : self->count);
     }
 }

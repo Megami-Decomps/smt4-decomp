@@ -14,16 +14,16 @@ u32 renderPhasePushPopStates(RenderPhase *owner)
     if (owner->phase - 2 < 3) {
         RenderCtxA *context = g_renderCtx;
         s32 state = renderCtxPackPassFlagsWithAlpha(6, 0.0f);
-        renderStackPush(&context->additional.stackC, state);
+        renderStackPush(context->stacks + RENDER_STACK_C, state);
         context = g_renderCtx;
         state = renderCtxPackPassFlags(1, 0);
-        renderStackPush(&context->stackA, state);
+        renderStackPush(context->stacks + RENDER_STACK_A, state);
         context = g_renderCtx;
         state = packNibblesAndByte(6, 1, 0);
-        renderStackPush(&context->stackB, state);
-        renderStackPop(&g_renderCtx->stackB);
-        renderStackPop(&g_renderCtx->stackA);
-        renderStackPop(&g_renderCtx->additional.stackC);
+        renderStackPush(context->stacks + RENDER_STACK_B, state);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_B);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_C);
     }
     return 0;
 }

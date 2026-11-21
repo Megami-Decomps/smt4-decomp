@@ -105,7 +105,7 @@ u32 campCecEditDrawContents(void)
             FUN_002ec2e0(work->rowsLeft, work->rowsTop, work->rowCount, work->columnWidth,
                          work->scrollTop, work->scrollKnob, work->scrollHeight);
         }
-        renderStackPop(&g_titleScene->stackA);
+        renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
         renderCtxApplyTransforms(g_titleScene);
         renderCtxResetColorScale(g_titleScene);
     }

@@ -32,7 +32,7 @@ u32 FUN_002a4334(void)
         renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         RenderCtxA *context = g_renderCtx;
         s32 state = renderCtxPackPassFlags(1, 0);
-        renderStackPush(&context->stackA, state);
+        renderStackPush(context->stacks + RENDER_STACK_A, state);
         efctSetSpeed(work->opacity);
         u32 layer = 2;
         if (work->alternateLayer != 0) {
@@ -42,7 +42,7 @@ u32 FUN_002a4334(void)
         texDrawTableEntryAtStoredOrigin(layer, DAT_0057f430.texture, x, y, 0, 0x2E);
         gxResetColorQuadToWhite();
         efctSetSpeed(1.0f);
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     }
     return 0;
 }

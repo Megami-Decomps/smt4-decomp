@@ -54,7 +54,7 @@ u32 FUN_00227418(void)
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
     s32 state = renderCtxPackPassFlags(1, 0);
-    renderStackPush(&context->stackA, state);
+    renderStackPush(context->stacks + RENDER_STACK_A, state);
 
     s32 menu = camp->state;
     if (menu == CAMP_MENU_SUB)
@@ -90,7 +90,7 @@ u32 FUN_00227418(void)
         break;
     }
 
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
     return 0;

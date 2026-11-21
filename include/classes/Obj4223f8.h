@@ -27,7 +27,7 @@ public:
     void updatePointerTransition();
     void enableKindEight();
 
-    /* 0x5A4 */ u8 flag5A4;
+    /* 0x5A4 */ s8 flag5A4;
     /* 0x5A5 */ u8 unk5A5[0xA5B2 - 0x5A5];
     /* 0xA5B2 */ s16 selectedIndex;
     /* 0xA5B4 */ u32 value;

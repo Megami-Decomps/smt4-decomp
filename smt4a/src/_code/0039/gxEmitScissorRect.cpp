@@ -18,14 +18,14 @@ void gxEmitScissorRect(u32 origin)
     cursorResetFromParam();
     u32 minimum;
     u32 maximum;
-    if (renderCtxGetStateStackTop(g_renderCtx, RENDER_STACK_SCISSOR) == 0) {
+    if (renderCtxStackTop(g_renderCtx, RENDER_STACK_SCISSOR) == 0) {
         minimum = 0;
         maximum = (height - 1) | ((width - 1) << 16);
     } else {
         u32 top = origin >> 16;
         u16 left = origin;
         minimum = (height <= top ? height - 1 : top) | ((left >= width ? width - 1 : left) << 16);
-        u32 extent = renderCtxGetStateStackTop(g_renderCtx, RENDER_STACK_SCISSOR_MAXIMUM);
+        u32 extent = renderCtxStackTop(g_renderCtx, RENDER_STACK_SCISSOR_MAXIMUM);
         u32 bottom = (s32)(top + (extent >> 16) - 1) < 0 ? 0 : (s32)(top + (extent >> 16) - 1) >= height ? height - 1 : (s32)(top + (extent >> 16) - 1);
         s32 right = left + (u16)extent;
         u32 rightWord;

@@ -18,7 +18,7 @@ u32 FUN_001ed134(void)
         efctSetSpeed(background->progress);
         renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
         texDrawTableEntryAtStoredOrigin(2, 14, 268, 0, 0, 251);
-        renderStackPop(&g_titleScene->stackA);
+        renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
         efctSetSpeed(1.0f);
     }
     return 0;

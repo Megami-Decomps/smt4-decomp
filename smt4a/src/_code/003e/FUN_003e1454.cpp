@@ -1,5 +1,5 @@
-/* NON_MATCHING: battle start request (formation file check, unit flag fix-up, state flags); flag pairs are u64 and btlFindEntryBlockByMemberId returns the state like retail; remaining differences are scheduling/register allocation (retail re-reads unit->state after the respawn test). */
-#include "common.h"
+/* NON_MATCHING: battle start request (formation file check, unit flag fix-up, state flags); the step transitions use btlStepEnter and the file name buffer is 0x80 bytes like retail's frame; remaining: retail re-reads unit->state after the respawn test (the build reuses the tested value), the intro-mask test and OR load the flag pair in the other order, and the aocFlag load and FUN_003e0f94's state argument are scheduled differently. */
+#include "battle/btlMain.h"
 
 #define BTL_UNIT_FIRST_ENEMY 4
 #define BTL_UNIT_COUNT 0x36
@@ -21,13 +21,6 @@ struct BtlUnit {
 struct UnitDataBlock {
     /* 0x00 */ u16 unk00;
     /* 0x02 */ u16 formation;
-};
-
-struct BtlRequest {
-    /* 0x00 */ u32 state;
-    /* 0x04 */ u8 unk04[8];
-    /* 0x0C */ u32 unk0C;
-    /* 0x10 */ u32 unk10;
 };
 
 struct BtlStartState {
@@ -69,22 +62,22 @@ void FUN_003f0d50(BtlStartState *state);
 void controllerClearVectorState(BtlStartState *state);
 void battleSaveCameraVectors(BtlStartState *state);
 void words10CopyHighToLow(u32 camera);
-s32 FUN_003e0f94(BtlRequest *request, BtlStartState *state);
+s32 FUN_003e0f94(BtlStep *request, BtlStartState *state);
 UnitDataBlock *btlFindEntryBlockByMemberId(BtlStartState *state, s32 resourceId);
 s32 pairedEntryTableContains(BtlStartState *state, u16 id);
 void btlQueueActionMessage(s32 a, s32 b, u32 id, s32 c, s32 d, s32 e, s32 f);
 void FUN_003ed6e8(BtlStartState *state);
 void FUN_003f26d4(BtlStartState *state);
 void frameTexRequestFade(s32 mode);
-void FUN_003e0bb8(BtlRequest *request, BtlStartState *state);
-void contentRequestStart(BtlRequest *request, BtlStartState *state);
+void FUN_003e0bb8(BtlStep *request, BtlStartState *state);
+void contentRequestStart(BtlStep *request, BtlStartState *state);
 
 /* Prepares a battle start: when the formation file is available applies the formation, hides
  * units whose resources the paired table lacks and raises the setup flags; otherwise defers to
  * the content request. */
-void FUN_003e1454(BtlRequest *request, BtlStartState *state)
+void FUN_003e1454(BtlStep *request, BtlStartState *state)
 {
-    char fileName[BTL_FILE_NAME_SIZE + 4];
+    char fileName[BTL_FILE_NAME_SIZE];
     bool aocFormation = false;
     if (state->aocFlag > 0 && FUN_0046ebf0(g_aocSystem) != 0)
         aocFormation = true;
@@ -113,22 +106,18 @@ void FUN_003e1454(BtlRequest *request, BtlStartState *state)
             btlQueueActionMessage(0, 0, 0x100021B, 0, 0, 0, 0);
             FUN_003ed6e8(state);
             FUN_003f26d4(state);
-            state->flags |= g_btlEncount.formation | g_btlEncount.ready;
+            state->flags = state->flags | g_btlEncount.formation | g_btlEncount.ready;
         }
-        request->unk10 = 0;
-        request->state = 0x17;
-        request->unk0C = 0;
+        btlStepEnter(request, 0x17);
         result = FUN_003e0f94(request, state);
         if (result != 2 && result != 5 && (state->flags & g_btlEncount.intro) == 0) {
             frameTexRequestFade(2);
-            state->flags |= g_btlEncount.intro;
+            state->flags = g_btlEncount.intro | state->flags;
         }
         FUN_003e0bb8(request, state);
         return;
     }
-    request->unk10 = 0;
-    request->state = 0x15;
-    request->unk0C = 0;
+    btlStepEnter(request, 0x15);
     contentRequestStart(request, state);
 }
 

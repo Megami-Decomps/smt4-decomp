@@ -29,10 +29,10 @@ void FUN_0028f694(s32 x, s32 y, u32 region)
     s32 markerX = vec2GetXInt(&camp->sprites[2]);
     s32 markerY = vec2GetYInt(&camp->sprites[2]);
     RenderCtx* context = g_titleScene;
-    renderStackSet(&context->scissor, 3);
+    renderStackSet(context->stacks + RENDER_STACK_SCISSOR, 3);
     gxSetMirroredClippedScissor(sprite->x + x, sprite->y + y, sprite->placement->width, sprite->placement->height, 1);
     texDrawTableEntryAtStoredOrigin(2, 0x1D, 0x42C, x + markerX, y + markerY, 0x88);
     context = g_titleScene;
-    renderStackSet(&context->scissor, 0);
+    renderStackSet(context->stacks + RENDER_STACK_SCISSOR, 0);
 }
 }

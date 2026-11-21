@@ -19,9 +19,9 @@ s32 renderScopedTaskPhaseOne(u32 job)
     renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
     renderCtxPushB(g_renderCtx, packNibblesAndByte(6, 1, 0));
     taskRunPhase(1);
-    renderStackPop(&g_renderCtx->stackB);
-    renderStackPop(&g_renderCtx->stackA);
-    renderStackPop(&g_renderCtx->additional.stackC);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_B);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_C);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);

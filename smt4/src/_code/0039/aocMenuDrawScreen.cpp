@@ -40,9 +40,9 @@ void aocMenuDrawScreen(AocMenu* screen)
     for (s32 i = 0; i < 24; i++) {
         effectRenderTransformedInstance(screen->animated.effects[i], (f32)shift);
     }
-    renderStackPopCounted(&g_titleScene->stackB);
-    renderStackPopCounted(&g_titleScene->stackB);
-    renderStackPopCounted(&g_titleScene->stackA);
+    renderStackPopCounted(g_titleScene->stacks + RENDER_STACK_B);
+    renderStackPopCounted(g_titleScene->stacks + RENDER_STACK_B);
+    renderStackPopCounted(g_titleScene->stacks + RENDER_STACK_A);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     renderCtxApplyTransforms(g_titleScene);

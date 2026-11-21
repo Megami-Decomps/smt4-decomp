@@ -19,7 +19,7 @@ void FUN_00343364(RenderCtx *context, u32 color, u32 alpha, u32 flags, f32 scale
     u8 first = 0;
     u8 second = 0;
     u32 nibble = 0;
-    AsdTexture *savedTexture = context->depthStacks.selectedTexture;
+    AsdTexture *savedTexture = context->selectedTexture;
     f32 width = (f32)asdGxPresetsGetHeightByKind(context->stereoMode);
     f32 height = (f32)asdGxPresetsGetByKind(context->stereoMode);
     if ((flags & 1) != 0) {
@@ -39,12 +39,12 @@ void FUN_00343364(RenderCtx *context, u32 color, u32 alpha, u32 flags, f32 scale
     renderCtxPushE(context, FUN_00310578(1, alpha, 0xff));
     renderCtxPushF(context, packThreeNibbles(nibble, nibble, nibble));
     FUN_002b7638(0.0f, 0.0f, width, height, color, color, color, color, scale);
-    renderStackPopChecked(&context->depthStacks.stackF);
-    renderStackPopChecked(&context->depthStacks.stackE);
-    renderStackPopChecked(&context->stackB);
-    renderStackPopChecked(&context->additional.stackG);
-    renderStackPopChecked(&context->additional.stackC);
-    renderStackPopChecked(&context->stackA);
+    renderStackPopChecked(context->stacks + RENDER_STACK_F);
+    renderStackPopChecked(context->stacks + RENDER_STACK_E);
+    renderStackPopChecked(context->stacks + RENDER_STACK_B);
+    renderStackPopChecked(context->stacks + RENDER_STACK_G);
+    renderStackPopChecked(context->stacks + RENDER_STACK_C);
+    renderStackPopChecked(context->stacks + RENDER_STACK_A);
     renderCtxSelectTexture(context, savedTexture);
 }
 

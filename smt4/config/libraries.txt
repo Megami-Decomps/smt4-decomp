@@ -74,3 +74,12 @@ thumb 0x2c66f2 0x2c6864 armlib printf helpers: Thumb, exact twins of smt4a's thi
 # armlib locale code (Thumb): two locale-table parsers ("*" then hex words) linked between libcLocaleGetCategory and
 # rt_locale; exact twins of smt4a's third-party FUN_002e2f6a/FUN_002e2fce.
 thumb 0x2c6902 0x2c69fa armlib locale table parsers: Thumb, before rt_locale; twins of smt4a's third-party 0x2e2f6a/0x2e2fce
+# CTR-SDK nn::cx (decompression): UncompressLZ (LZ10/LZ11, the extended-format test `*src & 0x0F`), UncompressRL,
+# UncompressHuffman (4/8-bit symbols, `4 + (dataBit & 7)` symbols per word, 32-bit bit loop) and GetUncompressedSize
+# (24-bit size, else the next word), linked as one block right before nn_fs_ipc_FileSystem_GetPriority; the same four
+# functions, byte for byte, are smt4a's 0x1aeb40-0x1aeefc block.
+arm 0x14f16c 0x14f528 CTR-SDK nn::cx decompression: UncompressLZ/RL/Huffman and GetUncompressedSize; exact twins of smt4a 0x1aeb40-0x1aeefc
+# nn::math's VEC3TransformCoordArray (math_Vector3): a loop over the header inline VEC3TransformCoord (the four row dot
+# products, 1/w, three products) through a local destination pointer, returning pOut; exact twin of smt4a's 0x43b6c0,
+# which sits inside the nn::math block (between nn_math_VEC3SafeNormalize and nn_math_ARMv6_HermiteC_FAST).
+arm 0x23b4f4 0x23b5dc nn::math VEC3TransformCoordArray: VEC3TransformCoord loop returning pOut; twin of smt4a 0x43b6c0

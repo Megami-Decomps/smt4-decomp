@@ -78,7 +78,7 @@ extern "C" void aocListMenuDrawRows(ListMenu *menu)
     s32 last = flaggedEntryGetValueByState(menu->holder);
     shopPanelSetScrollPosition(&menu->slider, FUN_0029e924(menu->holder), last);
     numberPanelDraw(&menu->slider, 0x81);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     renderCtxApplyTransforms(g_titleScene);

@@ -25,7 +25,7 @@ u32 FUN_00298544(void)
     renderCtxSelectTexture(g_renderCtx, 0);
     gxSubmitDrawZeroExtraParams(0.0f, 0.0f, 400.0f, 240.0f, color, color, color, 0.0f, color);
     FUN_002371b0();
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     return 0;
 }
 }

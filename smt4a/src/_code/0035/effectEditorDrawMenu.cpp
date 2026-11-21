@@ -16,25 +16,12 @@ void renderCtxResetColorScale(RenderCtxA *context);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 s32 renderCtxPackPassFlags(u32 first, u32 second);
 
-/* unit-local: the draw context seen as its array of render-state stacks (from 0x11F8: D, E, F, A, C, G, B;
- * RenderCtxA names them one by one). */
-struct RenderCtxStacksA {
-    /* 0x0000 */ u8 unk0000[0x11F8];
-    /* 0x11F8 */ RenderStateStack stacks[7];
-};
-
-/* The current (top) state of render-state stack `index`. */
-static __inline u32 renderStackTop(RenderCtxA *context, s32 index)
-{
-    return ((RenderCtxStacksA *)context)->stacks[index].entries[((RenderCtxStacksA *)context)->stacks[index].count];
-}
-
 /* Draws the effect editor's menu under its own render states, then pops them again. */
 void effectEditorDrawMenu(void)
 {
     renderCtxPushD(g_renderCtx, 0);
     renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
-    renderStackPushCounted(&g_renderCtx->stackB, renderStackTop(g_renderCtx, 6));
+    renderStackPushCounted(g_renderCtx->stacks + RENDER_STACK_B, renderCtxStackTop(g_renderCtx, RENDER_STACK_B));
     if (g_effectEditor.toggle == 0) {
         effectRestoreSavedRenderPairs(g_renderCtx, reinterpret_cast<void *>(asdCameraGetSavedRenderPairs()));
     } else {
@@ -52,9 +39,9 @@ void effectEditorDrawMenu(void)
     }
     renderCtxResetColorScale(g_renderCtx);
     skinObjectUpdateMatrices(g_renderCtx);
-    renderStackPopChecked(&g_renderCtx->depthStacks.stackD);
-    renderStackPop(&g_renderCtx->stackA);
-    renderStackPop(&g_renderCtx->stackB);
+    renderStackPopChecked(g_renderCtx->stacks + RENDER_STACK_D);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_B);
 }
 
 }

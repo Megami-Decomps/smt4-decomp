@@ -8,26 +8,26 @@ void dataSubmitSelectedPresetBlock(s32 enabled);
 // Upload a changed texture and synchronize whether a texture is selected.
 void renderCtxSelectTexture(RenderCtxA *context, AsdTexture *texture)
 {
-    if (context->depthStacks.selectedTextureDirty || context->depthStacks.selectedTexture != texture) {
-        context->depthStacks.selectedTexture = texture;
+    if (context->selectedTextureDirty || context->selectedTexture != texture) {
+        context->selectedTexture = texture;
         if (texture != NULL) {
             gxSubmitTextureUnitCommands(texture->dimensions.width, texture->dimensions.height, texture->image.hardwareFormat,
                          texture->image.physicalAddress, texture->unk38, texture->unk3c, texture->unk40);
-            context->depthStacks.selectedTextureState = 3;
+            context->selectedTextureState = 3;
         }
     }
-    context->depthStacks.selectedTextureDirty = 0;
+    context->selectedTextureDirty = 0;
     u8 state;
     if (texture != NULL) {
         state = 1;
-        if (context->depthStacks.selectedTextureState == state)
+        if (context->selectedTextureState == state)
             return;
     } else {
         state = 0;
-        if (context->depthStacks.selectedTextureState == state)
+        if (context->selectedTextureState == state)
             return;
     }
     dataSubmitSelectedPresetBlock(state);
-    context->depthStacks.selectedTextureState = state;
+    context->selectedTextureState = state;
 }
 }

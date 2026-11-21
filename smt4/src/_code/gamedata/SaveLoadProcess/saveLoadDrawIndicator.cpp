@@ -22,7 +22,7 @@ u32 saveLoadDrawIndicator()
         gxResetColorQuadToWhite();
         s32 parallax = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.27f);
         texDrawTableEntryAtStoredOrigin(2, 14, g_byteSettings.value + 0x185, parallax, 0, 6);
-        renderStackPop(&g_titleScene->stackA);
+        renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
         efctSetSpeed(1.0f);
         gxResetColorQuadToWhite();
     }

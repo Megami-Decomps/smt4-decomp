@@ -28,7 +28,7 @@ u32 FUN_00321544()
         }
         FUN_003d939c(portrait, static_cast<f32>(parallax));
     }
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
     return 0;

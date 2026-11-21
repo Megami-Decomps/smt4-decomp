@@ -194,13 +194,13 @@ s32 sortMenuDraw(u32 job)
 
         /* The shine slides across the row, clipped to the plate. */
         TextureTableEntryIV *plate = asdTMTexTableEntryAt(SORT_MENU_TEXTURES, 20);
-        renderStackSet(&g_titleScene->scissor, 3);
+        renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, 3);
         gxSetMirroredClippedScissor(slot->x + plate->x, slot->y + plate->y, plate->placement->width,
                                     plate->placement->height, 1);
         s32 shineY = vec2GetYInt(&work->sprites[11]) + slot->y;
         s32 shineX = vec2GetXInt(&work->sprites[11]) + slot->x;
         texDrawTableEntryAtStoredOrigin(2, SORT_MENU_TEXTURES, 22, shineX, shineY, 236);
-        renderStackSet(&g_titleScene->scissor, 0);
+        renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, 0);
     }
 
     if (static_cast<s32>(gridNavigationGetItemCount(&work->list)) > static_cast<s32>(uiListGetVisibleCount(&work->list))) {
@@ -212,7 +212,7 @@ s32 sortMenuDraw(u32 job)
                             work->ids[1], 251, 0);
         efctSetSpeed(1.0f);
     }
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);
     return 0;

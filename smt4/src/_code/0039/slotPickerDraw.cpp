@@ -45,7 +45,7 @@ void slotPickerDraw(SlotPicker *picker)
     gxResetColorQuadToWhite();
     RenderCtx *context = g_titleScene;
     s32 state = renderCtxPackPassFlags(1, 0);
-    renderStackPush(&context->stackA, state);
+    renderStackPush(context->stacks + RENDER_STACK_A, state);
     renderCtxSelectTexture(g_titleScene, 0);
     texDrawTableEntryAtStoredOrigin(2, 0x2E, 0, parallax, 0, 0xB);
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
@@ -84,7 +84,7 @@ void slotPickerDraw(SlotPicker *picker)
                      label);
     }
     efctSetSpeed(1.0f);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);
 }

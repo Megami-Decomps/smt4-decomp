@@ -42,14 +42,14 @@ u8 eventEffectBlinkFadeDraw()
     s32 firstEntry = DAT_0057f3d0[0].index * 1000;
     efctSetSpeed(work->alpha);
     texDrawTableEntryAtStoredOrigin(2, DAT_0057f3d0[0].group, firstEntry, 0, 0, 0xfa);
-    renderStackPop(&g_renderCtx->stackB);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_B);
     s32 secondEntry = DAT_0057f3d0[1].index * 1000;
     efctSetSpeed(1.0f);
     texDrawTableEntryAtStoredOrigin(2, DAT_0057f3d0[1].group, secondEntry, 0, -work->position, 0xfb);
     texDrawTableEntryAtStoredOrigin(2, DAT_0057f3d0[1].group, secondEntry + 1, 0, work->position, 0xfb);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     return 0;
 }
 }

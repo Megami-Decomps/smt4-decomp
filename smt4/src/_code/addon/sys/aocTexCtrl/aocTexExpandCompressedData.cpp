@@ -2,10 +2,10 @@
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
-u32 lzGetAdvertisedSize(const u8 *source);
-void lzDecompressBytes(const u8 *source, u8 *destination);
-void huffmanDecompress(const u8 *source, u8 *destination);
-void rleDecompress(const u8 *source, u8 *destination);
+u32 nn_cx_GetUncompressedSize(const u8 *source);
+void nn_cx_UncompressLZ(const u8 *source, u8 *destination);
+void nn_cx_UncompressHuffman(const u8 *source, u8 *destination);
+void nn_cx_UncompressRL(const u8 *source, u8 *destination);
 void *asdMemoryAllocAligned(s32 heap, s32 category, s32 flags, u32 bytes, u32 alignment, s32 clear);
 void asdMemFree(void *);
 
@@ -15,7 +15,7 @@ u8 *aocTexExpandCompressedData(u8 *source, u32 flags, u32 alignment)
     u8 kind = source[0] & 0xf0;
     u8 *result = source;
     if (kind == 0x10 || kind == 0x20 || kind == 0x30) {
-        u32 size = lzGetAdvertisedSize(source);
+        u32 size = nn_cx_GetUncompressedSize(source);
         if (size != 0) {
             if (flags & 1) {
                 if (flags & 2) {
@@ -33,11 +33,11 @@ u8 *aocTexExpandCompressedData(u8 *source, u32 flags, u32 alignment)
                 result = static_cast<u8 *>(asdMemoryAllocAligned(0x100, 0x100, 0, size, alignment, 1));
             }
             if (kind == 0x10) {
-                lzDecompressBytes(source, result);
+                nn_cx_UncompressLZ(source, result);
             } else if (kind == 0x20) {
-                huffmanDecompress(source, result);
+                nn_cx_UncompressHuffman(source, result);
             } else if (kind == 0x30) {
-                rleDecompress(source, result);
+                nn_cx_UncompressRL(source, result);
             }
             asdMemFree(source);
         }

@@ -30,7 +30,7 @@ void FUN_004cf58c(StereoSpriteEffect *effect)
     asdTMTexTableEntryAt(0x22, 3000);
     f32 wideOffset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.35f);
     texDrawTableEntryAtStoredOrigin(2, 0x22, 3000, wideOffset, 0, 2);
-    renderStackPopChecked(&g_renderCtx->stackA);
+    renderStackPopChecked(g_renderCtx->stacks + RENDER_STACK_A);
     efctSetSpeed(1.0f);
     renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
     efctSetSpeed(effect->speed);
@@ -38,7 +38,7 @@ void FUN_004cf58c(StereoSpriteEffect *effect)
     asdTMTexTableEntryAt(0x22, 1000);
     f32 narrowOffset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.28f);
     texDrawTableEntryAtStoredOrigin(2, 0x22, 1000, narrowOffset, 0, 6);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     efctSetSpeed(1.0f);
 }
 }

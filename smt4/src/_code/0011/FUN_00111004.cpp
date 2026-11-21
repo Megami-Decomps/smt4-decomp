@@ -1,18 +1,18 @@
-/* NON_MATCHING: the request's constructor and the second kind/word3/result store sequence retail repeats after it now
- * follow retail; remaining: retail reuses one stack slot for both WindowStatusResult temporaries and shares slots between
- * the request block and the wait block (frame 48), zero register allocation, and the result tests. */
+/* NON_MATCHING: the wait is sys/HandleWait.h's handleWait with the bool test of threadTryJoinAndClose; remaining:
+ * retail keeps the request kind 1 in r8 for both stores, reuses one stack slot for both WindowStatusResult(0)
+ * temporaries (frame 48, built 60), and builds the wait's stack arguments with str+stm. */
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
 #include "nn/Result.h"
 #include "shard/JobWork.h"
 #include "sys/ResultReport.h"
 #include "addon/AocSystem.h"
+#include "sys/HandleWait.h"
 
 extern "C" {
 s32 FUN_00121e50(AocSystem *system);
 void aocReleasePackageOwner(AocSystem *system);
 void kernelThreadJoinAndClose(u32 *waitHandle);
-s32 svcWaitSynchronizationN(s32 *signalled, const u32 *handles, s32 count, s32 waitAll, u32 timeoutLow, u32 timeoutHigh); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* The AOC job step: once the operation it started is acknowledged and its event is signalled,
  * queues the follow-up request; then, if the wait on its handle times out, releases the handle. */
@@ -31,15 +31,9 @@ u32 FUN_00111004(u32 handle)
         request.kind = 200;
         g_aocMain->queueRequest(request, 0x65, 0);
     }
-    u32 waitHandle = work->waitHandle;
-    if (waitHandle != 0) {
-        s32 signalled = 0;
-        s32 result = svcWaitSynchronizationN(&signalled, &waitHandle, 1, 0, 0, 0);
-        bool failed = nnResultIsFailure(result);
-        if (failed) {
-            resultHandleFailure(result, failed);
-        }
-        if (!nnResultIsNotTimeout(result) && work->requestId == work->completedId) {
+    if (work->waitHandle != 0) {
+        bool timedOut = nnResultIsNotTimeout(handleWait(work->waitHandle, 0)) != 1;
+        if (timedOut && work->requestId == work->completedId) {
             kernelThreadJoinAndClose(&work->waitHandle);
         }
     }

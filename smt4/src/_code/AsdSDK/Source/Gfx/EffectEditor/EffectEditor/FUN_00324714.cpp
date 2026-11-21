@@ -1,4 +1,4 @@
-/* NON_MATCHING: related-item argument registers, catalog-loop hoisting and count-update branches differ. */
+/* NON_MATCHING: retail keeps the source item in r2 for the default related item (moveq) and gives the catalog search other scratch registers (r1/r3/ip/r5 swapped). */
 #include "ui/UiSpriteApi.h"
 #include "gfx/EffectEditorStorage.h"
 extern "C" {
@@ -23,13 +23,15 @@ void resourceQueueDeferredDestroy(void *resource, s32 mode);
 }
 
 namespace {
-inline EffectSelectionTemplate *findTemplate(const EffectSelectionBlock *block)
+inline EffectSelectionTemplate *findTemplate(EffectSelectionCatalogEntry *const *catalog, u16 groupCount, const EffectSelectionBlock *block)
 {
-    for (u16 group = 0; group < 13; ++group) {
-        EffectSelectionCatalogEntry *entry = DAT_0044f4d4[group];
+    u16 type = block->type;
+    u16 id = block->id;
+    for (u16 group = 0; group < groupCount; ++group) {
+        EffectSelectionCatalogEntry *entry = catalog[group];
         if (entry != NULL) {
             for (; entry->parts != NULL; ++entry) {
-                if (entry->parts->type == block->type && entry->parts->id == block->id)
+                if (entry->parts->type == type && entry->parts->id == id)
                     return entry->object;
             }
         }
@@ -47,9 +49,7 @@ extern "C" u32 FUN_00324714()
     g_effectEditor.item = copy;
     rt_memcpy_w144(copy, source);
     ItemView *sourceView = reinterpret_cast<ItemView *>(source);
-    EffectSelectionItem *previous = source;
-    if (sourceView->flags & 2)
-        previous = nodeListFindByKey(g_effectEditor.list, sourceView->related);
+    EffectSelectionItem *previous = (sourceView->flags & 2) ? nodeListFindByKey(g_effectEditor.list, sourceView->related) : source;
     linkedItemsRedirectToReplacement(g_effectEditor.list, copy, previous);
     __aeabi_memcpy4(&g_effectEditorSettings, copy, 0x90);
     __aeabi_memcpy4(&g_effectEditorSavedSnapshot, copy, 0x80);
@@ -63,15 +63,15 @@ extern "C" u32 FUN_00324714()
     void *instance = effBlockCreateFromBlock(g_effectEditor.block);
     effectEditorApplyHandlerState(instance);
     g_effectEditor.instance = instance;
-    g_effectEditor.object = findTemplate(copy->block);
+    g_effectEditor.object = findTemplate(DAT_0044f4d4, 13, copy->block);
     g_effectEditor.object->context = &g_effectEditorState;
     u32 count = effEditorNodeListCount(g_effectEditor.list);
     if (count > 21) {
         g_effectEditor.index = count - 21;
         g_effectEditorState.index = 20;
     } else {
-        g_effectEditorState.index = count - 1;
         g_effectEditor.index = 0;
+        g_effectEditorState.index = count - 1;
     }
     g_effectEditor.unk4c = 0;
     g_effectEditor.unk50 = 0;

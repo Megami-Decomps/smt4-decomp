@@ -60,9 +60,9 @@ void FUN_003c4250(GaugeDrawOwner *owner, s32 x, s32 y, s32 target, s32 current, 
         flash = gaugeWidth(0x76, (s16)chunk, &flashHeight);
         texDrawTableEntrySized(2, 0x12, 0x76, x + width, y, flash, flashHeight, 0xDD);
         efctSetSpeed(owner->closingSpeed * scale);
-        renderStackSet(&g_renderCtx->stackB, packNibblesAndByte(6, 1, 0));
+        renderStackSet(g_renderCtx->stacks + RENDER_STACK_B, packNibblesAndByte(6, 1, 0));
         texDrawTableEntrySized(2, 0x12, 0x77, x + width, y, flash, flashHeight, 0xDE);
-        renderStackSet(&g_renderCtx->stackB, packNibblesAndByte(6, 7, 0));
+        renderStackSet(g_renderCtx->stacks + RENDER_STACK_B, packNibblesAndByte(6, 7, 0));
         efctSetSpeed(scale);
     }
     texDrawTableEntrySized(2, 0x12, 0x6E, x, y, width, height, 0xDD);

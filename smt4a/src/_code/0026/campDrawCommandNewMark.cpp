@@ -80,11 +80,11 @@ void campDrawCommandNewMark(s32 menu, s32 x, s32 y, u32 flags, s32 plain)
     efctSetSpeed(vec2GetSpeed(&g_camp->sprites[37]) * (f32)active); /* the icon sprite's speed */
     RenderCtxA *context = g_renderCtx;
     s32 state = packNibblesAndByte(6, 1, 0);
-    renderStackSet(&context->stackB, state);
+    renderStackSet(context->stacks + RENDER_STACK_B, state);
     texDrawTableEntryAtStoredOrigin(2, CAMP_NOTICE_HEADER, CAMP_NOTICE_GLOW, frame->x + x, frame->y + y, flags);
     context = g_renderCtx;
     state = packNibblesAndByte(6, 7, 0);
-    renderStackSet(&context->stackB, state);
+    renderStackSet(context->stacks + RENDER_STACK_B, state);
     efctSetSpeed((f32)active);
 }
 

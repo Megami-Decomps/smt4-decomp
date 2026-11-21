@@ -26,7 +26,7 @@ void hintWindowDrawArrows(SceneArrowDrawWork *work)
     gxResetColorQuadToWhite();
     RenderCtx *context = g_titleScene;
     s32 state = renderCtxPackPassFlags(1, 0);
-    renderStackPush(&context->stackA, state);
+    renderStackPush(context->stacks + RENDER_STACK_A, state);
     if (work->mode != 1) {
         FUN_003a37dc(work);
         if (placeWinGetValue()) {
@@ -51,7 +51,7 @@ void hintWindowDrawArrows(SceneArrowDrawWork *work)
             }
         }
     }
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);
 }

@@ -29,7 +29,7 @@ u32 uiFadeQuadDrawJob(u32 job)
         f32 height = static_cast<f32>(asdGxPresetsGetByKind(renderCtxGetStereoMode(g_titleScene)));
         f32 width = static_cast<f32>(asdGxPresetsGetHeightByKind(renderCtxGetStereoMode(g_titleScene)));
         gxSubmitDrawZeroExtraParams(0.0f, 0.0f, width, height, color, color, color, 0.0f, color);
-        renderStackPop(&g_titleScene->stackA);
+        renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     }
     return 0;
 }

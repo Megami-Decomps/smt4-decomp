@@ -1,4 +1,4 @@
-/* NON_MATCHING: the item merge loops and the passive-bonus loop are unrolled/scheduled differently from retail (207 vs 232 rows); the spoils application is the same. */
+/* NON_MATCHING: the item merge loops are unrolled/scheduled differently from retail; the passive-bonus loop (a plain static helper, as in resultAddExperienceReward) and the spoils application follow it. */
 #include "common.h"
 #include "shard/PassiveSkill.h"
 #include "result/Result.h"
@@ -34,6 +34,22 @@ void soundChannelRequestIfEnabled(u32 id, s32 arg);
 void gameCounterAddSaturating(s32 counter, s32 amount);
 s32 playerPadTestBit(u32 bit);
 s32 flagWordTestBit(StatBlock *unit, u32 bit);
+
+/* The experience multiplier of a unit's passive skills: the product of their bonuses (percent). */
+static f32 skillExpMultiplier(const u16 *skills, s32 count)
+{
+    f32 multiplier = 1.0f;
+    for (s32 skillIndex = 0; skillIndex < count; ++skillIndex) {
+        u16 skillId = skills[skillIndex];
+        if (skillId != 0) {
+            const PassiveSkillRecord *skill = passiveSkillLookupRecord(skillId);
+            if (skill != NULL && skill->experience.expBonus != 0) {
+                multiplier = (f32)(u32)skill->experience.expBonus * 0.01f * multiplier;
+            }
+        }
+    }
+    return multiplier;
+}
 
 /* Applies a finished battle's spoils to the result screen: stops the battle music, adds gold and
  * the items (merging stacks), counts the battle, adds the experience and shares it out to the
@@ -112,19 +128,7 @@ void resultApplySpoils(ResultSpoils *spoils)
                 share = 1;
             }
         }
-        f32 multiplier = 1.0f;
-
-        for (s32 k = 0; k < 8; k++) {
-            u32 skill = unit->skills.ids[k];
-
-            if (skill != 0) {
-                const PassiveSkillRecord *record = passiveSkillLookupRecord(skill);
-
-                if (record != NULL && record->experience.expBonus != 0) {
-                    multiplier = (f32)record->experience.expBonus * 0.01f * multiplier;
-                }
-            }
-        }
+        f32 multiplier = skillExpMultiplier(unit->skills.ids, 8);
         result->unitExperience[unit->growth.slot] += (share * (s32)(multiplier * 100.0f)) / 100;
     }
 }

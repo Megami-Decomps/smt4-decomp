@@ -1,16 +1,10 @@
 #include "gfx/StereoParallax.h"
 #include "camp/RenderCtxA.h"
-/* NON_MATCHING: named stereo parallax restores retail coordinate lifetimes; extended render-state stack addressing and conditional restore scheduling still differ. */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
+#include "shard/S1ListPanel.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
-
-/* Retail's draw context carries three more render-state stacks past the shared prefix. */
-struct ScrollBarStateStackView {
-    u8 prefix[0x1318];
-    RenderStateStack stacks[3];
-};
 
 extern "C" {
 void efctSetSpeed(f32 speed);
@@ -22,7 +16,7 @@ u32 renderPopStateStacks(void);
 
 /* Draws a list's scroll bar: the frame, then a thumb sized and placed by the visible fraction of
  * the list. */
-void FUN_004042fc(u8 *list, s32 x, s32 y, f32 speed)
+void uiDrawStereoListScrollBar(u8 *list, s32 x, s32 y, f32 speed)
 {
     void *view = list + 0x28;
     s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
@@ -47,17 +41,11 @@ void FUN_004042fc(u8 *list, s32 x, s32 y, f32 speed)
         thumbHeight = frame->placement->height;
     }
 
-    ScrollBarStateStackView *context = reinterpret_cast<ScrollBarStateStackView *>(g_renderCtx);
-    bool restore = false;
-    if (context->stacks[0].entries[context->stacks[0].count] == 3) {
-        renderStackSet(&context->stacks[0], 0);
-        restore = true;
-    }
+    bool restore = renderCtxSuspendScissor(g_renderCtx);
     FUN_00168e00(frame->x + x, frame->y + y + thumbOffset, frame->placement->width, thumbHeight);
     texDrawTableEntryAtStoredOrigin(2, 0x32, 0xD, x, y, 0xCE);
-    context = reinterpret_cast<ScrollBarStateStackView *>(g_renderCtx);
     if (restore)
-        renderStackSet(&context->stacks[0], 3);
+        renderCtxResumeScissor(g_renderCtx);
     renderPopStateStacks();
     efctSetSpeed(1.0f);
 }

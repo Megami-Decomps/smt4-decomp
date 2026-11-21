@@ -36,7 +36,7 @@ void FUN_003a37dc(TitleJobWork *work)
     if (jobIsValid(draw->secondJob)) {
         FUN_00285584(draw->secondJob, 0, 0);
     }
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);
 }

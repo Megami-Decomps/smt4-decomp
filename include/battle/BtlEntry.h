@@ -194,4 +194,10 @@ typedef char BtlEquipLayoutCheck[
     offsetof(BtlUnitDetail, flags) == 0x16 && offsetof(BtlUnitSource, maxHp) == 0x1C &&
     offsetof(BtlUnitLink, id) == 0x46 && sizeof(BtlUnitLink) == 0x48 ? 1 : -1];
 
+/* A unit's turn-order speed: its agility plus its battle speed bonus (the turn-order sorts compare it). */
+static __inline s16 btlUnitTurnSpeed(const BtlUnitData *data)
+{
+    return data->agility + data->speedBonus;
+}
+
 #endif

@@ -1,4 +1,4 @@
-/* NON_MATCHING: speed fields use absolute unit offsets rather than a shared stats base; loop/register allocation differs. */
+/* NON_MATCHING: the inlined sort (battleSortTurnOrder's body) keeps the same open problem as that function: retail lays the faster-speed swap out after the speed compare and loads the candidate first; the slot search before it schedules its registers differently. */
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
@@ -15,6 +15,33 @@ typedef char CurrentTurnIndexOffsetCheck[offsetof(CurrentTurnIndexViewIV, curren
 extern "C" {
 void btlUiRefreshSlotRanks(BtlUi *ui);
 
+/* Sorts populated turn-order slots by descending speed, then ascending unit index: battleSortTurnOrder's body. */
+static void sortTurnOrder(BtlMainState *state, s32 start)
+{
+    if (start >= 11) {
+        return;
+    }
+    for (s32 first = start; first < 11; ++first) {
+        if (state->turnOrder.order[first] >= 0) {
+            for (s32 second = first + 1; second < 12; ++second) {
+                s16 candidate = state->turnOrder.order[second];
+                if (candidate < 0)
+                    continue;
+                s16 current = state->turnOrder.order[first];
+                s16 currentSpeed = btlUnitTurnSpeed(&state->entries[current].data);
+                s16 candidateSpeed = btlUnitTurnSpeed(&state->entries[candidate].data);
+                if (currentSpeed < candidateSpeed) {
+                    state->turnOrder.order[first] = candidate;
+                    state->turnOrder.order[second] = current;
+                } else if (currentSpeed == candidateSpeed && state->entries[current].ids[0] > state->entries[candidate].ids[0]) {
+                    state->turnOrder.order[first] = candidate;
+                    state->turnOrder.order[second] = current;
+                }
+            }
+        }
+    }
+}
+
 // Append an eligible unit to the unprocessed turn slots and sort that suffix by speed and stable unit index.
 void FUN_0033b1ac(BtlMainState *battle, s32 listedId)
 {
@@ -29,25 +56,7 @@ void FUN_0033b1ac(BtlMainState *battle, s32 listedId)
     for (s32 slot = start; slot < 12; ++slot) {
         if (turns->turnOrder.order[slot] < 0) {
             turns->turnOrder.order[slot] = selectionIndex;
-            for (s32 first = start; first < 11; ++first) {
-                if (turns->turnOrder.order[first] < 0)
-                    continue;
-                for (s32 second = first + 1; second < 12; ++second) {
-                    s16 secondId = turns->turnOrder.order[second];
-                    if (secondId < 0)
-                        continue;
-                    s16 firstId = turns->turnOrder.order[first];
-                    const BtlEntry *firstUnit = &turns->entries[firstId];
-                    const BtlEntry *secondUnit = &turns->entries[secondId];
-                    s16 firstSpeed = firstUnit->data.agility + firstUnit->data.speedBonus;
-                    s16 secondSpeed = secondUnit->data.agility + secondUnit->data.speedBonus;
-                    if (firstSpeed < secondSpeed ||
-                        (firstSpeed == secondSpeed && secondUnit->ids[0] < firstUnit->ids[0])) {
-                        turns->turnOrder.order[first] = secondId;
-                        turns->turnOrder.order[second] = firstId;
-                    }
-                }
-            }
+            sortTurnOrder(turns, start);
             break;
         }
     }

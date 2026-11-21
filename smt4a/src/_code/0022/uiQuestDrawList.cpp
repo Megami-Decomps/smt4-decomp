@@ -134,11 +134,11 @@ void uiQuestDrawList(void)
         TextureTableEntryIV *window = asdTMTexTableEntryAt(0x1e, 0xac);
         s32 scrollX = vec2GetXInt(quest->sprite(2));
         s32 scrollY = vec2GetYInt(quest->sprite(2));
-        renderStackSet(&g_renderCtx->scissor, 3);
+        renderStackSet(g_renderCtx->stacks + RENDER_STACK_SCISSOR, 3);
         gxSetMirroredClippedScissor(focus->x + window->x + x, focus->y + window->y + y, window->placement->width,
                                     window->placement->height, 1);
         texDrawTableEntryAtStoredOrigin(2, 0x1e, 0xae, focus->x + (scrollX + x), scrollY + y + focus->y, 0xa6);
-        renderStackSet(&g_renderCtx->scissor, 0);
+        renderStackSet(g_renderCtx->stacks + RENDER_STACK_SCISSOR, 0);
 
         TextureTableEntryIV *plate = asdTMTexTableEntryAt(0x1e, 0xb3);
         u32 color = uiQuestDrawRowPlate(id, plate->x + focus->x + x, focus->y + plate->y + y, 0xab, 1, pressed);

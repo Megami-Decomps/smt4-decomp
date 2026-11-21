@@ -28,7 +28,7 @@ void mikadoCameraDrawView(StateDrawWork *work)
     if (work->state >= 3) {
         FUN_003bb77c(work->view);
     }
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);
 }

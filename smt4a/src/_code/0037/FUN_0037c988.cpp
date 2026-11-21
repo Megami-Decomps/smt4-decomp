@@ -66,10 +66,10 @@ void FUN_0037c988(SlotScreen *screen, u32 argument, s32 drawExtra, s32 mode, u32
                 if (screen->currentIds[slot] == screen->targetIds[base + listCursorGetRowIfUnblocked(&screen->cursor)]) {
                     efctSetSpeed(screen->effectSpeed * scale);
                     RenderCtxA *context = g_renderCtx;
-                    renderStackSet(&context->stackB, packNibblesAndByte(6, 1, 0));
+                    renderStackSet(context->stacks + RENDER_STACK_B, packNibblesAndByte(6, 1, 0));
                     texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x173, icon->x + position.x, icon->y + position.y, 0x65);
                     context = g_renderCtx;
-                    renderStackSet(&context->stackB, packNibblesAndByte(6, 7, 0));
+                    renderStackSet(context->stacks + RENDER_STACK_B, packNibblesAndByte(6, 7, 0));
                 }
             }
             efctSetSpeed(scale);

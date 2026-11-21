@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail hoists the constant 0 to the function entry (r7) next to 1/2/3/4; built hoists it only in front of the second switch (one instruction shorter at the first switch) */
+/* NON_MATCHING: retail hoists the constant 0 to the function entry (r7) next to 1/2/3/4 (the build loads it before the second switch), and of the two identical request-loading tails it keeps the acquire call in swap state 3 and the outAnimation clear in state 1 (the build the other way round). */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -97,7 +97,7 @@ swap:
         break;
     case 3:
         if (panel->outAnimation != 4)
-            return 0;
+            break;
         panel->swapState = 4;
         uiSpriteSetImageKeyframe(panel->fadeSprite, 0, 0);
         uiSpriteSetImageKeyframe(panel->swapSprite, 1, 0);
@@ -117,13 +117,13 @@ swap:
     case 1: {
         s32 image = panel->loading.id;
         if (image < 0)
-            return 0;
+            break;
         if (FUN_00293f10(image, 1) == 0)
-            return 0;
+            break;
         if (panel->loading.key == panel->request.key) {
             panel->shown = panel->loading;
             panel->swapState = 2;
-            return 0;
+            break;
         }
         if (panel->loading.id >= 0)
             statusBustUpPortraitRelease(panel->loading.id, 1);

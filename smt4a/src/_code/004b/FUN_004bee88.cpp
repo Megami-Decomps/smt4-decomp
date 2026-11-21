@@ -36,7 +36,7 @@ void renderCtxResetColorScale(RenderCtxA *context);
 void FUN_004bee88(PartnerScreenView *screen, s32 x, s32 y, f32 scale)
 {
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
-    renderStackPush(&g_renderCtx->stackA, renderCtxPackPassFlags(1, 0));
+    renderStackPush(g_renderCtx->stacks + RENDER_STACK_A, renderCtxPackPassFlags(1, 0));
     s32 shown = 0;
 
     for (s32 i = 0; i < 12; i++) {
@@ -81,7 +81,7 @@ void FUN_004bee88(PartnerScreenView *screen, s32 x, s32 y, f32 scale)
         texDrawTableEntryAtStoredOrigin(2, 0x11, 0xAB, mark->x + x, mark->y + y, 0x97);
         efctSetSpeed(1.0f);
     }
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
 }

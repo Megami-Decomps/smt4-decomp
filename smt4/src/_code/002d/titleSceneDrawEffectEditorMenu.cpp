@@ -17,25 +17,12 @@ u32 asdCameraGetSavedRenderPairs(void);
 s32 renderCtxPackPassFlags(u32 first, u32 second);
 void effectRestoreSavedRenderPairs(RenderCtx *context, u32 value);
 
-/* unit-local: the title scene's draw context seen as its array of render-state stacks (from 0x11EC: D, E, F,
- * A, C, G, B; RenderCtx names them one by one). */
-struct TitleSceneStacks {
-    /* 0x0000 */ u8 unk0000[0x11EC];
-    /* 0x11EC */ RenderStateStack stacks[7];
-};
-
-/* The current (top) state of render-state stack `index`. */
-static __inline u32 renderStackTop(RenderCtx *context, s32 index)
-{
-    return ((TitleSceneStacks *)context)->stacks[index].entries[((TitleSceneStacks *)context)->stacks[index].count];
-}
-
 /* Draws the effect editor's menu with its own render states pushed, then pops them again. */
 void titleSceneDrawEffectEditorMenu(void)
 {
     renderCtxPushD(g_titleScene, 0);
     renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
-    renderStackPushCounted(&g_titleScene->stackB, renderStackTop(g_titleScene, 6));
+    renderStackPushCounted(g_titleScene->stacks + RENDER_STACK_B, renderCtxStackTop(g_titleScene, RENDER_STACK_B));
     if (g_effectEditor.toggle == 0) {
         effectRestoreSavedRenderPairs(g_titleScene, asdCameraGetSavedRenderPairs());
     } else {
@@ -53,9 +40,9 @@ void titleSceneDrawEffectEditorMenu(void)
     }
     renderCtxResetColorScale(g_titleScene);
     renderCtxApplyTransforms(g_titleScene);
-    renderStackPopChecked(&g_titleScene->depthStacks.stackD);
-    renderStackPop(&g_titleScene->stackA);
-    renderStackPop(&g_titleScene->stackB);
+    renderStackPopChecked(g_titleScene->stacks + RENDER_STACK_D);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_B);
 }
 
 }

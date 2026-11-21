@@ -286,6 +286,10 @@ difference a register tie-break.
   integer stores, float members included, where field-by-field `0.0f` stores use VFP registers.
 - Reading `table->count` at each use instead of caching it in a local changes which registers the
   loop's values get; try both before calling a difference allocation.
+- A local pointer to a record inside a parameter or global (`BtlCombatantEntryA *entry = &battle->entries[index];`,
+  `void *list = &work->list;`, a view pointer to `g_effectEditor`) can change the allocation by itself: write the
+  access at each use (`battle->entries[index].flags`, `&work->list`), as for global holders above (smt4a
+  `FUN_003eb0cc` and `FUN_0034c940` IDENTICAL, `FUN_002830cc` 49 -> 6; wave 65).
 - Masks or table fields that retail reloads inside a loop, where armcc hoists them all, come back as in-loop loads
   through a local pointer to the global (`const BattleMaskPresets *masks = &g_battleMaskPresets;`): armcc then hoists
   only the unconditional first test. It moved four smt4a near misses (`FUN_003ec6d8`, `FUN_003a98c4`,
@@ -347,6 +351,11 @@ asks for.
   caller's arguments made seven queue functions IDENTICAL (smt4 `FUN_00246454`, `FUN_003de60c`, `FUN_003de9e4`,
   `FUN_0023c368`; smt4a `FUN_004fe618`, `FUN_004fe900`, `FUN_004fcde0`, wave 62). Keep each copy's body equal to
   its out-of-line function; the inlined copies show the source's store order where the out-of-line code does not.
+- A constant table id that retail moves into a callee-saved register once and copies into `r0` before each lookup
+  (`mov r4, #28` … `mov r0, r4; bl asdTMTexTableEntryAt`, where an inline literal is `mov r0, #28` at each call) is
+  the parameter of an inline helper called once per lookup: `asdTMTexTableEntryRect(file, index, &x, &y, &w, &h)`
+  (`AsdTMTexTable.h`, the inlined form of `rectRecRead`'s signature, three calls per function) made smt4
+  `FUN_0039f874` and smt4a `FUN_00492e20` IDENTICAL (wave 65). The helper still needs its own evidence.
 - A bounds-checked row getter (`if (i >= count) return NULL; return base + i * size;`) as a
   `static __inline` gives retail's `movcs r0, rN; bcs`.
 - Two calls that fill a zeroed out-parameter, one scheduled `strh zero; ldr arg` and the other `ldr arg; strh zero`
@@ -407,6 +416,9 @@ asks for.
   unrolling a search.
 - armcc rerolls consecutive copies from an indexed source array into a loop: name the entries as
   struct members.
+- A byte copy that retail peels and unrolls by two (one copy before the loop, then pairs) is a `do { *dst++ = *src++; }
+  while (--count > 0);` over an unsigned count; a `while`/`for` copy compiles to a plain loop (the nn::cx `UncompressRL`
+  copies, `rleDecompress`: 101 and 133 -> 8 lines in the two games, wave 65).
 - Offsets split into two adds (`add #0x400; add #0x384`) mean retail reaches a sub-struct through a
   pointer: give the sub-struct a type and go through `&work->sub`.
 - Constant tables addressed from one anchor (a `sub` chain from one pool word, such as `paramsInit`

@@ -12,7 +12,7 @@ struct StaffRollDrawView {
 /* Pushes the evaluated state on the scene's first stack (the stack is located after the state is evaluated). */
 static __inline void titleScenePushA(RenderCtx *scene, int state)
 {
-    renderStackPushCounted(&scene->stackA, state);
+    renderStackPushCounted(scene->stacks + RENDER_STACK_A, state);
 }
 
 extern "C" {
@@ -36,7 +36,7 @@ u32 FUN_002e0820(void)
     }
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     return 0;
 }
 }

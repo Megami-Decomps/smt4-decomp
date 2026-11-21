@@ -30,7 +30,7 @@ s32 FUN_001e4bf0(u32 job)
             renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
             if (FUN_0028a318())
                 btlUiPartyDisplayDraw(&ui->objC);
-            renderStackPop(&g_titleScene->stackA);
+            renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
             renderCtxApplyTransforms(g_titleScene);
             renderCtxResetColorScale(g_titleScene);
             return 0;

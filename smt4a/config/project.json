@@ -45586,42 +45586,42 @@
     },
     {
       "address": "0x1aeb40",
-      "function": "lzDecompressBytes",
+      "function": "nn_cx_UncompressLZ",
       "module": "_code",
-      "object": "build/obj/_code/001a/lzDecompressBytes.o",
+      "object": "build/obj/_code/001a/nn_cx_UncompressLZ.o",
       "size": 348,
-      "source": "src/_code/001a/lzDecompressBytes.cpp",
-      "target": "orig/target/_code/001a/lzDecompressBytes.o",
+      "source": "src/_code/001a/nn_cx_UncompressLZ.cpp",
+      "target": "orig/target/_code/001a/nn_cx_UncompressLZ.o",
       "thumb": false
     },
     {
       "address": "0x1aec9c",
-      "function": "rleDecompress",
+      "function": "nn_cx_UncompressRL",
       "module": "_code",
-      "object": "build/obj/_code/001a/rleDecompress.o",
+      "object": "build/obj/_code/001a/nn_cx_UncompressRL.o",
       "size": 320,
-      "source": "src/_code/001a/rleDecompress.cpp",
-      "target": "orig/target/_code/001a/rleDecompress.o",
+      "source": "src/_code/001a/nn_cx_UncompressRL.cpp",
+      "target": "orig/target/_code/001a/nn_cx_UncompressRL.o",
       "thumb": false
     },
     {
       "address": "0x1aeddc",
-      "function": "huffmanDecompress",
+      "function": "nn_cx_UncompressHuffman",
       "module": "_code",
-      "object": "build/obj/_code/001a/huffmanDecompress.o",
+      "object": "build/obj/_code/001a/nn_cx_UncompressHuffman.o",
       "size": 240,
-      "source": "src/_code/001a/huffmanDecompress.cpp",
-      "target": "orig/target/_code/001a/huffmanDecompress.o",
+      "source": "src/_code/001a/nn_cx_UncompressHuffman.cpp",
+      "target": "orig/target/_code/001a/nn_cx_UncompressHuffman.o",
       "thumb": false
     },
     {
       "address": "0x1aeecc",
-      "function": "lzGetAdvertisedSize",
+      "function": "nn_cx_GetUncompressedSize",
       "module": "_code",
-      "object": "build/obj/_code/001a/lzGetAdvertisedSize.o",
+      "object": "build/obj/_code/001a/nn_cx_GetUncompressedSize.o",
       "size": 48,
-      "source": "src/_code/001a/lzGetAdvertisedSize.cpp",
-      "target": "orig/target/_code/001a/lzGetAdvertisedSize.o",
+      "source": "src/_code/001a/nn_cx_GetUncompressedSize.cpp",
+      "target": "orig/target/_code/001a/nn_cx_GetUncompressedSize.o",
       "thumb": false
     },
     {
@@ -103133,12 +103133,12 @@
     },
     {
       "address": "0x34c940",
-      "function": "FUN_0034c940",
+      "function": "uniteConfirmResultPair",
       "module": "_code",
-      "object": "build/obj/_code/0034/FUN_0034c940.o",
+      "object": "build/obj/_code/0034/uniteConfirmResultPair.o",
       "size": 420,
-      "source": "src/_code/0034/FUN_0034c940.cpp",
-      "target": "orig/target/_code/0034/FUN_0034c940.o",
+      "source": "src/_code/0034/uniteConfirmResultPair.cpp",
+      "target": "orig/target/_code/0034/uniteConfirmResultPair.o",
       "thumb": false
     },
     {
@@ -122010,12 +122010,12 @@
     },
     {
       "address": "0x3b7960",
-      "function": "FUN_003b7960",
+      "function": "uiDrawMaskedSprite",
       "module": "_code",
-      "object": "build/obj/_code/003b/FUN_003b7960.o",
+      "object": "build/obj/_code/003b/uiDrawMaskedSprite.o",
       "size": 488,
-      "source": "src/_code/003b/FUN_003b7960.cpp",
-      "target": "orig/target/_code/003b/FUN_003b7960.o",
+      "source": "src/_code/003b/uiDrawMaskedSprite.cpp",
+      "target": "orig/target/_code/003b/uiDrawMaskedSprite.o",
       "thumb": false
     },
     {
@@ -129688,12 +129688,12 @@
     },
     {
       "address": "0x3eb0cc",
-      "function": "FUN_003eb0cc",
+      "function": "btlClearPartitionSlotFlags",
       "module": "_code",
-      "object": "build/obj/_code/003e/FUN_003eb0cc.o",
+      "object": "build/obj/_code/003e/btlClearPartitionSlotFlags.o",
       "size": 252,
-      "source": "src/_code/003e/FUN_003eb0cc.cpp",
-      "target": "orig/target/_code/003e/FUN_003eb0cc.o",
+      "source": "src/_code/003e/btlClearPartitionSlotFlags.cpp",
+      "target": "orig/target/_code/003e/btlClearPartitionSlotFlags.o",
       "thumb": false
     },
     {
@@ -133095,12 +133095,12 @@
     },
     {
       "address": "0x4042fc",
-      "function": "FUN_004042fc",
+      "function": "uiDrawStereoListScrollBar",
       "module": "_code",
-      "object": "build/obj/_code/0040/FUN_004042fc.o",
+      "object": "build/obj/_code/0040/uiDrawStereoListScrollBar.o",
       "size": 612,
-      "source": "src/_code/0040/FUN_004042fc.cpp",
-      "target": "orig/target/_code/0040/FUN_004042fc.o",
+      "source": "src/_code/0040/uiDrawStereoListScrollBar.cpp",
+      "target": "orig/target/_code/0040/uiDrawStereoListScrollBar.o",
       "thumb": false
     },
     {
@@ -144759,12 +144759,12 @@
     },
     {
       "address": "0x43b6c0",
-      "function": "FUN_0043b6c0",
+      "function": "nn_math_VEC3TransformCoordArray",
       "module": "_code",
-      "object": "build/obj/_code/0043/FUN_0043b6c0.o",
+      "object": "build/obj/_code/0043/nn_math_VEC3TransformCoordArray.o",
       "size": 232,
-      "source": "src/_code/0043/FUN_0043b6c0.cpp",
-      "target": "orig/target/_code/0043/FUN_0043b6c0.o",
+      "source": "src/_code/0043/nn_math_VEC3TransformCoordArray.cpp",
+      "target": "orig/target/_code/0043/nn_math_VEC3TransformCoordArray.o",
       "thumb": false
     },
     {
@@ -157951,12 +157951,12 @@
     },
     {
       "address": "0x492e20",
-      "function": "FUN_00492e20",
+      "function": "terminalWindowInitTouchRegions",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_00492e20.o",
+      "object": "build/obj/_code/0049/terminalWindowInitTouchRegions.o",
       "size": 256,
-      "source": "src/_code/0049/FUN_00492e20.cpp",
-      "target": "orig/target/_code/0049/FUN_00492e20.o",
+      "source": "src/_code/0049/terminalWindowInitTouchRegions.cpp",
+      "target": "orig/target/_code/0049/terminalWindowInitTouchRegions.o",
       "thumb": false
     },
     {
@@ -169418,12 +169418,12 @@
     },
     {
       "address": "0x4f8d90",
-      "function": "FUN_004f8d90",
+      "function": "btlLoadUncachedSourceModels",
       "module": "_code",
-      "object": "build/obj/_code/004f/FUN_004f8d90.o",
+      "object": "build/obj/_code/004f/btlLoadUncachedSourceModels.o",
       "size": 344,
-      "source": "src/_code/004f/FUN_004f8d90.cpp",
-      "target": "orig/target/_code/004f/FUN_004f8d90.o",
+      "source": "src/_code/004f/btlLoadUncachedSourceModels.cpp",
+      "target": "orig/target/_code/004f/btlLoadUncachedSourceModels.o",
       "thumb": false
     },
     {

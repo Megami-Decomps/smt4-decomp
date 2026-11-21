@@ -24,7 +24,7 @@ void renderSubmissionDrawPacket(RenderSubmissionPacket *job, u32 argument)
     }
     if ((job->flags & DRAW_PREBUILT_SHAPE) != 0) {
         FUN_002b358c(job->shape);
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
         return;
     }
 
@@ -47,7 +47,7 @@ void renderSubmissionDrawPacket(RenderSubmissionPacket *job, u32 argument)
     primitiveSourceBuildBatch(job->primitiveSource);
     renderCtxResetColorScale(g_renderCtx);
     skinObjectUpdateMatrices(g_renderCtx);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
 }
 
 } /* extern "C" */

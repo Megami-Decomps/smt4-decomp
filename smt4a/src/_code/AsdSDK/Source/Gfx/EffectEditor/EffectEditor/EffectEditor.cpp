@@ -138,9 +138,10 @@ static void phaseVectorSet(PhaseVector *vector, f32 x, f32 y, f32 z)
     vector->z = z;
 }
 
-/* NON_MATCHING: the vector stores and the camera argument bases now follow retail (as smt4 effectEditorInitialize);
- * the literal pool holds one more word, the perspective constants load in another order and the editor state
- * stores use other registers. */
+/* NON_MATCHING: 6 lines: everything but stereoCameraSetPerspective's argument schedule matches (retail moves the
+ * pivot 1 into r1 between the aspect and far-plane literals, the build after all four). The callee's definition takes
+ * a CameraPerspective by value; paramorder makes this IDENTICAL with the order (fieldOfView, camera, near, far,
+ * enabled, aspect), which is not the definition's. */
 extern "C" void FUN_002830cc(void)
 {
     randomStateSeed(0, 0x12345678);
@@ -154,8 +155,8 @@ extern "C" void FUN_002830cc(void)
     cameraMatrixCacheSetLookAt(&g_effectEditorCamera, &g_effectEditorCameraEye, &g_effectEditorCameraTarget, &g_effectEditorCameraUp);
     stereoCameraSetPerspective(&g_effectEditorCamera, 1, 30.0f, 20.0f, 25600.0f, 5.0f / 3.0f);
     FUN_0036b824(reinterpret_cast<u32>(&g_effectEditorCamera));
-    EditorResetStateView *startup = reinterpret_cast<EditorResetStateView *>(&g_effectEditor);
-    startup->buffer = startup->scratch;
+    reinterpret_cast<EditorResetStateView *>(&g_effectEditor)->buffer =
+        reinterpret_cast<EditorResetStateView *>(&g_effectEditor)->scratch;
     g_effectEditor.index = 0;
     g_effectEditorResourceName[0] = 0;
     g_effectEditor.unk08 = 0;

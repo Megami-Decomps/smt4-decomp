@@ -62,20 +62,20 @@ void FUN_00117da4(s32 usePrimary)
 
     RenderCtx *context = g_titleScene;
     s32 state = renderCtxPackPassFlags(1, 0);
-    renderStackPush(&context->stackA, state);
+    renderStackPush(context->stacks + RENDER_STACK_A, state);
     context = g_titleScene;
     switch (tex->zan.blendMode) {
     case 0:
         state = packNibblesAndByte(6, 7, 0);
-        renderStackSet(&context->stackB, state);
+        renderStackSet(context->stacks + RENDER_STACK_B, state);
         break;
     case 1:
         state = packNibblesAndByte(6, 1, 0);
-        renderStackSet(&context->stackB, state);
+        renderStackSet(context->stacks + RENDER_STACK_B, state);
         break;
     case 2:
         state = packNibblesAndByte(6, 1, 2);
-        renderStackSet(&context->stackB, state);
+        renderStackSet(context->stacks + RENDER_STACK_B, state);
         break;
     }
     renderCtxSelectTexture(g_titleScene, work);
@@ -88,9 +88,9 @@ void FUN_00117da4(s32 usePrimary)
     context = g_titleScene;
     if (tex->zan.blendMode != 0) {
         state = packNibblesAndByte(6, 7, 0);
-        renderStackSet(&context->stackB, state);
+        renderStackSet(context->stacks + RENDER_STACK_B, state);
     }
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
 }
 
 } /* extern "C" */

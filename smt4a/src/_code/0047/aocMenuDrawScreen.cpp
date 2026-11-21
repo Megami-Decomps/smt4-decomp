@@ -48,7 +48,7 @@ void aocMenuDrawScreen(StateScene *scene)
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *first = g_renderCtx;
     u32 firstState = renderCtxPackPassFlags(1, 0);
-    renderStackPushCountedDirect(&first->stackA, firstState);
+    renderStackPushCountedDirect(first->stacks + RENDER_STACK_A, firstState);
     RenderCtxA *second = g_renderCtx;
     s32 secondState = packNibblesAndByte(6, 7, 0);
     renderCtxPushB(second, secondState);
@@ -72,8 +72,8 @@ void aocMenuDrawScreen(StateScene *scene)
     }
     for (s32 i = 0; i < 11; i++)
         texDrawTableEntryAtStoredOrigin(2, 20, 0x7F4 + i, x, 0, 16);
-    renderStackPop(&g_renderCtx->stackB);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_B);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     skinObjectUpdateMatrices(g_renderCtx);

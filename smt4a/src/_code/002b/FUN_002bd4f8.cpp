@@ -32,7 +32,7 @@ u32 FUN_002bd4f8(void)
         renderCtxPushC(context, state);
         context = g_renderCtx;
         state = renderCtxPackPassFlags(1, 0);
-        renderStackPushCountedDirect(&context->stackA, state);
+        renderStackPushCountedDirect(context->stacks + RENDER_STACK_A, state);
         context = g_renderCtx;
         state = packNibblesAndByte(6, 1, 0);
         renderCtxPushB(context, state);
@@ -41,9 +41,9 @@ u32 FUN_002bd4f8(void)
                 effectNodeUpdatePlacedChildren(screen->slots[i].handle);
             }
         }
-        renderStackPop(&g_renderCtx->stackB);
-        renderStackPop(&g_renderCtx->stackA);
-        renderStackPop(&g_renderCtx->additional.stackC);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_B);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_C);
     }
     return 0;
 }

@@ -60,7 +60,7 @@ void FUN_0028f870(u32 list, s32 x, s32 y, s32 wide)
         thumbHeight = 1;
     }
     s32 thumbOffset = ((track->placement->height << 12) / gridNavigationGetItemCount(list)) * resourceRunOperationIfUnblocked(list) >> 12;
-    renderStackSet(&g_titleScene->scissor, 3);
+    renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, 3);
     gxSetMirroredClippedScissor(x + track->x, track->y + y + thumbOffset, track->placement->width, thumbHeight, 1);
     s32 thumbSprite;
     if (wide != 0) {
@@ -75,7 +75,7 @@ void FUN_0028f870(u32 list, s32 x, s32 y, s32 wide)
         }
     }
     texDrawTableEntryAtStoredOrigin(2, 0x1d, thumbSprite, x, y, 0x74);
-    renderStackSet(&g_titleScene->scissor, 0);
+    renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, 0);
 }
 
 } /* extern "C" */

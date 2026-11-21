@@ -30,7 +30,7 @@ u32 jyoucyuDrawLoadingOverlay()
     if (work->state < 100) {
         texDrawTableEntryAtStoredOrigin(2, 8, 0x18a, 0, 0, 11);
     }
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     efctSetSpeed(1.0f);
     return 0;
 }

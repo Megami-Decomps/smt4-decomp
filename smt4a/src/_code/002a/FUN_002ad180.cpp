@@ -49,13 +49,13 @@ s32 FUN_002ad180(u32 job)
     EventDrawWork *work = (EventDrawWork *)jobGetWork(job);
     RenderCtxA *context = g_renderCtx;
     s32 state = renderCtxPackPassFlags(1, 0);
-    renderStackPush(&context->stackA, state);
+    renderStackPush(context->stacks + RENDER_STACK_A, state);
     context = g_renderCtx;
     state = renderCtxPackPassFlagsWithAlpha(6, 0.0f);
-    renderStackPush(&context->additional.stackC, state);
+    renderStackPush(context->stacks + RENDER_STACK_C, state);
     context = g_renderCtx;
     state = packNibblesAndByte(6, 7, 0);
-    renderStackPushCountedDirect(&context->stackB, state);
+    renderStackPushCountedDirect(context->stacks + RENDER_STACK_B, state);
     for (s32 i = 0; i < work->jobCount; i++) {
         if (g_eventTex->drawAll != 0) {
             if (jobIsValid(work->jobs[i])) {
@@ -65,9 +65,9 @@ s32 FUN_002ad180(u32 job)
             drawJobAtOrigin(work, i);
         }
     }
-    renderStackPop(&g_renderCtx->stackB);
-    renderStackPop(&g_renderCtx->stackA);
-    renderStackPop(&g_renderCtx->additional.stackC);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_B);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_C);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
     return 0;

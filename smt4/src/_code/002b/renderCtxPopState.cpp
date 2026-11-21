@@ -1,13 +1,8 @@
 #include "camp/RenderCtx.h"
 
-// Indexed view of the complete seven-stack bank, including the named stacks in RenderCtx.
-struct IndexedRenderStates {
-    /* 0x0000 */ u8 unk0000[0x11ec];
-    /* 0x11EC */ RenderStateStack stacks[7];
-};
-
-// Pop and return the previous render state, applying the newly exposed state if needed.
-extern "C" s32 renderCtxPopState(IndexedRenderStates *context, u32 index)
+/* Pops the context's stack `index` (RenderStackKind) and returns the state popped, applying the newly exposed
+ * state if needed. */
+extern "C" s32 renderCtxPopState(RenderCtx *context, u32 index)
 {
     RenderStateStack *stack = &context->stacks[index];
     s32 previous = stack->entries[stack->count];

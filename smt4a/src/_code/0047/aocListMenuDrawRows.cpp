@@ -81,7 +81,7 @@ extern "C" void aocListMenuDrawRows(ListMenu *menu)
     s32 last = FUN_0031d174(menu->holder);
     size40Set(&menu->slider, resourceDispatchTaggedOperation(menu->holder), last);
     numberPanelDraw(&menu->slider, 0x81);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     skinObjectUpdateMatrices(g_renderCtx);

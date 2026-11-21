@@ -17,7 +17,7 @@ extern "C" {
 u32 countUnlockedSlots();
 u32 flagCountUnlockedSlots(u32 flags);
 void statusReplaceSkills(u16 *skills, u8 count);
-void FUN_002e2fb0(u16 *skills, u8 count);
+void statusRefreshSkillsMarkNew(u16 *skills, u8 count);
 StatusRefreshMemberView *partyMemberFindById(u32 id);
 s32 statusCollectUnlearnedSkillsAboveLevel(u16 memberId, u32 level, const u16 *skills, u32 *result, s32 skip);
 void statusDownRestoreTabForMode();
@@ -47,7 +47,7 @@ void statusPanelRefreshSelection(s32 alternate)
         count = flagCountUnlockedSlots(0);
     statusReplaceSkills(statusPrimarySelection(data)->skills, count);
     if (alternate != 0)
-        FUN_002e2fb0(reinterpret_cast<StatusSelectionRecord *>(data->unk18B0)->skills, count);
+        statusRefreshSkillsMarkNew(reinterpret_cast<StatusSelectionRecord *>(data->unk18B0)->skills, count);
     u32 result[4] = {0, 0, 0, 0};
     if (selection->memberId > 0 && data->unk1E66 != 6) {
         s32 skip;

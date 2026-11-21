@@ -18,11 +18,11 @@ void partyPanelDrawHighlight(s32 index, s32 x, s32 y, u32 flags, s32 highlighted
         efctSetSpeed(vec2GetSpeed(&panel->sprites[PARTY_PANEL_SPRITE_HIGHLIGHT]) * speed);
         RenderCtxA *context = g_renderCtx;
         s32 state = packNibblesAndByte(6, 1, 0);
-        renderStackSet(&context->stackB, state);
+        renderStackSet(context->stacks + RENDER_STACK_B, state);
         texDrawTableEntryAtStoredOrigin(2, 0x11, 0x4f, origin->x + x, origin->y + y, flags);
         context = g_renderCtx;
         state = packNibblesAndByte(6, 7, 0);
-        renderStackSet(&context->stackB, state);
+        renderStackSet(context->stacks + RENDER_STACK_B, state);
         efctSetSpeed(1.0f);
         return;
     }

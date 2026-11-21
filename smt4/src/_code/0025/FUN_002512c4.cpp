@@ -17,7 +17,7 @@ void FUN_002512c4(s32 entry, s32 x, s32 y, u32 flags, s32 selected)
     const TextureTableEntryIV *position = asdTMTexTableEntryAt(0x19, entry + 0x2D);
     RenderCtx *context = g_titleScene;
     s32 blend = packNibblesAndByte(6, 1, 0);
-    renderStackSet(&context->stackB, blend);
+    renderStackSet(context->stacks + RENDER_STACK_B, blend);
     if (selected != 0) {
         efctSetSpeed(vec2GetSpeed(&panel->sprites[PARTY_PANEL_SPRITE_HIGHLIGHT]));
         texDrawTableEntryAtStoredOrigin(2, 0x19, 0x10, position->x + x, position->y + y, flags);
@@ -27,6 +27,6 @@ void FUN_002512c4(s32 entry, s32 x, s32 y, u32 flags, s32 selected)
     }
     context = g_titleScene;
     blend = packNibblesAndByte(6, 7, 0);
-    renderStackSet(&context->stackB, blend);
+    renderStackSet(context->stacks + RENDER_STACK_B, blend);
 }
 }

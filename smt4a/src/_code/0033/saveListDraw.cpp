@@ -39,7 +39,7 @@ void FUN_0037eb64(SaveListWork *work, s32 x, s32 y);
 void saveListDraw(SaveListWork *work)
 {
     RenderCtxA *context = g_renderCtx;
-    renderStackPush(&context->stackA, renderCtxPackPassFlags(1, 0));
+    renderStackPush(context->stacks + RENDER_STACK_A, renderCtxPackPassFlags(1, 0));
     gxResetColorQuadToWhite();
     FUN_0037e8a4(work);
 
@@ -84,7 +84,7 @@ void saveListDraw(SaveListWork *work)
     FUN_0037eb64(work, x, y);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
 }
 
 } /* extern "C" */

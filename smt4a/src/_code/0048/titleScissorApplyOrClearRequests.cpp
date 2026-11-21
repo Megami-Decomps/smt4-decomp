@@ -24,7 +24,7 @@ void titleScissorApplyOrClearRequests(TitleScissorOwner *owner, s32 clip)
         y = offset[1] + y;
         renderSetClippedScissor(x, y, width, height);
     } else {
-        renderStackSetCounted(&g_renderCtx->scissor, 0);
+        renderStackSetCounted(g_renderCtx->stacks + RENDER_STACK_SCISSOR, 0);
     }
 }
 

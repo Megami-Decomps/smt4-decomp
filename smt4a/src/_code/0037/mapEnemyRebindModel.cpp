@@ -1,5 +1,5 @@
 #include "gamedata/EncounterSelection.h"
-/* NON_MATCHING: signed ownership flags and record lookup shape recovered; saved pointer roles, registration guard and owned-model reset stores differ. */
+/* NON_MATCHING: signed ownership flags, record lookup and the owned model's delete-and-clear (retail stores the NULL twice) recovered; remaining: the slot and record pointers swap r4/r5, and the build hoists model->body above the owned test (retail loads it in each arm), which also stops the registered test from being predicated. */
 #include "shard/W4_Match1b_RegisteredHandle.h"
 #include "gamedata/NkmEnemyRecord.h"
 #include "gamedata/NkmEnemyLookup.h"
@@ -46,8 +46,10 @@ void mapEnemyRebindModel(MapEnemyEntryA *slot, s32 id, u32 kind)
         }
         MapEnemyA *pool = g_mapEnemy;
         if (slot->model != NULL) {
-            if (slot->owned != 0)
+            if (slot->owned != 0) {
                 delete slot->model;
+                slot->model = NULL;
+            }
             slot->model = NULL;
             slot->active = 0;
             slot->behavior = 0;

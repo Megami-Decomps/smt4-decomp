@@ -18,7 +18,7 @@ u32 tmnlDrawDestinationName()
             textDrawString(150.0f, 0.0f, 0.0f, 3, 1.0f, -1, 1.0f, g_tmnlEntries[work->nameIndex].text);
         RenderCtx *scene = g_titleScene;
         renderCtxPushA(scene, renderCtxPackPassFlags(1, 0));
-        renderStackPop(&g_titleScene->stackA);
+        renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     }
     return 0;
 }

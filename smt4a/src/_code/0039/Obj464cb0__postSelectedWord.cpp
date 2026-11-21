@@ -4,13 +4,6 @@
 
 #include "camp/RenderCtxA.h"
 
-/* unit-local: the draw context seen as its array of render-state stacks (from 0x11F8: D, E, F, A, C, G, B;
- * RenderCtxA names them one by one). */
-struct RenderCtxStacksA {
-    /* 0x0000 */ u8 unk0000[0x11F8];
-    /* 0x11F8 */ RenderStateStack stacks[7];
-};
-
 extern "C" {
 void cursorResetFromParam(void);
 void asdModelCommandBlockRelease(void);
@@ -26,19 +19,12 @@ static void commandQueuePushPair(u32 first, u32 second)
     g_modelCommandWordCount += 2;
 }
 
-/* The current (top) state of render-state stack `index`. */
-static __inline u32 renderStackTop(RenderCtxA *context, s32 index)
-{
-    RenderCtxStacksA *stacks = (RenderCtxStacksA *)context;
-    return stacks->stacks[index].entries[stacks->stacks[index].count];
-}
-
 /* Posts this object's flags merged with the current state of render stack G (id 0xf0107), then its 3-bit mode
  * field (0, 1, 2 for modes 6/7, else 3) shifted into the top byte (id 0x80126). */
 void Obj464cb0::postSelectedWord()
 {
     cursorResetFromParam();
-    commandQueuePushPair(renderStackTop(g_renderCtx, 5) | ((u32)this & 0xfffff0ff), 0xf0107);
+    commandQueuePushPair(renderCtxStackTop(g_renderCtx, RENDER_STACK_G) | ((u32)this & 0xfffff0ff), 0xf0107);
     u32 mode = ((u32)this & 0x70) >> 4;
     if (mode != 0 && mode != 1) {
         if (mode == 6 || mode == 7) {

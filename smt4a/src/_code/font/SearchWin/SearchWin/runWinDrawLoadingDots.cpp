@@ -10,13 +10,13 @@
 /* Pushes the evaluated state on the title scene's second stack. */
 static __inline void titleScenePushSecond(RenderCtxA *scene, s32 state)
 {
-    renderStackPushCounted(&scene->stackB, state);
+    renderStackPushCounted(scene->stacks + RENDER_STACK_B, state);
 }
 
 /* Pops the title scene's first stack. */
 static __inline void titleScenePopFirst(RenderCtxA *scene)
 {
-    renderStackPop(&scene->stackA);
+    renderStackPop(scene->stacks + RENDER_STACK_A);
 }
 
 extern "C" {
@@ -49,7 +49,7 @@ u8 runWinDrawLoadingDots(void)
         RenderCtxA *scene = g_renderCtx;
         titleScenePushSecond(scene, packNibblesAndByte(6, 1, 0));
         texDrawCompositeSprite(2, 8, 0x15, x, y, 102);
-        renderStackPopChecked(&g_renderCtx->stackB);
+        renderStackPopChecked(g_renderCtx->stacks + RENDER_STACK_B);
         TextureTableEntryIV *labelPoint = asdTMTexTableEntryAt(8, 0x16F);
         textDrawString((f32)(labelPoint->x + x), (f32)(labelPoint->y + y), 0.56640625f, 4, 0.0f,
                        0x57D8FFFF, win->window.alpha, (const char *)win->text);

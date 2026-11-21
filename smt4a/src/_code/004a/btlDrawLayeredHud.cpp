@@ -20,7 +20,7 @@ void btlDrawLayeredHud(u32 context, s32 x, s32 y, u32 value, f32 speed)
         texDrawTableEntryAtStoredOrigin(2, 12, index + 128, x, y, 21);
     render = g_renderCtx;
     blend = packNibblesAndByte(6, 7, 0);
-    renderStackSet(&render->stackB, blend);
+    renderStackSet(render->stacks + RENDER_STACK_B, blend);
     TextureTableEntryIV *layout = asdTMTexTableEntryAt(12, 133);
     uiDrawItemOrStatusIcon(value, layout->x + x, layout->y + y, 26, 0);
     efctSetSpeed(1.0f);

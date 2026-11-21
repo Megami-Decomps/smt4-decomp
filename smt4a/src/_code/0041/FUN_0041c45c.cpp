@@ -18,7 +18,7 @@ static void markerDrawBody(s32 x, s32 y, f32 speed)
     efctSetSpeed(speed);
     gxResetColorQuadToWhite();
     texDrawCompositeSprite(2, 0x2b, 6, x, y, 2);
-    renderStackPop(&g_renderCtx->stackB);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_B);
     efctSetSpeed(1.0f);
 }
 

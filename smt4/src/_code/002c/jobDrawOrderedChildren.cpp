@@ -51,7 +51,7 @@ u32 jobDrawOrderedChildren(u32 job)
     } while (changed);
     RenderCtx *render = g_titleScene;
     s32 renderState = gxPackFadeKindAlphaWord(6, 0.0f);
-    renderStackPush(&render->additional.stackC, renderState);
+    renderStackPush(render->stacks + RENDER_STACK_C, renderState);
     if (work->drawAll) {
         for (s32 i = 0; i < 10; ++i) {
             if (jobIsValid(work->jobs[i]))
@@ -60,7 +60,7 @@ u32 jobDrawOrderedChildren(u32 job)
     } else if (jobIsValid(work->single)) {
         titleFadeOverlayDraw(work->single, work->x, work->y);
     }
-    renderStackPop(&g_titleScene->additional.stackC);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_C);
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);
     return 0;

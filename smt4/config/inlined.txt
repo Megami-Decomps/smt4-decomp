@@ -68,3 +68,4 @@ partyWidgetSetHasTag = 0xe5c01023; // 0x1d1594 (FUN_001d13b0, twin of smt4a FUN_
 partyWidgetSetFlagA = 0xe5c01024; // 0x1d15ac (FUN_001d13b0: widget reloaded into r0, movne/moveq r1, then strb r1, [r0, #36]); smt4a has the same row
 partyWidgetSetTransitionHeld = 0xe5c01026; // 0x1d1404 0x1d14a8 0x1d1518 (FUN_001d13b0: ldr r0, [rN]; mov r1, #0; strb r1, [r0, #38] between the partyWidgetSetTransitionActive and partyWidgetSetTransitionPending stores); smt4a has the same row
 partyWidgetSetFlagB = 0xe5c01029; // 0x1d15c4 (FUN_001d13b0: widget reloaded into r0, movne/moveq r1, then strb r1, [r0, #41]); smt4a has the same row
+soundInitStackSet = 0xe8800006; // 0x120c94 (nwSoundSystemInitializeBuffers, after ldr r2, [r4, #20]; mov r1, r6 with r0 = &g_nwSoundTaskStack; call padding nop {0} x2 follows; smt4a's twin FUN_0015de34 has the same at 0x15df2c)

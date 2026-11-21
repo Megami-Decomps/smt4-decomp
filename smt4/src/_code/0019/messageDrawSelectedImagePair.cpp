@@ -6,7 +6,7 @@
 /* Pushes a state on the context's first stack (the depth read once, as in Apocalypse's requestImageDraw). */
 static __inline void pushCountedA(RenderCtx *context, int state)
 {
-    renderStackPushCounted(&context->stackA, state);
+    renderStackPushCounted(context->stacks + RENDER_STACK_A, state);
 }
 
 extern "C" {
@@ -34,7 +34,7 @@ void messageDrawSelectedImagePair(const MessageImageSelector *owner, const f32 *
     texDrawCompositeSprite(2, 0x39, images.pairs[owner->selection].first, depth, 0, 11);
     depth = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.33f);
     texDrawTableEntryAtStoredOrigin(2, 0x39, images.pairs[owner->selection].second, depth, 0, 12);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);
 }

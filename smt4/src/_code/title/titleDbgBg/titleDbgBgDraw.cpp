@@ -30,7 +30,7 @@ u32 titleDbgBgDraw()
     efctSetSpeed(1.0f);
     gxResetColorQuadToWhite();
     texDrawTableEntryAtStoredOrigin(2, 0, 0, 0, 0, 0xB);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     if (jyoucyuGetTableEntry(0) != NULL) {
         // Shift-JIS: full-width "PC load".
         textDrawString(296.0f, 194.0f, 0.0f, 3, 1.0f, 0xFFFFFFFF, 1.0f, "\x82\x6F\x82\x62\x83\x8D\x81\x5B\x83\x68");

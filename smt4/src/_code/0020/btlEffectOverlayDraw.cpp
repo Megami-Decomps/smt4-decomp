@@ -34,7 +34,7 @@ u32 btlEffectOverlayDraw(u32 process)
     }
     renderCtxPushC(g_titleScene, gxPackFadeKindAlphaWord(6, 0.0f));
     effect->object->methods->draw(effect->object);
-    renderStackPop(&g_titleScene->additional.stackC);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_C);
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);
     return 0;

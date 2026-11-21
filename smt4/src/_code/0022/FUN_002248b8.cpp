@@ -16,17 +16,17 @@ s32 FUN_002248b8(u32 job)
     if (work->started) {
         RenderCtx *context = g_titleScene;
         s32 state = gxPackFadeKindAlphaWord(6, 0.0f);
-        renderStackPush(&context->additional.stackC, state);
+        renderStackPush(context->stacks + RENDER_STACK_C, state);
         context = g_titleScene;
         state = renderCtxPackPassFlags(1, 0);
-        renderStackPush(&context->stackA, state);
+        renderStackPush(context->stacks + RENDER_STACK_A, state);
         context = g_titleScene;
         state = packNibblesAndByte(6, 1, 0);
-        renderStackPush(&context->stackB, state);
+        renderStackPush(context->stacks + RENDER_STACK_B, state);
         effectNodeUpdatePlacedChildren(work->current);
-        renderStackPop(&g_titleScene->stackB);
-        renderStackPop(&g_titleScene->stackA);
-        renderStackPop(&g_titleScene->additional.stackC);
+        renderStackPop(g_titleScene->stacks + RENDER_STACK_B);
+        renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
+        renderStackPop(g_titleScene->stacks + RENDER_STACK_C);
     }
     return 0;
 }

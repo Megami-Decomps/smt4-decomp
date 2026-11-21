@@ -69,7 +69,7 @@ u32 FUN_00201830(void)
             effectColorSet(&color, 1.0f, 1.0f, 1.0f, work->fade);
             renderCtxSelectTexture(g_titleScene, 0);
             gfxDrawQuadFourColors(0.0f, 0.0f, 400.0f, 240.0f, &color, &color, &color, &color, 0.95703125f);
-            renderStackPop(&g_titleScene->stackA);
+            renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
         }
     }
     renderCtxApplyTransforms(g_titleScene);

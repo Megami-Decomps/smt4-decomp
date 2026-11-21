@@ -24,18 +24,18 @@ u32 FUN_00229324(void)
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *ctx = g_renderCtx;
     u32 firstState = renderCtxPackPassFlags(1, 0);
-    renderStackPushCounted(&ctx->stackA, firstState);
+    renderStackPushCounted(ctx->stacks + RENDER_STACK_A, firstState);
     ctx = g_renderCtx;
     if (scene->state == 13 && scene->step == 5 && uiSpriteGetCompletionState(&scene->banner) == 0) {
         if (scene->timer < 16) {
             s32 offset = scene->timer * -30;
             if (offset < -240)
                 offset = -240;
-            renderStackSet(&ctx->stackB, packNibblesAndByte(6, 1, 0));
+            renderStackSet(ctx->stacks + RENDER_STACK_B, packNibblesAndByte(6, 1, 0));
             if (offset > -240)
                 texDrawTableEntryAtStoredOrigin(2, 0x1D, 0x113, 0, offset, 0xF1);
             texDrawTableEntryAtStoredOrigin(2, 0x1D, 0x114, 0, offset + 240, 0xF1);
-            renderStackSet(&g_renderCtx->stackB, packNibblesAndByte(6, 7, 0));
+            renderStackSet(g_renderCtx->stacks + RENDER_STACK_B, packNibblesAndByte(6, 7, 0));
         }
         if (scene->timer >= 9) {
             efctSetSpeed(g_engineCleanupOwner.alpha);
@@ -43,16 +43,16 @@ u32 FUN_00229324(void)
             efctSetSpeed(1.0f);
         }
     }
-    renderStackPopChecked(&g_renderCtx->stackA);
+    renderStackPopChecked(g_renderCtx->stacks + RENDER_STACK_A);
     ctx = g_renderCtx;
     if (scene->state < 10) {
         if (scene->state != 0) {
             u32 secondState = renderCtxPackPassFlags(1, 0);
-            renderStackPushCounted(&ctx->stackA, secondState);
+            renderStackPushCounted(ctx->stacks + RENDER_STACK_A, secondState);
             FUN_004b0164(scene, vec2GetXInt(&scene->originSprite), vec2GetYInt(&scene->originSprite));
-            renderStackPop(&g_renderCtx->stackA);
+            renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
         }
-        renderStackSet(&g_renderCtx->stackB, packNibblesAndByte(6, 7, 0));
+        renderStackSet(g_renderCtx->stacks + RENDER_STACK_B, packNibblesAndByte(6, 7, 0));
         skinObjectUpdateMatrices(g_renderCtx);
         renderCtxResetColorScale(g_renderCtx);
     }

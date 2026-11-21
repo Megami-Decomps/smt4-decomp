@@ -9,7 +9,7 @@ int FUN_002371b0(void);
 int gpuSubmitFloatVectorsOrDefault(int *);
 int FUN_0032c808(void);
 int FUN_00409e78(int, unsigned char [64], int);
-int FUN_0043b6c0(int *, unsigned char [64], int *, int);
+int nn_math_VEC3TransformCoordArray(int *, unsigned char [64], int *, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 13 slot(s), 52 byte(s) */
@@ -37,7 +37,7 @@ extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
 /* Supplied declaration required: FUN_0032c808. */
 /* Supplied declaration required: FUN_00409e78. */
-/* Supplied declaration required: FUN_0043b6c0. */
+/* Supplied declaration required: nn_math_VEC3TransformCoordArray. */
 
 
 } /* extern "C" */
@@ -117,7 +117,7 @@ void Obj42080c::draw()
   temp_v12 = *(unsigned int *)(temp_v1 + 0x3c);
   uStack_80 = *(unsigned int *)(temp_v1 + 0x40);
   temp_v13 = *(float *)(temp_v1 + 0x44) + temp_v4;
-  FUN_0043b6c0(&temp_v5,temp_v14,&temp_v5,4);
+  nn_math_VEC3TransformCoordArray(&temp_v5,temp_v14,&temp_v5,4);
   FUN_0032c808();
   temp_v1 = 0;
   do {

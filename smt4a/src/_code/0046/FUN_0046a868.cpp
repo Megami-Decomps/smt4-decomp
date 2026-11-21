@@ -48,9 +48,9 @@ void FUN_0046a868(TitleOverlayA *overlay)
         f32 preset = (f32)asdGxPresetsGetByKind(renderCtxGetStereoMode(g_renderCtx));
         f32 height = (f32)asdGxPresetsGetHeightByKind(renderCtxGetStereoMode(g_renderCtx));
         gxSubmitDrawZeroExtraParams(0.0f, 0.0f, height, preset, alpha, alpha, alpha, 0.0f, alpha);
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     }
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     skinObjectUpdateMatrices(g_renderCtx);

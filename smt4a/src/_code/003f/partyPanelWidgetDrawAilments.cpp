@@ -20,7 +20,7 @@ void gxSetMirroredClippedScissor(s32 x, s32 y, s32 w, s32 h, s32 arg);
 
 static void setDrawState(s32 value)
 {
-    renderStackSet(&g_renderCtx->scissor, value);
+    renderStackSet(g_renderCtx->stacks + RENDER_STACK_SCISSOR, value);
 }
 
 // Draws the status ailment icons of a member; with two or more it also draws the

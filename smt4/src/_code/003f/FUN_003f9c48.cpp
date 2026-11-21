@@ -1,4 +1,4 @@
-/* NON_MATCHING: written like its matched sibling curveSampleLinear (find, last key, early return); retail fuses the interval into a vnmls, schedules the Hermite arguments differently and calls HermiteC_FAST with bl rather than a tail call. */
+/* NON_MATCHING: written like its matched sibling curveSampleLinear (find, last key, early return); the interval now fuses into retail's vnmls, but retail schedules the Hermite arguments differently and calls HermiteC_FAST with bl rather than a tail call. */
 #include "common.h"
 
 extern "C" {
@@ -32,11 +32,11 @@ f32 FUN_003f9c48(PackedHermiteCurve *curve, f32 time)
         return curve->valueOffset + (f32)(key->packed >> 12) * curve->valueScale;
     }
     PackedHermiteKey *next = key + 1;
-    f32 nextTime = curve->frameScale * (f32)(next->packed & 0xfff);
+    f32 duration = curve->frameScale * (f32)(next->packed & 0xfff) - keyTime;
     return nn_math_ARMv6_HermiteC_FAST(curve->valueOffset + (f32)(key->packed >> 12) * curve->valueScale,
                                        (f32)key->outSlope * (1.0f / 256.0f),
                                        curve->valueOffset + (f32)(next->packed >> 12) * curve->valueScale,
-                                       (f32)next->inSlope * (1.0f / 256.0f), time - keyTime, nextTime - keyTime);
+                                       (f32)next->inSlope * (1.0f / 256.0f), time - keyTime, duration);
 }
 
 } /* extern "C" */

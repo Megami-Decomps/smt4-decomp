@@ -33,7 +33,7 @@ void shopMainDrawPairedJobs(void *work)
         FUN_002609d8(view->firstJob, 0, 0);
     if (jobIsValid(view->secondJob))
         FUN_002609d8(view->secondJob, 0, 0);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
 }

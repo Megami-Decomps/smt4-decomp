@@ -13,7 +13,7 @@ extern Obj420990DrawContext *g_renderCtx;
 void renderCtxSelectTexture(void *context, u32 texture);
 u32 renderCtxPackPassFlags(u32 mode, u32 value);
 void FUN_00409e78(void *filter, f32 *matrix, const void *motion);
-void FUN_0043b6c0(f32 *vertices, const f32 *matrix, f32 *output, u32 count);
+void nn_math_VEC3TransformCoordArray(f32 *vertices, const f32 *matrix, f32 *output, u32 count);
 void FUN_0032c808();
 void gpuSubmitFloatVectorsOrDefault(const f32 *color, f32 x, f32 y, f32 z, f32 u, f32 v);
 void FUN_002371b0();
@@ -33,7 +33,7 @@ void Obj420990::draw()
     }
     f32 matrix[16];
     FUN_00409e78(this, matrix, &handles[0]);
-    FUN_0043b6c0(&points[0][0], matrix, &points[0][0], 4);
+    nn_math_VEC3TransformCoordArray(&points[0][0], matrix, &points[0][0], 4);
     FUN_0032c808();
     for (u32 vertex = 0; vertex < 4; ++vertex) {
         gpuSubmitFloatVectorsOrDefault(color, points[vertex][0], points[vertex][1],
@@ -43,7 +43,7 @@ void Obj420990::draw()
     renderCtxSelectTexture(g_renderCtx, ((FilterDrawTexture *)handles[1].handle)->handle);
     g_renderCtx->blend.replace(rects->blendB);
     FUN_00409e78(this, matrix, &handles[1]);
-    FUN_0043b6c0(&points[4][0], matrix, &points[4][0], 4);
+    nn_math_VEC3TransformCoordArray(&points[4][0], matrix, &points[4][0], 4);
     FUN_0032c808();
     for (u32 vertex = 4; vertex < 8; ++vertex) {
         gpuSubmitFloatVectorsOrDefault(color, points[vertex][0], points[vertex][1],

@@ -8569,3 +8569,14 @@
 00460e00 _ZN9Obj55c0e0D1Ev evidence FUN_00512388 stores _ZTV9Obj55c0e0+8 into 0x5c0f74 and registers this function (vtable slot 0) with __aeabi_atexit; native destructor (classes/Obj55c0e0.h)
 004611e4 _ZN9Obj55c130D1Ev evidence FUN_00512388 stores _ZTV9Obj55c130+8 into 0x5c0f78 and registers this function (vtable slot 0) with __aeabi_atexit; native destructor (classes/Obj55c130.h)
 004611e8 _ZN9Obj55c144D1Ev evidence FUN_00512388 stores _ZTV9Obj55c144+8 into 0x5c0f7c and registers this function (vtable slot 0) with __aeabi_atexit; native destructor (classes/Obj55c144.h)
+0043b6c0 nn_math_VEC3TransformCoordArray inferred nn::math VEC3TransformCoordArray, inside the nn::math block between nn_math_VEC3SafeNormalize and nn_math_ARMv6_HermiteC_FAST (twin of smt4 0x23b4f4)
+00492e20 terminalWindowInitTouchRegions inferred twin of smt4 FUN_0039f874 (asdTMTexTableEntryRect of table 19)
+0034c940 uniteConfirmResultPair inferred twin of smt4 uniteConfirmResultPair (same body): snapshots the chosen fusion result and opens its status screen
+004f8d90 btlLoadUncachedSourceModels inferred starts loading each source model not yet in the 50-slot battle model cache into the first free slot
+003eb0cc btlClearPartitionSlotFlags inferred clears the slot flags of every eligible combatant in the requested partition (actor category 2 or not)
+004042fc uiDrawStereoListScrollBar inferred draws a list's scroll bar (frame, then a thumb sized by the visible fraction) shifted by the stereo parallax, scissoring suspended
+003b7960 uiDrawMaskedSprite inferred draws a masked sprite: background, then the foreground clipped to the frame's rectangle with the outer scissoring suspended
+001aeb40 nn_cx_UncompressLZ inferred CTR-SDK nn::cx UncompressLZ (twin of smt4 0x14f16c)
+001aec9c nn_cx_UncompressRL inferred CTR-SDK nn::cx UncompressRL (twin of smt4 0x14f2c8)
+001aeddc nn_cx_UncompressHuffman inferred CTR-SDK nn::cx UncompressHuffman (twin of smt4 0x14f408)
+001aeecc nn_cx_GetUncompressedSize inferred CTR-SDK nn::cx GetUncompressedSize (twin of smt4 0x14f4f8)

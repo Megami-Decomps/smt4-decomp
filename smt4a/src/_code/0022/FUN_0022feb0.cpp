@@ -1,4 +1,4 @@
-/* NON_MATCHING: Counter values and nonzero-index lists are reconstructed; list append/count updates and persistent pointers allocate different registers/frame slots. */
+/* NON_MATCHING: one register: retail computes the counter-46 difference (play total minus counter B) into r2, the build into r0. */
 #include "gamedata/PlayLogTable.h"
 #include "camp/Config/Config.h"
 #include "gamedata/GameDataAccess.h"
@@ -19,17 +19,35 @@ u32 gameCountersGetWord(u8 counter);
 u32 gameDataGetTableValue();
 }
 
+/* Play log row `index`, or NULL past the end: dataTableGetEntry37's body, which retail inlines here. */
+static __inline PlayLogRecord *playLogRowAt(u32 index)
+{
+    void *table;
+    PlayLogRecord *entries;
+    u32 count;
+
+    table = dataTableGet(0x37, 0);
+    entries = static_cast<PlayLogRecord *>(dataTableGetEntries(table));
+    count = dataTableGetCount(table);
+    if (index >= count) {
+        entries = NULL;
+    } else {
+        entries = entries + index;
+    }
+    return entries;
+}
+
 /* Rebuild nonzero-counter lists, applying the two special counter interpretations. */
 extern "C" void FUN_0022feb0(CounterSelectionWork *work)
 {
     if (work == NULL) {
         return;
     }
-    DataTableView<PlayLogRecord> definitions(0x37, 0);
+    PlayLogRecord *records;
+    s32 count = playLogRecords(&records);
     sysMemClear(&work->first, sizeof(work->first) + sizeof(work->second));
-    for (s32 i = 0; i < static_cast<s32>(definitions.count); ++i) {
-        DataTableView<PlayLogRecord> current(0x37, 0);
-        const PlayLogRecord *definition = current.at(i);
+    for (s32 i = 0; i < count; ++i) {
+        const PlayLogRecord *definition = playLogRowAt(i);
         if (definition == NULL || definition->counter < 0) {
             continue;
         }
@@ -48,10 +66,12 @@ extern "C" void FUN_0022feb0(CounterSelectionWork *work)
             continue;
         }
         if (work->first.values[i] != 0) {
-            work->first.indices[work->first.count++] = static_cast<u16>(i);
+            work->first.indices[work->first.count] = static_cast<u16>(i);
+            work->first.count++;
         }
         if (work->second.values[i] != 0) {
-            work->second.indices[work->second.count++] = static_cast<u16>(i);
+            work->second.indices[work->second.count] = static_cast<u16>(i);
+            work->second.count++;
         }
     }
 }

@@ -100,8 +100,11 @@ local view or prototype, and keep the contract.
   conversions, and fill a newly queued payload through the returned action, not the queue context.
 - **`gfx/RenderStateStack.h`** and **`camp/RenderCtx.h`**: render-state caches. Use `RenderCtx` for
   IV and `RenderCtxA` for Apocalypse, with the context push/set wrappers when the state argument is
-  evaluated before locating the stack. `shard/S1ListPanel.h` supplies only the derived Apocalypse
-  scissor extension.
+  evaluated before locating the stack. The twelve stacks are one array, `stacks[RenderStackKind]`:
+  name a fixed stack as `ctx->stacks + RENDER_STACK_B` (armcc folds that like a field; `&ctx->stacks[K]`
+  schedules differently), read a top with `renderCtxStackTop(ctx, kind)` and replace it with
+  `renderCtxSetStackTop(ctx, kind, state)`. `shard/S1ListPanel.h` supplies only the Apocalypse scissor
+  suspend/resume helpers.
 - **`script/ScriptVm.h`**: the script interpreter. `ScriptVmProcess` is the process every opcode and
   command receives (`pc`, `depth`, tags, `ScriptVmValue` stack, `commandOwner`/`commandFrame`/
   `workValues`, variable tables); `ScriptContext`/`g_scrContext` holds the binary operators' operand

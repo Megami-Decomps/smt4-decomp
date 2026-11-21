@@ -55,20 +55,20 @@ void FUN_00117a70(s32 wide)
 
     RenderCtx *context = g_titleScene;
     s32 state = renderCtxPackPassFlags(1, 0);
-    renderStackPushCounted(&context->stackA, state);
+    renderStackPushCounted(context->stacks + RENDER_STACK_A, state);
     context = g_titleScene;
     switch (tex->hdr.blendMode) {
     case 0:
         state = packNibblesAndByte(6, 7, 0);
-        renderStackSet(&context->stackB, state);
+        renderStackSet(context->stacks + RENDER_STACK_B, state);
         break;
     case 1:
         state = packNibblesAndByte(6, 1, 0);
-        renderStackSet(&context->stackB, state);
+        renderStackSet(context->stacks + RENDER_STACK_B, state);
         break;
     case 2:
         state = packNibblesAndByte(6, 1, 2);
-        renderStackSet(&context->stackB, state);
+        renderStackSet(context->stacks + RENDER_STACK_B, state);
         break;
     }
     renderCtxSelectTexture(g_titleScene, surface);
@@ -81,9 +81,9 @@ void FUN_00117a70(s32 wide)
     context = g_titleScene;
     if (tex->hdr.blendMode != 0) {
         state = packNibblesAndByte(6, 7, 0);
-        renderStackSet(&context->stackB, state);
+        renderStackSet(context->stacks + RENDER_STACK_B, state);
     }
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
 }
 
 } /* extern "C" */

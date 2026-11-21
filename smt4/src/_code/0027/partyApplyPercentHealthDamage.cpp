@@ -1,4 +1,6 @@
-/* NON_MATCHING: explicit support-progress states and zero-health test now match; player clamps, unit-loop flag tests, and support reduction registers still differ. */
+/* NON_MATCHING: explicit support-progress states, the zero-health test, the unit-loop flag tests and the unit clamp
+ * (unitSetHpClamped, as in partyApplyNonlethalAilmentDamage) now match; the player clamp compares the other way round,
+ * the slot-list registers swap and the support reduction registers still differ. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
@@ -11,6 +13,19 @@ extern "C" {
 StatBlock *gameGetSupportUnitData();
 u16 rosterGetLeaderId();
 s32 table1bOr1cGetRecordValue(u32 id);
+}
+
+/* Sets a unit's HP, clamped to 1..maxHp (does nothing without a unit). */
+static __inline void unitSetHpClamped(StatBlock *unit, s16 hp)
+{
+    if (unit != NULL) {
+        s16 maximum = unit->maxHp;
+        if (hp > maximum)
+            hp = maximum;
+        else if (hp < 1)
+            hp = 1;
+        unit->hp = hp;
+    }
 }
 
 static __inline s32 healthReduction(s32 maximum, s32 percentage)
@@ -59,22 +74,18 @@ extern "C" void partyApplyPercentHealthDamage(s32 group, s32 percentage)
             if (slots[i] < 0)
                 continue;
             StatBlock *unit = gameGetUnitRecord(slots[i]);
-            u16 flags = unit->ailments;
-            if ((flags & 2) || (flags & 0x400) || (flags & 4))
+            if (unit->ailments & 2)
+                continue;
+            if (unit->ailments & 0x400)
+                continue;
+            if (unit->ailments & 4)
                 continue;
             s32 maximum = unit->maxHp;
             s32 previous = unit->hp;
             s32 remaining = previous - healthReduction(maximum, percentage);
             if (remaining <= 0)
                 remaining = 1;
-            s32 stored = static_cast<s16>(remaining);
-            if (unit) {
-                if (stored > maximum)
-                    stored = maximum;
-                else if (stored < 1)
-                    stored = 1;
-                unit->hp = static_cast<s16>(stored);
-            }
+            unitSetHpClamped(unit, remaining);
             s32 amount = previous - remaining;
             if (amount > 0)
                 gameCounterAddSaturating(23, amount);

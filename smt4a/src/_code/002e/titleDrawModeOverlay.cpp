@@ -27,12 +27,12 @@ u32 titleDrawModeOverlay()
     case 3:
         renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
         texDrawTableEntryAtStoredOrigin(2, 0x2a, 6000, 0, 0, 0xb);
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
         break;
     case 4:
         renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
         texDrawTableEntryAtStoredOrigin(2, 0x2a, 7000, 0, 0, 0xb);
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
         break;
     case 6:
     case 14:

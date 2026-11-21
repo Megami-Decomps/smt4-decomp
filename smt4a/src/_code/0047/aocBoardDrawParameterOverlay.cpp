@@ -26,7 +26,7 @@ u32 aocBoardDrawParameterOverlay(u32 job)
     efctSetSpeed(vec2GetSpeed(&work->sprites[0]));
     texDrawTableEntryAtStoredOrigin(2, 8, 0x14F, 0, 0, 6);
     efctSetSpeed(1.0f);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     gxResetColorQuadToWhite();
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);

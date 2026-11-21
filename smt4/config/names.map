@@ -3207,7 +3207,7 @@
 0031f0fc scrCommBattleGroupHasNegativeStat
 002cf58c statusDownSetSelectedEntryDescription
 002c8b80 lmapFindNearestMatchingTargetPoint
-0014f16c lzDecompressBytes
+0014f16c nn_cx_UncompressLZ
 00313588 effBlurFilterCreateRandomSamples
 00336368 btlAssignGroupedActionOrder
 0038959c aocFindTable03RecordByKey
@@ -4803,7 +4803,7 @@
 002ba8f4 kernelThreadJoinAndClose
 002aff0c slotOwnerDestroyAllSlots
 00294f64 resourceReleaseReference
-0014f4f8 lzGetAdvertisedSize
+0014f4f8 nn_cx_GetUncompressedSize
 003472f0 _ZN10SoundObj3cD1Ev
 00376974 _ZN11SoundHandleD1Ev
 003809a0 _ZN13SoundHeapBaseD1Ev
@@ -5059,8 +5059,8 @@
 002f5390 saveMediaReadBuffer
 002f55cc saveMediaWriteBuffer
 0019dc90 mapTimerBanksReset
-0014f408 huffmanDecompress
-0014f2c8 rleDecompress
+0014f408 nn_cx_UncompressHuffman
+0014f2c8 nn_cx_UncompressRL
 00233db8 aocLoadingTaskStart
 00142f30 asdGxCommandBufferGetCopyTarget
 0014d2f8 nw_snd_internal_Util_BitFlag_GetValueOrZero
@@ -6170,3 +6170,8 @@
 002d02b0 fusionComparePairsByParentPriorityDescending
 003f92a4 curveSampleLinearPacked
 003dfaf0 gpuDepthRangeEmitCommands
+002960ec uiUpdateChainedSpriteRows
+00224ce0 gfxSelectStatusIconPair
+0023b4f4 nn_math_VEC3TransformCoordArray
+0039f874 terminalWindowInitTouchRegions
+002e2fb0 statusRefreshSkillsMarkNew

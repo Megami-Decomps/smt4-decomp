@@ -68,7 +68,7 @@ void effectNodeUpdatePlacedChildren(EffectNode *node)
     lastFrame = node->frame - 1;
     scale = node->scale * node->childScale;
     child = node->firstChild;
-    renderStackPushCounted(&g_titleScene->stackB, g_titleScene->stackB.entries[g_titleScene->stackB.count]);
+    renderStackPushCounted(g_titleScene->stacks + RENDER_STACK_B, g_titleScene->stacks[RENDER_STACK_B].entries[g_titleScene->stacks[RENDER_STACK_B].count]);
     for (; child != NULL; child = child->next) {
         if (child->startFrame > lastFrame || (child->frame & 2) != 0) {
             continue;
@@ -112,7 +112,7 @@ void effectNodeUpdatePlacedChildren(EffectNode *node)
         g_handlerTable[child->resource->type].update(child->resource->data);
     }
     node->flags &= ~EFFECT_NODE_PLACED;
-    renderStackPop(&g_titleScene->stackB);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_B);
 }
 
 } /* extern "C" */

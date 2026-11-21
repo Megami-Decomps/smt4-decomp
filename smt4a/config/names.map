@@ -4304,7 +4304,7 @@
 004c6298 btlSelectFirstPartyAssistParticipant
 003fe718 moriModelBodyReleaseOwnedStorage
 0029f188 jyoucyuDrawLoadingOverlay
-001aeb40 lzDecompressBytes
+001aeb40 nn_cx_UncompressLZ
 00349b38 saveLoadReadThreadWorker
 00478778 _ZN7AocMenu20releaseStepResourcesEv
 0035cb1c scrCommShowHowTo
@@ -6359,7 +6359,7 @@
 001d1108 resourceResultMatchesRemappedCodes
 0040a244 resourceReleaseReference
 0018449c devilCompareRecordIds
-001aeecc lzGetAdvertisedSize
+001aeecc nn_cx_GetUncompressedSize
 002ba7b8 scrCommSetStoryFlag
 002b91ec fieldSceneResetEntryState
 002add8c campFusionResultCommand
@@ -6651,8 +6651,8 @@
 003180c4 scrSetStringSlot
 00312d6c mapSelectRoomMusicIfActive
 0019e290 placeWindowDestroy
-001aeddc huffmanDecompress
-001aec9c rleDecompress
+001aeddc nn_cx_UncompressHuffman
+001aec9c nn_cx_UncompressRL
 0047bcdc aocLoadingTaskStart
 003fd7c0 moriModelUnitStartMaterialAnimation
 00301a08 btlGetEntryChoiceRange
@@ -7895,3 +7895,10 @@
 00460e00 _ZN9Obj55c0e0D1Ev
 004611e4 _ZN9Obj55c130D1Ev
 004611e8 _ZN9Obj55c144D1Ev
+0043b6c0 nn_math_VEC3TransformCoordArray
+00492e20 terminalWindowInitTouchRegions
+0034c940 uniteConfirmResultPair
+004f8d90 btlLoadUncachedSourceModels
+003eb0cc btlClearPartitionSlotFlags
+004042fc uiDrawStereoListScrollBar
+003b7960 uiDrawMaskedSprite

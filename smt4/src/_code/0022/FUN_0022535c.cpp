@@ -26,7 +26,7 @@ u32 FUN_0022535c(void)
         }
         FUN_0032fe34(portrait, (f32)offset);
     }
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);
     return 0;

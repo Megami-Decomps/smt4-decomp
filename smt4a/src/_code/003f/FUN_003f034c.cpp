@@ -62,7 +62,7 @@ void btlUiEnterStateEntryStartup(BtlUiA *block);
 void FUN_004fbf90(s32 arg);
 void FUN_003eafa0(BattleFlagsState *battle, s32 arg);
 void FUN_003f22fc(BattleFlagsState *battle, s32 arg);
-void FUN_003eb0cc(BattleFlagsState *battle, s32 arg);
+void btlClearPartitionSlotFlags(BattleFlagsState *battle, s32 arg);
 void FUN_004c6294(void);
 
 /* Clamps a byte counter's increment at 255. */
@@ -107,7 +107,7 @@ void FUN_003f034c(BattleFlagsState *battle)
             g_btlMain.state->phase = 24;
         FUN_003eafa0(battle, 0);
         FUN_003f22fc(battle, 1);
-        FUN_003eb0cc(battle, 0);
+        btlClearPartitionSlotFlags(battle, 0);
         FUN_004c6294();
         return;
     }
@@ -125,7 +125,7 @@ void FUN_003f034c(BattleFlagsState *battle)
         g_btlMain.state->phase = 24;
     FUN_003eafa0(battle, 1);
     FUN_003f22fc(battle, 0);
-    FUN_003eb0cc(battle, 1);
+    btlClearPartitionSlotFlags(battle, 1);
     u32 value = battle->counterD + 1;
     if ((u16)value >= 255)
         value = 255;

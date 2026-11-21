@@ -114,17 +114,17 @@ void FUN_0013231c(SceneDrawJob *job, u32 stateA, s32 which, s32 dumpCommands)
         state->sceneBuilt = 1;
     }
     if (state->recorded == 0) {
-        if (pass != 0) {
-            gfxUploadShaderMatricesIfChanged(renderer, stateA, 0);
-        } else {
+        if (pass == 0) {
             asdGxCommandListStartRecord(state->recorder);
+        } else {
+            gfxUploadShaderMatricesIfChanged(renderer, stateA, 0);
         }
         if (dumpCommands != 0) {
             u32 *cursor = g_commandBufferCursor;
             sceneDrawJobRecords(job, renderer);
             u32 *end = cursor != NULL ? g_commandBufferCursor : NULL;
             if (cursor != NULL && end != NULL && end - cursor > 0) {
-                char line[260];
+                char line[0x100];
                 s32 length = 0;
                 s32 words = 0;
 

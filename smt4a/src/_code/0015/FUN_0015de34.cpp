@@ -1,5 +1,7 @@
-/* NON_MATCHING: register allocation: retail keeps the pre-advance cursor in a fresh register (mov r6,r5; add r5,..,r6) and emits a stm for the DAT_0059dbac pair; two compiler nop{0} before the VoiceManager call are missing. */
+/* NON_MATCHING: register allocation: retail keeps the pre-advance cursor in a fresh register (mov r6,r5; add r5,..,r6);
+ * the task stack pair is set through the linker-inlined soundInitStackSet (its stm and call padding now match). */
 #include "AsdSDK/AsdDebugHooks.h"
+#include "shard/W6_W6Match7_SoundInit.h"
 
 /* Sound system memory layout, read from the caller's setup block. */
 struct SndInitConfig {
@@ -23,19 +25,14 @@ struct SndState {
     /* 0x4 */ u32 voiceCount;
 };
 
-struct SndMemoryRange {
-    /* 0x0 */ s32 base;
-    /* 0x4 */ s32 size;
-};
-
 extern SndState DAT_0059dba4;
-extern SndMemoryRange DAT_0059dbac;
+extern SoundInitStack DAT_0059dbac;
 extern u8 DAT_00646b38;
 
 extern "C" {
 
 int FUN_00174ae0(void);
-int FUN_00174b5c(int, u32, SndMemoryRange *);
+int FUN_00174b5c(int, u32, SoundInitStack *);
 int FUN_0017561c(int, int, u32);
 int objectCommandQueueGet(void);
 int FUN_001757fc(void);
@@ -86,8 +83,7 @@ void FUN_0015de34(SndInitConfig *cfg, int offset)
         offset = cfg->managerSize + base;
         FUN_001b1998();
         nw_snd_internal_TaskManager_Initialize();
-        DAT_0059dbac.base = base;
-        DAT_0059dbac.size = cfg->managerSize;
+        soundInitStackSet(&DAT_0059dbac, (u8 *)base, cfg->managerSize);
         int voiceEnd = FUN_00175c30(nw_snd_internal_driver_VoiceManager_GetInstance(), DAT_0059dba4.voiceCount) + offset;
         int voiceSize = FUN_00175c30(nw_snd_internal_driver_VoiceManager_GetInstance(), DAT_0059dba4.voiceCount);
         FUN_00175bb8(nw_snd_internal_driver_VoiceManager_GetInstance(), offset, voiceSize);

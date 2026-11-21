@@ -7,6 +7,27 @@
 
 #include "gfx/RenderStateStack.h"
 
+/* The draw context's render-state stacks, by index in its `stacks` array (IV from 0x11EC, Apocalypse
+ * from 0x11F8). The letters are the order the camp draw code was found to use them in; what the
+ * lettered stacks hold, and stacks 7 and 8, are not known yet. Fields keep their width and name this
+ * enum in a comment. */
+enum RenderStackKind {
+    RENDER_STACK_D = 0,
+    RENDER_STACK_E = 1,
+    RENDER_STACK_F = 2,
+    RENDER_STACK_A = 3,
+    RENDER_STACK_C = 4,
+    RENDER_STACK_G = 5,
+    RENDER_STACK_B = 6,
+    RENDER_STACK_SCISSOR = 9,          /* scissoring on (RENDER_STATE_SCISSOR) or off */
+    RENDER_STACK_SCISSOR_MINIMUM = 10, /* y | x << 16 */
+    RENDER_STACK_SCISSOR_MAXIMUM = 11,
+    RENDER_STACK_COUNT = 12
+};
+
+/* The scissor stack's state with scissoring on. */
+enum { RENDER_STATE_SCISSOR = 3 };
+
 /* The draw context (IV layout), which holds several render-state stacks. */
 typedef struct RenderCtx {
     union {
@@ -32,35 +53,17 @@ typedef struct RenderCtx {
         /* 0x0528 */ s32 stereoMode;
     };
     union {
-        /* 0x052C */ u8 unk052C[0xD20];
+        /* 0x052C */ u8 unk052C[0xCB8];
         struct {
             u8 unk052C[0xC8];
             /* 0x05F4 */ u8 type;
         } cameraSelection;
-        struct {
-            u8 unk052C[0xCB8];
-            /* 0x11E4 */ struct AsdTexture *selectedTexture; /* texture renderCtxSelectTexture keeps applied */
-            /* 0x11E8 */ s8 selectedTextureDirty;            /* forces the texture to be applied again */
-            /* 0x11E9 */ u8 selectedTextureState;            /* 0/1: texture bound, 3: just applied */
-            /* 0x11EA */ u8 unk11EA[2];
-            /* 0x11EC */ RenderStateStack stackD;
-            /* 0x120C */ RenderStateStack stackE;
-            /* 0x122C */ RenderStateStack stackF;
-        } depthStacks;
     };
-    /* 0x124C */ RenderStateStack stackA;
-    union {
-        /* 0x126C */ u8 unk126C[0x40];
-        struct {
-            /* 0x126C */ RenderStateStack stackC;
-            /* 0x128C */ RenderStateStack stackG;
-        } additional;
-    };
-    /* 0x12AC */ RenderStateStack stackB;
-    /* 0x12CC */ u8 unk12CC[0x40];
-    /* 0x130C */ RenderStateStack scissor;        /* scissoring on (RENDER_STATE_SCISSOR) or off */
-    /* 0x132C */ RenderStateStack scissorMinimum; /* y | x << 16 */
-    /* 0x134C */ RenderStateStack scissorMaximum;
+    /* 0x11E4 */ struct AsdTexture *selectedTexture; /* texture renderCtxSelectTexture keeps applied */
+    /* 0x11E8 */ s8 selectedTextureDirty;            /* forces the texture to be applied again */
+    /* 0x11E9 */ u8 selectedTextureState;            /* 0/1: texture bound, 3: just applied */
+    /* 0x11EA */ u8 unk11EA[2];
+    /* 0x11EC */ RenderStateStack stacks[RENDER_STACK_COUNT]; /* indexed by RenderStackKind */
 } RenderCtx;
 
 /* Apocalypse layout: the stacks are 0xC further on. */
@@ -106,41 +109,23 @@ typedef struct RenderCtxA {
         /* 0x06FC */ u8 *camera; /* the active camera's node (view matrix at +0x38) */
     };
     union {
-        /* 0x0700 */ u8 unk0700[0xB58];
+        /* 0x0700 */ u8 unk0700[0xAF0];
         struct {
             /* 0x0700 */ u8 unk0700[0xAD8];
             /* 0x11D8 */ f32 colorScale[4];
             /* 0x11E8 */ s8 colorScaleDirty; /* forces the next colour-scale upload */
-            /* 0x11E9 */ u8 unk11E9[0x6F];
+            /* 0x11E9 */ u8 unk11E9[7];
         } color;
         struct {
             u8 unk0700[0xA98];
             /* 0x1198 */ u8 target[0x40];
         } display;
-        struct {
-            u8 unk0700[0xAF0];
-            /* 0x11F0 */ struct AsdTexture *selectedTexture; /* texture renderCtxSelectTexture keeps applied */
-            /* 0x11F4 */ s8 selectedTextureDirty;            /* forces the texture to be applied again */
-            /* 0x11F5 */ u8 selectedTextureState;            /* 0/1: texture bound, 3: just applied */
-            /* 0x11F6 */ u8 unk11F6[2];
-            /* 0x11F8 */ RenderStateStack stackD;
-            /* 0x1218 */ RenderStateStack stackE;
-            /* 0x1238 */ RenderStateStack stackF;
-        } depthStacks;
     };
-    /* 0x1258 */ RenderStateStack stackA;
-    union {
-        /* 0x1278 */ u8 unk1278[0x40];
-        struct {
-            /* 0x1278 */ RenderStateStack stackC;
-            /* 0x1298 */ RenderStateStack stackG;
-        } additional;
-    };
-    /* 0x12B8 */ RenderStateStack stackB;
-    /* 0x12D8 */ u8 unk12D8[0x40];
-    /* 0x1318 */ RenderStateStack scissor;        /* scissoring on (RENDER_STATE_SCISSOR) or off */
-    /* 0x1338 */ RenderStateStack scissorMinimum; /* y | x << 16 */
-    /* 0x1358 */ RenderStateStack scissorMaximum;
+    /* 0x11F0 */ struct AsdTexture *selectedTexture; /* texture renderCtxSelectTexture keeps applied */
+    /* 0x11F4 */ s8 selectedTextureDirty;            /* forces the texture to be applied again */
+    /* 0x11F5 */ u8 selectedTextureState;            /* 0/1: texture bound, 3: just applied */
+    /* 0x11F6 */ u8 unk11F6[2];
+    /* 0x11F8 */ RenderStateStack stacks[RENDER_STACK_COUNT]; /* indexed by RenderStackKind */
 } RenderCtxA;
 
 typedef char RenderCtxSizeCheck[sizeof(RenderCtx) == 0x136C ? 1 : -1];
@@ -165,6 +150,15 @@ typedef char RenderCtxAStereoOffsetCheck[
     offsetof(RenderCtxA, stereoMode) == 0x52C ? 1 : -1];
 typedef char RenderCtxAColorScaleOffsetCheck[offsetof(RenderCtxA, color.colorScale) == 0x11D8 ? 1 : -1];
 typedef char RenderCtxAColorDirtyOffsetCheck[offsetof(RenderCtxA, color.colorScaleDirty) == 0x11E8 ? 1 : -1];
+typedef char RenderCtxStacksOffsetCheck[
+    offsetof(RenderCtx, stacks) == 0x11EC &&
+    offsetof(RenderCtx, stacks[RENDER_STACK_A]) == 0x124C &&
+    offsetof(RenderCtx, stacks[RENDER_STACK_B]) == 0x12AC &&
+    offsetof(RenderCtx, stacks[RENDER_STACK_SCISSOR]) == 0x130C &&
+    offsetof(RenderCtxA, stacks) == 0x11F8 &&
+    offsetof(RenderCtxA, stacks[RENDER_STACK_A]) == 0x1258 &&
+    offsetof(RenderCtxA, stacks[RENDER_STACK_B]) == 0x12B8 &&
+    offsetof(RenderCtxA, stacks[RENDER_STACK_SCISSOR]) == 0x1318 ? 1 : -1];
 typedef char RenderCtxAColorTargetOffsetCheck[offsetof(RenderCtxA, colorTarget.colorScaleTarget) == 0x530 ? 1 : -1];
 typedef char RenderCtxADisplayAreaOffsetCheck[
     offsetof(RenderCtxA, shownMode) == 0x5F8 &&
@@ -172,88 +166,110 @@ typedef char RenderCtxADisplayAreaOffsetCheck[
     offsetof(RenderCtxA, displayAreas.areaB) == 0x63C &&
     offsetof(RenderCtxA, display.target) == 0x1198 ? 1 : -1];
 
+/* The current (top) state of the context's stack `kind` (RenderStackKind). */
+static __inline s32 renderCtxStackTop(RenderCtx *context, s32 kind)
+{
+    return context->stacks[kind].entries[context->stacks[kind].count];
+}
+
+static __inline s32 renderCtxStackTop(RenderCtxA *context, s32 kind)
+{
+    return context->stacks[kind].entries[context->stacks[kind].count];
+}
+
+/* Replaces the current state of the context's stack `kind` (RenderStackKind), keeping its depth. */
+static __inline void renderCtxSetStackTop(RenderCtx *context, s32 kind, s32 state)
+{
+    renderStackSetCounted(&context->stacks[kind], state);
+}
+
+static __inline void renderCtxSetStackTop(RenderCtxA *context, s32 kind, s32 state)
+{
+    renderStackSetCounted(&context->stacks[kind], state);
+}
+
 /* Pushes `state` on the context's first stack; the stack is located after `state` is evaluated. */
 static __inline void renderCtxPushA(RenderCtx *context, int state)
 {
-    renderStackPush(&context->stackA, state);
+    renderStackPush(context->stacks + RENDER_STACK_A, state);
 }
 
 static __inline void renderCtxPushA(RenderCtxA *context, int state)
 {
-    renderStackPush(&context->stackA, state);
+    renderStackPush(context->stacks + RENDER_STACK_A, state);
 }
 
 /* renderCtxPushA through renderStackPushCountedDirect (depth kept in a local, apply condition written out). */
 static __inline void renderCtxPushACountedDirect(RenderCtx *context, int state)
 {
-    renderStackPushCountedDirect(&context->stackA, state);
+    renderStackPushCountedDirect(context->stacks + RENDER_STACK_A, state);
 }
 
 static __inline void renderCtxPushACountedDirect(RenderCtxA *context, int state)
 {
-    renderStackPushCountedDirect(&context->stackA, state);
+    renderStackPushCountedDirect(context->stacks + RENDER_STACK_A, state);
 }
 
 /* Pushes the evaluated state on the context's fourth stack (at 0x11EC). */
 static __inline void renderCtxPushD(RenderCtx *context, int state)
 {
-    renderStackPush(&context->depthStacks.stackD, state);
+    renderStackPush(context->stacks + RENDER_STACK_D, state);
 }
 
 static __inline void renderCtxPushD(RenderCtxA *context, int state)
 {
-    renderStackPush(&context->depthStacks.stackD, state);
+    renderStackPush(context->stacks + RENDER_STACK_D, state);
 }
 
 /* Pushes the evaluated state on the context's third stack. */
 static __inline void renderCtxPushC(RenderCtx *context, int state)
 {
-    renderStackPush(&context->additional.stackC, state);
+    renderStackPush(context->stacks + RENDER_STACK_C, state);
 }
 
 static __inline void renderCtxPushC(RenderCtxA *context, int state)
 {
-    renderStackPush(&context->additional.stackC, state);
+    renderStackPush(context->stacks + RENDER_STACK_C, state);
 }
 
 /* Pushes the evaluated state on the context's second stack. */
 static __inline void renderCtxPushB(RenderCtx *context, int state)
 {
-    renderStackPush(&context->stackB, state);
+    renderStackPush(context->stacks + RENDER_STACK_B, state);
 }
 
 static __inline void renderCtxPushB(RenderCtxA *context, int state)
 {
-    renderStackPush(&context->stackB, state);
+    renderStackPush(context->stacks + RENDER_STACK_B, state);
 }
 
 /* Replaces the second stack's current state after the argument has been evaluated. */
 static __inline void renderCtxSetB(RenderCtx *context, int state)
 {
-    renderStackSet(&context->stackB, state);
+    renderStackSet(context->stacks + RENDER_STACK_B, state);
 }
 
 static __inline void renderCtxSetB(RenderCtxA *context, int state)
 {
-    renderStackSet(&context->stackB, state);
+    renderStackSet(context->stacks + RENDER_STACK_B, state);
 }
 
 /* Pushes the evaluated state on the context's fifth stack. */
 static __inline void renderCtxPushE(RenderCtx *context, int state)
 {
-    renderStackPush(&context->depthStacks.stackE, state);
+    renderStackPush(context->stacks + RENDER_STACK_E, state);
 }
 
 /* Pushes the evaluated state on the context's sixth stack. */
 static __inline void renderCtxPushF(RenderCtx *context, int state)
 {
-    renderStackPush(&context->depthStacks.stackF, state);
+    renderStackPush(context->stacks + RENDER_STACK_F, state);
 }
 
 /* Pushes the evaluated state on the context's seventh stack. */
 static __inline void renderCtxPushG(RenderCtx *context, int state)
 {
-    renderStackPush(&context->additional.stackG, state);
+    renderStackPush(context->stacks + RENDER_STACK_G, state);
 }
 
 /* Switches the draw context to the layout of its current stereo phase (IV). */
@@ -279,12 +295,12 @@ extern "C" void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 #endif
 
 typedef char RenderCtxSelectedTextureOffsetCheck[
-    offsetof(RenderCtx, depthStacks.selectedTexture) == 0x11E4 &&
-    offsetof(RenderCtx, depthStacks.selectedTextureDirty) == 0x11E8 &&
-    offsetof(RenderCtx, depthStacks.selectedTextureState) == 0x11E9 &&
-    offsetof(RenderCtxA, depthStacks.selectedTexture) == 0x11F0 &&
-    offsetof(RenderCtxA, depthStacks.selectedTextureDirty) == 0x11F4 &&
-    offsetof(RenderCtxA, depthStacks.selectedTextureState) == 0x11F5 ? 1 : -1];
+    offsetof(RenderCtx, selectedTexture) == 0x11E4 &&
+    offsetof(RenderCtx, selectedTextureDirty) == 0x11E8 &&
+    offsetof(RenderCtx, selectedTextureState) == 0x11E9 &&
+    offsetof(RenderCtxA, selectedTexture) == 0x11F0 &&
+    offsetof(RenderCtxA, selectedTextureDirty) == 0x11F4 &&
+    offsetof(RenderCtxA, selectedTextureState) == 0x11F5 ? 1 : -1];
 
 
 extern "C" {

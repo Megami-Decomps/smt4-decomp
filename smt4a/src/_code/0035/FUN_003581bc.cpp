@@ -60,7 +60,7 @@ u32 FUN_003581bc(void)
                          1.0f, 0x57d8ffff, 1.0f, (const char *)text);
             gxResetColorQuadToWhite();
         }
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     }
     return 0;
 }

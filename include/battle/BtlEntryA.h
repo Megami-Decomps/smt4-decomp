@@ -125,4 +125,10 @@ typedef char BtlCombatantRecordLayoutCheck[
     offsetof(BattleCandidateRecord, flags) == 0x16 &&
     offsetof(BattleSlotSourceRecordA, id) == 0x62 && sizeof(BattleSlotSourceRecordA) == 0x64 ? 1 : -1];
 
+/* A unit's turn-order speed: its agility plus its battle speed bonus (the turn-order sorts compare it). */
+static __inline s16 btlUnitTurnSpeedA(const BtlUnitDataA *data)
+{
+    return data->agility + data->speedBonus;
+}
+
 #endif

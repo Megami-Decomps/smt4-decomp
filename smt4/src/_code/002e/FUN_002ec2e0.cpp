@@ -20,11 +20,11 @@ void FUN_002ec2e0(u32 text, u32 param2, s32 param3, s32 param4, s32 row, u32 spr
     texDrawTableEntryAtStoredOrigin(2, 0x39, sprite, origin->x, origin->y, 0x22);
     TextureTableEntryIV* clip = asdTMTexTableEntryAt(0x39, 0xE0);
     RenderCtx* context = g_titleScene;
-    renderStackSet(&context->scissor, 3);
+    renderStackSet(context->stacks + RENDER_STACK_SCISSOR, 3);
     gxSetMirroredClippedScissor(origin->x + clip->x, origin->y + clip->y, clip->placement->width, clip->placement->height, 1);
     texDrawTableEntryAtStoredOrigin(2, 0x39, 0xE2, origin->x + offset, origin->y, 0x65);
     context = g_titleScene;
-    renderStackSet(&context->scissor, 0);
+    renderStackSet(context->stacks + RENDER_STACK_SCISSOR, 0);
     TextureTableEntryIV* label = asdTMTexTableEntryAt(0x39, 0xE4);
     texDrawTableEntryAtStoredOrigin(2, 0x39, 0xE3, origin->x, origin->y, 0xD);
     asdTextDrawDirectoryEntry(text, 3, -1, 0, 3, param2, param3 + row + param4);

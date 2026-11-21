@@ -21,7 +21,7 @@ int btlCameraFinishTransition(...);
 int FUN_004f65d4(...);
 int FUN_004f7778(...);
 int battleCloneRoutedMaterialChannels(...);
-int FUN_004f8d90(...);
+int btlLoadUncachedSourceModels(...);
 int __aeabi_memcpy4(...);
 
 typedef int romwright_code(...);
@@ -54,7 +54,7 @@ extern int moriModelContentIsLoaded(unsigned int);
 /* Supplied declaration required: FUN_004f65d4. */
 /* Supplied declaration required: FUN_004f7778. */
 /* Supplied declaration required: battleCloneRoutedMaterialChannels. */
-/* Supplied declaration required: FUN_004f8d90. */
+/* Supplied declaration required: btlLoadUncachedSourceModels. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -114,7 +114,7 @@ unsigned int btlEffectModelJobDispatch(int param_1,unsigned int param_2,unsigned
     temp_v1 = *(unsigned int *)(param_1 + 0x339c);
   }
   else {
-    FUN_004f8d90(g_btlAux,*(unsigned int *)(param_1 + 0x33a0));
+    btlLoadUncachedSourceModels(g_btlAux,*(unsigned int *)(param_1 + 0x33a0));
     temp_v1 = (*(unsigned int *)(param_1 + 0x339c) & 0xffffffef) | 0x20;
     *(unsigned int *)(param_1 + 0x339c) = temp_v1;
   }

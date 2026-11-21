@@ -20,7 +20,7 @@ struct AocDrawWork {
 };
 struct AocDrawText { u16 text[64]; };
 
-typedef char CheckDrawStateOffset[offsetof(RenderCtxA, stackA) == 0x1258 ? 1 : -1];
+typedef char CheckDrawStateOffset[offsetof(RenderCtxA, stacks[RENDER_STACK_A]) == 0x1258 ? 1 : -1];
 typedef char CheckDrawWorkPosition[offsetof(AocDrawWork, alternate) == 0x185c ? 1 : -1];
 
 extern "C" {
@@ -58,7 +58,7 @@ extern "C" s32 aocMenuDrawGuideDown(u32 job)
             s32 textY = sprite->y + y;
             textDrawString(static_cast<f32>(textX), static_cast<f32>(textY), 0.5f, 3, 0.0f, color, 1.0f, (const char *)&text[i]);
         }
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     }
     return 0;
 }

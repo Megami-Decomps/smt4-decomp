@@ -48,5 +48,5 @@ extern "C" void menuDrawRectangle(s32 x, s32 y, s32 width, s32 height,
                      static_cast<f32>(adjustedX), static_cast<f32>(adjustedY),
                      static_cast<f32>(width), static_cast<f32>(height), 0.0f, 1.0f);
     }
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
 }

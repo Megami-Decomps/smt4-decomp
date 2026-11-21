@@ -58,7 +58,7 @@ u32 FUN_00334848(void)
 
     RenderCtxA *context = g_renderCtx;
     s32 state = renderCtxPackPassFlagsWithAlpha(6, 0.0f);
-    renderStackPush(&context->additional.stackC, state);
+    renderStackPush(context->stacks + RENDER_STACK_C, state);
     if (work->drawAll != 0) {
         for (s32 i = 0; i < 10; i++) {
             if (jobIsValid(work->slots[i]) != 0) {
@@ -68,7 +68,7 @@ u32 FUN_00334848(void)
     } else if (jobIsValid(work->slots[10]) != 0) {
         FUN_00281428(work->slots[10], work->drawPosition.first, work->drawPosition.second);
     }
-    renderStackPop(&g_renderCtx->additional.stackC);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_C);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
     return 0;

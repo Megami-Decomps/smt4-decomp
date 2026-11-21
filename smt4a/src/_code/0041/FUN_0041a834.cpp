@@ -64,7 +64,7 @@ void FUN_0041a834(BtlIconStrip *strip, Vector2 *position, f32 scale)
                      (s32)((y - 12.0f) + (f32)wobbleOffset), 0x49);
     }
     efctSetSpeed(1.0f);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
 }
 
 } /* extern "C" */

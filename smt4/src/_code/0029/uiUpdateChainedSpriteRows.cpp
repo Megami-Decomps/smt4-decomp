@@ -1,4 +1,3 @@
-/* NON_MATCHING: armcc threads the first iteration of the first loop (`i == 0` known on entry) where retail tests i == 0 each pass; view/index/complete registers follow from that. */
 #include "ui/UiSpriteApi.h"
 struct StagedAnimationView {
     u8 prefix[0x2D84];
@@ -19,11 +18,17 @@ typedef char StagedAnimationOffsets[offsetof(StagedAnimationView, first) == 0x2D
     offsetof(StagedAnimationView, soundPlayed) == 0x3648 ? 1 : -1];
 extern "C" {
 void soundPlaySeUnpanned(u32 sound);
-u32 FUN_002960ec(StagedAnimationView *view)
+
+/* Advances the six staged sprites (each waits for the previous one) and their reveals, playing each reveal's sound
+ * once; counts frames once a reveal is far enough in. Returns 1 when every sprite and reveal has finished. */
+u32 uiUpdateChainedSpriteRows(StagedAnimationView *view)
 {
     u32 complete = 1;
     for (s32 i = 0; i < 6; ++i) {
-        if (i == 0 || uiSpriteGetCompletionState(&view->first[i - 1]))
+        bool ready = true;
+        if (i != 0)
+            ready = uiSpriteGetCompletionState(&view->first[i - 1]) != 0;
+        if (ready)
             uiSpriteAdvanceAnimation(&view->first[i]);
     }
     for (s32 i = 0; i < 6; ++i) {
@@ -36,7 +41,11 @@ u32 FUN_002960ec(StagedAnimationView *view)
         }
     }
     for (s32 i = 0; i < 6; ++i) {
-        if (!uiSpriteGetCompletionState(&view->first[i]) || !uiSpriteGetCompletionState(&view->reveals[i])) {
+        if (!uiSpriteGetCompletionState(&view->first[i])) {
+            complete = 0;
+            break;
+        }
+        if (!uiSpriteGetCompletionState(&view->reveals[i])) {
             complete = 0;
             break;
         }

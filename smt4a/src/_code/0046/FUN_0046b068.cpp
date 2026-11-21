@@ -17,12 +17,12 @@ void FUN_0046b068(void *subject)
 
     RenderCtxA *context = g_renderCtx;
     s32 requested = renderCtxPackPassFlags(1, 0);
-    renderStackPush(&context->stackA, requested);
+    renderStackPush(context->stacks + RENDER_STACK_A, requested);
 
     renderCtxSelectTexture(g_renderCtx, 0);
     FUN_0046a108(subject);
 
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
 
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);

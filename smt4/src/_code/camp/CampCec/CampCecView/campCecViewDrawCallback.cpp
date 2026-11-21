@@ -65,7 +65,7 @@ u32 campCecViewDrawCallback()
     u32 flags = fields->flags;
     FUN_002ec0fc(&fields->widgets[3], 0, 0, flags & 1, (flags & 2) >> 1, (flags & 4) >> 2,
                  fields->selected, fields->first, fields->count);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     renderCtxApplyTransforms(g_titleScene);
     return 0;
 }

@@ -89,12 +89,12 @@ void FUN_003d3a4c(s32 x, s32 y, f32 alpha)
             texDrawTableEntryAtStoredOrigin(2, 0x12, 0x457, row->x + x, row->y + y, 0xc4);
 
             TextureTableEntryIV *window = asdTMTexTableEntryAt(0x12, 0x420);
-            renderStackSetCounted(&g_renderCtx->scissor, 3);
+            renderStackSetCounted(g_renderCtx->stacks + RENDER_STACK_SCISSOR, 3);
             gxSetMirroredClippedScissor(row->x + window->x + x, row->y + window->y + y, window->placement->width,
                                         window->placement->height, 1);
             texDrawTableEntryAtStoredOrigin(2, 0x12, 0x422, vec2GetXInt(&screen->sprites[3]) + x + row->x,
                                             vec2GetYInt(&screen->sprites[3]) + y + row->y, 0xc9);
-            renderStackSetCounted(&g_renderCtx->scissor, 0);
+            renderStackSetCounted(g_renderCtx->stacks + RENDER_STACK_SCISSOR, 0);
 
             TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x12, 0x458);
             if (hidden) {

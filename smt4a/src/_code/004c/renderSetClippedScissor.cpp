@@ -29,16 +29,16 @@ void renderSetClippedScissor(s32 x, s32 y, s32 width, s32 height)
     clipScissorAxis(y, height, 240);
     s32 right = (s32)(320.0f - (f32)(x + width));
     s32 bottom = (s32)(240.0f - (f32)(y + height));
-    renderStackSet(&g_renderCtx->scissor, 3);
+    renderStackSet(g_renderCtx->stacks + RENDER_STACK_SCISSOR, 3);
     {
         RenderCtxA *scene = g_renderCtx;
         u32 packed = packScissorCoordinates(right, bottom);
-        renderStackSet(&scene->scissorMinimum, (s32)packed);
+        renderStackSet(scene->stacks + RENDER_STACK_SCISSOR_MINIMUM, (s32)packed);
     }
     {
         RenderCtxA *scene = g_renderCtx;
         u32 packed = packScissorCoordinates(width, height);
-        renderStackSet(&scene->scissorMaximum, (s32)packed);
+        renderStackSet(scene->stacks + RENDER_STACK_SCISSOR_MAXIMUM, (s32)packed);
     }
 }
 }

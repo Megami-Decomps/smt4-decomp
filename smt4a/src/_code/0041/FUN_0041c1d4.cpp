@@ -49,7 +49,7 @@ void FUN_0041c1d4(MarkerRing *ring)
     texDrawTableEntryAtStoredOrigin(2, 43, 96, (s32)positions[second][0], (s32)positions[second][1], 211);
     texDrawTableEntryAtStoredOrigin(2, 43, 97, (s32)positions[third][0], (s32)positions[third][1], 211);
     texDrawTableEntryAtStoredOrigin(2, 43, 96, (s32)positions[fourth][0], (s32)positions[fourth][1], 211);
-    renderStackPopChecked(&g_renderCtx->stackA);
+    renderStackPopChecked(g_renderCtx->stacks + RENDER_STACK_A);
     efctSetSpeed(1.0f);
 }
 }

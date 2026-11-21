@@ -25,7 +25,7 @@ void titleScissorApplyOrClearRequests(TitleScissorOwner *owner, s32 clip)
         y = offset[1] + y;
         gxSetClippedBottomScreenScissor(x, y, width, height);
     } else {
-        renderStackSetCounted(&g_titleScene->scissor, 0);
+        renderStackSetCounted(g_titleScene->stacks + RENDER_STACK_SCISSOR, 0);
     }
 }
 

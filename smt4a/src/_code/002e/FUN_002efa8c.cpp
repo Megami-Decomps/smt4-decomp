@@ -30,7 +30,7 @@ s32 FUN_002efa8c(u32 job)
     RenderCtxA *context = g_renderCtx;
     renderCtxPushA(context, renderCtxPackPassFlags(1, false));
     holder->target->vtbl->draw(holder->target);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     efctSetSpeed(1.0f);
     return 0;
 }

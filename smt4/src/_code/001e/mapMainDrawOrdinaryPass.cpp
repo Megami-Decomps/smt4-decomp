@@ -28,7 +28,7 @@ u32 mapMainDrawOrdinaryPass(u32 job)
     renderCtxPushA(context, renderCtxPackPassFlags(5, 0));
     FUN_001f9f64();
     MapMain_DrawMinimapIcons();
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     mapEplUpdateEntriesIfAny();
     return 0;
 }

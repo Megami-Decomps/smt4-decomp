@@ -28,7 +28,7 @@ u32 staffRollDrawMarkers()
     }
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     return 0;
 }
 }

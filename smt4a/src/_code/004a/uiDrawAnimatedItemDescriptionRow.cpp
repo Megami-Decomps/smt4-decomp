@@ -1,4 +1,4 @@
-/* NON_MATCHING: row-position base rebasing and VFP allocation differ from retail. */
+/* NON_MATCHING: 12 lines: the description draw and the speed reset are written in each arm as retail cross-jumps them, and the row speed comes from vec2GetSpeed; remaining: retail loads the 1.0f of the final efctSetSpeed into s17 at entry (pooled first) where the build hoists it with the 0.55f/0.0f text constants after btlDrawLayeredHud. */
 #include "shard/S1ListPanel.h"
 #include "camp/RenderCtxA.h"
 #include <stddef.h>
@@ -47,20 +47,12 @@ extern "C" void uiDrawAnimatedItemDescriptionRow(ItemRowContext *context, s32 ro
     s32 horizontalOffset = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.26f));
     s32 rowX = vec2GetXInt((const UiSpriteState *)context->rows[rowIndex].position);
     s32 rowY = vec2GetYInt((const UiSpriteState *)context->rows[rowIndex].position);
-    f32 speed = context->rows[rowIndex].speed;
+    f32 speed = vec2GetSpeed((const UiSpriteState *)context->rows[rowIndex].position);
     s32 x = placement->x + rowX + horizontalOffset;
     s32 y = spacing * rowIndex + placement->y + rowY;
     btlDrawLayeredHud(context, x, y, entry->label);
     const char *text;
-    if (!entry->effect) {
-        s32 category = entry->category;
-        if (category == 0)
-            return;
-        efctSetSpeed(speed);
-        TextureTableEntryIV *icon = asdTMTexTableEntryAt(12, 134);
-        uiDrawItemCategoryIcon(static_cast<s16>(category), icon->x + x, icon->y + y, 26, 0);
-        text = dataFindKindRecordWithAocOverrides(category, 0);
-    } else {
+    if (entry->effect) {
         s16 effect = static_cast<s16>(entry->effect);
         efctSetSpeed(speed);
         TextureTableEntryIV *icon = asdTMTexTableEntryAt(12, 134);
@@ -71,8 +63,19 @@ extern "C" void uiDrawAnimatedItemDescriptionRow(ItemRowContext *context, s32 ro
             text = DAT_0052b4c4;
         else
             text = reinterpret_cast<const char *>(aocIndexValueOrDefault(effect));
+        TextureTableEntryIV *position = asdTMTexTableEntryAt(12, 135);
+        textDrawString(static_cast<f32>(position->x + x), static_cast<f32>(position->y + y), 0.55f, 2, 0.0f, 255, speed, text);
+        efctSetSpeed(1.0f);
+    } else {
+        s32 category = entry->category;
+        if (category == 0)
+            return;
+        efctSetSpeed(speed);
+        TextureTableEntryIV *icon = asdTMTexTableEntryAt(12, 134);
+        uiDrawItemCategoryIcon(static_cast<s16>(category), icon->x + x, icon->y + y, 26, 0);
+        text = dataFindKindRecordWithAocOverrides(category, 0);
+        TextureTableEntryIV *position = asdTMTexTableEntryAt(12, 135);
+        textDrawString(static_cast<f32>(position->x + x), static_cast<f32>(position->y + y), 0.55f, 2, 0.0f, 255, speed, text);
+        efctSetSpeed(1.0f);
     }
-    TextureTableEntryIV *position = asdTMTexTableEntryAt(12, 135);
-    textDrawString(static_cast<f32>(position->x + x), static_cast<f32>(position->y + y), 0.55f, 2, 0.0f, 255, speed, text);
-    efctSetSpeed(1.0f);
 }

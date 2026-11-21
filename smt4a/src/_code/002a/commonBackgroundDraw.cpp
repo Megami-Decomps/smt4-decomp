@@ -19,7 +19,7 @@ s32 commonBackgroundDraw()
         u32 drawState = renderCtxPackPassFlags(1, 0);
         renderCtxPushA(context, drawState);
         texDrawTableEntryAtStoredOrigin(2, 8, 0x10C, 0, 0, 0xFB);
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
         efctSetSpeed(1.0f);
     }
     return 0;

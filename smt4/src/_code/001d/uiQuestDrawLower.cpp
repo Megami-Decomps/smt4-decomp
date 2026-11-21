@@ -41,7 +41,7 @@ s32 uiQuestDrawLower(u32 job)
             uiQuestDrawList();
             break;
         }
-        renderStackPop(&g_titleScene->stackA);
+        renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     }
     return 0;
 }

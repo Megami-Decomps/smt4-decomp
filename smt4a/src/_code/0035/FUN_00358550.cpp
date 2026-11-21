@@ -4,11 +4,11 @@
 namespace {
 inline void pushRasterState(RenderCtxA *context, s32 state)
 {
-    renderStackPush(&context->additional.stackC, state);
+    renderStackPush(context->stacks + RENDER_STACK_C, state);
 }
 inline void pushDepthState(RenderCtxA *context, s32 state)
 {
-    renderStackPush(&context->stackB, state);
+    renderStackPush(context->stacks + RENDER_STACK_B, state);
 }
 }
 extern "C" {
@@ -26,9 +26,9 @@ u32 FUN_00358550()
     context = g_renderCtx;
     pushDepthState(context, packNibblesAndByte(6, 1, 0));
     eplUpdateActiveNodes();
-    renderStackPop(&g_renderCtx->stackB);
-    renderStackPop(&g_renderCtx->stackA);
-    renderStackPop(&g_renderCtx->additional.stackC);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_B);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_C);
     return 0;
 }
 }

@@ -50,7 +50,7 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
     gxResetColorQuadToWhite();
     renderCtxSelectStereoLayout(g_titleScene);
     RenderCtx *context = g_titleScene;
-    renderStackPush(&context->stackA, renderCtxPackPassFlags(1, 0));
+    renderStackPush(context->stacks + RENDER_STACK_A, renderCtxPackPassFlags(1, 0));
     efctSetSpeed(transform->alpha);
     s32 offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
     texDrawCompositeSprite(2, 0x39, 3, x + offset, y, 0x71);
@@ -168,6 +168,6 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
     FUN_002bdf94(0, x + offset + position->x, position->y + y, 0, 5, 0x74, text);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
 }
 }

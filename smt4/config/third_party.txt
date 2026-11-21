@@ -815,6 +815,10 @@
 0x0014e674 rt_memmove_w name
 0x0014e6f4 FUN_0014e6f4 callers
 0x0014e6f8 FUN_0014e6f8 library
+0x0014f16c lzDecompressBytes library
+0x0014f2c8 rleDecompress library
+0x0014f408 huffmanDecompress library
+0x0014f4f8 lzGetAdvertisedSize library
 0x0014f528 nn_fs_ipc_FileSystem_GetPriority name
 0x0014f560 FUN_0014f560 callers
 0x0014f610 nn_dsp_CTR_DSP_SetSemaphore name
@@ -1363,6 +1367,7 @@
 0x0023a488 FUN_0023a488 between
 0x0023a4f8 FUN_0023a4f8 callers
 0x0023a5dc FUN_0023a5dc callers
+0x0023b4f4 FUN_0023b4f4 library
 0x0023d240 nn_math_ARMv6_MTX34MultTranslateAsm name
 0x0023d274 FUN_0023d274 between
 0x0023d2ec FUN_0023d2ec between

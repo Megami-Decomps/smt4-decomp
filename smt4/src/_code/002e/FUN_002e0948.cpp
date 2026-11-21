@@ -30,7 +30,7 @@ u32 FUN_002e0948(void)
     if ((u32)(screen->page - 1) < 98) {
         RenderCtx *context = g_titleScene;
         s32 state = gxPackFadeKindAlphaWord(6, 0.0f);
-        renderStackPushCounted(&context->additional.stackC, state);
+        renderStackPushCounted(context->stacks + RENDER_STACK_C, state);
         renderCtxPushACountedDirect(g_titleScene, renderCtxPackPassFlags(1, 0));
         renderCtxPushB(g_titleScene, packNibblesAndByte(6, 1, 0));
         for (s32 i = 0; i < 4; ++i) {
@@ -38,9 +38,9 @@ u32 FUN_002e0948(void)
                 effectNodeUpdatePlacedChildren(screen->slots[i].handle);
             }
         }
-        renderStackPop(&g_titleScene->stackB);
-        renderStackPop(&g_titleScene->stackA);
-        renderStackPop(&g_titleScene->additional.stackC);
+        renderStackPop(g_titleScene->stacks + RENDER_STACK_B);
+        renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
+        renderStackPop(g_titleScene->stacks + RENDER_STACK_C);
     }
     return 0;
 }

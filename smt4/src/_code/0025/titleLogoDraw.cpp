@@ -114,10 +114,10 @@ void titleLogoDraw(UniteRenderTarget *request)
     position[0] += (f32)(s32)((f32)(request->holder->screen->width - box->width) * 0.5f);
     FUN_0023e024(request->texture, FUN_003deab0(request->texture, 0), position, -1, 1, 1.0f);
 
-    renderStackPop(&g_titleScene->additional.stackG);
-    renderStackPop(&g_titleScene->additional.stackC);
-    renderStackPop(&g_titleScene->stackA);
-    renderStackPop(&g_titleScene->stackB);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_G);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_C);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_B);
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);
 }

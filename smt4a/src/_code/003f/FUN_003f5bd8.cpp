@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail unrolls the original-index lookup by two (peeled odd iteration), hoists -1 into fp and loads the 52-byte stride with count first; control flow, zeroing call and 100-entry cap match. */
+/* NON_MATCHING: the original-index search now unrolls by two like retail (index tested after the loop); remaining: retail keeps -1 in fp for the not-found exit (the build compares the index again and keeps hasNew's 1 in fp instead), and the prologue's 52-byte multiply and the sorted/visibleCount registers (sl/r9) are swapped. */
 #include "common.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -59,14 +59,14 @@ void FUN_003f5bd8(RankedUnlockListWork *work, s32 count)
         }
         if (flagsBGetBit1(id))
             work->hasNew = 1;
-        s32 found = -1;
-        for (s32 j = 0; j < work->entryCount; ++j) {
-            if (work->entries[j].id == entry->id) {
-                found = j;
+        s32 j;
+        for (j = 0; j < work->entryCount; ++j) {
+            if (work->entries[j].id == entry->id)
                 break;
-            }
         }
-        work->visibleIndices[work->visibleCount] = found;
+        if (j >= work->entryCount)
+            j = -1;
+        work->visibleIndices[work->visibleCount] = j;
         ++work->visibleCount;
     }
     asdOperatorDeleteC(sorted);

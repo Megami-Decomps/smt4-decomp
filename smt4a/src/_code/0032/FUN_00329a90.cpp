@@ -71,7 +71,7 @@ u32 FUN_00329a90(void)
             textDrawString((f32)panel->x + offset + (f32)counter->x, (f32)(panel->y + counter->y), 0.0f, 2,
                          1.0f, 0xffffffff, 1.0f, text);
         }
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     }
     return 0;
 }

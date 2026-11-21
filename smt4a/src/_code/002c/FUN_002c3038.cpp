@@ -57,7 +57,7 @@ u32 FUN_002c3038(u32 handle)
             color[3] = work->fade;
             renderCtxSelectTexture(g_renderCtx, NULL);
             gfxDrawQuadFourColors(color, color, color, color, 0.0f, 0.0f, 400.0f, 240.0f, 0.9375f);
-            renderStackPopChecked(&g_renderCtx->stackA);
+            renderStackPopChecked(g_renderCtx->stacks + RENDER_STACK_A);
         }
     } else {
         s32 shown = 10;

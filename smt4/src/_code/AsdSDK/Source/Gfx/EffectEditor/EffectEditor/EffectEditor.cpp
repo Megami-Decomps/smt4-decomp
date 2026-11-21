@@ -131,8 +131,8 @@ static void phaseVectorSet(PhaseVector *vector, f32 x, f32 y, f32 z)
     vector->z = z;
 }
 
-/* NON_MATCHING: the vector stores and the camera argument bases now follow retail; the literal pool holds one more
- * word, the perspective constants load in another order and the editor state stores use other registers. */
+/* NON_MATCHING: 6 lines: everything but stereoCameraSetPerspective's argument schedule matches (retail moves the
+ * pivot 1 into r1 between the aspect and far-plane literals, the build after all four); see smt4a FUN_002830cc. */
 extern "C" void effectEditorInitialize()
 {
     randomStateSeed(0, 0x12345678);
@@ -146,24 +146,17 @@ extern "C" void effectEditorInitialize()
     cameraMatrixCacheSetLookAt(&g_effectEditorCamera, &g_effectEditorCameraEye, &g_effectEditorCameraTarget, &g_effectEditorCameraUp);
     stereoCameraSetPerspective(&g_effectEditorCamera, 1, 30.0f, 20.0f, 25600.0f, 5.0f / 3.0f);
     FUN_00298d50(&g_effectEditorCamera);
-    struct StartupView {
-        u8 unk00[7];
-        u8 first;
-        u8 second;
-        u8 unk09[0x1f];
-        void *resource;
-    };
-    // The default resource's storage extends past the shared menu-state prefix.
+    /* The default resource pointer (0x28) and its storage extend past the shared menu-state prefix. */
+    struct StartupView { u8 unk00[0x28]; void *resource; };
     struct StorageView { u8 unk000[0xda0]; u8 resource[1]; };
-    typedef char EditorStartupOffsets[offsetof(StartupView, first) == 7 &&
-        offsetof(StartupView, second) == 8 && offsetof(StartupView, resource) == 0x28 &&
+    typedef char EditorStartupOffsets[offsetof(StartupView, resource) == 0x28 &&
         offsetof(StorageView, resource) == 0xda0 ? 1 : -1];
-    StartupView *startup = reinterpret_cast<StartupView *>(&g_effectEditor);
-    startup->resource = reinterpret_cast<StorageView *>(&g_effectEditor)->resource;
+    reinterpret_cast<StartupView *>(&g_effectEditor)->resource =
+        reinterpret_cast<StorageView *>(&g_effectEditor)->resource;
     g_effectEditor.index = 0;
     g_effectEditorResourceName[0] = 0;
-    startup->second = 0;
-    startup->first = 0;
+    g_effectEditor.unk08 = 0;
+    g_effectEditor.dirty = 0;
     g_effectEditor.mode = 0;
     g_effectEditor.inhibited = 0;
     g_effectEditorInitialVector.setIdentity();

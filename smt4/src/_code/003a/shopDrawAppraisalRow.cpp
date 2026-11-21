@@ -75,7 +75,7 @@ void shopDrawAppraisalRow(Scene3a *scene, s32 row, s32 selected, s32 index)
         s32 contentX = vec2GetXInt(scroll) + x - (content->width & 0x7FFF);
         s32 contentY = vec2GetYInt(scroll) + y;
         FUN_00231bcc(&scene->region, 0x4D, contentX, contentY, depth, 1);
-        renderStackSet(&g_titleScene->scissor, 0);
+        renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, 0);
     }
 
     u32 shown = second;

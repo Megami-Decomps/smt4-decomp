@@ -17,7 +17,7 @@ void FUN_00384ad8(void *work)
     renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
     renderCtxSelectTexture(g_titleScene, 0);
     debugItemListDraw(work);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);
 }

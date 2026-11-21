@@ -1,4 +1,4 @@
-/* NON_MATCHING: visibility and registration behavior are recovered; the flattened-grid loop, handle-list reloads, and loop entry layout differ. */
+/* NON_MATCHING: the grid flattening is IV lmapApplyLightVisibilityGrid's collectVisible helper and now matches; remaining: retail enters the handle loop at its bottom test and keeps the binding loaded by the test for ptrVectorAt (the build tests at the top and reloads it), and the unregister arm copies the index through r2. */
 #include "common.h"
 #include "classes/Obj4209cc.h"
 #include "Model/MoriModelManager.h"
@@ -27,17 +27,24 @@ extern s8 DAT_005f0c04[];
 void FUN_00399290(u32 index, s32 visible);
 }
 
-// Flatten the area's column-major mask, then synchronize handle registration and visibility.
-extern "C" void FUN_003cb948(const s8 grid[10][8])
+/* Copies the visible (non-9) cells of the 8x10 grid, column by column, into DAT_005f0c04. */
+static void collectVisible(const s8 *grid)
 {
-    u32 count = 0;
-    LmapMainStateA *state = g_lmapMainState;
+    s32 count = 0;
     for (s32 column = 0; column < 8; ++column) {
         for (s32 row = 0; row < 10; ++row) {
-            if (grid[row][column] != 9)
-                DAT_005f0c04[count++] = grid[row][column];
+            s8 visible = grid[row * 8 + column];
+            if (visible != 9)
+                DAT_005f0c04[count++] = visible;
         }
     }
+}
+
+// Flatten the area's column-major mask, then synchronize handle registration and visibility.
+extern "C" void FUN_003cb948(const s8 *grid)
+{
+    LmapMainStateA *state = g_lmapMainState;
+    collectVisible(grid);
     for (u32 index = 0; index < areaHandles(state)->count; ++index) {
         if (DAT_005f0c04[index] == 1) {
             if (g_lmapMainState == NULL || !areaSlotRegistered(g_lmapMainState, index)) {

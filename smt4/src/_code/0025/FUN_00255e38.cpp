@@ -1,4 +1,5 @@
-/* NON_MATCHING: close: retail pairs the state/zero stores into strd and allocates record/index to r7/r6 (built r5/r7); all fields and control flow match */
+/* NON_MATCHING: register allocation only: retail keeps record/index/the world+0x1F00 base in r7/r6/r5 (built r5/r7/r6),
+ * and loads the table unit's byte at 0x1A0 after storing tableRecord; the 64-bit state stores now give retail's strd. */
 #include "common.h"
 #include "gamedata/UnitRecordAccess.h"
 #include "gamedata/NkmEnemyLookup.h"
@@ -17,8 +18,7 @@ struct UnitRecordIn {
 
 /* A spawned unit slot. */
 struct UnitSlot {
-    /* 0x000 */ u32 state;
-    /* 0x004 */ u32 unk004;
+    /* 0x000 */ u64 state;          /* state flags, assigned as one 64-bit value (strd) */
     /* 0x008 */ s16 index;
     /* 0x00A */ u8 unk00A[0x64];
     /* 0x06E */ u16 tableId;
@@ -92,37 +92,36 @@ void FUN_00255e38(SlotWorld *world, UnitRecordIn *record, s32 kind, s32 index, s
     record->reset14C[11] = 0;
     record->reset14C[12] = 0;
     record->reset180 = 0;
-    if (kind == 0) {
+    switch (kind) {
+    case 0:
         slot = FUN_002561d8(world, index, 0);
         __aeabi_memcpy4(&slot->record, record, sizeof(UnitRecordIn));
         if ((slot->record.flags & 1) != 0) {
             slot->state = 7;
-            slot->unk004 = 0;
             slot->playerData = gameGetPlayerData();
         } else {
             slot->state = 9;
-            slot->unk004 = 0;
             slot->unitRecord = gameGetUnitRecord(slot->record.unitIndex);
         }
         world->playerCount++;
-    } else if (kind == 1) {
+        break;
+    case 1:
         slot = FUN_0033a5a0();
         __aeabi_memcpy4(&slot->record, record, sizeof(UnitRecordIn));
         slot->state = 0x11;
-        slot->unk004 = 0;
         slot->tableRecord = nkmEnemyFindById(*(u16 *)((u8 *)slot + 0xCE));
         if (*((u8 *)slot + 0x1A0) == 1) {
             slot->state |= 0x100;
         }
         world->tableCount++;
-    } else if (kind == 2) {
+        break;
+    case 2: {
         u8 *table;
         SlotTableData *data;
 
         slot = FUN_002561d8(world, index, 0);
         __aeabi_memcpy4(&slot->record, record, sizeof(UnitRecordIn));
         slot->state = 0x21;
-        slot->unk004 = 0;
         table = gameGetSlotTable();
         data = (SlotTableData *)(table + 0x910C);
         slot->slotTable = data;
@@ -131,6 +130,8 @@ void FUN_00255e38(SlotWorld *world, UnitRecordIn *record, s32 kind, s32 index, s
         } else {
             world->slotTableReady = 1;
         }
+        break;
+    }
     }
     slot->index = index;
     rt_memclr(slot->block72, 0x3C);

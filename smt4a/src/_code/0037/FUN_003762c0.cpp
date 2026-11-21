@@ -32,6 +32,6 @@ void FUN_003762c0(s32 x, s32 y, s32 width, s32 height, u32 outlineColor, u32 fil
         FUN_002e0924(color, color, color, color,
             (f32)drawX, (f32)drawY, (f32)width, (f32)height, 0.0f, 1.0f);
     }
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
 }
 }

@@ -31,7 +31,7 @@ u32 eventEffectDrawFullScreenQuad(void)
     FUN_00164034(0.0f, 0.0f, 400.0f, 240.0f, &parameters, &parameters, &parameters, &parameters, 0.21484375f);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     return 0;
 }
 }

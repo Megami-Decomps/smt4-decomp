@@ -1,4 +1,4 @@
-/* NON_MATCHING: unit/denominator register retention replaces retail spills/reloads; inner-loop limit and minimum-experience branch lowering differ, possibly under alternate optimization. */
+/* NON_MATCHING: the skill multiplier loop (a plain static helper, as in resultApplySpoils) now matches; retail keeps the defeated level in fp where the build spills it, so the divisor constant, the gained-experience clamps (predicated in retail) and the frame differ. */
 #include "shard/PadState.h"
 #include "shard/PassiveSkill.h"
 #include "result/Result.h"
@@ -26,6 +26,22 @@ u16 dataTable09Sub3GetRecord(s32, s32);
 u8 playerPadTestBit(u32);
 ExperienceUnit *gameGetUnitRecord(u32);
 
+/* The experience multiplier of a unit's passive skills: the product of their bonuses (percent). */
+static f32 skillExpMultiplier(const u16 *skills, s32 count)
+{
+    f32 multiplier = 1.0f;
+    for (s32 skillIndex = 0; skillIndex < count; ++skillIndex) {
+        u16 skillId = skills[skillIndex];
+        if (skillId != 0) {
+            const PassiveSkillRecord *skill = passiveSkillLookupRecord(skillId);
+            if (skill != NULL && skill->experience.expBonus != 0) {
+                multiplier = (f32)(u32)skill->experience.expBonus * 0.01f * multiplier;
+            }
+        }
+    }
+    return multiplier;
+}
+
 // Each reward consists of the base experience followed by the defeated unit's level.
 void resultAddExperienceReward(const s32 *reward)
 {
@@ -51,16 +67,7 @@ void resultAddExperienceReward(const s32 *reward)
             continue;
         }
         ExperienceUnit *experienceUnit = gameGetUnitRecord(party->slots[index]);
-        f32 multiplier = 1.0f;
-        for (s32 skillIndex = 0; skillIndex < 8; ++skillIndex) {
-            u16 skillId = experienceUnit->skills[skillIndex];
-            if (skillId != 0) {
-                const PassiveSkillRecord *skill = passiveSkillLookupRecord(skillId);
-                if (skill != NULL && skill->experience.expBonus != 0) {
-                    multiplier = (f32)(u32)skill->experience.expBonus * 0.01f * multiplier;
-                }
-            }
-        }
+        f32 multiplier = skillExpMultiplier(experienceUnit->skills, 8);
         u32 scaled = (u32)(base * (s32)(multiplier * 100.0f)) / 100;
         u32 gained = scaled * dataTable09Sub3GetRecord(experienceUnit->level, level) / 100;
         if (gained == 0 && scaled != 0) {

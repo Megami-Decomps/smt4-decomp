@@ -33,7 +33,7 @@ u32 jyoucyuDrawLoadingOverlay(void)
     gxSubmitDrawZeroExtraParams(0.0f, 0.0f, 400.0f, 240.0f, 255, 255, 255, 0.0f, 255);
     if (resident->status < 100)
         texDrawTableEntryAtStoredOrigin(2, 14, 394, 0, 0, 11);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     efctSetSpeed(1.0f);
     return 0;
 }

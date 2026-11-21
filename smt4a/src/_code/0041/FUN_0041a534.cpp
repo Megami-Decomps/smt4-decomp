@@ -48,7 +48,7 @@ void FUN_0041a534(BattleAnimatedIconStrip *strip, const f32 *world, f32 alpha)
             FUN_003c5de0((s16)strip->ids[index], strip->times[index], x, y, 0x49, 1.0f, 1.0f);
         }
         efctSetSpeed(1.0f);
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     }
 }
 }

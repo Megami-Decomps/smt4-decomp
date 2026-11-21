@@ -1,4 +1,3 @@
-/* NON_MATCHING: getters and row count match retail; only r7/r8 are swapped (loop-exit constant vs the soundPlayed element pointer). */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "map/lmapMain.h"
 
@@ -17,13 +16,17 @@ struct ChainedSpriteWork {
 
 extern "C" {
 
+/* Advances the six chained sprites (each waits for the previous one) and their second rows, playing each row's
+ * sound once; counts frames once a second row is far enough in. Returns 1 when every sprite has finished. */
 u32 uiUpdateChainedSpriteRows(ChainedSpriteWork *work)
 {
     u32 finished = 1;
     for (s32 i = 0; i < 6; ++i) {
-        if (i == 0 || uiAnimatedSpriteIsFinished(&work->first[i - 1])) {
+        bool ready = true;
+        if (i != 0)
+            ready = uiAnimatedSpriteIsFinished(&work->first[i - 1]) != 0;
+        if (ready)
             uiSpriteAdvanceAnimation(&work->first[i], 1.0f);
-        }
     }
     for (s32 i = 0; i < 6; ++i) {
         if (uiAnimatedSpriteIsFinished(&work->first[i])) {
@@ -35,7 +38,11 @@ u32 uiUpdateChainedSpriteRows(ChainedSpriteWork *work)
         }
     }
     for (s32 i = 0; i < 6; ++i) {
-        if (!uiAnimatedSpriteIsFinished(&work->first[i]) || !uiAnimatedSpriteIsFinished(&work->second[i])) {
+        if (!uiAnimatedSpriteIsFinished(&work->first[i])) {
+            finished = 0;
+            break;
+        }
+        if (!uiAnimatedSpriteIsFinished(&work->second[i])) {
             finished = 0;
             break;
         }

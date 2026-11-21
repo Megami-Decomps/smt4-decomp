@@ -57,13 +57,13 @@ void statusDownDrawSkillRow(s32 x, s32 y, u32 skill, s32 rowId, s32 player, s32 
 
     /* The shine slides across the row, clipped to the plate. */
     part = asdTMTexTableEntryAt(STATUS_SPRITES, 0x420);
-    renderStackSet(&g_titleScene->scissor, 3);
+    renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, 3);
     gxSetMirroredClippedScissor(row->x + part->x + x, row->y + part->y + y, part->placement->width,
                                 part->placement->height, 1);
     s32 shineY = vec2GetYInt(&work->sprites[3]) + y + row->y;
     s32 shineX = vec2GetXInt(&work->sprites[3]) + x + row->x;
     texDrawTableEntryAtStoredOrigin(2, STATUS_SPRITES, 0x422, shineX, shineY, 0xC9);
-    renderStackSet(&g_titleScene->scissor, 0);
+    renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, 0);
 
     u32 color = COLOR_WHITE;
     if (highlight == 1) {

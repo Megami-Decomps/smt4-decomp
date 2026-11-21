@@ -25,11 +25,11 @@ s32 mapMainDrawOrdinaryPass(u32 job)
     }
     RenderCtxA *context = g_renderCtx;
     s32 state = renderCtxPackPassFlags(5, 0);
-    renderStackPush(&context->stackA, state);
+    renderStackPush(context->stacks + RENDER_STACK_A, state);
     FUN_002b6f30();
     FUN_002cfb18();
     FUN_002443e4();
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     mapEplUpdateEntriesIfAny();
     return 0;
 }

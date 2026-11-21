@@ -1,4 +1,4 @@
-/* NON_MATCHING: mask loads are hoisted across the combatant scan, changing saved registers and roster-holder addressing. */
+/* NON_MATCHING: the masks are read through a local pointer (only the active mask hoisted, the others reloaded in the loop as in retail); remaining: saved registers and roster-holder addressing differ. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -17,12 +17,13 @@ u32 FUN_0039e768()
     f32 duration = (f32)scrGetArg(2);
     s32 enabled = scrGetArg(3);
     BtlMainStateA *state = btlGetMainState();
+    const BattleMaskPresets *masks = &g_battleMaskPresets;
     for (s32 index = 4; index < 54; ++index) {
         BtlCombatantEntryA *entry = &state->entries[index];
         u64 flags = entry->flags;
-        if ((flags & g_battleMaskPresets.eligibility.active) &&
-            !(flags & g_battleMaskPresets.eligibility.excluded) &&
-            (flags & g_battleMaskPresets.eligibility.required) &&
+        if ((flags & masks->eligibility.active) &&
+            !(flags & masks->eligibility.excluded) &&
+            (flags & masks->eligibility.required) &&
             entry->data.marked && entry->data.id == id) {
             FUN_004d888c(state->roster[index].script.holder, animation, enabled != 0, duration);
             break;

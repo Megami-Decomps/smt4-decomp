@@ -1,4 +1,7 @@
-/* NON_MATCHING: callback-stack scheduling, saved-register lifetimes and three unattributed no-menu-path NOPs differ; candidate -O2. */
+/* NON_MATCHING: the no-menu path now sits out of line as in retail; remaining: retail keeps state/work in r4/r5
+ * (built r5/r4) and hoists the state into r1 before the menu test, and retail's pool words for the Calc update and
+ * the DrawUp/DrawDown callbacks are 0 with no relocation (weak functions the release build did not link), so
+ * btlDebugDispatchCurrentJob, FUN_001fc5c0 and lmapJobQueryZero are not the real callbacks. */
 #include "shard/W6_W6Match8_BattleDebug.h"
 #include "battle/btlMain.h"
 #include "AsdSDK/AsdDebug.h"
@@ -39,13 +42,13 @@ void btlDebugOpen(BtlMainState *state, s32 menuMode)
     work->menuMode = menuMode;
     work->state = 0;
     g_btlDebugState.selection = 0;
-    if (menuMode != 0) {
+    if (menuMode == 0) {
+        FUN_003c5150(work, state);
+    } else {
         work->listBox = asdListBoxCreateDefault(owner->job, 0x73, 0, 0);
         asdListBoxAddItems((AsdListBox *)work->listBox, btlDebugMenuEntries, 11);
         asdListBoxSetByteValue(work->listBox, 1);
         jobSetText(work->listBox, btlDebugMenuTitle);
-    } else {
-        FUN_003c5150(work, state);
     }
     if (g_btlUiBlock != NULL) {
         FUN_0025c2d0(g_btlUiBlock, 1);

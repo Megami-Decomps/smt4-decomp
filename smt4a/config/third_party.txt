@@ -3284,6 +3284,10 @@
 0x001ab818 nn_math_ARMv6_MTX34CopyAsm name
 0x001ab838 FUN_001ab838 between
 0x001ab850 FUN_001ab850 callers
+0x001aeb40 lzDecompressBytes library
+0x001aec9c rleDecompress library
+0x001aeddc huffmanDecompress library
+0x001aeecc lzGetAdvertisedSize library
 0x001af058 nn_fs_ipc_FileSystem_GetPriority name
 0x001af090 FUN_001af090 between
 0x001af0f4 FUN_001af0f4 callers
@@ -3595,6 +3599,7 @@
 0x001c37f8 nw_anim_PlayPolicy_Loop name
 0x001c3864 FUN_001c3864 between
 0x001c398c FUN_001c398c between
+0x001c3bb8 FUN_001c3bb8 library
 0x001c3d20 FUN_001c3d20 between
 0x001c3e7c nw_gfx_SceneBuilder_BuildChildren name
 0x001c3f98 nw_gfx_SkeletalModel_SetFullBakedAnimEnabled name
@@ -6520,6 +6525,7 @@
 0x0043b55c FUN_0043b55c between
 0x0043b5b4 FUN_0043b5b4 between
 0x0043b658 nn_math_VEC3SafeNormalize name
+0x0043b6c0 FUN_0043b6c0 library
 0x0043b800 nn_math_ARMv6_HermiteC_FAST name
 0x0043b84c nn_math_ARMv6_MTX34ToQUATC_FAST name
 0x0043ba3c FUN_0043ba3c between

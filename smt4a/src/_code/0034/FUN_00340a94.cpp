@@ -1,4 +1,4 @@
-/* NON_MATCHING: Initial-frame/speed branch scheduling, shifted subtraction lowering and completion return ordering differ. */
+/* NON_MATCHING: written as uiSpriteSlideFromSide; this build lays the frame-0 position block out of line and jumps past the frame test (retail keeps it inline and retests the frame), negates the step before adding it (retail subtracts), and tail-calls uiSpriteGetCompletionState where retail calls it (linker-inlined ldrsb) and returns. */
 #include "ui/UiSpriteApi.h"
 
 extern "C" {
@@ -20,12 +20,12 @@ s32 FUN_00340a94(UiSpriteState *sprite, s32 reverse, s32 vertical)
             sprite->y = -sprite->y;
         }
     }
-    s32 speed = 75;
+    s32 speed;
     if (frame > 0) {
         speed = 75 - frame * 5;
-        if (speed < 0) {
-            speed = 0;
-        }
+        if (speed < 0) speed = 0;
+    } else {
+        speed = 75;
     }
     if (reverse != 0) {
         speed = -speed;
@@ -60,6 +60,6 @@ s32 FUN_00340a94(UiSpriteState *sprite, s32 reverse, s32 vertical)
         sprite->finished = 0;
     }
     sprite->updated = 1;
-    return sprite->finished;
+    return uiSpriteGetCompletionState(sprite);
 }
 }

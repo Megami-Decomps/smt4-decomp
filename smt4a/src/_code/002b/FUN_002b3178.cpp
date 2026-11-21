@@ -61,6 +61,6 @@ void FUN_002b3178(const TitleRadialGradient *gradient)
         effectSpawnPositionDefault(edgeColor.word, x, y, 0.0f);
     }
     FUN_002371b0();
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
 }
 }

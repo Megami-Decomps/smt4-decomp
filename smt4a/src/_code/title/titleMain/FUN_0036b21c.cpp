@@ -102,7 +102,7 @@ u32 FUN_0036b21c(void)
         efctSetSpeed(1.0f);
     }
     efctSetSpeed(1.0f);
-    renderStackPopChecked(&g_renderCtx->stackA);
+    renderStackPopChecked(g_renderCtx->stacks + RENDER_STACK_A);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
     return 0;

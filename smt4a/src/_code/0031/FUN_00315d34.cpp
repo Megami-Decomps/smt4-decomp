@@ -51,7 +51,7 @@ s32 FUN_00315d34(u32 handle)
         renderCtxSelectTexture(g_renderCtx, NULL);
         gxSubmitDrawZeroExtraParams(0.0f, 0.0f, 400.0f, 240.0f, overlay, overlay, overlay, 0.0f, overlay);
         FUN_002371b0();
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     }
 
     screen = g_mapIf.state;
@@ -115,7 +115,7 @@ s32 FUN_00315d34(u32 handle)
         FUN_003849cc(screen->notice.id, screen->notice.arg, 0, text, -1);
         textDrawString((f32)frame->x + offset, (f32)frame->y, 0.0f, 3, 1.0f,
                       0xFFFFFFFF, 1.0f, text);
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     }
     return 0;
 }

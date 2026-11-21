@@ -1,6 +1,7 @@
-/* NON_MATCHING: the request's constructor and the second kind/word3/result store sequence retail repeats after it now
- * follow retail; remaining: retail reuses one stack slot for both WindowStatusResult temporaries (frame 48), keeps zero
- * in r6 from the top, predicates the wait arguments and materialises the timeout test as a bool (movne/moveq; teq #1). */
+/* NON_MATCHING: the request's constructor and the second kind/word3/result store sequence retail repeats after it, and
+ * the timeout test materialised as a bool (movne/moveq; teq #1, as in IV's twin), now follow retail; remaining:
+ * retail reuses one stack slot for both WindowStatusResult temporaries (frame 48), keeps zero in r6 from the top and
+ * predicates the wait arguments. */
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
 #include "nn/Result.h"
@@ -38,7 +39,8 @@ u32 FUN_0015f0f4(u32 job)
         if (failed) {
             resultHandleFailure(result, failed);
         }
-        if (!nnResultIsNotTimeout(result) && work->requestId == work->completedId) {
+        bool timedOut = nnResultIsNotTimeout(result) != 1;
+        if (timedOut && work->requestId == work->completedId) {
             nnOsThreadImplDestroy(&work->waitHandle);
         }
     }

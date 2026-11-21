@@ -34,7 +34,7 @@ void FUN_002e0460(f32 height)
     if (list->count != 0) {
         RenderCtx *context = g_titleScene;
         u32 state = renderCtxPackPassFlags(5, 1);
-        renderStackPush(&context->stackA, state);
+        renderStackPush(context->stacks + RENDER_STACK_A, state);
         renderCtxSelectTexture(g_titleScene, 0);
         s32 index = 0;
         if (list->count > 0) {
@@ -53,7 +53,7 @@ void FUN_002e0460(f32 height)
                     maximumX, height, maximumZ);
             }
         }
-        renderStackPop(&g_titleScene->stackA);
+        renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     }
 }
 }

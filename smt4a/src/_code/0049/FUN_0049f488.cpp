@@ -43,7 +43,7 @@ u32 FUN_0049f488(HowToScreenWork *screen)
     renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     howToScreenDrawStates(screen);
     efctSetSpeed(1.0f);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
     renderCtxResetColorScale(g_renderCtx);
     return 0;

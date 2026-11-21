@@ -62,12 +62,12 @@ void uiIconScrollerDrawArrow(IconScroller *scroller, s32 amount)
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
     texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4f, entry->x + x, payloadAt(entry->y + y));
     texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4e, entry->x + x, payloadAt(entry->y + y - amount));
-    renderStackSetCounted(&g_titleScene->scissor, 3);
+    renderStackSetCounted(g_titleScene->stacks + RENDER_STACK_SCISSOR, 3);
     gxSetMirroredClippedScissor(entry->x + x, entry->y + y, entry->placement->width, entry->placement->height - amount, 1);
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
     texDrawTableEntryAtStoredOrigin(2, 0x15, 0x50, entry->x + x, payloadAt(entry->y + y));
     texDrawTableEntryAtStoredOrigin(2, 0x15, 0x51, entry->x + x, payloadAt(entry->y + y));
-    renderStackSetCounted(&g_titleScene->scissor, 0);
+    renderStackSetCounted(g_titleScene->stacks + RENDER_STACK_SCISSOR, 0);
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
     efctSetSpeed(1.0f);
 }

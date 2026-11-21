@@ -87,13 +87,13 @@ void uniteOptionListDraw(s32 x, s32 y)
 
         /* The shine slides across the row, clipped to the plate. */
         TextureTableEntryIV *plate = asdTMTexTableEntryAt(UNITE_SPRITES, 0x3c);
-        renderStackSet(&g_titleScene->scissor, 3);
+        renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, 3);
         gxSetMirroredClippedScissor(slot->x + plate->x + x, slot->y + plate->y + y, plate->placement->width,
                                     plate->placement->height, 1);
         s32 shineY = vec2GetYInt(&work->sprites.slide) + y + slot->y;
         s32 shineX = vec2GetXInt(&work->sprites.slide) + x + slot->x;
         texDrawTableEntryAtStoredOrigin(2, UNITE_SPRITES, 0x3e, shineX, shineY, 0x83);
-        renderStackSet(&g_titleScene->scissor, 0);
+        renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, 0);
 
         texDrawTableEntryAtStoredOrigin(2, UNITE_SPRITES, 0x1d6, slot->x + x, slot->y + y, 0x83);
         sprintf(name, "%s", record->name);

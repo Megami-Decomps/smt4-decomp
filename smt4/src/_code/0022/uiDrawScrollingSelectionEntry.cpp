@@ -44,6 +44,6 @@ void uiDrawScrollingSelectionEntry(ScrollingWidgetView *widget, s32 index, u32 c
     s32 contentX = scrollX + x - (content->bounds.width & 0x7FFF);
     s32 contentY = vec2GetYInt(scroll) + y;
     FUN_00231bcc(widget->sprites, 0x42C, contentX, contentY, color, 1);
-    renderStackSet(&g_titleScene->scissor, 0);
+    renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, 0);
 }
 }

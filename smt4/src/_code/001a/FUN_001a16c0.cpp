@@ -45,14 +45,14 @@ u32 FUN_001a16c0(u32 job)
                 efctSetSpeed(1.0f);
             }
         }
-        renderStackPopChecked(&g_titleScene->stackA);
+        renderStackPopChecked(g_titleScene->stacks + RENDER_STACK_A);
         if (result->state < 9) {
             if (result->state != 0) {
                 renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
                 u32 x = vec2GetXInt((const UiSpriteState *)&result->screen.position);
                 u32 y = vec2GetYInt((const UiSpriteState *)&result->screen.position);
                 FUN_003b3388(result, x, y);
-                renderStackPopChecked(&g_titleScene->stackA);
+                renderStackPopChecked(g_titleScene->stacks + RENDER_STACK_A);
             }
             renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
             renderCtxApplyTransforms(g_titleScene);

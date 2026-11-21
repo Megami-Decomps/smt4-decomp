@@ -2,21 +2,11 @@
 #include "camp/RenderCtxA.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
-
+/* Pops the scissor stacks (on/off, maximum, minimum). */
 extern "C" u32 renderPopStateStacks(void)
 {
-    /* Access view only: this does not describe the allocation's full size. */
-    struct StateStackViewA {
-        u8 prefix[0x1318];
-        RenderStateStack stacks[3];
-    };
-    typedef char StateStackViewLayoutCheck[
-        offsetof(StateStackViewA, stacks) == 0x1318 &&
-        sizeof(RenderStateStack) == 0x20 &&
-        sizeof(StateStackViewA) == 0x1378 ? 1 : -1];
-
-    renderStackPop(&reinterpret_cast<StateStackViewA *>(g_renderCtx)->stacks[0]);
-    renderStackPop(&reinterpret_cast<StateStackViewA *>(g_renderCtx)->stacks[2]);
-    renderStackPop(&reinterpret_cast<StateStackViewA *>(g_renderCtx)->stacks[1]);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_SCISSOR);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_SCISSOR_MAXIMUM);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_SCISSOR_MINIMUM);
     return 1;
 }

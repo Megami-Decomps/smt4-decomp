@@ -38,6 +38,6 @@ void effMenuDrawGradientRect(s32 x, s32 y, s32 width, s32 height, u32 firstColor
     renderCtxSelectTexture(g_titleScene, 0);
     gxSubmitDrawZeroExtraParams((f32)pixelX, (f32)pixelY, (f32)width, (f32)height,
                                 firstColor, firstColor, secondColor, depth, secondColor);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
 }
 }

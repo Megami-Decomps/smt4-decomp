@@ -1,4 +1,6 @@
-/* NON_MATCHING: work reload, result-bitfield zero test, parent registers and shared return layout differ. */
+/* NON_MATCHING: the shared result flag and the merged parent copy now follow retail; remaining: retail reads g_unite
+ * twice at entry (the pair base and the work kept in r6) and tests resultId with a 32-bit load and mask of the
+ * pair's second word, where the build reuses the pair's 64-bit bitfield read; registers follow from that. */
 #include "camp/Unite/UniteGlobals.h"
 #include "gamedata/UnitStats.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
@@ -13,32 +15,23 @@ s32 flagCountUnlockedSlots(const StatBlock *unit);
 void unitRecalculateEffectiveStats(StatBlock *unit);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
+/* Fills `result` for the selected fusion pair: mode 0 the fused demon with its inherited skills, 1 and 2 a copy
+ * of the first or second parent. Returns 1 when it filled the result. */
 u32 FUN_00257a50(StatBlock *result, s32 selection, s32 mode, u32)
 {
-    // The retail bitfields span one 64-bit allocation unit. A local view avoids
-    // increasing the alignment and size of the shared four-byte-aligned work.
-    struct ResultPairBits {
-        u64 firstId : 15;
-        u64 secondId : 15;
-        u64 firstType : 2;
-        u64 secondType : 2;
-        u64 resultId : 15;
-        u64 reserved : 15;
-    };
-    typedef char ResultPairBitsSizeCheck[sizeof(ResultPairBits) == 8 ? 1 : -1];
+    u32 ok = 0;
     UniteWork *work = g_unite;
-    const ResultPairBits *pair = reinterpret_cast<const ResultPairBits *>(
-        &work->resultPairsIV.pairs[selection]);
+    const UnitePairEntryIV *pair = &work->resultPairsIV.pairs[selection];
     switch (mode) {
     case 0: {
         if (work->resultPairsIV.pairs[selection].resultId == 0) {
-            return 0;
+            break;
         }
         FUN_0029dc74(pair->resultId, result);
         StatBlock *first = partyMemberFindById(pair->firstId);
         StatBlock *second = partyMemberFindById(pair->secondId);
         if (first == NULL || second == NULL) {
-            return 0;
+            break;
         }
         uniteMergeInheritedSkillsAndStats(work->context, first, second, NULL, result);
         uniteBuildInheritedSkillCandidates(pair->resultId, first, second);
@@ -55,27 +48,26 @@ u32 FUN_00257a50(StatBlock *result, s32 selection, s32 mode, u32)
             }
         }
         unitRecalculateEffectiveStats(result);
+        ok = 1;
         break;
     }
     case 1: {
         StatBlock *parent = partyMemberFindById(pair->firstId);
-        if (parent == NULL) {
-            return 0;
+        if (parent != NULL) {
+            __aeabi_memcpy4(result, parent, sizeof(*result));
+            ok = 1;
         }
-        __aeabi_memcpy4(result, parent, sizeof(*result));
         break;
     }
     case 2: {
         StatBlock *parent = partyMemberFindById(pair->secondId);
-        if (parent == NULL) {
-            return 0;
+        if (parent != NULL) {
+            __aeabi_memcpy4(result, parent, sizeof(*result));
+            ok = 1;
         }
-        __aeabi_memcpy4(result, parent, sizeof(*result));
         break;
     }
-    default:
-        return 0;
     }
-    return 1;
+    return ok;
 }
 }

@@ -16,11 +16,10 @@ void gxEmitScissorMaximum(u32 extent)
     u32 width = FUN_00169d8c(asdGxGetPresetIndex());
     u32 height = FUN_00169db4(asdGxGetPresetIndex());
     cursorResetFromParam();
+    RenderCtxA *context = g_renderCtx;
     u32 command;
-    if (renderCtxGetStateStackTop(g_renderCtx, RENDER_STACK_SCISSOR) == 0) {
-        command = 0;
-    } else {
-        u32 origin = renderCtxGetStateStackTop(g_renderCtx, RENDER_STACK_SCISSOR_MINIMUM);
+    if (renderCtxStackTop(context, RENDER_STACK_SCISSOR) != 0) {
+        u32 origin = renderCtxStackTop(context, RENDER_STACK_SCISSOR_MINIMUM);
         u32 top = origin >> 16;
         u16 left = origin;
         u16 extentWidth = extent;
@@ -31,6 +30,8 @@ void gxEmitScissorMaximum(u32 extent)
         u32 rightWord = (s32)(left + extentWidth - 1) < 0 ? 0
                       : ((s32)(left + extentWidth - 1) >= width ? width - 1 : (s32)(left + extentWidth - 1)) << 16;
         command = bottom | rightWord;
+    } else {
+        command = 0;
     }
     u32 *buffer = g_modelCommandBuffer;
     g_modelCommandBuffer[g_modelCommandWordCount] = command;

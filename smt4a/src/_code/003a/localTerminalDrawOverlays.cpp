@@ -22,20 +22,20 @@ u32 localTerminalDrawOverlays()
     if (terminal->state - 1U < 14) {
         RenderCtxA *render = g_renderCtx;
         s32 state = renderCtxPackPassFlagsWithAlpha(6, 0.0f);
-        renderStackPushCounted(&render->additional.stackC, state);
+        renderStackPushCounted(render->stacks + RENDER_STACK_C, state);
         render = g_renderCtx;
         state = renderCtxPackPassFlags(1, 0);
-        renderStackPushCounted(&render->stackA, state);
+        renderStackPushCounted(render->stacks + RENDER_STACK_A, state);
         render = g_renderCtx;
         state = packNibblesAndByte(6, 1, 0);
-        renderStackPushCounted(&render->stackB, state);
+        renderStackPushCounted(render->stacks + RENDER_STACK_B, state);
         for (s32 i = 0; i < 4; ++i) {
             if (terminal->slots[i].visible)
                 effectNodeUpdatePlacedChildren(terminal->slots[i].handle);
         }
-        renderStackPop(&g_renderCtx->stackB);
-        renderStackPop(&g_renderCtx->stackA);
-        renderStackPop(&g_renderCtx->additional.stackC);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_B);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_C);
     }
     return 0;
 }

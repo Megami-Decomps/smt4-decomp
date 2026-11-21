@@ -80,7 +80,7 @@ void FUN_002bdf94(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 layer, cons
 /* Switches scissoring (3: on, 0: off). */
 static __inline void hudSetScissor(s32 state)
 {
-    renderStackSet(&g_titleScene->scissor, state);
+    renderCtxSetStackTop(g_titleScene, RENDER_STACK_SCISSOR, state);
 }
 
 /* A panel's HP gauge: a pending change (`delta`) or the running one (`change` from `base`). */

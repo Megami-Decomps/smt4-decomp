@@ -33,7 +33,7 @@ u8 placeWinDraw(void)
                   0.0f, 0xffffffff, 1.0f, window->text);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     return 0;
 }
 }

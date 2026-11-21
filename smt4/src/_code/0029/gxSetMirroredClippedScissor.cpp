@@ -31,13 +31,13 @@ void gxSetMirroredClippedScissor(s32 x, s32 y, u32 width, s32 height,
     {
       RenderCtx *scene = g_titleScene;
       u32 packed = packScissorCoordinates(left, top);
-      renderStackSet(&scene->scissorMinimum, static_cast<s32>(packed));
+      renderStackSet(scene->stacks + RENDER_STACK_SCISSOR_MINIMUM, static_cast<s32>(packed));
     }
     // The first state callback may replace the global scene.
     {
       RenderCtx *scene = g_titleScene;
       u32 packed = packScissorCoordinates(clippedWidth, clippedHeight);
-      renderStackSet(&scene->scissorMaximum, static_cast<s32>(packed));
+      renderStackSet(scene->stacks + RENDER_STACK_SCISSOR_MAXIMUM, static_cast<s32>(packed));
     }
 }
 }

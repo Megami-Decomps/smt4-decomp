@@ -29,10 +29,10 @@ s32 smokeFadeDraw(u32)
     s32 secondEntry = DAT_0043df40[1].node * 1000;
     efctSetSpeed(fade->scale);
     texDrawTableEntryAtStoredOrigin(2, DAT_0043df40[1].table, secondEntry, 0, 0, 251);
-    renderStackPop(&g_titleScene->stackB);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_B);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     return 0;
 }
 }

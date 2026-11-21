@@ -13,7 +13,7 @@ u32 uiQuestDrawLower(void)
     if (work->unk93E == 0) {
         RenderCtxA *context = g_renderCtx;
         s32 state = renderCtxPackPassFlags(1, 0);
-        renderStackPush(&context->stackA, state);
+        renderStackPush(context->stacks + RENDER_STACK_A, state);
         switch (work->menuState) {
         case 1:
         case 2:
@@ -43,7 +43,7 @@ u32 uiQuestDrawLower(void)
             uiQuestDrawList();
             break;
         }
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     }
     return 0;
 }

@@ -19,7 +19,7 @@ void FUN_004097b4(RenderCtxA *context, u32 color, u32 fade, u32 flags, f32 alpha
     s32 first = 0;
     s32 second = 0;
     u32 mode = 0;
-    AsdTexture *savedTexture = context->depthStacks.selectedTexture;
+    AsdTexture *savedTexture = context->selectedTexture;
     f32 height = (f32)asdGxPresetsGetHeightByKind(context->unk052C);
     f32 width = (f32)asdGxPresetsGetByKind(context->unk052C);
 
@@ -33,19 +33,19 @@ void FUN_004097b4(RenderCtxA *context, u32 color, u32 fade, u32 flags, f32 alpha
         mode = 2;
     }
     renderCtxSelectTexture(context, NULL);
-    renderStackPush(&context->stackA, renderCtxPackPassFlags(1, second));
-    renderStackPush(&context->additional.stackC, renderCtxPackPassFlagsWithAlpha(1, 0.0f));
-    renderStackPush(&context->additional.stackG, flagsPackFourBooleans(first, first, first, first));
-    renderStackPush(&context->stackB, packNibblesAndByte(1, 0, 0));
-    renderStackPush(&context->depthStacks.stackE, FUN_003a48dc(1, fade, 255, 255));
-    renderStackPush(&context->depthStacks.stackF, packThreeFields(mode, mode, mode));
+    renderStackPush(context->stacks + RENDER_STACK_A, renderCtxPackPassFlags(1, second));
+    renderStackPush(context->stacks + RENDER_STACK_C, renderCtxPackPassFlagsWithAlpha(1, 0.0f));
+    renderStackPush(context->stacks + RENDER_STACK_G, flagsPackFourBooleans(first, first, first, first));
+    renderStackPush(context->stacks + RENDER_STACK_B, packNibblesAndByte(1, 0, 0));
+    renderStackPush(context->stacks + RENDER_STACK_E, FUN_003a48dc(1, fade, 255, 255));
+    renderStackPush(context->stacks + RENDER_STACK_F, packThreeFields(mode, mode, mode));
     FUN_00164034(0.0f, 0.0f, height, width, color, color, color, color, alpha);
-    renderStackPopChecked(&context->depthStacks.stackF);
-    renderStackPopChecked(&context->depthStacks.stackE);
-    renderStackPopChecked(&context->stackB);
-    renderStackPopChecked(&context->additional.stackG);
-    renderStackPopChecked(&context->additional.stackC);
-    renderStackPopChecked(&context->stackA);
+    renderStackPopChecked(context->stacks + RENDER_STACK_F);
+    renderStackPopChecked(context->stacks + RENDER_STACK_E);
+    renderStackPopChecked(context->stacks + RENDER_STACK_B);
+    renderStackPopChecked(context->stacks + RENDER_STACK_G);
+    renderStackPopChecked(context->stacks + RENDER_STACK_C);
+    renderStackPopChecked(context->stacks + RENDER_STACK_A);
     renderCtxSelectTexture(context, savedTexture);
 }
 

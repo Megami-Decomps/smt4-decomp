@@ -67,8 +67,8 @@ u32 eventFadeJobDraw(u32 handle)
     EffectColor fade = {job->intensity, job->intensity, job->intensity, job->alpha};
     u32 color = packFadeColor(fade);
     FUN_0033e160(job->handle, 0, (s32)job->level, job->params, color, 0, job->origin);
-    renderStackPop(&g_titleScene->additional.stackC);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_C);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);
     return 0;

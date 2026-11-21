@@ -159,7 +159,7 @@ extern "C" s32 uniteDrawPanel(u32)
         work->searchingFrame = (u8)(work->searchingFrame + 1) % 40;
         uiDrawRotatingLoadingGrid(0x1E0, work->searchingFrame);
     }
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);
     return 0;

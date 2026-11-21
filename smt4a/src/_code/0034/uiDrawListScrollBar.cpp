@@ -54,7 +54,7 @@ void uiDrawListScrollBar(Object *widget, s32 x, s32 y, u32 group, u32 frameId, u
                 offset = record->placement->width - length;
             }
         }
-        renderStackSet(&g_renderCtx->scissor, 3);
+        renderStackSet(g_renderCtx->stacks + RENDER_STACK_SCISSOR, 3);
         gxSetMirroredClippedScissor(record->x + x + offset, record->y + y, length, record->placement->height, 1);
     } else {
         s32 total = gridNavigationGetItemCount(widget);
@@ -74,13 +74,13 @@ void uiDrawListScrollBar(Object *widget, s32 x, s32 y, u32 group, u32 frameId, u
                 offset = record->placement->height - length;
             }
         }
-        renderStackSet(&g_renderCtx->scissor, 3);
+        renderStackSet(g_renderCtx->stacks + RENDER_STACK_SCISSOR, 3);
         gxSetMirroredClippedScissor(record->x + x, y + offset + record->y, record->placement->width, length, 1);
     }
     u32 chosenTrackId = trackId;
     if (thumbPressed != 0) chosenTrackId = trackPressedId;
     texDrawTableEntryAtStoredOrigin(2, group, chosenTrackId, x, y, layer + 5);
-    renderStackSet(&g_renderCtx->scissor, 0);
+    renderStackSet(g_renderCtx->stacks + RENDER_STACK_SCISSOR, 0);
 }
 
 } /* extern "C" */

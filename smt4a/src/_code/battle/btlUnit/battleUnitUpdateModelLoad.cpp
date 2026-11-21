@@ -1,4 +1,4 @@
-/* NON_MATCHING: -O2 candidate; retail reloads render flags and retains different state/entry registers and float-store scheduling. */
+/* NON_MATCHING: the record's fields are read through `record` at each use; remaining: retail reloads renderFlags after each bit test before modifying it (the build reuses the tested word and predicates the first update), and keeps the state and entry pointers in r5/r6 (built r6/r5). */
 #include "runtime/Stdio.h"
 #include "battle/btlMain.h"
 #include "battle/btlUnit.h"
@@ -40,15 +40,14 @@ extern const char g_battleEnemyModelPathFormat[]; // "battle/model/en%03d.bam"
 
 void battleUnitUpdateModelLoad(BtlMainStateA *state, BattleModelRecord *record)
 {
-    BattleEffectSetup &render = record->render;
-    if (render.renderFlags & 1) {
-        render.renderFlags = (render.renderFlags & ~1u) | 0x12;
+    if (record->render.renderFlags & 1) {
+        record->render.renderFlags = (record->render.renderFlags & ~1u) | 0x12;
     }
-    if (render.renderFlags & 2) {
-        if (render.renderFlags & 0x10) {
+    if (record->render.renderFlags & 2) {
+        if (record->render.renderFlags & 0x10) {
             if (record->model.owner == NULL) {
                 const BattleEntryModelView *entry = (const BattleEntryModelView *)
-                    btlMainFindEntryByListedId(state, render.group);
+                    btlMainFindEntryByListedId(state, record->render.group);
                 ModelOwner *owner = (ModelOwner *)asdMemoryAllocTraced(0x24, g_battleUnitSourceFile, 0x642);
                 if (owner != NULL) {
                     owner = (ModelOwner *)battleModelOwnerInitialize((u32 *)owner);
@@ -60,32 +59,32 @@ void battleUnitUpdateModelLoad(BtlMainStateA *state, BattleModelRecord *record)
                     modelOwnerLoadNamed(record->model.owner, filename);
                 }
             }
-            render.renderFlags &= ~0x10u;
+            record->render.renderFlags &= ~0x10u;
         }
         if (record->model.owner != NULL &&
             FUN_004d87e4((void **)record->model.owner)) {
-            render.flags |= 0x200002;
+            record->render.flags |= 0x200002;
             FUN_004d854c((s32 *)record->model.owner);
-            BtlUnitDataA *data = btlFindEntryBlockByMemberId(state, render.group);
+            BtlUnitDataA *data = btlFindEntryBlockByMemberId(state, record->render.group);
             btlUiAddRequest(g_btlUiBlock, data->id);
-            render.variant = 0;
-            render.position[0] = 0.0f;
-            render.position[1] = 0.0f;
-            render.position[2] = 0.0f;
-            battleEffectUpdateProjectionScale(&render);
+            record->render.variant = 0;
+            record->render.position[0] = 0.0f;
+            record->render.position[1] = 0.0f;
+            record->render.position[2] = 0.0f;
+            battleEffectUpdateProjectionScale(&record->render);
             u32 value = g_battleEffectSettings.defaultValue;
-            render.value6c = value;
-            render.value70 = value;
-            render.opacity = 255;
-            render.value74 = value;
-            render.value94 = value;
-            render.value98 = value;
-            render.renderFlags = (render.renderFlags & ~2u) | 4;
+            record->render.value6c = value;
+            record->render.value70 = value;
+            record->render.opacity = 255;
+            record->render.value74 = value;
+            record->render.value94 = value;
+            record->render.value98 = value;
+            record->render.renderFlags = (record->render.renderFlags & ~2u) | 4;
         }
     }
-    if ((render.renderFlags & 4) && !(render.renderFlags & 8)) {
+    if ((record->render.renderFlags & 4) && !(record->render.renderFlags & 8)) {
         record->model.state = 0;
-        render.renderFlags &= ~4u;
+        record->render.renderFlags &= ~4u;
     }
 }
 }

@@ -17,7 +17,7 @@ static __inline void drawColoredRectangle(const ColoredRectangle *box, f32 depth
     renderCtxPushA(context, renderCtxPackPassFlags(1, false));
     gxSubmitDrawZeroExtraParams(box->left, box->top, box->right - box->left, box->bottom - box->top,
                                 color, color, color, depth, color);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
 }
 
 // Draw a uniformly colored rectangle under a temporary render-state preset.

@@ -1,4 +1,5 @@
-/* NON_MATCHING: stock compaction loop branch layout and register allocation differ. */
+/* NON_MATCHING: instructions and layout match; register allocation only (retail keeps the slot table in r2 and the
+ * loaded slot in r1 through the first search, and the compaction index in r3). */
 #include "common.h"
 #include "gamedata/UnitStats.h"
 #include "gamedata/SaveSlotTableIV.h"
@@ -19,25 +20,27 @@ u32 FUN_0029bbc8(u32 unitIndex)
         else if (slots->active[2] == unitIndex)
             slots->active[2] = -1;
         for (s32 i = 0; i < 24; ++i) {
-            s32 current = slots->stock[i];
-            if (unitIndex == current) {
+            if (slots->stock[i] == unitIndex) {
                 slots->stock[i] = -1;
                 break;
             }
-            if (current < 0)
+            if (slots->stock[i] < 0)
                 break;
         }
         slots = gameGetSlotTable();
         for (s32 i = 0; i < 24; ++i) {
             if (slots->stock[i] < 0) {
-                s32 next = i;
-                do {
-                    ++next;
-                    if (next >= 24)
-                        return 1;
-                } while (slots->stock[next] < 0);
-                slots->stock[i] = slots->stock[next];
-                slots->stock[next] = -1;
+                bool found = false;
+                for (s32 next = i + 1; next < 24; ++next) {
+                    if (slots->stock[next] >= 0) {
+                        slots->stock[i] = slots->stock[next];
+                        slots->stock[next] = -1;
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                    return 1;
             }
         }
         return 1;

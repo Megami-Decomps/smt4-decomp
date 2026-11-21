@@ -56,13 +56,13 @@ void FUN_003b6da4(u8 *work, s32 unit, s32 x, s32 y)
             index++;
         }
     }
-    renderStackSet(&g_titleScene->scissor, 3);
+    renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, 3);
     gxSetMirroredClippedScissor(frame->x + x, frame->y + y, frame->placement->width, frame->placement->height, 1);
     s32 slide = (*counter - 20) * -3;
 
     messageKindForward(shown, frame->x + slide + x, frame->y + y, 0x7E);
     messageKindForward(nextShown, frame->x + x + slide + 13, frame->y + y, 0x7E);
-    renderStackSet(&g_titleScene->scissor, 0);
+    renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, 0);
     if (*counter >= 24) {
         *selection = (*selection + 1) % owned;
         *counter = 0;

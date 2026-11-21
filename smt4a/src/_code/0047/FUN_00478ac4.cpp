@@ -79,7 +79,7 @@ s32 FUN_00478ac4(u32 job)
             }
         }
     }
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     return 0;
 }
 

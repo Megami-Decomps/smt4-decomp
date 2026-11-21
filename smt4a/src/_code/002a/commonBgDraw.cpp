@@ -29,7 +29,7 @@ s32 commonBgDraw()
         quadSetOrderedVectors(QuadVector(), QuadVector(), QuadVector(), QuadVector(), 0, 1);
         texDrawTableEntryAtStoredOrigin(2, 9, 0, 0, 0, 1);
     }
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     skinObjectUpdateMatrices(reinterpret_cast<SkinObject *>(g_renderCtx));
     renderCtxResetColorScale(g_renderCtx);
     return 0;

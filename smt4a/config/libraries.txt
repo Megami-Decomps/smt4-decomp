@@ -54,3 +54,17 @@ thumb 0x10063a 0x1006c2 armlib qsort: Thumb, between libc_printfStr/FUN_0010043c
 thumb 0x10004a 0x1000e8 armlib wide-character classifier: Thumb, calls rt_ctype_table, binary search of packed ranges; twin of smt4 0x10004a
 # armlib's fplib cosf (libm_cosf): range reduction through a helper, __set_errno for infinities; exact twin of smt4's 0x282390.
 arm 0x1bbf0c 0x1bc048 armlib libm_cosf: fplib cosf, range reducer call and __set_errno; twin of smt4 0x282390
+# CTR-SDK nn::cx (decompression): UncompressLZ (LZ10/LZ11, the extended-format test `*src & 0x0F`), UncompressRL,
+# UncompressHuffman (4/8-bit symbols, `4 + (dataBit & 7)` symbols per word, 32-bit bit loop) and GetUncompressedSize
+# (24-bit size, else the next word), linked as one block; the same four functions, byte for byte, are smt4's
+# 0x14f16c-0x14f528 block right before nn_fs_ipc_FileSystem_GetPriority.
+arm 0x1aeb40 0x1aeefc CTR-SDK nn::cx decompression: UncompressLZ/RL/Huffman and GetUncompressedSize; exact twins of smt4 0x14f16c-0x14f528
+# nn::math's VEC3TransformCoordArray (math_Vector3): a loop over the header inline VEC3TransformCoord through a local
+# destination pointer, returning pOut; inside the nn::math block (between nn_math_VEC3SafeNormalize and
+# nn_math_ARMv6_HermiteC_FAST); exact twin of smt4's 0x23b4f4.
+arm 0x43b6c0 0x43b7a8 nn::math VEC3TransformCoordArray: VEC3TransformCoord loop returning pOut; twin of smt4 0x23b4f4
+# A shader bind-symbol search linked inside the nw_anim/nw_gfx block (between nw_anim_PlayPolicy_Loop and
+# nw_gfx_SceneBuilder_BuildChildren): the same 0x168 bytes as nn_gr_CTR_Shader_SearchBindSymbol (smt4a 0x15fb84, smt4
+# 0x2c1400) except one member offset (ldr r5, [r0, #16] against #12), so the same SDK search over another shader
+# object's symbol table.
+arm 0x1c3bb8 0x1c3d20 nn::gr/nw::gfx shader bind-symbol search: nn_gr_CTR_Shader_SearchBindSymbol's code with one member offset changed

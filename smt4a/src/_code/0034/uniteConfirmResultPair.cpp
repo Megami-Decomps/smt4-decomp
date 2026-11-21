@@ -1,5 +1,5 @@
-/* NON_MATCHING: large-offset snapshot copies and 64-bit packed-pair setter registers/stores differ. */
 #include "camp/Unite/UniteGlobals.h"
+#include "camp/Unite/UniteWork.h"
 
 extern "C" {
 void uniteBuildResultUnitRecord(void *list, s32 selection, s32 mode);
@@ -16,56 +16,44 @@ void panelSetTarget(s32 offset, s32 frame);
 void buttonHelpSetText(s32 first, u32 color);
 void uniteMenuChangeState(s32 first, s32 second);
 
-// Select a fusion pair, preserve its list view and activate the status/confirmation panels.
-void FUN_0034c940(s32 selection)
+/* Selects a fusion pair, preserves its list view and activates the status and confirmation panels. */
+void uniteConfirmResultPair(s32 selection)
 {
-    // These fields are 64-bit bitfields in this path; keeping the view local avoids changing
-    // the shared work block's alignment and the existing 32-bit packed-pair representation.
-    struct PairView {
-        u64 firstId : 15;
-        u64 secondId : 15;
-        u64 firstType : 2;
-        u64 secondType : 2;
-        u64 resultId : 15;
-        u64 reserved : 15;
-    };
+    /* unit-local: the pairs are read as IV's 64-bit bitfield entries here, which would change the shared
+     * work block's alignment and its 32-bit packed-pair view; the result record's four words are copied whole. */
+    struct UnitRecordWords { u32 words[4]; };
     struct SelectionView {
         u8 unk0000[0x418];
         s32 panelOffset;
         u8 unk041c[0xf9c];
-        PairView selected;
+        UnitePairEntryIV selected;
         u8 unk13c0[0x52dc];
         struct {
             u8 unk00[0x34];
-            u32 current[4];
+            UnitRecordWords current;
             u8 unk44[0x1e];
             s16 id;
         } list;
         u8 unk6700[0x2460];
-        u32 saved[4];
+        UnitRecordWords saved;
         u8 unk8b70[0x501];
         u8 active;
         u8 unk9072[6];
-        PairView choices[1];
+        UnitePairEntryIV choices[1];
     };
     SelectionView *work = reinterpret_cast<SelectionView *>(g_unite);
-    void *list = &work->list;
     work->active = 1;
-    uniteBuildResultUnitRecord(list, selection, 0);
-    work->saved[0] = work->list.current[0];
-    work->saved[1] = work->list.current[1];
-    work->saved[2] = work->list.current[2];
-    work->saved[3] = work->list.current[3];
-    const PairView *choice = &work->choices[selection];
-    work->selected.resultId = choice->resultId;
-    work->selected.firstId = choice->firstId;
-    work->selected.secondId = choice->secondId;
+    uniteBuildResultUnitRecord(&work->list, selection, 0);
+    work->saved = work->list.current;
+    work->selected.resultId = work->choices[selection].resultId;
+    work->selected.firstId = work->choices[selection].firstId;
+    work->selected.secondId = work->choices[selection].secondId;
     work->selected.firstType = 1;
     work->selected.secondType = 1;
-    work->selected.reserved = 0;
+    work->selected.unknown = 0;
     FUN_0033449c(1);
     FUN_0031f718(work->list.id, 0, 0);
-    objBInitBlock19D0(list, 0, 0);
+    objBInitBlock19D0(&work->list, 0, 0);
     FUN_003343c0(0);
     FUN_002c8550(9);
     FUN_0037e1b0(0, 0);

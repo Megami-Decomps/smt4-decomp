@@ -32,6 +32,8 @@ extern "C" {
 void asdSoundInitialize(s32 auxiliaryMode);
 u32 nw_snd_SoundSystem_GetRequiredMemSize(const SoundSystemInitParameters* parameters);
 void nwSoundSystemInitializeBuffers(const SoundSystemInitParameters* parameters, u8* buffer, u32 bufferSize);
+/* Sets a thread stack's buffer and size: one `stm r0, {r1, r2}`, which armlink inlined at every call (inlined.txt). */
+void soundInitStackSet(SoundInitStack* stack, u8* buffer, u32 size);
 }
 
 #ifdef __cplusplus

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-s32 lzGetAdvertisedSize(u8 *data);
-void lzDecompressBytes(const u8 *src, u8 *dst);
-void huffmanDecompress(u8 *src, u8 *dst);
-void rleDecompress(u8 *src, u8 *dst);
+s32 nn_cx_GetUncompressedSize(u8 *data);
+void nn_cx_UncompressLZ(const u8 *src, u8 *dst);
+void nn_cx_UncompressHuffman(u8 *src, u8 *dst);
+void nn_cx_UncompressRL(u8 *src, u8 *dst);
 void *asdMemoryAllocAligned(int, int, int, s32 size, u32 align, int);
 void asdMemFree(void *block);
 extern const char g_asdTMSprSourceFileName[]; /* AsdTMSpr.cpp: __FILE__ */
@@ -21,7 +21,7 @@ u8 *asdTMSprDecompress(u8 *data, u32 flags, u32 align)
     u8 *out = data;
     s32 size;
 
-    if ((format == 0x10 || format == 0x20 || format == 0x30) && (size = lzGetAdvertisedSize(data)) != 0) {
+    if ((format == 0x10 || format == 0x20 || format == 0x30) && (size = nn_cx_GetUncompressedSize(data)) != 0) {
         if (flags & 1) {
             if (flags & 2) {
                 asdDebugTrace(g_asdTMSprSourceFileName, 211);
@@ -38,11 +38,11 @@ u8 *asdTMSprDecompress(u8 *data, u32 flags, u32 align)
             out = (u8 *)asdMemoryAllocAligned(0x100, 0x100, 0, size, align, 1);
         }
         if (format == 0x10) {
-            lzDecompressBytes(data, out);
+            nn_cx_UncompressLZ(data, out);
         } else if (format == 0x20) {
-            huffmanDecompress(data, out);
+            nn_cx_UncompressHuffman(data, out);
         } else if (format == 0x30) {
-            rleDecompress(data, out);
+            nn_cx_UncompressRL(data, out);
         }
         asdMemFree(data);
     }

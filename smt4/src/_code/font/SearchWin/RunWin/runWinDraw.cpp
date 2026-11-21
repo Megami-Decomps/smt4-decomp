@@ -46,10 +46,10 @@ u8 runWinDraw(void)
     texDrawCompositeSprite(2, 14, 19, x, y, 110);
     RenderCtx *scene = g_titleScene;
     s32 state = packNibblesAndByte(6, 1, 0);
-    renderStackPushCountedDirect(&scene->stackB, state);
+    renderStackPushCountedDirect(scene->stacks + RENDER_STACK_B, state);
     texDrawTableEntryAtStoredOrigin(2, 14, 0x150, x, 0, 111);
     texDrawTableEntryAtStoredOrigin(2, 14, 0x151, x, 0, 111);
-    renderStackPop(&g_titleScene->stackB);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_B);
     TextureTableEntryIV *labelPoint = asdTMTexTableEntryAt(14, 0x153);
     textDrawString((f32)(labelPoint->x + (x - 14)), (f32)(labelPoint->y + y), 0.56640625f, 4, 0.0f, 0xF49800FF, win->alpha,
                    reinterpret_cast<const char *>(win->label));

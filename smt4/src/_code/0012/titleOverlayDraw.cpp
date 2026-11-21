@@ -18,7 +18,7 @@ s32 renderCtxPopState(RenderCtx *context, s32 stack);
 
 static __inline void setTitleRenderState(RenderCtx *context, s32 state)
 {
-    RenderStateStack *stack = &context->stackB;
+    RenderStateStack *stack = context->stacks + RENDER_STACK_B;
     s32 previous = stack->entries[stack->count];
     stack->entries[stack->count] = state;
     if (stack->dirty || previous != state) {

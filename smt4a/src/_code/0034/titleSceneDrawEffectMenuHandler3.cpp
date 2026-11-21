@@ -10,9 +10,9 @@ void titleSceneDrawEffectMenuHandler3(void)
 {
     RenderCtxA *context = g_renderCtx;
     s32 state = renderCtxPackPassFlags(1, 1);
-    renderStackPush(&context->stackA, state);
+    renderStackPush(context->stacks + RENDER_STACK_A, state);
     renderCtxSelectTexture(g_renderCtx, 0);
     effMenuCallHandler(3, 1);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
 }
 }

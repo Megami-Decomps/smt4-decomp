@@ -13,7 +13,7 @@ extern Obj420990DrawContext *g_titleScene;
 void renderCtxSelectTexture(void *context, u32 texture);
 u32 renderCtxPackPassFlags(u32 mode, u32 value);
 void titleSceneMultiplyByCameraView(void *filter, f32 *matrix, const void *motion);
-void FUN_0023b4f4(f32 *vertices, const f32 *matrix, f32 *output, u32 count);
+void nn_math_VEC3TransformCoordArray(f32 *vertices, const f32 *matrix, f32 *output, u32 count);
 void FUN_002b011c();
 void gpuSubmitFloatVectorsOrDefault(const f32 *color, f32 x, f32 y, f32 z, f32 u, f32 v);
 void forwardRecoveredCallback();
@@ -33,7 +33,7 @@ void Obj420990::draw()
     }
     f32 matrix[16];
     titleSceneMultiplyByCameraView(this, matrix, &handles[0]);
-    FUN_0023b4f4(&points[0][0], matrix, &points[0][0], 4);
+    nn_math_VEC3TransformCoordArray(&points[0][0], matrix, &points[0][0], 4);
     FUN_002b011c();
     for (u32 vertex = 0; vertex < 4; ++vertex) {
         gpuSubmitFloatVectorsOrDefault(color, points[vertex][0], points[vertex][1],
@@ -43,7 +43,7 @@ void Obj420990::draw()
     renderCtxSelectTexture(g_titleScene, ((FilterDrawTexture *)handles[1].handle)->handle);
     g_titleScene->blend.replace(rects->blendB);
     titleSceneMultiplyByCameraView(this, matrix, &handles[1]);
-    FUN_0023b4f4(&points[4][0], matrix, &points[4][0], 4);
+    nn_math_VEC3TransformCoordArray(&points[4][0], matrix, &points[4][0], 4);
     FUN_002b011c();
     for (u32 vertex = 4; vertex < 8; ++vertex) {
         gpuSubmitFloatVectorsOrDefault(color, points[vertex][0], points[vertex][1],

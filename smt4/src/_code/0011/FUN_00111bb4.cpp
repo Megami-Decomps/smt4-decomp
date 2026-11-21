@@ -1,4 +1,6 @@
-/* NON_MATCHING: retail retains redundant inline null checks and different texture-list registers. */
+/* NON_MATCHING: instructions and layout match; register allocation only (retail: zero r4, object r5, next r6,
+ * binding state r7, callback r8, lists global sl). textureObjectDestroy and gfxReleaseBlock are the inlined bodies
+ * whose own NULL tests retail repeats after the loops have already dereferenced the pointer. */
 #include "common.h"
 #include <stddef.h>
 
@@ -34,6 +36,46 @@ extern void (*g_gfxReleaseCallback)(u32 heap, u32 alignment, u32 flags, void *al
 extern TextureObjectLists *DAT_004652a8;
 extern u32 *g_textureBindingState;
 
+/* Hands one block back through the graphics release callback, if there is a block and a callback. */
+static __inline void gfxReleaseBlock(void *block)
+{
+    if (block != NULL && g_gfxReleaseCallback != NULL) {
+        g_gfxReleaseCallback(0x10000, 0x100, 0, block);
+    }
+}
+
+/* Unbinds a texture object from every binding group, then releases its data and the object. */
+static void textureObjectDestroy(TextureObject *object)
+{
+    if (object == NULL) {
+        return;
+    }
+    TextureObjectLists *lists = DAT_004652a8;
+    for (TextureObjectBindingGroup *group = lists->bindings; group; group = group->next) {
+        for (s32 i = 0; i < 2; ++i) {
+            TextureObjectBinding &binding = group->bindings[i];
+            if (binding.object == object) {
+                if (lists->active == group) {
+                    *g_textureBindingState |= 1;
+                }
+                binding.object = NULL;
+                binding.state[0] = 0;
+                binding.state[1] = 0;
+                binding.state[2] = 0;
+            }
+        }
+    }
+    if (object->data != NULL) {
+        if (g_gfxReleaseCallback != NULL) {
+            g_gfxReleaseCallback(object->heap, 0x103, object->allocationFlags, object->data);
+        }
+    }
+    if (g_gfxReleaseCallback != NULL) {
+        g_gfxReleaseCallback(0x10000, 0x100, 0, object);
+    }
+}
+
+/* Destroys every texture object and binding group and drops the texture lists. */
 void FUN_00111bb4()
 {
     if (!DAT_004652a8) {
@@ -42,39 +84,13 @@ void FUN_00111bb4()
     TextureObject *object = DAT_004652a8->objects;
     while (object) {
         TextureObject *next = object->next;
-        TextureObjectLists *lists = DAT_004652a8;
-        for (TextureObjectBindingGroup *group = lists->bindings; group; group = group->next) {
-            for (s32 i = 0; i < 2; ++i) {
-                TextureObjectBinding &binding = group->bindings[i];
-                if (binding.object == object) {
-                    if (lists->active == group) {
-                        *g_textureBindingState |= 1;
-                    }
-                    binding.object = NULL;
-                    binding.state[0] = 0;
-                    binding.state[1] = 0;
-                    binding.state[2] = 0;
-                }
-            }
-        }
-        if (object->data) {
-            if (!g_gfxReleaseCallback) {
-                object = next;
-                continue;
-            }
-            g_gfxReleaseCallback(object->heap, 0x103, object->allocationFlags, object->data);
-        }
-        if (g_gfxReleaseCallback) {
-            g_gfxReleaseCallback(0x10000, 0x100, 0, object);
-        }
+        textureObjectDestroy(object);
         object = next;
     }
     TextureObjectBindingGroup *group = DAT_004652a8->bindings;
     while (group) {
         TextureObjectBindingGroup *next = group->next;
-        if (g_gfxReleaseCallback) {
-            g_gfxReleaseCallback(0x10000, 0x100, 0, group);
-        }
+        gfxReleaseBlock(group);
         group = next;
     }
     DAT_004652a8 = NULL;

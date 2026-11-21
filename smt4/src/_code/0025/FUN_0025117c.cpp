@@ -19,11 +19,11 @@ void FUN_0025117c(s32 entry, s32 x, s32 y, u32 flags, s32 selected)
         efctSetSpeed(vec2GetSpeed(&panel->sprites[PARTY_PANEL_SPRITE_HIGHLIGHT]));
         RenderCtx *context = g_titleScene;
         s32 blend = packNibblesAndByte(6, 1, 0);
-        renderStackSetCounted(&context->stackB, blend);
+        renderStackSetCounted(context->stacks + RENDER_STACK_B, blend);
         texDrawTableEntryAtStoredOrigin(2, 0x19, 0x4F, position->x + x, position->y + y, flags);
         context = g_titleScene;
         blend = packNibblesAndByte(6, 7, 0);
-        renderStackSetCounted(&context->stackB, blend);
+        renderStackSetCounted(context->stacks + RENDER_STACK_B, blend);
         efctSetSpeed(1.0f);
         return;
     }

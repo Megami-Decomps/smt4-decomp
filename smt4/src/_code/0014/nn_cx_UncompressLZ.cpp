@@ -6,7 +6,7 @@ static __inline u32 readLzWord(const u8 *source)
            ((u32)source[2] << 16) | ((u32)source[3] << 24);
 }
 
-extern "C" void lzDecompressBytes(const u8 *source, u8 *destination)
+extern "C" void nn_cx_UncompressLZ(const u8 *source, u8 *destination)
 {
     u32 remaining = readLzWord(source) >> 8;
     bool extended = (*source & 15) != 0;

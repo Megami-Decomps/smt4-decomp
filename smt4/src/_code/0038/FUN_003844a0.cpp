@@ -45,10 +45,10 @@ void FUN_003844a0(TitleOverlay *overlay)
         f32 preset = (f32)asdGxPresetsGetByKind(renderCtxGetStereoMode(g_titleScene));
         f32 factor = (f32)asdGxPresetsGetHeightByKind(renderCtxGetStereoMode(g_titleScene));
         gxSubmitDrawZeroExtraParams(0.0f, 0.0f, factor, preset, alpha, alpha, alpha, 0.0f, alpha);
-        renderStackPopChecked(&g_titleScene->stackA);
+        renderStackPopChecked(g_titleScene->stacks + RENDER_STACK_A);
     }
     FUN_0038368c(overlay);
-    renderStackPopChecked(&g_titleScene->stackA);
+    renderStackPopChecked(g_titleScene->stacks + RENDER_STACK_A);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     renderCtxApplyTransforms(g_titleScene);

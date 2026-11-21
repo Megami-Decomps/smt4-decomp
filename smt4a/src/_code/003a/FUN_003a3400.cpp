@@ -38,7 +38,7 @@ void FUN_003a3400(f32 height)
                     maximumX, height, maximumZ, color, color, color, color);
             }
         }
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     }
 }
 }

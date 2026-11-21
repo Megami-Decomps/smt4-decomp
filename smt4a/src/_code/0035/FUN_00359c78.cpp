@@ -20,7 +20,7 @@ void FUN_00359c78(SpriteLayerBlendState *blend, s32 x, s32 y)
     s32 state = packNibblesAndByte(6, 1, 0);
     renderCtxPushB(context, state);
     texDrawCompositeSprite(2, 46, 12, x, y, 107);
-    renderStackPopChecked(&g_renderCtx->stackB);
+    renderStackPopChecked(g_renderCtx->stacks + RENDER_STACK_B);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     texDrawTableEntryAtStoredOrigin(2, 46, 146, blend->offset + x, y, 108);

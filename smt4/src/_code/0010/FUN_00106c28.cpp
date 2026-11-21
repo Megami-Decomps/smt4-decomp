@@ -16,12 +16,11 @@ u32 libc_strlen(const char *text);
 u32 srvGetServiceHandle(void *archive, const char *name, u32 length, u32 flags); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 // Acquire the shared archive mount, mounting it on the first reference under the module lock.
-u32 FUN_00106c28()
+nn::Result FUN_00106c28()
 {
     ScopedCriticalLock lock(static_cast<void *>(g_archiveModuleCriticalSection));
     if (FUN_0010f50c()) {
-        u32 failure = 0xd8a09ff9;
-        return failure;
+        return 0xd8a09ff9;
     }
     bool mounted;
     {
@@ -30,8 +29,7 @@ u32 FUN_00106c28()
     }
     if (mounted) {
         ++g_archiveModuleState.references;
-        u32 alreadyMounted = 0x00209ff9;
-        return alreadyMounted;
+        return 0x00209ff9;
     }
     u32 result = srvInitialize();
     if (nnResultIsFailure(result)) {
@@ -43,7 +41,6 @@ u32 FUN_00106c28()
     }
     ++g_archiveModuleState.references;
     FUN_0010f548(0x040201c8);
-    u32 success = 0;
-    return success;
+    return 0;
 }
 }

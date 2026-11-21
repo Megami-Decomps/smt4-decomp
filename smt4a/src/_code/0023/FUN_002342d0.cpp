@@ -55,6 +55,6 @@ void FUN_002342d0(u32 argument)
     bounds[0] += offset;
     FUN_001849bc(2, 0x13, 0x11fa, argument, offset, 11, bounds);
 
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
 }
 }

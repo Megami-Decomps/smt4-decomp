@@ -150,6 +150,19 @@ static __inline void asdTMTexTableEntrySize(u32 file, s32 index, u32 *width, u32
         *height = entry->height & 0xFFFF7FFF;
     }
 }
+
+/* The rectangle of texture `index` in table `file`: the entry's layout position and its drawn size (the
+ * placement's size when it has one, otherwise the entry's own size without the flag bit): the operation of
+ * asdTMTexTableGetEntryPlacement (smt4) / rectRecRead (smt4a), inlined with these ternaries by the
+ * touch-region setups of both games (smt4 terminalWindowInitTouchRegions, smt4a terminalWindowInitTouchRegions). */
+static __inline void asdTMTexTableEntryRect(u32 file, s32 index, s32 *x, s32 *y, s32 *width, s32 *height)
+{
+    const TextureTableEntryIV *entry = asdTMTexTableEntryAt(file, index);
+    *x = entry->x;
+    *y = entry->y;
+    *width = entry->placement ? entry->placement->width : entry->width & 0x7fff;
+    *height = entry->placement ? entry->placement->height : entry->height & 0x7fff;
+}
 #endif
 
 #endif

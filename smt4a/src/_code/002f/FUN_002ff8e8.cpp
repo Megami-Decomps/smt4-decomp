@@ -5,7 +5,7 @@
 
 static __inline void renderCtxSetBlend(RenderCtxA *context, s32 state)
 {
-    renderStackSet(&context->stackB, state);
+    renderStackSet(context->stacks + RENDER_STACK_B, state);
 }
 
 extern "C" {

@@ -80,7 +80,7 @@ void hintWindowDrawArrows(HintWindow *window)
                           0xFFFFFFFFu, 0, (f32)anim->frame, 1.0f);
         }
     }
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
 }

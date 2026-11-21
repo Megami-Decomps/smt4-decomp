@@ -38,7 +38,7 @@ u32 campCecDrawDimmingOverlay()
             renderCtxSelectStereoLayout(g_titleScene);
             RenderCtx *context = g_titleScene;
             s32 state = renderCtxPackPassFlags(1, 0);
-            renderStackPush(&context->stackA, state);
+            renderStackPush(context->stacks + RENDER_STACK_A, state);
             color.red = 0.0f;
             color.green = 0.0f;
             color.blue = 0.0f;
@@ -47,7 +47,7 @@ u32 campCecDrawDimmingOverlay()
             f32 offset = renderCtxCalculateStereoParallax(g_titleScene, 0.35f);
             gfxDrawQuadFourColors((f32)(s32)offset, 0.0f, 400.0f, 240.0f, &color, &color, &color, &color, 0.95703125f);
             efctSetSpeed(1.0f);
-            renderStackPop(&g_titleScene->stackA);
+            renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
         }
         break;
     }

@@ -72,7 +72,7 @@ u32 sWinDrawItemIcon(void)
         texDrawTableEntrySized(2, 0x34, texture, x, y, width, height, 21);
     }
     efctSetSpeed(1.0f);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     return 0;
 }
 

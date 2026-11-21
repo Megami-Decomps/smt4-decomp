@@ -1,39 +1,45 @@
-/* NON_MATCHING: retail retains a frame and non-tail Hermite call; compiler emits a tail call. */
+/* NON_MATCHING: the key search (the same static helper as curveSampleLinear16's) now has retail's by-value time copies; retail keeps the key in r0 and calls HermiteC_FAST with bl inside a push {r4, lr} frame where armcc tail-calls it. */
 #include "shard/W9_W9Match1_HermiteTrack.h"
 
 extern "C" {
 f32 nn_math_ARMv6_HermiteC_FAST(f32 firstValue, f32 firstTangent, f32 secondValue, f32 secondTangent, f32 elapsed, f32 duration);
 
-// Sample a Hermite animation track, correcting its estimated key interval.
+/* Finds the last key not after `frame`, searching from an interpolated guess (curveSampleLinear16's search). */
+static const HermiteAnimationKey *trackFindKey(const HermiteAnimationTrack *track, f32 frame)
+{
+    const HermiteAnimationKey *key = track->keys;
+    if (key->frame > frame) {
+        return key;
+    }
+    key = &track->keys[track->count - 1];
+    if (key->frame <= frame) {
+        return key;
+    }
+    key = &track->keys[(u32)(track->inverseDuration * ((f32)(s32)(track->count - 1) * frame))];
+    if (key->frame > frame) {
+        do {
+            key--;
+        } while (key->frame > frame);
+    } else {
+        do {
+            key++;
+        } while (key->frame <= frame);
+        key--;
+    }
+    return key;
+}
+
+/* Samples a Hermite animation track at `frame`. */
 f32 FUN_003f9d34(const HermiteAnimationTrack *track, f32 frame)
 {
-    const HermiteAnimationKey *last = track->keys + track->count - 1;
-    const HermiteAnimationKey *key = track->keys;
-    if (key->frame <= frame) {
-        key = last;
-        if (frame < key->frame) {
-            u32 estimate = (u32)((f32)(track->count - 1) * frame * track->inverseDuration);
-            key = track->keys + estimate;
-            if (key->frame > frame) {
-                do {
-                    --key;
-                } while (key->frame > frame);
-            } else {
-                do {
-                    ++key;
-                } while (key->frame <= frame);
-                --key;
-            }
-        }
+    const HermiteAnimationKey *key = trackFindKey(track, frame);
+    f32 keyFrame = key->frame;
+    const HermiteAnimationKey *last = &track->keys[track->count - 1];
+    if (keyFrame == frame || last == key) {
+        return key->value;
     }
-    f32 value;
-    if (key->frame != frame && key != last) {
-        value = nn_math_ARMv6_HermiteC_FAST(key->value, key->outgoingTangent, key[1].value,
-                                           key[1].incomingTangent, frame - key->frame,
-                                           key[1].frame - key->frame);
-    } else {
-        value = key->value;
-    }
-    return value;
+    const HermiteAnimationKey *next = key + 1;
+    return nn_math_ARMv6_HermiteC_FAST(key->value, key->outgoingTangent, next->value, next->incomingTangent,
+                                       frame - keyFrame, next->frame - keyFrame);
 }
 }

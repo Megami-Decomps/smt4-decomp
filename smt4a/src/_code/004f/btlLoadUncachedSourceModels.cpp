@@ -1,4 +1,3 @@
-/* NON_MATCHING: Battle source-model caching is reconstructed; duplicate/free-slot scans and retained work/source pointers allocate different registers and branch joins. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "runtime/Stdio.h"
@@ -46,7 +45,7 @@ extern const char DAT_00528500[];
 }
 
 /* Load uncached battle-source models into slots that are neither loading nor active. */
-extern "C" void FUN_004f8d90(BattleCacheWork *work, s32 kind)
+extern "C" void btlLoadUncachedSourceModels(BattleCacheWork *work, s32 kind)
 {
     if (kind == 0 || kind == 22) {
         return;
@@ -61,38 +60,38 @@ extern "C" void FUN_004f8d90(BattleCacheWork *work, s32 kind)
         if (source->first < 0 || source->second < 0) {
             continue;
         }
-        s32 index;
-        for (index = 0; index < 50; ++index) {
+        bool cached = false;
+        for (s32 index = 0; index < 50; ++index) {
             BattleCacheEntry *entry = &work->entries[index];
             if (entry->first >= 0 && entry->second >= 0 &&
                 entry->first == source->first && entry->second == source->second) {
+                cached = true;
                 break;
             }
         }
-        if (index < 50) {
+        if (cached) {
             continue;
         }
-        for (index = 0; index < 50; ++index) {
+        /* Take the first slot that is neither loading (2) nor active (4). */
+        for (s32 index = 0; index < 50; ++index) {
             BattleCacheEntry *entry = &work->entries[index];
-            if (!(entry->flags & 2) && !(entry->flags & 4)) {
-                break;
+            if (entry->flags & 2)
+                continue;
+            if (entry->flags & 4)
+                continue;
+            BattleCacheModel *model = static_cast<BattleCacheModel *>(asdMemoryAllocTraced(32, DAT_00528500, 0x4ab));
+            if (model != NULL) {
+                model = modelListInit(model);
             }
+            entry->model = model;
+            modelLoadFileAsyncByName(model, name);
+            entry->first = source->first;
+            entry->second = source->second;
+            entry->third = source->third;
+            entry->position = source->position;
+            entry->value = source->value;
+            entry->flags |= 2;
+            break;
         }
-        if (index == 50) {
-            continue;
-        }
-        BattleCacheEntry *entry = &work->entries[index];
-        BattleCacheModel *model = static_cast<BattleCacheModel *>(asdMemoryAllocTraced(32, DAT_00528500, 0x4ab));
-        if (model != NULL) {
-            model = modelListInit(model);
-        }
-        entry->model = model;
-        modelLoadFileAsyncByName(model, name);
-        entry->first = source->first;
-        entry->second = source->second;
-        entry->third = source->third;
-        entry->position = source->position;
-        entry->value = source->value;
-        entry->flags |= 2;
     }
 }

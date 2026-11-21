@@ -17,12 +17,12 @@ u32 FUN_00290688(void)
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
     s32 state = renderCtxPackPassFlags(1, 0);
-    renderStackPush(&context->stackA, state);
+    renderStackPush(context->stacks + RENDER_STACK_A, state);
     f32 parallax = renderCtxCalculateStereoParallax(g_renderCtx, 0.33f);
     texDrawTableEntryAtStoredOrigin(2, 0, 0x1FFB8, (s32)parallax - 56, -8, 1);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
     return 0;

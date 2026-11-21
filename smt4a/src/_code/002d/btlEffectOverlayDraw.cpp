@@ -44,7 +44,7 @@ s32 btlEffectOverlayDraw(u32 job)
     }
     renderCtxPushC(g_renderCtx, renderCtxPackPassFlagsWithAlpha(6, 0.0f));
     effect->child->vtable->draw(effect->child);
-    renderStackPop(&g_renderCtx->additional.stackC);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_C);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
     return 0;

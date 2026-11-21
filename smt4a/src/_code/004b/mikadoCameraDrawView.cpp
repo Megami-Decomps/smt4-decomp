@@ -31,7 +31,7 @@ void mikadoCameraDrawView(SkinDrawObject *object)
     if (object->kind >= 3) {
         FUN_004bade0(object->skinState);
     }
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
 }

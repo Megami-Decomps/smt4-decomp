@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_0023b4f4(int *, unsigned char [64], int *, int);
+int nn_math_VEC3TransformCoordArray(int *, unsigned char [64], int *, int);
 int titleSceneMultiplyByCameraView(int, unsigned char [64], int);
 int gpuSubmitFloatVectorsOrDefault(int *);
 int forwardRecoveredCallback(void);
@@ -31,7 +31,7 @@ typedef struct {
 
 extern int g_titleScene; /* 0x44ea00 */
 
-/* Supplied declaration required: FUN_0023b4f4. */
+/* Supplied declaration required: nn_math_VEC3TransformCoordArray. */
 /* Supplied declaration required: titleSceneMultiplyByCameraView. */
 /* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
 /* Supplied declaration required: forwardRecoveredCallback. */
@@ -117,7 +117,7 @@ void Obj42080c::draw()
   temp_v12 = *(unsigned int *)(temp_v1 + 0x3c);
   uStack_80 = *(unsigned int *)(temp_v1 + 0x40);
   temp_v13 = *(float *)(temp_v1 + 0x44) + temp_v4;
-  FUN_0023b4f4(&temp_v5,temp_v14,&temp_v5,4);
+  nn_math_VEC3TransformCoordArray(&temp_v5,temp_v14,&temp_v5,4);
   FUN_002b011c();
   temp_v1 = 0;
   do {

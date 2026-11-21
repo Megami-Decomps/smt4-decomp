@@ -24,7 +24,7 @@ u32 contentListDraw(void *work)
     renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     contentListDrawRows(work);
     efctSetSpeed(1.0f);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     context = g_renderCtx;
     renderCtxSetB(context, packNibblesAndByte(6, 7, 0));
     renderCtxResetColorScale(g_renderCtx);

@@ -46,7 +46,7 @@ void FUN_00483b78(KeyboardPanelState *panel)
         page += 4;
     FUN_004845ac(panel, static_cast<u8>(page), progress);
     efctSetSpeed(1.0f);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
 }

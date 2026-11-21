@@ -32,11 +32,11 @@ u32 eventFilterDrawOverlay(void *)
         s32 x = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
         texDrawTableEntryAtStoredOrigin(2, DAT_0057f3e8[work->texture].table, entry, x, 0, 0x2E);
         if (work->texture == 3 || work->texture == 4 || work->texture == 5) {
-            renderStackPop(&g_renderCtx->stackB);
+            renderStackPop(g_renderCtx->stacks + RENDER_STACK_B);
         }
         gxResetColorQuadToWhite();
         efctSetSpeed(1.0f);
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     }
     return 0;
 }

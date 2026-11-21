@@ -1,4 +1,6 @@
-/* NON_MATCHING: pool partition arithmetic scheduling, task-stack stores and saved-buffer registers differ; -O2 candidate. */
+/* NON_MATCHING: the task stack is set through the linker-inlined soundInitStackSet (retail's `stm r0, {r1, r2}` and its
+ * call padding at 0x120c94 now match); remaining: the pool sums are scheduled before the calls, and the profile buffer
+ * and channel size swap fp/r5. */
 #include "shard/S3SoundThread.h"
 #include "shard/W6_W6Match7_SoundInit.h"
 
@@ -37,11 +39,13 @@ void nwSoundSystemInitializeBuffers(const SoundSystemInitParameters *parameters,
         return;
     FUN_001310d4(&DAT_004ea168);
     if (!g_nwSoundSystemInitFlags.poolsInitialized) {
-        u32 sizeA = parameters->poolSizeA;
-        u32 sizeB = parameters->poolSizeB;
-        FUN_00130df4(soundRequestQueueGetInstance(), buffer, parameters->poolSizeA);
-        FUN_00130df4(soundStreamCommandManagerGetInstance(), buffer + sizeA, parameters->poolSizeB);
-        buffer += sizeA + sizeB;
+        u32 requestSize = parameters->poolSizeA;
+        u32 commandSize = parameters->poolSizeB;
+        u8 *requestMemory = buffer;
+        u8 *commandMemory = buffer + requestSize;
+        buffer += requestSize + commandSize;
+        FUN_00130df4(soundRequestQueueGetInstance(), requestMemory, parameters->poolSizeA);
+        FUN_00130df4(soundStreamCommandManagerGetInstance(), commandMemory, parameters->poolSizeB);
         g_nwSoundSystemInitFlags.poolsInitialized = 1;
     }
     u8 *soundStack = NULL;
@@ -55,17 +59,18 @@ void nwSoundSystemInitializeBuffers(const SoundSystemInitParameters *parameters,
         }
     }
     FUN_00130eec(_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv());
-    u32 taskStackSize = parameters->taskStackSize;
+    u8 *taskStack = buffer;
+    buffer += parameters->taskStackSize;
     nw_snd_internal_TaskManager_Initialize(FUN_002bb020());
-    g_nwSoundTaskStack.buffer = buffer;
-    g_nwSoundTaskStack.size = parameters->taskStackSize;
-    u8 *driverMemory = buffer + taskStackSize;
-    u8 *channelMemory = driverMemory + FUN_0013127c(nw_snd_internal_driver_VoiceManager_GetInstance(), g_nwSoundSystemInitFlags.driverMode);
-    u32 driverSize = FUN_0013127c(nw_snd_internal_driver_VoiceManager_GetInstance(), g_nwSoundSystemInitFlags.driverMode);
-    FUN_00131204(nw_snd_internal_driver_VoiceManager_GetInstance(), driverMemory, driverSize);
-    u8 *profileMemory = channelMemory + FUN_001310c4(nw_snd_internal_driver_ChannelManager_GetInstance(), g_nwSoundSystemInitFlags.driverMode);
-    u32 channelSize = FUN_001310c4(nw_snd_internal_driver_ChannelManager_GetInstance(), g_nwSoundSystemInitFlags.driverMode);
-    nw_snd_internal_driver_ChannelManager_Initialize(nw_snd_internal_driver_ChannelManager_GetInstance(), channelMemory, channelSize);
+    soundInitStackSet(&g_nwSoundTaskStack, taskStack, parameters->taskStackSize);
+    u8 *driverMemory = buffer;
+    buffer += FUN_0013127c(nw_snd_internal_driver_VoiceManager_GetInstance(), g_nwSoundSystemInitFlags.driverMode);
+    FUN_00131204(nw_snd_internal_driver_VoiceManager_GetInstance(), driverMemory,
+                 FUN_0013127c(nw_snd_internal_driver_VoiceManager_GetInstance(), g_nwSoundSystemInitFlags.driverMode));
+    u8 *channelMemory = buffer;
+    buffer += FUN_001310c4(nw_snd_internal_driver_ChannelManager_GetInstance(), g_nwSoundSystemInitFlags.driverMode);
+    nw_snd_internal_driver_ChannelManager_Initialize(nw_snd_internal_driver_ChannelManager_GetInstance(), channelMemory,
+                 FUN_001310c4(nw_snd_internal_driver_ChannelManager_GetInstance(), g_nwSoundSystemInitFlags.driverMode));
     FUN_00131288();
     FUN_00130514(FUN_00130498(), parameters->taskPriority, &g_nwSoundTaskStack);
     if (parameters->startThread) {
@@ -75,7 +80,7 @@ void nwSoundSystemInitializeBuffers(const SoundSystemInitParameters *parameters,
     }
     if (parameters->profiling && parameters->profileBufferSize > 0)
         nw_snd_internal_driver_SoundThread_SetProfileBuffer(_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(),
-                                                           profileMemory, parameters->profileBufferSize);
+                                                           buffer, parameters->profileBufferSize);
     g_nwSoundSystemInitFlags.usesThread = parameters->startThread;
     g_nwSoundSystemInitFlags.initialized = 1;
 }

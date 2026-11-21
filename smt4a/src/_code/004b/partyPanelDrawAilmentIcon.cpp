@@ -48,12 +48,12 @@ extern "C" void partyPanelDrawAilmentIcon(CyclingPanel *panel, s32 slot, s32 x, 
                     nextIndex++;
                 }
             }
-            renderStackSet(&g_renderCtx->scissor, 3);
+            renderStackSet(g_renderCtx->stacks + RENDER_STACK_SCISSOR, 3);
             gxSetMirroredClippedScissor(x + entry->x, y + entry->y, entry->placement->width, entry->placement->height, 1);
             s32 slide = (*timer - 20) * -3;
             effectDispatchSelector(current, entry->x + slide + x, entry->y + y, 0x7e, 1.0f);
             effectDispatchSelector(next, entry->x + x + slide + 13, entry->y + y, 0x7e, 1.0f);
-            renderStackSet(&g_renderCtx->scissor, 0);
+            renderStackSet(g_renderCtx->stacks + RENDER_STACK_SCISSOR, 0);
             if (*timer >= 24) {
                 *cursor = (*cursor + 1) % count;
                 *timer = 0;

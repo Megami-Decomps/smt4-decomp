@@ -87,7 +87,7 @@ extern "C" u32 FUN_002e1d1c(void)
     }
     uiSpawnSlotMarkers(reinterpret_cast<u8 *>(edit) + 0x38, CEC_AT(edit, s32, 0x124), CEC_AT(edit, s32, 0x120), extra,
                        CEC_AT(edit, s32, 0x128), variant);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
     efctSetSpeed(1.0f);

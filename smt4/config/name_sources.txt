@@ -5996,3 +5996,12 @@
 002d02b0 fusionComparePairsByParentPriorityDescending inferred qsort comparator for fusion sort key 3 descending (FUN_00196d78): parent priority, then race, level and id
 003f92a4 curveSampleLinearPacked inferred curveSampleLinear over twelve-bit packed keys (sibling of curveSampleLinear/curveSampleLinear16)
 003dfaf0 gpuDepthRangeEmitCommands inferred writes the depth-range scale and offset commands (registers 0x6D/0x6E, float24 via gpuEncodeFloat24Flush)
+002960ec uiUpdateChainedSpriteRows inferred twin of smt4a uiUpdateChainedSpriteRows (same source): advances six chained sprites and their reveals, returns 1 when all have finished
+00224ce0 gfxSelectStatusIconPair inferred twin of smt4a gfxSelectStatusIconPair (same switch, stores in each arm): foreground/background sprite ids for a status kind
+0023b4f4 nn_math_VEC3TransformCoordArray inferred nn::math VEC3TransformCoordArray: VEC3TransformCoord over count points through a local destination pointer, returns pOut (twin of smt4a 0x43b6c0 in the nn::math block)
+0039f874 terminalWindowInitTouchRegions inferred initializes the terminal window's two sprite regions and its table-defined touch rectangle (asdTMTexTableEntryRect of table 28)
+002e2fb0 statusRefreshSkillsMarkNew inferred replaces a unit's skills (statusReplaceSkills body) and marks the newly learned ids
+0014f16c nn_cx_UncompressLZ inferred CTR-SDK nn::cx UncompressLZ: LZ10/LZ11 with the extended-format test (*src & 0x0F); first of the nn::cx block before nn_fs_ipc
+0014f2c8 nn_cx_UncompressRL inferred CTR-SDK nn::cx UncompressRL: 0x80 run flag, run of count+3, copy of count+1
+0014f408 nn_cx_UncompressHuffman inferred CTR-SDK nn::cx UncompressHuffman: 4/8-bit symbols, 4 + (dataBit & 7) symbols per output word
+0014f4f8 nn_cx_GetUncompressedSize inferred CTR-SDK nn::cx GetUncompressedSize: the header's 24-bit size, else the following word

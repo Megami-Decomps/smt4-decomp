@@ -85,7 +85,7 @@ void shopDrawListRow(Scene3a *scene, s32 row, s32 selected, const Scene3aEntry *
         s32 contentX = vec2GetXInt(scroll) + x - (content->width & 0x7FFF);
         s32 contentY = vec2GetYInt(scroll) + y;
         FUN_00231bcc(&scene->region, 0x4D, contentX, contentY, depth, 1);
-        renderStackSet(&g_titleScene->scissor, 0);
+        renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, 0);
     }
     const TextureTableEntryIV *badge;
     if (!selected) {

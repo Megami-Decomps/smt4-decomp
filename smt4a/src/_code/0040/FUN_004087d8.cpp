@@ -42,7 +42,7 @@ void FUN_004087d8(ChoiceCaptionWork *work, s32 first)
     renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     efctSetSpeed(1.0f);
     choiceCaptionDrawBody(work, first);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     efctSetSpeed(1.0f);
 }
 }

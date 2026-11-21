@@ -22,7 +22,7 @@ u8 FUN_002109cc(void)
     ButtonHelpWork *help = g_buttonHelp.work;
     if (help->drawEnabled) {
         renderCtxSelectStereoLayout(g_titleScene);
-        renderStackPush(&g_titleScene->stackA, renderCtxPackPassFlags(1, 0));
+        renderStackPush(g_titleScene->stacks + RENDER_STACK_A, renderCtxPackPassFlags(1, 0));
         if (help->state <= 3 && (help->state < 2 || help->state == 2 || help->state == 3)) {
             FUN_00190e48();
             if (help->panelState) {
@@ -53,7 +53,7 @@ u8 FUN_002109cc(void)
                 }
             }
         }
-        renderStackPop(&g_titleScene->stackA);
+        renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
         renderCtxApplyTransforms(g_titleScene);
         renderCtxResetColorScale(g_titleScene);
     }

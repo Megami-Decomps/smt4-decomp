@@ -12,7 +12,7 @@ void titleSceneDrawEffectMenuHandler3(void)
     renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 1));
     renderCtxSelectTexture(g_titleScene, 0);
     effMenuCallHandler(3, 1);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
 }
 
 } /* extern "C" */

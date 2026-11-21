@@ -49,12 +49,12 @@ s32 FUN_001f42d4(u32 job)
 
     RenderCtx *context = g_titleScene;
     s32 state = renderCtxPackPassFlags(1, 0);
-    renderStackPushCounted(&context->stackA, state);
+    renderStackPushCounted(context->stacks + RENDER_STACK_A, state);
     context = g_titleScene;
     renderCtxPushC(context, gxPackFadeKindAlphaWord(6, 0.0f));
     context = g_titleScene;
     state = packNibblesAndByte(6, 7, 0);
-    renderStackPushCountedDirect(&context->stackB, state);
+    renderStackPushCountedDirect(context->stacks + RENDER_STACK_B, state);
     for (i = 0; i < work->count; i++) {
         if (g_eventTex->jobsActive) {
             if (jobIsValid(work->jobs[i])) {
@@ -64,9 +64,9 @@ s32 FUN_001f42d4(u32 job)
             drawJobAtOrigin(work, i);
         }
     }
-    renderStackPop(&g_titleScene->stackB);
-    renderStackPop(&g_titleScene->stackA);
-    renderStackPop(&g_titleScene->additional.stackC);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_B);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_C);
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);
     return 0;

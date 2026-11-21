@@ -19,9 +19,9 @@ s32 FUN_001aa4a8(u32 job)
     context = g_titleScene;
     renderCtxPushB(context, packNibblesAndByte(6, 1, 0));
     taskRunPhase(0);
-    renderStackPop(&g_titleScene->stackB);
-    renderStackPop(&g_titleScene->stackA);
-    renderStackPop(&g_titleScene->additional.stackC);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_B);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_C);
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);
     return 0;

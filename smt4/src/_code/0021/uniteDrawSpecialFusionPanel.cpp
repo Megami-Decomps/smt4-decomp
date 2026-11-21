@@ -150,11 +150,11 @@ void uniteDrawSpecialFusionPanel(s32 x, s32 y)
 
     /* The highlight scrolls inside the button's rectangle. */
     TextureTableEntryIV *clip = asdTMTexTableEntryAt(UNITE_TEXTURES, 340);
-    renderStackSetCounted(&g_titleScene->scissor, 3);
+    renderStackSetCounted(g_titleScene->stacks + RENDER_STACK_SCISSOR, 3);
     gxSetMirroredClippedScissor(clip->x + x, clip->y + y, clip->placement->width, clip->placement->height, 1);
     texDrawTableEntryAtStoredOrigin(2, UNITE_TEXTURES, 342, vec2GetXInt(&work->sprites.slide) + x,
                                     vec2GetYInt(&work->sprites.slide) + y, 131);
-    renderStackSetCounted(&g_titleScene->scissor, 0);
+    renderStackSetCounted(g_titleScene->stacks + RENDER_STACK_SCISSOR, 0);
 
     /* the price, red when the player cannot pay it */
     part = asdTMTexTableEntryAt(UNITE_TEXTURES, 354);

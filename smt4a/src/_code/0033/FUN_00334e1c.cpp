@@ -45,7 +45,7 @@ void FUN_002f752c(StatListWork *work, s32 *value, s32 *extra, s32 entry, s32 com
 void statRowDrawValue(StatListWork *work, s32 entry, s32 x, s32 y, s32 value, s32 difference);
 s32 itemIsCollectedWithRelated(u32 selection);
 void FUN_003c4250(StatListWork *work, s32 x, s32 y, s32 value, ...);
-void FUN_003b7960(StatListWork *work, s32 x, s32 y, s32 iconA, s32 iconB);
+void uiDrawMaskedSprite(StatListWork *work, s32 x, s32 y, s32 iconA, s32 iconB);
 void gxResetColorQuadToWhite(void);
 
 /* Draws one stat entry of the list: colored by how it compares with the other value, then its
@@ -84,9 +84,9 @@ void FUN_00334e1c(StatListWork *work, s32 entry)
         if (stat.first < 200) {
             FUN_003c4250(work, position.first, sprite->y + position.second, stat.first, stat.second, extraDifference);
         } else if (stat.first == 999) {
-            FUN_003b7960(work, position.first, sprite->y + position.second, 117, 116);
+            uiDrawMaskedSprite(work, position.first, sprite->y + position.second, 117, 116);
         } else {
-            FUN_003b7960(work, position.first, sprite->y + position.second, 115, 114);
+            uiDrawMaskedSprite(work, position.first, sprite->y + position.second, 115, 114);
         }
         efctSetSpeed(outerSpeed);
     }

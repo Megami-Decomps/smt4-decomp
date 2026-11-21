@@ -50,6 +50,6 @@ void btlLabelDrawActiveEntries(BattleLabelEntryViewA *entries)
             }
         }
     }
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
 }
 }

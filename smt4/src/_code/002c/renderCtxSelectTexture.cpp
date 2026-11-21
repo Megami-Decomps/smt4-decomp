@@ -9,9 +9,9 @@ void dataSubmitSelectedPresetBlock(s32 enable);
 /* Turns the texture binding on or off, unless it is already in that state. */
 static void setBindingState(RenderCtx *context, u8 state)
 {
-    if (context->depthStacks.selectedTextureState != state) {
+    if (context->selectedTextureState != state) {
         dataSubmitSelectedPresetBlock(state);
-        context->depthStacks.selectedTextureState = state;
+        context->selectedTextureState = state;
     }
 }
 
@@ -19,15 +19,15 @@ static void setBindingState(RenderCtx *context, u8 state)
  * was requested), then turns the binding on for a texture and off without one. */
 void renderCtxSelectTexture(RenderCtx *context, AsdTexture *texture)
 {
-    if (context->depthStacks.selectedTextureDirty != 0 || context->depthStacks.selectedTexture != texture) {
-        context->depthStacks.selectedTexture = texture;
+    if (context->selectedTextureDirty != 0 || context->selectedTexture != texture) {
+        context->selectedTexture = texture;
         if (texture != NULL) {
             gpuWriteTextureCommand(texture->dimensions.width, texture->dimensions.height, texture->image.hardwareFormat,
                          texture->image.physicalAddress, texture->unk38, texture->unk3c, texture->unk40);
-            context->depthStacks.selectedTextureState = 3;
+            context->selectedTextureState = 3;
         }
     }
-    context->depthStacks.selectedTextureDirty = 0;
+    context->selectedTextureDirty = 0;
     if (texture == NULL) {
         setBindingState(context, 0);
     } else {

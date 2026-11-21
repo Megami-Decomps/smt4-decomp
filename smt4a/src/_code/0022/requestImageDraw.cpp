@@ -10,7 +10,7 @@
 
 static __inline void pushCountedA(RenderCtxA *context, int state)
 {
-    renderStackPushCounted(&context->stackA, state);
+    renderStackPushCounted(context->stacks + RENDER_STACK_A, state);
 }
 
 extern "C" {
@@ -52,7 +52,7 @@ void requestImageDraw(const RequestImageSelector *owner, const f32 *alpha)
         depth = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.35f);
         texDrawTableEntryAtStoredOrigin(2, 0x2E, images[owner->selection].second, depth, 0, 12);
     }
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
 }

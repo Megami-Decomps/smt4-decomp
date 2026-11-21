@@ -43,7 +43,7 @@ s32 messageWindowDrawJob(u32 job)
                           3, 0.0f,
                           0xFC4F46FF, 1.0f, reinterpret_cast<const char *>(strings[index]));
         }
-        renderStackPop(&g_titleScene->stackA);
+        renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     }
     return 0;
 }

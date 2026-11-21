@@ -1,4 +1,4 @@
-/* NON_MATCHING: argument/temporary register allocation (commands/extra/address in r8/r7/r6 in retail), the kind 2/3/4 mode chain is compiled as a cmpne chain here but as separate moveq arms in retail, and the command writer's cursor is reloaded from the stack for the first block */
+/* NON_MATCHING: register allocation only: retail keeps commands/extra in r8/r7 (built r7/r8) and materialises the zero for unk05 and for each block's zero command word separately, where the build shares one zero register (r9). */
 #include "common.h"
 
 extern "C" {
@@ -78,21 +78,10 @@ void FUN_0045af48(TexSetup *setup, u32 *commands, u32 address, u32 extra, TexSou
     setup->format = source->format;
     setup->height3 = source->height;
     setup->width3 = source->width;
-    u8 mode;
-    if (source->simple == 0 && source->kind != 0) {
-        if (source->kind == 2) {
-            mode = 2;
-        } else if (source->kind == 3) {
-            mode = 3;
-        } else if (source->kind == 4) {
-            mode = 4;
-        } else {
-            mode = 0;
-        }
-    } else {
-        mode = 0;
-    }
-    setup->mode = mode;
+    /* Only kinds 2-4 of a source with more than one block keep their mode. */
+    setup->mode = (source->simple == 0 && source->kind != 0)
+                      ? (source->kind == 2 ? 2 : source->kind == 3 ? 3 : source->kind == 4 ? 4 : 0)
+                      : 0;
     setup->enabled = 1;
     setup->sourceAddress = source->address;
     u32 shifted = physical >> 3;

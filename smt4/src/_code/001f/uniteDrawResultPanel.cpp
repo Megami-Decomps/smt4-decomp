@@ -147,13 +147,13 @@ void uniteDrawResultPanel(s32 x, s32 y, u32 selected, s32 cursorSlot, s32 region
 
         /* The highlight scrolls inside the button's rectangle. */
         TextureTableEntryIV *clip = asdTMTexTableEntryAt(UNITE_TEXTURES, 122);
-        renderStackSetCounted(&g_titleScene->scissor, 3);
+        renderStackSetCounted(g_titleScene->stacks + RENDER_STACK_SCISSOR, 3);
         gxSetMirroredClippedScissor(panel->x + clip->x + x, panel->y + clip->y + y, clip->placement->width,
                                     clip->placement->height, 1);
         texDrawTableEntryAtStoredOrigin(2, UNITE_TEXTURES, 124,
                                         vec2GetXInt(&work->sprites.slide) + x + panel->x,
                                         vec2GetYInt(&work->sprites.slide) + y + panel->y, 206);
-        renderStackSetCounted(&g_titleScene->scissor, 0);
+        renderStackSetCounted(g_titleScene->stacks + RENDER_STACK_SCISSOR, 0);
 
         TextureTableEntryIV *slot = asdTMTexTableEntryAt(UNITE_TEXTURES, 127);
         uiDrawDemonIcon((s16)pair->firstId, panel->x + slot->x + x, panel->y + slot->y + y, 201, 1);

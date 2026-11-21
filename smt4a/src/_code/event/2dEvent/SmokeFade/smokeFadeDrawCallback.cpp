@@ -35,22 +35,22 @@ u8 smokeFadeDrawCallback()
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
     s32 mode = renderCtxPackPassFlags(1, 0);
-    renderStackPush(&context->stackA, mode);
+    renderStackPush(context->stacks + RENDER_STACK_A, mode);
     s32 firstImage = g_smokeFadeImages[0].index * 1000;
     efctSetSpeed(state->firstOpacity);
     texDrawTableEntryAtStoredOrigin(2, g_smokeFadeImages[0].group, firstImage, 0, 0, 0xfa);
 
     context = g_renderCtx;
     s32 blend = packNibblesAndByte(6, 1, 0);
-    renderStackPush(&context->stackB, blend);
+    renderStackPush(context->stacks + RENDER_STACK_B, blend);
     renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
     s32 secondImage = g_smokeFadeImages[1].index * 1000;
     efctSetSpeed(state->secondOpacity);
     texDrawTableEntryAtStoredOrigin(2, g_smokeFadeImages[1].group, secondImage, 0, 0, 0xfb);
-    renderStackPop(&g_renderCtx->stackB);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_B);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     return 0;
 }
 }

@@ -21,7 +21,7 @@ void uiDrawScreenDimmer(u32 unused, s32 topScreen)
     } else {
         screenDrawShadedRect(0, 0, 320, 240, 211);
     }
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     efctSetSpeed(1.0f);
     gxResetColorQuadToWhite();
 }

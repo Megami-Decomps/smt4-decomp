@@ -35,7 +35,7 @@ u32 titleDbgBgDraw(void)
         renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
         efctSetSpeed(1.0f);
         gxResetColorQuadToWhite();
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
         if (jyoucyuGetTableEntry(0) != NULL) {
             drawDebugLabel("\x82\x6f\x82\x62\x83\x8d\x81\x5b\x83\x68", 296.0f, 194.0f);
         } else {

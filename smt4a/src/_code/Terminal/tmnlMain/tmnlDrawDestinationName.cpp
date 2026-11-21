@@ -18,7 +18,7 @@ s32 tmnlDrawDestinationName(u32 task)
         }
         RenderCtxA *context = g_renderCtx;
         renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     }
     return 0;
 }

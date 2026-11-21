@@ -32,7 +32,7 @@ u8 eventEffectBlinkFadeDraw(u32)
     payload.words[0] = 0;
     payload.words[1] = 250;
     texDrawTableEntryAtStoredOrigin(2, DAT_0043df00[0].table, firstEntry, 0, payload);
-    renderStackPop(&g_titleScene->stackB);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_B);
     s32 secondEntry = DAT_0043df00[1].node * 1000;
     efctSetSpeed(1.0f);
     payload.words[0] = -work->position;
@@ -42,7 +42,7 @@ u8 eventEffectBlinkFadeDraw(u32)
     texDrawTableEntryAtStoredOrigin(2, DAT_0043df00[1].table, secondEntry + 1, 0, payload);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     return 0;
 }
 }

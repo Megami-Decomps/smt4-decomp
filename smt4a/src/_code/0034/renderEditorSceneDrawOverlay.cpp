@@ -20,7 +20,7 @@ void renderEditorSceneDrawOverlay(void)
         mono = 0;
     }
     effMenuCallHandler(0, mono);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     if (g_effectEditor.overlayEnabled) {
         debugGuideDrawGrid(30, 0.0f, 0.0f, 0.0f, 17.5f, 0x606060FF, 0x909090FF);
     }

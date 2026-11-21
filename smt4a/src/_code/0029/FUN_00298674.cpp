@@ -28,7 +28,7 @@ u32 FUN_00298674(void)
             renderCtxPushA(ctx, renderCtxPackPassFlags(1, 0));
             if (FUN_00284e94())
                 btlUiPartyDisplayDraw(&ui->objC);
-            renderStackPop(&g_renderCtx->stackA);
+            renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
             skinObjectUpdateMatrices(reinterpret_cast<SkinObject *>(g_renderCtx));
             renderCtxResetColorScale(g_renderCtx);
             return 0;

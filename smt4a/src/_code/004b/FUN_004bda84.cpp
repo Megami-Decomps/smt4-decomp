@@ -61,13 +61,13 @@ void FUN_004bda84(f32 scale, SelectorOwner *owner, SelectorData *data, s32 list,
                 availableNext++;
             }
         }
-        renderStackSet(&g_renderCtx->scissor, 3);
+        renderStackSet(g_renderCtx->stacks + RENDER_STACK_SCISSOR, 3);
         gxSetMirroredClippedScissor(anchor->x, anchor->y, anchor->placement->width, anchor->placement->height, 1);
         shift = (owner->pulse[list] - 20) * -3;
         nextShift = shift + 13;
         effectDispatchSelector(current, anchor->x + (shift + x), anchor->y + y, 0x7E, 1.0f);
         effectDispatchSelector(next, anchor->x + (x + nextShift), anchor->y + y, 0x7E, 1.0f);
-        renderStackSet(&g_renderCtx->scissor, 0);
+        renderStackSet(g_renderCtx->stacks + RENDER_STACK_SCISSOR, 0);
     }
     efctSetSpeed(1.0f);
 }

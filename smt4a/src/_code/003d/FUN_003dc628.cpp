@@ -40,7 +40,7 @@ int FUN_002a5cf4(void);
 int gameGlobalsGetBlock1390(void);
 int FUN_002e26c4(...);
 int FUN_00319aec(...);
-int FUN_0034c940(...);
+int uniteConfirmResultPair(...);
 int FUN_0038800c(...);
 int messageDismissNumericBanner(...);
 int partyPanelSetHidden(...);
@@ -142,7 +142,7 @@ extern int gameDataBlocksGetSelectedValue(void);
 /* Supplied declaration required: FUN_0033449c. */
 extern int FUN_0034919c(void);
 extern int partyPanelIsActive(void);
-/* Supplied declaration required: FUN_0034c940. */
+/* Supplied declaration required: uniteConfirmResultPair. */
 /* Supplied declaration required: screenSetColor670. */
 extern int FUN_0035a094(void);
 extern int FUN_0035db94(void);
@@ -540,7 +540,7 @@ LAB_003dcd84:
           temp_v5 = FUN_002a73f8();
           if (((temp_v5 != 0) && (temp_v5 = gameStateIsNotTransitioning(), temp_v5 != 0)) &&
              (temp_v5 = FUN_0022e750(), temp_v5 != 0)) {
-            FUN_0034c940((int)*(char *)(temp_v9 + 0xb9));
+            uniteConfirmResultPair((int)*(char *)(temp_v9 + 0xb9));
             campSetSpriteAnimationPreset(2,3,0xffffffff,0);
             campChangeState(0x23);
             campReleaseRegisteredTouchRegions();

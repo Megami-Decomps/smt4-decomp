@@ -20,7 +20,7 @@ u32 unitDrawStatusEffectIcons(void)
         renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         RenderCtxA *context = g_renderCtx;
         s32 state = renderCtxPackPassFlags(1, 0);
-        renderStackPush(&context->stackA, state);
+        renderStackPush(context->stacks + RENDER_STACK_A, state);
         unitGetStereoScreenPosition(&x, &y, 10, 0.35f);
         efctSetSpeed(vec2GetSpeed(&work->spriteHeaders.headers[2]));
         texDrawTableEntryAtStoredOrigin(2, 0x12, 0, x, y, 1);
@@ -32,7 +32,7 @@ u32 unitDrawStatusEffectIcons(void)
         unitGetStereoScreenPosition(&x, &y, 9, 0.35f);
         efctSetSpeed(vec2GetSpeed(&work->spriteHeaders.headers[1]));
         texDrawTableEntryAtStoredOrigin(2, 0x12, 2, x, y, 1);
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     }
     return 0;
 }

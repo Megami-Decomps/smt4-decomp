@@ -29,7 +29,7 @@ void renderSubmissionDrawPacket(RenderSubmissionPacket *packet, u32 mode)
     }
     if ((packet->flags & DRAW_PREBUILT_SHAPE) != 0) {
         FUN_001f6b74(packet->shape);
-        renderStackPop(&g_titleScene->stackA);
+        renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
         return;
     }
 
@@ -53,7 +53,7 @@ void renderSubmissionDrawPacket(RenderSubmissionPacket *packet, u32 mode)
     FUN_0034724c(packet->primitiveSource);
     renderCtxResetColorScale(g_titleScene);
     renderCtxApplyTransforms(g_titleScene);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
 }
 
 } /* extern "C" */

@@ -16,7 +16,7 @@ u32 renderWithTemporaryDrawState(u32 argument)
     renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
     FUN_003f82b8(argument);
     efctSetSpeed(1.0f);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
     renderCtxResetColorScale(g_renderCtx);
     return 0;

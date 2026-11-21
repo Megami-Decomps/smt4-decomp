@@ -66,7 +66,7 @@ u32 campCecViewDrawEntries()
     u32 flags = draw->flags;
     FUN_0036c91c(&draw->rowWork.footerState.footer, 0, 0, flags & 1, (flags & 2) >> 1,
                  (flags & 4) >> 2, draw->selected, draw->top, draw->total);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     skinObjectUpdateMatrices(g_renderCtx);
     efctSetSpeed(1.0f);
     return 0;

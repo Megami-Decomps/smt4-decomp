@@ -32,7 +32,7 @@ u32 FUN_0025ec04(void)
         FUN_00227294(0, 0, 1);
         break;
     }
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
     return 0;

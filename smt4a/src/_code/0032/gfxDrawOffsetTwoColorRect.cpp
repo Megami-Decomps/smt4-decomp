@@ -37,6 +37,6 @@ void gfxDrawOffsetTwoColorRect(s32 x, s32 y, s32 width, s32 height, u32 firstCol
     renderCtxSelectTexture(g_renderCtx, 0);
     gxSubmitDrawZeroExtraParams((f32)pixelX, (f32)pixelY, (f32)width, (f32)height,
                                 firstColor, firstColor, secondColor, depth, secondColor);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
 }
 } /* extern "C" */

@@ -10,7 +10,7 @@ extern "C" {
 void efctSetSpeed(f32 speed);
 void FUN_004045ac(SpriteDetailPanel* panel, s32 x, s32 y, f32 speed);
 void FUN_00402ab8(SpriteDetailPanel* panel, s32 x, s32 y, f32 speed);
-void FUN_004042fc(SpriteDetailPanel* panel, s32 x, s32 y, f32 speed);
+void uiDrawStereoListScrollBar(SpriteDetailPanel* panel, s32 x, s32 y, f32 speed);
 void FUN_00404a8c(SpriteDetailPanel* panel, s32 x, s32 y, f32 speed);
 void drawSpriteDetailPanelClipped(SpriteDetailPanel* panel, s32 x, s32 y, f32 speed);
 
@@ -45,7 +45,7 @@ void spriteDetailPanelDraw(SpriteDetailPanel* panel)
         }
         efctSetSpeed(1.0f);
         FUN_00402ab8(panel, detailX, detailY, detailSpeed);
-        FUN_004042fc(panel, x, y, detailSpeed);
+        uiDrawStereoListScrollBar(panel, x, y, detailSpeed);
     } else if (panel->mode == 1) {
         drawSpriteDetailPanelClipped(panel, detailX, detailY, detailSpeed);
     }

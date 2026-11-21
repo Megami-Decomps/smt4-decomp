@@ -55,7 +55,7 @@ void titlePanelDraw(TitlePanel *panel)
     }
     FUN_00397db0(panel, frame, speed);
     efctSetSpeed(1.0f);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);
 }

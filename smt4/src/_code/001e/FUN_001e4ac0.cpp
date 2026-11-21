@@ -26,7 +26,7 @@ s32 FUN_001e4ac0(u32 job)
     renderCtxSelectTexture(g_titleScene, 0);
     gxSubmitDrawZeroExtraParams(0.0f, 0.0f, 400.0f, 240.0f, color, color, color, 0.0f, color);
     forwardRecoveredCallback();
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     return 0;
 }
 }

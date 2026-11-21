@@ -62,7 +62,7 @@ void btlPartnerDrawEntries(DrawGroup *group, DrawEntrySource *source)
     }
     renderCtxPushA(context, renderCtxPackPassFlags(5, 1));
     context = g_renderCtx;
-    renderStackPushCounted(&context->additional.stackC, renderCtxPackPassFlagsWithAlpha(6));
+    renderStackPushCounted(context->stacks + RENDER_STACK_C, renderCtxPackPassFlagsWithAlpha(6));
 
     s32 drawn = 0;
     for (s32 i = 0; i < 12; i++) {
@@ -75,8 +75,8 @@ void btlPartnerDrawEntries(DrawGroup *group, DrawEntrySource *source)
             drawn++;
         }
     }
-    renderStackPop(&g_renderCtx->additional.stackC);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_C);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
 }

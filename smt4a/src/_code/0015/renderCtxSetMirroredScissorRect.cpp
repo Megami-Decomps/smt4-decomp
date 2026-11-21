@@ -5,8 +5,8 @@
 #include "camp/RenderCtxA.h"
 
 typedef char CheckCachedStateSize[sizeof(RenderStateStack) == 0x20 ? 1 : -1];
-typedef char CheckScissorMinimumOffset[offsetof(RenderCtxScissorA, scissorMinimum) == 0x1338 ? 1 : -1];
-typedef char CheckScissorMaximumOffset[offsetof(RenderCtxScissorA, scissorMaximum) == 0x1358 ? 1 : -1];
+typedef char CheckScissorMinimumOffset[offsetof(RenderCtxA, stacks[RENDER_STACK_SCISSOR_MINIMUM]) == 0x1338 ? 1 : -1];
+typedef char CheckScissorMaximumOffset[offsetof(RenderCtxA, stacks[RENDER_STACK_SCISSOR_MAXIMUM]) == 0x1358 ? 1 : -1];
 
 extern "C" s32 asdGxPresetsGetEnable(u32 viewport);
 extern "C" s32 stateValuesGetBySelector(u32 viewport);
@@ -49,8 +49,8 @@ extern "C" s32 renderCtxSetMirroredScissorRect(s32 x, s32 y, s32 width, s32 heig
         minimumY = maximumY;
     if (endY > maximumY)
         endY = maximumY;
-    renderStackSet(&g_renderCtx->scissorMinimum, static_cast<u32>(minimumY) | (static_cast<u32>(minimumX) << 16));
-    renderStackSet(&g_renderCtx->scissorMaximum, static_cast<u32>(endY) | (static_cast<u32>(endX) << 16));
-    renderStackSetCounted(&g_renderCtx->scissor, RENDER_STATE_SCISSOR);
+    renderStackSet(g_renderCtx->stacks + RENDER_STACK_SCISSOR_MINIMUM, static_cast<u32>(minimumY) | (static_cast<u32>(minimumX) << 16));
+    renderStackSet(g_renderCtx->stacks + RENDER_STACK_SCISSOR_MAXIMUM, static_cast<u32>(endY) | (static_cast<u32>(endX) << 16));
+    renderStackSetCounted(g_renderCtx->stacks + RENDER_STACK_SCISSOR, RENDER_STATE_SCISSOR);
     return 1;
 }

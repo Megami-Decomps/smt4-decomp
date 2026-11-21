@@ -26,7 +26,7 @@ void titleSceneDrawEffectEditor()
     if (effMenuGetFlag() != 0 && g_titleScene->stereoMode == 0)
         enabled = 0;
     effMenuCallHandler(0, enabled);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     if (reinterpret_cast<EditorDrawView *>(&g_effectEditor)->debugBackdrop != 0) {
         // A 30-line debug grid at the origin.
         u32 lightColor = 0x909090FF;

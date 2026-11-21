@@ -55,9 +55,9 @@ u32 FUN_00289f10(u32 job)
             work->prepared = 1;
         }
         RenderCtxA *context = g_renderCtx;
-        renderStackPush(&context->stackA, renderCtxPackPassFlags(5, 1));
+        renderStackPush(context->stacks + RENDER_STACK_A, renderCtxPackPassFlags(5, 1));
         context = g_renderCtx;
-        renderStackPush(&context->additional.stackC, renderCtxPackPassFlagsWithAlpha(6));
+        renderStackPush(context->stacks + RENDER_STACK_C, renderCtxPackPassFlagsWithAlpha(6));
 
         bool twoPass = work->spriteId == SPRITE_ID_FADE_A || work->spriteId == SPRITE_ID_FADE_B
                        || work->spriteId == SPRITE_ID_FADE_C;
@@ -72,8 +72,8 @@ u32 FUN_00289f10(u32 job)
                          spriteColorPack(work->level, work->alpha), 2);
         }
 
-        renderStackPop(&g_renderCtx->additional.stackC);
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_C);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
         skinObjectUpdateMatrices(g_renderCtx);
         renderCtxResetColorScale(g_renderCtx);
     }

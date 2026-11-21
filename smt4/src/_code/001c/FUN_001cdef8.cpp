@@ -41,7 +41,7 @@ u8 FUN_001cdef8(void)
         unitGetStereoScreenPosition(&x, &y, 8, 0.35f);
         efctSetSpeed(vec2GetSpeed(&animation->third));
         texDrawTableEntryAtStoredOrigin(2, 0x1A, 2, x, y, 1);
-        renderStackPop(&g_titleScene->stackA);
+        renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     }
     return 0;
 }

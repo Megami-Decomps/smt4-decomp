@@ -53,9 +53,9 @@ u32 FUN_00168e00(s32 x, s32 y, s32 width, s32 height)
     if (upperY > maxY) {
         upperY = maxY;
     }
-    renderStackPush(&g_renderCtx->scissorMinimum, (u32)lowerY | ((u32)lowerX << 16));
-    renderStackPush(&g_renderCtx->scissorMaximum, (u32)upperY | ((u32)upperX << 16));
-    renderStackPush(&g_renderCtx->scissor, 3);
+    renderStackPush(g_renderCtx->stacks + RENDER_STACK_SCISSOR_MINIMUM, (u32)lowerY | ((u32)lowerX << 16));
+    renderStackPush(g_renderCtx->stacks + RENDER_STACK_SCISSOR_MAXIMUM, (u32)upperY | ((u32)upperX << 16));
+    renderStackPush(g_renderCtx->stacks + RENDER_STACK_SCISSOR, 3);
     return 1;
 }
 }

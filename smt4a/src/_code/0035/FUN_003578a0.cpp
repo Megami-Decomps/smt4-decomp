@@ -55,7 +55,7 @@ void FUN_003578a0(f32 height)
                     maximumX, height, maximumZ);
             }
         }
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     }
 }
 }

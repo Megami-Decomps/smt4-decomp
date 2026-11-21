@@ -174,7 +174,7 @@ extern "C" s32 uniteDrawPanel(u32)
         work->optionNamesA.highlightFrame = (u8)(work->optionNamesA.highlightFrame + 1) % 40;
         uiDrawRotatingGridHighlights(0x1E0, work->optionNamesA.highlightFrame);
     }
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     skinObjectUpdateMatrices(reinterpret_cast<SkinObject *>(g_renderCtx));
     renderCtxResetColorScale(g_renderCtx);
     return 0;

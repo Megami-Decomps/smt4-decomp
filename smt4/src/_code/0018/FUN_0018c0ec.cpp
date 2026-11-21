@@ -90,7 +90,7 @@ int __aeabi_memcpy4(...);
 
 int mapDepartAdvanceState(void);
 int unitNotificationShowNext(...);
-int FUN_002960ec(...);
+int uiUpdateChainedSpriteRows(...);
 int FUN_00296284(int, int);
 int FUN_002963ec(...);
 int resultExpGaugesRefresh(...);
@@ -174,7 +174,7 @@ extern unsigned int devilCalculateRankCost(unsigned short, int, int);
 /* Supplied declaration required: uiStoreTextureEntryCenter. */
 extern int dataTable9EntryOrZero(int);
 /* Supplied declaration required: unitNotificationShowNext. */
-/* Supplied declaration required: FUN_002960ec. */
+/* Supplied declaration required: uiUpdateChainedSpriteRows. */
 /* Supplied declaration required: FUN_00296284. */
 /* Supplied declaration required: FUN_002963ec. */
 /* Supplied declaration required: resultExpGaugesRefresh. */
@@ -458,7 +458,7 @@ LAB_0018c354:
     }
     break;
   case 3:
-    FUN_002960ec(temp_v2);
+    uiUpdateChainedSpriteRows(temp_v2);
     unitNotificationShowNext(temp_v2);
     temp_v4 = 0;
     do {
@@ -484,7 +484,7 @@ LAB_0018c354:
     }
     break;
   case 4:
-    FUN_002960ec(temp_v2);
+    uiUpdateChainedSpriteRows(temp_v2);
     unitNotificationShowNext(temp_v2);
     temp_v4 = 0;
     do {
@@ -506,7 +506,7 @@ LAB_0018c354:
     }
     break;
   case 5:
-    temp_v28 = FUN_002960ec(temp_v2);
+    temp_v28 = uiUpdateChainedSpriteRows(temp_v2);
     unitNotificationShowNext(temp_v2);
     temp_v4 = gameGetPlayerData();
     temp_v32 = (char *)(temp_v2 + 0xd517);
@@ -958,7 +958,7 @@ LAB_0018d058:
       if (temp_v8 == 0) goto LAB_0018d058;
     } while( 1 );
   case 6:
-    FUN_002960ec(temp_v2);
+    uiUpdateChainedSpriteRows(temp_v2);
     unitNotificationShowNext(temp_v2);
     temp_v4 = 0;
     inputQueryButtonState(0,1);

@@ -2,11 +2,11 @@
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
-u32 lzGetAdvertisedSize(const u8 *source);
+u32 nn_cx_GetUncompressedSize(const u8 *source);
 u8 *asdMemoryAllocAligned(u32 alignment, u32 heap, u32 category, u32 size, u32 argument, s32 clear);
-void lzDecompressBytes(const u8 *source, u8 *destination);
-void huffmanDecompress(const u8 *source, u8 *destination);
-void rleDecompress(const u8 *source, u8 *destination);
+void nn_cx_UncompressLZ(const u8 *source, u8 *destination);
+void nn_cx_UncompressHuffman(const u8 *source, u8 *destination);
+void nn_cx_UncompressRL(const u8 *source, u8 *destination);
 void asdMemFree(void *memory);
 
 // Expand a supported Nintendo compression stream and transfer ownership from source to output.
@@ -15,7 +15,7 @@ u8 *aocTexExpandCompressedData(u8 *source, u32 flags, u32 argument)
     u32 kind = *source & 0xF0;
     u8 *output = source;
     if (kind == 0x10 || kind == 0x20 || kind == 0x30) {
-        u32 size = lzGetAdvertisedSize(source);
+        u32 size = nn_cx_GetUncompressedSize(source);
         if (size != 0) {
             if (flags & 1) {
                 if (flags & 2) {
@@ -35,11 +35,11 @@ u8 *aocTexExpandCompressedData(u8 *source, u32 flags, u32 argument)
                 }
             }
             if (kind == 0x10) {
-                lzDecompressBytes(source, output);
+                nn_cx_UncompressLZ(source, output);
             } else if (kind == 0x20) {
-                huffmanDecompress(source, output);
+                nn_cx_UncompressHuffman(source, output);
             } else if (kind == 0x30) {
-                rleDecompress(source, output);
+                nn_cx_UncompressRL(source, output);
             }
             asdMemFree(source);
         }

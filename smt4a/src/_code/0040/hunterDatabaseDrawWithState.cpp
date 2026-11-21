@@ -23,10 +23,10 @@ u32 hunterDatabaseDrawWithState(HunterDatabaseDrawView *work)
     renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     spriteDetailPanelDraw(work);
     efctSetSpeed(1.0f);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     context = g_renderCtx;
     s32 blendState = packNibblesAndByte(6, 7, 0);
-    renderStackSetCounted(&context->stackB, blendState);
+    renderStackSetCounted(context->stacks + RENDER_STACK_B, blendState);
     renderCtxResetColorScale(g_renderCtx);
     return 0;
 }

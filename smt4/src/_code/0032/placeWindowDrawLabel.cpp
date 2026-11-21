@@ -35,7 +35,7 @@ u32 placeWindowDrawLabel(void)
         0xffffffff, 1.0f, window->text);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     return 0;
 }
 }

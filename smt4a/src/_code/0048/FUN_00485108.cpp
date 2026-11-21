@@ -22,12 +22,12 @@ void FUN_00485108(NameFormStateA *form, s32 x, s32 y, f32 speed)
     efctSetSpeed(vec2GetSpeed(&work->decoration.sprite) * speed);
     RenderCtxA *context = g_renderCtx;
     s32 blend = packNibblesAndByte(6, 1, 0);
-    renderStackSet(&context->stackB, blend);
+    renderStackSet(context->stacks + RENDER_STACK_B, blend);
     for (s32 index = 0; index < 4; ++index)
         texDrawTableEntryAtStoredOrigin(2, 0x23, index + 0x155, x, y, 0x29);
     context = g_renderCtx;
     blend = packNibblesAndByte(6, 7, 0);
-    renderStackSet(&context->stackB, blend);
+    renderStackSet(context->stacks + RENDER_STACK_B, blend);
     if (form->countdown > 0)
         texDrawTableEntryAtStoredOrigin(2, 0x23, 0x159, x, y, 0x29);
     efctSetSpeed(speed);

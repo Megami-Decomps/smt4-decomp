@@ -33,7 +33,7 @@ u32 btlGameOverDrawOverlay(OverlayTask *task)
         asdTMTexTableEntryAt(0x22, 3000);
         f32 shift = (f32)(s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.35f);
         texDrawTableEntryAtStoredOrigin(2, 0x22, 3000, (s32)shift, 0, 2);
-        renderStackPopChecked(&g_renderCtx->stackA);
+        renderStackPopChecked(g_renderCtx->stacks + RENDER_STACK_A);
         efctSetSpeed(1.0f);
         context = g_renderCtx;
         mode = renderCtxPackPassFlags(1, 0);
@@ -43,7 +43,7 @@ u32 btlGameOverDrawOverlay(OverlayTask *task)
         asdTMTexTableEntryAt(0x22, 1000);
         shift = (f32)(s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.28f);
         texDrawTableEntryAtStoredOrigin(2, 0x22, 1000, (s32)shift, 0, 6);
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
         efctSetSpeed(1.0f);
         return 0;
     }

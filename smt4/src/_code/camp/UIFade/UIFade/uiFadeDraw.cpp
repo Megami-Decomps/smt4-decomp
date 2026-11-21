@@ -25,10 +25,10 @@ void uiFadeDraw(u32 arg)
     renderCtxSelectStereoLayout(g_titleScene);
     ctx = g_titleScene;
     state = renderCtxPackPassFlags(1, 0);
-    renderStackPush(&ctx->stackA, state);
+    renderStackPush(ctx->stacks + RENDER_STACK_A, state);
     efctSetSpeed(fade->alpha);
     texDrawTableEntryAtStoredOrigin(2, 0xe, 0x10c, 0, 0, arg);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     renderCtxResetColorScale(g_titleScene);
     efctSetSpeed(1.0f);
 }

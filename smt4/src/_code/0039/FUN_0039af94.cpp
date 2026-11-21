@@ -106,10 +106,10 @@ void FUN_0039af94(MapMarkerScreen *screen)
             efctSetSpeed(1.0f);
             RenderCtx *context = g_titleScene;
             s32 state = renderCtxPackPassFlags(1, 0);
-            renderStackPushCounted(&context->stackA, state);
+            renderStackPushCounted(context->stacks + RENDER_STACK_A, state);
             uiDrawTableTextureSized(9, 0x13, sprite, (s32)(origin[0] + (f32)drawX), (s32)(origin[1] + (f32)drawY),
                          drawWidth, drawHeight, 0xB);
-            renderStackPopChecked(&g_titleScene->stackA);
+            renderStackPopChecked(g_titleScene->stacks + RENDER_STACK_A);
         }
     }
 }

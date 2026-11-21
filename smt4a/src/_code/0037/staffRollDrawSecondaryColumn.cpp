@@ -22,7 +22,7 @@ u32 staffRollDrawSecondaryColumn(void)
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
     s32 state = renderCtxPackPassFlags(1, 0);
-    renderStackPushCountedDirect(&context->stackA, state);
+    renderStackPushCountedDirect(context->stacks + RENDER_STACK_A, state);
     for (u32 index = 0; index < 12; ++index) {
         s32 x = (s32)credits->lines[index].x;
         s32 y = (s32)credits->lines[index].y;
@@ -31,7 +31,7 @@ u32 staffRollDrawSecondaryColumn(void)
     }
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     return 0;
 }
 }

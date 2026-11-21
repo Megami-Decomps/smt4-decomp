@@ -15,12 +15,12 @@ u32 FUN_001e1418(void)
     renderCtxSelectStereoLayout(g_titleScene);
     RenderCtx *context = g_titleScene;
     s32 renderState = renderCtxPackPassFlags(1, 0);
-    renderStackPush(&context->stackA, renderState);
+    renderStackPush(context->stacks + RENDER_STACK_A, renderState);
     f32 parallax = renderCtxCalculateStereoParallax(g_titleScene, 0.33f);
     texDrawTableEntryAtStoredOrigin(2, 2, 0x1FFB8, static_cast<s32>(parallax) - 56, -8, 1);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);
     return 0;

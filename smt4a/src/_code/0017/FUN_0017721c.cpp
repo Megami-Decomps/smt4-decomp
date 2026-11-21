@@ -119,7 +119,7 @@ void FUN_0017721c(SceneDrawJob *job, u32 stateA, u32 stateB, s32 dumpCommands)
         sceneDrawJobRecords(job, renderer);
         u32 *end = cursor != NULL ? g_commandBufferCursor : NULL;
         if (cursor != NULL && end != NULL && end - cursor > 0) {
-            char line[260];
+            char line[0x100];
             s32 length = 0;
             s32 words = 0;
 

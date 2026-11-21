@@ -59,7 +59,7 @@ u8 FUN_003bab24(void)
             drawOverlay(overlay);
             texDrawTableEntryAtStoredOrigin(2, 9, 1, 0, 0, 11);
         }
-        renderStackPop(&g_renderCtx->stackA);
+        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
         skinObjectUpdateMatrices(g_renderCtx);
         renderCtxResetColorScale(g_renderCtx);
     }

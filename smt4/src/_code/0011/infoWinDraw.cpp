@@ -46,7 +46,7 @@ s32 infoWinDraw(u32 job)
     }
     texDrawTableEntryAtStoredOrigin(2, 14, 134, x, y, 31);
     texDrawTableEntryAtStoredOrigin(2, 14, 258, x, y, 31);
-    renderStackPop(&g_titleScene->stackA);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     return 0;
 }
 

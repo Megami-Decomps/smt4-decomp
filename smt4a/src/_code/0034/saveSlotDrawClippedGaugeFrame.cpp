@@ -33,7 +33,7 @@ void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, s32 flag);
 // Replace the blend-stack top and reapply it when changing modes.
 static __inline void applyGaugeBlend(RenderCtxA *context, s32 state)
 {
-    RenderStateStack *stack = &context->stackB;
+    RenderStateStack *stack = context->stacks + RENDER_STACK_B;
     s32 previous = stack->entries[stack->count];
     stack->entries[stack->count] = state;
     if (renderStackNeedsApply(stack, previous, state)) {
@@ -64,12 +64,12 @@ extern "C" void saveSlotDrawClippedGaugeFrame(u8 *panel, s32 rows)
     applyGaugeBlend(g_renderCtx, packNibblesAndByte(6, 1, 0));
     texDrawTableEntryAtStoredOrigin(2, 13, 0x4F, sprite->x + x, sprite->y + y, 0x2E);
     texDrawTableEntryAtStoredOrigin(2, 13, 0x4E, sprite->x + x, sprite->y + y - shrink, 0x2E);
-    renderStackSet(&g_renderCtx->scissor, 3);
+    renderStackSet(g_renderCtx->stacks + RENDER_STACK_SCISSOR, 3);
     gxSetMirroredClippedScissor(sprite->x + x, sprite->y + y, sprite->placement->width, sprite->placement->height - shrink, 1);
     applyGaugeBlend(g_renderCtx, packNibblesAndByte(6, 1, 0));
     texDrawTableEntryAtStoredOrigin(2, 13, 0x50, sprite->x + x, sprite->y + y, 0x2E);
     texDrawTableEntryAtStoredOrigin(2, 13, 0x51, sprite->x + x, sprite->y + y, 0x2E);
-    renderStackSet(&g_renderCtx->scissor, 0);
+    renderStackSet(g_renderCtx->stacks + RENDER_STACK_SCISSOR, 0);
     applyGaugeBlend(g_renderCtx, packNibblesAndByte(6, 7, 0));
     efctSetSpeed(1.0f);
 }

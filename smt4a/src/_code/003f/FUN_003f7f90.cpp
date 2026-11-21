@@ -54,7 +54,7 @@ s32 FUN_003f7f90(PositionedMenuDrawWork *work, s32 value)
     renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     drawStates(work);
     efctSetSpeed(1.0f);
-    renderStackPop(&g_renderCtx->stackA);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
     skinObjectUpdateMatrices((SkinObject *)g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
