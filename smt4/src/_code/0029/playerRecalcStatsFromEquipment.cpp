@@ -32,8 +32,8 @@ struct StatLimits {
 
 extern "C" {
 
-void FUN_003c1e50(GrowthParameters *info);
-void FUN_003c1ab4(s32 level, GrowthValues *output, const GrowthParameters *parameters);
+void playerGetGrowthParameters(GrowthParameters *info);
+void statMaximumsAtLevel(s32 level, GrowthValues *output, const GrowthParameters *parameters);
 void FUN_002dada4(StatValues *stats, const StatLimits *limits, s32 mode);
 
 /* The equipped item of one slot. */
@@ -103,9 +103,9 @@ void playerRecalcStatsFromEquipment(PlayerDataIV *player)
     player->stats[3] = statClamp(player->stats[3]);
     player->stats[4] = statClamp(player->stats[4]);
     player->stats[1] = statClamp(player->stats[1]);
-    FUN_003c1e50(&parameters);
+    playerGetGrowthParameters(&parameters);
     parametersCopy = parameters;
-    FUN_003c1ab4(player->level, (GrowthValues *)current, &parametersCopy);
+    statMaximumsAtLevel(player->level, (GrowthValues *)current, &parametersCopy);
     limits.base = *(const LimitWords *)player->skills;
     player->maxHp += hpBonus;
     player->maxMp += mpBonus;

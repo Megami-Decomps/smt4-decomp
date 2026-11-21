@@ -3,12 +3,10 @@
 #include "gfx/ModelSortKey.h"
 
 extern "C" {
-__softfp u64 FUN_00524fb4(f32 depth);
-
 u64 FUN_00516818(u32 unused, const ModelSortEntry *entry, u32 priority,
                  f32 start, f32 end, f32 scale)
 {
-    u64 key = FUN_00524fb4((end - start) * scale) & 0xFFFFFF;
+    u64 key = (u64)((end - start) * scale) & 0xFFFFFF;
     ModelSortNode *node = entry->node;
     ModelSortModel *model = entry->model;
     if (node != NULL && model != NULL) {

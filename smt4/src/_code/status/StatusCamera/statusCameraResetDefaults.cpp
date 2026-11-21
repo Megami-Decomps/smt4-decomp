@@ -5,7 +5,7 @@
 
 extern "C" {
 extern StatusCameraWork *g_statusCamera;
-void FUN_002bc644(s32 x, s32 y, s32 width, s32 height);
+void asdGxSetViewport(s32 x, s32 y, s32 width, s32 height);
 void cameraMatrixCacheReset(StatusCameraWork *camera, s32 enabled);
 void cameraMatrixCacheSetLookAt(StatusCameraWork *camera, const Vec3 *eye, const Vec3 *target, const Vec3 *up);
 void stereoCameraSetPerspective(StatusCameraWork *camera, s32 enabled, f32 fov, f32 nearClip, f32 farClip, f32 aspect);
@@ -37,7 +37,7 @@ void statusCameraResetDefaults(void)
         Vec3 offset;
         vec3Scale(&offset, &camera->dir, camera->dist);
         vec3Add(&target, &target, &offset);
-        FUN_002bc644(200, 0, 200, 240);
+        asdGxSetViewport(200, 0, 200, 240);
         cameraMatrixCacheReset(camera, 1);
         cameraMatrixCacheSetLookAt(camera, &camera->eye, &target, &up);
         stereoCameraSetPerspective(camera, 1, camera->lens.fov, camera->lens.nearClip, camera->lens.farClip, 1.6666666f);

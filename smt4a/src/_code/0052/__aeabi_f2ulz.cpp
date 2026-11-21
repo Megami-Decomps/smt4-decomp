@@ -1,5 +1,5 @@
 /* NON_MATCHING: BLOCKED: ARM runtime helper (float to 64-bit unsigned conversion) written in assembly in the library */
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00524fb4` (_code @ 0x524fb4, 0x51 bytes) from smt4a.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `__aeabi_f2ulz` (_code @ 0x524fb4, 0x51 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
@@ -17,7 +17,7 @@ int halt_baddata(void);
 
 /* WARNING: Control flow encountered bad instruction data */
 
-unsigned long long FUN_00524fb4(int param_1)
+unsigned long long __aeabi_f2ulz(int param_1)
 
 {
 /* irregular: 3 native warning(s); review required */

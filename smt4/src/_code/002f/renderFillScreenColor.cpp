@@ -10,7 +10,6 @@ struct RenderColor {
 };
 
 extern "C" {
-extern AsdGxDisplayBuffers g_asdGxPresetsDisplay1; /* g_asdGxPresets.displays[1] */
 void renderCtxResetFrameStacks(RenderCtx *scene);
 void FUN_00343364(RenderCtx *scene, const RenderColor *color, u32 mode, u32 flags, f32 opacity);
 
@@ -24,7 +23,7 @@ void renderFillScreenColor(u32 mode, u32 flags, f32 red, f32 green, f32 blue, f3
     s32 preset;
     if (g_asdGxPresets.selectedDisplay == &g_asdGxPresets.displays[0])
         preset = 0;
-    else if (g_asdGxPresets.selectedDisplay == &g_asdGxPresetsDisplay1)
+    else if (g_asdGxPresets.selectedDisplay == &g_asdGxPresets.displays[1])
         preset = 1;
     else
         preset = 2;

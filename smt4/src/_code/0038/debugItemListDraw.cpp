@@ -27,7 +27,7 @@ void debugItemListDraw(DebugItemList *work)
         return;
     }
     for (s32 row = 0; row < count; ++row) {
-        const char *text = FUN_002bcddc(work->items[row].id, 0);
+        const char *text = questGetTitleOrDescription(work->items[row].id, 0);
         textDrawString(24.0f, (f32)(row * 14 + 8), 0.0f, 2, 1.0f, color, 1.0f, text);
     }
     s32 selected = flaggedEntryGetValueByState(&work->selection);

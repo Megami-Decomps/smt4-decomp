@@ -59,7 +59,7 @@ typedef struct Screen4A {
         } confirmation;
     };
     /* 0x085C */ u32 job;
-    /* 0x0860 */ u8 unk0860;
+    /* 0x0860 */ s8 unk0860;
     /* 0x0861 */ u8 unk0861[0xA00F];
     /* 0xA870 */ u8 unkA870;
     /* 0xA871 */ u8 unkA871;

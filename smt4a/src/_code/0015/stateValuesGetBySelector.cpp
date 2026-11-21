@@ -1,21 +1,15 @@
-#include "common.h"
-
-struct StateValues {
-    s8 primary;   // 0x00
-    s8 secondary; // 0x01
-};
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 extern "C" {
-extern StateValues DAT_0063ff88;
-
+/* Returns the full-resolution flag of a screen target's framebuffer (0 and 1: top, 2: bottom). */
 s32 stateValuesGetBySelector(u32 selector)
 {
     if (selector == 0 || selector == 1) {
-        return DAT_0063ff88.primary;
+        return (s8)g_asdGxPresets.fullResolution[0];
     }
     if (selector == 2) {
-        return DAT_0063ff88.secondary;
+        return (s8)g_asdGxPresets.fullResolution[1];
     }
     return 0;
 }
-}
+} /* extern "C" */

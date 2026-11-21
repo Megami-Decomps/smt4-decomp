@@ -1,4 +1,4 @@
-/* NON_MATCHING: ordinal and accepted-count values remain in registers instead of retail argument homing; scene gate folds to direct addressing and return tails differ. */
+/* NON_MATCHING: only the kind-2 test's branch sense differs (retail: cmp #2; bne <kind 3>; b <kind 2>, the build: beq <kind 2>; b <kind 3>). */
 #include "ui/UiSpriteApi.h"
 #include "shard/PlayScene.h"
 #include "gamedata/GameDataAccess.h"
@@ -21,13 +21,14 @@ s32 idOwnerHasActiveObject(void *unit);
 u32 FUN_00293988(void *battle);
 s32 FUN_0023dcb8(void);
 
+/* The kind of the `ordinal`-th available command of the current party slot's menu, or 0. */
 u8 FUN_00330f80(PlayScene *scene, s32 ordinal)
 {
-    // These byte columns are accessed inside canonical opaque scene/party-manager data.
-    struct CommandSceneGate { u8 prefix[0x38D1]; u8 blocked; };
+    /* The slot table's party unit indices (byte column 0x9108 + slot). */
     struct CommandPartySlots { u8 prefix[0x9107]; s8 units[1]; };
-    const CommandPartySlots *slots = static_cast<const CommandPartySlots *>(gameGetSlotTable());
+    u8 result = 0;
     s32 accepted = 0;
+    const CommandPartySlots *slots = static_cast<const CommandPartySlots *>(gameGetSlotTable());
     for (s32 index = 0; index < 9; ++index) {
         const ContextCommandDefinition *command = FUN_00292960(static_cast<u8>(index), scene->unk305C == 0);
         void *unit = NULL;
@@ -42,7 +43,7 @@ u8 FUN_00330f80(PlayScene *scene, s32 ordinal)
         if (command->blockedInBattleMode && (btlGetMainState()->battleFlags & 0x40000))
             continue;
         if (command->kind == 5) {
-            if (scene->unk305C != 0 && reinterpret_cast<const CommandSceneGate *>(scene)->blocked)
+            if (scene->unk305C != 0 && scene->party.vacant[0])
                 continue;
         } else {
             if (command->kind == 2 &&
@@ -53,10 +54,12 @@ u8 FUN_00330f80(PlayScene *scene, s32 ordinal)
         }
         if (command->kind != 6 && command->kind != 8 && scene->unk305C == 0 && FUN_0023dcb8())
             continue;
-        if (accepted == ordinal)
-            return command->kind;
+        if (accepted == ordinal) {
+            result = command->kind;
+            break;
+        }
         ++accepted;
     }
-    return 0;
+    return result;
 }
 }

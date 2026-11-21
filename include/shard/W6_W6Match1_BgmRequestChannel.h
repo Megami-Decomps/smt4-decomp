@@ -45,6 +45,29 @@ extern "C" {
 void bgmStop(s32 id, u32 fadeFrames, s32 force);
 }
 
+/* bgmHasPendingResume's test: the channel plays and has a pending transition (0x20). */
+static __inline bool bgmChannelIsPendingResume(const BgmRequestChannel *channel)
+{
+    return (channel->flags & BGM_CHANNEL_PLAYING) != 0 && (channel->flags & 0x20) != 0;
+}
+
+/* bgmFadeOut's per-channel step: cancels a playing channel's pending transition (0x20: it becomes
+ * 0x40 and this channel the current one in `selection`) or starts its normal 30-frame fade-out
+ * unless it is flagged 0x400. */
+static __inline void bgmFadeChannel(BgmRequestChannel *channel, u32 parameter, BgmChannelSelection *selection)
+{
+    if (channel->flags & BGM_CHANNEL_PLAYING) {
+        if (channel->flags & 0x20) {
+            channel->flags = (channel->flags & ~0x20) | 0x40;
+            channel->play.param = parameter;
+            selection->selected = channel->play.index;
+        } else if (!(channel->flags & 0x400)) {
+            channel->fadeFrames = 30;
+            channel->flags |= BGM_CHANNEL_FADE_OUT;
+        }
+    }
+}
+
 #ifdef __cplusplus
 extern "C" {
 #endif

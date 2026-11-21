@@ -1,4 +1,5 @@
-/* NON_MATCHING: allocation, slot setup and the unrolled copy loop match in shape; retail keeps `i * stride` as an in-loop mla and addresses the copy as `(n * i) * 3` after hoisting n = (indices + 2) / 3 behind the count guard, and chooses different registers. */
+/* NON_MATCHING: the copy now indexes by whole triangle groups as retail does; remaining: retail computes the group count
+   after the count guard (ours hoists it before), multiplies stride * i in the mla, and picks other registers. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
@@ -43,9 +44,9 @@ GeomObject *effGeomCreateRepeatedIndexList(s32 count, s32 triangles, s32 vertexS
     object->flags = 0xA5;
     u16 *indices = slot->indices;
     for (s32 i = 0; i < count; i++) {
-        s32 perCopy = (indicesPerTriangleList + 2) / 3 * 3;
-        for (s32 k = 0; k < perCopy; k++) {
-            indices[i * perCopy + k] = source[k] + i * vertexStride;
+        s32 groups = (indicesPerTriangleList + 2) / 3;
+        for (s32 k = 0; k < groups * 3; k++) {
+            indices[groups * i * 3 + k] = source[k] + i * vertexStride;
         }
     }
     return object;

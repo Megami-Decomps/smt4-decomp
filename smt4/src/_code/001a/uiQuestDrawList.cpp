@@ -77,7 +77,7 @@ void uiQuestDrawList(void)
         TextureTableEntryIV *plate = asdTMTexTableEntryAt(0x29, 0x9c);
         u32 color = FUN_001af84c(id, entry->x + plate->x + x, plate->y + entry->y + y, 0x6f, 0);
         TextureTableEntryIV *name = asdTMTexTableEntryAt(0x29, 0x9b);
-        __2sprintf(text, "%s", FUN_002bcddc(id, 0));
+        __2sprintf(text, "%s", questGetTitleOrDescription(id, 0));
         textDrawString((f32)(entry->x + name->x + x), (f32)(entry->y + name->y + y), 0.45f, 2, 0.0f, color, 1.0f, text);
         TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x29, 0x9a);
         drawSkillCategoryLabel(id, icon->x + entry->x + x, entry->y + icon->y + y, 0x6f);
@@ -120,7 +120,7 @@ void uiQuestDrawList(void)
         TextureTableEntryIV *plate = asdTMTexTableEntryAt(0x29, 0xb3);
         u32 color = FUN_001af84c(id, plate->x + focus->x + x, focus->y + plate->y + y, 0xab, 1);
         TextureTableEntryIV *name = asdTMTexTableEntryAt(0x29, 0xb2);
-        __2sprintf(text, "%s", FUN_002bcddc(id, 0));
+        __2sprintf(text, "%s", questGetTitleOrDescription(id, 0));
         textDrawString((f32)(focus->x + name->x + x), (f32)(focus->y + name->y + y), 0.32f, 3, 0.0f, color, 1.0f, text);
         if (questIsCompleted(id)) {
             texDrawTableEntryAtStoredOrigin(2, 0x29, 0xb0, focus->x + x, focus->y + y, 0xab);

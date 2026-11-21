@@ -1,4 +1,4 @@
-/* NON_MATCHING: cached adjacent links become LDRD instead of retail's separate loads; list-search and unlink cold blocks have different placement. -O2 candidate. */
+/* NON_MATCHING: retail places both list searches' advance steps and the head-unlink arm after the epilogue and loads the unlinked object's next link inside each arm; the build keeps the searches inline and hoists that load. */
 #include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
@@ -23,17 +23,17 @@ static inline void removeSoundObject(AsdSndStatusApoc *status, AsdSndObject *sou
     }
     if (node != NULL) {
         AsdSndObject *previous = sound->prev;
-        AsdSndObject *next = sound->next;
         if (previous != NULL) {
+            AsdSndObject *next = sound->next;
             previous->next = next;
-            if (next != NULL) {
+            if (sound->next != NULL) {
                 next->prev = previous;
             }
-        } else if (next == NULL) {
+        } else if (sound->next == NULL) {
             status->objects = NULL;
         } else {
-            next->prev = NULL;
-            status->objects = next;
+            sound->next->prev = NULL;
+            status->objects = sound->next;
         }
     }
     --status->objectCount;
@@ -48,12 +48,11 @@ extern "C" AsdSndObject *asdSoundObjectCreate(u32 data, u32 option, u32 kind, f3
     AsdSndObject *sound = (AsdSndObject *)asdMemoryAllocTracked(
         ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(AsdSndObject), 1);
     if (sound != NULL) {
-        for (AsdSndObject *node = status->objects; node != NULL; node = node->next) {
-            if (node == sound) {
-                removeSoundObject(status, sound);
-                break;
-            }
-        }
+        AsdSndObject *node = status->objects;
+        while (node != NULL && node != sound)
+            node = node->next;
+        if (node != NULL)
+            removeSoundObject(status, sound);
         for (s32 i = 0; i < sound->voiceCount; ++i) {
             if (sound->voices[i] != 0) {
                 nn_snd_CTR_FreeVoice(sound->voices[i]);

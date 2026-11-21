@@ -3,7 +3,6 @@
 #include "shard/JobWork.h"
 
 extern "C" {
-extern s8 DAT_0063ff88[2]; /* Full-resolution enable flags for the two framebuffer classes. */
 void asdGxCmdBufferFinalizeBlock(void);
 void FUN_0017ced4(u32 source, u32 sourceStride, u32 sourceGap, u32 destination,
                  u32 destinationStride, s32 destinationGap, u32 bytes);
@@ -20,8 +19,8 @@ s32 gxCopyFramebufferToSurface(u32 target, JobSurface *destination)
     s32 halfWidth = 0;
     if (!(((target == 0 || target == 1) && g_asdGxPresets.framebuffers[0].mode == 0x500) ||
           (target == 2 && g_asdGxPresets.framebuffers[2].mode == 0x500)) &&
-        !(((target == 0 || target == 1) && DAT_0063ff88[0] != 0) ||
-          (target == 2 && DAT_0063ff88[1] != 0)))
+        !(((target == 0 || target == 1) && g_asdGxPresets.fullResolution[0] != 0) ||
+          (target == 2 && g_asdGxPresets.fullResolution[1] != 0)))
         halfWidth = 1;
 
     u32 width = framebuffer->width;

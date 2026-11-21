@@ -1,4 +1,3 @@
-/* NON_MATCHING: title branch placement, reward switch layout, and register allocation differ from retail. */
 #include "common.h"
 #include "quest_center/QuestRecord.h"
 #include "bible/bibleDevil.h"
@@ -11,26 +10,29 @@ char *libc_strcpy(char *destination, const char *source);
 void FUN_002bd158(const char *source, char *destination);
 void textEncodeFontSlot(s32 index, const char *text);
 
-// Bind a record's title/description and, optionally, its six reward slots to UI text fields.
+/* questGetTitleOrDescription's body (quest_center/QuestText.h): the quest's title, or its description when
+ * description is nonzero; NULL for a missing id. */
+static __inline const char *questText(u32 id, s32 description)
+{
+    QuestRecord *record = questDataGetRecord(id);
+    if (record == NULL)
+        return NULL;
+    if (description == 0)
+        return record->title;
+    return record->description;
+}
+
+/* Binds a record's title or description and, optionally, its six reward slots to UI text fields. */
 void uiBindRecordRewardText(u32 id, s32 showRewards, s32 description)
 {
     char text[128];
     char formatted[128];
-    const char *title = NULL;
-    if (description) {
-        QuestRecord *record = questDataGetRecord(id);
-        if (record != NULL) {
-            title = record->description;
-        }
-        libc_strcpy(text, title);
+    if (!description) {
+        textEncodeFontSlot(0x28, questText(id, description));
+    } else {
+        libc_strcpy(text, questText(id, description));
         FUN_002bd158(text, formatted);
         textEncodeFontSlot(0x28, formatted);
-    } else {
-        QuestRecord *record = questDataGetRecord(id);
-        if (record != NULL) {
-            title = record->title;
-        }
-        textEncodeFontSlot(0x28, title);
     }
     if (showRewards) {
         QuestRecord *record = questDataGetRecord(id);
@@ -48,11 +50,11 @@ void uiBindRecordRewardText(u32 id, s32 showRewards, s32 description)
                     textEncodeFontSlot(index + 8, text);
                     FUN_0029ede8(index + 0x18, record->requirements[index].count, -1, 0);
                     break;
-                case 5:
-                    textEncodeFontSlot(index + 0x29, dataTable0cLookupById(record->requirements[index].id));
-                    break;
                 case 6:
                     FUN_0029ede8(index + 0x18, record->requirements[index].count, -1, 0);
+                    break;
+                case 5:
+                    textEncodeFontSlot(index + 0x29, dataTable0cLookupById(record->requirements[index].id));
                     break;
                 }
             }

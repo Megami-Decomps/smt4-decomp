@@ -6,7 +6,7 @@ extern MapMainA *g_mapMain;
 __weak u32 FUN_0037a07c_hook(u32 value);
 void mapEplUpdateEntries(void);
 u32 uiSelectionRefresh(void);
-void FUN_002d26a4(u32 value);
+void sparkleSetUpdate(u32 value);
 void FUN_00395904(void);
 u8 FUN_00246bd4(void);
 u8 FUN_00249dec(void);
@@ -35,7 +35,7 @@ void FUN_0037a07c(void)
 {
     MapMainA *map = g_mapMain;
     mapEplUpdateEntries();
-    FUN_002d26a4(FUN_0037a07c_hook(uiSelectionRefresh()));
+    sparkleSetUpdate(FUN_0037a07c_hook(uiSelectionRefresh()));
     FUN_00395904();
     FUN_00246bd4();
     u8 status = FUN_00249dec();

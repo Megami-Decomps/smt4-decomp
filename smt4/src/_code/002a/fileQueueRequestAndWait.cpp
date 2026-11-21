@@ -1,5 +1,7 @@
-/* NON_MATCHING: request storage is shared across branches (184-byte frame versus retail 380), and wait loops are rotated; 83 instructions each. */
+/* NON_MATCHING: retail gives each branch its own request (380-byte frame, the paired one at sp+184) where this
+ * build shares one (184 bytes), and loads mode/bytes into s17/s16 with single stores (this build: vldmia/vstmia). */
 #include "shard/FileQueueRequest.h"
+#include "nn/fnd/TimeSpan.h"
 
 struct FileQueue;
 extern "C" {
@@ -8,9 +10,9 @@ void _ZN9Obj422224C1Ev(FileQueueRequest *request);
 char *stringCopyTruncated(char *destination, const char *source, u32 capacity);
 FileQueueRequest *fileQueuePush(FileQueue *queue, const FileQueueRequest *request);
 void fileWorkerQueueRestartIfIdle(FileQueue *queue);
-void threadSleepDuration(s64 nanoseconds);
+void threadSleepDuration(nn::fnd::TimeSpan delay);
 
-// Submit a single- or paired-path request and wait for its queued operation to finish.
+/* Submits a single- or paired-path request and waits for its queued operation to finish. */
 u32 fileQueueRequestAndWait(FileQueue *queue, const char *path, const char *secondPath, u32 *transferredBytes,
                  u32 mode, u32 bytes, void *context)
 {
@@ -28,8 +30,11 @@ u32 fileQueueRequestAndWait(FileQueue *queue, const char *path, const char *seco
         request.flags |= 2;
         operation = fileQueuePush(queue, &request);
         fileWorkerQueueRestartIfIdle(queue);
-        while (operation->operation.state != 3)
-            threadSleepDuration(3000000);
+        for (;;) {
+            if (operation->operation.state == 3)
+                break;
+            threadSleepDuration(nn::fnd::TimeSpan::FromMilliSeconds(3));
+        }
     } else {
         libc_strlen(path);
         FileQueueRequest request;
@@ -40,8 +45,11 @@ u32 fileQueueRequestAndWait(FileQueue *queue, const char *path, const char *seco
         request.context = 0;
         operation = fileQueuePush(queue, &request);
         fileWorkerQueueRestartIfIdle(queue);
-        while (operation->operation.state != 3)
-            threadSleepDuration(3000000);
+        for (;;) {
+            if (operation->operation.state == 3)
+                break;
+            threadSleepDuration(nn::fnd::TimeSpan::FromMilliSeconds(3));
+        }
     }
     *transferredBytes = operation->output.transferredBytes;
     return operation->operation.result;

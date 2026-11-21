@@ -25415,12 +25415,12 @@
     },
     {
       "address": "0x140728",
-      "function": "FUN_00140728",
+      "function": "asdVramHeapInit",
       "module": "_code",
-      "object": "build/obj/_code/0014/FUN_00140728.o",
+      "object": "build/obj/_code/0014/asdVramHeapInit.o",
       "size": 160,
-      "source": "src/_code/0014/FUN_00140728.cpp",
-      "target": "orig/target/_code/0014/FUN_00140728.o",
+      "source": "src/_code/0014/asdVramHeapInit.cpp",
+      "target": "orig/target/_code/0014/asdVramHeapInit.o",
       "thumb": false
     },
     {
@@ -28223,12 +28223,12 @@
     },
     {
       "address": "0x154180",
-      "function": "FUN_00154180",
+      "function": "asdGxSetViewport",
       "module": "_code",
-      "object": "build/obj/_code/0015/FUN_00154180.o",
+      "object": "build/obj/_code/0015/asdGxSetViewport.o",
       "size": 400,
-      "source": "src/_code/0015/FUN_00154180.cpp",
-      "target": "orig/target/_code/0015/FUN_00154180.o",
+      "source": "src/_code/0015/asdGxSetViewport.cpp",
+      "target": "orig/target/_code/0015/asdGxSetViewport.o",
       "thumb": false
     },
     {
@@ -70454,12 +70454,12 @@
     },
     {
       "address": "0x2d26a4",
-      "function": "FUN_002d26a4",
+      "function": "sparkleSetUpdate",
       "module": "_code",
-      "object": "build/obj/_code/002d/FUN_002d26a4.o",
+      "object": "build/obj/_code/002d/sparkleSetUpdate.o",
       "size": 188,
-      "source": "src/_code/002d/FUN_002d26a4.cpp",
-      "target": "orig/target/_code/002d/FUN_002d26a4.o",
+      "source": "src/_code/002d/sparkleSetUpdate.cpp",
+      "target": "orig/target/_code/002d/sparkleSetUpdate.o",
       "thumb": false
     },
     {
@@ -108698,12 +108698,12 @@
     {
       "address": "0x36fad8",
       "file": "event/2dEvent/EventEffect",
-      "function": "FUN_0036fad8",
+      "function": "eventSnowNoiseStart",
       "module": "_code",
-      "object": "build/obj/_code/event/2dEvent/EventEffect/FUN_0036fad8.o",
+      "object": "build/obj/_code/event/2dEvent/EventEffect/eventSnowNoiseStart.o",
       "size": 348,
-      "source": "src/_code/event/2dEvent/EventEffect/FUN_0036fad8.cpp",
-      "target": "orig/target/_code/event/2dEvent/EventEffect/FUN_0036fad8.o",
+      "source": "src/_code/event/2dEvent/EventEffect/eventSnowNoiseStart.cpp",
+      "target": "orig/target/_code/event/2dEvent/EventEffect/eventSnowNoiseStart.o",
       "thumb": false
     },
     {
@@ -131412,12 +131412,12 @@
     },
     {
       "address": "0x3f6f68",
-      "function": "FUN_003f6f68",
+      "function": "scrollListAdvancePage",
       "module": "_code",
-      "object": "build/obj/_code/003f/FUN_003f6f68.o",
+      "object": "build/obj/_code/003f/scrollListAdvancePage.o",
       "size": 272,
-      "source": "src/_code/003f/FUN_003f6f68.cpp",
-      "target": "orig/target/_code/003f/FUN_003f6f68.o",
+      "source": "src/_code/003f/scrollListAdvancePage.cpp",
+      "target": "orig/target/_code/003f/scrollListAdvancePage.o",
       "thumb": false
     },
     {
@@ -164385,12 +164385,12 @@
     },
     {
       "address": "0x4c6bd0",
-      "function": "FUN_004c6bd0",
+      "function": "btlDemonSkillCategoryModifier",
       "module": "_code",
-      "object": "build/obj/_code/004c/FUN_004c6bd0.o",
+      "object": "build/obj/_code/004c/btlDemonSkillCategoryModifier.o",
       "size": 56,
-      "source": "src/_code/004c/FUN_004c6bd0.cpp",
-      "target": "orig/target/_code/004c/FUN_004c6bd0.o",
+      "source": "src/_code/004c/btlDemonSkillCategoryModifier.cpp",
+      "target": "orig/target/_code/004c/btlDemonSkillCategoryModifier.o",
       "thumb": false
     },
     {
@@ -167865,12 +167865,12 @@
     },
     {
       "address": "0x4e7080",
-      "function": "FUN_004e7080",
+      "function": "btlClearActionMarksAndSelectTarget",
       "module": "_code",
-      "object": "build/obj/_code/004e/FUN_004e7080.o",
+      "object": "build/obj/_code/004e/btlClearActionMarksAndSelectTarget.o",
       "size": 228,
-      "source": "src/_code/004e/FUN_004e7080.cpp",
-      "target": "orig/target/_code/004e/FUN_004e7080.o",
+      "source": "src/_code/004e/btlClearActionMarksAndSelectTarget.cpp",
+      "target": "orig/target/_code/004e/btlClearActionMarksAndSelectTarget.o",
       "thumb": false
     },
     {
@@ -177569,12 +177569,12 @@
     },
     {
       "address": "0x524fb4",
-      "function": "FUN_00524fb4",
+      "function": "__aeabi_f2ulz",
       "module": "_code",
-      "object": "build/obj/_code/0052/FUN_00524fb4.o",
+      "object": "build/obj/_code/0052/__aeabi_f2ulz.o",
       "size": 81,
-      "source": "src/_code/0052/FUN_00524fb4.cpp",
-      "target": "orig/target/_code/0052/FUN_00524fb4.o",
+      "source": "src/_code/0052/__aeabi_f2ulz.cpp",
+      "target": "orig/target/_code/0052/__aeabi_f2ulz.o",
       "thumb": false
     }
   ]

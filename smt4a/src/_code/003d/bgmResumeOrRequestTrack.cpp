@@ -1,4 +1,5 @@
-/* NON_MATCHING: channel-base retention and fade-transition register lifetimes differ. */
+/* NON_MATCHING: retail keeps the fade parameter (60) and the request arguments (0, 60) in r4/r5/r6 across the
+ * guarding jyoucyuGetTableEntry calls and reloads channel 0's address for the fade; this build rematerialises them. */
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
 #include "kernel/jyoucyuGetTableEntry.h"
 
@@ -8,51 +9,50 @@ extern BgmChannelSelection g_resourceSharedFlag;
 void soundChannelRequest(u32, s32, s32);
 }
 
-static __inline void bgmResumeChannel(BgmRequestChannel *channel, s32 fadeParam)
+/* bgmHasPendingResume's body (inlined: a plain static, as retail's unrolled copy shows): 1 when the jyoucyu
+ * table's entry 1 is unset and a channel has a pending transition. */
+static u32 bgmPendingResume(void)
 {
-    if (channel->flags & 2) {
-        if (channel->flags & 0x20) {
-            channel->flags = (channel->flags & ~0x20) | 0x40;
-            channel->play.param = fadeParam;
-            g_resourceSharedFlag.selected = channel->play.index;
-        } else if (!(channel->flags & 0x400)) {
-            channel->fadeFrames = 30;
-            channel->flags |= 8;
+    if (jyoucyuGetTableEntry(1) != 0) {
+        return 0;
+    }
+    u32 result = 0;
+    for (s32 i = 0; i < 2; i++) {
+        if (bgmChannelIsPendingResume(&g_bgmRequestChannels[i])) {
+            result = 1;
+            break;
         }
     }
+    return result;
 }
 
-static __inline void bgmResumeChannels(s32 fadeParam)
+/* bgmFadeOut's body as this caller inlines it (channel 1 reached from channel 0's address). */
+static __inline void bgmFadeAll(u32 parameter)
 {
-    if (jyoucyuGetTableEntry(1) == NULL) {
-        bgmResumeChannel(&g_bgmRequestChannels[0], fadeParam);
-        bgmResumeChannel(&g_bgmRequestChannels[1], fadeParam);
+    if (jyoucyuGetTableEntry(1) == 0) {
+        bgmFadeChannel(&g_bgmRequestChannels[0], parameter, &g_resourceSharedFlag);
+        bgmFadeChannel(&g_bgmRequestChannels[1], parameter, &g_resourceSharedFlag);
     }
 }
 
-static __inline void bgmRequestTrack(u32 track, s32 channel, s32 fade)
+/* soundChannelRequestIfEnabled's body. */
+static __inline void bgmRequestIfEnabled(u32 track, s32 param, s32 frames)
 {
-    if (jyoucyuGetTableEntry(1) == NULL) {
-        soundChannelRequest(track, channel, fade);
+    if (jyoucyuGetTableEntry(1) == 0) {
+        soundChannelRequest(track, param, frames);
     }
-}
-
-static __inline bool bgmChannelResumePending(const BgmRequestChannel *channel)
-{
-    return (channel->flags & 2) && (channel->flags & 0x20);
 }
 
 extern "C" {
-/* Resume paused BGM channels when possible, otherwise request the desired track. */
+/* Completes a pending BGM transition when one is waiting, otherwise requests the track. */
 void bgmResumeOrRequestTrack(u32 track)
 {
     if (jyoucyuGetTableEntry(1) == NULL) {
-        if (jyoucyuGetTableEntry(1) == NULL &&
-            (bgmChannelResumePending(&g_bgmRequestChannels[0]) || bgmChannelResumePending(&g_bgmRequestChannels[1]))) {
-            bgmResumeChannels(60);
+        if (bgmPendingResume()) {
+            bgmFadeAll(60);
         } else {
-            bgmRequestTrack(track, 0, 60);
+            bgmRequestIfEnabled(track, 0, 60);
         }
     }
 }
-}
+} /* extern "C" */

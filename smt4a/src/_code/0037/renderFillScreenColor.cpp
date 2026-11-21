@@ -10,7 +10,6 @@ struct RenderColor {
 };
 
 extern "C" {
-extern AsdGxDisplayBuffers g_asdGxSecondaryPreset; /* g_asdGxPresets.displays[1] */
 
 void renderCtxResetFrameState(RenderCtxA *context);
 void FUN_004097b4(RenderCtxA *context, RenderColor *color, u32 arg0, u32 arg1, f32 value);
@@ -25,7 +24,7 @@ void renderFillScreenColor(u32 arg0, u32 arg1, f32 red, f32 green, f32 blue, f32
     color = RenderColor(red, green, blue, alpha);
     if (g_asdGxPresets.selectedDisplay == &g_asdGxPresets.displays[0]) {
         slot = 0;
-    } else if (g_asdGxPresets.selectedDisplay == &g_asdGxSecondaryPreset) {
+    } else if (g_asdGxPresets.selectedDisplay == &g_asdGxPresets.displays[1]) {
         slot = 1;
     } else {
         slot = 2;

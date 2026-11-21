@@ -28924,12 +28924,12 @@
     },
     {
       "address": "0x208cbc",
-      "function": "FUN_00208cbc",
+      "function": "sparkleSetUpdate",
       "module": "_code",
-      "object": "build/obj/_code/0020/FUN_00208cbc.o",
+      "object": "build/obj/_code/0020/sparkleSetUpdate.o",
       "size": 188,
-      "source": "src/_code/0020/FUN_00208cbc.cpp",
-      "target": "orig/target/_code/0020/FUN_00208cbc.o",
+      "source": "src/_code/0020/sparkleSetUpdate.cpp",
+      "target": "orig/target/_code/0020/sparkleSetUpdate.o",
       "thumb": false
     },
     {
@@ -34315,12 +34315,12 @@
     },
     {
       "address": "0x22e538",
-      "function": "FUN_0022e538",
+      "function": "pageRegisterButtonTouchRegions",
       "module": "_code",
-      "object": "build/obj/_code/0022/FUN_0022e538.o",
+      "object": "build/obj/_code/0022/pageRegisterButtonTouchRegions.o",
       "size": 248,
-      "source": "src/_code/0022/FUN_0022e538.cpp",
-      "target": "orig/target/_code/0022/FUN_0022e538.o",
+      "source": "src/_code/0022/pageRegisterButtonTouchRegions.cpp",
+      "target": "orig/target/_code/0022/pageRegisterButtonTouchRegions.o",
       "thumb": false
     },
     {
@@ -35899,12 +35899,12 @@
     },
     {
       "address": "0x235804",
-      "function": "FUN_00235804",
+      "function": "__aeabi_f2ulz",
       "module": "_code",
-      "object": "build/obj/_code/0023/FUN_00235804.o",
+      "object": "build/obj/_code/0023/__aeabi_f2ulz.o",
       "size": 81,
-      "source": "src/_code/0023/FUN_00235804.cpp",
-      "target": "orig/target/_code/0023/FUN_00235804.o",
+      "source": "src/_code/0023/__aeabi_f2ulz.cpp",
+      "target": "orig/target/_code/0023/__aeabi_f2ulz.o",
       "thumb": false
     },
     {
@@ -52171,12 +52171,12 @@
     },
     {
       "address": "0x2a0028",
-      "function": "FUN_002a0028",
+      "function": "uniteSourceListRefresh",
       "module": "_code",
-      "object": "build/obj/_code/002a/FUN_002a0028.o",
+      "object": "build/obj/_code/002a/uniteSourceListRefresh.o",
       "size": 360,
-      "source": "src/_code/002a/FUN_002a0028.cpp",
-      "target": "orig/target/_code/002a/FUN_002a0028.o",
+      "source": "src/_code/002a/uniteSourceListRefresh.cpp",
+      "target": "orig/target/_code/002a/uniteSourceListRefresh.o",
       "thumb": false
     },
     {
@@ -58269,12 +58269,12 @@
     },
     {
       "address": "0x2bc644",
-      "function": "FUN_002bc644",
+      "function": "asdGxSetViewport",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002bc644.o",
+      "object": "build/obj/_code/002b/asdGxSetViewport.o",
       "size": 400,
-      "source": "src/_code/002b/FUN_002bc644.cpp",
-      "target": "orig/target/_code/002b/FUN_002bc644.o",
+      "source": "src/_code/002b/asdGxSetViewport.cpp",
+      "target": "orig/target/_code/002b/asdGxSetViewport.o",
       "thumb": false
     },
     {
@@ -58389,12 +58389,12 @@
     },
     {
       "address": "0x2bcddc",
-      "function": "FUN_002bcddc",
+      "function": "questGetTitleOrDescription",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002bcddc.o",
+      "object": "build/obj/_code/002b/questGetTitleOrDescription.o",
       "size": 36,
-      "source": "src/_code/002b/FUN_002bcddc.cpp",
-      "target": "orig/target/_code/002b/FUN_002bcddc.o",
+      "source": "src/_code/002b/questGetTitleOrDescription.cpp",
+      "target": "orig/target/_code/002b/questGetTitleOrDescription.o",
       "thumb": false
     },
     {
@@ -102774,12 +102774,12 @@
     },
     {
       "address": "0x3c1ab4",
-      "function": "FUN_003c1ab4",
+      "function": "statMaximumsAtLevel",
       "module": "_code",
-      "object": "build/obj/_code/003c/FUN_003c1ab4.o",
+      "object": "build/obj/_code/003c/statMaximumsAtLevel.o",
       "size": 92,
       "source": "src/_code/003c/playerInitializeStats.cpp",
-      "target": "orig/target/_code/003c/FUN_003c1ab4.o",
+      "target": "orig/target/_code/003c/statMaximumsAtLevel.o",
       "thumb": false
     },
     {
@@ -102804,12 +102804,12 @@
     },
     {
       "address": "0x3c1cfc",
-      "function": "FUN_003c1cfc",
+      "function": "demonGetGrowthParameters",
       "module": "_code",
-      "object": "build/obj/_code/003c/FUN_003c1cfc.o",
+      "object": "build/obj/_code/003c/demonGetGrowthParameters.o",
       "size": 228,
-      "source": "src/_code/003c/FUN_003c1cfc.cpp",
-      "target": "orig/target/_code/003c/FUN_003c1cfc.o",
+      "source": "src/_code/003c/demonGetGrowthParameters.cpp",
+      "target": "orig/target/_code/003c/demonGetGrowthParameters.o",
       "thumb": false
     },
     {
@@ -102824,12 +102824,12 @@
     },
     {
       "address": "0x3c1e50",
-      "function": "FUN_003c1e50",
+      "function": "playerGetGrowthParameters",
       "module": "_code",
-      "object": "build/obj/_code/003c/FUN_003c1e50.o",
+      "object": "build/obj/_code/003c/playerGetGrowthParameters.o",
       "size": 164,
       "source": "src/_code/003c/playerInitializeStats.cpp",
-      "target": "orig/target/_code/003c/FUN_003c1e50.o",
+      "target": "orig/target/_code/003c/playerGetGrowthParameters.o",
       "thumb": false
     },
     {

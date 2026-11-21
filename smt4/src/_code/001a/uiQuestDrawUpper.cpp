@@ -121,7 +121,7 @@ s32 uiQuestDrawUpper(u32 job)
         drawSkillCategoryLabel(category, labelRect->x + x, labelRect->y + y, 0xa6);
         TextureTableEntryIV* nameRect = asdTMTexTableEntryAt(0x29, 0x55);
         char text[64];
-        sprintf(text, "%s", FUN_002bcddc(category, 0));
+        sprintf(text, "%s", questGetTitleOrDescription(category, 0));
         textDrawString((f32)(nameRect->x + x), (f32)(nameRect->y + y), 0.375f, 3, 0.0f, -1, 1.0f, text);
         effectRenderTransformedInstance(pointer, (f32)(s32)renderCtxCalculateStereoParallax(g_titleScene, 0.28f));
         break;

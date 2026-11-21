@@ -1,4 +1,6 @@
-/* NON_MATCHING: stack frame (key/message placement), saved-register numbering and the state/step STRD pair differ; branch layout now matches. */
+/* NON_MATCHING: the display-name fallback is loaded before the lookup in retail (movs/moveq), the callback flag update uses a
+   pre-indexed ldrh, the state/step pair is one strd, and retail keeps `mov r3, #0` live across the linker-removed
+   shopListItemGetId (a multifile clobber-set case, as in smt4's followCursorAndDescribe). */
 #include "runtime/Stdio.h"
 #include "ui/UiSpriteApi.h"
 #include "shard/Shard004A.h"

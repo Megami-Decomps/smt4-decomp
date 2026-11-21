@@ -180,7 +180,7 @@ u32 messageExpandControlCode(s32 code, const u16 *text, u16 *out, s32 *index, s3
             textConvertToGlyphPairs((const u8 *)dataTableGetNamePayload(quest), (s8 *)name);
             FUN_002bd0f8(out, position, (const u16 *)name, measureOnly);
         } else {
-            libc_strcpy(name, FUN_002bcddc(quest, 1));
+            libc_strcpy(name, questGetTitleOrDescription(quest, 1));
             FUN_002bd158(name, wide);
             FUN_002bd0f8(out, position, wide, measureOnly);
         }

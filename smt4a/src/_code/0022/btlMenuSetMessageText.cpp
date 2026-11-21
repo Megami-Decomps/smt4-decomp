@@ -11,7 +11,7 @@ void rt_memcpy(void *destination, const void *source, u32 size);
 s32 padGetMappedValue(s32 id);
 s32 partyFindSlotById(u32 id);
 s32 FUN_004bd098(void *unit, s32 skillId);
-s32 FUN_004c6bd0(s16 id, const SkillDataRecordA *skill);
+s32 btlDemonSkillCategoryModifier(s16 id, const SkillDataRecordA *skill);
 
 // Set the short menu message and refresh its skill-use count for the current unit.
 void btlMenuSetMessageText(const char *text)
@@ -74,7 +74,7 @@ void btlMenuSetMessageText(const char *text)
                     count = FUN_004bd098(unit, menu->skillId);
                 } else {
                     const SkillDataRecordA *skill = skillDataFindById(menu->skillId);
-                    count = FUN_004c6bd0(static_cast<s16>(menu->tail.unitId), skill);
+                    count = btlDemonSkillCategoryModifier(static_cast<s16>(menu->tail.unitId), skill);
                 }
             }
             menu->tail.count = count;

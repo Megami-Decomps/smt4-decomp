@@ -38,6 +38,7 @@ void mapSelectContainingRegions(RegionPoint point)
         MapRegion *region = &table->regions[index];
         MapVector direction;
         MapVector normal;
+        bool inside = true;
         for (s32 edge = 0; edge < 4; ++edge) {
             switch (edge) {
             case 0:
@@ -58,16 +59,17 @@ void mapSelectContainingRegions(RegionPoint point)
                 break;
             }
             if (mathVec3Dot(normal.x, normal.y, normal.z, direction.x, direction.y, direction.z) < 0.0f) {
-                goto nextRegion;
+                inside = false;
+                break;
             }
         }
+        if (!inside)
+            continue;
         if (region->kind == 0) {
             g_gameState.overrideKinds[0] = region->id;
         } else {
             g_gameState.overrideKinds[2] = region->id;
         }
-    nextRegion:
-        ;
     }
 }
 }

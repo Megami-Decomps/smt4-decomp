@@ -1,4 +1,3 @@
-/* NON_MATCHING: initial animation phases are outlined after the shared return rather than before the timeline; -O2 candidate. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlUI.h"
@@ -34,6 +33,7 @@ void objectJobStop(BtlMainStateA *);
 void btlUiSessionDestroy(BtlMainStateA *);
 void eventCommandClearPending(void *);
 
+/* Plays the game-over eye animation, then tears the battle down and picks the next state. */
 u32 btlGameOverRunEyeSequence(BtlGameOverSequence *sequence)
 {
     switch (sequence->phase) {
@@ -41,40 +41,38 @@ u32 btlGameOverRunEyeSequence(BtlGameOverSequence *sequence)
         effectRequestByName(g_btlAux, DAT_00530eb0);
         sequence->phase = 1;
         sequence->frame = 0;
-        // Fall through while the animation is becoming available.
+        /* fall through while the animation becomes available */
     case 1:
         if (!btlPollVersionedEffectTexture(g_btlAux))
-            return 0;
+            break;
         sequence->phase = 2;
-        break;
+        /* fall through */
     case 2:
+        if (sequence->frame == g_btlGameOverEyeTimeline.panelFrame) {
+            btlQueueMessageTableReflectAction(0, 0, 0, 0, 7, 0, 11, 0);
+            btlUiPanelStart(g_btlUiBlock);
+        }
+        if (sequence->frame == g_btlGameOverEyeTimeline.effectFrame)
+            btlReflectQueuePairedParameters(0, 0, g_btlGameOverEyeTimeline.effectId, 16, 0, g_btlGameOverEyeTimeline.effectParameter, 0, 2, -1);
+        if (sequence->frame == g_btlGameOverEyeTimeline.fade0Frame && pairedAvailabilityGetState(0) != 1 && pairedAvailabilityGetState(0) != 3)
+            slotSetRequest(0, g_btlGameOverEyeTimeline.fade0, 255);
+        if (sequence->frame == g_btlGameOverEyeTimeline.fade1Frame && pairedAvailabilityGetState(1) != 1 && pairedAvailabilityGetState(1) != 3)
+            slotSetRequest(1, g_btlGameOverEyeTimeline.fade1, 255);
+        if (sequence->frame > g_btlGameOverEyeTimeline.endFrame) {
+            BtlMainStateA *battle = btlGetMainState();
+            FUN_003f14a0(battle);
+            btlTalkBustUpDestroy();
+            holderStopJob2(battle);
+            objectJobStop(battle);
+            btlUiSessionDestroy(battle);
+            if (reinterpret_cast<void *>(g_btlCamera))
+                eventCommandClearPending(reinterpret_cast<void *>(g_btlCamera));
+            sequence->state = sequence->mode == 2 ? 1 : 3;
+            sequence->phase = 0;
+        }
+        ++sequence->frame;
         break;
-    default:
-        return 0;
     }
-    if (sequence->frame == g_btlGameOverEyeTimeline.panelFrame) {
-        btlQueueMessageTableReflectAction(0, 0, 0, 0, 7, 0, 11, 0);
-        btlUiPanelStart(g_btlUiBlock);
-    }
-    if (sequence->frame == g_btlGameOverEyeTimeline.effectFrame)
-        btlReflectQueuePairedParameters(0, 0, g_btlGameOverEyeTimeline.effectId, 16, 0, g_btlGameOverEyeTimeline.effectParameter, 0, 2, -1);
-    if (sequence->frame == g_btlGameOverEyeTimeline.fade0Frame && pairedAvailabilityGetState(0) != 1 && pairedAvailabilityGetState(0) != 3)
-        slotSetRequest(0, g_btlGameOverEyeTimeline.fade0, 255);
-    if (sequence->frame == g_btlGameOverEyeTimeline.fade1Frame && pairedAvailabilityGetState(1) != 1 && pairedAvailabilityGetState(1) != 3)
-        slotSetRequest(1, g_btlGameOverEyeTimeline.fade1, 255);
-    if (sequence->frame > g_btlGameOverEyeTimeline.endFrame) {
-        BtlMainStateA *battle = btlGetMainState();
-        FUN_003f14a0(battle);
-        btlTalkBustUpDestroy();
-        holderStopJob2(battle);
-        objectJobStop(battle);
-        btlUiSessionDestroy(battle);
-        if (reinterpret_cast<void *>(g_btlCamera))
-            eventCommandClearPending(reinterpret_cast<void *>(g_btlCamera));
-        sequence->state = sequence->mode == 2 ? 1 : 3;
-        sequence->phase = 0;
-    }
-    ++sequence->frame;
     return 0;
 }
 }

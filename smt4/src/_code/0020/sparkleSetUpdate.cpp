@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail copies the alpha table with ldm/stm (not ldrd/strd) and counts the 64 iterations down in a separate register (`subs r2, r2, #1`). */
+/* NON_MATCHING: register allocation only: retail keeps the colour constant 0xc0b0a000 in r4 and the life-table
+ * loaded alpha and the size field's base in r5; this build swaps the two. */
 #include "common.h"
 
 typedef struct Vec3f {
@@ -24,25 +25,21 @@ extern const SparkleAlphaTable DAT_00404400;
 extern SparkleSet *g_activeTextureSlot;
 
 /* Advances every live sparkle: grows it, moves it up and fades it by its remaining life. */
-void FUN_00208cbc(void)
+void sparkleSetUpdate(void)
 {
     SparkleAlphaTable table = DAT_00404400;
+    s32 i;
 
-    for (s32 i = 0; i < 64; i++) {
-        SparkleSet *set = g_activeTextureSlot;
-
-        if (set->life[i] > 0) {
-            s32 life;
-
-            set->size[i] += 3.0f;
-            set->position[i].y += 1.5f;
-            life = set->life[i];
-            if (life > 10) {
-                set->color[i] = 0xc0b0a000;
+    for (i = 0; i < 64; i++) {
+        if (g_activeTextureSlot->life[i] > 0) {
+            g_activeTextureSlot->size[i] += 3.0f;
+            g_activeTextureSlot->position[i].y += 1.5f;
+            if (g_activeTextureSlot->life[i] > 10) {
+                g_activeTextureSlot->color[i] = 0xc0b0a000;
             } else {
-                set->color[i] = table.alpha[life] | 0xc0b0a000;
+                g_activeTextureSlot->color[i] = table.alpha[g_activeTextureSlot->life[i]] | 0xc0b0a000;
             }
-            set->life[i] = life - 1;
+            g_activeTextureSlot->life[i]--;
         }
     }
 }

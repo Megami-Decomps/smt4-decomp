@@ -13,7 +13,7 @@ extern MapMain *g_mapMain;
 void mapEplUpdateEntries(void);
 void FUN_002d5374(void);
 void mapNaviUpdateSlots(void);
-void FUN_00208cbc(void);
+void sparkleSetUpdate(void);
 void FUN_003079b4(void);
 void FUN_002712dc(void);
 u8 FUN_0027052c(void);
@@ -43,7 +43,7 @@ void mapPerFrameUpdate(void)
     mapEplUpdateEntries();
     FUN_002d5374();
     mapNaviUpdateSlots();
-    FUN_00208cbc();
+    sparkleSetUpdate();
     FUN_003079b4();
     FUN_002712dc();
     mapMain->status = FUN_0027052c();

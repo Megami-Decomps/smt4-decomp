@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the slot index in r5 and the work pointer in r4 (built swaps them), and derives the two-icon pair address after the first icon lookup; the if-chain, hoisted count pointer and call sequence are identical */
+/* NON_MATCHING: retail keeps &g_buttonHelp in r8 and the second icon's base in r7 (built swaps them), and computes both touchPressed bases before the word store of the six-byte clear; the block layout and call sequence match. */
 #include "ui/UiSpriteApi.h"
 #include "ui/ButtonHelpGlobal.h"
 #include <string.h>
@@ -33,10 +33,8 @@ extern "C" void buttonHelpPrepareSlots(void)
             } else if (kind == 9) {
                 buttonHelpAddIcon(work, count, i, 0x85);
             } else if (kind == 0x15 || kind == 0x14) {
-                s16 *icon = &work->touchRegions[i];
-                icon[0] = FUN_0019d890(10, i + 0x1F);
-                *count = work->touchCount + 1;
-                icon[1] = FUN_0019d890(10, i + 0x20);
+                buttonHelpAddIcon(work, count, i, i + 0x1F);
+                work->touchRegions[i + 1] = FUN_0019d890(10, i + 0x20);
                 *count = *count + 1;
             } else if ((kind == 10 || kind == 11) || (kind == 12 || kind == 13) || ((kind == 14 || kind == 15) || kind == 16)) {
                 switch (i) {
@@ -59,12 +57,12 @@ extern "C" void buttonHelpPrepareSlots(void)
         }
     }
     for (s32 i = 0; i < 4; i++) {
-        if (work->mode != 1) {
-            uiSpriteSetImageKeyframe(&work->panelSprites[i], 0, 0);
-            uiSpriteSetScaleKeyframe(&work->panelSprites[i], 0, 0);
-        } else {
+        if (work->mode == 1) {
             uiSpriteSetImageKeyframe(&work->panelSprites[i], 0, 0);
             uiSpriteSetKeyframe(&work->panelSprites[i], 2, 0);
+        } else {
+            uiSpriteSetImageKeyframe(&work->panelSprites[i], 0, 0);
+            uiSpriteSetScaleKeyframe(&work->panelSprites[i], 0, 0);
         }
     }
     memset(work->touchPressed, 0, sizeof(work->touchPressed));

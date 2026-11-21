@@ -1,4 +1,5 @@
-/* NON_MATCHING: lookup scan is not unrolled by two and final scaled-draw VFP argument scheduling differs. */
+/* NON_MATCHING: the lookup now unrolls by two as retail does; remaining: retail clears the frame search's start and
+   result before the divisions and schedules the scaled draw's VFP arguments in other registers. */
 #include "common.h"
 #include <stddef.h>
 
@@ -24,7 +25,8 @@ void efctSetSpeed(f32 speed);
 void texDrawTableEntrySized(s32 layer, s32 group, u32 sprite, s32 x, s32 y, u32 width, u32 height, u32 color);
 }
 
-static inline s32 findAnimatedIcon(s32 id)
+/* The icon's index in the lookup table, or -1 (engineLookupObjectById searches the same table). */
+static s32 findAnimatedIcon(s32 id)
 {
     for (s32 i = 0; i < 10; ++i) {
         if (g_engineObjectLookup[i].id == id) {

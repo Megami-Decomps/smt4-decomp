@@ -2,10 +2,12 @@
 #include "quest_center/QuestText.h"
 
 // Select the title or description of an existing quest.
-extern "C" const char *FUN_002bcddc(u32 id, s32 description)
+extern "C" const char *questGetTitleOrDescription(u32 id, s32 description)
 {
     QuestRecord *record = questDataGetRecord(id);
     if (record == NULL)
         return NULL;
-    return description == 0 ? record->title : record->description;
+    if (description == 0)
+        return record->title;
+    return record->description;
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: reserved-name field references materialize separate addresses instead of retaining the global base; table-offset and path-buffer registers differ. */
+/* NON_MATCHING: retail loads each g_btlEffect name after its null test (reloading the prefix after strlen) and keeps &formatted in sl (so fp holds the version); the build loads the names before the tests into r8 and rematerializes &formatted. */
 #include "runtime/Stdio.h"
 #include "battle/btlEffect.h"
 #include <string.h>
@@ -16,11 +16,11 @@ u32 keyedRecordRegisterName(const char *name);
 u32 FUN_003478dc(u32 id, const char *version);
 }
 
-static inline bool effectNameHasPrefix(const char *name, const char *const &prefix)
+static __inline bool effectNameHasPrefix(const char *name, const char *prefix)
 {
     return name != NULL && libc_strncmp(name, prefix, libc_strlen(prefix)) == 0;
 }
-static inline bool effectNameEquals(const char *name, const char *const &reserved)
+static __inline bool effectNameEquals(const char *name, const char *reserved)
 {
     return name != NULL && strcmp(name, reserved) == 0;
 }
@@ -52,10 +52,13 @@ extern "C" void FUN_004f9278(BtlEffectOwnerA *owner)
         const char *name = table->entries[index].name;
         if (libc_strlen(name) == 0 || strcmp(name, DAT_00528544) == 0 || strcmp(DAT_0052853c, name) == 0)
             continue;
-        if (effectNameHasPrefix(name, g_btlEffect.prefix) ||
-            effectNameEquals(name, g_btlEffect.reserved.name) ||
-            effectNameHasPrefix(name, g_btlEffect.otherPrefix) ||
-            effectNameEquals(name, g_btlEffect.reserved.otherName))
+        if (effectNameHasPrefix(name, g_btlEffect.prefix))
+            continue;
+        if (effectNameEquals(name, g_btlEffect.reserved.name))
+            continue;
+        if (effectNameHasPrefix(name, g_btlEffect.otherPrefix))
+            continue;
+        if (effectNameEquals(name, g_btlEffect.reserved.otherName))
             continue;
         sysMemClear(path, sizeof(path));
         sysMemClear(formatted, sizeof(formatted));

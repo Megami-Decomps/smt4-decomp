@@ -6,26 +6,6 @@
 extern "C" {
 extern AsdMemoryApoc g_asdMemory;
 
-static __inline AsdVramBlockA *takeBlockDescriptor(AsdMemTable *table)
-{
-    if (table != NULL && table->entries != NULL) {
-        AsdVramBlockA *entries = static_cast<AsdVramBlockA *>(table->entries);
-        for (s32 i = 0; i < 512; ++i) {
-            AsdVramBlockA *block = &entries[i];
-            if (block->poolId == 0) {
-                block->addr = 0;
-                block->size = 0;
-                block->poolId = i + 1;
-                block->prev = NULL;
-                block->next = NULL;
-                ++table->count;
-                return block;
-            }
-        }
-    }
-    return NULL;
-}
-
 static __inline AsdVramBlockA *allocateVramBlock(u32 &size)
 {
     if (size & 0x7f)

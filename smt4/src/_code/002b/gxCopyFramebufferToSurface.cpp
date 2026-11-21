@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `gxCopyFramebufferToSurface` (_code @ 0x2bfadc, 0x140 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 extern "C" {
 
@@ -13,13 +14,6 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_4_stack;
 
-extern unsigned char DAT_004e3a68; /* 0x4e3a68 */
-extern int DAT_004e3aa0; /* 0x4e3aa0 */
-extern unsigned char DAT_004e3ae0; /* 0x4e3ae0 */
-extern int DAT_004e3b18; /* 0x4e3b18 */
-extern int DAT_004e3bd8; /* 0x4e3bd8 */
-extern signed char DAT_004e3be0; /* 0x4e3be0 */
-extern signed char DAT_004e3be1; /* 0x4e3be1 */
 
 /* Supplied declaration required: FUN_001372c8. */
 /* Supplied declaration required: asdGxCmdBufferFinalizeBlock. */
@@ -44,17 +38,17 @@ int gxCopyFramebufferToSurface(unsigned int param_1,int param_2,unsigned int par
   
   puVar9 = (unsigned char *)0x0;
   if (param_1 < 2) {
-    puVar9 = &DAT_004e3a68;
+    puVar9 = (unsigned char *)&g_asdGxPresets.framebuffers[0];
   }
   else if (param_1 == 2) {
-    puVar9 = &DAT_004e3ae0;
+    puVar9 = (unsigned char *)&g_asdGxPresets.framebuffers[2];
   }
   if (param_1 < 2) {
-    param_4 = DAT_004e3aa0;
+    param_4 = (int)g_asdGxPresets.framebuffers[0].mode;
   }
   temp_v9 = 0;
-  if ((((param_1 >= 2) && (param_4 = DAT_004e3b18, param_1 != 2)) || (param_4 != 0x500)) &&
-     (((temp_v4 = DAT_004e3be0, param_1 >= 2 && (temp_v4 = DAT_004e3be1, param_1 != 2)) ||
+  if ((((param_1 >= 2) && (param_4 = (int)g_asdGxPresets.framebuffers[2].mode, param_1 != 2)) || (param_4 != 0x500)) &&
+     (((temp_v4 = (signed char)g_asdGxPresets.fullResolution[0], param_1 >= 2 && (temp_v4 = (signed char)g_asdGxPresets.fullResolution[1], param_1 != 2)) ||
       (temp_v4 == '\0')))) {
     temp_v9 = 1;
   }
@@ -62,7 +56,7 @@ int gxCopyFramebufferToSurface(unsigned int param_1,int param_2,unsigned int par
   temp_v8 = *(unsigned int *)(puVar9 + 0x30);
   temp_v10 = *(int *)(puVar9 + 0x34);
   temp_v0 = *(int *)(param_2 + 0x14);
-  if (DAT_004e3bd8 == 0x8058) {
+  if (g_asdGxPresets.colorFormat == 0x8058) {
     temp_v7 = 4;
   }
   asdGxCmdBufferFinalizeBlock();

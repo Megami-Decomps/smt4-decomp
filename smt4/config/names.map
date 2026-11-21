@@ -6126,3 +6126,12 @@
 003a099c shopUpdatePageOpening
 003f946c curveSampleLinear
 0033f86c flagBitsMergeBlock
+00235804 __aeabi_f2ulz
+002bcddc questGetTitleOrDescription
+002bc644 asdGxSetViewport
+00208cbc sparkleSetUpdate
+002a0028 uniteSourceListRefresh
+0022e538 pageRegisterButtonTouchRegions
+003c1e50 playerGetGrowthParameters
+003c1ab4 statMaximumsAtLevel
+003c1cfc demonGetGrowthParameters

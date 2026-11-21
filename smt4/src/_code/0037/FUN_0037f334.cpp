@@ -22,7 +22,6 @@ typedef struct {
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-extern unsigned long long FUN_00235804(float);
 extern float __aeabi_ul2f(int, int, int);
 /* Supplied declaration required: linkListEraseManagerNode. */
 extern unsigned int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
@@ -63,7 +62,7 @@ void FUN_0037f334(int param_1)
     temp_v14 = CONCAT44(temp_v11,0x4d7fb0ff);
     temp_v6 = 0x4e200000;
     temp_v7 = 0;
-    temp_v15 = FUN_00235804((*(float *)(param_1 + 0x68) * 2.6811186e+08f) / temp_v11);
+    temp_v15 = (unsigned long long)((*(float *)(param_1 + 0x68) * 2.6811186e+08f) / temp_v11);
     temp_v2 = (unsigned int)((unsigned long long)temp_v15 >> 0x20);
     temp_v8 = (unsigned int)temp_v15 >= 0x4e200000;
     temp_v3 = temp_v2 - !temp_v8;
@@ -125,7 +124,7 @@ void FUN_0037f334(int param_1)
         if (romwright_subpiece_4_1_0(temp_v10 >> 0x1e,0)) {
           return;
         }
-        temp_v15 = FUN_00235804(temp_v13 / temp_v11);
+        temp_v15 = (unsigned long long)(temp_v13 / temp_v11);
         temp_v2 = (unsigned int)((unsigned long long)temp_v15 >> 0x20);
         temp_v8 = temp_v6 <= (unsigned int)temp_v15;
         temp_v3 = temp_v2 - (temp_v7 + !temp_v8);

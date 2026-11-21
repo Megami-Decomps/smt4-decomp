@@ -1,4 +1,4 @@
-/* NON_MATCHING: 16777215.0f scale literal is restored; compiler uses ldrd instead of retail ldm and packs fields in another order. */
+/* NON_MATCHING: the (u64) cast of the scaled factor (armlib's __aeabi_f2ulz) matches; compiler uses ldrd instead of retail ldm and packs fields in another order. */
 #include "common.h"
 
 namespace {
@@ -36,23 +36,14 @@ struct PackingContextView {
     SelectionView* selection; // 0x08
     EntryTableView* table;    // 0x0C
 };
-
-union FloatBits {
-    f32 value;
-    u32 bits;
-};
 }
-
-extern "C" u32 FUN_00235804(u32 valueBits);
 
 // Pack the converted product, optional selected-entry fields, and high-byte tag.
 extern "C" unsigned long long FUN_003f854c(
     u32 owner, PackingContextView* context, u32 tag, f32 factor)
 {
-    FloatBits product;
-    product.value = factor * 16777215.0f;
-    unsigned long long packed =
-        static_cast<unsigned long long>(FUN_00235804(product.bits) & 0x00FFFFFF) << 21;
+    unsigned long long packed = (u64)(factor * 16777215.0f) & 0x00FFFFFF;
+    packed <<= 21;
 
     const SelectionView* selection = context->selection;
     const EntryTableView* table = context->table;

@@ -8,7 +8,7 @@
 extern "C" {
 extern StatusCameraWorkA *g_statusCamera;
 void sysMemClear(void *memory, u32 size);
-void FUN_00154180(s32 x, s32 y, s32 width, s32 height);
+void asdGxSetViewport(s32 x, s32 y, s32 width, s32 height);
 void cameraMatrixCacheSetLookAt(StatusCameraWorkA *camera, const Vec3 *eye, const Vec3 *target, const Vec3 *up);
 void stereoCameraSetPerspective(StatusCameraWorkA *camera, s32 mode, f32 fov, f32 nearClip, f32 farClip, f32 aspect);
 void uiSetFloatPair(StatusCameraWorkA *camera, f32 first, f32 second);
@@ -44,7 +44,7 @@ void statusCameraInitialize(void)
         target.x += offset.x;
         target.y += offset.y;
         target.z += offset.z;
-        FUN_00154180(200, 0, 200, 240);
+        asdGxSetViewport(200, 0, 200, 240);
         asdCameraInitializeDefaults(reinterpret_cast<AsdCamera *>(camera), 1);
         cameraMatrixCacheSetLookAt(camera, &camera->eye, &target, &up);
         stereoCameraSetPerspective(camera, 1, camera->lens.fov, camera->lens.nearClip, camera->lens.farClip, 1.6666666f);

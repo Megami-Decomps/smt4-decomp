@@ -28,7 +28,7 @@ s32 uiAnimationAdvanceChannel(Scene3aSprites *sprites, s32 index);
 void FUN_00233240(Scene3aSprites *sprites, u32 index);
 void rectangleInitializeSelection(EmptyRange *range, s32 x, s32 y, s32 selection);
 void pointConvertToFloat(FloatPoint *point, s32 x, s32 y);
-void FUN_0022e538(NumericStepper *stepper);
+void pageRegisterButtonTouchRegions(NumericStepper *stepper);
 s32 shopSlotGetPrice(const ShopSlot *item);
 s32 aocItemGetPrice(const ShopSlot *item);
 u32 messageTargetSetValue(u32 value, u8 flag);
@@ -128,7 +128,7 @@ void shopQuantityStep(ShopScreen *screen)
         uiAnimationAdvanceChannel(&screen->animation, 6);
         pointConvertToFloat((FloatPoint *)&screen->panel.rect, vec2GetXInt(slide), vec2GetYInt(slide));
         if (uiSpriteGetCompletionState(slide) != 0) {
-            FUN_0022e538(&screen->quantity);
+            pageRegisterButtonTouchRegions(&screen->quantity);
             screen->pageTransition.substep = 2;
             shopShowPriceChange(screen);
         }
@@ -212,7 +212,7 @@ void shopQuantityStep(ShopScreen *screen)
                 maximum = btlRollClamped(item->id, shopSlotGetPrice(item));
             }
             numericStepperSetup(&screen->quantity, maximum, 0, row);
-            FUN_0022e538(&screen->quantity);
+            pageRegisterButtonTouchRegions(&screen->quantity);
         }
         if (((screen->slot == 0 || screen->slot == 1) || (screen->slot == 2 || screen->slot == 3)) ||
             ((screen->slot == 4 || screen->slot == 5) || screen->slot == 6)) {
@@ -285,7 +285,7 @@ void shopQuantityStep(ShopScreen *screen)
             if (gameGlobalsDataExists() != 0) {
                 FUN_0022e500(0);
             }
-            FUN_0022e538(&screen->quantity);
+            pageRegisterButtonTouchRegions(&screen->quantity);
             screen->pageTransition.substep = 2;
             buttonHelpSetPreset(0x85);
             if (screen->slot == 8) {

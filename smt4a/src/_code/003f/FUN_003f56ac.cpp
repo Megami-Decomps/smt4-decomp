@@ -32,14 +32,14 @@ s32 scrollOwnerSetValue(void *cursor, s32 value);
 s32 gridNavigationGetItemCount(void *cursor);
 s32 flaggedEntryGetValueA(void *cursor);
 void dialogEnterState(UnlockLogMenu *menu, u32 state, u32 arg);
-void FUN_003f6f68(UnlockLogMenu *menu, u32 state);
+void scrollListAdvancePage(UnlockLogMenu *menu, u32 state);
 
 /* Menu input: moves the list cursor with the up/down buttons, picks a button with the choice
  * buttons and starts the selection animation. */
 void FUN_003f56ac(UnlockLogMenu *menu)
 {
     uiSpriteAdvanceAnimation(menu->titleSprite, 1.0f);
-    FUN_003f6f68(menu, 7);
+    scrollListAdvancePage(menu, 7);
     s32 up = padQueryLogicalKey(9, 0);
     if (up == 0 || resourceRunOperationIfUnblocked(menu->cursor) != 0) {
         if (up != 0) {

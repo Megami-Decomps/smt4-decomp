@@ -1,4 +1,3 @@
-/* NON_MATCHING: only register allocation differs (this build hoists the constant 3 into r8, so the step/substep pair is stored with separate STRs instead of retail's STM, and registers r5-r7 are assigned differently). */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
@@ -39,12 +38,7 @@ void AocMenu::closeMenu()
         aocMenuSetButtonHelp(menu, -1, 0);
         jobOwnerFreeSlotAndStop(menu->jobOwner);
         jobStopAndClearFlags(menu);
-        menu->step = 0x12;
-        menu->substep = 0;
-        if (menu->window != NULL) {
-            delete menu->window;
-            menu->window = NULL;
-        }
+        aocMenuChangeStep(menu, 0x12);
         FUN_00126fb8(reinterpret_cast<u8 *>(g_aocMain) + 0x80);
         aocClearDisplayFlag(g_aocSystem);
         aocReleasePackageOwner(g_aocSystem);
@@ -82,27 +76,19 @@ void AocMenu::closeMenu()
         if (buttonHelpStateIsNot3() != 0) {
             aocClearDisplayFlag(g_aocSystem);
             g_aocSystem->getPendingRequest();
-            menu->step = 5;
-            menu->substep = 0;
-            if (menu->window != NULL) {
-                delete menu->window;
-                menu->window = NULL;
-            }
+            aocMenuChangeStep(menu, 5);
         }
         break;
     case 9999:
-        if (!flagBit(flags, 2) && !flagBit(flags, 3)) {
-            aocClearDisplayFlag(g_aocSystem);
-            aocReleasePackageOwner(g_aocSystem);
-            if (FUN_002ad1e0(&g_aocMain->operationDone) != 0)
-                g_aocMain->flags &= ~0x10000u;
-            menu->step = 3;
-            menu->substep = 0;
-            if (menu->window != NULL) {
-                delete menu->window;
-                menu->window = NULL;
-            }
-        }
+        if (flagBit(flags, 2))
+            break;
+        if (flagBit(flags, 3))
+            break;
+        aocClearDisplayFlag(g_aocSystem);
+        aocReleasePackageOwner(g_aocSystem);
+        if (FUN_002ad1e0(&g_aocMain->operationDone) != 0)
+            g_aocMain->flags &= ~0x10000u;
+        aocMenuChangeStep(menu, 3);
         break;
     }
 }

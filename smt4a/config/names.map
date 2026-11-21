@@ -7846,3 +7846,11 @@
 00500f3c gxEmitColorDepthMask
 0043b5b4 vec4Transform
 003fd5bc flagBitsMergeBlock
+00524fb4 __aeabi_f2ulz
+00154180 asdGxSetViewport
+002d26a4 sparkleSetUpdate
+00140728 asdVramHeapInit
+004e7080 btlClearActionMarksAndSelectTarget
+0036fad8 eventSnowNoiseStart
+003f6f68 scrollListAdvancePage
+004c6bd0 btlDemonSkillCategoryModifier

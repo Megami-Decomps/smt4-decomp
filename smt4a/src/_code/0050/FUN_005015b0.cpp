@@ -1,4 +1,5 @@
-/* NON_MATCHING: register allocation and store form differ (retail post-increments each command word and keeps the clamped y in r0). */
+/* NON_MATCHING: retail loads the command header before choosing the mode word, shifts the clamped y inside its clamp
+   branch (keeping the word in r0) and post-increments the third store; the rest matches. */
 #include "common.h"
 
 /* A scissor rectangle and the size of the render target it is clamped to. */
@@ -24,7 +25,10 @@ u32 *FUN_005015b0(const ScissorState *scissor, u32 *command)
     s32 x;
     s32 y;
 
-    *command++ = scissor->enabled ? 3 : 0;
+    if (scissor->enabled)
+        *command++ = 3;
+    else
+        *command++ = 0;
     *command++ = 0x802F0065; /* scissor registers 0x65-0x67 */
 
     x = scissor->x;

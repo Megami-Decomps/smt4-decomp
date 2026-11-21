@@ -8,7 +8,7 @@ extern "C" {
 int sysMemClear(...);
 int btlEntryBuildSummary(...);
 int btlActionMarkRandomTargetableUnit(...);
-int FUN_004e7080(...);
+int btlClearActionMarksAndSelectTarget(...);
 int FUN_004e7c04(...);
 int FUN_004e8454(...);
 int btlUnitMarkTargetCandidates(...);
@@ -114,7 +114,7 @@ extern unsigned int mapCategoryToDestinationGroup(unsigned int);
 /* Supplied declaration required: FUN_004c8ee0. */
 /* Supplied declaration required: FUN_004c9160. */
 /* Supplied declaration required: btlActionMarkRandomTargetableUnit. */
-/* Supplied declaration required: FUN_004e7080. */
+/* Supplied declaration required: btlClearActionMarksAndSelectTarget. */
 /* Supplied declaration required: FUN_004e7c04. */
 /* Supplied declaration required: FUN_004e8454. */
 /* Supplied declaration required: btlUnitMarkTargetCandidates. */
@@ -483,7 +483,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
       *(unsigned short *)(param_2[10] + 0x1c0) = 5;
       param_2[0x16a] = 0;
       sysMemClear(param_2 + 0xe,0x85);
-      FUN_004e7080(param_1,param_2,param_2[0xd]);
+      btlClearActionMarksAndSelectTarget(param_1,param_2,param_2[0xd]);
       *(unsigned short *)(*param_1 + 0x2356) =
            *(unsigned short *)(*(int *)(*param_1 + 0x1ffc) + param_2[0xd] * 0x408 + 8);
       temp_v16 = 0xb;
@@ -504,7 +504,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
         }
         sysMemClear(param_2 + 0xe,0x85);
         piVar16 = param_1;
-        FUN_004e7080(param_1,param_2,param_2[0xd]);
+        btlClearActionMarksAndSelectTarget(param_1,param_2,param_2[0xd]);
         if (piVar16 == (int *)0x0) {
           *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x26;
           return 1;

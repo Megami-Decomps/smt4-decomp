@@ -1,4 +1,5 @@
-/* NON_MATCHING: input/count registers swap, constructor stores retain different pointer bases, and the paired flag tests fold to one TST with the cold tail inlined. -O2 candidate. */
+/* NON_MATCHING: register allocation only: retail tests the file in r0 and copies it to r7 after the branch, keeping
+ * the texture count in r8 (this build: file in r8 via movs, count in r7), and stores the allocation through r5. */
 #include "shard/W6_W6Match8_SpriteTextureResource.h"
 #include "shard/W6_W6Match2_TextureHolder.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
@@ -46,7 +47,9 @@ SpriteGroupPlayer *spriteGroupCreateFromFile(const SpriteGroupFileHeader *file)
             const SpriteGroupDefinition *group = &resource->group.groups[index];
             if (group->kind & 0x10000000) {
                 resource->stateCapacity = group->count;
-            } else if ((group->flags & 0x40) || (group->flags & 0x80)) {
+            } else if (group->flags & 0x40) {
+                resource->stateCapacity = 2;
+            } else if (group->flags & 0x80) {
                 resource->stateCapacity = 2;
             }
         }

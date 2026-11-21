@@ -27,7 +27,6 @@ extern float __aeabi_ul2f(int, int, int);
 /* Supplied declaration required: FUN_001d0b34. */
 extern int FUN_00461d28(int, unsigned int);
 /* Supplied declaration required: FUN_00461fe0. */
-extern unsigned long long FUN_00524fb4(float);
 
 
 void FUN_004659c8(int param_1)
@@ -62,7 +61,7 @@ void FUN_004659c8(int param_1)
     temp_v14 = CONCAT44(temp_v11,0x4d7fb0ff);
     temp_v7 = 0x4e200000;
     temp_v8 = 0;
-    temp_v15 = FUN_00524fb4((*(float *)(param_1 + 0x68) * 2.6811186e+08f) / temp_v11);
+    temp_v15 = (unsigned long long)((*(float *)(param_1 + 0x68) * 2.6811186e+08f) / temp_v11);
     temp_v3 = (unsigned int)((unsigned long long)temp_v15 >> 0x20);
     temp_v9 = (unsigned int)temp_v15 >= 0x4e200000;
     temp_v4 = temp_v3 - !temp_v9;
@@ -118,7 +117,7 @@ void FUN_004659c8(int param_1)
         if (romwright_subpiece_4_1_0(temp_v10 >> 0x1e,0)) {
           return;
         }
-        temp_v15 = FUN_00524fb4(temp_v13 / temp_v11);
+        temp_v15 = (unsigned long long)(temp_v13 / temp_v11);
         temp_v3 = (unsigned int)((unsigned long long)temp_v15 >> 0x20);
         temp_v9 = temp_v7 <= (unsigned int)temp_v15;
         temp_v4 = temp_v3 - (temp_v8 + !temp_v9);

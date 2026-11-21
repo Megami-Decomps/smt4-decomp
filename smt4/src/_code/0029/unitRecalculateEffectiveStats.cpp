@@ -33,8 +33,8 @@ typedef char CharacterStatsSizeCheck[sizeof(CharacterStats) == 0xe ? 1 : -1];
 typedef char CharacterStatWorkSizeCheck[sizeof(CharacterStatWork) == 0x602 ? 1 : -1];
 
 extern "C" {
-CharacterGrowth FUN_003c1cfc(u32 id);
-void FUN_003c1ab4(u32 level, CharacterStats *stats, const CharacterGrowth *growth);
+CharacterGrowth demonGetGrowthParameters(u32 id);
+void statMaximumsAtLevel(u32 level, CharacterStats *stats, const CharacterGrowth *growth);
 void FUN_002dada4(CharacterStats *stats, const s16 *limits, u32 count);
 }
 
@@ -89,8 +89,8 @@ extern "C" void unitRecalculateEffectiveStats(CharacterStatWork *work)
     work->effective.magic = clampCharacterStat(work->effective.magic + work->bonuses.magic);
 
     CharacterGrowth growth;
-    growth = FUN_003c1cfc(work->id);
-    FUN_003c1ab4(work->level, &work->effective, &growth);
+    growth = demonGetGrowthParameters(work->id);
+    statMaximumsAtLevel(work->level, &work->effective, &growth);
     work->effective.hp += work->bonuses.hp;
     work->effective.mp += work->bonuses.mp;
     applyCharacterBoon(&work->effective, &growth, work->boon);

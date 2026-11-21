@@ -199,7 +199,7 @@ void FUN_00186a48(void)
     drawSkillCategoryLabel(temp_v0,*(short *)(temp_v11 + 8) + temp_v9 + temp_v10,*(short *)(temp_v11 + 10) + temp_v8,
                  0xa6);
     temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x29,0x55));
-    temp_v4 = reinterpret_cast<u32>(FUN_002bcddc(temp_v0,0));
+    temp_v4 = reinterpret_cast<u32>(questGetTitleOrDescription(temp_v0,0));
     __2sprintf((char *)temp_v14,(const char *)&LAB_0018710c,temp_v4);
     VectorSignedToFloat(*(short *)(temp_v11 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v11 + 8) + temp_v9 + temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);

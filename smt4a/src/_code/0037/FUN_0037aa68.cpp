@@ -22,7 +22,7 @@ struct RenderTargetPair {
 };
 
 void FUN_00154d68(u32 color, u32 depth, u32 width, u32 height);
-void FUN_00154180(s32 x, s32 y, s32 width, s32 height);
+void asdGxSetViewport(s32 x, s32 y, s32 width, s32 height);
 void renderFillScreenColor(u32 a, u32 b, Color4 color, f32 value);
 
 /* Binds the render target, sets its viewport (clamped to 1023x1016) and clears it with `color` (white if NULL). */
@@ -40,7 +40,7 @@ void FUN_0037aa68(RenderTargetPair *target, const Color4 *color)
     if (height > 0x3F8) {
         height = 0x3F8;
     }
-    FUN_00154180(0, 0, width, height);
+    asdGxSetViewport(0, 0, width, height);
     if (color != NULL) {
         renderFillScreenColor(0, 7, *color, 0.0f);
         return;

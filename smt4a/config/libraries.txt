@@ -41,3 +41,7 @@ arm 0x15d35c 0x15d430 NintendoWare-gfx Obj55b704::create: nw::gfx DynamicBuilder
 arm 0x15d814 0x15d8d8 NintendoWare-gfx Obj55bb90 (fog)::create: nw::gfx DynamicBuilder::Create, MovePtr resource handle, inside the nw_gfx block
 arm 0x171acc 0x171bb8 NintendoWare-gfx Obj55b4a8::create: nw::gfx DynamicBuilder::Create, MovePtr resource handle, inside the nw_gfx block
 arm 0x171d7c 0x171e40 NintendoWare-gfx Obj55b5a8::create: nw::gfx DynamicBuilder::Create, MovePtr resource handle, inside the nw_gfx block
+# armlib's __aeabi_f2ulz (float to unsigned 64-bit, softfp argument in r0): asrs r2, r0, #23 exponent split, shifts
+# into r0:r1, rt_fpResultDispatch on NaN/overflow; armcc 4.1 calls it for a (u64) cast of a float (FUN_0051673c,
+# FUN_00516818, FUN_00516680); exact twin of smt4's third-party FUN_00235804.
+arm 0x524fb4 0x525008 armlib __aeabi_f2ulz: float to u64 conversion called by armcc for (u64) float casts; twin of smt4 0x235804

@@ -1,10 +1,9 @@
-/* NON_MATCHING: retail reads the signed unit id through a literal-pool offset (ldr 0x166; ldrsh [r0,r4]) and keeps the not-found response value in r6 separate from the found value in r1. */
 #include "battle/BtlMainAccess.h"
 #include "gamedata/NkmBaseRecordA.h"
+#include "battle/BtlSkillModifiers.h"
 #include "battle/btlMain.h"
 #include "battle/BattleSkillResponseMasks.h"
 #include "gamedata/SkillDataRecord.h"
-#include "gamedata/ReferencedKindRecord.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "battle/BtlGlobals.h"
 
@@ -31,16 +30,7 @@ s32 FUN_004c55e4(u32 unitId, u32 skillId)
         SkillDataRecordA *skill = skillDataFindById(skillId);
         if (skill) {
             struct SignedIdView { u8 unk00[0x166]; s16 id; };
-            s32 value = 0;
-            s16 id = reinterpret_cast<const SignedIdView *>(unit)->id;
-            u16 kind = reinterpret_cast<const ReferencedKindRecord *>(skill)->kind;
-            if (kind < 18) {
-                const NkmBaseRecordA *record = nkmBaseGetRecord((u16)id);
-                if (record) {
-                    value = record->categoryModifiers[kind];
-                }
-            }
-            return FUN_0034a304(skill, value, 2);
+            return FUN_0034a304(skill, demonCategoryModifier(reinterpret_cast<const SignedIdView *>(unit)->id, skill), 2);
         }
     }
     return 0;

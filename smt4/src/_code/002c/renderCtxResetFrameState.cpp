@@ -1,17 +1,16 @@
-/* NON_MATCHING: render-target selection and framebuffer dimension scheduling differ. */
+/* NON_MATCHING: target selection matches; retail sets the viewport's zero origin (r0, r1) right after the
+ * framebuffer bind and loads width, height and mode with one ldm, as a by-value {x, y, width, height} viewport
+ * argument does (code identical then, but the setter's constant-argument callers lose their order); with four ints
+ * the zeros come last. The displays[1..2]/framebuffers[1..2] pool words also need g_asdGxPresets sized. */
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpersSmt4.h"
 
 extern "C" {
-extern AsdGxDisplayBuffers g_asdGxPresetsDisplay1;
-extern AsdGxDisplayBuffers DAT_004e3a38;
-extern AsdGxFramebuffer DAT_004e3aa4;
-extern AsdGxFramebuffer DAT_004e3ae0;
 void FUN_0011a258(const void *color, const void *depth, s32 width, s32 height);
-void FUN_002bc644(s32 x, s32 y, s32 width, s32 height);
+void asdGxSetViewport(s32 x, s32 y, s32 width, s32 height);
 void asdGfxBindTarget(u32 buffer);
 
-/* Select the screen's framebuffer and apply its scaled viewport and buffer binding. */
+/* Selects the screen's framebuffer and applies its scaled viewport and display buffer binding. */
 void renderCtxResetFrameState(s32 target)
 {
     s32 screen = 0;
@@ -20,16 +19,16 @@ void renderCtxResetFrameState(s32 target)
         g_asdGxPresets.selectedDisplay = &g_asdGxPresets.displays[0];
     } else if (target != 1) {
         if (target == 2) {
-            if (g_asdGxPresets.sharePrimaryFramebuffer != 0)
-                g_asdGxPresets.selectedFramebuffer = &g_asdGxPresets.framebuffers[0];
+            if (g_asdGxPresets.sharePrimaryFramebuffer == 0)
+                g_asdGxPresets.selectedFramebuffer = &g_asdGxPresets.framebuffers[2];
             else
-                g_asdGxPresets.selectedFramebuffer = &DAT_004e3ae0;
+                g_asdGxPresets.selectedFramebuffer = &g_asdGxPresets.framebuffers[0];
             screen = 1;
-            g_asdGxPresets.selectedDisplay = &DAT_004e3a38;
+            g_asdGxPresets.selectedDisplay = &g_asdGxPresets.displays[2];
         }
     } else {
-        g_asdGxPresets.selectedDisplay = &g_asdGxPresetsDisplay1;
-        g_asdGxPresets.selectedFramebuffer = &DAT_004e3aa4;
+        g_asdGxPresets.selectedFramebuffer = &g_asdGxPresets.framebuffers[1];
+        g_asdGxPresets.selectedDisplay = &g_asdGxPresets.displays[1];
     }
     AsdGxFramebuffer *framebuffer = g_asdGxPresets.selectedFramebuffer;
     FUN_0011a258(&framebuffer->color, &framebuffer->depth,
@@ -50,9 +49,9 @@ void renderCtxResetFrameState(s32 target)
         }
         break;
     }
-    FUN_002bc644(0, 0, width, height);
-    AsdGxDisplayBuffers *binding = g_asdGxPresets.selectedDisplay;
+    asdGxSetViewport(0, 0, width, height);
     if (g_asdGxPresets.displayMode == 1) {
+        AsdGxDisplayBuffers *binding = g_asdGxPresets.selectedDisplay;
         s32 index = binding->index;
         asdGfxSetMode(binding->mode);
         asdGfxBindTarget(binding->buffers[index]);

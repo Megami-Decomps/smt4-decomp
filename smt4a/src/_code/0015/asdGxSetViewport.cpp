@@ -24,7 +24,7 @@ static __inline u32 encodeInverseExtent(f32 value)
 extern "C" {
 void asdModelCommitCommandRange(u32* begin, u32* end);
 
-void FUN_00154180(u32 x, s32 y, s32 width, s32 height)
+void asdGxSetViewport(u32 x, s32 y, s32 width, s32 height)
 {
     f32 widthValue = static_cast<f32>(width);
     f32 heightValue = static_cast<f32>(height);

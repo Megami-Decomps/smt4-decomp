@@ -1,4 +1,3 @@
-/* NON_MATCHING: only register allocation differs (this build hoists the constant 3 into r8, so the step/substep pair is stored with separate STRs instead of retail's STM, and registers r5-r7 are assigned differently). */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
@@ -40,12 +39,7 @@ void AocMenu::closeMenu()
         aocMenuSetButtonHelp(menu, -1, 0);
         jobOwnerFreeSlotAndStop(menu->jobOwner);
         jobFlagsWorkStop(menu);
-        menu->step = 0x12;
-        menu->substep = 0;
-        if (menu->window != NULL) {
-            delete menu->window;
-            menu->window = NULL;
-        }
+        aocMenuChangeStep(menu, 0x12);
         FUN_0016ccb4(reinterpret_cast<u8 *>(g_aocMain) + 0x80);
         aocClearDisplayFlag(g_aocSystem);
         aocReleasePackageOwner(g_aocSystem);
@@ -83,31 +77,19 @@ void AocMenu::closeMenu()
         if (buttonHelpStateIsNot3() != 0) {
             aocClearDisplayFlag(g_aocSystem);
             g_aocSystem->getPendingRequest();
-            menu->step = 5;
-            menu->substep = 0;
-            if (menu->window != NULL) {
-                delete menu->window;
-                menu->window = NULL;
-            }
+            aocMenuChangeStep(menu, 5);
         }
         break;
     case 9999:
-        if ((flags & 4) != 0) {
+        if (flagBit(flags, 2))
             break;
-        }
-        if ((flags & 8) != 0) {
+        if (flagBit(flags, 3))
             break;
-        }
         aocClearDisplayFlag(g_aocSystem);
         aocReleasePackageOwner(g_aocSystem);
         if (sysLightEventTryWait(reinterpret_cast<u8 *>(g_aocMain) + 0x98) != 0)
             g_aocMain->flags &= ~0x10000u;
-        menu->step = 3;
-        menu->substep = 0;
-        if (menu->window != NULL) {
-            delete menu->window;
-            menu->window = NULL;
-        }
+        aocMenuChangeStep(menu, 3);
         break;
     }
 }

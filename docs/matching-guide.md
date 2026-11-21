@@ -354,6 +354,12 @@ asks for.
 - AocMenu's step change (store the step, clear the substep, delete the window) is `aocMenuChangeStep` in
   `classes/AocMenu.h`, the helper `AocMenu::runMainProcess` uses at six sites in each game; called in place of the
   open-coded statements it made smt4a `aocMenuUpdate` IDENTICAL (wave 57).
+- In AocMenu steppers, test each flag bit with its own early `break` (`if (flagBit(flags, 2)) break; if (flagBit(flags, 3))
+  break;`): a combined `!a && !b` folds into one `tst` of the mask 12, which retail does not (`AocMenu::closeMenu`, both
+  games, wave 60; 24 lines off with the combined test).
+- A real getter written `return c ? a : b;` and `if (c) return a; return b;` compiles the same out of line, but inlined
+  as a `static __inline` copy into a caller only one form may give the caller's registers: smt4 `uiBindRecordRewardText`
+  is IDENTICAL with `FUN_002bcddc`'s body in the `if` form and 8 lines off with the ternary (wave 60). Try both.
 - A switch case that sets several globals and then looks a value up can be another function of the file
   inlined with constant arguments: smt4a `FUN_003b5064`'s resume mode 0 is `mapPlaceSet(1, 2, 0)`'s body
   (`mapPlaceSelect` in `smt4a/include/map/MapPlaceLookup.h`), where open-coded literals miss by 27 lines.
@@ -436,6 +442,10 @@ More on classes, constructors and destructors is in [C++](style-and-naming.md#c)
   `snprintf(buf, sizeof(buf), fmt, ...)` with `<stdio.h>`, as for `sprintf`; a local prototype of the placeholder
   leaves the prologue and argument scheduling off (smt4 `effectTextureRequestsPump`, smt4a `FUN_0036f0a0` and three
   effect texture loaders per game, wave 59).
+- **`__aeabi_f2ulz` is armlib's float to `u64` conversion** (smt4 0x235804, smt4a 0x524fb4): armcc calls it for a
+  `(u64)` cast of a float. Write the cast (`u64 key = (u64)(depth * 16777215.0f) & 0xFFFFFF;`), not a call through a
+  placeholder prototype (the model sort-key builders smt4 `FUN_003f8608`/`FUN_003f86e4`/`FUN_003f854c` and their
+  Apocalypse twins, wave 60).
 - Two format strings a unit owns at adjacent addresses with word padding between them (smt4
   `asdLoadFileAsync`'s `"patch:/%s"` at 0x409800 and `"rom:/%s"` at 0x40980c) are one `static const` struct of two
   `char` arrays sized to the padding: armcc emits separate `static const char[]` objects unpadded and in reverse

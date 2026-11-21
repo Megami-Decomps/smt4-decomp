@@ -1,4 +1,8 @@
-/* NON_MATCHING: recovered slot/flag query arguments restore paired battle-state loads; retail retains a linker-inlined false guard and kind-three re-test whose original callee identity is unresolved, and branch/index-base layout differs. */
+/* NON_MATCHING: recovered slot/flag query arguments restore paired battle-state loads; branch/index-base layout differs.
+   Lead: the linker-inlined false guard is a call to btlDebugQueryEnabled (inlined.txt, mov r0, #0) inside the
+   kind != 6 && kind != 8 block, and the kind-three re-test is an inlined helper (kind == 3, flag 1 clear,
+   btlIsDefeatSuppressed, btlObjectHasEntryFlag); written so, those blocks match retail, but the kind 5/3 tails
+   still lay out differently (69 lines against 64), so the source keeps the plain form. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "battle/BtlDebugMenuEntry.h"

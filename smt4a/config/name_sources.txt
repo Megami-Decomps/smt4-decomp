@@ -8512,3 +8512,13 @@
 00500f3c gxEmitColorDepthMask inferred appends the depth-test and colour/depth write-mask register (0x107), optionally refreshing the framebuffer access masks
 0043b5b4 vec4Transform inferred twin of smt4 FUN_0026e768
 003fd5bc flagBitsMergeBlock inferred twin of smt4 FUN_0033f86c
+0063fdb4 DAT_0063fdb4 inferred interior of g_asdGxPresets: displays[1] (0x63fd88 + 0x2c); its users now write &g_asdGxPresets.displays[1]
+0063fd88 g_asdGxPresets inferred size:0x204 sizeof(AsdGxPresets), asserted in AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h; users touch up to fullResolution[1] at +0x201
+00524fb4 __aeabi_f2ulz evidence armlib float to unsigned 64-bit conversion (armcc 4.1 calls it for a (u64) cast of a float); twin of smt4 0x235804
+00154180 asdGxSetViewport inferred twin of smt4 FUN_002bc644
+002d26a4 sparkleSetUpdate inferred twin of smt4 FUN_00208cbc
+00140728 asdVramHeapInit inferred initialises the VRAM heap: its lists and free bytes, takes a pool descriptor and inserts it into the free list
+004e7080 btlClearActionMarksAndSelectTarget inferred twin of smt4 btlClearActionMarksAndSelectTarget (same code shape)
+0036fad8 eventSnowNoiseStart inferred starts the snow-noise event effect ("EvtSnowNoise Calc" / "EvtSnowNoise DrawUp*" task names)
+003f6f68 scrollListAdvancePage inferred advances a scroll list by a page, stepping while the top row is unchanged
+004c6bd0 btlDemonSkillCategoryModifier inferred a demon's modifier for a skill's category (NkmBase categoryModifiers), 0 without one

@@ -22,7 +22,7 @@ void heapOwnerCreate(void *expHeap, u32 base, u32 size, u32 flags);
 void nn_os_CriticalSection_Initialize(void *lock);
 void FUN_00159138(void *expHeap, u32 block, u32 size);
 void memoryDebugSetRegions(u32 mainBase, u32 mainSize, u32 extraBase, u32 extraSize, u32 vramABase, u32 vramASize, u32 vramBBase, u32 vramBSize);
-void FUN_00140728(AsdVramHeap *heap, u32 base, u32 size);
+void asdVramHeapInit(AsdVramHeap *heap, u32 base, u32 size);
 void *asdMemoryAllocTracked(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 
@@ -65,8 +65,8 @@ void asdMemoryInit(void)
     table->entries = asdMemoryAllocTracked(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, 0x2800, 1);
     table->count = 0;
 
-    FUN_00140728(&g_asdVramHeapA, sys->vramA.base, sys->vramA.size);
-    FUN_00140728(&g_asdVramHeapB, sys->vramB.base, sys->vramB.size);
+    asdVramHeapInit(&g_asdVramHeapA, sys->vramA.base, sys->vramA.size);
+    asdVramHeapInit(&g_asdVramHeapB, sys->vramB.base, sys->vramB.size);
 
     /* The allocator objects the engine's operator new/delete use. */
     allocator = (AsdAllocator *)asdMemoryAlloc(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(AsdAllocator), 1);

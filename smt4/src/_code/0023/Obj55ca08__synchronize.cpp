@@ -1,7 +1,9 @@
-/* NON_MATCHING: recovered touch-selection flow still differs in predicate and helper-call scheduling. */
+/* NON_MATCHING: retail materialises the 0/1 flag constants (r8/r7) before the region guard and reloads regionCount
+ * after the flag stores; this build sets them inside the guard and reuses the guard's load. */
 #include "classes/Obj55ca08.h"
 #include "camp/Unite/UniteWork.h"
 #include "code/Code0029_Smt4.h"
+#include "gamedata/GameDataAccess_Shard0031.h"
 
 struct Obj55ca08Selection {
     u8 type;
@@ -12,8 +14,7 @@ struct Obj55ca08Selection {
 };
 extern "C" {
 s32 ifTouchGetSelectionModeForRegion(s32 region);
-s32 resourceRunOperationIfUnblocked(void);
-s32 flaggedEntryGetValueA(void);
+s32 resourceRunOperationIfUnblocked(const u8 *state);
 s32 flaggedEntryGetValueB(const u8 *state);
 void eventQueueAddUnique(u32 event);
 void scrollOwnerSetValue(u8 *state, u32 value);
@@ -44,13 +45,13 @@ void Obj55ca08::synchronize(const u8 *selection)
     }
     if (selected != 0) {
         s32 index = selectedIndex;
-        s32 offset = entry->type == 1 ? resourceRunEmbeddedOperationIfUnblocked(entry->state) : resourceRunOperationIfUnblocked();
+        s32 offset = entry->type == 1 ? resourceRunEmbeddedOperationIfUnblocked(entry->state) : resourceRunOperationIfUnblocked(entry->state);
         if (offset + index < entry->count) {
-            s32 previous = entry->type == 1 ? flaggedEntryGetValueB(entry->state) : flaggedEntryGetValueA();
+            s32 previous = entry->type == 1 ? flaggedEntryGetValueB(entry->state) : flaggedEntryGetValueA((FlaggedEntry *)entry->state);
             if (soundEnabled != 0 && previous != index) {
                 eventQueueAddUnique(0x100016c);
             }
-            offset = entry->type == 1 ? resourceRunEmbeddedOperationIfUnblocked(entry->state) : resourceRunOperationIfUnblocked();
+            offset = entry->type == 1 ? resourceRunEmbeddedOperationIfUnblocked(entry->state) : resourceRunOperationIfUnblocked(entry->state);
             if (entry->type == 0) {
                 scrollOwnerSetValue(entry->state, offset);
                 flaggedEntrySetValueA(entry->state, index);

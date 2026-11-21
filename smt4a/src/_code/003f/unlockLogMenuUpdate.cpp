@@ -41,7 +41,7 @@ void scrScriptProcessStartEntry(void *script, u32 entry);
 s32 scrRunOpcodesStub(void *script);
 void *textureGetIndexedResource(u32 group);
 void FUN_003f6bc0(UnlockLogUpdateWork *work);
-void FUN_003f6f68(UnlockLogUpdateWork *work, u32 state);
+void scrollListAdvancePage(UnlockLogUpdateWork *work, u32 state);
 }
 
 /* Advance the unlock-log animations, script, and resource-ready transitions. */
@@ -122,7 +122,7 @@ extern "C" s32 unlockLogMenuUpdate(UnlockLogUpdateWork *work)
         }
         break;
     case 11:
-        FUN_003f6f68(work, 8);
+        scrollListAdvancePage(work, 8);
         break;
     }
     return 0;

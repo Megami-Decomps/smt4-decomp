@@ -1,4 +1,4 @@
-/* NON_MATCHING: same instruction stream except the zero constant and the 0xfc00 mask swap r8/r9 and the last skillsB upper-six-bits update keeps its result in r2 (extra mov) in retail */
+/* NON_MATCHING: retail sets the loop index once before the support test (mov r4, r8 from the shared zero); the build sets it in each arm (moveq r4, #0 and mov r4, #0), shifting the branch targets */
 #include "gamedata/PackedSkillSlot.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "code/Code002b.h"
@@ -86,26 +86,24 @@ void FUN_00337cfc(u32 unused, BattleUnit *unit, SourceUnit *source)
     unit->baseVitals = unit->vitals;
     unit->level = source->level;
     unit->variant = source->variant;
-    s32 i = 0;
+    s32 i;
     if (support != 0) {
         unit->supportKind = source->supportKind;
         unit->supportIndex = source->supportIndex;
-        do {
+        for (i = 0; i < 18; i++) {
             unit->skillsA[i].id = FUN_003c8538(i & 0xFF);
             unit->skillsA[i].unk00 = FUN_003c862c(i & 0xFF);
             unit->skillsB[i].id = FUN_003c8538(i & 0xFF);
             unit->skillsB[i].unk00 = FUN_003c862c(i & 0xFF);
-            i++;
-        } while (i < 18);
+        }
         unit->unk14A = (supportUnitGetEntry(source->supportKind, source->supportIndex)->packed << 2) >> 24;
     } else {
-        do {
+        for (i = 0; i < 18; i++) {
             unit->skillsA[i].id = randomGetLowerTenBits(source, i & 0xFF);
             unit->skillsA[i].unk00 = randomGetUpperSixBits(source, i & 0xFF);
             unit->skillsB[i].id = randomGetLowerTenBits(source, i & 0xFF);
             unit->skillsB[i].unk00 = randomGetUpperSixBits(source, i & 0xFF);
-            i++;
-        } while (i < 18);
+        }
         const NkmBaseRecord *record = nkmBaseGetRecord(unit->id);
         unit->unk14A = record->battleRace;
         u8 kind = record->category;

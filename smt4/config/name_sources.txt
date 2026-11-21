@@ -5944,3 +5944,14 @@
 003a099c shopUpdatePageOpening inferred runs the shop page's opening animation, then enters the chosen page or transaction script
 003f946c curveSampleLinear inferred samples a keyframe curve at a time, blending linearly with the next key
 0033f86c flagBitsMergeBlock inferred ORs the flag bits 0x800-0xa1f of one flag block into another
+004e3a0c DAT_004e3a0c inferred interior of g_asdGxPresets: displays[1] (0x4e39e0 + 0x2c); its users now write &g_asdGxPresets.displays[1]
+004e39e0 g_asdGxPresets inferred size:0x204 sizeof(AsdGxPresets), asserted in AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h; users touch up to fullResolution[1] at +0x201
+00235804 __aeabi_f2ulz evidence armlib float to unsigned 64-bit conversion (armcc 4.1 calls it for a (u64) cast of a float): softfp argument in r0, asrs r2, r0, #23 exponent split, rt_fpResultDispatch on NaN/overflow; twin of smt4a 0x524fb4
+002bcddc questGetTitleOrDescription inferred returns a quest record's title, or its description when the flag is set (NULL for a missing id)
+002bc644 asdGxSetViewport inferred sets the GX viewport rectangle (x, y, width, height); renderCtxResetFrameState calls it
+00208cbc sparkleSetUpdate inferred advances every live sparkle of the 64-entry sparkle set (grows, rises and fades it)
+002a0028 uniteSourceListRefresh inferred refreshes the fusion screen's source list from the catalogue criteria (rows unlocked)
+0022e538 pageRegisterButtonTouchRegions inferred registers a page's button touch regions from its texture table
+003c1e50 playerGetGrowthParameters inferred twin of smt4a playerGetGrowthParameters: the hero's growth parameters from data table 9
+003c1ab4 statMaximumsAtLevel inferred computes HP and MP at a level from growth parameters (capped at 9999, MP at 45%)
+003c1cfc demonGetGrowthParameters inferred returns a demon's growth parameters with HP and MP at its base level

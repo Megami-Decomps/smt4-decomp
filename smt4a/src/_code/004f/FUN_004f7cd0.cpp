@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads the reserved-name globals inside the null-guarded tests (not before) and keeps the 128-byte buffer address in sl; stack frame 260 vs 256. */
+/* NON_MATCHING: retail loads each g_btlEffect name after its null test (reloading the prefix after strlen) and keeps the 128-byte buffer address in sl (one more saved register); the build loads the names before the tests. */
 #include "runtime/Stdio.h"
 #include "battle/btlEffect.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
@@ -35,9 +35,11 @@ static __inline bool nameEquals(const char *name, const char *other)
 
 void FUN_004f7cd0(BtlEffectOwnerA *effect)
 {
+    char path[128];
+    char formatted[128];
+    BattleEffectVersionOwnerView *owner = reinterpret_cast<BattleEffectVersionOwnerView *>(effect);
     if (effect->slots == NULL)
         return;
-    BattleEffectVersionOwnerView *owner = reinterpret_cast<BattleEffectVersionOwnerView *>(effect);
     for (s32 index = 0; index < BTL_EFFECT_SLOTS; ++index) {
         const char *name = effect->slots->entries[index].name;
         if (libc_strlen(name) == 0 || strcmp(name, DAT_00528544) == 0 ||
@@ -46,7 +48,6 @@ void FUN_004f7cd0(BtlEffectOwnerA *effect)
         if (nameHasPrefix(name, g_btlEffect.prefix) || nameEquals(name, g_btlEffect.reserved.name) ||
             nameHasPrefix(name, g_btlEffect.otherPrefix) || nameEquals(name, g_btlEffect.reserved.otherName))
             continue;
-        char path[128], formatted[128];
         sysMemClear(path, sizeof(path));
         sysMemClear(formatted, sizeof(formatted));
         __2sprintf(formatted, DAT_005284c0, name);

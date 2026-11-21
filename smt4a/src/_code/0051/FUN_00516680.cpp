@@ -38,13 +38,11 @@ struct PackingContextView {
 };
 }
 
-extern "C" __softfp u32 FUN_00524fb4(f32 value);
-
 // Pack the converted product, optional selected-entry fields, and high-byte tag.
 extern "C" unsigned long long FUN_00516680(
     u32 owner, PackingContextView* context, u32 tag, f32 factor)
 {
-    unsigned long long packed = FUN_00524fb4(factor * 16777215.0f) & 0x00FFFFFF;
+    unsigned long long packed = (u64)(factor * 16777215.0f) & 0x00FFFFFF;
     packed <<= 21;
 
     const SelectionView* selection = context->selection;

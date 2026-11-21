@@ -1,17 +1,6 @@
-/* NON_MATCHING: growth-parameter initialization uses byte/halfword stores instead of retail's packed register construction. */
 #include "common.h"
 #include "gamedata/PlayerGrowthDefaults.h"
 
-struct LevelGrowthParameters {
-    /* 0x00 */ u8 weights[5];
-    /* 0x05 */ u8 reserved;
-    /* 0x06 */ u16 baseHp;
-    /* 0x08 */ u16 baseMp;
-    /* 0x0A */ u8 hpGrowth;
-    /* 0x0B */ u8 mpGrowth;
-    /* 0x0C */ u16 hp;
-    /* 0x0E */ u16 mp;
-};
 struct LevelGrowthStats {
     /* 0x00 */ u16 values[7];
     /* 0x0E */ u16 maxHp;
@@ -29,7 +18,7 @@ struct LevelGrowthUnit {
     /* 0x76 */ u8 level;
 };
 
-extern "C" u32 unitRollGrowthStat(LevelGrowthStats *stats, LevelGrowthParameters *parameters, u32 flags);
+extern "C" u32 unitRollGrowthStat(LevelGrowthStats *stats, StatGrowthParametersIV *parameters, u32 flags);
 extern "C" void gameSaveAddPointsClamped(u32 value);
 extern "C" void playerRecalcStatsFromEquipment(u32 value);
 
@@ -38,11 +27,8 @@ extern "C" void unitApplyLevelGrowth(LevelGrowthUnit *unit, s32 levels, bool gro
 {
     if (levels <= 0)
         return;
-    const PlayerGrowRecord *entry = playerGrowthDefaults();
-    LevelGrowthParameters parameters = {
-        {entry->growth[0], entry->growth[1], entry->growth[2], entry->growth[3], entry->growth[4]},
-        0, entry->baseHp, entry->baseMp, entry->hpGrowth, entry->mpGrowth, 0, 0
-    };
+    StatGrowthParametersIV parameters;
+    playerGrowthParametersIV(&parameters);
     for (s32 level = 0; level < levels; ++level) {
         if (unit->level == 99)
             break;

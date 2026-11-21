@@ -1,4 +1,5 @@
-/* NON_MATCHING: slot search/early-exit layout differs (retail keeps the not-found result in one register shared with the failure state store); register allocation of this/pair also differs. */
+/* NON_MATCHING: only the pair search differs: retail keeps the not-found -1 in a saved register and the matching slot
+   index in the loop counter's register (returned directly), the build keeps one result register (r7/r8 swap). */
 #include "common.h"
 #include "runtime/Stdio.h"
 #include "gamedata/NkmBaseRecordA.h"
@@ -49,25 +50,31 @@ s32 soundChannelRequestIfEnabled(s32 a, s32 b, s32 c);
 void statusPanelClose(void);
 void buttonHelpSetText(u32 a, u32 color);
 void sysPlaySe(u32 id);
+void scriptProcessSetMode(ScriptProcess *process, s32 mode); /* a one-instruction setter armlink inlines (inlined.txt) */
 extern const char DAT_0052c7c0[];
+
+/* devilGetVoiceCategory's body (inlined.txt: ldrb r0, [r0, #56]): the demon's talk tone. */
+static __inline u8 devilGetTalkTone(const NkmBaseRecordA *record)
+{
+    return record->talkTone;
+}
 
 /* The slot holding the pair's record (and the pair's id or flag), or -1. */
 static inline s32 findPairSlot(const SavedPair *pair)
 {
-    s32 i;
-    for (i = 0; i < 24; i++) {
+    s32 result = -1;
+    for (s32 i = 0; i < 24; i++) {
         SlotRecordId *record = gameGetSlotRecord(i);
         if (record != NULL && record->id == pair->recordId) {
-            if (i >= 0 && (recordContainsPairedId(record, pair->pairedId) != 0 || pair->flag != 0)) {
-                return i;
-            }
+            if (i >= 0 && (recordContainsPairedId(record, pair->pairedId) != 0 || pair->flag != 0))
+                result = i;
             break;
         }
     }
-    return -1;
+    return result;
 }
 
-// Pick the saved slot for the chosen pair; when found and its data is loaded, open the status display.
+/* Picks the saved slot for the chosen pair; when found and its data is loaded, opens the status display. */
 void FUN_004cbb38(TalkScene *scene)
 {
     s32 found = -1;
@@ -88,12 +95,12 @@ void FUN_004cbb38(TalkScene *scene)
     }
     if (scene->scene == NULL) {
         scene->scene = scrScriptProcessCreate(scene->sceneData, scene->modelData);
-        scene->scene->mode = 0;
+        scriptProcessSetMode(scene->scene, 0);
     }
     SavedPair *pair = saveGetSelectedRecordSlot(scene->pairIndex);
     SlotRecordId *record = gameGetSlotRecord(scene->slot);
     char path[64];
-    __2sprintf(path, DAT_0052c7c0, dataTable25Section0FindById(nkmBaseGetRecord(record->id)->talkTone) + 1);
+    __2sprintf(path, DAT_0052c7c0, dataTable25Section0FindById(devilGetTalkTone(nkmBaseGetRecord(record->id))) + 1);
     scene->portraitFile = asdLoadFileSyncDefault(path);
     scene->portrait = scrScriptProcessCreate(scene->portraitData, scene->portraitFile);
     btlTalkBustUpCreate();
