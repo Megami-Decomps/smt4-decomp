@@ -167,7 +167,10 @@ class Game:
             if stems:
                 self.objdiff = re.sub(r"(?<=/)(" + "|".join(re.escape(s) for s in sorted(stems, key=len, reverse=True)) + r")(?=[.\"])",
                                       lambda m: stems[m[1]], self.objdiff)
-            self.objdiff = word(functions).sub(lambda m: functions[m[1]], self.objdiff)
+            # Only the function entries: a path or unit name after a `/` keeps the file stem (a free C++
+            # function's mangled name has its plain name as the stem).
+            entry = re.compile(r"(?<![A-Za-z0-9_/])(" + "|".join(re.escape(n) for n in sorted(functions, key=len, reverse=True)) + r")(?![A-Za-z0-9_])")
+            self.objdiff = entry.sub(lambda m: functions[m[1]], self.objdiff)
         mapped = {int(m[1], 16) for m in re.finditer(r"^([0-9a-fA-F]{8}) ", self.names_map, re.M)}
         for old, new in self.functions_renamed.items():
             address = self.functions[new]
@@ -183,16 +186,36 @@ class Game:
         return True
 
 
+def in_extern_c(text, position):
+    """Whether `position` lies inside an `extern "C" { ... }` block of `text`."""
+    for block in re.finditer(r'extern\s+"C"\s*\{', text):
+        depth, index = 1, block.end()
+        while depth and index < len(text):
+            depth += {"{": 1, "}": -1}.get(text[index], 0)
+            index += 1
+        if block.start() < position < index:
+            return True
+    return False
+
+
 def defines_member(state, old, new):
     """Whether a plain-to-mangled rename is ready: no source or header names `old` any more, and the
     unit's source defines the member `new` demangles to (`Obj55bccc::~Obj55bccc()` for
-    `_ZN9Obj55bcccD1Ev`), the definition the person renaming wrote by hand."""
+    `_ZN9Obj55bcccD1Ev`), the definition the person renaming wrote by hand. A free C++ function keeps
+    its plain identifier: its unit has to define it outside `extern "C"`."""
     unit = state.units.get(old)
     member = demangle(new)
-    if unit is None or not member or "::" not in member:
+    if unit is None or not member:
         return False
     qualified = member.split("(")[0]
     text = (state.dir / unit["source"]).read_text(encoding="utf-8")
+    if "::" not in member:
+        # A free C++ function (`_Z21quadSetOrderedVectors10QuadVector...`) keeps its identifier in source:
+        # ready when the unit defines it with C++ linkage, outside every extern "C" block.
+        if qualified != old:
+            return False
+        definition = re.search(r"^[^\n;#]*(?<![A-Za-z0-9_])" + re.escape(old) + r"\s*\([^;{]*\)\s*\{", text, re.M)
+        return bool(definition) and not in_extern_c(text, definition.start())
     if not re.search(re.escape(qualified) + r"\s*\(", text):
         return False
     plain = re.compile(r"(?<![A-Za-z0-9_])" + re.escape(old) + r"(?![A-Za-z0-9_])")

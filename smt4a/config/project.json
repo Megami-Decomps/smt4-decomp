@@ -1046,12 +1046,12 @@
     },
     {
       "address": "0x1028b8",
-      "function": "FUN_001028b8",
+      "function": "__2snprintf",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_001028b8.o",
+      "object": "build/obj/_code/0010/__2snprintf.o",
       "size": 54,
-      "source": "src/_code/0010/FUN_001028b8.cpp",
-      "target": "orig/target/_code/0010/FUN_001028b8.o",
+      "source": "src/_code/0010/__2snprintf.cpp",
+      "target": "orig/target/_code/0010/__2snprintf.o",
       "thumb": true
     },
     {
@@ -32622,12 +32622,12 @@
     },
     {
       "address": "0x169614",
-      "function": "FUN_00169614",
+      "function": "asdSoundAuxSlotsSelect",
       "module": "_code",
-      "object": "build/obj/_code/0016/FUN_00169614.o",
+      "object": "build/obj/_code/0016/asdSoundAuxSlotsSelect.o",
       "size": 188,
-      "source": "src/_code/0016/FUN_00169614.cpp",
-      "target": "orig/target/_code/0016/FUN_00169614.o",
+      "source": "src/_code/0016/asdSoundAuxSlotsSelect.cpp",
+      "target": "orig/target/_code/0016/asdSoundAuxSlotsSelect.o",
       "thumb": false
     },
     {
@@ -36528,7 +36528,7 @@
     },
     {
       "address": "0x18291c",
-      "function": "quadSetOrderedVectors",
+      "function": "_Z21quadSetOrderedVectors10QuadVectorS_S_S_ii",
       "module": "_code",
       "object": "build/obj/_code/0018/quadSetOrderedVectors.o",
       "size": 372,
@@ -132123,12 +132123,12 @@
     },
     {
       "address": "0x3fd5bc",
-      "function": "FUN_003fd5bc",
+      "function": "flagBitsMergeBlock",
       "module": "_code",
-      "object": "build/obj/_code/003f/FUN_003fd5bc.o",
+      "object": "build/obj/_code/003f/flagBitsMergeBlock.o",
       "size": 128,
-      "source": "src/_code/003f/FUN_003fd5bc.cpp",
-      "target": "orig/target/_code/003f/FUN_003fd5bc.o",
+      "source": "src/_code/003f/flagBitsMergeBlock.cpp",
+      "target": "orig/target/_code/003f/flagBitsMergeBlock.o",
       "thumb": false
     },
     {
@@ -144739,12 +144739,12 @@
     },
     {
       "address": "0x43b5b4",
-      "function": "FUN_0043b5b4",
+      "function": "vec4Transform",
       "module": "_code",
-      "object": "build/obj/_code/0043/FUN_0043b5b4.o",
+      "object": "build/obj/_code/0043/vec4Transform.o",
       "size": 164,
-      "source": "src/_code/0043/FUN_0043b5b4.cpp",
-      "target": "orig/target/_code/0043/FUN_0043b5b4.o",
+      "source": "src/_code/0043/vec4Transform.cpp",
+      "target": "orig/target/_code/0043/vec4Transform.o",
       "thumb": false
     },
     {
@@ -171113,12 +171113,12 @@
     },
     {
       "address": "0x500f3c",
-      "function": "FUN_00500f3c",
+      "function": "gxEmitColorDepthMask",
       "module": "_code",
-      "object": "build/obj/_code/0050/FUN_00500f3c.o",
+      "object": "build/obj/_code/0050/gxEmitColorDepthMask.o",
       "size": 164,
-      "source": "src/_code/0050/FUN_00500f3c.cpp",
-      "target": "orig/target/_code/0050/FUN_00500f3c.o",
+      "source": "src/_code/0050/gxEmitColorDepthMask.cpp",
+      "target": "orig/target/_code/0050/gxEmitColorDepthMask.o",
       "thumb": false
     },
     {

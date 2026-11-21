@@ -3,10 +3,10 @@
 
 extern "C" {
 
-/* Stores `value` in the byte at 0x1E6 of the global at 0x61978C. */
+/* Sets the voice load queue's disabled byte (0x1E6). */
 void FUN_0015059c(u8 value)
 {
-    g_soundObjectTable.unk1E6 = value;
+    g_soundObjectTable.disabled = value;
 }
 
 } /* extern "C" */

@@ -3,7 +3,7 @@
 extern "C" {
 
 /* Address of the sub block at +0x6fc of the object. */
-int FUN_00343358(int obj)
+int renderCtxGetBuiltinCamera(int obj)
 {
     return obj + 0x6fc;
 }

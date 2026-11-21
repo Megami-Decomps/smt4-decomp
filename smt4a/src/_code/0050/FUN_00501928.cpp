@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail retains the key-construction address in r8 and uses ldm/stm copies; this source uses ldrd/strd and different branch placement. */
+/* NON_MATCHING: the branch layout now matches; retail keeps &key in r8 (one more saved register, a 20-byte frame) and copies the key with ldm/stm, this build uses ldrd/strd. */
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
 #include "nn/cec/MessageKey.h"
 
@@ -22,10 +22,10 @@ s32 FUN_00501928(AsdCecMessageBox *box, s32 kind, const u8 *messageId)
         const CecMessageKeyHeader *header = nn_cec_CTR_MessageBox_GetMessHeader(box, kind, index);
         const CecMessageKey *source = header != NULL ? &header->key : NULL;
         CecMessageKey key;
-        if (source != NULL) {
-            releaseOrCopyHandle(&key, source);
-        } else {
+        if (source == NULL) {
             releaseOrCopyHandle2(&key, DAT_005b4499);
+        } else {
+            releaseOrCopyHandle(&key, source);
         }
         if (cecMessageIdEquals(messageId, key)) {
             return index;

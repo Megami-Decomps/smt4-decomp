@@ -1,5 +1,6 @@
-/* NON_MATCHING: vector initialization is an explicit loop rather than retail's C++ array-construction helper. */
+/* NON_MATCHING: retail clears DAT_0044ea20 with one two-register stm (a 64-bit field) and pools its address first. */
 #include "common.h"
+#include <new>
 #include "shard/W6_W6Match7_QuadVectors.h"
 #include "util/BitsAndBytes.h"
 
@@ -24,9 +25,7 @@ void FUN_003ec998(u32 first, u32 second, u32 *output)
     g_quadColorState.unk1c[1] = 1.0f;
     g_quadColorState.unk1c[2] = 1.0f;
     g_quadColorState.unk1c[3] = 1.0f;
-    for (u32 index = 0; index < 4; ++index) {
-        vectorSetAllOne(&g_quadColorState.vectors[index]);
-    }
+    new (g_quadColorState.vectors) QuadVector[4];
     DAT_004d4914[0] = packNibblesAndByte(6, 7, 0);
     DAT_004d4914[1] = packNibblesAndByte(6, 1, 0);
     DAT_004d4914[2] = packNibblesAndByte(6, 1, 2);

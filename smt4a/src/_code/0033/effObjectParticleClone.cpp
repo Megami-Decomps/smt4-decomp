@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail reloads original->resource->description for the multiplier (keeping the first load only for the
- * counts) where this build reuses it, so the saved registers number differently. */
+ * counts) where this build reuses it, and keeps the source in r4 and the clone in r5 (the build: r5 and r4). */
 #include "AsdSDK/Source/Gfx/Effect/EmitterCloneResource.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -26,7 +26,7 @@ static __inline void *effAllocCleared(u32 size)
 /* Duplicate emitter parameters and clone the model-backed emitter's rendering object. */
 EffEmitter *effObjectParticleClone(EffEmitter *source)
 {
-    // The source and destination allocation extend beyond the shared emitter prefix.
+    /* The source and destination allocation extend beyond the shared emitter prefix. */
     struct EmitterView {
         u32 maxCount;
         s32 handle;
@@ -43,12 +43,7 @@ EffEmitter *effObjectParticleClone(EffEmitter *source)
         offsetof(EmitterView, resource) == 0x9c ? 1 : -1];
     EmitterView *original = reinterpret_cast<EmitterView *>(source);
     EffEmitterDesc *description = original->resource->description;
-    s32 count = description->countOverride;
-    if (count == 0) {
-        count = description->countDefault;
-    }
-    u32 maxCount = count * original->resource->description->multiplier;
-    maxCount = maxCount > 100 ? 100 : maxCount;
+    u32 maxCount = effEmitterGetCapacity(description);
     EmitterView *clone = static_cast<EmitterView *>(effAllocCleared(sizeof(EmitterView)));
     clone->handle = -1;
     clone->maxCount = maxCount;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: completion getter calls match; cached display bases and the state/constant register allocation (retail keeps 1 in r7 and 0 in r6, loads 1 again for display.finished) differ. */
+/* NON_MATCHING: retail keeps 1 in r7 and 0 in r6 (this build swaps them) and materialises the 1 for display.finished separately in state 3. */
 #include "ui/UiSpriteApi.h"
 
 struct BufferedRowsDisplay {
@@ -38,6 +38,8 @@ extern "C" {
 void __aeabi_memcpy4(void *, const void *, u32);
 void gridNavigationConfigure(BufferedRowsDisplay *, u32, u32, u32, u32, u32);
 
+/* Steps the buffered rows: animates them in, swaps the display to the other buffer and replays the rows,
+ * then marks the display finished. */
 void FUN_002007f4(BufferedRowsWork *work)
 {
     switch (work->state) {
@@ -56,7 +58,7 @@ void FUN_002007f4(BufferedRowsWork *work)
         if (!uiSpriteGetCompletionState(&work->rows[4]))
             return;
         work->state = 3;
-        // fall through
+        /* fall through */
     case 3:
         work->display.finished = 1;
         work->state = 0;
@@ -64,13 +66,18 @@ void FUN_002007f4(BufferedRowsWork *work)
     default:
         return;
     }
-    work->display.activeBuffer = !work->display.activeBuffer;
+    if (work->display.activeBuffer == 0)
+        work->display.activeBuffer = 1;
+    else
+        work->display.activeBuffer = 0;
     __aeabi_memcpy4(work->display.primaryData,
                 work->buffers[work->display.activeBuffer].primaryData, 200);
     __aeabi_memcpy4(work->display.secondaryData,
                 work->buffers[work->display.activeBuffer].secondaryData, 100);
     gridNavigationConfigure(&work->display, work->buffers[work->display.activeBuffer].source, 5, 1, 0, 1);
-    s16 animation = work->selected ? 0 : 2;
+    s32 animation = 0;
+    if (!work->selected)
+        animation = 2;
     for (s32 index = 0; index < 5; ++index)
         uiSpriteSelectAnim(&work->rows[index], animation);
     work->state = 2;

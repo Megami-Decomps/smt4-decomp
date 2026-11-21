@@ -1,4 +1,4 @@
-/* NON_MATCHING: same 128 rows as retail; the state-change stores (ldr/add/stm) use r2/r3 where retail uses r1/r2 and the stm is scheduled before the previous-state str. */
+/* NON_MATCHING: same 128 rows as retail; changeState loads the previous state into r2 (item pages) or r3 (buy and sell) where retail uses r1, and the item pages address the state pair through r1 instead of r2. */
 #include "classes/Obj536044.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "shard/Shard0049.h"
@@ -11,6 +11,7 @@
 /* The scene with its page-transition step. */
 struct ShopMenuView : public Obj536044 {
     void finishPageTransition();
+    void enterScriptState(s32 next, const char *name);
 };
 
 extern "C" {
@@ -20,6 +21,13 @@ void pointConvertToFloat(f32 *, s32, s32);
 u32 tableGroupFindEntryIndex(u32, const char *);
 void scrScriptProcessStartEntry(void *, u32);
 void scrRunOpcodesStub(void *);
+}
+
+/* Enters a transaction state and starts its entry of the shop script. */
+inline void ShopMenuView::enterScriptState(s32 next, const char *name)
+{
+    changeState(next);
+    scrScriptProcessStartEntry(controller, tableGroupFindEntryIndex(tableGroup, name));
 }
 
 // Moves on from the page's open animation: the item pages wait for the fade, the buy and sell pages
@@ -32,12 +40,10 @@ inline void ShopMenuView::finishPageTransition()
             changeState(7);
         return;
     case 7:
-        changeState(8);
-        scrScriptProcessStartEntry(controller, tableGroupFindEntryIndex(tableGroup, "shop_itembuy"));
+        enterScriptState(8, "shop_itembuy");
         break;
     case 8:
-        changeState(9);
-        scrScriptProcessStartEntry(controller, tableGroupFindEntryIndex(tableGroup, "shop_selloff"));
+        enterScriptState(9, "shop_selloff");
         break;
     default:
         return;

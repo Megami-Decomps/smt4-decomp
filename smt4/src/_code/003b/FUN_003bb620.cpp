@@ -1,4 +1,4 @@
-/* NON_MATCHING: idle-clock clamp, texture queue reloads, and embedded-selector register allocation differ. */
+/* NON_MATCHING: the idle clock now matches; retail recomputes the selector address (+0x74) at each use where this build keeps it in r8, and computes the queued texture id and the loaded-flag base before the first loaded test. */
 #include "ui/UiSpriteApi.h"
 #include "shard/S3SceneWidget.h"
 #include "shard/S1ListMenu.h"
@@ -13,6 +13,9 @@ struct SelectionTextureWork {
 };
 typedef char SelectionTextureWorkLayoutCheck[
     offsetof(SelectionTextureWork, idleFrames) == 0xcb8 ? 1 : -1];
+
+/* Evaluates `x` once per comparison: retail increments the idle clock up to three times through it. */
+#define CLAMP(x, lo, hi) ((x) < (lo) ? (lo) : (x) > (hi) ? (hi) : (x))
 
 extern "C" {
 s32 flaggedValueHolderGetTotal(const FlaggedValueHolder *values);
@@ -36,22 +39,7 @@ u32 FUN_003bb620(SelectionTextureWork *work)
     if (flaggedValueHolderGetTotal(values) != previous) {
         work->idleFrames = 0;
     } else {
-        // The range test advances the idle clock through the stored word on each successful bound check.
-        s32 *clock = &work->idleFrames;
-        s32 frames = *clock + 1;
-        *clock = frames;
-        if (frames < 0) {
-            frames = 0;
-        } else {
-            frames = frames + 1;
-            *clock = frames;
-            if (frames > 256) {
-                frames = 256;
-            } else {
-                frames = frames + 1;
-                *clock = frames;
-            }
-        }
+        s32 frames = CLAMP(++work->idleFrames, 0, 256);
         work->idleFrames = frames;
         if (frames >= 16) {
             s32 selected = flaggedValueHolderGetTotal(values);

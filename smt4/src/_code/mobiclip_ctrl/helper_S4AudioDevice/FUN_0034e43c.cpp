@@ -1,4 +1,4 @@
-/* NON_MATCHING: twin of smt4a FUN_00422940: retail's frame has 16 more bytes around the thread start argument/functor table (0x34 vs 0x24), passes an uninitialised register (r8) as the owner argument of asdOperatorNew, and loads the allocator vtable into r2 before the slot call. */
+/* NON_MATCHING: retail passes an uninitialised register (r8) as asdOperatorNew's owner argument (the original read an unset local; this source passes NULL) and loads the critical section's address after the two clearing stores. */
 #include "AsdSDK/AsdDebug.h"
 #include "common.h"
 #include "nn/Result.h"
@@ -61,6 +61,22 @@ void FUN_00123c88();
 void FUN_00123cb4();
 void FUN_00123ca4();
 
+/* nn::os::Thread::Start: runs `entry(argument)` on a new thread whose stack is `stack`; a failure is reported. */
+static __inline void audioStartThread(void *thread, void (*entry)(), u32 argument, AudioThreadWork &stack, s32 priority,
+                                      s32 processor)
+{
+    ThreadFunctorTable table;
+    table.argumentSize = sizeof(argument);
+    table.copyArgument = FUN_00123c88;
+    table.destroyArgument = FUN_00123cb4;
+    table.invoke = FUN_00123ca4;
+    s32 result = FUN_002bcc60(thread, &table, entry, &argument, stack.stackBase + stack.stackSize, priority, processor, 0);
+    bool failed = nnResultIsFailure(result);
+    if (failed) {
+        resultHandleFailure(result, failed);
+    }
+}
+
 // Starts the audio device: allocates the ring and the mix thread.
 u32 FUN_0034e43c(AudioAllocator *allocator, s32 ringCount, const void *first, const void *second)
 {
@@ -77,7 +93,7 @@ u32 FUN_0034e43c(AudioAllocator *allocator, s32 ringCount, const void *first, co
     }
     g_soundVoicePool.ringCount = ringCount;
     g_soundVoicePool.allocator = allocator;
-    g_soundVoicePool.ring = allocator->allocate(ringCount * 0x70, 4);
+    g_soundVoicePool.ring = g_soundVoicePool.allocator->allocate(g_soundVoicePool.ringCount * 0x70, 4);
     if (g_soundVoicePool.ring == NULL) {
         g_soundVoicePool.allocator = NULL;
         g_soundVoicePool.ringCount = 0;
@@ -99,18 +115,7 @@ u32 FUN_0034e43c(AudioAllocator *allocator, s32 ringCount, const void *first, co
     }
     g_soundVoicePool.thread = thread;
     resultReportIfFailed(thread, g_soundVoicePool.threadStack, 0x1000);
-    u32 argument = 0;
-    ThreadFunctorTable table;
-    table.copyArgument = FUN_00123c88;
-    table.argumentSize = 4;
-    table.destroyArgument = FUN_00123cb4;
-    table.invoke = FUN_00123ca4;
-    s32 result = FUN_002bcc60(DAT_0044d128, &table, FUN_0034e718, &argument,
-                              g_soundVoicePool.thread->stackBase + g_soundVoicePool.thread->stackSize, 2, -2, 0);
-    bool failed = nnResultIsFailure(result);
-    if (failed) {
-        resultHandleFailure(result, failed);
-    }
+    audioStartThread(DAT_0044d128, FUN_0034e718, 0, *g_soundVoicePool.thread, 2, -2);
     return 1;
 }
 

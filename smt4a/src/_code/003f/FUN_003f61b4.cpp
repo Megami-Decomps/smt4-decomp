@@ -1,16 +1,9 @@
 #include "gfx/StereoParallax.h"
 #include "camp/RenderCtxA.h"
-/* NON_MATCHING: scroll-bar draw; retail keeps the list view pointer in r7 (built spills it) and reaches the render-state stack through base+0x1000+0x120 address arithmetic with a conditional restore; calls, float math and tail call efctSetSpeed match */
 #include "camp/RenderCtx.h"
+#include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-
-
-/* Retail's draw context carries three more render-state stacks past the shared prefix. */
-struct ScrollBarStateStackView {
-    u8 prefix[0x1318];
-    RenderStateStack stacks[3];
-};
 
 extern "C" {
 void efctSetSpeed(f32 speed);
@@ -25,8 +18,9 @@ u32 renderPopStateStacks(void);
 void FUN_003f61b4(u8 *list, s32 x, s32 y, f32 speed)
 {
     void *view = list + 0xBC;
-    x += (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+    s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     efctSetSpeed(speed);
+    x += parallax;
     texDrawTableEntryAtStoredOrigin(2, 0x31, 0x74, x, y, 0xC9);
     texDrawTableEntryAtStoredOrigin(2, 0x31, 0x73, x, y, 0xC9);
 
@@ -46,17 +40,11 @@ void FUN_003f61b4(u8 *list, s32 x, s32 y, f32 speed)
         thumbHeight = frame->placement->height;
     }
 
-    ScrollBarStateStackView *context = reinterpret_cast<ScrollBarStateStackView *>(g_renderCtx);
-    bool restore = false;
-    if (context->stacks[0].entries[context->stacks[0].count] == 3) {
-        renderStackSet(&context->stacks[0], 0);
-        restore = true;
-    }
+    bool restore = renderCtxSuspendScissor(g_renderCtx);
     FUN_00168e00(frame->x + x, frame->y + y + thumbOffset, frame->placement->width, thumbHeight);
     texDrawTableEntryAtStoredOrigin(2, 0x31, 0x75, x, y, 0xCE);
-    context = reinterpret_cast<ScrollBarStateStackView *>(g_renderCtx);
     if (restore)
-        renderStackSet(&context->stacks[0], 3);
+        renderCtxResumeScissor(g_renderCtx);
     renderPopStateStacks();
     efctSetSpeed(1.0f);
 }

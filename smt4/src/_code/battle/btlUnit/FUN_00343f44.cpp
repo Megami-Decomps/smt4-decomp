@@ -1,4 +1,4 @@
-/* NON_MATCHING: action-index addressing, successful phase-store predication and draw-default load order differ; the fourth alpha-fade argument is restored. */
+/* NON_MATCHING: retail loads the action table pointer before the actor index, and loads the draw defaults in field order (first, second, priority) where this build loads `second` first. */
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
@@ -93,11 +93,12 @@ void FUN_00343f44(u32, BattleQueuedActionStep *work)
             action->flags &= ~8;
             action->presentationFlags |= 0x800;
             const BattleQueuedActionsView *queued = reinterpret_cast<const BattleQueuedActionsView *>(state);
-            if (FUN_0033a7f8(state, action, queued->commands[work->queue]) == 0) {
+            if (FUN_0033a7f8(state, action, queued->commands[work->queue]) != 0) {
+                work->phase = 3;
+            } else {
                 work->active = 0;
                 return;
             }
-            work->phase = 3;
             const s16 first = static_cast<s16>(DAT_00439a20.first);
             const s16 second = static_cast<s16>(DAT_00439a20.second);
             const s16 priority = static_cast<s16>(DAT_00439a20.priority);

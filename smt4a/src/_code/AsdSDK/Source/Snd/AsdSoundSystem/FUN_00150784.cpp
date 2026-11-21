@@ -7,7 +7,7 @@ extern AsdSndHandleList g_soundHandleList;
 
 s32 nw_snd_SoundArchive_IsAvailable(void *archive);
 void FUN_00154890(u32 arg);
-void FUN_00169614(u32 arg);
+void asdSoundAuxSlotsSelect(u32 arg);
 void FUN_00173a94(u8 *manager);
 void soundObjectPostStop(u8 *dataManager);
 void FUN_00173c7c(u8 *player);
@@ -68,7 +68,7 @@ void FUN_00150784(void)
     }
 
     system->currentSlotB = NULL;
-    FUN_00169614(0xFFFFFFFF);
+    asdSoundAuxSlotsSelect(0xFFFFFFFF);
     FUN_00154890(0xFFFFFFFF);
     if (system->sound3d.enabled == 1) {
         for (u8 i = 0; i < 0x10; i++)

@@ -20,7 +20,7 @@ int sysMemClear(float *, int);
 int effScalarKeyFindNextDistinct(float *, float *, float *, float *);
 int effScalarChannelAdvance(...);
 int FUN_003d2480(...);
-int FUN_0043b5b4(...);
+int vec4Transform(...);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
 
@@ -79,7 +79,7 @@ extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: effScalarKeyFindNextDistinct. */
 /* Supplied declaration required: effScalarChannelAdvance. */
 /* Supplied declaration required: FUN_003d2480. */
-/* Supplied declaration required: FUN_0043b5b4. */
+/* Supplied declaration required: vec4Transform. */
 
 
 void FUN_00260158(float *param_1)
@@ -253,7 +253,7 @@ void FUN_00260158(float *param_1)
       temp_v19 = (float *)romwright_f2u((float)(temp_v12));
       FUN_001a1c28(temp_v28);
       nn_math_ARMv6_MTX44MultAsm(&uStack_e8,&uStack_e8,temp_v28);
-      FUN_0043b5b4(&temp_v16,&uStack_e8);
+      vec4Transform(&temp_v16,&uStack_e8);
       temp_v7 = temp_v7 + 1;
       *(float **)((int)temp_v3 + 0x120) = temp_v16;
       *(float **)((int)temp_v3 + 0x124) = temp_v17;
@@ -298,7 +298,7 @@ void FUN_00260158(float *param_1)
         temp_v26 = temp_v12;
         FUN_001a1c28(temp_v29);
         nn_math_ARMv6_MTX44MultAsm(temp_v27,temp_v27,temp_v29);
-        FUN_0043b5b4(&temp_v23,temp_v27);
+        vec4Transform(&temp_v23,temp_v27);
         *(float *)((int)param_1[(int)temp_v2 + 0x99] + 0x358) = temp_v23;
         *(float *)((int)param_1[(int)temp_v2 + 0x99] + 0x35c) = temp_v24;
         *(float *)((int)param_1[(int)temp_v2 + 0x99] + 0x360) = temp_v25;
@@ -356,7 +356,7 @@ void FUN_00260158(float *param_1)
         temp_v24 = temp_v12;
         FUN_001a1c28(temp_v29);
         nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,temp_v29);
-        FUN_0043b5b4(&temp_v21,&temp_v25);
+        vec4Transform(&temp_v21,&temp_v25);
         temp_v30 = temp_v21;
         temp_v31 = temp_v22;
         temp_v32 = temp_v23;

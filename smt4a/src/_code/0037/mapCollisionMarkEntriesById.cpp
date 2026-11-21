@@ -1,39 +1,44 @@
-/* NON_MATCHING: array-loop scanning replaces retail's cached first groups and branch chain. */
-#include "common.h"
-
-struct CollisionMarkRecord {
-    u8 unk00[6];
-    s16 id; // 0x06
-    u8 marked; // 0x08
-    u8 unk09[0x9f];
-};
-struct CollisionMarkTables {
-    u32 unk00;
-    s32 counts[4]; // 0x04
-    s32 extraCount; // 0x14
-    CollisionMarkRecord *records[4]; // 0x18
-};
+/* NON_MATCHING: retail predicates the pool index initialization before the early exit. */
+#include "gfx/TaggedRecordPools.h"
 
 extern "C" {
-extern CollisionMarkTables g_mapCollision;
-extern CollisionMarkRecord DAT_005e2714[];
+extern TaggedPoolRecord DAT_005e2714[];
 
-// Mark every collision-table entry carrying the requested nonzero id.
-void mapCollisionMarkEntriesById(s32 id)
+/* Enable every matching tag in the four dynamic collision pools and the static pool. */
+void mapCollisionMarkEntriesById(s32 tag)
 {
-    if (id == 0)
+    if (tag == 0)
         return;
-    for (s32 table = 0; table < 4; ++table) {
-        CollisionMarkRecord *record = g_mapCollision.records[table];
-        for (u32 remaining = g_mapCollision.counts[table]; remaining > 0; --remaining, ++record) {
-            if (record->id == id)
-                record->marked = 1;
+
+    const s32 firstCount = g_mapCollision.counts[0];
+    const s32 secondCount = g_mapCollision.counts[1];
+    TaggedPoolRecord *firstPool = g_mapCollision.pools[0];
+    TaggedPoolRecord *secondPool = g_mapCollision.pools[1];
+    for (s32 pool = 0; pool < 4; ++pool) {
+        TaggedPoolRecord *record;
+        s32 count;
+        if (pool == 0) {
+            count = firstCount;
+            record = firstPool;
+        } else if (pool == 1) {
+            count = secondCount;
+            record = secondPool;
+        } else if (pool == 2) {
+            count = g_mapCollision.counts[2];
+            record = g_mapCollision.pools[2];
+        } else {
+            count = g_mapCollision.counts[3];
+            record = g_mapCollision.pools[3];
+        }
+        for (s32 remaining = count; remaining > 0; --remaining, ++record) {
+            if (record->tag == tag)
+                record->enabled = 1;
         }
     }
-    CollisionMarkRecord *record = DAT_005e2714;
-    for (s32 remaining = g_mapCollision.extraCount; remaining > 0; --remaining, ++record) {
-        if (record->id == id)
-            record->marked = 1;
+    TaggedPoolRecord *record = DAT_005e2714;
+    for (s32 remaining = g_mapCollision.counts[4]; remaining > 0; --remaining, ++record) {
+        if (record->tag == tag)
+            record->enabled = 1;
     }
 }
-}
+} /* extern "C" */

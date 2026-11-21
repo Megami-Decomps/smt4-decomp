@@ -1,7 +1,5 @@
-/* NON_MATCHING: scissor helpers address the stack through ctx+0x120 (one shared base register); the draw-offset order now matches. */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
-#include "gfx/StereoParallax.h"
 #include "gfx/StereoParallax.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/RenderCtxA.h"

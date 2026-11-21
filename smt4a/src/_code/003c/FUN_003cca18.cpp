@@ -1,49 +1,16 @@
+/* NON_MATCHING: uses pure UniteWorkA fields; 121 vs 121 rows, only the packed pairSort.pairs[*selected].resultId load uses two ldrs instead of retail's ldm (because UniteWorkA is 8-byte aligned). */
 #include "code/Code002a_VariantA.h"
-/* NON_MATCHING: constant-zero return and input/work register lifetimes save one fewer register; packed result ID uses two loads instead of retail LDM. */
+#include "code/Code002a_Smt4a.h"
 #include "camp/Unite/UniteWork.h"
 #include "shard/Shard0031.h"
 #include "shard/Shard0032.h"
 #include "ui/IfTouch.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
-namespace {
-struct FusionInheritanceInputView {
-    u8 unk0000[0x478];
-    s16 modeKeys[1];
-    u8 unk047A[0x67CC - 0x47A];
-    FlaggedEntry candidates;
-    u16 unk6830;
-    u16 candidateIndices[1];
-    u8 unk6834[0x8B60 - 0x6834];
-    u16 primaryIds[8];
-    u16 secondaryIds[24];
-    u8 unk8BA0[0x210];
-    FlaggedEntry primary;
-    FlaggedEntry secondary;
-    u8 unk8E78[0x12];
-    u8 accepted;
-};
-// The shared pair uses word fields; do not increase its alignment for this 64-bit packed view.
-struct FusionPairSelectionBitsA {
-    u64 firstId : 15;
-    u64 secondId : 15;
-    u64 firstType : 2;
-    u64 secondType : 2;
-    u64 resultId : 15;
-    u64 reserved : 15;
-};
-typedef char FusionInheritanceInputLayoutCheck[
-    offsetof(FusionInheritanceInputView, primary) == 0x8DB0 &&
-    offsetof(FusionInheritanceInputView, secondary) == 0x8E14 &&
-    offsetof(FusionInheritanceInputView, accepted) == 0x8E8A &&
-    sizeof(FusionPairSelectionBitsA) == 8 ? 1 : -1];
-}
-
 extern "C" {
-u32 uiScrollHandleActionsOrTouch(FlaggedEntry *entry, const TextureTableEntryIV *rectangle, const s16 *ids,
+u32 uiScrollHandleActionsOrTouch(ScrollSelection *entry, const TextureTableEntryIV *rectangle, const s16 *ids,
     u32 firstKey, u32 secondKey, u32 thirdKey, s8 *blockedMode, s32 secondary, s32 notify);
-s32 gridNavigationHandleConfirm(FlaggedEntry *entry, s32 mode);
-s32 resourceRunOperationIfUnblocked(const FlaggedEntry *entry);
+s32 gridNavigationHandleConfirm(ScrollSelection *entry, s32 mode);
 void skillHelpUpdateAttributeAndTarget(u32 id);
 void buttonHelpSetText(u32 mode, u32 color);
 u32 padQueryLogicalKey(u32 button, u32 mode);
@@ -53,36 +20,34 @@ void eventQueueAddUniqueIfValid(u32 event);
 
 u32 FUN_003cca18(UniteWorkA *work, s8 blocked, u32 *selected)
 {
-    FusionInheritanceInputView *input = reinterpret_cast<FusionInheritanceInputView *>(work);
-    if (uiScrollHandleActionsOrTouch(&input->primary, NULL, input->modeKeys, -1, -1, -1,
-            &blocked, 0, 1) != 0 || gridNavigationHandleConfirm(&input->primary, 1) != 0) {
-        const s32 index = resourceRunOperationIfUnblocked(&input->primary) + listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&input->primary));
-        const u16 id = input->primaryIds[index];
+    u32 result = 0;
+    if (uiScrollHandleActionsOrTouch(&work->inheritanceA.slotList, NULL, work->touchA.slotRegions, -1, -1, -1,
+            &blocked, 0, 1) != 0 || gridNavigationHandleConfirm(&work->inheritanceA.slotList, 1) != 0) {
+        const s32 index = resourceRunOperationIfUnblocked((Object *)&work->inheritanceA.slotList) + listCursorGetRowIfUnblocked((const Object *)&work->inheritanceA.slotList);
+        const u16 id = work->inheritanceA.slots[index];
         if (id != 0) {
             skillHelpUpdateAttributeAndTarget(id);
         } else {
             buttonHelpSetText(0, 0xF4F4F4FF);
         }
-    } else if ((padQueryLogicalKey(0, 1) | static_cast<s32>(blocked)) != 0) {
-        input->accepted = 1;
+    } else if ((padQueryLogicalKey(0, 1) | (s32)blocked) != 0) {
+        work->inheritanceA.accepted = 1;
         if (work->history.previous == 30) {
             *selected = 0;
         } else {
-            const s32 index = resourceRunOperationIfUnblocked(&input->candidates) + listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&input->candidates));
-            *selected = input->candidateIndices[index];
+            const s32 index = resourceRunOperationIfUnblocked((Object *)&work->pairSort.pairList) + listCursorGetRowIfUnblocked((const Object *)&work->pairSort.pairList);
+            *selected = work->pairSort.sortedPairs[index];
         }
-        const FusionPairSelectionBitsA *pair = reinterpret_cast<const FusionPairSelectionBitsA *>(
-            &work->pairList.pairs[*selected]);
         UnitRecord record;
-        unitRecordBuild(pair->resultId, &record);
+        unitRecordBuild(work->pairSort.pairs[*selected].resultId, &record);
         uniteMenuChangeState(0x10, 0);
         eventQueueAddUniqueIfValid(0x100020E);
     } else if (padQueryLogicalKey(1, 1) != 0) {
         eventQueueAddUniqueIfValid(0x100020F);
-        input->accepted = 1;
-        const s32 index = resourceRunOperationIfUnblocked(&input->secondary) + listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&input->secondary));
-        skillHelpUpdateAttributeAndTarget(input->secondaryIds[index]);
+        work->inheritanceA.accepted = 1;
+        const s32 index = resourceRunOperationIfUnblocked((Object *)&work->inheritanceA.skillList) + listCursorGetRowIfUnblocked((const Object *)&work->inheritanceA.skillList);
+        skillHelpUpdateAttributeAndTarget(work->inheritanceA.skills[index]);
     }
-    return 0;
+    return result;
 }
 }

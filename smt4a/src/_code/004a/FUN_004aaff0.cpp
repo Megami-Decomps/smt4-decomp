@@ -1,9 +1,9 @@
-/* NON_MATCHING: float conversion/division scheduling and final multiply-subtract contraction differ. */
 #include "ui/NumberAlignment.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+
 extern "C" {
 
-// Center a number using the digit width and the width of the surrounding label.
+/* Centers a number using the digit width and the width of the surrounding label. */
 s32 FUN_004aaff0(NumberAlignmentWindow *window, s32 index)
 {
     s32 value = window->slots[index].value;
@@ -13,12 +13,16 @@ s32 FUN_004aaff0(NumberAlignmentWindow *window, s32 index)
     f32 labelWidth = (f32)labelMetric->placement->width;
     f32 totalWidth = labelWidth + digitWidth * 5.0f;
     s32 digits = 1;
-    for (; digits < 6; ++digits) {
+    for (s32 i = 0; i < 5; ++i) {
         value /= 10;
-        if (value <= 0)
+        if (value <= 0) {
             break;
+        }
+        ++digits;
     }
-    return (s32)(-((f32)(5 - digits) * digitWidth) +
-        (totalWidth - digitWidth * (f32)digits) * 0.5f);
+    f32 offset = -((f32)(5 - digits) * digitWidth);
+    f32 center = (totalWidth - digitWidth * (f32)digits) * 0.5f;
+    return (s32)(offset + center);
 }
-}
+
+} /* extern "C" */

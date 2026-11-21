@@ -1,4 +1,4 @@
-/* NON_MATCHING: code shape now matches retail (roster and entries pointers reloaded per iteration, field offsets hoisted); only the register assignment and the two-ldr load of the entry mask differ. */
+/* NON_MATCHING: prologue matches retail (all 11 instructions); inside the loop only r0/r4 are swapped (which collapses retail's two entry-mask ldrs into one ldm). */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -8,11 +8,11 @@ extern "C" {
 
 void FUN_003efbac(BtlMainStateA *state)
 {
-    u64 mask = g_btlMain.actorCategories[2];
     for (s32 index = 0; index < 109; ++index) {
-        s16 unitIndex = state->roster[index].motion.unitIndex;
+        u64 mask = g_btlMain.actorCategories[2];
+        s32 unitIndex = state->roster[index].motion.unitIndex;
         if (unitIndex >= 0 && (state->entries[unitIndex].flags & mask) != 0) {
-            state->roster[index].motion.flags &= ~0x4000u;
+            state->roster[index].motion.flags &= ~0x4000;
         }
     }
 }

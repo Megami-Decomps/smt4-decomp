@@ -73,3 +73,4 @@ partyWidgetSetFlagB = 0xe5c01029; // 0x26f4a0 0x26f5cc (FUN_0026f3a0: widget rel
 partyWidgetGetUnitId = 0xe5900034; // 0x28c368 0x28c388 0x28c3bc 0x28c410 (FUN_0028c2ec: a lone ldr r0, [r0, #52] after the widget is loaded into r0, with the call's nop padding); smt4 has the same row
 partyWidgetSetCost = 0xe5801044; // 0x28c3e0 0x28c434 0x28c48c 0x28c4c0 (FUN_0028c2ec: rsb r1, r0, #0; ldr r0, [widget]; str r1, [r0, #68]); smt4 has the same row
 partyWidgetSetValue = 0xe5801040; // 0x28c520 0x28c5f4 (FUN_0028c2ec: ldr r1, [sp]; ldr r0, [widget]; str r1, [r0, #64], the widget reloaded for partyWidgetGetCost); smt4 has the same row
+renderCtxGetBuiltinCamera = 0xe2800c07; // 0x1bcf74 (renderGetCameraViewMatrix: add r0, r0, #0x700 after mov r0, r1, result moved to r5; the built-in camera at RenderCtxA+0x700, smt4's twin FUN_00343358 is a three-instruction function for ctx+0x6fc)

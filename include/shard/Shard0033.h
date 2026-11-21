@@ -61,7 +61,7 @@ typedef struct ObjB {
         /* 0x137C */ u8 unk137C[2];
         struct {
             /* 0x137C */ s8 state;   /* gameGlobalsGetState */
-            /* 0x137D */ u8 pending;
+            /* 0x137D */ s8 pending;
         } sessionSelection;
     };
     /* 0x137E */ u8 unk137E;

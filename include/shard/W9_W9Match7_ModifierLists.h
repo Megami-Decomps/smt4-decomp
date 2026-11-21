@@ -10,7 +10,8 @@ struct AttributeModifier {
 };
 
 struct AttributeModifierLists {
-    /* 0x00 */ u8 unk00[0x62];
+    /* 0x00 */ u32 unk00[0x18]; /* word-aligned record: retail copies the negative list with vldmia */
+    /* 0x60 */ u8 unk60[2];
     /* 0x62 */ AttributeModifier positive[9];
     /* 0x74 */ AttributeModifier negative[10];
 };

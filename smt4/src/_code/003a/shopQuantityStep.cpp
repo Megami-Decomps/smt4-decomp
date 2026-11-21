@@ -111,13 +111,13 @@ void shopQuantityStep(ShopScreen *screen)
 
     uiAnimationAdvanceChannel(&screen->animation, 2);
     uiAnimationAdvanceChannel(&screen->animation, 3);
-    switch (screen->substep) {
+    switch (screen->pageTransition.substep) {
     case 0:
         flagWordSet(&screen->flags, 0x1000);
         FUN_00233240(&screen->animation, 6);
         FUN_00233240(&screen->animation, 7);
         rectangleInitializeSelection(&screen->panel.rect, 320, 0, 43);
-        screen->substep = 1;
+        screen->pageTransition.substep = 1;
         buttonHelpSetPreset(0x85);
         screen->quantityIndex = -1;
         screen->quantityIndex = flaggedValueHolderGetTotal(&screen->slotInfo[screen->slot].holder);
@@ -129,7 +129,7 @@ void shopQuantityStep(ShopScreen *screen)
         pointConvertToFloat((FloatPoint *)&screen->panel.rect, vec2GetXInt(slide), vec2GetYInt(slide));
         if (uiSpriteGetCompletionState(slide) != 0) {
             FUN_0022e538(&screen->quantity);
-            screen->substep = 2;
+            screen->pageTransition.substep = 2;
             shopShowPriceChange(screen);
         }
         break;
@@ -156,29 +156,29 @@ void shopQuantityStep(ShopScreen *screen)
             if (screen->quantity.value > 0) {
                 if (screen->slot == 7 || screen->slot == 8) {
                     messageMainFinishWindow();
-                    if (screen->phase == 11) {
+                    if (screen->pageTransition.phase == 11) {
                         messageMainSetEnabled(1);
                     }
                     ifTouchRegionRemove();
                     ifTouchRegionRemove();
-                    screen->substep = 4;
+                    screen->pageTransition.substep = 4;
                 } else {
                     ifTouchRegionRemove();
                     ifTouchRegionRemove();
-                    screen->substep = 5;
+                    screen->pageTransition.substep = 5;
                 }
                 FUN_002328b4();
             } else {
                 ifTouchRegionRemove();
                 ifTouchRegionRemove();
-                screen->substep = 3;
+                screen->pageTransition.substep = 3;
             }
         }
         if (inputIsQuestMenuPressed() != 0) {
             ifTouchRegionRemove();
             ifTouchRegionRemove();
             FUN_00232848();
-            screen->substep = 3;
+            screen->pageTransition.substep = 3;
         } else if (screen->quantityIndex != index) {
             screen->quantityIndex = index;
             screen->quantity.value = 0;
@@ -235,24 +235,24 @@ void shopQuantityStep(ShopScreen *screen)
         }
         screen->quantityIndex = -1;
         buttonHelpSelectMenuPreset(screen);
-        if (screen->phase == 11) {
+        if (screen->pageTransition.phase == 11) {
             messageMainSetEnabled(0);
         }
         flagWordClear(&screen->flags, 0x1000);
         if (screen->slot == 8) {
-            screen->phase = 7;
-            screen->substep = 0;
+            screen->pageTransition.phase = 7;
+            screen->pageTransition.substep = 0;
         } else if (screen->slot == 7) {
-            screen->phase = 6;
-            screen->substep = 0;
+            screen->pageTransition.phase = 6;
+            screen->pageTransition.substep = 0;
         } else {
-            screen->phase = 5;
-            screen->substep = 0;
+            screen->pageTransition.phase = 5;
+            screen->pageTransition.substep = 0;
         }
         break;
     case 4:
         if (sys43e188GetState() != 0) {
-            screen->substep = 5;
+            screen->pageTransition.substep = 5;
         }
         break;
     case 5: {
@@ -271,7 +271,7 @@ void shopQuantityStep(ShopScreen *screen)
         if (gameGlobalsDataExists() != 0) {
             FUN_0022e500(1);
         }
-        screen->substep = 6;
+        screen->pageTransition.substep = 6;
         break;
     }
     case 6:
@@ -279,14 +279,14 @@ void shopQuantityStep(ShopScreen *screen)
             break;
         }
         if (messageMainGetChoiceResult() == 0) {
-            screen->substep = 7;
+            screen->pageTransition.substep = 7;
             buttonHelpSetPreset(0x76);
         } else {
             if (gameGlobalsDataExists() != 0) {
                 FUN_0022e500(0);
             }
             FUN_0022e538(&screen->quantity);
-            screen->substep = 2;
+            screen->pageTransition.substep = 2;
             buttonHelpSetPreset(0x85);
             if (screen->slot == 8) {
                 messageMainSetEnabled(0);
@@ -306,7 +306,7 @@ void shopQuantityStep(ShopScreen *screen)
             change = -change;
         }
         messageBannerSetCountdown(change, 0);
-        screen->substep = 8;
+        screen->pageTransition.substep = 8;
         shopStartScript(screen, "shop_Decide");
         scrRunOpcodesStub(screen->process);
         screen->wait.frames = 0;
@@ -333,7 +333,7 @@ void shopQuantityStep(ShopScreen *screen)
                 quantity = -quantity;
             }
             inventoryApplyTransaction(item, quantity, 1);
-            screen->substep = 9;
+            screen->pageTransition.substep = 9;
             if (screen->slot == 8 && FUN_0028e9d0(item->id) == 0) {
                 ShopCategoryList *list = &screen->slotInfo[screen->slot];
                 s32 row = flaggedEntryGetValueByState(list);
@@ -357,9 +357,9 @@ void shopQuantityStep(ShopScreen *screen)
             playerSlotHoldsEntry(screen, shopSelectedItem(screen)->id) == 0) {
             shopStartScript(screen, "shop_IsEquip");
             messageMainSetTargetFlags(1);
-            screen->substep = 10;
+            screen->pageTransition.substep = 10;
         } else {
-            screen->substep = 3;
+            screen->pageTransition.substep = 3;
             if (screen->slot == 8) {
                 shopStartScript(screen, "shop_selloff");
             } else if (screen->slot == 7) {
@@ -409,7 +409,7 @@ void shopQuantityStep(ShopScreen *screen)
         if (gameGlobalsDataExists() != 0) {
             FUN_0022e500(0);
         }
-        screen->substep = 3;
+        screen->pageTransition.substep = 3;
         break;
     }
     if (gameGlobalsDataExists() != 0 && FUN_00299fc0() != 0 && screen->preview.ready == 0 && !previewPending) {

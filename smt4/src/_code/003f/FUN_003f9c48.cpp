@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail computes the last-key address before the time compare and merges both tests (vcmp; cmpne; bne), and schedules the Hermite arguments differently. */
+/* NON_MATCHING: written like its matched sibling curveSampleLinear (find, last key, early return); retail fuses the interval into a vnmls, schedules the Hermite arguments differently and calls HermiteC_FAST with bl rather than a tail call. */
 #include "common.h"
 
 extern "C" {
@@ -26,16 +26,17 @@ f32 nn_math_ARMv6_HermiteC_FAST(f32 v0, f32 t0, f32 v1, f32 t1, f32 s, f32 d);
 f32 FUN_003f9c48(PackedHermiteCurve *curve, f32 time)
 {
     PackedHermiteKey *key = animCurveFindPackedKey(curve, time);
+    PackedHermiteKey *last = &curve->keys[curve->keyCount - 1];
     f32 keyTime = curve->frameScale * (f32)(key->packed & 0xfff);
-    if (keyTime != time && key != &curve->keys[curve->keyCount - 1]) {
-        PackedHermiteKey *next = key + 1;
-        f32 interval = curve->frameScale * (f32)(next->packed & 0xfff) - keyTime;
-        return nn_math_ARMv6_HermiteC_FAST(curve->valueOffset + (f32)(key->packed >> 12) * curve->valueScale,
-                                           (f32)key->outSlope * (1.0f / 256.0f),
-                                           curve->valueOffset + (f32)(next->packed >> 12) * curve->valueScale,
-                                           (f32)next->inSlope * (1.0f / 256.0f), time - keyTime, interval);
+    if (keyTime == time || key == last) {
+        return curve->valueOffset + (f32)(key->packed >> 12) * curve->valueScale;
     }
-    return curve->valueOffset + (f32)(key->packed >> 12) * curve->valueScale;
+    PackedHermiteKey *next = key + 1;
+    f32 nextTime = curve->frameScale * (f32)(next->packed & 0xfff);
+    return nn_math_ARMv6_HermiteC_FAST(curve->valueOffset + (f32)(key->packed >> 12) * curve->valueScale,
+                                       (f32)key->outSlope * (1.0f / 256.0f),
+                                       curve->valueOffset + (f32)(next->packed >> 12) * curve->valueScale,
+                                       (f32)next->inSlope * (1.0f / 256.0f), time - keyTime, nextTime - keyTime);
 }
 
 } /* extern "C" */

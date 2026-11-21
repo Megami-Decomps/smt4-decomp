@@ -1,43 +1,44 @@
-/* NON_MATCHING: the four-entry jump table now matches (explicit case 4 label); retail hoists the state constants 1 and 4 into r7/r8 and shares its epilogue differently (retail 92 vs built 93 rows). */
+#include <stdio.h>
 #include "gfx/NamedTextureCache.h"
 
 
 extern "C" {
 extern NamedTextureCache g_textureCache;
-s32 FUN_001028b8(char *output, u32 capacity, const char *format, ...);
-void FUN_002adc94(u32 unused, BattleEffectTextureSlot *slot, u32 bytes);
+void FUN_002adc94(u32 unused, BattleEffectTextureSlot *request, u32 bytes);
 void asdLoadFileAsyncDefault(const char *path, void **file, u32 flags,
     NamedTextureLoadCallback callback, BattleEffectTextureSlot *slot);
 void asdMemFree(void *allocation);
 
-// Request missing effect texture files, retry failed requests and release completed file buffers.
+/* Starts missing effect textures, retries failed requests, then releases their temporary buffers. */
 void FUN_0036f0a0(void)
 {
-    BattleEffectTextureSlot *slot = g_textureCache.entries;
+    BattleEffectTextureSlot *request = g_textureCache.entries;
+    char path[128];
     switch (g_textureCache.state) {
     case 0:
         if (g_textureCache.count != 0) {
             g_textureCache.state = 1;
-            return;
+        } else {
+            g_textureCache.state = 4;
         }
         break;
     case 1:
-        for (s32 index = 0; index < g_textureCache.count; ++index, ++slot) {
-            if (slot->texture->image.physicalAddress == 0 && slot->loaded == 0) {
-                char path[128];
-                FUN_001028b8(path, sizeof(path), "%s%s.tga", "battle/effect/tex/", slot->name);
-                slot->loadingState = 1;
-                asdLoadFileAsyncDefault(path, &slot->file, 1, FUN_002adc94, slot);
+        for (s32 index = 0; index < g_textureCache.count; ++index, ++request) {
+            if (request->texture->image.physicalAddress == 0 && request->loaded == 0) {
+                snprintf(path, sizeof(path), "%s%s.tga", "battle/effect/tex/", request->name);
+                request->loadingState = 1;
+                asdLoadFileAsyncDefault(path, &request->file, 1, FUN_002adc94, request);
             }
         }
         g_textureCache.state = 2;
         return;
     case 2:
-        for (s32 index = 0; index < g_textureCache.count; ++index, ++slot) {
-            if (slot->texture->image.physicalAddress == 0 && slot->loaded == 0) {
-                if (slot->loadingState == 1)
+        for (s32 index = 0; index < g_textureCache.count; ++index, ++request) {
+            if (request->texture->image.physicalAddress == 0 && request->loaded == 0) {
+                if (request->loadingState == 1) {
                     return;
-                if (slot->loadingState == 0) {
+                }
+                if (request->loadingState == 0) {
                     g_textureCache.state = 1;
                     return;
                 }
@@ -46,18 +47,18 @@ void FUN_0036f0a0(void)
         g_textureCache.state = 3;
         return;
     case 3:
-        for (s32 index = 0; index < g_textureCache.count; ++index, ++slot) {
-            if (slot->file != NULL) {
-                asdMemFree(slot->file);
-                slot->file = NULL;
+        for (s32 index = 0; index < g_textureCache.count; ++index, ++request) {
+            if (request->file != NULL) {
+                asdMemFree(request->file);
+                request->file = NULL;
             }
         }
+        g_textureCache.state = 4;
         break;
     case 4:
-        return;
+        break;
     default:
-        return;
+        break;
     }
-    g_textureCache.state = 4;
 }
 }

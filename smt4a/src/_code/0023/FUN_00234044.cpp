@@ -1,4 +1,4 @@
-/* NON_MATCHING: mode-table addressing and positional-sound VFP registers differ. */
+/* NON_MATCHING: retail reads g_gameState.mapId before the sound-position table and adds the position offset in each arm (scaled arm: vldmia s0-s1 with the constant in s2); the movement-block stores after the sound differ with it. */
 #include "map/MapIfGlobals.h"
 #include "game/GameStateA.h"
 #include "map/mapDepart.h"
@@ -19,11 +19,11 @@ void FUN_00234044(s32 mode, s32 id)
     // The movement block starts 0x48 bytes into the state.
     struct InterfaceMovementBlock {
         u8 unk00[0x30];
-        u32 progress; // 0x30
+        f32 progress; // 0x30
         u8 unk34[0x28];
         f32 position[3]; // 0x5c
         f32 target[3]; // 0x68
-        u32 timer; // 0x74
+        f32 timer; // 0x74
         u8 unk78[0x118];
         s32 id; // 0x190
     };
@@ -45,17 +45,16 @@ void FUN_00234044(s32 mode, s32 id)
         state->active = 0;
     } else {
         block->id = id;
-        const f32 *position = DAT_00581280[id].position;
         if (g_gameState.mapId <= 100)
-            soundActorStartOnFreeChannel(0x10002ab, position[0], position[1], position[2]);
+            soundActorStartOnFreeChannel(0x10002ab, DAT_00581280[id].position[0], DAT_00581280[id].position[1], DAT_00581280[id].position[2]);
         else
-            soundActorStartOnFreeChannel(0x10002ab, position[0] * (1.0f / 3.0f),
-                        position[1] * (1.0f / 3.0f), position[2] * (1.0f / 3.0f));
+            soundActorStartOnFreeChannel(0x10002ab, DAT_00581280[id].position[0] * (1.0f / 3.0f),
+                        DAT_00581280[id].position[1] * (1.0f / 3.0f), DAT_00581280[id].position[2] * (1.0f / 3.0f));
         block->position[0] = 0.0f;
         block->position[1] = 20.0f;
         block->position[2] = 0.0f;
-        block->progress = 0;
-        block->timer = 0;
+        block->progress = 0.0f;
+        block->timer = 0.0f;
         block->target[0] = block->position[0];
         block->target[1] = 20.0f;
         block->target[2] = block->position[2];

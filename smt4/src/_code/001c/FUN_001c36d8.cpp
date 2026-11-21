@@ -20,7 +20,7 @@ int dispatchIfFound(...); // declcheck: local (romwright prototype; the shared d
 int unitRecalculateEffectiveStats(...);
 int gameFlagIsSet(...);
 int playerSyncPair2AOnce(void);
-int FUN_0033f86c(int, int);
+int flagBitsMergeBlock(int, int);
 int FUN_00394fd8(...);
 int __aeabi_memcpy4(...);
 
@@ -80,7 +80,7 @@ extern int gameGetUnitRecord(unsigned int);
 extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: playerSyncPair2AOnce. */
-/* Supplied declaration required: FUN_0033f86c. */
+/* Supplied declaration required: flagBitsMergeBlock. */
 /* Supplied declaration required: FUN_00394fd8. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
@@ -300,7 +300,7 @@ void FUN_001c36d8(int param_1)
                 }
                 temp_v6 = temp_v6 + 1;
               } while (temp_v6 < 0xe);
-              FUN_0033f86c(temp_v2 + 0xb91c,temp_v3 + 0xb91c);
+              flagBitsMergeBlock(temp_v2 + 0xb91c,temp_v3 + 0xb91c);
               if (temp_v7 != 0) {
                 gameFlagSetValue(0x556, 1, 1);
               }

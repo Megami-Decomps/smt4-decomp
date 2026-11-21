@@ -1,4 +1,4 @@
-/* NON_MATCHING: instruction rows now equal retail (169); recordContainsPairedId takes the skill id and the slot count is signed; only register numbering differs (retail keeps the arg/out-skills pair in r7/r8 and the table in r6 after the 0x1c00 add). */
+/* NON_MATCHING: 169 vs 169 rows with exact block layout; only callee-saved register assignment (arg/outSkills r7/r8 and added r6/r8) differs. */
 #include "common.h"
 #include "shard/W6_W6Match8_BattleDebug.h"
 #include "code/Code0029.h"
@@ -72,28 +72,27 @@ u32 FUN_003f33b0(MemberRecord* source, u32 arg, u16* outSkills)
     s32 unlocked = getUnlockedSlotCount(record);
     if (8 - added > 0) outSkills[added] = 0;
 
-    MemberRecord* member = record;
     s32 unplaced = added;
     for (s32 i = 0; i < unlocked; i++) {
-        if (member->skills[i] == 0) unplaced--;
+        if (record->skills[i] == 0) unplaced--;
     }
-    if (unplaced > 0) {
-        unitRecomputeDerivedStats(record);
-        return 1;
-    }
-    for (s32 i = 0; i < 8; i++) {
-        u16 skill = outSkills[i];
-        if (skill != 0) {
-            for (s32 j = duplicates; j < 8; j++) {
-                if (member->skills[j] == 0) {
-                    partyRecordSetEquippedItemClampRank(record, skill, j);
-                    break;
+    if (unplaced <= 0) {
+        for (s32 i = 0; i < 8; i++) {
+            u16 skill = outSkills[i];
+            if (skill != 0) {
+                for (s32 j = duplicates; j < 8; j++) {
+                    if (record->skills[j] == 0) {
+                        partyRecordSetEquippedItemClampRank(record, skill, j);
+                        break;
+                    }
                 }
             }
         }
+        unitRecomputeDerivedStats(record);
+        return 0;
     }
     unitRecomputeDerivedStats(record);
-    return 0;
+    return 1;
 }
 
 } /* extern "C" */

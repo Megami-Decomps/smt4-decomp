@@ -1,4 +1,3 @@
-/* NON_MATCHING: cull-case predication, logic-command cursor register and depth/channel-mask load scheduling differ; the true buffer-access tail call is restored. */
 #include "shard/W6_W6Match4_GxDrawSettings.h"
 #include "shard/W6_W6Match8_GpuDepth.h"
 #include "AsdSDK/Source/Sys/Gx/GxStencilState.h"
@@ -54,21 +53,32 @@ u32 *gpuEmitDepthBufferCommands(const GpuDepthState *depth, u32 *commands, s32 f
 u32 *FUN_003dfaf0(const PipelineDepthBiasView *bias, u32 *commands);
 u32 *FUN_002265ac(GxDrawSettings **owner, u32 *commands, s32 reset);
 
+/* The body of Apocalypse's FUN_00500f3c without its access-mask refresh: appends the depth test and the
+ * colour/depth write mask register (0x107). The mask comes from the settings the depth state belongs to. */
+static __inline u32 *gxEmitColorDepthMask(const PipelineCommandStateView *state, u32 *commands)
+{
+    *commands++ = (state->depthEnabled != 0) | (state->depthFunction << 4) |
+        ((state->depthOwner->buffers.colorWriteMask & 1) ? 0x100 : 0) |
+        ((state->depthOwner->buffers.colorWriteMask & 2) ? 0x200 : 0) |
+        ((state->depthOwner->buffers.colorWriteMask & 4) ? 0x400 : 0) |
+        ((state->depthOwner->buffers.colorWriteMask & 8) ? 0x800 : 0) | (state->depthWrite ? 0x1000 : 0);
+    *commands++ = 0xF0107;
+    return commands;
+}
+
+/* Appends the draw settings' fragment-operation commands: cull mode, blend, logic op, depth range, alpha and
+ * stencil tests, depth and colour masks and depth bias, then the framebuffer access masks. */
 u32 *gxDrawSettingsEmitCommands(GxDrawSettings *settings, u32 *commands, s32 reset)
 {
     PipelineCommandStateView *state = (PipelineCommandStateView *)settings;
     u32 cull = 0;
     if (state->cullEnabled) {
-        switch (state->winding) {
-        case 0:
+        if (state->winding == 0) {
             cull = state->face == 0 ? 2 : 1;
-            break;
-        case 1:
+        } else if (state->winding == 1) {
             cull = state->face == 1 ? 2 : 1;
-            break;
-        default:
+        } else {
             cull = 1;
-            break;
         }
     }
     *commands++ = cull;
@@ -93,12 +103,7 @@ u32 *gxDrawSettingsEmitCommands(GxDrawSettings *settings, u32 *commands, s32 res
     *commands++ = ((u32)state->stencil.depthFailOperation << 4) |
         ((u32)state->stencil.passOperation << 8) | state->stencil.failOperation;
     *commands++ = 0xF0106;
-    u8 channels = state->depthOwner->buffers.colorWriteMask;
-    *commands++ = (state->depthEnabled != 0) | ((u32)state->depthFunction << 4) |
-        ((channels & 1) ? 0x100 : 0) | ((channels & 2) ? 0x200 : 0) |
-        ((channels & 4) ? 0x400 : 0) | ((channels & 8) ? 0x800 : 0) |
-        (state->depthWrite ? 0x1000 : 0);
-    *commands++ = 0xF0107;
+    commands = gxEmitColorDepthMask(state, commands);
     commands = FUN_003dfaf0(&state->depthBias, commands);
     return FUN_002265ac(&state->owner, commands, reset);
 }

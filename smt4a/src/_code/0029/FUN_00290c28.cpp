@@ -1,10 +1,11 @@
-/* NON_MATCHING: frame-duration operand registers, half-size VFP allocation and paired output stores differ from retail. */
+/* NON_MATCHING: frame-duration operand registers and the VFP allocation of the size conversions differ, and retail
+   stores x and y separately where the build pairs them (vstmia). */
 #include "shard/W6_W6Match8_SpriteTextureResource.h"
 #include "gfx/SpriteGroupDrawState.h"
 
 extern "C" void FUN_00290c28(SpriteGroupPlayer *player, SpriteGroupDrawState *out)
 {
-    // SpriteGroupData publishes only the duration prefix, not the final value.
+    /* SpriteGroupData publishes only the duration prefix, not the final value. */
     struct FrameView {
         s16 width, height;
         s16 originX, originY;
@@ -50,8 +51,9 @@ extern "C" void FUN_00290c28(SpriteGroupPlayer *player, SpriteGroupDrawState *ou
     else
         out->mode = 1;
     out->value = frame->value;
-    f32 halfWidth = (f32)frame->width * 0.5f;
-    f32 halfHeight = (f32)frame->height * 0.5f;
+    f32 half = 0.5f;
+    f32 halfWidth = (f32)frame->width * half;
+    f32 halfHeight = (f32)frame->height * half;
     f32 originX = (f32)frame->originX;
     f32 originY = (f32)frame->originY;
     out->u1 = (f32)(frame->u1 >> 4) / textureWidth;

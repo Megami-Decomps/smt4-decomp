@@ -23,7 +23,7 @@ void selectMenuHandlePendingRequest(SelectMenu *menu)
         uiRectDrawAtBottomRight(&menu->region, 10, 0, 0, listId);
 
         bool pickMode = false;
-        if (menu->substep == 4) {
+        if (menu->pageTransition.substep == 4) {
             pickMode = true;
         }
         MenuList *list = &menu->list;

@@ -1,4 +1,5 @@
-/* NON_MATCHING: script-mode setter and phase switch match; state-7 tail merging and result-state store scheduling differ. */
+/* NON_MATCHING: state 8's finished arm stores the done state before loading the -1 result; retail loads the result
+   first (moving that arm into a mode function of its own matches, but nothing besides the score supports it). */
 #include "battle/BtlMainAccess.h"
 #include "script/scrScriptProcess.h"
 #include "battle/btlGameOver.h"
@@ -22,55 +23,63 @@ u32 stepStateBattleStart(BtlGameOverA *work);
 void scriptProcessSetMode(void *process, u32 mode);
 }
 
-/* The save counter is outside the shared save-data prefixes. */
+/* unit-local: save-file game-over counter outside the shared save-data prefixes */
 struct SaveCounterView {
-    u8 unk00000[0x27E3D];
-    u8 gameOvers;
+    /* 0x00000 */ u8 unk00000[0x27E3D];
+    /* 0x27E3D */ u8 gameOvers;
 };
 
-#define GAMEOVER_STATE_EYES_START 0
-#define GAMEOVER_STATE_EYES_WAIT 1
-#define GAMEOVER_STATE_TIMELINE 2
-#define GAMEOVER_STATE_LOAD 3
-#define GAMEOVER_STATE_MENU 4
-#define GAMEOVER_STATE_CHAINED 5
-#define GAMEOVER_STATE_SCRIPT 6
-#define GAMEOVER_STATE_START 7
-#define GAMEOVER_STATE_RESULT_WAIT 8
-#define GAMEOVER_STATE_RESULT 9
-#define GAMEOVER_STATE_DONE 10
+enum {
+    GAMEOVER_STATE_EYES_START = 0,
+    GAMEOVER_STATE_EYES_WAIT = 1,
+    GAMEOVER_STATE_TIMELINE = 2,
+    GAMEOVER_STATE_LOAD = 3,
+    GAMEOVER_STATE_MENU = 4,
+    GAMEOVER_STATE_CHAINED = 5,
+    GAMEOVER_STATE_SCRIPT = 6,
+    GAMEOVER_STATE_START = 7,
+    GAMEOVER_STATE_RESULT_WAIT = 8,
+    GAMEOVER_STATE_RESULT = 9,
+    GAMEOVER_STATE_DONE = 10
+};
 
 extern "C" {
 
-/* Game-over state machine: plays the eye animation and timeline, loads the screen's files, runs
- * the script and hands over to the result states. Returns the next state's result: 0 to keep
- * running, -1 when finished. */
+/* State 5's mode step: enters the battle-start step (retail keeps this tail as its own copy instead of
+ * cross-jumping it into state 6's identical phase-99 tail, the sign of an inlined mode function). */
+static __inline s32 gameOverStepChained(BtlGameOverA *work)
+{
+    work->state = GAMEOVER_STATE_START;
+    return stepStateBattleStart(work);
+}
+
+/* Drives the game-over state machine, returning 0 to keep running or -1 when finished. */
 s32 FUN_003e6f50(BtlGameOverA *work)
 {
     switch (work->state) {
     case GAMEOVER_STATE_EYES_START:
         effectRequestByName(g_btlAux, DAT_00528618);
         work->state = GAMEOVER_STATE_EYES_WAIT;
-        if (btlPollVersionedEffectTexture(g_btlAux) != 0) {
-            work->state = GAMEOVER_STATE_TIMELINE;
-            work->timing.frameCounter = 0;
-            return FUN_003e6c14(work);
+        if (btlPollVersionedEffectTexture(g_btlAux) == 0) {
+            return 0;
         }
-        break;
+        work->state = GAMEOVER_STATE_TIMELINE;
+        work->timing.frameCounter = 0;
+        return FUN_003e6c14(work);
     case GAMEOVER_STATE_EYES_WAIT:
-        if (btlPollVersionedEffectTexture(g_btlAux) != 0) {
-            work->state = GAMEOVER_STATE_TIMELINE;
-            work->timing.frameCounter = 0;
-            return FUN_003e6c14(work);
+        if (btlPollVersionedEffectTexture(g_btlAux) == 0) {
+            return 0;
         }
-        break;
+        work->state = GAMEOVER_STATE_TIMELINE;
+        work->timing.frameCounter = 0;
+        return FUN_003e6c14(work);
     case GAMEOVER_STATE_TIMELINE:
         return FUN_003e6c14(work);
     case GAMEOVER_STATE_LOAD: {
         SaveCounterView *save;
 
-        asdLoadFileAsyncSimple(DAT_005285fc, reinterpret_cast<u32 *>(&work->dataA), 0);
-        asdLoadFileAsyncSimple(DAT_005285dc, reinterpret_cast<u32 *>(&work->dataB), 0);
+        asdLoadFileAsyncSimple(DAT_005285fc, (u32 *)&work->dataA, 0);
+        asdLoadFileAsyncSimple(DAT_005285dc, (u32 *)&work->dataB, 0);
         save = (SaveCounterView *)gameDataBlocksGetSaveData();
         if (save->gameOvers < 255) {
             save->gameOvers++;
@@ -81,8 +90,7 @@ s32 FUN_003e6f50(BtlGameOverA *work)
     case GAMEOVER_STATE_MENU:
         return talkEventStartScript(work);
     case GAMEOVER_STATE_CHAINED:
-        work->state = GAMEOVER_STATE_START;
-        return stepStateBattleStart(work);
+        return gameOverStepChained(work);
     case GAMEOVER_STATE_SCRIPT:
         switch (work->step.phase) {
         case 0:

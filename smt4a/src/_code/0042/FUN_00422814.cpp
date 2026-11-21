@@ -29,10 +29,9 @@ u32 FUN_00422814(s32 width, s32 height, s32 capacity)
                 allocator->vtable->release(allocator, slot->elements);
                 return 0;
             }
-            slot->cursors[0] = 0;
-            slot->cursors[1] = 0;
-            slot->cursors[2] = 0;
-            slot->cursors[3] = 0;
+            for (s32 i = 0; i < 4; ++i) {
+                slot->cursors[i] = 0;
+            }
             slot->submitted = 0;
             slot->completed = 0;
             slot->scaleX = 1.0f;

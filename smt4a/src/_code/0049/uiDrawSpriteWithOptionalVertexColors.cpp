@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail creates extra color-argument copies and a 188-byte frame versus 76 bytes here; the original color value/temporary ABI is unrecovered. */
+/* NON_MATCHING: retail creates extra color-argument copies and a 188-byte frame versus 76 bytes here; retail passes the colors by value (shard/W6_W6Match7_QuadVectors.h) inside an inlined draw body
+   with its own stack frame; this draft keeps the old pointer prototype (by value scores 142 against 136). */
 #include "shard/W6_W6Match7_QuadVectors.h"
 #include "shard/W6_W6Match3_ExtendedRecordCall.h"
 #include "gfx/SpriteVertexColors.h"
@@ -9,8 +10,7 @@ extern "C" {
 f32 jobGetScalarValue();
 void efctSetSpeed(f32);
 void gxResetColorQuadToWhite();
-void *__aeabi_vec_ctor_nocookie_nodtor(QuadVector *, void (*)(QuadVector *), u32, u32);
-void quadSetOrderedVectors(const QuadVector *, const QuadVector *, const QuadVector *,
+void quadSetOrderedVectors(const QuadVector *, const QuadVector *, const QuadVector *, // declcheck: local (draft keeps the pointer form)
                   const QuadVector *, s32, s32);
 void texDrawTableEntrySized(u32, u32, s32, u32, u32, u32, u32, u32);
 
@@ -28,7 +28,6 @@ void uiDrawSpriteWithOptionalVertexColors(s32 spriteId, s32 x, s32 y, u32 layer,
     }
     if (useColors && extension != NULL) {
         QuadVector colors[4];
-        __aeabi_vec_ctor_nocookie_nodtor(colors, vectorSetAllOne, sizeof(QuadVector), 4);
         colors[0] = reinterpret_cast<ItemSpriteExtension *>(sprite->placement)->colors[0];
         colors[1] = reinterpret_cast<ItemSpriteExtension *>(sprite->placement)->colors[1];
         colors[2] = reinterpret_cast<ItemSpriteExtension *>(sprite->placement)->colors[2];

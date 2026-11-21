@@ -1,8 +1,15 @@
-/* NON_MATCHING: interpolation recovered; VFP load grouping, calculation scheduling and final paired position stores differ. */
+/* NON_MATCHING: the early exit and the counter update match; retail loads the fields in another order (targetA/B
+ * with one vldmia), interleaves the conversions differently and stores valueA and valueB separately. */
 #include "gfx/TransformInterpolation.h"
 
 extern "C" {
-// Advance the active transform interpolation by one frame.
+/* The value `elapsed` frames of `duration` along from `start` to `target`. */
+static __inline f32 transformInterpolate(f32 start, f32 target, f32 elapsed, f32 duration)
+{
+    return ((target - start) * elapsed) / duration + start;
+}
+
+/* Advances the active transform interpolation by one frame. */
 void transformInterpolationStep(TransformInterpolation* transform)
 {
     if (transform->flags & 0x1000) {
@@ -12,14 +19,10 @@ void transformInterpolationStep(TransformInterpolation* transform)
         if (elapsed == duration) {
             transform->flags &= ~0x1000;
         }
-        transform->valueA = ((transform->targetA - transform->startA) * (float)elapsed) /
-                            (float)duration + transform->startA;
-        transform->valueB = ((transform->targetB - transform->startB) * (float)elapsed) /
-                            (float)duration + transform->startB;
-        transform->x = ((transform->targetX - transform->startX) * (float)elapsed) /
-                       (float)duration + transform->startX;
-        transform->y = ((transform->targetY - transform->startY) * (float)elapsed) /
-                       (float)duration + transform->startY;
+        transform->valueA = transformInterpolate(transform->startA, transform->targetA, elapsed, duration);
+        transform->valueB = transformInterpolate(transform->startB, transform->targetB, elapsed, duration);
+        transform->x = transformInterpolate(transform->startX, transform->targetX, elapsed, duration);
+        transform->y = transformInterpolate(transform->startY, transform->targetY, elapsed, duration);
     }
 }
 }

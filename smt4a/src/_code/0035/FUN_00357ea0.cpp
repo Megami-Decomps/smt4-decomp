@@ -1,4 +1,4 @@
-/* NON_MATCHING: Shared-enable materialization, the mode-zero fast branch, and float-bit comparison registers differ. */
+/* NON_MATCHING: the two enable stores use r0/r1 the other way round from retail (retail loads the target before testing the code and materialises the flag moveq-first). */
 #include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
@@ -8,38 +8,30 @@ extern "C" {
 s32 FUN_0040898c(JobAnimationTargetPrefixA *target);
 }
 
-// The retail code compares signed representations, not converted integers.
-static s32 floatRepresentation(f32 value)
-{
-    union {
-        f32 value;
-        s32 bits;
-    } representation;
-    representation.value = value;
-    return representation.bits;
-}
-
+/* Advances the animated sprite, enables its target and parameters unless the code is 0x71, and steps the mode-2 phase (wrapping at 30) and angle (wrapping at 360). */
 extern "C" u32 FUN_00357ea0(u32 process)
 {
     JobAnimationWorkPrefixA *work = (JobAnimationWorkPrefixA *)jobGetWork(process);
     uiSpriteAdvanceAnimation((UiSpriteState *)work->unk2C, 1.0f);
 
-    const bool enabled = (work->code != 0x71);
-    work->target->enabled = enabled;
-    work->animation->enabled = enabled;
+    u32 code = work->code;
+    work->target->enabled = code != 0x71;
+    work->animation->enabled = code != 0x71;
 
     switch (work->mode) {
+    case 0:
+        break;
     case 1:
         FUN_0040898c(work->target);
         break;
     case 2: {
         JobAnimationParametersPrefixA *animation = work->animation;
         animation->phase += 1.0f;
-        if (floatRepresentation(animation->phase) >= 0x41f00000)
+        if (animation->phase >= 30.0f)
             animation->phase -= 30.0f;
 
         animation->angle += 12.0f;
-        if (floatRepresentation(animation->angle) > 0x43b40000)
+        if (animation->angle > 360.0f)
             animation->angle -= 360.0f;
         break;
     }

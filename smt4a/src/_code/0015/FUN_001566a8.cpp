@@ -5,7 +5,6 @@
 #include "kernel/jyoucyuGetTableEntry.h"
 
 extern "C" {
-extern VoiceLoadQueue g_soundObjectTable;
 void rt_aeabi_memclr(void *memory, u32 size);
 s32 eventIsSkipping(void);
 char *libc_strcat(char *destination, const char *source);
@@ -19,18 +18,6 @@ static const char s_voiceDirectory[] = "snd/voice/";
 static const char s_voiceIdFormat[] = "%06d";
 static const char s_voiceFileFormat[] = "%s.bcwav";
 
-static __inline VoiceLoadRequest *voiceLoadRequestAt(VoiceLoadQueue *queue, u32 index)
-{
-    return index < 4 ? &queue->entries[index] : NULL;
-}
-static __inline s32 findFreeVoiceLoadRequest(VoiceLoadQueue *queue)
-{
-    for (s32 index = 0; index < 4; ++index) {
-        if (voiceLoadRequestAt(queue, index)->active == 0)
-            return index;
-    }
-    return -1;
-}
 
 /* Reserve a voice-load slot and schedule a wave file with per-channel stereo gains. */
 extern "C" u32 FUN_001566a8(u32 group, u32 id, s32 kind, u8 flags, u8 priority,

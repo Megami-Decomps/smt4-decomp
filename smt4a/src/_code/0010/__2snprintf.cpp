@@ -1,4 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001028b8` (_code @ 0x1028b8, 0x36 bytes) from smt4a.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `__2snprintf` (_code @ 0x1028b8, 0x36 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
@@ -20,7 +20,7 @@ extern unsigned char LAB_00100d79; /* 0x100d79 */
 /* Supplied declaration required: libcFormatAppendByte. */
 
 
-unsigned int FUN_001028b8(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
+unsigned int __2snprintf(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
 
 {
 /* irregular: 3 native warning(s); review required */

@@ -3,10 +3,10 @@
 
 extern "C" {
 
-/* Returns the byte at 0x1E4 of the global at 0x61978C. */
+/* Returns the voice load queue's voice-flags byte (0x1E4). */
 u8 messageVoiceFlagsGet(void)
 {
-    return g_soundObjectTable.unk1E4;
+    return g_soundObjectTable.voiceFlags;
 }
 
 } /* extern "C" */

@@ -5934,3 +5934,13 @@
 003de758 btlReflectQueuePendingRosterFade inferred its smt4a twin's name (same reflect actions, kinds 0x21/0x22)
 0039c728 mapNaviDisplayUpdateDragScroll inferred follows a touch drag on the navigation map, then lets the speed coast
 003dc19c btlLoadSequenceEffects inferred looks up indexed effect descriptors and requests their files
+002522f8 __2snprintf evidence armlib snprintf entry (armcc 4.1 calls snprintf as __2snprintf): its <stdio.h> snprintf callers (effectTextureRequestsPump, FUN_00328d2c, FUN_00324a20, FUN_00317a90) differ from retail only in this symbol; 0x36-byte Thumb armlib body, exact twin of smt4a 0x1028b8
+002b1fc4 _Z21quadSetOrderedVectors10QuadVectorS_S_S_ii inferred a C++ function taking four QuadVector (non-trivial: inline constructor and destructor) by value: callers pass pointers to stack copies, armcc rejects the extern "C" form; gxSetUniformQuadColors is IDENTICAL calling it
+00126770 asdSoundAuxSlotsSelect inferred selects the two auxiliary sound slots, restoring each selected slot's heap to its saved state
+0021e7f4 mapRewardRollAndAward inferred rolls a weighted reward of a data table 0x20 group (add-on override first) and optionally awards it
+0010ffdc asdModelWorkInitialize inferred sets up the AsdModel work area and starts its worker thread
+0026e768 vec4Transform inferred body is nn::math's VEC4Transform (4x4 matrix times vector through a temporary, returns pOut)
+00343358 renderCtxGetBuiltinCamera inferred returns the render context's built-in camera (ctx+0x6fc); smt4a's one-instruction twin was linker-inlined (smt4a inlined.txt row)
+003a099c shopUpdatePageOpening inferred runs the shop page's opening animation, then enters the chosen page or transaction script
+003f946c curveSampleLinear inferred samples a keyframe curve at a time, blending linearly with the next key
+0033f86c flagBitsMergeBlock inferred ORs the flag bits 0x800-0xa1f of one flag block into another

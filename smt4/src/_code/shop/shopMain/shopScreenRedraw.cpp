@@ -54,7 +54,7 @@ void shopScreenRedraw(ShopScreen *screen, u32 sprite)
     FUN_00231bcc(&screen->region, icons.first.icons[firstIndex], 0, 0, color, 1);
     FUN_00231bcc(&screen->region, icons.second.icons[secondIndex], 0, 0, color, 1);
 
-    s32 mode = screen->phase;
+    s32 mode = screen->pageTransition.phase;
     s32 compact = (mode == 5 || mode == 9) || (mode == 6 || mode == 10) || (mode == 7 || mode == 11) ||
                   (mode == 15 || mode == 16);
     ShopCategoryList *list = &screen->slotInfo[screen->slot];

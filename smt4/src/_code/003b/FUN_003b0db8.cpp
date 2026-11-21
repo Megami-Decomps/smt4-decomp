@@ -1,4 +1,3 @@
-/* NON_MATCHING: frame/serial address registers, 64-bit increment loads and cursor scheduling differ. */
 #include "common.h"
 #include <stddef.h>
 
@@ -23,7 +22,7 @@ typedef char ModelSequenceHeaderWorkOffsetsCheck[
     offsetof(ModelSequenceHeaderWork, active) == 0x1487 &&
     offsetof(ModelSequenceHeaderWork, hasSequence) == 0x1489 ? 1 : -1];
 
-inline void clearModelSequenceHeader(ModelSequenceHeaderWork *work)
+static __inline void clearModelSequenceHeader(ModelSequenceHeaderWork *work)
 {
     work->position = 0;
     work->increment = 0;
@@ -48,25 +47,24 @@ u32 FUN_003b0db8(ModelSequenceHeaderWork *work, const u8 *source, u32 *cursor, u
     u8 header = source[offset];
     work->hasSequence = (header & 2) >> 1;
     work->started = header & 1;
-    u32 previousFrame = work->frame;
     u32 frame = header >> 2;
-    if (previousFrame == 0x40) {
+    if (work->frame == 0x40) {
         work->frame = frame;
-    } else if (previousFrame != frame) {
+    } else if (work->frame != frame) {
         if (work->increment == 0) {
             clearModelSequenceHeader(work);
             return 0x46;
         }
-        work->position += (u64)(frame - previousFrame) * work->increment;
+        work->position += work->increment * (u64)(frame - work->frame);
         work->frame = frame;
         if (!FUN_003b0964(work)) {
             return 0x44;
         }
     }
     if (work->hasSequence) {
-        u16 encoded = *reinterpret_cast<const u16 *>(source + *cursor);
-        *cursor += 2;
-        u32 sequence = ((encoded & 0xFF) << 8) | (encoded >> 8);
+        u32 pos = *cursor;
+        u32 sequence = ((u32)source[pos] << 8) | source[pos + 1];
+        *cursor = pos + 2;
         if (*cursor > size) {
             clearModelSequenceHeader(work);
             return 0x43;

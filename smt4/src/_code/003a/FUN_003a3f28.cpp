@@ -32,25 +32,25 @@ void FUN_003a3f28(ShopScreen *screen)
         gameGlobalsSetSubScreenActive(0);
         buttonHelpSelectMenuPreset(screen);
         if (screen->help.variant == 1) {
-            screen->substep = 0;
+            screen->pageTransition.substep = 0;
             if (screen->slot != 8) {
-                screen->phase = 15;
+                screen->pageTransition.phase = 15;
             } else {
-                screen->phase = 16;
+                screen->pageTransition.phase = 16;
             }
             return;
         }
         if (screen->slot == 7) {
-            screen->phase = 6;
-            screen->substep = 0;
+            screen->pageTransition.phase = 6;
+            screen->pageTransition.substep = 0;
             return;
         }
         if (screen->slot == 8) {
-            screen->phase = 7;
+            screen->pageTransition.phase = 7;
         } else {
-            screen->phase = 5;
+            screen->pageTransition.phase = 5;
         }
-        screen->substep = 0;
+        screen->pageTransition.substep = 0;
         return;
     }
     ShopSlotTable *table = &screen->lists[screen->slot];

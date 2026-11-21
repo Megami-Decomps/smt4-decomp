@@ -121,6 +121,9 @@ difference a register tie-break.
   returns `nn::Result`, not `s32`: with `s32` armcc gives the result and the reference-count pointer
   other registers (smt4 `FUN_0011c834`, smt4a `FUN_0015997c`, smt4 `FUN_00146704`). Only where every
   caller treats the value as a result (sign test, forwarding); keep `s32`/`bool` for 0/1 answers.
+- Under `--fpmode=fast`, a float compared against a positive constant compiles to an integer compare of the bit
+  patterns (`vmov r1, s0; cmp r1, r2` against the constant's word): write the plain float test
+  (`if (phase >= 30.0f)`), not a union or cast that recreates the bits (smt4a `FUN_00357ea0`, wave 59).
 - Test a returned `nn::Result` from a local: `nn::Result result = f(&out); if (nnResultIsSuccess(result))`
   gives retail's `and #0x80000000; cmp; bge`, passing the call straight in gives `asr; adds` (wave 52:
   `runtimeInitializeSharedHandle`, both games).
@@ -324,6 +327,9 @@ asks for.
 - nn::math's header inlines are helpers with evidence: `MTX44PerspectivePivotDeg` (`MTX44Perspective` of the angle
   in radians, then `MTX44PivotC`) written as a `static __inline` at both call sites gave retail's projection code in
   `stereoCameraSetPerspective` (both games), and `MTX44Transpose` returns its destination.
+- nn::math's `VEC4Transform` (`nw/math/VEC4.h`) is written as the SDK has it: the four row dot products into a
+  temporary `VEC4`, then copied to `pOut`, which it returns (pOut may alias the input): smt4 `FUN_0026e768` and smt4a
+  `FUN_0043b5b4` (wave 59).
 - An inlined orthographic projection (zero stores early, then elements 0/3/5/7/10/11, pooled as 0.0, far, 1.0, 2.0)
   is `MTX44Ortho` in the SDK's fast C form: the three reciprocals and the six computed elements into locals first,
   then the ten constant stores, then the six computed ones, all through the SDK's two-dimensional view
@@ -376,6 +382,11 @@ asks for.
 
 - A vtable whose slots 0/1 are destructors: declare a virtual destructor and write `delete`; it fixes
   the predication around the call. Not when slot 0 is an ordinary method.
+- A function taking a non-trivial class by value (callers copy it to the stack and pass pointers to the copies)
+  has C++ linkage: armcc 4.1 b1454 stops with an internal fault on a call to an `extern "C"` function with such a
+  parameter. Declare and define it outside `extern "C"` and give it its mangled name
+  (`_Z21quadSetOrderedVectors10QuadVectorS_S_S_ii` in `shard/W6_W6Match7_QuadVectors.h`; `names.py` accepts the
+  rename once the unit defines the C++ function).
 - Constructor stores out of order: a base class taking the value in its constructor
   (`Base(kind) : kind(kind)`) gives retail's order; members of types with their own zeroing
   constructors give its registers.
@@ -421,6 +432,10 @@ More on classes, constructors and destructors is in [C++](style-and-naming.md#c)
   object at an address: both name the image's global (`g_asdRomPathFormat`) and pass it to `__2sprintf`
   from `runtime/Stdio.h` (`AsdSDK/Source/Sys/File/AsdLoadPath.h`), keeping `<stdio.h>` `sprintf` for the
   arm whose format is a plain pointer.
+- **`__2snprintf` is armlib's `snprintf`** (smt4 0x2522f8, smt4a 0x1028b8, 0x36-byte Thumb): write
+  `snprintf(buf, sizeof(buf), fmt, ...)` with `<stdio.h>`, as for `sprintf`; a local prototype of the placeholder
+  leaves the prologue and argument scheduling off (smt4 `effectTextureRequestsPump`, smt4a `FUN_0036f0a0` and three
+  effect texture loaders per game, wave 59).
 - Two format strings a unit owns at adjacent addresses with word padding between them (smt4
   `asdLoadFileAsync`'s `"patch:/%s"` at 0x409800 and `"rom:/%s"` at 0x40980c) are one `static const` struct of two
   `char` arrays sized to the padding: armcc emits separate `static const char[]` objects unpadded and in reverse

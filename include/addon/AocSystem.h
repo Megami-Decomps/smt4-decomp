@@ -78,6 +78,8 @@ DataTable42Record *dataArchiveGetMergedRecord(AocSystem *system, s32 index);
 void aocActivateFileGroupFlags(AocSystem *system);
 u8 *aocFindPackageTable22Record(AocSystem *system, s32 id);
 void *aocFindQuestPayloadById(AocSystem *system, s32 id);
+/* The payload after the id of the first record `id` in a loaded package's kind-0x21 tables (section 1), or NULL. */
+const char *aocFindDisplayNameOverrideText(AocSystem *system, s32 id);
 void aocReleasePackageOwner(AocSystem *system);
 u32 aocContentLookupSucceeds(AocSystem *system, u32 id);
 AocPackageDirectoryEntry *packageFindRecordByName(AocSystem *system, s32 kind, u32 key);

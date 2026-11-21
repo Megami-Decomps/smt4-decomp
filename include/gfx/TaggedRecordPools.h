@@ -20,4 +20,7 @@ typedef char TaggedPoolRecordLayoutCheck[sizeof(TaggedPoolRecord) == 0xa8 &&
 typedef char TaggedRecordPoolsLayoutCheck[sizeof(TaggedRecordPools) == 0x28 &&
     offsetof(TaggedRecordPools, counts) == 4 &&
     offsetof(TaggedRecordPools, pools) == 0x18 ? 1 : -1];
+
+/* Apocalypse's collision global, seen as its tagged record pools. */
+extern "C" TaggedRecordPools g_mapCollision;
 #endif

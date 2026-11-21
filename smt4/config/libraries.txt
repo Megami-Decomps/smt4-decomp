@@ -54,3 +54,6 @@ arm 0x36ef0c 0x36efa8 NintendoWare-gfx between nw_gfx_Fog_Accept and nw::gfx res
 arm 0x36fc08 0x36fcf8 NintendoWare-gfx after ResTextureCoordinatorData constructor; exact twin of smt4a's third-party FUN_00452380
 # armlib's ll_udiv10 (unsigned 64-bit divide by ten, named from the ARM runtime); smt4a's exact twin 0x2e3fcc is third-party.
 arm 0x1527b4 0x15284c armlib ll_udiv10: 64-bit reciprocal divide by ten; smt4a twin ll_udiv10 is third-party
+# armlib's __2snprintf (snprintf entry, Thumb): the exact 0x36-byte twin of smt4a's third-party FUN_001028b8; callers
+# written with <stdio.h> snprintf (effectTextureRequestsPump and three effect texture loaders) differ only in its name.
+thumb 0x2522f8 0x25232e armlib __2snprintf: Thumb snprintf entry; exact twin of smt4a's third-party FUN_001028b8

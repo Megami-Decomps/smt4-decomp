@@ -1,7 +1,7 @@
 /* NON_MATCHING: missing callback target at 0x1008b6 (Thumb address 0x1008b7) falls inside FUN_00100890; cannot name its bounded-output callback */
-/* romwright 0.5.0 decompilation of FUN_002522f8 for reference (not compiled; its own view of the boundaries):
+/* romwright 0.5.0 decompilation of __2snprintf for reference (not compiled; its own view of the boundaries):
 
-unsigned int FUN_002522f8(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
+unsigned int __2snprintf(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
 
 {
   int local_28;

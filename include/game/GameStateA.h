@@ -29,7 +29,8 @@ struct GameStateA {
     /* 0x000 */ s32 mapId;
     /* 0x004 */ s32 areaId;
     /* 0x008 */ u32 currentObjectId;
-    /* 0x00C */ u8 unk00C[8];
+    /* 0x00C */ s32 naviMapId;            /* map and area last handed to the navigation (map spawn) */
+    /* 0x010 */ s32 naviAreaId;
     /* 0x014 */ s32 resumeMode;          /* 1-3: what the resume point records */
     /* 0x018 */ s8 inputBlocked;
     /* 0x019 */ u8 unk019[3];

@@ -1,4 +1,4 @@
-/* NON_MATCHING: the word swap now matches retail's shift sequence; VFP scheduling of the channel conversions differs and retail hoists the constant 1 (r6) for the final state store. */
+/* NON_MATCHING: literal pool order (g_btlStageModel before g_handleRegistry) and byte swap match retail; VFP channel scheduling and constant-1 hoisting in r6 still differ. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlStage.h"
@@ -27,8 +27,8 @@ void FUN_0040dcdc(u32, void* owner)
     if (work->duration > 0) {
         BtlMainStateA* battle = btlGetMainState();
         f32 remaining = (f32)(work->duration - work->elapsed);
-        const RegistryView* registry = static_cast<const RegistryView*>(g_handleRegistry);
-        u32 color = *table108Owner(registry->owner, g_btlStageModel->apocalypse.selection, work->elapsed);
+        s32 selection = g_btlStageModel->apocalypse.selection;
+        u32 color = *table108Owner(((const RegistryView*)g_handleRegistry)->owner, selection, work->elapsed);
         u32 swapped = (color << 24) | ((color >> 8) << 16) | ((u8)(color >> 16) << 8) | (color >> 24);
         s32 redByte = swapped & 0xFF;
         s32 greenByte = (swapped >> 8) & 0xFF;

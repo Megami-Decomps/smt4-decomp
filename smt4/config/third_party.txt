@@ -1367,6 +1367,7 @@
 0x0023d2ec FUN_0023d2ec between
 0x0023d304 nn_gr_CTR_Vertex_LoadArray_DisableAll name
 0x00248ce8 nn_cec_CTR_MessageBox_SetMessageBoxData name
+0x002522f8 FUN_002522f8 library
 0x0025432c nn_fnd_DateTime_GetYear name
 0x00254384 nn_fnd_DateTime_GetMonth name
 0x002543dc nn_fnd_DateTime_GetDay name

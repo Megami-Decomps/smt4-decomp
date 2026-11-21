@@ -1,4 +1,5 @@
-/* NON_MATCHING: cull-mode branching, packet-store grouping, constant synthesis and scratch-register allocation differ; an optimization flag may explain them. */
+/* NON_MATCHING: the cull-mode chain matches; packet-store grouping (retail pairs the logic-command words into strd/stmia),
+ * constant synthesis and scratch-register allocation differ; an optimization flag may explain them. */
 #include "shard/W6_W6Match4_GxDrawSettings.h"
 #include "shard/W6_W6Match8_GpuDepth.h"
 
@@ -51,13 +52,10 @@ u32 *gxDrawSettingsMakeCommand(GxDrawSettings *settings, u32 *commands, s32 rese
     }
     u32 outputMode = 0;
     if (settings->outputEnabled) {
-        if (packet->frontFace) {
-            if (packet->frontFace == 1 && packet->cullSide == 1)
-                outputMode = 2;
-            else
-                outputMode = 1;
-        } else if (packet->cullSide == 0) {
-            outputMode = 2;
+        if (packet->frontFace == 0) {
+            outputMode = packet->cullSide == 0 ? 2 : 1;
+        } else if (packet->frontFace == 1) {
+            outputMode = packet->cullSide == 1 ? 2 : 1;
         } else {
             outputMode = 1;
         }

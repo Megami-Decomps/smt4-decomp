@@ -1,10 +1,3 @@
-#include "shard/W6_W6Match7_QuadVectors.h"
-
-/* Initializes all four components to one. */
-extern "C" void vectorSetAllOne(QuadVector *vector)
-{
-    vector->xyz.x = 1.0f;
-    vector->xyz.y = 1.0f;
-    vector->xyz.z = 1.0f;
-    vector->w = 1.0f;
-}
+/* QuadVector's inline default constructor (shard/W6_W6Match7_QuadVectors.h): its out-of-line copy is emitted
+   where an array of QuadVector is constructed, as in gxSetUniformQuadColors. */
+#include "../002a/gxSetUniformQuadColors.cpp"

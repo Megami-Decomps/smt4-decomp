@@ -46,7 +46,7 @@ void shopDrawEquippedItemPage(Scene3a *scene)
     header.id = equipped;
     FUN_0022ea70(scene, 0, 0, &header);
 
-    s32 phase = scene->phase;
+    s32 phase = scene->pageTransition.phase;
     bool selectedOverlay = phase == 5 || phase == 9 || phase == 6 || phase == 10 ||
         phase == 7 || phase == 11 || phase == 15 || phase == 16;
     Scene3aSlotInfo *page = &scene->slotInfo[scene->slot];

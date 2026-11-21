@@ -3090,7 +3090,7 @@
 003503d0 movieSyncPollBackend
 002b1ad4 spriteSequencePlayerAdvance
 003c000c btlAddClampedVital
-002b1fc4 quadSetOrderedVectors
+002b1fc4 _Z21quadSetOrderedVectors10QuadVectorS_S_S_ii
 0024d7d0 btlBuildUnitSnapshot
 00280364 mapSelectContainingRegions
 001d22a0 spriteGroupPlayerSelect
@@ -6117,3 +6117,12 @@
 003de758 btlReflectQueuePendingRosterFade
 0039c728 mapNaviDisplayUpdateDragScroll
 003dc19c btlLoadSequenceEffects
+002522f8 __2snprintf
+00126770 asdSoundAuxSlotsSelect
+0021e7f4 mapRewardRollAndAward
+0010ffdc asdModelWorkInitialize
+0026e768 vec4Transform
+00343358 renderCtxGetBuiltinCamera
+003a099c shopUpdatePageOpening
+003f946c curveSampleLinear
+0033f86c flagBitsMergeBlock

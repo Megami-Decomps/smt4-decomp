@@ -2,7 +2,6 @@
 #include "gfx/TaggedRecordPools.h"
 
 extern "C" {
-extern TaggedRecordPools g_mapCollision;
 extern TaggedPoolRecord DAT_005e2714[];
 
 // Disable every matching tag in the four dynamic record pools and the static pool.

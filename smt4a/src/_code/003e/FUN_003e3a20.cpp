@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack aggregate placement, choice-record integer/VFP copying and saved pointer registers differ. */
+/* NON_MATCHING: target stat writes fixed to original.tableStats[index + 2] (sp+4..12) and signed count; choice-record VFP copy (vldmia/vstmia) and preview/inherited address hoisting still differ. */
 #include "shard/Shard0032.h"
 #include <stddef.h>
 #include "code/Code0033.h"
@@ -50,7 +50,7 @@ void FUN_003e3a20(InheritancePreviewWork *work, const InheritanceTargetStats *ta
     InheritanceSkillList previous = *(const InheritanceSkillList *)original.skills;
     FUN_004cd4b8(&original, (s16)(target->level - original.level));
     for (s32 index = 0; index < 5; ++index)
-        original.stats[index + 2] = target->stats[index];
+        original.tableStats[index + 2] = target->stats[index];
     unitRecomputeDerivedStats(&original);
     original.experience = FUN_004cc8d8(original.id, original.level) - 1;
     UnitRecord preview;
@@ -58,7 +58,7 @@ void FUN_003e3a20(InheritancePreviewWork *work, const InheritanceTargetStats *ta
     u16 inherited[8] = {0};
     InheritanceChoiceRecord choice = work->choices()[work->selected];
     s32 unlocked = getUnlockedSlotCount(0);
-    u32 count = 0;
+    s32 count = 0;
     for (s32 index = 0; index < 8; ++index)
         partyRecordSetEquippedItemClampRank(&preview, 0, index);
     for (s32 index = 0; index < 8; ++index) {

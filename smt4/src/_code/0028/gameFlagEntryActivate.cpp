@@ -1,4 +1,6 @@
-/* NON_MATCHING: flag-store folding, two-byte counter clearing and active-slot address decomposition differ. */
+/* NON_MATCHING: the flag loop now matches (gameFlagSetValue's body); retail stores the entry flags before reloading them
+   for the 0x80/secondary clears, clears the primary counters with three unaligned word stores (a __packed 12-byte record,
+   which as a type here swaps r4/r5 and scores worse) and returns once after the slot loop. */
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "code/Code0029.h"
 #include "gamedata/GameDataAccess_VariantA.h"
@@ -22,6 +24,21 @@ extern "C" {
 s32 table1bOr1cGetRecordValue(u32 id);
 void words3Clear(void *words);
 void FUN_0023ddbc(u32 flag, s32 value);
+
+/* Reports a game flag change to FUN_0023ddbc, then sets or clears the flag's bit (gameFlagSetValue's body). */
+static __inline void gameFlagWrite(u32 flag, s32 value)
+{
+    GameFlagBlockPrefixIV *block = reinterpret_cast<GameFlagBlockPrefixIV *>(gameGetFlagBlock());
+
+    FUN_0023ddbc(flag, value);
+    u32 index = flag >> 3;
+    if (value) {
+        block->packedFlags[index] |= 1 << (flag & 7);
+    } else {
+        s32 keep = ~(1 << (flag & 7));
+        block->packedFlags[index] &= keep;
+    }
+}
 
 u32 gameFlagEntryActivate(u32 id)
 {
@@ -60,9 +77,7 @@ u32 gameFlagEntryActivate(u32 id)
         block->primaryCounters[5] = 0;
         block->primaryCounter = 0;
         for (u32 flag = 0x500; flag < 0x520; ++flag) {
-            GameFlagBlockPrefixIV *current = reinterpret_cast<GameFlagBlockPrefixIV *>(gameGetFlagBlock());
-            FUN_0023ddbc(flag, 0);
-            current->packedFlags[flag >> 3] &= ~(1u << (flag & 7));
+            gameFlagWrite(flag, 0);
         }
     }
     return 1;

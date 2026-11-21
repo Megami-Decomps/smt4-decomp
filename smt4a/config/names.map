@@ -4145,7 +4145,7 @@
 004249e8 movieSyncPollBackend
 00285518 mapGetDisplayName
 003ebd40 btlAnyEventFilterMatches
-0018291c quadSetOrderedVectors
+0018291c _Z21quadSetOrderedVectors10QuadVectorS_S_S_ii
 00152618 asdSceneCreateDefaultLight
 003c323c lmapApplyAreaHandleVisibility
 004d9c54 modelSetDrawMode
@@ -7841,3 +7841,8 @@
 004cb9d0 battleEffectUpdateProjectionScale
 004a41d8 compendiumUpdateSelectedEntry
 004d542c btlCameraApplyEditorValue
+001028b8 __2snprintf
+00169614 asdSoundAuxSlotsSelect
+00500f3c gxEmitColorDepthMask
+0043b5b4 vec4Transform
+003fd5bc flagBitsMergeBlock

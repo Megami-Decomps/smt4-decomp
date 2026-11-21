@@ -6,7 +6,7 @@ extern "C" {
 
 typedef int romwright_code(...);
 extern int FUN_0022fc5c(...); /* 0x22fc5c */
-extern int FUN_003a099c(...); /* 0x3a099c */
+extern int shopUpdatePageOpening(...); /* 0x3a099c */
 extern int FUN_003a0b78(...); /* 0x3a0b78 */
 extern int sceneExitTransitionUpdate(...); /* 0x3a0c5c */
 extern int FUN_003a0d64(...); /* 0x3a0d64 */
@@ -48,7 +48,7 @@ void FUN_003a4518(int param_1)
   *(unsigned int *)(param_1 + 0x34) = 0;
   *(romwright_code **)(param_1 + 0x38) = FUN_003a3354;
   *(unsigned int *)(param_1 + 0x3c) = 0;
-  *(romwright_code **)(param_1 + 0x40) = FUN_003a099c;
+  *(romwright_code **)(param_1 + 0x40) = shopUpdatePageOpening;
   *(unsigned int *)(param_1 + 0x44) = 0;
   *(unsigned int *)(param_1 + 0x48) = 0x3a5768;
   *(unsigned int *)(param_1 + 0x4c) = 0;

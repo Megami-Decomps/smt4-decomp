@@ -1,4 +1,5 @@
-/* NON_MATCHING: the zero-timeout poll and its bool test now match; r4/r6 are swapped (queue vs wait result) and the thread descriptor/argument stores are scheduled differently. */
+/* NON_MATCHING: the zero-timeout poll, its bool test and the inlined Thread::Start now match in shape; retail keeps the
+   thread in r5 and the queue in r4 (the build: r4 and r6) and builds the wait's stack arguments with str+stm. */
 #include "sys/FileWorkerQueue.h"
 #include "nn/Result.h"
 #include "code/Code002b.h"
@@ -11,7 +12,22 @@ void fileWorkerCopyArgument(const void *source, void *destination);
 void fileWorkerDestroyArgument(void *argument);
 void fileWorkerInvokeEntry(ThreadEntryPoint entry, void *argument);
 
-// Restart a completed worker; a zero-timeout poll leaves a worker that is still running alone.
+/* nn::os::Thread::Start: runs `entry(argument)` on a new thread whose stack is `stack`; a failure is reported. */
+static __inline void fileWorkerStartThread(FileQueueWorker *thread, ThreadEntryPoint entry, FileQueue *argument,
+    ThreadStackInfo &stack, u32 priority, s32 processor)
+{
+    ThreadArgumentDescriptor descriptor;
+    descriptor.argumentSize = sizeof(argument);
+    descriptor.operations.copy = fileWorkerCopyArgument;
+    descriptor.operations.destroy = fileWorkerDestroyArgument;
+    descriptor.operations.invoke = fileWorkerInvokeEntry;
+    u32 result = FUN_002bcc60(thread, &descriptor, entry, &argument,
+        reinterpret_cast<void *>(stack.address + stack.size), priority, processor, 0);
+    if (nnResultIsFailureExceptSummary(result, 3))
+        resultHandleFailure(result);
+}
+
+/* Restarts a completed worker; a zero-timeout poll leaves a worker that is still running alone. */
 void fileWorkerQueueRestartIfIdle(FileQueue *queue)
 {
     FileQueueWorker *thread = &queue->thread;
@@ -23,16 +39,6 @@ void fileWorkerQueueRestartIfIdle(FileQueue *queue)
     if (running)
         return;
     kernelThreadJoinAndClose(thread);
-    FileQueue *argument = queue;
-    ThreadArgumentDescriptor descriptor;
-    descriptor.argumentSize = sizeof(argument);
-    descriptor.operations.copy = fileWorkerCopyArgument;
-    descriptor.operations.destroy = fileWorkerDestroyArgument;
-    descriptor.operations.invoke = fileWorkerInvokeEntry;
-    u32 result = FUN_002bcc60(thread, &descriptor, FUN_00158bb4, &argument,
-        reinterpret_cast<void *>(thread->stack->address + thread->stack->size), 0x11, -2, 0);
-    bool failed = nnResultIsFailureExceptSummary(result, 3);
-    if (failed)
-        resultHandleFailure(result, failed);
+    fileWorkerStartThread(thread, FUN_00158bb4, queue, *thread->stack, 0x11, -2);
 }
 }

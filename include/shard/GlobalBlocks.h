@@ -5,6 +5,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "sound/VoiceLoadQueue.h"
 
 struct PadAnalogCalibration;
 
@@ -31,14 +32,7 @@ typedef struct Block5b40b4 {
 } Block5b40b4;
 extern Block5b40b4 g_processResultState;
 
-/* Global at 0x61978C: only the bytes at 0x1E4..0x1E6 are used. */
-typedef struct Block61978c {
-    /* 0x000 */ u8 unk000[0x1E4];
-    /* 0x1E4 */ u8 unk1E4;
-    /* 0x1E5 */ u8 unk1E5;
-    /* 0x1E6 */ u8 unk1E6;
-} Block61978c;
-extern Block61978c g_soundObjectTable;
+/* Global at 0x61978C: g_soundObjectTable, the voice load queue (sound/VoiceLoadQueue.h). */
 
 /* Global at 0x5891D8. */
 typedef struct Block5891d8 {

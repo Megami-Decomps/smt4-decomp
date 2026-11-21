@@ -8506,3 +8506,9 @@
 004cb9d0 battleEffectUpdateProjectionScale inferred writes the battle effect's camera projection scale
 004a41d8 compendiumUpdateSelectedEntry inferred updates the selected compendium entry's price, registration and details
 004d542c btlCameraApplyEditorValue inferred applies an edited camera position, angle, distance and flags
+001028b8 __2snprintf evidence armlib snprintf entry (armcc 4.1 calls snprintf as __2snprintf): its <stdio.h> snprintf callers (FUN_0036f0a0, FUN_003cdb28, FUN_003c5c88, FUN_003afc2c) differ from retail only in this symbol; twin of smt4 0x2522f8
+0018291c _Z21quadSetOrderedVectors10QuadVectorS_S_S_ii inferred twin of smt4's; gxSetUniformQuadColors and commonBgDraw are IDENTICAL calling it
+00169614 asdSoundAuxSlotsSelect inferred twin of smt4 FUN_00126770
+00500f3c gxEmitColorDepthMask inferred appends the depth-test and colour/depth write-mask register (0x107), optionally refreshing the framebuffer access masks
+0043b5b4 vec4Transform inferred twin of smt4 FUN_0026e768
+003fd5bc flagBitsMergeBlock inferred twin of smt4 FUN_0033f86c

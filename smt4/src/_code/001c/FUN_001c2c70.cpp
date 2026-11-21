@@ -6,7 +6,7 @@ extern "C" {
 
 int scalarTimelineUpdate(...);
 int FUN_00212224(...);
-int FUN_0026e768(...);
+int vec4Transform(...);
 int effScalarChannelAdvance(...);
 int randomSignedRatio(int, double, int);
 f32 randomSignedScaledRange(s32 mode, s32 lower, s32 upper, u32 divisor);
@@ -63,7 +63,7 @@ extern int DAT_00433238; /* 0x433238 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: scalarTimelineUpdate. */
 /* Supplied declaration required: FUN_00212224. */
-/* Supplied declaration required: FUN_0026e768. */
+/* Supplied declaration required: vec4Transform. */
 /* Supplied declaration required: effScalarChannelAdvance. */
 /* Supplied declaration required: randomSignedRatio. */
 /* Supplied declaration required: randomSignedScaledRange. */
@@ -252,7 +252,7 @@ void FUN_001c2c70(float *param_1)
       temp_v19 = (float *)romwright_f2u((float)(temp_v12));
       FUN_002b2144(temp_v28);
       nn_math_ARMv6_MTX44MultAsm(&uStack_e8,&uStack_e8,temp_v28);
-      FUN_0026e768(&temp_v16,&uStack_e8);
+      vec4Transform(&temp_v16,&uStack_e8);
       temp_v7 = temp_v7 + 1;
       *(float **)((int)temp_v3 + 0x120) = temp_v16;
       *(float **)((int)temp_v3 + 0x124) = temp_v17;
@@ -297,7 +297,7 @@ void FUN_001c2c70(float *param_1)
         temp_v26 = temp_v12;
         FUN_002b2144(temp_v29);
         nn_math_ARMv6_MTX44MultAsm(temp_v27,temp_v27,temp_v29);
-        FUN_0026e768(&temp_v23,temp_v27);
+        vec4Transform(&temp_v23,temp_v27);
         *(float *)((int)param_1[(int)temp_v2 + 0x99] + 0x358) = temp_v23;
         *(float *)((int)param_1[(int)temp_v2 + 0x99] + 0x35c) = temp_v24;
         *(float *)((int)param_1[(int)temp_v2 + 0x99] + 0x360) = temp_v25;
@@ -355,7 +355,7 @@ void FUN_001c2c70(float *param_1)
         temp_v24 = temp_v12;
         FUN_002b2144(temp_v29);
         nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,temp_v29);
-        FUN_0026e768(&temp_v21,&temp_v25);
+        vec4Transform(&temp_v21,&temp_v25);
         temp_v30 = temp_v21;
         temp_v31 = temp_v22;
         temp_v32 = temp_v23;

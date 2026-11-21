@@ -20,7 +20,7 @@ extern "C" {
 u32 *gxEmitFramebufferAccessMasks(u32 *settingsWord, u32 *commands, s32 flush);
 
 // Append the color/depth write mask register, optionally refreshing access masks.
-u32 *FUN_00500f3c(const GxColorMaskState *state, u32 *commands, s32 refreshAccess)
+u32 *gxEmitColorDepthMask(const GxColorMaskState *state, u32 *commands, s32 refreshAccess)
 {
     *commands++ = (state->enabled != 0) | (state->function << 4) |
                   ((state->owner->writeMask & 1) ? 0x100 : 0) |

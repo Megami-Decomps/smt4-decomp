@@ -31,28 +31,35 @@ struct Scene3aSprites {
     /* 0x000 */ u8 unk00[0x20];
     /* 0x020 */ UiSpriteState sprites[8];   /* 6 slides the quantity panel in, 7 out */
 };
+/* Phase and animation substep change together when an opening page selects its destination. */
+struct ShopPageTransition {
+    /* 0x00 */ s32 phase;
+    /* 0x04 */ s32 substep;
+};
 struct Scene3a {
     /* 0x00000 */ u32 flags;                /* 0x1000: the quantity panel is on screen */
-    /* 0x00004 */ s32 phase;
     union {
-        /* 0x00008 */ s32 substep;
+        /* 0x00004 */ ShopPageTransition pageTransition;
         struct {
-            u8 unk08[8];
+            ShopPageTransition transition;
+            u8 unk0C[4];
             /* 0x00010 */ s32 variant;
             /* 0x00014 */ u8 forceOverride;
             u8 unk15[3];
             /* 0x00018 */ s32 context;
         } help;
         struct {
-            u8 unk08BeforeFrames[4];
+            ShopPageTransition transition;
             /* 0x0000C */ s32 frames;       /* frames spent in the current substep */
         } wait;
         struct {
-            u8 unk08BeforeFrame[0x14];
+            ShopPageTransition transition;
+            u8 unk0C[0x10];
             /* 0x0001C */ u8 kindTenFrame;  /* the appraisal list's rows of kind-10 items take their own frame */
         } appraisal;
         struct {
-            u8 unk08BeforePreview[0x16];
+            ShopPageTransition transition;
+            u8 unk0C[0x12];
             /* 0x0001E */ u8 requested;
             /* 0x0001F */ u8 ready;
         } preview;
@@ -109,7 +116,9 @@ typedef char Scene3aTransactionLayoutCheck[sizeof(Scene3aEntry) == 4 &&
     offsetof(Scene3a, transaction.records) == 0x9D1C && offsetof(Scene3a, transaction.count) == 0x15D1C &&
     offsetof(Scene3a, transaction.totalAmount) == 0x15D20 && offsetof(Scene3a, selectedItem) == 0x15D54 &&
     offsetof(Scene3a, quantityIndex) == 0x15D68 ? 1 : -1];
-typedef char Scene3aQuantityLayoutCheck[offsetof(Scene3a, wait.frames) == 0xC &&
+typedef char Scene3aQuantityLayoutCheck[offsetof(Scene3a, pageTransition) == 4 &&
+    offsetof(Scene3a, pageTransition.substep) == 8 &&
+    offsetof(Scene3a, wait.frames) == 0xC &&
     offsetof(Scene3a, appraisal.kindTenFrame) == 0x1C &&
     offsetof(Scene3a, scriptTable) == 0x160 && offsetof(Scene3a, process) == 0x168 &&
     offsetof(Scene3a, panel.rect) == 0x394 && offsetof(Scene3a, animation) == 0x3A8 &&

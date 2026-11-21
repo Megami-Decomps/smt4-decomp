@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail loads the packed colour into r1 with the next shiftRandomNextFraction argument (mov r0,#0) hoisted before the REV colour bytes, so one more register (r10) is saved and the VFP temps s16/s17 swap; source shape for that schedule not found. */
+/* NON_MATCHING: retail loads the packed colour into r1 with the next shiftRandomNextFraction argument (mov r0,#0) hoisted before the REV colour bytes, so one more register (r10) is saved and the VFP temps s16/s17 swap; source shape for that schedule not found (an unused read of
+   parameters->color narrows the diff; it is not kept). */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "gfx/QuaternionWorkspace.h"
@@ -58,7 +59,6 @@ BlurSample *effBlurFilterCreateScatterSamples(const BlurScatterParameters *param
         BlurScatterQuad *quad = &sample->scatter.quad;
         quad->extra08 = parameters->extra10;
         quad->extra0c = parameters->extra14;
-        u32 color = parameters->color;
         packedColorBytesSet(&quad->color, parameters->color);
         f32 spread = parameters->spread;
         f32 halfSize = (f32)parameters->size * 0.5f;

@@ -1,4 +1,6 @@
-/* NON_MATCHING: channel byte addressing, event-condition block layout and action-call argument scheduling differ. */
+/* NON_MATCHING: the event-condition layout and the slot-kind stores (battleSetActionKind's setter) match; retail keeps
+ * the kind 0x23 in r8 for both of its stores (here rematerialised, with 967 built from it) and schedules the
+ * FUN_0023c154 arguments in another order. */
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
@@ -18,9 +20,11 @@ BtlEntry *btlFindFirstActiveUnit(BtlMainState *);
 void FUN_0023c154(BtlMainState *, s32, s32, s32, ActionKindSelection *);
 }
 
-static void setPendingAction(BtlMainState *battle, u8 kind)
+/* Sets the selected action thread's kind (the setter battleSetActionKind and FUN_00229b10 inline). */
+static __inline void battleSetSelectedActionThreadKind(s32 index, u8 kind)
 {
-    reinterpret_cast<ActionStateChannel *>(g_btlAction.slots)[battle->actionState.index].pending = kind;
+    ActionKindThread *thread = &reinterpret_cast<ActionKindThread *>(g_btlAction.slots)[index];
+    thread->kind = kind;
 }
 
 /* Prefer a pending battle event; otherwise queue an emergency action and advance the channel. */
@@ -28,14 +32,14 @@ extern "C" void FUN_00229754(BattleActionOwnerView *owner, ActionKindSelection *
 {
     BtlMainState *battle = owner->battle;
     if (battle->actionState.mode == 8) {
-        setPendingAction(battle, 0x23);
+        battleSetSelectedActionThreadKind(battle->actionState.index, 0x23);
         return;
     }
-    if ((selection->flags & 0x10000) ? battle->eventCount > 0 :
-        ((reinterpret_cast<BtlEntry *>(selection->entry)->flags & 1) &&
-         !(reinterpret_cast<BtlEntry *>(selection->entry)->flags & 0x40))) {
+    if (!(selection->flags & 0x10000) ? ((reinterpret_cast<BtlEntry *>(selection->entry)->flags & 1) &&
+                                         !(reinterpret_cast<BtlEntry *>(selection->entry)->flags & 0x40)) :
+                                        battle->eventCount > 0) {
         if (!isEntryUsable(g_btlEvent) && btlEventSelectTrigger(g_btlEvent, 4, selection->entry->unitIndex, 0)) {
-            setPendingAction(owner->battle, 0x21);
+            battleSetSelectedActionThreadKind(owner->battle->actionState.index, 0x21);
             return;
         }
     }
@@ -44,5 +48,5 @@ extern "C" void FUN_00229754(BattleActionOwnerView *owner, ActionKindSelection *
         FUN_0023c154(owner->battle, 1, owner->battle->actions->participant.combatantIndex,
                      active->selectionIndex, selection);
     }
-    setPendingAction(owner->battle, 0x23);
+    battleSetSelectedActionThreadKind(owner->battle->actionState.index, 0x23);
 }

@@ -9,7 +9,7 @@ typedef struct PosArrange {
 } PosArrange;
 
 s32 sysMemClear(char *buffer, s32 size);
-s32 FUN_001028b8(char *buffer, s32 size, const char *format, ...);
+s32 __2snprintf(char *buffer, s32 size, const char *format, ...);
 
 /* Builds the position-arrange data file name for the first or second set that is present (returns the buffer, as retail does). */
 char *btlPosArrangeGetFileName(PosArrange *arrange)
@@ -18,9 +18,9 @@ char *btlPosArrangeGetFileName(PosArrange *arrange)
 
     sysMemClear(name, 128);
     if (arrange->first >= 0) {
-        FUN_001028b8(name, 128, "battle/pos_arrange/00_%04d.earg", arrange->first);
+        __2snprintf(name, 128, "battle/pos_arrange/00_%04d.earg", arrange->first);
     } else if (arrange->second >= 0) {
-        FUN_001028b8(name, 128, "battle/pos_arrange/01_%04d.earg", arrange->second);
+        __2snprintf(name, 128, "battle/pos_arrange/01_%04d.earg", arrange->second);
     }
     return name;
 }

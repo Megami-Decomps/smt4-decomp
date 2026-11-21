@@ -1,33 +1,35 @@
-/* NON_MATCHING: typed vector copies use VFP/block-copy shapes instead of retail's split integer transfers, and the preserved-W branch is laid out differently. */
+/* NON_MATCHING: typed vector copies use VFP/block-copy shapes instead of retail's split integer transfers, and the
+   preserved-W branch is laid out differently. A C++ function taking the four vectors by value (QuadVector is non-trivial,
+   so they arrive as pointers to the callers' copies): its symbol is _Z21quadSetOrderedVectors10QuadVectorS_S_S_ii
+   (build/w59_names.txt renames the plain placeholder). */
 #include "shard/W6_W6Match7_QuadVectors.h"
 
 extern "C" {
 extern const s32 DAT_0053cd64[5][4];
 extern QuadVectorState g_quadColorState;
-void *__aeabi_vec_ctor_nocookie_nodtor(QuadVector *, void (*)(QuadVector *), u32 size, u32 count);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
+} /* extern "C" */
 
-// Reorder four quad vectors, optionally replacing their W components with the global default.
-void quadSetOrderedVectors(const QuadVector *a, const QuadVector *b, const QuadVector *c,
-                  const QuadVector *d, s32 mode, s32 preserveW)
+/* Reorders four quad vectors, optionally replacing their W components with the global default. */
+void quadSetOrderedVectors(QuadVector first, QuadVector second, QuadVector third, QuadVector fourth, s32 mode,
+    s32 preserveW)
 {
     QuadVector vectors[4];
-    __aeabi_vec_ctor_nocookie_nodtor(vectors, vectorSetAllOne, sizeof(QuadVector), 4);
     s32 order[5][4];
     __aeabi_memcpy4(order, DAT_0053cd64, sizeof(order));
     if (preserveW) {
-        vectors[0] = *a;
-        vectors[1] = *b;
-        vectors[2] = *c;
-        vectors[3] = *d;
+        vectors[0] = first;
+        vectors[1] = second;
+        vectors[2] = third;
+        vectors[3] = fourth;
     } else {
-        vectors[0].xyz = a->xyz;
+        vectors[0].xyz = first.xyz;
         vectors[0].w = g_quadColorState.defaultW;
-        vectors[1].xyz = b->xyz;
+        vectors[1].xyz = second.xyz;
         vectors[1].w = g_quadColorState.defaultW;
-        vectors[2].xyz = c->xyz;
+        vectors[2].xyz = third.xyz;
         vectors[2].w = g_quadColorState.defaultW;
-        vectors[3].xyz = d->xyz;
+        vectors[3].xyz = fourth.xyz;
         vectors[3].w = g_quadColorState.defaultW;
     }
     g_quadColorState.mode = mode;
@@ -37,4 +39,4 @@ void quadSetOrderedVectors(const QuadVector *a, const QuadVector *b, const QuadV
     g_quadColorState.corners[3] = vectors[order[mode][3]];
     g_quadColorState.dirty = 1;
 }
-}
+

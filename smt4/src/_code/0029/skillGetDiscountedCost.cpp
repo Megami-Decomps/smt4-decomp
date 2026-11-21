@@ -1,4 +1,5 @@
-/* NON_MATCHING: learned-rank search remains scalar instead of pair-unrolled, and branch-local discount accumulation differs. */
+/* NON_MATCHING: only the rank arm's add differs: retail shares the last flag arm's `add` (discount += bonus) where armcc
+   folds the zero discount into a mov. */
 #include "gamedata/SkillDataRecord.h"
 #include "shard/Shard004B.h"
 #include "status/StatusCamera.h"
@@ -14,11 +15,14 @@ typedef char SkillCostDiscountOffsetCheck[
     offsetof(SkillCostDiscountView, discount) == 0x38 ? 1 : -1];
 }
 
-static __inline u8 findLearnedSkillRank(const PlayerDataIV *player, u32 skillId)
+/* The player's rank in a learned skill, 0 when not learned: the body of a real function (Apocalypse's padGetMappedValue),
+   written as a plain static, which armcc inlines with retail's pair-unrolled search. */
+static s32 findLearnedSkillRank(u32 skillId)
 {
+    const PlayerDataIV *player = gameGetPlayerData();
     for (s32 index = 0; index < 8; ++index) {
         if (player->skills[index] == skillId) {
-            return (u8)player->skillRanks[index];
+            return player->skillRanks[index];
         }
     }
     return 0;
@@ -28,7 +32,7 @@ extern "C" {
 s32 flagBitIsSet(u32 flag);
 SkillCostDiscountView *appCostRecordFindById(u16 id);
 
-// Apply learned-rank or global cost discounts, keeping a nonzero skill's cost at least one.
+/* Applies learned-rank or global cost discounts, keeping a nonzero skill's cost at least one. */
 s32 skillGetDiscountedCost(u32 skillId, s32 useLearnedRank)
 {
     SkillDataRecord *skill = skillDataFindById(skillId);
@@ -37,9 +41,7 @@ s32 skillGetDiscountedCost(u32 skillId, s32 useLearnedRank)
     }
     s32 baseCost = skill->cost.baseCost;
     s32 discount = 0;
-    if (useLearnedRank != 0) {
-        discount += skillSumRankBonuses(skill, findLearnedSkillRank(gameGetPlayerData(), skillId), 4);
-    } else {
+    if (useLearnedRank == 0) {
         if (flagBitIsSet(12) != 0) {
             discount = appCostRecordFindById(12)->discount;
         }
@@ -52,6 +54,8 @@ s32 skillGetDiscountedCost(u32 skillId, s32 useLearnedRank)
         if (flagBitIsSet(15) != 0) {
             discount += appCostRecordFindById(15)->discount;
         }
+    } else {
+        discount += skillSumRankBonuses(skill, findLearnedSkillRank(skillId), 4);
     }
     s32 cost = baseCost - discount;
     return cost > 0 ? cost : 1;

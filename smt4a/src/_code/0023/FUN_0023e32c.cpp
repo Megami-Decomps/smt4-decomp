@@ -36,7 +36,7 @@ u32 FUN_0023e32c(u32 excludedA, u32 excludedB, u32 excludedC, u32 level)
             continue;
         u16 requirement = record->saveRequirement;
         if ((requirement & 1) != 0) {
-            if ((requirement & 0xFFFE) != 0) {
+            if ((requirement & ~1) != 0) {
                 if (!gameDataCopySaveEntry(requirement >> 1, &saved) || (saveRequirementFlags(saved) & 0xFC) == 0)
                     continue;
             } else {

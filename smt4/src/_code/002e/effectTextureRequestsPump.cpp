@@ -1,15 +1,14 @@
-/* NON_MATCHING: the four-entry jump table now matches (explicit case 4 label); retail hoists the state constants 1 and 4 into r7/r8 and shares its epilogue differently (retail 92 vs built 93 rows). */
+#include <stdio.h>
 #include "gfx/NamedTextureCache.h"
 
 
 extern "C" {
 extern NamedTextureCache g_textureCache;
-s32 FUN_002522f8(char *buffer, u32 size, const char *format, ...);
 void FUN_001f4b3c(u32 unused, BattleEffectTextureSlot *request, u32 bytes);
 void asdLoadFileAsyncDefault(const char *path, void **result, u32 flags, NamedTextureLoadCallback callback, BattleEffectTextureSlot *request);
 void asdMemFree(void *buffer);
 
-// Start missing effect textures, retry failed requests, then release their temporary buffers.
+/* Starts missing effect textures, retries failed requests, then releases their temporary buffers. */
 void effectTextureRequestsPump()
 {
     BattleEffectTextureSlot *request = g_textureCache.entries;
@@ -18,13 +17,14 @@ void effectTextureRequestsPump()
     case 0:
         if (g_textureCache.count != 0) {
             g_textureCache.state = 1;
-            return;
+        } else {
+            g_textureCache.state = 4;
         }
         break;
     case 1:
         for (s32 index = 0; index < g_textureCache.count; ++index, ++request) {
             if (request->texture->image.physicalAddress == 0 && request->loaded == 0) {
-                FUN_002522f8(path, sizeof(path), "%s%s.tga", "battle/effect/tex/", request->name);
+                snprintf(path, sizeof(path), "%s%s.tga", "battle/effect/tex/", request->name);
                 request->loadingState = 1;
                 asdLoadFileAsyncDefault(path, &request->file, 0, FUN_001f4b3c, request);
             }
@@ -52,12 +52,12 @@ void effectTextureRequestsPump()
                 request->file = NULL;
             }
         }
+        g_textureCache.state = 4;
         break;
     case 4:
-        return;
+        break;
     default:
-        return;
+        break;
     }
-    g_textureCache.state = 4;
 }
 }

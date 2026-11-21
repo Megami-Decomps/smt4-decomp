@@ -13,7 +13,7 @@ struct ProgramIdSpec {
     /* 0x12 */ u8 media;
 };
 
-s32 FUN_001028b8(char *buffer, u32 size, const char *format, ...);
+s32 __2snprintf(char *buffer, u32 size, const char *format, ...);
 s32 FUN_00439a04(const char *string);
 
 /* Formats the spec as a 16-digit hexadecimal program id and hands it to the service; returns the failure result or 0. */
@@ -45,7 +45,7 @@ s32 FUN_00428220(const ProgramIdSpec *spec)
     s32 media = programMediaBits(spec->media) << 28;
     u64 programId = (u64)high << 32 | (u64)(low & 0x0fffffff) | (u64)media;
     char text[20];
-    FUN_001028b8(text, 17, "%016llx", programId);
+    __2snprintf(text, 17, "%016llx", programId);
     s32 result = FUN_00439a04(text);
     if (!nnResultIsFailure(result)) {
         result = 0;

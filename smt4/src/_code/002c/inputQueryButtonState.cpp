@@ -1,54 +1,86 @@
-/* NON_MATCHING: input/help switch ordering, shared mode-query register allocation and zero-result return paths differ; native active-kind helper boundary restored. */
 #include "common.h"
+#include "StaffRoll/StaffRollMain.h"
 
 extern "C" {
-bool buttonHelpIsButtonEnabled(u32);
-u32 padIsButtonRepeat(u32);
-u32 padIsButtonPressed(u32);
-u8 slotIsActive(u32);
-s32 buttonHelpKindIsTriggered(s8);
-s32 buttonHelpKindIsPressed(s8);
-}
+u32 padIsButtonRepeat(u32 button);
+u32 padIsButtonPressed(u32 button);
+s32 buttonHelpIsButtonEnabled(s32 direction);
+s32 buttonHelpKindIsTriggered(s32 direction);
+s32 buttonHelpKindIsPressed(s32 direction);
 
-static inline u32 queryPadButton(u32 button, s32 mode)
+/* The state of one pad button in `mode`: 0 auto-repeat, 1 pressed, 2 released. */
+static __inline s32 padButtonQuery(s32 button, s32 mode)
 {
+    s32 result = 0;
     switch (mode) {
-    case 0: return padIsButtonRepeat(button);
-    case 1: return padIsButtonPressed(button);
-    case 2: return slotIsActive(button);
-    default: return 0;
+    case 0:
+        result = padIsButtonRepeat(button);
+        break;
+    case 1:
+        result = padIsButtonPressed(button);
+        break;
+    case 2:
+        result = slotIsActive(button);
+        break;
     }
+    return result;
 }
 
-extern "C" s32 inputQueryButtonState(s32 button, s32 mode)
+/* Logical input query: true when `key` is active in `mode`, on the pad button itself, on the pad button
+   it shares a function with, or on the stick direction mapped to it. */
+s32 inputQueryButtonState(s32 key, s32 mode)
 {
-    s8 helpKind = 0;
-    switch (button) {
-    case 0: helpKind = 1; break;
-    case 1: helpKind = 2; break;
-    case 7: helpKind = 6; break;
-    case 8: helpKind = 5; break;
-    case 9: helpKind = 3; break;
-    case 10: helpKind = 4; break;
+    s32 result = 0;
+    s32 stickDirection = 0;
+    switch (key) {
+    case 0:
+        stickDirection = 1;
+        break;
+    case 1:
+        stickDirection = 2;
+        break;
+    case 9:
+        stickDirection = 3;
+        break;
+    case 10:
+        stickDirection = 4;
+        break;
+    case 8:
+        stickDirection = 5;
+        break;
+    case 7:
+        stickDirection = 6;
+        break;
     }
-    u32 result = queryPadButton(button, mode);
-    if (result)
+    result = padButtonQuery(key, mode);
+    if (result != 0) {
         return result;
-    switch (button) {
-    case 3: result = queryPadButton(12, mode); break;
-    case 4: result = queryPadButton(13, mode); break;
-    case 5: result = queryPadButton(14, mode); break;
-    case 6: result = queryPadButton(15, mode); break;
     }
-    if (result)
+    if (key == 5) {
+        result = padButtonQuery(14, mode);
+    }
+    if (key == 6) {
+        result = padButtonQuery(15, mode);
+    }
+    if (key == 4) {
+        result = padButtonQuery(13, mode);
+    }
+    if (key == 3) {
+        result = padButtonQuery(12, mode);
+    }
+    if (result != 0) {
         return result;
-    if (!helpKind)
-        return 0;
-    if (mode == 0)
-        return buttonHelpKindIsPressed(helpKind);
-    if (mode == 1)
-        return buttonHelpKindIsTriggered(helpKind);
-    if (mode == 2)
-        return buttonHelpIsButtonEnabled(helpKind);
-    return 0;
+    }
+    if (stickDirection != 0) {
+        switch (mode) {
+        case 2:
+            return buttonHelpIsButtonEnabled(stickDirection);
+        case 1:
+            return buttonHelpKindIsTriggered(stickDirection);
+        case 0:
+            return buttonHelpKindIsPressed(stickDirection);
+        }
+    }
+    return result;
+}
 }

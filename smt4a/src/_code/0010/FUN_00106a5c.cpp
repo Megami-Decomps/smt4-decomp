@@ -5,7 +5,7 @@
 extern "C" {
 
 int refIsNullOrZero(int *);
-int FUN_001028b8(unsigned char [64], int, unsigned char *, unsigned int);
+int __2snprintf(unsigned char [64], int, unsigned char *, unsigned int);
 int FUN_00103750(int *);
 int FUN_001585e4(...);
 int archivePathDeviceOpen(unsigned int *, unsigned short [6], unsigned int *);
@@ -60,7 +60,7 @@ extern int DAT_005949dc; /* 0x5949dc */
 
 /* Supplied declaration required: refIsNullOrZero. */
 extern int FUN_00100836(unsigned char *, unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_001028b8. */
+/* Supplied declaration required: __2snprintf. */
 /* Supplied declaration required: FUN_00103750. */
 extern int wordRefsDiffer_00132112(unsigned int **, unsigned int **);
 /* Supplied declaration required: FUN_001585e4. */
@@ -152,7 +152,7 @@ LAB_00106ab8:
       temp_v6[3] = '\0';
       temp_v14 = temp_v4 * 4;
       temp_v5 = *(unsigned int **)(temp_v27 + temp_v14);
-      FUN_001028b8(temp_v24,0x40,&LAB_00106c74,(*(unsigned int *)&s__V_V_V_0058954c.u1[0]));
+      __2snprintf(temp_v24,0x40,&LAB_00106c74,(*(unsigned int *)&s__V_V_V_0058954c.u1[0]));
       temp_v5 = (unsigned int *)&temp_v7;
       temp_v17 = 0;
       temp_v12 = (unsigned int *)0x1;

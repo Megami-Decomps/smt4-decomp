@@ -2694,13 +2694,13 @@
       "target_path": "orig/target/_code/0010/FUN_00102870.o"
     },
     {
-      "base_path": "build/obj/_code/0010/FUN_001028b8.o",
+      "base_path": "build/obj/_code/0010/__2snprintf.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001028b8",
+            "name": "__2snprintf",
             "size": 54,
             "vram": "0x1028b8"
           }
@@ -2708,10 +2708,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0010/FUN_001028b8.cpp"
+        "source_path": "src/_code/0010/__2snprintf.cpp"
       },
-      "name": "_code/0010/FUN_001028b8",
-      "target_path": "orig/target/_code/0010/FUN_001028b8.o"
+      "name": "_code/0010/__2snprintf",
+      "target_path": "orig/target/_code/0010/__2snprintf.o"
     },
     {
       "base_path": "build/obj/_code/0010/libc_wprintfStr.o",
@@ -64760,13 +64760,13 @@
       "target_path": "orig/target/_code/0016/texTableFindNode.o"
     },
     {
-      "base_path": "build/obj/_code/0016/FUN_00169614.o",
+      "base_path": "build/obj/_code/0016/asdSoundAuxSlotsSelect.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00169614",
+            "name": "asdSoundAuxSlotsSelect",
             "size": 188,
             "vram": "0x169614"
           }
@@ -64774,10 +64774,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0016/FUN_00169614.cpp"
+        "source_path": "src/_code/0016/asdSoundAuxSlotsSelect.cpp"
       },
-      "name": "_code/0016/FUN_00169614",
-      "target_path": "orig/target/_code/0016/FUN_00169614.o"
+      "name": "_code/0016/asdSoundAuxSlotsSelect",
+      "target_path": "orig/target/_code/0016/asdSoundAuxSlotsSelect.o"
     },
     {
       "base_path": "build/obj/_code/0016/FUN_001696d4.o",
@@ -72490,7 +72490,7 @@
         "complete": false,
         "functions": [
           {
-            "name": "quadSetOrderedVectors",
+            "name": "_Z21quadSetOrderedVectors10QuadVectorS_S_S_ii",
             "size": 372,
             "vram": "0x18291c"
           }
@@ -258937,13 +258937,13 @@
       "target_path": "orig/target/_code/003f/partyFlagRange.o"
     },
     {
-      "base_path": "build/obj/_code/003f/FUN_003fd5bc.o",
+      "base_path": "build/obj/_code/003f/flagBitsMergeBlock.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_003fd5bc",
+            "name": "flagBitsMergeBlock",
             "size": 128,
             "vram": "0x3fd5bc"
           }
@@ -258951,10 +258951,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003f/FUN_003fd5bc.cpp"
+        "source_path": "src/_code/003f/flagBitsMergeBlock.cpp"
       },
-      "name": "_code/003f/FUN_003fd5bc",
-      "target_path": "orig/target/_code/003f/FUN_003fd5bc.o"
+      "name": "_code/003f/flagBitsMergeBlock",
+      "target_path": "orig/target/_code/003f/flagBitsMergeBlock.o"
     },
     {
       "base_path": "build/obj/_code/003f/gameFlagSetValue.o",
@@ -283431,13 +283431,13 @@
       "target_path": "orig/target/_code/0043/FUN_0043b55c.o"
     },
     {
-      "base_path": "build/obj/_code/0043/FUN_0043b5b4.o",
+      "base_path": "build/obj/_code/0043/vec4Transform.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0043b5b4",
+            "name": "vec4Transform",
             "size": 164,
             "vram": "0x43b5b4"
           }
@@ -283445,10 +283445,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0043/FUN_0043b5b4.cpp"
+        "source_path": "src/_code/0043/vec4Transform.cpp"
       },
-      "name": "_code/0043/FUN_0043b5b4",
-      "target_path": "orig/target/_code/0043/FUN_0043b5b4.o"
+      "name": "_code/0043/vec4Transform",
+      "target_path": "orig/target/_code/0043/vec4Transform.o"
     },
     {
       "base_path": "build/obj/_code/0043/nn_math_VEC3SafeNormalize.o",
@@ -335571,13 +335571,13 @@
       "target_path": "orig/target/_code/0050/FUN_00500ee4.o"
     },
     {
-      "base_path": "build/obj/_code/0050/FUN_00500f3c.o",
+      "base_path": "build/obj/_code/0050/gxEmitColorDepthMask.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00500f3c",
+            "name": "gxEmitColorDepthMask",
             "size": 164,
             "vram": "0x500f3c"
           }
@@ -335585,10 +335585,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0050/FUN_00500f3c.cpp"
+        "source_path": "src/_code/0050/gxEmitColorDepthMask.cpp"
       },
-      "name": "_code/0050/FUN_00500f3c",
-      "target_path": "orig/target/_code/0050/FUN_00500f3c.o"
+      "name": "_code/0050/gxEmitColorDepthMask",
+      "target_path": "orig/target/_code/0050/gxEmitColorDepthMask.o"
     },
     {
       "base_path": "build/obj/_code/0050/FUN_00500fe4.o",

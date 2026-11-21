@@ -1,4 +1,4 @@
-/* NON_MATCHING: Initial active-placement search block layout, owner/placement saved registers and the first vector-add load order differ. */
+/* NON_MATCHING: 107 vs 107 rows, initial search loop layout now matches retail; only owner/placement saved registers (r5/r6) and one vldr s0/s1 load order differ. */
 #include "shard/W6_W6Match8_BattleSpritePlacement.h"
 
 struct PlacementControllerSnapshot {
@@ -58,15 +58,19 @@ u32 FUN_004f7778(void *owner)
     for (s32 runtimeIndex = 0; runtimeIndex < 50; ++runtimeIndex) {
         RuntimeEntry *runtime = &view->runtime[runtimeIndex];
         if ((runtime->flags & 2) != 0) {
-            s32 index = 0;
-            while (view->placements[index].key != runtime->key ||
-                   (view->placements[index].flags & 1) == 0) {
-                if (++index >= 50) {
-                    return 0;
+            bool found = false;
+            for (s32 index = 0; index < 50; ++index) {
+                if (view->placements[index].key == runtime->key &&
+                    (view->placements[index].flags & 1) != 0) {
+                    found = true;
+                    break;
                 }
             }
+            if (!found) {
+                return 0;
+            }
             sysMemClear(view->snapshots, sizeof(view->snapshots));
-            for (index = 0; index < 50; ++index) {
+            for (s32 index = 0; index < 50; ++index) {
                 PlacementEntry *entry = &view->placements[index];
                 if (entry->key == runtime->key) {
                     BattleVector3 value;

@@ -1,98 +1,57 @@
-/* NON_MATCHING: retail clears a third unused scratch buffer; bounded slot lookup and float-pair copies also schedule differently. */
-#include "common.h"
-#include "runtime/Stdio.h"
-#include <stddef.h>
-
-namespace {
-struct VoiceFileSlot {
-    u8 active;
-    char path[0x40];
-    u8 unk41[0xF];
-    u32 position;
-    u32 frame;
-    f32 leftVolume;
-    f32 rightVolume;
-    u8 unk60[8];
-    u32 flags;
-    u8 unk6C[8];
-    u8 category;
-    u8 volume;
-    u8 unk76;
-    u8 options;
-};
-struct VoiceFileRequests {
-    VoiceFileSlot slots[4];
-    u8 unk1E0[6];
-    u8 disabled;
-};
-typedef char VoiceFileSlotOffsetsCheck[sizeof(VoiceFileSlot) == 0x78 &&
-    offsetof(VoiceFileSlot, leftVolume) == 0x58 && offsetof(VoiceFileSlot, options) == 0x77 &&
-    offsetof(VoiceFileRequests, disabled) == 0x1E6 ? 1 : -1];
-}
+/* NON_MATCHING: written like its sibling FUN_001566a8 (third scratch buffer, failure value, <stdio.h> sprintf); the slot search copies the queue base into another register and the request stores schedule differently. The two format strings are the ones FUN_001566a8 defines (one pooled copy in the image), so neither unit can own them yet. */
+#include <stdio.h>
+#include "code/Code0016.h"
+#include "sound/VoiceLoadQueue.h"
+#include "kernel/jyoucyuGetTableEntry.h"
 
 extern "C" {
-extern VoiceFileRequests g_soundObjectTable;
-extern const char DAT_0053629c[]; // "snd/voice/"
-extern const char DAT_00536288[]; // "%s.bcwav"
-void rt_aeabi_memclr(void *data, u32 size);
-char *libc_strcat(char *output, const char *input);
-char *libc_strcpy(char *output, const char *input);
-void *jyoucyuGetTableEntry(u32 id);
+void rt_aeabi_memclr(void *memory, u32 size);
 s32 eventIsSkipping(void);
-void asdSoundGetObjectCount(void);
+char *libc_strcat(char *destination, const char *source);
+char *libc_strcpy(char *destination, const char *source); // declcheck: local (the shared header keeps the decompiler's word-pointer view)
+u32 asdSoundGetObjectCount(void);
 u32 asdLoadFileExists(const char *path);
-void workCommandArm(void *file, VoiceFileSlot *slot);
-void asdLoadFileAsyncDefault(const char *path, void **file, u32 flags,
-    void (*callback)(void *, VoiceFileSlot *), VoiceFileSlot *slot);
-}
+void workCommandArm(void *file, VoiceLoadRequest *request);
+} /* extern "C" */
+static const char s_voiceDirectory[] = "snd/voice/";
+static const char s_voiceFileFormat[] = "%s.bcwav";
 
-static __inline VoiceFileSlot *voiceFileSlotAt(u32 index)
-{
-    if (index >= 4)
-        return NULL;
-    return &g_soundObjectTable.slots[index];
-}
 
-static __inline s32 findFreeVoiceFileSlot(void)
+/* Reserves a voice-load slot and schedules the named wave file with per-channel stereo gains. */
+extern "C" u32 FUN_001628c0(const char *name, s32 kind, u8 flags, u8 priority, f32 leftGain, f32 rightGain)
 {
-    for (s32 index = 0; index < 4; ++index) {
-        if (voiceFileSlotAt(index)->active == 0)
-            return index;
-    }
-    return -1;
-}
-
-// Request one streamed BCWAV voice in a free slot, preserving its independent channel volumes.
-extern "C" u32 FUN_001628c0(const char *name, u32 volume, u8 category, u8 options,
-    f32 leftVolume, f32 rightVolume)
-{
-    char path[64];
-    char basename[64];
+    u32 failure = (u32)-1;
+    char path[64], directory[64], number[64];
     rt_aeabi_memclr(path, sizeof(path));
-    rt_aeabi_memclr(basename, sizeof(basename));
-    if (jyoucyuGetTableEntry(1) != NULL || eventIsSkipping() != 0 ||
-        g_soundObjectTable.disabled != 0 || volume == 0)
-        return ~0u;
-    __2sprintf(basename, DAT_0053629c);
-    libc_strcat(basename, name);
-    __2sprintf(path, DAT_00536288, basename);
+    rt_aeabi_memclr(directory, sizeof(directory));
+    rt_aeabi_memclr(number, sizeof(number));
+    if (jyoucyuGetTableEntry(1) != NULL)
+        return failure;
+    if (eventIsSkipping() != 0)
+        return failure;
+    if (g_soundObjectTable.disabled != 0 || kind == 0)
+        return failure;
+    sprintf(directory, s_voiceDirectory);
+    libc_strcat(directory, name);
+    sprintf(path, s_voiceFileFormat, directory);
     asdSoundGetObjectCount();
-    s32 index = findFreeVoiceFileSlot();
+    VoiceLoadQueue *queue = &g_soundObjectTable;
+    s32 index = findFreeVoiceLoadRequest(queue);
     if (index == -1)
-        return ~0u;
-    VoiceFileSlot *slot = voiceFileSlotAt(index);
-    if (slot == NULL || asdLoadFileExists(path) == 0)
-        return ~0u;
-    slot->position = 0;
-    slot->frame = 0;
-    slot->flags = 0;
-    slot->category = category;
-    slot->active = 1;
-    slot->leftVolume = leftVolume;
-    slot->rightVolume = rightVolume;
-    slot->volume = static_cast<u8>(volume);
-    slot->options = options;
-    libc_strcpy(slot->path, path);
-    asdLoadFileAsyncDefault(path, NULL, 3, workCommandArm, slot);
+        return failure;
+    VoiceLoadRequest *request = voiceLoadRequestAt(queue, index);
+    if (request == NULL || !asdLoadFileExists(path))
+        return failure;
+    request->group = 0;
+    request->id = 0;
+    request->counter = 0;
+    request->flags = flags;
+    request->active = 1;
+    request->gains[0] = leftGain;
+    request->gains[1] = rightGain;
+    request->kind = kind;
+    request->priority = priority;
+    libc_strcpy(request->path, path);
+    asdLoadFileAsyncDefault((u32)path, 0, 3, (u32)workCommandArm, (u32)request);
     return index;
 }

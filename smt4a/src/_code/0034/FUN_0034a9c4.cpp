@@ -1,4 +1,4 @@
-/* NON_MATCHING: the record-flag test now lowers to TST/MOVNE as in retail; remaining: retail shares one register for the constant 1 and `allowed`, keeps the zero constant in r6 and uses a 300-byte frame, so session/option registers differ. */
+/* NON_MATCHING: retail keeps `allowed` in the register that holds the constant 1 for the earlier stores (r8) and the zero for the pending clear in r6; this build gives `allowed` a scratch register. */
 #include "shard/Shard0033.h"
 #include "gamedata/NkmEnemyLookup.h"
 #include "game/GameGlobalsRef.h"
@@ -7,18 +7,20 @@ extern "C" {
 void unitRecordBuildFromSave(u32 id, void *record);
 void FUN_0026fd50(void *display, const void *record, u32 mode, u32 options);
 
-// Load a character into the session display and update whether it can be selected.
+/* Loads a character into the session display and updates whether it can be selected. */
 void FUN_0034a9c4(u32 id, u32 options)
 {
     u8 record[300];
     ObjB *session = g_gameGlobals.instance;
-    bool allowed = true;
+    bool allowed;
     session->sessionDisplay.active = 1;
     unitRecordBuildFromSave(id, record);
     session->unk2017 = 5;
     FUN_0026fd50(session->block1390, record, 0, options);
     session->unk20B0 = 1;
-    if ((s16)id >= 0) {
+    if ((s16)id < 0) {
+        allowed = true;
+    } else {
         NkmEnemyRecordA *devil = nkmEnemyFindById(id & 0xffff);
         if (devil == NULL)
             allowed = false;

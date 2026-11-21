@@ -6,7 +6,7 @@ extern "C" {
 extern AsdSoundSystem g_asdSound;
 void basicSoundStopOrFadeOut(s32 sound, s32 fadeFrames);
 void nw_snd_SoundHandle_DetachSound(s32 *handle);
-void FUN_00126770(u32 first, u32 second);
+void asdSoundAuxSlotsSelect(u32 first, u32 second);
 void asdSoundSlotCSelect(u32 first, u32 second);
 s32 FUN_00119da8(u32 index);
 void nw_ut_internal_LinkListImpl_erase_2B743C(void *list, void *node);
@@ -57,7 +57,7 @@ void FUN_001177e0()
         }
     }
     selected->slotB = NULL;
-    FUN_00126770(0xffffffff, 0xffffffff);
+    asdSoundAuxSlotsSelect(0xffffffff, 0xffffffff);
     asdSoundSlotCSelect(0xffffffff, 0xffffffff);
     FUN_00119da8(0xffffffff);
 

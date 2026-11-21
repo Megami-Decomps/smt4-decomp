@@ -1,4 +1,4 @@
-/* NON_MATCHING: screen construction still retains its base across the triplet reset calls. */
+/* NON_MATCHING: screen construction retains its base across the triplet reset calls; the teardown's register schedule also differs. */
 #include "mikado/mikadoMain.h"
 #include "classes/SelectionState.h"
 #include "classes/Obj55ca08.h"
@@ -41,6 +41,7 @@ extern "C" u32 FUN_002bd1f4()
         u8 tail14C[0x1120];
 
         MikadoWindow() : active(0), enabled(0), flags(0) {}
+        static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
         static void operator delete(void *memory) { asdOperatorDelete(memory); }
     };
     struct ScreenWork {
@@ -50,27 +51,21 @@ extern "C" u32 FUN_002bd1f4()
         u8 padding[2];
         MikadoWindow *window;
     };
-    struct ScreenGlobals {
-        MikadoGlobals shared;
-        u32 firstSelection;
-        u32 thirdSelection;
-    };
-    ScreenGlobals *globals = reinterpret_cast<ScreenGlobals *>(&g_mikado);
-    ScreenWork *work = reinterpret_cast<ScreenWork *>(globals->shared.work);
+    ScreenWork *work = (ScreenWork *)g_mikado.work;
 
     switch (work->state) {
     case 0: {
-        work->window = new (asdOperatorNew(sizeof(MikadoWindow))) MikadoWindow;
-        FUN_004b6fc4(reinterpret_cast<UiScreen *>(work->window));
+        work->window = new MikadoWindow;
+        FUN_004b6fc4((UiScreen *)work->window);
         SelectionTriplet selection;
-        selection.values[0] = globals->firstSelection;
-        selection.values[2] = globals->thirdSelection;
-        menu4CSetValue42(reinterpret_cast<Menu4C *>(work->window), &selection);
+        selection.values[0] = g_mikado.cameraStartA;
+        selection.values[2] = g_mikado.cameraStartC;
+        menu4CSetValue42((Menu4C *)work->window, &selection);
         work->state = 1;
         break;
     }
     case 1:
-        uiTextScreenRunPhaseUpdate(reinterpret_cast<UiScreen *>(work->window));
+        uiTextScreenRunPhaseUpdate((UiScreen *)work->window);
         if (work->window->completed)
             work->state = 2;
         break;
@@ -84,7 +79,7 @@ extern "C" u32 FUN_002bd1f4()
         }
         break;
     case 3:
-        return static_cast<u32>(-1);
+        return (u32)-1;
     }
     return 0;
 }

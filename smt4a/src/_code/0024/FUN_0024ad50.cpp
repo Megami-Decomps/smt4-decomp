@@ -1,4 +1,3 @@
-/* NON_MATCHING: record stores now ascend like retail (no chained float assignment); remaining: retail reloads g_engineRecordList before the pair and secondary loops and numbers the scratch registers differently. */
 #include "common.h"
 
 struct EngineResetRecord {
@@ -31,33 +30,6 @@ struct EngineResetRecord {
     /* 0x50 */ u8 unk50;
     /* 0x51 */ u8 unk51[3];
     /* 0x54 */ s32 secondaryIndex;
-
-    void reset(bool primary)
-    {
-        active = 0;
-        unk04 = 0;
-        unk08 = 0;
-        x = 0.0f;
-        y = 0.0f;
-        z = 0.0f;
-        w = 0.0f;
-        unk1c = 0;
-        unk20 = 0;
-        if (primary) { unk22 = 0; }
-        unk24 = 0;
-        unk28 = 0;
-        unk2c = 0;
-        unk30 = 0;
-        unk34 = 0;
-        unk38 = 0;
-        unk3c = 0;
-        if (primary) { unk4c = 0; }
-        index = -1;
-        if (primary) {
-            unk50 = 0;
-            secondaryIndex = -1;
-        }
-    }
 };
 struct EngineResetPair {
     u32 first;
@@ -87,32 +59,63 @@ struct EngineResetState {
 };
 extern "C" EngineResetState *g_engineRecordList;
 
-/* Reset the engine's 32 primary records, 17 pairs, and three secondary records. */
+/* Clears a record; the primary records also clear their secondary link (the 32 primary and three
+ * secondary records share it). */
+static __inline void engineRecordReset(EngineResetRecord *record, bool primary)
+{
+    record->active = 0;
+    record->unk04 = 0;
+    record->unk08 = 0;
+    record->x = 0.0f;
+    record->y = 0.0f;
+    record->z = 0.0f;
+    record->w = 0.0f;
+    record->unk1c = 0;
+    record->unk20 = 0;
+    if (primary)
+        record->unk22 = 0;
+    record->unk24 = 0;
+    record->unk28 = 0;
+    record->unk2c = 0;
+    record->unk30 = 0;
+    record->unk34 = 0;
+    record->unk38 = 0;
+    record->unk3c = 0;
+    if (primary)
+        record->unk4c = 0;
+    record->index = -1;
+    if (primary) {
+        record->unk50 = 0;
+        record->secondaryIndex = -1;
+    }
+}
+
+/* Resets the engine's header fields, its 32 primary records, 17 pairs and three secondary records. */
 extern "C" void FUN_0024ad50()
 {
-    EngineResetState *state = g_engineRecordList;
-    state->unk000 = 0;
-    state->unk004 = 0;
-    state->unk006 = 0;
-    state->unk008 = 0;
-    state->unk00a = 0;
-    state->unk018 = 0;
-    state->unkCe0 = 0;
-    state->unk010 = 0;
-    state->unkCe4 = 0;
-    state->unkCe8 = 0;
-    state->unkCec = 0;
-    state->unkCf0 = 0;
-    state->unkCf4 = 0;
-    state->unkCf8 = 0;
-    for (s32 i = 0; i < 32; ++i) {
-        g_engineRecordList->records[i].reset(true);
+    g_engineRecordList->unk000 = 0;
+    g_engineRecordList->unk004 = 0;
+    g_engineRecordList->unk006 = 0;
+    g_engineRecordList->unk008 = 0;
+    g_engineRecordList->unk00a = 0;
+    g_engineRecordList->unk018 = 0;
+    g_engineRecordList->unkCe0 = 0;
+    g_engineRecordList->unk010 = 0;
+    g_engineRecordList->unkCe4 = 0;
+    g_engineRecordList->unkCe8 = 0;
+    g_engineRecordList->unkCec = 0;
+    g_engineRecordList->unkCf0 = 0;
+    g_engineRecordList->unkCf4 = 0;
+    g_engineRecordList->unkCf8 = 0;
+    s32 i;
+    for (i = 0; i < 32; ++i) {
+        engineRecordReset(&g_engineRecordList->records[i], true);
     }
-    for (s32 i = 0; i < 17; ++i) {
+    for (i = 0; i < 17; ++i) {
         g_engineRecordList->pairs[i].first = 0;
         g_engineRecordList->pairs[i].second = 0;
     }
-    for (s32 i = 0; i < 3; ++i) {
-        g_engineRecordList->secondary[i].reset(false);
+    for (i = 0; i < 3; ++i) {
+        engineRecordReset(&g_engineRecordList->secondary[i], false);
     }
 }

@@ -25,7 +25,7 @@ int FUN_003df7c4(...);
 int playerSyncPair2AOnce(void);
 int appTryPurchase(...);
 void partySlotClearInactiveFlag(unsigned int);
-int FUN_003fd5bc(...);
+int flagBitsMergeBlock(...);
 
 int aocActivateFileGroupFlags(...);
 int flagValueSub(...);
@@ -101,7 +101,7 @@ extern int gameDataBlocksValueGet(void);
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: partySlotClearInactiveFlag. */
 extern int partyGetSlot(unsigned int);
-/* Supplied declaration required: FUN_003fd5bc. */
+/* Supplied declaration required: flagBitsMergeBlock. */
 /* Supplied declaration required: aocActivateFileGroupFlags. */
 /* Supplied declaration required: flagValueSub. */
 /* Supplied declaration required: FUN_0048111c. */
@@ -463,7 +463,7 @@ void FUN_00261a28(const u8 *options)
     }
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 0x17);
-  FUN_003fd5bc(temp_v0 + 0x54d0,temp_v1 + 0x54d0);
+  flagBitsMergeBlock(temp_v0 + 0x54d0,temp_v1 + 0x54d0);
   if (temp_v25 != 0) {
     gameFlagSetValue(0x556, 1, 1);
   }

@@ -19,7 +19,7 @@ int FUN_00500cac(...);
 unsigned int* FUN_00500d38(unsigned int [4], unsigned int*, int);
 unsigned int* FUN_00500e74(const GpuLogicState*, unsigned int*, int);
 int FUN_00500ee4(...);
-int FUN_00500f3c(...);
+int gxEmitColorDepthMask(...);
 int nn_math_ARMv6_MTX34CopyAsm(unsigned char *, unsigned int);
 
 /* stack frame of param_3: 6 slot(s), 15 byte(s) */
@@ -55,7 +55,7 @@ extern unsigned char *FUN_0042cbd8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00500cac. */
 extern unsigned char *FUN_00500df8(unsigned char *, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00500ee4. */
-/* Supplied declaration required: FUN_00500f3c. */
+/* Supplied declaration required: gxEmitColorDepthMask. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 
 
@@ -260,7 +260,7 @@ void FUN_0045a6a4(int *param_1,unsigned int *param_2,int *param_3)
     FUN_00500cac(puVar8,puVar12,0);
     puVar12 = temp_v13;
     temp_v20 = puVar8;
-    FUN_00500f3c(puVar12,puVar8,0);
+    gxEmitColorDepthMask(puVar12,puVar8,0);
     puVar8 = temp_v15;
     temp_v20 = puVar12;
     gxEmitFramebufferAccessMasks(puVar8,puVar12,1);

@@ -1,10 +1,11 @@
-/* NON_MATCHING: retail keeps the dead store of y before y + height (x, vadd, y, z, y+h) where armcc coalesces the three stores into one vstmia. */
+/* NON_MATCHING: retail keeps the dead store of y before y + height (x, vadd, y, z, y+h) where armcc coalesces the three
+   stores into one vstmia, and loads the 0.0f/1.0f constants in another order. */
 #include "gfx/ParticleSlotState.h"
 
 extern "C" {
 extern ParticleSlotGlobals g_activeTextureSlot;
 
-// Allocate a particle and cycle through the four texture-coordinate orientations.
+/* Allocates a particle and cycles through the four texture-coordinate orientations. */
 void effParticleSpawnCycleOrientation(u32 state, f32 x, f32 y, f32 z, f32 height, f32 size)
 {
     ParticleSlotState *slot = reinterpret_cast<ParticleSlotState *>(g_activeTextureSlot.slot);
@@ -18,7 +19,8 @@ void effParticleSpawnCycleOrientation(u32 state, f32 x, f32 y, f32 z, f32 height
         slot->base.particleState[index] = state;
         slot->sizes[index] = size;
         slot->colors[index] = 0xFFFFFF00;
-        switch (g_activeTextureSlot.nextOrientation & 3) {
+        u32 orientation = g_activeTextureSlot.nextOrientation;
+        switch (orientation & 3) {
         case 0:
             slot->coordinates[index].values[0] = 0.0f;
             slot->coordinates[index].values[1] = 0.0f;
@@ -60,7 +62,7 @@ void effParticleSpawnCycleOrientation(u32 state, f32 x, f32 y, f32 z, f32 height
             slot->coordinates[index].values[7] = 0.0f;
             break;
         }
-        ++g_activeTextureSlot.nextOrientation;
+        g_activeTextureSlot.nextOrientation = orientation + 1;
         return;
     }
 }

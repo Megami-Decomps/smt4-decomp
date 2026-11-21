@@ -1,4 +1,4 @@
-/* NON_MATCHING: now builds the same blocks as retail (170 vs 172 rows): block-base pointers, sprite locals and the completion getter match; only the saved-register numbering of the title/list/scene pointers and the literal-pool tail differ. */
+/* NON_MATCHING: 172 vs 172 rows, all registers and literal pool match retail; only the two-instruction scheduling of `add r8` (list block base) relative to titleSprite/dirtyA/dirtyB differs. */
 #include "common.h"
 #include "game/GameStateA.h"
 #include "map/mapDepart.h"
@@ -46,12 +46,11 @@ void FUN_0048bdec(MapScreen* screen)
 {
     if ((screen->flags & 8) == 0) return;
 
-    s8 phase = screen->phase;
     void* titleSprite = SCREEN_PTR(screen, 0xf88);
     u8* dirtyA = &SCREEN_BYTE(screen, 0x7b90);
     u8* dirtyB = &SCREEN_BYTE(screen, 0x7b91);
-    MapScreenListBlock* list = reinterpret_cast<MapScreenListBlock*>(reinterpret_cast<u8*>(screen) + 0x20600);
-    if (phase == 0) {
+    MapScreenListBlock* list = (MapScreenListBlock*)((u8*)screen + 0x20600);
+    if (screen->phase == 0) {
         if (list->active != 0) {
             for (s32 i = 0; i < 6; i++) uiSpriteAdvanceAnimation(&screen->listSprites[i], 1.0f);
             uiSpriteAdvanceAnimation((UiSpriteState *)(SCREEN_PTR(screen, 0x112c)), 1.0f);
@@ -65,7 +64,7 @@ void FUN_0048bdec(MapScreen* screen)
         pointConvertToFloat(SCREEN_PTR(screen, 0x4d0), x, y);
         *dirtyA = 1;
         *dirtyB = 1;
-    } else if (phase == 1) {
+    } else if (screen->phase == 1) {
         naviMainSetCurrentMap(SCREEN_PTR(screen, 0x4cc), screen->mapIndex);
         FUN_00492ac8(reinterpret_cast<u32>(SCREEN_PTR(screen, 0x4cc)), 0);
         naviSwitchTextureSetForMap(screen, screen->mapIndex);
@@ -86,12 +85,12 @@ void FUN_0048bdec(MapScreen* screen)
             *dirtyB = 1;
             FUN_002d22c0(0);
             dialogClose(1);
-            list->active = 0;
+            SCREEN_BYTE(screen, 0x20644) = 0;
             naviRefreshBackgroundAndFeedback(screen);
             g_gameState.alternateNaviMap = 0;
         }
         screen->phase = 2;
-    } else if (phase == 2) {
+    } else if (screen->phase == 2) {
         uiSpriteAdvanceAnimation((UiSpriteState *)titleSprite, 1.0f);
         uiSpriteAdvanceAnimation((UiSpriteState *)(SCREEN_PTR(screen, 0x1014)), 1.0f);
         void* pointerSprite = screen->pointerSprite;

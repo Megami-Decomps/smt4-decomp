@@ -1,4 +1,4 @@
-/* NON_MATCHING: saved-register assignment differs (retail keeps the zero in r9 and &initial in r8; ours the reverse) and the 0x1BE clear's address temp is scheduled after the 0x110 stores; otherwise the same instructions. */
+/* NON_MATCHING: category switch now matches retail; saved-register assignment (zero r9 vs &initial r8) and the 0x1BE clear's address scheduling after unk116 still differ. */
 #include "battle/BattleUnitInit.h"
 #include "gamedata/NkmBaseRecordA.h"
 
@@ -65,12 +65,16 @@ void btlUnitStateInitFromRecord(u32 unused, BattleUnitState *unit, UnitSourceRec
     }
     model = nkmBaseGetRecord(unit->sourceId);
     unit->unk1BB = model->battleRace;
-    if (model->category == 1) {
+    switch (model->category) {
+    case 1:
         unit->unk1BC = 1;
-    } else if (model->category == 4) {
+        break;
+    case 4:
         unit->unk1BC = 0;
-    } else if (model->category == 5) {
+        break;
+    case 5:
         unit->unk1BC = 2;
+        break;
     }
     unit->affinities = record->affinities;
     sysMemClear(unit->flagsA, 0x15);

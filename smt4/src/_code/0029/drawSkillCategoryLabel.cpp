@@ -1,4 +1,3 @@
-/* NON_MATCHING: shared 41A/41B selection uses one extra branch and different block placement; O2 may restore retail's shared backward branch. */
 #include "code/Code001b.h"
 #include "quest_center/QuestRecord.h"
 
@@ -17,7 +16,11 @@ void drawSkillCategoryLabel(u16 skill, s32 x, s32 y, u32 style)
     if (dataTable1bOr1cRecordHasFlag1(skill) != 0) {
         label = highlighted ? 0x40F : 0x408;
     } else if (idIsAtLeast350(skill) != 0) {
-        label = highlighted ? 0x41B : 0x41A;
+        if (highlighted) {
+            label = 0x41B;
+        } else {
+            label = 0x41A;
+        }
     } else {
         const QuestRecord *record = questDataGetRecord(skill);
         switch (record->kind) {
@@ -38,7 +41,11 @@ void drawSkillCategoryLabel(u16 skill, s32 x, s32 y, u32 style)
             break;
         case 8:
         case 9:
-            label = highlighted ? 0x41B : 0x41A;
+            if (highlighted) {
+                label = 0x41B;
+            } else {
+                label = 0x41A;
+            }
             break;
         case 10:
             return;
@@ -50,4 +57,4 @@ void drawSkillCategoryLabel(u16 skill, s32 x, s32 y, u32 style)
     texTableRecordCallWithParams(2, 0x13, label, x, y, style);
     gxResetColorQuadToWhite();
 }
-} // extern "C"
+} /* extern "C" */

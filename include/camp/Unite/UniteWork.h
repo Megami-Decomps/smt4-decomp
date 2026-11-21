@@ -437,7 +437,9 @@ struct UniteWorkA {
             /* 0x8E78 */ u8 unk8E78[4];
             /* 0x8E7C */ s32 freedCount;           /* entries of freedSlots in use */
             /* 0x8E80 */ s32 skillCount;           /* candidate skills in `skills` */
-            /* 0x8E84 */ u8 unk8E84[8];
+            /* 0x8E84 */ u8 unk8E84[6];
+            /* 0x8E8A */ u8 accepted;
+            /* 0x8E8B */ u8 unk8E8B;
             /* 0x8E8C */ s32 freedSlots[8];        /* the slots emptied, last first; -1 = none */
         } inheritanceA;
         struct {
@@ -449,6 +451,7 @@ struct UniteWorkA {
             /* 0x472 */ s16 scrollUpRegion;
             /* 0x474 */ s16 scrollDownRegion;
             /* 0x476 */ s16 scrollThumbRegion;
+            /* 0x478 */ s16 slotRegions[8];     /* touch regions of the skill inheritance screen's slot buttons */
         } touchA;
         /* what uniteCreate sets up past the lists: the special recipes and the catalog thread */
         struct {

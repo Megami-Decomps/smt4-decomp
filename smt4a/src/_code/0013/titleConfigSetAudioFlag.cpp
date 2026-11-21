@@ -2,10 +2,10 @@
 
 extern "C" {
 
-/* Stores `value` in the byte at 0x1E5 of the global at 0x61978C. */
+/* Sets the voice load queue's voice-bank byte (0x1E5). */
 void titleConfigSetAudioFlag(u8 value)
 {
-    g_soundObjectTable.unk1E5 = value;
+    g_soundObjectTable.voiceBank = value;
 }
 
 } /* extern "C" */

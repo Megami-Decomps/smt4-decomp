@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail 54 vs built 52 rows; camera-selection branches and matrix block-copy scheduling differ. */
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxTitle.h"
 
@@ -6,18 +5,21 @@ extern "C" {
 void *asdCameraValueGet(s32);
 s32 gxIsStereoscopic3dEnabled(void);
 void *FUN_0034334c(RenderCtx *);
-void *FUN_00343358(RenderCtx *);
+void *renderCtxGetBuiltinCamera(RenderCtx *);
 
-void renderGetCameraViewMatrix(void *destination)
+/* unit-local: a camera's 3x4 view matrix and the 4x4 matrix this function widens it into */
+struct Matrix3x4 {
+    f32 values[3][4];
+};
+struct Matrix4x4 {
+    Matrix3x4 transform;
+    f32 lastRow[4];
+};
+
+/* Copies the active camera's view matrix (the eye's for stereoscopic 3D) into a 4x4 matrix. */
+void renderGetCameraViewMatrix(Matrix4x4 *out)
 {
-    struct Matrix3x4 {
-        f32 values[3][4];
-    };
-    struct Matrix4x4 {
-        Matrix3x4 transform;
-        f32 lastRow[4];
-    };
-    // The stereo alternatives extend past the shared primary-matrix view.
+    /* The stereo alternatives extend past the shared primary-matrix view. */
     struct CameraMatrixViews {
         u8 unk000[0x38];
         Matrix3x4 primary;
@@ -30,7 +32,7 @@ void renderGetCameraViewMatrix(void *destination)
     bool special = false;
     CameraMatrixViews *camera;
     if (g_titleScene->cameraSelection.type == 3) {
-        camera = static_cast<CameraMatrixViews *>(FUN_00343358(g_titleScene));
+        camera = static_cast<CameraMatrixViews *>(renderCtxGetBuiltinCamera(g_titleScene));
         special = true;
     } else if (g_titleScene->cameraSelection.type == 4) {
         camera = static_cast<CameraMatrixViews *>(FUN_0034334c(g_titleScene));
@@ -38,10 +40,14 @@ void renderGetCameraViewMatrix(void *destination)
     } else {
         camera = static_cast<CameraMatrixViews *>(asdCameraValueGet(mode));
     }
-    const Matrix3x4 *matrix = &camera->primary;
-    if (mode != 2 && gxIsStereoscopic3dEnabled() == 1 && !special)
+    const Matrix3x4 *matrix;
+    if (mode == 2) {
+        matrix = &camera->primary;
+    } else if (gxIsStereoscopic3dEnabled() == 1 && !special) {
         matrix = mode == 1 ? &camera->tertiary : &camera->secondary;
-    Matrix4x4 *out = static_cast<Matrix4x4 *>(destination);
+    } else {
+        matrix = &camera->primary;
+    }
     out->transform = *matrix;
     out->lastRow[0] = 0;
     out->lastRow[1] = 0;

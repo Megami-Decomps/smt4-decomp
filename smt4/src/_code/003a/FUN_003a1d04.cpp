@@ -28,7 +28,7 @@ void FUN_003a1d04(Scene3a *scene)
     u32 color = scene->listId;
     FUN_00231bcc(&scene->region, 100, 0, 0, color, 1);
     FUN_003a07a0(scene, scene->slot);
-    s32 phase = scene->phase;
+    s32 phase = scene->pageTransition.phase;
     bool selectedOverlay = phase == 5 || phase == 9 || phase == 6 || phase == 10 ||
         phase == 7 || phase == 11 || phase == 15 || phase == 16;
     Scene3aSlotInfo *page = &scene->slotInfo[scene->slot];

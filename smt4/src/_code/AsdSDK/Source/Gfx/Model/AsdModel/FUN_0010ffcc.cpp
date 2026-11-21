@@ -3,13 +3,13 @@
 extern "C" {
 
 extern void srvInitialize(void);
-extern u32 FUN_0010ffdc(void);
+extern u32 asdModelWorkInitialize(void);
 
-/* Runs srvInitialize, then registers the callbacks (FUN_0010ffdc). */
+/* Runs srvInitialize, then registers the callbacks (asdModelWorkInitialize). */
 u32 FUN_0010ffcc(void)
 {
     srvInitialize();
-    return FUN_0010ffdc();
+    return asdModelWorkInitialize();
 }
 
 } /* extern "C" */

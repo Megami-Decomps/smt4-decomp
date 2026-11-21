@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002522f8(unsigned char [24], int, unsigned char *, unsigned int, unsigned int, unsigned int);
+int __2snprintf(unsigned char [24], int, unsigned char *, unsigned int, unsigned int, unsigned int);
 int FUN_0035fb7c(void);
 
 typedef struct fn_00353550_arg0 fn_00353550_arg0;
@@ -23,7 +23,7 @@ typedef struct {
 
 extern unsigned char LAB_003535d0; /* 0x3535d0 */
 
-/* Supplied declaration required: FUN_002522f8. */
+/* Supplied declaration required: __2snprintf. */
 /* Supplied declaration required: FUN_0035fb7c. */
 
 
@@ -49,7 +49,7 @@ void FUN_00353550(fn_00353550_arg0 *param_1,unsigned int param_2,unsigned int pa
   else {
     temp_v1 = 0x10;
   }
-  FUN_002522f8(temp_v2,0x11,&LAB_003535d0,param_4,
+  __2snprintf(temp_v2,0x11,&LAB_003535d0,param_4,
                (unsigned int)param_1->field_0x11 | ((param_1->field_0xc & 0xff0fffff) << 8),temp_v1 | 0x40000)
   ;
   FUN_0035fb7c();

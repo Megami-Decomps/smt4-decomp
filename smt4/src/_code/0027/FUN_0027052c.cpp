@@ -58,7 +58,7 @@ extern int DAT_0049fc84; /* 0x49fc84 */
 
 /* Supplied declaration required: asdMdlManagerMarkDestroy. */
 /* Supplied declaration required: FUN_001fc0a8. */
-extern int FUN_0021e7f4(int, unsigned int);
+extern int mapRewardRollAndAward(int, unsigned int);
 extern int mapDepartIsRunning(void);
 /* Supplied declaration required: FUN_0027ee24. */
 extern int inputConfirmPressed(void);
@@ -169,7 +169,7 @@ joined_r0x002706c8:
                 DAT_0049fa5c = 0;
                 temp_v3 = *(int *)(temp_v6 + 0x80);
                 if (temp_v3 < -1) {
-                  temp_v16 = FUN_0021e7f4(-temp_v3,1);
+                  temp_v16 = mapRewardRollAndAward(-temp_v3,1);
                   temp_v0 = *(short *)(temp_v6 + 0x7c);
                   if (((temp_v0 == 3 || temp_v0 == 4) || ((temp_v0 == 5 || temp_v0 == 7) || temp_v0 == 1)) &&
                      (*(char *)(g_mapStateSlots + 0x14) != '\0')) {
@@ -187,7 +187,7 @@ joined_r0x002706c8:
                     saveFlagSetOrAddCounter(temp_v16,1);
                   }
                   else {
-                    temp_v16 = FUN_0021e7f4((int)*(short *)(temp_v3 + 0x14),1);
+                    temp_v16 = mapRewardRollAndAward((int)*(short *)(temp_v3 + 0x14),1);
                     temp_v0 = *(short *)(temp_v6 + 0x7c);
                     if ((((temp_v0 == 3) || (temp_v0 == 4 || temp_v0 == 5)) || (temp_v0 == 7 || temp_v0 == 1))
                        && (*(char *)(g_mapStateSlots + 0x14) != '\0')) {

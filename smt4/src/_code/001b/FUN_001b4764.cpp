@@ -1,22 +1,11 @@
-/* NON_MATCHING: every store and the Obj4207d0 effect creation match; retail reloads scene->pose.position.x for the two copied floats (armcc forwards the constant instead) and materialises the float constants in a different register order. The effect-state global is still named by its retail address (DAT_0049f91c base). */
+/* NON_MATCHING: every store, the Obj4207d0 creation and the encounter reset (as in FUN_001d2f48) match; retail reloads
+ * scene->pose.position.x for the two copied floats (armcc forwards the constant), loads the later float constants
+ * lazily, and stores the positional-sound defaults with separate str (armcc here pairs them with stm). */
 #include "classes/Obj4207d0.h"
 #include "map/LmapGlobals.h"
-
-/* The map effect state kept beside the scene. */
-struct LmapEffectState {
-    /* 0x17C */ u8 unk17C;
-    /* 0x17D */ u8 unk17D[3];
-    /* 0x180 */ f32 unk180;
-    /* 0x184 */ f32 unk184;
-    /* 0x188 */ f32 unk188;
-    /* 0x18C */ f32 unk18C;
-    /* 0x190 */ u8 unk190[0x24];
-    /* 0x1B4 */ u16 unk1B4;
-};
+#include "game/GameState.h"
 
 extern "C" {
-extern LmapEffectState DAT_0049f91c;
-
 /* Resets the map scene to its defaults and creates its effect object. */
 void FUN_001b4764(void)
 {
@@ -82,11 +71,21 @@ void FUN_001b4764(void)
     scene->positionalSound = -1;
     scene->modelSwapStep = 0;
     scene->positionalSoundFrames = 0;
-    DAT_0049f91c.unk17C = 0;
-    DAT_0049f91c.unk180 = 0.0f;
-    DAT_0049f91c.unk184 = 0.0f;
-    DAT_0049f91c.unk188 = 0.0f;
-    DAT_0049f91c.unk18C = 0.0f;
+    g_gameState.event.encounterSourceActive = 0;
+    g_gameState.event.encounterSourcePosition.x = 0.0f;
+    g_gameState.event.encounterSourcePosition.y = 0.0f;
+    g_gameState.event.encounterSourcePosition.z = 0.0f;
+    g_gameState.event.encounterSourceHeading = 0.0f;
+    g_gameState.event.encounterDelay = 0;
+    g_gameState.event.encounterForced = 0;
+    g_gameState.event.encounterApproach = 0;
+    g_gameState.event.encounterBackAttack = 0;
+    g_gameState.event.encounterPending = 0;
+    g_gameState.event.encounterState = 0;
+    g_gameState.event.encounterMarkerPosition.x = 0.0f;
+    g_gameState.event.encounterMarkerPosition.y = 0.0f;
+    g_gameState.event.encounterMarkerPosition.z = 0.0f;
+    g_gameState.event.encounterMarkerHeading = 0.0f;
 }
 
 } /* extern "C" */

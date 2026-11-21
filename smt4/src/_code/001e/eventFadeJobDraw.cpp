@@ -1,4 +1,6 @@
-/* NON_MATCHING: lane scaling and canonical render pushes now match their retail operation shapes; VFP conversion registers, draw-argument scheduling and the cleared early return differ. */
+/* NON_MATCHING: the early returns and render pushes match; retail loads the intensity and alpha with two vldr and
+ * converts the four channels into s0-s3 in order, and schedules the level conversion after the colour store, where
+ * this loads both with one vldmia and converts into s3-s0. */
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match3_EffectColor.h"
 #include "code/Code0028.h"
@@ -49,25 +51,26 @@ u32 eventFadeJobDraw(u32 handle)
     if (job->pending != 0) {
         return 0;
     }
-    if (job->active != 0) {
-        if (job->initialized == 0) {
-            FUN_001a79a8(job);
-            job->initialized = 1;
-        }
-        RenderCtx *context = g_titleScene;
-        s32 state = renderCtxPackPassFlags(5, 1);
-        renderCtxPushA(context, state);
-        context = g_titleScene;
-        state = gxPackFadeKindAlphaWord(6, 0.0f);
-        renderCtxPushC(context, state);
-        EffectColor fade = {job->intensity, job->intensity, job->intensity, job->alpha};
-        u32 color = packFadeColor(fade);
-        FUN_0033e160(job->handle, 0, (s32)job->level, job->params, color, 0, job->origin);
-        renderStackPop(&g_titleScene->additional.stackC);
-        renderStackPop(&g_titleScene->stackA);
-        renderCtxApplyTransforms(g_titleScene);
-        renderCtxResetColorScale(g_titleScene);
+    if (job->active == 0) {
+        return 0;
     }
+    if (job->initialized == 0) {
+        FUN_001a79a8(job);
+        job->initialized = 1;
+    }
+    RenderCtx *context = g_titleScene;
+    s32 state = renderCtxPackPassFlags(5, 1);
+    renderCtxPushA(context, state);
+    context = g_titleScene;
+    state = gxPackFadeKindAlphaWord(6, 0.0f);
+    renderCtxPushC(context, state);
+    EffectColor fade = {job->intensity, job->intensity, job->intensity, job->alpha};
+    u32 color = packFadeColor(fade);
+    FUN_0033e160(job->handle, 0, (s32)job->level, job->params, color, 0, job->origin);
+    renderStackPop(&g_titleScene->additional.stackC);
+    renderStackPop(&g_titleScene->stackA);
+    renderCtxApplyTransforms(g_titleScene);
+    renderCtxResetColorScale(g_titleScene);
     return 0;
 }
 

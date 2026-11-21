@@ -1,52 +1,44 @@
-/* NON_MATCHING: retail 54 vs built 55 rows; model-slot pointer addressing and destruction branch layout differ. */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "gfx/PlayerModelParts.h"
+#include "ui/DummyAttachmentWork.h"
 #include <string.h>
 
 extern "C" {
 char *strncpy(char *, const char *, u32);
 
+/* Releases part `index`'s model: hides it and, when its node is live, marks it for destruction. Retail repeats
+ * the model's NULL test and recomputes the part's address here, the inlined body of a function of its own. */
+static __inline void playerModelReleasePart(PlayerModelParts *player, s32 index)
+{
+    PlayerModelPart *part = &player->parts[index];
+    if (part->model != NULL) {
+        part->state = 2;
+        asdMdlObjectHide(part->model);
+        if (part->model->node->unk0c >= 0)
+            asdMdlManagerMarkDestroy(part->model);
+    }
+}
+
+/* Points equipment part `index` at the model `name`: an unused part starts loading it (asynchronously when
+ * allowed), a part holding another model releases it first; the same model is left alone. */
 void playerModelLoadSlot(void *owner, s32 index, const char *name, u16 id)
 {
-    struct ModelSlot {
-        u32 state;
-        u16 id;
-        u16 unk06;
-        AsdMdlObject *model;
-        void *request;
-        char name[0x40];
-    };
-    struct ModelSlotsView {
-        u32 unk00;
-        u32 blocked;
-        u32 asyncEnabled;
-        u32 unk0C;
-        ModelSlot slots[1];
-    };
-    ModelSlotsView *state = static_cast<ModelSlotsView *>(owner);
-    ModelSlot *slot = &state->slots[index];
-    slot->id = id;
-    if (slot->model != NULL) {
-        if (strcmp(slot->name, name) == 0)
+    PlayerModelParts *player = (PlayerModelParts *)owner;
+    PlayerModelPart *part = &player->parts[index];
+    part->id = id;
+    if (part->model == NULL) {
+        if (player->blocked == 0 && player->asyncEnabled != 0) {
+            asdLoadFileAsyncSimple(name, (u32 *)&part->request, 1);
+            part->state = 4;
             return;
-        if (slot->model != NULL) {
-            slot->state = 2;
-            slot->model->flags |= 2;
-            AsdMdlNode *node = slot->model->node;
-            node->sceneNode->positionFollowed = 0;
-            if (node->unk0c >= 0) {
-                asdMdlManagerMarkDestroy(slot->model);
-                return;
-            }
         }
+        part->state = 5;
     } else {
-        if (state->blocked == 0 && state->asyncEnabled != 0) {
-            asdLoadFileAsyncSimple(name, reinterpret_cast<u32 *>(&slot->request), 1);
-            slot->state = 4;
+        if (strcmp(part->name, name) == 0)
             return;
-        }
-        slot->state = 5;
+        playerModelReleasePart(player, index);
     }
-    strncpy(slot->name, name, sizeof(slot->name));
+    strncpy(part->name, name, sizeof(part->name));
 }
 }

@@ -1,8 +1,8 @@
-/* NON_MATCHING: retail reloads g_renderCtx after reading the eye and keeps the camera-kind cases out of line; this build loads it once and predicates the kind-3 case. */
-#include "common.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
+/* unit-local: the camera's view matrices and the 4x4 matrix this function widens one into */
 typedef struct ViewMtx34 {
     f32 m[3][4];
 } ViewMtx34;
@@ -21,44 +21,30 @@ typedef struct RenderCamera {
     /* 0x288 */ ViewMtx34 viewRight;
 } RenderCamera;
 
-typedef struct RenderContext {
-    /* 0x000 */ u8 unk000[0x52c];
-    /* 0x52C */ s32 eye;          /* 1 = right, 2 = center */
-    /* 0x530 */ u8 unk530[0xc8];
-    /* 0x5F8 */ u8 cameraKind;    /* 3 = built-in camera, 4 = override camera */
-    /* 0x5F9 */ u8 unk5F9[0x107];
-    /* 0x700 */ RenderCamera camera;
-} RenderContext;
-
-extern RenderContext *g_renderCtx;
-
 s32 gxIsStereoscopic3dEnabled(void);
 RenderCamera *asdCameraValueGet(s32 eye);
-RenderCamera *FUN_001c5bd8(RenderContext *context);
+RenderCamera *FUN_001c5bd8(RenderCtxA *context);
+RenderCamera *renderCtxGetBuiltinCamera(RenderCtxA *context);
 
 /* Copies the active camera's view matrix for the current eye into `out` as a 4x4 matrix. */
 void renderGetCameraViewMatrix(ViewMtx44 *out)
 {
-    s32 eye = g_renderCtx->eye;
+    s32 eye = renderCtxGetStereoMode(g_renderCtx);
     bool fixed = false;
     RenderCamera *camera;
-
-    switch (g_renderCtx->cameraKind) {
-    case 3:
-        camera = &g_renderCtx->camera;
+    if (g_renderCtx->shownMode == 3) {
+        camera = renderCtxGetBuiltinCamera(g_renderCtx);
         fixed = true;
-        break;
-    case 4:
+    } else if (g_renderCtx->shownMode == 4) {
         camera = FUN_001c5bd8(g_renderCtx);
         fixed = true;
-        break;
-    default:
+    } else {
         camera = asdCameraValueGet(eye);
-        break;
     }
-
     const ViewMtx34 *view;
-    if (eye != 2 && gxIsStereoscopic3dEnabled() == 1 && !fixed) {
+    if (eye == 2) {
+        view = &camera->view;
+    } else if (gxIsStereoscopic3dEnabled() == 1 && !fixed) {
         view = eye == 1 ? &camera->viewRight : &camera->viewLeft;
     } else {
         view = &camera->view;

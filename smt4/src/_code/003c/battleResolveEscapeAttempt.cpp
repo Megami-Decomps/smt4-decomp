@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail retains an identity cap/refetch/second store after its wrapping byte increment; failure-path layout and scratch registers also differ. */
+/* NON_MATCHING: the saturating attempt count now matches; retail places the failed-escape arm after the epilogue and branches back to the shared FUN_00229a3c call, and pools g_btlAux in another slot. */
 #include "battle/btlMain.h"
 #include "battle/btlEvent.h"
 #include "shard/W4_Match6_BtlScript.h"
@@ -66,7 +66,9 @@ void battleResolveEscapeAttempt(BattleRetreatOwner *owner, BattleRetreatAction *
     s32 roll = randRange(99);
     bool success = roll < chance;
 
-    ++reinterpret_cast<BattleRetreatScriptFields *>(owner->script)->attempts;
+    /* The escape-attempt count saturates at 255. */
+    u32 attempts = ++reinterpret_cast<BattleRetreatScriptFields *>(owner->script)->attempts;
+    reinterpret_cast<BattleRetreatScriptFields *>(owner->script)->attempts = attempts < 255 ? attempts : 255;
     BattleVersionResources *resources = g_btlAux;
     if (reinterpret_cast<BattleRetreatResourceFields *>(resources)->flags & 0x400)
         FUN_00240614(resources);

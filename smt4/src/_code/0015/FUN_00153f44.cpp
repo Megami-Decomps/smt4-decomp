@@ -46,7 +46,7 @@ static inline void modelEmitMatrix(u32 index, const MTX34 *matrix)
 // Upload the model's world matrix (the identity when its transform flag is clear) and view matrix.
 void FUN_00153f44(ModelMatrixUploader *uploader, ModelTransforms *model)
 {
-    if ((~1 & model->state->flags->flags) == 0) {
+    if ((1 & ~model->state->flags->flags) == 0) {
         modelEmitMatrix(0, &model->worldMatrix);
     } else {
         modelEmitMatrix(0, &MTX34::Identity());
