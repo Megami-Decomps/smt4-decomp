@@ -21,7 +21,7 @@ int FUN_004c0f74(...);
 int source4CCopyHalves(void);
 int kindIdStore(...);
 int FUN_004c60c0(unsigned int, unsigned int);
-int FUN_004c8340(unsigned int, unsigned int, unsigned int, unsigned int *);
+int btlGetAffinity(unsigned int, unsigned int, unsigned int, unsigned int *);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -132,7 +132,7 @@ extern unsigned int FUN_004bf9a0(unsigned int);
 /* Supplied declaration required: source4CCopyHalves. */
 /* Supplied declaration required: kindIdStore. */
 /* Supplied declaration required: FUN_004c60c0. */
-/* Supplied declaration required: FUN_004c8340. */
+/* Supplied declaration required: btlGetAffinity. */
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -436,7 +436,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
     do {
       temp_v10 = temp_v53;
       temp_v31 = temp_v3;
-      FUN_004c8340(temp_v53,temp_v54,temp_v37[temp_v11],temp_v46);
+      btlGetAffinity(temp_v53,temp_v54,temp_v37[temp_v11],temp_v46);
       temp_v44[temp_v11 + 0xe] = temp_v10;
       temp_v10 = temp_v54;
       FUN_004c60c0(temp_v54,temp_v37[temp_v11]);

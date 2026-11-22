@@ -34,19 +34,18 @@ u32 FUN_0024ee68(s32 request)
         result = NET_RESULT_NOT_INITIALIZED;
         return result;
     }
-    void *section = g_moduleCriticalSection2;
-    nn_os_CriticalSection_Enter(section);
+    nn_os_CriticalSection_Enter(g_moduleCriticalSection2);
     if (request) {
         if (!(FUN_00239a54() | DAT_004656ca.available)) {
             result = NET_RESULT_NOT_AVAILABLE;
-            nn_os_CriticalSection_Leave(section);
+            nn_os_CriticalSection_Leave(g_moduleCriticalSection2);
             return result;
         }
         result = FUN_003594f0(14);
     }
     if (!DAT_004656ca.connected) {
         result = NET_RESULT_NOT_INITIALIZED;
-        nn_os_CriticalSection_Leave(section);
+        nn_os_CriticalSection_Leave(g_moduleCriticalSection2);
         return result;
     }
     if (DAT_004656ca.dirty) {
@@ -55,7 +54,7 @@ u32 FUN_0024ee68(s32 request)
             DAT_004656ca.dirty = 0;
         }
     }
-    nn_os_CriticalSection_Leave(section);
+    nn_os_CriticalSection_Leave(g_moduleCriticalSection2);
     return result;
 }
 

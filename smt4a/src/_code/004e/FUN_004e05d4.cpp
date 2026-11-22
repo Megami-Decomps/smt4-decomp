@@ -21,7 +21,7 @@ int FUN_004aa878(void);
 int btlSlotSetStoreValue(...);
 int btlAdjustPropertyClamped(...);
 int FUN_004c9160(...);
-int FUN_004cab9c(void);
+int btlRosterMotionSyncStatus(void);
 int FUN_004e5830(int *, unsigned int *, unsigned int);
 int btlActionTargetSlotScore(...);
 int FUN_004fcffc(...);
@@ -82,7 +82,7 @@ extern int btlFindEntryValue(int, unsigned int);
 /* Supplied declaration required: btlAdjustPropertyClamped. */
 extern int FUN_004c8a9c(void);
 /* Supplied declaration required: FUN_004c9160. */
-/* Supplied declaration required: FUN_004cab9c. */
+/* Supplied declaration required: btlRosterMotionSyncStatus. */
 /* Supplied declaration required: FUN_004e5830. */
 /* Supplied declaration required: btlUnitLandHit. */
 /* Supplied declaration required: btlActionTargetSlotScore. */
@@ -211,7 +211,7 @@ unsigned int FUN_004e05d4(int *param_1,unsigned int *param_2)
   do {
     temp_v3 = *(int *)(*param_1 + 0x1ed4) + temp_v2 * 0x1d0;
     if ((temp_v3 != 0) && (temp_v4 = *(unsigned int *)(temp_v3 + 0x50), (temp_v4 & 1) != 0 && (temp_v4 & 2) != 0)) {
-      FUN_004cab9c();
+      btlRosterMotionSyncStatus();
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 0x6d);

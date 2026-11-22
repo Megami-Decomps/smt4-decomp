@@ -26,7 +26,7 @@ int dispatchIfFound(...); // declcheck: local (romwright prototype; the shared d
 int unitRecalculateEffectiveStats(...);
 int useCounterRelease(void);
 int eventQueueAddUnique(...);
-int FUN_002e3378(...);
+int table5Type9MarkEntrySeen(...);
 int FUN_003ae34c(...);
 
 int scrRunOpcodesStub(...);
@@ -238,7 +238,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: inputQueryButtonState. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: memClear. */
-/* Supplied declaration required: FUN_002e3378. */
+/* Supplied declaration required: table5Type9MarkEntrySeen. */
 extern unsigned long long partyPanelFocusSelectedPartyMember(unsigned int);
 /* Supplied declaration required: table08ApplyToParty. */
 extern int btlItemUselessOnGroupMember(unsigned int, unsigned short);
@@ -2716,7 +2716,7 @@ LAB_001c7c50:
             FUN_0029bed8(*(unsigned short *)(temp_v4 + 0x46));
           }
           gameCounterAddSaturating(0x26,1);
-          FUN_002e3378(*(unsigned short *)(temp_v4 + 0x46));
+          table5Type9MarkEntrySeen(*(unsigned short *)(temp_v4 + 0x46));
         }
         temp_v14 = 1;
         temp_v7 = 0x17;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: VFP register allocation for the origin and scheduling of the loop increment differ. */
 #include "map/mapObj.h"
 #include "map/MapObjectRecords.h"
 #include "map/mapDepart.h"
@@ -14,13 +13,7 @@ void mapObjFindNearestPointByCategory(s32 firstCategory, s32 secondCategory, s32
                   MapVector origin)
 {
     s32 nearest = 99999;
-    s32 index = 0;
-    if (dataTableGetRecordFortyFive() <= 0) {
-        return;
-    }
-
-    const f32 threshold = origin.y + 50.0f;
-    do {
+    for (s32 index = 0; index < dataTableGetRecordFortyFive(); index++) {
         const MapObjRecord *record = mapObjGetCombinedEntry(index);
         if (record->map >= 0 && record->map == (s16)g_mapObj->request.map &&
             record->object == (s16)g_mapObj->request.object &&
@@ -29,10 +22,10 @@ void mapObjFindNearestPointByCategory(s32 firstCategory, s32 secondCategory, s32
             MapVector point = {
                 (f32)record->x, (f32)record->y, (f32)record->z
             };
-            if (vertical > 0 && point.y < threshold) {
+            if (vertical > 0 && point.y < origin.y + 50.0f) {
                 continue;
             }
-            if (vertical < -1 && threshold < point.y) {
+            if (vertical < -1 && origin.y + 50.0f < point.y) {
                 continue;
             }
             s32 distance = (s32)distSpatial(origin, point);
@@ -43,7 +36,7 @@ void mapObjFindNearestPointByCategory(s32 firstCategory, s32 secondCategory, s32
             *heading = record->placement;
             nearest = distance;
         }
-    } while (++index < dataTableGetRecordFortyFive());
+    }
 }
 
 } /* extern "C" */

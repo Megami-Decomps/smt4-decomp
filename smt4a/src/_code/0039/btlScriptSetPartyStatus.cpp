@@ -10,7 +10,7 @@ extern BattleMessageFlagMasks g_btlMessageFlagMasks;
 extern u32 g_btlScriptUnit;
 u32 scrGetArg(u32 index);
 u32 FUN_004bf9a0(u32 status);
-u32 FUN_004c8340(s32 source, s32 target, u32 status, s32 mode, s32 flags);
+u32 btlGetAffinity(s32 source, s32 target, u32 status, s32 mode, s32 flags);
 void FUN_004fda78(s32 mode, s32 flags, void *source, BattleRosterRecordA *target,
                   s32 response, s32 extra);
 void FUN_004fdb18(s32 mode, void *source, BattleRosterRecordA *target, u32 statuses, s32 flags);
@@ -34,7 +34,7 @@ u32 btlScriptSetPartyStatus()
                 FUN_004fcffc(0, source, &state->roster[entry->ids[0]], mask);
             } else {
                 if (checkResponse &&
-                    (FUN_004c8340(-1, entry->ids[0], FUN_004bf9a0(status), 2, -1) & 0x10000)) {
+                    (btlGetAffinity(-1, entry->ids[0], FUN_004bf9a0(status), 2, -1) & 0x10000)) {
                     FUN_004fda78(0, 0, source, &state->roster[entry->ids[0]], 4, 0);
                     btlQueueActionMessage(0, source, 0x100028C, 0, 1, 0, 0);
                     continue;

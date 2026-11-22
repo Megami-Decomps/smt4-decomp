@@ -9,7 +9,7 @@ int skillDataFindById(void);
 int source4CCopyHalves(unsigned int, unsigned short [10]);
 int btlAiMarkLowestHpTarget(...);
 int FUN_004e9bd0(...);
-int FUN_004ea200(...);
+int btlActionPickModeForTargets(...);
 
 /* stack frame of param_2: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -41,7 +41,7 @@ extern int skillGetAdjustedCost(unsigned int, unsigned short);
 /* Supplied declaration required: source4CCopyHalves. */
 /* Supplied declaration required: btlAiMarkLowestHpTarget. */
 /* Supplied declaration required: FUN_004e9bd0. */
-/* Supplied declaration required: FUN_004ea200. */
+/* Supplied declaration required: btlActionPickModeForTargets. */
 
 
 void FUN_004e8668(int *param_1,int param_2)
@@ -74,7 +74,7 @@ void FUN_004e8668(int *param_1,int param_2)
   } while (temp_v4 != 0);
   qsort(aiStack_1ec,temp_v3,4,&FUN_00241988);
   piVar3 = param_1;
-  FUN_004ea200(param_1,param_2,aiStack_1ec,temp_v3,1);
+  btlActionPickModeForTargets(param_1,param_2,aiStack_1ec,temp_v3,1);
   if (piVar3 == (int *)0x0) {
     temp_v5[0] = 0;
     temp_v5[1] = 0;
@@ -119,7 +119,7 @@ LAB_004e8820:
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 9);
     piVar3 = param_1;
-    FUN_004ea200(param_1,param_2,aiStack_1ec,temp_v3,0);
+    btlActionPickModeForTargets(param_1,param_2,aiStack_1ec,temp_v3,0);
     if (piVar3 == (int *)0x0) {
       temp_v2 = 0;
       do {

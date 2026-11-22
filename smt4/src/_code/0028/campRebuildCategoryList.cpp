@@ -35,7 +35,7 @@ extern int itemSortCompareByCategoryAndId(...); /* 0x2497f8 */
 extern int itemSortCompareRankThenKey(...); /* 0x257568 */
 extern int entryCompareClassThenDescendingValue(...); /* 0x2c6d30 */
 extern int FUN_002dc594(...); /* 0x2dc594 */
-extern int FUN_002dc634(...); /* 0x2dc634 */
+extern int table8Type5CompareBySkill(...); /* 0x2dc634 */
 extern int FUN_002dc72c(...); /* 0x2dc72c */
 extern int FUN_002dcce0(...); /* 0x2dcce0 */
 extern int FUN_002dcd38(...); /* 0x2dcd38 */
@@ -57,14 +57,14 @@ extern int dataTable08Sub0CompareBySortKeys(...); /* 0x2e4a0c */
 extern int dataTableKeyRankCompare(...); /* 0x2e4a60 */
 extern int FUN_002e4aac(...); /* 0x2e4aac */
 extern int recordRankCompareWithTieBreak(...); /* 0x2f261c */
-extern int FUN_002f2680(...); /* 0x2f2680 */
+extern int skillListCompareBySortKeyDescending(...); /* 0x2f2680 */
 extern int FUN_002f2740(...); /* 0x2f2740 */
 extern int dataTable08CompareSecondaryKeyDescending(...); /* 0x2f27ec */
 extern int dataTable08Sub2ComparePackedKeyDescending(...); /* 0x2f2840 */
 extern int FUN_002f2898(...); /* 0x2f2898 */
 extern int itemCompareCategoryDescendingValueAscending(...); /* 0x2f8120 */
 extern int FUN_0030bce8(...); /* 0x30bce8 */
-extern int FUN_0030bd88(...); /* 0x30bd88 */
+extern int table8Type5CompareBySkillDescending(...); /* 0x30bd88 */
 extern int FUN_0030be80(...); /* 0x30be80 */
 extern int FUN_0030bed8(...); /* 0x30bed8 */
 extern int dataTable08Sub2CompareIds(...); /* 0x30bf40 */
@@ -157,7 +157,7 @@ void campRebuildCategoryList(int param_1)
     if ((*pbVar4 & 0x7f) == 3) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = gridNavigationGetItemCount(temp_v3);
-        arraySortQsort(temp_v1,temp_v2,8,FUN_002f2680);
+        arraySortQsort(temp_v1,temp_v2,8,skillListCompareBySortKeyDescending);
         return;
       }
       temp_v2 = gridNavigationGetItemCount(temp_v3);
@@ -215,10 +215,10 @@ void campRebuildCategoryList(int param_1)
     }
     if ((*pbVar4 & 0x7f) == 3) {
       if ((char)*pbVar4 < '\0') {
-        arraySortQsort(temp_v6,temp_v5,2,FUN_0030bd88);
+        arraySortQsort(temp_v6,temp_v5,2,table8Type5CompareBySkillDescending);
         return;
       }
-      arraySortQsort(temp_v6,temp_v5,2,FUN_002dc634);
+      arraySortQsort(temp_v6,temp_v5,2,table8Type5CompareBySkill);
       return;
     }
     break;

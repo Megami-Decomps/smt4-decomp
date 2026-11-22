@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code001f_Smt4.h"
 
 extern "C" {
 
@@ -11,9 +12,9 @@ static __inline void effectSpawnKind(u32 kind, f32 x, f32 y, f32 z)
 }
 
 /* Spawn a kind-ten effect with the standard height and duration. */
-void effectSpawnKindTen(f32 x, f32 y, f32 z)
+void effectSpawnKindTen(MapVector position)
 {
-    effectSpawnKind(10, x, y, z);
+    effectSpawnKind(10, position.x, position.y, position.z);
 }
 
-}
+} /* extern "C" */

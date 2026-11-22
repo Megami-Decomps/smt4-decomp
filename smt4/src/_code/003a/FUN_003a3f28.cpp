@@ -12,10 +12,10 @@ s32 FUN_0039fcd8(const void *, const void *);
 s32 halfDifference(const void *, const void *);
 s32 equipmentComparePowerThenOrder(const void *, const void *);
 s32 FUN_003a0028(const void *, const void *);
-s32 FUN_003a0078(const void *, const void *);
+s32 contentCompareKindValueAscending(const void *, const void *);
 s32 FUN_003a0118(const void *, const void *);
 s32 FUN_003a0164(const void *, const void *);
-s32 FUN_003a05e8(const void *, const void *);
+s32 contentCompareKindValueDescending(const void *, const void *);
 s32 FUN_003a0674(const void *, const void *);
 s32 FUN_003a06b8(const void *, const void *);
 s32 FUN_003a06fc(const void *, const void *);
@@ -81,9 +81,9 @@ void FUN_003a3f28(ShopScreen *screen)
         break;
     case 15:
         if (useCounterGetValue() == 0)
-            arraySortQsort(table->items, table->count, sizeof(ShopSlot), FUN_003a05e8);
+            arraySortQsort(table->items, table->count, sizeof(ShopSlot), contentCompareKindValueDescending);
         else
-            arraySortQsort(table->items, table->count, sizeof(ShopSlot), FUN_003a0078);
+            arraySortQsort(table->items, table->count, sizeof(ShopSlot), contentCompareKindValueAscending);
         break;
     case 16:
         if (useCounterGetValue() == 0)

@@ -38,7 +38,7 @@ int sysClearCachedFlag(void);
 int soundChannelStopAll(...);
 int btlActionPrepareFromSource(...);
 int btlTurnEndApplyRegenSkills(...);
-int FUN_003ef1e4(...);
+int btlDecideEnemyFlee(...);
 int resourceReleaseReference(void);
 int btlHelpFreeEntries(void);
 int FUN_004c8e30(...);
@@ -223,7 +223,7 @@ extern int FUN_003e9964(unsigned int);
 extern int FUN_003ed878(unsigned int);
 /* Supplied declaration required: btlTurnEndApplyRegenSkills. */
 /* Supplied declaration required: btlFindSelectionIndexByOrdinal. */
-/* Supplied declaration required: FUN_003ef1e4. */
+/* Supplied declaration required: btlDecideEnemyFlee. */
 /* Supplied declaration required: FUN_003f034c. */
 /* Supplied declaration required: btlAiBuildTurnOrder. */
 /* Supplied declaration required: FUN_003fda64. */
@@ -842,7 +842,7 @@ joined_r0x0024cba8:
       *(unsigned int *)(temp_v2 + 0x124) = 0x3f800000;
       *(unsigned int *)(temp_v2 + 0x128) = 0x3f800000;
       btlActionPrepareFromSource(temp_v2,temp_v2 + 0xf4,0);
-      FUN_003ef1e4(temp_v2,1);
+      btlDecideEnemyFlee(temp_v2,1);
       if ((*(unsigned int *)(temp_v2 + 0x110) & 8) == 0) {
         FUN_004c8e30(3,0,1);
       }

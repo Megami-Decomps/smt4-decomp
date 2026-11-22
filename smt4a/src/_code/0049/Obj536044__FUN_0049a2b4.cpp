@@ -21,10 +21,10 @@ s32 FUN_004938d0(const void *, const void *);
 s32 halfDifference(const void *, const void *);
 s32 FUN_0049393c(const void *, const void *);
 s32 FUN_00493d38(const void *, const void *);
-s32 FUN_00493d88(const void *, const void *);
+s32 contentCompareKindValueAscending(const void *, const void *);
 s32 FUN_00493e94(const void *, const void *);
 s32 FUN_00493ee0(const void *, const void *);
-s32 FUN_004943bc(const void *, const void *);
+s32 contentCompareKindValueDescending(const void *, const void *);
 s32 FUN_00494448(const void *, const void *);
 s32 FUN_0049448c(const void *, const void *);
 s32 FUN_004944d0(const void *, const void *);
@@ -109,10 +109,10 @@ void Obj536044::FUN_0049a2b4()
         return;
     case 0xF:
         if (useCounterGetValue() == 0) {
-            arraySortQsort(list->items, list->count, 4, FUN_004943bc);
+            arraySortQsort(list->items, list->count, 4, contentCompareKindValueDescending);
             return;
         }
-        arraySortQsort(list->items, list->count, 4, FUN_00493d88);
+        arraySortQsort(list->items, list->count, 4, contentCompareKindValueAscending);
         return;
     }
 }

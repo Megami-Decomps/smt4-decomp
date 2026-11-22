@@ -167,7 +167,7 @@ int naviClearObjectBlock(void);
 int FUN_0027d968(void);
 int gameSaveSetBattleResultCode(...);
 int sequenceRequestClearDeferred(void);
-int FUN_00281788(void);
+int cullVolumeTableClear(void);
 int FUN_0028527c(int);
 int gameRestoreWorkSave(int);
 int asdLoadFileAsyncSimple(...);
@@ -454,7 +454,7 @@ extern int inputConfirmPressed(void);
 /* Supplied declaration required: frameTexConfigureCaptureTextures. */
 /* Supplied declaration required: FUN_00280ccc. */
 /* Supplied declaration required: FUN_00281784. */
-/* Supplied declaration required: FUN_00281788. */
+/* Supplied declaration required: cullVolumeTableClear. */
 /* Supplied declaration required: FUN_0028527c. */
 /* Supplied declaration required: naviRegisterTransitionsAndRequest. */
 /* Supplied declaration required: gameRestoreWorkSave. */
@@ -599,7 +599,7 @@ unsigned int FUN_001d3e3c(void)
     DAT_0049f940 = 1;
     DAT_0049f941 = 1;
     DAT_0049fba0 = 0;
-    FUN_00281788();
+    cullVolumeTableClear();
     MapIf_Register(*puVar7,1);
     *(unsigned char *)((int)puVar7 + 0x99a) = 0;
     *(unsigned char *)(temp_v4 + 0x792) = 0;

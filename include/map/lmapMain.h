@@ -333,7 +333,7 @@ typedef struct LmapViewA {
     /* 0x214 */ f32 unk214;
     /* 0x218 */ f32 raised;         /* nonzero while the camera is raised */
     /* 0x21C */ f32 unk21C;
-    /* 0x220 */ u8 moving;          /* the camera move below is running */
+    /* 0x220 */ s8 moving;          /* the camera move below is running */
     /* 0x221 */ u8 unk221[3];
     /* 0x224 */ VectorPairTransitionA move; /* the camera move (vectorPairTransitionStep steps it) */
     /* 0x298 */ f32 unk298;
@@ -344,7 +344,7 @@ typedef struct LmapViewA {
     /* 0x2B2 */ s16 unk2B2;
     /* 0x2B4 */ s16 unk2B4;
     /* 0x2B6 */ s16 unk2B6;
-    /* 0x2B8 */ u8 unk2B8;
+    /* 0x2B8 */ s8 unk2B8;
     /* 0x2B9 */ u8 unk2B9[3];
     /* 0x2BC */ Obj557af8 *clip; /* the animated camera clip (FUN_0035243c), or NULL */
     /* 0x2C0 */ MapVector homeEye;     /* the static pose restored when the clip ends */

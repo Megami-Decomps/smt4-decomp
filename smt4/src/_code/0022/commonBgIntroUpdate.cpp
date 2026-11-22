@@ -68,8 +68,7 @@ s32 commonBgIntroUpdate(u32 handle)
         break;
     case INTRO_STATE_WAIT_TOUCH: {
         s32 mode = ifTouchGetSelectionModeForRegion(work->touchId);
-        s32 a = work->frameA + 1;
-        work->frameA = a % 15;
+        work->frameA = (work->frameA + 1) % 15;
         work->frameB = (work->frameB + 1) % 60;
         if (mode == 2) {
             work->frameA = 0;

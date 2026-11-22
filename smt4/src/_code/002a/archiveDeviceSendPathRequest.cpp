@@ -1,4 +1,6 @@
-/* NON_MATCHING: retail materialises the request pointer after the device (movne r6,sp after movne r5,r0) and keeps the constant 4 in r1 for the stm; the null test itself now matches. */
+/* NON_MATCHING: 26 lines. Retail copies the device into r5 and the request's address (sp) into r6 under the null
+ * test (movne) and keeps a 16-byte frame, which a pointer variable to the request and a second device variable
+ * reproduce (6 lines), but those are only register steering; the wave 77 review removed them. */
 #include "common.h"
 
 extern "C" {
@@ -24,21 +26,19 @@ ArchiveDevice *FUN_002b5a5c(const u16 *path);
 /* Sends the path part after the "device:" prefix to the device named in `path`. */
 u32 archiveDeviceSendPathRequest(const u16 *path)
 {
-    ArchiveDevice *found = FUN_002b5a5c(path);
+    ArchiveDevice *device = FUN_002b5a5c(path);
     u32 result;
 
-    if (found == NULL) {
+    if (device == NULL) {
         result = 0xc8804465;
     } else {
         ArchiveRequest request;
-        ArchiveRequest *req = &request;
-        ArchiveDevice *device = found;
         while (*path++ != ':') {
         }
-        req->kind = 4;
-        req->path = path;
-        req->size = (wstrlenU16(path) + 1) * 2;
-        result = device->control(req);
+        request.kind = 4;
+        request.path = path;
+        request.size = (wstrlenU16(path) + 1) * 2;
+        result = device->control(&request);
     }
     return result;
 }

@@ -15,7 +15,7 @@ int FUN_004bf9a0(...);
 int FUN_004c0f74(unsigned int *, unsigned int);
 int kindIdStore(unsigned int, unsigned int [7]);
 int FUN_004c60c0(...);
-int FUN_004c8340(...);
+int btlGetAffinity(...);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of param_8: 18 slot(s), 64 byte(s) */
@@ -72,7 +72,7 @@ extern int FUN_0028cb6c(void);
 /* Supplied declaration required: FUN_004c0f74. */
 /* Supplied declaration required: kindIdStore. */
 /* Supplied declaration required: FUN_004c60c0. */
-/* Supplied declaration required: FUN_004c8340. */
+/* Supplied declaration required: btlGetAffinity. */
 extern int flagsCountSelectedBits(short);
 
 
@@ -257,7 +257,7 @@ LAB_004c4810:
           return 0;
         }
         temp_v2 = temp_v38;
-        FUN_004c8340(temp_v38,param_5,temp_v23[0],temp_v7,0xffffffff);
+        btlGetAffinity(temp_v38,param_5,temp_v23[0],temp_v7,0xffffffff);
         kindIdStore(temp_v23[0],temp_v36);
         puVar8 = puVar4;
         FUN_004c0f74(puVar4,temp_v36[0] & 0xff);
@@ -389,7 +389,7 @@ LAB_004c4810:
             temp_v8 = 0;
             do {
               temp_v2 = temp_v38;
-              FUN_004c8340(temp_v38,param_5,temp_v23[temp_v8],*(unsigned char *)(temp_v4 + 0x23),
+              btlGetAffinity(temp_v38,param_5,temp_v23[temp_v8],*(unsigned char *)(temp_v4 + 0x23),
                            0xffffffff);
               temp_v30[temp_v8] = temp_v2;
               temp_v2 = param_5;

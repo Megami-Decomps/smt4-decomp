@@ -1,25 +1,23 @@
-/* NON_MATCHING: the complete 24-instruction control flow matches, but flags, queue address and table-base registers are allocated differently. */
+/* NON_MATCHING: the control flow and instructions match; retail keeps the entries-pointer address in ip and the turn's entry index in r4, the build swaps them (r4/ip) and so renumbers the flag registers. */
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
-#include "shard/W6_W6Match3_BattleQueue.h"
 
-struct BattleQueueView {
-    /* 0x0000 */ u8 unk0000[0x2f06];
-    /* 0x2f06 */ s16 entries[12];
-};
+extern "C" {
 
-extern "C" void btlPruneInvalidQueuedEntries(BtlMainState* state)
+/* Empties every turn-order slot whose entry is no longer active or is blocked. */
+void btlPruneInvalidQueuedEntries(BtlMainState *state)
 {
-    BattleQueueView* queue = (BattleQueueView*)state;
-    for (s32 index = 0; index < 12; ++index) {
-        s32 entry = queue->entries[index];
+    for (s32 i = 0; i < 12; i++) {
+        s32 entry = state->turnOrder.order[i];
         if (entry >= 0) {
             u32 flags = state->entries[entry].flags;
             if ((flags & BTL_ENTRY_FLAG_ACTIVE) == 0) {
-                queue->entries[index] = -1;
+                state->turnOrder.order[i] = -1;
             } else if (flags & BTL_ENTRY_FLAG_BLOCKED) {
-                queue->entries[index] = -1;
+                state->turnOrder.order[i] = -1;
             }
         }
     }
 }
+
+} /* extern "C" */

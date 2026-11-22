@@ -62,10 +62,10 @@ typedef struct BtlUnitDataA {
     /* 0x114 */ u16 alternateFlags; /* [0x278] */
     /* 0x116 */ u16 unk116;         /* [0x27A] */
     /* 0x118 */ u16 skillIds[8];     /* [0x27C] the unit's skill ids (FUN_0039d804) */
-    /* 0x128 */ u8 unk128[0x2A];
+    /* 0x128 */ u16 innateValues[21]; /* [0x28C] a second per-slot table like `values` (kind in bits 10 and up) */
     /* 0x152 */ u16 values[21];     /* [0x2B6] bits 10 and up hold a kind (BTL_UNIT_SLOT_TABLE) */
     /* 0x17C */ u8 slotFlags[21];   /* [0x2E0] per-slot flags the scripts query */
-    /* 0x191 */ u8 unk191[0x15];
+    /* 0x191 */ u8 slotNeutralized[21]; /* [0x2F5] nonzero: btlGetAffinity clears the affinity flags of an attack of the slot's kind */
     /* 0x1A6 */ u8 levels[21];      /* [0x30A] values >> 10 */
     /* 0x1BB */ u8 unk1BB[3];
     /* 0x1BE */ s16 actionKind;     /* [0x322] the action the unit takes next */
@@ -108,7 +108,7 @@ struct BtlCombatantEntryA {
     /* 0x13C */ s16 modifiers[9];
     /* 0x14E */ u8 unk14E[2];
     /* 0x150 */ u32 modifierFlags;
-    /* 0x154 */ u8 unk154[4];
+    /* 0x154 */ s32 weakSlot;     /* a 1-based slot btlGetAffinity compares the attack's slot with, 0 for none */
     /* 0x158 */ s32 targetDelay;    /* positive: not selectable yet */
     /* 0x15C */ u8 unk15C[8];
     /* 0x164 */ BtlUnitDataA data;

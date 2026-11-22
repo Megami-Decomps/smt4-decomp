@@ -14,7 +14,7 @@ typedef struct {
 extern unsigned int g_fsWaitNotification3; /* 0x4d42c8 */
 extern unsigned int DAT_004d42d8; /* 0x4d42d8 */
 
-extern int FUN_00129584(unsigned int *, unsigned int);
+extern int modelWorkListAppend(unsigned int *, unsigned int);
 extern int FUN_0013af84(unsigned int);
 /* Supplied declaration required: sysReportCheckFailure. */
 
@@ -26,7 +26,7 @@ void FUN_001270a8(unsigned int param_1)
   int temp_v0;
   
   DAT_004d42d8 = param_1;
-  temp_v0 = FUN_00129584(&g_fsWaitNotification3,0x209);
+  temp_v0 = modelWorkListAppend(&g_fsWaitNotification3,0x209);
   if (temp_v0 < 0) {
     sysReportCheckFailure(temp_v0,0x1270cc);
   }

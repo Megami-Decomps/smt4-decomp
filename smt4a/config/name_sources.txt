@@ -8841,3 +8841,29 @@
 003774e8 relicSearchDraw inferred draws the partner relic search (w76-f2)
 0058800c g_scrConditionRejected inferred set by the condition script when an entry is rejected (w76-f2)
 005713f0 g_btlSkillResponseMasks evidence size:0x118 sizeof(BattleSkillResponseMasks) is asserted 0x118 and the object ends at g_btlCamera; retail pool words DAT_00571420/DAT_00571480 are +0x30/+0x90 into it (w76-o4)
+00235b08 soundActorQueueReset inferred exact twin of smt4 soundActorQueueReset
+003758d8 skillListCompareBySortKeyDescending inferred near twin of smt4 skillListCompareBySortKeyDescending (tools/shared.py)
+00244acc cullVolumeTableClear inferred twin of smt4 cullVolumeTableClear (same 160-record clear)
+00154ca4 renderBindDisplay inferred exact twin of smt4 renderBindDisplay
+0035dfc0 table5Type9MarkEntrySeen inferred near twin of smt4 table5Type9MarkEntrySeen
+002e34a4 mapCollisionGetStoredVectors inferred twin of smt4 mapCollisionGetStoredVectors (w77-o3)
+005ed314 g_mapCollisionVectors inferred twin of smt4 g_mapCollisionVectors (the four stored collision vectors mapCollisionGetStoredVectors copies)
+00493d88 contentCompareKindValueAscending inferred exact twin of smt4 contentCompareKindValueAscending
+004943bc contentCompareKindValueDescending inferred exact twin of smt4 contentCompareKindValueDescending
+00406ad4 moriSceneInitColorLists inferred gives the model scene its default colour slots and eight-item lists (Model/MoriModelScene) (w77-o4)
+004a0f5c fieldPickRecoveryCaster inferred picks and charges the caster of the field recovery skill 0x8C (w77-o4)
+004c3db4 battleAddEnemyRewards inferred adds a defeated enemy's experience, money and item drops (w77-o4)
+004c8340 btlGetAffinity inferred the affinity of a battle unit to an attack (w77-o4)
+004ea200 btlActionPickModeForTargets inferred picks the unit's action mode for the candidate targets and marks them (w77-o4)
+003edca0 battleTryRecruitEnemy inferred decides whether a battle enemy can be recruited (w77-o4)
+004a0524 fieldWalkRecoverHp inferred per-step HP recovery while walking, as smt4 fieldWalkRecoverHp (w77-o4)
+00381874 effMenuBrowserStep inferred near twin of smt4 effMenuBrowserStep
+003ef1e4 btlDecideEnemyFlee inferred decides whether the battle's enemies flee (w77-f1)
+002cea78 vectorScratchCatmullRom inferred exact twin of smt4 vectorScratchCatmullRom
+003da030 uniteEffectDraw inferred smt4 uniteEffectDraw's twin plus Apocalypse's captions; registered as the "TMD DDRAW" draw (w77-f2)
+002199fc uniteEffectDrawMaterial inferred the callee in uniteEffectDraw's place of smt4 uniteEffectDrawMaterial, same arguments (w77-f2)
+0052f330 g_uniteMaterialCues2 inferred twin of smt4 g_uniteMaterialCues2 (uniteEffectDraw's two-material cue table)
+0052f340 g_uniteMaterialCues3 inferred twin of smt4 g_uniteMaterialCues3 (three-material cue table)
+0052f350 g_uniteMaterialCues4 inferred twin of smt4 g_uniteMaterialCues4 (four-material cue table)
+004cab9c btlRosterMotionSyncStatus inferred synchronizes a roster motion with its unit's status and rebuilds the condition list (w77-f2)
+00230d30 statusDownRebuildTouchRegions inferred twin of smt4 statusDownRebuildTouchRegions (one name for the twins, w77-f2)

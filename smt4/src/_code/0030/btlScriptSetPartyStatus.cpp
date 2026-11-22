@@ -1,4 +1,5 @@
-/* NON_MATCHING: only the apply-path target calculation uses r1/r0/r5 instead of retail r0/r1/ip (112/112 rows). */
+/* NON_MATCHING: written as the Apocalypse twin (IDENTICAL); only the apply call's action address differs: retail
+ * loads the actions base into r1 and builds the address before the stacked-argument ldm, the build uses r2 after it. */
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
@@ -7,8 +8,6 @@
 #include "script/ScriptArgs.h"
 
 struct BtlUnit;
-
-// The legacy entry-state header does not expose the action table's earlier slot.
 
 extern "C" {
 extern u32 g_btlScriptUnit;
@@ -30,28 +29,22 @@ u32 btlScriptSetPartyStatus()
     s32 checkResistance = scrGetArg(2);
     BtlUnit* source = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     BtlMainState* state = btlGetMainState();
-    BtlMainState* table = reinterpret_cast<BtlMainState*>(state);
-    u32 mask = 1u << status;
-
     for (s32 slot = 0; slot < 4; ++slot) {
         BtlEntry* entry = &state->entries[slot];
-        if (!(entry->flags & BTL_ENTRY_FLAG_ACTIVE) ||
-            (entry->flags & BTL_ENTRY_FLAG_BLOCKED) || entry->ids[0] < 0) {
-            continue;
-        }
-        if (apply && checkResistance &&
-            (btlSkillHitFlags(entry->ids[0], FUN_002463e8(status), 2, -1) &
-             0x10000)) {
-            FUN_00246080(0, 0, source,
-                         &table->actions[entry->ids[0]], 4);
-            btlQueueKeyedScalarReflectAction(0, source, 0x10001ea, 0, 1, 0, 0);
-            continue;
-        }
-        if (!apply) {
-            FUN_00246d38(0, source, &table->actions[entry->ids[0]], mask);
-        } else {
-            FUN_00246e24(0, source, &table->actions[entry->ids[0]], mask, 1);
-            btlQueueKeyedScalarReflectAction(0, source, 0x10001bd, 0, 0, 0, 0);
+        if ((entry->flags & BTL_ENTRY_FLAG_ACTIVE) &&
+            !(entry->flags & BTL_ENTRY_FLAG_BLOCKED) && entry->ids[0] >= 0) {
+            if (!apply) {
+                FUN_00246d38(0, source, &state->actions[entry->ids[0]], 1u << status);
+            } else {
+                if (checkResistance &&
+                    (btlSkillHitFlags(entry->ids[0], FUN_002463e8(status), 2, -1) & 0x10000)) {
+                    FUN_00246080(0, 0, source, &state->actions[entry->ids[0]], 4);
+                    btlQueueKeyedScalarReflectAction(0, source, 0x10001ea, 0, 1, 0, 0);
+                    continue;
+                }
+                FUN_00246e24(0, source, &state->actions[entry->ids[0]], 1u << status, 1);
+                btlQueueKeyedScalarReflectAction(0, source, 0x10001bd, 0, 0, 0, 0);
+            }
         }
     }
     return 1;

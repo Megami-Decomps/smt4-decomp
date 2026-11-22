@@ -15,7 +15,7 @@ int counterIncrementSaturating(...);
 int FUN_004bf9a0(...);
 int source4CCopyHalves(...);
 int FUN_004c60c0(...);
-int FUN_004c8340(...);
+int btlGetAffinity(...);
 int VectorSignedToFloat(...);
 
 typedef struct fn_004bfcfc_arg2 fn_004bfcfc_arg2;
@@ -83,7 +83,7 @@ extern int FUN_0028cb6c(void);
 /* Supplied declaration required: source4CCopyHalves. */
 extern unsigned int mapCategoryToDestinationGroup(unsigned int);
 /* Supplied declaration required: FUN_004c60c0. */
-/* Supplied declaration required: FUN_004c8340. */
+/* Supplied declaration required: btlGetAffinity. */
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -206,7 +206,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
     temp_v37 = 1;
   }
   temp_v7 = temp_v41;
-  FUN_004c8340(temp_v41,param_5,temp_v8,(int)(short)temp_v20,0xffffffff);
+  btlGetAffinity(temp_v41,param_5,temp_v8,(int)(short)temp_v20,0xffffffff);
   temp_v31 = temp_v7;
   if (param_7 == 0) {
     if (temp_v37 != 0) {
@@ -341,7 +341,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
           temp_v39 = puVar4 + 0x99;
           do {
             temp_v8 = temp_v41;
-            FUN_004c8340(temp_v41,param_5,temp_v19[temp_v6],*(unsigned char *)(param_1 + 0x23),
+            btlGetAffinity(temp_v41,param_5,temp_v19[temp_v6],*(unsigned char *)(param_1 + 0x23),
                          0xffffffff);
             temp_v28[temp_v6] = temp_v8;
             temp_v8 = param_5;

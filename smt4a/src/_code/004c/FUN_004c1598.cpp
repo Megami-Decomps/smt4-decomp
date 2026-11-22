@@ -6,7 +6,7 @@
 #include "battle/BtlGlobals.h"
 extern "C" {
 void btlEntryBuildSummary(BattleActionEvaluation *result, BtlMainStateA *state, BtlCombatantEntryA *actor);
-u32 FUN_004c8340(u32 actor, u32 target, u32 skill, s32 kind, s32 flags);
+u32 btlGetAffinity(u32 actor, u32 target, u32 skill, s32 kind, s32 flags);
 void kindIdStore(u32 skill, u32 *kind);
 s32 FUN_004c0f74(BtlCombatantEntryA *actor, u32 kind);
 f32 FUN_004c28b4(u32 actor, u32 skill);
@@ -22,7 +22,7 @@ f32 FUN_004c1598(u32 actorId, u32 targetId)
     u16 skill = evaluation.skill;
     if ((u32)(evaluation.kind - 3) <= 7)
         return multiplier;
-    u32 result = FUN_004c8340(actorId, targetId, skill, evaluation.kind, -1);
+    u32 result = btlGetAffinity(actorId, targetId, skill, evaluation.kind, -1);
     s32 percentage = (u16)result;
     if ((result & 0x60000) && percentage == 0)
         percentage = 100;

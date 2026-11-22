@@ -50,7 +50,7 @@ extern BattleActionMasks g_btlAction;
 
 void *asdOperatorNewD(u32 bytes);
 void asdOperatorDeleteC(void *block);
-u32 FUN_004c8340(u32 a, s32 id, u32 b, u32 c, u32 d);
+u32 btlGetAffinity(u32 a, s32 id, u32 b, u32 c, u32 d);
 u32 FUN_004c60c0(s32 id, u32 b);
 void FUN_004fdb18(u32 arg0, u32 arg1, ReactionRoster *record, u32 mask, u32 flag);
 void *btlMainFindEntryByListedId(ReactionBattle *battle, s32 unit);
@@ -72,7 +72,7 @@ void FUN_004e5830(ReactionOwner *owner, u32 arg1, u32 arg2)
         if ((entry->mask & g_btlAction.entryMask) && !(entry->mask & g_btlAction.disableMask) &&
             (entry->flags & 0x400) == 0) {
             if ((entry->flags & 0x200) == 0) {
-                u32 first = FUN_004c8340(0xFFFFFFFF, entry->id, 15, 2, 0xFFFFFFFF);
+                u32 first = btlGetAffinity(0xFFFFFFFF, entry->id, 15, 2, 0xFFFFFFFF);
                 u32 second = FUN_004c60c0(entry->id, 15);
                 if (((first | second) & 0x170000) == 0) {
                     noneFound = 0;

@@ -27,7 +27,7 @@ typedef char BattleCommandSlotSizeCheck[sizeof(BattleCommandSlot) == 0x1254 ? 1 
 
 extern "C" {
 u32 FUN_004ea0c0(BattleEventOwnerRef *owner, const BattleEventCandidate *candidate);
-s32 FUN_003edca0(BtlMainStateA *state);
+s32 battleTryRecruitEnemy(BtlMainStateA *state);
 BtlCombatantEntryA *FUN_003e81bc(BtlMainStateA *state);
 
 // Finish this action slot, queuing the recovery command when the event permits it.
@@ -41,7 +41,7 @@ void FUN_004eb740(BtlMainStateA **reference, const BattleEventCandidate *candida
         reinterpret_cast<BattleCommandSlot *>(g_btlAction.slots)[(*reference)->unitRecord.currentSlot].setCommand(0x24);
         return;
     }
-    if (FUN_003edca0(*reference)) {
+    if (battleTryRecruitEnemy(*reference)) {
         BtlCombatantEntryA *entry = FUN_003e81bc(*reference);
         BtlMainStateA *state = *reference;
         f32 value; // Never set before use, as in the original.

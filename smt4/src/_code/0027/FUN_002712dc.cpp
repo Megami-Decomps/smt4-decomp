@@ -32,7 +32,7 @@ void lmapIntroSceneStep(void);
 void FUN_002ea500(void);
 void FUN_002d424c(void);
 void FUN_002d4874(void);
-void FUN_0021df18(void);
+void mapGimicRequestNearestOfKind(void);
 void mapFastModelCreate(f32 x, f32 y, f32 z, f32 heading);
 
 
@@ -736,7 +736,7 @@ void FUN_002712dc(void)
             break;
         case 1:
             if (++g_lmapScene->stateTime > 10) {
-                FUN_0021df18();
+                mapGimicRequestNearestOfKind();
                 soundPlaySeUnpanned(0x10000c0);
                 lmapSceneNextState();
             }

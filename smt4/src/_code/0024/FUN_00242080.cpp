@@ -9,7 +9,7 @@
 
 extern "C" {
 extern const char DAT_00400002;
-void FUN_002f82ac(EffectTextRequest *request);
+void effMenuBrowserStep(EffectTextRequest *request);
 s32 formattedTextCopyLabel(EffectTextRequest *request, char *buffer);
 s32 linkedObjGetValue(EffectTextRequest *request);
 void effectEditorObjectDestroy(EffectTextRequest *request);
@@ -31,7 +31,7 @@ u32 FUN_00242080(u32 flags)
     result.state = 0;
     char generalLabel[104];
     if (g_effectEditor.nodeList != NULL) {
-        FUN_002f82ac(g_effectEditor.request);
+        effMenuBrowserStep(g_effectEditor.request);
         result.state = g_effectEditor.request->state;
         result.kind = formattedTextCopyLabel(g_effectEditor.request, result.label);
         result.index = linkedObjGetValue(g_effectEditor.request);

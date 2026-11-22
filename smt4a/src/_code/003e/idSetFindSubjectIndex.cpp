@@ -1,28 +1,22 @@
-/* NON_MATCHING: result-set and requested-ID registers are swapped (retail r2/r1, compiled r1/r2); loop structure and operations otherwise match. */
-#include "common.h"
+/* NON_MATCHING: the member id and the entry swap r1/r2 in the search (retail: entry r2, id r1), as in IV's twin; both
+ * are IDENTICAL in a `--multifile` run with btlMainFindEntryByListedId or with `--fpu=softvfp` (config proposals). */
+#include "battle/btlAction.h"
+#include "battle/BtlEntryLookup.h"
 
-struct ContentIdSubject {
-    u8 unk00[0x6a]; // 0x00
-    s16 id;          // 0x6a
-};
+extern "C" {
 
-struct ContentIdSet {
-    u8 unk00[8]; // 0x00
-    s16 ids[50];  // 0x08
-};
-
-extern "C" ContentIdSet* btlMainFindEntryByListedId(void* context, s32 id);
-
-// Resolve the subject's ID set and return the matching slot, or -1.
-extern "C" s32 idSetFindSubjectIndex(void* context, const ContentIdSubject* subject)
+/* Returns the position of the action's member within its combatant entry, or -1 when absent. */
+s32 idSetFindSubjectIndex(BtlMainStateA *state, const BtlActionRecord *action)
 {
-    ContentIdSet* set = btlMainFindEntryByListedId(context, subject->id);
-    if (set != NULL) {
+    BtlCombatantEntryA *entry = btlMainFindEntryByListedId(state, action->apocalypse.memberId);
+    if (entry != NULL) {
         for (s32 index = 0; index < 50; ++index) {
-            if (subject->id == set->ids[index]) {
+            if (action->apocalypse.memberId == entry->ids[index]) {
                 return index;
             }
         }
     }
     return -1;
 }
+
+} /* extern "C" */

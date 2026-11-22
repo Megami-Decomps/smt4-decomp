@@ -1,4 +1,8 @@
-/* NON_MATCHING: ARMCC stack-spills the battle owner instead of keeping r9 and lowers motion-state branches and masked-color interpolation differently. */
+/* NON_MATCHING: 665 lines (531 by shape). Retail keeps the battle state in r9 and has no stack frame: it reloads
+ * 0xFFFF, 0x3DC2, the clear mask's and the effect settings' addresses where they are used. This build keeps one of
+ * those constants in a callee-saved register and spills the battle state instead (`ldr r0, [sp]` at every call),
+ * which also renumbers the zero and camera registers. The blocks, calls and tests follow retail; the end-of-shake
+ * block is btlRosterMotionSyncStatus's body and its status test hasAnyOf3DC2's, both inlined by retail (one file, btlUnit.cpp). */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
@@ -7,6 +11,7 @@
 #include <stddef.h>
 #include "battle/BtlEntryLookup.h"
 #include "battle/btlCamera.h"
+#include "battle/BattleHelpers_VariantB.h"
 
 typedef char CheckRosterMotionHandle[offsetof(BattleRosterMotionA, handle) == 0x1BC ? 1 : -1];
 typedef char CheckRosterMotionSelection[offsetof(BattleRosterMotionA, selection) == 0x128 ? 1 : -1];
@@ -21,7 +26,6 @@ s32 idSetFindSubjectIndex(BtlMainStateA *battle, const BattleRosterRecordA *reco
 u32 randBetween(u32 minimum, u32 maximum);
 void *stateEntryFindById(BtlMainStateA *battle, s32 id);
 f32 asdAnimGetTrackLastFrame(void *animation, u32 track);
-s32 btlScriptUnitHasFlags(void);
 BattleMotionSelection *btlMotionFindSelection(BtlMainStateA *battle, u32 id); // declcheck: local (the shared declaration does not compile here or changes this unit)
 s32 btlMotionFindSequence(BtlMainStateA *battle, s32 kind, u32 action); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void FUN_003f2638(BtlMainStateA *battle, u32 action, BattleRosterRecordA *record, u32 flags);
@@ -40,6 +44,15 @@ void callOnHandleField4C(BattleMotionHandle **handle, f32 x, f32 y, f32 z);
 void setHandleEnabled(BattleMotionHandle **handle, u32 enabled);
 void FUN_004cb394(BtlMainStateA *battle, BattleRosterRecordA *record);
 void battleUpdateRotatingObjects(void *selection);
+
+/* hasAnyOf3DC2's body, which retail inlines late (the mask stays a pool word tested with tst). */
+static u8 statusHasAnyOf3DC2(u32 mask)
+{
+    if (mask & 0x3DC2) {
+        return 1;
+    }
+    return 0;
+}
 
 /* Advance active roster motion, model handles, and independent color/alpha transitions. */
 u32 battleRosterMotionUpdate(u32 job)
@@ -79,7 +92,7 @@ u32 battleRosterMotionUpdate(u32 job)
             break;
         case 1:
             if ((motion.flags & 0x200000) != 0) {
-                if (btlScriptUnitHasFlags()) {
+                if (btlScriptUnitHasFlags(battle)) {
                     if (motion.pending == 0 && motion.pendingAlternate == 0) {
                         battleRosterMotionEndRequest(&motion);
                     }
@@ -94,9 +107,7 @@ u32 battleRosterMotionUpdate(u32 job)
                             battleRosterMotionEndRequest(&motion);
                         }
                     } else if (motion.pending == 0 && motion.pendingAlternate == 0) {
-                        motion.applied = 0;
-                        motion.appliedAlternate = 0;
-                        motion.flags &= ~0x400000;
+                        battleRosterMotionEndRequest(&motion);
                     }
                 }
                 motion.state = 0;
@@ -109,7 +120,7 @@ u32 battleRosterMotionUpdate(u32 job)
                     displacement = -displacement;
                 }
                 motion.offset = displacement;
-                if (motion.stateFrame < motion.motionDuration) {
+                if (motion.motionDuration > motion.stateFrame) {
                     f32 angle = (((f32)motion.stateFrame * 1.5707964f) /
                                  (f32)motion.motionDuration) * 40.743664f;
                     motion.amount = (1.0f - FUN_001a1ee0(angle)) * motion.amplitude;
@@ -125,28 +136,29 @@ u32 battleRosterMotionUpdate(u32 job)
                     for (u32 marker = 0; marker < 5; ++marker) {
                         motion.markers[marker] = 0;
                     }
+                    /* btlRosterMotionSyncStatus's body: synchronizes the motion with its unit's status and rebuilds the condition list */
                     subject = btlFindEntryBlockByMemberId(btlGetMainState(), motion.group);
                     if (subject != NULL) {
-                        if ((subject->statusFlags & 0x180) != 0) {
+                        if (subject->statusFlags & 0x180) {
                             btlGetMainState();
                             motion.state = 3;
                             motion.stateFrame = 0;
                             motion.motionDuration = 0;
-                        } else if ((motion.flags & 0x80) != 0) {
+                        } else if (motion.flags & 0x80) {
                             motion.state = 0;
                             motion.stateFrame = 0;
                             motion.motionDuration = 0;
-                            BtlMainStateA *current = btlGetMainState();
+                            BtlMainStateA *state = btlGetMainState();
                             if (motion.unitIndex >= 0) {
-                                current->entries[motion.unitIndex].flags &= ~g_battleMotionCombatantClearMask;
+                                state->entries[motion.unitIndex].flags &= ~g_battleMotionCombatantClearMask;
                             }
                         }
-                        if ((subject->statusFlags & 0x3DC2) != 0) {
+                        if (statusHasAnyOf3DC2(subject->statusFlags)) {
                             halfRecClear(btlGetMainState(), subject);
                         }
                         if (motion.unitIndex >= 0) {
-                            BtlMainStateA *current = btlGetMainState();
-                            if (&current->entries[motion.unitIndex] != NULL) {
+                            BtlCombatantEntryA *unit = &btlGetMainState()->entries[motion.unitIndex];
+                            if (unit != NULL) {
                                 flagSelectionRebuild(motion.selection, subject->statusFlags);
                             }
                         }
@@ -157,23 +169,25 @@ u32 battleRosterMotionUpdate(u32 job)
         case 2:
             if ((motion.flags & 0x400) != 0 && (motion.flags & 0x10) == 0 &&
                 (motion.flags & 2) != 0) {
-                f32 previous = motion.phase;
-                f32 speed = motion.phaseSpeed;
-                f32 displacement = motion.amount * previous;
-                if (speed >= 0.0f) {
+                f32 displacement;
+                if (motion.phaseSpeed >= 0.0f) {
+                    f32 step = (1.0f - motion.phase) * motion.phaseSpeed;
                     motion.phaseSpeed += g_battleEffectSettings.motion.growingAcceleration;
-                    motion.phase = previous + (1.0f - previous) * speed;
+                    displacement = motion.amount * motion.phase;
+                    motion.phase += step;
                     if (motion.phase >= 0.99f) {
                         motion.phaseSpeed = motion.motionScale * -0.6f;
                     }
                 } else {
+                    f32 step = motion.phase * -motion.phaseSpeed;
                     motion.phaseSpeed += g_battleEffectSettings.motion.shrinkingAcceleration;
-                    motion.phase = previous + previous * speed;
+                    displacement = motion.amount * motion.phase;
+                    motion.phase -= step;
                     if (motion.phase <= 0.01f) {
+                        displacement = 0.0f;
                         motion.state = 0;
                         motion.stateFrame = 0;
                         motion.motionDuration = 0;
-                        displacement = 0.0f;
                     }
                 }
                 motion.offset = displacement;

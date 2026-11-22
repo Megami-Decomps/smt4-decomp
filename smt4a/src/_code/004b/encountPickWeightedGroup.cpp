@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail stores `selected`'s zero after copying excludeSpecial (ours before) and swaps the registers of the choice count and the entry pointer (r8/r9). */
+/* NON_MATCHING: retail stores `selected`'s zero after copying excludeSpecial (ours before); the rest matches. */
 #include "gamedata/EncountData.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/NkmEnemyRecord.h"
@@ -24,11 +24,10 @@ u32 encountPickWeightedGroup(s32 tableIndex, s32 excludeSpecial)
     s32 total = 0;
     s32 choiceCount = 30; /* the table's encounter choices */
     for (s32 index = 0; index < choiceCount; ++index) {
-        EncountChoice *entry = &table->choices[index];
-        if (entry->groupId != 0) {
+        if (table->choices[index].groupId != 0) {
             bool excluded = false;
             if (excludeSpecial) {
-                EncountGroupRecordA *group = dataTable02GetRecordWithAocPackage(entry->groupId);
+                EncountGroupRecordA *group = dataTable02GetRecordWithAocPackage(table->choices[index].groupId);
                 for (s32 member = 0; member < 6; ++member) {
                     if (group->enemyIds[member] != 0) {
                         NkmEnemyRecordA *record = nkmEnemyFindById(group->enemyIds[member]);
@@ -40,7 +39,7 @@ u32 encountPickWeightedGroup(s32 tableIndex, s32 excludeSpecial)
                 }
             }
             if (!excluded)
-                total += entry->weight;
+                total += table->choices[index].weight;
         }
     }
     s32 choice = randRange((u16)(total - 1));

@@ -5,7 +5,7 @@ extern "C" {
 void asdGfxSetMode(s32 mode);
 void asdGfxBindTarget(u32 value);
 void asdGxCmdBufferFinalizeBlock(void);
-void FUN_00154ca4(AsdGxDisplayBuffers* ring, s32 enabled);
+void renderBindDisplay(AsdGxDisplayBuffers* ring, s32 enabled);
 void FUN_00161694(s32 mode);
 
 // Submit the previous presets, optionally refresh them, then advance each ring.
@@ -29,9 +29,9 @@ void asdGxSwapDisplayBuffers(s32 refresh, s32 secondaryEnabled)
     asdGfxBindTarget(value);
     if (refresh) {
         asdGxCmdBufferFinalizeBlock();
-        FUN_00154ca4(primary, 1);
-        FUN_00154ca4(secondaryPreset, secondaryEnabled);
-        FUN_00154ca4(output, 1);
+        renderBindDisplay(primary, 1);
+        renderBindDisplay(secondaryPreset, secondaryEnabled);
+        renderBindDisplay(output, 1);
     }
     FUN_00161694(0x402);
     primary->index = (primary->index + 1) % primary->count;

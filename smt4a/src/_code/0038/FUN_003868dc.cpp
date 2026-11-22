@@ -20,7 +20,7 @@ int FUN_0033f9f4(void);
 int soundActorStartOnFreeChannel(int);
 int gameCounterAddSaturating(int, int);
 int FUN_004a01c8(int, int);
-int FUN_004a0524(void);
+int fieldWalkRecoverHp(void);
 int FUN_004a08f0(void);
 int __hardfp_atan2f(void);
 int SBORROW4(int, int);
@@ -59,7 +59,7 @@ extern unsigned int FUN_0029202c(void);
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: FUN_004a01c8. */
-/* Supplied declaration required: FUN_004a0524. */
+/* Supplied declaration required: fieldWalkRecoverHp. */
 /* Supplied declaration required: FUN_004a08f0. */
 extern int partyAnyMemberHasFlagBit(unsigned int, unsigned int);
 /* Supplied declaration required: __hardfp_atan2f. */
@@ -284,7 +284,7 @@ void FUN_003868dc(int param_1)
       *(float *)(temp_v0 + 0xdf0) = temp_v7;
       if ((int)temp_v7 >= 0x44bb8001) {
         *(float *)(temp_v0 + 0xdf0) = temp_v7 - temp_v11;
-        FUN_004a0524();
+        fieldWalkRecoverHp();
         FUN_004a08f0();
       }
       temp_v11 = *(float *)(temp_v0 + 0xdf8) + temp_v8;

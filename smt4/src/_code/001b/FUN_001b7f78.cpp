@@ -264,13 +264,13 @@ int naviClearObjectBlock(void);
 int FUN_0027d968(void);
 int gameSaveSetBattleResultCode(...);
 int sequenceRequestClearDeferred(void);
-int FUN_00281788(void);
+int cullVolumeTableClear(void);
 int gameRestoreWorkSave(int);
 int FUN_002f3694(void);
 int MapIf_Register(unsigned int, int);
 int VectorSignedToFloat(...);
 int mapIfResetTimer(void);
-int FUN_001a9510(void);
+int soundActorQueueReset(void);
 int mapObjSelectFirstEntry(void);
 
 extern unsigned char LAB_00305f61; /* 0x305f61 */
@@ -609,7 +609,7 @@ extern int mapDepartIsRunning(void);
 /* Supplied declaration required: frameTexConfigureCaptureTextures. */
 /* Supplied declaration required: FUN_00280ccc. */
 /* Supplied declaration required: FUN_00281784. */
-/* Supplied declaration required: FUN_00281788. */
+/* Supplied declaration required: cullVolumeTableClear. */
 /* Supplied declaration required: mapSpawnActiveSlotEffects. */
 /* Supplied declaration required: FUN_002849a4. */
 /* Supplied declaration required: FUN_0028527c. */
@@ -705,7 +705,7 @@ extern int FUN_00328b1c(int);
 /* Supplied declaration required: mapIfResetTimer. */
 /* Supplied declaration required: mapEnemyStopJob. */
 /* Supplied declaration required: mapRangeWorkReset. */
-/* Supplied declaration required: FUN_001a9510. */
+/* Supplied declaration required: soundActorQueueReset. */
 /* Supplied declaration required: mapEnemySelectUpdatePhase. */
 /* Supplied declaration required: mapEnemyResetUpdateState. */
 /* Supplied declaration required: mapDepartRequest. */
@@ -804,9 +804,9 @@ unsigned int FUN_001b7f78(void)
     DAT_0049f941 = 1;
     DAT_0049fba0 = '\0';
     mapIfResetTimer();
-    FUN_00281788();
+    cullVolumeTableClear();
     mapObjSelectFirstEntry();
-    FUN_001a9510();
+    soundActorQueueReset();
     MapIf_Register(*puVar14,0);
     *(unsigned char *)((int)puVar14 + 0xba) = 0;
     *(unsigned char *)(puVar14 + 0x11) = 0;

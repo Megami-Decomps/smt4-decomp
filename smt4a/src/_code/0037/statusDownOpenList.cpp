@@ -10,7 +10,7 @@ extern "C" {
 extern void ifTouchRegionRemove(void);
 extern void __aeabi_memset4(void *dst, int size, u32 value);
 extern void gridNavigationConfigure(ScrollSelection *list, s32 count, s32 visible, s32 columns, s32 wrap, s32 alternateKeys);
-extern void statusDownRegisterTouchRegions(void);
+extern void statusDownRebuildTouchRegions(void);
 extern void scrollListSetSelectionTracked(ScrollSelection *list, s32 index);
 extern s32 gridNavigationGetItemCount(ScrollSelection *list);
 
@@ -36,7 +36,7 @@ void statusDownOpenList(u32 argA, u32 argB)
     previous = status->track.state;
     status->track.state = 0xE;
     status->track.previous = previous;
-    statusDownRegisterTouchRegions();
+    statusDownRebuildTouchRegions();
 }
 
 } /* extern "C" */

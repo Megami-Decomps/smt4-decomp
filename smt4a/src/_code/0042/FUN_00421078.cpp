@@ -8,7 +8,7 @@ void FUN_00421078(ModelStatePlayer *player)
     FUN_00421858(player);
     Obj557b18 *model = modelStateOwnerGetModel(player->owner, 0);
     if (model != NULL) {
-        u32 name = FUN_003fdadc();
+        u32 name = FUN_003fdadc(model);
         u32 motion = ownerSlotSetText(model, name);
         if (motion != MODEL_MOTION_NONE) {
             motionPlayerStartBlended(model, motion, 2, 0.0f, 0.0f);

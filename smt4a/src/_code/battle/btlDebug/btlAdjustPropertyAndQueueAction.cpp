@@ -15,7 +15,7 @@ int gameCounterAddSaturating(...);
 
 int btlCombatantGetSummaryValues(...);
 int btlAdjustPropertyClamped(...);
-int FUN_004c8340(...);
+int btlGetAffinity(...);
 int btlQueueActionMessage(...);
 int FUN_004fd0ec(...);
 int FUN_004fd3f0(int, unsigned int, int);
@@ -69,7 +69,7 @@ extern int btlStatusFlagsHaveAilment(int);
 extern short btlFindEntryValue(int, unsigned int);
 /* Supplied declaration required: btlCombatantGetSummaryValues. */
 /* Supplied declaration required: btlAdjustPropertyClamped. */
-/* Supplied declaration required: FUN_004c8340. */
+/* Supplied declaration required: btlGetAffinity. */
 extern int btlUnitGet(unsigned int);
 /* Supplied declaration required: btlQueueActionMessage. */
 /* Supplied declaration required: FUN_004fd0ec. */
@@ -462,7 +462,7 @@ LAB_004fca64:
       btlCombatantGetSummaryValues((int)*(short *)(temp_v24 + 0x6a),temp_v14 + 1,temp_v14 + 3);
       temp_v14[0] = -1;
       temp_v6 = (unsigned int)*(short *)(temp_v24 + 0x6a);
-      FUN_004c8340(temp_v6,(int)*(short *)(param_4 + 0x6a),temp_v14[1],temp_v14[3]);
+      btlGetAffinity(temp_v6,(int)*(short *)(param_4 + 0x6a),temp_v14[1],temp_v14[3]);
       temp_v4 = reinterpret_cast<int>(btlQueueReflectAction(g_btlActionReflect,temp_v3,0,param_2));
       *(unsigned char *)(temp_v4 + 4) = 8;
       *(int *)(temp_v4 + 0x14) = param_4;
@@ -483,7 +483,7 @@ LAB_004fca64:
           btlCombatantGetSummaryValues((int)*(short *)(temp_v24 + 0x6a),temp_v14 + 1,temp_v14 + 2);
           temp_v14[0] = -1;
           temp_v6 = (unsigned int)*(short *)(temp_v24 + 0x6a);
-          FUN_004c8340(temp_v6,(int)*(short *)(param_4 + 0x6a),temp_v14[1],temp_v14[2]);
+          btlGetAffinity(temp_v6,(int)*(short *)(param_4 + 0x6a),temp_v14[1],temp_v14[2]);
           if ((temp_v6 & 0x800000) != 0) {
             gameCounterAddSaturating(0x2d,1);
           }

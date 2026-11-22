@@ -6,7 +6,7 @@ extern "C" {
 extern u32 g_btlScriptUnit;
 s32 scrGetArg(s32 index);
 u32 FUN_004bf9a0(u32 category);
-u32 FUN_004c8340(s32 unit, u32 options, u32 slot, s32 mode, s32 fallback);
+u32 btlGetAffinity(s32 unit, u32 options, u32 slot, s32 mode, s32 fallback);
 void FUN_004fda78(s32 actor, s32 secondary, u32 options, void *target, s32 value, u16 extraId);
 u32 FUN_004fdb18(s16 actor, u32 options, BattleRosterRecordA *target, u32 mask, s32 checkStatus);
 u32 FUN_004fcffc(s16 actor, u32 options, void *target, u32 mask);
@@ -25,7 +25,7 @@ u32 FUN_0038ddb0(void)
         FUN_004fcffc(0, options, battle->roster, 1u << status);
     } else {
         if (checkResistance &&
-            (FUN_004c8340(-1, 0, FUN_004bf9a0(status), 2, -1) & 0x10000)) {
+            (btlGetAffinity(-1, 0, FUN_004bf9a0(status), 2, -1) & 0x10000)) {
             FUN_004fda78(0, 0, options, battle->roster, 4, 0);
             btlQueueActionMessage(0, options, reinterpret_cast<void *>(0x100028c), 0, 1, 0, 0);
         } else {

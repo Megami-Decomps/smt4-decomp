@@ -33,9 +33,8 @@ void FUN_00170054(void)
         g_nngxState.nameReady = 1;
     }
     {
-        const u16 *name = g_nngxState.name;
 
-        srvGetServiceHandle(&g_nngxDefaultCommandState, name, libc_strlen(name), 0);
+        srvGetServiceHandle(&g_nngxDefaultCommandState, g_nngxState.name, libc_strlen(g_nngxState.name), 0);
     }
     g_nngxState.unk14 = g_nngxState.unk10;
     nn_gxlow_CTR_Gpu_AcquireRight(&g_nngxGpu, g_nngxCommandState1, g_nngxState.gpuRightFlag);

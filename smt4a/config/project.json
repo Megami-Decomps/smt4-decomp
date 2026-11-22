@@ -28323,12 +28323,12 @@
     },
     {
       "address": "0x154ca4",
-      "function": "FUN_00154ca4",
+      "function": "renderBindDisplay",
       "module": "_code",
-      "object": "build/obj/_code/0015/FUN_00154ca4.o",
+      "object": "build/obj/_code/0015/renderBindDisplay.o",
       "size": 192,
-      "source": "src/_code/0015/FUN_00154ca4.cpp",
-      "target": "orig/target/_code/0015/FUN_00154ca4.o",
+      "source": "src/_code/0015/renderBindDisplay.cpp",
+      "target": "orig/target/_code/0015/renderBindDisplay.o",
       "thumb": false
     },
     {
@@ -55876,12 +55876,12 @@
     },
     {
       "address": "0x2199fc",
-      "function": "FUN_002199fc",
+      "function": "uniteEffectDrawMaterial",
       "module": "_code",
-      "object": "build/obj/_code/0021/FUN_002199fc.o",
+      "object": "build/obj/_code/0021/uniteEffectDrawMaterial.o",
       "size": 2580,
-      "source": "src/_code/0021/FUN_002199fc.cpp",
-      "target": "orig/target/_code/0021/FUN_002199fc.o",
+      "source": "src/_code/0021/uniteEffectDrawMaterial.cpp",
+      "target": "orig/target/_code/0021/uniteEffectDrawMaterial.o",
       "thumb": false
     },
     {
@@ -57452,12 +57452,12 @@
     },
     {
       "address": "0x230d30",
-      "function": "statusDownRegisterTouchRegions",
+      "function": "statusDownRebuildTouchRegions",
       "module": "_code",
-      "object": "build/obj/_code/0023/statusDownRegisterTouchRegions.o",
+      "object": "build/obj/_code/0023/statusDownRebuildTouchRegions.o",
       "size": 1792,
-      "source": "src/_code/0023/statusDownRegisterTouchRegions.cpp",
-      "target": "orig/target/_code/0023/statusDownRegisterTouchRegions.o",
+      "source": "src/_code/0023/statusDownRebuildTouchRegions.cpp",
+      "target": "orig/target/_code/0023/statusDownRebuildTouchRegions.o",
       "thumb": false
     },
     {
@@ -57836,12 +57836,12 @@
     },
     {
       "address": "0x235b08",
-      "function": "FUN_00235b08",
+      "function": "soundActorQueueReset",
       "module": "_code",
-      "object": "build/obj/_code/0023/FUN_00235b08.o",
+      "object": "build/obj/_code/0023/soundActorQueueReset.o",
       "size": 92,
-      "source": "src/_code/0023/FUN_00235b08.cpp",
-      "target": "orig/target/_code/0023/FUN_00235b08.o",
+      "source": "src/_code/0023/soundActorQueueReset.cpp",
+      "target": "orig/target/_code/0023/soundActorQueueReset.o",
       "thumb": false
     },
     {
@@ -59527,12 +59527,12 @@
     },
     {
       "address": "0x244acc",
-      "function": "FUN_00244acc",
+      "function": "cullVolumeTableClear",
       "module": "_code",
-      "object": "build/obj/_code/0024/FUN_00244acc.o",
+      "object": "build/obj/_code/0024/cullVolumeTableClear.o",
       "size": 216,
-      "source": "src/_code/0024/FUN_00244acc.cpp",
-      "target": "orig/target/_code/0024/FUN_00244acc.o",
+      "source": "src/_code/0024/cullVolumeTableClear.cpp",
+      "target": "orig/target/_code/0024/cullVolumeTableClear.o",
       "thumb": false
     },
     {
@@ -70046,12 +70046,12 @@
     },
     {
       "address": "0x2cea78",
-      "function": "FUN_002cea78",
+      "function": "vectorScratchCatmullRom",
       "module": "_code",
-      "object": "build/obj/_code/002c/FUN_002cea78.o",
+      "object": "build/obj/_code/002c/vectorScratchCatmullRom.o",
       "size": 1572,
-      "source": "src/_code/002c/FUN_002cea78.cpp",
-      "target": "orig/target/_code/002c/FUN_002cea78.o",
+      "source": "src/_code/002c/vectorScratchCatmullRom.cpp",
+      "target": "orig/target/_code/002c/vectorScratchCatmullRom.o",
       "thumb": false
     },
     {
@@ -72154,12 +72154,12 @@
     },
     {
       "address": "0x2e34a4",
-      "function": "FUN_002e34a4",
+      "function": "mapCollisionGetStoredVectors",
       "module": "_code",
-      "object": "build/obj/_code/002e/FUN_002e34a4.o",
+      "object": "build/obj/_code/002e/mapCollisionGetStoredVectors.o",
       "size": 132,
-      "source": "src/_code/002e/FUN_002e34a4.cpp",
-      "target": "orig/target/_code/002e/FUN_002e34a4.o",
+      "source": "src/_code/002e/mapCollisionGetStoredVectors.cpp",
+      "target": "orig/target/_code/002e/mapCollisionGetStoredVectors.o",
       "thumb": false
     },
     {
@@ -106231,12 +106231,12 @@
     },
     {
       "address": "0x35dfc0",
-      "function": "FUN_0035dfc0",
+      "function": "table5Type9MarkEntrySeen",
       "module": "_code",
-      "object": "build/obj/_code/0035/FUN_0035dfc0.o",
+      "object": "build/obj/_code/0035/table5Type9MarkEntrySeen.o",
       "size": 124,
-      "source": "src/_code/0035/FUN_0035dfc0.cpp",
-      "target": "orig/target/_code/0035/FUN_0035dfc0.o",
+      "source": "src/_code/0035/table5Type9MarkEntrySeen.cpp",
+      "target": "orig/target/_code/0035/table5Type9MarkEntrySeen.o",
       "thumb": false
     },
     {
@@ -109889,12 +109889,12 @@
     },
     {
       "address": "0x3758d8",
-      "function": "FUN_003758d8",
+      "function": "skillListCompareBySortKeyDescending",
       "module": "_code",
-      "object": "build/obj/_code/0037/FUN_003758d8.o",
+      "object": "build/obj/_code/0037/skillListCompareBySortKeyDescending.o",
       "size": 192,
-      "source": "src/_code/0037/FUN_003758d8.cpp",
-      "target": "orig/target/_code/0037/FUN_003758d8.o",
+      "source": "src/_code/0037/skillListCompareBySortKeyDescending.cpp",
+      "target": "orig/target/_code/0037/skillListCompareBySortKeyDescending.o",
       "thumb": false
     },
     {
@@ -112905,12 +112905,12 @@
     },
     {
       "address": "0x381874",
-      "function": "FUN_00381874",
+      "function": "effMenuBrowserStep",
       "module": "_code",
-      "object": "build/obj/_code/0038/FUN_00381874.o",
+      "object": "build/obj/_code/0038/effMenuBrowserStep.o",
       "size": 1656,
-      "source": "src/_code/0038/FUN_00381874.cpp",
-      "target": "orig/target/_code/0038/FUN_00381874.o",
+      "source": "src/_code/0038/effMenuBrowserStep.cpp",
+      "target": "orig/target/_code/0038/effMenuBrowserStep.o",
       "thumb": false
     },
     {
@@ -127204,12 +127204,12 @@
     },
     {
       "address": "0x3da030",
-      "function": "FUN_003da030",
+      "function": "uniteEffectDraw",
       "module": "_code",
-      "object": "build/obj/_code/003d/FUN_003da030.o",
+      "object": "build/obj/_code/003d/uniteEffectDraw.o",
       "size": 1600,
-      "source": "src/_code/003d/FUN_003da030.cpp",
-      "target": "orig/target/_code/003d/FUN_003da030.o",
+      "source": "src/_code/003d/uniteEffectDraw.cpp",
+      "target": "orig/target/_code/003d/uniteEffectDraw.o",
       "thumb": false
     },
     {
@@ -130119,12 +130119,12 @@
     },
     {
       "address": "0x3edca0",
-      "function": "FUN_003edca0",
+      "function": "battleTryRecruitEnemy",
       "module": "_code",
-      "object": "build/obj/_code/003e/FUN_003edca0.o",
+      "object": "build/obj/_code/003e/battleTryRecruitEnemy.o",
       "size": 800,
-      "source": "src/_code/003e/FUN_003edca0.cpp",
-      "target": "orig/target/_code/003e/FUN_003edca0.o",
+      "source": "src/_code/003e/battleTryRecruitEnemy.cpp",
+      "target": "orig/target/_code/003e/battleTryRecruitEnemy.o",
       "thumb": false
     },
     {
@@ -130229,12 +130229,12 @@
     },
     {
       "address": "0x3ef1e4",
-      "function": "FUN_003ef1e4",
+      "function": "btlDecideEnemyFlee",
       "module": "_code",
-      "object": "build/obj/_code/003e/FUN_003ef1e4.o",
+      "object": "build/obj/_code/003e/btlDecideEnemyFlee.o",
       "size": 1052,
-      "source": "src/_code/003e/FUN_003ef1e4.cpp",
-      "target": "orig/target/_code/003e/FUN_003ef1e4.o",
+      "source": "src/_code/003e/btlDecideEnemyFlee.cpp",
+      "target": "orig/target/_code/003e/btlDecideEnemyFlee.o",
       "thumb": false
     },
     {
@@ -133448,12 +133448,12 @@
     },
     {
       "address": "0x406ad4",
-      "function": "FUN_00406ad4",
+      "function": "moriSceneInitColorLists",
       "module": "_code",
-      "object": "build/obj/_code/0040/FUN_00406ad4.o",
+      "object": "build/obj/_code/0040/moriSceneInitColorLists.o",
       "size": 912,
-      "source": "src/_code/0040/FUN_00406ad4.cpp",
-      "target": "orig/target/_code/0040/FUN_00406ad4.o",
+      "source": "src/_code/0040/moriSceneInitColorLists.cpp",
+      "target": "orig/target/_code/0040/moriSceneInitColorLists.o",
       "thumb": false
     },
     {
@@ -158311,12 +158311,12 @@
     },
     {
       "address": "0x493d88",
-      "function": "FUN_00493d88",
+      "function": "contentCompareKindValueAscending",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_00493d88.o",
+      "object": "build/obj/_code/0049/contentCompareKindValueAscending.o",
       "size": 140,
-      "source": "src/_code/0049/FUN_00493d88.cpp",
-      "target": "orig/target/_code/0049/FUN_00493d88.o",
+      "source": "src/_code/0049/contentCompareKindValueAscending.cpp",
+      "target": "orig/target/_code/0049/contentCompareKindValueAscending.o",
       "thumb": false
     },
     {
@@ -158411,12 +158411,12 @@
     },
     {
       "address": "0x4943bc",
-      "function": "FUN_004943bc",
+      "function": "contentCompareKindValueDescending",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_004943bc.o",
+      "object": "build/obj/_code/0049/contentCompareKindValueDescending.o",
       "size": 140,
-      "source": "src/_code/0049/FUN_004943bc.cpp",
-      "target": "orig/target/_code/0049/FUN_004943bc.o",
+      "source": "src/_code/0049/contentCompareKindValueDescending.cpp",
+      "target": "orig/target/_code/0049/contentCompareKindValueDescending.o",
       "thumb": false
     },
     {
@@ -159518,12 +159518,12 @@
     },
     {
       "address": "0x4a0524",
-      "function": "FUN_004a0524",
+      "function": "fieldWalkRecoverHp",
       "module": "_code",
-      "object": "build/obj/_code/004a/FUN_004a0524.o",
+      "object": "build/obj/_code/004a/fieldWalkRecoverHp.o",
       "size": 960,
-      "source": "src/_code/004a/FUN_004a0524.cpp",
-      "target": "orig/target/_code/004a/FUN_004a0524.o",
+      "source": "src/_code/004a/fieldWalkRecoverHp.cpp",
+      "target": "orig/target/_code/004a/fieldWalkRecoverHp.o",
       "thumb": false
     },
     {
@@ -159578,12 +159578,12 @@
     },
     {
       "address": "0x4a0f5c",
-      "function": "FUN_004a0f5c",
+      "function": "fieldPickRecoveryCaster",
       "module": "_code",
-      "object": "build/obj/_code/004a/FUN_004a0f5c.o",
+      "object": "build/obj/_code/004a/fieldPickRecoveryCaster.o",
       "size": 992,
-      "source": "src/_code/004a/FUN_004a0f5c.cpp",
-      "target": "orig/target/_code/004a/FUN_004a0f5c.o",
+      "source": "src/_code/004a/fieldPickRecoveryCaster.cpp",
+      "target": "orig/target/_code/004a/fieldPickRecoveryCaster.o",
       "thumb": false
     },
     {
@@ -164107,12 +164107,12 @@
     },
     {
       "address": "0x4c3db4",
-      "function": "FUN_004c3db4",
+      "function": "battleAddEnemyRewards",
       "module": "_code",
-      "object": "build/obj/_code/004c/FUN_004c3db4.o",
+      "object": "build/obj/_code/004c/battleAddEnemyRewards.o",
       "size": 884,
-      "source": "src/_code/004c/FUN_004c3db4.cpp",
-      "target": "orig/target/_code/004c/FUN_004c3db4.o",
+      "source": "src/_code/004c/battleAddEnemyRewards.cpp",
+      "target": "orig/target/_code/004c/battleAddEnemyRewards.o",
       "thumb": false
     },
     {
@@ -164491,12 +164491,12 @@
     },
     {
       "address": "0x4c8340",
-      "function": "FUN_004c8340",
+      "function": "btlGetAffinity",
       "module": "_code",
-      "object": "build/obj/_code/004c/FUN_004c8340.o",
+      "object": "build/obj/_code/004c/btlGetAffinity.o",
       "size": 900,
-      "source": "src/_code/004c/FUN_004c8340.cpp",
-      "target": "orig/target/_code/004c/FUN_004c8340.o",
+      "source": "src/_code/004c/btlGetAffinity.cpp",
+      "target": "orig/target/_code/004c/btlGetAffinity.o",
       "thumb": false
     },
     {
@@ -164827,12 +164827,12 @@
     },
     {
       "address": "0x4cab9c",
-      "function": "FUN_004cab9c",
+      "function": "btlRosterMotionSyncStatus",
       "module": "_code",
-      "object": "build/obj/_code/004c/FUN_004cab9c.o",
+      "object": "build/obj/_code/004c/btlRosterMotionSyncStatus.o",
       "size": 252,
-      "source": "src/_code/004c/FUN_004cab9c.cpp",
-      "target": "orig/target/_code/004c/FUN_004cab9c.o",
+      "source": "src/_code/004c/btlRosterMotionSyncStatus.cpp",
+      "target": "orig/target/_code/004c/btlRosterMotionSyncStatus.o",
       "thumb": false
     },
     {
@@ -168105,12 +168105,12 @@
     {
       "address": "0x4ea200",
       "file": "battle/btlAction",
-      "function": "FUN_004ea200",
+      "function": "btlActionPickModeForTargets",
       "module": "_code",
-      "object": "build/obj/_code/battle/btlAction/FUN_004ea200.o",
+      "object": "build/obj/_code/battle/btlAction/btlActionPickModeForTargets.o",
       "size": 992,
-      "source": "src/_code/battle/btlAction/FUN_004ea200.cpp",
-      "target": "orig/target/_code/battle/btlAction/FUN_004ea200.o",
+      "source": "src/_code/battle/btlAction/btlActionPickModeForTargets.cpp",
+      "target": "orig/target/_code/battle/btlAction/btlActionPickModeForTargets.o",
       "thumb": false
     },
     {

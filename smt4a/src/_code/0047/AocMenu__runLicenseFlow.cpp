@@ -1,4 +1,8 @@
-/* NON_MATCHING: typed rewrite of the license flow (281 vs 293 rows): retail keeps three RequestParameters temporaries (60-byte frame) and assigns constants/globals to different registers; step order, handler lifetime and the shared result ladder follow retail. */
+/* NON_MATCHING: 80 lines (22 by shape), written like _ZN7AocMenu15runQueryProcessEv with the result ladder in each
+ * polling step. Retail hoists the wait counter's 3 before the step number 7 (as in runQueryProcess and
+ * pollContentStatus: `counter = 3;` first gives that order, which is only score evidence), and in step 5 keeps the
+ * content id in r1 and the next step's 6 in r2 where this build swaps them, which lets this build share step 0's
+ * final store with step 5's. */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "classes/Obj422214Owner.h"
@@ -13,7 +17,7 @@ public:
     virtual RequestParameters poll();
 
     /* 0x04 */ u32 words[4];
-    /* 0x14 */ u32 detail;
+    /* 0x14 */ u32 contentId; /* the license operation's content, set after it is created */
 };
 
 /* The license menu's work. */
@@ -41,151 +45,147 @@ void FUN_0047bc90(AocLicenseMenu *menu, RequestParameters *parameters);
 void aocLoadingTaskStart(AocLicenseMenu *menu, s32 value);
 s32 strIsEmpty(const RequestParameters *result);
 
-/* Releases the polled operation, if any. */
-static __inline void releaseHandler(AocLicenseMenu *menu)
-{
-    if (menu->handler != NULL) {
-        delete menu->handler;
-    }
-}
-
-/* Starts the status operation of the given kind in the menu's embedded storage. */
-static __inline void startHandler(AocLicenseMenu *menu, s32 kind)
-{
-    AocLicenseHandler *created = windowCreateStatusOperation(menu->handlerStorage, kind);
-    menu->handler = created;
-}
+/* The kinds of a finished status result. */
+enum {
+    AOC_RESULT_RETRY = 0x66,
+    AOC_RESULT_DONE = 0x67
+};
 
 /* Per-frame update of the license flow: starts its status operations, polls them and reports the result. */
 void AocMenu::runLicenseFlow()
 {
-    AocLicenseMenu *menu = reinterpret_cast<AocLicenseMenu *>(this);
+    AocLicenseMenu *menu = (AocLicenseMenu *)this;
     RequestParameters result;
     AocMain *aocMain = g_aocMain;
+
     switch (menu->step) {
     case 0:
-        if (buttonHelpStateIsNot3() == 0) {
-            return;
+        if (buttonHelpStateIsNot3() != 0 && (menu->flags & 0x200) != 0) {
+            AocLicenseHandler *created = windowCreateStatusOperation(menu->handlerStorage, 0);
+            menu->step = 1;
+            menu->handler = created;
         }
-        if ((menu->flags & 0x200) == 0) {
-            return;
-        }
-        startHandler(menu, 0);
-        menu->step = 1;
-        return;
+        break;
     case 1:
-        if ((menu->flags & 0x200) == 0) {
-            return;
+        if ((menu->flags & 0x200) != 0) {
+            result = menu->handler->poll();
+            if (strIsEmpty(&result) != 0) {
+                menu->step = 2;
+            } else if (byteIsAtLeast100((const u8 *)&result) != 0) {
+                jobFlagsWorkStop(menu);
+                switch (result.kind) {
+                case AOC_RESULT_DONE:
+                    menu->step = 7;
+                    menu->counter = 3;
+                    break;
+                case AOC_RESULT_RETRY: {
+                    RequestParameters copy = result;
+                    FUN_0047bc90(menu, &copy);
+                    break;
+                }
+                default:
+                    menu->result = result;
+                    menu->step = 9999;
+                    break;
+                }
+            }
         }
-        result = menu->handler->poll();
-        if (strIsEmpty(&result) != 0) {
-            menu->step = 2;
-            return;
-        }
-        if (byteIsAtLeast100(reinterpret_cast<const u8 *>(&result)) == 0) {
-            return;
-        }
-        jobFlagsWorkStop(menu);
         break;
     case 2:
-        releaseHandler(menu);
-        startHandler(menu, 6);
+        if (menu->handler != NULL)
+            delete menu->handler;
+        menu->handler = windowCreateStatusOperation(menu->handlerStorage, 6);
         menu->step = 3;
         aocLoadingTaskStart(menu, 1);
-        return;
+        break;
     case 3:
         result = menu->handler->poll();
         if (strIsEmpty(&result) != 0) {
-            releaseHandler(menu);
+            if (menu->handler != NULL)
+                delete menu->handler;
             aocLoadingTaskStart(menu, 0);
-            startHandler(menu, 0);
+            AocLicenseHandler *created = windowCreateStatusOperation(menu->handlerStorage, 0);
             menu->step = 4;
-            return;
+            menu->handler = created;
+        } else if (byteIsAtLeast100((const u8 *)&result) != 0) {
+            jobFlagsWorkStop(menu);
+            menu->result = result;
+            menu->step = 9999;
         }
-        if (byteIsAtLeast100(reinterpret_cast<const u8 *>(&result)) == 0) {
-            return;
-        }
-        jobFlagsWorkStop(menu);
-        menu->step = 9999;
-        menu->result = result;
-        return;
+        break;
     case 4:
-        if ((menu->flags & 0x200) == 0) {
-            return;
+        if ((menu->flags & 0x200) != 0) {
+            result = menu->handler->poll();
+            if (strIsEmpty(&result) != 0) {
+                menu->step = 5;
+                aocLoadingTaskStart(menu, 1);
+            } else if (byteIsAtLeast100((const u8 *)&result) != 0) {
+                jobFlagsWorkStop(menu);
+                switch (result.kind) {
+                case AOC_RESULT_DONE:
+                    menu->step = 7;
+                    menu->counter = 3;
+                    break;
+                case AOC_RESULT_RETRY: {
+                    RequestParameters copy = result;
+                    FUN_0047bc90(menu, &copy);
+                    break;
+                }
+                default:
+                    menu->result = result;
+                    menu->step = 9999;
+                    break;
+                }
+            }
         }
-        result = menu->handler->poll();
-        if (strIsEmpty(&result) != 0) {
-            menu->step = 5;
-            aocLoadingTaskStart(menu, 1);
-            return;
-        }
-        if (byteIsAtLeast100(reinterpret_cast<const u8 *>(&result)) == 0) {
-            return;
-        }
-        jobFlagsWorkStop(menu);
         break;
     case 5:
-        releaseHandler(menu);
-        startHandler(menu, 7);
-        menu->handler->detail = aocMain->selectedRecord->contentId;
+        if (menu->handler != NULL)
+            delete menu->handler;
+        menu->handler = windowCreateStatusOperation(menu->handlerStorage, 7);
+        menu->handler->contentId = aocMain->selectedRecord->contentId;
         menu->step = 6;
-        return;
+        break;
     case 6:
         result = menu->handler->poll();
         if (strIsEmpty(&result) != 0) {
-            menu->state = 10;
-            menu->step = 0;
-            if (menu->handler != NULL) {
-                delete menu->handler;
-                menu->handler = NULL;
-            }
+            aocMenuChangeStep(this, 10);
             AocMain *main = g_aocMain;
             for (s32 index = 0; index < 16; ++index) {
                 main->contentCode.words[index] = 0;
             }
-            sysMemClear(main->contentText, 0x80);
-            return;
+            sysMemClear(main->contentText, sizeof(main->contentText));
+        } else if (byteIsAtLeast100((const u8 *)&result) != 0) {
+            jobFlagsWorkStop(menu);
+            switch (result.kind) {
+            case AOC_RESULT_DONE:
+                menu->step = 7;
+                menu->counter = 3;
+                break;
+            case AOC_RESULT_RETRY: {
+                RequestParameters copy = result;
+                FUN_0047bc90(menu, &copy);
+                break;
+            }
+            default:
+                menu->result = result;
+                menu->step = 9999;
+                break;
+            }
         }
-        if (byteIsAtLeast100(reinterpret_cast<const u8 *>(&result)) == 0) {
-            return;
-        }
-        jobFlagsWorkStop(menu);
         break;
     case 7:
         menu->counter--;
-        if (menu->counter > 0) {
-            return;
-        }
-        menu->state = 6;
-        menu->step = 0;
-        if (menu->handler != NULL) {
-            delete menu->handler;
-            menu->handler = NULL;
-        }
+        if (menu->counter > 0)
+            break;
+        aocMenuChangeStep(this, 6);
         aocMenuSetButtonHelp(menu, 2, 1);
-        return;
+        break;
     case 9999:
         FUN_00476e58(menu, 14, 6);
-        if (menu->state != 6) {
-            return;
-        }
-        aocMenuSetButtonHelp(menu, 2, 1);
-        return;
-    }
-    switch (result.kind) {
-    case 0x67:
-        menu->step = 7;
-        menu->counter = 3;
-        return;
-    case 0x66: {
-        RequestParameters copy = result;
-        FUN_0047bc90(menu, &copy);
-        return;
-    }
-    default:
-        menu->step = 9999;
-        menu->result = result;
-        return;
+        if (menu->state == 6)
+            aocMenuSetButtonHelp(menu, 2, 1);
+        break;
     }
 }
 

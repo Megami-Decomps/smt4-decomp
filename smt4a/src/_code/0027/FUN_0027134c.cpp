@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002cea78(float *);
+int vectorScratchCatmullRom(float *);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(...);
 
@@ -38,7 +38,7 @@ extern float DAT_006472f8; /* 0x6472f8 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_002cea78. */
+/* Supplied declaration required: vectorScratchCatmullRom. */
 
 
 void FUN_0027134c(fn_0027134c_arg0 *param_1,float *param_2)
@@ -234,7 +234,7 @@ void FUN_0027134c(fn_0027134c_arg0 *param_1,float *param_2)
             if (temp_v10 != 0.0f) {
               do {
                 temp_v25 = temp_v25 + temp_v18;
-                FUN_002cea78(&temp_v30);
+                vectorScratchCatmullRom(&temp_v30);
                 pfVar3[-7] = DAT_006472e8;
                 pfVar3[-10] = DAT_006472dc;
                 pfVar3[-9] = DAT_006472e0;

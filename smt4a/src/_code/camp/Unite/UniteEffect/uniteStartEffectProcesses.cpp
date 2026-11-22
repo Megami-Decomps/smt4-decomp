@@ -7,7 +7,7 @@ extern UniteEffectWork *g_uniteEffectWork;
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 pool, u32 size, u32 flags);
 void sysMemClear(void *memory, u32 size);
 s32 FUN_003cf02c(u32 process);
-s32 FUN_003da030(u32 process);
+s32 uniteEffectDraw(u32 process);
 s32 FUN_003d26cc(u32 process);
 u32 taskCreateDraw(const char *name, s32 priority, u32 flags, AsdProcFunc start, AsdProcUpdateFunc update, AsdProcFunc end, void *work, u32 parent);
 void btlTalkBustUpCreate();
@@ -24,7 +24,7 @@ void uniteStartEffectProcesses()
     UniteEffectWork *work = g_uniteEffectWork;
     sysMemClear(work, sizeof(*work));
     work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TMD CALC"), 4, 0, NULL, FUN_003cf02c, NULL, NULL);
-    taskCreateDraw("TMD DDRAW", 235, 0, NULL, FUN_003da030, NULL, NULL, work->process);
+    taskCreateDraw("TMD DDRAW", 235, 0, NULL, uniteEffectDraw, NULL, NULL, work->process);
     taskCreateDraw("TMD DDRAW", 113, 0, NULL, FUN_003d26cc, NULL, NULL, work->process);
     btlTalkBustUpCreate();
     messageSetScriptDisplayMode();

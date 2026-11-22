@@ -50,7 +50,7 @@ extern int contentIdCompareSecondaryThenPrimary(...); /* 0x36027c */
 extern int idCompareByKeyThenRank(...); /* 0x3602d0 */
 extern int FUN_0036031c(...); /* 0x36031c */
 extern int recordRankCompareWithTieBreak(...); /* 0x375874 */
-extern int FUN_003758d8(...); /* 0x3758d8 */
+extern int skillListCompareBySortKeyDescending(...); /* 0x3758d8 */
 extern int FUN_00375998(...); /* 0x375998 */
 extern int entrySortComparePrimaryKeyDesc(...); /* 0x375aa8 */
 extern int contentIdCompareRankAndOrderDescending(...); /* 0x375afc */
@@ -149,7 +149,7 @@ void campRebuildListByMode(int param_1)
         }
         if ((char)*pbVar5 < '\0') {
           temp_v2 = gridNavigationGetItemCount(temp_v3);
-          arraySortQsort(temp_v1,temp_v2,8,FUN_003758d8);
+          arraySortQsort(temp_v1,temp_v2,8,skillListCompareBySortKeyDescending);
           return;
         }
         temp_v2 = gridNavigationGetItemCount(temp_v3);

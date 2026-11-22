@@ -22,7 +22,7 @@ int btlSlotSetStoreValue(...);
 int btlCombatantGetSummaryValues(...);
 int btlDowngradeRandomResistance(void);
 int mapCategoryToDestinationGroup(...);
-int FUN_004c8340(...);
+int btlGetAffinity(...);
 int halfTable152TopIs2(...);
 int FUN_004e699c(...);
 int FUN_004fb5dc(...);
@@ -274,7 +274,7 @@ extern int btlGetPropertyMaximum(void);
 extern int FUN_004c65e8(int);
 extern int valueRangeSameSide(int, int);
 extern int FUN_004c6b8c(unsigned int *, unsigned int *);
-/* Supplied declaration required: FUN_004c8340. */
+/* Supplied declaration required: btlGetAffinity. */
 /* Supplied declaration required: halfTable152TopIs2. */
 /* Supplied declaration required: FUN_004d7a60. */
 /* Supplied declaration required: FUN_004e5a40. */
@@ -1231,7 +1231,7 @@ LAB_004e34b8:
     temp_v21 = (unsigned int *)0x0;
     btlCombatantGetSummaryValues((int)*(short *)(*(int *)(*param_1 + 0x1ed4) + temp_v77),&temp_v22,&temp_v21);
     temp_v13 = (unsigned int)*(short *)(*(int *)(*param_1 + 0x1ed4) + temp_v77);
-    FUN_004c8340(temp_v13,(int)*(short *)(*(int *)(*param_1 + 0x1ed4) + temp_v105),temp_v22,temp_v21,
+    btlGetAffinity(temp_v13,(int)*(short *)(*(int *)(*param_1 + 0x1ed4) + temp_v105),temp_v22,temp_v21,
                  0xffffffff);
     if (((temp_v6 == 0) && ((temp_v47 == (unsigned int *)0x2 || ((temp_v13 & 0x800000) != 0)))) &&
        (temp_v5 = btlFindEntryValue(param_8,0x17), temp_v5 >= 1)) {
@@ -1807,7 +1807,7 @@ LAB_004e4cac:
   temp_v22 = (unsigned int *)0x0;
   btlCombatantGetSummaryValues((int)*(short *)(*(int *)(*param_1 + 0x1ed4) + temp_v77),&temp_v21,&temp_v22);
   temp_v13 = (unsigned int)*(short *)(*(int *)(*param_1 + 0x1ed4) + temp_v77);
-  FUN_004c8340(temp_v13,(int)*(short *)(*(int *)(*param_1 + 0x1ed4) + param_8 * 0x1d0 + 0x6a),
+  btlGetAffinity(temp_v13,(int)*(short *)(*(int *)(*param_1 + 0x1ed4) + param_8 * 0x1d0 + 0x6a),
                temp_v21,temp_v22,0xffffffff);
   if ((((temp_v6 == 0) && (temp_v59 != 0)) &&
       ((temp_v47 == (unsigned int *)0x2 || ((temp_v13 & 0x800000) != 0)))) &&

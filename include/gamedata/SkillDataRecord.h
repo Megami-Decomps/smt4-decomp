@@ -280,6 +280,12 @@ struct Table04ExtraRecord {
             u32 tier : 2;
             u32 reserved : 30;
         } actionTier;
+        struct {
+            u32 unk0 : 11;
+            u32 element : 5;   /* the attack element the record changes the affinity of */
+            u32 kind : 4;      /* the affinity it gives (1-4: btlGetAffinity's flags 0x80000, 0x10000, 0x20000, 0x40000) */
+            u32 unk20 : 12;
+        } affinityBits;
     };
 };
 typedef char Table04RecordAOffsets[offsetof(SkillDataRecordA, properties) == 0x28 &&

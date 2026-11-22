@@ -222,6 +222,18 @@ static __inline void renderCtxPushA(RenderCtxA *context, int state)
     renderStackPush(context->stacks + RENDER_STACK_A, state);
 }
 
+/* renderCtxPushA through renderStackPushCounted (depth kept in a local): the `pushCountedA` of smt4a
+ * requestImageDraw and smt4 messageDrawSelectedImagePair. */
+static __inline void renderCtxPushACounted(RenderCtx *context, int state)
+{
+    renderStackPushCounted(context->stacks + RENDER_STACK_A, state);
+}
+
+static __inline void renderCtxPushACounted(RenderCtxA *context, int state)
+{
+    renderStackPushCounted(context->stacks + RENDER_STACK_A, state);
+}
+
 /* renderCtxPushA through renderStackPushCountedDirect (depth kept in a local, apply condition written out). */
 static __inline void renderCtxPushACountedDirect(RenderCtx *context, int state)
 {

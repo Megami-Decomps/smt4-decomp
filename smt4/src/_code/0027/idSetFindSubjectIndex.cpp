@@ -1,24 +1,22 @@
-/* NON_MATCHING: IDENTICAL with unit cflags `--fpu=softvfp` (default flags otherwise); under the default VFP build only the entry pointer and the reloaded member id swap r1/r2 (retail: entry r2, id r1). */
+/* NON_MATCHING: the member id and the entry swap r1/r2 in the search (retail: entry r2, id r1), as in the Apocalypse
+ * twin and in the inlined copies (btlActionEffectAnchor, FUN_0023cd08); IDENTICAL in a `--multifile` run with
+ * btlMainFindEntryByListedId or with `--fpu=softvfp` (config proposals in the wave report). */
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
+#include "battle/btlAction.h"
 #include "battle/BtlGlobals.h"
-
-struct ListedMember {
-    u8 unk00[0x62]; // 0x00
-    s16 id;          // 0x62
-};
 
 extern "C" {
 
-// Returns a listed member's position within its combatant entry, or -1 when absent.
-s32 idSetFindSubjectIndex(BtlMainState* state, const ListedMember* member)
+/* Returns the position of the action's member within its combatant entry, or -1 when absent. */
+s32 idSetFindSubjectIndex(BtlMainState *state, const BtlActionRecord *action)
 {
-    BtlEntry* entry = btlMainFindEntryByListedId(state, member->id);
+    BtlEntry *entry = btlMainFindEntryByListedId(state, action->memberId);
     if (entry == NULL) {
         return -1;
     }
     for (s32 index = 0; index < 50; ++index) {
-        if (member->id == entry->ids[index]) {
+        if (action->memberId == entry->ids[index]) {
             return index;
         }
     }

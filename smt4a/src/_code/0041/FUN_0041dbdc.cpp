@@ -1,4 +1,3 @@
-/* NON_MATCHING: prologue order only: retail copies `selected` to r5 (movs r5, r1) and stores the selected byte after `mov r0, #1`; built stores it before. */
 #include "common.h"
 #include "gamedata/GameDataAccess_Shard0031.h"
 #include "saveLoadUI/SaveLoadInteractionsA.h"
@@ -34,7 +33,7 @@ s32 FUN_0041fc24(Menu *menu);
 s32 FUN_0041e2d8(Menu *menu);
 
 /* Switches the menu between its two entries (`selected` nonzero: B), refreshes the current entry's values and the total. */
-void FUN_0041dbdc(Menu *menu, s32 selected)
+void FUN_0041dbdc(Menu *menu, bool selected)
 {
     u32 se;
 

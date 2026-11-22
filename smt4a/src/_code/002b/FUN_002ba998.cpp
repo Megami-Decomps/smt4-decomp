@@ -90,7 +90,7 @@ int btlActionPrepareFromSource(int, int, int);
 int FUN_003ea69c(int, unsigned char [688], unsigned int);
 int btlMainBuffersFree(int, int);
 int btlUnitStateInitFromRecord(...);
-int FUN_003ef1e4(int, int);
+int btlDecideEnemyFlee(int, int);
 int FUN_003f1d74(int);
 int countersAddSaturating(...);
 int FUN_004a8edc(...);
@@ -235,7 +235,7 @@ extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: btlUnitStateInitFromRecord. */
 /* Supplied declaration required: FUN_003ee138. */
 /* Supplied declaration required: FUN_003eee9c. */
-/* Supplied declaration required: FUN_003ef1e4. */
+/* Supplied declaration required: btlDecideEnemyFlee. */
 /* Supplied declaration required: FUN_003f135c. */
 /* Supplied declaration required: FUN_003f1d74. */
 /* Supplied declaration required: btlAiBuildTurnOrder. */
@@ -351,7 +351,7 @@ void FUN_002ba998(unsigned int param_1)
     btlActionPrepareFromSource(temp_v7,temp_v7 + 0xf4,0);
     slotStreakUpdate();
     btlSelectFirstPartyAssistParticipant();
-    FUN_003ef1e4(temp_v7,0);
+    btlDecideEnemyFlee(temp_v7,0);
     if (*(short *)(temp_v7 + 0x11c) != 0) {
       FUN_003f1d74(temp_v7);
     }

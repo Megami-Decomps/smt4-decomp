@@ -1,267 +1,191 @@
+/* NON_MATCHING: 80 lines (22 by shape), the same source and the same differences as Apocalypse's twin. Retail hoists
+ * the wait counter's 3 before the step number 7 (`counter = 3;` first gives that order, which is only score
+ * evidence), and in step 5 keeps the content id in r1 and the next step's 6 in r2 where this build swaps them, which
+ * lets this build share step 0's final store with step 5's. */
 #include "code/Code0023.h"
-/* NON_MATCHING: romwright 0.5.0 decompilation of `_ZN7AocMenu14runLicenseFlowEv` (_code @ 0x38e5f4, 0x48c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "classes/AocMenu.h"
-#include "romwright_types.h"
+#include "addon/aocMain.h"
+#include "classes/Obj422214Owner.h"
+#include "test/BustupViewer.h"
+#include "util/BitsAndBytes.h"
+#include "AsdSDK/AsdMemUtil.h"
+
+/* The status operation the menu is polling: slot 1 is its deleting destructor, slot 3 reads the pending result. */
+class AocLicenseHandler {
+public:
+    virtual ~AocLicenseHandler();
+    virtual void vfunc08();
+    virtual RequestParameters poll();
+
+    /* 0x04 */ u32 words[4];
+    /* 0x14 */ u32 contentId; /* the license operation's content, set after it is created */
+};
+
+/* The license menu's work. */
+struct AocLicenseMenu {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ s32 state;
+    /* 0x008 */ s32 step;
+    /* 0x00C */ s32 counter;
+    /* 0x010 */ u8 unk010[0x1F8];
+    /* 0x208 */ AocLicenseHandler *handler;
+    /* 0x20C */ u8 handlerStorage[4];
+    /* 0x210 */ RequestParameters result;
+};
+
+/* The add-on main block's selected-record pointer and the cleared licence data. */
 
 extern "C" {
 
-int aocMenuSetButtonHelp(unsigned int *, int, int);
-int jobStopAndClearFlags(unsigned int *);
-int aocLoadingTaskStart(unsigned int *, int);
-int FUN_00233e70(unsigned int *, int, int);
-int FUN_00234124(unsigned int *, unsigned int *);
+void FUN_00233e70(AocLicenseMenu *menu, s32 first, s32 second);
+void aocMenuSetButtonHelp(AocLicenseMenu *menu, s32 selection, s32 mode);
+void jobStopAndClearFlags(AocLicenseMenu *menu);
+void FUN_00234124(AocLicenseMenu *menu, RequestParameters *parameters);
+void aocLoadingTaskStart(AocLicenseMenu *menu, s32 value);
+s32 strIsEmpty(const RequestParameters *result);
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_1_stack;
+/* The kinds of a finished status result. */
+enum {
+    AOC_RESULT_RETRY = 0x66,
+    AOC_RESULT_DONE = 0x67
+};
 
-extern int g_aocMain; /* 0x432fc8 */
-
-/* Supplied declaration required: aocMenuSetButtonHelp. */
-/* Supplied declaration required: jobStopAndClearFlags. */
-/* Supplied declaration required: aocLoadingTaskStart. */
-/* Supplied declaration required: FUN_00233e70. */
-/* Supplied declaration required: windowCreateStatusOperation. */
-/* Supplied declaration required: FUN_00234124. */
-extern int buttonHelpStateIsNot3(void);
-extern int strIsEmpty(unsigned int *);
-extern int byteIsAtLeast100(unsigned int *);
-/* Supplied declaration required: memClear. */
-
-
-/* WARNING: Type propagation algorithm not settling */
-
+/* Per-frame update of the license flow: starts its status operations, polls them and reports the result. */
 void AocMenu::runLicenseFlow()
-
 {
-    unsigned int * param_1 = reinterpret_cast<unsigned int *>(this);
-/* irregular: 9 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  RequestParameters record;
-  unsigned int temp_v3;
-  unsigned int uStack_40;
-  unsigned int uStack_3c;
-  unsigned int uStack_38;
-  unsigned int uStack_34;
-  unsigned int temp_v4;
-  unsigned int uStack_2c;
-  unsigned int uStack_28;
-  unsigned int uStack_24;
-  unsigned int uStack_20;
-  
-  temp_v1 = g_aocMain;
-  temp_v0 = param_1[2];
-  if (temp_v0 != 4) {
-    if ((int)temp_v0 < 4) {
-      if (temp_v0 == 0) {
-        temp_v1 = buttonHelpStateIsNot3();
-        if (temp_v1 == 0) {
-          return;
+    AocLicenseMenu *menu = (AocLicenseMenu *)this;
+    RequestParameters result;
+    AocMain *aocMain = g_aocMain;
+
+    switch (menu->step) {
+    case 0:
+        if (buttonHelpStateIsNot3() != 0 && (menu->flags & 0x200) != 0) {
+            AocLicenseHandler *created = (AocLicenseHandler *)windowCreateStatusOperation(menu->handlerStorage, 0);
+            menu->step = 1;
+            menu->handler = created;
         }
-        if ((*param_1 & 0x200) == 0) {
-          return;
+        break;
+    case 1:
+        if ((menu->flags & 0x200) != 0) {
+            result = menu->handler->poll();
+            if (strIsEmpty(&result) != 0) {
+                menu->step = 2;
+            } else if (byteIsAtLeast100((const u8 *)&result) != 0) {
+                jobStopAndClearFlags(menu);
+                switch (result.kind) {
+                case AOC_RESULT_DONE:
+                    menu->step = 7;
+                    menu->counter = 3;
+                    break;
+                case AOC_RESULT_RETRY: {
+                    RequestParameters copy = result;
+                    FUN_00234124(menu, &copy);
+                    break;
+                }
+                default:
+                    menu->result = result;
+                    menu->step = 9999;
+                    break;
+                }
+            }
         }
-        puVar3 = param_1 + 0x83;
-        windowCreateStatusOperation(puVar3,0);
-        param_1[2] = 1;
-        param_1[0x82] = (unsigned int)puVar3;
-        return;
-      }
-      if (temp_v0 != 1) {
-        if (temp_v0 == 2) {
-          if ((int *)param_1[0x82] != (int *)0x0) {
-            (**(romwright_code **)(*(int *)param_1[0x82] + 4))();
-          }
-          puVar3 = param_1 + 0x83;
-          windowCreateStatusOperation(puVar3,6);
-          param_1[0x82] = (unsigned int)puVar3;
-          param_1[2] = 3;
-          aocLoadingTaskStart(param_1,1);
-          return;
+        break;
+    case 2:
+        if (menu->handler != NULL)
+            delete menu->handler;
+        menu->handler = (AocLicenseHandler *)windowCreateStatusOperation(menu->handlerStorage, 6);
+        menu->step = 3;
+        aocLoadingTaskStart(menu, 1);
+        break;
+    case 3:
+        result = menu->handler->poll();
+        if (strIsEmpty(&result) != 0) {
+            if (menu->handler != NULL)
+                delete menu->handler;
+            aocLoadingTaskStart(menu, 0);
+            AocLicenseHandler *created = (AocLicenseHandler *)windowCreateStatusOperation(menu->handlerStorage, 0);
+            menu->step = 4;
+            menu->handler = created;
+        } else if (byteIsAtLeast100((const u8 *)&result) != 0) {
+            jobStopAndClearFlags(menu);
+            menu->result = result;
+            menu->step = 9999;
         }
-        if (temp_v0 != 3) {
-          return;
+        break;
+    case 4:
+        if ((menu->flags & 0x200) != 0) {
+            result = menu->handler->poll();
+            if (strIsEmpty(&result) != 0) {
+                menu->step = 5;
+                aocLoadingTaskStart(menu, 1);
+            } else if (byteIsAtLeast100((const u8 *)&result) != 0) {
+                jobStopAndClearFlags(menu);
+                switch (result.kind) {
+                case AOC_RESULT_DONE:
+                    menu->step = 7;
+                    menu->counter = 3;
+                    break;
+                case AOC_RESULT_RETRY: {
+                    RequestParameters copy = result;
+                    FUN_00234124(menu, &copy);
+                    break;
+                }
+                default:
+                    menu->result = result;
+                    menu->step = 9999;
+                    break;
+                }
+            }
         }
-        (**(romwright_code **)(*(int *)param_1[0x82] + 0xc))(&temp_v3);
-        record.word(0) = temp_v3;
-        record.word(1) = uStack_40;
-        record.word(2) = uStack_3c;
-        record.word(3) = uStack_38;
-        record.word(4) = uStack_34;
-        temp_v1 = strIsEmpty(&record.word(0));
-        if (temp_v1 != 0) {
-          if ((int *)param_1[0x82] != (int *)0x0) {
-            (**(romwright_code **)(*(int *)param_1[0x82] + 4))();
-          }
-          aocLoadingTaskStart(param_1,0);
-          puVar3 = param_1 + 0x83;
-          windowCreateStatusOperation(puVar3,0);
-          param_1[2] = 4;
-          param_1[0x82] = (unsigned int)puVar3;
-          return;
+        break;
+    case 5:
+        if (menu->handler != NULL)
+            delete menu->handler;
+        menu->handler = (AocLicenseHandler *)windowCreateStatusOperation(menu->handlerStorage, 7);
+        menu->handler->contentId = aocMain->selectedRecord->contentId;
+        menu->step = 6;
+        break;
+    case 6:
+        result = menu->handler->poll();
+        if (strIsEmpty(&result) != 0) {
+            aocMenuChangeStep(this, 10);
+            AocMain *main = g_aocMain;
+            for (s32 index = 0; index < 16; ++index) {
+                main->contentCode.words[index] = 0;
+            }
+            memClear(main->contentText, sizeof(main->contentText));
+        } else if (byteIsAtLeast100((const u8 *)&result) != 0) {
+            jobStopAndClearFlags(menu);
+            switch (result.kind) {
+            case AOC_RESULT_DONE:
+                menu->step = 7;
+                menu->counter = 3;
+                break;
+            case AOC_RESULT_RETRY: {
+                RequestParameters copy = result;
+                FUN_00234124(menu, &copy);
+                break;
+            }
+            default:
+                menu->result = result;
+                menu->step = 9999;
+                break;
+            }
         }
-        temp_v1 = byteIsAtLeast100(&record.word(0));
-        if (temp_v1 == 0) {
-          return;
-        }
-        jobStopAndClearFlags(param_1);
-        param_1[2] = 9999;
-        param_1[0x84] = record.word(0);
-        param_1[0x85] = record.word(1);
-        param_1[0x86] = record.word(2);
-        param_1[0x87] = record.word(3);
-        param_1[0x88] = record.word(4);
-        return;
-      }
-      if ((*param_1 & 0x200) == 0) {
-        return;
-      }
-      (**(romwright_code **)(*(int *)param_1[0x82] + 0xc))(&temp_v3);
-      record.word(0) = temp_v3;
-      record.word(1) = uStack_40;
-      record.word(2) = uStack_3c;
-      record.word(3) = uStack_38;
-      record.word(4) = uStack_34;
-      temp_v1 = strIsEmpty(&record.word(0));
-      if (temp_v1 != 0) {
-        param_1[2] = 2;
-        return;
-      }
-      temp_v1 = byteIsAtLeast100(&record.word(0));
-      if (temp_v1 == 0) {
-        return;
-      }
-      jobStopAndClearFlags(param_1);
+        break;
+    case 7:
+        menu->counter--;
+        if (menu->counter > 0)
+            break;
+        aocMenuChangeStep(this, 6);
+        aocMenuSetButtonHelp(menu, 2, 1);
+        break;
+    case 9999:
+        FUN_00233e70(menu, 14, 6);
+        if (menu->state == 6)
+            aocMenuSetButtonHelp(menu, 2, 1);
+        break;
     }
-    else {
-      if (temp_v0 == 5) {
-        if ((int *)param_1[0x82] != (int *)0x0) {
-          (**(romwright_code **)(*(int *)param_1[0x82] + 4))();
-        }
-        puVar3 = param_1 + 0x83;
-        windowCreateStatusOperation(puVar3,7);
-        param_1[0x82] = (unsigned int)puVar3;
-        puVar3[5] = (unsigned int)*(unsigned short *)(*(int *)(temp_v1 + 0x688) + 0x9aa);
-        param_1[2] = 6;
-        return;
-      }
-      if (temp_v0 != 6) {
-        if (temp_v0 != 7) {
-          if (temp_v0 != 9999) {
-            return;
-          }
-          FUN_00233e70(param_1,0xe,6);
-          if (param_1[1] != 6) {
-            return;
-          }
-        }
-        else {
-          temp_v0 = param_1[3];
-          param_1[3] = temp_v0 - 1;
-          if (0 < (int)(temp_v0 - 1)) {
-            return;
-          }
-          param_1[1] = 6;
-          param_1[2] = 0;
-          if ((int *)param_1[0x82] != (int *)0x0) {
-            (**(romwright_code **)(*(int *)param_1[0x82] + 4))();
-            param_1[0x82] = 0;
-          }
-        }
-        aocMenuSetButtonHelp(param_1,2,1);
-        return;
-      }
-      (**(romwright_code **)(*(int *)param_1[0x82] + 0xc))(&temp_v3);
-      record.word(0) = temp_v3;
-      record.word(1) = uStack_40;
-      record.word(2) = uStack_3c;
-      record.word(3) = uStack_38;
-      record.word(4) = uStack_34;
-      temp_v1 = strIsEmpty(&record.word(0));
-      if (temp_v1 != 0) {
-        param_1[1] = 10;
-        param_1[2] = 0;
-        if ((int *)param_1[0x82] != (int *)0x0) {
-          (**(romwright_code **)(*(int *)param_1[0x82] + 4))();
-          param_1[0x82] = 0;
-        }
-        temp_v1 = g_aocMain;
-        *(unsigned int *)(g_aocMain + 0x694) = 0;
-        *(unsigned int *)(temp_v1 + 0x698) = 0;
-        *(unsigned int *)(temp_v1 + 0x69c) = 0;
-        *(unsigned int *)(temp_v1 + 0x6a0) = 0;
-        *(unsigned int *)(temp_v1 + 0x6a4) = 0;
-        *(unsigned int *)(temp_v1 + 0x6a8) = 0;
-        *(unsigned int *)(temp_v1 + 0x6ac) = 0;
-        *(unsigned int *)(temp_v1 + 0x6b0) = 0;
-        *(unsigned int *)(temp_v1 + 0x6b4) = 0;
-        *(unsigned int *)(temp_v1 + 0x6b8) = 0;
-        *(unsigned int *)(temp_v1 + 0x6bc) = 0;
-        *(unsigned int *)(temp_v1 + 0x6c0) = 0;
-        *(unsigned int *)(temp_v1 + 0x6c4) = 0;
-        *(unsigned int *)(temp_v1 + 0x6c8) = 0;
-        *(unsigned int *)(temp_v1 + 0x6cc) = 0;
-        *(unsigned int *)(temp_v1 + 0x6d0) = 0;
-        memClear((void *)(temp_v1 + 0x6d4),0x80);
-        return;
-      }
-      temp_v1 = byteIsAtLeast100(&record.word(0));
-      if (temp_v1 == 0) {
-        return;
-      }
-      jobStopAndClearFlags(param_1);
-    }
-  }
-  else {
-    if ((*param_1 & 0x200) == 0) {
-      return;
-    }
-    (**(romwright_code **)(*(int *)param_1[0x82] + 0xc))(&temp_v3);
-    record.word(0) = temp_v3;
-    record.word(1) = uStack_40;
-    record.word(2) = uStack_3c;
-    record.word(3) = uStack_38;
-    record.word(4) = uStack_34;
-    temp_v1 = strIsEmpty(&record.word(0));
-    if (temp_v1 != 0) {
-      param_1[2] = 5;
-      aocLoadingTaskStart(param_1,1);
-      return;
-    }
-    temp_v1 = byteIsAtLeast100(&record.word(0));
-    if (temp_v1 == 0) {
-      return;
-    }
-    jobStopAndClearFlags(param_1);
-  }
-  if ((record.word(0) & 0xff) == 0x66) {
-    temp_v4 = record.word(0);
-    uStack_2c = record.word(1);
-    uStack_28 = record.word(2);
-    uStack_24 = record.word(3);
-    uStack_20 = record.word(4);
-    FUN_00234124(param_1,&temp_v4);
-    return;
-  }
-  if ((record.word(0) & 0xff) == 0x67) {
-    param_1[2] = 7;
-    param_1[3] = 3;
-    return;
-  }
-  param_1[2] = 9999;
-  param_1[0x84] = record.word(0);
-  param_1[0x85] = record.word(1);
-  param_1[0x86] = record.word(2);
-  param_1[0x87] = record.word(3);
-  param_1[0x88] = record.word(4);
-  return;
 }
 
-} /* extern "C" */
+}

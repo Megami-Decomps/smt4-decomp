@@ -1,5 +1,5 @@
-/* NON_MATCHING: scheduling only: retail loads the experience, hp-low and hp-high words together before their stores (likewise max-HP/stat-offset/variant, and the kind byte before the slot store); ours interleaves each load with its store. Locals holding each loaded field reproduce it, but they are steering. */
 #include "common.h"
+#include <stddef.h>
 #include "gamedata/EquipmentRecord.h"
 
 /* Seven halfwords, copied around as a unit. */
@@ -7,8 +7,8 @@ __packed struct HalfwordGroup {
     u16 values[7];
 };
 
-/* A party demon record in save format (fields are not naturally aligned). */
-__packed struct DemonSaveRecord {
+/* A party demon record in save format (the halfword groups are packed; every other field is naturally aligned). */
+struct DemonSaveRecord {
     /* 0x00 */ HalfwordGroup skills;       /* the first three are looked up for their effects */
     /* 0x0E */ HalfwordGroup groupB;
     /* 0x1C */ HalfwordGroup stats;        /* values 2..6 are clamped to 999 in the snapshot */
@@ -30,7 +30,7 @@ struct StatGrades {
 };
 
 /* The snapshot the battle log keeps of a demon (0x5B0 bytes). */
-__packed struct DemonSnapshot {
+struct DemonSnapshot {
     /* 0x000 */ s16 slot;
     /* 0x002 */ u16 kind;
     /* 0x004 */ s32 experienceToNext;
@@ -51,6 +51,11 @@ __packed struct DemonSnapshot {
     /* 0x598 */ s32 marker;
     /* 0x59C */ u16 playerName[10];
 };
+
+typedef char DemonSaveRecordLayoutCheck[offsetof(DemonSaveRecord, experience) == 0x30 &&
+    offsetof(DemonSaveRecord, kind) == 0x76 ? 1 : -1];
+typedef char DemonSnapshotLayoutCheck[offsetof(DemonSnapshot, statGrades) == 0x32 &&
+    offsetof(DemonSnapshot, cleared) == 0x58 && sizeof(DemonSnapshot) == 0x5B0 ? 1 : -1];
 
 extern "C" {
 

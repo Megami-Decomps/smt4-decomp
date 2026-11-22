@@ -1,21 +1,22 @@
-/* NON_MATCHING: readable rewrite of the command menu mode switch; retail keeps the work in r4 and the mode pointer in r5 (the build swaps them and spills the 0x3bdc list address), copies the mode argument to r9 after storing it, and lays the 8/10/12 and 1 region loops out as one shared test chain (the build tests 8, 10, 12 as one chain). */
 #include "common.h"
 #include <stddef.h>
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
 #include "gamedata/NkmEnemyLookup.h"
 
-/* A selectable entry of the command menu's page list (0x40 bytes). */
+/* unit-local: the battle UI object (ActorCardAnimationsA in battle/ActorCardAnimations.h, Menu32 in shard/Shard0032.h,
+ * BattleSelectionTransition) has several partial views that name 0x387C-0x3890 differently; merging them is a
+ * follow-up (wave 77 review). A selectable entry of the command menu's page list (0x40 bytes). */
 struct CommandPageEntry {
     /* 0x00 */ u16 id;
     /* 0x02 */ u8 unk02[0x16];
-    /* 0x18 */ u8 present;
+    /* 0x18 */ s8 present;
     /* 0x19 */ u8 unk19[0x1B];
     /* 0x34 */ s32 value;
     /* 0x38 */ u8 unk38[8];
 };
 
-/* The battle command menu's work past the parts the other menu functions use. */
+/* unit-local (see CommandPageEntry): the battle command menu's view of that object. */
 struct CommandMenuScreen {
     /* 0x0000 */ u8 unk0000[0x3878];
     /* 0x3878 */ u32 unk3878;
@@ -80,64 +81,32 @@ static __inline void addSelectionRegions(CommandMenuScreen *work)
     }
 }
 
-/* Enters a command menu mode: plays its sound, rebuilds the touch regions its buttons need. */
-void btlCommandMenuEnterMode(CommandMenuScreen *work, s32 mode, s32 rememberPrevious)
+/* Clears the touch region table and registers the regions of the new mode's buttons. Retail copies the mode
+ * argument into a register of its own (mov r9, r6) where this starts: the parameter of an inlined function. */
+static __inline void addModeRegions(CommandMenuScreen *work, s32 mode)
 {
-    s32 *current = &work->mode;
-    if (*current == 0x22)
-        gridNavigationConfigure(&work->allList, 4, 1, 4, 1, 1);
-    if (*current == 0x13 || *current == 0x16)
-        sysPlaySe(buttonHelpGetValue());
-    if (*current == 0x22 || *current == 0x23 || *current == 0x24)
-        sysPlaySe(buttonHelpGetValue());
-    if (ifTouchGetButtonHelpValue() == 0x3F) {
-        if (btlScriptUnitHasFlags(btlGetMainState()) == 0)
-            sysPlaySe(buttonHelpGetValue());
-    }
-    s32 *selected = &work->selected;
-    s32 *previous = &work->previousMode;
-    if (*current == 7) {
-        if ((u32)(*previous - 8) <= 5)
-            FUN_00270104(work);
-        else
-            screenSetContextHint(work, FUN_002cc9e0(work, 1), *selected);
-    }
-    if (mode == 2) {
-        sysPlaySe(gameDataFlagTestBit(0x10) != 0 ? 0xB0 : 0xB1);
-    } else if (mode == 9 || mode == 8 || mode == 0xB || mode == 10 || mode == 0xD || mode == 0xC) {
-        btlPlayMenuConfirmSe(0);
-    } else if (mode == 1) {
-        btlPlayMenuConfirmSe(listCursorGetRowOfChildIfUnblocked(&work->lists[*selected]) == 0);
-    }
-    if (rememberPrevious != 0)
-        *previous = *current;
-    *current = mode;
-    work->unk3878 = 0;
-    for (s32 i = 0; i < work->regionCount; i++)
-        ifTouchRegionRemove();
-    work->regionCount = 0;
     __aeabi_memset4(work->regions, 0x40, 0xFFFFFFFF);
-    if (mode == 1) {
+    if (mode == 1)
         addSelectionRegions(work);
-    } else if (mode == 8 || mode == 10 || mode == 12) {
+    if (mode == 8 || mode == 10 || mode == 12) {
         addSelectionRegions(work);
         for (s32 i = 0; i < uiSearchPrimary(work->current); i++) {
             s32 first;
-            if (*selected == 1)
+            if (work->selected == 1)
                 first = 0xC2;
-            else if (*selected == 2)
+            else if (work->selected == 2)
                 first = 0xBB;
             else
                 first = 0xB3;
             work->regions[0x16 / 2 + i] = ifTouchRegionAddRequested(0xD, first + i);
             work->regionCount++;
         }
-        if (uiSearchPrimary(work->current) < gridNavigationGetItemCount(work->current)) {
-            if (*selected == 1) {
+        if (gridNavigationGetItemCount(work->current) > uiSearchPrimary(work->current)) {
+            if (work->selected == 1) {
                 work->regions[0x10 / 2] = ifTouchRegionAddRequested(0xD, 0x199);
                 work->regions[0x12 / 2] = ifTouchRegionAddRequested(0xD, 0x197);
                 work->regions[0x14 / 2] = ifTouchRegionAddRequested(0xD, 0x198);
-            } else if (*selected == 2) {
+            } else if (work->selected == 2) {
                 work->regions[0x10 / 2] = ifTouchRegionAddRequested(0xD, 0x193);
                 work->regions[0x12 / 2] = ifTouchRegionAddRequested(0xD, 0x191);
                 work->regions[0x14 / 2] = ifTouchRegionAddRequested(0xD, 0x192);
@@ -153,26 +122,24 @@ void btlCommandMenuEnterMode(CommandMenuScreen *work, s32 mode, s32 rememberPrev
         work->regions[0x22 / 2] = ifTouchRegionAddRequested(0xD, 0x1B3);
         work->regionCount++;
         for (s32 i = 0; i < work->pageCount; i++) {
-            CommandPageEntry *page = &work->pages[i];
-            if (page->present != 0) {
-                if ((nkmEnemyFindById(page->id)->level & 0x8000) != 0) {
+            if (work->pages[i].present != 0) {
+                if ((nkmEnemyFindById(work->pages[i].id)->level & 0x8000) != 0) {
                     if (work->pageFlag != 0) {
                         work->regions[0x24 / 2 + i] = ifTouchRegionAddRequested(0xD, 0x1A0);
-                    } else if (page->value - 0x14A <= 4u || page->value - 0x165 <= 3u) {
+                    } else if (work->pages[i].value - 0x14A <= 4u || work->pages[i].value - 0x165 <= 3u) {
                         work->regions[0x24 / 2 + i] = ifTouchRegionAddRequested(0xD, 0x19F);
                     } else {
                         work->regions[0x24 / 2 + i] = ifTouchRegionAddRequested(0xD, 0x19E);
                     }
                 } else {
-                    work->regions[0x24 / 2 + i] = ifTouchRegionAddRequested(0xD, page->value);
+                    work->regions[0x24 / 2 + i] = ifTouchRegionAddRequested(0xD, work->pages[i].value);
                 }
                 work->regionCount++;
             }
         }
     }
     if (mode == 0x22 || mode == 0x2D) {
-        ScrollSelection *list = &work->allList;
-        for (s32 i = 0; i < widgetSubCallIfVisible(list); i++) {
+        for (s32 i = 0; i < widgetSubCallIfVisible(&work->allList); i++) {
             if (work->blocked[i] == 0) {
                 work->regions[0x38 / 2 + i] = ifTouchRegionAddRequested(0xD, i + 0x36);
                 work->regionCount++;
@@ -180,13 +147,48 @@ void btlCommandMenuEnterMode(CommandMenuScreen *work, s32 mode, s32 rememberPrev
         }
     }
     if (mode == 0x16) {
-        ScrollSelection *list = &work->allList;
-        for (s32 i = 0; i < widgetSubCallIfVisible(list); i++) {
+        for (s32 i = 0; i < widgetSubCallIfVisible(&work->allList); i++) {
             if (work->chosen[i] == 1) {
                 work->regions[0x38 / 2 + i] = ifTouchRegionAddRequested(0xD, i + 0x36);
                 work->regionCount++;
             }
         }
     }
+}
+
+/* Enters a command menu mode: plays its sound, rebuilds the touch regions its buttons need. */
+void btlCommandMenuEnterMode(CommandMenuScreen *work, s32 mode, s32 rememberPrevious)
+{
+    if (work->mode == 0x22)
+        gridNavigationConfigure(&work->allList, 4, 1, 4, 1, 1);
+    if (work->mode == 0x13 || work->mode == 0x16)
+        sysPlaySe(buttonHelpGetValue());
+    if (work->mode == 0x22 || work->mode == 0x23 || work->mode == 0x24)
+        sysPlaySe(buttonHelpGetValue());
+    if (ifTouchGetButtonHelpValue() == 0x3F) {
+        if (btlScriptUnitHasFlags(btlGetMainState()) == 0)
+            sysPlaySe(buttonHelpGetValue());
+    }
+    if (work->mode == 7) {
+        if ((u32)(work->previousMode - 8) <= 5)
+            FUN_00270104(work);
+        else
+            screenSetContextHint(work, FUN_002cc9e0(work, 1), work->selected);
+    }
+    if (mode == 2) {
+        sysPlaySe(gameDataFlagTestBit(0x10) != 0 ? 0xB0 : 0xB1);
+    } else if (mode == 9 || mode == 8 || mode == 0xB || mode == 10 || mode == 0xD || mode == 0xC) {
+        btlPlayMenuConfirmSe(0);
+    } else if (mode == 1) {
+        btlPlayMenuConfirmSe(listCursorGetRowOfChildIfUnblocked(&work->lists[work->selected]) == 0);
+    }
+    if (rememberPrevious != 0)
+        work->previousMode = work->mode;
+    work->mode = mode;
+    work->unk3878 = 0;
+    for (s32 i = 0; i < work->regionCount; i++)
+        ifTouchRegionRemove();
+    work->regionCount = 0;
+    addModeRegions(work, mode);
 }
 }

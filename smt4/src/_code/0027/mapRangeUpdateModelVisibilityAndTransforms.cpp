@@ -1,4 +1,3 @@
-/* NON_MATCHING: the motion getter now matches; the saved registers holding zero and the range-work global are exchanged. */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match2_AnimationVisualState.h"
@@ -63,13 +62,12 @@ u32 modelGetCurrentMotion(Inner0020ffe0 *model);
 void mapRangeUpdateModelVisibilityAndTransforms()
 {
     for (s32 i = 0; i < 16; ++i) {
-        RangeWork* work = g_mapRangeWork;
-        RangeEntry* entry = &work->table.entries[i];
+        RangeEntry* entry = &g_mapRangeWork->table.entries[i];
         if (!entry->active || entry->kind == 3) {
             continue;
         }
         RangeModelBinding* binding = entry->hasOwnBinding
-            ? entry->binding : work->slots[entry->slot].binding;
+            ? entry->binding : g_mapRangeWork->slots[entry->slot].binding;
         if (g_gameState.loading) {
             modelSetScale(binding->model, 0.0f);
             nodeSetPropertyScale(binding->model, 0.0f);

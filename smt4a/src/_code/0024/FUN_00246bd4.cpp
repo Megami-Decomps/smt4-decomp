@@ -112,7 +112,7 @@ int gameDataFlagTestBit(...);
 int controllerGetSourceValue(...);
 int controllerGetSourceTiming(...);
 int moriModelUnitStartMaterialAnimation(...);
-int FUN_004a0524(...);
+int fieldWalkRecoverHp(...);
 int FUN_004a08f0(...);
 int __aeabi_memcpy4(...);
 
@@ -422,7 +422,7 @@ extern int linkHolderCheckFirst(int);
 /* Supplied declaration required: FUN_0049fc88. */
 /* Supplied declaration required: FUN_0049fe58. */
 /* Supplied declaration required: FUN_004a01c8. */
-/* Supplied declaration required: FUN_004a0524. */
+/* Supplied declaration required: fieldWalkRecoverHp. */
 /* Supplied declaration required: FUN_004a08f0. */
 extern int partyAnyMemberHasFlagBit(unsigned int, unsigned int);
 extern int inputIsQuestCancelPressed(void);
@@ -927,7 +927,7 @@ LAB_002b82a8:
     *(float *)(temp_v6 + 0xdf0) = temp_v25;
     if ((int)temp_v25 >= 0x44bb8001) {
       *(float *)(temp_v6 + 0xdf0) = temp_v25 - 1500.0f;
-      FUN_004a0524();
+      fieldWalkRecoverHp();
       FUN_004a08f0();
     }
     temp_v25 = *(float *)(temp_v6 + 0xdf8) + temp_v35;

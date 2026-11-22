@@ -7,7 +7,7 @@ extern "C" {
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int FUN_0029406c(int *, int *, int *);
-int FUN_002e34a4(unsigned int *, int *, int *, unsigned char [24]);
+int mapCollisionGetStoredVectors(unsigned int *, int *, int *, unsigned char [24]);
 
 /* stack frame of void: 18 slot(s), 72 byte(s) */
 typedef struct {
@@ -37,7 +37,7 @@ extern int g_lmapScene; /* 0x581288 */
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_0029406c. */
-/* Supplied declaration required: FUN_002e34a4. */
+/* Supplied declaration required: mapCollisionGetStoredVectors. */
 extern int lmapResolveContextValue(void);
 
 void FUN_0030250c(void)
@@ -69,7 +69,7 @@ void FUN_0030250c(void)
   
   *(unsigned int *)((*(int *)((unsigned char *)&g_lmapViewHolder + 0x4)) + 0x218) = 0;
   puVar1 = (unsigned int *)&temp_v8;
-  FUN_002e34a4(puVar1,&temp_v11,&temp_v5,temp_v20);
+  mapCollisionGetStoredVectors(puVar1,&temp_v11,&temp_v5,temp_v20);
   if (puVar1 != (unsigned int *)0x0) {
     temp_v2 = temp_v8;
     temp_v14 = temp_v9;

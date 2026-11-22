@@ -3,12 +3,6 @@
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxTitle.h"
 
-/* Pushes a state on the context's first stack (the depth read once, as in Apocalypse's requestImageDraw). */
-static __inline void pushCountedA(RenderCtx *context, int state)
-{
-    renderStackPushCounted(context->stacks + RENDER_STACK_A, state);
-}
-
 extern "C" {
 extern const MessageImageChoices g_messageSelectedImagePairs;
 void gxResetColorQuadToWhite(void);
@@ -27,7 +21,7 @@ void messageDrawSelectedImagePair(const MessageImageSelector *owner, const f32 *
     renderCtxSelectStereoLayout(g_titleScene);
     gxResetColorQuadToWhite();
     RenderCtx *context = g_titleScene;
-    pushCountedA(context, renderCtxPackPassFlags(1, 0));
+    renderCtxPushACounted(context, renderCtxPackPassFlags(1, 0));
     efctSetSpeed(*alpha);
     MessageImageChoices images = g_messageSelectedImagePairs;
     s32 depth = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.35f);

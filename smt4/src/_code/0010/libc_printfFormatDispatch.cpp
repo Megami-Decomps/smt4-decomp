@@ -9,7 +9,7 @@ int FUN_002aa924(...);
 int CONCAT44(...);
 int libc_printfStr(float *, float *, int);
 int libc_printfWstr(float *, float *, int);
-int FUN_002076b8(...);
+int vectorScratchCatmullRom(...);
 int FUN_002aa67c(...);
 int FUN_002aa6ac(...);
 int FUN_002aa790(...);
@@ -73,7 +73,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: libc_printfStr. */
 /* Supplied declaration required: libc_printfWstr. */
 extern unsigned int FUN_0010072c(float *, int, int, unsigned int);
-/* Supplied declaration required: FUN_002076b8. */
+/* Supplied declaration required: vectorScratchCatmullRom. */
 /* Supplied declaration required: FUN_002aa67c. */
 /* Supplied declaration required: FUN_002aa6ac. */
 /* Supplied declaration required: FUN_002aa790. */
@@ -392,7 +392,7 @@ float * libc_printfFormatDispatch(float *param_1,float *param_2,int *param_3)
           temp_v10 = DAT_004ea924;
           do {
             in_s16 = in_s16 + temp_v26;
-            FUN_002076b8(((unsigned int)__current_sp()));
+            vectorScratchCatmullRom(((unsigned int)__current_sp()));
             pfVar3[-7] = DAT_004ea928;
             pfVar3[-10] = DAT_004ea91c;
             pfVar3[-9] = DAT_004ea920;

@@ -1,9 +1,10 @@
-/* NON_MATCHING: 44 lines: retail loads the point's kind separately in each arm where armcc hoists one load above
- * the index test, which also swaps the queue and previous-point registers (r6/r7). */
+/* NON_MATCHING: retail loads the point's kind separately in each arm where armcc hoists one load above
+ * the index test (which also moves the previous-point address), and loads the previous point's z apart from x/y. */
 #include "shard/W6_W6Match2_VectorQueue.h"
-#include "util/MathFunctions.h"
+#include "map/MapVector.h"
 
 extern "C" {
+f32 mathDistanceBetweenPoints(MapVector from, MapVector to); // declcheck: local (util/MathFunctions.h declares six floats for its float callers; retail moves this caller's points as by-value vectors, as in mapSelectNearbyDeferredModel)
 extern VectorQueueWork *g_vectorQueueWork;
 
 // Finish the active path by storing each point's direction toward its predecessor.
@@ -20,8 +21,7 @@ void FUN_001e33e4(void)
         } else {
             QueuedVector *previous = point - 1;
             point->kind |= 1;
-            f32 distance = mathDistanceBetweenPoints(point->position.x, point->position.y, point->position.z,
-                                     previous->position.x, previous->position.y, previous->position.z);
+            f32 distance = mathDistanceBetweenPoints(point->position, previous->position);
             if (distance < 0.0f)
                 distance = -distance;
             MapVector previousPosition = previous->position;

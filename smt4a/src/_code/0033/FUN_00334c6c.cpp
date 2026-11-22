@@ -9,8 +9,7 @@ void efctSetSpeed(f32 speed);
 // Draw the normal or alternate status panel with independent background and accent timing.
 void FUN_00334c6c(s32 x, s32 y, s32 alternate)
 {
-    StatusDownStateA *work = g_statusDown;
-    efctSetSpeed(vec2GetSpeed(&work->sprites[1]));
+    efctSetSpeed(vec2GetSpeed(&g_statusDown->sprites[1]));
     for (s32 index = 0; index < 3; ++index)
         texDrawTableEntryAtStoredOrigin(2, 0x12, index + 0x57E, x, y, 0xBF);
     efctSetSpeed(1.0f);
@@ -35,7 +34,7 @@ void FUN_00334c6c(s32 x, s32 y, s32 alternate)
     texDrawTableEntryAtStoredOrigin(2, 0x12, topRight, x, y, 0xC1);
     texDrawTableEntryAtStoredOrigin(2, 0x12, middleLeft, x, y, 0xC2);
     texDrawTableEntryAtStoredOrigin(2, 0x12, middleRight, x, y, 0xC2);
-    efctSetSpeed(vec2GetSpeed(&work->sprites[3]));
+    efctSetSpeed(vec2GetSpeed(&g_statusDown->sprites[3]));
     texDrawTableEntryAtStoredOrigin(2, 0x12, bottomLeft, x, y, 0xC4);
     texDrawTableEntryAtStoredOrigin(2, 0x12, bottomRight, x, y, 0xC4);
     efctSetSpeed(1.0f);

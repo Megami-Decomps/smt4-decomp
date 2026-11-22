@@ -36,8 +36,7 @@ typedef struct StatusDownState {
     /* 0x0420 */ s32 unk420;
     /* 0x0424 */ s32 indicatorFirst;
     /* 0x0428 */ s32 indicatorSecond;
-    /* 0x042C */ u8 slots[0x29];            /* filled with 0xFF */
-    /* 0x0455 */ u8 unk455[0x29];
+    /* 0x042C */ s16 slots[0x29];           /* the touch region of each row, -1 when none (the fills pass the count, 0x29, as the byte size) */
     /* 0x047E */ s16 selectedEntry;         /* negative when nothing is selected */
     /* 0x0480 */ u8 touchRegionCount;
     /* 0x0481 */ s8 unk481;

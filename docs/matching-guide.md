@@ -123,6 +123,8 @@ difference a register tie-break.
   look for another cause (smt4 `FUN_00361934`).
 - Keep packing local to genuinely unaligned members, with size and offset assertions: packing a whole
   record downgrades its aligned word accesses.
+- The same holds for an outer `__packed` on a naturally aligned record that only embeds packed groups: removing it
+  (the halfword groups stay packed, offsets asserted) made smt4 `btlBuildDemonSnapshot` IDENTICAL (wave 77).
 - A float-shaped stack argument does not prove a variadic callee: a one-word integer/float payload
   union has the same calling convention.
 - A result reported through `FUN_002c3510` (smt4a `FUN_0013ebd8`) is an `nn::Result`
@@ -158,6 +160,14 @@ difference a register tie-break.
   `and #255`, no `uxth`) is word-sized even when the callee only stores its low byte, and one they sign-extend is `s16`
   (with the field it is stored into `s16` too). btlHelp's creator smt4a `FUN_00200a68(u16 id, s16 message, …, u32 mode,
   …)`, one declaration in `battle/btlHelp.h`, is IDENTICAL with all eight callers (wave 74).
+- The definition decides when the two disagree: every caller of `ifTouchRegionAdd` sign-extends, but the definition
+  (both games) is IDENTICAL only with `u16` parameters (`s16` swaps r4/r5) and several callers lose IDENTICAL with a
+  shared `s16` declaration, so the callers keep their local declarations (wave 77). Likewise a by-value
+  `mathDistanceBetweenPoints(MapVector, MapVector)` in `util/MathFunctions.h` made smt4 `FUN_0039568c` worse (10 -> 22).
+- A callback that seems to take three arguments can have dropped a fourth that retail keeps in r3 before the call
+  through ip: `g_gfxReleaseCallback` takes the block as its fourth argument (`DriverTextureRelease`), which made
+  `blockOpen` IDENTICAL in both games (wave 77).
+- A flag parameter that retail tests before storing it into a byte field is `bool` (smt4a `FUN_0041dbdc`, wave 77).
 - A by-value struct of four floats travels in `s0`-`s3` in field order wherever it is listed, so building it in the
   caller does not reproduce a schedule that only an interleaved scalar order matches: `stereoCameraSetPerspective`'s
   callers stay closer with scalar arguments (wave 74).
@@ -192,6 +202,9 @@ difference a register tie-break.
   or indexing with the switch variable rather than literal indices moves armcc's tail merge. Keep
   explicit cases even when a case and `default` do the same thing: merging them changes the whole
   decision tree.
+- A membership test written as `k == 2 || k == 3 || k == 8` on a lookup's result can be `switch (lookup(id)) { case 2:
+  case 3: case 8: … }`, as a sibling already has it: the four kind-value comparators smt4 `FUN_003a0078`/`FUN_003a05e8`
+  and smt4a `FUN_00493d88`/`FUN_004943bc` are IDENTICAL with it, like their sibling `FUN_003a0164` (wave 77).
 - A switch case whose jump-table entry points into another case's tail is a fall-through
   (`case A: …; /* fall through */ case B:`).
 - Two identical branches that retail cross-jumps come from one inline helper called in both.
@@ -351,6 +364,11 @@ difference a register tie-break.
   `void *list = &work->list;`, a view pointer to `g_effectEditor`) can change the allocation by itself: write the
   access at each use (`battle->entries[index].flags`, `&work->list`), as for global holders above (smt4a
   `FUN_003eb0cc` and `FUN_0034c940` IDENTICAL, `FUN_002830cc` 49 -> 6; wave 65).
+- Wave 77 matched nine more this way (a cached pointer to a global, a table element or `param->state` removed):
+  smt4 `mapRangeUpdateModelVisibilityAndTransforms`, `FUN_00281788` and smt4a twin `FUN_00244acc`,
+  `effectColorOverrideBeginFadeToGray` (both games), smt4a `scrCommShowHowTo`, `FUN_002bd170`,
+  `renderCtxSelectBlendPreset` and `streamWriterSetLengthIfFits`. A local that holds a value across calls that could
+  change the global (scrCommShowHowTo's `work` for `jobStop`) stays.
 - The same for a table indexed by an operand: `table[command].handler()` then `table[command].argumentCount`, not a
   cached `ScriptCommand *entry`, made the script interpreter's `scrRunCommand` IDENTICAL in both games (wave 76).
 - Masks or table fields that retail reloads inside a loop, where armcc hoists them all, come back as in-loop loads

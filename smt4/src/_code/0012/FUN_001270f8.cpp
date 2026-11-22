@@ -16,7 +16,7 @@ extern unsigned int g_fsWaitNotification2; /* 0x4d42b4 */
 extern int DAT_004d42c4; /* 0x4d42c4 */
 
 /* Supplied declaration required: FUN_001270a8. */
-extern int FUN_00129584(unsigned int *, unsigned int);
+extern int modelWorkListAppend(unsigned int *, unsigned int);
 extern int FUN_0013af84(unsigned int);
 /* Supplied declaration required: sysReportCheckFailure. */
 extern void nn_os_LightEvent_ClearSignal(unsigned int);
@@ -37,7 +37,7 @@ void FUN_001270f8(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   nn_os_LightEvent_ClearSignal(param_1 + 8);
   FUN_001270a8(param_1);
   DAT_004d42c4 = param_1 + 8;
-  temp_v0 = FUN_00129584(&g_fsWaitNotification2,0x207);
+  temp_v0 = modelWorkListAppend(&g_fsWaitNotification2,0x207);
   if (-(temp_v0 >> 0x1f) != 0) {
     sysReportCheckFailure(temp_v0,0x12715c,-(temp_v0 >> 0x1f),param_4,unaff_r4,in_lr);
   }

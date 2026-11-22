@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail forms the last-key address as keys + (count * 8 - 8) and divides into s2; armcc here uses a writeback load (keys + count * 8, #-8). */
+/* NON_MATCHING: the frame (time / duration) and its scale take s1/s2 the other way round from retail, and the first key word loads into r1 where retail uses r3. */
 #include "common.h"
 
 namespace {
@@ -24,18 +24,17 @@ extern "C" {
  * estimate proportional to time and walk to the right key. */
 CurveKey *FUN_0051ca30(KeyCurve *curve, f32 time)
 {
-    CurveKey *keys = curve->keys;
     u32 frame = (u32)(time / curve->frameLength);
     CurveKey *key;
 
-    if (keys[0].frame > frame) {
-        return keys;
+    if (curve->keys[0].frame > frame) {
+        return curve->keys;
     }
-    key = &keys[curve->keyCount - 1];
+    key = &curve->keys[curve->keyCount - 1];
     if (frame >= key->frame) {
         return key;
     }
-    key = &keys[(u32)(curve->inverseDuration * ((f32)(curve->keyCount - 1) * time))];
+    key = &curve->keys[(u32)(curve->inverseDuration * ((f32)(curve->keyCount - 1) * time))];
     if (frame < key->frame) {
         do {
             --key;

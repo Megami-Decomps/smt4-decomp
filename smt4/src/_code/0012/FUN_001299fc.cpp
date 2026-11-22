@@ -33,10 +33,8 @@ void FUN_001299fc(void)
         srvInitialize();
         g_nngxState.configurationInitialized = 1;
     }
-
-    const char *configuration = g_nngxState.configuration;
-    srvGetServiceHandle(&g_nngxCommandState1, configuration,
-                           libc_strlen(configuration), 0);
+    srvGetServiceHandle(&g_nngxCommandState1, g_nngxState.configuration,
+                           libc_strlen(g_nngxState.configuration), 0);
     g_nngxState.acquiredGpu = g_nngxState.configuredGpu;
     nn_gxlow_CTR_Gpu_AcquireRight(&g_nngxGpu, g_nngxDefaultCommandState,
                                  g_nngxState.acquireMode);

@@ -13,7 +13,7 @@ int __ARM_common_memcpy4_8(...);
 int skillDataFindById(void);
 int sysMemClear(int [109], int);
 int btlEntryBuildSummary(...);
-int FUN_004c8340(...);
+int btlGetAffinity(...);
 int FUN_004c9160(...);
 int FUN_004e7c04(...);
 int btlUnitMarkTargetCandidates(...);
@@ -49,7 +49,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: btlEntryBuildSummary. */
-/* Supplied declaration required: FUN_004c8340. */
+/* Supplied declaration required: btlGetAffinity. */
 /* Supplied declaration required: FUN_004c9160. */
 /* Supplied declaration required: FUN_004e7c04. */
 /* Supplied declaration required: btlUnitMarkTargetCandidates. */
@@ -109,7 +109,7 @@ unsigned int FUN_004e933c(int *param_1,int param_2)
             *(unsigned short *)(temp_v4 + 0x324) = *(unsigned short *)(temp_v2 + 0x118);
             btlEntryBuildSummary(temp_v10,*param_1,*(unsigned int *)(param_2 + 0x20));
             temp_v3 = (unsigned int)*(short *)(*(int *)(param_2 + 0x20) + 0x6e);
-            FUN_004c8340(temp_v3,(int)*(short *)((int)puVar6 + 0x6e),temp_v10[0] >> 0x10,
+            btlGetAffinity(temp_v3,(int)*(short *)((int)puVar6 + 0x6e),temp_v10[0] >> 0x10,
                          (int)(short)temp_v10[1],0xffffffff);
             temp_v2 = temp_v9;
             if ((temp_v3 & 0x70000) != 0) {
@@ -126,7 +126,7 @@ unsigned int FUN_004e933c(int *param_1,int param_2)
         *(unsigned short *)(temp_v4 + 0x324) = 1;
         btlEntryBuildSummary(temp_v10,*param_1,*(unsigned int *)(param_2 + 0x20));
         temp_v3 = (unsigned int)*(short *)(*(int *)(param_2 + 0x20) + 0x6e);
-        FUN_004c8340(temp_v3,(int)*(short *)((int)puVar6 + 0x6e),temp_v10[0] >> 0x10,
+        btlGetAffinity(temp_v3,(int)*(short *)((int)puVar6 + 0x6e),temp_v10[0] >> 0x10,
                      (int)(short)temp_v10[1],0xffffffff);
         temp_v1 = temp_v9;
         if ((temp_v3 & 0x70000) != 0) {
@@ -145,7 +145,7 @@ unsigned int FUN_004e933c(int *param_1,int param_2)
             *(unsigned short *)(temp_v4 + 0x324) = 2;
             btlEntryBuildSummary(temp_v10,*param_1,*(unsigned int *)(param_2 + 0x20));
             temp_v3 = (unsigned int)*(short *)(*(int *)(param_2 + 0x20) + 0x6e);
-            FUN_004c8340(temp_v3,(int)*(short *)((int)puVar6 + 0x6e),temp_v10[0] >> 0x10,
+            btlGetAffinity(temp_v3,(int)*(short *)((int)puVar6 + 0x6e),temp_v10[0] >> 0x10,
                          (int)(short)temp_v10[1],0xffffffff);
             temp_v1 = temp_v9;
             if ((temp_v3 & 0x70000) != 0) {

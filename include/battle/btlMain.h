@@ -377,6 +377,16 @@ struct BattleEncounterSlotA {
     u8 padding[0x19];
 };
 
+/* The battle's reward totals (Apocalypse, BtlMainStateA + 0x1B0): up to six dropped items with their counts, the
+ * money and experience, and the highest enemy level. */
+typedef struct BattleRewardsA {
+    /* 0x00 */ s32 itemIds[6];
+    /* 0x18 */ s32 itemCounts[6];
+    /* 0x30 */ s32 money;
+    /* 0x34 */ s32 experience;
+    /* 0x38 */ u32 maxLevel;
+} BattleRewardsA;
+
 /* The same block in Apocalypse. */
 typedef struct BtlMainStateA {
     /* 0x0000 */ u32 job;         /* job that runs the battle */
@@ -467,6 +477,10 @@ typedef struct BtlMainStateA {
             u8 prefix[0x92];
             /* 0x011E */ u16 devilId;
         } devil;
+        struct {
+            u8 prefix[0x124];
+            /* 0x01B0 */ BattleRewardsA totals;  /* what the defeated enemies leave (battleAddEnemyRewards adds each one's) */
+        } rewards;
         struct {
             u8 prefix[0x64];
             s32 secondaryId; /* 0xF0 */
@@ -823,6 +837,11 @@ typedef struct BtlMainGlobalsA {
             /* 0x0A8 */ u64 excluded;
         } turnOrderMasks;
         struct {
+            /* 0x090 */ u64 recruited;     /* entry flags battleTryRecruitEnemy sets once an enemy agrees to join */
+            u8 unk098[8];
+            /* 0x0A0 */ u64 recruitRolled; /* entry flags it sets when it rolls for an enemy */
+        } recruitMasks;
+        struct {
             /* 0x090 */ u8 unk090[0x28];
             /* 0x0B8 */ u64 excluded;
         } compatibility;
@@ -936,6 +955,9 @@ static __inline void btlStepEnter(BtlStep *step, u32 state)
     step->counters.unk0C = 0;
     step->state = state;
 }
+
+typedef char BtlMainStateARewardsOffsetCheck[
+    offsetof(BtlMainStateA, rewards.totals) == 0x1B0 && sizeof(BattleRewardsA) == 0x3C ? 1 : -1];
 
 typedef char BtlMainStateAFlaggedRosterCountOffsetCheck[
     offsetof(BtlMainStateA, flaggedRoster.count) == 0x1ED9 ? 1 : -1];

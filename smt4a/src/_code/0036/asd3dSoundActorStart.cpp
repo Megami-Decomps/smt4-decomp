@@ -11,9 +11,8 @@ u8 nw_snd_SoundStartable_StartSound(AsdSnd3dActorA *actor, s32 *handle, s32 id, 
 /* Starts sound `id` on idle 3D actor `channel` at the 3D start volume; returns whether it started. */
 u8 asd3dSoundActorStart(s32 id, u32 channel)
 {
-    AsdSoundSystemA *system = &g_asdSoundSystem;
-    AsdSnd3dStateA *sound3d = &system->sound3d;
-    AsdSndSlotA *slot = system->currentSlotA;
+    AsdSnd3dStateA *sound3d = &g_asdSoundSystem.sound3d;
+    AsdSndSlotA *slot = g_asdSoundSystem.currentSlotA;
     u8 success = 0;
     if (sound3d->enabled && channel < 16 &&
         nw_snd_SoundArchive_IsAvailable(&g_asdSoundSystem) &&

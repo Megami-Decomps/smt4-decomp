@@ -15,7 +15,7 @@ typedef char TextRequestResultOffsetsCheck[offsetof(TextRequestResultView, selec
     offsetof(TextRequestResultView, linkedValue) == 0x104 ? 1 : -1];
 
 extern "C" {
-void FUN_00381874(EffectTextRequest *request);
+void effMenuBrowserStep(EffectTextRequest *request);
 u32 formattedTextCopyLabel(EffectTextRequest *request, void *result);
 u32 linkedObjGetValue(EffectTextRequest *request);
 void FUN_003c4984(EffectTextRequest *request, void *selection);
@@ -26,7 +26,7 @@ EffectTextRequest *effMenuCreate(u32 kind, u32 context);
 void effectEditorPollTextRequest(u32 unused, u32 context, TextRequestResultView *result)
 {
     if (g_effectEditor.nodeList != 0) {
-        FUN_00381874(g_effectEditor.request);
+        effMenuBrowserStep(g_effectEditor.request);
         result->state = g_effectEditor.request->state;
         result->labelValue = formattedTextCopyLabel(g_effectEditor.request, result);
         result->linkedValue = linkedObjGetValue(g_effectEditor.request);

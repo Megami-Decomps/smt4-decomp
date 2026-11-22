@@ -16,13 +16,12 @@ void lmapSceneBeginPositionTransition(f32 x, f32 y, f32 z, f32 endX, f32 endY, f
 {
     MapVector from = {x, y, z};
     MapVector to = {endX, endY, endZ};
-    LmapSceneA *scene = g_lmapScene;
-    MapVector *step = &scene->transition.step;
+    MapVector *step = &g_lmapScene->transition.step;
     step->x = to.x - from.x;
     step->y = to.y - from.y;
     step->z = to.z - from.z;
-    scene->transition.start = from;
-    scene->transition.end = to;
+    g_lmapScene->transition.start = from;
+    g_lmapScene->transition.end = to;
     scaleMapVector(step, 1.0f / 18.0f);
     g_lmapScene->pose.targetHeading = mathPositionHeadingDegrees(from, to);
 }

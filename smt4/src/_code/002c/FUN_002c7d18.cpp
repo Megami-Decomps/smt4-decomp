@@ -13,7 +13,7 @@ int renderGetCameraViewMatrix(...);
 int gfxQuaternionWorkspaceBuildMatrix(...);
 int nn_math_ARMv6_MTX34AddTranslateAsm(...);
 int nn_math_ARMv6_MTX34MultTranslateAsm_2A3504(...);
-int FUN_002aff70(...);
+int debugQuadVertex(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int FUN_002b011c(...);
 int phaseCosInterpolate(...);
 int mathSinFixedAngle(...);
@@ -120,7 +120,7 @@ extern float DAT_004ea998; /* 0x4ea998 */
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34AddTranslateAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultTranslateAsm_2A3504. */
-/* Supplied declaration required: FUN_002aff70. */
+/* Supplied declaration required: debugQuadVertex. */
 /* Supplied declaration required: FUN_002b011c. */
 /* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: mathSinFixedAngle. */
@@ -317,10 +317,10 @@ void FUN_002c7d18(fn_002c7d18_arg0 *param_1)
               mathSinFixedAngle();
               temp_v18 = (unsigned long long)(unsigned int)temp_v12 << 0x20;
               FUN_002b011c();
-              FUN_002aff70(temp_v37);
-              FUN_002aff70(temp_v37);
-              FUN_002aff70(temp_v37);
-              FUN_002aff70(temp_v37);
+              debugQuadVertex(temp_v37);
+              debugQuadVertex(temp_v37);
+              debugQuadVertex(temp_v37);
+              debugQuadVertex(temp_v37);
               forwardRecoveredCallback();
             }
           }
@@ -364,10 +364,10 @@ void FUN_002c7d18(fn_002c7d18_arg0 *param_1)
               mathSinFixedAngle();
               temp_v18 = (unsigned long long)(unsigned int)temp_v19 << 0x20;
               FUN_002b011c();
-              FUN_002aff70(temp_v37);
-              FUN_002aff70(temp_v37);
-              FUN_002aff70(temp_v37);
-              FUN_002aff70(temp_v37);
+              debugQuadVertex(temp_v37);
+              debugQuadVertex(temp_v37);
+              debugQuadVertex(temp_v37);
+              debugQuadVertex(temp_v37);
               forwardRecoveredCallback();
             }
           }

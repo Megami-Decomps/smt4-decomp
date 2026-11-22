@@ -10,21 +10,20 @@ void asdScenePassVisit(void *pass, void *visitor);
 /* Attach the pending node of scene slot 0 or 1 and clear its bookkeeping. */
 void FUN_00359454(s32 which)
 {
-    GfxSettings *state = &g_gfxSettings;
-    ModelSlotNodes *nodes = &state->owner[which]->slot->nodes;
+    ModelSlotNodes *nodes = &g_gfxSettings.owner[which]->slot->nodes;
 
     if (which == 0) {
-        state->node0 = state->pendingNode[0];
-        nw_gfx_SceneNode_AttachChild(state->sceneNode[0]);
-        *nodes->target = state->node0;
-        state->slotState[0] = 0;
-        asdScenePassVisit(state->attachInfo[0], state->transformBuilder[0]);
+        g_gfxSettings.node0 = g_gfxSettings.pendingNode[0];
+        nw_gfx_SceneNode_AttachChild(g_gfxSettings.sceneNode[0]);
+        *nodes->target = g_gfxSettings.node0;
+        g_gfxSettings.slotState[0] = 0;
+        asdScenePassVisit(g_gfxSettings.attachInfo[0], g_gfxSettings.transformBuilder[0]);
     } else if (which == 1) {
-        state->node1 = state->pendingNode[1];
-        nw_gfx_SceneNode_AttachChild(state->sceneNode[1]);
-        *nodes->target = state->node1;
-        state->slotState[1] = 0;
-        asdScenePassVisit(state->attachInfo[1], state->transformBuilder[1]);
+        g_gfxSettings.node1 = g_gfxSettings.pendingNode[1];
+        nw_gfx_SceneNode_AttachChild(g_gfxSettings.sceneNode[1]);
+        *nodes->target = g_gfxSettings.node1;
+        g_gfxSettings.slotState[1] = 0;
+        asdScenePassVisit(g_gfxSettings.attachInfo[1], g_gfxSettings.transformBuilder[1]);
     }
 }
 

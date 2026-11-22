@@ -14,7 +14,7 @@ typedef struct EffectTextResult {
 
 void nodeListOwnerFree(void *owner);
 void effectEditorObjectDestroy(EffectTextRequest *request);
-void FUN_002f82ac(EffectTextRequest *request);
+void effMenuBrowserStep(EffectTextRequest *request);
 EffectTextRequest *effMenuCreate(void *owner, u32 size);
 u32 linkedObjGetValue(EffectTextRequest *request);
 u32 formattedTextCopyLabel(EffectTextRequest *request, EffectTextResult *result);
@@ -25,7 +25,7 @@ void FUN_003241c4(EffectTextRequest *request, void *body);
 void effectEditorPollTextRequest(u32 unused, u32 size, EffectTextResult *result)
 {
     if (g_effectEditor.nodeList != NULL) {
-        FUN_002f82ac(g_effectEditor.request);
+        effMenuBrowserStep(g_effectEditor.request);
         result->state = g_effectEditor.request->state;
         result->label = formattedTextCopyLabel(g_effectEditor.request, result);
         result->extra = linkedObjGetValue(g_effectEditor.request);

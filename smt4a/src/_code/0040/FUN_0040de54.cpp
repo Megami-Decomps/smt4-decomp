@@ -69,7 +69,7 @@ int FUN_004c909c(...);
 int FUN_004c9160(...);
 int FUN_004c9474(...);
 int btlHelpAppendTextEntry(...);
-int FUN_004cab9c(...);
+int btlRosterMotionSyncStatus(...);
 int FUN_004cad84(void);
 void btlRosterMotionRestart(TransitionView *state);
 int driftObjectStart(...);
@@ -243,7 +243,7 @@ extern unsigned int FUN_0047fa50(unsigned int);
 /* Supplied declaration required: FUN_004c9474. */
 /* Supplied declaration required: btlHelpAppendTextEntry. */
 /* Supplied declaration required: btlEntryRemove. */
-/* Supplied declaration required: FUN_004cab9c. */
+/* Supplied declaration required: btlRosterMotionSyncStatus. */
 /* Supplied declaration required: FUN_004cad84. */
 /* Supplied declaration required: FUN_004cae0c. */
 /* Supplied declaration required: colorFadeStartRgb. */
@@ -849,7 +849,7 @@ joined_r0x0040ec14:
     if (puVar6 != (unsigned int *)0x0) {
       if ((char)psVar2[2] != '\x1a') {
         if ((char)psVar2[2] == '\x1b') {
-          FUN_004cab9c(*(unsigned int *)(psVar2 + 10));
+          btlRosterMotionSyncStatus(*(unsigned int *)(psVar2 + 10));
         }
       }
       else if (!((puVar6[1] & DAT_0057131c) == 0 && (*puVar6 & DAT_00571318) == 0)) {
@@ -879,7 +879,7 @@ joined_r0x0040ec14:
     if (puVar6 != (unsigned int *)0x0) {
       if (!(((DAT_00571318 | DAT_00571330) & *puVar6) != 0 ||
            ((DAT_00571334 | DAT_0057131c) & puVar6[1]) != 0)) {
-        FUN_004cab9c(*(unsigned int *)(psVar2 + 10));
+        btlRosterMotionSyncStatus(*(unsigned int *)(psVar2 + 10));
         break;
       }
       temp_v3 = reinterpret_cast<int>(btlGetMainState());
@@ -887,7 +887,7 @@ joined_r0x0040ec14:
       do {
         temp_v9 = (int)*(short *)((int)puVar6 + temp_v6 * 2 + 8);
         if (-1 < temp_v9) {
-          FUN_004cab9c(*(int *)(temp_v3 + 0x1ed4) + temp_v9 * 0x1d0);
+          btlRosterMotionSyncStatus(*(int *)(temp_v3 + 0x1ed4) + temp_v9 * 0x1d0);
         }
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < 0x32);

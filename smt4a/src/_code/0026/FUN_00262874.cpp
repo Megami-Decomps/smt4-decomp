@@ -10,7 +10,7 @@ extern "C" {
 
 int FUN_002c7cd4(...);
 int FUN_0031f688(void);
-int FUN_0035dfc0(...);
+int table5Type9MarkEntrySeen(...);
 
 int eventQueueAddUnique(...);
 int uiSpriteSelectAnim(...);
@@ -255,7 +255,7 @@ extern int gameGlobalsGetState(void);
 /* Supplied declaration required: useCounterRelease. */
 extern int FUN_0035db94(void);
 /* Supplied declaration required: uniteCreatePreviewModel. */
-/* Supplied declaration required: FUN_0035dfc0. */
+/* Supplied declaration required: table5Type9MarkEntrySeen. */
 /* Supplied declaration required: FUN_00372100. */
 extern unsigned long long FUN_00372570(unsigned int);
 extern int panelStateIs0(void);
@@ -3024,7 +3024,7 @@ LAB_0026700c:
               compendiumRegisterPartyDemon(*(unsigned short *)(temp_v14 + 0x62));
             }
             gameCounterAddSaturating(0x26,1);
-            FUN_0035dfc0(*(unsigned short *)(temp_v14 + 0x62));
+            table5Type9MarkEntrySeen(*(unsigned short *)(temp_v14 + 0x62));
             temp_v4 = gameDataBlocksGetSaveData();
             *(unsigned short *)(temp_v4 + 0x27e0c) = 0;
           }

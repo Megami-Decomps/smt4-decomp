@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern void statusDownRegisterTouchRegions(void);
+extern void statusDownRebuildTouchRegions(void);
 
 /* Switches the status screen to mode 4, remembering the previous mode. */
 void FUN_00371ef4(void)
@@ -12,7 +12,7 @@ void FUN_00371ef4(void)
     status->stateTimer = 0;
     status->track.previous = status->track.state;
     status->track.state = 4;
-    statusDownRegisterTouchRegions();
+    statusDownRebuildTouchRegions();
 }
 
 }

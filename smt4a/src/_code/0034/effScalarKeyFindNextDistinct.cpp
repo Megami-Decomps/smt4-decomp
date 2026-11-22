@@ -1,4 +1,4 @@
-/* NON_MATCHING: head now matches (`s32 distance = 1` before an `if (*index < 3)` guard); remaining: register allocation of the key pointers and the VFP conversion order */
+/* NON_MATCHING: the step division's VFP registers match retail with the key pointers; remaining: retail folds the keys' 0x44 offset into each load (the build adds it to the two key pointers first) and gives the pointers other registers. */
 /* Finds the next distinct integer-key frame and computes its scaled value. */
 #include "AsdSDK/Source/Gfx/Effect/EffectScalarKeys.h"
 
@@ -10,8 +10,9 @@ extern "C" void effScalarKeyFindNextDistinct(const EffectIntegerKeySource *sourc
         for (; *index + distance < 4; ++distance) {
             *duration = source->keys[*index + distance].frame - source->keys[*index].frame;
             if (*duration > 0) {
-                s32 frames = source->keys[*index + distance].frame - (source->keys[*index]).frame;
-                *step = (f32)(source->keys[*index]).value / (f32)frames;
+                const EffectIntegerKey *from = &source->keys[*index];
+                const EffectIntegerKey *to = &source->keys[*index + distance];
+                *step = (f32)from->value / (f32)(to->frame - from->frame);
                 *value = (f32)source->keys[*index].value;
                 *index += distance;
                 return;

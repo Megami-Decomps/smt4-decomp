@@ -11,7 +11,7 @@ s32 effBlockCopyDataB(void *block, const void *source, s32 size);
 EffectSelectionItem *linkedFindItemByIndex(void *list, s32 index);
 void nodeListFree(void *list);
 s32 effMenuAppendNamedEntry(void *owner, const char *name, s32 kind, u32 index, s32 flags);
-void FUN_00381874(EffectTextRequest *request);
+void effMenuBrowserStep(EffectTextRequest *request);
 EffectTextRequest *effMenuCreate(void *owner);
 void handleHolderFree(EffectTextRequest *request);
 s32 linkedObjGetValue(EffectTextRequest *request);
@@ -36,7 +36,7 @@ u32 FUN_003c8878(u32 flags)
     input.state = 0;
 
     if (g_effectEditor.nodeList != NULL) {
-        FUN_00381874(g_effectEditor.request);
+        effMenuBrowserStep(g_effectEditor.request);
         input.state = g_effectEditor.request->state;
         input.kind = formattedTextCopyLabel(g_effectEditor.request, input.label);
         input.value = linkedObjGetValue(g_effectEditor.request);

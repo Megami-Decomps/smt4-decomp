@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_00244acc(void);
+void cullVolumeTableClear(void);
 
-/* Forwards to FUN_00244acc, the function that follows it. */
+/* Forwards to cullVolumeTableClear, the function that follows it. */
 void FUN_00244ac8(void)
 {
-    FUN_00244acc();
+    cullVolumeTableClear();
 }
 
 } /* extern "C" */

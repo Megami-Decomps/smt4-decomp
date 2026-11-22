@@ -3,13 +3,13 @@
 
 extern "C" {
 void FUN_004063b0(Obj557b68 *scene, const MoriSceneConfig *config);
-void FUN_00406ad4(Obj557b68 *scene);
+void moriSceneInitColorLists(Obj557b68 *scene);
 
 // Initialize the model scene and its default blue-gray distance fog.
 void moriSceneSetFogDefaults(Obj557b68 *scene, const MoriSceneConfig *config)
 {
     FUN_004063b0(scene, config);
-    FUN_00406ad4(scene);
+    moriSceneInitColorLists(scene);
     scene->fogOffset = 0.0f;
     scene->fogScale = 1.0f;
     scene->fogPower = 1.0f;

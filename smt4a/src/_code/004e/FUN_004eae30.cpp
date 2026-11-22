@@ -15,7 +15,7 @@ int FUN_004c0f74(...);
 int btlFindEntryValue(...);
 int kindIdStore(...);
 int btlCombatantGetSummaryValues(...);
-int FUN_004c8340(...);
+int btlGetAffinity(...);
 
 /* stack frame of param_4: 13 slot(s), 52 byte(s) */
 typedef struct {
@@ -49,7 +49,7 @@ extern unsigned int DAT_0057116c; /* 0x57116c */
 /* Supplied declaration required: btlFindEntryValue. */
 /* Supplied declaration required: kindIdStore. */
 /* Supplied declaration required: btlCombatantGetSummaryValues. */
-/* Supplied declaration required: FUN_004c8340. */
+/* Supplied declaration required: btlGetAffinity. */
 extern int __aeabi_idivmod(int, unsigned int);
 
 
@@ -118,7 +118,7 @@ void FUN_004eae30(unsigned int *param_1,int param_2,int param_3,int param_4)
         temp_v10 = 0;
         btlCombatantGetSummaryValues((int)*(short *)(*(int *)(param_4 + 0x24) + 0x6a),&temp_v9,&temp_v10);
         temp_v3 = (unsigned int)*(short *)(*(int *)(param_4 + 0x24) + 0x6a);
-        FUN_004c8340(temp_v3,param_3,temp_v9,temp_v10,0xffffffff);
+        btlGetAffinity(temp_v3,param_3,temp_v9,temp_v10,0xffffffff);
         if ((temp_v3 & 0x20000) != 0) {
           temp_v4 = 3;
         }
@@ -234,7 +234,7 @@ LAB_004eafdc:
           temp_v11[0] = 0;
           btlCombatantGetSummaryValues((int)*(short *)(*(int *)(param_4 + 0x24) + 0x6a),&temp_v10,temp_v11);
           temp_v3 = (unsigned int)*(short *)(*(int *)(param_4 + 0x24) + 0x6a);
-          FUN_004c8340(temp_v3,temp_v1,temp_v10,temp_v11[0],0xffffffff);
+          btlGetAffinity(temp_v3,temp_v1,temp_v10,temp_v11[0],0xffffffff);
           if ((temp_v3 & 0x20000) != 0) {
             temp_v7 = 3;
           }

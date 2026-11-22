@@ -1,6 +1,7 @@
 /* NON_MATCHING: the maze-owner and list-owner global addresses use exchanged registers. */
 #include "map/mapRndMaze.h"
-#include "shard/W4_Match1b_RegisteredHandle.h"
+#include "Model/MoriModelContent.h"
+#include "Model/MoriModelManager.h"
 #include <stddef.h>
 
 /* These handle arrays extend beyond the common MapRndMazeA prefix. */
@@ -8,23 +9,21 @@ struct MazeHandleTables {
     u8 unk000[0x394];
     u8 active;
     u8 unk395[0x1F];
-    RegisteredHandle *roots[6];
-    RegisteredHandle *groups[6][64];
-    RegisteredHandle *special[4];
+    MoriModelContent *roots[6];
+    MoriModelContent *groups[6][64];
+    MoriModelContent *special[4];
 };
 typedef char MazeHandleTablesOffsetsCheck[
     offsetof(MazeHandleTables, groups) == 0x3CC &&
     offsetof(MazeHandleTables, special) == 0x9CC ? 1 : -1];
 extern "C" {
 extern MazeHandleTables g_mapRndMaze;
-extern void *g_handleRegistry;
-void ptrListRemoveClearOwner(void *, u32);
 }
 
-static __inline void mazeUnregisterHandle(RegisteredHandle *handle)
+static __inline void mazeUnregisterHandle(MoriModelContent *handle)
 {
-    if (handle != NULL && handle->id != 0) {
-        ptrListRemoveClearOwner(g_handleRegistry, handle->id);
+    if (handle != NULL && handle->body != NULL) {
+        ptrListRemoveClearOwner(g_handleRegistry, handle->body);
     }
 }
 

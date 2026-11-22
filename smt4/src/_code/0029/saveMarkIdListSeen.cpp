@@ -26,8 +26,7 @@ static __inline void saveMarkIdSeen(SaveBlockView *save, s16 id)
 {
     if (id != 0 && (u32)id <= 500) {
         SaveBody *body = &save->body;
-        u8 *byte = &body->seenBits[id / 8];
-        *byte |= 1 << (id % 8);
+        body->seenBits[id / 8] |= 1 << (id % 8);
     }
 }
 

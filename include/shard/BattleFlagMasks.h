@@ -3,6 +3,7 @@
 #define SHARD_BATTLE_FLAG_MASKS_H
 
 #include "common.h"
+#include <stddef.h>
 
 struct BattleMasks {
     /* 0x000 */ u8 unk000[0x58];
@@ -30,10 +31,21 @@ struct BattleMasks {
 struct BattleFlagsState {
     /* 0x0000 */ u8 unk0000[0xf0];
     /* 0x00f0 */ s32 signedState;
-    /* 0x00f4 */ u8 unk00f4[0x45a0 - 0xf4];
+    /* 0x00f4 */ u32 enemies[6];        /* enemy ids, 0 = empty slot */
+    /* 0x010c */ u32 conditions;        /* bit 16: the enemies always flee, bit 17: they never do */
+    /* 0x0110 */ u8 unk0110[0x152 - 0x110];
+    /* 0x0152 */ u16 partialFleeChance; /* percent chance of partialFleeMask when fleeBehavior is 2 */
+    /* 0x0154 */ u8 unk0154[0x188 - 0x154];
+    /* 0x0188 */ u8 fleeBehavior;       /* 1: flee only from a race 39 enemy, 2: always, 3: never */
+    /* 0x0189 */ u8 unk0189[0x45a0 - 0x189];
     /* 0x45a0 */ u64 blockFlags;
     /* 0x45a8 */ u64 forceFlags;
 };
+
+typedef char BattleFlagsStateOffsetCheck[offsetof(BattleFlagsState, enemies) == 0xf4 &&
+    offsetof(BattleFlagsState, conditions) == 0x10c && offsetof(BattleFlagsState, partialFleeChance) == 0x152 &&
+    offsetof(BattleFlagsState, fleeBehavior) == 0x188 && offsetof(BattleFlagsState, blockFlags) == 0x45a0 &&
+    offsetof(BattleFlagsState, forceFlags) == 0x45a8 ? 1 : -1];
 
 extern "C" {
 extern BattleMasks g_btlMain;

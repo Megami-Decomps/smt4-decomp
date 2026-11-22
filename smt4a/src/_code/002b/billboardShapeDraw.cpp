@@ -1,5 +1,6 @@
-/* NON_MATCHING: 497 lines; the structure lines up row for row (361 built against 366). About 200 of the differing
- * lines are stack offsets: retail's frame is 452 bytes (428 here) and no source form tried gave its slot order. Retail
+/* NON_MATCHING: the structure lines up row for row. The five attribute streams are zero-initialised: retail leaves a
+ * stream whose attribute bit is clear unset and still steps it, undefined in C (497 lines without the ten stores;
+ * wave 77 review, as in the IV twin). About 200 of the differing lines are stack offsets: retail's frame is 452 bytes (428 here) and no source form tried gave its slot order. Retail
  * also holds the facing matrix's address in r5 from the top of each sprite and spills the output texcoord pointer,
  * which permutes r5/r7/r8/sl through all four vertices. The earlier draft scored 451 but built 289 rows: it left code
  * out, so this complete rewrite replaced it (wave 76 review: correctness before score). */
@@ -83,11 +84,12 @@ extern "C" {
  * its rotation and placed at its position. */
 void billboardShapeDraw(BillboardShape *shape)
 {
-    BillboardStream positions;
-    BillboardStream colors;
-    BillboardStream sizes;
-    BillboardStream rotations;
-    BillboardStream texCoords;
+    /* A stream whose attribute bit is clear stays at NULL with no step (retail leaves it unset and still steps it). */
+    BillboardStream positions = { 0, 0 };
+    BillboardStream colors = { 0, 0 };
+    BillboardStream sizes = { 0, 0 };
+    BillboardStream rotations = { 0, 0 };
+    BillboardStream texCoords = { 0, 0 };
 
     skinObjectUpdateMatrices(g_renderCtx);
     s32 count = shape->capacity;

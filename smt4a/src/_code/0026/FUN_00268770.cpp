@@ -50,7 +50,7 @@ int gridNavigationConfigure(...);
 int gridNavigationHandleConfirm(...);
 int FUN_0023092c(void);
 int statusDownSetSpriteMode(unsigned int, unsigned int, int);
-int statusDownRegisterTouchRegions(void);
+int statusDownRebuildTouchRegions(void);
 int recordGetModeForId(...);
 int statusDownSwitchTab(...);
 int flaggedEntryGetValueA(...);
@@ -102,7 +102,7 @@ extern int scrRunOpcodesStub(unsigned int);
 extern int statusDownPanelIsOpenAndIdle(void);
 /* Supplied declaration required: FUN_0023092c. */
 /* Supplied declaration required: statusDownSetSpriteMode. */
-/* Supplied declaration required: statusDownRegisterTouchRegions. */
+/* Supplied declaration required: statusDownRebuildTouchRegions. */
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 extern int uniteNotBusy(void);
@@ -222,7 +222,7 @@ unsigned int FUN_00268770(void)
       temp_v12 = *puVar13;
       *puVar13 = temp_v7;
       *(unsigned int *)(temp_v6 + 0x51c) = temp_v12;
-      statusDownRegisterTouchRegions();
+      statusDownRebuildTouchRegions();
       *(unsigned char *)(temp_v2 + 0x528) = 1;
     }
     break;
@@ -511,7 +511,7 @@ LAB_00268d68:
         temp_v6 = uiSpriteAdvanceAnimation(temp_v2 + 0x370);
         if (temp_v6 != 0) {
           FUN_0023092c();
-          statusDownRegisterTouchRegions();
+          statusDownRebuildTouchRegions();
           temp_v6 = g_statusDown;
           *(unsigned int *)(g_statusDown + 0x524) = 0;
           puVar13 = (unsigned int *)(temp_v6 + 0x518);
@@ -712,7 +712,7 @@ joined_r0x002694c0:
         temp_v6 = uiSpriteAdvanceAnimation(temp_v2 + 0x370);
         if (temp_v6 != 0) {
           FUN_0023092c();
-          statusDownRegisterTouchRegions();
+          statusDownRebuildTouchRegions();
           temp_v6 = g_statusDown;
           *(unsigned int *)(g_statusDown + 0x524) = 0;
           puVar13 = (unsigned int *)(temp_v6 + 0x518);

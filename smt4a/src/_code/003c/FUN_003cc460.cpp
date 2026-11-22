@@ -4,9 +4,9 @@
 
 extern "C" {
 
-void FUN_004c3db4(BtlCombatantEntryA *entry);
+void battleAddEnemyRewards(BtlCombatantEntryA *entry);
 
-/* Runs FUN_004c3db4 for every battle entry that is eligible, not excluded and has the required mask bits. */
+/* Runs battleAddEnemyRewards for every battle entry that is eligible, not excluded and has the required mask bits. */
 u32 FUN_003cc460(void)
 {
     BtlMainStateA *battle = btlGetMainState();
@@ -17,7 +17,7 @@ u32 FUN_003cc460(void)
         if ((entry->flags & g_battleMaskPresets.eligibility.active) != 0 &&
             !battleMaskIntersects(entry->flags, g_battleMaskPresets.eligibility.excluded) &&
             (entry->flags & g_battleMaskPresets.eligibility.required) != 0) {
-            FUN_004c3db4(entry);
+            battleAddEnemyRewards(entry);
         }
     }
     return 1;

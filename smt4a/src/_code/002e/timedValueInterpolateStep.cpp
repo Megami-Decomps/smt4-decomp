@@ -1,30 +1,27 @@
-/* NON_MATCHING: The output pointer and completion flag use different saved registers. */
 #include "common.h"
 extern "C" {
 f32 mathInterpolateTimed(s32 elapsed, s32 duration, f32 start, f32 target);
 
-// Interpolates toward the target, clamps overshoot, and reports completion.
-u32 timedValueInterpolateStep(f32* value, s32 elapsed, s32 duration, f32 start, f32 target)
+/* Interpolates toward the target; once the time is up or the value reaches or passes the target,
+ * snaps it to the target and reports completion. */
+u32 timedValueInterpolateStep(f32 *value, s32 elapsed, s32 duration, f32 start, f32 target)
 {
-    s32 complete = 0;
-    f32 interpolated = mathInterpolateTimed(elapsed, duration, start, target);
-    *value = interpolated;
-    if (elapsed == duration) {
-        complete = 1;
+    bool done = false;
+    *value = mathInterpolateTimed(elapsed, duration, start, target);
+    if (duration == elapsed) {
+        done = true;
     }
     if (target - start > 0.0f) {
-        if (interpolated >= target) {
-            *value = target;
-            return 1;
+        if (*value >= target) {
+            done = true;
         }
-    } else if (interpolated <= target) {
+    } else if (*value <= target) {
+        done = true;
+    }
+    if (done) {
         *value = target;
         return 1;
     }
-    if (!complete) {
-        return 0;
-    }
-    *value = target;
-    return 1;
+    return 0;
 }
 }

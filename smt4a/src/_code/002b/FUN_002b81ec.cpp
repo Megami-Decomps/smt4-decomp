@@ -35,7 +35,7 @@ void lmapSceneStartMovement(signed char);
 int FUN_00354098(void);
 int gameCounterAddSaturating(...);
 int FUN_004a01c8(...);
-int FUN_004a0524(void);
+int fieldWalkRecoverHp(void);
 int FUN_004a08f0(void);
 int __hardfp_atan2f(void);
 int SBORROW4(...);
@@ -106,7 +106,7 @@ extern int linkHolderCheckFirst(unsigned int);
 /* Supplied declaration required: moriModelUnitStartMaterialAnimation. */
 /* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: FUN_004a01c8. */
-/* Supplied declaration required: FUN_004a0524. */
+/* Supplied declaration required: fieldWalkRecoverHp. */
 /* Supplied declaration required: FUN_004a08f0. */
 extern int partyAnyMemberHasFlagBit(unsigned int, unsigned int);
 extern int inputIsQuestCancelPressed(void);
@@ -485,7 +485,7 @@ void FUN_002b81ec(void)
       *(float *)(temp_v2 + 0xdf0) = temp_v14;
       if ((int)temp_v14 >= 0x44bb8001) {
         *(float *)(temp_v2 + 0xdf0) = temp_v14 - 1500.0f;
-        FUN_004a0524();
+        fieldWalkRecoverHp();
         FUN_004a08f0();
       }
       temp_v14 = *(float *)(temp_v2 + 0xdf8) + temp_v13;

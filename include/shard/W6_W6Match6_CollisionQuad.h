@@ -25,6 +25,8 @@ struct CollisionQueueState {
     union {
         u8 unk00[8];
         struct { u32 unk00; s32 triangleCount; } geometry;
+        /* 0x00 loaded: mapCollisionExists' test; 0x01 ready: both cleared by mapCollisionRelease */
+        struct { s8 loaded; s8 ready; } status;
     };
     union { s32 firstCount; s32 quadCount; }; // 0x08
     union {

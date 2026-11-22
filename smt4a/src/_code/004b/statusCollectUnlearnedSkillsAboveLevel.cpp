@@ -1,4 +1,4 @@
-/* NON_MATCHING: the loop index, skill id and known-list pointer rotate through r3/r1/r2 where retail uses r1/r2/r3. */
+/* NON_MATCHING: the loop index and the skill id are exchanged (r2/r1) relative to retail (r1/r2); the inner known-list scan matches (as in smt4). */
 #include "common.h"
 #include "gamedata/NkmBaseRecordA.h"
 

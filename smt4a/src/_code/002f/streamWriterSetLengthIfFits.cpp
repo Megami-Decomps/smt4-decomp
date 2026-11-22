@@ -1,4 +1,3 @@
-/* NON_MATCHING: capacity and used are loaded in the opposite order (r3/r2 swapped). */
 #include "common.h"
 
 extern "C" {
@@ -19,12 +18,10 @@ typedef struct {
 /* Sets the buffer length when it fits in the remaining space; returns whether it did. */
 u32 streamWriterSetLengthIfFits(Buffer *buffer, u32 length)
 {
-    BufferState *state = buffer->state;
-
-    if ((u32)(state->capacity - state->used) < length) {
+    if ((u32)(buffer->state->capacity - buffer->state->used) < length) {
         return 0;
     }
-    state->length = length;
+    buffer->state->length = length;
     return 1;
 }
 

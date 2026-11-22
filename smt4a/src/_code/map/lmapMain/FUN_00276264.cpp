@@ -222,7 +222,7 @@ int resourceOwnerLoadNamed(...);
 int itemResetOverLimitStates(int);
 int FUN_004bc95c(...);
 int VectorSignedToFloat(...);
-int FUN_00244acc(void);
+int cullVolumeTableClear(void);
 int mapIfSetOpaqueMode(void);
 int popupRequest(void);
 int FUN_0037723c(...);
@@ -605,13 +605,13 @@ extern int scriptHolderUpdateSimple(int);
 /* Supplied declaration required: objectPoolDestroyAll. */
 /* Supplied declaration required: twoObjectsRelease. */
 extern int playerCanAffordRecoverySkill(void);
-extern int FUN_004a0f5c(void);
+extern int fieldPickRecoveryCaster(void);
 /* Supplied declaration required: itemResetOverLimitStates. */
 extern int flagsBit7Get(int, int);
 /* Supplied declaration required: FUN_004bc95c. */
 extern int inputConfirmPressed(void);
 extern int battleValuesSet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00244acc. */
+/* Supplied declaration required: cullVolumeTableClear. */
 /* Supplied declaration required: mapIfRestartActiveRecords. */
 /* Supplied declaration required: mapIfSetOpaqueMode. */
 /* Supplied declaration required: FUN_0024ad50. */
@@ -708,7 +708,7 @@ unsigned int FUN_00276264(void)
     uRam005f1621 = 1;
     DAT_005f1622 = 1;
     DAT_005f18c4 = '\0';
-    FUN_00244acc();
+    cullVolumeTableClear();
     FUN_002019dc(*puVar2,1);
     *(unsigned char *)((int)puVar2 + 0x9e2) = 0;
     *(unsigned char *)(temp_v5 + 0x7c6) = 0;
@@ -1792,7 +1792,7 @@ LAB_00278b38:
                                   temp_v8 = playerCanAffordRecoverySkill();
                                   if (temp_v8 != 0) {
                                     temp_v8 = buttonHelpIsActionActive(0x13);
-                                    if ((temp_v8 != 0) && (temp_v8 = FUN_004a0f5c(), temp_v8 != 0)) {
+                                    if ((temp_v8 != 0) && (temp_v8 = fieldPickRecoveryCaster(), temp_v8 != 0)) {
                                       __2sprintf((char *)&uStack_b0,(const char *)(0x278fdc),temp_v8);
                                       mapIfStart(&uStack_b0);
                                       sysPlayVoice(0x100021c);

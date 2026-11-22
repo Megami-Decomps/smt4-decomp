@@ -6,8 +6,6 @@
 #include "addon/aocMain.h"
 #include "gfx/ControllerModel.h"
 
-#define MODEL_MOTION_NONE 0xffff
-
 /* The owner of the models a state player switches between. */
 struct ModelStateOwner {
     /* 0x00 */ u8 unk00[8];
@@ -25,9 +23,6 @@ struct ModelStatePlayer {
 extern "C" {
 void FUN_00421858(ModelStatePlayer *player);
 void *ptrVectorAt(void *models, u32 index);
-u32 FUN_003fdadc(void);
-u32 ownerSlotSetText(void *model, u32 name);
-u32 FUN_001a79e8(void *model, u32 name);
 }
 
 /* The owner's model body `index`, or NULL without an owner. */

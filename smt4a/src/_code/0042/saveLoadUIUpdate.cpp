@@ -33,7 +33,7 @@ void saveLoadUiSuspendOrRestart(SaveSlotHeaderWork *ui);
 void saveLoadUiRestartSpritesAndWait(SaveSlotHeaderWork *ui);
 void saveLoadUiRestartSlotSpritesAndWait(SaveSlotHeaderWork *ui);
 void spriteListMenuResetSprites(SaveSlotHeaderWork *ui, s32 resetHeader);
-void FUN_0041dbdc(SaveSlotHeaderWork *ui, s32 flag);
+void FUN_0041dbdc(SaveSlotHeaderWork *ui, bool selected);
 void saveMenuCacheSlotHeadersStep(SaveSlotHeaderWork *ui);
 void scrScriptProcessStartEntry(ScriptProcess *script, s32 index);
 DataBlockTable *gameDataBlocksGetTable(void);

@@ -43,7 +43,9 @@ typedef char BattleEntrySummaryRatioOffsets[
 /* Apocalypse's summary (0x34 bytes): the same fields, then 0x12 bytes nothing here names yet. */
 struct BattleEntrySummaryA {
     /* 0x00 */ BattleEntrySummary base;
-    /* 0x22 */ u8 unk22[0x12];
+    /* 0x22 */ u8 unk22[2];
+    /* 0x24 */ s32 unk24;          /* nonzero: btlGetAffinity replaces the target's affinity flags with 0x800000 */
+    /* 0x28 */ u8 unk28[0xC];
 };
 typedef char BattleEntrySummaryASizeCheck[sizeof(BattleEntrySummaryA) == 0x34 ? 1 : -1];
 #endif

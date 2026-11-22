@@ -8,11 +8,6 @@
 #include "AsdSDK/AsdDebugHooks.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
-static __inline void pushCountedA(RenderCtxA *context, int state)
-{
-    renderStackPushCounted(context->stacks + RENDER_STACK_A, state);
-}
-
 extern "C" {
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void gxResetColorQuadToWhite(void);
@@ -33,7 +28,7 @@ void requestImageDraw(const RequestImageSelector *owner, const f32 *alpha)
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     gxResetColorQuadToWhite();
     RenderCtxA *context = g_renderCtx;
-    pushCountedA(context, renderCtxPackPassFlags(1, 0));
+    renderCtxPushACounted(context, renderCtxPackPassFlags(1, 0));
     efctSetSpeed(*alpha);
     MessageImagePair images[9];
     sysMemClear(images, sizeof(images));
