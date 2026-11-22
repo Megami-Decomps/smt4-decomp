@@ -19,6 +19,7 @@ to a unit that the unit then calls only once: such a helper needs evidence besid
 sibling doing the same, a header declaring it, or a real function's body; see docs/CONTRIBUTING.md,
 "Matching rules").
 """
+import json
 import os
 import re
 import subprocess
@@ -62,8 +63,20 @@ def game_of(path):
     return path.split("/", 1)[0] if path.startswith(("smt4/", "smt4a/")) else None
 
 
+def own_functions(game):
+    """{source path relative to the game: the functions built from it}: a file's own definitions are not
+    redeclarations, in a translation unit's file (tools/tu.py) those of every unit built from it."""
+    out = {}
+    project = json.loads((ROOT / game / "config" / "project.json").read_text(encoding="utf-8"))
+    for unit in project["units"]:
+        out.setdefault(unit["source"], set()).add(unit["function"])
+    return out
+
+
 def added_lines(base):
-    """{unit path: text of the lines the change adds} for the .cpp units under <game>/src.
+    """{unit path: text of the lines the change adds} for the .cpp units under <game>/src. A line the change
+    removes from another unit of the same game is moved, not added (functions merged into one translation
+    unit's file, or split out of one).
 
     The working tree is compared as CI will see it once committed: untracked sources (a file
     `names.py` renamed, a new unit) count too, and a renamed file only for the lines it changed.
@@ -80,13 +93,18 @@ def added_lines(base):
         subprocess.run(["git", "add", "-A", "--", *paths], cwd=ROOT, env=env, capture_output=True)
         diff = subprocess.run(["git", "diff", "--cached", "-M", "--unified=0", base, "--", *paths], cwd=ROOT, env=env,
                               capture_output=True, text=True, encoding="utf-8", errors="replace").stdout
-    out, current = {}, None
+    out, removed, current, old = {}, {}, None, None
     for line in diff.splitlines():
-        if line.startswith("+++ "):
+        if line.startswith("--- "):
+            old = line[6:] if line.startswith("--- a/") and line.endswith(".cpp") else None
+        elif line.startswith("+++ "):
             current = line[6:] if line.startswith("+++ b/") and line.endswith(".cpp") else None
-        elif current and line.startswith("+") and not line.startswith("+++"):
+        elif current and line.startswith("+"):
             out.setdefault(current, []).append(line[1:])
-    return {path: "\n".join(lines) for path, lines in out.items()}
+        elif old and line.startswith("-"):
+            removed.setdefault(game_of(old), set()).add(line[1:].strip())
+    return {path: "\n".join(l for l in lines if not l.strip() or l.strip() not in removed.get(game_of(path), ()))
+            for path, lines in out.items()}
 
 
 def single_use_helpers(added, text):
@@ -136,15 +154,17 @@ def main():
         total = 0
         for game in ("smt4", "smt4a"):
             decls, types = shared_names(game)
+            own = own_functions(game)
             for unit in (ROOT / game / "src").rglob("*.cpp"):
                 d, t = names_in(unit.read_text(encoding="utf-8", errors="replace"))
-                total += len((d & decls) - {unit.stem}) + len(t & types)
+                mine = {unit.stem} | own.get(unit.relative_to(ROOT / game).as_posix(), set())
+                total += len((d & decls) - mine) + len(t & types)
         print(f"{total} local redeclarations of names a shared header declares")
         if "--ratchet" in sys.argv or "--lower" in sys.argv:
             ratchet(total, write="--lower" in sys.argv)
         return
     base = sys.argv[1] if len(sys.argv) > 1 else "HEAD~1"
-    shared = {}
+    shared, own = {}, {}
     new, helpers = [], []
     for path, text in sorted(added_lines(base).items()):
         game = game_of(path)
@@ -155,10 +175,11 @@ def main():
             helpers += [(path, name) for name in single_use_helpers(text, whole)]
         if game not in shared:
             shared[game] = shared_names(game)
+            own[game] = own_functions(game)
         decls, types = shared[game]
         d, t = names_in(text)
-        stem = Path(path).stem
-        new += [f"{path}: declares {n}" for n in sorted((d & decls) - {stem})]
+        mine = {Path(path).stem} | own[game].get(path.split("/", 1)[1], set())
+        new += [f"{path}: declares {n}" for n in sorted((d & decls) - mine)]
         new += [f"{path}: defines struct {n}" for n in sorted(t & types)]
     if helpers:  # a report, never a failure
         print(f"{len(helpers)} new single-use helpers (needs evidence: twin, sibling, header, or real function body):")

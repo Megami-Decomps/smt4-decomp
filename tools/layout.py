@@ -116,16 +116,21 @@ def layout(game, path, type_name):
     text = path.read_text(encoding="utf-8")
     body = struct_body(COMMENT.sub("", text), type_name)
     if body is None:
-        # maybe defined in a header the file includes: search them
-        for inc in re.findall(r'#include\s+"([^"]+)"', text):
-            for base in (ROOT / "include", path.parent):
-                h = base / inc
-                if h.exists():
-                    body = struct_body(COMMENT.sub("", h.read_text(encoding="utf-8")), type_name)
-                    if body is not None:
-                        break
-            if body is not None:
-                break
+        # maybe defined in a header the file includes, directly or through other headers: search them as
+        # armcc does (the including file's directory, then the game's include/, then the shared one)
+        todo, seen = [(path.parent, text)], set()
+        while todo and body is None:
+            here, source = todo.pop(0)
+            for inc in re.findall(r'#include\s+"([^"]+)"', source):
+                h = next((base / inc for base in (here, ROOT / game / "include", ROOT / "include") if (base / inc).is_file()), None)
+                if h is None or h.resolve() in seen:
+                    continue
+                seen.add(h.resolve())
+                header = h.read_text(encoding="utf-8")
+                body = struct_body(COMMENT.sub("", header), type_name)
+                if body is not None:
+                    break
+                todo.append((h.parent, header))
     if body is None:
         raise LookupError(f"no definition of {type_name} in {path.name} or its includes")
     fields = members(body)

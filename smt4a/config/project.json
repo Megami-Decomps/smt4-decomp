@@ -54278,7 +54278,7 @@
       "module": "_code",
       "object": "build/obj/_code/0020/playLogChangePage.o",
       "size": 432,
-      "source": "src/_code/0020/playLogChangePage.cpp",
+      "source": "src/_code/camp/PlayLog/PlayLog/PlayLog.cpp",
       "target": "orig/target/_code/0020/playLogChangePage.o",
       "thumb": false
     },
@@ -55730,7 +55730,7 @@
       "module": "_code",
       "object": "build/obj/_code/camp/PlayLog/PlayLog/playLogUpdate.o",
       "size": 1188,
-      "source": "src/_code/camp/PlayLog/PlayLog/playLogUpdate.cpp",
+      "source": "src/_code/camp/PlayLog/PlayLog/PlayLog.cpp",
       "target": "orig/target/_code/camp/PlayLog/PlayLog/playLogUpdate.o",
       "thumb": false
     },

@@ -237,6 +237,8 @@ images are available.
       `python -B tools/declcheck.py --all --ratchet` passes.
 - [ ] In `<game>/`: `python -B build.py && python -B build.py report && python -B ../tools/relink.py --matched`
       prints `MATCH`, the claimed functions are proven, and no previously proven function is lost.
+- [ ] A change to a file several units share ([translation units](project.md#translation-units)) passes
+      `python -B tools/tu.py check`.
 - [ ] New names went through `tools/names.py`; the code meets the
       [readability standard](style-and-naming.md#readability-standard).
 - [ ] Every `cflags`, `multifile`, `inlined.txt`, `numbers.txt` or `size:` entry the change adds

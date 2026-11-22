@@ -10,7 +10,8 @@ is `inferred`.
 
 A function is renamed in `config/symbols.txt`, `config/names.map`, `config/project.json`,
 `objdiff.json`, every `src/**.cpp` and `include/**.h` that mentions it, and its source file is
-renamed with it. A global (an address in `.rodata`/`.data`/`.bss`) gets a `type:object` line in
+renamed with it, unless other units are built from that file too (a translation unit, tools/tu.py): the
+file keeps its name and only the unit's object, target and objdiff entry follow the new name. A global (an address in `.rodata`/`.data`/`.bss`) gets a `type:object` line in
 `config/symbols.txt` and replaces `DAT_<address>` in the sources; a row repeating a named global's own
 name with a note starting `size:0x..` corrects its size, and a row renaming a global to its own
 `DAT_<address>` takes its name away (named at the wrong address). Each row is recorded in
@@ -54,7 +55,8 @@ class Game:
         self.project_path = self.dir / "config" / "project.json"
         self.project = json.loads(self.project_path.read_text(encoding="utf-8"))
         self.objdiff_path = self.dir / "objdiff.json"
-        self.objdiff = self.objdiff_path.read_text(encoding="utf-8")
+        self.objdiff = json.loads(self.objdiff_path.read_text(encoding="utf-8"))
+        self.entries = {entry["base_path"]: entry for entry in self.objdiff["units"]}  # by the unit's object
         self.names_map_path = self.dir / "config" / "names.map"
         self.names_map = self.names_map_path.read_text(encoding="utf-8") if self.names_map_path.exists() else ""
         modules = json.loads((self.dir / "config" / "modules.json").read_text(encoding="utf-8"))["modules"][0]
@@ -69,7 +71,6 @@ class Game:
         self.functions_renamed = {}  # old -> new, for symbols.txt, names.map, project, objdiff
         self.new_symbols = []  # type:object lines to append
         self.files = []      # (old source, new source)
-        self.stems = {}      # old file stem -> new file stem
         self.resized = False
 
     def taken(self, name):
@@ -85,21 +86,27 @@ class Game:
         self.functions_renamed[old] = new
         unit = self.units.pop(old, None)
         if unit:
-            # Files are named after the function, readably: `Obj558be0__stop.cpp` for a mangled name.
-            old_source = unit["source"]
+            # Files are named after the function, readably: `Obj558be0__stop.cpp` for a mangled name. A source
+            # other units are built from too (a translation unit, tools/tu.py) keeps its name: it is the file's.
+            old_source, old_object = unit["source"], unit["object"]
             old_stem, new_stem = file_stem(old), file_stem(new)
+            shared = any(other is not unit and other.get("source") == old_source for other in self.units.values())
             unit["function"] = new
-            for key in ("source", "object", "target"):
+            for key in ("object", "target") if shared else ("source", "object", "target"):
                 if key in unit:
                     unit[key] = re.sub(r"(?<=/)" + re.escape(old_stem) + r"(?=\.)", new_stem, unit[key])
             self.units[new] = unit
             if unit["source"] != old_source:
-                # Other units built from the same file (several functions of one source) follow it.
-                for other in self.units.values():
-                    if other is not unit and other.get("source") == old_source:
-                        other["source"] = unit["source"]
                 self.files.append((old_source, unit["source"]))
-            self.stems[old_stem] = new_stem
+            # objdiff.json: the unit's entry takes its paths, its name the new file stem, its function the new name.
+            entry = self.entries.pop(old_object, None)
+            if entry is not None:
+                entry.update(base_path=unit["object"], target_path=unit["target"])
+                entry["metadata"]["source_path"] = unit["source"]
+                entry["name"] = re.sub(r"(?<=/)" + re.escape(old_stem) + r"$", new_stem, entry["name"])
+                entry["metadata"]["functions"] = [dict(f, name=new) if f["name"] == old else f
+                                                  for f in entry["metadata"].get("functions", [])]
+                self.entries[unit["object"]] = entry
         # Units compiled together with it (armcc --multifile) name it in their "multifile" list.
         for other in self.units.values():
             if old in other.get("multifile", ()):
@@ -162,15 +169,6 @@ class Game:
             functions = self.functions_renamed
             self.symbols = re.sub(r"^(\S+)( = )", lambda m: functions.get(m[1], m[1]) + m[2], self.symbols, flags=re.M)
             self.names_map = re.sub(r"^([0-9a-fA-F]{8}) (\S+)$", lambda m: f"{m[1]} {functions.get(m[2], m[2])}", self.names_map, flags=re.M)
-            # objdiff.json: paths and unit names take the file stem, the function entries the symbol.
-            stems = self.stems
-            if stems:
-                self.objdiff = re.sub(r"(?<=/)(" + "|".join(re.escape(s) for s in sorted(stems, key=len, reverse=True)) + r")(?=[.\"])",
-                                      lambda m: stems[m[1]], self.objdiff)
-            # Only the function entries: a path or unit name after a `/` keeps the file stem (a free C++
-            # function's mangled name has its plain name as the stem).
-            entry = re.compile(r"(?<![A-Za-z0-9_/])(" + "|".join(re.escape(n) for n in sorted(functions, key=len, reverse=True)) + r")(?![A-Za-z0-9_])")
-            self.objdiff = entry.sub(lambda m: functions[m[1]], self.objdiff)
         mapped = {int(m[1], 16) for m in re.finditer(r"^([0-9a-fA-F]{8}) ", self.names_map, re.M)}
         for old, new in self.functions_renamed.items():
             address = self.functions[new]
@@ -180,7 +178,7 @@ class Game:
             self.symbols = self.symbols.rstrip("\n") + "\n" + "\n".join(self.new_symbols) + "\n"
         self.symbols_path.write_text(self.symbols, encoding="utf-8", newline="\n")
         self.project_path.write_text(json.dumps(self.project, indent=2) + "\n", encoding="utf-8", newline="\n")
-        self.objdiff_path.write_text(self.objdiff, encoding="utf-8", newline="\n")
+        self.objdiff_path.write_text(json.dumps(self.objdiff, indent=2) + "\n", encoding="utf-8", newline="\n")
         if self.names_map:
             self.names_map_path.write_text(self.names_map, encoding="utf-8", newline="\n")
         return True

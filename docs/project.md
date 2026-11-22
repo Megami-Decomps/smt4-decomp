@@ -42,6 +42,7 @@ the other tools run from the repository root. Host problems are in
 | `tools/flag_audit.py` | Which unmatched units match under the flags their twin or neighbours were built with? | `python -B tools/flag_audit.py --game smt4 --apply none` |
 | `tools/worktrees.py` | How do I work on several functions in parallel? | `python -B tools/worktrees.py create NAME`, later `patch NAME` and `remove NAME` |
 | `tools/progress_site.py` | What would the progress site show for this checkout? | `python -B tools/progress_site.py --out build/site` |
+| `tools/tu.py` | Are the files several units share (translation units) consistent? | `python -B tools/tu.py check` (`list`, `sync`) |
 
 ## Layout
 
@@ -90,9 +91,11 @@ tools/declcheck.py    fails when a change adds a unit-local copy of a function, 
                       tree's count rises above config/declcheck_ceiling.txt
 tools/layout.py       field offsets of struct views from the compiler, and every view of one object merged
                       by offset (--anchor SYMBOL): the input for one declaration per object
+tools/tu.py           checks the source files several units share (translation units, below) and keeps
+                      objdiff.json's source paths in step with config/project.json
 ```
 
-Every function is its own `.cpp`, compiled by armcc 4.1 [Build 1454] (`--cpp --no_rtti -O3 -Otime`; a unit
+Every function is its own `.cpp` unless it is part of a [translation unit](#translation-units), compiled by armcc 4.1 [Build 1454] (`--cpp --no_rtti -O3 -Otime`; a unit
 whose retail code shows another build, such as `-O2`, `-Ospace` or `--fpu=softvfp`, carries its own `cflags`). The games are
 C++ (their asserts name 168 `.cpp` source files and 4 `.c`). Recovered classes have shared declarations
 in `include/classes/` and native member definitions outside `extern "C"`; functions not established
@@ -138,6 +141,41 @@ file-local variable of one file joins it. Measured by hiding 30% of the anchors 
 `smt4/config/tus_extra.json` adds 20 assert-anchored functions found with another tool's function
 bounds. To move a function, move its `.cpp` and update its `source` and `file` in `config/project.json`
 and its unit in `objdiff.json`.
+
+## Translation units
+
+armcc decides some things per file, not per function: a plain `static` helper the file calls from
+several functions is inlined late, one with a single call early, and the registers come out differently
+(Apocalypse's `playLogChangePage` matches only next to `playLogUpdate`, whose five calls of
+`playLogSetState` make six in the file). Such functions share one source file, as the original did:
+
+- **Declare it** by giving each unit the same `source` in `config/project.json` (keep each unit's own
+  `object`, `target` and `objdiff.json` entry; `python -B tools/tu.py sync` writes the entries' source
+  paths). Name the file after the original (`camp/PlayLog/PlayLog/PlayLog.cpp`), put the includes,
+  declarations and file-local `static` helpers and data once at the top, then each function, with its own
+  doc comment and `NON_MATCHING` note directly before its definition. The units of one file share
+  `cflags`, `thumb` and `multifile` (the file was compiled once).
+- **build.py** compiles the whole file for each of its units and carves the unit's own function out
+  (`--split_sections`, as for a structor's extra variants): each object still holds one function, so
+  objdiff, `fdiff` and relink work per function. A change to the file rebuilds all of its units.
+- **fdiff.py / trial.py / usercheck.py** compile the file and diff only the requested function; a
+  `trial.py` variant is the whole file. A variant (or edit) that drops the function fails with
+  "defines no ..." instead of diffing a sibling. `usercheck` re-scores every unit of a changed file.
+- **names.py** renames the function inside the file and the unit's object, target and objdiff entry; the
+  file keeps its name. **units.py** gives a function split off a TU unit a source of its own, and `drop`
+  leaves the file for its other units (delete the dropped definition by hand). **declcheck.py** treats
+  every function built from the file as the file's own, and lines moved between units (merging files
+  into a TU) are not new. **progress_site.py** judges each function on its own definition plus the
+  file's common part, and takes its draft note from the comment before its definition (or a note at the
+  top of the file naming it). **layout.py** compiles the whole file with its units' flags. **flag_audit.py**
+  does not apply per-unit flags to a TU's units.
+- `python -B tools/tu.py check` (CI runs it) checks the rules: each unit's definition is in its file,
+  the units agree on flags, objects and targets are unique, and objdiff.json's paths match.
+
+A TU is a matching decision like a `multifile` entry: it needs evidence that the functions shared a file
+(`config/tus.json`, the asserts) and a reason in the diff. Still open: each unit compiles the whole file
+(twice when carving: N functions cost 2N compiles of the file), and a carved unit's file-local data is
+named, not placed and checked by relink (see *Data a unit owns or names* in the contribution guide).
 
 ## Where the source came from
 

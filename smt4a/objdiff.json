@@ -50059,7 +50059,7 @@
           "_code",
           "AsdSDK/Source/Sys/Gx/AsdGxCommandList"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListFlip.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList.cpp"
       },
       "name": "_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListFlip",
       "target_path": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListFlip.o"
@@ -50324,7 +50324,7 @@
           "_code",
           "AsdSDK/Source/Sys/Gx/AsdGxCommandList"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListBindBack.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList.cpp"
       },
       "name": "_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListBindBack",
       "target_path": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListBindBack.o"
@@ -50629,7 +50629,7 @@
           "_code",
           "AsdSDK/Source/Snd/AsdSoundSystem"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Snd/AsdSoundSystem/asdSoundSlotBCreate.cpp"
+        "source_path": "src/_code/0014/asdSoundSelectCurrentSlot.cpp"
       },
       "name": "_code/AsdSDK/Source/Snd/AsdSoundSystem/asdSoundSlotBCreate",
       "target_path": "orig/target/_code/AsdSDK/Source/Snd/AsdSoundSystem/asdSoundSlotBCreate.o"
@@ -51282,7 +51282,7 @@
           "_code",
           "AsdSDK/Source/Sys/Gx/AsdGxCommandList"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListSetLists.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList.cpp"
       },
       "name": "_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListSetLists",
       "target_path": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListSetLists.o"
@@ -51911,7 +51911,7 @@
           "_code",
           "AsdSDK/Source/Sys/Gx/AsdGxCommandList"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListSetNewListId.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList.cpp"
       },
       "name": "_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListSetNewListId",
       "target_path": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListSetNewListId.o"
@@ -56015,7 +56015,7 @@
           "_code",
           "AsdSDK/Source/Sys/Gx/AsdGxCommandList"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListCreate.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList.cpp"
       },
       "name": "_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListCreate",
       "target_path": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListCreate.o"
@@ -56076,7 +56076,7 @@
           "_code",
           "AsdSDK/Source/Sys/Gx/AsdGxCommandList"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListBegin.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList.cpp"
       },
       "name": "_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListBegin",
       "target_path": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListBegin.o"
@@ -73885,7 +73885,7 @@
           "_code",
           "AsdSDK/Source/Sys/Gx/AsdGxCommandList"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListStartRecord.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList.cpp"
       },
       "name": "_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListStartRecord",
       "target_path": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListStartRecord.o"
@@ -107744,7 +107744,7 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0020/playLogChangePage.cpp"
+        "source_path": "src/_code/camp/PlayLog/PlayLog/PlayLog.cpp"
       },
       "name": "_code/0020/playLogChangePage",
       "target_path": "orig/target/_code/0020/playLogChangePage.o"
@@ -110543,7 +110543,7 @@
           "_code",
           "camp/PlayLog/PlayLog"
         ],
-        "source_path": "src/_code/camp/PlayLog/PlayLog/playLogUpdate.cpp"
+        "source_path": "src/_code/camp/PlayLog/PlayLog/PlayLog.cpp"
       },
       "name": "_code/camp/PlayLog/PlayLog/playLogUpdate",
       "target_path": "orig/target/_code/camp/PlayLog/PlayLog/playLogUpdate.o"
@@ -124001,7 +124001,7 @@
           "_code",
           "AsdSDK/Source/Gfx/EffectEditor/EffectEditor"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/FUN_002830cc.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/EffectEditor.cpp"
       },
       "name": "_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/FUN_002830cc",
       "target_path": "orig/target/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/FUN_002830cc.o"
@@ -203083,7 +203083,7 @@
           "_code",
           "AsdSDK/Source/Gfx/EffectEditor/EffectEditor"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectEditorApplyHandlerState.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/EffectEditor.cpp"
       },
       "name": "_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectEditorApplyHandlerState",
       "target_path": "orig/target/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectEditorApplyHandlerState.o"
@@ -228798,7 +228798,7 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0039/saveLoadStartDefaultWindow.cpp"
+        "source_path": "src/_code/0039/saveLoadStartWindowWithArgument.cpp"
       },
       "name": "_code/0039/saveLoadStartDefaultWindow",
       "target_path": "orig/target/_code/0039/saveLoadStartDefaultWindow.o"
@@ -240293,7 +240293,7 @@
           "_code",
           "AsdSDK/Source/Gfx/EffectEditor/EffectEditor"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectEditorActivateSelection.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/EffectEditor.cpp"
       },
       "name": "_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectEditorActivateSelection",
       "target_path": "orig/target/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectEditorActivateSelection.o"
@@ -243449,7 +243449,7 @@
           "_code",
           "AsdSDK/Source/Gfx/EffectEditor/EffectEditor"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectEditorEditPositionVector.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/EffectEditor.cpp"
       },
       "name": "_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectEditorEditPositionVector",
       "target_path": "orig/target/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectEditorEditPositionVector.o"
@@ -244314,7 +244314,7 @@
           "_code",
           "AsdSDK/Source/Gfx/EffectEditor/EffectEditor"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectPollResourceFileDialog.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/EffectEditor.cpp"
       },
       "name": "_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectPollResourceFileDialog",
       "target_path": "orig/target/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectPollResourceFileDialog.o"
@@ -244415,7 +244415,7 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003c/effectEditorResetRotation.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/EffectEditor.cpp"
       },
       "name": "_code/003c/effectEditorResetRotation",
       "target_path": "orig/target/_code/003c/effectEditorResetRotation.o"
@@ -245882,7 +245882,7 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003c/effectEditorResetVector.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/EffectEditor.cpp"
       },
       "name": "_code/003c/effectEditorResetVector",
       "target_path": "orig/target/_code/003c/effectEditorResetVector.o"
@@ -278359,7 +278359,7 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0043/NnOsHandle__dtor_NnOsHandle.cpp"
+        "source_path": "src/_code/0050/FUN_0050f8cc.cpp"
       },
       "name": "_code/0043/NnOsHandle__dtor_NnOsHandle",
       "target_path": "orig/target/_code/0043/NnOsHandle__dtor_NnOsHandle.o"
@@ -313151,7 +313151,7 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/FUN_004a2a30.cpp"
+        "source_path": "src/_code/004a/EntryWindowDraw.cpp"
       },
       "name": "_code/004a/FUN_004a2a30",
       "target_path": "orig/target/_code/004a/FUN_004a2a30.o"
@@ -313272,7 +313272,7 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/FUN_004a3238.cpp"
+        "source_path": "src/_code/004a/EntryWindowDraw.cpp"
       },
       "name": "_code/004a/FUN_004a3238",
       "target_path": "orig/target/_code/004a/FUN_004a3238.o"
@@ -319896,7 +319896,7 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004b/cecSendCardData.cpp"
+        "source_path": "src/_code/004b/CecCardMessages.cpp"
       },
       "name": "_code/004b/cecSendCardData",
       "target_path": "orig/target/_code/004b/cecSendCardData.o"
@@ -319976,7 +319976,7 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004b/cecCardMessageBoxInit.cpp"
+        "source_path": "src/_code/004b/CecCardMessages.cpp"
       },
       "name": "_code/004b/cecCardMessageBoxInit",
       "target_path": "orig/target/_code/004b/cecCardMessageBoxInit.o"

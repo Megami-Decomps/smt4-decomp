@@ -5694,7 +5694,7 @@
           "_code",
           "AsdSDK/Source/Sys/Gx/AsdGxCommandList"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListFlip.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList.cpp"
       },
       "name": "_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListFlip",
       "target_path": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListFlip.o"
@@ -5918,7 +5918,7 @@
           "_code",
           "AsdSDK/Source/Sys/Gx/AsdGxCommandList"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListBindBack.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList.cpp"
       },
       "name": "_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListBindBack",
       "target_path": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListBindBack.o"
@@ -6630,7 +6630,7 @@
           "_code",
           "AsdSDK/Source/Sys/Gx/AsdGxCommandList"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListSetLists.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList.cpp"
       },
       "name": "_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListSetLists",
       "target_path": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListSetLists.o"
@@ -7195,7 +7195,7 @@
           "_code",
           "AsdSDK/Source/Sys/Gx/AsdGxCommandList"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListSetNewListId.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList.cpp"
       },
       "name": "_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListSetNewListId",
       "target_path": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListSetNewListId.o"
@@ -48900,7 +48900,7 @@
           "_code",
           "AsdSDK/Source/Gfx/EffectEditor/EffectEditor"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectEditorInitialize.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/EffectEditor.cpp"
       },
       "name": "_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectEditorInitialize",
       "target_path": "orig/target/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectEditorInitialize.o"
@@ -80307,7 +80307,7 @@
           "_code",
           "AsdSDK/Source/Gfx/EffectEditor/EffectEditor"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectEditorApplyHandlerState.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/EffectEditor.cpp"
       },
       "name": "_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectEditorApplyHandlerState",
       "target_path": "orig/target/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectEditorApplyHandlerState.o"
@@ -107433,7 +107433,7 @@
           "_code",
           "AsdSDK/Source/Sys/Gx/AsdGxCommandList"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListStartRecord.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList.cpp"
       },
       "name": "_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListStartRecord",
       "target_path": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListStartRecord.o"
@@ -118007,7 +118007,7 @@
           "_code",
           "AsdSDK/Source/Snd/AsdSoundSystem"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Snd/AsdSoundSystem/asdSoundSlotBCreate.cpp"
+        "source_path": "src/_code/002c/asdSoundSelectSlotB.cpp"
       },
       "name": "_code/AsdSDK/Source/Snd/AsdSoundSystem/asdSoundSlotBCreate",
       "target_path": "orig/target/_code/AsdSDK/Source/Snd/AsdSoundSystem/asdSoundSlotBCreate.o"
@@ -119815,7 +119815,7 @@
           "_code",
           "AsdSDK/Source/Sys/Gx/AsdGxCommandList"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListBegin.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList.cpp"
       },
       "name": "_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListBegin",
       "target_path": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListBegin.o"
@@ -120560,7 +120560,7 @@
           "_code",
           "AsdSDK/Source/Sys/Gx/AsdGxCommandList"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListCreate.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList.cpp"
       },
       "name": "_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListCreate",
       "target_path": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListCreate.o"
@@ -150455,7 +150455,7 @@
           "_code",
           "AsdSDK/Source/Gfx/EffectEditor/EffectEditor"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectEditorActivateSelection.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/EffectEditor.cpp"
       },
       "name": "_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectEditorActivateSelection",
       "target_path": "orig/target/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectEditorActivateSelection.o"
@@ -152147,7 +152147,7 @@
           "_code",
           "AsdSDK/Source/Gfx/EffectEditor/EffectEditor"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectEditorEditPositionVector.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/EffectEditor.cpp"
       },
       "name": "_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectEditorEditPositionVector",
       "target_path": "orig/target/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectEditorEditPositionVector.o"
@@ -152590,7 +152590,7 @@
           "_code",
           "AsdSDK/Source/Gfx/EffectEditor/EffectEditor"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectPollResourceFileDialog.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/EffectEditor.cpp"
       },
       "name": "_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectPollResourceFileDialog",
       "target_path": "orig/target/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/effectPollResourceFileDialog.o"
@@ -152691,7 +152691,7 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0032/effectEditorResetRotation.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/EffectEditor.cpp"
       },
       "name": "_code/0032/effectEditorResetRotation",
       "target_path": "orig/target/_code/0032/effectEditorResetRotation.o"
@@ -153517,7 +153517,7 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0032/effectEditorResetVector.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/EffectEditor.cpp"
       },
       "name": "_code/0032/effectEditorResetVector",
       "target_path": "orig/target/_code/0032/effectEditorResetVector.o"
@@ -159264,7 +159264,7 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0034/FUN_00340558.cpp"
+        "source_path": "src/_code/0034/btlStageUpdateNodePositions.cpp"
       },
       "name": "_code/0034/FUN_00340558",
       "target_path": "orig/target/_code/0034/FUN_00340558.o"
@@ -163078,7 +163078,7 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0034/Obj4209cc__Obj4209cc.cpp"
+        "source_path": "src/_code/0034/Obj4209cc__deleting_dtor_Obj4209cc.cpp"
       },
       "name": "_code/0034/Obj4209cc__Obj4209cc",
       "target_path": "orig/target/_code/0034/Obj4209cc__Obj4209cc.o"
@@ -201122,7 +201122,7 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003b/cecSendCardData.cpp"
+        "source_path": "src/_code/003b/CecCardWrite.cpp"
       },
       "name": "_code/003b/cecSendCardData",
       "target_path": "orig/target/_code/003b/cecSendCardData.o"
@@ -201222,7 +201222,7 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003b/FUN_003bbd88.cpp"
+        "source_path": "src/_code/003b/CecCardWrite.cpp"
       },
       "name": "_code/003b/FUN_003bbd88",
       "target_path": "orig/target/_code/003b/FUN_003bbd88.o"
@@ -202686,7 +202686,7 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003c/statMaximumsAtLevel.cpp"
+        "source_path": "src/_code/003c/playerInitializeStats.cpp"
       },
       "name": "_code/003c/statMaximumsAtLevel",
       "target_path": "orig/target/_code/003c/statMaximumsAtLevel.o"
@@ -202786,7 +202786,7 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003c/playerGetGrowthParameters.cpp"
+        "source_path": "src/_code/003c/playerInitializeStats.cpp"
       },
       "name": "_code/003c/playerGetGrowthParameters",
       "target_path": "orig/target/_code/003c/playerGetGrowthParameters.o"

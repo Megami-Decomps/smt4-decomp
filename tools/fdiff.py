@@ -170,6 +170,13 @@ def compile_unit(build, compiler, unit, source, obj):
     if done.returncode:
         return done.stdout + done.stderr or f"exit status {done.returncode}"
     build.finish_object(compiler, unit, source, obj)  # carve, then armlink's NOPs
+    # A translation unit's file (several units built from one source, tools/tu.py) compiles to every function
+    # in it; carving keeps the unit's own. Without its definition the object would hold a sibling's code.
+    if sum(u["source"] == unit["source"] for u in build.PROJECT["units"]) > 1:
+        _sections, symbols = build.read_elf(obj.read_bytes())
+        if not any(s["shndx"] and build.structor(s["name"]) == build.structor(unit["function"]) for s in symbols):
+            return (f"Error: {Path(source).name} defines no {unit['function']}: its translation unit "
+                    f"({unit['source']}) compiled, but holds no code for this unit")
     return None
 
 

@@ -48,6 +48,10 @@ jobs:
       - name: Declaration ceiling
         run: python -B tools/declcheck.py --all --ratchet
 
+      # Files several units share (translation units): each unit's definition, shared flags, objdiff.json paths.
+      - name: Translation units
+        run: python -B tools/tu.py check
+
       # The pinned armcc, objdiff-cli and arm-none-eabi binutils, each checked against its sha256.
       - name: Cache tools
         uses: actions/cache@v4

@@ -45,6 +45,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(os.path.abspath(__file__)).parent))
 from cxxnames import demangle  # noqa: E402
+import tu  # noqa: E402
 
 ROOT = Path(os.path.abspath(__file__)).parent.parent
 
@@ -110,20 +111,28 @@ def load_game(game: str) -> dict:
              if line and not line.startswith("#")} if listed.exists() else set()
     project = json.loads((ROOT / game / "config" / "project.json").read_text(encoding="utf-8"))
     address = {u["function"]: int(u["address"], 16) for u in project["units"]}
+    # A function's source is its unit's (config/project.json). Several units may share one file, a
+    # translation unit (tools/tu.py): each function is judged on its own definition and the file's
+    # common part, and its NON_MATCHING note is the comment before its definition.
+    source_of = {u["function"]: u["source"] for u in project["units"]}
+    built_from = tu.by_source(project["units"])
+    texts = {}
     excluded = 0
     functions = []
     for unit in report["units"]:
-        source = unit["metadata"]["source_path"]
-        folder = Path(source).parent.as_posix().removeprefix("src/_code/")
-        path = ROOT / game / source
-        text = path.read_text(encoding="utf-8") if path.exists() else ""
-        head = text.lstrip()[:200]
-        draft = head.startswith("/* NON_MATCHING:") and "romwright" not in head.split("*/")[0]
         for function in unit.get("functions", []):
             name = function["name"]
             if address.get(name) in third:
                 excluded += 1
                 continue
+            source = source_of.get(name, unit["metadata"]["source_path"])
+            folder = Path(source).parent.as_posix().removeprefix("src/_code/")
+            if source not in texts:
+                path = ROOT / game / source
+                texts[source] = path.read_text(encoding="utf-8") if path.exists() else ""
+            siblings = [u["function"] for u in built_from.get(source, ())] or [name]
+            text = tu.own_text(texts[source], name, siblings)
+            draft = tu.is_draft(texts[source], name, siblings)
             registered = name in proven
             readable = registered and is_readable(name, text)
             functions.append({

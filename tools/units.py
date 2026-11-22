@@ -23,7 +23,8 @@ before the next `push {..., lr}`) holds two functions: the row splits it there.
 [<note>]`. A new function `FUN_<address>` gets a source file saying it is not written yet; `extend`
 gives the function at the address the new size; `move` starts the function inside the bytes at the
 address (one named `FUN_<old address>` is renamed in every file); `drop` removes the function at the
-address and its source (data taken for code; the size is ignored); `join` makes the pieces in the
+address and its source (data taken for code; the size is ignored; a source other units are built from,
+a translation unit's, stays: remove the definition by hand); `join` makes the pieces in the
 bytes one function, keeping the first real name, else the first written source, else the first piece;
 `split` cuts the function at the address at the offset in the size column.
 
@@ -86,15 +87,18 @@ def split(game, function, offset, note, state):
     unit = units[index]
     unit["size"] = offset
     new = dict(unit, address=f"{second:#x}", function=name, size=size - offset)
-    stem = Path(unit["source"]).stem
+    # The new unit's files are named after it, next to the first's (its object and target are named after
+    # the function even when the source is a translation unit's, tools/tu.py).
     for key in ("source", "object", "target"):
-        new[key] = unit[key].replace(f"/{stem}.", f"/{name}.")
+        path = Path(unit[key])
+        new[key] = (path.parent / f"{name}{path.suffix}").as_posix()
     new.pop("cflags", None)
+    new.pop("multifile", None)
     units.insert(index + 1, new)
     placeholder(game, new["source"], f"split off {function} at +{offset:#x} ({note or 'the analysis merged the two'})")
 
     entries = objdiff["units"]
-    at = next(i for i, e in enumerate(entries) if e["metadata"]["source_path"] == unit["source"])
+    at = next(i for i, e in enumerate(entries) if e["base_path"] == unit["object"])
     entry = entries[at]
     entry["metadata"]["functions"] = [dict(f, size=offset) if f["name"] == function else f for f in entry["metadata"]["functions"]]
     copy = json.loads(json.dumps(entry))
@@ -472,8 +476,12 @@ def add(game, address, size, kind, note, state, renames):
         unit = next((u for u in units if u["function"] == found[1]), None)
         if unit:   # the analysis left a few functions without a unit
             units.remove(unit)
-            entries[:] = [e for e in entries if e["metadata"]["source_path"] != unit["source"]]
-            (ROOT / game / unit["source"]).unlink()
+            entries[:] = [e for e in entries if e["base_path"] != unit["object"]]
+            if any(u["source"] == unit["source"] for u in units):
+                # A translation unit's file (tools/tu.py) stays for its other units.
+                print(f"{game}: {found[1]} dropped; {unit['source']} stays for its other units: remove its definition there")
+            else:
+                (ROOT / game / unit["source"]).unlink()
         return symbols, project, objdiff
     if kind == "join":
         # One function the analysis cut into pieces: one piece keeps its name and source and spans them
@@ -503,7 +511,7 @@ def add(game, address, size, kind, note, state, renames):
                    + symbols[found.end():])
         unit = next(u for u in units if u["function"] == name)
         unit.update(address=f"{address:#x}", size=size)
-        entry = next(e for e in entries if e["metadata"]["source_path"] == unit["source"])
+        entry = next(e for e in entries if e["base_path"] == unit["object"])
         entry["metadata"]["functions"] = [dict(f, size=size, vram=f"{address:#x}") if f["name"] == name else f
                                           for f in entry["metadata"]["functions"]]
         if old != address:
@@ -525,7 +533,7 @@ def add(game, address, size, kind, note, state, renames):
             "size": size, "source": f"src/{folder}/{name}.cpp", "target": f"orig/target/{folder}/{name}.o",
             "thumb": kind == "thumb"}
     index = bisect.bisect_left([int(u["address"], 16) for u in units], address)
-    if index < len(units) and entries[index]["metadata"]["source_path"] != units[index]["source"]:
+    if index < len(units) and entries[index]["base_path"] != units[index]["object"]:
         raise SystemExit(f"{game}: objdiff.json is not in config/project.json's order at {units[index]['function']}")
     units.insert(index, unit)
     entries.insert(index, {"base_path": unit["object"], "metadata": {

@@ -439,9 +439,13 @@ def apply(games, rows):
         if not todo:
             continue
         game = games[name]
+        sources = collections.Counter(u["source"] for u in game.project["units"])
         for unit in game.project["units"]:
             row = todo.get(unit["address"])
-            if row:
+            if row and sources[unit["source"]] > 1:
+                # A translation unit's file (tools/tu.py) is compiled once with one set of flags: not per unit.
+                print(f"{name} {unit['function']}: not applied, {unit['source']} is a translation unit's file")
+            elif row:
                 unit["cflags"] = row["cflags"]
                 row["marker_removed"] = remove_marker(game.home / unit["source"])
                 applied.append(row)

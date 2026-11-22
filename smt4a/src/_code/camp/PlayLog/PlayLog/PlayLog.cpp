@@ -1,6 +1,7 @@
-/* NON_MATCHING: 22 lines, one allocation choice in the counter-0x2E rows: retail computes the difference first and
- * into r1 (`sub r1, r6, r0; add r0, r4, r5, lsl #2`), this build the row address first and the difference into r0.
- * playLogBuildPages has the same expression and the same miss. */
+/* camp/PlayLog/PlayLog.cpp, as one translation unit: the play log screen's page change and its update, compiled
+ * together as the original file was. armcc inlines the plain `static` playLogSetState (six calls in this file) late,
+ * which the page change needs: compiled on its own, its one call is inlined early and the page change's registers
+ * come out the other way round. Each function's own note is the comment before its definition. */
 #include "common.h"
 #include <stddef.h>
 #include "gamedata/PlayLogTable.h"
@@ -12,6 +13,8 @@
 
 extern "C" {
 extern PlayLogWorkA *g_playLog;
+void __aeabi_memcpy4(void *, const void *, u32); // declcheck: local (the shared declaration does not compile here or changes this unit)
+void gridNavigationConfigure(ScrollSelection *list, u32 count, u32 rows, u32 first, u32 second, u32 third);
 s32 padQueryLogicalKey(s32 key, s32 mode);
 s32 ifTouchRegionAddRequested(u32 file, u32 index);
 void eventQueueAddUniqueIfValid(s32 event); // declcheck: local (the shared declaration does not compile here or changes this unit)
@@ -23,6 +26,50 @@ s32 resourceRunOperationIfUnblocked(ScrollSelection *list); // declcheck: local 
 s32 listCursorGetRowIfUnblocked(const void *object); // declcheck: local (the shared declaration does not compile here or changes this unit)
 s32 gridNavigationGetItemCount(ScrollSelection *list); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
+/* Steps the play log's page change: slides the rows out, shows the other page and slides the rows back in, then
+ * returns the screen to its list state. */
+void playLogChangePage(PlayLogWorkA *work)
+{
+    switch (work->pageStep) {
+    case 0:
+        for (s32 index = 0; index < 5; ++index)
+            uiSpriteAdvanceAnimation(&work->sprites[index], 1.0f);
+        if (!uiSpriteGetCompletionState(&work->sprites[4]))
+            return;
+        work->pageStep = 1;
+        break;
+    case 1:
+        break;
+    case 2:
+        for (s32 index = 0; index < 5; ++index)
+            uiSpriteAdvanceAnimation(&work->sprites[index], 1.0f);
+        if (!uiSpriteGetCompletionState(&work->sprites[4]))
+            return;
+        work->pageStep = 3;
+        /* fall through */
+    case 3:
+        playLogSetState(work, 1);
+        return;
+    default:
+        return;
+    }
+    if (work->page == 0)
+        work->page = 1;
+    else
+        work->page = 0;
+    __aeabi_memcpy4(work->values, work->pages[work->page].values, sizeof(work->values));
+    __aeabi_memcpy4(work->ids, work->pages[work->page].ids, sizeof(work->ids));
+    gridNavigationConfigure(&work->list, work->pages[work->page].count, 5, 1, 0, 1);
+    s32 animation = 0;
+    if (!work->pageDirection)
+        animation = 2;
+    playLogSelectAnimation(work, animation);
+    work->pageStep = 2;
+}
+
+/* NON_MATCHING: 22 lines, one allocation choice in the counter-0x2E rows: retail computes the difference first and
+ * into r1 (`sub r1, r6, r0; add r0, r4, r5, lsl #2`), this build the row address first and the difference into r0.
+ * playLogBuildPages has the same expression and the same miss. */
 /* One frame of the play log screen: animates the sprites, scrolls the list and moves between states. */
 void playLogUpdate(void)
 {

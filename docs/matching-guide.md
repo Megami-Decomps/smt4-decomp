@@ -365,8 +365,9 @@ asks for.
   inlines it early (its constants share the caller's hoisted registers), with several it inlines late (each site
   materialises its own). smt4a `FUN_002007f4` (one call of `playLogSetState`) is 30 lines off alone and IDENTICAL
   compiled in one file with `FUN_0021545c` (five more calls; wave 68). A `multifile` entry cannot express this
-  (`--no_autoinline` keeps the helper out of line), and a unit must not add calls to emulate it: such pairs need
-  both units carved from one source file.
+  (`--no_autoinline` keeps the helper out of line), and a unit must not add calls to emulate it: such pairs are
+  one [translation unit](project.md#translation-units), both units built from one source file
+  (`camp/PlayLog/PlayLog/PlayLog.cpp` holds the play-log pair).
 - Retail copying fields one `ldr`/`str` pair at a time where the build batches the same copies through VFP
   registers (`vldr`/`vstr` runs) is a plain `static` helper armcc inlined late, called once per copy: smt4
   `FUN_001569d8` and its smt4a twin `FUN_004491fc` (15 calls of `resetCursorRewind`, `current = begin`) are
