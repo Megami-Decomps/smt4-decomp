@@ -2,8 +2,6 @@
 
 extern "C" {
 
-int ifTouchRegionRemove(void);
-void __aeabi_memset4(void *block, u32 size, u32 value);
 void statusDownSetSpriteMode(s32 mode, s32 imageKey, s32 flag);
 
 /* Enters `next`, remembering the previous state and restarting the state timer. */
@@ -28,11 +26,7 @@ void statusDownRestartTransition(void)
     statusDownEnter(status, 2);
     screen->nextState = 0;
     screen->tab = 0;
-    for (s32 i = 0; i < status->touchRegionCount; i++) {
-        ifTouchRegionRemove();
-    }
-    status->touchRegionCount = 0;
-    __aeabi_memset4(status->slots, sizeof(status->slots), 0xFFFFFFFF);
+    statusDownClearTouchRegions(status);
 }
 
 } /* extern "C" */

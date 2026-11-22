@@ -18,7 +18,7 @@ struct MapSingleModelState {
 struct MapSingleModelWork {
     /* 0x00 */ s32 state;           /* 1 idle, 2 placed, 3 leaving */
     /* 0x04 */ s32 timer;           /* frames in the current state */
-    /* 0x08 */ u8 unk08[4];
+    /* 0x08 */ s32 modelId;         /* the map's single-model id (> 0: a model is placed) */
     /* 0x0C */ u8 requested;        /* leave requested */
     /* 0x0D */ u8 unk0D[3];
     /* 0x10 */ MapSingleModelState model;

@@ -24,7 +24,7 @@ extern const u8 DAT_0052aa0c;
 void *asdMemoryAlloc(s32 heap, s32 alignment, s32 option, u32 bytes, s32 fromFront);
 u32 taskCreateDraw(const char *name, u32 priority, u32 flags, u32 argument, void (*draw)(), void (*teardown)(u32),
                    void *work, u32 parent);
-void FUN_00357ea0();
+void btlTargetSelectCalc();
 void btlTargetSelectDraw();
 void btlTargetSelectDestroy(u32 job);
 void paramsClearPacket(UiResourceParameters *params);
@@ -39,13 +39,13 @@ void FUN_00363990(BtlMainStateA *owner)
     work->base.primary = reinterpret_cast<BtlUiObject *>(new (owner) Obj557bd8);
     work->base.secondary = reinterpret_cast<BtlUiObject *>(new (owner) Obj557d48);
     work->mode = 0;
-    owner->targetSelect.job = taskCreateDraw("btlTargetSelect Calc", 4, 0, 0, FUN_00357ea0, btlTargetSelectDestroy, work, owner->job);
+    owner->targetSelect.job = taskCreateDraw("btlTargetSelect Calc", 4, 0, 0, btlTargetSelectCalc, btlTargetSelectDestroy, work, owner->job);
     taskCreateDraw("btlTargetSelect DrawUpL", 0x7E, 0, 0, btlTargetSelectDraw, 0, work, owner->targetSelect.job);
     taskCreateDraw("btlTargetSelect DrawUpR", 0xDA, 0, 0, btlTargetSelectDraw, 0, work, owner->targetSelect.job);
     paramsClearPacket(&work->parameters);
     paramsInit(&work->parameters, 0, 0, 0, 0, 0, 0, &DAT_0052aa0c, 0x10, 0, 0);
     uiSpriteStateInitFromSource(&work->draw, 12, 0x71, &work->parameters, 1, 1.0f);
-    FUN_0036b644(&work->draw, 0);
+    uiSpriteStartFrameSequence(&work->draw, 0);
 }
 
 }

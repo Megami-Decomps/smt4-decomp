@@ -16,6 +16,7 @@ public:
     /* 0xa8 */ Vector8 *listA;
     /* 0xac */ Vector8 *listB;
     struct BindingCache {
+        BindingCache() : first(0), mode(2), firstSlot(0xff), secondSlot(0xff), value(0) {}
         u8 first, mode, firstSlot, secondSlot;
         u32 value;
     };

@@ -1,4 +1,9 @@
-/* NON_MATCHING: equipment-label zero caching, panel register lifetimes, and portrait-release guard/loop layout differ from retail. */
+/* NON_MATCHING: 109 lines (71 by shape; raw counts the rows three missing moves shift). The flow, the frame and
+ * the saved registers are retail's. What differs: the preview test keeps the panel's demon in r0 and the card's
+ * in r1 (retail r2 and r0, with a `mov r0, r2` before each devilIsTextureLoaded); the two inlined portrait-state
+ * helpers use the caller's registers where retail copies the index (`mov r5, r7`) and the set (`movs r5, r4`,
+ * the index in r4), the same r4/r5 choice textureRequestCacheGet's own copy has and its source does not give; and
+ * the two-dash strcpy calls __ARM_common_memcpy4_5, which retail's symbols still name __ARM_common_memcpy4_5. */
 #include <string.h>
 #include "common.h"
 #include <stdio.h>
@@ -9,46 +14,11 @@
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers_VariantD.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
-
-struct CharacterInfoPanelA {
-    void *title, *name;
-    void *equipmentLabels[7];
-    u16 equipmentIds[7];
-    u16 unk32;
-    void *description;
-    void *demonName;
-    s32 demonNameWidth;
-    void *race;
-    s32 raceWidth;
-    void *specialItemName;
-    s32 specialItemWidth;
-    void *skillLabels[8];
-    s32 skillWidths[8];
-    s16 previewId;
-    u16 unk92;
-    u32 textureStates[9];
-};
-struct CharacterInfoRecordA {
-    /* 0x00 */ u16 equipment[7];
-    /* 0x0E */ char name[18];
-    /* 0x20 */ u8 flags;
-    /* 0x21 */ u8 unk21;
-    /* 0x22 */ u8 portrait;
-    /* 0x23 */ u8 title;
-    /* 0x24 */ u32 message;
-    /* 0x28 */ u8 unk28[0xc];
-    /* 0x34 */ u16 owner;
-    /* 0x36 */ u16 unk36;
-    /* 0x38 */ u16 specialItem;
-    /* 0x3A */ u8 unk3a[0x16];
-    /* 0x50 */ u16 skills[8];
-    /* 0x60 */ u16 demon;
-};
-typedef char CharacterInfoPanelASizeCheck[sizeof(CharacterInfoPanelA) == 0xb8 ? 1 : -1];
-typedef char CharacterInfoRecordASizeCheck[sizeof(CharacterInfoRecordA) == 0x64 ? 1 : -1];
+#include "shard/Shard003B.h"
+#include "cec/CecMessage.h"
+#include "shard/W6_W6Match3_UnitStatusRequest.h"
 
 extern "C" {
-void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 void rt_aeabi_memclr(void *destination, u32 size);
 void asdTextFormatStream(void *label, u32 font, u32 color, s32 x, s32 y, const char *format, ...);
 const char *dataTable4AGetEntry2C(u32 id);
@@ -56,79 +26,139 @@ const char *fileSectionGetData(void *file, u32 entry, u32 table);
 const char *dataFindKindRecordWithAocOverrides(u32 equipment, u32 flags);
 const char *dataTable01GetRecordWithAocOverride(u32 demon);
 const char *demonGetRaceLabel(u32 demon, u32 flags);
-void FUN_001a90f0(char *destination, const char *source);
 f32 fontMeasureTextWidth(const char *text, u32 font, f32 spacing);
 void statusBustUpPortraitRelease(s32 id, u32 kind);
 void statusBustUpPortraitAcquire(s32 id, u32 kind);
-u16 FUN_0036fcd0(void *item, u32 flags);
 u32 requestIdToCode(u32 id);
 void asdTMTexTableReleaseNode(u32 table, u32 code);
 }
 
-static __forceinline void setCharacterEquipmentLabelA(CharacterInfoPanelA *panel, const CharacterInfoRecordA *record, u32 slot, char *buffer)
+/* Frees portrait texture `index` unless it is still loading (textureRequestCacheGet's counterpart). */
+static __inline void resSetReleaseTexture(ResSet *set, u32 index)
 {
-    if (record->equipment[slot]) {
-        textExpandGlyphsToBuffer(dataFindKindRecordWithAocOverrides(record->equipment[slot], 0), buffer, 0);
-        asdTextFormatStream(panel->equipmentLabels[slot], 2, -1u, 0, 0, buffer);
-        panel->equipmentIds[slot] = record->equipment[slot];
-    } else {
-        panel->equipmentIds[slot] = 0;
-    }
-}
-
-static inline void clearCharacterPreviewA(CharacterInfoPanelA *panel)
-{
-    if (panel->previewId && devilIsTextureLoaded(panel->previewId, 1))
-        statusBustUpPortraitRelease(panel->previewId, 1);
-    panel->previewId = 0;
-}
-
-extern "C" void characterInfoPanelPopulate(CharacterInfoPanelA *panel, const CharacterInfoRecordA *record, void *messages)
-{
-    if (panel == NULL || record == NULL)
+    if (set == NULL) {
         return;
-    char buffer[128];
-    textExpandGlyphsToBuffer(record->name, buffer, 0);
-    asdTextFormatStream(panel->name, 3, -1u, 0, 0, buffer);
-    const char *title = dataTable4AGetEntry2C(record->title);
-    if (record->flags & 2)
-        __aeabi_memcpy4(buffer, "\x82\x63\x82\x85\x82\x96\x82\x85\x82\x8c\x82\x8f\x82\x90\x82\x85\x82\x92", 19);
-    else if (title)
-        textExpandGlyphsToBuffer(title, buffer, 0);
-    else
-        rt_aeabi_memclr(buffer, sizeof(buffer));
-    asdTextFormatStream(panel->title, 2, -1u, 0, 0, buffer);
-    if (messages)
-        asdTextFormatStream(panel->description, 2, -1u, 0, 0, "%s", fileSectionGetData(messages, record->message, 0));
-    else {
-        buffer[0] = '\x81';
-        buffer[1] = '\x40';
-        buffer[2] = '\0';
-        asdTextFormatStream(panel->description, 2, -1u, 0, 0, buffer);
     }
-    setCharacterEquipmentLabelA(panel, record, 0, buffer);
-    setCharacterEquipmentLabelA(panel, record, 1, buffer);
-    setCharacterEquipmentLabelA(panel, record, 2, buffer);
-    setCharacterEquipmentLabelA(panel, record, 3, buffer);
-    setCharacterEquipmentLabelA(panel, record, 4, buffer);
-    setCharacterEquipmentLabelA(panel, record, 5, buffer);
-    setCharacterEquipmentLabelA(panel, record, 6, buffer);
+    if (asdTMTexTableNodeIsLoaded(RES_SET_TEXTURE_TABLE, requestIdToCode(index)) &&
+        set->states[index] != RES_SET_TEXTURE_LOADING) {
+        asdTMTexTableReleaseNode(RES_SET_TEXTURE_TABLE, requestIdToCode(index));
+        set->states[index] = RES_SET_TEXTURE_IDLE;
+    }
+}
 
-    if (record->owner)
-        textExpandGlyphsToBuffer(dataTable01GetRecordWithAocOverride(record->demon), buffer, 0);
-    else
-        strcpy(buffer, "\x81\x7c\x81\x7c\x81\x7c");
+/* Marks portrait texture `index` as wanted: gfxAdvanceTextureRequestQueue loads it. */
+static __inline void resSetRequestTexture(ResSet *set, u32 index)
+{
+    if (set == NULL) {
+        return;
+    }
+    if (!asdTMTexTableNodeIsLoaded(RES_SET_TEXTURE_TABLE, requestIdToCode(index))) {
+        if (set->states[index] != RES_SET_TEXTURE_LOADED && set->states[index] != RES_SET_TEXTURE_LOADING) {
+            set->states[index] = RES_SET_TEXTURE_REQUESTED;
+        }
+    }
+}
+
+/* Fills the character info panel from a StreetPass card: the player's name, title, message and equipment, the
+ * demon's name, race and skills, the special item, and the portrait texture to load. */
+extern "C" void characterInfoPanelPopulate(ResSet *panel, const CecProcessSlotA *card, void *messages)
+{
+    if (panel == NULL || card == NULL) {
+        return;
+    }
+    const CecCardDemon *demon = &card->demon;
+    char buffer[128];
+
+    textExpandGlyphsToBuffer(card->playerName, buffer, 0);
+    asdTextFormatStream(panel->name, 3, -1u, 0, 0, buffer);
+
+    const char *title = dataTable4AGetEntry2C(card->title);
+    if (card->flags & 2) {
+        strcpy(buffer, "\x82\x63\x82\x85\x82\x96\x82\x85\x82\x8c\x82\x8f\x82\x90\x82\x85\x82\x92"); /* "Developer" in wide letters */
+    } else if (title == NULL) {
+        rt_aeabi_memclr(buffer, sizeof(buffer));
+    } else {
+        textExpandGlyphsToBuffer(title, buffer, 0);
+    }
+    asdTextFormatStream(panel->title, 2, -1u, 0, 0, buffer);
+
+    if (messages == NULL) {
+        strcpy(buffer, "\x81\x40"); /* a wide space */
+        asdTextFormatStream(panel->description, 2, -1u, 0, 0, buffer);
+    } else {
+        asdTextFormatStream(panel->description, 2, -1u, 0, 0, "%s", fileSectionGetData(messages, card->selection, 0));
+    }
+
+    /* The seven equipment slots: an empty one keeps its label. */
+    if (card->equipment[0] == 0) {
+        panel->equipmentIds[0] = 0;
+    } else {
+        textExpandGlyphsToBuffer(dataFindKindRecordWithAocOverrides(card->equipment[0], 0), buffer, 0);
+        asdTextFormatStream(panel->equipmentLabels[0], 2, -1u, 0, 0, buffer);
+        panel->equipmentIds[0] = card->equipment[0];
+    }
+    if (card->equipment[1] == 0) {
+        panel->equipmentIds[1] = 0;
+    } else {
+        textExpandGlyphsToBuffer(dataFindKindRecordWithAocOverrides(card->equipment[1], 0), buffer, 0);
+        asdTextFormatStream(panel->equipmentLabels[1], 2, -1u, 0, 0, buffer);
+        panel->equipmentIds[1] = card->equipment[1];
+    }
+    if (card->equipment[2] == 0) {
+        panel->equipmentIds[2] = 0;
+    } else {
+        textExpandGlyphsToBuffer(dataFindKindRecordWithAocOverrides(card->equipment[2], 0), buffer, 0);
+        asdTextFormatStream(panel->equipmentLabels[2], 2, -1u, 0, 0, buffer);
+        panel->equipmentIds[2] = card->equipment[2];
+    }
+    if (card->equipment[3] == 0) {
+        panel->equipmentIds[3] = 0;
+    } else {
+        textExpandGlyphsToBuffer(dataFindKindRecordWithAocOverrides(card->equipment[3], 0), buffer, 0);
+        asdTextFormatStream(panel->equipmentLabels[3], 2, -1u, 0, 0, buffer);
+        panel->equipmentIds[3] = card->equipment[3];
+    }
+    if (card->equipment[4] == 0) {
+        panel->equipmentIds[4] = 0;
+    } else {
+        textExpandGlyphsToBuffer(dataFindKindRecordWithAocOverrides(card->equipment[4], 0), buffer, 0);
+        asdTextFormatStream(panel->equipmentLabels[4], 2, -1u, 0, 0, buffer);
+        panel->equipmentIds[4] = card->equipment[4];
+    }
+    if (card->equipment[5] == 0) {
+        panel->equipmentIds[5] = 0;
+    } else {
+        textExpandGlyphsToBuffer(dataFindKindRecordWithAocOverrides(card->equipment[5], 0), buffer, 0);
+        asdTextFormatStream(panel->equipmentLabels[5], 2, -1u, 0, 0, buffer);
+        panel->equipmentIds[5] = card->equipment[5];
+    }
+    if (card->equipment[6] == 0) {
+        panel->equipmentIds[6] = 0;
+    } else {
+        textExpandGlyphsToBuffer(dataFindKindRecordWithAocOverrides(card->equipment[6], 0), buffer, 0);
+        asdTextFormatStream(panel->equipmentLabels[6], 2, -1u, 0, 0, buffer);
+        panel->equipmentIds[6] = card->equipment[6];
+    }
+
+    if (card->selectedDemon) {
+        textExpandGlyphsToBuffer(dataTable01GetRecordWithAocOverride(demon->id), buffer, 0);
+    } else {
+        strcpy(buffer, "\x81\x7c\x81\x7c\x81\x7c"); /* three dashes */
+    }
     asdTextFormatStream(panel->demonName, 1, -1u, 0, 0, buffer);
     panel->demonNameWidth = (s32)fontMeasureTextWidth(buffer, 1, 0.0f);
-    if (record->owner)
-        textExpandGlyphsToBuffer(demonGetRaceLabel(record->demon, 0), buffer, 0);
-    else
-        FUN_001a90f0(buffer, "\x81\x7c\x81\x7c");
+
+    if (card->selectedDemon) {
+        textExpandGlyphsToBuffer(demonGetRaceLabel(demon->id, 0), buffer, 0);
+    } else {
+        strcpy(buffer, "\x81\x7c\x81\x7c");
+    }
     asdTextFormatStream(panel->race, 2, -1u, 0, 0, buffer);
     panel->raceWidth = (s32)fontMeasureTextWidth(buffer, 2, 0.0f);
+
     for (s32 slot = 0; slot < 8; ++slot) {
-        if (record->skills[slot] && record->owner) {
-            textExpandGlyphsToBuffer(reinterpret_cast<const char *>(aocIndexValueOrDefault(record->skills[slot])), buffer, 0);
+        if (demon->skills[slot] && card->selectedDemon) {
+            textExpandGlyphsToBuffer((const char *)aocIndexValueOrDefault(demon->skills[slot]), buffer, 0);
             asdTextFormatStream(panel->skillLabels[slot], 1, -1u, 0, 0, buffer);
             panel->skillWidths[slot] = (s32)fontMeasureTextWidth(buffer, 1, 0.0f);
         } else {
@@ -137,23 +167,25 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanelA *panel, const Cha
             panel->skillWidths[slot] = (s32)fontMeasureTextWidth(buffer, 2, 0.0f);
         }
     }
-    if (panel->previewId != record->demon) {
-        if (record->demon) {
-            if (record->owner) {
-                if (panel->previewId && devilIsTextureLoaded(panel->previewId, 1))
-                    statusBustUpPortraitRelease(panel->previewId, 1);
-                panel->previewId = record->demon;
-                statusBustUpPortraitAcquire(panel->previewId, 1);
+
+    /* The demon preview follows the card's demon. */
+    if (panel->previewId != demon->id && demon->id != 0) {
+        if (card->selectedDemon) {
+            if (panel->previewId && devilIsTextureLoaded(panel->previewId, 1)) {
+                statusBustUpPortraitRelease(panel->previewId, 1);
             }
-        } else {
-            clearCharacterPreviewA(panel);
+            panel->previewId = demon->id;
+            statusBustUpPortraitAcquire(panel->previewId, 1);
         }
-    } else if (record->demon == 0) {
-        clearCharacterPreviewA(panel);
+    } else if (demon->id == 0) {
+        if (panel->previewId && devilIsTextureLoaded(panel->previewId, 1)) {
+            statusBustUpPortraitRelease(panel->previewId, 1);
+        }
+        panel->previewId = 0;
     }
-    if (record->specialItem) {
-        void *item = reinterpret_cast<void *>(unitMapIdToCategory(record->specialItem, 0));
-        u16 id = FUN_0036fcd0(item, 0);
+
+    if (card->specialItem) {
+        u16 id = FUN_0036fcd0(unitMapIdToCategory(card->specialItem, 0), 0);
         textExpandGlyphsToBuffer(dataTable01GetRecordWithAocOverride(dataTable10FindValue(id)), buffer, 0);
         asdTextFormatStream(panel->specialItemName, 2, -1u, 0, 0, buffer);
         panel->specialItemWidth = (s32)fontMeasureTextWidth(buffer, 2, 0.0f);
@@ -163,21 +195,16 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanelA *panel, const Cha
         panel->specialItemWidth = 0;
     }
 
-    u32 defaultPortrait = 0;
-    for (u32 portrait = 0; portrait < 9; ++portrait) {
-        if (asdTMTexTableNodeIsLoaded(0x2e, requestIdToCode(portrait))) {
-            defaultPortrait = portrait;
+    /* The card's portrait replaces the first one loaded. */
+    s32 loaded = 0;
+    for (s32 index = 0; index < RES_SET_TEXTURE_COUNT; ++index) {
+        if (asdTMTexTableNodeIsLoaded(RES_SET_TEXTURE_TABLE, requestIdToCode(index))) {
+            loaded = index;
             break;
         }
     }
-    if (!asdTMTexTableNodeIsLoaded(0x2e, requestIdToCode(record->portrait))) {
-        if (asdTMTexTableNodeIsLoaded(0x2e, requestIdToCode(defaultPortrait)) && panel->textureStates[defaultPortrait] != 2) {
-            asdTMTexTableReleaseNode(0x2e, requestIdToCode(defaultPortrait));
-            panel->textureStates[defaultPortrait] = 0;
-        }
-        u32 portrait = record->portrait;
-        if (!asdTMTexTableNodeIsLoaded(0x2e, requestIdToCode(portrait)) &&
-            panel->textureStates[portrait] != 3 && panel->textureStates[portrait] != 2)
-            panel->textureStates[portrait] = 1;
+    if (!asdTMTexTableNodeIsLoaded(RES_SET_TEXTURE_TABLE, requestIdToCode(card->portrait))) {
+        resSetReleaseTexture(panel, loaded);
+        resSetRequestTexture(panel, card->portrait);
     }
 }

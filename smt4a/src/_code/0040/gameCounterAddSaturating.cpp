@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail keeps the index in r5 and the amount in r4 (built: r4/r5). */
 #include "common.h"
 
 extern "C" {
@@ -14,29 +13,35 @@ extern void gameAddPointsClamped(u32 amount);
 extern void questCenterCounterAddSaturating14(u32 amount);
 extern void questCenterAddPoints(u32 amount);
 
-static __inline void counterAdd(u32 *counter, u32 amount)
-{
-    if (amount < ~*counter) {
-        *counter = *counter + amount;
-    } else {
-        *counter = 0xFFFFFFFF;
-    }
-}
-
 /* Adds `amount` to counter `index` in both tables (saturating) and notifies the feature that
  * tracks the counters 2, 9, 0x13 and 0x26. */
 void gameCounterAddSaturating(s32 index, u32 amount)
 {
-    counterAdd(&gameGetCounters()->total[index], amount);
-    counterAdd(&gameGetCounters()->session[index], amount);
-    if (index == 2) {
+    u32 *total = &gameGetCounters()->total[index];
+    if (~*total > amount) {
+        *total = *total + amount;
+    } else {
+        *total = 0xFFFFFFFF;
+    }
+    u32 *session = &gameGetCounters()->session[index];
+    if (~*session > amount) {
+        *session = *session + amount;
+    } else {
+        *session = 0xFFFFFFFF;
+    }
+    switch (index) {
+    case 2:
         questCenterCounterAddSaturating14(amount);
-    } else if (index == 9) {
+        return;
+    case 9:
         questCenterAddPoints(amount);
-    } else if (index == 0x13) {
+        return;
+    case 0x13:
         questCenterCounterAddSaturating1A(amount);
-    } else if (index == 0x26) {
+        return;
+    case 0x26:
         gameAddPointsClamped(amount);
+        return;
     }
 }
 

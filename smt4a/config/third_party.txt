@@ -3170,7 +3170,7 @@
 0x001a8f48 nw_snd_internal_GroupFile_FileHeader_GetFileBlock name
 0x001a8fb0 nw_snd_internal_GroupFile_FileHeader_GetInfoBlock name
 0x001a901c nw_snd_internal_GroupFile_FileHeader_GetInfoExBlock name
-0x001a90f0 FUN_001a90f0 between
+0x001a90f0 __ARM_common_memcpy4_5 name
 0x001a9110 __ARM_common_memcpy4_8 name
 0x001a9124 FUN_001a9124 callers
 0x001a91ec FUN_001a91ec callers
@@ -6998,7 +6998,7 @@
 0x00466bd4 sndChannelLfoReset between
 0x00466c00 FUN_00466c00 between
 0x00466c3c nw_snd_internal_FrameHeap_Alloc name
-0x00466cac nw_snd_internal_FrameHeap_FrameHeap_sub_object_380298 name
+0x00466cac _ZN13Obj55c3ecListC1Ev between
 0x00466cc4 nw_snd_internal_FrameHeap_FrameHeap_sub_object_3802B0 name
 0x00466d04 obj118Reset2 between
 0x00466d28 FUN_00466d28 between
@@ -7486,7 +7486,7 @@
 0x00514b9c FUN_00514b9c between
 0x00514ba0 FUN_00514ba0 between
 0x00514ba4 FUN_00514ba4 between
-0x00514bd4 expHeapBaseDestroyA between
+0x00514bd4 _ZN9Obj5583d0D1Ev between
 0x00514bfc FUN_00514bfc between
 0x00514c2c FUN_00514c2c between
 0x00514c88 expHeapBaseDestroyB between

@@ -14,7 +14,7 @@ struct EffectGeometryCloneView {
     s32 *referenceCount;
 };
 extern "C" {
-EffectGeometryCloneView *FUN_002ce938(s32, s32, s32, u16);
+EffectGeometryCloneView *FUN_002ce938(s32 count, s16 verticesPerItem, s16 trianglesPerItem, u32 flags);
 void refCountIncrement(s32 *);
 
 EffectGeometryCloneView *FUN_002ff43c(EffectGeometryCloneView *source)

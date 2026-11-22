@@ -1,9 +1,8 @@
-/* NON_MATCHING: direct overlap returns match; square-root intermediate, division registers and result-height store scheduling differ. */
 #include "shard/W6_W6Match6_CollisionQuad.h"
 #include <math.h>
 
 extern "C" {
-// Resolve overlapping XZ circles; preserve the first center's height.
+/* Resolves two overlapping circles on the XZ plane: moves the first out of the second, keeping its height. */
 bool mapResolveCircleOverlapXZ(CollisionVector *result, CollisionVector first, f32 firstRadius,
                   CollisionVector second, f32 secondRadius)
 {
@@ -15,9 +14,12 @@ bool mapResolveCircleOverlapXZ(CollisionVector *result, CollisionVector first, f
     }
     f32 radius = firstRadius + secondRadius;
     if (radius >= distance) {
-        result->x = second.x + (dx / distance) * radius;
-        result->y = first.y;
-        result->z = second.z + (dz / distance) * radius;
+        /* Push the first centre out along the unit direction, keeping its height. */
+        f32 directionX = dx / distance;
+        f32 directionZ = dz / distance;
+        first.x = second.x + directionX * radius;
+        first.z = second.z + directionZ * radius;
+        *result = first;
         return true;
     }
     *result = first;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: transition subobject matches all accesses; transition pointer and result saved registers r5/r6 remain exchanged. */
 /* Starts a ready character-panel script and advances the panel's slide/fade transition. */
 #include "script/scrScriptProcess.h"
 #include <stddef.h>
@@ -14,13 +13,13 @@ u32 FUN_0026f1f0(void);
 void buttonHelpSetPreset(u32 preset);
 void uiAnimateStaggeredSlidesAndFades(void *panel, u32 mode);
 
-u32 FUN_002e1744(void *object)
+u32 characterPanelStartScript(void *object)
 {
     struct PanelTransitionState {
         u8 unk00[0x10];
         u32 phase;
         u8 unk14[0x10];
-        u8 busy;
+        s8 busy;
         u8 unk25[4];
         s8 needsHelp;
     };
@@ -46,9 +45,8 @@ u32 FUN_002e1744(void *object)
         offsetof(PanelTransitionState, needsHelp) == 0x29 &&
         sizeof(PanelWork) == 0x12c ? 1 : -1];
     PanelWork *work = (PanelWork *)object;
-    PanelTransitionState *transition = &work->transition;
     u32 result = 0;
-    if (!transition->busy && FUN_0026f784(work->link) &&
+    if (!work->transition.busy && FUN_0026f784(work->link) &&
         work->resource != NULL && work->entry != NULL && work->record != NULL) {
         if (work->ready == 1) {
             work->process = scrScriptProcessCreate(work->resource, work->entry);
@@ -59,7 +57,7 @@ u32 FUN_002e1744(void *object)
             if (!buttonHelpTextIsVisible()) {
                 FUN_0026f188(FUN_0026f1f0(), 15);
             }
-            if (!transition->needsHelp) {
+            if (!work->transition.needsHelp) {
                 work->transition.phase = 1;
             } else {
                 buttonHelpSetPreset(226);

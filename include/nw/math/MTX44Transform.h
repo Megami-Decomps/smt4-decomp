@@ -30,6 +30,37 @@ static __inline MTX44 *MTX44Mult(MTX44 *out, const MTX44 *left, const MTX44 *rig
     return out;
 }
 
+/* nn::math::VEC3TransformCoord: transforms a point by the matrix and divides by the resulting w (inlined,
+ * through VEC3TransformCoordArray, by smt4a's particle quad fill FUN_004ff4e0). */
+static __inline VEC3 *VEC3TransformCoord(VEC3 *pOut, const MTX44 *pM, const VEC3 *pV)
+{
+    VEC3 tmp;
+    f32 rw;
+
+    tmp.x = pM->m[0][0] * pV->x + pM->m[0][1] * pV->y + pM->m[0][2] * pV->z + pM->m[0][3];
+    tmp.y = pM->m[1][0] * pV->x + pM->m[1][1] * pV->y + pM->m[1][2] * pV->z + pM->m[1][3];
+    tmp.z = pM->m[2][0] * pV->x + pM->m[2][1] * pV->y + pM->m[2][2] * pV->z + pM->m[2][3];
+    rw = pM->m[3][0] * pV->x + pM->m[3][1] * pV->y + pM->m[3][2] * pV->z + pM->m[3][3];
+    rw = 1.0f / rw;
+
+    pOut->x = rw * tmp.x;
+    pOut->y = rw * tmp.y;
+    pOut->z = rw * tmp.z;
+    return pOut;
+}
+
+/* nn::math::VEC3TransformCoordArray: VEC3TransformCoord over `count` points. */
+static __inline VEC3 *VEC3TransformCoordArray(VEC3 *pOut, const MTX44 *pM, const VEC3 *pV, u32 count)
+{
+    VEC3 *pDst = pOut;
+    for (u32 i = 0; i < count; ++i) {
+        VEC3TransformCoord(pDst, pM, pV);
+        ++pV;
+        ++pDst;
+    }
+    return pOut;
+}
+
 /* nn::math::VEC3 with its constructor (the shared VEC3 stays an aggregate for the units that initialise it
  * with braces): by-value components, which a caller evaluates before the vector exists. */
 struct VEC3Value : VEC3 {

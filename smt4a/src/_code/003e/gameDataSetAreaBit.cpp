@@ -1,18 +1,21 @@
-/* NON_MATCHING: retail uses `ldrb r2, [r0, r4, lsr #3]!` where armcc emits `and r2, r4, #7`. */
 #include "common.h"
 
 extern "C" {
 
 u8 *gameDataBlockGetArea28350(void);
 
+/* Sets or clears bit `index` of the area block's first bitset. */
 void gameDataSetAreaBit(u32 index, s32 enabled)
 {
-    u8 *byte = &gameDataBlockGetArea28350()[index >> 3];
-    u32 bit = 1u << (index & 7);
+    u8 *flags = gameDataBlockGetArea28350();
+    s32 byte = index / 8;
+    s32 bit = index % 8;
+    u8 *flag = &flags[byte];
+
     if (enabled != 0) {
-        *byte |= bit;
+        *flag |= 1 << bit;
     } else {
-        *byte &= ~bit;
+        *flag &= ~(1 << bit);
     }
 }
 

@@ -16,7 +16,7 @@ struct UpgradeLimits {
 
 extern "C" {
 s32 equipmentIsFullyUpgraded(void);
-void FUN_001a90f0(EquipmentUpgradeModifiers *extras, const EquipmentUpgradeModifiers *source);
+void __ARM_common_memcpy4_5(EquipmentUpgradeModifiers *extras, const EquipmentUpgradeModifiers *source);
 
 /* Fills `limits` with how much more an upgrade of equipment `item` may add to its capped values. */
 void FUN_0048053c(s32 item, UpgradeLimits *limits)
@@ -36,7 +36,7 @@ void FUN_0048053c(s32 item, UpgradeLimits *limits)
     s32 hp = 0;
     if (upgrade != NULL) {
         hp = upgrade->hpBonus;
-        FUN_001a90f0(&extras, (const EquipmentUpgradeModifiers *)upgrade->statBonus);
+        __ARM_common_memcpy4_5(&extras, (const EquipmentUpgradeModifiers *)upgrade->statBonus);
     }
     switch (kind) {
     case 4: {

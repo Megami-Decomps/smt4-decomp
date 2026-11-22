@@ -47,7 +47,7 @@ void uiSpriteAdvanceAlphaTrack(UiSpriteState *sprite, f32 step);
 void FUN_00182348(UiSpriteState *sprite, f32 step);
 void spriteSequencePlayerAdvance(UiSpriteState *sprite, f32 step);
 /* Starts frame sequence `sequence` of the sprite's resource. */
-void FUN_0036b644(UiSpriteState *sprite, s32 sequence);
+void uiSpriteStartFrameSequence(UiSpriteState *sprite, s16 sequence);
 /* uiSpriteAdvanceAnimation with the position track replaced by a slide in from 320 pixels to the right (left
    when `reverse`). */
 s32 uiSpriteSlideFromSide(UiSpriteState *sprite, s32 reverse);

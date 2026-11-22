@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a90f0(...);
+int __ARM_common_memcpy4_5(...);
 int libc_strcpy(...);
 int mapIfRequestById(...);
 
@@ -69,7 +69,7 @@ extern unsigned char g_recordTable; /* 0x5f32a0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: gameFlagIsSet. */
-/* Supplied declaration required: FUN_001a90f0. */
+/* Supplied declaration required: __ARM_common_memcpy4_5. */
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: libc_strcpy. */
@@ -685,7 +685,7 @@ LAB_003652e4:
                           in_r12 = &g_recordTable;
                           do {
                             if (*(unsigned int **)(temp_v3 * 0x17c + 0x5f33cc) == temp_v24) {
-                              FUN_001a90f0(temp_v3 * 0x17c + 0x5f340e,&DAT_00580c98);
+                              __ARM_common_memcpy4_5(temp_v3 * 0x17c + 0x5f340e,&DAT_00580c98);
                               break;
                             }
                             temp_v3 = temp_v3 + 1;

@@ -1,5 +1,6 @@
-/* NON_MATCHING: retail computes `high` (orr r4) before loading the id and variation and places `sub sp` after the kind load; this build hoists the loads above the orr (id in r3). */
+/* NON_MATCHING: snprintf (<stdio.h>) gives retail's prologue; still differs: retail computes `high` (orr r4) before loading the id and variation, this build loads the id (into r3) first. */
 #include "nn/Result.h"
+#include <stdio.h>
 #include "sys/ProgramId.h"
 
 extern "C" {
@@ -13,7 +14,6 @@ struct ProgramIdSpec {
     /* 0x12 */ u8 media;
 };
 
-s32 __2snprintf(char *buffer, u32 size, const char *format, ...);
 s32 FUN_00439a04(const char *string);
 
 /* Formats the spec as a 16-digit hexadecimal program id and hands it to the service; returns the failure result or 0. */
@@ -44,8 +44,8 @@ s32 FUN_00428220(const ProgramIdSpec *spec)
     u32 low = spec->variation | ((spec->uniqueId & 0xfffff) << 8);
     s32 media = programMediaBits(spec->media) << 28;
     u64 programId = (u64)high << 32 | (u64)(low & 0x0fffffff) | (u64)media;
-    char text[20];
-    __2snprintf(text, 17, "%016llx", programId);
+    char text[17];
+    snprintf(text, sizeof(text), "%016llx", programId);
     s32 result = FUN_00439a04(text);
     if (!nnResultIsFailure(result)) {
         result = 0;

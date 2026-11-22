@@ -82,7 +82,7 @@ int partyPanelToggleRefresh(...);
 int FUN_002932d8(...);
 int statusPanelSetOpen(...);
 int FUN_0029d8f4(...);
-int FUN_0029defc(...);
+int gameLoadUnitSnapshot(...);
 int FUN_0029dfc0(...);
 int scrollOwnerSelectIndex(...);
 int objectPartRunUnlessLocked(...); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
@@ -199,7 +199,7 @@ extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: FUN_0029d8f4. */
 /* Supplied declaration required: menuSetModeAndResetTransitions. */
 extern unsigned int fusionPlayerLevelCapGet(void);
-/* Supplied declaration required: FUN_0029defc. */
+/* Supplied declaration required: gameLoadUnitSnapshot. */
 extern int FUN_0029dfa8(void);
 /* Supplied declaration required: FUN_0029dfc0. */
 extern int gameGetFlagByte12e8(void);
@@ -452,7 +452,7 @@ joined_r0x001c43a0:
           temp_v8 = gameGetSlotTable();
           if (*(char *)(temp_v8 + temp_v24 + 0x9107) < '\0') {
             FUN_0026d670();
-            FUN_0029defc(0);
+            gameLoadUnitSnapshot(0);
             FUN_0029dfc0(0);
           }
           else {
@@ -462,7 +462,7 @@ joined_r0x001c43a0:
           }
         }
         else {
-          FUN_0029defc(0xffffffff,0);
+          gameLoadUnitSnapshot(0xffffffff,0);
           statusPanelSetOpen(1);
         }
         temp_v8 = 0;
@@ -651,7 +651,7 @@ LAB_001c4748:
         }
         if (*(int *)(temp_v1 + temp_v9 * 8 + 0x738) < 0) {
           FUN_0026d670();
-          FUN_0029defc(0);
+          gameLoadUnitSnapshot(0);
           FUN_0029dfc0(0);
         }
         else {
@@ -942,7 +942,7 @@ LAB_001c538c:
           if (temp_v16 != 0) {
             temp_v11 = gameGetSlotTable();
             if (*(char *)(temp_v11 + temp_v16 + 0x9107) < '\0') {
-              FUN_0029defc(0);
+              gameLoadUnitSnapshot(0);
               FUN_0029dfc0(0);
             }
             else {
@@ -952,7 +952,7 @@ LAB_001c538c:
             }
           }
           else {
-            FUN_0029defc(0xffffffff,0);
+            gameLoadUnitSnapshot(0xffffffff,0);
             statusPanelSetOpen(1);
           }
           temp_v11 = 0;
@@ -985,7 +985,7 @@ LAB_001c538c:
             temp_v11 = temp_v11 + temp_v16 * 4 + temp_v9 * 0xc;
           }
           if (*(int *)(temp_v1 + (temp_v11 - 4) * 8 + 0x738) < 0) {
-            FUN_0029defc(0);
+            gameLoadUnitSnapshot(0);
             FUN_0029dfc0(0);
           }
           else {
@@ -1304,7 +1304,7 @@ LAB_001c659c:
                               if (temp_v6 == 0) {
                                 FUN_0026c654((int)*(short *)(temp_v1 + 0x38),0xffffffff,
                                              *(unsigned short *)(temp_v1 + 0x36),0);
-                                FUN_0029defc(0xffffffff,0);
+                                gameLoadUnitSnapshot(0xffffffff,0);
                                 FUN_0026dafc(partyPanelPollSelectedStatusColor());
                                 temp_v6 = (int)*(short *)(temp_v1 + 0x38);
                                 FUN_0026c654(temp_v6,0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
@@ -1351,7 +1351,7 @@ LAB_001c6598:
                             FUN_0026c710(0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
                             if (temp_v6 == 0) {
                               FUN_0026c710(0xffffffff,*(unsigned short *)(temp_v1 + 0x36),0);
-                              FUN_0029defc(0xffffffff,0);
+                              gameLoadUnitSnapshot(0xffffffff,0);
                               FUN_0026dafc(partyPanelPollSelectedStatusColor());
                               temp_v6 = -1;
                               FUN_0026c710(0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
@@ -1787,7 +1787,7 @@ LAB_001c6680:
     temp_v4 = FUN_0029dfa8();
     if (temp_v4 == 0) {
       if (*(short *)(temp_v1 + 0x38) < 0) {
-        FUN_0029defc(0xffffffff,0);
+        gameLoadUnitSnapshot(0xffffffff,0);
       }
       else {
         temp_v7 = gameGetUnitRecord();
@@ -1892,7 +1892,7 @@ LAB_001c6eb8:
               FUN_0026c464((int)*(short *)(temp_v1 + 0x38),*(unsigned short *)(temp_v1 + 0x36),0);
               if (-1 < *(short *)(temp_v1 + 0x38)) goto LAB_001c6d98;
 LAB_001c6d64:
-              FUN_0029defc(0xffffffff,0);
+              gameLoadUnitSnapshot(0xffffffff,0);
               FUN_0026dafc(partyPanelPollSelectedStatusColor());
               partyPanelSetState(0x14,1);
               temp_v7 = 0x100017c;
@@ -1949,7 +1949,7 @@ LAB_001c6d98:
       else {
         FUN_0029e890(0,1);
         FUN_0029c4c8(1);
-        FUN_0029defc((int)*(short *)(temp_v1 + 0xb96),0);
+        gameLoadUnitSnapshot((int)*(short *)(temp_v1 + 0xb96),0);
         FUN_0029c4e4(temp_v1 + 0xb50,0);
         FUN_0029c4ac(0);
         temp_v15 = fusionPlayerLevelCapGet();
@@ -2312,7 +2312,7 @@ LAB_001c7b60:
         if (temp_v6 != 0) {
           temp_v4 = gameGetSlotTable();
           if (-1 >= *(char *)(temp_v4 + temp_v6 + 0x9107)) {
-            FUN_0029defc(0);
+            gameLoadUnitSnapshot(0);
             FUN_0029dfc0(0);
           }
           else {
@@ -2322,7 +2322,7 @@ LAB_001c7b60:
           }
         }
         else {
-          FUN_0029defc(0xffffffff,0);
+          gameLoadUnitSnapshot(0xffffffff,0);
           statusPanelSetOpen(1);
         }
       }
@@ -2339,7 +2339,7 @@ LAB_001c7b60:
           temp_v24 = temp_v24 + temp_v4 * 4 + temp_v8 * 0xc;
         }
         if (*(int *)(temp_v1 + (temp_v24 - 4) * 8 + 0x738) < 0) {
-          FUN_0029defc(0);
+          gameLoadUnitSnapshot(0);
           FUN_0029dfc0(0);
         }
         else {
@@ -2752,11 +2752,11 @@ LAB_001c7c50:
             statusPanelSetOpen(1);
             break;
           }
-          FUN_0029defc(0);
+          gameLoadUnitSnapshot(0);
           FUN_0029dfc0(0);
         }
         else {
-          FUN_0029defc(0xffffffff,0);
+          gameLoadUnitSnapshot(0xffffffff,0);
           statusPanelSetOpen(1);
         }
       }
@@ -2773,7 +2773,7 @@ LAB_001c7c50:
           temp_v24 = temp_v24 + temp_v4 * 4 + temp_v8 * 0xc;
         }
         if (*(int *)(temp_v1 + (temp_v24 - 4) * 8 + 0x738) < 0) {
-          FUN_0029defc(0);
+          gameLoadUnitSnapshot(0);
           FUN_0029dfc0(0);
           break;
         }

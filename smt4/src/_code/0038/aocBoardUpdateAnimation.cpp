@@ -9,7 +9,7 @@ void uiStoreTextureEntryCenter(UiSpriteState *sprite, u32 group, u32 image);
 s32 aocBoardUpdateAnimation(u32 job)
 {
     AocBoardWork *work = (AocBoardWork *)jobGetWork(job);
-    work->owner.unk418 = (work->owner.unk418 + 1) % 40;
+    work->owner.spinnerFrame = (work->owner.spinnerFrame + 1) % 40;
     switch (work->owner.control.frame) {
     case 0:
         work->setTransitionReady(false);

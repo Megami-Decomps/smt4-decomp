@@ -23,7 +23,7 @@ int gameSavedFlagSet(void);
 int itemTableGetItemRecord(void);
 int FUN_0033b33c(...);
 int btlLookupEffectValue(...);
-int FUN_003ddae8(...);
+int btlReflectCreateKind3(...);
 int btlReflectCreateKindf(...);
 int btlReflectQueueDepthOverlays(...);
 int FUN_003de978(...);
@@ -166,7 +166,7 @@ extern int btlGetMaximumNamedValue(int);
 extern unsigned int btlFindEffectNameValue(int);
 /* Supplied declaration required: btlReflectCreateKind1c. */
 /* Supplied declaration required: FUN_003dda20. */
-/* Supplied declaration required: FUN_003ddae8. */
+/* Supplied declaration required: btlReflectCreateKind3. */
 /* Supplied declaration required: btlReflectCreateKindf. */
 /* Supplied declaration required: btlReflectCreateKind2a. */
 /* Supplied declaration required: btlReflectQueueDepthOverlays. */
@@ -692,7 +692,7 @@ LAB_003d444c:
         temp_v4 = btlEffectNameHasPrefix(g_btlAux,temp_v5 + 0x108);
         if (temp_v4 != 0) {
           temp_v8 = btlLookupEffectValue(g_btlAux);
-          FUN_003ddae8(temp_v8,param_2);
+          btlReflectCreateKind3(temp_v8,param_2);
         }
         else if (param_2[0x165] != 0) {
           FUN_00282820((int)*(short *)(temp_v5 + 0x118),param_2,(int)*(short *)(param_2[9] + 0x62),0,3

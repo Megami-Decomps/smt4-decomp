@@ -51,7 +51,7 @@ int btlReflectQueueDepthOverlays(...);
 void btlReflectInitKind3(int first, int second, unsigned int flags, unsigned int value,
                   unsigned int option, unsigned int auxiliary, unsigned int target);
 int btlReflectSetValuePair(...);
-int FUN_004fbd30(...);
+int btlReflectCreateKind4(...);
 int FUN_004fee24(...);
 
 int itemTableGetItemRecord(void);
@@ -264,7 +264,7 @@ extern unsigned int FUN_004fa030(int);
 /* Supplied declaration required: FUN_004feecc. */
 /* Supplied declaration required: btlActionReflectSetStateArg. */
 /* Supplied declaration required: FUN_004fb5a8. */
-/* Supplied declaration required: FUN_004fbd30. */
+/* Supplied declaration required: btlReflectCreateKind4. */
 /* Supplied declaration required: FUN_004fe7b0. */
 /* Supplied declaration required: FUN_004fee24. */
 extern unsigned int FUN_004fee98(int, unsigned int *, unsigned int);
@@ -1023,7 +1023,7 @@ code_r0x004ef7f0:
           temp_v22 = btlEffectNameHasPrefix(g_btlAux,temp_v7 + 0x108);
           if (temp_v22 != 0) {
             temp_v22 = btlLookupEffectValue(g_btlAux);
-            FUN_004fbd30(temp_v22 + temp_v5,puVar29);
+            btlReflectCreateKind4(temp_v22 + temp_v5,puVar29);
           }
           else if (*(int *)(temp_v20 + 0x598) != 0) {
             btlQueueMessageTableReflectAction(*(short *)(temp_v7 + 0x118) + temp_v5,puVar29,

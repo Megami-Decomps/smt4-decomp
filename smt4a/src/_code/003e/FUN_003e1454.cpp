@@ -1,5 +1,6 @@
-/* NON_MATCHING: battle start request (formation file check, unit flag fix-up, state flags); the step transitions use btlStepEnter and the file name buffer is 0x80 bytes like retail's frame; remaining: retail re-reads unit->state after the respawn test (the build reuses the tested value), the intro-mask test and OR load the flag pair in the other order, and the aocFlag load and FUN_003e0f94's state argument are scheduled differently. */
+/* NON_MATCHING: 45 lines. Battle start request (formation file check, unit flag fix-up, state flags); the step transitions use btlStepEnter and the file name buffer is 0x80 bytes like retail's frame; remaining: retail re-reads unit->state after the respawn test (the build reuses the tested value), the intro-mask test and OR load the flag pair in the other order, and the aocFlag load and FUN_003e0f94's state argument are scheduled differently (aocHasType39Record takes the add-on index as its second argument, as in contentRequestStart). */
 #include "battle/btlMain.h"
+#include "shard/W4_Match3_AocMainA.h"
 
 #define BTL_UNIT_FIRST_ENEMY 4
 #define BTL_UNIT_COUNT 0x36
@@ -48,11 +49,9 @@ struct BtlEncountMasks {
 #define BTL_UNIT_VISUAL_HIDDEN 0x800
 
 extern "C" {
-extern u32 g_aocSystem;
 extern u32 g_btlCamera;
 extern BtlEncountMasks g_btlEncount;
 
-s32 FUN_0046ebf0(u32 aocSystem);
 void sysMemClear(void *block, s32 size);
 u32 btlPosArrangeGetFileName(BtlStartState *state);
 char *libc_strcpy(char *destination, u32 source);
@@ -79,7 +78,7 @@ void FUN_003e1454(BtlStep *request, BtlStartState *state)
 {
     char fileName[BTL_FILE_NAME_SIZE];
     bool aocFormation = false;
-    if (state->aocFlag > 0 && FUN_0046ebf0(g_aocSystem) != 0)
+    if (state->aocFlag > 0 && aocHasType39Record(g_aocSystem, state->aocFlag) != 0)
         aocFormation = true;
     sysMemClear(fileName, BTL_FILE_NAME_SIZE);
     libc_strcpy(fileName, btlPosArrangeGetFileName(state));

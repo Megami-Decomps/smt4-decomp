@@ -108,7 +108,7 @@ void resultInitialize(ResultWork *work)
     uiSpriteSetKeyframe(&resultScreenSprites(work)->sprites[RESULT_SPRITE_DETAIL], 0, 0);
     uiSpriteStateInitFromSource(&resultScreenSprites(work)->sprites[RESULT_SPRITE_OVERLAY], TEX_TABLE_RESULT, 1000, &resultScreenSprites(work)->parameters,
                                 101, 1.0f);
-    FUN_002eb76c(&resultScreenSprites(work)->sprites[RESULT_SPRITE_OVERLAY], 0);
+    uiSpriteStartFrameSequence(&resultScreenSprites(work)->sprites[RESULT_SPRITE_OVERLAY], 0);
     uiSpriteStateInitFromSource(&resultScreenSprites(work)->sprites[RESULT_SPRITE_OVERLAY + 1], TEX_TABLE_RESULT, 1000,
                                 &resultScreenSprites(work)->parameters, 101, 1.0f);
     uiSpriteStateInitFromSource(&resultScreenSprites(work)->sprites[RESULT_SPRITE_CURTAIN], TEX_TABLE_RESULT, 1000, &resultScreenSprites(work)->parameters,

@@ -8,7 +8,7 @@ extern "C" {
 
 void messageSlotSet(s32 slot);
 void scrCommMessageSetMode(s32 mode);
-void FUN_0028dcf4(MessageWindow *window, u32 layout);
+void messageWindowSetupLayoutSprites(MessageWindow *window, u32 layout);
 void messageWindowOpen(MessageWindow *window, u32 a, u32 b, u32 kind, u32 c, u32 d, u32 options);
 int buttonHelpSetEnabled(void);
 u32 FUN_002b753c(u32 object);
@@ -72,7 +72,7 @@ u32 messageWindowShowOrPoll(u32 a, u32 b, s32 wait, s32 kind, s32 priority, u32 
                 win->restartPending = 0;
                 messageWindowOpen(win, a, b, kind, 26, 1, 0);
                 if (win->closeRequested == 0) {
-                    FUN_0028dcf4(win, win->mode);
+                    messageWindowSetupLayoutSprites(win, win->mode);
                 }
                 return 0;
             }
@@ -128,7 +128,7 @@ u32 messageWindowShowOrPoll(u32 a, u32 b, s32 wait, s32 kind, s32 priority, u32 
                 win->touchRegionCount = FUN_002b753c(win->box);
             }
             if (win->closeRequested == 0) {
-                FUN_0028dcf4(win, win->mode);
+                messageWindowSetupLayoutSprites(win, win->mode);
             }
             if (priority != 0) {
                 objFlagsSetBits(win->box, 0x20);

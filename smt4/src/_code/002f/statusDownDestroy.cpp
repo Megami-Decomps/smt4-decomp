@@ -3,21 +3,14 @@
 extern "C" {
 
 int asdMemFreeSlot(AsdText *text);
-int ifTouchRegionRemove(void);
 int asdMemFree(StatusDownState *ptr);
-int __aeabi_memset4(void *dst, int size, u32 value);
 int jobStop(u32 job, int mode);
 
 void statusDownDestroy(void)
 {
     StatusDownState *block = g_statusDown;
-    int i;
 
-    for (i = 0; i < (int)(u32)block->touchRegionCount; i++) {
-        ifTouchRegionRemove();
-    }
-    block->touchRegionCount = 0;
-    __aeabi_memset4(block->slots, 0x29, 0xffffffff);
+    statusDownClearTouchRegions(block);
     asdMemFreeSlot(block->text);
     jobStop(block->job, 0);
     asdMemFree(block);

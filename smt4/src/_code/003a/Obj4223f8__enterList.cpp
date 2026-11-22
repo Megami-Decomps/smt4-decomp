@@ -9,7 +9,7 @@ s32 stageAssetsLoaded();
 void FUN_00233240(void *panel, s32 mode);
 void buttonHelpSetPreset(u32 preset);
 s32 flaggedValueHolderGetTotal(const SelectionFlags *selection);
-void FUN_0029defc(s32 id, s32 mode);
+void gameLoadUnitSnapshot(s32 id, s32 mode);
 void statusPanelSetOpen(s32 open);
 void FUN_0029dfc0(s32 mode);
 
@@ -73,7 +73,7 @@ void Obj4223f8::enterList()
             return;
         view->statusId = id;
         if (id) {
-            FUN_0029defc(static_cast<s16>(id), 1);
+            gameLoadUnitSnapshot(static_cast<s16>(id), 1);
             statusPanelSetOpen(1);
             return;
         }

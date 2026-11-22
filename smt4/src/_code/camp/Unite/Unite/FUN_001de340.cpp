@@ -8,7 +8,7 @@
 extern "C" {
 
 int statusPanelSetOpen(...);
-int FUN_0029defc(...);
+int gameLoadUnitSnapshot(...);
 int gridNavigationConfigure(...);
 int qsort(...);
 int nkmBaseGetRecord(void);
@@ -83,7 +83,7 @@ extern int *g_unite; /* 0x43dd68 */
 /* Supplied declaration required: gameRecordCopy. */
 /* Supplied declaration required: statusPanelSetOpen. */
 extern int fusionPlayerLevelCapGet(void);
-/* Supplied declaration required: FUN_0029defc. */
+/* Supplied declaration required: gameLoadUnitSnapshot. */
 extern int itemGetFlagBit1(unsigned short);
 extern int flagWordTestBit(int, unsigned int);
 /* Supplied declaration required: gridNavigationConfigure. */
@@ -700,7 +700,7 @@ LAB_001df3cc:
           temp_v17 = 1;
           gridNavigationConfigure(temp_v27,*temp_v28,1,4);
           if (param_1[0x100] != 2) {
-            FUN_0029defc((int)(short)temp_v34[0x1e],0);
+            gameLoadUnitSnapshot((int)(short)temp_v34[0x1e],0);
             statusPanelSetOpen(1);
           }
           piVar9 = g_unite;

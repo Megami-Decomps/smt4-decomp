@@ -1453,7 +1453,7 @@
 0x002a7b78 _ZN9Obj421d10C1Ev between
 0x002a7bc0 _ZN2nw4math5MTX448IdentityEv name
 0x002a7c50 nw_gfx_res_ResLookupTable_Dereference name
-0x002a7c80 FUN_002a7c80 between
+0x002a7c80 __ARM_common_memcpy4_5 name
 0x002a7c94 nw_ut_FloatEqualsWeak_float name
 0x002a7cf8 nw_ut_MoveArray_nn_math_MTX34_MoveArray_sub_object name
 0x002a7d70 FUN_002a7d70 callers
@@ -2673,7 +2673,7 @@
 0x003801dc nw_snd_internal_driver_MmlParser_ParseAllocTrack name
 0x00380210 nw_snd_internal_CurveLfo_Reset name
 0x00380228 nw_snd_internal_FrameHeap_Alloc name
-0x00380298 _ZN13Obj421f54ListC1Ev twin
+0x00380298 _ZN13Obj421f54ListC1Ev between
 0x003802b0 nw_snd_internal_FrameHeap_FrameHeap_sub_object_3802B0 name
 0x003802f0 FUN_003802f0 between
 0x00380320 FUN_00380320 between

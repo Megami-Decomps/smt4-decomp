@@ -922,7 +922,8 @@ typedef struct BtlStep {
     union {
         /* 0x04 */ u8 unk04[0x28];
         struct {
-            /* 0x04 */ u8 unk04BeforeCounters[8];
+            /* 0x04 */ u32 fileHandle; /* the buffer of the file the step loads (contentRequestStart) */
+            /* 0x08 */ u8 unk08[4];
             /* 0x0C */ u32 unk0C;
             /* 0x10 */ u32 unk10;
         } counters;

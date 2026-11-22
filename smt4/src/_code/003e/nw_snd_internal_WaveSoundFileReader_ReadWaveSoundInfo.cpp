@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a7c80(unsigned int *, unsigned int);
+int __ARM_common_memcpy4_5(unsigned int *, unsigned int);
 int FUN_003e6240(unsigned int);
 int nw_snd_internal_WaveSoundFile_InfoBlockBody_GetWaveSoundData(unsigned int, unsigned int);
 int nw_snd_internal_WaveSoundFile_WaveSoundInfo_GetPan(void);
@@ -12,7 +12,7 @@ int nw_snd_internal_WaveSoundFile_WaveSoundInfo_GetPitch(void);
 int nw_snd_internal_WaveSoundFile_WaveSoundInfo_GetSendValue(unsigned int, int, unsigned int *, int);
 int nw_snd_internal_WaveSoundFile_WaveSoundInfo_GetSurroundPan(void);
 
-/* Supplied declaration required: FUN_002a7c80. */
+/* Supplied declaration required: __ARM_common_memcpy4_5. */
 extern unsigned int offsetRefResolve4(void);
 /* Supplied declaration required: FUN_003e6240. */
 /* Supplied declaration required: nw_snd_internal_WaveSoundFile_InfoBlockBody_GetWaveSoundData. */
@@ -45,7 +45,7 @@ nw_snd_internal_WaveSoundFileReader_ReadWaveSoundInfo
   *(char *)((int)param_2 + 10) = (char)temp_v1;
   nw_snd_internal_WaveSoundFile_WaveSoundInfo_GetSendValue(temp_v0,(int)param_2 + 0xb,param_2 + 3,2);
   FUN_003e6240(temp_v0);
-  FUN_002a7c80(param_2 + 1,temp_v0);
+  __ARM_common_memcpy4_5(param_2 + 1,temp_v0);
   return 1;
 }
 

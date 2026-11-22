@@ -1,4 +1,6 @@
-/* NON_MATCHING: with the draw body as its own helper the coordinate loads (ldrd) and push/pop scheduling match; only x/y swap saved registers (retail x r5, y r6). */
+/* NON_MATCHING: written in place, the draw is 39 lines off (frame and coordinate scheduling); a single-use static
+ * helper holding the draw between the render push and pop came closer (only x/y swapped saved registers) but had no
+ * evidence besides the score. */
 #include "gfx/UiControlDraw.h"
 #include "camp/RenderCtxA.h"
 #include "shard/S1ListPanel.h"
@@ -10,21 +12,15 @@ void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite();
 void texDrawCompositeSprite(s32 layer, u32 group, u32 sprite, s32 x, s32 y, s32 priority);
 
-/* Draws the sprite at (x, y) with the given speed. */
-static void markerDrawBody(s32 x, s32 y, f32 speed)
+/* Draws the marker at its position with its own speed, then restores the renderer's blend state and the speed. */
+void FUN_0041c45c(const UiScaledDrawPosition *position, const TextureTableEntryIV *sprite)
 {
     RenderCtxA *context = g_renderCtx;
     renderCtxPushB(context, packNibblesAndByte(6, 1, 0));
-    efctSetSpeed(speed);
+    efctSetSpeed(position->speed);
     gxResetColorQuadToWhite();
-    texDrawCompositeSprite(2, 0x2b, 6, x, y, 2);
+    texDrawCompositeSprite(2, 0x2b, 6, position->x + sprite->x, position->y + sprite->y, 2);
     renderStackPop(g_renderCtx->stacks + RENDER_STACK_B);
     efctSetSpeed(1.0f);
-}
-
-/* Draw the marker with its local speed and restore the renderer's blend state. */
-void FUN_0041c45c(const UiScaledDrawPosition *position, const TextureTableEntryIV *sprite)
-{
-    markerDrawBody(position->x + sprite->x, position->y + sprite->y, position->speed);
 }
 }

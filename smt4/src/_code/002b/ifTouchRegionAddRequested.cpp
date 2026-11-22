@@ -3,10 +3,10 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 // Inlined copy of ifTouchRegionAdd: adds a touch region; returns its index, or -1 when all 200 are in use.
-static s32 touchRegionAppend(u16 x, u16 y, u16 width, u16 height)
+static s16 touchRegionAppend(u16 x, u16 y, u16 width, u16 height)
 {
     IfTouchState *state = g_ifTouch.state;
-    s32 index = state->regionCount;
+    s16 index = state->regionCount;
 
     if (index >= 200) {
         return -1;
@@ -20,7 +20,7 @@ static s32 touchRegionAppend(u16 x, u16 y, u16 width, u16 height)
 }
 
 // Append the touch rectangle of texture `index` in table `file`, stripping the encoded dimension flags.
-extern "C" s32 ifTouchRegionAddRequested(u32 file, s32 index)
+extern "C" s16 ifTouchRegionAddRequested(u32 file, s32 index)
 {
     IfTouchState *initialState = g_ifTouch.state;
     TextureTableEntryIV *request = asdTMTexTableEntryAt(file, index);

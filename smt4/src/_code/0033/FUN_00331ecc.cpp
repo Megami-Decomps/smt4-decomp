@@ -808,7 +808,7 @@ LAB_003333b4:
           }
           else {
             FUN_0029c4c8(1);
-            FUN_0029defc((int)sStack_5f2,0);
+            gameLoadUnitSnapshot((int)sStack_5f2,0);
             FUN_0029c4e4(&iStack_638,1);
             FUN_0029c4ac(0);
           }

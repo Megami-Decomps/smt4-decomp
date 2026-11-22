@@ -1,4 +1,5 @@
-/* NON_MATCHING: g_aocMain and g_mapSelection trade r8/r7, and the cancel-bit test keeps the AocMain pointer in r1 and the flags in r0 (retail: r0/r2). */
+/* NON_MATCHING: only the cancel-bit test differs: the build keeps the AocMain pointer in r1 and the flags in r0 (retail:
+ * r0/r2), as in FUN_004d7e20. */
 #include "map/MapJumpTransition.h"
 #include "game/GameStateA.h"
 #include "shard/W4_Match3_AocMainA.h"
@@ -25,23 +26,17 @@ static __inline void mapJumpEnter(MapJumpTransition *work, u32 state)
     work->state = state;
 }
 
-/* Clears the add-on menu's request bits 4-6 and reports whether bit 4 (cancel) was set. */
-static __inline u32 aocMainTakeCancel(void)
-{
-    u32 flags = g_aocMain->flags;
-    g_aocMain->flags = flags & ~0x70U;
-    return (flags & 0x10) >> 4;
-}
-
 /* Runs the add-on return script, then saves the return request and jumps to the selected map (or
  * back to the current one). */
-void FUN_004b8f18(MapJumpTransition *work)
+void aocTransitionUpdate(MapJumpTransition *work)
 {
-    if (work->substate == 0) {
+    switch (work->substate) {
+    case 0:
         infoWinSetValue(0);
         FUN_00341fa4(&g_aocMain->scriptHolder, 1);
         work->substate = 1;
-    } else if (work->substate == 1) {
+        break;
+    case 1: {
         s32 result = itemEventStartupUpdate(&g_aocMain->scriptHolder);
         if (result) {
             helpResourcesRelease(&g_aocMain->scriptHolder);
@@ -83,6 +78,8 @@ void FUN_004b8f18(MapJumpTransition *work)
         if (result == 2 || aocMainTakeCancel()) {
             mapJumpEnter(work, 15);
         }
+        break;
+    }
     }
 }
 }

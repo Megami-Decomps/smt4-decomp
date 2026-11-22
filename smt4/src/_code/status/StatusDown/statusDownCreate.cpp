@@ -52,7 +52,6 @@ void drawParameterBlockClear(UiResourceParameters *packet);
 void asdTextSetBaseColor(AsdText *text, u32 value);
 AsdText *asdTextCreate(u32 text);
 void positionStateSet(AsdText *text, s32 arg, u32 color, f32 value);
-void *__aeabi_memset4(void *dest, s32 size, s32 value);
 
 /* Allocates and clears the status screen's work area, starts its calc/draw tasks and builds its sprites. */
 void statusDownCreate(void)

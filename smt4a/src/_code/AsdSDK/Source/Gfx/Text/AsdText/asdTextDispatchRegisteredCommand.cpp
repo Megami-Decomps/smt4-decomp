@@ -24,7 +24,7 @@ extern TextCommandCallback g_textControlCallbacks[8];
 extern u16 g_textControlCallbackCodes[8];
 extern u32 g_textControlCallbackArgumentCounts[8];
 
-static __inline u16 nextTextCommandArgument(TextCommandCursor &cursor)
+static __inline u32 nextTextCommandArgument(TextCommandCursor &cursor)
 {
     s32 index = ++cursor.index;
     ++cursor.consumed;

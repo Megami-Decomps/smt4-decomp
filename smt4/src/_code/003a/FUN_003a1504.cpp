@@ -8,7 +8,7 @@
 extern "C" {
 
 extern s32 FUN_0029e0f8(void);
-extern void FUN_0029defc(u32 a, s32 b);
+extern void gameLoadUnitSnapshot(u32 a, s32 b);
 extern void statusPanelSetOpen(s32 a);
 extern s32 contentGetEntryKind(u32 id);
 extern void gameGlobalsSetSelected(s32 a);
@@ -29,7 +29,7 @@ void FUN_003a1504(Scene3a *scene)
         break;
     case SCENE3A_STATE_START:
         if (FUN_0029e0f8() != 0) {
-            FUN_0029defc(0xffffffff, 0);
+            gameLoadUnitSnapshot(0xffffffff, 0);
             statusPanelSetOpen(1);
             id = shopSelectedItem(scene)->id;
             if (id != 0) {

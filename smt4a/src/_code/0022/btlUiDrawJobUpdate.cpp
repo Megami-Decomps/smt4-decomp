@@ -33,7 +33,7 @@ int devilIsTextureLoaded(...);
 int pairQueueAppend(...);
 int controllerStartInterpolation(...);
 int FUN_0047f66c(...);
-int FUN_004aa0b0(...);
+int btlUiPositionRequestAdd(...);
 int VectorSignedToFloat(...);
 
 int padQueryLogicalKey(void);
@@ -182,7 +182,7 @@ extern int btlScriptUnitHasFlags(void);
 /* Supplied declaration required: FUN_003f9970. */
 /* Supplied declaration required: FUN_0047f66c. */
 /* Supplied declaration required: btlUiQueuePositionedRequest. */
-/* Supplied declaration required: FUN_004aa0b0. */
+/* Supplied declaration required: btlUiPositionRequestAdd. */
 /* Supplied declaration required: FUN_004ab10c. */
 
 
@@ -650,7 +650,7 @@ LAB_00225054:
         temp_v10 = randRange(0xf);
         btlUiQueuePositionedRequest(reinterpret_cast<BtlUiA *>(temp_v0), temp_v10 + 0x14,
                      0.0f, 0.0f, 0.0f, 0, 0, 1, 1);
-        FUN_004aa0b0(temp_v0,2,1);
+        btlUiPositionRequestAdd(temp_v0,2,1);
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 8);
 LAB_002255d4:
@@ -737,7 +737,7 @@ LAB_002255d4:
             VectorSignedToFloat((int)*(short *)(temp_v9 + 10) + temp_v20,
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat(*(short *)(temp_v9 + 8) + temp_v21,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_004aa0b0(temp_v10,temp_v18,0);
+            btlUiPositionRequestAdd(temp_v10,temp_v18,0);
           }
           else {
             temp_v16 = (unsigned int)*(short *)(temp_v9 + 8);
@@ -764,7 +764,7 @@ LAB_002255d4:
             VectorSignedToFloat((int)*(short *)(temp_v9 + 10) + (int)(short)(temp_v3 - 0x14) +
                                 (temp_v20 - temp_v4),(unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat(temp_v17 + temp_v16 + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_004aa0b0(temp_v10,temp_v18,0,temp_v5);
+            btlUiPositionRequestAdd(temp_v10,temp_v18,0,temp_v5);
           }
           if (temp_v8 == DAT_0057a9bc - 1U) {
             DAT_0057a9bc = 0;

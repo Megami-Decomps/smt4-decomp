@@ -1,14 +1,14 @@
-/* NON_MATCHING: register allocation only: in the row search retail reuses r5 (the dead `count - 1`) for the row offset where the build takes r6. */
 #include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
 /* Append to the row ending at this position, otherwise use the first empty row. */
-u32 FUN_004aa0b0(u32 request, u8 flags, u8 mode, f32 x, f32 y, f32 z)
+u32 btlUiPositionRequestAdd(u32 request, u8 flags, u8 mode, f32 x, f32 y, f32 z)
 {
     BtlUiA *ui = g_btlUi.ui;
     s32 row = -1;
-    for (s32 i = 0; i < 16; ++i) {
+    s32 i;
+    for (i = 0; i < 16; ++i) {
         s32 count = ui->availabilityCounts.counts[i];
         if (static_cast<u32>(count - 1) < 31) {
             if (ui->positionRequests.rows[i].entries[count - 1].x == x && ui->positionRequests.rows[i].entries[count - 1].y == y &&
@@ -19,7 +19,7 @@ u32 FUN_004aa0b0(u32 request, u8 flags, u8 mode, f32 x, f32 y, f32 z)
         }
     }
     if (row < 0) {
-        for (s32 i = 0; i < 16; ++i) {
+        for (i = 0; i < 16; ++i) {
             if (ui->availabilityCounts.counts[i] <= 0) {
                 row = i;
                 break;

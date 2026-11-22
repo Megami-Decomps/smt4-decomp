@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a90f0(...);
+int __ARM_common_memcpy4_5(...);
 int FUN_0050ac0c(unsigned int *);
 int FUN_0050ace0(void);
 int FUN_0050ad08(unsigned int *);
@@ -15,7 +15,7 @@ int nw_snd_internal_BankFile_VelocityRegion_GetVolume(void);
 int nw_snd_internal_BankFile_VelocityRegion_IsIgnoreNoteOff(void);
 
 extern unsigned int *FUN_001a8f3c(unsigned int);
-/* Supplied declaration required: FUN_001a90f0. */
+/* Supplied declaration required: __ARM_common_memcpy4_5. */
 extern int FUN_0050aadc(int, unsigned int);
 extern int *getSectionAtC_abd4(unsigned int);
 /* Supplied declaration required: FUN_0050ac0c. */
@@ -83,7 +83,7 @@ unsigned int FUN_0050802c(int param_1,unsigned int *param_2,int param_3,unsigned
           *(unsigned char *)(param_2 + 5) = puVar6[0x10];
           *(unsigned char *)((int)param_2 + 0x15) = puVar6[0x11];
           *(unsigned char *)((int)param_2 + 0x16) = puVar6[0x12];
-          FUN_001a90f0(param_2 + 3,puVar6 + 0x20);
+          __ARM_common_memcpy4_5(param_2 + 3,puVar6 + 0x20);
         }
         else {
           puVar4 = puVar3;
@@ -107,7 +107,7 @@ unsigned int FUN_0050802c(int param_1,unsigned int *param_2,int param_3,unsigned
           nw_snd_internal_BankFile_VelocityRegion_GetInterpolationType();
           *(char *)((int)param_2 + 0x16) = (char)(int)puVar4;
           FUN_0050ac0c(puVar3);
-          FUN_001a90f0(param_2 + 3,puVar3);
+          __ARM_common_memcpy4_5(param_2 + 3,puVar3);
         }
         return 1;
       }

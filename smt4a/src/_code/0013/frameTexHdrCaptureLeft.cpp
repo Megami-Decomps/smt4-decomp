@@ -10,7 +10,7 @@ void surfaceCopy(AsdTexture *, AsdTexture *);
 
 /* "HDRCL" capture: captures the left screen into the scene texture and builds its downsampled copies
  * (through the half and quarter textures when the chain exists). */
-s32 renderSurfaceDownsampleJob(u32 job)
+s32 frameTexHdrCaptureLeft(u32 job)
 {
     FrameTexWorkA *work = (FrameTexWorkA *)jobGetWork(job);
     work->hdr.capturedLeft = 0;

@@ -4,9 +4,7 @@
 extern "C" {
 s32 FUN_0035db94();
 void statusDownSetSpriteMode(u32 direction, u32 selection, s32 mode);
-void ifTouchRegionRemove();
 void buttonHelpSetText(s32 channel, u32 color);
-void __aeabi_memset4(void *destination, s32 size, s32 value);
 
 // Change status tabs, clear their touch regions, and schedule the corresponding page state.
 void statusDownSwitchTab(u32 tab)
@@ -22,10 +20,7 @@ void statusDownSwitchTab(u32 tab)
     else if (FUN_0035db94() > 0)
         statusDownSetSpriteMode(2, 0xffffffff, 0);
     StatusDownStateA *state = g_statusDown;
-    for (s32 region = 0; region < state->touchRegionCount; ++region)
-        ifTouchRegionRemove();
-    state->touchRegionCount = 0;
-    __aeabi_memset4(state->slots, sizeof(state->slots), -1);
+    statusDownClearTouchRegions(state);
     state = g_statusDown;
     state->stateTimer = 0;
     u32 previous = state->track.state;

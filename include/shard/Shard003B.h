@@ -3,6 +3,7 @@
 #define SHARD_SHARD003B_H
 
 #include "common.h"
+#include <stddef.h>
 
 #include "shard/Shard003A.h"
 
@@ -13,27 +14,42 @@ typedef struct Quad {
     /* 0x0C */ u32 d;
 } Quad;
 
+/* The StreetPass card's character info panel (characterInfoPanelPopulate fills it; 0xB8 bytes): its text
+ * objects, the demon preview it holds and the state of each of the nine portrait textures. */
 typedef struct ResSet {
-    /* 0x00 */ u32 h0;
-    /* 0x04 */ u32 h1;
-    /* 0x08 */ u32 a[7];
-    /* 0x24 */ union {
-        u8 unk24[0x10];
-        u32 params24[4];
-    };
-    /* 0x34 */ u32 h34;
-    /* 0x38 */ u32 h38;
-    /* 0x3C */ u8 unk3C[4];
-    /* 0x40 */ u32 h40;
-    /* 0x44 */ u8 unk44[4];
-    /* 0x48 */ u32 h48;
-    /* 0x4C */ u8 unk4C[4];
-    /* 0x50 */ u32 b[8];
-    /* 0x70 */ u8 unk70[0x20];
-    /* 0x90 */ s16 unk90;
+    /* 0x00 */ void *title;
+    /* 0x04 */ void *name;
+    /* 0x08 */ void *equipmentLabels[7];
+    /* 0x24 */ u16 equipmentIds[7];  /* the equipment each label shows */
+    /* 0x32 */ u8 unk32[2];
+    /* 0x34 */ void *description;
+    /* 0x38 */ void *demonName;
+    /* 0x3C */ s32 demonNameWidth;
+    /* 0x40 */ void *race;
+    /* 0x44 */ s32 raceWidth;
+    /* 0x48 */ void *specialItemName;
+    /* 0x4C */ s32 specialItemWidth;
+    /* 0x50 */ void *skillLabels[8];
+    /* 0x70 */ s32 skillWidths[8];
+    /* 0x90 */ s16 previewId;      /* the demon whose bust-up is acquired, 0: none */
     /* 0x92 */ u8 unk92[2];
-    /* 0x94 */ s32 states[9];
+    /* 0x94 */ s32 states[9];     /* ResSetTextureState of each portrait texture (table 0x2E) */
 } ResSet;
+
+/* ResSet::states (gfxAdvanceTextureRequestQueue steps them). */
+enum ResSetTextureState {
+    RES_SET_TEXTURE_IDLE,
+    RES_SET_TEXTURE_REQUESTED,
+    RES_SET_TEXTURE_LOADING,
+    RES_SET_TEXTURE_LOADED
+};
+enum {
+    RES_SET_TEXTURE_COUNT = 9,
+    RES_SET_TEXTURE_TABLE = 0x2E
+};
+typedef char ResSetLayoutCheck[sizeof(ResSet) == 0xB8 && offsetof(ResSet, equipmentIds) == 0x24 &&
+    offsetof(ResSet, skillLabels) == 0x50 && offsetof(ResSet, previewId) == 0x90 &&
+    offsetof(ResSet, states) == 0x94 ? 1 : -1];
 
 typedef struct Rec12C {
     /* 0x000 */ u8 unk000[0x12C];

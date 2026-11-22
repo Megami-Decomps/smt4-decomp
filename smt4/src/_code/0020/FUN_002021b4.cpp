@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail addresses the counter with add then ldr (value in r0), the build with a writeback ldr (value in r1); the rest matches. */
 #include "common.h"
 #include "event/2dEvent/Npc2d.h"
 #include "code/Code0034.h"
@@ -13,16 +12,12 @@ void gameAddPointsClamped(u32 amount);
  * 0xFFFFFFFF) and notifies the counter's handler. */
 static __inline void counterAddSaturating(s32 index, u32 amount)
 {
-    u32 *table = reinterpret_cast<u32 *>(gameGetCounters());
-    u32 *counter = &table[index];
-    u32 value = *counter;
-
-    if (~value > amount) {
-        value = value + amount;
+    u32 *counter = &((u32 *)gameGetCounters())[index];
+    if (~*counter > amount) {
+        *counter = *counter + amount;
     } else {
-        value = 0xffffffff;
+        *counter = 0xFFFFFFFF;
     }
-    *counter = value;
     switch (index) {
     case 2:
         questCenterCounterAddSaturating14(amount);

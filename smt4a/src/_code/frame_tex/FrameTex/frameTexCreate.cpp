@@ -34,8 +34,8 @@ static const SpriteAnimationCommand sCampCommands[] = {
 extern "C" {
 
 void frameTexReleaseWork(u32 job);
-s32 renderSurfaceDownsampleJob(u32 job);
-s32 FUN_0013cd7c(u32 job);
+s32 frameTexHdrCaptureLeft(u32 job);
+s32 frameTexHdrCaptureRight(u32 job);
 s32 FUN_0013c660(u32 job);
 s32 FUN_0013c6d4(u32 job);
 s32 FUN_0013cf80(u32 job);
@@ -100,9 +100,9 @@ void frameTexCreate(void)
     work->encEffAlternate = 0;
     work->hdrDownsampleChain = 0;
 
-    work->job = asdProcessCreateSimple((const s8 *)"HDRCL", 0x6c, 0, 0, renderSurfaceDownsampleJob, frameTexReleaseWork,
+    work->job = asdProcessCreateSimple((const s8 *)"HDRCL", 0x6c, 0, 0, frameTexHdrCaptureLeft, frameTexReleaseWork,
                                        (u32)g_frameTex);
-    taskCreateDraw((const s8 *)"HDRCR", 0xce, 0, 0, FUN_0013cd7c, NULL, (u32)g_frameTex, (void *)work->job);
+    taskCreateDraw((const s8 *)"HDRCR", 0xce, 0, 0, frameTexHdrCaptureRight, NULL, (u32)g_frameTex, (void *)work->job);
     taskCreateDraw((const s8 *)"HDRDL", 0x6d, 0, 0, FUN_0013c660, NULL, (u32)g_frameTex, (void *)work->job);
     taskCreateDraw((const s8 *)"HDRDR", 0xcf, 0, 0, FUN_0013c6d4, NULL, (u32)g_frameTex, (void *)work->job);
     taskCreateDraw((const s8 *)"ZanCL", 0x6f, 0, 0, FUN_0013cf80, NULL, (u32)g_frameTex, (void *)work->job);

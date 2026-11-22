@@ -88,7 +88,9 @@ struct GameStateEventBlock {
     /* 0xBC */ u32 encounterValue;
     /* 0xC0 */ u8 unkC0[4];
     /* 0xC4 */ s32 entryBudget;
-    /* 0xC8 */ u8 unkC8[0x38];
+    /* 0xC8 */ u8 unkC8[0x14];
+    /* 0xDC */ s32 singleModelId;       /* > 0: the map places its single unit model (u006) */
+    /* 0xE0 */ u8 unkE0[0x20];
 };
 
 /* The map block (0x200): stage, environment, destination marker, loaded files. */

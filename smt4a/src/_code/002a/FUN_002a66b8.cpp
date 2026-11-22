@@ -1,4 +1,4 @@
-/* NON_MATCHING: key search written as a plain for loop (`s32 distance = 1` first); remaining: retail computes the first key pointer in place in r2 and loads the two keys' frame/value pairs interleaved (register assignment of the pointer/temporaries) */
+/* NON_MATCHING (b1454): only the final segment differs: retail loads start.frame, start.value, end.frame, end.value and converts the value change into s0 (the build loads both frames first and swaps s0/s1). */
 #include "AsdSDK/Source/Gfx/Effect/EffectResourceKeys.h"
 
 extern "C" f32 effRandomSignedValue(s32, s32, s32);
@@ -7,27 +7,25 @@ extern "C" f32 effRandomSignedValue(s32, s32, s32);
 extern "C" void FUN_002a66b8(EffectResourceKeyTrack *track,
                             const EffectResourceKeyTrack *source)
 {
-    s32 distance = 1;
     if (track->index >= 3)
         track->index = 4;
     s32 current = track->index;
-    for (; current + distance < 4; ++distance) {
+    for (s32 distance = 1; current + distance < 4; ++distance) {
         track->duration = source->keys[current + distance].frame - source->keys[current].frame;
-        if (track->duration > 0) {
-            if (track->keys[current + distance].value != 0 &&
-                track->keys[current + distance].resource > 0) {
-                f32 adjustment = effRandomSignedValue(2, track->keys[current + distance].resource, 1);
-                track->keys[track->index + distance].value -= (s32)adjustment;
-            }
-            s32 nextIndex = track->index + distance;
-            const EffectResourceKey *previous = &track->keys[track->index];
-            const EffectResourceKey *next = &track->keys[nextIndex];
-            f32 duration = (f32)(next->frame - previous->frame);
-            f32 difference = (f32)(next->value - previous->value);
-            track->step = difference / duration;
-            track->target = (f32)next->value;
-            track->index = nextIndex;
-            break;
+        if (track->duration <= 0)
+            continue;
+        if (track->keys[current + distance].value != 0 &&
+            track->keys[current + distance].resource > 0) {
+            f32 adjustment = effRandomSignedValue(2, track->keys[current + distance].resource, 1);
+            track->keys[track->index + distance].value -= (s32)adjustment;
         }
+        s32 currentIndex = track->index;
+        s32 nextIndex = currentIndex + distance;
+        s32 frameCount = track->keys[nextIndex].frame - track->keys[currentIndex].frame;
+        s32 valueChange = track->keys[nextIndex].value - track->keys[currentIndex].value;
+        track->step = (f32)valueChange / (f32)frameCount;
+        track->target = (f32)track->keys[nextIndex].value;
+        track->index = nextIndex;
+        return;
     }
 }

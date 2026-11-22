@@ -4,22 +4,7 @@
 
 extern "C" {
 s32 FUN_0035fa18(BtlUiObjCA *widget);
-void FUN_004aa0b0(BtlUiA *ui, u32 alternate, u32 mode, f32 x, f32 y, f32 depth);
-
-/* Computes the center of a TMX sprite table entry (same logic as uiStoreTextureEntryCenter). */
-static __inline void texEntryGetCenter(u32 file, s32 index, s32 *outX, s32 *outY)
-{
-    const TextureTableEntryIV *entry = asdTMTexTableEntryAt(file, index);
-    if (entry->placement == NULL) {
-        u16 w = entry->width & 0x7FFF;
-        u16 h = entry->height & 0x7FFF;
-        *outX = entry->x + (w >> 1);
-        *outY = entry->y + (h >> 1);
-    } else {
-        *outX = entry->x + entry->placement->width / 2;
-        *outY = entry->y + entry->placement->height / 2;
-    }
-}
+void btlUiPositionRequestAdd(BtlUiA *ui, u32 alternate, u32 mode, f32 x, f32 y, f32 depth);
 
 void FUN_004aace8(u32 unused, s32 slot, u32 alternate, s32 x, s32 y)
 {
@@ -42,7 +27,7 @@ void FUN_004aace8(u32 unused, s32 slot, u32 alternate, s32 x, s32 y)
         if (alternate == 0) {
             yOffset = -2.0f;
         }
-        FUN_004aa0b0(ui, alternate, 0, (f32)(layout->x + (x + 39)),
+        btlUiPositionRequestAdd(ui, alternate, 0, (f32)(layout->x + (x + 39)),
                      (f32)((y + 17) + layout->y) + yOffset, 0.0f);
         return;
     }
@@ -50,7 +35,7 @@ void FUN_004aace8(u32 unused, s32 slot, u32 alternate, s32 x, s32 y)
     s32 anchorY = layout->y;
     s32 centerX;
     s32 centerY;
-    texEntryGetCenter(13, 0x416, &centerX, &centerY);
+    asdTMTexTableEntryCenter(13, 0x416, &centerX, &centerY);
     s32 centerOffsetX = -centerX;
     s32 centerOffsetY = -centerY;
     if (FUN_0035fa18(&ui->objC)) {
@@ -58,7 +43,7 @@ void FUN_004aace8(u32 unused, s32 slot, u32 alternate, s32 x, s32 y)
     } else {
         layout = asdTMTexTableEntryAt(13, 0x70);
     }
-    FUN_004aa0b0(ui, alternate, 0,
+    btlUiPositionRequestAdd(ui, alternate, 0,
                  (f32)((layout->x + x) + (anchorX + centerOffsetX)),
                  (f32)((layout->y + y) + (anchorY + centerOffsetY)), 0.0f);
 }

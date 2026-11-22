@@ -6,12 +6,13 @@
 #include <stddef.h>
 
 #include "shard/Shard0049.h"
+#include "shard/ScreenRect.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 
 struct BibleAnalyzeListEntry {
     u8 unk00[4];
-    u16 id; // 0x04
+    s16 id; // 0x04: the demon (bibleAnalyzeDrawMenu sign-extends it, ldrsh)
     u8 unk06[0x1a];
 };
 typedef char BibleAnalyzeListEntryLayoutCheck[sizeof(BibleAnalyzeListEntry) == 0x20 &&
@@ -27,6 +28,10 @@ typedef struct Screen4A {
             /* 0x001C */ u8 unk001C[0xAC];
             /* 0x00C8 */ f32 position[2];
         } cursor;
+        struct {
+            u8 unk001CBeforeRect[0xAC];
+            /* 0x00C8 */ ScreenRect rect;   /* the screen's origin: the layout its parts are drawn through */
+        } layout;
         struct {
             u8 unk001CBeforeSelection[4];
             /* 0x0020 */ u8 selectedIndex[1];
@@ -49,6 +54,14 @@ typedef struct Screen4A {
             /* 0x05E6 */ s8 confirmed;
         } input;
         struct {
+            u8 unk00E0BeforeSprites[0x134];
+            /* 0x0214 */ UiSpriteState sprites[7]; /* 0: the selected row's frame, 1: its bar, 6: `animation.selection` */
+        } parts;
+        struct {
+            u8 unk00E0BeforeSlide[0x770];
+            /* 0x0850 */ s32 slide;         /* the panel's slide-in offset, 0..256 */
+        } transition;
+        struct {
             u8 unk00E0BeforeSprite[0x47C];
             /* 0x055C */ UiSpriteState selection;
         } animation;
@@ -60,7 +73,9 @@ typedef struct Screen4A {
     };
     /* 0x085C */ u32 job;
     /* 0x0860 */ s8 unk0860;
-    /* 0x0861 */ u8 unk0861[0xA00F];
+    /* 0x0861 */ u8 unk0861[3];
+    /* 0x0864 */ BibleAnalyzeListEntry rows[0x500]; /* the analyze list: one row per demon */
+    /* 0xA864 */ u8 unkA864[0xC];
     /* 0xA870 */ u8 unkA870;
     /* 0xA871 */ u8 unkA871;
     /* 0xA872 */ s16 unkA872;
@@ -70,7 +85,10 @@ typedef struct Screen4A {
     };
 } Screen4A;
 typedef char Screen4ASizeCheck[sizeof(Screen4A) == 0xA878 ? 1 : -1];
-typedef char Screen4ACursorOffsetCheck[offsetof(Screen4A, cursor.position) == 0xC8 ? 1 : -1];
+typedef char Screen4ACursorOffsetCheck[offsetof(Screen4A, cursor.position) == 0xC8 &&
+    offsetof(Screen4A, layout.rect) == 0xC8 && offsetof(Screen4A, parts.sprites) == 0x214 &&
+    offsetof(Screen4A, parts.sprites[6]) == 0x55C && offsetof(Screen4A, transition.slide) == 0x850 &&
+    offsetof(Screen4A, rows) == 0x864 ? 1 : -1];
 typedef char Screen4AInputOffsetCheck[offsetof(Screen4A, input.selection) == 0x55C &&
     offsetof(Screen4A, input.confirmed) == 0x5E6 ? 1 : -1];
 typedef char Screen4AAnalyzeOffsetCheck[offsetof(Screen4A, listSelection.selectedIndex) == 0x20 &&

@@ -554,7 +554,7 @@
 00461c2c nw_snd_internal_driver_Voice_Pause
 00461c4c nw_snd_internal_driver_Voice_Start
 00466c3c nw_snd_internal_FrameHeap_Alloc
-00466cac nw_snd_internal_FrameHeap_FrameHeap_sub_object_380298
+00466cac _ZN13Obj55c3ecListC1Ev
 00466cc4 nw_snd_internal_FrameHeap_FrameHeap_sub_object_3802B0
 00467558 nw_anim_res_CalcVector3Curve
 00492a8c NaviMain_GetCurrentMap
@@ -2372,7 +2372,7 @@
 00512868 returnMinusOne4
 00513ff0 readInnerWord6
 005144c8 words4BClear
-00514bd4 expHeapBaseDestroyA
+00514bd4 _ZN9Obj5583d0D1Ev
 00514c88 expHeapBaseDestroyB
 00515384 variantSetByteA
 00515550 variantSetByteB
@@ -4049,7 +4049,7 @@
 002bf1a4 areaDiscoveryMarkCell
 00437644 maskWorkProcessGroupedActions
 004ce9b0 renderPhasePushPopStates
-0013cb90 renderSurfaceDownsampleJob
+0013cb90 frameTexHdrCaptureLeft
 00338bf0 lmapInitializeArea
 00403510 contentListUpdateNavigation
 0038dfa4 scrBattleDamagePartyNonlethal
@@ -6551,7 +6551,7 @@
 00431e8c nn_fnd_detail_DestroyHeap
 00456624 nw_gfx_Material_DestroyResFragmentShader
 00466f98 soundRequestPostType30
-00467040 _ZN9Obj421f54C1Ev
+00467040 _ZN9Obj55c3ecC1Ev
 00467840 thresholdDispatchOutsideRange
 00477d10 aocMenuSetButtonHelp
 004d8d40 btlStageUpdate
@@ -8143,3 +8143,14 @@
 003da030 uniteEffectDraw
 002199fc uniteEffectDrawMaterial
 004cab9c btlRosterMotionSyncStatus
+004fefe0 animKeyTableFindKey
+0036b644 uiSpriteStartFrameSequence
+00357ea0 btlTargetSelectCalc
+004fbd30 btlReflectCreateKind4
+004aa0b0 btlUiPositionRequestAdd
+0046ebf0 aocHasType39Record
+004a6144 bibleAnalyzeDrawRow
+0013e38c textIconDraw
+0013cd7c frameTexHdrCaptureRight
+004b8f18 aocTransitionUpdate
+001a90f0 __ARM_common_memcpy4_5

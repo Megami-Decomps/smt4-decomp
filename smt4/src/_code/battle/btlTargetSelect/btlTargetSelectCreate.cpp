@@ -28,7 +28,7 @@ extern BtlTargetSelect *g_btlTargetSelect;
 extern const u8 DAT_004017f4;
 void *asdMemoryAlloc(s32 heap, s32 alignment, s32 option, u32 bytes, s32 fromFront);
 /* This factory supplies an owner tag even though the allocator body ignores it. */
-s32 FUN_002e0730(u32 job);
+s32 btlTargetSelectCalc(u32 job);
 s32 btlTargetSelectDraw(u32 job);
 void btlTargetSelectDestroy(u32 job);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
@@ -37,7 +37,7 @@ void drawParameterBlockClear(UiResourceParameters *);
 
 void uiSpriteStateInitFromSource(TargetSelectDrawState *, u32 first, u32 second,
                    UiResourceParameters *, s32 flag, f32 scalar);
-void FUN_002eb76c(TargetSelectDrawState *, u32 mode);
+void uiSpriteStartFrameSequence(TargetSelectDrawState *, u32 mode); // declcheck: local (the shared declaration does not compile here or changes this unit)
 }
 
 // Create the information and marker displays with a calculation job and two draw passes.
@@ -54,7 +54,7 @@ extern "C" void btlTargetSelectCreate(BtlMainState *owner)
 
     owner->targetSelect.job = taskCreateDraw(
         reinterpret_cast<const s8 *>("btlTargetSelect Calc"), 2, 0, 0,
-        FUN_002e0730, btlTargetSelectDestroy, reinterpret_cast<u32>(work),
+        btlTargetSelectCalc, btlTargetSelectDestroy, reinterpret_cast<u32>(work),
         reinterpret_cast<void *>(owner->job));
     taskCreateDraw(reinterpret_cast<const s8 *>("btlTargetSelect DrawUpL"), 0x7a, 0, 0,
                    btlTargetSelectDraw, NULL, reinterpret_cast<u32>(work),
@@ -66,5 +66,5 @@ extern "C" void btlTargetSelectCreate(BtlMainState *owner)
     drawParameterBlockClear(&work->parameters);
     paramsInit(&work->parameters, 0, 0, 0, 0, 0, 0, &DAT_004017f4, 0x10, 0, 0);
     uiSpriteStateInitFromSource(&work->draw, 0x14, 0x71, &work->parameters, 1, 1.0f);
-    FUN_002eb76c(&work->draw, 0);
+    uiSpriteStartFrameSequence(&work->draw, 0);
 }

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0023d078(int, int);
 int FUN_0023d158(int, unsigned int);
 int matrixScaleColumns(unsigned char [48], unsigned char [48], float *);
-int FUN_0023d274(int, int);
+int animKeyTableFindKey(int, int);
 int asdModelAdvanceCommandCursor(unsigned int);
 int gxGetCommandListParameter(int, int *);
 int FUN_00349d88(int, int, int, unsigned char [48]);
@@ -68,7 +68,7 @@ extern int FUN_0023d0d4(int, unsigned int);
 /* Supplied declaration required: FUN_0023d158. */
 extern unsigned int resourceGetIndexedEntry(int, unsigned int);
 /* Supplied declaration required: matrixScaleColumns. */
-/* Supplied declaration required: FUN_0023d274. */
+/* Supplied declaration required: animKeyTableFindKey. */
 /* Supplied declaration required: asdModelAdvanceCommandCursor. */
 /* Supplied declaration required: gxGetCommandListParameter. */
 /* Supplied declaration required: FUN_00349d88. */
@@ -169,7 +169,7 @@ void FUN_00342250(int param_1,unsigned int param_2)
           temp_v41 = temp_v18;
           temp_v3 = (**(romwright_code **)(**(int **)(param_1 + 8) + 0x28))(*(int **)(param_1 + 8),temp_v6);
           temp_v1 = temp_v3;
-          FUN_0023d274(temp_v3,temp_v24);
+          animKeyTableFindKey(temp_v3,temp_v24);
           in_s0 = in_s0 * (float)temp_v21;
           in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v19 <= in_s0) << 0x1d);
           temp_v42 = 0;

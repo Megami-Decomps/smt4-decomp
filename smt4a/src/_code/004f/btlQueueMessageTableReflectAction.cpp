@@ -1,4 +1,3 @@
-/* NON_MATCHING: actor/options saved registers are swapped (retail actor=sl, options=r4); tail otherwise matches. */
 #include "battle/btlReflect.h"
 #include "battle/btlMain.h"
 #include "battle/btlDebug.h"
@@ -7,7 +6,8 @@
 extern "C" {
 extern BtlAuxA* g_btlAux;
 
-
+/* Queues the reflect action of a message-table entry (kind 4 when the effect name has the prefix), flagging the
+ * two special death motions. */
 ReflectAction* btlQueueMessageTableReflectAction(s32 actor, u32 options, u32 first, s32 target,
                            u32 third, u32 fourth, u32 value, const char* name)
 {
@@ -18,9 +18,7 @@ ReflectAction* btlQueueMessageTableReflectAction(s32 actor, u32 options, u32 fir
         f32 second;
     };
     if (btlEffectNameHasPrefix(reinterpret_cast<u32>(g_btlAux), reinterpret_cast<u32>(name))) {
-        ReflectAction* action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
-        action->kind = 4;
-        return action;
+        return reflectCreateKind4(actor, options);
     }
     if (target >= 109) {
         return NULL;

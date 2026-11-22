@@ -21,14 +21,6 @@ struct OverlayFadeWork {
 extern "C" {
 u32 timedValueInterpolateStep(f32 *value, s32 duration, s32 frame, f32 start, f32 target);
 
-/* Non-negative IEEE-754 values keep their numeric order when compared as signed words. */
-static __inline s32 floatBits(f32 value)
-{
-    union { f32 value; s32 bits; } representation;
-    representation.value = value;
-    return representation.bits;
-}
-
 // Step both fade channels and finish the transition once its endpoint and overlay gate are ready.
 u32 FUN_0036ce70(OverlayFadeWork *work)
 {
@@ -47,8 +39,7 @@ u32 FUN_0036ce70(OverlayFadeWork *work)
         }
     }
     f32 progress = work->channels[1].progress.value;
-    // The upper-end test uses the stored IEEE-754 progress representation.
-    if (floatBits(progress) >= 0x3f800000 && entering)
+    if (progress >= 1.0f && entering)
         complete = true;
     if (progress <= 0.0f && !entering)
         complete = true;

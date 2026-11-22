@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a90f0(unsigned int **, unsigned char [8]);
+int __ARM_common_memcpy4_5(unsigned int **, unsigned char [8]);
 int nw_gfx_res_GetReferenceShaderTarget(unsigned char [8], unsigned int *, unsigned int);
 int nw_gfx_res_ResMaterial_CacheUserUniformIndex(int *, int, int);
 int nw_gfx_res_ResShader_Dereference(void);
@@ -18,7 +18,7 @@ typedef struct {
 } param_4_stack;
 
 extern int FUN_0018e1f4(unsigned int **, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001a90f0. */
+/* Supplied declaration required: __ARM_common_memcpy4_5. */
 /* Supplied declaration required: nw_gfx_res_GetReferenceShaderTarget. */
 /* Supplied declaration required: nw_gfx_res_ResMaterial_CacheUserUniformIndex. */
 /* Supplied declaration required: nw_gfx_res_ResShader_Dereference. */
@@ -82,7 +82,7 @@ int nw_gfx_res_ResMaterial_SetupShader
       temp_v4 = (unsigned int *)0x0;
       temp_v5 = '\0';
       nw_gfx_res_GetReferenceShaderTarget(temp_v7,puVar6,param_4);
-      FUN_001a90f0(&temp_v4,temp_v7);
+      __ARM_common_memcpy4_5(&temp_v4,temp_v7);
       if (temp_v5 == '\0') {
         temp_v0 = -0x7ffffffe;
       }

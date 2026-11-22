@@ -11,7 +11,7 @@
 extern "C" {
 #endif
 
-u32 FUN_0046ebf0(u32 arg0, u32 arg1);
+u32 aocHasType39Record(AocSystemA *system, u32 key);
 
 #ifdef __cplusplus
 }

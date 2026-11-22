@@ -1,4 +1,3 @@
-/* NON_MATCHING: slot null handling matches retail; callee-saved register assignment differs (retail keeps stack-arg constant 16 in fp, per-item counts in r6/r7, slot in r8). */
 #include "shard/W6_W6Match3_EffectColor.h"
 #include "AsdSDK/AsdDebug.h"
 #include <stddef.h>
@@ -29,30 +28,23 @@ void slotInit(EffectGeometrySlotView *, u32, s32, s32);
 void matrix44SetIdentity(f32 *);
 
 /* Allocate a geometry batch, its vertex slot and opaque white per-item colors. */
-EffectGeometryBatchView *FUN_002ce938(s32 count, s32 verticesPerItem, s32 trianglesPerItem, u16 flags)
+EffectGeometryBatchView *FUN_002ce938(s32 count, s16 verticesPerItem, s16 trianglesPerItem, u32 flags)
 {
     asdDebugTrace(g_effGeometrySourceFileName, 504);
     EffectGeometryBatchView *batch = static_cast<EffectGeometryBatchView *>(memAlloc(0x10000, 0x100, 0, sizeof(EffectGeometryBatchView), 0x10, 1));
     EffectGeometrySlotView *slotMemory = static_cast<EffectGeometrySlotView *>(asdMemoryAllocTraced(sizeof(EffectGeometrySlotView), g_effGeometrySourceFileName, 506));
     EffectGeometrySlotView *slot = (slotMemory != NULL) ? slotReset(slotMemory) : NULL;
-    s32 triangles = trianglesPerItem * count;
-    s32 vertices = verticesPerItem * count;
-    slotInit(slot, 0x25, triangles * 3, vertices);
+    slotInit(slot, 0x25, trianglesPerItem * count * 3, verticesPerItem * count);
     batch->slot = slot;
     asdDebugTrace(g_effGeometrySourceFileName, 511);
     batch->colors = static_cast<EffectColor *>(memAlloc(0x10000, 0x100, 0, count * sizeof(EffectColor), 0x10, 1));
-    for (u16 i = 0; i < count; ++i) {
-        EffectColor *color = &batch->colors[i];
-        color->red = 1.0f;
-        color->green = 1.0f;
-        color->blue = 1.0f;
-        color->alpha = 1.0f;
-    }
+    for (u16 i = 0; i < count; ++i)
+        effectColorSet(&batch->colors[i], 1.0f, 1.0f, 1.0f, 1.0f);
     matrix44SetIdentity(batch->matrix);
     batch->flags = flags | 0x100;
     batch->count = count;
-    batch->vertexCount = vertices;
-    batch->triangleCount = triangles;
+    batch->vertexCount = verticesPerItem * count;
+    batch->triangleCount = trianglesPerItem * count;
     batch->drawFlags = 0xa5;
     batch->verticesPerItem = verticesPerItem;
     batch->trianglesPerItem = trianglesPerItem;

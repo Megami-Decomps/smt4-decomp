@@ -9,7 +9,7 @@ s32 FUN_0040898c(JobAnimationTargetPrefixA *target);
 }
 
 /* Advances the animated sprite, enables its target and parameters unless the code is 0x71, and steps the mode-2 phase (wrapping at 30) and angle (wrapping at 360). */
-extern "C" u32 FUN_00357ea0(u32 process)
+extern "C" u32 btlTargetSelectCalc(u32 process)
 {
     JobAnimationWorkPrefixA *work = (JobAnimationWorkPrefixA *)jobGetWork(process);
     uiSpriteAdvanceAnimation((UiSpriteState *)work->unk2C, 1.0f);

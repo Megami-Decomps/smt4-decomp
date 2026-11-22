@@ -54,7 +54,7 @@ struct UiScreen {
     /* 0x1110 */ u8 unk1110[0x6c];
     /* 0x117c */ struct {
         UiScreenFunc func;               /* member function pointer, 8 bytes */
-    } updateFuncs[8];                    /* one per phase (count unknown) */
+    } updateFuncs[19];                   /* one per phase (mikadoInitUpdateHandlers fills 19) */
 };
 
 #endif

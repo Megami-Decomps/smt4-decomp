@@ -23,7 +23,7 @@ extern u8 g_mobiclipSlots[0x210];
 extern u8 entry;
 
 s32 __aeabi_atexit(void* object, void (*destroy)(void*), void* module);
-void expHeapBaseDestroyA(void* object);
+void _ZN9Obj5583d0D1Ev(void* object); /* Obj5583d0::~Obj5583d0, the registered destructor */
 
 // Clears the six slot objects and registers their finalizers.
 void FUN_00510084(void)
@@ -33,7 +33,7 @@ void FUN_00510084(void)
         MobiclipSlot* slot = &slots[i];
         for (s32 w = 0; w < 6; w++) slot->words[w] = 0;
         slot->tail = 0;
-        __aeabi_atexit(slot, expHeapBaseDestroyA, &entry);
+        __aeabi_atexit(slot, _ZN9Obj5583d0D1Ev, &entry);
     }
 }
 

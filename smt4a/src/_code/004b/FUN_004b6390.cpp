@@ -47,7 +47,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: gameGlobalsSetOverlayActive. */
 /* Supplied declaration required: gameGlobalsSetSceneState. */
 /* Supplied declaration required: campButtonHelpAcquire. */
-/* Supplied declaration required: FUN_0036b644. */
+/* Supplied declaration required: uiSpriteStartFrameSequence. */
 /* Supplied declaration required: statusBustUpPortraitAcquire. */
 /* Supplied declaration required: objBMarkAndInit20D4. */
 /* Supplied declaration required: stateHolderMarkAndInit2588. */
@@ -166,7 +166,7 @@ void FUN_004b6390(int param_1)
   uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x6b0),0x1d,0, (UiResourceParameters *)(param_1),1, 1.0f);
   uiSpriteSetKeyframe((UiSpriteState *)(param_1 + 0x6b0),0, 0);
   uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x73c),0x1d,1000, (UiResourceParameters *)(param_1),0x65, 1.0f);
-  FUN_0036b644((UiSpriteState *)(param_1 + 0x73c),0);
+  uiSpriteStartFrameSequence((UiSpriteState *)(param_1 + 0x73c),0);
   uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x7c8),0x1d,1000, (UiResourceParameters *)(param_1),0x65, 1.0f);
   uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x854),0x1d,1000, (UiResourceParameters *)(param_1),0x65, 1.0f);
   uiSpriteSelectAnim((UiSpriteState *)((void *)(param_1 + 0x854)),6);

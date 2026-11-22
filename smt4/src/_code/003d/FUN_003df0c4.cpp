@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail predicates the empty-list case (movcs/strcs) and compares as `cmp start, count` / `cmp remaining, capacity`; built branches and swaps the compare operands (failure test via nnResultIsFailure now matches) */
 #include "classes/WindowStatus.h"
 #include "nn/Result.h"
 
@@ -19,14 +18,13 @@ WindowStatusResult FUN_003df0c4(TextListEntry **entry, u32 *outCount, s32 code, 
 {
     TextListEntry *list = *entry;
 
-    if (start >= list->itemCount) {
-        code = 0;
-        *outCount = 0;
-    } else {
-        u32 remaining = list->itemCount - start;
+    u32 count = list->itemCount;
 
-        if (remaining < capacity) {
-            capacity = remaining;
+    if (start >= count) {
+        code = *outCount = 0;
+    } else {
+        if (count - start < capacity) {
+            capacity = count - start;
         }
         code = FUN_00352098(code, 1, list->handleA, list->handleB, list->items + start, capacity);
         if (!nnResultIsFailure(code)) {

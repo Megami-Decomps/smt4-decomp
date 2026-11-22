@@ -12,16 +12,12 @@ int questCenterAddPoints(u32 amount);
 /* Adds `amount` to counter `index` (saturating at 0xFFFFFFFF) and notifies the counter's handler. */
 void gameCounterAddSaturating(int index, u32 amount)
 {
-    u32 *table = reinterpret_cast<u32 *>(gameGetCounters());
-    u32 *counter = &table[index];
-    u32 value = *counter;
-
-    if (~value > amount) {
-        value = value + amount;
+    u32 *counter = &((u32 *)gameGetCounters())[index];
+    if (~*counter > amount) {
+        *counter = *counter + amount;
     } else {
-        value = 0xffffffff;
+        *counter = 0xFFFFFFFF;
     }
-    *counter = value;
     switch (index) {
     case 2:
         questCenterCounterAddSaturating14(amount);

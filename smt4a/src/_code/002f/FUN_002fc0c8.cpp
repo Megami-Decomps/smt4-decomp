@@ -16,7 +16,7 @@ int FUN_00421f34(...);
 unsigned int* commandProfileWriteDefault(unsigned int*);
 unsigned int *asdGxEmitAlphaDepthWritePreset(unsigned int *commands);
 unsigned int* FUN_00422048(void);
-int FUN_004fefe0(...);
+int animKeyTableFindKey(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(...);
 int nn_math_ARMv6_MTX34CopyAsm(unsigned char [60], unsigned int *);
@@ -106,7 +106,7 @@ extern unsigned int FUN_00421e18(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00422048. */
 /* Supplied declaration required: asdGxBuildAlphaDepthPresetCommands. */
 extern unsigned int FUN_0042c5cc(unsigned int);
-/* Supplied declaration required: FUN_004fefe0. */
+/* Supplied declaration required: animKeyTableFindKey. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultTranslateAsm. */
@@ -241,7 +241,7 @@ void FUN_002fc0c8(unsigned int param_1)
             temp_v50 = temp_v6;
             temp_v1 = (**(romwright_code **)(*DAT_0057aa08 + 0x28))(DAT_0057aa08,temp_v3);
             temp_v39 = temp_v1;
-            FUN_004fefe0(temp_v1,temp_v37);
+            animKeyTableFindKey(temp_v1,temp_v37);
             in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v14 <= in_s0 * temp_v22) << 0x1d);
             temp_v20 = CONCAT44(temp_v14,temp_v14);
             temp_v45 = (float)(unsigned int)!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0);
@@ -333,7 +333,7 @@ void FUN_002fc0c8(unsigned int param_1)
             temp_v52 = temp_v6;
             temp_v1 = (**(romwright_code **)(*DAT_0057aa08 + 0x28))(DAT_0057aa08,temp_v3);
             temp_v39 = temp_v1;
-            FUN_004fefe0(temp_v1,temp_v37);
+            animKeyTableFindKey(temp_v1,temp_v37);
             in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v14 <= in_s0 * temp_v22) << 0x1d);
             temp_v20 = CONCAT44(temp_v14,temp_v14);
             temp_v44 = (unsigned int)!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0);
@@ -436,7 +436,7 @@ void FUN_002fc0c8(unsigned int param_1)
             temp_v47 = temp_v6;
             temp_v1 = (**(romwright_code **)(*DAT_0057aa08 + 0x28))(DAT_0057aa08,temp_v3);
             temp_v39 = temp_v1;
-            FUN_004fefe0(temp_v1,temp_v37);
+            animKeyTableFindKey(temp_v1,temp_v37);
             in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v14 <= in_s0 * temp_v22) << 0x1d);
             for (temp_v6 = romwright_fabs_4(in_s0 * temp_v22); temp_v15 = temp_v14, (int)temp_v6 >= 0x47800000;
                 temp_v6 = temp_v6 - temp_v21) {
@@ -538,7 +538,7 @@ void FUN_002fc0c8(unsigned int param_1)
             temp_v47 = temp_v6;
             temp_v1 = (**(romwright_code **)(*DAT_0057aa08 + 0x28))(DAT_0057aa08,temp_v3);
             temp_v39 = temp_v1;
-            FUN_004fefe0(temp_v1,temp_v38);
+            animKeyTableFindKey(temp_v1,temp_v38);
             in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v14 <= in_s0 * temp_v22) << 0x1d);
             temp_v20 = CONCAT44(temp_v14,temp_v14);
             temp_v42 = (unsigned int)!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0);

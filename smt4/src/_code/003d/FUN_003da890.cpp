@@ -1,4 +1,3 @@
-/* NON_MATCHING: instruction-for-instruction identical except register numbering (first loop keeps the slot base in r8 in retail, r5 here; idOnly loop swaps r0/r1) */
 #include "common.h"
 #include <stddef.h>
 #include "AsdSDK/AsdMemUtil.h"
@@ -39,7 +38,7 @@ typedef char ResourceSlotSizeCheck[sizeof(ResourceSlot) == 0x8C ? 1 : -1];
 typedef char ResourceSlotsOffsetCheck[offsetof(ResourceSlots, single0) == 0x2F9C &&
     offsetof(ResourceSlots, groupG) == 0x3070 && offsetof(ResourceSlots, single1) == 0x3218 ? 1 : -1];
 
-static inline void resetSlot(ResourceSlot *slot)
+static void resetSlot(ResourceSlot *slot)
 {
     slot->id = 0xFF;
     memClear(slot->data, sizeof(slot->data));
@@ -54,25 +53,27 @@ extern "C" {
 /* Releases every resource slot of the work area and marks them free. */
 void FUN_003da890(ResourceSlots *work)
 {
+    s32 i;
+
     work->active = 0;
-    for (s32 i = 0; i < 4; i++) {
+    for (i = 0; i < 4; i++) {
         resetSlot(&work->groupA[i]);
         resetSlot(&work->groupB[i]);
         resetSlot(&work->groupC[i]);
         resetSlot(&work->groupD[i]);
     }
-    for (s32 i = 0; i < 2; i++) {
+    for (i = 0; i < 2; i++) {
         resetSlot(&work->groupE[i]);
     }
-    for (s32 i = 0; i < 5; i++) {
+    for (i = 0; i < 5; i++) {
         resetSlot(&work->groupF[i]);
     }
-    for (s32 i = 0; i < 3; i++) {
+    for (i = 0; i < 3; i++) {
         resetSlot(&work->groupG[i]);
     }
     resetSlot(&work->single0);
     resetSlot(&work->single1);
-    for (s32 i = 0; i < 11; i++) {
+    for (i = 0; i < 11; i++) {
         work->idOnly[i].id = 0xFF;
     }
 }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a90f0(int *, unsigned char [8]);
+int __ARM_common_memcpy4_5(int *, unsigned char [8]);
 
 /* stack frame of param_3: 2 slot(s), 5 byte(s) */
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_001a90f0. */
+/* Supplied declaration required: __ARM_common_memcpy4_5. */
 extern unsigned int libc_strlen(int);
 /* Supplied declaration required: nw_gfx_res_GetReferenceShaderTarget. */
 extern int nw_ut_ResDicPatricia_Get(int *, int, unsigned int);
@@ -79,7 +79,7 @@ void nw_gfx_res_GetReferenceShaderTarget(int *param_1,int param_2,int param_3)
       temp_v5 = 0;
       temp_v6 = '\0';
       nw_gfx_res_GetReferenceShaderTarget((int *)temp_v7,(int)puVar6,param_3);
-      FUN_001a90f0(&temp_v5,temp_v7);
+      __ARM_common_memcpy4_5(&temp_v5,temp_v7);
       if (temp_v6 != '\0') {
         piVar4 = (int *)(param_2 + 0x1c);
         if (temp_v5 != 0) {

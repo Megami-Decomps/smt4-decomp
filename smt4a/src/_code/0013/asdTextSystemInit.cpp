@@ -24,7 +24,7 @@ void asdTextRegisterSlot(u32 id, s32 slot, void (*callback)(void));
 void asdTextSetDefaultMode(u32 mode);
 void FUN_0013cae4(void);
 void FUN_0013edc8(void);
-void FUN_0013e38c(void);
+void textIconDraw(void);
 void messageTextSelectPortrait(void);
 void messageTextSetPortraitFrame(void);
 
@@ -53,7 +53,7 @@ void asdTextSystemInit(void)
     sentinelLookupAdd(0xF87B, 4, 0);
     FUN_00140280(FUN_0013cae4);
     FUN_001418ec(FUN_0013edc8);
-    FUN_0013f52c(FUN_0013e38c);
+    FUN_0013f52c(textIconDraw);
     asdTextRegisterSlot(0xF87A, 1, messageTextSelectPortrait);
     asdTextRegisterSlot(0xF87B, 4, messageTextSetPortraitFrame);
     asdTextSetDefaultMode(0x8190);

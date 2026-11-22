@@ -35,7 +35,14 @@ struct MessageWindow {
     /* 0x034 */ u8 unk034;
     /* 0x035 */ u8 closeRequested;
     /* 0x036 */ u8 priority;
-    /* 0x037 */ u8 unk037[0x27];
+    /* The kind-12 window (messageWindowSetupLayoutSprites): up to five shuffled message lines, each with a card sprite (7 to 11). */
+    /* 0x037 */ u8 cardStates[5];
+    /* 0x03C */ u8 lineOrder[5];         /* the message line each row shows */
+    /* 0x041 */ u8 lineStates[5];
+    /* 0x046 */ u8 lineDelays[5];        /* a random number below 10 for each row */
+    /* 0x04B */ u8 unk04B;
+    /* 0x04C */ s16 lineWidths[5];       /* each row's text width in pixels */
+    /* 0x056 */ u8 unk056[8];
     /* 0x05E */ u8 isPlain;
     /* 0x05F */ u8 closeLocked;
     /* 0x060 */ u8 unk060[4];
@@ -92,7 +99,8 @@ struct MessageMain {
 
 typedef char MessageWindowOffsetsCheck[
     offsetof(MessageWindow, flags) == 0xC && offsetof(MessageWindow, choiceResult) == 0x1C &&
-    offsetof(MessageWindow, closeRequested) == 0x35 && offsetof(MessageWindow, closeLocked) == 0x5F &&
+    offsetof(MessageWindow, closeRequested) == 0x35 && offsetof(MessageWindow, lineOrder) == 0x3C &&
+    offsetof(MessageWindow, lineWidths) == 0x4C && offsetof(MessageWindow, closeLocked) == 0x5F &&
     offsetof(MessageWindow, counterState) == 0x7C && offsetof(MessageWindow, panelState) == 0x88 &&
     offsetof(MessageWindow, panelStep) == 0x8C && offsetof(MessageWindow, panelCount) == 0x90 && offsetof(MessageWindow, unk098) == 0x98 &&
     offsetof(MessageWindow, parameters) == 0xA4 && offsetof(MessageWindow, sprites) == 0xC4 && offsetof(MessageWindow, sprites[12]) == 0x754 &&

@@ -1,4 +1,3 @@
-/* NON_MATCHING: btlEntryHasCategoryThreeSkill shape; only the second equipment loop swaps the base/offset registers of its id load (retail ldr r0 / add r1, built ldr r1 / add r0). */
 #include "battle/BtlEntry.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
 #include "gamedata/SkillDataRecord.h"
@@ -10,26 +9,30 @@ extern "C" {
 /* Whether one of the entry's equipped skills or its demon's default skills has the encoded category. */
 static __inline u32 entryHasSkillCategory(const BtlEntry *entry, u32 category)
 {
+    s32 index;
+    const SkillDataRecord *skill;
+    NkmBaseRecord *demon;
+
     if (entry->data.equipA != NULL) {
-        for (s32 index = 0; index < 8; ++index) {
-            const SkillDataRecord *skill = skillDataFindById(entry->data.equipA->items[index]);
+        for (index = 0; index < 8; ++index) {
+            skill = skillDataFindById(entry->data.equipA->items[index]);
             if (skill != NULL && skill->skillProperties.category == category) {
                 return 1;
             }
         }
     }
     if (entry->data.equipB != NULL) {
-        for (s32 index = 0; index < 8; ++index) {
-            const SkillDataRecord *skill = skillDataFindById(entry->data.equipB->items[index]);
+        for (index = 0; index < 8; ++index) {
+            skill = skillDataFindById(entry->data.equipB->items[index]);
             if (skill != NULL && skill->skillProperties.category == category) {
                 return 1;
             }
         }
     }
     if (entry->data.devil != NULL) {
-        NkmBaseRecord *demon = reinterpret_cast<NkmBaseRecord *>(nkmBaseGetRecord(entry->data.id));
-        for (s32 index = 0; index < 8; ++index) {
-            const SkillDataRecord *skill = skillDataFindById(demon->skills[index]);
+        demon = reinterpret_cast<NkmBaseRecord *>(nkmBaseGetRecord(entry->data.id));
+        for (index = 0; index < 8; ++index) {
+            skill = skillDataFindById(demon->skills[index]);
             if (skill != NULL && skill->skillProperties.category == category) {
                 return 1;
             }
@@ -39,7 +42,7 @@ static __inline u32 entryHasSkillCategory(const BtlEntry *entry, u32 category)
 }
 
 // Script command: sets the result to whether the script unit has a skill of the requested encoded category.
-u32 FUN_00311fc4()
+u32 scrBtlUnitHasSkillCategory()
 {
     u32 category = scrGetArg(0);
     BtlEntry *entry = reinterpret_cast<BtlEntry *>(reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->entryView.entry);

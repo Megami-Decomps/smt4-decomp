@@ -1,16 +1,9 @@
-/* NON_MATCHING: the aocIndex test uses r0 instead of retail r1; the state store is scheduled before unk10 instead of after it. */
-#include "common.h"
+#include "battle/btlMain.h"
+#include "shard/W4_Match3_AocMainA.h"
 
 extern "C" {
 
-typedef struct ContentRequest003e1390 {
-    /* 0x00 */ s32 state;
-    /* 0x04 */ u32 handle;
-    /* 0x08 */ u32 unk08;
-    /* 0x0c */ u32 unk0c;
-    /* 0x10 */ u32 unk10;
-} ContentRequest003e1390;
-
+/* unit-local: the battle state as the request sees it, only its add-on index (FUN_003e1454 tests the same word). */
 typedef struct ContentDesc003e1390 {
     /* 0x00 */ u8 unk00[0xf0];
     /* 0xf0 */ s32 aocIndex;
@@ -20,32 +13,27 @@ void asdMemFree(void *memory);
 void asdLoadFileAsyncSimple(const char *name, u32 *handle, s32 flags);
 char *libc_strcpy(char *dst, const char *src);
 void *sysMemClear(void *dst, u32 size);
-void btlEncountLoadArrangementStep(ContentRequest003e1390 *request, ContentDesc003e1390 *desc);
-void aocQueueType39(u32 aoc, u32 index, u32 *handle, const char *name);
+void btlEncountLoadArrangementStep(BtlStep *step, ContentDesc003e1390 *desc);
+void aocQueueType39(AocSystemA *aoc, u32 index, u32 *handle, const char *name);
 char *btlPosArrangeGetFileName(ContentDesc003e1390 *desc);
-s32 FUN_0046ebf0(u32 aoc);
-
-extern u32 g_aocSystem; /* 0x570280 */
 
 /* Starts loading a content request: queues it through the add-on content system when the descriptor has an add-on index, otherwise from the default source. */
-void contentRequestStart(ContentRequest003e1390 *request, ContentDesc003e1390 *desc)
+void contentRequestStart(BtlStep *request, ContentDesc003e1390 *desc)
 {
     char name[128];
 
     sysMemClear(name, 0x80);
     libc_strcpy(name, btlPosArrangeGetFileName(desc));
-    if (request->handle != 0) {
-        asdMemFree(reinterpret_cast<void *>(request->handle));
-        request->handle = 0;
+    if (request->counters.fileHandle != 0) {
+        asdMemFree(reinterpret_cast<void *>(request->counters.fileHandle));
+        request->counters.fileHandle = 0;
     }
-    if (0 < desc->aocIndex && FUN_0046ebf0(g_aocSystem) != 0) {
-        aocQueueType39(g_aocSystem, desc->aocIndex, &request->handle, name);
+    if (0 < desc->aocIndex && aocHasType39Record(g_aocSystem, desc->aocIndex) != 0) {
+        aocQueueType39(g_aocSystem, desc->aocIndex, &request->counters.fileHandle, name);
     } else {
-        asdLoadFileAsyncSimple(name, &request->handle, 0);
+        asdLoadFileAsyncSimple(name, &request->counters.fileHandle, 0);
     }
-    request->state = 0x16;
-    request->unk10 = 0;
-    request->unk0c = 0;
+    btlStepEnter(request, 0x16);
     btlEncountLoadArrangementStep(request, desc);
 }
 

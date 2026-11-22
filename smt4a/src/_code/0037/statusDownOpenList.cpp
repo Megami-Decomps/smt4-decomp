@@ -7,8 +7,6 @@ static inline ScrollSelection *statusDownGetSelectionList(StatusDownStateA *stat
 
 extern "C" {
 
-extern void ifTouchRegionRemove(void);
-extern void __aeabi_memset4(void *dst, int size, u32 value);
 extern void gridNavigationConfigure(ScrollSelection *list, s32 count, s32 visible, s32 columns, s32 wrap, s32 alternateKeys);
 extern void statusDownRebuildTouchRegions(void);
 extern void scrollListSetSelectionTracked(ScrollSelection *list, s32 index);
@@ -26,11 +24,7 @@ void statusDownOpenList(u32 argA, u32 argB)
     scrollListSetSelectionTracked(statusDownGetSelectionList(status), gridNavigationGetItemCount(statusDownGetSelectionList(status)) - 1);
     status->listActive = 1;
     status = g_statusDown;
-    for (int i = 0; i < status->touchRegionCount; i++) {
-        ifTouchRegionRemove();
-    }
-    status->touchRegionCount = 0;
-    __aeabi_memset4(status->slots, 0x54, 0xFFFFFFFF);
+    statusDownClearTouchRegions(status);
     status = g_statusDown;
     status->stateTimer = 0;
     previous = status->track.state;

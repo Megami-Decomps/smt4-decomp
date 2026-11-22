@@ -507,7 +507,7 @@ code_r0x0032d518:
         }
         else {
           FUN_0029c4c8(1);
-          FUN_0029defc((int)(short)uStack_5fa,0);
+          gameLoadUnitSnapshot((int)(short)uStack_5fa,0);
           FUN_0029c4e4(auStack_640,1);
           FUN_0029c4ac(0);
         }
@@ -1208,7 +1208,7 @@ code_r0x0032d518:
           }
           else {
             FUN_0029c4c8(1);
-            FUN_0029defc((int)(short)uStack_5fa,0);
+            gameLoadUnitSnapshot((int)(short)uStack_5fa,0);
             FUN_0029c4e4(auStack_640,1);
             FUN_0029c4ac(0);
           }

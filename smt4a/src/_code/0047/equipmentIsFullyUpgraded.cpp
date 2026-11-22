@@ -5,7 +5,7 @@
 
 extern "C" {
 EquipmentUpgradeState *FUN_00239200(void);
-void FUN_001a90f0(EquipmentUpgradeModifiers *, const EquipmentUpgradeModifiers *);
+void __ARM_common_memcpy4_5(EquipmentUpgradeModifiers *, const EquipmentUpgradeModifiers *);
 
 // True when this equipment item cannot accept any further upgrade bonus.
 u32 equipmentIsFullyUpgraded(u32 itemId)
@@ -18,7 +18,7 @@ u32 equipmentIsFullyUpgraded(u32 itemId)
     s32 power = 0;
     if (bonus) {
         power = bonus->hpBonus;
-        FUN_001a90f0(&modifiers,
+        __ARM_common_memcpy4_5(&modifiers,
             reinterpret_cast<const EquipmentUpgradeModifiers *>(bonus->statBonus));
     }
     switch (category) {

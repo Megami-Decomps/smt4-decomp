@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern void asdMemFreeSlot(u32 handle);
+extern void asdMemFreeSlot(void *object); // declcheck: local (frees the text object itself; the shared declaration takes a slot pointer)
 extern void statusBustUpPortraitRelease(s32 a, s32 b);
 extern u32 requestIdToCode(s32 index);
 extern void asdTMTexTableReleaseNode(s32 a, u32 b);
@@ -18,18 +18,18 @@ void resSetFree(ResSet *set)
         return;
     }
     for (i = 0; i < 7; i++) {
-        asdMemFreeSlot(set->a[i]);
+        asdMemFreeSlot(set->equipmentLabels[i]);
     }
-    asdMemFreeSlot(set->h1);
-    asdMemFreeSlot(set->h0);
-    asdMemFreeSlot(set->h34);
+    asdMemFreeSlot(set->name);
+    asdMemFreeSlot(set->title);
+    asdMemFreeSlot(set->description);
     for (i = 0; i < 8; i++) {
-        asdMemFreeSlot(set->b[i]);
+        asdMemFreeSlot(set->skillLabels[i]);
     }
-    asdMemFreeSlot(set->h38);
-    asdMemFreeSlot(set->h40);
-    asdMemFreeSlot(set->h48);
-    statusBustUpPortraitRelease(set->unk90, 1);
+    asdMemFreeSlot(set->demonName);
+    asdMemFreeSlot(set->race);
+    asdMemFreeSlot(set->specialItemName);
+    statusBustUpPortraitRelease(set->previewId, 1);
     if (set != NULL) {
         for (i = 0; i < 9; i++) {
             if (asdTMTexTableNodeIsLoaded(0x2E, requestIdToCode(i)) != 0) {

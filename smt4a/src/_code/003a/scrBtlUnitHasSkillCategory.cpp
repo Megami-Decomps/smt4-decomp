@@ -1,4 +1,3 @@
-/* NON_MATCHING: the second (secondary-record) loop swaps r0/r1 for the record pointer and the skill offset (as in the smt4 twin FUN_00311fc4); the rest matches. */
 #include "battle/btlUnit.h"
 #include "gamedata/BattleUnitSkills.h"
 #include "gamedata/NkmEnemyRecord.h"
@@ -17,26 +16,30 @@ u32 scrGetArg(u32);
  * (btlEntryHasCategoryThreeSkill's walk with the category as an argument; the smt4 twin FUN_00311fc4 has it too). */
 static __inline u32 entryHasSkillCategory(BtlCombatantEntryA *entry, u32 category)
 {
+    s32 index;
+    const SkillDataRecordA *skill;
+    const NkmEnemyRecordA *demon;
+
     if (entry->data.record) {
-        for (s32 index = 0; index < 8; ++index) {
-            const SkillDataRecordA *skill = skillDataFindById(entry->data.record->skills[index]);
+        for (index = 0; index < 8; ++index) {
+            skill = skillDataFindById(entry->data.record->skills[index]);
             if (skill && category == ((skill->properties >> 11) & 0x1f)) {
                 return 1;
             }
         }
     }
     if (entry->data.secondaryRecord) {
-        for (s32 index = 0; index < 8; ++index) {
-            const SkillDataRecordA *skill = skillDataFindById(entry->data.secondaryRecord->skills[index]);
+        for (index = 0; index < 8; ++index) {
+            skill = skillDataFindById(entry->data.secondaryRecord->skills[index]);
             if (skill && category == ((skill->properties >> 11) & 0x1f)) {
                 return 1;
             }
         }
     }
     if (entry->data.candidate) {
-        const NkmEnemyRecordA *demon = nkmEnemyFindById(entry->data.id);
-        for (s32 index = 0; index < 8; ++index) {
-            const SkillDataRecordA *skill = skillDataFindById(demon->skills[index]);
+        demon = nkmEnemyFindById(entry->data.id);
+        for (index = 0; index < 8; ++index) {
+            skill = skillDataFindById(demon->skills[index]);
             if (skill && category == ((skill->properties >> 11) & 0x1f)) {
                 return 1;
             }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: global/zero saved registers and the selection-array address scratch register differ. */
 #include "ui/UiSpriteApi.h"
 #include "ui/ButtonHelpGlobal.h"
 #include "font/ComWin/ComWin.h"
@@ -29,8 +28,9 @@ void buttonHelpClosePanel(s32 clearTouches)
             uiSpriteSetScaleKeyframe(&panel->panelSprites[i], 0, 1);
         }
     }
-    g_buttonHelp.work->phase = 0;
-    g_buttonHelp.work->state = 3;
+    panel = g_buttonHelp.work;
+    panel->phase = 0;
+    panel->state = 3;
 }
 
 } /* extern "C" */

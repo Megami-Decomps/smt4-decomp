@@ -22,7 +22,7 @@ static __inline UnitePairBits *unitePairBits(UnitePairEntryIV *entry)
 
 extern "C" {
 void uniteBuildResultUnitRecord(void *cursor, s32 index, s32 mode);
-void FUN_0029defc(s32 id, s32 mode);
+void gameLoadUnitSnapshot(s32 id, s32 mode);
 void FUN_0029c4e4(void *cursor, s32 mode);
 void menuSetModeAndResetTransitions(s32 mode);
 void FUN_0029e890(s32 first, s32 second);
@@ -48,7 +48,7 @@ void uniteConfirmResultPair(s32 index)
     unitePairBits(&work->pairListIV.pairs[0])->secondType = 1;
     unitePairBits(&work->pairListIV.pairs[0])->reserved = 0;
     FUN_0029c4c8(1);
-    FUN_0029defc(work->resultSelectionIV.selected.id, 0);
+    gameLoadUnitSnapshot(work->resultSelectionIV.selected.id, 0);
     FUN_0029c4e4(work->resultSelectionIV.cursor, 0);
     FUN_0029c4ac(0);
     menuSetModeAndResetTransitions(8);

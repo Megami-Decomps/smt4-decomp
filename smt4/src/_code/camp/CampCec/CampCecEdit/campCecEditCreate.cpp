@@ -29,7 +29,7 @@ u32 campCecEditDrawSelectedImage(void);
 u32 campCecEditUpdateCamera(void);
 u32 campCecEditDrawContents(void);
 /* The state handlers. */
-s32 FUN_002e1744(CampCecEdit *edit);
+s32 characterPanelStartScript(CampCecEdit *edit);
 s32 campCecEditMessageState(CampCecEdit *edit);
 s32 FUN_00220d58(CampCecEdit *edit);
 s32 FUN_002fc7a0(CampCecEdit *edit);
@@ -92,7 +92,7 @@ void campCecEditCreate(u8 openMode)
     edit->touchY = 0;
     edit->shownTarget = -1;
 
-    edit->stateHandlers[0] = FUN_002e1744;
+    edit->stateHandlers[0] = characterPanelStartScript;
     edit->stateHandlers[2] = campCecEditMessageState;
     edit->stateHandlers[1] = FUN_00220d58;
     edit->stateHandlers[3] = campCecClassifyRequestedUnit;

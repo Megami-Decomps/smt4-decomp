@@ -7,7 +7,7 @@ struct Value5 {
 };
 
 /* Copies the five-byte value. */
-extern "C" void FUN_001a90f0(Value5 *dest, const Value5 *src)
+extern "C" void __ARM_common_memcpy4_5(Value5 *dest, const Value5 *src)
 {
     dest->word = src->word;
     dest->byte = src->byte;

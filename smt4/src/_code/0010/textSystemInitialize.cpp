@@ -25,7 +25,7 @@ void asdTextSetDefaultRenderSetting(u32 setting);
 void FUN_0010a2f8(void);
 void messageExpandControlCode(void);
 void scrCommQueueRequest(void);
-void FUN_00109b08(void);
+void textIconDraw(void);
 void messageTextSelectPortrait(void);
 void messageTextSetPortraitFrame(void);
 
@@ -53,7 +53,7 @@ void textSystemInitialize(void)
     sentinelLookupAdd(0xf87a, 1, 0);
     sentinelLookupAdd(0xf87b, 4, 0);
     scrCommSetQueueRequestCallback(scrCommQueueRequest);
-    FUN_0010a770(FUN_00109b08);
+    FUN_0010a770(textIconDraw);
     asdTextRegisterSlot(0xf87a, 1, messageTextSelectPortrait);
     asdTextRegisterSlot(0xf87b, 4, messageTextSetPortraitFrame);
     asdTextSetDefaultRenderSetting(0x8190);

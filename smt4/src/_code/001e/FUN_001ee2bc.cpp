@@ -1,4 +1,4 @@
-/* NON_MATCHING (b1454): only the key-field load order (retail: start.frame, start.value, end.frame, end.value) and the integer/VFP registers of the final segment differ. */
+/* NON_MATCHING (b1454): only the final segment differs: retail loads start.frame, start.value, end.frame, end.value and converts the value change into s0 (the build loads both frames first and swaps s0/s1). */
 #include "AsdSDK/Source/Gfx/Effect/EffectResourceKeys.h"
 
 extern "C" f32 effRandomSignedValue(s32, s32, s32);
@@ -19,13 +19,12 @@ extern "C" void FUN_001ee2bc(EffectResourceKeyTrack *track,
             f32 adjustment = effRandomSignedValue(2, track->keys[current + distance].resource, 1);
             track->keys[track->index + distance].value -= (s32)adjustment;
         }
-        s32 nextIndex = track->index + distance;
-        const EffectResourceKey *start = &track->keys[track->index];
-        const EffectResourceKey *next = &track->keys[nextIndex];
-        s32 frameCount = next->frame - start->frame;
-        s32 valueChange = next->value - start->value;
+        s32 currentIndex = track->index;
+        s32 nextIndex = currentIndex + distance;
+        s32 frameCount = track->keys[nextIndex].frame - track->keys[currentIndex].frame;
+        s32 valueChange = track->keys[nextIndex].value - track->keys[currentIndex].value;
         track->step = (f32)valueChange / (f32)frameCount;
-        track->target = (f32)next->value;
+        track->target = (f32)track->keys[nextIndex].value;
         track->index = nextIndex;
         return;
     }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a90f0(unsigned int *, unsigned int);
+int __ARM_common_memcpy4_5(unsigned int *, unsigned int);
 int FUN_00507dd8(void);
 int FUN_00507ee8(unsigned int);
 int FUN_00507f20(void);
@@ -15,7 +15,7 @@ int nw_snd_internal_WaveSoundFile_WaveSoundInfo_GetPitch(void);
 int nw_snd_internal_WaveSoundFile_WaveSoundInfo_GetSendValue(unsigned int, int, unsigned int *, int);
 int nw_snd_internal_WaveSoundFile_WaveSoundInfo_GetSurroundPan(void);
 
-/* Supplied declaration required: FUN_001a90f0. */
+/* Supplied declaration required: __ARM_common_memcpy4_5. */
 extern unsigned int getSectionAt4_7dcc(void);
 /* Supplied declaration required: FUN_00507dd8. */
 /* Supplied declaration required: FUN_00507ee8. */
@@ -50,7 +50,7 @@ unsigned int FUN_00508c34(int *param_1,unsigned int *param_2,unsigned int param_
   nw_snd_internal_WaveSoundFile_WaveSoundInfo_GetSendValue(temp_v1,(int)param_2 + 0xb,param_2 + 3,2);
   temp_v2 = temp_v1;
   FUN_00507ee8(temp_v1);
-  FUN_001a90f0(param_2 + 1,temp_v2);
+  __ARM_common_memcpy4_5(param_2 + 1,temp_v2);
   if (*(unsigned int *)(*param_1 + 8) >= 0x1000100) {
     temp_v2 = temp_v1;
     FUN_00507dd8();

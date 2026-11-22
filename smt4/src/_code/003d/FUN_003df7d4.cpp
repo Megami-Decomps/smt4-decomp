@@ -1,5 +1,3 @@
-/* NON_MATCHING: retail predicates the empty-list case (movcs r1, #0; strcs r1) with the zero result in r1;
- * built branches, materialising it in r0 first. */
 #include "classes/WindowStatus.h"
 #include "nn/Result.h"
 
@@ -23,13 +21,10 @@ WindowStatusResult FUN_003df7d4(TextListEntry **entry, u32 *outCount, s32 code, 
     u32 count = list->itemCount;
 
     if (start >= count) {
-        code = 0;
-        *outCount = 0;
+        code = *outCount = 0;
     } else {
-        u32 remaining = count - start;
-
-        if (remaining < capacity) {
-            capacity = remaining;
+        if (count - start < capacity) {
+            capacity = count - start;
         }
         code = FUN_00352098(code, 1, list->handleA, list->handleB, list->items + start, capacity);
         if (!nnResultIsFailure(code)) {

@@ -1,17 +1,17 @@
-#include "shard/Shard003B.h"
+#include "classes/Obj42251c.h"
 
 /* Copy the pool's scalar render parameters. */
-extern "C" void _ZN9Obj42251c14copyParametersEPKv(ResSet *destination, const ResSet *source)
+extern "C" void _ZN9Obj42251c14copyParametersEPKv(Obj42251cData *destination, const Obj42251cData *source)
 {
-    destination->h34 = source->h34;
-    destination->h38 = source->h38;
-    destination->a[5] = source->a[5];
-    destination->a[6] = source->a[6];
-    destination->params24[0] = source->params24[0];
-    destination->params24[1] = source->params24[1];
-    destination->params24[2] = source->params24[2];
-    destination->params24[3] = source->params24[3];
-    destination->a[4] = source->a[4];
-    destination->h1 = source->h1;
-    destination->a[0] = source->a[0];
+    destination->lowNibble = source->lowNibble;
+    destination->highNibble = source->highNibble;
+    destination->first = source->first;
+    destination->second = source->second;
+    destination->third = source->third;
+    destination->fourth = source->fourth;
+    destination->fifth = source->fifth;
+    destination->sixth = source->sixth;
+    destination->flags = source->flags;
+    destination->unk04 = source->unk04;
+    destination->unk08 = source->unk08;
 }

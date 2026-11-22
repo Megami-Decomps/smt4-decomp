@@ -5,7 +5,7 @@
 
 extern "C" {
 void FUN_0018e0cc(DispatchResourceReference *reference, DispatchResource *resource, u32 flags);
-void FUN_001a90f0(DispatchResourceLookup *result, const DispatchResourceReference *reference);
+void __ARM_common_memcpy4_5(DispatchResourceLookup *result, const DispatchResourceReference *reference);
 u32 FUN_0015d8e0(DispatchResource **resource, u32 allocator, u32 flags);
 
 /* Resolves a resource's embedded payload, loading it on demand before dispatch; 0x80000001 when the reference is not found. */
@@ -25,7 +25,7 @@ GfxResult resourceDispatchResolvePayload(u32 allocator, DispatchResource *resour
                 lookup.found = 0;
                 DispatchResourceReference reference;
                 FUN_0018e0cc(&reference, container, flags);
-                FUN_001a90f0(&lookup, &reference);
+                __ARM_common_memcpy4_5(&lookup, &reference);
                 if (!lookup.found) {
                     result |= 0x80000001;
                     ready = false;

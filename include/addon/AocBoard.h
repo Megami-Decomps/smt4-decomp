@@ -20,7 +20,7 @@ struct AocBoardWork {
 };
 
 typedef char AocBoardWorkOffsets[
-    offsetof(AocBoardWork, owner.unk418) == 0x418 &&
+    offsetof(AocBoardWork, owner.spinnerFrame) == 0x418 &&
     offsetof(AocBoardWork, sprites) == 0x440 &&
     sizeof(UiSpriteState) == 0x8C ? 1 : -1];
 

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a90f0(int, unsigned int);
+int __ARM_common_memcpy4_5(int, unsigned int);
 int coproc_movefrom_User_R_Thread_and_Process_ID(void);
 int software_interrupt(int);
 
@@ -13,7 +13,7 @@ extern unsigned int DAT_005c0a98; /* 0x5c0a98 */
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_001a90f0. */
+/* Supplied declaration required: __ARM_common_memcpy4_5. */
 
 
 unsigned int FUN_004428c0(unsigned int param_1,unsigned int param_2,unsigned int *param_3,unsigned int param_4,
@@ -30,7 +30,7 @@ unsigned int FUN_004428c0(unsigned int param_1,unsigned int param_2,unsigned int
   *(unsigned int *)(temp_v1 + 0x88) = *param_3;
   *(unsigned int *)(temp_v1 + 0x8c) = param_3[1];
   *(unsigned char *)(temp_v1 + 0x90) = *(unsigned char *)(param_3 + 2);
-  FUN_001a90f0(temp_v1 + 0x94,param_4);
+  __ARM_common_memcpy4_5(temp_v1 + 0x94,param_4);
   *(unsigned char *)(temp_v1 + 0x9c) = param_5;
   *(unsigned char *)(temp_v1 + 0xa0) = param_6;
   *(unsigned int *)(temp_v1 + 0xa4) = 0x20;

@@ -2,7 +2,7 @@
 #include "gfx/TiledIndexMesh.h"
 
 extern "C" {
-TiledIndexMesh *FUN_002ce938(s32 rows, s32 verticesPerRow, s32 trianglesPerRow, u32 flags);
+TiledIndexMesh *FUN_002ce938(s32 rows, s16 verticesPerRow, s16 trianglesPerRow, u32 flags);
 
 // Replicate a triangle pattern across a grid whose adjacent cells share a vertex column.
 TiledIndexMesh *FUN_00390164(s32 rows, s32 columns, const u16 *pattern, s32 verticesPerColumn, u32 flags)

@@ -11,7 +11,7 @@ int nw_gfx_RenderContext_ResetState_364D68(...);
 int FUN_0023d078(...);
 int FUN_0023d158(...);
 int matrixScaleColumns(...);
-int FUN_0023d274(...);
+int animKeyTableFindKey(...);
 int gxGetCommandListParameter(int, int [3]);
 int FUN_00349cdc(int, int, int, unsigned char [52]);
 int FUN_00349d88(...);
@@ -80,7 +80,7 @@ extern int FUN_0023d0d4(int, unsigned int);
 /* Supplied declaration required: FUN_0023d158. */
 extern unsigned int resourceGetIndexedEntry(int, unsigned int);
 /* Supplied declaration required: matrixScaleColumns. */
-/* Supplied declaration required: FUN_0023d274. */
+/* Supplied declaration required: animKeyTableFindKey. */
 /* Supplied declaration required: asdModelAdvanceCommandCursor. */
 /* Supplied declaration required: gxGetCommandListParameter. */
 /* Supplied declaration required: FUN_00349cdc. */
@@ -200,7 +200,7 @@ void FUN_0034a28c(int param_1,unsigned int param_2)
           temp_v48 = temp_v8;
           temp_v0 = (**(romwright_code **)(**(int **)(param_1 + 8) + 0x28))(*(int **)(param_1 + 8),temp_v4);
           temp_v27 = temp_v0;
-          FUN_0023d274(temp_v0,temp_v2);
+          animKeyTableFindKey(temp_v0,temp_v2);
           temp_v49 = 0.0f;
           in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v20 <= in_s0 * temp_v21) << 0x1d);
           for (temp_v8 = romwright_fabs_4(in_s0 * temp_v21); temp_v15 = temp_v20, (int)temp_v8 >= 0x47800000;
@@ -283,7 +283,7 @@ void FUN_0034a28c(int param_1,unsigned int param_2)
           temp_v49 = temp_v8;
           temp_v3 = (**(romwright_code **)(**(int **)(param_1 + 8) + 0x28))(*(int **)(param_1 + 8),temp_v4);
           temp_v0 = temp_v3;
-          FUN_0023d274(temp_v3,temp_v2);
+          animKeyTableFindKey(temp_v3,temp_v2);
           in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v20 <= in_s0 * temp_v21) << 0x1d);
           temp_v30 = (unsigned int)!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0);
           for (temp_v8 = romwright_fabs_4(in_s0 * temp_v21); temp_v15 = temp_v20, (int)temp_v8 >= 0x47800000;
@@ -376,7 +376,7 @@ void FUN_0034a28c(int param_1,unsigned int param_2)
           temp_v49 = temp_v8;
           temp_v0 = (**(romwright_code **)(**(int **)(param_1 + 8) + 0x28))(*(int **)(param_1 + 8),temp_v4);
           temp_v25 = temp_v0;
-          FUN_0023d274(temp_v0,temp_v2);
+          animKeyTableFindKey(temp_v0,temp_v2);
           temp_v50 = 0;
           in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v20 <= in_s0 * temp_v21) << 0x1d);
           for (temp_v8 = romwright_fabs_4(in_s0 * temp_v21); temp_v15 = temp_v20, (int)temp_v8 >= 0x47800000;

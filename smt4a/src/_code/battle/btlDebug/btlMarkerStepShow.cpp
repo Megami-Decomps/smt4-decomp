@@ -42,7 +42,7 @@ extern const Vec3 DAT_005e1c2c;
 
 BtlSide* btlMainFindEntryByListedId(void* main, s32 index);
 Vec3 btlGetCombatantDrawPosition(void* main, s32 index, s32 arg);
-s16 FUN_004aa0b0(BtlUiA *ui, s32 a, s32 b, f32 x, f32 y, f32 z);
+s16 btlUiPositionRequestAdd(BtlUiA *ui, s32 a, s32 b, f32 x, f32 y, f32 z);
 s16 FUN_004aace8(BtlUiA *ui, s32 id, s32 a, s32 x, s32 y);
 s32 FUN_004aa1e8(BtlUiA *ui, s32 handle);
 
@@ -70,24 +70,24 @@ void btlMarkerStepShow(u32 unused, MarkerStep* step)
                 position.x += DAT_005e1c2c.x;
                 position.y += DAT_005e1c2c.y;
                 position.z += DAT_005e1c2c.z;
-                step->handle = FUN_004aa0b0(g_btlUiBlock, 1, 1, position.x, position.y, position.z);
+                step->handle = btlUiPositionRequestAdd(g_btlUiBlock, 1, 1, position.x, position.y, position.z);
                 break;
             case 2:
                 position.x += DAT_005e1c2c.x;
                 position.y += DAT_005e1c2c.y;
                 position.z += DAT_005e1c2c.z;
                 if (step->doubled != 0) {
-                    step->handle = FUN_004aa0b0(g_btlUiBlock, 0, 1, position.x, position.y, position.z);
-                    FUN_004aa0b0(g_btlUiBlock, 1, 1, position.x - 3.0f, position.y + 1.2f, position.z);
+                    step->handle = btlUiPositionRequestAdd(g_btlUiBlock, 0, 1, position.x, position.y, position.z);
+                    btlUiPositionRequestAdd(g_btlUiBlock, 1, 1, position.x - 3.0f, position.y + 1.2f, position.z);
                 } else {
-                    step->handle = FUN_004aa0b0(g_btlUiBlock, 0, 1, position.x, position.y, position.z);
+                    step->handle = btlUiPositionRequestAdd(g_btlUiBlock, 0, 1, position.x, position.y, position.z);
                 }
                 break;
             case 3:
-                step->handle = FUN_004aa0b0(g_btlUiBlock, 3, 1, position.x, position.y, position.z);
+                step->handle = btlUiPositionRequestAdd(g_btlUiBlock, 3, 1, position.x, position.y, position.z);
                 break;
             case 4:
-                step->handle = FUN_004aa0b0(g_btlUiBlock, 2, 1, position.x, position.y, position.z);
+                step->handle = btlUiPositionRequestAdd(g_btlUiBlock, 2, 1, position.x, position.y, position.z);
                 break;
             default:
                 step->done = 0;

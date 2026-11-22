@@ -43,7 +43,7 @@ void FUN_00298d0c(u32 value);
 void beginStatusPanelClose(void);
 void statusPanelSetOpen(s32 open);
 void FUN_0029d8f4(StatBlock *unit, s32 demonSide, u8 flag);
-void FUN_0029defc(s32 id, s32 mode);
+void gameLoadUnitSnapshot(s32 id, s32 mode);
 s32 FUN_0029dfa8(void);
 s32 FUN_0029e02c(void);
 void sortMenuCreate(s32 id, s32 arg);
@@ -170,7 +170,7 @@ void campSkillListUpdate(void)
     } else {
         if (!FUN_0029dfa8()) {
             if (camp->skills[row].unit < 0) {
-                FUN_0029defc(-1, 0);
+                gameLoadUnitSnapshot(-1, 0);
                 statusPanelSetOpen(1);
             } else {
                 FUN_0029d8f4(gameGetUnitRecord(camp->skills[row].unit), 0, 0);
@@ -220,7 +220,7 @@ void campSkillListUpdate(void)
                     mapEnableAndClearState();
                     campPaySkillCost(camp, row);
                     if (camp->skills[row].unit < 0) {
-                        FUN_0029defc(-1, 0);
+                        gameLoadUnitSnapshot(-1, 0);
                         statusPanelSetOpen(0);
                     } else {
                         FUN_0029d8f4(gameGetUnitRecord(camp->skills[row].unit), 0, 0);

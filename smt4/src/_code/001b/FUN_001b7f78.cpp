@@ -172,7 +172,7 @@ int lmapSceneGetUnk0(void);
 int FUN_00280ccc(void);
 int FUN_00316de4(...);
 
-int FUN_0019dde4(...);
+int mapSingleModelInitialize(...);
 int questShowRequirementProgress(void);
 int FUN_0020d6b0(void);
 int lmapLoadStageModels(void);
@@ -444,7 +444,7 @@ extern unsigned int DAT_0049fd34; /* 0x49fd34 */
 #endif
 /* Supplied declaration required: FUN_0010421c. */
 /* Supplied declaration required: FUN_0010bb84. */
-/* Supplied declaration required: FUN_0019dde4. */
+/* Supplied declaration required: mapSingleModelInitialize. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: mapDepartFreeWork. */
 /* Supplied declaration required: FUN_001a8cf8. */
@@ -1447,7 +1447,7 @@ LAB_001b8e80:
       return 0;
     }
     lmapLoadStageModels();
-    FUN_0019dde4(puVar14[0xb],puVar14[0xc]);
+    mapSingleModelInitialize(puVar14[0xb],puVar14[0xc]);
     MapEpl_Init(puVar14[0xb],puVar14[0xc]);
     FUN_0020d6b0();
     FUN_002a04f0(0);
@@ -5378,7 +5378,7 @@ LAB_001bf6c8:
     temp_v14 = DAT_0049f954;
     if (temp_v9 != 0) {
       lmapLoadStageModels();
-      FUN_0019dde4(puVar14[0xb],puVar14[0xc]);
+      mapSingleModelInitialize(puVar14[0xb],puVar14[0xc]);
       MapEpl_Init(puVar14[0xb],puVar14[0xc]);
       FUN_0020d6b0();
       DAT_0049fb49 = 0;

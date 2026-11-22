@@ -30,7 +30,7 @@ void uiSpriteAdvanceAnimation(void *fade);
 void bannerAnimStep(TitleLogoModel *model);
 
 /* Job update: steps the fade, shows the logo unless faded out, and animates it by mode. */
-s32 FUN_002e0730(u32 job)
+s32 btlTargetSelectCalc(u32 job)
 {
     TitleLogoWork *work = (TitleLogoWork *)jobGetWork(job);
     uiSpriteAdvanceAnimation(work->fade);

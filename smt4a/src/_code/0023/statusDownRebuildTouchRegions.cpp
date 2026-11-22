@@ -1,16 +1,11 @@
-/* NON_MATCHING: 514 lines (508 by shape), a typed rewrite with retail's blocks, calls and stores. Retail forms the
- * address of touchRegionCount again in every state (each loop's preheader, each `+= n`), so its states keep their own
- * copies of the tab and page-button tails (450 rows); this build forms the address once at entry and cross-jumps the
- * identical tails (401 rows). The raw decompilation it replaces scored 564 (492 by shape). */
 #include "status/StatusDownA.h"
 #include "ui/UiControl.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-s32 ifTouchRegionAddRequested(u32 file, s32 index);
-s32 ifTouchRegionAdd(u16 x, u16 y, u16 width, u16 height); // declcheck: local (its shared declarations sit in unrelated record headers)
-void __aeabi_memset4(void *destination, u32 size, s32 value);
+s16 ifTouchRegionAddRequested(u32 file, s32 index); // declcheck: local (no shared declaration yet; the result is the s16 region index its definition returns)
+s32 ifTouchRegionAdd(s32 x, s32 y, s32 width, s32 height); // declcheck: local (callers pass sign-extended halfwords; the shared u16 prototype zero-extends them)
 s32 gameFlagIsSet(u32 flag); // declcheck: local (the shared declarations disagree on the result type)
 s32 gridNavigationGetItemCount(void *navigation); // declcheck: local (a signed count of a list or a selector; the shared ones are unsigned or take an Object)
 
@@ -48,6 +43,16 @@ enum {
     STATUS_FLAG_MENU_ROWS = 0x410
 };
 
+/* Tells whether a row of the status menu can be chosen: rows 1 and 2 need flag 0x410. The status screen's
+ * input handler makes the same test on its rows (IV's FUN_001cca14). */
+static __inline bool statusMenuRowIsEnabled(s32 row)
+{
+    if (gameFlagIsSet(STATUS_FLAG_MENU_ROWS) == 0 && (row == 1 || row == 2)) {
+        return false;
+    }
+    return true;
+}
+
 /* Removes the status screen's touch regions and registers those of its current state: the rows of the state's
  * list or grid, then its fixed buttons. Each row's slot holds the region the stylus is tested against. */
 extern "C" void statusDownRebuildTouchRegions(void)
@@ -55,11 +60,7 @@ extern "C" void statusDownRebuildTouchRegions(void)
     StatusDownStateA *state = g_statusDown;
     s32 i;
 
-    for (i = 0; i < state->touchRegionCount; i++) {
-        ifTouchRegionRemove();
-    }
-    state->touchRegionCount = 0;
-    __aeabi_memset4(state->slots, sizeof(state->slots), -1);
+    statusDownClearTouchRegions(state);
     switch (state->track.state) {
     case 3:
         for (i = 0; i < gridNavigationGetItemCount(&state->list); i++) {
@@ -102,7 +103,7 @@ extern "C" void statusDownRebuildTouchRegions(void)
     }
     case 19:
         for (i = 0; i < 7; i++) {
-            if (gameFlagIsSet(STATUS_FLAG_MENU_ROWS) != 0 || (i != 1 && i != 2)) {
+            if (statusMenuRowIsEnabled(i)) {
                 state->slots[i] = ifTouchRegionAddRequested(STATUS_SPRITES, STATUS_REGION_MENU_ROWS + i);
             } else {
                 state->slots[i] = 0;
@@ -129,12 +130,11 @@ extern "C" void statusDownRebuildTouchRegions(void)
     case 22:
         for (s32 row = 0; row < 9; row++) {
             for (s32 column = 0; column < 4; column++) {
-                s32 cell = column + row * 4;
-
-                if (cell >= state->inventory.ownedCount) {
+                if (column + row * 4 >= state->inventory.ownedCount) {
                     break;
                 }
-                state->slots[cell] = ifTouchRegionAddRequested(STATUS_SPRITES, STATUS_REGION_INVENTORY + cell);
+                state->slots[column + row * 4] =
+                    ifTouchRegionAddRequested(STATUS_SPRITES, STATUS_REGION_INVENTORY + column + row * 4);
                 state->touchRegionCount++;
             }
         }
@@ -168,20 +168,21 @@ extern "C" void statusDownRebuildTouchRegions(void)
         state->touchRegionCount++;
         break;
     case 31: {
+        StatusDownSkillMenuA *menu = &state->menu;
         s32 rows = 0;
 
-        for (i = 0; i < state->menu.count; i++) {
+        for (i = 0; i < menu->count; i++) {
             state->slots[i] = ifTouchRegionAddRequested(STATUS_SPRITES, STATUS_REGION_SKILL_ROWS + i);
             rows++;
             state->touchRegionCount++;
         }
         state->slots[rows] = ifTouchRegionAddRequested(STATUS_SPRITES, STATUS_REGION_SKILL_CLOSE);
         state->touchRegionCount++;
-        state->menu.selectedCard = rows;
+        menu->selectedCard = rows;
         break;
     }
     /* The states without touch regions. Retail dispatches through a full 29-entry jump table, which armcc
-     * builds only with some of these labels present (without them a compare tree: 604 lines); every such state is
+     * builds only with some of these labels present (without them a compare tree); every such state is
      * listed because which ones the original named cannot be told. */
     case 5:
     case 6:

@@ -43,7 +43,7 @@ const char *fileSectionGetData(void *file, u32 entry, u32 table);
 const char *dataFindKindRecordWithAocOverrides(u32 id, u32 flags);
 void textConvertToGlyphPairs(const char *source, char *destination);
 const char *demonGetRaceLabel(u32 demon, u32 flags);
-void FUN_002a7c80(char *destination, const char *source);
+void __ARM_common_memcpy4_5(char *destination, const char *source);
 const char *aocIndexValueOrDefault(u32 skill);
 f32 fontMeasureTextWidth(const char *text, u32 font, f32 spacing); // declcheck: local (the shared declaration in ui/AnimatedMessage.h does not compile here: cannot overload functions distinguished by return type alone)
 void statusBustUpPortraitRelease(s32 id, u32 kind);
@@ -107,7 +107,7 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanel *panel, const Char
     if (record->demon)
         textConvertToGlyphPairs(demonGetRaceLabel(record->demon, 0), buffer);
     else
-        FUN_002a7c80(buffer, "\x81\x7c\x81\x7c");
+        __ARM_common_memcpy4_5(buffer, "\x81\x7c\x81\x7c");
     asdTextDrawFormatted(panel->race, 2, -1u, 0, 0, buffer);
     panel->raceWidth = (s32)fontMeasureTextWidth(buffer, 2, 0.0f);
 

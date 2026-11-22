@@ -1,4 +1,3 @@
-/* NON_MATCHING: armcc uses different registers for the global pointer and slot loop; the loop structure and stores agree. */
 #include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {
@@ -8,17 +7,18 @@ extern MapTimerBanks *g_vectorQueueWork;
 /* Clears the timer banks and invalidates all pending slots. */
 void mapTimerBanksReset(void)
 {
-    MapTimerBanks *work = g_vectorQueueWork;
-    for (s32 bank = 0; bank < 16; ++bank) {
-        for (s32 entry = 0; entry < 16; ++entry) {
-            work->banks[bank].entries[entry].active = 0;
+    s32 i;
+    s32 entry;
+    for (i = 0; i < 16; ++i) {
+        for (entry = 0; entry < 16; ++entry) {
+            g_vectorQueueWork->banks[i].entries[entry].active = 0;
         }
-        work->banks[bank].count = 0;
+        g_vectorQueueWork->banks[i].count = 0;
     }
-    work->count = 0;
-    for (s32 slot = 0; slot < 32; ++slot) {
-        work->slots[slot].active = 0;
-        work->slots[slot].id = -1;
+    g_vectorQueueWork->count = 0;
+    for (i = 0; i < 32; ++i) {
+        g_vectorQueueWork->slots[i].active = 0;
+        g_vectorQueueWork->slots[i].id = -1;
     }
 }
 

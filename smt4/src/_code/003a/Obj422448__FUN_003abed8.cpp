@@ -70,7 +70,7 @@ int useCounterStart(void);
 int FUN_0029dfc0(...);
 int FUN_0029e0f8(void);
 int FUN_0029dfa8(void);
-int FUN_0029defc(...);
+int gameLoadUnitSnapshot(...);
 int statusPanelSetOpen(s32 open);
 
 /* Per-frame update of the skill list screen: reacts to the menu/cancel/confirm buttons, charges or
@@ -164,7 +164,7 @@ void Obj422448::FUN_003abed8()
             if (help == 0) {
                 return;
             }
-            FUN_0029defc((s16)help, 0);
+            gameLoadUnitSnapshot((s16)help, 0);
             FUN_0020349c(screen->shownSkillId);
             statusPanelSetOpen(1);
             return;

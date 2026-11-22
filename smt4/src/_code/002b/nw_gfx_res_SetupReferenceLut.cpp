@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0013fd7c(unsigned char [8], int, unsigned int);
-int FUN_002a7c80(int *, unsigned char [8]);
+int __ARM_common_memcpy4_5(int *, unsigned char [8]);
 
 /* stack frame of param_2: 2 slot(s), 5 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_0013fd7c. */
-/* Supplied declaration required: FUN_002a7c80. */
+/* Supplied declaration required: __ARM_common_memcpy4_5. */
 
 
 unsigned int nw_gfx_res_SetupReferenceLut(int param_1,unsigned int param_2)
@@ -42,7 +42,7 @@ unsigned int nw_gfx_res_SetupReferenceLut(int param_1,unsigned int param_2)
       temp_v1 = 0;
       temp_v2 = '\0';
       FUN_0013fd7c(temp_v3,param_1,param_2);
-      FUN_002a7c80(&temp_v1,temp_v3);
+      __ARM_common_memcpy4_5(&temp_v1,temp_v3);
       if (temp_v2 == '\0') {
         temp_v0 = 0x80000004;
       }

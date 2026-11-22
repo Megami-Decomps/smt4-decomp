@@ -86,6 +86,23 @@ typedef struct StatusDownState {
 
 extern "C" StatusDownState *g_statusDown;
 
+extern "C" {
+void ifTouchRegionRemove(void);
+void __aeabi_memset4(void *destination, u32 size, s32 value); // declcheck: local (the AEABI word fill has no shared declaration yet)
+}
+
+/* Takes back the screen's touch regions and empties the slots: the three statements the status screen's
+ * switch-tab, open-list, rebuild and destroy functions share. */
+static __inline void statusDownClearTouchRegions(StatusDownState *state)
+{
+    for (s32 i = 0; i < state->touchRegionCount; i++) {
+        ifTouchRegionRemove();
+    }
+    state->touchRegionCount = 0;
+    /* the count where the size was meant: the fill stops halfway through the slots */
+    __aeabi_memset4(state->slots, sizeof(state->slots) / sizeof(state->slots[0]), -1);
+}
+
 typedef char StatusDownStateLayoutCheck[
     offsetof(StatusDownState, sprites) == 0x28 &&
     offsetof(StatusDownState, track) == 0x400 &&

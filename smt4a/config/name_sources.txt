@@ -8867,3 +8867,20 @@
 0052f350 g_uniteMaterialCues4 inferred twin of smt4 g_uniteMaterialCues4 (four-material cue table)
 004cab9c btlRosterMotionSyncStatus inferred synchronizes a roster motion with its unit's status and rebuilds the condition list (w77-f2)
 00230d30 statusDownRebuildTouchRegions inferred twin of smt4 statusDownRebuildTouchRegions (one name for the twins, w77-f2)
+004fefe0 animKeyTableFindKey inferred exact twin of smt4 animKeyTableFindKey
+0036b644 uiSpriteStartFrameSequence inferred exact twin of smt4 uiSpriteStartFrameSequence
+00357ea0 btlTargetSelectCalc evidence registered by FUN_00363990 as the job "btlTargetSelect Calc"
+004fbd30 btlReflectCreateKind4 inferred queues a reflect action of kind 4 with no payload, Apocalypse's btlReflectCreateKind3 (w78-o4)
+004aa0b0 btlUiPositionRequestAdd inferred adds a position request to a free or matching row of the battle UI's position table (w78-o4)
+0046ebf0 aocHasType39Record inferred tests whether the add-on content system holds a type-39 record for a key (w78-o4)
+004a6144 bibleAnalyzeDrawRow inferred twin of smt4 bibleAnalyzeDrawRow (same source)
+0013e38c textIconDraw inferred twin of smt4 textIconDraw (same source)
+0013cb90 frameTexHdrCaptureLeft inferred twin of smt4 frameTexHdrCaptureLeft: same checks of FrameTexWorkA::hdr (capturedLeft) and capture (w78-o3)
+0013cd7c frameTexHdrCaptureRight inferred twin of smt4 frameTexHdrCaptureRight: the right-screen capture (capturedRight; w78-o3)
+004b8f18 aocTransitionUpdate inferred near twin of smt4 aocTransitionUpdate (shared.py; w78-o3)
+0064758c g_nnExpHeap inferred size:0x58 the expanding heap FUN_005116f4 constructs (Obj5583d0), IV's g_nnExpHeap
+006475e4 g_nnMappedMemoryBlock inferred size:0x1c the MappedMemoryBlock FUN_005116f4 constructs next to g_nnExpHeap
+001a90f0 __ARM_common_memcpy4_5 inferred armcc's 5-byte copy helper (word then byte, 0x14 bytes), called for a strcpy of a 4-character literal as __ARM_common_memcpy4_7 is for 7 (w78-f1)
+00467040 _ZN9Obj55c3ecC1Ev evidence the constructor stores _ZTV9Obj55c3ec+8 (retail relocation); Apocalypse's twin class of IV's Obj421f54 (classes/Obj55c3ec.h); source made a member by build/w78_members.py
+00514bd4 _ZN9Obj5583d0D1Ev evidence slot 0 of _ZTV9Obj5583d0 (word at 0x5583d8 = 0x514bd4), registered by the static initialiser FUN_005116f4; near twin of smt4 _ZN9Obj420eecD1Ev (C form, as IV's)
+00466cac _ZN13Obj55c3ecListC1Ev inferred exact twin of smt4 _ZN13Obj421f54ListC1Ev, called by _ZN9Obj55c3ecC1Ev for its list; source made a member by build/w78_members.py

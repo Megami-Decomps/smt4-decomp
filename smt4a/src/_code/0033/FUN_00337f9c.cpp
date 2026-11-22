@@ -3,7 +3,7 @@
 #include "gfx/TiledIndexMesh.h"
 
 extern "C" {
-TiledIndexMesh *FUN_002ce938(s32 rows, s32 verticesPerRow, s32 trianglesPerRow, u32 flags);
+TiledIndexMesh *FUN_002ce938(s32 rows, s16 verticesPerRow, s16 trianglesPerRow, u32 flags);
 
 TiledIndexMesh *FUN_00337f9c(s32 rows, s32 columns, s32 trianglesPerCell, s16 vertexStride,
                            const u16 *pattern, u32 flags)

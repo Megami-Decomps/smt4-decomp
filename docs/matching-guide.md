@@ -168,6 +168,10 @@ difference a register tie-break.
   through ip: `g_gfxReleaseCallback` takes the block as its fourth argument (`DriverTextureRelease`), which made
   `blockOpen` IDENTICAL in both games (wave 77).
 - A flag parameter that retail tests before storing it into a byte field is `bool` (smt4a `FUN_0041dbdc`, wave 77).
+- A halfword field one caller loads with `ldrsh` and another with `ldrh` can be one `s16` field: the second passes it
+  to a `u16` parameter. The analyze list's `BibleAnalyzeListEntry::id` (smt4a `bibleAnalyzeDrawMenu`, `ldrsh`) reaches
+  `nkmBaseGetRecord`, defined with `u16`, through a `u32` declaration in `NkmBaseRecordA.h`, which costs
+  `Obj55c8d0::FUN_004a4658` 2 lines until that declaration follows the definition (wave 78).
 - A by-value struct of four floats travels in `s0`-`s3` in field order wherever it is listed, so building it in the
   caller does not reproduce a schedule that only an interleaved scalar order matches: `stereoCameraSetPerspective`'s
   callers stay closer with scalar arguments (wave 74).
@@ -208,6 +212,11 @@ difference a register tie-break.
 - A switch case whose jump-table entry points into another case's tail is a fall-through
   (`case A: …; /* fall through */ case B:`).
 - Two identical branches that retail cross-jumps come from one inline helper called in both.
+- Tests of one value written as separate `if (set == 0) {…} if (set == 1) {…} if (set == 2) {…}` blocks compile to
+  the same compare chain as an else-if chain, but cross-jumping keeps the first copy of the blocks' shared tail where
+  the chain keeps the last: retail branching from the later blocks into the first one's tail is the sign. The text
+  icon callbacks smt4 `FUN_00109b08` and smt4a `FUN_0013e38c` are IDENTICAL with separate ifs and 172 lines off as a
+  chain (wave 78).
 - An early-return arm whose final call retail cross-jumps into the other path's call to the same
   function (a `b` into the other arm's `bl`) is an if/else with the call in both arms, the early
   condition joined into the test: `if (stockOnly == 0 && row < 1) { …; f(unit, index, 0); } else { …;
@@ -327,6 +336,9 @@ difference a register tie-break.
   named locals declared in retail's pool order fix the order of constants.
 - Chained assignment (`current[i] = maximum[i] = value;`) stores one value through both pointers the
   way retail does; separate statements reload or reorder it.
+- A function that returns a moved copy of a by-value struct parameter assigns into the parameter and copies it out
+  whole (`first.x = …; first.z = …; *result = first;`), not field by field into the result: smt4/smt4a
+  `mapResolveCircleOverlapXZ` (wave 78).
 - Reading a pointer field before a store that may alias it is a different program, not scheduling: after a store
   through another pointer (a struct copy's word stores alias anything), armcc must reload the field, so retail
   loading it before the store means the source read it first. `const Vec3f *target = key->target;` before
@@ -539,6 +551,9 @@ asks for.
   100.0f)` stored into a `u8` field, but nothing shows a halfword (retail's signed `vcvt` only shows a signed cast), so
   the review kept `(s32)` and `NON_MATCHING`. Likewise a `memset` of a one-word field of unknown type, chosen because
   the byte fill orders its store before a later load (smt4 `FUN_003c7f20`, `FUN_0021eda8`), is steering (wave 76).
+- The status screen's touch-region reset (remove every region, zero the count, fill the slots with -1) is
+  `statusDownClearTouchRegions` (`status/StatusDown.h`, `StatusDownA.h`): six functions per game use it and stay or
+  become IDENTICAL (`statusDownRebuildTouchRegions` in both games, wave 78).
 - AocMenu's step change (store the step, clear the substep, delete the window) is `aocMenuChangeStep` in
   `classes/AocMenu.h`, the helper `AocMenu::runMainProcess` uses at six sites in each game; called in place of the
   open-coded statements it made smt4a `aocMenuUpdate` IDENTICAL (wave 57).
@@ -654,6 +669,9 @@ More on classes, constructors and destructors is in [C++](style-and-naming.md#c)
   object at an address: both name the image's global (`g_asdRomPathFormat`) and pass it to `__2sprintf`
   from `runtime/Stdio.h` (`AsdSDK/Source/Sys/File/AsdLoadPath.h`), keeping `<stdio.h>` `sprintf` for the
   arm whose format is a plain pointer.
+  The same holds when the other user is far away in the image (no translation unit): `effMenuBrowserStep`'s prologue
+  comes out right with unit-local `static const char` formats, but `formattedTextCopyLabel` names the same two words, so
+  the review kept `__2sprintf` with the image's globals (wave 78).
 - **`__2snprintf` is armlib's `snprintf`** (smt4 0x2522f8, smt4a 0x1028b8, 0x36-byte Thumb): write
   `snprintf(buf, sizeof(buf), fmt, ...)` with `<stdio.h>`, as for `sprintf`; a local prototype of the placeholder
   leaves the prologue and argument scheduling off (smt4 `effectTextureRequestsPump`, smt4a `FUN_0036f0a0` and three
@@ -793,6 +811,9 @@ register tie-breaks. Fix the source; don't change the compiler per unit.
   IPC request stubs match as direct `cmd->header = …; cmd->words[i] = …;` stores (descriptors through
   `ipcMappedBufferDescriptor`), often with softvfp: most of smt4's request stubs at 0x351e54-0x3522f8
   and their smt4a twins at 0x4264d0-0x426a1c carry it, and their forwarders take the twin's flags.
+  Not applied: `asdCmdBufferAppendCopyTransfer`/`asdCmdBufferAppendTextureTransfer` (both games) go from 107/54-56 to
+  39/10-18 lines with softvfp and contain no VFP instruction, but nothing next to them is proven with the flag and the
+  large functions right after them (smt4 0x143280, 0x144228) use VFP registers, so there is no run to extend (wave 78).
 
 ### `--multifile`
 
@@ -837,3 +858,5 @@ its own cflags ignored (the wave-49 IPC stubs all come back IDENTICAL with `twin
 - A six-register prologue with `mov r5, r0` before `mov r4, r1` and a load through r5
   (smt4 `FUN_002072f0`, `FUN_001b18f0`; smt4a `FUN_002ce730`, `FUN_00290978`, `FUN_00241874`). Helpers,
   `const` parameters, local copies and multifile did not move it; don't spend long on it.
+  The counter adders had it too and matched once an inner inline helper was written in place, its statements
+  repeated (smt4a `gameCounterAddSaturating`, `FUN_002c5214`; smt4 `FUN_002021b4`; wave 78): try that before giving up.

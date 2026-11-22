@@ -1,15 +1,9 @@
 /* NON_MATCHING: register allocation differs (slide in r7 rather than r4, the tab-flag base folds +190), retail keeps slide + 1 in r9 from before the loop and computes the row base only when rows are visible; the draw sequence is the same. */
 #include "common.h"
 #include <stdio.h>
+#include "bible/BibleAnalyzeWork.h"
 
 extern "C" {
-
-/* One list row (0x20 bytes): its id is the short at 4. */
-typedef struct AnalyzeRow {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ s16 id;
-    /* 0x06 */ u8 unk06[0x1A];
-} AnalyzeRow;
 
 /* A text layout record: a position at 8/10 and a pointer to the box size. */
 typedef struct AnalyzeTextBox {
@@ -18,21 +12,6 @@ typedef struct AnalyzeTextBox {
     /* 0x0A */ s16 y;
     /* 0x0C */ s16 *size;
 } AnalyzeTextBox;
-
-/* The analyze screen's work block (only the fields drawn here). */
-typedef struct AnalyzeWork {
-    /* 0x000 */ u8 unk000[0x14];
-    /* 0x014 */ s32 mode;               /* 2: a row is selected */
-    /* 0x018 */ u8 unk018[8];
-    /* 0x020 */ u8 list[4];             /* the scroll list state */
-    /* 0x024 */ s32 visibleRows;
-    /* 0x028 */ s32 rowCount;
-    /* 0x02C */ u8 unk02c[0x9C];
-    /* 0x0C8 */ u8 panel[0x4CC];
-    /* 0x594 */ s32 slide;              /* the panel's slide-in offset, 0..256 */
-    /* 0x598 */ u8 unk598[0x10];
-    /* 0x5A8 */ AnalyzeRow rows[1];
-} AnalyzeWork;
 
 typedef struct AnalyzeWorkView {
     u8 unk0000[0xA5B4];
@@ -54,7 +33,7 @@ s32 textMeasureOnLayer(const char *text, s32 mode);
 void drawTextAtSnappedRectangle(void *panel, f32 x, f32 y, s32 a, s32 b, const char *text, f32 scale, f32 c, f32 d);
 s32 FUN_0029e924(void *list);
 s32 flaggedEntryGetValueByState(void *list);
-void FUN_003aa044(AnalyzeWork *work, s32 index, s32 selected, s32 id);
+void bibleAnalyzeDrawRow(AnalyzeWork *work, s32 index, s32 selected, s32 id);
 void scrollMenuDrawLayer(AnalyzeWork *work, s32 step);
 
 /* Draws the analyze panel: the slid-in frame, the two tab headers, the target's name centred in
@@ -92,13 +71,13 @@ void bibleAnalyzeDrawMenu(AnalyzeWork *work)
 
     for (s32 i = 0; i < visible; i++) {
         if (work->mode != 2 || flaggedEntryGetValueByState(work->list) != i) {
-            FUN_003aa044(work, i + 1, 0, rows[first + i].id);
+            bibleAnalyzeDrawRow(work, i + 1, 0, rows[first + i].id);
         }
     }
     if (work->rowCount > 0 && work->mode == 2) {
         s32 id = work->rows[flaggedEntryGetValueByState(work->list) + first].id;
 
-        FUN_003aa044(work, flaggedEntryGetValueByState(work->list) + 1, 1, id);
+        bibleAnalyzeDrawRow(work, flaggedEntryGetValueByState(work->list) + 1, 1, id);
     }
     scrollMenuDrawLayer(work, slide + 1);
 }

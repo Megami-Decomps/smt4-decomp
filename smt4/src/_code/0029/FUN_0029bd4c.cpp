@@ -3,8 +3,6 @@
 
 extern "C" {
 
-int ifTouchRegionRemove(void);
-void __aeabi_memset4(void *block, u32 size, u32 value);
 
 /* If the status screen is up, restarts its timer, moves it to state 2, removes its touch regions and clears its slot block. */
 void FUN_0029bd4c(void)
@@ -12,7 +10,6 @@ void FUN_0029bd4c(void)
     StatusDownState *screen = g_statusDown;
     StatusDownState *status;
     s32 previous;
-    s32 i;
 
     if (screen->track.state == 0) {
         return;
@@ -25,11 +22,7 @@ void FUN_0029bd4c(void)
     status->track.previous = previous;
     screen->nextState = 0;
     screen->tab = 0;
-    for (i = 0; i < status->touchRegionCount; i++) {
-        ifTouchRegionRemove();
-    }
-    status->touchRegionCount = 0;
-    __aeabi_memset4(status->slots, 0x29, 0xFFFFFFFF);
+    statusDownClearTouchRegions(status);
 }
 
 } /* extern "C" */

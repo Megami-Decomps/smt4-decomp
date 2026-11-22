@@ -53,7 +53,7 @@ void FUN_00233240(void *animation, s32 channel);
 s32 gameGetFlagByte12e8(void);
 s32 flaggedValueHolderGetTotal(void *holder);
 s32 FUN_0029e0f8(void);
-void FUN_0029defc(s16 id, s32 flag);
+void gameLoadUnitSnapshot(s16 id, s32 flag);
 void FUN_0029dfc0(s32 id);
 void statusPanelSetOpen(s32 open);
 void objectWordsClear(void *words);
@@ -109,7 +109,7 @@ void Obj4223f8::updateBrowse()
         if (panelOpen != 0 && current != shown) {
             ui->shownDevil = shown;
             if (shown != 0) {
-                FUN_0029defc(shown, 1);
+                gameLoadUnitSnapshot(shown, 1);
                 statusPanelSetOpen(1);
             } else {
                 FUN_0029dfc0(0);

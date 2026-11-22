@@ -6256,3 +6256,16 @@
 002aff70 debugQuadVertex inferred near twin of smt4a debugQuadVertex (w77-f1)
 002f82ac effMenuBrowserStep inferred steps the effect menu's file browser (w77-f1)
 002076b8 vectorScratchCatmullRom inferred Catmull-Rom evaluation on the vector scratch slots (w77-f1)
+0023d274 animKeyTableFindKey inferred finds the key of a group in an AnimKeyTable at or after a frame (gfx/AnimKeyTable.h; w78-o1)
+002eb76c uiSpriteStartFrameSequence inferred selects a delimiter-separated frame sequence of a UiSpriteState and restarts it (w78-o2)
+002e0730 btlTargetSelectCalc evidence registered by btlTargetSelectCreate as the job "btlTargetSelect Calc"
+0029defc gameLoadUnitSnapshot inferred builds the game data's unit snapshot from the player or a saved unit record (w78-o2)
+002e1744 characterPanelStartScript inferred starts a ready character-panel script and advances the panel's transition (w78-o2)
+003ddae8 btlReflectCreateKind3 inferred queues a reflect action of kind 3 with no payload (inlined by FUN_00282820; w78-o4)
+00311fc4 scrBtlUnitHasSkillCategory inferred exact source of smt4a scrBtlUnitHasSkillCategory (w78-o4)
+003aa044 bibleAnalyzeDrawRow inferred draws one row of the compendium analyze list; bibleAnalyzeDrawMenu calls it per row (w78-f2)
+00109b08 textIconDraw inferred the text system's icon callback: draws an icon of a set and returns its width (w78-f2)
+0028dcf4 messageWindowSetupLayoutSprites inferred sets up a message window's layout sprites by window kind (w78-f1)
+0038a478 aocBoardDraw inferred the AOC board's draw job ("Aoc board UP L"/"UP R", aocBoardCreateDrawJobs; w78-f1)
+0019dde4 mapSingleModelInitialize inferred sets up the single map model (MapSingleModelWork) from the game state's event block (w78-o1)
+002a7c80 __ARM_common_memcpy4_5 inferred exact twin of smt4a __ARM_common_memcpy4_5

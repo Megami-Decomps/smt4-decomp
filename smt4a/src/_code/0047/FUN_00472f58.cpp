@@ -19,11 +19,11 @@ extern "C" void FUN_00472f58(AocBoardWork *board, u32 request, u8 mode, u32 cont
     board->owner.control.parameter = context;
     board->owner.control.frame = 0;
     board->owner.enabled = mode;
-    board->owner.control.resource = reinterpret_cast<u32>(FUN_00473754(g_aocMain, request, board->owner.unk014));
+    board->owner.control.resource = reinterpret_cast<u32>(FUN_00473754(g_aocMain, request, board->owner.lines));
     board->setTransitionReady(false);
     if (!(board->owner.control.flags & 0x10)) {
         board->owner.control.flags |= 0x10;
-        board->owner.unk418 = 0;
+        board->owner.spinnerFrame = 0;
         board->owner.control.process = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_005271ac), 4, 0, 0, aocBoardUpdateAnimation, 0, reinterpret_cast<u32>(board));
         taskCreateDraw(DAT_0052719c, 0x87, 1, 0, FUN_00472820, 0, board, board->owner.control.process);
         taskCreateDraw(DAT_0052718c, 0xE3, 1, 0, FUN_00472820, 0, board, board->owner.control.process);

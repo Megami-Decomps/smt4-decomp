@@ -6395,3 +6395,16 @@
 002aff70 debugQuadVertex
 002f82ac effMenuBrowserStep
 002076b8 vectorScratchCatmullRom
+0023d274 animKeyTableFindKey
+002eb76c uiSpriteStartFrameSequence
+002e0730 btlTargetSelectCalc
+0029defc gameLoadUnitSnapshot
+002e1744 characterPanelStartScript
+003ddae8 btlReflectCreateKind3
+00311fc4 scrBtlUnitHasSkillCategory
+003aa044 bibleAnalyzeDrawRow
+00109b08 textIconDraw
+0028dcf4 messageWindowSetupLayoutSprites
+0038a478 aocBoardDraw
+0019dde4 mapSingleModelInitialize
+002a7c80 __ARM_common_memcpy4_5

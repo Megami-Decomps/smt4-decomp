@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a7c80(...);
+int __ARM_common_memcpy4_5(...);
 
 int aocDataTable23GetEntry(...);
 int FUN_0024f24c(...);
@@ -75,7 +75,7 @@ extern int FUN_00276264(int);
 extern int FUN_0027d968(void);
 extern unsigned int *dataTable2fSub1GetRecord(int);
 /* Supplied declaration required: FUN_00298dc8. */
-/* Supplied declaration required: FUN_002a7c80. */
+/* Supplied declaration required: __ARM_common_memcpy4_5. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: gameFlagIsSet. */
 extern unsigned int FUN_002df80c(int);
@@ -631,7 +631,7 @@ LAB_0027bef0:
         if ((temp_v31 != 0) && (temp_v1 = 0, 0 < DAT_00447a2c)) {
           do {
             if (*(unsigned int *)(temp_v1 * 0x178 + 0x4a1390) == temp_v12) {
-              FUN_002a7c80(temp_v1 * 0x178 + 0x4a13d2,&DAT_00447a30);
+              __ARM_common_memcpy4_5(temp_v1 * 0x178 + 0x4a13d2,&DAT_00447a30);
               break;
             }
             temp_v1 = temp_v1 + 1;

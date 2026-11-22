@@ -178,6 +178,23 @@ static ReflectAction *reflectCreateKind24(s32 slot, u32 extra, u32 first, u32 se
     return entry;
 }
 
+/* Copy of btlReflectCreateKind3 (smt4: an action of kind 3 with no payload; the entry stays in r0), inlined by FUN_00282820. */
+static ReflectAction *reflectCreateKind3(s32 id, u32 options)
+{
+    ReflectAction *entry = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, options);
+    entry->kind = 3;
+    return entry;
+}
+
+/* Apocalypse's copy of the same builder, btlReflectCreateKind4 (kind 4), inlined by btlQueueMessageTableReflectAction and
+ * FUN_004fea44. */
+static ReflectAction *reflectCreateKind4(s32 id, u32 options)
+{
+    ReflectAction *entry = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, options);
+    entry->kind = 4;
+    return entry;
+}
+
 /* Apocalypse's copies, of btlReflectCreateKind2b (kind 0x2b), btlReflectQueueKind44 (kind 0x2c) and btlReflectCreateKind2e,
  * the same builders under that game's kind numbers. */
 static void reflectCreateKind2b(s32 id, u32 flags, u32 target, u32 parameter, u32 value, s32 enabled)

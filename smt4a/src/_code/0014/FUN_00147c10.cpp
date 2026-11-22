@@ -1,4 +1,6 @@
-/* NON_MATCHING: register allocation only: the instruction stream is the same (three inlined bucket sorts), but retail keeps the group in sl, the list in r4 and the bucket array in r5 where this build uses r9, r4 and sl. */
+/* NON_MATCHING: register allocation only: the instruction stream is the same (three inlined bucket sorts), but retail keeps
+ * the bucket array in r5, the object in r6 and the bucket index in r9 where this build uses r9, r5 and r8, and it sets up
+ * the re-insert's arguments r0 first. */
 #include "common.h"
 #include <stddef.h>
 
@@ -80,7 +82,7 @@ static __inline void sortByPriority(ObjectList *list)
     for (s32 i = 0; i < 128; i++) {
         while (buckets[i].count != 0) {
             PriorityLink *node = buckets[i].first;
-            nw_ut_internal_LinkListImpl_erase_2BAE30(&buckets[i], node);
+            nw_ut_internal_LinkListImpl_erase_2BAE30(&buckets[i], buckets[i].first);
             nw_ut_internal_LinkListImpl_insert(&list->count, &list->first, node);
         }
     }

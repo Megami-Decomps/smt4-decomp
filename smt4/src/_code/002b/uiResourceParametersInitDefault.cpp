@@ -59,8 +59,8 @@ void uiResourceParametersInitDefault(DrawParameterOwner* owner)
     owner->words[4] = 0;
     owner->enabled = 1;
     owner->dirty = 1;
-    owner->unk41C = 0;
-    owner->unk418 = 0;
+    owner->text = 0;
+    owner->spinnerFrame = 0;
     drawParameterBlockClear(&owner->parameters);
     paramsInit(&owner->parameters, sDefaultPacketA, sizeof(sDefaultPacketA), sDefaultPacketB, sizeof(sDefaultPacketB),
                sDefaultPacketC, sizeof(sDefaultPacketC), NULL, 0, sDefaultPacketD, sizeof(sDefaultPacketD));

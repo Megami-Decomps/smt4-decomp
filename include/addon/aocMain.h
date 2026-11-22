@@ -112,6 +112,15 @@ s32 objHasFlagBit16(AocMain *main);
 void aocMenuSetReadyFlag(AocMain *owner, u8 ready);
 }
 
+/* Clears the menu's request bits 4-6 and reports whether bit 4 (cancelled or failed) was set (IV's aocTransitionUpdate,
+ * Apocalypse's aocTransitionUpdate and FUN_004d7e20). */
+static __inline u32 aocMainTakeCancel(void)
+{
+    u32 flags = g_aocMain->flags;
+    g_aocMain->flags = flags & ~0x70U;
+    return (flags & 0x10) >> 4;
+}
+
 /* The display block that AOC drives (Shin Megami Tensei IV layout). */
 typedef struct AocDisplay {
     /* 0x0000 */ u8 unk0000[0x450C];
