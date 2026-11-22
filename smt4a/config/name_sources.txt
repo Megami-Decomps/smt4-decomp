@@ -7562,3 +7562,5 @@
 0041f4c0 saveLoadUiPrepareSelection inferred readiness gates, touch rebuild, help text, enters mode 13
 003f29c0 btlPopFilteredCommand inferred pops the next pending command that passes the mode/status filter
 003ebca0 btlHasFilteredCommand inferred scans the pending commands with the same filter
+0055c3ec _ZTV9Obj421f54 inferred same Obj421f54 sound-heap constructor as IV; native address point 0x55c3f4 (+8)
+00466cac _ZN13Obj421f54ListC1Ev inferred exact IV twin at 0x380298: complete constructor of the frame-heap list at owner+0x10

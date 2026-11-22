@@ -7141,7 +7141,7 @@
 0x00466bd4 sndChannelLfoReset between
 0x00466c00 FUN_00466c00 between
 0x00466c3c nw_snd_internal_FrameHeap_Alloc name
-0x00466cac nw_snd_internal_FrameHeap_FrameHeap_sub_object_380298 name
+0x00466cac _ZN13Obj421f54ListC1Ev library
 0x00466cc4 nw_snd_internal_FrameHeap_FrameHeap_sub_object_3802B0 name
 0x00466d04 obj118Reset2 between
 0x00466d28 FUN_00466d28 between

@@ -7,3 +7,6 @@
 thumb 0x2e2000 0x311800 OnlineCore source paths in the image; Thumb -Ospace block absent from smt4
 # The CTR-SDK's crt0 entry point (smt4's twin): no frame, a run of calls ending in a tail `b svcExitProcess`.
 arm 0x100000 0x100024 CTR-SDK-crt0 image entry point; calls the SDK's init routines and tail-branches to svcExitProcess
+
+# FrameHeap subobject constructor between the two named FrameHeap routines.
+arm 0x466cac 0x466cc4 NintendoWare-snd FrameHeap subobject: initializes its handle and circular section list; exact IV twin 0x380298

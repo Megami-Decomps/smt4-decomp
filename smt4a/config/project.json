@@ -151904,12 +151904,12 @@
     },
     {
       "address": "0x466cac",
-      "function": "nw_snd_internal_FrameHeap_FrameHeap_sub_object_380298",
+      "function": "_ZN13Obj421f54ListC1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0046/nw_snd_internal_FrameHeap_FrameHeap_sub_object_380298.o",
+      "object": "build/obj/_code/0046/Obj421f54List__Obj421f54List.o",
       "size": 24,
-      "source": "src/_code/0046/nw_snd_internal_FrameHeap_FrameHeap_sub_object_380298.cpp",
-      "target": "orig/target/_code/0046/nw_snd_internal_FrameHeap_FrameHeap_sub_object_380298.o",
+      "source": "src/_code/0046/Obj421f54List__Obj421f54List.cpp",
+      "target": "orig/target/_code/0046/Obj421f54List__Obj421f54List.o",
       "thumb": false
     },
     {

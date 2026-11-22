@@ -297859,13 +297859,13 @@
       "target_path": "orig/target/_code/0046/nw_snd_internal_FrameHeap_Alloc.o"
     },
     {
-      "base_path": "build/obj/_code/0046/nw_snd_internal_FrameHeap_FrameHeap_sub_object_380298.o",
+      "base_path": "build/obj/_code/0046/Obj421f54List__Obj421f54List.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "nw_snd_internal_FrameHeap_FrameHeap_sub_object_380298",
+            "name": "_ZN13Obj421f54ListC1Ev",
             "size": 24,
             "vram": "0x466cac"
           }
@@ -297873,10 +297873,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0046/nw_snd_internal_FrameHeap_FrameHeap_sub_object_380298.cpp"
+        "source_path": "src/_code/0046/Obj421f54List__Obj421f54List.cpp"
       },
-      "name": "_code/0046/nw_snd_internal_FrameHeap_FrameHeap_sub_object_380298",
-      "target_path": "orig/target/_code/0046/nw_snd_internal_FrameHeap_FrameHeap_sub_object_380298.o"
+      "name": "_code/0046/Obj421f54List__Obj421f54List",
+      "target_path": "orig/target/_code/0046/Obj421f54List__Obj421f54List.o"
     },
     {
       "base_path": "build/obj/_code/0046/nw_snd_internal_FrameHeap_FrameHeap_sub_object_3802B0.o",
