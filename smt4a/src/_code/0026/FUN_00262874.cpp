@@ -16,7 +16,7 @@ int eventQueueAddUnique(...);
 int uiSpriteSelectAnim(...);
 int partyFindSlotById(...);
 int FUN_0023f900(void);
-int FUN_002a5e7c(...);
+int compendiumRegisterPartyDemon(...);
 int FUN_002cb84c(void);
 int partyPanelRefreshItemPreview(void);
 int sysMemClear(...);
@@ -200,7 +200,7 @@ extern int listCursorGetRowIfUnblocked(int);
 extern int compendiumEntryIsRegistered(unsigned short);
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002a5cf4. */
-/* Supplied declaration required: FUN_002a5e7c. */
+/* Supplied declaration required: compendiumRegisterPartyDemon. */
 /* Supplied declaration required: skillApplyToParty. */
 /* Supplied declaration required: FUN_002a6a24. */
 /* Supplied declaration required: statusDownRestartTransition. */
@@ -3021,7 +3021,7 @@ LAB_0026700c:
             *(unsigned int *)(temp_v1 + 0xfc4) = 0;
             *(unsigned int *)(temp_v1 + 0xfc8) = (unsigned int)*(unsigned short *)(temp_v14 + 100);
             if (temp_v4 == 0) {
-              FUN_002a5e7c(*(unsigned short *)(temp_v14 + 0x62));
+              compendiumRegisterPartyDemon(*(unsigned short *)(temp_v14 + 0x62));
             }
             gameCounterAddSaturating(0x26,1);
             FUN_0035dfc0(*(unsigned short *)(temp_v14 + 0x62));

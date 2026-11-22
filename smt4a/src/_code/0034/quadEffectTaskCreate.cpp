@@ -1,4 +1,4 @@
-/* NON_MATCHING: native pointer/word arguments recovered; instruction scheduling remains under verification. */
+/* NON_MATCHING: 83 lines: retail leaves the task unset (no NULL default) for unknown kinds, reloads config->kind after the clear (an unused load) and keeps config in r5 and the extra record in r6 (swapped here). */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Effect/ParticleCreate.h"
 
@@ -50,7 +50,7 @@ void *taskCreate(TaskFunc update, TaskFunc phase0, TaskFunc phase1, TaskFunc pha
                  TaskFunc destroy, s32 workSize, s32 listIndex, u32 priority, s32 clearWork);
 void sysMemClear(void *block, s32 size);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
-void FUN_00213d1c(QuadEffectTask *task);
+void FUN_00213d1c(QuadEffectTask *effect, const QuadEffectTask *source);
 
 /* Creates the quad effect task: its update routines depend on the config's kind. Sets up the
  * four colored corners, copies the caller's records in and starts it. */
@@ -59,18 +59,20 @@ QuadEffectTask *quadEffectTaskCreate(u32 owner, const void *base, const void *ex
 {
     const u8 *extra = static_cast<const u8 *>(extraData);
     QuadEffectTask *task = NULL;
-    u8 kind = config->kind;
     u32 list = 3;
-
-    if ((config->flags & 2) != 0 || kind == 3 || kind == 1) {
+    if ((config->flags & 2) != 0 || config->kind == 3 || config->kind == 1) {
         list = 4;
     }
-    if (kind == 0) {
+    switch (config->kind) {
+    case 0:
         task = static_cast<QuadEffectTask *>(taskCreate(FUN_002129b8, FUN_00238490, NULL, NULL, destroy, 0x3F0, list, 0, 0));
-    } else if (kind == 1) {
+        break;
+    case 1:
         task = static_cast<QuadEffectTask *>(taskCreate(FUN_002129b8, NULL, FUN_00237dd0, NULL, destroy, 0x3F0, list, 0, 0));
-    } else if (kind == 3) {
+        break;
+    case 3:
         task = static_cast<QuadEffectTask *>(taskCreate(FUN_002129b8, NULL, NULL, FUN_00237dd0, destroy, 0x3F0, list, 0, 0));
+        break;
     }
     if (task != NULL) {
         sysMemClear(task, 0x3F0);
@@ -107,7 +109,7 @@ QuadEffectTask *quadEffectTaskCreate(u32 owner, const void *base, const void *ex
         task->value268 = value268;
         task->unk2d0 = 0;
         task->owner = owner;
-        FUN_00213d1c(task);
+        FUN_00213d1c(task, task);
         task->ownerSlot = ownerSlot;
         task->flag = index;
         task->timeB = time;

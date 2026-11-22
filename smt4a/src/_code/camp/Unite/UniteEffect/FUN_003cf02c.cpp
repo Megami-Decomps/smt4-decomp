@@ -26,7 +26,7 @@ int padQueryLogicalKey(...);
 int sysPlaySe(...);
 int dataTable01GetRecordWithAocOverride(...);
 int ptrListRemoveClearOwner(...);
-int FUN_001fc348(...);
+int materialMergeApplyTextureTransform(...);
 int titleRestartSlotState3(...);
 int scrScriptProcessStartEntry(...);
 int libc_strcpy(...);
@@ -92,7 +92,7 @@ extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_0019eb14. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: slotSetRequest. */
-/* Supplied declaration required: FUN_001fc348. */
+/* Supplied declaration required: materialMergeApplyTextureTransform. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: titleRestartSlotState3. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -575,20 +575,20 @@ LAB_003cf9bc:
       *(unsigned int *)(temp_v2 + 0x3c) = *(unsigned int *)(temp_v2 + 0x2c);
       FUN_0040c190(temp_v2 + 0x38);
       FUN_003d2a00(&LAB_003d009c);
-      FUN_001fc348(temp_v2 + 0x38);
+      materialMergeApplyTextureTransform(temp_v2 + 0x38);
     }
     if (*(short *)(temp_v2 + 0x1e) == 3) {
       if (*(int *)(temp_v2 + 8) == 0xa0) {
         *(unsigned int *)(temp_v2 + 0x3c) = *(unsigned int *)(temp_v2 + 0x2c);
         FUN_0040c190(temp_v2 + 0x38);
         FUN_003d2a00(&LAB_003d009c);
-        FUN_001fc348(temp_v2 + 0x38);
+        materialMergeApplyTextureTransform(temp_v2 + 0x38);
       }
       if (*(int *)(temp_v2 + 8) == 0x11d) {
         *(unsigned int *)(temp_v2 + 0x3c) = *(unsigned int *)(temp_v2 + 0x30);
         FUN_0040c190(temp_v2 + 0x38);
         FUN_003d2a00(&LAB_003d00a8);
-        FUN_001fc348(temp_v2 + 0x38);
+        materialMergeApplyTextureTransform(temp_v2 + 0x38);
       }
     }
     if (*(short *)(temp_v2 + 0x1e) == 4) {
@@ -596,19 +596,19 @@ LAB_003cf9bc:
         *(unsigned int *)(temp_v2 + 0x3c) = *(unsigned int *)(temp_v2 + 0x2c);
         FUN_0040c190(temp_v2 + 0x38);
         FUN_003d2a00(&LAB_003d009c);
-        FUN_001fc348(temp_v2 + 0x38);
+        materialMergeApplyTextureTransform(temp_v2 + 0x38);
       }
       if (*(int *)(temp_v2 + 8) == 0x118) {
         *(unsigned int *)(temp_v2 + 0x3c) = *(unsigned int *)(temp_v2 + 0x30);
         FUN_0040c190(temp_v2 + 0x38);
         FUN_003d2a00(&LAB_003d00a8);
-        FUN_001fc348(temp_v2 + 0x38);
+        materialMergeApplyTextureTransform(temp_v2 + 0x38);
       }
       if (*(int *)(temp_v2 + 8) == 0x168) {
         *(unsigned int *)(temp_v2 + 0x3c) = *(unsigned int *)(temp_v2 + 0x34);
         FUN_0040c190(temp_v2 + 0x38);
         FUN_003d2a00(&LAB_003d00b4);
-        FUN_001fc348(temp_v2 + 0x38);
+        materialMergeApplyTextureTransform(temp_v2 + 0x38);
       }
     }
     break;

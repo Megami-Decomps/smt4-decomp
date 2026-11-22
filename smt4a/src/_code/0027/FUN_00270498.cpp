@@ -1,5 +1,7 @@
 #include "ui/PartyPanelStateA.h"
-/* NON_MATCHING: near (206 rows against 208): same flow, calls and bit extraction (resultPacked is read as one 64-bit word); retail keeps the two parent records in a stack pair with sl/r8 register choices where ours uses fp, takes the mode 0x12 call out of line after the common tail, and tests the FUN_004dc3a8 result with an extra cmp */
+/* NON_MATCHING: 119 lines off: both fusion calls take (unite, parent, parent, &packed) and retail tests each result
+ * in its own arm; retail still saves one register fewer (48-byte frame, zero in r8 rather than fp), reads the
+ * packed result with one ldm and copies the result record into r6 for the merge call. */
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef short s16;
@@ -42,7 +44,7 @@ s32 unitRecomputeDerivedStats(void *record);
 s32 recordMergeByteMasks(UniteWorkA *unite, SlotRecord *a, SlotRecord *b, s32 flag, void *record);
 s32 wordAt1B0Clear(UniteWorkA *unite);
 s32 FUN_004db650(UniteWorkA *unite, SlotRecord *a, SlotRecord *b, u64 *packed);
-s32 FUN_004dc3a8(void);
+s32 FUN_004dc3a8(UniteWorkA *unite, SlotRecord *a, SlotRecord *b, u64 *packed);
 s32 getUnlockedSlotCount(void *record);
 
 /* Finds the party record whose id is `id` (first match over the free-slot count), else NULL. */
@@ -89,44 +91,42 @@ u32 FUN_00270498(void)
         parent[i] = slotRecordFindById(panel->fusionParentIds[i] & 0xFFFF);
     }
 
-    if (parent[0] != 0 && parent[1] != 0) {
-        s32 result;
-        wordAt1B0Clear(panel->unite);
-        if (panel->panelState != 0x12) {
-            result = FUN_004dc3a8();
-        } else {
-            result = FUN_004db650(panel->unite, parent[0], parent[1], &panel->fusionResultPacked);
-        }
-        if (result != 0) {
-            void *record = panel->fusionResult;
-            unitRecordBuild(((u32)(panel->fusionResultPacked >> 17)) >> 17);
-            recordMergeByteMasks(panel->unite, parent[0], parent[1], 0, record);
+    if (parent[0] == 0 || parent[1] == 0)
+        return 0;
+    wordAt1B0Clear(panel->unite);
+    if (panel->panelState == 0x12) {
+        if (FUN_004db650(panel->unite, parent[0], parent[1], &panel->fusionResultPacked) == 0)
+            return 0;
+    } else {
+        if (FUN_004dc3a8(panel->unite, parent[0], parent[1], &panel->fusionResultPacked) == 0)
+            return 0;
+    }
+    void *record = panel->fusionResult;
+    unitRecordBuild(((u32)(panel->fusionResultPacked >> 17)) >> 17);
+    recordMergeByteMasks(panel->unite, parent[0], parent[1], 0, record);
 
-            s16 skills[16] = { 0 };
-            s32 count = 0;
-            u64 packed = panel->fusionResultPacked;
-            count = addPassableSkills(skills, count, partySlotRecordById((u32)packed & 0x7FFF));
-            packed = panel->fusionResultPacked;
-            count = addPassableSkills(skills, count, partySlotRecordById(((u32)packed & 0x3FFFFFFF) >> 15));
-            if (panel->panelState == 10) {
-                FUN_0034c340(skills, count, &panel->fusionResultPacked, 0);
-                s32 slots = getUnlockedSlotCount(record);
-                for (s32 i = 0; i < UNIT_SKILL_SLOTS; i++) {
-                    if (skills[i] != 0 && arrayContainsU16(panel->fusionResultSkills, slots, skills[i]) == 0) {
-                        for (s32 j = 0; j < slots; j++) {
-                            if (panel->fusionResultSkills[j] == 0) {
-                                panel->fusionResultSkills[j] = skills[i];
-                                break;
-                            }
-                        }
+    s16 skills[16] = { 0 };
+    s32 count = 0;
+    u64 packed = panel->fusionResultPacked;
+    count = addPassableSkills(skills, count, partySlotRecordById((u32)packed & 0x7FFF));
+    packed = panel->fusionResultPacked;
+    count = addPassableSkills(skills, count, partySlotRecordById(((u32)packed & 0x3FFFFFFF) >> 15));
+    if (panel->panelState == 10) {
+        FUN_0034c340(skills, count, &panel->fusionResultPacked, 0);
+        s32 slots = getUnlockedSlotCount(record);
+        for (s32 i = 0; i < UNIT_SKILL_SLOTS; i++) {
+            if (skills[i] != 0 && arrayContainsU16(panel->fusionResultSkills, slots, skills[i]) == 0) {
+                for (s32 j = 0; j < slots; j++) {
+                    if (panel->fusionResultSkills[j] == 0) {
+                        panel->fusionResultSkills[j] = skills[i];
+                        break;
                     }
                 }
             }
-            unitRecomputeDerivedStats(record);
-            return 1;
         }
     }
-    return 0;
+    unitRecomputeDerivedStats(record);
+    return 1;
 }
 
 } /* extern "C" */

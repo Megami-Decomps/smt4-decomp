@@ -12,6 +12,7 @@ struct BtlUnitData;
 struct BtlCombatantEntryA;
 struct BtlUnitDataA;
 struct BtlActionRecord;
+struct BattleRosterRecordA;
 
 /* Halfword index of the per-slot table in a unit's data block (BtlUnitDataA.values). */
 #define BTL_UNIT_SLOT_TABLE 0xA9
@@ -70,6 +71,17 @@ typedef char BtlUnitLayoutCheck[
     offsetof(BtlUnit, parameter) == 0x580 && offsetof(BtlUnit, unk594) == 0x594 &&
     offsetof(BtlUnit, pairs) == 0x5A8 ? 1 : -1];
 
+/* What an Apocalypse unit tracks for one target while its action plays out (0x10 bytes). */
+typedef struct BtlUnitTargetStateA {
+    /* 0x0 */ u16 startFrame;       /* the target's animation window (btlCommandExtendAnimationWindow) */
+    /* 0x2 */ u16 endFrame;
+    /* 0x4 */ s32 hp;               /* the HP the target is left with as the queued hits land (FUN_004e5f2c) */
+    /* 0x8 */ s32 recoveryPercent;  /* the percentage a tier-2 survival restores */
+    /* 0xC */ u8 unk0C[4];
+} BtlUnitTargetStateA;
+
+#define BTL_UNIT_TARGET_STATE_COUNT 135
+
 /* The same unit in Apocalypse; the action module keeps twelve of them. */
 typedef struct BtlUnitA {
     /* 0x000 */ u32 flags;
@@ -77,7 +89,7 @@ typedef struct BtlUnitA {
     /* 0x005 */ u8 command;         /* the action command requested next */
     /* 0x006 */ u8 unk006[0x1A];
     /* 0x020 */ BtlCombatantEntryA *entry; /* the unit's battle entry */
-    /* 0x024 */ u8 unk024[4];
+    /* 0x024 */ BattleRosterRecordA *record; /* the roster record of the action's current target */
     /* 0x028 */ BtlUnitDataA *data;  /* the entry's data block (btlFindEntryBlockByMemberId) */
     /* 0x02C */ u16 id;
     /* 0x02E */ u8 unk02E[0xA];
@@ -88,7 +100,7 @@ typedef struct BtlUnitA {
     /* 0x59D */ s8 uiMode;          /* the command menu variant (dispatchBattleCommandUiVariant) */
     /* 0x59E */ u8 unk59E[0x1A];
     /* 0x5B8 */ BtlUnitTargetPair pairs[BTL_UNIT_TARGET_PAIR_COUNT];
-    /* 0x9E0 */ u8 unk9E0[0x870];
+    /* 0x9E0 */ BtlUnitTargetStateA targetStates[BTL_UNIT_TARGET_STATE_COUNT]; /* indexed by a target's listed id */
 } BtlUnitA;
 
 typedef struct BtlActionSlotA {
@@ -99,6 +111,7 @@ typedef struct BtlActionSlotA {
 typedef char BtlUnitALayoutCheck[
     sizeof(BtlUnitA) == 0x1250 && sizeof(BtlActionSlotA) == 0x1254 && offsetof(BtlUnitA, entry) == 0x20 &&
     offsetof(BtlUnitA, data) == 0x28 && offsetof(BtlUnitA, targets) == 0x38 &&
-    offsetof(BtlUnitA, cameraMode) == 0x594 && offsetof(BtlUnitA, uiMode) == 0x59D && offsetof(BtlUnitA, pairs) == 0x5B8 ? 1 : -1];
+    offsetof(BtlUnitA, cameraMode) == 0x594 && offsetof(BtlUnitA, uiMode) == 0x59D && offsetof(BtlUnitA, pairs) == 0x5B8 &&
+    offsetof(BtlUnitA, record) == 0x24 && offsetof(BtlUnitA, targetStates) == 0x9E0 && sizeof(BtlUnitTargetStateA) == 0x10 ? 1 : -1];
 
 #endif

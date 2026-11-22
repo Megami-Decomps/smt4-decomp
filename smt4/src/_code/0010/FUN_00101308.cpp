@@ -78,7 +78,7 @@ int titleConfigApplyAudio(...);
 int asdTMTexTablePrepareNodeImage(...);
 int asdTMTexTableLoadTmx(...);
 
-int FUN_0010250c(...);
+int asdFileInitialize(...);
 int textSystemInitialize(...);
 int asdProcessInit(...);
 int asdMemoryInit(...);
@@ -270,7 +270,7 @@ extern int g_titleScene; /* 0x44ea00 */
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: faderStepAll. */
-/* Supplied declaration required: FUN_0010250c. */
+/* Supplied declaration required: asdFileInitialize. */
 /* Supplied declaration required: messageInitializeDisplay. */
 /* Supplied declaration required: ifTouchAcquire. */
 /* Supplied declaration required: textSystemInitialize. */
@@ -467,7 +467,7 @@ void FUN_00101308(void)
   randomStateSeed(0,0x12345678);
   asdMemoryInit(0x100000);
   asdMemorySetUseAllocatorA(1);
-  FUN_0010250c();
+  asdFileInitialize();
   initializeAndResetSubsystems();
   FUN_00106e10();
   nn_pl_CTR_InitializeGameCoin();

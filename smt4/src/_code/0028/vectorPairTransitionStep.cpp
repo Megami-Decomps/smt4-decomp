@@ -1,6 +1,7 @@
 /* NON_MATCHING: the delta step matches (nn::math VEC3Add through pointers); in the smoothing step retail adds
  * through a pointer to each current vector (r1) and loads target/current in another order. */
 #include "map/VectorPairTransition.h"
+#include "map/LmapViewGlobals.h"
 
 /* nn::math's VEC3Add, VEC3Sub and VEC3Scale. */
 static __inline BattleVector3 *vec3Add(BattleVector3 *out, const BattleVector3 *a, const BattleVector3 *b)
@@ -26,12 +27,11 @@ static __inline BattleVector3 *vec3Scale(BattleVector3 *out, const BattleVector3
 }
 
 extern "C" {
-extern VectorTransitionGlobals g_lmapViewHolder;
 
 /* Advances the camera's two-vector move by one frame; returns 1 once it has arrived. */
 s32 vectorPairTransitionStep()
 {
-    VectorPairTransition* transition = &g_lmapViewHolder.work->transition;
+    VectorPairTransition* transition = &g_lmapViewHolder.view->move;
     if (transition->frame >= transition->duration) {
         transition->current = transition->target;
         return 1;

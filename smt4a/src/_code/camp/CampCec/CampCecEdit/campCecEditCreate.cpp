@@ -37,7 +37,7 @@ u32 campCecEditDraw(void);
 s32 campCecEditCreateEffect(void);
 u32 FUN_002e1d1c(void);
 /* The mode handlers. */
-s32 FUN_00359dc4(StateAtF4 *edit);
+s32 statusScreenStartWhenLoaded(StateAtF4 *edit);
 s32 FUN_00342e24(StateAtF4 *edit);
 s32 FUN_00318e84(StateAtF4 *edit);
 s32 FUN_00387d38(StateAtF4 *edit);
@@ -109,7 +109,7 @@ void campCecEditCreate(u8 openMode)
     edit->unk10A = edit->unk108 = saved->value;
     edit->unk10D = saved->flag0e;
 
-    edit->table.handlers[0] = FUN_00359dc4;
+    edit->table.handlers[0] = statusScreenStartWhenLoaded;
     edit->table.handlers[2] = FUN_00342e24;
     edit->table.handlers[1] = FUN_00318e84;
     edit->table.handlers[3] = FUN_00387d38;

@@ -52,7 +52,7 @@ typedef struct Resource {
 
 /* Grouped resource records and the workspace-size view used by the binder. */
 struct ResourceSizingRecord {
-    /* 0x00 */ s16 kind;
+    /* 0x00 */ u16 kind;
     /* 0x02 */ u8 unk02[0x12];
 };
 struct ResourceSizingGroup {

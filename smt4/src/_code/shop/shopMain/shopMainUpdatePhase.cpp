@@ -1,9 +1,10 @@
-/* NON_MATCHING: readable rebuild from asm of the shop main's per-frame phase machine (create the selection scene, wait for its load, tear it down, then request the next sequence); armcc here orders the shop singleton's lazy allocation (inlined twice in retail) and the story-flag screen list differently. */
 #include "common.h"
 #include <stdio.h>
 #include "AsdSDK/Source/Gfx/Camera/AsdCamera.h"
 #include "game/GameState.h"
 #include "shop/shopMain.h"
+#include "shard/W6_W6Match5_SequencePacket.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 /* The shop main (only the fields read here). */
 struct ShopMain {
@@ -19,12 +20,6 @@ struct ShopMain {
     /* 0x15 */ u8 unk15[3];
     /* 0x18 */ u8 *scene;
 };
-
-/* A selection scene (first word is its load state; +0x828 its touch interface). */
-struct ShopScene {
-    u32 loadFlags;
-};
-
 
 extern "C" {
 
@@ -43,21 +38,21 @@ void sceneRunLoadingPhaseUpdate(void);
 void FUN_003a3914(void);
 u32 _ZN9Obj55ca08D1Ev(u8 *touch);
 void asdMemFreeNonNull(u8 *block);
-void asdSequenceRequest(s32 kind, s32 *arguments, s32 flag);
 s32 FUN_00287304(void);
 s32 gameStateIsFlagSetAndLarge(void);
 void titleSetSlotValueState2(s32 a, s32 b);
 void soundChannelStopAll(s32 channel);
 
-/* The shop sequence singleton, allocated on first use. */
-static ShopSequenceRequest *shopSequence(void)
+/* Returns the queued shop request, allocating a cleared one on first use. */
+static __inline ShopSequenceRequest *shopGetQueuedRequest(void)
 {
     if (g_shopSequenceRequest == NULL) {
-        g_shopSequenceRequest = (ShopSequenceRequest *)asdOperatorNew(8);
-        if (g_shopSequenceRequest != NULL) {
-            g_shopSequenceRequest->pending = 0;
-            g_shopSequenceRequest->screen = 0;
+        ShopSequenceRequest *request = (ShopSequenceRequest *)asdOperatorNew(sizeof(ShopSequenceRequest));
+        if (request != NULL) {
+            request->pending = 0;
+            request->screen = 0;
         }
+        g_shopSequenceRequest = request;
     }
     return g_shopSequenceRequest;
 }
@@ -67,7 +62,6 @@ static ShopSequenceRequest *shopSequence(void)
 u32 shopMainUpdatePhase(void)
 {
     ShopMain *shop = g_shop;
-    s32 slot[2];
     switch (shop->phase) {
     case 0: {
         s32 screen;
@@ -79,20 +73,33 @@ u32 shopMainUpdatePhase(void)
             shop->phase = 3;
             break;
         }
+        /* retail passes a stack address the file-slot reference functions ignore */
+        s32 slot[2];
         fileSlot17Acquire(slot);
         s32 sub = shop->screen;
-        s32 kind = sub >= 100 ? 1 : 0;
-        if (sub >= 100)
+        s32 kind = 0;
+        if (sub >= 100) {
+            kind = 1;
             sub -= 100;
-        if (shop->sceneMode == 0) {
+        }
+        switch (shop->sceneMode) {
+        case 0: {
             void *memory = asdOperatorNew(0x15D6C);
             shop->scene = memory != NULL ? FUN_003a5e30(memory, 0, kind, sub) : NULL;
-        } else if (shop->sceneMode == 1) {
+            break;
+        }
+        case 1: {
             void *memory = asdOperatorNew(0x15D6C);
             u8 *scene = memory != NULL ? FUN_003a5e30(memory, 1, kind, sub) : NULL;
             shop->scene = scene;
+            /* the scene's selection word sits at +0x860 */
             s32 selection = shop->selection;
-            *(s32 *)(scene + 0x860) = selection;
+            if (selection == 8)
+                *(s32 *)(scene + 0x860) = 8;
+            else
+                *(s32 *)(scene + 0x860) = selection;
+            break;
+        }
         }
         shopResetMessageState(shop->scene);
         shop->phase = 1;
@@ -107,6 +114,7 @@ u32 shopMainUpdatePhase(void)
         break;
     case 2:
         if (shop->scene != NULL) {
+            s32 slot[2];
             FUN_003a3914();
             if (shop->scene != NULL)
                 asdMemFreeNonNull((u8 *)_ZN9Obj55ca08D1Ev(shop->scene + 0x828) - 0x828);
@@ -117,19 +125,24 @@ u32 shopMainUpdatePhase(void)
     case 3: {
         if (shop->requestPending != 0) {
             s32 which;
-            if (shop->screen >= 100)
-                which = shop->screen == 0x6D ? 2 : 4;
-            else
-                which = shop->screen == 8 ? 1 : 3;
-            ShopSequenceRequest *sequence = shopSequence();
-            sequence->screen = shop->screen;
-            shopSequence()->pending = 1;
-            s32 arguments[2];
-            u8 buffer[24];
-            arguments[0] = 0x4B;
-            arguments[1] = -1;
-            sprintf((char *)buffer, "e%03d_%02d", 0x4B, which);
-            asdSequenceRequest(4, arguments, 0x20);
+            if (shop->screen >= 100) {
+                if (shop->screen == 0x6D)
+                    which = 2;
+                else
+                    which = 4;
+            } else {
+                if (shop->screen == 8)
+                    which = 1;
+                else
+                    which = 3;
+            }
+            shopGetQueuedRequest()->screen = shop->screen;
+            shopGetQueuedRequest()->pending = 1;
+            NamedSceneSequence request;
+            request.id = 0x4B;
+            request.slot = -1;
+            sprintf(request.name, "e%03d_%02d", request.id, which);
+            asdSequenceRequest(4, &request, sizeof(request));
         } else if (FUN_00287304() != 0) {
             if (gameStateIsFlagSetAndLarge() != 0) {
                 s32 arguments[2];
@@ -140,10 +153,10 @@ u32 shopMainUpdatePhase(void)
             }
         } else if (shop->silent != 0) {
             titleSetSlotValueState2(0, 1);
-            titleSetSlotValueState2(1, 0);
+            titleSetSlotValueState2(1, 1);
         } else {
             titleSetSlotValueState2(0, 1);
-            titleSetSlotValueState2(1, 0);
+            titleSetSlotValueState2(1, 1);
             soundChannelStopAll(15);
         }
         return 0xFFFFFFFF;

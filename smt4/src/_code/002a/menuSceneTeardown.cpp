@@ -72,7 +72,7 @@ static inline void releaseOwner(void **owner)
     }
 }
 
-static inline void destroyManagedModel(void **model)
+static void destroyManagedModel(void **model)
 {
     asdMdlManagerMarkDestroy(*model);
     asdMdlManagerDestroy(*model);

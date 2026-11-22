@@ -867,7 +867,7 @@ LAB_004f054c:
       iVar29 = *(int *)(param_2[8] + 0x150);
       dataTable41FindById();
       if (iVar29 != 0) {
-        FUN_004aa3d4(DAT_0057a9c8,2,*(unsigned int *)(param_2[8] + 0x150) & 0xffff,
+        btlUiOpenHelpWindow(DAT_0057a9c8,2,*(unsigned int *)(param_2[8] + 0x150) & 0xffff,
                      *(unsigned int *)(param_2[8] + 0x3f8),0,0);
       }
       else {
@@ -879,32 +879,32 @@ LAB_004f054c:
         else {
           uVar2 = *(unsigned short *)(uVar17 + 4);
         }
-        FUN_004aa3d4(DAT_0057a9c8,iStack_68,0,*(unsigned int *)(param_2[8] + 0x3f8),uVar2,bVar26);
+        btlUiOpenHelpWindow(DAT_0057a9c8,iStack_68,0,*(unsigned int *)(param_2[8] + 0x3f8),uVar2,bVar26);
       }
       break;
     case 2:
     case 3:
-      FUN_004aa3d4(DAT_0057a9c8,iStack_68,uStack_74 & 0xffff,*(unsigned int *)(param_2[8] + 0x3f8),
+      btlUiOpenHelpWindow(DAT_0057a9c8,iStack_68,uStack_74 & 0xffff,*(unsigned int *)(param_2[8] + 0x3f8),
                    *(unsigned short *)(param_2[10] + 2),0);
       break;
     case 8:
-      FUN_004aa3d4(DAT_0057a9c8,iStack_68,uStack_64 & 0xffff,0,0,0);
+      btlUiOpenHelpWindow(DAT_0057a9c8,iStack_68,uStack_64 & 0xffff,0,0,0);
       break;
     case 9:
     case 0xb:
     case 0xc:
       if ((*param_2 & 0x2000000) == 0) {
-        FUN_004aa3d4(DAT_0057a9c8,iStack_68,1,0,0,0);
+        btlUiOpenHelpWindow(DAT_0057a9c8,iStack_68,1,0,0,0);
       }
       else {
-        FUN_004aa3d4(DAT_0057a9c8,iStack_68,0,0,0,0);
+        btlUiOpenHelpWindow(DAT_0057a9c8,iStack_68,0,0,0,0);
       }
       break;
     case 10:
       iVar29 = 0;
       do {
         if (*(char *)((int)param_2 + iVar29 + 0x38) != '\0') {
-          FUN_004aa3d4(DAT_0057a9c8,iStack_68,0,0,0,0);
+          btlUiOpenHelpWindow(DAT_0057a9c8,iStack_68,0,0,0,0);
           break;
         }
         iVar29 = iVar29 + 1;

@@ -26,7 +26,7 @@ int btlItemComputeValues(...);
 int btlCommandMenuResolveLayout(...);
 int btlCommandResolveSelectedTarget(...);
 int FUN_0028cf30(...);
-int FUN_0028cfd8(void);
+int itemHealingIsUseful(void);
 int gameReleaseDataReference(void);
 int beginStatusPanelClose(void);
 int messageDismissNumericBanner(...);
@@ -110,7 +110,7 @@ extern int statusScreenIsClosed(void);
 /* Supplied declaration required: btlCommandResolveSelectedTarget. */
 /* Supplied declaration required: FUN_0028cf30. */
 extern int widgetGetVisibleLength(int);
-/* Supplied declaration required: FUN_0028cfd8. */
+/* Supplied declaration required: itemHealingIsUseful. */
 extern unsigned long long FUN_0028d1f4(unsigned short);
 extern unsigned int FUN_0028d24c(void);
 extern unsigned int listGetU16OrZero(unsigned int, int);
@@ -1006,7 +1006,7 @@ LAB_0019b924:
       temp_v17 = listCursorGetRowIfUnblocked(*piVar14);
       temp_v10 = (unsigned int)*(unsigned short *)(param_1 + (temp_v17 + temp_v5) * 2 + 0x3480);
       temp_v6 = temp_v10;
-      FUN_0028cfd8();
+      itemHealingIsUseful();
       if (temp_v6 == 0) {
         itemTableGetItemRecord();
         temp_v6 = (unsigned int)*(unsigned short *)(temp_v10 + 0x62);

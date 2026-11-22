@@ -7,7 +7,7 @@ int FUN_001f87d4(void);
 int mapDepartAdvanceCameraSequence(void);
 int FUN_0021b0f0(void);
 int FUN_0021b2ec(void);
-int FUN_00282228(int *);
+int vectorPairTransitionStart(int *);
 int calcHeadingRoundedToCardinalDirection(void);
 int libm_cosf(void); // declcheck: local (the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "libm_sinf" has "C" linkage)
 int libm_sinf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
@@ -63,7 +63,7 @@ extern int DAT_0049fa10; /* 0x49fa10 */
 /* Supplied declaration required: FUN_0021b0f0. */
 /* Supplied declaration required: FUN_0021b2ec. */
 extern int vectorPairTransitionStep(void);
-/* Supplied declaration required: FUN_00282228. */
+/* Supplied declaration required: vectorPairTransitionStart. */
 /* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
@@ -372,7 +372,7 @@ void FUN_003079b4(void)
       uStack_30 = (unsigned long long)(unsigned int)uStack_30;
       temp_v37 = temp_v28;
       temp_v38 = temp_v14;
-      FUN_00282228(&temp_v31);
+      vectorPairTransitionStart(&temp_v31);
       piVar7 = g_mapCamera;
       *(unsigned char *)(g_mapCamera + 0x87) = 1;
       piVar13 = piVar7 + 1;
@@ -418,7 +418,7 @@ void FUN_003079b4(void)
         uStack_30 = (unsigned long long)(unsigned int)uStack_30;
         temp_v37 = temp_v24;
         temp_v38 = temp_v28;
-        FUN_00282228(&temp_v31);
+        vectorPairTransitionStart(&temp_v31);
         piVar7 = g_mapCamera;
         g_mapCamera[1] = g_mapCamera[1] + 1;
         piVar7[2] = 0;
@@ -472,7 +472,7 @@ void FUN_003079b4(void)
       uStack_30 = (unsigned long long)(unsigned int)uStack_30;
       temp_v37 = temp_v30;
       temp_v38 = temp_v15;
-      FUN_00282228(&temp_v31);
+      vectorPairTransitionStart(&temp_v31);
       piVar7 = g_mapCamera;
       *(unsigned char *)(g_mapCamera + 0x87) = 1;
       piVar13 = piVar7 + 1;
@@ -518,7 +518,7 @@ void FUN_003079b4(void)
         temp_v46 = 0.0f;
         uStack_30 = (unsigned long long)(unsigned int)uStack_30;
         temp_v38 = temp_v15;
-        FUN_00282228(&temp_v31);
+        vectorPairTransitionStart(&temp_v31);
         piVar7 = g_mapCamera;
         g_mapCamera[1] = g_mapCamera[1] + 1;
         piVar7[2] = 0;
@@ -583,7 +583,7 @@ void FUN_003079b4(void)
       temp_v46 = 0.0f;
       uStack_30 = (unsigned long long)(unsigned int)uStack_30;
       temp_v38 = temp_v24;
-      FUN_00282228(&temp_v31);
+      vectorPairTransitionStart(&temp_v31);
       piVar7 = g_mapCamera;
       *(unsigned char *)(g_mapCamera + 0x87) = 1;
       piVar13 = piVar7 + 1;
@@ -635,7 +635,7 @@ void FUN_003079b4(void)
         uStack_30 = (unsigned long long)(unsigned int)uStack_30;
         temp_v37 = temp_v26;
         temp_v38 = temp_v24;
-        FUN_00282228(&temp_v31);
+        vectorPairTransitionStart(&temp_v31);
         piVar7 = g_mapCamera;
         g_mapCamera[1] = g_mapCamera[1] + 1;
         piVar7[2] = 0;

@@ -1,4 +1,8 @@
-/* NON_MATCHING: sound system shutdown (Apocalypse layout view); the voice list now comes from g_soundHandleList, the slot loops use real handle arrays and the voice loop matches retail; remaining: retail keeps the two-way aux-slot body out of line (beq to the body after the loop) and holds the system base in r6 with a zero in r9 (158 vs 146 rows). */
+/* NON_MATCHING: sound system shutdown (Apocalypse layout view); the slot loops release each handle through its
+ * address as retail does; remaining: retail reaches the aux slots through a second pool word for the block and keeps
+ * their body out of line (an inlined slot function: a static helper for it gives 131 lines, unproven so not kept),
+ * holds the system base in r6 with a zero in r9, and reaches the 3D state through a third pool word with a second
+ * enabled test. */
 #include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 
 extern "C" {
@@ -17,19 +21,12 @@ void asdMemFree(void *block);
 void nw_ut_internal_LinkListImpl_erase_2B743C(void *list, void *node);
 void nw_snd_SoundHandle_DetachSound(s32 *handle);
 
+/* Stops and detaches the sound a handle holds (nw::snd's SoundHandle::Stop header inline). */
 static __inline void asdSoundHandleRelease(s32 *handle)
 {
     if (*handle != 0) {
         asdSoundObjectStop(*handle, 0);
         nw_snd_SoundHandle_DetachSound(handle);
-    }
-}
-
-static __inline void releaseSlotHandle(s32 *handles, u32 index)
-{
-    if (handles[index] != 0) {
-        asdSoundObjectStop(handles[index], 0);
-        nw_snd_SoundHandle_DetachSound(&handles[index]);
     }
 }
 
@@ -43,7 +40,7 @@ void FUN_00150784(void)
     AsdSndSlotBA *slotB = system->currentSlotB;
     if (slotB != NULL) {
         for (u8 i = 0; i < 0x10; i++)
-            releaseSlotHandle(slotB->handles, i);
+            asdSoundHandleRelease(&slotB->handles[i]);
     }
     for (u8 i = 0; i < 2; i++) {
         if (i == 0 || i == 1) {
@@ -64,7 +61,7 @@ void FUN_00150784(void)
     AsdSndSlotA *slotA = system->currentSlotA;
     if (slotA != NULL) {
         for (u8 i = 0; i < 4; i++)
-            releaseSlotHandle(slotA->handles, i);
+            asdSoundHandleRelease(&slotA->handles[i]);
     }
 
     system->currentSlotB = NULL;

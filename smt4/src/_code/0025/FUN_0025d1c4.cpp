@@ -17,7 +17,7 @@ int gxSetMirroredClippedScissor(...);
 int FUN_002b6db0(...);
 int nkmBaseGetRecord(void);
 
-int FUN_0028cfd8(void);
+int itemHealingIsUseful(void);
 int listGetU16OrZero(...);
 int FUN_002b6c34(...);
 int aocIndexValueOrDefault(...);
@@ -60,7 +60,7 @@ extern unsigned int dataTable16Sub2GetRecordS64(unsigned int);
 /* Supplied declaration required: mapGetSelectedRecordCategoryTable. */
 extern int FUN_0025cc54(void);
 /* Supplied declaration required: playerGetMappedCategory. */
-/* Supplied declaration required: FUN_0028cfd8. */
+/* Supplied declaration required: itemHealingIsUseful. */
 extern short FUN_0028d24c(void);
 /* Supplied declaration required: listGetU16OrZero. */
 extern unsigned int flagValueRead(int);
@@ -243,7 +243,7 @@ void FUN_0025d1c4(int param_1)
               temp_v13 = flagValueRead(temp_v10);
               temp_v21 = 0;
               temp_v5 = temp_v10;
-              FUN_0028cfd8();
+              itemHealingIsUseful();
               if (temp_v10 == 0) {
                 temp_v21 = 1;
               }
@@ -571,7 +571,7 @@ void FUN_0025d1c4(int param_1)
       else {
         temp_v8 = (int)*(short *)(param_1 + temp_v15 * 2 + 0x3480);
         temp_v4 = temp_v8;
-        FUN_0028cfd8();
+        itemHealingIsUseful();
         temp_v5 = temp_v4;
         dataFindKindRecordWithAocOverrides(temp_v4,0);
         sprintf((char *)temp_v19,"%s",temp_v4);

@@ -1,9 +1,11 @@
-/* NON_MATCHING: list construction omits mode/normalized-ID arguments; request-record publication and exit-state data accesses also differ. */
+/* NON_MATCHING: 16 lines, registers only: the constants 1 and 0 swap r7/r8 (retail keeps 1 in r7, the request-clear 0 in r8); the IV twin with the same source is IDENTICAL. */
 #include "common.h"
 #include <stdio.h>
 #include "game/GameStateA.h"
 #include "AsdSDK/Source/Gfx/Camera/AsdCamera.h"
 #include "shop/shopMain.h"
+#include "shard/W6_W6Match5_SequencePacket.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 #define SHOP_STATE_OPEN 0
 #define SHOP_STATE_WAIT_LIST 1
@@ -38,11 +40,11 @@ extern ShopSequenceRequest *g_shopSequenceRequest;
 
 void *asdOperatorNew(u32 size);
 void asdOperatorDelete(void *block);
-ShopList *FUN_0049c3c0(void *memory);
+ShopList *FUN_0049c3c0(void *memory, s32 mode, s32 kind, s32 sub);
 void FUN_0019ea5c(ShopList *list);
 void placeWindowRunStateHandler(void);
 void FUN_00499c84(void);
-void _ZN9Obj55ca08D1Ev(void *detail);
+u8 *_ZN9Obj55ca08D1Ev(void *detail);
 void fileSlot17Acquire(s32 *slot);
 void fileSlot17Release(s32 *slot);
 s32 storyFlagRangeAnySet(void);
@@ -51,17 +53,17 @@ s32 lmapMainGetUnk74(void);
 s32 gameStateIsFlagSetAndLarge(void);
 void soundChannelStopAll(s32 mask);
 void titleSetSlotValueState2(s32 a, s32 b);
-void asdSequenceRequest(s32 type, s32 *args, s32 size);
 
-static ShopSequenceRequest *shopRequestRecordGet(void)
+/* Returns the queued shop request, allocating a cleared one on first use. */
+static __inline ShopSequenceRequest *shopGetQueuedRequest(void)
 {
     if (g_shopSequenceRequest == NULL) {
-        ShopSequenceRequest *record = (ShopSequenceRequest *)asdOperatorNew(sizeof(ShopSequenceRequest));
-        g_shopSequenceRequest = record;
-        if (record != NULL) {
-            record->pending = 0;
-            record->screen = 0;
+        ShopSequenceRequest *request = (ShopSequenceRequest *)asdOperatorNew(sizeof(ShopSequenceRequest));
+        if (request != NULL) {
+            request->pending = 0;
+            request->screen = 0;
         }
+        g_shopSequenceRequest = request;
     }
     return g_shopSequenceRequest;
 }
@@ -70,82 +72,97 @@ static ShopSequenceRequest *shopRequestRecordGet(void)
 s32 shopMainUpdatePhase(u32 process)
 {
     ShopSession *shop = g_shop;
-    s32 slot[2];
     switch (shop->state) {
-    case SHOP_STATE_OPEN:
+    case SHOP_STATE_OPEN: {
         if (storyFlagRangeAnySet() != 0 && isFlag10Set() == 0)
             setFlag10();
+        /* retail passes a stack address the file-slot reference functions ignore */
+        s32 slot[2];
         fileSlot17Acquire(slot);
-        if (shop->openMode == 0) {
-            ShopList *list = (ShopList *)asdOperatorNew(SHOP_LIST_SIZE);
-            shop->list = list != NULL ? FUN_0049c3c0(list) : NULL;
-        } else if (shop->openMode == 1) {
-            ShopList *list = (ShopList *)asdOperatorNew(SHOP_LIST_SIZE);
-            shop->list = list != NULL ? FUN_0049c3c0(list) : NULL;
+        s32 sub = shop->shopId;
+        s32 kind = 0;
+        if (sub >= 100) {
+            kind = 1;
+            sub -= 100;
+        }
+        switch (shop->openMode) {
+        case 0: {
+            void *memory = asdOperatorNew(SHOP_LIST_SIZE);
+            shop->list = memory != NULL ? FUN_0049c3c0(memory, 0, kind, sub) : NULL;
+            break;
+        }
+        case 1: {
+            void *memory = asdOperatorNew(SHOP_LIST_SIZE);
+            ShopList *list = memory != NULL ? FUN_0049c3c0(memory, 1, kind, sub) : NULL;
+            shop->list = list;
             s32 mode = shop->listMode;
             if (mode == 8)
-                mode = 8;
-            shop->list->mode = mode;
+                list->mode = 8;
+            else
+                list->mode = mode;
+            break;
+        }
         }
         FUN_0019ea5c(shop->list);
         shop->state = SHOP_STATE_WAIT_LIST;
-        return 0;
-
+        break;
+    }
     case SHOP_STATE_WAIT_LIST:
-        if (shop == NULL || shop->list == NULL)
-            return 0;
-        placeWindowRunStateHandler();
-        if ((shop->list->flags & 1) == 0)
-            return 0;
-        shop->state = SHOP_STATE_CLOSE;
-        return 0;
-
+        if (shop != NULL && shop->list != NULL) {
+            placeWindowRunStateHandler();
+            if (shop->list->flags & 1)
+                shop->state = SHOP_STATE_CLOSE;
+        }
+        break;
     case SHOP_STATE_CLOSE:
         if (shop->list != NULL) {
+            s32 slot[2];
             FUN_00499c84();
-            if (shop->list != NULL) {
-                _ZN9Obj55ca08D1Ev(shop->list->detail);
-                asdOperatorDelete(shop->list);
-            }
+            if (shop->list != NULL)
+                asdOperatorDelete((u8 *)_ZN9Obj55ca08D1Ev(shop->list->detail) - 0xB08);
             fileSlot17Release(slot);
         }
         shop->state = SHOP_STATE_EXIT;
-        return 0;
-
-    case SHOP_STATE_EXIT:
+        break;
+    case SHOP_STATE_EXIT: {
         if (shop->hasMessage != 0) {
-            u32 messageId;
-            if (shop->shopId >= 100)
-                messageId = shop->shopId == 0x6D ? 3 : 5;
-            else
-                messageId = shop->shopId == 8 ? 2 : 4;
-            shopRequestRecordGet()->screen = shop->shopId;
-            shopRequestRecordGet()->pending = 1;
-            slot[1] = -1;
-            slot[0] = 999;
-            char name[24];
-            sprintf(name, "e%03d_%02d", 999, messageId);
-            asdSequenceRequest(4, slot, 0x20);
-        } else if (lmapMainGetUnk74() != 0) {
-            s32 type = 6;
-            s32 *args = NULL;
-            s32 size = 0;
-            if (gameStateIsFlagSetAndLarge() != 0) {
-                slot[0] = g_gameState.savedMapId - 200;
-                args = slot;
-                type = 0xE;
-                size = 4;
+            s32 which;
+            if (shop->shopId >= 100) {
+                if (shop->shopId == 0x6D)
+                    which = 3;
+                else
+                    which = 5;
+            } else {
+                if (shop->shopId == 8)
+                    which = 2;
+                else
+                    which = 4;
             }
-            asdSequenceRequest(type, args, size);
+            shopGetQueuedRequest()->screen = shop->shopId;
+            shopGetQueuedRequest()->pending = 1;
+            NamedSceneSequence request;
+            request.id = 999;
+            request.slot = -1;
+            sprintf(request.name, "e%03d_%02d", request.id, which);
+            asdSequenceRequest(4, &request, sizeof(request));
+        } else if (lmapMainGetUnk74() != 0) {
+            if (gameStateIsFlagSetAndLarge() != 0) {
+                s32 arguments[2];
+                arguments[0] = g_gameState.savedMapId - 200;
+                asdSequenceRequest(14, arguments, 4);
+            } else {
+                asdSequenceRequest(6, NULL, 0);
+            }
         } else if (shop->silentExit != 0) {
             titleSetSlotValueState2(0, 1);
-            titleSetSlotValueState2(1, 0);
+            titleSetSlotValueState2(1, 1);
         } else {
             titleSetSlotValueState2(0, 1);
-            titleSetSlotValueState2(1, 0);
-            soundChannelStopAll(0xF);
+            titleSetSlotValueState2(1, 1);
+            soundChannelStopAll(15);
         }
         return -1;
+    }
     }
     return 0;
 }

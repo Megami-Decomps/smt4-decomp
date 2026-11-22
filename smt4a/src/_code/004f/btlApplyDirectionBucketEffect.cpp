@@ -9,9 +9,9 @@ struct BtlMainStateA;
 extern "C" {
 
 int FUN_001aff14(float *, int);
-int FUN_003e7fa4(...);
+int btlGetCombatantDrawPosition(...);
 int btlScriptUnitHasFlags(void);
-Vec3f FUN_003ecab8(BtlMainStateA *, s32 index, s32 forceAttachment);
+Vec3f btlGetCombatantOverridePosition(BtlMainStateA *, s32 index, s32 forceAttachment);
 int FUN_0043ba3c(...);
 
 /* stack frame of param_4: 30 slot(s), 120 byte(s) */
@@ -56,9 +56,9 @@ extern unsigned int DAT_00573824; /* 0x573824 */
 
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001aff14. */
-/* Supplied declaration required: FUN_003e7fa4. */
+/* Supplied declaration required: btlGetCombatantDrawPosition. */
 /* Supplied declaration required: btlScriptUnitHasFlags. */
-/* Supplied declaration required: FUN_003ecab8. */
+/* Supplied declaration required: btlGetCombatantOverridePosition. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_0043ba3c. */
 
@@ -108,11 +108,11 @@ void btlApplyDirectionBucketEffect(unsigned int param_1,unsigned int param_2,uns
   switch(param_2) {
   case 0:
     temp_v3 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003e7fa4(temp_v3,param_3,0);
+    btlGetCombatantDrawPosition(temp_v3,param_3,0);
     break;
   case 1:
     temp_v3 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003ecab8(reinterpret_cast<BtlMainStateA *>(temp_v3),param_3,0);
+    btlGetCombatantOverridePosition(reinterpret_cast<BtlMainStateA *>(temp_v3),param_3,0);
     break;
   case 2:
     puVar2 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
@@ -129,11 +129,11 @@ void btlApplyDirectionBucketEffect(unsigned int param_1,unsigned int param_2,uns
     break;
   case 3:
     temp_v3 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003e7fa4(temp_v3,param_4,0);
+    btlGetCombatantDrawPosition(temp_v3,param_4,0);
     break;
   case 4:
     temp_v3 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003ecab8(reinterpret_cast<BtlMainStateA *>(temp_v3),param_4,0);
+    btlGetCombatantOverridePosition(reinterpret_cast<BtlMainStateA *>(temp_v3),param_4,0);
     break;
   case 5:
     puVar2 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
@@ -200,11 +200,11 @@ void btlApplyDirectionBucketEffect(unsigned int param_1,unsigned int param_2,uns
     break;
   case 0xd:
     temp_v3 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003e7fa4(temp_v3,param_4,1);
+    btlGetCombatantDrawPosition(temp_v3,param_4,1);
     break;
   case 0xe:
     temp_v3 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003ecab8(reinterpret_cast<BtlMainStateA *>(temp_v3),param_4,1);
+    btlGetCombatantOverridePosition(reinterpret_cast<BtlMainStateA *>(temp_v3),param_4,1);
     break;
   case 0xf:
   }

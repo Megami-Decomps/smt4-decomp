@@ -7,7 +7,7 @@ extern "C" {
 int ARM_common_memset4_6(...);
 int FUN_0014eae4(void);
 int FUN_002a6264(int *, int);
-int FUN_002a63d8(int *, int);
+int graphicsResourceSetLeafValue(int *, int);
 int FUN_002a65d8(int *, int);
 int FUN_002af294(...);
 int FUN_002b3acc(int *, int, int, unsigned int);
@@ -56,7 +56,7 @@ extern unsigned int sceneGroup1Root; /* 0x464b8c */
 /* Supplied declaration required: ARM_common_memset4_6. */
 /* Supplied declaration required: FUN_0014eae4. */
 /* Supplied declaration required: FUN_002a6264. */
-/* Supplied declaration required: FUN_002a63d8. */
+/* Supplied declaration required: graphicsResourceSetLeafValue. */
 /* Supplied declaration required: FUN_002a65d8. */
 /* Supplied declaration required: FUN_002af294. */
 /* Supplied declaration required: FUN_002b3acc. */
@@ -118,10 +118,10 @@ void FUN_002a9834(int *param_1,unsigned int *param_2,unsigned int param_3,int pa
     FUN_002a65d8(param_1,0x2030000);
   }
   if ((param_3 & 0x20) != 0) {
-    FUN_002a63d8(param_1,0x2020000);
+    graphicsResourceSetLeafValue(param_1,0x2020000);
   }
   else if ((param_3 & 0x100) != 0) {
-    FUN_002a63d8(param_1,0x2030000);
+    graphicsResourceSetLeafValue(param_1,0x2030000);
   }
   if ((param_3 & 0x10) != 0) {
     FUN_002a6264(param_1,0x2020000);

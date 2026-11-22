@@ -5,9 +5,9 @@
 
 extern "C" {
 void FUN_002342d0(s32 first, s32 second);
-void FUN_002b6cb0();
+void mapEnemyDrawEdgeIndicators();
 void FUN_002b968c(MapIfGlobalsA *globals);
-void FUN_002cf8e4();
+void mapDrawTargetDirectionIndicator();
 void transitionDrawExpandingImages(u32 frame);
 
 s32 FUN_0029d760(u32 handle)
@@ -19,8 +19,8 @@ s32 FUN_0029d760(u32 handle)
     MapIfStateA *state = globals->state;
     FUN_002b968c(globals);
     if (g_gameState.mapId < 100) {
-        FUN_002b6cb0();
-        FUN_002cf8e4();
+        mapEnemyDrawEdgeIndicators();
+        mapDrawTargetDirectionIndicator();
     }
     if (state->unkCD08) {
         transitionDrawExpandingImages(state->unkCD0C);

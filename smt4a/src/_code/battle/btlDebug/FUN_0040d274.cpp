@@ -9,7 +9,7 @@
 extern "C" {
 
 int cameraProjectToScreen(...);
-int FUN_003e7fa4(...);
+int btlGetCombatantDrawPosition(...);
 int FUN_004f1b2c(...);
 int FUN_004f22a4(...);
 int FUN_004f2938(...);
@@ -42,7 +42,7 @@ static float romwright_fabs_4(float value)
 }
 #endif
 /* Supplied declaration required: cameraProjectToScreen. */
-/* Supplied declaration required: FUN_003e7fa4. */
+/* Supplied declaration required: btlGetCombatantDrawPosition. */
 /* Supplied declaration required: FUN_004f1b2c. */
 /* Supplied declaration required: FUN_004f22a4. */
 extern int FUN_004f2708(int, unsigned int, unsigned int);
@@ -138,7 +138,7 @@ void FUN_0040d274(unsigned int param_1,int param_2)
   case 0xd:
     if (*(int *)(param_2 + 0x14) != 0) {
       temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
-      FUN_003e7fa4(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x6a),0);
+      btlGetCombatantDrawPosition(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x6a),0);
       temp_v2 = *(short *)(param_2 + 0x48);
       temp_v4 = *(unsigned int *)(param_2 + 0x28);
     }
@@ -167,7 +167,7 @@ void FUN_0040d274(unsigned int param_1,int param_2)
       return;
     }
     temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
-    FUN_003e7fa4(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x6a),0);
+    btlGetCombatantDrawPosition(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x6a),0);
     if ((*(unsigned int *)(*(int *)(param_2 + 0x14) + 0x50) & 0x10) != 0) {
       in_s0 = *(float *)(reinterpret_cast<int>(g_btlCamera) + 0x598);
       in_s2 = *(float *)(reinterpret_cast<int>(g_btlCamera) + 0x5a0);
@@ -295,7 +295,7 @@ LAB_0040d588:
   case 0x18:
     if (*(int *)(param_2 + 0x14) != 0) {
       temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
-      FUN_003e7fa4(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x6a),0);
+      btlGetCombatantDrawPosition(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x6a),0);
       temp_v2 = *(short *)(param_2 + 0x48);
       temp_v4 = *(unsigned int *)(param_2 + 0x28);
     }
@@ -322,7 +322,7 @@ LAB_0040d588:
   case 0x19:
     if (*(int *)(param_2 + 0x14) != 0) {
       temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
-      FUN_003e7fa4(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x6a),0);
+      btlGetCombatantDrawPosition(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x6a),0);
       if ((*(unsigned int *)(*(int *)(param_2 + 0x14) + 0x50) & 0x10) != 0) {
         in_s0 = *(float *)(reinterpret_cast<int>(g_btlCamera) + 0x598);
         in_s2 = *(float *)(reinterpret_cast<int>(g_btlCamera) + 0x5a0);

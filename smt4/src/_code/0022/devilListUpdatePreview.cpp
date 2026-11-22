@@ -1,26 +1,29 @@
-/* NON_MATCHING: the 0x604-byte unit copy and the cleared stat region schedule differently (retail zeroes sixteen words with individual stores, armcc keeps the temporary's layout in other registers) and the slot-table search keeps its pointers in different registers. */
+/* NON_MATCHING: 37 lines: retail computes the entry array's base (work + 0x5A8) into a saved register before the
+ * flaggedValueHolderGetTotal call; this build adds it after the call (one instruction fewer), which shifts every
+ * later branch. Only a single-use base pointer local reproduces it (steering, not kept). */
 #include "gamedata/NkmBaseRecord.h"
 #include "gamedata/UnitStats.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
-#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
-/* A devil list entry (0x20 bytes): only its id is read. */
+/* A devil list entry (0x20 bytes). */
 struct DevilPreviewEntry {
-    u8 unk00[4];
-    u16 id;
-    u8 unk06[0x1A];
+    /* 0x00 */ u16 key;  /* 0 in the first entry: the list is empty */
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ u16 id;
+    /* 0x06 */ u8 unk06[0x1A];
 };
 
 /* The devil list screen's work block (only the preview fields). */
 struct DevilPreviewWork {
     u8 unk000[0x20];
     u8 cursor[0x584];
-    /* 0x5A4 */ u8 previewEnabled;
-    /* 0x5A5 */ u8 previewMode;      /* 1: show the party's own copy of the unit */
+    /* 0x5A4 */ s8 previewEnabled;
+    /* 0x5A5 */ s8 previewMode;      /* 1: show the party's own copy of the unit */
     /* 0x5A6 */ u8 unk5a6;
-    /* 0x5A7 */ u8 previewShown;
+    /* 0x5A7 */ s8 previewShown;
     /* 0x5A8 */ DevilPreviewEntry entries[1];
-    u8 unk5c8[0xA000 - 0x28 + 0x5C0 - 0x5A8];
+    /* 0x5C8 */ u8 unk5c8[0xA5B2 - 0x5C8];
+    /* 0xA5B2 */ u16 lastId;         /* the devil the panel shows */
 };
 
 /* The party's slot table (shared prefix): 24 units, the stock order and its count. */
@@ -55,35 +58,21 @@ void unitRecalculateEffectiveStats(StatBlock *unit);
 void memClear(void *block, s32 size);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 
-/* The last previewed id is kept at 0xA5B2 of the work block. */
-struct DevilPreviewWorkView {
-    u8 unk0000[0xA5B2];
-    u16 lastId;
-};
-
 /* Keeps the status panel showing the devil under the cursor: opens the panel for it, and in
  * preview mode builds the unit (a fresh one, or a copy of the party's with its growth cleared). */
 void devilListUpdatePreview(DevilPreviewWork *work)
 {
-    if (*(u16 *)work->entries == 0) {
+    if (work->entries[0].key == 0) {
         FUN_0029dfc0(0);
         return;
     }
-    u16 id = work->entries[flaggedValueHolderGetTotal((u8 *)work + 0x20)].id;
-    u16 *lastId = &((DevilPreviewWorkView *)work)->lastId;
+    u16 id = work->entries[flaggedValueHolderGetTotal(work->cursor)].id;
 
     if (FUN_0029e0f8() == 0) {
         return;
     }
-    if (work->previewEnabled != 1) {
-        if (*lastId == id) {
-            return;
-        }
-        FUN_0029d8a0(id);
-        statusPanelSetOpen(1);
-        FUN_0022d1a8(work);
-    } else {
-        if (work->previewShown == 0 && *lastId == id) {
+    if (work->previewEnabled == 1) {
+        if (work->previewShown == 0 && work->lastId == id) {
             return;
         }
         if (work->previewMode != 1) {
@@ -98,7 +87,8 @@ void devilListUpdatePreview(DevilPreviewWork *work)
             DevilPreviewSlots *slots = gameGetSlotTable();
             StatBlock *current = NULL;
 
-            for (u16 i = 0; i < slots->stockCount; ++i) {
+            u8 count = slots->stockCount;
+            for (u16 i = 0; i < count; ++i) {
                 s32 slot = slots->stock[i];
 
                 if (slot >= 0) {
@@ -132,8 +122,15 @@ void devilListUpdatePreview(DevilPreviewWork *work)
         }
         work->previewShown = 0;
         FUN_0022d1a8(work);
+    } else {
+        if (work->lastId == id) {
+            return;
+        }
+        FUN_0029d8a0(id);
+        statusPanelSetOpen(1);
+        FUN_0022d1a8(work);
     }
-    *lastId = id;
+    work->lastId = id;
 }
 
 }

@@ -12,7 +12,7 @@ int buttonHelpSetText(...);
 int statusPanelClose(void);
 int FUN_0023b45c(...);
 int scrScriptProcessStartEntry(...);
-int FUN_002a5e7c(int);
+int compendiumRegisterPartyDemon(int);
 int statusDownRestartTransition(void);
 int gameGlobalsSetOverlayActive(...);
 int scrSetStringSlot(int, unsigned int);
@@ -70,7 +70,7 @@ extern int gameGlobalsIsActiveStateFour(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int compendiumEntryIsRegistered(void);
 extern int messageGetChoiceResult(void);
-/* Supplied declaration required: FUN_002a5e7c. */
+/* Supplied declaration required: compendiumRegisterPartyDemon. */
 /* Supplied declaration required: statusDownRestartTransition. */
 /* Supplied declaration required: gameGlobalsSetOverlayActive. */
 /* Supplied declaration required: scrSetStringSlot. */
@@ -162,7 +162,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 8);
     if (temp_v0 == 0) {
-      FUN_002a5e7c(*(unsigned short *)(temp_v1 + 0x62));
+      compendiumRegisterPartyDemon(*(unsigned short *)(temp_v1 + 0x62));
     }
     param_1->field_0x8 = 10;
     return;

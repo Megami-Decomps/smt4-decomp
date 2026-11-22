@@ -9,11 +9,11 @@ struct Obj002624b8 {
     /* 0x46 */ u16 unk46;
 };
 
-void FUN_002624c4(void *a, u32 b, u32 c);
+void fusionBuildPreviewResult(void *a, u32 b, u32 c);
 
 void FUN_002624b8(void *a, Obj002624b8 *b, Obj002624b8 *c)
 {
-    FUN_002624c4(a, b->unk46, c->unk46);
+    fusionBuildPreviewResult(a, b->unk46, c->unk46);
 }
 
 }

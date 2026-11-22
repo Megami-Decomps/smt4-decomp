@@ -16,7 +16,7 @@ void FUN_00514b78(void *argument);
 void FUN_00514af0(ThreadEntryPoint entry, void *argument);
 void saveLoadReadThreadWorker(void *request);
 void FUN_00371100(void *request);
-void FUN_00349ca4(void *request);
+void saveLoadWriteThreadWorker(void *request);
 void FUN_00349e60(void *request);
 s32 FUN_0032c8c8(s32 result);
 }
@@ -77,7 +77,7 @@ extern "C" bool FUN_0031ed60(SaveLoadThreadRequest *request, s32 mode)
     } else if (mode == 0 || mode == 3 || mode == 5) {
         result = startSaveLoadWorker(request, saveLoadReadThreadWorker);
     } else if (mode == 2) {
-        result = startSaveLoadWorker(request, FUN_00349ca4);
+        result = startSaveLoadWorker(request, saveLoadWriteThreadWorker);
     } else if (mode == 4) {
         result = startSaveLoadWorker(request, FUN_00349e60);
     }

@@ -6,7 +6,7 @@
 
 extern "C" {
 extern BattleVector3 DAT_00493530;
-void FUN_003d5f60(BattleVectorTransition *work, const BattleVector3 *origin, const BattleVector3 *target, f32 distance);
+void battleVectorTransitionAimPath(BattleVectorTransition *work, const BattleVector3 *origin, const BattleVector3 *target, f32 distance);
 
 /* Starts the depth-offset arc: records the path parameters, captures the current vectors and aims the arc at the
  * end anchor pushed back by the depth offset. */
@@ -24,6 +24,6 @@ void FUN_003d710c(BattleVectorTransition *work, u32 duration, u32 mode, s32 dept
     BattleVector3 difference = {start.x - end.x, start.y - end.y, start.z - end.z};
     f32 distance = sqrtf(difference.x * difference.x + difference.y * difference.y + difference.z * difference.z);
     end.z += (f32)work->path.depthOffset;
-    FUN_003d5f60(work, (const BattleVector3 *)&x, &end, distance);
+    battleVectorTransitionAimPath(work, (const BattleVector3 *)&x, &end, distance);
 }
 }

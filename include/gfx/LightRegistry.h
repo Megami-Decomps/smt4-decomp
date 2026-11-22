@@ -2,6 +2,7 @@
 #define GFX_LIGHT_REGISTRY_H
 #include "common.h"
 #include <stddef.h>
+#include <algorithm>
 
 struct LightRegistry;
 struct LightRegistration {
@@ -10,6 +11,15 @@ struct LightRegistration {
 };
 extern "C" LightRegistration** _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_(
     LightRegistration**, LightRegistration**, LightRegistration**, LightRegistration* const*);
+/* Rogue Wave's std::remove over the registry's pointer array: find the first match, then compact the
+ * rest with the out-of-line remove_copy. */
+static __inline LightRegistration **lightRegistryRemove(LightRegistration **first, LightRegistration **last,
+                                                        LightRegistration *const &value)
+{
+    first = std::find(first, last, value);
+    LightRegistration **next = first;
+    return first == last ? first : _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_(++next, last, first, &value);
+}
 struct LightRegistry {
     union {
         u8 unk00[0x18]; // 0x00
@@ -23,14 +33,8 @@ struct LightRegistry {
 
     bool remove(LightRegistration* const& light)
     {
-        LightRegistration** newEnd = begin;
-        while (newEnd != end && *newEnd != light) {
-            ++newEnd;
-        }
-        if (newEnd != end) {
-            newEnd = _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_(newEnd + 1, end, newEnd, &light);
-        }
-        bool removed = end != newEnd;
+        LightRegistration** newEnd = lightRegistryRemove(begin, end, light);
+        bool removed = newEnd != end;
         end = newEnd;
         return removed;
     }

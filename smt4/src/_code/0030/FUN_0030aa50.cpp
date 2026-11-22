@@ -3,12 +3,12 @@
 
 extern "C" {
 
-void FUN_00202ab4(s32 a, s32 b);
+void saveLoadUICreate(s32 a, s32 b);
 
 /* Resets the save/load worker for a load (isLoad = 1) and enters state 8 at the position of record 0x36/2. */
 void FUN_0030aa50(u8 arg)
 {
-    FUN_00202ab4(0, 0);
+    saveLoadUICreate(0, 0);
     Worker *worker = g_saveLoadUIFlags.worker;
     worker->unk014 = 0;
     g_saveLoadUIFlags.unk00 = 0;

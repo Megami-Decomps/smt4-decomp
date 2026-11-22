@@ -4,7 +4,7 @@
 
 extern "C" {
 void FUN_002a65d8(void* file, u32 mask);
-void FUN_002a63d8(void* file, u32 mask);
+void graphicsResourceSetLeafValue(void* file, u32 mask);
 void FUN_002a6264(void* file, u32 mask);
 AsdAllocator* asdMemoryGetDefaultAllocator(void);
 void nw_gfx_res_ResGraphicsFile_Setup(void* file, AsdAllocator* allocator, void* data);
@@ -34,9 +34,9 @@ void* gfxCreateResGraphicsFileObject(void* data, u32 flags)
         FUN_002a65d8(file, 0x02030000);
     }
     if (flags & 0x20) {
-        FUN_002a63d8(file, 0x02020000);
+        graphicsResourceSetLeafValue(file, 0x02020000);
     } else if (flags & 0x100) {
-        FUN_002a63d8(file, 0x02030000);
+        graphicsResourceSetLeafValue(file, 0x02030000);
     }
     if (flags & 0x10) {
         FUN_002a6264(file, 0x02020000);

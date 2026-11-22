@@ -87,6 +87,12 @@ struct BattleViewState {
             u32 unkC0;
             f32 unkC4;
         } tailSettings;
+        /* the screen-edge direction indicator (mapDrawTargetDirectionIndicator) */
+        struct {
+            /* 0xb0 */ s32 frame;    /* blink counter */
+            /* 0xb4 */ f32 angle;    /* degrees, signed by side */
+            /* 0xb8 */ u8 hidden;
+        } indicator;
     };
     /* 0xc8 */ MoriModelContent *children[3];
 };
@@ -103,6 +109,7 @@ typedef char BattleViewResetFieldsLayoutCheck[
     offsetof(BattleViewState, transitionFlags) == 0x74 &&
     offsetof(BattleViewState, limits) == 0x98 &&
     offsetof(BattleViewState, resetTail.unkA4) == 0xa4 &&
-    offsetof(BattleViewState, tailSettings.unkBC) == 0xbc ? 1 : -1];
+    offsetof(BattleViewState, tailSettings.unkBC) == 0xbc &&
+    offsetof(BattleViewState, indicator.hidden) == 0xb8 ? 1 : -1];
 
 #endif

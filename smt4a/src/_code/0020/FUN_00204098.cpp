@@ -16,7 +16,7 @@ int buttonHelpTransitionPresetFlags(...);
 int gameSavedFlagSet(...);
 int statusCommitSelectedSkills(...);
 int FUN_0026cbb8(...);
-int FUN_002a5e7c(...);
+int compendiumRegisterPartyDemon(...);
 void statusReplaceSkills(const u16 *skills, u8 count);
 int statusDownOpenList(...);
 int statusDownEnterState3(void);
@@ -227,7 +227,7 @@ extern int messageMainIsIdle(void);
 /* Supplied declaration required: entrySlotStoreRecordValue. */
 /* Supplied declaration required: mapDepartAdvanceState. */
 extern int messageGetChoiceResult(void);
-/* Supplied declaration required: FUN_002a5e7c. */
+/* Supplied declaration required: compendiumRegisterPartyDemon. */
 /* Supplied declaration required: saveMarkIdListSeen. */
 /* Supplied declaration required: statusDownRestartTransition. */
 /* Supplied declaration required: statusPanelSetOpen. */
@@ -1866,7 +1866,7 @@ joined_r0x002075ac:
       temp_v16 = messageMainIsIdle();
       if (temp_v16 != 0) {
         if (*(char *)(temp_v6 + 0x7f2c) != '\0') {
-          FUN_002a5e7c(*(unsigned short *)(temp_v13 + 0x62));
+          compendiumRegisterPartyDemon(*(unsigned short *)(temp_v13 + 0x62));
           *(unsigned char *)(temp_v6 + 0x7f2c) = 0;
         }
         buttonHelpSetText(0,0xf4f4f4ff);

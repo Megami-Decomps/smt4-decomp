@@ -1,253 +1,261 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `btlEffectModelJobDispatch` (_code @ 0x3dd1a4, 0x4c4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include <stdio.h>
-#include "romwright_types.h"
+/* NON_MATCHING: the stages and their inlined passes are retail's; what differs:
+ * - the reference-effect requests: retail keeps the name table in sl and a pointer to the formatted path in r9, both
+ *   set before the loop (the build reloads `sp + 128` and uses r9 for the table), so retail saves one register more
+ *   (r4-sl) and its frame is 256 bytes for the build's 260; the `'/'` argument of the strrchr is set a row later;
+ * - the finish pass: retail still loads the effect kind (into r7) for the compiled-out body and enters the loop
+ *   unconditionally;
+ * - the camera flag: retail keeps g_btlMain in r0 and ORs through `[r0, #1588]`, the build forms the address apart;
+ * - the two stage changes of the wait stage each store the flags in retail; the build shares one store;
+ * - the prologue (retail: push, add, vpush, the two parameter moves around `sub sp`) and the three zero arguments
+ *   of modelPartSetRotationDegrees (retail: s2, s1, s0 each from s16) are those of a <stdio.h> sprintf with the
+ *   format as a literal: both come out as retail's once the unit owns "battle/effect/%s.eft" (119 raw, 55 shape).
+ *   The literal (DAT_004008c4) is shared with the file's other effect loaders, so it is passed to __2sprintf here. */
+#include "common.h"
+#include "runtime/Stdio.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "battle/BtlEffectLoad.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlMainAccess.h"
+#include "battle/btlEffect.h"
+#include "code/Code0023_Smt4.h"
+#include "code/Code002d_Smt4.h"
+#include "gfx/ModelBoneAttachment.h"
+#include "map/LmapPlayerModel.h"
+#include "shard/BattleSceneSlots.h"
+#include "shard/JobWork.h"
+#include "shard/W6_W6Match3_EffectColor.h"
+#include "shard/W6_W6Match5_EffectLineJob.h"
 
 extern "C" {
 
-int effectColorInitDefault(...);
-int FUN_002276f8(...);
-int asdModelClearSlotColors(...);
-int modelSetAnimationChannels(...);
-int animPlayerSetLoopPolicy(...);
-int modelPartSetRotationDegrees(...); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
-int btlGetMainState(...);
-int asdLoadFileAsyncSimple(...);
-int lightOwnerRegister(...);
-int libc_strcpy(...);
-int memClear(...);
-void animOwnerSetScale(unsigned int, float);
-int FUN_003da0ec(...);
-int modelAttachmentsUpdateFromParents(...);
-int battleCreateSecondaryModels(...);
-int FUN_003dc924(...);
-int __aeabi_memcpy4(...);
+extern BtlEffectGlobals g_btlEffect;
+extern const char DAT_00400664[11][32]; /* "ef_e_ref..." reference effect names */
+extern const char DAT_004008c4[];       /* "battle/effect/%s.eft" */
 
-typedef int romwright_code(...);
-/* stack frame of param_4: 3 slot(s), 9 byte(s) */
-typedef struct {
-    unsigned char spA0; /* 0xa0: local_a0 */
-    unsigned int sp124; /* 0x124: local_124 */
-    unsigned int sp128; /* 0x128: local_128 */
-} param_4_stack;
-extern unsigned int g_btlAux; /* 0x435d18 */
+void btlEffectNumberedRelease(BtlEffectWork *work);
+void effectColorInitDefault(EffectColor *color);
+u8 gameObjectFlagIsSet(void);
+void battleCreateSecondaryModels(void *work, s32 kind);
+s32 modelHasLoadedAttachment(const ModelBoneAttachmentRoot *object);
+u32 modelAttachmentsUpdateFromParents(BtlEffectWork *work);
+void modelSetAnimationChannels(AsdMdlObject *model, s32 index, f32 blend);
+void animPlayerSetLoopPolicy(AsdMdlNode *node, s32 loop);
+void FUN_003dc924(BtlEffectWork *work, s32 effectKind, s32 allActors);
+void FUN_003da0ec(BtlEffectWork *work);
+char *libc_strcpy(char *destination, const char *source); // declcheck: local (the shared one takes unsigned int pointers)
+const u8 *libc_strrchr(const u8 *text, u32 character);
+u32 keyedRecordFindByName(const char *name);
 
-/* Supplied declaration required: effectColorInitDefault. */
-/* Supplied declaration required: FUN_002276f8. */
-/* Supplied declaration required: asdModelClearSlotColors. */
-/* Supplied declaration required: modelSetAnimationChannels. */
-extern int keyedRecordFindByName(int);
-extern int libc_strrchr(unsigned char *, unsigned int);
-/* Supplied declaration required: animPlayerSetLoopPolicy. */
-/* Supplied declaration required: modelPartSetRotationDegrees. */
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: lightOwnerRegister. */
-extern int modelHasLoadedAttachment(unsigned int);
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: animOwnerSetScale. */
-extern int gameObjectFlagIsSet(void);
-/* Supplied declaration required: FUN_003da0ec. */
-/* Supplied declaration required: modelAttachmentsUpdateFromParents. */
-/* Supplied declaration required: battleCreateSecondaryModels. */
-/* Supplied declaration required: FUN_003dc924. */
-/* Supplied declaration required: __aeabi_memcpy4. */
+} /* extern "C" */
 
-
-unsigned int btlEffectModelJobDispatch(int param_1,unsigned int param_2,unsigned int param_3,int param_4)
-
+/* Gives the unit model the default effect colour. */
+static __inline void applyDefaultEffectColor(JobWork *jobWork)
 {
-/* irregular: 2 goto(s); 18 native warning(s); review required */
-  char temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned int *puVar8;
-  unsigned char temp_v7;
-  unsigned char temp_v8 [4];
-  int temp_v9;
-  unsigned char temp_v10 [8];
-  unsigned char temp_v11;
-  
-  if (0 < *(int *)(param_1 + 0x3214)) {
-    *(int *)(param_1 + 0x3214) = *(int *)(param_1 + 0x3214) - 1;
-  }
-  temp_v1 = *(unsigned int *)(param_1 + 0x3028);
-  temp_v7 = (temp_v1 & 2) != 0;
-  if (temp_v7) {
-    temp_v1 = *(unsigned int *)(param_1 + 0x3034);
-  }
-  if (temp_v7 && temp_v1 != 0) {
-    if ((g_btlMain != 0) &&
-       (temp_v0 = *(char *)(param_1 + 0x3038), (temp_v0 == '\x02' || temp_v0 == '\b') || temp_v0 == '\t')) {
-      g_btlMain->flags = g_btlMain->flags | 0x4000000;
-    }
-    (**(romwright_code **)(**(int **)(param_1 + 0x3034) + 8))();
-    temp_v2 = (**(romwright_code **)(**(int **)(param_1 + 0x3034) + 0x14))();
-    if (temp_v2 != 0) {
-      FUN_002276f8(param_1);
-    }
-  }
-  if ((*(unsigned int *)(param_1 + 0x3028) & 4) != 0) {
-    effectColorInitDefault(temp_v8);
-    asdModelClearSlotColors(param_2);
-  }
-  if ((*(unsigned int *)(param_1 + 0x3028) & 8) != 0) {
-    effectColorInitDefault(temp_v8);
-    asdModelClearSlotColors(param_2);
-    temp_v2 = gameObjectFlagIsSet();
-    if (temp_v2 == 0) {
-      *(unsigned int *)(param_1 + 0x3028) = *(unsigned int *)(param_1 + 0x3028) & 0xfffffff7;
-    }
-  }
-  if ((*(unsigned int *)(param_1 + 0x3028) & 0x10) == 0) {
-    temp_v1 = *(unsigned int *)(param_1 + 0x3028);
-  }
-  else {
-    battleCreateSecondaryModels(g_btlAux,*(unsigned int *)(param_1 + 0x302c));
-    temp_v1 = (*(unsigned int *)(param_1 + 0x3028) & 0xffffffef) | 0x20;
-    *(unsigned int *)(param_1 + 0x3028) = temp_v1;
-  }
-  if ((temp_v1 & 0x20) != 0) {
-    if (*(int *)(param_1 + 0x302c) != 0 && *(int *)(param_1 + 0x302c) != 0x16) {
-      temp_v2 = 0;
-      do {
-        temp_v3 = param_1 + temp_v2 * 0x28;
-        if ((*(unsigned int *)(temp_v3 + 0x1b4) & 2) != 0) {
-          temp_v4 = modelHasLoadedAttachment(*(unsigned int *)(temp_v3 + 400));
-          if (temp_v4 == 0) goto LAB_003dd4ac;
-          *(unsigned int *)(temp_v3 + 0x1b4) = *(unsigned int *)(temp_v3 + 0x1b4) | 4;
-        }
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 0x32);
-    }
-    if (*(int *)(param_1 + 0x302c) != 0 && *(int *)(param_1 + 0x302c) != 0x16) {
-      temp_v2 = 0;
-      do {
-        temp_v3 = btlGetMainState();
-        temp_v3 = temp_v3 + temp_v2 * 0x1c;
-        temp_v4 = *(int *)(temp_v3 + 0x2318);
-        if (-1 < temp_v4) {
-          param_4 = *(int *)(temp_v3 + 0x231c);
-        }
-        if (-1 < temp_v4 && -1 < param_4) {
-          temp_v3 = 0;
-          while( 1 ) {
-            temp_v5 = param_1 + temp_v3 * 0x28;
-            temp_v6 = temp_v5 + 400;
-            temp_v7 = *(int *)(temp_v5 + 0x194) == temp_v4;
-            if (temp_v7) {
-              temp_v6 = *(int *)(temp_v5 + 0x198);
+    EffectColor color;
+
+    effectColorInitDefault(&color);
+    asdModelSetUnitSlotColor(jobWork, color.red, color.green, color.blue);
+}
+
+/* btlEffectModelsLoaded's body: whether every used model slot's attachment has loaded; marks the loaded ones. */
+static __inline u32 modelSlotsLoaded(BtlEffectWork *work, s32 kind)
+{
+    if (kind != 0 && kind != 22) {
+        for (s32 i = 0; i < 50; i++) {
+            BtlEffectModelSlot *slot = &work->models[i];
+
+            if ((slot->flags & BTL_EFFECT_MODEL_USED) != 0) {
+                if (modelHasLoadedAttachment((const ModelBoneAttachmentRoot *)slot->model) == 0) {
+                    return 0;
+                }
+                slot->flags |= BTL_EFFECT_MODEL_LOADED;
             }
-            if (temp_v7 && temp_v6 == param_4) break;
-            temp_v3 = temp_v3 + 1;
-            if (temp_v3 >= 0x32) {
-              *(unsigned int *)(param_1 + 0x3028) = (*(unsigned int *)(param_1 + 0x3028) & 0xffffffdf) | 0x10;
-              goto LAB_003dd4ac;
+        }
+    }
+    return 1;
+}
+
+/* Whether every target slot of the battle state (its 109 id pairs) has its model slot. Retail tests the
+ * kind for 0 and 22 a second time right after modelSlotsLoaded's test, as two functions with the same guard do. */
+static __inline u32 modelSlotsComplete(BtlEffectWork *work, s32 kind)
+{
+    if (kind != 0 && kind != 22) {
+        for (s32 i = 0; i < 109; i++) {
+            const BattleTargetSlot *source = &((const BattleSceneSlots *)btlGetMainState())->slots[i];
+
+            if (source->primaryId >= 0 && source->secondaryId >= 0) {
+                bool found = false;
+
+                for (s32 j = 0; j < 50; j++) {
+                    const BtlEffectModelSlot *slot = &work->models[j];
+
+                    if (slot->primaryId == source->primaryId && slot->secondaryId == source->secondaryId) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    return 0;
+                }
             }
-          }
         }
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 0x6d);
     }
-    modelAttachmentsUpdateFromParents(param_1);
-    temp_v2 = 0;
-    do {
-      temp_v3 = param_1 + temp_v2 * 0x28;
-      puVar8 = (unsigned int *)(temp_v3 + 400);
-      temp_v1 = *(unsigned int *)(temp_v3 + 0x1b4);
-      temp_v7 = (temp_v1 & 2) != 0;
-      if (temp_v7) {
-        temp_v1 = *puVar8;
-      }
-      if (temp_v7 && temp_v1 != 0) {
-        if (*(int *)(*(int *)(temp_v1 + 8) + 0xc) < 0) {
-          lightOwnerRegister(temp_v1,1);
+    return 1;
+}
+
+/* btlEffectModelsResetPlayers's body: resets the animation player of every model and publishes its selection. */
+static __inline void modelSlotsResetPlayers(BtlEffectWork *work)
+{
+    for (s32 i = 0; i < 50; i++) {
+        BtlEffectModelSlot *slot = &work->models[i];
+
+        if ((slot->flags & BTL_EFFECT_MODEL_USED) != 0 && slot->model != NULL) {
+            if (slot->model->node->unk0c < 0) {
+                lightOwnerRegister(slot->model, 1);
+            }
+            modelPartSetRotationDegrees(slot->model->node, 0, nodeVec3(0.0f, 0.0f, 0.0f));
+            modelSetAnimationChannels(slot->model, 0, 0.0f);
+            animOwnerSetScale((ModelOwner *)slot->model, 0.0f);
+            animPlayerSetLoopPolicy(slot->model->node, 1);
+            AsdMdlObject *model = slot->model;
+            model->flags |= 2;
+            model->node->sceneNode->positionFollowed = 0;
+            s32 selection = slot->selection;
+            if (selection >= 0) {
+                work->selections[selection].id = slot->primaryId;
+                work->selections[selection].index = slot->selection;
+            }
         }
-        modelPartSetRotationDegrees(*(unsigned int *)(*puVar8 + 8),0);
-        modelSetAnimationChannels(*puVar8,0);
-        animOwnerSetScale(*puVar8, 0.0f);
-        animPlayerSetLoopPolicy(*(unsigned int *)(*puVar8 + 8),1);
-        puVar8 = (unsigned int *)*puVar8;
-        *puVar8 = *puVar8 | 2;
-        *(unsigned char *)(*(int *)(puVar8[2] + 0x2c) + 0x1f6) = 0;
-        if (-1 < *(int *)(temp_v3 + 0x1ac)) {
-          temp_v4 = param_1 + *(int *)(temp_v3 + 0x1ac) * 8;
-          *(unsigned int *)(temp_v4 + 0x1030) = *(unsigned int *)(temp_v3 + 0x194);
-          *(unsigned int *)(temp_v4 + 0x1034) = *(unsigned int *)(temp_v3 + 0x1ac);
-        }
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0x32);
-    *(unsigned int *)(param_1 + 0x3028) = (*(unsigned int *)(param_1 + 0x3028) & 0xffffffdf) | 0x40;
-  }
-LAB_003dd4ac:
-  if ((*(unsigned int *)(param_1 + 0x3028) & 0x40) == 0) {
-    temp_v1 = *(unsigned int *)(param_1 + 0x3028);
-  }
-  else {
-    FUN_003dc924(param_1,*(unsigned int *)(param_1 + 0x302c),0);
-    temp_v1 = (*(unsigned int *)(param_1 + 0x3028) & 0xffffffbf) | 0x80;
-    *(unsigned int *)(param_1 + 0x3028) = temp_v1;
-  }
-  if ((temp_v1 & 0x80) == 0) {
-    temp_v1 = *(unsigned int *)(param_1 + 0x3028);
-  }
-  else {
-    temp_v2 = 0;
-    while (temp_v2 = temp_v2 + 1, temp_v2 < 0x6d) {
-      if (temp_v2 >= 4) {
-        btlGetMainState();
-      }
     }
-    temp_v1 = *(unsigned int *)(param_1 + 0x3028) & 0xffffff0f;
-    *(unsigned int *)(param_1 + 0x3028) = temp_v1;
-  }
-  if ((temp_v1 & 0x100) != 0) {
-    temp_v2 = 0;
-    do {
-      memClear(temp_v8,0x80);
-      memClear(temp_v10,0x80);
-      sprintf((char *)temp_v10,"battle/effect/%s.eft","ef_e_ref" + temp_v2 * 0x20);
-      libc_strcpy(temp_v8,temp_v10);
-      temp_v3 = param_1 + temp_v2 * 0x8c;
-      temp_v4 = libc_strrchr(temp_v8,0x2f);
-      libc_strcpy(temp_v3 + 0x25c8,temp_v4 + 1);
-      temp_v4 = keyedRecordFindByName(temp_v3 + 0x25c8);
-      if (temp_v4 == 0xff) {
-        asdLoadFileAsyncSimple(temp_v8,temp_v3 + 0x25c4,0);
-        *(unsigned char *)(temp_v3 + 0x2648) = *(unsigned char *)(temp_v3 + 0x2648) | 1;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0xb);
-    *(unsigned int *)(param_1 + 0x3028) = (*(unsigned int *)(param_1 + 0x3028) & 0xfffffeff) | 0x200;
-  }
-  temp_v1 = *(unsigned int *)(param_1 + 0x3028);
-  if ((temp_v1 & 0x200) != 0) {
-    temp_v2 = 0;
-    do {
-      __aeabi_memcpy4(temp_v8,param_1 + temp_v2 * 0x8c + 0x25c0,0x8c);
-      if (((temp_v11 & 1) != 0) && (temp_v9 == 0)) {
-        FUN_003da0ec(param_1);
-        if (*(unsigned int *)(param_1 + 0x3030) < 0xffff) {
-          *(unsigned int *)(param_1 + 0x3030) = *(unsigned int *)(param_1 + 0x3030) + 1;
+}
+
+/* The file name part of a path (the helper FUN_003dbb40 and effectRequestByName use). */
+static __inline const char *fileNameFromPath(const char *path)
+{
+    const u8 *separator = libc_strrchr((const u8 *)path, '/');
+    return (const char *)(separator + 1);
+}
+
+/* Names an effect file slot after `path` and requests the file unless a record already provides it: the tail
+ * FUN_003dadd8, FUN_003dba3c, FUN_003dbb40 and effectRequestByName end with (retail copies `path` into r8). */
+static __inline void effectFileSlotRequest(BtlEffectFileSlot *slot, const char *path)
+{
+    libc_strcpy(slot->name, fileNameFromPath(path));
+    if (keyedRecordFindByName(slot->name) == 0xff) {
+        asdLoadFileAsyncSimple(path, (u32 *)&slot->file, 0);
+        slot->flags |= 1;
+    }
+}
+
+/* Requests the eleven reference effects (FUN_003dadd8 and FUN_003dba3c are the same loop over other slots). */
+static __inline void referenceEffectsRequest(BtlEffectWork *work)
+{
+    for (s32 i = 0; i < 11; i++) {
+        char path[0x80];
+        char formatted[0x80];
+
+        memClear(path, sizeof(path));
+        const char *name = DAT_00400664[i];
+        memClear(formatted, sizeof(formatted));
+        __2sprintf(formatted, DAT_004008c4, name);
+        libc_strcpy(path, formatted);
+        effectFileSlotRequest(&work->referenceSlots[i], path);
+    }
+}
+
+/* Whether every requested reference effect has its file (btlEventAreResourcesReady's body over these slots). */
+static __inline u32 referenceEffectsReady(const BtlEffectWork *work)
+{
+    for (s32 i = 0; i < 11; i++) {
+        BtlEffectFileSlot slot = work->referenceSlots[i];
+
+        if ((slot.flags & 1) != 0 && slot.file == NULL) {
+            return 0;
         }
-        return 0;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0xb);
-    *(unsigned int *)(param_1 + 0x3028) = (temp_v1 & 0xfffffdff) | 0x400;
-  }
-  FUN_003da0ec(param_1);
-  if (*(unsigned int *)(param_1 + 0x3030) < 0xffff) {
-    *(unsigned int *)(param_1 + 0x3030) = *(unsigned int *)(param_1 + 0x3030) + 1;
-  }
-  return 0;
+    }
+    return 1;
+}
+
+extern "C" {
+
+/* The effect work's per-frame job: runs the numbered effect, keeps the unit model's colour, and steps the
+ * model stages (create the secondary models, wait for them, reset their players, clone them for the acting
+ * units) and the reference-effect stages (request, wait) that BtlEffectWork::flags asks for. */
+s32 btlEffectModelJobDispatch(BtlEffectWork *work, JobWork *jobWork)
+{
+    if (work->wait > 0) {
+        work->wait--;
+    }
+    if ((work->flags & BTL_EFFECT_JOB_NUMBERED_EFFECT) != 0 && work->numberedEffect != 0) {
+        if (g_btlMain != NULL &&
+            (work->numberedIndex == 2 || work->numberedIndex == 8 || work->numberedIndex == 9)) {
+            g_btlMain->flags |= 0x4000000;
+        }
+        ((BustupEffectLineObject *)work->numberedEffect)->update();
+        if (((BustupEffectLineObject *)work->numberedEffect)->isFinished() != 0) {
+            btlEffectNumberedRelease(work);
+        }
+    }
+    if ((work->flags & BTL_EFFECT_JOB_COLOR_ONCE) != 0) {
+        applyDefaultEffectColor(jobWork);
+    }
+    if ((work->flags & BTL_EFFECT_JOB_COLOR_FOLLOW) != 0) {
+        applyDefaultEffectColor(jobWork);
+        if (gameObjectFlagIsSet() == 0) {
+            work->flags &= ~BTL_EFFECT_JOB_COLOR_FOLLOW;
+        }
+    }
+    if ((work->flags & BTL_EFFECT_JOB_CREATE_MODELS) != 0) {
+        battleCreateSecondaryModels(g_btlEffect.data, work->effectKind);
+        work->flags = (work->flags & ~BTL_EFFECT_JOB_CREATE_MODELS) | BTL_EFFECT_JOB_WAIT_MODELS;
+    }
+    if ((work->flags & BTL_EFFECT_JOB_WAIT_MODELS) != 0) {
+        if (modelSlotsLoaded(work, work->effectKind) != 0) {
+            if (modelSlotsComplete(work, work->effectKind) == 0) {
+                work->flags = (work->flags & ~BTL_EFFECT_JOB_WAIT_MODELS) | BTL_EFFECT_JOB_CREATE_MODELS;
+            } else {
+                modelAttachmentsUpdateFromParents(work);
+                modelSlotsResetPlayers(work);
+                work->flags = (work->flags & ~BTL_EFFECT_JOB_WAIT_MODELS) | BTL_EFFECT_JOB_CLONE_MODELS;
+            }
+        }
+    }
+    if ((work->flags & BTL_EFFECT_JOB_CLONE_MODELS) != 0) {
+        FUN_003dc924(work, work->effectKind, 0);
+        work->flags = (work->flags & ~BTL_EFFECT_JOB_CLONE_MODELS) | BTL_EFFECT_JOB_FINISH_MODELS;
+    }
+    if ((work->flags & BTL_EFFECT_JOB_FINISH_MODELS) != 0) {
+        /* the pass over the battle's actions that follows the clone stage (the loop head of FUN_003dc924):
+         * nothing of its body but the state lookup is left in retail */
+        for (s32 i = 0; i < 109; i++) {
+            if (i < 4) {
+                continue;
+            }
+            if ((btlGetMainState()->actions[i].status & 1) == 0) {
+                continue;
+            }
+            if (work->effectKind == 0 || work->effectKind == 22) {
+                continue;
+            }
+        }
+        work->flags &= ~BTL_EFFECT_JOB_MODEL_STAGES;
+    }
+    if ((work->flags & BTL_EFFECT_JOB_LOAD_REFERENCES) != 0) {
+        referenceEffectsRequest(work);
+        work->flags = (work->flags & ~BTL_EFFECT_JOB_LOAD_REFERENCES) | BTL_EFFECT_JOB_WAIT_REFERENCES;
+    }
+    if ((work->flags & BTL_EFFECT_JOB_WAIT_REFERENCES) != 0) {
+        if (referenceEffectsReady(work) != 0) {
+            work->flags = (work->flags & ~BTL_EFFECT_JOB_WAIT_REFERENCES) | BTL_EFFECT_JOB_REFERENCES_READY;
+        }
+    }
+    FUN_003da0ec(work);
+    if (work->frames < 0xffff) {
+        work->frames++;
+    }
+    return 0;
 }
 
 } /* extern "C" */

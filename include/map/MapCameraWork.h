@@ -2,6 +2,7 @@
 #define MAP_MAPCAMERAWORK_H
 
 #include "map/mapDepart.h"
+#include "map/VectorPairTransition.h"
 #include <stddef.h>
 
 /* The field map's camera view (IV; Apocalypse's twin is LmapViewA, whose layout is 4 bytes longer
@@ -49,8 +50,10 @@ typedef struct LmapView {
     /* 0x1C8 */ f32 fieldOfView[16]; /* degrees */
     /* 0x208 */ s32 contextOverride;
     /* 0x20C */ f32 values[4];
-    /* 0x21C */ u8 tracking;
-    /* 0x21D */ u8 unk21D[0x77];
+    /* 0x21C */ u8 tracking;        /* the camera move below is running */
+    /* 0x21D */ u8 unk21D[3];
+    /* 0x220 */ VectorPairTransition move; /* the camera move (vectorPairTransitionStep steps it) */
+    /* 0x290 */ u8 unk290[4];
     /* 0x294 */ MapVector targetOffset;
     /* 0x2A0 */ u32 requestActive;  /* a request (lmapRequestTimedEffect) is pending */
     /* 0x2A4 */ s32 priority;       /* the pending request's priority */
@@ -79,7 +82,8 @@ typedef char LmapViewOffsets[offsetof(LmapView, heading) == 0x18 && offsetof(Lma
     offsetof(LmapView, turning) == 0xB0 && offsetof(LmapView, turnStart) == 0xB8 &&
     offsetof(LmapView, preset) == 0xC4 && offsetof(LmapView, rearDistance) == 0x188 &&
     offsetof(LmapView, fieldOfView) == 0x1C8 && offsetof(LmapView, contextOverride) == 0x208 &&
-    offsetof(LmapView, tracking) == 0x21C && offsetof(LmapView, targetOffset) == 0x294 &&
+    offsetof(LmapView, tracking) == 0x21C && offsetof(LmapView, move) == 0x220 &&
+    offsetof(LmapView, targetOffset) == 0x294 &&
     offsetof(LmapView, moving) == 0x2B0 && offsetof(LmapView, presetEnabled) == 0x2B8 &&
     sizeof(LmapView) == 0x2C0 && offsetof(LmapViewHolder, view) == 4 ? 1 : -1];
 

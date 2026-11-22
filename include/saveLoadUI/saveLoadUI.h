@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include "gamedata/PlayerInitialization.h"
+#include "ui/UiSpriteState.h"
 #include <stddef.h>
 
 struct SavePreviewSlot {
@@ -29,6 +30,12 @@ typedef char SavePreviewSlotOffsets[
     offsetof(SavePreviewSlot, enabled) == 0x4c &&
     offsetof(SavePreviewSlot, optionEnabled) == 0x64 ? 1 : -1];
 
+/* The game data table block (gameDataBlocksGetTable): 0x80 bytes saved ahead of the settings and the save data. */
+struct SaveTableImage {
+    u32 words[32];
+};
+struct ConfigSettingsImage; /* IV: the eight setting bytes configGetSettings returns (gamedata/SaveLoadProcess.h) */
+
 /* IV: the save/load screen's work area. */
 typedef struct SaveLoadUIWork {
     /* 0x00 */ u32 task;                   /* the screen's task handle */
@@ -51,8 +58,71 @@ typedef struct SaveLoadUIWork {
             u8 unk354;
             u8 pending;
         } preview;
+        /* the screen's own state, as saveLoadUI's initialiser (saveLoadUICreate) sets it up */
+        struct {
+            /* 0x010 */ u8 unk10[8];
+            /* 0x018 */ s32 selectedSlot;         /* starts at the slot last used (Sys44de28.lastSlot) */
+            /* 0x01C */ f32 unk1C;
+            /* 0x020 */ f32 unk20;                /* 30.0 */
+            /* 0x024 */ s32 unk24;
+            /* 0x028 */ u8 inputBlocked;
+            /* 0x029 */ u8 unk29[3];
+            /* 0x02C */ f32 unk2C;                /* 0.5 */
+            /* 0x030 */ f32 unk30;                /* 0.5 */
+            /* 0x034 */ u32 slotIndex;
+            /* 0x038 */ f32 slotX;
+            /* 0x03C */ f32 slotY;
+            /* 0x040 */ u8 unk40[8];
+            /* 0x048 */ u8 unk48;
+            /* 0x049 */ u8 isLoad;
+            /* 0x04A */ u8 unk4A[0xA];
+            /* 0x054 */ u8 unk54;
+            /* 0x055 */ u8 unk55;
+            /* 0x056 */ u8 unk56[2];
+            /* 0x058 */ s32 unk58;
+            /* 0x05C */ u8 unk5C;
+            /* 0x05D */ u8 unk5D[3];
+            /* 0x060 */ s32 unk60;                /* 4 */
+            /* 0x064 */ s32 panelX[3];            /* x of the three slot panels (320, 640, 800 as the screen opens) */
+            /* 0x070 */ u8 unk70;
+            /* 0x071 */ u8 unk71;
+            /* 0x072 */ u8 unk72;
+            /* 0x073 */ u8 unk73;
+            /* 0x074 */ u8 unk74[8];
+            /* 0x07C */ UiResourceParameters resources;   /* the sprites' animation resource */
+            /* 0x09C */ UiSpriteState sprites[3];
+            /* 0x240 */ u32 scriptData;           /* saveLoadUI/saveloadUI.bf */
+            /* 0x244 */ u32 messageData;          /* saveLoadUI/saveloadUI.mbm */
+            /* 0x248 */ u32 unk248;
+            /* 0x24C */ SavePreviewSlot slots[2];
+            /* 0x34C */ u8 available[2];
+            /* 0x34E */ u8 unk34E[2];
+            /* 0x350 */ PlayerDataIV *player;     /* scratch player record for the previews */
+            /* 0x354 */ u8 unk354;
+            /* 0x355 */ u8 pending;
+            /* 0x356 */ u8 unk356[6];
+            /* 0x35C */ s32 unk35C;
+            /* 0x360 */ struct AsdMdlObject *model;   /* player/pl_dammy.bam */
+            /* 0x364 */ PlayerEquipment equipment;    /* the player's equipment as the screen opened */
+            /* 0x372 */ u8 unk372[2];
+            /* 0x374 */ f32 unk374;               /* 0.5 */
+            /* 0x378 */ u8 unk378;
+            /* 0x379 */ u8 unk379;
+            /* 0x37A */ u8 unk37A;
+            /* 0x37B */ u8 unk37B;
+            /* 0x37C */ SaveTableImage *backupTable;       /* copies of the game data table, the settings */
+            /* 0x380 */ ConfigSettingsImage *backupConfig; /* and the save data, taken as the screen opens */
+            /* 0x384 */ GameSaveBody *backupSave;
+        } screen;
     };
 } SaveLoadUIWork;
+typedef char SaveLoadScreenOffsets[
+    offsetof(SaveLoadUIWork, screen.selectedSlot) == 0x18 && offsetof(SaveLoadUIWork, screen.resources) == 0x7C &&
+    offsetof(SaveLoadUIWork, screen.sprites) == 0x9C && offsetof(SaveLoadUIWork, screen.scriptData) == 0x240 &&
+    offsetof(SaveLoadUIWork, screen.slots) == 0x24C && offsetof(SaveLoadUIWork, screen.player) == 0x350 &&
+    offsetof(SaveLoadUIWork, screen.model) == 0x360 && offsetof(SaveLoadUIWork, screen.equipment) == 0x364 &&
+    offsetof(SaveLoadUIWork, screen.unk374) == 0x374 && offsetof(SaveLoadUIWork, screen.backupTable) == 0x37C &&
+    offsetof(SaveLoadUIWork, screen.backupSave) == 0x384 ? 1 : -1];
 typedef char SaveLoadPreviewOffsets[
     sizeof(SaveLoadUIWork) == 0x388 &&
     offsetof(SaveLoadUIWork, preview.previousSlot) == 0x18 &&

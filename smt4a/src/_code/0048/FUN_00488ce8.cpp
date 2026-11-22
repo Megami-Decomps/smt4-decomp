@@ -13,7 +13,7 @@ int padGetNormalizedAnalogStick(...);
 int naviRequestSelectedMap(void);
 int FUN_003a35a4(void);
 int sysPlayVoice(...);
-int FUN_00489480(int);
+int naviInputHandleMapToggle(int);
 int FUN_0048981c(void);
 int naviSelectRequestedCategory(...);
 int rectRecRead(int, int, int *, unsigned int **);
@@ -82,7 +82,7 @@ extern int FUN_00167c0c(unsigned int **, int *);
 /* Supplied declaration required: naviRequestSelectedMap. */
 /* Supplied declaration required: FUN_003a35a4. */
 /* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: FUN_00489480. */
+/* Supplied declaration required: naviInputHandleMapToggle. */
 /* Supplied declaration required: FUN_0048981c. */
 /* Supplied declaration required: naviSelectRequestedCategory. */
 /* Supplied declaration required: rectRecRead. */
@@ -136,7 +136,7 @@ unsigned int FUN_00488ce8(int param_1)
   unsigned int temp_v17;
   
   temp_v0 = (int)gameFlagsGetBlock();
-  FUN_00489480(param_1);
+  naviInputHandleMapToggle(param_1);
   temp_v1 = param_1;
   FUN_0048981c();
   if (temp_v1 != 0) {

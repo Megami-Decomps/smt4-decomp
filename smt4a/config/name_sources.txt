@@ -8647,3 +8647,30 @@
 00404050 contentListDrawRow inferred draws one row of the content list (called by contentListDrawRows)
 00404f40 contentListDrawFocusedRow inferred draws the focused row of the content list
 0050d778 __ARM_common_memset4_12 evidence armcc's own 12-byte fill helper: memset(p, v, 12) of a word-aligned buffer compiles to a call to it with this body
+00142b84 asdSoundInitialize evidence twin of smt4 asdSoundInitialize (same body, IDENTICAL from one source) and its AsdSoundSystem.cpp trace path
+001c95c0 materialSubmitBufferColor inferred twin of smt4 FUN_0015a714
+003b52ec eventTablePickNext inferred twin of smt4 FUN_002765d0
+001b431c graphicsResourceSetLeafValue inferred twin of smt4 FUN_002a63d8
+003bb710 uniteInheritanceBuildSkillList inferred builds the inheritance screen's skill list (UniteWorkA inheritanceA)
+002a5e7c compendiumRegisterPartyDemon inferred registers a party demon in the compendium
+002cf8e4 mapDrawTargetDirectionIndicator inferred draws the map's target direction indicator
+002b6cb0 mapEnemyDrawEdgeIndicators inferred draws the screen-edge indicators of map enemies
+00349ca4 saveLoadWriteThreadWorker inferred counterpart of saveLoadReadThreadWorker (placed right after it, shares its filename buffer)
+001fc348 materialMergeApplyTextureTransform inferred sibling of FUN_003cbb60 (materialMergeSetTiming)
+00359dc4 statusScreenStartWhenLoaded inferred starts the status screen once its models have loaded
+004e76cc btlUnitLandHit inferred lands a hit on the unit's target: queues the HP change, survival skills, animation window
+0021a9e8 btlCommandMenuSetupLists inferred sets up the battle command menu's lists (party list count, command availability)
+0033a374 vectorPairTransitionStep inferred twin of smt4 vectorPairTransitionStep
+002d1e44 vectorPairTransitionStart inferred twin of smt4 FUN_00282228
+00142d8c asdProcTimersPassed inferred twin of smt4 FUN_0010d6c0
+003eb314 btlUnitStateInitFromEnemyRecord inferred initialises a battle unit's state from its enemy record
+004a1db4 compendiumBrowseMenuUpdate inferred per-frame cursor/tab/price preview of the compendium browse menu
+004a580c questMenuUpdate inferred per-frame input of the quest selection menu
+00489480 naviInputHandleMapToggle inferred handles the navi map toggle/focus input
+003e7fa4 btlGetCombatantDrawPosition inferred a combatant's draw position (spawn table, bust-up anchor, draw offset)
+003ecab8 btlGetCombatantOverridePosition inferred twin form of FUN_003e7fa4 with the override position table
+003eaa9c btlSetupEnvironmentModelCopies inferred copies combatant transforms and applies scale records for marked opponents
+00429580 aocSubmitBatchRequest inferred queues a batch of up to 20 AOC requests
+004aa3d4 btlUiOpenHelpWindow inferred formats and opens the battle UI help window by kind
+004e7168 btlActionStepUnit inferred advances a battle unit's action phases
+0046e458 resourceSetFindActiveModelLinkValue inferred finds an id across six IdTables and returns the first active kind-5 link value

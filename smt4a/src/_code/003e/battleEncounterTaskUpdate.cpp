@@ -41,7 +41,7 @@ s32 FUN_004f2294(BtlCameraA *camera);
 void btlCameraObjectCreate(BtlCameraA *camera);
 s32 FUN_003e1068(BtlStep *step, BtlMainStateA *state);
 s32 FUN_003ece50(BtlMainStateA *state);
-void FUN_003eaa9c(BtlMainStateA *state);
+void btlSetupEnvironmentModelCopies(BtlMainStateA *state);
 s32 FUN_003e1454(BtlStep *step, BtlMainStateA *state);
 s32 contentRequestStart(BtlStep *step, BtlMainStateA *state);
 s32 FUN_003e21c8(BtlStep *step, BtlMainStateA *state);
@@ -208,7 +208,7 @@ extern "C" s32 battleEncounterTaskUpdate(BtlStep *step, BtlMainStateA *state)
     case 16:
         if (!FUN_003ece50(state))
             return 0;
-        FUN_003eaa9c(state);
+        btlSetupEnvironmentModelCopies(state);
         step->counters.unk0C = step->counters.unk10 = 0;
         step->state = 20;
         return FUN_003e1454(step, state);

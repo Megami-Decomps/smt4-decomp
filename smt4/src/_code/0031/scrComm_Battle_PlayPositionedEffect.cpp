@@ -1,120 +1,94 @@
-/* NON_MATCHING: readable rewrite compiles (169 vs 170 rows); stack frame (84 vs 92 bytes) and register allocation differ */
+/* NON_MATCHING: 54 lines: the effect-set names are pooled pc-relative here but are shared objects in retail (DAT_00400428/34, also used by scrComm_Battle_PlayCommonEffect); retail keeps FUN_002454c4's constant 1 in r4 across the copy, and stores the slot loop's spilled unit/member parameters separately where this build pairs them (strd). */
 #include "battle/BtlMainAccess.h"
+#include "battle/btlMain.h"
+#include "battle/btlAction.h"
+#include "battle/btlEffect.h"
 #include "battle/BattleUnitSlot.h"
-#include <string.h>
 #include "battle/BtlGlobals.h"
-
-// Effect request handed to the battle effect queue (32 bytes). It first carries the
-// effect set's name, then is reused for one request per matching effect slot.
-struct EffectRequest {
-    s32 mode;           // 0x00
-    s32 side;           // 0x04
-    u32 type;           // 0x08
-    const char* name;   // 0x0c
-    s32 target;         // 0x10
-    s32 targetCopy;     // 0x14
-    u32 user;           // 0x18
-    u32 unk1c;
-};
-
-struct BattleUnitSlot {
-    u32 flags;              // 0x00: bit 0 present, bit 6 dead
-    u8 unk04[4];
-    s32 entryIndex;         // 0x08 (low halfword)
-    u8 unk0c[0x288 - 0x0c];
-};
-
-struct BattleEffectSlot {
-    u8 unk00[0x58];
-    char name[0x10];        // 0x58: effect name
-    s16 power;              // 0x68
-    u16 type;               // 0x6a
-};
-
-struct BattleMain {
-    u8 unk0000[0x1e98];
-    u8* entries;            // 0x1e98 (0x114 bytes each; listed id at 0x62)
-    u8 unk1e9c[0x1fc0 - 0x1e9c];
-    u8* units;              // 0x1fc0 (BattleUnitSlot, 0x288 each)
-};
-
-struct BattleEffectState {
-    u8 unk0000[0x1cfc];
-    u8* effectSlots;        // 0x1cfc
-};
+#include "code/Code0024.h"
+#include "code/Code0028_Smt4.h"
+#include <string.h>
 
 extern "C" {
-
-extern const char DAT_00400440[];
 extern u32 g_btlScriptUnit;
-extern BattleEffectState* g_btlAux;
 extern u32 g_btlEvent;
-
-void __ARM_common_memcpy4_9(void* dst, const char* src);
-void FUN_00245420(s32 slot, u32 unit, void* entry, u32 effect);
-void FUN_002454c4(BattleEffectState* state, EffectRequest* request, s32 a, s32 b);
-s32 FUN_0024550c(void);
-void FUN_00282820(s32 value, u32 user, s32 target, s32 targetCopy);
+extern BtlEffectOwner *g_btlAux;
+extern const char DAT_00400440[];
 s32 scrGetArg(s32 index);
-s32 libc_strlen(const char* s);
 s32 isEntryUsable(u32 event); // declcheck: local (the shared declaration in code/Code0027.h does not compile here: argument of type "u32" is incompatible with parameter of type "int *")
-s32 FUN_0028299c(BattleEffectState* state);
+s32 FUN_0024550c(BtlEffectOwner *owner);
+void FUN_00245420(s32 actor, u32 unit, BtlActionRecord *target, u32 value, s32 effect, s32 lookup, s32 extra);
+void FUN_00282820(s32 position, u32 first, u32 second, s32 listedId, s32 layer, u32 mode, u32 kind, const char *text);
+u32 libc_strlen(const char *text);
 
-// Script command: plays the effect set `arg0` on every living side, positioned by the sign of `arg1`.
-void scrComm_Battle_PlayPositionedEffect(void)
+/* FUN_001b1a48's body (plain static: retail inlines it late, spilling its parameters): spawns the slot block's text effects, suppressing the conditional (kind 12)
+ * labels of inactive entries. */
+static void spawnSlotTexts(s32 side, u32 first, const BtlEffectSlotBlock *slots, s32 spacing, u32 second,
+    s32 listedId)
 {
-    u32 effectId = scrGetArg(0);
-    s32 direction = scrGetArg(1);
-    s32 inEvent = isEntryUsable(g_btlEvent);
-    if (!((inEvent == 0 || FUN_0024550c() != 0) && direction != 0)) return;
-
-    EffectRequest request = { 0, 0, 0, NULL, 0, 0, 0, 0 };
-    const char* setName = direction < 0 ? "commonDw" : "commonUp";
-    __ARM_common_memcpy4_9(&request, setName);
-    FUN_002454c4(g_btlAux, &request, 1, 0);
-
-    BattleMain* main = reinterpret_cast<BattleMain *>(btlGetMainState());
-    u32 user = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
-    s32 placed = 0;
-    u8* effectSlots = g_btlAux->effectSlots;
-    BattleMain* mainForEntries = main;
-    for (s32 unitIndex = 0; unitIndex < 4; unitIndex++) {
-        BattleUnitSlot* unit = reinterpret_cast<BattleUnitSlot*>(reinterpret_cast<BattleMain *>(btlGetMainState())->units + unitIndex * 0x288);
-        if ((unit->flags & 1) == 0 || (unit->flags & 0x40) != 0) continue;
-        s16 entryIndex = (s16)unit->entryIndex;
-        if (entryIndex < 0) continue;
-        u8* entry = mainForEntries->entries + entryIndex * 0x114;
-        request.side = unitIndex << 3;
-        request.type = 0xffffffff;
-        request.mode = direction;
-        FUN_00245420(placed << 3, user, entry, effectId);
-        request.user = user;
-        request.target = *reinterpret_cast<s16*>(entry + 0x62);
-        request.targetCopy = request.target;
-        BattleMain* current = reinterpret_cast<BattleMain *>(btlGetMainState());
-        for (s32 slot = 0; slot < 4; slot++) {
-            BattleEffectSlot* effect = reinterpret_cast<BattleEffectSlot*>(effectSlots + slot * 0x16);
-            if (libc_strlen(effect->name) == 0 || strcmp(effect->name, DAT_00400440) == 0) continue;
-            u32 type = effect->type;
-            s32 base = FUN_0028299c(g_btlAux);
-            s32 sideCode = direction < 0 ? 3 : 2;
-            switch (type) {
-            case 0: case 1: case 2: case 3: case 4: case 5: case 0xc: {
-                u32* found = NULL;
-                if (type == 0xc && request.target >= 0) found = reinterpret_cast<u32 *>(btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(current), request.target));
-                if (type != 0xc || request.target < 0 || found == NULL || (*found & 2) != 0) {
-                    request.name = effect->name;
-                    request.mode = 6;
-                    request.side = sideCode;
-                    request.type = type;
-                    FUN_00282820(effect->power + base * placed, user, request.targetCopy, request.target);
+    BtlMainState *battle = btlGetMainState();
+    for (s32 index = 0; index < 4; ++index) {
+        const char *text = slots->entries[index].name;
+        if (libc_strlen(text) && strcmp(text, DAT_00400440)) {
+            u32 kind = slots->entries[index].id;
+            s32 offset = FUN_0028299c((Owner *)g_btlAux) * spacing;
+            u32 mode = 2;
+            if (side < 0)
+                mode = 3;
+            switch (kind) {
+            case 0: case 1: case 2: case 3: case 4: case 5: case 12:
+                if (kind == 12 && listedId >= 0) {
+                    BtlEntry *target = btlMainFindEntryByListedId(battle, listedId);
+                    if (target != NULL && (target->flags & 2) == 0)
+                        break;
                 }
+                FUN_00282820(slots->entries[index].unk10 + offset, first, second, listedId, 6, mode, kind,
+                    slots->entries[index].name);
                 break;
             }
-            }
         }
-        placed++;
     }
 }
 
-} /* extern "C" */
+/* Loads the common up (or down, for a negative effect) effect set (scrComm_Battle_PlayCommonEffect opens with the
+ * same block). Retail addresses the two names as objects shared with that command: one file's pooled literals. */
+static __inline void loadCommonEffectSet(s32 effect)
+{
+    char name[32] = {0};
+    if (effect < 0)
+        strcpy(name, "commonDw");
+    else
+        strcpy(name, "commonUp");
+    FUN_002454c4(g_btlAux, reinterpret_cast<u32>(name), 1, 0);
+}
+
+/* Script command: plays the common up/down effect (by the sign of arg 1) at every living party unit. */
+u32 scrComm_Battle_PlayPositionedEffect(void)
+{
+    u32 value = scrGetArg(0);
+    s32 effect = scrGetArg(1);
+    if (isEntryUsable(g_btlEvent) && !FUN_0024550c(g_btlAux))
+        return 0;
+    if (effect != 0) {
+        loadCommonEffectSet(effect);
+        BtlMainState *main = btlGetMainState();
+        u32 unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
+        s32 placed = 0;
+        BtlEffectSlotBlock *slots = g_btlAux->slots;
+        for (s32 i = 0; i < 4; i++) {
+            BtlEntry *entry = &btlGetMainState()->entries[i];
+            if ((entry->flags & 1) == 0 || (entry->flags & 0x40) != 0)
+                continue;
+            s16 action = entry->ids[0];
+            if (action < 0)
+                continue;
+            BtlActionRecord *target = &main->actions[action];
+            FUN_00245420(placed << 3, unit, target, value, effect, i << 3, -1);
+            s32 member = target->memberId;
+            spawnSlotTexts(effect, unit, slots, placed, member, member);
+            placed++;
+        }
+    }
+    return 1;
+}
+}

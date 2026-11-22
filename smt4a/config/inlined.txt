@@ -75,3 +75,9 @@ partyWidgetSetCost = 0xe5801044; // 0x28c3e0 0x28c434 0x28c48c 0x28c4c0 (FUN_002
 partyWidgetSetValue = 0xe5801040; // 0x28c520 0x28c5f4 (FUN_0028c2ec: ldr r1, [sp]; ldr r0, [widget]; str r1, [r0, #64], the widget reloaded for partyWidgetGetCost); smt4 has the same row
 renderCtxGetBuiltinCamera = 0xe2800c07; // 0x1bcf74 (renderGetCameraViewMatrix: add r0, r0, #0x700 after mov r0, r1, result moved to r5; the built-in camera at RenderCtxA+0x700, smt4's twin FUN_00343358 is a three-instruction function for ctx+0x6fc)
 soundInitStackSet = 0xe8800006; // 0x15df2c (FUN_0015de34, after ldr r2, [r4, #20]; mov r1, r6 with r0 = &DAT_0059dbac; call padding nop {0} x2 follows; twin of smt4 0x120c94 in nwSoundSystemInitializeBuffers)
+cecMessageSetRankA = 0xe5c01021; // 0x2a2990 (FUN_002a28c0: mov r1, r7 sets the value FUN_0031cee0 returned, r0 is FUN_002bf520's record; same shape as the ownerSetName call beside it)
+cecMessageSetRankB = 0xe5c01022; // 0x2a29b4 (FUN_002a28c0: mov r1, r7 with gameSaveWorkGetState's result, r0 is FUN_002bf520's record)
+cecMessageSetRankC = 0xe5c01023; // 0x2a29d8 (FUN_002a28c0: mov r1, r7 with saveFlagGet27e1f's result, r0 is FUN_002bf520's record)
+cecMessageSetGameFlag = 0xe5c01042; // 0x2a2a4c (FUN_002a28c0: mov r1, r7 with FUN_002a46b8's result, r0 is FUN_002bf520's record)
+cecMessageSetWord27E8C = 0xe5801024; // 0x2a2a94 (FUN_002a28c0: mov r1, r7 with gameDataBlocksGetWord27E8C's result, r0 is FUN_002bf520's record)
+btlMainGetPartyListCount = 0xe1d00ef0; // 0x21ac68 (FUN_0021a9e8: btlGetMainState's result in r0 is passed, and the s16 result is then moved into r1 as the next call's argument where a direct field read would load into r1)

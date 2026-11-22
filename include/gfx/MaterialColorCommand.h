@@ -30,13 +30,31 @@ static __inline u32 materialColorChannel(f32 value)
         value = 0.0f;
     return static_cast<u32>(value * 255.0f + 0.5f);
 }
+/* The material buffer colour's channel conversion: clamped to [0, 1] through a clamp taking its
+ * bounds as values (retail compares against the bounds in VFP registers), scaled and rounded. */
+static __inline f32 materialClamp(f32 value, f32 low, f32 high)
+{
+    if (value > high)
+        return high;
+    if (value < low)
+        return low;
+    return value;
+}
+static __inline u8 materialChannelToByte(f32 value)
+{
+    return static_cast<u8>(materialClamp(value, 0.0f, 1.0f) * 255.0f + 0.5f);
+}
 static __inline MaterialPackedColor materialPackColor(const f32 *color)
 {
+    u8 red = materialChannelToByte(color[0]);
+    u8 green = materialChannelToByte(color[1]);
+    u8 blue = materialChannelToByte(color[2]);
+    u8 alpha = materialChannelToByte(color[3]);
     MaterialPackedColor packed;
-    packed.channels.red = materialColorChannel(color[0]);
-    packed.channels.green = materialColorChannel(color[1]);
-    packed.channels.blue = materialColorChannel(color[2]);
-    packed.channels.alpha = materialColorChannel(color[3]);
+    packed.channels.red = red;
+    packed.channels.green = green;
+    packed.channels.blue = blue;
+    packed.channels.alpha = alpha;
     return packed;
 }
 typedef char MaterialColorOffsets[offsetof(MaterialColorResource, color) == 0xB4 &&

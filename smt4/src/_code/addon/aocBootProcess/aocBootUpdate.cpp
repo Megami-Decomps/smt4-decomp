@@ -1,4 +1,4 @@
-/* NON_MATCHING: AOC boot process step (SD card check, first request, wait for the dialog, hand over); written from the decompilation, request local and switch layout not compared with retail */
+/* NON_MATCHING: AOC boot process step (SD card check, first request, wait for the dialog, hand over). Retail hoists the constant 1 into r7 at entry (the request's kind), keeps g_aocMain in r0 into the check case, reads the dialog's ready byte with ldrsb through a split base after a call boundary (nop), and cross-jumps the top cancel into the query case's copy; registers and block layout differ. */
 #include "addon/aocBootProcess.h"
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
@@ -27,7 +27,7 @@ struct AocSystemBootView {
 
 struct AocBootDialogView {
     /* 0x000 */ u8 unk000[0x4CA];
-    /* 0x4CA */ u8 ready;
+    /* 0x4CA */ s8 ready;
 };
 
 extern "C" {
@@ -37,7 +37,7 @@ extern u32 g_aocBootFinished;
 void aocReleasePackageOwner(AocSystem *system);
 void jobOwnerFreeSlotAndStop(void *owner);
 s32 sysLightEventTryWait(void *event);
-void asdFsIsSdCardDetected(void);
+s32 asdFsIsSdCardDetected(void);
 void jyoucyuGetTableEntry(u32 id);
 void aocResetOperationState(AocSystem *system);
 void aocClearDisplayFlag(AocSystem *system);
@@ -46,6 +46,12 @@ RequestParameters FUN_003887cc(AocSystem *system);
 u8 startsWithH(const void *value);
 u8 strIsEmpty(const void *value);
 u8 byteIsAtLeast100(const void *value);
+
+/* Bit `bit` of a flag word, as 0 or 1. */
+static __inline u32 flagBit(u32 flags, u32 bit)
+{
+    return (flags & (1u << bit)) >> bit;
+}
 
 /* Leaves the boot dialog and waits for the cancel event of the add-on system. */
 static __inline void aocBootCancel(AocBoot *boot)
@@ -61,85 +67,84 @@ static __inline void aocBootCancel(AocBoot *boot)
 u32 aocBootUpdate(void)
 {
     AocBoot *boot = g_aocBoot;
-    RequestParameters request;
+    RequestParameters request(1);
     if (boot->frames < AOC_BOOT_FRAMES_MAX)
         boot->frames++;
 
     u32 flags = g_aocMain->flags;
+    u32 cancelled = flagBit(flags, 4);
     g_aocMain->flags = flags & ~AOC_FLAG_ACTIVE_MASK;
-    if ((flags & AOC_FLAG_CANCEL) != 0) {
+    if (cancelled) {
         aocBootCancel(boot);
-        return 0;
-    }
-
-    switch (boot->state) {
-    case AOC_BOOT_STATE_CHECK: {
-        bool eventSignalled = false;
-        if (sysLightEventTryWait(reinterpret_cast<u8 *>(g_aocMain) + 0x98) != 0) {
-            g_aocMain->flags &= ~AOC_FLAG_PENDING_EVENT;
-            eventSignalled = true;
-        }
-        asdFsIsSdCardDetected();
-        if (eventSignalled) {
-            boot->state = AOC_BOOT_STATE_QUERY;
-            g_aocMain->mode = 1;
-            aocResetOperationState(g_aocSystem);
-        } else {
-            jyoucyuGetTableEntry(0);
-            boot->state = AOC_BOOT_STATE_OPEN_DIALOG;
-        }
-        break;
-    }
-    case AOC_BOOT_STATE_QUERY: {
-        request = FUN_003887cc(g_aocSystem);
-        if (boot->dialogOpen == 0 && reinterpret_cast<AocSystemBootView *>(g_aocSystem)->packageHandle != 0) {
-            reinterpret_cast<AocSystemBootView *>(g_aocSystem)->phase = 6;
-            aocEntryPanelCreateText(boot->dialog, 0xBE, 2, 0);
-            boot->dialogOpen = 1;
-        }
-        flags = g_aocMain->flags;
-        g_aocMain->flags = flags & ~AOC_FLAG_ACTIVE_MASK;
-        if ((flags & AOC_FLAG_CANCEL) != 0) {
-            aocBootCancel(boot);
+    } else {
+        switch (boot->state) {
+        case AOC_BOOT_STATE_CHECK: {
+            if (sysLightEventTryWait(reinterpret_cast<u8 *>(g_aocMain) + 0x98) != 0)
+                g_aocMain->flags &= ~AOC_FLAG_PENDING_EVENT;
+            if (asdFsIsSdCardDetected() != 0) {
+                boot->state = AOC_BOOT_STATE_QUERY;
+                g_aocMain->mode = 1;
+                aocResetOperationState(g_aocSystem);
+            } else {
+                jyoucyuGetTableEntry(0);
+                boot->state = AOC_BOOT_STATE_OPEN_DIALOG;
+            }
             break;
         }
-        if (startsWithH(&request) != 0) {
-            boot->state = AOC_BOOT_STATE_CHECK;
-            aocEntryPanelCreateText(boot->dialog, 0xBE, 2, 0);
-            boot->dialogOpen = 1;
+        case AOC_BOOT_STATE_QUERY: {
+            request = FUN_003887cc(g_aocSystem);
+            if (boot->dialogOpen == 0 && reinterpret_cast<AocSystemBootView *>(g_aocSystem)->packageHandle != 0) {
+                reinterpret_cast<AocSystemBootView *>(g_aocSystem)->phase = 6;
+                aocEntryPanelCreateText(boot->dialog, 0xBE, 2, 0);
+                boot->dialogOpen = 1;
+            }
+            flags = g_aocMain->flags;
+            cancelled = flagBit(flags, 4);
+            g_aocMain->flags = flags & ~AOC_FLAG_ACTIVE_MASK;
+            if (cancelled) {
+                aocBootCancel(boot);
+                break;
+            }
+            if (startsWithH(&request) != 0) {
+                boot->state = AOC_BOOT_STATE_CHECK;
+                aocEntryPanelCreateText(boot->dialog, 0xBE, 2, 0);
+                boot->dialogOpen = 1;
+                break;
+            }
+            if (strIsEmpty(&request) != 0 || byteIsAtLeast100(&request) != 0)
+                boot->state = AOC_BOOT_STATE_OPEN_DIALOG;
             return 0;
         }
-        if (strIsEmpty(&request) != 0 || byteIsAtLeast100(&request) != 0)
-            boot->state = AOC_BOOT_STATE_OPEN_DIALOG;
-        return 0;
-    }
-    case AOC_BOOT_STATE_OPEN_DIALOG:
-        if (boot->dialogOpen != 0) {
-            if (boot->frames < AOC_BOOT_DIALOG_MIN_FRAMES)
-                return 0;
-            flagObjAdvance(boot->dialog);
-        }
-        boot->state = AOC_BOOT_STATE_CLOSE_DIALOG;
-        break;
-    case AOC_BOOT_STATE_CLOSE_DIALOG:
-        if (boot->dialogOpen != 0) {
-            if (boot->frames < AOC_BOOT_DIALOG_MIN_FRAMES)
-                return 0;
-            if (reinterpret_cast<AocBootDialogView *>(boot->dialog)->ready == 0)
-                return 0;
-            jobOwnerFreeSlotAndStop(boot->dialog);
-        }
-        aocClearDisplayFlag(g_aocSystem);
-        g_aocSystem->getPendingRequest();
-        g_aocBootFinished = 1;
-        boot->state = AOC_BOOT_STATE_DONE;
-        return 0xFFFFFFFF;
-    case AOC_BOOT_STATE_CANCEL:
-        if ((flags & 4) == 0 && (flags & 8) == 0) {
+        case AOC_BOOT_STATE_OPEN_DIALOG:
+            if (boot->dialogOpen != 0) {
+                if (boot->frames < AOC_BOOT_DIALOG_MIN_FRAMES)
+                    return 0;
+                flagObjAdvance(boot->dialog);
+            }
+            boot->state = AOC_BOOT_STATE_CLOSE_DIALOG;
+            break;
+        case AOC_BOOT_STATE_CLOSE_DIALOG:
+            if (boot->dialogOpen != 0) {
+                if (boot->frames < AOC_BOOT_DIALOG_MIN_FRAMES)
+                    return 0;
+                if (reinterpret_cast<AocBootDialogView *>(boot->dialog)->ready == 0)
+                    return 0;
+                jobOwnerFreeSlotAndStop(boot->dialog);
+            }
+            aocClearDisplayFlag(g_aocSystem);
+            g_aocSystem->getPendingRequest();
+            g_aocBootFinished = 1;
+            boot->state = AOC_BOOT_STATE_DONE;
+            return 0xFFFFFFFF;
+        case AOC_BOOT_STATE_CANCEL:
+            if (flagBit(flags, 2))
+                break;
+            if (flagBit(flags, 3))
+                break;
             boot->frames = 0xFFFF;
             boot->state = AOC_BOOT_STATE_CLOSE_DIALOG;
+            break;
         }
-        break;
     }
     return 0;
 }

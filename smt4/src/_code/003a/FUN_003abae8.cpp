@@ -54,7 +54,7 @@ struct RowPanel {
 };
 
 extern "C" {
-s8 uiSubStateGetSelected(const CursorState *cursor);
+s8 touchSelectionGetSelected(const CursorState *cursor);
 LayoutSlot *layoutFindTableEntry(u8 *layout, u32 id);
 void uiDrawScrollingSelectionEntry(RowPanel *panel, s32 index, s32 alpha, s32 row);
 void drawTextAtSnappedRectangle(u8 *layout, f32 x, f32 y, s32 style, u32 color, const char *text, f32 scale, f32 c, f32 d);
@@ -82,7 +82,7 @@ void FUN_003abae8(RowPanel *panel, s32 index, s32 row, s32 selected, s32 alpha)
     u32 color;
     u32 nameBox;
     if (selected != 0) {
-        uiDrawScrollingSelectionEntry(panel, index, alpha, uiSubStateGetSelected(&panel->cursor));
+        uiDrawScrollingSelectionEntry(panel, index, alpha, touchSelectionGetSelected(&panel->cursor));
         style = 3;
         color = 0xFFFFFFFF;
         nameBox = 0x4E0;

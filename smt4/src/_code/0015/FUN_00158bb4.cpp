@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0015c81c(int *, int *);
 int threadSleepDuration(unsigned char *, int);
 int svcWaitSynchronizationN(unsigned char *, int *, int, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
-int svcReleaseSemaphore(int *, int, int);
+int svcReleaseSemaphore(int *, int, int); // declcheck: local (raw draft: its svcWaitSynchronizationN calls do not fit sys/HandleWait.h)
 int resultHandleFailure(void);
 
 typedef int romwright_code(...);

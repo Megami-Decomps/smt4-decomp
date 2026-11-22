@@ -1,4 +1,4 @@
-/* NON_MATCHING: the null checks on the name come out as `cmp; beq` with the argument moved afterwards, where retail tests the argument register itself (`movs r0, r6`) and loads the table field after the test; the frame setup and the hoisted slot base register differ accordingly */
+/* NON_MATCHING: the null checks on the name come out as `cmp; beq` with the argument moved afterwards, where retail tests the argument register itself (`movs r0, r6`) and loads the table field after the test; the frame setup and the hoisted slot base register differ accordingly. Since BtlEffectWork places numberedEffect/numberedIndex at their real offsets (0x3034/0x3038, as retail stores them) armcc also keeps the work + 0x3000 base in its own register (`add r9, r8, #12288`) where retail recomputes it, which shifts the registers (91 lines; 56 with the old, 0x60-early layout) */
 #include "runtime/Stdio.h"
 #include "battle/BtlEffectLoad.h"
 #include <string.h>
@@ -16,7 +16,7 @@ char *libc_strcpy(char *destination, const char *source);
 void memClear(void *buffer, s32 size);
 char *libc_strrchr(char *text, s32 character);
 s32 keyedRecordFindByName(const char *key);
-void FUN_002276f8(BtlEffectWork *work);
+void btlEffectNumberedRelease(BtlEffectWork *work);
 u32 filterCreateByKind(u32 first, u32 second, u32 third);
 void asdLoadFileAsyncSimple(const char *path, void **resource, s32 mode);
 
@@ -45,7 +45,7 @@ u32 btlEffectResolveRequestedEffects(BtlEffectWork *work)
                         for (s32 n = 0; n < 11; n++) {
                             __2sprintf(file, DAT_00400904, g_btlEffect.numberedPrefix, n);
                             if (strcmp(file, name) == 0) {
-                                FUN_002276f8(work);
+                                btlEffectNumberedRelease(work);
                                 work->numberedIndex = n;
                                 work->numberedEffect = filterCreateByKind(n & 0xff, 7, 0);
                                 found = true;

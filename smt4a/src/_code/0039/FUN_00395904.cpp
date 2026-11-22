@@ -13,12 +13,12 @@ int calcHeadingRoundedToCardinalDirection(void);
 int FUN_002b56e0(void);
 int mathAngleDeltaDegrees(void);
 int lmapViewUpdateOrbitSequence(void);
-int FUN_002d1e44(float *);
+int vectorPairTransitionStart(float *);
 int FUN_0030250c(void);
 int FUN_003026d8(void);
 int lmapResolveContextValue(void);
 int FUN_0033982c(void);
-int FUN_0033a374(void);
+int vectorPairTransitionStep(void);
 int FUN_00352568(void);
 
 extern int *g_lmapView; /* 0x5806a4 */
@@ -316,7 +316,7 @@ void FUN_00395904(void)
     if (temp_v9 != 0) {
       if (temp_v9 != 1) {
         if (temp_v9 == 2) {
-          FUN_0033a374();
+          vectorPairTransitionStep();
           piVar6 = g_lmapView;
           g_lmapView = piVar6;
           if (temp_v9 != 0) {
@@ -326,7 +326,7 @@ void FUN_00395904(void)
         }
       }
       else {
-        FUN_0033a374();
+        vectorPairTransitionStep();
         if (temp_v9 != 0) {
           temp_v27 = (float)piVar6[0x95];
           temp_v28 = (float)piVar6[0x96];
@@ -364,7 +364,7 @@ void FUN_00395904(void)
           temp_v44 = 0;
           temp_v46 = 0;
           temp_v36 = temp_v25;
-          FUN_002d1e44(&temp_v27);
+          vectorPairTransitionStart(&temp_v27);
           piVar6 = g_lmapView;
           g_lmapView[1] = g_lmapView[1] + 1;
           piVar6[2] = 0;
@@ -408,7 +408,7 @@ void FUN_00395904(void)
       temp_v44 = 0;
       temp_v46 = 0;
       temp_v36 = temp_v25;
-      FUN_002d1e44(&temp_v27);
+      vectorPairTransitionStart(&temp_v27);
       piVar6 = g_lmapView;
       *(unsigned char *)(g_lmapView + 0x88) = 1;
       piVar7 = piVar6 + 1;
@@ -421,7 +421,7 @@ void FUN_00395904(void)
     if (temp_v9 != 0) {
       if (temp_v9 != 1) {
         if (temp_v9 == 2) {
-          FUN_0033a374();
+          vectorPairTransitionStep();
           piVar6 = g_lmapView;
           g_lmapView = piVar6;
           if (temp_v9 != 0) {
@@ -431,7 +431,7 @@ void FUN_00395904(void)
         }
       }
       else {
-        FUN_0033a374();
+        vectorPairTransitionStep();
         if (temp_v9 != 0) {
           temp_v27 = (float)piVar6[0x95];
           temp_v28 = (float)piVar6[0x96];
@@ -468,7 +468,7 @@ void FUN_00395904(void)
           temp_v44 = 0;
           temp_v46 = 0;
           temp_v36 = temp_v25;
-          FUN_002d1e44(&temp_v27);
+          vectorPairTransitionStart(&temp_v27);
           piVar6 = g_lmapView;
           g_lmapView[1] = g_lmapView[1] + 1;
           piVar6[2] = 0;
@@ -513,7 +513,7 @@ void FUN_00395904(void)
       temp_v44 = 0;
       temp_v46 = 0;
       temp_v36 = temp_v25;
-      FUN_002d1e44(&temp_v27);
+      vectorPairTransitionStart(&temp_v27);
       piVar6 = g_lmapView;
       *(unsigned char *)(g_lmapView + 0x88) = 1;
       piVar7 = piVar6 + 1;
@@ -532,7 +532,7 @@ void FUN_00395904(void)
     if (temp_v9 != 0) {
       if (temp_v9 != 1) {
         if (temp_v9 == 2) {
-          FUN_0033a374();
+          vectorPairTransitionStep();
           piVar6 = g_lmapView;
           g_lmapView = piVar6;
           if (temp_v9 != 0) {
@@ -542,7 +542,7 @@ void FUN_00395904(void)
         }
       }
       else {
-        FUN_0033a374();
+        vectorPairTransitionStep();
         if (temp_v9 != 0) {
           temp_v27 = (float)piVar6[0x95];
           temp_v28 = (float)piVar6[0x96];
@@ -584,7 +584,7 @@ void FUN_00395904(void)
           temp_v44 = 0;
           temp_v46 = 0;
           temp_v36 = temp_v23;
-          FUN_002d1e44(&temp_v27);
+          vectorPairTransitionStart(&temp_v27);
           piVar6 = g_lmapView;
           g_lmapView[1] = g_lmapView[1] + 1;
           piVar6[2] = 0;
@@ -632,7 +632,7 @@ void FUN_00395904(void)
       temp_v44 = 0;
       temp_v46 = 0;
       temp_v36 = temp_v23;
-      FUN_002d1e44(&temp_v27);
+      vectorPairTransitionStart(&temp_v27);
       piVar6 = g_lmapView;
       *(unsigned char *)(g_lmapView + 0x88) = 1;
       piVar7 = piVar6 + 1;
@@ -650,7 +650,7 @@ void FUN_00395904(void)
     temp_v9 = g_lmapView[1];
     if (temp_v9 != 0) {
       if (temp_v9 == 1) {
-        FUN_0033a374();
+        vectorPairTransitionStep();
         piVar6 = g_lmapView;
         g_lmapView = piVar6;
         if (temp_v9 != 0) {
@@ -706,7 +706,7 @@ void FUN_00395904(void)
       temp_v44 = 0;
       temp_v46 = 0;
       temp_v36 = temp_v25;
-      FUN_002d1e44(&temp_v27);
+      vectorPairTransitionStart(&temp_v27);
       piVar6 = g_lmapView;
       piVar7 = g_lmapView + 1;
       *(unsigned char *)(g_lmapView + 0x88) = 1;
@@ -719,7 +719,7 @@ void FUN_00395904(void)
     temp_v9 = g_lmapView[1];
     if (temp_v9 != 0) {
       if (temp_v9 == 1) {
-        FUN_0033a374();
+        vectorPairTransitionStep();
         piVar6 = g_lmapView;
         g_lmapView = piVar6;
         if (temp_v9 != 0) {
@@ -766,7 +766,7 @@ void FUN_00395904(void)
       temp_v44 = 0;
       temp_v46 = 0;
       temp_v36 = temp_v25;
-      FUN_002d1e44(&temp_v27);
+      vectorPairTransitionStart(&temp_v27);
       piVar6 = g_lmapView;
       piVar7 = g_lmapView + 1;
       *(unsigned char *)(g_lmapView + 0x88) = 1;
@@ -778,7 +778,7 @@ void FUN_00395904(void)
   case 0x14:
     temp_v9 = g_lmapView[1];
     if (temp_v9 != 0) {
-      if ((temp_v9 == 1) && (FUN_0033a374(), piVar6 = g_lmapView, temp_v9 != 0)) {
+      if ((temp_v9 == 1) && (vectorPairTransitionStep(), piVar6 = g_lmapView, temp_v9 != 0)) {
         g_lmapView[0x86] = 0;
         piVar6[0x87] = 0;
         piVar6[6] = (int)(*(float *)(g_lmapScene + 0x50) + 110.0f);
@@ -831,7 +831,7 @@ void FUN_00395904(void)
       temp_v44 = 0;
       temp_v46 = 0;
       temp_v36 = temp_v25;
-      FUN_002d1e44(&temp_v27);
+      vectorPairTransitionStart(&temp_v27);
       piVar6 = g_lmapView;
       piVar7 = g_lmapView + 1;
       *(unsigned char *)(g_lmapView + 0x88) = 1;
@@ -845,7 +845,7 @@ void FUN_00395904(void)
     piVar6 = g_lmapView;
     if (g_lmapView[1] != 0) {
       if ((g_lmapView[1] == 1) &&
-         (piVar7 = g_lmapView, FUN_0033a374(), piVar6 = g_lmapView, piVar7 != (int *)0x0)) {
+         (piVar7 = g_lmapView, vectorPairTransitionStep(), piVar6 = g_lmapView, piVar7 != (int *)0x0)) {
         g_lmapView[0x86] = 0;
         piVar6[0x87] = 0;
         piVar6[6] = (int)(*(float *)(g_lmapScene + 0x50) + 110.0f);
@@ -901,7 +901,7 @@ void FUN_00395904(void)
       temp_v46 = 0;
       temp_v36 = temp_v22;
       temp_v37 = temp_v23;
-      FUN_002d1e44(&temp_v27);
+      vectorPairTransitionStart(&temp_v27);
       piVar6 = g_lmapView;
       piVar7 = g_lmapView + 1;
       *(unsigned char *)(g_lmapView + 0x88) = 1;
@@ -915,7 +915,7 @@ void FUN_00395904(void)
   case 0x16:
     temp_v9 = g_lmapView[1];
     if (temp_v9 != 0) {
-      if ((temp_v9 == 1) && (FUN_0033a374(), piVar6 = g_lmapView, temp_v9 != 0)) {
+      if ((temp_v9 == 1) && (vectorPairTransitionStep(), piVar6 = g_lmapView, temp_v9 != 0)) {
         g_lmapView[0x86] = 0;
         piVar6[0x87] = 0;
         piVar6[6] = *(int *)(g_lmapScene + 0x4c);
@@ -968,7 +968,7 @@ void FUN_00395904(void)
       temp_v44 = 0;
       temp_v46 = 0;
       temp_v36 = temp_v25;
-      FUN_002d1e44(&temp_v27);
+      vectorPairTransitionStart(&temp_v27);
       piVar6 = g_lmapView;
       piVar7 = g_lmapView + 1;
       *(unsigned char *)(g_lmapView + 0x88) = 1;
@@ -983,7 +983,7 @@ void FUN_00395904(void)
     if (g_lmapView[1] != 0) {
       if (g_lmapView[1] == 1) {
         piVar7 = g_lmapView;
-        FUN_0033a374();
+        vectorPairTransitionStep();
         piVar6 = g_lmapView;
 joined_r0x00397538:
         g_lmapView = piVar6;
@@ -1048,7 +1048,7 @@ joined_r0x00397538:
       temp_v37 = fStack_40;
       temp_v38 = fStack_3c;
       temp_v46 = 0;
-      FUN_002d1e44(&temp_v27);
+      vectorPairTransitionStart(&temp_v27);
       piVar6 = g_lmapView;
       piVar7 = g_lmapView + 1;
       *(unsigned char *)(g_lmapView + 0x88) = 1;
@@ -1065,7 +1065,7 @@ joined_r0x00397538:
     if (g_lmapView[1] != 0) {
       if (g_lmapView[1] == 1) {
         piVar7 = g_lmapView;
-        FUN_0033a374();
+        vectorPairTransitionStep();
         piVar6 = g_lmapView;
         goto joined_r0x00397538;
       }
@@ -1116,7 +1116,7 @@ joined_r0x00397538:
       temp_v37 = fStack_40;
       temp_v38 = fStack_3c;
       temp_v46 = 0;
-      FUN_002d1e44(&temp_v27);
+      vectorPairTransitionStart(&temp_v27);
       piVar6 = g_lmapView;
       piVar7 = g_lmapView + 1;
       *(unsigned char *)(g_lmapView + 0x88) = 1;
@@ -1131,7 +1131,7 @@ joined_r0x00397538:
     lmapResolveContextValue();
     temp_v9 = g_lmapView[1];
     if (temp_v9 != 0) {
-      if ((temp_v9 == 1) && (FUN_0033a374(), piVar7 = g_lmapView, temp_v9 != 0)) {
+      if ((temp_v9 == 1) && (vectorPairTransitionStep(), piVar7 = g_lmapView, temp_v9 != 0)) {
         piVar11 = g_lmapView + 0x14;
         g_lmapView[6] = *(int *)(g_lmapScene + 0x4c);
         temp_v9 = piVar6[0x99];
@@ -1176,7 +1176,7 @@ joined_r0x00397538:
       }
       temp_v45 = DAT_005f1a48;
       temp_v46 = 0;
-      FUN_002d1e44(&temp_v27);
+      vectorPairTransitionStart(&temp_v27);
       piVar6 = g_lmapView;
       piVar7 = g_lmapView + 1;
       *(unsigned char *)(g_lmapView + 0x88) = 1;
@@ -1190,7 +1190,7 @@ joined_r0x00397538:
     piVar6 = g_lmapView;
     if (g_lmapView[1] != 0) {
       if ((g_lmapView[1] == 1) &&
-         (piVar7 = g_lmapView, FUN_0033a374(), piVar6 = g_lmapView, piVar7 != (int *)0x0)) {
+         (piVar7 = g_lmapView, vectorPairTransitionStep(), piVar6 = g_lmapView, piVar7 != (int *)0x0)) {
         g_lmapView[0x86] = 0;
         piVar6[0x87] = 0;
         piVar6[6] = *(int *)(g_lmapScene + 0x50);
@@ -1243,7 +1243,7 @@ joined_r0x00397538:
       temp_v45 = 10;
       temp_v46 = 0;
       temp_v36 = temp_v25;
-      FUN_002d1e44(&temp_v27);
+      vectorPairTransitionStart(&temp_v27);
       piVar6 = g_lmapView;
       *(unsigned char *)(g_lmapView + 0x88) = 1;
       piVar7 = piVar6 + 1;
@@ -1255,7 +1255,7 @@ joined_r0x00397538:
     temp_v9 = g_lmapView[1];
     if (temp_v9 != 0) {
       if (temp_v9 == 1) {
-        FUN_0033a374();
+        vectorPairTransitionStep();
         piVar6 = g_lmapView;
         g_lmapView = piVar6;
         if (temp_v9 != 0) {
@@ -1281,7 +1281,7 @@ joined_r0x00397538:
       temp_v45 = 0x3c;
       temp_v44 = 0;
       temp_v46 = 0;
-      FUN_002d1e44(&temp_v27);
+      vectorPairTransitionStart(&temp_v27);
       piVar6 = g_lmapView;
       piVar7 = g_lmapView + 1;
       *(unsigned char *)(g_lmapView + 0x88) = 1;
@@ -1294,7 +1294,7 @@ joined_r0x00397538:
     temp_v9 = g_lmapView[1];
     if (temp_v9 != 0) {
       if (temp_v9 == 1) {
-        FUN_0033a374();
+        vectorPairTransitionStep();
         piVar6 = g_lmapView;
         g_lmapView = piVar6;
         if (temp_v9 != 0) {
@@ -1320,7 +1320,7 @@ joined_r0x00397538:
       temp_v45 = 0x3c;
       temp_v44 = 0;
       temp_v46 = 0;
-      FUN_002d1e44(&temp_v27);
+      vectorPairTransitionStart(&temp_v27);
       piVar6 = g_lmapView;
       piVar7 = g_lmapView + 1;
       *(unsigned char *)(g_lmapView + 0x88) = 1;
@@ -1333,7 +1333,7 @@ joined_r0x00397538:
     temp_v9 = g_lmapView[1];
     if (temp_v9 != 0) {
       if (temp_v9 == 1) {
-        FUN_0033a374();
+        vectorPairTransitionStep();
         piVar6 = g_lmapView;
         g_lmapView = piVar6;
         if (temp_v9 != 0) {
@@ -1381,7 +1381,7 @@ joined_r0x00397538:
       temp_v44 = 0;
       temp_v46 = 0;
       temp_v37 = temp_v21;
-      FUN_002d1e44(&temp_v27);
+      vectorPairTransitionStart(&temp_v27);
       piVar6 = g_lmapView;
       piVar7 = g_lmapView + 1;
       *(unsigned char *)(g_lmapView + 0x88) = 1;
@@ -1394,7 +1394,7 @@ joined_r0x00397538:
     temp_v9 = g_lmapView[1];
     if (temp_v9 != 0) {
       if (temp_v9 == 1) {
-        FUN_0033a374();
+        vectorPairTransitionStep();
         piVar6 = g_lmapView;
         g_lmapView = piVar6;
         if (temp_v9 != 0) {
@@ -1441,7 +1441,7 @@ joined_r0x00397538:
       temp_v44 = 0;
       temp_v46 = 0;
       temp_v37 = temp_v22;
-      FUN_002d1e44(&temp_v27);
+      vectorPairTransitionStart(&temp_v27);
       piVar6 = g_lmapView;
       piVar7 = g_lmapView + 1;
       *(unsigned char *)(g_lmapView + 0x88) = 1;
@@ -1457,7 +1457,7 @@ joined_r0x00397538:
     temp_v9 = g_lmapView[1];
     if (temp_v9 != 0) {
       if (temp_v9 == 1) {
-        FUN_0033a374();
+        vectorPairTransitionStep();
         piVar6 = g_lmapView;
         g_lmapView = piVar6;
         if (temp_v9 != 0) {
@@ -1484,7 +1484,7 @@ joined_r0x00397538:
       temp_v45 = 0x28;
       temp_v44 = 0;
       temp_v46 = 0;
-      FUN_002d1e44(&temp_v27);
+      vectorPairTransitionStart(&temp_v27);
       piVar6 = g_lmapView;
       piVar7 = g_lmapView + 1;
       *(unsigned char *)(g_lmapView + 0x88) = 1;

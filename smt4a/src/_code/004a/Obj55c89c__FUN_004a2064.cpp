@@ -16,7 +16,7 @@ UnitRecord *slotRecordFindById(u32);
 s32 compendiumEntryIsRegistered(u32);
 void FUN_0032d0c8(s32, s32, u32, const UnitRecord *);
 void FUN_004a16bc(void *);
-void FUN_004a1db4(void *);
+void compendiumBrowseMenuUpdate(void *);
 void compendiumUpdateSelectedEntry(void *);
 void FUN_004a3b48(void *);
 void words4At20Clear(PartySlots *);
@@ -61,7 +61,7 @@ void Obj55c89c::FUN_004a2064()
     RosterView *menu = (RosterView *)work;
     RosterRow *rows = menu->rows;
     if (menu->state == 11) {
-        FUN_004a1db4(menu);
+        compendiumBrowseMenuUpdate(menu);
     } else if (menu->state == 2) {
         UnitRecord unit;
         s16 previous = rows[flaggedValueHolderGetTotal(&menu->range)].getId();

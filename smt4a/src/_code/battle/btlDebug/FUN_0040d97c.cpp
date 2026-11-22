@@ -41,7 +41,7 @@ extern u8 g_btlActionReflect[];
 extern const Vec3 DAT_005e1c2c;
 
 BtlSide* btlMainFindEntryByListedId(void* main, s32 index);
-Vec3 FUN_003e7fa4(void* main, s32 index, s32 arg);
+Vec3 btlGetCombatantDrawPosition(void* main, s32 index, s32 arg);
 s16 FUN_004aa0b0(BtlUiA *ui, s32 a, s32 b, f32 x, f32 y, f32 z);
 s16 FUN_004aace8(BtlUiA *ui, s32 id, s32 a, s32 x, s32 y);
 s32 FUN_004aa1e8(BtlUiA *ui, s32 handle);
@@ -69,7 +69,7 @@ void FUN_0040d97c(u32 unused, MarkerStep* step)
 
     u16 result;
     if ((side->flags & MASK64(0x28)) != 0) {
-        Vec3 offset = FUN_003e7fa4(btlGetMainState(), step->actor->index, 0);
+        Vec3 offset = btlGetCombatantDrawPosition(btlGetMainState(), step->actor->index, 0);
         Vec3 base = step->actor->position;
         f32 x = offset.x + base.x;
         f32 y = offset.y + base.y;

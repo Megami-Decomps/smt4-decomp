@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild from asm of the sound voice update; retail walks the four voices with an inlined bounds-checked accessor and shares the voice-start tail by jumps (the draft's gotos), and keeps the group base and the voice pointers in different registers than armcc here. */
+/* NON_MATCHING: 159 lines; retail walks the voices with an inlined unsigned bounds-checked accessor (movcs) from the table base (add r9, base, #0), and its first busy search is querySlotHasHandle's body (found-pointer test) and its stop loop workCommandRefreshActiveSlots's; written that way the reserved search unrolls and the block layout moves (243 lines), so the plain loops stay. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
@@ -29,9 +29,15 @@ struct SoundVoice {
     /* 0x77 */ u8 unk77;
 };
 
+/* The voice table and the sound flags after it. */
+struct SoundVoiceTable {
+    /* 0x000 */ SoundVoice voices[4];
+    /* 0x1E0 */ u8 unk1E0[6];
+    /* 0x1E6 */ s8 stopAll;  /* 1: voices are stopped until the button is released */
+};
+
 extern "C" {
-extern SoundVoice DAT_004c5634[4];
-extern u8 DAT_004c581a;
+extern SoundVoiceTable DAT_004c5634;
 
 s32 jyoucyuGetTableEntry(s32 index);
 s32 objectGetFlagBit1(u32 handle);
@@ -48,7 +54,7 @@ void rt_aeabi_memclr(void *block, s32 size);
 /* The voice at an index, or null past the last one. */
 static SoundVoice *voiceAt(s32 index)
 {
-    return index < 4 ? &DAT_004c5634[index] : NULL;
+    return index < 4 ? &DAT_004c5634.voices[index] : NULL;
 }
 
 /* Frees a voice's data block and clears its slot. */
@@ -123,7 +129,7 @@ void FUN_00106708(void)
             }
             startVoice(voice);
         } else if (voice->flags & VOICE_PLAYING) {
-            if ((DAT_004c581a != 0 || eventIsSkipping() != 0) && voice->mode != 4) {
+            if ((DAT_004c5634.stopAll != 0 || eventIsSkipping() != 0) && voice->mode != 4) {
                 voice->flags |= VOICE_STOP_REQUESTED;
                 voice->fade = 0;
             }
@@ -150,8 +156,8 @@ void FUN_00106708(void)
             voice->state = 0;
         }
     }
-    if (DAT_004c581a == 1 && inputQueryButtonState(9, 2) == 0 && slotIsActive(6) == 0)
-        DAT_004c581a = 0;
+    if (DAT_004c5634.stopAll == 1 && inputQueryButtonState(9, 2) == 0 && slotIsActive(6) == 0)
+        DAT_004c5634.stopAll = 0;
 }
 
 } /* extern "C" */

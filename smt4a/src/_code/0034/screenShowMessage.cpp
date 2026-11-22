@@ -4,7 +4,7 @@
 extern "C" {
 
 extern u32 g_aocSystem;
-extern s32 FUN_0046e458(u32 system, s32 id);
+extern s32 resourceSetFindActiveModelLinkValue(u32 system, s32 id);
 extern s32 dataTableValue0f(void);
 extern void screenBuildItemDescriptionMessage(s32 id);
 extern void asdTextDrawDirectoryEntry(u32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
@@ -19,7 +19,7 @@ void screenShowMessage(s32 id)
     } else {
         screen->text.useDirectoryText = 1;
         screen->textVisible = 1;
-        value = FUN_0046e458(g_aocSystem, id);
+        value = resourceSetFindActiveModelLinkValue(g_aocSystem, id);
         if (value == 0) {
             value = dataTableValue0f();
         }

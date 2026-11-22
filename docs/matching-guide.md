@@ -340,6 +340,10 @@ difference a register tie-break.
 - When retail reaches a field through its own pool word even in a function that already holds the
   enclosing object's base, the field is a separate object: split the symbol (smt4's `g_mapSelection`
   at 0x49FD14 was carved out of `g_gameState`).
+- Two globals that retail reaches from one pool word plus an offset (status as `g_asdSoundDuck + 0x1c`) are
+  defined in the same file: armcc folds them onto one base only for data the translation unit defines. Define them
+  in the unit that owns the file's data and keep every other declaration `extern` (smt4 `asdSoundInitialize`,
+  smt4a `FUN_00142b84`: IDENTICAL, placed by relink, wave 70).
 - Likewise, a float constant pooled ahead of a global's address where the build pools it after can mean
   the "array member" a struct points at is a separate adjacent global: declare it as its own object and
   store `&object` into the pointer (`SoundReverbFilterSize`, smt4 `FUN_00109580`).
@@ -451,6 +455,14 @@ asks for.
 - A switch case that sets several globals and then looks a value up can be another function of the file
   inlined with constant arguments: smt4a `FUN_003b5064`'s resume mode 0 is `mapPlaceSet(1, 2, 0)`'s body
   (`mapPlaceSelect` in `smt4a/include/map/MapPlaceLookup.h`), where open-coded literals miss by 27 lines.
+- An accessor called in a stack-argument list is scheduled first: armcc evaluates an inlined call's body ahead of
+  the other arguments, so one stack argument retail loads before all the rest is an accessor, not a field read.
+  smt4a `FUN_004e76cc` passes `unitTargetHp(unit)` (three sites) among 26 arguments and retail reads it first; open-coded it is 75 lines off
+  (wave 70).
+- A flag retail sets to 1 and tests again at the end of a loop body (`moveq r0, #1` then a branch to the test),
+  where the open-coded statements branch straight on, is the result of a plain `static` helper inlined late:
+  `procUpdate` in smt4/smt4a `asdProcessUpdate` (312 → 107 lines, wave 70; one arm still branches directly). With
+  a single call it still needs evidence besides the diff.
 
 ### Loops and data
 

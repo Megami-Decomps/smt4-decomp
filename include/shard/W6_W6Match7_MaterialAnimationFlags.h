@@ -4,6 +4,7 @@
 #include "common.h"
 #include <stddef.h>
 #include "shard/W6_W6Match8_BattleSpritePlacement.h"
+#include "shard/W6_W6Match7_TextureTransform.h"
 
 /* Prefixes used by the animation-to-material binding pass. */
 struct MaterialFlagMember {
@@ -34,9 +35,12 @@ struct MaterialFlagBindingArray {
 extern "C" void gfxMarkMaterialAnimationCapabilities(const MaterialFlagAnimation*, MaterialFlagStateArray*,
                              const MaterialFlagBindingArray*);
 
+/* A texture channel's transform: the scale and translation are copied in as whole vectors. */
 struct MaterialMergeChannel {
-    /* 0x00 */ f32 first[3];
-    /* 0x0C */ f32 second[3];
+    /* 0x00 */ f32 unk00;
+    /* 0x04 */ TextureTransformVector2 scale;
+    /* 0x0C */ f32 unk0C;
+    /* 0x10 */ TextureTransformVector2 translation;
 };
 struct MaterialMergeTiming {
     /* 0x00 */ f32 first;
@@ -152,6 +156,17 @@ static __inline void materialMergeSetKind(MaterialMergeNode *node, u8 mask, bool
         node->kinds |= mask;
     } else {
         node->kinds &= ~mask;
+    }
+}
+/* Sets a texture channel's timing value (mode 12) and the node's clamp kind bit. */
+static __inline void materialMergeSetTiming(MaterialMergeNode *node, f32 value, bool clamp)
+{
+    node->timing[0].first = value;
+    node->timing[0].mode = 12;
+    if (clamp) {
+        node->kinds |= 1;
+    } else {
+        node->kinds &= ~1;
     }
 }
 typedef char MaterialMergeNodeSizeCheck[sizeof(MaterialMergeNode) == 0x158 ? 1 : -1];

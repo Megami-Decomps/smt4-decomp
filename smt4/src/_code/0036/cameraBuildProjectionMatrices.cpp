@@ -1,4 +1,6 @@
-/* NON_MATCHING: angle constant folding and matrix arithmetic/rotation scheduling differ; -O2 candidate. */
+/* NON_MATCHING: the half angle is its own statement (retail multiplies by 0.5 and by 128/pi separately); the matrix
+ * arithmetic is scheduled differently (retail divides before the zero stores) and retail reloads m4/m5 in the pivot
+ * cases where armcc reuses the values it stored. */
 #include "shard/W6_W6Match6_ProjectionCamera.h"
 
 extern "C" {
@@ -12,7 +14,8 @@ void cameraBuildProjectionMatrices(ProjectionCamera *camera, f32 *projection, f3
     f32 aspect = lens->aspect;
     f32 nearClip = lens->nearClip;
     f32 farClip = lens->farClip;
-    f32 angle = lens->fieldOfView * 0.5f * 40.7436637878418f;
+    f32 halfFieldOfView = lens->fieldOfView * 0.5f;
+    f32 angle = halfFieldOfView * 40.7436637878418f;
     f32 sine, cosine;
     mathSinCos(&sine, &cosine, angle);
     projection[1] = 0.0f;

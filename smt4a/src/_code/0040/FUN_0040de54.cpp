@@ -32,7 +32,7 @@ int sysPlaySe(...);
 int scrScriptProcessStartEntry(...);
 int buttonHelpGetValue(...);
 int FUN_003e7ef0(...);
-int FUN_003e7fa4(...);
+int btlGetCombatantDrawPosition(...);
 int FUN_0040c64c(...);
 int FUN_00410410(...);
 int FUN_0047effc(...);
@@ -194,7 +194,7 @@ extern unsigned int FUN_003e53ec(void);
 /* Supplied declaration required: FUN_003e7840. */
 extern int btlIsExtendedState(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003e7ef0. */
-/* Supplied declaration required: FUN_003e7fa4. */
+/* Supplied declaration required: btlGetCombatantDrawPosition. */
 extern unsigned int FUN_003e82d4(int);
 /* Supplied declaration required: btlScriptUnitHasFlags. */
 extern int btlSlotStateIsNot456(unsigned int, unsigned int);
@@ -1043,7 +1043,7 @@ LAB_0040f258:
           if (temp_v3 == 0) {
             btlQueueActionMessage(0,*(unsigned int *)(psVar2 + 4),0x1000275,0,1,0,0);
           }
-          FUN_003e7fa4(*param_1,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
+          btlGetCombatantDrawPosition(*param_1,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
           btlUiReserveActionSlot(g_btlUiBlock,puVar6);
         }
       }

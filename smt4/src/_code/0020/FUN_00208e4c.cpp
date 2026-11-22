@@ -9,7 +9,7 @@ extern "C" {
 
 int lmapRequestTimedEffect(...);
 int FUN_002df948(void);
-int FUN_002dfb48(void);
+int mapEnemyPickSpawnPosition(void);
 
 int CONCAT44(...);
 int asdMdlManagerMarkDestroy(...);
@@ -117,7 +117,7 @@ extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: randNextInRange. */
 /* Supplied declaration required: FUN_002df948. */
-/* Supplied declaration required: FUN_002dfb48. */
+/* Supplied declaration required: mapEnemyPickSpawnPosition. */
 
 
 void FUN_00208e4c(void)
@@ -2324,7 +2324,7 @@ LAB_0020a934:
         *(unsigned int *)(temp_v3 + 100) = 0;
         if (*(int *)(temp_v3 + 0xbc) == 0) {
           pcVar9 = pcVar17;
-          FUN_002dfb48();
+          mapEnemyPickSpawnPosition();
           if (pcVar9 == (char *)0x0) {
             *(unsigned int *)(temp_v3 + 0xb8) = 0;
             *(unsigned int *)(temp_v3 + 0xbc) = 0;
@@ -2383,7 +2383,7 @@ LAB_0020a934:
             temp_v7 = *(char *)(temp_v6 + 0x3051);
           }
           else {
-            FUN_002dfb48();
+            mapEnemyPickSpawnPosition();
             if (pcVar17 == (char *)0x0) {
               *(unsigned int *)(temp_v3 + 0xb8) = 0;
               *(unsigned int *)(temp_v3 + 0xbc) = 0;

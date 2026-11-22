@@ -1,9 +1,12 @@
-/* NON_MATCHING: contract fixes applied (owner->state passed to the slot helpers, FUN_003dc504(g_btlAux) result tested, shared result exit, action-data slot setter, case order); retail merges the command store of four case groups into one tail and loads the slot stride from the pool each time. */
+/* NON_MATCHING: phases and command stores now lay out as retail's except the switch's tail merge: retail shares the
+ * case-7 block's `strb` with the kind 1-3/8-12 group (whose index goes through r3) and keeps the kind-13 and kind-14
+ * stores apart, where armcc merges kinds 4-7 into the kind-13 block. */
 #include "common.h"
 #include "battle/btlUnit.h"
 #include "gamedata/SkillDataLookup.h"
 #include "battle/btlAction.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUnitWork.h"
 
 /* The record of a combatant's chosen action: its id is at 0x62. */
 struct TurnRecord {
@@ -46,13 +49,6 @@ struct TurnWork {
     /* 0x594 */ u32 argument;
 };
 
-/* One script slot of the battle (0xF1C bytes each); the byte at 9 is its command. */
-struct TurnScriptSlot {
-    /* 0x00 */ u8 unk00[9];
-    /* 0x09 */ u8 command;
-    /* 0x0A */ u8 unk0A[0xF12];
-};
-
 struct DataTable40Record {
     /* 0x00 */ u8 unk00[0x45];
     /* 0x45 */ u8 flag;
@@ -65,13 +61,14 @@ s32 objSlotStateIsActiveRange(TurnState *state, s32 slot);
 void slotResetIdle(TurnState *state, s32 slot, u32 value);
 s32 FUN_003dc504(void *work);
 void FUN_003da010(void *resources);
-void FUN_003dcaac(void *resources, u32 value);
+void btlEffectModelJobStart(void *resources, u32 value); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void btlTargetSetFlag10(TurnState *state, s32 targetId, s32 primary);
 
-static __inline void turnSetCommand(TurnOwner *owner, u8 command)
+/* Sets the command the acting unit's slot runs next. */
+static __inline void turnSetCommand(TurnOwner *owner, s32 command)
 {
-    TurnScriptSlot *slot = &reinterpret_cast<TurnScriptSlot *>(g_btlAction.slots)[owner->state->actorIndex];
-    slot->command = command;
+    BtlActionSlot *slot = &g_btlAction.slots[owner->state->actorIndex];
+    slot->unit.command = command;
 }
 
 /* Drives the action's animation phases; returns 1 when the action is over and its script command is set. */
@@ -86,11 +83,10 @@ u32 FUN_003cab9c(TurnOwner *owner, TurnWork *work)
         work->phase = 1;
         /* fall through */
     case 1:
-        if (FUN_003dc504(g_btlAux) == 0) {
-            return result;
+        if (FUN_003dc504(g_btlAux) != 0) {
+            FUN_003da010(g_btlAux);
+            work->phase = 2;
         }
-        FUN_003da010(g_btlAux);
-        work->phase = 2;
         return result;
     case 2:
         if (FUN_003db7b4(g_btlAux) == 0) {
@@ -98,7 +94,7 @@ u32 FUN_003cab9c(TurnOwner *owner, TurnWork *work)
         }
         work->phase = 5;
         if ((owner->state->stateFlags & 4) == 0) {
-            FUN_003dcaac(g_btlAux, work->argument);
+            btlEffectModelJobStart(g_btlAux, work->argument);
         }
         break;
     case 5:

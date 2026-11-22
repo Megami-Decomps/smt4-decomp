@@ -1,3 +1,4 @@
+#include "shard/W6_W6Match7_SoundInit.h"
 #include "common.h"
 
 /* One of the two persistent sound stream records. */
@@ -15,7 +16,6 @@ struct ResourceSharedState {
 
 extern "C" {
 void *jyoucyuGetTableEntry(u32 index);
-void FUN_00142b84(s32 value);
 void FUN_0013df74(const char *path, s32 arg1, s32 arg2);
 void *asdSoundGetStringBlock(void);
 u32 asdSoundHandleListAdd(s32 id, u8 flag);
@@ -31,7 +31,7 @@ extern SoundStreamRecord g_bgmRequestChannels[2];
 void soundSetupArchiveAndSlots(void)
 {
     if (jyoucyuGetTableEntry(1) == NULL) {
-        FUN_00142b84(0);
+        asdSoundInitialize(0);
         FUN_0013df74("rom:/snd/sdds4.bcsar", 1, 0);
         asdSoundGetStringBlock();
         asdSoundHandleListAdd(0, 1);

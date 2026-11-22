@@ -33,7 +33,7 @@ void gameGlobalsSetSceneState(u32 value);
 s32 gameDataGetRecordValue(void);
 void statusBustUpPortraitAcquire(s32 id, s32 byDevilId);
 void statusBustUpPortraitRelease(s32 id, s32 resolveRecord);
-void FUN_002a5e7c(u32 id);
+void compendiumRegisterPartyDemon(u32 id);
 void sysPlaySe(u32 id);
 void statusDisplayBindUnitRecord(SlotRecordA *record, s32 useBaseStats, u32 selection, const u32 *parameters);
 void objBInitBlock19D0(SlotRecordA *record, s32 copyPair, u32 c);
@@ -170,7 +170,7 @@ s32 campCecRecvStatGainState(CampCecRecv *recv)
             recv->gains.step = 6;
             btlTalkBustUpReleaseAllSlots();
             if (recv->unitFlag.unk7D4) {
-                FUN_002a5e7c(unit->id);
+                compendiumRegisterPartyDemon(unit->id);
                 recv->unitFlag.unk7D4 = 0;
             }
         }

@@ -1,7 +1,14 @@
-/* NON_MATCHING: vector snapshot copy grouping, zero-vector stores and saved-register allocation differ. */
+/* NON_MATCHING: the zero vectors now store z, y, x as retail does and the copies store with one stm; retail also
+ * loads each copied vector with one ldm (the build splits off one word), and saves one register fewer. */
 #include "gfx/CameraPoseBlend.h"
 #include "battle/btlMain.h"
 #include "battle/btlCamera.h"
+
+/* Clears a vector (z, y, then x: retail's store order). */
+static __inline void battleVectorClear(BattleVector3 *v)
+{
+    v->x = v->y = v->z = 0.0f;
+}
 
 extern "C" {
 /* NOTE: declared by value here, unlike battle/BtlGlobals.h's pointer (retail check pending). */
@@ -58,20 +65,19 @@ void FUN_003d86a0(CameraPoseBlendView *camera, u32 unused, u32 duration)
     ResetView *state = reinterpret_cast<ResetView *>(camera);
     camera->flags &= ~0x200000u;
     if ((camera->flags & 0x100000) == 0) {
-        const BattleVector3 zero = { 0.0f, 0.0f, 0.0f };
         state->progress = 0.0f;
         state->first.target = state->first.current;
         state->second.target = state->second.current;
         state->paired.targetSecond = state->paired.currentSecond;
         state->paired.targetFirst = state->paired.currentFirst;
-        state->position.target = state->position.current;
-        state->target.target = state->target.current;
+        battleVectorCopy(&state->position.target, &state->position.current);
+        battleVectorCopy(&state->target.target, &state->target.current);
         state->first.delta = 0.0f;
         state->second.delta = 0.0f;
         state->paired.deltaSecond = 0.0f;
         state->paired.deltaFirst = 0.0f;
-        state->position.delta = zero;
-        state->target.delta = zero;
+        battleVectorClear(&state->position.delta);
+        battleVectorClear(&state->target.delta);
         state->first.frame = 0;
         state->second.frame = 0;
         state->paired.frame = 0;
@@ -81,16 +87,16 @@ void FUN_003d86a0(CameraPoseBlendView *camera, u32 unused, u32 duration)
         g_btlMain.scalar = state->scalarSnapshot;
         camera->start.scalar = state->angleSnapshot;
         state->scalars.startScalar = state->scalars.referenceScalar;
-        camera->start.position = state->positionSnapshot;
-        DAT_00493518[0] = state->firstSnapshot;
-        DAT_00493518[2] = state->secondSnapshot;
+        battleVectorCopy(&camera->start.position, &state->positionSnapshot);
+        battleVectorCopy(&DAT_00493518[0], &state->firstSnapshot);
+        battleVectorCopy(&DAT_00493518[2], &state->secondSnapshot);
         camera->end.up.x = 0.0f;
         g_btlMain.scalarDelta = 0.0f;
         camera->end.scalar = 0.0f;
         state->scalars.endScalar = 0.0f;
-        camera->end.position = zero;
-        DAT_00493518[1] = zero;
-        DAT_00493518[3] = zero;
+        battleVectorClear(&camera->end.position);
+        battleVectorClear(&DAT_00493518[1]);
+        battleVectorClear(&DAT_00493518[3]);
         state->enabled = 1;
         state->duration = duration;
         camera->flags |= 0x10;

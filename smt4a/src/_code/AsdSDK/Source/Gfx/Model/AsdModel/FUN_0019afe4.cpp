@@ -15,7 +15,7 @@ int FUN_001acca0(void);
 void sceneNodeAttachDeclaredChild(SceneChildSet *, SceneNodePrefix *);
 int nw_gfx_SceneBuilder_CreateObject(int *, unsigned int, unsigned int);
 int FUN_001b4288(int *, int);
-int FUN_001b431c(int *, int);
+int graphicsResourceSetLeafValue(int *, int);
 int FUN_001b451c(int *, int);
 int FUN_001b6d08(int *, int, int, unsigned int);
 int libc_strlen(...);
@@ -67,7 +67,7 @@ extern unsigned int asdMemoryGetAllocatorA(void);
 /* Supplied declaration required: sceneNodeAttachDeclaredChild. */
 /* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
 /* Supplied declaration required: FUN_001b4288. */
-/* Supplied declaration required: FUN_001b431c. */
+/* Supplied declaration required: graphicsResourceSetLeafValue. */
 /* Supplied declaration required: FUN_001b451c. */
 /* Supplied declaration required: FUN_001b6d08. */
 /* Supplied declaration required: libc_strlen. */
@@ -121,10 +121,10 @@ void FUN_0019afe4(int *param_1,unsigned int *param_2,unsigned int param_3,int pa
     FUN_001b4288(param_1,0x2030000);
   }
   if ((param_3 & 0x20) != 0) {
-    FUN_001b431c(param_1,0x2020000);
+    graphicsResourceSetLeafValue(param_1,0x2020000);
   }
   else if ((param_3 & 0x100) != 0) {
-    FUN_001b431c(param_1,0x2030000);
+    graphicsResourceSetLeafValue(param_1,0x2030000);
   }
   if ((param_3 & 0x10) != 0) {
     FUN_001b451c(param_1,0x2020000);

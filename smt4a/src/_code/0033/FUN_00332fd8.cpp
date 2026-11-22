@@ -1,4 +1,4 @@
-/* NON_MATCHING: VFP constant allocation only: retail keeps 0.0f in the first saved register s16 and uses six saved VFP registers (d8-d10) where the build lands the zero in s21 and needs seven; the string, jump-table labels and vector initialisers now match. */
+/* NON_MATCHING: 62 lines off; sceneRegisterBoxEffect now takes its definition's 19 integer and 7 float arguments. Retail copies the zero (y) into s19 early and reuses s16 for z, loads 90.0f before the predicated move; the build keeps the zero in s16 and z in s19. */
 #include "common.h"
 #include "util/MathFunctions.h"
 #include "gamedata/DataTable4CValue.h"
@@ -10,9 +10,11 @@ extern "C" {
 s32 FUN_002393cc(s32 scene);
 f32 calcHeadingRoundedToCardinalDirection(f32 heading);
 
-void sceneRegisterBoxEffect(s32 a, s32 b, const char *name, s32 c, s32 d, s32 e, s32 f0, s32 f1, s32 f2, s32 f3,
-                            s32 f4, s32 f5, s32 f6, s32 f7, s32 g, s32 h, s32 kind, s32 i, s32 j, s32 k,
-                            MapVector position, MapVector size, f32 heading);
+s32 sceneRegisterBoxEffect(u32 id, u32 value, const char *name, u32 resource,
+    u32 effect, s32 variant, u8 option0, u8 option1, u8 option2,
+    u8 option3, u8 option4, u8 option5, u8 flag0, u8 flag1, u8 option,
+    u32 data0, u32 data1, u32 data2, u32 priority,
+    f32 x, f32 y, f32 z, f32 extent0, f32 extent1, f32 extent2, f32 yaw);
 
 /* Place the fountain box effect in front of the map target, facing along the rounded cardinal heading. */
 void FUN_00332fd8(void)
@@ -45,14 +47,6 @@ void FUN_00332fd8(void)
     f32 radians = heading * 0.017453292f;
     x -= libm_sinf(radians) * 250.0f;
     z -= libm_cosf(radians) * 250.0f;
-    MapVector position;
-    position.x = x;
-    position.y = 0.0f;
-    position.z = z;
-    MapVector size;
-    size.x = 200.0f;
-    size.y = 200.0f;
-    size.z = 120.0f;
     s32 kind = 18;
     if (FUN_002393cc(scene) != 0) {
         switch (scene) {
@@ -66,11 +60,11 @@ void FUN_00332fd8(void)
         case 7: kind = 24; break;
         case 8: kind = 25; break;
         }
-        sceneRegisterBoxEffect(0, 0, "T_FOUNTAIN", 82, 36, -1, 0, 0, 0, 0, 0, 0, 0, 0, 13, 1, kind, 1, -1, 0,
-                               position, size, heading);
+        sceneRegisterBoxEffect(0, 0, "T_FOUNTAIN", 82, 36, -1, 0, 0, 0, 0, 0, 0, 0, 13, 1, kind, 1, -1, 0,
+                               x, 0.0f, z, 200.0f, 200.0f, 120.0f, heading);
     } else {
-        sceneRegisterBoxEffect(0x205, 0, "T_FOUNTAIN", 86, 12, -1, 0, 0, 0, 0, 0, 0, 0, 0, 13, 1, 1, 1, -1, 0,
-                               position, size, heading);
+        sceneRegisterBoxEffect(0x205, 0, "T_FOUNTAIN", 86, 12, -1, 0, 0, 0, 0, 0, 0, 0, 13, 1, 1, 1, -1, 0,
+                               x, 0.0f, z, 200.0f, 200.0f, 120.0f, heading);
     }
 }
 }

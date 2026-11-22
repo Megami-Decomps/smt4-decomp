@@ -1,70 +1,12 @@
-/* NON_MATCHING: new buffer stays in fp instead of retail's stack pair; vector growth and success-result scheduling differ. */
+/* NON_MATCHING: 91 lines off with nw::ut::MoveArray's push_back (as FUN_00515a9c): retail keeps the parent in r6 and
+ * the node in r5, moves the node into r1 before the circular-reference test, and loads begin/end with one ldm. */
 #include "shard/W6_W6Match7_SceneAttachment.h"
 #include "classes/AsdAllocatorObject.h"
-#include <new>
-
-struct SceneNodeArray {
-    typedef SceneNode *value_type;
-
-    AsdAllocatorObject *allocator;
-    value_type *begin;
-    value_type *end;
-    u32 capacityFlags;
-
-    s32 capacity() const { return capacityFlags & 0x3fffffff; }
-
-    bool reserve(s32 requested)
-    {
-        if (requested <= capacity()) {
-            return true;
-        }
-        if (allocator == NULL || (capacityFlags & 0xc0000000) != 0x40000000) {
-            return false;
-        }
-        value_type *buffer = static_cast<value_type *>(allocator->allocate(requested * sizeof(value_type), 0x20));
-        if (buffer == NULL) {
-            return false;
-        }
-        s32 count = 0;
-        value_type *source = begin;
-        value_type *limit = end;
-        if (source != limit) {
-            value_type *destination = buffer;
-            do {
-                new (destination) value_type(*source);
-                ++source;
-                ++destination;
-            } while (source != limit);
-            count = end - begin;
-        }
-        if (begin != NULL) {
-            end = begin;
-            allocator->release(begin);
-        }
-        begin = buffer;
-        end = buffer + count;
-        capacityFlags = (capacityFlags & 0xc0000000) | requested;
-        return true;
-    }
-
-    bool pushBack(SceneNode *node)
-    {
-        s32 currentCapacity = capacity();
-        if (end - begin >= currentCapacity) {
-            s32 requested = currentCapacity != 0 ? currentCapacity * 2 : 1;
-            if (!reserve(requested)) {
-                return false;
-            }
-        }
-        new (end) value_type(node);
-        ++end;
-        return true;
-    }
-};
+#include "nw/ut/MoveArray.h"
 
 struct SceneNodeChildren {
     SceneNode *owner;
-    SceneNodeArray nodes;
+    nw::ut::MoveArray<SceneNode *> nodes;
 
     bool attach(SceneNode *node);
 };
@@ -84,7 +26,7 @@ inline bool SceneNodeChildren::attach(SceneNode *node)
     if (node->parent != NULL) {
         return false;
     }
-    bool attached = nodes.pushBack(node);
+    bool attached = nodes.push_back(node);
     if (attached) {
         node->parent = owner;
     }

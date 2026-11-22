@@ -436,6 +436,10 @@ typedef struct BtlMainStateA {
             /* 0x008C */ u8 unk008C[0x1C];
             /* 0x00A8 */ u32 mode;
             /* 0x00AC */ s32 availabilityOverride; /* 1 permits the kind-9 list entry */
+            /* 0x00B0 */ u8 unk00B0[0x30];
+            /* 0x00E0 */ s16 partyListCount; /* entries of the command menu's party list (btlCommandMenuSetupLists) */
+            /* 0x00E2 */ u8 unk00E2[2];
+            /* 0x00E4 */ s32 unk00E4;      /* 1: a surviving protected target switches the command mode to 13 (btlUnitLandHit) */
         } commandFilter;
         struct {
             /* 0x008C */ u8 unk008C[0x18];

@@ -7,7 +7,7 @@
 
 extern "C" {
 void screenFadeResetAndRelease(MaterialMergeOwner *);
-void FUN_002276f8(MaterialMergeOwner *);
+void btlEffectNumberedRelease(MaterialMergeOwner *);
 void modelManagerReleaseSlots(MaterialMergeOwner *);
 void btlSpritePlacementRelease(BattleSpritePlacement *);
 
@@ -43,7 +43,7 @@ extern "C" void btlEffectOwnerReleaseResources(MaterialMergeOwner *owner)
     ResourceControl *control = reinterpret_cast<ResourceControl *>(owner);
     control->state = 0;
     screenFadeResetAndRelease(owner);
-    FUN_002276f8(owner);
+    btlEffectNumberedRelease(owner);
     modelManagerReleaseSlots(owner);
 
     KeyedValueTable *models = reinterpret_cast<KeyedValueTable *>(owner);

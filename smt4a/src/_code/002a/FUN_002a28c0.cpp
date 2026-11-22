@@ -1,4 +1,4 @@
-/* NON_MATCHING: camp StreetPass (CEC) loader thread body: loads the CEC tables and script, fills the outgoing message record from the save data and forwards it, then waits until the files have arrived; written from the decompilation, the stack buffers of the CEC id helpers and the return-value plumbing are approximated */
+/* NON_MATCHING: camp StreetPass (CEC) loader thread body: loads the CEC tables and script, fills the outgoing message record from the save data and forwards it, then waits until the files have arrived; the message record's one-byte and one-word fields are set through the five setters armlink inlined (cecMessageSet*, config/inlined.txt; those blocks are retail's apart from the value register); written from the decompilation, the stack buffers of the CEC id helpers and the return-value plumbing are approximated */
 #include "common.h"
 #include "event/2dEvent/EventEffect.h"
 #include "camp/CampCec/CampCecView.h"
@@ -47,6 +47,11 @@ void asdLoadFileAsyncSimple(const char *path, s32 *destination, s32 flags);
 void loadSlotEnsureLoaded(s32 slot);
 void btlTalkBustUpCreate(void);
 CecMessageRecord *FUN_002bf520(void);
+void cecMessageSetRankA(CecMessageRecord *record, u8 rank);
+void cecMessageSetRankB(CecMessageRecord *record, u8 rank);
+void cecMessageSetRankC(CecMessageRecord *record, u8 rank);
+void cecMessageSetGameFlag(CecMessageRecord *record, u8 flag);
+void cecMessageSetWord27E8C(CecMessageRecord *record, u32 value);
 void saveBuildSummary(void);
 u8 FUN_0031cee0(void);
 u8 gameSaveWorkGetState(void);
@@ -78,16 +83,16 @@ void FUN_002a28c0(CecThreadWork *work)
             asdLoadFileAsyncSimple("camp/CecMain_msg.mbm", &work->messages, 0);
             FUN_002bf520();
             saveBuildSummary();
-            FUN_002bf520()->rankA = FUN_0031cee0();
-            FUN_002bf520()->rankB = gameSaveWorkGetState();
-            FUN_002bf520()->rankC = saveFlagGet27e1f();
+            cecMessageSetRankA(FUN_002bf520(), FUN_0031cee0());
+            cecMessageSetRankB(FUN_002bf520(), gameSaveWorkGetState());
+            cecMessageSetRankC(FUN_002bf520(), saveFlagGet27e1f());
             ownerSetName(FUN_002bf520(), reinterpret_cast<u32>(FUN_002840ac()));
             s32 progress;
             FUN_002a4664(&progress);
             engineForwardVariadicCommand(FUN_002bf520(), progress, 0, 0);
-            FUN_002bf520()->gameFlag = FUN_002a46b8();
+            cecMessageSetGameFlag(FUN_002bf520(), FUN_002a46b8());
             slotNameDisplaySetEntry(FUN_002bf520(), gameDataGetRecordValue());
-            FUN_002bf520()->word27E8C = gameDataBlocksGetWord27E8C();
+            cecMessageSetWord27E8C(FUN_002bf520(), gameDataBlocksGetWord27E8C());
             if (gameDataGetRecordValue() == 0)
                 rt_aeabi_memclr(FUN_002bf520()->ownerId, CEC_MESSAGE_RECORD_ID_SIZE);
 

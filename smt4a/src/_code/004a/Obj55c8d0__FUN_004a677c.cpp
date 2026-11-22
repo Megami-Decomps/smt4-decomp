@@ -25,7 +25,7 @@ struct DevilListMenu {
 
 extern "C" {
 void menu4BUpdate(DevilListMenu *menu);
-void FUN_004a580c(DevilListMenu *menu);
+void questMenuUpdate(DevilListMenu *menu);
 void FUN_004a5d5c(DevilListMenu *menu);
 void words4At20Clear(PartySlots *party);
 s32 rangeGetMinimumLimit(u8 *range);
@@ -45,7 +45,7 @@ void Obj55c8d0::FUN_004a677c()
     if (menu->state == 4) {
         menu4BUpdate(menu);
     } else {
-        FUN_004a580c(menu);
+        questMenuUpdate(menu);
     }
     FUN_004a5d5c(menu);
     words4At20Clear(&menu->party);

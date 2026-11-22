@@ -1,4 +1,4 @@
-/* NON_MATCHING: the control flow and calls are the same; retail addresses the reference-model fields through a second copy of the work pointer made just before FUN_002276f8 (this build hoists work + 0x3000 to the top and spills it), keeps the current name pointer in the first word of the 128-byte text buffer during the reference scan, and allocates the loop registers differently. */
+/* NON_MATCHING: the control flow and calls are the same; retail addresses the reference-model fields through a second copy of the work pointer made just before btlEffectNumberedRelease (this build hoists work + 0x3000 to the top and spills it), keeps the current name pointer in the first word of the 128-byte text buffer during the reference scan, and allocates the loop registers differently. */
 #include "common.h"
 #include "runtime/Stdio.h"
 #include <string.h>
@@ -35,7 +35,7 @@ s32 libc_strncmp(const char *a, const char *b, u32 n);
 char *libc_strcpy(char *destination, const char *source);
 void memClear(void *block, s32 size);
 s32 keyedRecordFindByName(const char *name);
-void FUN_002276f8(EffectWork *work);
+void btlEffectNumberedRelease(EffectWork *work);
 u32 filterCreateByKind(u32 index, u32 kind, u32 flag);
 char *libc_strrchr(const char *text, s32 character);
 void asdLoadFileAsyncSimple(const char *path, u32 *file, s32 flag);
@@ -71,7 +71,7 @@ u32 FUN_003dab2c(EffectWork *work)
             for (s32 j = 0; j < 11; j++) {
                 __2sprintf(text, DAT_00400904, g_btlEffect[0], j);
                 if (strcmp(text, name) == 0) {
-                    FUN_002276f8(work);
+                    btlEffectNumberedRelease(work);
                     work->referenceFilter = filterCreateByKind(j & 0xff, 7, 0);
                     work->referenceIndex = j;
                     selected = true;

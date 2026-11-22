@@ -24,7 +24,7 @@ extern SkillSlot *btlMainFindEntryByListedId(BtlObject *obj, int skillId);
 extern SkillInfo *FUN_003eca48(BtlObject *obj, u16 infoId);
 extern int FUN_003e9b74(BtlObject *obj);
 extern int FUN_003ece50(BtlObject *obj);
-extern int FUN_003eaa9c(BtlObject *obj);
+extern int btlSetupEnvironmentModelCopies(BtlObject *obj);
 extern int FUN_003e1454(BtlStep *step, BtlObject *obj);
 
 
@@ -46,7 +46,7 @@ void FUN_003e1068(BtlStep *step, BtlObject *obj)
                 if (FUN_003ece50(obj) == 0) {
                     return;
                 }
-                FUN_003eaa9c(obj);
+                btlSetupEnvironmentModelCopies(obj);
             }
         }
     }

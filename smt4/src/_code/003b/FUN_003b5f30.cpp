@@ -10,7 +10,7 @@ int gxSetMirroredClippedScissor(int, int, int, int, int);
 int effectRenderTransformedInstance(int);
 int gxResetColorQuadToWhite(void);
 int efctSetSpeed(void);
-int FUN_003b65a4(int, int, int, int, int, int, int, int, int, int);
+int resultDrawRowColumn(int, int, int, int, int, int, int, int, int, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
@@ -26,7 +26,7 @@ typedef struct {
     unsigned int sp78; /* 0x78: local_78 */
 } param_3_stack;
 
-extern unsigned int DAT_0044dc38; /* 0x44dc38 */
+extern unsigned int g_resultRowDrawState; /* 0x44dc38 */
 extern unsigned int DAT_0044dc3c; /* 0x44dc3c */
 extern int g_titleScene; /* 0x44ea00 */
 
@@ -41,7 +41,7 @@ extern int vec2GetXInt(int);
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_003b65a4. */
+/* Supplied declaration required: resultDrawRowColumn. */
 
 
 void FUN_003b5f30(int param_1,int param_2,int param_3)
@@ -103,16 +103,16 @@ void FUN_003b5f30(int param_1,int param_2,int param_3)
         if (temp_v12 != 2) {
           if (temp_v12 != 4) {
             if (temp_v12 == 6) {
-              DAT_0044dc38 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x28,0x5f));
+              g_resultRowDrawState = reinterpret_cast<int>(asdTMTexTableEntryAt(0x28,0x5f));
             }
           }
           else {
-            DAT_0044dc38 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x28,0x66));
+            g_resultRowDrawState = reinterpret_cast<int>(asdTMTexTableEntryAt(0x28,0x66));
             DAT_0044dc3c = 0;
           }
         }
         else {
-          DAT_0044dc38 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x28,100));
+          g_resultRowDrawState = reinterpret_cast<int>(asdTMTexTableEntryAt(0x28,100));
           DAT_0044dc3c = 0;
         }
       }
@@ -149,7 +149,7 @@ void FUN_003b5f30(int param_1,int param_2,int param_3)
         temp_v6 = temp_v6 + temp_v3;
         temp_v3 = param_1 + temp_v8 * 2;
         temp_v8 = param_1 + temp_v8;
-        FUN_003b65a4(param_1,temp_v12,(int)*(char *)(temp_v2 + 0x90f0),temp_v7,temp_v5,temp_v6,
+        resultDrawRowColumn(param_1,temp_v12,(int)*(char *)(temp_v2 + 0x90f0),temp_v7,temp_v5,temp_v6,
                      (int)*(short *)(temp_v3 + 0xd468),(int)*(char *)(temp_v8 + 0xd4fe),
                      (int)*(short *)(temp_v3 + 0xd49a),(int)*(char *)(temp_v8 + 0xd530));
         temp_v7 = temp_v7 + 1;

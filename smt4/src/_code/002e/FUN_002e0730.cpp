@@ -27,7 +27,7 @@ struct TitleLogoWork {
 
 extern "C" {
 void uiSpriteAdvanceAnimation(void *fade);
-void FUN_0034266c(TitleLogoModel *model);
+void bannerAnimStep(TitleLogoModel *model);
 
 /* Job update: steps the fade, shows the logo unless faded out, and animates it by mode. */
 s32 FUN_002e0730(u32 job)
@@ -41,7 +41,7 @@ s32 FUN_002e0730(u32 job)
     case 0:
         break;
     case 1:
-        FUN_0034266c(work->model);
+        bannerAnimStep(work->model);
         break;
     case 2: {
         TitleLogoEffect *effect = work->effect;

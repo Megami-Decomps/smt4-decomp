@@ -40,7 +40,7 @@ struct RecoverableSlot {
     u16 hp; // 0x2a
 };
 extern "C" {
-void FUN_003eb314(BattleSlotState *, BattleSlotCore *, void *);
+void btlUnitStateInitFromEnemyRecord(BattleSlotState *, BattleSlotCore *, void *);
 PartySlotMap *gameGetSlotTable();
 RecoverableSlot *gameGetSlotRecord(s32);
 s32 bitsAt60Test(RecoverableSlot *, u32);
@@ -80,7 +80,7 @@ void btlPopulateSelectedSlot(s32 kind, s32 slot, s32 destination, s32 animate)
         void *definition = nkmEnemyFindById((u16)battle->slots[slot].id);
         if (definition == NULL)
             return;
-        FUN_003eb314(battle, (BattleSlotCore *)&scratch.data, definition);
+        btlUnitStateInitFromEnemyRecord(battle, (BattleSlotCore *)&scratch.data, definition);
     }
     FUN_004ca63c(battle, (BattleSlotCore *)&scratch.data, kind, destination, 1);
     if (kind == 1) {

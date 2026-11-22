@@ -1,80 +1,93 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00511fb4` (_code @ 0x511fb8, 0xd8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: 67 vs 67 rows (2 diff lines); all four global initializers, vtables, atexit calls and pool entries match retail except LightEvent::Initialize second arg uses mov r1, #0 before lock store instead of mov r1, r5 after it. */
+#include "common.h"
+#include "classes/Obj557b68.h"
+#include "classes/Obj55c244.h"
+#include "nn/os/CriticalSection.h"
+
+struct InitHeapRecord {
+    /* 0x00 */ u32 word00;
+    /* 0x04 */ u32 word04;
+    /* 0x08 */ u32 word08;
+    /* 0x0C */ u32 word0C;
+    /* 0x10 */ u8 flag10;
+    /* 0x14 */ u32 word14;
+    /* 0x18 */ u8 flag18;
+};
+
+struct InitServiceObj {
+    /* 0x00 */ const void *vtable;
+    /* 0x04 */ u32 word04;
+    /* 0x08 */ u32 word08;
+    /* 0x0C */ u32 word0C;
+    /* 0x10 */ u32 criticalSection[3];
+    /* 0x1C */ LightEvent lightEvent;
+    /* 0x24 */ u32 word24;
+    /* 0x28 */ u32 word28;
+    /* 0x2C */ u32 word2C;
+    /* 0x30 */ u32 word30;
+    /* 0x34 */ u8 unk34[0xD];
+    /* 0x41 */ u8 flag41;
+    /* 0x42 */ u8 flag42;
+    /* 0x43 */ u8 pad43;
+    /* 0x44 */ u32 word44;
+    /* 0x48 */ u32 word48;
+};
 
 extern "C" {
+extern InitHeapRecord DAT_0064600c;
+extern u32 DAT_005c0b04;
+extern InitServiceObj DAT_0064602c;
+extern u32 DAT_005c0b08[2];
+extern u8 entry;
+extern const void *_ZTV9Obj55b404[];
+extern const void *_ZTV9Obj55b420[];
 
-int nn_os_CriticalSection_Initialize(...);
-int nn_os_LightEvent_Initialize(...);
-int __aeabi_atexit(...);
-int __aeabi_vec_ctor_nocookie_nodtor(...);
+void FUN_0042d03c(void *obj);
+void FUN_0042d1cc(void *obj);
+void FUN_0043eca8(void *obj);
+void *FUN_0042d1c0(void *obj);
+void FUN_001f3ddc(void *obj);
+s32 __aeabi_atexit(void *object, void (*destroy)(void *), void *module);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern unsigned char FUN_0042d1c0; /* 0x42d1c0 */
-extern int FUN_0042d1cc(...); /* 0x42d1cc */
-extern unsigned char DAT_0055b40c; /* 0x55b40c */
-extern unsigned char DAT_0055b428; /* 0x55b428 */
-extern unsigned int DAT_005c0b04; /* 0x5c0b04 */
-extern unsigned int DAT_005c0b08; /* 0x5c0b08 */
-extern unsigned char *DAT_0064602c; /* 0x64602c */
-extern unsigned int DAT_00646030; /* 0x646030 */
-extern unsigned int DAT_00646034; /* 0x646034 */
-extern unsigned int DAT_00646038; /* 0x646038 */
-extern unsigned int DAT_0064603c; /* 0x64603c */
-extern unsigned int DAT_00646048; /* 0x646048 */
-extern unsigned int DAT_0064604c; /* 0x64604c */
-extern unsigned int DAT_00646050; /* 0x646050 */
-extern unsigned int DAT_00646054; /* 0x646054 */
-extern unsigned int DAT_00646058; /* 0x646058 */
-extern unsigned int DAT_0064605c; /* 0x64605c */
-extern unsigned char DAT_0064606d; /* 0x64606d */
-extern unsigned char DAT_0064606e; /* 0x64606e */
-extern unsigned int DAT_00646070; /* 0x646070 */
-extern unsigned int DAT_00646074; /* 0x646074 */
-
-/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
-/* Supplied declaration required: nn_os_LightEvent_Initialize. */
-/* Supplied declaration required: __aeabi_atexit. */
-/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-
-
-void FUN_00511fb4(unsigned int *param_1)
-
+/* Static initializer for the module's heap record, service object and handle array. */
+void FUN_00511fb4(void)
 {
-/* irregular: 5 native warning(s); review required */
-  *param_1 = 0;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  *(unsigned char *)(param_1 + 4) = 0;
-  param_1[5] = 0;
-  *(unsigned char *)(param_1 + 6) = 0;
-  DAT_005c0b04 = 0;
-  DAT_0064602c = &DAT_0055b40c;
-  DAT_00646030 = 0;
-  DAT_00646034 = 0;
-  DAT_00646038 = 0;
-  DAT_0064603c = 0;
-  nn_os_CriticalSection_Initialize(&DAT_0064603c,FUN_0042d1cc,0x100000);
-  DAT_00646048 = 0;
-  DAT_0064604c = 0;
-  nn_os_LightEvent_Initialize(&DAT_00646048,0);
-  DAT_00646050 = 0;
-  DAT_00646054 = 0;
-  DAT_00646058 = 0;
-  DAT_0064605c = 0;
-  DAT_0064606d = 0;
-  DAT_0064606e = 0;
-  DAT_0064602c = &DAT_0055b428;
-  DAT_00646070 = 0;
-  DAT_00646074 = 0;
-  __aeabi_vec_ctor_nocookie_nodtor(&DAT_005c0b08,&FUN_0042d1c0,4,2);
-  __aeabi_atexit(0,0x1f3ddc,0x100000);
-  return;
+    DAT_0064600c.word00 = 0;
+    DAT_0064600c.word04 = 0;
+    DAT_0064600c.word08 = 0;
+    DAT_0064600c.word0C = 0;
+    DAT_0064600c.flag10 = 0;
+    DAT_0064600c.word14 = 0;
+    DAT_0064600c.flag18 = 0;
+    __aeabi_atexit(&DAT_0064600c, FUN_0042d03c, &entry);
+
+    DAT_005c0b04 = 0;
+    __aeabi_atexit(&DAT_005c0b04, FUN_0042d1cc, &entry);
+
+    InitServiceObj *obj = &DAT_0064602c;
+    obj->vtable = &_ZTV9Obj55b404[2];
+    obj->word04 = 0;
+    obj->word08 = 0;
+    obj->word0C = 0;
+    obj->criticalSection[0] = 0;
+    nn_os_CriticalSection_Initialize(obj->criticalSection);
+    LightEvent *ev = &obj->lightEvent;
+    ev->state = 0;
+    ev->lock = 0;
+    nn_os_LightEvent_Initialize(ev, 0);
+    obj->word24 = 0;
+    obj->word28 = 0;
+    obj->word2C = 0;
+    obj->word30 = 0;
+    obj->flag41 = 0;
+    obj->flag42 = 0;
+    obj->vtable = &_ZTV9Obj55b420[2];
+    obj->word44 = 0;
+    obj->word48 = 0;
+    __aeabi_atexit(obj, FUN_0043eca8, &entry);
+
+    __aeabi_vec_ctor_nocookie_nodtor(DAT_005c0b08, FUN_0042d1c0, 4, 2);
+    __aeabi_atexit(NULL, FUN_001f3ddc, &entry);
 }
 
 } /* extern "C" */

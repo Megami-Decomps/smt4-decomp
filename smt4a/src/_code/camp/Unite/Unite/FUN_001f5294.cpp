@@ -37,7 +37,7 @@ int wordAt1B0Clear(...);
 
 int partyFindSlotById(...);
 int scrollOwnerSetValue(...);
-int FUN_002a5e7c(...);
+int compendiumRegisterPartyDemon(...);
 int saveMarkIdListSeen(...);
 int panelSetMode3(...);
 int FUN_0031f688(void);
@@ -67,7 +67,7 @@ int objBInitBlock19D0(...);
 int FUN_0033449c(...);
 int messageDismissNumericBanner(...);
 int uniteListRebuild(...);
-int FUN_003bb710(...);
+int uniteInheritanceBuildSkillList(...);
 int FUN_003c3f8c(...);
 int FUN_003c9354(void);
 int FUN_003cca18(...);
@@ -275,7 +275,7 @@ extern int listCursorGetRowOfChildIfUnblocked(int *);
 /* Supplied declaration required: scrollListSetSelectionTracked. */
 /* Supplied declaration required: compendiumEntryIsRegistered. */
 extern int messageGetChoiceResult(void);
-/* Supplied declaration required: FUN_002a5e7c. */
+/* Supplied declaration required: compendiumRegisterPartyDemon. */
 /* Supplied declaration required: saveMarkIdListSeen. */
 /* Supplied declaration required: statusDownRestartTransition. */
 /* Supplied declaration required: statusPanelSetOpen. */
@@ -354,7 +354,7 @@ extern int panelStateIs0(void);
 extern int partyPanelIsStateTwentyFive(void);
 /* Supplied declaration required: fusionPrepareSpecialRecipeList. */
 /* Supplied declaration required: uniteListRebuild. */
-/* Supplied declaration required: FUN_003bb710. */
+/* Supplied declaration required: uniteInheritanceBuildSkillList. */
 /* Supplied declaration required: partyPanelSetHidden. */
 /* Supplied declaration required: findSkillMetadataById. */
 /* Supplied declaration required: FUN_003c3f8c. */
@@ -2366,7 +2366,7 @@ LAB_001f77ec:
                       }
                       FUN_0028a538((piVar19[(unsigned int)temp_v1 * 2 + 0x4ef] & 0x1ffffU) >> 2,&temp_v25,
                                    temp_v40);
-                      FUN_003bb710((piVar3[temp_v47[0] * 2 + 0x4ef] & 0x1ffffU) >> 2);
+                      uniteInheritanceBuildSkillList((piVar3[temp_v47[0] * 2 + 0x4ef] & 0x1ffffU) >> 2);
                       uniteListRebuild((piVar3[temp_v47[0] * 2 + 0x4ef] & 0x1ffffU) >> 2);
                       piVar3[0x103] = 0xf;
                       uniteMenuChangeState(0x24,1);
@@ -2850,7 +2850,7 @@ LAB_001f9868:
     FUN_002c8550(2);
     FUN_0033449c(0);
     nkmBaseGetRecord(*(unsigned short *)((int)piVar3 + 0x66fe));
-    FUN_003bb710(*(unsigned short *)((int)piVar3 + 0x66fe));
+    uniteInheritanceBuildSkillList(*(unsigned short *)((int)piVar3 + 0x66fe));
     uniteListRebuild(*(unsigned short *)((int)piVar3 + 0x66fe));
     *(short *)(piVar3 + 0x19b4) = (short)piVar3[0x22d8];
     *(unsigned short *)((int)piVar3 + 0x66d2) = *(unsigned short *)((int)piVar3 + 0x8b62);
@@ -3035,7 +3035,7 @@ LAB_001f9868:
       *(unsigned short *)(temp_v5 + 0x2a) = temp_v3;
       *(unsigned short *)(temp_v5 + 0x2c) = *(unsigned short *)(temp_v5 + 0x10);
       if (temp_v4 == 0) {
-        FUN_002a5e7c(*(unsigned short *)(temp_v5 + 0x62));
+        compendiumRegisterPartyDemon(*(unsigned short *)(temp_v5 + 0x62));
       }
       gameCounterAddSaturating(0x26,1);
       temp_v4 = *piVar19;
@@ -3847,7 +3847,7 @@ LAB_001fb9c4:
                   iStack_384 = piVar19[0x1497];
                   temp_v37 = piVar19[0x1496];
                   FUN_0034c340(temp_v30,temp_v29,0,&temp_v35);
-                  FUN_003bb710((short)temp_v46[0xe]);
+                  uniteInheritanceBuildSkillList((short)temp_v46[0xe]);
                   uniteListRebuild((short)temp_v46[0xe]);
                   piVar3[0x103] = 0xf;
                   uniteMenuChangeState(0x24,1);
@@ -3961,7 +3961,7 @@ joined_r0x001fbbe8:
           piVar3[0x4f1] = (piVar3[0x4f1] & 0xfffe0003U) | temp_v7;
           piVar3[0x4f3] = (piVar3[0x4f3] & 0xfffe0003U) | temp_v7;
           FUN_0028a538(temp_v10,temp_v4,temp_v5);
-          FUN_003bb710((piVar3[0x4ef] & 0x1ffffU) >> 2);
+          uniteInheritanceBuildSkillList((piVar3[0x4ef] & 0x1ffffU) >> 2);
           uniteListRebuild((piVar3[0x4ef] & 0x1ffffU) >> 2);
           piVar3[0x103] = 0xf;
           uniteMenuChangeState(0x24,1);

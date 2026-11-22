@@ -12,7 +12,7 @@ void ownerTableEntryGet(int *out, Owner *owner, u32 index);
 
 u32 FUN_003dbe68(NameOwner *owner);
 
-void FUN_003dcaac(Obj *obj, u32 value);
+void btlEffectModelJobStart(Obj *obj, u32 value);
 
 void FUN_003d9d74(OwnerState *owner);
 

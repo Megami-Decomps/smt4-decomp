@@ -1,4 +1,5 @@
-/* NON_MATCHING: packed parameter-load grouping, command pointer setup and pool-store register allocation differ. */
+/* NON_MATCHING: 116 lines off: the stack parameters are words (retail loads them with ldm); retail keeps the pool
+ * counters' address in r9 and the command in fp, loads flagB into sl before the calls and splits the channel loads. */
 #include "shard/W9_W9Match7_FlagGatedEntries.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 
@@ -43,8 +44,8 @@ u32 FUN_00244c70(void *object, u32 first, u32 second, u32 third, f32 x, f32 y, f
 
 void FUN_0035363c(void *object, u32 id, u32 reference, u32 styleValue,
     f32 x, f32 y, f32 z, f32 depth, f32 scale, f32 rotation,
-    u32 first, u32 second, u8 channel0, u8 channel1, u8 channel2, u8 channel3, u8 channel4, u8 channel5,
-    u8 flagA, u8 flagB, u8 kind, u32 vectorXBits, u32 vectorYBits, u32 vectorZBits, u32 third)
+    u32 first, u32 second, u32 channel0, u32 channel1, u32 channel2, u32 channel3, u32 channel4, u32 channel5,
+    u32 flagA, u32 flagB, u32 kind, u32 vectorXBits, u32 vectorYBits, u32 vectorZBits, u32 third)
 {
     u32 current = DAT_00580c90.second;
     EffectRegistrationCommand *command = &DAT_00602020[current];

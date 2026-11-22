@@ -22,7 +22,7 @@ int FUN_004dcc5c(...);
 int FUN_004dce1c(...);
 int btlUnitSetParam(...);
 int btlUnitClearRecordFields(...);
-int FUN_004e7168(...);
+int btlActionStepUnit(...);
 int FUN_004ecd7c(...);
 int FUN_004ecee8(...);
 int btlCameraFinishTransition(...);
@@ -39,7 +39,7 @@ int btlSlotManagerResetStates(...);
 int FUN_003efb18(...);
 int FUN_003f2594(...);
 int flagValueSub(...);
-int FUN_004aa3d4(...);
+int btlUiOpenHelpWindow(...);
 int FUN_004e5f2c(...);
 int btlReflectCreateKind25(...);
 int btlQueueKeyedScalarReflectAction(...);
@@ -198,7 +198,7 @@ extern int FUN_003eca48(int, unsigned short);
 /* Supplied declaration required: flagValueSub. */
 /* Supplied declaration required: FUN_004a92d0. */
 /* Supplied declaration required: FUN_004a9308. */
-/* Supplied declaration required: FUN_004aa3d4. */
+/* Supplied declaration required: btlUiOpenHelpWindow. */
 /* Supplied declaration required: btlUiSelectCommandTargetState. */
 /* Supplied declaration required: FUN_004ac0bc. */
 extern unsigned short partySlotFindIndex(void);
@@ -223,7 +223,7 @@ extern int isEntryUsable(int);
 /* Supplied declaration required: FUN_004e5f2c. */
 /* Supplied declaration required: btlUnitClearRecordFields. */
 /* Supplied declaration required: FUN_004e6b64. */
-/* Supplied declaration required: FUN_004e7168. */
+/* Supplied declaration required: btlActionStepUnit. */
 extern int btlActionTargetSlotScore(int *, unsigned int *, int);
 /* Supplied declaration required: FUN_004e8454. */
 extern int FUN_004ea0c0(int *, unsigned int *);
@@ -1246,7 +1246,7 @@ code_r0x004f054c:
         temp_v3 = *(int *)(*(int *)(temp_v20 + 0x24) + 0x150);
         dataTable41FindById();
         if (temp_v3 != 0) {
-          FUN_004aa3d4(g_btlUiBlock,2,*(unsigned int *)(*(int *)(temp_v20 + 0x24) + 0x150) & 0xffff,
+          btlUiOpenHelpWindow(g_btlUiBlock,2,*(unsigned int *)(*(int *)(temp_v20 + 0x24) + 0x150) & 0xffff,
                        *(unsigned int *)(*(int *)(temp_v20 + 0x24) + 0x3f8),0,0);
         }
         else {
@@ -1258,34 +1258,34 @@ code_r0x004f054c:
           else {
             temp_v1 = *(unsigned short *)(temp_v3 + 4);
           }
-          FUN_004aa3d4(g_btlUiBlock,iStack_68,0,*(unsigned int *)(*(int *)(temp_v20 + 0x24) + 0x3f8),
+          btlUiOpenHelpWindow(g_btlUiBlock,iStack_68,0,*(unsigned int *)(*(int *)(temp_v20 + 0x24) + 0x3f8),
                        temp_v1,temp_v23);
         }
         break;
       case 2:
       case 3:
-        FUN_004aa3d4(g_btlUiBlock,iStack_68,uStack_74 & 0xffff,
+        btlUiOpenHelpWindow(g_btlUiBlock,iStack_68,uStack_74 & 0xffff,
                      *(unsigned int *)(*(int *)(temp_v20 + 0x24) + 0x3f8),
                      *(unsigned short *)(*(int *)(temp_v20 + 0x2c) + 2),0);
         break;
       case 8:
-        FUN_004aa3d4(g_btlUiBlock,iStack_68,uStack_64 & 0xffff,0,0,0);
+        btlUiOpenHelpWindow(g_btlUiBlock,iStack_68,uStack_64 & 0xffff,0,0,0);
         break;
       case 9:
       case 0xb:
       case 0xc:
         if ((*puVar25 & 0x2000000) == 0) {
-          FUN_004aa3d4(g_btlUiBlock,iStack_68,1,0,0,0);
+          btlUiOpenHelpWindow(g_btlUiBlock,iStack_68,1,0,0,0);
         }
         else {
-          FUN_004aa3d4(g_btlUiBlock,iStack_68,0,0,0,0);
+          btlUiOpenHelpWindow(g_btlUiBlock,iStack_68,0,0,0,0);
         }
         break;
       case 10:
         temp_v3 = 0;
         do {
           if (*(char *)((int)puVar25 + temp_v3 + 0x38) != '\0') {
-            FUN_004aa3d4(g_btlUiBlock,iStack_68,0,0,0,0);
+            btlUiOpenHelpWindow(g_btlUiBlock,iStack_68,0,0,0,0);
             break;
           }
           temp_v3 = temp_v3 + 1;
@@ -1337,7 +1337,7 @@ code_r0x004f054c:
     FUN_004ecd7c(param_1,puVar25);
     return;
   case 0xe:
-    FUN_004e7168(param_1,puVar25);
+    btlActionStepUnit(param_1,puVar25);
     return;
   case 0x10:
     temp_v27 = 1;
@@ -1371,7 +1371,7 @@ code_r0x004f054c:
       btlEntryBuildSummary(&uStack_58,*param_1,*(unsigned int *)(temp_v20 + 0x24));
       temp_v27 = (unsigned int)*(unsigned short *)(*(int *)(temp_v20 + 0x2c) + 2);
       temp_v28 = 0;
-      FUN_004aa3d4(g_btlUiBlock,(int)*(short *)(*(int *)(temp_v20 + 0x2c) + 0x1be),temp_v29,
+      btlUiOpenHelpWindow(g_btlUiBlock,(int)*(short *)(*(int *)(temp_v20 + 0x2c) + 0x1be),temp_v29,
                    *(unsigned int *)(*(int *)(temp_v20 + 0x24) + 0x3f8));
       temp_v27 = 0;
       FUN_004fbeac(0xf,puVar25,0,0x31);

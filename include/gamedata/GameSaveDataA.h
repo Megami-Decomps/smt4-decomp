@@ -137,16 +137,28 @@ typedef struct SavePartySectionA {
 
 typedef char SavePartySectionASizeCheck[sizeof(SavePartySectionA) == 0x2D30 ? 1 : -1];
 
-/* Apocalypse: one saved item record (0x50 bytes, 0x501 of them). */
+/* Apocalypse: one saved item record (0x50 bytes, 0x501 of them): a compendium entry, the copy of a demon's unit
+ * record (SlotRecordA) that compendiumRegisterPartyDemon registers. */
 typedef struct GameSavedItemA {
-    /* 0x00 */ u16 variant;        /* copied from the registered demon's variant (FUN_002a5e7c) */
-    /* 0x02 */ u8 unk02[0x14];
-    /* 0x16 */ s8 flags;
-    /* 0x17 */ u8 unk17[0x1F];
+    /* 0x00 */ u16 level;          /* SlotRecordA.level */
+    /* 0x02 */ u16 stats[5];       /* the five table stats with their bonuses added */
+    /* 0x0C */ u16 unitStats[5];   /* SlotRecordA.stats */
+    /* 0x16 */ s8 flags;           /* bit 0: registered, bits 2-5: the demon's status */
+    /* 0x17 */ u8 unk17;
+    /* 0x18 */ u16 maxHp;          /* SlotRecordA.tableStats[0] */
+    /* 0x1A */ u16 maxMp;          /* SlotRecordA.tableStats[1] */
+    /* 0x1C */ u32 skillWords[4];  /* SlotRecordA.skillWords */
+    /* 0x2C */ u32 skillRankWords[2]; /* SlotRecordA.skillRankWords */
+    /* 0x34 */ u8 unk34[2];
     /* 0x36 */ u16 bits;
-    /* 0x38 */ u8 unk38[0x16];
+    /* 0x38 */ u32 experience;
+    /* 0x3C */ s8 categoryRanks[18]; /* SlotRecordA.categoryRanks */
     /* 0x4E */ s16 counter;
 } GameSavedItemA;
+
+typedef char GameSavedItemAOffsetCheck[offsetof(GameSavedItemA, flags) == 0x16 &&
+    offsetof(GameSavedItemA, skillWords) == 0x1C && offsetof(GameSavedItemA, bits) == 0x36 &&
+    offsetof(GameSavedItemA, categoryRanks) == 0x3C && sizeof(GameSavedItemA) == 0x50 ? 1 : -1];
 
 /* The saved record from its second word on (save body + 0x27E04). FUN_002c1408 and campCecEditCreate reach its
  * fields through a pointer to it (base 0x27E04, offsets 8 and 10), the record's own accessors through the record. */

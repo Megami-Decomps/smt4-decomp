@@ -42,7 +42,7 @@ s32 btlGetPropertyMaximum(u32 property);
 s32 btlPollVersionedEffectTexture(s32 aux);
 s32 chainCountIdUnflagged(u32 chain, ReflectAction *action);
 void btlQueueMessageTableReflectAction(s32 a, ReflectAction *action, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
-void FUN_004aa3d4(BtlUiA *block, s32 a, s32 b, u32 effect, u32 skill, s32 c);
+void btlUiOpenHelpWindow(BtlUiA *block, s32 a, s32 b, u32 effect, u32 skill, s32 c);
 void btlReflectQueueValueAction(s32 a, ReflectAction *action, s32 b, u8 *attacker, s32 c);
 void FUN_004fbeac(s32 a, ReflectAction *action, s32 b, s32 c, s32 d);
 void effectRequestByName(s32 aux, const char *name);
@@ -89,7 +89,7 @@ u32 FUN_004e7e08(ActionContext *context, ReflectAction *action)
             btlQueueMessageTableReflectAction(0, action, entry, entry, 7, 0, 0, 0);
         else
             btlQueueMessageTableReflectAction(0, action, entry, entry, 7, 0, 2, 0);
-        FUN_004aa3d4(g_btlUiBlock, 2, 0x1CC, *(u32 *)(action->attacker + 0x3F8), *(u16 *)(action->skill + 2), 0);
+        btlUiOpenHelpWindow(g_btlUiBlock, 2, 0x1CC, *(u32 *)(action->attacker + 0x3F8), *(u16 *)(action->skill + 2), 0);
         if (propertiesAtMaximum(*(s16 *)(action->target + 0x6A))) {
             btlReflectQueueValueAction(10, action, 0x40, action->attacker, 0);
         } else {

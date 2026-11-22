@@ -24,6 +24,22 @@ static __inline s32 handleWait(u32 handle, s64 timeout)
     return result;
 }
 
+/* Releases `releaseCount` slots of the semaphore `semaphore`; `*out` receives the count before the release. */
+s32 svcReleaseSemaphore(u32 *out, u32 semaphore, u32 releaseCount);
+
+/* Releases `releaseCount` slots of the semaphore `semaphore`; a failed release is reported. Returns the
+   release's result code. The file loader pairs it with handleWait around every use of its request lock. */
+static __inline s32 semaphoreRelease(u32 semaphore, u32 releaseCount)
+{
+    u32 count;
+    s32 result = svcReleaseSemaphore(&count, semaphore, releaseCount);
+    bool failed = nnResultIsFailure(result);
+    if (failed) {
+        resultHandleFailure(result, failed);
+    }
+    return result;
+}
+
 } /* extern "C" */
 
 #endif

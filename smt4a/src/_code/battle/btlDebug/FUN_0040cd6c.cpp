@@ -58,7 +58,7 @@ extern s16 DAT_0057a664[];
 extern const Vec3 DAT_005e1c2c;
 
 BtlSide *btlMainFindEntryByListedId(void *main, s32 index);
-Vec3 FUN_003e7fa4(void *main, s32 index, s32 arg);
+Vec3 btlGetCombatantDrawPosition(void *main, s32 index, s32 arg);
 s32 randBetween(s32 minimum, s32 maximum);
 u32 FUN_004a94a8(BtlUiA *block, s32 bank);
 
@@ -76,7 +76,7 @@ void FUN_0040cd6c(u32 unused, EffectStep *step)
     }
     if (step->phase == 0) {
     if ((side->flags & MASK64(0x28)) != 0) {
-        Vec3 position = FUN_003e7fa4(main, step->side->slotId, 0);
+        Vec3 position = btlGetCombatantDrawPosition(main, step->side->slotId, 0);
         if (step->count > 0) {
             if ((side->flags & MASK64(0x40)) != 0) {
                 step->side->drift.x = (f32)randBetween(DAT_0057a664[4], DAT_0057a664[5]) * 0.01f;

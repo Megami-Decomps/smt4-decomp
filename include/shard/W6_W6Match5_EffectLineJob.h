@@ -16,7 +16,7 @@ public:
     virtual void update() = 0;         // 0x08
     virtual void draw() = 0;           // 0x0C
     virtual void reserved10() = 0;
-    virtual void reserved14() = 0;
+    virtual s32 isFinished() = 0;      // 0x14
     virtual s32 isReady() = 0;         // 0x18
 };
 

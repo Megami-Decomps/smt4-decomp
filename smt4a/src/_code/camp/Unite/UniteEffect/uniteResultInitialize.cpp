@@ -91,7 +91,7 @@ u32 asdVramBGetFreeBytes(void);
 void uniteEnemyRenderSetup(UniteRenderTarget *target, u32 extent, u32 options, u32 width, u32 height);
 void FUN_0040c190(UniteRenderTarget *target);
 void FUN_003d2a00(const char *name);
-void FUN_001fc348(UniteRenderTarget *target);
+void materialMergeApplyTextureTransform(UniteRenderTarget *target);
 void statusBustUpPortraitAcquire(s32 id, u32 kind);
 
 void uiSpriteSetScaleKeyframe(UniteSprite *sprite, s32 a, s32 b);
@@ -142,7 +142,7 @@ void uniteResultInitialize(void)
             work->camera = cameraStorage ? new(cameraStorage) Obj557af8(resource) : 0;
         }
         FUN_003d2a00("tx_devil1");
-        FUN_001fc348(&work->renderTarget);
+        materialMergeApplyTextureTransform(&work->renderTarget);
     }
     if (work->materialCount == 3) {
         MoriModelContent *model = (MoriModelContent *)asdMemoryAllocTraced(sizeof(MoriModelContent), "c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp", 1804);
@@ -156,7 +156,7 @@ void uniteResultInitialize(void)
             void *cameraStorage = asdMemoryAllocTraced(sizeof(Obj557af8), "c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp", 1809);
             work->camera = cameraStorage ? new(cameraStorage) Obj557af8(resource) : 0;
         FUN_003d2a00("tx_devil1");
-        FUN_001fc348(&work->renderTarget);
+        materialMergeApplyTextureTransform(&work->renderTarget);
     }
     if (work->materialCount == 4) {
         MoriModelContent *model = (MoriModelContent *)asdMemoryAllocTraced(sizeof(MoriModelContent), "c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp", 1827);
@@ -170,7 +170,7 @@ void uniteResultInitialize(void)
             void *cameraStorage = asdMemoryAllocTraced(sizeof(Obj557af8), "c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp", 1832);
             work->camera = cameraStorage ? new(cameraStorage) Obj557af8(resource) : 0;
         FUN_003d2a00("tx_devil1");
-        FUN_001fc348(&work->renderTarget);
+        materialMergeApplyTextureTransform(&work->renderTarget);
     }
     for (s32 i = 0; i < work->materialCount; i++) {
         statusBustUpPortraitAcquire((s16)work->materialDevils[i], 1);

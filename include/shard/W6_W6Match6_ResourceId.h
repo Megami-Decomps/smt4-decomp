@@ -12,23 +12,14 @@ static __inline bool resourceIdInRange(s32 value, s32 category, s32 first, s32 e
            (value & 0x3ff) >= first && (value & 0x3ff) < end;
 }
 
-// Map legacy packed resource identifiers to the replacement resource set.
+/* Maps legacy packed resource identifiers to the replacement resource set. The cases are in retail's
+ * block order (0x34, 0x20, 0x11). */
 static __inline u32 remapLegacyResourceId(const PackedResourceId *resource)
 {
     s32 value = resource->value;
     if (value == 0)
         return 0;
     switch ((resource->value & 0x3fc00) >> 10) {
-    case 0x11:
-        return resourceIdInRange(value, 0x11, 0x104, 0x118) ? 0xc8a13909 : 0xc9413915;
-    case 0x20:
-        switch (value) {
-        case (s32)0xc8a08035: return 0xc8613916;
-        }
-        break;
-    case 0x28:
-    case 0x2e:
-        break;
     case 0x34:
         if (resourceIdInRange(value, 0x34, 100, 300)) {
             switch (value) {
@@ -54,6 +45,16 @@ static __inline u32 remapLegacyResourceId(const PackedResourceId *resource)
         case (s32)0xd860d024: return 0xd861389a;
         case (s32)0xd880d023: return 0xd8813896;
         }
+        break;
+    case 0x20:
+        switch (value) {
+        case (s32)0xc8a08035: return 0xc8613916;
+        }
+        break;
+    case 0x11:
+        return resourceIdInRange(value, 0x11, 0x104, 0x118) ? 0xc8a13909 : 0xc9413915;
+    case 0x28:
+    case 0x2e:
         break;
     }
     return value;

@@ -96,6 +96,35 @@ struct SkillDataRecord {
             u8 prefix[0xC];
             /* 0x38 */ u32 rankFlags; /* the sign bit locks the rank bonuses */
         } rankInfo;
+        struct {
+            u8 prefix[3];
+            /* 0x2F */ u8 target;       /* 4: only for a target without status bits */
+            /* 0x30 */ u8 unk30[2];
+            /* 0x32 */ s8 statChanges[3]; /* the three stat conditions FUN_0033f8ec tests */
+            /* 0x35 */ u8 strictStats : 1;       /* passed to FUN_0033f8ec with the stat conditions */
+            /* 0x35 */ u8 needsEffect13Off : 1;  /* the needs below: see battle/SkillUseNeeds.h */
+            /* 0x35 */ u8 unk35Bit2 : 1;
+            /* 0x35 */ u8 revives : 1;
+            /* 0x35 */ u8 needsBattleFlag10Clear : 1;
+            /* 0x35 */ u8 curesNothing : 1;      /* the cure event is not a need of its own */
+            /* 0x35 */ u8 needsEffectOn : 2;     /* bit 0: effect 18 must be running, bit 1: effect 19 (one field:
+                                                  * retail tests its high bit with a shift, `lsrs #7`) */
+            /* 0x36 */ u16 healAmount : 12;      /* the HP restored */
+            /* 0x36 */ u16 needsEscape : 1;
+            /* 0x36 */ u16 unk36Bit13 : 3;
+            /* 0x38 */ u32 cureEvent : 7;        /* the cure event (statusCureEventAddMask), 0 when none */
+            /* 0x38 */ u32 needsEffect16Off : 1;
+            /* 0x38 */ u32 needsEffect17Off : 1;
+            /* 0x38 */ u32 unk38Bit9 : 5;
+            /* 0x38 */ u32 needsStatRoom : 1;
+            /* 0x38 */ u32 unk38Bit15 : 9;
+            /* 0x38 */ u32 needsEffect18Off : 1;
+            /* 0x38 */ u32 needsEffect19Off : 1;
+            /* 0x38 */ u32 needsEffect20Off : 1;
+            /* 0x38 */ u32 needsEffect14Off : 1;
+            /* 0x38 */ u32 needsEffect15Off : 1;
+            /* 0x38 */ u32 unk38Bit29 : 3;
+        } use;                          /* what using the skill or item on a target needs (btlSkillCheckApplicable, itemEffectCheckApplicable) */
     };
     union {
         /* 0x3C */ u32 flags;
@@ -110,7 +139,11 @@ struct SkillDataRecord {
     /* 0x43 */ u8 percentCost; /* the percentage cost, used when `costs.fixedCost` is 0 */
     /* 0x44 */ u8 unk44[7];
     /* 0x4B */ u8 slotCount; /* selected by the battle slot-count skill lookup */
-    /* 0x4C */ u8 unk4C[12];
+    /* 0x4C */ u8 unk4C[3];
+    /* 0x4F */ u8 needsBaseMaxHp; /* usable only while the target's maximum HP is not above its record's (btlSkillCheckApplicable) */
+    /* 0x50 */ u8 unk50[6];
+    /* 0x56 */ u8 needsMenuRoom;  /* usable only while both menu cursor coordinates are below 8 (btlSkillCheckApplicable) */
+    /* 0x57 */ u8 unk57;
     /* 0x58 */ SkillRankBonus rankBonuses[8]; /* (kind, amount) pairs, a zero kind ends the list */
 };
 typedef char Table04RecordSizeCheck[sizeof(SkillDataRecord) == 0x68 &&
@@ -118,7 +151,10 @@ typedef char Table04RecordSizeCheck[sizeof(SkillDataRecord) == 0x68 &&
     offsetof(SkillDataRecord, identity.id) == 0x20 && offsetof(SkillDataRecord, sort.category) == 0x23 &&
     offsetof(SkillDataRecord, sort.sortKey) == 0x24 && offsetof(SkillDataRecord, costs.prefix) == 0x2C &&
     offsetof(SkillDataRecord, percentCost) == 0x43 && offsetof(SkillDataRecord, menuCategory) == 0x3C &&
-    offsetof(SkillDataRecord, rankInfo.rankFlags) == 0x38 && offsetof(SkillDataRecord, rankBonuses) == 0x58 ? 1 : -1];
+    offsetof(SkillDataRecord, rankInfo.rankFlags) == 0x38 && offsetof(SkillDataRecord, rankBonuses) == 0x58 &&
+    offsetof(SkillDataRecord, use.target) == 0x2F && offsetof(SkillDataRecord, use.statChanges) == 0x32 &&
+    offsetof(SkillDataRecord, needsBaseMaxHp) == 0x4F &&
+    offsetof(SkillDataRecord, needsMenuRoom) == 0x56 ? 1 : -1];
 
 /* Apocalypse's skill record: one row of battle/SkillData.tbb table 0 (data table 4, section 0; 0x88 bytes): skills and items. skillDataFindById()
  * searches the records with a stride of 0x88 bytes (retail passes 0x88 to libc_bsearch). */

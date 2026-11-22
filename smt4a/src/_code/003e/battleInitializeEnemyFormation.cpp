@@ -32,7 +32,7 @@ typedef char InitialPartySourceLayoutCheck[sizeof(InitialPartySource) == 0x84 &&
 
 extern "C" {
 void btlActionPrepareFromSource(BtlMainStateA *state, InitialPartySource *source, s32 useSaved);
-void FUN_003eb314(BtlMainStateA *state, BtlUnitRecordA *unit, const NkmEnemyRecordA *definition);
+void btlUnitStateInitFromEnemyRecord(BtlMainStateA *state, BtlUnitRecordA *unit, const NkmEnemyRecordA *definition);
 void FUN_004ca63c(BtlMainStateA *state, const BtlUnitRecordA *unit, s32 kind, s32 slot, u32 flags);
 void sequenceRequestDeferEx(u32 sequence, const void *arguments);
 
@@ -52,7 +52,7 @@ void battleInitializeEnemyFormation(BtlMainStateA *state)
     if (g_btlMain.initialParty.forcedUnitId > 0) {
         BtlCombatantEntryA temporary;
         NkmEnemyRecordA *definition = nkmEnemyFindById((u16)g_btlMain.initialParty.forcedUnitId);
-        FUN_003eb314(state, (BtlUnitRecordA *)&temporary.data, definition);
+        btlUnitStateInitFromEnemyRecord(state, (BtlUnitRecordA *)&temporary.data, definition);
         FUN_004ca63c(state, (BtlUnitRecordA *)&temporary.data, 1, 4, 0);
     } else {
         BtlCombatantEntryA temporary;
@@ -60,7 +60,7 @@ void battleInitializeEnemyFormation(BtlMainStateA *state)
             if (work->source.ids[i] != 0) {
                 NkmEnemyRecordA *definition = nkmEnemyFindById((u16)work->source.ids[i]);
                 if (definition != NULL) {
-                    FUN_003eb314(state, (BtlUnitRecordA *)&temporary.data, definition);
+                    btlUnitStateInitFromEnemyRecord(state, (BtlUnitRecordA *)&temporary.data, definition);
                     FUN_004ca63c(state, (BtlUnitRecordA *)&temporary.data, 1, i + 4, 0);
                 }
             }

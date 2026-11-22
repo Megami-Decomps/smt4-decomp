@@ -24,9 +24,8 @@ extern "C" void FUN_0034e718()
         nn_os_CriticalSection_Enter(DAT_004c40f8);
         FUN_002a208c();
         u32 count = g_soundVoicePool.streamCount;
-        AudioStreamSlot *streams = g_soundVoicePool.streams;
         for (u32 i = 0; i < count; ++i) {
-            AudioStreamSlot *stream = &streams[i];
+            AudioStreamSlot *stream = &g_soundVoicePool.streams[i];
             if (stream->voice && stream->queued && stream->buffers[stream->readIndex].playback.status == 3) {
                 stream->consumedSamples += static_cast<s32>(stream->buffers[stream->readIndex].sampleCount);
                 --stream->queued;

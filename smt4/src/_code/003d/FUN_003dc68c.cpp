@@ -44,7 +44,7 @@ u32 libc_strlen(const char *text);
 s32 libc_strncmp(const char *a, const char *b, u32 count);
 char *libc_strcpy(char *dest, const char *src);
 void memClear(void *buffer, s32 size);
-void FUN_002276f8(BtlEffectWork *work);
+void btlEffectNumberedRelease(BtlEffectWork *work);
 u32 filterCreateByKind(u32 index, u32 a, u32 b);
 char *libc_strrchr(const char *text, s32 character);
 s32 keyedRecordFindByName(const char *name);
@@ -85,7 +85,7 @@ extern "C" u32 FUN_003dc68c(BtlEffectWork *work)
             for (s32 n = 0; n < 11; n++) {
                 __2sprintf(buffer, DAT_00400904, g_btlEffect.bufferPrefix, n);
                 if (strcmp(buffer, name) == 0) {
-                    FUN_002276f8(work);
+                    btlEffectNumberedRelease(work);
                     work->bufferHandle = filterCreateByKind(n & 0xFF, 7, 0);
                     work->bufferIndex = n;
                     found = true;

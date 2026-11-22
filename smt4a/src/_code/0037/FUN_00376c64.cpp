@@ -23,11 +23,11 @@ typedef struct CameraMoveRequest {
 } CameraMoveRequest;
 
 s32 lmapResolveContextValue(void);
-s32 FUN_0033a374(LmapViewA *view);
+s32 vectorPairTransitionStep(LmapViewA *view);
 void lmapCameraSetMode(s32 arg);
 
 s32 FUN_00330108(MapVec3 *from, MapVec3 *to, MapVec3 *out);
-void FUN_002d1e44(CameraMoveRequest *request);
+void vectorPairTransitionStart(CameraMoveRequest *request);
 
 /* Steps the map camera's recentre: in phase 0 plans a move from the current focus to a point
  * beside the scene anchor (stopping at obstacles), in phase 1 adopts the saved view once the
@@ -38,7 +38,7 @@ void FUN_00376c64(void)
     LmapViewA *view = g_lmapViewHolder.view;
 
     if (view->phase != 0) {
-        if (view->phase == 1 && FUN_0033a374(view) != 0) {
+        if (view->phase == 1 && vectorPairTransitionStep(view) != 0) {
             view = g_lmapViewHolder.view;
             view->raised = 0.0f;
             view->unk21C = 0.0f;
@@ -90,7 +90,7 @@ void FUN_00376c64(void)
     request.unk48 = 0;
     request.frames = 20;
     request.unk6c = 0.0f;
-    FUN_002d1e44(&request);
+    vectorPairTransitionStart(&request);
     view = g_lmapViewHolder.view;
     view->moving = 1;
     view->phase++;

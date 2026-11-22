@@ -64,7 +64,10 @@ struct ResultWork : ResultInputWork {
     /* 0xD531 */ u8 unkD531[0x1B];
     /* 0xD54C */ s32 startPoints;             /* the points the counter starts from */
     /* 0xD550 */ u32 shownPoints;             /* the counted-up points shown, 12 fractional bits */
-    /* 0xD554 */ u8 unkD554[0xED];
+    /* 0xD554 */ u8 unkD554[0x28];
+    /* 0xD57C */ s32 ailmentCycleFrames[24];  /* by unit index + 1 (0: the player): frames the shown ailment marker has been up */
+    /* 0xD5DC */ s32 ailmentCycleIndex[24];   /* by unit index + 1: which of the unit's ailments its row shows */
+    /* 0xD63C */ u8 unkD63C[5];
     /* 0xD641 */ u8 rewardFlagA;              /* copied from the battle reward (+0x3C) */
     /* 0xD642 */ u8 rewardFlagB;              /* copied from the battle reward (+0x3D) */
     /* 0xD643 */ u8 unkD643;
@@ -88,7 +91,8 @@ typedef char ResultWorkLevelUpOffsetsCheck[
     offsetof(ResultWork, statCursor) == 0xCFD4 && offsetof(ResultWork, valueIndex) == 0xD038 &&
     offsetof(ResultWork, startLevel) == 0xD530 && offsetof(ResultWork, rewardFlagA) == 0xD641 ? 1 : -1];
 typedef char ResultWorkPointsOffsetsCheck[
-    offsetof(ResultWork, startPoints) == 0xD54C && offsetof(ResultWork, shownPoints) == 0xD550 ? 1 : -1];
+    offsetof(ResultWork, startPoints) == 0xD54C && offsetof(ResultWork, shownPoints) == 0xD550 &&
+    offsetof(ResultWork, ailmentCycleFrames) == 0xD57C && offsetof(ResultWork, ailmentCycleIndex) == 0xD5DC ? 1 : -1];
 
 extern "C" {
 extern ResultWork *g_result;

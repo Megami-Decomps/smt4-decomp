@@ -1,4 +1,6 @@
-/* NON_MATCHING: readable rewrite compiles (171 vs 165 rows); retail keeps more values in callee-saved registers across the power loops */
+/* NON_MATCHING: retail keeps a zero term in r7 that it adds to the base chance (and saves r7/r8), adds the result of
+ * a linker-inlined `mov r0, #0` call after the 70 clamp, tests bit 5 of the word at 0x44ac as part of a 64-bit
+ * mask (and/movs) and shares the flag-8 store with the fail tail; the member status tests and operand orders match. */
 #include "common.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "battle/BattleBalanceRow.h"
@@ -11,7 +13,7 @@ struct BattleMain {
     u32 enemyIds[6];        // 0xc8: id word, low halfword is the demon id
     u32 rules;              // 0xe0: bit 16 = escape always fails, bit 17 = escape disabled
     u8 unk00e4[0x14c - 0xe4];
-    s8 escapeRule;          // 0x14c: 1 = needs a race 0x27 ally, 2 = always fails, 3 = always succeeds
+    u8 escapeRule;          // 0x14c: 1 = needs a race 0x27 ally, 2 = always fails, 3 = always succeeds
     u8 unk14d[0x44a0 - 0x14d];
     u32 flags;              // 0x44a0: bit 1/2 = escape failed, bit 3 = no eligible ally
     u8 unk44a4[4];
@@ -64,7 +66,10 @@ void FUN_00338cfc(BattleMain* battle, s32 sureEscape)
             s32 i = 0;
             for (; i < 6; i++) {
                 u32 id = battle->enemyIds[i];
-                if (id != 0 && nkmBaseGetRecord(id & 0xffff)->race == 0x27) break;
+                if (id != 0) {
+                    NkmBaseRecord *devil = nkmBaseGetRecord(id & 0xffff);
+                    if (devil != NULL && devil->race == 0x27) break;
+                }
             }
             if (i >= 6) {
                 battle->flags |= 8;
@@ -80,14 +85,18 @@ void FUN_00338cfc(BattleMain* battle, s32 sureEscape)
         f32 allyPower = 0.0f;
         f32 enemyPower = 0.0f;
         if ((gameGetPlayerData()->ailments & 2) == 0) {
-            allyPower = (f32)(gameGetPlayerData()->stats[4] + gameGetPlayerData()->stats[3]);
+            allyPower = (f32)(gameGetPlayerData()->stats[3] + gameGetPlayerData()->stats[4]);
         }
         for (s32 i = 0; i < 3; i++) {
             if (gameGetSlotTable()->partyActive[i] >= 0) {
                 PartyMember* member = saveResolvePartySlot(i);
-                if ((member->status & 2) == 0 && (member->status & 0x400) == 0 && (member->status & 4) == 0) {
-                    s32 power = member->power1 + member->power0;
-                    if ((f32)power > allyPower) allyPower = (f32)power;
+                if ((member->status & 2) == 0) {
+                    if ((member->status & 0x400) == 0) {
+                        if ((member->status & 4) == 0) {
+                            s32 power = member->power0 + member->power1;
+                            if ((f32)power > allyPower) allyPower = (f32)power;
+                        }
+                    }
                 }
             }
         }
@@ -96,12 +105,13 @@ void FUN_00338cfc(BattleMain* battle, s32 sureEscape)
             if (id != 0) {
                 NkmEnemyRecord* record = nkmEnemyFindById(id & 0xffff);
                 if (record != NULL) {
-                    u32 power = record->stats[4] + record->stats[3];
+                    u32 power = record->stats[3] + record->stats[4];
                     if ((f32)power > enemyPower) enemyPower = (f32)power;
                 }
             }
         }
-        s32 chance = (s32)(FUN_0023ea94()->escapeRate * (f32)((s32)((allyPower - enemyPower) * 0.2f) + 0x2d));
+        s32 chance = (s32)((allyPower - enemyPower) * 0.2f) + 0x2d;
+        chance = (s32)(FUN_0023ea94()->escapeRate * (f32)chance);
         if (FUN_002973ec() != 0) {
             if (FUN_002973ec() == 1) chance = 0x50;
         } else if (chance < 0x1e) {

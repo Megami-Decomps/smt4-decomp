@@ -8,7 +8,7 @@ extern "C" {
 int btlTargetSelectSetMode(...);
 int btlTargetSelectSetEntry(...);
 int FUN_00368e10(...);
-int FUN_003e7fa4(...);
+int btlGetCombatantDrawPosition(...);
 int btlEntryBuildSummary(...);
 int btlMainFindEntryByListedId(...);
 int FUN_004c0f74(...);
@@ -42,7 +42,7 @@ extern unsigned int DAT_0057116c; /* 0x57116c */
 /* Supplied declaration required: btlTargetSelectSetMode. */
 /* Supplied declaration required: btlTargetSelectSetEntry. */
 /* Supplied declaration required: FUN_00368e10. */
-/* Supplied declaration required: FUN_003e7fa4. */
+/* Supplied declaration required: btlGetCombatantDrawPosition. */
 /* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_004c0f74. */
@@ -93,7 +93,7 @@ void FUN_004eae30(unsigned int *param_1,int param_2,int param_3,int param_4)
     }
     temp_v0 = *(int *)(*param_1 + 0x1ed4);
     g_btlAction = param_3;
-    FUN_003e7fa4(*param_1,param_3,0);
+    btlGetCombatantDrawPosition(*param_1,param_3,0);
     temp_v1 = *param_1;
     btlMainFindEntryByListedId(temp_v1,(int)*(short *)(temp_v0 + param_3 * 0x1d0 + 0x6a));
     temp_v0 = __aeabi_idivmod(*(int *)(temp_v1 + 600) * 100,*(unsigned int *)(temp_v1 + 0x25c));
@@ -206,7 +206,7 @@ LAB_004eafdc:
     do {
       if (temp_v11[temp_v0 + 1] == 0xffffffff) break;
       temp_v9 = (unsigned int)*(short *)(*(int *)(*param_1 + 0x1ffc) + temp_v11[temp_v0 + 1] * 0x408 + 8);
-      FUN_003e7fa4(*param_1,temp_v9,0);
+      btlGetCombatantDrawPosition(*param_1,temp_v9,0);
       temp_v14 = in_s0;
       uStack_6c = in_s1;
       uStack_68 = in_s2;

@@ -906,12 +906,12 @@
     {
       "address": "0x10250c",
       "file": "AsdSDK/Source/Sys/File/AsdFile",
-      "function": "FUN_0010250c",
+      "function": "asdFileInitialize",
       "module": "_code",
-      "object": "build/obj/_code/AsdSDK/Source/Sys/File/AsdFile/FUN_0010250c.o",
+      "object": "build/obj/_code/AsdSDK/Source/Sys/File/AsdFile/asdFileInitialize.o",
       "size": 324,
-      "source": "src/_code/AsdSDK/Source/Sys/File/AsdFile/FUN_0010250c.cpp",
-      "target": "orig/target/_code/AsdSDK/Source/Sys/File/AsdFile/FUN_0010250c.o",
+      "source": "src/_code/AsdSDK/Source/Sys/File/AsdFile/asdFileInitialize.cpp",
+      "target": "orig/target/_code/AsdSDK/Source/Sys/File/AsdFile/asdFileInitialize.o",
       "thumb": false
     },
     {
@@ -3249,12 +3249,12 @@
     },
     {
       "address": "0x10d6c0",
-      "function": "FUN_0010d6c0",
+      "function": "asdProcTimersPassed",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010d6c0.o",
+      "object": "build/obj/_code/0010/asdProcTimersPassed.o",
       "size": 1336,
-      "source": "src/_code/0010/FUN_0010d6c0.cpp",
-      "target": "orig/target/_code/0010/FUN_0010d6c0.o",
+      "source": "src/_code/0010/asdProcTimersPassed.cpp",
+      "target": "orig/target/_code/0010/asdProcTimersPassed.o",
       "thumb": false
     },
     {
@@ -17675,12 +17675,12 @@
     },
     {
       "address": "0x15a714",
-      "function": "FUN_0015a714",
+      "function": "materialSubmitBufferColor",
       "module": "_code",
-      "object": "build/obj/_code/0015/FUN_0015a714.o",
+      "object": "build/obj/_code/0015/materialSubmitBufferColor.o",
       "size": 388,
-      "source": "src/_code/0015/FUN_0015a714.cpp",
-      "target": "orig/target/_code/0015/FUN_0015a714.o",
+      "source": "src/_code/0015/materialSubmitBufferColor.cpp",
+      "target": "orig/target/_code/0015/materialSubmitBufferColor.o",
       "thumb": false
     },
     {
@@ -26282,12 +26282,12 @@
     },
     {
       "address": "0x1ed9a0",
-      "function": "FUN_001ed9a0",
+      "function": "saveLoadUIDrawCaptionAndShade",
       "module": "_code",
-      "object": "build/obj/_code/001e/FUN_001ed9a0.o",
+      "object": "build/obj/_code/001e/saveLoadUIDrawCaptionAndShade.o",
       "size": 824,
-      "source": "src/_code/001e/FUN_001ed9a0.cpp",
-      "target": "orig/target/_code/001e/FUN_001ed9a0.o",
+      "source": "src/_code/001e/saveLoadUIDrawCaptionAndShade.cpp",
+      "target": "orig/target/_code/001e/saveLoadUIDrawCaptionAndShade.o",
       "thumb": false
     },
     {
@@ -28096,12 +28096,12 @@
     {
       "address": "0x202ab4",
       "file": "saveLoadUI/saveLoadUI",
-      "function": "FUN_00202ab4",
+      "function": "saveLoadUICreate",
       "module": "_code",
-      "object": "build/obj/_code/saveLoadUI/saveLoadUI/FUN_00202ab4.o",
+      "object": "build/obj/_code/saveLoadUI/saveLoadUI/saveLoadUICreate.o",
       "size": 1256,
-      "source": "src/_code/saveLoadUI/saveLoadUI/FUN_00202ab4.cpp",
-      "target": "orig/target/_code/saveLoadUI/saveLoadUI/FUN_00202ab4.o",
+      "source": "src/_code/saveLoadUI/saveLoadUI/saveLoadUICreate.cpp",
+      "target": "orig/target/_code/saveLoadUI/saveLoadUI/saveLoadUICreate.o",
       "thumb": false
     },
     {
@@ -28258,12 +28258,12 @@
     },
     {
       "address": "0x205184",
-      "function": "FUN_00205184",
+      "function": "ocEventJobUpdate",
       "module": "_code",
-      "object": "build/obj/_code/0020/FUN_00205184.o",
+      "object": "build/obj/_code/0020/ocEventJobUpdate.o",
       "size": 996,
-      "source": "src/_code/0020/FUN_00205184.cpp",
-      "target": "orig/target/_code/0020/FUN_00205184.o",
+      "source": "src/_code/0020/ocEventJobUpdate.cpp",
+      "target": "orig/target/_code/0020/ocEventJobUpdate.o",
       "thumb": false
     },
     {
@@ -33065,12 +33065,12 @@
     },
     {
       "address": "0x2276f8",
-      "function": "FUN_002276f8",
+      "function": "btlEffectNumberedRelease",
       "module": "_code",
-      "object": "build/obj/_code/0022/FUN_002276f8.o",
+      "object": "build/obj/_code/0022/btlEffectNumberedRelease.o",
       "size": 84,
-      "source": "src/_code/0022/FUN_002276f8.cpp",
-      "target": "orig/target/_code/0022/FUN_002276f8.o",
+      "source": "src/_code/0022/btlEffectNumberedRelease.cpp",
+      "target": "orig/target/_code/0022/btlEffectNumberedRelease.o",
       "thumb": false
     },
     {
@@ -37213,12 +37213,12 @@
     },
     {
       "address": "0x23c6e4",
-      "function": "asdModelClearSlotColors",
+      "function": "asdModelSetUnitSlotColor",
       "module": "_code",
-      "object": "build/obj/_code/0023/asdModelClearSlotColors.o",
+      "object": "build/obj/_code/0023/asdModelSetUnitSlotColor.o",
       "size": 24,
-      "source": "src/_code/0023/asdModelClearSlotColors.cpp",
-      "target": "orig/target/_code/0023/asdModelClearSlotColors.o",
+      "source": "src/_code/0023/asdModelSetUnitSlotColor.cpp",
+      "target": "orig/target/_code/0023/asdModelSetUnitSlotColor.o",
       "thumb": false
     },
     {
@@ -37454,12 +37454,12 @@
     },
     {
       "address": "0x23d488",
-      "function": "FUN_0023d488",
+      "function": "btlSkillCheckApplicable",
       "module": "_code",
-      "object": "build/obj/_code/0023/FUN_0023d488.o",
+      "object": "build/obj/_code/0023/btlSkillCheckApplicable.o",
       "size": 1324,
-      "source": "src/_code/0023/FUN_0023d488.cpp",
-      "target": "orig/target/_code/0023/FUN_0023d488.o",
+      "source": "src/_code/0023/btlSkillCheckApplicable.cpp",
+      "target": "orig/target/_code/0023/btlSkillCheckApplicable.o",
       "thumb": false
     },
     {
@@ -37474,12 +37474,12 @@
     },
     {
       "address": "0x23dc38",
-      "function": "FUN_0023dc38",
+      "function": "statusCureEventAddMask",
       "module": "_code",
-      "object": "build/obj/_code/0023/FUN_0023dc38.o",
+      "object": "build/obj/_code/0023/statusCureEventAddMask.o",
       "size": 128,
-      "source": "src/_code/0023/FUN_0023dc38.cpp",
-      "target": "orig/target/_code/0023/FUN_0023dc38.o",
+      "source": "src/_code/0023/statusCureEventAddMask.cpp",
+      "target": "orig/target/_code/0023/statusCureEventAddMask.o",
       "thumb": false
     },
     {
@@ -42974,12 +42974,12 @@
     },
     {
       "address": "0x2624c4",
-      "function": "FUN_002624c4",
+      "function": "fusionBuildPreviewResult",
       "module": "_code",
-      "object": "build/obj/_code/0026/FUN_002624c4.o",
+      "object": "build/obj/_code/0026/fusionBuildPreviewResult.o",
       "size": 672,
-      "source": "src/_code/0026/FUN_002624c4.cpp",
-      "target": "orig/target/_code/0026/FUN_002624c4.o",
+      "source": "src/_code/0026/fusionBuildPreviewResult.cpp",
+      "target": "orig/target/_code/0026/fusionBuildPreviewResult.o",
       "thumb": false
     },
     {
@@ -45658,12 +45658,12 @@
     },
     {
       "address": "0x2765d0",
-      "function": "FUN_002765d0",
+      "function": "eventTablePickNext",
       "module": "_code",
-      "object": "build/obj/_code/0027/FUN_002765d0.o",
+      "object": "build/obj/_code/0027/eventTablePickNext.o",
       "size": 812,
-      "source": "src/_code/0027/FUN_002765d0.cpp",
-      "target": "orig/target/_code/0027/FUN_002765d0.o",
+      "source": "src/_code/0027/eventTablePickNext.cpp",
+      "target": "orig/target/_code/0027/eventTablePickNext.o",
       "thumb": false
     },
     {
@@ -46837,12 +46837,12 @@
     },
     {
       "address": "0x282228",
-      "function": "FUN_00282228",
+      "function": "vectorPairTransitionStart",
       "module": "_code",
-      "object": "build/obj/_code/0028/FUN_00282228.o",
+      "object": "build/obj/_code/0028/vectorPairTransitionStart.o",
       "size": 232,
-      "source": "src/_code/0028/FUN_00282228.cpp",
-      "target": "orig/target/_code/0028/FUN_00282228.o",
+      "source": "src/_code/0028/vectorPairTransitionStart.cpp",
+      "target": "orig/target/_code/0028/vectorPairTransitionStart.o",
       "thumb": false
     },
     {
@@ -48547,12 +48547,12 @@
     },
     {
       "address": "0x28cfd8",
-      "function": "FUN_0028cfd8",
+      "function": "itemHealingIsUseful",
       "module": "_code",
-      "object": "build/obj/_code/0028/FUN_0028cfd8.o",
+      "object": "build/obj/_code/0028/itemHealingIsUseful.o",
       "size": 532,
-      "source": "src/_code/0028/FUN_0028cfd8.cpp",
-      "target": "orig/target/_code/0028/FUN_0028cfd8.o",
+      "source": "src/_code/0028/itemHealingIsUseful.cpp",
+      "target": "orig/target/_code/0028/itemHealingIsUseful.o",
       "thumb": false
     },
     {
@@ -53492,12 +53492,12 @@
     },
     {
       "address": "0x2a63d8",
-      "function": "FUN_002a63d8",
+      "function": "graphicsResourceSetLeafValue",
       "module": "_code",
-      "object": "build/obj/_code/002a/FUN_002a63d8.o",
+      "object": "build/obj/_code/002a/graphicsResourceSetLeafValue.o",
       "size": 512,
-      "source": "src/_code/002a/FUN_002a63d8.cpp",
-      "target": "orig/target/_code/002a/FUN_002a63d8.o",
+      "source": "src/_code/002a/graphicsResourceSetLeafValue.cpp",
+      "target": "orig/target/_code/002a/graphicsResourceSetLeafValue.o",
       "thumb": false
     },
     {
@@ -65586,12 +65586,12 @@
     },
     {
       "address": "0x2dfb48",
-      "function": "FUN_002dfb48",
+      "function": "mapEnemyPickSpawnPosition",
       "module": "_code",
-      "object": "build/obj/_code/002d/FUN_002dfb48.o",
+      "object": "build/obj/_code/002d/mapEnemyPickSpawnPosition.o",
       "size": 500,
-      "source": "src/_code/002d/FUN_002dfb48.cpp",
-      "target": "orig/target/_code/002d/FUN_002dfb48.o",
+      "source": "src/_code/002d/mapEnemyPickSpawnPosition.cpp",
+      "target": "orig/target/_code/002d/mapEnemyPickSpawnPosition.o",
       "thumb": false
     },
     {
@@ -81094,12 +81094,12 @@
     },
     {
       "address": "0x34266c",
-      "function": "FUN_0034266c",
+      "function": "bannerAnimStep",
       "module": "_code",
-      "object": "build/obj/_code/0034/FUN_0034266c.o",
+      "object": "build/obj/_code/0034/bannerAnimStep.o",
       "size": 648,
-      "source": "src/_code/0034/FUN_0034266c.cpp",
-      "target": "orig/target/_code/0034/FUN_0034266c.o",
+      "source": "src/_code/0034/bannerAnimStep.cpp",
+      "target": "orig/target/_code/0034/bannerAnimStep.o",
       "thumb": false
     },
     {
@@ -101400,12 +101400,12 @@
     },
     {
       "address": "0x3b65a4",
-      "function": "FUN_003b65a4",
+      "function": "resultDrawRowColumn",
       "module": "_code",
-      "object": "build/obj/_code/003b/FUN_003b65a4.o",
+      "object": "build/obj/_code/003b/resultDrawRowColumn.o",
       "size": 1196,
-      "source": "src/_code/003b/FUN_003b65a4.cpp",
-      "target": "orig/target/_code/003b/FUN_003b65a4.o",
+      "source": "src/_code/003b/resultDrawRowColumn.cpp",
+      "target": "orig/target/_code/003b/resultDrawRowColumn.o",
       "thumb": false
     },
     {
@@ -101420,12 +101420,12 @@
     },
     {
       "address": "0x3b6da4",
-      "function": "FUN_003b6da4",
+      "function": "resultDrawAilmentMarker",
       "module": "_code",
-      "object": "build/obj/_code/003b/FUN_003b6da4.o",
+      "object": "build/obj/_code/003b/resultDrawAilmentMarker.o",
       "size": 732,
-      "source": "src/_code/003b/FUN_003b6da4.cpp",
-      "target": "orig/target/_code/003b/FUN_003b6da4.o",
+      "source": "src/_code/003b/resultDrawAilmentMarker.cpp",
+      "target": "orig/target/_code/003b/resultDrawAilmentMarker.o",
       "thumb": false
     },
     {
@@ -103381,12 +103381,12 @@
     },
     {
       "address": "0x3c7f08",
-      "function": "objModelSlotClearColor",
+      "function": "objModelSlotSetColor",
       "module": "_code",
-      "object": "build/obj/_code/003c/objModelSlotClearColor.o",
+      "object": "build/obj/_code/003c/objModelSlotSetColor.o",
       "size": 24,
-      "source": "src/_code/003c/objModelSlotClearColor.cpp",
-      "target": "orig/target/_code/003c/objModelSlotClearColor.o",
+      "source": "src/_code/003c/objModelSlotSetColor.cpp",
+      "target": "orig/target/_code/003c/objModelSlotSetColor.o",
       "thumb": false
     },
     {
@@ -104246,12 +104246,12 @@
     },
     {
       "address": "0x3d3944",
-      "function": "FUN_003d3944",
+      "function": "btlEntrySetupMusic",
       "module": "_code",
-      "object": "build/obj/_code/003d/FUN_003d3944.o",
+      "object": "build/obj/_code/003d/btlEntrySetupMusic.o",
       "size": 592,
-      "source": "src/_code/003d/FUN_003d3944.cpp",
-      "target": "orig/target/_code/003d/FUN_003d3944.o",
+      "source": "src/_code/003d/btlEntrySetupMusic.cpp",
+      "target": "orig/target/_code/003d/btlEntrySetupMusic.o",
       "thumb": false
     },
     {
@@ -104317,12 +104317,12 @@
     },
     {
       "address": "0x3d5f60",
-      "function": "FUN_003d5f60",
+      "function": "battleVectorTransitionAimPath",
       "module": "_code",
-      "object": "build/obj/_code/003d/FUN_003d5f60.o",
+      "object": "build/obj/_code/003d/battleVectorTransitionAimPath.o",
       "size": 364,
-      "source": "src/_code/003d/FUN_003d5f60.cpp",
-      "target": "orig/target/_code/003d/FUN_003d5f60.o",
+      "source": "src/_code/003d/battleVectorTransitionAimPath.cpp",
+      "target": "orig/target/_code/003d/battleVectorTransitionAimPath.o",
       "thumb": false
     },
     {
@@ -104838,12 +104838,12 @@
     },
     {
       "address": "0x3d9d9c",
-      "function": "FUN_003d9d9c",
+      "function": "btlEffectModelsResetPlayers",
       "module": "_code",
-      "object": "build/obj/_code/003d/FUN_003d9d9c.o",
+      "object": "build/obj/_code/003d/btlEffectModelsResetPlayers.o",
       "size": 232,
-      "source": "src/_code/003d/FUN_003d9d9c.cpp",
-      "target": "orig/target/_code/003d/FUN_003d9d9c.o",
+      "source": "src/_code/003d/btlEffectModelsResetPlayers.cpp",
+      "target": "orig/target/_code/003d/btlEffectModelsResetPlayers.o",
       "thumb": false
     },
     {
@@ -105018,12 +105018,12 @@
     },
     {
       "address": "0x3db1f4",
-      "function": "FUN_003db1f4",
+      "function": "btlEffectModelsLoaded",
       "module": "_code",
-      "object": "build/obj/_code/003d/FUN_003db1f4.o",
+      "object": "build/obj/_code/003d/btlEffectModelsLoaded.o",
       "size": 100,
-      "source": "src/_code/003d/FUN_003db1f4.cpp",
-      "target": "orig/target/_code/003d/FUN_003db1f4.o",
+      "source": "src/_code/003d/btlEffectModelsLoaded.cpp",
+      "target": "orig/target/_code/003d/btlEffectModelsLoaded.o",
       "thumb": false
     },
     {
@@ -105268,12 +105268,12 @@
     },
     {
       "address": "0x3dcaac",
-      "function": "FUN_003dcaac",
+      "function": "btlEffectModelJobStart",
       "module": "_code",
-      "object": "build/obj/_code/003d/FUN_003dcaac.o",
+      "object": "build/obj/_code/003d/btlEffectModelJobStart.o",
       "size": 36,
-      "source": "src/_code/003d/FUN_003dcaac.cpp",
-      "target": "orig/target/_code/003d/FUN_003dcaac.o",
+      "source": "src/_code/003d/btlEffectModelJobStart.cpp",
+      "target": "orig/target/_code/003d/btlEffectModelJobStart.o",
       "thumb": false
     },
     {

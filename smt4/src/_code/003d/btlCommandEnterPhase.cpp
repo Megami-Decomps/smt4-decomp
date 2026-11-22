@@ -37,7 +37,7 @@ void FUN_0027e38c(void *event);
 void FUN_003ca6c4(BtlMainState **block, CommandState *work);
 void btlUiRouteSelectedAction(BtlUi *ui);
 u32 btlReflectQueueSelectionMarks(s32 a, u32 options, BtlEntry *entry);
-u32 FUN_003d3944(BtlMainState **block, CommandState *work);
+u32 btlEntrySetupMusic(BtlMainState **block, CommandState *work);
 void FUN_0033a780(BtlMainState *state);
 void btlResetTransitionProgress(BtlCamera *camera);
 void FUN_00256898(s32 a, s32 b);
@@ -54,7 +54,7 @@ u32 FUN_003dbb40(void *object);
 u32 FUN_003ca32c(BtlMainState **block, CommandState *work);
 void btlUiRecountParty(BtlUi *ui);
 void objDestroyChild(void *object);
-void FUN_002276f8(void *object);
+void btlEffectNumberedRelease(void *object);
 void modelManagerReleaseSlots(void *object);
 void modelSetResetSlots(void *object);
 void eventCommandDispatchPendingCleanup(void);
@@ -168,7 +168,7 @@ void btlCommandEnterPhase(BtlMainState **block, s32 phase)
         commandRebindPartyUnits(block, work);
         return;
     case 11:
-        FUN_003d3944(block, work);
+        btlEntrySetupMusic(block, work);
         return;
     case 12:
         FUN_00244fb0(state, 0, 1, 10, 0xff);
@@ -255,7 +255,7 @@ void btlCommandEnterPhase(BtlMainState **block, s32 phase)
         if ((work->entry->flags & 0x10) == 0)
             btlUiRecountParty(g_btlUiBlock);
         objDestroyChild(g_btlAux);
-        FUN_002276f8(g_btlAux);
+        btlEffectNumberedRelease(g_btlAux);
         g_btlAux->flags &= ~0x8000u;
         battleResetCounterAndFlag(reinterpret_cast<ResetCounterOwner *>(g_btlAux));
         modelManagerReleaseSlots(g_btlAux);

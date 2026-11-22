@@ -21,17 +21,6 @@ struct BoundsCustomSizeView {
 };
 typedef char BoundsMaterialParameterLayoutCheck[offsetof(BoundsMaterialParameters, values) == 0x10 &&
     offsetof(BoundsCustomSizeView, format) == 0x34 ? 1 : -1];
-
-inline void setBoundsTiming(MaterialMergeNode *node, f32 value, bool clamp)
-{
-    node->timing[0].first = value;
-    node->timing[0].mode = 12;
-    if (clamp) {
-        node->kinds |= 1;
-    } else {
-        node->kinds &= ~1;
-    }
-}
 }
 
 extern "C" void FUN_00401a74(EffectBoundsSource *source, TextureTransformVector2 *scale,
@@ -57,17 +46,17 @@ extern "C" void FUN_003cbb60(MaterialMergeResource *model, EffectBoundsSource *s
         } else if (channel == 2) {
             node->flags |= 0x4000;
         }
-        *reinterpret_cast<TextureTransformVector2 *>(&node->channels[channel].second[1]) = offset;
-        *reinterpret_cast<TextureTransformVector2 *>(&node->channels[channel].first[1]) = scale;
+        node->channels[channel].translation = offset;
+        node->channels[channel].scale = scale;
         switch (channel) {
         case 0:
-            setBoundsTiming(node, values.x, format == 12);
+            materialMergeSetTiming(node, values.x, format == 12);
             break;
         case 1:
-            setBoundsTiming(node, values.y, format == 12);
+            materialMergeSetTiming(node, values.y, format == 12);
             break;
         case 2:
-            setBoundsTiming(node, values.z, format == 12);
+            materialMergeSetTiming(node, values.z, format == 12);
             break;
         }
     }

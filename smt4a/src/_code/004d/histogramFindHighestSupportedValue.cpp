@@ -20,7 +20,7 @@ s32 histogramFindHighestSupportedValue(void)
     for (s32 index = first; index <= last; ++index) {
         if (compendiumEntryIsRegistered(static_cast<u16>(index))) {
             GameSaveBodyA *save = (GameSaveBodyA *)gameDataBlocksGetSaveData();
-            u32 value = save->items[index].variant;
+            u32 value = save->items[index].level;
             if (value >= 1 && value <= 999) {
                 if (histogram[value] < 20)
                     ++histogram[value];

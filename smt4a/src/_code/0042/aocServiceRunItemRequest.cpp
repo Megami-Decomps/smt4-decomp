@@ -4,7 +4,7 @@
 
 extern "C" {
 nn::Result FUN_00427ac4(void *request, u32 count);
-WindowStatusResult FUN_00429580(void *owner, void *request, const ItemCodeInfo *items, u32 count, s32 mode);
+WindowStatusResult aocSubmitBatchRequest(void *owner, void *request, const ItemCodeInfo *items, u32 count, s32 mode);
 
 /* Validates `count` requests and their owner, executes them, and returns the translated result. */
 static __inline WindowStatusResult runRequests(void *owner, void *request, const ItemCodeInfo *items, u32 count)
@@ -17,7 +17,7 @@ static __inline WindowStatusResult runRequests(void *owner, void *request, const
     if (nnResultIsFailure(status)) {
         return WindowStatusResult(status);
     }
-    WindowStatusResult result = FUN_00429580(owner, request, items, count, 0);
+    WindowStatusResult result = aocSubmitBatchRequest(owner, request, items, count, 0);
     recordValidatePair(owner, result);
     return result;
 }

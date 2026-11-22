@@ -26,7 +26,7 @@ typedef struct RowPanel {
     /* 0x594 */ s32 alpha;
 } RowPanel;
 
-extern s8 uiSubStateGetSelected(const CursorState *cursor);
+extern s8 touchSelectionGetSelected(const CursorState *cursor);
 extern LayoutSlot *layoutFindTableEntry(u8 *layout, u32 id);
 extern void uiDrawScrollingSelectionEntry(RowPanel *panel, s32 index, s32 alpha, s32 row);
 extern void FUN_0022d9c8(RowPanel *panel, s32 kind, s32 index, s32 selected, s32 alpha, s32 color);
@@ -59,7 +59,7 @@ void FUN_003a9df4(RowPanel *panel, s32 index, s32 selected, u32 id)
     baseX = slot->x;
     baseY = slot->y;
     if (selected != 0) {
-        uiDrawScrollingSelectionEntry(panel, index, alpha, uiSubStateGetSelected(&panel->cursor));
+        uiDrawScrollingSelectionEntry(panel, index, alpha, touchSelectionGetSelected(&panel->cursor));
     }
     demonIconPanelDrawRow(panel, 1, id, index, selected, alpha);
     FUN_0022db94(panel, id, index, selected, alpha);

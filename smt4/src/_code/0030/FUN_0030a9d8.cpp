@@ -3,12 +3,12 @@
 
 extern "C" {
 
-void FUN_00202ab4(s32 a, s32 b);
+void saveLoadUICreate(s32 a, s32 b);
 
 /* Resets the save/load UI to its first state: no slot loading, cursor on the first slot's position. */
 void FUN_0030a9d8(void)
 {
-    FUN_00202ab4(0, 0);
+    saveLoadUICreate(0, 0);
     Worker *worker = g_saveLoadUIFlags.worker;
     worker->unk014 = 0;
     g_saveLoadUIFlags.unk00 = 0;

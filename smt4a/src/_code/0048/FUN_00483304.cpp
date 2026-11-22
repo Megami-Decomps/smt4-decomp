@@ -1,4 +1,4 @@
-/* NON_MATCHING: transform constant-load scheduling, stack base preservation and owner/object saved registers differ. */
+/* NON_MATCHING: 107 vs 107 rows (102 diff lines); splitting position/rotation/scale into separate MapVector locals matches push {r4-r9, lr}; remaining: sub sp #44 vs #36 and vstmia scheduling across rotation/scale. */
 #include "map/EnemySpawnState.h"
 
 extern "C" {
@@ -18,16 +18,18 @@ void FUN_00483304(EnemySpawnOwner *owner, u32 sourceIndex)
 {
     const EnemySpawnRecord *record = fieldFindAreaPlacementRecord(sourceIndex);
     if (record->kind != 1 || (gameFlagIsSet(0x137) != 0 && gameFlagIsSet(0x147) == 0)) {
-        struct Transform { MapVector position, rotation, scale; } transform;
-        transform.position.x = static_cast<f32>(record->x);
-        transform.position.y = static_cast<f32>(record->y);
-        transform.position.z = static_cast<f32>(record->z);
-        transform.rotation.x = 0.0f;
-        transform.rotation.y = 0.0f;
-        transform.rotation.z = 0.0f;
-        transform.scale.x = 50.0f;
-        transform.scale.y = 50.0f;
-        transform.scale.z = 50.0f;
+        MapVector position;
+        MapVector rotation;
+        MapVector scale;
+        position.x = (f32)record->x;
+        position.y = (f32)record->y;
+        position.z = (f32)record->z;
+        rotation.x = 0.0f;
+        rotation.y = 0.0f;
+        rotation.z = 0.0f;
+        scale.x = 50.0f;
+        scale.y = 50.0f;
+        scale.z = 50.0f;
         u16 id = record->id;
         for (s32 index = 0; index < 32; ++index) {
             if (owner->registeredIds[index] == id) {
@@ -38,9 +40,9 @@ void FUN_00483304(EnemySpawnOwner *owner, u32 sourceIndex)
         EnemySpawnObject *object = FUN_00482b08(owner, 0, 0);
         if (object != NULL) {
             FUN_004824fc(object, owner->context);
-            FUN_00482414(object, &transform.position);
-            FUN_00482428(object, &transform.rotation);
-            FUN_0048269c(object, &transform.scale);
+            FUN_00482414(object, &position);
+            FUN_00482428(object, &rotation);
+            FUN_0048269c(object, &scale);
             object->id = enemy;
             object->sourceIndex = sourceIndex;
             object->category = mapEnemyLookupByte(enemy);

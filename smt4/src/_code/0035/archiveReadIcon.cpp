@@ -1,4 +1,6 @@
-/* NON_MATCHING: module/range folding, result capture across file cleanup, stack slots and saved registers differ. */
+/* NON_MATCHING: the results after the file is open are now named locals copied out after the file closes, as in
+ * retail; retail shares one stack slot between the three error results (the build gives each its own), keeps the
+ * no-archive return in line, and compares the module with lsr before the description bitfield. */
 #include "shard/W6_W6Match7_ArchiveIcon.h"
 #include "nn/Result.h"
 
@@ -45,16 +47,20 @@ extern "C" WindowStatusResult archiveReadIcon(const ArchiveIconSource *source, v
     ArchiveIconFile file;
     s32 status = file.tryOpen(*source, ArchiveIconPath(widePath));
     if (nnResultModule(status) == 17 &&
-        nnResultDescription(status) >= 100 && nnResultDescription(status) <= 179) {
-        return WindowStatusResult(0xd881388c);
+        nnResultDescriptionBits(status) >= 100 && nnResultDescriptionBits(status) <= 179) {
+        WindowStatusResult iconResult(0xd881388c);
+        return iconResult;
     }
     if (nnResultIsFailure(status)) {
-        return WindowStatusResult(static_cast<u32>(status));
+        WindowStatusResult iconResult((u32)status);
+        return iconResult;
     }
     u32 readSize;
     status = nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile(&readSize, file.object, 0, output, 0x1200);
     if (nnResultIsFailure(status)) {
-        return WindowStatusResult(static_cast<u32>(status));
+        WindowStatusResult iconResult((u32)status);
+        return iconResult;
     }
-    return WindowStatusResult(0);
+    WindowStatusResult iconResult(0);
+    return iconResult;
 }

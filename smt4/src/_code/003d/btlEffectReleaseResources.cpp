@@ -10,7 +10,7 @@
 
 extern "C" {
 void screenFadeResetAndRelease(MaterialMergeOwner *);
-void FUN_002276f8(MaterialMergeOwner *);
+void btlEffectNumberedRelease(MaterialMergeOwner *);
 void FUN_003da890(MaterialMergeOwner *);
 void modelManagerReleaseSlots(MaterialMergeOwner *);
 void keyedRecordsFreeAll(void);
@@ -66,7 +66,7 @@ extern "C" void btlEffectReleaseResources(MaterialMergeOwner *owner)
         methods->destroy(control->optionalObject);
         control->optionalObject = NULL;
     }
-    FUN_002276f8(owner);
+    btlEffectNumberedRelease(owner);
     control->clearedWord = 0;
     keyedRecordsFreeAll();
     textureCacheReleaseAll();

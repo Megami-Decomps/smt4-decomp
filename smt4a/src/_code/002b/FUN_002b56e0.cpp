@@ -6,8 +6,8 @@ extern "C" {
 
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
-int FUN_002d1e44(unsigned int *);
-int FUN_0033a374(void);
+int vectorPairTransitionStart(unsigned int *);
+int vectorPairTransitionStep(void);
 
 /* stack frame of void: 13 slot(s), 52 byte(s) */
 typedef struct {
@@ -32,8 +32,8 @@ extern int g_lmapScene; /* 0x581288 */
 
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
-/* Supplied declaration required: FUN_002d1e44. */
-/* Supplied declaration required: FUN_0033a374. */
+/* Supplied declaration required: vectorPairTransitionStart. */
+/* Supplied declaration required: vectorPairTransitionStep. */
 
 void FUN_002b56e0(void)
 
@@ -113,7 +113,7 @@ void FUN_002b56e0(void)
     temp_v21 = temp_v11;
     temp_v22 = temp_v3;
     temp_v26 = temp_v10;
-    FUN_002d1e44(&temp_v14);
+    vectorPairTransitionStart(&temp_v14);
     temp_v1 = g_lmapView;
     *(int *)(g_lmapView + 4) = *(int *)(g_lmapView + 4) + 1;
     *(unsigned int *)(temp_v1 + 8) = 0;
@@ -160,7 +160,7 @@ void FUN_002b56e0(void)
       temp_v21 = temp_v13;
       temp_v22 = temp_v7;
       temp_v26 = temp_v10;
-      FUN_002d1e44(&temp_v14);
+      vectorPairTransitionStart(&temp_v14);
       temp_v1 = g_lmapView;
       *(unsigned char *)(g_lmapView + 0x220) = 1;
       piVar2 = (int *)(temp_v1 + 4);
@@ -181,7 +181,7 @@ void FUN_002b56e0(void)
           *(unsigned int *)(temp_v1 + 8) = 0;
           return;
         }
-        FUN_0033a374();
+        vectorPairTransitionStep();
       }
     }
     else {
@@ -195,7 +195,7 @@ void FUN_002b56e0(void)
         *(unsigned int *)(temp_v1 + 8) = 0;
         return;
       }
-      FUN_0033a374();
+      vectorPairTransitionStep();
       if (temp_v1 != 0) {
         temp_v14 = *(unsigned int *)(g_lmapView + 0x5c);
         fStack_b4 = *(float *)(g_lmapView + 0x60);
@@ -230,7 +230,7 @@ void FUN_002b56e0(void)
         temp_v21 = temp_v13;
         temp_v22 = temp_v7;
         temp_v26 = temp_v10;
-        FUN_002d1e44(&temp_v14);
+        vectorPairTransitionStart(&temp_v14);
         temp_v1 = g_lmapView;
         *(int *)(g_lmapView + 4) = *(int *)(g_lmapView + 4) + 1;
         *(unsigned int *)(temp_v1 + 8) = 0;
@@ -268,8 +268,8 @@ void FUN_002b56e0(void)
       temp_v22 = temp_v16;
       temp_v23 = temp_v17;
       temp_v26 = temp_v10;
-      FUN_002d1e44(&temp_v14);
-      FUN_0033a374();
+      vectorPairTransitionStart(&temp_v14);
+      vectorPairTransitionStep();
       temp_v1 = g_lmapView;
       *(int *)(g_lmapView + 4) = *(int *)(g_lmapView + 4) + 1;
       *(unsigned int *)(temp_v1 + 8) = 0;
@@ -301,13 +301,13 @@ void FUN_002b56e0(void)
       temp_v25 = 600;
       temp_v24 = 1;
       temp_v26 = 0x40000000;
-      FUN_002d1e44(&temp_v14);
-      FUN_0033a374();
+      vectorPairTransitionStart(&temp_v14);
+      vectorPairTransitionStep();
       return;
     }
   }
   else {
-    FUN_0033a374();
+    vectorPairTransitionStep();
     if (temp_v1 != 0) {
       temp_v1 = g_lmapView;
       *(int *)(g_lmapView + 4) = *(int *)(g_lmapView + 4) + 1;

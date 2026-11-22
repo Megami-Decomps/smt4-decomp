@@ -1,3 +1,4 @@
+#include "battle/SkillUseNeeds.h"
 #include "common.h"
 #include "gamedata/GamePlayerData.h"
 #include "gamedata/UnitRecordAccess.h"
@@ -20,7 +21,6 @@ extern "C" {
 StatBlock *saveResolvePartySlot(s32 index);
 s32 btlSourceGetMaxHp(const PlayerDataIV *player);
 s32 btlLinkGetMaxHp(const StatBlock *unit);
-void FUN_0023dc38(u16 *mask, s32 kind);
 
 /* Tells whether the effect would change the target: 0 when it would, 3 when it would do nothing. */
 u32 FUN_0033fe6c(s32 index, s32 fromParty, const RecoveryEffect *effect, u32 useAmounts)
@@ -56,7 +56,7 @@ u32 FUN_0033fe6c(s32 index, s32 fromParty, const RecoveryEffect *effect, u32 use
         }
         if ((wanted & CURE_STATUS) != 0) {
             u16 cureMask = 0;
-            FUN_0023dc38(&cureMask, effect->statusKind & 0x7F);
+            statusCureEventAddMask(&cureMask, effect->statusKind & 0x7F);
             if ((cureMask & player->ailments) != 0)
                 changes |= CURE_STATUS;
         }
@@ -80,7 +80,7 @@ u32 FUN_0033fe6c(s32 index, s32 fromParty, const RecoveryEffect *effect, u32 use
         }
         if ((wanted & CURE_STATUS) != 0) {
             u16 cureMask = 0;
-            FUN_0023dc38(&cureMask, effect->statusKind & 0x7F);
+            statusCureEventAddMask(&cureMask, effect->statusKind & 0x7F);
             if ((cureMask & unit->ailments) != 0)
                 changes |= CURE_STATUS;
         }

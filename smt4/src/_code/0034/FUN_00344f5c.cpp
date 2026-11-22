@@ -65,7 +65,7 @@ int FUN_003d86a0(...);
 int btlReflectQueuePendingRosterFade(...);
 
 int FUN_0023c638(...);
-int asdModelClearSlotColors(...);
+int asdModelSetUnitSlotColor(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int FUN_0023c700(...);
 int FUN_00244fb0(...);
 int slotResetIdle(...);
@@ -118,7 +118,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: btlReflectCreateKind18. */
 /* Supplied declaration required: FUN_0023c638. */
 extern int FUN_0023c684(unsigned int);
-/* Supplied declaration required: asdModelClearSlotColors. */
+/* Supplied declaration required: asdModelSetUnitSlotColor. */
 /* Supplied declaration required: FUN_0023c700. */
 /* Supplied declaration required: FUN_0023cd08. */
 /* Supplied declaration required: modelSetAnimationChannels. */
@@ -329,7 +329,7 @@ LAB_00344fc0:
     VectorSignedToFloat((int)(char)psVar2[0x11],(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(int *)(psVar2 + 0x14) - *(int *)(psVar2 + 0x26),
                         (unsigned char)(in_fpscr >> 0x16) & 3);
-    asdModelClearSlotColors(temp_v4,*(int *)(psVar2 + 0x14) - *(int *)(psVar2 + 0x26),(int)(char)psVar2[0x10],
+    asdModelSetUnitSlotColor(temp_v4,*(int *)(psVar2 + 0x14) - *(int *)(psVar2 + 0x26),(int)(char)psVar2[0x10],
                  (int)*(char *)((int)psVar2 + 0x21));
     temp_v5 = *(int *)(psVar2 + 0x26);
     *(int *)(psVar2 + 0x26) = temp_v5 + 1;
@@ -343,7 +343,7 @@ LAB_00344fc0:
     VectorSignedToFloat(*(int *)(psVar2 + 0x14) - *(int *)(psVar2 + 0x26),
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     asdModelBankGetModelUnk08((int)*(short *)(DAT_004398d4 + 0x8c),0);
-    asdModelClearSlotColors(temp_v4);
+    asdModelSetUnitSlotColor(temp_v4);
     temp_v5 = *(int *)(psVar2 + 0x26);
     *(int *)(psVar2 + 0x26) = temp_v5 + 1;
     if (*(int *)(psVar2 + 0x14) <= temp_v5 + 1) break;

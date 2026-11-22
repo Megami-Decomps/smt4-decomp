@@ -9,7 +9,7 @@
 
 extern "C" {
 
-int FUN_004e76cc(...);
+int btlUnitLandHit(...);
 int btlReflectQueueSelectionMarks(...);
 
 int infoWinSetText(unsigned int, unsigned int);
@@ -84,7 +84,7 @@ extern int FUN_004c8a9c(void);
 /* Supplied declaration required: FUN_004c9160. */
 /* Supplied declaration required: FUN_004cab9c. */
 /* Supplied declaration required: FUN_004e5830. */
-/* Supplied declaration required: FUN_004e76cc. */
+/* Supplied declaration required: btlUnitLandHit. */
 /* Supplied declaration required: btlActionTargetSlotScore. */
 /* Supplied declaration required: btlReflectQueueSelectionMarks. */
 /* Supplied declaration required: FUN_004fcffc. */
@@ -401,7 +401,7 @@ LAB_004e0ac0:
                 temp_v2 = temp_v2 + 100;
               }
               piVar8 = param_1;
-              FUN_004e76cc(param_1,param_2,temp_v2);
+              btlUnitLandHit(param_1,param_2,temp_v2);
               if (piVar8 != (int *)0x0) {
                 *param_2 = *param_2 | 0x10000;
               }

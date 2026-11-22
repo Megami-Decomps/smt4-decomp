@@ -1,5 +1,6 @@
-/* NON_MATCHING: VFP register allocation and the branch layout of the plane loop differ from retail (retail keeps the sphere position in s17-s19 and tests the projected distance before reloading the plane normal). */
+/* NON_MATCHING: 145 lines off (the magnitude is fabsf: retail's vabs). VFP register allocation and the branch layout of the plane loop differ from retail (retail keeps the sphere position in s17-s19 and tests the projected distance before reloading the plane normal). */
 #include "common.h"
+#include <math.h>
 #include "shard/W6_W6Match6_CollisionQuad.h"
 
 extern "C" {
@@ -46,7 +47,7 @@ u32 FUN_002826dc(const f32 *position, f32 *resolved, s32 strict, s32 tall)
                 continue;
             }
             f32 distance = x * planes->normal.x + y * planes->normal.y + z * planes->normal.z - planes->distance;
-            f32 magnitude = distance < 0.0f ? -distance : distance;
+            f32 magnitude = fabsf(distance);
 
             if (!(magnitude < radius)) {
                 continue;

@@ -6070,3 +6070,29 @@
 00194b14 playLogDraw inferred twin of smt4a FUN_00214dc4
 0024aaa0 overlayGetStatusScene inferred the smt4a twin's name for the same call
 0044dbb0 g_qcStartSequences inferred the quest center's start-sequence table QuestCenterMainProcUpdate searches
+00205184 ocEventJobUpdate inferred steps the OC event job's states (case 1 and 3 apply the event camera)
+001ed9a0 saveLoadUIDrawCaptionAndShade inferred draws the save/load screen's caption and its shading overlay (Worker isLoad/shaded/shadeSpeed)
+0015a714 materialSubmitBufferColor inferred packs and submits a material colour command (materialPackColor)
+002765d0 eventTablePickNext inferred picks the next event of an event table (stores -1 when none)
+002624c4 fusionBuildPreviewResult inferred fills the fusion preview's result record (PackedIdentifiers, cost)
+0028cfd8 itemHealingIsUseful inferred whether a healing item would help any party member
+002dfb48 mapEnemyPickSpawnPosition inferred picks a spawn position for a map enemy inside a radius
+002a63d8 graphicsResourceSetLeafValue inferred sets a value at a leaf of a graphics resource through relative pointers
+0010250c asdFileInitialize inferred initialises the AsdFile loader (request lock and thread)
+003d3944 btlEntrySetupMusic inferred chooses and starts the battle entry's music
+003d5f60 battleVectorTransitionAimPath inferred aims a battle camera vector transition along its path anchors
+0034266c bannerAnimStep inferred advances a banner animation's phase and reveal step
+0023d488 btlSkillCheckApplicable inferred battle twin of itemEffectCheckApplicable (SkillUseNeeds)
+00202ab4 saveLoadUICreate evidence its process names "SAVELOAD_UI C/UD/UDD/D" and the saveLoadUI.cpp trace path
+003b65a4 resultDrawRowColumn inferred draws one column of a level-up result row
+003b6da4 resultDrawAilmentMarker inferred draws a result row's ailment marker (ResultWork ailment cycle)
+0044dc38 g_resultRowDrawState inferred size:0x8 the result rows' draw state (ResultRowDrawState: column, colour)
+0023dc38 statusCureEventAddMask inferred adds the status bits a cure event clears to a mask
+00282228 vectorPairTransitionStart inferred starts the camera's two-vector move (FUN_002d1e44's twin)
+0010d6c0 asdProcTimersPassed inferred whether a process's timer conditions have all passed (timers, update count)
+003db1f4 btlEffectModelsLoaded inferred whether the effect work's model slots have loaded (body of btlEffectModelJobDispatch's modelSlotsLoaded)
+003d9d9c btlEffectModelsResetPlayers inferred resets the effect models' animation players (body of modelSlotsResetPlayers)
+003dcaac btlEffectModelJobStart inferred starts the effect model job
+002276f8 btlEffectNumberedRelease inferred releases the numbered effect (clears its flag)
+0023c6e4 asdModelSetUnitSlotColor inferred forwards r, g, b to asdModelSlotSetColor for the global unit's model: sets a colour, clears nothing
+003c7f08 objModelSlotSetColor inferred forwards r, g, b to asdModelSlotSetColor: sets a colour

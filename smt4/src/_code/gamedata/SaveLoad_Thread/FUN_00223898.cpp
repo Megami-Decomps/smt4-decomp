@@ -3,6 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "nn/Result.h"
 #include "sys/ResultReport.h"
+#include "sys/HandleWait.h"
 
 extern "C" {
 struct ThreadArgTraits {
@@ -28,7 +29,6 @@ struct SaveLoadThreadWork {
 };
 
 s32 svcCreateSemaphore(u32 *out, u32 initialCount, u32 maxCount);
-s32 svcReleaseSemaphore(u32 *out, u32 semaphore, u32 releaseCount);
 s32 FUN_002cbe5c(s32 result);
 void *memAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, u32 alignment, u32 category);
 s32 FUN_002bcc60(void *thread, const ThreadArgTraits *traits, void (*entry)(void *), ThreadBoundArgs *args,

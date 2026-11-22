@@ -1,4 +1,7 @@
-/* NON_MATCHING: readable rewrite, control flow and instruction set match retail; remaining diffs: retail keeps r2/r3 across the uiClampScrollOffset calls (needs multifile), converts both centre values before the subtractions (vstmia of corner), sign-extends the page and the owner flag with ldrsb/sxth, and shares one base register for the model block. */
+/* NON_MATCHING: readable rewrite, control flow and instruction set match retail, and the slot lookup passes the page as
+ * FUN_0022b238's index; remaining diffs: retail keeps r2/r3 across the uiClampScrollOffset calls (needs multifile),
+ * converts both centre values before the subtractions (vstmia of corner), reads the owner flag with a lone ldrsb
+ * (a linker-inlined getter) and reaches the model owner and recordShown through precomputed field addresses. */
 #include "common.h"
 #include "ui/ScreenObject.h"
 #include "game/GameState.h"
@@ -77,7 +80,7 @@ extern "C" {
 
 
 PanelSelection *FUN_0022b8c0(void *selection);
-PanelSelection *FUN_0022b238(void *selection);
+PanelSelection *FUN_0022b238(void *selection, s32 index); // declcheck: local (code/Code0022_Smt4.h declares it as returning u32 from an Obj *; this caller reads the returned entry)
 s32 FUN_003bb620(void *selection);
 s32 flaggedValueHolderGetTotal(void *selection);
 void modelSetVisible(PanelModelOwner *owner, s32 visible);
@@ -133,7 +136,7 @@ void FUN_003b875c(PanelWork *work)
         s16 page = flaggedValueHolderGetTotal(work->selection);
         work->page = page;
         if (work->recordShown != 0) {
-            PanelSelection *current = FUN_0022b238(work->selection);
+            PanelSelection *current = FUN_0022b238(work->selection, page);
             s32 kind = current->kind;
 
             if (!(work->mode == 4 || work->mode == 3) || (kind != 0 && kind != 6) ||

@@ -443,7 +443,8 @@ struct UniteWorkA {
             u8 prefix438[0x8728];
             /* 0x8B60 */ u16 slots[8];             /* 0 = empty */
             /* 0x8B70 */ u16 skills[0x60];         /* the candidate skills */
-            /* 0x8C30 */ u8 unk8C30[0x180];
+            /* 0x8C30 */ u16 extraSkills[0x60];    /* listed after the candidates; 0 ends the list */
+            /* 0x8CF0 */ u16 mergedSkills[0x60];   /* scratch: the initial and candidate skills without repeats */
             /* 0x8DB0 */ ScrollSelection slotList;  /* the cursor over `slots` */
             /* 0x8E14 */ ScrollSelection skillList; /* the cursor over `skills` */
             /* 0x8E78 */ u8 unk8E78[4];
@@ -596,6 +597,8 @@ typedef char UniteWorkAInheritanceOffsets[offsetof(UniteWorkA, inheritanceA.slot
     offsetof(UniteWorkA, inheritanceA.skillCount) == 0x8E80 && offsetof(UniteWorkA, inheritanceA.freedSlots) == 0x8E8C &&
     offsetof(UniteWorkA, inheritanceA.rowLimit) == 0x8E84 && offsetof(UniteWorkA, inheritanceA.accepted) == 0x8E8A &&
     offsetof(UniteWorkA, inheritanceA.stripSelected) == 0x8EAC &&
+    offsetof(UniteWorkA, inheritanceA.extraSkills) == 0x8C30 &&
+    offsetof(UniteWorkA, inheritanceA.mergedSkills) == 0x8CF0 &&
     offsetof(UniteWorkA, buttonsA.regions) == 0x438 ? 1 : -1];
 
 typedef char UniteWorkAHelpOffsetCheck[offsetof(UniteWorkA, inheritanceA.skillList) == 0x8E14 &&

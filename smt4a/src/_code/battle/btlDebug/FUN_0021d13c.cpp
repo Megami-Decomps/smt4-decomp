@@ -18,7 +18,7 @@ int FUN_0047f4cc(...);
 int FUN_004c8e30(...);
 
 int FUN_0020d3d4(...);
-int FUN_0021a9e8(...);
+int btlCommandMenuSetupLists(...);
 int statusPanelClose(void);
 int partyStatusRefreshSlot(...);
 int gameGlobalsReleaseReference(void);
@@ -167,7 +167,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: btlCommandMenuEnterMode. */
 /* Supplied declaration required: FUN_0020d3d4. */
 /* Supplied declaration required: FUN_0021a6c8. */
-/* Supplied declaration required: FUN_0021a9e8. */
+/* Supplied declaration required: btlCommandMenuSetupLists. */
 /* Supplied declaration required: gridNavigationHandleConfirm. */
 extern int FUN_0022a030(unsigned int, int);
 /* Supplied declaration required: statusPanelClose. */
@@ -2089,7 +2089,7 @@ joined_r0x0022027c:
         if (temp_v0 == '\0') {
           *piVar16 = temp_v4;
           *(unsigned char *)(param_1 + 0x38b8) = 0;
-          FUN_0021a9e8(param_1);
+          btlCommandMenuSetupLists(param_1);
           temp_v4 = 0;
           do {
             uiSpriteSetImageKeyframe(param_1 + temp_v4 * 0x8c + 0xe58,0);

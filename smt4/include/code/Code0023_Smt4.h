@@ -33,4 +33,7 @@ void sub10OwnerStart(Obj *obj);
 
 void transitionConfigureAndReset(TransitionRecord *record,u32 first,u32 second,f32 value);
 
+/* Colours the global unit's model slot; `unused` is passed by the callers and never read. */
+void asdModelSetUnitSlotColor(void *unused, f32 red, f32 green, f32 blue);
+
 } /* extern "C" */

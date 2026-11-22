@@ -229,7 +229,7 @@ code_r0x0032e99c:
       }
       saveMarkIdListSeen(iVar9);
       if (uStack_4c != 0) {
-        FUN_002a5e7c(*(unsigned short *)(iVar9 + 0x62));
+        compendiumRegisterPartyDemon(*(unsigned short *)(iVar9 + 0x62));
         *(unsigned char *)(param_1 + 0x7d4) = 1;
       }
       FUN_002bf520();

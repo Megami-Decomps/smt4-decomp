@@ -177,7 +177,7 @@ int FUN_001a9104(void);
 int FUN_0020d6b0(void);
 int FUN_0020db10(void);
 int aocSelectedRecordIsUnavailable(void);
-int FUN_002765d0(void);
+int eventTablePickNext(void);
 int mapIfClose(void);
 int mapIfSetMode1(void);
 int navigationSetFieldValue(...);
@@ -558,7 +558,7 @@ extern int FUN_00276348(int);
 /* Supplied declaration required: navigationApplyOptionalValue. */
 /* Supplied declaration required: navigationApplyArguments. */
 /* Supplied declaration required: aocSelectedRecordIsUnavailable. */
-/* Supplied declaration required: FUN_002765d0. */
+/* Supplied declaration required: eventTablePickNext. */
 /* Supplied declaration required: mapIfClose. */
 /* Supplied declaration required: mapIfSetMode1. */
 /* Supplied declaration required: navigationSetFieldValue. */
@@ -1559,7 +1559,7 @@ LAB_001b9210:
         DAT_0049f9b8 = (float)*(unsigned int *)(g_lmapScene + 0x24);
         return 0;
       }
-      FUN_002765d0();
+      eventTablePickNext();
       if (temp_v9 != 0) {
         DAT_0049f934 = 1;
         DAT_0049f93c = 1;
@@ -5421,7 +5421,7 @@ LAB_001bf6c8:
         mapIfSetMode1();
         temp_v9 = 0;
         naviMainApplySetting(0,8);
-        FUN_002765d0();
+        eventTablePickNext();
         if (temp_v9 != 0) {
           DAT_0049fb6b = 1;
           temp_v16 = tableGroupFindEntryIndex(puVar14[0x13],0x1b95e4);
@@ -5523,7 +5523,7 @@ LAB_001bf6c8:
     if (temp_v9 == 0x1a) {
       return 0;
     }
-    FUN_002765d0();
+    eventTablePickNext();
     if (temp_v9 != 0) {
       DAT_0049fb6b = 1;
       temp_v16 = tableGroupFindEntryIndex(puVar14[0x13],0x1b95e4);

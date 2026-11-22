@@ -38,7 +38,7 @@ void cameraMatrixCacheReset(ManagedCameraIV *camera, s32 enabled);
 void FUN_002c159c(ManagedCameraIV *camera, f32 first, f32 second);
 void cameraMatrixCacheSetLookAt(ManagedCameraIV *camera, const Vec3f *eye, const Vec3f *target, const Vec3f *up);
 void stereoCameraSetPerspective(ManagedCameraIV *camera, s32 enabled, f32 fov, f32 nearClip, f32 farClip, f32 aspect);
-s32 FUN_00205184(u32 process);
+s32 ocEventJobUpdate(u32 process);
 void event3dOpeningDestroy(u32 process);
 s32 eventIsSkipping(void);
 void FUN_002a09b4(const char *path, s32 flags);
@@ -73,7 +73,7 @@ u32 FUN_002f6314(void)
         stereoCameraSetPerspective(&work->camera, 1, work->parameters.fieldOfView, work->parameters.nearClip,
             work->parameters.farClip, work->parameters.aspect);
         FUN_00298d50(reinterpret_cast<u32>(&work->camera));
-        work->process = asdProcessCreateSimple((const s8 *)"3dEventOpening Calc", 2, 0, 0, FUN_00205184, event3dOpeningDestroy, reinterpret_cast<u32>(work));
+        work->process = asdProcessCreateSimple((const s8 *)"3dEventOpening Calc", 2, 0, 0, ocEventJobUpdate, event3dOpeningDestroy, reinterpret_cast<u32>(work));
         /* Retail keeps the skip test although both outcomes start the same way. */
         if (eventIsSkipping()) {
             work->state = 1;

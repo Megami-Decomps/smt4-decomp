@@ -1,9 +1,9 @@
 #include "sys/FileWorkerQueue.h"
 #include "nn/Result.h"
 #include "sys/ResultReport.h"
+#include "sys/HandleWait.h"
 extern "C" {
 s32 svcWaitSynchronizationN(s32 *index, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
-s32 svcReleaseSemaphore(u32 *previousCount, u32 semaphore, u32 releaseCount);
 void *nnnstdMemCpy(void *destination, const void *source, u32 bytes);
 
 // Copy a request into the next ring slot and advance the write index.

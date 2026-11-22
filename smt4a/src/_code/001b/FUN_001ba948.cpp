@@ -1,20 +1,19 @@
-/* NON_MATCHING: configuration word registers, command constant synthesis and clamped LOD VFP scheduling differ. */
+/* NON_MATCHING: 124 lines off: the LOD-bias clamp now has retail's flow; retail pools the command headers 0xF0091,
+ * 0xF0093, 0xF0095 and 0xF0096 and derives 0xF0092/0xF0094 by adding 1 (the build pools other ones), reads the
+ * minification filter before the type tests and needs only r4 saved. */
 #include "shard/S2GrTexture.h"
 
 /* Encode the signed 13-bit fixed-point LOD-bias field. */
 static inline u32 textureLodBiasFixed(f32 bias)
 {
-    f32 scaled = (bias + 16.0f) * 256.0f;
-    f32 clamped = 0.0f;
-    if (scaled >= 0.0f) {
-        if (scaled >= 8192.0f)
-            clamped = 8191.0f;
-        else
-            clamped = scaled;
-        if (clamped >= 4096.0f)
-            return (u32)(clamped - 4096.0f);
-    }
-    return (u32)(clamped + 4096.0f);
+    f32 value = (bias + 16.0f) * 256.0f;
+    if (0.0f > value)
+        value = 0.0f;
+    else if (value >= 8192.0f)
+        value = 8191.0f;
+    if (value >= 4096.0f)
+        return (u32)(value - 4096.0f);
+    return (u32)(value + 4096.0f);
 }
 
 extern "C" {

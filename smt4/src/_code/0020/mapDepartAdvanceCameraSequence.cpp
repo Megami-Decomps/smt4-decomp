@@ -1,356 +1,176 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `mapDepartAdvanceCameraSequence` (_code @ 0x208504, 0x674 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the code is retail's except for one register. Retail keeps the pointer to the running move in r3
+ * across the calls to vectorPairTransitionStep (so it saves r4-r7 only and the frame is 4 bytes larger: 116 against
+ * 112); the build keeps it in r4 and saves r8 too. armcc holds a value in r3 across a call only when it has seen
+ * the callee: with vectorPairTransitionStep defined in the same file the build does the same (84 raw lines left,
+ * the x and z registers of three points swapped), so the two belong to one translation unit. Apocalypse's twin,
+ * lmapViewUpdateOrbitSequence, keeps the pointer in r4 and is IDENTICAL. */
+#include "map/LmapViewGlobals.h"
+#include "map/LmapGlobals.h"
+#include "map/VectorPairTransition.h"
+#include "util/TrigF32.h"
 
 extern "C" {
 
-int FUN_00282228(int *);
-int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "libm_sinf" has "C" linkage)
-int libm_sinf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
+void vectorPairTransitionStart(const VectorPairTransition *parameters);
+s32 vectorPairTransitionStep(void);
+}
 
-/* stack frame of void: 13 slot(s), 52 byte(s) */
-typedef struct {
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-    unsigned int sp8C; /* 0x8c: local_8c */
-    unsigned int sp90; /* 0x90: local_90 */
-    unsigned int sp94; /* 0x94: local_94 */
-    unsigned int sp98; /* 0x98: local_98 */
-    unsigned int sp9C; /* 0x9c: local_9c */
-    unsigned int spA0; /* 0xa0: local_a0 */
-    unsigned int spA4; /* 0xa4: local_a4 */
-    unsigned int spA8; /* 0xa8: local_a8 */
-    unsigned int spAC; /* 0xac: local_ac */
-    unsigned int spB8; /* 0xb8: local_b8 */
-} void_stack;
+#define DEGREES_TO_RADIANS 0.017453292f
 
-extern int g_mapCamera; /* 0x4474f4 */
-extern int g_lmapScene; /* 0x447e88 */
-
-extern int vectorPairTransitionStep(void);
-/* Supplied declaration required: FUN_00282228. */
-/* Supplied declaration required: libm_cosf. */
-/* Supplied declaration required: libm_sinf. */
-
-
-void mapDepartAdvanceCameraSequence(void)
-
+/* Starts the next phase of the camera sequence. */
+static __inline void viewAdvancePhase(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  unsigned long long temp_v5;
-  unsigned int temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  int temp_v14;
-  unsigned int uStack_b4;
-  unsigned int uStack_b0;
-  unsigned int temp_v15;
-  unsigned int temp_v16;
-  unsigned int temp_v17;
-  float temp_v18;
-  float temp_v19;
-  float temp_v20;
-  float temp_v21;
-  float temp_v22;
-  float temp_v23;
-  unsigned int temp_v24;
-  unsigned int temp_v25;
-  unsigned int temp_v26;
-  
-  temp_v2 = 0.017453292f;
-  temp_v7 = 120.0f;
-  temp_v3 = 155.0f;
-  temp_v11 = 250.0f;
-  temp_v9 = 160.0f;
-  temp_v6 = 0;
-  temp_v12 = 370.0f;
-  temp_v13 = 50.0f;
-  temp_v4 = 350.0f;
-  temp_v10 = 140.0f;
-  temp_v8 = 150.0f;
-  temp_v1 = g_mapCamera + 0x220;
-  switch(*(unsigned int *)(g_mapCamera + 4)) {
-  case 0:
-    temp_v14 = *(unsigned int *)(g_mapCamera + 0x58);
-    uStack_b4 = *(unsigned int *)(g_mapCamera + 0x5c);
-    uStack_b0 = *(unsigned int *)(g_mapCamera + 0x60);
-    temp_v16 = *(unsigned int *)(g_mapCamera + 0x50);
-    temp_v15 = *(unsigned int *)(g_mapCamera + 0x4c);
-    temp_v17 = *(unsigned int *)(g_mapCamera + 0x54);
-    temp_v8 = *(float *)(g_lmapScene + 0x1c);
-    temp_v12 = *(float *)(g_lmapScene + 0x20);
-    temp_v4 = *(float *)(g_lmapScene + 0x4c) * 0.017453292f;
-    temp_v10 = *(float *)(g_lmapScene + 0x24);
-    libm_sinf();
-    temp_v13 = 300.0f;
-    temp_v12 = temp_v12 + temp_v7;
-    temp_v8 = temp_v8 + temp_v4 * 300.0f;
-    temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
-    libm_cosf();
-    temp_v20 = temp_v10 + temp_v4 * temp_v13;
-    temp_v7 = *(float *)(g_lmapScene + 0x1c);
-    temp_v13 = *(float *)(g_lmapScene + 0x20);
-    temp_v10 = *(float *)(g_lmapScene + 0x24);
-    temp_v4 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
-    temp_v18 = temp_v8;
-    temp_v19 = temp_v12;
-    libm_sinf();
-    temp_v7 = temp_v7 + temp_v4 * temp_v11;
-    temp_v13 = temp_v13 + temp_v9;
-    temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
-    libm_cosf();
-    temp_v23 = temp_v10 + temp_v2 * temp_v11;
-    temp_v25 = 0x1e;
-    temp_v24 = 0;
-    temp_v21 = temp_v7;
-    temp_v22 = temp_v13;
-    temp_v26 = temp_v6;
-    FUN_00282228(&temp_v14);
-    temp_v1 = g_mapCamera;
-    *(unsigned char *)(g_mapCamera + 0x21c) = 1;
-    piVar1 = (int *)(temp_v1 + 4);
-    *piVar1 = *piVar1 + 1;
-    *(unsigned int *)(temp_v1 + 8) = 0;
-    break;
-  case 1:
-    temp_v0 = vectorPairTransitionStep();
-    if (temp_v0 != 0) {
-      temp_v14 = *(unsigned int *)(temp_v1 + 0x30);
-      uStack_b4 = *(unsigned int *)(temp_v1 + 0x34);
-      uStack_b0 = *(unsigned int *)(temp_v1 + 0x38);
-      temp_v15 = *(unsigned int *)(temp_v1 + 0x3c);
-      temp_v16 = *(unsigned int *)(temp_v1 + 0x40);
-      temp_v17 = *(unsigned int *)(temp_v1 + 0x44);
-      temp_v8 = *(float *)(g_lmapScene + 0x1c);
-      temp_v11 = *(float *)(g_lmapScene + 0x20);
-      temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
-      temp_v10 = *(float *)(g_lmapScene + 0x24);
-      libm_sinf();
-      temp_v8 = temp_v8 + temp_v4 * temp_v12;
-      temp_v11 = temp_v11 + temp_v7;
-      temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
-      libm_cosf();
-      temp_v20 = temp_v10 + temp_v4 * temp_v12;
-      temp_v7 = *(float *)(g_lmapScene + 0x1c);
-      temp_v12 = *(float *)(g_lmapScene + 0x20);
-      temp_v10 = *(float *)(g_lmapScene + 0x24);
-      temp_v4 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
-      temp_v18 = temp_v8;
-      temp_v19 = temp_v11;
-      libm_sinf();
-      temp_v8 = 200.0f;
-      temp_v12 = temp_v12 + temp_v9;
-      temp_v7 = temp_v7 + temp_v4 * 200.0f;
-      temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
-      libm_cosf();
-      temp_v23 = temp_v10 + temp_v2 * temp_v8;
-      temp_v25 = 0x5a;
-      temp_v24 = 0;
-      temp_v21 = temp_v7;
-      temp_v22 = temp_v12;
-      temp_v26 = temp_v6;
-      FUN_00282228(&temp_v14);
-      temp_v1 = g_mapCamera;
-      *(int *)(g_mapCamera + 4) = *(int *)(g_mapCamera + 4) + 1;
-      *(unsigned int *)(temp_v1 + 8) = 0;
-      return;
+    LmapView *view = g_lmapViewHolder.view;
+
+    view->phase++;
+    view->unk008 = 0;
+}
+
+extern "C" {
+
+/* Runs the map camera's scripted orbit of the player (the departure sequence). Each phase waits for the
+ * running camera move and starts the next: the look-at point (`first`) and the eye (`second`) are placed
+ * around the player by an angle off its heading, a distance and a height. The view is read through its
+ * holder at every use, as retail does. */
+void mapDepartAdvanceCameraSequence(void)
+{
+    const VectorPairTransition *move = &g_lmapViewHolder.view->move;
+    VectorPairTransition request;
+    BattleVector3 point;
+    MapVector center;
+
+    switch (g_lmapViewHolder.view->phase) {
+    case 0:
+        request.start.first = *(const BattleVector3 *)&g_lmapViewHolder.view->savedTarget;
+        request.start.second = *(const BattleVector3 *)&g_lmapViewHolder.view->savedEye;
+        center = g_lmapScene->pose.position;
+        point.x = center.x + libm_sinf(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 300.0f;
+        point.y = center.y + 120.0f;
+        point.z = center.z + libm_cosf(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 300.0f;
+        request.target.first = point;
+        center = g_lmapScene->pose.position;
+        point.x = center.x + libm_sinf((g_lmapScene->pose.heading - 155.0f) * DEGREES_TO_RADIANS) * 250.0f;
+        point.y = center.y + 160.0f;
+        point.z = center.z + libm_cosf((g_lmapScene->pose.heading - 155.0f) * DEGREES_TO_RADIANS) * 250.0f;
+        request.target.second = point;
+        request.duration = 30;
+        request.smoothing = 0;
+        request.smoothingDivisor = 0.0f;
+        vectorPairTransitionStart(&request);
+        g_lmapViewHolder.view->tracking = 1;
+        viewAdvancePhase();
+        break;
+    case 1: /* push the eye in */
+        if (vectorPairTransitionStep() != 0) {
+            request.start.first = move->current.first;
+            request.start.second = move->current.second;
+            center = g_lmapScene->pose.position;
+            point.x = center.x + libm_sinf(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 370.0f;
+            point.y = center.y + 120.0f;
+            point.z = center.z + libm_cosf(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 370.0f;
+            request.target.first = point;
+            center = g_lmapScene->pose.position;
+            point.x = center.x + libm_sinf((g_lmapScene->pose.heading - 155.0f) * DEGREES_TO_RADIANS) * 200.0f;
+            point.y = center.y + 160.0f;
+            point.z = center.z + libm_cosf((g_lmapScene->pose.heading - 155.0f) * DEGREES_TO_RADIANS) * 200.0f;
+            request.target.second = point;
+            request.duration = 90;
+            request.smoothing = 0;
+            request.smoothingDivisor = 0.0f;
+            vectorPairTransitionStart(&request);
+            viewAdvancePhase();
+        }
+        break;
+    case 2: /* raise the eye */
+        if (vectorPairTransitionStep() != 0) {
+            request.start.first = move->current.first;
+            request.start.second = move->current.second;
+            center = g_lmapScene->pose.position;
+            point.x = center.x + libm_sinf(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 370.0f;
+            point.y = center.y + 50.0f;
+            point.z = center.z + libm_cosf(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 370.0f;
+            request.target.first = point;
+            center = g_lmapScene->pose.position;
+            point.x = center.x + libm_sinf((g_lmapScene->pose.heading - 155.0f) * DEGREES_TO_RADIANS) * 250.0f;
+            point.y = center.y + 250.0f;
+            point.z = center.z + libm_cosf((g_lmapScene->pose.heading - 155.0f) * DEGREES_TO_RADIANS) * 250.0f;
+            request.target.second = point;
+            request.duration = 10;
+            request.smoothing = 0;
+            request.smoothingDivisor = 0.0f;
+            vectorPairTransitionStart(&request);
+            viewAdvancePhase();
+        }
+        break;
+    case 3: /* keep rising */
+        if (vectorPairTransitionStep() != 0) {
+            request.start.first = move->current.first;
+            request.start.second = move->current.second;
+            center = g_lmapScene->pose.position;
+            point.x = center.x + libm_sinf(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 370.0f;
+            point.y = center.y + 50.0f;
+            point.z = center.z + libm_cosf(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 370.0f;
+            request.target.first = point;
+            center = g_lmapScene->pose.position;
+            point.x = center.x + libm_sinf((g_lmapScene->pose.heading - 155.0f) * DEGREES_TO_RADIANS) * 250.0f;
+            point.y = center.y + 280.0f;
+            point.z = center.z + libm_cosf((g_lmapScene->pose.heading - 155.0f) * DEGREES_TO_RADIANS) * 250.0f;
+            request.target.second = point;
+            request.duration = 80;
+            request.smoothing = 0;
+            request.smoothingDivisor = 0.0f;
+            vectorPairTransitionStart(&request);
+            viewAdvancePhase();
+        }
+        break;
+    case 4: /* swing round, easing */
+        if (vectorPairTransitionStep() != 0) {
+            request.start.first = move->current.first;
+            request.start.second = move->current.second;
+            center = g_lmapScene->pose.position;
+            point.x = center.x + libm_sinf((g_lmapScene->pose.heading - 15.0f) * DEGREES_TO_RADIANS) * 350.0f;
+            point.y = center.y + 140.0f;
+            point.z = center.z + libm_cosf((g_lmapScene->pose.heading - 15.0f) * DEGREES_TO_RADIANS) * 350.0f;
+            request.target.first = point;
+            center = g_lmapScene->pose.position;
+            point.x = center.x + libm_sinf((g_lmapScene->pose.heading - 160.0f) * DEGREES_TO_RADIANS) * 150.0f;
+            point.y = center.y + 150.0f;
+            point.z = center.z + libm_cosf((g_lmapScene->pose.heading - 160.0f) * DEGREES_TO_RADIANS) * 150.0f;
+            request.target.second = point;
+            request.duration = 15;
+            request.smoothing = 1;
+            request.smoothingDivisor = 2.0f;
+            vectorPairTransitionStart(&request);
+            viewAdvancePhase();
+        }
+        break;
+    case 5: /* drift to the final pose */
+        if (vectorPairTransitionStep() != 0) {
+            request.start.first = move->current.first;
+            request.start.second = move->current.second;
+            center = g_lmapScene->pose.position;
+            point.x = center.x + libm_sinf((g_lmapScene->pose.heading - 18.0f) * DEGREES_TO_RADIANS) * 350.0f;
+            point.y = center.y + 140.0f;
+            point.z = center.z + libm_cosf((g_lmapScene->pose.heading - 18.0f) * DEGREES_TO_RADIANS) * 350.0f;
+            request.target.first = point;
+            center = g_lmapScene->pose.position;
+            point.x = center.x + libm_sinf((g_lmapScene->pose.heading - 165.0f) * DEGREES_TO_RADIANS) * 120.0f;
+            point.y = center.y + 150.0f;
+            point.z = center.z + libm_cosf((g_lmapScene->pose.heading - 165.0f) * DEGREES_TO_RADIANS) * 120.0f;
+            request.target.second = point;
+            request.duration = 105;
+            request.smoothing = 0;
+            request.smoothingDivisor = 0.0f;
+            vectorPairTransitionStart(&request);
+            viewAdvancePhase();
+        }
+        break;
+    case 6:
+        if (vectorPairTransitionStep() != 0) {
+            viewAdvancePhase();
+        }
+        break;
     }
-    break;
-  case 2:
-    temp_v0 = vectorPairTransitionStep();
-    if (temp_v0 != 0) {
-      temp_v14 = *(unsigned int *)(temp_v1 + 0x30);
-      uStack_b4 = *(unsigned int *)(temp_v1 + 0x34);
-      uStack_b0 = *(unsigned int *)(temp_v1 + 0x38);
-      temp_v15 = *(unsigned int *)(temp_v1 + 0x3c);
-      temp_v16 = *(unsigned int *)(temp_v1 + 0x40);
-      temp_v17 = *(unsigned int *)(temp_v1 + 0x44);
-      temp_v8 = *(float *)(g_lmapScene + 0x1c);
-      temp_v10 = *(float *)(g_lmapScene + 0x20);
-      temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
-      temp_v7 = *(float *)(g_lmapScene + 0x24);
-      libm_sinf();
-      temp_v8 = temp_v8 + temp_v4 * temp_v12;
-      temp_v10 = temp_v10 + temp_v13;
-      temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
-      libm_cosf();
-      temp_v20 = temp_v7 + temp_v4 * temp_v12;
-      temp_v7 = *(float *)(g_lmapScene + 0x1c);
-      temp_v12 = *(float *)(g_lmapScene + 0x20);
-      temp_v9 = *(float *)(g_lmapScene + 0x24);
-      temp_v4 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
-      temp_v18 = temp_v8;
-      temp_v19 = temp_v10;
-      libm_sinf();
-      temp_v7 = temp_v7 + temp_v4 * temp_v11;
-      temp_v12 = temp_v12 + temp_v11;
-      temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
-      libm_cosf();
-      temp_v23 = temp_v9 + temp_v2 * temp_v11;
-      temp_v25 = 10;
-      temp_v24 = 0;
-      temp_v21 = temp_v7;
-      temp_v22 = temp_v12;
-      temp_v26 = temp_v6;
-      FUN_00282228(&temp_v14);
-      temp_v1 = g_mapCamera;
-      *(int *)(g_mapCamera + 4) = *(int *)(g_mapCamera + 4) + 1;
-      *(unsigned int *)(temp_v1 + 8) = 0;
-      return;
-    }
-    break;
-  case 3:
-    temp_v0 = vectorPairTransitionStep();
-    if (temp_v0 != 0) {
-      temp_v14 = *(unsigned int *)(temp_v1 + 0x30);
-      uStack_b4 = *(unsigned int *)(temp_v1 + 0x34);
-      uStack_b0 = *(unsigned int *)(temp_v1 + 0x38);
-      temp_v15 = *(unsigned int *)(temp_v1 + 0x3c);
-      temp_v16 = *(unsigned int *)(temp_v1 + 0x40);
-      temp_v17 = *(unsigned int *)(temp_v1 + 0x44);
-      temp_v8 = *(float *)(g_lmapScene + 0x1c);
-      temp_v10 = *(float *)(g_lmapScene + 0x20);
-      temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
-      temp_v7 = *(float *)(g_lmapScene + 0x24);
-      libm_sinf();
-      temp_v8 = temp_v8 + temp_v4 * temp_v12;
-      temp_v10 = temp_v10 + temp_v13;
-      temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
-      libm_cosf();
-      temp_v20 = temp_v7 + temp_v4 * temp_v12;
-      temp_v9 = *(float *)(g_lmapScene + 0x1c);
-      temp_v12 = *(float *)(g_lmapScene + 0x20);
-      temp_v7 = *(float *)(g_lmapScene + 0x24);
-      temp_v4 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
-      temp_v18 = temp_v8;
-      temp_v19 = temp_v10;
-      libm_sinf();
-      temp_v9 = temp_v9 + temp_v4 * temp_v11;
-      temp_v12 = temp_v12 + 280.0f;
-      temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
-      libm_cosf();
-      temp_v23 = temp_v7 + temp_v2 * temp_v11;
-      temp_v25 = 0x50;
-      temp_v24 = 0;
-      temp_v21 = temp_v9;
-      temp_v22 = temp_v12;
-      temp_v26 = temp_v6;
-      FUN_00282228(&temp_v14);
-      temp_v1 = g_mapCamera;
-      *(int *)(g_mapCamera + 4) = *(int *)(g_mapCamera + 4) + 1;
-      *(unsigned int *)(temp_v1 + 8) = 0;
-      return;
-    }
-    break;
-  case 4:
-    temp_v0 = vectorPairTransitionStep();
-    if (temp_v0 != 0) {
-      temp_v14 = *(unsigned int *)(temp_v1 + 0x30);
-      uStack_b4 = *(unsigned int *)(temp_v1 + 0x34);
-      uStack_b0 = *(unsigned int *)(temp_v1 + 0x38);
-      temp_v13 = 15.0f;
-      temp_v15 = *(unsigned int *)(temp_v1 + 0x3c);
-      temp_v16 = *(unsigned int *)(temp_v1 + 0x40);
-      temp_v17 = *(unsigned int *)(temp_v1 + 0x44);
-      temp_v7 = *(float *)(g_lmapScene + 0x1c);
-      temp_v12 = *(float *)(g_lmapScene + 0x20);
-      temp_v11 = *(float *)(g_lmapScene + 0x24);
-      temp_v3 = (*(float *)(g_lmapScene + 0x4c) - 15.0f) * temp_v2;
-      libm_sinf();
-      temp_v7 = temp_v7 + temp_v3 * temp_v4;
-      temp_v19 = temp_v12 + temp_v10;
-      temp_v3 = (*(float *)(g_lmapScene + 0x4c) - temp_v13) * temp_v2;
-      libm_cosf();
-      temp_v20 = temp_v11 + temp_v3 * temp_v4;
-      temp_v4 = *(float *)(g_lmapScene + 0x1c);
-      temp_v11 = *(float *)(g_lmapScene + 0x20);
-      temp_v10 = *(float *)(g_lmapScene + 0x24);
-      temp_v3 = (*(float *)(g_lmapScene + 0x4c) - temp_v9) * temp_v2;
-      temp_v18 = temp_v7;
-      libm_sinf();
-      temp_v4 = temp_v4 + temp_v3 * temp_v8;
-      temp_v11 = temp_v11 + temp_v8;
-      temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v9) * temp_v2;
-      libm_cosf();
-      temp_v23 = temp_v10 + temp_v2 * temp_v8;
-      temp_v25 = 0xf;
-      temp_v24 = 1;
-      temp_v26 = 0x40000000;
-      temp_v21 = temp_v4;
-      temp_v22 = temp_v11;
-      FUN_00282228(&temp_v14);
-      temp_v1 = g_mapCamera;
-      *(int *)(g_mapCamera + 4) = *(int *)(g_mapCamera + 4) + 1;
-      *(unsigned int *)(temp_v1 + 8) = 0;
-      return;
-    }
-    break;
-  case 5:
-    temp_v0 = vectorPairTransitionStep();
-    if (temp_v0 != 0) {
-      temp_v14 = *(unsigned int *)(temp_v1 + 0x30);
-      uStack_b4 = *(unsigned int *)(temp_v1 + 0x34);
-      uStack_b0 = *(unsigned int *)(temp_v1 + 0x38);
-      temp_v13 = 18.0f;
-      temp_v15 = *(unsigned int *)(temp_v1 + 0x3c);
-      temp_v16 = *(unsigned int *)(temp_v1 + 0x40);
-      temp_v17 = *(unsigned int *)(temp_v1 + 0x44);
-      temp_v9 = *(float *)(g_lmapScene + 0x1c);
-      temp_v12 = *(float *)(g_lmapScene + 0x20);
-      temp_v11 = *(float *)(g_lmapScene + 0x24);
-      temp_v3 = (*(float *)(g_lmapScene + 0x4c) - 18.0f) * temp_v2;
-      libm_sinf();
-      temp_v9 = temp_v9 + temp_v3 * temp_v4;
-      temp_v12 = temp_v12 + temp_v10;
-      temp_v3 = (*(float *)(g_lmapScene + 0x4c) - temp_v13) * temp_v2;
-      libm_cosf();
-      temp_v20 = temp_v11 + temp_v3 * temp_v4;
-      temp_v10 = 165.0f;
-      temp_v4 = *(float *)(g_lmapScene + 0x24);
-      temp_v5 = *(unsigned long long *)(g_lmapScene + 0x1c);
-      temp_v3 = (*(float *)(g_lmapScene + 0x4c) - 165.0f) * temp_v2;
-      temp_v18 = temp_v9;
-      temp_v19 = temp_v12;
-      libm_sinf();
-      temp_v3 = (float)temp_v5 + temp_v3 * temp_v7;
-      temp_v8 = (float)((unsigned long long)temp_v5 >> 0x20) + temp_v8;
-      temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v10) * temp_v2;
-      libm_cosf();
-      temp_v23 = temp_v4 + temp_v2 * temp_v7;
-      temp_v25 = 0x69;
-      temp_v24 = 0;
-      temp_v21 = temp_v3;
-      temp_v22 = temp_v8;
-      temp_v26 = temp_v6;
-      FUN_00282228(&temp_v14);
-      temp_v1 = g_mapCamera;
-      *(int *)(g_mapCamera + 4) = *(int *)(g_mapCamera + 4) + 1;
-      *(unsigned int *)(temp_v1 + 8) = 0;
-      return;
-    }
-    break;
-  case 6:
-    temp_v1 = vectorPairTransitionStep();
-    if (temp_v1 != 0) {
-      temp_v1 = g_mapCamera;
-      *(int *)(g_mapCamera + 4) = *(int *)(g_mapCamera + 4) + 1;
-      *(unsigned int *)(temp_v1 + 8) = 0;
-      return;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

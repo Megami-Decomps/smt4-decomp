@@ -110,7 +110,7 @@ typedef struct CampCecRecv {
         /* 0x3EC */ u8 unk3EC[0x3EC];
         struct {
             /* 0x3EC */ u8 unk3ECBeforeFlag[0x3E8];
-            /* 0x7D4 */ u8 unk7D4;              /* FUN_002a5e7c is still owed for the unit */
+            /* 0x7D4 */ u8 unk7D4;              /* compendiumRegisterPartyDemon is still owed for the unit */
         } unitFlag;
         struct {
             /* 0x3EC */ CampCecReceivedRecord entries[10]; /* the DataStore's records (source 1) */

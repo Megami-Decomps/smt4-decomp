@@ -14,7 +14,7 @@ int qsort(...);
 int nkmBaseGetRecord(void);
 int asdMemFree(...);
 
-int FUN_002624c4(...);
+int fusionBuildPreviewResult(...);
 int halfwordListAppendGroup(...);
 int FUN_00269bc4(...);
 int gameRecordCopy(int, unsigned short [14]);
@@ -77,7 +77,7 @@ extern int *g_unite; /* 0x43dd68 */
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_002624c4. */
+/* Supplied declaration required: fusionBuildPreviewResult. */
 /* Supplied declaration required: halfwordListAppendGroup. */
 /* Supplied declaration required: FUN_00269bc4. */
 /* Supplied declaration required: gameRecordCopy. */
@@ -309,7 +309,7 @@ void FUN_001de340(int *param_1)
                          (param_1[param_1[0x16d] * 2 + 0x4e5] & 0xfffffffcU) | 1;
                     halfwordListAppendGroup(*param_1,1,temp_v5 + 0x34);
                   }
-                  temp_v5 = FUN_002624c4(*param_1,*(unsigned short *)(temp_v4 + 0x46),temp_v1,
+                  temp_v5 = fusionBuildPreviewResult(*param_1,*(unsigned short *)(temp_v4 + 0x46),temp_v1,
                                        param_1 + param_1[0x16d] * 2 + 0x4e4);
                   if (temp_v5 != 0) {
                     *temp_v29 = param_1[0x16d] + 1;
@@ -429,7 +429,7 @@ LAB_001decc4:
                       piVar9[temp_v6 * 2 + 0x4e4] = piVar9[temp_v6 * 2 + 0x4e4];
                       piVar9[temp_v6 * 2 + 0x4e5] = (piVar9[temp_v6 * 2 + 0x4e5] & 0xfffffffcU) | 1;
                     }
-                    temp_v6 = FUN_002624c4(*piVar9,temp_v21,temp_v13,piVar9 + piVar9[0x16d] * 2 + 0x4e4)
+                    temp_v6 = fusionBuildPreviewResult(*piVar9,temp_v21,temp_v13,piVar9 + piVar9[0x16d] * 2 + 0x4e4)
                     ;
                     if (temp_v6 != 0) {
                       *temp_v40 = piVar9[0x16d] + 1;
@@ -481,7 +481,7 @@ LAB_001dedf4:
                   temp_v6 = *temp_v29;
                   param_1[temp_v6 * 2 + 0x4e4] = temp_v14;
                   param_1[temp_v6 * 2 + 0x4e5] = (temp_v13 & 0xfffffffc) | 1;
-                  temp_v2 = FUN_002624c4(*param_1,*(unsigned short *)(temp_v2 + 0x46),
+                  temp_v2 = fusionBuildPreviewResult(*param_1,*(unsigned short *)(temp_v2 + 0x46),
                                        *(unsigned short *)(temp_v5 + 0x46),param_1 + *temp_v29 * 2 + 0x4e4
                                       );
                   if (temp_v2 != 0) {

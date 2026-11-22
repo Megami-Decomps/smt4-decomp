@@ -12,7 +12,7 @@ int asdOperatorNew(...);
 int nn_os_LightEvent_Wait(...);
 int svcWaitSynchronizationN(...);
 int asdMemFree(...);
-int svcReleaseSemaphore(...);
+int svcReleaseSemaphore(...); // declcheck: local (raw draft: its svcWaitSynchronizationN calls do not fit sys/HandleWait.h)
 int resultHandleFailure(...);
 int asdFatalError(...);
 int FUN_002c618c(...);

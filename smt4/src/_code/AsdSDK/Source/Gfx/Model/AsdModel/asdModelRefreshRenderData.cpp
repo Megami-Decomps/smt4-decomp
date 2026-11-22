@@ -11,7 +11,7 @@ void FUN_0015b430(void *binding, u32 value);
 void FUN_0015ab84(ModelRefreshState *state, s32 index, u32 material);
 void shaderEmitLightVectors(ModelRefreshState *state);
 void FUN_0015a8b4(ModelRefreshState *state, s32 index, u32 node);
-void FUN_0015a714(ModelRefreshState *state);
+void materialSubmitBufferColor(ModelRefreshState *state);
 
 // Refresh changed material/node bindings and emit the aggregate material color command.
 void asdModelRefreshRenderData(ModelRefreshState *state)
@@ -55,7 +55,7 @@ void asdModelRefreshRenderData(ModelRefreshState *state)
             state->textureDirty = 1;
         }
         if (state->textureDirty) {
-            FUN_0015a714(state);
+            materialSubmitBufferColor(state);
         }
     }
 }

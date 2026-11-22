@@ -1,5 +1,3 @@
-/* NON_MATCHING: 29 lines: retail reaches the status block through its own base (duck + 0x1c, then offsets 0x15,
- * 0x17, 0, 4) where armcc folds it into the duck base. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdDebug.h"
@@ -20,18 +18,14 @@ struct SoundAuxiliarySlotView {
     u8 volume;
     u8 unk3a[2];
 };
-
-// The initializer accesses the duck state and the immediately following status
-// as one contiguous control block; the canonical component layouts are reused.
-struct SoundControlView {
-    AsdSndDuck duck;
-    AsdSndStatus status;
-};
 }
 
 extern "C" {
 extern AsdSoundSystem g_asdSound;
-extern SoundControlView g_asdSoundDuck;
+/* AsdSoundSystem.cpp's duck state and the sound status block after it. The file defines them: armcc addresses the
+ * status from the duck's pool word (duck + 0x1c), as retail does, only for data defined in the same file. */
+AsdSndDuck g_asdSoundDuck;
+AsdSndStatus g_asdSoundStatus;
 s32 FUN_0011be58();
 s32 dspComponentLoadEmbedded();
 s32 dspsndInitializeManagers();
@@ -45,7 +39,7 @@ void* asdMemoryAlloc(s32 heap, s32 alignment, s32 option, u32 size, s32 fromFron
 static __inline void duckSetup(f32 level, s32 enable, u32 holdFrames, u32 unk08, u32 fadeInFrames, u32 fadeOutFrames)
 {
     if (enable != 0) {
-        AsdSndDuck *duck = &g_asdSoundDuck.duck;
+        AsdSndDuck *duck = &g_asdSoundDuck;
         duck->flags |= 1;
         duck->level = level;
         if (duck->level <= 0.0f) {
@@ -58,20 +52,20 @@ static __inline void duckSetup(f32 level, s32 enable, u32 holdFrames, u32 unk08,
         duck->fadeInFrames = fadeInFrames;
         duck->fadeOutFrames = fadeOutFrames;
         duck->unk08 = unk08;
-        if (g_asdSoundDuck.status.hasStream == 0) {
+        if (g_asdSoundStatus.hasStream == 0) {
             return;
         }
         duck->active = 1;
     } else {
-        g_asdSoundDuck.duck.holdFrames = 0;
-        g_asdSoundDuck.duck.level = 0.0f;
-        g_asdSoundDuck.duck.fadeInFrames = 0;
-        g_asdSoundDuck.duck.fadeOutFrames = 0;
-        g_asdSoundDuck.duck.unk08 = 0;
-        g_asdSoundDuck.duck.timer = 0;
-        g_asdSoundDuck.duck.fading = 0;
-        g_asdSoundDuck.duck.flags = 0;
-        g_asdSoundDuck.duck.active = 0;
+        g_asdSoundDuck.holdFrames = 0;
+        g_asdSoundDuck.level = 0.0f;
+        g_asdSoundDuck.fadeInFrames = 0;
+        g_asdSoundDuck.fadeOutFrames = 0;
+        g_asdSoundDuck.unk08 = 0;
+        g_asdSoundDuck.timer = 0;
+        g_asdSoundDuck.fading = 0;
+        g_asdSoundDuck.flags = 0;
+        g_asdSoundDuck.active = 0;
     }
 }
 
@@ -141,10 +135,10 @@ void asdSoundInitialize(s32 auxiliaryMode)
     sound->sound3d.enabled = 0;
     sound->sound3d.volume = ASD_SND_VOLUME_DEFAULT;
     duckSetup(0.0f, 0, 0, 0, 0, 0);
-    g_asdSoundDuck.status.unk15 = 0;
-    g_asdSoundDuck.status.hasStream = 0;
-    g_asdSoundDuck.status.objects = NULL;
-    g_asdSoundDuck.status.objectCount = 0;
+    g_asdSoundStatus.unk15 = 0;
+    g_asdSoundStatus.hasStream = 0;
+    g_asdSoundStatus.objects = NULL;
+    g_asdSoundStatus.objectCount = 0;
     sound->archiveLoaded = 0;
 }
 }

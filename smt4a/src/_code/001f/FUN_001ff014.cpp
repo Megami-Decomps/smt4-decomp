@@ -12,7 +12,7 @@ int qsort(...);
 int nkmBaseGetRecord(void);
 int slotRecordFindById(...);
 int partyFindSlotById(int);
-int FUN_002a5e7c(...);
+int compendiumRegisterPartyDemon(...);
 int arrayContainsU16(...);
 int unitRecordBuildFromSave(unsigned int, unsigned char [98]);
 int findSkillMetadataById(void);
@@ -62,7 +62,7 @@ extern unsigned short recordGetScaledMaximum(int);
 extern int gameGetSlotRecord(void);
 /* Supplied declaration required: partyFindSlotById. */
 extern int compendiumEntryIsRegistered(unsigned int);
-/* Supplied declaration required: FUN_002a5e7c. */
+/* Supplied declaration required: compendiumRegisterPartyDemon. */
 /* Supplied declaration required: saveMarkIdListSeen. */
 /* Supplied declaration required: arrayContainsU16. */
 /* Supplied declaration required: unitRecordBuildFromSave. */
@@ -376,7 +376,7 @@ unsigned char FUN_001ff014(int param_1)
   *(unsigned short *)(temp_v4 + 0x2a) = temp_v0;
   *(unsigned short *)(temp_v4 + 0x2c) = *(unsigned short *)(temp_v4 + 0x10);
   if (temp_v1 == 0) {
-    FUN_002a5e7c(*(unsigned short *)(temp_v4 + 0x62));
+    compendiumRegisterPartyDemon(*(unsigned short *)(temp_v4 + 0x62));
   }
   gameCounterAddSaturating(0x26,1);
   if (temp_v10 != 0) {

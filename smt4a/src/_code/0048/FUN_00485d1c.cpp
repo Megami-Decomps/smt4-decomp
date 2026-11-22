@@ -16,7 +16,7 @@ void FUN_0031879c(void);
 u32 naviMainConditionsHold(NavigationPollingWork *work);
 u32 FUN_00488ce8(NavigationPollingWork *work);
 void naviMainSetValuePair(void *scene, const NavigationPoint *position);
-void FUN_00489480(NavigationPollingWork *work);
+void naviInputHandleMapToggle(NavigationPollingWork *work);
 void FUN_0048981c(NavigationPollingWork *work);
 
 u32 FUN_00485d1c(NavigationPollingWork *work)
@@ -45,7 +45,7 @@ u32 FUN_00485d1c(NavigationPollingWork *work)
                     naviMainSetValuePair(work->scene, &point);
                 }
             }
-            FUN_00489480(work);
+            naviInputHandleMapToggle(work);
             FUN_0048981c(work);
         }
     }

@@ -24,7 +24,7 @@ int statusCommitSelectedSkills(int);
 int scrScriptProcessCreate(...);
 int scrScriptProcessStartEntry(...);
 int FUN_00285774(void);
-int FUN_002a5e7c(...);
+int compendiumRegisterPartyDemon(...);
 int statusDownRestartTransition(void);
 int libc_strcpy(unsigned char [32], unsigned int);
 int FUN_002f01c4(int);
@@ -86,7 +86,7 @@ extern int gameGlobalsIsActiveStateFour(void);
 /* Supplied declaration required: FUN_00285774. */
 extern int compendiumEntryIsRegistered(void);
 extern int messageGetChoiceResult(void);
-/* Supplied declaration required: FUN_002a5e7c. */
+/* Supplied declaration required: compendiumRegisterPartyDemon. */
 /* Supplied declaration required: statusDownRestartTransition. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002f01c4. */
@@ -300,7 +300,7 @@ LAB_002f56d4:
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x43ac),4);
     if (*(char *)(temp_v20 + 0xd4) == '\0') {
       if (*(char *)(param_1 + 0x7f2c) != '\0') {
-        FUN_002a5e7c(*(unsigned short *)(temp_v2 + 0x62));
+        compendiumRegisterPartyDemon(*(unsigned short *)(temp_v2 + 0x62));
         *(unsigned char *)(param_1 + 0x7f2c) = 0;
       }
       *(unsigned int *)(param_1 + 0x436c) = 0xb;

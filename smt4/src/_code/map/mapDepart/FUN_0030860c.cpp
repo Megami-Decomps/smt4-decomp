@@ -88,7 +88,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: mapDepartAdvanceCameraSequence. */
 /* Supplied declaration required: FUN_0021b0f0. */
 /* Supplied declaration required: FUN_0021b2ec. */
-/* Supplied declaration required: FUN_00282228. */
+/* Supplied declaration required: vectorPairTransitionStart. */
 /* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */

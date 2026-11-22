@@ -5,7 +5,7 @@
 extern "C" {
 
 int vectorPairTransitionStep(void);
-int FUN_00282228(unsigned int *);
+int vectorPairTransitionStart(unsigned int *);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "libm_sinf" has "C" linkage)
 int libm_sinf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
@@ -31,7 +31,7 @@ extern float DAT_00447500; /* 0x447500 */
 extern int g_lmapScene; /* 0x447e88 */
 
 /* Supplied declaration required: vectorPairTransitionStep. */
-/* Supplied declaration required: FUN_00282228. */
+/* Supplied declaration required: vectorPairTransitionStart. */
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
 
@@ -114,7 +114,7 @@ void FUN_001f87d4(void)
     temp_v22 = temp_v5;
     temp_v23 = temp_v13;
     temp_v27 = temp_v11;
-    FUN_00282228(&temp_v15);
+    vectorPairTransitionStart(&temp_v15);
     temp_v1 = g_mapCamera;
     *(int *)(g_mapCamera + 4) = *(int *)(g_mapCamera + 4) + 1;
     *(unsigned int *)(temp_v1 + 8) = 0;
@@ -161,7 +161,7 @@ void FUN_001f87d4(void)
       temp_v22 = temp_v14;
       temp_v23 = temp_v7;
       temp_v27 = temp_v11;
-      FUN_00282228(&temp_v15);
+      vectorPairTransitionStart(&temp_v15);
       temp_v1 = g_mapCamera;
       *(unsigned char *)(g_mapCamera + 0x21c) = 1;
       piVar2 = (int *)(temp_v1 + 4);
@@ -231,7 +231,7 @@ void FUN_001f87d4(void)
         temp_v22 = temp_v14;
         temp_v23 = temp_v7;
         temp_v27 = temp_v11;
-        FUN_00282228(&temp_v15);
+        vectorPairTransitionStart(&temp_v15);
         temp_v1 = g_mapCamera;
         *(int *)(g_mapCamera + 4) = *(int *)(g_mapCamera + 4) + 1;
         *(unsigned int *)(temp_v1 + 8) = 0;
@@ -269,7 +269,7 @@ void FUN_001f87d4(void)
       temp_v23 = temp_v17;
       temp_v24 = temp_v18;
       temp_v27 = temp_v11;
-      FUN_00282228(&temp_v15);
+      vectorPairTransitionStart(&temp_v15);
       vectorPairTransitionStep();
       temp_v1 = g_mapCamera;
       *(int *)(g_mapCamera + 4) = *(int *)(g_mapCamera + 4) + 1;
@@ -302,7 +302,7 @@ void FUN_001f87d4(void)
       temp_v26 = 600;
       temp_v25 = 1;
       temp_v27 = 0x40000000;
-      FUN_00282228(&temp_v15);
+      vectorPairTransitionStart(&temp_v15);
       vectorPairTransitionStep();
       return;
     }
