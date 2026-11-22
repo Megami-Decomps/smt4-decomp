@@ -13,7 +13,7 @@ extern "C" {
 extern MenuDrawPoint g_effMenuDrawOffset;
 
 u32 renderCtxPackPassFlags(u32 value, bool enabled);
-void FUN_0021025c(u32 color0, u32 color1, u32 color2, u32 color3,
+void effectDrawRectOutline(u32 color0, u32 color1, u32 color2, u32 color3,
                   f32 x, f32 y, f32 width, f32 height, f32 depth, f32 lineWidth);
 }
 
@@ -44,7 +44,7 @@ extern "C" void menuDrawRectangle(s32 x, s32 y, s32 width, s32 height,
     u32 outR = outline.rgba.r, outG = outline.rgba.g, outB = outline.rgba.b, outA = outline.rgba.a;
     if (outA != 0) {
         u32 color = packMenuColor(outR, outG, outB, outA);
-        FUN_0021025c(color, color, color, color,
+        effectDrawRectOutline(color, color, color, color,
                      static_cast<f32>(adjustedX), static_cast<f32>(adjustedY),
                      static_cast<f32>(width), static_cast<f32>(height), 0.0f, 1.0f);
     }

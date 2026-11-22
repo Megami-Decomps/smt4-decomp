@@ -28,7 +28,7 @@ extern "C" {
 
 bool FUN_004212b8(void *animation);
 f32 animationGetModeChannelValue(void *animation);
-void FUN_004fbdd4(s32 a, s32 b, s32 param, f32 red, f32 green, f32 blue);
+void btlReflectCreateTint(s32 a, s32 b, s32 param, f32 red, f32 green, f32 blue);
 void actionSequenceTriggerRangeAnimation(BtlAttackAnim *anim, s16 frame, s32 mode);
 void FUN_00420fc0(void *animation);
 void btlUpdateAttackAnimation(BtlAttackAnim *anim);
@@ -40,7 +40,7 @@ void FUN_004fa15c(BtlAttackAnim *anim)
     if (!FUN_004212b8(anim->animation)) {
         s32 frame = (s32)animationGetModeChannelValue(anim->animation);
         if (anim->key->frame == frame) {
-            FUN_004fbdd4(0, 0, anim->key->param, anim->color->red * 0.01f,
+            btlReflectCreateTint(0, 0, anim->key->param, anim->color->red * 0.01f,
                          anim->color->green * 0.01f, anim->color->blue * 0.01f);
         }
         actionSequenceTriggerRangeAnimation(anim, frame, 1);

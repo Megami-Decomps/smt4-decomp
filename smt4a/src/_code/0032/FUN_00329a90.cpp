@@ -37,42 +37,39 @@ u32 FUN_00329a90(void)
     if (depart->state >= 18) {
         return 0;
     }
-    {
-        renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
-        RenderCtxA *context = g_renderCtx;
-        s32 preset = renderCtxPackPassFlags(1, 0);
-        renderCtxPushA(context, preset);
-        s32 state = depart->state;
-        if (state == 5 || state == 6) {
-            efctSetSpeed(1.0f);
-            gxResetColorQuadToWhite();
-            FUN_00355428();
-        } else if (state == 14) {
-            efctSetSpeed(1.0f);
-            gxResetColorQuadToWhite();
-            depart = g_mapDepart;
-            f32 offset;
-            if (depart->slide < 5) {
-                offset = 500.0f - (f32)(depart->slide * 100);
-            } else {
-                offset = 0.0f;
-            }
-            texDrawCompositeSprite(2, 19, 30, (s32)offset, 0, 11);
-            TextureTableEntryIV *panel = asdTMTexTableEntryAt(19, 0x1105);
-            asdTMTexTableEntryAt(19, 0x110d);
-            TextureTableEntryIV *counter = asdTMTexTableEntryAt(19, 0x1101);
-            TextureTableEntryIV *frame = asdTMTexTableEntryAt(19, 0x1100);
-            asdTMTexTableEntryAt(19, 0x1104);
-            asdTMTexTableEntryAt(19, 0x1102);
-            asdTMTexTableEntryAt(19, 0x1103);
-            texDrawTableEntryAtStoredOrigin(2, 19, 0x1242, (s32)((f32)panel->x + offset + (f32)frame->x), panel->y + frame->y, 11);
-            char text[32];
-            sprintf(text, "%d\201@\202l\202\201\202\203\202\203\202\201", depart->value);
-            textDrawString((f32)panel->x + offset + (f32)counter->x, (f32)(panel->y + counter->y), 0.0f, 2,
-                         1.0f, 0xffffffff, 1.0f, text);
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
+    RenderCtxA *context = g_renderCtx;
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
+    s32 state = depart->state;
+    if (state == 5 || state == 6) {
+        efctSetSpeed(1.0f);
+        gxResetColorQuadToWhite();
+        FUN_00355428();
+    } else if (state == 14) {
+        efctSetSpeed(1.0f);
+        gxResetColorQuadToWhite();
+        depart = g_mapDepart;
+        f32 offset;
+        if (depart->slide < 5) {
+            offset = 500.0f - (f32)(depart->slide * 100);
+        } else {
+            offset = 0.0f;
         }
-        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
+        texDrawCompositeSprite(2, 19, 30, (s32)offset, 0, 11);
+        TextureTableEntryIV *panel = asdTMTexTableEntryAt(19, 0x1105);
+        asdTMTexTableEntryAt(19, 0x110d);
+        TextureTableEntryIV *counter = asdTMTexTableEntryAt(19, 0x1101);
+        TextureTableEntryIV *frame = asdTMTexTableEntryAt(19, 0x1100);
+        asdTMTexTableEntryAt(19, 0x1104);
+        asdTMTexTableEntryAt(19, 0x1102);
+        asdTMTexTableEntryAt(19, 0x1103);
+        texDrawTableEntryAtStoredOrigin(2, 19, 0x1242, (s32)((f32)panel->x + offset + (f32)frame->x), panel->y + frame->y, 11);
+        char text[32];
+        sprintf(text, "%d\201@\202l\202\201\202\203\202\203\202\201", depart->value);
+        textDrawString((f32)panel->x + offset + (f32)counter->x, (f32)(panel->y + counter->y), 0.0f, 2,
+                     1.0f, 0xffffffff, 1.0f, text);
     }
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     return 0;
 }
 

@@ -24,7 +24,7 @@ void FUN_0027e760(BattleManager *battle);
 int scrGetCommandFrame(void);
 u32 scrGetArg(int index);
 void FUN_003c7c84(BattleManager *battle, BattleUnit *unit);
-void FUN_003c7f20(BattleManager *battle, BattleUnit *unit);
+void btlStageModelRelease(BattleManager *battle, BattleUnit *unit);
 
 /* Script command: moves a battle unit to the stage position given by script arguments 0 and 1 (returns whether phase 4 is active while one is busy). */
 bool scrComm_Battle_SetStagePosition(void)
@@ -36,7 +36,7 @@ bool scrComm_Battle_SetStagePosition(void)
     if (scrGetCommandFrame() != 0) {
         return DAT_004398d4->phase == 4;
     }
-    FUN_003c7f20(DAT_004398d4, unit);
+    btlStageModelRelease(DAT_004398d4, unit);
     unit->stagePosition.x = x;
     unit->stagePosition.y = y;
     FUN_003c7c84(DAT_004398d4, unit);

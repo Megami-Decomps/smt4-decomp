@@ -1,5 +1,6 @@
 #pragma once
 #include "common.h"
+#include "nw/math/MTX33.h"
 
 /* Functions in the 0x00180000 code block whose subsystem is not known yet; each declaration matches its definition. */
 struct FileHandle;
@@ -20,5 +21,9 @@ FileHandle * fileHandleClose(FileHandle *file);
 void asdMdlNodeGetWorldPosition(Holder *object, u32 unused, u32 *out);
 
 void FUN_001882fc(Owner *owner);
+
+/* Receives one quad vertex (packed colour, position, texture coordinate) from the sprite builders; the release
+ * build forwards it to a debug hook that was not linked. */
+void debugQuadVertex(u32 color, nw::math::VEC3 position, f32 u, f32 v);
 
 } /* extern "C" */

@@ -1,4 +1,4 @@
-/* NON_MATCHING: 176 lines: retail keeps the record lookup's result in its own register (movne), tests the swapped count range with the swap's compare, compares the table index against the count the other way round, keeps the candidate count unextended until it is tested, and splits the fourth race test from the other three; the frame is 8 bytes larger. */
+/* NON_MATCHING: 82 lines: retail swaps the count range in place (movlt pair, the drawn count zeroed ahead of it), keeps the record lookup's result in its own register (movne) and tests the swapped range with the swap's compare; the candidate list (the helper smt4a FUN_003774e8 shares) matches but for its frame offsets. */
 #include "common.h"
 #include "addon/AocSystem.h"
 #include "gamedata/DataTable.h"
@@ -46,9 +46,37 @@ static __inline RewardDrawRecord *rewardDrawRecord(u32 index)
         return record;
     void *table = dataTableGet(0x21, 0);
     RewardDrawRecord *records = (RewardDrawRecord *)dataTableGetEntries(table);
-    if (index < dataTableGetCount(table))
-        return &records[index];
-    return NULL;
+    u32 count = dataTableGetCount(table);
+    if (index >= count)
+        return NULL;
+    return &records[index];
+}
+
+/* Lists the ids of the candidates within draw record `index`'s level range and of its races; returns how many. */
+static __inline s16 rewardDrawCandidates(u32 index, s16 *list)
+{
+    RewardDrawRecord *range = rewardDrawRecord(index);
+    u8 race0 = range->races[0];
+    u8 levelLow = range->levelA;
+    u8 levelHigh = range->levelB;
+    u8 race1 = range->races[1];
+    u8 race2 = range->races[2];
+    u8 race3 = range->races[3];
+    if (levelLow > levelHigh) {
+        u8 swap = levelLow;
+        levelLow = levelHigh;
+        levelHigh = swap;
+    }
+    s32 count = 0;
+    for (u32 id = 0x3B7; id <= 0x47E; id++) {
+        RewardCandidate *candidate = aocRecordLookup83(id);
+        if (candidate == NULL || candidate->level < levelLow || candidate->level > levelHigh)
+            continue;
+        u8 race = candidate->race;
+        if (race == race0 || race == race1 || race == race2 || race == race3)
+            list[count++] = candidate->id;
+    }
+    return count;
 }
 
 /* Draws the rewards of draw record `index`: first the fixed ones by their chances, then random candidates
@@ -91,27 +119,7 @@ u32 rewardDrawFromRecord(u32 index, s32 *ids, u8 *fresh, s32 *drawCount)
                     return percent;
             }
 
-            RewardDrawRecord *range = rewardDrawRecord(index);
-            u8 race0 = range->races[0];
-            u8 levelLow = range->levelA;
-            u8 levelHigh = range->levelB;
-            u8 race1 = range->races[1];
-            u8 race2 = range->races[2];
-            u8 race3 = range->races[3];
-            if (levelLow > levelHigh) {
-                u8 swap = levelLow;
-                levelLow = levelHigh;
-                levelHigh = swap;
-            }
-            s16 candidateCount = 0;
-            for (u32 id = 0x3B7; id <= 0x47E; id++) {
-                RewardCandidate *candidate = aocRecordLookup83(id);
-                if (candidate == NULL || candidate->level < levelLow || candidate->level > levelHigh)
-                    continue;
-                u8 race = candidate->race;
-                if (race == race0 || race == race1 || race == race2 || race == race3)
-                    candidates[candidateCount++] = candidate->id;
-            }
+            s16 candidateCount = rewardDrawCandidates(index, candidates);
             if (candidateCount != 0) {
                 for (; drawn < count; drawn++) {
                     s16 id = candidates[randNextInRange((u16)(candidateCount - 1))];

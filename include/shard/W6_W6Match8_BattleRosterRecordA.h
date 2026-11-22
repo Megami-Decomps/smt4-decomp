@@ -60,6 +60,28 @@ struct BattleRosterRecordA {
             /* 0x000 */ u8 unk000[0x104];
             /* 0x104 */ s32 group;
         } reflection;
+        struct {                              /* what removing the record's combatant resets */
+            /* 0x000 */ u8 unk000[0x48];
+            /* 0x048 */ u32 task;
+            /* 0x04C */ u8 unk04C[4];
+            /* 0x050 */ u32 status;           /* bit 0x200000: `holder` is owned */
+            /* 0x054 */ u8 unk054[4];
+            /* 0x058 */ u64 flags;            /* cleared as one 64-bit mask */
+            /* 0x060 */ u16 labelFlags;
+            /* 0x062 */ u8 unk062[2];
+            /* 0x064 */ u32 pendingValue;
+            /* 0x068 */ s16 combatantIndex;
+            /* 0x06A */ u8 unk06A[2];
+            /* 0x06C */ u32 work[12];
+            /* 0x09C */ u32 stateFlags;
+            /* 0x0A0 */ u8 shown;
+            /* 0x0A1 */ u8 unk0A1[0x63];
+            /* 0x104 */ s32 slot;
+            /* 0x108 */ s32 nextSlot;
+            /* 0x10C */ u32 groupWork[7];
+            /* 0x128 */ u8 workState[0x94];   /* FUN_0041a7dc resets it */
+            /* 0x1BC */ void **holder;        /* an object reference, deleted with the record's combatant */
+        } removal;
         struct {
             /* 0x000 */ u8 unk000[0x1B0];
             /* 0x1B0 */ f32 x;
@@ -68,6 +90,9 @@ struct BattleRosterRecordA {
     };
 };
 typedef char BattleRosterRecordASizeCheck[sizeof(BattleRosterRecordA) == 0x1D0 ? 1 : -1];
+typedef char BattleRosterRecordARemovalCheck[offsetof(BattleRosterRecordA, removal.combatantIndex) == 0x68 &&
+    offsetof(BattleRosterRecordA, removal.stateFlags) == 0x9C && offsetof(BattleRosterRecordA, removal.slot) == 0x104 &&
+    offsetof(BattleRosterRecordA, removal.workState) == 0x128 && offsetof(BattleRosterRecordA, removal.holder) == 0x1BC ? 1 : -1];
 typedef char BattleRosterRecordALiveFlagsCheck[offsetof(BattleRosterRecordA, liveFlags.unk58) == 0x58 ? 1 : -1];
 typedef char BattleRosterRecordALiveFlags10CCheck[offsetof(BattleRosterRecordA, liveFlags.unk10C) == 0x10C ? 1 : -1];
 typedef char BattleRosterRecordAReflectionGroupOffsetCheck[

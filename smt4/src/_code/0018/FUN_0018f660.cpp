@@ -24,7 +24,7 @@ int statusBustUpPortraitAcquire(int, int);
 int playerModelLoadPart(...);
 int FUN_002945a4(...);
 int playerModelListCreate(void);
-int FUN_00294834(int, int, int, int);
+int playerLightsSetup(int, int, int, int);
 int FUN_00294d6c(void);
 int statusCameraSelectPreset(int);
 int resourceReleaseReference(void);
@@ -93,7 +93,7 @@ extern unsigned int eventResourceCacheAcquire(int, unsigned int);
 /* Supplied declaration required: FUN_002945a4. */
 /* Supplied declaration required: playerModelListCreate. */
 extern unsigned int *_ZN9Obj4206e8C1Ev(void);
-/* Supplied declaration required: FUN_00294834. */
+/* Supplied declaration required: playerLightsSetup. */
 /* Supplied declaration required: FUN_00294d6c. */
 /* Supplied declaration required: statusCameraSelectPreset. */
 /* Supplied declaration required: resourceReleaseReference. */
@@ -317,7 +317,7 @@ unsigned int FUN_0018f660(void)
         temp_v18 = 0x1e;
         temp_v16 = 0x1e;
         temp_v17 = 0x1e;
-        FUN_00294834(200,200,200,0x82);
+        playerLightsSetup(200,200,200,0x82);
       }
       pcVar4[0x1e9c] = -0x5a;
       pcVar4[0x1e9d] = -0x65;

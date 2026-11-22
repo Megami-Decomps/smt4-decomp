@@ -14,7 +14,7 @@ struct RenameTextBuffers {
     char message[100];
 };
 extern "C" {
-s32 FUN_002f2aa8(KeyboardState *keyboard);
+s32 effMenuTextEntryStep(KeyboardState *keyboard);
 void namedObjectFormatFullName(NamedObject *object, char *destination);
 s32 namedObjectFormatName(NamedObject *object, char *destination);
 void asdMemoryFreeLocked(void *allocation);
@@ -33,7 +33,7 @@ u32 FUN_00219d20()
         node->initialKind = 0xb6;
         node->unk04 = 100;
     } else {
-        FUN_002f2aa8(reinterpret_cast<KeyboardState *>(g_effectEditor.label));
+        effMenuTextEntryStep(reinterpret_cast<KeyboardState *>(g_effectEditor.label));
         namedObjectFormatFullName(reinterpret_cast<NamedObject *>(g_effectEditor.label), text.fullName);
         namedObjectFormatName(reinterpret_cast<NamedObject *>(g_effectEditor.label), text.shortName);
         text.result = reinterpret_cast<KeyboardState *>(g_effectEditor.label)->mode;

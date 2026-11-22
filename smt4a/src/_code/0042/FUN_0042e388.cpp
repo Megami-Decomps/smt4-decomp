@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses different result-bit tests, cached-header copy registers and lock-pointer scheduling. */
+/* NON_MATCHING: 161 lines. The scoped lock, the failure-first arms and the outbox kind tested first give retail's blocks; retail still tests the remove result with `ands #0x80000000; bpl`, keeps 1 (the update flags) in fp and the message bytes in sl, rematerialises the key size per call, and leaves the failed commit write its own epilogue. */
 #include "nn/cec/MessageBoxCache.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
 #include "nn/Result.h"
@@ -28,44 +28,23 @@ static __inline u32 cecMessageBoxGetMessageBytes(MessageBox *box, s32 kind, cons
 extern "C" u32 FUN_0042e388(MessageBox *box, s32 kind, const CecMessageKey *key, s32 commit)
 {
     CecMessageBoxCacheView *work = reinterpret_cast<CecMessageBoxCacheView *>(box);
-    nn_os_CriticalSection_Enter(&g_asdCecMessageBoxCriticalSection);
+    ScopedCriticalLock lock(g_asdCecMessageBoxCriticalSection);
     if (box->id == 0) {
-        nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
         return 0xc8810bea;
     }
-    u32 result;
-    if (kind != 1) {
-        nn::Result messageBytes = cecMessageBoxGetMessageBytes(box, kind, key);
-        result = box->vtbl->remove(box, box->id, 6, kind, key, sizeof(*key));
-        if (nnResultIsSuccess(result)) {
+    if (kind == 1) {
+        u32 messageBytes = cecMessageBoxGetMessageBytes(box, kind, key);
+        s32 result = box->vtbl->remove(box, box->id, 7, kind, key, sizeof(*key));
+        if (nnResultIsFailure(result)) {
             if (commit != 0) {
-                result = nn_cec_CTR_MessageBox_WriteBoxInfo(box, 0, &work->inbox.header, work->inbox.ids);
-                if (nnResultIsFailure(result)) {
-                    nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
-                    return result;
-                }
+                nn_cec_CTR_MessageBox_WriteBoxInfo(box, 1, &work->outbox.header, work->outbox.ids);
             } else {
-                work->beginInboxUpdate();
-                work->pendingInbox.storage.totalBytes -= messageBytes;
-                --work->pendingInbox.count;
+                work->beginOutboxUpdate();
             }
-            nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
-            return result;
-        }
-        if (commit == 0) {
-            work->beginInboxUpdate();
-            nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
-            return result;
-        }
-        nn_cec_CTR_MessageBox_WriteBoxInfo(box, 0, &work->inbox.header, work->inbox.ids);
-    } else {
-        nn::Result messageBytes = cecMessageBoxGetMessageBytes(box, 1, key);
-        result = box->vtbl->remove(box, box->id, 7, 1, key, sizeof(*key));
-        if (nnResultIsSuccess(result)) {
+        } else {
             if (commit != 0) {
                 result = nn_cec_CTR_MessageBox_WriteBoxInfo(box, 1, &work->outbox.header, work->outbox.ids);
                 if (nnResultIsFailure(result)) {
-                    nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
                     return result;
                 }
             } else {
@@ -73,20 +52,32 @@ extern "C" u32 FUN_0042e388(MessageBox *box, s32 kind, const CecMessageKey *key,
                 work->pendingOutbox.storage.totalBytes -= messageBytes;
                 --work->pendingOutbox.count;
             }
-            u32 removed = box->vtbl->closeBox(box, box->id, key, sizeof(*key), 3);
-            if (nnResultIsSuccess(removed)) {
+            nn::Result closed = box->vtbl->closeBox(box, box->id, key, sizeof(*key), 3);
+            if (nnResultIsSuccess(closed)) {
                 nn_cec_CTR_MessageBox_ReadOutBoxIndex(box);
             }
-            nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
-            return result;
         }
-        if (commit == 0) {
-            work->beginOutboxUpdate();
-            nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
-            return result;
-        }
-        nn_cec_CTR_MessageBox_WriteBoxInfo(box, 1, &work->outbox.header, work->outbox.ids);
+        return result;
     }
-    nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
+    u32 messageBytes = cecMessageBoxGetMessageBytes(box, kind, key);
+    s32 result = box->vtbl->remove(box, box->id, 6, kind, key, sizeof(*key));
+    if (nnResultIsFailure(result)) {
+        if (commit != 0) {
+            nn_cec_CTR_MessageBox_WriteBoxInfo(box, 0, &work->inbox.header, work->inbox.ids);
+        } else {
+            work->beginInboxUpdate();
+        }
+    } else {
+        if (commit != 0) {
+            result = nn_cec_CTR_MessageBox_WriteBoxInfo(box, 0, &work->inbox.header, work->inbox.ids);
+            if (nnResultIsFailure(result)) {
+                return result;
+            }
+        } else {
+            work->beginInboxUpdate();
+            work->pendingInbox.storage.totalBytes -= messageBytes;
+            --work->pendingInbox.count;
+        }
+    }
     return result;
 }

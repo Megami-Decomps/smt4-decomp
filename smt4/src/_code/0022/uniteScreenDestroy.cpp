@@ -42,7 +42,7 @@ s32 svcWaitSynchronizationN(s32 *signalled, const s32 *handles, s32 count, s32 w
 void gameCounterAddSaturating(s32 counter, s32 amount);
 s32 lmapSceneGetScript(void);
 s32 lmapMainIsRunning(void);
-void FUN_00294834(s32 r0, s32 g0, s32 b0, s32 r1, s32 g1, s32 b1, s32 r2, s32 g2, s32 b2, s32 r3, s32 g3, s32 b3,
+void playerLightsSetup(s32 r0, s32 g0, s32 b0, s32 r1, s32 g1, s32 b1, s32 r2, s32 g2, s32 b2, s32 r3, s32 g3, s32 b3,
                   f32 f0, f32 f1, f32 f2, f32 f3, f32 f4, f32 f5, f32 f6, f32 f7, f32 f8);
 void asdModelSlotRelease(s32 slot);
 void modelRemoveFromSlotList(s32 object, s32 arg);
@@ -86,7 +86,7 @@ void uniteScreenDestroy(void)
 
     gameCounterAddSaturating(0x25, saveBlockGetPlaySeconds() - screen->startTime);
     if (lmapSceneGetScript() != 0 || lmapMainIsRunning() != 0) {
-        FUN_00294834(200, 200, 200, 130, 130, 130, 30, 30, 30, 150, 150, 150, 90.0f, -0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 30.0f, 1.5f);
+        playerLightsSetup(200, 200, 200, 130, 130, 130, 30, 30, 30, 150, 150, 150, 90.0f, -0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 30.0f, 1.5f);
     } else {
         asdModelSlotRelease(0);
     }

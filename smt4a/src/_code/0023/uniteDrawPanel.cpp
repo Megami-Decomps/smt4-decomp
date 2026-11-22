@@ -52,7 +52,7 @@ extern "C" s32 uniteDrawPanel(u32)
         s32 x = vec2GetXInt(&work->sprites.open);
         s32 y = vec2GetYInt(&work->sprites.open);
         f32 opacity = vec2GetSpeed(&work->sprites.open);
-        FUN_00285b58(x, y, mode, opacity);
+        uniteDrawListPanel(x, y, mode, opacity);
         x += vec2GetXInt(&work->sprites.listOffset);
         y += vec2GetYInt(&work->sprites.listOffset);
         efctSetSpeed(opacity);
@@ -68,7 +68,7 @@ extern "C" s32 uniteDrawPanel(u32)
         s32 x = vec2GetXInt(&work->sprites.open);
         s32 y = vec2GetYInt(&work->sprites.open);
         f32 opacity = vec2GetSpeed(&work->sprites.open);
-        FUN_00285b58(x, y, 0, opacity);
+        uniteDrawListPanel(x, y, 0, opacity);
         FUN_002aa038(x, y, opacity);
         x += vec2GetXInt(&work->sprites.listOffset);
         y += vec2GetYInt(&work->sprites.listOffset);

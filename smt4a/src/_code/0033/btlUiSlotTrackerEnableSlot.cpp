@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail keeps tracker+index in r5 and the constant 1 in r6, built the other way round */
 #include "common.h"
 
 extern "C" {
@@ -13,17 +12,13 @@ typedef struct Tracker {
     /* 0x4125 */ u8 mode[5];
 } Tracker;
 
-static __inline void trackerStoreByte(u8 *field, s32 value)
+/* Enables slot `index` with the given value and mode, and adds `amount` to the total its mode selects (0 or 1).
+ * `flags` (0 from FUN_004a96fc, 1 from btlUiQueueSlotPositionRequest) is not read. */
+void btlUiSlotTrackerEnableSlot(Tracker *tracker, s32 amount, s32 index, u8 value, u8 mode, s32 flags)
 {
-    *field = value;
-}
-
-/* Enables slot `index` with the given value and mode, and adds `amount` to the total its mode selects (0 or 1). */
-void btlUiSlotTrackerEnableSlot(Tracker *tracker, s32 amount, s32 index, u8 value, s32 mode)
-{
-    trackerStoreByte(&tracker->enabled[index], 1);
-    trackerStoreByte(&tracker->mode[index], mode);
-    trackerStoreByte(&tracker->value[index], value);
+    tracker->enabled[index] = 1;
+    tracker->mode[index] = mode;
+    tracker->value[index] = value;
     tracker->unk410C[index] = 0;
     if (mode == 0) {
         tracker->totalA[index] += amount;

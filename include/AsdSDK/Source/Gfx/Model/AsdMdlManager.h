@@ -134,6 +134,19 @@ static __inline f32 asdMotionModelBlendLimit(const AsdMdlNode *model)
     return model->active->blendLimit;
 }
 
+/* Show or hide a model object: the draw flag and its scene node's follow byte go together. */
+static __inline void asdMdlObjectShow(AsdMdlObject *model)
+{
+    model->flags &= ~2;
+    model->node->sceneNode->positionFollowed = 1;
+}
+
+static __inline void asdMdlObjectHide(AsdMdlObject *model)
+{
+    model->flags |= 2;
+    model->node->sceneNode->positionFollowed = 0;
+}
+
 #ifdef __cplusplus
 extern "C" {
 #endif

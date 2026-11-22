@@ -46,7 +46,7 @@ struct ResultWork : ResultInputWork {
     /* 0x3534 */ s32 step;
     /* 0x3538 */ u8 unk3538[0xC];
     /* 0x3544 */ s32 curtainStep;               /* frames since the curtain started closing */
-    /* 0x3548 */ u8 unk3548[0x18];
+    /* 0x3548 */ s32 unk3548[6];              /* cleared when the screen is created */
     /* 0x3560 */ u8 kind;                     /* resultCreate's argument */
     /* 0x3561 */ u8 unk3561[3];
     /* 0x3564 */ u32 buffer3564;              /* heap block, freed on destroy */
@@ -63,19 +63,31 @@ struct ResultWork : ResultInputWork {
     /* 0x35B8 */ s32 unitExperience[RESULT_EXPERIENCE_SLOTS]; /* by the unit's result slot */
     /* 0x3618 */ s32 itemIds[RESULT_ITEM_SLOTS];
     /* 0x3630 */ s32 itemCounts[RESULT_ITEM_SLOTS];
-    /* 0x3648 */ u8 unk3648[8];
+    /* 0x3648 */ s32 unk3648;
+    /* 0x364C */ u16 unk364C;
+    /* 0x364E */ u8 unk364E[2];
     /* 0x3650 */ s32 gold;
     /* 0x3654 */ ResultEntry entries[RESULT_ENTRY_COUNT];
     /* 0xCF74 */ u32 entryCount;
     /* 0xCF78 */ s32 current;                 /* index of the current entry */
-    /* 0xCF7C */ u8 unkCF7C[0x50];
+    /* 0xCF7C */ u8 unkCF7C[0x1A];
+    /* 0xCF96 */ s16 unkCF96[RESULT_ENTRY_COUNT]; /* one per entry, -1 when the screen is created */
+    /* 0xCFC8 */ u8 unkCFC8[2];
+    /* 0xCFCA */ u16 unkCFCA;
     /* 0xCFCC */ s32 remainingPoints;         /* stat points still to hand out */
     /* 0xCFD0 */ u8 unkCFD0[4];
     /* 0xCFD4 */ FlaggedEntry statCursor;      /* the list cursor over the five stats */
     /* 0xD038 */ s32 valueIndex;
     /* 0xD03C */ u32 pendingValue;
     /* 0xD040 */ s32 scriptValue;             /* reported to the script by FUN_003235a8 */
-    /* 0xD044 */ u8 unkD044[0x4EC];
+    /* 0xD044 */ u8 unkD044[0x294];
+    /* 0xD2D8 */ s64 unkD2D8[RESULT_ENTRY_COUNT]; /* per entry; the four arrays below too */
+    /* 0xD3A0 */ u8 unkD3A0[0xC8];
+    /* 0xD468 */ u16 unkD468[RESULT_ENTRY_COUNT];
+    /* 0xD49A */ u16 unkD49A[RESULT_ENTRY_COUNT];
+    /* 0xD4CC */ u8 unkD4CC[0x32];
+    /* 0xD4FE */ u8 unkD4FE[RESULT_ENTRY_COUNT];
+    /* 0xD517 */ u8 unkD517[RESULT_ENTRY_COUNT];
     /* 0xD530 */ s8 startLevel;               /* the player's level before the level-ups */
     /* 0xD531 */ u8 unkD531[0x1B];
     /* 0xD54C */ s32 startPoints;             /* the points the counter starts from */
@@ -83,7 +95,8 @@ struct ResultWork : ResultInputWork {
     /* 0xD554 */ u8 unkD554[0x28];
     /* 0xD57C */ s32 ailmentCycleFrames[24];  /* by unit index + 1 (0: the player): frames the shown ailment marker has been up */
     /* 0xD5DC */ s32 ailmentCycleIndex[24];   /* by unit index + 1: which of the unit's ailments its row shows */
-    /* 0xD63C */ u8 unkD63C[5];
+    /* 0xD63C */ u8 unkD63C[4];
+    /* 0xD640 */ u8 unkD640;
     /* 0xD641 */ u8 rewardFlagA;              /* copied from the battle reward (+0x3C) */
     /* 0xD642 */ u8 rewardFlagB;              /* copied from the battle reward (+0x3D) */
     /* 0xD643 */ u8 unkD643;

@@ -251,8 +251,8 @@ typedef struct GameState {
     /* 0x3C8 */ u32 overlayBlue;
     /* 0x3CC */ s8 unk3CC;
     /* 0x3CD */ u8 unk3CD[3];
-    /* 0x3D0 */ s32 unk3D0;
-    /* 0x3D4 */ s32 unk3D4;
+    /* 0x3D0 */ s32 lastWallPass;  /* collision pass of the last kind-1 plane hit (-1: none), as in GameStateA */
+    /* 0x3D4 */ s32 lastWallPlane; /* its plane index (-1: none) */
     /* 0x3D8 */ u8 unk3D8[8];
     /* 0x3E0 */ s32 showAllEntries;     /* nonzero: every entry is visible, requirements ignored */
     /* 0x3E4 */ s8 showHiddenIcons;    /* nonzero: the navigator places hidden icons too */

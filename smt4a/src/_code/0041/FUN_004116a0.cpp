@@ -27,7 +27,7 @@ void FUN_003f1b3c(BtlMainStateA *battle, u32 voice, s32 kind, u32 *text, u32 *co
 void FUN_0047f4cc(u32 handle, f32 red, f32 green, f32 blue);
 void uiNavigatorStart(s32 id, s32 a, s32 b, s32 c, s32 d);
 void infoWinSetTimer(s32 frames);
-void FUN_004fbdd4(s32 a, s32 b, s32 c, f32 red, f32 green, f32 blue);
+void btlReflectCreateTint(s32 a, s32 b, s32 c, f32 red, f32 green, f32 blue);
 u32 btlReflectQueueDepthOverlays(s32 actor, u32 options, u32 value, const BattleRosterRecordA *source);
 
 /* Starts the "victory pose" presentation: picks a random party member that can speak (or the
@@ -57,7 +57,7 @@ void FUN_004116a0(ScriptOwner *owner)
     infoWinSetText(reinterpret_cast<const char *>(battle->infoWindow), (u16)text);
     uiNavigatorStart(pick, 1, 1, 0, 0);
     infoWinSetTimer(0x708);
-    FUN_004fbdd4(0, 0, 5, 0.4f, 0.4f, 0.4f);
+    btlReflectCreateTint(0, 0, 5, 0.4f, 0.4f, 0.4f);
     for (s32 i = 4; i < 54; i++) {
         BattleRosterRecordA *record = &battle->roster[i];
         if (record != NULL && (record->liveFlags.unk50 & 1) && (record->liveFlags.unk50 & 2))

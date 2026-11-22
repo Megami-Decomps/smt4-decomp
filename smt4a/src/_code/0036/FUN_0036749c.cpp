@@ -1,8 +1,10 @@
-/* NON_MATCHING: per-frame step of the lmap intro/exit scene (eases the camera, then a state machine: set up the camera behind the player, wait, hand to the map, and the exit steps that switch back to scene 1 / 0x10); written from the decompilation, the arguments of distSpatial / mathPositionHeadingDegrees / the trig helpers are not recovered (called with the angle where one is visible) and the u32 copies of the float targets are kept */
+/* NON_MATCHING: 104 lines. distSpatial and mathPositionHeadingDegrees now take their real by-value MapVector arguments, the behind-the-player placement is written per branch (the heading field read at each use, the spawn copied whole), the frame limits are retail's (> 2, > 15, > 3) and FUN_00327ee8 takes the eased x and z. Retail keeps the eased position in s0-s2 for distSpatial (the build reloads it), loads 1/3 and 1/6 into s3/s2, and gives the degree-to-radian factor and the distance 100 the other two saved VFP registers. */
 #include "common.h"
 #include "game/GameStateA.h"
 #include "map/LmapViewGlobals.h"
 #include "util/TrigF32.h"
+#include "util/MathFunctions.h"
+#include "shard/W6_W6Match1_PositionedStream.h"
 
 #define LMAP_STATE_SETUP 0
 #define LMAP_STATE_SETTLE 1
@@ -16,9 +18,9 @@
 #define LMAP_BEHIND_DISTANCE 100.0f
 #define LMAP_DEG_TO_RAD 0.017453292f
 #define LMAP_HALF_TURN 180.0f
-#define LMAP_SETTLE_FRAMES 3
-#define LMAP_ENTER_FRAMES 0x10
-#define LMAP_EXIT_FRAMES 4
+#define LMAP_SETTLE_FRAMES 2
+#define LMAP_ENTER_FRAMES 15
+#define LMAP_EXIT_FRAMES 3
 #define LMAP_SCENE_MAP 1
 #define LMAP_SCENE_ENTER 0x10
 #define LMAP_BUTTON_ACCEPT 5
@@ -30,27 +32,14 @@ void mapIfApplyEntryRequest(s32 active, u32 record);
 void mapSetSceneState(u32 scene);
 void lmapCameraSetMode(s32 mode);
 void FUN_00324e38(s32 mode);
-void FUN_00327ee8(void);
-void FUN_002e364c(f32 *position);
+void FUN_00327ee8(f32 x, f32 z);
+void FUN_002e364c(MapVector *position);
 void mapEaseSceneHeading(void);
 
-f32 distSpatial(void);
-f32 mathPositionHeadingDegrees(void);
 void sysPlaySe(u32 sound);
 s32 inputIsQuestMenuPressed(void);
 s32 inputConfirmPressed(void);
 s32 padButtonIsPressed(u32 button);
-
-/* Moves the target to the spawn position, pushed out behind `heading`. */
-static __inline void lmapPlaceBehind(LmapSceneA *scene, f32 heading)
-{
-    scene->pose.targetPosition.x = g_gameState.overviewPosition.x;
-    scene->pose.targetPosition.y = g_gameState.overviewPosition.y;
-    scene->pose.targetPosition.z = g_gameState.overviewPosition.z;
-    f32 angle = (heading + LMAP_HALF_TURN) * LMAP_DEG_TO_RAD;
-    scene->pose.targetPosition.x += libm_sinf(angle) * LMAP_BEHIND_DISTANCE;
-    scene->pose.targetPosition.z += libm_cosf(angle) * LMAP_BEHIND_DISTANCE;
-}
 
 void FUN_0036749c(void)
 {
@@ -65,13 +54,24 @@ void FUN_0036749c(void)
         scene->moveMode = 0;
         scene->moveSpeed = 3.0f;
         scene->unk06C = 0;
-        if (distSpatial() < LMAP_NEAR_DISTANCE) {
-            lmapPlaceBehind(scene, scene->pose.heading);
-            scene = g_lmapScene;
-            scene->pose.targetHeading = mathPositionHeadingDegrees();
+        /* The target goes behind the player: opposite the current heading when the camera is already close,
+         * else opposite the heading from the camera to the player. */
+        if (distSpatial(g_lmapScene->pose.position, g_gameState.overviewPosition) < LMAP_NEAR_DISTANCE) {
+            g_lmapScene->pose.targetPosition = g_gameState.overviewPosition;
+            g_lmapScene->pose.targetPosition.x +=
+                libm_sinf((g_lmapScene->pose.heading + LMAP_HALF_TURN) * LMAP_DEG_TO_RAD) * LMAP_BEHIND_DISTANCE;
+            g_lmapScene->pose.targetPosition.z +=
+                libm_cosf((g_lmapScene->pose.heading + LMAP_HALF_TURN) * LMAP_DEG_TO_RAD) * LMAP_BEHIND_DISTANCE;
+            g_lmapScene->pose.targetHeading =
+                mathPositionHeadingDegrees(g_lmapScene->pose.targetPosition, g_gameState.overviewPosition);
         } else {
-            scene->pose.targetHeading = mathPositionHeadingDegrees();
-            lmapPlaceBehind(scene, scene->pose.targetHeading);
+            g_lmapScene->pose.targetHeading =
+                mathPositionHeadingDegrees(g_lmapScene->pose.targetPosition, g_gameState.overviewPosition);
+            g_lmapScene->pose.targetPosition = g_gameState.overviewPosition;
+            g_lmapScene->pose.targetPosition.x +=
+                libm_sinf((g_lmapScene->pose.targetHeading + LMAP_HALF_TURN) * LMAP_DEG_TO_RAD) * LMAP_BEHIND_DISTANCE;
+            g_lmapScene->pose.targetPosition.z +=
+                libm_cosf((g_lmapScene->pose.targetHeading + LMAP_HALF_TURN) * LMAP_DEG_TO_RAD) * LMAP_BEHIND_DISTANCE;
         }
         lmapCameraSetMode(10);
         g_lmapView->contextMode = -1;
@@ -86,7 +86,7 @@ void FUN_0036749c(void)
         scene->stateTime++;
         mapIfApplyEntryRequest(1, g_gameState.overviewRecord);
         scene = g_lmapScene;
-        if (scene->stateTime >= LMAP_SETTLE_FRAMES) {
+        if (scene->stateTime > LMAP_SETTLE_FRAMES) {
             scene->moveMode = 0x1D;
             scene->moveSpeed = 2.0f;
             scene->state++;
@@ -124,7 +124,7 @@ void FUN_0036749c(void)
 
     case LMAP_STATE_ENTER_WAIT:
         scene->stateTime++;
-        if (scene->stateTime >= LMAP_ENTER_FRAMES)
+        if (scene->stateTime > LMAP_ENTER_FRAMES)
             mapSetSceneState(LMAP_SCENE_ENTER);
         break;
 
@@ -136,7 +136,7 @@ void FUN_0036749c(void)
 
     case LMAP_STATE_EXIT_WAIT:
         scene->stateTime++;
-        if (scene->stateTime >= LMAP_EXIT_FRAMES) {
+        if (scene->stateTime > LMAP_EXIT_FRAMES) {
             FUN_00324e38(0);
             mapSetSceneState(LMAP_SCENE_MAP);
         }
@@ -146,8 +146,8 @@ void FUN_0036749c(void)
         break;
     }
 
-    FUN_002e364c(&g_lmapScene->pose.targetPosition.x);
-    FUN_00327ee8();
+    FUN_002e364c(&g_lmapScene->pose.targetPosition);
+    FUN_00327ee8(g_lmapScene->pose.position.x, g_lmapScene->pose.position.z);
 }
 
 } /* extern "C" */

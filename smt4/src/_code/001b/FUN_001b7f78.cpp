@@ -141,7 +141,7 @@ int frameTexCampSetMode(...);
 int frameTexResetFlags(void);
 int frameTexConfigureCaptureTextures(...);
 int FUN_0028a420(...);
-int FUN_00294834(...);
+int playerLightsSetup(...);
 int linkHolderClearFlagGroup(...);
 int questDataGetRecord(void);
 
@@ -175,7 +175,7 @@ int FUN_00316de4(...);
 int FUN_0019dde4(...);
 int questShowRequirementProgress(void);
 int FUN_0020d6b0(void);
-int FUN_0020db10(void);
+int lmapLoadStageModels(void);
 int aocSelectedRecordIsUnavailable(void);
 int eventTablePickNext(void);
 int mapIfClose(void);
@@ -471,7 +471,7 @@ extern int gameMapHasActiveSlotId(int);
 /* Supplied declaration required: FUN_00208d8c. */
 /* Supplied declaration required: FUN_0020d6b0. */
 /* Supplied declaration required: mapObjectVisibilityRestore. */
-/* Supplied declaration required: FUN_0020db10. */
+/* Supplied declaration required: lmapLoadStageModels. */
 /* Supplied declaration required: lmapSceneUpdateHandles. */
 /* Supplied declaration required: asdMdlBanksDestroyAll. */
 /* Supplied declaration required: FUN_0021baf4. */
@@ -640,7 +640,7 @@ extern int rosterGetLeaderId(void);
 /* Supplied declaration required: buttonHelpWorkSetPreset. */
 /* Supplied declaration required: tableGroupFindEntryIndex. */
 /* Supplied declaration required: helpResourcesRelease. */
-/* Supplied declaration required: FUN_00294834. */
+/* Supplied declaration required: playerLightsSetup. */
 /* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: scrScriptProcessCreate. */
@@ -1446,7 +1446,7 @@ LAB_001b8e80:
     if (temp_v9 == 0) {
       return 0;
     }
-    FUN_0020db10();
+    lmapLoadStageModels();
     FUN_0019dde4(puVar14[0xb],puVar14[0xc]);
     MapEpl_Init(puVar14[0xb],puVar14[0xc]);
     FUN_0020d6b0();
@@ -2983,7 +2983,7 @@ LAB_001bb1d4:
       uStack_1c4 = 0x82;
       uStack_1c0 = 0x1e;
       uStack_1bc = (unsigned int)0x1e;
-      FUN_00294834(200,200,200,0x82);
+      playerLightsSetup(200,200,200,0x82);
     }
     mapPerFrameUpdate();
     return 0;
@@ -5377,7 +5377,7 @@ LAB_001bf6c8:
     temp_v9 = lmapSceneCleanupObject();
     temp_v14 = DAT_0049f954;
     if (temp_v9 != 0) {
-      FUN_0020db10();
+      lmapLoadStageModels();
       FUN_0019dde4(puVar14[0xb],puVar14[0xc]);
       MapEpl_Init(puVar14[0xb],puVar14[0xc]);
       FUN_0020d6b0();

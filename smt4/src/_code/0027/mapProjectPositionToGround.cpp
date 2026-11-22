@@ -1,248 +1,141 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `mapProjectPositionToGround` (_code @ 0x27f48c, 0x390 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: rewritten from the raw draft (mapSweepCollisionPlanesFar is the same sweep over the last two lists). */
+#include "gfx/CollisionPlaneView.h"
 #include "game/GameState.h"
+#include <math.h>
 
 extern "C" {
+/* The planes of each collision list the last sweep touched, one byte per plane (FUN_002005ec reads them). */
+extern u8 g_mapCollisionTouchedTriangles[];
+extern u8 g_mapCollisionTouchedQuads[];
+extern u8 g_mapCollisionTouchedSegmentsA[];
+extern u8 g_mapCollisionTouchedSegmentsB[];
 
+void collisionTestProjectedSpherePlanes(f32 *distanceOut, s32 kind, s32 sub, const CollisionPlaneView *plane,
+                                        f32 x, f32 y, f32 z, f32 radius);
 
-int CONCAT44(...);
-int collisionTestProjectedSpherePlanes(float *, int, int, int);
-
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-} param_2_stack;
-
-extern unsigned int DAT_00446fec; /* 0x446fec */
-extern unsigned int DAT_00446ff0; /* 0x446ff0 */
-extern unsigned int DAT_00446ff4; /* 0x446ff4 */
-extern unsigned int DAT_00446ff8; /* 0x446ff8 */
-extern int DAT_00447000; /* 0x447000 */
-extern int DAT_00447004; /* 0x447004 */
-extern int DAT_00447008; /* 0x447008 */
-extern int DAT_0044700c; /* 0x44700c */
-extern unsigned char DAT_0049e45c; /* 0x49e45c */
-extern unsigned char DAT_0049e65c; /* 0x49e65c */
-extern unsigned char DAT_0049e7dc; /* 0x49e7dc */
-extern unsigned char DAT_0049e87c; /* 0x49e87c */
-
-
-
-/* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
+/* Moves a sphere from `previous` to `position` (lifted by 15) and pushes it out of the map's four collision plane
+ * lists (radius 25 for the first two, 60 for the others), marking each plane it touches and recording the last
+ * kind-1 plane hit in the game state; writes the corrected position back and the old one to `previous`. Returns
+ * whether a kind-1 plane was hit (1 when the sphere did not move). */
+u32 mapProjectPositionToGround(CollisionVector *position, CollisionVector *previous)
 {
-    return (float)sqrt((double)value);
-}
-#endif
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
-{
-    return value < (float)0 ? -value : value;
-}
-#endif
-/* Supplied declaration required: collisionTestProjectedSpherePlanes. */
+    s32 lastWall = -1;
+    u32 hit = 0;
+    CollisionVector from = *previous;
+    f32 x = position->x;
+    f32 y = position->y;
+    f32 z = position->z;
+    CollisionVector start = *position;
 
+    g_gameState.lastWallPass = -1;
+    g_gameState.lastWallPlane = -1;
+    for (s32 i = 0; i < g_mapCollision.geometry.triangleCount; i++) {
+        g_mapCollisionTouchedTriangles[i] = 0;
+    }
+    for (s32 i = 0; i < g_mapCollision.quadCount; i++) {
+        g_mapCollisionTouchedQuads[i] = 0;
+    }
+    for (s32 i = 0; i < g_mapCollision.segmentCounts[0]; i++) {
+        g_mapCollisionTouchedSegmentsA[i] = 0;
+    }
+    for (s32 i = 0; i < g_mapCollision.segmentCounts[1]; i++) {
+        g_mapCollisionTouchedSegmentsB[i] = 0;
+    }
+    f32 dx = x - from.x;
+    f32 dy = y - from.y;
+    f32 dz = z - from.z;
+    if (sqrtf(dx * dx + dy * dy + dz * dz) < 0.01f) {
+        return 1;
+    }
 
-unsigned int mapProjectPositionToGround(float *param_1,float *param_2)
-
-{
-/* irregular: 1 goto(s); 2 native warning(s); review required */
-  unsigned char *puVar1;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  unsigned long long temp_v11;
-  unsigned long long temp_v12;
-  float temp_v13;
-  unsigned long long temp_v14;
-  unsigned long long temp_v15;
-  float temp_v16;
-  unsigned int temp_v17;
-  float *temp_v18;
-  float *temp_v19;
-  float temp_v20;
-  
-  temp_v4 = -1;
-  temp_v17 = 0;
-  temp_v6 = *param_2;
-  temp_v7 = param_2[1];
-  temp_v9 = param_2[2];
-  temp_v10 = *param_1;
-  temp_v5 = param_1[1];
-  temp_v15 = *(unsigned long long *)param_1;
-  temp_v20 = param_1[2];
-  temp_v11 = CONCAT44(temp_v20,temp_v10);
-  g_gameState.unk3D0 = -1;
-  g_gameState.unk3D4 = -1;
-  if (0 < (int)DAT_00446fec) {
-    puVar1 = (unsigned char *)0x49e45b;
-    if ((DAT_00446fec & 1) != 0) {
-      DAT_0049e45c = 0;
-      puVar1 = &DAT_0049e45c;
-    }
-    for (temp_v0 = (int)DAT_00446fec >> 1; temp_v0 != 0; temp_v0 = temp_v0 - 1) {
-      puVar1[1] = 0;
-      puVar1 = puVar1 + 2;
-      *puVar1 = 0;
-    }
-  }
-  if (0 < (int)DAT_00446ff0) {
-    puVar1 = (unsigned char *)0x49e65b;
-    if ((DAT_00446ff0 & 1) != 0) {
-      DAT_0049e65c = 0;
-      puVar1 = &DAT_0049e65c;
-    }
-    for (temp_v0 = (int)DAT_00446ff0 >> 1; temp_v0 != 0; temp_v0 = temp_v0 - 1) {
-      puVar1[1] = 0;
-      puVar1 = puVar1 + 2;
-      *puVar1 = 0;
-    }
-  }
-  if (0 < (int)DAT_00446ff4) {
-    puVar1 = (unsigned char *)0x49e7db;
-    if ((DAT_00446ff4 & 1) != 0) {
-      DAT_0049e7dc = 0;
-      puVar1 = &DAT_0049e7dc;
-    }
-    for (temp_v0 = (int)DAT_00446ff4 >> 1; temp_v0 != 0; temp_v0 = temp_v0 - 1) {
-      puVar1[1] = 0;
-      puVar1 = puVar1 + 2;
-      *puVar1 = 0;
-    }
-  }
-  if (0 < (int)DAT_00446ff8) {
-    puVar1 = (unsigned char *)0x49e87b;
-    if ((DAT_00446ff8 & 1) != 0) {
-      DAT_0049e87c = 0;
-      puVar1 = &DAT_0049e87c;
-    }
-    for (temp_v0 = (int)DAT_00446ff8 >> 1; temp_v0 != 0; temp_v0 = temp_v0 - 1) {
-      puVar1[1] = 0;
-      puVar1 = puVar1 + 2;
-      *puVar1 = 0;
-    }
-  }
-  temp_v10 = temp_v10 - temp_v6;
-  temp_v7 = temp_v5 - temp_v7;
-  if ((int)romwright_sqrt_4(temp_v10 * temp_v10 + temp_v7 * temp_v7 + (temp_v20 - temp_v9) * (temp_v20 - temp_v9)) <
-      0x3c23d70a) {
-    return 1;
-  }
-  temp_v0 = 0;
-  temp_v6 = 25.0f;
-  temp_v14 = CONCAT44(temp_v20,0x42700000);
-  temp_v12 = (unsigned long long)(unsigned int)(temp_v5 + 15.0f);
-  temp_v5 = 0.0f;
-  temp_v18 = param_1;
-  temp_v19 = param_2;
-  do {
-    temp_v12 = CONCAT44(temp_v6,(int)temp_v12);
-    temp_v1 = DAT_00447000;
-    temp_v3 = DAT_00446fec;
-LAB_0027f630:
-    temp_v2 = 0;
-    if (0 < (int)temp_v3) {
-      do {
-        if (*(char *)(temp_v1 + 8) != '\0') {
-          temp_v7 = ((float)temp_v11 * *(float *)(temp_v1 + 0xc) +
-                   (float)temp_v12 * *(float *)(temp_v1 + 0x10) +
-                  (float)((unsigned long long)temp_v11 >> 0x20) * *(float *)(temp_v1 + 0x14)) -
-                  *(float *)(temp_v1 + 0x18);
-          temp_v9 = romwright_fabs_4(temp_v7);
-          if ((temp_v9 < (float)(temp_v12 >> 0x20)) &&
-             (collisionTestProjectedSpherePlanes(&temp_v16,(int)*(char *)(temp_v1 + 4),(int)*(char *)(temp_v1 + 5),temp_v1),
-             temp_v5 <= temp_v16)) {
-            temp_v10 = (float)temp_v11 - *(float *)(temp_v1 + 0xc) * temp_v7;
-            temp_v20 = (float)temp_v12 - *(float *)(temp_v1 + 0x10) * temp_v7;
-            temp_v8 = (float)((unsigned long long)temp_v11 >> 0x20) - *(float *)(temp_v1 + 0x14) * temp_v7;
-            temp_v13 = (float)(temp_v12 >> 0x20);
-            if (*(char *)(temp_v1 + 4) != '\x01') {
-              if (temp_v0 == 2) {
-                (&DAT_0049e7dc)[temp_v2] = 1;
-              }
-              else if (temp_v0 == 3) {
-                (&DAT_0049e87c)[temp_v2] = 1;
-              }
-              if (temp_v5 <= temp_v7) {
-                if (temp_v16 < temp_v9) {
-                  temp_v16 = temp_v9;
-                }
-                temp_v12 = CONCAT44(temp_v13,temp_v20 + *(float *)(temp_v1 + 0x10) * temp_v16);
-                temp_v11 = CONCAT44(temp_v8 + *(float *)(temp_v1 + 0x14) * temp_v16,
-                                  temp_v10 + *(float *)(temp_v1 + 0xc) * temp_v16);
-              }
-            }
-            else {
-              g_gameState.unk3D0 = temp_v0;
-              g_gameState.unk3D4 = temp_v2;
-              if (temp_v0 == 0) {
-                puVar1 = &DAT_0049e45c;
-                puVar1[temp_v2] = 1;
-              }
-              else if (temp_v0 == 1) {
-                puVar1 = &DAT_0049e65c;
-                puVar1[temp_v2] = 1;
-              }
-              if ((-1 < temp_v4) && (temp_v16 < temp_v9)) {
-                temp_v16 = temp_v9;
-              }
-              temp_v17 = 1;
-              temp_v12 = CONCAT44(temp_v13,temp_v20 + *(float *)(temp_v1 + 0x10) * temp_v16);
-              temp_v11 = CONCAT44(temp_v8 + *(float *)(temp_v1 + 0x14) * temp_v16,
-                                temp_v10 + *(float *)(temp_v1 + 0xc) * temp_v16);
-              if (temp_v16 == temp_v13) {
-                temp_v4 = temp_v2;
-              }
-            }
-          }
+    y += 15.0f;
+    for (s32 pass = 0; pass < 4; pass++) {
+        CollisionPlaneView *planes;
+        s32 count;
+        f32 radius;
+        switch (pass) {
+        case 0:
+            radius = 25.0f;
+            planes = (CollisionPlaneView *)g_mapCollision.triangles;
+            count = g_mapCollision.geometry.triangleCount;
+            break;
+        case 1:
+            radius = 25.0f;
+            planes = (CollisionPlaneView *)g_mapCollision.quads;
+            count = g_mapCollision.quadCount;
+            break;
+        case 2:
+            radius = 60.0f;
+            planes = (CollisionPlaneView *)g_mapCollision.second;
+            count = g_mapCollision.segmentCounts[0];
+            break;
+        default:
+            radius = 60.0f;
+            planes = (CollisionPlaneView *)g_mapCollision.unk24;
+            count = g_mapCollision.segmentCounts[1];
+            break;
         }
-        temp_v2 = temp_v2 + 1;
-        temp_v1 = temp_v1 + 0xa8;
-      } while (temp_v2 < (int)temp_v3);
+        for (s32 i = 0; i < count; i++, planes++) {
+            if (!planes->active)
+                continue;
+            f32 signedDistance = x * planes->normal.x + y * planes->normal.y + z * planes->normal.z - planes->distance;
+            f32 distance = fabsf(signedDistance);
+            if (radius <= distance)
+                continue;
+            f32 push;
+            collisionTestProjectedSpherePlanes(&push, planes->kind, planes->sub, planes, x, y, z, radius);
+            if (push < 0.0f)
+                continue;
+            /* The sphere centre projected onto the plane (retail multiplies and subtracts apart). */
+            f32 offsetX = planes->normal.x * signedDistance;
+            f32 offsetY = planes->normal.y * signedDistance;
+            f32 offsetZ = planes->normal.z * signedDistance;
+            f32 px = x - offsetX;
+            f32 py = y - offsetY;
+            f32 pz = z - offsetZ;
+            if (planes->kind == 1) {
+                g_gameState.lastWallPass = pass;
+                g_gameState.lastWallPlane = i;
+                if (pass == 0) {
+                    g_mapCollisionTouchedTriangles[i] = 1;
+                } else if (pass == 1) {
+                    g_mapCollisionTouchedQuads[i] = 1;
+                }
+                if (lastWall > -1 && push < distance)
+                    push = distance;
+                f32 pushX = planes->normal.x * push;
+                f32 pushY = planes->normal.y * push;
+                f32 pushZ = planes->normal.z * push;
+                x = px + pushX;
+                y = py + pushY;
+                z = pz + pushZ;
+                hit = 1;
+                if (push == radius)
+                    lastWall = i;
+            } else {
+                if (pass == 2) {
+                    g_mapCollisionTouchedSegmentsA[i] = 1;
+                } else if (pass == 3) {
+                    g_mapCollisionTouchedSegmentsB[i] = 1;
+                }
+                if (signedDistance < 0.0f)
+                    continue;
+                if (distance > push)
+                    push = distance;
+                f32 pushX = planes->normal.x * push;
+                f32 pushY = planes->normal.y * push;
+                f32 pushZ = planes->normal.z * push;
+                x = px + pushX;
+                y = py + pushY;
+                z = pz + pushZ;
+            }
+        }
     }
-    temp_v0 = temp_v0 + 1;
-    temp_v7 = (float)temp_v12;
-    if (temp_v0 >= 4) {
-      *temp_v18 = (float)temp_v11;
-      temp_v18[1] = temp_v7 - temp_v6;
-      temp_v18[2] = (float)((unsigned long long)temp_v11 >> 0x20);
-      temp_v19[2] = (float)((unsigned long long)temp_v14 >> 0x20);
-      *temp_v19 = (float)temp_v15;
-      temp_v19[1] = (float)((unsigned long long)temp_v15 >> 0x20);
-      return temp_v17;
-    }
-  } while (temp_v0 == 0);
-  if (temp_v0 != 1) {
-    temp_v12 = CONCAT44((int)temp_v14,temp_v7);
-    temp_v1 = DAT_00447008;
-    temp_v3 = DAT_00446ff4;
-    if (temp_v0 != 2) {
-      temp_v1 = DAT_0044700c;
-      temp_v3 = DAT_00446ff8;
-    }
-  }
-  else {
-    temp_v12 = CONCAT44(temp_v6,temp_v7);
-    temp_v1 = DAT_00447004;
-    temp_v3 = DAT_00446ff0;
-  }
-  goto LAB_0027f630;
+    position->x = x;
+    position->y = y - 25.0f;
+    position->z = z;
+    *previous = start;
+    return hit;
 }
 
 } /* extern "C" */

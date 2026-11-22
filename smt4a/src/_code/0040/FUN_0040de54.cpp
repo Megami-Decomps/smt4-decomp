@@ -42,7 +42,7 @@ int FUN_004c0850(...);
 int FUN_004c6edc(...);
 int FUN_004c80f0(...);
 int channelRunMagnitudeQueries(...); // declcheck: local (romwright prototype; the shared declaration in battle/btlAction.h does not compile here: too few arguments in function call)
-int FUN_004c9d04(...);
+int btlEntryRemove(...);
 void FUN_004cae0c(void *context, void *state, s32 pending, u32 target);
 int colorFadeStartRgb(...);
 int asdModelActivateOwnedSlots(...);
@@ -242,7 +242,7 @@ extern unsigned int FUN_0047fa50(unsigned int);
 /* Supplied declaration required: FUN_004c9160. */
 /* Supplied declaration required: FUN_004c9474. */
 /* Supplied declaration required: btlHelpAppendTextEntry. */
-/* Supplied declaration required: FUN_004c9d04. */
+/* Supplied declaration required: btlEntryRemove. */
 /* Supplied declaration required: FUN_004cab9c. */
 /* Supplied declaration required: FUN_004cad84. */
 /* Supplied declaration required: FUN_004cae0c. */
@@ -1116,7 +1116,7 @@ LAB_0040f258:
     FUN_0040c64c(param_1,psVar2);
     break;
   case '.':
-    FUN_004c9d04((int)*(short *)(*(int *)(psVar2 + 0xc) + 0x6e),0);
+    btlEntryRemove((int)*(short *)(*(int *)(psVar2 + 0xc) + 0x6e),0);
     reinterpret_cast<int>(btlGetMainState());
     FUN_003e7ef0();
     break;

@@ -1,179 +1,158 @@
-/* NON_MATCHING: readable rewrite from retail disassembly compiles (253 vs 249 rows); retail keeps the handler table pointers in literal-pool loads and the file-line assertion strings inline, ordering of the stack argument struct differs */
+/* NON_MATCHING: 136 lines (50 by shape). Retail keeps restriction 3 in r9 next to 4 in r8 (hoisted after the parental-control
+ * test, so it pushes r9 and its frame is 36 bytes against 40) and stores 2 and 6 through one shared `str r0`; here 3 and 6
+ * share the store. The thread launch has the same arguments with -2 in r3 and 17 in ip (the order IV's campCecCreate
+ * also misses). Writing the unit-mark tests in both arms of the StreetPass-process test hoists 3 as retail does but keeps
+ * two copies of the tests, so it is not written. */
+#include "camp/CampCec/CampCecRecv.h"
+#include "camp/CampCec/CampCecDraw.h"
 #include "nn/Result.h"
-#include "common.h"
-#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "nn/os/ThreadLaunch.h"
 #include "sys/ResultReport.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
-#include "cec/CecProcessGlobal.h"
+#include "code/Code0015_Smt4a.h"
+#include "gamedata/GameDataAccess_Smt4a.h"
+#include "shard/GameDataBlocks.h"
+#include "util/BitsAndBytes_VariantF_Shard004B.h"
 
-typedef void (*CecHandler)(void);
-
-// Allocation record kept for the receive list (24 bytes).
-struct CecList {
-    u32 unk00;
-    u32 unk04;
-    u32 begin;              // 0x08
-    u32 size;               // 0x0c
-    u8 flag;                // 0x10
-    u8 pad11[7];
-};
-
-// State of the CEC receive screen (0x808 bytes).
-struct CampCecRecv {
-    /* 0x000 */ u32 process;
-    /* 0x004 */ u32 unk004[2];
-    /* 0x00c */ CecHandler handlers[9];     // 0x0c..0x2c
-    /* 0x030 */ u32 unk030;
-    /* 0x034 */ CecHandler finishHandler;   // 0x34
-    /* 0x038 */ u8 unk038[0x350 - 0x38];
-    /* 0x350 */ u32 scriptFile;             // 0x350 (848)
-    /* 0x354 */ u32 messageFile;            // 0x354 (852)
-    /* 0x358 */ u8 unk358[0x3a8 - 0x358];
-    /* 0x3a8 */ u32 selection;              // 0x3a8 (936)
-    /* 0x3ac */ s32 mode;                   // 0x3ac (940)
-    /* 0x3b0 */ s32 unk3b0;                 // 0x3b0 (944)
-    /* 0x3b4 */ s32 unk3b4;                 // 0x3b4 (948)
-    /* 0x3b8 */ u8 unk3b8[0x3e0 - 0x3b8];
-    /* 0x3e0 */ s32 restriction;            // 0x3e0 (992)
-    /* 0x3e4 */ u8 unk3e4[4];
-    /* 0x3e8 */ u8 unk3e8;                  // 0x3e8 (1000)
-    /* 0x3e9 */ u8 unk3e9[0x7d4 - 0x3e9];
-    /* 0x7d4 */ u8 unk7d4;                  // 0x7d4 (2004)
-    /* 0x7d5 */ u8 fromMenu;                // 0x7d5 (2005)
-    /* 0x7d6 */ u8 unk7d6[2];
-    /* 0x7d8 */ u32 drawList;               // 0x7d8 (2008)
-    /* 0x7dc */ u8 unk7dc[0x7f0 - 0x7dc];
-    /* 0x7f0 */ u8 unk7f0;                  // 0x7f0 (2032)
-    /* 0x7f1 */ u8 unk7f1[3];
-    /* 0x7f4 */ u32 unk7f4;                 // 0x7f4 (2036)
-    /* 0x7f8 */ CecList* list;              // 0x7f8 (2040)
-    /* 0x7fc */ u32 result;                 // 0x7fc (2044)
-    /* 0x800 */ u8 unk800[4];
-    /* 0x804 */ void* buffer;               // 0x804 (2052)
-};
+#define CAMP_CEC_RECV_SOURCE "c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\CampCec\\CampCecRecv.cpp"
 
 extern "C" {
 
-extern CampCecRecv* g_campCecRecv;
+extern CampCecRecv *g_campCecRecv;
 
-CampCecRecv* asdMemoryAllocTracked(u32 size, u32 alignment, u32 heap, u32 trackedSize, u32 flag);
-void sysMemClear(void* data, u32 size);
-void taskCreateDraw(const char* name, s32 priority, s32 a, s32 b, void (*draw)(void), s32 c, s32 d, u32 parent);
-void FUN_0035a840(void);
-void campCecRecvDownloadState(void);
-void jobScene360WaitStep(void);
-void FUN_0032e4a4(void);
-void campCecRecvStatGainState(void);
-void FUN_0035a3f0(void);
-void FUN_0035a7c4(void);
-void dataSceneWaitStep(void);
-void menuPollModeScript(void);
-void questQueryFalse(void);
-void stateMachineRun(void);
-void FUN_0025d578(void);
-void campCecLoaderThread(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
-void FUN_00514a64(void);
+u32 stateMachineRun(void);
+u32 FUN_0025d578(void);
+s32 FUN_0035a840(CampCecRecv *recv);
+s32 campCecRecvDownloadState(CampCecRecv *recv);
+s32 jobScene360WaitStep(CampCecRecv *recv);
+s32 FUN_0032e4a4(CampCecRecv *recv);
+s32 campCecRecvStatGainState(CampCecRecv *recv);
+s32 FUN_0035a3f0(CampCecRecv *recv);
+s32 FUN_0035a7c4(CampCecRecv *recv);
+s32 dataSceneWaitStep(CampCecRecv *recv);
+s32 menuPollModeScript(CampCecRecv *recv);
+s32 questQueryFalse(CampCecRecv *recv);
+void campCecLoaderThread(CampCecRecv *recv); // declcheck: local (camp/CecMenu.h declares IV's menu as the argument)
+void FUN_00514a64(const u32 *value, u32 *output);
 void FUN_00514b84(void);
-void FUN_00514b14(void);
-u8* stockFindSelectedUnit(void);
+u32 FUN_00514b14(u32 (*callback)(u32), const u32 *value);
+s32 FUN_002fb0d4(void *thread, const ThreadArgumentDescriptor *descriptor, void (*entry)(CampCecRecv *),
+                 CampCecRecv **argument, u32 stackTop, s32 priority, s32 processor, u32 flags);
+SlotRecordA *stockFindSelectedUnit(void);
 s32 nn_cfg_CTR_IsRestrictP2pCec(void);
-s32 FUN_004310c0(void);
-s32 bitsAt60Test(u8* object, u32 bit);
-void sysPlaySe(s32 id);
+u8 FUN_004310c0(void);
+void sysPlaySe(u32 id);
 void runWinOpen(void);
-void runWinOpenState(void);
-void gameDataAddHomeButtonHold(s32 value);
-void gameDataBlocksAddFlags(u32 flags);
-u32 campCecDrawListCreate(void);
-void* memAlloc(u32 size, u32 alignment, u32 heap, u32 trackedSize, u32 usable, u32 flag);
-void* asdOperatorNew(u32 size, u8* allocator);
-void resultReportIfFailed(void* list, void* buffer, u32 size);
-u32 FUN_002fb0d4(u32* result, void* handlers, void (*callback)(void), CampCecRecv** context, u32 end, u32 a, s32 b, s32 c);
+u32 runWinOpenState(void);
+void resultReportIfFailed(ThreadStackStorage *stack, void *buffer, u32 size);
+CampCecDrawList *campCecDrawListCreate(void);
+u32 cecQueryOptionalProcess(void); // declcheck: local (cec/CecProcessGlobal.h pulls in Obj557ec0.h, whose asdOperatorDelete clashes with this unit's)
 
-// Creates the CEC receive screen: allocates its state, starts the calc/draw tasks, works out
-// whether the feature is available (restriction code in `restriction`) and either loads the
-// script/message files for the error path or opens the receive window.
-void campCecRecvCreate(u8 fromMenu)
+}
+
+/* nn::os::Thread::Start: runs `entry(argument)` on a new thread whose stack is `stack`; a failure is fatal. */
+static __inline void campCecRecvStartThread(void *thread, void (*entry)(CampCecRecv *), CampCecRecv *argument,
+                                            ThreadStackStorage &stack, s32 priority, s32 processor)
+{
+    ThreadArgumentDescriptor descriptor;
+    descriptor.argumentSize = sizeof(argument);
+    descriptor.callbacks[0] = (void (*)(void))FUN_00514a64;
+    descriptor.callbacks[1] = FUN_00514b84;
+    descriptor.callbacks[2] = (void (*)(void))FUN_00514b14;
+    s32 result = FUN_002fb0d4(thread, &descriptor, entry, &argument, stack.info.address + stack.info.size, priority,
+                              processor, 0);
+    if (nnResultIsFailureExceptSummary(result, 3)) {
+        resultHandleFailure(result);
+    }
+}
+
+extern "C" {
+
+/* Creates the camp's StreetPass receive screen: its work area, its update and draw tasks and its state
+ * handlers. `source` says where the records come from (0: the cec inbox, 1: the DataStore). With StreetPass
+ * restricted, switched off or not running, or with the selected unit marked, only the menu's script is loaded
+ * for the notice; otherwise the wait window opens and the loader thread starts. */
+void campCecRecvCreate(u8 source)
 {
     if (g_campCecRecv == NULL) {
-        g_campCecRecv = asdMemoryAllocTracked(0x100, 0x100, 0, 0x808, 1);
+        asdDebugTrace(CAMP_CEC_RECV_SOURCE, 268);
+        g_campCecRecv = (CampCecRecv *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(CampCecRecv), 1);
     }
-    CampCecRecv* recv = g_campCecRecv;
-    sysMemClear(recv, 0x808);
-    recv->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("CampCecRecv Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(stateMachineRun), 0, 0);
-    taskCreateDraw("CampCecRecv Draw", 0x86, 0, 0, FUN_0025d578, 0, 0, recv->process);
-    taskCreateDraw("CampCecRecv DrawR", 0xe2, 0, 0, FUN_0025d578, 0, 0, recv->process);
-    recv->fromMenu = fromMenu;
-    recv->unk3e8 = 0;
-    recv->selection = -1;
-    recv->mode = 0;
-    recv->unk3b0 = -1;
-    recv->unk3b4 = -1;
-    recv->handlers[0] = FUN_0035a840;
-    recv->handlers[1] = campCecRecvDownloadState;
-    recv->handlers[2] = jobScene360WaitStep;
-    recv->handlers[3] = FUN_0032e4a4;
-    recv->handlers[4] = campCecRecvStatGainState;
-    recv->handlers[5] = FUN_0035a3f0;
-    recv->handlers[6] = FUN_0035a7c4;
-    recv->handlers[7] = dataSceneWaitStep;
-    recv->handlers[8] = menuPollModeScript;
-    recv->finishHandler = questQueryFalse;
+    CampCecRecv *recv = g_campCecRecv;
+    sysMemClear(recv, sizeof(CampCecRecv));
+    recv->task = asdProcessCreateSimple((const s8 *)"CampCecRecv Calc", 3, 0, 0, (AsdProcUpdateFunc)stateMachineRun, 0, 0);
+    taskCreateDraw((const s8 *)"CampCecRecv Draw", 0x86, 0, 0, (AsdProcUpdateFunc)FUN_0025d578, 0, 0, (void *)recv->task);
+    taskCreateDraw((const s8 *)"CampCecRecv DrawR", 0xE2, 0, 0, (AsdProcUpdateFunc)FUN_0025d578, 0, 0, (void *)recv->task);
+    recv->received.source = source;
+    recv->done = 0;
+    recv->machine.previousState = -1;
+    recv->machine.state = 0;
+    recv->machine.nextState = -1;
+    recv->machine.unk3B4 = -1;
+    recv->machine.states[0] = FUN_0035a840;
+    recv->machine.states[1] = campCecRecvDownloadState;
+    recv->machine.states[2] = jobScene360WaitStep;
+    recv->machine.states[3] = FUN_0032e4a4;
+    recv->machine.states[4] = campCecRecvStatGainState;
+    recv->machine.states[5] = FUN_0035a3f0;
+    recv->machine.states[6] = FUN_0035a7c4;
+    recv->machine.states[7] = dataSceneWaitStep;
+    recv->machine.states[8] = menuPollModeScript;
+    recv->machine.idle = questQueryFalse;
 
-    u8* network = stockFindSelectedUnit();
-    recv->restriction = 0;
+    SlotRecordA *unit = stockFindSelectedUnit();
+    recv->machine.restriction = 0;
     if (nn_cfg_CTR_IsRestrictP2pCec() != 0) {
-        recv->restriction = 1;
+        recv->machine.restriction = 1;
     } else if (FUN_004310c0() == 0) {
-        recv->restriction = 2;
-    } else if (cecQueryOptionalProcess() == 0 && recv->fromMenu == 0) {
-        recv->restriction = 6;
-    } else if (network != NULL) {
-        if (bitsAt60Test(network, 1) != 0) {
-            recv->restriction = 3;
-        } else if (bitsAt60Test(network, 10) != 0) {
-            recv->restriction = 4;
+        recv->machine.restriction = 2;
+    } else if (cecQueryOptionalProcess() == 0 && recv->received.source == 0) {
+        recv->machine.restriction = 6;
+    } else if (unit != NULL) {
+        if (bitsAt60Test(unit, 1)) {
+            recv->machine.restriction = 3;
+        } else if (bitsAt60Test(unit, 10)) {
+            recv->machine.restriction = 4;
         }
     }
-
-    recv->unk7d4 = 0;
-    if (recv->restriction != 0) {
-        asdLoadFileAsyncSimple("camp/CecMain_scr.bf", &recv->scriptFile, 0);
-        asdLoadFileAsyncSimple("camp/CecMain_msg.mbm", &recv->messageFile, 0);
-        recv->mode = 8;
+    recv->received.unitOwed = 0;
+    if (recv->machine.restriction != 0) {
+        asdLoadFileAsyncSimple("camp/CecMain_scr.bf", &recv->machine.noticeScript, 0);
+        asdLoadFileAsyncSimple("camp/CecMain_msg.mbm", &recv->machine.noticeMessages, 0);
+        recv->machine.state = 8;
         return;
     }
 
     sysPlaySe(3);
-    sysPlaySe(0xbb);
+    sysPlaySe(0xBB);
     runWinOpen();
     runWinOpenState();
     gameDataAddHomeButtonHold(2);
     gameDataBlocksAddFlags(2);
     recv->drawList = campCecDrawListCreate();
-    recv->unk7f0 = 0;
-    recv->unk7f4 = 0;
-    recv->buffer = memAlloc(0x100, 0x100, 0, 0x1000, 0x1000, 1);
-    CecList* list = static_cast<CecList*>(asdOperatorNew(0x18, network));
-    if (list != NULL) {
-        list->unk00 = 0;
-        list->unk04 = 0;
-        list->begin = 0;
-        list->size = 0;
-        list->flag = 0;
+
+    /* The thread that loads the screen's files. */
+    recv->loaderStop = 0;
+    recv->loaderProgress = 0;
+    asdDebugTrace(CAMP_CEC_RECV_SOURCE, 490);
+    recv->loaderStackMemory = memAlloc(0x100, 0x100, 0, 0x1000, 0x1000, 1);
+    /* operator new's second argument is unused; retail passes the register that still holds the unit */
+    ThreadStackStorage *stack = (ThreadStackStorage *)asdOperatorNew(sizeof(ThreadStackStorage), unit);
+    if (stack != NULL) {
+        stack->info.unk00 = 0;
+        stack->info.unk04 = 0;
+        stack->info.address = 0;
+        stack->info.size = 0;
+        stack->owned = 0;
     }
-    recv->list = list;
-    resultReportIfFailed(list, recv->buffer, 0x1000);
-    struct {
-        u32 count;
-        void (*first)(void);
-        void (*second)(void);
-        void (*third)(void);
-    } handlers = { 4, FUN_00514a64, FUN_00514b84, FUN_00514b14 };
-    u32 result = FUN_002fb0d4(&recv->result, &handlers, campCecLoaderThread, &recv, recv->list->size + recv->list->begin, 0x11, -2, 0);
-    if ((result & 0x7e00000) != 0x600000 && (s32)nnResultIsFailure(result)) {
-        resultHandleFailure(result);
-    }
+    recv->loaderStack = stack;
+    resultReportIfFailed(recv->loaderStack, recv->loaderStackMemory, 0x1000);
+    campCecRecvStartThread(recv->loaderThread, campCecLoaderThread, recv, *recv->loaderStack, 17, -2);
 }
 
 } /* extern "C" */

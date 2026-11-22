@@ -1,4 +1,4 @@
-/* NON_MATCHING: 132 lines (180 vs 178 rows): g_gameState.eventResult, link-slot if/else, listSelectItem(link, index), and ldr/str point copies match; retail keeps y in r2 and 10 in r3 across uiClampScrollOffset (needs multifile uiClampScrollOffset). */
+/* NON_MATCHING: 110 lines (180 vs 178 rows): g_gameState.eventResult, link-slot if/else, listSelectItem(link, index), and ldr/str point copies match; retail keeps y in r2 and 10 in r3 across uiClampScrollOffset (now its multifile partner, 132 -> 110 lines). */
 #include "camp/ScriptPanelResources.h"
 #include "shard/Shard004B.h"
 #include "shard/Shard004A.h"
@@ -71,7 +71,6 @@ s32 FUN_004babd8(void *menu);
 void linkSlotSetFlag1C(QuestLinkSlot *slot, s32 value);
 void linkSlotSetFlag20(QuestLinkSlot *slot, s32 value);
 void FUN_00407eb0(QuestLinkSlot *slot, s32 kind, s32 unused);
-void uiClampScrollOffset(void *panel, QuestPoint *point);
 void FUN_004b8ba0(void *panel);
 void listSelectItem(QuestLinkSlot *slot, s32 index);
 void mapRecordResumePoint(void);
@@ -102,8 +101,8 @@ void questMenuPanelUpdate(QuestPanel *panel)
         panel->from.y = panel->origin.y;
         panel->to.x = (f32)x - 200.0f;
         panel->to.y = (f32)y - 120.0f;
-        uiClampScrollOffset(panel, &panel->from);
-        uiClampScrollOffset(panel, &panel->to);
+        uiClampScrollOffset((ScreenObject *)panel, &panel->from.x);
+        uiClampScrollOffset((ScreenObject *)panel, &panel->to.x);
         panel->segmentFrom.x = panel->current.x;
         panel->segmentFrom.y = panel->current.y;
         panel->segmentTo.x = (f32)x;

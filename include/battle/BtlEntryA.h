@@ -11,7 +11,10 @@
 struct BtlUnitRecordA;
 
 struct BattleCandidateRecord {
-    /* 0x00 */ u8 unk00[0x16];
+    union {
+        /* 0x00 */ u8 unk00[0x16];
+        /* 0x00 */ u16 id;          /* the demon's id (nkmBaseGetRecord) */
+    };
     /* 0x16 */ u16 flags;
 };
 
@@ -41,7 +44,8 @@ typedef struct BtlUnitDataA {
     /* 0x0D4 */ s8 special;         /* [0x238] */
     /* 0x0D5 */ u8 motionState;     /* [0x239] */
     /* 0x0D6 */ u8 marked;          /* [0x23A] */
-    /* 0x0D7 */ u8 unk0D7;
+    /* 0x0D7 */ s8 retained;        /* [0x23B] nonzero: the unit stays listed when its entry is removed (the removal
+                                     * keeps the byte) */
     /* 0x0D8 */ u8 unk0D8[0x1C];    /* [0x23C] the vitals and stats below as the battle began */
     /* 0x0F4 */ s32 hp;             /* [0x258] */
     /* 0x0F8 */ s32 maxHp;          /* [0x25C] */
@@ -77,7 +81,11 @@ typedef struct BtlUnitDataA {
     /* 0x224 */ u8 unk224[4];
     /* 0x228 */ s32 unk228;         /* [0x38C] */
     /* 0x22C */ s16 speedBonus;     /* [0x390] added to agility for the turn order */
-    /* 0x22E */ u8 unk22E[0x62];
+    /* 0x22E */ u8 unk22E[2];
+    /* 0x230 */ u32 history[6];     /* [0x394] keys handed back to the battle's accumulators with the unit */
+    /* 0x248 */ s32 cursor;         /* [0x3AC] the newest history slot */
+    /* 0x24C */ s32 total;          /* [0x3B0] */
+    /* 0x250 */ u8 unk250[0x40];
     /* 0x290 */ s8 state;           /* [0x3F4] */
     /* 0x291 */ u8 unk291[3];
     /* 0x294 */ BtlUnitRecordA *record; /* [0x3F8] the unit record the combatant was built from */
@@ -93,12 +101,14 @@ typedef struct BtlUnitDataA {
 struct BtlCombatantEntryA {
     /* 0x000 */ u64 flags;
     /* 0x008 */ s16 ids[50];        /* the member ids the entry is listed under; the first is the unit's index */
-    /* 0x06C */ u8 unk06C[2];
+    /* 0x06C */ s16 listedSlot;     /* -1 once the entry is removed */
     /* 0x06E */ s16 selectionIndex;
     /* 0x070 */ u8 unk070[4];
     /* 0x074 */ s32 properties[50]; /* per-property counters, indexed by a script's property id */
     /* 0x13C */ s16 modifiers[9];
-    /* 0x14E */ u8 unk14E[0xA];
+    /* 0x14E */ u8 unk14E[2];
+    /* 0x150 */ u32 modifierFlags;
+    /* 0x154 */ u8 unk154[4];
     /* 0x158 */ s32 targetDelay;    /* positive: not selectable yet */
     /* 0x15C */ u8 unk15C[8];
     /* 0x164 */ BtlUnitDataA data;
@@ -119,7 +129,10 @@ typedef char BtlCombatantEntryALayoutCheck[
     offsetof(BtlCombatantEntryA, properties) == 0x74 && offsetof(BtlCombatantEntryA, modifiers) == 0x13C &&
     offsetof(BtlCombatantEntryA, targetDelay) == 0x158 &&
     offsetof(BtlCombatantEntryA, data) == 0x164 && offsetof(BtlCombatantEntryA, data.hp) == 0x258 &&
-    offsetof(BtlCombatantEntryA, data.record) == 0x3F8 && sizeof(BtlCombatantEntryA) == 0x408 ? 1 : -1];
+    offsetof(BtlCombatantEntryA, data.record) == 0x3F8 && sizeof(BtlCombatantEntryA) == 0x408 &&
+    offsetof(BtlCombatantEntryA, listedSlot) == 0x6C && offsetof(BtlCombatantEntryA, modifierFlags) == 0x150 &&
+    offsetof(BtlCombatantEntryA, data.retained) == 0x23B && offsetof(BtlCombatantEntryA, data.history) == 0x394 &&
+    offsetof(BtlCombatantEntryA, data.cursor) == 0x3AC && offsetof(BtlCombatantEntryA, data.total) == 0x3B0 ? 1 : -1];
 typedef char BtlCombatantRecordLayoutCheck[
     sizeof(BtlCombatantActionA) == 8 && offsetof(BtlCombatantActionA, kind) == 2 &&
     offsetof(BattleCandidateRecord, flags) == 0x16 &&

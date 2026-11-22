@@ -31,7 +31,7 @@ void mapUpdatePerFrame(void);
 void mapEntryTriggerForScene(u32 scene);
 void frameTexResetFlags(void);
 void frameTexConfigureCaptureTextures(s32 arg);
-void FUN_00294834(s32 r0, s32 g0, s32 b0, s32 r1, s32 g1, s32 b1, s32 r2, s32 g2, s32 b2, s32 r3, s32 g3, s32 b3,
+void playerLightsSetup(s32 r0, s32 g0, s32 b0, s32 r1, s32 g1, s32 b1, s32 r2, s32 g2, s32 b2, s32 r3, s32 g3, s32 b3,
                   f32 f0, f32 f1, f32 f2, f32 f3, f32 f4, f32 f5, f32 f6, f32 f7, f32 f8);
 void FUN_0028a420(s32 mode, s32 option);
 void linkHolderClearFlagGroup(u32 arg);
@@ -101,7 +101,7 @@ u32 FUN_002eeb80(void)
             FUN_002758d8();
             resourceTableReleaseHandles();
             FUN_0028a420(0, 0);
-            FUN_00294834(200, 200, 200, 130, 130, 130, 30, 30, 30, 150, 150, 150, 90.0f, -0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 30.0f, 1.5f);
+            playerLightsSetup(200, 200, 200, 130, 130, 130, 30, 30, 30, 150, 150, 150, 90.0f, -0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 30.0f, 1.5f);
             g_mapDepartSequence.frame = 100;
             g_gameState.mapReady = 1;
             mapUpdatePerFrame();

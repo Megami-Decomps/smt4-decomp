@@ -22,7 +22,7 @@ typedef struct EditorOffsets0031ba38 {
     /* 0x0c */ s32 extraOffset;
 } EditorOffsets0031ba38;
 
-void FUN_002f2aa8(EditorObject0031ba38 *object);
+void effMenuTextEntryStep(EditorObject0031ba38 *object);
 s32 effMenuNodeGetState(EditorObject0031ba38 *object);
 s32 linkedFindItemByIndex(u32 source, s32 offset);
 void namedObjectFormatName(EditorObject0031ba38 *object, s32 offset);
@@ -35,7 +35,7 @@ u32 effectEditorUpdate(void)
 {
     s32 data;
 
-    FUN_002f2aa8(g_effectEditor.object);
+    effMenuTextEntryStep(g_effectEditor.object);
     s32 position = g_effectEditorState.extraOffset + g_effectEditor.baseOffset;
     data = linkedFindItemByIndex(g_effectEditor.source, position);
     s32 nameOffset = data + 0x9c;

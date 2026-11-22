@@ -351,7 +351,9 @@ struct GameStateA {
     /* 0x654 */ s32 lastWallPlane; /* plane index of the last wall hit (-1: none) */
     /* 0x658 */ u8 unk658[8];
     /* 0x660 */ s32 showAllEntries;      /* nonzero: every entry is visible, requirements ignored */
-    /* 0x664 */ u8 unk664[8];
+    /* 0x664 */ u8 unk664[2];
+    /* 0x666 */ u8 relicSearchAlways;    /* nonzero: a relic search never comes up empty by chance */
+    /* 0x667 */ u8 unk667[5];
     /* 0x66C */ s32 stageOverride;       /* -1: derive the stage from the data table */
     /* 0x670 */ s32 groupOverride;       /* -1: derive the group from the data table */
     /* 0x674 */ u8 unk674[2];

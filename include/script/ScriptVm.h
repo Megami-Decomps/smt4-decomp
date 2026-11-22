@@ -128,6 +128,12 @@ typedef char ScriptContextLayout[
 
 extern ScriptContext g_scrContext;
 
+/* One entry of the script command table, indexed by a command instruction's operand. */
+struct ScriptCommand {
+    /* 0x0 */ s32 (*handler)(void);   /* runs the command; 0 asks the process to wait */
+    /* 0x4 */ s32 argumentCount;      /* what the command takes off the script's stack */
+};
+
 extern s32 g_scrIntVars[0x180];   /* script integer variables */
 extern f32 g_scrFloatVars[0x180]; /* script float variables */
 

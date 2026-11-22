@@ -25,17 +25,17 @@ struct BattleSkillResponseMasks {
     /* 0x078 */ u64 unk078;          // 0x400000000
     /* 0x080 */ u64 allyKind;        // 0x2000000000: acts on a queued ally action
     /* 0x088 */ u64 tierThird;       // 0x8000000000: action tier 3
-    /* 0x090 */ u64 unk090;          // 0x2
-    /* 0x098 */ u64 alwaysEscape;    // 0x4: the battle always lets the party escape
+    /* 0x090 */ u64 noEscapeBonus;   // 0x2: drops the escape chance's bonus term (FUN_004c67d0)
+    /* 0x098 */ u64 unk098;          // 0x4
     /* 0x0A0 */ u64 assistActive;    // 0x200
-    /* 0x0A8 */ u64 alwaysProc;      // 0x40000: chance skills always fire
+    /* 0x0A8 */ u64 alwaysProc;      // 0x40000: chance skills always fire; the party always escapes
     /* 0x0B0 */ u64 stateBlocked;    // 0x400000
     /* 0x0B8 */ u64 unk0B8;          // 0x4000000
     /* 0x0C0 */ u64 tierForced;      // 0x80
-    /* 0x0C8 */ u64 markerEscape;    // 0x100: the marker that always lets the party escape
-    /* 0x0D0 */ u64 markerGuarantee; // 0x10000: guarantees the assist; never lets the party escape
-    /* 0x0D8 */ u64 unk0D8;          // 0x400000
-    /* 0x0E0 */ u64 unk0E0;          // 0x800000
+    /* 0x0C8 */ u64 unk0C8;          // 0x100
+    /* 0x0D0 */ u64 markerGuarantee; // 0x10000: guarantees the assist
+    /* 0x0D8 */ u64 markerEscape;    // 0x400000: the marker that always lets the party escape
+    /* 0x0E0 */ u64 markerNoEscape;  // 0x800000: the marker that never lets the party escape
     /* 0x0E8 */ u64 unk0E8;          // 0x4000000
     /* 0x0F0 */ u64 reinforceForced; // 0x20000000
     /* 0x0F8 */ u64 blockKind;       // 0x100000000: never acts

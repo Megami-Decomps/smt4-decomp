@@ -1,0 +1,56 @@
+/* NON_MATCHING: only the -1 store / context test block differs: retail materialises -1 in r1 and loads the context into
+ * r0 after the store (the build loads it first into r1). A memset of unkc0 to 0xFF matches, but unkc0's type is unknown
+ * (one word as far as any user shows), so the bytewise clear would be chosen for the schedule alone (rejected in the
+ * wave 76 review, with btlStageDestroy, whose teardown is the same). */
+#include "shard/W6_W6Match1_BattleStageModel.h"
+#include "battle/BtlStageStackRegion.h"
+#include "nn/Result.h"
+#include "nn/os/Handle.h"
+#include "nn/os/Thread.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "sys/ResultReport.h"
+
+extern "C" {
+s32 svcWaitSynchronizationN(s32 *signaled, u32 *handles, s32 count, s32 waitAll, s64 timeout);
+void FUN_002759bc(void);
+void mdlHandleArrayDestroy(BattleStageModel *stage);
+
+/* Waits for the loader thread to end, then finalizes and closes it. */
+static __inline void stageStopThread(BattleStageModel *stage)
+{
+    s32 signaled;
+    u32 handles[1] = { stage->thread.handle };
+    s32 result = svcWaitSynchronizationN(&signaled, handles, 1, 0, -1);
+    bool failed = nnResultIsFailure(result);
+    if (failed) {
+        resultHandleFailure(result, failed);
+    }
+    stage->thread.joined = 1;
+    stage->thread.finalize();
+    stage->thread.NnOsHandle::~NnOsHandle();
+}
+
+/* Tears the stage model down: joins its loader thread, releases the thread's stack, the frame
+ * textures and the model handles. */
+void btlStageModelRelease(BattleStageModel *stage)
+{
+    stageStopThread(stage);
+    if (stage->stackRegion != NULL) {
+        addressSpaceRegionFree(stage->stackRegion);
+        delete static_cast<StackRegion *>(stage->stackRegion);
+        stage->stackRegion = NULL;
+    }
+    if (stage->threadStack != NULL) {
+        asdMemFree(stage->threadStack);
+        stage->threadStack = NULL;
+    }
+    stage->unkc0 = -1;
+    if (stage->context != NULL) {
+        stage->context = NULL;
+    }
+    FUN_002759bc();
+    mdlHandleArrayDestroy(stage);
+    stage->state = 0;
+}
+
+} /* extern "C" */

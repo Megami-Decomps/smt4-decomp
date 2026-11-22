@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild from asm of a battle phase step that clears the phase's flag masks and advances to the next sub-phase; armcc here schedules the 64-bit mask updates (retail loads each mask half separately and uses bic/mvn chains) and the saturating counters differently. */
+/* NON_MATCHING: 137 lines. The mask clears one statement per mask, the resolved flag, the counter clamps, FUN_004fbf90's two arguments, the empty FUN_004c6294 call and the not-pending path first now follow retail; retail still loads the flag word and the masks in another order (ldm/ldrd pairs, mvn+and against bic), stores the resolved-branch clear with strd, and rematerialises the phase constants (mov #12/#24 before the NULL test) per branch. */
 #include "common.h"
 #include "gamedata/GameFlags.h"
 #include "battle/BtlUiGlobal.h"
@@ -59,77 +59,77 @@ u32 *btlFindFirstEntryMatchingCategoryAndRequiredMask(BattleFlagsState *battle);
 void btlAiBuildTurnOrder(BattleFlagsState *battle);
 void btlUiIdsRefresh(BtlUiA *block);
 void btlUiEnterStateEntryStartup(BtlUiA *block);
-void FUN_004fbf90(s32 arg);
+void FUN_004fbf90(s32 id, u32 options);
 void FUN_003eafa0(BattleFlagsState *battle, s32 arg);
 void btlClearActiveCombatantActions(BattleFlagsState *battle, s32 arg);
 void btlClearPartitionSlotFlags(BattleFlagsState *battle, s32 arg);
 void FUN_004c6294(void);
-
-/* Clamps a byte counter's increment at 255. */
-static void bumpByte(u8 *counter)
-{
-    u32 value = (u8)(*counter + 1);
-    if (value >= 255)
-        value = 255;
-    *counter = (u8)value;
-}
 
 /* Runs one step of the battle phase: clears the masks of the phases that just ended and, depending on
  * whether the phase resolved, starts the next sub-phase. */
 void FUN_003f034c(BattleFlagsState *battle)
 {
     gameFlagSetValue(0x591, 0, 1);
-    battle->flags &= ~g_btlMain.clearMaskC & ~g_btlMain.clearMaskA & ~g_btlMain.clearMaskD & ~g_btlMain.clearMaskH;
+    battle->flags &= ~g_btlMain.clearMaskC;
+    battle->flags &= ~g_btlMain.clearMaskA;
+    battle->flags &= ~g_btlMain.clearMaskD;
+    battle->flags &= ~g_btlMain.clearMaskH;
     if (battle->hasExtra)
         battle->extra = btlFindFirstEntryMatchingCategoryAndRequiredMask(battle)[0x100];
-    battle->flags &= ~g_btlMain.clearMaskE & ~g_btlMain.clearMaskF;
-    bool resolved = (battle->flags & g_btlMain.resolveMask) != 0;
-    battle->flags &= ~g_btlMain.resolveMask & ~g_btlMain.clearMaskG;
+    battle->flags &= ~g_btlMain.clearMaskE;
+    battle->flags &= ~g_btlMain.clearMaskF;
+    bool resolved = false;
+    if (battle->flags & g_btlMain.resolveMask)
+        resolved = true;
+    battle->flags &= ~g_btlMain.resolveMask;
+    battle->flags &= ~g_btlMain.clearMaskG;
     if (resolved) {
         btlAiBuildTurnOrder(battle);
         btlUiIdsRefresh(g_btlUiBlock);
-        battle->flags &= ~g_btlMain.clearMaskA & ~g_btlMain.clearMaskD;
+        battle->flags &= ~g_btlMain.clearMaskA;
+        battle->flags &= ~g_btlMain.clearMaskD;
         if (g_btlMain.state != NULL)
             g_btlMain.state->phase = 12;
         return;
     }
     btlUiEnterStateEntryStartup(g_btlUiBlock);
-    if (battle->flags & g_btlMain.pendingMask) {
-        battle->flags &= ~g_btlMain.pendingMask & ~g_btlMain.clearMaskB;
-        bumpByte(&battle->counterA);
-        bumpByte(&battle->counterB);
+    if ((battle->flags & g_btlMain.pendingMask) == 0) {
+        if (battle->encounterKind == 2 && battle->encounterTimer > 0)
+            battle->encounterTimer--;
+        FUN_004fbf90(0, 0);
+        battle->flags = (battle->flags | g_btlMain.pendingMask) & ~g_btlMain.clearMaskB;
+        battle->counterB++;
+        battle->counterB = battle->counterB >= 255 ? 255 : battle->counterB;
         if (battle->counterC >= 0) {
             battle->counterC++;
-            if (battle->counterC >= 255)
-                battle->counterC = 255;
+            battle->counterC = battle->counterC >= 255 ? 255 : battle->counterC;
         }
         if (g_btlMain.state != NULL)
             g_btlMain.state->phase = 24;
-        FUN_003eafa0(battle, 0);
-        btlClearActiveCombatantActions(battle, 1);
-        btlClearPartitionSlotFlags(battle, 0);
+        FUN_003eafa0(battle, 1);
+        btlClearActiveCombatantActions(battle, 0);
+        btlClearPartitionSlotFlags(battle, 1);
         FUN_004c6294();
+        battle->counterD++;
+        battle->counterD = battle->counterD >= 255 ? 255 : battle->counterD;
         return;
     }
-    if (battle->encounterKind == 2 && battle->encounterTimer > 0)
-        battle->encounterTimer--;
-    FUN_004fbf90(0);
-    battle->flags = (battle->flags | g_btlMain.pendingMask) & ~g_btlMain.clearMaskB;
-    bumpByte(&battle->counterB);
+    battle->flags &= ~g_btlMain.pendingMask;
+    battle->flags &= ~g_btlMain.clearMaskB;
+    battle->counterA++;
+    battle->counterA = battle->counterA >= 255 ? 255 : battle->counterA;
+    battle->counterB++;
+    battle->counterB = battle->counterB >= 255 ? 255 : battle->counterB;
     if (battle->counterC >= 0) {
         battle->counterC++;
-        if (battle->counterC >= 255)
-            battle->counterC = 255;
+        battle->counterC = battle->counterC >= 255 ? 255 : battle->counterC;
     }
     if (g_btlMain.state != NULL)
         g_btlMain.state->phase = 24;
-    FUN_003eafa0(battle, 1);
-    btlClearActiveCombatantActions(battle, 0);
-    btlClearPartitionSlotFlags(battle, 1);
-    u32 value = battle->counterD + 1;
-    if ((u16)value >= 255)
-        value = 255;
-    battle->counterD = (u16)value;
+    FUN_003eafa0(battle, 0);
+    btlClearActiveCombatantActions(battle, 1);
+    btlClearPartitionSlotFlags(battle, 0);
+    FUN_004c6294();
 }
 
 } /* extern "C" */

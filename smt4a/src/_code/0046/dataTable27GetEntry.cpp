@@ -1,16 +1,13 @@
-#include "shard/Shard0046.h"
+#include "classes/Obj5333c0.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
-extern void *dataTableGet(u32 index, u32 type);
-extern Entry88 *dataTableGetEntries(void *table);
-extern u32 dataTableGetCount(void *table);
-
-/* Entry `index` of data table 0x27 (type 0), or NULL when out of range. */
-Entry88 *dataTable27GetEntry(u32 unused, u32 index)
+/* Entry `index` of data table 0x27 (type 0), or NULL when out of range; the scene's table byte is not used. */
+SceneTalkRecord *dataTable27GetEntry(const u8 *table27, u32 index)
 {
     void *table = dataTableGet(0x27, 0);
-    Entry88 *entries = dataTableGetEntries(table);
+    SceneTalkRecord *entries = (SceneTalkRecord *)dataTableGetEntries(table);
     u32 count = dataTableGetCount(table);
 
     if (index >= count) {

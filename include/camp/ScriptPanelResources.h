@@ -3,7 +3,9 @@
 #include "common.h"
 #include <stddef.h>
 #include "shard/Shard004B.h"
+#include "gfx/TransformInterpolation.h"
 struct ScriptProcess;
+struct TableGroupHeader;
 struct MikadoRecord;
 class MikadoTalkWorkA;
 struct CampScriptPanelResources {
@@ -18,11 +20,14 @@ struct CampScriptPanelResources {
             /* 0x0030 */ s32 frame;        /* frames counted by the step */
             u8 unk0034[8];
             /* 0x003C */ s16 sceneId;
-            u8 unk003E[0xA];
+            u8 unk003E[2];
+            /* 0x0040 */ s16 startEntryId; /* the list entry the menu opens on (0: none) */
+            u8 unk0042[6];
             /* 0x0048 */ u8 exitRequest[4]; /* how to leave with the camp's resources kept: [0] map selection 100-199,
                                              * [1] below 100, [2] 200 and up, [3] save mode 2 */
             /* 0x004C */ u16 menuTotal;    /* flaggedValueHolderGetTotal of the menu */
         } mikado;
+        /* 0x0000 */ TransformInterpolation scroll; /* the view's scroll towards the selected entry */
         struct {
             u8 prefix[0x28];
             u32 state, timer;
@@ -51,7 +56,10 @@ struct CampScriptPanelResources {
     /* 0x1134 */ u8 unk1134[4];
     /* 0x1138 */ void *talkScript;   /* "mikado/talk.bf" */
     /* 0x113C */ void *talkMessages; /* "mikado/talk.mbm" */
-    /* 0x1140 */ u8 unk1140[0x10];
+    /* 0x1140 */ u8 unk1140[4];
+    /* 0x1144 */ TableGroupHeader *conditionNames; /* entry names of the condition script */
+    /* 0x1148 */ u8 unk1148[4];
+    /* 0x114C */ ScriptProcess *conditionScript;   /* runs a list entry's availability condition */
     /* 0x1150 */ void *scriptFileB;
     /* 0x1154 */ void *messageFileB;
     /* 0x1158 */ ScriptProcess *scriptB;
@@ -86,7 +94,10 @@ typedef char CampScriptPanelViewOffsets[
     offsetof(CampScriptPanelResources, panel.menu.inputLocked) == 0xA88 &&
     offsetof(CampScriptPanelResources, panel.record) == 0x1118 &&
     offsetof(CampScriptPanelResources, panel.group) == 0x1120 &&
+    offsetof(CampScriptPanelResources, mikado.startEntryId) == 0x40 &&
     offsetof(CampScriptPanelResources, talkMessages) == 0x113C &&
+    offsetof(CampScriptPanelResources, conditionNames) == 0x1144 &&
+    offsetof(CampScriptPanelResources, conditionScript) == 0x114C &&
     offsetof(CampScriptPanelResources, keepUi) == 0x1168 &&
     offsetof(CampScriptPanelResources, talkWork) == 0x1218 &&
     offsetof(CampScriptPanelResources, cachedFiles) == 0x121C ? 1 : -1];

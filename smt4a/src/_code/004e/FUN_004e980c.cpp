@@ -1,6 +1,9 @@
-/* NON_MATCHING: the 64-bit mask tests and the shift-or updates compile to different instruction groups than retail, and the pair-unrolled selection loop differs; the selection logic is the same. */
+/* NON_MATCHING: 67 lines. Retail compares the unit-flag loop index signed (blt) yet keeps the loop rolled (a u32 index here; s32 unrolls it), clears the candidate slot with mvn #0, sets the found count before the clearing loop, and builds the 64-bit chosen-mask OR in the other operand order with one strd. */
 #include "common.h"
 #include "gamedata/NkmBaseRecordA.h"
+#include "battle/btlAction.h"
+#include "battle/BtlGlobals.h"
+#include "battle/BtlUnitWork.h"
 
 extern "C" {
 
@@ -46,9 +49,6 @@ typedef struct PickCandidate {
     u8 unk05;
 } PickCandidate;
 
-extern u64 DAT_00571150;
-extern u64 DAT_00571168;
-extern u64 DAT_00571170;
 
 void __aeabi_memset4(void *destination, u32 size, s32 value);
 PickSlots *gameGetSlotTable(void);
@@ -57,31 +57,34 @@ void asdOperatorDeleteC(void *block);
 PickRecord *gameGetSlotRecord(s32 index);
 s32 bitsAt60Test(PickRecord *record, u32 bit);
 void qsort(void *base, u32 count, s32 size, s32 (*compare)(const void *, const void *));
-s32 FUN_003d2d7c(const void *a, const void *b);
+s32 uiComparePriorityAndKey(const void *a, const void *b);
 
 /* Marks the usable battle slots, then picks up to three stock units ranked by the candidate sort
  * and records them in the chosen mask and the order bytes. */
-void FUN_004e980c(PickOwner *owner, u8 *flags)
+void FUN_004e980c(PickOwner *owner, BtlUnitA *unit)
 {
-    for (s32 i = 0; i < 4; i++) {
+    /* Read before the loop: retail loads all three masks once, ahead of the flag stores that could alias them. */
+    u64 targetMask = g_btlAction.buttons.confirm;
+    u64 reachMask = g_btlAction.interaction.reachMask;
+    u64 requiredMask = g_btlAction.interaction.requiredMask;
+    for (u32 i = 0; i < 4; i++) {
         u64 unitFlags = owner->state->entries[i].flags;
-
-        if ((unitFlags & DAT_00571150) == 0 && (unitFlags & DAT_00571170) == 0 && (unitFlags & DAT_00571168) == 0) {
-            flags[0x38 + i] = 1;
+        if ((unitFlags & targetMask) == 0 && (unitFlags & reachMask) == 0 && (unitFlags & requiredMask) == 0) {
+            unit->targets[i] = 1;
         }
     }
     __aeabi_memset4(owner->state->order, 3, -1);
-    u32 stockCount = gameGetSlotTable()->count;
+    s32 stockCount = gameGetSlotTable()->count;
     PickCandidate *candidates = (PickCandidate *)asdOperatorNewD(stockCount * sizeof(PickCandidate));
 
-    for (u32 i = 0; i < stockCount; i++) {
-        candidates[i].slot = 0xFF;
+    for (s32 i = 0; i < stockCount; i++) {
+        candidates[i].slot = -1;
         candidates[i].key = 0;
         candidates[i].rank = 0;
     }
     s32 found = 0;
 
-    for (u32 i = 0; i < stockCount; i++) {
+    for (s32 i = 0; i < stockCount; i++) {
         if (gameGetSlotTable()->stock[i] < 0) {
             continue;
         }
@@ -95,13 +98,13 @@ void FUN_004e980c(PickOwner *owner, u8 *flags)
         }
     }
     if (found != 0) {
-        qsort(candidates, found, 6, FUN_003d2d7c);
-        s32 picks = found >= 4 ? 3 : found;
+        qsort(candidates, found, 6, uiComparePriorityAndKey);
+        if (found > 3) {
+            found = 3;
+        }
 
-        for (s32 i = 0; i < picks; i++) {
-            PickState *state = owner->state;
-
-            state->chosenMask |= 1 << (candidates[i].slot + 1);
+        for (s32 i = 0; i < found; i++) {
+            owner->state->chosenMask |= 1 << (candidates[i].slot + 1);
             owner->state->order[i] = candidates[i].slot + 1;
         }
     }

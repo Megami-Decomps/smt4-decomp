@@ -8815,3 +8815,29 @@
 003ec668 btlMotionFindSequence inferred finds a motion sequence row (w75-f2)
 003eca48 btlMotionFindSelection inferred finds a unit's motion selection row (w75-f2)
 004de37c btlUnitTargetPanelStep inferred steps the unit target panel (w75-f2)
+00227980 scrRunCommand inferred twin of smt4 scrRunCommand
+00533f90 g_scrCommandTable inferred twin of smt4 g_scrCommandTable (scrRunCommand's table)
+0013f444 sentinelLookupAdd inferred twin of smt4 sentinelLookupAdd
+003ea1cc btlTurnOrderRankOf inferred twin of smt4 btlTurnOrderRankOf (BtlMainStateA::turnOrder)
+002e0924 effectDrawRectOutline inferred twin of smt4 effectDrawRectOutline
+001600b8 gfxBlockListStart inferred starts the graphics block list (w76-o1)
+00375ec8 effMenuTextEntryStep inferred twin of smt4 effMenuTextEntryStep
+005c10d8 g_effMenuCharTable inferred twin of smt4 g_effMenuCharTable
+005c10c1 g_effMenuCellText inferred twin of smt4 g_effMenuCellText
+0036d5e0 mapSweepCollisionPlanesFar inferred twin of smt4 mapSweepCollisionPlanesFar
+005ecf14 g_mapCollisionTouchedTriangles inferred twin of smt4 g_mapCollisionTouchedTriangles
+005ed114 g_mapCollisionTouchedQuads inferred twin of smt4 g_mapCollisionTouchedQuads
+005ed294 g_mapCollisionTouchedSegmentsA inferred twin of smt4 g_mapCollisionTouchedSegmentsA
+005ed334 g_mapCollisionTouchedSegmentsB inferred twin of smt4 g_mapCollisionTouchedSegmentsB
+004fbdd4 btlReflectCreateTint inferred twin of smt4 btlReflectCreateTint
+002a3348 scrCommMessageShowBustupWait inferred message script command: the bust-up form for (command, 13) pairs, else the plain one (w76-o3)
+002a3470 scrCommMessageShowBustupStop inferred message script command: stops the event textures and bust-up slots for (command, 13) pairs (w76-o3)
+00285b58 uniteDrawListPanel inferred draws the fusion menu's list panel (w76-f1)
+002b358c billboardShapeDraw inferred builds the billboard quads of a shape's sprites (w76-f1)
+002b3538 billboardShapeGetStream inferred returns a billboard shape's vertex attribute stream (w76-f1)
+00184c4c debugQuadVertex inferred the debug hook taking a quad vertex's colour, position and texture coordinates (w76-f1)
+004b6bc4 contentMenuRebuildGroup inferred twin of smt4 contentMenuRebuildGroup (w76-f2)
+004c9d04 btlEntryRemove inferred twin of smt4 btlEntryRemove (w76-f2)
+003774e8 relicSearchDraw inferred draws the partner relic search (w76-f2)
+0058800c g_scrConditionRejected inferred set by the condition script when an entry is rejected (w76-f2)
+005713f0 g_btlSkillResponseMasks evidence size:0x118 sizeof(BattleSkillResponseMasks) is asserted 0x118 and the object ends at g_btlCamera; retail pool words DAT_00571420/DAT_00571480 are +0x30/+0x90 into it (w76-o4)

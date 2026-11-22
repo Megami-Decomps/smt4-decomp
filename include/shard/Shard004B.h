@@ -3,20 +3,31 @@
 #define SHARD_SHARD004B_H
 
 #include "common.h"
+#include <stddef.h>
 #include "ui/UiSpriteState.h"
 
 #include "shard/Shard004A.h"
 
 typedef struct ListEntry20 {
     /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ u8 kind;
-    /* 0x21 */ u8 unk21[7];
+    /* 0x20 */ u8 kind;          /* the list holds one entry of each nonzero kind */
+    /* 0x21 */ u8 unk21;
+    /* 0x22 */ s16 x;            /* its place on the scrolling view */
+    /* 0x24 */ s16 y;
+    /* 0x26 */ u8 unk26[2];
     /* 0x28 */ s16 cameraView;   /* the view the scene's camera controller takes for this entry */
     /* 0x2A */ u8 unk2A;
     /* 0x2B */ s8 modelIndex;    /* which of the location's models the entry shows */
-    /* 0x2C */ u8 unk2C[0x2E];
+    /* 0x2C */ char conditionName[0x10]; /* entry of the condition script that may hide it, "0" for none */
+    /* 0x3C */ u16 requiredFlag; /* game flag that must be set (0: none) */
+    /* 0x3E */ u16 forbiddenFlag; /* game flag that must be clear (0: none) */
+    /* 0x40 */ u8 unk40[0x1A];
     /* 0x5A */ u16 unk5A;
+    /* 0x5C */ u8 unk5C[0x74];
 } ListEntry20;
+typedef char ListEntry20LayoutCheck[sizeof(ListEntry20) == 0xD0 && offsetof(ListEntry20, x) == 0x22 &&
+    offsetof(ListEntry20, cameraView) == 0x28 && offsetof(ListEntry20, conditionName) == 0x2C &&
+    offsetof(ListEntry20, requiredFlag) == 0x3C && offsetof(ListEntry20, unk5A) == 0x5A ? 1 : -1];
 
 typedef struct Menu4C {
     /* 0x000 */ u8 unk000[0x20];

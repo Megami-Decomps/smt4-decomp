@@ -157,7 +157,7 @@ s32 btlUiIsWidgetOutsideClosingState(void *ui);
 s32 btlUiIsIdle(void *ui);
 void btlQueueSkillReflectActions(u32 first, u32 second, BattleTaskActor *actor, u32 flags, BattleTaskEffect effect);
 void btlAiScriptIsFinished(void *script);
-s32 FUN_0027de98(BattleTaskContext *work);
+s32 btlListedActionsPending(BattleTaskContext *work);
 s32 btlUiIsIdleForCommand(void *ui);
 void btlUiRecountParty(void *ui);
 void FUN_003ae3cc(void *ui);
@@ -566,7 +566,7 @@ extern "C" s32 battleMainProcessUpdate()
     case 15:
         if (work->timer < 0 || !battleTaskUiReady())
             break;
-        if (FUN_0027de98(work) || work->result == 0)
+        if (btlListedActionsPending(work) || work->result == 0)
             setBattleTaskState(16);
         else if (work->result == 6)
             setBattleTaskState(18);

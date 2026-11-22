@@ -1,4 +1,4 @@
-/* NON_MATCHING: FUN_004c9d04 takes four arguments (its definition; retail passes three zeros from r3); remaining: the entry flags load as ldm/ldrd instead of two ldr, the entry's unit pointer is formed as entry+0x400 and row+15 is computed before the effect lookup in retail, and the final command store folds the field offset into the slot index (retail adds it after). */
+/* NON_MATCHING: btlEntryRemove takes four arguments (its definition; retail passes three zeros from r3); remaining: the entry flags load as ldm/ldrd instead of two ldr, the entry's unit pointer is formed as entry+0x400 and row+15 is computed before the effect lookup in retail, and the final command store folds the field offset into the slot index (retail adds it after). */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
@@ -50,7 +50,7 @@ BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStat
 u32 FUN_004c9160(s32 kind, void *object, s32 mode, s32 option);
 void FUN_004fe764(s32 unit, CommandMenu *menu, s32 target, s32 value, s32 mode);
 void btlQueueActionMessage(s32 actor, CommandMenu *menu, u32 options, s32 a, s32 b, s32 c, s32 d);
-void FUN_004c9d04(s32 index, s32 a, s32 b, s32 c);
+void btlEntryRemove(s32 index, s32 a, s32 b, s32 c);
 void FUN_004fcf0c(s32 row, CommandMenu *menu, s32 first, s32 slot, s32 member, s32 last);
 void FUN_003f1b3c(BtlMainStateA *state, s32 section, s32 kind, u32 *effect, u32 *sound);
 void FUN_0047f7ac(u32 index, u32 value);
@@ -85,7 +85,7 @@ u32 FUN_004e0314(BattleMenuOwner *owner, CommandMenu *menu)
             BtlCombatantEntryA *entry = &owner->state->entries[i];
             if ((g_btlAction.targetableMask & entry->flags) != 0 && (entry->flags & g_btlAction.interaction.excludedMask) == 0 &&
                 (entry->data.statusFlags & 0x400) != 0) {
-                FUN_004c9d04(entry->selectionIndex, 0, 0, 0);
+                btlEntryRemove(entry->selectionIndex, 0, 0, 0);
             }
         }
         s32 row = 1;

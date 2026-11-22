@@ -75,5 +75,11 @@ typedef char EffMenuTextNodeLayoutCheck[sizeof(EffMenuTextNode) == 0x44 &&
 typedef char EffMenuTextListLayoutCheck[sizeof(EffMenuTextList) == 0xC &&
     offsetof(EffMenuTextList, head) == 8 ? 1 : -1];
 
+extern "C" {
+/* The menu's debug text: text at (x, y) in a colour index. __weak and undefined in the release build, so armlink
+ * turned every call into a NOP after its arguments (the text entry's field and character grid). */
+__weak void effMenuDebugDrawText(s32 x, s32 y, s32 color, const char *text);
+}
+
 
 #endif

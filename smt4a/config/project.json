@@ -25198,12 +25198,12 @@
     },
     {
       "address": "0x13f444",
-      "function": "FUN_0013f444",
+      "function": "sentinelLookupAdd",
       "module": "_code",
-      "object": "build/obj/_code/0013/FUN_0013f444.o",
+      "object": "build/obj/_code/0013/sentinelLookupAdd.o",
       "size": 96,
-      "source": "src/_code/0013/FUN_0013f444.cpp",
-      "target": "orig/target/_code/0013/FUN_0013f444.o",
+      "source": "src/_code/0013/sentinelLookupAdd.cpp",
+      "target": "orig/target/_code/0013/sentinelLookupAdd.o",
       "thumb": false
     },
     {
@@ -30660,12 +30660,12 @@
     },
     {
       "address": "0x1600b8",
-      "function": "FUN_001600b8",
+      "function": "gfxBlockListStart",
       "module": "_code",
-      "object": "build/obj/_code/0016/FUN_001600b8.o",
+      "object": "build/obj/_code/0016/gfxBlockListStart.o",
       "size": 64,
-      "source": "src/_code/0016/FUN_001600b8.cpp",
-      "target": "orig/target/_code/0016/FUN_001600b8.o",
+      "source": "src/_code/0016/gfxBlockListStart.cpp",
+      "target": "orig/target/_code/0016/gfxBlockListStart.o",
       "thumb": false
     },
     {
@@ -36940,12 +36940,12 @@
     },
     {
       "address": "0x184c4c",
-      "function": "FUN_00184c4c",
+      "function": "debugQuadVertex",
       "module": "_code",
-      "object": "build/obj/_code/0018/FUN_00184c4c.o",
+      "object": "build/obj/_code/0018/debugQuadVertex.o",
       "size": 4,
-      "source": "src/_code/0018/FUN_00184c4c.cpp",
-      "target": "orig/target/_code/0018/FUN_00184c4c.o",
+      "source": "src/_code/0018/debugQuadVertex.cpp",
+      "target": "orig/target/_code/0018/debugQuadVertex.o",
       "thumb": false
     },
     {
@@ -56754,12 +56754,12 @@
     },
     {
       "address": "0x227980",
-      "function": "FUN_00227980",
+      "function": "scrRunCommand",
       "module": "_code",
-      "object": "build/obj/_code/0022/FUN_00227980.o",
+      "object": "build/obj/_code/0022/scrRunCommand.o",
       "size": 104,
-      "source": "src/_code/0022/FUN_00227980.cpp",
-      "target": "orig/target/_code/0022/FUN_00227980.o",
+      "source": "src/_code/0022/scrRunCommand.cpp",
+      "target": "orig/target/_code/0022/scrRunCommand.o",
       "thumb": false
     },
     {
@@ -63193,12 +63193,12 @@
     },
     {
       "address": "0x285b58",
-      "function": "FUN_00285b58",
+      "function": "uniteDrawListPanel",
       "module": "_code",
-      "object": "build/obj/_code/0028/FUN_00285b58.o",
+      "object": "build/obj/_code/0028/uniteDrawListPanel.o",
       "size": 1700,
-      "source": "src/_code/0028/FUN_00285b58.cpp",
-      "target": "orig/target/_code/0028/FUN_00285b58.o",
+      "source": "src/_code/0028/uniteDrawListPanel.cpp",
+      "target": "orig/target/_code/0028/uniteDrawListPanel.o",
       "thumb": false
     },
     {
@@ -65191,12 +65191,12 @@
     },
     {
       "address": "0x2a3348",
-      "function": "FUN_002a3348",
+      "function": "scrCommMessageShowBustupWait",
       "module": "_code",
-      "object": "build/obj/_code/002a/FUN_002a3348.o",
+      "object": "build/obj/_code/002a/scrCommMessageShowBustupWait.o",
       "size": 168,
-      "source": "src/_code/002a/FUN_002a3348.cpp",
-      "target": "orig/target/_code/002a/FUN_002a3348.o",
+      "source": "src/_code/002a/scrCommMessageShowBustupWait.cpp",
+      "target": "orig/target/_code/002a/scrCommMessageShowBustupWait.o",
       "thumb": false
     },
     {
@@ -65211,12 +65211,12 @@
     },
     {
       "address": "0x2a3470",
-      "function": "FUN_002a3470",
+      "function": "scrCommMessageShowBustupStop",
       "module": "_code",
-      "object": "build/obj/_code/002a/FUN_002a3470.o",
+      "object": "build/obj/_code/002a/scrCommMessageShowBustupStop.o",
       "size": 168,
-      "source": "src/_code/002a/FUN_002a3470.cpp",
-      "target": "orig/target/_code/002a/FUN_002a3470.o",
+      "source": "src/_code/002a/scrCommMessageShowBustupStop.cpp",
+      "target": "orig/target/_code/002a/scrCommMessageShowBustupStop.o",
       "thumb": false
     },
     {
@@ -66759,22 +66759,22 @@
     },
     {
       "address": "0x2b3538",
-      "function": "FUN_002b3538",
+      "function": "billboardShapeGetStream",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002b3538.o",
+      "object": "build/obj/_code/002b/billboardShapeGetStream.o",
       "size": 84,
-      "source": "src/_code/002b/FUN_002b3538.cpp",
-      "target": "orig/target/_code/002b/FUN_002b3538.o",
+      "source": "src/_code/002b/billboardShapeGetStream.cpp",
+      "target": "orig/target/_code/002b/billboardShapeGetStream.o",
       "thumb": false
     },
     {
       "address": "0x2b358c",
-      "function": "FUN_002b358c",
+      "function": "billboardShapeDraw",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002b358c.o",
+      "object": "build/obj/_code/002b/billboardShapeDraw.o",
       "size": 1484,
-      "source": "src/_code/002b/FUN_002b358c.cpp",
-      "target": "orig/target/_code/002b/FUN_002b358c.o",
+      "source": "src/_code/002b/billboardShapeDraw.cpp",
+      "target": "orig/target/_code/002b/billboardShapeDraw.o",
       "thumb": false
     },
     {
@@ -71355,12 +71355,12 @@
     },
     {
       "address": "0x2e0924",
-      "function": "FUN_002e0924",
+      "function": "effectDrawRectOutline",
       "module": "_code",
-      "object": "build/obj/_code/002e/FUN_002e0924.o",
+      "object": "build/obj/_code/002e/effectDrawRectOutline.o",
       "size": 144,
-      "source": "src/_code/002e/FUN_002e0924.cpp",
-      "target": "orig/target/_code/002e/FUN_002e0924.o",
+      "source": "src/_code/002e/effectDrawRectOutline.cpp",
+      "target": "orig/target/_code/002e/effectDrawRectOutline.o",
       "thumb": false
     },
     {
@@ -108425,12 +108425,12 @@
     },
     {
       "address": "0x36d5e0",
-      "function": "FUN_0036d5e0",
+      "function": "mapSweepCollisionPlanesFar",
       "module": "_code",
-      "object": "build/obj/_code/0036/FUN_0036d5e0.o",
+      "object": "build/obj/_code/0036/mapSweepCollisionPlanesFar.o",
       "size": 888,
-      "source": "src/_code/0036/FUN_0036d5e0.cpp",
-      "target": "orig/target/_code/0036/FUN_0036d5e0.o",
+      "source": "src/_code/0036/mapSweepCollisionPlanesFar.cpp",
+      "target": "orig/target/_code/0036/mapSweepCollisionPlanesFar.o",
       "thumb": false
     },
     {
@@ -110029,12 +110029,12 @@
     },
     {
       "address": "0x375ec8",
-      "function": "FUN_00375ec8",
+      "function": "effMenuTextEntryStep",
       "module": "_code",
-      "object": "build/obj/_code/0037/FUN_00375ec8.o",
+      "object": "build/obj/_code/0037/effMenuTextEntryStep.o",
       "size": 964,
-      "source": "src/_code/0037/FUN_00375ec8.cpp",
-      "target": "orig/target/_code/0037/FUN_00375ec8.o",
+      "source": "src/_code/0037/effMenuTextEntryStep.cpp",
+      "target": "orig/target/_code/0037/effMenuTextEntryStep.o",
       "thumb": false
     },
     {
@@ -110402,12 +110402,12 @@
     },
     {
       "address": "0x3774e8",
-      "function": "FUN_003774e8",
+      "function": "relicSearchDraw",
       "module": "_code",
-      "object": "build/obj/_code/0037/FUN_003774e8.o",
+      "object": "build/obj/_code/0037/relicSearchDraw.o",
       "size": 1248,
-      "source": "src/_code/0037/FUN_003774e8.cpp",
-      "target": "orig/target/_code/0037/FUN_003774e8.o",
+      "source": "src/_code/0037/relicSearchDraw.cpp",
+      "target": "orig/target/_code/0037/relicSearchDraw.o",
       "thumb": false
     },
     {
@@ -129526,12 +129526,12 @@
     },
     {
       "address": "0x3ea1cc",
-      "function": "uiFindValidIdOrdinal",
+      "function": "btlTurnOrderRankOf",
       "module": "_code",
-      "object": "build/obj/_code/003e/uiFindValidIdOrdinal.o",
+      "object": "build/obj/_code/003e/btlTurnOrderRankOf.o",
       "size": 64,
-      "source": "src/_code/003e/uiFindValidIdOrdinal.cpp",
-      "target": "orig/target/_code/003e/uiFindValidIdOrdinal.o",
+      "source": "src/_code/003e/btlTurnOrderRankOf.cpp",
+      "target": "orig/target/_code/003e/btlTurnOrderRankOf.o",
       "thumb": false
     },
     {
@@ -162461,13 +162461,16 @@
     },
     {
       "address": "0x4b6bc4",
-      "function": "FUN_004b6bc4",
+      "function": "contentMenuRebuildGroup",
       "module": "_code",
-      "object": "build/obj/_code/004b/FUN_004b6bc4.o",
+      "object": "build/obj/_code/004b/contentMenuRebuildGroup.o",
       "size": 1000,
-      "source": "src/_code/004b/FUN_004b6bc4.cpp",
-      "target": "orig/target/_code/004b/FUN_004b6bc4.o",
-      "thumb": false
+      "source": "src/_code/004b/contentMenuRebuildGroup.cpp",
+      "target": "orig/target/_code/004b/contentMenuRebuildGroup.o",
+      "thumb": false,
+      "multifile": [
+        "uiClampScrollOffset"
+      ]
     },
     {
       "address": "0x4b6fc4",
@@ -162527,7 +162530,10 @@
       "size": 708,
       "source": "src/_code/004b/questMenuPanelUpdate.cpp",
       "target": "orig/target/_code/004b/questMenuPanelUpdate.o",
-      "thumb": false
+      "thumb": false,
+      "multifile": [
+        "uiClampScrollOffset"
+      ]
     },
     {
       "address": "0x4b7968",
@@ -164780,12 +164786,12 @@
     },
     {
       "address": "0x4c9d04",
-      "function": "FUN_004c9d04",
+      "function": "btlEntryRemove",
       "module": "_code",
-      "object": "build/obj/_code/004c/FUN_004c9d04.o",
+      "object": "build/obj/_code/004c/btlEntryRemove.o",
       "size": 1860,
-      "source": "src/_code/004c/FUN_004c9d04.cpp",
-      "target": "orig/target/_code/004c/FUN_004c9d04.o",
+      "source": "src/_code/004c/btlEntryRemove.cpp",
+      "target": "orig/target/_code/004c/btlEntryRemove.o",
       "thumb": false
     },
     {
@@ -169929,12 +169935,12 @@
     },
     {
       "address": "0x4fbdd4",
-      "function": "FUN_004fbdd4",
+      "function": "btlReflectCreateTint",
       "module": "_code",
-      "object": "build/obj/_code/004f/FUN_004fbdd4.o",
+      "object": "build/obj/_code/004f/btlReflectCreateTint.o",
       "size": 116,
-      "source": "src/_code/004f/FUN_004fbdd4.cpp",
-      "target": "orig/target/_code/004f/FUN_004fbdd4.o",
+      "source": "src/_code/004f/btlReflectCreateTint.cpp",
+      "target": "orig/target/_code/004f/btlReflectCreateTint.o",
       "thumb": false
     },
     {

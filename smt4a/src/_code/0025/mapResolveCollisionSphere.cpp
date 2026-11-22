@@ -39,10 +39,10 @@ extern CollisionPlane *DAT_0058021c;
 extern CollisionPlane *DAT_00580220;
 extern CollisionPlane *DAT_00580224;
 extern CollisionPlane *DAT_00580228;
-extern u8 DAT_005ecf14[];     /* touched flags, wall list A */
-extern u8 DAT_005ed114[];     /* touched flags, wall list B */
-extern u8 DAT_005ed294[];     /* touched flags, floor list A */
-extern u8 DAT_005ed334[];     /* touched flags, floor list B */
+extern u8 g_mapCollisionTouchedTriangles[];     /* touched flags, wall list A */
+extern u8 g_mapCollisionTouchedQuads[];     /* touched flags, wall list B */
+extern u8 g_mapCollisionTouchedSegmentsA[];     /* touched flags, floor list A */
+extern u8 g_mapCollisionTouchedSegmentsB[];     /* touched flags, floor list B */
 
 void collisionTestProjectedSpherePlanes(f32 *reach, s32 type, s32 sub, CollisionPlane *plane);
 f32 sqrtf(f32 value);
@@ -66,10 +66,10 @@ u32 mapResolveCollisionSphere(f32 *position, f32 *previous, s32 shortReach)
     g_gameState.lastWallPass = -1;
     g_gameState.lastWallPlane = -1;
 
-    clearFlags(DAT_005ecf14, DAT_00580208);
-    clearFlags(DAT_005ed114, DAT_0058020c);
-    clearFlags(DAT_005ed294, DAT_00580210);
-    clearFlags(DAT_005ed334, DAT_00580214);
+    clearFlags(g_mapCollisionTouchedTriangles, DAT_00580208);
+    clearFlags(g_mapCollisionTouchedQuads, DAT_0058020c);
+    clearFlags(g_mapCollisionTouchedSegmentsA, DAT_00580210);
+    clearFlags(g_mapCollisionTouchedSegmentsB, DAT_00580214);
 
     if (sqrtf(dx * dx + dy * dy + dz * dz) < MOTION_EPSILON)
         return 1;
@@ -121,9 +121,9 @@ u32 mapResolveCollisionSphere(f32 *position, f32 *previous, s32 shortReach)
             f32 footZ = z - planes->nz * signedDistance;
             if (planes->type != PLANE_TYPE_WALL) {
                 if (pass == PASS_FLOORS_A)
-                    DAT_005ed294[i] = 1;
+                    g_mapCollisionTouchedSegmentsA[i] = 1;
                 else if (pass == PASS_FLOORS_B)
-                    DAT_005ed334[i] = 1;
+                    g_mapCollisionTouchedSegmentsB[i] = 1;
                 if (0.0f <= signedDistance) {
                     if (reach < distance)
                         reach = distance;
@@ -135,9 +135,9 @@ u32 mapResolveCollisionSphere(f32 *position, f32 *previous, s32 shortReach)
                 g_gameState.lastWallPass = pass;
                 g_gameState.lastWallPlane = i;
                 if (pass == PASS_WALLS_A)
-                    DAT_005ecf14[i] = 1;
+                    g_mapCollisionTouchedTriangles[i] = 1;
                 else if (pass == PASS_WALLS_B)
-                    DAT_005ed114[i] = 1;
+                    g_mapCollisionTouchedQuads[i] = 1;
                 if (lastWall >= 0 && reach < distance)
                     reach = distance;
                 changed = 1;

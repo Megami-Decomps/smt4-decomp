@@ -7,7 +7,7 @@ enum { DRAW_SECOND_RENDER_STATE = 0x100, DRAW_PREBUILT_SHAPE = 0x200 };
 
 extern "C" {
 s32 renderCtxPackPassFlags(u32 first, u32 second); // declcheck: local (the shared declaration does not compile here or changes this unit)
-void FUN_002b358c(u32 shape);
+void billboardShapeDraw(u32 shape);
 void camSetMatrixB(RenderCtxA *context, const nw::math::MTX44 *matrix);
 void renderCtxSelectBlendPreset(u32 argument);
 void primitiveSourceBuildBatch(u32 source);
@@ -23,7 +23,7 @@ void renderSubmissionDrawPacket(RenderSubmissionPacket *job, u32 argument)
         renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
     }
     if ((job->flags & DRAW_PREBUILT_SHAPE) != 0) {
-        FUN_002b358c(job->shape);
+        billboardShapeDraw(job->shape);
         renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
         return;
     }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: 214 lines: retail writes the four party entries out one by one (each through its own entry pointer; the build keeps the loop), keeps the flags word at 0x44A0 and the difficulty in stack slots and has an extra zeroed term cleared when its bit 1 is set (`movne sl, #0` on an already zero register) that is not recoverable; the formula and branches agree */
+/* NON_MATCHING: 180 lines: retail writes the four party entries out one by one (each through its own entry pointer; the build keeps the loop) and keeps the flags word at 0x44A0 and the difficulty in stack slots; the averages, the zeroed bonus term (`movne sl, #0`), the formula and the mode/clamp tail now follow retail (as in the Apocalypse twin FUN_004c67d0) */
 #include "battle/BtlMainAccess.h"
 #include "battle/BattleEntries.h"
 
@@ -33,6 +33,8 @@ s32 FUN_003bf1e4(void)
             partyLuck += entry->data.luck;
         }
     }
+    partyAgility /= partyCount;
+    partyLuck /= partyCount;
     s32 enemyCount = 0;
     s32 enemyAgility = 0;
     s32 enemyLuck = 0;
@@ -44,23 +46,31 @@ s32 FUN_003bf1e4(void)
             enemyLuck += entry->data.luck;
         }
     }
-    s32 agilityGap = partyAgility / partyCount - enemyAgility / enemyCount;
-    s32 luckGap = partyLuck / partyCount - enemyLuck / enemyCount;
+    enemyAgility /= enemyCount;
+    enemyLuck /= enemyCount;
+    s32 chance = partyAgility - enemyAgility + (partyLuck - enemyLuck) / 2;
+    s32 bonus = 0;
+    /* Retail performs this test and the store (movne) although the bonus is already 0. */
+    if ((state->battleFlags & 2) != 0) {
+        bonus = 0;
+    }
     s32 surprise = 0;
     if (btlFindNthActiveSpecialEntry(state, 1) >= 0) {
         surprise = -50;
     }
-    s32 chance = agilityGap + luckGap / 2 + state->encounterControl.difficulty * 10 + surprise + 50;
+    chance = chance + bonus + state->encounterControl.difficulty * 10 + surprise + 50;
     s32 mode = FUN_002973ec();
-    if (mode != 1) {
-        if (mode == 2 || chance < 0) {
-            return 0;
-        }
-        if (chance <= 100) {
-            return chance;
-        }
+    if (mode == 1) {
+        chance = 100;
+    } else if (mode == 2) {
+        chance = 0;
     }
-    return 100;
+    if (chance < 0) {
+        chance = 0;
+    } else if (chance > 100) {
+        chance = 100;
+    }
+    return chance;
 }
 
 }

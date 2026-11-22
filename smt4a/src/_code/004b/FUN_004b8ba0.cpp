@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild of the menu's entry-availability scan and mode switch (the draft's three copies of the availability script run are one helper here, inlined by retail); armcc here orders the entry loops, the 36-byte name buffer and the mode switch differently. */
+/* NON_MATCHING: 220 lines. The two kind tests as separate ifs, the u16 flag ids, the per-mode scroll blocks and the two contentMenuRebuildGroup calls now follow retail. Retail reads the entry count as `add r0, r0, #156; ldr r0, [r0, #2024]` (probably a one-instruction getter on the entry list that armlink inlined; unverified, no inlined.txt row), gives the three inlined availability runs their own 36-byte buffers (sp+40, sp+32), keeps a kind-2 hit flag on the stack whose only reader is a dead load in case 1 (an if/else with identical arms on such a flag lets armcc drop the load here, so the flag is not written: wave 76 review) and hoists 0/1 into r6/r5 before the switch. */
 #include "common.h"
 #include "runtime/Stdio.h"
 
@@ -6,8 +6,8 @@
 struct MenuEntry {
     /* 0x00 */ u8 unk00[0x2C];
     /* 0x2C */ char name[0x10];     /* "0" for an empty entry */
-    /* 0x3C */ s16 requiredFlag;    /* must be set (0: none) */
-    /* 0x3E */ s16 forbiddenFlag;   /* must not be set (0: none) */
+    /* 0x3C */ u16 requiredFlag;    /* must be set (0: none) */
+    /* 0x3E */ u16 forbiddenFlag;   /* must not be set (0: none) */
     /* 0x40 */ u8 unk40[0x14];
     /* 0x54 */ s16 kind;
 };
@@ -38,7 +38,7 @@ struct ScriptMenu {
 
 extern "C" {
 extern const char DAT_005328fc[];
-extern s32 DAT_0058800c;
+extern s32 g_scrConditionRejected;
 
 u32 tableGroupFindEntryIndex(u32 group, const char *name);
 void scrScriptProcessStartEntry(u32 script, u32 entry);
@@ -46,7 +46,7 @@ s32 scrRunOpcodesStub(u32 script);
 s32 gameFlagIsSet(s32 flag);
 MenuEntry *menu4CGetEntry(void *entries, s32 index);
 void menu4CScrollToKind(void *entries, s32 kind);
-void FUN_004b6bc4(ScriptMenu *menu, s32 selected, s32 mode);
+void contentMenuRebuildGroup(ScriptMenu *menu, s32 selected, s32 mode);
 void moveCameraCtrlSnapToNode(u32 sound, s32 a, u32 b); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Runs an entry's availability script and tests its flags: true when it is available. */
@@ -55,12 +55,12 @@ static bool entryAvailable(ScriptMenu *menu, MenuEntry *entry)
     char buffer[36];
     u32 script = menu->script;
     u32 table = menu->scriptTable;
-    DAT_0058800c = 0;
+    g_scrConditionRejected = 0;
     __2sprintf(buffer, DAT_005328fc, entry->name);
     scrScriptProcessStartEntry(script, tableGroupFindEntryIndex(table, buffer));
     while (scrRunOpcodesStub(script) != 2) {
     }
-    return DAT_0058800c == 0 && (entry->requiredFlag == 0 || gameFlagIsSet(entry->requiredFlag) != 0) &&
+    return g_scrConditionRejected == 0 && (entry->requiredFlag == 0 || gameFlagIsSet(entry->requiredFlag) != 0) &&
            (entry->forbiddenFlag == 0 || gameFlagIsSet(entry->forbiddenFlag) == 0);
 }
 
@@ -72,42 +72,48 @@ void FUN_004b8ba0(ScriptMenu *menu)
     s32 count = menu->entryCount;
     for (s32 i = 0; i < count; i++) {
         MenuEntry *entry = menu4CGetEntry(menu->entries, i);
-        if (entry->kind == 3 && entry->name[0] != '0') {
-            if (entryAvailable(menu, entry))
-                break;
-        } else if (entry->kind == 4 && entry->name[0] != '0') {
-            if (entryAvailable(menu, entry)) {
-                noFourthKind = false;
-                break;
-            }
+        if (entry->kind == 3 && entry->name[0] != '0' && entryAvailable(menu, entry))
+            break;
+        if (entry->kind == 4 && entry->name[0] != '0' && entryAvailable(menu, entry)) {
+            noFourthKind = false;
+            break;
         }
     }
     for (s32 i = 0; i < count; i++) {
         MenuEntry *entry = menu4CGetEntry(menu->entries, i);
+        /* Retail records the hit in a stack flag that only a dead load in case 1 reads. */
         if (entry->kind == 2 && entry->name[0] != '0' && entryAvailable(menu, entry))
             break;
     }
     switch (menu->mode) {
     case 1:
+        menu4CScrollToKind(menu->entries, 0xFF);
+        menu->flags |= 0x40000000;
+        menu->scrolled = 1;
+        break;
     case 2:
+        menu4CScrollToKind(menu->entries, 0xFF);
+        menu->flags |= 0x40000000;
+        menu->scrolled = 1;
         break;
     case 5:
-        if (!noFourthKind)
-            return;
+        if (noFourthKind) {
+            menu4CScrollToKind(menu->entries, 0xFF);
+            menu->flags |= 0x40000000;
+            menu->scrolled = 1;
+        }
         break;
     case 6:
     case 7:
-        FUN_004b6bc4(menu, menu->selected, (menu->flags & 0x10000000) != 0 ? 4 : 3);
+        if (menu->flags & 0x10000000)
+            contentMenuRebuildGroup(menu, menu->selected, 4);
+        else
+            contentMenuRebuildGroup(menu, menu->selected, 3);
         menu->state = 4;
         menu->subState = 0;
         moveCameraCtrlSnapToNode(menu->sound, 0, 0xFFFFFFFF);
-        return;
-    default:
-        return;
+        break;
     }
-    menu4CScrollToKind(menu->entries, 0xFF);
-    menu->flags |= 0x40000000;
-    menu->scrolled = 1;
 }
 
 } /* extern "C" */

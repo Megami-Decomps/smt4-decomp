@@ -46,6 +46,18 @@ struct BattleEffectGlobals {
             /* 0x28 */ f32 growingAcceleration;
             /* 0x2C */ f32 shrinkingAcceleration;
         } motion;
+        struct {                    /* the bits of a battle entry's 64-bit flags (BtlCombatantEntryA.flags) */
+            u8 unk20[0x10];
+            /* 0x30 */ u64 active;
+            /* 0x38 */ u64 downed;         /* kept through the removal */
+            /* 0x40 */ u64 party;          /* the entry is an active party position */
+            /* 0x48 */ u64 present;
+            /* 0x50 */ u64 guest;
+            /* 0x58 */ u64 actionsCleared;
+            /* 0x60 */ u8 unk60[0x10];
+            /* 0x70 */ u64 removing;       /* the retired unit's cleanup removes it instead */
+            /* 0x78 */ u64 reserved;       /* kept as present and active */
+        } entryFlags;
     };
     /* 0x80 */ u64 flashMask;
     /* 0x88 */ u8 unk88[0x10];

@@ -9,7 +9,7 @@ extern "C" {
 
 enum { DRAW_SECOND_RENDER_STATE = 0x100, DRAW_PREBUILT_SHAPE = 0x200 };
 
-void FUN_001f6b74(u32 aux);
+void billboardShapeDraw(u32 aux);
 void camSetMatrixB(RenderCtx *ctx, const f32 *matrix);
 void modelApplyChangedCachedVector(RenderCtx *ctx, f32 a, f32 b, f32 c, f32 d);
 void renderCtxSelectBlendPreset(u32 mode);
@@ -28,7 +28,7 @@ void renderSubmissionDrawPacket(RenderSubmissionPacket *packet, u32 mode)
         renderCtxPushA(ctx, renderCtxPackPassFlags(1, 0));
     }
     if ((packet->flags & DRAW_PREBUILT_SHAPE) != 0) {
-        FUN_001f6b74(packet->shape);
+        billboardShapeDraw(packet->shape);
         renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
         return;
     }

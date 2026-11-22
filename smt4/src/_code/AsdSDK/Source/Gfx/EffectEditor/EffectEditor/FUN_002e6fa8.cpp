@@ -8,7 +8,7 @@ extern "C" {
 extern const u8 DAT_00400001;
 extern const u8 DAT_00400002;
 void asdMemoryFreeLocked(void* memory);
-void FUN_002f2aa8(EffMenuNode* node);
+void effMenuTextEntryStep(EffMenuNode* node);
 void namedObjectFormatFullName(EffMenuNode* node, char* dest);
 void namedObjectFormatName(EffMenuNode* node, char* dest);
 __weak void FUN_002e6fa8_hook(void* list, const char* path);
@@ -35,7 +35,7 @@ u32 FUN_002e6fa8(void)
         g_effectEditor.label->initialKind = 182;
         g_effectEditor.label->unk04 = 100;
     } else {
-        FUN_002f2aa8(g_effectEditor.label);
+        effMenuTextEntryStep(g_effectEditor.label);
         namedObjectFormatFullName(g_effectEditor.label, input.fullName);
         namedObjectFormatName(g_effectEditor.label, input.name);
         input.state = g_effectEditor.label->unk08;

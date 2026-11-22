@@ -1,343 +1,262 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0046b18c` (_code @ 0x46b18c, 0x834 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: every call, branch and store is retail's and the frame is retail's (the three text buffers in one
+ * scope, ordered as retail has them), but with the buffers at function scope armcc no longer tail-calls
+ * FUN_0046a278 from substate 1, which retail does. Besides that: a few scratch registers (the choice counter, the
+ * NPC index in the ready test, one hide loop, the flag loop), the load of the flags ahead of the substate store in
+ * substate 5, and which substates share the "store substate, return" tail. */
 #include <stdio.h>
-#include "romwright_types.h"
-#include "shard/W6_W6Match6_ItemIcon.h"
+#include "classes/Obj5333c0.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "code/Code003c_Smt4a.h"
+#include "gfx/ControllerModel.h"
+#include "kernel/jyoucyuGetTableEntry.h"
+#include "script/scrScriptProcess.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
+#include "shop/ShopItemDescription.h"
+#include "text/TextDraw.h"
+#include "util/MemoryHelpers_VariantC.h"
+
+enum {
+    SCENE_FLAG_TALKING = 0x100, /* Obj5333c0::flags: an NPC conversation is in progress */
+    SE_TALK_START = 0xa4,
+    BUTTON_HELP_NPC_SELECT = 0xa2
+};
 
 extern "C" {
 
-int libc_strcat(...);
-int textExpandGlyphsToBuffer(unsigned char [64], unsigned char [136], int);
-int sysPlaySe(...);
-int jyoucyuGetTableEntry(...);
-int asdMemFree(void);
-int scrScriptProcessDestroy(void);
-int scrScriptProcessCreate(...);
-int scrScriptProcessStartEntry(...);
-int asdLoadFileAsyncSimple(...);
-int messageGetChoiceResult(void);
-int libc_strcpy(unsigned char [64], unsigned int);
-int sysMemClear(unsigned int *, int);
-int buttonHelpSetSelectedId(int);
-int messageSetIndexedFlag(unsigned int, unsigned int);
-int modelPlayClip(...);
-int pickObjStart(unsigned int *, unsigned char *); // declcheck: local (romwright prototype; its types do not fit classes/Obj5333c0.h: including it fails to compile)
-int FUN_0046a278(unsigned int *, unsigned int);
-int candidateGetPreferredValue(...);
+extern const char DAT_00533564[]; /* "<br>" */
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
+char *libc_strcpy(char *destination, const char *source); // declcheck: local (the shared header keeps the decompiler's word-pointer view)
+char *libc_strcat(char *destination, const char *source);
+void sysPlaySe(u32 id);
+void buttonHelpSetSelectedId(u16 value);
+void messageSetIndexedFlag(u32 index, u8 value);
+u8 gameSaveTestFlag(s32 flagIndex, u8 mask);
+u8 messageWindowIsState1(void);
+u32 messageMainGetValue(void);
+u32 animationChannelsAllFinished(const Obj557b18 *body);
+f32 candidateGetPreferredValue(Obj557b18 *body);
+s32 tableGroupFindEntryIndex(void *table, const char *name);
+u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
+void FUN_0046a278(Obj5333c0 *scene, s32 index);
 
-extern unsigned char LAB_0046b4e0; /* 0x46b4e0 */
-extern unsigned char LAB_0046b8f0; /* 0x46b8f0 */
-extern unsigned char LAB_0046b910; /* 0x46b910 */
+} /* extern "C" */
 
-/* Supplied declaration required: libc_strcat. */
-/* Supplied declaration required: textExpandGlyphsToBuffer. */
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: messageSetScriptDisplayMode. */
-/* Supplied declaration required: jyoucyuGetTableEntry. */
-extern unsigned int gameSaveTestFlag(unsigned short, unsigned char);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: scrScriptProcessCreate. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-extern unsigned int messageMainGetValue(void);
-/* Supplied declaration required: messageGetChoiceResult. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: sysMemClear. */
-extern int messageWindowIsState1(void);
-/* Supplied declaration required: buttonHelpSetSelectedId. */
-extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
-/* Supplied declaration required: messageSetIndexedFlag. */
-/* Supplied declaration required: messageMainRequestBanner. */
-/* Supplied declaration required: modelPlayClip. */
-/* Supplied declaration required: pickObjStart. */
-/* Supplied declaration required: FUN_0046a278. */
-extern int dataTable27GetEntry(int, unsigned int);
-/* Supplied declaration required: candidateGetPreferredValue. */
-extern int animationChannelsAllFinished(int);
-
-
-void FUN_0046b18c(unsigned int *param_1)
-
+/* Shows, in each row of the choice list, whether the row's save flag is set. */
+inline void Obj5333c0::refreshChoiceFlags()
 {
-/* irregular: 1 goto(s); irregular input(s): in_s0; 21 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  float in_s0;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned char temp_v7 [64];
-  unsigned char temp_v8 [64];
-  unsigned char temp_v9 [136];
-  
-  temp_v6 = 0;
-  temp_v5 = 0x3f800000;
-  switch(param_1[2]) {
-  case 0:
-    if (param_1[0x2b6] != 0) {
-      temp_v4 = *(int *)(param_1[*(int *)(param_1[0x2b6] + 4) + 0x283] + 4);
-      temp_v3 = animationChannelsAllFinished(temp_v4);
-      if (temp_v3 == 0) {
-        return;
-      }
-      *(unsigned int *)(temp_v4 + 0x1fc) = temp_v6;
-      modelPlayClip(temp_v4,0);
-      param_1[0x2b6] = 0;
+    for (u32 i = 0; i < 4; i++) {
+        u8 set = gameSaveTestFlag(choiceFlagWord, choiceFlags[i].mask);
+        choiceFlags[i].set = set;
+        messageSetIndexedFlag(i, set);
     }
-    param_1[2] = param_1[2] + 1;
-    puVar2 = param_1 + 0x2b7;
-    param_1[0x2b5] = 0;
-    sysMemClear(puVar2,0x200);
-    param_1[0x2b4] = 0;
-    temp_v2 = 0;
-    if (0 < (int)param_1[0x2ae]) {
-      do {
-        temp_v3 = dataTable27GetEntry((int)param_1 + 0x19,0);
-        libc_strcpy(temp_v7,temp_v3 + param_1[temp_v2 * 2 + 0x29c] * 0x88);
-        textExpandGlyphsToBuffer(temp_v7,temp_v9,0);
-        libc_strcat(puVar2,temp_v9);
-        libc_strcat(puVar2,"<br>");
-        param_1[param_1[0x2b4] + 0x2b0] = temp_v2;
-        temp_v1 = param_1[0x2b4] + 1;
-        param_1[0x2b4] = temp_v1;
-        if (temp_v1 >= 4) break;
-        temp_v2 = temp_v2 + 1;
-      } while ((int)temp_v2 < (int)param_1[0x2ae]);
-      if (0 < (int)param_1[0x2b4]) {
-        if (param_1[0x2b4] != 1) {
-          buttonHelpSetSelectedId(0xa2);
-          pickObjStart(param_1,&LAB_0046b4e0);
-          messageMainRequestBanner();
-          if ((char)param_1[6] != '\0') {
-            return;
-          }
-          temp_v2 = 0;
-          do {
-            temp_v5 = gameSaveTestFlag((short)param_1[0x33d],
-                                 *(unsigned char *)((int)param_1 + temp_v2 * 10 + 0xe4a));
-            *(char *)((int)param_1 + temp_v2 * 10 + 0xe46) = (char)temp_v5;
-            messageSetIndexedFlag(temp_v2,temp_v5);
-            temp_v2 = temp_v2 + 1;
-          } while (temp_v2 < 4);
-          return;
-        }
-        temp_v2 = 6;
-        param_1[2] = temp_v2;
-        return;
-      }
+}
+
+/* Whether both talk files are loaded and the NPC's motion has reached the talk frame. */
+inline bool Obj5333c0::talkScriptReady()
+{
+    if (talkScriptFile == NULL || talkMessageFile == NULL) {
+        return false;
     }
-    param_1[1] = 5;
-    param_1[2] = 0;
-    break;
-  case 1:
-    temp_v3 = scrRunOpcodesStub(*(unsigned int *)param_1[0xad]);
-    if (temp_v3 != 2) {
-      temp_v3 = messageWindowIsState1();
-      if (temp_v3 != 0) {
-        temp_v2 = messageMainGetValue();
-        param_1[0x2b5] = temp_v2;
-        if (temp_v2 != 0xffffffff) {
-          FUN_0046a278(param_1,temp_v2);
-          return;
-        }
-      }
+    if (candidateGetPreferredValue(npcControllersA[talkEntry->npc - 1]->body) < unkA5C) {
+        return false;
     }
-    else {
-      temp_v3 = messageGetChoiceResult();
-      if (temp_v3 != -1) {
-        temp_v2 = messageGetChoiceResult();
-        param_1[0x2b5] = temp_v2;
-        FUN_0046a278(param_1,temp_v2);
-        temp_v2 = param_1[param_1[0x2b5] + 0x2b0];
-        param_1[0x2b6] = (unsigned int)(param_1 + temp_v2 * 2 + 0x29c);
-        temp_v3 = *(int *)(param_1[param_1[temp_v2 * 2 + 0x29d] + 0x283] + 4);
-        *(unsigned int *)(temp_v3 + 0x1fc) = temp_v5;
-        modelPlayClip(temp_v3,0);
-        param_1[2] = param_1[2] + 1;
-        *param_1 = *param_1 | 0x100;
-        temp_v3 = 0;
-        if (0 < (int)param_1[0x2b4]) {
-          do {
-            temp_v4 = temp_v3 + 1;
-            temp_v2 = *(unsigned int *)(*(int *)(param_1[param_1[param_1[temp_v3 + 0x2b0] * 2 + 0x29d] + 0x28c]
-                                      + 4) + 4);
-            if ((temp_v2 & 1) == 0) {
-              *(unsigned int *)(*(int *)(param_1[param_1[param_1[temp_v3 + 0x2b0] * 2 + 0x29d] + 0x28c] + 4) +
-                       4) = temp_v2 | 1;
+    return true;
+}
+
+/* After the talk script has finished: lets the NPC's motion run again and frees the script and its files. */
+inline void Obj5333c0::endTalkScript()
+{
+    npcControllersA[talkEntry->npc - 1]->body->speed = 1.0f;
+    messageSetScriptDisplayMode();
+    if (talkScript != NULL) {
+        scrScriptProcessDestroy(talkScript);
+        talkScript = NULL;
+    }
+    if (talkScriptFile != NULL) {
+        asdMemFree(talkScriptFile);
+        talkScriptFile = NULL;
+    }
+    if (talkMessageFile != NULL) {
+        asdMemFree(talkMessageFile);
+        talkMessageFile = NULL;
+    }
+}
+
+extern "C" {
+
+/* The scene's NPC conversation state: lists the NPCs that can be talked to, lets the player choose one (or takes
+ * the only one), runs that NPC's talk script and returns to state 5. */
+void FUN_0046b18c(Obj5333c0 *scene)
+{
+    char path[64];        /* an NPC's name, then its script's path */
+    char messagePath[64];
+    char expanded[128];
+
+    switch (scene->substate) {
+    case 0: {
+        /* Wait for the previous NPC's motion, then build the choice list. */
+        if (scene->talkEntry != NULL) {
+            Obj557b18 *body = scene->npcControllersA[scene->talkEntry->npc - 1]->body;
+            if (!animationChannelsAllFinished(body)) {
+                return;
             }
-            temp_v3 = temp_v4;
-          } while (temp_v4 < (int)param_1[0x2b4]);
+            body->speed = 0.0f;
+            modelPlayClip(body, 0, 0, 0.0f, 0.0f);
+            scene->talkEntry = NULL;
         }
-        sysPlaySe(0xa4);
-        param_1[0x33c] = param_1[0x2b5];
+        scene->substate++;
+        scene->choice = 0;
+        sysMemClear(scene->choiceText, sizeof(scene->choiceText));
+        scene->choiceCount = 0;
+        for (s32 i = 0; i < scene->talkEntryCount; i++) {
+            libc_strcpy(path, dataTable27GetEntry(&scene->talkTable, 0)[scene->talkEntries[i].record].name);
+            textExpandGlyphsToBuffer(path, expanded, 0);
+            libc_strcat(scene->choiceText, expanded);
+            libc_strcat(scene->choiceText, DAT_00533564);
+            scene->choiceEntries[scene->choiceCount] = i;
+            scene->choiceCount++;
+            if (scene->choiceCount >= sizeof(scene->choiceEntries) / sizeof(scene->choiceEntries[0])) {
+                break;
+            }
+        }
+        if (scene->choiceCount <= 0) {
+            scene->state = 5;
+            scene->substate = 0;
+            return;
+        }
+        if (scene->choiceCount == 1) {
+            scene->substate = 6;
+            return;
+        }
+        buttonHelpSetSelectedId(BUTTON_HELP_NPC_SELECT);
+        pickObjStart(scene, "qc_NpcSelect");
+        messageMainRequestBanner();
+        if (scene->location != 0) {
+            return;
+        }
+        scene->refreshChoiceFlags();
         return;
-      }
-      param_1[0x338] = 0;
-      param_1[2] = 5;
-      *param_1 = *param_1 & 0xfffffeff;
-      temp_v3 = 0;
-      if (0 < (int)param_1[0x2b4]) {
-        do {
-          temp_v4 = temp_v3 + 1;
-          temp_v2 = *(unsigned int *)(*(int *)(param_1[param_1[param_1[temp_v3 + 0x2b0] * 2 + 0x29d] + 0x28c] +
-                                    4) + 4);
-          if ((temp_v2 & 1) == 0) {
-            *(unsigned int *)(*(int *)(param_1[param_1[param_1[temp_v3 + 0x2b0] * 2 + 0x29d] + 0x28c] + 4) + 4
-                     ) = temp_v2 | 1;
-          }
-          temp_v3 = temp_v4;
-        } while (temp_v4 < (int)param_1[0x2b4]);
+    }
+    case 1:
+        /* The choice list is open. */
+        if (scrRunOpcodesStub(*scene->script) == 2) {
+            if (messageGetChoiceResult() == (u32)-1) {
+                scene->transformWanted = 0;
+                scene->substate = 5;
+                scene->clearFlags(SCENE_FLAG_TALKING);
+                for (s32 i = 0; i < scene->choiceCount; i++) {
+                Obj557b18 *hidden = scene->npcControllersB[scene->talkEntries[scene->choiceEntries[i]].npc - 1]->body;
+                if ((hidden->flags & 1) == 0) {
+                    hidden->flags |= 1;
+                }
+            }
+                return;
+            }
+            scene->choice = messageGetChoiceResult();
+            FUN_0046a278(scene, scene->choice);
+            scene->talkEntry = &scene->talkEntries[scene->choiceEntries[scene->choice]];
+            Obj557b18 *body = scene->npcControllersA[scene->talkEntry->npc - 1]->body;
+            body->speed = 1.0f;
+            modelPlayClip(body, 0, 0, 0.0f, 0.0f);
+            scene->substate++;
+            scene->setFlags(SCENE_FLAG_TALKING);
+            for (s32 i = 0; i < scene->choiceCount; i++) {
+                Obj557b18 *hidden = scene->npcControllersB[scene->talkEntries[scene->choiceEntries[i]].npc - 1]->body;
+                if ((hidden->flags & 1) == 0) {
+                    hidden->flags |= 1;
+                }
+            }
+            sysPlaySe(SE_TALK_START);
+            scene->chosenRow = scene->choice;
+            return;
+        }
+        if (messageWindowIsState1()) {
+            scene->choice = messageMainGetValue();
+            if (scene->choice != -1) {
+                FUN_0046a278(scene, scene->choice);
+            }
+        }
         return;
-      }
+    case 2: {
+        u16 id = dataTable27GetEntry(&scene->talkTable, 0)[scene->talkEntry->record].scriptId;
+        sprintf(path, "quest_center/npc/n%03d/n%03d.bf", id, id);
+        sprintf(messagePath, "quest_center/npc/n%03d/n%03d.mbm", id, id);
+        asdLoadFileAsyncSimple(path, (u32 *)&scene->talkScriptFile, 0);
+        asdLoadFileAsyncSimple(messagePath, (u32 *)&scene->talkMessageFile, 0);
+        scene->substate++;
+        return;
     }
-    break;
-  case 2:
-    temp_v3 = dataTable27GetEntry((int)param_1 + 0x19,0);
-    temp_v0 = *(unsigned short *)(temp_v3 + *(int *)param_1[0x2b6] * 0x88 + 0x6a);
-    sprintf((char *)temp_v7,(const char *)&LAB_0046b8f0,temp_v0,temp_v0);
-    sprintf((char *)temp_v8,(const char *)&LAB_0046b910,temp_v0);
-    asdLoadFileAsyncSimple(temp_v7,param_1 + 0xa7,0);
-    asdLoadFileAsyncSimple(temp_v8,param_1 + 0xa8,0);
-    param_1[2] = param_1[2] + 1;
-    return;
-  case 3:
-    temp_v2 = 0;
-    if (param_1[0xa7] != 0) {
-      temp_v2 = param_1[0xa8];
+    case 3:
+        if (!scene->talkScriptReady()) {
+            return;
+        }
+        break;
+    case 4:
+        if (scene->location == 0) {
+            scene->refreshChoiceFlags();
+        }
+        if (scrRunOpcodesStub(scene->talkScript) == 2) {
+            scene->endTalkScript();
+            scene->substate = 0;
+            scene->clearFlags(SCENE_FLAG_TALKING);
+        }
+        return;
+    case 5:
+        scene->substate = 0;
+        scene->clearFlags(SCENE_FLAG_TALKING);
+        scene->state = 5;
+        return;
+    case 6: {
+        /* Only one NPC: talk to it without the list. */
+        scene->transformWanted = scene->talkEntries[scene->choiceEntries[0]].npc;
+        if (scene->talkEntries[scene->choiceEntries[scene->choice]].npc == 8) {
+            scene->transformWanted = 5;
+        }
+        if (scene->talkEntries[scene->choiceEntries[scene->choice]].npc == 9) {
+            scene->transformWanted = 4;
+        }
+        scene->talkEntry = &scene->talkEntries[scene->choiceEntries[scene->choice]];
+        Obj557b18 *body = scene->npcControllersA[scene->talkEntry->npc - 1]->body;
+        body->speed = 1.0f;
+        modelPlayClip(body, 0, 0, 0.0f, 0.0f);
+        sysPlaySe(SE_TALK_START);
+        u16 id = dataTable27GetEntry(&scene->talkTable, 0)[scene->talkEntry->record].scriptId;
+        sprintf(path, "quest_center/npc/n%03d/n%03d.bf", id, id);
+        sprintf(messagePath, "quest_center/npc/n%03d/n%03d.mbm", id, id);
+        asdLoadFileAsyncSimple(path, (u32 *)&scene->talkScriptFile, 0);
+        asdLoadFileAsyncSimple(messagePath, (u32 *)&scene->talkMessageFile, 0);
+        scene->setFlags(SCENE_FLAG_TALKING);
+        scene->substate = 7;
+        return;
     }
-    if (param_1[0xa7] == 0 || temp_v2 == 0) {
-      return;
+    case 7:
+        if (!scene->talkScriptReady()) {
+            return;
+        }
+        break;
+    case 8:
+        if (scrRunOpcodesStub(scene->talkScript) == 2) {
+            scene->endTalkScript();
+            scene->clearFlags(SCENE_FLAG_TALKING);
+            scene->substate = 5;
+            scene->transformWanted = 0;
+        }
+        return;
+    default:
+        return;
     }
-    candidateGetPreferredValue(*(unsigned int *)(param_1[*(int *)(param_1[0x2b6] + 4) + 0x283] + 4));
-    if (in_s0 < (float)param_1[0x297]) {
-      return;
-    }
-    goto LAB_0046b85c;
-  case 4:
-    if ((char)param_1[6] == '\0') {
-      temp_v2 = 0;
-      do {
-        temp_v6 = gameSaveTestFlag((short)param_1[0x33d],
-                             *(unsigned char *)((int)param_1 + temp_v2 * 10 + 0xe4a));
-        *(char *)((int)param_1 + temp_v2 * 10 + 0xe46) = (char)temp_v6;
-        messageSetIndexedFlag(temp_v2,temp_v6);
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 4);
-    }
-    temp_v3 = scrRunOpcodesStub(param_1[0xa9]);
-    if (temp_v3 == 2) {
-      *(unsigned int *)(*(int *)(param_1[*(int *)(param_1[0x2b6] + 4) + 0x283] + 4) + 0x1fc) = temp_v5;
-      messageSetScriptDisplayMode();
-      if (param_1[0xa9] != 0) {
-        scrScriptProcessDestroy();
-        param_1[0xa9] = 0;
-      }
-      if (param_1[0xa7] != 0) {
-        asdMemFree();
-        param_1[0xa7] = 0;
-      }
-      if (param_1[0xa8] != 0) {
-        asdMemFree();
-        param_1[0xa8] = 0;
-      }
-      param_1[2] = 0;
-      *param_1 = *param_1 & 0xfffffeff;
-      return;
-    }
-    break;
-  case 5:
-    param_1[2] = 0;
-    *param_1 = *param_1 & 0xfffffeff;
-    param_1[1] = 5;
-    return;
-  case 6:
-    param_1[0x338] = param_1[param_1[0x2b0] * 2 + 0x29d];
-    temp_v2 = param_1[0x2b5];
-    if (param_1[param_1[temp_v2 + 0x2b0] * 2 + 0x29d] == 8) {
-      param_1[0x338] = 5;
-    }
-    if (param_1[param_1[temp_v2 + 0x2b0] * 2 + 0x29d] == 9) {
-      param_1[0x338] = 4;
-    }
-    temp_v2 = param_1[temp_v2 + 0x2b0];
-    param_1[0x2b6] = (unsigned int)(param_1 + temp_v2 * 2 + 0x29c);
-    temp_v3 = *(int *)(param_1[param_1[temp_v2 * 2 + 0x29d] + 0x283] + 4);
-    *(unsigned int *)(temp_v3 + 0x1fc) = 0x3f800000;
-    modelPlayClip(temp_v3,0);
-    sysPlaySe(0xa4);
-    temp_v3 = dataTable27GetEntry((int)param_1 + 0x19,0);
-    temp_v0 = *(unsigned short *)(temp_v3 + *(int *)param_1[0x2b6] * 0x88 + 0x6a);
-    sprintf((char *)temp_v7,(const char *)&LAB_0046b8f0,temp_v0,temp_v0);
-    sprintf((char *)temp_v8,(const char *)&LAB_0046b910,temp_v0);
-    asdLoadFileAsyncSimple(temp_v7,param_1 + 0xa7,0);
-    asdLoadFileAsyncSimple(temp_v8,param_1 + 0xa8,0);
-    *param_1 = *param_1 | 0x100;
-    temp_v2 = 7;
-    param_1[2] = temp_v2;
-    return;
-  case 7:
-    temp_v2 = 0;
-    if (param_1[0xa7] != 0) {
-      temp_v2 = param_1[0xa8];
-    }
-    if (param_1[0xa7] == 0 || temp_v2 == 0) {
-      return;
-    }
-    candidateGetPreferredValue(*(unsigned int *)(param_1[*(int *)(param_1[0x2b6] + 4) + 0x283] + 4));
-    if (in_s0 < (float)param_1[0x297]) {
-      return;
-    }
-LAB_0046b85c:
-    temp_v3 = *(int *)(param_1[*(int *)(param_1[0x2b6] + 4) + 0x283] + 4);
-    *(unsigned int *)(temp_v3 + 0x1fc) = temp_v6;
-    modelPlayClip(temp_v3,0);
-    temp_v2 = param_1[0xa7];
-    scrScriptProcessCreate(temp_v2,param_1[0xa8]);
-    param_1[0xa9] = temp_v2;
-    *(unsigned int *)(temp_v2 + 0x108) = 2;
-    temp_v3 = dataTable27GetEntry((int)param_1 + 0x19,0);
-    temp_v4 = *(int *)param_1[0x2b6];
+
+    /* Substates 3 and 7, once ready: hold the NPC's motion at the talk frame and start its talk script. */
+    Obj557b18 *body = scene->npcControllersA[scene->talkEntry->npc - 1]->body;
+    body->speed = 0.0f;
+    modelPlayClip(body, 0, 0, scene->unkA5C, 0.0f);
+    scene->talkScript = scrScriptProcessCreate(scene->talkScriptFile, scene->talkMessageFile);
+    scene->talkScript->mode = 2;
+    const char *entryName = dataTable27GetEntry(&scene->talkTable, 0)[scene->talkEntry->record].entryName;
     jyoucyuGetTableEntry(0);
-    temp_v5 = tableGroupFindEntryIndex(param_1[0xa7],temp_v3 + temp_v4 * 0x88 + 0x6c);
-    scrScriptProcessStartEntry(param_1[0xa9],temp_v5);
-    temp_v2 = param_1[2] + 1;
-    param_1[2] = temp_v2;
-    return;
-  case 8:
-    temp_v3 = scrRunOpcodesStub(param_1[0xa9]);
-    if (temp_v3 == 2) {
-      *(unsigned int *)(*(int *)(param_1[*(int *)(param_1[0x2b6] + 4) + 0x283] + 4) + 0x1fc) = temp_v5;
-      messageSetScriptDisplayMode();
-      if (param_1[0xa9] != 0) {
-        scrScriptProcessDestroy();
-        param_1[0xa9] = 0;
-      }
-      if (param_1[0xa7] != 0) {
-        asdMemFree();
-        param_1[0xa7] = 0;
-      }
-      if (param_1[0xa8] != 0) {
-        asdMemFree();
-        param_1[0xa8] = 0;
-      }
-      *param_1 = *param_1 & 0xfffffeff;
-      param_1[2] = 5;
-      param_1[0x338] = 0;
-      return;
-    }
-  }
-  return;
+    scrScriptProcessStartEntry(scene->talkScript, tableGroupFindEntryIndex(scene->talkScriptFile, entryName));
+    scene->substate++;
 }
 
 } /* extern "C" */

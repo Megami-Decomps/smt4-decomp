@@ -1,9 +1,11 @@
 #ifndef SHARD_W5_W5MATCH2_MODELCOLOR_H
 #define SHARD_W5_W5MATCH2_MODELCOLOR_H
 #include "common.h"
-/* nw::ut::FloatColor: RGBA in 0..1. */
+/* nw::ut::FloatColor: RGBA in 0..1 (the model colours, and the fragment light colours their setters take by value). */
 struct ModelColor {
     f32 r, g, b, a;
+    ModelColor() {}
+    ModelColor(f32 red, f32 green, f32 blue, f32 alpha) : r(red), g(green), b(blue), a(alpha) {}
     void Set(f32 red, f32 green, f32 blue, f32 alpha) { r = red; g = green; b = blue; a = alpha; }
 };
 struct ModelColorWork { u8 unk00[0xB8]; ModelColor color; u32 packed; };

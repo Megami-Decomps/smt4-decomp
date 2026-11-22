@@ -209,6 +209,12 @@ difference a register tie-break.
 - The same holds for an unused computation: keep it only where retail performs it (the `vcvt`/`vmul` are in its
   code). Retail loading a global's address early into a saved register is not such evidence: smt4a `FUN_00487d6c`
   matched with a draw depth it never used and retail never computes, and stays `NON_MATCHING` at 6 lines (wave 74).
+- The identical-arms form holds only while the build keeps the dead load: smt4a `FUN_004b8ba0` tested a kind-2 flag in
+  two identical arms, armcc dropped the test and the load, and the flag still moved the allocation (198 against 220
+  lines); the wave 76 review removed it as steering.
+- A field has one view per function: smt4 `FUN_00308d5c` updated `battleFlags` (32-bit) at three sites and `battleMask`
+  (64-bit) at two, each chosen by score (110 lines); the review put all five on `battleMask`, the view retail's reload
+  supports (225 lines).
 - `if (a == b) { X } else { Y }` moves `X` out of line after the next unconditional branch; the `!=`
   spelling does not. `cmp; beq; cmp; beq; b` is an if/else-if chain, `cmp; beq; cmp; bne; b` a
   `switch`. Which copy of identical tail blocks survives follows `return` against `break`, and
@@ -345,6 +351,8 @@ difference a register tie-break.
   `void *list = &work->list;`, a view pointer to `g_effectEditor`) can change the allocation by itself: write the
   access at each use (`battle->entries[index].flags`, `&work->list`), as for global holders above (smt4a
   `FUN_003eb0cc` and `FUN_0034c940` IDENTICAL, `FUN_002830cc` 49 -> 6; wave 65).
+- The same for a table indexed by an operand: `table[command].handler()` then `table[command].argumentCount`, not a
+  cached `ScriptCommand *entry`, made the script interpreter's `scrRunCommand` IDENTICAL in both games (wave 76).
 - Masks or table fields that retail reloads inside a loop, where armcc hoists them all, come back as in-loop loads
   through a local pointer to the global (`const BattleMaskPresets *masks = &g_battleMaskPresets;`): armcc then hoists
   only the unconditional first test. It moved four smt4a near misses (`FUN_003ec6d8`, `FUN_003a98c4`,
@@ -506,6 +514,13 @@ asks for.
 - Two spellings of the same inline that differ only in which register one value gets (the set's apply test through
   `renderStackNeedsApply` or written out) are not two original forms: choosing one per unit by score is steering, and
   wave 73 rejected a `renderStackSetChecked` variant that matched three smt4a units that way.
+- A predicate two sibling functions share is a real helper: Apocalypse's message commands `FUN_002a3348` and
+  `FUN_002a3470` test the same (command, 13) pairs and are IDENTICAL calling `scrIsBustupMessageCommand`
+  (`script/ScriptMessageBustup.h`); each with its own inline dispatcher missed by 8 lines (wave 76).
+- A conversion's width comes from where the value goes: smt4 `FUN_003ddb50` and its twin match with `(s16)(red *
+  100.0f)` stored into a `u8` field, but nothing shows a halfword (retail's signed `vcvt` only shows a signed cast), so
+  the review kept `(s32)` and `NON_MATCHING`. Likewise a `memset` of a one-word field of unknown type, chosen because
+  the byte fill orders its store before a later load (smt4 `FUN_003c7f20`, `FUN_0021eda8`), is steering (wave 76).
 - AocMenu's step change (store the step, clear the substep, delete the window) is `aocMenuChangeStep` in
   `classes/AocMenu.h`, the helper `AocMenu::runMainProcess` uses at six sites in each game; called in place of the
   open-coded statements it made smt4a `aocMenuUpdate` IDENTICAL (wave 57).
@@ -559,6 +574,10 @@ asks for.
 
 - A vtable whose slots 0/1 are destructors: declare a virtual destructor and write `delete`; it fixes
   the predication around the call. Not when slot 0 is an ordinary method.
+- A slot-0 function whose whole body is a removed tail call is not a native destructor even when the derived class's
+  deleting destructor calls it as its base's: smt4 `_ZTV9Obj422094` lists 0x381254 in slot 0 (and 0 in slot 1), and
+  written as `~Obj422094()` it stores the vptr and returns `this` where retail has one NOP; the unit keeps its member
+  form and name (wave 76).
 - A function taking a non-trivial class by value (callers copy it to the stack and pass pointers to the copies)
   has C++ linkage: armcc 4.1 b1454 stops with an internal fault on a call to an `extern "C"` function with such a
   parameter. Declare and define it outside `extern "C"` and give it its mangled name
@@ -634,6 +653,12 @@ More on classes, constructors and destructors is in [C++](style-and-naming.md#c)
 - A magnitude test that retail compiles as `cmp rV, #0; ldrlt r0, [sp, #N]; movge r0, rV` (reusing a negation it
   already computed) is `abs(value)` from `<stdlib.h>`, not a ternary: smt4a `FUN_00169e38` and its IV twin
   `FUN_002bdce0` are IDENTICAL with it (wave 61).
+- `__weak` on a declaration is allowed only for a function the image never defines, and only where every call site in
+  retail is a NOP (`mov r0, r0`) after the call's argument setup: armlink removed calls to the undefined weak symbol,
+  and `build.py` does the same. smt4 `FUN_002f2aa8` and smt4a `FUN_00375ec8` keep four such sites (x and y in r0/r1,
+  the colour index in r2, the text in r3: the formatted buffer, a grid cell, `"BS"`, `"OK"`), written as calls of
+  `__weak effMenuDebugDrawText` (`AsdSDK/Source/Gfx/Effect/effMenu.h`). A `__weak` that only stops a tail call or
+  moves registers, with no NOP in retail, is steering (the Hermite family, rejected earlier).
 - A lone `mov r0, #const` where a call would be, followed by a reload of a value the call would have
   clobbered, is a linker-inlined constant getter: write the call and add an `inlined.txt` row
   (`titleConfigUpdate`'s default volumes).
@@ -760,6 +785,11 @@ unit can name those callees in a `multifile` list in `config/project.json`; `bui
 `fdiff` then compile it in one `--multifile --no_autoinline` run with the callees' unit sources
 and keep only the unit's function. Same evidence rule as `cflags`, and the callees' own sources
 must clobber what retail's do (matched callees are best).
+A callee that uses only VFP registers is the clearest case: retail's smt4a `FUN_004b6bc4` and `questMenuPanelUpdate`
+read `r2`/`r3` right after `bl uiClampScrollOffset` (`vmov s1, r2`), and the IDENTICAL `uiClampScrollOffset` writes
+no core register; as its `multifile` partner they went from 163 to 137 and 132 to 110 lines (wave 76). IV's
+`contentMenuRebuildGroup` got worse with the same partner (118 to 135) and has no entry.
+
 The recipe always adds `--no_autoinline`, which most multifile units need (without it their callees are
 inlined). Some need autoinline on: smt4 `mapDepartAdvanceCameraSequence` keeps retail's `r3` across six calls of
 `vectorPairTransitionStep`, its prologue and its 116-byte frame only in a `--multifile` run without

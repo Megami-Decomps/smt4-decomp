@@ -29,7 +29,7 @@ int VectorSignedToFloat(int, int);
 
 extern unsigned char LAB_004b8200; /* 0x4b8200 */
 extern unsigned char LAB_004b820c; /* 0x4b820c */
-extern int DAT_0058800c; /* 0x58800c */
+extern int g_scrConditionRejected; /* 0x58800c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: sysPlaySe. */
@@ -88,14 +88,14 @@ void FUN_004b7e20(int param_1)
       if (temp_v2 >= 10) {
         if (temp_v2 != 0xb) {
           if (temp_v2 == 0x14) {
-            if (DAT_0058800c != 0) {
+            if (g_scrConditionRejected != 0) {
               messageSetMode(1);
               soundPlayCueForContextKind(param_1);
               menu4CStartBlock74(param_1 + 0x9c);
               menu4CReset(param_1 + 0x9c);
               *(unsigned char *)(param_1 + 0xa88) = 0;
               temp_v2 = 0x28;
-              DAT_0058800c = 0;
+              g_scrConditionRejected = 0;
             }
             else {
               messageSetMode(1);
@@ -159,14 +159,14 @@ void FUN_004b7e20(int param_1)
         if (temp_v2 != 1) {
           return;
         }
-        DAT_0058800c = 0;
+        g_scrConditionRejected = 0;
         dialogClose(0);
         temp_v2 = 10;
       }
       *(int *)(param_1 + 0x2c) = temp_v2;
       return;
     }
-    else if (DAT_0058800c == 0) {
+    else if (g_scrConditionRejected == 0) {
       if (*(char *)(*(int *)(param_1 + 0x111c) + 0x6c) == '0') {
         *(unsigned int *)(param_1 + 0x2c) = 0x14;
         return;
@@ -194,7 +194,7 @@ void FUN_004b7e20(int param_1)
       menu4CStartBlock74(param_1 + 0x9c);
       menu4CReset(param_1 + 0x9c);
       *(unsigned char *)(param_1 + 0xa88) = 0;
-      DAT_0058800c = 0;
+      g_scrConditionRejected = 0;
       buttonHelpSetPanelState(1);
       dialogOpen(0, 0);
       infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(param_1 + 0x113c)), *(unsigned char *)(*(int *)(param_1 + 0x1118) + 0x3f));
@@ -208,7 +208,7 @@ void FUN_004b7e20(int param_1)
       messageSetMode(1);
       *(unsigned int *)(param_1 + 0x2c) = 0;
       *(unsigned int *)(param_1 + 0x28) = 5;
-      DAT_0058800c = 0;
+      g_scrConditionRejected = 0;
       *(unsigned char *)(param_1 + 0xa8a) = 0;
       return;
     }
@@ -229,7 +229,7 @@ void FUN_004b7e20(int param_1)
   dialogOpen(0, 0);
   infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(param_1 + 0x113c)), *(unsigned char *)(*(int *)(param_1 + 0x1118) + 0x3f))
   ;
-  DAT_0058800c = 0;
+  g_scrConditionRejected = 0;
   *(unsigned char *)(param_1 + 0xa8a) = 0;
   return;
 }

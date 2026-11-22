@@ -6,9 +6,9 @@
 extern "C" {
 
 int mapOverlayDraw(void);
-int FUN_0025ba8c(...);
-int FUN_0025bab8(...);
-int colorSetAndCachePica(...);
+int fragmentLightSetSpecular1(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
+int fragmentLightSetSpecular0(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
+int fragmentLightSetDiffuse(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int asdModelSlotGetResource(...);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "libm_sinf" has "C" linkage)
 int libm_sinf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
@@ -69,9 +69,9 @@ extern float DAT_004bdba8; /* 0x4bdba8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: mapOverlayDraw. */
-/* Supplied declaration required: FUN_0025ba8c. */
-/* Supplied declaration required: FUN_0025bab8. */
-/* Supplied declaration required: colorSetAndCachePica. */
+/* Supplied declaration required: fragmentLightSetSpecular1. */
+/* Supplied declaration required: fragmentLightSetSpecular0. */
+/* Supplied declaration required: fragmentLightSetDiffuse. */
 /* Supplied declaration required: asdModelSlotGetResource. */
 extern unsigned int FUN_0025bb34(unsigned int, unsigned char *, unsigned int);
 /* Supplied declaration required: libm_cosf. */
@@ -440,22 +440,22 @@ void mapEnvironmentSetLight(int param_1,unsigned int param_2,unsigned int param_
   temp_v13 = temp_v45;
   temp_v12 = FUN_0025bb34(1,&LAB_001e4248,0);
   temp_v40 = asdModelSlotGetResource(temp_v12,0);
-  colorSetAndCachePica(&temp_v40);
-  FUN_0025bab8(&temp_v40);
-  FUN_0025ba8c(&temp_v40);
+  fragmentLightSetDiffuse(&temp_v40);
+  fragmentLightSetSpecular0(&temp_v40);
+  fragmentLightSetSpecular1(&temp_v40);
   *(float *)(temp_v40 + 0x10c) = temp_v38;
   *(unsigned int *)(temp_v40 + 0x110) = temp_v13;
   *(float *)(temp_v40 + 0x114) = temp_v14;
   temp_v13 = FUN_0025bb34(1,&LAB_001e4258,0);
   temp_v41 = asdModelSlotGetResource(temp_v13,0);
-  colorSetAndCachePica(&temp_v41);
-  FUN_0025bab8(&temp_v41);
-  FUN_0025ba8c(&temp_v41);
+  fragmentLightSetDiffuse(&temp_v41);
+  fragmentLightSetSpecular0(&temp_v41);
+  fragmentLightSetSpecular1(&temp_v41);
   temp_v13 = FUN_0025bb34(1,&LAB_001e4268,0);
   temp_v42 = asdModelSlotGetResource(temp_v13,0);
-  colorSetAndCachePica(&temp_v42);
-  FUN_0025bab8(&temp_v42);
-  FUN_0025ba8c(&temp_v42);
+  fragmentLightSetDiffuse(&temp_v42);
+  fragmentLightSetSpecular0(&temp_v42);
+  fragmentLightSetSpecular1(&temp_v42);
   mapOverlayDraw();
   return;
 }

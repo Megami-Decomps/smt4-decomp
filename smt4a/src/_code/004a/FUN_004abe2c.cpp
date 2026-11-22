@@ -26,10 +26,10 @@ void FUN_004abe2c(BtlUiA *unused, s32 mode, s8 first, s8 second, bool firstStrik
     if (options != 0 || mode != 0) {
         BtlUiA *current = g_btlUi.ui;
         fillTwoWordsWithByte(current->ids, 0xFFFFFFFF);
-        current->ids[0] = uiFindValidIdOrdinal(current->owner, 0);
-        current->ids[1] = uiFindValidIdOrdinal(current->owner, 1);
-        current->ids[2] = uiFindValidIdOrdinal(current->owner, 2);
-        current->ids[3] = uiFindValidIdOrdinal(current->owner, 3);
+        current->ids[0] = btlTurnOrderRankOf(current->owner, 0);
+        current->ids[1] = btlTurnOrderRankOf(current->owner, 1);
+        current->ids[2] = btlTurnOrderRankOf(current->owner, 2);
+        current->ids[3] = btlTurnOrderRankOf(current->owner, 3);
         btlUiCopyIdList(&current->objC, current->ids);
         if (mode != 0)
             menu32Advance(&ui->base.objC);

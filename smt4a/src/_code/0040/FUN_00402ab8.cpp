@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rewrite from retail disassembly compiles (214 vs 194 rows); retail interleaves the float conversions with the rect loads, repeats the parallax call per cell and unrolls the row/mark scans differently */
+/* NON_MATCHING: 247 lines (216 vs 211 rows). Retail spills the colour (-1) to [sp] and keeps 201 in r7, computes the cell offset before testing the row result, keeps the mark search's found flag as 1/0 in r0 (no jump threading), and reloads the suffix rect's placement width at the frame draw; the row search (-1 sentinel), the per-arm parallax calls and the single faded draw now follow retail's blocks. */
 #include "common.h"
 #include <stdio.h>
 #include "gfx/StereoParallax.h"
@@ -71,35 +71,35 @@ void FUN_00402ab8(CaptionPanel* panel, s32 x, s32 y, f32 speed)
     s32 baseX = shift + x;
     for (s32 i = 0; i < 8; i++) {
         s32 value = panel->value + i;
-        s32 row;
-        s32 offset = 0;
-        bool found = false;
-        for (row = 0; row < 6; row++) {
-            if (panel->rows[row].low <= value && value < panel->rows[row].high) {
-                offset = value - panel->rows[row].low;
+        s32 row = -1;
+        for (s32 r = 0; r < 6; r++) {
+            if (panel->rows[r].low <= value && value < panel->rows[r].high) {
+                row = r;
                 break;
             }
         }
-        if (row == 6) continue;
-        for (s32 j = 0; j < 10; j++) {
+        if (row < 0) continue;
+        s32 offset = value - panel->rows[row].low;
+        s32 j;
+        for (j = 0; j < 10; j++) {
             u16 mark = panel->record->marks[j];
-            if (mark != 0 && (s32)(mark - 1) == value) {
-                found = true;
-                break;
-            }
+            if (mark != 0 && (s32)(mark - 1) == value) break;
         }
+        bool found = j < 10;
+        s32 iconShift = 0;
         TextureTableEntryIV* iconRect;
-        s32 iconShift;
+        s32 parallax;
         if (found) {
             TextureTableEntryIV* markRect = asdTMTexTableEntryAt(50, 58 + i);
-            texDrawTableEntryAtStoredOrigin(2, 50, 57, markRect->x + baseX, markRect->y + y, 201);
+            parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+            texDrawTableEntryAtStoredOrigin(2, 50, 57, markRect->x + parallax + baseX, markRect->y + y, 201);
             iconRect = asdTMTexTableEntryAt(50, 66 + i);
+            parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
             iconShift = 6;
         } else {
             iconRect = asdTMTexTableEntryAt(50, 18 + i);
-            iconShift = 0;
+            parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
         }
-        s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
         textDrawRangeFaded(panel->icons[row], parallax + iconShift + iconRect->x + baseX, iconRect->y + y, 201, speed, 6, offset);
     }
     efctSetSpeed(1.0f);

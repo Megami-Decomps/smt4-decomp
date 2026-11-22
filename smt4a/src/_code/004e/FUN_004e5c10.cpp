@@ -1,159 +1,103 @@
-/* NON_MATCHING: battle AI command choice (roll against 10% / 40% bands); written from the decompilation, branch layout (retail jumps into the shared 0x2B/0x2C call) and scheduling not compared */
+/* NON_MATCHING: 114 lines, rewritten from retail's blocks on the shared unit types (BtlMainStateA **, BtlUnitA, the 0x34-byte summary, setScriptState as in FUN_004eb838). What remains is allocation: retail keeps g_btlAction in r8, 30 in r7, 1 in r9 and the marked flag in sl (here r9, r8, sl, r7), and loads the 64-bit masks and flags with ldm where the build uses ldrd. */
 #include "common.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
 #include "util/Random.h"
 #include "battle/BtlUiGlobal.h"
-
-#define BTL_UNIT_COUNT_ALL 0x6D
-#define BTL_UNIT_STRIDE 0x1D0
-#define BTL_TARGET_STRIDE 0x408
-
-struct BtlUnitFlagsView {
-    /* 0x00 */ u8 unk00[0x50];
-    /* 0x50 */ u32 flags;
-    /* 0x54 */ u8 unk54[0x17C];
-};
-
-struct BtlSideMask {
-    /* 0x00 */ u32 low;
-    /* 0x04 */ u32 high;
-};
-
-struct BtlEffectView {
-    /* 0x000 */ u8 unk000[0x1BE];
-    /* 0x1BE */ u16 phase;
-    /* 0x1C0 */ u16 mode;
-};
-
-struct BtlSkillView {
-    /* 0x00 */ u8 unk00[0x6A];
-    /* 0x6A */ s16 animation;
-};
-
-struct BtlMainView {
-    /* 0x0000 */ u8 unk0000[0xA4];
-    /* 0x00A4 */ s32 actorIndex;
-    /* 0x00A8 */ u8 unk00A8[0x1E2C];
-    /* 0x1ED4 */ BtlUnitFlagsView *units;
-    /* 0x1ED8 */ u8 unk1ED8[0x124];
-    /* 0x1FFC */ u8 *targets;
-};
-
-struct BtlActorView {
-    BtlMainView *main;
-};
-
-struct BtlCommandView {
-    /* 0x00 */ u32 flags;
-    /* 0x04 */ u8 unk04[0x1C];
-    /* 0x20 */ BtlSideMask *target;
-    /* 0x24 */ BtlSkillView *skill;
-    /* 0x28 */ BtlEffectView *effect;
-    /* 0x2C */ u32 id;
-    /* 0x30 */ u8 unk30[8];
-    /* 0x38 */ u8 candidates[BTL_UNIT_COUNT_ALL];
-    /* 0xA5 */ u8 unkA5[0x4F8];
-    /* 0x59D */ u8 rolled;
-};
-
-struct BtlScriptUnitView {
-    /* 0x0000 */ u8 unk0000[9];
-    /* 0x0009 */ u8 state;
-    /* 0x000A */ u8 unk000A[0x124A];
-};
-
-struct BtlTargetModeView {
-    /* 0x00 */ u8 unk00[2];
-    /* 0x02 */ s16 selector;
-    /* 0x04 */ s8 targetKind;
-};
+#include "battle/btlUnit.h"
+#include "battle/btlAction.h"
+#include "battle/BtlGlobals.h"
+#include "battle/BattleEntrySummary.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
-extern BtlScriptUnitView *g_btlScriptUnit;
-extern u32 DAT_00571168;
-extern u32 DAT_0057116c;
-extern u32 DAT_00571170;
-extern u32 DAT_00571174;
+void FUN_004e8454(BtlMainStateA **owner);
+s32 FUN_004e933c(BtlMainStateA **owner, BtlUnitA *unit);
+void FUN_004e7c04(BtlMainStateA **owner, s32 marked);
+void btlEntryBuildSummary(BattleEntrySummaryA *summary, BtlMainStateA *battle, BtlCombatantEntryA *entry);
+void btlUnitMarkTargetCandidates(BtlMainStateA **owner, s32 marked, s32 set);
+void btlActionMarkRandomTargetableUnit(BtlMainStateA **owner);
+void FUN_004eb838(BtlMainStateA **owner, BtlUnitA *unit);
+void FUN_004c9220(u32 first, const void *snapshotA, const void *snapshotB, u8 mode);
+void FUN_004c9160(s32 effect, BtlCombatantEntryA *entry, s32 a, s32 b);
+void FUN_004fd508(s32 weight, BtlUnitA *unit, s32 a, BattleRosterRecordA *record, s32 b);
+void FUN_004a9308(BtlUiA *block, u16 id, s32 a, s32 b);
 
-void FUN_004e8454(BtlActorView *actor);
-s32 FUN_004e933c(BtlActorView *actor, BtlCommandView *command);
-void FUN_004e7c04(BtlActorView *actor, s32 flag);
-void btlEntryBuildSummary(BtlTargetModeView *out, BtlMainView *main, BtlSideMask *target);
-void btlUnitMarkTargetCandidates(BtlActorView *actor, s32 flag, s32 mode);
-void btlActionMarkRandomTargetableUnit(BtlActorView *actor);
-void FUN_004eb838(BtlActorView *actor, BtlCommandView *command);
-void FUN_004c9220(s32 id, BtlSideMask *target);
-void FUN_004c9160(s32 id, BtlSideMask *target, s32 a, s32 b);
-void FUN_004fd508(s32 id, BtlCommandView *command, s32 a, BtlSkillView *skill, s32 b);
-void FUN_004a9308(BtlUiA *block, s16 id, s32 arg);
-
-#define BTL_AI_ROLL_MAX 99
-#define BTL_AI_ROLL_BAND_A 10
-#define BTL_AI_ROLL_BAND_B 0x28
-
-/* Chooses the command's effect: the first 10% roll tries the special case, the next 30% performs
- * the marked attack; otherwise the default command is queued. */
-void FUN_004e5c10(BtlActorView *actor, BtlCommandView *command)
+/* Sets the command of the owner's action slot (FUN_004eb838's setScriptState). */
+static __inline void setScriptState(BtlMainStateA **owner, u8 command)
 {
-    s32 roll = lcgRandomRange(BTL_AI_ROLL_MAX);
-    FUN_004e8454(actor);
-    bool handled = false;
-    if (roll < BTL_AI_ROLL_BAND_A) {
-        BtlActorView *special = actor;
-        FUN_004e933c(actor, command);
-        handled = special == NULL;
-    }
-    if (!handled) {
-        if (roll < BTL_AI_ROLL_BAND_B) {
-            bool marked = (command->target->low & DAT_00571168) != 0 || (command->target->high & DAT_0057116c) != 0;
-            FUN_004e7c04(actor, marked);
-            BtlEffectView *effect = command->effect;
-            effect->phase = 1;
-            BtlTargetModeView mode;
-            btlEntryBuildSummary(&mode, actor->main, command->target);
-            effect->mode = (mode.selector == 1) ? 2 : 1;
-            if (mode.targetKind == 0)
-                btlActionMarkRandomTargetableUnit(actor);
-            else if (mode.targetKind == 1)
-                btlUnitMarkTargetCandidates(actor, marked, 1);
-            else if (mode.targetKind == 2)
-                btlUnitMarkTargetCandidates(actor, marked, 2);
-            for (s32 i = 0; i < BTL_UNIT_COUNT_ALL; i++) {
-                u32 flags = actor->main->units[i].flags;
-                actor->main->units[i].flags = flags & ~4u;
-                actor->main->units[i].flags = flags & ~0xCu;
+    BtlActionSlotA &slot = g_btlAction.slots[(*owner)->unitRecord.currentSlot];
+    slot.unit.command = command;
+}
+
+/* Chooses the unit's command from a roll: below 10 the special command is tried first, below 40 the
+ * unit attacks the targets its summary selects, otherwise it queues the default command. The UI
+ * shows the command unless the unit's flags hold a required or reach mask bit. */
+void FUN_004e5c10(BtlMainStateA **owner, BtlUnitA *unit)
+{
+    s32 roll = lcgRandomRange(99);
+    FUN_004e8454(owner);
+    if (roll >= 10 || FUN_004e933c(owner, unit) == 0) {
+        if (roll < 40) {
+            s32 marked = 1;
+            if ((unit->entry->flags & g_btlAction.interaction.requiredMask) == 0)
+                marked = 0;
+            FUN_004e7c04(owner, marked);
+            BtlUnitDataA *data = unit->data;
+            data->actionKind = 1;
+            BattleEntrySummaryA summary;
+            btlEntryBuildSummary(&summary, *owner, unit->entry);
+            if (summary.base.element == 1)
+                data->actionArg = 2;
+            else
+                data->actionArg = 1;
+            switch (summary.base.scope) {
+            case 0:
+                btlActionMarkRandomTargetableUnit(owner);
+                break;
+            case 1:
+                btlUnitMarkTargetCandidates(owner, marked, 1);
+                break;
+            case 2:
+                btlUnitMarkTargetCandidates(owner, marked, 2);
+                break;
             }
-            btlCommandExtendAnimationWindow((BtlActorRef *)actor, (BtlCommand *)command, command->skill->animation, 0, 0x1E, 0x1E);
-            FUN_004eb838(actor, command);
-            command->rolled = 1;
-            if (mode.targetKind == 0) {
-                s32 i;
-                for (i = 0; i < BTL_UNIT_COUNT_ALL; i++) {
-                    if (command->candidates[i] != 0) {
-                        if ((u8 *)command->target == actor->main->targets + i * BTL_TARGET_STRIDE)
-                            FUN_004c9160(0x2B, command->target, 0, 1);
-                        else
-                            FUN_004c9220(0x2A, command->target);
+            for (s32 i = 0; i < 109; i++) {
+                (*owner)->roster[i].liveFlags.unk50 &= ~4;
+                (*owner)->roster[i].liveFlags.unk50 &= ~8;
+            }
+            btlCommandExtendAnimationWindow((BtlActorRef *)owner, (BtlCommand *)unit,
+                                            unit->record->combatant.parameterIndex, 0, 30, 30);
+            FUN_004eb838(owner, unit);
+            unit->uiMode = 1;
+            if (summary.base.scope == 0) {
+                BtlCombatantEntryA *target = NULL;
+                bool self = false;
+                for (s32 i = 0; i < 109; i++) {
+                    if (unit->targets[i] != 0) {
+                        target = &(*owner)->entries[i];
+                        self = unit->entry == target;
                         break;
                     }
                 }
-                if (i == BTL_UNIT_COUNT_ALL)
-                    FUN_004c9220(0x2A, command->target);
+                if (self)
+                    FUN_004c9160(43, unit->entry, 0, 1);
+                else
+                    FUN_004c9220(42, unit->entry, target, 1);
             } else {
-                FUN_004c9160(0x2C, command->target, 0, 1);
+                FUN_004c9160(44, unit->entry, 0, 1);
             }
         } else {
-            s32 weight = (command->flags & 0x1080) == 0 ? 0x32 : 0;
-            FUN_004c9160(9, command->target, 0, 1);
-            FUN_004fd508(weight, command, 0, command->skill, 1);
-            btlCommandExtendAnimationWindow((BtlActorRef *)actor, (BtlCommand *)command, command->skill->animation, 0, 0x1E, 0x1E);
-            g_btlScriptUnit[actor->main->actorIndex].state = 0x1D;
+            s32 weight = (unit->flags & 0x1080) == 0 ? 50 : 0;
+            FUN_004c9160(9, unit->entry, 0, 1);
+            FUN_004fd508(weight, unit, 0, unit->record, 1);
+            btlCommandExtendAnimationWindow((BtlActorRef *)owner, (BtlCommand *)unit,
+                                            unit->record->combatant.parameterIndex, 0, 30, 30);
+            setScriptState(owner, 29);
         }
     }
-    if (((DAT_0057116c | DAT_00571174) & command->target->high) != 0
-        || ((DAT_00571168 | DAT_00571170) & command->target->low) != 0)
-        return;
-    FUN_004a9308(g_btlUiBlock, (s16)command->id, 0);
+    if (((g_btlAction.interaction.requiredMask | g_btlAction.interaction.reachMask) & unit->entry->flags) == 0)
+        FUN_004a9308(g_btlUiBlock, unit->id, 0, 0);
 }
 
 } /* extern "C" */

@@ -37,7 +37,7 @@ void btlMenuSetMessageText(const char *message);
 void menuStateReset();
 void menuStateStartSelect(s32 selection);
 void fillTwoWordsWithByte(void *destination, u32 value);
-u16 uiFindValidIdOrdinal(u32 owner, u32 ordinal);
+u16 btlTurnOrderRankOf(u32 owner, u32 ordinal);
 void btlUiCopyIdList(BtlUiObjCA *panel, u16 *ids);
 void menu32Advance(BtlUiObjCA *panel);
 void uiMenuActivateAndCountEntries(BtlUiObjCA *panel);

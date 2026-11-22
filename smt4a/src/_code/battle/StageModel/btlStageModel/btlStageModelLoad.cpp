@@ -1,16 +1,15 @@
-/* NON_MATCHING: readable rewrite from retail disassembly compiles (230 vs 306 rows); the compiler unrolls the stage-row search by two while retail keeps a straight loop, and retail zero-fills the name buffer with 16 word stores */
+/* NON_MATCHING: 186 lines. With the 0x24-byte BAM entries (0x50-byte rows) and an entry pointer in the row search the loop is no longer unrolled; retail still recomputes the found row's address from the index (`adds`), converts all three BAM coordinates before storing them with vstmia (a vector copy), and allocates the zero register and the constant 1 the other way round. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include <stdio.h>
 #include "code/Code001c.h"
 
-// One BAM entry of a stage row: name, and three u16 position components stored as floats.
+// One BAM entry of a stage row (0x24 bytes): name, and three u16 position components stored as floats.
 struct StageBam {
-    u8 unk00[4];
-    char name[0x1e];            // 0x04
-    u16 x;                      // 0x22
-    u16 y;                      // 0x24
-    u16 z;                      // 0x26
+    char name[0x1e];            // 0x00
+    u16 x;                      // 0x1e
+    u16 y;                      // 0x20
+    u16 z;                      // 0x22
 };
 
 // Stage table row (0x50 bytes): stage/sub-stage ids, two BAM entries and a redirect.
@@ -21,6 +20,7 @@ struct StageRow {
     u16 redirectStage;          // 0x4c
     u16 redirectSub;            // 0x4e
 };
+typedef char StageRowSizeCheck[sizeof(StageRow) == 0x50 ? 1 : -1];
 
 // Stage model: ids, the model lists and the BAM positions.
 struct BtlStageModel {
@@ -37,7 +37,7 @@ struct BtlStageModel {
 // Resource owner: only the pieces touched here.
 struct ResourceOwner {
     u8 unk00[4];
-    u32* flags;                 // 0x04
+    u32* flags;                 // 0x04: the flag bits are its second word
     u8 unk08[0xc];
     u8* state;                  // 0x14
 };
@@ -60,13 +60,14 @@ void* asdMemoryAllocTraced(u32 size, const char* file, u32 line);
 void* modelListInit(void* memory);
 
 // Finds the stage table row for the given ids.
-static inline StageRow* findStageRow(BtlStageModel* model)
+static __inline StageRow* findStageRow(BtlStageModel* model)
 {
     u32 table = dataTableFileGetTable(g_engineOptionalWork, 0);
     StageRow* rows = dataTableGetEntries();
     u32 count = dataTableGetCount(table);
     for (u32 i = 0; i < count; i++) {
-        if (rows[i].stage == model->stage && rows[i].substage == model->substage) return &rows[i];
+        StageRow* row = &rows[i];
+        if (row->stage == model->stage && row->substage == model->substage) return row;
     }
     return NULL;
 }
@@ -86,7 +87,7 @@ void btlStageModelLoad(BtlStageModel* model, u32 stage, u32 substage)
     }
 
     char name[64] = { 0 };
-    static_cast<void *>(btlGetMainState());
+    btlGetMainState();
     ResourceOwner* owner = g_handleRegistry;
     sprintf(name, "%se%03d_%02d.bch", "battle/battle_map/", stage, substage);
     if (FUN_00240c34(name) == 0) {
@@ -100,7 +101,7 @@ void btlStageModelLoad(BtlStageModel* model, u32 stage, u32 substage)
             FUN_0040ae70(owner, 0);
         }
         owner->state[0xc4] = 0;
-        *owner->flags |= 2;
+        owner->flags[1] |= 2;
     }
 
     sprintf(name, "%sb%03d_%02d.bam", "battle/battle_map/", stage, substage);

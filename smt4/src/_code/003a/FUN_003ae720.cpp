@@ -3,7 +3,7 @@
 
 extern "C" {
 void memFill8(void *destination, u32 value);
-u16 slotFindNonnegativeRank(void *owner, u32 index);
+u16 btlTurnOrderRankOf(void *owner, u32 index); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void btlUiCopyIdList(BtlUiObjC *window, BtlUiSettings *settings);
 void FUN_002dc464(BtlUiObjC *window);
 void FUN_002e439c(BtlUiObjC *window);
@@ -13,10 +13,10 @@ void FUN_003ae720(void *unused, s32 immediate)
 {
     BtlUi *ui = g_btlUi.ui;
     memFill8(&ui->settings, 0xFFFFFFFF);
-    ui->settings.slotRanks[0] = slotFindNonnegativeRank(ui->owner, 0);
-    ui->settings.slotRanks[1] = slotFindNonnegativeRank(ui->owner, 1);
-    ui->settings.slotRanks[2] = slotFindNonnegativeRank(ui->owner, 2);
-    ui->settings.slotRanks[3] = slotFindNonnegativeRank(ui->owner, 3);
+    ui->settings.slotRanks[0] = btlTurnOrderRankOf(ui->owner, 0);
+    ui->settings.slotRanks[1] = btlTurnOrderRankOf(ui->owner, 1);
+    ui->settings.slotRanks[2] = btlTurnOrderRankOf(ui->owner, 2);
+    ui->settings.slotRanks[3] = btlTurnOrderRankOf(ui->owner, 3);
     btlUiCopyIdList(&ui->objC, &ui->settings);
     if (immediate != 0) {
         FUN_002dc464(&ui->objC);

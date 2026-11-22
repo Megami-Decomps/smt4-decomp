@@ -12,7 +12,7 @@ int renderSubmissionDrawPacket(...);
 int FUN_00256dbc(...);
 int entryListSetPhase(...);
 int renderCtxSelectBlendPreset(...);
-int FUN_00257374(...);
+int billboardShapeGetStream(...);
 int refCountIncrement(void);
 int effectNodeUpdatePlacedChildren(...);
 int gfxQuaternionWorkspaceBuildMatrix(void);
@@ -112,7 +112,7 @@ extern int effectQuerySelectedBehavior(void *);
 /* Supplied declaration required: FUN_00256dbc. */
 /* Supplied declaration required: entryListSetPhase. */
 /* Supplied declaration required: renderCtxSelectBlendPreset. */
-/* Supplied declaration required: FUN_00257374. */
+/* Supplied declaration required: billboardShapeGetStream. */
 /* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: effectNodeUpdatePlacedChildren. */
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
@@ -231,10 +231,10 @@ void FUN_00267d84(fn_00267d84_arg0 *param_1)
       temp_v14 = (float)param_1[1].field_0x4 * in_s0;
       temp_v18 = *(float *)&param_1[1].field_0x8 * in_s0;
       temp_v8 = *(int *)(*(int *)(param_1 + 1) + 0xc);
-      FUN_00257374(temp_v8,1,&temp_v49);
-      FUN_00257374(temp_v8,2,&temp_v60);
-      FUN_00257374(temp_v8,4,&temp_v47);
-      FUN_00257374(temp_v8,0x20,&temp_v48);
+      billboardShapeGetStream(temp_v8,1,&temp_v49);
+      billboardShapeGetStream(temp_v8,2,&temp_v60);
+      billboardShapeGetStream(temp_v8,4,&temp_v47);
+      billboardShapeGetStream(temp_v8,0x20,&temp_v48);
       if ((*(unsigned int *)((int)pvVar11 + 0xc) & 1) != 0) {
         quadSourceCopyOut(pvVar11,&temp_v59);
         quadHolderCopyOut(pvVar11,&temp_v35);
@@ -393,11 +393,11 @@ void FUN_00267d84(fn_00267d84_arg0 *param_1)
       temp_v34 = *(int *)(*(int *)(param_1 + 1) + 0xc);
       temp_v2 = *(unsigned int *)&param_1->field_0x44;
       temp_v7 = *(int *)((int)pvVar11 + 0x20);
-      FUN_00257374(temp_v34,1,&temp_v49);
-      FUN_00257374(temp_v34,2,&temp_v60);
-      FUN_00257374(temp_v34,4,&temp_v47);
-      FUN_00257374(temp_v34,0x20,&temp_v48);
-      FUN_00257374(temp_v34,0x80,&temp_v33);
+      billboardShapeGetStream(temp_v34,1,&temp_v49);
+      billboardShapeGetStream(temp_v34,2,&temp_v60);
+      billboardShapeGetStream(temp_v34,4,&temp_v47);
+      billboardShapeGetStream(temp_v34,0x20,&temp_v48);
+      billboardShapeGetStream(temp_v34,0x80,&temp_v33);
       temp_v1 = temp_v34;
       temp_v3 = tableOwnerGetEntry(temp_v2,0);
       *(unsigned int *)(temp_v1 + 0xb4) = temp_v3;

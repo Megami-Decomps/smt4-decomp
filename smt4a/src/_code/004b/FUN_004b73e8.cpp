@@ -11,7 +11,6 @@ void obj04Finish(void);
 ListEntry20 *menu4CGetCurrentEntry(Menu4C *menu);
 void questMenuPanelUpdate(CampScriptPanelResources *panel);
 void transformInterpolationStep(CampScriptPanelResources *panel);
-void uiClampScrollOffset(CampScriptPanelResources *panel, void *animation);
 void spatialAdvanceTransformTransition(u32 handle);
 
 /* True when any of the panel move/step request flags is set. */
@@ -105,7 +104,7 @@ void FUN_004b73e8(CampScriptPanelResources *panel)
         }
     }
     transformInterpolationStep(panel);
-    uiClampScrollOffset(panel, panel->transition.animation);
+    uiClampScrollOffset((ScreenObject *)panel, &panel->scroll.x);
     if (panel->cacheLoaded)
         spatialAdvanceTransformTransition(panel->cacheHandle);
 }

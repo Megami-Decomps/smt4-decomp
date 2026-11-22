@@ -1,4 +1,6 @@
-/* NON_MATCHING: retail keeps the command cursor and material pointer in stack slots and stores the register words through stmia pairs; the word values, the light-enable mask loop and the per-light register groups are the same. */
+/* NON_MATCHING: the word values, the light-enable mask loop (armcc unrolls it by two, as retail) and the per-light
+ * register groups are the same; retail keeps the light count and material pointer in stack slots, puts the register
+ * words at sp+8 (stm pairs) and computes the light's diffuse and ambient words before the specular one. */
 #include "common.h"
 
 namespace {
@@ -52,10 +54,10 @@ u32 *nw_gfx_internal_FastWordCopyAsm_6(u32 *destination, const u32 *source);
    scaled back by 1/1024, giving 0..255, and the result is packed as three 10-bit fields. */
 static u32 colorModulate(u32 a, u32 b)
 {
-    s16 first = (s16)(((a & 0xff) << 1) + 1) * (s16)(((b & 0xff) << 1) + 1);
-    s16 second = (s16)(((a & 0xff00) >> 7) + 1) * (s16)(((b & 0xff00) >> 7) + 1);
-    s16 third = (s16)(((a & 0xff0000) >> 15) + 1) * (s16)(((b & 0xff0000) >> 15) + 1);
-    return (((u32)first >> 10) << 20) | (((u32)second >> 10) << 10) | ((u32)third >> 10);
+    u32 first = (u32)((s16)(((a & 0xff) << 1) + 1) * (s16)(((b & 0xff) << 1) + 1)) >> 10;
+    u32 second = (u32)((s16)(((a & 0xff00) >> 7) + 1) * (s16)(((b & 0xff00) >> 7) + 1)) >> 10;
+    u32 third = (u32)((s16)(((a & 0xff0000) >> 15) + 1) * (s16)(((b & 0xff0000) >> 15) + 1)) >> 10;
+    return (first << 20) | (second << 10) | third;
 }
 
 /* Repacks a colour as three 10-bit fields without scaling. */
@@ -86,14 +88,9 @@ void FUN_003742e8(LightJob *job, u32 unused, LightMaterial *material, s32 useRaw
         count = 8;
     }
     u32 mask = 0;
-    s32 last = 0;
-    if (count > 0) {
-        last = count - 1;
-        s32 slot = count & 1;
-        for (s32 pairs = count >> 1; pairs != 0; pairs--) {
-            mask = mask | (slot << (slot * 4)) | ((slot + 1) << (slot * 4 + 4));
-            slot += 2;
-        }
+    s32 last = count > 0 ? count - 1 : 0;
+    for (s32 i = 0; i < count; i++) {
+        mask |= i << (i * 4);
     }
     cursor = g_commandBufferCursor;
     cursor[0] = last;

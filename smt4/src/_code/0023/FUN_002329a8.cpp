@@ -1,39 +1,25 @@
-/* NON_MATCHING: scheduling only: retail loads the first call's index constant (mov r1, #0) after the owner-flag update and uses r1 for it, built hoists it above and uses r0/r1 the other way round. */
+/* NON_MATCHING: scheduling only: retail loads the first call's index constant (mov r1, #0) after the timer-flag update and uses r1 for it, built hoists it above and uses r0/r1 the other way round. */
 #include "shard/S1Mover.h"
+#include "classes/Obj422318.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
-struct CloneRenderState {
-    u8 unk000[0x1f6];
-    u8 enabled; // 0x1f6
-};
-// The render pointer is just past the shared AsdMdlNode prefix.
-struct CloneNode {
-    u8 unk00[0x2c];
-    CloneRenderState *render; // 0x2c
-};
-struct ModelCloneOwner {
-    u8 unk00[8];
-    u8 flags; // 0x08
-    u8 unk09[0x63];
-    AsdMdlObject *model; // 0x6c
-};
 extern "C" {
 void modelPartSetRotationDegrees(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
 void nodeSetScale(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
 
-// Clone and enable a model, resetting its root translation, rotation and scale.
-void FUN_002329a8(ModelCloneOwner *owner, AsdMdlObject *source)
+/* Clones and shows a model, resetting its root translation, rotation and scale. */
+void FUN_002329a8(Obj422318 *owner, AsdMdlObject *source)
 {
-    owner->model = asdMdlManagerClone(source, 0);
-    lightOwnerRegister(owner->model, 1);
-    AsdMdlObject *model = owner->model;
-    model->flags &= ~2u;
-    ((CloneNode *)model->node)->render->enabled = 1;
-    owner->flags |= 2;
-    f32 zero = 0.0f;
-    Vec3f origin = {zero, zero, zero};
-    nodeSetTranslation(owner->model->node, 0, &origin.x);
-    modelPartSetRotationDegrees(owner->model->node, 0, zero, zero, zero);
-    nodeSetScale(owner->model->node, 0, 1.0f, 1.0f, 1.0f);
+    owner->handle = asdMdlManagerClone(source, 0);
+    lightOwnerRegister(owner->handle, 1);
+    asdMdlObjectShow(owner->handle);
+    owner->timerFlags |= 2;
+    Vec3f origin;
+    origin.x = 0.0f;
+    origin.y = 0.0f;
+    origin.z = 0.0f;
+    nodeSetTranslation(owner->handle->node, 0, &origin.x);
+    modelPartSetRotationDegrees(owner->handle->node, 0, 0.0f, 0.0f, 0.0f);
+    nodeSetScale(owner->handle->node, 0, 1.0f, 1.0f, 1.0f);
 }
 }

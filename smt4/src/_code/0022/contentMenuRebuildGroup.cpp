@@ -1,8 +1,9 @@
-/* NON_MATCHING: retail inlines the entry check twice (once per source) sharing one stack buffer for the script name and the iteration state (frame 300 vs 340 here) and orders the header-search/state selection blocks differently; the calls and stores are the same. */
+/* NON_MATCHING: 118 lines. Retail keeps the row's x/y in r2/r3 across uiClampScrollOffset (it knows the callee's clobbers: a multifile partner), which moves the loop registers and the elapsed/duration stores (stm); its first loop reads the script group before the script; frame 300 against 340. */
 #include "common.h"
 #include <stdio.h>
 #include "AsdSDK/AsdMemUtil.h"
 #include "game/GameState.h"
+#include "gfx/TransformInterpolation.h"
 
 namespace {
 /* A selectable entry (0xd0 bytes): the bucket it belongs to, its availability script and the flags gating it. */
@@ -87,65 +88,82 @@ void FUN_003bb9d4(void *list);
 s32 gameStateIsFlagSetAndLarge(void);
 void listScrollToId(void *list, s32 id);
 ListRow *FUN_0022b8c0(void *list);
-void uiClampScrollOffset(MenuWindow *window, f32 *pair);
 void transformInterpolationStep(MenuWindow *window);
 void FUN_0022b6c4(void *list);
-
-/* Runs the entry's availability script and, when the entry passes its flags, lists it and marks its bucket. */
-static void listIfAvailable(MenuWindow *window, MenuEntry *entry, char *buckets, u32 group, u32 script)
-{
-    char name[36];
-    if (entry->bucket == 0 || buckets[entry->bucket] == '\0') {
-        if (entry->name[0] != '0') {
-            DAT_0044cfb8 = 0;
-            sprintf(name, "%s", entry->name);
-            scrScriptProcessStartEntry(script, tableGroupFindEntryIndex(group, name));
-            while (scrRunOpcodesStub(script) != 2) {
-            }
-            if (DAT_0044cfb8 != 0) {
-                return;
-            }
-        }
-        if ((entry->requiredFlag == 0 || gameFlagIsSet(entry->requiredFlag) != 0) &&
-            (entry->forbiddenFlag == 0 || gameFlagIsSet(entry->forbiddenFlag) == 0)) {
-            buckets[entry->bucket] = 1;
-            entryListAppend(window->list, entry);
-        }
-    }
-}
 
 /* Rebuilds the menu for row `selected` of the first table: lists the entries of the opened group (and the extra
    content entries of that kind) that pass their scripts and flags, restores the cursor and lays out the view. */
 void contentMenuRebuildGroup(MenuWindow *window, s32 selected, s32 state)
 {
-    s32 i;
     TableView view;
     GroupHeader *rows = dataTable33Sub0GetRecord(&view, 0);
     s32 rowCount = dataTable33Sub0GetCount(&view);
     window->header = NULL;
-    for (i = 0; i < rowCount; i++) {
+    for (s32 i = 0; i < rowCount; i++) {
         if (rows[i].id == selected) {
             window->header = &rows[i];
             break;
         }
     }
     entryListReset(window->list);
-    if (state != -1) {
-        window->state = state;
-    } else {
+    if (state == -1) {
         window->state = window->header->group;
+    } else {
+        window->state = state;
     }
     MenuEntry *entries = dataTable33GroupGetRecord(&view, window->state, 0);
     s32 entryCount = dataTable33GroupGetCount(&view, window->state);
     char buckets[256];
+    char name[32];
     memClear(buckets, 0x100);
     for (s32 i = 0; i < entryCount; i++) {
-        listIfAvailable(window, &entries[i], buckets, window->scriptGroup, window->script);
+        MenuEntry *entry = &entries[i];
+
+        if (entry->bucket == 0 || buckets[entry->bucket] == '\0') {
+            u32 script = window->script;
+            u32 group = window->scriptGroup;
+
+            if (entry->name[0] != '0') {
+                DAT_0044cfb8 = 0;
+                sprintf(name, "%s", entry->name);
+                scrScriptProcessStartEntry(script, tableGroupFindEntryIndex(group, name));
+                while (scrRunOpcodesStub(script) != 2) {
+                }
+                if (DAT_0044cfb8 != 0) {
+                    continue;
+                }
+            }
+            if ((entry->requiredFlag == 0 || gameFlagIsSet(entry->requiredFlag) != 0) &&
+                (entry->forbiddenFlag == 0 || gameFlagIsSet(entry->forbiddenFlag) == 0)) {
+                buckets[entry->bucket] = 1;
+                entryListAppend(window->list, entry);
+            }
+        }
     }
     s32 extraCount = packageListCountSectionRecords(g_aocSystem, window->state + 1);
     for (s32 i = 0; i < extraCount; i++) {
-        listIfAvailable(window, contentEntryGetFromFilesByKind(g_aocSystem, window->state + 1, i), buckets,
-                        window->scriptGroup, window->script);
+        MenuEntry *entry = contentEntryGetFromFilesByKind(g_aocSystem, window->state + 1, i);
+
+        if (entry->bucket == 0 || buckets[entry->bucket] == '\0') {
+            u32 script = window->script;
+            u32 group = window->scriptGroup;
+
+            if (entry->name[0] != '0') {
+                DAT_0044cfb8 = 0;
+                sprintf(name, "%s", entry->name);
+                scrScriptProcessStartEntry(script, tableGroupFindEntryIndex(group, name));
+                while (scrRunOpcodesStub(script) != 2) {
+                }
+                if (DAT_0044cfb8 != 0) {
+                    continue;
+                }
+            }
+            if ((entry->requiredFlag == 0 || gameFlagIsSet(entry->requiredFlag) != 0) &&
+                (entry->forbiddenFlag == 0 || gameFlagIsSet(entry->forbiddenFlag) == 0)) {
+                buckets[entry->bucket] = 1;
+                entryListAppend(window->list, entry);
+            }
+        }
     }
     FUN_003bb9d4(window->list);
     s32 id = -1;
@@ -159,21 +177,7 @@ void contentMenuRebuildGroup(MenuWindow *window, s32 selected, s32 state)
         listScrollToId(window->list, id);
     }
     ListRow *row = FUN_0022b8c0(window->list);
-    s32 y = row->y;
-    s32 x = row->x;
-    window->flags = window->flags | 0x1000;
-    window->viewX = window->originX;
-    window->viewY = window->originY;
-    window->cornerX = (f32)x - 200.0f;
-    window->cornerY = (f32)y - 120.0f;
-    uiClampScrollOffset(window, &window->viewX);
-    uiClampScrollOffset(window, &window->cornerX);
-    window->sizeCopyX = window->sizeX;
-    window->sizeCopyY = window->sizeY;
-    window->targetX = (f32)x;
-    window->targetY = (f32)y;
-    window->unk088 = 0;
-    window->unk08c = 1;
+    transformInterpolationScrollTo((TransformInterpolation *)window, row->x, row->y, 1);
     transformInterpolationStep(window);
     FUN_0022b6c4(window->list);
 }

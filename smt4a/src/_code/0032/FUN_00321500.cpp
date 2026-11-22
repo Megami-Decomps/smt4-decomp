@@ -16,10 +16,8 @@ int uiSpriteSetKeyframe(u8 *sub, int a, int b);
 /* When the state is 0, switches to state 5, clears the counter and restarts the sub-object. */
 void FUN_00321500(Owner *owner)
 {
-    u32 *state = &owner->state;
-
-    if (*state == 0) {
-        *state = 5;
+    if (owner->state == 0) {
+        owner->state = 5;
         owner->counter = 0;
         uiSpriteSetKeyframe(owner->sub, 0, 0);
     }

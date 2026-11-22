@@ -1,15 +1,9 @@
 /* NON_MATCHING: the normalisation now matches; retail keeps the shared 1.0 constant in s16 and the sine in s17, where this build swaps the two callee-saved registers. */
-#include "common.h"
+#include "shard/S1Mover.h"
+#include <math.h>
 
 extern "C" {
 
-typedef struct Vec3f {
-    f32 x;
-    f32 y;
-    f32 z;
-} Vec3f;
-
-f32 sqrtf(f32 value);
 f32 mathSinFixedAngle(f32 angle);
 f32 phaseCosInterpolate(f32 angle);
 void FUN_003219b0(void *out, const Vec3f *axis, u32 arg, f32 oneMinusCos, f32 sine);

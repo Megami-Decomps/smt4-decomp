@@ -73,7 +73,7 @@ void uniteRebuildFusionCatalog(void);
 void mapMainCallIfFlag(s32 flag);
 u32 fileSlotLoad(u32 id);
 s32 lmapMainIsRunning(void);
-void FUN_00294834(s32 r0, s32 g0, s32 b0, s32 r1, s32 g1, s32 b1, s32 r2, s32 g2, s32 b2, s32 r3, s32 g3, s32 b3,
+void playerLightsSetup(s32 r0, s32 g0, s32 b0, s32 r1, s32 g1, s32 b1, s32 r2, s32 g2, s32 b2, s32 r3, s32 g3, s32 b3,
                   f32 f0, f32 f1, f32 f2, f32 f3, f32 f4, f32 f5, f32 f6, f32 f7, f32 f8);
 void statusCameraSelectPreset(s32 preset);
 void *__aeabi_memset4(void *dest, s32 size, s32 value);
@@ -208,7 +208,7 @@ void uniteCreate(void)
     work->menu.scriptProcess = reinterpret_cast<u32>(scrScriptProcessCreate(work->menu.scriptFile, work->menu.messageFile));
 
     if (lmapSceneGetScript() != NULL || lmapMainIsRunning() != 0) {
-        FUN_00294834(0, 0, 0, 0, 0, 0, 255, 0, 0, 255, 0, 0, 0.0f, -1.0f, -565.0f, 1335.0f, 0.0f, -100.0f, 1500.0f, 1500.0f,
+        playerLightsSetup(0, 0, 0, 0, 0, 0, 255, 0, 0, 255, 0, 0, 0.0f, -1.0f, -565.0f, 1335.0f, 0.0f, -100.0f, 1500.0f, 1500.0f,
                      100.0f);
     }
     work->preview.camera = asdCameraLoadFromFile("camp/jakyou_all.bccam");

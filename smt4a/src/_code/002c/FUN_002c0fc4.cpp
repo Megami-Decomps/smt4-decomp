@@ -5,10 +5,10 @@
 #include <math.h>
 
 extern "C" {
-extern u8 DAT_005ecf14[]; /* touched flags, wall list A */
-extern u8 DAT_005ed114[]; /* touched flags, wall list B */
-extern u8 DAT_005ed294[]; /* touched flags, floor list A */
-extern u8 DAT_005ed334[]; /* touched flags, floor list B */
+extern u8 g_mapCollisionTouchedTriangles[]; /* touched flags, wall list A */
+extern u8 g_mapCollisionTouchedQuads[]; /* touched flags, wall list B */
+extern u8 g_mapCollisionTouchedSegmentsA[]; /* touched flags, floor list A */
+extern u8 g_mapCollisionTouchedSegmentsB[]; /* touched flags, floor list B */
 void gxEmitColoredQuad(u32 colorA, u32 colorB, u32 colorC, u32 colorD,
                   CollisionVector a, CollisionVector b, CollisionVector c, CollisionVector d);
 void FUN_00203970(u32 color, CollisionVector from, CollisionVector to);
@@ -32,7 +32,7 @@ extern "C" void FUN_002c0fc4(CollisionVector position)
     for (u32 i = 0; i < (u32)g_mapCollision.geometry.triangleCount; i++) {
         CollisionQuad *shape = &g_mapCollision.triangles[i];
         s32 mode = g_gameState.collisionDebugMode;
-        if (mode == 1 || (mode == 2 && collisionShapeInRange(shape, position, range)) || DAT_005ecf14[i] == 1) {
+        if (mode == 1 || (mode == 2 && collisionShapeInRange(shape, position, range)) || g_mapCollisionTouchedTriangles[i] == 1) {
             u32 color = colors[i & 3];
             gxEmitColoredQuad(color, color, color, color,
                          shape->vertices[0], shape->vertices[1], shape->vertices[2], shape->vertices[0]);
@@ -41,7 +41,7 @@ extern "C" void FUN_002c0fc4(CollisionVector position)
     for (u32 i = 0; i < (u32)g_mapCollision.quadCount; i++) {
         CollisionQuad *shape = &g_mapCollision.quads[i];
         s32 mode = g_gameState.collisionDebugMode;
-        if (mode == 1 || (mode == 2 && collisionShapeInRange(shape, position, range)) || DAT_005ed114[i] == 1) {
+        if (mode == 1 || (mode == 2 && collisionShapeInRange(shape, position, range)) || g_mapCollisionTouchedQuads[i] == 1) {
             u32 color = colors[i & 3];
             gxEmitColoredQuad(color, color, color, color,
                          shape->vertices[0], shape->vertices[1], shape->vertices[2], shape->vertices[3]);
@@ -50,7 +50,7 @@ extern "C" void FUN_002c0fc4(CollisionVector position)
     for (u32 i = 0; i < (u32)g_mapCollision.segmentCounts[0]; i++) {
         CollisionQuad *shape = &g_mapCollision.second[i];
         s32 mode = g_gameState.collisionDebugMode;
-        if (mode == 1 || (mode == 2 && collisionShapeInRange(shape, position, range)) || DAT_005ed294[i] == 1) {
+        if (mode == 1 || (mode == 2 && collisionShapeInRange(shape, position, range)) || g_mapCollisionTouchedSegmentsA[i] == 1) {
             FUN_00203970(0xff00ff, shape->vertices[0], shape->vertices[1]);
             FUN_00203970(0xff00ff, shape->vertices[1], shape->vertices[2]);
             FUN_00203970(0xff00ff, shape->vertices[2], shape->vertices[0]);
@@ -62,7 +62,7 @@ extern "C" void FUN_002c0fc4(CollisionVector position)
         u32 color;
         if (mode == 1 || (mode == 2 && collisionShapeInRange(shape, position, range))) {
             color = 0xffff00ff;
-        } else if (DAT_005ed334[i] == 1) {
+        } else if (g_mapCollisionTouchedSegmentsB[i] == 1) {
             color = 0xff00ff;
         } else {
             continue;

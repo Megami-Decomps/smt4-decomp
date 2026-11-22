@@ -28,7 +28,7 @@ int dataTable01FindByIdWithAoc(...);
 int libc_strcpy(...);
 int asdMemFree(void);
 int jobStop(...);
-int FUN_00308d5c(...);
+int btlTurnEnd(...);
 int FUN_0033a670(...);
 int FUN_0033b3c4(...);
 int FUN_00348c10(...);
@@ -49,7 +49,7 @@ int FUN_00255180(...);
 int FUN_002551ac(...);
 int bgmStopNoForce(...);
 int FUN_0027dbc8(...);
-int FUN_0027de98(void);
+int btlListedActionsPending(void);
 int btlEventSelectTrigger(...);
 int FUN_0027e760(...);
 void bgmRequestSelectedChannelFade(unsigned int frames);
@@ -60,7 +60,7 @@ int messageSetConfirmDisplayMode(void);
 int battleInitializeEnemyFormation(...);
 int FUN_003ae134(...);
 int FUN_003c7c84(...);
-int FUN_003c7f20(...);
+int btlStageModelRelease(...);
 
 int btlUiCreateTasks(...);
 int btlAutoCalcTaskCreate(...);
@@ -150,7 +150,7 @@ extern int FUN_00255de0(unsigned int, unsigned int);
 /* Supplied declaration required: bgmStopNoForce. */
 /* Supplied declaration required: FUN_0027dbc8. */
 /* Supplied declaration required: btlSpriteSelectSource. */
-/* Supplied declaration required: FUN_0027de98. */
+/* Supplied declaration required: btlListedActionsPending. */
 extern int isEntryUsable(unsigned int *); // declcheck: local (romwright prototype; the shared declaration in code/Code0027.h does not compile here: argument of type "unsigned int *" is incompatible with parameter of type "int *")
 /* Supplied declaration required: btlEventSelectTrigger. */
 /* Supplied declaration required: FUN_0027e760. */
@@ -181,7 +181,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002f34cc. */
-/* Supplied declaration required: FUN_00308d5c. */
+/* Supplied declaration required: btlTurnEnd. */
 /* Supplied declaration required: battleInitializeEnemyFormation. */
 /* Supplied declaration required: btlInitializeActivePartyUnits. */
 /* Supplied declaration required: FUN_00337cfc. */
@@ -196,7 +196,7 @@ extern int jobIsValid(unsigned int);
 extern int FUN_003bf0a4(void);
 /* Supplied declaration required: btlHelpFreeEntries. */
 /* Supplied declaration required: FUN_003c7c84. */
-/* Supplied declaration required: FUN_003c7f20. */
+/* Supplied declaration required: btlStageModelRelease. */
 /* Supplied declaration required: FUN_003c8428. */
 /* Supplied declaration required: supportUnitInitializeRandomCategory. */
 /* Supplied declaration required: btlEffectReleaseResources. */
@@ -403,7 +403,7 @@ void FUN_001fc6e8(unsigned int param_1)
   case 3:
     *(unsigned int *)(temp_v4 + 0x13c) = 0xffffffff;
     *(unsigned int *)(temp_v4 + 0x140) = 0xffffffff;
-    FUN_003c7f20(DAT_004398d4,temp_v4);
+    btlStageModelRelease(DAT_004398d4,temp_v4);
     FUN_003c7c84(DAT_004398d4,temp_v4);
     FUN_0027e760(DAT_004398d4);
     return;
@@ -586,7 +586,7 @@ void FUN_001fc6e8(unsigned int param_1)
     *(unsigned int *)(temp_v4 + 0x49c0) = 0xff;
     *(unsigned int *)(temp_v4 + 0x44a0) = *(unsigned int *)(temp_v4 + 0x44a0) & 0xfeffffff;
     temp_v3 = temp_v4;
-    FUN_0027de98();
+    btlListedActionsPending();
     if (temp_v3 == 0) {
       if ((*(short *)(temp_v4 + 0x2f1e) < 0) ||
          (*(short *)(temp_v4 + *(short *)(temp_v4 + 0x2f1e) * 2 + 0x2f06) < 0)) {
@@ -671,7 +671,7 @@ LAB_001fd348:
       *(unsigned int *)(temp_v4 + 0x88) = 2;
     }
     temp_v3 = temp_v4;
-    FUN_0027de98();
+    btlListedActionsPending();
     if (temp_v3 == 0) {
       if (0 < *(int *)(temp_v4 + 0xbc)) {
         temp_v6 = temp_v4 + 0x4900;
@@ -697,7 +697,7 @@ LAB_001fd348:
     }
     break;
   case 0x10:
-    FUN_00308d5c(temp_v4);
+    btlTurnEnd(temp_v4);
     return;
   case 0x13:
     switch(*(unsigned int *)(temp_v4 + 0x88)) {

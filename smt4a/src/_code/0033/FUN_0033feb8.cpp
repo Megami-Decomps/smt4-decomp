@@ -26,7 +26,7 @@ void padGetNormalizedAnalogStick(f32* stickX, f32* stickY, s32 arg);
 void FUN_0033f9f4(void);
 f32 __hardfp_atan2f(f32 y, f32 x);
 
-s32 FUN_0036d5e0(MapVector* candidate, MapVector* previous);
+s32 mapSweepCollisionPlanesFar(MapVector* candidate, MapVector* previous);
 
 // Moves the player on the field from the analog stick: accelerates while held,
 // turns to the stick direction and advances in one or two collision-checked steps.
@@ -80,7 +80,7 @@ void FUN_0033feb8(PlayerController* player)
         scene = g_lmapScene;
         scene->pose.targetPosition.z += libm_cosf(scene->pose.targetHeading * 0.017453292f) * stride;
         scene = g_lmapScene;
-        if (DAT_005f1c48 == 0) blocked = FUN_0036d5e0(&scene->pose.targetPosition, &before);
+        if (DAT_005f1c48 == 0) blocked = mapSweepCollisionPlanesFar(&scene->pose.targetPosition, &before);
         scene = g_lmapScene;
         scene->pose.position.x = (scene->pose.targetPosition.x - scene->pose.position.x) + scene->pose.position.x;
         scene->pose.position.z = (scene->pose.targetPosition.z - scene->pose.position.z) + scene->pose.position.z;

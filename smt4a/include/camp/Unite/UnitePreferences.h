@@ -14,7 +14,7 @@ struct FusionCatalogCriteria {
     /* 0x0A */ u16 unk0A;
     /* 0x0C */ u16 unk0C;
     /* 0x0E */ s16 unk0E;
-    /* 0x10 */ u8 unk10[3];
+    /* 0x10 */ s8 optionActive[3];  /* the saved switch of each option row of the fusion menu, in row order */
     /* 0x13 */ u8 searchEnabled;
     /* 0x14 */ u8 unk14;
     /* 0x15 */ s8 skillCategory;

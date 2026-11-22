@@ -103,7 +103,7 @@ void btlEntryRemove(s32 index, s32 unused, s32 removeLinked, s32 keepLink)
             entry->data.guest->state = 2;
             entry->data.guest->hp = 0;
         }
-        state->unk49c4 = 0;
+        state->supportTurn = 0;
     } else {
         if (entry->flagMask & BTL_ENTRY_FLAG_PARTY) {
             if (keepLink == 0) {

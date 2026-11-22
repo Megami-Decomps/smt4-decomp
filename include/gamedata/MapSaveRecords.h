@@ -24,7 +24,7 @@ typedef struct MapMarkerSlot {
     /* 0x00 */ u8 flags;           /* bit 0: used, bit 1: shows a content entry, bit 2: pending, bit 3: expired, bit 4: marked */
     /* 0x01 */ s8 first;
     /* 0x02 */ s8 second;
-    /* 0x03 */ u8 stage;
+    /* 0x03 */ s8 stage;           /* the content entry's stage (0-3); s8: mapNaviUpdateSlots sign-extends it */
     /* 0x04 */ s16 contentIndex;
     /* 0x06 */ s16 objectId;       /* the map object the marker belongs to */
     /* 0x08 */ s16 timer;          /* content minutes * 0x708 frames */

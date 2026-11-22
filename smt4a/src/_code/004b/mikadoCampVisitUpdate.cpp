@@ -32,7 +32,7 @@ extern const char g_mikadoPathPrefix[]; /* "mikado/" */
 
 void transformInterpolationStep(CampScriptPanelResources *work);
 void soundPlayCueForContextKind(CampScriptPanelResources *work); // declcheck: local (code/Code004b_Smt4a.h types the argument as a SoundCueContext view)
-void FUN_004b6bc4(CampScriptPanelResources *work, s32 type, s32 group);
+void contentMenuRebuildGroup(CampScriptPanelResources *work, s32 type, s32 group);
 s32 FUN_004ba698(Menu4C *menu);
 void menu4CClearFlag84(Menu4C *menu);
 ListEntry20 *menu4CGetCurrentEntry(Menu4C *menu);
@@ -183,7 +183,7 @@ void mikadoCampVisitUpdate(CampScriptPanelResources *work)
     case 5: {
         if (campGetState()->changed) {
             u8 kind = menu4CGetCurrentEntry(&work->panel.menu)->kind;
-            FUN_004b6bc4(work, work->mikado.sceneId, work->panel.group);
+            contentMenuRebuildGroup(work, work->mikado.sceneId, work->panel.group);
             menu4CScrollToKind(&work->panel.menu, kind);
             work->mikado.menuTotal = flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(&work->panel.menu));
         }

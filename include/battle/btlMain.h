@@ -57,7 +57,8 @@ typedef struct BtlMainState {
             /* 0x0060 */ u8 freeOnEnd;    /* 0 = keep the block after the job ends */
             /* 0x0061 */ u8 unk0061[3];
             /* 0x0064 */ u32 mode;
-            /* 0x0068 */ u8 unk0068[0x18];
+            /* 0x0068 */ s32 nextState;   /* the state the battle's main process enters next */
+            /* 0x006C */ u8 unk006C[0x14];
             /* 0x0080 */ s8 firstBonus;
             /* 0x0081 */ s8 secondBonus;
             /* 0x0082 */ u8 unk0082[0x42];
@@ -65,6 +66,10 @@ typedef struct BtlMainState {
             /* 0x00C8 */ u8 unk00C8[0x90];
             /* 0x0158 */ u32 selectedIds[1];
         } core;
+        struct {
+            u8 prefix[0x16C];
+            /* 0x016C */ s32 waitCount;   /* positive while the turn's end has to wait (the main process holds state 8) */
+        } turnEnd;
         struct {
             u8 prefix[0x58];
             /* 0x58 */ u32 job;
@@ -173,6 +178,11 @@ typedef struct BtlMainState {
             /* 0x225A */ s16 checkId;           /* listed id of the player's unit */
         } playerCheck;
         struct {
+            u8 unk1FD8[0x338];
+            /* 0x2310 */ void *actions;         /* the actions listed for the turn (btlListedActionsPending) */
+            /* 0x2314 */ s32 count;
+        } listedActions;
+        struct {
             u8 unk1FD8[0x284];
             /* 0x225C */ s32 mode;
             /* 0x2260 */ u32 event;
@@ -228,7 +238,8 @@ typedef struct BtlMainState {
             u8 unk44a8[0x4968 - 0x44A8];
             /* 0x4968 */ s16 x;
             /* 0x496A */ s16 y;
-            /* 0x496C */ u8 unk496C[4];
+            /* 0x496C */ s16 stepsX;            /* positive while the cursor is still moving */
+            /* 0x496E */ s16 stepsY;
             /* 0x4970 */ s16 targetX;
             /* 0x4972 */ s16 targetY;
         } menuCursor;
@@ -240,7 +251,7 @@ typedef struct BtlMainState {
     /* 0x49B8 */ u32 unk49B8;
     /* 0x49BC */ u32 flags49BC;
     /* 0x49C0 */ s32 selectedGroup;  /* 0xff when no group is selected */
-    /* 0x49C4 */ u8 unk49c4;
+    /* 0x49C4 */ s8 supportTurn;     /* nonzero while the support unit still acts at the turn's end */
     /* 0x49C5 */ s8 hasActiveEntry;
     /* 0x49C6 */ u8 unk49C6[0xA];
     /* 0x49D0 */ u64 flags49D0;
@@ -501,6 +512,10 @@ typedef struct BtlMainStateA {
         /* 0x2000 */ u8 unk2000[0x2cd0];
         /* 0x2000 */ u32 commandWords[4]; /* pending command is low/high words [2]/[3] */
         /* 0x2000 */ BtlCommandMessageStateA commandMessage;
+        struct {
+            /* 0x2000 */ s16 units;       /* live entries of the party's side and guests aside */
+            /* 0x2002 */ s16 present;     /* live entries with the present flag */
+        } entryCounts;
         struct {
             u8 prefix[4];
             /* 0x2004 */ s16 selection;

@@ -81,6 +81,39 @@ struct ResultInputWork {
     /* 0x352C */ s32 state;
 };
 
+/* The same first 0x34A0 bytes seen as what resultInitialize builds there: the sprite resource block, then the
+ * screen's sprites (the position pairs above are the first words of sprites 1, 9 and 10). */
+enum {
+    RESULT_SPRITE_BACKGROUND = 0,
+    RESULT_SPRITE_ROWS = 1,         /* 6 */
+    RESULT_SPRITE_STAT_HIGHLIGHT = 7,
+    RESULT_SPRITE_HEADER = 8,
+    RESULT_SPRITE_REWARD = 9,
+    RESULT_SPRITE_DETAIL = 10,
+    RESULT_SPRITE_OVERLAY = 11,     /* 3; the third is the closing curtain */
+    RESULT_SPRITE_CURTAIN = 13,
+    RESULT_SPRITE_MARKERS = 14,     /* 16 */
+    RESULT_SPRITE_ICONS = 30,       /* 4 rows of 7 */
+    RESULT_SPRITE_ENTRIES = 58,     /* RESULT_ENTRY_COUNT */
+    RESULT_SPRITE_ITEMS = 83,       /* RESULT_ITEM_SLOTS */
+    RESULT_SPRITE_ITEM_COUNTS = 90, /* RESULT_ITEM_SLOTS */
+    RESULT_SPRITE_COUNT = 96
+};
+
+struct ResultScreenSprites {
+    /* 0x0000 */ UiResourceParameters parameters;
+    /* 0x0020 */ UiSpriteState sprites[RESULT_SPRITE_COUNT];
+};
+typedef char ResultScreenSpritesCheck[offsetof(ResultScreenSprites, sprites) == 0x20 &&
+    sizeof(UiSpriteState) == 0x8C && sizeof(ResultScreenSprites) == 0x34A0 ? 1 : -1];
+
+/* The block as its sprite resource and sprites. A documented view, kept until ResultInputWork's own members (the
+ * position pairs and unions above) are folded into this layout: one struct per object is the follow-up. */
+static __inline ResultScreenSprites *resultScreenSprites(ResultInputWork *work)
+{
+    return (ResultScreenSprites *)work;
+}
+
 typedef char ResultInputWorkOffsets[
     offsetof(ResultInputWork, menuPosition) == 0xAC &&
     offsetof(ResultInputWork, rewardPosition) == 0x50C &&

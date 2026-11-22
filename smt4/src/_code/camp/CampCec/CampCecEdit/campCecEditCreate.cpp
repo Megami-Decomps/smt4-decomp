@@ -36,7 +36,7 @@ s32 FUN_002fc7a0(CampCecEdit *edit);
 s32 FUN_002ec514(CampCecEdit *edit);
 s32 recordQueryModeZero(CampCecEdit *edit);
 s32 campCecEditChoiceListState(CampCecEdit *edit);
-s32 FUN_00321af0(CampCecEdit *edit);
+s32 panelSlideOutStep(CampCecEdit *edit);
 
 u32 campCecDrawSetCreate(void);
 u32 campCecDrawPageCreate(void);
@@ -100,7 +100,7 @@ void campCecEditCreate(u8 openMode)
     edit->stateHandlers[5] = FUN_002ec514;
     edit->stateHandlers[8] = recordQueryModeZero;
     edit->stateHandlers[6] = campCecEditChoiceListState;
-    edit->stateHandlers[7] = FUN_00321af0;
+    edit->stateHandlers[7] = panelSlideOutStep;
 
     /* each message's entry in CecEdit_scr.bf */
     edit->messageEntries[1] = 1;

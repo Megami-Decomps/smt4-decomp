@@ -1,11 +1,11 @@
-/* NON_MATCHING: saved collection/mode registers are swapped, with the mode save moved before the guard. */
+/* NON_MATCHING: mode is s8 (callers sign-extend it); retail still keeps mode in r1 until the guard passes, this build copies it to r5 at entry. */
 #include "shard/W6_W6Match5_EntryCollection.h"
 
 extern "C" {
 extern const EntryComparator DAT_0052b5d4[34];
 void qsort(void *, u32, u32, EntryComparator);
 
-void entryCollectionSortByMode(EntryCollection *collection, s32 mode)
+void entryCollectionSortByMode(EntryCollection *collection, s8 mode)
 {
     if (collection->sortMode == mode)
         return;

@@ -7,7 +7,7 @@
 extern "C" {
 extern BtlStageGlobals g_btlStage;
 s32 btlStageRunWork(void);
-void FUN_0021eda8(u32 handle);
+void btlStageDestroy(u32 handle);
 void btlSpriteSelectSource(BtlMainState* battle, void* description, u32 mode);
 u32 taskCreateDraw(const char* name, u32 priority, u32 flags, u32 mode,
                    s32 (*update)(void), void (*destroy)(u32), void* work, u32 parent);
@@ -31,7 +31,7 @@ void FUN_001e2350(BtlMainState* battle)
         offsetof(StageSetupView, identifiers) == 0x13C ? 1 : -1];
     StageSetupView* setup = reinterpret_cast<StageSetupView*>(battle);
     setup->job = taskCreateDraw("btlStage Calc", 2, 0, 0,
-                                btlStageRunWork, FUN_0021eda8, battle, battle->job);
+                                btlStageRunWork, btlStageDestroy, battle, battle->job);
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\btlStage.cpp", 577);
     BtlStage* stage = g_btlStage.stage = static_cast<BtlStage*>(asdMemAlloc(0x100, 0x100, 0, 0xC4, 1));
     for (s32 i = 2; i >= 0; --i) {

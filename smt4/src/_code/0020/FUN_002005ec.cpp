@@ -24,10 +24,10 @@ extern int DAT_00447000; /* 0x447000 */
 extern int DAT_00447004; /* 0x447004 */
 extern int DAT_00447008; /* 0x447008 */
 extern int DAT_0044700c; /* 0x44700c */
-extern unsigned char DAT_0049e45c; /* 0x49e45c */
-extern unsigned char DAT_0049e65c; /* 0x49e65c */
-extern unsigned char DAT_0049e7dc; /* 0x49e7dc */
-extern unsigned char DAT_0049e87c; /* 0x49e87c */
+extern unsigned char g_mapCollisionTouchedTriangles; /* 0x49e45c */
+extern unsigned char g_mapCollisionTouchedQuads; /* 0x49e65c */
+extern unsigned char g_mapCollisionTouchedSegmentsA; /* 0x49e7dc */
+extern unsigned char g_mapCollisionTouchedSegmentsB; /* 0x49e87c */
 
 
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
@@ -67,13 +67,13 @@ void FUN_002005ec(void)
       temp_v2 = DAT_00447000 + temp_v1 * 0xa8;
       if (g_gameState.unk34C != 1) {
         if (g_gameState.unk34C != 2) {
-          temp_v0 = (&DAT_0049e45c)[temp_v1];
+          temp_v0 = (&g_mapCollisionTouchedTriangles)[temp_v1];
         }
         else {
           temp_v4 = *(float *)(temp_v2 + 0x8c) - in_s0;
           temp_v3 = *(float *)(temp_v2 + 0x94) - in_s2;
           if (romwright_sqrt_4(temp_v4 * temp_v4 + temp_v3 * temp_v3) < (float)temp_v5) goto LAB_002006a4;
-          temp_v0 = (&DAT_0049e45c)[temp_v1];
+          temp_v0 = (&g_mapCollisionTouchedTriangles)[temp_v1];
         }
         if (temp_v0 == '\x01') {
           gxEmitColoredQuad(temp_v6[temp_v1 & 3],temp_v6[temp_v1 & 3]);
@@ -92,13 +92,13 @@ LAB_002006a4:
       temp_v2 = DAT_00447004 + temp_v1 * 0xa8;
       if (g_gameState.unk34C != 1) {
         if (g_gameState.unk34C != 2) {
-          temp_v0 = (&DAT_0049e65c)[temp_v1];
+          temp_v0 = (&g_mapCollisionTouchedQuads)[temp_v1];
         }
         else {
           temp_v4 = *(float *)(temp_v2 + 0x8c) - in_s0;
           temp_v3 = *(float *)(temp_v2 + 0x94) - in_s2;
           if (romwright_sqrt_4(temp_v4 * temp_v4 + temp_v3 * temp_v3) < (float)temp_v5) goto LAB_00200760;
-          temp_v0 = (&DAT_0049e65c)[temp_v1];
+          temp_v0 = (&g_mapCollisionTouchedQuads)[temp_v1];
         }
         if (temp_v0 == '\x01') {
           gxEmitColoredQuad(temp_v6[temp_v1 & 3],temp_v6[temp_v1 & 3]);
@@ -117,13 +117,13 @@ LAB_00200760:
       temp_v2 = DAT_00447008 + temp_v1 * 0xa8;
       if (g_gameState.unk34C != 1) {
         if (g_gameState.unk34C != 2) {
-          temp_v0 = (&DAT_0049e7dc)[temp_v1];
+          temp_v0 = (&g_mapCollisionTouchedSegmentsA)[temp_v1];
         }
         else {
           temp_v4 = *(float *)(temp_v2 + 0x8c) - in_s0;
           temp_v3 = *(float *)(temp_v2 + 0x94) - in_s2;
           if (romwright_sqrt_4(temp_v4 * temp_v4 + temp_v3 * temp_v3) < (float)temp_v5) goto LAB_00200824;
-          temp_v0 = (&DAT_0049e7dc)[temp_v1];
+          temp_v0 = (&g_mapCollisionTouchedSegmentsA)[temp_v1];
         }
         if (temp_v0 == '\x01') {
           rectangleForwardExpandedAlt(0xff00ff);
@@ -146,13 +146,13 @@ LAB_00200824:
       temp_v2 = DAT_0044700c + temp_v1 * 0xa8;
       if (g_gameState.unk34C != 1) {
         if (g_gameState.unk34C != 2) {
-          temp_v0 = (&DAT_0049e87c)[temp_v1];
+          temp_v0 = (&g_mapCollisionTouchedSegmentsB)[temp_v1];
         }
         else {
           temp_v4 = *(float *)(temp_v2 + 0x8c) - in_s0;
           temp_v3 = *(float *)(temp_v2 + 0x94) - in_s2;
           if (romwright_sqrt_4(temp_v4 * temp_v4 + temp_v3 * temp_v3) < (float)temp_v5) goto LAB_002008dc;
-          temp_v0 = (&DAT_0049e87c)[temp_v1];
+          temp_v0 = (&g_mapCollisionTouchedSegmentsB)[temp_v1];
         }
         if (temp_v0 == '\x01') {
           rectangleForwardExpandedAlt(0xff00ff);

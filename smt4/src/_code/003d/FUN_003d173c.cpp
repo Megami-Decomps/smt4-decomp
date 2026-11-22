@@ -1,6 +1,6 @@
 /* NON_MATCHING: 22 raw / 6 shape. Two things remain: retail loads g_btlMain's address right after the
  * FUN_00293ed0 test (ldrne r6 ahead of the frame load) where the build loads it at the switch head, and it sets
- * FUN_003ddb50's value argument (r2) before the three colour floats. The second is the callee's parameter order:
+ * btlReflectCreateTint's value argument (r2) before the three colour floats. The second is the callee's parameter order:
  * (actor, options, red, green, blue, value) gives retail's schedule here and leaves the other caller identical,
  * but it is a shared prototype and is reported rather than applied.
  * The two empty cases are retail's: its decision tree pivots on 212 and then on 148, which a switch over the
@@ -55,7 +55,7 @@ void modelClearPendingAnimation(BtlMainState *state);
 void modelSlotDetachChild(BtlCamera *main);
 void btlUiPlaySceneFadeOutWhenReady(BtlUi *uiBlock);
 void slotResetIdle(BtlMainState *state, s32 slot, u32 value);
-void FUN_003ddb50(u32 actor, void *options, u32 value, f32 red, f32 green, f32 blue);
+void btlReflectCreateTint(u32 actor, void *options, u32 value, f32 red, f32 green, f32 blue);
 void FUN_00282820(s32 a1, s32 a2, s32 a3, s32 a4, s32 a5, s32 a6, s32 a7, s32 a8);
 u32 btlReflectQueueFlaggedRecords(s32 actor, void *options, u32 value);
 void btlActionReflectRun(s32 actionId, void *argument);
@@ -109,7 +109,7 @@ u32 FUN_003d173c(BtlMainState **block, ActionStateChannel *channel)
         btlQueueKeyedScalarReflectAction(0, channel, 0x100010a, 0, 0, 0, 1);
         break;
     case 90:
-        FUN_003ddb50(0, channel, 5, 0.36f, 0.28f, 0.26f);
+        btlReflectCreateTint(0, channel, 5, 0.36f, 0.28f, 0.26f);
         break;
     case 100:
         if (reinterpret_cast<ReflectCutsceneView *>(*block)->scaleGroup != NULL) {

@@ -1,203 +1,168 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `mapNaviUpdateSlots` (_code @ 0x2f3c28, 0x3dc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: rewritten from the raw draft; same tests, calls and switches as retail. Retail lays the stage
+ * switches out differently (the last case of the first one as `bne; b`, the last two cases of the second and third
+ * after the following dispatch and the enemy search), takes the marker base in r1/r0 the other way round and loads
+ * the stack arguments of the marker-value calls in the other register order (one stm). */
 #include "gamedata/MapSaveBlock.h"
-#include "romwright_types.h"
 #include "map/MapEnemyGlobal.h"
+#include "gamedata/GameDataAccess_Smt4.h"
+
+/* unit-local: a content entry of table 0x32 (contentEntryGetE) as this function reads it; its four stages follow the
+ * id (mapUpdateLocationAvailability reads the first). */
+struct ContentStage {
+    /* 0x0 */ s8 first;
+    /* 0x1 */ s8 second;
+    /* 0x2 */ s16 values[4];
+    /* 0xA */ s16 minutes;
+    /* 0xC */ u8 x;
+    /* 0xD */ u8 y;
+};
+struct ContentEntry {
+    /* 0x00 */ s32 id;          /* -1: unused */
+    /* 0x04 */ ContentStage stages[4];
+};
 
 extern "C" {
+void naviSetActiveMapSlot(u32 kind, u32 argument, u32 first, u32 second, u32 third, u32 fourth, u32 fifth);
+void naviSetMapSlotDefault(u32 kind);
 
-int naviSetActiveMapSlot(...);
-int contentEntryGetE(void);
-int naviSetMapSlotDefault(int);
-
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
-
-
-/* Supplied declaration required: naviSetActiveMapSlot. */
-/* Supplied declaration required: contentEntryGetE. */
-/* Supplied declaration required: naviSetMapSlotDefault. */
-
-
+/* Refreshes the navigator's sixteen map slots from the location markers: a pending content marker whose stage ran out
+ * moves to its next stage (back to the first after the last or an empty one); a shown marker on the current area goes
+ * to the position of the enemy that carries it, else to its own values. */
 void mapNaviUpdateSlots(void)
-
 {
-/* irregular: 2 goto(s); 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  char temp_v4;
-  unsigned char temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  unsigned char temp_v10;
-  
-  temp_v1 = ((int)g_mapEnemy);
-  temp_v2 = (int)gameGetMapBlock();
-  temp_v7 = 0;
-  do {
-    temp_v8 = temp_v2 + temp_v7 * 0x14;
-    temp_v0 = *(unsigned char *)(temp_v8 + 0xf20);
-    if ((temp_v0 & 1) != 0) {
-      if ((temp_v0 & 4) != 0) {
-        if (((temp_v0 & 2) != 0) && (temp_v6 = (int)*(short *)(temp_v8 + 0xf24), (temp_v0 & 8) != 0)) {
-          *(unsigned char *)(temp_v8 + 0xf20) = (temp_v0 & 0xf7) | 0x20;
-          contentEntryGetE();
-          temp_v4 = *(char *)(temp_v8 + 0xf23) + '\x01';
-          *(char *)(temp_v8 + 0xf23) = temp_v4;
-          if (temp_v4 != '\x01') {
-            if (temp_v4 != '\x02') {
-              if (temp_v4 != '\x03') {
-                if (temp_v4 == '\x04') {
-                  *(unsigned char *)(temp_v8 + 0xf23) = 0;
-                }
-              }
-              else {
-                temp_v4 = *(char *)(temp_v6 + 0x2e);
-                if (temp_v4 < '\x01') {
-                  *(unsigned char *)(temp_v8 + 0xf23) = 0;
-                }
-              }
-            }
-            else {
-              temp_v4 = *(char *)(temp_v6 + 0x20);
-              if (temp_v4 < '\x01') {
-                *(unsigned char *)(temp_v8 + 0xf23) = 0;
-              }
-            }
-          }
-          else {
-            temp_v4 = *(char *)(temp_v6 + 0x12);
-            if (temp_v4 < '\x01') {
-              *(unsigned char *)(temp_v8 + 0xf23) = 0;
-            }
-          }
-          temp_v4 = *(char *)(temp_v8 + 0xf23);
-          if (temp_v4 != '\0') {
-            if (temp_v4 != '\x01') {
-              if (temp_v4 != '\x02') {
-                if (temp_v4 == '\x03') {
-                  *(unsigned char *)(temp_v8 + 0xf21) = *(unsigned char *)(temp_v6 + 0x2e);
-                  temp_v5 = *(unsigned char *)(temp_v6 + 0x2f);
-                  *(unsigned char *)(temp_v8 + 0xf22) = temp_v5;
-                }
-              }
-              else {
-                *(unsigned char *)(temp_v8 + 0xf21) = *(unsigned char *)(temp_v6 + 0x20);
-                temp_v5 = *(unsigned char *)(temp_v6 + 0x21);
-                *(unsigned char *)(temp_v8 + 0xf22) = temp_v5;
-              }
-            }
-            else {
-              *(unsigned char *)(temp_v8 + 0xf21) = *(unsigned char *)(temp_v6 + 0x12);
-              temp_v5 = *(unsigned char *)(temp_v6 + 0x13);
-              *(unsigned char *)(temp_v8 + 0xf22) = temp_v5;
-            }
-          }
-          else {
-            *(unsigned char *)(temp_v8 + 0xf21) = *(unsigned char *)(temp_v6 + 4);
-            temp_v5 = *(unsigned char *)(temp_v6 + 5);
-            *(unsigned char *)(temp_v8 + 0xf22) = temp_v5;
-          }
-          if (temp_v4 != '\0') {
-            if (temp_v4 != '\x01') {
-              if (temp_v4 != '\x02') {
-                if (temp_v4 == '\x03') {
-                  *(short *)(temp_v8 + 0xf28) = *(short *)(temp_v6 + 0x38) * 0x708;
-                  *(unsigned short *)(temp_v8 + 0xf2c) = *(unsigned short *)(temp_v6 + 0x30);
-                  *(unsigned short *)(temp_v8 + 0xf2e) = *(unsigned short *)(temp_v6 + 0x32);
-                  *(unsigned short *)(temp_v8 + 0xf30) = *(unsigned short *)(temp_v6 + 0x34);
-                  *(unsigned short *)(temp_v8 + 0xf32) = *(unsigned short *)(temp_v6 + 0x36);
-                  *(unsigned char *)(temp_v8 + 0xf2a) = *(unsigned char *)(temp_v6 + 0x3a);
-                  temp_v5 = *(unsigned char *)(temp_v6 + 0x3b);
-                  *(unsigned char *)(temp_v8 + 0xf2b) = temp_v5;
-                }
-              }
-              else {
-                *(short *)(temp_v8 + 0xf28) = *(short *)(temp_v6 + 0x2a) * 0x708;
-                *(unsigned short *)(temp_v8 + 0xf2c) = *(unsigned short *)(temp_v6 + 0x22);
-                *(unsigned short *)(temp_v8 + 0xf2e) = *(unsigned short *)(temp_v6 + 0x24);
-                *(unsigned short *)(temp_v8 + 0xf30) = *(unsigned short *)(temp_v6 + 0x26);
-                *(unsigned short *)(temp_v8 + 0xf32) = *(unsigned short *)(temp_v6 + 0x28);
-                *(unsigned char *)(temp_v8 + 0xf2a) = *(unsigned char *)(temp_v6 + 0x2c);
-                temp_v5 = *(unsigned char *)(temp_v6 + 0x2d);
-                *(unsigned char *)(temp_v8 + 0xf2b) = temp_v5;
-              }
-            }
-            else {
-              *(short *)(temp_v8 + 0xf28) = *(short *)(temp_v6 + 0x1c) * 0x708;
-              *(unsigned short *)(temp_v8 + 0xf2c) = *(unsigned short *)(temp_v6 + 0x14);
-              *(unsigned short *)(temp_v8 + 0xf2e) = *(unsigned short *)(temp_v6 + 0x16);
-              *(unsigned short *)(temp_v8 + 0xf30) = *(unsigned short *)(temp_v6 + 0x18);
-              *(unsigned short *)(temp_v8 + 0xf32) = *(unsigned short *)(temp_v6 + 0x1a);
-              *(unsigned char *)(temp_v8 + 0xf2a) = *(unsigned char *)(temp_v6 + 0x1e);
-              temp_v5 = *(unsigned char *)(temp_v6 + 0x1f);
-              *(unsigned char *)(temp_v8 + 0xf2b) = temp_v5;
-            }
-          }
-          else {
-            *(short *)(temp_v8 + 0xf28) = *(short *)(temp_v6 + 0xe) * 0x708;
-            *(unsigned short *)(temp_v8 + 0xf2c) = *(unsigned short *)(temp_v6 + 6);
-            *(unsigned short *)(temp_v8 + 0xf2e) = *(unsigned short *)(temp_v6 + 8);
-            *(unsigned short *)(temp_v8 + 0xf30) = *(unsigned short *)(temp_v6 + 10);
-            *(unsigned short *)(temp_v8 + 0xf32) = *(unsigned short *)(temp_v6 + 0xc);
-            *(unsigned char *)(temp_v8 + 0xf2a) = *(unsigned char *)(temp_v6 + 0x10);
-            temp_v5 = *(unsigned char *)(temp_v6 + 0x11);
-            *(unsigned char *)(temp_v8 + 0xf2b) = temp_v5;
-          }
-          if ((*(unsigned char *)(temp_v8 + 0xf20) & 4) == 0) goto LAB_002f3fe8;
+    MapEnemy *enemy = g_mapEnemy;
+    MapSaveBlock *block = gameGetMapBlock();
+
+    for (s32 slot = 0; slot < 16; slot++) {
+        if (!(block->markers[slot].flags & 1)) {
+            continue;
         }
-        if ((*(unsigned char *)(temp_v8 + 0xf20) & 0x12) != 0) {
-          if (((int)*(char *)(temp_v8 + 0xf21) == *(int *)(temp_v1 + 0xc)) &&
-             ((int)*(char *)(temp_v8 + 0xf22) == *(int *)(temp_v1 + 0x10))) {
-            temp_v6 = 0;
-            do {
-              temp_v3 = temp_v1 + temp_v6 * 0x180;
-              temp_v10 = *(char *)(temp_v3 + 0x34) != '\0';
-              temp_v9 = 0;
-              if (temp_v10) {
-                temp_v9 = *(int *)(temp_v3 + 0xb8);
-              }
-              if ((temp_v10 && temp_v9 != 0x13) && (*(int *)(temp_v3 + 0x88) == temp_v7)) {
-                if ((*(int *)(temp_v3 + 0xb8) == 3) && (*(int *)(temp_v3 + 0xbc) < 2)) {
-                  naviSetActiveMapSlot(temp_v7);
+        if (block->markers[slot].flags & 4) {
+            if (block->markers[slot].flags & 2) {
+                /* Read before the flag byte is stored, which may alias it (retail loads it here). */
+                s16 content = block->markers[slot].contentIndex;
+                if (block->markers[slot].flags & 8) {
+                    block->markers[slot].flags = (block->markers[slot].flags & ~8) | 0x20;
+                    ContentEntry *entry = (ContentEntry *)contentEntryGetE(content);
+                    block->markers[slot].stage++;
+                    switch (block->markers[slot].stage) {
+                    case 1:
+                        if (entry->stages[1].first <= 0) {
+                            block->markers[slot].stage = 0;
+                        }
+                        break;
+                    case 2:
+                        if (entry->stages[2].first <= 0) {
+                            block->markers[slot].stage = 0;
+                        }
+                        break;
+                    case 3:
+                        if (entry->stages[3].first <= 0) {
+                            block->markers[slot].stage = 0;
+                        }
+                        break;
+                    case 4:
+                        block->markers[slot].stage = 0;
+                        break;
+                    }
+                    switch (block->markers[slot].stage) {
+                    case 0:
+                        block->markers[slot].first = entry->stages[0].first;
+                        block->markers[slot].second = entry->stages[0].second;
+                        break;
+                    case 1:
+                        block->markers[slot].first = entry->stages[1].first;
+                        block->markers[slot].second = entry->stages[1].second;
+                        break;
+                    case 2:
+                        block->markers[slot].first = entry->stages[2].first;
+                        block->markers[slot].second = entry->stages[2].second;
+                        break;
+                    case 3:
+                        block->markers[slot].first = entry->stages[3].first;
+                        block->markers[slot].second = entry->stages[3].second;
+                        break;
+                    }
+                    switch (block->markers[slot].stage) {
+                    case 0:
+                        block->markers[slot].timer = entry->stages[0].minutes * 0x708;
+                        block->markers[slot].values[0] = entry->stages[0].values[0];
+                        block->markers[slot].values[1] = entry->stages[0].values[1];
+                        block->markers[slot].values[2] = entry->stages[0].values[2];
+                        block->markers[slot].values[3] = entry->stages[0].values[3];
+                        block->markers[slot].x = entry->stages[0].x;
+                        block->markers[slot].y = entry->stages[0].y;
+                        break;
+                    case 1:
+                        block->markers[slot].timer = entry->stages[1].minutes * 0x708;
+                        block->markers[slot].values[0] = entry->stages[1].values[0];
+                        block->markers[slot].values[1] = entry->stages[1].values[1];
+                        block->markers[slot].values[2] = entry->stages[1].values[2];
+                        block->markers[slot].values[3] = entry->stages[1].values[3];
+                        block->markers[slot].x = entry->stages[1].x;
+                        block->markers[slot].y = entry->stages[1].y;
+                        break;
+                    case 2:
+                        block->markers[slot].timer = entry->stages[2].minutes * 0x708;
+                        block->markers[slot].values[0] = entry->stages[2].values[0];
+                        block->markers[slot].values[1] = entry->stages[2].values[1];
+                        block->markers[slot].values[2] = entry->stages[2].values[2];
+                        block->markers[slot].values[3] = entry->stages[2].values[3];
+                        block->markers[slot].x = entry->stages[2].x;
+                        block->markers[slot].y = entry->stages[2].y;
+                        break;
+                    case 3:
+                        block->markers[slot].timer = entry->stages[3].minutes * 0x708;
+                        block->markers[slot].values[0] = entry->stages[3].values[0];
+                        block->markers[slot].values[1] = entry->stages[3].values[1];
+                        block->markers[slot].values[2] = entry->stages[3].values[2];
+                        block->markers[slot].values[3] = entry->stages[3].values[3];
+                        block->markers[slot].x = entry->stages[3].x;
+                        block->markers[slot].y = entry->stages[3].y;
+                        break;
+                    }
+                    if (!(block->markers[slot].flags & 4)) {
+                        naviSetMapSlotDefault(slot);
+                        continue;
+                    }
                 }
-                else {
-                  naviSetActiveMapSlot(temp_v7);
+            }
+            if (block->markers[slot].flags & 0x12) {
+                if (block->markers[slot].first == enemy->requestArgs[0] &&
+                    block->markers[slot].second == enemy->requestArgs[1]) {
+                    bool found = false;
+                    for (s32 i = 0; i < MAP_ENEMY_COUNT; i++) {
+                        MapEnemyEntry *entry = &enemy->entries[i];
+                        if (entry->active && entry->state != 19 && entry->markerIndex == slot) {
+                            if (entry->state == 3 && entry->elapsed < 2) {
+                                naviSetActiveMapSlot(slot, block->markers[slot].first, block->markers[slot].second,
+                                                     (s32)entry->position.x, (s32)entry->position.y,
+                                                     (s32)entry->position.z, 0);
+                            } else {
+                                naviSetActiveMapSlot(slot, block->markers[slot].first, block->markers[slot].second,
+                                                     (s32)entry->position.x, (s32)entry->position.y,
+                                                     (s32)entry->position.z, 1);
+                            }
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found) {
+                        continue;
+                    }
                 }
-                goto LAB_002f3ff0;
-              }
-              temp_v6 = temp_v6 + 1;
-            } while (temp_v6 < 0x20);
-          }
-          naviSetActiveMapSlot(temp_v7,(int)*(char *)(temp_v8 + 0xf21),(int)*(char *)(temp_v8 + 0xf22),
-                       (int)*(short *)(temp_v8 + 0xf2c),(int)*(short *)(temp_v8 + 0xf2e),
-                       (int)*(short *)(temp_v8 + 0xf30),1);
+                naviSetActiveMapSlot(slot, block->markers[slot].first, block->markers[slot].second,
+                                     block->markers[slot].values[0], block->markers[slot].values[1],
+                                     block->markers[slot].values[2], 1);
+            } else {
+                naviSetActiveMapSlot(slot, block->markers[slot].first, block->markers[slot].second,
+                                     block->markers[slot].values[0], block->markers[slot].values[1],
+                                     block->markers[slot].values[2], 0);
+            }
+        } else {
+            naviSetMapSlotDefault(slot);
         }
-        else {
-          naviSetActiveMapSlot(temp_v7,(int)*(char *)(temp_v8 + 0xf21),(int)*(char *)(temp_v8 + 0xf22),
-                       (int)*(short *)(temp_v8 + 0xf2c),(int)*(short *)(temp_v8 + 0xf2e),
-                       (int)*(short *)(temp_v8 + 0xf30),0);
-        }
-      }
-      else {
-LAB_002f3fe8:
-        naviSetMapSlotDefault(temp_v7);
-      }
     }
-LAB_002f3ff0:
-    temp_v7 = temp_v7 + 1;
-    if (temp_v7 >= 0x10) {
-      return;
-    }
-  } while( 1 );
 }
 
 } /* extern "C" */

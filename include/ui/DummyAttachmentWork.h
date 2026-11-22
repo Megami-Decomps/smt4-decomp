@@ -11,19 +11,6 @@ struct DummyAttachmentSource {
     AsdMdlObject *model; // 0x1c
 };
 
-/* Show or hide a model object: the draw flag and its scene node's follow byte go together. */
-static __inline void asdMdlObjectShow(AsdMdlObject *model)
-{
-    model->flags &= ~2;
-    model->node->sceneNode->positionFollowed = 1;
-}
-
-static __inline void asdMdlObjectHide(AsdMdlObject *model)
-{
-    model->flags |= 2;
-    model->node->sceneNode->positionFollowed = 0;
-}
-
 /* One selectable NPC of the quest center: its row of data table 0x27/0 and its 1-based marker. */
 struct DummyAttachmentNpcEntry {
     s32 record; // 0x00

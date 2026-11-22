@@ -129,7 +129,7 @@ extern unsigned int DAT_0061a5e8; /* 0x61a5e8 */
 extern int DAT_0061a5ec; /* 0x61a5ec */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int FUN_001600b8(int);
+extern int gfxBlockListStart(int);
 /* Supplied declaration required: FUN_001600fc. */
 extern int FUN_00160944(void);
 extern int blockOpen(int);
@@ -195,7 +195,7 @@ unsigned int FUN_00149ae0(romwright_code *param_1,romwright_code *param_2)
     temp_v4 = DAT_0058919c + 0x10cc;
     temp_v5 = DAT_0058919c + 0x2840;
     temp_v0 = FUN_00160944();
-    if ((((-1 < temp_v0) && (temp_v0 = FUN_001600b8(temp_v1), -1 < temp_v0)) &&
+    if ((((-1 < temp_v0) && (temp_v0 = gfxBlockListStart(temp_v1), -1 < temp_v0)) &&
         (temp_v0 = blockOpen(temp_v2), -1 < temp_v0)) &&
        ((FUN_001600fc(), -1 < temp_v4 && (temp_v0 = gfxDefaultTexturesInitialize(reinterpret_cast<DefaultTextureWork *>(temp_v5)), -1 < temp_v0)))) {
       nngxGetError();

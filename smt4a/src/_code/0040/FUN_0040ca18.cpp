@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rewrite from retail disassembly compiles (211 vs 208 rows); retail keeps a constant-false flag and the mask table base in registers/stack slots that the source-level structure does not reproduce */
+/* NON_MATCHING: 266 lines. The phase switch with one shared `done = 1`, the never-set-elsewhere side flag tested in retail's order (direct, side, plain) and the score-5 path sharing the final send now follow retail; retail still lays the score-5 and score-2/3 blocks out before the target flags, threads the all-down loop's exit straight into the 0x21 assignment, hoists the two player masks before the loop, and initialises the step locals around the btlAiBestTargetScore call. */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -66,90 +66,92 @@ s32 infoWinIsActive(void);
 void FUN_0040ca18(u32 unused, ActionStep* step)
 {
     BtlMainStateA* main = btlGetMainState();
-    u64 blocked = ((g_btlActionReflect.blockMaskC | g_btlActionReflect.blockMaskA) & main->stateFlags64.bits);
-    if (blocked != 0) {
+    if ((g_btlActionReflect.blockMaskC | g_btlActionReflect.blockMaskA) & main->stateFlags64.bits) {
         step->done = 0;
         return;
     }
-    if (step->phase != 0) {
-        if (step->phase == 1 && infoWinIsActive() == 0) {
+    switch (step->phase) {
+    case 0: {
+        u32 id = 0;
+        s32 arg = 0;
+        bool pending = false;
+        bool direct = true;
+        bool toSide = false;
+        void* target = NULL;
+        s32 score = btlAiBestTargetScore(g_btlScriptUnit);
+        BtlUnit* unit = btlUnitGet(g_btlScriptUnit);
+        if (score != 5) {
+            ActionTarget* record = FUN_002c7bf4(step->request);
+            if (record == NULL) return;
+            u32 flags = record->flags;
+            if ((flags & 0x20) != 0 && (unit->side->data.statusFlags & 0x10) == 0) return;
+            if (score == 1) return;
+            if (score == 2) {
+                if (record->idTwo != 0) {
+                    id = record->idTwo;
+                } else if (record->idDefault != 0) {
+                    arg = record->argDefault;
+                    id = record->idDefault;
+                }
+            } else if (score == 3) {
+                if (record->idThree != 0) {
+                    arg = record->argThree;
+                    id = record->idThree;
+                } else if (record->idDefault != 0) {
+                    arg = record->argDefault;
+                    id = record->idDefault;
+                }
+            } else if (record->idDefault != 0) {
+                arg = record->argDefault;
+                id = record->idDefault;
+            }
+            if ((flags & 1) != 0) target = step->actor;
+            if ((flags & 0x10) != 0) target = step->actor;
+            if ((flags & 8) != 0) {
+                s32 g;
+                for (g = 0; g < 4; g++) {
+                    BtlCombatantEntryA* other = &main->entries[g];
+                    if (step->actor->selectionIndex != other->selectionIndex) {
+                        if ((other->flags & g_btlActionReflect.playerMask) == 0) break;
+                        if ((other->flags & g_btlActionReflect.skipMask) != 0) break;
+                        if ((other->data.statusFlags & 0x10) == 0) break;
+                    }
+                }
+                if (g == 4) {
+                    id = 0x21;
+                    direct = false;
+                }
+            }
+            if ((flags & 0x40) != 0) {
+                s32 ready = FUN_004c86ec(step->request);
+                s32 index = FUN_004c600c(step->actor->selectionIndex);
+                if (ready != 0 && index >= 0) {
+                    id = 0x3e;
+                    target = &main->entries[index];
+                    direct = false;
+                    toSide = true;
+                }
+            }
+        } else {
+            id = 0x25;
+            if (FUN_004ea5e8(g_btlScriptUnit) <= 1) pending = true;
+            FUN_004e699c(g_btlScriptUnit, unit->side->selectionIndex, score);
+            direct = false;
+        }
+        if (direct) FUN_004c8d8c(id, target, arg);
+        else if (toSide) FUN_004c9160(id, target, arg, 1);
+        else FUN_004c8e30(id, arg, 1);
+        if (pending) return;
+        step->phase++;
+        break;
+    }
+    case 1:
+        if (infoWinIsActive() == 0) {
             step->done = 0;
             return;
         }
-        step->done = 1;
-        return;
+        break;
     }
-
-    u32 id = 0;
-    s32 arg = 0;
-    bool pending = false;
-    bool direct = true;
-    void* target = NULL;
-    s32 score = btlAiBestTargetScore(g_btlScriptUnit);
-    BtlUnit* unit = btlUnitGet(g_btlScriptUnit);
-    if (score != 5) {
-        ActionTarget* record = FUN_002c7bf4(step->request);
-        if (record == NULL) return;
-        u32 flags = record->flags;
-        if ((flags & 0x20) != 0 && (unit->side->data.statusFlags & 0x10) == 0) return;
-        if (score == 1) return;
-        if (score == 2) {
-            if (record->idTwo != 0) {
-                id = record->idTwo;
-            } else if (record->idDefault != 0) {
-                arg = record->argDefault;
-                id = record->idDefault;
-            }
-        } else if (score == 3) {
-            if (record->idThree != 0) {
-                arg = record->argThree;
-                id = record->idThree;
-            } else if (record->idDefault != 0) {
-                arg = record->argDefault;
-                id = record->idDefault;
-            }
-        } else if (record->idDefault != 0) {
-            arg = record->argDefault;
-            id = record->idDefault;
-        }
-        if ((flags & 1) != 0) target = step->actor;
-        if ((flags & 0x10) != 0) target = step->actor;
-        if ((flags & 8) != 0) {
-            s32 g;
-            for (g = 0; g < 4; g++) {
-                BtlCombatantEntryA* other = &main->entries[g];
-                if (step->actor->selectionIndex != other->selectionIndex) {
-                    if ((other->flags & g_btlActionReflect.playerMask) == 0) break;
-                    if ((other->flags & g_btlActionReflect.skipMask) != 0) break;
-                    if ((other->data.statusFlags & 0x10) == 0) break;
-                }
-            }
-            if (g == 4) {
-                id = 0x21;
-                direct = false;
-            }
-        }
-        bool toSide = false;
-        if ((flags & 0x40) != 0) {
-            s32 ready = FUN_004c86ec(step->request);
-            s32 index = FUN_004c600c(step->actor->selectionIndex);
-            if (ready != 0 && index >= 0) {
-                id = 0x3e;
-                target = &main->entries[index];
-                toSide = true;
-            }
-        }
-        if (toSide) FUN_004c9160(id, target, arg, 1);
-        else if (direct) FUN_004c8d8c(id, target, arg);
-        else FUN_004c8e30(id, arg, 1);
-    } else {
-        id = 0x25;
-        if (FUN_004ea5e8(g_btlScriptUnit) <= 1) pending = true;
-        FUN_004e699c(g_btlScriptUnit, unit->side->selectionIndex, 5);
-        FUN_004c8e30(id, arg, 1);
-    }
-    if (pending) return;
-    step->phase = step->phase + 1;
     step->done = 1;
 }
 

@@ -27,7 +27,7 @@ extern "C" {
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 s32 rosterGetLeaderId(void);
 s32 table1bOr1cGetRecordValue(void); // declcheck: local (the shared declaration in code/Code001b.h does not compile here: too few arguments in function call)
-void FUN_004b6bc4(SceneStartWork *work, s32 mode, s32 arg);
+void contentMenuRebuildGroup(SceneStartWork *work, s32 mode, s32 arg);
 s32 pairedAvailabilityGetState(u32 index);
 void titleSetSlotValueState2(u32 index, s32 value);
 void bgmReleaseStopped(void);
@@ -54,7 +54,7 @@ void mapSceneInitializeScriptAndEntry(SceneStartWork *work)
     if (rosterGetLeaderId() != 0 && table1bOr1cGetRecordValue() == 6) {
         special = 1;
     }
-    FUN_004b6bc4(work, mode, -1);
+    contentMenuRebuildGroup(work, mode, -1);
     work->centerX = 400.0f;
     work->centerY = 240.0f;
     if (pairedAvailabilityGetState(0) == 3) {

@@ -4,7 +4,7 @@
 extern "C" {
 void FUN_001e1104(BtlUiObjB *, s32 mode, s32 options, s32 firstStrike);
 void spriteRowListOpen(BtlUiObjA *, s32 mode, s32 first, s32 second);
-u16 slotFindNonnegativeRank(void *owner, u32 slot);
+u16 btlTurnOrderRankOf(void *owner, u32 slot); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void communicationBeginTransition(s32 mode);
 void communicationSetResultPointer(void);
 void memFill8(void *output, u32 value);
@@ -55,10 +55,10 @@ void FUN_003ae134(void *, s32 mode, u8 first, u8 second, s32 firstStrike, s32 op
     if (options != 0 || mode != 0) {
         BtlUi *current = g_btlUi.ui;
         memFill8(&current->settings, ~0u);
-        current->settings.slotRanks[0] = slotFindNonnegativeRank(current->owner, 0);
-        current->settings.slotRanks[1] = slotFindNonnegativeRank(current->owner, 1);
-        current->settings.slotRanks[2] = slotFindNonnegativeRank(current->owner, 2);
-        current->settings.slotRanks[3] = slotFindNonnegativeRank(current->owner, 3);
+        current->settings.slotRanks[0] = btlTurnOrderRankOf(current->owner, 0);
+        current->settings.slotRanks[1] = btlTurnOrderRankOf(current->owner, 1);
+        current->settings.slotRanks[2] = btlTurnOrderRankOf(current->owner, 2);
+        current->settings.slotRanks[3] = btlTurnOrderRankOf(current->owner, 3);
         btlUiCopyIdList(&current->objC, &current->settings);
         if (mode != 0)
             FUN_002dc464(&ui->base.objC);

@@ -55,7 +55,7 @@ int FUN_002b5e08(int, int *, unsigned char *, unsigned int *);
 int blockResetAxis(...);
 int mapSetSceneState(...);
 int gameFlagsWriteBlockBit(int, int);
-int FUN_003774e8(int, unsigned char *, unsigned char *, unsigned int *);
+int relicSearchDraw(int, unsigned char *, unsigned char *, unsigned int *);
 int FUN_003799d0(void);
 int messageBannerInitCounter(...);
 int mapIfStartNavigation(...);
@@ -162,7 +162,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: gameFlagsBitSet. */
 /* Supplied declaration required: FUN_003689d0. */
 /* Supplied declaration required: FUN_00377158. */
-/* Supplied declaration required: FUN_003774e8. */
+/* Supplied declaration required: relicSearchDraw. */
 /* Supplied declaration required: FUN_003799d0. */
 extern int panelStateIs0(void);
 /* Supplied declaration required: panelSetTarget. */
@@ -471,7 +471,7 @@ unsigned int FUN_002991d4(void)
       }
       if (*(unsigned int *)(temp_v4 + 0xc) < 2) {
         temp_v11 = *(int *)(temp_v4 + 0xb0);
-        FUN_003774e8(temp_v11,&DAT_005f1d74,&DAT_005f1db4,&DAT_005f1dc4);
+        relicSearchDraw(temp_v11,&DAT_005f1d74,&DAT_005f1db4,&DAT_005f1dc4);
         if (temp_v11 != 0) {
           if (temp_v11 == 1) {
             *(unsigned char *)(temp_v4 + 0x8c) = 1;

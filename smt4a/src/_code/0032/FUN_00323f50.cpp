@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(...);
 int renderCtxSelectTexture(...);
-int FUN_00184c4c(...);
+int debugQuadVertex(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int camSetMatrixA(...);
 int FUN_001a1ee0(...);
 int FUN_001b4a00(...);
@@ -113,7 +113,7 @@ extern float DAT_00647358; /* 0x647358 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: renderCtxSelectTexture. */
-/* Supplied declaration required: FUN_00184c4c. */
+/* Supplied declaration required: debugQuadVertex. */
 /* Supplied declaration required: camSetMatrixA. */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: FUN_001b4a00. */
@@ -317,10 +317,10 @@ void FUN_00323f50(fn_00323f50_arg0 *param_1)
               FUN_001a1ee0();
               temp_v18 = (unsigned long long)(unsigned int)temp_v12 << 0x20;
               FUN_0032c808();
-              FUN_00184c4c(temp_v37);
-              FUN_00184c4c(temp_v37);
-              FUN_00184c4c(temp_v37);
-              FUN_00184c4c(temp_v37);
+              debugQuadVertex(temp_v37);
+              debugQuadVertex(temp_v37);
+              debugQuadVertex(temp_v37);
+              debugQuadVertex(temp_v37);
               FUN_002371b0();
             }
           }
@@ -364,10 +364,10 @@ void FUN_00323f50(fn_00323f50_arg0 *param_1)
               FUN_001a1ee0();
               temp_v18 = (unsigned long long)(unsigned int)temp_v19 << 0x20;
               FUN_0032c808();
-              FUN_00184c4c(temp_v37);
-              FUN_00184c4c(temp_v37);
-              FUN_00184c4c(temp_v37);
-              FUN_00184c4c(temp_v37);
+              debugQuadVertex(temp_v37);
+              debugQuadVertex(temp_v37);
+              debugQuadVertex(temp_v37);
+              debugQuadVertex(temp_v37);
               FUN_002371b0();
             }
           }

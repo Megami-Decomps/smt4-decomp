@@ -5,14 +5,14 @@
 
 extern "C" {
 extern EffectSelectionTemplate g_effectEditorState;
-void FUN_00375ec8(EffMenuNode *node);
+void effMenuTextEntryStep(EffMenuNode *node);
 void namedObjectFormatName(EffMenuNode *node, const char *text);
 void engineFreeCallback(void *memory);
 s32 effMenuNodeGetState(EffMenuNode *node);
 
 u32 effectEditorUpdate()
 {
-    FUN_00375ec8(g_effectEditor.name);
+    effMenuTextEntryStep(g_effectEditor.name);
     s32 position = g_effectEditorState.indices.extraOffset + g_effectEditor.index;
     LinkedItem *item = linkedFindItemByIndex(
         (LinkedItems *)g_effectEditor.list, position);
