@@ -1,4 +1,4 @@
-/* NON_MATCHING: typed workspace fields enable accumulator folding and two-way group-loop unrolling, increasing saved registers; -O2 candidate. */
+/* NON_MATCHING: retail does not know the cleared totals afterwards (it reloads totals[1], [2], [3] and [4] before adding to them) and never unrolls the group loops; the build folds the zeroes in, which changes the whole allocation. */
 #include "common.h"
 
 struct WorkspaceResourceGroup {
@@ -23,8 +23,9 @@ struct ResourceWorkspaceSizes { u32 totals[6]; WorkspaceArraySize arrays[9]; };
 
 extern "C" void resourceCalculateWorkspaceSizes(const WorkspaceResource *resource, ResourceWorkspaceSizes *sizes, const u32 *parameters)
 {
-    for (u32 i = 0; i < 6; ++i)
-        sizes->totals[i] = 0;
+    u32 *total = sizes->totals;
+    for (s32 i = 0; i < 6; i++)
+        *total++ = 0;
     u32 variantCount = parameters[0];
     u32 count = resource->nodeCount;
     u32 bytes = count * 0x158;

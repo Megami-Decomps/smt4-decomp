@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation and scheduling: retail keeps 0xFFFFFFFF in r2 (also the 0xFFFF test), loads the unit's two flag words separately and uses five callee-saved registers; control flow, tint table and the channel fade arithmetic match. */
+/* NON_MATCHING: register allocation and scheduling: retail materialises 0xFFFFFFFF in r2 before the clear-mask test (and derives the 0xFFFF compare from it), loads the clear mask as one pair, and reloads the fade step after restarting it; control flow, tint table and the channel fade arithmetic match. */
 #include "common.h"
 
 /* The battle effect settings block (g_battleEffectSettings): only the fields the status tint reads. */
@@ -8,14 +8,12 @@ struct BattleEffectTintSettings {
     /* 0x14 */ u8 unk14[8];
     /* 0x1C */ u32 defaultColor;
     /* 0x20 */ u8 unk20[0x48];
-    /* 0x68 */ u32 clearMaskLow;
-    /* 0x6C */ u32 clearMaskHigh;
+    /* 0x68 */ u64 clearMask;
 };
 
 /* A battle unit's status flags. */
 struct BattleTintUnit {
-    /* 0x000 */ u32 flagsLow;
-    /* 0x004 */ u32 flagsHigh;
+    /* 0x000 */ u64 flags;
     /* 0x008 */ u8 unk008[0x26C];
     /* 0x274 */ u16 statusMask;
 };
@@ -34,7 +32,7 @@ struct StatusTintRecord {
     /* 0x8C */ u8 unk8C[8];
     /* 0x94 */ u32 fromColor;
     /* 0x98 */ u32 toColor;
-    /* 0x9C */ s32 current;
+    /* 0x9C */ u32 current;
 };
 
 extern "C" {
@@ -53,19 +51,18 @@ void FUN_004cb394(void *owner, StatusTintRecord *record)
     if (unit == NULL) {
         return;
     }
-    if (((unit->flagsHigh & g_battleEffectSettings.clearMaskHigh) | (g_battleEffectSettings.clearMaskLow & unit->flagsLow)) == 0 ||
+    if ((unit->flags & g_battleEffectSettings.clearMask) == 0 ||
         record->variant == 0xFFFF) {
         record->color = 0xFFFFFFFF;
         return;
     }
-    s32 status = record->current;
     for (u32 i = 0; i < 14; i++) {
-        if (status == 0 && (unit->statusMask & (1 << (i & 0xFF))) != 0) {
+        if (record->current == 0 && (unit->statusMask & (1 << i)) != 0) {
             record->current = i;
-            status = i;
             break;
         }
     }
+    u32 status = record->current;
     u32 target;
     if (status == 7) {
         target = 0x52DEE7FF;
@@ -83,44 +80,47 @@ void FUN_004cb394(void *owner, StatusTintRecord *record)
         target = 0xFF0055FF;
     } else if (status == 12) {
         target = 0x124FD8FF;
+    } else if (status == 13) {
+        target = 0x6B7296FF;
     } else {
         target = g_battleEffectSettings.defaultColor;
-        if (status == 13) {
-            target = 0x6B7296FF;
-        }
     }
     if (record->toColor != target) {
         record->fromColor = record->color;
         record->toColor = target;
         record->step = 0;
     }
-    s32 step = record->step;
-    if (step < fadeFrames) {
-        f32 progress = (f32)(step + 1) / (f32)fadeFrames;
+    if (record->step < fadeFrames) {
+        f32 progress = (f32)(record->step + 1) / (f32)fadeFrames;
         u32 from = record->fromColor;
-        record->step = step + 1;
+        record->step++;
+        s32 toRed = target >> 24;
+        s32 toGreen = (target & 0xFF0000) >> 16;
+        s32 toBlue = (target & 0xFF00) >> 8;
+        s32 toAlpha = target & 0xFF;
         s32 fromRed = from >> 24;
         s32 fromGreen = (from & 0xFF0000) >> 16;
         s32 fromBlue = (from & 0xFF00) >> 8;
         s32 fromAlpha = from & 0xFF;
-        s32 red = (s32)((f32)((s32)(target >> 24) - fromRed) * progress) + fromRed;
-        s32 green = (s32)((f32)((s32)((target & 0xFF0000) >> 16) - fromGreen) * progress) + fromGreen;
-        s32 blue = (s32)((f32)((s32)((target & 0xFF00) >> 8) - fromBlue) * progress) + fromBlue;
-        s32 alpha = (s32)((f32)((s32)(target & 0xFF) - fromAlpha) * progress) + fromAlpha;
-        record->color = alpha + red * 0x1000000 + green * 0x10000 + blue * 0x100;
+        s32 red = (s32)((f32)(toRed - fromRed) * progress) + fromRed;
+        s32 green = (s32)((f32)(toGreen - fromGreen) * progress) + fromGreen;
+        s32 blue = (s32)((f32)(toBlue - fromBlue) * progress) + fromBlue;
+        s32 alpha = (s32)((f32)(toAlpha - fromAlpha) * progress) + fromAlpha;
+        record->color = (red << 24) + (green << 16) + (blue << 8) + alpha;
         return;
     }
     record->color = target;
-    record->step = step + 1;
-    if ((f32)fadeFrames + 20.0f + 4.0f < (f32)(step + 1)) {
-        s32 next = status + 1;
+    record->step++;
+    if ((f32)fadeFrames + 20.0f + 4.0f < (f32)record->step) {
+        u32 next = status + 1;
         do {
-            if ((unit->statusMask & (1 << (next & 0xFF))) != 0) {
+            if ((unit->statusMask & (1 << next)) != 0) {
                 record->current = next;
                 return;
             }
             next++;
-            next = next >= 14 ? 0 : next;
+            if (next > 13)
+                next = 0;
         } while (status != next);
     }
 }

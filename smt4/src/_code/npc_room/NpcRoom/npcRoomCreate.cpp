@@ -1,273 +1,169 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `npcRoomCreate` (_code @ 0x26dcd4, 0x62c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: 168 raw / 146 shape lines, registers. The loop over a group's later members is unrolled by two as
+ * in retail (only `for (j = i + 1; j < room->eventCount; j++)` does that; the forms indexed from zero compile to a
+ * single-step loop), but the build keeps `i + 1` in r0 and the loop's row index in a saved register, where retail
+ * keeps `i` in r1 and folds the +1 into the offsets (`ldm` of events[i] and events[i + 1], `[r8, #44]`); with that
+ * the group count, the group list and the scratch registers come out in other registers, and the record search
+ * counts in r1 against r0 (the build: r0 against r1). The two lookups are the helpers npcRoomUpdate (the same
+ * file, NpcRoom.cpp) inlines too. */
+#include "npc_room/NpcRoom.h"
+#include "gamedata/NpcRoomTable.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "camp/CampMenuEntry.h"
 #include "code/Code0028_Smt4.h"
+#include "code/Code002c_Smt4.h"
+#include "event/bustupEvent/BustupTex.h"
+#include "script/scrScriptProcess.h"
+#include "shard/W6_W6Match1_BgmRequestChannel.h"
 
 extern "C" {
 
-int FUN_00252190(...);
-int FUN_00285e44(...);
-int commonBgAcquire(...);
-int buttonHelpCreate(...);
-int buttonHelpWorkSetPreset(...);
-int scrScriptProcessCreate(...);
-int fileSlotLoad(...);
-int dataTableGetCount(...);
-int dataTableGetEntries(...);
-int __aeabi_memset4(...);
-int jobSetParent(...);
-int memClear(...);
-int asdMemAlloc(...);
-int taskCreateDraw(...);
-int asdProcessCreateSimple(...);
-int asdTMTexTablePrepareNodeImage(...);
-int asdLoadFileSyncDefault(...);
-int FUN_002fdfe0(...);
+extern NpcRoom *g_npcRoom;
 
-/* stack frame of param_1: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_1_stack;
+s32 npcRoomUpdate(u32 job);
+s32 FUN_001aba44(u32 job);
+s32 FUN_001dd8e8(u32 job);
+void __aeabi_memset4(void *destination, u32 size, s32 value);
+void fileSlotLoad(s32 table);
+u32 FUN_00252190(u32 npcId, u32 mode, s32 x);
+u32 FUN_00285e44(s32 npcId, u32 style, s32 x);
+void jobSetParent(u32 parent, u32 job);
+void FUN_002fdfe0(u32 job, u32 value);
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
+void commonBgAcquire(void);
+void buttonHelpCreate(void);
 
-extern int FUN_00194278(...); /* 0x194278 */
-extern unsigned char FUN_001aba44; /* 0x1aba44 */
-extern unsigned char FUN_001dd8e8; /* 0x1dd8e8 */
-extern unsigned char LAB_0026e300; /* 0x26e300 */
-extern unsigned int *g_npcRoom; /* 0x44d198 */
-
-/* Supplied declaration required: FUN_00252190. */
-/* Supplied declaration required: FUN_00285e44. */
-/* Supplied declaration required: commonBgStopChildAndBeginTransition. */
-/* Supplied declaration required: commonBgAcquire. */
-/* Supplied declaration required: buttonHelpCreate. */
-/* Supplied declaration required: buttonHelpWorkSetPreset. */
-/* Supplied declaration required: scrScriptProcessCreate. */
-/* Supplied declaration required: fileSlotLoad. */
-extern int gameFlagIsSet(void);
-/* Supplied declaration required: dataTableGetCount. */
-/* Supplied declaration required: dataTableGetEntries. */
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: jobSetParent. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: asdTMTexTablePrepareNodeImage. */
-/* Supplied declaration required: asdLoadFileSyncDefault. */
-/* Supplied declaration required: FUN_002fdfe0. */
-
-
-void npcRoomCreate(unsigned int param_1)
-
+/* Finds the room's row of the room table (the helper npcRoomUpdate has too). */
+static __inline void npcRoomFindRecord(u32 id)
 {
-/* irregular: 3 unstructured edge(s); 1 goto(s); 20 native warning(s); review required */
-  int temp_v0;
-  short temp_v1;
-  short temp_v2;
-  unsigned int temp_v3;
-  unsigned int *puVar5;
-  unsigned int *puVar6;
-  unsigned char *puVar7;
-  unsigned int temp_v4;
-  unsigned short *puVar9;
-  unsigned int temp_v5;
-  short *psVar11;
-  int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  unsigned int temp_v9;
-  int temp_v10;
-  int temp_v11;
-  int temp_v12;
-  short temp_v13 [10];
-  
-  if (g_npcRoom == (unsigned int *)0x0) {
-    puVar6 = (unsigned int *)0x100;
-    asdMemAlloc(0x100,0x100,0,0x108,1);
-    g_npcRoom = puVar6;
-  }
-  puVar6 = g_npcRoom;
-  memClear();
-  asdProcessCreateSimple("NpcRoom Calc",2,0,0,FUN_00194278,0,0);
-  *puVar6 = (unsigned int)puVar7;
-  taskCreateDraw("NpcRoom UDrawLeft",0x7a,0,0,&FUN_001aba44,0,0,puVar7);
-  taskCreateDraw("NpcRoom UDrawRight",0xd8,0,0,&FUN_001aba44,0,0,*puVar6);
-  taskCreateDraw("NpcRoom DDraw",0xe6,0,0,&FUN_001dd8e8,0,0,*puVar6);
-  fileSlotLoad(0x35);
-  fileSlotLoad(0x1a);
-  *(short *)(puVar6 + 0x40) = (short)param_1;
-  puVar5 = g_npcRoom;
-  g_npcRoom[9] = 0;
-  temp_v4 = dataTableGet(0x35,0);
-  puVar9 = (unsigned short *)dataTableGetEntries();
-  temp_v5 = dataTableGetCount(temp_v4);
-  temp_v9 = 0;
-  if (temp_v9 < temp_v5) {
-    do {
-      if (*puVar9 == param_1) {
-        puVar5[9] = (unsigned int)puVar9;
-        break;
-      }
-      temp_v9 = temp_v9 + 1;
-      puVar9 = puVar9 + 0x36;
-    } while (temp_v9 < temp_v5);
-  }
-  puVar5 = g_npcRoom;
-  temp_v1 = *(short *)(puVar6 + 0x40);
-  g_npcRoom[10] = 0;
-  puVar5[0xb] = 0;
-  puVar5[0xc] = 0;
-  puVar5[0xd] = 0;
-  temp_v4 = dataTableGet(0x35,1);
-  psVar11 = (short *)dataTableGetEntries();
-  temp_v5 = dataTableGetCount(temp_v4);
-  temp_v9 = 0;
-  puVar5[0x3d] = 0;
-  if (temp_v5 != 0) {
-    do {
-      if ((((*psVar11 == temp_v1) && ((psVar11[7] == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 != 0)))) &&
-          ((psVar11[8] == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 != 0)))) &&
-         (((psVar11[9] == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 == 0)) &&
-          ((psVar11[10] == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 == 0)))))) {
-        puVar5[puVar5[0x3d] + 10] = (unsigned int)psVar11;
-        temp_v6 = puVar5[0x3d];
-        puVar5[0x3d] = temp_v6 + 1;
-        if (temp_v6 + 1 >= 8) break;
-      }
-      temp_v9 = temp_v9 + 1;
-      psVar11 = psVar11 + 0x6a;
-    } while (temp_v9 < temp_v5);
-  }
-  temp_v6 = 0;
-  do {
-    __aeabi_memset4(puVar6 + temp_v6 * 4 + 0x19,0x10,0xffffffff);
-    temp_v6 = temp_v6 + 1;
-  } while (temp_v6 < 8);
-  temp_v5 = 0;
-  temp_v13[0] = 0;
-  temp_v13[1] = 0;
-  temp_v13[2] = 0;
-  temp_v13[3] = 0;
-  temp_v13[4] = 0;
-  temp_v13[5] = 0;
-  temp_v13[6] = 0;
-  temp_v13[7] = 0;
-  temp_v6 = 0;
-  puVar6[0x39] = 0;
-  do {
-    if (puVar6[temp_v6 + 10] != 0) {
-      temp_v1 = *(short *)(puVar6[temp_v6 + 10] + 10);
-      temp_v2 = (short)temp_v6;
-      if (temp_v1 != 0) {
-        if ((int)temp_v5 >= 1) {
-          temp_v9 = temp_v5 & 1;
-          temp_v3 = temp_v9;
-        }
-        else {
-          temp_v9 = temp_v5;
-          temp_v3 = 0;
-        }
-        temp_v7 = 0;
-        if (0 < (int)temp_v9) {
-          do {
-            if (temp_v13[temp_v7] == temp_v1) goto LAB_0026e0ac;
-            temp_v7 = temp_v7 + 1;
-          } while ((int)temp_v7 < (int)temp_v3);
-        }
-        while ((temp_v7 = temp_v3, (int)temp_v5 > (int)temp_v7 && (temp_v13[temp_v7] != temp_v1))) {
-          if (temp_v13[temp_v7 + 1] == temp_v1) {
-            temp_v7 = temp_v7 + 1;
+    NpcRoom *room = g_npcRoom;
+    room->record = NULL;
+    void *table = dataTableGet(0x35, 0);
+    NpcRoomRecordIV *record = (NpcRoomRecordIV *)dataTableGetEntries(table);
+    u32 count = dataTableGetCount(table);
+    for (u32 i = 0; i < count; i++, record++) {
+        if (record->id == id) {
+            room->record = record;
             break;
-          }
-          temp_v3 = temp_v7 + 2;
         }
-LAB_0026e0ac:
-        if ((int)temp_v5 <= (int)temp_v7) {
-          temp_v8 = 1;
-          *(short *)(puVar6 + puVar6[0x39] * 4 + 0x19) = temp_v2;
-          if (0 < (int)((puVar6[0x3d] - temp_v6) - 1U)) {
-            temp_v12 = 0;
-            if (((puVar6[0x3d] - temp_v6) & 1U) == 0) {
-              if (*(short *)(puVar6[temp_v6 + 10] + 10) == *(short *)(puVar6[temp_v6 + 0xb] + 10)) {
-                temp_v8 = 2;
-                *(short *)((int)puVar6 + puVar6[0x39] * 0x10 + 0x66) = temp_v2 + 1;
-              }
-              temp_v12 = 1;
+    }
+}
+
+/* Collects the room's events whose flag conditions hold, eight at most (the helper npcRoomUpdate has too). */
+static __inline void npcRoomCollectEvents(u16 id)
+{
+    NpcRoom *room = g_npcRoom;
+    room->events[0] = NULL;
+    room->events[1] = NULL;
+    room->events[2] = NULL;
+    room->events[3] = NULL;
+    void *table = dataTableGet(0x35, 1);
+    NpcRoomEventRecordIV *event = (NpcRoomEventRecordIV *)dataTableGetEntries(table);
+    u32 count = dataTableGetCount(table);
+    room->eventCount = 0;
+    for (u32 i = 0; i < count; i++, event++) {
+        if (event->id == id && (event->requiredFlagA == 0 || gameFlagIsSet(event->requiredFlagA)) &&
+            (event->requiredFlagB == 0 || gameFlagIsSet(event->requiredFlagB)) &&
+            (event->excludedFlagA == 0 || !gameFlagIsSet(event->excludedFlagA)) &&
+            (event->excludedFlagB == 0 || !gameFlagIsSet(event->excludedFlagB))) {
+            room->events[room->eventCount] = event;
+            room->eventCount++;
+            if (room->eventCount >= NPC_ROOM_JOBS) {
+                break;
             }
-            for (temp_v10 = ((puVar6[0x3d] - temp_v6) - 1) >> 1; temp_v10 != 0; temp_v10 = temp_v10 - 1) {
-              temp_v11 = temp_v6 + temp_v12;
-              if (*(short *)(puVar6[temp_v6 + 10] + 10) == *(short *)(puVar6[temp_v11 + 0xb] + 10)) {
-                temp_v0 = temp_v8 * 2;
-                temp_v8 = temp_v8 + 1;
-                *(short *)((int)puVar6 + temp_v0 + puVar6[0x39] * 0x10 + 100) = (short)temp_v11 + 1;
-              }
-              if (*(short *)(puVar6[temp_v6 + 10] + 10) == *(short *)(puVar6[temp_v11 + 0xc] + 10)) {
-                temp_v0 = temp_v8 * 2;
-                temp_v8 = temp_v8 + 1;
-                *(short *)((int)puVar6 + temp_v0 + puVar6[0x39] * 0x10 + 100) = (short)temp_v11 + 2;
-              }
-              temp_v12 = temp_v12 + 2;
-            }
-          }
-          psVar11 = temp_v13 + temp_v5;
-          temp_v5 = temp_v5 + 1;
-          puVar6[0x39] = puVar6[0x39] + 1;
-          *psVar11 = *(short *)(puVar6[temp_v6 + 10] + 10);
         }
-      }
-      else {
-        *(short *)(puVar6 + puVar6[0x39] * 4 + 0x19) = temp_v2;
-        puVar6[0x39] = puVar6[0x39] + 1;
-      }
     }
-    temp_v6 = temp_v6 + 1;
-  } while (7 >= temp_v6);
-  temp_v4 = asdLoadFileSyncDefault(&LAB_0026e300);
-  puVar6[0x12] = temp_v4;
-  temp_v6 = asdLoadFileSyncDefault("[Q");
-  puVar6[0x13] = temp_v6;
-  scrScriptProcessCreate(temp_v6,puVar6[0x12]);
-  puVar6[0x14] = temp_v6;
-  *(unsigned int *)(temp_v6 + 0x108) = 2;
-  temp_v6 = puVar6[0x13];
-  scrScriptProcessCreate(temp_v6,puVar6[0x12]);
-  puVar6[0x15] = temp_v6;
-  *(unsigned int *)(temp_v6 + 0x108) = 2;
-  temp_v6 = 0;
-  do {
-    temp_v8 = puVar6[temp_v6 + 10];
-    if (temp_v8 != 0) {
-      temp_v5 = (unsigned int)*(unsigned short *)(temp_v8 + 2);
-      if (*(short *)(temp_v8 + 4) != 0) {
-        FUN_00252190();
-      }
-      else {
-        FUN_00285e44(temp_v5,0,(int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v8 + 6));
-      }
-      puVar6[temp_v6 + 1] = temp_v5;
-      jobSetParent(*puVar6,puVar6[temp_v6 + 1]);
-      FUN_002fdfe0(puVar6[temp_v6 + 1],*(unsigned char *)(puVar6[temp_v6 + 10] + 0xd) + 3);
+}
+
+/* Opens room `id`: starts its jobs, finds its events, lays their portraits out in display rows (the events
+ * of one group share a row) and loads the room's scripts, portraits and background. */
+void npcRoomCreate(u32 id)
+{
+    if (g_npcRoom == NULL) {
+        asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\npc_room\\NpcRoom.cpp", 456);
+        g_npcRoom = (NpcRoom *)asdMemAlloc(0x100, 0x100, 0, sizeof(NpcRoom), 1);
     }
-    temp_v6 = temp_v6 + 1;
-  } while (temp_v6 < 8);
-  temp_v4 = dataTableGet(0x1a,0);
-  temp_v6 = dataTableGetEntries();
-  dataTableGetCount(temp_v4);
-  *(unsigned short *)((int)puVar6 + 0x102) =
-       *(unsigned short *)((temp_v6 + (unsigned int)*(unsigned short *)(puVar6[9] + 0x22) * 2) - 2);
-  asdTMTexTablePrepareNodeImage(2);
-  commonBgAcquire();
-  commonBgStopChildAndBeginTransition();
-  buttonHelpCreate();
-  buttonHelpWorkSetPreset(0xa0);
-  return;
+    NpcRoom *room = g_npcRoom;
+    memClear(room, sizeof(NpcRoom));
+    room->job = asdProcessCreateSimple((const s8 *)"NpcRoom Calc", 2, 0, 0, npcRoomUpdate, NULL, 0);
+    taskCreateDraw((const s8 *)"NpcRoom UDrawLeft", 0x7a, 0, 0, FUN_001aba44, NULL, 0, (void *)room->job);
+    taskCreateDraw((const s8 *)"NpcRoom UDrawRight", 0xd8, 0, 0, FUN_001aba44, NULL, 0, (void *)room->job);
+    taskCreateDraw((const s8 *)"NpcRoom DDraw", 0xe6, 0, 0, FUN_001dd8e8, NULL, 0, (void *)room->job);
+    fileSlotLoad(0x35);
+    fileSlotLoad(0x1a);
+    room->mode = id;
+    npcRoomFindRecord(id);
+    npcRoomCollectEvents(room->mode);
+
+    for (s32 i = 0; i < NPC_ROOM_JOBS; i++) {
+        __aeabi_memset4(room->displayModels[i], sizeof(room->displayModels[i]), -1);
+    }
+    s32 groupCount = 0;
+    u16 groups[NPC_ROOM_JOBS] = {0};
+    room->displayCount = 0;
+    for (s32 i = 0; i < NPC_ROOM_JOBS; i++) {
+        if (room->events[i] != NULL) {
+            u16 group = room->events[i]->group;
+            if (group == 0) {
+                room->displayModels[room->displayCount][0] = i;
+                room->displayCount++;
+            } else {
+                s32 known;
+                for (known = 0; known < groupCount; known++) {
+                    if (groups[known] == group) {
+                        break;
+                    }
+                }
+                if (known >= groupCount) {
+                    room->displayModels[room->displayCount][0] = i;
+                    s32 column = 1;
+                    for (s32 j = i + 1; j < room->eventCount; j++) {
+                        if (room->events[i]->group == room->events[j]->group) {
+                            room->displayModels[room->displayCount][column] = j;
+                            column++;
+                        }
+                    }
+                    room->displayCount++;
+                    groups[groupCount] = room->events[i]->group;
+                    groupCount++;
+                }
+            }
+        }
+    }
+
+    room->dataA = asdLoadFileSyncDefault("npc_room/npcMsg.mbm");
+    room->dataB = asdLoadFileSyncDefault("npc_room/npc.bf");
+    ScriptProcess *process = scrScriptProcessCreate(room->dataB, room->dataA);
+    room->processA = process;
+    scriptProcessSetMode(process, 2);
+    process = scrScriptProcessCreate(room->dataB, room->dataA);
+    room->processB = process;
+    scriptProcessSetMode(process, 2);
+    for (s32 i = 0; i < NPC_ROOM_JOBS; i++) {
+        if (room->events[i] != NULL) {
+            NpcRoomEventRecordIV *event = room->events[i];
+            if (event->isDemon != 0) {
+                room->jobs[i] = FUN_00252190(event->npcId, 0, event->x + event->xOffset);
+            } else {
+                room->jobs[i] = FUN_00285e44(event->npcId, 0, event->x + event->xOffset);
+            }
+            jobSetParent(room->job, room->jobs[i]);
+            FUN_002fdfe0(room->jobs[i], room->events[i]->layer + 3);
+        }
+    }
+
+    void *table = dataTableGet(0x1a, 0);
+    u16 *images = (u16 *)dataTableGetEntries(table);
+    dataTableGetCount(table);
+    room->backgroundImage = images[room->record->background - 1];
+    asdTMTexTablePrepareNodeImage(2, room->backgroundImage);
+    commonBgAcquire();
+    commonBgStopChildAndBeginTransition();
+    buttonHelpCreate();
+    buttonHelpWorkSetPreset(0xa0);
 }
 
 } /* extern "C" */

@@ -1,7 +1,7 @@
 /* NON_MATCHING: sin/cos arguments, results and the sound/marker positions built from them are restored from retail; the body is still the raw decompiler control-flow draft, so branch layout and register allocation differ. */
 #include "common.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
-#include "map/MapActionMarker.h"
+#include "map/MapIfGlobals.h"
 #include "util/TrigF32.h"
 
 extern "C" {
@@ -48,7 +48,7 @@ extern unsigned char DAT_0049fb46; /* 0x49fb46 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: mapDestroySecondaryModel. */
 /* Supplied declaration required: mapIfReleaseSlot2. */
-/* Supplied declaration required: FUN_00248114. */
+/* Supplied declaration required: mapIfSpawnDownAction. */
 /* Supplied declaration required: mapIfActivateRecord. */
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapInterfaceSetStateTwo. */
@@ -284,7 +284,7 @@ void FUN_002e8fdc(void)
       marker.y = *(float *)&DAT_0049f9a4;
       marker.z = *(float *)&DAT_0049f9a8 + libm_cosf(*(float *)&DAT_0049f9ac * 0.017453292f) * 150.0f;
       marker.w = DAT_0049f9bc;
-      FUN_00248114(marker);
+      mapIfSpawnDownAction(marker);
       }
       temp_v0 = g_lmapScene;
       temp_v1 = *(int *)(temp_v0 + 4);

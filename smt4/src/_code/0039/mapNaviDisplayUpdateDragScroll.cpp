@@ -3,6 +3,7 @@
 #include "map/NaviDisplayTransition.h"
 #include "map/mapDepart.h"
 #include "game/GameState.h"
+#include "shard/NaviMain.h"
 #include "title/TitleSceneTuning.h"
 
 struct CursorPosition {
@@ -14,7 +15,6 @@ extern "C" {
 
 s32 FUN_002bffd8(s32 *x, s32 *y);
 f32 naviMainGetParameter(u16 *state);
-CursorPosition *NaviMain_GetCursorPos(u16 *state);
 void NaviMain_SetCursorPos(u16 *state, CursorPosition *position);
 
 /* Halts inertial scrolling by clearing both velocity components. */
@@ -69,7 +69,7 @@ void mapNaviDisplayUpdateDragScroll(MapNaviDisplay *display)
         work->velocityX = work->velocityX * DAT_0044cdc8.dragFriction;
         work->velocityY = work->velocityY * DAT_0044cdc8.dragFriction;
         f32 scale = naviMainGetParameter(mapState);
-        CursorPosition position = *NaviMain_GetCursorPos(mapState);
+        CursorPosition position = *(CursorPosition *)NaviMain_GetCursorPos(mapState);
         position.x = work->velocityX / scale + position.x;
         position.y = work->velocityY / scale + position.y;
         NaviMain_SetCursorPos(mapState, &position);

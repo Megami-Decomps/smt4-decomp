@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include "gamedata/MapSaveBlockA.h"
 #include "game/GameStateA.h"
-/* NON_MATCHING: readable rebuild of the nearest-talk-target selection; retail keeps the best distance and id in s/r registers across the dispatch with the sphere test inlined as vsqrt and merges the three pickup branches' common stores, which armcc here schedules differently. */
+/* NON_MATCHING: nearest-talk-target selection; same control flow and calls as retail, but retail keeps a 44-byte frame (the purchase test's bonus and cost on the stack, the flag block and player at sp+20/24), loads the player position as one vldm after the target's three coordinates and allocates the loop registers differently. */
 #include "shard/W5_W5Match7_SceneState.h"
 #include "map/LmapGlobals.h"
 #include <math.h>
+#include "map/MapVector.h"
+#include "map/LmapGlobals.h"
+#include "AsdSDK/Source/Snd/SoundActorQueue.h"
 
 /* A talk/pickup target of the map scene (only the fields this reads). */
 class TalkTarget {
@@ -16,7 +19,7 @@ public:
     /* 0x0D */ u8 unk0D[0x13];
     /* 0x20 */ u32 id;
     /* 0x24 */ u8 unk24[8];
-    /* 0x2C */ f32 x, y, z;
+    /* 0x2C */ MapVector position;
     /* 0x38 */ u8 unk38[0x30];
     /* 0x68 */ s32 cost;
     /* 0x6C */ u8 unk6C[0x1F];
@@ -46,11 +49,10 @@ extern "C" {
 u8 *gameGetPlayerData(void);
 void mapSetActiveEntryId(u32 id);
 void sequenceRequestDefer(s32 sequence, u32 arg);
-void soundActorStartOnFreeChannel(u32 id);
 s32 gameDataFlagTestBit(u32 flag);
 
 /* Picks the nearest interactable target within 150 units and starts what it does (a scripted
- * event, a shop purchase or a pickup); returns the id of the chosen target, or -1. */
+ * event or a shop purchase), then releases it; returns the id of the chosen target, or -1. */
 u32 FUN_00482c04(TalkTargetSet *set)
 {
     u32 chosen = 0xFFFFFFFF;
@@ -61,27 +63,51 @@ u32 FUN_00482c04(TalkTargetSet *set)
         TalkTarget *target = set->targets[i];
         if (target == NULL || !(target->flags & 1) || (target->flags & 4) || !(target->flags & 0x10))
             continue;
-        f32 dx = target->x - g_lmapScene->pose.position.x;
-        f32 dy = target->y - g_lmapScene->pose.position.y;
-        f32 dz = target->z - g_lmapScene->pose.position.z;
-        if (g_lmapScene->pose.position.y > target->y + 5.0f)
+        const MapVector *position = &target->position;
+        f32 dx = position->x - g_lmapScene->pose.position.x;
+        f32 dy = position->y - g_lmapScene->pose.position.y;
+        f32 dz = position->z - g_lmapScene->pose.position.z;
+        if (g_lmapScene->pose.position.y > position->y + 5.0f)
             continue;
         s32 distance = (s32)sqrtf(dx * dx + dy * dy + dz * dz);
         if (distance >= 150 || distance >= bestDistance)
             continue;
+        bestDistance = distance;
         g_gameState.unk1CD = 0;
-        if (target->kind == 1) {
+        switch (set->targets[i]->kind) {
+        case 0:
+            target = set->targets[i];
+            chosen = target->id;
+            if (flagsBlock->eventEnabled != 0) {
+                s32 bonus = 0;
+                s32 cost = target->cost;
+                if (gameDataFlagTestBit(0x8B))
+                    bonus = 9;
+                if (*(u16 *)(player + 0x62) + bonus > cost) {
+                    g_gameState.unk1CD = 1;
+                    SoundActorQueuePosition sound = {position->x, position->y, position->z};
+                    soundActorStartOnFreeChannel(0x1000225, soundActorScalePosition(sound, 1.0f / 3.0f));
+                    break;
+                }
+                g_gameState.unk1CD = 0;
+            }
+            g_gameState.chosenTalkId = chosen;
+            g_gameState.talkRewardId = 0;
+            if (set->targets[i]->rewardKind == 3 && set->targets[i]->rewardId != 0)
+                g_gameState.talkRewardId = set->targets[i]->rewardId;
+            break;
+        case 1:
             g_gameState.talkMarker = 0;
             g_gameState.talkMarkerArg = 0;
+            target = set->targets[i];
             if (target->hasScript) {
-                s32 flagId = g_gameState.talkFlagsEnabled != 0 ? target->flagId : 0;
-                if (g_gameState.talkFlagsEnabled != 0 && flagId != 0 && flagId >= 0)
-                    flagsBlock->mapId = (s16)flagId;
+                if (g_gameState.talkFlagsEnabled != 0 && target->flagId > 0)
+                    flagsBlock->mapId = (s16)target->flagId;
                 if (target->sequence > 0) {
                     if (target->deferred != 0) {
                         g_gameState.scriptPending = 1;
                         g_gameState.scriptId = target->sequence;
-                        sprintf(g_gameState.scriptName, "%d_%d", target->sequence, target->sequenceArg);
+                        sprintf(g_gameState.scriptName, "e%03d_%02d", target->sequence, target->sequenceArg);
                     } else {
                         sequenceRequestDefer(target->sequence, target->sequenceArg);
                     }
@@ -89,29 +115,13 @@ u32 FUN_00482c04(TalkTargetSet *set)
                 mapSetActiveEntryId(target->id);
                 chosen = target->id;
                 if (target->marker > 0) {
-                    g_gameState.talkMarkerArg = target->markerArg;
                     g_gameState.talkMarker = target->marker;
+                    g_gameState.talkMarkerArg = target->markerArg;
                 }
             }
-        } else if (target->kind == 0) {
-            chosen = target->id;
-            bool affordable = true;
-            if (flagsBlock->eventEnabled != 0) {
-                s32 limit = *(u16 *)(player + 0x62) + (gameDataFlagTestBit(0x8B) ? 9 : 0);
-                affordable = target->cost >= limit;
-            }
-            if (!affordable) {
-                g_gameState.unk1CD = 1;
-                soundActorStartOnFreeChannel(0x1000225);
-            } else {
-                g_gameState.talkRewardId = 0;
-                g_gameState.chosenTalkId = chosen;
-                if (target->rewardKind == 3 && target->rewardId != 0)
-                    g_gameState.talkRewardId = target->rewardId;
-            }
+            break;
         }
         TalkTarget *owner = set->targets[i];
-        bestDistance = distance;
         if (owner != NULL) {
             s32 kind = owner->kind;
             delete owner;

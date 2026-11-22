@@ -6,7 +6,7 @@ extern "C" {
 
 int facingUpdateAngles(int, int);
 int mtx44RotateYXZDegrees(...);
-int mtxMakeTranslation(...);
+int nn_math_ARMv6_MTX44TranslateC_FAST(...);
 int layoutApplyForState(int);
 int mathMatrixBuildRotationXyz(...);
 int cameraSetViewMatrix(...);
@@ -66,7 +66,7 @@ extern float DAT_004efd98; /* 0x4efd98 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: facingUpdateAngles. */
 /* Supplied declaration required: mtx44RotateYXZDegrees. */
-/* Supplied declaration required: mtxMakeTranslation. */
+/* Supplied declaration required: nn_math_ARMv6_MTX44TranslateC_FAST. */
 /* Supplied declaration required: layoutApplyForState. */
 extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
 /* Supplied declaration required: mathMatrixBuildRotationXyz. */
@@ -191,19 +191,19 @@ void FUN_001aa6a4(int param_1)
     temp_v14 = *pfVar2 * 0.03125f;
     temp_v15 = pfVar2[1] * 0.03125f;
     temp_v16 = 0.0f;
-    mtxMakeTranslation(temp_v30,&temp_v14);
+    nn_math_ARMv6_MTX44TranslateC_FAST(temp_v30,&temp_v14);
     nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v30);
   }
   temp_v32 = *(unsigned int *)(param_1 + 0x120);
   temp_v34 = *(unsigned int *)(param_1 + 0x128);
   temp_v33 = -*(float *)(param_1 + 0x124);
-  mtxMakeTranslation(temp_v29,&temp_v32);
+  nn_math_ARMv6_MTX44TranslateC_FAST(temp_v29,&temp_v32);
   nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v29);
   if (*(char *)(param_1 + 0x380) == '\x01') {
     temp_v14 = *(float *)(param_1 + 0x358);
     temp_v15 = *(float *)(param_1 + 0x35c);
     temp_v16 = *(float *)(param_1 + 0x360);
-    mtxMakeTranslation(temp_v30,&temp_v14);
+    nn_math_ARMv6_MTX44TranslateC_FAST(temp_v30,&temp_v14);
     nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v30);
   }
   if (*(char *)(param_1 + 0x380) == '\x03') {
@@ -303,7 +303,7 @@ void FUN_001aa6a4(int param_1)
       temp_v14 = temp_v14 * temp_v12;
       temp_v15 = temp_v15 * temp_v13;
       temp_v16 = temp_v11;
-      mtxMakeTranslation(temp_v30,&temp_v14);
+      nn_math_ARMv6_MTX44TranslateC_FAST(temp_v30,&temp_v14);
       nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v30);
       temp_v9 = temp_v6;
     }
@@ -319,7 +319,7 @@ void FUN_001aa6a4(int param_1)
     temp_v14 = temp_v14 * temp_v13;
     temp_v15 = temp_v15 * temp_v12;
     temp_v16 = temp_v11;
-    mtxMakeTranslation(temp_v30,&temp_v14);
+    nn_math_ARMv6_MTX44TranslateC_FAST(temp_v30,&temp_v14);
     nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v30);
   }
   temp_v19[0] = *(float *)(param_1 + 500) * *(float *)(param_1 + 0x1f8);
@@ -351,7 +351,7 @@ void FUN_001aa6a4(int param_1)
     temp_v14 = temp_v14 * temp_v12;
     temp_v15 = temp_v15 * temp_v13;
     temp_v16 = temp_v11;
-    mtxMakeTranslation(temp_v30,&temp_v14);
+    nn_math_ARMv6_MTX44TranslateC_FAST(temp_v30,&temp_v14);
     nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v30);
   }
   cameraSetViewMatrix(g_titleScene,temp_v18);

@@ -17,7 +17,6 @@ struct CountAt5A;
 extern "C" {
 
 void gameSetStatusCameraHeightMode(s32 mode);
-void messageChoiceShowCurrent(Obj536044 *shop);
 s32 inputConfirmPressed(void);
 s32 inputIsQuestRepeatRight(void);
 s32 FUN_004d0494(void);
@@ -71,7 +70,7 @@ void Obj536044::FUN_0049bd20()
         gameSetStatusCameraHeightMode(0);
     }
     u32 confirmed = FUN_004954e8((SubmenuWork *)this);
-    messageChoiceShowCurrent(this);
+    shopDrawSelectedItem(this);
     if (slotInfo[slot].range.count > 0 && inputConfirmPressed() != 0) {
         confirmed = 1;
     }

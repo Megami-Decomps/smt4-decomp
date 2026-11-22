@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rewrite from retail disassembly compiles (210 vs 228 rows); retail's load-stage fallthrough and mask tests are laid out differently */
+/* NON_MATCHING: same control flow as retail; armcc here hoists the constants 1 and 2 into r8/r5 for the state and load-stage stores (retail materialises them at each store), which shifts the whole allocation */
 #include "common.h"
 #include <stdio.h>
 #include "gamedata/NkmBaseRecordA.h"
@@ -46,6 +46,7 @@ struct BtlTalkWindow {
     s32 modeC;              // 0x140
     s8 loadStage;           // 0x144
     u8 unk145[3];
+    s32 tone;               // 0x148: the demon's talk tone (index into g_btlTalkToneNames)
 };
 
 struct SideRecord {
@@ -78,6 +79,10 @@ void btlPlayMenuConfirmSe(s32 arg);
 void btlReflectQueueSelectionMarks(s32 a, s32 b);
 s32 chainCountIdUnflagged(u32 chain, s32 arg);
 
+static const char s_talkFilePath[] = "battle/talk/talk.bf";
+static const char s_toneModelFormat[] = "battle/talk/TalkTone%s.mbm";
+static const char s_toneTableFormat[] = "battle/talk/Tone%s.tbb";
+
 // Per-frame state machine of the battle talk window: loads the tone resources, starts the
 // talk script, applies its result and finally clears the pending mask. Returns -1 when done.
 s32 btlTalkWindowStep(BtlTalkWindow* window, s32 unused)
@@ -87,12 +92,12 @@ s32 btlTalkWindowStep(BtlTalkWindow* window, s32 unused)
     case 0: {
         SideRecord* side = btlFindEntryBlockByMemberId(window->battle, window->sideId);
         NkmBaseRecordA *info = nkmBaseGetRecord(side->id);
-        sprintf(path, "battle/talk/Tone%s.tbb", g_btlTalkToneNames[info->talkTone]);
+        sprintf(path, s_toneTableFormat, g_btlTalkToneNames[info->talkTone]);
         asdLoadFileAsyncSimple(path, &window->toneFile, 1);
-        window->modeA = info->talkTone;
-        sprintf(path, "battle/talk/TalkTone%s.mbm", g_btlTalkToneNames[info->talkTone]);
+        window->tone = info->talkTone;
+        sprintf(path, s_toneModelFormat, g_btlTalkToneNames[window->tone]);
         asdLoadFileAsyncSimple(path, &window->toneModel, 1);
-        asdLoadFileAsyncSimple("battle/talk/talk.bf", &window->talkFile, 1);
+        asdLoadFileAsyncSimple(s_talkFilePath, &window->talkFile, 1);
         FUN_004f741c(g_btlAux);
         window->state = 1;
         if (*reinterpret_cast<s32*>(g_btlCamera + 0x7cc) >= 0 && FUN_004f2708(g_btlCamera, window->battle, 1) != 0) {
@@ -102,22 +107,24 @@ s32 btlTalkWindowStep(BtlTalkWindow* window, s32 unused)
         return 0;
     }
     case 1:
-        if (window->loadStage == 0) {
+        switch (window->loadStage) {
+        case 0:
             if (btlAuxAreResourcesReady(g_btlAux) == 0) return 0;
             FUN_004f89e8(g_btlAux);
             window->loadStage = 1;
-        }
-        if (window->loadStage == 1) {
+            /* fall through */
+        case 1:
             if (FUN_004f9c2c(g_btlAux) == 0) return 0;
             window->loadStage = 2;
         }
-        if (window->toneFile == 0 || window->talkFile == 0 || window->toneModel == 0) return 0;
-        window->process = scrScriptProcessCreate();
-        *reinterpret_cast<s32*>(window->process + 264) = 1;
-        scrScriptProcessStartEntry(window->process, 0);
-        sysPlaySe(0x3e);
-        window->state = 2;
-        return 0;
+        if (window->toneFile != 0 && window->talkFile != 0 && window->toneModel != 0) {
+            window->process = scrScriptProcessCreate();
+            *reinterpret_cast<s32*>(window->process + 264) = 1;
+            scrScriptProcessStartEntry(window->process, 0);
+            sysPlaySe(0x3e);
+            window->state = 2;
+        }
+        break;
     case 2:
         if (scrRunOpcodesStub(window->process) != 2) return 0;
         btlPlayMenuConfirmSe(0);
@@ -135,10 +142,11 @@ s32 btlTalkWindowStep(BtlTalkWindow* window, s32 unused)
         window->state = 4;
         return 0;
     case 3:
-        if (window->toneModel == 0) return 0;
-        *reinterpret_cast<u32*>(window->process + 0xc0) = window->toneModel;
-        window->state = 2;
-        return 0;
+        if (window->toneModel != 0) {
+            *reinterpret_cast<u32*>(window->process + 0xc0) = window->toneModel;
+            window->state = 2;
+        }
+        break;
     case 4:
         if (chainCountIdUnflagged(g_btlActionReflect, 0) > 0) return 0;
         if ((g_btlTalk.pendingMask & window->battle->pending) != 0) {

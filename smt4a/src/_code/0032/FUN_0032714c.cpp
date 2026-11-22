@@ -6,14 +6,14 @@
 #include "util/MathFunctions.h"
 
 extern "C" {
-void FUN_003250ac(void *movement, MapVector current, MapVector destination);
+void vec3DirectionBetween(void *movement, MapVector current, MapVector destination);
 void controllerSetRotationEulerDegrees(u32 controller, f32 x, f32 y, f32 z);
 
 void FUN_0032714c(MapVector destination)
 {
     LmapSceneA *scene = g_lmapScene;
     scene->movementDestination = destination;
-    FUN_003250ac(&scene->movement, scene->movementCurrent, destination);
+    vec3DirectionBetween(&scene->movement, scene->movementCurrent, destination);
     scene = g_lmapScene;
     f32 heading = mathPositionHeadingDegrees(scene->movementCurrent, scene->movementDestination);
     scene = g_lmapScene;

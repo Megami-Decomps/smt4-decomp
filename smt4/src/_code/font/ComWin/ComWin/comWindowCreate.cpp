@@ -9,7 +9,7 @@
 
 extern "C" {
 void comWindowProcessUpdate(void *task);
-void FUN_0011a434(void *task);
+void comWinDraw(void *task);
 void taskCreateDraw(const char *name, s32 priority, s32 mode, s32 flags, void (*callback)(void *), u32 work, void *argument, u32 parent);
 void drawParameterBlockClear(UiResourceParameters *packet);
 
@@ -46,8 +46,8 @@ void comWindowCreate()
     CommandWindow *window = g_comWin;
     memClear(window, sizeof(CommandWindow));
     window->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("ComWin Calc"), 1, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(comWindowProcessUpdate), 0, 0);
-    taskCreateDraw("ComWin DrawUpLeft", 0x81, 0, 0, FUN_0011a434, 0, 0, window->process);
-    taskCreateDraw("ComWin DrawUpRight", 0xdf, 0, 0, FUN_0011a434, 0, 0, window->process);
+    taskCreateDraw("ComWin DrawUpLeft", 0x81, 0, 0, comWinDraw, 0, 0, window->process);
+    taskCreateDraw("ComWin DrawUpRight", 0xdf, 0, 0, comWinDraw, 0, 0, window->process);
     window = g_comWin;
     // The aligned packet begins two bytes into the shared byte-array padding.
     ParameterView *parameters = reinterpret_cast<ParameterView *>(window);

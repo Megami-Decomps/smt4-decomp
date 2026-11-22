@@ -1,13 +1,15 @@
-/* NON_MATCHING: retail re-evaluates the unit table address (g_btlAction+4, then index * 0xf1c) at every store and keeps the 64-bit mask halves in different registers; the control flow and calls are the same. */
+/* NON_MATCHING: 348 lines: the slot stores now address the unit as retail does (slot base, then +9); the stack frame
+ * is 8 bytes larger than retail's (68) and the 64-bit mask halves and saved registers are allocated differently;
+ * the control flow and calls are the same. */
 #include "common.h"
 #include "gamedata/SkillDataLookup.h"
 #include "battle/BattleCommandController.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
-#include "battle/ActionStateChannels.h"
 #include "gamedata/ConsumableRecord.h"
 #include "battle/BtlGlobals.h"
 #include "battle/BtlUiGlobal.h"
+#include "battle/BattleEntrySummary.h"
 
 namespace {
 /* A skill info record (only the kind and its flags). */
@@ -25,7 +27,7 @@ s32 FUN_003af084(BtlUi *block);
 void btlUiCopyStatePairs(BtlUi *block, char *valid, u64 *mask, u64 *pair);
 s32 btlFindEntrySelectionByKey(BtlMainState *block, s32 index);
 s32 playerPadTestBit(u32 bit);
-void btlEntryBuildSummary(CommandInfo *info, BtlMainState *block, BtlEntry *entry);
+void btlEntryBuildSummary(BattleEntrySummary *result, BtlMainState *state, const BtlEntry *entry);
 void FUN_003d0d1c(BtlMainState **block, CommandState *state);
 void FUN_00229a24(BtlUi *block);
 void FUN_00229b10(BtlMainState **block, CommandState *state);
@@ -33,7 +35,7 @@ void FUN_00229b10(BtlMainState **block, CommandState *state);
 /* Sets the acting unit's action kind. */
 static __inline void setActorAction(BtlMainState **block, s32 kind)
 {
-    reinterpret_cast<ActionStateChannels *>(g_btlAction.slots)->entries[(*block)->actionState.index].pending = kind;
+    btlActionGetSlot((*block)->actionState.index)->unit.command = kind;
 }
 
 /* Marks every target the menu reported as chosen. */
@@ -126,11 +128,11 @@ u32 FUN_003cae6c(BtlMainState **block, CommandState *state)
                     } else {
                         state->targetMarks[0] = 1;
                         if (playerPadTestBit(1) != 0) {
-                            CommandInfo command;
-                            btlEntryBuildSummary(&command, *block, state->entry);
-                            if (command.kind == 3) {
-                                if (!(command.value == 0xe || command.value == 0x11)) {
-                                    if (command.value == 1) {
+                            BattleEntrySummary summary;
+                            btlEntryBuildSummary(&summary, *block, state->entry);
+                            if (summary.category == 3) {
+                                if (!(summary.ailmentGroup == 0xe || summary.ailmentGroup == 0x11)) {
+                                    if (summary.ailmentGroup == 1) {
                                         i = 0;
                                         continue;
                                     }

@@ -2,7 +2,7 @@
 #include "map/LmapPlayerModel.h"
 #include "common.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
-#include "map/MapActionMarker.h"
+#include "map/MapIfGlobals.h"
 #include "util/TrigF32.h"
 #include "shard/S1Mover.h"
 #include "game/GameState.h"
@@ -42,7 +42,7 @@ extern int g_lmapScene; /* 0x447e88 */
 
 /* Supplied declaration required: mapDestroySecondaryModel. */
 /* Supplied declaration required: mapIfReleaseSlot2. */
-/* Supplied declaration required: FUN_00248114. */
+/* Supplied declaration required: mapIfSpawnDownAction. */
 /* Supplied declaration required: mapIfActivateRecord. */
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapInterfaceSetStateTwo. */
@@ -215,7 +215,7 @@ void FUN_002e9b60(void)
         marker.y = g_gameState.overviewPosition.y;
         marker.z = g_gameState.overviewPosition.z + libm_cosf(g_gameState.overviewHeading * 0.017453292f) * 150.0f;
         marker.w = g_gameState.heading;
-        FUN_00248114(marker);
+        mapIfSpawnDownAction(marker);
         temp_v0 = g_lmapScene;
         *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;
         *(unsigned int *)(temp_v0 + 8) = 0;

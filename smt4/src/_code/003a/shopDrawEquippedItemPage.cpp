@@ -1,5 +1,7 @@
 /* NON_MATCHING: the equipment scene and held-row flag use opposite saved registers (r6/r5).
- * The header row is cleared with EquipmentMenuItem::clearOptions, the body sceneApplyTransaction inlines too. */
+ * The header row is cleared with EquipmentMenuItem::clearOptions, the body sceneApplyTransaction inlines too.
+ * Retail leaves the page image unset (r1 as it came) for a slot past 8; the explicit default
+ * case here costs 8 lines. */
 #include "shard/S2Scene3a.h"
 #include "shard/Shard004A.h"
 #include "gamedata/GamePlayerData.h"
@@ -25,6 +27,7 @@ void shopDrawEquippedItemPage(Scene3a *scene)
     case 6: image = 11; break;
     case 7: image = 3; break;
     case 8: image = 4; break;
+    default: image = 0; break;
     }
     uiRectDrawAtBottomRight(&scene->region, image, 0, 0, frameColor);
     u32 color = scene->listId;

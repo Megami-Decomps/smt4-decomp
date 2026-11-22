@@ -1,9 +1,4 @@
-#include "common.h"
-
-struct ModelHolder {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ void *model;
-};
+#include "shard/W6_W6Match7_BattleEffects.h"
 
 extern "C" {
 void motionPlayerStartBlended(void *model, u32 index, u8 enabled, f32 first, f32 second);
@@ -15,7 +10,7 @@ static __inline void modelStart(void *model, u32 index, s32 enabled, f32 value)
 }
 
 /* Starts the referenced model operation at frame zero, if there is a model. */
-void FUN_004d888c(ModelHolder **holder, u32 index, u32 enabled, f32 value)
+void FUN_004d888c(BattleMotionHandle **holder, u32 index, f32 value, u32 enabled)
 {
     if (*holder != NULL) {
         s32 on = 1;

@@ -195,8 +195,7 @@ typedef struct GameSaveBodyA {
     /* 0x00003 */ u8 option;        /* the save option; FUN_00138aa4 runs down GameDataBlocksA.countdowns[option] */
     /* 0x00004 */ SaveSlotTableA slots;
     /* 0x02C54 */ u8 unk02C54[0x8C];
-    /* 0x02CE0 */ u8 area2CE0[4];
-    /* 0x02CE4 */ u8 unk02CE4[0x48];
+    /* 0x02CE0 */ u8 area2CE0[0x4C];   /* cleared as one block with the point counters (gameDataBlocksClearSlots) */
     /* 0x02D2C */ s32 pointsTotal;   /* every point gained */
     /* 0x02D30 */ u32 points;        /* spendable, capped at 9999 */
     /* 0x02D34 */ u8 flagValues[0x10B8];   /* the banked flag values (flagValueGetStorage) */

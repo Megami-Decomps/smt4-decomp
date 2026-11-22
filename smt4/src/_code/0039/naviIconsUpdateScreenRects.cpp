@@ -1,6 +1,7 @@
 /* NON_MATCHING: 184 lines. The visibility test, the cursor load and the plain icons' half-size products are retail's. Retail computes both view offsets of a sprite icon before its first store, places the first loop's plain-icon block after the second loop, and keeps the 160/120/0.5 constants in other VFP registers. */
 #include "gamedata/MapSaveBlock.h"
 #include "game/GameState.h"
+#include "shard/NaviMain.h"
 #include <stddef.h>
 
 /* A navigator icon (0x30 bytes, accessed fields). */
@@ -37,14 +38,13 @@ typedef char NaviWorkLayoutCheck[sizeof(NaviIcon) == 0x30 && offsetof(NaviWork, 
     offsetof(NaviWork, icons) == 0x61B4 && offsetof(NaviWork, iconCount) == 0x121B4 ? 1 : -1];
 
 extern "C" {
-f32 *NaviMain_GetCursorPos(void *cursor);
 }
 
 /* Convert the icons' map positions to screen positions around the cursor. */
 extern "C" void naviIconsUpdateScreenRects(NaviWork *work)
 {
     MapSaveBlock *mapBlock = gameGetMapBlock();
-    f32 *position = NaviMain_GetCursorPos(&work->cursor);
+    f32 *position = (f32 *)NaviMain_GetCursorPos(&work->cursor);
     f32 cursorX = position[0];
     f32 cursorY = position[1];
     if (mapBlock->layout != 12) {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the scheduling of the 0.0f constant load and one VFP register choice in the capture block differ. */
 #include "shard/W5_W5Match7_SceneState.h"
+#include "shard/NaviMain.h"
 #include "AsdSDK/TexTableEntryRange.h"
 #include "game/GameState.h"
 #include "map/mapDepart.h"
@@ -26,7 +27,6 @@ struct NavigationDrag {
 extern "C" {
 s32 effectForwardModeOne(s32, s32, s32, s32);
 void FUN_003c2e0c(s32 *x, s32 *y);
-CursorPoint *NaviMain_GetCursorPos(void *cursorData);
 
 // Capture the initial drag position and track whether the pointer remains held.
 u32 naviUpdateDragCapture(NavigationDrag *drag)
@@ -42,7 +42,7 @@ u32 naviUpdateDragCapture(NavigationDrag *drag)
             drag->previous.y = y;
             drag->current.x = x;
             drag->current.y = y;
-            CursorPoint cursor = *NaviMain_GetCursorPos(drag->cursorData);
+            CursorPoint cursor = *(CursorPoint *)NaviMain_GetCursorPos(drag->cursorData);
             drag->origin.x = x;
             drag->origin.y = y;
             drag->cursor = cursor;

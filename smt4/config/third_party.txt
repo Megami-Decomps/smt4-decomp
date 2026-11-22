@@ -1383,6 +1383,7 @@
 0x00284828 callGlobalHook twin
 0x00286180 nn_math_ARMv6_MTX33CopyAsm name
 0x00286390 nn_math_ARMv6_MTX34InvTransposeAsm name
+0x0028648c nn_math_ARMv6_MTX44TranslateC_FAST name
 0x002881bc libm_tanf name
 0x0028836c libm_acosf name
 0x002a0d24 nn_fnd_ExpHeapBase_Finalize name

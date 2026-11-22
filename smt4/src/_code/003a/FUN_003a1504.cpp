@@ -1,6 +1,7 @@
-/* NON_MATCHING: register allocation (retail keeps the state pointer in r5 and the scene in r4, and zero-extends the id with uxth before FUN_0029a084); the jump table
- * is a __switch$$ relocation in the build and raw words in retail. */
+/* NON_MATCHING: 52 lines, registers only: retail keeps the state pointer in r5 and the scene in r4 (the build: r4
+ * and r5); the jump table is a __switch$$ relocation in the build and raw words in retail. */
 #include "shard/S2Scene3a.h"
+#include "shop/ShopScreen.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "shop/shopMain.h"
 
@@ -9,7 +10,6 @@ extern "C" {
 extern s32 FUN_0029e0f8(void);
 extern void FUN_0029defc(u32 a, s32 b);
 extern void statusPanelSetOpen(s32 a);
-extern s32 flaggedValueHolderGetTotal(Scene3aSlotInfo *info);
 extern s32 contentGetEntryKind(u32 id);
 extern void gameGlobalsSetSelected(s32 a);
 extern void gameReleaseDataReference(void);
@@ -22,8 +22,7 @@ extern void asdMdlManagerDestroy(void *manager);
 void FUN_003a1504(Scene3a *scene)
 {
     s32 *state = &scene->state;
-    Scene3aList *list;
-    u16 id;
+    u32 id;
 
     switch (*state) {
     case SCENE3A_STATE_IDLE:
@@ -32,8 +31,7 @@ void FUN_003a1504(Scene3a *scene)
         if (FUN_0029e0f8() != 0) {
             FUN_0029defc(0xffffffff, 0);
             statusPanelSetOpen(1);
-            list = &scene->lists[scene->slot];
-            id = list->items[flaggedValueHolderGetTotal(&scene->slotInfo[scene->slot])].id;
+            id = shopSelectedItem(scene)->id;
             if (id != 0) {
                 if (contentGetEntryKind(id) == 4) {
                     FUN_0029a084(0, id);

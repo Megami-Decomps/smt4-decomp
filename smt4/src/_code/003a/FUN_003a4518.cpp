@@ -11,12 +11,12 @@ extern int FUN_003a0b78(...); /* 0x3a0b78 */
 extern int sceneExitTransitionUpdate(...); /* 0x3a0c5c */
 extern int FUN_003a0d64(...); /* 0x3a0d64 */
 extern int FUN_003a186c(...); /* 0x3a186c */
-extern int FUN_003a18a0(...); /* 0x3a18a0 */
+extern int shopEquipmentPagesUpdate(...); /* 0x3a18a0 */
 extern int shopMenuUpdateInput(...); /* 0x3a284c */
 extern int FUN_003a2c48(...); /* 0x3a2c48 */
 extern int shopUpdateCategoryMenu(...); /* 0x3a3354 */
-extern int FUN_003a3a9c(...); /* 0x3a3a9c */
-extern int FUN_003a3c7c(...); /* 0x3a3c7c */
+extern int shopBuyListUpdate(...); /* 0x3a3a9c */
+extern int shopSellListUpdate(...); /* 0x3a3c7c */
 extern int FUN_003a3f28(...); /* 0x3a3f28 */
 extern int shopQuantityStep(...); /* 0x3a4a60 */
 
@@ -52,9 +52,9 @@ void FUN_003a4518(int param_1)
   *(unsigned int *)(param_1 + 0x44) = 0;
   *(unsigned int *)(param_1 + 0x48) = 0x3a5768;
   *(unsigned int *)(param_1 + 0x4c) = 0;
-  *(romwright_code **)(param_1 + 0x50) = FUN_003a3a9c;
+  *(romwright_code **)(param_1 + 0x50) = shopBuyListUpdate;
   *(unsigned int *)(param_1 + 0x54) = 0;
-  *(romwright_code **)(param_1 + 0x58) = FUN_003a3c7c;
+  *(romwright_code **)(param_1 + 0x58) = shopSellListUpdate;
   *(unsigned int *)(param_1 + 0x5c) = 0;
   *(romwright_code **)(param_1 + 0x60) = FUN_003a3f28;
   *(unsigned int *)(param_1 + 100) = 0;
@@ -72,7 +72,7 @@ void FUN_003a4518(int param_1)
   *(unsigned int *)(param_1 + 0x8c) = 0;
   *(romwright_code **)(param_1 + 0x90) = FUN_003a0b78;
   *(unsigned int *)(param_1 + 0x94) = 0;
-  *(romwright_code **)(param_1 + 0x98) = FUN_003a18a0;
+  *(romwright_code **)(param_1 + 0x98) = shopEquipmentPagesUpdate;
   *(unsigned int *)(param_1 + 0x9c) = 0;
   *(romwright_code **)(param_1 + 0xa0) = shopMenuUpdateInput;
   *(unsigned int *)(param_1 + 0xa4) = 0;

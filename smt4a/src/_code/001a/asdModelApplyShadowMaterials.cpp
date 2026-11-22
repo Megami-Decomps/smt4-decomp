@@ -75,7 +75,7 @@ extern nw::ut::RuntimeTypeInfo DAT_005c0f34;
 
 u32 libc_strlen(const char *text);
 GfxDictionaryNode *nw_ut_ResDicPatricia_Get(const GfxDictionary *dictionary, const char *name, u32 length);
-void FUN_001b5314(GfxMesh *mesh, s32 flag, f32 strength);
+void modelMaterialSetFlatColor(GfxMesh *mesh, s32 flag, f32 strength);
 }
 
 inline GfxMaterialValue *GfxDictionary::find(const char *key) const
@@ -121,14 +121,14 @@ extern "C" u32 asdModelApplyShadowMaterials(GfxSceneObject *object)
                 if (value->mode > 0) {
                     if (value->mode == 2) {
                         if (g_gfxSettings.initialized) {
-                            FUN_001b5314(mesh, 0, g_gfxSettings.shadowOn);
+                            modelMaterialSetFlatColor(mesh, 0, g_gfxSettings.shadowOn);
                         }
                         applied = 1;
                     }
                     nw::ut::DynamicCast<GfxModel>(object, &DAT_005c0f34)->shadow = GfxShadowState(1);
                 } else {
                     if (g_gfxSettings.initialized) {
-                        FUN_001b5314(mesh, 0, g_gfxSettings.shadowOff);
+                        modelMaterialSetFlatColor(mesh, 0, g_gfxSettings.shadowOff);
                     }
                     applied = 1;
                 }

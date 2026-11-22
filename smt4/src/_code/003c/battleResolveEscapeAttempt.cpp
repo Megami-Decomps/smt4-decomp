@@ -71,7 +71,7 @@ void battleResolveEscapeAttempt(BattleRetreatOwner *owner, BattleRetreatAction *
     reinterpret_cast<BattleRetreatScriptFields *>(owner->script)->attempts = attempts < 255 ? attempts : 255;
     BattleVersionResources *resources = g_btlAux;
     if (reinterpret_cast<BattleRetreatResourceFields *>(resources)->flags & 0x400)
-        FUN_00240614(resources);
+        nameEntriesRegisterVerNames(resources);
 
     script = owner->script;
     fields = reinterpret_cast<BattleRetreatScriptFields *>(script);

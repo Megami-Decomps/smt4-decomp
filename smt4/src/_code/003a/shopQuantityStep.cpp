@@ -29,7 +29,6 @@ void FUN_00233240(Scene3aSprites *sprites, u32 index);
 void rectangleInitializeSelection(EmptyRange *range, s32 x, s32 y, s32 selection);
 void pointConvertToFloat(FloatPoint *point, s32 x, s32 y);
 void pageRegisterButtonTouchRegions(NumericStepper *stepper);
-s32 shopSlotGetPrice(const ShopSlot *item);
 s32 aocItemGetPrice(const ShopSlot *item);
 u32 messageTargetSetValue(u32 value, u8 flag);
 void FUN_002937c8(ShopCategoryList *list);
@@ -39,7 +38,6 @@ void messageMainFinishWindow(void);
 void messageMainSetEnabled(u8 value);
 s32 inputIsQuestMenuPressed(void);
 s32 flaggedEntryGetValueByState(ShopCategoryList *list);
-s32 shopAffordableCount(u32 id, s32 divisor);
 u32 playerSlotHoldsEntry(ShopScreen *screen, u32 id);
 void equipmentPreviewUpdateSelection(ShopScreen *screen);
 u8 sys43e188GetState(void);
@@ -61,15 +59,6 @@ void FUN_0029a0e8(PlayerDataIV *player);
 void btlBuildDemonSnapshotFromSaveRecord(PlayerDataIV *player);
 void soundPlaySeUnpanned(unsigned int id);
 void statusCameraRestore(s32 usePreset);
-
-/* The item under the current category's cursor. */
-static __inline ShopSlot *shopSelectedItem(ShopScreen *screen)
-{
-    ShopCategoryList *list = &screen->slotInfo[screen->slot];
-    ShopSlot *slots = screen->lists[screen->slot].items;
-
-    return &slots[flaggedValueHolderGetTotal(&list->holder)];
-}
 
 /* What the chosen quantity of the selected item costs (category 8, selling: what it pays). */
 static __inline s32 shopQuantityPrice(ShopScreen *screen)

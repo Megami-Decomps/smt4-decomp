@@ -1,4 +1,7 @@
-/* NON_MATCHING: resolves duplicate devils when a party slot is replaced (swap the displaced id into the matching slot, keep the reserve list sorted and de-duplicated, adjust the counters); written from the decompilation, the compiler-unrolled shift/zero loops are written as plain loops */
+/* NON_MATCHING: 334 lines: resolves duplicate devils when a party slot is replaced (swap the displaced id into the
+ * matching slot, keep the reserve list sorted and de-duplicated, adjust the counters), then repeats for the slot it
+ * displaced through a tail call to itself, as retail does; the ids are halfwords read unsigned. Left: retail rereads
+ * the reserve count in the unrolled shift loop, keeps the found flag on the stack and uses a 20-byte frame. */
 #include "shard/W5_W5Match2_PairedIds.h"
 #include "common.h"
 
@@ -7,9 +10,9 @@
 
 struct PartyIds {
     /* 0x0000 */ u8 unk0000[0x76A4];
-    /* 0x76A4 */ s16 slots[PARTY_SLOT_COUNT];
+    /* 0x76A4 */ u16 slots[PARTY_SLOT_COUNT];
     /* 0x76B4 */ s16 slotMarks[PARTY_SLOT_COUNT];
-    /* 0x76C4 */ s16 reserve[PARTY_SLOT_COUNT];
+    /* 0x76C4 */ u16 reserve[PARTY_SLOT_COUNT];
     /* 0x76D4 */ u8 unk76D4[0x17F];
     /* 0x7853 */ u8 unk7853;
     /* 0x7854 */ s32 reserveCount;
@@ -20,7 +23,7 @@ struct PartyIds {
 
 struct PartyIncoming {
     /* 0x00 */ u8 unk00[0x34];
-    /* 0x34 */ s16 ids[PARTY_SLOT_COUNT];
+    /* 0x34 */ u16 ids[PARTY_SLOT_COUNT];
 };
 
 extern "C" {
@@ -34,65 +37,64 @@ static __inline void reserveRemoveHeadDuplicates(PartyIds *party)
     for (s32 k = 0; k < PARTY_SLOT_COUNT - 1; k++) {
         if (party->reserve[k + 1] == party->reserve[0]) {
             party->reserve[k + 1] = 0;
-            qsort(party->reserve, PARTY_SLOT_COUNT, sizeof(s16), FUN_00321c94);
+            qsort(party->reserve, PARTY_SLOT_COUNT, sizeof(u16), FUN_00321c94);
         }
     }
 }
 
 void FUN_00267d74(PartyIds *party, u32 record, PartyIncoming *incoming, s32 swapSlot)
 {
-    for (;;) {
-        /* Find the slot that currently holds the id the incoming slot wants. */
-        s32 slot;
-        for (slot = 0; slot < PARTY_SLOT_COUNT; slot++) {
-            if (party->slots[slot] != 0 && swapSlot != PARTY_NO_SLOT && slot != swapSlot
-                && party->slots[slot] == incoming->ids[swapSlot])
-                break;
+    /* Find the slot that currently holds the id the incoming slot wants. */
+    bool found = false;
+    s32 slot;
+    for (slot = 0; slot < PARTY_SLOT_COUNT; slot++) {
+        if (party->slots[slot] != 0 && swapSlot != PARTY_NO_SLOT && slot != swapSlot
+            && party->slots[slot] == incoming->ids[swapSlot]) {
+            found = true;
+            break;
         }
-        if (slot >= PARTY_SLOT_COUNT)
-            return;
-
-        u16 displaced = party->slots[slot];
-        party->slots[slot] = incoming->ids[slot];
-        party->changed[slot] = 1;
-        reserveRemoveHeadDuplicates(party);
-
-        /* Make room at the head of the reserve and clear its unused tail. */
-        for (s32 j = party->reserveCount; j > 0; j--)
-            party->reserve[j] = party->reserve[j - 1];
-        for (s32 j = party->reserveCount; j < PARTY_SLOT_COUNT; j++)
-            party->reserve[j] = 0;
-
-        if (recordContainsPairedId(record, incoming->ids[slot]) != 0) {
-            if (party->reserve[1] == incoming->ids[slot]) {
-                party->reserve[0] = 0;
-            } else {
-                party->reserve[0] = incoming->ids[slot];
-                reserveRemoveHeadDuplicates(party);
-            }
-        } else {
-            party->reserve[0] = 0;
-            qsort(party->reserve, PARTY_SLOT_COUNT, sizeof(s16), FUN_00321c94);
-        }
-
-        s32 displacedKnown = playerHasSkill(displaced);
-        s32 incomingPaired = recordContainsPairedId(record, incoming->ids[slot]);
-        if (displacedKnown == 0 || incomingPaired != 0) {
-            if (playerHasSkill(displaced) == 0 && recordContainsPairedId(record, incoming->ids[slot]) != 0) {
-                party->filledCount++;
-                party->slotMarks[slot] = 1;
-            } else if ((playerHasSkill(displaced) == 0 && recordContainsPairedId(record, incoming->ids[slot]) == 0)
-                       || incoming->ids[slot] == 0) {
-                party->reserveCount--;
-            }
-        } else {
-            if (incoming->ids[slot] != 0)
-                party->filledCount--;
-            party->reserveCount--;
-            party->slotMarks[slot] = 0;
-        }
-        swapSlot = slot;
     }
+    if (!found)
+        return;
+
+    u16 displaced = party->slots[slot];
+    party->slots[slot] = incoming->ids[slot];
+    party->changed[slot] = 1;
+    reserveRemoveHeadDuplicates(party);
+
+    /* Make room at the head of the reserve and clear its unused tail. */
+    for (s32 j = party->reserveCount; j > 0; j--)
+        party->reserve[j] = party->reserve[j - 1];
+    for (s32 j = party->reserveCount; j < PARTY_SLOT_COUNT; j++)
+        party->reserve[j] = 0;
+
+    if (recordContainsPairedId(record, incoming->ids[slot]) != 0) {
+        if (party->reserve[1] == incoming->ids[slot]) {
+            party->reserve[0] = 0;
+        } else {
+            party->reserve[0] = incoming->ids[slot];
+            reserveRemoveHeadDuplicates(party);
+        }
+    } else {
+        party->reserve[0] = 0;
+        qsort(party->reserve, PARTY_SLOT_COUNT, sizeof(u16), FUN_00321c94);
+    }
+
+    if (playerHasSkill(displaced) == 0 || recordContainsPairedId(record, incoming->ids[slot]) != 0) {
+        if (playerHasSkill(displaced) == 0 && recordContainsPairedId(record, incoming->ids[slot]) != 0) {
+            party->filledCount++;
+            party->slotMarks[slot] = 1;
+        } else if ((playerHasSkill(displaced) == 0 && recordContainsPairedId(record, incoming->ids[slot]) == 0)
+                   || incoming->ids[slot] == 0) {
+            party->reserveCount--;
+        }
+    } else {
+        if (incoming->ids[slot] != 0)
+            party->filledCount--;
+        party->reserveCount--;
+        party->slotMarks[slot] = 0;
+    }
+    FUN_00267d74(party, record, incoming, slot);
 }
 
 } /* extern "C" */

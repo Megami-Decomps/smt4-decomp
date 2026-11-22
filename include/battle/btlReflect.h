@@ -159,6 +159,16 @@ static void reflectCreateKind22(s32 actor, u32 flags, u32 target, u32 parameter,
     action->parameter = parameter;
 }
 
+/* btlReflectCreateKind1c (kind 0x1c: target, value, parameter), inlined by btlQueueSkillReflectActions. */
+static void reflectCreateKind1c(s32 id, u32 flags, u32 target, u32 parameter, u32 value)
+{
+    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, flags);
+    action->kind = 0x1c;
+    action->target = target;
+    action->value = value;
+    action->parameter = parameter;
+}
+
 static ReflectAction *reflectCreateKind24(s32 slot, u32 extra, u32 first, u32 second)
 {
     ReflectAction *entry = btlQueueReflectAction(g_btlActionReflect, (s16)slot, 0, extra);

@@ -80,6 +80,10 @@ void spriteDrawPartGroup(SpriteDrawOwner *owner, s32 key, const SpriteDrawVector
 void FUN_003fad14(SpriteDrawOwner *owner, s32 key, const SpriteDrawVector3 *position,
                   u32 flags, s32 filter, const SpriteDrawVector2 *offset,
                   const SpriteDrawVector2 *scale, s32 flipY, f32 globalScale);
+/* The same placed part-group draw in SMT IV. */
+void FUN_0033d42c(SpriteDrawOwner *owner, s32 key, const SpriteDrawVector3 *position,
+                  u32 flags, s32 filter, const SpriteDrawVector2 *offset,
+                  const SpriteDrawVector2 *scale, s32 flipY, f32 globalScale);
 }
 
 extern "C" void spriteDrawWithOrigin(SpriteDrawOwner *owner, s32 index,

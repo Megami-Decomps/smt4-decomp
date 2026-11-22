@@ -33,7 +33,7 @@ int scrScriptProcessStartEntry(...);
 int buttonHelpGetMode(...);
 int buttonHelpSetPreset(...);
 int FUN_00343f44(...);
-int FUN_003c0d70(...);
+int btlEntryRemove(...);
 int colorFadeStartRgb(...);
 int btlEffectDisableModels(...);
 int FUN_003d9f74(...);
@@ -176,7 +176,7 @@ extern unsigned int FUN_0039474c(void);
 /* Supplied declaration required: btlDispatchTargetActionKind. */
 /* Supplied declaration required: FUN_003c0390. */
 /* Supplied declaration required: btlMessageStartUnlessFlagged. */
-/* Supplied declaration required: FUN_003c0d70. */
+/* Supplied declaration required: btlEntryRemove. */
 /* Supplied declaration required: driftObjectStart. */
 /* Supplied declaration required: colorFadeStartRgb. */
 /* Supplied declaration required: FUN_003c1a2c. */
@@ -858,7 +858,7 @@ joined_r0x0034611c:
     FUN_00343f44(param_1,psVar2);
     break;
   case '$':
-    FUN_003c0d70((int)*(short *)(*(int *)(psVar2 + 0xc) + 0x6e),0);
+    btlEntryRemove((int)*(short *)(*(int *)(psVar2 + 0xc) + 0x6e),0);
     btlPruneInvalidQueuedEntries((BtlMainState*)btlGetMainState());
     break;
   case '%':

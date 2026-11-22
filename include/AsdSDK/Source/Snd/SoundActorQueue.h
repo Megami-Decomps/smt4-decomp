@@ -63,5 +63,7 @@ static __inline SoundActorQueuePosition soundActorScalePosition(SoundActorQueueP
 /* Start a positional actor sound, returning its slot handle or the invalid handle. */
 extern "C" u32 soundActorStartOnFreeChannel(u32 soundId, SoundActorQueuePosition position);
 extern "C" void eventSoundPlayByKind(u32 kind, s32 index, SoundActorQueuePosition position);
+/* Apocalypse's eventSoundPlayByKind (it forwards the position to soundActorStartOnFreeChannel as well). */
+extern "C" void eventSoundPlayByKind(u32 kind, s32 index, SoundActorQueuePosition position);
 
 #endif

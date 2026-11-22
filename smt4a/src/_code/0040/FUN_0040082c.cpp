@@ -9,7 +9,7 @@
 extern "C" {
 extern BattleCandidateMasks DAT_00573c90;
 s32 FUN_003ff73c(BtlCombatantEntryA *entry, const ConsumableRecordA *skill);
-s32 FUN_00400284(s32 index, s32 mode, const ConsumableRecordA *skill, u32 flags);
+s32 itemCheckUsefulOnUnit(s32 index, s32 mode, const ConsumableRecordA *skill, u32 flags);
 s32 FUN_004009d0(u32 id, s32 mode);
 
 s32 FUN_0040082c(u32 id)
@@ -48,7 +48,7 @@ s32 FUN_0040082c(u32 id)
     if ((properties->target & 0x7F) == 1 || (properties->flags & 4)) {
         SaveSlotTableA *party = gameGetSlotTable();
         for (s32 index = -1; index < party->count; ++index) {
-            if (FUN_00400284(index, 0, skill, 0) == 0)
+            if (itemCheckUsefulOnUnit(index, 0, skill, 0) == 0)
                 return 0;
         }
     }

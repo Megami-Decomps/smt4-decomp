@@ -105,6 +105,9 @@ extern "C" {
 #endif
 
 void FUN_004930e4(s32 mode);
+/* IV: the navigation cursor (g_naviMain->cursor). Callers pass their navigation state in r0 (a work area's
+ * +0x162), which it ignores. */
+NaviValuePair *NaviMain_GetCursorPos(const void *navigation);
 
 #ifdef __cplusplus
 }

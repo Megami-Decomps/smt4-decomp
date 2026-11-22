@@ -5,7 +5,7 @@ extern "C" {
 
 void providerEntrySetVector(MovedPart *part, Vec3f *position);
 void nodeSetTranslation(u32 node, s32 flags, Vec3f *translation);
-void FUN_00341bec(Mover *mover);
+void moverAimCameraAlongPart(Mover *mover);
 
 // Set the part's translation (its matrix's last column) and mark the transform dirty.
 static __inline void movedPartSetPosition(MovedPart *part, Vec3f position)
@@ -57,7 +57,7 @@ void moverStepOneFrame(Mover *mover)
             }
         }
     }
-    FUN_00341bec(mover);
+    moverAimCameraAlongPart(mover);
 }
 
 } /* extern "C" */

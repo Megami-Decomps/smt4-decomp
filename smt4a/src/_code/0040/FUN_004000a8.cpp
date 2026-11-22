@@ -9,7 +9,7 @@ extern "C" {
 extern BattleCandidateMasks DAT_00573c90;
 
 u32 FUN_00400164(void *actor, u16 value);
-s32 FUN_00400284(void *actor, s32 arg1, ConsumableRecordA *record, s32 arg3);
+s32 itemCheckUsefulOnUnit(void *actor, s32 arg1, ConsumableRecordA *record, s32 arg3);
 
 /* Classify the table-8 record id for actor: 1 none, 2 not usable here, 3 started, 0 blocked or refused. */
 u32 FUN_004000a8(void *actor, u32 id)
@@ -31,7 +31,7 @@ u32 FUN_004000a8(void *actor, u32 id)
     if (DAT_00573c90.excluded & state->markerMasks.bits) {
         return 0;
     }
-    if (FUN_00400284(actor, 1, record, 1)) {
+    if (itemCheckUsefulOnUnit(actor, 1, record, 1)) {
         return 3;
     }
     return 0;

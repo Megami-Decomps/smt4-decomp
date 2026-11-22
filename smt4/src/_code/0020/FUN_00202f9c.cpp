@@ -1,4 +1,3 @@
-/* NON_MATCHING: the global base pointer is held in r6 (retail: r4); otherwise identical. */
 #include "common.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
@@ -49,7 +48,6 @@ void FUN_00202f9c(void)
 {
     SceneState *state = g_saveLoadUIFlags.state;
     SceneState *state2;
-    u32 i;
 
     asdMdlManagerDestroy(reinterpret_cast<AsdMdlObject *>(state->handle360));
     state->handle360 = 0;
@@ -59,11 +57,9 @@ void FUN_00202f9c(void)
     }
     buttonHelpSetText(0, 0x323232ff);
     state2 = g_saveLoadUIFlags.state;
-    i = 0;
-    do {
+    for (u32 i = 0; i < 10; i++) {
         FUN_002108c0(0x36, i);
-        i++;
-    } while (i < 10);
+    }
     fileSlotFree(0x3d);
     msgWindowReset();
     if (state2->buffer248 != NULL) {

@@ -241,8 +241,8 @@ extern int FUN_002c7bf4(unsigned int *);
 /* Supplied declaration required: btlScriptUnitHasFlags. */
 /* Supplied declaration required: btlEntryBuildSummary. */
 extern int btlStateHasSelectionGateFlag(unsigned int);
-extern int FUN_003ec668(unsigned int, int, int);
-extern int FUN_003eca48(unsigned int, unsigned short);
+extern int btlMotionFindSequence(unsigned int, int, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
+extern int btlMotionFindSelection(unsigned int, unsigned short); // declcheck: local (the shared declaration does not compile here or changes this unit)
 /* Supplied declaration required: FUN_003f0254. */
 /* Supplied declaration required: btlHasDuplicateEnemyDemonId. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
@@ -448,8 +448,8 @@ void FUN_004e20c0(unsigned int *param_1,unsigned int *param_2,int param_3,unsign
   if ((((((param_2 != (unsigned int *)0x0) && (temp_v5 = btlScriptUnitHasFlags(*param_1), temp_v5 == 0)) &&
         (temp_v6 = param_2[8], temp_v6 != 0)) &&
        ((*(char *)(temp_v6 + 0x23a) != '\0' &&
-        (temp_v5 = FUN_003eca48(*param_1,*(unsigned short *)(temp_v6 + 0x166)), temp_v5 != 0)))) &&
-      (temp_v5 = FUN_003ec668(*param_1,(int)*(char *)(temp_v5 + 2),(int)(short)param_2[0x491]),
+        (temp_v5 = btlMotionFindSelection(*param_1,*(unsigned short *)(temp_v6 + 0x166)), temp_v5 != 0)))) &&
+      (temp_v5 = btlMotionFindSequence(*param_1,(int)*(char *)(temp_v5 + 2),(int)(short)param_2[0x491]),
       temp_v5 != 0)) && (temp_v12 = DAT_00571140, DAT_00571140 < 1)) {
     temp_v12 = *(int *)(temp_v5 + 100);
   }

@@ -52,7 +52,11 @@ struct BattleEffectGlobals {
     /* 0x98 */ u64 markerMask;
 };
 
-struct BattleMotionHandle;
+/* Apocalypse: what a roster record's motion handle points at (observed prefix). */
+struct BattleMotionHandle {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ void *model;       /* the model whose motions play */
+};
 struct BattleRosterMotionA {
     /* 0x000 */ u8 unk000[0x0C];
     /* 0x00C */ f32 position[3];
@@ -106,6 +110,18 @@ struct BattleRosterMotionA {
     /* 0x1CC */ s16 pendingAlternate;
     /* 0x1CE */ u16 appliedAlternate;
 };
+enum {
+    BATTLE_MOTION_CAMERA_SWITCHED = 0x400000 /* BattleRosterMotionA::flags: the running sequence has started its camera switch */
+};
+/* Ends the record's motion request: remembers it as the last one applied and rewinds the sequence. */
+static __inline void battleRosterMotionEndRequest(BattleRosterMotionA *motion)
+{
+    motion->applied = motion->pending;
+    motion->pending = 0;
+    motion->pendingAlternate = 0;
+    motion->appliedAlternate = 0;
+    motion->flags &= ~BATTLE_MOTION_CAMERA_SWITCHED;
+}
 struct BattleMotionSubject {
     union {
         /* 0x000 */ u8 unk000[0x110];
@@ -117,11 +133,36 @@ struct BattleMotionSubject {
     };
     /* 0x110 */ u16 status;
 };
+/* A row of the battle motion file's table 0, keyed by the unit id: which motion set the unit uses. */
 struct BattleMotionSelection {
-    /* 0x00 */ u16 unk00;
-    /* 0x02 */ s8 kind;
-    /* 0x03 */ u8 unk03;
+    /* 0x00 */ s16 id;
+    /* 0x02 */ s8 kind;      /* the table of BattleMotionSequence rows, 0 = none */
+    /* 0x03 */ u8 unk03[0x35];
 };
+/* One step of a motion sequence: the animation to blend into and what else starts with it. */
+struct BattleMotionStep {
+    /* 0x00 */ s32 animation;
+    /* 0x04 */ f32 blend;            /* blend time passed to the motion player */
+    /* 0x08 */ s32 loops;            /* nonzero: the animation loops and the step never advances by itself */
+    /* 0x0C */ u32 startsReferenced : 1;
+               u32 referencedIndex : 10; /* asdModelStartReferencedAnimation */
+               u32 startsClip : 1;
+               u32 clipIndex : 10;       /* targetStartIndexWithFlag2 */
+};
+/* A row of one of the motion file's kind tables, keyed by the motion a roster record asks for. */
+struct BattleMotionSequence {
+    /* 0x00 */ u32 motion;
+    /* 0x04 */ BattleMotionStep steps[3];
+    /* 0x34 */ u32 endsInDefeat;     /* the sequence ends by queueing the unit's defeat reflection */
+    /* 0x38 */ u8 unk38;
+    /* 0x39 */ u8 cameraFlags;       /* bit 0: starts a camera switch; bit 1: the switch holds the camera */
+    /* 0x3A */ s16 cameraSwitch;
+    /* 0x3C */ u8 unk3C[0x2C];
+};
+typedef char BattleMotionRecordLayoutCheck[
+    sizeof(BattleMotionSelection) == 0x38 && sizeof(BattleMotionStep) == 0x10 &&
+    offsetof(BattleMotionSequence, endsInDefeat) == 0x34 && offsetof(BattleMotionSequence, cameraSwitch) == 0x3A &&
+    sizeof(BattleMotionSequence) == 0x68 ? 1 : -1];
 struct BattleMotionCameraSubject {
     /* 0x00 */ u32 unk00;
     /* 0x04 */ f32 position[3];
@@ -136,6 +177,12 @@ static __inline u32 battleBlendColorComponent(u32 target, u32 start, u32 mask, f
     }
     return (start + (u32)((f32)(target - start) * progress)) & mask;
 }
+extern "C" {
+/* Apocalypse: starts motion `index` on the handle's model at frame zero, blending over `value`, looping when
+ * `enabled` (FUN_004d888c). The float comes before the flag: btlRosterMotionStepSequence's calls load it after the flag. */
+void FUN_004d888c(BattleMotionHandle **handle, u32 index, f32 value, u32 enabled);
+}
+
 typedef char BattleRosterMotionASizeCheck[sizeof(BattleRosterMotionA) == 0x1D0 ? 1 : -1];
 typedef char BattleRosterMotionAStateOffsetCheck[offsetof(BattleRosterMotionA, useAlternateState) == 0xA0 ? 1 : -1];
 typedef char BattleEffectGlobalsSizeCheck[sizeof(BattleEffectGlobals) == 0xA0 ? 1 : -1];

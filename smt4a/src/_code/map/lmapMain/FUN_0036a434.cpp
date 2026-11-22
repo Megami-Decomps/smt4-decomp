@@ -12,7 +12,7 @@ int stereoCameraSetPerspective(unsigned char *, int);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int residentApplyFallbackValues(void);
-int FUN_003250ac(unsigned char [4]);
+int vec3DirectionBetween(unsigned char [4]);
 int mapCollisionSweepSegment(int, float *, float *);
 int __hardfp_atan2f(void);
 
@@ -45,7 +45,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: residentApplyFallbackValues. */
-/* Supplied declaration required: FUN_003250ac. */
+/* Supplied declaration required: vec3DirectionBetween. */
 /* Supplied declaration required: FUN_0036b824. */
 /* Supplied declaration required: mapCollisionSweepSegment. */
 /* Supplied declaration required: __hardfp_atan2f. */
@@ -251,7 +251,7 @@ void FUN_0036a434(int param_1)
   *(unsigned int *)(temp_v1 + 0x54) = temp_v3;
   *(unsigned int *)(temp_v1 + 0x58) = temp_v4;
   *(unsigned int *)(temp_v1 + 0x18) = *(unsigned int *)(param_1 + 0x50);
-  FUN_003250ac(temp_v16);
+  vec3DirectionBetween(temp_v16);
   *(unsigned int *)(g_lmapView + 0x308) = temp_v17;
   __hardfp_atan2f();
   residentApplyFallbackValues();

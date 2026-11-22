@@ -101,7 +101,6 @@ SummonResource *eventResourceCacheAcquire(s32 id, s32 flag);
 void FUN_0024057c(BtlSummonState *state, SummonEffect *effect, s32 flag);
 void btlReflectInitKind9(s32 a, u32 unit, SummonEffect *effect, u32 b, s32 c);
 void FUN_003c1964(s32 flag);
-void FUN_00240614(BattleVersionResources *resources);
 
 /* Returns 1 once the summon has been spawned. */
 u32 btlSummonLoadAndSpawn(BtlSummonState *state, u32 request)
@@ -144,7 +143,7 @@ u32 btlSummonLoadAndSpawn(BtlSummonState *state, u32 request)
         }
         g_btlMain->flags |= 0x4000;
         if ((*reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(g_btlAux) + 0x3028) & 0x400) != 0)
-            FUN_00240614(g_btlAux);
+            nameEntriesRegisterVerNames(g_btlAux);
         state->state = SUMMON_STATE_SPAWN;
         return 0;
     }

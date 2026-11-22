@@ -1,7 +1,9 @@
-/* NON_MATCHING: the allocation/copy sequence and the slot-clearing loop are scheduled differently from retail; the screen setup is the same. */
+/* NON_MATCHING: same instructions as retail apart from allocation: retail keeps ui in r5 and isLoad in r4 (the build swaps them, and the 0/1 constants in r7/r8), and stores isLoad before option */
 #include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
+#include "AsdSDK/AsdDebug.h"
+#include <string.h>
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "saveLoadUI/SaveLoadInteractionsA.h"
@@ -70,16 +72,42 @@ typedef struct SaveLoadGlobals {
 } SaveLoadGlobals;
 
 extern SaveLoadGlobals g_saveLoadUIBase;
-extern u8 DAT_00533d50[];
-extern u8 DAT_00533dc8[];
-extern u8 DAT_00533de0[];
+extern const char DAT_00533ec0[];
+extern const char DAT_00533f18[];
+extern const char DAT_00533efc[];
+
+/* Animation key tables passed to paramsInit; the original file defined them statically. */
+static const UiSpritePositionKey sSaveLoadPositionKeys[] = {
+    {0, 0, 0, 0, 0, 0, 0},
+    {320, 0, 0, 0, 8, 0, 0},
+    {0, 0, -320, 0, 4, 0, 0},
+    {380, 0, 30, 0, 8, 0, 0},
+    {460, 0, 30, 0, 8, 0, 0},
+    {30, 0, 0, 0, 5, 0, 0},
+    {60, 0, 30, 0, 5, 0, 0},
+    {90, 0, 30, 0, 5, 0, 0},
+    {0, 0, -30, 0, 3, 0, 0},
+    {30, 0, -30, 0, 3, 0, 0},
+};
+static const UiSpriteScalarKey sSaveLoadAlphaKeys[] = {
+    {0.0f, 1.0f, 5, 0, 0},
+    {1.0f, 0.0f, 3, 0, 0},
+};
+static const SpriteAnimationCommand sSaveLoadAnimations[] = {
+    {1, 0, {0, 0, 0}, -3, -3, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-1, 0, {0, 0, 0}, -1, -1, 0, {0, 0, 0}, -1, 0, {0, 0, 0}},
+    {2, 0, {0, 0, 0}, -3, -3, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-1, 0, {0, 0, 0}, -1, -1, 0, {0, 0, 0}, -1, 0, {0, 0, 0}},
+    {3, 0, {0, 0, 0}, -3, -3, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-1, 0, {0, 0, 0}, -1, -1, 0, {0, 0, 0}, -1, 0, {0, 0, 0}},
+    {4, 0, {0, 0, 0}, -3, -3, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-1, 0, {0, 0, 0}, -1, -1, 0, {0, 0, 0}, -1, 0, {0, 0, 0}},
+};
 
 void *asdMemoryAlloc(u32 size, u32 alignment, u32 a, u32 b, u32 c);
 void *gameDataBlocksGetTable(void);
 void *configGetSettings(void);
 void *gameDataBlocksGetSaveData(void);
-void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-void __ARM_common_memcpy4_8(void *destination, const void *source);
 s32 gameFlagIsSet(u32 flag);
 void asdTMTexTableLoadSprites(u32 table);
 void loadSlotRequestAsync(u32 slot, u32 arg);
@@ -101,23 +129,26 @@ void FUN_0041fe58(SaveLoadUI *ui, s32 isLoad, u8 option)
 {
     ui->isLoad = (u8)isLoad;
     ui->option = option;
+    asdDebugTrace(DAT_00533ec0, 2155);
     ui->tableCopy = asdMemoryAlloc(0x10000, 0x100, 0, 0x80, 1);
+    asdDebugTrace(DAT_00533ec0, 2156);
     ui->settingsCopy = asdMemoryAlloc(0x10000, 0x100, 0, 8, 1);
+    asdDebugTrace(DAT_00533ec0, 2157);
     ui->saveCopy = asdMemoryAlloc(0x10000, 0x100, 0, 0x2A71C, 1);
-    __aeabi_memcpy4(ui->tableCopy, gameDataBlocksGetTable(), 0x80);
-    __ARM_common_memcpy4_8(ui->settingsCopy, configGetSettings());
-    __aeabi_memcpy4(ui->saveCopy, gameDataBlocksGetSaveData(), 0x2A71C);
-    __aeabi_memcpy4(ui->header, (u8 *)gameDataBlocksGetSaveData() + 8, 0xE);
-    asdLoadFileAsyncSimple("saveLoadUI/saveloadUI.bf", &ui->uiScript, 0);
-    asdLoadFileAsyncSimple("saveLoadUI/saveloadUI.mbm", &ui->uiMessages, 0);
-    if (isLoad != 0) {
-        ui->flagId = 0x470;
-        ui->headerKind = 8;
-        ui->flagValue = (u8)gameFlagIsSet(0x470);
-    } else {
+    memcpy((u32 *)ui->tableCopy, (const u32 *)gameDataBlocksGetTable(), 0x80);
+    memcpy(ui->settingsCopy, configGetSettings(), 8);
+    memcpy((u32 *)ui->saveCopy, (const u32 *)gameDataBlocksGetSaveData(), 0x2A71C);
+    memcpy((u32 *)ui->header, (const u32 *)((u8 *)gameDataBlocksGetSaveData() + 8), 0xE);
+    asdLoadFileAsyncSimple(DAT_00533f18, &ui->uiScript, 0);
+    asdLoadFileAsyncSimple(DAT_00533efc, &ui->uiMessages, 0);
+    if (isLoad == 0) {
         ui->headerKind = 9;
         ui->flagId = 0x471;
         ui->flagValue = 1;
+    } else {
+        ui->flagId = 0x470;
+        ui->headerKind = 8;
+        ui->flagValue = (u8)gameFlagIsSet(0x470);
     }
     g_saveLoadUIBase.flag470 = (u8)gameFlagIsSet(0x470);
     g_saveLoadUIBase.flag471 = (u8)gameFlagIsSet(0x471);
@@ -132,9 +163,10 @@ void FUN_0041fe58(SaveLoadUI *ui, s32 isLoad, u8 option)
         ui->slotUsed[i] = 0;
     }
     ui->unk2f4 = 0;
+    asdDebugTrace(DAT_00533ec0, 2374);
     ui->buffer = asdMemoryAlloc(0x100, 0x100, 0, 100, 1);
     paramsClearPacket(ui->params);
-    paramsInit(reinterpret_cast<UiResourceParameters *>(ui->params), DAT_00533d50, 0x78, DAT_00533dc8, 0x18, NULL, 0, 0, 0, DAT_00533de0, 0xE0);
+    paramsInit(reinterpret_cast<UiResourceParameters *>(ui->params), sSaveLoadPositionKeys, sizeof(sSaveLoadPositionKeys), sSaveLoadAlphaKeys, sizeof(sSaveLoadAlphaKeys), NULL, 0, NULL, 0, sSaveLoadAnimations, sizeof(sSaveLoadAnimations));
     uiSpriteStateInitFromSource(&ui->sprite0, 0x2B, 1, (UiResourceParameters *)(ui->params), 0xC9, 1.0f);
     uiSpriteInitializeState(&ui->sprite1, 0x2B, 0x51, 2, (UiResourceParameters *)(ui->params), 2, 1.0f);
     uiSpriteInitializeState(&ui->sprite2, 0x2B, 0x52, 2, (UiResourceParameters *)(ui->params), 2, 1.0f);

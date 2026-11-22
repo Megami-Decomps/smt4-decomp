@@ -62,7 +62,7 @@ extern nw::ut::RuntimeTypeInfo DAT_00472288;
 
 u32 libc_strlen(const char *text);
 void *nw_ut_ResDicPatricia_Get(void *dictionary, const char *name, u32 length);
-void FUN_002a3204(GfxMesh *mesh, s32 flag, f32 strength);
+void modelMaterialSetFlatColor(GfxMesh *mesh, s32 flag, f32 strength);
 
 /* The named value of the mesh's material dictionary, if the mesh has one. */
 static inline GfxMaterialValue *findMaterialValue(GfxMesh *mesh, const char *name)
@@ -97,14 +97,14 @@ s32 FUN_002fb604(GfxSceneObject *object)
             }
             if (value->mode > 0) {
                 if (value->mode == 2 && g_gfxSettings.initialized) {
-                    FUN_002a3204(mesh, 1, g_gfxSettings.shadowOn);
+                    modelMaterialSetFlatColor(mesh, 1, g_gfxSettings.shadowOn);
                 }
                 GfxModel *shadowed = nw::ut::DynamicCast<GfxModel>(object, &DAT_00472288);
                 GfxShadowState state;
                 state.active = 1;
                 shadowed->shadow = state;
             } else if (g_gfxSettings.initialized) {
-                FUN_002a3204(mesh, 1, g_gfxSettings.shadowOff);
+                modelMaterialSetFlatColor(mesh, 1, g_gfxSettings.shadowOff);
             }
         }
     }

@@ -44,7 +44,7 @@ extern int DAT_005f1600; /* 0x5f1600 */
 extern signed char DAT_005f199e; /* 0x5f199e */
 extern float DAT_005f1a88; /* 0x5f1a88 */
 extern int DAT_005f1bec; /* 0x5f1bec */
-extern unsigned int DAT_005f1bfc; /* 0x5f1bfc */
+extern unsigned int g_mapDebugSettings; /* 0x5f1bfc */
 extern unsigned char DAT_005f1c48; /* 0x5f1c48 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
@@ -487,7 +487,7 @@ void lmapCameraUpdate(void)
     }
   }
   temp_v15 = (float)((unsigned long long)temp_v26 >> 0x20);
-  puVar7 = &DAT_005f1bfc;
+  puVar7 = &g_mapDebugSettings;
   temp_v2 = *g_lmapView;
   if (temp_v2 != 2) {
     if (temp_v2 < 3) {

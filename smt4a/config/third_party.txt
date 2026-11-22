@@ -2581,6 +2581,9 @@
 0x00173f38 nw_snd_SoundArchivePlayer_SetupMram name
 0x00174108 FUN_00174108 callers
 0x001742d8 FUN_001742d8 callers
+0x001742e4 nw_snd_internal_BasicSound_Stop name
+0x001743b8 nw_snd_internal_BasicSound_Update name
+0x001748a0 FUN_001748a0 between
 0x00174a00 fileHandleRead callers
 0x00174a64 fileHandleSeek callers
 0x00174ae0 FUN_00174ae0 between
@@ -2643,6 +2646,7 @@
 0x0017ef34 _ZN14AllocatedArrayI10ArrayEntryED1Ev between
 0x0017efa4 skeletonUpdateWorldMatrices between
 0x0017f87c FUN_0017f87c between
+0x0017fc38 interpolationStateEvaluate between
 0x0017fc74 FUN_0017fc74 callers
 0x0017fc88 FUN_0017fc88 between
 0x0017fcb0 nn_math_ARMv6_MTX44TransposeAsm name
@@ -3090,7 +3094,7 @@
 0x001a5474 FUN_001a5474 between
 0x001a5514 FUN_001a5514 between
 0x001a5678 gfxModelRebuildTextureCommands between
-0x001a586c soundObjectUnlinkFromOwner twin
+0x001a586c soundObjectUnlinkFromOwner between
 0x001a5894 FUN_001a5894 between
 0x001a5974 FUN_001a5974 callers
 0x001a59c0 FUN_001a59c0 callers
@@ -6361,6 +6365,7 @@
 0x0043b6c0 nn_math_VEC3TransformCoordArray name
 0x0043b800 nn_math_ARMv6_HermiteC_FAST name
 0x0043b84c nn_math_ARMv6_MTX34ToQUATC_FAST name
+0x0043b9f0 nn_math_ARMv6_MTX44TranslateC_FAST name
 0x0043ba3c FUN_0043ba3c between
 0x0043bb48 mathAtan2AngleU16 between
 0x0043bc74 mathAtanAngle256 between

@@ -23,7 +23,7 @@ typedef struct GameDataBlocks {
     /* 0x10 */ u32 homeButtonHolds;
     /* 0x14 */ u32 sleepHolds;       /* while nonzero, sleep mode is disabled */
     /* 0x18 */ u32 flags;
-    /* 0x1C */ s32 cheatSequenceStep; /* steps of FUN_0031e384's hidden input sequence entered so far */
+    /* 0x1C */ s32 cheatSequenceStep; /* steps of cheatSequenceUpdate's hidden input sequence entered so far */
 } GameDataBlocks;
 
 /* Apocalypse allocates one additional work block. */

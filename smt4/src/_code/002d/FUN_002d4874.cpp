@@ -10,7 +10,7 @@
 extern "C" {
 
 
-int FUN_0019db68(void);
+int mapIfShowActionMarker(void);
 int mapDestroyOverlayModel(...);
 int mapIfReleaseSlot3(void);
 int mapIfActivateRecord(int, unsigned int);
@@ -41,7 +41,7 @@ extern int g_lmapScene; /* 0x447e88 */
 
 
 
-/* Supplied declaration required: FUN_0019db68. */
+/* Supplied declaration required: mapIfShowActionMarker. */
 /* Supplied declaration required: mapDestroyOverlayModel. */
 /* Supplied declaration required: mapIfReleaseSlot3. */
 /* Supplied declaration required: mapIfActivateRecord. */
@@ -209,7 +209,7 @@ void FUN_002d4874(void)
         *(unsigned int *)(g_mapCamera + 0xac) = 1;
         buttonHelpSetPreset(0xda);
         mapIfActivateRecord(1,g_gameState.overviewRecord);
-        FUN_0019db68();
+        mapIfShowActionMarker();
         temp_v0 = g_lmapScene;
         *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;
         *(unsigned int *)(temp_v0 + 8) = 0;

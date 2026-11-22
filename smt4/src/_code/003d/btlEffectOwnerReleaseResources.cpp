@@ -62,7 +62,7 @@ extern "C" void btlEffectOwnerReleaseResources(MaterialMergeOwner *owner)
         }
         AsdMdlObject *model = reinterpret_cast<AsdMdlObject *>(slot->model);
         if (model != NULL) {
-            if (model->node->unk0c >= 0)
+            if (model->node->sceneGroup >= 0)
                 asdMdlManagerMarkDestroy(model);
             asdMdlManagerDestroy(reinterpret_cast<AsdMdlObject *>(slot->model));
             slot->model = NULL;

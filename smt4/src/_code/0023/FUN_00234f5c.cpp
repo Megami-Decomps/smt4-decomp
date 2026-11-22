@@ -41,7 +41,7 @@ extern "C" {
 
 u32 asdMdlManagerCreateLoaded(const char* name, s32 mode);
 void lightOwnerRegister(u32 model, s32 arg);
-void FUN_00341340(MikadoScene* scene, const char* name);
+void modelSetLoadFromFile(MikadoScene* scene, const char* name);
 void FUN_002a09b4(const char* name, s32 arg);
 void FUN_002a04f0(s32 arg);
 u32* cameraGetProviderEntryPayload(u32 node);
@@ -69,7 +69,7 @@ void FUN_00234f5c(MikadoScene* scene, const char* name, const char* override)
     scene->model = asdMdlManagerCreateLoaded(path, 7);
     lightOwnerRegister(scene->model, 1);
     sprintf(path, "%s.bccam", name);
-    FUN_00341340(scene, path);
+    modelSetLoadFromFile(scene, path);
     sprintf(path, "%s.bcenv", name);
     FUN_002a09b4(path, 0);
     FUN_002a04f0(0);

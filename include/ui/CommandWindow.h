@@ -11,8 +11,14 @@ typedef struct CommandWindow {
     /* 0x008 */ u32 phase;          /* 0 idle, 1 opening, 2 shown, 3 waiting, 4 closing */
     /* 0x00C */ u32 phaseTimer;     /* frames since the phase began */
     /* 0x010 */ u8 textEnabled;
-    /* 0x011 */ u8 unk11;
-    /* 0x012 */ u8 unk12[2];
+    union {
+        /* 0x011 */ u8 unk11;
+        /* 0x011 */ s8 skillPlayer;  /* state 2: whose skill the icon is drawn for */
+    };
+    union {
+        /* 0x012 */ u8 unk12[2];
+        /* 0x012 */ u8 frameSide;    /* 0/1: which of the window's two frame entries it is laid out in */
+    };
     /* 0x014 */ u32 state;
     /* 0x018 */ u16 value;
     /* 0x01A */ u8 unk01A[0x22];

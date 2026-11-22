@@ -19,7 +19,7 @@ int FUN_004e8454(int *);
 int FUN_004e8668(int *, unsigned int *);
 int btlUnitMarkTargetCandidates(int *, int);
 int FUN_004eae30(...);
-int FUN_004eb42c(int *, unsigned int *);
+int btlTargetCursorMove(int *, unsigned int *);
 int FUN_004eb838(...);
 
 /* stack frame of param_2: 5 slot(s), 17 byte(s) */
@@ -65,7 +65,7 @@ extern int btlUiIsMenuReady(unsigned int);
 /* Supplied declaration required: FUN_004e8668. */
 /* Supplied declaration required: btlUnitMarkTargetCandidates. */
 /* Supplied declaration required: FUN_004eae30. */
-/* Supplied declaration required: FUN_004eb42c. */
+/* Supplied declaration required: btlTargetCursorMove. */
 /* Supplied declaration required: FUN_004eb838. */
 
 
@@ -145,7 +145,7 @@ int FUN_004e15fc(int *param_1,unsigned int *param_2)
         FUN_004eae30(param_1,1,0xffffffff,param_2);
       }
       else {
-        FUN_004eb42c(param_1,param_2);
+        btlTargetCursorMove(param_1,param_2);
         FUN_004eae30(param_1,1,param_2[0x16b],param_2);
       }
     }

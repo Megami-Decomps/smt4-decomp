@@ -60,7 +60,7 @@ extern void *g_btlAux;
 s32 objSlotStateIsActiveRange(TurnState *state, s32 slot);
 void slotResetIdle(TurnState *state, s32 slot, u32 value);
 s32 FUN_003dc504(void *work);
-void FUN_003da010(void *resources);
+void btlEffectLoadVersionedSet(void *resources);
 void btlEffectModelJobStart(void *resources, u32 value); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void btlTargetSetFlag10(TurnState *state, s32 targetId, s32 primary);
 
@@ -84,7 +84,7 @@ u32 FUN_003cab9c(TurnOwner *owner, TurnWork *work)
         /* fall through */
     case 1:
         if (FUN_003dc504(g_btlAux) != 0) {
-            FUN_003da010(g_btlAux);
+            btlEffectLoadVersionedSet(g_btlAux);
             work->phase = 2;
         }
         return result;

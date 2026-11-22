@@ -42,17 +42,23 @@ struct BtlEncounterGlobalsA {
                 /* 0x40 */ u32 words[2];
             };
         } transition;
+        struct {
+            u8 unk38BeforeOrderMask[0x18];
+            /* 0x50 */ u64 mask;           /* set with orderBuiltMask once the turn order is built (FUN_003e16cc) */
+        } order;
     };
     /* 0x58 */ u64 queuedStateMask;
     /* 0x60 */ u64 initializedMask;
+    /* 0x68 */ u64 orderBuiltMask;         /* the global ends at 0x70, where g_btlEvent starts */
 };
 typedef char BtlEncounterGlobalsAMaskOffsetCheck[
     offsetof(BtlEncounterGlobalsA, initialStateMask) == 0x30 &&
     offsetof(BtlEncounterGlobalsA, queuedStateMask) == 0x58 &&
     offsetof(BtlEncounterGlobalsA, initializedMask) == 0x60 &&
-    sizeof(BtlEncounterGlobalsA) == 0x68 ? 1 : -1];
+    offsetof(BtlEncounterGlobalsA, order.mask) == 0x50 && offsetof(BtlEncounterGlobalsA, orderBuiltMask) == 0x68 &&
+    sizeof(BtlEncounterGlobalsA) == 0x70 ? 1 : -1];
 typedef char BtlEncounterGlobalsAWorkOffsetCheck[
-    offsetof(BtlEncounterGlobalsA, work) == 0 && sizeof(BtlEncounterGlobalsA) == 0x68 ? 1 : -1];
+    offsetof(BtlEncounterGlobalsA, work) == 0 && sizeof(BtlEncounterGlobalsA) == 0x70 ? 1 : -1];
 typedef char BtlEncounterGlobalsATransitionMaskOffsetCheck[
     offsetof(BtlEncounterGlobalsA, transition.mask) == 0x40 &&
     offsetof(BtlEncounterGlobalsA, transition.words) == 0x40 ? 1 : -1];

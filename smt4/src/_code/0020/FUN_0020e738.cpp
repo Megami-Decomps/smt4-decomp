@@ -24,7 +24,7 @@ extern QuadRecord DAT_004c14a0[];
 extern s32 DAT_004c2420;
 
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(PhaseVector *out, const f32 *matrix, const PhaseVector *in);
-void FUN_0025247c(PhaseVector *out, PhaseVector from, PhaseVector to);
+void vec3DirectionBetween(PhaseVector *out, PhaseVector from, PhaseVector to);
 
 /* Queues a width x height quad at (x, y) turned by `degrees` around the Y axis: the corners are
  * rotated through the rotation matrix of the three angles and moved to the position. */
@@ -77,10 +77,10 @@ void FUN_0020e738(u16 idA, u16 idB, f32 x, f32 y, f32 width, f32 height, f32 deg
     quad->corner[1] = local[0];
     quad->corner[2] = local[2];
     quad->corner[3] = local[1];
-    FUN_0025247c(&quad->edge[0], quad->corner[0], quad->corner[1]);
-    FUN_0025247c(&quad->edge[1], quad->corner[1], quad->corner[3]);
-    FUN_0025247c(&quad->edge[2], quad->corner[2], quad->corner[0]);
-    FUN_0025247c(&quad->edge[3], quad->corner[3], quad->corner[2]);
+    vec3DirectionBetween(&quad->edge[0], quad->corner[0], quad->corner[1]);
+    vec3DirectionBetween(&quad->edge[1], quad->corner[1], quad->corner[3]);
+    vec3DirectionBetween(&quad->edge[2], quad->corner[2], quad->corner[0]);
+    vec3DirectionBetween(&quad->edge[3], quad->corner[3], quad->corner[2]);
     DAT_004c2420++;
 }
 

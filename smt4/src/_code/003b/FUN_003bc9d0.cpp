@@ -3,7 +3,7 @@
 #include "script/scrScriptProcess.h"
 #include "code/Code0038.h"
 
-/* Radians to degrees, as FUN_00341bec and the title menu's FUN_001e9990 convert the same camera field of view. */
+/* Radians to degrees, as moverAimCameraAlongPart and the title menu's FUN_001e9990 convert the same camera field of view. */
 static f32 radiansToDegrees(f32 radians)
 {
     return radians * 180.0f * 0.31830987f;

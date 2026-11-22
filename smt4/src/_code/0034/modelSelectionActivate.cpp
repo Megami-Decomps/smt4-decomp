@@ -99,7 +99,7 @@ extern SceneNode* asdModelGetSlotArray0(int);
 extern int nw_gfx_SceneNode_IsCircularReference(SceneNode*, SceneNode*);
 extern ModelParameters* asdCameraGetSavedRenderPairs(void*);
 extern void cameraExportProviderEntryWords(SceneNode*, float*, float*, float*, float*);
-extern void FUN_00341bec(ModelSelection*);
+extern void moverAimCameraAlongPart(ModelSelection*);
 
 void modelSelectionActivate(ModelSelection* selection, int modelIndex, int animationIndex)
 {
@@ -246,6 +246,6 @@ void modelSelectionActivate(ModelSelection* selection, int modelIndex, int anima
                  &parameters->value30);
 
     parameters->value28 = parameters->value28 * 57.2957763671875f;
-    FUN_00341bec(selection);
+    moverAimCameraAlongPart(selection);
 }
 }

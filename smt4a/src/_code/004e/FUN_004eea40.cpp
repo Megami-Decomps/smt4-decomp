@@ -93,8 +93,8 @@ void FUN_004eea40(int *param_1,unsigned int *param_2)
   if (((((param_2 != (unsigned int *)0x0) && (iVar5 = FUN_003e8430(*piStack_30), iVar5 == 0)) &&
        (uVar17 = param_2[8], uVar17 != 0)) &&
       ((*(char *)(uVar17 + 0x23a) != '\0' &&
-       (iVar5 = FUN_003eca48(*piStack_30,*(unsigned short *)(uVar17 + 0x166)), iVar5 != 0)))) &&
-     ((iVar5 = FUN_003ec668(*piStack_30,(int)*(char *)(iVar5 + 2),(int)(short)puStack_60[0x11]),
+       (iVar5 = btlMotionFindSelection(*piStack_30,*(unsigned short *)(uVar17 + 0x166)), iVar5 != 0)))) &&
+     ((iVar5 = btlMotionFindSequence(*piStack_30,(int)*(char *)(iVar5 + 2),(int)(short)puStack_60[0x11]),
       iVar5 != 0 && (iVar4 = DAT_00571140, DAT_00571140 < 1)))) {
     iVar4 = *(int *)(iVar5 + 100);
   }

@@ -14,7 +14,7 @@ struct SoundSlotOwnerA {
 
 extern "C" {
 extern SoundSlotOwnerA g_asdSoundHandleState;
-void asdSoundObjectStop(SoundHandle *handle, s32 frames);
+void nw_snd_internal_BasicSound_Stop(SoundHandle *handle, s32 frames); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Stops an indexed sound, allowing it to fade over the requested frame count. */
 s32 asdSoundApplyBankValue(u32 index, s32 frames)
@@ -25,7 +25,7 @@ s32 asdSoundApplyBankValue(u32 index, s32 frames)
         return result;
     }
     if (slots->handles[index] != NULL) {
-        asdSoundObjectStop(slots->handles[index], frames);
+        nw_snd_internal_BasicSound_Stop(slots->handles[index], frames);
     }
     return 1;
 }

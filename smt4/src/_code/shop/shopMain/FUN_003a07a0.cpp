@@ -10,7 +10,7 @@ struct AlternateShopDecorations {
 
 extern "C" {
 extern const ShopIconIndices DAT_0044df98[7];
-extern const AlternateShopDecorations DAT_0044dfd0;
+extern const AlternateShopDecorations g_shopTabNeighbors;
 void FUN_00231bcc(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color, u32 flags);
 s32 gameFlagIsSet(u32 flag);
 
@@ -48,16 +48,16 @@ void FUN_003a07a0(ShopWork *shop, s32 state)
         s32 firstIndex;
         s32 secondIndex;
         if (work->mode == 1) {
-            firstIndex = DAT_0044dfd0.pages[work->page].first;
-            secondIndex = DAT_0044dfd0.pages[work->page].second;
+            firstIndex = g_shopTabNeighbors.pages[work->page].first;
+            secondIndex = g_shopTabNeighbors.pages[work->page].second;
             if (work->page == 0 &&
                 (work->restricted || work->result == 8 || !gameFlagIsSet(0x410))) {
-                firstIndex = DAT_0044dfd0.lockedFirst.first;
-                secondIndex = DAT_0044dfd0.lockedFirst.second;
+                firstIndex = g_shopTabNeighbors.lockedFirst.first;
+                secondIndex = g_shopTabNeighbors.lockedFirst.second;
             } else if (work->page == 3 &&
                 (work->restricted || work->result == 8 || !gameFlagIsSet(0x410))) {
-                firstIndex = DAT_0044dfd0.lockedFourth.first;
-                secondIndex = DAT_0044dfd0.lockedFourth.second;
+                firstIndex = g_shopTabNeighbors.lockedFourth.first;
+                secondIndex = g_shopTabNeighbors.lockedFourth.second;
             }
         } else {
             firstIndex = DAT_0044df98[work->page].first;

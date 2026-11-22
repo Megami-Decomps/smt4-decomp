@@ -108,7 +108,7 @@ extern "C" s32 ocEventJobUpdate(u32 job)
         if (work->model != NULL && modelHasLoadedAttachment(work->model) == 0)
             break;
         work->motion = 1;
-        if (work->model != NULL && work->model->node->unk0c < 0) {
+        if (work->model != NULL && work->model->node->sceneGroup < 0) {
             lightOwnerRegister(work->model, 1);
             animPlayerSetLoopPolicy(work->model->node, 1);
             modelSelectPrimaryMotion(work->model->node, work->motion, 0.0f);

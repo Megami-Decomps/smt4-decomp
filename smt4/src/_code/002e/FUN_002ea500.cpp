@@ -2,7 +2,7 @@
 #include "common.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "map/mapDepart.h"
-#include "map/MapActionMarker.h"
+#include "map/MapIfGlobals.h"
 #include "util/TrigF32.h"
 #include "util/MathFunctions.h"
 
@@ -43,7 +43,7 @@ extern unsigned char DAT_0049fb46; /* 0x49fb46 */
 
 /* Supplied declaration required: mapDestroySecondaryModel. */
 /* Supplied declaration required: mapIfReleaseSlot2. */
-/* Supplied declaration required: FUN_00248114. */
+/* Supplied declaration required: mapIfSpawnDownAction. */
 /* Supplied declaration required: mapIfActivateRecord. */
 extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: table23FindRecordByKey. */
@@ -179,7 +179,7 @@ void FUN_002ea500(void)
           marker.y = *(float *)&DAT_0049f9a4 + 10.0f;
           marker.z = *(float *)&DAT_0049f9a8 + libm_cosf(*(float *)(g_lmapScene + 0x50) * 0.017453292f) * 20.0f;
           marker.w = *(float *)(g_lmapScene + 0x50) + 180.0f;
-          FUN_00248114(marker);
+          mapIfSpawnDownAction(marker);
           }
           temp_v1 = *(int *)(g_lmapScene + 4);
           temp_v0 = g_lmapScene;

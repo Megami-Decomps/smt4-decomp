@@ -19,7 +19,7 @@ void asdMdlManagerDestroy(AsdMdlObject *obj)
 {
     LookupListNode *removed;
 
-    if (obj->node->unk0c >= 0) {
+    if (obj->node->sceneGroup >= 0) {
         obj->flags |= 0x200000;
         asdMdlLightBatchRemove(obj->node);
     }

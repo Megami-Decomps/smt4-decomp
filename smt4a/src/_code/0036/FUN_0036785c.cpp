@@ -7,7 +7,7 @@ extern "C" {
 
 int sysPlaySe(int);
 int slotSetRequest(...);
-int FUN_00246014(void);
+int mapIfSpawnDownAction(void);
 int mapIfOverlayRelease(void);
 int mapSetSceneState(...);
 
@@ -45,7 +45,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: mapIfApplyEntryRequest. */
-/* Supplied declaration required: FUN_00246014. */
+/* Supplied declaration required: mapIfSpawnDownAction. */
 /* Supplied declaration required: mapIfOverlayRelease. */
 /* Supplied declaration required: mapEaseSceneHeading. */
 extern int pairedAvailabilityBothReady(void);
@@ -281,7 +281,7 @@ LAB_00367d2c:
       mapIfApplyEntryRequest(1,g_gameState.overviewRecord);
       libm_sinf();
       libm_cosf();
-      FUN_00246014();
+      mapIfSpawnDownAction();
       temp_v2 = *(int *)(g_lmapScene + 4);
       temp_v1 = g_lmapScene;
     }

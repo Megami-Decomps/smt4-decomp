@@ -1,51 +1,53 @@
 #include "map/InteractionFlags.h"
-/* NON_MATCHING: refreshes visibility and screen position of the map icons (flag/ownership rules, scroll offset, 512x640 clip); written from the decompilation, the unused gameFlagsGetBlock() call is dropped and float to int conversion/scheduling is not compared with retail */
+/* NON_MATCHING: refreshes visibility and screen position of the map icons (flag/ownership rules, scroll offset, 512x640 clip); written from the decompilation, float register allocation and the visibility/clip scheduling differ from retail */
 #include "gamedata/MapSaveBlockA.h"
 #include "shard/W6_W6Match7_NumericStepper.h"
 #include "common.h"
+#include <stddef.h>
 #include "game/GameStateA.h"
 #include "gamedata/FlagBitTests.h"
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
 
-#define MAP_ICON_TYPE_OWNED -1
-#define MAP_ICON_TYPE_STORY -2
-#define MAP_ICON_TYPE_FLAG -3
+#define MAP_ICON_TYPE_OWNED 0xFF
+#define MAP_ICON_TYPE_STORY 0xFE
+#define MAP_ICON_TYPE_FLAG 0xFD
 #define MAP_ID_FIELD 0x65
 #define MAP_CLIP_WIDTH 512.0f
 #define MAP_CLIP_HEIGHT 640.0f
 
 struct MapIcon {
-    /* 0x00 */ u8 kind;
-    /* 0x01 */ s8 unlockType;
-    /* 0x02 */ u8 unk02[2];
-    /* 0x04 */ u16 frame;
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u8 kind;
+    /* 0x05 */ u8 unlockType;
     /* 0x06 */ u8 unk06[2];
-    /* 0x08 */ f32 x;
-    /* 0x0C */ f32 y;
-    /* 0x10 */ f32 width;
-    /* 0x14 */ f32 height;
-    /* 0x18 */ u8 unk18[0x12];
-    /* 0x2A */ s16 unlockId;
-    /* 0x2C */ s16 requireFlag;      /* hidden unless this flag is set */
-    /* 0x2E */ s16 excludeFlag;      /* hidden while this flag is set */
-    /* 0x30 */ s16 visible;
-    /* 0x32 */ u16 drawFrame;
-    /* 0x34 */ s32 screenX;
-    /* 0x38 */ s32 screenY;
-    /* 0x3C */ s32 drawWidth;
-    /* 0x40 */ s32 drawHeight;
-    /* 0x44 */ s32 color;
-    /* 0x48 */ s32 unk48;
-    /* 0x4C */ u8 unk4C;
-    /* 0x4D */ u8 unk4D[0x17];
+    /* 0x08 */ u16 frame;
+    /* 0x0A */ u8 unk0A[2];
+    /* 0x0C */ f32 x;
+    /* 0x10 */ f32 y;
+    /* 0x14 */ f32 width;
+    /* 0x18 */ f32 height;
+    /* 0x1C */ u8 unk1C[0x12];
+    /* 0x2E */ s16 unlockId;
+    /* 0x30 */ s16 requireFlag;      /* hidden unless this flag is set */
+    /* 0x32 */ s16 excludeFlag;      /* hidden while this flag is set */
+    /* 0x34 */ s16 visible;
+    /* 0x36 */ u16 drawFrame;
+    /* 0x38 */ s32 screenX;
+    /* 0x3C */ s32 screenY;
+    /* 0x40 */ u32 drawWidth;
+    /* 0x44 */ u32 drawHeight;
+    /* 0x48 */ s32 color;
+    /* 0x4C */ s32 unk4C;
+    /* 0x50 */ u8 unk50;
+    /* 0x51 */ u8 unk51[0x13];
 };
 
 struct MapScreenWork {
     /* 0x00000 */ u8 unk00000[0x4CC];
     /* 0x004CC */ u8 scene[4];
     /* 0x004D0 */ u8 scroll[8];
-    /* 0x004D8 */ u8 unk004D8[0x12B8];
-    /* 0x01790 */ MapIcon icons[0xFF];
+    /* 0x004D8 */ u8 unk004D8[0x12B4];
+    /* 0x0178C */ MapIcon icons[0x100];
     /* 0x07B8C */ s32 iconCount;
     /* 0x07B90 */ u8 unk07B90;
     /* 0x07B91 */ u8 refreshed;
@@ -59,6 +61,9 @@ struct MapScreenWork {
     /* 0x2064C */ s32 overrideZ;
 };
 
+typedef char MapScreenWorkOffsetCheck[sizeof(MapIcon) == 0x64 && offsetof(MapScreenWork, iconCount) == 0x7B8C &&
+    offsetof(MapScreenWork, hasOverride) == 0x20634 && offsetof(MapScreenWork, overrideZ) == 0x2064C ? 1 : -1];
+
 extern "C" {
 
 f32 *lmapSceneGetObj(void *scene);
@@ -70,6 +75,7 @@ s32 gameOwnedBitTest2(s32 id);
 
 void FUN_0049177c(MapScreenWork *work)
 {
+    gameFlagsGetBlock();
     void *scene = work->scene;
     s32 map = naviGetActiveStateValue(scene);
     f32 *cameraObject = lmapSceneGetObj(scene);
@@ -94,8 +100,8 @@ void FUN_0049177c(MapScreenWork *work)
     }
     s32 iconCount = work->iconCount;
     if (map == MAP_ID_FIELD) {
-        scrollX = (cameraX - -25400.0f) * 0.0169705f;
-        scrollY = (cameraZ - -16400.0f) * 0.016886543f;
+        scrollX = 0.0169705f * (cameraX - -25400.0f);
+        scrollY = 0.016886543f * (cameraZ - -16400.0f);
     }
     s32 shiftX = (s32)(originX - (scrollX - 160.0f));
     s32 shiftY = (s32)(originY - (scrollY - 120.0f));
@@ -110,25 +116,39 @@ void FUN_0049177c(MapScreenWork *work)
         else
             icon->visible = 1;
 
-        if (icon->unlockType == MAP_ICON_TYPE_OWNED)
-            icon->visible = (gameOwnedBitTest2(icon->unlockId) != 0 || g_gameState.showAllEntries != 0) ? 1 : 0;
-        else if (icon->unlockType == MAP_ICON_TYPE_STORY)
-            icon->visible = (FUN_00384d34(icon->unlockId) != 0 || g_gameState.showAllEntries != 0) ? 1 : 0;
-        else if (icon->unlockType == MAP_ICON_TYPE_FLAG)
-            icon->visible = gameFlagsBitTest(icon->unlockId) != 0 ? 1 : 0;
+        if (icon->unlockType == MAP_ICON_TYPE_OWNED) {
+            if (gameOwnedBitTest2(icon->unlockId) != 0 || g_gameState.showAllEntries != 0)
+                icon->visible = 1;
+            else
+                icon->visible = 0;
+        } else if (icon->unlockType == MAP_ICON_TYPE_STORY) {
+            if (FUN_00384d34(icon->unlockId) != 0 || g_gameState.showAllEntries != 0)
+                icon->visible = 1;
+            else
+                icon->visible = 0;
+        } else if (icon->unlockType == MAP_ICON_TYPE_FLAG) {
+            if (gameFlagsBitTest(icon->unlockId) != 0)
+                icon->visible = 1;
+            else
+                icon->visible = 0;
+        }
 
         if (icon->visible != 0) {
-            f32 top = offset[1] + icon->y + (f32)shiftY;
-            icon->unk48 = 0;
-            icon->drawWidth = (s32)icon->width;
-            icon->drawHeight = (s32)icon->height;
+            f32 x = icon->x + (f32)shiftX;
+            f32 y = icon->y + (f32)shiftY;
+            icon->unk4C = 0;
             icon->color = -1;
             icon->drawFrame = icon->frame;
-            icon->unk4C = 0;
-            icon->screenX = (s32)(offset[0] + icon->x + (f32)shiftX);
+            icon->unk50 = 0;
+            f32 width = icon->width;
+            f32 height = icon->height;
+            f32 left = offset[0] + x;
+            f32 top = offset[1] + y;
+            icon->drawWidth = (u32)width;
+            icon->drawHeight = (u32)height;
+            icon->screenX = (s32)left;
             icon->screenY = (s32)top;
-            if (!(0.0f <= (offset[0] + icon->x + (f32)shiftX) + icon->width) || (offset[0] + icon->x + (f32)shiftX) > MAP_CLIP_WIDTH
-                || !(0.0f <= top + icon->height) || top > MAP_CLIP_HEIGHT)
+            if (left + width < 0.0f || left > MAP_CLIP_WIDTH || top + height < 0.0f || top > MAP_CLIP_HEIGHT)
                 icon->visible = 0;
         }
     }

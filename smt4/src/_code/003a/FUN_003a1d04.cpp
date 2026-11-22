@@ -1,4 +1,6 @@
-/* NON_MATCHING: scene/selection registers and initial frame-color scheduling differ. */
+/* NON_MATCHING: scene/selection registers and initial frame-color scheduling differ.
+ * Retail leaves the page image unset (r1 as it came) for a slot past 8; the explicit default
+ * case here costs 8 lines. */
 #include "shard/S2Scene3a.h"
 #include "shard/Shard004A.h"
 #include "code/Code0029.h"
@@ -23,6 +25,7 @@ void FUN_003a1d04(Scene3a *scene)
     case 6: image = 11; break;
     case 7: image = 3; break;
     case 8: image = 4; break;
+    default: image = 0; break;
     }
     uiRectDrawAtBottomRight(&scene->region, image, 0, 0, frameColor);
     u32 color = scene->listId;

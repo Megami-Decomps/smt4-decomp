@@ -5,7 +5,7 @@ extern "C" {
 
 void nw_ut_internal_LinkListImpl_erase_2B743C(LinkList *list);
 void nw_ut_internal_LinkListImpl_insert(LinkList *list, ListNode *pos, ListNode *node);
-void FUN_001743b8(PlayerSoundA *sound);
+void nw_snd_internal_BasicSound_Update(PlayerSoundA *sound);
 void FUN_001738a4(SoundPlayerA *player, s32 reverse);
 
 /* Move the ready pending sounds to the ready list, update every active sound, then re-sort the
@@ -27,7 +27,7 @@ void FUN_00173818(SoundPlayerA *player)
     if (active != linkListEndIter(&player->activeList)) {
         do {
             LinkListIterator cur = active++;
-            FUN_001743b8(playerSoundFromActiveNode(cur.node));
+            nw_snd_internal_BasicSound_Update(playerSoundFromActiveNode(cur.node));
         } while (active != linkListEndIter(&player->activeList));
     }
     FUN_001738a4(player, 0);

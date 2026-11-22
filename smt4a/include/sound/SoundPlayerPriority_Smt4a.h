@@ -5,6 +5,6 @@
 struct SoundObject;
 extern "C" {
 
-void asdSoundObjectStop(SoundObject *object, s32 frames);
+void nw_snd_internal_BasicSound_Stop(SoundObject *object, s32 frames);
 
 } /* extern "C" */

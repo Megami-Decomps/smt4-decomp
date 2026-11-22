@@ -1,4 +1,7 @@
-/* NON_MATCHING: pool order and the conditional sound call match; only the final reset stores differ (retail sets 7 in r1 and the zero in r0 and stores state first). */
+/* NON_MATCHING: only the final reset stores differ (retail sets 7 in r1 and the zero in r0 and stores state first).
+ * IDENTICAL with the record's own fields (position as a SoundActorQueuePosition, `state = 7` before
+ * `proximityTimer = 0`, as FUN_003659f4 orders them) only while `GameStateA *state = &g_gameState` stays a
+ * single-use pointer (it pools g_gameState before 120.0f); without it 8 lines differ. */
 #include "map/MapIfGlobals.h"
 #include "game/GameStateA.h"
 #include "map/mapDepart.h"

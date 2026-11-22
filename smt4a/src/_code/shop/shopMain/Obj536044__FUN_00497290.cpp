@@ -10,7 +10,6 @@
 extern "C" {
 
 void gameSetStatusCameraHeightMode(s32 mode);
-void messageChoiceShowCurrent(Obj536044 *shop);
 s32 inputIsQuestRepeatRight(void);
 s32 FUN_004d0494(void);
 s32 inputIsQuestCancelPressed(void);
@@ -56,7 +55,7 @@ void Obj536044::FUN_00497290()
         }
     }
     FUN_004954e8((SubmenuWork *)this);
-    messageChoiceShowCurrent(this);
+    shopDrawSelectedItem(this);
     if (inputIsQuestRepeatRight() != 0 || recordGetModeForId(nextItem) == 6) {
         if (slot != SHOP_SLOT_ITEMS) {
             if (slot == 3) {

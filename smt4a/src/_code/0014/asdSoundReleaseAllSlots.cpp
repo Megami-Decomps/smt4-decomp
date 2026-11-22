@@ -3,7 +3,7 @@
 #include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 
 extern "C" {
-void asdSoundObjectStop(s32 handle, s32 immediate); // declcheck: local (the shared declaration does not compile here or changes this unit)
+void nw_snd_internal_BasicSound_Stop(s32 handle, s32 immediate); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void asdMemFree(void *block); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void nw_snd_SoundHandle_DetachSound(void *handle);
 void nw_snd_SoundHeap_Destroy(void *heap);
@@ -60,7 +60,7 @@ static __inline void asdSoundSlotARestore(u32 index, AsdSndSlotA *slot)
     if (index < ASD_SND_SLOT_A_COUNT && slot != NULL) {
         for (s32 i = 0; i < 4; ++i) {
             if (slot->handles[i] != 0)
-                asdSoundObjectStop(slot->handles[i], 0);
+                nw_snd_internal_BasicSound_Stop(slot->handles[i], 0);
         }
         slot->volume = ASD_SND_VOLUME_DEFAULT;
         if (slot->hasHeap != 0)
@@ -79,7 +79,7 @@ static __inline void asdSoundSlotARelease(u32 index)
         return;
     for (s32 i = 0; i < 4; ++i) {
         if (slot->handles[i] != 0) {
-            asdSoundObjectStop(slot->handles[i], 0);
+            nw_snd_internal_BasicSound_Stop(slot->handles[i], 0);
             nw_snd_SoundHandle_DetachSound(&slot->handles[i]);
         }
     }
@@ -108,7 +108,7 @@ void asdSoundReleaseAllSlots(void)
     AsdSndHandleNode *node = list->handles;
     while (node != NULL) {
         if (node->handle != 0) {
-            asdSoundObjectStop(node->handle, 0);
+            nw_snd_internal_BasicSound_Stop(node->handle, 0);
             nw_snd_SoundHandle_DetachSound(node);
         }
         AsdSndHandleNode *next = node->next;

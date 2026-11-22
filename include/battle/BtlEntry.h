@@ -70,13 +70,20 @@ struct BtlUnitDetail {
 typedef struct BtlUnitLink {
     /* 0x00 */ u8 unk00[0xE];
     /* 0x0E */ s16 maxHp;
-    /* 0x10 */ u8 unk10[0x36];
+    /* 0x10 */ u8 unk10[0x1A];
+    /* 0x2A */ s16 hp;
+    /* 0x2C */ u8 unk2C[0x18];
+    /* 0x44 */ u16 state;           /* flag halfword (flagWordTestBit, objectFlagsClear); 2 once the unit is removed */
     /* 0x46 */ u16 id;
 } BtlUnitLink;
 
 struct BtlUnitSource {
     /* 0x00 */ u8 unk00[0x1C];
     /* 0x1C */ s16 maxHp;
+    /* 0x1E */ u8 unk1E[0xC];
+    /* 0x2A */ s16 hp;
+    /* 0x2C */ u8 unk2C[0x46];
+    /* 0x72 */ u16 state;           /* 2 once the unit is removed */
 };
 
 /* A unit's data block: the part of its battle entry from 0xCC on (entry offsets in brackets). The
@@ -150,7 +157,10 @@ typedef struct BtlEntry {
         /* 0x000 */ u64 flagMask;       /* flags (low word) and the next word, updated as one mask */
     };
     /* 0x008 */ s16 ids[50];            /* the member ids the entry is listed under */
-    /* 0x06C */ u8 unk06C[2];
+    union {
+        /* 0x06C */ u8 unk06C[2];
+        /* 0x06C */ s16 listedSlot;     /* -1 once the entry is removed */
+    };
     /* 0x06E */ s16 selectionIndex;
     /* 0x070 */ u8 unk070[2];
     /* 0x072 */ s16 stat[12];           /* indexed by the script's kind (7, 10 and 11 are used) */
@@ -169,7 +179,10 @@ typedef struct BtlEntry {
     } turn;
     /* 0x09C */ u8 unk09C[0x12];
     /* 0x0AE */ s16 modifiers[9];
-    /* 0x0C0 */ u8 unk0C0[4];
+    union {
+        /* 0x0C0 */ u8 unk0C0[4];
+        /* 0x0C0 */ u32 modifierFlags;  /* cleared with the modifiers */
+    };
     /* 0x0C4 */ s32 forcedSlot;         /* 1 + an affinity slot forced on the entry's attacks, 0 when none */
     /* 0x0C8 */ s32 unk0C8;             /* <= 0 marks a downed live entry (btlUnitIsDeadAndUncopied) */
     /* 0x0CC */ BtlUnitData data;
@@ -192,7 +205,10 @@ typedef char BtlEntryLayoutCheck[
 typedef char BtlEquipLayoutCheck[
     offsetof(BtlEquip, weapon.id) == 4 && offsetof(BtlEquip, skillIds) == 0x34 && sizeof(BtlEquip) == 0x44 &&
     offsetof(BtlUnitDetail, flags) == 0x16 && offsetof(BtlUnitSource, maxHp) == 0x1C &&
-    offsetof(BtlUnitLink, id) == 0x46 && sizeof(BtlUnitLink) == 0x48 ? 1 : -1];
+    offsetof(BtlUnitLink, id) == 0x46 && sizeof(BtlUnitLink) == 0x48 &&
+    offsetof(BtlUnitLink, hp) == 0x2A && offsetof(BtlUnitLink, state) == 0x44 &&
+    offsetof(BtlUnitSource, hp) == 0x2A && offsetof(BtlUnitSource, state) == 0x72 &&
+    offsetof(BtlEntry, listedSlot) == 0x6C && offsetof(BtlEntry, modifierFlags) == 0xC0 ? 1 : -1];
 
 /* A unit's turn-order speed: its agility plus its battle speed bonus (the turn-order sorts compare it). */
 static __inline s16 btlUnitTurnSpeed(const BtlUnitData *data)

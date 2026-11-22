@@ -1,7 +1,7 @@
 /* NON_MATCHING: current-slot address materialization and local allocation differ. */
 #include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 
-extern "C" void asdSoundObjectStop(s32 handle, s32 fadeFrames);
+extern "C" void nw_snd_internal_BasicSound_Stop(s32 handle, s32 fadeFrames); // declcheck: local (the shared declaration does not compile here or changes this unit)
 extern "C" void nw_snd_SoundHeap_LoadState(void *heap, u32 state);
 
 // Select an active four-handle slot, optionally restoring its saved heap state.
@@ -19,7 +19,7 @@ extern "C" s32 FUN_00154890(u32 index)
             s32 i = 0;
             while (i < 4) {
                 if (slot->handles[i] != 0)
-                    asdSoundObjectStop(slot->handles[i], 0);
+                    nw_snd_internal_BasicSound_Stop(slot->handles[i], 0);
                 ++i;
             }
             slot->volume = 0x40;

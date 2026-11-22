@@ -439,7 +439,7 @@ typedef struct LmapSceneA {
     /* 0x1CE */ u8 unk1CE[2];
     /* 0x1D0 */ s32 movementState;     /* the scripted movement's state (4: moving to the destination) */
     /* 0x1D4 */ u32 unk1D4;
-    /* 0x1D8 */ MapVector movement;      /* the path follower FUN_003250ac steps */
+    /* 0x1D8 */ MapVector movement;      /* the path follower vec3DirectionBetween steps */
     union {
         /* 0x1E4 */ u32 resumeState;  /* saved representation */
         /* 0x1E4 */ f32 movementStepSize;

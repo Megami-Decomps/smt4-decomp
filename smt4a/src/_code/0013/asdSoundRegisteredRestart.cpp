@@ -3,14 +3,14 @@
 
 extern "C" {
 u32 nw_snd_SoundStartable_StartSound(void* player, AsdSndHandleNode* handle, s32 soundId, s32 option);
-void asdSoundObjectStop(s32 handle, s32 frames); // declcheck: local (the shared declaration does not compile here or changes this unit)
+void nw_snd_internal_BasicSound_Stop(s32 handle, s32 frames); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void FUN_0015e874(s32 handle, s32 frames, f32 volume); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Stops the node's sound when it has one (as asdSoundRegisteredStop and handlerFinishById do). */
 static __inline void soundStop(AsdSndHandleNode *node, s32 frames)
 {
     if (node->handle != 0) {
-        asdSoundObjectStop(node->handle, frames);
+        nw_snd_internal_BasicSound_Stop(node->handle, frames);
     }
 }
 

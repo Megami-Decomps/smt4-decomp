@@ -10,8 +10,8 @@ void btlUiObjCSetActive(void *block, u8 value);
 
 void FUN_002454c4(void *obj, u32 b, u32 a, int flag);
 
-void FUN_0024ac68(u8 value);
+void frameTexSetZanEnabled(u8 value);
 
-void FUN_0024ac7c(u8 value);
+void frameTexSetHdrEnabled(u8 value);
 
 } /* extern "C" */

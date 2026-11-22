@@ -20,7 +20,7 @@ int mapResolveCollisionSphere(int *, int *, int);
 int FUN_002826dc(int *, int *, int, int);
 int distSpatial(void);
 int lmapRequestTimedEffect(int, int, int);
-int FUN_003250ac(int *);
+int vec3DirectionBetween(int *);
 int mathPositionHeadingDegrees(void);
 int soundActorStartOnFreeChannel(...);
 int moriModelUnitStartMaterialAnimation(...);
@@ -90,7 +90,7 @@ extern signed char DAT_005f1c7e; /* 0x5f1c7e */
 /* Supplied declaration required: mapEplSetSlotPosition. */
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: lmapRequestTimedEffect. */
-/* Supplied declaration required: FUN_003250ac. */
+/* Supplied declaration required: vec3DirectionBetween. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
 /* Supplied declaration required: controllerSetDestination. */
@@ -328,7 +328,7 @@ LAB_002db724:
           g_lmapScene[0x81] =
                (int)((float)g_lmapScene[0x81] + temp_v11 * *(float *)(temp_v0 + 0x1528));
           piVar2[0x80] = (int)((float)piVar2[0x80] + 120.0f);
-          FUN_003250ac(piVar5);
+          vec3DirectionBetween(piVar5);
           mathPositionHeadingDegrees();
           piVar2 = g_lmapScene;
           g_lmapScene[0x86] = (int)temp_v17;

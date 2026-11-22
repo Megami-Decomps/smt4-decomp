@@ -3,7 +3,7 @@
 
 extern "C" {
 
-int FUN_00395830(int);
+int driftEffectSetVelocity(int);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
 int nn_math_ARMv6_VEC3TransformAsm_2AD44C(float *, float *);
@@ -46,7 +46,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00395830. */
+/* Supplied declaration required: driftEffectSetVelocity. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
 
@@ -137,7 +137,7 @@ void FUN_00395b44(int param_1, float factor)
   *(float *)(temp_v1 + 0x28) = temp_v14;
   *(float *)(temp_v1 + 0x2c) = temp_v15;
   *(float *)(temp_v1 + 0x30) = temp_v16;
-  FUN_00395830(param_1);
+  driftEffectSetVelocity(param_1);
   return;
 }
 

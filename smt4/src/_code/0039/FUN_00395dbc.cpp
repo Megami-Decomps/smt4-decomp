@@ -24,16 +24,16 @@ struct VelocityParticle {
     /* 0x18 */ f32 velocityZ;
 };
 
-void FUN_00395830(VelocityParticle *particle);
+void driftEffectSetVelocity(VelocityParticle *particle);
 
-/* Per-frame update: every tenth frame of the owner runs FUN_00395830, then the owner's position advances by the particle's velocity. */
+/* Per-frame update: every tenth frame of the owner runs driftEffectSetVelocity, then the owner's position advances by the particle's velocity. */
 void FUN_00395dbc(VelocityParticle *particle)
 {
     ParticleOwner *owner = particle->owner;
     ParticleTransform *transform = &owner->transform;
 
     if (owner->frame % 10 == 0) {
-        FUN_00395830(particle);
+        driftEffectSetVelocity(particle);
     }
     transform->x += particle->velocityX;
     transform->y += particle->velocityY;

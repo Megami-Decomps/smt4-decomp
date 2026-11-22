@@ -34,7 +34,7 @@ int mapEaseSceneHeading(void);
 int FUN_002e364c(int);
 int lmapCameraSetMode(int);
 int mapSetSceneState(unsigned int);
-int FUN_003250ac(...);
+int vec3DirectionBetween(...);
 int mapIfReleaseRequestObject(void);
 int mathPositionHeadingDegrees(void);
 int mapIfReleaseSlot1(void);
@@ -69,7 +69,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: lmapCameraSetMode. */
 /* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: mathVec3Dot. */
-/* Supplied declaration required: FUN_003250ac. */
+/* Supplied declaration required: vec3DirectionBetween. */
 /* Supplied declaration required: mapIfReleaseRequestObject. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: mapIfReleaseSlot1. */
@@ -179,7 +179,7 @@ void FUN_00327964(void)
               libm_cosf();
               temp_v3 = g_lmapScene + 0x124;
               *(float *)(g_lmapScene + 0x120) = *(float *)(g_lmapScene + 0x120) + temp_v8 * temp_v14;
-              FUN_003250ac(temp_v3);
+              vec3DirectionBetween(temp_v3);
               temp_v3 = g_lmapScene;
               *(unsigned int *)(g_lmapScene + 0x130) = temp_v16;
               *(unsigned char *)(temp_v3 + 0x115) = 1;
@@ -196,7 +196,7 @@ void FUN_00327964(void)
               libm_cosf();
               temp_v3 = g_lmapScene + 0x124;
               *(float *)(g_lmapScene + 0x120) = *(float *)(g_lmapScene + 0x120) + temp_v8 * temp_v14;
-              FUN_003250ac(temp_v3);
+              vec3DirectionBetween(temp_v3);
               temp_v3 = g_lmapScene;
               *(unsigned int *)(g_lmapScene + 0x130) = temp_v16;
               *(unsigned char *)(temp_v3 + 0x115) = 1;
@@ -372,22 +372,22 @@ LAB_00327dc8:
             if (temp_v6 != 2) {
               if (temp_v6 == 3) {
                 temp_v10 = (unsigned long long)*(unsigned int *)(temp_v4 + 0x614dec);
-                FUN_003250ac(temp_v18);
+                vec3DirectionBetween(temp_v18);
               }
             }
             else {
               temp_v10 = (unsigned long long)*(unsigned int *)(temp_v4 + 0x614dd4);
-              FUN_003250ac(temp_v18);
+              vec3DirectionBetween(temp_v18);
             }
           }
           else {
             temp_v10 = (unsigned long long)*(unsigned int *)(temp_v4 + 0x614dbc);
-            FUN_003250ac(temp_v18);
+            vec3DirectionBetween(temp_v18);
           }
         }
         else {
           temp_v10 = (unsigned long long)*(unsigned int *)(temp_v4 + 0x614da4);
-          FUN_003250ac(temp_v18);
+          vec3DirectionBetween(temp_v18);
         }
         temp_v7 = (float)temp_v10;
         mathVec3Dot();

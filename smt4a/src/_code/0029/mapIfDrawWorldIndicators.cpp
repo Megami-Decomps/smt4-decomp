@@ -75,7 +75,7 @@ unsigned int mapIfDrawWorldIndicators(void)
   iVar19 = DAT_0059dbb4;
   iVar17 = DAT_0058103c;
   iStack_4a4 = 0;
-  if ((((DAT_005f1bfc != 0) && (DAT_005f161f == '\0')) && (DAT_005f1621 == '\0')) &&
+  if ((((g_mapDebugSettings != 0) && (DAT_005f161f == '\0')) && (DAT_005f1621 == '\0')) &&
      (*DAT_005806a4 != 3)) {
     iVar18 = 0;
     uVar3 = renderCtxPackPassFlags(5,0);

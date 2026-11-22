@@ -30,7 +30,7 @@ struct BattleVersionResources {
     BattleVersionResourceSlot slots[11];
 };
 
-extern "C" void FUN_00240614(BattleVersionResources* resources);
+extern "C" void nameEntriesRegisterVerNames(BattleVersionResources* resources);
 
 #ifdef __cplusplus
 extern "C" {

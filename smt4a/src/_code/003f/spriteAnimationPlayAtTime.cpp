@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild of the keyframe lookup that plays an animation at a time; retail zero-initialises the two result vectors on the stack up front and keeps the interpolation in s-registers across the compares, and the scan/compare of the frame time (int to float per key) is scheduled differently by armcc. */
+/* NON_MATCHING: 28 lines. Left: retail loads the range's first key into the loop counter's register and copies it for the first-key test (this build the other way round), converts the previous key's time before the span, and multiplies the differences as ratio * difference. */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 
 /* One keyframe (0x18 bytes). */
@@ -33,40 +33,44 @@ void spriteAnimationPlayAtTime(SpriteDrawOwner *owner, s32 index, const SpriteDr
     if (index >= set->origin->animationCount)
         return;
     SpriteDrawVector2 position(0.0f, 0.0f);
-    SpriteDrawVector2 keyScale(0.0f, 0.0f);
+    SpriteDrawVector2 keyScale(100.0f, 100.0f);
     s32 first = set->ranges[index].first;
     s32 last = first + set->ranges[index].count - 1;
-    s32 key = 0;
-    bool found = false;
+    s32 key = -1;
     for (s32 i = first; i <= last; i++) {
-        AnimKey *current = &set->keys[i];
-        if (time > (f32)current->time)
-            continue;
-        if (time == (f32)current->time || i == first) {
-            key = current->id;
-            position.x = current->position[0];
-            position.y = current->position[1];
-            keyScale.x = current->scale[0];
-            keyScale.y = current->scale[1];
-        } else {
-            AnimKey *previous = current - 1;
-            f32 ratio = (time - (f32)previous->time) / (f32)(current->time - previous->time);
-            key = previous->id;
-            position.x = previous->position[0] + ratio * (current->position[0] - previous->position[0]);
-            position.y = previous->position[1] + ratio * (current->position[1] - previous->position[1]);
-            keyScale.x = previous->scale[0] + ratio * (current->scale[0] - previous->scale[0]);
-            keyScale.y = previous->scale[1] + ratio * (current->scale[1] - previous->scale[1]);
+        if (time <= (f32)set->keys[i].time) {
+            if (time == (f32)set->keys[i].time || first == i) {
+                key = set->keys[i].id;
+                position.x = set->keys[i].position[0];
+                position.y = set->keys[i].position[1];
+                keyScale.x = set->keys[i].scale[0];
+                keyScale.y = set->keys[i].scale[1];
+            } else {
+                f32 ratio = (time - (f32)set->keys[i - 1].time) / (f32)(set->keys[i].time - set->keys[i - 1].time);
+                key = set->keys[i - 1].id;
+                /* previous + (current - previous) * ratio, a step at a time */
+                position.x = set->keys[i].position[0] - set->keys[i - 1].position[0];
+                position.y = set->keys[i].position[1] - set->keys[i - 1].position[1];
+                keyScale.x = set->keys[i].scale[0] - set->keys[i - 1].scale[0];
+                keyScale.y = set->keys[i].scale[1] - set->keys[i - 1].scale[1];
+                position.x = ratio * position.x;
+                position.y = ratio * position.y;
+                keyScale.x = ratio * keyScale.x;
+                keyScale.y = ratio * keyScale.y;
+                position.x = set->keys[i - 1].position[0] + position.x;
+                position.y = set->keys[i - 1].position[1] + position.y;
+                keyScale.x = set->keys[i - 1].scale[0] + keyScale.x;
+                keyScale.y = set->keys[i - 1].scale[1] + keyScale.y;
+            }
+            break;
         }
-        found = key >= 0;
-        break;
     }
-    if (!found) {
-        AnimKey *end = &set->keys[last];
-        key = end->id;
-        position.x = end->position[0];
-        position.y = end->position[1];
-        keyScale.x = end->scale[0];
-        keyScale.y = end->scale[1];
+    if (key < 0) {
+        key = set->keys[last].id;
+        position.x = set->keys[last].position[0];
+        position.y = set->keys[last].position[1];
+        keyScale.x = set->keys[last].scale[0];
+        keyScale.y = set->keys[last].scale[1];
     }
     keyScale.x *= 0.01f;
     keyScale.y *= 0.01f;

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int asdSoundObjectStop(int *, unsigned int);
+int nw_snd_internal_BasicSound_Stop(int *, unsigned int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
-/* Supplied declaration required: asdSoundObjectStop. */
+/* Supplied declaration required: nw_snd_internal_BasicSound_Stop. */
 
 
 void FUN_0018fe70(int param_1,unsigned int param_2)
@@ -20,7 +20,7 @@ void FUN_0018fe70(int param_1,unsigned int param_2)
   if (piVar1 != (int *)(param_1 + 4)) {
     do {
       piVar2 = (int *)*piVar1;
-      asdSoundObjectStop(piVar1 + -0x40,param_2);
+      nw_snd_internal_BasicSound_Stop(piVar1 + -0x40,param_2);
       piVar1 = piVar2;
     } while (piVar2 != (int *)(param_1 + 4));
   }

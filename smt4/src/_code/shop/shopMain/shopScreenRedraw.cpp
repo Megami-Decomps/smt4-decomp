@@ -3,14 +3,13 @@
 #include "shop/ShopMenuData.h"
 
 extern "C" {
-extern const ShopIconIndices DAT_0044e020[];
+extern const ShopIconIndices g_shopItemTabNeighbors[];
 void uiRectDrawAtBottomRight(void *header, u32 id, s32 dx, s32 dy, u32 flags);
 void FUN_00231bcc(void *header, u32 id, s32 dx, s32 dy, u32 color, u32 flags);
 void shopDrawListRow(ShopScreen *screen, s32 index, s32 flag, ShopSlot *slot);
 s32 FUN_0029e924(ShopCategoryList *list);
 s32 flaggedEntryGetValueByState(ShopCategoryList *list);
 s32 rangeLimitMin(ShopCategoryList *list);
-s32 flaggedValueHolderGetTotal(ShopCategoryList *list);
 
 /* Redraws the shop screen's header icons and the visible slots of the current category. */
 void shopScreenRedraw(ShopScreen *screen, u32 sprite)
@@ -44,8 +43,8 @@ void shopScreenRedraw(ShopScreen *screen, u32 sprite)
     FUN_00231bcc(&screen->region, screen->tab + 0x61, 0, 0, color, 1);
     FUN_00231bcc(&screen->region, 0x65, 0, 0, color, 1);
     FUN_00231bcc(&screen->region, 0x66, 0, 0, color, 1);
-    s32 firstIndex = DAT_0044e020[screen->tab].first;
-    s32 secondIndex = DAT_0044e020[screen->tab].second;
+    s32 firstIndex = g_shopItemTabNeighbors[screen->tab].first;
+    s32 secondIndex = g_shopItemTabNeighbors[screen->tab].second;
     /* unit-local: a copy of the two tab icon groups for these draws */
     struct TabIconRows {
         ShopTabImageGroup first;
@@ -66,7 +65,7 @@ void shopScreenRedraw(ShopScreen *screen, u32 sprite)
             shopDrawListRow(screen, i + 1, 0, &slots[first + i]);
     }
     if (compact && list->range.count > 0)
-        shopDrawListRow(screen, flaggedEntryGetValueByState(list) + 1, 1, &slots[flaggedValueHolderGetTotal(list)]);
+        shopDrawListRow(screen, flaggedEntryGetValueByState(list) + 1, 1, &slots[flaggedValueHolderGetTotal(&list->holder)]);
     shopPanelSetScrollPosition(screen->view, FUN_0029e924(list), flaggedEntryGetValueByState(list));
     screen->view->refresh(color);
 }

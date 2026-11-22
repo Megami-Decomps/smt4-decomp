@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_0025247c(unsigned char [4]);
+int vec3DirectionBetween(unsigned char [4]);
 int residentApplyFallbackValues(void);
 int __hardfp_atan2f(void);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "libm_sinf" has "C" linkage)
@@ -39,7 +39,7 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_0025247c. */
+/* Supplied declaration required: vec3DirectionBetween. */
 /* Supplied declaration required: residentApplyFallbackValues. */
 /* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: libm_cosf. */
@@ -238,7 +238,7 @@ void FUN_00265f50(int param_1)
   *(unsigned int *)(temp_v0 + 0x50) = temp_v1;
   *(unsigned int *)(temp_v0 + 0x54) = temp_v2;
   *(unsigned int *)(temp_v0 + 0x18) = *(unsigned int *)(param_1 + 0x50);
-  FUN_0025247c(temp_v14);
+  vec3DirectionBetween(temp_v14);
   *(unsigned int *)(g_mapCamera + 700) = temp_v15;
   __hardfp_atan2f();
   residentApplyFallbackValues();

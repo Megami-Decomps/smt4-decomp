@@ -30,6 +30,20 @@ public:
         counter = 0;
     }
 
+    /* Advances the ramp by one frame. */
+    void Update()
+    {
+        if (counter < frames) {
+            counter++;
+        }
+    }
+
+    /* Whether the ramp has reached its target. */
+    bool IsFinished() const
+    {
+        return counter >= frames;
+    }
+
     /* 0x00 */ T origin;
     /* 0x04 */ T target;
     /* 0x08 */ U frames;

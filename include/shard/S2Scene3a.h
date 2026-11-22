@@ -12,6 +12,7 @@
 #include <stddef.h>
 
 struct Scene3a;
+struct AsdMdlObject;
 typedef void (Scene3a::*Scene3aFunc)();
 typedef ShopPanel MenuView;
 
@@ -113,8 +114,11 @@ struct Scene3a {
             /* 0x15D3C */ s32 rowCount;
         } menu;
     };
-    /* 0x15D48 */ void *modelManager;
-    /* 0x15D4C */ u8 unk15d4c[8];
+    /* 0x15D48 */ struct AsdMdlObject *modelManager; /* the previewed equipment's model, NULL: none */
+    /* 0x15D4C */ s16 nextRegion;           /* the touch regions of the page arrows */
+    /* 0x15D4E */ s16 previousRegion;
+    /* 0x15D50 */ s16 touchRegionCount;     /* touch regions the page added (ifTouchRegionRemove takes each back) */
+    /* 0x15D52 */ u8 unk15d52[2];
     /* 0x15D54 */ u32 selectedItem;
     /* 0x15D58 */ u32 menuCursors[3];       /* where each category menu's cursor returns to: [0] the armour page's, [1] the weapons page's, [2] the top menu's row */
     /* 0x15D64 */ u8 menuCursorSet[2];      /* set while a page menu is started ([0] armour, [1] weapons): it opens at its remembered cursor */

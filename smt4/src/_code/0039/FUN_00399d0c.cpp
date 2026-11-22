@@ -3,6 +3,7 @@
 #include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
 #include "game/GameState.h"
+#include "shard/NaviMain.h"
 
 extern "C" {
 
@@ -69,7 +70,6 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: gameGetMapBlock. */
 /* Supplied declaration required: uiDrawTransientSprites. */
 /* Supplied declaration required: FUN_0039eb4c. */
-extern unsigned int *NaviMain_GetCursorPos(int);
 extern int NaviMain_GetPosX(void);
 /* Supplied declaration required: NaviMain_GetPosY. */
 
@@ -136,7 +136,7 @@ void FUN_00399d0c(int param_1)
   pfVar5 = (float *)lmapSceneGetObj(temp_v37);
   temp_v24 = *pfVar5;
   temp_v19 = pfVar5[2];
-  puVar6 = (unsigned int *)NaviMain_GetCursorPos(temp_v37);
+  puVar6 = (unsigned int *)NaviMain_GetCursorPos((const void *)temp_v37);
   temp_v22 = (unsigned long long)*puVar6 << 0x20;
   temp_v23 = (float)puVar6[1];
   pairCopy(temp_v44 + 0x164,&temp_v35);

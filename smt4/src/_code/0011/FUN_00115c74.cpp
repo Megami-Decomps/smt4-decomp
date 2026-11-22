@@ -1,4 +1,8 @@
-/* NON_MATCHING: only the flag-array base (add r2, r1, #132) is formed before the first count test instead of after it, which also moves the count into r3. */
+/* NON_MATCHING: only the flag-array base (add r2, r1, #132) is formed before the first count test instead of after it,
+ * which also moves the count into r3. The slot flags are their own object (g_asdModelSlotFlags, g_gfxSettings + 0x84 in
+ * symbols.txt) that retail addresses from g_gfxSettings' pool word: armcc folds two globals onto one base only when the
+ * translation unit defines both. A test unit defining both (initialised, same section) and reading the flags as their
+ * own array gives retail's lazy `add`; the function belongs in the file that defines them. */
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "gfx/GfxSettings.h"
 

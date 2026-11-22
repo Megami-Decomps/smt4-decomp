@@ -368,7 +368,7 @@ extern unsigned int DAT_005f1bec; /* 0x5f1bec */
 extern unsigned int DAT_005f1bf0; /* 0x5f1bf0 */
 extern unsigned int DAT_005f1bf4; /* 0x5f1bf4 */
 extern unsigned int DAT_005f1bf8; /* 0x5f1bf8 */
-extern unsigned int DAT_005f1bfc; /* 0x5f1bfc */
+extern unsigned int g_mapDebugSettings; /* 0x5f1bfc */
 extern unsigned int DAT_005f1c00; /* 0x5f1c00 */
 extern unsigned int DAT_005f1c04; /* 0x5f1c04 */
 extern unsigned char DAT_005f1c08; /* 0x5f1c08 */
@@ -692,7 +692,7 @@ void FUN_00363c58(int param_1)
   DAT_005f1bf0 = 0;
   DAT_005f1bf4 = 0;
   DAT_005f1bf8 = 0;
-  DAT_005f1bfc = 1;
+  g_mapDebugSettings = 1;
   DAT_005f1c00 = 0;
   DAT_005f1c04 = 0;
   DAT_005f1c08 = 0;

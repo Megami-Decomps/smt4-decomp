@@ -13,7 +13,7 @@ int titleScissorApplyOrClearRequests(...);
 int mathDistanceBetweenPoints(void);
 int renderCtxPopState(...);
 int renderStackPushIndexed(unsigned int, int, unsigned int);
-int FUN_0039af94(int);
+int naviDrawLocationMarkers(int);
 int naviIconsUpdateScreenRects(int);
 int FUN_0039d0d0(int);
 int FUN_0039e56c(int);
@@ -43,7 +43,7 @@ extern int mapClassifyPlaceState(unsigned int);
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
 extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0039af94. */
+/* Supplied declaration required: naviDrawLocationMarkers. */
 /* Supplied declaration required: naviIconsUpdateScreenRects. */
 /* Supplied declaration required: FUN_0039d0d0. */
 /* Supplied declaration required: FUN_0039e56c. */
@@ -158,7 +158,7 @@ void FUN_003996c8(int param_1)
   }
 LAB_003998fc:
   FUN_0039d0d0(param_1);
-  FUN_0039af94(param_1);
+  naviDrawLocationMarkers(param_1);
   temp_v5 = NaviMain_GetPosX(temp_v3);
   temp_v6 = NaviMain_GetCurrentMap(temp_v3);
   if ((temp_v5 == temp_v6) && ((int)*(char *)(param_1 + 0x60) == *(int *)(param_1 + 0x121cc))) {

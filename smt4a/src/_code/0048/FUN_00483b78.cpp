@@ -24,7 +24,7 @@ void gxResetColorQuadToWhite();
 s32 renderCtxPackPassFlags(u32 first, u32 second);
 void efctSetSpeed(f32 speed);
 void texDrawCompositeSprite(s32 layer, u32 archive, u32 image, s32 x, s32 y, s32 priority);
-void FUN_004845ac(KeyboardPanelState *panel, u8 page, f32 progress);
+void nameFormDrawKeys(KeyboardPanelState *panel, u8 page, f32 progress);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 
@@ -44,7 +44,7 @@ void FUN_00483b78(KeyboardPanelState *panel)
     s8 page = panel->page;
     if (panel->alternate)
         page += 4;
-    FUN_004845ac(panel, static_cast<u8>(page), progress);
+    nameFormDrawKeys(panel, static_cast<u8>(page), progress);
     efctSetSpeed(1.0f);
     renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     skinObjectUpdateMatrices(g_renderCtx);

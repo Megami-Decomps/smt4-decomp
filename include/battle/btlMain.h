@@ -504,6 +504,8 @@ typedef struct BtlMainStateA {
         struct {
             u8 prefix[4];
             /* 0x2004 */ s16 selection;
+            u8 unk2006[2];
+            /* 0x2008 */ u64 extraTargets;  /* the second mask the target panel reports (btlUnitTargetPanelStep) */
         } commandEntry;
         struct {
             u8 prefix[0x2C74];
@@ -581,7 +583,13 @@ typedef struct BtlMainStateA {
             /* 0x2000 */ u8 prefix[0x340];
             /* 0x2340 */ u8 enabled[4];
             /* 0x2344 */ s16 actorOffsets[4];
+            /* 0x234C */ u8 unk234C[4];
+            /* 0x2350 */ s32 animationOverride; /* sent once in place of a motion step's animation, -1 = none */
         } reflectedSlots;
+        struct {
+            /* 0x2000 */ u8 unk2000BeforeMotionFile[0x294];
+            /* 0x2294 */ void *file;            /* the motion data file: table 0 BattleMotionSelection, then BattleMotionSequence tables */
+        } motionTable;
         struct {
             /* 0x2000 */ u8 unk2000BeforeResources[0x16C];
             /* 0x216C */ BattleCleanupResource* resources[42];
@@ -623,6 +631,7 @@ typedef struct BtlMainStateA {
         struct {
             u8 prefix[0x2C80];
             s32 kind; /* 0x4C80 */
+            /* 0x4C84 */ u8 cameraHeld; /* a motion sequence's camera switch holds the camera (btlRosterMotionStepSequence) */
         } gameOver;
         struct {
             u8 prefix[0x25BA];
@@ -675,6 +684,8 @@ typedef char BtlMainStateAReflectedSlotOffsetCheck[
     offsetof(BtlMainStateA, environmentModel.ready) == 0x22CD &&
     offsetof(BtlMainStateA, reflectedSlots.enabled) == 0x2340 &&
     offsetof(BtlMainStateA, reflectedSlots.actorOffsets) == 0x2344 &&
+    offsetof(BtlMainStateA, reflectedSlots.animationOverride) == 0x2350 &&
+    offsetof(BtlMainStateA, motionTable.file) == 0x2294 && offsetof(BtlMainStateA, gameOver.cameraHeld) == 0x4C84 &&
     sizeof(BtlMainStateA) == 0x4CF0 ? 1 : -1];
 typedef char BtlMainStateARetainedRosterOffsetCheck[
     offsetof(BtlMainStateA, retainedRoster.entries) == 0x2418 &&
@@ -703,6 +714,7 @@ typedef char BtlMainStateAEncounterTaskOffsetCheck[
     offsetof(BtlMainStateA, encounterTask.job) == 8 && sizeof(BtlMainStateA) == 0x4CF0 ? 1 : -1];
 typedef char BtlMainStateACompletionOffsetCheck[
     offsetof(BtlMainStateA, commandEntry.selection) == 0x2004 &&
+    offsetof(BtlMainStateA, commandEntry.extraTargets) == 0x2008 &&
     offsetof(BtlMainStateA, completion.pending) == 0x4C74 ? 1 : -1];
 typedef char BtlMainStateAPendingCommandOffsetsCheck[
     offsetof(BtlMainStateA, commandFilter.mode) == 0xA8 &&

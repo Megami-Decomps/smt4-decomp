@@ -183,8 +183,8 @@ extern short partyCountActiveSlots(void);
 extern unsigned int words3Clear(void);
 extern int btlScriptUnitHasFlags(int);
 /* Supplied declaration required: btlEntryBuildSummary. */
-extern int FUN_003ec668(int, int, int);
-extern int FUN_003eca48(int, unsigned short);
+extern int btlMotionFindSequence(int, int, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
+extern int btlMotionFindSelection(int, unsigned short); // declcheck: local (the shared declaration does not compile here or changes this unit)
 /* Supplied declaration required: halfRecClear. */
 /* Supplied declaration required: btlSlotManagerResetStates. */
 /* Supplied declaration required: FUN_003efb18. */
@@ -463,8 +463,8 @@ LAB_004ebd00:
     if (((((puVar25 != (unsigned int *)0x0) && (temp_v6 = btlScriptUnitHasFlags(*piStack_30), temp_v6 == 0)) &&
          (temp_v6 = *(int *)(temp_v20 + 0x24), temp_v6 != 0)) &&
         ((*(char *)(temp_v6 + 0x23a) != '\0' &&
-         (temp_v6 = FUN_003eca48(*piStack_30,*(unsigned short *)(temp_v6 + 0x166)), temp_v6 != 0)))) &&
-       ((temp_v6 = FUN_003ec668(*piStack_30,(int)*(char *)(temp_v6 + 2),(int)*(short *)(temp_v27 + 0x44)
+         (temp_v6 = btlMotionFindSelection(*piStack_30,*(unsigned short *)(temp_v6 + 0x166)), temp_v6 != 0)))) &&
+       ((temp_v6 = btlMotionFindSequence(*piStack_30,(int)*(char *)(temp_v6 + 2),(int)*(short *)(temp_v27 + 0x44)
                              ), temp_v6 != 0 && (temp_v5 = DAT_00571140, DAT_00571140 < 1)))) {
       temp_v5 = *(int *)(temp_v6 + 100);
     }

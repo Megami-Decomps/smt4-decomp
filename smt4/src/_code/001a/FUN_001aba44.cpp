@@ -16,7 +16,7 @@ u32 FUN_001aba44(void)
     NpcRoom *room = g_npcRoom;
 
     s32 x = static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.33f));
-    texTableRecordCallWithParams(2, 2, room->unk102 * 1000, x - 56, -8, 1);
+    texTableRecordCallWithParams(2, 2, room->backgroundImage * 1000, x - 56, -8, 1);
     for (s32 row = 0; row < room->displayCount; row++) {
         for (s32 column = 0; column < NPC_ROOM_JOBS; column++) {
             s32 model = room->displayModels[row][column];

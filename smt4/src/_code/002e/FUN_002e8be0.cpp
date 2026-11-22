@@ -13,7 +13,7 @@
 extern "C" {
 
 void mapEaseSceneHeading(void);
-void FUN_001b4478(f32 x, f32 y, f32 z, f32 direction);
+void mapIfSpawnCaveAction(f32 x, f32 y, f32 z, f32 direction); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void mapDestroyInterfaceModel(void);
 void mapIfReleaseSlot1(void);
 void mapIfActivateRecord(s32 mode, s32 record);
@@ -57,7 +57,7 @@ void FUN_002e8be0(void)
         f32 viewZ = g_gameState.overviewPosition.z;
         viewX += libm_sinf(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
         viewZ += libm_cosf(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
-        FUN_001b4478(viewX, viewY, viewZ, g_gameState.heading);
+        mapIfSpawnCaveAction(viewX, viewY, viewZ, g_gameState.heading);
         g_lmapScene->state = g_lmapScene->state + 1;
         g_lmapScene->stateTime = 0;
         break;

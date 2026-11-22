@@ -9,7 +9,7 @@ extern "C" {
 HalfPair48 *saveGetIndexedMapValue(s32 index);
 s32 gameDataBlockTestFlag(u32 mask);
 void messageInitializeSavedBanner(void);
-u32 FUN_0031e384(void *polling);
+u32 cheatSequenceUpdate(void *polling);
 u32 gameDataGetMenuIdleFlags(void);
 
 /* Dispatch the selected CEC action and maintain idle help, saved banner and visibility flags. */
@@ -59,7 +59,7 @@ u32 campCecMenuIdleState(CampCecMenu *menu)
         messageBannerInitSelection(1, 0);
         messageInitializeSavedBanner();
     }
-    if ((FUN_0031e384(menu->polling.work) & 2) != 0) {
+    if ((cheatSequenceUpdate(menu->polling.work) & 2) != 0) {
         if ((gameDataGetMenuIdleFlags() & 2) != 0)
             g_campCec->card.flags |= 2;
         else

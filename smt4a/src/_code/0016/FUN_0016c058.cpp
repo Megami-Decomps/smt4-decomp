@@ -1,4 +1,6 @@
-/* NON_MATCHING: retail spills the shadow-map name pointer and the mode to the stack and lays the matrix-path block after the plain one; built keeps them in registers and orders the blocks the other way (231 rows vs 235); the pass logic is the same. */
+/* NON_MATCHING: 327 lines: the block order now follows retail (matrix path tested first) and the texture test reads
+ * the word the entry points at; retail still spills the shadow-map name pointer and the mode to a 12-byte frame
+ * (the build saves r3 instead) and schedules the command refresh tests differently. */
 #include "common.h"
 #include "nw/math/MTX34.h"
 
@@ -10,7 +12,7 @@ struct ShadowEntry {
     /* 0x00 */ u32 unk00;
     /* 0x04 */ u8 hidden;
     /* 0x05 */ u8 unk05[3];
-    /* 0x08 */ s32 **texture;
+    /* 0x08 */ s32 *texture;        /* nonzero word once the shadow texture exists */
 };
 
 struct ShadowTable {
@@ -145,10 +147,19 @@ void FUN_0016c058(ShadowRenderer *renderer, ShadowDraw *draw)
     }
     ShadowEntry *entry = &shadows->entries[slot];
 
-    if (entry->hidden != 0 || **entry->texture == 0) {
+    if (entry->hidden != 0 || *entry->texture == 0) {
         return;
     }
-    if ((*context->flags & 2) == 0) {
+    if ((*context->flags & 2) != 0) {
+        refreshCommands(renderer, mesh);
+        emitMatrix(commands, registers[2], useWorld != 0 ? draw->worldMatrix : &MTX34::Identity());
+        emitMatrix(commands, registers[10], draw->viewMatrix);
+        if ((*context->flags & 4) != 0) {
+            return;
+        }
+        FUN_0018f488(commands, mode, *(u32 *)(renderer->target + 0xD0));
+        FUN_0019430c(context, commands, draw->sceneArg, registers + 0x20);
+    } else {
         refreshCommands(renderer, mesh);
         emitMatrix(commands, registers[0x22], draw->worldMatrix);
         emitMatrix(commands, registers[10], draw->viewMatrix);
@@ -157,19 +168,6 @@ void FUN_0016c058(ShadowRenderer *renderer, ShadowDraw *draw)
         }
         FUN_0018f488(commands, mode, *(u32 *)(renderer->target + 0xD0));
         FUN_001942a8(context, commands);
-    } else {
-        refreshCommands(renderer, mesh);
-        if (useWorld != 0) {
-            emitMatrix(commands, registers[2], draw->worldMatrix);
-        } else {
-            emitMatrix(commands, registers[2], &MTX34::Identity());
-        }
-        emitMatrix(commands, registers[10], draw->viewMatrix);
-        if ((*context->flags & 4) != 0) {
-            return;
-        }
-        FUN_0018f488(commands, mode, *(u32 *)(renderer->target + 0xD0));
-        FUN_0019430c(context, commands, draw->sceneArg, registers + 0x20);
     }
 }
 

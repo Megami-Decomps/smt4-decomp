@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rewrite from retail disassembly compiles (218 vs 210 rows); retail builds the translate/scale matrices with individual stores and a 16-word copy of the camera matrix, and keeps the scale-derived offsets in float registers */
+/* NON_MATCHING: 186 lines (160 with branch targets blanked). The translate/scale builds are nn::math's inlines now (nw/math/MTX44Transform.h); retail still reads the caption's opacity through the sprite getter (add r0, r4, #60; vldr s0, [r0, #32]) and keeps 0.0f in s20 with a 16-byte larger frame, where the build reads the field directly and saves one VFP pair fewer. */
 #include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "shard/TextureDrawCall.h"
@@ -6,11 +6,11 @@
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/RenderCtxA.h"
+#include "nw/math/MTX44Transform.h"
 
-// Row-major 4x4 matrix.
-struct Mtx44 {
-    f32 m[16];
-};
+using nw::math::MTX44;
+using nw::math::VEC3Value;
+
 
 // Sprite placement record: x/y at +8/+10; the second record also carries a pointer to
 // a widths table at +12.
@@ -39,11 +39,8 @@ extern "C" {
 s32 fontMeasureLineAdvance(const char* text, s32 font);
 void skinObjectUpdateMatrices(RenderCtxA *ctx);
 void numberFontDrawFormatted(s32 a, s32 x, s32 y, s32 b, s32 c, s32 d, const char* format, s32 value);
-const Mtx44* _ZN2nw4math5MTX448IdentityEv(void);
-void mtx44Copy(Mtx44* dst, const Mtx44* src);
-void nn_math_ARMv6_MTX44MultAsm(Mtx44* out, const Mtx44* a, const Mtx44* b);
-void FUN_0019a0dc(Mtx44* out, RenderCtxA* ctx);
-void camSetMatrixA(RenderCtxA *ctx, const Mtx44* matrix);
+MTX44 FUN_0019a0dc(RenderCtxA *scene);
+void camSetMatrixA(RenderCtxA *ctx, const MTX44 *matrix);
 
 // Draws an item badge: the caption centred in `frame`, the category icon and the count
 // (two digits once it reaches ten), the count part scaled around its anchor while it pops in.
@@ -79,40 +76,19 @@ void FUN_00165778(ItemBadge* badge, TextureTableEntryIV* frame)
         offsetY = (12.0f - scale * 12.0f) * 0.5f;
     }
 
-    Mtx44 saved;
-    Mtx44 composed;
-    Mtx44 factor;
-    mtx44Copy(&saved, _ZN2nw4math5MTX448IdentityEv());
-    mtx44Copy(&composed, _ZN2nw4math5MTX448IdentityEv());
-    mtx44Copy(&factor, _ZN2nw4math5MTX448IdentityEv());
-    factor.m[1] = 0.0f;
-    factor.m[3] = (f32)(rect->x + countRect->x);
-    factor.m[0] = 1.0f;
-    factor.m[7] = (f32)(rect->y + countRect->y);
-    factor.m[2] = 0.0f;
-    factor.m[3] = factor.m[3] + offsetX;
-    factor.m[7] = factor.m[7] + offsetY;
-    factor.m[4] = 0.0f;
-    factor.m[5] = 1.0f;
-    factor.m[6] = 0.0f;
-    factor.m[8] = 0.0f;
-    factor.m[9] = 0.0f;
-    factor.m[10] = 1.0f;
-    factor.m[14] = 0.0f;
-    factor.m[15] = 1.0f;
-    factor.m[12] = 0.0f;
-    factor.m[13] = 0.0f;
-    factor.m[11] = 0.0f;
-    nn_math_ARMv6_MTX44MultAsm(&composed, &composed, &factor);
-    for (s32 i = 0; i < 16; i++) factor.m[i] = 0.0f;
-    factor.m[15] = 1.0f;
-    factor.m[0] = scale;
-    factor.m[5] = scale;
-    factor.m[10] = 1.0f;
-    nn_math_ARMv6_MTX44MultAsm(&composed, &composed, &factor);
-    Mtx44 current;
-    FUN_0019a0dc(&current, g_renderCtx);
-    saved = current;
+    MTX44 saved;
+    MTX44 composed;
+    MTX44 factor;
+    MTX44Identity(&saved);
+    MTX44Identity(&composed);
+    MTX44Identity(&factor);
+    VEC3Value position((f32)(rect->x + countRect->x) + offsetX, (f32)(rect->y + countRect->y) + offsetY, 0.0f);
+    MTX44Translate(&factor, &position);
+    MTX44Mult(&composed, &composed, &factor);
+    VEC3Value scales(scale, scale, 1.0f);
+    MTX44Scale(&factor, &scales);
+    MTX44Mult(&composed, &composed, &factor);
+    saved = FUN_0019a0dc(g_renderCtx);
     camSetMatrixA(g_renderCtx, &composed);
     numberFontDrawFormatted(6, 0, 0, 1, digits, 121, "%d", badge->count);
     camSetMatrixA(g_renderCtx, &saved);

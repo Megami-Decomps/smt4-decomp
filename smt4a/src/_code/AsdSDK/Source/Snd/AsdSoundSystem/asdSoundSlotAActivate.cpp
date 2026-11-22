@@ -11,7 +11,7 @@ void *asdMemoryAlloc(s32 heap, u32 alignment, u32 flags, s32 size, u32 fromFront
 u32 nw_snd_SoundHeap_Create(void *heap, void *buffer, u32 size);
 u32 nw_snd_SoundHeap_SaveState(void *heap);
 void nw_snd_SoundHeap_LoadState(void *heap, u32 state);
-void asdSoundObjectStop(AsdSndObject *sound, s32 frames);
+void nw_snd_internal_BasicSound_Stop(AsdSndObject *sound, s32 frames); // declcheck: local (the shared declaration does not compile here or changes this unit)
 }
 
 /* asdSoundDuckSetup's body: AsdSoundSystem.cpp's own callers inline it. */
@@ -64,7 +64,7 @@ static inline void selectActiveSoundSlotA(u32 index, u32 reset)
     if (reset != 0) {
         for (s32 i = 0; i < 4; ++i) {
             if (slot->handles[i] != 0) {
-                asdSoundObjectStop(reinterpret_cast<AsdSndObject *>(slot->handles[i]), 0);
+                nw_snd_internal_BasicSound_Stop(reinterpret_cast<AsdSndObject *>(slot->handles[i]), 0);
             }
         }
         slot->volume = ASD_SND_VOLUME_DEFAULT;

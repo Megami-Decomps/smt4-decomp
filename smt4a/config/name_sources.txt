@@ -8788,3 +8788,30 @@
 002a6480 savedRecordSetDemonId inferred stores the demon id in the saved StreetPass record (w74-f2)
 002bf534 campCecCreate inferred creates the camp's StreetPass overlay (w74-f2; IV's campCecCreate plays the same role)
 002a28c0 campCecLoaderThread inferred the StreetPass receive screen's loader thread (w74-f2; IV's counterpart has this name)
+003250ac vec3DirectionBetween inferred twin of smt4 vec3DirectionBetween
+00246014 mapIfSpawnDownAction inferred creates the map down-action marker (map/all/action_down.bam), the sibling of mapIfSpawnCaveAction
+00498994 shopDrawSelectedItem inferred twin of smt4 shopDrawSelectedItem (shows the item under the shop category's cursor) (w75-o1)
+0033e348 lmapSceneStepEquipmentTransition inferred steps the map scene's object transition and shows the chosen object (w75-o1)
+0031bca4 jobStartAlphaFade inferred twin of smt4 jobStartAlphaFade
+001b5314 modelMaterialSetFlatColor inferred twin of smt4 modelMaterialSetFlatColor
+0045edc8 reverbProcessChannels inferred twin of smt4 reverbProcessChannels
+004f64f4 btlEffectLoadVersionedSet inferred twin of smt4 btlEffectLoadVersionedSet
+002946a0 eventSoundPlayByKind inferred twin of smt4 eventSoundPlayByKind (plays an event kind's sound at a position) (w75-o4)
+00400284 itemCheckUsefulOnUnit inferred tests whether an item's hp, mp and status effects would all apply to a unit (w75-o4)
+004eb42c btlTargetCursorMove inferred moves the battle target cursor to the next or previous candidate (w75-o4)
+0040d97c btlMarkerStepShow inferred steps a battle marker's show animation (w75-o4)
+005f1bfc g_mapDebugSettings inferred the map debug settings block (w75-o4)
+001743b8 nw_snd_internal_BasicSound_Update inferred NintendoWare nw::snd::internal::BasicSound::Update (matched on nw/snd/BasicSound.h) (w75-f1)
+001742e4 nw_snd_internal_BasicSound_Stop inferred NintendoWare nw::snd::internal::BasicSound::Stop (IDENTICAL as BasicSoundA::Stop) (w75-f1)
+0043b9f0 nn_math_ARMv6_MTX44TranslateC_FAST inferred nn::math ARMv6 MTX44TranslateC_FAST out of line (IDENTICAL through nw/math/MTX44Transform.h) (w75-f1)
+0015519c comWinDraw inferred twin of smt4 comWinDraw
+004845ac nameFormDrawKeys inferred draws the name form's keys and character-kind list (w75-f1)
+00532b5c g_nameFormKeyCodes inferred the character code of each name-form key, s16[6][15] (w75-f1)
+00214324 npcRoomUpdate inferred twin of smt4 npcRoomUpdate
+00138e14 frameTexCreate inferred twin of smt4 frameTexCreate
+00348c28 frameTexSetHdrEnabled inferred twin of smt4 frameTexSetHdrEnabled
+00348c3c frameTexSetZanEnabled inferred twin of smt4 frameTexSetZanEnabled
+004cae58 btlRosterMotionStepSequence inferred steps the motion sequence a roster record asked for (w75-f2)
+003ec668 btlMotionFindSequence inferred finds a motion sequence row (w75-f2)
+003eca48 btlMotionFindSelection inferred finds a unit's motion selection row (w75-f2)
+004de37c btlUnitTargetPanelStep inferred steps the unit target panel (w75-f2)

@@ -7,7 +7,6 @@ s32 useCounterIsFinished(void);
 void useCounterRelease(void);
 s32 useCounterGetCurrentValue(void);
 s32 useCounterGetValue(void);
-s32 flaggedValueHolderGetTotal(ShopCategoryList *list);
 void arraySortQsort(ShopSlot *slots, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 FUN_0039fcd8(const void *, const void *);
 s32 halfDifference(const void *, const void *);
@@ -54,7 +53,7 @@ void FUN_003a3f28(ShopScreen *screen)
         return;
     }
     ShopSlotTable *table = &screen->lists[screen->slot];
-    flaggedValueHolderGetTotal(&screen->slotInfo[screen->slot]);
+    flaggedValueHolderGetTotal(&screen->slotInfo[screen->slot].holder);
     switch (useCounterGetCurrentValue()) {
     case 3:
         if (useCounterGetValue() == 0)

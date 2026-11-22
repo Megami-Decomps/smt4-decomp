@@ -14,7 +14,7 @@ int sysPlaySe(int);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int mapIfApplyEntryRequest(int, unsigned int);
-int FUN_00246014(void);
+int mapIfSpawnDownAction(void);
 int mapIfOverlayRelease(void);
 int mapEaseSceneHeading(void);
 int FUN_002e364c(int);
@@ -52,7 +52,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: mapIfApplyEntryRequest. */
 /* Supplied declaration required: FUN_002342b8. */
-/* Supplied declaration required: FUN_00246014. */
+/* Supplied declaration required: mapIfSpawnDownAction. */
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapIfOverlayRelease. */
 /* Supplied declaration required: mapEaseSceneHeading. */
@@ -238,7 +238,7 @@ void FUN_00366e24(void)
         mapIfApplyEntryRequest(1,DAT_005f16ac);
         libm_sinf();
         libm_cosf();
-        FUN_00246014();
+        mapIfSpawnDownAction();
         temp_v2 = g_lmapScene;
         *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;
         *(unsigned int *)(temp_v2 + 8) = 0;

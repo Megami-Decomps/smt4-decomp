@@ -90,7 +90,7 @@ int btlMainFindEntryByListedId(...);
 int btlResetSlot(...);
 int FUN_003f2280(...);
 int FUN_0040cd6c(int *, short *);
-int FUN_0040d97c(...);
+int btlMarkerStepShow(...);
 int FUN_0040dcdc(int *, short *);
 int resourcePairApply(unsigned int, unsigned int);
 int FUN_004a96fc(int, int, unsigned int, unsigned int, int);
@@ -212,7 +212,7 @@ extern int controllerGetRecordValue(void);
 /* Supplied declaration required: FUN_0040ca18. */
 /* Supplied declaration required: FUN_0040cd6c. */
 /* Supplied declaration required: FUN_0040d274. */
-/* Supplied declaration required: FUN_0040d97c. */
+/* Supplied declaration required: btlMarkerStepShow. */
 /* Supplied declaration required: FUN_0040dcdc. */
 /* Supplied declaration required: FUN_00410410. */
 /* Supplied declaration required: FUN_004112b0. */
@@ -467,7 +467,7 @@ LAB_0040deb4:
     }
     break;
   case '\b':
-    FUN_0040d97c(param_1,psVar2);
+    btlMarkerStepShow(param_1,psVar2);
     break;
   case '\t':
     puVar6 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());

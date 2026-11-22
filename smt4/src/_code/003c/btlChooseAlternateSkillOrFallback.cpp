@@ -43,11 +43,6 @@ void btlUnitSetParam(AlternateActionContext *, s32, s32);
 void FUN_00229b10(AlternateActionContext *, AlternateActionChoice *);
 void FUN_00227b14(BtlUi *ui, u16, s32, s32);
 
-static __inline BtlActionSlot *btlActionGetSlot(s32 index)
-{
-    return &g_btlAction.slots[index];
-}
-
 u32 btlChooseAlternateSkillOrFallback(AlternateActionContext *context, AlternateActionChoice *choice)
 {
     s32 roll = randRange(1);

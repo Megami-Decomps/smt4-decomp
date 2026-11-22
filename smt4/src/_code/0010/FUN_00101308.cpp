@@ -54,7 +54,7 @@ int FUN_00102e34(...);
 int soundEffectInitializeDelay(...);
 int FUN_00103f74(...);
 int modelStartProcessGroup(...);
-int FUN_001043c8(...);
+int frameTexCreate(...);
 int FUN_00104e28(...);
 int FUN_00104e44(...);
 int titleSequenceInit(...);
@@ -311,7 +311,7 @@ extern int appletGetBusyFlag(void);
 extern unsigned int asdModelGetStatic50(void);
 /* Supplied declaration required: gfxInitDefaultDrawColor. */
 /* Supplied declaration required: asdPrimInit. */
-/* Supplied declaration required: FUN_001043c8. */
+/* Supplied declaration required: frameTexCreate. */
 /* Supplied declaration required: FUN_001049ac. */
 extern int FUN_00104e0c(void);
 /* Supplied declaration required: FUN_00104e28. */
@@ -692,7 +692,7 @@ void FUN_00101308(void)
   asdProcessCreateSimple(&LAB_00101d6c,0x160,0);
   FUN_00105cac(3);
   modelStartProcessGroup(0x67,0x68,0xe3,0);
-  FUN_001043c8(1);
+  frameTexCreate(1);
   FUN_00102e34(0);
   temp_v22 = 0.25f;
   renderCtxSetupScreenCamera(g_titleScene);

@@ -112,7 +112,7 @@ static __inline void modelSlotsResetPlayers(BtlEffectWork *work)
         BtlEffectModelSlot *slot = &work->models[i];
 
         if ((slot->flags & BTL_EFFECT_MODEL_USED) != 0 && slot->model != NULL) {
-            if (slot->model->node->unk0c < 0) {
+            if (slot->model->node->sceneGroup < 0) {
                 lightOwnerRegister(slot->model, 1);
             }
             modelPartSetRotationDegrees(slot->model->node, 0, nodeVec3(0.0f, 0.0f, 0.0f));

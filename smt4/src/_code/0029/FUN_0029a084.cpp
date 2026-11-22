@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_0029a084(int which, u32 value)
+void FUN_0029a084(int which, u16 value)
 {
     GameData *data = g_gameGlobals.data;
 

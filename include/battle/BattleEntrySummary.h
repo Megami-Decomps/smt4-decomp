@@ -39,4 +39,11 @@ typedef char BattleEntrySummaryRatioOffsets[
     offsetof(BattleEntrySummary, percent) == 0x1D &&
     offsetof(BattleEntrySummary, percentage) == 0x1E &&
     offsetof(BattleEntrySummary, maximumHits) == 0x20 ? 1 : -1];
+
+/* Apocalypse's summary (0x34 bytes): the same fields, then 0x12 bytes nothing here names yet. */
+struct BattleEntrySummaryA {
+    /* 0x00 */ BattleEntrySummary base;
+    /* 0x22 */ u8 unk22[0x12];
+};
+typedef char BattleEntrySummaryASizeCheck[sizeof(BattleEntrySummaryA) == 0x34 ? 1 : -1];
 #endif

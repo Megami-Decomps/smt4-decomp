@@ -99,7 +99,7 @@ typedef struct GameSaveSelectionState {
     /* 0x04 */ u32 money;          /* capped at 9999999 */
     /* 0x08 */ s16 selectedUnitId; /* id of the selected party unit, 0 = none */
     /* 0x0A */ u8 mode;
-    /* 0x0B */ u8 modeFlags;       /* bit 1: the hidden mode toggled by FUN_0031e384 */
+    /* 0x0B */ u8 modeFlags;       /* bit 1: the hidden mode toggled by cheatSequenceUpdate */
 } GameSaveSelectionState;
 
 /* IV: the unit selection block (save block + 0x24B88). */

@@ -1,4 +1,3 @@
-/* NON_MATCHING: Retail forms the list address in r0 and copies it to r6; armcc forms it in r6 and copies it to r0. */
 #include "ui/ButtonHelp.h"
 #include "common.h"
 #include "quest_center/QuestRecordA.h"
@@ -111,11 +110,9 @@ void FUN_0023ff10(void)
             sysPlaySe(0x76);
         }
     }
-    void *list = ui->lower.list;
-
-    s32 pageOffset = resourceRunOperationIfUnblocked(list);
-    s32 row = listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(list));
-    id = ui->lower.ids[pageOffset + row];
+    /* the selected entry: the page's first row plus the cursor row */
+    id = ui->lower.ids[resourceRunOperationIfUnblocked(ui->lower.list) +
+                       listCursorGetRowIfUnblocked((const Object *)ui->lower.list)];
     record = questDataGetRecord(id);
     if (flags->locked != 0) {
         buttonHelpSelectSlot(5, 1, 0x32, 1);

@@ -69,7 +69,7 @@ void FUN_00343f44(u32, BattleQueuedActionStep *work)
             if (work->mode == 1) {
                 if ((state->battleFlags & 4) != 0) {
                     if ((reinterpret_cast<BattleVersionReadinessView *>(g_btlAux)->flags & 0x400) != 0) {
-                        FUN_00240614(g_btlAux);
+                        nameEntriesRegisterVerNames(g_btlAux);
                     }
                     work->phase = 1;
                 } else {

@@ -76,7 +76,7 @@ int linkHolderApplyFirst(...);
 int mapIfSetMode1(...);
 int FUN_002342b8(...);
 int mapIfSpawnCaveAction(...);
-int FUN_00246014(...);
+int mapIfSpawnDownAction(...);
 int mapIfReleasePanel(...);
 int mapIfOverlayRelease(...);
 int mapIfReleaseSlot2(...);
@@ -94,7 +94,7 @@ int mapIfApplyEntryRequest(...);
 int mapIfSpawnManholeAction(...);
 int lmapRequestTimedEffect(...);
 int lmapCameraSetMode(...);
-int FUN_003250ac(...);
+int vec3DirectionBetween(...);
 int FUN_0033abd4(...);
 int mathPositionHeadingDegrees(...);
 int slotTargetApplyActiveValue(...);
@@ -316,7 +316,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: mapFastModelCreate. */
 /* Supplied declaration required: FUN_002342b8. */
 /* Supplied declaration required: mapIfSpawnCaveAction. */
-/* Supplied declaration required: FUN_00246014. */
+/* Supplied declaration required: mapIfSpawnDownAction. */
 /* Supplied declaration required: popupStateClose. */
 /* Supplied declaration required: FUN_002469d0. */
 /* Supplied declaration required: mapResolveCollisionSphere. */
@@ -370,7 +370,7 @@ extern int mapJobIsDone(void);
 /* Supplied declaration required: mathVec3Dot. */
 /* Supplied declaration required: mapSpawnRandomEventKindEffect. */
 /* Supplied declaration required: FUN_00324e38. */
-/* Supplied declaration required: FUN_003250ac. */
+/* Supplied declaration required: vec3DirectionBetween. */
 /* Supplied declaration required: FUN_00325998. */
 /* Supplied declaration required: mapObjFindNearestPointByCategory. */
 /* Supplied declaration required: mapTrapEnable. */
@@ -2226,7 +2226,7 @@ LAB_003270bc:
                 libm_cosf();
                 piVar18 = g_lmapScene + 0x49;
                 g_lmapScene[0x48] = (int)((float)g_lmapScene[0x48] + temp_v35 * temp_v27);
-                FUN_003250ac(piVar18);
+                vec3DirectionBetween(piVar18);
                 piVar18 = g_lmapScene;
                 g_lmapScene[0x4c] = temp_v32;
                 *(unsigned char *)((int)piVar18 + 0x115) = 1;
@@ -2243,7 +2243,7 @@ LAB_003270bc:
                 libm_cosf();
                 piVar18 = g_lmapScene + 0x49;
                 g_lmapScene[0x48] = (int)((float)g_lmapScene[0x48] + temp_v35 * temp_v27);
-                FUN_003250ac(piVar18);
+                vec3DirectionBetween(piVar18);
                 piVar18 = g_lmapScene;
                 g_lmapScene[0x4c] = temp_v32;
                 *(unsigned char *)((int)piVar18 + 0x115) = 1;
@@ -2754,7 +2754,7 @@ LAB_003270bc:
         mapIfApplyEntryRequest(1,DAT_005f16ac);
         libm_sinf();
         libm_cosf();
-        FUN_00246014();
+        mapIfSpawnDownAction();
         piVar18 = g_lmapScene;
         temp_v32 = piVar18[1];
         piVar18[1] = temp_v32 + 1;
@@ -3197,7 +3197,7 @@ LAB_00366704:
           mapIfApplyEntryRequest(1,DAT_005f16ac);
           libm_sinf();
           libm_cosf();
-          FUN_00246014();
+          mapIfSpawnDownAction();
           piVar18 = g_lmapScene;
           g_lmapScene[1] = g_lmapScene[1] + 1;
           piVar18[2] = 0;
@@ -3520,7 +3520,7 @@ LAB_00366704:
               mapIfApplyEntryRequest(1,DAT_005f16ac);
               libm_sinf();
               libm_cosf();
-              FUN_00246014();
+              mapIfSpawnDownAction();
               temp_v32 = g_lmapScene[1];
               piVar18 = g_lmapScene;
               piVar18[1] = temp_v32 + 1;
@@ -8096,22 +8096,22 @@ code_r0x00327ee8:
               if (temp_v12 != 2) {
                 if (temp_v12 == 3) {
                   temp_v34 = (unsigned long long)*(unsigned int *)(temp_v6 + 0x614dec);
-                  FUN_003250ac((int)&uStack_4c + 4);
+                  vec3DirectionBetween((int)&uStack_4c + 4);
                 }
               }
               else {
                 temp_v34 = (unsigned long long)*(unsigned int *)(temp_v6 + 0x614dd4);
-                FUN_003250ac((int)&uStack_4c + 4);
+                vec3DirectionBetween((int)&uStack_4c + 4);
               }
             }
             else {
               temp_v34 = (unsigned long long)*(unsigned int *)(temp_v6 + 0x614dbc);
-              FUN_003250ac((int)&uStack_4c + 4);
+              vec3DirectionBetween((int)&uStack_4c + 4);
             }
           }
           else {
             temp_v34 = (unsigned long long)*(unsigned int *)(temp_v6 + 0x614da4);
-            FUN_003250ac((int)&uStack_4c + 4);
+            vec3DirectionBetween((int)&uStack_4c + 4);
           }
           temp_v18 = (float)temp_v34;
           mathVec3Dot();

@@ -1,6 +1,6 @@
 /* NON_MATCHING: 201 lines. tabsActive is s8 (retail's split base screen+0x200). Retail tests the tab-typed path
  * through a flag it sets to 1 and ORs with the character (mov r0, #1; orrs) instead of branching straight on, keeps
- * the blank-cell code in r9 and pushes sl instead of r3; the glyph table DAT_00532b5c is still an extern array. */
+ * the blank-cell code in r9 and pushes sl instead of r3; the glyph table g_nameFormKeyCodes is still an extern array. */
 #include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
@@ -43,7 +43,7 @@ struct NameEntryScreen {
 
 extern "C" {
 
-extern const s16 DAT_00532b5c[];
+extern const s16 g_nameFormKeyCodes[];
 
 void scrRunOpcodesStub(u32 process);
 s32 largeGridHandleTouchSelection(NameEntryScreen* screen);
@@ -88,7 +88,7 @@ void FUN_00483d34(NameEntryScreen* screen)
         if (screen->tabsActive != 0 && flaggedEntryGetValueB(screen->pageCursor) == 0) {
             typeCharacter(screen, -0x7ec0);
         } else if (character == 0) {
-            s16 symbol = DAT_00532b5c[screen->row * 15 + screen->column];
+            s16 symbol = g_nameFormKeyCodes[screen->row * 15 + screen->column];
             if (symbol == -0x7ec0) {
                 screen->finished = 1;
                 sendEvent100020F();

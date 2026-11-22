@@ -12,7 +12,7 @@ int FUN_004ab8e4(unsigned int);
 int btlSlotSetStoreValue(int, int, int);
 int btlAdjustPropertyClamped(int, int, int, int);
 int FUN_004c6b8c(unsigned int, int);
-int FUN_004f64f4(int);
+int btlEffectLoadVersionedSet(int);
 int FUN_004f95cc(void);
 int state339CSetMode10(int, unsigned int);
 
@@ -55,7 +55,7 @@ extern int FUN_004ab8bc(unsigned int);
 /* Supplied declaration required: btlSlotSetStoreValue. */
 /* Supplied declaration required: btlAdjustPropertyClamped. */
 /* Supplied declaration required: FUN_004c6b8c. */
-/* Supplied declaration required: FUN_004f64f4. */
+/* Supplied declaration required: btlEffectLoadVersionedSet. */
 extern int FUN_004f8264(void);
 extern int FUN_004f90e0(int, unsigned int);
 /* Supplied declaration required: FUN_004f95cc. */
@@ -91,7 +91,7 @@ unsigned int FUN_004ddd10(int *param_1,unsigned int *param_2)
     temp_v2 = g_btlAux;
     FUN_004f95cc();
     if (temp_v2 != 0) {
-      FUN_004f64f4(g_btlAux);
+      btlEffectLoadVersionedSet(g_btlAux);
       temp_v4 = 2;
       param_2[2] = temp_v4;
     }

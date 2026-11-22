@@ -1,8 +1,8 @@
 /* NON_MATCHING: the colors are rebuilt from the channels as retail does, but armcc allocates eight saved registers and merges the 0x94..0x9C stores instead of retail's separate str. */
+#include "code/Code0024.h"
 #include "gfx/FrameTransition.h"
 
 extern "C" {
-void FUN_00348c28(u32 enabled);
 void frameTexStartTransition(u32 first, u32 second, u32 third);
 
 /* Caches transition colors and channels, then starts the frame-texture transition. */
@@ -20,7 +20,7 @@ void FUN_0035c708(FrameTransitionColors *state, u32 first, u32 second, u32 third
     state->thirdColor = (red << 24) | (green << 16) | (blue << 8) | state->thirdAlpha;
     state->secondColor = (second & 0xffffff00) | state->secondAlpha;
     state->firstColor = (red << 24) | (green << 16) | (blue << 8) | state->firstAlpha;
-    FUN_00348c28(1);
+    frameTexSetHdrEnabled(1);
     frameTexStartTransition(state->firstColor, state->secondColor, state->thirdColor);
 }
 }

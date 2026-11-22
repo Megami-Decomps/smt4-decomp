@@ -11,7 +11,6 @@ struct CountAt5A;
 extern "C" {
 
 void buttonHelpSetText(const s8 *text, u32 color);
-void messageChoiceShowCurrent(Obj536044 *shop);
 s32 inputConfirmPressed(void);
 void sendEvent100020E(void);
 void sendEvent100020F(void);
@@ -39,7 +38,7 @@ void Obj536044::itemMenuHandleSelectionInput()
     scrRunOpcodesStub(controller);
     panelSetTarget(0, 0);
     u32 confirmed = FUN_004954e8((SubmenuWork *)this);
-    messageChoiceShowCurrent(this);
+    shopDrawSelectedItem(this);
     if (slotInfo[slot].range.count > 0 && inputConfirmPressed() != 0) {
         confirmed = 1;
     }

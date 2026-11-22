@@ -22,9 +22,9 @@ extern GameStateView g_gameState;
 
 int mathVec3Dot(void);
 
-int FUN_001fa760(void);
+int mapIfSpawnManholeAction(void);
 int mapIfActivateRecord(int, unsigned int);
-int FUN_0025247c(...);
+int vec3DirectionBetween(...);
 int mapInterfaceSetStateTwo(void);
 int mapIfSetMode1(void);
 int mapProjectPositionToGround(int, int);
@@ -56,9 +56,9 @@ extern int g_lmapScene; /* 0x447e88 */
 
 extern int DAT_004c2420; /* 0x4c2420 */
 
-/* Supplied declaration required: FUN_001fa760. */
+/* Supplied declaration required: mapIfSpawnManholeAction. */
 /* Supplied declaration required: mapIfActivateRecord. */
-/* Supplied declaration required: FUN_0025247c. */
+/* Supplied declaration required: vec3DirectionBetween. */
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapInterfaceSetStateTwo. */
 extern int inputIsQuestMenuPressed(void);
@@ -165,7 +165,7 @@ void FUN_0027fde4(void)
               libm_cosf();
               temp_v2 = g_lmapScene + 0x124;
               *(float *)(g_lmapScene + 0x120) = *(float *)(g_lmapScene + 0x120) + temp_v7 * temp_v15;
-              FUN_0025247c(temp_v2);
+              vec3DirectionBetween(temp_v2);
               temp_v2 = g_lmapScene;
               *(unsigned int *)(g_lmapScene + 0x130) = temp_v16;
               *(unsigned char *)(temp_v2 + 0x115) = 1;
@@ -182,7 +182,7 @@ void FUN_0027fde4(void)
               libm_cosf();
               temp_v2 = g_lmapScene + 0x124;
               *(float *)(g_lmapScene + 0x120) = *(float *)(g_lmapScene + 0x120) + temp_v7 * temp_v15;
-              FUN_0025247c(temp_v2);
+              vec3DirectionBetween(temp_v2);
               temp_v2 = g_lmapScene;
               *(unsigned int *)(g_lmapScene + 0x130) = temp_v16;
               *(unsigned char *)(temp_v2 + 0x115) = 1;
@@ -194,7 +194,7 @@ void FUN_0027fde4(void)
             *(unsigned int *)(g_mapCamera + 0xac) = 0xffffffff;
             buttonHelpSetPreset(0xdb);
             mapIfActivateRecord(1,g_gameState.f0049f99c);
-            FUN_001fa760();
+            mapIfSpawnManholeAction();
             temp_v2 = g_lmapScene;
             temp_v3 = *(int *)(temp_v2 + 4);
             *(int *)(temp_v2 + 4) = temp_v3 + 1;
@@ -347,25 +347,25 @@ LAB_00280248:
               if (temp_v5 == 3) {
                 temp_v9 = (unsigned long long)*(unsigned int *)(temp_v3 + 0x4c1510);
                 temp_v14 = (unsigned long long)temp_v13 << 0x20;
-                FUN_0025247c(temp_v18);
+                vec3DirectionBetween(temp_v18);
               }
             }
             else {
               temp_v9 = (unsigned long long)*(unsigned int *)(temp_v3 + 0x4c14f8);
               temp_v14 = (unsigned long long)temp_v13 << 0x20;
-              FUN_0025247c(temp_v18);
+              vec3DirectionBetween(temp_v18);
             }
           }
           else {
             temp_v9 = (unsigned long long)*(unsigned int *)(temp_v3 + 0x4c14e0);
             temp_v14 = (unsigned long long)temp_v13 << 0x20;
-            FUN_0025247c(temp_v18);
+            vec3DirectionBetween(temp_v18);
           }
         }
         else {
           temp_v9 = (unsigned long long)*(unsigned int *)(temp_v3 + 0x4c14c8);
           temp_v14 = (unsigned long long)temp_v13 << 0x20;
-          FUN_0025247c(temp_v18);
+          vec3DirectionBetween(temp_v18);
         }
         temp_v6 = (float)temp_v9;
         mathVec3Dot();

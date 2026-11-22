@@ -38,7 +38,7 @@ void campButtonHelpAcquire(void);
 void asdTMTexTableLoadSprites(s32 table);
 u32 npcCreateTextureEffectJob(u32 id, s32 x, s32 y);
 u32 npc2dCreatePortraitJob(u32 id, u32 a, u32 b, u32 c, f32 scale);
-void FUN_0031bca4(u32 handle, s32 extent, s32 flip);
+void jobStartAlphaFade(u32 handle, s32 extent, s32 flip);
 void resourceReleaseReference(u32 model);
 u32 resourceCacheGetOrLoadModel(s32 resource, u32 first, u32 second);
 
@@ -106,7 +106,7 @@ void FUN_0049669c(ShopScene *shop)
     shop->backdropJob = npcCreateTextureEffectJob(backdropId, 0, 0);
     if (overlayId != 0) {
         shop->overlayId = npc2dCreatePortraitJob(overlayId, 0, 0, 0, 1.0f);
-        FUN_0031bca4(shop->overlayId, 0, 0);
+        jobStartAlphaFade(shop->overlayId, 0, 0);
         return;
     }
     if (npcId != 0) {

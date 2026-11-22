@@ -22,7 +22,7 @@ void modelEffectReleaseEntry(ModelEffectOwner *owner, u32 index)
         owner->entries[index].effect = NULL;
     }
     if (owner->entries[index].model != NULL) {
-        if (owner->entries[index].model->node->unk0c >= 0) {
+        if (owner->entries[index].model->node->sceneGroup >= 0) {
             asdMdlManagerMarkDestroy(owner->entries[index].model);
         }
         asdMdlManagerDestroy(owner->entries[index].model);

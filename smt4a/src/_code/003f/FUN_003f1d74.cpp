@@ -1,242 +1,157 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f1d74` (_code @ 0x3f1d74, 0x370 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: debug start of a battle from a party preset record, rebuilt from the retail disassembly (the old draft was a raw decompilation); the calls and stores agree, but retail calls the preset table getter predicated (blne, the file word reused as the NULL result), keeps a count-down pair loop for the twelve stock-slot flags and allocates the loop registers differently. */
+#include "common.h"
+#include <string.h>
+#include "battle/btlMain.h"
+#include "battle/BtlGlobals.h"
+#include "gamedata/DataTable.h"
+#include "gamedata/DataTableAccess_VariantA.h"
+#include "gamedata/GameSaveDataA.h"
+#include "gamedata/SaveSlotTable.h"
+#include "gamedata/SaveSlotRecord.h"
+#include "gamedata/GameDataAccess.h"
+#include "gamedata/GamePlayerData.h"
+#include "shard/W6_W6Match8_LightUniforms.h"
 #include "code/Code0029.h"
+#include "code/Code003e.h"
+#include "code/Code0018.h"
+
+/* unit-local: the battle state fields this preset loader writes, until btlMain.h names them */
+struct BattlePresetState {
+    /* 0x0000 */ u8 unk0000[0xE4];
+    /* 0x00E4 */ u32 presetA;
+    /* 0x00E8 */ u32 presetB;
+    /* 0x00EC */ u8 unk00EC[0x2188];
+    /* 0x2274 */ u32 presetFile;     /* the loaded preset table file, 0 when none */
+    /* 0x2278 */ u8 unk2278[0x2328];
+    /* 0x45A0 */ u64 stateFlags;
+    /* 0x45A8 */ u8 unk45A8[0x7C8];
+    /* 0x4D70 */ u32 presetMode;
+    /* 0x4D74 */ u8 unk4D74[0xD0];
+    /* 0x4E44 */ u8 presetFlag;
+};
+
+/* unit-local: one 0x84-byte party preset record of the preset table */
+struct BattlePartyPreset {
+    /* 0x00 */ u16 a;
+    /* 0x02 */ u16 b;
+    /* 0x04 */ s32 money;
+    /* 0x08 */ u16 playerTable[7];   /* passed to the player record builder */
+    /* 0x16 */ s16 maxHp;
+    /* 0x18 */ s16 maxMp;
+    /* 0x1A */ s16 stats[5];
+    /* 0x24 */ u16 skills[8];
+    /* 0x34 */ u16 playerId;
+    /* 0x36 */ u8 unk36[2];
+    /* 0x38 */ u16 reserve[3];
+    /* 0x3E */ u16 party[9];
+    /* 0x50 */ u16 flags[5][2];      /* flag id and value */
+    /* 0x64 */ u16 stock[7][2];      /* stock unit id and value */
+    /* 0x80 */ u16 counter;
+    /* 0x82 */ u8 mode;
+    /* 0x83 */ u8 flag;
+};
+
+typedef char BattlePresetLayoutCheck[offsetof(BattlePresetState, presetFile) == 0x2274 &&
+    offsetof(BattlePresetState, stateFlags) == 0x45A0 && offsetof(BattlePresetState, presetFlag) == 0x4E44 &&
+    offsetof(BattlePartyPreset, playerId) == 0x34 && offsetof(BattlePartyPreset, stock) == 0x64 &&
+    sizeof(BattlePartyPreset) == 0x84 ? 1 : -1];
 
 extern "C" {
 
-int saveSlotFindSelected(void);
-int partySlotIsOccupied(void);
-int __aeabi_memset4(unsigned int *, int, unsigned int);
-int FUN_00284fdc(void);
-int libc_strcpy(unsigned char [20], unsigned int);
-int rt_memclr(unsigned int, int);
-int FUN_003df7c4(int);
-int FUN_003dff6c(int, unsigned char [20], unsigned short *);
-int FUN_003e0174(void);
-int FUN_003e49e8(void);
-int saveSlotTableSetPreferredId(void);
-int partyRefreshOrInsertSlot(void);
-int partyAdjustCounterIfEnoughActive(int);
-int flagValueAdd(int);
+char *libc_strcpy(char *destination, const u8 *source); // declcheck: local (the shared shard declaration takes word pointers)
+void FUN_003dff6c(u16 id, const char *name, const u16 *table);
+void FUN_003df7c4(s32 mode);
+void FUN_003e0174(u16 skill);
+s32 partySlotFindIndex(const SlotRecordA *record);
+void flagValueAdd(s32 id, u32 amount);
+void partyRefreshOrInsertSlot(u16 id, u16 value);
+void FUN_00284fdc(void);
+void FUN_003e49e8(void);
+void partyAdjustCounterIfEnoughActive(u16 counter);
+void *__aeabi_memset4(void *dest, s32 size, s32 value);
+void rt_memclr(void *destination, u32 size);
 
-typedef struct fn_003f1d74_arg0 fn_003f1d74_arg0;
-struct fn_003f1d74_arg0 {
-    unsigned char pad_0x0[0xe4];
-    uint field_0xe4; /* +0xe4 */
-    uint field_0xe8; /* +0xe8 */
-    unsigned char pad_0xec[0x2188];
-    unsigned char field_0x2274; /* +0x2274 */
-    unsigned char pad_0x2275[0x232b];
-    uint field_0x45a0; /* +0x45a0 */
-    unsigned char field_0x45a4; /* +0x45a4 */
-    unsigned char pad_0x45a5[0x7cb];
-    uint field_0x4d70; /* +0x4d70 */
-    unsigned char pad_0x4d74[0xd0];
-    undefined1 field_0x4e44; /* +0x4e44 */
-};
-
-/* stack frame of param_2: 7 slot(s), 14 byte(s) */
-typedef struct {
-    unsigned short sp3C; /* 0x3c: local_3c */
-    unsigned short sp3E; /* 0x3e: local_3e */
-    unsigned short sp40; /* 0x40: local_40 */
-    unsigned short sp42; /* 0x42: local_42 */
-    unsigned short sp44; /* 0x44: local_44 */
-    unsigned short sp46; /* 0x46: local_46 */
-    unsigned short sp48; /* 0x48: local_48 */
-} param_2_stack;
-
-extern unsigned int DAT_00573a50; /* 0x573a50 */
-extern unsigned int DAT_00573a54; /* 0x573a54 */
-
-extern unsigned int gameGetPlayerName(void);
-/* Supplied declaration required: saveSlotFindSelected. */
-extern int gameGetPlayerData(void);
-/* Supplied declaration required: partySlotIsOccupied. */
-extern int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-extern unsigned int dataTableFileGetTable(int, unsigned int);
-extern int gameGetSlotRecord(int);
-extern unsigned int *gameGetSlotTable(void);
-/* Supplied declaration required: __aeabi_memset4. */
-extern unsigned int flagValueGetStorage(void);
-/* Supplied declaration required: FUN_00284fdc. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: FUN_003df7c4. */
-/* Supplied declaration required: FUN_003dff6c. */
-/* Supplied declaration required: FUN_003e0174. */
-/* Supplied declaration required: FUN_003e49e8. */
-/* Supplied declaration required: saveSlotTableSetPreferredId. */
-/* Supplied declaration required: partyRefreshOrInsertSlot. */
-/* Supplied declaration required: partyAdjustCounterIfEnoughActive. */
-/* Supplied declaration required: flagValueAdd. */
-extern unsigned char partySlotFindIndex(void);
-/* Supplied declaration required: dispatchIfFound. */
-
-
-void FUN_003f1d74(fn_003f1d74_arg0 *param_1,unsigned int param_2)
-
+/* Starts a battle from party preset `index` of the battle's preset table (when the battle state allows it):
+ * builds the player from the record, fills the party and stock, sets the preset flags and the party money. */
+void FUN_003f1d74(BattlePresetState *state, u32 index)
 {
-/* irregular: 19 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned char temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int *puVar6;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  int temp_v11;
-  unsigned short *puVar10;
-  unsigned char *pbVar11;
-  unsigned short temp_v12;
-  unsigned short temp_v13;
-  unsigned short temp_v14;
-  unsigned short temp_v15;
-  unsigned short temp_v16;
-  unsigned short temp_v17;
-  unsigned short temp_v18;
-  unsigned char temp_v19 [20];
-  
-  if (((param_1->field_0x45a0 & DAT_00573a50) != 0 ||
-      (*(unsigned int *)&param_1->field_0x45a4 & DAT_00573a54) != 0) && param_2 != 0) {
-    temp_v2 = 0;
-    if (*(int *)&param_1->field_0x2274 != 0) {
-      temp_v2 = dataTableFileGetTable(*(int *)&param_1->field_0x2274,0);
+    if ((state->stateFlags & g_btlMain.fixedScore.mask) == 0 || index == 0)
+        return;
+    void *table = state->presetFile != 0 ? dataTableFileGetTable(state->presetFile, 0) : NULL;
+    BattlePartyPreset *presets = (BattlePartyPreset *)dataTableGetEntries(table);
+    if (index > dataTableGetCount(table) - 1)
+        return;
+    BattlePartyPreset *preset = &presets[index];
+    SaveSlotTableA *slots = gameGetSlotTable();
+
+    char name[20];
+    libc_strcpy(name, gameGetPlayerName());
+    u16 playerTable[7];
+    for (s32 i = 0; i < 7; i++)
+        playerTable[i] = preset->playerTable[i];
+    FUN_003dff6c(preset->playerId, name, playerTable);
+
+    PlayerDataA *player = gameGetPlayerData();
+    for (s32 i = 0; i < 5; i++)
+        player->baseStats.stats[i] = preset->stats[i];
+    FUN_003df7c4(0);
+    if (preset->maxHp > 0)
+        player->hp = player->maxHp = preset->maxHp;
+    if (preset->maxMp > 0)
+        player->mp = player->maxMp = preset->maxMp;
+    for (s32 i = 0; i < 8; i++) {
+        if (preset->skills[i] != 0)
+            FUN_003e0174(preset->skills[i]);
     }
-    temp_v3 = dataTableGetEntries();
-    temp_v4 = dataTableGetCount(temp_v2);
-    if (param_2 <= temp_v4 - 1U) {
-      puVar10 = (unsigned short *)(temp_v3 + param_2 * 0x84);
-      puVar6 = (unsigned int *)gameGetSlotTable();
-      temp_v4 = 0;
-      temp_v2 = gameGetPlayerName();
-      libc_strcpy(temp_v19,temp_v2);
-      temp_v12 = puVar10[4];
-      temp_v13 = puVar10[5];
-      temp_v14 = puVar10[6];
-      temp_v15 = puVar10[7];
-      temp_v16 = puVar10[8];
-      temp_v17 = puVar10[9];
-      temp_v18 = puVar10[10];
-      FUN_003dff6c(puVar10[0x1a],temp_v19,&temp_v12);
-      temp_v3 = gameGetPlayerData();
-      *(unsigned short *)(temp_v3 + 0x12) = puVar10[0xd];
-      *(unsigned short *)(temp_v3 + 0x14) = puVar10[0xe];
-      *(unsigned short *)(temp_v3 + 0x16) = puVar10[0xf];
-      *(unsigned short *)(temp_v3 + 0x18) = puVar10[0x10];
-      *(unsigned short *)(temp_v3 + 0x1a) = puVar10[0x11];
-      FUN_003df7c4(0);
-      temp_v0 = puVar10[0xb];
-      if (0 < (short)temp_v0) {
-        *(unsigned short *)(temp_v3 + 0x1c) = temp_v0;
-        *(unsigned short *)(temp_v3 + 0x2a) = temp_v0;
-      }
-      temp_v0 = puVar10[0xc];
-      if (0 < (short)temp_v0) {
-        *(unsigned short *)(temp_v3 + 0x1e) = temp_v0;
-        *(unsigned short *)(temp_v3 + 0x2c) = temp_v0;
-      }
-      do {
-        if (puVar10[temp_v4 + 0x12] != 0) {
-          FUN_003e0174();
-        }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < 8);
-      __aeabi_memset4(puVar6 + 0x722,0x18,0xffffffff);
-      *(unsigned short *)(puVar6 + 0x728) = 0xffff;
-      pbVar11 = (unsigned char *)((int)puVar6 + 0x1ca3);
-      *(unsigned char *)((int)puVar6 + 0x1ca2) = 0xff;
-      temp_v4 = 0;
-      temp_v3 = 0;
-      *pbVar11 = 8;
-      do {
-        if (puVar10[temp_v3 + 0x1f] != 0) {
-          dispatchIfFound(temp_v3,puVar10[temp_v3 + 0x1f],0);
-        }
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < (int)(unsigned int)*pbVar11);
-      temp_v3 = 0;
-      do {
-        if ((puVar10[temp_v3 + 0x1c] != 0) && (temp_v11 = 0, *pbVar11 != 0)) {
-          do {
-            temp_v5 = gameGetSlotRecord(temp_v11);
-            if (*(unsigned short *)(temp_v5 + 0x62) == puVar10[temp_v3 + 0x1c]) {
-              temp_v1 = partySlotFindIndex();
-              temp_v11 = temp_v4 + 0x1ca0;
-              temp_v4 = temp_v4 + 1;
-              *(unsigned char *)((int)puVar6 + temp_v11) = temp_v1;
-              break;
+
+    __aeabi_memset4(slots->party, sizeof(slots->party), -1);
+    memset(slots->reserve, 0xFF, sizeof(slots->reserve));
+    slots->count = 8;
+    for (s32 i = 0; i < slots->count; i++) {
+        if (preset->party[i] != 0)
+            dispatchIfFound(i, preset->party[i], 0);
+    }
+    s32 reserved = 0;
+    for (s32 i = 0; i < 3; i++) {
+        if (preset->reserve[i] == 0)
+            continue;
+        for (s32 slot = 0; slot < slots->count; slot++) {
+            SlotRecordA *record = gameGetSlotRecord(slot);
+            if (record->id == preset->reserve[i]) {
+                slots->reserve[reserved++] = partySlotFindIndex(record);
+                break;
             }
-            temp_v11 = temp_v11 + 1;
-          } while (temp_v11 < (int)(unsigned int)*pbVar11);
         }
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < 3);
-      temp_v2 = flagValueGetStorage();
-      rt_memclr(temp_v2,0x10b8);
-      temp_v3 = 0;
-      temp_v7 = temp_v6;
-      do {
-        temp_v0 = puVar10[temp_v3 * 2 + 0x28];
-        if (temp_v0 != 0) {
-          temp_v7 = (unsigned int)puVar10[temp_v3 * 2 + 0x29];
-        }
-        if (temp_v0 != 0 && temp_v7 != 0) {
-          flagValueAdd(temp_v0);
-          temp_v7 = temp_v8;
-        }
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < 5);
-      FUN_00284fdc();
-      temp_v4 = 6;
-      *puVar6 = *(unsigned int *)(puVar10 + 2);
-      param_1->field_0xe4 = (unsigned int)*puVar10;
-      param_1->field_0xe8 = (unsigned int)puVar10[1];
-      temp_v3 = 0;
-      do {
-        temp_v4 = temp_v4 - 1;
-        puVar6[temp_v3 * 0x4d + 0x7c3] = puVar6[temp_v3 * 0x4d + 0x7c3] & 0xfffffffe;
-        puVar6[temp_v3 * 0x4d + 0x810] = puVar6[temp_v3 * 0x4d + 0x810] & 0xfffffffe;
-        temp_v3 = temp_v3 + 2;
-      } while (temp_v4 != 0);
-      temp_v7 = 0;
-      temp_v4 = 0;
-      *(unsigned short *)(puVar6 + 0xb13) = 0;
-      *(unsigned short *)((int)puVar6 + 0x2c4e) = 0;
-      temp_v3 = 0;
-      do {
-        if (puVar10[temp_v3 * 2 + 0x32] != 0) {
-          temp_v7 = (unsigned int)puVar10[temp_v3 * 2 + 0x33];
-        }
-        if (puVar10[temp_v3 * 2 + 0x32] != 0 && temp_v7 != 0) {
-          partyRefreshOrInsertSlot();
-          temp_v7 = temp_v9;
-          if (temp_v3 == 0) {
-            saveSlotTableSetPreferredId();
-            temp_v7 = temp_v10;
-          }
-          temp_v4 = temp_v4 + 1;
-        }
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < 7);
-      if (0 < temp_v4) {
-        saveSlotFindSelected();
-        partySlotIsOccupied();
-      }
-      FUN_003e49e8();
-      partyAdjustCounterIfEnoughActive(puVar10[0x40]);
-      param_1->field_0x4d70 = (unsigned int)(unsigned char)puVar10[0x41];
-      param_1->field_0x4e44 = *(unsigned char *)((int)puVar10 + 0x83);
     }
-  }
-  return;
+
+    rt_memclr(flagValueGetStorage(), 0x10B8);
+    for (s32 i = 0; i < 5; i++) {
+        if (preset->flags[i][0] != 0 && preset->flags[i][1] != 0)
+            flagValueAdd(preset->flags[i][0], preset->flags[i][1]);
+    }
+    FUN_00284fdc();
+    slots->money = preset->money;
+    state->presetA = preset->a;
+    state->presetB = preset->b;
+    for (s32 i = 0; i < 12; i++)
+        slots->slots[i].flags &= ~1;
+    slots->preferredId = 0;
+    slots->unk2C4E = 0;
+    s32 stocked = 0;
+    for (s32 i = 0; i < 7; i++) {
+        if (preset->stock[i][0] != 0 && preset->stock[i][1] != 0) {
+            partyRefreshOrInsertSlot(preset->stock[i][0], preset->stock[i][1]);
+            if (i == 0)
+                saveSlotTableSetPreferredId(preset->stock[i][0]);
+            stocked++;
+        }
+    }
+    if (stocked > 0)
+        partySlotIsOccupied(saveSlotFindSelected());
+    FUN_003e49e8();
+    partyAdjustCounterIfEnoughActive(preset->counter);
+    state->presetMode = preset->mode;
+    state->presetFlag = preset->flag;
 }
 
 } /* extern "C" */

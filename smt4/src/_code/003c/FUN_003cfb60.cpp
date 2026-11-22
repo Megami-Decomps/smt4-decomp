@@ -35,11 +35,6 @@ extern int btlReflectCreateKind24(int, BtlAction *, u32, int);
 extern int FUN_003ddee0(int, BtlAction *, BtlTarget *, int, int, int);
 extern int frameRangeExtend(BtlWork **, BtlAction *, int, int, int, int);
 
-static __inline BtlActionSlot *btlActionGetSlot(s32 index)
-{
-    return &g_btlAction.slots[index];
-}
-
 /* Runs the action: puts the unit into its idle/hit state (1 when hp <= 1, else 0 and a UI call), fires the action's hooks and marks the unit's slot. Returns 0 when blocked by an event. */
 u32 FUN_003cfb60(BtlWork **work, BtlAction *action)
 {

@@ -33,7 +33,7 @@ extern int g_lmapScene; /* 0x581288 */
 
 extern signed char DAT_005f1bc4; /* 0x5f1bc4 */
 extern int DAT_005f1bec; /* 0x5f1bec */
-extern unsigned int DAT_005f1bfc; /* 0x5f1bfc */
+extern unsigned int g_mapDebugSettings; /* 0x5f1bfc */
 extern signed char DAT_005f1c70; /* 0x5f1c70 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -160,7 +160,7 @@ void FUN_0033982c(void)
     temp_v4 = slotIsActive(7);
     temp_v8 = temp_v4 != 0;
   }
-  temp_v27 = &DAT_005f1bfc;
+  temp_v27 = &g_mapDebugSettings;
   temp_v15 = 7.0f;
   temp_v17 = 3.0f;
   temp_v16 = temp_v18;

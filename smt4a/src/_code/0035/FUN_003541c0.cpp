@@ -15,7 +15,7 @@ int mapResolveCollisionSphere(...);
 int FUN_002826dc(...);
 int distSpatial(void);
 int lmapRequestTimedEffect(...);
-int FUN_003250ac(int *);
+int vec3DirectionBetween(int *);
 int mathPositionHeadingDegrees(void);
 int soundActorStartOnFreeChannel(...);
 int controllerSetDestination(...);
@@ -51,7 +51,7 @@ extern signed char DAT_005f1c7e; /* 0x5f1c7e */
 /* Supplied declaration required: FUN_002826dc. */
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: lmapRequestTimedEffect. */
-/* Supplied declaration required: FUN_003250ac. */
+/* Supplied declaration required: vec3DirectionBetween. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
 /* Supplied declaration required: controllerSetDestination. */
@@ -218,7 +218,7 @@ void FUN_003541c0(void)
         piVar5 = g_lmapScene + 0x76;
         g_lmapScene[0x81] = (int)((float)g_lmapScene[0x81] + temp_v9 * *(float *)(temp_v0 + 0x1528));
         piVar4[0x80] = (int)((float)piVar4[0x80] + 120.0f);
-        FUN_003250ac(piVar5);
+        vec3DirectionBetween(piVar5);
         mathPositionHeadingDegrees();
         piVar4 = g_lmapScene;
         g_lmapScene[0x86] = (int)temp_v7;

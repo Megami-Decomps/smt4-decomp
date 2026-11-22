@@ -60,7 +60,7 @@ int gameDataBlocksReleaseHold(...);
 int titleConfigApply(...);
 int FUN_001389ec(...);
 int modelStartWorkerProcesses(...);
-int FUN_00138e14(...);
+int frameTexCreate(...);
 int FUN_001394ec(...);
 int FUN_00139508(...);
 int FUN_0013963c(...);
@@ -320,7 +320,7 @@ extern int FUN_00138cb4(void);
 /* Supplied declaration required: appletUnlockAndRestoreDisplay. */
 /* Supplied declaration required: gfxInitDefaultDrawColor. */
 /* Supplied declaration required: asdPrimInit. */
-/* Supplied declaration required: FUN_00138e14. */
+/* Supplied declaration required: frameTexCreate. */
 /* Supplied declaration required: asdFileHashPackOpen. */
 /* Supplied declaration required: FUN_001394ec. */
 /* Supplied declaration required: FUN_00139508. */
@@ -652,7 +652,7 @@ void FUN_00135c30(void)
   FUN_0013a48c(6);
   modelStartWorkerProcesses(0x67,0x6a,0xe6,0);
   FUN_0013b3d0(g_handleRegistry,0x67,0x69,0xe6);
-  FUN_00138e14(1);
+  frameTexCreate(1);
   FUN_0013778c(0);
   temp_v16 = 0.25f;
   renderCtxSetupScreenCamera(g_renderCtx);

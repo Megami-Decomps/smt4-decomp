@@ -27,7 +27,7 @@ void buttonHelpCreate(void);
 void asdTMTexTablePrepareNodeImage(u32 table, u32 variant);
 u32 FUN_002fdff4(u32 resource);
 u32 FUN_00285e44(u32 sound, u32 option, u32 flags);
-void FUN_00247bf4(u32 handle, u32 option, u32 flags);
+void jobStartAlphaFade(u32 handle, u32 option, u32 flags);
 extern const char DAT_004075c0[]; // shop/shop.bf
 extern const char DAT_00407600[]; // shop/shop_tkywpn.mbm
 extern const char DAT_004075d0[]; // shop/shop_mkdwpn.mbm
@@ -89,7 +89,7 @@ void shopLoadMessageBankAndSound(ShopCreateWork *shop)
     resources->messageHandle = FUN_002fdff4(resource);
     if (sound) {
         resources->soundHandle = FUN_00285e44(sound, 0, 0);
-        FUN_00247bf4(resources->soundHandle, 0, 0);
+        jobStartAlphaFade(resources->soundHandle, 0, 0);
     }
 }
 }

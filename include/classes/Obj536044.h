@@ -6,6 +6,7 @@
 #include "ui/UiSpriteState.h"
 #include "shop/EquipmentMenuPage.h"
 #include "shop/ShopPanel.h"
+#include "shop/ShopSlotNeighbors.h"
 #include "shard/W5_W5Match2_PlainData.h"
 #include "shard/W6_W6Match7_NumericStepper.h"
 #include "shard/W6_W6Match6_SpritePresetBank.h"
@@ -16,6 +17,7 @@ class Obj536044;
 
 extern "C" void shopEnterQuantitySelection(Obj536044 *shop, s32 nextState);
 extern "C" void shopTrackSelectedItemPreview(Obj536044 *scene);
+extern "C" void shopDrawSelectedItem(Obj536044 *shop);
 
 /* A scene whose step functions are listed in the table at 0x536044 (named after it until its real
  * name is known): the table holds member-function pointers, not a vtable. */
@@ -138,28 +140,10 @@ protected:
 
     friend void shopEnterQuantitySelection(Obj536044 *shop, s32 nextState);
     friend void shopTrackSelectedItemPreview(Obj536044 *scene);
+    friend void shopDrawSelectedItem(Obj536044 *shop);
     friend struct Obj536044LayoutCheck;
 };
 
-/* Slot 7, the item page, has no neighbours and no preview model. */
-enum { SHOP_SLOT_ITEMS = 7 };
-
-/* The slots the right and left buttons lead to from one slot. */
-struct ShopSlotStep {
-    /* 0x00 */ s32 next;
-    /* 0x04 */ s32 previous;
-};
-
-/* For each equipment slot, the slot the right and left buttons lead to (g_shopTabNeighbors, 0x588f28);
- * slots 0 and 3 have other neighbours while the scene is restricted. */
-struct ShopSlotNeighbors {
-    /* 0x00 */ ShopSlotStep slot[8];
-    /* 0x40 */ s32 restricted0Next;
-    /* 0x44 */ s32 restricted0Previous;
-    /* 0x48 */ s32 restricted3Next;
-    /* 0x4C */ s32 restricted3Previous;
-};
-typedef char ShopSlotNeighborsSizeCheck[sizeof(ShopSlotNeighbors) == 0x50 ? 1 : -1];
 
 struct Obj536044LayoutCheck {
     char restricted[offsetof(Obj536044, restricted) == 0x18 ? 1 : -1];

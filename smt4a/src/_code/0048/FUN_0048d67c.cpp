@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild of the map marker screen-position update; the VFP conversion order (the draft's per-marker int/float round trips) and the half-scale constant 0.5f are scheduled differently by armcc, and the two float x/y sources of the first branch (0x850C/0x8510 for placed markers) are kept as the draft read them. */
+/* NON_MATCHING: map marker screen-position update; the instructions mostly agree but the float registers differ from the start (retail loads the camera position into s3/s2 with two vldr, the build into s0/s1 with one vldm) and the marker loops schedule differently. */
 #include "gamedata/MapSaveBlockA.h"
 
 /* One map marker (0x30 bytes at +0x84F8 of the map view). */
@@ -32,8 +32,14 @@ struct MapView {
     /* 0x204FC */ s32 markerRadius;
 };
 
+/* The map debug settings block at 0x5f1bfc (only the flag read here). */
+struct MapDebugSettings {
+    /* 0x00 */ u8 unk00[0x64];
+    /* 0x64 */ u8 showAllMarkers;   /* draw every marker, active or not */
+};
+
 extern "C" {
-extern s8 DAT_005f1c60;
+extern MapDebugSettings g_mapDebugSettings;
 f32 *sub68OwnerGetBlock60(void *owner);
 
 /* Converts every marker's map position to screen position and size around the camera. */
@@ -41,47 +47,54 @@ void FUN_0048d67c(MapView *view)
 {
     MapSaveBlockA *flags = gameFlagsGetBlock();
     f32 *camera = sub68OwnerGetBlock60(view->cameraOwner);
-    s32 count = view->markerCount;
+    f32 cameraX = camera[0];
+    f32 cameraY = camera[1];
     if (flags->layout != 0xC) {
-        s32 dx = (s32)((f32)(view->viewWidth / 2) - camera[0]);
-        s32 dy = (s32)((f32)(view->viewHeight / 2) - camera[1]);
-        for (s32 i = 0; i < count; i++) {
-            MapMarker *marker = &((MapMarker *)((u8 *)view + 0x84F8))[i];
-            if (!((marker->active && marker->visible) || DAT_005f1c60 != 0))
+        s32 dx = (s32)((f32)(view->viewWidth / 2) - cameraX);
+        s32 dy = (s32)((f32)(view->viewHeight / 2) - cameraY);
+        for (s32 i = 0; i < view->markerCount; i++) {
+            MapMarker *marker = &view->markers[i];
+            if (!((marker->active && marker->visible) || g_mapDebugSettings.showAllMarkers != 0))
                 continue;
             if (marker->id != -1) {
-                marker->screenX = (s32)((marker->width - ((f32)dx - 160.0f)) - (f32)((view->markerRadius) / 2));
-                marker->screenY = (s32)((marker->height - ((f32)dy - 120.0f)) - (f32)((view->markerRadius) / 2));
-                marker->screenWidth = (view->markerRadius) + 0xC;
-                marker->screenHeight = (view->markerRadius) + 0xC;
+                f32 offsetX = (f32)dx - 160.0f;
+                f32 offsetY = (f32)dy - 120.0f;
+                marker->screenX = (s32)((marker->width - offsetX) - (f32)(view->markerRadius / 2));
+                marker->screenY = (s32)((marker->height - offsetY) - (f32)(view->markerRadius / 2));
+                marker->screenWidth = view->markerRadius + 0xC;
+                marker->screenHeight = view->markerRadius + 0xC;
             } else {
-                u32 width = (u32)(marker->width * 0.5f);
-                u32 height = (u32)(marker->height * 0.5f);
-                marker->screenX = (s32)(marker->x * 0.5f - ((f32)dx - 160.0f));
-                marker->screenY = (s32)(marker->y * 0.5f - ((f32)dy - 120.0f));
-                marker->screenWidth = width;
-                marker->screenHeight = height;
+                f32 offsetX = (f32)dx - 160.0f;
+                f32 offsetY = (f32)dy - 120.0f;
+                f32 x = marker->x * 0.5f;
+                f32 y = marker->y * 0.5f;
+                marker->screenX = (s32)(x - offsetX);
+                marker->screenY = (s32)(y - offsetY);
+                marker->screenWidth = (u32)(marker->width * 0.5f);
+                marker->screenHeight = (u32)(marker->height * 0.5f);
             }
         }
     } else {
-        s32 dx = (s32)((f32)view->viewWidth - camera[0]);
-        s32 dy = (s32)((f32)view->viewHeight - camera[1]);
-        for (s32 i = 0; i < count; i++) {
-            MapMarker *marker = &((MapMarker *)((u8 *)view + 0x84F8))[i];
-            if (!((marker->active && marker->visible) || DAT_005f1c60 != 0))
+        s32 dx = (s32)((f32)view->viewWidth - cameraX);
+        s32 dy = (s32)((f32)view->viewHeight - cameraY);
+        for (s32 i = 0; i < view->markerCount; i++) {
+            MapMarker *marker = &view->markers[i];
+            if (!((marker->active && marker->visible) || g_mapDebugSettings.showAllMarkers != 0))
                 continue;
             if (marker->id != -1) {
-                marker->screenX = (s32)((marker->x - ((f32)dx - 160.0f)) - (f32)(view->markerRadius));
-                marker->screenY = (s32)((marker->y - ((f32)dy - 120.0f)) - (f32)(view->markerRadius));
-                marker->screenWidth = 0x18 + (view->markerRadius) * 2;
-                marker->screenHeight = 0x18 + (view->markerRadius) * 2;
+                f32 offsetX = (f32)dx - 160.0f;
+                f32 offsetY = (f32)dy - 120.0f;
+                marker->screenX = (s32)((marker->x - offsetX) - (f32)view->markerRadius);
+                marker->screenY = (s32)((marker->y - offsetY) - (f32)view->markerRadius);
+                marker->screenWidth = 0x18 + view->markerRadius * 2;
+                marker->screenHeight = 0x18 + view->markerRadius * 2;
             } else {
-                u32 width = (u32)marker->width;
-                u32 height = (u32)marker->height;
-                marker->screenWidth = width;
-                marker->screenHeight = height;
-                marker->screenX = (s32)(marker->x - ((f32)dx - 160.0f));
-                marker->screenY = (s32)(marker->y - ((f32)dy - 120.0f));
+                f32 offsetX = (f32)dx - 160.0f;
+                f32 offsetY = (f32)dy - 120.0f;
+                marker->screenWidth = (u32)marker->width;
+                marker->screenHeight = (u32)marker->height;
+                marker->screenX = (s32)(marker->x - offsetX);
+                marker->screenY = (s32)(marker->y - offsetY);
             }
         }
     }

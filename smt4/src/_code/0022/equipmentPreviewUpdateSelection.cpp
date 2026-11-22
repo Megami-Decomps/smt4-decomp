@@ -1,11 +1,11 @@
-/* NON_MATCHING: 14 lines: only the scheduling of the list and cursor address arithmetic around the first call differs
- * (retail interleaves the two index multiplies and reloads the slot into r1 before the item load). */
+/* NON_MATCHING: 6 lines, scheduling, as its Apocalypse twin shopTrackSelectedItemPreview: retail reloads the slot
+ * for the second holder address before it reads the selected item's id, the build after. */
 #include "shard/S2Scene3a.h"
+#include "shop/ShopScreen.h"
 #include "code/Code0029_Smt4.h"
 #include "gamedata/GamePlayerData.h"
 
 extern "C" {
-s32 flaggedValueHolderGetTotal(Scene3aSlotInfo *);
 u32 uiStateHasAnyActiveFlag(Scene3aSlotInfo *);
 void statusCameraRestore(u32);
 s32 contentGetEntryKind(u32);
@@ -16,8 +16,7 @@ void btlBuildDemonSnapshotFromSaveRecord(PlayerDataIV *);
 
 void equipmentPreviewUpdateSelection(Scene3a *scene)
 {
-    Scene3aList *list = &scene->lists[scene->slot];
-    u32 item = list->items[flaggedValueHolderGetTotal(&scene->slotInfo[scene->slot])].id;
+    u32 item = shopSelectedItem(scene)->id;
     if (uiStateHasAnyActiveFlag(&scene->slotInfo[scene->slot]) || scene->selectedItem != item) {
         statusCameraRestore(0);
         scene->preview.requested = 0;

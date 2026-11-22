@@ -27,7 +27,7 @@ void npcRoomDestroy(void)
             soundChannelStopAll(0xF);
             bgmFadeOut(0x3C);
         }
-        asdTMTexTableReleaseNode(0, room->unk102);
+        asdTMTexTableReleaseNode(0, room->backgroundImage);
         for (i = 0; i < NPC_ROOM_JOBS; i++) {
             if (room->jobUsed[i] != 0) {
                 jobStop(room->jobs[i], 0);

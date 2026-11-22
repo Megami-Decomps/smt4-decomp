@@ -1,6 +1,6 @@
 /* frame_tex/FrameTex: SMT IV's frame-texture effects work (g_frameTex, 0xFEC bytes).
  *
- * FUN_001043c8 allocates it and registers one draw job per effect and screen ("HDR", "Zan",
+ * frameTexCreate allocates it and registers one draw job per effect and screen ("HDR", "Zan",
  * "CAMP", two "ENCEFF" sets and a cross-fade set (Apocalypse names it "XFADE"), each with left/right capture (CL/CR) and draw (DL/DR)
  * callbacks); every callback receives this work from jobGetWork(). The capture callbacks copy the
  * frame buffer into a texture and record gxCopyFramebufferToSurface's result and a per-screen "captured" flag,

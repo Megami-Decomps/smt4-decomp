@@ -13,7 +13,6 @@ extern "C" {
 extern const ShopSlotStep g_shopItemTabNeighbors[]; /* the tab reached from each tab of the item list */
 
 void messageMainSetFlag(u8 value);
-void messageChoiceShowCurrent(Obj536044 *shop);
 s32 inputConfirmPressed(void);
 u32 FUN_00498408(Obj536044 *scene, u32 id);
 s32 FUN_001ba3d0(u32 id); // declcheck: local (a forwarder: this caller passes the id and uses the count)
@@ -60,7 +59,7 @@ void Obj536044::FUN_00499fdc()
     panelSetTarget(0, 0);
     u32 confirmed = FUN_004954e8((SubmenuWork *)this);
 
-    messageChoiceShowCurrent(this);
+    shopDrawSelectedItem(this);
     if (slotInfo[slot].range.count > 0 && inputConfirmPressed() != 0) {
         confirmed = 1;
     }

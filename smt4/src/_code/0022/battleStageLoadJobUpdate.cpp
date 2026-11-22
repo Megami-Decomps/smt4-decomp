@@ -39,7 +39,7 @@ s32 battleStageLoadJobUpdate(u32 handle)
         if (work->model != NULL && !modelHasLoadedAttachment(work->model))
             break;
         if (AsdMdlObject *model = work->model) {
-            if (model->node->unk0c < 0) {
+            if (model->node->sceneGroup < 0) {
                 lightOwnerRegister(model, 1);
             }
             nodeSetTranslation3f(work->model->node, 0, 0.0f, 0.0f, 0.0f);

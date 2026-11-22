@@ -1,4 +1,3 @@
-/* NON_MATCHING: duplicate lookup uses r2 instead of r1 for the slot-stride intermediate. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "runtime/Stdio.h"
@@ -37,18 +36,6 @@ extern "C" const char DAT_004008dc[];
 extern "C" void memClear(void *destination, u32 size);
 
 
-static inline bool battleHasSecondaryAttachment(const BattleAttachmentOwner *owner,
-    s32 firstId, s32 secondId)
-{
-    for (s32 index = 0; index < 50; ++index) {
-        const BattleAttachmentSlot *slot = &owner->slots[index];
-        if (slot->firstId >= 0 && slot->secondId >= 0 &&
-            slot->firstId == firstId && slot->secondId == secondId)
-            return true;
-    }
-    return false;
-}
-
 static inline bool battleSecondarySlotIsAvailable(const BattleAttachmentSlot *slot)
 {
     if (slot->flags & 2)
@@ -71,7 +58,16 @@ extern "C" void battleCreateSecondaryModels(BattleAttachmentOwner *owner, s32 ki
         BattleAttachmentSource *source = &main->sources[sourceIndex];
         if (source->firstId < 0 || source->secondId < 0)
             continue;
-        if (battleHasSecondaryAttachment(owner, source->firstId, source->secondId))
+        bool found = false;
+        for (s32 index = 0; index < 50; ++index) {
+            const BattleAttachmentSlot *slot = &owner->slots[index];
+            if (slot->firstId >= 0 && slot->secondId >= 0 &&
+                slot->firstId == source->firstId && slot->secondId == source->secondId) {
+                found = true;
+                break;
+            }
+        }
+        if (found)
             continue;
         for (s32 slotIndex = 0; slotIndex < 50; ++slotIndex) {
             BattleAttachmentSlot *slot = &owner->slots[slotIndex];

@@ -39,13 +39,13 @@ struct BtlActionRecord {
     /* 0x50 */ u32 status;
     /* 0x54 */ u32 flags;
     union {
-        /* 0x58 */ u8 unk58[0xa];
+        /* 0x58 */ u8 unk58[4];
         /* 0x58 */ u16 presentationFlags;
-        struct {
-            u8 unk58[8];
-            /* 0x60 */ s16 combatantIndex;
-        } participant;
     };
+    /* 0x5C */ u32 pendingValue;        /* cleared with the record when its combatant leaves the battle */
+    struct {
+        /* 0x60 */ s16 combatantIndex;
+    } participant;
     /* 0x62 */ s16 memberId;
     union {
         /* 0x64 */ u8 unk64[0x94];
@@ -60,12 +60,15 @@ struct BtlActionRecord {
         struct {
             /* 0x64 */ u8 unk64[0x8C];
             /* 0xF0 */ s32 slot;       /* negative: not placed in a slot yet */
+            /* 0xF4 */ s32 nextSlot;   /* reset to -1 with slot */
         } placement;
+        /* 0x64 */ u32 work[13];       /* the words a combatant's removal clears (editorRestore is the first two) */
     };
     /* 0xf8 */ u32 stateFlags;
     union {
         /* 0xfc */ u8 unkfc[0x18];
         /* 0xfc */ u32 groupKey;
+        /* 0xfc */ u32 groupWork[6];   /* groupKey and the five words after it, cleared together */
     };
 };
 

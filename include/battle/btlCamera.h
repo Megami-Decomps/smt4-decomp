@@ -267,7 +267,7 @@ struct BtlCameraA {
             /* 0x028 */ BtlCameraVector3 to;
         } span;
     };
-    /* 0x038 */ s32 unk38;
+    /* 0x038 */ s32 state;           /* 3: running a switch (obj4FStartSwitch) */
     /* 0x03c */ s32 unk3C;
     /* 0x040 */ u32 job;
     /* 0x044 */ u8 unk044[0x28];
@@ -297,7 +297,9 @@ struct BtlCameraA {
     /* 0x658 */ CameraBackend *backend;
     /* 0x65c */ u8 unk65c[0x2e];
     /* 0x68a */ u8 enabled;
-    /* 0x68b */ u8 unk68b[0x79];
+    /* 0x68b */ u8 unk68b[0x1d];
+    /* 0x6a8 */ u8 switchHeld;       /* the running switch keeps the camera until it is released */
+    /* 0x6a9 */ u8 unk6a9[0x5b];
     /* 0x704 */ f32 eyeDip;
     /* 0x708 */ u8 unk708[0xC];
     /* 0x714 */ f32 fovShift;

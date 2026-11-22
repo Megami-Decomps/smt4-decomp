@@ -21,7 +21,7 @@ typedef struct BtlObject {
 } BtlObject;
 
 extern SkillSlot *btlMainFindEntryByListedId(BtlObject *obj, int skillId);
-extern SkillInfo *FUN_003eca48(BtlObject *obj, u16 infoId);
+extern SkillInfo *btlMotionFindSelection(BtlObject *obj, u16 infoId); // declcheck: local (the shared declaration does not compile here or changes this unit)
 extern int FUN_003e9b74(BtlObject *obj);
 extern int FUN_003ece50(BtlObject *obj);
 extern int btlSetupEnvironmentModelCopies(BtlObject *obj);
@@ -37,7 +37,7 @@ void FUN_003e1068(BtlStep *step, BtlObject *obj)
     if (info != NULL) {
         slot = btlMainFindEntryByListedId(obj, info->skillId);
         if (slot != NULL) {
-            info = FUN_003eca48(obj, slot->infoId);
+            info = btlMotionFindSelection(obj, slot->infoId);
             if (info != NULL && (info->flags & 2) != 0) {
                 FUN_003e9b74(obj);
                 step->state = 0x10;

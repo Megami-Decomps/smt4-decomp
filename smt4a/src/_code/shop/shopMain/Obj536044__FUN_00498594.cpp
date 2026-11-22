@@ -4,7 +4,7 @@
 extern "C" {
 extern s32 g_shopItemTabNeighbors[][2];
 void FUN_004954e8(EquipmentMenuState *menu);
-void messageChoiceShowCurrent(EquipmentMenuState *menu);
+void shopDrawSelectedItem(EquipmentMenuState *menu); // declcheck: local (the shared declaration does not compile here or changes this unit)
 s32 inputIsQuestRepeatRight(void);
 s32 recordGetModeForId(s32 itemId);
 s32 FUN_004d0494(void);
@@ -35,7 +35,7 @@ void _ZN9Obj53604412FUN_00498594Ev(EquipmentMenuState *menu)
     };
     ShopNeighborView *neighbors = reinterpret_cast<ShopNeighborView *>(menu);
     FUN_004954e8(menu);
-    messageChoiceShowCurrent(menu);
+    shopDrawSelectedItem(menu);
     if (inputIsQuestRepeatRight() || recordGetModeForId(neighbors->nextItem) == 6) {
         menu->selection.index = g_shopItemTabNeighbors[menu->selection.index][0];
         shopScreenRebuildForSelection(menu, 1);

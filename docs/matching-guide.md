@@ -272,6 +272,14 @@ difference a register tie-break.
 - A flag retail tests while it is still known false (`bics` against the zeroed register, before the arms that set it)
   is a `bool` guard the source wrote anyway: `bool ready = false; … if (concerned && !ready) { … ready = true; … }
   if (ready) result = N;` made smt4 `FUN_001a9104` IDENTICAL (wave 73); without the `!ready` test it is 194 lines off.
+- A branch over one `orr rX, rX, #7` (`tst; beq; orr`), where `x |= 7` gives a predicated `orrne`, is the three bits set
+  by separate statements in one block (`gives |= 1; gives |= 2; gives |= 4;`): armcc decides branch against
+  predication before it folds them. Only where each bit is its own fact (hp, mp and status in smt4a `FUN_00400284`,
+  IDENTICAL, wave 75); one count split into increments is still steering.
+- A local retail leaves unset on some path and then reads (a pointer assigned only for two values of a byte, a
+  `switch` with no `default`) is undefined behaviour in the source: give it a defined value (`= NULL`, a `default:`
+  case) and keep the function `NON_MATCHING` at that cost (the ComWin draws smt4 `FUN_0011a434` and smt4a
+  `FUN_0015519c`, smt4 `shopDrawEquippedItemPage`, wave 75).
 - A worker thread is `for (;;) { if (work->stop) break; switch (work->state) { ... } sleep(span); }`
   with each `case` advancing `state++` and falling through; the stop flag is an `s8`, and the sleep
   takes its `nn::fnd::TimeSpan` by value.
@@ -386,6 +394,9 @@ asks for.
   tail call or predication: move the lookup into a `static __inline` helper so its scope ends there.
 - A body retail repeats in its callers (an allocator such as `effBlockCreate`, a sibling function from
   the same file) is a `static __inline` copy of that body.
+- IV's shop list states inline the helpers Apocalypse's shop has as members (`Obj536044::selectedItem`, `canBuyItem`,
+  `canSellItem`): `shopSelectedItem` and `shopCanBuyItem` in `shop/ShopScreen.h`, written as the members are, made smt4
+  `shopDrawSelectedItem`, `FUN_003a18a0`, `FUN_003a3a9c` and `FUN_003a3c7c` IDENTICAL as ports of their twins (wave 75).
 - A `__FILE__` trace naming `./effMisc.h` at line 450 (`asdDebugTrace(DAT_004102f4, 450)`: each unit has its own
   copy of the header's `__FILE__` string) followed by `memAlloc` and `rt_memclr` of the same size, with the size kept
   in a saved register (`mov sl, #168`), is effMisc.h's cleared-allocation inline: write it as a
@@ -458,6 +469,9 @@ asks for.
 - nn::math's `VEC4Transform` (`nw/math/VEC4.h`) is written as the SDK has it: the four row dot products into a
   temporary `VEC4`, then copied to `pOut`, which it returns (pOut may alias the input): smt4 `FUN_0026e768` and smt4a
   `FUN_0043b5b4` (wave 59).
+- A direction between two points (difference, `1.0f / sqrtf` of the squared length, three products) is nn::math's
+  `VEC3Sub` then `VEC3Normalize` (`nw/math/VEC3.h`) on by-value `VEC3`s: smt4 `FUN_0025247c` and smt4a `FUN_003250ac`
+  are IDENTICAL with it; open-coded, the 1.0 and the root land in other VFP registers (wave 75).
 - An inlined orthographic projection (zero stores early, then elements 0/3/5/7/10/11, pooled as 0.0, far, 1.0, 2.0)
   is `MTX44Ortho` in the SDK's fast C form: the three reciprocals and the six computed elements into locals first,
   then the ten constant stores, then the six computed ones, all through the SDK's two-dimensional view

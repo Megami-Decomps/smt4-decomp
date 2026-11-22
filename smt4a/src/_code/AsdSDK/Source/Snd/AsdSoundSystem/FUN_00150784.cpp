@@ -15,7 +15,7 @@ void asdSoundAuxSlotsSelect(u32 arg);
 void FUN_00173a94(u8 *manager);
 void soundObjectPostStop(u8 *dataManager);
 void FUN_00173c7c(u8 *player);
-void asdSoundObjectStop(s32 handle, s32 arg);
+void nw_snd_internal_BasicSound_Stop(s32 handle, s32 arg); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void uiTextStateReset(void *system);
 void asdMemFree(void *block);
 void nw_ut_internal_LinkListImpl_erase_2B743C(void *list, void *node);
@@ -25,7 +25,7 @@ void nw_snd_SoundHandle_DetachSound(s32 *handle);
 static __inline void asdSoundHandleRelease(s32 *handle)
 {
     if (*handle != 0) {
-        asdSoundObjectStop(*handle, 0);
+        nw_snd_internal_BasicSound_Stop(*handle, 0);
         nw_snd_SoundHandle_DetachSound(handle);
     }
 }
@@ -47,7 +47,7 @@ void FUN_00150784(void)
             AsdSndAuxSlot *aux = system->currentAux[i];
             s32 handle = aux != NULL ? aux->handle : 0;
             if (aux != NULL && handle != 0) {
-                asdSoundObjectStop(handle, 0);
+                nw_snd_internal_BasicSound_Stop(handle, 0);
                 nw_snd_SoundHandle_DetachSound(&aux->handle);
             }
         }

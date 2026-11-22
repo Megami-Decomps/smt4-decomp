@@ -1,5 +1,5 @@
-/* NON_MATCHING: readable rebuild of the keyframe lookup that plays an animation at a time; retail zero-initialises the two result vectors on the stack up front and keeps the interpolation in s-registers across the compares, and the scan/compare of the frame time (int to float per key) is scheduled differently by armcc. */
-#include "common.h"
+/* NON_MATCHING: 28 lines. Left: retail loads the range's first key into the loop counter's register and copies it for the first-key test (this build the other way round), converts the previous key's time before the span, and multiplies the differences as ratio * difference. */
+#include "shard/W6_W6Match8_AnimatedSprite.h"
 
 /* One keyframe (0x18 bytes). */
 struct AnimKey {
@@ -15,72 +15,70 @@ struct AnimRange {
     u16 count;
 };
 
-struct AnimSetInfo {
-    /* 0x00 */ u8 unk00[0xE];
-    /* 0x0E */ u16 animCount;
-};
 
 /* An animation set. */
-struct AnimSet {
-    /* 0x00 */ u8 unk00[0x10];
-    /* 0x10 */ AnimSetInfo *info;
-    /* 0x14 */ u8 unk14[0xC];
+struct AnimSet : SpriteDrawOwner {
     /* 0x20 */ AnimKey *keys;
     /* 0x24 */ AnimRange *ranges;
 };
 
 extern "C" {
-void spriteDrawPartGroup(AnimSet *set, s32 key, u32 a, u32 b, f32 c); // declcheck: local (the shared declaration does not compile here or changes this unit)
-void FUN_0033d42c(AnimSet *set, s32 key, u32 a, u32 b, f32 c, f32 *position, f32 *scale, f32 d);
 
 /* Looks up animation `index` of the set at `time` (interpolating between the two surrounding keys)
- * and plays the resulting key, with the interpolated position and scale when `placed` is set. */
-void spriteAnimationPlayAtTime(AnimSet *set, s32 index, u32 a, u32 b, f32 time, f32 c, s32 placed, f32 d)
+ * and plays the resulting key, applying interpolated placement when options.positioned is set. */
+void spriteAnimationPlayAtTime(SpriteDrawOwner *owner, s32 index, const SpriteDrawVector3 *placement,
+                  u32 flags, s32 filter, s32 positioned, s32 flipY, f32 time, f32 globalScale)
 {
-    if (index >= set->info->animCount)
+    AnimSet *set = static_cast<AnimSet *>(owner);
+    if (index >= set->origin->animationCount)
         return;
-    f32 position[2] = { 0.0f, 0.0f };
-    f32 scale[2] = { 0.0f, 0.0f };
+    SpriteDrawVector2 position(0.0f, 0.0f);
+    SpriteDrawVector2 keyScale(100.0f, 100.0f);
     s32 first = set->ranges[index].first;
     s32 last = first + set->ranges[index].count - 1;
-    s32 key = 0;
-    bool found = false;
+    s32 key = -1;
     for (s32 i = first; i <= last; i++) {
-        AnimKey *current = &set->keys[i];
-        if (time > (f32)current->time)
-            continue;
-        if (time == (f32)current->time || i == first) {
-            key = current->id;
-            position[0] = current->position[0];
-            position[1] = current->position[1];
-            scale[0] = current->scale[0];
-            scale[1] = current->scale[1];
-        } else {
-            AnimKey *previous = current - 1;
-            f32 ratio = (time - (f32)previous->time) / (f32)(current->time - previous->time);
-            key = previous->id;
-            position[0] = previous->position[0] + ratio * (current->position[0] - previous->position[0]);
-            position[1] = previous->position[1] + ratio * (current->position[1] - previous->position[1]);
-            scale[0] = previous->scale[0] + ratio * (current->scale[0] - previous->scale[0]);
-            scale[1] = previous->scale[1] + ratio * (current->scale[1] - previous->scale[1]);
+        if (time <= (f32)set->keys[i].time) {
+            if (time == (f32)set->keys[i].time || first == i) {
+                key = set->keys[i].id;
+                position.x = set->keys[i].position[0];
+                position.y = set->keys[i].position[1];
+                keyScale.x = set->keys[i].scale[0];
+                keyScale.y = set->keys[i].scale[1];
+            } else {
+                f32 ratio = (time - (f32)set->keys[i - 1].time) / (f32)(set->keys[i].time - set->keys[i - 1].time);
+                key = set->keys[i - 1].id;
+                /* previous + (current - previous) * ratio, a step at a time */
+                position.x = set->keys[i].position[0] - set->keys[i - 1].position[0];
+                position.y = set->keys[i].position[1] - set->keys[i - 1].position[1];
+                keyScale.x = set->keys[i].scale[0] - set->keys[i - 1].scale[0];
+                keyScale.y = set->keys[i].scale[1] - set->keys[i - 1].scale[1];
+                position.x = ratio * position.x;
+                position.y = ratio * position.y;
+                keyScale.x = ratio * keyScale.x;
+                keyScale.y = ratio * keyScale.y;
+                position.x = set->keys[i - 1].position[0] + position.x;
+                position.y = set->keys[i - 1].position[1] + position.y;
+                keyScale.x = set->keys[i - 1].scale[0] + keyScale.x;
+                keyScale.y = set->keys[i - 1].scale[1] + keyScale.y;
+            }
+            break;
         }
-        found = key >= 0;
-        break;
     }
-    if (!found) {
-        AnimKey *end = &set->keys[last];
-        key = end->id;
-        position[0] = end->position[0];
-        position[1] = end->position[1];
-        scale[0] = end->scale[0];
-        scale[1] = end->scale[1];
+    if (key < 0) {
+        key = set->keys[last].id;
+        position.x = set->keys[last].position[0];
+        position.y = set->keys[last].position[1];
+        keyScale.x = set->keys[last].scale[0];
+        keyScale.y = set->keys[last].scale[1];
     }
-    scale[0] *= 0.01f;
-    scale[1] *= 0.01f;
-    if (placed == 0)
-        spriteDrawPartGroup(set, key, a, b, c);
+    keyScale.x *= 0.01f;
+    keyScale.y *= 0.01f;
+    if (positioned == 0)
+        spriteDrawPartGroup(set, key, placement, flags, filter, globalScale);
     else
-        FUN_0033d42c(set, key, a, b, c, position, scale, d);
+        FUN_0033d42c(set, key, placement, flags, filter, &position, &keyScale,
+                     flipY, globalScale);
 }
 
 } /* extern "C" */

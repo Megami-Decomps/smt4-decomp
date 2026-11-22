@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void asdSoundObjectStop(s32 handle, s32 frames);
+void nw_snd_internal_BasicSound_Stop(s32 handle, s32 frames); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Stop the registered sound and retire its handle-list node. */
 void handlerFinishById(s32 id, s32 frames)
@@ -15,7 +15,7 @@ void handlerFinishById(s32 id, s32 frames)
         }
         if (handler->id == id) {
             if (handler->handle != 0) {
-                asdSoundObjectStop(handler->handle, frames);
+                nw_snd_internal_BasicSound_Stop(handler->handle, frames);
             }
             handler->value = 1;
             handler->unk08 = 0;

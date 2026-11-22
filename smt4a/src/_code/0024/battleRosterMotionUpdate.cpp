@@ -22,10 +22,10 @@ u32 randBetween(u32 minimum, u32 maximum);
 void *stateEntryFindById(BtlMainStateA *battle, s32 id);
 f32 asdAnimGetTrackLastFrame(void *animation, u32 track);
 s32 btlScriptUnitHasFlags(void);
-BattleMotionSelection *FUN_003eca48(BtlMainStateA *battle, u32 id);
-s32 FUN_003ec668(BtlMainStateA *battle, s32 kind, u32 action);
+BattleMotionSelection *btlMotionFindSelection(BtlMainStateA *battle, u32 id); // declcheck: local (the shared declaration does not compile here or changes this unit)
+s32 btlMotionFindSequence(BtlMainStateA *battle, s32 kind, u32 action); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void FUN_003f2638(BtlMainStateA *battle, u32 action, BattleRosterRecordA *record, u32 flags);
-void FUN_004cae58(BtlMainStateA *battle, BattleRosterRecordA *record);
+void btlRosterMotionStepSequence(BtlMainStateA *battle, BattleRosterRecordA *record);
 f32 randomGetNormalizedFloat(void);
 f32 FUN_001a1ee0(f32 angle);
 void halfRecClear(BtlMainStateA *battle, BtlUnitDataA *subject);
@@ -67,7 +67,7 @@ u32 battleRosterMotionUpdate(u32 job)
         switch (motion.state) {
         case 0:
             if ((motion.flags & 0x200000) != 0) {
-                FUN_004cae58(battle, entry);
+                btlRosterMotionStepSequence(battle, entry);
             } else if ((motion.flags & 2) != 0) {
                 motion.motionDuration = 0;
                 motion.amount = 0.0f;
@@ -81,25 +81,17 @@ u32 battleRosterMotionUpdate(u32 job)
             if ((motion.flags & 0x200000) != 0) {
                 if (btlScriptUnitHasFlags()) {
                     if (motion.pending == 0 && motion.pendingAlternate == 0) {
-                        motion.applied = motion.pending;
-                        motion.pending = 0;
-                        motion.pendingAlternate = 0;
-                        motion.appliedAlternate = 0;
-                        motion.flags &= ~0x400000;
+                        battleRosterMotionEndRequest(&motion);
                     }
                 } else {
                     BtlCombatantEntryA *unit = btlMainFindEntryByListedId(battle, motion.group);
                     if (unit->data.motionState == 0 || (motion.flags & 0x800000) != 0) {
-                        BattleMotionSelection *selection = FUN_003eca48(battle, unit->data.id);
-                        if (selection != NULL && FUN_003ec668(battle, selection->kind, 6)) {
+                        BattleMotionSelection *selection = btlMotionFindSelection(battle, unit->data.id);
+                        if (selection != NULL && btlMotionFindSequence(battle, selection->kind, 6)) {
                             FUN_003f2638(battle, 6, entry, 0);
-                            FUN_004cae58(battle, entry);
+                            btlRosterMotionStepSequence(battle, entry);
                         } else {
-                            motion.applied = motion.pending;
-                            motion.pending = 0;
-                            motion.pendingAlternate = 0;
-                            motion.appliedAlternate = 0;
-                            motion.flags &= ~0x400000;
+                            battleRosterMotionEndRequest(&motion);
                         }
                     } else if (motion.pending == 0 && motion.pendingAlternate == 0) {
                         motion.applied = 0;
@@ -193,12 +185,12 @@ u32 battleRosterMotionUpdate(u32 job)
             break;
         case 3:
             if ((motion.flags & 0x200000) != 0) {
-                FUN_004cae58(battle, entry);
+                btlRosterMotionStepSequence(battle, entry);
             }
             break;
         case 4:
             if ((motion.flags & 0x200000) != 0) {
-                FUN_004cae58(battle, entry);
+                btlRosterMotionStepSequence(battle, entry);
             } else {
                 motion.state = 0;
                 motion.stateFrame = 0;

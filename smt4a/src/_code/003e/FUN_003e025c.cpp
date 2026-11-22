@@ -36,7 +36,7 @@ typedef char BattleCameraViewOffsetsCheck[
 extern "C" {
 extern BtlAuxA *g_btlAux;
 extern const char DAT_00528568[];
-BattleCameraDefinition *FUN_003eca48(BtlMainStateA *battle, u16 id);
+BattleCameraDefinition *btlMotionFindSelection(BtlMainStateA *battle, u16 id); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void FUN_004f2abc(BtlCameraA *camera, const char *path);
 s32 FUN_004f2294(BtlCameraA *camera);
 void btlCameraObjectCreate(BtlCameraA *camera);
@@ -49,7 +49,7 @@ void FUN_003e025c(BtlStep *step, BtlMainStateA *battle)
     if (record != NULL) {
         BtlCombatantEntryA *entry = btlMainFindEntryByListedId(battle, record->combatant.parameterIndex);
         if (entry != NULL) {
-            BattleCameraDefinition *definition = FUN_003eca48(battle, entry->data.id);
+            BattleCameraDefinition *definition = btlMotionFindSelection(battle, entry->data.id);
             BattleCameraAuxCamera *auxCamera = &reinterpret_cast<BattleCameraAuxView *>(g_btlAux)->camera;
             auxCamera->resource = definition->resource;
             if (definition != NULL && (definition->flags & 1) != 0) {

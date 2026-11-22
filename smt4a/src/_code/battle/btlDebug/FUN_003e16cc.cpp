@@ -1,6 +1,7 @@
-/* NON_MATCHING: readable rewrite compiles (212 vs 209 rows); register allocation differs (retail keeps the state in r9) */
+/* NON_MATCHING: register allocation differs (retail keeps the state in r9, the shown count in r8 and a zero in sl, and reloads the unit's pending flag before clearing it). */
 #include "common.h"
 #include "battle/BtlUiGlobal.h"
+#include "battle/btlEncount.h"
 
 // Battle unit entry (0x1d0 bytes each): only the fields read here.
 struct BattleUnitEntry {
@@ -29,6 +30,18 @@ struct StateObject {
     u32 unk10;              // 0x10
 };
 
+/* Where the refresh announcements of each side are placed (0x57a634). */
+struct BtlRefreshSideLayout {
+    s32 stride;             /* between two announcements */
+    s32 base;               /* added for the marker */
+    s32 extra;
+};
+struct BtlRefreshLayout {
+    BtlRefreshSideLayout enemy;     /* 0x00 */
+    BtlRefreshSideLayout player;    /* 0x0c */
+    s32 start;                      /* 0x18 */
+};
+
 struct SideRecord {
     u8 unk00[2];
     u16 id;                 // 0x02
@@ -38,16 +51,8 @@ extern "C" {
 
 extern s32 g_btlCamera;
 extern u8* g_btlAux;
-extern s16 DAT_0057a634;
-extern s16 DAT_0057a638;
-extern s16 DAT_0057a63c;
-extern s16 DAT_0057a640;
-extern s16 DAT_0057a644;
-extern s16 DAT_0057a648;
-extern s16 DAT_0057a64c;
-extern u64 DAT_00573858;
-extern u64 DAT_00573878;
-extern u64 DAT_00573890;
+extern BtlRefreshLayout DAT_0057a634;
+extern BtlEncounterGlobalsA g_btlEncount;
 
 void qsort(void* base, s32 count, s32 size, s32 (*compare)(const void*, const void*));
 s32 FUN_00221a94(const void* a, const void* b);
@@ -63,17 +68,17 @@ void btlCameraStartMove(s32 camera, s32 arg);
 void FUN_003ed6e8(BattleState* state);
 void btlAiBuildTurnOrder(BattleState* state);
 void FUN_004aa2e0(BtlUiA *ui, s32 arg);
-void FUN_003e0cd4(StateObject* object, BattleState* state);
+s32 FUN_003e0cd4(StateObject* object, BattleState* state);
 
 // Shows the "refresh" announcement for every unit whose pair state changed, then continues the state machine.
-void FUN_003e16cc(StateObject* object, BattleState* state)
+s32 FUN_003e16cc(StateObject* object, BattleState* state)
 {
     if (object->flags == 0 && (*reinterpret_cast<u32*>(g_btlAux + 0x339c) & 0x400) != 0) {
         *reinterpret_cast<u32*>(g_btlCamera + 0x64c) |= 0x4000;
         nameEntriesRegisterVerNames(g_btlAux);
         object->flags |= 2;
     }
-    if ((object->flags & 2) == 0 || FUN_004f8264(g_btlAux) == 0) return;
+    if ((object->flags & 2) == 0 || FUN_004f8264(g_btlAux) == 0) return 0;
 
     BattleUnitEntry* pending[50];
     s32 count = 0;
@@ -93,21 +98,21 @@ void FUN_003e16cc(StateObject* object, BattleState* state)
                 SideRecord* record = btlFindEntryBlockByMemberId(state, unit->listedId);
                 if (pairedEntryTableContains(state, record->id) == 0) {
                     unit->status |= 0x800;
-                    s16 stride, base, extra;
+                    s16 stride, base, extra, start;
                     if ((unit->flags & 0x10) != 0) {
-                        stride = DAT_0057a640;
-                        base = DAT_0057a644;
-                        extra = DAT_0057a648;
+                        stride = DAT_0057a634.player.stride;
+                        base = DAT_0057a634.player.base;
+                        extra = DAT_0057a634.player.extra;
+                        start = DAT_0057a634.start;
                     } else {
-                        stride = DAT_0057a634;
-                        base = DAT_0057a638;
-                        extra = DAT_0057a63c;
+                        stride = DAT_0057a634.enemy.stride;
+                        base = DAT_0057a634.enemy.base;
+                        extra = DAT_0057a634.enemy.extra;
+                        start = DAT_0057a634.start;
                     }
-                    s32 offset = shown * stride + DAT_0057a64c;
                     FUN_004cae0c(state, unit, 0, 0);
-                    btlReflectQueueKind44(offset + base, object, unit, 0xff, extra, 0);
-                    u32 kind = ((unit->flags & 0x10) != 0) ? 7 : 6;
-                    FUN_004fe764(offset, object, unit, kind, 0xd);
+                    btlReflectQueueKind44(start + base + shown * stride, object, unit, 0xff, extra, 0);
+                    FUN_004fe764(start + shown * stride, object, unit, (unit->flags & 0x10) != 0 ? 7 : 6, 0xd);
                     if (!announced) {
                         btlQueueActionMessage(shown * stride, object, 0x1000276, 0, 0, 0, 0);
                         announced = true;
@@ -117,21 +122,21 @@ void FUN_003e16cc(StateObject* object, BattleState* state)
             }
         }
     }
-    if (*reinterpret_cast<s32*>(g_btlCamera + 0x34) != 0) {
-        btlCameraStartMove(g_btlCamera, 0);
-    } else {
+    if (*reinterpret_cast<s32*>(g_btlCamera + 0x34) == 0) {
         btlCameraStartMove(g_btlCamera, 0x78);
+    } else {
+        btlCameraStartMove(g_btlCamera, 0);
     }
-    if ((DAT_00573858 & state->pendingMask) == 0) {
+    if ((g_btlEncount.initialStateMask & state->pendingMask) == 0) {
         FUN_003ed6e8(state);
         btlAiBuildTurnOrder(state);
-        state->pendingMask = DAT_00573878 | state->pendingMask | DAT_00573890;
+        state->pendingMask = g_btlEncount.order.mask | state->pendingMask | g_btlEncount.orderBuiltMask;
         FUN_004aa2e0(g_btlUiBlock, 0);
     }
     object->unk10 = 0;
     object->phase = 0x19;
     object->flags = 0;
-    FUN_003e0cd4(object, state);
+    return FUN_003e0cd4(object, state);
 }
 
 } /* extern "C" */

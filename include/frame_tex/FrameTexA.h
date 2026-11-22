@@ -1,7 +1,7 @@
 /* frame_tex/FrameTex: Apocalypse's frame-texture effects work (g_frameTex, 0x14A0 bytes).
  *
  * The same effects as SMT IV's FrameTexWork (frame_tex/FrameTex.h: the "HDR", "Zan", "CAMP", two
- * "ENCEFF" and the "XFADE" cross-fade draw jobs FUN_00138e14 registers), with four CAMP widgets and a
+ * "ENCEFF" and the "XFADE" cross-fade draw jobs frameTexCreate registers), with four CAMP widgets and a
  * larger block between the CAMP and ENCEFF capture states. Only Apocalypse's units include this. */
 #ifndef FRAME_TEX_FRAMETEXA_H
 #define FRAME_TEX_FRAMETEXA_H

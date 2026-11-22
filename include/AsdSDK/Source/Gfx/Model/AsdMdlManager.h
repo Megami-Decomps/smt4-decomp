@@ -46,7 +46,7 @@ typedef struct AsdMdlNode {
     /* 0x00 */ u32 flags;                /* bit 0: a pending motion should replace the playing one; bit 1: shared */
     /* 0x04 */ AsdModelFile *file;       /* the loaded model image (reference counted) */
     /* 0x08 */ u32 drawMask;             /* caller supplied parameter, 7 by default */
-    /* 0x0C */ s32 unk0c;                /* -1 by default */
+    /* 0x0C */ s32 sceneGroup;           /* the scene group the model is registered in (lightOwnerRegister), -1: none */
     /* 0x10 */ s32 unk10;                /* -1 by default */
     /* 0x14 */ u8 unk14[0x10];
     /* 0x24 */ void **table;             /* count entries, the first is the scene node */

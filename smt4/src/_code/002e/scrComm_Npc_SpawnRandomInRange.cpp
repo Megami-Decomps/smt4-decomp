@@ -29,7 +29,7 @@ u32 partyFindFreeStockSlot(void);
 u32 FUN_00252190(u32 id, s32 a, s32 b);
 void eventTexSetJobParam(u32 job);
 void eventTexRegisterAndSortTask(u32 job);
-void FUN_00247bf4(u32 job, s32 frame, s32 flag);
+void jobStartAlphaFade(u32 job, s32 frame, s32 flag);
 void *memClear(void *data, u32 size);
 const char *dataTable01FindByIdWithAoc(u32 id);
 char *libc_strcpy(char *destination, const char *source);
@@ -81,13 +81,13 @@ u32 scrComm_Npc_SpawnRandomInRange(void)
         eventTexSetJobParam(job);
         eventTexRegisterAndSortTask(job);
         scrWorkSetValue(2, job);
-        FUN_00247bf4(job, 0, 1);
+        jobStartAlphaFade(job, 0, 1);
         scrWorkSetValue(0, 2);
         DAT_0044cfa0 = 0;
         break;
     }
     case 2:
-        FUN_00247bf4(scrWorkGetValue(2), 15, 0);
+        jobStartAlphaFade(scrWorkGetValue(2), 15, 0);
         scrWorkSetValue(0, 3);
         DAT_0044cfa0 = 0;
         break;
@@ -119,7 +119,7 @@ u32 scrComm_Npc_SpawnRandomInRange(void)
         break;
     }
     case 10:
-        FUN_00247bf4(scrWorkGetValue(2), 10, 1);
+        jobStartAlphaFade(scrWorkGetValue(2), 10, 1);
         scrWorkSetValue(0, 11);
         DAT_0044cfa0 = 0;
         break;

@@ -1,8 +1,8 @@
 /* NON_MATCHING: component stores, packed-color register allocation and the final branch form differ. */
+#include "code/Code0024.h"
 #include "shard/FrameColorState.h"
 
 extern "C" {
-void FUN_0024ac7c(s32 enabled);
 void frameTexStartTransition(u32 first, u32 second, u32 third);
 
 // Retain the color components and initialize the frame's three packed colors.
@@ -19,7 +19,7 @@ void FUN_002e23c0(FrameColorState *state, u32 first, u32 second, u32 third)
     state->secondColor = state->secondLowByte | (second & ~0xffu);
     state->firstColor = state->lowByte | (state->highByte << 24) |
                         (state->upperMiddleByte << 16) | (state->lowerMiddleByte << 8);
-    FUN_0024ac7c(1);
+    frameTexSetHdrEnabled(1);
     frameTexStartTransition(state->firstColor, state->secondColor, state->thirdColor);
 }
 }

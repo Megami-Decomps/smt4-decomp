@@ -75,8 +75,8 @@ extern "C" u32 battleEncounterStepShowAmbushMarkers(BattleEncounterQuery *query,
     if (query->pending == 0 && (g_btlAux->flags & BTL_EFFECT_JOB_REFERENCES_READY)) {
         btlCameraSetFlags(g_btlMain, 0x4000);
         /* BattleVersionResources (shard/W6_W6Match1_BattleVersionResources.h) is still a separate view of the
-         * g_btlAux block (BtlEffectWork) that FUN_00240614 and its siblings take; merging the two is a follow-up. */
-        FUN_00240614((BattleVersionResources *)g_btlAux);
+         * g_btlAux block (BtlEffectWork) that nameEntriesRegisterVerNames and its siblings take; merging the two is a follow-up. */
+        nameEntriesRegisterVerNames((BattleVersionResources *)g_btlAux);
         query->pending |= BATTLE_ENCOUNTER_MARKERS_REQUESTED;
     }
     if (!(query->pending & BATTLE_ENCOUNTER_MARKERS_REQUESTED)) {

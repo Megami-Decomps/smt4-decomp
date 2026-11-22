@@ -28,7 +28,7 @@ void FUN_0027fde4(void);
 void FUN_002e8be0(void);
 void FUN_002e8fdc(void);
 void FUN_002e9b60(void);
-void FUN_002ea140(void);
+void lmapIntroSceneStep(void);
 void FUN_002ea500(void);
 void FUN_002d424c(void);
 void FUN_002d4874(void);
@@ -333,7 +333,7 @@ void FUN_002712dc(void)
         FUN_002e9b60();
         return;
     case 15:
-        FUN_002ea140();
+        lmapIntroSceneStep();
         return;
     case 17:
         FUN_002ea500();

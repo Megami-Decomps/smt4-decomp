@@ -2,7 +2,7 @@
 #include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 
 extern "C" {
-void asdSoundObjectStop(s32 handle, s32 frames);
+void nw_snd_internal_BasicSound_Stop(s32 handle, s32 frames); // declcheck: local (the shared declaration does not compile here or changes this unit)
 s32 FUN_0016003c(s32 handle);
 
 // Request a registered sound's stop, then retire its node once playback has ended.
@@ -13,7 +13,7 @@ u32 asdSoundRegisteredStop(s32 id, s32 frames)
     if (node != NULL) {
         if ((node->value & 0x10) == 0) {
             if (node->handle != 0) {
-                asdSoundObjectStop(node->handle, frames);
+                nw_snd_internal_BasicSound_Stop(node->handle, frames);
             }
             node->value |= 0x10;
         }

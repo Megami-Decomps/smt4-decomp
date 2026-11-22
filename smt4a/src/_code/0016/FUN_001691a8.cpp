@@ -13,8 +13,8 @@ u32 FUN_001691a8(s32 slot)
             return 0;
         }
         if (gameSaveTestFlag(occupant->id, occupant->kind) == 0) {
-            if (room->progress[slot].unk00 >= room->progress[slot].unk04 &&
-                room->progress[slot].unk08 >= 5) {
+            if (room->progress[slot].delayElapsed >= room->progress[slot].delay &&
+                room->progress[slot].fadeStep >= 5) {
                 return 0;
             }
         }

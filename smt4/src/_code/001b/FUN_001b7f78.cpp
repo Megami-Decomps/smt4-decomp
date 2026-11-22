@@ -731,7 +731,7 @@ extern int mapMainPollScript(void);
 /* Supplied declaration required: FUN_00276138. */
 /* Supplied declaration required: mapPerFrameUpdate. */
 /* Supplied declaration required: mapEnemyRestartIdleEntries. */
-extern int FUN_002d2b40(void);
+extern int mapEnemyResolveEncounter(void);
 extern int mapRangeCreateModels(void);
 /* Supplied declaration required: mapIfDestroyModelManagers. */
 /* Supplied declaration required: FUN_002d3e88. */
@@ -2892,7 +2892,7 @@ LAB_001bb1d4:
         *(unsigned char *)((int)puVar14 + 0xba) = 1;
       }
       if (*(char *)(temp_v9 + 0xdc8) == '\0') {
-        temp_v9 = FUN_002d2b40();
+        temp_v9 = mapEnemyResolveEncounter();
         if (temp_v9 == -1) {
           return 0;
         }

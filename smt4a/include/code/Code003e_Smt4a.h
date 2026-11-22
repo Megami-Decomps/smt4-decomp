@@ -5,8 +5,9 @@
 struct ControllerGroup;
 struct Holder;
 struct Owner;
-struct IdRecord;
-struct RecordOwner;
+struct BtlMainStateA;
+struct BattleMotionSelection;
+struct BattleMotionSequence;
 struct ValueAtF0;
 struct FourPtrs;
 struct HalfRec;
@@ -18,11 +19,13 @@ void FUN_003e55f4(Holder *holder);
 
 void uiEntriesReset(Owner *owner);
 
-IdRecord * FUN_003ec668(RecordOwner *owner, u32 unused, u32 id);
+/* The sequence of `motion` in the motion file's table `kind` (the kind passes through to the table lookup). */
+BattleMotionSequence *btlMotionFindSequence(BtlMainStateA *battle, s32 kind, u32 motion);
 
 u32 valueAtF0IsReady(ValueAtF0 *obj);
 
-IdRecord * FUN_003eca48(RecordOwner *owner, s32 id);
+/* The motion selection of the unit `id` in the motion file's table 0. */
+BattleMotionSelection *btlMotionFindSelection(BtlMainStateA *battle, s32 id);
 
 u32 fourPtrsAllNull(FourPtrs *obj);
 

@@ -11,7 +11,7 @@ struct SoundGlobals {
     /* 0x318 */ SoundHandleTable *table;
 };
 extern SoundGlobals g_asdSoundHandleState;
-void asdSoundObjectStop(void *sound, s32 fadeFrames);
+void nw_snd_internal_BasicSound_Stop(void *sound, s32 fadeFrames); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void nw_snd_SoundHandle_DetachSound(void **handle);
 void asdSoundDetachAllHandles(void)
 {
@@ -19,7 +19,7 @@ void asdSoundDetachAllHandles(void)
     if (table != NULL) {
         for (u8 index = 0; index < 16; ++index) {
             if (table->handles[index] != NULL) {
-                asdSoundObjectStop(table->handles[index], 0);
+                nw_snd_internal_BasicSound_Stop(table->handles[index], 0);
                 nw_snd_SoundHandle_DetachSound(&table->handles[index]);
             }
         }

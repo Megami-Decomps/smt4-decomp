@@ -28,7 +28,7 @@ u32 partyFindFirstUnusedEntry(void);
 u32 npc2dCreateDemonPortrait(u32 id, s32 a, s32 b, s32 c, f32 scale);
 void eventTexSetJobParam(u32 job);
 void eventInsertSortedTextureJob(u32 job);
-void FUN_0031bca4(u32 job, s32 frame, s32 flag);
+void jobStartAlphaFade(u32 job, s32 frame, s32 flag);
 void sysMemClear(void *data, u32 size);
 const char *dataTable01GetRecordWithAocOverride(u32 id);
 const char *demonGetRaceLabel(u32 id, s32 kind);
@@ -80,13 +80,13 @@ u32 scrSpawnRandomDemonInLevelRange(void)
         eventTexSetJobParam(job);
         eventInsertSortedTextureJob(job);
         scrWorkSetValue(2, job);
-        FUN_0031bca4(job, 0, 1);
+        jobStartAlphaFade(job, 0, 1);
         scrWorkSetValue(0, 2);
         DAT_00588008 = 0;
         break;
     }
     case 2:
-        FUN_0031bca4(scrWorkGetValue(2), 15, 0);
+        jobStartAlphaFade(scrWorkGetValue(2), 15, 0);
         scrWorkSetValue(0, 3);
         DAT_00588008 = 0;
         break;
@@ -118,7 +118,7 @@ u32 scrSpawnRandomDemonInLevelRange(void)
         break;
     }
     case 10:
-        FUN_0031bca4(scrWorkGetValue(2), 10, 1);
+        jobStartAlphaFade(scrWorkGetValue(2), 10, 1);
         scrWorkSetValue(0, 11);
         DAT_00588008 = 0;
         break;

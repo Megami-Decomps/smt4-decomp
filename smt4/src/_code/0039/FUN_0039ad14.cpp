@@ -4,7 +4,7 @@
 #include "game/GameState.h"
 
 extern "C" {
-void FUN_0039b648(NavigationInterpolation *state);
+void naviUpdateTouchButtons(NavigationInterpolation *state);
 u32 naviUpdateDragCapture(NavigationInterpolation *state);
 void NaviMain_SetCursorPos(void *cursor, const NavigationPoint *position);
 
@@ -31,7 +31,7 @@ u32 FUN_0039ad14(NavigationInterpolation *state)
             NaviMain_SetCursorPos(state->cursorData, &position);
         }
     }
-    FUN_0039b648(state);
+    naviUpdateTouchButtons(state);
     naviUpdateDragCapture(state);
     return 0;
 }

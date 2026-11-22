@@ -2,14 +2,14 @@
 
 extern "C" {
 s32 asd3dSoundActorIsPlaying(u32 actorIndex);
-void asdSoundObjectStop(u32 handle, u32 frames); // declcheck: local (the shared declaration does not compile here or changes this unit)
+void nw_snd_internal_BasicSound_Stop(u32 handle, u32 frames); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Stops an actor's sound when a handle is bound: the guarded stop of nw::snd::SoundHandle::Stop, inlined here as in
  * IV's twin FUN_002ebdd8 and asdSoundRegisteredRestart. */
 static __inline void stopSpatialHandle(AsdSnd3dStateA &sound3d, u32 index, u32 frames)
 {
     if (s32 handle = sound3d.handles[index]) {
-        asdSoundObjectStop(handle, frames);
+        nw_snd_internal_BasicSound_Stop(handle, frames);
     }
 }
 

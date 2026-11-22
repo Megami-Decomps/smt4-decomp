@@ -15,7 +15,7 @@ static __inline void playerModelReleasePart(PlayerModelParts *player, s32 index)
     if (part->model != NULL) {
         part->state = 2;
         asdMdlObjectHide(part->model);
-        if (part->model->node->unk0c >= 0)
+        if (part->model->node->sceneGroup >= 0)
             asdMdlManagerMarkDestroy(part->model);
     }
 }

@@ -26,7 +26,7 @@ struct RegionPoint {
 
 extern "C" {
 extern MapRegionTable DAT_004c14a0;
-void FUN_0025247c(f32 *out, f32 fromX, f32 fromY, f32 fromZ, f32 toX, f32 toY, f32 toZ);
+void vec3DirectionBetween(f32 *out, f32 fromX, f32 fromY, f32 fromZ, f32 toX, f32 toY, f32 toZ);
 
 // Select the containing map region independently for ordinary and alternate kinds.
 void mapSelectContainingRegions(RegionPoint point)
@@ -43,19 +43,19 @@ void mapSelectContainingRegions(RegionPoint point)
             switch (edge) {
             case 0:
                 normal = region->edgeA.normal;
-                FUN_0025247c(&direction.x, region->edgeA.origin.x, region->edgeA.origin.y, region->edgeA.origin.z, point.x, 0.0f, point.z);
+                vec3DirectionBetween(&direction.x, region->edgeA.origin.x, region->edgeA.origin.y, region->edgeA.origin.z, point.x, 0.0f, point.z);
                 break;
             case 1:
                 normal = region->edgeB.normal;
-                FUN_0025247c(&direction.x, region->edgeB.origin.x, region->edgeB.origin.y, region->edgeB.origin.z, point.x, 0.0f, point.z);
+                vec3DirectionBetween(&direction.x, region->edgeB.origin.x, region->edgeB.origin.y, region->edgeB.origin.z, point.x, 0.0f, point.z);
                 break;
             case 2:
                 normal = region->edgeC.normal;
-                FUN_0025247c(&direction.x, region->edgeC.origin.x, region->edgeC.origin.y, region->edgeC.origin.z, point.x, 0.0f, point.z);
+                vec3DirectionBetween(&direction.x, region->edgeC.origin.x, region->edgeC.origin.y, region->edgeC.origin.z, point.x, 0.0f, point.z);
                 break;
             case 3:
                 normal = region->edgeD.normal;
-                FUN_0025247c(&direction.x, region->edgeD.origin.x, region->edgeD.origin.y, region->edgeD.origin.z, point.x, 0.0f, point.z);
+                vec3DirectionBetween(&direction.x, region->edgeD.origin.x, region->edgeD.origin.y, region->edgeD.origin.z, point.x, 0.0f, point.z);
                 break;
             }
             if (mathVec3Dot(normal.x, normal.y, normal.z, direction.x, direction.y, direction.z) < 0.0f) {

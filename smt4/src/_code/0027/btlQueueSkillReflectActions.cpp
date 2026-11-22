@@ -1,4 +1,7 @@
-/* NON_MATCHING: register pressure - retail keeps the frame, actor and skill in registers and re-evaluates the frame offsets per use, while this version spills r0-r3 and the derived frames; the stack-argument layout (two skipped words, the speed passed as raw bits) and the calls are the same. */
+/* NON_MATCHING: 13 parameters as the callers pass them (firstAmount is the first stack word); the damage actions are
+ * btlReflectCreateKind1c's body and the status action btlReflectQueueStatusChange, inlined. Retail keeps the frame, actor
+ * and skill in registers where this build spills r0-r3, and tests the skill id the other way round (movge of the
+ * non-reflect flag). */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlReflect.h"
 #include "common.h"
@@ -21,8 +24,8 @@ void btlQueueKeyedScalarReflectAction(s32 a, s32 b, u32 sound, s32 c, s32 d, s32
 
 /* Queues the reflect actions of a skill use: the optional pre-effect, the one or two damage amounts (with their
    effect and, when a status flag changes, the effect sound), and the follow-up status actions. Always returns 1. */
-u32 btlQueueSkillReflectActions(s32 frame, u32 actor, SkillRecord *skill, u32 unused4, u32 unused5, u32 unused6, s32 firstAmount, s32 secondAmount,
-                 u32 unused7, u32 statusMask, s32 preDelay, s32 effectDelay, s32 preSide, u32 effectSpeedBits,
+u32 btlQueueSkillReflectActions(s32 frame, u32 actor, SkillRecord *skill, u32 unused3, s32 firstAmount, s32 secondAmount,
+                 u32 unused6, u32 statusMask, s32 preDelay, s32 effectDelay, s32 preSide, u32 effectSpeedBits,
                  u32 clearMask)
 {
     union {
@@ -53,26 +56,14 @@ u32 btlQueueSkillReflectActions(s32 frame, u32 actor, SkillRecord *skill, u32 un
             if (isReflect && effectDelay >= 0) {
                 FUN_002268d0(frame, 0, actor, skill, firstAmount, secondAmount, 5, 1, effectSpeed);
             }
-            ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, effectFrame, 0, actor);
-            action->kind = 0x1c;
-            action->target = (u32)skill;
-            action->value = 0;
-            action->parameter = firstAmount;
-            action = btlQueueReflectAction(g_btlActionReflect, effectFrame, 0, actor);
-            action->kind = 0x1c;
-            action->target = (u32)skill;
-            action->value = 1;
-            action->parameter = secondAmount;
+            reflectCreateKind1c(effectFrame, actor, (u32)skill, firstAmount, 0);
+            reflectCreateKind1c(effectFrame, actor, (u32)skill, secondAmount, 1);
             changed = btlScriptUnitIsIncapacitated(static_cast<void *>(btlGetMainState()));
         } else {
             if (isReflect && effectDelay >= 0) {
                 FUN_002268d0(frame, 0, actor, skill, firstAmount, 0, 2, 1, effectSpeed);
             }
-            ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, effectFrame, 0, actor);
-            action->kind = 0x1c;
-            action->target = (u32)skill;
-            action->value = 0;
-            action->parameter = firstAmount;
+            reflectCreateKind1c(effectFrame, actor, (u32)skill, firstAmount, 0);
             changed = btlScriptUnitIsIncapacitated(static_cast<void *>(btlGetMainState())) & ~clearMask;
         }
         if (changed != 0) {
@@ -82,11 +73,7 @@ u32 btlQueueSkillReflectActions(s32 frame, u32 actor, SkillRecord *skill, u32 un
         if (isReflect && effectDelay >= 0) {
             FUN_002268d0(frame, 0, actor, skill, secondAmount, 0, 3, 1, effectSpeed);
         }
-        ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, effectFrame, 0, actor);
-        action->kind = 0x1c;
-        action->target = (u32)skill;
-        action->value = 1;
-        action->parameter = secondAmount;
+        reflectCreateKind1c(effectFrame, actor, (u32)skill, secondAmount, 1);
         changed = btlScriptUnitIsIncapacitated(static_cast<void *>(btlGetMainState()));
         if (changed != 0) {
             btlQueueKeyedScalarReflectAction(0, 0, 0x10001c1, 0, 1, 0, 0);
@@ -101,14 +88,10 @@ u32 btlQueueSkillReflectActions(s32 frame, u32 actor, SkillRecord *skill, u32 un
                 flags = entry->statusFlags;
             }
         }
-        ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)((s16)frame + 1), 0, actor);
-        action->kind = 0x1d;
-        action->target = (u32)skill;
-        action->value = 0;
-        action->parameter = statusMask;
+        btlReflectQueueStatusChange((s16)((s16)frame + 1), actor, skill, 0, statusMask);
         if (isReflect && (flags & ~statusMask & 0x586) == 0) {
             s16 lastFrame = (s16)((s16)frame + 2);
-            action = btlQueueReflectAction(g_btlActionReflect, lastFrame, 0, actor);
+            ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, lastFrame, 0, actor);
             action->kind = 0x14;
             action->target = (u32)skill;
             action = btlQueueReflectAction(g_btlActionReflect, lastFrame, 0, actor);

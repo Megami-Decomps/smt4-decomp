@@ -88,7 +88,7 @@ extern "C" void shopUpdatePageOpening(Scene3a *scene)
     }
     if (scene->modelManager != NULL &&
         modelHasLoadedAttachment((const ModelBoneAttachmentRoot *)scene->modelManager) != 0 &&
-        ((AsdMdlObject *)scene->modelManager)->node->unk0c < 0) {
+        ((AsdMdlObject *)scene->modelManager)->node->sceneGroup < 0) {
         lightOwnerRegister((AsdMdlObject *)scene->modelManager, 1);
         nodeSetTranslation3f(((AsdMdlObject *)scene->modelManager)->node, 0, nodeVec3(0.0f, -32000.0f, 0.0f));
     }

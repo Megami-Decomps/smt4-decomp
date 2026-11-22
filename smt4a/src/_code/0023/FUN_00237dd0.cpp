@@ -14,7 +14,7 @@ int FUN_001a1c28(...);
 int mtx44RotateYXZDegrees(...);
 int facingUpdateAngles(int, int);
 int uiSpriteRefreshMode(int);
-int matrixSetTranslation(...);
+int nn_math_ARMv6_MTX44TranslateC_FAST(...);
 int VectorSignedToFloat(...);
 int nn_math_ARMv6_MTX34CopyAsm(unsigned char [48], float *);
 int nn_math_ARMv6_MTX34InvTransposeAsm(unsigned char [68], unsigned char [48]);
@@ -76,7 +76,7 @@ extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
 /* Supplied declaration required: facingUpdateAngles. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: uiSpriteRefreshMode. */
-/* Supplied declaration required: matrixSetTranslation. */
+/* Supplied declaration required: nn_math_ARMv6_MTX44TranslateC_FAST. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34InvTransposeAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34ToMTX33Asm. */
@@ -191,19 +191,19 @@ void FUN_00237dd0(int param_1)
     temp_v14 = *pfVar2 * 0.03125f;
     temp_v15 = pfVar2[1] * 0.03125f;
     temp_v16 = 0.0f;
-    matrixSetTranslation(temp_v30,&temp_v14);
+    nn_math_ARMv6_MTX44TranslateC_FAST(temp_v30,&temp_v14);
     nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v30);
   }
   temp_v32 = *(unsigned int *)(param_1 + 0x120);
   temp_v34 = *(unsigned int *)(param_1 + 0x128);
   temp_v33 = -*(float *)(param_1 + 0x124);
-  matrixSetTranslation(temp_v29,&temp_v32);
+  nn_math_ARMv6_MTX44TranslateC_FAST(temp_v29,&temp_v32);
   nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v29);
   if (*(char *)(param_1 + 0x380) == '\x01') {
     temp_v14 = *(float *)(param_1 + 0x358);
     temp_v15 = *(float *)(param_1 + 0x35c);
     temp_v16 = *(float *)(param_1 + 0x360);
-    matrixSetTranslation(temp_v30,&temp_v14);
+    nn_math_ARMv6_MTX44TranslateC_FAST(temp_v30,&temp_v14);
     nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v30);
   }
   if (*(char *)(param_1 + 0x380) == '\x03') {
@@ -303,7 +303,7 @@ void FUN_00237dd0(int param_1)
       temp_v14 = temp_v14 * temp_v12;
       temp_v15 = temp_v15 * temp_v13;
       temp_v16 = temp_v11;
-      matrixSetTranslation(temp_v30,&temp_v14);
+      nn_math_ARMv6_MTX44TranslateC_FAST(temp_v30,&temp_v14);
       nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v30);
       temp_v9 = temp_v6;
     }
@@ -319,7 +319,7 @@ void FUN_00237dd0(int param_1)
     temp_v14 = temp_v14 * temp_v13;
     temp_v15 = temp_v15 * temp_v12;
     temp_v16 = temp_v11;
-    matrixSetTranslation(temp_v30,&temp_v14);
+    nn_math_ARMv6_MTX44TranslateC_FAST(temp_v30,&temp_v14);
     nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v30);
   }
   temp_v19[0] = *(float *)(param_1 + 500) * *(float *)(param_1 + 0x1f8);
@@ -351,7 +351,7 @@ void FUN_00237dd0(int param_1)
     temp_v14 = temp_v14 * temp_v12;
     temp_v15 = temp_v15 * temp_v13;
     temp_v16 = temp_v11;
-    matrixSetTranslation(temp_v30,&temp_v14);
+    nn_math_ARMv6_MTX44TranslateC_FAST(temp_v30,&temp_v14);
     nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v30);
   }
   camSetMatrixA(g_renderCtx,temp_v18);

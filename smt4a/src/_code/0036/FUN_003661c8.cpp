@@ -11,7 +11,7 @@ int sysPlaySe(int);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int mapIfApplyEntryRequest(...);
-int FUN_00246014(void);
+int mapIfSpawnDownAction(void);
 int lmapRequestTimedEffect(...);
 int padGetNormalizedAnalogStick(...);
 int FUN_00324e38(...);
@@ -51,7 +51,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: mapIfApplyEntryRequest. */
 /* Supplied declaration required: FUN_002342b8. */
-/* Supplied declaration required: FUN_00246014. */
+/* Supplied declaration required: mapIfSpawnDownAction. */
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: lmapRequestTimedEffect. */
 /* Supplied declaration required: mapIfOverlayRelease. */
@@ -283,7 +283,7 @@ void FUN_003661c8(void)
       mapIfApplyEntryRequest(1,g_gameState.overviewRecord);
       libm_sinf();
       libm_cosf();
-      FUN_00246014();
+      mapIfSpawnDownAction();
       temp_v1 = g_lmapScene;
       temp_v2 = *(int *)(temp_v1 + 4);
       *(int *)(temp_v1 + 4) = temp_v2 + 1;

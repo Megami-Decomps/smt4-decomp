@@ -84,7 +84,7 @@ u8 messageBannerIsIdle(void);
 extern "C" {
 #endif
 
-void FUN_0029a084(int which, u32 value);
+void FUN_0029a084(int which, u16 value);
 
 #ifdef __cplusplus
 }

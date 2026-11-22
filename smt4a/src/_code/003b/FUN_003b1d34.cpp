@@ -16,13 +16,13 @@ u32 FUN_003b1d34(void)
             btlCameraStartMove(camera, 0);
             FUN_004f1edc(camera);
             camera->unk3C = 0;
-            camera->unk38 = 1;
+            camera->state = 1;
             camera->unk0C = camera->unk14;
             camera->unk10 = camera->unk18;
         } else if (mode == 1) {
             mathVectorClear(camera->vector);
             camera->unk3C = 0;
-            camera->unk38 = 1;
+            camera->state = 1;
             camera->unk0C = 0.0f;
             camera->unk10 = 0.0f;
         }

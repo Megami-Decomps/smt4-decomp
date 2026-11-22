@@ -9,7 +9,7 @@ int asdOperatorDelete(void);
 int bufProcRelease(void);
 int btlUiClearEntryStates(unsigned int);
 int FUN_004ddd10(...);
-int FUN_004de37c(int *, unsigned int *, int, unsigned int);
+int btlUnitTargetPanelStep(int *, unsigned int *, int, unsigned int);
 int btlUnitSetParam(int *, int, int);
 int FUN_004e0314(...);
 int FUN_004e05d4(...);
@@ -64,7 +64,7 @@ extern int FUN_004c8a9c(void);
 extern int isEntryUsable(unsigned int);
 extern int *FUN_004dc72c(int *, unsigned int *, int, unsigned int);
 /* Supplied declaration required: FUN_004ddd10. */
-/* Supplied declaration required: FUN_004de37c. */
+/* Supplied declaration required: btlUnitTargetPanelStep. */
 /* Supplied declaration required: btlUnitSetParam. */
 extern int *battleActionSnapshotCommand(int *, unsigned int *, int, unsigned int);
 /* Supplied declaration required: FUN_004e0314. */
@@ -141,7 +141,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
   default:
     return (int *)0x0;
   case 8:
-    FUN_004de37c(param_1,puVar9,temp_v6,param_4);
+    btlUnitTargetPanelStep(param_1,puVar9,temp_v6,param_4);
     return param_1;
   case 9:
     *(unsigned char *)(temp_v4 + 9) = 10;
