@@ -127,7 +127,7 @@ int gameMapBitSet(...);
 int FUN_00316de4(...);
 int FUN_00396370(void);
 
-int FUN_001a9104(void);
+int questShowRequirementProgress(void);
 int FUN_002648e8(...);
 int FUN_0026493c(...);
 int FUN_00265180(void);
@@ -343,7 +343,7 @@ extern unsigned int DAT_0049fd2c; /* 0x49fd2c */
 #endif
 /* Supplied declaration required: asdMdlManagerMarkDestroy. */
 extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_001a9104. */
+/* Supplied declaration required: questShowRequirementProgress. */
 /* Supplied declaration required: FUN_001d34a8. */
 /* Supplied declaration required: regionFindRecord. */
 /* Supplied declaration required: mapSelectNearbyDeferredModel. */
@@ -953,7 +953,7 @@ unsigned int FUN_001d3e3c(void)
     break;
   case 0xb:
     *(unsigned char *)((int)puVar7 + 0xe1) = 0;
-    FUN_001a9104();
+    questShowRequirementProgress();
     if (temp_v5 == 1) {
       puVar7[3] = 0x28;
       DAT_0049f934 = 1;

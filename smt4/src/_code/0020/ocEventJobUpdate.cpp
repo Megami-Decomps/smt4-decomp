@@ -6,6 +6,7 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMotionValueApi.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "code/Code0038.h"
+#include "gfx/CameraStereoDepth.h"
 
 /* unit-local: the frame controller of a loaded camera animation (only the fields this job drives). */
 struct OcCameraFrames {
@@ -62,7 +63,6 @@ void animPlayerSetLoopPolicy(AsdMdlNode *node, s32 loop);
 void FUN_002a04f0(void *arg);
 void modelSlotAttachChild(OcCameraAnim *camera, s32 index);
 void cameraExportParameters(f32 *output, const OcCameraAnim *camera);
-void FUN_002c159c(void *camera, f32 twist, f32 scale);
 void cameraMatrixCacheSetLookAt(void *camera, const f32 *eye, const f32 *target, const f32 *up);
 void stereoCameraSetPerspective(void *camera, u32 pivot, OcCameraPerspective perspective);
 void titleSetSlotValueState2(u32 index, u32 value);
@@ -83,7 +83,7 @@ static const char s_environmentPath[] = "event/oc/oc_loop.bcenv";
 static void ocEventApplyCamera(OcEventWork *work)
 {
     cameraExportParameters(work->eye, work->current);
-    FUN_002c159c(work->camera, work->twist, 1.0f);
+    asdCameraSetStereoDepth(work->camera, work->twist, 1.0f);
     cameraMatrixCacheSetLookAt(work->camera, work->eye, work->target, work->up);
     stereoCameraSetPerspective(work->camera, 1, work->perspective);
 }

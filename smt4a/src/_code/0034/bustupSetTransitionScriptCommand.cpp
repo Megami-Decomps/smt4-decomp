@@ -3,7 +3,7 @@
 extern "C" {
 s32 scrGetArg(u32 index);
 u32 inputFastForwardActive(void);
-void FUN_00318174(s32 portrait, s32 transition, s32 duration);
+void bustupCutAnimStartTransition(s32 portrait, s32 transition, s32 duration);
 
 // Clamp bustup transition duration in the fast mode before applying the request.
 u32 bustupSetTransitionScriptCommand(void)
@@ -14,7 +14,7 @@ u32 bustupSetTransitionScriptCommand(void)
     if (inputFastForwardActive() != 0 && duration > 4) {
         duration = 4;
     }
-    FUN_00318174(portrait, transition, duration);
+    bustupCutAnimStartTransition(portrait, transition, duration);
     return 1;
 }
 }

@@ -3,6 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "title/titleMain.h"
 #include "shard/W6_W6Match3_EffectColor.h"
+#include "gfx/CameraStereoDepth.h"
 
 struct StatusCameraRegistryView {
     u8 prefix[0xC];
@@ -17,7 +18,6 @@ void asdGxSetViewport(s32, s32, s32, s32);
 void cameraMatrixCacheSetLookAt(StatusCameraWorkA *, const Vec3 *, const Vec3 *, const Vec3 *);
 void stereoCameraSetPerspective(StatusCameraWorkA *, s32, f32, f32, f32, f32);
 void asdCameraRegister(StatusCameraWorkA *);
-void uiSetFloatPair(StatusCameraWorkA *, f32, f32);
 
 // Create the status camera, aim it along the requested direction and register its viewport.
 void statusCameraSetup(const Vec3 *eye, const Vec3 *direction, const Vec3 *auxiliary,
@@ -49,7 +49,7 @@ void statusCameraSetup(const Vec3 *eye, const Vec3 *direction, const Vec3 *auxil
     stereoCameraSetPerspective(camera, 1, camera->lens.fov, camera->lens.nearClip, camera->lens.farClip, 1.6666666f);
     FUN_0036b824(reinterpret_cast<u32>(camera));
     asdCameraRegister(camera);
-    uiSetFloatPair(camera, viewportScale, 1.0f);
+    asdCameraSetStereoDepth(camera, viewportScale, 1.0f);
     g_handleRegistry->camera = camera;
 }
 }

@@ -9,7 +9,7 @@ extern "C" {
 int renderCtxSelectTexture(int, unsigned int);
 int FUN_0019e3d0(...);
 int FUN_001aff14(int *, int);
-int FUN_0020cb74(...);
+int spriteDrawPartQuad(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 int nn_math_ARMv6_MTX34CopyAsm(unsigned char [84], unsigned int *);
@@ -89,7 +89,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int, int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_0019e3d0. */
 /* Supplied declaration required: FUN_001aff14. */
-/* Supplied declaration required: FUN_0020cb74. */
+/* Supplied declaration required: spriteDrawPartQuad. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
@@ -430,7 +430,7 @@ LAB_003fade8:
                 temp_v17[0] = (float)(*(unsigned char *)((int)pfVar7 + 0x27) & 1);
                 temp_v17[1] = (float)((*(unsigned char *)((int)pfVar7 + 0x27) & 2) >> 1);
                 VectorUnsignedToFloat((unsigned int)*(unsigned short *)(pfVar7 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-                FUN_0020cb74(*(unsigned int *)
+                spriteDrawPartQuad(*(unsigned int *)
                               (*(int *)(param_1 + 0x14) + (unsigned int)*(unsigned char *)(pfVar7 + 9) * 0x20 + 0x18)
                              ,temp_v38,&temp_v19,pfVar7 + 4,temp_v4,keyScale,1,param_8);
               }

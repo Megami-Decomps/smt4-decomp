@@ -1,148 +1,47 @@
-/* NON_MATCHING: Retail instruction scheduling/register allocation differs (158 retail versus 110 compiled rows). */
+/* NON_MATCHING: 96 lines: retail adds -11.0 (kept in s16 from entry) to each vertex depth and loads each vertex's
+ * buffer pointer once, copying the position through VFP pairs; the build subtracts 11.0 and reloads the buffer for
+ * every field; the context loads into r4 rather than r1 before the first push. */
 #include "classes/Obj42080c.h"
-#include "romwright_types.h"
+#include "classes/FilterDraw.h"
+#include "camp/RenderCtxTitle.h"
 #include "code/Code002b_Smt4.h"
+#include "ui/AnimatedMessage.h"
 
 extern "C" {
-
-int nn_math_VEC3TransformCoordArray(int *, unsigned char [64], int *, int);
-int titleSceneMultiplyByCameraView(int, unsigned char [64], int);
-int gpuSubmitFloatVectorsOrDefault(int *);
-int forwardRecoveredCallback(void);
-int renderCtxSelectTexture(int, unsigned int);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 13 slot(s), 52 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp7C; /* 0x7c: local_7c */
-    unsigned int sp84; /* 0x84: local_84 */
-    unsigned int sp88; /* 0x88: local_88 */
-    unsigned int sp8C; /* 0x8c: local_8c */
-    unsigned int sp90; /* 0x90: local_90 */
-    unsigned int sp94; /* 0x94: local_94 */
-    unsigned int sp9C; /* 0x9c: local_9c */
-    unsigned int spA0; /* 0xa0: local_a0 */
-    unsigned int spA8; /* 0xa8: local_a8 */
-} param_1_stack;
-
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: nn_math_VEC3TransformCoordArray. */
-/* Supplied declaration required: titleSceneMultiplyByCameraView. */
-/* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
-/* Supplied declaration required: forwardRecoveredCallback. */
-/* Supplied declaration required: FUN_002b011c. */
-/* Supplied declaration required: renderCtxSelectTexture. */
-extern int renderCtxPackPassFlags(unsigned int, unsigned int);
-
-
-} /* extern "C" */
-
-void Obj42080c::draw()
-
-{
-    int param_1 = (int)this;
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar6;
-  float temp_v4;
-  int temp_v5;
-  unsigned int uStack_a4;
-  float temp_v6;
-  unsigned int temp_v7;
-  unsigned int uStack_98;
-  float temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  float temp_v11;
-  unsigned int temp_v12;
-  unsigned int uStack_80;
-  float temp_v13;
-  unsigned char temp_v14 [64];
-  int temp_v15;
-  unsigned int temp_v16;
-  unsigned int temp_v17;
-  unsigned int temp_v18;
-  
-  temp_v4 = -11.0f;
-  renderCtxSelectTexture(g_titleScene,*(unsigned int *)(*(int *)(param_1 + 8) + 8));
-  titleSceneMultiplyByCameraView(param_1,temp_v14,param_1 + 0x18);
-  temp_v1 = g_titleScene;
-  piVar6 = (int *)(g_titleScene + 0x12ac);
-  temp_v0 = *(int *)(*(int *)(param_1 + 0x60) + 0x18);
-  temp_v2 = *piVar6;
-  temp_v3 = piVar6[temp_v2 + 2];
-  *piVar6 = temp_v2 + 1;
-  piVar6[temp_v2 + 3] = temp_v0;
-  if (*(char *)(temp_v1 + 0x12c4) != '\0' || temp_v3 != temp_v0) {
-    (**(romwright_code **)(temp_v1 + 0x12c8))();
-    *(unsigned char *)(temp_v1 + 0x12c4) = 0;
-  }
-  temp_v1 = g_titleScene;
-  temp_v0 = renderCtxPackPassFlags(1,0);
-  piVar6 = (int *)(temp_v1 + 0x124c);
-  temp_v2 = *piVar6;
-  temp_v3 = piVar6[temp_v2 + 2];
-  *piVar6 = temp_v2 + 1;
-  piVar6[temp_v2 + 3] = temp_v0;
-  if (*(char *)(temp_v1 + 0x1264) != '\0' || temp_v3 != temp_v0) {
-    (**(romwright_code **)(temp_v1 + 0x1268))();
-    *(unsigned char *)(temp_v1 + 0x1264) = 0;
-  }
-  temp_v18 = *(unsigned int *)(*(int *)(param_1 + 0x14) + 8);
-  temp_v15 = 0x3f800000;
-  temp_v16 = 0x3f800000;
-  temp_v17 = 0x3f800000;
-  puVar2 = *(unsigned int **)(param_1 + 4);
-  temp_v5 = *puVar2;
-  uStack_a4 = puVar2[1];
-  temp_v6 = (float)puVar2[2] + temp_v4;
-  temp_v1 = *(int *)(param_1 + 4);
-  temp_v8 = *(float *)(temp_v1 + 0x1c) + temp_v4;
-  temp_v7 = *(unsigned int *)(temp_v1 + 0x14);
-  uStack_98 = *(unsigned int *)(temp_v1 + 0x18);
-  temp_v1 = *(int *)(param_1 + 4);
-  temp_v9 = *(unsigned int *)(temp_v1 + 0x28);
-  temp_v10 = *(unsigned int *)(temp_v1 + 0x2c);
-  temp_v11 = *(float *)(temp_v1 + 0x30) + temp_v4;
-  temp_v1 = *(int *)(param_1 + 4);
-  temp_v12 = *(unsigned int *)(temp_v1 + 0x3c);
-  uStack_80 = *(unsigned int *)(temp_v1 + 0x40);
-  temp_v13 = *(float *)(temp_v1 + 0x44) + temp_v4;
-  nn_math_VEC3TransformCoordArray(&temp_v5,temp_v14,&temp_v5,4);
-  FUN_002b011c();
-  temp_v1 = 0;
-  do {
-    gpuSubmitFloatVectorsOrDefault(&temp_v15);
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 4);
-  forwardRecoveredCallback();
-  temp_v1 = g_titleScene;
-  piVar6 = (int *)(g_titleScene + 0x124c);
-  temp_v0 = *piVar6;
-  temp_v2 = piVar6[temp_v0 + 2];
-  *piVar6 = temp_v0 - 1;
-  if (*(char *)(temp_v1 + 0x1264) != '\0' || temp_v2 != piVar6[temp_v0 + 1]) {
-    (**(romwright_code **)(temp_v1 + 0x1268))();
-    *(unsigned char *)(temp_v1 + 0x1264) = 0;
-  }
-  temp_v1 = g_titleScene;
-  piVar6 = (int *)(g_titleScene + 0x12ac);
-  temp_v0 = *piVar6;
-  temp_v2 = piVar6[temp_v0 + 2];
-  *piVar6 = temp_v0 - 1;
-  if (*(char *)(temp_v1 + 0x12c4) != '\0' || temp_v2 != piVar6[temp_v0 + 1]) {
-    (**(romwright_code **)(temp_v1 + 0x12c8))();
-    *(unsigned char *)(temp_v1 + 0x12c4) = 0;
-  }
-  return;
+void titleSceneMultiplyByCameraView(void *filter, f32 *matrix, const void *motion);
+void nn_math_VEC3TransformCoordArray(f32 *vertices, const f32 *matrix, f32 *output, u32 count);
+void gpuSubmitFloatVectorsOrDefault(const f32 *color, f32 x, f32 y, f32 z, f32 u, f32 v);
+void forwardRecoveredCallback(); // declcheck: local (retail passes nothing: r0 still holds the last submit's result)
 }
 
+/* Draws the quad: its four vertices, moved 11 units back and through the filter's camera view, in the
+ * source's blend mode with the child's alpha. */
+void Obj42080c::draw()
+{
+    renderCtxSelectTexture(g_titleScene, (struct AsdTexture *)((FilterDrawTexture *)texture)->handle);
+    f32 matrix[16];
+    titleSceneMultiplyByCameraView(this, matrix, matrixSlot());
+    renderStackPushCounted(g_titleScene->stacks + RENDER_STACK_B,
+                           static_cast<Filter4PolySource *>(rect)->blendMode);
+    renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
+    f32 color[4];
+    color[0] = 1.0f;
+    color[1] = 1.0f;
+    color[2] = 1.0f;
+    color[3] = ((FilterDrawChild *)child)->alpha;
+    f32 points[4][3];
+    for (u32 vertex = 0; vertex < 4; ++vertex) {
+        points[vertex][0] = vertices()[vertex].position[0];
+        points[vertex][1] = vertices()[vertex].position[1];
+        points[vertex][2] = vertices()[vertex].position[2] - 11.0f;
+    }
+    nn_math_VEC3TransformCoordArray(&points[0][0], matrix, &points[0][0], 4);
+    FUN_002b011c();
+    for (u32 vertex = 0; vertex < 4; ++vertex) {
+        gpuSubmitFloatVectorsOrDefault(color, points[vertex][0], points[vertex][1], points[vertex][2],
+                                       vertices()[vertex].x, vertices()[vertex].y);
+    }
+    forwardRecoveredCallback();
+    renderCtxPopCounted(g_titleScene, RENDER_STACK_A);
+    renderCtxPopCounted(g_titleScene, RENDER_STACK_B);
+}

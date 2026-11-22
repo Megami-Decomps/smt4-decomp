@@ -15,7 +15,7 @@ int FUN_0037aa68(void *, int *);
 int packFields(...);
 int flagsPackFourBooleans(...);
 int block530OwnerReset(int, float *, int);
-int FUN_004097b4(int, int *, int, int);
+int renderCtxFillDisplay(int, int *, int, int);
 int VectorSignedToFloat(...);
 
 typedef struct fn_00402290_arg0 fn_00402290_arg0;
@@ -71,8 +71,8 @@ extern int renderCtxPackPassFlagsWithAlpha(unsigned int);
 /* Supplied declaration required: packFields. */
 /* Supplied declaration required: flagsPackFourBooleans. */
 /* Supplied declaration required: block530OwnerReset. */
-/* Supplied declaration required: FUN_004097b4. */
-/* Supplied declaration required: FUN_004ff058. */
+/* Supplied declaration required: renderCtxFillDisplay. */
+/* Supplied declaration required: spriteDrawPartGroup. */
 extern unsigned int FUN_004ff4b0(void *, unsigned int);
 
 
@@ -144,7 +144,7 @@ void FUN_00402290(fn_00402290_arg0 *param_1)
     (**(romwright_code **)(temp_v0 + 0x1334))();
     *(unsigned char *)(temp_v0 + 0x1330) = 0;
   }
-  FUN_004097b4(g_renderCtx,&temp_v35,0,7);
+  renderCtxFillDisplay(g_renderCtx,&temp_v35,0,7);
   temp_v0 = *(int *)((int)param_1->field_0x8 + 0xc);
   temp_v4 = *(unsigned int *)(temp_v0 + 0x18);
   temp_v7 = *(unsigned int *)(temp_v0 + 0x14);
@@ -251,7 +251,7 @@ void FUN_00402290(fn_00402290_arg0 *param_1)
   GpuFloatEncoding positionZ;
   positionZ.bits = temp_v16;
   SpriteDrawVector3 position = {temp_v14, temp_v15, positionZ.value};
-  FUN_004ff058((SpriteDrawOwner *)param_1->field_0x4, temp_v4, &position,
+  spriteDrawPartGroup((SpriteDrawOwner *)param_1->field_0x4, temp_v4, &position,
                0xFFFFFFFFu, 1, 1.0f);
   temp_v0 = g_renderCtx;
   piVar5 = (int *)(g_renderCtx + 0x12b8);

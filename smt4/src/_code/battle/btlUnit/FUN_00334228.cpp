@@ -10,7 +10,7 @@ int btlFindNthActiveSpecialEntry(int, int);
 int libm_tanf(void);
 int nkmEnemyFindById(void);
 int qsort(int *, int, int, unsigned char *);
-int FUN_002fe394(int, int, unsigned int, int);
+int animSlotsLoadFromFile(int, int, unsigned int, int);
 int FUN_00337f98(int, int);
 int __aeabi_memcpy4(...);
 
@@ -43,7 +43,7 @@ extern int idSetFindSubjectIndex(int, int);
 /* Supplied declaration required: libm_tanf. */
 /* Supplied declaration required: nkmEnemyFindById. */
 /* Supplied declaration required: qsort. */
-/* Supplied declaration required: FUN_002fe394. */
+/* Supplied declaration required: animSlotsLoadFromFile. */
 /* Supplied declaration required: FUN_00337f98. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
@@ -90,7 +90,7 @@ void FUN_00334228(unsigned int *param_1,int param_2)
   temp_v4 = param_2 + 0x3f4;
   temp_v28 = param_1;
   temp_v29 = param_2;
-  FUN_002fe394(temp_v4,0x32,*(unsigned int *)(param_2 + 0x1e88),param_2 + 0x1074);
+  animSlotsLoadFromFile(temp_v4,0x32,*(unsigned int *)(param_2 + 0x1e88),param_2 + 0x1074);
   temp_v7 = temp_v29;
   temp_v15 = temp_v4;
   btlFindNthActiveSpecialEntry(temp_v29,1);

@@ -2,6 +2,7 @@
 #include "camp/RenderCtx.h"
 #include "shard/S1Mover.h"
 #include "nw/math/VEC3.h"
+#include "gfx/CameraStereoDepth.h"
 
 extern "C" {
 void cameraMatrixCacheReset(RenderCtx *context, s32 mode);
@@ -9,7 +10,6 @@ u32 asdGxPresetsGetByKind(u32 kind);
 u32 asdGxPresetsGetHeightByKind(u32 kind);
 void FUN_0011d0dc(RenderCtx *context, f32 left, f32 right, f32 bottom, f32 top, f32 nearClip, f32 farClip);
 void FUN_0011d084(RenderCtx *context, const f32 *matrix);
-void FUN_002c159c(RenderCtx *context, f32 depth, f32 parameter);
 void asdCameraRegister(RenderCtx *context);
 
 // Configure the screen projection and an origin-facing camera at the requested depth.
@@ -39,7 +39,7 @@ void renderCtxSetupScreenCamera(RenderCtx *context, f32 depth, f32 minimum, f32 
     f32 view[3][4];
     nw::math::MTX34LookAt(view, &eye, &up, &target);
     FUN_0011d084(context, &view[0][0]);
-    FUN_002c159c(context, depth, parameter);
+    asdCameraSetStereoDepth(context, depth, parameter);
     asdCameraRegister(context);
 }
 }

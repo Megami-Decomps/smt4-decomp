@@ -4,6 +4,7 @@
 #include "AsdSDK/AsdLoadFileSyncDefault.h"
 #include "classes/Obj557b58.h"
 #include "shard/W6_W6Match3_EffectColor.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
@@ -45,8 +46,6 @@ extern const char DAT_0053cd4c[]; /* "DefaultTextureVS.shbin" */
 
 void *FUN_00157acc(void *owner);
 s32 modelShaderLoad(void *owner, const void *binary, u32 size, s32 unused);
-u32 asdGxPresetsGetHeightByKind(u32 kind);
-u32 asdGxPresetsGetByKind(u32 kind);
 f32 (*mtx44OrthoC(f32 (*matrix)[4], f32 left, f32 right, f32 bottom, f32 top, f32 nearPlane, f32 farPlane))[4];
 void nn_math_ARMv6_MTX44PivotC_FAST(f32 (*matrix)[4], u32 pivot);
 void cameraMatrixCacheSetLookAt(void *camera, const MapVector *eye, const MapVector *target, const MapVector *up);

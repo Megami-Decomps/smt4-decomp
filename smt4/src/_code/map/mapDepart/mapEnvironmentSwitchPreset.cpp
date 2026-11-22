@@ -46,7 +46,7 @@ void FUN_001a9604(u32 a, f32 b, f32 c, f32 d, f32 e, f32 f, f32 g);
 void mapEnvironmentSetLight(u32 enabled, u32 arg14, u32 arg15, u32 arg16, u32 arg17,
                   u32 arg18, u32 arg19, u32 arg20, u32 arg21, u32 arg22,
                   u32 arg23, s32 arg24, s32 arg26, f32 arg1A, f32 arg1C);
-void FUN_0025b754(void);
+void mapOverlayDraw(void);
 
 /* Switches the map environment (sky texture, light and fog parameters, heading) to preset `preset`,
    fading from the previous one over `transition` frames (1 means the default 15; 0 is immediate). */
@@ -118,7 +118,7 @@ void mapEnvironmentSwitchPreset(u32 preset, s32 transition)
         g_fixedCameraPosition.degrees -= 360.0f;
     }
     g_mapTable.unk38 = 0;
-    FUN_0025b754();
+    mapOverlayDraw();
 }
 
 } /* extern "C" */

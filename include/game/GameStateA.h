@@ -200,7 +200,7 @@ struct GameStateA {
     /* 0x2CA */ u8 unk2CA[0x1E];
     /* 0x2E8 */ s32 unk2E8;
     /* 0x2EC */ u32 chosenTalkId;
-    /* 0x2F0 */ u8 unk2F0[0x18];
+    /* 0x2F0 */ u32 recentHintIds[6];  /* the demons the last hint popups named, most recent first (popupTryStartDemonHint) */
     /* 0x308 */ u32 unk308;
     /* 0x30C */ s32 popupElapsedFrames;
     /* 0x310 */ u32 pendingEntryIds[32];

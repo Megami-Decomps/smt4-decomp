@@ -47,4 +47,10 @@ extern EffectEditorVector g_effectEditorRotation;
 }
 #endif
 
+extern "C" {
+/* Reads pad `pad`'s two analog sticks (left x/y, right x/y) for the free camera. The release build's body is a
+ * `return 0` stub armlink inlined at its call (inlined.txt), so the outputs are never written there. */
+s32 effectEditorReadSticks(f32 *leftX, f32 *leftY, f32 *rightX, f32 *rightY, s32 pad);
+}
+
 #endif

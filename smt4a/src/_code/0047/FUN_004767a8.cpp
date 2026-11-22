@@ -6,7 +6,7 @@ extern "C" {
 int nn_fnd_DateTime_DateToDays(...);
 int legacyResourceIdRemap(...);
 int FUN_00426e18(...);
-int FUN_00426eb8(...);
+int aocItemAttributeLabel(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int aocOpenPackedArchive(int *, int, int);
 int recordClearWideHandle(...);
 int _ZN9Obj4279d4C1Ejj(int [3], unsigned char [1024], int);
@@ -38,7 +38,7 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: nn_fnd_DateTime_DateToDays. */
 /* Supplied declaration required: legacyResourceIdRemap. */
 /* Supplied declaration required: FUN_00426e18. */
-/* Supplied declaration required: FUN_00426eb8. */
+/* Supplied declaration required: aocItemAttributeLabel. */
 /* Supplied declaration required: aocOpenPackedArchive. */
 extern unsigned int halfPair48LowByteA(int);
 extern unsigned int halfPair48LowByteB(int);
@@ -148,7 +148,7 @@ void FUN_004767a8(int param_1)
   temp_v13 = (unsigned int *)&temp_v14;
   temp_v2 = halfPair48LowByteB(temp_v0 + 0x28);
   temp_v3 = halfPair48LowByteA(temp_v0 + 0x28);
-  FUN_00426eb8(&temp_v9,0,temp_v3,temp_v2);
+  aocItemAttributeLabel(&temp_v9,0,temp_v3,temp_v2);
   *(unsigned int *)(temp_v0 + 0x368) = temp_v9;
   *(unsigned int *)(temp_v0 + 0x36c) = uStack_ec;
   *(unsigned int *)(temp_v0 + 0x370) = uStack_e8;
@@ -167,7 +167,7 @@ void FUN_004767a8(int param_1)
   *(unsigned int *)(temp_v0 + 0x3a4) = uStack_b4;
   temp_v2 = halfPair48LowByteB(temp_v0 + 0x28);
   temp_v3 = halfPair48LowByteA(temp_v0 + 0x28);
-  FUN_00426eb8(&temp_v9,2,temp_v3,temp_v2);
+  aocItemAttributeLabel(&temp_v9,2,temp_v3,temp_v2);
   *(unsigned int *)(temp_v0 + 0x3a8) = temp_v9;
   *(unsigned int *)(temp_v0 + 0x3ac) = uStack_ec;
   *(unsigned int *)(temp_v0 + 0x3b0) = uStack_e8;
@@ -186,7 +186,7 @@ void FUN_004767a8(int param_1)
   *(unsigned int *)(temp_v0 + 0x3e4) = uStack_b4;
   temp_v2 = halfPair48LowByteB(temp_v0 + 0x28);
   temp_v3 = halfPair48LowByteA(temp_v0 + 0x28);
-  FUN_00426eb8(&temp_v9,3,temp_v3,temp_v2);
+  aocItemAttributeLabel(&temp_v9,3,temp_v3,temp_v2);
   *(unsigned int *)(temp_v0 + 1000) = temp_v9;
   *(unsigned int *)(temp_v0 + 0x3ec) = uStack_ec;
   *(unsigned int *)(temp_v0 + 0x3f0) = uStack_e8;
@@ -205,7 +205,7 @@ void FUN_004767a8(int param_1)
   *(unsigned int *)(temp_v0 + 0x424) = uStack_b4;
   temp_v2 = halfPair48LowByteB(temp_v0 + 0x28);
   temp_v3 = halfPair48LowByteA(temp_v0 + 0x28);
-  FUN_00426eb8(&temp_v9,5,temp_v3,temp_v2);
+  aocItemAttributeLabel(&temp_v9,5,temp_v3,temp_v2);
   *(unsigned int *)(temp_v0 + 0x428) = temp_v9;
   *(unsigned int *)(temp_v0 + 0x42c) = uStack_ec;
   *(unsigned int *)(temp_v0 + 0x430) = uStack_e8;

@@ -10,7 +10,7 @@ int renderCtxResetColorScale(int);
 int skinObjectUpdateMatrices(int);
 int FUN_0037aa68(unsigned int, int);
 int block530OwnerReset(int, float *, int);
-int FUN_004097b4(int, int *, int, int);
+int renderCtxFillDisplay(int, int *, int, int);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -51,8 +51,8 @@ extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int renderCtxPackPassFlagsWithAlpha(unsigned int);
 extern int flagsPackFourBooleans(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: block530OwnerReset. */
-/* Supplied declaration required: FUN_004097b4. */
-/* Supplied declaration required: FUN_004ff058. */
+/* Supplied declaration required: renderCtxFillDisplay. */
+/* Supplied declaration required: spriteDrawPartGroup. */
 extern unsigned int FUN_004ff4b0(unsigned int, unsigned int);
 
 
@@ -112,7 +112,7 @@ void FUN_0040c190(int param_1)
     (**(romwright_code **)(temp_v0 + 0x1334))();
     *(unsigned char *)(temp_v0 + 0x1330) = 0;
   }
-  FUN_004097b4(g_renderCtx,&temp_v27,0,7);
+  renderCtxFillDisplay(g_renderCtx,&temp_v27,0,7);
   temp_v0 = *(int *)(*(int *)(param_1 + 8) + 0xc);
   temp_v6 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v5 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -190,7 +190,7 @@ void FUN_0040c190(int param_1)
   temp_v11 = temp_v7;
   temp_v1 = FUN_004ff4b0(*(unsigned int *)(param_1 + 4),0);
   SpriteDrawVector3 position = {temp_v9, temp_v10, temp_v11};
-  FUN_004ff058((SpriteDrawOwner *)*(unsigned int *)(param_1 + 4), temp_v1, &position,
+  spriteDrawPartGroup((SpriteDrawOwner *)*(unsigned int *)(param_1 + 4), temp_v1, &position,
                0xFFFFFFFFu, 1, 1.0f);
   temp_v0 = g_renderCtx;
   piVar6 = (int *)(g_renderCtx + 0x1298);

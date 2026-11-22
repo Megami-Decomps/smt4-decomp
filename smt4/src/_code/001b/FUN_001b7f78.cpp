@@ -173,7 +173,7 @@ int FUN_00280ccc(void);
 int FUN_00316de4(...);
 
 int FUN_0019dde4(...);
-int FUN_001a9104(void);
+int questShowRequirementProgress(void);
 int FUN_0020d6b0(void);
 int FUN_0020db10(void);
 int aocSelectedRecordIsUnavailable(void);
@@ -448,7 +448,7 @@ extern unsigned int DAT_0049fd34; /* 0x49fd34 */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: mapDepartFreeWork. */
 /* Supplied declaration required: FUN_001a8cf8. */
-/* Supplied declaration required: FUN_001a9104. */
+/* Supplied declaration required: questShowRequirementProgress. */
 /* Supplied declaration required: FUN_001a9574. */
 /* Supplied declaration required: FUN_001abb98. */
 /* Supplied declaration required: mapDepartUpdateHandles. */
@@ -1592,7 +1592,7 @@ LAB_001b9210:
       DAT_0049f938 = DAT_0049f938 - 1;
     }
     temp_v10 = DAT_0049f938;
-    FUN_001a9104();
+    questShowRequirementProgress();
     if (temp_v10 == 1) {
       puVar14[9] = 0x43;
       DAT_0049f934 = 1;

@@ -1,21 +1,27 @@
-/* NON_MATCHING: vector load/store grouping, separate history-global literals, saved registers and final multiply/add contraction differ. */
+/* NON_MATCHING: 130 lines (128 vs 134 rows): routingMode == 2 and mode 1 vector ops improved with sibling vectorSubtract/vectorScale/vectorAdd helpers; retail anchors g_cameraAlternateProgressStart relative to g_cameraAlternateProgressPrevious (same TU) and keeps the final z multiply/add unfused. */
 #include "shard/W5_W5Match8_CameraTransition.h"
 #include "battle/btlCamera.h"
 
-static inline W5Match8Vec3 operator-(const W5Match8Vec3& first, const W5Match8Vec3& second)
+/* Same vector helpers as siblings FUN_004f1708, FUN_004f0c80, and FUN_004f2548. */
+static __inline void vectorSubtract(W5Match8Vec3 *out, const W5Match8Vec3 *a, const W5Match8Vec3 *b)
 {
-    W5Match8Vec3 result = { first.x - second.x, first.y - second.y, first.z - second.z };
-    return result;
+    out->x = a->x - b->x;
+    out->y = a->y - b->y;
+    out->z = a->z - b->z;
 }
-static inline W5Match8Vec3 operator+(const W5Match8Vec3& first, const W5Match8Vec3& second)
+
+static __inline void vectorScale(W5Match8Vec3 *out, const W5Match8Vec3 *a, f32 scale)
 {
-    W5Match8Vec3 result = { first.x + second.x, first.y + second.y, first.z + second.z };
-    return result;
+    out->x = a->x * scale;
+    out->y = a->y * scale;
+    out->z = a->z * scale;
 }
-static inline W5Match8Vec3 operator*(const W5Match8Vec3& vector, f32 scale)
+
+static __inline void vectorAdd(W5Match8Vec3 *out, const W5Match8Vec3 *a, const W5Match8Vec3 *b)
 {
-    W5Match8Vec3 result = { vector.x * scale, vector.y * scale, vector.z * scale };
-    return result;
+    out->x = a->x + b->x;
+    out->y = a->y + b->y;
+    out->z = a->z + b->z;
 }
 
 extern "C" {
@@ -25,9 +31,10 @@ extern W5Match8Vec3 g_cameraAlternateProgressPrevious;
 extern W5Match8Vec3 g_cameraUnoffsetStartPosition;
 f32 easeEvaluate(s32 mode, s32 duration, s32 frame);
 
-void FUN_004f2094(W5Match8CameraTransition* camera)
+/* Advances the battle camera's position and alternate progress for routing modes 0, 1, and 2. */
+void FUN_004f2094(W5Match8CameraTransition *camera)
 {
-    // These transition fields follow the canonical camera prefix; keep its published size intact.
+    /* These transition fields follow the canonical camera prefix; keep its published size intact. */
     struct AlternateTransitionView {
         W5Match8CameraTransition camera;
         W5Match8Vec3 progress;
@@ -36,24 +43,31 @@ void FUN_004f2094(W5Match8CameraTransition* camera)
         u32 frame;
         u32 mode;
     };
-    AlternateTransitionView* state = reinterpret_cast<AlternateTransitionView*>(camera);
+    AlternateTransitionView *state = (AlternateTransitionView *)camera;
     if (g_btlCamera.routingMode == 2) {
-        W5Match8Vec3 delta = camera->alternateTarget - g_cameraUnoffsetStartPosition;
+        W5Match8Vec3 delta;
+        vectorSubtract(&delta, &camera->alternateTarget, &g_cameraUnoffsetStartPosition);
         f32 factor = easeEvaluate(state->mode, state->duration, state->frame);
-        camera->positionProgress = camera->targetStart + delta * factor;
+        vectorScale(&delta, &delta, factor);
+        vectorAdd(&camera->positionProgress, &camera->targetStart, &delta);
     } else if (g_btlCamera.routingMode == 1) {
         state->progress = g_cameraAlternateProgressPrevious;
         f32 factor = easeEvaluate(state->mode, state->duration, state->frame);
-        state->progress = (camera->alternateTarget - (camera->reference.position - state->progress)) * factor;
+        W5Match8Vec3 diff;
+        vectorSubtract(&diff, &camera->reference.position, &state->progress);
+        vectorSubtract(&diff, &camera->alternateTarget, &diff);
+        vectorScale(&state->progress, &diff, factor);
         g_cameraAlternateProgressPrevious = state->progress;
         state->progress = g_cameraAlternateProgressStart;
-        camera->positionProgress = g_cameraAlternateProgressPrevious + camera->targetStart;
+        vectorAdd(&camera->positionProgress, &g_cameraAlternateProgressPrevious, &camera->targetStart);
         camera->targetProgress.z = camera->positionProgress.z +
             (camera->alternateTarget.z - g_cameraAlternateProgressStart.z) * factor;
     } else {
-        W5Match8Vec3 delta = camera->alternateTarget - (camera->reference.position - state->progress);
         f32 factor = easeEvaluate(state->mode, state->duration, state->frame);
-        state->progress = delta * factor;
+        W5Match8Vec3 diff;
+        vectorSubtract(&diff, &camera->reference.position, &state->progress);
+        vectorSubtract(&diff, &camera->alternateTarget, &diff);
+        vectorScale(&state->progress, &diff, factor);
     }
 }
 }

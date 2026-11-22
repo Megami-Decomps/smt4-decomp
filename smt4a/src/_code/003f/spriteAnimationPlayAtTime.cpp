@@ -18,7 +18,6 @@ struct AnimRange {
 
 /* An animation set. */
 struct AnimSet : SpriteDrawOwner {
-    /* 0x14 */ u8 unk14[0xC];
     /* 0x20 */ AnimKey *keys;
     /* 0x24 */ AnimRange *ranges;
 };
@@ -33,8 +32,8 @@ void spriteAnimationPlayAtTime(SpriteDrawOwner *owner, s32 index, const SpriteDr
     AnimSet *set = static_cast<AnimSet *>(owner);
     if (index >= set->origin->animationCount)
         return;
-    SpriteDrawVector2 position = {0.0f, 0.0f};
-    SpriteDrawVector2 keyScale = {0.0f, 0.0f};
+    SpriteDrawVector2 position(0.0f, 0.0f);
+    SpriteDrawVector2 keyScale(0.0f, 0.0f);
     s32 first = set->ranges[index].first;
     s32 last = first + set->ranges[index].count - 1;
     s32 key = 0;
@@ -72,7 +71,7 @@ void spriteAnimationPlayAtTime(SpriteDrawOwner *owner, s32 index, const SpriteDr
     keyScale.x *= 0.01f;
     keyScale.y *= 0.01f;
     if (positioned == 0)
-        FUN_004ff058(set, key, placement, flags, filter, globalScale);
+        spriteDrawPartGroup(set, key, placement, flags, filter, globalScale);
     else
         FUN_003fad14(set, key, placement, flags, filter, &position, &keyScale,
                      flipY, globalScale);

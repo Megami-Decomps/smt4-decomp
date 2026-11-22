@@ -10,6 +10,7 @@
 #include "script/scrScriptProcess.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "code/Code0038.h"
+#include "gfx/CameraStereoDepth.h"
 
 struct Event3dOpeningWork {
     u32 process;
@@ -35,7 +36,6 @@ extern const char DAT_004036e0[];
 extern const char DAT_004036c8[];
 extern char DAT_004036b0[];
 void cameraMatrixCacheReset(ManagedCameraIV *camera, s32 enabled);
-void FUN_002c159c(ManagedCameraIV *camera, f32 first, f32 second);
 void cameraMatrixCacheSetLookAt(ManagedCameraIV *camera, const Vec3f *eye, const Vec3f *target, const Vec3f *up);
 void stereoCameraSetPerspective(ManagedCameraIV *camera, s32 enabled, f32 fov, f32 nearClip, f32 farClip, f32 aspect);
 s32 ocEventJobUpdate(u32 process);
@@ -68,7 +68,7 @@ u32 FUN_002f6314(void)
         up->z = 0.0f;
         work->parameters.aspect = 1.6666666f;
         work->distance = 5.0f;
-        FUN_002c159c(&work->camera, 5.0f, 1.0f);
+        asdCameraSetStereoDepth(&work->camera, 5.0f, 1.0f);
         cameraMatrixCacheSetLookAt(&work->camera, eye, target, up);
         stereoCameraSetPerspective(&work->camera, 1, work->parameters.fieldOfView, work->parameters.nearClip,
             work->parameters.farClip, work->parameters.aspect);

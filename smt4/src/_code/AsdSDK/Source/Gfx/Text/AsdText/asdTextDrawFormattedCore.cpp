@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001eb584(char *, unsigned char *, int);
+int textConvertMarkup(char *, unsigned char *, int);
 int textFontGetGlyphSheet(...);
 int recordTableGet(...);
 int asdMemFree(void);
@@ -33,7 +33,7 @@ extern unsigned char g_textControlCallbackCodes; /* 0x4def18 */
 extern unsigned char g_textControlCallbackArgumentCounts; /* 0x4def28 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001eb584. */
+/* Supplied declaration required: textConvertMarkup. */
 /* Supplied declaration required: textFontGetGlyphSheet. */
 extern int charCodeIsPrivateUseGlyph(unsigned int);
 /* Supplied declaration required: recordTableGet. */
@@ -103,7 +103,7 @@ void asdTextDrawFormattedCore(int *param_1,unsigned int param_2,int param_3,unsi
     *param_1 = 0;
   }
   if (*param_6 != '\0') {
-    FUN_001eb584(param_6,&DAT_004daf08,0);
+    textConvertMarkup(param_6,&DAT_004daf08,0);
     puVar2 = &DAT_004daf08;
     FUN_002d609c(&DAT_004daf08,&DAT_004dcf08,0);
     param_1[1] = (int)puVar2;

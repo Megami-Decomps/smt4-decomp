@@ -72,7 +72,7 @@ typedef struct AsdMdlNode {
     /* 0x90 */ u8 unk90;
     /* 0x91 */ u8 unk91[3];
     /* 0x94 */ AsdModelAttrContainers containers;
-    /* 0x98 */ u8 unk98[8];
+    /* 0x98 */ AsdModelAttrRecords flaggedRecords; /* the records of every entry with flag bit 0 (asdModelBuildFlaggedAttributeRecords) */
     /* 0xA0 */ AsdModelAttrRecords records;
 } AsdMdlNode;
 

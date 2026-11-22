@@ -7,6 +7,7 @@
 #include "common.h"
 #include "battle/btlCamera.h"
 #include <math.h>
+#include "gfx/CameraStereoDepth.h"
 
 struct BtlCameraMatrix {
     f32 m[3][4];
@@ -32,9 +33,8 @@ void FUN_003d681c(BtlCamera *camera);
 void FUN_003d6e20(BtlCamera *camera);
 void battleVectorTransitionUpdatePath(BtlCamera *camera);
 void battleCameraBlendTargetOffset(BtlCamera *camera);
-void FUN_003d5af0(void *owner, AsdCamera *view, const BtlCameraVector3 *eye, const BtlCameraVector3 *target,
+void asdCameraSetLookAtRoll(void *owner, AsdCamera *view, const BtlCameraVector3 *eye, const BtlCameraVector3 *target,
                   const BtlCameraVector3 *up, const BtlCameraVector3 *rotation);
-void FUN_002c159c(AsdCamera *view, f32 first, f32 second);
 void FUN_001db388(AsdCamera *view, s32 lowerScreen, f32 fieldOfView, f32 nearClip, f32 farClip);
 void effectSetPrimaryPosition(const BtlCameraVector3 *position);
 void effectSetSecondaryPosition(const BtlCameraVector3 *position);
@@ -381,15 +381,15 @@ s32 btlCameraUpdate(BtlCamera *camera)
         vecAdd(&eye, &camera->eyeOrigin);
 
         if (camera->flags & 0xC000000) {
-            FUN_002c159c(btlCameraView(camera), camera->debugScalarWide, 1.0f);
+            asdCameraSetStereoDepth(btlCameraView(camera), camera->debugScalarWide, 1.0f);
         } else {
-            FUN_002c159c(btlCameraView(camera), camera->debugScalar, 1.0f);
+            asdCameraSetStereoDepth(btlCameraView(camera), camera->debugScalar, 1.0f);
         }
         BtlCameraVector3 rotation;
         rotation.x = 0.0f;
         rotation.y = 0.0f;
         rotation.z = camera->roll + camera->altRoll;
-        FUN_003d5af0(camera, btlCameraView(camera), &eye, &target, &up, &rotation);
+        asdCameraSetLookAtRoll(camera, btlCameraView(camera), &eye, &target, &up, &rotation);
         f32 fov = camera->fov + camera->altFovShift + camera->fovShift;
         FUN_001db388(btlCameraView(camera), 0, fov, 0.1f, 25600.0f);
         effectSetPrimaryPosition(&eye);

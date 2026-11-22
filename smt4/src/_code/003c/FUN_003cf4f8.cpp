@@ -1,11 +1,12 @@
-/* NON_MATCHING: readable rebuild of the enemy target-candidate builder; the local action-info block (29 bytes in retail) and the duplicated candidate array are laid out differently by armcc, and retail's 0x85-entry clear loop pairs two stores per iteration. */
+/* NON_MATCHING: 158 lines: retail clears both candidate arrays through two walking pointers and a down counter (the
+ * build indexes them), and gives the three flags other stack slots (pick-one 568, favour-guarding 572, broad 576). */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
 #include "gamedata/SkillDataLookup.h"
 
 /* The action a battle unit is about to use (as btlEntryBuildSummary fills it). */
 struct BattleActionInfo {
-    /* 0x00 */ s16 kind;
+    /* 0x00 */ u16 kind;
     /* 0x02 */ u8 unk02[0x14];
     /* 0x16 */ s16 skill;          /* skill id, 0 when none */
     /* 0x18 */ u8 unk18[7];
@@ -39,6 +40,13 @@ void btlEntryBuildSummary(BattleActionInfo *info, BtlMainState *battle, u32 unit
 s32 btlUnitIsDeadAndUncopied(EnemyAiContext *context, EnemyTurnWork *work, s32 target);
 s32 randRange(u32 limit);
 
+/* Marks a candidate slot unused. */
+static __inline void candidateClear(TargetCandidate *candidate)
+{
+    candidate->id = -1;
+    candidate->weight = 0;
+}
+
 /* Fills `out` (0x85 id/weight pairs, ids -1 when unused) with the targets the enemy may pick this
  * turn: one random allowed target for a single-target heal-like action, or every allowed target
  * weighted by the power roll, and raises the enemy's stat bonuses when guarding targets are hit. */
@@ -49,13 +57,13 @@ void FUN_003cf4f8(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate 
     BtlMainState *battle = btlGetMainState();
     btlEntryBuildSummary(&info, battle, work->unit);
     for (s32 i = 0; i < 0x85; i++) {
-        out[i].id = -1;
-        out[i].weight = 0;
-        scratch[i].id = -1;
-        scratch[i].weight = 0;
+        candidateClear(&out[i]);
+        candidateClear(&scratch[i]);
     }
     if (work->disabled != 0)
         return;
+    bool pickOne = false;
+    bool favourGuarding = false;
     bool broadSkill = false;
     if (info.skill != 0) {
         const SkillDataRecord *skill = skillDataFindById(info.skill);
@@ -68,17 +76,18 @@ void FUN_003cf4f8(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate 
             }
         }
     }
-    bool pickOne = false;
-    bool favourGuarding = false;
+    s32 power = info.powerMin;
+    s32 maxPower = info.powerMax;
     if (info.kind == 6)
         pickOne = true;
     else if (info.kind == 1)
         favourGuarding = true;
-    s32 power = info.powerMax;
-    if (!(context->battle->battleFlags & 0x40000) && info.powerMin < info.powerMax)
-        power = info.powerMin + randRange((u16)(info.powerMax - info.powerMin));
-    else if (!(context->battle->battleFlags & 0x40000))
-        power = info.powerMin;
+    if ((context->battle->battleFlags & 0x40000) == 0) {
+        if (power < maxPower)
+            power += randRange((u16)(maxPower - power));
+    } else {
+        power = maxPower;
+    }
     for (s32 target = 0; target < 0x6D; target++) {
         if (work->allowed[target] &&
             ((context->battle->entries[target].flags & 0x40) || btlUnitIsDeadAndUncopied(context, work, target)))
@@ -95,6 +104,7 @@ void FUN_003cf4f8(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate 
         }
         if (count != 0) {
             s32 pick = randRange((u16)(count - 1));
+            scratch[pick].weight++;
             out[0].id = scratch[pick].id;
             out[0].weight = 1;
             if (context->battle->core.firstBonus < 0)

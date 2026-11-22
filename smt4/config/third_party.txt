@@ -183,10 +183,7 @@
 0x0011d9c0 FUN_0011d9c0 between
 0x0011d9c4 _ZN9Obj4210946createEPvP18AsdAllocatorObject library
 0x0011da9c resourceCreateOwnedObject twin
-0x0011dadc FUN_0011dadc between
-0x0011f5e4 FUN_0011f5e4 between
 0x0011f9d0 FUN_0011f9d0 twin
-0x0011ffc0 FUN_0011ffc0 between
 0x00120000 _ZN9Obj4212e86createEPvP18AsdAllocatorObject library
 0x001204b8 _ZN9Obj4217746createEPvP18AsdAllocatorObject library
 0x00120740 FUN_00120740 callers
@@ -335,10 +332,8 @@
 0x0012c628 FUN_0012c628 between
 0x0012c778 nw_gfx_ParticleEmitter_GetMemorySizeInternal name
 0x0012ca58 FUN_0012ca58 callers
-0x0012cef8 FUN_0012cef8 between
 0x0012cf30 FUN_0012cf30 between
 0x0012cf68 nw_gfx_SceneEnvironment_SceneEnvironment_sub_object name
-0x0012d1c4 FUN_0012d1c4 between
 0x0012d1fc FUN_0012d1fc between
 0x0012d318 FUN_0012d318 between
 0x0012d3f0 nw_gfx_SceneEnvironmentSetting_GetMemorySizeInternal name
@@ -1519,7 +1514,6 @@
 0x002ad254 nn_gxlow_CTR_IsGpuServiceAvailable name
 0x002ad264 nn_gxlow_CTR_GetGpu name
 0x002ad270 nn_math_ARMv6_MTX44FrustumC_FAST name
-0x002ad314 mathSinCos between
 0x002ad3a4 FUN_002ad3a4 between
 0x002ad44c nn_math_ARMv6_VEC3TransformAsm_2AD44C name
 0x002ad488 nn_fnd_DateTime_FromParameters name

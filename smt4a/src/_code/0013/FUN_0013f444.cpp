@@ -2,7 +2,6 @@
 #include "shard/W6_W6Match5_SentinelLookup.h"
 
 extern "C" {
-extern SentinelLookupEntry g_sentinelLookupEntries[];
 
 // Append a new key/value pair, keeping the following terminator initialized.
 void FUN_0013f444(u32 key, u32 value, s8 flags)

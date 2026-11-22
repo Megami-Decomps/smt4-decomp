@@ -1,7 +1,6 @@
 #include "shard/W6_W6Match5_SentinelLookup.h"
 
 extern "C" {
-extern SentinelLookupEntry g_sentinelLookupEntries[];
 
 // Looks up a value in a table terminated by key 0xf890.
 u32 sentinelLookupGetValue(u32 key)

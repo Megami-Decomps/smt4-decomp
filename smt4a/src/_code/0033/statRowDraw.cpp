@@ -34,7 +34,7 @@ void efctSetSpeed(f32 speed);
 void FUN_002f752c(StatListWork *work, s32 *value, s32 *extra, s32 entry, s32 compare);
 void statRowDrawValue(StatListWork *work, s32 entry, s32 x, s32 y, s32 value, s32 difference);
 s32 itemIsCollectedWithRelated(u32 selection);
-void FUN_003c4250(StatListWork *work, s32 x, s32 y, s32 value, ...);
+void battleWindowDrawHpGauge(StatListWork *work, s32 x, s32 y, s32 value, ...);
 void uiDrawMaskedSprite(StatListWork *work, s32 x, s32 y, s32 iconA, s32 iconB);
 void gxResetColorQuadToWhite(void);
 
@@ -75,7 +75,7 @@ void statRowDraw(StatListWork *work, s32 entry)
         TextureTableEntryIV *sprite = asdTMTexTableEntryAt(18, entry + STAT_SPRITE_BASE);
 
         if (value < 200) {
-            FUN_003c4250(work, x, sprite->y + y, value, extra, extraDifference);
+            battleWindowDrawHpGauge(work, x, sprite->y + y, value, extra, extraDifference);
         } else if (value == 999) {
             uiDrawMaskedSprite(work, x, sprite->y + y, 117, 116);
         } else {

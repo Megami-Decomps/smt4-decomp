@@ -1,4 +1,8 @@
-/* NON_MATCHING: retail keeps the 0.2 factor in s17 and the shared draw tail laid out differently (190 vs 184 rows); the row drawing logic is the same. */
+/* NON_MATCHING: 146 lines. The selected-row modes test mode 1 first and the other rows switch on the mode (retail's
+ * compare chain, one 0.2 constant in s17 for modes 2 and 3, `<= 5`/`>= 1` limits); the slide sprite's opacity is read
+ * through vec2GetSpeed (armlink-inlined `vldr s0, [r0, #32]`). Left: the row and the stack parameters are allocated
+ * differently (retail: row in sl, offsets in r8/r9), the list and selection addresses take each other's stack slots,
+ * the page-id address is kept in a stack slot, and the final draw shares the shifted-row draw's tail in retail. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "ui/UiSpriteApi.h"
@@ -8,9 +12,8 @@ extern "C" {
 /* The list menu's work area (only the fields used here, by their offsets). */
 typedef struct ListMenuWork {
     /* 0x0000 */ u8 unk0000[0x2E0];
-    /* 0x02E0 */ u8 slide[0x20];
-    /* 0x0300 */ f32 slideSpeed;
-    /* 0x0304 */ u8 unk0304[0xF8];
+    /* 0x02E0 */ UiSpriteState slide;
+    /* 0x036C */ u8 unk036C[0x90];
     /* 0x03FC */ s32 scroll;
     /* 0x0400 */ u8 unk0400[0x8760];
     /* 0x8B60 */ u16 pageIds[8];
@@ -38,18 +41,43 @@ void FUN_003b6354(f32 scale, ListMenuWork *work, s32 row, s32 mode, s32 selected
         return;
     }
     if (work->selected < gridNavigationGetItemCount(work->list) && row == selectedRow) {
-        if (mode != 1) {
-            if ((mode == 2 || mode == 3) && *shifted != 0) {
-                *y = work->scroll * -3 + *y;
-                texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x171, *x + offsetX, *y + offsetY, 0x65);
-                return;
-            }
-        } else if (work->scroll < 1) {
-            efctSetSpeed((f32)(1 - work->scroll) * scale);
+        if (mode == 1) {
+            if (work->scroll < 1)
+                efctSetSpeed((f32)(1 - work->scroll) * scale);
+        } else if ((mode == 2 || mode == 3) && *shifted != 0) {
+            *y = work->scroll * -3 + *y;
+            texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x171, *x + offsetX, *y + offsetY, 0x65);
+            return;
         }
-    } else if (mode != 1) {
-        if (mode != 2) {
-            if (mode == 3 && work->scroll < 6) {
+    } else {
+        switch (mode) {
+        case 1:
+            if (work->scroll >= 1) {
+                s32 base = resourceRunOperationIfUnblocked(work->list);
+                s32 index = listCursorGetRowIfUnblocked(work->list);
+
+                if (work->pageIds[row] == work->slotIds[index + base]) {
+                    *x = vec2GetXInt(&work->slide) + *x;
+                    *y = vec2GetYInt(&work->slide) + *y;
+                    efctSetSpeed(vec2GetSpeed(&work->slide) * scale);
+                }
+            }
+            break;
+        case 2:
+            if (work->scroll <= 5) {
+                s32 base = resourceRunOperationIfUnblocked(work->list);
+                s32 index = listCursorGetRowIfUnblocked(work->list);
+
+                if (*shifted != 0) {
+                    *y = work->scroll * -3 + *y;
+                }
+                if (work->pageIds[row] == work->slotIds[index + base]) {
+                    efctSetSpeed((f32)(5 - work->scroll) * 0.2f * scale);
+                }
+            }
+            break;
+        case 3:
+            if (work->scroll <= 5) {
                 if (*shifted != 0) {
                     *y = work->scroll * -3 + *y;
                 }
@@ -57,25 +85,7 @@ void FUN_003b6354(f32 scale, ListMenuWork *work, s32 row, s32 mode, s32 selected
                     efctSetSpeed((f32)(5 - work->scroll) * 0.2f * scale);
                 }
             }
-        } else if (work->scroll < 6) {
-            s32 base = resourceRunOperationIfUnblocked(work->list);
-            s32 index = listCursorGetRowIfUnblocked(work->list);
-
-            if (*shifted != 0) {
-                *y = work->scroll * -3 + *y;
-            }
-            if (work->pageIds[row] == work->slotIds[index + base]) {
-                efctSetSpeed((f32)(5 - work->scroll) * 0.2f * scale);
-            }
-        }
-    } else if (work->scroll > 0) {
-        s32 base = resourceRunOperationIfUnblocked(work->list);
-        s32 index = listCursorGetRowIfUnblocked(work->list);
-
-        if (work->pageIds[row] == work->slotIds[index + base]) {
-            *x = vec2GetXInt((const UiSpriteState *)work->slide) + *x;
-            *y = vec2GetYInt((const UiSpriteState *)work->slide) + *y;
-            efctSetSpeed(work->slideSpeed * scale);
+            break;
         }
     }
     texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x171, *x + offsetX, *y + offsetY, 0x65);

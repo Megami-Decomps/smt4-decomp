@@ -30,7 +30,7 @@ struct AnimSet {
 };
 
 extern "C" {
-void FUN_0023e024(AnimSet *set, s32 key, u32 a, u32 b, f32 c);
+void spriteDrawPartGroup(AnimSet *set, s32 key, u32 a, u32 b, f32 c); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void FUN_0033d42c(AnimSet *set, s32 key, u32 a, u32 b, f32 c, f32 *position, f32 *scale, f32 d);
 
 /* Looks up animation `index` of the set at `time` (interpolating between the two surrounding keys)
@@ -78,7 +78,7 @@ void spriteAnimationPlayAtTime(AnimSet *set, s32 index, u32 a, u32 b, f32 time, 
     scale[0] *= 0.01f;
     scale[1] *= 0.01f;
     if (placed == 0)
-        FUN_0023e024(set, key, a, b, c);
+        spriteDrawPartGroup(set, key, a, b, c);
     else
         FUN_0033d42c(set, key, a, b, c, position, scale, d);
 }

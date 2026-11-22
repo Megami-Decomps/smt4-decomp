@@ -6,7 +6,7 @@ extern "C" {
 
 int effectApplyFiveComponentsWithDefaults(void); // declcheck: local (romwright prototype; the shared declaration in code/Code001c_Smt4.h does not compile here: too few arguments in function call)
 int flagsPackFourBooleans(...);
-int FUN_0023e024(...);
+int spriteDrawPartGroup(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
 int renderCtxSelectTexture(...);
@@ -59,7 +59,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: effectApplyFiveComponentsWithDefaults. */
 /* Supplied declaration required: flagsPackFourBooleans. */
-/* Supplied declaration required: FUN_0023e024. */
+/* Supplied declaration required: spriteDrawPartGroup. */
 extern int gxPackFadeKindAlphaWord(unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
@@ -224,7 +224,7 @@ void FUN_00340c90(fn_00340c90_arg0 *param_1)
     (**(romwright_code **)(temp_v0 + 0x12c8))();
     *(unsigned char *)(temp_v0 + 0x12c4) = 0;
   }
-  FUN_0023e024(param_1->field_0x4,temp_v4,&temp_v28,0xffffffff,1);
+  spriteDrawPartGroup(param_1->field_0x4,temp_v4,&temp_v28,0xffffffff,1);
   temp_v0 = g_titleScene;
   piVar5 = (int *)(g_titleScene + 0x12ac);
   temp_v1 = *piVar5;

@@ -1,113 +1,63 @@
-/* NON_MATCHING: readable rewrite of the stream voice pump; retail copies the request words through VFP registers (vldr/vstr, vpush d8), uses ldrd/strd for the voice indices and a single state-block base register, none of which the build reproduces. */
-#include "common.h"
-
-// One wave buffer of a stream voice (0x18 bytes, nn::snd::CTR::WaveBuffer).
-struct StreamWaveBuffer {
-    /* 0x00 */ u32 data;
-    /* 0x04 */ u32 size;
-    /* 0x08 */ u8 unk08[8];
-    /* 0x10 */ u8 queued;
-    /* 0x11 */ u8 status;  // 3: finished playing
-    /* 0x12 */ u8 unk12[6];
-};
-
-// A streaming voice (0x70 bytes).
-struct StreamVoice {
-    /* 0x00 */ u32 voice;               // 0: slot unused
-    /* 0x04 */ StreamWaveBuffer *buffers;
-    /* 0x08 */ u8 unk08[0x30];
-    /* 0x38 */ u32 bufferCount;
-    /* 0x3c */ u8 unk3c[4];
-    /* 0x40 */ u32 chunkFrames;
-    /* 0x44 */ u32 writeIndex;
-    /* 0x48 */ u32 readIndex;
-    /* 0x4c */ u32 queuedCount;
-    /* 0x50 */ u32 freeCount;
-    /* 0x54 */ u8 unk54[4];
-    /* 0x58 */ u64 sampleCount;         // samples handed to the voice
-    /* 0x60 */ u64 playedCount;         // samples the voice has played
-    /* 0x68 */ u8 unk68[8];
-};
-
-// A queued request to feed a voice (0xc bytes).
-struct StreamRequest {
-    StreamVoice *voice;
-    u32 data;
-    u32 samples;
-};
-
-// The stream layer's state block.
-struct StreamState {
-    /* 0x00 */ u8 unk00;
-    /* 0x01 */ s8 active;                 // the stream layer is active
-    /* 0x02 */ u8 unk02[6];
-    /* 0x08 */ StreamVoice *voices;       // voice table
-    /* 0x0c */ u8 unk0c[8];
-    /* 0x14 */ u32 voiceCount;
-    /* 0x18 */ u32 requestsQueued;        // requests queued so far
-    /* 0x1c */ u32 requestsHandled;       // requests handled so far
-};
+/* NON_MATCHING: 59 lines (140 vs 141 rows): with AudioStreamWorker.h volatile cursors, all reloads, vpush d8, vldr/vstr s16, and ldrd r0, [r4] match; remaining: add r2, r0, #96 before ldrd r2, [r2] and a few scratch-register swaps. */
+#include "sound/AudioStreamWorker.h"
 
 extern "C" {
-extern StreamState g_soundVoicePool;
-extern StreamRequest DAT_00618524[0x40];
-extern u8 g_soundVoiceCriticalSection;               // critical section
+extern AudioStreamWorker g_soundVoicePool;
+extern AudioStreamRequest DAT_00618524[64];
+extern u8 g_soundVoiceCriticalSection;
 
 void nn_os_CriticalSection_Enter(void *section);
 void nn_os_CriticalSection_Leave(void *section);
-void nn_snd_CTR_InitializeWaveBuffer(StreamWaveBuffer *buffer);
+void nn_snd_CTR_InitializeWaveBuffer(WaveBuffer *buffer); // declcheck: local (only the generated protos__code.h declares it)
 void FUN_001c76b8(void);
-void nn_snd_CTR_Voice_AppendWaveBuffer(u32 voice, StreamWaveBuffer *buffer);
+void nn_snd_CTR_Voice_AppendWaveBuffer(u32 voice, WaveBuffer *buffer);
 void FUN_001cd5ac(void);
-u32 FUN_00439e0c(u32 samples, u32 flag, u32 chunkFrames);
+u32 FUN_00439e0c(u32 samples, s32 format, s32 channels);
 
-// Retires the wave buffers the voices have finished, then feeds the queued requests into the voices' free buffers.
+/* Retires the wave buffers the voices have finished, then feeds the queued requests into the voices' free buffers. */
 void FUN_00422c48(void)
 {
     nn_os_CriticalSection_Enter(&g_soundVoiceCriticalSection);
-    if (g_soundVoicePool.active != 0) {
+    if ((s8)g_soundVoicePool.unk01[0] != 0) {
         FUN_001cd5ac();
     }
-    u32 count = g_soundVoicePool.voiceCount;
-    for (u32 i = 0; i < count; i++) {
-        StreamVoice *voice = &g_soundVoicePool.voices[i];
-        if (voice->voice != 0 && voice->queuedCount != 0 && voice->buffers[voice->readIndex].status == 3) {
-            s32 size = (s32)voice->buffers[voice->readIndex].size;
-            voice->playedCount += (s64)size;
-            voice->queuedCount--;
-            voice->readIndex++;
-            if (voice->readIndex == voice->bufferCount) {
-                voice->readIndex = 0;
+    u32 count = g_soundVoicePool.streamCount;
+    for (u32 i = 0; i < count; ++i) {
+        AudioStreamSlot *stream = &g_soundVoicePool.streams[i];
+        if (stream->voice != 0 && stream->queued != 0 && stream->buffers[stream->readIndex].playback.status == 3) {
+            stream->consumedSamples += (s32)stream->buffers[stream->readIndex].sampleCount;
+            --stream->queued;
+            ++stream->readIndex;
+            if (stream->readIndex == stream->capacity) {
+                stream->readIndex = 0;
             }
         }
     }
-    while (g_soundVoicePool.requestsHandled < g_soundVoicePool.requestsQueued) {
-        StreamRequest *request = &DAT_00618524[g_soundVoicePool.requestsHandled & 0x3f];
-        StreamVoice *voice = request->voice;
-        if (voice != NULL) {
-            if (voice->bufferCount <= voice->queuedCount) {
+    while (g_soundVoicePool.written > g_soundVoicePool.read) {
+        AudioStreamSlot *stream = DAT_00618524[g_soundVoicePool.read & 63].stream;
+        if (stream != NULL) {
+            if (stream->queued >= stream->capacity) {
                 break;
             }
-            u32 data = DAT_00618524[g_soundVoicePool.requestsHandled & 0x3f].data;
-            u32 samples = DAT_00618524[g_soundVoicePool.requestsHandled & 0x3f].samples;
-            StreamWaveBuffer *buffer = &voice->buffers[voice->writeIndex];
-            nn_snd_CTR_InitializeWaveBuffer(buffer);
-            buffer->data = data;
-            u32 size = FUN_00439e0c(samples, 1, voice->chunkFrames);
-            voice->sampleCount += size;
-            buffer->size = size;
-            buffer->queued = 0;
-            nn_snd_CTR_Voice_AppendWaveBuffer(voice->voice, buffer);
-            voice->queuedCount++;
-            voice->writeIndex++;
-            if (voice->writeIndex == voice->bufferCount) {
-                voice->writeIndex = 0;
+            u8 *data = DAT_00618524[g_soundVoicePool.read & 63].data;
+            u32 bytes = DAT_00618524[g_soundVoicePool.read & 63].bytes;
+            nn_snd_CTR_InitializeWaveBuffer(&stream->buffers[stream->writeIndex]);
+            stream->buffers[stream->writeIndex].data = data;
+            u32 samples = FUN_00439e0c(bytes, 1, stream->channels);
+            stream->submittedSamples = stream->submittedSamples + samples;
+            stream->buffers[stream->writeIndex].sampleCount = samples;
+            stream->buffers[stream->writeIndex].looping = 0;
+            nn_snd_CTR_Voice_AppendWaveBuffer(stream->voice, &stream->buffers[stream->writeIndex]);
+            ++stream->queued;
+            ++stream->writeIndex;
+            if (stream->writeIndex == stream->capacity) {
+                stream->writeIndex = 0;
             }
-            voice->freeCount--;
+            --stream->pending;
         }
-        g_soundVoicePool.requestsHandled++;
+        ++g_soundVoicePool.read;
     }
-    if (g_soundVoicePool.active != 0) {
+    if ((s8)g_soundVoicePool.unk01[0] != 0) {
         FUN_001c76b8();
     }
     nn_os_CriticalSection_Leave(&g_soundVoiceCriticalSection);

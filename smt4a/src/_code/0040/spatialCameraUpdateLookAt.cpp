@@ -1,4 +1,4 @@
-/* NON_MATCHING: look-at update rebuilt with the native MTX34::Identity() copy (retail's guarded static) and struct copies of position/angles; the inlined Euler phase rotation (sin/cos samples) still differs from retail's 226-row schedule (208 built). */
+/* NON_MATCHING: 333 lines (291 by shape). Look-at update rebuilt with the native MTX34::Identity() copy (retail's guarded static) and struct copies of position/angles; the inlined rotation builder (buildEulerPhaseRotationBatched) has retail's batched wrap loops, its table lookups and products still differ from retail's schedule. */
 #include "gfx/EulerPhaseRotation.h"
 #include "code/Code0015.h"
 #include "nw/math/MTX34.h"
@@ -42,8 +42,11 @@ void spatialCameraUpdateLookAt(LookAtCamera *camera)
     CameraAngles angles = camera->angles;
     Matrix34Data matrix;
     nn_math_ARMv6_MTX34CopyAsm(reinterpret_cast<nw::math::MTX34 *>(&matrix), &nw::math::MTX34::Identity());
-    buildEulerPhaseRotation(&matrix, 1, g_sinCosTable, angles.values[0] * 40.764328f, angles.values[1] * 40.764328f,
+    buildEulerPhaseRotationBatched(&matrix, g_sinCosTable, angles.values[0] * 40.764328f, angles.values[1] * 40.764328f,
                             angles.values[2] * 40.764328f);
+    matrix.values[3] = 0.0f;
+    matrix.values[7] = 0.0f;
+    matrix.values[11] = 0.0f;
     CameraPoint forward;
     forward.x = 0.0f;
     forward.y = 0.0f;

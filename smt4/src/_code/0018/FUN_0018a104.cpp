@@ -2,6 +2,7 @@
 #include "common.h"
 #include <math.h>
 #include "script/scrScriptProcess.h"
+#include "gfx/CameraStereoDepth.h"
 
 struct Vec3f {
     f32 x, y, z;
@@ -22,7 +23,6 @@ struct OrbitScreen {
 extern "C" {
 
 void mathSinCos(f32* sine, f32* cosine);
-void FUN_002c159c(void* camera);
 void cameraMatrixCacheSetLookAt(void* camera, Vec3f* position, Vec3f* target, s32* result);
 void stereoCameraSetPerspective(void* camera, s32 flag);
 
@@ -65,7 +65,7 @@ void FUN_0018a104(OrbitScreen* screen)
                 (yz - sine * axis.x) * screen->direction.z) * screen->distance + screen->position.y;
     target.z = ((xy - sine * axis.z) * screen->direction.x + (yz + sine * axis.x) * screen->direction.y +
                 (cosine + complement * axis.y * axis.y) * screen->direction.z) * screen->distance + screen->position.z;
-    FUN_002c159c(screen->camera);
+    asdCameraSetStereoDepth(screen->camera, screen->nearPlane, 1.0f);
     cameraMatrixCacheSetLookAt(screen->camera, &screen->position, &target, &result);
     stereoCameraSetPerspective(screen->camera, 1);
     FUN_00298d50(reinterpret_cast<u32>(screen->camera));

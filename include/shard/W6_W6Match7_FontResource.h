@@ -34,6 +34,10 @@ struct FontGlyphLookupVTable {
     union {
         u8 unk00[0x44];
         struct {
+            u8 unk00[4];
+            void (*destroy)(FontGlyphLookup *font); // 0x04: the deleting destructor
+        } lifetime;
+        struct {
             u8 unk00[0x40];
             void (*getGlyph)(FontGlyphLookup *font, NwFontGlyph *glyph, s32 character); // 0x40
         } glyph;
@@ -44,7 +48,8 @@ struct FontGlyphLookup {
     /* 0x00 */ FontGlyphLookupVTable *vtable;
 };
 struct FontGlyphResourceOwner {
-    /* 0x00 */ u8 unk00[8];
+    /* 0x00 */ NwFontFileHeader *file;  /* the font file image the owner frees */
+    /* 0x04 */ NwFontInfo *info;        /* the body of its FINF block */
     /* 0x08 */ FontGlyphLookup *font;
 };
 typedef char FontGlyphLookupVTableSizeCheck[sizeof(FontGlyphLookupVTable) == 0x48 ? 1 : -1];

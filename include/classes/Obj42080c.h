@@ -3,19 +3,31 @@
 
 #include "classes/Obj420794.h"
 
-/* One vertex of the quad: position at +0x0C. */
+/* One vertex of the quad: its position, then its texture coordinates at +0x0C. */
 struct Obj42080cVertex {
-    /* 0x00 */ u8 unk00[0xC];
-    /* 0x0C */ u32 x;
-    /* 0x10 */ u32 y;
+    /* 0x00 */ f32 position[3];
+    /* 0x0C */ f32 x;
+    /* 0x10 */ f32 y;
 };
 
 /* A rectangle: left, top, right, bottom. */
 struct Obj42080cRect {
-    /* 0x00 */ u32 left;
-    /* 0x04 */ u32 top;
-    /* 0x08 */ u32 right;
-    /* 0x0C */ u32 bottom;
+    /* 0x00 */ f32 left;
+    /* 0x04 */ f32 top;
+    /* 0x08 */ f32 right;
+    /* 0x0C */ f32 bottom;
+};
+
+/* What a four-polygon filter is built from (filterCreateQuad): its rectangle, blend mode, texture id and
+ * three colour components. */
+struct Filter4PolySource : Obj42080cRect {
+    /* 0x10 */ u8 unk10[8];
+    /* 0x18 */ u32 blendMode;
+    /* 0x1C */ u32 textureId;
+    /* 0x20 */ u8 unk20[0x14];
+    /* 0x34 */ u32 colorA;
+    /* 0x38 */ u32 colorB;
+    /* 0x3C */ u32 colorC;
 };
 
 /* A screen filter (vtable at 0x42080c, named after it until its real name is known): a quad whose

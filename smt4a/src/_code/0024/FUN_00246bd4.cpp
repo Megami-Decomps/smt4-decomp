@@ -8,7 +8,7 @@ int lmapResolveContextValue(...);
 int mathVec3Dot(...);
 int FUN_00330108(...);
 int FUN_00352568(...);
-int FUN_00376c64(...);
+int lmapCameraRecentreStep(...);
 int controllerSetDestination(...);
 int controllerSetRotationEulerDegrees(...);
 int VectorFloatToUnsigned(...);
@@ -388,7 +388,7 @@ extern int mapJobIsDone(void);
 /* Supplied declaration required: mapIfReleaseSlot1. */
 /* Supplied declaration required: FUN_00354098. */
 /* Supplied declaration required: FUN_00365c94. */
-/* Supplied declaration required: FUN_00376c64. */
+/* Supplied declaration required: lmapCameraRecentreStep. */
 extern int dataTableGetRecord23(void);
 /* Supplied declaration required: naviMainSetRequestTriple. */
 /* Supplied declaration required: uiPlayGatedActionFeedback. */
@@ -7729,7 +7729,7 @@ joined_r0x00397538:
       }
       break;
     case 0x1f:
-      FUN_00376c64();
+      lmapCameraRecentreStep();
       break;
     case 0x20:
       temp_v32 = g_lmapView[1];

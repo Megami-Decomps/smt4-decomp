@@ -3,6 +3,7 @@
 #include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
+#include "gfx/CameraStereoDepth.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ int mathAngleDeltaDegrees(void);
 int FUN_00330108(...);
 int mathPositionHeadingDegrees(void);
 
-int uiSetFloatPair(unsigned char *);
 int cameraMatrixCacheSetLookAt(...);
 int stereoCameraSetPerspective(...);
 int randomGetNormalizedFloat(void);
@@ -68,7 +68,6 @@ static float romwright_sqrt_4(float value)
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: uiSetFloatPair. */
 /* Supplied declaration required: cameraMatrixCacheSetLookAt. */
 /* Supplied declaration required: stereoCameraSetPerspective. */
 /* Supplied declaration required: gameFlagsGetBlock. */
@@ -270,7 +269,7 @@ void lmapCameraUpdate(void)
   piVar5 = g_lmapView;
   temp_v2 = *g_lmapView;
   if (temp_v2 == 3) {
-    uiSetFloatPair(&g_localCamera);
+    asdCameraSetStereoDepth(&g_localCamera, 100.0f, 1.0f);
     stereoCameraSetPerspective(&g_localCamera,1);
     FUN_00324b68();
     FUN_0036b824(&g_localCamera);
@@ -281,7 +280,7 @@ void lmapCameraUpdate(void)
   }
   temp_v20 = 0x42340000;
   if (temp_v2 == 4) {
-    uiSetFloatPair(&g_localCamera);
+    asdCameraSetStereoDepth(&g_localCamera, 100.0f, 1.0f);
     stereoCameraSetPerspective(&g_localCamera,1);
     cameraMatrixCacheSetLookAt(&g_localCamera,g_lmapView + 0x21,g_lmapView + 0x24,g_lmapView + 8);
     FUN_00324b68();

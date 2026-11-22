@@ -1,4 +1,7 @@
-/* NON_MATCHING: SDK texture-unit command writer; the LOD-bias fixed-point clamp and the flag packing schedule differently from retail (float clamp compares integer bits there) */
+/* NON_MATCHING: 220 lines. The LOD bias is clamped to 0..8191 before the offset-binary flip (retail's vmovgt to 0
+ * and the 8191.0 reload). Left: retail computes the cube-map flag right after loading the target and the mag filter,
+ * keeps the parameter word in fewer registers (push {r4, lr}), and threads the 8192/4096 compares into one
+ * predicated chain. */
 #include "common.h"
 #include "shard/S2GrTexture.h"
 
@@ -69,13 +72,14 @@ u32 *FUN_001ba6b0(TextureDescriptor *tex, u32 *cmd, s32 reserve)
         f32 bias = tex->lodBias;
         if (bias != 0.0f && ((*(u32 *)&bias << 1) >> 24) != 0xFF) {
             f32 scaled = (bias + 16.0f) * 256.0f;
-            if (scaled >= 0.0f) {
-                if (scaled >= 8192.0f)
-                    scaled = 8191.0f;
-                lod = (scaled >= 4096.0f) ? (u32)(scaled - 4096.0f) : (u32)(scaled + 4096.0f);
-            } else {
-                lod = (u32)(0.0f + 4096.0f);
-            }
+            if (scaled < 0.0f)
+                scaled = 0.0f;
+            if (scaled >= 8192.0f)
+                scaled = 8191.0f;
+            if (scaled < 4096.0f)
+                lod = (u32)(scaled + 4096.0f);
+            else
+                lod = (u32)(scaled - 4096.0f);
         }
         lod |= ((u32)tex->lodMin << 16) | ((u32)tex->lodMax << 24);
     }

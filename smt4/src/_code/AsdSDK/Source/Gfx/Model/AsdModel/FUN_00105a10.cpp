@@ -12,7 +12,7 @@ extern void *g_asdModelSceneRoots[2];
 extern LightCount g_asdLightCount[2];
 
 void *FUN_00111724(void *allocator, const AsdModelSlotConfig *config);
-void *FUN_001113b0(void *allocator, const AsdModelLimits *limits);
+void *asdSceneRootCreate(void *allocator, const AsdModelLimits *limits);
 
 // Set up the model system: the default allocator, the two slot arrays, the limits table and the
 // per-scene command lists.
@@ -40,14 +40,14 @@ void FUN_00105a10(const AsdModelSettings *settings)
         DAT_004dadb0.unk34 = settings->unk80;
         DAT_004dadb0.unk38 = settings->unk88;
     }
-    g_asdModelSceneRoots[0] = FUN_001113b0(asdMemoryGetDefaultAllocator(), &DAT_004dadb0);
+    g_asdModelSceneRoots[0] = asdSceneRootCreate(asdMemoryGetDefaultAllocator(), &DAT_004dadb0);
     DAT_004dadb0.unk3c = 0x100;
     DAT_004dadb0.unk40 = 0x100;
     DAT_004dadb0.unk44 = 0x100;
     DAT_004dadb0.unk5c = 10;
     DAT_004dadb0.unk6c = 0x100;
     DAT_004dadb0.unk50 = 10;
-    g_asdModelSceneRoots[1] = FUN_001113b0(asdMemoryGetDefaultAllocator(), (const AsdModelLimits *)&DAT_004dadb0.unk3c);
+    g_asdModelSceneRoots[1] = asdSceneRootCreate(asdMemoryGetDefaultAllocator(), (const AsdModelLimits *)&DAT_004dadb0.unk3c);
 
     for (s32 i = 0; i < 2; i++) {
         LightCount *scene = &g_asdLightCount[i];

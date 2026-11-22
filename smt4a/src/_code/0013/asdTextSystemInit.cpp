@@ -6,7 +6,7 @@ extern u8 DAT_0057f5d8;
 
 void fontPoolCreate(s32 count);
 s32 fontFileLoadSync(const char *path);
-void asdFontLoadSlot(s32 slot, s32 font);
+void asdFontLoadGlyphSet(s32 slot, s32 font);
 void fontSetBaselineOffset(s32 slot, f32 offset);
 void workRangeSetLowerBound(s32 value);
 void FUN_00140708(s32 value);
@@ -33,11 +33,11 @@ void messageTextSetPortraitFrame(void);
 void asdTextSystemInit(void)
 {
     fontPoolCreate(6);
-    asdFontLoadSlot(1, fontFileLoadSync("font/TsukuMin_9_9.bcfnt"));
-    asdFontLoadSlot(2, fontFileLoadSync("font/TsukuMin_12_12.bcfnt"));
-    asdFontLoadSlot(3, fontFileLoadSync("font/TsukuMin_14_14.bcfnt"));
-    asdFontLoadSlot(4, fontFileLoadSync("font/TsukuMin_16_16.bcfnt"));
-    asdFontLoadSlot(5, fontFileLoadSync("font/demo_font.bcfnt"));
+    asdFontLoadGlyphSet(1, fontFileLoadSync("font/TsukuMin_9_9.bcfnt"));
+    asdFontLoadGlyphSet(2, fontFileLoadSync("font/TsukuMin_12_12.bcfnt"));
+    asdFontLoadGlyphSet(3, fontFileLoadSync("font/TsukuMin_14_14.bcfnt"));
+    asdFontLoadGlyphSet(4, fontFileLoadSync("font/TsukuMin_16_16.bcfnt"));
+    asdFontLoadGlyphSet(5, fontFileLoadSync("font/demo_font.bcfnt"));
     fontSetBaselineOffset(0, -10.0f);
     fontSetBaselineOffset(1, -2.0f);
     fontSetBaselineOffset(2, -3.0f);

@@ -5,6 +5,7 @@
 #include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 #include "gfx/CameraAnimationApply.h"
+#include "gfx/CameraStereoDepth.h"
 
 extern "C" {
 
@@ -43,7 +44,7 @@ int buttonHelpTransitionPresetFlags(...);
 int resOwnerRunNodeHandlers(...);
 int ptrListRemoveClearOwner(...);
 int slotSetRequest(...);
-int FUN_0021b6ec(...);
+int commandMenuRegisterItemCommands(...);
 int scrRunOpcodesStub(...);
 int useCounterStart(void);
 int touchMenuClose(void);
@@ -87,7 +88,6 @@ int FUN_0040ae70(...);
 int modelSetDrawMode(...);
 
 int asdLoadFileWithSize(...);
-int uiSetFloatPair(...);
 int cameraMatrixCacheSetLookAt(...);
 int stereoCameraSetPerspective(...);
 int asdOperatorNew(void);
@@ -163,7 +163,6 @@ extern unsigned int DAT_005f1b7c; /* 0x5f1b7c */
 /* Supplied declaration required: asdCameraInitializeDefaults. */
 /* Supplied declaration required: screenFadeStartIn. */
 extern int pairedAvailabilityGetState(unsigned int);
-/* Supplied declaration required: uiSetFloatPair. */
 extern unsigned int messageVoiceBankGet(void);
 /* Supplied declaration required: cameraMatrixCacheSetLookAt. */
 /* Supplied declaration required: padQueryLogicalKey. */
@@ -198,7 +197,7 @@ extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: placeWinStartText. */
 /* Supplied declaration required: placeWindowStartClose. */
-/* Supplied declaration required: FUN_0021b6ec. */
+/* Supplied declaration required: commandMenuRegisterItemCommands. */
 /* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: titleRestartSlotState3. */
 extern int messageMainIsWindowActive(void);
@@ -332,7 +331,7 @@ unsigned int FUN_0027e0d8(void)
       cameraAnimationSampleAndAdvance(temp_v7,temp_v11,0);
     }
     puVar3[0x15] = puVar3[0x15] + 1;
-    uiSetFloatPair(puVar3 + 0x16);
+    asdCameraSetStereoDepth(puVar3 + 0x16, 5.0f, 1.0f);
     cameraMatrixCacheSetLookAt(puVar3 + 0x16,temp_v11,temp_v13,temp_v14);
     stereoCameraSetPerspective(puVar3 + 0x16,1);
     temp_v7 = 0;
@@ -445,7 +444,7 @@ unsigned int FUN_0027e0d8(void)
       cameraAnimationSampleAndAdvance(temp_v7,temp_v11,0);
     }
     puVar8[0x15] = puVar8[0x15] + 1;
-    uiSetFloatPair(puVar8 + 0x16);
+    asdCameraSetStereoDepth(puVar8 + 0x16, 5.0f, 1.0f);
     cameraMatrixCacheSetLookAt(puVar8 + 0x16,temp_v11,temp_v13,temp_v14);
     stereoCameraSetPerspective(puVar8 + 0x16,1);
     FUN_0036b824(puVar8 + 0x16);
@@ -600,7 +599,7 @@ unsigned int FUN_0027e0d8(void)
         sysPlaySe(0xa8);
         sortMenuAcquire(0xffffffff,2);
         obj7ECSetPair(puVar3[6],puVar3[7]);
-        FUN_0021b6ec(puVar3);
+        commandMenuRegisterItemCommands(puVar3);
         useCounterStart();
         puVar3[4] = 4;
         break;
@@ -1129,7 +1128,7 @@ LAB_0027edcc:
       sysPlaySe(0xa8);
       sortMenuAcquire(0xffffffff,2);
       obj7ECSetPair(puVar3[6],puVar3[7]);
-      FUN_0021b6ec(puVar3);
+      commandMenuRegisterItemCommands(puVar3);
       useCounterStart();
       puVar3[4] = 4;
       break;

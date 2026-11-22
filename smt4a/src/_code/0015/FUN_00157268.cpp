@@ -4,7 +4,7 @@ extern "C" {
 void _ZN9SlotStateC1Ev(RenderPassViewportState *state);
 u32 *gpuEmitDepthBufferCommands(RenderPassDepthState *state, u32 *commands, s32 first, s32 second);
 u32 *gpuDepthRangeEmitCommands(RenderPassColorState *state, u32 *commands);
-void FUN_0016bb74(RenderPassQueue *queue, s32 pass);
+void modelManagerCollectDrawItems(RenderPassQueue *queue, s32 pass);
 void FUN_0016b8a8(RenderPassQueue *queue, s32 pass);
 void FUN_0016b078(RenderPassQueue *queue, RenderPassItem *item);
 void vectorClear(RenderPassQueue *queue);
@@ -29,7 +29,7 @@ void FUN_00157268(RenderPassQueue *queue)
     *commands = gpuEmitDepthBufferCommands(&states.depth, *commands, 1, 1);
     *commands = gpuDepthRangeEmitCommands(&states.color, *commands);
     for (s32 pass = 0; pass < 4; ++pass) {
-        FUN_0016bb74(queue, pass);
+        modelManagerCollectDrawItems(queue, pass);
         RenderPassBlend *blend = &queue->blend;
         switch (pass) {
         case 0:

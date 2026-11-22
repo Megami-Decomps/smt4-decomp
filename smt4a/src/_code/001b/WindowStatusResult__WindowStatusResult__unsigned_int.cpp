@@ -1,79 +1,83 @@
-/* NON_MATCHING: result translation retains unrecovered fatal-reporting ABI and retail branch scheduling. */
+/* NON_MATCHING: 217 lines. Restructured from retail: the message is a local stored once, module 0xD000's service
+ * range and module 0x4400's description ranges test the module index and a signed description number, module
+ * 0x13800 is tested by its index, and a failed service call is thrown with the caller's pc and the failure bit.
+ * Left: retail keeps 0 in r0 from entry and shares the "message = service description" move with the 0xE0A0D0A9
+ * case, tests 0xC8A08035 twice (a compare, then an adds), and allocates the module mask in ip. */
 #include "classes/WindowStatus.h"
 
 extern "C" {
 s32 FUN_001bd5b8(u32 *description);
-void errThrowFatal(s32 error, u32 returnAddress);
+void errThrowFatal(s32 error, u32 location, ...); /* also passed the failure bit, as sysReportCheckFailure is */
 }
 
 /* Converts an SDK result into the corresponding game message ID. */
 WindowStatusResult::WindowStatusResult(u32 value) : code(value)
 {
-    u32 module = value & 0x3fc00;
-    u32 number = value & 0x3ff;
-    description = 0x164a3;
-    if (module == 0xd000) {
-        if (number >= 100 && number < 300) {
-            if (value == 0xe0a0d0a9) {
-                description = 0;
+    u32 module = value & 0x3FC00;
+    u32 moduleIndex = module >> 10;
+    s32 number = value & 0x3FF;
+    u32 message = 0x164A3;
+
+    if (module == 0xD000) {
+        if (moduleIndex == 0x34 && number >= 100 && number < 300) {
+            if (value == 0xE0A0D0A9) {
+                message = 0;
             } else {
                 u32 serviceDescription;
                 s32 error = FUN_001bd5b8(&serviceDescription);
-                if (error < 0) {
-                    errThrowFatal(error, 0x1b5848);
-                }
-                if (serviceDescription != 0xd909) {
-                    description = serviceDescription;
-                }
+                u32 location = __current_pc();
+                u32 failed = (u32)error >> 31;
+
+                if (failed)
+                    errThrowFatal(error, location, failed);
+                if (serviceDescription != 0xD909)
+                    message = serviceDescription;
             }
-            return;
+        } else {
+            switch (value) {
+            case 0xC920D019: message = 0x16AFA; break;
+            case 0xC8A0D018: message = 0x17FFE; break;
+            case 0xC920D017: message = 0x16AFB; break;
+            case 0xC960D00C: message = 0x16AFD; break;
+            case 0xC960D01B: message = 0x16AFC; break;
+            default: message = 0; break;
+            }
         }
+    } else if (module == 0xA000) {
+        message = number + 0x169B8;
+    } else if (module == 0xB800) {
+        message = number + 0x16A1C;
+    } else if (value == 0xC8A08035) {
+        message = 0x17F36;
+    } else if (module == 0x4400) {
+        if (moduleIndex == 0x11 && number >= 260 && number < 280)
+            message = 0x16F79;
+        else if (moduleIndex == 0x11 && number >= 280 && number <= 0x14E)
+            message = 0x16F7A;
+        else if (moduleIndex == 0x11 && number >= 390 && number < 400)
+            message = 0x17F3F;
+        else if ((moduleIndex == 0x11 && number >= 220 && number <= 229) || (moduleIndex == 0x11 && number >= 100 && number <= 179))
+            message = 0x16F78;
+        else
+            message = 0x16F7F;
+    } else if (moduleIndex == 0x4E && number >= 256) {
         switch (value) {
-        case 0xc920d019: description = 0x16afa; break;
-        case 0xc8a0d018: description = 0x17ffe; break;
-        case 0xc920d017: description = 0x16afb; break;
-        case 0xc960d00c: description = 0x16afd; break;
-        case 0xc960d01b: description = 0x16afc; break;
-        default: description = 0; break;
+        case 0xC8A13908: message = 0x16B43; break;
+        case 0xC8A13900: message = 0x16440; break;
+        case 0xC8A13901: message = 0x16441; break;
+        case 0xC8A13902: message = 0x16442; break;
+        case 0xC8A13904: message = 0x16443; break;
+        case 0xC8A13905: break;
+        case 0xC8A13906: message = 0x16446; break;
+        case 0xC9413912: message = 0x16957; break;
+        case 0xC9413910: message = 0x16379; break;
+        case 0xC9413911: message = 0x167C4; break;
+        case 0xC961391A: message = 0x17FFF; break;
+        case 0xF9613903: message = 0x16447; break;
+        default: message = 0; break;
         }
-        return;
-    }
-    if (module == 0xa000) {
-        description = number + 0x169b8;
-    } else if (module == 0xb800) {
-        description = number + 0x16a1c;
-    } else if (value == 0xc8a08035) {
-        description = 0x17f36;
-    } else if (module != 0x4400) {
-        if (module != 0x13800 || number < 0x100) {
-            description = 0;
-            return;
-        }
-        switch (value) {
-        case 0xc8a13908: description = 0x16b43; break;
-        case 0xc8a13900: description = 0x16440; break;
-        case 0xc8a13901: description = 0x16441; break;
-        case 0xc8a13902: description = 0x16442; break;
-        case 0xc8a13904: description = 0x16443; break;
-        case 0xc8a13905: break;
-        case 0xc8a13906: description = 0x16446; break;
-        case 0xc9413912: description = 0x16957; break;
-        case 0xc9413910: description = 0x16379; break;
-        case 0xc9413911: description = 0x167c4; break;
-        case 0xc961391a: description = 0x17fff; break;
-        case 0xf9613903: description = 0x16447; break;
-        default: description = 0; break;
-        }
-    } else if (number >= 0x104 && number <= 0x117) {
-        description = 0x16f79;
-    } else if (number >= 0x118 && number <= 0x14e) {
-        description = 0x16f7a;
-    } else if (number >= 0x186 && number <= 399) {
-        description = 0x17f3f;
     } else {
-        description = 0x16f78;
-        if ((number < 0xdc || number >= 0xe6) && (number < 100 || number >= 0xb4)) {
-            description = 0x16f7f;
-        }
+        message = 0;
     }
+    description = message;
 }

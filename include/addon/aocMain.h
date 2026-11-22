@@ -30,6 +30,11 @@ typedef struct AocWorkerThread {
 } AocWorkerThread;
 
 
+/* One attribute name of a catalog query (0x40 bytes, copied whole). */
+typedef struct AocAttributeName {
+    char text[0x40];
+} AocAttributeName;
+
 /* The AOC system's main block, g_aocMain (0xD68 bytes, the same layout in both games): the content
  * archive and the online service, the worker thread and its completion event, the quest-script
  * loader, the content tables and per-slot records, and the request the AOC process is running. */
@@ -45,14 +50,17 @@ typedef struct AocMain {
     /* 0x028 */ u8 contentFile[0x54];
     /* 0x07C */ u8 service[4];             /* the online service the operations query */
     /* 0x080 */ u32 queryResult;           /* result of the last service query; the content requests are created with it */
-    /* 0x084 */ u8 unk084[4];
+    /* 0x084 */ u8 serviceClock[4];        /* what the catalog job reads the service's date from (FUN_00427ff4) */
     /* 0x088 */ AocWorkerThread thread;
     /* 0x098 */ LightEvent operationDone;  /* signalled when the worker finishes an operation */
     /* 0x0A0 */ u8 unk0A0[8];
     /* 0x0A8 */ AocScriptHolder scriptHolder;
     /* 0x0C0 */ u8 jumpRequested;
     /* 0x0C1 */ u8 skipRestore;
-    /* 0x0C2 */ u8 unk0C2[0x4E6];
+    /* 0x0C2 */ u8 unk0C2[0x21];
+    /* 0x0E3 */ char catalogFilter[0x281];  /* the catalog query's filter text, used while catalogFilterCount is set */
+    /* 0x364 */ u32 catalogFilterCount;
+    /* 0x368 */ AocAttributeName attributeNames[9]; /* the attributes a catalog query returns: four item labels, then the sale fields */
     /* 0x5A8 */ AocBufferRequest *contentRequest; /* its buffer holds the 0x30-byte content entries */
     /* 0x5AC */ void *contentBuffer;
     /* 0x5B0 */ AocAuxBufferRequest *itemRequest;  /* the item entries the purchase requests are built from */
@@ -60,7 +68,8 @@ typedef struct AocMain {
     /* 0x5B8 */ u8 unk5B8[0xC0];
     /* 0x678 */ Obj422214Owner *records;   /* the per-slot content records */
     /* 0x67C */ s32 recordCount;
-    /* 0x680 */ u8 unk680[8];
+    /* 0x680 */ u32 catalogTotal;          /* entries the service holds for the last catalog query */
+    /* 0x684 */ u32 catalogOffset;         /* first entry the next catalog query asks for */
     /* 0x688 */ Obj422214Owner *selectedRecord;
     /* 0x68C */ u8 unk68C[8];
     /* 0x694 */ union {
@@ -83,6 +92,8 @@ typedef struct AocMain {
 } AocMain;
 
 typedef char AocMainLayoutCheck[sizeof(AocMain) == 0xD68 &&
+    offsetof(AocMain, catalogFilter) == 0xE3 && offsetof(AocMain, catalogFilterCount) == 0x364 &&
+    offsetof(AocMain, attributeNames) == 0x368 && offsetof(AocMain, catalogOffset) == 0x684 &&
     offsetof(AocMain, contentArchive) == 0x18 && offsetof(AocMain, contentFile) == 0x28 &&
     offsetof(AocMain, service) == 0x7C && offsetof(AocMain, queryResult) == 0x80 &&
     offsetof(AocMain, thread) == 0x88 && offsetof(AocMain, operationDone) == 0x98 &&

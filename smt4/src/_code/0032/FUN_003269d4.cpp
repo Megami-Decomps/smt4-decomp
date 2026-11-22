@@ -1,4 +1,6 @@
-/* NON_MATCHING: retail writes the 32-bit vertex colours as byte stores through rev/lsr extraction of a register value (an unaligned store; `__packed` stores of the same values still compile to plain str here) and keeps the loop-invariant fade bounds in the stack; this version stores the colour bytes directly. */
+/* NON_MATCHING: 189 lines: the colours are now stored through the byte-reversed packing (rev/lsr strb) as retail does;
+ * remaining: retail keeps repeatCount in fp and the segment count in lr (the build spills both), copies the mirrored
+ * colour word through core registers (the build uses vldr/vstr) and schedules the flag update after the buffer loads. */
 #include "effect/FadeStrip.h"
 
 extern "C" {
@@ -6,8 +8,8 @@ void rt_memcpy(void *destination, const void *source, u32 bytes);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 }
 
-// Builds a fading vertex strip: one base strip with `segments + 1` vertices whose alpha ramps in and out, then copies
-// of it for each further repeat.
+/* Builds a fading vertex strip: one base strip of `segments + 1` rings of four vertices whose alpha ramps in and out,
+ * then copies of it for each further repeat. */
 extern "C" void FUN_003269d4(StripOwnerView *owner, StripParameters *params)
 {
     u32 repeatCount = params->repeatCount;
@@ -20,14 +22,14 @@ extern "C" void FUN_003269d4(StripOwnerView *owner, StripParameters *params)
     geometry->flags |= 0x24;
 
     s32 segments = params->segments;
-    u32 vertexCount = segments + 1;
+    u32 rings = segments + 1;
     s32 fadeInEnd = static_cast<s32>(params->fadeInEnd * static_cast<f32>(segments));
     s32 fadeOutStart = static_cast<s32>(params->fadeOutStart * static_cast<f32>(segments));
     f32 step = params->spacing * 0.33333334f;
 
     StripColor *color = baseColors;
     StripCoords *coords = baseCoords;
-    for (u32 i = 0; i < vertexCount; i++) {
+    for (u32 i = 0; i < rings; i++) {
         f32 fade;
         if (static_cast<s32>(i) < fadeInEnd) {
             fade = static_cast<f32>(i) / static_cast<f32>(fadeInEnd);
@@ -37,20 +39,10 @@ extern "C" void FUN_003269d4(StripOwnerView *owner, StripParameters *params)
                 fade = static_cast<f32>(segments - i) / static_cast<f32>(segments - fadeOutStart);
             }
         }
-        color->first[0] = 0xff;
-        color->first[1] = 0xff;
-        color->first[2] = 0xff;
-        color->first[3] = 0;
-        u32 alpha = static_cast<u32>(fade * 255.0f);
-        color->second[0] = 0xff;
-        color->second[1] = 0xff;
-        color->second[2] = 0xff;
-        color->second[3] = static_cast<u8>(alpha);
+        stripStoreColor(color->first, 0x00FFFFFF);
+        stripStoreColor(color->second, 0x00FFFFFF | (static_cast<u32>(fade * 255.0f) << 24));
         color->third = *reinterpret_cast<u32 *>(color->second);
-        color->fourth[0] = 0xff;
-        color->fourth[1] = 0xff;
-        color->fourth[2] = 0xff;
-        color->fourth[3] = 0;
+        stripStoreColor(color->fourth, 0x00FFFFFF);
         coords->v0 = 0.0f;
         coords->v1 = step;
         coords->v2 = step * 2.0f;
@@ -58,10 +50,11 @@ extern "C" void FUN_003269d4(StripOwnerView *owner, StripParameters *params)
         color++;
         coords++;
     }
+    u32 vertices = rings * 4;
     for (u32 repeat = 1; repeat < repeatCount; repeat++) {
-        rt_memcpy(color, baseColors, vertexCount * sizeof(StripColor));
-        color += vertexCount;
-        __aeabi_memcpy4(coords, baseCoords, vertexCount * sizeof(StripCoords));
-        coords += vertexCount;
+        rt_memcpy(color, baseColors, vertices * sizeof(u32));
+        color += rings;
+        __aeabi_memcpy4(coords, baseCoords, vertices * 8);
+        coords += rings;
     }
 }

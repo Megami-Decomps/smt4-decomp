@@ -39,8 +39,8 @@ void Obj5333c0::update()
                 sprintf(name, "dummy_npc4");
             }
             lookupNameEntry(transform->model->node, name, &position);
-            controllerSetDestination(npcControllersA[i]->model, &position);
-            controllerSetDestination(npcControllersB[i]->model, &position);
+            controllerSetDestination(npcControllersA[i]->body, &position);
+            controllerSetDestination(npcControllersB[i]->body, &position);
         }
     }
 }

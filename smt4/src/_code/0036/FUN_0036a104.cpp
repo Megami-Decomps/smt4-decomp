@@ -1,4 +1,4 @@
-/* NON_MATCHING: the position now copies as a three-float struct (ldm/stm) like retail; remaining: the three phase lookups schedule with different register pressure (extra saves of r8/r9 and d8-d9, table loads not paired as retail's), and retail also copies the translation as a 3-word struct. */
+/* NON_MATCHING: 211 lines: the position copies as a three-float struct (ldm/stm) like retail and the lookups go through lookupPhase; remaining: the build saves only r4/r5 and reorders the angle loads and the three lookups (retail keeps the sign flags in r4-r6, loads the angles with vldmia and pairs the table loads), and retail copies the translation as a 3-word struct. */
 #include "shard/W6_W6Match6_PhaseTrig.h"
 
 /* Three scalar floats copied as a group. */
@@ -45,28 +45,9 @@ void FUN_0036a104(EulerTransform *matrix, const EulerPlacement *placement)
     xMagnitude = wrapPhase(xMagnitude);
     yMagnitude = wrapPhase(yMagnitude);
     zMagnitude = wrapPhase(zMagnitude);
-    u16 xWhole = (u32)xMagnitude;
-    u16 yWhole = (u32)yMagnitude;
-    u16 zWhole = (u32)zMagnitude;
-    const PhaseTrigEntry *xEntry = &g_sinCosTable[(u8)xWhole];
-    const PhaseTrigEntry *yEntry = &g_sinCosTable[(u8)yWhole];
-    const PhaseTrigEntry *zEntry = &g_sinCosTable[(u8)zWhole];
-    f32 xFraction = xMagnitude - (f32)xWhole;
-    f32 yFraction = yMagnitude - (f32)yWhole;
-    f32 zFraction = zMagnitude - (f32)zWhole;
-    PhaseSinCos x, y, z;
-    x.sine = xEntry->sine + xFraction * xEntry->sineDelta;
-    x.cosine = xEntry->cosine + xFraction * xEntry->cosineDelta;
-    y.sine = yEntry->sine + yFraction * yEntry->sineDelta;
-    y.cosine = yEntry->cosine + yFraction * yEntry->cosineDelta;
-    z.sine = zEntry->sine + zFraction * zEntry->sineDelta;
-    z.cosine = zEntry->cosine + zFraction * zEntry->cosineDelta;
-    if (xNegative)
-        x.sine = -x.sine;
-    if (yNegative)
-        y.sine = -y.sine;
-    if (zNegative)
-        z.sine = -z.sine;
+    PhaseSinCos x = lookupPhase(g_sinCosTable, xMagnitude, xNegative);
+    PhaseSinCos y = lookupPhase(g_sinCosTable, yMagnitude, yNegative);
+    PhaseSinCos z = lookupPhase(g_sinCosTable, zMagnitude, zNegative);
     matrix->rotation20 = -y.sine;
     matrix->rotation00 = z.cosine * y.cosine;
     matrix->rotation10 = z.sine * y.cosine;

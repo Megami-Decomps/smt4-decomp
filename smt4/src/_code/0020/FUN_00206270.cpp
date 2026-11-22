@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00292f4c(PlayScene *scene);
+int skillMenuShowEntryHelp(PlayScene *scene);
 int FUN_00297b94(PlayScene *scene, u32 a, u32 b);
 int beginStatusPanelClose(void);
 extern u32 FUN_00297ca4(PlayScene *scene, u32 a);
@@ -18,7 +18,7 @@ void FUN_00206270(PlayScene *scene)
     scene->unk5918 = 4;
     gameGlobalsSetSubScreenActive(0);
     if (scene->mode - 8U <= 5) {
-        FUN_00292f4c(scene);
+        skillMenuShowEntryHelp(scene);
         return;
     }
     value = FUN_00297ca4(scene, 0);

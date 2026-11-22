@@ -283,8 +283,18 @@ static __inline void renderCtxPushE(RenderCtx *context, int state)
     renderStackPush(context->stacks + RENDER_STACK_E, state);
 }
 
+static __inline void renderCtxPushE(RenderCtxA *context, int state)
+{
+    renderStackPush(context->stacks + RENDER_STACK_E, state);
+}
+
 /* Pushes the evaluated state on the context's sixth stack. */
 static __inline void renderCtxPushF(RenderCtx *context, int state)
+{
+    renderStackPush(context->stacks + RENDER_STACK_F, state);
+}
+
+static __inline void renderCtxPushF(RenderCtxA *context, int state)
 {
     renderStackPush(context->stacks + RENDER_STACK_F, state);
 }
@@ -294,6 +304,63 @@ static __inline void renderCtxPushG(RenderCtx *context, int state)
 {
     renderStackPush(context->stacks + RENDER_STACK_G, state);
 }
+
+static __inline void renderCtxPushG(RenderCtxA *context, int state)
+{
+    renderStackPush(context->stacks + RENDER_STACK_G, state);
+}
+
+extern "C" {
+u32 asdGxPresetsGetHeightByKind(u32 kind);
+u32 asdGxPresetsGetByKind(u32 kind);
+}
+
+/* The size of the display the context is drawing to, long side first (the panel is mounted sideways, so the
+ * preset's "height" is the picture's width). Each reads the context's stereo mode on its own: the screen
+ * fills (smt4 renderCtxFillDisplay, smt4a renderCtxFillDisplay) load the field at both calls, where one scope would keep its
+ * address in a register. */
+static __inline f32 renderCtxDisplayWidth(RenderCtx *context)
+{
+    return (f32)asdGxPresetsGetHeightByKind(context->stereoMode);
+}
+
+static __inline f32 renderCtxDisplayWidth(RenderCtxA *context)
+{
+    return (f32)asdGxPresetsGetHeightByKind(context->stereoMode);
+}
+
+static __inline f32 renderCtxDisplayHeight(RenderCtx *context)
+{
+    return (f32)asdGxPresetsGetByKind(context->stereoMode);
+}
+
+static __inline f32 renderCtxDisplayHeight(RenderCtxA *context)
+{
+    return (f32)asdGxPresetsGetByKind(context->stereoMode);
+}
+
+/* A state held on one of the context's stacks for a scope: pushed when the object is made (the stack is
+ * located after `state` is evaluated, as with the push wrappers above) and popped by its destructor, so a run
+ * of them unwinds in reverse order through the stacks they refer to (the screen fills smt4 renderCtxFillDisplay and
+ * smt4a renderCtxFillDisplay hold six each, and keep each stack's address in one register from push to pop). */
+class RenderCtxStateScope {
+public:
+    RenderCtxStateScope(RenderCtx *context, s32 kind, int state) : stack(context->stacks[kind])
+    {
+        renderStackPush(&stack, state);
+    }
+    RenderCtxStateScope(RenderCtxA *context, s32 kind, int state) : stack(context->stacks[kind])
+    {
+        renderStackPush(&stack, state);
+    }
+    ~RenderCtxStateScope()
+    {
+        renderStackPopChecked(stack);
+    }
+
+private:
+    RenderStateStack &stack;
+};
 
 /* Switches the draw context to the layout of its current stereo phase (IV). */
 #ifdef __cplusplus

@@ -3,17 +3,6 @@
 #include "classes/Obj420880.h"
 #include "AsdSDK/AsdDebug.h"
 
-/* What the filter is built from: its rectangle, texture id and three colour components. */
-struct Filter4PolySource : Obj42080cRect {
-    /* 0x10 */ u8 unk10[8];
-    /* 0x18 */ u32 blendMode;
-    /* 0x1C */ u32 textureId;
-    /* 0x20 */ u8 unk20[0x14];
-    /* 0x34 */ u32 colorA;
-    /* 0x38 */ u32 colorB;
-    /* 0x3C */ u32 colorC;
-};
-
 extern "C" {
 extern const char g_asdFilterSourceFileName[];
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);

@@ -13,7 +13,7 @@ extern u32 DAT_00636e6c[];
 extern ModelSlotList* g_asdModelSlotArray0[2];
 void tripleClear(Triple* object);
 AsdAllocator* asdMemoryGetDefaultAllocator(void);
-u32* FUN_0014850c(AsdAllocator* allocator, const u32* description);
+u32* asdSceneRootCreate(AsdAllocator* allocator, const u32* description);
 void FUN_0013d42c(const u32* settings, u32 options);
 void FUN_00176538(void* light);
 void FUN_001445d4(void);
@@ -29,8 +29,8 @@ void FUN_001399b0(const u32* settings, u32 options)
     GfxSettings *state = &g_gfxSettings;
     state->unk1C = 0;
     void **lights = state->attachInfo;
-    lights[0] = FUN_0014850c(asdMemoryGetDefaultAllocator(), DAT_00636e30);
-    lights[1] = FUN_0014850c(asdMemoryGetDefaultAllocator(), DAT_00636e6c);
+    lights[0] = asdSceneRootCreate(asdMemoryGetDefaultAllocator(), DAT_00636e30);
+    lights[1] = asdSceneRootCreate(asdMemoryGetDefaultAllocator(), DAT_00636e6c);
     FUN_0013d42c(settings, options);
     void **visitors = state->transformBuilder;
     for (s32 i = 0; i < 2; ++i) {

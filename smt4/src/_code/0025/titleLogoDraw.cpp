@@ -41,7 +41,7 @@ s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 s32 renderCtxPackPassFlags(u32 kind, u8 enabled);
 s32 flagsPackFourBooleans(u8 first, u8 second, u8 third, u8 fourth);
 u32 FUN_003deab0(LogoObject *logo, s32 mode);
-void FUN_0023e024(LogoObject *logo, u32 handle, f32 *position, s32 color, s32 mode, f32 scale);
+void spriteDrawPartGroup(LogoObject *logo, u32 handle, f32 *position, s32 color, s32 mode, f32 scale); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void renderCtxResetColorScale(RenderCtx *context);
 
 /* nn::math::MTX44Ortho (an SDK header inline; smt4a keeps an out-of-line copy, FUN_0015a050): the orthographic
@@ -112,7 +112,7 @@ void titleLogoDraw(UniteRenderTarget *request)
     position[0] += (f32)-box->offsetX;
     position[1] = (f32)request->holder->screen->height - 143.0f;
     position[0] += (f32)(s32)((f32)(request->holder->screen->width - box->width) * 0.5f);
-    FUN_0023e024(request->texture, FUN_003deab0(request->texture, 0), position, -1, 1, 1.0f);
+    spriteDrawPartGroup(request->texture, FUN_003deab0(request->texture, 0), position, -1, 1, 1.0f);
 
     renderStackPop(g_titleScene->stacks + RENDER_STACK_G);
     renderStackPop(g_titleScene->stacks + RENDER_STACK_C);

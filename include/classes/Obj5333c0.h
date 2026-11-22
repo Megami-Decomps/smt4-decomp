@@ -4,6 +4,7 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "quest_center/QuestRecordA.h"
+#include "Model/MoriModelContent.h"
 
 class Obj5333c0;
 struct ScriptProcess;
@@ -23,17 +24,13 @@ struct SceneTransform {
     /* 0x18 */ SceneTransformModel *model;
 };
 
-/* A quest NPC's controller; `model` is what controllerSetDestination moves. */
-struct SceneNpcController {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ void *model;
-};
 
 extern "C" {
 void FUN_0046ba10(Obj5333c0 *scene);
 void FUN_004688c8(Obj5333c0 *scene);
 u16 idOwnerGetRecordHalf(Obj5333c0 *scene);
 s32 pickObjStart(Obj5333c0 *scene, const char *entry);
+void qcCtrlStart(Obj5333c0 *scene, s32 kind, s32 mode, s32 frozen);
 }
 
 /* A scene whose step functions are listed in the table at 0x5333c0 (named after it until its real
@@ -59,6 +56,7 @@ public:
     friend void FUN_004688c8(Obj5333c0 *scene);
     friend u16 idOwnerGetRecordHalf(Obj5333c0 *scene);
     friend s32 pickObjStart(Obj5333c0 *scene, const char *entry);
+    friend void qcCtrlStart(Obj5333c0 *scene, s32 kind, s32 mode, s32 frozen);
 
 protected:
     /* Switches to `next` and restarts the substate. */
@@ -96,15 +94,18 @@ protected:
     /* 0x2B8 */ SceneStep steps[20]; /* step function of each state; slot 0 and 19 stay empty */
     /* 0x358 */ u8 unk358[0x6B4];
     /* 0xA0C */ u32 deliveryQuest;             /* selection returned by the quest menu */
-    /* 0xA10 */ SceneNpcController *npcControllersA[9];
-    /* 0xA34 */ SceneNpcController *npcControllersB[9];
+    /* 0xA10 */ MoriModelContent *npcControllersA[9];   /* "<location>_npc<n>.bam"; controllerSetDestination moves their bodies */
+    /* 0xA34 */ MoriModelContent *npcControllersB[9];   /* "<location>_npc<n>_add1.bam", shown with the first */
     /* 0xA58 */ u8 npcsPlaced;                  /* the NPC controllers were sent to their dummy markers */
-    /* 0xA59 */ u8 unkA59[0x63];
+    /* 0xA59 */ u8 unkA59[3];
+    /* 0xA5C */ f32 unkA5C;                     /* 30 when the scene starts */
+    /* 0xA60 */ u8 unkA60[0x5C];
     /* 0xABC */ s32 npcCount;
     /* 0xAC0 */ u8 unkAC0[0x21C];
     /* 0xCDC */ SceneTransform *transform;
     /* 0xCE0 */ u32 transformWanted;
     /* 0xCE4 */ u32 transformCurrent;
+    /* 0xCE8 */ MoriModelContent *backgroundModel;   /* "<location>.bam", loaded only for a frozen (2) scene */
 };
 
 #endif

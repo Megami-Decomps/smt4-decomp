@@ -107,7 +107,7 @@ int popupTryStartScrollPrompt(...);
 int partyTryOpenLevelLimitPopup(void);
 int popupStateSetAndShow(...);
 void popupTryStartTimedPrompt(void);
-int FUN_00294cfc(...);
+int popupTryStartDemonHint(...);
 int popupTryStartStory(...);
 int FUN_002b80b8(void);
 void FUN_002b80fc(float x, float y, float z);
@@ -161,7 +161,7 @@ int FUN_00364740(...);
 int mapIfClose(void);
 int FUN_003699e4(void);
 int FUN_0036a434(...);
-int FUN_0036aa04(...);
+int followerDisplayUpdate(...);
 int FUN_0036b824(...);
 int FUN_00378000(void);
 int mapEnvironmentSelectPreset(...);
@@ -462,7 +462,7 @@ extern char *campGetState(void);
 /* Supplied declaration required: FUN_002941c8. */
 /* Supplied declaration required: FUN_00294854. */
 extern int mapIfHasSelection(void);
-/* Supplied declaration required: FUN_00294cfc. */
+/* Supplied declaration required: popupTryStartDemonHint. */
 /* Supplied declaration required: popupTryStartStory. */
 /* Supplied declaration required: FUN_00297c3c. */
 /* Supplied declaration required: mapCollisionLoad. */
@@ -527,7 +527,7 @@ extern int FUN_00356380(void);
 /* Supplied declaration required: clearFlags310To31F. */
 /* Supplied declaration required: FUN_003699e4. */
 /* Supplied declaration required: FUN_0036a434. */
-/* Supplied declaration required: FUN_0036aa04. */
+/* Supplied declaration required: followerDisplayUpdate. */
 /* Supplied declaration required: FUN_0036b824. */
 /* Supplied declaration required: FUN_00376f84. */
 /* Supplied declaration required: mapSetActiveEntryId. */
@@ -1223,7 +1223,7 @@ LAB_00276f5c:
     *(unsigned char *)(puVar2 + 0x25) = 1;
     FUN_00249dec();
     FUN_0036a434(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     FUN_00297c3c();
     DAT_005f1614 = 0;
     DAT_005f1859 = 1;
@@ -1592,7 +1592,7 @@ LAB_00276f5c:
                 FUN_00249dec();
                 *(char *)(puVar2 + 0x27a) = temp_v1;
                 FUN_0036a434(puVar2);
-                FUN_0036aa04(puVar2);
+                followerDisplayUpdate(puVar2);
                 FUN_00297c3c();
                 navigationSetArguments(puVar2[0x10],puVar2[0x12],DAT_005f1604);
                 if (*(char *)(puVar2 + 0x27a) != '\0') {
@@ -1865,7 +1865,7 @@ LAB_00278b38:
                                     popupTryStartStory(0);
                                     FUN_0020ecd4();
                                     partyTryOpenLevelLimitPopup();
-                                    FUN_00294cfc(DAT_005f18e8);
+                                    popupTryStartDemonHint(DAT_005f18e8);
                                     temp_v8 = flagsBit7Get(g_gameState.mapId,DAT_005f1600);
                                     if (temp_v8 == 0) {
                                       popupTryStartScrollPrompt(g_gameState.mapId,DAT_005f1600);
@@ -2241,7 +2241,7 @@ LAB_00278774:
         temp_v8 = temp_v8 + 1;
       } while (temp_v8 < 0x20);
       DAT_005f161f = 1;
-      FUN_0036aa04(puVar19);
+      followerDisplayUpdate(puVar19);
       controllerUpdateWithIdleTimer(puVar19 + 0x3d);
       FUN_00297c3c();
       FUN_00234b30();
@@ -2284,7 +2284,7 @@ LAB_00278774:
       temp_v8 = temp_v8 + 1;
     } while (temp_v8 < 0x20);
     DAT_005f161f = 0;
-    FUN_0036aa04(puVar19);
+    followerDisplayUpdate(puVar19);
     controllerUpdateWithIdleTimer(puVar19 + 0x3d);
     FUN_00297c3c();
     FUN_00234b30();
@@ -2625,7 +2625,7 @@ LAB_00279834:
     puVar2[3] = puVar2[3] + 1;
     FUN_0036a434(puVar2);
     FUN_003401a4(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     FUN_00297c3c();
     FUN_00234b30();
     FUN_002737a8();
@@ -2633,7 +2633,7 @@ LAB_00279834:
   case 0x20:
     FUN_0036a434(puVar2);
     FUN_003401a4(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     FUN_00297c3c();
     FUN_00234b30();
     FUN_002737a8();
@@ -2683,12 +2683,12 @@ LAB_0027a7a8:
     puVar2[3] = puVar2[3] + 1;
     FUN_0036a434(puVar2);
     FUN_003401a4(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     break;
   case 0x22:
     FUN_0036a434(puVar2);
     FUN_003401a4(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     temp_v8 = scrRunOpcodesStub(puVar2[0x280]);
     if (temp_v8 != 2) {
       return 0;
@@ -2729,13 +2729,13 @@ LAB_0027a7a8:
     puVar2[3] = puVar2[3] + 1;
     FUN_0036a434(puVar2);
     FUN_003401a4(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     mapPopupReset();
     return 0;
   case 0x24:
     FUN_0036a434(puVar2);
     FUN_003401a4(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     temp_v8 = scrRunOpcodesStub(puVar2[0x280]);
     if (temp_v8 != 2) {
       return 0;
@@ -2772,7 +2772,7 @@ LAB_0027a7a8:
     scrScriptProcessStartEntry(puVar2[0x280],DAT_005f165c);
     FUN_0036a434(puVar2);
     FUN_003401a4(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     FUN_00249dec();
     FUN_00297c3c();
     FUN_00234b30();
@@ -2785,7 +2785,7 @@ LAB_0027a7a8:
     break;
   case 0x26:
     FUN_003401a4(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     FUN_0036a434(puVar2);
     FUN_00249dec();
     FUN_00297c3c();
@@ -2809,7 +2809,7 @@ LAB_0027a7a8:
   case 0x27:
     FUN_0036a434(puVar2);
     FUN_003401a4(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     FUN_00249dec();
     FUN_00297c3c();
     FUN_00234b30();
@@ -2833,7 +2833,7 @@ LAB_0027a7a8:
     break;
   case 0x28:
     FUN_003401a4(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     FUN_0036a434(puVar2);
     FUN_00249dec();
     FUN_00297c3c();
@@ -2875,7 +2875,7 @@ LAB_0027a7a8:
     scrScriptProcessStartEntry(puVar2[0x27d],puVar2[0x279]);
     FUN_0036a434(puVar2);
     FUN_003401a4(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     mapPopupReset();
     puVar2[3] = puVar2[3] + 1;
     puVar2[4] = 0;
@@ -2883,7 +2883,7 @@ LAB_0027a7a8:
   case 0x2a:
     FUN_0036a434(puVar2);
     FUN_003401a4(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     puVar2[4] = puVar2[4] + 1;
     temp_v8 = scrRunOpcodesStub(puVar2[0x27d]);
     if (temp_v8 != 2) {
@@ -2911,7 +2911,7 @@ LAB_0027a030:
   case 0x2c:
     FUN_0036a434(puVar2);
     FUN_003401a4(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     puVar2[4] = puVar2[4] + 1;
     temp_v8 = scrRunOpcodesStub(puVar2[0x27d]);
     if (temp_v8 != 2) {
@@ -2928,7 +2928,7 @@ LAB_0027a030:
   case 0x2e:
     FUN_0036a434(puVar2);
     FUN_003401a4(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     puVar2[4] = puVar2[4] + 1;
     temp_v8 = scrRunOpcodesStub(puVar2[0x27d]);
     if (temp_v8 != 2) {
@@ -2966,7 +2966,7 @@ LAB_0027a030:
     scrScriptProcessStartEntry(puVar2[0x27d],puVar2[0x279]);
     FUN_0036a434(puVar2);
     FUN_003401a4(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     FUN_00297c3c();
     FUN_00234b30();
     FUN_002737a8();
@@ -2977,7 +2977,7 @@ LAB_0027a030:
     puVar2[4] = puVar2[4] + 1;
     FUN_0036a434(puVar2);
     FUN_003401a4(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     FUN_00297c3c();
     FUN_00234b30();
     FUN_002737a8();
@@ -3044,7 +3044,7 @@ LAB_0027a030:
     }
     FUN_0036a434(puVar2);
     FUN_003401a4(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     temp_v8 = puVar2[4];
     puVar2[4] = temp_v8 + 1;
     if (temp_v8 + 1 < 0x11) {
@@ -3459,7 +3459,7 @@ LAB_0027a030:
     FUN_00249dec();
     *(unsigned char *)(puVar2 + 0x27a) = temp_v2;
     FUN_0036a434(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     FUN_00297c3c();
     DAT_005f1859 = 0;
     DAT_005f185a = 0;
@@ -3471,7 +3471,7 @@ LAB_0027a030:
     FUN_00249dec();
     *(char *)(puVar2 + 0x27a) = (char)temp_v6;
     FUN_0036a434(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     FUN_00297c3c();
     temp_v8 = engineHasActiveRecord();
     if (temp_v8 == 0) {
@@ -3521,7 +3521,7 @@ LAB_0027a030:
     FUN_00249dec();
     *(char *)(puVar2 + 0x27a) = (char)temp_v6;
     FUN_0036a434(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     FUN_00297c3c();
     puVar2[4] = puVar2[4] + 1;
     temp_v8 = scrRunOpcodesStub(puVar2[0x27d]);
@@ -4235,7 +4235,7 @@ LAB_0027ca0c:
       }
     }
     FUN_003401a4(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     temp_v8 = puVar2[4];
     puVar2[4] = temp_v8 + 1;
     if (temp_v8 + 1 < 0x15) {
@@ -4347,7 +4347,7 @@ LAB_0027ca0c:
     }
     FUN_0036a434(puVar2);
     FUN_003401a4(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     temp_v8 = puVar2[4];
     puVar2[4] = temp_v8 + 1;
     if (temp_v8 + 1 < 0x11) {
@@ -4364,7 +4364,7 @@ LAB_0027ca0c:
     }
     FUN_0036a434(puVar2);
     FUN_003401a4(puVar2);
-    FUN_0036aa04(puVar2);
+    followerDisplayUpdate(puVar2);
     puVar2[4] = puVar2[4] + 1;
     temp_v8 = pairedAvailabilityBothReady();
 joined_r0x0027ce58:

@@ -4,6 +4,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "gfx/CameraStereoDepth.h"
 
 extern "C" {
 extern EffectProcess *g_effectProcessActive;
@@ -12,7 +13,6 @@ void textureCacheReset(u32);
 void FUN_00317a90();
 void FUN_00221ba8();
 void cameraMatrixCacheReset(EffectProcess *, u32);
-void FUN_002c159c(EffectProcess *, f32, f32);
 void cameraMatrixCacheSetLookAt(EffectProcess *, const f32 *, const f32 *, const f32 *);
 void stereoCameraSetPerspective(EffectProcess *, u32, f32, f32, f32, f32);
 s32 FUN_0017fbe4(u32 job);
@@ -49,7 +49,7 @@ u32 effectProcessCreate(u8 keepScene)
     target[2] = 0.0f;
     work->scene.fieldOfView = 60.0f;
     cameraMatrixCacheReset(work, 1);
-    FUN_002c159c(work, 5.0f, 1.0f);
+    asdCameraSetStereoDepth(work, 5.0f, 1.0f);
     cameraMatrixCacheSetLookAt(work, eye, target, up);
     stereoCameraSetPerspective(work, 1, work->scene.fieldOfView, 0.1f, 25600.0f, 1.66666662693f);
     work->scene.process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EffectProc"), 2, 0, 0, FUN_0017fbe4, effectProcessDestroy, reinterpret_cast<u32>(work));

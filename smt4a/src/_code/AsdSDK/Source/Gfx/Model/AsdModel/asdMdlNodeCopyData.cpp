@@ -32,7 +32,7 @@ EmitterCloneModelBody *FUN_001b6d08(const ModelInstanceDescription *description,
 void FUN_00386548(EmitterCloneModelBody *instance);
 void *asdMemoryAlloc(s32 heap, s32 alignment, s32 flags, u32 size, s32 clear);
 void FUN_0019cbf8(AsdMdlNode *model);
-void FUN_0019d57c(AsdMdlNode *model, u8 *data);
+void asdModelBuildFlaggedAttributeRecords(AsdMdlNode *model, u8 *data);
 
 void asdMdlNodeCopyData(AsdMdlNode *destination, AsdMdlNode *source, s32 mode)
 {
@@ -77,6 +77,6 @@ void asdMdlNodeCopyData(AsdMdlNode *destination, AsdMdlNode *source, s32 mode)
     if (mode == 0) {
         FUN_0019cbf8(destination);
     }
-    FUN_0019d57c(destination, destination->file->data);
+    asdModelBuildFlaggedAttributeRecords(destination, destination->file->data);
 }
 }

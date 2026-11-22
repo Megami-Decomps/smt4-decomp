@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00191830(...);
+int spriteDrawPartQuad(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int FUN_002929d8(int *, int);
 int FUN_002ba1e0(...);
 int renderCtxSelectTexture(int, unsigned int);
@@ -83,7 +83,7 @@ extern unsigned int DAT_004efd98; /* 0x4efd98 */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00191830. */
+/* Supplied declaration required: spriteDrawPartQuad. */
 /* Supplied declaration required: FUN_002929d8. */
 /* Supplied declaration required: FUN_002ba1e0. */
 extern int __cxa_guard_acquire(unsigned int *);
@@ -419,7 +419,7 @@ LAB_0033d500:
                 temp_v17[0] = (float)(*(unsigned char *)((int)pfVar7 + 0x27) & 1);
                 temp_v17[1] = (float)((*(unsigned char *)((int)pfVar7 + 0x27) & 2) >> 1);
                 VectorUnsignedToFloat((unsigned int)*(unsigned short *)(pfVar7 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-                FUN_00191830(*(unsigned int *)
+                spriteDrawPartQuad(*(unsigned int *)
                               (*(int *)(param_1 + 0x14) + (unsigned int)*(unsigned char *)(pfVar7 + 9) * 0x20 + 0x18)
                              ,temp_v38,&temp_v19,pfVar7 + 4,temp_v4,param_7,1,param_8);
               }

@@ -1,8 +1,8 @@
-/* NON_MATCHING: 111 lines. (1) The failed-write block (free the image, state 5) is shared by both wait states and
- * sits in the second one, whose success block retail moves behind the literal pool. (2) Retail lays out state 5's
- * result block before state 4's. (3) The constants 4 and 1 are in r7/r8 (built: r8/r7). The runner's flag is read
- * through flag0CGet, a one-instruction getter armlink inlined (retail's lone `ldrsb r0, [r0, #12]` before the
- * call padding; the field read gave `ldrb`, 106 lines). */
+/* NON_MATCHING: 40 lines. Both wait states test the write result as `if (failed) { free; state 5 } else { free;
+ * next state }`, which gives retail's shared failure block and layout. Left: the constants 4, 1 and 0 sit in
+ * r7/r8/r6 in retail (built: r6/r7/r8), so state 3's success stores pair into an `stm`, and retail lays out
+ * state 5's result block before state 4's. The runner's flag is read through flag0CGet, a one-instruction getter
+ * armlink inlined (retail's lone `ldrsb r0, [r0, #12]` before the call padding; the field read gave `ldrb`). */
 #include "common.h"
 #include "gamedata/SaveLoadProcess.h"
 #include "gamedata/SaveLoadProcessState.h"
@@ -110,13 +110,13 @@ u32 saveLoadProcessWriteStep(u32 job)
 
     case SAVE_STAGE_WAIT_EXTRA:
         if (lazyScriptTaskStep() == 1) {
-            if (byte1IsZero() == 0) {
+            if (byte1IsZero() != 0) {
                 asdMemFree(work->buffer);
-                work->state = SAVE_STAGE_WRITE_FULL;
+                work->state = SAVE_STAGE_FAILED;
                 work->buffer = NULL;
             } else {
                 asdMemFree(work->buffer);
-                work->state = SAVE_STAGE_FAILED;
+                work->state = SAVE_STAGE_WRITE_FULL;
                 work->buffer = NULL;
             }
             break;
@@ -147,15 +147,15 @@ u32 saveLoadProcessWriteStep(u32 job)
 
     case SAVE_STAGE_WAIT_FULL:
         if (lazyScriptTaskStep() == 1) {
-            if (byte1IsZero() == 0) {
+            if (byte1IsZero() != 0) {
+                asdMemFree(work->buffer);
+                work->state = SAVE_STAGE_FAILED;
+                work->buffer = NULL;
+            } else {
                 asdMemFree(work->buffer);
                 work->state = SAVE_STAGE_DONE;
                 work->buffer = NULL;
-                return 0;
             }
-            asdMemFree(work->buffer);
-            work->state = SAVE_STAGE_FAILED;
-            work->buffer = NULL;
             break;
         }
         saveAdvanceWaitAnimation();

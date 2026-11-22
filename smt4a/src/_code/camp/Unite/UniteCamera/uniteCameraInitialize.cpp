@@ -3,6 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "title/titleMain.h"
 #include "util/TrigF32.h"
+#include "gfx/CameraStereoDepth.h"
 
 /* The fusion work appends its settings pointer to the shared camera prefix. */
 struct UniteCameraWorkView {
@@ -27,7 +28,6 @@ void asdCameraInitializeDefaults(ManagedCamera *, s32);
 void cameraMatrixCacheSetLookAt(ManagedCamera *, const Vec3f *, const Vec3f *, const Vec3f *);
 void stereoCameraSetPerspective(ManagedCamera *, s32, f32, f32, f32, f32);
 void asdCameraRegister(ManagedCamera *);
-void uiSetFloatPair(ManagedCamera *, f32, f32);
 
 /* Set up the fusion camera's look direction, projection and stereo parameters. */
 void uniteCameraInitialize(const CameraParameters *parameters)
@@ -50,7 +50,7 @@ void uniteCameraInitialize(const CameraParameters *parameters)
                  work->parameters->farClip, work->parameters->aspect);
     FUN_0036b824(reinterpret_cast<u32>(&work->camera));
     asdCameraRegister(&work->camera);
-    uiSetFloatPair(&work->camera, 0.25f, 1.0f);
+    asdCameraSetStereoDepth(&work->camera, 0.25f, 1.0f);
     g_handleRegistry->active = &work->camera;
 }
 }

@@ -33,7 +33,7 @@ struct ResultSpoilsA {
     /* 0x18 */ u32 counts[6];
     /* 0x30 */ u32 money;
     /* 0x34 */ u32 value;
-    /* 0x38 */ s16 source;
+    /* 0x38 */ u16 source;
 
     ResultSpoilsA() : money(0), value(0)
     {
@@ -53,6 +53,8 @@ void FUN_00331714(const ResultSpoilsA *spoils);
 void questBuildRewardSpoils(ResultSpoils *spoils, u32 questId);
 /* Applies the rewards to the result screen. */
 void resultApplySpoils(ResultSpoils *spoils);
+/* The gold bonus percentage the spoils add (a `return 0` stub armlink inlined at every call: inlined.txt). */
+u32 resultGetGoldBonusPercent(void);
 }
 
 #endif

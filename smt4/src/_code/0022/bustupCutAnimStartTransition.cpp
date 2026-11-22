@@ -1,4 +1,8 @@
-/* NON_MATCHING: 174 lines (shape 32): retail reads the new id back before the side stores, hoists the camera block address into fp before the dirty test (through a split +1280 base), keeps the job id before the state store and stores the previous side and id with one stm; the rest (ease switch, offsets, node refreshes, the out-of-line first start) follows retail. */
+/* NON_MATCHING: 65 lines: retail reads the new id back before the side stores, hoists the camera block address
+ * into fp before the dirty test, loads the two float constants in the other order, gives the new ref and node
+ * lookups the other registers and stores the previous side and id with one stm; the flags are s8 (retail's split
+ * +1280 base for the dirty flag), the ease switch, offsets, node refreshes and the out-of-line first start follow
+ * retail. */
 #include "common.h"
 
 #define CUT_ID_SPECIAL 200
@@ -45,8 +49,8 @@ struct BustupCutAnim {
     /* 0x5E4 */ CutNodeOwner *node;
     /* 0x5E8 */ CutRef *ref;
     /* 0x5EC */ s32 state;
-    /* 0x5F0 */ u8 started;
-    /* 0x5F1 */ u8 dirty;
+    /* 0x5F0 */ s8 started;
+    /* 0x5F1 */ s8 dirty;
     /* 0x5F2 */ u8 unk5F2[2];
     /* 0x5F4 */ s32 side;
     /* 0x5F8 */ s32 previousSide;

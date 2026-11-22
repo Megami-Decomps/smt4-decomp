@@ -7,7 +7,7 @@ extern int dataTableGetEntries(void);
 extern u32 dataTableGet(u32 id, u32 index);
 
 /* Address of record `index` (100-byte records, payload at +0x13) of data table 0x16/2, or 0 when out of range. */
-int dataTable16Sub2GetRecord(u32 index)
+int dataTable16Sub2GetRecord(u8 index)
 {
     u32 table = dataTableGet(0x16, 2);
     int entries = dataTableGetEntries();

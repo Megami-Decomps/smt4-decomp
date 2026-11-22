@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail writes the 32-bit vertex colours as byte stores through rev/lsr extraction of a register value (an unaligned store; `__packed` stores of the same values still compile to plain str here) and keeps the loop-invariant fade bounds in the stack; this version stores the colour bytes directly. */
+/* NON_MATCHING: the colours are stored through the byte-reversed packing (rev/lsr strb) as retail does; retail keeps the loop-invariant fade bounds in the stack and allocates the loop registers differently. */
 #include "effect/FadeStrip.h"
 
 extern "C" {
@@ -37,20 +37,10 @@ extern "C" void FUN_003c82d8(StripOwnerView *owner, StripParameters *params)
                 fade = static_cast<f32>(segments - i) / static_cast<f32>(segments - fadeOutStart);
             }
         }
-        color->first[0] = 0xff;
-        color->first[1] = 0xff;
-        color->first[2] = 0xff;
-        color->first[3] = 0;
-        u32 alpha = static_cast<u32>(fade * 255.0f);
-        color->second[0] = 0xff;
-        color->second[1] = 0xff;
-        color->second[2] = 0xff;
-        color->second[3] = static_cast<u8>(alpha);
+        stripStoreColor(color->first, 0x00FFFFFF);
+        stripStoreColor(color->second, 0x00FFFFFF | (static_cast<u32>(fade * 255.0f) << 24));
         color->third = *reinterpret_cast<u32 *>(color->second);
-        color->fourth[0] = 0xff;
-        color->fourth[1] = 0xff;
-        color->fourth[2] = 0xff;
-        color->fourth[3] = 0;
+        stripStoreColor(color->fourth, 0x00FFFFFF);
         coords->v0 = 0.0f;
         coords->v1 = step;
         coords->v2 = step * 2.0f;

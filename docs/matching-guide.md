@@ -259,6 +259,9 @@ difference a register tie-break.
 - A condition computed inside a guarded block and tested after the blocks join is a flag:
   `bool changed = false; if (ready && enabled) changed = memcmp(...) != 0; if (changed) { ... }`
   (smt4 `FUN_001ec6e0`). Nesting the test inside the guard gives a different branch layout.
+- A flag retail tests while it is still known false (`bics` against the zeroed register, before the arms that set it)
+  is a `bool` guard the source wrote anyway: `bool ready = false; … if (concerned && !ready) { … ready = true; … }
+  if (ready) result = N;` made smt4 `FUN_001a9104` IDENTICAL (wave 73); without the `!ready` test it is 194 lines off.
 - A worker thread is `for (;;) { if (work->stop) break; switch (work->state) { ... } sleep(span); }`
   with each `case` advancing `state++` and falling through; the stop flag is an `s8`, and the sleep
   takes its `nn::fnd::TimeSpan` by value.
@@ -333,6 +336,9 @@ difference a register tie-break.
   code (which halfwords load first, which registers the sums go through); where the scalar goes does
   not. Try both pointer orders, not every permutation (`labelEntry->x + entry->x + x`, smt4
   `titleConfigDraw`).
+- A value retail computes ahead of a call's stack arguments, or keeps across an earlier call in place of the value it
+  derives from, was its own statement before the call: `s32 offset = bar->x - damage->x;` (smt4a `FUN_003c4250`) and
+  `s32 nextSlide = slide + 13;` held across the first draw (smt4a `partyPanelDrawAilmentIcon`), both IDENTICAL (wave 73).
 - armcc fuses `a * b + c` written as one expression into `vmla`; retail's separate `vmul` then `vadd`
   means the product was its own statement (`f32 pulse = speed * 0.5f; efctSetSpeed(pulse + 0.5f);`,
   smt4 `FUN_001a7810`). That is instruction evidence, not allocation.
@@ -466,6 +472,13 @@ asks for.
   the body of the out-of-line `renderCtxPopState`). Five near misses became IDENTICAL with it alone (smt4 `FUN_002e15f8`,
   `shopDrawQuantityPanel`; smt4a `runWinDraw`, `aocMenuDrawGuideDown`, `FUN_00359c78`), and the GuestWin draws of both
   games use it (wave 71).
+- Six render states pushed on different stacks, each stack's address held in its own callee-saved register until the
+  pops run in reverse order at the end of a block, are scoped guards: `RenderCtxStateScope` (`camp/RenderCtx.h`, the
+  push wrapper's order in its constructor, `renderStackPopChecked` in its destructor) made the screen fills smt4
+  `FUN_00343364` and smt4a `FUN_004097b4` IDENTICAL; explicit pushes and pops are 337 lines off (wave 73).
+- Two spellings of the same inline that differ only in which register one value gets (the set's apply test through
+  `renderStackNeedsApply` or written out) are not two original forms: choosing one per unit by score is steering, and
+  wave 73 rejected a `renderStackSetChecked` variant that matched three smt4a units that way.
 - AocMenu's step change (store the step, clear the substep, delete the window) is `aocMenuChangeStep` in
   `classes/AocMenu.h`, the helper `AocMenu::runMainProcess` uses at six sites in each game; called in place of the
   open-coded statements it made smt4a `aocMenuUpdate` IDENTICAL (wave 57).
@@ -597,6 +610,9 @@ More on classes, constructors and destructors is in [C++](style-and-naming.md#c)
 - A lone `mov r0, #const` where a call would be, followed by a reload of a value the call would have
   clobbered, is a linker-inlined constant getter: write the call and add an `inlined.txt` row
   (`titleConfigUpdate`'s default volumes).
+- `mov r0, #0; cmp r0, #0` (or `mov r0, #100; rsb r0, r0, #0`) is such a getter too: armcc folds a test or a negation of
+  a constant, so the value came from a call (`resultGetGoldBonusPercent`, `-questCenterGetHealingFee()` in smt4
+  `FUN_00382f4c`, wave 73). Argument moves before the lone `mov r0, #0` are the stub's real arguments: pass them.
 - Record setters and getters are linker-inlined too: a widget reloaded into `r0` and the value rematerialised before
   each `strb r1, [r0, #N]` (or a lone `ldr r0, [r0, #N]` followed by the call's `nop` padding) is a call to a
   one-instruction accessor. Write the calls and add the rows after checking each call site's word in the image

@@ -1,11 +1,11 @@
 #include "map/mapDepart.h"
 #include "map/LmapViewGlobals.h"
 #include "shard/W6_W6Match1_PositionedStream.h"
+#include "gfx/CameraStereoDepth.h"
 
 extern "C" {
 extern u8 g_localCamera;
 
-void uiSetFloatPair(u8* camera, f32 first, f32 second);
 
 // Set the camera float pair from the horizontal target distance and target state.
 void lmapUpdateCameraDistancePair(void)
@@ -29,10 +29,10 @@ void lmapUpdateCameraDistancePair(void)
         if (distance.bits < 0x41a00000) {
             distance.value = 20.0f;
         }
-        uiSetFloatPair(&g_localCamera, distance.value,
+        asdCameraSetStereoDepth(&g_localCamera, distance.value,
                        g_lmapViewHolder.view->scale);
     } else {
-        uiSetFloatPair(&g_localCamera, 140.0f,
+        asdCameraSetStereoDepth(&g_localCamera, 140.0f,
                        g_lmapViewHolder.view->scale);
     }
 }

@@ -1,4 +1,6 @@
-/* NON_MATCHING: the stick values stay unwritten as in retail (its stub call was inlined away) but the argument setup for that call is not emitted, the phase samples are inlined in another order and register assignment differs (237 vs 234 rows); the free camera update is the same. */
+/* NON_MATCHING: 350 lines: the stick read is called with its real arguments (its release body is a linker-inlined
+ * `return 0` stub, inlined.txt, so the outputs keep whatever the stack held, as in retail); the frame is 0x80 against
+ * retail's 0x6c, the phase samples are inlined in another order and the registers differ. */
 #include "ui/UiSpriteApi.h"
 #include "gfx/EffectEditorStorage.h"
 
@@ -16,12 +18,13 @@ void cameraMatrixCacheSetLookAt(void *camera, const PhaseVector *eye, const Phas
  * through the rotation matrix of the three angles and aims the camera at the orbit centre. */
 void FUN_00219908(void)
 {
-    f32 stick[4]; /* retail's stick read was a stub call armlink inlined to `mov r0,#0`: nothing writes these, so they hold whatever the stack had */
-    f32 matrix[16];
+    f32 leftX, leftY, rightX, rightY;
+    f32 matrix[12];
     PhaseVector offset;
     PhaseVector center;
     PhaseVector eye;
 
+    effectEditorReadSticks(&leftX, &leftY, &rightX, &rightY, 0);
     if (padIsButtonPressed(27) != 0) {
         g_effectEditorCameraOffset.x = 0.0f;
         g_effectEditorCameraOffset.y = 0.0f;
@@ -30,11 +33,11 @@ void FUN_00219908(void)
         g_effectEditorCameraRotation.y = 0.0f;
         g_effectEditorCameraRotation.z = 0.0f;
     }
-    g_effectEditorCameraRotation.y += stick[2] * 3.2f;
-    g_effectEditorCameraRotation.x -= stick[3] * 3.2f;
+    g_effectEditorCameraRotation.y += rightX * 3.2f;
+    g_effectEditorCameraRotation.x -= rightY * 3.2f;
     if (slotIsActive(28) == 0) {
-        g_effectEditorCameraOffset.x += stick[0] * 10.0f;
-        g_effectEditorCameraOffset.z -= stick[1] * 10.0f;
+        g_effectEditorCameraOffset.x += leftX * 10.0f;
+        g_effectEditorCameraOffset.z -= leftY * 10.0f;
     }
     if (slotIsActive(23) != 0) {
         g_effectEditorCameraOffset.y -= 5.0f;

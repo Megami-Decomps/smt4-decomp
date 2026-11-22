@@ -1,4 +1,4 @@
-/* NON_MATCHING: native growth-parameter return, derived stats, rank bonuses and skill modifiers are recovered; clamp predicates, constant-rate branch specialization and scheduling differ. */
+/* NON_MATCHING: 125 lines (182 vs 183 rows): per-rank constant-rate specializations (5/8/10), shared bonus post-check, and currentMp clamp match; armcc optimizes > 999 into >= 1000 and allocates r8 around HP/MP addition. */
 #include <string.h>
 #include "shard/W6_W6Match8_StatGrowth.h"
 
@@ -28,28 +28,31 @@ void FUN_0034cb50(s16 *stats, const u16 *skills, u32 count);
 s32 unitHasRankingBonus(u16 id);
 }
 
-static __inline s32 clampDerivedStat(s32 value)
+static __inline s16 clampDerivedStat(s32 value)
 {
-    if (value > 999)
-        return 999;
-    if (value < 1)
-        return 1;
-    return value;
+    if (value > 999) {
+        value = 999;
+    } else if (value < 1) {
+        value = 1;
+    }
+    return (s16)value;
 }
 
 static __inline s16 derivedMaximumHp(DerivedBattleStats *record)
 {
     s16 maximum = record->derived[0];
-    if (unitHasRankingBonus(record->id))
+    if (unitHasRankingBonus(record->id)) {
         maximum = (s16)(s32)(maximum * 1.25f);
+    }
     return maximum;
 }
 
-// Recalculate bounded battle stats, growth bonuses, and skill modifiers, then clamp current HP/MP.
+/* Recalculate bounded battle stats, growth bonuses, and skill modifiers, then clamp current HP/MP. */
 extern "C" void unitRecomputeDerivedStats(DerivedBattleStats *record)
 {
-    if (record == NULL)
+    if (record == NULL) {
         return;
+    }
     memcpy(record->derived, record->base, sizeof(record->base));
     record->derived[2] = clampDerivedStat(record->derived[2] + record->bonuses[2]);
     record->derived[4] = clampDerivedStat(record->derived[4] + record->bonuses[4]);
@@ -64,25 +67,40 @@ extern "C" void unitRecomputeDerivedStats(DerivedBattleStats *record)
     s16 mp = record->base[1] - baseMp + record->derived[1] + record->bonuses[1];
     record->derived[0] = hp;
     record->derived[1] = mp;
-    u32 rate = 0;
-    switch (record->growthRank) {
-    case 1: rate = 5; break;
-    case 2: rate = 8; break;
-    case 3: rate = 10; break;
+    s32 hpBonus = 0;
+    s32 mpBonus = 0;
+    bool hasRank = true;
+    if (record->growthRank == 1) {
+        hpBonus = (u32)parameters.hp * 5 / 100;
+        mpBonus = (u32)parameters.mp * 5 / 100;
+    } else if (record->growthRank == 2) {
+        hpBonus = (u32)parameters.hp * 8 / 100;
+        mpBonus = (u32)parameters.mp * 8 / 100;
+    } else if (record->growthRank == 3) {
+        hpBonus = (u32)parameters.hp * 10 / 100;
+        mpBonus = (u32)parameters.mp * 10 / 100;
+    } else {
+        hasRank = false;
     }
-    if (rate != 0) {
-        u32 hpBonus = (u32)parameters.hp * rate / 100;
-        u32 mpBonus = (u32)parameters.mp * rate / 100;
-        if (hpBonus == 0)
+    if (hasRank) {
+        if (hpBonus == 0) {
             hpBonus = 1;
-        if (mpBonus == 0)
+        }
+        if (mpBonus == 0) {
             mpBonus = 1;
-        record->derived[0] = hp + hpBonus;
-        record->derived[1] = mp + mpBonus;
+        }
+        if (hpBonus > 0) {
+            record->derived[0] = hp + hpBonus;
+        }
+        if (mpBonus > 0) {
+            record->derived[1] = mp + mpBonus;
+        }
     }
     FUN_0034cb50(record->derived, record->skills, 8);
-    if (derivedMaximumHp(record) < record->currentHp)
+    if (derivedMaximumHp(record) < record->currentHp) {
         record->currentHp = derivedMaximumHp(record);
-    if (record->derived[1] < record->currentMp)
+    }
+    if (record->currentMp > record->derived[1]) {
         record->currentMp = record->derived[1];
+    }
 }

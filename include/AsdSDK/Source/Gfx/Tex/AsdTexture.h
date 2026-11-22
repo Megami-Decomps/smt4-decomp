@@ -138,4 +138,21 @@ void asdTextureSetImage(AsdTexture *texture);
 }
 #endif
 
+/* Describes a 2D texture over caller-owned pixels, ready for asdTextureSetImage (AsdFont's sheet textures in both
+ * games read every value before the first store, as arguments are). */
+static __inline void asdTextureDescribeImage(AsdTexture *texture, s32 width, s32 height, u32 format, u32 type,
+                                             void *pixels, u32 bytes)
+{
+    texture->image.mip.level = 0;
+    texture->dimensions.width = width;
+    texture->dimensions.height = height;
+    texture->image.format = format;
+    texture->target = ASDTEXTURE_TARGET_2D;
+    texture->heap = 0x10000;  /* ASD_HEAP_EXTRA: the pixels stay where they are */
+    texture->image.flags = 0x2000000;
+    texture->image.type = type;
+    texture->storage.pixels = pixels;
+    texture->storage.bytes = bytes;
+}
+
 #endif

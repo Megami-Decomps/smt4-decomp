@@ -1,112 +1,98 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033cc84` (_code @ 0x33cc84, 0x274 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: 177 lines (the romwright draft was 217): a readable rebuild from retail's code. Retail multiplies the
+ * shade by 0.25 before the fade and the appear time by 0.125 before the fade (the build folds the constants into the
+ * fade first), keeps a 0.0 + slide addition before the frame position's conversion, saves r6 and reaches each marker
+ * by index; the field names are inferred. */
+#include "common.h"
+#include <stddef.h>
+#include "camp/RenderCtxTitle.h"
+#include "code/Code002b.h"
 #include "shard/TextureDrawCall.h"
+#include "ui/AnimatedMessage.h"
+
+/* One marker of the panel (0x54 bytes from +0x40). */
+struct PanelMarker {
+    /* 0x00 */ u8 shown;     /* 0: drawn at its stored point */
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ s32 row;      /* 1: the first row */
+    /* 0x08 */ s32 column;   /* column in its row, or the point index when not shown */
+    /* 0x0C */ u8 unk0C[0x48];
+};
+
+/* The panel this draw reads (observed fields). */
+struct MarkerPanel {
+    /* 0x000 */ u8 unk000[0x40];
+    /* 0x040 */ PanelMarker markers[8];
+    /* 0x2E0 */ u8 unk2E0[0x14];
+    /* 0x2F4 */ s32 markerCount;
+    /* 0x2F8 */ s32 firstRowCount;
+    /* 0x2FC */ s32 secondRowCount;
+    /* 0x300 */ u8 unk300[0x68];
+    /* 0x368 */ f32 points[4][2];   /* where the hidden markers sit */
+    /* 0x388 */ f32 firstRowY;
+    /* 0x38C */ f32 secondRowY;
+    /* 0x390 */ s32 state;          /* 4: closed */
+    /* 0x394 */ f32 fade;           /* 0..4 */
+    /* 0x398 */ f32 shade;          /* 0..4 */
+    /* 0x39C */ f32 slide;          /* 0..4 */
+    /* 0x3A0 */ f32 appear;
+};
+
+typedef char MarkerPanelOffsets[sizeof(PanelMarker) == 0x54 && offsetof(MarkerPanel, markerCount) == 0x2F4 &&
+    offsetof(MarkerPanel, points) == 0x368 && offsetof(MarkerPanel, state) == 0x390 &&
+    offsetof(MarkerPanel, appear) == 0x3A0 ? 1 : -1];
 
 extern "C" {
+void gxResetUniformQuadColorsAndScale(void);
+f32 FUN_00247f0c(f32 from, f32 to, f32 frames, f32 frame);
+void FUN_0033c72c(MarkerPanel *panel, s32 sprite, f32 x, f32 y, f32 alpha);
 
-int FUN_00247f0c(void);
-int FUN_002b7638(int *);
-int gxResetUniformQuadColorsAndScale(void);
-int efctSetSpeed(void);
-int renderCtxSelectTexture(unsigned int, int);
-int FUN_0033c72c(...);
-int VectorSignedToFloat(...);
-
-/* stack frame of param_1: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_1_stack;
-
-extern unsigned int g_titleScene; /* 0x44ea00 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00247f0c. */
-/* Supplied declaration required: FUN_002b7638. */
-/* Supplied declaration required: gxResetUniformQuadColorsAndScale. */
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: renderCtxSelectTexture. */
-/* Supplied declaration required: FUN_0033c72c. */
-
-
-void FUN_0033cc84(int param_1)
-
+/* Draws the marker panel: a darkening screen quad, the panel frame slid in from the side and each marker,
+ * centred in its row (or at its stored point when hidden). */
+void FUN_0033cc84(MarkerPanel *panel)
 {
-/* irregular: irregular input(s): in_fpscr; 11 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int in_fpscr;
-  float temp_v6;
-  int temp_v7;
-  int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  float temp_v11;
-  
-  if (*(int *)(param_1 + 0x390) != 4) {
-    temp_v8 = 0;
-    temp_v9 = 0;
-    temp_v6 = 0.0f;
-    temp_v10 = 0;
-    temp_v11 = *(float *)(param_1 + 0x398) * 0.25f * (1.0f - *(float *)(param_1 + 0x394) * 0.25f) * 0.5f
-    ;
-    renderCtxSelectTexture(g_titleScene,0);
-    FUN_002b7638(&temp_v8);
+    if (panel->state == 4)
+        return;
+    f32 alpha = 1.0f - panel->fade * 0.25f;
+    f32 color[4];
+    color[0] = 0.0f;
+    color[1] = 0.0f;
+    color[2] = 0.0f;
+    color[3] = panel->shade * 0.25f * alpha * 0.5f;
+    renderCtxSelectTexture(g_titleScene, NULL);
+    FUN_002b7638(0.0f, 0.0f, 400.0f, 240.0f, (u32)color, (u32)color, (u32)color, (u32)color, 0.87109375f);
     gxResetUniformQuadColorsAndScale();
-    efctSetSpeed();
-    temp_v7 = (int)(temp_v6 + (4.0f - *(float *)(param_1 + 0x39c)) * 20.0f);
-    texDrawTableEntryAtStoredOrigin(2,0x14,0x54,0,temp_v7,0x23);
-    texDrawTableEntryAtStoredOrigin(2,0x14,0x55,0,temp_v7,0x23);
-    FUN_00247f0c();
-    temp_v5 = 0;
-    temp_v7 = temp_v1;
-    if (0 < *(int *)(param_1 + 0x2f4)) {
-      do {
-        temp_v4 = param_1 + temp_v5 * 0x54;
-        if (*(char *)(temp_v4 + 0x40) != '\0') {
-          temp_v0 = *(int *)(param_1 + 0x2f8);
-          if (temp_v0 != 0) {
-            temp_v7 = *(int *)(param_1 + 0x2fc);
-          }
-          if (!(temp_v0 == 0 || temp_v7 == 0)) {
-            if (*(int *)(temp_v4 + 0x44) != 1) {
-              VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x48),(unsigned char)(in_fpscr >> 0x16) & 3);
-              VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-            }
-            else {
-              VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x48),(unsigned char)(in_fpscr >> 0x16) & 3);
-              VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-            }
-          }
-          else if (*(int *)(temp_v4 + 0x44) != 1) {
-            VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x48),(unsigned char)(in_fpscr >> 0x16) & 3);
-            VectorSignedToFloat(*(unsigned int *)(param_1 + 0x2fc),(unsigned char)(in_fpscr >> 0x16) & 3);
-          }
-          else {
-            VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x48),(unsigned char)(in_fpscr >> 0x16) & 3);
-            VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-          }
-          FUN_0033c72c(param_1,0x24);
-          temp_v7 = temp_v2;
+    efctSetSpeed(alpha);
+    f32 slide = (4.0f - panel->slide) * 20.0f;
+    s32 frameX = (s32)(0.0f + slide);
+    texDrawTableEntryAtStoredOrigin(2, 20, 84, 0, frameX, 35);
+    texDrawTableEntryAtStoredOrigin(2, 20, 85, 0, frameX, 35);
+    f32 offset = FUN_00247f0c(30.0f, 0.0f, 8.0f, panel->appear);
+    f32 markerAlpha = panel->appear * 0.125f * alpha;
+    for (s32 i = 0; i < panel->markerCount; i++) {
+        PanelMarker *marker = &panel->markers[i];
+        if (marker->shown == 0) {
+            FUN_0033c72c(panel, 36, panel->points[marker->column][0], panel->points[marker->column][1] + slide, alpha);
+            continue;
         }
-        else {
-          FUN_0033c72c(param_1,0x24);
-          temp_v7 = temp_v3;
+        f32 x;
+        f32 y;
+        if (panel->firstRowCount != 0 && panel->secondRowCount != 0) {
+            if (marker->row == 1) {
+                x = marker->column * 76.0f + (400.0f - panel->firstRowCount * 76.0f) * 0.5f;
+                y = panel->firstRowY;
+            } else {
+                x = marker->column * 76.0f + (400.0f - panel->secondRowCount * 76.0f) * 0.5f;
+                y = panel->secondRowY;
+            }
+        } else {
+            if (marker->row == 1)
+                x = marker->column * 76.0f + (400.0f - panel->firstRowCount * 76.0f) * 0.5f;
+            else
+                x = marker->column * 76.0f + (400.0f - panel->secondRowCount * 76.0f) * 0.5f;
+            y = (panel->firstRowY + panel->secondRowY) * 0.5f;
         }
-        temp_v5 = temp_v5 + 1;
-      } while (temp_v5 < *(int *)(param_1 + 0x2f4));
+        FUN_0033c72c(panel, 36, x + offset, y, markerAlpha);
     }
-  }
-  return;
 }
 
 } /* extern "C" */

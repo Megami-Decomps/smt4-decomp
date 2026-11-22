@@ -12,7 +12,7 @@ struct RenderColor {
 extern "C" {
 
 void renderCtxResetFrameState(RenderCtxA *context);
-void FUN_004097b4(RenderCtxA *context, RenderColor *color, u32 arg0, u32 arg1, f32 value);
+void renderCtxFillDisplay(RenderCtxA *context, RenderColor *color, u32 arg0, u32 arg1, f32 value);
 
 /* Draws with `color` under the render context's slot for the active graphics preset, then restores the slot. */
 void renderFillScreenColor(u32 arg0, u32 arg1, f32 red, f32 green, f32 blue, f32 alpha, f32 value)
@@ -32,7 +32,7 @@ void renderFillScreenColor(u32 arg0, u32 arg1, f32 red, f32 green, f32 blue, f32
     renderCtxSetStereoMode(g_renderCtx, slot);
     renderCtxResetFrameState(g_renderCtx);
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
-    FUN_004097b4(g_renderCtx, &color, arg0, arg1, value);
+    renderCtxFillDisplay(g_renderCtx, &color, arg0, arg1, value);
     renderCtxSetStereoMode(g_renderCtx, savedSlot);
 }
 

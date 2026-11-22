@@ -1,4 +1,4 @@
-/* NON_MATCHING: same phase-sampler family as FUN_001aff14: retail batches the three phase wrap loops and keeps the translation terms in s-registers across the rotation build, which armcc schedules differently here (about 320 diff lines). */
+/* NON_MATCHING: 306 lines (278 by shape). Same rotation builder as FUN_001aff14, now through buildEulerPhaseRotationBatched (retail batches the three phase wrap loops): the table lookups and the translation terms kept in s-registers across the rotation build are still scheduled differently. */
 #include "gfx/EulerPhaseRotation.h"
 
 /* One pose source: where the node sits, how it is turned (radians) and where it is moved to. */
@@ -45,8 +45,11 @@ void FUN_00193c08(PoseOwner *owner, PoseBuffer *buffer)
         node->origin[1] = source->origin[1];
         node->origin[2] = source->origin[2];
         const f32 radiansToPhase = 40.743664f;
-        buildEulerPhaseRotation(&node->matrix, 1, g_sinCosTable, source->angles[0] * radiansToPhase,
+        buildEulerPhaseRotationBatched(&node->matrix, g_sinCosTable, source->angles[0] * radiansToPhase,
                                 source->angles[1] * radiansToPhase, source->angles[2] * radiansToPhase);
+    node->matrix.values[3] = 0.0f;
+    node->matrix.values[7] = 0.0f;
+    node->matrix.values[11] = 0.0f;
         Matrix34Data translate;
         translate.values[0] = 1.0f;
         translate.values[1] = 0.0f;

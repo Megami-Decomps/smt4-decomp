@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild of the matrix-from-radians setup; retail wraps each phase in its own loop, samples the table per axis and keeps the translation column in s-registers across the rotation build, which armcc here schedules differently (see buildEulerPhaseRotation). */
+/* NON_MATCHING: 223 lines (197 by shape). Readable rebuild of the matrix-from-radians setup through the batched rotation builder (buildEulerPhaseRotationBatched): the sign tests and wrap loops are retail's; the table lookups, the matrix products and the translation column kept in s-registers across the build are still scheduled differently. */
 #include "gfx/EulerPhaseRotation.h"
 
 extern "C" {
@@ -12,7 +12,7 @@ void FUN_0044b3c8(Matrix34Data *matrix, f32 x, f32 y, f32 z)
     f32 translationX = matrix->values[3];
     f32 translationY = matrix->values[7];
     f32 translationZ = matrix->values[11];
-    buildEulerPhaseRotation(matrix, 1, g_sinCosTable, x * radiansToPhase, y * radiansToPhase, z * radiansToPhase);
+    buildEulerPhaseRotationBatched(matrix, g_sinCosTable, x * radiansToPhase, y * radiansToPhase, z * radiansToPhase);
     matrix->values[3] = translationX;
     matrix->values[7] = translationY;
     matrix->values[11] = translationZ;

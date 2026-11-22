@@ -1,4 +1,6 @@
-/* NON_MATCHING: same as the Apocalypse twin - retail keeps the camera constants in callee-saved VFP registers across both camera set-ups and orders the setup stores differently. */
+/* NON_MATCHING: asdCameraSetStereoDepth takes the stereo pair (30.0, 1.0), which retail keeps in s16/s17 across both camera
+ * set-ups; what remains is the order and bases of the default setup stores (retail stores the target through its own
+ * base and the far plane, aspect and roll from block + 0x400) and the camera pointer kept in r6. */
 #include <stdio.h>
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -6,6 +8,7 @@
 #include "event/bustupEvent/BustupCutAnim.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "code/Code0038.h"
+#include "gfx/CameraStereoDepth.h"
 
 namespace {
 struct BustupVec3 {
@@ -66,7 +69,6 @@ extern "C" {
 extern BustupCutGlobal g_bustupCutAnim;
 void memClear(void *data, u32 size);
 void cameraMatrixCacheReset(void *camera, s32 flag);
-void FUN_002c159c(void *camera);
 void cameraMatrixCacheSetLookAt(void *camera, BustupVec3 *position, BustupVec3 *target, BustupVec3 *up);
 void stereoCameraSetPerspective(void *camera, s32 flag, f32 fov, f32 nearPlane, f32 farPlane, f32 aspect);
 void FUN_00298d50(void *camera);
@@ -79,7 +81,7 @@ u32 asdMdlManagerCreateSecondList(const char *path, u32 flags);
 void FUN_0024edd4(BustupModelNode *node, s32 part);
 void cameraExportParameters(BustupCameraSetup *setup, u32 model);
 
-/* Creates the bust-up cut animation block on first use (camera, jobs and the per-scene models/lists)
+/* Creates the bust-up cut animation block on first use (block->camera, jobs and the per-scene models/lists)
    and returns its job handle. */
 u32 bustupCutAnimEnsureBlock(void)
 {
@@ -90,30 +92,34 @@ u32 bustupCutAnimEnsureBlock(void)
         BustupCutBlock *block = g_bustupCutAnim.block;
         memClear(block, sizeof(BustupCutBlock));
         cameraMatrixCacheReset(block->camera, 1);
-        block->setup.position.x = 0.0f;
-        block->setup.position.y = 0.0f;
-        block->setup.position.z = 0.0f;
-        block->setup.target.x = 0.0f;
-        block->setup.target.y = 0.0f;
-        block->setup.target.z = -5.0f;
-        block->setup.up.x = 0.0f;
-        block->setup.up.y = 1.0f;
-        block->setup.up.z = 0.0f;
+        BustupCameraSetup *setup = &block->setup;
+        BustupVec3 *position = &setup->position;
+        BustupVec3 *target = &setup->target;
+        BustupVec3 *up = &setup->up;
+        position->x = 0.0f;
+        position->y = 0.0f;
+        position->z = 0.0f;
+        target->x = 0.0f;
+        target->y = 0.0f;
+        target->z = -5.0f;
+        up->x = 0.0f;
+        up->y = 1.0f;
+        up->z = 0.0f;
         block->setup.fov = 30.0f;
         block->setup.nearPlane = 1.0f;
         block->setup.farPlane = 10000.0f;
         block->setup.aspect = 5.0f / 3.0f;
         block->setup.roll = 0.0f;
-        FUN_002c159c(block->camera);
-        cameraMatrixCacheSetLookAt(block->camera, &block->setup.position, &block->setup.target, &block->setup.up);
-        stereoCameraSetPerspective(block->camera, 1, block->setup.fov, block->setup.nearPlane, block->setup.farPlane, block->setup.aspect);
+        asdCameraSetStereoDepth(block->camera, 30.0f, 1.0f);
+        cameraMatrixCacheSetLookAt(block->camera, &setup->position, &setup->target, &setup->up);
+        stereoCameraSetPerspective(block->camera, 1, setup->fov, setup->nearPlane, setup->farPlane, setup->aspect);
         FUN_00298d50(block->camera);
         block->unk5f0 = 0;
         block->unk5f2 = 1;
         block->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("BustupCutAnim"), 2, 0, 0, FUN_002169cc, bustupCutAnimDestroy, reinterpret_cast<u32>(block));
         taskCreateDraw(reinterpret_cast<const s8 *>("BustupCutAnimDraw"), 0x6f, 0, 0, jobDrawOrderedChildren, NULL, block, block->job);
         block->unk5ec = 0;
-        char path[76];
+        char path[64];
         for (u32 i = 0; i < BUSTUP_CUT_ENTRIES; i++) {
             sprintf(path, "event/BustUpEvent/%s.bccam", g_bustupCutAnim.ids[i]);
             block->models[i] = reinterpret_cast<u32>(asdCameraLoadFromFile(path));
@@ -129,10 +135,10 @@ u32 bustupCutAnimEnsureBlock(void)
                 FUN_0024edd4(node, part);
             }
         }
-        cameraExportParameters(&block->setup, block->model);
-        FUN_002c159c(block->camera);
-        cameraMatrixCacheSetLookAt(block->camera, &block->setup.position, &block->setup.target, &block->setup.up);
-        stereoCameraSetPerspective(block->camera, 1, block->setup.fov, block->setup.nearPlane, block->setup.farPlane, block->setup.aspect);
+        cameraExportParameters(setup, block->model);
+        asdCameraSetStereoDepth(block->camera, 30.0f, 1.0f);
+        cameraMatrixCacheSetLookAt(block->camera, &setup->position, &setup->target, &setup->up);
+        stereoCameraSetPerspective(block->camera, 1, setup->fov, setup->nearPlane, setup->farPlane, setup->aspect);
         FUN_00298d50(block->camera);
     }
     return g_bustupCutAnim.block->job;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: the ailment test is now retail's tst/tsteq chain (statusHasAilment) and the block layout (unit-record branch first) matches; remaining: retail keeps status in r5 and the entry/record pointer in r4 and widens status with uxth before each OR into a record (an unreduced halfword), 197 rows against 206. */
+/* NON_MATCHING: 200 lines: the ailment test is retail's tst/tsteq chain (statusHasAilment) and the block layout (unit-record branch first) matches; status is a word that each OR narrows to a halfword (retail widens it with uxth at every OR, the build once, in a saved register), and retail keeps the entry in r4 and entry+0x100 in r6. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "gamedata/UnitRecordAccess.h"
@@ -80,7 +80,7 @@ void FUN_0033b1ac(BtlStateRecords *state, s32 value);
 
 /* Sets (set != 0) or clears the status bits `status` on the entry with the listed id, mirroring them
  * to its linked records; entries past 0x6D are unit records. */
-void FUN_003bcdb0(s32 id, s32 set, u16 status)
+void FUN_003bcdb0(s32 id, s32 set, u32 status)
 {
     BtlStateRecords *state = reinterpret_cast<BtlStateRecords *>(btlGetMainState());
     BtlStatusEntry *entry = btlMainFindEntryByListedId(state, id);
@@ -96,7 +96,7 @@ void FUN_003bcdb0(s32 id, s32 set, u16 status)
                     if (statusHasAilment(status)) {
                         record->ailments = record->ailments & ~STATUS_BIT_ALT;
                     }
-                    record->ailments = record->ailments | status;
+                    record->ailments = record->ailments | (u16)status;
                 }
             }
         }
@@ -106,18 +106,18 @@ void FUN_003bcdb0(s32 id, s32 set, u16 status)
                 if (statusHasAilment(status)) {
                     btlTargetSetFlag10(state, id, 0);
                 }
-                entry->lower.status = entry->lower.status | status;
+                entry->lower.status = entry->lower.status | (u16)status;
                 if (entry->linkedA != NULL) {
-                    u16 value = entry->linkedA->status | status;
+                    u16 value = entry->linkedA->status | (u16)status;
 
                     entry->linkedA->status = value;
                     entry->linkedA->status = value & ~STATUS_CLEAR_ON_ENTRY;
                 }
                 if (entry->linkedB != NULL) {
-                    entry->linkedB->ailments = entry->linkedB->ailments | status;
+                    entry->linkedB->ailments = entry->linkedB->ailments | (u16)status;
                 }
                 if (entry->linkedC != NULL) {
-                    entry->linkedC->ailments = entry->linkedC->ailments | status;
+                    entry->linkedC->ailments = entry->linkedC->ailments | (u16)status;
                 }
                 if ((entry->flags & ENTRY_FLAG_SLEEPING) != 0) {
                     entry->lower.status = entry->lower.status & ~STATUS_CLEAR_ON_ENTRY;

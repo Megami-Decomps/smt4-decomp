@@ -54,6 +54,15 @@ struct StripOwnerView {
     StripGeometry *geometry;  // 0x04
 };
 
+/* Stores a packed colour as its four bytes, lowest first (the byte-reversed packing of the effect colours). */
+static __inline void stripStoreColor(u8 *bytes, u32 color)
+{
+    bytes[0] = __rev(color) >> 24;
+    bytes[1] = __rev(color) >> 16;
+    bytes[2] = __rev(color) >> 8;
+    bytes[3] = __rev(color);
+}
+
 typedef char StripLayoutCheck[sizeof(StripColor) == 0x10 && sizeof(StripCoords) == 0x20 &&
                                       sizeof(StripBufferDescription) == 0x40 &&
                                       sizeof(StripGeometry) == 0x5c && sizeof(StripParameters) == 0x94 &&

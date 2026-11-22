@@ -1,4 +1,6 @@
-/* NON_MATCHING: compiler merges positional sound calls and hoists inactive-pool reset block; -O2 candidate. */
+/* NON_MATCHING: retail addresses the record from state + index * 0x194 (fields at +0x1d0.., a +0x100 base for the
+ * byte and halfword fields) and reloads unk17 after clearing it; the build folds the record pointer and threads the
+ * jump, so the sound-call branches are laid out and cross-jumped differently. */
 #include "map/MapIfGlobals.h"
 #include "map/mapDepart.h"
 #include "shard/Shard0036.h"
@@ -7,80 +9,66 @@
 #include "game/GameState.h"
 #include "map/LmapViewGlobals.h"
 
-static __inline SoundActorQueuePosition soundPosition(const Vec3f &value)
+static __inline SoundActorQueuePosition soundPosition(const MapVector &value)
 {
     SoundActorQueuePosition position = { value.x, value.y, value.z };
     return position;
 }
 
-struct MapActivationRecord {
-    u8 unk00[0x20];
-    s32 destination;
-    u8 unk24[8];
-    u16 timer;
-    u8 unk2e[0x2e];
-    Vec3f position; // 0x5c
-    u8 unk68[0x124];
-    u32 linked; // 0x18c
-};
-
 extern "C" {
-Vec3f FUN_003e0e60(const Vec3f *value, f32 scale);
+MapVector FUN_003e0e60(const MapVector *value, f32 scale);
 
 u32 mapIfActivateRecord(u8 enabled, s32 index)
 {
     MapIfState *state = g_mapIf.state;
     state->unk17 = enabled;
-    MapIfRecord *record = index == -1 ? NULL : &g_mapIf.state->records[index];
-    MapActivationRecord *details = reinterpret_cast<MapActivationRecord *>(record);
-    if (index != -1 && record->active && g_mapCamera->contextMode != details->destination)
+    MapIfRecord *record = &g_mapIf.state->records[index];
+    if (index != -1 && record->active && g_mapCamera->contextMode != record->destination)
         state->unk17 = 0;
-    if (state->unk17 == 0) {
-        MapIfRecord *records = state->records;
-        for (s32 slot = 0; slot < 128; ++slot) {
-            MapIfRecord *entry = &records[slot];
-            if (!entry->active)
-                continue;
-            s32 category = entry->category;
-            if (category != 0x1d && category != 0x26 &&
-                category != 0x1e && category != 0x1f && category != 0x25 &&
-                (entry->state == 8 || entry->state == 10 || entry->state == 12 ||
-                 entry->state == 14 || entry->state == 16))
-                entry->state = 6;
+    if (state->unk17 != 0) {
+        if (index == -1)
+            return 0;
+        if (!record->active || record->state != 6)
+            return 1;
+        if (record->category >= 0x22) {
+            record->state = 7;
+            if (g_gameState.inputBlocked == 0)
+                soundActorStartOnFreeChannel(0x10001ff, soundPosition(FUN_003e0e60(&record->start, 1.0f / 3.0f)));
+        } else if (record->destination == -1) {
+            record->state = 9;
+            soundActorStartOnFreeChannel(0x10001ff, soundPosition(record->start));
+        } else if (record->destination == -2) {
+            record->state = 11;
+            soundActorStartOnFreeChannel(0x10001ff, soundPosition(record->start));
+        } else if (record->destination == -3) {
+            record->state = 13;
+            soundActorStartOnFreeChannel(0x10001ff, soundPosition(record->start));
+        } else if (record->values[2] == 0) {
+            record->state = 15;
+            if (g_gameState.inputBlocked == 0)
+                soundActorStartOnFreeChannel(0x10001ff, soundPosition(record->start));
+        } else {
+            record->state = 7;
+            if (!(g_gameState.inputBlocked != 0 && g_mapCamera->mode == 0)) {
+                if (g_gameState.mapId >= 100)
+                    soundActorStartOnFreeChannel(0x10001ff, soundPosition(FUN_003e0e60(&record->start, 1.0f / 3.0f)));
+                else
+                    soundActorStartOnFreeChannel(0x10001ff, soundPosition(record->start));
+            }
         }
+        record->proximityTimer = 0;
         return 1;
     }
-    if (index == -1)
-        return 0;
-    if (!record->active || record->state != 6)
-        return 1;
-    if (record->category >= 0x22) {
-        record->state = 7;
-        if (g_gameState.inputBlocked == 0)
-            soundActorStartOnFreeChannel(0x10001ff, soundPosition(FUN_003e0e60(&details->position, 1.0f / 3.0f)));
-    } else if (details->destination == -1) {
-        record->state = 9;
-        soundActorStartOnFreeChannel(0x10001ff, soundPosition(details->position));
-    } else if (details->destination == -2) {
-        record->state = 11;
-        soundActorStartOnFreeChannel(0x10001ff, soundPosition(details->position));
-    } else if (details->destination == -3) {
-        record->state = 13;
-        soundActorStartOnFreeChannel(0x10001ff, soundPosition(details->position));
-    } else if (details->linked == 0) {
-        record->state = 15;
-        if (g_gameState.inputBlocked == 0)
-            soundActorStartOnFreeChannel(0x10001ff, soundPosition(details->position));
-    } else {
-        record->state = 7;
-        if (!(g_gameState.inputBlocked != 0 && g_mapCamera->mode == 0)) {
-            if (g_gameState.mapId >= 100)
-                soundActorStartOnFreeChannel(0x10001ff, soundPosition(FUN_003e0e60(&details->position, 1.0f / 3.0f)));
-            else
-                soundActorStartOnFreeChannel(0x10001ff, soundPosition(details->position));
-        }
+    for (s32 slot = 0; slot < 128; ++slot) {
+        if (!state->records[slot].active)
+            continue;
+        s32 category = state->records[slot].category;
+        if (category != 0x1d && category != 0x26 &&
+            category != 0x1e && category != 0x1f && category != 0x25 &&
+            (state->records[slot].state == 8 || state->records[slot].state == 10 || state->records[slot].state == 12 ||
+             state->records[slot].state == 14 || state->records[slot].state == 16))
+            state->records[slot].state = 6;
     }
-    details->timer = 0;
     return 1;
 }
 }

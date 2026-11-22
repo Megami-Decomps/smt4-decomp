@@ -7,7 +7,7 @@ extern "C" {
 
 void battleSelectButtonHelpPreset(int);
 int flagBitIsSet(int);
-int FUN_00292f4c(void);
+int skillMenuShowEntryHelp(void);
 int FUN_00297b94(int, unsigned int, unsigned int);
 int objectPartRunUnlessLocked(int); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 int uiGridNavigationEntryCount(...); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
@@ -26,7 +26,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: flagBitIsSet. */
-/* Supplied declaration required: FUN_00292f4c. */
+/* Supplied declaration required: skillMenuShowEntryHelp. */
 extern int btlScriptUnitIsIncapacitated(void);
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_00297b94. */
@@ -81,7 +81,7 @@ void playSceneSetState(int param_1,int param_2,int param_3)
   }
   if (*(int *)(param_1 + 0x3048) == 7) {
     if (*(int *)(param_1 + 0x304c) - 8U < 6) {
-      FUN_00292f4c();
+      skillMenuShowEntryHelp();
     }
     else {
       temp_v2 = FUN_00297ca4(param_1,1);

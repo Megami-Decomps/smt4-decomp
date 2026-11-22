@@ -33,7 +33,7 @@ void campButtonHelpRelease(void);
 void helpTexturesRelease(void);
 void commonBgStopChildAndBeginTransition(void);
 void questCenterInitEntry(void *entry);
-void FUN_0046a34c(QuestEntry *screen, s32 which, s32 argB, s32 nested);
+void qcCtrlStart(QuestEntry *screen, s32 which, s32 argB, s32 nested); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void _ZN9Obj5333c06updateEv(QuestEntry *screen);
 s32 entryRequestSequence(void);
 s32 lmapMainGetUnk74(void);
@@ -102,7 +102,7 @@ u32 FUN_00236110(void)
         QuestEntry *created = new QuestEntry;
         work->entry = created;
         questCenterInitEntry(created);
-        FUN_0046a34c(work->entry, g_qcMain.entryId, g_qcMain.option0, g_qcMain.option1);
+        qcCtrlStart(work->entry, g_qcMain.entryId, g_qcMain.option0, g_qcMain.option1);
         work->mode = 1;
         break;
     }

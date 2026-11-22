@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail writes the four party entries out one by one (ours is a loop), keeps the flags word at 0x44A0 in a stack slot and has an extra zeroed term cleared when its bit 1 is set (`movne sl, #0` on an already zero register) that is not recoverable; the formula and branches agree */
+/* NON_MATCHING: 214 lines: retail writes the four party entries out one by one (each through its own entry pointer; the build keeps the loop), keeps the flags word at 0x44A0 and the difficulty in stack slots and has an extra zeroed term cleared when its bit 1 is set (`movne sl, #0` on an already zero register) that is not recoverable; the formula and branches agree */
 #include "battle/BtlMainAccess.h"
 #include "battle/BattleEntries.h"
 
@@ -26,20 +26,22 @@ s32 FUN_003bf1e4(void)
     s32 partyAgility = 0;
     s32 partyLuck = 0;
     for (s32 i = 0; i < 4; i++) {
-        if ((entries[i].flags & 1) != 0 && (entries[i].flags & 0x40) == 0) {
+        BtlEntry *entry = &entries[i];
+        if ((entry->flags & 1) != 0 && (entry->flags & 0x40) == 0) {
             partyCount++;
-            partyAgility += entries[i].data.agility;
-            partyLuck += entries[i].data.luck;
+            partyAgility += entry->data.agility;
+            partyLuck += entry->data.luck;
         }
     }
     s32 enemyCount = 0;
     s32 enemyAgility = 0;
     s32 enemyLuck = 0;
     for (s32 i = 4; i < 54; i++) {
-        if ((entries[i].flags & 1) != 0 && (entries[i].flags & 0x40) == 0) {
+        BtlEntry *entry = &entries[i];
+        if ((entry->flags & 1) != 0 && (entry->flags & 0x40) == 0) {
             enemyCount++;
-            enemyAgility += entries[i].data.agility;
-            enemyLuck += entries[i].data.luck;
+            enemyAgility += entry->data.agility;
+            enemyLuck += entry->data.luck;
         }
     }
     s32 agilityGap = partyAgility / partyCount - enemyAgility / enemyCount;

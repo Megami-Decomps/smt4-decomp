@@ -2,6 +2,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "gfx/CameraStereoDepth.h"
 
 extern "C" {
 
@@ -27,7 +28,6 @@ void textureCacheReset(u32 mode);
 void FUN_003afc2c(void);
 void FUN_0031b96c(void);
 void asdCameraInitializeDefaults(EffectProcessInit *camera, s32 enabled);
-void uiSetFloatPair(EffectProcessInit *camera, f32 distance, f32 scale);
 void cameraMatrixCacheSetLookAt(EffectProcessInit *camera, const f32 *eye, const f32 *target, const f32 *up);
 void stereoCameraSetPerspective(EffectProcessInit *camera, u32 pivot, f32 fov, f32 aspect, f32 nearClip, f32 farClip);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void *owner);
@@ -63,7 +63,7 @@ u32 effectProcessCreate(u8 keepScene)
     process->target[2] = 0.0f;
     process->fieldOfView = 60.0f;
     asdCameraInitializeDefaults(process, 1);
-    uiSetFloatPair(process, 5.0f, 1.0f);
+    asdCameraSetStereoDepth(process, 5.0f, 1.0f);
     cameraMatrixCacheSetLookAt(process, process->eye, process->target, up);
     stereoCameraSetPerspective(process, 1, process->fieldOfView, 1.6666666f, 0.1f, 100000.0f);
     process->process = asdProcessCreateSimple((const s8 *)"EffectProc", 4, 0, 0, FUN_001f4c80, effectProcessDestroy, (u32)process);

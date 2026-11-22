@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_0025b754(void);
+int mapOverlayDraw(void);
 int FUN_0025ba8c(...);
 int FUN_0025bab8(...);
 int colorSetAndCachePica(...);
@@ -68,7 +68,7 @@ extern float DAT_004bdba4; /* 0x4bdba4 */
 extern float DAT_004bdba8; /* 0x4bdba8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0025b754. */
+/* Supplied declaration required: mapOverlayDraw. */
 /* Supplied declaration required: FUN_0025ba8c. */
 /* Supplied declaration required: FUN_0025bab8. */
 /* Supplied declaration required: colorSetAndCachePica. */
@@ -456,7 +456,7 @@ void mapEnvironmentSetLight(int param_1,unsigned int param_2,unsigned int param_
   colorSetAndCachePica(&temp_v42);
   FUN_0025bab8(&temp_v42);
   FUN_0025ba8c(&temp_v42);
-  FUN_0025b754();
+  mapOverlayDraw();
   return;
 }
 

@@ -5,6 +5,7 @@
 #include "font/PlaceWin.h"
 #include "game/GameState.h"
 #include "code/Code0013.h"
+#include "gfx/CameraStereoDepth.h"
 extern "C" int FUN_0020ffe8(...);
 
 extern "C" {
@@ -85,7 +86,6 @@ int FUN_002a09b4(unsigned char *, int);
 int skelNodePoseChain(void);
 int effPartCreateFromSource(void);
 int cameraExportParameters(short [6], unsigned int);
-int FUN_002c159c(unsigned int *);
 int stereoCameraSetPerspective(...);
 int cameraMatrixCacheSetLookAt(...);
 int cameraMatrixCacheReset(unsigned int *, int);
@@ -203,7 +203,6 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: soundPlaySeUnpanned. */
 /* Supplied declaration required: messageSetConfirmDisplayMode. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_002c159c. */
 /* Supplied declaration required: inputQueryButtonState. */
 /* Supplied declaration required: stereoCameraSetPerspective. */
 /* Supplied declaration required: cameraMatrixCacheSetLookAt. */
@@ -270,7 +269,7 @@ unsigned int FUN_001d99c0(void)
   psVar12 = temp_v7;
   if ((unsigned int)g_tmnl[4] >= 2) {
     cameraExportParameters(temp_v7,g_tmnl[g_tmnl[0x154] + 0xf]);
-    FUN_002c159c(puVar2 + 0x12);
+    asdCameraSetStereoDepth(puVar2 + 0x12, 5.0f, 1.0f);
     cameraMatrixCacheSetLookAt(puVar2 + 0x12,temp_v7,temp_v8,temp_v9);
     stereoCameraSetPerspective(puVar2 + 0x12,1);
     temp_v6 = 0;
@@ -338,7 +337,7 @@ unsigned int FUN_001d99c0(void)
         FUN_00263988(puVar7,2);
         cameraMatrixCacheReset(puVar7 + 0x12,1);
         cameraExportParameters(temp_v7,puVar7[puVar7[0x154] + 0xf]);
-        FUN_002c159c(puVar7 + 0x12);
+        asdCameraSetStereoDepth(puVar7 + 0x12, 5.0f, 1.0f);
         cameraMatrixCacheSetLookAt(puVar7 + 0x12,temp_v7,temp_v8,temp_v9);
         stereoCameraSetPerspective(puVar7 + 0x12,1);
         FUN_00298d50(puVar7 + 0x12);

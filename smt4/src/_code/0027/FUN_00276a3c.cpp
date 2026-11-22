@@ -3,6 +3,7 @@
 #include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
 #include "game/GameState.h"
+#include "gfx/CameraStereoDepth.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ int libm_sinf(void); // declcheck: local (the shared declaration does not compil
 int mathDistanceBetweenPoints(void);
 int FUN_00298d50(...);
 int cameraExportParameters(float [3], int);
-int FUN_002c159c(unsigned char *);
 int stereoCameraSetPerspective(...);
 int cameraMatrixCacheSetLookAt(...);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -69,7 +69,6 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: FUN_00298d50. */
 /* Supplied declaration required: cameraExportParameters. */
-/* Supplied declaration required: FUN_002c159c. */
 /* Supplied declaration required: stereoCameraSetPerspective. */
 /* Supplied declaration required: cameraMatrixCacheSetLookAt. */
 /* Supplied declaration required: gameGetMapBlock. */
@@ -231,7 +230,7 @@ void FUN_00276a3c(void)
   temp_v10 = 20.0f;
   temp_v19 = 1.0f;
   if (temp_v3 == 3) {
-    FUN_002c159c(&g_fixedCamera);
+    asdCameraSetStereoDepth(&g_fixedCamera, 100.0f, 1.0f);
     stereoCameraSetPerspective(&g_fixedCamera,1);
     FUN_0025c238();
     FUN_00298d50(&g_fixedCamera);
@@ -241,7 +240,7 @@ void FUN_00276a3c(void)
   }
   temp_v20 = 45.0f;
   if (temp_v3 == 4) {
-    FUN_002c159c(&g_fixedCamera);
+    asdCameraSetStereoDepth(&g_fixedCamera, 100.0f, 1.0f);
     stereoCameraSetPerspective(&g_fixedCamera,1);
     cameraMatrixCacheSetLookAt(&g_fixedCamera,g_mapCamera + 0x20,g_mapCamera + 0x23,g_mapCamera + 7);
     FUN_0025c238();
@@ -255,10 +254,12 @@ void FUN_00276a3c(void)
     temp_v3 = *(int *)(g_lmapScene + 0x1c);
     mathDistanceBetweenPoints();
     if (temp_v3 < 0x43340000) {
-      FUN_002c159c(&g_fixedCamera);
+      /* the distance (draft: temp_v3) less 40, at least 20 */
+      asdCameraSetStereoDepth(&g_fixedCamera, *(float *)&temp_v3 - 40.0f < 20.0f ? 20.0f : *(float *)&temp_v3 - 40.0f,
+                   *(float *)(g_mapCamera + 0x26));
     }
     else {
-      FUN_002c159c(&g_fixedCamera);
+      asdCameraSetStereoDepth(&g_fixedCamera, 140.0f, *(float *)(g_mapCamera + 0x26));
     }
     FUN_0025c238();
     FUN_00298d50(&g_fixedCamera);
@@ -599,10 +600,12 @@ void FUN_00276a3c(void)
     temp_v3 = *(int *)(g_lmapScene + 0x1c);
     mathDistanceBetweenPoints();
     if (temp_v3 < 0x43340000) {
-      FUN_002c159c(&g_fixedCamera);
+      /* the distance (draft: temp_v3) less 40, at least 20 */
+      asdCameraSetStereoDepth(&g_fixedCamera, *(float *)&temp_v3 - 40.0f < 20.0f ? 20.0f : *(float *)&temp_v3 - 40.0f,
+                   *(float *)(g_mapCamera + 0x26));
     }
     else {
-      FUN_002c159c(&g_fixedCamera);
+      asdCameraSetStereoDepth(&g_fixedCamera, 140.0f, *(float *)(g_mapCamera + 0x26));
     }
     stereoCameraSetPerspective(&g_fixedCamera,1);
     temp_v3 = *g_mapCamera;

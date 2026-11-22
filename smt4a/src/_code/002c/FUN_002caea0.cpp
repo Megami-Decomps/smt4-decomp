@@ -2,10 +2,10 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "clear_save/clearSave.h"
+#include "gfx/CameraStereoDepth.h"
 
 extern "C" {
 
-int uiSetFloatPair(...);
 int cameraMatrixCacheSetLookAt(...);
 int stereoCameraSetPerspective(...);
 int ownerGetFloatValue(...);
@@ -31,7 +31,6 @@ typedef int romwright_code(...);
 extern int nw_anim_PlayPolicy_Loop(...); /* 0x1c37f8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: uiSetFloatPair. */
 /* Supplied declaration required: cameraMatrixCacheSetLookAt. */
 /* Supplied declaration required: stereoCameraSetPerspective. */
 extern int eventIsSkipping(void);
@@ -109,7 +108,7 @@ unsigned int FUN_002caea0(void)
       *(unsigned char *)(temp_v1 + 0x58) = 1;
       *(unsigned char *)(temp_v0 + 0x570) = 1;
       cameraExportParameters(temp_v0 + 0x510,*(unsigned int *)(temp_v0 + 0x55c));
-      uiSetFloatPair(temp_v0 + 4);
+      asdCameraSetStereoDepth((void *)(temp_v0 + 4), *(float *)(temp_v0 + 0x554), 1.0f);
       cameraMatrixCacheSetLookAt(temp_v0 + 4,temp_v0 + 0x510,temp_v0 + 0x51c,temp_v0 + 0x528);
       stereoCameraSetPerspective(temp_v0 + 4,1);
       screenFadeSlotReset(0);
@@ -145,7 +144,7 @@ unsigned int FUN_002caea0(void)
     }
   case 3:
     cameraExportParameters(temp_v0 + 0x510,*(unsigned int *)(temp_v0 + 0x55c));
-    uiSetFloatPair(temp_v0 + 4);
+    asdCameraSetStereoDepth((void *)(temp_v0 + 4), *(float *)(temp_v0 + 0x554), 1.0f);
     cameraMatrixCacheSetLookAt(temp_v0 + 4,temp_v0 + 0x510,temp_v0 + 0x51c,temp_v0 + 0x528);
     stereoCameraSetPerspective(temp_v0 + 4,1);
     break;

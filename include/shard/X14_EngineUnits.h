@@ -63,7 +63,11 @@ typedef struct ResultWorkA {
     /* 0x43B6 */ s16 statRowRegions[5];         /* touch regions of the stat rows */
     /* 0x43C0 */ u8 unk43C0[0x18];
     /* 0x43D8 */ ResultStatArrowRegions statArrowRegions[5];
-    /* 0x43EC */ u8 unk43EC[0x40];
+    /* 0x43EC */ u8 unk43EC[4];
+    /* 0x43F0 */ u32 itemIds[6];                /* the items won, merged by id (FUN_00331714) */
+    /* 0x4408 */ u32 itemCounts[6];
+    /* 0x4420 */ u8 unk4420[8];
+    /* 0x4428 */ s32 gold;                      /* the money won */
     /* 0x442C */ EngineUnit units[37];
     /* 0x74BC */ u8 unk74BC[4];
     /* 0x74C0 */ s32 current;  /* index of the active unit */

@@ -1,4 +1,7 @@
-/* NON_MATCHING: register assignment and the order of the builder-struct stores differ from retail (186 vs 184 rows); the camera creation logic is the same. */
+/* NON_MATCHING: 230 lines. The two allocators are fetched before the scene builder's request is filled (retail's
+ * call order) and the type walk is nw's IsDerivedFrom (the type tested before the parent link). Left: retail keeps
+ * the resource pointer in a stack slot and computes the self-relative offsets from the field address, and the
+ * register assignment and frame differ. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/asdMemoryGetAllocatorA.h"
@@ -110,11 +113,14 @@ s32 FUN_0024530c(CameraScene *scene, AnimatedCamera *camera);
 static SceneObject *castTo(SceneObject *object, const TypeInfo *wanted)
 {
     if (object != NULL) {
-        for (const TypeInfo *type = object->vtable->typeInfo(object); type != NULL; type = type->parent) {
+        const TypeInfo *type = object->vtable->typeInfo(object);
+
+        do {
             if (type == wanted) {
                 return object;
             }
-        }
+            type = type->parent;
+        } while (type != NULL);
     }
     return NULL;
 }
@@ -134,6 +140,8 @@ CameraSet *asdCameraCreateFromResource(u8 *resource)
     for (; entry != entryEnd; entry += 0x10) {
         s32 dataOffset = *(s32 *)(entry + 0xC);
         void *data = dataOffset != 0 ? entry + 0xC + dataOffset : NULL;
+        Allocator *allocator = asdMemoryGetDefaultAllocator();
+        u32 deviceAllocator = (u32)asdMemoryGetAllocatorA();
         SceneBuilderParams params;
 
         params.data = data;
@@ -146,8 +154,7 @@ CameraSet *asdCameraCreateFromResource(u8 *resource)
         params.count2 = 4;
         params.unk20 = 0;
         params.flag2 = 1;
-        SceneObject *created = nw_gfx_SceneBuilder_CreateObject(&params, asdMemoryGetDefaultAllocator(),
-                                                               (u32)asdMemoryGetAllocatorA());
+        SceneObject *created = nw_gfx_SceneBuilder_CreateObject(&params, allocator, deviceAllocator);
         SceneObject *object = castTo(created, &DAT_0044e858);
         CameraScene *scene = (CameraScene *)castTo(object, &DAT_0044e820);
 

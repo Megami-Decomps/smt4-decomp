@@ -11,7 +11,7 @@ struct RenderColor {
 
 extern "C" {
 void renderCtxResetFrameStacks(RenderCtx *scene);
-void FUN_00343364(RenderCtx *scene, const RenderColor *color, u32 mode, u32 flags, f32 opacity);
+void renderCtxFillDisplay(RenderCtx *scene, const RenderColor *color, u32 mode, u32 flags, f32 opacity);
 
 /* Fills the screen with the colour (red, green, blue, alpha) under the scene's stereo mode for the active
  * graphics preset, then restores the scene's mode. */
@@ -30,7 +30,7 @@ void renderFillScreenColor(u32 mode, u32 flags, f32 red, f32 green, f32 blue, f3
     renderCtxSetStereoMode(g_titleScene, preset);
     renderCtxResetFrameStacks(g_titleScene);
     renderCtxSelectStereoLayout(g_titleScene);
-    FUN_00343364(g_titleScene, &color, mode, flags, opacity);
+    renderCtxFillDisplay(g_titleScene, &color, mode, flags, opacity);
     renderCtxSetStereoMode(g_titleScene, savedPreset);
 }
 }

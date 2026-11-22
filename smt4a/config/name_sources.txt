@@ -8736,3 +8736,31 @@
 003e21c8 btlEncountLoadArrangementStep inferred the encounter query's arrangement load step (state 0x16 -> 0x17, w72-g1)
 003fa010 dataStoreRequestDispatch inferred DataStore's nine-kind request factory (w72-g1)
 003fa6a4 dataStoreSubmitJob inferred allocates a DataStore job under the lock and sets its state (w72-g1)
+004ff058 spriteDrawPartGroup inferred twin of smt4 spriteDrawPartGroup
+0020cb74 spriteDrawPartQuad inferred twin of smt4 spriteDrawPartQuad
+002a1cec textConvertMarkup inferred twin of smt4 textConvertMarkup
+0014850c asdSceneRootCreate inferred twin of smt4 asdSceneRootCreate
+002ff8e8 renderCtxSelectBlendPreset inferred twin of smt4 renderCtxSelectBlendPreset (same source)
+00391778 effPolyRingGeom0Draw inferred twin of smt4 effPolyRingGeom0Draw
+00391df4 effPolyRingGeom1Draw inferred twin of smt4 effPolyRingGeom1Draw
+003881f8 mapCollisionSweepSegment inferred twin of smt4 mapCollisionSweepSegment
+0038a7dc animSlotsLoadFromFile inferred twin of smt4 animSlotsLoadFromFile
+003c4250 battleWindowDrawHpGauge inferred draws a battle window's HP gauge with the damage flash (w73-o4)
+0021b6ec commandMenuRegisterItemCommands inferred registers the command menu's item commands (w73-o4)
+0036aa04 followerDisplayUpdate inferred updates the follower's model display (w73-o4)
+00294cfc popupTryStartDemonHint inferred starts a demon hint popup when one is due (w73-o4)
+00289418 statusDownDrawCardRow inferred draws a card row of the status screen's lower panel (w73-o4)
+0016bb74 modelManagerCollectDrawItems inferred collects the model manager's draw items (w73-o4)
+0016bde0 modelManagerCollectSecondPassItems inferred collects the model manager's second-pass draw items (w73-o4)
+0019d57c asdModelBuildFlaggedAttributeRecords inferred builds a model's flagged attribute records (AsdModel.cpp trace, w73-o4)
+00376c64 lmapCameraRecentreStep inferred steps the local map camera's recentring (w73-o4)
+00318174 bustupCutAnimStartTransition inferred twin of smt4 bustupCutAnimStartTransition
+00140e6c asdFontLoadGlyphSet inferred twin of smt4 asdFontLoadGlyphSet (w73-f1)
+00475700 aocCatalogJobRun inferred runs the add-on shop's catalog query job (w73-f1)
+00427c38 aocCatalogQueryInit inferred initialises an add-on catalog query (w73-f1)
+0042792c aocServiceQueryCatalog inferred sends a catalog query to the add-on service (w73-f1)
+00426eb8 aocItemAttributeLabel inferred writes an item attribute's message label (NA_NAME_<group>_<item>, w73-f1)
+0046a34c qcCtrlStart evidence its __FILE__ trace names quest_center\qcCtrl.cpp (lines 581/602/638, w73-f2)
+00415cd8 btlFilterXPolySetup evidence twin of smt4 btlFilterXPolySetup; its trace names FilterXPoly.cpp
+004097b4 renderCtxFillDisplay inferred twin of smt4 renderCtxFillDisplay
+001418fc asdCameraSetStereoDepth inferred twin of smt4 asdCameraSetStereoDepth

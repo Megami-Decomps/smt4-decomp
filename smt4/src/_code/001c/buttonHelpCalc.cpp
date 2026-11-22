@@ -7,7 +7,7 @@ extern "C" {
 
 extern ButtonHelpQueuedSelections DAT_0043da50;
 
-void FUN_00220984(void);
+void buttonHelpUpdateTouch(void);
 void FUN_002ae028(u8 *help); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void buttonHelpSetPreset(u32 preset); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
@@ -45,7 +45,7 @@ s32 buttonHelpCalc(u32 job)
         }
         break;
     case 2:
-        FUN_00220984();
+        buttonHelpUpdateTouch();
         break;
     case 3:
         for (s32 i = 0; i < 2; i++) {

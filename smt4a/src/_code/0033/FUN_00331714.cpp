@@ -1,277 +1,190 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00331714` (_code @ 0x331714, 0x524 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-#include "mapnavi/naviMain.h"
-#include "code/Code001b.h"
+/* NON_MATCHING: readable port of IV's resultApplySpoils (329 lines; resultGetGoldBonusPercent is linker-inlined,
+ * inlined.txt): retail keeps the reserve test as compare-and-branch where the build threads it,
+ * and gives the work, slot table and totals other registers. */
+#include "shard/X14_EngineUnits.h"
 #include "result/ResultSpoils.h"
+#include "gamedata/SaveSlotTable.h"
+#include "gamedata/SaveSlotRecord.h"
+#include "gamedata/EquipmentRecordA.h"
+#include "gamedata/SkillDataRecord.h"
+#include "gamedata/GamePlayerData.h"
+#include "gamedata/GameDataAccess_VariantE.h"
+#include "util/BitsAndBytes_VariantF_Shard004B.h"
+#include "sys/RuntimeObjects.h"
+#include "code/Code001b.h"
+#include "mapnavi/naviMain.h"
+#include "mikado/mikadoMain.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
+void resultSetMode(ResultWorkA *result, s32 mode);
+void uiQuestCreate(void);
+void FUN_002c8778(u16 sourceId);
+s32 mapMainIsBusy(void);
+s32 lmapMainIsRunning(void);
+void soundChannelStopAll(s32 channel);
+void resourceTableReleaseHandles(void);
+s32 bgmHasPendingResume(void);
+void bgmRequestSelectedChannelFade(u32 frames);
+void soundChannelRequestIfEnabled(u32 sound, s32 channel, s32 frames);
+/* The gold bonus in percent: an empty getter (`mov r0, #0`) that armlink inlined at its one call. */
 
-int gameGetPlayerData(void);
-int itemTableGetEquipmentRecord(void);
-int resultSetMode(int, int);
-int resourceTableReleaseHandles(void);
-int bgmReleaseStopped(void);
-int FUN_002c8778(int);
-int uiQuestCreate(void);
-int dataTable41FindById(void);
-int soundChannelRequestIfEnabled(int, int, int);
-int soundChannelStopAll(int);
-void bgmRequestSelectedChannelFade(unsigned int frames);
-int partyGetSlotPreferredFirst(unsigned int);
-int gameCounterAddSaturating(int, int);
-int VectorSignedToFloat(int, int);
-int VectorUnsignedToFloat(unsigned int, int);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_1_stack;
-
-extern int DAT_00588c44; /* 0x588c44 */
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int lmapMainIsRunning(void);
-/* Supplied declaration required: gameGetPlayerData. */
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: itemTableGetEquipmentRecord. */
-extern int gameGetSlotRecord(void);
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: resultSetMode. */
-/* Supplied declaration required: resourceTableReleaseHandles. */
-/* Supplied declaration required: bgmReleaseStopped. */
-/* Supplied declaration required: FUN_002c8778. */
-/* Supplied declaration required: uiQuestCreate. */
-/* Supplied declaration required: dataTable41FindById. */
-/* Supplied declaration required: soundChannelRequestIfEnabled. */
-/* Supplied declaration required: soundChannelStopAll. */
-extern int bgmHasPendingResume(void);
-extern int actorIsActive(void);
-extern int partySlotMatchesSelected(unsigned int);
-/* Supplied declaration required: partyGetSlotPreferredFirst. */
-/* Supplied declaration required: gameCounterAddSaturating. */
-extern int bitsAt60Test(int, unsigned int);
-extern int mapMainIsBusy(void);
-
-
-/* WARNING: Removing unreachable block (ram,0x00331818) */
-/* WARNING: Removing unreachable block (ram,0x00331824) */
-/* WARNING: Removing unreachable block (ram,0x00331828) */
-
-void FUN_00331714(const ResultSpoilsA *spoils)
-
+/* The experience multiplier of a unit's passive skills: the product of their bonuses (percent). */
+static f32 skillExpMultiplier(const u16 *skills, s32 count)
 {
-  s32 param_1 = reinterpret_cast<s32>(spoils);
-/* irregular: irregular input(s): in_fpscr; 18 native warning(s); review required */
-  short temp_v0;
-  char temp_v1;
-  unsigned char temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int *piVar8;
-  unsigned short *puVar9;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  int temp_v9;
-  int temp_v10;
-  int temp_v11;
-  int temp_v12;
-  int temp_v13;
-  int temp_v14;
-  int temp_v15;
-  unsigned int in_fpscr;
-  float temp_v16;
-  float temp_v17;
-  float temp_v18;
-  unsigned long long temp_v19;
-  unsigned long long temp_v20;
-  
-  temp_v3 = DAT_00588c44;
-  temp_v4 = gameGetSlotTable();
-  gameGetPlayerData();
-  resultSetMode(temp_v3,0);
-  uiQuestCreate();
-  FUN_002c8778(*(unsigned short *)(param_1 + 0x38));
-  temp_v5 = mapMainIsBusy();
-  if ((temp_v5 != 0) || (temp_v5 = lmapMainIsRunning(), temp_v5 != 0)) {
-    bgmReleaseStopped();
-    soundChannelStopAll(0xf);
-    resourceTableReleaseHandles();
-  }
-  else {
-    temp_v5 = bgmHasPendingResume();
-    if (temp_v5 == 0) {
-      bgmRequestSelectedChannelFade(0x1e);
-    }
-  }
-  temp_v0 = *(short *)(param_1 + 0x38);
-  if (((temp_v0 != 2 && temp_v0 != 8) && ((temp_v0 != 10 && temp_v0 != 0x10) && temp_v0 != 0x11)) &&
-     ((temp_v0 != 0x18 || (temp_v5 = gameFlagIsSet(0x4c9), temp_v5 == 0)))) {
-    soundChannelRequestIfEnabled(0x100002d,0,0x3c);
-  }
-  temp_v5 = *(int *)(param_1 + 0x30);
-  temp_v12 = 0;
-  temp_v15 = 0;
-  *(int *)(temp_v3 + 0x4428) = *(int *)(temp_v3 + 0x4428) + temp_v5;
-  do {
-    temp_v9 = *(int *)(param_1 + temp_v15 * 4);
-    if (temp_v9 != 0) {
-      temp_v14 = param_1 + temp_v15 * 4;
-      temp_v13 = *(int *)(temp_v14 + 0x18);
-      if (temp_v13 != 0) {
-        temp_v6 = 0;
-        do {
-          temp_v10 = temp_v3 + temp_v6 * 4;
-          temp_v11 = *(int *)(temp_v10 + 0x43f0);
-          if (temp_v11 == temp_v9) {
-            piVar8 = (int *)(temp_v3 + temp_v6 * 4 + 0x4408);
-            *piVar8 = *piVar8 + temp_v13;
-            break;
-          }
-          if (temp_v11 == 0) {
-            *(int *)(temp_v3 + temp_v6 * 4 + 0x43f0) = temp_v9;
-            *(int *)(temp_v10 + 0x4408) = temp_v13;
-            break;
-          }
-          temp_v6 = temp_v6 + 1;
-        } while (temp_v6 < 6);
-        temp_v12 = temp_v12 + *(int *)(temp_v14 + 0x18);
-      }
-    }
-    temp_v15 = temp_v15 + 1;
-    if (temp_v15 >= 6) {
-      temp_v15 = dataTable1bOr1cRecordHasFlag1(*(unsigned short *)(param_1 + 0x38));
-      if (temp_v15 == 0) {
-        gameCounterAddSaturating(0x22,1);
-        gameCounterAddSaturating(0x23,temp_v5);
-        gameCounterAddSaturating(0x24,temp_v12);
-      }
-      temp_v12 = *(int *)(param_1 + 0x34);
-      temp_v5 = playerHasFlagBit(1);
-      temp_v18 = 1.0f;
-      temp_v19 = 0x42c800003c23d70a;
-      if ((temp_v5 == 0) && (temp_v5 = playerHasFlagBit(10), temp_v5 == 0)) {
-        temp_v17 = temp_v18;
-        puVar9 = (unsigned short *)gameGetPlayerData();
-        temp_v5 = 0;
-        do {
-          temp_v7 = 0;
-          switch(temp_v5) {
-          case 0:
-            temp_v7 = (unsigned int)*puVar9;
-            break;
-          case 1:
-            temp_v7 = (unsigned int)puVar9[1];
-            break;
-          case 2:
-            temp_v7 = (unsigned int)puVar9[2];
-            break;
-          case 3:
-            temp_v7 = (unsigned int)puVar9[3];
-            break;
-          case 4:
-            temp_v7 = (unsigned int)puVar9[4];
-            break;
-          case 5:
-            temp_v7 = (unsigned int)puVar9[5];
-            break;
-          case 6:
-            temp_v7 = (unsigned int)puVar9[6];
-          }
-          itemTableGetEquipmentRecord();
-          temp_v8 = 0;
-          if (temp_v7 != 0) {
-            temp_v8 = (unsigned int)*(unsigned short *)(temp_v7 + 0x3a);
-          }
-          if (temp_v7 != 0 && temp_v8 != 0) {
-            dataTable41FindById();
-            temp_v7 = 0;
-            if (temp_v8 != 0) {
-              temp_v7 = (unsigned int)*(unsigned char *)(temp_v8 + 0x2f);
+    f32 multiplier = 1.0f;
+    for (s32 skillIndex = 0; skillIndex < count; ++skillIndex) {
+        u16 skillId = skills[skillIndex];
+        if (skillId != 0) {
+            const Table04ExtraRecord *skill = dataTable41FindById(skillId);
+            if (skill != NULL && skill->modifier.percentage != 0) {
+                multiplier = (f32)(u32)skill->modifier.percentage * 0.01f * multiplier;
             }
-            if (temp_v8 != 0 && temp_v7 != 0) {
-              temp_v16 = (float)VectorUnsignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-              temp_v17 = temp_v16 * (float)temp_v19 * temp_v17;
-            }
-          }
-          temp_v5 = temp_v5 + 1;
-        } while (temp_v5 < 7);
-        *(int *)(temp_v3 + 0x7870) =
-             (temp_v12 * (int)(temp_v17 * (float)((unsigned long long)temp_v19 >> 0x20))) / 100 +
-             *(int *)(temp_v3 + 0x7870);
-      }
-      temp_v20 = 0x3e99999a;
-      temp_v5 = 0;
-      do {
-        if (-1 < *(char *)(temp_v4 + temp_v5 + 0x1c88)) {
-          temp_v15 = gameGetSlotRecord();
-          temp_v9 = bitsAt60Test(temp_v15,1);
-          if ((temp_v9 == 0) && (temp_v9 = bitsAt60Test(temp_v15,10), temp_v9 == 0)) {
-            temp_v2 = 0;
-            temp_v1 = *(char *)(temp_v4 + temp_v5 + 0x1c88);
-            if ((*(char *)(temp_v4 + 0x1ca0) == temp_v1) ||
-               ((*(char *)(temp_v4 + 0x1ca1) == temp_v1 || (*(char *)(temp_v4 + 0x1ca2) == temp_v1)))) {
-              temp_v2 = 1;
-            }
-            temp_v17 = (float)VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v9 = temp_v12;
-            if (((!temp_v2) && (temp_v9 = (int)(temp_v17 * (float)temp_v20), temp_v12 != 0)) && (temp_v9 < 1))
-            {
-              temp_v9 = 1;
-            }
-            temp_v13 = 0;
-            temp_v17 = temp_v18;
-            do {
-              temp_v7 = (unsigned int)*(unsigned short *)(temp_v15 + 0x34 + temp_v13 * 2);
-              if (temp_v7 != 0) {
-                dataTable41FindById();
-                temp_v8 = 0;
-                if (temp_v7 != 0) {
-                  temp_v8 = (unsigned int)*(unsigned char *)(temp_v7 + 0x2f);
-                }
-                if (temp_v7 != 0 && temp_v8 != 0) {
-                  temp_v16 = (float)VectorUnsignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-                  temp_v17 = temp_v16 * (float)temp_v19 * temp_v17;
-                }
-              }
-              temp_v13 = temp_v13 + 1;
-            } while (temp_v13 < 8);
-            piVar8 = (int *)(temp_v3 + (unsigned int)*(unsigned char *)(temp_v15 + 0x66) * 0x28 + 0x7898);
-            *piVar8 = (temp_v9 * (int)(temp_v17 * (float)((unsigned long long)temp_v19 >> 0x20))) / 100 + *piVar8;
-          }
         }
-        temp_v5 = temp_v5 + 1;
-      } while (temp_v5 < 0x18);
-      temp_v7 = 0;
-      temp_v19 = 0x3f4ccccd;
-      do {
-        temp_v8 = temp_v7 & 0xffff;
-        partyGetSlotPreferredFirst(temp_v8);
-        temp_v4 = actorIsActive();
-        if (temp_v4 != 0) {
-          temp_v5 = partySlotMatchesSelected(temp_v8);
-          temp_v18 = (float)VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v4 = temp_v12;
-          if (((temp_v5 == 0) && (temp_v4 = (int)(temp_v18 * (float)temp_v19), temp_v12 != 0)) && (temp_v4 < 1))
-          {
-            temp_v4 = 1;
-          }
-          temp_v5 = temp_v7 + 0x19;
-          if (temp_v5 >= 0x25) {
-            temp_v5 = 0x24;
-          }
-          piVar8 = (int *)(temp_v3 + temp_v5 * 0x28 + 0x7870);
-          *piVar8 = temp_v4 + *piVar8;
-        }
-        temp_v7 = temp_v7 + 1;
-      } while ((int)temp_v7 < 0xc);
-      return;
     }
-  } while( 1 );
+    return multiplier;
+}
+
+/* Applies a finished battle's spoils to the result screen: stops the battle music, adds gold and the items
+ * (merging stacks), counts the battle, adds the experience scaled by the hero's equipment bonuses, shares it out
+ * to the party scaled by each member's passive bonuses (members outside the three reserve[] positions get 30%) and gives the
+ * stock demons theirs (80% unless selected). */
+void FUN_00331714(const ResultSpoilsA *spoils)
+{
+    ResultWorkA *result = g_engineCleanupOwner.instance;
+    SaveSlotTableA *slots = gameGetSlotTable();
+
+    gameGetPlayerData();
+    resultSetMode(result, 0);
+    uiQuestCreate();
+    FUN_002c8778(spoils->source);
+    if (mapMainIsBusy() != 0 || lmapMainIsRunning() != 0) {
+        bgmReleaseStopped();
+        soundChannelStopAll(15);
+        resourceTableReleaseHandles();
+    } else if (bgmHasPendingResume() == 0) {
+        bgmRequestSelectedChannelFade(30);
+    }
+    if (spoils->source != 2 && spoils->source != 8 && spoils->source != 10 && spoils->source != 16 &&
+        spoils->source != 17 && !(spoils->source == 24 && gameFlagIsSet(0x4c9)))
+        soundChannelRequestIfEnabled(0x100002D, 0, 60);
+    s32 gold = spoils->money;
+    s32 itemTotal = 0;
+
+    if (gold != 0) {
+        u32 bonus = resultGetGoldBonusPercent();
+        if (bonus != 0) {
+            u32 extra = gold * bonus / 100;
+            if (extra == 0)
+                extra = 1;
+            gold += extra;
+        }
+    }
+    result->gold += gold;
+    for (s32 i = 0; i < 6; i++) {
+        u32 id = spoils->items[i];
+
+        if (id == 0 || spoils->counts[i] == 0) {
+            continue;
+        }
+        for (s32 j = 0; j < 6; j++) {
+            if (result->itemIds[j] == id) {
+                result->itemCounts[j] += spoils->counts[i];
+                break;
+            }
+            if (result->itemIds[j] == 0) {
+                result->itemIds[j] = id;
+                result->itemCounts[j] = spoils->counts[i];
+                break;
+            }
+        }
+        itemTotal += spoils->counts[i];
+    }
+    if (dataTable1bOr1cRecordHasFlag1(spoils->source) == 0) {
+        gameCounterAddSaturating(0x22, 1);
+        gameCounterAddSaturating(0x23, gold);
+        gameCounterAddSaturating(0x24, itemTotal);
+    }
+    s32 experience = spoils->value;
+
+    if (playerHasFlagBit(1) == 0 && playerHasFlagBit(10) == 0) {
+        f32 multiplier = 1.0f;
+        PlayerDataA *player = gameGetPlayerData();
+        for (s32 slot = 0; slot < 7; slot++) {
+            u32 id = 0;
+            switch (slot) {
+            case 0:
+                id = player->equipment[0];
+                break;
+            case 1:
+                id = player->equipment[1];
+                break;
+            case 2:
+                id = player->equipment[2];
+                break;
+            case 3:
+                id = player->equipment[3];
+                break;
+            case 4:
+                id = player->equipment[4];
+                break;
+            case 5:
+                id = player->equipment[5];
+                break;
+            case 6:
+                id = player->equipment[6];
+                break;
+            }
+            EquipmentRecordA *equipment = itemTableGetEquipmentRecord(id);
+            if (equipment != NULL && equipment->modifierId != 0) {
+                Table04ExtraRecord *modifier = dataTable41FindById(equipment->modifierId);
+                if (modifier != NULL && modifier->modifier.percentage != 0)
+                    multiplier = (f32)(u32)modifier->modifier.percentage * 0.01f * multiplier;
+            }
+        }
+        result->experience[0].total += (experience * (s32)(multiplier * 100.0f)) / 100;
+    }
+    for (s32 i = 0; i < 24; i++) {
+        if (slots->party[i] < 0) {
+            continue;
+        }
+        SlotRecordA *unit = gameGetSlotRecord(slots->party[i]);
+
+        if (bitsAt60Test(unit, 1) != 0 || bitsAt60Test(unit, 10) != 0) {
+            continue;
+        }
+        s32 inFront = 0;
+        s8 index = slots->party[i];
+
+        if (slots->reserve[0] == index || slots->reserve[1] == index || slots->reserve[2] == index) {
+            inFront = 1;
+        }
+        s32 share = experience;
+
+        if (!inFront) {
+            share = (s32)((f32)experience * 0.3f);
+            if (experience != 0 && share <= 0) {
+                share = 1;
+            }
+        }
+        f32 multiplier = skillExpMultiplier(unit->skills, 8);
+        result->experience[unit->tableIndex + 1].total += (share * (s32)(multiplier * 100.0f)) / 100;
+    }
+    for (u32 i = 0; i < 12; i++) {
+        PartySlotA *stock = partyGetSlotPreferredFirst((u16)i);
+        if (actorIsActive(stock) == 0)
+            continue;
+        s32 share = experience;
+        if (!partySlotMatchesSelected(stock)) {
+            share = (s32)((f32)experience * 0.8f);
+            if (experience != 0 && share <= 0)
+                share = 1;
+        }
+        s32 row = i + 25;
+        if (row > 36)
+            row = 36;
+        result->experience[row].total += share;
+    }
 }
 
 } /* extern "C" */

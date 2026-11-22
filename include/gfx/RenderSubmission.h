@@ -32,7 +32,9 @@ struct RenderSubmissionOwner {
     /* 0x28 */ u32 drawMode;
     /* 0x2C */ u8 unk2C[8];
     /* 0x34 */ u32 frame;
-    /* 0x38 */ u8 unk38[0x1E];
+    /* 0x38 */ u8 unk38[4];
+    /* 0x3C */ u8 packetDepthEnabled; /* depth flag of the owners whose resource holds the packet first (effPolyRingGeom1Draw) */
+    /* 0x3D */ u8 unk3D[0x19];
     /* 0x56 */ u8 depthEnabled;
 };
 struct RenderSubmission {
@@ -55,6 +57,7 @@ union RenderSubmissionColor {
     } channels;
 };
 typedef char RenderSubmissionOffsetsCheck[offsetof(RenderSubmission, owner) == 0x40 &&
+    offsetof(RenderSubmissionOwner, packetDepthEnabled) == 0x3C &&
     offsetof(RenderSubmissionOwner, depthEnabled) == 0x56 &&
     offsetof(RenderSubmissionPacket, texture) == 0x04 && offsetof(RenderSubmissionPacket, placement) == 0x10 &&
     offsetof(RenderSubmissionPacket, color) == 0x50 && offsetof(RenderSubmissionPacket, pending) == 0x54 &&

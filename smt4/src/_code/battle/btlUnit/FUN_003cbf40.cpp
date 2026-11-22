@@ -53,7 +53,7 @@ u32 FUN_003af054(BtlUi *ui);
 void FUN_003af06c(BtlUi *ui, u64 mask);
 s32 btlAiSelectCommand(BtlMainState **block, CommandState *work);
 void FUN_003d0fcc(BtlMainState **block, s32 mode);
-void FUN_003d1e2c(BtlMainState **block, CommandState *work);
+void btlTargetCursorStep(BtlMainState **block, CommandState *work);
 void FUN_003dda20(s32 a, CommandState *work, s32 amount);
 
 /* Sets the acting combatant's pending action. */
@@ -124,7 +124,7 @@ u32 FUN_003cbf40(BtlMainState **block, CommandState *work)
             }
             FUN_00229118(block, 1, -1, work);
         } else {
-            FUN_003d1e2c(block, work);
+            btlTargetCursorStep(block, work);
             FUN_00229118(block, 1, work->targetIndex, work);
         }
         for (s32 remaining = 109, i = 0; remaining != 0; --remaining, ++i) {

@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (219 vs 211 rows); retail hoists the loop-invariant model/animation pointers into callee-saved registers and the relative-offset resolves differ; unnamed scene-builder types are file-local */
 #include "common.h"
 #include "script/scrScriptProcess.h"
+#include "gfx/CameraStereoDepth.h"
 
 extern "C" {
 
@@ -82,7 +83,6 @@ SceneObject* nw_gfx_SceneBuilder_CreateObject(SceneBuildDesc* desc, Allocator* d
 void* _ZN9Obj42111cC1Ej(void* self, Allocator* allocator);
 void FUN_002a5960(void* self, AnimDesc* desc, f32 startTime, u32 flags, s32 enabled);
 void cameraMatrixCacheReset(void* camera, s32 arg);
-void FUN_002c159c(void* camera);
 void cameraMatrixCacheSetLookAt(void* camera, f32* position, f32* target, f32* up);
 void stereoCameraSetPerspective(void* camera, s32 arg, f32 a, f32 b, f32 c, f32 d);
 void modelSelectionActivate(ModelSet* set, s32 a, s32 b);
@@ -182,7 +182,7 @@ void FUN_00341340(ModelSet* set, void* path)
     set->up[1] = 1.0f;
     set->up[2] = 0.0f;
     set->distance = 5.0f;
-    FUN_002c159c(set->camera);
+    asdCameraSetStereoDepth(set->camera, 5.0f, 1.0f);
     cameraMatrixCacheSetLookAt(set->camera, set->position, set->target, set->up);
     stereoCameraSetPerspective(set->camera, 1, set->nearClip, set->aspect, set->farClip, 1.6666666f);
     FUN_00298d50(reinterpret_cast<u32>(set->camera));

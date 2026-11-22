@@ -7,6 +7,7 @@
 #include "title/titleMain.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "code/Code0038.h"
+#include "gfx/CameraStereoDepth.h"
 
 namespace {
 // The opening's camera includes a final stereo parameter beyond the shared 0x508-byte prefix.
@@ -49,7 +50,6 @@ extern char DAT_0052f638[]; // event/oc/oc_loop.bam
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void sysMemClear(void *data, u32 size);
 void asdCameraInitializeDefaults(CameraMatrixCache *camera, s32 mode);
-void uiSetFloatPair(CameraMatrixCache *camera, f32 first, f32 second);
 void cameraMatrixCacheSetLookAt(CameraMatrixCache *camera, const Vec3 *eye, const Vec3 *target, const Vec3 *up);
 void stereoCameraSetPerspective(CameraMatrixCache *camera, s32 mode, f32 fieldOfView, f32 nearClip, f32 farClip, f32 aspect);
 s32 FUN_002caea0(u32 handle);
@@ -80,7 +80,7 @@ u32 event3dOpeningCreate(void)
         work->up.z = 0.0f;
         work->projection.aspect = 5.0f / 3.0f;
         work->distance = 5.0f;
-        uiSetFloatPair(&work->camera.cache, 5.0f, 1.0f);
+        asdCameraSetStereoDepth(&work->camera.cache, 5.0f, 1.0f);
         cameraMatrixCacheSetLookAt(&work->camera.cache, &work->eye, &work->target, &work->up);
         stereoCameraSetPerspective(&work->camera.cache, 1, work->projection.fieldOfView,
             work->projection.nearClip, work->projection.farClip, work->projection.aspect);

@@ -87,7 +87,7 @@ code_r0x00216c3c:
       goto code_r0x00216b4c;
     case 4:
       iVar5 = iVar2 + 4;
-      FUN_002c159c(iVar5);
+      asdCameraSetStereoDepth(iVar5);
       cameraMatrixCacheSetLookAt(iVar5,iVar8,iVar2 + 0x518,iVar2 + 0x524);
       stereoCameraSetPerspective(iVar5,1);
       FUN_00298d50(iVar5);
@@ -152,7 +152,7 @@ code_r0x00216c3c:
 code_r0x00216b4c:
       if (*(char *)(iVar2 + 0x5f0) != '\0') {
         iVar5 = iVar2 + 4;
-        FUN_002c159c(iVar5);
+        asdCameraSetStereoDepth(iVar5);
         cameraMatrixCacheSetLookAt(iVar5,iVar8,iVar2 + 0x518,iVar2 + 0x524);
         stereoCameraSetPerspective(iVar5,1);
         FUN_00298d50(iVar5);

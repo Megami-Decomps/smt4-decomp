@@ -1,4 +1,6 @@
-/* NON_MATCHING: the item merge loops are unrolled/scheduled differently from retail; the passive-bonus loop (a plain static helper, as in resultAddExperienceReward) and the spoils application follow it. */
+/* NON_MATCHING: 210 lines (resultGetGoldBonusPercent is linker-inlined, inlined.txt). Retail
+ * gives the work, slot table and running totals other registers (r9/r8/r5/r6 against r5/r9/r6/r7); it also keeps the
+ * front-line flag in r0 and tests it after the share's float conversion, where the build branches on it directly. */
 #include "common.h"
 #include "shard/PassiveSkill.h"
 #include "result/Result.h"
@@ -30,9 +32,10 @@ void soundChannelStopAll(s32 channel);
 void resourceTableReleaseHandles(void);
 s32 bgmHasPendingResume(void);
 void bgmRequestSelectedChannelFade(u32 frames);
-void soundChannelRequestIfEnabled(u32 id, s32 arg);
+void soundChannelRequestIfEnabled(u32 sound, s32 channel, s32 frames);
 void gameCounterAddSaturating(s32 counter, s32 amount);
 s32 playerPadTestBit(u32 bit);
+/* The gold bonus in percent: an empty getter (`mov r0, #0`) that armlink inlined at its one call. */
 s32 flagWordTestBit(StatBlock *unit, u32 bit);
 
 /* The experience multiplier of a unit's passive skills: the product of their bonuses (percent). */
@@ -71,10 +74,19 @@ void resultApplySpoils(ResultSpoils *spoils)
     } else if (bgmHasPendingResume() == 0) {
         bgmRequestSelectedChannelFade(30);
     }
-    soundChannelRequestIfEnabled(0x100003C, 0);
+    soundChannelRequestIfEnabled(0x100003C, 0, 60);
     s32 gold = spoils->gold;
     s32 itemTotal = 0;
 
+    if (gold != 0) {
+        u32 bonus = resultGetGoldBonusPercent();
+        if (bonus != 0) {
+            u32 extra = gold * bonus / 100;
+            if (extra == 0)
+                extra = 1;
+            gold += extra;
+        }
+    }
     result->gold += gold;
     for (s32 i = 0; i < 6; i++) {
         s32 id = spoils->itemId[i];
@@ -124,7 +136,7 @@ void resultApplySpoils(ResultSpoils *spoils)
 
         if (!inFront) {
             share = (s32)((f32)experience * 0.3f);
-            if (experience != 0 && share < 1) {
+            if (experience != 0 && share <= 0) {
                 share = 1;
             }
         }

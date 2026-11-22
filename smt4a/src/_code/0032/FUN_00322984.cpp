@@ -15,7 +15,7 @@ int handlerTableCallWithValue(...);
 int FUN_002b3538(...);
 int renderSubmissionDrawPacket(...);
 int memcpySrcFirst(...);
-int FUN_002ff8e8(...);
+int renderCtxSelectBlendPreset(...);
 int FUN_00323f50(...);
 int quadSourceCopyOut(...);
 int quadHolderCopyOut(...);
@@ -115,7 +115,7 @@ extern unsigned int tableOwnerGetEntry(unsigned int, unsigned int);
 /* Supplied declaration required: renderSubmissionDrawPacket. */
 /* Supplied declaration required: memcpySrcFirst. */
 extern int effectQuerySelectedBehavior(void *);
-/* Supplied declaration required: FUN_002ff8e8. */
+/* Supplied declaration required: renderCtxSelectBlendPreset. */
 /* Supplied declaration required: FUN_00323f50. */
 /* Supplied declaration required: quadSourceCopyOut. */
 /* Supplied declaration required: quadHolderCopyOut. */
@@ -384,7 +384,7 @@ void FUN_00322984(fn_00322984_arg0 *param_1)
         *(unsigned int *)(temp_v8 + 100) =
              (((temp_v0 >> 0x10) & 0xff) << 0x10) | (temp_v0 & 0xff) | (((temp_v0 >> 8) & 0xff) << 8) |
              (temp_v0 & 0xff000000);
-        FUN_002ff8e8(*(unsigned int *)(temp_v1 + 0x54) & 0xffff);
+        renderCtxSelectBlendPreset(*(unsigned int *)(temp_v1 + 0x54) & 0xffff);
         renderSubmissionDrawPacket(*(unsigned int *)(param_1 + 1),*(unsigned int *)(temp_v1 + 0x54) & 0xffff);
       }
       break;
@@ -608,7 +608,7 @@ void FUN_00322984(fn_00322984_arg0 *param_1)
              (temp_v0 & 0xff) | (((temp_v0 >> 8) & 0xff) << 8) | (((temp_v0 >> 0x10) & 0xff) << 0x10) |
              (temp_v0 & 0xff000000);
         *(int *)(temp_v34 + 0x60) = temp_v8;
-        FUN_002ff8e8(*(unsigned int *)(temp_v7 + 0x54) & 0xffff);
+        renderCtxSelectBlendPreset(*(unsigned int *)(temp_v7 + 0x54) & 0xffff);
         renderSubmissionDrawPacket(*(unsigned int *)(param_1 + 1),*(unsigned int *)(temp_v7 + 0x54) & 0xffff);
         return;
       }
@@ -694,7 +694,7 @@ void FUN_00322984(fn_00322984_arg0 *param_1)
       }
       break;
     case 7:
-      FUN_002ff8e8(*(unsigned int *)(*(int *)((int)pvVar11 + 0x20) + 0x54) & 0xffff);
+      renderCtxSelectBlendPreset(*(unsigned int *)(*(int *)((int)pvVar11 + 0x20) + 0x54) & 0xffff);
       FUN_00323f50(param_1);
       return;
     }

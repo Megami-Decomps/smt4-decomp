@@ -2316,10 +2316,6 @@
 0x00147ed4 nw_snd_FxDelay_AssignWorkBuffer name
 0x00147eec nw_snd_FxDelay_GetRequiredMemSize name
 0x00147f08 nw_snd_FxDelay_SetParam name
-0x00148030 FUN_00148030 between
-0x001481e4 FUN_001481e4 between
-0x001482c0 FUN_001482c0 between
-0x00148bb8 FUN_00148bb8 between
 0x00149840 nngxDisplayEnv name
 0x0014a784 nngxRunCmdlist name
 0x0014a900 FUN_0014a900 callers
@@ -2387,11 +2383,8 @@
 0x0015adc4 FUN_0015adc4 between
 0x0015add8 _ZN9Obj55b4e46createEPvP18AsdAllocatorObject library
 0x0015aeb0 resourceCreateOwnedObject between
-0x0015aef0 FUN_0015aef0 between
-0x0015c9f8 FUN_0015c9f8 between
 0x0015cccc FUN_0015cccc between
 0x0015d2bc nw_gfx_TransformNode_DynamicBuilder_Create name
-0x0015d31c FUN_0015d31c between
 0x0015d35c _ZN9Obj55b7046createEPvP18AsdAllocatorObject library
 0x0015d814 _ZN9Obj55bb906createEPvP18AsdAllocatorObject library
 0x0015d988 FUN_0015d988 callers
@@ -2564,10 +2557,8 @@
 0x00171d7c _ZN9Obj55b5a86createEPvP18AsdAllocatorObject library
 0x00171e44 FUN_00171e44 between
 0x00171ec8 FUN_00171ec8 callers
-0x00172088 FUN_00172088 between
 0x001720c0 FUN_001720c0 between
 0x001720f8 nw_gfx_SceneEnvironment_SceneEnvironment_sub_object name
-0x001723b8 FUN_001723b8 between
 0x001723f0 FUN_001723f0 between
 0x0017250c FUN_0017250c between
 0x001725e4 FUN_001725e4 between

@@ -112,6 +112,12 @@ static __inline void renderStackPopChecked(RenderStateStack *st)
     }
 }
 
+/* The checked pop for a holder of a reference to the stack (RenderCtxStateScope, camp/RenderCtx.h). */
+static __inline void renderStackPopChecked(RenderStateStack &st)
+{
+    renderStackPopChecked(&st);
+}
+
 /* Replaces the current state without changing the stack depth. */
 static __inline void renderStackSet(RenderStateStack *st, int state)
 {

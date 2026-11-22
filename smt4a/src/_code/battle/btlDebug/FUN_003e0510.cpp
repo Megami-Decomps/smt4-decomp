@@ -7,7 +7,7 @@ extern "C" {
 int qsort(int [4], unsigned int, int, unsigned char *);
 int nkmEnemyFindById(void);
 int FUN_00239404(int, int);
-int FUN_0038a7dc(int, int, unsigned int, int);
+int animSlotsLoadFromFile(int, int, unsigned int, int);
 int FUN_003e3188(unsigned int *, int);
 int FUN_003eba0c(int, int);
 int FUN_003edaf0(int, int);
@@ -45,7 +45,7 @@ extern unsigned int DAT_0057aa1c; /* 0x57aa1c */
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: nkmEnemyFindById. */
 /* Supplied declaration required: FUN_00239404. */
-/* Supplied declaration required: FUN_0038a7dc. */
+/* Supplied declaration required: animSlotsLoadFromFile. */
 /* Supplied declaration required: FUN_003e3188. */
 /* Supplied declaration required: FUN_003eba0c. */
 /* Supplied declaration required: FUN_003edaf0. */
@@ -104,7 +104,7 @@ void FUN_003e0510(unsigned int *param_1,int param_2)
   temp_v3 = param_2 + 0x430;
   temp_v32 = param_1;
   temp_v33 = param_2;
-  FUN_0038a7dc(temp_v3,0x32,*(unsigned int *)(param_2 + 0x1ec4),param_2 + 0x10b0);
+  animSlotsLoadFromFile(temp_v3,0x32,*(unsigned int *)(param_2 + 0x1ec4),param_2 + 0x10b0);
   temp_v9 = temp_v33;
   btlFindSelectionIndexByOrdinal(temp_v33,1);
   piVar12 = (int *)(temp_v33 + 0x1ffc);

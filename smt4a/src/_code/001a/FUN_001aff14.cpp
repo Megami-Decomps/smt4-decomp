@@ -1,9 +1,16 @@
-/* NON_MATCHING: separate phase sampling versus retail batched reduction changes saved registers, matrix scheduling and translation stores. */
+/* NON_MATCHING: 197 lines (185 by shape). The sign tests, magnitudes and the three wrap loops are retail's (the batched
+ * builder); the table lookups and the matrix products still go through other registers (the build saves
+ * d8-d9 where retail saves r4-r9 only). */
 #include "gfx/EulerPhaseRotation.h"
 extern "C" {
 extern const PhaseTrigEntry g_sinCosTable[];
 void FUN_001aff14(Matrix34Data *matrix, s32 clearTranslation, f32 x, f32 y, f32 z)
 {
-    buildEulerPhaseRotation(matrix, clearTranslation, g_sinCosTable, x, y, z);
+    buildEulerPhaseRotationBatched(matrix, g_sinCosTable, x, y, z);
+    if (clearTranslation) {
+        matrix->values[3] = 0.0f;
+        matrix->values[7] = 0.0f;
+        matrix->values[11] = 0.0f;
+    }
 }
 }

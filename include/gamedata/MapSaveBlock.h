@@ -75,8 +75,8 @@ typedef struct MapSaveBlock {
     /* 0xF20 */ MapMarkerSlot markers[16];
     /* 0x1060 */ s16 progressedItem;  /* the quest item whose count a gain advanced (FUN_00348e88) */
     /* 0x1062 */ s16 completedItem;   /* the quest item whose count a gain completed */
-    /* 0x1064 */ u16 secondCompletedItem;
-    /* 0x1066 */ u16 secondProgressedItem;
+    /* 0x1064 */ s16 secondCompletedItem;
+    /* 0x1066 */ s16 secondProgressedItem;
     /* 0x1068 */ u8 unk1068[0x7C];
 } MapSaveBlock;
 

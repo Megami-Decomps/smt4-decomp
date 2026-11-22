@@ -9,7 +9,7 @@ int renderCtxSelectTexture(int, unsigned int);
 int skinObjectUpdateMatrices(int);
 int sysMemClear(unsigned char *, int);
 int __aeabi_vec_ctor_nocookie_nodtor(unsigned char *, unsigned char *, int, int);
-int FUN_002ff8e8(unsigned int);
+int renderCtxSelectBlendPreset(unsigned int);
 int camSetMatrixB(int, int *);
 int materialUploadChangedParameterVector(int, unsigned int);
 int FUN_00412678(unsigned int, unsigned char [352], int *);
@@ -41,7 +41,7 @@ extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-/* Supplied declaration required: FUN_002ff8e8. */
+/* Supplied declaration required: renderCtxSelectBlendPreset. */
 /* Supplied declaration required: camSetMatrixB. */
 /* Supplied declaration required: materialUploadChangedParameterVector. */
 /* Supplied declaration required: FUN_00412678. */
@@ -105,7 +105,7 @@ void FUN_003380a0(unsigned int *param_1,unsigned int param_2)
   temp_v12 = 0;
   temp_v13 = 0x3f800000;
   camSetMatrixB(g_renderCtx,&temp_v8);
-  FUN_002ff8e8(param_2);
+  renderCtxSelectBlendPreset(param_2);
   temp_v5 = g_renderCtx;
   if ((*(unsigned short *)((int)param_1 + 0x12) & 0x100) != 0) {
     temp_v0 = renderCtxPackPassFlags(5,0);

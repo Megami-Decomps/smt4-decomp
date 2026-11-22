@@ -2,6 +2,7 @@
 #include "status/StatusCamera.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "script/scrScriptProcess.h"
+#include "gfx/CameraStereoDepth.h"
 
 extern "C" {
 extern StatusCameraWork *g_statusCamera;
@@ -9,7 +10,6 @@ void asdGxSetViewport(s32 x, s32 y, s32 width, s32 height);
 void cameraMatrixCacheReset(StatusCameraWork *camera, s32 enabled);
 void cameraMatrixCacheSetLookAt(StatusCameraWork *camera, const Vec3 *eye, const Vec3 *target, const Vec3 *up);
 void stereoCameraSetPerspective(StatusCameraWork *camera, s32 enabled, f32 fov, f32 nearClip, f32 farClip, f32 aspect);
-void FUN_002c159c(StatusCameraWork *camera, f32 first, f32 second);
 
 void statusCameraResetDefaults(void)
 {
@@ -42,7 +42,7 @@ void statusCameraResetDefaults(void)
         cameraMatrixCacheSetLookAt(camera, &camera->eye, &target, &up);
         stereoCameraSetPerspective(camera, 1, camera->lens.fov, camera->lens.nearClip, camera->lens.farClip, 1.6666666f);
         FUN_00298d50(reinterpret_cast<u32>(camera));
-        FUN_002c159c(camera, 2.8f, 1.0f);
+        asdCameraSetStereoDepth(camera, 2.8f, 1.0f);
     }
 }
 }

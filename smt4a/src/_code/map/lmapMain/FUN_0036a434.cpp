@@ -3,17 +3,17 @@
 #include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "title/titleMain.h"
+#include "gfx/CameraStereoDepth.h"
 
 extern "C" {
 
-int uiSetFloatPair(unsigned char *);
 int cameraMatrixCacheSetLookAt(unsigned char *, int, int, int);
 int stereoCameraSetPerspective(unsigned char *, int);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int residentApplyFallbackValues(void);
 int FUN_003250ac(unsigned char [4]);
-int FUN_003881f8(int, float *, float *);
+int mapCollisionSweepSegment(int, float *, float *);
 int __hardfp_atan2f(void);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
@@ -40,7 +40,6 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: uiSetFloatPair. */
 /* Supplied declaration required: cameraMatrixCacheSetLookAt. */
 /* Supplied declaration required: stereoCameraSetPerspective. */
 /* Supplied declaration required: libm_cosf. */
@@ -48,7 +47,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: residentApplyFallbackValues. */
 /* Supplied declaration required: FUN_003250ac. */
 /* Supplied declaration required: FUN_0036b824. */
-/* Supplied declaration required: FUN_003881f8. */
+/* Supplied declaration required: mapCollisionSweepSegment. */
 /* Supplied declaration required: __hardfp_atan2f. */
 
 void FUN_0036a434(int param_1)
@@ -131,7 +130,7 @@ void FUN_0036a434(int param_1)
      (((((*(int *)(param_1 + 0x40) != 0x65 || ((int)temp_v12 + 0x39d8cfffU >= 0xf9fff)) ||
         ((unsigned int)temp_v11 >= 0xc62be000)) || (0xc61ab000 >= (unsigned int)temp_v11)) &&
       (temp_v1 = *(int *)(param_1 + 0xcc), !((temp_v1 == 4 || temp_v1 == 5) || temp_v1 == 6))))) {
-    FUN_003881f8(param_1 + 0x60,&temp_v18,&temp_v13);
+    mapCollisionSweepSegment(param_1 + 0x60,&temp_v18,&temp_v13);
     temp_v11 = (temp_v13 - temp_v18) * (temp_v13 - temp_v18) +
              (temp_v14 - temp_v19) * (temp_v14 - temp_v19) +
              (temp_v15 - temp_v20) * (temp_v15 - temp_v20);
@@ -236,7 +235,7 @@ void FUN_0036a434(int param_1)
     }
   }
   FUN_0036b824(reinterpret_cast<u32>(&g_localCamera));
-  uiSetFloatPair(&g_localCamera);
+  asdCameraSetStereoDepth(&g_localCamera, 1000.0f, 1.0f);
   stereoCameraSetPerspective(&g_localCamera,1);
   cameraMatrixCacheSetLookAt(&g_localCamera,param_1 + 0x78,param_1 + 0x84,param_1 + 0x54);
   *(unsigned char **)(*(int *)(param_1 + 0x936c) + 0xc) = &g_localCamera;

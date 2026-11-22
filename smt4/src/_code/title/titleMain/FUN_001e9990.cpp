@@ -7,6 +7,7 @@
 #include "code/Code0019_Smt4.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "code/Code0013.h"
+#include "gfx/CameraStereoDepth.h"
 
 extern "C" {
 
@@ -53,7 +54,6 @@ int buttonHelpSetPreset(...);
 int eventQueueAddUnique(...);
 int gxResetUniformQuadColorsAndScale(void);
 int dataTableGet(...);
-int FUN_002c159c(...);
 int stereoCameraSetPerspective(...);
 int FUN_003bc9d0(unsigned int *);
 int VectorSignedToFloat(int, int);
@@ -148,7 +148,6 @@ extern int padIsButtonPressed(unsigned int);
 extern int gameDataBlocksGetSaveData(void);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTableGet. */
-/* Supplied declaration required: FUN_002c159c. */
 /* Supplied declaration required: stereoCameraSetPerspective. */
 /* Supplied declaration required: jobStop. */
 extern unsigned int asdCameraGetSavedRenderPairs(void);
@@ -298,7 +297,7 @@ int FUN_001e9990(unsigned int handle)
     stereoCameraSetPerspective(temp_v6,1);
     temp_v5 = 0x3f800000;
     in_s0 = 5.0f;
-    FUN_002c159c(temp_v6);
+    asdCameraSetStereoDepth((void *)temp_v6, 5.0f, 1.0f);
     FUN_00298d50(temp_v6);
     lightOwnerRegister(puVar13[0x23],1);
     lightOwnerRegister(puVar13[0x24],1);

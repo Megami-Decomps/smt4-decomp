@@ -1,4 +1,6 @@
-/* NON_MATCHING: the retail unit inlines the NintendoWare resource accessors (relative-offset link resolution with null checks) with its own register scheduling; this version resolves the same links through one helper and a pointer-chasing helper, so the instruction count and allocation differ. */
+/* NON_MATCHING: the retail unit inlines the NintendoWare resource accessors (relative-offset links, each resolved
+ * pointer NULL-tested on its own), reloads the scene node chain for every shape (the shape index lives in a stack slot)
+ * and re-reads the vertex stream for the cache flush; this version hoists the chain and keeps the stream pointer. */
 #include "camp/Unite/UniteEffectState.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
@@ -19,7 +21,7 @@ static inline u8 *pointerAt(u8 *base, u32 offset)
 }
 
 extern "C" {
-void FUN_003409f8(void *context, u8 buffer[16], f32 *offset);
+void FUN_003409f8(void *context, f32 *scale, f32 *offset);
 void nw_gfx_res_ResTextureMapper_SetTexture(u32 **mapper, u32 texture);
 
 /* Applies the screen's scroll to the model data it draws with: every selected attribute of the selected
@@ -28,9 +30,9 @@ void nw_gfx_res_ResTextureMapper_SetTexture(u32 **mapper, u32 texture);
 void uniteEffectApplyScrollToModel(UniteRenderTarget *context)
 {
     UniteEffectWork *screen = g_screenStateWork;
-    u8 buffer[16];
+    f32 scale[2];
     f32 offset[2];
-    FUN_003409f8(context, buffer, offset);
+    FUN_003409f8(context, scale, offset);
     u8 *resourceSet = reinterpret_cast<u8 *>(screen->model->node->sceneNode);
     for (s32 i = 0; i < screen->materialSets.shapes.count; i++) {
         u32 *modelTable = relativeLink(reinterpret_cast<u32 *>(pointerAt(resourceSet, 8) + 200));

@@ -1,73 +1,42 @@
-/* NON_MATCHING: readable rebuild of AsdFont's glyph-set load (releases the slot's old font, then wraps the new BFFNT file: finds its FINF block, allocates one texture per glyph sheet and fills them from the sheet table); armcc here lays out the format switch (retail stores the three format words per case) and the loop variables differently. */
+/* NON_MATCHING: 174 lines (78 by shape); the format switch and the texture set-up match. Retail keeps the constant 1
+ * in r7 from before the block walk (the allocation's last argument and the mode-1 store use it), tests the block
+ * signature with `adds` of the negated 'FINF', branches from the unknown-format arm to the shared `return 1`, sets
+ * the release loop's index after its count test (`movne r5, #0`), swaps r1/r2 in the glyph-set lookup and loads the
+ * sheet image pointer before the sheet size (the format in ip, not a VFP register). */
+#include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
-#include "shard/W6_W6Match7_FontResource.h"
-
-/* A BFFNT glyph sheet descriptor (TGLP). */
-struct GlyphSheetInfo {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u32 sheetBytes;
-    /* 0x08 */ u16 sheetCount;
-    /* 0x0A */ u16 format;
-    /* 0x0C */ u8 unk0C[4];
-    /* 0x10 */ u16 width;
-    /* 0x12 */ u16 height;
-    /* 0x14 */ u8 *data;
-};
-
-/* The font info block (FINF) body: its glyph sheet descriptor is the third word. */
-struct FontInfoBody {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ GlyphSheetInfo *sheets;
-};
-
-/* A font object whose second virtual function destroys it. */
-class GlyphFont {
-public:
-    virtual void vfunc00();
-    virtual void destroy();
-};
-
-/* One glyph set of the font table (0x2C bytes). */
-struct GlyphSet {
-    /* 0x00 */ NwFontFileHeader *file;
-    /* 0x04 */ FontInfoBody *info;
-    /* 0x08 */ GlyphFont *font;
-    /* 0x0C */ AsdTexture **textures;
-    /* 0x10 */ u32 sheetCount;
-    /* 0x14 */ u16 format;
-    /* 0x16 */ u8 unk16[2];
-    /* 0x18 */ u32 glFormat;
-    /* 0x1C */ u32 glType;
-    /* 0x20 */ u32 bitsPerTexel;
-    /* 0x24 */ u8 mode;           /* 2 for the 0x6756 format, else 1 */
-    /* 0x25 */ u8 unk25[3];
-    /* 0x28 */ u32 unk28;
-};
-
-struct AsdFontTable {
-    GlyphSet *items;
-    u32 count;
-};
+#include "font/FontStringReader.h"
 
 extern "C" {
-extern AsdFontTable g_asdFontGlyphSets;
+extern FontRecordPool g_asdFontGlyphSets;
 
 AsdTexture *asdTextureCreate(s32 shared);
 void asdTextureRelease(AsdTexture *texture);
 void *asdOperatorNew(u32 bytes);
 void asdMemFree(void *block);
 void *asdMemoryAlloc(s32 heap, s32 alignClass, s32 unk, u32 size, s32 fromFront);
-GlyphFont *FUN_00121e38(void *memory);
+FontGlyphLookup *FUN_00121e38(void *memory); // declcheck: local (the shared declaration takes no storage and returns nothing)
 
-/* Loads font file `file` into glyph set `index`: returns 1 when the slot exists. */
+/* recordTableGet's body: glyph set `index`, or NULL when the table has no such set. */
+static __inline FontRegisteredRecord *glyphSetGet(u32 index)
+{
+    if (g_asdFontGlyphSets.records != NULL && index < g_asdFontGlyphSets.count)
+        return &g_asdFontGlyphSets.records[index];
+    return NULL;
+}
+
+/* Loads font file `file` into glyph set `index`: releases what the set held, creates the font reader over the
+ * file, finds its FINF block and wraps each glyph sheet image in a texture of the sheet's format. Returns 0 when
+ * the table has no such set. */
 u32 asdFontLoadGlyphSet(u32 index, NwFontFileHeader *file)
 {
-    GlyphSet *set = g_asdFontGlyphSets.items != NULL && index < g_asdFontGlyphSets.count ? &g_asdFontGlyphSets.items[index] : NULL;
+    FontRegisteredRecord *set = glyphSetGet(index);
     if (set == NULL)
         return 0;
     if (set->file != NULL) {
         if (set->textures != NULL) {
             for (u32 i = 0; i < set->sheetCount; i++) {
+                /* the pixels belong to the font file, freed below */
                 set->textures[i]->storage.pixels = NULL;
                 asdTextureRelease(set->textures[i]);
             }
@@ -75,7 +44,7 @@ u32 asdFontLoadGlyphSet(u32 index, NwFontFileHeader *file)
             set->textures = NULL;
         }
         if (set->font != NULL) {
-            set->font->destroy();
+            set->font->vtable->lifetime.destroy(set->font);
             set->font = NULL;
         }
         if (set->file != NULL) {
@@ -85,72 +54,74 @@ u32 asdFontLoadGlyphSet(u32 index, NwFontFileHeader *file)
         set->info = NULL;
     }
     set->file = file;
-    void *memory = asdOperatorNew(0x18);
-    GlyphFont *font = NULL;
-    if (memory != NULL)
-        font = FUN_00121e38(memory);
+    FontGlyphLookup *font = (FontGlyphLookup *)asdOperatorNew(0x18);
+    if (font != NULL)
+        font = FUN_00121e38(font);
     set->font = font;
     if (!nw_font_ResFontSetResource((NwResFontBase *)set->font, set->file))
         return 1;
     NwFontFileHeader *header = set->file;
-    u32 *finf = NULL;
-    u32 *block = (u32 *)((u8 *)header + header->headerSize);
+    NwFontInfo *info = NULL;
+    NwFontBlockHeader *block = (NwFontBlockHeader *)((u8 *)header + header->headerSize);
     for (s32 i = 0; i < header->blockCount; i++) {
-        if (block[0] == 0x464E4946)
-            finf = block + 2;
-        block = (u32 *)((u8 *)block + block[1]);
+        if (block->signature == 0x464E4946)  /* 'FINF' */
+            info = (NwFontInfo *)(block + 1);
+        block = (NwFontBlockHeader *)((u8 *)block + block->byteSize);
     }
-    set->info = (FontInfoBody *)finf;
-    GlyphSheetInfo *sheets = set->info->sheets;
-    set->textures = (AsdTexture **)asdMemoryAlloc(0x100, 0x100, 0, (u32)sheets->sheetCount << 2, 1);
+    set->info = info;
+    NwFontSheetInfo *sheets = set->info->sheetInfo;
+    u32 bytes = (u32)sheets->sheetCount << 2;
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Font\\AsdFont.cpp", 269);
+    set->textures = (AsdTexture **)asdMemoryAlloc(0x100, 0x100, 0, bytes, 1);
     set->sheetCount = sheets->sheetCount;
-    set->unk28 = 0;
-    set->format = sheets->format;
-    switch (sheets->format) {
-    case 0:
-        set->glFormat = 0x6752;
-        set->glType = 0x1401;
-        set->bitsPerTexel = 0x20;
+    set->unk28 = 0.0f;
+    set->format = sheets->sheetFormat;
+    /* the GL format, type and texel size of each font sheet format */
+    switch (set->format) {
+    case 11:  /* A4 */
+        set->glFormat = 0x6756;
+        set->glType = 0x6761;
+        set->bitsPerTexel = 4;
         break;
-    case 1:
-        set->glFormat = 0x6754;
-        set->glType = 0x1401;
-        set->bitsPerTexel = 0x18;
-        break;
-    case 2:
-        set->glFormat = 0x6752;
-        set->glType = 0x8034;
-        set->bitsPerTexel = 0x10;
-        break;
-    case 3:
-        set->glFormat = 0x6754;
-        set->glType = 0x8363;
-        set->bitsPerTexel = 0x10;
-        break;
-    case 4:
-        set->glFormat = 0x6752;
-        set->glType = 0x8033;
-        set->bitsPerTexel = 0x10;
-        break;
-    case 5:
-        set->glFormat = 0x6758;
-        set->glType = 0x1401;
-        set->bitsPerTexel = 0x10;
-        break;
-    case 8:
+    case 8:  /* A8 */
         set->glFormat = 0x6756;
         set->glType = 0x1401;
         set->bitsPerTexel = 8;
         break;
-    case 9:
+    case 9:  /* LA4 */
         set->glFormat = 0x6758;
         set->glType = 0x6760;
         set->bitsPerTexel = 8;
         break;
-    case 11:
-        set->glFormat = 0x6756;
-        set->glType = 0x6761;
-        set->bitsPerTexel = 4;
+    case 5:  /* LA8 */
+        set->glFormat = 0x6758;
+        set->glType = 0x1401;
+        set->bitsPerTexel = 16;
+        break;
+    case 4:  /* RGBA4 */
+        set->glFormat = 0x6752;
+        set->glType = 0x8033;
+        set->bitsPerTexel = 16;
+        break;
+    case 2:  /* RGB5A1 */
+        set->glFormat = 0x6752;
+        set->glType = 0x8034;
+        set->bitsPerTexel = 16;
+        break;
+    case 0:  /* RGBA8 */
+        set->glFormat = 0x6752;
+        set->glType = 0x1401;
+        set->bitsPerTexel = 32;
+        break;
+    case 3:  /* RGB565 */
+        set->glFormat = 0x6754;
+        set->glType = 0x8363;
+        set->bitsPerTexel = 16;
+        break;
+    case 1:  /* RGB8 */
+        set->glFormat = 0x6754;
+        set->glType = 0x1401;
+        set->bitsPerTexel = 24;
         break;
     default:
         set->glFormat = 0x6756;
@@ -158,26 +129,25 @@ u32 asdFontLoadGlyphSet(u32 index, NwFontFileHeader *file)
         set->bitsPerTexel = 0;
         return 1;
     }
-    set->mode = set->glFormat != 0x6756 ? 1 : 2;
+    /* A two-way switch, not an if: retail tests the format the arms stored at run time by subtraction (`sub; subs`)
+     * and keeps each arm's three stores; any if or ternary spelling lets armcc thread the test into the nine arms and
+     * merge their stores into stm (shape 78 against 195 in IV, 106 against 223 in Apocalypse). Still NON_MATCHING. */
+    switch (set->glFormat) {
+    case 0x6756:
+        set->mode = 2;
+        break;
+    default:
+        set->mode = 1;
+        break;
+    }
     u32 offset = 0;
     for (u32 i = 0; i < set->sheetCount; i++) {
         AsdTexture *texture = asdTextureCreate(0);
         set->textures[i] = texture;
-        u8 *data = sheets->data;
-        u16 width = sheets->width;
-        u16 height = sheets->height;
-        texture->image.mip.level = 0;
-        texture->dimensions.width = width;
-        texture->dimensions.height = height;
-        texture->image.format = set->glFormat;
-        texture->target = ASDTEXTURE_TARGET_2D;
-        texture->heap = 0x10000;
-        texture->image.flags = 0x2000000;
-        texture->image.type = set->glType;
-        texture->storage.pixels = data + offset;
-        texture->storage.bytes = sheets->sheetBytes;
+        asdTextureDescribeImage(texture, sheets->sheetWidth, sheets->sheetHeight, set->glFormat, set->glType,
+                                sheets->sheetImage + offset, sheets->sheetSize);
         asdTextureSetImage(texture);
-        offset += sheets->sheetBytes;
+        offset += sheets->sheetSize;
     }
     return 1;
 }

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W5_W5Match8_CameraTransition.h"
+#include "gfx/CameraStereoDepth.h"
 
 namespace {
 struct CameraBlendFrameView {
@@ -13,7 +14,6 @@ struct CameraBlendFrameView {
 extern "C" {
 
 int CONCAT44(...);
-int uiSetFloatPair(...);
 int cameraMatrixCacheSetLookAt(...);
 int mathSinCos(...);
 int FUN_00280070(...);
@@ -125,7 +125,6 @@ static float romwright_sqrt_4(float value)
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Supplied declaration required: uiSetFloatPair. */
 /* Supplied declaration required: cameraMatrixCacheSetLookAt. */
 extern unsigned int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: mathSinCos. */
@@ -625,10 +624,10 @@ LAB_004f33d8:
     temp_v28 = temp_v0;
     temp_v32 = temp_v0;
     if (((unsigned int)param_1[0x193] & 0xc000000) != 0) {
-      uiSetFloatPair(param_1 + 0x1b);
+      asdCameraSetStereoDepth(param_1 + 0x1b, param_1[0x15f], 1.0f);
     }
     else {
-      uiSetFloatPair(param_1 + 0x1b);
+      asdCameraSetStereoDepth(param_1 + 0x1b, param_1[0x15e], 1.0f);
     }
     temp_v47 = param_1[0x16f] + param_1[0x20c];
     pfStack_11c = &temp_v45;

@@ -3,9 +3,9 @@
 #include "code/Code0015.h"
 #include "title/titleMain.h"
 #include "gfx/ControllerModel.h"
+#include "gfx/CameraStereoDepth.h"
 
 extern "C" {
-void uiSetFloatPair(void *owner, f32 first, f32 second);
 u8 lookupNameEntry(NpcDummyModel *model, const char *name, MapVector *position);
 
 static __inline void npcModelClearFlag(NpcDummyModel *model, u32 mask)
@@ -22,7 +22,7 @@ void npcDummyBindingsBindPositions(NpcDummyBindings *bindings)
     if (!bindings->initialized) {
         if (bindings->mode == 1) {
             void *owner = reinterpret_cast<void *>(asdCameraGetSavedRenderPairs());
-            uiSetFloatPair(owner, 0.25f, 0.3f);
+            asdCameraSetStereoDepth(owner, 0.25f, 0.3f);
             FUN_0036b824(reinterpret_cast<u32>(owner));
         }
         bindings->initialized = 1;

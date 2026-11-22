@@ -17,7 +17,7 @@ int wstrlenU16(...);
 int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
 int asdOperatorNewE(...);
 int textExpandSingleByteGlyphs(...);
-int FUN_00426eb8(...);
+int aocItemAttributeLabel(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int textConvertToBoundedWide(...);
 int FUN_004749a0(...);
 int table30GetEntry(unsigned char [56], unsigned int, unsigned int);
@@ -75,7 +75,7 @@ extern int legacyResourceIdRemap(int);
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: asdOperatorNewE. */
 /* Supplied declaration required: textExpandSingleByteGlyphs. */
-/* Supplied declaration required: FUN_00426eb8. */
+/* Supplied declaration required: aocItemAttributeLabel. */
 extern unsigned int halfPair48LowByteA(int);
 extern unsigned int halfPair48LowByteB(int);
 /* Supplied declaration required: textConvertToBoundedWide. */
@@ -259,7 +259,7 @@ int FUN_004760bc(int param_1)
       }
       temp_v3 = halfPair48LowByteB(temp_v5 + 0x28);
       temp_v4 = halfPair48LowByteA(temp_v5 + 0x28);
-      FUN_00426eb8(&temp_v33,0,temp_v4,temp_v3);
+      aocItemAttributeLabel(&temp_v33,0,temp_v4,temp_v3);
       temp_v23 = temp_v33;
       uStack_1bf4 = uStack_1ab4;
       uStack_1bf0 = uStack_1ab0;
@@ -287,7 +287,7 @@ int FUN_004760bc(int param_1)
       }
       temp_v3 = halfPair48LowByteB(temp_v5 + 0x28);
       temp_v4 = halfPair48LowByteA(temp_v5 + 0x28);
-      FUN_00426eb8(&temp_v31,2,temp_v4,temp_v3);
+      aocItemAttributeLabel(&temp_v31,2,temp_v4,temp_v3);
       temp_v25 = temp_v31;
       uStack_1bb4 = uStack_1af4;
       uStack_1bb0 = uStack_1af0;
@@ -316,7 +316,7 @@ int FUN_004760bc(int param_1)
       sysMemClear(temp_v41,0x800);
       temp_v3 = halfPair48LowByteB(temp_v5 + 0x28);
       temp_v4 = halfPair48LowByteA(temp_v5 + 0x28);
-      FUN_00426eb8(&temp_v27,3,temp_v4,temp_v3);
+      aocItemAttributeLabel(&temp_v27,3,temp_v4,temp_v3);
       temp_v23 = temp_v27;
       uStack_1bf4 = uStack_1b74;
       uStack_1bf0 = uStack_1b70;
@@ -397,7 +397,7 @@ int FUN_004760bc(int param_1)
       *(unsigned char *)(temp_v6 + 0x180) = 0xff;
       temp_v3 = halfPair48LowByteB(temp_v5 + 0x28);
       temp_v4 = halfPair48LowByteA(temp_v5 + 0x28);
-      FUN_00426eb8(&temp_v23,5,temp_v4,temp_v3);
+      aocItemAttributeLabel(&temp_v23,5,temp_v4,temp_v3);
       temp_v29 = temp_v23;
       uStack_1b34 = uStack_1bf4;
       uStack_1b30 = uStack_1bf0;

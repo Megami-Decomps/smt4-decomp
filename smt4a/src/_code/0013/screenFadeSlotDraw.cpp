@@ -6,8 +6,6 @@
 extern "C" {
 extern W6Match3SlotState g_screenFadeSlots[2];
 u32 renderCtxPackPassFlags(u32 kind, bool enabled);
-u32 asdGxPresetsGetByKind(u32 kind);
-u32 asdGxPresetsGetHeightByKind(u32 kind);
 
 // Draw the requested fade slot's color over the full selected render target.
 void screenFadeSlotDraw(s32 index)

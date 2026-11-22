@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00330108(float *, float *, float *);
-int FUN_00376c64(void);
+int lmapCameraRecentreStep(void);
 
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
@@ -1451,7 +1451,7 @@ joined_r0x00397538:
     }
     break;
   case 0x1f:
-    FUN_00376c64();
+    lmapCameraRecentreStep();
     break;
   case 0x20:
     temp_v9 = g_lmapView[1];

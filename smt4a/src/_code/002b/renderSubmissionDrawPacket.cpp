@@ -9,7 +9,7 @@ extern "C" {
 s32 renderCtxPackPassFlags(u32 first, u32 second); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void FUN_002b358c(u32 shape);
 void camSetMatrixB(RenderCtxA *context, const nw::math::MTX44 *matrix);
-void FUN_002ff8e8(u32 argument);
+void renderCtxSelectBlendPreset(u32 argument);
 void primitiveSourceBuildBatch(u32 source);
 void renderCtxResetColorScale(RenderCtxA *context);
 void skinObjectUpdateMatrices(RenderCtxA *context); // declcheck: local (the shared declaration does not compile here or changes this unit)
@@ -40,7 +40,7 @@ void renderSubmissionDrawPacket(RenderSubmissionPacket *job, u32 argument)
     FUN_00409c60(g_renderCtx, job->tint[0] * byteToUnit * byteToUnit,
                  job->tint[1] * byteToUnit * byteToUnit, job->tint[2] * byteToUnit * byteToUnit,
                  job->tint[3] * byteToUnit * byteToUnit);
-    FUN_002ff8e8(argument);
+    renderCtxSelectBlendPreset(argument);
     if (job->pending != 0) {
         job->pending = 0;
     }

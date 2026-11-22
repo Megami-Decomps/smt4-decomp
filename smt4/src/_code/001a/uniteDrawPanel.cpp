@@ -64,7 +64,7 @@ extern "C" s32 uniteDrawPanel(u32)
         s32 x = vec2GetXInt(&work->sprites.open);
         s32 y = vec2GetYInt(&work->sprites.open);
         FUN_001dddd8(x, y, 0);
-        FUN_001f1bc4(x, y);
+        uniteFilterValueListDraw(x, y);
         x += vec2GetXInt(&work->sprites.listOffset);
         y += vec2GetYInt(&work->sprites.listOffset);
         uiDrawListScrollBar(&work->selectionListsIV.partnerList, x, y,

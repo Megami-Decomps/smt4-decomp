@@ -1,4 +1,3 @@
-/* NON_MATCHING: readable rebuild of the main-partner select menu's state machine (draft args completed from the surrounding calls: the entry index passed to the script start, the destroyed script and the lost return of padQueryLogicalKey); armcc here shares the state-store tail and the script reload differently. */
 #include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "shard/Shard0031.h"
@@ -33,6 +32,7 @@ struct PartnerMenuFull {
 extern "C" {
 extern s8 g_callbackOwnerSlots;
 
+
 s32 FUN_004be1c8(PartnerMenuFull *menu);
 s32 partnerMenuUpdateList(PartnerMenuFull *menu);
 s32 partnerMenuUpdateStatusPage(PartnerMenuFull *menu);
@@ -51,6 +51,9 @@ void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
 void gameGlobalsSetOverlayActive(s32 flag);
 void statusPanelClose(void);
 
+/* The confirm script's entry name. */
+static const char s_setMainPartnerEntry[] = "SetMainPartner2";
+
 /* Steps the partner select menu: hands the list and confirm states to their handlers and runs the
  * confirm/cancel scripts. Always returns 0. */
 u32 FUN_004be608(PartnerMenuFull *menu)
@@ -62,15 +65,14 @@ u32 FUN_004be608(PartnerMenuFull *menu)
     case 2:
         gameGlobalsSetMenuOpenFlag(1);
         uiSpriteAdvanceAnimation((UiSpriteState *)menu->panel, 1.0f);
-        if (menu->panelClosed != 0) {
+        if (uiSpriteGetCompletionState((const UiSpriteState *)menu->panel) != 0) {
             gameGlobalsSetMenuOpenFlag(0);
             menu->state = menu->returnState;
-            if (menu->state == 3)
+            if (menu->state == 3) {
                 menu->mode = 1;
-            else if (menu->state == 4)
+            } else if (menu->state == 4) {
                 menu->mode = 2;
-            else
-                return 0;
+            }
         }
         break;
     case 3:
@@ -80,48 +82,47 @@ u32 FUN_004be608(PartnerMenuFull *menu)
         partnerMenuUpdateStatusPage(menu);
         break;
     case 5:
-        if (scrRunOpcodesStub(menu->script) != 2)
-            return 0;
-        if (menu->fromTitle == 1)
-            messageBannerRestartOrClear();
-        if (messageMainGetValue() != 0) {
-            if (menu->fromTitle != 1) {
+        if (scrRunOpcodesStub(menu->script) == 2) {
+            if (menu->fromTitle == 1) {
+                messageBannerRestartOrClear();
+            }
+            if (messageMainGetValue() == 0) {
+                menu->state = 6;
+            } else if (menu->fromTitle == 1) {
+                menu->state = 9;
+                sysPlaySe(0x11F);
+            } else {
                 menu->state = 3;
                 gameGlobalsSetMenuOpenFlag(0);
                 sysPlaySe(0xF0);
-                return 0;
             }
-            menu->state = 9;
-            sysPlaySe(0x11F);
-            return 0;
         }
-        menu->state = 6;
         break;
     case 6: {
         u8 *devil = (u8 *)partyGetSlot(*(u32 *)((u8 *)menu + 0x2C4 + menu->cursor * 4) & 0xFFFF);
-        if (devil == NULL)
-            return 0;
-        saveSlotTableSetPreferredId(*(u16 *)(devil + 300));
-        menu->shownDevil = menu->cursor;
-        FUN_0035d03c(0);
-        if (menu->fromTitle == 1) {
-            menu->state = 11;
-        } else {
-            gameGlobalsSetMenuOpenFlag(0);
-            sysPlaySe(0x11B);
-            menu->state = 3;
+        if (devil != NULL) {
+            saveSlotTableSetPreferredId(*(u16 *)(devil + 300));
+            menu->shownDevil = menu->cursor;
+            FUN_0035d03c(0);
+            if (menu->fromTitle == 1) {
+                menu->state = 11;
+            } else {
+                gameGlobalsSetMenuOpenFlag(0);
+                sysPlaySe(0x11B);
+                menu->state = 3;
+            }
         }
         break;
     }
     case 7:
-        if (scrRunOpcodesStub(menu->script) != 2)
-            return 0;
-        if (messageMainGetValue() != 0) {
-            menu->state = 3;
-            sysPlaySe(0xF0);
-            return 0;
+        if (scrRunOpcodesStub(menu->script) == 2) {
+            if (messageMainGetValue() != 0) {
+                menu->state = 3;
+                sysPlaySe(0xF0);
+            } else {
+                menu->state = 8;
+            }
         }
-        menu->state = 8;
         break;
     case 8:
         saveSlotTableSetPreferredId(0);
@@ -130,35 +131,47 @@ u32 FUN_004be608(PartnerMenuFull *menu)
         sysPlaySe(0xF0);
         menu->state = 3;
         break;
+    case 13:
+        if (menu->fromTitle != 1) {
+            gameGlobalsSetOverlayActive(0);
+            statusPanelClose();
+        }
+        if (menu->script != NULL) {
+            scrScriptProcessDestroy(menu->script);
+            menu->script = NULL;
+        }
+        gameGlobalsSetMenuOpenFlag(g_callbackOwnerSlots);
+        menu->state = 0;
+        break;
     case 9:
         gridNavigationHandleConfirm(menu->list, 1);
-        menu->selection = listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(menu->list));
+        menu->selection = listCursorGetRowIfUnblocked((const Object *)menu->list);
         menu->cursor = menu->selection;
         if (padQueryLogicalKey(0, 1) != 0) {
             dialogClose(1);
             eventQueueAddUniqueIfValid(0x100020E);
             menu->state = 10;
             menu->returnState = 6;
-            s32 entry = tableGroupFindEntryIndex(menu->scriptTable, "SetMainPartner2");
-            if (entry >= 0)
+            s32 entry = tableGroupFindEntryIndex(menu->scriptTable, s_setMainPartnerEntry);
+            if (entry >= 0) {
                 scrScriptProcessStartEntry(menu->script, entry);
+            }
         }
         break;
     case 10:
-        if (scrRunOpcodesStub(menu->script) != 2)
-            return 0;
-        messageBannerRestartOrClear();
-        menu->state = menu->returnState;
+        if (scrRunOpcodesStub(menu->script) == 2) {
+            messageBannerRestartOrClear();
+            menu->state = menu->returnState;
+        }
         break;
     case 11:
-    case 13:
         if (menu->fromTitle != 1) {
             gameGlobalsSetOverlayActive(0);
             statusPanelClose();
         }
-        if (menu->script != 0) {
+        if (menu->script != NULL) {
             scrScriptProcessDestroy(menu->script);
-            menu->script = 0;
+            menu->script = NULL;
         }
         gameGlobalsSetMenuOpenFlag(g_callbackOwnerSlots);
         menu->state = 0;

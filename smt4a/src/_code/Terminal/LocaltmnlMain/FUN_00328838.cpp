@@ -5,6 +5,7 @@
 #include "gfx/CameraAnimationApply.h"
 #include "title/titleMain.h"
 #include "code/Code0013_Smt4a.h"
+#include "gfx/CameraStereoDepth.h"
 
 extern "C" {
 
@@ -64,7 +65,6 @@ int linkHolderSetFlag(...);
 
 int asdLoadFileWithSize(...);
 int asdCameraInitializeDefaults(...);
-int uiSetFloatPair(...);
 int cameraMatrixCacheSetLookAt(...);
 int stereoCameraSetPerspective(...);
 int asdOperatorNew(void);
@@ -127,7 +127,6 @@ extern unsigned int DAT_005f1b7c; /* 0x5f1b7c */
 /* Supplied declaration required: asdCameraInitializeDefaults. */
 /* Supplied declaration required: screenFadeStartIn. */
 extern int pairedAvailabilityGetState(unsigned int);
-/* Supplied declaration required: uiSetFloatPair. */
 /* Supplied declaration required: cameraMatrixCacheSetLookAt. */
 /* Supplied declaration required: padQueryLogicalKey. */
 /* Supplied declaration required: stereoCameraSetPerspective. */
@@ -272,7 +271,7 @@ unsigned int FUN_00328838(void)
       cameraAnimationSampleAndAdvance(temp_v4,&temp_v9,0);
     }
     *(int *)(temp_v0 + 0x3c) = *(int *)(temp_v0 + 0x3c) + 1;
-    uiSetFloatPair(temp_v0 + 0x40);
+    asdCameraSetStereoDepth((void *)(temp_v0 + 0x40), 5.0f, 1.0f);
     cameraMatrixCacheSetLookAt(temp_v0 + 0x40,&temp_v9,temp_v10,temp_v11);
     stereoCameraSetPerspective(temp_v0 + 0x40,1);
     temp_v4 = 0;
@@ -369,7 +368,7 @@ unsigned int FUN_00328838(void)
       cameraAnimationSampleAndAdvance(temp_v6,&temp_v9,0);
     }
     *(int *)(temp_v4 + 0x3c) = *(int *)(temp_v4 + 0x3c) + 1;
-    uiSetFloatPair(temp_v4 + 0x40);
+    asdCameraSetStereoDepth((void *)(temp_v4 + 0x40), 5.0f, 1.0f);
     cameraMatrixCacheSetLookAt(temp_v4 + 0x40,&temp_v9,temp_v10,temp_v11);
     stereoCameraSetPerspective(temp_v4 + 0x40,1);
     FUN_0036b824(temp_v4 + 0x40);

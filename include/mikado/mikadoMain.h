@@ -52,6 +52,7 @@ struct MikadoRouteActorA {
 class MikadoTalkWorkA {
 public:
     static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
+    static void *operator new(u32 bytes, void *owner) throw() { return asdOperatorNew(bytes, owner); }
     static void operator delete(void *block);
     /* 0x000 */ s32 nodeCount;
     /* 0x004 */ s32 selectedNode;

@@ -12,7 +12,7 @@
 extern "C" {
 
 int textDrawRangeFaded(...);
-void FUN_00289418(int x, int y, float alpha);
+void statusDownDrawCardRow(int x, int y, float alpha);
 
 int dataFindKindRecordWithAocOverrides(...);
 int textDrawString(...);
@@ -530,7 +530,7 @@ LAB_0026b644:
       temp_v11 = temp_v11 + 1;
     } while (temp_v11 < 3);
     efctSetSpeed();
-    FUN_00289418(temp_v0,temp_v1,bannerAlpha);
+    statusDownDrawCardRow(temp_v0,temp_v1,bannerAlpha);
   }
   return 0;
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: item detail panel draw; the call sequence follows retail (speed is forwarded to every callee) but the kind switch, the sound guard and the saved registers differ */
+/* NON_MATCHING: 86 lines (161 vs 163 rows): elementMessageGroup switch (0..9), dataTable10FindValue guard, shared drawNoticeHeader helper, and 64-byte label buffer match retail (exact push {r4..fp, lr} and 92-byte frame); x/y register swap (r6/r7) and stack-arg stm grouping differ. */
 #include "common.h"
 #include <stdio.h>
 #include "text/TextDraw.h"
@@ -34,45 +34,58 @@ void FUN_003f757c(DetailPanel *panel, s32 x, s32 y, u32 layer, const char *text,
 #define DETAIL_KIND_NO_VALUE 10
 #define DETAIL_STEREO_SCALE 0.26f
 
+/* Message group id for a record category, or -1 when it has none (same table as FUN_003f6424 and FUN_003f74a8). */
+static __inline s32 elementMessageGroup(u32 kind)
+{
+    s32 id;
+    switch (kind) {
+    case 0: id = 0xAE; break;
+    case 1: id = 0xB2; break;
+    case 2: id = 0xB0; break;
+    case 3: id = 0xB1; break;
+    case 4: id = 0xB3; break;
+    case 5: id = 5; break;
+    case 6: id = 0xBA; break;
+    case 7: id = 0xB9; break;
+    case 8: id = 0xAF; break;
+    case 9: id = 0xBB; break;
+    default: id = DETAIL_KIND_NONE_SOUND; break;
+    }
+    return id;
+}
+
+/* Draws the notice header text with stereo parallax (same operation as sibling FUN_003f78f8). */
+static __inline void drawNoticeHeader(s32 x, s32 y, s32 sprite, const char *text, u32 color, f32 speed)
+{
+    s32 stereo = (s32)renderCtxCalculateStereoParallax(g_renderCtx, DETAIL_STEREO_SCALE);
+    efctSetSpeed(speed);
+    TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x31, sprite);
+    fontMeasureLineAdvance(text, 3);
+    textDrawString((f32)(frame->x + (x + stereo)), (f32)(frame->y + y), 0.15625f, 3, 0.0f, color, speed, text);
+}
+
 /* Draws the detail panel of the selected item: its kind sound and frame, the name and the kind
  * icon. */
 void FUN_003f7674(DetailPanel *panel, s32 x, s32 y, f32 speed)
 {
     u32 kind = panel->item->kindAndValue >> 8;
-    s32 sound;
-    switch (kind) {
-    case 0: sound = 0xAE; break;
-    case 1: sound = 0xB2; break;
-    case 2: sound = 0xB0; break;
-    case 3: sound = 0xB1; break;
-    case 4: sound = 0xB3; break;
-    case 5: sound = 5; break;
-    case 6: sound = 0xBA; break;
-    case 7: sound = 0xB9; break;
-    case 8: sound = 0xAF; break;
-    case 9: sound = 0xBB; break;
-    default: sound = DETAIL_KIND_NONE_SOUND; break;
+    s32 sound = elementMessageGroup(kind);
+    if (sound >= 0 && kind != DETAIL_KIND_SPECIAL) {
+        dataTable10FindValue((u16)sound);
     }
-    if (sound >= 0 && kind != DETAIL_KIND_SPECIAL)
-        dataTable10FindValue(sound & 0xFFFF);
 
     FUN_003f707c(panel, x, y, 0xD3, 0x3E, 0x47, 0x4C, 0x4F, speed);
-    char *name = panel->item->name;
-    s32 stereo = (s32)renderCtxCalculateStereoParallax(g_renderCtx, DETAIL_STEREO_SCALE);
-    efctSetSpeed(speed);
-    TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x31, 0x46);
-    fontMeasureLineAdvance(name, 3);
-    s32 nameX = frame->x + x + stereo;
-    textDrawString((f32)nameX, (f32)(frame->y + y), 0.15625f, 3, 0.0f, 0xFF, speed, name);
+    drawNoticeHeader(x, y, 0x46, panel->item->name, 0xFF, speed);
 
-    char label[76];
+    char label[64];
     sprintf(label, "%s", FUN_003f74a8(panel, panel->item));
     FUN_003f757c(panel, x, y, 0xD8, label, 0x4B, 0x4A, 1, 0, speed);
     u16 value = panel->item->kindAndValue;
-    if (value >> 8 == DETAIL_KIND_NO_VALUE)
+    if (value >> 8 == DETAIL_KIND_NO_VALUE) {
         value = 0;
-    else
+    } else {
         value = value & 0xFF;
+    }
     FUN_003f533c(panel, x, y, 0xD8, value, 0x78, 0x79, 0x7A, 0xA6D2E3FF, 0, speed);
     uiDrawStereoKindIcon(panel, x, y, 0xD8, panel->item->kindAndValue >> 8, 0x4A, speed);
     efctSetSpeed(1.0f);

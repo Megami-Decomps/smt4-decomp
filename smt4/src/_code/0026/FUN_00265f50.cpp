@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "script/scrScriptProcess.h"
+#include "gfx/CameraStereoDepth.h"
 
 extern "C" {
 
@@ -10,10 +11,9 @@ int residentApplyFallbackValues(void);
 int __hardfp_atan2f(void);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "libm_sinf" has "C" linkage)
 int libm_sinf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
-int FUN_002c159c(unsigned char *);
 int stereoCameraSetPerspective(unsigned char *, int);
 int cameraMatrixCacheSetLookAt(unsigned char *, int, int, int);
-int FUN_002fcae0(int, float *, float *);
+int mapCollisionSweepSegment(int, float *, float *);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -45,10 +45,9 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_00298d50. */
-/* Supplied declaration required: FUN_002c159c. */
 /* Supplied declaration required: stereoCameraSetPerspective. */
 /* Supplied declaration required: cameraMatrixCacheSetLookAt. */
-/* Supplied declaration required: FUN_002fcae0. */
+/* Supplied declaration required: mapCollisionSweepSegment. */
 
 
 void FUN_00265f50(int param_1)
@@ -125,7 +124,7 @@ void FUN_00265f50(int param_1)
      (((((*(int *)(param_1 + 0x40) != 0x65 || ((int)temp_v10 + 0x39d8cfffU >= 0xf9fff)) ||
         ((unsigned int)in_s16 >= 0xc62be000)) || (0xc61ab000 >= (unsigned int)in_s16)) &&
       (temp_v0 = *(int *)(param_1 + 0xcc), !((temp_v0 == 4 || temp_v0 == 5) || temp_v0 == 6))))) {
-    FUN_002fcae0(param_1 + 0x60,&temp_v16,&temp_v11);
+    mapCollisionSweepSegment(param_1 + 0x60,&temp_v16,&temp_v11);
     temp_v9 = (temp_v11 - temp_v16) * (temp_v11 - temp_v16) +
              (temp_v12 - temp_v17) * (temp_v12 - temp_v17) +
              (temp_v13 - temp_v18) * (temp_v13 - temp_v18);
@@ -224,7 +223,7 @@ void FUN_00265f50(int param_1)
     }
   }
   FUN_00298d50(reinterpret_cast<u32>(&g_fixedCamera));
-  FUN_002c159c(&g_fixedCamera);
+  asdCameraSetStereoDepth(&g_fixedCamera, 1000.0f, 1.0f);
   stereoCameraSetPerspective(&g_fixedCamera,1);
   cameraMatrixCacheSetLookAt(&g_fixedCamera,param_1 + 0x78,param_1 + 0x84,param_1 + 0x54);
   temp_v0 = g_mapCamera;

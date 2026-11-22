@@ -32,7 +32,7 @@ void FUN_003699e4();
 void lmapApplyAreaHandleVisibility();
 void FUN_003ca5a4();
 void lmapInitializeActorHandles();
-void FUN_0036aa04(LmapMainStateA *);
+void followerDisplayUpdate(LmapMainStateA *);
 void controllerUpdateWithIdleTimer(LmapObj *);
 void FUN_00297c3c();
 void FUN_00234b30();
@@ -86,7 +86,7 @@ void lmapInitializeArea(u32 area, u32 spawnId)
             handle->owner->flags &= ~3u;
     }
     g_gameState.loading = 0;
-    FUN_0036aa04(state);
+    followerDisplayUpdate(state);
     controllerUpdateWithIdleTimer(&state->obj);
     FUN_00297c3c();
     FUN_00234b30();

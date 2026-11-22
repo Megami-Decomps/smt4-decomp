@@ -4,11 +4,11 @@
 #include "AsdSDK/AsdLoadFileSyncDefault.h"
 #include "title/titleMain.h"
 #include "shard/W6_W6Match3_EffectColor.h"
+#include "gfx/CameraStereoDepth.h"
 
 extern "C" {
 extern const char DAT_0053295c[];
 MoveCameraResource *_ZN9Obj557af8C1EPK21AsdAnimCameraResource(MoveCameraResource *resource, void *data);
-void uiSetFloatPair(ManagedCamera *camera, f32 distance, f32 scale);
 void cameraMatrixCacheSetLookAt(ManagedCamera *camera, const Vec3f *eye, const Vec3f *target, const Vec3f *up);
 void stereoCameraSetPerspective(ManagedCamera *camera, u32 pivot, f32 fieldOfView, f32 nearClip, f32 farClip, f32 aspect);
 
@@ -42,7 +42,7 @@ void moveCameraCtrlLoadTrack(MoveCameraCtrlWork *work, const char *name)
     work->farClip = 10000.0f;
     vec3Set(&work->up, 0.0f, 1.0f, 0.0f);
     work->distance = 5.0f;
-    uiSetFloatPair(&work->camera, 5.0f, 1.0f);
+    asdCameraSetStereoDepth(&work->camera, 5.0f, 1.0f);
     cameraMatrixCacheSetLookAt(&work->camera, &work->eye, &work->target, &work->up);
     stereoCameraSetPerspective(&work->camera, 1, work->fieldOfView, work->nearClip, work->farClip, 1.6666666f);
     FUN_0036b824(reinterpret_cast<u32>(&work->camera));

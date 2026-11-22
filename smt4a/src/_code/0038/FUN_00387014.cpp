@@ -6,7 +6,7 @@ extern "C" {
 void FUN_00386720(void);
 void FUN_003401a4(LmapMainStateA *state);
 void FUN_0036a434(LmapMainStateA *state);
-void FUN_0036aa04(LmapMainStateA *state);
+void followerDisplayUpdate(LmapMainStateA *state);
 void FUN_00297c3c(void);
 void FUN_00234b30(void);
 void FUN_002737a8(void);
@@ -25,7 +25,7 @@ void FUN_00387014(void)
         }
     }
     FUN_0036a434(state);
-    FUN_0036aa04(state);
+    followerDisplayUpdate(state);
     FUN_00297c3c();
     FUN_00234b30();
     FUN_002737a8();
