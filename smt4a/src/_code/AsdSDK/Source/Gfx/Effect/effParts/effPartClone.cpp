@@ -50,7 +50,7 @@ void effPartInitDefaults(void *part);
 void skelNodePoseChain(EffPartList *part, const EffOrientation *orientation);
 void effectTimelinePartApplyRotation(EffPartList *part, const EffOrientation *orientation);
 void effectParticleEmitterSetAdvance(EffPartList *part, f32 scale);
-void FUN_001b4c1c(EffPartList *part, s32 value);
+void effectTimelinePartApplyTint(EffPartList *part, s32 value);
 
 /* Create an empty part (the body of effPartCreate). */
 static inline EffPartList *effPartNew(void)
@@ -116,7 +116,7 @@ EffPartList *effPartClone(EffPartList *source)
     skelNodePoseChain(part, &orientation);
     effectTimelinePartApplyRotation(part, &orientation);
     effectParticleEmitterSetAdvance(part, unitScale);
-    FUN_001b4c1c(part, -1);
+    effectTimelinePartApplyTint(part, -1);
     return part;
 }
 

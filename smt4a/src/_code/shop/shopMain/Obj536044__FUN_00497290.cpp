@@ -1,55 +1,16 @@
-/* NON_MATCHING: armcc places the first camera-height else arm (tab 3) after the repeat-right test instead of right behind the call; every other instruction matches */
-#include "common.h"
-#include <stddef.h>
+#include "classes/Obj536044.h"
 #include "network/DataStore/DataStoreMain.h"
 #include "Model/MoriModelManager.h"
 #include "Model/MoriModelContent.h"
 #include "gfx/ControllerModel.h"
-
-#define SHOP_TAB_NONE 7
-
-/* The shop screen's work area (Apocalypse); only the fields this update reads. */
-struct ShopScreen {
-    /* 0x00000 */ u8 unk00000[4];
-    /* 0x00004 */ u32 state;
-    /* 0x00008 */ u32 substate;
-    /* 0x0000c */ u8 unk0000c[4];
-    /* 0x00010 */ u32 prevState;
-    /* 0x00014 */ u8 unk00014[4];
-    /* 0x00018 */ u8 locked;
-    /* 0x00019 */ u8 unk00019[9];
-    /* 0x00022 */ u8 unk22;
-    /* 0x00023 */ u8 unk00023[0x3a9];
-    /* 0x003cc */ u8 sprites[0x774];
-    /* 0x00b40 */ u32 tab;
-    /* 0x00b44 */ u8 unk00b44[0x154e4];
-    /* 0x16028 */ MoriModelContent *cursor;
-    /* 0x1602c */ s16 prevRecord;
-    /* 0x1602e */ s16 nextRecord;
-};
-
-/* For each tab, the tab the left/right buttons lead to; tabs 0 and 3 have locked alternatives. */
-struct ShopTabNeighbors {
-    struct {
-        u32 left;
-        u32 right;
-    } tab[8];
-    u32 tab0Left;
-    u32 tab0Right;
-    u32 tab3Left;
-    u32 tab3Right;
-};
-
-typedef char ShopScreenLayoutCheck[offsetof(ShopScreen, tab) == 0xb40 && offsetof(ShopScreen, sprites) == 0x3cc &&
-    offsetof(ShopScreen, cursor) == 0x16028 && offsetof(ShopScreen, nextRecord) == 0x1602e ? 1 : -1];
+#include "code/Code0049_Smt4a.h"
+#include "gamedata/GameDataAccess.h"
+#include "camp/CampMenuEntry.h"
 
 extern "C" {
 
-s32 gameFlagIsSet(u32 id);
-s32 recordGetModeForId(s32 id);
 void gameSetStatusCameraHeightMode(s32 mode);
-void FUN_004954e8(ShopScreen *shop);
-void messageChoiceShowCurrent(ShopScreen *shop);
+void messageChoiceShowCurrent(Obj536044 *shop);
 s32 inputIsQuestRepeatRight(void);
 s32 FUN_004d0494(void);
 s32 inputIsQuestCancelPressed(void);
@@ -59,122 +20,127 @@ void statusCameraRestore(s32 a);
 void sendEvent1000210(void);
 void sendEvent100020F(void);
 void sendEvent100020E(void);
-void FUN_004964e0(ShopScreen *shop, s32 a);
-void uiSpriteBankApplyPreset(void *sprites, s32 preset);
-void FUN_0049af90(ShopScreen *shop);
-void menuOpenCommandList(ShopScreen *shop);
-void FUN_00498de0(ShopScreen *shop);
+void FUN_004964e0(Obj536044 *shop, s32 a);
+void uiSpriteBankApplyPreset(SpritePresetBank *bank, u32 preset);
+void FUN_0049af90(Obj536044 *shop);
+void menuOpenCommandList(Obj536044 *shop);
 
-extern ShopTabNeighbors g_shopTabNeighbors;
+extern ShopSlotNeighbors g_shopTabNeighbors; /* 0x588f28 */
 
-/* Tabs 3-5 each keep a marker that is cleared when the tab is left. */
-static __inline void shopClearTabMarker(ShopScreen *shop)
+} /* extern "C" */
+
+/* Per-frame update of the shop's equipment pages: slot switching and the menu/cancel buttons. */
+void Obj536044::FUN_00497290()
 {
-    if (shop->tab == 3) {
-        FUN_0038b57c(0);
-    }
-    if (shop->tab == 4) {
-        FUN_0038b57c(1);
-    }
-    if (shop->tab == 5) {
-        FUN_0038b57c(2);
-    }
-}
-
-/* Per-frame update of the shop's tab screen: tab switching and the menu/cancel buttons. */
-void _ZN9Obj53604412FUN_00497290Ev(ShopScreen *shop)
-{
-    s32 mode;
-
-    if (shop->tab != SHOP_TAB_NONE) {
+    if (slot != SHOP_SLOT_ITEMS) {
         if (objBStateAllowsAction() == 0) {
             return;
         }
-        if (shop->cursor != NULL) {
-            if (moriModelContentIsLoaded(shop->cursor) == 0) {
+        if (resource != NULL) {
+            if (moriModelContentIsLoaded(resource) == 0) {
                 return;
             }
-            if (shop->cursor->body == NULL) {
-                Obj557b18 *model;
-
-                moriModelContentLoadBody(shop->cursor, 0);
-                model = shop->cursor->body;
+            if (resource->body == NULL) {
+                moriModelContentLoadBody(resource, 0);
+                Obj557b18 *model = resource->body;
                 handleRegistryRegisterObject(g_handleRegistry, model);
                 controllerSetPositionXyz(model, 0.0f, -32000.0f, 0.0f);
             }
         }
-        if (shop->tab == 3) {
+        if (slot == 3) {
             gameSetStatusCameraHeightMode(1);
+        } else if (slot == 5) {
+            gameSetStatusCameraHeightMode(2);
         } else {
-            gameSetStatusCameraHeightMode(shop->tab == 5 ? 2 : 0);
+            gameSetStatusCameraHeightMode(0);
         }
     }
-    FUN_004954e8(shop);
-    messageChoiceShowCurrent(shop);
-    if (inputIsQuestRepeatRight() != 0 || recordGetModeForId(shop->prevRecord) == 6) {
-        if (shop->tab != SHOP_TAB_NONE) {
-            shopClearTabMarker(shop);
+    FUN_004954e8((SubmenuWork *)this);
+    messageChoiceShowCurrent(this);
+    if (inputIsQuestRepeatRight() != 0 || recordGetModeForId(nextItem) == 6) {
+        if (slot != SHOP_SLOT_ITEMS) {
+            if (slot == 3) {
+                FUN_0038b57c(0);
+            }
+            if (slot == 4) {
+                FUN_0038b57c(1);
+            }
+            if (slot == 5) {
+                FUN_0038b57c(2);
+            }
             statusCameraRestore(0);
-            shop->unk22 = 0;
-            if (shop->tab == 0 && (shop->locked != 0 || gameFlagIsSet(0x410) == 0)) {
-                shop->tab = g_shopTabNeighbors.tab0Left;
-            } else if (shop->tab == 3 && (shop->locked != 0 || gameFlagIsSet(0x410) == 0)) {
-                shop->tab = g_shopTabNeighbors.tab3Left;
+            previewing = 0;
+            if (slot == 0 && (restricted != 0 || gameFlagIsSet(0x410) == 0)) {
+                slot = g_shopTabNeighbors.restricted0Next;
+            } else if (slot == 3 && (restricted != 0 || gameFlagIsSet(0x410) == 0)) {
+                slot = g_shopTabNeighbors.restricted3Next;
             } else {
-                shop->tab = g_shopTabNeighbors.tab[shop->tab].left;
+                slot = g_shopTabNeighbors.slot[slot].next;
             }
             sendEvent1000210();
-            FUN_004964e0(shop, 1);
-            s32 mode;
-            if (shop->tab != 3) {
-                mode = shop->tab == 5 ? 2 : 0;
+            FUN_004964e0(this, 1);
+            if (slot == 3) {
+                gameSetStatusCameraHeightMode(1);
+            } else if (slot == 5) {
+                gameSetStatusCameraHeightMode(2);
             } else {
-                mode = 1;
+                gameSetStatusCameraHeightMode(0);
             }
-            gameSetStatusCameraHeightMode(mode);
         }
-    } else if (FUN_004d0494() != 0 || recordGetModeForId(shop->nextRecord) == 6) {
-        if (shop->tab != SHOP_TAB_NONE) {
-            shopClearTabMarker(shop);
+    } else if (FUN_004d0494() != 0 || recordGetModeForId(previousItem) == 6) {
+        if (slot != SHOP_SLOT_ITEMS) {
+            if (slot == 3) {
+                FUN_0038b57c(0);
+            }
+            if (slot == 4) {
+                FUN_0038b57c(1);
+            }
+            if (slot == 5) {
+                FUN_0038b57c(2);
+            }
             statusCameraRestore(0);
-            shop->unk22 = 0;
-            if (shop->tab == 0 && (shop->locked != 0 || gameFlagIsSet(0x410) == 0)) {
-                shop->tab = g_shopTabNeighbors.tab0Right;
-            } else if (shop->tab == 3 && (shop->locked != 0 || gameFlagIsSet(0x410) == 0)) {
-                shop->tab = g_shopTabNeighbors.tab3Right;
+            previewing = 0;
+            if (slot == 0 && (restricted != 0 || gameFlagIsSet(0x410) == 0)) {
+                slot = g_shopTabNeighbors.restricted0Previous;
+            } else if (slot == 3 && (restricted != 0 || gameFlagIsSet(0x410) == 0)) {
+                slot = g_shopTabNeighbors.restricted3Previous;
             } else {
-                shop->tab = g_shopTabNeighbors.tab[shop->tab].right;
+                slot = g_shopTabNeighbors.slot[slot].previous;
             }
             sendEvent1000210();
-            FUN_004964e0(shop, 1);
-            s32 mode;
-            if (shop->tab != 3) {
-                mode = shop->tab == 5 ? 2 : 0;
+            FUN_004964e0(this, 1);
+            if (slot == 3) {
+                gameSetStatusCameraHeightMode(1);
+            } else if (slot == 5) {
+                gameSetStatusCameraHeightMode(2);
             } else {
-                mode = 1;
+                gameSetStatusCameraHeightMode(0);
             }
-            gameSetStatusCameraHeightMode(mode);
         }
     }
     if (inputIsQuestMenuPressed() != 0) {
-        shopClearTabMarker(shop);
-        uiSpriteBankApplyPreset(shop->sprites, 1);
+        if (slot == 3) {
+            FUN_0038b57c(0);
+        }
+        if (slot == 4) {
+            FUN_0038b57c(1);
+        }
+        if (slot == 5) {
+            FUN_0038b57c(2);
+        }
+        uiSpriteBankApplyPreset(&animation, 1);
         sendEvent100020F();
-        shop->prevState = shop->state;
-        shop->state = 0x13;
-        shop->substate = 0;
-        if (shop->tab == SHOP_TAB_NONE) {
+        changeState(0x13);
+        if (slot == SHOP_SLOT_ITEMS) {
             return;
         }
-        FUN_0049af90(shop);
+        FUN_0049af90(this);
     } else if (inputIsQuestCancelPressed() != 0) {
         sendEvent100020E();
-        menuOpenCommandList(shop);
+        menuOpenCommandList(this);
     }
-    if (shop->tab == SHOP_TAB_NONE) {
+    if (slot == SHOP_SLOT_ITEMS) {
         return;
     }
-    FUN_00498de0(shop);
+    shopTrackSelectedItemPreview(this);
 }
-
-} /* extern "C" */

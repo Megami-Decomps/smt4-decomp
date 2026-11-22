@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void mapSetActiveEntryId(u16 value)
+void mapSetActiveEntryId(s32 value)
 {
     MapSaveBlock *block = gameGetMapBlock();
 

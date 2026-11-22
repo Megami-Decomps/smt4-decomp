@@ -22,7 +22,7 @@ struct FusionSortPreferences {
 
 extern "C" {
 s32 FUN_002b27d4(const void *a, const void *b);
-s32 FUN_0034f0b4(const void *a, const void *b);
+s32 fusionComparePairsByRaceLevelAndIdDescending(const void *a, const void *b);
 s32 uniteComparePairsAscending(const void *a, const void *b);
 s32 fusionPairCompare(const void *a, const void *b);
 s32 FUN_002b28d8(const void *a, const void *b);
@@ -42,7 +42,7 @@ void fusionSortPairs(void)
         if (ascending) {
             qsort(work->pairSort.sortedPairs, work->pairSort.sortedCount, sizeof(u16), FUN_002b27d4);
         } else {
-            qsort(work->pairSort.sortedPairs, work->pairSort.sortedCount, sizeof(u16), FUN_0034f0b4);
+            qsort(work->pairSort.sortedPairs, work->pairSort.sortedCount, sizeof(u16), fusionComparePairsByRaceLevelAndIdDescending);
         }
     }
     if ((*setting & 0x7f) == 2) {

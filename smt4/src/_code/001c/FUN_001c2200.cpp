@@ -56,7 +56,7 @@ typedef struct CollisionBuild {
 extern CollisionBuild g_mapCollision;
 
 void FUN_0026e80c(s32 shape, u8 buffer[68], CollisionVec3 a, CollisionVec3 b, CollisionVec3 c, CollisionVec3 d);
-void FUN_0026ea5c(s32 shape, s32 index, CollisionVec3 *direction, f32 *length, CollisionVec3 buffer, CollisionVec3 a,
+void statusCameraBuildAxisPlane(s32 shape, s32 index, CollisionVec3 *direction, f32 *length, CollisionVec3 buffer, CollisionVec3 a,
                   CollisionVec3 b);
 void FUN_0026e8a4(s32 shape, s32 kind, f32 *bounds, f32 *extent, CollisionVec3 a, CollisionVec3 b, CollisionVec3 c,
                   CollisionVec3 d);
@@ -98,10 +98,10 @@ void FUN_001c2200(u32 owner)
                 quad->shape = 2;
             }
             FUN_0026e80c(quad->shape, buffer, v0, v1, v2, v3);
-            FUN_0026ea5c(quad->shape, 0, &quad->edgeDirection[0], &quad->edgeLength[0], *(CollisionVec3 *)buffer, v0, v1);
-            FUN_0026ea5c(quad->shape, 1, &quad->edgeDirection[1], &quad->edgeLength[1], *(CollisionVec3 *)buffer, v1, v2);
-            FUN_0026ea5c(quad->shape, 2, &quad->edgeDirection[2], &quad->edgeLength[2], *(CollisionVec3 *)buffer, v2, v3);
-            FUN_0026ea5c(quad->shape, 2, &quad->edgeDirection[3], &quad->edgeLength[3], *(CollisionVec3 *)buffer, v3, v0);
+            statusCameraBuildAxisPlane(quad->shape, 0, &quad->edgeDirection[0], &quad->edgeLength[0], *(CollisionVec3 *)buffer, v0, v1);
+            statusCameraBuildAxisPlane(quad->shape, 1, &quad->edgeDirection[1], &quad->edgeLength[1], *(CollisionVec3 *)buffer, v1, v2);
+            statusCameraBuildAxisPlane(quad->shape, 2, &quad->edgeDirection[2], &quad->edgeLength[2], *(CollisionVec3 *)buffer, v2, v3);
+            statusCameraBuildAxisPlane(quad->shape, 2, &quad->edgeDirection[3], &quad->edgeLength[3], *(CollisionVec3 *)buffer, v3, v0);
             FUN_0026e8a4(quad->shape, quad->kind, quad->bounds, &quad->extent, v0, v1, v2, v3);
             g_mapCollision.quadCount++;
         }

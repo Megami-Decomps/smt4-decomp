@@ -1,55 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `questCompareByKindGroup` (_code @ 0x2fdc2c, 0xbc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: 47 vs 47 rows (2 diff lines): retail materialises `moveq r0, #0` before `cmpne r0, #0` on the first NULL check, built emits `cmpne r0, #0; moveq r0, #0`. */
+#include "quest_center/QuestRecordA.h"
 
 extern "C" {
+s32 itemKindToSortGroup(u8 kind);
 
-int questDataGetRecord(void);
-
-/* Supplied declaration required: questDataGetRecord. */
-extern int itemKindToSortGroup(unsigned char);
-
-
-unsigned int questCompareByKindGroup(unsigned short *param_1,unsigned short *param_2)
-
+/* Orders two quest records by sort order; 0 when either record is missing (same logic as questCompareForDisplayOrder). */
+static __inline s32 compareQuestOrder(const u16 *leftId, const u16 *rightId)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = (unsigned int)*param_1;
-  questDataGetRecord();
-  temp_v1 = (unsigned int)*param_2;
-  questDataGetRecord();
-  if (temp_v0 == 0) {
-    temp_v1 = 0;
-  }
-  if ((temp_v0 != 0 && temp_v1 != 0) &&
-     (temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 0xdc) - (unsigned int)*(unsigned short *)(temp_v1 + 0xdc), temp_v1 == 0)) {
-    temp_v1 = (unsigned int)*param_1;
-    questDataGetRecord();
-    temp_v0 = (unsigned int)*param_2;
-    questDataGetRecord();
-    if (temp_v1 == 0 || temp_v0 == 0) {
-      return 0;
-    }
-    temp_v2 = itemKindToSortGroup(*(unsigned char *)(temp_v1 + 6));
-    temp_v3 = itemKindToSortGroup(*(unsigned char *)(temp_v0 + 6));
-    temp_v1 = temp_v2 - temp_v3;
-    if (temp_v1 == 0) {
-      temp_v1 = (unsigned int)*param_1;
-      questDataGetRecord();
-      temp_v0 = (unsigned int)*param_2;
-      questDataGetRecord();
-      if (temp_v1 == 0 || temp_v0 == 0) {
+    QuestRecordA *left = questDataGetRecord(*leftId);
+    QuestRecordA *right = questDataGetRecord(*rightId);
+    if (left == NULL || right == NULL) {
         return 0;
-      }
-      temp_v1 = (unsigned int)*(unsigned short *)(temp_v1 + 4) - (unsigned int)*(unsigned short *)(temp_v0 + 4);
     }
-  }
-  return temp_v1;
+    return left->order - right->order;
 }
 
-} /* extern "C" */
+/* Orders two quest records by mapped kind group, breaking ties by sort order (same logic as FUN_002b2b34). */
+static __inline s32 compareQuestKindGroup(const u16 *leftId, const u16 *rightId)
+{
+    QuestRecordA *left = questDataGetRecord(*leftId);
+    QuestRecordA *right = questDataGetRecord(*rightId);
+    if (left == NULL || right == NULL) {
+        return 0;
+    }
+    s32 result = itemKindToSortGroup(left->kind) - itemKindToSortGroup(right->kind);
+    if (result != 0) {
+        return result;
+    }
+    return compareQuestOrder(leftId, rightId);
+}
+
+/* Compares quest ids by rank, then mapped kind group, then sort order (0 when either record is missing). */
+s32 questCompareByKindGroup(const u16 *leftId, const u16 *rightId)
+{
+    QuestRecordA *left = questDataGetRecord(*leftId);
+    QuestRecordA *right = questDataGetRecord(*rightId);
+    if (left == NULL || right == NULL) {
+        return 0;
+    }
+    s32 result = left->rank - right->rank;
+    if (result != 0) {
+        return result;
+    }
+    return compareQuestKindGroup(leftId, rightId);
+}
+}

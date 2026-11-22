@@ -1,4 +1,7 @@
-/* NON_MATCHING: sets up the quest counter scene (area models, talk work, message files); written from the decompilation and the retail disassembly, the string pool order and local table copy not compared with retail */
+/* NON_MATCHING: sets up the quest counter scene (area models, talk work, message files). Retail passes asdOperatorNew
+ * an uninitialised callee-saved register (sl) as its second argument, which cannot be written; its frame is 16 bytes
+ * smaller (area-name copy at sp, the file names, then path at sp+144) and its table copy is addressed from the
+ * literal block (86 lines). */
 #include <stdio.h>
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "classes/FloatState.h"
@@ -61,13 +64,6 @@ void titleRestartSlotState3(s32 slot, s32 value);
 
 void FUN_003840f4(QuestCounterScene *scene, s32 questId, u8 unused, u8 mode)
 {
-    static const char *const areaNames[4] = {
-        "quest_center/bg/k2_pub/k2_pub",
-        "quest_center/bg/hunter_company/hunter_company",
-        "quest_center/bg/hunter_company_law/hunter_company_law",
-        "quest_center/bg/hunter_company_chaos/hunter_company_chaos",
-    };
-
     scene->questId = (s8)questId;
     scene->unk11 = unused;
     scene->mode = mode;
@@ -89,7 +85,13 @@ void FUN_003840f4(QuestCounterScene *scene, s32 questId, u8 unused, u8 mode)
         break;
     }
 
-    char path[144];
+    const char *areaNames[4] = {
+        "quest_center/bg/k2_pub/k2_pub",
+        "quest_center/bg/hunter_company/hunter_company",
+        "quest_center/bg/hunter_company_law/hunter_company_law",
+        "quest_center/bg/hunter_company_chaos/hunter_company_chaos",
+    };
+    char path[136];
     for (u32 i = 0; i < QUEST_NPC_COUNT; i++) {
         sprintf(path, "%s_npc%d.bam", areaNames[scene->area], i + 1);
         scene->npcModels[i] = asdMdlManagerCreateLoaded(path, 7);
@@ -118,13 +120,11 @@ void FUN_003840f4(QuestCounterScene *scene, s32 questId, u8 unused, u8 mode)
         FUN_002a09b4(path, 0);
     }
 
-    QuestTalkWork *talk = static_cast<QuestTalkWork *>(asdOperatorNew(0x17F0, NULL));
-    if (talk != NULL) {
-        memClear(talk, 0x17F0);
-        new (&talk->state) FloatState();
-    }
-    scene->talk = talk;
-    FUN_00235250(reinterpret_cast<Mover *>(talk));
+    void *memory = asdOperatorNew(0x17F0, NULL);
+    if (memory != NULL)
+        memClear(memory, 0x17F0);
+    scene->talk = new (memory) QuestTalkWork;
+    FUN_00235250(reinterpret_cast<Mover *>(scene->talk));
     FUN_00234f5c(scene->talk, areaNames[scene->area], 0);
     nodeOwnerSetEnabled(reinterpret_cast<NodeEnableOwner *>(scene->talk), 0);
 

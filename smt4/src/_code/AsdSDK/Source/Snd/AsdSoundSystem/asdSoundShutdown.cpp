@@ -8,7 +8,7 @@ extern AsdSndDuck g_asdSoundDuck;
 extern AsdSndStatus g_asdSoundStatus;
 
 void FUN_001177e0(void);
-void FUN_0010c350(void);
+void asdSoundReleaseAllSlots(void);
 void FUN_0010bf78(void);
 void sndSystemFinalize(void);
 void soundCallbacksCloseDspResource(void);
@@ -53,7 +53,7 @@ void asdSoundShutdown(void)
 {
     AsdSoundSystem *system = &g_asdSound;
     FUN_001177e0();
-    FUN_0010c350();
+    asdSoundReleaseAllSlots();
     duckSetup(0.0f, 0, 0, 0, 0, 0);
     FUN_0010bf78();
     if (system->workBuffer != NULL) {

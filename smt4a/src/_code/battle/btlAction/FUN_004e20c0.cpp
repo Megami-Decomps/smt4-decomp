@@ -63,7 +63,7 @@ int btlScriptUnitHasFlags(...);
 int btlMainFindEntryByListedId(...);
 int FUN_003f2aac(...);
 int FUN_004bf348(...);
-int FUN_004bfa30(unsigned int *, unsigned int, int, int, int);
+int btlGetCurableAilmentMaskForTarget(unsigned int *, unsigned int, int, int, int);
 int FUN_004bfcfc(unsigned int *, unsigned int, unsigned int, int, int, int);
 int mathScaleByCategory(int);
 int FUN_004c1598(int, int);
@@ -249,7 +249,7 @@ extern int FUN_003eca48(unsigned int, unsigned short);
 /* Supplied declaration required: FUN_003f21ec. */
 /* Supplied declaration required: FUN_003f2aac. */
 /* Supplied declaration required: FUN_004bf348. */
-/* Supplied declaration required: FUN_004bfa30. */
+/* Supplied declaration required: btlGetCurableAilmentMaskForTarget. */
 /* Supplied declaration required: FUN_004bfcfc. */
 /* Supplied declaration required: mathScaleByCategory. */
 /* Supplied declaration required: FUN_004c14c8. */
@@ -472,7 +472,7 @@ void FUN_004e20c0(unsigned int *param_1,unsigned int *param_2,int param_3,unsign
   FUN_004c16c8(temp_v108,param_6,param_7,param_8,0);
   puVar13 = temp_v108;
   temp_v88 = puVar9;
-  FUN_004bfa30(temp_v108,param_6,param_7,param_8,0);
+  btlGetCurableAilmentMaskForTarget(temp_v108,param_6,param_7,param_8,0);
   temp_v58 = (unsigned int *)0x0;
   temp_v13 = param_2[0x161];
   temp_v21 = (unsigned int *)0x0;

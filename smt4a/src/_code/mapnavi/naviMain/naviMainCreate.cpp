@@ -4,6 +4,7 @@
 #include "mapnavi/NaviMainGlobals.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "shard/NaviMain.h"
+#include "classes/Obj532300.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ void campCommonBgAcquire(void);
 void campButtonHelpAcquire(void);
 void commonBgStopChildAndBeginTransition(void);
 void commonBgReset(void);
-void FUN_00485e74(u8 *panel);
 void FUN_00490484(void *panel, u32 first, u32 third, u32 second, f32 x, f32 y);
 void requestBeginProcessing(u8 *request, s32 value, s32 type);
 void NaviMain_ResetFlags(u8 *request, u8 mode);
@@ -44,7 +44,7 @@ void naviMainCreate(u32 unused, u32 argument)
     navigation->value.first = 0.0f;
     navigation->value.second = 0.0f;
     navigation->closeRequested = 0;
-    FUN_00485e74(navigation->panel);
+    naviPanelInitialize((Obj532300 *)navigation->panel);
 
     campCommonBgAcquire();
     if (gameFlagIsSet(0x49a) == 0) {

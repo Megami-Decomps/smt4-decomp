@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only (129 vs 129 rows): retail keeps the count address in r5 and the zero in r3 where the build uses r3 and ip, and starts with the push before the address add. */
+/* NON_MATCHING: register allocation only (70 lines): retail keeps the count address in r5 and the zero in r3 (the build: r3 and r5), and in the search loop the count in r2 and the index in ip */
 #include "shard/W9_W9Match1_ResourceRequest.h"
 
 struct ResourceRequestRegistry {
@@ -10,11 +10,12 @@ struct ResourceRequestRegistry {
 
 extern "C" u32 resourceRequestRegisterOrUpdate(ResourceRequestRegistry *registry, const ResourceRequest *request)
 {
-    for (s32 i = 0; i < registry->count; ++i)
+    s32 i;
+    for (i = 0; i < registry->count; ++i)
         registry->entries[i].marked = 0;
 
     s32 count = registry->count;
-    for (s32 i = 0; i < count; ++i) {
+    for (i = 0; i < count; ++i) {
         if (registry->entries[i].request.kind == request->kind &&
             registry->entries[i].request.position[0] == request->position[0] &&
             registry->entries[i].request.position[1] == request->position[1] &&

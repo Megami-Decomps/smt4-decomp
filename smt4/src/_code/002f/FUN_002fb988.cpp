@@ -11,7 +11,7 @@ extern "C" {
 int mapIdleHintStep(void);
 int FUN_002562e4(int, int);
 int partyApplyNonlethalAilmentDamage(int, int);
-int FUN_0026413c(void);
+int mapCameraUpdateTurn(void);
 int mapProjectPositionToGround(int, int);
 int padGetNormalizedAnalogStick(float *, unsigned int [12], int);
 int __hardfp_atan2f(void);
@@ -20,8 +20,8 @@ int libm_sinf(void); // declcheck: local (the shared declaration does not compil
 int mathDistanceBetweenPoints(void);
 int gameCounterAddSaturating(int, int);
 int FUN_002d4fa0(void);
-int FUN_003a66c4(void);
-int FUN_003a6988(void);
+int fieldWalkRecoverHp(void);
+int fieldWalkRecoverMp(void);
 int SBORROW4(int, int);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -52,7 +52,7 @@ extern int g_lmapScene; /* 0x447e88 */
 /* Supplied declaration required: partyApplyNonlethalAilmentDamage. */
 extern unsigned int FUN_00256540(void);
 extern int unitGroupHasFlag(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0026413c. */
+/* Supplied declaration required: mapCameraUpdateTurn. */
 /* Supplied declaration required: mapProjectPositionToGround. */
 /* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: __hardfp_atan2f. */
@@ -63,8 +63,8 @@ extern int unitGroupHasFlag(unsigned int, unsigned int);
 extern int padIsButtonRepeat(unsigned int);
 extern int padIsButtonPressed(unsigned int);
 /* Supplied declaration required: FUN_002d4fa0. */
-/* Supplied declaration required: FUN_003a66c4. */
-/* Supplied declaration required: FUN_003a6988. */
+/* Supplied declaration required: fieldWalkRecoverHp. */
+/* Supplied declaration required: fieldWalkRecoverMp. */
 
 
 void FUN_002fb988(int param_1)
@@ -127,7 +127,7 @@ void FUN_002fb988(int param_1)
         (temp_v16[0] < 0xbf000000)) && ((int)temp_v16[0] < 0x3f000000)) {
       temp_v5 = 1;
     }
-    FUN_0026413c();
+    mapCameraUpdateTurn();
     if (g_gameState.unk368 == 1) {
       if (g_gameState.unk3CC != '\0') {
         temp_v2 = padIsButtonPressed(1);
@@ -285,8 +285,8 @@ void FUN_002fb988(int param_1)
     *(float *)(temp_v0 + 0xdbc) = temp_v7;
     if ((int)temp_v7 >= 0x44bb8001) {
       *(float *)(temp_v0 + 0xdbc) = temp_v7 - temp_v11;
-      FUN_003a66c4();
-      FUN_003a6988();
+      fieldWalkRecoverHp();
+      fieldWalkRecoverMp();
     }
     temp_v8 = *(float *)(temp_v0 + 0xdc4) + temp_v8;
     *(float *)(temp_v0 + 0xdc4) = temp_v8;

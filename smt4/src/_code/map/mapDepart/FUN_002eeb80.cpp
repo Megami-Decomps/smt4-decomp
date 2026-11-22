@@ -15,7 +15,7 @@ void debugOverlaySetShown(s32 shown);
 void FUN_00273f90(void);
 void lmapUpdateSceneModels(void);
 void FUN_00274798(void);
-void FUN_00274fac(void);
+void mapGimicUpdate(void);
 void FUN_0027522c(void);
 void FUN_00275364(void);
 void soundActorQueueStartPending(void);
@@ -115,7 +115,7 @@ u32 FUN_002eeb80(void)
         mapEntryTriggerForScene(g_gameState.areaId);
         FUN_00275364();
         FUN_0027522c();
-        FUN_00274fac();
+        mapGimicUpdate();
         FUN_00274798();
         g_mapDepartWork[10] = 1;
         mapDepartSyncModelVisibility();

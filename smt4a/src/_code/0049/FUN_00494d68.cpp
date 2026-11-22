@@ -47,7 +47,7 @@ extern int equipmentHasPositiveUpgrade(unsigned int);
 extern int FUN_00498408(int, unsigned int);
 extern int itemGetNameOrFallback(unsigned int, unsigned int);
 /* Supplied declaration required: shopGetEntryPrice. */
-extern int btlRollClamped(unsigned short, unsigned int);
+extern int shopAffordableCount(unsigned short, unsigned int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 extern unsigned int aocItemGetPrice(unsigned short *);
 
 
@@ -178,7 +178,7 @@ void FUN_00494d68(int param_1,int param_2,int param_3,unsigned short *param_4)
     }
     if (*(int *)(param_1 + 0xb40) != 8) {
       temp_v6 = shopGetEntryPrice(param_4);
-      temp_v4 = btlRollClamped(*param_4,temp_v6);
+      temp_v4 = shopAffordableCount(*param_4,temp_v6);
       if (temp_v4 == 0) {
         temp_v10 = 0x787878ff;
       }
@@ -220,7 +220,7 @@ LAB_00495274:
     temp_v15 = 0x9a;
     if (temp_v8 != 8) {
       temp_v6 = shopGetEntryPrice(param_4);
-      temp_v4 = btlRollClamped(*param_4,temp_v6);
+      temp_v4 = shopAffordableCount(*param_4,temp_v6);
       if (temp_v4 == 0) {
         temp_v10 = -0x64646401;
       }

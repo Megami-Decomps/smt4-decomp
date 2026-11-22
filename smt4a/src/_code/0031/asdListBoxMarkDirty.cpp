@@ -1,4 +1,4 @@
-/* NON_MATCHING: the "_FALSE" copy is now strcpy (armcc's __ARM_common_memcpy4_7, buffer in r8 as retail); retail still repeats the "measure the text and add the width" tail in every item-type case where ours merges them into one tail. */
+/* NON_MATCHING: the "_FALSE" copy is now strcpy (armcc's __ARM_common_memcpy4_7, buffer in r8 as retail); the INT width is an if/else of two products (retail's addeq/addne); retail still repeats the "measure the text and add the width" tail in every item-type case where ours merges them into one tail. */
 #include <stdio.h>
 #include <string.h>
 #include "AsdSDK/Source/Util/AsdListBox.h"
@@ -77,7 +77,11 @@ void asdListBoxMarkDirty(u32 listBox)
                 itemWidth += box->charWidth * 6;
                 break;
             case ASD_LISTBOX_INT:
-                itemWidth += box->charWidth * (item->flags != 0 ? 11 : 9);
+                if (item->flags != 0) {
+                    itemWidth += box->charWidth * 11;
+                } else {
+                    itemWidth += box->charWidth * 9;
+                }
                 break;
             case ASD_LISTBOX_FLOAT:
                 itemWidth += box->charWidth * 8;

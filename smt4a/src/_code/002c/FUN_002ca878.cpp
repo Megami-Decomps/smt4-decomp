@@ -1,4 +1,4 @@
-/* NON_MATCHING: counter badge draw; call sequence follows retail, float/int scheduling and the saved-register set are not compared */
+/* NON_MATCHING: counter badge draw (107 lines); the x + stereo sum is shared differently (retail overwrites it for the digits and recomputes it for the label), and the digit position is computed before drawSetColorFromRGBA8 in retail */
 #include "common.h"
 #include <stdio.h>
 #include "shard/TextureDrawCall.h"
@@ -24,7 +24,7 @@ s32 fontMeasureLineAdvance(const char *text, s32 mode);
 #define BADGE_FLAGS 0xBF
 
 /* Draws a count badge at (x, y): the four frame sprites, the label and the digits centred in it. */
-void FUN_002ca878(f32 speed, s32 x, s32 y)
+void FUN_002ca878(struct SaveListWork *work, s32 x, s32 y, f32 speed)
 {
     char label[64];
     char digits[64];

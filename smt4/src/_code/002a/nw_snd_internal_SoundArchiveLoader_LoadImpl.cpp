@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002a4b0c(unsigned int, int *);
-int FUN_002a78c0(int *, unsigned int, unsigned int, int *, int, unsigned int);
+int soundArchiveLoaderReadFile(int *, unsigned int, unsigned int, int *, int, unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_5: 4 slot(s), 16 byte(s) */
@@ -18,7 +18,7 @@ typedef struct {
 
 extern int FUN_00152314(int, unsigned int, int **);
 /* Supplied declaration required: FUN_002a4b0c. */
-/* Supplied declaration required: FUN_002a78c0. */
+/* Supplied declaration required: soundArchiveLoaderReadFile. */
 extern int nnosGetHeapSize(void);
 extern unsigned int nnosGetHeapBase(void);
 
@@ -68,7 +68,7 @@ unsigned int nw_snd_internal_SoundArchiveLoader_LoadImpl
     }
   }
   piVar4 = param_1;
-  FUN_002a78c0(param_1,param_2,temp_v0,unaff_r4,0,param_4);
+  soundArchiveLoaderReadFile(param_1,param_2,temp_v0,unaff_r4,0,param_4);
   if (piVar4 != unaff_r4) {
     return 0;
   }

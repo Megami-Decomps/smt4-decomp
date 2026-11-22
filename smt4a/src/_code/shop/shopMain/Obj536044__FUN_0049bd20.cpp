@@ -1,402 +1,224 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049bd20` (_code @ 0x49bd20, 0x694 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
 #include "classes/Obj536044.h"
+#include "shop/ShopSelectedItem.h"
+#include "shop/ShopBuyItem.h"
 #include "network/DataStore/DataStoreMain.h"
+#include "Model/MoriModelManager.h"
+#include "Model/MoriModelContent.h"
+#include "gfx/ControllerModel.h"
+#include "script/scrScriptProcess.h"
+#include "ui/UiControl.h"
+#include "code/Code0049_Smt4a.h"
+#include "code/Code004d_Smt4a.h"
+#include "gamedata/GameDataAccess.h"
+#include "camp/CampMenuEntry.h"
+
+struct CountAt5A;
 
 extern "C" {
 
-int statusCameraRestore(...);
-int FUN_0038b57c(...);
-int FUN_004964e0(...);
-int sendEvent1000210(void);
+void gameSetStatusCameraHeightMode(s32 mode);
+void messageChoiceShowCurrent(Obj536044 *shop);
+s32 inputConfirmPressed(void);
+s32 inputIsQuestRepeatRight(void);
+s32 FUN_004d0494(void);
+s32 inputIsQuestCancelPressed(void);
+s32 inputIsQuestMenuPressed(void);
+void FUN_0038b010(u8 value);
+void FUN_0038b57c(s32 index);
+void statusCameraRestore(s32 usePreset);
+void sendEvent1000210(void);
+void sendEvent100020F(void);
+void sendEvent100020E(void);
+void FUN_004964e0(Obj536044 *shop, s32 changed);
+void uiSpriteBankApplyPreset(SpritePresetBank *bank, u32 preset);
+void FUN_0049af90(Obj536044 *shop);
+void releaseEntriesB(CountAt5A *entries);
+void menuOpenCommandList(Obj536044 *shop);
+void shopStartSelectionScript(Obj536044 *shop, s32 kind);
+s32 tableGroupFindEntryIndex(u32 table, const char *name);
+u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
+void buttonHelpSetText(const s8 *text, u32 color);
 
-int ifTouchRegionRemove(void);
-int uiSpriteBankApplyPreset(int, int);
-int buttonHelpSetText(...);
-int scrRunOpcodesStub(unsigned int);
-int scrScriptProcessStartEntry(unsigned int, unsigned int);
-int panelSetTarget(int);
-int gameSetStatusCameraHeightMode(...);
-int FUN_0038b010(int);
-int controllerSetPositionXyz(unsigned int);
-int moriModelContentLoadBody(int, int);
-int handleRegistryRegisterObject(unsigned int, unsigned int);
-int FUN_004954e8(int);
-int menuOpenCommandList(...);
-int messageChoiceShowCurrent(int);
-int shopStartSelectionScript(...);
-int FUN_00498de0(...);
-int FUN_0049af90(int);
-int sendEvent100020F(void);
-int sendEvent100020E(void);
-int releaseEntriesA(int);
-int releaseEntriesB(unsigned int);
+extern const ShopSlotStep g_shopListSlotNeighbors[7]; /* the neighbours of the equipment slots while their list is shown */
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
+} /* extern "C" */
 
-extern unsigned char LAB_0049c3b4; /* 0x49c3b4 */
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-
-/* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: uiSpriteBankApplyPreset. */
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: buttonHelpSetText. */
-/* Supplied declaration required: scrRunOpcodesStub. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int recordGetModeForId(int);
-/* Supplied declaration required: statusCameraRestore. */
-extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-/* Supplied declaration required: panelSetTarget. */
-/* Supplied declaration required: gameSetStatusCameraHeightMode. */
-/* Supplied declaration required: FUN_0038b010. */
-/* Supplied declaration required: FUN_0038b57c. */
-/* Supplied declaration required: controllerSetPositionXyz. */
-/* Supplied declaration required: moriModelContentLoadBody. */
-extern int moriModelContentIsLoaded(void);
-/* Supplied declaration required: handleRegistryRegisterObject. */
-/* Supplied declaration required: FUN_004954e8. */
-/* Supplied declaration required: FUN_004964e0. */
-/* Supplied declaration required: menuOpenCommandList. */
-/* Supplied declaration required: messageChoiceShowCurrent. */
-/* Supplied declaration required: shopStartSelectionScript. */
-/* Supplied declaration required: FUN_00498de0. */
-/* Supplied declaration required: FUN_0049af90. */
-extern unsigned int shopGetEntryPrice(unsigned short *);
-extern int btlRollClamped(unsigned short, unsigned int);
-extern int flaggedValueHolderGetTotal(int);
-/* Supplied declaration required: sendEvent100020F. */
-/* Supplied declaration required: sendEvent100020E. */
-/* Supplied declaration required: sendEvent1000210. */
-extern int inputIsQuestRepeatRight(void);
-extern int FUN_004d0494(void);
-extern int inputIsQuestCancelPressed(void);
-extern int inputIsQuestMenuPressed(void);
-extern int inputConfirmPressed(void);
-/* Supplied declaration required: releaseEntriesA. */
-/* Supplied declaration required: releaseEntriesB. */
-
-
-void _ZN9Obj53604412FUN_0049bd20Ev(int param_1)
-
+/* Per-frame update of an equipment slot's list: buying the selected item, slot switching and the
+ * menu/cancel buttons. */
+void Obj536044::FUN_0049bd20()
 {
-/* irregular: 1 goto(s); 26 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int *piVar6;
-  unsigned short *puVar7;
-  
-  panelSetTarget(0);
-  temp_v1 = objBStateAllowsAction();
-  if (temp_v1 == 0) {
-    FUN_004954e8(param_1);
-    return;
-  }
-  if (*(int *)(param_1 + 0x16028) != 0) {
-    temp_v1 = moriModelContentIsLoaded();
-    if (temp_v1 == 0) {
-      return;
+    panelSetTarget(0, 0);
+    if (objBStateAllowsAction() == 0) {
+        FUN_004954e8((SubmenuWork *)this);
+        return;
     }
-    if (*(int *)(*(int *)(param_1 + 0x16028) + 4) == 0) {
-      moriModelContentLoadBody(*(int *)(param_1 + 0x16028),0);
-      temp_v2 = *(unsigned int *)(*(int *)(param_1 + 0x16028) + 4);
-      handleRegistryRegisterObject(g_handleRegistry,temp_v2);
-      controllerSetPositionXyz(temp_v2);
-    }
-  }
-  piVar6 = (int *)(param_1 + 0xb40);
-  if (*(int *)(param_1 + 0xb40) != 3) {
-    if (*(int *)(param_1 + 0xb40) == 5) {
-      temp_v2 = 2;
-    }
-    else {
-      temp_v2 = 0;
-    }
-    gameSetStatusCameraHeightMode(temp_v2);
-  }
-  else {
-    gameSetStatusCameraHeightMode(1);
-  }
-  temp_v1 = FUN_004954e8(param_1);
-  messageChoiceShowCurrent(param_1);
-  if ((0 < *(int *)(param_1 + *(int *)(param_1 + 0xb40) * 0x74 + 0xb68)) &&
-     (temp_v3 = inputConfirmPressed(), temp_v3 != 0)) {
-    temp_v1 = 1;
-  }
-  temp_v3 = *(int *)(param_1 + 0xb40);
-  temp_v4 = flaggedValueHolderGetTotal(param_1 + temp_v3 * 0x74 + 0xb60);
-  puVar7 = (unsigned short *)(param_1 + temp_v3 * 0x1002 + 0xf74 + temp_v4 * 4);
-  if (*(int *)(param_1 + 0xb40) != 8) {
-    temp_v2 = shopGetEntryPrice(puVar7);
-    temp_v3 = btlRollClamped(*puVar7,temp_v2);
-    if (temp_v3 != 0) goto LAB_0049be70;
-  }
-  else {
-LAB_0049be70:
-    if (temp_v1 != 0) {
-      sendEvent100020E();
-      shopEnterQuantitySelection((Obj536044 *)param_1, 0xb);
-      FUN_00498de0(param_1);
-      return;
-    }
-  }
-  temp_v1 = inputIsQuestRepeatRight();
-  if ((temp_v1 == 0) && (temp_v1 = recordGetModeForId((int)*(short *)(param_1 + 0x1602c)), temp_v1 != 6)) {
-    temp_v1 = FUN_004d0494();
-    if ((temp_v1 == 0) && (temp_v1 = recordGetModeForId((int)*(short *)(param_1 + 0x1602e)), temp_v1 != 6)) {
-      temp_v1 = inputIsQuestMenuPressed();
-      temp_v0 = '\0';
-      if (temp_v1 != 0) {
-        temp_v0 = *(char *)(param_1 + 0x22);
-      }
-      if (!(temp_v1 == 0 || temp_v0 == '\0')) {
-        FUN_0038b010(0);
-        uiSpriteBankApplyPreset(param_1 + 0x3cc,1);
-        sendEvent100020F();
-        FUN_0049af90(param_1);
-        releaseEntriesB(*(unsigned int *)(param_1 + 0xb3c));
-        releaseEntriesA(param_1 + 0xb08);
-        temp_v1 = 0;
-        if (temp_v1 < *(short *)(param_1 + 0x16030)) {
-          do {
-            ifTouchRegionRemove();
-            temp_v1 = temp_v1 + 1;
-          } while (temp_v1 < *(short *)(param_1 + 0x16030));
+    if (resource != NULL) {
+        if (moriModelContentIsLoaded(resource) == 0) {
+            return;
         }
-        *(unsigned short *)(param_1 + 0x16030) = 0;
-        *(unsigned short *)(param_1 + 0x1602c) = 0xffff;
-        *(unsigned short *)(param_1 + 0x1602e) = 0xffff;
-        *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 4);
-        *(unsigned int *)(param_1 + 4) = 5;
-        *(unsigned int *)(param_1 + 8) = 0;
-        temp_v1 = *(int *)(param_1 + 0xb40);
-        switch(temp_v1) {
+        if (resource->body == NULL) {
+            moriModelContentLoadBody(resource, 0);
+            Obj557b18 *model = resource->body;
+            handleRegistryRegisterObject(g_handleRegistry, model);
+            controllerSetPositionXyz(model, 0.0f, -32000.0f, 0.0f);
+        }
+    }
+    if (slot == 3) {
+        gameSetStatusCameraHeightMode(1);
+    } else if (slot == 5) {
+        gameSetStatusCameraHeightMode(2);
+    } else {
+        gameSetStatusCameraHeightMode(0);
+    }
+    u32 confirmed = FUN_004954e8((SubmenuWork *)this);
+    messageChoiceShowCurrent(this);
+    if (slotInfo[slot].range.count > 0 && inputConfirmPressed() != 0) {
+        confirmed = 1;
+    }
+    if (canBuyItem(selectedItem()) && confirmed != 0) {
+        sendEvent100020E();
+        shopEnterQuantitySelection(this, 11);
+    } else if (inputIsQuestRepeatRight() != 0 || recordGetModeForId(nextItem) == 6) {
+        if (mode == 0) {
+            if (slot == SHOP_SLOT_ITEMS) {
+                return;
+            }
+        } else if (mode == 1) {
+            if (slot == SHOP_SLOT_ITEMS) {
+                return;
+            }
+        }
+        if (slot == 0 && (restricted != 0 || gameFlagIsSet(0x410) == 0) && mode != 1) {
+            return;
+        }
+        if (slot == 3 || slot == 4 || slot == 5 || g_shopListSlotNeighbors[slot].next == 3 || g_shopListSlotNeighbors[slot].next == 4 ||
+            g_shopListSlotNeighbors[slot].next == 5) {
+            if (slot == 3) {
+                FUN_0038b57c(0);
+            }
+            if (slot == 4) {
+                FUN_0038b57c(1);
+            }
+            if (slot == 5) {
+                FUN_0038b57c(2);
+            }
+            statusCameraRestore(0);
+            previewing = 0;
+            previewReady = 0;
+        }
+        if (slot != 0 || (restricted == 0 && gameFlagIsSet(0x410) != 0)) {
+            slot = g_shopListSlotNeighbors[slot].next;
+            sendEvent1000210();
+            FUN_004964e0(this, 1);
+            if (slot == 3) {
+                gameSetStatusCameraHeightMode(1);
+            } else if (slot == 5) {
+                gameSetStatusCameraHeightMode(2);
+            } else {
+                gameSetStatusCameraHeightMode(0);
+            }
+        }
+    } else if (FUN_004d0494() != 0 || recordGetModeForId(previousItem) == 6) {
+        if (mode == 0) {
+            if (slot == SHOP_SLOT_ITEMS) {
+                return;
+            }
+        } else if (mode == 1) {
+            if (slot == SHOP_SLOT_ITEMS) {
+                return;
+            }
+        }
+        if (slot == 0 && (restricted != 0 || gameFlagIsSet(0x410) == 0) && mode != 1) {
+            return;
+        }
+        if (slot == 3 || slot == 4 || slot == 5 || g_shopListSlotNeighbors[slot].next == 3 || g_shopListSlotNeighbors[slot].next == 4 ||
+            g_shopListSlotNeighbors[slot].next == 5) {
+            if (slot == 3) {
+                FUN_0038b57c(0);
+            }
+            if (slot == 4) {
+                FUN_0038b57c(1);
+            }
+            if (slot == 5) {
+                FUN_0038b57c(2);
+            }
+            statusCameraRestore(0);
+            previewing = 0;
+        }
+        if (slot != 0 || (restricted == 0 && gameFlagIsSet(0x410) != 0)) {
+            slot = g_shopListSlotNeighbors[slot].previous;
+            sendEvent1000210();
+            FUN_004964e0(this, 1);
+            if (slot == 3) {
+                gameSetStatusCameraHeightMode(1);
+            } else if (slot == 5) {
+                gameSetStatusCameraHeightMode(2);
+            } else {
+                gameSetStatusCameraHeightMode(0);
+            }
+        }
+    } else if (inputIsQuestMenuPressed() != 0 && previewing != 0) {
+        FUN_0038b010(0);
+        uiSpriteBankApplyPreset(&animation, 1);
+        sendEvent100020F();
+        FUN_0049af90(this);
+        releaseEntriesB((CountAt5A *)view);
+        releaseEntriesA((CountAt30 *)touchSelection);
+        for (s32 i = 0; i < touchRegionCount; i++) {
+            ifTouchRegionRemove();
+        }
+        touchRegionCount = 0;
+        nextItem = -1;
+        previousItem = -1;
+        changeState(5);
+        switch (slot) {
         case 0:
         case 1:
         case 2:
-          *(unsigned int *)(param_1 + 0x16040) = 0;
-          *(unsigned int *)(param_1 + 0x1603c) = 0;
-          if (temp_v1 == 1) {
-            *(unsigned int *)(param_1 + 0x1603c) = 1;
-          }
-          else if (temp_v1 == 2) {
-            *(unsigned int *)(param_1 + 0x1603c) = 2;
-          }
-          *(unsigned char *)(param_1 + 0x16045) = 1;
-          if (*(int *)(param_1 + 0x1601c) >= 2) {
-            temp_v2 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x184),&LAB_0049c3b4);
-            scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18c),temp_v2);
-            scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18c));
-            shopStartSelectionScript(param_1,1);
-            *(unsigned int *)(param_1 + 8) = 3;
-            buttonHelpSetText(0,0xf4f4f4ff);
-          }
-          *(unsigned char *)(param_1 + 0x16045) = 0;
-          break;
+            cleared[2] = 0;
+            cleared[1] = 0;
+            if (slot == 1) {
+                cleared[1] = 1;
+            } else if (slot == 2) {
+                cleared[1] = 2;
+            }
+            clearedFlags[1] = 1;
+            if (visibleCount > 1) {
+                scrScriptProcessStartEntry(controller, tableGroupFindEntryIndex(tableGroup, "shop_in2"));
+                scrRunOpcodesStub(controller);
+                shopStartSelectionScript(this, 1);
+                substate = 3;
+                buttonHelpSetText(NULL, 0xF4F4F4FF);
+            }
+            clearedFlags[1] = 0;
+            break;
         case 3:
         case 4:
         case 5:
         case 6:
-          *(unsigned int *)(param_1 + 0x16038) = 0;
-          *(unsigned int *)(param_1 + 0x16040) = 1;
-          if (temp_v1 == 4) {
-            *(unsigned int *)(param_1 + 0x16038) = 1;
-          }
-          else if (temp_v1 == 5) {
-            *(unsigned int *)(param_1 + 0x16038) = 2;
-          }
-          else if (temp_v1 == 6) {
-            *(unsigned int *)(param_1 + 0x16038) = 3;
-          }
-          *(unsigned char *)(param_1 + 0x16044) = 1;
-          if (*(int *)(param_1 + 0x1601c) >= 2) {
-            temp_v2 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x184),&LAB_0049c3b4);
-            scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18c),temp_v2);
-            scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18c));
-            shopStartSelectionScript(param_1,2);
-            *(unsigned int *)(param_1 + 8) = 4;
-            buttonHelpSetText(0,0xf4f4f4ff);
-          }
-          *(unsigned char *)(param_1 + 0x16044) = 0;
+            cleared[0] = 0;
+            cleared[2] = 1;
+            if (slot == 4) {
+                cleared[0] = 1;
+            } else if (slot == 5) {
+                cleared[0] = 2;
+            } else if (slot == 6) {
+                cleared[0] = 3;
+            }
+            clearedFlags[0] = 1;
+            if (visibleCount > 1) {
+                scrScriptProcessStartEntry(controller, tableGroupFindEntryIndex(tableGroup, "shop_in2"));
+                scrRunOpcodesStub(controller);
+                shopStartSelectionScript(this, 2);
+                substate = 4;
+                buttonHelpSetText(NULL, 0xF4F4F4FF);
+            }
+            clearedFlags[0] = 0;
+            break;
         }
-      }
-      else {
-        temp_v1 = inputIsQuestCancelPressed();
-        if (temp_v1 != 0) {
-          sendEvent100020E();
-          menuOpenCommandList(param_1);
-        }
-      }
-      FUN_00498de0(param_1);
-      return;
+    } else if (inputIsQuestCancelPressed() != 0) {
+        sendEvent100020E();
+        menuOpenCommandList(this);
     }
-    if (*(int *)(param_1 + 0x14) != 0) {
-      if (*(int *)(param_1 + 0x14) == 1) {
-        temp_v1 = *(int *)(param_1 + 0xb40);
-        if (temp_v1 == 7) {
-          return;
-        }
-      }
-    }
-    else {
-      temp_v1 = *(int *)(param_1 + 0xb40);
-      if (temp_v1 == 7) {
-        return;
-      }
-    }
-    if ((*(int *)(param_1 + 0xb40) == 0) &&
-       (((*(char *)(param_1 + 0x18) != '\0' || (temp_v1 = gameFlagIsSet(0x410), temp_v1 == 0)) &&
-        (*(int *)(param_1 + 0x14) != 1)))) {
-      return;
-    }
-    temp_v1 = *(int *)(param_1 + 0xb40);
-    if (temp_v1 != 3) {
-      if (temp_v1 != 4) {
-        if (temp_v1 != 5) {
-          temp_v1 = *(int *)(temp_v1 * 8 + 0x588ef0);
-          if ((temp_v1 == 3 || temp_v1 == 4) || temp_v1 == 5) {
-            statusCameraRestore(0);
-            *(unsigned char *)(param_1 + 0x22) = 0;
-          }
-        }
-        else {
-          FUN_0038b57c(2);
-          statusCameraRestore(0);
-          *(unsigned char *)(param_1 + 0x22) = 0;
-        }
-      }
-      else {
-        FUN_0038b57c(1);
-        if (*(int *)(param_1 + 0xb40) == 5) {
-          FUN_0038b57c(2);
-        }
-        statusCameraRestore(0);
-        *(unsigned char *)(param_1 + 0x22) = 0;
-      }
-    }
-    else {
-      FUN_0038b57c(0);
-      if (*(int *)(param_1 + 0xb40) == 4) {
-        FUN_0038b57c(1);
-      }
-      if (*(int *)(param_1 + 0xb40) == 5) {
-        FUN_0038b57c(2);
-      }
-      statusCameraRestore(0);
-      *(unsigned char *)(param_1 + 0x22) = 0;
-    }
-    if ((*(int *)(param_1 + 0xb40) == 0) &&
-       ((*(char *)(param_1 + 0x18) != '\0' || (temp_v1 = gameFlagIsSet(0x410), temp_v1 == 0)))) {
-      FUN_00498de0(param_1);
-      return;
-    }
-    *piVar6 = *(int *)(*(int *)(param_1 + 0xb40) * 8 + 0x588ef4);
-    sendEvent1000210();
-    FUN_004964e0(param_1,1);
-    if (*piVar6 == 3) {
-      temp_v2 = 1;
-      gameSetStatusCameraHeightMode(temp_v2);
-      FUN_00498de0(param_1);
-      return;
-    }
-    if (*piVar6 == 5) {
-      temp_v2 = 2;
-      gameSetStatusCameraHeightMode(temp_v2);
-      FUN_00498de0(param_1);
-      return;
-    }
-    temp_v2 = 0;
-  }
-  else {
-    if (*(int *)(param_1 + 0x14) != 0) {
-      if (*(int *)(param_1 + 0x14) == 1) {
-        temp_v1 = *(int *)(param_1 + 0xb40);
-        if (temp_v1 == 7) {
-          return;
-        }
-      }
-    }
-    else {
-      temp_v1 = *(int *)(param_1 + 0xb40);
-      if (temp_v1 == 7) {
-        return;
-      }
-    }
-    if ((*(int *)(param_1 + 0xb40) == 0) &&
-       (((*(char *)(param_1 + 0x18) != '\0' || (temp_v1 = gameFlagIsSet(0x410), temp_v1 == 0)) &&
-        (*(int *)(param_1 + 0x14) != 1)))) {
-      return;
-    }
-    temp_v1 = *(int *)(param_1 + 0xb40);
-    if (temp_v1 != 3) {
-      if (temp_v1 != 4) {
-        if (temp_v1 != 5) {
-          temp_v1 = *(int *)(temp_v1 * 8 + 0x588ef0);
-          if ((temp_v1 == 3 || temp_v1 == 4) || temp_v1 == 5) {
-            statusCameraRestore(0);
-            *(unsigned char *)(param_1 + 0x22) = 0;
-            *(unsigned char *)(param_1 + 0x23) = 0;
-          }
-        }
-        else {
-          FUN_0038b57c(2);
-          statusCameraRestore(0);
-          *(unsigned char *)(param_1 + 0x22) = 0;
-          *(unsigned char *)(param_1 + 0x23) = 0;
-        }
-      }
-      else {
-        FUN_0038b57c(1);
-        if (*(int *)(param_1 + 0xb40) == 5) {
-          FUN_0038b57c(2);
-        }
-        statusCameraRestore(0);
-        *(unsigned char *)(param_1 + 0x22) = 0;
-        *(unsigned char *)(param_1 + 0x23) = 0;
-      }
-    }
-    else {
-      FUN_0038b57c(0);
-      if (*(int *)(param_1 + 0xb40) == 4) {
-        FUN_0038b57c(1);
-      }
-      if (*(int *)(param_1 + 0xb40) == 5) {
-        FUN_0038b57c(2);
-      }
-      statusCameraRestore(0);
-      *(unsigned char *)(param_1 + 0x22) = 0;
-      *(unsigned char *)(param_1 + 0x23) = 0;
-    }
-    if ((*(int *)(param_1 + 0xb40) == 0) &&
-       ((*(char *)(param_1 + 0x18) != '\0' || (temp_v1 = gameFlagIsSet(0x410), temp_v1 == 0)))) {
-      FUN_00498de0(param_1);
-      return;
-    }
-    *piVar6 = *(int *)(*(int *)(param_1 + 0xb40) * 8 + 0x588ef0);
-    sendEvent1000210();
-    FUN_004964e0(param_1,1);
-    if (*piVar6 != 3) {
-      if (*piVar6 != 5) {
-        temp_v2 = 0;
-        gameSetStatusCameraHeightMode(temp_v2);
-        FUN_00498de0(param_1);
-        return;
-      }
-      temp_v2 = 2;
-    }
-    else {
-      temp_v2 = 1;
-    }
-  }
-  gameSetStatusCameraHeightMode(temp_v2);
-  FUN_00498de0(param_1);
-  return;
+    shopTrackSelectedItemPreview(this);
 }
-
-} /* extern "C" */

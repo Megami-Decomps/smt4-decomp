@@ -2,10 +2,10 @@
 #include "shard/W6_W6Match5_DevilSort.h"
 
 /* Orders two demons by descending race, then ascending level, then descending id. */
-static inline s32 compareFusionDemons(u16 first, u16 second)
+static __inline s32 compareFusionDemons(const u16 *first, const u16 *second)
 {
-    const NkmBaseRecord *a = nkmBaseGetRecord(first);
-    const NkmBaseRecord *b = nkmBaseGetRecord(second);
+    const NkmBaseRecord *a = nkmBaseGetRecord(*first);
+    const NkmBaseRecord *b = nkmBaseGetRecord(*second);
     s32 order = b->race - a->race;
     if (order != 0)
         return order;
@@ -21,10 +21,11 @@ extern "C" s32 fusionComparePairsByRaceLevelAndIdDescending(const u16 *first, co
     UniteWork *work = g_unite;
     u16 firstId = work->pairListIV.pairs[*first].firstId;
     u16 secondId = work->pairListIV.pairs[*second].firstId;
-    s32 order = compareFusionDemons(firstId, secondId);
+    s32 order = compareFusionDemons(&firstId, &secondId);
     if (order == 0) {
-        order = compareFusionDemons(work->pairListIV.pairs[*first].secondId,
-                                    work->pairListIV.pairs[*second].secondId);
+        firstId = work->pairListIV.pairs[*first].secondId;
+        secondId = work->pairListIV.pairs[*second].secondId;
+        order = compareFusionDemons(&firstId, &secondId);
     }
     return order;
 }

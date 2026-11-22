@@ -1,17 +1,14 @@
-/* NON_MATCHING: render-stack push schedules its second address add earlier; shared constants (1.0f, 1, 11) are kept in different registers and the overlay null test uses cmp instead of adds. */
+/* NON_MATCHING: 72 lines. The pivot is the 12-byte TextureDrawPivot that FUN_0032cdc8 copies (retail's frame holds
+ * it at sp+12, as the build now does; with anchor modes 1 its x and y stay unset, in retail too). Retail schedules
+ * the pivot's stores between the x and y arguments, tests the overlay with adds and lays out the style test as
+ * bne/b; the drawOverlay copies' registers differ. */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match5_CommonBackground.h"
 #include "Model/MoriModelShadowMap.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "gfx/TextureDrawPivot.h"
 
-
-/* Draw arguments of the pivoted sprite call. */
-struct OverlayPivot {
-    f32 depth;
-    s16 horizontalMode;
-    s16 verticalMode;
-};
 
 /* The common background overlay object (accessed prefix). */
 struct CommonBackgroundOverlay {
@@ -29,7 +26,6 @@ extern "C" {
 s32 renderCtxPackPassFlags(u32 kind, bool enabled);
 void efctSetSpeed(f32 speed);
 void texDrawCompositeSprite(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);
-void FUN_0032cdc8(u32 screen, u32 table, u32 image, s32 x, s32 y, u32 flags, const OverlayPivot *pivot);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 
@@ -40,7 +36,10 @@ static void drawOverlay(CommonBackgroundOverlay *overlay)
     efctSetSpeed(overlay->fade);
     texDrawCompositeSprite(2, 9, 3, x, y, 11);
     const TextureTableEntryIV *info = asdTMTexTableEntryAt(9, 0x35);
-    OverlayPivot pivot = {64.0f, 1, 1};
+    TextureDrawPivot pivot; /* anchor modes 1: its x and y stay unset, as in retail */
+    pivot.depth = 64.0f;
+    pivot.horizontalMode = 1;
+    pivot.verticalMode = 1;
     FUN_0032cdc8(2, 9, 0x34, info->x + x + info->placement->width / 2, y + info->placement->height / 2 + info->y, 11, &pivot);
     efctSetSpeed(1.0f);
 }

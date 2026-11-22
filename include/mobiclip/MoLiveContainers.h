@@ -123,7 +123,7 @@ public:
 
 typedef std::pair<const u32, ObjectHandle> ObjectHandleEntry;
 typedef StlAllocator<ObjectHandleEntry> ObjectHandleAllocator;
-typedef std::map<u32, ObjectHandle, std::less<u32>, ObjectHandleAllocator> ObjectHandleMap;
+typedef std::multimap<u32, ObjectHandle, std::less<u32>, ObjectHandleAllocator> ObjectHandleMap;
 
 } /* namespace MoLive */
 

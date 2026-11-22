@@ -1,6 +1,3 @@
-/* NON_MATCHING: register swap only: retail keeps the constant 1 in r8 and the alternate table base in r7, armcc here the reverse.
- * Copying the parameter into a local (`void *menu` cast to `work`, as the IV twin FUN_003a07a0 casts its ShopWork *)
- * gives IDENTICAL, but so does a same-type copy, so it is not kept without evidence the parameter had another type. */
 #include "shard/Shard0049.h"
 
 struct EquipmentDetailPair { s32 first, second; };
@@ -17,7 +14,7 @@ struct AlternateEquipmentDetails {
 };
 
 extern "C" {
-extern const EquipmentDetailPair DAT_00588ef0[];
+extern const EquipmentDetailPair g_shopListSlotNeighbors[];
 extern const AlternateEquipmentDetails g_shopTabNeighbors;
 extern const EquipmentDetailImages g_equipMenuStateHandlerInit;
 s32 gameFlagIsSet(u32);
@@ -45,15 +42,17 @@ void FUN_00494574(EquipmentMenuState *work, s32 selection)
             firstIndex = g_shopTabNeighbors.pages[work->page].first;
             secondIndex = g_shopTabNeighbors.pages[work->page].second;
             if (work->page == 0 && (work->sound.restricted || !gameFlagIsSet(0x410))) {
-                firstIndex = g_shopTabNeighbors.lockedFirst.first;
-                secondIndex = g_shopTabNeighbors.lockedFirst.second;
+                const EquipmentDetailPair *locked = &g_shopTabNeighbors.lockedFirst;
+                firstIndex = locked->first;
+                secondIndex = locked->second;
             } else if (work->page == 3 && (work->sound.restricted || !gameFlagIsSet(0x410))) {
-                firstIndex = g_shopTabNeighbors.lockedFourth.first;
-                secondIndex = g_shopTabNeighbors.lockedFourth.second;
+                const EquipmentDetailPair *locked = &g_shopTabNeighbors.lockedFourth;
+                firstIndex = locked->first;
+                secondIndex = locked->second;
             }
         } else {
-            firstIndex = DAT_00588ef0[work->page].first;
-            secondIndex = DAT_00588ef0[work->page].second;
+            firstIndex = g_shopListSlotNeighbors[work->page].first;
+            secondIndex = g_shopListSlotNeighbors[work->page].second;
         }
         EquipmentImageGroup first = g_equipMenuStateHandlerInit.first;
         EquipmentImageGroup second = g_equipMenuStateHandlerInit.second;

@@ -1,90 +1,63 @@
-/* NON_MATCHING: readable rewrite from retail disassembly compiles (174 vs 164 rows); register allocation and constant hoisting (0.26f parallax depth, layer ids) differ */
+/* NON_MATCHING: 32 lines; retail has a 36-byte frame (the halo sprite address spills to [sp, #28]; 20 bytes and [sp, #12] here) and adds the title x before the parallax (add r9, r8, r0) where the build swaps the operands */
 #include "ui/UiSpriteApi.h"
 #include "common.h"
+#include "camp/RenderCtxA.h"
+#include "gfx/StereoParallax.h"
 #include "shard/TextureDrawCall.h"
 #include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/SaveSlotTable.h"
 
-// Draw-state stack embedded in the render context.
-struct DrawRing {
-    s32 index;              // 0x00
-    s32 unk04;
-    s32 slots[4];           // 0x08
-    u8 dirty;               // 0x18
-    u8 unk19[3];
-    void (*flush)(s32 state);   // 0x1c
-};
-
-struct RenderCtx {
-    u8 unk0000[0x12b8];
-    DrawRing ring;          // 0x12b8
-};
-
-
-// UI sprite header: only the animation scale read here.
-struct UiSprite {
-    u8 unk00[0x20];
-    f32 scale;              // 0x20
-};
-
+/* unit-local: the save list work's sprites, as saveListDraw reads them (title, the selected row, the halo) */
 struct SaveSlotHud {
-    u8 unk0000[0xe8c];
-    u8 titleSprite[0xf18 - 0xe8c];      // 0xe8c
-    u8 cardSprite[0xfa2 - 0xf18];       // 0xf18
-    s8 cardVisible;                     // 0xfa2
-    u8 unkfa3[0x197c - 0xfa3];
-    UiSprite haloSprite;                // 0x197c
+    /* 0x0000 */ u8 unk0000[0xe8c];
+    /* 0x0E8C */ UiSpriteState titleSprite;
+    /* 0x0F18 */ UiSpriteState cardSprite;  /* the selected slot's row */
+    /* 0x0FA4 */ u8 unk0fa4[0x197c - 0xfa4];
+    /* 0x197C */ UiSpriteState haloSprite;
 };
 
 extern "C" {
 
-extern RenderCtx* g_renderCtx;
-
-f32 renderCtxCalculateStereoParallax(RenderCtx* ctx, f32 depth);
 void efctSetSpeed(f32 speed);
 
-static void setDrawState(s32 value)
+/* Draws the save slot panel (three-part frames at the title sprite) and, when a
+ * card is shown for the selected slot, the card's frame and highlight. */
+void FUN_0037e8a4(SaveSlotHud *hud, f32 alpha)
 {
-    DrawRing* ring = &g_renderCtx->ring;
-    s32 previous = ring->slots[ring->index];
-    ring->slots[ring->index] = value;
-    if (ring->dirty != 0 || previous != value) {
-        ring->flush(value);
-        ring->dirty = 0;
-    }
-}
-
-// Draws the save slot panel (three-part frames at the title sprite) and, when a
-// card is shown for the selected slot, the card's frame and highlight.
-void FUN_0037e8a4(SaveSlotHud* hud, f32 alpha)
-{
-    void* titleSprite = hud->titleSprite;
-    s32 baseX = vec2GetXInt((UiSpriteState *)titleSprite);
-    s32 baseY = vec2GetYInt((UiSpriteState *)titleSprite);
+    s32 baseX = vec2GetXInt(&hud->titleSprite);
+    s32 baseY = vec2GetYInt(&hud->titleSprite);
     s32 x = baseX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
-    efctSetSpeed(reinterpret_cast<UiSprite*>(titleSprite)->scale * alpha);
-    for (s32 i = 0; i < 3; i++) texDrawTableEntryAtStoredOrigin(2, 0x14, 0xc08 + i, x, baseY, 0xbf);
-    texDrawTableEntryAtStoredOrigin(2, 0x14, 0xbe1, baseX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f), baseY, 0xc4);
+    efctSetSpeed(vec2GetSpeed(&hud->titleSprite) * alpha);
+    for (s32 i = 0; i < 3; i++)
+        texDrawTableEntryAtStoredOrigin(2, 0x14, 0xc08 + i, x, baseY, 0xbf);
+    texDrawTableEntryAtStoredOrigin(2, 0x14, 0xbe1, baseX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f),
+                                    baseY, 0xc4);
 
-    void* cardSprite = hud->cardSprite;
-    if (hud->cardVisible == 0 || saveSlotFindSelected() == NULL) return;
+    UiSpriteState *card = &hud->cardSprite;
+    if (uiSpriteGetCompletionState(card) == 0 || saveSlotFindSelected() == NULL)
+        return;
 
-    s32 cardX = vec2GetXInt((UiSpriteState *)cardSprite);
-    s32 cardY = vec2GetYInt((UiSpriteState *)cardSprite);
-    TextureTableEntryIV* frame = asdTMTexTableEntryAt(0x14, 0xbd9);
-    s32 frameX = cardX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f) + frame->x;
-    s32 frameY = cardY + frame->y;
-    setDrawState(packNibblesAndByte(6, 1, 0));
-    for (s32 i = 0; i < 3; i++) texDrawTableEntryAtStoredOrigin(2, 0x14, 0xbe2 + i, frameX, frameY, 0xbf);
+    s32 cardX = vec2GetXInt(card);
+    s32 cardY = vec2GetYInt(card);
+    TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x14, 0xbd9);
+    s32 frameX = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f) + cardX + frame->x;
+    s32 frameY = frame->y + cardY;
+    /* both opacities are read and not used (retail keeps the two loads) */
+    vec2GetSpeed(&hud->haloSprite);
+    vec2GetSpeed(card);
+    renderCtxSetStackTop(g_renderCtx, RENDER_STACK_B, packNibblesAndByte(6, 1, 0));
+    for (s32 i = 0; i < 3; i++)
+        texDrawTableEntryAtStoredOrigin(2, 0x14, 0xbe2 + i, frameX, frameY, 0xbf);
 
-    TextureTableEntryIV* marker = asdTMTexTableEntryAt(0x14, 0xc16);
-    s32 markerX = marker->x + cardX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+    TextureTableEntryIV *marker = asdTMTexTableEntryAt(0x14, 0xc16);
+    s32 markerX = marker->x + ((s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f) + cardX);
     s32 markerY = marker->y + cardY;
-    efctSetSpeed(hud->haloSprite.scale * alpha);
-    for (s32 i = 0; i < 3; i++) texDrawTableEntryAtStoredOrigin(2, 0x14, 0xc01 + i, markerX, markerY, 0xc4);
+    efctSetSpeed(vec2GetSpeed(&hud->haloSprite) * alpha);
+    for (s32 i = 0; i < 3; i++)
+        texDrawTableEntryAtStoredOrigin(2, 0x14, 0xc01 + i, markerX, markerY, 0xc4);
     efctSetSpeed(alpha);
-    setDrawState(packNibblesAndByte(6, 7, 0));
+    renderCtxSetStackTop(g_renderCtx, RENDER_STACK_B, packNibblesAndByte(6, 7, 0));
 }
 
 } /* extern "C" */

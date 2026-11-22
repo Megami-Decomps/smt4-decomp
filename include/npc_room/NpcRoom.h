@@ -74,8 +74,9 @@ struct NpcRoomA {
     /* 0x0F8 */ u8 unk0F8[0xC];
     /* 0x104 */ u32 messageParameter;
     /* 0x108 */ NpcRoomSlotProgressA progress[NPC_ROOM_JOBS];
+    /* 0x168 */ s32 frame;  /* the animation clock the room slots' fade cycles run on */
 };
-typedef char NpcRoomASizeCheck[sizeof(NpcRoomA) == 0x168 ? 1 : -1];
+typedef char NpcRoomASizeCheck[sizeof(NpcRoomA) == 0x16C ? 1 : -1];
 typedef char NpcRoomADisplayEntriesOffsetCheck[offsetof(NpcRoomA, displayEntries) == 0x64 ? 1 : -1];
 typedef char NpcRoomADisplayCountOffsetCheck[offsetof(NpcRoomA, displayCount) == 0xE4 ? 1 : -1];
 typedef char NpcRoomAMessageParameterOffsetCheck[offsetof(NpcRoomA, messageParameter) == 0x104 ? 1 : -1];

@@ -1,4 +1,4 @@
-/* NON_MATCHING: typed rewrite of the command controller target setup, the smt4a variant of FUN_003ca6c4 with 64-bit entry masks (461 vs 462 rows); register allocation of the mask halves and loop pointers differs. */
+/* NON_MATCHING: typed rewrite of the command controller target setup, the smt4a variant of FUN_003ca6c4 with 64-bit entry masks (463 rows, as retail; the first two loops share one index as in the IV twin); register allocation of the mask halves and loop pointers differs. */
 #include "common.h"
 #include "gamedata/SkillDataLookup.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -90,12 +90,14 @@ void FUN_004dd0c4(BtlMainStateA **block, CommandStateA *state)
             normal = false;
     } else if (kind == 8) {
         if (record != NULL && record->skillId != 0) {
-            if (skillDataFindById(record->skillId) == NULL || skillHasSpecialCategory(skill))
+            const SkillDataRecordA *itemSkill = skillDataFindById(record->skillId);
+            if (itemSkill == NULL || skillHasSpecialCategory(itemSkill))
                 normal = false;
         }
     }
 
-    for (s32 remaining = 109, index = 0; remaining != 0; --remaining, ++index) {
+    s32 index;
+    for (index = 0; index < 109; ++index) {
         (*block)->roster[index].liveFlags.unk50 &= ~4;
         (*block)->roster[index].liveFlags.unk50 &= ~8;
     }
@@ -106,7 +108,7 @@ void FUN_004dd0c4(BtlMainStateA **block, CommandStateA *state)
         u64 sideBMask = actionMask(MASK_SIDE_B);
         u64 enemyMask = g_btlAction.interaction.requiredMask;
         u64 hiddenMask = g_btlAction.interaction.excludedMask;
-        for (s32 index = 0; index < 109; ++index) {
+        for (index = 0; index < 109; ++index) {
             s32 combatant = (*block)->roster[index].combatant.combatantIndex;
             if (combatant < 0)
                 continue;

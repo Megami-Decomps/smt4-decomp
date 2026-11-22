@@ -5,7 +5,7 @@
  *   (font sp+0, name sprite sp+12, layout entry/sprite/x sp+4/0/8, id copy sp+4, price sp+0). shopDrawAppraisalRow
  *   differs the same way;
  * - `row != 0` is `mov #1; moveq #0` in retail (`movne #1; moveq #0` here);
- * - retail loads the entry id into r2 before it moves the price for btlRollClamped, as its four other callers do
+ * - retail loads the entry id into r2 before it moves the price for shopAffordableCount, as its four other callers do
  *   (a plain `static` helper around the call gives that, but moves the id's slot to sp+28);
  * - the name draw loads the 0.0 spacing after the colour move (before it here). */
 #include <stdio.h>
@@ -29,7 +29,7 @@ f32 drawTextAtSnappedRectangle(const AsdTextureRegion *region, f32 x, f32 y, u32
 const char *itemGetNameOrFallback(u32 id, s32 payload);
 s32 shopSlotGetPrice(const Scene3aEntry *entry);
 s32 aocItemGetPrice(const Scene3aEntry *entry);
-s32 btlRollClamped(u32 id, s32 divisor);
+s32 shopAffordableCount(u32 id, s32 divisor);
 s32 playerSlotHoldsEntry(Scene3a *scene, u32 id);
 s8 touchSelectionGetSelected(const Obj55ca08 *selection);
 
@@ -140,7 +140,7 @@ void shopDrawListRow(Scene3a *scene, s32 row, s32 selected, const Scene3aEntry *
             if (sceneHoldsLastItem(scene, id)) {
                 color = 0x5A5A5AFF;
             }
-        } else if (!btlRollClamped(entry->id, shopSlotGetPrice(entry))) {
+        } else if (!shopAffordableCount(entry->id, shopSlotGetPrice(entry))) {
             color = 0x5A5A5AFF;
         }
     } else {
@@ -150,7 +150,7 @@ void shopDrawListRow(Scene3a *scene, s32 row, s32 selected, const Scene3aEntry *
             if (sceneHoldsLastItem(scene, id)) {
                 color = 0x787878FF;
             }
-        } else if (!btlRollClamped(entry->id, shopSlotGetPrice(entry))) {
+        } else if (!shopAffordableCount(entry->id, shopSlotGetPrice(entry))) {
             color = 0x787878FF;
         }
     }

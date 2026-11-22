@@ -449,10 +449,12 @@ struct UniteWorkA {
             /* 0x8E78 */ u8 unk8E78[4];
             /* 0x8E7C */ s32 freedCount;           /* entries of freedSlots in use */
             /* 0x8E80 */ s32 skillCount;           /* candidate skills in `skills` */
-            /* 0x8E84 */ u8 unk8E84[6];
-            /* 0x8E8A */ u8 accepted;
+            /* 0x8E84 */ s32 rowLimit;             /* a cursor at or past it is on the button strip */
+            /* 0x8E88 */ u8 unk8E88[2];
+            /* 0x8E8A */ s8 accepted;
             /* 0x8E8B */ u8 unk8E8B;
             /* 0x8E8C */ s32 freedSlots[8];        /* the slots emptied, last first; -1 = none */
+            /* 0x8EAC */ s8 stripSelected;         /* the button strip below the list is selected */
         } inheritanceA;
         struct {
             /* 0x438 */ s16 regions[0x40];      /* the touch region of each list button: the rows, then 29-31 the
@@ -592,6 +594,8 @@ typedef char UniteWorkResultBuildAOffsets[
 typedef char UniteWorkAInheritanceOffsets[offsetof(UniteWorkA, inheritanceA.slots) == 0x8B60 &&
     offsetof(UniteWorkA, inheritanceA.slotList) == 0x8DB0 && offsetof(UniteWorkA, inheritanceA.freedCount) == 0x8E7C &&
     offsetof(UniteWorkA, inheritanceA.skillCount) == 0x8E80 && offsetof(UniteWorkA, inheritanceA.freedSlots) == 0x8E8C &&
+    offsetof(UniteWorkA, inheritanceA.rowLimit) == 0x8E84 && offsetof(UniteWorkA, inheritanceA.accepted) == 0x8E8A &&
+    offsetof(UniteWorkA, inheritanceA.stripSelected) == 0x8EAC &&
     offsetof(UniteWorkA, buttonsA.regions) == 0x438 ? 1 : -1];
 
 typedef char UniteWorkAHelpOffsetCheck[offsetof(UniteWorkA, inheritanceA.skillList) == 0x8E14 &&

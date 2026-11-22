@@ -23,7 +23,7 @@ s32 nameEntryUpdateTask(void *process);
 void nameWorkMarkDone(void *process);
 s32 nameDrawIfVisible(void);
 s32 nameDrawLowerCallback(void);
-void FUN_003984ac(void *drawing, s8 mode);
+void stateSetterConstruct(void *drawing, s8 mode);
 void FUN_003984a4(void *drawing);
 }
 
@@ -36,7 +36,7 @@ extern "C" void nameMainCreateJobs(const s32 *mode)
     if (mode == NULL)
         FUN_003984a4(work->drawing);
     else
-        FUN_003984ac(work->drawing, (s8)*mode);
+        stateSetterConstruct(work->drawing, (s8)*mode);
     work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_004056ac), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(nameEntryUpdateTask), reinterpret_cast<AsdProcFunc>(nameWorkMarkDone), reinterpret_cast<u32>(g_name.work));
     if (*mode == 1) {
         taskCreateDraw(DAT_004056bc, 0x80, 1, 0, nameDrawIfVisible, NULL, g_name.work, work->process);

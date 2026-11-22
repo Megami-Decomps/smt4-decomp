@@ -1,6 +1,6 @@
-/* NON_MATCHING: the unit loop now matches (unitSetHpClamped, the clamp with its own NULL test that retail inlines here
- * and in partyApplyPercentHealthDamage); remaining: the group lives in r5 instead of r4 (and the player's damage
- * product in r4), the player division is scheduled before the HP load, and the player clamp compares the other way. */
+/* NON_MATCHING: the unit loop's clamps match (unitSetHpClamped, and playerSetHpClamped for the player, as in
+ * partyApplyPercentHealthDamage); remaining: the group lives in r5 instead of r4 (and the player's damage product in
+ * r4), the player division is scheduled before the HP load, and the unit loop's registers differ. */
 #include "gamedata/SaveSlotTableIV.h"
 #include "gamedata/GameDataAccess_Smt4.h"
 #include "gamedata/GamePlayerData.h"
@@ -19,6 +19,18 @@ static __inline void unitSetHpClamped(StatBlock *unit, s16 hp)
             hp = 1;
         unit->hp = hp;
     }
+}
+
+/* Sets the player's HP, clamped to 1..maxHp. */
+static __inline void playerSetHpClamped(s16 hp)
+{
+    PlayerDataIV *player = gameGetPlayerData();
+    s16 maximum = player->maxHp;
+    if (hp > maximum)
+        hp = maximum;
+    else if (hp < 1)
+        hp = 1;
+    player->hp = hp;
 }
 
 /* Applies nonlethal percentage damage to the party members (player included for groups 0, 2 and 3) that have the
@@ -40,13 +52,7 @@ void partyApplyNonlethalAilmentDamage(u32 group, u32 ailment, s32 percentage)
         hp -= damage;
         if (hp <= 0)
             hp = 1;
-        s16 remaining = hp;
-        PlayerDataIV *player = gameGetPlayerData();
-        if (remaining > player->maxHp)
-            remaining = player->maxHp;
-        else if (remaining < 1)
-            remaining = 1;
-        player->hp = remaining;
+        playerSetHpClamped(hp);
     }
 
     s32 count;

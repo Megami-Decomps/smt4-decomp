@@ -8,7 +8,7 @@ int memAlloc(...);
 int effectParticleEmitterSetAdvance(...);
 int effectTimelinePartApplyRotation(...);
 int FUN_001b4ba4(int);
-int FUN_001b4c1c(...);
+int effectTimelinePartApplyTint(...);
 int effPartInitDefaults(...);
 int FUN_001b4e80(void);
 int skelNodePoseChain(...);
@@ -36,7 +36,7 @@ extern char s______________________005b3274[113]; /* 0x5b3274 */
 /* Supplied declaration required: effectParticleEmitterSetAdvance. */
 /* Supplied declaration required: effectTimelinePartApplyRotation. */
 /* Supplied declaration required: FUN_001b4ba4. */
-/* Supplied declaration required: FUN_001b4c1c. */
+/* Supplied declaration required: effectTimelinePartApplyTint. */
 /* Supplied declaration required: effPartInitDefaults. */
 /* Supplied declaration required: FUN_001b4e80. */
 /* Supplied declaration required: skelNodePoseChain. */
@@ -328,7 +328,7 @@ unsigned int * effPartCreateFromSource(unsigned int *param_1)
   skelNodePoseChain(puVar2,&temp_v12);
   effectTimelinePartApplyRotation(puVar2,&temp_v12);
   effectParticleEmitterSetAdvance(puVar2);
-  FUN_001b4c1c(puVar2,0xffffffff);
+  effectTimelinePartApplyTint(puVar2,0xffffffff);
   FUN_001b4e80();
   return puVar2;
 }

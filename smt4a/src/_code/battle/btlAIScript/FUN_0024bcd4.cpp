@@ -37,7 +37,7 @@ int FUN_00339270(void);
 int sysClearCachedFlag(void);
 int soundChannelStopAll(...);
 int btlActionPrepareFromSource(...);
-int FUN_003ee734(...);
+int btlTurnEndApplyRegenSkills(...);
 int FUN_003ef1e4(...);
 int resourceReleaseReference(void);
 int btlHelpFreeEntries(void);
@@ -221,7 +221,7 @@ extern int FUN_003e9964(unsigned int);
 /* Supplied declaration required: FUN_003ebad4. */
 /* Supplied declaration required: btlHasFilteredCommand. */
 extern int FUN_003ed878(unsigned int);
-/* Supplied declaration required: FUN_003ee734. */
+/* Supplied declaration required: btlTurnEndApplyRegenSkills. */
 /* Supplied declaration required: btlFindSelectionIndexByOrdinal. */
 /* Supplied declaration required: FUN_003ef1e4. */
 /* Supplied declaration required: FUN_003f034c. */
@@ -993,7 +993,7 @@ LAB_0024d284:
         rt_memcpy(temp_v6,DAT_00573928,0x10b8);
       }
     }
-    FUN_003ee734(temp_v2);
+    btlTurnEndApplyRegenSkills(temp_v2);
     if (((*puVar16 & DAT_00573a50) != 0 || (DAT_00573a54 & *(unsigned int *)(temp_v2 + 0x45a4)) != 0) &&
        (*(int *)(temp_v2 + 0xa8) == 2 || *(int *)(temp_v2 + 0xa8) == 4)) {
       *(unsigned int *)(temp_v2 + 0xa8) = 0xd;

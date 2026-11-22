@@ -8,7 +8,7 @@ extern "C" {
 int slotTableReplace(unsigned char [12], unsigned int, int);
 int FUN_00150d2c(int *, unsigned int, int *, unsigned int);
 int FUN_002a4b0c(int, int *);
-int FUN_002a78c0(int *, unsigned int, int, int *, unsigned int, unsigned int);
+int soundArchiveLoaderReadFile(int *, unsigned int, int, int *, unsigned int, unsigned int);
 int FUN_002a7ac4(unsigned char [12], int *, int);
 int rt_memcpy(unsigned int, int *, int);
 
@@ -26,7 +26,7 @@ typedef struct {
 extern int *FUN_001522ac(unsigned char *, unsigned int);
 extern unsigned int FUN_001522d4(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a4b0c. */
-/* Supplied declaration required: FUN_002a78c0. */
+/* Supplied declaration required: soundArchiveLoaderReadFile. */
 /* Supplied declaration required: FUN_002a7ac4. */
 extern unsigned int soundArchiveFileEntryIsLoaded(int);
 extern int nnosGetHeapSize(void);
@@ -80,7 +80,7 @@ FUN_0014c250(int *param_1,unsigned int param_2,unsigned int param_3,int *param_4
       rt_memcpy(temp_v2,&temp_v10,0x20);
       temp_v1 = temp_v2 + 0x20;
       temp_v5 = FUN_001522d4(temp_v8,param_3);
-      FUN_002a78c0(param_1,temp_v0,temp_v1,piVar2,temp_v5,param_5);
+      soundArchiveLoaderReadFile(param_1,temp_v0,temp_v1,piVar2,temp_v5,param_5);
       if (param_1 == piVar2) {
         slotTableReplace(temp_v8,param_3,temp_v1);
         FUN_002a4b0c(temp_v1,piVar2);

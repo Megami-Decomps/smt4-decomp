@@ -1,50 +1,43 @@
-/* NON_MATCHING: surface field loads, floating-register allocation and format-switch block layout differ. */
-#include "common.h"
+/* NON_MATCHING: the code matches retail's except the register allocation: retail keeps the colour width in r4
+ * and the depth width in r6 (the build swaps them), multiplies red into s5 (the build blue), and moves the depth
+ * value's bits into a core register after the sign test rather than at entry. */
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
+#include "shard/W6_W6Match8_GpuDepth.h"
 
-struct ClearBufferSurface {
-    u32 format;
-    u32 unk04;
-    u32 address;
-    u32 unk0C;
-    u32 size;
-};
-union ClearDepthBits { f32 value; u32 bits; };
 extern "C" {
 void asdGxCommandBufferTerminateAndSubmit();
 void asdGfxCmdBufferForward8(u32, u32, u32, u32, u32, u32, u32, u32);
 
-void gxCommandClearColorDepth(ClearBufferSurface *color, ClearBufferSurface *depth,
-                  f32 red, f32 green, f32 blue, f32 alpha, f32 depthValue,
-                  u32 stencil, u32 clearMask, s32 synchronize)
+/* Fills the colour and depth buffers the clear mask selects (bit 0 colour, bits 1-2 depth and stencil) with the
+ * clear colour (RGBA8) and the 24-bit depth plus 8-bit stencil, optionally submitting the pending commands first. */
+void gxCommandClearColorDepth(AsdGxRenderBuffer *color, AsdGxRenderBuffer *depth, u32 stencil, u32 clearMask,
+                  s32 synchronize, f32 red, f32 green, f32 blue, f32 alpha, f32 depthValue)
 {
     u32 colorBits = 32;
     u32 depthBits = 32;
-    u32 colorAddress = color->address;
-    u32 colorSize = color->size;
-    u32 depthAddress = depth->address;
-    u32 depthSize = depth->size;
-    ClearDepthBits value;
-    value.value = depthValue;
-    u32 packedDepth;
-    if (depthValue <= 0.0f || ((value.bits << 1) >> 24) == 255) {
-        packedDepth = 0;
-    } else {
-        value.value *= 16777216.0f;
-        packedDepth = static_cast<s32>(value.bits) < 0x4B800000 ?
-                      static_cast<u32>(value.value) : 0xFFFFFF;
-    }
-    u32 packedColor = (static_cast<u32>(red * 255.0f) << 24) |
-                      (static_cast<u32>(green * 255.0f) << 16) |
-                      (static_cast<u32>(blue * 255.0f) << 8) |
-                      static_cast<u32>(alpha * 255.0f);
-    switch (color->format) {
-    case 0x8056:
-    case 0x8057:
-    case 0x8D62:
+    u32 colorFormat = color->format;
+    u32 colorAddress = color->buffer;
+    u32 colorBytes = color->bytes;
+    u32 depthFormat = depth->format;
+    u32 depthAddress = depth->buffer;
+    u32 depthBytes = depth->bytes;
+    u32 packedDepth = gpuDepthEncodeUnorm24(depthValue);
+    packedDepth |= stencil << 24;
+    u32 redByte = (u32)(red * 255.0f);
+    u32 greenByte = (u32)(green * 255.0f);
+    u32 blueByte = (u32)(blue * 255.0f);
+    u32 alphaByte = (u32)(alpha * 255.0f);
+    u32 packedColor = (redByte << 24) | (greenByte << 16) | (blueByte << 8) | alphaByte;
+    switch (colorFormat) {
+    case 0x8056: /* GL_RGBA4 */
+    case 0x8057: /* GL_RGB5_A1 */
+    case 0x8D62: /* GL_RGB565 */
         colorBits = 16;
         break;
+    case 0x8058: /* GL_RGBA8 */
+        break;
     }
-    if (depth->format == 0x81A5)
+    if (depthFormat == 0x81A5) /* GL_DEPTH_COMPONENT16 */
         depthBits = 16;
     if (!(clearMask & 1))
         colorAddress = 0;
@@ -52,7 +45,7 @@ void gxCommandClearColorDepth(ClearBufferSurface *color, ClearBufferSurface *dep
         depthAddress = 0;
     if (synchronize)
         asdGxCommandBufferTerminateAndSubmit();
-    asdGfxCmdBufferForward8(colorAddress, colorSize, packedColor, colorBits,
-                           depthAddress, depthSize, packedDepth | (stencil << 24), depthBits);
+    asdGfxCmdBufferForward8(colorAddress, colorBytes, packedColor, colorBits,
+                           depthAddress, depthBytes, packedDepth, depthBits);
 }
-}
+} /* extern "C" */

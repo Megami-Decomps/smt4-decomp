@@ -1,4 +1,4 @@
-/* NON_MATCHING: animation-state base is not retained; storage-allocation flag and buffer-size lifetimes differ. */
+/* NON_MATCHING: 71 vs 70 rows (25 diff lines): animation-state base and memberCount loop match retail; retail hoists the allocation flag (r9=1) and byte count (r8=count*4) ahead of the storage NULL check and loads view->holder via r5. */
 #include "Model/MoriModelUnit.h"
 #include "shard/W6_W6Match7_MaterialAnimationFlags.h"
 #include "AsdSDK/AsdDebug.h"
@@ -44,7 +44,7 @@ void moriModelUnitStartMaterialAnimation(MoriModelUnit *unit, u32 index, u8 mode
         u32 samples[2];
         void *storage;
     };
-    // Animation fields extend beyond MoriModelUnit's canonical prefix.
+    /* Animation fields extend beyond MoriModelUnit's canonical prefix. */
     struct UnitView {
         u8 prefix[0x84];
         AnimationState state;
@@ -56,31 +56,34 @@ void moriModelUnitStartMaterialAnimation(MoriModelUnit *unit, u32 index, u8 mode
     };
     typedef char UnitViewLayout[offsetof(UnitView, state) == 0x84 &&
         offsetof(UnitView, materials) == 0x10c && offsetof(UnitView, holder) == 0x20c ? 1 : -1];
-    UnitView *view = reinterpret_cast<UnitView *>(unit);
-    ModelView *model = view->holder ? &view->holder->model : NULL;
+    UnitView *view = (UnitView *)unit;
+    ModelView *model = NULL;
+    if (view->holder != NULL) {
+        model = &view->holder->model;
+    }
     if (index < model->library->count) {
         AnimationView *animation = model->library->animations[index];
         if (animation != NULL) {
-            view->state.index = index;
-            view->state.speed = speed;
-            view->state.animation = animation;
-            resourceNameBindingBind(&view->state.binding, &animation->header, view->metadata);
-            gfxMarkMaterialAnimationCapabilities(&animation->header, &view->materials, &view->state.binding);
-            view->state.mode = mode;
-            animation = view->state.animation;
+            AnimationState *state = &view->state;
+            state->index = index;
+            state->speed = speed;
+            state->animation = animation;
+            resourceNameBindingBind(&state->binding, &animation->header, view->metadata);
+            gfxMarkMaterialAnimationCapabilities(&animation->header, &view->materials, &state->binding);
+            state->mode = mode;
+            animation = state->animation;
             u32 count = animation->valueCount;
-            for (u32 member = 0; member < animation->header.count; ++member) {
+            u32 memberCount = animation->header.count;
+            for (u32 member = 0; member < memberCount; ++member) {
                 if (animation->header.members[member]->targetKind == 6) {
-                    void *storage = view->state.storage;
-                    if (storage == NULL) {
+                    if (state->storage == NULL) {
                         asdDebugTrace(g_moriModelUnitSourceFileName, 942);
-                        storage = asdMemoryAlloc(0x10000, 0x100, 0, count * 4, 1);
-                        view->state.storage = storage;
+                        state->storage = asdMemoryAlloc(0x10000, 0x100, 0, count * 4, 1);
                     }
-                    FUN_0045b498(view->state.samples, storage, count);
+                    FUN_0045b498(state->samples, state->storage, count);
                     model = &view->holder->model;
                     if (model != NULL) {
-                        FUN_0045b384(view->state.samples, &animation->header, model);
+                        FUN_0045b384(state->samples, &animation->header, model);
                     }
                     return;
                 }
@@ -88,4 +91,4 @@ void moriModelUnitStartMaterialAnimation(MoriModelUnit *unit, u32 index, u8 mode
         }
     }
 }
-}
+} /* extern "C" */

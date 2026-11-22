@@ -5,7 +5,7 @@
 extern "C" {
 extern MapCollisionFaceTable g_mapCollision;
 void FUN_0026e80c(s32 flag, Vec3f *out, f32 hint);
-void FUN_0026ea5c(s32 kind, s32 corner, f32 *edge, f32 *limit, Vec3f origin, Vec3f from, Vec3f to);
+void statusCameraBuildAxisPlane(s32 kind, s32 corner, f32 *edge, f32 *limit, Vec3f origin, Vec3f from, Vec3f to);
 void FUN_0026e8a4(s32 kind, s32 count, f32 *bounds, f32 *bounds2, Vec3f a, Vec3f b, Vec3f c, Vec3f d);
 
 /* Appends the collision mesh's faces to the face table, building each one's plane, centre and edge data. */
@@ -38,10 +38,10 @@ void FUN_001c2778(u32 owner)
         face->unk0a = 0;
         Vec3f reference;
         FUN_0026e80c(1, &reference, v0.x);
-        FUN_0026ea5c(face->kind, 0, face->edgeA, &face->limitA, reference, v0, v1);
-        FUN_0026ea5c(face->kind, 1, face->edgeB, &face->limitB, reference, v1, v2);
-        FUN_0026ea5c(face->kind, 2, face->edgeC, &face->limitC, reference, v2, v3);
-        FUN_0026ea5c(face->kind, 2, face->edgeD, &face->limitD, reference, v3, v0);
+        statusCameraBuildAxisPlane(face->kind, 0, face->edgeA, &face->limitA, reference, v0, v1);
+        statusCameraBuildAxisPlane(face->kind, 1, face->edgeB, &face->limitB, reference, v1, v2);
+        statusCameraBuildAxisPlane(face->kind, 2, face->edgeC, &face->limitC, reference, v2, v3);
+        statusCameraBuildAxisPlane(face->kind, 2, face->edgeD, &face->limitD, reference, v3, v0);
         FUN_0026e8a4(face->kind, face->vertexCount, face->bounds, face->bounds2, v0, v1, v2, v3);
         g_mapCollision.faceCount++;
     }

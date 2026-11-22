@@ -45,7 +45,10 @@ struct MikadoRouteActorA {
 };
 
 /* Apocalypse's counterpart (0x7A0 bytes, mikado/moveCamera/MoveCameraCtrl.cpp): the scene's camera
- * controller; its floating-point state sits at 0x4F0. */
+ * controller; its floating-point state sits at 0x4F0. The controller's own functions (moveCameraCtrlSetup,
+ * moveCameraCtrlSnapToNode, the track loader) use the fuller layout MoveCameraCtrlWork in gfx/MoveCameraCtrl.h:
+ * nodeCount/selectedNode/routeMode are its frameCount/frame/selectedKey, actor its pointModel and the actor
+ * destinations its point positions. */
 class MikadoTalkWorkA {
 public:
     static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }

@@ -5,7 +5,9 @@
 
 #include "shard/W6_W6Match8_DevilRecordA.h"
 
-static __inline s32 fusionCompareRaceLevelIdA(const u32 *first, const u32 *second)
+/* Tie-breaks two demon ids by race, then level (higher first), then id: the body of IV's qsort comparator
+ * devilCompareRaceLevelDescending, inlined by the pair comparators. */
+static __inline s32 fusionCompareRaceLevelIdA(const u16 *first, const u16 *second)
 {
     const NkmBaseRecordA *a = nkmBaseGetRecord(*first);
     const NkmBaseRecordA *b = nkmBaseGetRecord(*second);

@@ -22,7 +22,7 @@ extern unsigned char LAB_002909f8; /* 0x2909f8 */
 extern int FUN_00290a8c(...); /* 0x290a8c */
 extern unsigned char LAB_002ce670; /* 0x2ce670 */
 extern int FUN_002ce730(...); /* 0x2ce730 */
-extern int FUN_002fddd8(...); /* 0x2fddd8 */
+extern int devilCompareUnitsByRaceDescending(...); /* 0x2fddd8 */
 extern int g_partyPanel; /* 0x57f268 */
 
 /* Supplied declaration required: qsort. */
@@ -53,7 +53,7 @@ void partyPanelSortByMode(void)
       qsort(temp_v0 + 0xa80,0x18,8,FUN_00241874);
     }
     else {
-      qsort(temp_v0 + 0xa80,0x18,8,FUN_002fddd8);
+      qsort(temp_v0 + 0xa80,0x18,8,devilCompareUnitsByRaceDescending);
     }
   }
   if ((*pbVar2 & 0x7f) == 4) {

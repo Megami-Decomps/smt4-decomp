@@ -78,7 +78,7 @@ unsigned long long FUN_002def6c(void)
     }
     *piVar6 = 0;
   }
-  FUN_003ef614(puVar1);
+  battleReleaseUnusedEnemyResources(puVar1);
   battleReleaseRetiredUnitResources(puVar1);
   if (puVar1[0x89d] != 0) {
     puVar1[0x89d] = 0;

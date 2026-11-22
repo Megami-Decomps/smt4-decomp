@@ -39,7 +39,7 @@ void messageMainFinishWindow(void);
 void messageMainSetEnabled(u8 value);
 s32 inputIsQuestMenuPressed(void);
 s32 flaggedEntryGetValueByState(ShopCategoryList *list);
-s32 btlRollClamped(u32 id, s32 divisor);
+s32 shopAffordableCount(u32 id, s32 divisor);
 u32 playerSlotHoldsEntry(ShopScreen *screen, u32 id);
 void equipmentPreviewUpdateSelection(ShopScreen *screen);
 u8 sys43e188GetState(void);
@@ -209,7 +209,7 @@ void shopQuantityStep(ShopScreen *screen)
                     maximum--;
                 }
             } else {
-                maximum = btlRollClamped(item->id, shopSlotGetPrice(item));
+                maximum = shopAffordableCount(item->id, shopSlotGetPrice(item));
             }
             numericStepperSetup(&screen->quantity, maximum, 0, row);
             pageRegisterButtonTouchRegions(&screen->quantity);

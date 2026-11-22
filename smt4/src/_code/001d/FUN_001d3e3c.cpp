@@ -64,7 +64,7 @@ int slotOwnerDestroyAllSlots(...);
 int mapProjectPointHeightToCollision(...);
 int objDestroyModels(...);
 
-int FUN_0026413c(void);
+int mapCameraUpdateTurn(void);
 void lmapEntryPoolDestroyAll(LmapObj *);
 int FUN_002644a8(void);
 int mapInterfaceSetStateTwo(void);
@@ -353,7 +353,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: mapEffectReserveAndSpawn. */
 /* Supplied declaration required: FUN_00263e50. */
 /* Supplied declaration required: FUN_002640a4. */
-/* Supplied declaration required: FUN_0026413c. */
+/* Supplied declaration required: mapCameraUpdateTurn. */
 /* Supplied declaration required: lmapEntryPoolDestroyAll. */
 /* Supplied declaration required: FUN_002644a8. */
 extern int lmapMainUpdateScriptTransition(void);
@@ -2405,7 +2405,7 @@ LAB_001d6bd0:
     }
     break;
   case 0x3b:
-    FUN_0026413c();
+    mapCameraUpdateTurn();
     FUN_00265f50(puVar7);
     temp_v6 = scrRunOpcodesStub(puVar7[0x26e]);
     if (temp_v6 != 2) {

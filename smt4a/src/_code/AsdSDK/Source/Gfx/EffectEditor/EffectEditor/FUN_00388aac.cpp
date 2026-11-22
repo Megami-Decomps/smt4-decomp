@@ -10,7 +10,7 @@ int effectNodeUpdateTransform(...);
 int effPartCreateFromSource(void);
 int effectParticleEmitterSetAdvance(...);
 int effectTimelinePartApplyRotation(void);
-int FUN_001b4c1c(...);
+int effectTimelinePartApplyTint(...);
 int skelNodePoseChain(...);
 int eventDispatch(...);
 int effBlockCreateFromBlock(void);
@@ -106,7 +106,7 @@ extern int slotIsActive(unsigned int);
 /* Supplied declaration required: effPartCreateFromSource. */
 /* Supplied declaration required: effectParticleEmitterSetAdvance. */
 /* Supplied declaration required: effectTimelinePartApplyRotation. */
-/* Supplied declaration required: FUN_001b4c1c. */
+/* Supplied declaration required: effectTimelinePartApplyTint. */
 /* Supplied declaration required: skelNodePoseChain. */
 extern unsigned char *FUN_00200bcc(unsigned char *);
 /* Supplied declaration required: FUN_00202178. */
@@ -559,7 +559,7 @@ LAB_00388edc:
       effectTimelinePartApplyRotation();
       skelNodePoseChain(DAT_0059dbf0,&g_effectEditorInitialVector);
       effectParticleEmitterSetAdvance(DAT_0059dbf0);
-      FUN_001b4c1c(DAT_0059dbf0,g_effectEditorWorkingSnapshot.parameters.value);
+      effectTimelinePartApplyTint(DAT_0059dbf0,g_effectEditorWorkingSnapshot.parameters.value);
     }
   }
   else {

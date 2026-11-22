@@ -1,10 +1,8 @@
-/* NON_MATCHING: choice-table copies, prompt literals, and message/menu register scheduling differ. */
+/* NON_MATCHING: 84 lines; retail copies the flag and label tables from two separate constants (the build merges them into one), keeps the window pointer in r9 and orders the message arguments differently */
 #include "ui/MessageMainA.h"
 #include "ui/ScriptChoiceMenu.h"
+#include "AsdSDK/asdTextFormatStream.h"
 extern "C" {
-extern const FiveChoiceTable DAT_00530a10;
-extern const ChoiceLabelTable DAT_0052fe4c;
-extern const u8 LAB_0038870c;
 s32 scrGetCommandFrame(void);
 s32 scrGetArg(u32 index);
 void scrCommMessageSetMode(s32 mode);
@@ -14,7 +12,6 @@ void bustupCutAnimRequestStopSlots(void);
 void eventTexRequestStopAll(void);
 u32 scrGetCommandOwner(void);
 void messageWindowShowOrPoll(u32, u32, u32, s32, s32, s32);
-void asdTextFormatStream(u32, s32, u32, s32, s32, const u8 *, const u8 *);
 void msgBoxFlagsSetBit7(u32 box);
 void sortMenuAcquire(u32, s32);
 void useCounterAppendValue(u8 label);
@@ -28,15 +25,14 @@ void obj04Finish(void);
 /* Offers enabled five-way choices, excluding the script's current selection. */
 u32 FUN_003884d4(void)
 {
-    FiveChoiceTable choices = DAT_00530a10;
-    u8 labels[8];
-    for (s32 i = 0; i < 8; ++i) labels[i] = DAT_0052fe4c.five[i];
+    u32 flags[5] = {0x37C, 0x37D, 0x37E, 0x37F, 0x308}; /* the game flag that enables each choice */
+    u8 labels[8] = {'U', 'V', 'W', 'X', 'Z'};          /* the menu label of each choice */
     s32 frame = scrGetCommandFrame();
     s32 excluded = scrGetArg(0);
     scrCommMessageSetMode(0);
     s32 available = 0;
     for (s32 i = 0; i < 5; ++i)
-        if (i != excluded && gameFlagIsSet(choices.flags[i])) ++available;
+        if (i != excluded && gameFlagIsSet(flags[i])) ++available;
     MessageWindowA *work = g_messageMain.window;
     if (!available) {
         scrSetResult(99);
@@ -50,13 +46,14 @@ u32 FUN_003884d4(void)
         u32 argument = scrGetArg(0);
         u32 commandFrame = scrGetCommandFrame();
         messageWindowShowOrPoll(message, argument, commandFrame, 6, 0, 0);
-        asdTextFormatStream(work->box, 4, 0xffffffff, 0, 3, "%s", &LAB_0038870c);
+        /* the prompt, in full-width Shift-JIS: "Where would you like to go?" */
+        asdTextFormatStream(work->box, 4, 0xffffffff, 0, 3, "%s", "\x81\x72\x81\x40\x82\x76\x82\x88\x82\x85\x82\x92\x82\x85\x81\x40\x82\x97\x82\x8F\x82\x95\x82\x8C\x82\x84\x81\x40\x82\x99\x82\x8F\x82\x95\x81\x40\x82\x8C\x82\x89\x82\x8B\x82\x85\x81\x40\x82\x94\x82\x8F\x81\x40\x82\x87\x82\x8F\x81\x48");
         msgBoxFlagsSetBit7(work->box);
         work->displayEnabled = 0;
         work->flags |= 0x20;
         sortMenuAcquire(0xffffffff, 3);
         for (s32 i = 0; i < 5; ++i)
-            if (i != excluded && gameFlagIsSet(choices.flags[i])) useCounterAppendValue(labels[i]);
+            if (i != excluded && gameFlagIsSet(flags[i])) useCounterAppendValue(labels[i]);
         useCounterStart();
     }
     s32 result = useCounterGetCurrentValue();

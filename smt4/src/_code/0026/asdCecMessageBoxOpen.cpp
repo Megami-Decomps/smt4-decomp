@@ -1,4 +1,6 @@
-/* NON_MATCHING: stack layout (retail packs clock at sp+0, info, copy, date; built needs 136 bytes), failure tails merge differently (retail: inbox/outbox failures share a block with two NOPed hook calls), registers differ. */
+/* NON_MATCHING: the frame is retail's 128 bytes, but retail places the copied clock below the date (sp+104/112);
+ * the failure tails merge differently (retail: inbox/outbox failures share a block with two NOPed hook calls, the tag
+ * mismatch code is loaded into r4 before the unlock), and registers differ. */
 #include "shard/W6_W6Match6_CecMessageBox.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
 #include "battle/btlMain.h"
@@ -71,12 +73,15 @@ s32 asdCecMessageBoxOpen(AsdCecMessageBox* box, u32 id, u32 expectedTag)
     nn_cec_CTR_MessageBox_ReadOutBoxIndex(box);
     state->info.infoA = 0;
     state->info.infoB = 0;
-    u64 clock;
-    clockGetTicksAsMicroseconds(&clock);
-    u64 now = clock;
-    CecCalendarDate date;
-    asdSaveHeaderBuildCalendarTime(&date, &now);
-    state->info.openedAt = date;
+    /* Block scope: retail's clock shares sp+0 with the index reads' outgoing stack argument. */
+    {
+        u64 clock;
+        clockGetTicksAsMicroseconds(&clock);
+        u64 now = clock;
+        CecCalendarDate date;
+        asdSaveHeaderBuildCalendarTime(&date, &now);
+        state->info.openedAt = date;
+    }
     g_asdCecModuleFlags.open = 1;
     return 0;
 }

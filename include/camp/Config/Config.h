@@ -113,7 +113,7 @@ typedef char ConfigWorkALayoutCheck[
     offsetof(ConfigWorkA, hasType24B) == 0x4C1 ? 1 : -1];
 
 extern "C" {
-u32 FUN_002e50d4(void);
+u32 saveBlockGetPlaySeconds(void);
 }
 
 extern "C" {

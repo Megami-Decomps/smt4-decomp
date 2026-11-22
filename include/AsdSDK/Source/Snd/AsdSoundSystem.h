@@ -219,7 +219,7 @@ typedef struct AsdSndObject {
         /* 0x00 */ u8 unk00[0x68];
         struct {
             u32 active, unk04;
-            u8 waveBuffers[2][2][0x18]; // 0x08
+            u8 waveBuffers[4][0x18]; // 0x08: nn::snd::CTR::WaveBuffer, two per voice (voice i uses 2i and 2i+1)
         } stream;
     };
     union {

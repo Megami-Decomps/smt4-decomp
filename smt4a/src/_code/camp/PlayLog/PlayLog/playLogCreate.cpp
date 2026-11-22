@@ -8,24 +8,6 @@
 #include <string.h>
 #include "ui/UiSpriteState.h"
 
-struct PlayLogPageA { u32 count; u32 values[50]; u32 details[25]; };
-struct PlayLogScreenViewA {
-    UiResourceParameters parameters;
-    UiSpriteState sprites[5];
-    Obj4221a4 window;
-    s32 state;
-    u8 unk348[0x10];
-    s16 count;
-    u16 unk35a;
-    u32 values[50];
-    u32 details[25];
-    u8 hasPlayer;
-    u8 page;
-    u8 unk48a[2];
-    PlayLogPageA pages[2];
-    u32 pending;
-    u32 unk6f0;
-};
 struct PlayLogPlayerViewA { u8 unk00[0x66]; u16 id; };
 extern "C" {
 extern PlayLogWorkA *g_playLog;
@@ -34,8 +16,8 @@ void asdTMTexTableLoadSprites(u32 table);
 void loadSlotEnsureLoaded(u32 slot);
 void paramsClearPacket(UiResourceParameters *parameters);
 
-void FUN_0022feb0(void *work);
-void gridNavigationConfigure(Obj4221a4 *window, u32 count, s32 rows, s32 first, s32 second, s32 third);
+void playLogBuildPages(void *work);
+void gridNavigationConfigure(ScrollSelection *list, u32 count, s32 rows, s32 first, s32 second, s32 third);
 const PlayLogPlayerViewA *gameDataBlocksGetTable(void);
 
 /* Animation key tables passed to paramsInit; the original file defined them statically. */
@@ -67,13 +49,12 @@ void playLogCreate(void)
 {
     if (g_playLog == NULL) {
         asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\PlayLog\\PlayLog.cpp", 419);
-        g_playLog = static_cast<PlayLogWorkA *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(PlayLogScreenViewA), 1));
+        g_playLog = static_cast<PlayLogWorkA *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(PlayLogWorkA), 1));
     }
-    // The page storage follows the canonical play-log prefix.
-    PlayLogScreenViewA *work = reinterpret_cast<PlayLogScreenViewA *>(g_playLog);
+    PlayLogWorkA *work = g_playLog;
     sysMemClear(work, sizeof(*work));
     work->state = 0;
-    work->pending = 0;
+    work->pageStep = 0;
     asdTMTexTableLoadSprites(0x25);
     asdTMTexLoadMainHeap(0x25, 0);
     loadSlotEnsureLoaded(0x37);
@@ -85,11 +66,11 @@ void playLogCreate(void)
         uiSpriteSetKeyframe((&work->sprites[index]), 2, 0);
         uiSpriteSetImageKeyframe((&work->sprites[index]), 0, 0);
     }
-    FUN_0022feb0(work);
+    playLogBuildPages(work);
     work->page = 0;
     memcpy(work->values, work->pages[0].values, sizeof(work->values));
-    memcpy(work->details, work->pages[work->page].details, sizeof(work->details));
-    gridNavigationConfigure(&work->window, work->pages[work->page].count, 5, 1, 0, 1);
+    memcpy(work->ids, work->pages[work->page].ids, sizeof(work->ids));
+    gridNavigationConfigure(&work->list, work->pages[work->page].count, 5, 1, 0, 1);
     work->hasPlayer = 0;
     if (gameDataBlocksGetTable()->id != 0)
         work->hasPlayer = 1;

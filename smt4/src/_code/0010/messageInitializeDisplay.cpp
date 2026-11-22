@@ -13,8 +13,8 @@ void guestWinCreate(void);
 void FUN_0010a9c8(void *work);
 Task *taskCreateDraw(const char *name, u16 priority, u32 workSize, TaskFunc update, TaskFunc draw, TaskFunc destroy, void *work, u32 value);
 void objFlagsSetBits(u32 object, u32 bits);
-void FUN_0010ec70(void (*callback)(void));
-void FUN_0010e5e0(void (*callback)(void));
+void messageSetSkipPoll(void (*callback)(void));
+void messageSetAdvancePoll(void (*callback)(void));
 void FUN_0010efd8(void);
 void messageAdvanceInputForBox(void);
 void messageOwnerIsBusy(void);
@@ -45,8 +45,8 @@ void messageInitializeDisplay(void)
     objFlagsSetBits(state->box, 0x100);
     objFlagsSetBits(g_messageMain.banner->box, 0x200);
     objFlagsSetBits(g_messageMain.aux->box, 0x100);
-    FUN_0010ec70(FUN_0010efd8);
-    FUN_0010e5e0(messageAdvanceInputForBox);
+    messageSetSkipPoll(FUN_0010efd8);
+    messageSetAdvancePoll(messageAdvanceInputForBox);
     asdTextSetDefaultStyle((u32)messageOwnerIsBusy);
 }
 }

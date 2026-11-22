@@ -60,11 +60,10 @@ s32 FUN_003bc59c(void)
     for (s32 index = span.range[0]; index < span.count[0] + span.range[0]; index++) {
         const BtlCombatantEntryA *combatant = &btlGetMainState()->entries[index];
         const BattleActionCountView *actions = reinterpret_cast<const BattleActionCountView *>(combatant);
-        u64 flags = combatant->flags;
-        if ((flags & g_btlCandidateMasks.unavailable) == 0 && (flags & g_btlCandidateMasks.required) != 0 &&
-            (flags & g_btlCandidateMasks.excluded) == 0) {
+        if ((g_btlCandidateMasks.unavailable & combatant->flags) == 0 && (combatant->flags & g_btlCandidateMasks.required) != 0 &&
+            (combatant->flags & g_btlCandidateMasks.excluded) == 0) {
             s32 found = 0;
-            if ((flags & g_btlCandidateMasks.unavailable) != 0 || (flags & g_btlCandidateMasks.singleAction) != 0) {
+            if ((g_btlCandidateMasks.unavailable & combatant->flags) != 0 || (combatant->flags & g_btlCandidateMasks.singleAction) != 0) {
                 if (actions->selected.kind == 2 || actions->selected.kind == 3) {
                     const BattleActionSkill *skill = (const BattleActionSkill *)skillDataFindById(actions->selected.id);
                     if (skill != NULL && attribute == skill->attribute) {

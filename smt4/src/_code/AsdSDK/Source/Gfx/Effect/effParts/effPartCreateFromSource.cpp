@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00152e70(int);
 int FUN_00152ea0(void);
-int FUN_002a353c(...);
+int effectTimelinePartApplyTint(...);
 int effectParticleEmitterSetAdvance(...);
 int effectTimelinePartApplyRotation(...);
 int skelNodePoseChain(...);
@@ -34,7 +34,7 @@ extern unsigned char g_handlerTable; /* 0x464110 */
 
 /* Supplied declaration required: FUN_00152e70. */
 /* Supplied declaration required: FUN_00152ea0. */
-/* Supplied declaration required: FUN_002a353c. */
+/* Supplied declaration required: effectTimelinePartApplyTint. */
 /* Supplied declaration required: effectParticleEmitterSetAdvance. */
 /* Supplied declaration required: effectTimelinePartApplyRotation. */
 /* Supplied declaration required: skelNodePoseChain. */
@@ -323,7 +323,7 @@ unsigned int * effPartCreateFromSource(unsigned int *param_1)
   skelNodePoseChain(puVar2,&temp_v12);
   effectTimelinePartApplyRotation(puVar2,&temp_v12);
   effectParticleEmitterSetAdvance(puVar2);
-  FUN_002a353c(puVar2,0xffffffff);
+  effectTimelinePartApplyTint(puVar2,0xffffffff);
   FUN_00152ea0();
   return puVar2;
 }

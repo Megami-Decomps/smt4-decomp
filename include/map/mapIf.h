@@ -36,8 +36,8 @@ typedef struct MapIfRecord {
     /* 0x04C */ u8 hidden;
     /* 0x04D */ u8 unk04D[3];
     /* 0x050 */ MapVector position;
-    /* 0x05C */ f32 start[3];
-    /* 0x068 */ f32 current[3];
+    /* 0x05C */ MapVector start;
+    /* 0x068 */ MapVector current;
     /* 0x074 */ f32 angle;
     /* 0x078 */ f32 size[2];
     /* 0x080 */ s32 target;

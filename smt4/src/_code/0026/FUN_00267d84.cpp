@@ -16,7 +16,7 @@ int FUN_00257374(...);
 int refCountIncrement(void);
 int effectNodeUpdatePlacedChildren(...);
 int gfxQuaternionWorkspaceBuildMatrix(void);
-int FUN_002a353c(...);
+int effectTimelinePartApplyTint(...);
 int memCopy(...);
 int FUN_002c7d18(...);
 int SUB41(double, int);
@@ -116,7 +116,7 @@ extern int effectQuerySelectedBehavior(void *);
 /* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: effectNodeUpdatePlacedChildren. */
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
-/* Supplied declaration required: FUN_002a353c. */
+/* Supplied declaration required: effectTimelinePartApplyTint. */
 /* Supplied declaration required: memCopy. */
 /* Supplied declaration required: FUN_002c7d18. */
 
@@ -681,7 +681,7 @@ void FUN_00267d84(fn_00267d84_arg0 *param_1)
             DAT_004ea930 = temp_v18;
             DAT_004ea934 = temp_v23;
             DAT_004ea938 = temp_v14;
-            FUN_002a353c(*puVar2,(temp_v13 & 0xff) |
+            effectTimelinePartApplyTint(*puVar2,(temp_v13 & 0xff) |
                                  (temp_v7 << 0x18) | ((temp_v17 & 0xff) << 0x10) |
                                  ((temp_v0 & 0xff) << 8));
             effectNodeUpdatePlacedChildren(*puVar2);

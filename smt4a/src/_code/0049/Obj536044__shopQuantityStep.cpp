@@ -40,10 +40,9 @@ void sendEvent100020E(void);
 void sendEvent100020F(void);
 s32 inputIsQuestMenuPressed(void);
 s32 FUN_0031d174(EquipmentMenuCursor *list); // declcheck: local (a forwarder: this caller uses the row it returns)
-s32 btlRollClamped(u32 id, s32 divisor);
+s32 shopAffordableCount(u32 id, s32 divisor); // declcheck: local (the shared declaration does not compile here or changes this unit)
 s32 FUN_001ba3d0(u32 id); // declcheck: local (a forwarder: this caller passes the id and uses the count)
 u32 FUN_00498408(Obj536044 *scene, u32 id);
-void FUN_00498de0(Obj536044 *scene);
 void FUN_00498ff0(Obj536044 *scene);
 u8 messageMainIsIdle(void);
 const char *itemGetNameOrFallback(u32 id, s32 payload);
@@ -56,7 +55,7 @@ void FUN_003720e4(u8 value);
 u32 messageGetChoiceResult(void); // declcheck: local (declared in the item description's header)
 u32 panelSetMode3(u32 value, u8 flag);
 u8 panelStateIs0(void);
-void FUN_0049cd18(const EquipmentMenuItem *item, s32 count, s32 charge);
+void inventoryApplyTransaction(const EquipmentMenuItem *item, s32 count, s32 charge);
 void FUN_00496a0c(Obj536044 *scene, u32 mode);
 void setListWindow(EquipmentMenuCursor *list, u32 first, u32 row);
 void FUN_003df7c4(PlayerDataA *player);
@@ -202,13 +201,13 @@ void Obj536044::shopQuantityStep()
                     maximum--;
                 }
             } else {
-                maximum = btlRollClamped(item->id, shopGetEntryPrice(item));
+                maximum = shopAffordableCount(item->id, shopGetEntryPrice(item));
             }
             numericStepperSetup(&quantity, maximum, 0, row);
             FUN_00493a7c(&quantity);
         }
         if (((slot == 0 || slot == 1) || (slot == 2 || slot == 3)) || ((slot == 4 || slot == 5) || slot == 6)) {
-            FUN_00498de0(this);
+            shopTrackSelectedItemPreview(this);
             if (previewReady == 0) {
                 previewPending = true;
             }
@@ -320,7 +319,7 @@ void Obj536044::shopQuantityStep()
             if (slot == 8) {
                 count = -count;
             }
-            FUN_0049cd18(item, count, 1);
+            inventoryApplyTransaction(item, count, 1);
             substate = 9;
             if (slot == 8 && flagValueIsPositiveForward(item->id) == 0) {
                 EquipmentMenuCursor *list = &slotInfo[slot];

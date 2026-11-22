@@ -1,4 +1,10 @@
-/* NON_MATCHING: typed rewrite of the command controller target setup (same row count as retail); register allocation of the loop indices/ pointers and the literal-pool offset loads of the action table differ. */
+/* NON_MATCHING: 309 rows against retail's 310, with the same control flow, calls and loads. The first two loops share one
+ * index as retail does (the second starts from the first loop's count-down register, which is 0 by then). What
+ * differs is register allocation and scheduling: the window-flag load before the skill lookup (retail reads the
+ * selection's value and kind first), the index against its copy in the clearing loop, the entry flags after
+ * btlMainFindEntryByListedId (retail r0) and the two slots of the position sort (retail keeps the first slot's
+ * index in r7 and its entry in r5, and addresses the second entry with an add where the build uses a writeback
+ * load: the missing row). */
 #include "battle/BattleCommandController.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/BattleHelpers_Smt4.h"
@@ -60,12 +66,13 @@ void FUN_003ca6c4(BtlMainState **block, CommandState *state)
         }
     }
 
-    for (s32 remaining = 109, index = 0; remaining != 0; --remaining, ++index) {
+    s32 index;
+    for (index = 0; index < 109; ++index) {
         (*block)->actions[index].status &= ~4;
         (*block)->actions[index].status &= ~8;
     }
     state->targetIndex = -1;
-    for (s32 index = 0; index < 109; ++index) {
+    for (index = 0; index < 109; ++index) {
         s32 combatant = (*block)->actions[index].participant.combatantIndex;
         if (combatant < 0)
             continue;
@@ -103,14 +110,14 @@ void FUN_003ca6c4(BtlMainState **block, CommandState *state)
         BtlActionRecord *action = &(*block)->actions[index];
         if ((action->status & 4) == 0 || (action->status & 0x400) == 0)
             continue;
-        BtlEntry *entry = btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(*block), action->memberId);
+        BtlEntry *entry = btlMainFindEntryByListedId(*block, action->memberId);
         if ((entry->flags & 0x10) == 0)
             continue;
         if ((entry->flags & 0x100) != 0 && entry->ids[0] != action->memberId)
             continue;
-        const CommandActionView *view = reinterpret_cast<const CommandActionView *>(action);
+        const CommandActionView *view = (const CommandActionView *)action;
         state->windowHandles[windowCount] = FUN_003aeaa4(g_btlUiBlock, entry->data.id, view->variant, entry->data.maxHp, entry->data.maxMp, entry->data.statusFlags,
-                     *reinterpret_cast<const UiPosition *>(action->geometry.position));
+                     *(const UiPosition *)action->geometry.position);
         state->windowSelections[windowCount] = entry->selectionIndex;
         ++windowCount;
     }
@@ -127,7 +134,7 @@ void FUN_003ca6c4(BtlMainState **block, CommandState *state)
         }
     }
 
-    // Order the targets by their position (insertion by bubbling the smallest up).
+    /* Order the targets by their position, bubbling the smallest up. */
     for (s32 pass = 0; pass < 108; ++pass) {
         for (s32 slot = 108; pass < slot; --slot) {
             u8 first = state->targetOrder[slot - 1];
@@ -156,4 +163,4 @@ void FUN_003ca6c4(BtlMainState **block, CommandState *state)
         }
     }
 }
-}
+} /* extern "C" */

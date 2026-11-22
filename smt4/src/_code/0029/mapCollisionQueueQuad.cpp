@@ -4,7 +4,7 @@
 extern "C" {
 extern CollisionQuad g_collisionPlaneTable[];
 void FUN_0026e80c(s32, CollisionVector *, CollisionVector, CollisionVector, CollisionVector, CollisionVector);
-void FUN_0026ea5c(s32, s32, CollisionVector *, f32 *, CollisionVector, CollisionVector, CollisionVector);
+void statusCameraBuildAxisPlane(s32, s32, CollisionVector *, f32 *, CollisionVector, CollisionVector, CollisionVector);
 
 void mapCollisionQueueQuad(s32 queue, u16 tag, u16 material, CollisionVector a, CollisionVector b,
                   CollisionVector c, CollisionVector d, CollisionVector normal)
@@ -30,9 +30,9 @@ void mapCollisionQueueQuad(s32 queue, u16 tag, u16 material, CollisionVector a, 
     quad->center.z = (a.z + b.z + c.z + d.z) * 0.25f;
     CollisionVector reference;
     FUN_0026e80c(1, &reference, a, b, c, d);
-    FUN_0026ea5c(quad->enabled, 0, &quad->edgeNormals[0], &quad->edgeDistances[0], reference, a, b);
-    FUN_0026ea5c(quad->enabled, 1, &quad->edgeNormals[1], &quad->edgeDistances[1], reference, b, c);
-    FUN_0026ea5c(quad->enabled, 2, &quad->edgeNormals[2], &quad->edgeDistances[2], reference, c, d);
-    FUN_0026ea5c(quad->enabled, 2, &quad->edgeNormals[3], &quad->edgeDistances[3], reference, d, a);
+    statusCameraBuildAxisPlane(quad->enabled, 0, &quad->edgeNormals[0], &quad->edgeDistances[0], reference, a, b);
+    statusCameraBuildAxisPlane(quad->enabled, 1, &quad->edgeNormals[1], &quad->edgeDistances[1], reference, b, c);
+    statusCameraBuildAxisPlane(quad->enabled, 2, &quad->edgeNormals[2], &quad->edgeDistances[2], reference, c, d);
+    statusCameraBuildAxisPlane(quad->enabled, 2, &quad->edgeNormals[3], &quad->edgeDistances[3], reference, d, a);
 }
 }

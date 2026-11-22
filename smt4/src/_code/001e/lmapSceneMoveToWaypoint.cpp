@@ -1,8 +1,11 @@
-/* NON_MATCHING: direction intermediate stores are folded, and scene-position snapshots use integer copies. */
+/* NON_MATCHING: the direction is nn::math's VEC3Sub then VEC3Scale (map/MapVector.h); retail reloads the direction's
+ * y and z after storing each scaled component and copies the start position to the scene through VFP registers
+ * (the build copies it with ldm/stm). */
 #include "map/LmapMainGlobals.h"
 #include "shard/W6_W6Match2_AocTable23.h"
 #include "gamedata/DataTableAccess_AocTable23.h"
 #include "util/MathFunctions.h"
+#include "map/MapVector.h"
 
 extern "C" {
 u32 table23FindRecordByKey(s32 map, s32 group, u32 point);
@@ -43,13 +46,8 @@ void lmapSceneMoveToWaypoint(s32 startGroup, u32 startPoint, s32 targetGroup, u3
     work->target.y = target->y;
     work->target.z = target->z;
     f32 distance = mathDistanceBetweenPoints(work->start.x, work->start.y, work->start.z, work->target.x, work->target.y, work->target.z);
-    work->direction.x = work->target.x - work->start.x;
-    work->direction.y = work->target.y - work->start.y;
-    work->direction.z = work->target.z - work->start.z;
-    f32 inverseDistance = 1.0f / distance;
-    work->direction.x *= inverseDistance;
-    work->direction.y *= inverseDistance;
-    work->direction.z *= inverseDistance;
+    work->direction = mapVectorSub(work->target, work->start);
+    mapVectorScale(&work->direction, &work->direction, 1.0f / distance);
     work->speed = 30.0f;
     work->elapsed = 0;
     work->duration = static_cast<s32>(distance / work->speed);

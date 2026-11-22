@@ -11,15 +11,9 @@ void FUN_00110b28(SmallTextString *destination, const SmallTextString *source);
 Obj5597fc::Obj5597fc()
 {
     enabled = 1;
-    {
-        Obj55a5a8RawArray empty;
-        _ZNSt6vectorIPv12AsdAllocatorIS0_EEaSERKS3_(&first, &empty);
-    }
+    _ZNSt6vectorIPv12AsdAllocatorIS0_EEaSERKS3_(&first, &static_cast<const Obj55a5a8RawArray &>(Obj55a5a8RawArray()));
     firstFlag = 0;
-    {
-        Obj55a5a8RawArray empty;
-        _ZNSt6vectorIPv12AsdAllocatorIS0_EEaSERKS3_(&second, &empty);
-    }
+    _ZNSt6vectorIPv12AsdAllocatorIS0_EEaSERKS3_(&second, &static_cast<const Obj55a5a8RawArray &>(Obj55a5a8RawArray()));
     kind = 0xffff;
     firstPair = *g_defaultWordPairValue;
     secondPair = *g_defaultWordPairValue;
@@ -28,10 +22,7 @@ Obj5597fc::Obj5597fc()
     unk48 = 0;
     firstState = 0;
     secondState = 0;
-    {
-        SmallTextString empty;
-        FUN_00110b28(&text, &empty);
-    }
+    FUN_00110b28(&text, &static_cast<const SmallTextString &>(SmallTextString()));
     ready = 0;
     elements = Obj55aff4Vector();
     result = 0;

@@ -77,14 +77,4 @@ u8 *gameGetFlagBlock(void);
 }
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-void stateSetterConstruct(u8 *setter, u8 source);
-
-#ifdef __cplusplus
-}
-#endif
-
 #endif

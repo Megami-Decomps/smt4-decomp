@@ -1,4 +1,6 @@
-/* NON_MATCHING: readable rebuild (same shape as FUN_002277d4 inside a per-mode loop; the unroll-by-two marking loop now matches); retail writes the mode count and first mode with one stm after the flag test and numbers the saved registers differently. */
+/* NON_MATCHING: readable rebuild (same shape as FUN_002277d4 inside a per-mode loop); retail shares one zero register
+ * between FUN_00228220's first and sixth arguments and numbers two scratch registers of the marking loop the other way
+ * round (69 lines). */
 #include "common.h"
 #include "gamedata/PlayerDataBlock.h"
 #include "gamedata/EquipmentRecord.h"
@@ -49,27 +51,25 @@ void btlEntryBuildSummary(u16 *summary, BtlMainState *state, u32 *actor);
  * skill in the outcome. Returns 1 when something was chosen. */
 s32 FUN_003d10a0(BtlMainState **state, AiSkillContext *context, AiSkillTarget **targets, u32 count, s32 anyTarget)
 {
-    struct {
-        s32 count;
-        s32 skills[3];
-    } modes;
+    s32 modeCount;
+    s32 modes[3];
 
     if ((*context->actor & 2) == 0) {
-        modes.count = 1;
-        modes.skills[0] = 0;
+        modeCount = 1;
+        modes[0] = 0;
     } else {
-        modes.count = 1;
-        modes.skills[0] = 1;
+        modeCount = 1;
+        modes[0] = 1;
         if (itemTableGetEquipmentRecord(*reinterpret_cast<u16 *>(gameGetPlayerData() + 2)) != 0) {
-            modes.count = 2;
-            modes.skills[1] = 2;
+            modeCount = 2;
+            modes[1] = 2;
         }
     }
     s32 mode = 0;
     do {
         s32 reviveKind = 0;
         context->outcome->state = 1;
-        context->outcome->skillId = modes.skills[mode];
+        context->outcome->skillId = modes[mode];
         u16 summary[18];
         btlEntryBuildSummary(summary, *state, context->actor);
         switch (summary[0]) {
@@ -105,7 +105,7 @@ s32 FUN_003d10a0(BtlMainState **state, AiSkillContext *context, AiSkillTarget **
                         usable = 1;
                         if (reviveKind == 0) {
                             context->outcome->state = 1;
-                            context->outcome->skillId = modes.skills[mode];
+                            context->outcome->skillId = modes[mode];
                             context->marks[targets[i]->markIndex] = 1;
                             return 1;
                         }
@@ -115,7 +115,7 @@ s32 FUN_003d10a0(BtlMainState **state, AiSkillContext *context, AiSkillTarget **
         }
         if ((usable & reviveKind) != 0) {
             context->outcome->state = 1;
-            context->outcome->skillId = modes.skills[mode];
+            context->outcome->skillId = modes[mode];
             for (s32 i = 0; i < count; i++) {
                 if ((targets[i]->flags & 0x400) != 0) {
                     context->marks[targets[i]->markIndex] = 1;
@@ -124,7 +124,7 @@ s32 FUN_003d10a0(BtlMainState **state, AiSkillContext *context, AiSkillTarget **
             return 1;
         }
         mode++;
-    } while (mode < modes.count);
+    } while (mode < modeCount);
     return 0;
 }
 

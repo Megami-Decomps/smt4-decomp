@@ -1,17 +1,20 @@
-/* NON_MATCHING: merged heading epilogue, VFP register lifetimes and neighbor-field addressing differ. */
+/* NON_MATCHING: the two arms (each with its own heading stores, as retail's two epilogues show) and the neighbour
+ * cell tests match retail's code; retail loads the scene pointer in each arm and reuses the spawn cell's loaded
+ * coordinates for the cell index, and the VFP registers differ. */
 #include "gamedata/MapSaveBlock.h"
 #include "map/MapSpawn.h"
 #include "map/LmapGlobals.h"
 #include "map/LmapViewGlobals.h"
 extern "C" {
+
 extern MapSpawnPoint DAT_00447f40[];
 
-// Restore an explicit spawn point or place the actor at the map's starting cell.
+/* Restores an explicit spawn point or places the actor at the map's starting cell, facing an open neighbour. */
 void FUN_0022373c(void)
 {
-    MapSaveBlock *grid = gameGetMapBlock();
-    s32 spawn = mapGetDepartureIndex();
+    MapSaveBlock *block = gameGetMapBlock();
     f32 heading = 0.0f;
+    s32 spawn = mapGetDepartureIndex();
     LmapScene *scene = g_lmapScene;
     if (spawn != 0) {
         const MapSpawnPoint *point = &DAT_00447f40[spawn];
@@ -24,37 +27,29 @@ void FUN_0022373c(void)
         scene->pose.position.z = z;
         scene->pose.targetPosition.x = x;
         scene->pose.targetPosition.z = z;
+        scene->pose.heading = heading;
+        scene->pose.targetHeading = heading;
+        g_mapCamera->heading = heading;
     } else {
-        // Adjacency bytes straddle the current cell in the map's packed grid.
-        struct NeighborView {
-            u8 north;
-            u8 unk01[0x6F];
-            u8 west;
-            u8 unk71[0xF];
-            u8 east;
-            u8 unk81[0x6F];
-            u8 south;
-        };
-        const NeighborView *neighbors = (const NeighborView *)((u8 *)grid + grid->maze.spawnZ * 0x78 + grid->maze.spawnX * 8 - 0x3C);
-        f32 x = (f32)grid->maze.spawnX * 500.0f + 250.0f;
-        f32 z = (f32)grid->maze.spawnZ * 500.0f + 250.0f;
+        f32 x = (f32)block->maze.spawnX * 500.0f + 250.0f;
+        f32 z = (f32)block->maze.spawnZ * 500.0f + 250.0f;
         scene->pose.position.x = x;
         scene->pose.position.y = 0.0f;
         scene->pose.position.z = z;
         scene->pose.targetPosition.x = x;
         scene->pose.targetPosition.y = 0.0f;
         scene->pose.targetPosition.z = z;
-        if (neighbors->north == 2)
+        if (block->grid.cells[block->maze.spawnZ - 1][block->maze.spawnX].state == 2)
             heading = 180.0f;
-        if (neighbors->south == 2)
+        if (block->grid.cells[block->maze.spawnZ + 1][block->maze.spawnX].state == 2)
             heading = 0.0f;
-        if (neighbors->west == 2)
+        if (block->grid.cells[block->maze.spawnZ][block->maze.spawnX - 1].state == 2)
             heading = 270.0f;
-        if (neighbors->east == 2)
+        if (block->grid.cells[block->maze.spawnZ][block->maze.spawnX + 1].state == 2)
             heading = 90.0f;
+        scene->pose.heading = heading;
+        scene->pose.targetHeading = heading;
+        g_mapCamera->heading = heading;
     }
-    scene->pose.heading = heading;
-    scene->pose.targetHeading = heading;
-    g_mapCamera->heading = heading;
 }
 }

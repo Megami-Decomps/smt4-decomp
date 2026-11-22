@@ -38,7 +38,7 @@ typedef struct AsdGxRenderBuffer {
     /* 0x04 */ u32 unk04;
     /* 0x08 */ u32 buffer;             /* the nngx render buffer */
     /* 0x0C */ u32 unk0C;
-    /* 0x10 */ u32 unk10;
+    /* 0x10 */ u32 bytes;              /* the buffer's size: the memory fill length */
     /* 0x14 */ u32 typeSelector;       /* 0: unsigned short, 2: unsigned int */
 } AsdGxRenderBuffer;
 

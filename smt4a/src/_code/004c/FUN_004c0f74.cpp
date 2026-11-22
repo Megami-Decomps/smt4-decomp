@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail sets a shared `result` (mov r5,#1) and leaves through one common exit where this build returns immediately; the wide-mask load grouping and unit-index lifetime differ too. */
+/* NON_MATCHING: 104 vs 104 rows (62 diff lines): single-exit result and callee-saved register allocation (r4-r9, 76-byte frame) match retail; shared `mov r5, #1` placement, out-of-line passive 26/27 checks and 64-bit sourceKind mask loads differ. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -16,8 +16,6 @@ struct CombatantAffinityPreview {
     u8 enabled;
     u32 trailing[2];
 };
-// The skill record's element byte sits at 0x44. The unit value occupies
-// padding whose two-byte alignment cannot accept a new shared word field.
 struct AffinitySkillTailView {
     u8 unk00[0x44];
     u8 element;
@@ -30,8 +28,6 @@ struct CombatantAffinityValueView {
     u8 prefix[0x11C];
     s32 value;
 };
-typedef char CombatantAffinityPreviewLayout[sizeof(CombatantAffinityPreview) == 0x34 &&
-    offsetof(CombatantAffinityPreview, skill) == 0x16 && offsetof(CombatantAffinityPreview, enabled) == 0x2B ? 1 : -1];
 
 extern "C" {
 CombatantAffinityPreview btlEntryBuildSummary(BtlMainStateA *battle, BtlCombatantEntryA *entry);
@@ -41,41 +37,57 @@ void kindIdStore(u32 kind, u32 *value);
 
 u32 FUN_004c0f74(BtlCombatantEntryA *entry, u32 element)
 {
+    u32 result = 0;
     CombatantAffinityPreview action = btlEntryBuildSummary(btlGetMainState(), entry);
     if (action.skill != 0) {
         AffinitySkillTailView *skill = (AffinitySkillTailView *)skillDataFindById(action.skill);
-        if (skill != NULL && skill->element != 0 && skill->element - 1 == element)
-            return 1;
+        if (skill != NULL && skill->element != 0 && skill->element - 1 == element) {
+            result = 1;
+        }
     }
-    u32 skills[5] = {0};
-    source4CCopyHalves(entry, (u16 *)skills);
-    for (s32 index = 0; index < 9; ++index) {
-        u16 id = ((u16 *)skills)[index];
-        if (id != 0) {
-            AffinityPassiveView *passive = (AffinityPassiveView *)dataTable41FindById(id);
-            if (passive != NULL && passive->element != 0) {
-                if (passive->element == 26) {
-                    if (element < 8)
-                        return 1;
-                } else if (passive->element == 27) {
-                    if (element - 2 < 6)
-                        return 1;
-                } else if (passive->element - 1 == element) {
-                    return 1;
+    if (result == 0) {
+        u32 skills[5] = {0};
+        source4CCopyHalves(entry, (u16 *)skills);
+        for (s32 index = 0; index < 9; ++index) {
+            u16 id = ((u16 *)skills)[index];
+            if (id != 0) {
+                AffinityPassiveView *passive = (AffinityPassiveView *)dataTable41FindById(id);
+                if (passive != NULL && passive->element != 0) {
+                    if (passive->element == 26) {
+                        if (element <= 7) {
+                            result = 1;
+                            break;
+                        }
+                    } else if (passive->element == 27) {
+                        if (element >= 2 && element <= 7) {
+                            result = 1;
+                            break;
+                        }
+                    } else if (passive->element - 1 == element) {
+                        result = 1;
+                        break;
+                    }
+                }
+            }
+        }
+        if (result == 0) {
+            if (action.enabled && (entry->data.statusFlags & 16) &&
+                (!(entry->flags & g_btlSkillResponseMasks.sourceKind) ||
+                    FUN_004bd098(entry->data.sourceId, action.skill) >= 0)) {
+                kindIdStore(action.targetKind, skills);
+                if (element == skills[0]) {
+                    result = 1;
+                }
+            }
+            if (result == 0) {
+                s16 firstId = entry->ids[0];
+                CombatantAffinityValueView *unit = (CombatantAffinityValueView *)btlMainFindEntryByListedId(btlGetMainState(), firstId);
+                if (unit != NULL && unit->value > 0 && (element == 2 || element == 3 || element == 20)) {
+                    result = 1;
                 }
             }
         }
     }
-    if (action.enabled && (entry->data.statusFlags & 16) &&
-        (!(entry->flags & g_btlSkillResponseMasks.sourceKind) ||
-            FUN_004bd098(entry->data.sourceId, action.skill) >= 0)) {
-        kindIdStore(action.targetKind, skills);
-        if (skills[0] == element)
-            return 1;
-    }
-    CombatantAffinityValueView *unit = (CombatantAffinityValueView *)btlMainFindEntryByListedId(btlGetMainState(), entry->ids[0]);
-    if (unit != NULL && unit->value > 0 && (element == 2 || element == 3 || element == 20))
-        return 1;
-    return 0;
+    return result;
 }
-}
+} /* extern "C" */

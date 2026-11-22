@@ -23,7 +23,7 @@ struct MapMesh {
 extern "C" {
 
 void FUN_00226e90(s32 axis, s32 kind, f32 *edgeNormal, f32 *edgeDistance);
-void FUN_00237438(s32 axis, s32 vertex, f32 *edgeNormal, f32 *edgeDistance);
+void statusCameraBuildAxisPlane(s32 axis, s32 vertex, f32 *edgeNormal, f32 *edgeDistance);
 
 /* Appends every triangle of the mesh to the map's second collision list as a tagged plane: the
  * plane equation, the three vertices and their centroid, the dominant axis, and the edge planes. */
@@ -62,9 +62,9 @@ void FUN_0025f358(u32 tag)
         f32 nx = quad->normal.x < 0.0f ? -quad->normal.x : quad->normal.x;
         f32 nz = quad->normal.z < 0.0f ? -quad->normal.z : quad->normal.z;
         quad->enabled = nz <= nx ? 0 : 2; /* the axis the plane is projected along */
-        FUN_00237438(quad->enabled, 0, &quad->edgeNormals[0].x, &quad->edgeDistances[0]);
-        FUN_00237438(quad->enabled, 1, &quad->edgeNormals[1].x, &quad->edgeDistances[1]);
-        FUN_00237438(quad->enabled, 2, &quad->edgeNormals[2].x, &quad->edgeDistances[2]);
+        statusCameraBuildAxisPlane(quad->enabled, 0, &quad->edgeNormals[0].x, &quad->edgeDistances[0]);
+        statusCameraBuildAxisPlane(quad->enabled, 1, &quad->edgeNormals[1].x, &quad->edgeDistances[1]);
+        statusCameraBuildAxisPlane(quad->enabled, 2, &quad->edgeNormals[2].x, &quad->edgeDistances[2]);
         FUN_00226e90(quad->enabled, quad->vertexCount, &quad->edgeNormals[3].x, &quad->edgeDistances[3]);
         g_mapCollision.segmentCounts[0]++;
     }

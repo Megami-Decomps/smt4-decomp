@@ -11,7 +11,6 @@ struct SlotTable {
 
 extern "C" {
 
-void __aeabi_memcpy4(void* dst, const void* src, u32 size);
 SlotTable* gameGetSlotTable(void);
 void FUN_0029bbc8(u8 id);
 void saveMarkIdListSeen(StatBlock* record);
@@ -25,8 +24,7 @@ void unitRecalculateEffectiveStats(StatBlock* record);
 // that cannot be merged into `outSkills`; returns 1 when some do not fit.
 u32 FUN_0033bb94(StatBlock* source, u32 arg, u16* outSkills)
 {
-    StatBlock copy;
-    __aeabi_memcpy4(&copy, source, 0x604);
+    StatBlock copy = *source;
     SlotTable* table = gameGetSlotTable();
     u32 id = copy.growth.slot;
     s32 partyIndex = -1;

@@ -1,46 +1,48 @@
+/* NON_MATCHING: 10 lines; retail loads the 1.0f opacity constant into s17 at entry, the build only before the row loop */
+#include "camp/Unite/UniteWork.h"
 #include "code/Code002a_VariantA.h"
-/* NON_MATCHING: owner/base-address allocation, row-valid flag initialization and highlight Boolean lowering differ; -O2 candidate. */
-#include "shard/Shard0031.h"
+#include "code/Code002a_Smt4a.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-struct EightRowListDraw {
-    u8 unk0000[0x8e14];
-    FlaggedEntry grid;
-    u8 unk8e78[8];
-    s32 entryCount, selectionLimit;
-    u8 unk8e88[2];
-    u8 selectionActive;
-    u8 unk8e8b[0x21];
-    u8 headerOverride;
-};
 extern "C" {
-s32 resourceRunOperationIfUnblocked(FlaggedEntry *);
-void uniteDrawSelectionButtonStrip(s32, s32, f32);
-void uiDrawLayeredSpriteEffect(s32, s32, f32);
-void FUN_003cbd04(EightRowListDraw *, u32, u32, s32, s32, s32, u32, f32);
-void skillScreenDrawCandidateRow(EightRowListDraw *, u32, s32, s32, f32);
-void efctSetSpeed(f32);
+f32 uniteDrawSelectionButtonStrip(s32 x, s32 y, f32 speed);
+void uiDrawLayeredSpriteEffect(s32 x, s32 y, f32 speed);
+void FUN_003cbd04(UniteWorkA *work, s32 row, struct SlotRecordA *record, s32 valid, s32 x, s32 y, s32 highlighted,
+                  f32 effect);
+void skillScreenDrawCandidateRow(UniteWorkA *work, struct SlotRecordA *record, s32 x, s32 y, f32 effect);
 
-void drawInteractiveEightRowList(EightRowListDraw *work, u32 style, s32 interactive, s32 x, s32 y, f32 scale)
+/* Draws the skill inheritance screen's eight visible candidate rows and, when the list is active, the
+ * button strip (cursor past the row limit) or the highlighted candidate row. */
+void drawInteractiveEightRowList(UniteWorkA *work, struct SlotRecordA *record, s32 interactive, s32 x, s32 y,
+                                 f32 effect)
 {
-    resourceRunOperationIfUnblocked(&work->grid);
-    s32 base = resourceRunOperationIfUnblocked(&work->grid);
-    s32 selected = listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&work->grid));
-    bool headerSelected = false;
-    if (interactive && (base + selected >= work->selectionLimit || work->headerOverride)) {
-        uniteDrawSelectionButtonStrip(x, y, scale);
-        headerSelected = true;
+    resourceRunOperationIfUnblocked((Object *)&work->inheritanceA.skillList);
+    s32 cursor = resourceRunOperationIfUnblocked((Object *)&work->inheritanceA.skillList) +
+                 listCursorGetRowIfUnblocked(&work->inheritanceA.skillList);
+    bool stripShown = false;
+    if (interactive && (cursor >= work->inheritanceA.rowLimit || work->inheritanceA.stripSelected)) {
+        uniteDrawSelectionButtonStrip(x, y, effect);
+        stripShown = true;
     } else {
-        uiDrawLayeredSpriteEffect(x, y, scale);
+        uiDrawLayeredSpriteEffect(x, y, effect);
     }
     for (s32 row = 0; row < 8; ++row) {
-        bool valid = resourceRunOperationIfUnblocked(&work->grid) + row < work->entryCount;
-        if (!interactive || listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&work->grid)) != row || headerSelected || !work->selectionActive) {
-            bool highlighted = listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&work->grid)) == row && !work->selectionActive && interactive;
-            FUN_003cbd04(work, row, style, valid, x, y, highlighted, scale);
+        s32 valid = 1;
+        if (resourceRunOperationIfUnblocked((Object *)&work->inheritanceA.skillList) + row >=
+            work->inheritanceA.skillCount)
+            valid = 0;
+        if (!interactive || listCursorGetRowIfUnblocked(&work->inheritanceA.skillList) != row || stripShown ||
+            !work->inheritanceA.accepted) {
+            s32 highlighted = 0;
+            if (listCursorGetRowIfUnblocked(&work->inheritanceA.skillList) == row && !work->inheritanceA.accepted &&
+                interactive)
+                highlighted = 1;
+            FUN_003cbd04(work, row, record, valid, x, y, highlighted, effect);
             efctSetSpeed(1.0f);
         }
     }
-    if (!headerSelected && work->selectionActive && interactive)
-        skillScreenDrawCandidateRow(work, style, x, y, scale);
+    if (!stripShown && work->inheritanceA.accepted && interactive)
+        skillScreenDrawCandidateRow(work, record, x, y, effect);
 }
-}
+
+} /* extern "C" */

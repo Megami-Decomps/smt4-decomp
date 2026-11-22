@@ -63,7 +63,7 @@ struct ShopTabIcons {
 
 extern "C" {
 extern const ShopMainIconTables g_equipMenuStateHandlerInit;
-extern ShopTabIcons DAT_00588f78[];
+extern ShopTabIcons g_shopItemTabNeighbors[];
 void uiDrawCompositeSpriteAtRectCorner(void *header, u32 id, s32 dx, s32 dy, u32 flags);
 void FUN_0049368c(void *header, u32 id, s32 dx, s32 dy, u32 color, u32 flags);
 void FUN_00494d68(ShopScreen *screen, s32 index, s32 flag, ShopSlot *slot);
@@ -105,8 +105,8 @@ void shopScreenRedrawHeaderAndSlots(ShopScreen *screen)
     FUN_0049368c(screen->detail.header, screen->detail.tab + 0x61, 0, 0, color, 1);
     FUN_0049368c(screen->detail.header, 0x65, 0, 0, color, 1);
     FUN_0049368c(screen->detail.header, 0x66, 0, 0, color, 1);
-    s32 firstIndex = DAT_00588f78[screen->detail.tab].first;
-    s32 secondIndex = DAT_00588f78[screen->detail.tab].second;
+    s32 firstIndex = g_shopItemTabNeighbors[screen->detail.tab].first;
+    s32 secondIndex = g_shopItemTabNeighbors[screen->detail.tab].second;
     ShopIconGroup firstIcons = g_equipMenuStateHandlerInit.firstIcons;
     ShopIconGroup secondIcons = g_equipMenuStateHandlerInit.secondIcons;
     FUN_0049368c(screen->detail.header, firstIcons.ids[firstIndex], 0, 0, color, 1);

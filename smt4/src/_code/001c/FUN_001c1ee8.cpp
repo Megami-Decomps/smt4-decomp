@@ -33,7 +33,7 @@ typedef char MapCollisionMeshViewCheck[offsetof(MapCollisionMeshView, model) == 
 extern "C" {
 void FUN_0026e8a4(s32 axis, s32 count, f32 *minimum, f32 *maximum,
                   f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1, f32 x2, f32 y2, f32 z2, f32 x3, f32 y3, f32 z3);
-void FUN_0026ea5c(s32 axis, s32 index, CollisionVector *direction, f32 *length,
+void statusCameraBuildAxisPlane(s32 axis, s32 index, CollisionVector *direction, f32 *length,
                   f32 cx, f32 cy, f32 cz, f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);
 
 /* The triangle's centre with the coordinate of the projection axis dropped. */
@@ -85,9 +85,9 @@ void FUN_001c1ee8(u32 tag)
         f32 nz = __fabsf(quad->normal.z);
         quad->enabled = nx >= nz ? 0 : 2;
         CollisionVector center = collisionTriangleProjectedCenter(quad->enabled, a, b, c);
-        FUN_0026ea5c(quad->enabled, 0, &quad->edgeNormals[0], &quad->edgeDistances[0], center.x, center.y, center.z, a.x, a.y, a.z, b.x, b.y, b.z);
-        FUN_0026ea5c(quad->enabled, 1, &quad->edgeNormals[1], &quad->edgeDistances[1], center.x, center.y, center.z, b.x, b.y, b.z, c.x, c.y, c.z);
-        FUN_0026ea5c(quad->enabled, 2, &quad->edgeNormals[2], &quad->edgeDistances[2], center.x, center.y, center.z, c.x, c.y, c.z, a.x, a.y, a.z);
+        statusCameraBuildAxisPlane(quad->enabled, 0, &quad->edgeNormals[0], &quad->edgeDistances[0], center.x, center.y, center.z, a.x, a.y, a.z, b.x, b.y, b.z);
+        statusCameraBuildAxisPlane(quad->enabled, 1, &quad->edgeNormals[1], &quad->edgeDistances[1], center.x, center.y, center.z, b.x, b.y, b.z, c.x, c.y, c.z);
+        statusCameraBuildAxisPlane(quad->enabled, 2, &quad->edgeNormals[2], &quad->edgeDistances[2], center.x, center.y, center.z, c.x, c.y, c.z, a.x, a.y, a.z);
         CollisionVector unused;
         FUN_0026e8a4(quad->enabled, quad->vertexCount, (f32 *)&quad->unk98[0], (f32 *)&quad->unk98[8], a.x, a.y, a.z, b.x, b.y, b.z, c.x, c.y, c.z, unused.x, unused.y, unused.z);
         collision.segmentCounts[0]++;

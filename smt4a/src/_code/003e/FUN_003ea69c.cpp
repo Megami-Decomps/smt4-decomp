@@ -1,4 +1,4 @@
-/* NON_MATCHING: cached stat registers and original attribute-block copy grouping differ; initial flag stores and packed skill-bitfield operations now match structurally. */
+/* NON_MATCHING: 122 vs 122 rows (96 diff lines): direct snapshot->original = snapshot->current matches smt4:btlInitializePlayerUnitData and removes vldmia/vstmia; cached stat registers (r8/r9/sl) and 7-word ldm copy grouping still differ. */
 #include "battle/btlUnit.h"
 #include "battle/BtlEntryA.h"
 #include "gamedata/GameDataAccess.h"
@@ -16,7 +16,7 @@ s16 playerPackedEntryHigh(u32);
 
 void FUN_003ea69c(u32, BtlUnitDataA *unit, const PadState *player)
 {
-    // Four-word skill views would enlarge the shared 0x3a-byte union region.
+    /* Four-word skill views would enlarge the shared 0x3a-byte union region. */
     struct Attributes {
         u16 values[5];
         u16 reserved;
@@ -65,8 +65,8 @@ void FUN_003ea69c(u32, BtlUnitDataA *unit, const PadState *player)
         offsetof(SnapshotView, pending) == 0x228 &&
         offsetof(SourceView, skills) == 0x34 &&
         offsetof(SourceView, flags) == 0x5e ? 1 : -1];
-    SnapshotView *snapshot = reinterpret_cast<SnapshotView *>(unit);
-    const SourceView *source = reinterpret_cast<const SourceView *>(player);
+    SnapshotView *snapshot = (SnapshotView *)unit;
+    const SourceView *source = (const SourceView *)player;
     snapshot->initialized = 1;
     snapshot->header[3] = -1;
     snapshot->header[0] = 0;
@@ -76,18 +76,14 @@ void FUN_003ea69c(u32, BtlUnitDataA *unit, const PadState *player)
     snapshot->changes.maxHp = 0;
     snapshot->changes.mp = 0;
     snapshot->changes.maxMp = 0;
-    s32 hp = source->hp;
-    snapshot->current.hp = hp;
-    s32 maxHp = source->maxHp;
-    snapshot->current.maxHp = maxHp;
-    s32 mp = source->mp;
-    snapshot->current.mp = mp;
-    s32 maxMp = source->maxMp;
-    snapshot->current.maxMp = maxMp;
-    for (s32 index = 0; index < 5; ++index)
+    snapshot->current.hp = source->hp;
+    snapshot->current.maxHp = source->maxHp;
+    snapshot->current.mp = source->mp;
+    snapshot->current.maxMp = source->maxMp;
+    for (s32 index = 0; index < 5; ++index) {
         snapshot->current.attributes.values[index] = source->attributes[index];
-    Values captured = { hp, maxHp, mp, maxMp, snapshot->current.attributes };
-    snapshot->original = captured;
+    }
+    snapshot->original = snapshot->current;
     snapshot->flags = source->flags;
     snapshot->counterA = 0;
     snapshot->counterB = 0;
@@ -106,12 +102,18 @@ void FUN_003ea69c(u32, BtlUnitDataA *unit, const PadState *player)
     }
     snapshot->percentage = 100;
     switch (playerAlignmentClass()) {
-    case 1: snapshot->alignment = 1; break;
-    case 4: snapshot->alignment = 0; break;
-    case 5: snapshot->alignment = 2; break;
+    case 1:
+        snapshot->alignment = 1;
+        break;
+    case 4:
+        snapshot->alignment = 0;
+        break;
+    case 5:
+        snapshot->alignment = 2;
+        break;
     }
     snapshot->skills = source->skills;
     sysMemClear(snapshot->flagsBySlot, sizeof(snapshot->flagsBySlot));
     memset(snapshot->changedBySlot, 0, sizeof(snapshot->changedBySlot));
 }
-}
+} /* extern "C" */

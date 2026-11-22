@@ -1,8 +1,10 @@
-/* NON_MATCHING: readable rewrite from retail call sites compiles (173 vs ~180 rows); scenario copy loops and register allocation differ from retail */
+/* NON_MATCHING: retail sets the item loop's index to 0 before gameGetPlayerName (so the player data pointer is r5),
+ * and loads a stock entry's id into r2 before the count test; the rest is that register shift (56 lines). */
 #include "gamedata/DataTable.h"
 #include "gamedata/UnitRecordAccess.h"
 #include "code/Code0029.h"
 #include "gamedata/GamePlayerData.h"
+#include <string.h>
 
 // Row of the debug scenario table (0x74 bytes): the state the game is set to.
 struct ScenarioRow {
@@ -65,8 +67,7 @@ void FUN_0033adf8(BattleMainBlock* battle, u32 row)
 {
     if ((battle->flags & 0x40000) == 0 || row == 0) return;
 
-    void *table = 0;
-    if (battle->scenarioFile != 0) table = dataTableFileGetTable(battle->scenarioFile, 0);
+    void *table = battle->scenarioFile != NULL ? dataTableFileGetTable(battle->scenarioFile, 0) : NULL;
     ScenarioRow *rows = static_cast<ScenarioRow *>(dataTableGetEntries(table));
     s32 count = dataTableGetCount(table);
     if (row > (u32)(count - 1)) return;
@@ -77,27 +78,23 @@ void FUN_0033adf8(BattleMainBlock* battle, u32 row)
     libc_strcpy(name, gameGetPlayerName());
     u16 look[7];
     for (s32 i = 0; i < 7; i++) look[i] = scenario->look[i];
-    playerUnitRecordInit((s8)scenario->playerKind, name, look);
+    playerUnitRecordInit(scenario->playerKind, name, look);
 
     PlayerDataIV* player = gameGetPlayerData();
     for (s32 i = 0; i < 5; i++) player->baseStats.stats[i] = scenario->stats[i];
     playerRecalcStatsFromEquipment(0);
     if (scenario->hp > 0) {
-        player->maxHp = scenario->hp;
-        player->hp = scenario->hp;
+        player->hp = player->maxHp = scenario->hp;
     }
     if (scenario->mp > 0) {
-        player->maxMp = scenario->mp;
-        player->mp = scenario->mp;
+        player->mp = player->maxMp = scenario->mp;
     }
     for (s32 i = 0; i < 8; i++) {
         if (scenario->itemIds[i] != 0) FUN_00334058(scenario->itemIds[i]);
     }
 
     __aeabi_memset4(slots->slotClear, 0x18, -1);
-    slots->party[0] = 0xff;
-    slots->party[1] = 0xff;
-    slots->party[2] = 0xff;
+    memset(slots->party, 0xff, sizeof(slots->party));
     slots->slotLimit = 8;
     for (s32 i = 0; i < slots->slotLimit; i++) {
         if (scenario->slotIds[i] != 0) dispatchIfFound(i, scenario->slotIds[i], 0);
@@ -106,8 +103,9 @@ void FUN_0033adf8(BattleMainBlock* battle, u32 row)
     for (s32 i = 0; i < 3; i++) {
         if (scenario->partyIds[i] == 0) continue;
         for (s32 slot = 0; slot < slots->slotLimit; slot++) {
-            if (gameGetUnitRecord(slot)->id == scenario->partyIds[i]) {
-                slots->party[partyCount] = gameSlotFindByCategory(gameGetUnitRecord(slot));
+            StatBlock *unit = gameGetUnitRecord(slot);
+            if (unit->id == scenario->partyIds[i]) {
+                slots->party[partyCount] = gameSlotFindByCategory(unit);
                 partyCount++;
                 break;
             }

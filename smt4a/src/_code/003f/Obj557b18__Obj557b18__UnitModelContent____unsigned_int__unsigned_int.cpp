@@ -9,7 +9,7 @@ Obj557b18::Obj557b18(UnitModelContent *content, u32 partIndex, u32 id)
       unke4(0), unke5(0), unke8(0), unkec(0), unkf0(0), unkf4(0), unkf8(0), unkfc(0), unk100(0), unk104(0),
       unk10c(0), unk110(0), unk114(0), unk118(0), unk11c(1),
       parent(NULL),
-      speed(1.0f), unk200(0), pendingValue(0), selection(-1), unk20c(0), unk210(0),
+      speed(1.0f), unk200(0), pendingValue(0), selection(-1), unk20c(0), modelData(NULL),
       unk254(0), unk258(0), unk25c(0), unk260(0), unk264(0), unk268(0)
 {
     rt_aeabi_memclr(unk214, sizeof(unk214));

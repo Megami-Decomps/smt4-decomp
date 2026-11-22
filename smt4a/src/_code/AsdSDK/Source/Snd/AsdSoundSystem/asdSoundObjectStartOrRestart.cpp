@@ -1,4 +1,7 @@
-/* NON_MATCHING: sound/voice/lock registers differ and typed per-channel buffers enable strength reduction; -O2 candidate. */
+/* NON_MATCHING: retail loads the lock's address once before the flag tests (the build loads it in each arm), keeps
+ * the first loop's voice address uncached and orders the `i != 0` moves moveq/movne (28 lines). The lock is
+ * g_asdSoundSystem.control.status.section (0x63f4f0): addressed that way armcc hoists it as retail does, but its pool
+ * word then reads g_asdSoundSystem+0x1308 where the target's reads DAT_0063f4f0, so the plain global stays. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
 #include "shard/W6_W6Match8_LightUniforms.h"
@@ -40,9 +43,9 @@ void asdSoundObjectStartOrRestart(AsdSndObject *sound, s32 frames, f32 volume, f
                 nn_snd_CTR_Voice_SetPitch(sound->voices[i], 1.0f);
                 sound->flags = 0;
                 for (s32 buffer = 0; buffer < 2; ++buffer)
-                    nn_snd_CTR_InitializeWaveBuffer(sound->stream.waveBuffers[i][buffer]);
+                    nn_snd_CTR_InitializeWaveBuffer(sound->stream.waveBuffers[i * 2 + buffer]);
                 soundQueueArchiveWaveBuffers(sound->voices[i], sound->playback.sampleParameters[i],
-                             sound->stream.waveBuffers[i][0], sound->stream.waveBuffers[i][1], i != 0);
+                             sound->stream.waveBuffers[i * 2], sound->stream.waveBuffers[i * 2 + 1], i != 0);
             }
             asdSoundObjectStartOrRestart(sound, frames, sound->volume, scale);
         }

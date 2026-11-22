@@ -11,7 +11,7 @@ void shopDrawSelectedItem(SelectMenu *);
 s32 inputConfirmPressed(void);
 u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *);
 u32 shopSlotGetPrice(const EquipmentMenuItem *);
-s32 btlRollClamped(u16, u32);
+s32 shopAffordableCount(u16, u32);
 void FUN_002328b4(void);
 void FUN_0022e648(SelectMenu *, s32);
 s32 inputIsQuestMenuPressed(void);
@@ -68,7 +68,7 @@ void FUN_003a3a9c(SelectMenu *menu)
     s32 category = work->category;
     u32 index = flaggedValueHolderGetTotal(&work->cursors[category].holder);
     EquipmentMenuItem *item = &work->pages[category].items[index];
-    if ((work->category == 8 || btlRollClamped(item->id, shopSlotGetPrice(item))) && accepted) {
+    if ((work->category == 8 || shopAffordableCount(item->id, shopSlotGetPrice(item))) && accepted) {
         FUN_002328b4();
         FUN_0022e648(menu, 10);
         return;

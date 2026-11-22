@@ -1,112 +1,110 @@
-/* NON_MATCHING: retail keeps every `name != NULL` test and the name/path/work pointers share registers (mov r6,sp / mov r6,r8); armcc here threads the redundant null tests and keeps separate registers */
+/* NON_MATCHING: 166 vs 166 rows (72 diff lines): matches the smt4 twin FUN_003dc68c (nameEquals/nameStartsWith by reference); remaining differences are the hoisted work+0x3000 base (retail hoists buffer pointer into fp) and entry address formation before NULL tests. */
 #include "common.h"
 #include "runtime/Stdio.h"
-#include "battle/btlEffect.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "AsdSDK/AsdMemUtil.h"
 #include "gamedata/GameDataAccess.h"
+#include "shard/W6_W6Match3_RotationY.h"
 #include <string.h>
 
-/* The effect names of one battle, 0x16 bytes each, after a 0x108 byte header. */
-struct BtlEffectNameTable {
-    /* 0x000 */ u8 unk000[0x108];
-    /* 0x108 */ BtlEffectSlot names[BTL_EFFECT_SLOTS];
+/* One effect load slot (0x8C bytes). */
+struct EffectSlot {
+    u8 unk00[4];
+    u32 file;
+    char name[0x80];
+    u8 flags;
+    u8 unk89[3];
 };
 
-/* An effect file being loaded: its data, requested name and state. */
-struct BtlEffectLoad {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ void *file;   /* asynchronously loaded effect file */
-    /* 0x08 */ char name[0x80]; /* file name without its directory */
-    /* 0x88 */ u8 flags;     /* bit 0: load requested */
-    /* 0x89 */ u8 unk89[3];
-};
-
+/* The battle effect work (accessed fields). */
 struct BtlEffectWork {
-    /* 0x0000 */ u8 unk0000[0x1F54];
-    /* 0x1F54 */ BtlEffectNameTable *names;
-    /* 0x1F58 */ u8 unk1F58[0x25EC - 0x1F58];
-    /* 0x25EC */ BtlEffectLoad loads[BTL_EFFECT_SLOTS];
-    /* 0x281C */ u8 unk281C[0x33A8 - 0x281C];
-    /* 0x33A8 */ u32 transition;
-    /* 0x33AC */ u8 transitionEffect;
+    u8 unk0000[0x1F54];
+    char *names;
+    u8 unk1F58[0x25EC - 0x1F58];
+    EffectSlot slots[4];
+    u8 unk281C[0x33A8 - 0x281C];
+    u32 bufferHandle;
+    u8 bufferIndex;
 };
-
-typedef char BtlEffectWorkOffsets[offsetof(BtlEffectWork, names) == 0x1F54 &&
-    offsetof(BtlEffectWork, loads) == 0x25EC &&
-    sizeof(BtlEffectLoad) == 0x8C &&
-    offsetof(BtlEffectWork, transition) == 0x33A8 ? 1 : -1];
 
 extern "C" {
-
-extern BtlEffectGlobals g_btlEffect;
+extern const char *g_btlEffect[6];
 extern const char DAT_0052853c[]; /* "NOT_EFT" */
 extern const char DAT_00528534[]; /* "%s%02d" */
 extern const char DAT_005284c0[]; /* "battle/effect/%s.eft" */
-
 u32 libc_strlen(const char *text);
 s32 libc_strncmp(const char *a, const char *b, u32 count);
 char *libc_strcpy(char *dest, const char *src);
-void sysMemClear(void *buffer, u32 bytes);
-char *libc_strrchr(const char *text, s32 character);
 void btlCameraFinishTransition(BtlEffectWork *work);
-u32 filterCreateByKind(u32 effect, u32 a, u32 b);
+char *libc_strrchr(const char *text, s32 character);
+} /* extern "C" */
 
-/* Requests the loading of every effect the battle names; returns 0 when it has no name table. */
-u32 FUN_004f9764(BtlEffectWork *work)
+static __inline bool nameEquals(const char *name, const char *const &other)
 {
-    s32 i;
+    return name != 0 && strcmp(name, other) == 0;
+}
 
-    if (work->names == NULL) {
+static __inline bool nameStartsWith(const char *name, const char *const &prefix)
+{
+    return name != 0 && libc_strncmp(name, prefix, libc_strlen(prefix)) == 0;
+}
+
+/* Start loading the effect file of every named battle effect that is not already known. */
+extern "C" u32 FUN_004f9764(BtlEffectWork *work)
+{
+    if (work->names == 0) {
         return 0;
     }
-    for (i = 0; i < BTL_EFFECT_SLOTS; i++) {
-        const char *name = work->names->names[i].name;
-        char path[128];
-        char text[128];
-        s32 n;
-
+    char path[128];
+    char buffer[128];
+    for (s32 i = 0; i < 4; i++) {
+        const char *name = work->names + 0x108 + i * 0x16;
         if (libc_strlen(name) == 0 || strcmp(name, "0") == 0) {
             continue;
         }
-        if (strcmp(DAT_0052853c, name) != 0 &&
-            (name == NULL || (strcmp(name, g_btlEffect.skipped.skipFirst) != 0 &&
-                              strcmp(name, g_btlEffect.skipped.skipSecond) != 0)) &&
-            (name == NULL || strcmp(name, g_btlEffect.reserved.name) != 0)) {
-            if (name != NULL && libc_strncmp(name, g_btlEffect.otherPrefix, libc_strlen(g_btlEffect.otherPrefix)) == 0) {
+        if (strcmp(DAT_0052853c, name) == 0) {
+            continue;
+        }
+        if (name != 0 && (strcmp(name, g_btlEffect[1]) == 0 || strcmp(name, g_btlEffect[2]) == 0)) {
+            continue;
+        }
+        if (nameEquals(name, g_btlEffect[4])) {
+            continue;
+        }
+        if (nameStartsWith(name, g_btlEffect[3])) {
+            continue;
+        }
+        if (nameStartsWith(name, g_btlEffect[0])) {
+            bool found = false;
+            for (s32 n = 0; n < 11; n++) {
+                __2sprintf(buffer, DAT_00528534, g_btlEffect[0], n);
+                if (strcmp(buffer, name) == 0) {
+                    btlCameraFinishTransition(work);
+                    work->bufferHandle = (u32)filterCreateByKind(n & 0xFF, 7, 0);
+                    work->bufferIndex = n;
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
                 continue;
             }
-            if (name != NULL && libc_strncmp(name, g_btlEffect.prefix, libc_strlen(g_btlEffect.prefix)) == 0) {
-                for (n = 0; n < 11; n++) {
-                    __2sprintf(text, DAT_00528534, g_btlEffect.prefix, n);
-                    if (strcmp(text, name) == 0) {
-                        btlCameraFinishTransition(work);
-                        work->transition = filterCreateByKind(n & 0xff, 7, 0);
-                        work->transitionEffect = n;
-                        break;
-                    }
-                }
-                if (n < 11) {
-                    continue;
-                }
-            }
-            if (name == NULL || strcmp(name, g_btlEffect.reserved.otherName) != 0) {
-                sysMemClear(path, sizeof(path));
-                sysMemClear(text, sizeof(text));
-                __2sprintf(text, DAT_005284c0, name);
-                libc_strcpy(path, text);
-                if (libc_strlen(path) != 0) {
-                    BtlEffectLoad *load = &work->loads[i];
-
-                    libc_strcpy(load->name, libc_strrchr(path, '/') + 1);
-                    if (findRecordByKey(load->name) == 0xff) {
-                        asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&load->file), 1);
-                        load->flags |= 1;
-                    }
-                }
+        }
+        if (nameEquals(name, g_btlEffect[5])) {
+            continue;
+        }
+        sysMemClear(path, 128);
+        sysMemClear(buffer, 128);
+        __2sprintf(buffer, DAT_005284c0, name);
+        libc_strcpy(path, buffer);
+        if (libc_strlen(path) != 0) {
+            EffectSlot *slot = &work->slots[i];
+            libc_strcpy(slot->name, libc_strrchr(path, '/') + 1);
+            if (findRecordByKey(slot->name) == 0xFF) {
+                asdLoadFileAsyncSimple(path, &slot->file, 1);
+                slot->flags |= 1;
             }
         }
     }
     return 1;
 }
-
-} /* extern "C" */

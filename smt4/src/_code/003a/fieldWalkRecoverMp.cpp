@@ -1,0 +1,110 @@
+/* NON_MATCHING: only register allocation differs (100 lines): retail hoists the skill list's zero into sl at entry,
+ * keeps the healed amount in r1 and the current value in r0, and the first side-unit clamp stores the limit register. */
+#include "common.h"
+#include "gamedata/GameDataAccess.h"
+#include "gamedata/SaveSlotTableIV.h"
+#include "gamedata/GamePlayerData.h"
+#include "gamedata/UnitRecordAccess.h"
+
+extern "C" {
+
+/* A percentage of max, never negative. */
+static u32 unitHasFlag(const StatBlock *unit, u32 bit)
+{
+    return (static_cast<u32>(unit->ailments) & (1 << (bit & 0xFF))) != 0;
+}
+
+static s32 percentOfMax(s32 max, s32 percent)
+{
+    s32 amount = max * percent / 100;
+    return amount < 0 ? 0 : amount;
+}
+
+/* Heals the unit by a percentage of its maximum MP, keeping the result in 1..max. */
+static void unitHealMpPercent(StatBlock *unit, s32 percent)
+{
+    s32 max = unit->maxMp;
+    s32 mp = unit->mp + percentOfMax(max, percent);
+    if (mp > max)
+        mp = max;
+    s16 value = mp;
+    if (unit != NULL) {
+        s32 limit = unit->maxMp;
+        if (value > limit)
+            value = limit;
+        else if (value < 1)
+            value = 1;
+        unit->mp = value;
+    }
+}
+
+/* Heals every usable side unit by the percentage. */
+static void healSideUnitsMp(s32 percent, s32 count)
+{
+    const s8 *side = gameGetSlotTable()->active;
+    for (s32 i = 0; i < count; ++i) {
+        if (side[i] >= 0) {
+            StatBlock *unit = gameGetUnitRecord(side[i]);
+            if (!unitHasFlag(unit, 1) && !unitHasFlag(unit, 10) && !unitHasFlag(unit, 2))
+                unitHealMpPercent(unit, percent);
+        }
+    }
+}
+
+/* Heals the usable side units that know the regeneration skill. */
+static void healRegenSkillUnitsMp(s32 percent, s32 count)
+{
+    const s8 *side = gameGetSlotTable()->active;
+    for (s32 i = 0; i < count; ++i) {
+        if (side[i] >= 0) {
+            StatBlock *unit = gameGetUnitRecord(side[i]);
+            if (!unitHasFlag(unit, 1) && !unitHasFlag(unit, 10) && !unitHasFlag(unit, 2)) {
+                u16 skills[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+                if (unit != NULL) {
+                    for (s32 k = 0; k < 8; ++k)
+                        skills[k] = unit->resist[k];
+                }
+                for (s32 k = 0; k < 9; ++k) {
+                    if (skills[k] != 0 && skills[k] == 0x1C7) {
+                        unitHealMpPercent(unit, percent);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Applies the walking MP recovery to the player and the party's side units. */
+void fieldWalkRecoverMp(void)
+{
+    s32 percent = 0;
+    if (!(gameGetPlayerData()->ailments & 2)) {
+        if (flagBitIsSet(0x67) || flagBitIsSet(0x65))
+            percent = 5;
+        else if (flagBitIsSet(0x64))
+            percent = 2;
+        s32 sidePercent = percent;
+        if (gameGetPlayerData()->equipped.accessory == 0x2AB)
+            percent += 2;
+        if (percent > 0) {
+            s32 max = gameGetPlayerData()->maxMp;
+            s32 mp = gameGetPlayerData()->mp + percentOfMax(max, percent);
+            if (mp > max)
+                mp = max;
+            s16 value = mp;
+            PlayerDataIV *player = gameGetPlayerData();
+            s32 limit = player->maxMp;
+            if (value > limit)
+                value = limit;
+            else if (value < 1)
+                value = 1;
+            player->mp = value;
+        }
+        if (sidePercent > 0 && flagBitIsSet(0x67))
+            healSideUnitsMp(sidePercent, 3);
+        healRegenSkillUnitsMp(2, 3);
+    }
+}
+
+} /* extern "C" */

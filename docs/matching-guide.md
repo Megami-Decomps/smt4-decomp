@@ -215,6 +215,10 @@ difference a register tie-break.
   after the join.
 - Retail sharing one call's copies across `switch` cases, each arm ending in that call, is
   `if (a) { … } else if (b) { … } else break; call();` (shopQuantityStep's substeps 6 and 9).
+- A choice between calls that retail cross-jumps (one copy of a call with its argument chosen in a chain of tests)
+  is an `if / else if / else` of whole calls, written that way at every site that makes the choice, not a mode
+  variable passed to one call: `if (slot == 3) gameSetStatusCameraHeightMode(1); else if (slot == 5) …(2); else …(0);`
+  at all three sites made smt4a `Obj536044::FUN_00497290` and `FUN_0049bd20` IDENTICAL (wave 68).
 - `cmp; mov rN, #const; rsbne; bl` is one call written in both arms with the operand negated in one:
   `if (x) f(v, 0); else f(-v, 0);` (shopQuantityStep's price change).
 - `ldrlt r0, =A; ldrgt r0, =B; beq; bl f` is two calls, `if (v > e) f(B); else if (v < e) f(A);`, not
@@ -269,6 +273,12 @@ difference a register tie-break.
   named locals declared in retail's pool order fix the order of constants.
 - Chained assignment (`current[i] = maximum[i] = value;`) stores one value through both pointers the
   way retail does; separate statements reload or reorder it.
+- Reading a pointer field before a store that may alias it is a different program, not scheduling: after a store
+  through another pointer (a struct copy's word stores alias anything), armcc must reload the field, so retail
+  loading it before the store means the source read it first. `const Vec3f *target = key->target;` before
+  `work->initialPosition = key->position;` in `moveCameraSelectKey` (`gfx/MoveCameraCtrl.h`) made smt4a
+  `moveCameraCtrlSnapToNode` IDENTICAL and took `FUN_00407110` from 42 to 8 lines (wave 68). Check that the
+  store can alias the field; a load moved across a store that cannot alias it is only scheduling.
 - GPU command words are appended through the global cursor itself, `*g_commandBufferCursor++ = 0;
   *g_commandBufferCursor++ = 0x8025E;`, with the context's fields read through `g_asdGfxContext.cmdBuffer->` at
   each use: a cached cursor or buffer local merges the two stores into `stm` and moves the registers (wave 52:
@@ -351,6 +361,12 @@ asks for.
   do not always schedule alike: once a helper has evidence, try both (the basename helper of
   `FUN_003dbb40`, the same expression as in `FUN_003dadd8` and `FUN_003dba3c`; the map-camera accessor
   of smt4a `FUN_002442ac`, read twice around a call).
+- When a plain `static` helper is inlined depends on how many calls the translation unit holds: with one call armcc
+  inlines it early (its constants share the caller's hoisted registers), with several it inlines late (each site
+  materialises its own). smt4a `FUN_002007f4` (one call of `playLogSetState`) is 30 lines off alone and IDENTICAL
+  compiled in one file with `FUN_0021545c` (five more calls; wave 68). A `multifile` entry cannot express this
+  (`--no_autoinline` keeps the helper out of line), and a unit must not add calls to emulate it: such pairs need
+  both units carved from one source file.
 - Retail copying fields one `ldr`/`str` pair at a time where the build batches the same copies through VFP
   registers (`vldr`/`vstr` runs) is a plain `static` helper armcc inlined late, called once per copy: smt4
   `FUN_001569d8` and its smt4a twin `FUN_004491fc` (15 calls of `resetCursorRewind`, `current = begin`) are
@@ -461,6 +477,11 @@ asks for.
   (`Base(kind) : kind(kind)`) gives retail's order; members of types with their own zeroing
   constructors give its registers.
 - `new (alloc) T` with a constructor and a class `operator new` gives retail's predicated allocation.
+- A handler a class's function-pointer table calls on `this` is a member function: written as one on the class's
+  real fields (`void Obj536044::FUN_00497290()`, `classes/Obj536044.h`) it can match where the same body over a
+  unit-local struct view of the object does not: smt4a `Obj536044::FUN_00497290` was 179 lines off as a C function
+  taking a `ShopScreen *` view and is IDENTICAL as a member (wave 68, with `FUN_0049bd20` and `FUN_00499fdc` written
+  the same way from their drafts).
 - A native initializer list (`: vtable(...), table(data), owner(unit), count(data->count)`) plus
   members whose own constructors zero them (`ModelEffectList() : count(0), items(NULL) {}`) pairs the
   stores into retail's `strd`; the same stores written in the body do not (smt4a

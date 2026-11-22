@@ -56,6 +56,32 @@ struct Obj557b18Scale : MapVector {
     Obj557b18Scale() { x = 1.0f; y = 1.0f; z = 1.0f; }
 };
 
+/* The body's bone poses, what Obj557b18.skeleton points at (lookupNameEntry reads a bone's position). */
+struct Obj557b18Skeleton {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 boneCount;
+    /* 0x0C */ u8 unk0C[8];
+    /* 0x14 */ void *poses;         /* 0x30 bytes a bone */
+};
+
+/* A node of the model data's bone-name dictionary (0xC bytes). Node 0 is the search tree's root: bone `i` is
+ * node `i + 1`. */
+struct Obj557b18NameNode {
+    /* 0x00 */ u32 referenceBit;
+    /* 0x04 */ u16 left;
+    /* 0x06 */ u16 right;
+    /* 0x08 */ const char *name;
+};
+
+/* The model data the body was built from, what Obj557b18.modelData points at (only the bone names). */
+struct Obj557b18ModelData {
+    /* 0x00 */ u8 unk00[0x78];
+    /* 0x78 */ Obj557b18NameNode *boneNames;
+};
+
+typedef char Obj557b18NameLayoutCheck[sizeof(Obj557b18NameNode) == 0xC && offsetof(Obj557b18Skeleton, boneCount) == 8 &&
+    offsetof(Obj557b18ModelData, boneNames) == 0x78 ? 1 : -1];
+
 /* The object whose vtable is at 0x557b18 (named after it until its real name is known): a model
  * body (MoriModelUnit, 0x26C bytes), created by its content (Model/MoriModelContent.h) from the
  * content's resource; the controller functions move it, the model manager lists it. */
@@ -101,7 +127,7 @@ public:
     /* 0xFC */ u32 unkfc;
     /* 0x100 */ u32 unk100;
     /* 0x104 */ u32 unk104;
-    /* 0x108 */ u8 unk108[4];
+    /* 0x108 */ Obj557b18Skeleton *skeleton;
     /* 0x10C */ u32 unk10c;
     /* 0x110 */ u32 unk110;
     /* 0x114 */ u32 unk114;
@@ -119,7 +145,7 @@ public:
     /* 0x208 */ s16 selection;      /* -1 when none */
     /* 0x20A */ u8 unk20a[2];
     /* 0x20C */ u32 unk20c;
-    /* 0x210 */ u32 unk210;
+    /* 0x210 */ Obj557b18ModelData *modelData;
     /* 0x214 */ u8 unk214[0x40];
     /* 0x254 */ u32 unk254;
     /* 0x258 */ u32 unk258;
@@ -137,7 +163,8 @@ extern "C" void FUN_003fd790(Obj557b18 *body);
 typedef char Obj557b18LayoutCheck[sizeof(Obj557b18Element) == 0x30 &&
     offsetof(Obj557b18, elements) == 0x24 && offsetof(Obj557b18, position) == 0x1B4 && offsetof(Obj557b18, matrix) == 0x1C0 &&
     offsetof(Obj557b18, scale) == 0x1F0 && offsetof(Obj557b18, selection) == 0x208 &&
-    offsetof(Obj557b18, speed) == 0x1FC && offsetof(Obj557b18, unk214) == 0x214 &&
+    offsetof(Obj557b18, speed) == 0x1FC && offsetof(Obj557b18, skeleton) == 0x108 &&
+    offsetof(Obj557b18, modelData) == 0x210 && offsetof(Obj557b18, unk214) == 0x214 &&
     sizeof(Obj557b18) == 0x26C ? 1 : -1];
 
 #endif

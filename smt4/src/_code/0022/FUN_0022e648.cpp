@@ -24,7 +24,7 @@ extern "C" {
 s32 flaggedEntryGetValueByState(FlaggedValueHolder *);
 s32 flaggedValueHolderGetTotal(FlaggedValueHolder *);
 u32 shopSlotGetPrice(u16 *);
-s32 btlRollClamped(u16, u32);
+s32 shopAffordableCount(u16, u32);
 s32 playerSlotHoldsEntry(SelectionRollWork *, u16);
 }
 
@@ -52,7 +52,7 @@ extern "C" void FUN_0022e648(SelectionRollWork *work, u32 mode)
             --result;
         }
     } else {
-        result = btlRollClamped(*entry, shopSlotGetPrice(entry));
+        result = shopAffordableCount(*entry, shopSlotGetPrice(entry));
     }
     work->hasResult = result != 0;
     work->result = result;

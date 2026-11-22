@@ -14,8 +14,8 @@ void infoWindowInitialize(void);
 void comWinInitialize(void);
 void FUN_001409e4(void);
 s32 FUN_0013f7c4(u32 handle);
-void FUN_00144efc(void (*callback)(void));
-void asdTextSetDefaultStyle(void (*callback)(void));
+void messageSetSkipPoll(void (*callback)(void));
+void messageSetAdvancePoll(void (*callback)(void));
 void FUN_001456fc(void);
 void FUN_00145534(void);
 void asdTextSetDefaultValue(s32 (*callback)(void));
@@ -56,8 +56,8 @@ void FUN_00137144(void)
     objFlagsSetBits(g_messageMain.aux->box, 0x100);
     for (s32 i = 0; i < 12; i++)
         objFlagsSetBits(g_messageWindows[i]->box, 0x100);
-    FUN_00144efc(FUN_001456fc);
-    asdTextSetDefaultStyle(FUN_00145534);
+    messageSetSkipPoll(FUN_001456fc);
+    messageSetAdvancePoll(FUN_00145534);
     asdTextSetDefaultValue(msgIsSkipInputActive);
 }
 

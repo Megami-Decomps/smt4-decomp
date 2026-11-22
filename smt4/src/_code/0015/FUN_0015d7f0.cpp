@@ -1,49 +1,53 @@
-/* NON_MATCHING: the IEEE field view (exponent/mantissa extracted up front) now matches retail's field extraction; retail keeps the mantissa shift as a separate lsr, branches instead of predicating the in-range arm, and loads the shared constant earlier. */
-#include "common.h"
+/* NON_MATCHING: the half-float conversions and the command words match retail's code; retail loads the
+ * header constant 0x801f0144 at entry (the build loads it after the second conversion) and so numbers the
+ * conversion registers differently (r4-r7 against r4-r6). */
+#include "shard/W6_W6Match8_GpuDepth.h"
 
 extern "C" u32 *g_commandBufferCursor;
 
-// An IEEE single split into its fields.
-union SingleBits {
-    u32 bits;
-    struct { u32 mantissa : 23; u32 exponent : 8; u32 sign : 1; } field;
-};
-
-// The GPU conversion flushes subnormals to signed zero and clamps overflow to infinity.
-static __inline u16 floatBitsToGpuHalf(u32 bits)
+/* Converts a float to the GPU's half float, as NintendoWare's float-to-16-bit conversion does: sign (bit 15),
+ * 5-bit exponent rebiased from 127 to 15, 10-bit fraction. Values below the exponent range keep only the sign,
+ * values above it saturate to infinity. */
+static __inline u16 floatToGpuHalf(f32 value)
 {
-    SingleBits single;
-    single.bits = bits;
-    u32 biased = single.field.exponent;
-    u32 mantissa = single.field.mantissa;
-    u32 half = 0;
-    if (bits & 0x80000000)
-        half = 0x8000;
-    u32 exponent;
-    if ((bits & 0x7fffffff) == 0) {
+    GpuFloatEncoding encoding;
+    encoding.value = value;
+    u32 bits32 = encoding.bits;
+    u32 sign = bits32 & 0x80000000;
+    s32 exponent = (s32)((bits32 >> 23) & 0xff);
+    u32 fraction = bits32 & 0x7fffff;
+    u32 bits16 = 0;
+    bits16 |= (sign != 0) ? 0x8000 : 0;
+    if ((bits32 & ~0x80000000) == 0) {
         exponent = 0;
-        half = (mantissa >> 13) | half | ((exponent & 31) << 10);
     } else {
-        exponent = biased - 112;
-        if (static_cast<s32>(exponent) >= 0) {
-            if (static_cast<s32>(exponent) > 31)
-                half = 0x7c00;
-            else
-                half = (mantissa >> 13) | half | ((exponent & 31) << 10);
-        }
+        exponent = exponent - 127 + 15;
     }
-    return half;
+    fraction = fraction >> 13;
+    if (exponent < 0) {
+        /* underflow: a signed zero */
+    } else if (exponent > 0x1f) {
+        bits16 = 0x1f << 10;
+    } else {
+        bits16 |= fraction & 0x3ff;
+        bits16 |= (exponent & 0x1f) << 10;
+    }
+    return bits16;
 }
 
-// Write a three-component half-float lighting vector to the selected GPU register.
-extern "C" void FUN_0015d7f0(s32 index, const u32 *vectorBits)
+/* Writes a three-component half-float lighting vector to light `index`'s GPU registers (0x144 + 16 * index). */
+extern "C" void FUN_0015d7f0(u32 index, const f32 *vector)
 {
-    u16 x = floatBitsToGpuHalf(vectorBits[0]);
-    u16 y = floatBitsToGpuHalf(vectorBits[1]);
-    u16 z = floatBitsToGpuHalf(vectorBits[2]);
-    g_commandBufferCursor[2] = z;
-    g_commandBufferCursor[3] = 0;
-    g_commandBufferCursor[0] = x | (y << 16);
-    g_commandBufferCursor[1] = index * 16 + 0x801f0144;
+    f32 x = vector[0];
+    f32 y = vector[1];
+    f32 z = vector[2];
+    u32 command[4] = {
+        floatToGpuHalf(x) | (floatToGpuHalf(y) << 16),
+        index * 16 + 0x801f0144,
+        floatToGpuHalf(z),
+        0,
+    };
+    for (s32 i = 0; i < 4; ++i)
+        g_commandBufferCursor[i] = command[i];
     g_commandBufferCursor += 4;
 }

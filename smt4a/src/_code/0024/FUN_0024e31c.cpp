@@ -21,7 +21,7 @@ int renderCtxCalculateStereoParallax(...);
 int jobGetScalarValue(void);
 int devilDrawResolvedTexture(...);
 int FUN_002fb5c4(int);
-int FUN_003210bc(int, int);
+int btlDrawFloatingNumbers(int, int);
 int FUN_003217d0(int);
 int FUN_003a9f7c(int);
 int FUN_003f931c(unsigned int);
@@ -62,7 +62,7 @@ extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: devilDrawResolvedTexture. */
 /* Supplied declaration required: FUN_002fb5c4. */
-/* Supplied declaration required: FUN_003210bc. */
+/* Supplied declaration required: btlDrawFloatingNumbers. */
 /* Supplied declaration required: FUN_003217d0. */
 /* Supplied declaration required: FUN_003a9f7c. */
 /* Supplied declaration required: FUN_003f931c. */
@@ -123,7 +123,7 @@ unsigned int FUN_0024e31c(void)
         (**(romwright_code **)(temp_v6 + 0x1274))();
         *(unsigned char *)(temp_v6 + 0x1270) = 0;
       }
-      FUN_003210bc(temp_v1,1);
+      btlDrawFloatingNumbers(temp_v1,1);
       temp_v7 = 0.8f;
       renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v8 = (unsigned long long)(unsigned int)(int)temp_v7;

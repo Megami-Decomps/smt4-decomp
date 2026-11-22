@@ -22,7 +22,7 @@ struct HistoryGlobals {
 extern "C" {
 
 extern HistoryGlobals g_gameDataBlocks;
-void FUN_00334e18(void);
+void appUnlockFreeApps(void);
 
 /* Zeroes the reset words and count (the twin, smt4a FUN_00284fdc, clears through the same helper). */
 static __inline void resetClear(HistoryReset *state)
@@ -40,7 +40,7 @@ void FUN_001dd930(void)
     HistoryData *data = g_gameDataBlocks.data;
     data->previous = data->current;
     resetClear(&data->reset);
-    FUN_00334e18();
+    appUnlockFreeApps();
 }
 
 } /* extern "C" */

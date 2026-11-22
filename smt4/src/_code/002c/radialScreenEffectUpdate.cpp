@@ -1,4 +1,6 @@
-/* NON_MATCHING: duration/frame registers (r8/r7 in retail), the center/min/max stores (retail reloads x/y with two vldr and stores each, built vldmia/vstmia) and the packed-color reload (retail vldr + vldmia {s2-s3} + vldr) differ; the factor copy, product multiply and REV byte getters match. */
+/* NON_MATCHING: the screen-centred bounds match (centre in two named locals); retail keeps duration/frame in r8/r7
+ * (swapped here), and for a world position loads x/y once into VFP registers and computes x-r, x+r, y-r, y+r where
+ * this build copies the centre through core registers and rereads it; the packed-colour reload differs too. */
 #include "shard/W6_W6Match6_RadialScreenEffect.h"
 #include "gfx/EffectColorMath.h"
 #include "gfx/VectorScratch.h"
@@ -26,23 +28,23 @@ void radialScreenEffectUpdate(RadialScreenEffectJob *job)
     }
     f32 radius = FUN_00269508(resource->radiusCurve, frame, duration);
     if (resource->screenCentered) {
-        output->center.x = 200.0f;
-        output->center.y = 120.0f;
-        output->minimum.x = 200.0f - radius;
-        output->minimum.y = 120.0f - radius;
-        output->maximum.x = radius + 200.0f;
-        output->maximum.y = radius + 120.0f;
-    } else {
-        g_vectorScratch.first.color = job->position;
-        radius = screenEffectProjectWorldRadius(job->radiusScale * radius);
-        f32 x = g_vectorScratch.first.color.red;
-        f32 y = g_vectorScratch.first.color.green;
+        f32 x = 200.0f;
+        f32 y = 120.0f;
         output->center.x = x;
         output->center.y = y;
         output->minimum.x = x - radius;
-        output->maximum.x = x + radius;
         output->minimum.y = y - radius;
-        output->maximum.y = y + radius;
+        output->maximum.x = radius + x;
+        output->maximum.y = radius + y;
+    } else {
+        g_vectorScratch.first.color = job->position;
+        radius = screenEffectProjectWorldRadius(job->radiusScale * radius);
+        output->center.x = g_vectorScratch.first.color.red;
+        output->center.y = g_vectorScratch.first.color.green;
+        output->minimum.x = output->center.x - radius;
+        output->minimum.y = output->center.y - radius;
+        output->maximum.x = output->center.x + radius;
+        output->maximum.y = output->center.y + radius;
     }
     u32 sampledColor = FUN_00269694(resource->colorCurve, &resource->weight, frame, duration);
     renderCtxSetPackedColor(job->color);

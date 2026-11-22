@@ -1,139 +1,90 @@
-/* NON_MATCHING: sets up the mikado move-camera controller (camera model, camera data, named points and the two marker models); written from the decompilation, allocation tracing and register scheduling not compared with retail */
+/* NON_MATCHING: 54 lines (50 by shape), three places.
+ * - The first key: retail loads the key's target pointer before it copies the position, then stores in the order
+ *   first-key position, first-key target, initial target, initial position; this build copies the position to both
+ *   fields before it reads the target. (moveCameraCtrlSnapToNode and moveCameraCtrlLoadTrack load the pointer early too.)
+ * - The bone loop: retail keeps the name offset 20 in fp and loads `[names, 20 + i * 12]` (so it saves fp and its
+ *   frame is 140 bytes, not 144); this build adds `i * 12` to the base and loads `[.., #20]`.
+ * - The found name: retail moves strstr's result straight into r1 (`movs r1, r0`), this build tests r0 and moves it. */
 #include "common.h"
 #include <stdio.h>
-
-struct McVec3 {
-    u32 x, y, z;
-};
-
-struct McModelList {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u32 object;          /* the registered scene object */
-    /* 0x08 */ u8 unk08[4];
-    /* 0x0C */ u8 *data;
-};
-
-struct McNameTable {
-    /* 0x00 */ u8 unk00[0x78];
-    /* 0x78 */ u8 *entries;         /* 0xC bytes each, the name pointer at 0x14 relative to 0x78 base */
-};
-
-struct McSceneObject {
-    /* 0x000 */ u8 unk000[0x108];
-    /* 0x108 */ struct { u8 unk[8]; s32 count; } *nameList;
-    /* 0x10C */ u8 unk10C[0x104];
-    /* 0x210 */ McNameTable *table;
-};
-
-struct McOwner {
-    /* 0x00 */ u8 unk00[0x34];
-    /* 0x34 */ struct { u8 unk[0x48]; u32 **cameraData; } *scene;
-};
-
-struct MoveCameraCtrl {
-    /* 0x000 */ u32 unk00;
-    /* 0x004 */ u32 unk04;
-    /* 0x008 */ u32 unk08;
-    /* 0x00C */ s32 pointCount;
-    /* 0x010 */ u8 unk10[5];
-    /* 0x015 */ u8 hasPoints;
-    /* 0x016 */ u8 unk16[2];
-    /* 0x018 */ McModelList *cameraModel;
-    /* 0x01C */ McModelList *pointModel;
-    /* 0x020 */ McModelList *arrowModel;
-    /* 0x024 */ u8 unk24[0x570];
-    /* 0x594 */ McOwner *owner;
-    /* 0x598 */ u8 unk598[0x1C];
-    /* 0x5B4 */ McVec3 position;
-    /* 0x5C0 */ McVec3 target;
-    /* 0x5CC */ u8 unk5CC[0x18];
-    /* 0x5E4 */ McVec3 positionB;
-    /* 0x5F0 */ McVec3 targetB;
-    /* 0x5FC */ u8 unk5FC[0xC];
-    /* 0x608 */ McVec3 pointStart;
-    /* 0x614 */ u8 unk614[0xC];
-    /* 0x620 */ McVec3 points[0x20];
-};
+#include "Model/MoriModelManager.h"
+#include "Model/MoriModelContent.h"
+#include "Model/MoriScene.h"
+#include "classes/Obj557d00.h"
+#include "gfx/ControllerModel.h"
+#include "gfx/MoveCameraCtrl.h"
+#include "classes/Obj557b58.h"
+#include "code/Code0040_Shard0040.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
-extern u32 g_handleRegistry;
+extern const char DAT_0053295c[]; /* this file's __FILE__: mikado/moveCamera/MoveCameraCtrl.cpp */
 
-void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
-McModelList *modelListInit(void *memory);
-void resourceOwnerLoadFileSync(void);
-void moriModelContentLoadBody(McModelList *list, s32 flag);
-void FUN_0040ab7c(McModelList *list, s32 flag);
-void handleRegistryRegisterObject(u32 registry, u32 object);
-void modelPlayClip(u32 object, s32 a, s32 b);
-void controllerSetPosition(u32 object);
-void controllerSetPositionXyz(u32 object);
-void FUN_00407110(MoveCameraCtrl *ctrl, const char *name);
-void resourceOwnerLoadNamed(u32 registry, const char *name);
-s32 FUN_0040af60(u32 registry);
-void FUN_0040ae70(u32 registry, s32 flag);
-void FUN_0045b538(u8 *data);
-const char *FUN_00102c30(const void *name, const char *prefix);
-void lookupNameEntry(McSceneObject *object, const char *entry, McVec3 *out);
+void moveCameraCtrlLoadTrack(MoveCameraCtrlWork *ctrl, const char *name);
+void resourceOwnerLoadNamed(Obj557c48 *registry, const char *name);
+void FUN_0045b538(void *owner);
+char *FUN_00102c30(const char *text, const char *pattern);  /* strstr */
 
-#define MC_SOURCE "c:\\SMT4F\\SMT4F\\sdds4\\program\\mikado\\moveCamera\\MoveCameraCtrl.cpp"
-
-/* Allocates and constructs one model list. */
-static __inline McModelList *mcCreateModelList(u32 line)
+/* Allocates and constructs one model content at line `line` of MoveCameraCtrl.cpp. */
+static __inline MoriModelContent *mcCreateContent(s32 line)
 {
-    void *memory = asdMemoryAllocTraced(0x20, MC_SOURCE, line);
-    return memory != NULL ? modelListInit(memory) : NULL;
+    MoriModelContent *content = (MoriModelContent *)asdMemoryAllocTraced(0x20, DAT_0053295c, line);
+    if (content != NULL) {
+        content = modelListInit(content);
+    }
+    return content;
 }
 
-void moveCameraCtrlSetup(MoveCameraCtrl *ctrl, const char *cameraName, const char *dataName)
+/* Loads the camera model and its camera track, collects the positions of the model's "Dum_" bones and, when it
+ * has any, loads the arrow and point markers. `dataName` names the model when it differs from the camera's. */
+void moveCameraCtrlSetup(MoveCameraCtrlWork *ctrl, const char *cameraName, const char *dataName)
 {
+    char path[128];
+    Vec3f point;
+
     ctrl->cameraModel = NULL;
-    ctrl->unk00 = 0;
-    ctrl->unk08 = 0;
-    ctrl->unk04 = 0;
+    ctrl->frameCount = 0;
+    ctrl->auxiliaryCount = 0;
+    ctrl->frame = 0;
     ctrl->pointCount = 0;
-    dataName = dataName == NULL ? cameraName : dataName;
+    if (dataName == NULL) {
+        dataName = cameraName;
+    }
     ctrl->hasPoints = 0;
 
-    char path[128];
     sprintf(path, "%s.bam", dataName);
-    ctrl->cameraModel = mcCreateModelList(0xF5);
-    resourceOwnerLoadFileSync();
-    moriModelContentLoadBody(ctrl->cameraModel, 0);
-    FUN_0045b538(ctrl->cameraModel->data + 0xC);
-    u32 object = ctrl->cameraModel->object;
-    handleRegistryRegisterObject(g_handleRegistry, object);
-    modelPlayClip(object, 0, 1);
-    controllerSetPosition(object);
-    controllerSetPositionXyz(object);
+    ctrl->cameraModel = mcCreateContent(245);
+    resourceOwnerLoadFileSync(ctrl->cameraModel, path);
+    moriModelContentLoadBody(ctrl->cameraModel, NULL);
+    FUN_0045b538(ctrl->cameraModel->resource->unk0C);
+    Obj557b18 *body = ctrl->cameraModel->body;
+    handleRegistryRegisterObject(g_handleRegistry, body);
+    modelPlayClip(body, 0, 1, 0.0f, 0.0f);
+    controllerSetPosition(body, 1.0f, 1.0f, 1.0f);
+    controllerSetPositionXyz(body, 0.0f, 0.0f, 0.0f);
 
     sprintf(path, "%s_cam.bch", cameraName);
-    FUN_00407110(ctrl, path);
+    moveCameraCtrlLoadTrack(ctrl, path);
     sprintf(path, "%s.bch", cameraName);
-    u32 registry = g_handleRegistry;
+    Obj557c48 *registry = g_handleRegistry;
     resourceOwnerLoadNamed(registry, path);
-    if (FUN_0040af60(registry) != 0)
+    if (FUN_0040af60((LockedObj *)registry) != 0) {
         FUN_0040ae70(registry, 1);
+    }
 
-    u32 *cameraData = *ctrl->owner->scene->cameraData;
-    u32 *cameraPose = reinterpret_cast<u32 *>(cameraData[0x30 / 4]);
-    ctrl->positionB.x = cameraData[0x1C / 4];
-    ctrl->positionB.y = cameraData[0x20 / 4];
-    ctrl->positionB.z = cameraData[0x24 / 4];
-    ctrl->targetB.x = cameraPose[0];
-    ctrl->targetB.y = cameraPose[1];
-    ctrl->targetB.z = cameraPose[2];
-    ctrl->target = ctrl->targetB;
-    ctrl->position = ctrl->positionB;
+    const MoveCameraTrackKey *key = ctrl->resource->track->keys[0];
+    ctrl->initialPosition = ctrl->firstKeyPosition = key->position;
+    ctrl->initialTarget = ctrl->firstKeyTarget = *key->target;
 
-    McSceneObject *sceneObject = reinterpret_cast<McSceneObject *>(object);
-    s32 nodeCount = sceneObject->nameList->count;
-    u8 *nodes = sceneObject->table->entries;
-    for (s32 i = 0; i < nodeCount; i++) {
-        const char *entry = FUN_00102c30(*reinterpret_cast<void **>(nodes + i * 0xC + 0x14), "Dum_");
-        if (entry != NULL) {
-            McVec3 point;
-            lookupNameEntry(sceneObject, entry, &point);
-            ctrl->points[ctrl->pointCount] = point;
+    s32 boneCount = body->skeleton->boneCount;
+    Obj557b18NameNode *boneNames = body->modelData->boneNames;
+    for (s32 i = 0; i < boneCount; i++) {
+        const char *name = FUN_00102c30(boneNames[i + 1].name, "Dum_");
+        if (name != NULL) {
+            lookupNameEntry(body, (u32)name, (u32 *)&point);
+            ctrl->points[ctrl->pointCount].x = point.x;
+            ctrl->points[ctrl->pointCount].y = point.y;
+            ctrl->points[ctrl->pointCount].z = point.z;
             ctrl->pointCount++;
         }
     }
@@ -141,27 +92,27 @@ void moveCameraCtrlSetup(MoveCameraCtrl *ctrl, const char *cameraName, const cha
     if (ctrl->pointCount > 0) {
         ctrl->hasPoints = 1;
         sprintf(path, "mikado/yaji.bam");
-        ctrl->arrowModel = mcCreateModelList(0x15E);
-        resourceOwnerLoadFileSync();
+        ctrl->arrowModel = mcCreateContent(350);
+        resourceOwnerLoadFileSync(ctrl->arrowModel, path);
         FUN_0040ab7c(ctrl->arrowModel, 0);
-        moriModelContentLoadBody(ctrl->arrowModel, 0);
-        u32 arrow = ctrl->arrowModel->object;
+        moriModelContentLoadBody(ctrl->arrowModel, NULL);
+        Obj557b18 *arrow = ctrl->arrowModel->body;
         handleRegistryRegisterObject(g_handleRegistry, arrow);
-        modelPlayClip(arrow, 0, 1);
-        controllerSetPosition(arrow);
-        controllerSetPositionXyz(arrow);
+        modelPlayClip(arrow, 0, 1, 0.0f, 0.0f);
+        controllerSetPosition(arrow, 1.0f, 1.0f, 1.0f);
+        controllerSetPositionXyz(arrow, 0.0f, 0.0f, 0.0f);
 
         sprintf(path, "mikado/point.bam");
-        ctrl->pointModel = mcCreateModelList(0x16C);
-        resourceOwnerLoadFileSync();
+        ctrl->pointModel = mcCreateContent(364);
+        resourceOwnerLoadFileSync(ctrl->pointModel, path);
         FUN_0040ab7c(ctrl->pointModel, 0);
-        moriModelContentLoadBody(ctrl->pointModel, 0);
-        u32 marker = ctrl->pointModel->object;
+        moriModelContentLoadBody(ctrl->pointModel, NULL);
+        Obj557b18 *marker = ctrl->pointModel->body;
         handleRegistryRegisterObject(g_handleRegistry, marker);
-        modelPlayClip(marker, 0, 1);
-        controllerSetPosition(marker);
-        ctrl->pointStart = ctrl->points[0];
-        controllerSetPositionXyz(marker);
+        modelPlayClip(marker, 0, 1, 0.0f, 0.0f);
+        controllerSetPosition(marker, 1.0f, 1.0f, 1.0f);
+        ctrl->pointPosition = ctrl->points[0];
+        controllerSetPositionXyz(marker, ctrl->pointPosition.x, ctrl->pointPosition.y, ctrl->pointPosition.z);
     }
 }
 

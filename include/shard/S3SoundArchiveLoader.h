@@ -80,6 +80,13 @@ typedef struct SoundNoteInfo {
     /* 0x0D */ u8 unk0D[11];
 } SoundNoteInfo;
 
+/* Three words soundPlayerPlayItem hands through to the playback call (passed by value). */
+struct PlayParameters {
+    /* 0x00 */ u32 first;
+    /* 0x04 */ u32 second;
+    /* 0x08 */ u32 third;
+};
+
 /* nw::snd::internal::WaveSoundFileReader, built over one wave sound file. */
 typedef struct WaveSoundFileReader {
     u32 unk00[2];

@@ -1,4 +1,4 @@
-/* NON_MATCHING: near (197 rows against 198): same switch cases, calls and constants; retail keeps the stage-mode index in r5 through a conditional move (cmp; movge; blt) where ours uses `subs`, hoists the party count/offset pair loads differently in case 4, copies the camera position as three plain words with swapped r0/r1, and holds the battle block in r8/r4 differently in case 6 */
+/* NON_MATCHING: 203 vs 203 rows (36 diff lines): cases 1, 2, 3, 5, 8, 9 match byte-for-byte; case 4 differs on `cmp/movge` vs `subs` and `vldmia/vstmia` vs `vldr/vstr` on slot->pos, and case 6 swaps r0/r1 in the slot halfword sum. */
 #include "battle/BtlMainAccess.h"
 #include "code/Code0018.h"
 #include "util/MathFunctions.h"
@@ -15,6 +15,12 @@ extern "C" {
 struct Vec2 {
     f32 x;
     f32 y;
+    Vec2 &operator+=(const Vec2 &rhs)
+    {
+        x += rhs.x;
+        y += rhs.y;
+        return *this;
+    }
 };
 
 struct StageUnitSlot {
@@ -100,7 +106,7 @@ void FUN_00410f84(StageState *state)
         mathVectorClear(g_btlCamera);
         g_btlCamera[3] = 0.0f;
         g_btlCamera[4] = 0.0f;
-        s32 mode = btlStageGetModeIndex(reinterpret_cast<u32>(state));
+        s32 mode = btlStageGetModeIndex((u32)state);
         if (mode >= 0) {
             g_btlCamera[0] = DAT_00529780[mode].cameraPos[0];
             g_btlCamera[1] = DAT_00529780[mode].cameraPos[1];
@@ -112,25 +118,20 @@ void FUN_00410f84(StageState *state)
         state->value = 0;
         state->id = -1;
         FUN_00411c04(state, 1);
-        s32 mode = btlStageGetModeIndex(reinterpret_cast<u32>(state));
+        s32 mode = btlStageGetModeIndex((u32)state);
         if (mode >= 0) {
             s32 count = partyCountActiveSlots();
             const StageModeParams *params = &DAT_00529780[mode];
             Vec2 offset = params->slotOffset;
-            s32 i = 0;
-            while (i < count) {
-                Vec2 pos = state->slot[i].pos;
-                pos.x = pos.x + offset.x;
-                pos.y = pos.y + offset.y;
-                state->slot[i].pos = pos;
-                i++;
+            for (s32 i = 0; i < count; i++) {
+                state->slot[i].pos += offset;
             }
             controllerGroupSetPosition(g_btlStageModel, params->groupScale, params->groupScale, params->groupScale);
         }
         return;
     }
     case 5: {
-        BtlMainView *mainState = reinterpret_cast<BtlMainView *>(btlGetMainState());
+        BtlMainView *mainState = (BtlMainView *)btlGetMainState();
         BattleUnitBlock *block = btlFindFirstEntryMatchingCategoryAndRequiredMask();
         u32 record = partyFindActiveRecordById((u16)state->value);
         btlUnitStateInitFromRecord(mainState, (u8 *)block + 0x164, record, 1);
@@ -142,7 +143,7 @@ void FUN_00410f84(StageState *state)
         return;
     }
     case 6: {
-        BtlMainView *mainState = reinterpret_cast<BtlMainView *>(btlGetMainState());
+        BtlMainView *mainState = (BtlMainView *)btlGetMainState();
         BattleUnitBlock *block = btlFindFirstEntryMatchingCategoryAndRequiredMask();
         u32 record = saveSlotFindSelected();
         btlUnitStateInitFromRecord(mainState, (u8 *)block + 0x164, record, 0);

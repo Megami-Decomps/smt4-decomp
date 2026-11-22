@@ -1,11 +1,5 @@
 #include "common.h"
-
-/* Three words handed through to the playback call. */
-struct PlayParameters {
-    u32 first;
-    u32 second;
-    u32 third;
-};
+#include "shard/S3SoundArchiveLoader.h"
 
 /* Where a sound item lives: offsets into the archive, or the file it points at. */
 struct SoundFileInfo {

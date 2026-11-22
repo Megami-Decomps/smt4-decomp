@@ -29,8 +29,8 @@ int libm_sinf(void); // declcheck: local (the shared declaration does not compil
 int mathDistanceBetweenPoints(void);
 int mathGetShortestAngleDelta(void);
 int gameCounterAddSaturating(...);
-int FUN_003a66c4(void);
-int FUN_003a6988(void);
+int fieldWalkRecoverHp(void);
+int fieldWalkRecoverMp(void);
 int SBORROW4(...);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -79,8 +79,8 @@ extern int unitGroupHasFlag(unsigned int, unsigned int);
 extern int padIsButtonRepeat(unsigned int);
 extern int padIsButtonPressed(unsigned int);
 /* Supplied declaration required: mapEnemyAdvancePursuit. */
-/* Supplied declaration required: FUN_003a66c4. */
-/* Supplied declaration required: FUN_003a6988. */
+/* Supplied declaration required: fieldWalkRecoverHp. */
+/* Supplied declaration required: fieldWalkRecoverMp. */
 
 
 void FUN_001fa8e4(void)
@@ -393,8 +393,8 @@ void FUN_001fa8e4(void)
     *(float *)(temp_v2 + 0xdbc) = temp_v13;
     if ((int)temp_v13 >= 0x44bb8001) {
       *(float *)(temp_v2 + 0xdbc) = temp_v13 - 1500.0f;
-      FUN_003a66c4();
-      FUN_003a6988();
+      fieldWalkRecoverHp();
+      fieldWalkRecoverMp();
     }
     temp_v12 = *(float *)(temp_v2 + 0xdc4) + temp_v12;
     *(float *)(temp_v2 + 0xdc4) = temp_v12;

@@ -1,61 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `fusionPairCompare` (_code @ 0x2fd93c, 0x158 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "camp/Unite/UniteGlobals.h"
+#include "shard/W6_W6Match8_DevilRecordA.h"
 
-extern "C" {
-
-int nkmBaseGetRecord(void);
-
-extern int g_unite; /* 0x57f290 */
-
-/* Supplied declaration required: nkmBaseGetRecord. */
-
-
-int fusionPairCompare(unsigned short *param_1,unsigned short *param_2)
-
+/* Tie-break two demons by descending race, ascending level, and descending demon id. */
+static __inline s32 compareFusionDevilDetails(const u16 *first, const u16 *second)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned short *puVar2;
-  unsigned short *puVar3;
-  int temp_v1;
-  unsigned short *puVar5;
-  unsigned short *puVar6;
-  
-  temp_v0 = g_unite;
-  puVar5 = (unsigned short *)(*(unsigned int *)(g_unite + (unsigned int)*param_1 * 8 + 0x13b8) & 0x7fff);
-  puVar6 = (unsigned short *)(*(unsigned int *)(g_unite + (unsigned int)*param_2 * 8 + 0x13b8) & 0x7fff);
-  puVar2 = puVar5;
-  nkmBaseGetRecord();
-  puVar3 = puVar6;
-  nkmBaseGetRecord();
-  temp_v1 = (unsigned int)puVar3[3] - (unsigned int)puVar2[3];
-  if (temp_v1 == 0) {
-    nkmBaseGetRecord();
-    nkmBaseGetRecord();
-    temp_v1 = (unsigned int)(unsigned char)puVar6[1] - (unsigned int)(unsigned char)puVar5[1];
-    if ((temp_v1 == 0) && (temp_v1 = (unsigned int)puVar5[3] - (unsigned int)puVar6[3], temp_v1 == 0)) {
-      temp_v1 = (unsigned int)*puVar6 - (unsigned int)*puVar5;
+    const NkmBaseRecordA *a = nkmBaseGetRecord(*first);
+    const NkmBaseRecordA *b = nkmBaseGetRecord(*second);
+    s32 order = b->race - a->race;
+    if (order == 0) {
+        order = a->level - b->level;
+        if (order == 0) {
+            order = b->id - a->id;
+        }
     }
-  }
-  if (temp_v1 == 0) {
-    puVar5 = (unsigned short *)((*(unsigned int *)(temp_v0 + (unsigned int)*param_1 * 8 + 0x13b8) & 0x3fffffff) >> 0xf);
-    puVar6 = (unsigned short *)((*(unsigned int *)(temp_v0 + (unsigned int)*param_2 * 8 + 0x13b8) & 0x3fffffff) >> 0xf);
-    puVar2 = puVar5;
-    nkmBaseGetRecord();
-    puVar3 = puVar6;
-    nkmBaseGetRecord();
-    temp_v1 = (unsigned int)puVar3[3] - (unsigned int)puVar2[3];
-    if (temp_v1 == 0) {
-      nkmBaseGetRecord();
-      nkmBaseGetRecord();
-      temp_v1 = (unsigned int)(unsigned char)puVar6[1] - (unsigned int)(unsigned char)puVar5[1];
-      if ((temp_v1 == 0) && (temp_v1 = (unsigned int)puVar5[3] - (unsigned int)puVar6[3], temp_v1 == 0)) {
-        temp_v1 = (unsigned int)*puVar6 - (unsigned int)*puVar5;
-      }
-    }
-  }
-  return temp_v1;
+    return order;
 }
 
-} /* extern "C" */
+/* Order two demons by descending level, then by descending race, ascending level, and descending demon id. */
+static __inline s32 compareFusionDevils(const u16 *first, const u16 *second)
+{
+    const NkmBaseRecordA *a = nkmBaseGetRecord(*first);
+    const NkmBaseRecordA *b = nkmBaseGetRecord(*second);
+    s32 order = b->level - a->level;
+    if (order == 0) {
+        order = compareFusionDevilDetails(first, second);
+    }
+    return order;
+}
+
+/* Sort fusion pairs lexicographically by their first and second demons, descending. */
+extern "C" s32 fusionPairCompare(const u16 *first, const u16 *second)
+{
+    UniteWorkA *list = g_unite;
+    u16 firstId = list->pairList.pairs[*first].packedIds & 0x7FFF;
+    u16 secondId = list->pairList.pairs[*second].packedIds & 0x7FFF;
+    s32 result = compareFusionDevils(&firstId, &secondId);
+    if (result == 0) {
+        firstId = (list->pairList.pairs[*first].packedIds & 0x3FFFFFFF) >> 15;
+        secondId = (list->pairList.pairs[*second].packedIds & 0x3FFFFFFF) >> 15;
+        result = compareFusionDevils(&firstId, &secondId);
+    }
+    return result;
+}

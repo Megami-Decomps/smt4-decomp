@@ -20,7 +20,7 @@ typedef char WaveArchiveLoadInfoOffsets[
 extern "C" {
 u32 soundArchiveFileEntryIsLoaded(void *archive);
 s32 soundArchiveReadWaveArchiveInfo(void *archive, u32 id, WaveArchiveLoadInfo *info);
-u32 FUN_002a78c0(SoundArchiveLoader *loader, u32 fileId, void *buffer, u32 size, u32 offset, u32 flags);
+u32 soundArchiveLoaderReadFile(SoundArchiveLoader *loader, u32 fileId, void *buffer, u32 size, u32 offset, u32 flags);
 u32 nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlockOffset(const void *header);
 u32 nw_snd_internal_WaveArchiveFile_FileHeader_GetInfoBlockOffset(const void *header);
 u32 nnosGetHeapBase(void);
@@ -52,7 +52,7 @@ void *FUN_00150d2c(SoundArchiveLoader *loader, u32 archiveId, WaveArchiveAllocat
     /* The archive reader requires a 32-byte-aligned temporary header. */
     u8 storage[0x2C + 31];
     void *header = (void *)(((u32)storage + 31) & ~31u);
-    if (FUN_002a78c0(loader, fileId, header, 0x2C, 0, flags) != 0x2C)
+    if (soundArchiveLoaderReadFile(loader, fileId, header, 0x2C, 0, flags) != 0x2C)
         return 0;
     u32 fileOffset = nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlockOffset(header);
     u32 infoOffset = nw_snd_internal_WaveArchiveFile_FileHeader_GetInfoBlockOffset(header);
@@ -64,7 +64,7 @@ void *FUN_00150d2c(SoundArchiveLoader *loader, u32 archiveId, WaveArchiveAllocat
     u32 heapSize = nnosGetHeapSize();
     if ((u32)data < heapBase || (u32)data + size > heapBase + heapSize)
         return 0;
-    if (FUN_002a78c0(loader, fileId, data, fileOffset, 0, flags) != fileOffset)
+    if (soundArchiveLoaderReadFile(loader, fileId, data, fileOffset, 0, flags) != fileOffset)
         return 0;
     *(u32 *)(data + fileOffset) = DAT_004148c4;
     WaveArchiveReader reader;

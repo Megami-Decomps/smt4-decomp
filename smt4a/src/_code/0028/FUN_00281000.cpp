@@ -1,25 +1,15 @@
-#include "common.h"
+#include "gfx/TextureDrawPivot.h"
 
-struct ValueSettings {
-    f32 value;       // 0x00
-    s16 firstMode;   // 0x04
-    s16 secondMode;  // 0x06
-    u16 firstExtra;  // 0x08: kept only when firstMode is 3
-    u16 secondExtra; // 0x0A: kept only when secondMode is 3
-};
-
-/* Sets the value and both modes; a mode of 3 also takes its extra value. */
-extern "C" void FUN_00281000(ValueSettings* settings, f32 value,
-                              s16 firstMode, s16 secondMode,
-                              u16 firstExtra, u16 secondExtra)
+/* Sets the pivot's depth and both anchor modes; a mode of 3 also takes its coordinate. */
+extern "C" void FUN_00281000(TextureDrawPivot *pivot, f32 depth, s16 horizontalMode, s16 verticalMode, u16 x, u16 y)
 {
-    settings->value = value;
-    settings->firstMode = firstMode;
-    settings->secondMode = secondMode;
-    if (firstMode == 3) {
-        settings->firstExtra = firstExtra;
+    pivot->depth = depth;
+    pivot->horizontalMode = horizontalMode;
+    pivot->verticalMode = verticalMode;
+    if (horizontalMode == 3) {
+        pivot->x = x;
     }
-    if (secondMode == 3) {
-        settings->secondExtra = secondExtra;
+    if (verticalMode == 3) {
+        pivot->y = y;
     }
 }

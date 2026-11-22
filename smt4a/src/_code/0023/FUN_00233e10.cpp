@@ -47,7 +47,7 @@ u32 FUN_00233e10(u8 blocked, s32 index)
     if (record->category >= 45) {
         record->state = 7;
         if (g_gameState.inputBlocked == 0) {
-            FUN_0050245c(record->start[0], record->start[1], record->start[2]);
+            FUN_0050245c(record->start.x, record->start.y, record->start.z);
             soundActorStartOnFreeChannel(0x10002ab);
         }
     } else {
@@ -68,7 +68,7 @@ u32 FUN_00233e10(u8 blocked, s32 index)
             } else if (g_gameState.mapId < 100) {
                 soundActorStartOnFreeChannel(0x10002ab);
             } else {
-                FUN_0050245c(record->start[0], record->start[1], record->start[2]);
+                FUN_0050245c(record->start.x, record->start.y, record->start.z);
                 soundActorStartOnFreeChannel(0x10002ab);
             }
         } else {

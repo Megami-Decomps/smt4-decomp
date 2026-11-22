@@ -10,7 +10,7 @@ int mapSpawnActiveSlotEffects(void);
 int FUN_002849a4(...);
 int FUN_0028527c(int);
 int naviRegisterTransitionsAndRequest(int, int, int, int, int, int);
-int FUN_002852f0(int);
+int mazeLayoutGrid(int);
 int asdMdlManagerCreateLoaded(unsigned char *, int);
 int lightOwnerRegister(unsigned int, int);
 int randNextInRange(...);
@@ -69,7 +69,7 @@ extern unsigned char *puRam004bd108; /* 0x4bd108 */
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0028527c. */
 /* Supplied declaration required: naviRegisterTransitionsAndRequest. */
-/* Supplied declaration required: FUN_002852f0. */
+/* Supplied declaration required: mazeLayoutGrid. */
 extern int mapGetDepartureIndex(void);
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: lightOwnerRegister. */
@@ -134,14 +134,14 @@ void FUN_001abb98(void)
   temp_v6 = mapGetDepartureIndex();
   temp_v7 = FUN_00316ce4();
   if (!(temp_v7 == 1 && temp_v6 == 0)) {
-    FUN_002852f0(0);
+    mazeLayoutGrid(0);
     DAT_004bd0d8 = 0;
     if (temp_v6 != 0) {
       temp_v7 = temp_v6 * 0x44;
       temp_v6 = *(int *)(temp_v6 * 0x44 + 0x447f40);
       *(unsigned char *)(puVar8 + 0x374) = *(unsigned char *)(temp_v7 + 0x447f46);
       *(unsigned char *)((int)puVar8 + 0xdd1) = *(unsigned char *)(temp_v7 + 0x447f47);
-      FUN_002852f0(1);
+      mazeLayoutGrid(1);
       temp_v15 = 0;
       if (*(char *)((int)puVar8 + 0x791) != -1) {
         *(unsigned char *)((int)puVar8 + 0x791) = 0xff;
@@ -207,7 +207,7 @@ void FUN_001abb98(void)
       if ('\0' < temp_v1) {
         *(char *)(puVar8 + 0x374) = temp_v1;
         *(char *)((int)puVar8 + 0xdd1) = temp_v1;
-        FUN_002852f0(1);
+        mazeLayoutGrid(1);
       }
       *(unsigned char *)((int)puVar8 + 0x791) = 0xff;
       do {

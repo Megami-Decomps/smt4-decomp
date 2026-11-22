@@ -1,10 +1,13 @@
-/* NON_MATCHING: addressing now matches retail (s8 `maxed`, entries indexed directly from the 0x7800 base); remaining: retail loads the leader's u64 with `ldrd` (members use two `ldr`), places the `lsr` temp in r2, and schedules the `maxed` byte load after the move of `needed`.
- * The IV twin FUN_00296474 matches with the u64-to-gauge conversion as a plain `static f32 expWholePart(u64)` helper
- * at each site; here that helper scores 62, and 10 only when marked `__inline` (wave 54): one helper cannot take two
- * spellings, so the twin's form is not applied yet. */
+/* NON_MATCHING: 37 lines (23 by shape). The player's gauge and the three reserve[] demons' match. In the party[]
+ * loop retail moves `needed` before it loads `maxed` and shifts the experience through r2 (this build: the load
+ * first, r3), and in the stock-slot loop it loads the experience with two `ldr` where this build uses `ldrd`.
+ * The u64-to-gauge conversion is the IV twin's `expWholePart(u64)`, a plain `static` there; here the plain form
+ * scores 50 and `static __inline` 37. Open-coding it at two of the four sites scores 10 but has no reason. */
 #include "common.h"
 #include "sys/RuntimeObjects.h"
 #include "gamedata/GamePlayerData.h"
+#include "gamedata/SaveSlotTable.h"
+#include "gamedata/SaveSlotRecord.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* One experience-gauge entry of the result screen (0x28 bytes). */
@@ -19,58 +22,46 @@ struct ExpGaugeEntry {
     /* 0x12 */ u8 unk12[0x16];
 };
 
-/* The result screen's work area; leader is the player, members[slot] a party member. */
+/* The result screen's work area (only the experience gauges). */
 struct ExpResultWork {
     /* 0x0000 */ u8 unk0000[0x7880];
-    /* 0x7880 */ ExpGaugeEntry leader;
-    /* 0x78a8 */ ExpGaugeEntry members[36];
-};
-
-/* The party slot table: the active order and the three party slots. */
-struct PartySlotTable {
-    /* 0x0000 */ u8 unk0000[0x1c88];
-    /* 0x1c88 */ s8 order[24];
-    /* 0x1ca0 */ s8 party[3];
-};
-
-/* A party member's record (only the fields read here). */
-struct PartyMemberRecord {
-    /* 0x00 */ u8 unk00[0x62];
-    /* 0x62 */ u16 expCurve;
-    /* 0x64 */ u16 level;
+    /* 0x7880 */ ExpGaugeEntry entries[37];  /* the player, then one per slot-table entry; the stock slots from 25 */
 };
 
 extern "C" {
-PartySlotTable *gameGetSlotTable(void);
-PartyMemberRecord *gameGetSlotRecord(s32 slot);
-PartyMemberRecord *partyGetSlotPreferredFirst(u16 index);
-s32 partySlotMatchesSelected(PartyMemberRecord *record);
 u32 levelGetExpRequirement(s32 level);
-u32 unitGetExpRequirement(u16 expCurve, s32 level, s32 expBonus);
+u32 unitGetExpRequirement(u16 id, s32 level, s32 expBonus);
 }
 
-/* Refreshes the gauge widths of the player, the party, the stock and the remaining slots. */
+/* The whole part of an experience value (12-bit fixed point), as the gauge arithmetic uses it. */
+static __inline f32 expWholePart(u64 exp)
+{
+    return (f32)(exp >> 12);
+}
+
+/* Refreshes the gauge widths of the player, the three demons in reserve[], the other demons of party[] and the
+ * stock slots (entries 25 and up). */
 extern "C" void resultExpGaugesRefresh(ExpResultWork *work)
 {
-    PartySlotTable *table = gameGetSlotTable();
+    SaveSlotTableA *table = gameGetSlotTable();
     TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x1d, 0x14);
-    u64 needed = levelGetExpRequirement(gameGetPlayerData()->level + work->leader.levelOffset);
-    if (work->leader.maxed) {
-        work->leader.gauge = icon->placement->width;
+    u64 needed = levelGetExpRequirement(gameGetPlayerData()->level + work->entries[0].levelOffset);
+    if (work->entries[0].maxed) {
+        work->entries[0].gauge = icon->placement->width;
     } else {
-        work->leader.gauge = (s32)((f32)(work->leader.exp >> 12) / (f32)needed * (f32)icon->placement->width);
+        work->entries[0].gauge = (s32)(expWholePart(work->entries[0].exp) / (f32)needed * (f32)icon->placement->width);
     }
 
     for (s32 i = 0; i < 3; i++) {
-        s32 slot = table->party[i];
+        s32 slot = table->reserve[i];
         if (slot >= 0) {
-            PartyMemberRecord *record = gameGetSlotRecord(slot);
+            SlotRecordA *record = gameGetSlotRecord(slot);
             if (record != NULL) {
-                u64 needed = unitGetExpRequirement(record->expCurve, record->level + work->members[slot].levelOffset, work->members[slot].expBonus);
-                if (work->members[slot].maxed) {
-                    work->members[slot].gauge = icon->placement->width;
+                u64 needed = unitGetExpRequirement(record->id, record->level + work->entries[slot + 1].levelOffset, work->entries[slot + 1].expBonus);
+                if (work->entries[slot + 1].maxed) {
+                    work->entries[slot + 1].gauge = icon->placement->width;
                 } else {
-                    work->members[slot].gauge = (s32)((f32)(work->members[slot].exp >> 12) / (f32)needed * (f32)icon->placement->width);
+                    work->entries[slot + 1].gauge = (s32)(expWholePart(work->entries[slot + 1].exp) / (f32)needed * (f32)icon->placement->width);
                 }
             }
         }
@@ -78,42 +69,42 @@ extern "C" void resultExpGaugesRefresh(ExpResultWork *work)
 
     icon = asdTMTexTableEntryAt(0x1d, 0x5f);
     for (s32 i = 0; i < 24; i++) {
-        if ((table->party[0] >= 0 && table->party[0] == table->order[i]) ||
-            (table->party[1] >= 0 && table->party[1] == table->order[i]) ||
-            (table->party[2] >= 0 && table->party[2] == table->order[i])) {
+        if ((table->reserve[0] >= 0 && table->reserve[0] == table->party[i]) ||
+            (table->reserve[1] >= 0 && table->reserve[1] == table->party[i]) ||
+            (table->reserve[2] >= 0 && table->reserve[2] == table->party[i])) {
             continue;
         }
-        s32 slot = table->order[i];
+        s32 slot = table->party[i];
         if (slot >= 0) {
-            PartyMemberRecord *record = gameGetSlotRecord(slot);
+            SlotRecordA *record = gameGetSlotRecord(slot);
             if (record != NULL) {
-                u64 needed = unitGetExpRequirement(record->expCurve, record->level + work->members[slot].levelOffset, work->members[slot].expBonus);
-                if (work->members[slot].maxed) {
-                    work->members[slot].gauge = icon->placement->width;
+                u64 needed = unitGetExpRequirement(record->id, record->level + work->entries[slot + 1].levelOffset, work->entries[slot + 1].expBonus);
+                if (work->entries[slot + 1].maxed) {
+                    work->entries[slot + 1].gauge = icon->placement->width;
                 } else {
-                    work->members[slot].gauge = (s32)((f32)(work->members[slot].exp >> 12) / (f32)needed * (f32)icon->placement->width);
+                    work->entries[slot + 1].gauge = (s32)(expWholePart(work->entries[slot + 1].exp) / (f32)needed * (f32)icon->placement->width);
                 }
             }
         }
     }
 
     for (s32 i = 0; i < 12; i++) {
-        PartyMemberRecord *record = partyGetSlotPreferredFirst(i);
-        if (actorIsActive(record)) {
+        PartySlotA *stocked = partyGetSlotPreferredFirst((u16)i);
+        if (actorIsActive(stocked)) {
             s32 index = i + 25;
             if (index > 36) {
                 index = 36;
             }
-            u64 needed = levelGetExpRequirement((&work->leader)[index].levelOffset + record->level);
-            if (partySlotMatchesSelected(record)) {
+            u64 needed = levelGetExpRequirement(work->entries[index].levelOffset + stocked->record.level);
+            if (partySlotMatchesSelected(stocked)) {
                 icon = asdTMTexTableEntryAt(0x1d, 0x13b);
             } else {
                 icon = asdTMTexTableEntryAt(0x1d, 0x5f);
             }
-            if ((&work->leader)[index].maxed) {
-                (&work->leader)[index].gauge = icon->placement->width;
+            if (work->entries[index].maxed) {
+                work->entries[index].gauge = icon->placement->width;
             } else {
-                (&work->leader)[index].gauge = (s32)((f32)((&work->leader)[index].exp >> 12) / (f32)needed * (f32)icon->placement->width);
+                work->entries[index].gauge = (s32)(expWholePart(work->entries[index].exp) / (f32)needed * (f32)icon->placement->width);
             }
         }
     }

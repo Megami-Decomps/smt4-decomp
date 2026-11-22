@@ -18,7 +18,7 @@ u32 FUN_0023fffc(BattleEncounterQuery *query, BtlMainState *context);
 u32 FUN_0023fbdc(BattleEncounterQuery *query, BtlMainState *context);
 void frameTexApplyMode(s32 mode);
 void FUN_00338458(BtlMainState *context);
-void FUN_0033a144(BtlMainState *context);
+void btlHistoryStoreActionValues(BtlMainState *context);
 void FUN_00338424(BtlMainState *context);
 void battleSaveCameraVectors(BtlMainState *context);
 void vec3CopyFromOffsetC(void *main);
@@ -62,7 +62,7 @@ u32 battleEncounterStepSetup(BattleEncounterQuery *query, BtlMainState *context)
             context->battleMask |= 0x40000000;
         }
         FUN_00338458(context);
-        FUN_0033a144(context);
+        btlHistoryStoreActionValues(context);
         FUN_00338424(context);
         battleSaveCameraVectors(context);
         vec3CopyFromOffsetC(g_btlMain);

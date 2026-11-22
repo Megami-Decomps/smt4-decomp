@@ -6,7 +6,7 @@ s32 FUN_001ba3d0(u32 id); // declcheck: local (the forwarder receives an ID and 
 s32 FUN_0031d174(EquipmentMenuCursor *cursor); // declcheck: local (the forwarder returns the cursor row)
 u32 FUN_00498408(Obj536044 *shop, u32 id);
 s32 shopGetEntryPrice(const EquipmentMenuItem *item); // declcheck: local (the shop's item type)
-s32 btlRollClamped(u32 id, s32 divisor);
+s32 shopAffordableCount(u32 id, s32 divisor); // declcheck: local (the shared declaration does not compile here or changes this unit)
 }
 
 /* Enters the quantity selection state for the item under the shop cursor. */
@@ -34,7 +34,7 @@ extern "C" void shopEnterQuantitySelection(Obj536044 *shop, s32 nextState)
             --maximum;
         }
     } else {
-        maximum = btlRollClamped(item->id, shopGetEntryPrice(item));
+        maximum = shopAffordableCount(item->id, shopGetEntryPrice(item));
     }
     numericStepperSetup(&shop->quantity, maximum, 0, row);
 }

@@ -21,7 +21,7 @@ extern s8 DAT_0049fc64;
 extern s8 DAT_0049fce8;
 
 void padGetNormalizedAnalogStick(f32* stickX, f32* stickY, s32 arg);
-void FUN_0026413c(void);
+void mapCameraUpdateTurn(void);
 f32 __hardfp_atan2f(f32 y, f32 x);
 s32 FUN_002ed094(MapVector* candidate, MapVector* previous);
 
@@ -47,7 +47,7 @@ void FUN_002d508c(PlayerController* player)
 
     f32 stickX, stickY;
     padGetNormalizedAnalogStick(&stickX, &stickY, 0);
-    FUN_0026413c();
+    mapCameraUpdateTurn();
     player->moving = 0;
     if (stickX > -0.5f && stickX < 0.5f && stickY > -0.5f && stickY < 0.5f) {
         player->speed = player->speed * 0.5f;

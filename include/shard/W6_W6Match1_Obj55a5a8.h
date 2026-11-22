@@ -5,6 +5,20 @@
 #include "classes/ZeroWordPair.h"
 
 extern "C" void *rt_malloc(u32 bytes);
+extern "C" char g_smallTextEmptySentinel;
+
+/* Initialization record for the shared empty text buffer; retail performs no scope cleanup. */
+struct SmallTextString {
+    SmallTextString() : data(&g_smallTextEmptySentinel), size(0), capacity(20)
+    {
+        firstCharacter = 0;
+    }
+    /* 0x00 */ char *data;
+    /* 0x04 */ u8 firstCharacter;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ u32 size;
+    /* 0x0C */ u32 capacity;
+};
 
 struct Obj55a5a8RawArray {
     Obj55a5a8RawArray() : begin(NULL), end(NULL), capacity(NULL) {}
@@ -46,6 +60,10 @@ protected:
     /* 0x40 */ ZeroWordPair fourthPair;
     /* 0x48 */ u32 unk48;
     /* 0x4C */ Obj55aff4Vector elements;
+    /* 0x58 */ u8 firstState;
+    /* 0x59 */ u8 secondState;
+    /* 0x5A */ u8 unk5a[2];
+    /* 0x5C */ SmallTextString text;
 };
 
 #endif

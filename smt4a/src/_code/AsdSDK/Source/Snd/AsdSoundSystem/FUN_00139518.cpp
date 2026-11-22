@@ -14,7 +14,7 @@ extern "C" {
 extern AsdSndControlA g_asdSoundDuck;
 
 void FUN_00150784(void);
-void FUN_00141b24(void);
+void asdSoundReleaseAllSlots(void);
 SoundThreadView *_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 void FUN_00152bf8(AsdSndObject *object);
 void asdMemFree(void *memory);
@@ -58,7 +58,7 @@ static void asdSoundDuckReset(AsdSndDuck *duck)
 extern "C" void FUN_00139518(void)
 {
     FUN_00150784();
-    FUN_00141b24();
+    asdSoundReleaseAllSlots();
     asdSoundDuckReset(&g_asdSoundDuck.duck);
     AsdSndStatusApoc *status = &g_asdSoundDuck.status;
     if (status->ready != 0) {

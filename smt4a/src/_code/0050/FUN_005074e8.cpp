@@ -1,33 +1,65 @@
-/* NON_MATCHING: placement arrays of recovered trivial element types omit retail construction loops; caller stack homing and bone-copy scheduling also differ. */
+/* NON_MATCHING: 109 vs 107 rows (82 diff lines): PartBuildResult non-trivial destructor and element placement-new loops restore the 4 retail construction loops; caller stack homing (push {r0-r3}, 52-byte frame) and bone-copy scheduling still differ. */
 #include "gfx/SkeletonInstanceBuffers.h"
 #include <new>
+
+/* Return value matching moriModelUnitAttachPart's PartBuildResult (non-trivial destructor forces sret). */
+struct PartBuildResult {
+    ~PartBuildResult() {}
+    void *memory;
+    u32 result;
+};
+
+struct PlacementU16 {
+    PlacementU16() {}
+    u16 value;
+};
+struct PlacementMat44 {
+    PlacementMat44() {}
+    SkeletonMatrix44 value;
+};
+struct PlacementMat34 {
+    PlacementMat34() {}
+    SkeletonMatrix34 value;
+};
+struct PlacementVec3 {
+    PlacementVec3() {}
+    SkeletonVector3 value;
+};
 
 extern "C" {
 SkeletonBufferBlock FUN_0045b4d0(SkeletonBufferCursor *cursor, u32 bytes, u32 alignment);
 void nn_math_ARMv6_MTX34InverseAsm(SkeletonMatrix34 *destination, const SkeletonMatrix34 *source);
 void FUN_00193c08(SkeletonInstanceResource *resource, SkeletonInstanceBuffers *instance);
 
-SkeletonBufferBlock FUN_005074e8(SkeletonInstanceResource *resource, SkeletonInstanceBuffers *instance,
-                               u8 *memory, const SkeletonBufferRequirements *requirements)
+PartBuildResult FUN_005074e8(SkeletonInstanceResource *resource, SkeletonInstanceBuffers *instance,
+                             u8 *memory, const SkeletonBufferRequirements *requirements)
 {
     SkeletonBufferCursor cursor = {memory, memory + requirements->totalBytes};
     SkeletonBufferBlock block = FUN_0045b4d0(&cursor, requirements->idBytes, 4);
-    instance->jointIds = static_cast<u16 *>(block.data);
+    instance->jointIds = (u16 *)block.data;
     instance->jointCount = block.bytes / sizeof(u16);
-    new (instance->jointIds) u16[instance->jointCount];
+    for (u32 i = 0; i < instance->jointCount; ++i) {
+        new (&instance->jointIds[i]) PlacementU16;
+    }
     block = FUN_0045b4d0(&cursor, requirements->matrixBytes, 4);
-    instance->matrices = static_cast<SkeletonMatrix44 *>(block.data);
+    instance->matrices = (SkeletonMatrix44 *)block.data;
     instance->matrixCount = block.bytes / sizeof(SkeletonMatrix44);
-    new (instance->matrices) SkeletonMatrix44[instance->matrixCount];
+    for (u32 i = 0; i < instance->matrixCount; ++i) {
+        new (&instance->matrices[i]) PlacementMat44;
+    }
     block = FUN_0045b4d0(&cursor, requirements->localMatrixBytes, 4);
-    instance->localMatrices = static_cast<SkeletonMatrix34 *>(block.data);
+    instance->localMatrices = (SkeletonMatrix34 *)block.data;
     instance->localMatrixCount = block.bytes / sizeof(SkeletonMatrix34);
-    new (instance->localMatrices) SkeletonMatrix34[instance->localMatrixCount];
+    for (u32 i = 0; i < instance->localMatrixCount; ++i) {
+        new (&instance->localMatrices[i]) PlacementMat34;
+    }
     if (resource->kind == 2) {
         block = FUN_0045b4d0(&cursor, requirements->vectorBytes, 4);
-        instance->vectors = static_cast<SkeletonVector3 *>(block.data);
+        instance->vectors = (SkeletonVector3 *)block.data;
         instance->vectorCount = block.bytes / sizeof(SkeletonVector3);
-        new (instance->vectors) SkeletonVector3[instance->vectorCount];
+        for (u32 i = 0; i < instance->vectorCount; ++i) {
+            new (&instance->vectors[i]) PlacementVec3;
+        }
     }
     bool hasSpecialJoint = false;
     u32 index = 0;
@@ -39,16 +71,20 @@ SkeletonBufferBlock FUN_005074e8(SkeletonInstanceResource *resource, SkeletonIns
         nn_math_ARMv6_MTX34InverseAsm(&instance->localMatrices[index], &source->localMatrix);
         ++joint;
         ++index;
-        if (source->flags & 0x70000)
+        if (source->flags & 0x70000) {
             hasSpecialJoint = true;
+        }
     }
     FUN_00193c08(resource, instance);
     instance->kind = resource->kind;
-    if (hasSpecialJoint)
+    if (hasSpecialJoint) {
         instance->flags |= 1;
-    else
+    } else {
         instance->flags &= ~1;
-    SkeletonBufferBlock remaining = {cursor.current, 0};
+    }
+    PartBuildResult remaining;
+    remaining.memory = cursor.current;
+    remaining.result = 0;
     return remaining;
 }
-}
+} /* extern "C" */

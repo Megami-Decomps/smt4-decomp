@@ -1,4 +1,6 @@
-/* NON_MATCHING: retail retains inline menu-builder setup/NOPs and a loop bound register; clean C++ factors result branches and defaults differently. */
+/* NON_MATCHING: retail calls functions armlink inlined or removed: a one-instruction `mov r0, #0` stub taking (0, flags)
+ * whose result becomes the node list, a `mov r0, #22` getter giving the GENERAL entry count, and two empty calls after
+ * the request setup and after the redirect (nop pairs); without inlined.txt rows for them the build differs there. */
 #include <stdio.h>
 #include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
@@ -21,6 +23,7 @@ void effBlockSetBlobB(EffBlock *block, const void *data, s32 size, u16 tag);
 // Run the editor's selection dialog and apply the selected reference or general index.
 u32 FUN_00242080(u32 flags)
 {
+    u32 status = 0x600001;
     struct DialogResult {
         char label[200];
         s32 kind, state, index;
@@ -51,9 +54,9 @@ u32 FUN_00242080(u32 flags)
         request->type = 186;
         request->size = 28;
     }
-    if (result.state == 2)
-        return 0x400000;
-    if (result.state == 1) {
+    if (result.state == 2) {
+        status = 0x400000;
+    } else if (result.state == 1) {
         if (result.kind != 8) {
             LinkedItem *replacement = linkedFindItemByIndex(
                 static_cast<LinkedItems *>(g_effectEditor.list), -result.index);
@@ -68,8 +71,8 @@ u32 FUN_00242080(u32 flags)
                          reinterpret_cast<LinkedItem *>(g_effectEditor.item));
             effBlockSetBlobB(reinterpret_cast<EffBlock *>(g_effectEditor.block), &result.index, 4, 4);
         }
-        return reinterpret_cast<u32>(&DAT_00400002);
+        status = reinterpret_cast<u32>(&DAT_00400002);
     }
-    return 0x600001;
+    return status;
 }
 }

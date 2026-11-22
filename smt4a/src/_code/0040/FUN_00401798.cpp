@@ -1,4 +1,5 @@
-/* NON_MATCHING: logic agrees; register numbering/operand load order of the owner->frame and owner->metrics chains differs, and the table-search loop is rotated differently. */
+/* NON_MATCHING: same instructions and layout as retail (the row search is deadEffectOffsetFind); the layout and row
+ * pointers swap r4/r5 and the frame/metrics loads take other scratch registers (102 lines). */
 #include "common.h"
 #include "gamedata/DeadEffectOffset.h"
 
@@ -91,41 +92,30 @@ void FUN_00401798(CenteredLayout *layout, LayoutSource *source)
             offsetY = -centreOffset(frames->frame->height, owner->metrics->innerHeight, y, owner->metrics->originY);
         }
     } else {
-        u16 key = layout->owner->key;
-        void *table = dataTableGet(0x3B, 0);
-        DeadEffectOffsetRecord *row = deadEffectOffsetRecords(table);
-        s32 count = dataTableGetCount(table);
-        s32 i = 0;
-
-        if (count < 1) {
-            return;
-        }
-        while (row->id != key) {
-            i++;
-            row++;
-            if (count <= i) {
-                return;
-            }
-        }
+        DeadEffectOffsetRecord *row = deadEffectOffsetFind(layout->owner->key);
         if (row == NULL) {
             return;
         }
-        if (row->positionX != 0) {
+        s16 x = row->positionX;
+        s16 y;
+
+        if (x != 0) {
             CenterOwner *owner = layout->owner;
             CenterFrameOwner *frames = layout->frameOwner;
 
-            layout->positionX = row->positionX;
-            layout->offsetX = centreOffset(frames->frame->width, owner->metrics->innerWidth, row->positionX, owner->metrics->originX);
+            layout->positionX = x;
+            layout->offsetX = centreOffset(frames->frame->width, owner->metrics->innerWidth, x, owner->metrics->originX);
         }
-        if (row->positionY == 0) {
+        y = row->positionY;
+        if (y == 0) {
             return;
         }
-        layout->positionY = row->positionY;
+        layout->positionY = y;
         {
             CenterOwner *owner = layout->owner;
             CenterFrameOwner *frames = layout->frameOwner;
             f32 span = (f32)frames->frame->height;
-            s32 shifted = (s32)((span - (f32)owner->metrics->innerHeight) * 0.5f) + (row->positionY - owner->metrics->originY);
+            s32 shifted = (s32)((span - (f32)owner->metrics->innerHeight) * 0.5f) + (y - owner->metrics->originY);
 
             offsetY = span * 0.5f - (f32)shifted;
         }

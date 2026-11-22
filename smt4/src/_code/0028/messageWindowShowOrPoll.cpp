@@ -1,6 +1,6 @@
 #include "script/ScriptArgs.h"
 #include "ui/MessageMain.h"
-/* NON_MATCHING: near (207 rows against 205): flow, constants and calls follow retail; retail's prologue is a variadic-style `push {r0-r3,...}` with the 5th/6th stack arguments read at sp+72/+76 and the 6th forwarded to FUN_0028e6d0 through a VFP register copy (vldr/vstr), which a plain u32 parameter does not reproduce, and register allocation differs */
+/* NON_MATCHING: near (207 rows against 205): flow, constants and calls follow retail; retail's prologue is a variadic-style `push {r0-r3,...}` with the 5th/6th stack arguments read at sp+72/+76 and the 6th forwarded to messageWindowOpen through a VFP register copy (vldr/vstr), which a plain u32 parameter does not reproduce, and register allocation differs */
 extern "C" {
 
 #define MSG_KIND_PLAIN 11
@@ -9,7 +9,7 @@ extern "C" {
 void messageSlotSet(s32 slot);
 void scrCommMessageSetMode(s32 mode);
 void FUN_0028dcf4(MessageWindow *window, u32 layout);
-void FUN_0028e6d0(MessageWindow *window, u32 a, u32 b, u32 kind, u32 c, u32 d, u32 options);
+void messageWindowOpen(MessageWindow *window, u32 a, u32 b, u32 kind, u32 c, u32 d, u32 options);
 int buttonHelpSetEnabled(void);
 u32 FUN_002b753c(u32 object);
 s32 resultIsIdle(void);
@@ -70,7 +70,7 @@ u32 messageWindowShowOrPoll(u32 a, u32 b, s32 wait, s32 kind, s32 priority, u32 
         if (win == 0 || state == 0) {
             if (win->restartPending != 0) {
                 win->restartPending = 0;
-                FUN_0028e6d0(win, a, b, kind, 26, 1, 0);
+                messageWindowOpen(win, a, b, kind, 26, 1, 0);
                 if (win->closeRequested == 0) {
                     FUN_0028dcf4(win, win->mode);
                 }
@@ -123,7 +123,7 @@ u32 messageWindowShowOrPoll(u32 a, u32 b, s32 wait, s32 kind, s32 priority, u32 
             if (eventIsSkipping() != 0 && resultIsIdle() != 0) {
                 return 1;
             }
-            FUN_0028e6d0(win, a, b, kind, 26, 1, options);
+            messageWindowOpen(win, a, b, kind, 26, 1, options);
             if (kind == MSG_KIND_PLAIN || kind == MSG_KIND_PLAIN_HELP) {
                 win->touchRegionCount = FUN_002b753c(win->box);
             }

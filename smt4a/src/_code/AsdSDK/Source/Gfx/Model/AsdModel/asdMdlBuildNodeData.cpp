@@ -1,4 +1,4 @@
-/* NON_MATCHING: constructor stores are grouped, parser cold blocks and saved-register lifetimes differ, and literal order changes; candidate -O2. */
+/* NON_MATCHING: 79 lines; retail lays the payload signature check out of line (returning through a branch) and copies the source pointer into its own register for each inlined lookup */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/Source/Util/AsdList.h"
@@ -41,6 +41,7 @@ extern AsdList DAT_00636ebc;
 static __inline void *modelPayload(void *source, u32 *flags)
 {
     ModelContainerHeader *container = (ModelContainerHeader *)source;
+    void *result = source;
     if (rt_memcmp(source, g_asdModelContainerAtbcMagic, 4) == 0 ||
         rt_memcmp(source, g_asdModelContainerAbchMagic, 4) == 0) {
         u32 offset = container->signedModelOffset;
@@ -48,22 +49,23 @@ static __inline void *modelPayload(void *source, u32 *flags)
             offset = container->modelOffset;
         }
         ModelSignatureHeader *signature = (ModelSignatureHeader *)((u8 *)source + offset);
+        result = NULL;
         if (rt_memcmp(signature, g_asdModelPayloadSignature, 7) == 0) {
             *flags = signature->flags;
-            return (u8 *)signature + 0x80;
+            result = (u8 *)signature + 0x80;
         }
-        return NULL;
     }
-    return source;
+    return result;
 }
 
 static __inline void *modelDictionary(void *source)
 {
+    void *dictionary = NULL;
     if (rt_memcmp(source, g_asdModelContainerAtbcMagic, 4) == 0 ||
         rt_memcmp(source, g_asdModelContainerAbchMagic, 4) == 0) {
-        return (u8 *)source + ((ModelContainerHeader *)source)->dictionaryOffset;
+        dictionary = (u8 *)source + ((ModelContainerHeader *)source)->dictionaryOffset;
     }
-    return NULL;
+    return dictionary;
 }
 
 extern "C" void *asdMdlBuildNodeData(void *source, void *argument)

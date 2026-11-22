@@ -1,4 +1,5 @@
-/* NON_MATCHING: event-success block placement and state/selection saved-register assignment differ; named slot setter avoids the hoisted kind-byte offset. */
+/* NON_MATCHING: 14 lines: only the guard (kind 8) store differs: retail loads the battle state and the slot index into
+ * r2 and the slot size into r0 (the build swaps them). */
 #include "battle/ActionKindSelection.h"
 #include "battle/btlAction.h"
 #include "battle/btlMain.h"
@@ -12,9 +13,10 @@ s32 isEntryUsable(BattleEvent *); // declcheck: local (the shared declaration in
 s32 btlEventSelectTrigger(BattleEvent *, s32, s32, s32);
 void battleSetActionKind(BtlMainState **);
 
-static __inline void battleSetSelectedActionThreadKind(s32 index, u8 kind)
+/* Sets the action kind of the battle's current unit slot. */
+static __inline void battleSetUnitActionKind(const BtlMainState *view, u8 kind)
 {
-    ActionKindThread *thread = &reinterpret_cast<ActionKindThread *>(g_btlAction.slots)[index];
+    ActionKindThread *thread = &reinterpret_cast<ActionKindThread *>(g_btlAction.slots)[view->actionState.index];
     thread->kind = kind;
 }
 
@@ -27,34 +29,32 @@ void FUN_00229b10(BtlMainState **state, const ActionKindSelection *selection)
         u8 special;
     };
     if (!isEntryUsable(g_btlEvent)) {
-        s32 unit = selection->entry->unitIndex;
-        if ((u16)selection->command->kind != 11) {
-            if (btlEventSelectTrigger(g_btlEvent, 3, unit, 0)) {
+        if ((u16)selection->command->kind == 11) {
+            if (btlEventSelectTrigger(g_btlEvent, 7, selection->entry->unitIndex, 0)) {
                 const BtlMainState *view = *state;
-                battleSetSelectedActionThreadKind(view->actionState.index, 24);
+                battleSetUnitActionKind(view, 24);
                 return;
             }
-        } else if (btlEventSelectTrigger(g_btlEvent, 7, unit, 0)) {
+        } else if (btlEventSelectTrigger(g_btlEvent, 3, selection->entry->unitIndex, 0)) {
             const BtlMainState *view = *state;
-            battleSetSelectedActionThreadKind(view->actionState.index, 24);
+            battleSetUnitActionKind(view, 24);
             return;
         }
     }
     bool special = false;
-    s16 kind = selection->command->kind;
-    if (kind == 3) {
+    if (selection->command->kind == 3) {
         const SkillActionView *skill = (const SkillActionView *)skillDataFindById(selection->command->skill);
         if (skill != NULL && skill->special != 0) {
             special = true;
         }
         const BtlMainState *view = *state;
         if (!(view->editorControl.flags & 0x800) && special) {
-            battleSetSelectedActionThreadKind(view->actionState.index, 12);
+            battleSetUnitActionKind(view, 12);
             return;
         }
-    } else if (kind == 13) {
+    } else if (selection->command->kind == 13) {
         const BtlMainState *view = *state;
-        battleSetSelectedActionThreadKind(view->actionState.index, 8);
+        battleSetUnitActionKind(view, 8);
         return;
     }
     battleSetActionKind(state);

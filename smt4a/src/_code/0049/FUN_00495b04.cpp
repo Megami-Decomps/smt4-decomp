@@ -48,7 +48,7 @@ extern int equipmentHasPositiveUpgrade(unsigned int);
 extern unsigned int itemGetNameOrFallback(unsigned int, unsigned int);
 /* Supplied declaration required: contentGetUpgradedKindValue. */
 extern unsigned int shopGetEntryPrice(unsigned short *);
-extern int btlRollClamped(unsigned short, unsigned int);
+extern int shopAffordableCount(unsigned short, unsigned int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 
 void FUN_00495b04(int param_1,int param_2,int param_3,unsigned short *param_4)
@@ -176,7 +176,7 @@ void FUN_00495b04(int param_1,int param_2,int param_3,unsigned short *param_4)
     }
     if (param_2 != 0 && temp_v8 != 8) {
       temp_v11 = shopGetEntryPrice(param_4);
-      temp_v8 = btlRollClamped(*param_4,temp_v11);
+      temp_v8 = shopAffordableCount(*param_4,temp_v11);
       if (temp_v8 == 0) {
         temp_v15 = 0x787878ff;
         goto LAB_00495f20;
@@ -197,7 +197,7 @@ void FUN_00495b04(int param_1,int param_2,int param_3,unsigned short *param_4)
     temp_v15 = -1;
     if (param_2 != 0 && temp_v8 != 8) {
       temp_v11 = shopGetEntryPrice(param_4);
-      temp_v8 = btlRollClamped(*param_4,temp_v11);
+      temp_v8 = shopAffordableCount(*param_4,temp_v11);
       if (temp_v8 == 0) {
         temp_v15 = -0x64646401;
         goto LAB_00495f20;

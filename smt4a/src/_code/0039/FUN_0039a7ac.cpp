@@ -1,4 +1,4 @@
-/* NON_MATCHING: logic and call chain match; armcc allocates the shared zero/one registers (retail r5=0, r6=1, the 0.1f step hoisted into s2 and the fade-mode tests ordered 1 then 2 via a branch pair) differently */
+/* NON_MATCHING: 44 lines; logic and call chain match; retail keeps the shared 0 and 1 in r5/r6 (the shown result is moved from them at the join, the fade-out arm stores them predicated) and pools the 0.55f before the 0.8f, where the build rematerialises the constants */
 #include "shard/W6_W6Match5_CommonBackground.h"
 #include "addon/aocMain.h"
 #include "map/mapRndMaze.h"
@@ -21,6 +21,8 @@ u32 FUN_0039a7ac(void)
 {
     CommonBackgroundChild *overlay = g_commonBg.owned;
     switch (overlay->fadeMode) {
+    case 0:
+        break;
     case 1:
         overlay->fade -= 0.1f;
         if (overlay->fade <= 0.0f) {
@@ -37,27 +39,17 @@ u32 FUN_0039a7ac(void)
         break;
     }
 
-    u8 shown;
-    if (overlay->keepAlive != 0) {
-        shown = 1;
-    } else {
-        shown = 0;
-        if (gameFlagIsSet(0x51) != 0 && (gameFlagIsSet(0xc) == 0 || gameFlagIsSet(0x10) != 0) && gameFlagIsSet(0x11) == 0) {
-            if (aocJobIsValid() != 0) {
-                if (engineCleanupIsDone() == 0) {
-                    shown = 1;
-                }
-            } else if (mapRndMazeTaskIsActive() == 0) {
-                if (campIsState85() != 0) {
-                    shown = 1;
-                } else if (((sub68OwnerCall2() == 0 || campIsState85() != 0) || namePollShutdown() != 0) &&
-                           titleMainIsRunning() == 0 && npcRoomIsOpen() == 0 && QuestCenterMode_IsBusy() == 0 &&
-                           shopPollShutdown() == 0 && onesRoomIsRunning() == 0 && aocMainPollShutdown() == 0) {
-                    shown = 1;
-                }
-            }
-        }
-    }
+    u8 shown = 1;
+    if (overlay->keepAlive == 0)
+        shown = (gameFlagIsSet(0x51) != 0 && (gameFlagIsSet(0xc) == 0 || gameFlagIsSet(0x10) != 0) &&
+                gameFlagIsSet(0x11) == 0 &&
+                (aocJobIsValid() != 0
+                     ? engineCleanupIsDone() == 0
+                     : mapRndMazeTaskIsActive() == 0 &&
+                           (campIsState85() != 0 ||
+                            (((sub68OwnerCall2() == 0 || campIsState85() != 0) || namePollShutdown() != 0) &&
+                             titleMainIsRunning() == 0 && npcRoomIsOpen() == 0 && QuestCenterMode_IsBusy() == 0 &&
+                             shopPollShutdown() == 0 && onesRoomIsRunning() == 0 && aocMainPollShutdown() == 0))));
     if (overlay->shown != shown) {
         overlay->shown = shown;
         if (shown == 0) {
@@ -66,7 +58,10 @@ u32 FUN_0039a7ac(void)
         } else {
             overlay->fadeMode = 2;
             overlay->unk08 = 0;
-            overlay->fadeMax = namePollShutdown() != 0 ? 0.55f : 0.8f;
+            if (namePollShutdown() == 0)
+                overlay->fadeMax = 0.8f;
+            else
+                overlay->fadeMax = 0.55f;
         }
     }
     return 0;

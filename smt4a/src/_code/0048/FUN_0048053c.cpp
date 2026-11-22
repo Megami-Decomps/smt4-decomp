@@ -1,45 +1,45 @@
-/* NON_MATCHING: canonical modifier alignment, seven-halfword bonus extent and unsigned range bounds are restored; zero/one lifetimes, stack slot placement and clamp arithmetic scheduling remain different. */
+/* NON_MATCHING: 127 vs 127 rows (78 diff lines): switch(kind) restores r4-r7 and branch structure; retail retains r8=0 (32-byte frame vs 36-byte), compares `999 > used + add` in `cmp r0, r2; bgt`, and adds the stat constant before extras. */
 #include "shard/W5_W5Match7_EntrySort.h"
 #include "gamedata/DataTableAccess_VariantE_EntrySort.h"
 #include "gamedata/EquipmentUpgradeState.h"
 #include "shard/ItemStackLimit.h"
 
-// The points an equipment upgrade of one kind can still add: hit points (cap 999) and up to three
-// stats (cap 99), laid out like the bonuses already applied.
+/* The points an equipment upgrade of one kind can still add: hit points (cap 999) and up to three
+ * stats (cap 99), laid out like the bonuses already applied. */
 struct UpgradeLimits {
-    s16 hp;        // 0x00
+    s16 hp;        /* 0x00 */
     u8 unk02[6];
-    s16 statA;     // 0x08
-    s16 statB;     // 0x0a
-    s16 statC;     // 0x0c
+    s16 statA;     /* 0x08 */
+    s16 statB;     /* 0x0a */
+    s16 statC;     /* 0x0c */
 };
-
 
 extern "C" {
 s32 equipmentIsFullyUpgraded(void);
-void FUN_001a90f0(EquipmentUpgradeModifiers* extras, const EquipmentUpgradeModifiers* source);
+void FUN_001a90f0(EquipmentUpgradeModifiers *extras, const EquipmentUpgradeModifiers *source);
 
-// Fills `limits` with how much more an upgrade of equipment `item` may add to its capped values.
-void FUN_0048053c(s32 item, UpgradeLimits* limits)
+/* Fills `limits` with how much more an upgrade of equipment `item` may add to its capped values. */
+void FUN_0048053c(s32 item, UpgradeLimits *limits)
 {
     if (equipmentIsFullyUpgraded() != 0) {
         return;
     }
-    EquipmentUpgradeRecord* record = reinterpret_cast<EquipmentUpgradeRecord*>(itemCategoryFindByItemId(item));
+    EquipmentUpgradeRecord *record = (EquipmentUpgradeRecord *)itemCategoryFindByItemId(item);
     s32 kind = 0;
-    if (record != NULL)
+    if (record != NULL) {
         kind = record->category;
+    }
     s16 bonuses[7];
     equipmentGetCappedUpgradeBonuses(item, bonuses);
-    const EquipmentRecordA* upgrade = itemTableGetEquipmentRecord(item);
+    const EquipmentRecordA *upgrade = itemTableGetEquipmentRecord(item);
     EquipmentUpgradeModifiers extras = {};
     s32 hp = 0;
     if (upgrade != NULL) {
         hp = upgrade->hpBonus;
-        FUN_001a90f0(&extras,
-            reinterpret_cast<const EquipmentUpgradeModifiers*>(upgrade->statBonus));
+        FUN_001a90f0(&extras, (const EquipmentUpgradeModifiers *)upgrade->statBonus);
     }
-    if (kind == 4) {
+    switch (kind) {
+    case 4: {
         u32 index = item - 0x12d;
         if ((s32)index >= 0) {
             if (index <= 0x77) {
@@ -61,7 +61,9 @@ void FUN_0048053c(s32 item, UpgradeLimits* limits)
                 }
             }
         }
-    } else if (kind == 5) {
+        break;
+    }
+    case 5: {
         u32 index = item - 0x1a5;
         if ((s32)index >= 0) {
             if (index <= 0x77) {
@@ -73,7 +75,9 @@ void FUN_0048053c(s32 item, UpgradeLimits* limits)
                 }
             }
         }
-    } else if (kind == 6) {
+        break;
+    }
+    case 6: {
         u32 index = item - 0x21d;
         if ((s32)index >= 0) {
             if (index <= 0x77) {
@@ -90,6 +94,8 @@ void FUN_0048053c(s32 item, UpgradeLimits* limits)
                 }
             }
         }
+        break;
+    }
     }
 }
-}
+} /* extern "C" */

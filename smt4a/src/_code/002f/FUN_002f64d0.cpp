@@ -65,7 +65,7 @@ void FUN_002f64d0(unsigned int param_1,float *param_2,float *param_3)
     uVar6 = VectorFloatToUnsigned(param_3[1] * fVar2,3);
     uVar4 = VectorFloatToUnsigned(param_3[2] * fVar2,3);
     uVar5 = VectorFloatToUnsigned(param_2[3] * fVar2,3);
-    FUN_001b4c1c(*unaff_r6,
+    effectTimelinePartApplyTint(*unaff_r6,
                  (uVar5 & 0xff) | (iVar3 << 0x18) | ((uVar6 & 0xff) << 0x10) | ((uVar4 & 0xff) << 8)
                 );
     effectNodeUpdatePlacedChildren(*unaff_r6);

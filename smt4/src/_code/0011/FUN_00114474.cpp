@@ -8,7 +8,7 @@
 
 extern "C" {
 
-int FUN_00124324(...);
+int messageWindowUpdate(...);
 int FUN_00126058(void);
 int msgBoxFlagsSetBit7(...);
 
@@ -51,7 +51,7 @@ extern signed char DAT_0049382a; /* 0x49382a */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00124324. */
+/* Supplied declaration required: messageWindowUpdate. */
 /* Supplied declaration required: gameDataCounterSpend. */
 /* Supplied declaration required: FUN_00126058. */
 extern int msgBoxIsState2(unsigned int);
@@ -1008,7 +1008,7 @@ LAB_00115ad8:
   if (*(char *)(temp_v3 + 8) != '\x01') {
     return 0;
   }
-  FUN_00124324(*(unsigned int *)(temp_v3 + 4));
+  messageWindowUpdate(*(unsigned int *)(temp_v3 + 4));
   if (*(int *)(temp_v3 + 4) != 0) {
     if (DAT_0049382a == '\0') {
       FUN_00126058();

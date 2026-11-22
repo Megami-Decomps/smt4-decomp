@@ -41,7 +41,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: drawTextAtRelativePosition. */
-extern int btlRollClamped(unsigned short, unsigned int);
+extern int shopAffordableCount(unsigned short, unsigned int);
 extern unsigned int itemGetNameOrFallback(unsigned int, unsigned int);
 /* Supplied declaration required: uiRectDrawAtBottomRight. */
 /* Supplied declaration required: FUN_00230d2c. */
@@ -185,7 +185,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
     temp_v14 = 0xffffffff;
     if (param_2 != 0 && temp_v5 != 8) {
       temp_v10 = shopSlotGetPrice(param_4);
-      temp_v5 = btlRollClamped(*param_4,temp_v10);
+      temp_v5 = shopAffordableCount(*param_4,temp_v10);
       if (temp_v5 == 0) {
         temp_v14 = 0x787878ff;
       }
@@ -200,7 +200,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
     temp_v14 = 0xff;
     if (param_2 != 0 && temp_v5 != 8) {
       temp_v10 = shopSlotGetPrice(param_4);
-      temp_v5 = btlRollClamped(*param_4,temp_v10);
+      temp_v5 = shopAffordableCount(*param_4,temp_v10);
       if (temp_v5 == 0) {
         temp_v14 = 0x5a5a5aff;
       }

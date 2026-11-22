@@ -15,7 +15,7 @@ static __inline s32 floatBits(f32 value)
 
 extern "C" {
 void FUN_001f4d08(s32, CollisionVector *, CollisionVector, CollisionVector, CollisionVector, CollisionVector);
-void FUN_00237438(s32, s32, CollisionVector *, f32 *, CollisionVector, CollisionVector, CollisionVector);
+void statusCameraBuildAxisPlane(s32, s32, CollisionVector *, f32 *, CollisionVector, CollisionVector, CollisionVector);
 
 /* Appends a four-corner quad to the third collision list: plane, corners, center, and (for a mostly-vertical normal) its edge planes. */
 void FUN_002c0b98(u16 tag, CollisionVector a, CollisionVector b, CollisionVector c, CollisionVector d,
@@ -45,10 +45,10 @@ void FUN_002c0b98(u16 tag, CollisionVector a, CollisionVector b, CollisionVector
         }
         CollisionVector reference;
         FUN_001f4d08(quad->enabled, &reference, a, b, c, d);
-        FUN_00237438(quad->enabled, 0, &quad->edgeNormals[0], &quad->edgeDistances[0], reference, a, b);
-        FUN_00237438(quad->enabled, 1, &quad->edgeNormals[1], &quad->edgeDistances[1], reference, b, c);
-        FUN_00237438(quad->enabled, 2, &quad->edgeNormals[2], &quad->edgeDistances[2], reference, c, d);
-        FUN_00237438(quad->enabled, 2, &quad->edgeNormals[3], &quad->edgeDistances[3], reference, d, a);
+        statusCameraBuildAxisPlane(quad->enabled, 0, &quad->edgeNormals[0], &quad->edgeDistances[0], reference, a, b);
+        statusCameraBuildAxisPlane(quad->enabled, 1, &quad->edgeNormals[1], &quad->edgeDistances[1], reference, b, c);
+        statusCameraBuildAxisPlane(quad->enabled, 2, &quad->edgeNormals[2], &quad->edgeDistances[2], reference, c, d);
+        statusCameraBuildAxisPlane(quad->enabled, 2, &quad->edgeNormals[3], &quad->edgeDistances[3], reference, d, a);
         g_mapCollision.segmentCounts[1]++;
     }
 }

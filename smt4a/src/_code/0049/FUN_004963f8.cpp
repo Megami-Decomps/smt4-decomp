@@ -6,7 +6,7 @@
 extern "C" {
 void gameCounterAddSaturating(u32 kind, u32 amount);
 void gameDataAddCappedPoints(u32 points);
-void FUN_0049cd18(const AocItemRef *entry, s32 quantity, u32 flags);
+void inventoryApplyTransaction(const AocItemRef *entry, s32 quantity, u32 flags);
 
 void FUN_004963f8(Scene3a *scene)
 {
@@ -37,13 +37,13 @@ void FUN_004963f8(Scene3a *scene)
             entry.scaled = 0;
             entry.percent = 0;
             entry.id = id;
-            FUN_0049cd18(&entry, -quantity, 0);
+            inventoryApplyTransaction(&entry, -quantity, 0);
         } else {
             entry.unk02Bit0 = 0;
             entry.scaled = 0;
             entry.percent = 0;
             entry.id = id;
-            FUN_0049cd18(&entry, quantity, 0);
+            inventoryApplyTransaction(&entry, quantity, 0);
         }
     }
 }

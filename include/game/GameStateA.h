@@ -224,7 +224,10 @@ struct GameStateA {
     /* 0x3D8 */ s8 unk3D8;
     /* 0x3D9 */ u8 unk3D9[3];
     /* 0x3DC */ MapVector breakableCheckPosition; /* compared with the player's distance to a breakable */
-    /* 0x3E8 */ s32 unk3E8;
+    union {
+        /* 0x3E8 */ s32 unk3E8;
+        /* 0x3E8 */ f32 breakableCheckValue; /* cleared to 0.0f with breakableCheckPosition */
+    };
     /* 0x3EC */ s16 unk3EC;
     /* 0x3EE */ u8 unk3EE;
     /* 0x3EF */ u8 unk3EF;

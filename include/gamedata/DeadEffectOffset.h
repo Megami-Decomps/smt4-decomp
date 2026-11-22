@@ -24,6 +24,19 @@ static inline DeadEffectOffsetRecord *deadEffectOffsetRecords(void *table)
 {
     return static_cast<DeadEffectOffsetRecord *>(dataTableGetEntries(table));
 }
+
+/* The row keyed `id`, or NULL (a linear search: the death-effect layout functions of both games inline it). */
+static __inline DeadEffectOffsetRecord *deadEffectOffsetFind(u16 id)
+{
+    void *table = dataTableGet(0x3B, 0);
+    DeadEffectOffsetRecord *row = deadEffectOffsetRecords(table);
+    s32 count = dataTableGetCount(table);
+    for (s32 i = 0; i < count; i++, row++) {
+        if (row->id == id)
+            return row;
+    }
+    return NULL;
+}
 #endif
 
 #endif

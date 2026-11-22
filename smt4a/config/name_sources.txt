@@ -8602,3 +8602,32 @@
 003f22fc btlClearActiveCombatantActions inferred clears the queued action of every active combatant of the category (0 ordinary, 1 special, other: all)
 004be49c statusUseHealItemOnSelectedUnit inferred spends the item on the selected unit's percentage heal, then moves the status cursor to the next unit that can take it
 003f06b4 btlHasDuplicateEnemyDemonId inferred 1 when another active enemy combatant shares the selector entry's demon id
+0049cd18 inventoryApplyTransaction inferred same source as smt4 inventoryApplyTransaction (wave 68)
+001445a0 messageSetAdvancePoll inferred stores the message windows' advance-page poll (g_asdTextDefaults+0x2C); misnamed, FUN_00137144 installs FUN_00145534 with it
+00144efc messageSetSkipPoll inferred stores the message windows' skip-line poll (g_asdTextDefaults+0x28); twin of smt4 FUN_0010ec70
+001624b8 messageWindowUpdate inferred twin of smt4 FUN_00124324
+0032b688 staffRollCreate inferred twin of smt4 FUN_002cac54
+00237438 statusCameraBuildAxisPlane inferred exact twin of smt4 FUN_0026ea5c
+001b4c1c effectTimelinePartApplyTint inferred exact twin of smt4 FUN_002a353c
+00141b24 asdSoundReleaseAllSlots inferred releases every sound slot (A, B, aux) and their heaps; twin of smt4 FUN_0010c350
+003210bc btlDrawFloatingNumbers inferred same source as smt4 btlDrawFloatingNumbers (wave 68)
+00168bec npcRoomSlotFadeOpacity inferred a room slot's opacity in its fade cycle
+00485e74 naviPanelInitialize inferred sets up the map navigation panel (Obj532300)
+00498de0 shopTrackSelectedItemPreview inferred keeps the shop's model preview on the selected item
+0049cbac shopAffordableCount inferred exact twin of smt4 btlRollClamped
+003ee734 btlTurnEndApplyRegenSkills inferred applies the regeneration skills at the end of a turn
+0021545c playLogUpdate inferred per-frame update of the play log (PlayLogWorkA)
+002007f4 playLogChangePage inferred switches the play log's page
+0022feb0 playLogBuildPages inferred builds the play log's pages
+00407110 moveCameraCtrlLoadTrack inferred loads the move camera's track and selects key 0
+002e50d4 saveBlockGetPlaySeconds inferred same body as smt4 saveBlockGetPlaySeconds
+0034f0b4 fusionComparePairsByRaceLevelAndIdDescending inferred same source as smt4 fusionComparePairsByRaceLevelAndIdDescending
+002fddd8 devilCompareUnitsByRaceDescending inferred near twin of smt4 devilCompareUnitsByRaceDescending
+002fd824 skillListCompareBySortKeyAndUnit inferred skill list comparator: sort key, then unit demon id; near twin smt4 FUN_00219148
+003e854c battleInitializeEnemyFormation inferred ported from smt4 battleInitializeEnemyFormation
+003ef614 battleReleaseUnusedEnemyResources inferred releases enemy resources no unit still uses (isRetainedResource, as battleReleaseRetiredUnitResources)
+004bfa30 btlGetCurableAilmentMaskForTarget inferred returns the ailment mask the item cures on the target
+005b3d54 g_asdTextDefaults inferred size:0x38 sizeof(AsdTextDefaultsA), asserted in TextDefaults.h
+00587f10 g_uiTextFontSettings inferred size:0x18 FUN_00485e74 clears its word at +0x14; g_naviMain follows at 0x587f28
+00588ef0 g_shopListSlotNeighbors inferred size:0x38 seven {next, previous} slot steps of the equipment lists, right before g_shopTabNeighbors
+00588f78 g_shopItemTabNeighbors inferred {next, previous} tab steps of the shop item list (FUN_00499fdc, FUN_00498594)

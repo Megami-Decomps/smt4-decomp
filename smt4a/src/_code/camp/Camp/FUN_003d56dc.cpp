@@ -29,7 +29,7 @@ int FUN_003b01e8(void);
 int aocScriptReleaseTableAndReset(void);
 
 int configUpdate(void);
-int FUN_0021545c(void);
+int playLogUpdate(void);
 int campReleaseRegisteredTouchRegions(void);
 int useCounterStart(void);
 int campCecScriptStart(...);
@@ -193,7 +193,7 @@ extern int uniteStateIsDone(void);
 /* Supplied declaration required: FUN_0020dc1c. */
 extern int bibleIsClosed(void);
 extern int configIsClosed(void);
-/* Supplied declaration required: FUN_0021545c. */
+/* Supplied declaration required: playLogUpdate. */
 /* Supplied declaration required: FUN_00215bbc. */
 /* Supplied declaration required: unitStatusResetSpriteState. */
 /* Supplied declaration required: FUN_0021b274. */
@@ -1625,7 +1625,7 @@ joined_r0x003d7c38:
     }
     break;
   case 0x2f:
-    FUN_0021545c();
+    playLogUpdate();
     temp_v4 = playLogIsClosed();
     goto joined_r0x003d7c38;
   case 0x30:

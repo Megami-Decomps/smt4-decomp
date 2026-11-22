@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the three corner-quad tables differ: retail walks base, base+1584, base+1584*2 chained from one pointer and orders the stores differently; here each table is addressed from the global with its own offset. */
+/* NON_MATCHING: 86 lines; only the three corner-quad tables differ: retail reaches the second and third from the first (base + 1584, then + 1584 again) and stores in another order */
 #include "map/MapIfGlobals.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -64,43 +64,42 @@ void FUN_002019dc(u32 parent, u8 mode)
     taskCreateDraw("MAP FADE", 138, 0, 0, FUN_00315d34, NULL, NULL, mapIf->job);
     mapIf->indicatorTask = taskCreateDraw("MIF3DL", 113, 0, 0, mapIfDrawWorldIndicators, NULL, NULL, mapIf->job);
 
-    MapIfQuad *quads = DAT_006087e4[0];
-    quads[0].corner[0].x = -64.0f;
-    quads[0].corner[0].y = 16.0f;
-    quads[0].corner[0].z = 0.0f;
-    quads[0].corner[1].x = -64.0f;
-    quads[0].corner[1].y = -16.0f;
-    quads[0].corner[1].z = 0.0f;
-    quads[0].corner[2].x = 64.0f;
-    quads[0].corner[2].y = 16.0f;
-    quads[0].corner[2].z = 0.0f;
-    quads[0].corner[3].x = 64.0f;
-    quads[0].corner[3].y = -16.0f;
-    quads[0].corner[3].z = 0.0f;
-    quads[33].corner[0].x = -64.0f;
-    quads[33].corner[0].y = 0.0f;
-    quads[33].corner[0].z = 16.0f;
-    quads[33].corner[1].x = -64.0f;
-    quads[33].corner[1].y = 0.0f;
-    quads[33].corner[1].z = -16.0f;
-    quads[33].corner[2].x = 64.0f;
-    quads[33].corner[2].y = 0.0f;
-    quads[33].corner[2].z = 16.0f;
-    quads[33].corner[3].x = 64.0f;
-    quads[33].corner[3].y = 0.0f;
-    quads[33].corner[3].z = -16.0f;
-    quads[66].corner[0].x = -64.0f;
-    quads[66].corner[0].y = 0.0f;
-    quads[66].corner[0].z = -16.0f;
-    quads[66].corner[1].x = -64.0f;
-    quads[66].corner[1].y = 0.0f;
-    quads[66].corner[1].z = 16.0f;
-    quads[66].corner[2].x = 64.0f;
-    quads[66].corner[2].y = 0.0f;
-    quads[66].corner[2].z = -16.0f;
-    quads[66].corner[3].x = 64.0f;
-    quads[66].corner[3].y = 0.0f;
-    quads[66].corner[3].z = 16.0f;
+    DAT_006087e4[0][0].corner[0].x = -64.0f;
+    DAT_006087e4[0][0].corner[0].y = 16.0f;
+    DAT_006087e4[0][0].corner[0].z = 0.0f;
+    DAT_006087e4[0][0].corner[1].x = -64.0f;
+    DAT_006087e4[0][0].corner[1].y = -16.0f;
+    DAT_006087e4[0][0].corner[1].z = 0.0f;
+    DAT_006087e4[0][0].corner[2].x = 64.0f;
+    DAT_006087e4[0][0].corner[2].y = 16.0f;
+    DAT_006087e4[0][0].corner[2].z = 0.0f;
+    DAT_006087e4[0][0].corner[3].x = 64.0f;
+    DAT_006087e4[0][0].corner[3].y = -16.0f;
+    DAT_006087e4[0][0].corner[3].z = 0.0f;
+    DAT_006087e4[1][0].corner[0].x = -64.0f;
+    DAT_006087e4[1][0].corner[0].y = 0.0f;
+    DAT_006087e4[1][0].corner[0].z = 16.0f;
+    DAT_006087e4[1][0].corner[1].x = -64.0f;
+    DAT_006087e4[1][0].corner[1].y = 0.0f;
+    DAT_006087e4[1][0].corner[1].z = -16.0f;
+    DAT_006087e4[1][0].corner[2].x = 64.0f;
+    DAT_006087e4[1][0].corner[2].y = 0.0f;
+    DAT_006087e4[1][0].corner[2].z = 16.0f;
+    DAT_006087e4[1][0].corner[3].x = 64.0f;
+    DAT_006087e4[1][0].corner[3].y = 0.0f;
+    DAT_006087e4[1][0].corner[3].z = -16.0f;
+    DAT_006087e4[2][0].corner[0].x = -64.0f;
+    DAT_006087e4[2][0].corner[0].y = 0.0f;
+    DAT_006087e4[2][0].corner[0].z = -16.0f;
+    DAT_006087e4[2][0].corner[1].x = -64.0f;
+    DAT_006087e4[2][0].corner[1].y = 0.0f;
+    DAT_006087e4[2][0].corner[1].z = 16.0f;
+    DAT_006087e4[2][0].corner[2].x = 64.0f;
+    DAT_006087e4[2][0].corner[2].y = 0.0f;
+    DAT_006087e4[2][0].corner[2].z = -16.0f;
+    DAT_006087e4[2][0].corner[3].x = 64.0f;
+    DAT_006087e4[2][0].corner[3].y = 0.0f;
+    DAT_006087e4[2][0].corner[3].z = 16.0f;
     mapIf->mode = mode;
     mapIfResetRecords();
 }

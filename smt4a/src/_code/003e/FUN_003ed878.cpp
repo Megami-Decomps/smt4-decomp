@@ -1,4 +1,4 @@
-/* NON_MATCHING: partner-state branch folding and 64-bit mask load/store grouping differ. */
+/* NON_MATCHING: 79 vs 80 rows (93 diff lines): separate phase updates and direct 64-bit masks improve structure; partner-state branch tail merging and register allocation (r4-r7) still differ. */
 #include "battle/btlMain.h"
 #include "code/Code004a.h"
 #include "battle/btlPartnerAttack.h"
@@ -7,7 +7,7 @@
 #include "battle/BtlGlobals.h"
 #include "battle/BtlUiGlobal.h"
 
-// The queued command lies beyond the published BtlMainStateA extent.
+/* The queued command lies beyond the published BtlMainStateA extent. */
 struct BattleTransitionStateView {
     BtlMainStateA battle;
     /* 0x4CF0 */ u8 unk4CF0[0x78];
@@ -17,47 +17,57 @@ struct BattleTransitionSource {
     /* 0x000 */ u8 unk000[0x400];
     /* 0x400 */ u32 command;
 };
+struct BattleTransitionGlobals {
+    /* 0x000 */ BtlMainStateA *state;
+    /* 0x004 */ u8 unk004[0x104];
+    /* 0x108 */ u64 transitionMask;
+    /* 0x110 */ u8 unk110[0x80];
+    /* 0x190 */ u64 partnerMask;
+};
 typedef char BattleTransitionCommandOffsetCheck[
     offsetof(BattleTransitionStateView, command) == 0x4D68 ? 1 : -1];
+
 extern "C" {
-extern BtlPartnerAttackA* g_btlPartnerAttack;
+extern BtlPartnerAttackA *g_btlPartnerAttack;
 extern u32 g_btlScriptUnit;
-BattleTransitionSource* btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA* battle);
+BattleTransitionSource *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 s32 hasFlag80Or1000(u32 id, BtlUnitA* unit);
 
-// Begin the next partner-attack phase or queue the current unit's transition command.
-u32 FUN_003ed878(BattleTransitionStateView* state)
+/* Begin the next partner-attack phase or queue the current unit's transition command. */
+u32 FUN_003ed878(BattleTransitionStateView *state)
 {
-    BtlMainStateA* main = g_btlMain.state;
-    u32 phase;
-    u64 flags = state->battle.stateFlags64.bits;
-    u64 partnerMask = (u64)g_btlMain.selectionGate.words[0] |
-                      ((u64)g_btlMain.selectionGate.words[1] << 32);
-    if (flags & partnerMask) {
+    if (state->battle.stateFlags64.bits & ((const BattleTransitionGlobals *)&g_btlMain)->partnerMask) {
+        BtlMainStateA *main = g_btlMain.state;
         if (g_btlPartnerAttack->state != 2) {
             ++g_btlPartnerAttack->state;
-            phase = 15;
+            if (main != NULL) {
+                main->phase = 15;
+            }
         } else {
-            phase = 17;
+            if (main != NULL) {
+                main->phase = 17;
+            }
         }
     } else {
-        if (flags & g_btlMain.transition.mask)
+        if (state->battle.stateFlags64.bits & ((const BattleTransitionGlobals *)&g_btlMain)->transitionMask) {
             return 0;
+        }
         state->command = btlFindFirstEntryMatchingCategoryAndRequiredMask(&state->battle)->command;
-        BtlUnitA* unit = reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
+        BtlUnitA *unit = (BtlUnitA *)btlUnitGet((BtlMainStateA *const *)g_btlScriptUnit);
         u32 special = 0;
-        if (unit != NULL && hasFlag80Or1000(g_btlScriptUnit, unit))
+        if (unit != NULL && hasFlag80Or1000(g_btlScriptUnit, unit)) {
             special = 1;
+        }
         FUN_004abba8(g_btlUiBlock, special ^ 1);
-        unit = reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
-        if (unit != NULL)
+        unit = (BtlUnitA *)btlUnitGet((BtlMainStateA *const *)g_btlScriptUnit);
+        if (unit != NULL) {
             hasFlag80Or1000(g_btlScriptUnit, unit);
-        state->battle.stateFlags64.bits |= g_btlMain.transition.mask;
-        phase = 14;
-        main = g_btlMain.state;
+        }
+        state->battle.stateFlags64.bits = ((const BattleTransitionGlobals *)&g_btlMain)->transitionMask | state->battle.stateFlags64.bits;
+        if (g_btlMain.state != NULL) {
+            g_btlMain.state->phase = 14;
+        }
     }
-    if (main != NULL)
-        main->phase = phase;
     return 1;
 }
-}
+} /* extern "C" */

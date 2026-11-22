@@ -1,6 +1,7 @@
-/* NON_MATCHING: the retail unit builds the 2-float pairs (scene+40/64 from scene+28, +72, +348, +416) with stm/vstmia and addresses the globals through DAT_005f16fc-256; the same stores in the same order, but the pairs/globals are separate stores/offsets here. */
+/* NON_MATCHING: 107 lines; the scene block pairs (scene+40 and +64 set from a reload of scene+28, +72, +348 by vstmia, +416 by stm) are stored as separate fields here, and the g_gameState reset (through g_gameState+0x100) swaps r0/r3 */
 #include "common.h"
 #include "classes/Obj557c58.h"
+#include "game/GameStateA.h"
 #include <new>
 
 namespace {
@@ -141,43 +142,10 @@ struct LmapSceneInit {
     /* 0x291 */ u8 unk291;
 };
 
-/* Scene-wide globals at DAT_005f16fc. */
-struct LmapGlobalsInit {
-    /* 0x000 */ u8 pad000[0xb0];
-    /* 0x0b0 */ u8 unk0b0;
-    /* 0x0b1 */ u8 pad0b1[0x3];
-    /* 0x0b4 */ f32 unk0b4;
-    /* 0x0b8 */ f32 unk0b8;
-    /* 0x0bc */ f32 unk0bc;
-    /* 0x0c0 */ f32 unk0c0;
-    /* 0x0c4 */ u8 pad0c4[0x4];
-    /* 0x0c8 */ u16 unk0c8;
-    /* 0x0ca */ u8 pad0ca[0x2];
-    /* 0x0cc */ u8 unk0cc;
-    /* 0x0cd */ u8 unk0cd;
-    /* 0x0ce */ u8 unk0ce;
-    /* 0x0cf */ u8 pad0cf[0x5];
-    /* 0x0d4 */ u8 unk0d4;
-    /* 0x0d5 */ u8 pad0d5[0x3];
-    /* 0x0d8 */ u32 unk0d8;
-    /* 0x0dc */ f32 unk0dc;
-    /* 0x0e0 */ f32 unk0e0;
-    /* 0x0e4 */ f32 unk0e4;
-    /* 0x0e8 */ f32 unk0e8;
-    /* 0x0ec */ u8 pad0ec[0x1ec];
-    /* 0x2d8 */ u8 unk2d8;
-    /* 0x2d9 */ u8 pad2d9[0x3];
-    /* 0x2dc */ f32 unk2dc;
-    /* 0x2e0 */ f32 unk2e0;
-    /* 0x2e4 */ f32 unk2e4;
-    /* 0x2e8 */ f32 unk2e8;
-    /* 0x2ec */ u16 unk2ec;
-};
 }
 
 extern "C" {
 extern LmapSceneInit *g_lmapScene;
-extern LmapGlobalsInit DAT_005f16fc;
 
 /* Resets the map scene block to its start-of-map state: camera/transform defaults (distance 10, yaw -90,
    scale 100/1000), the script object and the scene-wide globals. */
@@ -289,27 +257,27 @@ void FUN_002496b8(void)
     scene->unk250 = 0;
     scene->unk260 = 0.0f;
     scene->unk264 = 0;
-    DAT_005f16fc.unk0b0 = 0;
-    DAT_005f16fc.unk0b4 = 0.0f;
-    DAT_005f16fc.unk0b8 = 0.0f;
-    DAT_005f16fc.unk0bc = 0.0f;
-    DAT_005f16fc.unk0c0 = 0.0f;
-    DAT_005f16fc.unk0c8 = 0;
-    DAT_005f16fc.unk0cc = 0;
-    DAT_005f16fc.unk0cd = 0;
-    DAT_005f16fc.unk0ce = 0;
-    DAT_005f16fc.unk0d4 = 0;
-    DAT_005f16fc.unk0d8 = 0;
-    DAT_005f16fc.unk0dc = 0.0f;
-    DAT_005f16fc.unk0e0 = 0.0f;
-    DAT_005f16fc.unk0e4 = 0.0f;
-    DAT_005f16fc.unk0e8 = 0.0f;
-    DAT_005f16fc.unk2d8 = 0;
-    DAT_005f16fc.unk2dc = 0.0f;
-    DAT_005f16fc.unk2e0 = 0.0f;
-    DAT_005f16fc.unk2e4 = 0.0f;
-    DAT_005f16fc.unk2e8 = 0.0f;
-    DAT_005f16fc.unk2ec = 0;
+    g_gameState.unk1B0 = 0;
+    g_gameState.unk1B4 = 0.0f;
+    g_gameState.unk1B8 = 0.0f;
+    g_gameState.unk1BC = 0.0f;
+    g_gameState.unk1C0 = 0.0f;
+    g_gameState.unk1C8 = 0;
+    g_gameState.unk1CC = 0;
+    g_gameState.unk1CD = 0;
+    g_gameState.unk1CE = 0;
+    g_gameState.unk1D4 = 0;
+    g_gameState.unk1D8 = 0;
+    g_gameState.unk1DC = 0.0f;
+    g_gameState.unk1E0 = 0.0f;
+    g_gameState.unk1E4 = 0.0f;
+    g_gameState.unk1E8 = 0.0f;
+    g_gameState.unk3D8 = 0;
+    g_gameState.breakableCheckPosition.x = 0.0f;
+    g_gameState.breakableCheckPosition.y = 0.0f;
+    g_gameState.breakableCheckPosition.z = 0.0f;
+    g_gameState.breakableCheckValue = 0.0f;
+    g_gameState.unk3EC = 0;
     scene->unk280 = 0;
     scene->unk284 = 0;
     scene->unk288 = 0;

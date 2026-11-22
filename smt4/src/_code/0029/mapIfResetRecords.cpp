@@ -1,4 +1,7 @@
-/* NON_MATCHING: transform-clear loop unrolling, float triple stores and primary-position copy formation differ. */
+/* NON_MATCHING: 51 lines. The records' loop matches retail's copy of the start position (a MapVector
+ * assignment: vstmia with x and y forwarded, z reloaded) and its unrolled transform clear; retail still pairs the
+ * limits[1..2] and category/id stores (vstmia, stm), keeps 101 in r4, and copies the primary's position through
+ * core registers (ldm of x and y, z forwarded with vmov) where this build forwards all three zeros. */
 #include "map/MapIfGlobals.h"
 
 extern "C" {
@@ -30,33 +33,40 @@ void mapIfResetRecords()
         record.target = -1;
         record.offset = 0.0f;
         record.pending = 0;
-        record.start[0] = 1150.0f;
+        record.start.x = 1150.0f;
         record.flag42 = 0;
         record.timer = 0;
         record.heading = 0.0f;
-        record.start[1] = 150.0f;
-        record.start[2] = 0.0f;
+        record.start.y = 150.0f;
+        record.start.z = 0.0f;
         record.hidden = 0;
         record.angle = 0.0f;
-        for (s32 j = 0; j < 12; ++j) {
-            record.transform[j] = 0.0f;
-        }
+        record.transform[0] = 0.0f;
+        record.transform[1] = 0.0f;
+        record.transform[2] = 0.0f;
+        record.transform[3] = 0.0f;
+        record.transform[4] = 0.0f;
+        record.transform[5] = 0.0f;
+        record.transform[6] = 0.0f;
+        record.transform[7] = 0.0f;
+        record.transform[8] = 0.0f;
+        record.transform[9] = 0.0f;
+        record.transform[10] = 0.0f;
+        record.transform[11] = 0.0f;
         record.values[0] = 0;
         record.values[1] = 0;
         record.values[2] = 0;
-        for (s32 j = 0; j < 3; ++j) {
-            record.current[j] = record.start[j];
-        }
+        record.current = record.start;
     }
     MapIfRecord &primary = state->primary;
     primary.active = 0;
     primary.flag40 = 0;
     primary.id = -1;
-    primary.start[0] = 0.0f;
+    primary.start.x = 0.0f;
     primary.first = 0;
     primary.unk190 = 0;
-    primary.start[1] = 0.0f;
-    primary.start[2] = 0.0f;
+    primary.start.y = 0.0f;
+    primary.start.z = 0.0f;
     primary.second = 0;
     primary.category = 0;
     primary.progress = 0.0f;
@@ -65,8 +75,8 @@ void mapIfResetRecords()
     primary.target = -1;
     primary.pending = 0;
     primary.angle = 0.0f;
-    for (s32 j = 0; j < 3; ++j) {
-        primary.current[j] = primary.start[j];
-    }
+    primary.current.x = primary.start.x;
+    primary.current.y = primary.start.y;
+    primary.current.z = primary.start.z;
 }
 }

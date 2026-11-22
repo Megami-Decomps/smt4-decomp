@@ -7,7 +7,7 @@
 
 extern "C" {
 
-int FUN_001624b8(...);
+int messageWindowUpdate(...);
 int mathInterpolateTimed(...);
 int msgBoxFlagsSetBit7(...);
 int FUN_00167400(void);
@@ -68,7 +68,7 @@ extern float DAT_005e2054; /* 0x5e2054 */
 /* Supplied declaration required: asdTMTexTablePrepareNodeImage. */
 /* Supplied declaration required: objFlagsSetBits. */
 /* Supplied declaration required: padQueryLogicalKey. */
-/* Supplied declaration required: FUN_001624b8. */
+/* Supplied declaration required: messageWindowUpdate. */
 /* Supplied declaration required: gameDataCounterSpend. */
 /* Supplied declaration required: mathInterpolateTimed. */
 extern int campIsState85(void);
@@ -1375,7 +1375,7 @@ LAB_0014dfd4:
   if (*(char *)(temp_v2 + 8) != '\x01') {
     return 0;
   }
-  FUN_001624b8(*(unsigned int *)(temp_v2 + 4));
+  messageWindowUpdate(*(unsigned int *)(temp_v2 + 4));
   if (*(int *)(temp_v2 + 4) != 0) {
     if (DAT_005e204e == '\0') {
       FUN_00167400();

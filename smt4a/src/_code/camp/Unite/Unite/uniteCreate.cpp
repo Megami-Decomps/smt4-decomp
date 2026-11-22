@@ -282,7 +282,7 @@ void uniteCreate(void)
     g_handleRegistry->flags |= 1;
     work->previewA.resetCount = 0;
     work->previewA.frames = 0;
-    work->menu.openedSeconds = FUN_002e50d4();
+    work->menu.openedSeconds = saveBlockGetPlaySeconds();
     if (fusionListAvailableSpecialRecipes(work->sprites.ctrl, work->catalogThreadA.specialRecipes) != 0) {
         gameFlagSetValue(0x52C, 1, 1);
     } else {

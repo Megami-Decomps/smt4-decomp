@@ -32,7 +32,7 @@ struct MapCollisionMesh : CollisionQueueState {
 extern "C" {
 void FUN_0026e8a4(s32 axis, s32 count, f32 *minimum, f32 *maximum,
                   CollisionVector first, CollisionVector second, CollisionVector third, CollisionVector fourth);
-void FUN_0026ea5c(s32, s32, CollisionVector *, f32 *, CollisionVector, CollisionVector, CollisionVector);
+void statusCameraBuildAxisPlane(s32, s32, CollisionVector *, f32 *, CollisionVector, CollisionVector, CollisionVector);
 
 /* Turn every triangle of the loaded collision mesh into a collision quad record owned by `owner`. */
 void FUN_001c24e4(u32 owner)
@@ -70,9 +70,9 @@ void FUN_001c24e4(u32 owner)
         quad->queue = 0;
         quad->tag = 0;
         CollisionVector reference = {quad->center.x, 0.0f, quad->center.z};
-        FUN_0026ea5c(quad->enabled, 0, &quad->edgeNormals[0], &quad->edgeDistances[0], reference, a, b);
-        FUN_0026ea5c(quad->enabled, 1, &quad->edgeNormals[1], &quad->edgeDistances[1], reference, b, c);
-        FUN_0026ea5c(quad->enabled, 2, &quad->edgeNormals[2], &quad->edgeDistances[2], reference, c, a);
+        statusCameraBuildAxisPlane(quad->enabled, 0, &quad->edgeNormals[0], &quad->edgeDistances[0], reference, a, b);
+        statusCameraBuildAxisPlane(quad->enabled, 1, &quad->edgeNormals[1], &quad->edgeDistances[1], reference, b, c);
+        statusCameraBuildAxisPlane(quad->enabled, 2, &quad->edgeNormals[2], &quad->edgeDistances[2], reference, c, a);
         CollisionVector unused;
         FUN_0026e8a4(quad->enabled, quad->vertexCount, (f32 *)&quad->unk98[0], (f32 *)&quad->unk98[8], a, b, c, unused);
         collision.geometry.triangleCount++;

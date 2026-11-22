@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild from asm of the battle command menu's result selection; retail shares its skip/candidate tails by jumps (the draft's six gotos) and computes the work-block offsets from three base registers, which armcc here emits from the structured conditions. */
+/* NON_MATCHING: 30 lines; retail loads the battle state mask words with one ldm from 0x45A0 (the build: two ldr from a 0x4500 base), lays the kind-3 test out as bne/b where the build has beq/b, and tests the target slot and the member with two branches (the build predicates the second compare) */
 #include "battle/BtlMainAccess.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "common.h"
@@ -6,6 +6,7 @@
 #include "gamedata/SaveSlotRecord.h"
 #include "gamedata/SaveSlotTable.h"
 #include "code/Code002a.h"
+#include "battle/BtlDebugMenuEntry.h"
 
 /* One command-menu entry (only the fields read here). */
 struct CommandEntry {
@@ -26,16 +27,19 @@ struct CommandWork {
     /* 0x3890 */ s32 selected;
     /* 0x3894 */ u8 unk3894[0x28];
     /* 0x38BC */ u8 lists[0x7D0];  /* one 100-byte list per selection */
-    /* 0x408C */ u8 unk408C[0x161];
-    /* 0x41ED */ u8 blocked;
-    /* 0x41EE */ u8 unk41EE[0x22];
+    /* 0x408C */ u8 unk408C[0x74];
+    /* 0x4100 */ BtlDebugPage page;
     /* 0x4210 */ s16 targets[8];
+};
+
+struct BattleMaskWords {
+    u32 low;
+    u32 high;
 };
 
 struct BattleState {
     /* 0x0000 */ u8 unk0000[0x45A0];
-    /* 0x45A0 */ u32 maskA;
-    /* 0x45A4 */ u32 maskB;
+    /* 0x45A0 */ BattleMaskWords masks;
 };
 
 struct BattleMasks {
@@ -54,14 +58,25 @@ s32 idListHasFlaggedRecord(SlotRecordA *member);
 s32 btlIsDefeatSuppressed(void);
 s32 btlListIsKind9Available(void);
 
-/* Whether a target command is usable by the member: allowed by the member's equipment when no
- * flagged record applies. */
-static bool targetCommandAllowed(CommandEntry *entry, SlotRecordA *member)
+s32 btlDebugQueryEnabled(void);
+
+/* btlObjectHasEntryFlag's body: whether the unit's demon record allows the command (extra flag bit 2). */
+static __inline s32 unitHasCommandFlag(SlotRecordA *unit)
 {
-    if ((entry->attributes & 1) || btlIsDefeatSuppressed() == 0 || btlIsDefeatSuppressed() == 0)
-        return false;
-    NkmBaseRecordA *info = nkmBaseGetRecord(member->id);
-    return info != NULL && (info->extraFlags & 4) != 0;
+    if (unit == NULL)
+        return 0;
+    if (btlIsDefeatSuppressed() == 0)
+        return 0;
+    NkmBaseRecordA *record = nkmBaseGetRecord(unit->id);
+    return record != NULL ? ((record->extraFlags & 4) >> 2) : 0;
+}
+
+/* Whether a target command (kind 3) is usable by the member: not flagged for a free target, and allowed
+ * by the member's demon record. */
+static __inline bool targetCommandAllowed(CommandEntry *entry, SlotRecordA *member)
+{
+    return entry->kind == 3 && (entry->attributes & 1) == 0 && btlIsDefeatSuppressed() != 0 &&
+           unitHasCommandFlag(member) != 0;
 }
 
 /* Picks which command the menu returns for the current selection: walks the ten command slots,
@@ -73,6 +88,7 @@ u32 FUN_002cc9e0(CommandWork *work, s32 inBattle)
     SaveSlotTableA *table = gameGetSlotTable();
     CommandEntry *entry = NULL;
     s32 count = 0;
+    BtlDebugPage *page = &work->page;
     for (s32 t = 0; t < 10; t++) {
         entry = FUN_002cc228(t & 0xFF, work->selected == 0);
         SlotRecordA *member = NULL;
@@ -85,19 +101,27 @@ u32 FUN_002cc9e0(CommandWork *work, s32 inBattle)
         if (entry->flagB != 0 && gameDataFlagTestBit(entry->flagB) == 0)
             continue;
         if (entry->limitedByBattle) {
-            BattleState *battle = reinterpret_cast<BattleState *>(btlGetMainState());
-            if ((DAT_00573b88.maskA & battle->maskA) | (battle->maskB & DAT_00573b88.maskB))
+            BattleMaskWords masks = reinterpret_cast<BattleState *>(btlGetMainState())->masks;
+            if (((masks.low & DAT_00573b88.maskA) | (masks.high & DAT_00573b88.maskB)) != 0)
                 continue;
         }
-        if (entry->kind == 2)
+        if (entry->kind == 5) {
+            if (page->pending != 0)
+                continue;
+        } else if (entry->kind == 2) {
             continue;
-        if (entry->kind == 5 && work->blocked != 0)
-            continue;
-        if (entry->kind == 3 && work->targets[work->selected] != -1 && member != NULL &&
-            idListHasFlaggedRecord(member) == 0 && !targetCommandAllowed(entry, member))
-            continue;
-        if (entry->kind == 9 && btlListIsKind9Available() == 0)
-            continue;
+        } else if (entry->kind == 3) {
+            if (work->targets[work->selected] != -1 && member != NULL) {
+                if (idListHasFlaggedRecord(member) == 0 && !targetCommandAllowed(entry, member))
+                    continue;
+            }
+        }
+        if (entry->kind != 6 && entry->kind != 8) {
+            if (work->selected == 0 && btlDebugQueryEnabled() != 0)
+                continue;
+            if (entry->kind == 9 && btlListIsKind9Available() == 0)
+                continue;
+        }
         if ((entry->attributes & 1) && btlIsDefeatSuppressed() != 0)
             continue;
         if (listCursorGetRowOfChildIfUnblocked(reinterpret_cast<Object *>(work->lists + work->selected * 100)) == count)

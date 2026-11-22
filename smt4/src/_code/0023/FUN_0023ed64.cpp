@@ -1,4 +1,5 @@
-/* NON_MATCHING: alpha/scale pair transfers, VFP constant registers, and phase-one branch placement differ. */
+/* NON_MATCHING: the cycle steps load and store the four alpha/scale fields one by one in retail (the build pairs the
+ * first scale and second alpha with vldmia/vstmia); the rest only shifts. */
 #include "ui/SplashAnimationState.h"
 #include "code/Code002c.h"
 #include "ui/UiControl.h"
@@ -52,18 +53,17 @@ s32 FUN_0023ed64(SplashAnimationState *state)
         state->firstAlpha = 0.0f;
         state->firstScale = 1.0f;
     }
-    // The original compares the raw words at these positive float thresholds.
-    if (state->frameBits <= 0x41f00000 && state->secondAlpha <= 0.0f) {
+    if (state->frame <= 30.0f && state->secondAlpha <= 0.0f) {
         state->secondAlpha = 0.0f;
         state->secondScale = 1.0f;
     }
-    if (state->frameBits > 0x41f00000) {
+    if (state->frame > 30.0f) {
         state->firstAlpha += 0.033333335f;
         state->firstScale += 0.016666668f;
         state->secondAlpha -= 0.033333335f;
         state->secondScale += 0.016666668f;
     }
-    if (state->frameBits < 0x41f00000) {
+    if (state->frame < 30.0f) {
         state->firstAlpha -= 0.033333335f;
         state->firstScale += 0.016666668f;
         state->secondAlpha += 0.033333335f;
@@ -76,7 +76,7 @@ s32 FUN_0023ed64(SplashAnimationState *state)
             titleSetSlotValueState2(0, 30);
         if (pairedAvailabilityGetState(0) == 2)
             return 0;
-        if (state->fadeBits < 0x3f800000)
+        if (state->fade < 1.0f)
             state->fade += 0.033333335f;
         else
             state->wait = 300;

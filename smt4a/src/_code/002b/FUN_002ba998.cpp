@@ -45,7 +45,7 @@ int btlEncountInitialize(...);
 int FUN_00363990(...);
 int FUN_00385c44(...);
 int FUN_003e49e8(void);
-int FUN_003e854c(...);
+int battleInitializeEnemyFormation(...);
 int FUN_003e892c(...);
 int btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
 int btlHasFilteredCommand(void);
@@ -224,7 +224,7 @@ extern int gameDataGetEntryFlags(short);
 /* Supplied declaration required: soundChannelStopAll. */
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_003e49e8. */
-/* Supplied declaration required: FUN_003e854c. */
+/* Supplied declaration required: battleInitializeEnemyFormation. */
 /* Supplied declaration required: FUN_003e892c. */
 /* Supplied declaration required: btlInitializeDemonUnitState. */
 /* Supplied declaration required: btlActionPrepareFromSource. */
@@ -486,7 +486,7 @@ void FUN_002ba998(unsigned int param_1)
     *(unsigned char *)(temp_v7 + 0x45b8) = 0;
     *(unsigned char *)(temp_v7 + 0x45b9) = 0;
     *(unsigned int *)(temp_v7 + 0x2414) = 0;
-    FUN_003e854c(temp_v7);
+    battleInitializeEnemyFormation(temp_v7);
     temp_v6 = jobIsValid(*(unsigned int *)(temp_v7 + 0x74));
     if (temp_v6 == 0) {
       btlEventTaskCreate(temp_v7);

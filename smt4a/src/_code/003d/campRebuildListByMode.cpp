@@ -25,7 +25,7 @@ extern int FUN_002ce460(...); /* 0x2ce460 */
 extern int FUN_002ce4d4(...); /* 0x2ce4d4 */
 extern int FUN_002ce520(...); /* 0x2ce520 */
 extern int FUN_002fd7c0(...); /* 0x2fd7c0 */
-extern int FUN_002fd824(...); /* 0x2fd824 */
+extern int skillListCompareBySortKeyAndUnit(...); /* 0x2fd824 */
 extern int FUN_002fd8e4(...); /* 0x2fd8e4 */
 extern int FUN_002fdd2c(...); /* 0x2fdd2c */
 extern int uiComparePackedEntryRankAscending(...); /* 0x2fdd80 */
@@ -153,7 +153,7 @@ void campRebuildListByMode(int param_1)
           return;
         }
         temp_v2 = gridNavigationGetItemCount(temp_v3);
-        arraySortQsort(temp_v1,temp_v2,8,FUN_002fd824);
+        arraySortQsort(temp_v1,temp_v2,8,skillListCompareBySortKeyAndUnit);
         return;
       default:
         return;

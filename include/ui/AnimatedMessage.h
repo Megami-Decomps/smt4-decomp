@@ -22,6 +22,8 @@ struct UiTextFontGlobals {
     /* 0x00 */ f32 dragFriction;    /* what the navigation map's slide is scaled by each frame */
     /* 0x04 */ u8 unk04[8];
     /* 0x0C */ u32 font;
+    /* 0x10 */ u8 unk10[4];
+    /* 0x14 */ s32 unk14;           /* cleared when the navigation panel starts */
 };
 
 extern "C" {

@@ -15,6 +15,7 @@ struct MoriModelContent;
 class Obj536044;
 
 extern "C" void shopEnterQuantitySelection(Obj536044 *shop, s32 nextState);
+extern "C" void shopTrackSelectedItemPreview(Obj536044 *scene);
 
 /* A scene whose step functions are listed in the table at 0x536044 (named after it until its real
  * name is known): the table holds member-function pointers, not a vtable. */
@@ -68,12 +69,21 @@ protected:
     void showPriceChange();
     void startScript(const char *name);
 
+    /* The list states' tests of the item under the cursor: whether it can be sold (inline in
+     * Obj536044__FUN_00499fdc.cpp) and whether the player can pay for it (shop/ShopBuyItem.h, inlined by
+     * FUN_0049bd20 and itemMenuHandleSelectionInput). Slot 8 is the selling list. */
+    bool canSellItem(const EquipmentMenuItem *item);
+    bool canBuyItem(const EquipmentMenuItem *item);
+
     /* 0x00 */ u32 flags;                /* 0x1000: the quantity panel is on screen */
     /* 0x04 */ s32 state;
     /* 0x08 */ s32 substate;
     /* 0x0C */ s32 timer;
     /* 0x10 */ s32 previousState;
-    /* 0x14 */ u8 unk14[0xF];
+    /* 0x14 */ s32 mode;                /* 0 and 1: the equipment pages; with 1 the restricted slot 0 can still be left */
+    /* 0x18 */ u8 restricted;           /* slots 0 and 3 take their restricted neighbours, as they do until flag 0x410 is set */
+    /* 0x19 */ u8 unk19[9];
+    /* 0x22 */ u8 previewing;           /* the selected item's preview is up */
     /* 0x23 */ u8 previewReady;         /* the equipment preview model has been requested */
     /* 0x24 */ Handler states[22];
     /* 0xD4 */ ExitHandler exitStates[22];
@@ -101,21 +111,55 @@ protected:
     /* 0x9FFE */ u16 messages[3];           /* the appraisal records follow: 6 bytes each, the message id first */
     /* 0xA004 */ u8 unkA004[0xBFFC];
     /* 0x16000 */ u32 panel;
-    /* 0x16004 */ u8 unk16004[0x24];
+    /* 0x16004 */ s32 previewEnabled;       /* the selected item is shown on the character */
+    /* 0x16008 */ u32 previewedId;          /* the item shown on the character */
+    /* 0x1600C */ u8 unk1600C[0x10];
+    /* 0x1601C */ s32 visibleCount;         /* how many categories the menu shows */
+    /* 0x16020 */ u8 unk16020[8];
     /* 0x16028 */ MoriModelContent *resource;  /* the equipment preview model */
-    /* 0x1602C */ u8 unk1602C[4];
+    /* 0x1602C */ s16 nextItem;         /* the records whose mode 6 stands for the right and left buttons */
+    /* 0x1602E */ s16 previousItem;
     /* 0x16030 */ s16 touchRegionCount;
-    /* 0x16032 */ u8 unk16032[6];
+    /* 0x16032 */ u8 unk16032[2];
+    /* 0x16034 */ u32 lastSelectedId;       /* the item the preview was last restarted for */
     /* 0x16038 */ u32 cleared[3];
     /* 0x16044 */ u8 clearedFlags[2];
     /* 0x16046 */ u8 unk16046[2];
     /* 0x16048 */ s32 quantityIndex;        /* the list index the quantity panel was set up for, -1: none */
 
     friend void shopEnterQuantitySelection(Obj536044 *shop, s32 nextState);
+    friend void shopTrackSelectedItemPreview(Obj536044 *scene);
     friend struct Obj536044LayoutCheck;
 };
 
+/* Slot 7, the item page, has no neighbours and no preview model. */
+enum { SHOP_SLOT_ITEMS = 7 };
+
+/* The slots the right and left buttons lead to from one slot. */
+struct ShopSlotStep {
+    /* 0x00 */ s32 next;
+    /* 0x04 */ s32 previous;
+};
+
+/* For each equipment slot, the slot the right and left buttons lead to (g_shopTabNeighbors, 0x588f28);
+ * slots 0 and 3 have other neighbours while the scene is restricted. */
+struct ShopSlotNeighbors {
+    /* 0x00 */ ShopSlotStep slot[8];
+    /* 0x40 */ s32 restricted0Next;
+    /* 0x44 */ s32 restricted0Previous;
+    /* 0x48 */ s32 restricted3Next;
+    /* 0x4C */ s32 restricted3Previous;
+};
+typedef char ShopSlotNeighborsSizeCheck[sizeof(ShopSlotNeighbors) == 0x50 ? 1 : -1];
+
 struct Obj536044LayoutCheck {
+    char restricted[offsetof(Obj536044, restricted) == 0x18 ? 1 : -1];
+    char previewing[offsetof(Obj536044, previewing) == 0x22 ? 1 : -1];
+    char nextItem[offsetof(Obj536044, nextItem) == 0x1602C ? 1 : -1];
+    char visibleCount[offsetof(Obj536044, visibleCount) == 0x1601C ? 1 : -1];
+    char previewedId[offsetof(Obj536044, previewedId) == 0x16008 ? 1 : -1];
+    char lastSelectedId[offsetof(Obj536044, lastSelectedId) == 0x16034 ? 1 : -1];
+    char mode[offsetof(Obj536044, mode) == 0x14 ? 1 : -1];
     char resultScript[offsetof(Obj536044, resultScript) == 0x39C ? 1 : -1];
     char previewReady[offsetof(Obj536044, previewReady) == 0x23 ? 1 : -1];
     char panelRect[offsetof(Obj536044, panelRect) == 0x3B8 ? 1 : -1];

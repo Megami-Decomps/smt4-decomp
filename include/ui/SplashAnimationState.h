@@ -8,14 +8,8 @@ struct SplashAnimationState {
     s32 scriptState; // 0x00
     u8 unk04[0x18];
     s32 phase; // 0x1c
-    union {
-        f32 fade; // 0x20
-        s32 fadeBits;
-    };
-    union {
-        f32 frame; // 0x24
-        s32 frameBits;
-    };
+    f32 fade; // 0x20
+    f32 frame; // 0x24: frames left in the crossfade cycle
     f32 firstAlpha; // 0x28
     f32 firstScale; // 0x2c
     f32 secondAlpha; // 0x30

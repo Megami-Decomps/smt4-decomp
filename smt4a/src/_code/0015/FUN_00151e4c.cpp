@@ -11,7 +11,7 @@ int positionStateSet(...);
 int textDrawRangeFaded(...);
 int texDrawCompositeSprite(int, int, int, int, int, int);
 int efctSetSpeed(void);
-int FUN_00168bec(...);
+int npcRoomSlotFadeOpacity(...);
 int FUN_001696d4(void *, int);
 int renderCtxPopState(...);
 int renderStackPushIndexed(RenderCtxA *, int, unsigned int);
@@ -50,7 +50,7 @@ typedef struct {
 /* Supplied declaration required: texDrawCompositeSprite. */
 extern int npcRoomGetEntryValue(unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00168bec. */
+/* Supplied declaration required: npcRoomSlotFadeOpacity. */
 extern int FUN_00168d38(unsigned int);
 extern int FUN_001691a8(void);
 extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
@@ -166,7 +166,7 @@ LAB_00151ff8:
               temp_v7 = romwright_piece_4_4((int)(float)temp_v8,temp_v5);
               do {
                 if (param_1->field_0x1a10 == 0) {
-                  FUN_00168bec(temp_v2);
+                  npcRoomSlotFadeOpacity(temp_v2);
                 }
                 efctSetSpeed();
                 texDrawTableEntryAtStoredOrigin(2,8,temp_v2 + 0x18e,(int)((unsigned long long)temp_v7 >> 0x20),(int)temp_v7,0x33);

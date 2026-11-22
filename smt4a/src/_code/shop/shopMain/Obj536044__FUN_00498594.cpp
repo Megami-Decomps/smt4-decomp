@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match6_SpritePresetBank.h"
 
 extern "C" {
-extern s32 DAT_00588f78[][2];
+extern s32 g_shopItemTabNeighbors[][2];
 void FUN_004954e8(EquipmentMenuState *menu);
 void messageChoiceShowCurrent(EquipmentMenuState *menu);
 s32 inputIsQuestRepeatRight(void);
@@ -37,13 +37,13 @@ void _ZN9Obj53604412FUN_00498594Ev(EquipmentMenuState *menu)
     FUN_004954e8(menu);
     messageChoiceShowCurrent(menu);
     if (inputIsQuestRepeatRight() || recordGetModeForId(neighbors->nextItem) == 6) {
-        menu->selection.index = DAT_00588f78[menu->selection.index][0];
+        menu->selection.index = g_shopItemTabNeighbors[menu->selection.index][0];
         FUN_00496a0c(menu, 1);
         sendEvent1000210();
         return;
     }
     if (FUN_004d0494() || recordGetModeForId(neighbors->previousItem) == 6) {
-        menu->selection.index = DAT_00588f78[menu->selection.index][1];
+        menu->selection.index = g_shopItemTabNeighbors[menu->selection.index][1];
         FUN_00496a0c(menu, 1);
         sendEvent1000210();
         return;

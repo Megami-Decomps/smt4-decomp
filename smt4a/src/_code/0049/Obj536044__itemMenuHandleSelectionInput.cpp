@@ -1,106 +1,69 @@
-/* NON_MATCHING: category/choice address preparation and state/constant register allocation differ; -O2 candidate. */
 #include "classes/Obj536044.h"
-#include "shard/W6_W6Match6_SpritePresetBank.h"
-#include "shard/W6_W6Match4_FlaggedValueHolder.h"
+#include "shop/ShopSelectedItem.h"
+#include "shop/ShopBuyItem.h"
+#include "script/scrScriptProcess.h"
+#include "ui/UiControl.h"
+#include "code/Code0049_Smt4a.h"
+#include "code/Code004d_Smt4a.h"
 
-struct EquipmentChoice { u16 id, quantity; };
-struct EquipmentChoiceList { EquipmentChoice choices[1024]; u16 unk1000; };
-union EquipmentCategory {
-    FlaggedValueHolder selection;
-    struct { u8 unk00[8]; s32 count; } items;
-};
-struct EquipmentMenu {
-    u32 unk000;
-    s32 state, phase;
-    u32 unk00c;
-    s32 previousState;
-    u8 unk014[0x178];
-    u32 process;
-    u8 unk190[0x23c];
-    SpritePresetBank bank; // 0x3cc
-    u8 releaseState[0x34]; // 0xb08
-    u32 releaseHandle;
-    s32 category;
-    u8 unkb44[0x1c];
-    EquipmentCategory categories[9]; // 0xb60
-    EquipmentChoiceList choices[9]; // 0xf74, stride0x1002
-    u8 unk9f86[0xc0aa];
-    s16 touchCount;
-    u8 unk16032[0xe];
-    u32 closeRequest;
-};
+struct CountAt5A;
+
 extern "C" {
-u32 scrRunOpcodesStub(u32);
-void buttonHelpSetText(u32, u32);
-u32 panelSetTarget(u32, u8);
-u32 FUN_004954e8(EquipmentMenu *);
-void messageChoiceShowCurrent(EquipmentMenu *);
-u32 inputConfirmPressed();
-u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *);
-u32 shopGetEntryPrice(const EquipmentChoice *);
-u32 btlRollClamped(u16, u32);
-void sendEvent100020E();
-void sendEvent100020F();
-u32 inputIsQuestMenuPressed();
-u32 inputIsQuestCancelPressed();
+
+void buttonHelpSetText(const s8 *text, u32 color);
+void messageChoiceShowCurrent(Obj536044 *shop);
+s32 inputConfirmPressed(void);
+void sendEvent100020E(void);
+void sendEvent100020F(void);
+s32 inputIsQuestMenuPressed(void);
+s32 inputIsQuestCancelPressed(void);
 void FUN_0038b010(u8 value);
-void uiSpriteBankApplyPreset(SpritePresetBank *, u32);
-void obj04Finish();
-void releaseEntriesB(u32);
-void releaseEntriesA(void *);
-void ifTouchRegionRemove();
-void menuOpenCommandList(EquipmentMenu *);
+void uiSpriteBankApplyPreset(SpritePresetBank *bank, u32 preset);
+void obj04Finish(void);
+void releaseEntriesB(CountAt5A *entries);
+void menuOpenCommandList(Obj536044 *shop);
 
-static __inline void equipmentMenuEnterState(EquipmentMenu *menu, u32 next)
-{
-    menu->previousState = menu->state;
-    menu->state = next;
-    menu->phase = 0;
-}
+} /* extern "C" */
 
-void _ZN9Obj53604428itemMenuHandleSelectionInputEv(EquipmentMenu *menu)
+/* Updates the item list: waits for the closing script, then handles buying the selected item and the
+ * menu/cancel buttons. */
+void Obj536044::itemMenuHandleSelectionInput()
 {
-    if (menu->phase != 0) {
-        if (menu->phase == 1 && scrRunOpcodesStub(menu->process) == 2) {
-            buttonHelpSetText(0, 0xf4f4f4ff);
-            equipmentMenuEnterState(menu, 5);
+    if (substate != 0) {
+        if (substate == 1 && scrRunOpcodesStub(controller) == 2) {
+            buttonHelpSetText(NULL, 0xF4F4F4FF);
+            changeState(5);
         }
         return;
     }
-    scrRunOpcodesStub(menu->process);
+    scrRunOpcodesStub(controller);
     panelSetTarget(0, 0);
-    u32 confirmed = FUN_004954e8(menu);
-    messageChoiceShowCurrent(menu);
-    if (menu->categories[menu->category].items.count > 0 && inputConfirmPressed())
+    u32 confirmed = FUN_004954e8((SubmenuWork *)this);
+    messageChoiceShowCurrent(this);
+    if (slotInfo[slot].range.count > 0 && inputConfirmPressed() != 0) {
         confirmed = 1;
-    u32 index = flaggedValueHolderGetTotal(&menu->categories[menu->category].selection);
-    const EquipmentChoice *choice = &menu->choices[menu->category].choices[index];
-    bool eligible = true;
-    if (menu->category != 8) {
-        u32 limit = shopGetEntryPrice(choice);
-        eligible = btlRollClamped(choice->id, limit) != 0;
     }
-    if (eligible && confirmed) {
+    if (canBuyItem(selectedItem()) && confirmed != 0) {
         sendEvent100020E();
-        shopEnterQuantitySelection((Obj536044 *)menu, 12);
+        shopEnterQuantitySelection(this, 12);
         return;
     }
-    if (inputIsQuestMenuPressed()) {
-        menu->closeRequest = 0;
+    if (inputIsQuestMenuPressed() != 0) {
+        cleared[2] = 0;
         FUN_0038b010(0);
         sendEvent100020F();
-        uiSpriteBankApplyPreset(&menu->bank, 1);
+        uiSpriteBankApplyPreset(&animation, 1);
         obj04Finish();
-        releaseEntriesB(menu->releaseHandle);
-        releaseEntriesA(menu->releaseState);
-        for (s32 i = 0; i < menu->touchCount; ++i)
+        releaseEntriesB((CountAt5A *)view);
+        releaseEntriesA((CountAt30 *)touchSelection);
+        for (s32 i = 0; i < touchRegionCount; i++) {
             ifTouchRegionRemove();
-        menu->phase = 1;
+        }
+        substate = 1;
         return;
     }
-    if (inputIsQuestCancelPressed()) {
+    if (inputIsQuestCancelPressed() != 0) {
         sendEvent100020E();
-        menuOpenCommandList(menu);
+        menuOpenCommandList(this);
     }
-}
 }

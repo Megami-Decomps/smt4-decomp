@@ -1,4 +1,5 @@
-/* NON_MATCHING: close: retail loads the target position as x then a y/z vldmia pair and moves r0/-1 after the prologue vpush; built groups the VFP loads differently and uses r0 rather than r1 for the list counters */
+/* NON_MATCHING: retail keeps &target->position in r0 from the distance to the sound start (loading x, then y/z with
+ * vldmia) and holds the distance in r1; the build reloads the position and uses r0 (64 lines). */
 #include <stdio.h>
 #include "gamedata/MapSaveBlock.h"
 #include "map/LmapGlobals.h"
@@ -38,18 +39,17 @@ struct TalkTargetList {
     /* 0x18 */ TalkTarget *targets[32];
 };
 
-/* Straight-line distance between two map positions. */
-static __inline f32 mapVectorDistance(const MapVector &a, const MapVector &b)
+/* Straight-line distance between two map positions: nn::math's VEC3Dist header inline (the length of
+ * VEC3Sub, map/MapVector.h's mapVectorSub). */
+static __inline f32 mapVectorDistance(MapVector a, const MapVector &b)
 {
-    f32 dx = a.x - b.x;
-    f32 dy = a.y - b.y;
-    f32 dz = a.z - b.z;
+    MapVector d = mapVectorSub(a, b);
 
-    return sqrtf(dx * dx + dy * dy + dz * dz);
+    return sqrtf(d.x * d.x + d.y * d.y + d.z * d.z);
 }
 
 extern "C" {
-void mapSetActiveEntryId(u16 value);
+void mapSetActiveEntryId(s32 value);
 void sequenceRequestDefer(s32 id, s32 argument);
 
 /* Picks the nearest interactable within 150 units of the camera, runs its talk or event action and

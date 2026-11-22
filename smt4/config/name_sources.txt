@@ -6031,3 +6031,25 @@
 003ae418 btlUiReserveActionSlot inferred reserves a screen-space action slot and marks the owner complete when the UI is already closing; twin of smt4a FUN_004a9d68
 0033be90 skillRollRandomMutatedSkill inferred twin of smt4a FUN_003f36a4: a random learnable skill of a rank shifted -2..+2 from a source skill
 003cfc84 btlEnemyGroupColorTransitionStep inferred queues the enemy group's timed colour transition at frames 20/30 and reports when the mode's wait is over; twin of smt4a FUN_004e753c
+0010e5e0 messageSetAdvancePoll inferred stores the message windows' advance-page poll (g_asdTextDefaults+0x28); messageInitializeDisplay installs messageAdvanceInputForBox with it
+0010ec70 messageSetSkipPoll inferred stores the message windows' skip-line poll (g_asdTextDefaults+0x24)
+00124324 messageWindowUpdate inferred per-frame message window update (polls the advance callback); twin of smt4a FUN_001624b8
+002a78c0 soundArchiveLoaderReadFile inferred nw::snd SoundArchiveLoader::ReadFile shape: reads a file of the sound archive in chunks
+002cac54 staffRollCreate inferred creates the staff roll (StaffRoll/StaffRollMain); twin of smt4a FUN_0032b688
+002852f0 mazeLayoutGrid inferred lays out the maze map grid
+0026413c mapCameraUpdateTurn inferred steps the map camera's turn toward its target heading
+0026ea5c statusCameraBuildAxisPlane inferred builds the status camera's three corner vectors; exact twin smt4a FUN_00237438
+002a353c effectTimelinePartApplyTint inferred exact twin smt4a FUN_001b4c1c
+0028e6d0 messageWindowOpen inferred opens a message window
+00274fac mapGimicUpdate inferred per-frame update of the map gimics (g_mapGimic)
+003984ac stateSetterConstruct inferred same source as smt4a stateSetterConstruct (wave 68)
+0010c350 asdSoundReleaseAllSlots inferred twin of smt4a FUN_00141b24
+00334e18 appUnlockFreeApps inferred unlocks the gauntlet apps whose purchase requirements are met at no cost
+003a66c4 fieldWalkRecoverHp inferred recovers HP while walking, by a base percentage
+003a6988 fieldWalkRecoverMp inferred recovers MP while walking, by a base percentage
+0033a144 btlHistoryStoreActionValues inferred stores the acting combatant's values into the battle history
+00230c1c shopAffordableCount inferred how many of an item the player can pay for and still hold (money / price, 0-99, stack room)
+001e1540 fusionComparePairsByParentPriorityAscending inferred ascending sibling of fusionComparePairsByParentPriorityDescending
+00219148 skillListCompareBySortKeyAndUnit inferred near twin of smt4a FUN_002fd824
+00464d6c DAT_00464d6c inferred lies inside g_asdTextDefaults (its skip and advance polls at +0x24/+0x28)
+00464d48 g_asdTextDefaults inferred size:0x34 sizeof(AsdTextDefaults), asserted in TextDefaults.h

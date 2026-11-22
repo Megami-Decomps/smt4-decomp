@@ -125,7 +125,7 @@ int clearFlags310To31F(void);
 int FUN_00273f90(void);
 int lmapUpdateSceneModels(void);
 int FUN_00274798(void);
-int FUN_00274fac(void);
+int mapGimicUpdate(void);
 int FUN_0027522c(void);
 int FUN_00275364(void);
 int mapRangeUpdateModelVisibilityAndTransforms(void);
@@ -527,7 +527,7 @@ extern char *campGetState(void);
 /* Supplied declaration required: FUN_00273f90. */
 /* Supplied declaration required: lmapUpdateSceneModels. */
 /* Supplied declaration required: FUN_00274798. */
-/* Supplied declaration required: FUN_00274fac. */
+/* Supplied declaration required: mapGimicUpdate. */
 /* Supplied declaration required: FUN_0027522c. */
 /* Supplied declaration required: FUN_00275364. */
 /* Supplied declaration required: mapRangeUpdateModelVisibilityAndTransforms. */
@@ -3002,7 +3002,7 @@ LAB_001bb1d4:
     mapRangeUpdateModelVisibilityAndTransforms();
     FUN_00275364();
     FUN_0027522c();
-    FUN_00274fac();
+    mapGimicUpdate();
     FUN_00274798();
     *(unsigned char *)(g_mapDepartWork + 10) = 1;
     mapDepartSyncModelVisibility();

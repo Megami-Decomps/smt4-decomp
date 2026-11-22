@@ -13,7 +13,7 @@ int eventDispatch(...);
 int effectEditorApplyHandlerState(void);
 int resourceQueueDeferredDestroy(...);
 int effectNodeUpdateTransform(...);
-int FUN_002a353c(...);
+int effectTimelinePartApplyTint(...);
 int effectParticleEmitterSetAdvance(...);
 int effectTimelinePartApplyRotation(void);
 int skelNodePoseChain(...);
@@ -111,7 +111,7 @@ extern unsigned char *FUN_0024dd90(void);
 /* Supplied declaration required: resourceQueueDeferredDestroy. */
 /* Supplied declaration required: registrationEntryInsert. */
 /* Supplied declaration required: effectNodeUpdateTransform. */
-/* Supplied declaration required: FUN_002a353c. */
+/* Supplied declaration required: effectTimelinePartApplyTint. */
 /* Supplied declaration required: effectParticleEmitterSetAdvance. */
 /* Supplied declaration required: effectTimelinePartApplyRotation. */
 /* Supplied declaration required: skelNodePoseChain. */
@@ -556,7 +556,7 @@ LAB_002fd1c8:
       effectTimelinePartApplyRotation();
       skelNodePoseChain(DAT_0044ea90,&g_effectEditorInitialVector);
       effectParticleEmitterSetAdvance(DAT_0044ea90);
-      FUN_002a353c(DAT_0044ea90,g_effectEditorWorkingSnapshot.parameters.value);
+      effectTimelinePartApplyTint(DAT_0044ea90,g_effectEditorWorkingSnapshot.parameters.value);
     }
   }
   else {

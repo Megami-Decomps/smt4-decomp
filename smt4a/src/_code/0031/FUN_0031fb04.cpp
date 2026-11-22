@@ -125,7 +125,7 @@ extern "C" void FUN_0031fb04(void)
     unite->stackRegion = NULL;
     asdMemFree(unite->threadStack);
     unite->threadStack = NULL;
-    gameCounterAddSaturating(0x25, FUN_002e50d4() - unite->startTime);
+    gameCounterAddSaturating(0x25, saveBlockGetPlaySeconds() - unite->startTime);
     if (unite->registered != 0) {
         resourceOwnerReleaseAndReset(g_handleRegistry);
     }

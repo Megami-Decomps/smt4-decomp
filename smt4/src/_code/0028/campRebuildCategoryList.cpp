@@ -26,7 +26,7 @@ extern int btlDevilCompareRankAndOrder(...); /* 0x207054 */
 extern int FUN_00207094(...); /* 0x207094 */
 extern int table08IdCompareRankThenCategory(...); /* 0x2070e0 */
 extern int FUN_002190e4(...); /* 0x2190e4 */
-extern int FUN_00219148(...); /* 0x219148 */
+extern int skillListCompareBySortKeyAndUnit(...); /* 0x219148 */
 extern int FUN_00219208(...); /* 0x219208 */
 extern int dataTable08CompareSecondaryKeyAscending(...); /* 0x2194dc */
 extern int FUN_00219530(...); /* 0x219530 */
@@ -161,7 +161,7 @@ void campRebuildCategoryList(int param_1)
         return;
       }
       temp_v2 = gridNavigationGetItemCount(temp_v3);
-      arraySortQsort(temp_v1,temp_v2,8,FUN_00219148);
+      arraySortQsort(temp_v1,temp_v2,8,skillListCompareBySortKeyAndUnit);
       return;
     }
     break;

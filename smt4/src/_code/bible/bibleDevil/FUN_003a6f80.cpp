@@ -1,4 +1,5 @@
-/* NON_MATCHING: register allocation and stack spill placement differ (retail spills the touch-panel pointer and keeps the entry base in r6 inside the select arm); the 0x500 block, the ready getter and the tail call to releaseEntriesA now match. */
+/* NON_MATCHING: retail shares the record buffer's stack slot with the spilled touch-panel pointer (a 0x610 frame, ip
+ * pushed as padding) and keeps the 0x500 block in r5 through the confirm arm (58 lines). */
 #include "common.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include "status/StatusCamera.h"
@@ -19,10 +20,10 @@ typedef struct DevilListInput {
     /* 0x594 */ u8 unk594[0xC];
     /* 0x5A0 */ u32 script;
     /* 0x5A4 */ u8 previewEnabled;
-    /* 0x5A5 */ u8 previewMode;
+    /* 0x5A5 */ s8 previewMode;
     /* 0x5A6 */ u8 unk5a6;
     /* 0x5A7 */ u8 previewShown;
-    /* 0x5A8 */ struct {
+    /* 0x5A8 */ struct DevilListRow {
         u8 unk00[4];
         u16 id;
         u8 unk06[0x1A];
@@ -39,7 +40,7 @@ typedef struct DevilListBlock {
 
 typedef struct DevilListInputView {
     u8 unk0000[0xA5B4];
-    u16 targetId;
+    s16 targetId;
 } DevilListInputView;
 
 extern u32 g_bibleDevilCallbackContext[];
@@ -69,6 +70,12 @@ u32 partyMemberFindById(u16 id);
 void FUN_0029da34(s32 a, s32 b, u16 id, const void *record);
 void unitInitializeFromSavedRecord(u16 id, void *record);
 
+/* The id of a row of the list. */
+static __inline u16 devilListRowGetId(const DevilListInput::DevilListRow *row)
+{
+    return row->id;
+}
+
 /* Handles the input of the devil list's preview screen: leaving to the map, opening the entry
  * (name and race to the text slots, then its script), the menu button (to the room), the confirm
  * button (toggles the preview kind) and the cancel button. */
@@ -91,7 +98,11 @@ void FUN_003a6f80(DevilListInput *work)
     if (gameGetNavigationState() != 0) {
         work->mode = 9;
         work->step = 0;
-        ((DevilListInputView *)work)->targetId = gameGetFlagByte12e8() == 1 ? 1 : 5;
+        if (gameGetFlagByte12e8() == 1) {
+            ((DevilListInputView *)work)->targetId = 1;
+        } else {
+            ((DevilListInputView *)work)->targetId = 5;
+        }
         FUN_00233240((u8 *)work + 0xDC, ((DevilListInputView *)work)->targetId);
         if (block->previewEnabled == 0) {
             messageDismissNumericBanner(1);
@@ -100,8 +111,9 @@ void FUN_003a6f80(DevilListInput *work)
         releaseEntriesA(work->touchPanel);
         return;
     }
+    DevilListInput::DevilListRow *rows = work->rows;
     if (select != 0) {
-        u32 id = work->rows[flaggedValueHolderGetTotal(work->cursor)].id;
+        u32 id = devilListRowGetId(&rows[flaggedValueHolderGetTotal(work->cursor)]);
         u8 record[0x610];
 
         libc_strcpy(reinterpret_cast<unsigned int *>(record), reinterpret_cast<unsigned int *>((u32)dataTable01FindByIdWithAoc(id)));
@@ -137,15 +149,15 @@ void FUN_003a6f80(DevilListInput *work)
             FUN_002328b4();
             work->previewShown = 1;
             buttonHelpSetPreset(work->previewMode == 1 ? 0x4C : 0x4D);
-            u16 id = work->rows[flaggedValueHolderGetTotal(work->cursor)].id;
+            s16 id = devilListRowGetId(&rows[flaggedValueHolderGetTotal(work->cursor)]);
 
             if (work->previewMode == 1) {
                 FUN_0029da34(0, 1, id, (const void *)partyMemberFindById(id));
-                return;
+            } else {
+                u8 record[0x610];
+                unitInitializeFromSavedRecord(id, record);
+                FUN_0029da34(0, 1, id, record);
             }
-            u8 record[0x610];
-            unitInitializeFromSavedRecord(id, record);
-            FUN_0029da34(0, 1, id, record);
             return;
         }
         if (cancel != 0) {

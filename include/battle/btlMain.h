@@ -777,7 +777,7 @@ typedef struct BtlMainGlobalsA {
         } resident;
         struct {
             u8 unk28[0x28];
-            /* 0x50 */ s32 forcedUnitId; /* the unit the initial party forces (FUN_003e854c) */
+            /* 0x50 */ s32 forcedUnitId; /* the unit the initial party forces (battleInitializeEnemyFormation) */
         } initialParty;
     };
     /* 0x60 */ u64 actorCategories[4];
