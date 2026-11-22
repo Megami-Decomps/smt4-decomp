@@ -12,7 +12,7 @@ int uiObjectSetColorRgb(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int FUN_00169a1c(...);
-int statRowDrawValueImpl(...);
+int numberFontDrawFormatted(...);
 
 int gxResetColorQuadToWhite(void);
 int nkmBaseGetRecord(void);
@@ -39,7 +39,7 @@ extern int g_campCecRanking; /* 0x57f11c */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00169a1c. */
-/* Supplied declaration required: statRowDrawValueImpl. */
+/* Supplied declaration required: numberFontDrawFormatted. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: nkmBaseGetRecord. */
@@ -190,7 +190,7 @@ int FUN_002bfd94(void)
             temp_v1 = *(short *)(temp_v9 + 10);
             drawSetColorFromRGBA8(0xffffffff);
             sprintf((char *)temp_v14,"%d",temp_v18);
-            statRowDrawValueImpl(6,temp_v4 + temp_v0 + temp_v8,temp_v3 + temp_v1 + temp_v5,1,3,0x65,temp_v14);
+            numberFontDrawFormatted(6,temp_v4 + temp_v0 + temp_v8,temp_v3 + temp_v1 + temp_v5,1,3,0x65,temp_v14);
             gxResetColorQuadToWhite();
           }
           temp_v7 = temp_v7 + 1;

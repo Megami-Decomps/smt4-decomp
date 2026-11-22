@@ -29,7 +29,7 @@ int FUN_002e23c0(EffectOwner *owner, u32 colorA, u32 fade, u32 colorB);
 int FUN_00340334(EffectOwner *owner, u32 a, u32 b, u32 c, u32 d, s32 e, s32 f, f32 scale);
 
 extern u32 DAT_00439cf8;
-extern u8 DAT_00439ce0;
+extern u8 g_btlColorDefaults;
 extern u8 DAT_00439ce1;
 extern u8 DAT_00439ce2;
 
@@ -50,7 +50,7 @@ void FUN_003c7cf0(EffectOwner *owner, s32 id, s32 sub)
             s32 level = strength / 255;
             DAT_00439cf8 = (level << 24) + ((strength / 255) << 16) + ((strength / 255) << 8) + 0xFF;
             u8 tint = owner->records[i].tint;
-            DAT_00439ce0 = (s16)tint * 199 / 255;
+            g_btlColorDefaults = (s16)tint * 199 / 255;
             DAT_00439ce1 = (s16)tint * 150 / 255;
             DAT_00439ce2 = tint * 36 / 255;
             return;

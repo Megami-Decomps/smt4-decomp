@@ -1,4 +1,6 @@
-/* NON_MATCHING: retail inlines SVC 0x23; the normal svcCloseHandle call preserves behavior without banned syscall intrinsics. */
+/* NON_MATCHING: 181 lines: retail reads the file handle before allocating the adapter (stored with one stm), tests the
+ * open/attach status as nn::Result locals (and #0x80000000; cmp; bge), spills `first`/`second` to the frame and keeps the
+ * three stack arguments in r8-sl where the build moves them through s16-s18. */
 #include "shard/W6_W6Match2_HandleRequest.h"
 #include "shard/W6_W6Match7_UnitHeapModule.h"
 #include "nn/Result.h"
@@ -89,30 +91,33 @@ extern "C" u32 titleContentStreamCreate(u32 *output, const HandleRequest *reques
                 &session, &fileHandle, 0, 0x2345678a,
                 2, &archivePath, sizeof(archivePath), 2, &contentPath, sizeof(contentPath), 1, 0);
             if (!nnResultIsFailure(static_cast<s32>(status))) {
-                DirectFileAdapter *adapter = static_cast<DirectFileAdapter *>(
+                DirectFileAdapter *adapter = new (
                     nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(
-                        &g_titleContentAdapterHeap));
+                        &g_titleContentAdapterHeap)) DirectFileAdapter(fileHandle);
                 if (adapter != NULL) {
-                    new (adapter) DirectFileAdapter(fileHandle);
-                    status = FUN_00138f14(stream, adapter, first, second, third, fourth, fifth);
-                    if (nnResultIsFailure(static_cast<s32>(status)))
+                    u32 attached = FUN_00138f14(stream, adapter, first, second, third, fourth, fifth);
+                    if (nnResultIsFailure(static_cast<s32>(attached))) {
                         adapter->vtable->destroy(adapter);
+                        status = attached;
+                    } else {
+                        status = 0;
+                    }
                 } else {
                     svcCloseHandle(fileHandle);
                     status = outOfMemory;
                 }
             }
-            if (nnResultIsFailure(static_cast<s32>(status))) {
-                stream->vtable->destroy(stream);
-            } else {
+            if (!nnResultIsFailure(static_cast<s32>(status))) {
                 result = stream;
                 status = 0;
+            } else {
+                stream->vtable->destroy(stream);
             }
         }
     }
-    if (!nnResultIsFailure(static_cast<s32>(status))) {
-        *output = reinterpret_cast<u32>(result);
-        return 0;
+    if (nnResultIsFailure(static_cast<s32>(status))) {
+        return status;
     }
-    return status;
+    *output = reinterpret_cast<u32>(result);
+    return 0;
 }

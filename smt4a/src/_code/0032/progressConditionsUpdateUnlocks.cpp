@@ -1,6 +1,6 @@
-/* NON_MATCHING: retail tail-merges the twelve countersGetB calls (each case only sets r0, one shared bl) and keeps the minimum compare after the switch; armcc here emits one call per case. The save-byte pointer and bit index now match. */
 #include "gamedata/CampCecTable.h"
 #include "shard/Shard003D.h"
+#include "shard/ProgressUnlock.h"
 #include "gamedata/GameDataAccess_VariantG.h"
 #include "gamedata/GameDataAccess.h"
 
@@ -11,17 +11,14 @@ u32 countersGetB(s32);
 s32 FUN_003dfe88();
 s32 FUN_003dfd44();
 
+/* Earns every title whose required flag is set and whose play counter has reached its minimum,
+ * marking it earned and pending in the save. */
 void progressConditionsUpdateUnlocks()
 {
     countersRecordPlayerMaxima();
     s32 count = campCecCount();
     for (s32 index = 0; index < count; ++index) {
-        s32 byte = index / 8;
-        s32 bit = index % 8;
-        GameBlock2830C *save = reinterpret_cast<GameBlock2830C *>(gameDataBlocksGetSaveData());
-        u8 *earned = &save->unlocks.earned[byte];
-        u32 bits = *earned;
-        if (bits & (1u << bit))
+        if (unlockBitIsEarned(index))
             continue;
         CampCecRecord *entry = &campCecRecords()[index];
         if (entry == NULL)
@@ -31,10 +28,11 @@ void progressConditionsUpdateUnlocks()
             allowed = false;
         u16 counter = entry->counter;
         if (counter != 0) {
-            u32 value = 0;
             if (counter < 0x40) {
-                value = countersGetA((u8)counter);
+                if (countersGetA((u8)counter) < entry->minimum)
+                    continue;
             } else {
+                u32 value = 0;
                 switch ((u8)counter) {
                 case 0x40: value = countersGetB(0x27); break;
                 case 0x41: value = countersGetB(9); break;
@@ -51,16 +49,14 @@ void progressConditionsUpdateUnlocks()
                 case 0x4c: value = FUN_003dfe88(); break;
                 case 0x4d: value = FUN_003dfd44(); break;
                 }
+                if (value < entry->minimum)
+                    continue;
             }
-            if (value < entry->minimum)
-                continue;
         }
         if (allowed) {
-            save = reinterpret_cast<GameBlock2830C *>(gameDataBlocksGetSaveData());
-            save->unlocks.earned[byte] |= 1u << bit;
-            save = reinterpret_cast<GameBlock2830C *>(gameDataBlocksGetSaveData());
-            save->unlocks.pending[byte] |= 1u << bit;
+            unlockBitSetEarned(index);
+            unlockBitSetPending(index);
         }
     }
 }
-}
+} /* extern "C" */

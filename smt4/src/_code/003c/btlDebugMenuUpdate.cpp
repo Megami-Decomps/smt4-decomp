@@ -76,7 +76,7 @@ extern const char btlDebugMenuTitle[];
 extern u32 DAT_00435dc0;
 extern u32 DAT_00435dd8;
 extern u32 DAT_00439ce8;
-extern u8 DAT_00439ce0;
+extern u8 g_btlColorDefaults;
 extern u8 DAT_00439ce1;
 extern u8 DAT_00439ce2;
 extern u8 DAT_00439ce3;
@@ -438,7 +438,7 @@ u32 btlDebugMenuUpdate(DebugMenu *menu, DebugBattle *battle)
             } while (index < 0x6d);
             break;
         case 4:
-            DAT_00439ce0 = *asdListBoxGetItemValuePtr(menu->listBox, 4);
+            g_btlColorDefaults = *asdListBoxGetItemValuePtr(menu->listBox, 4);
             break;
         case 5:
             DAT_00439ce1 = *asdListBoxGetItemValuePtr(menu->listBox, 5);

@@ -6,14 +6,14 @@
 #include <stddef.h>
 
 /* A position on a screen, copied as a whole. */
-typedef struct ScreenPoint {
+typedef struct ScreenPointF {
     /* 0x00 */ f32 x;
     /* 0x04 */ f32 y;
-} ScreenPoint;
+} ScreenPointF;
 
 /* A world point projected to a screen: the screen position and the view-space depth. */
 typedef struct ProjectedPoint {
-    /* 0x00 */ ScreenPoint screen;
+    /* 0x00 */ ScreenPointF screen;
     /* 0x08 */ f32 depth;
 } ProjectedPoint;
 
@@ -21,7 +21,7 @@ class TargetMarkerEntry {
 public:
     TargetMarkerEntry();
 
-    /* 0x00 */ ScreenPoint screen;  /* where the target is drawn */
+    /* 0x00 */ ScreenPointF screen;  /* where the target is drawn */
     /* 0x08 */ u8 registered;       /* the demon, or one it links to, is registered */
     /* 0x09 */ u8 status[6];        /* per-target display flags the battle passes in */
     /* 0x0F */ u8 visible;

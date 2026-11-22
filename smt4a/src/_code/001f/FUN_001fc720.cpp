@@ -18,7 +18,7 @@ int FUN_00288b20(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(...);
-int statRowDrawValueImpl(...);
+int numberFontDrawFormatted(...);
 int FUN_00185e84(...);
 int skillDataFindById(void);
 int statusDownDrawIndicatorPairs(int, int);
@@ -61,7 +61,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: statRowDrawValueImpl. */
+/* Supplied declaration required: numberFontDrawFormatted. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: FUN_00185e84. */
@@ -333,7 +333,7 @@ LAB_001fca00:
         texDrawCompositeSprite(2,0x12,7,*(short *)(temp_v8 + 8) + temp_v29,*(short *)(temp_v8 + 10) + param_2,
                      0xb5);
         temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x413));
-        statRowDrawValueImpl(0,(int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v29,
+        numberFontDrawFormatted(0,(int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v29,
                      (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v7 + 10) + param_2,1,4,0xba,
                      "%d",temp_v27);
       }
@@ -499,7 +499,7 @@ LAB_001fd80c:
                 }
                 temp_v14 = skillGetAdjustedCost(temp_v19,*(unsigned short *)(temp_v25 + 0xbc));
                 temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x508));
-                statRowDrawValueImpl(0,(int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v7 + 8) + param_1,
+                numberFontDrawFormatted(0,(int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v7 + 8) + param_1,
                              (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v12 + 10) + param_2,1
                              ,4,0xc9,"%d",temp_v14);
               }
@@ -528,7 +528,7 @@ LAB_001fd80c:
                 textDrawString(2,0xffffffff,temp_v20);
                 temp_v14 = skillGetAdjustedCost(temp_v19,*(unsigned short *)(temp_v25 + 0xbc));
                 temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x4fb));
-                statRowDrawValueImpl(0,*(short *)(temp_v12 + 8) + temp_v17,*(short *)(temp_v12 + 10) + param_2,1,4
+                numberFontDrawFormatted(0,*(short *)(temp_v12 + 8) + temp_v17,*(short *)(temp_v12 + 10) + param_2,1,4
                              ,0xc9,"%d",temp_v14);
               }
             }
@@ -631,7 +631,7 @@ LAB_001fcee8:
     temp_v14 = skillGetAdjustedCost(temp_v19,*(unsigned int *)(temp_v2 + 0x658));
     texDrawCompositeSprite(2,0x12,7,*(short *)(temp_v3 + 8) + temp_v12,*(short *)(temp_v3 + 10) + param_2,0xb5);
     temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x413));
-    statRowDrawValueImpl(0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v12,
+    numberFontDrawFormatted(0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v12,
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v11 + 10) + param_2,1,4,0xba,
                  "%d",temp_v14);
   }

@@ -23,7 +23,7 @@ enum {
 /* Sine and cosine of an angle (radians) by linear interpolation of the 256-entry table. */
 static void sinCosFromTable(f32 radians, f32 *sine, f32 *cosine)
 {
-    f32 scaled = radians * 40.764328f;
+    f32 scaled = radians * 40.743664f;
     f32 magnitude = scaled < 0.0f ? -scaled : scaled;
 
     while (magnitude >= (f32)SIN_COS_WRAP) {
@@ -77,7 +77,7 @@ void FUN_003136e4(f32 angle, f32 distance)
 
     if (g_gameState.unk3A3 != 0) {
         if (g_gameState.mapId == 38 && g_gameState.areaId == 3) {
-            sinCosFromTable(0.29656f, &sinY, &cosY);
+            sinCosFromTable(0.296706f, &sinY, &cosY);
             rotationFromSinCos(&matrix, sinX, cosX, sinY, cosY, sinX, cosX);
             nn_math_ARMv6_MTX34CopyAsm(&applied, &matrix);
             eplSlotApplyParameters(0, &applied);

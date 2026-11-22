@@ -3,7 +3,7 @@
 
 extern "C" {
 void FUN_001a1f7c(s32);
-s32 FUN_001edcf0(void);
+s32 saveLoadConfirmScriptStep(void);
 void saveLoadThreadRequestInit(s32, s32, s32, s32, s32);
 void buttonHelpTexturesUnref(void);
 void buttonHelpCreate(void);
@@ -27,7 +27,7 @@ u32 saveLoadProcessBootUpdate(u32 job)
         work->state = 9;
         break;
     case 9:
-        if (FUN_001edcf0() == 1) {
+        if (saveLoadConfirmScriptStep() == 1) {
             work->state = 10;
         } else {
             ++g_byteSettings.flags;

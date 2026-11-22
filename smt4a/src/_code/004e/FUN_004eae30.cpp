@@ -7,7 +7,7 @@ extern "C" {
 
 int btlTargetSelectSetMode(...);
 int btlTargetSelectSetEntry(...);
-int FUN_00368e10(...);
+int btlTargetSelectSetInfoPanel(...);
 int btlGetCombatantDrawPosition(...);
 int btlEntryBuildSummary(...);
 int btlMainFindEntryByListedId(...);
@@ -41,7 +41,7 @@ extern unsigned int DAT_0057116c; /* 0x57116c */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: btlTargetSelectSetMode. */
 /* Supplied declaration required: btlTargetSelectSetEntry. */
-/* Supplied declaration required: FUN_00368e10. */
+/* Supplied declaration required: btlTargetSelectSetInfoPanel. */
 /* Supplied declaration required: btlGetCombatantDrawPosition. */
 /* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
@@ -165,7 +165,7 @@ void FUN_004eae30(unsigned int *param_1,int param_2,int param_3,int param_4)
     temp_v9 = (*(unsigned short *)(temp_v1 + 0x274) & 0x10) >> 4;
     temp_v10 = temp_v3;
     temp_v11[0] = temp_v1;
-    FUN_00368e10(temp_v12,*(unsigned short *)(temp_v1 + 0x166),temp_v4,temp_v11[2],temp_v6,temp_v8);
+    btlTargetSelectSetInfoPanel(temp_v12,*(unsigned short *)(temp_v1 + 0x166),temp_v4,temp_v11[2],temp_v6,temp_v8);
     temp_v2 = 1;
   }
   else {

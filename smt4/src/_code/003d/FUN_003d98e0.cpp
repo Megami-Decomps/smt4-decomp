@@ -23,7 +23,7 @@ typedef struct EffectOwner {
 
 s32 FUN_001c2b48(u32 effect);
 s32 FUN_00224ab0(f32 *value, s32 index, u32 arg);
-void FUN_003947cc(u32 handle, s32 zero, s32 kind, Vec3 position);
+void btlEffectSetStartByName(u32 handle, s32 zero, s32 kind, Vec3 position);
 Vec3 FUN_003dd680(EffectOwner *owner, s32 kind, u32 arg, s32 index);
 
 /* Returns the first unused slot of the owner's slot list, or NULL when all are taken. */
@@ -70,7 +70,7 @@ u32 FUN_003d98e0(EffectOwner *owner, u32 effect, u32 arg, s32 index, u32 indexAr
     position.x += origin.x;
     position.y += origin.y;
     u32 *slot = findFreeSlot(owner);
-    FUN_003947cc(target, 0, kind, position);
+    btlEffectSetStartByName(target, 0, kind, position);
     if (kind == 2 || kind == 5 || kind == 7 || kind == 8 || kind == 9 || kind == 12) {
         return registerHandle(owner, reinterpret_cast<u32>(spatialEffectTaskCreate(effect, slot, position.x, position.y, position.z, 1.0f, 1, 3)));
     }

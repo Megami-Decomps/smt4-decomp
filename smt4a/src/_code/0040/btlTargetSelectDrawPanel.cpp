@@ -12,7 +12,7 @@ int efctSetSpeed(void);
 int renderPopStateStacks(void);
 int FUN_00168e00(int, int, int, int);
 int gxResetUniformQuadColorsAndScale(void);
-int statRowDrawValueImpl(...);
+int numberFontDrawFormatted(...);
 int renderCtxCalculateStereoParallax(int);
 int FUN_003d3020(int, int, int);
 int drawFacingElbowSegments(int, float *, float *, unsigned int, int);
@@ -43,7 +43,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: renderPopStateStacks. */
 /* Supplied declaration required: FUN_00168e00. */
 /* Supplied declaration required: gxResetUniformQuadColorsAndScale. */
-/* Supplied declaration required: statRowDrawValueImpl. */
+/* Supplied declaration required: numberFontDrawFormatted. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_003d3020. */
 /* Supplied declaration required: drawFacingElbowSegments. */
@@ -164,7 +164,7 @@ void btlTargetSelectDrawPanel(int param_1)
   }
   efctSetSpeed();
   temp_v13 = (float)VectorSignedToFloat((int)temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
-  statRowDrawValueImpl(0,(int)(*(float *)(param_1 + 0x80) + (float)((unsigned long long)temp_v12 >> 0x20) + temp_v13),
+  numberFontDrawFormatted(0,(int)(*(float *)(param_1 + 0x80) + (float)((unsigned long long)temp_v12 >> 0x20) + temp_v13),
                (int)(*(float *)(param_1 + 0x84) + (float)((unsigned long long)temp_v9 >> 0x20)),1,
                *(unsigned int *)(param_1 + 0xf0),0x42,"%d",*(unsigned int *)(param_1 + 0x28));
   temp_v13 = (float)VectorSignedToFloat((int)temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);

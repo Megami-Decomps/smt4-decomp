@@ -16,7 +16,7 @@
 #include "ui/AnimatedMessage.h"
 
 extern "C" {
-void statRowDrawValueImpl(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
+void numberFontDrawFormatted(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
 void FUN_00185e84(s16 id, s32 x, s32 y, u32 layer, u32 a, u32 b);
 void statDrawClampedDelta(SlotRecordA *record, s16 id, s32 x, s32 y, u32 layer, u32 a);
 
@@ -67,7 +67,7 @@ void skillScreenDrawCandidateRow(UniteWorkA *work, SlotRecordA *record, s32 x, s
     statDrawClampedDelta(record, work->inheritanceA.skills[index], frame->x + part->x + x, frame->y + part->y + y, 0x8d, 0);
     if (filled) {
         part = asdTMTexTableEntryAt(0x1a, 0x1a6);
-        statRowDrawValueImpl(1, frame->x + part->x + x, frame->y + part->y + y, 1, 4, 0x8d, "%d", skillGetAdjustedCost(record, work->inheritanceA.skills[index]));
+        numberFontDrawFormatted(1, frame->x + part->x + x, frame->y + part->y + y, 1, 4, 0x8d, "%d", skillGetAdjustedCost(record, work->inheritanceA.skills[index]));
     } else {
         /* Retail still looks up the empty row's cost entry and draws nothing with it. */
         asdTMTexTableEntryAt(0x1a, 0x19b);

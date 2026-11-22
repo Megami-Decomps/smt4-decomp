@@ -24,7 +24,7 @@ extern "C" {
 extern SoundStatusInit g_asdSoundStatus;
 extern s32 DAT_0044e90c;
 SoundThreadCallbackView *_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
-void FUN_001198a4(void);
+void asdWaveVoiceUpdateAll(void);
 
 /* Sets up the sound layer: its lock, the sound thread's per-frame callback, and marks it ready. */
 void FUN_0010dd80(void)
@@ -33,7 +33,7 @@ void FUN_0010dd80(void)
     SoundThreadCallbackView *thread = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
     thread->argument = 0;
     nn::os::DataMemoryBarrier();
-    thread->callback = FUN_001198a4;
+    thread->callback = asdWaveVoiceUpdateAll;
     g_asdSoundStatus.ready = 1;
     DAT_0044e90c = 20;
 }

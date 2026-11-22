@@ -8,7 +8,7 @@
 
 extern "C" {
 
-void statRowDrawValueImpl(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
+void numberFontDrawFormatted(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
 void FUN_00185e84(s16 id, s32 x, s32 y, u32 layer, u32 a, u32 b);
 void statDrawClampedDelta(u32 unit, s16 id, s32 x, s32 y, u32 layer, u32 a);
 void partyRecordSetEquippedItemClampRank(u32 unit, u16 id, s32 index);
@@ -43,7 +43,7 @@ void skillScreenDrawSlotRow(UniteWorkA *work, s32 index, u32 unit, s32 count, s3
     }
     statDrawClampedDelta(unit, work->inheritanceA.slots[index], part->x + x, part->y + y, 0x74, 0);
     part = asdTMTexTableEntryAt(0x1a, 0x17c);
-    statRowDrawValueImpl(1, part->x + x, part->y + y, 1, 4, 0x79, "%d", skillGetAdjustedCost(unit, work->inheritanceA.slots[index]));
+    numberFontDrawFormatted(1, part->x + x, part->y + y, 1, 4, 0x79, "%d", skillGetAdjustedCost(unit, work->inheritanceA.slots[index]));
 }
 
 } /* extern "C" */

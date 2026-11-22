@@ -19,7 +19,7 @@ int effectRenderTransformedInstance(...);
 int textDrawRangeFaded(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
-int statRowDrawValueImpl(...);
+int numberFontDrawFormatted(...);
 int renderCtxCalculateStereoParallax(...);
 int gameFlagBlockGet(void);
 int questDataGetRecord(void);
@@ -61,7 +61,7 @@ extern unsigned int dataTableGetNamePayload(unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int table01RecordLookupForContent(unsigned int);
-/* Supplied declaration required: statRowDrawValueImpl. */
+/* Supplied declaration required: numberFontDrawFormatted. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
@@ -266,7 +266,7 @@ void FUN_00218640(void)
       VectorSignedToFloat(*(short *)(temp_v13 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
       textDrawString(2,0xffffffff,temp_v27);
       temp_v12 = (int)temp_v18 + (int)temp_v16;
-      statRowDrawValueImpl(0,*(short *)(temp_v13 + 8) + temp_v4 + temp_v12 + 3,
+      numberFontDrawFormatted(0,*(short *)(temp_v13 + 8) + temp_v4 + temp_v12 + 3,
                    (temp_v5 - 1) + (int)*(short *)(temp_v13 + 10),0,7,0x6a);
       textFormatFullWidthNumber(temp_v28,*(unsigned int *)(temp_v19 + 0xf4));
       VectorSignedToFloat(*(short *)(temp_v13 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);

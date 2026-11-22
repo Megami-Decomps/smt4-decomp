@@ -10,7 +10,7 @@ extern "C" {
 int cameraProjectToScreen(unsigned int *, int, unsigned int);
 int uiStoreTextureEntryCenter(...); // declcheck: local (romwright prototype; its types do not fit ui/UiTexturePlacement.h: including it fails to compile)
 int FUN_002963ec(...);
-int FUN_003adca8(int, int, unsigned int);
+int btlUiStartNumberPopup(int, int, unsigned int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -29,7 +29,7 @@ extern int btlScriptUnitIsIncapacitated(void);
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern unsigned int asdCameraGetSavedRenderPairs(void);
-/* Supplied declaration required: FUN_003adca8. */
+/* Supplied declaration required: btlUiStartNumberPopup. */
 
 
 void FUN_00205cc8(int param_1)
@@ -122,7 +122,7 @@ LAB_00205ea4:
           temp_v10 = (unsigned int)*(unsigned char *)(temp_v3 + 0xca03);
           temp_v9 = (unsigned int)*(unsigned char *)(temp_v3 + 0xca02);
           temp_v11 = (int)*(char *)(temp_v3 + 0xc9f9);
-          FUN_003adca8(param_1,temp_v8,*(unsigned int *)(temp_v3 + 0xc9fc));
+          btlUiStartNumberPopup(param_1,temp_v8,*(unsigned int *)(temp_v3 + 0xc9fc));
           *(unsigned char *)(temp_v3 + 0xc9f8) = 0;
           pcVar8 = (char *)(temp_v7 + 0xd5ec);
           temp_v2 = *(char *)(temp_v7 + 0xd5ec) + '\x01';

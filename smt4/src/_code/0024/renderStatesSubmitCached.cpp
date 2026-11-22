@@ -1,4 +1,6 @@
-/* NON_MATCHING: cached-state array addressing, boolean mask lowering and command scratch registers differ. */
+/* NON_MATCHING: 181 lines: retail loads every command header from the pool (no 0xF0110/0xF0113 derived from their
+ * neighbours), rematerialises the invalidate block's 1, and builds the stencil bits as `mov rN, #1 ... moveq rN, #0`;
+ * the colour and depth stack reads, the late-inlined stack-top address forms and the statement order agree. */
 #include "title/titleMain.h"
 #include "shard/S1ListPanel.h"
 #include "camp/RenderCtxTitle.h"
@@ -8,44 +10,55 @@ extern u32 *g_modelCommandBuffer;
 extern u32 g_modelCommandWordCount;
 void cursorResetFromParam();
 void asdModelCommandBlockRelease();
+}
 
-void renderStatesSubmitCached(s32 synchronize)
+/* The current state of the title scene's render-state stack `kind` (four calls; plain static, inlined late:
+ * retail forms each stack address from the stack's own count offset). */
+static s32 sceneStackTop(s32 kind)
+{
+    return renderCtxStackTop(g_titleScene, kind);
+}
+
+extern "C" {
+/* Restores the colour and depth buffer access registers from the current render-state stacks. */
+void renderStatesSubmitCached(s32 invalidate)
 {
     cursorResetFromParam();
-    if (synchronize != 0) {
-        u32 *buffer = g_modelCommandBuffer;
-        buffer[g_modelCommandWordCount] = 1;
-        buffer[g_modelCommandWordCount + 1] = 0xF0111;
+    if (invalidate) {
+        u32 *commands = g_modelCommandBuffer;
+        commands[g_modelCommandWordCount] = 1;
+        commands[g_modelCommandWordCount + 1] = 0xF0111;
         g_modelCommandWordCount += 2;
-        buffer[g_modelCommandWordCount] = 1;
-        buffer[g_modelCommandWordCount + 1] = 0xF0110;
+        commands[g_modelCommandWordCount] = 1;
+        commands[g_modelCommandWordCount + 1] = 0xF0110;
         g_modelCommandWordCount += 2;
     }
-    u32 *buffer = g_modelCommandBuffer;
-    RenderCtx *scene = g_titleScene;
-    u32 colorState = scene->stacks[RENDER_STACK_G].entries[scene->stacks[RENDER_STACK_G].count] & 0xF00;
-    u32 colorAccess = colorState != 0 ? 0xF : 0;
-    buffer[g_modelCommandWordCount] = colorAccess;
-    buffer[g_modelCommandWordCount + 1] = 0xF0112;
+    u32 *commands = g_modelCommandBuffer;
+    u32 colorMask = sceneStackTop(RENDER_STACK_G) & 0xf00;
+    u32 colorRead = 0;
+    u32 colorWrite = 0;
+    if (colorMask) {
+        colorRead = 15;
+        colorWrite = 15;
+    }
+    commands[g_modelCommandWordCount] = colorRead;
+    commands[g_modelCommandWordCount + 1] = 0xF0112;
     g_modelCommandWordCount += 2;
-    buffer[g_modelCommandWordCount] = colorAccess;
-    buffer[g_modelCommandWordCount + 1] = 0xF0113;
+    commands[g_modelCommandWordCount] = colorWrite;
+    commands[g_modelCommandWordCount + 1] = 0xF0113;
     g_modelCommandWordCount += 2;
-    scene = g_titleScene;
-    u32 depthState = scene->stacks[RENDER_STACK_A].entries[scene->stacks[RENDER_STACK_A].count];
-    u32 testState = scene->stacks[RENDER_STACK_E].entries[scene->stacks[RENDER_STACK_E].count];
-    u32 enabledTests = (testState & 1) != 0 ? testState : 0;
-    u32 readAccess = ((enabledTests & 0x30) != 0 && (testState & 0xF0000000) != 0) |
-        (static_cast<u32>(colorState != 0 || (depthState & 0x1000) != 0) << 1);
-    buffer[g_modelCommandWordCount] = readAccess;
-    buffer[g_modelCommandWordCount + 1] = 0xF0114;
+    u32 rasterState = sceneStackTop(RENDER_STACK_A);
+    bool depthRead = colorMask || (rasterState & 0x1000);
+    u32 testState = sceneStackTop(RENDER_STACK_E);
+    bool stencilRead = ((testState & -(testState & 1)) & 0x30) && (testState & 0xf0000000);
+    commands[g_modelCommandWordCount] = (u32)stencilRead | ((u32)depthRead << 1);
+    commands[g_modelCommandWordCount + 1] = 0xF0114;
     g_modelCommandWordCount += 2;
-    scene = g_titleScene;
-    u32 writeMask = scene->stacks[RENDER_STACK_F].entries[scene->stacks[RENDER_STACK_F].count];
-    u32 writeAccess = ((enabledTests & 0xFF00) != 0 && writeMask != 0) |
-        (static_cast<u32>((depthState & 0x1000) != 0) << 1);
-    buffer[g_modelCommandWordCount] = writeAccess;
-    buffer[g_modelCommandWordCount + 1] = 0xF0115;
+    u32 writeMask = sceneStackTop(RENDER_STACK_F);
+    bool stencilWrite = ((testState & -(testState & 1)) & 0xff00) && writeMask;
+    bool depthWrite = (rasterState & 0x1000) != 0;
+    commands[g_modelCommandWordCount] = (u32)stencilWrite | ((u32)depthWrite << 1);
+    commands[g_modelCommandWordCount + 1] = 0xF0115;
     g_modelCommandWordCount += 2;
     asdModelCommandBlockRelease();
 }

@@ -1,6 +1,10 @@
-/* NON_MATCHING: recovered logic; retail re-reads marker fields after stores and keeps the -1 constant shared with the 0xffff compare, so register allocation and the fade arithmetic scheduling differ. */
+/* NON_MATCHING: 189 lines. The slot is read back after the search (retail reuses the value loaded before the loop
+ * when nothing was found) and the slot colours are one else-if chain. Remaining: retail materialises the -1 colour
+ * before the 0xffff key test, reloads the fade step after the colour change where this build forwards it, and
+ * schedules the four channel differences in another order. */
 #include "common.h"
 #include "battle/BtlEntryLookup.h"
+#include "classes/Obj4209d8.h"
 
 /* A unit marker that fades between slot colors. */
 struct BtlUnitMarker {
@@ -19,21 +23,13 @@ struct BtlUnitMarker {
     s32 slot;               // 0x94: selected slot
 };
 
-/* Marker fade settings. */
-struct BtlMarkerConfig {
-    u8 unk00[0xC];
-    s32 fadeSteps;          // 0x0C
-    u8 unk10[8];
-    u32 defaultColor;       // 0x18
-};
-
 extern "C" {
-extern BtlMarkerConfig DAT_00439ce0;
+extern Obj4209d8ColorDefaults g_btlColorDefaults;
 
 /* Fade a unit marker toward the color of its selected slot; cycle the slot once the fade has run. */
 void FUN_003c14e8(BtlMainState *battle, BtlUnitMarker *marker)
 {
-    s32 fadeSteps = DAT_00439ce0.fadeSteps;
+    s32 fadeSteps = g_btlColorDefaults.markerFadeSteps;
     if ((marker->flags & 2) == 0) {
         return;
     }
@@ -45,15 +41,13 @@ void FUN_003c14e8(BtlMainState *battle, BtlUnitMarker *marker)
         marker->color = 0xffffffff;
         return;
     }
-    s32 slot;
     for (u32 bit = 0; bit < 11; bit++) {
-        slot = marker->slot;
-        if (slot == 0 && (unit->data.statusFlags & (1 << bit)) != 0) {
+        if (marker->slot == 0 && (unit->data.statusFlags & (1 << bit)) != 0) {
             marker->slot = bit;
-            slot = bit;
             break;
         }
     }
+    s32 slot = marker->slot;
     u32 color;
     if (slot == 7) {
         color = 0x52dee7ff;
@@ -65,11 +59,10 @@ void FUN_003c14e8(BtlMainState *battle, BtlUnitMarker *marker)
         color = 0xefd629ff;
     } else if (slot == 9) {
         color = 0x7e620cff;
+    } else if (slot == 3) {
+        color = 0xff4000ff;
     } else {
-        color = DAT_00439ce0.defaultColor;
-        if (slot == 3) {
-            color = 0xff4000ff;
-        }
+        color = g_btlColorDefaults.unmodulated;
     }
     if (marker->toColor != color) {
         marker->fromColor = marker->color;

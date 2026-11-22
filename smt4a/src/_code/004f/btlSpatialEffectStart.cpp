@@ -55,7 +55,7 @@ static __inline s32 effectManagerRecordHandle(BtlEffectManager *manager, s32 han
 
 s32 FUN_00320b44(f32 *scale, s32 index, u32 value);
 MapVector btlApplyDirectionBucketEffect(BtlEffectManager *manager, s32 mode, u32 param, s32 index);
-void FUN_0047ed10(u32 value, s32 a, s32 mode, MapVector position);
+void btlEffectSetStartByName(u32 value, s32 a, s32 mode, MapVector position);
 void FUN_00260030(s32 entry);
 
 /* Starts effect `effect` for the manager: finds a free slot, plays the effect (scaled by its mode) at
@@ -77,7 +77,7 @@ s32 btlSpatialEffectStart(BtlEffectManager *manager, s32 effect, u32 param, s32 
     position.y += start.y;
     u32 *freeSlot = findFreeSlot(manager);
     if (hasTarget != 0) {
-        FUN_0047ed10(targetValue, 0, mode, position);
+        btlEffectSetStartByName(targetValue, 0, mode, position);
     }
     if (mode == 2 || mode == 5 || mode == 7 || mode == 8 || mode == 9 || mode == 12 || mode == 15) {
         return effectManagerRecordHandle(

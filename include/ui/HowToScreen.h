@@ -2,6 +2,7 @@
 #define UI_HOW_TO_SCREEN_H
 #include "ui/UiSpriteState.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "gamedata/HowToTable.h"
 #include <stddef.h>
 
 struct HowToDrawTables {
@@ -24,9 +25,16 @@ struct HowToScreenWork {
         } mode;
     };
     /* 0x008 */ void *messages[2];
-    /* 0x010 */ u32 unk010[2];
+    union {
+        /* 0x010 */ u32 unk010[2];
+        struct {
+            /* 0x010 */ HowToRecord *records;  /* the how-to table's rows, indexed by entry id */
+            /* 0x014 */ u32 unk014;
+        } table;
+    };
     union {
         /* 0x018 */ u8 resetState[0xD0];
+        /* 0x018 */ u16 entryIds[0x34];        /* the listed entries in order, 0 after the last */
         struct {
             /* 0x018 */ u8 unk018[0x68];
             /* 0x080 */ u32 selection;
@@ -34,7 +42,12 @@ struct HowToScreenWork {
             /* 0x088 */ u32 handles[3];
         } display;
     };
-    /* 0x0E8 */ u8 unk0E8[0x134];
+    /* 0x0E8 */ u8 unk0E8[0x108];
+    /* 0x1F0 */ s32 scroll;                /* the list's first visible entry */
+    /* 0x1F4 */ s32 cursor;                /* the selected row on the screen */
+    /* 0x1F8 */ u8 unk1F8[4];
+    /* 0x1FC */ s16 rowRegions[10];        /* each visible row's touch region */
+    /* 0x210 */ u8 unk210[0xC];
     /* 0x21C */ UiResourceParameters parameters;
     /* 0x23C */ UiSpriteState sprites[4];
 };
@@ -52,6 +65,9 @@ typedef char HowToScreenWorkOffsets[sizeof(HowToScreenWork) == 0x46C &&
     offsetof(HowToScreenWork, messages) == 8 &&
     offsetof(HowToScreenWork, display.selection) == 0x80 &&
     offsetof(HowToScreenWork, display.handles) == 0x88 &&
+    offsetof(HowToScreenWork, table.records) == 0x10 && offsetof(HowToScreenWork, entryIds) == 0x18 &&
+    offsetof(HowToScreenWork, scroll) == 0x1F0 && offsetof(HowToScreenWork, cursor) == 0x1F4 &&
+    offsetof(HowToScreenWork, rowRegions) == 0x1FC &&
     offsetof(HowToScreenWork, parameters) == 0x21C &&
     offsetof(HowToScreenWork, sprites) == 0x23C ? 1 : -1];
 typedef char HowToScreenStateOffsetCheck[offsetof(HowToScreenWork, mode.state) == 4 &&

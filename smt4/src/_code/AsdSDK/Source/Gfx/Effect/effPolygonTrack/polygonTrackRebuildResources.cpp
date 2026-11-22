@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc spills the arguments (push {r0-r2}) and hoists the per-component colour addresses out of the vertex loop; retail keeps the parameters in registers, copies the seven parameter words with one ldm/stm and stores the eight colour components with reloads per vertex. */
+/* NON_MATCHING: 129 lines: the prologue, the parameter copy and the buffer rebuild match; retail computes the block size before the trace's arguments, and in the vertex loop reloads the colour table's address per vertex (the second call's copy as `add r2, r1, #0`) with the index in r0 where the build hoists the address. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -45,31 +45,38 @@ TrackColorBuffer *FUN_002469ec(u32 count, u32 first, const u8 *layout, s32 attri
 TrackColorBuffer *FUN_002d1480(u32 count, s32 a, s32 b, s32 c, const u8 *layout, s32 stride);
 void FUN_00305400(TrackBuffers *buffers, const u32 *params);
 
+/* Sets the colour of vertex `index` from rgba bytes (each scaled twice by 1/255); called for both colour buffers. */
+static void trackSetVertexColor(TrackColorBuffer *buffer, u16 index, const u8 *rgba)
+{
+    const f32 scale = 1.0f / 255.0f;
+    f32 *color = buffer->colors[index];
+    for (u32 c = 0; c < 4; c++)
+        color[c] = rgba[c] * scale * scale;
+}
+
 /* Copies the creation parameters `params` into the track and rebuilds its vertex buffers (every
  * vertex starts with the track colour); a track without vertices keeps nothing. */
 void polygonTrackRebuildResources(PolygonTrack *track, u32 unused, const TrackParams *params)
 {
     track->params = *params;
     if (track->vertexCount != 0) {
-        if (track->buffers != NULL) {
-            bufferObjDestroy(track->buffers->colorsA);
-            bufferObjDestroy(track->buffers->colorsB);
-            asdMemFree(track->buffers);
+        TrackBuffers *buffers = track->buffers;
+        if (buffers != NULL) {
+            bufferObjDestroy(buffers->colorsA);
+            bufferObjDestroy(buffers->colorsB);
+            asdMemFree(buffers);
         }
         u16 count = track->vertexCount;
         u16 first = params->words[0];
         asdDebugTrace(DAT_004105bc, 533);
-        TrackBuffers *buffers = (TrackBuffers *)memAlloc(0x10000, 0x100, 0, 0x1C + count * 2, 0x10, 1);
+        buffers = (TrackBuffers *)memAlloc(0x10000, 0x100, 0, 0x1C + count * 2, 0x10, 1);
         memClear(buffers, 0x1C + count * 2);
         buffers->indices = buffers->indexData;
         buffers->colorsA = FUN_002469ec(count, first, DAT_004736f0, 3, 0x48);
         buffers->colorsB = FUN_002d1480(count, 1, 6, 8, DAT_004737ce, 0x48);
-        const f32 scale = 1.0f / 255.0f;
-        for (u16 i = 0; i < count; i++) {
-            for (u32 c = 0; c < 4; c++)
-                buffers->colorsA->colors[i][c] = DAT_00472560[c] * scale * scale;
-            for (u32 c = 0; c < 4; c++)
-                buffers->colorsB->colors[i][c] = DAT_00472560[c] * scale * scale;
+        for (u32 i = 0; i < count; i++) {
+            trackSetVertexColor(buffers->colorsA, i, DAT_00472560);
+            trackSetVertexColor(buffers->colorsB, i, DAT_00472560);
         }
         track->buffers = buffers;
         FUN_00305400(buffers, &params->words[2]);

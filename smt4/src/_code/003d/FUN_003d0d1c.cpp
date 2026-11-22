@@ -1,4 +1,8 @@
-/* NON_MATCHING: the selection masks now use int shifts sign-extended into the 64-bit mask (no __aeabi_llsl); retail keeps the present-flag loop rolled with a signed counter and tests bits 2|0x20 apart from 0x10, and unrolls the selection loop. */
+/* NON_MATCHING: 166 lines; the selection loop is written plainly (armcc unrolls it by two as retail does). Remaining:
+ * retail keeps the present-flag loop rolled with a signed counter and tests bits 2|0x20 apart from 0x10, stores the
+ * candidates' empty slot as `mvn #0` (this build `mov #255`), and allocates the candidate count and buffer to other
+ * registers. `formation` is likely the battle main state holder (BtlMainState: entries at 0x1FC0, the 64-bit mask at
+ * 0x1FD0). */
 #include "common.h"
 #include "gamedata/UnitRecordAccess.h"
 #include "gamedata/NkmBaseRecord.h"
@@ -53,18 +57,17 @@ void FUN_003d0d1c(BattleFormation** formation, BattleSetup* setup)
     }
     __aeabi_memset4(&(*formation)->selected, 3, -1);
 
-    u32 slotLimit = *reinterpret_cast<u8*>(reinterpret_cast<u8*>(gameGetSlotTable()) + 0x910b);
+    s32 slotLimit = *reinterpret_cast<u8*>(reinterpret_cast<u8*>(gameGetSlotTable()) + 0x910b);
     FormationCandidate* candidates = reinterpret_cast<FormationCandidate*>(asdOperatorNewC(slotLimit * 4));
-    for (u32 i = 0; i < slotLimit; i++) {
-        candidates[i].slot = 0xff;
+    for (s32 i = 0; i < slotLimit; i++) {
+        candidates[i].slot = -1;
         candidates[i].rank = 0;
         candidates[i].race = 0;
     }
 
-    u32 count = 0;
-    for (u32 i = 0; i < slotLimit; i++) {
-        s8 slotId = gameGetSlotTable()->party[i];
-        if (slotId < 0) continue;
+    s32 count = 0;
+    for (s32 i = 0; i < slotLimit; i++) {
+        if (gameGetSlotTable()->party[i] < 0) continue;
         StatBlock* unit = gameGetUnitRecord(gameGetSlotTable()->party[i]);
         if (unit != NULL && flagWordTestBit(unit, 1) == 0 && flagWordTestBit(unit, 10) == 0 &&
             flagWordTestBit(unit, 2) == 0) {
@@ -76,26 +79,10 @@ void FUN_003d0d1c(BattleFormation** formation, BattleSetup* setup)
     }
     if (count != 0) {
         qsort(candidates, count, 4, sortCompareRankThenOrder);
-        if ((s32)count >= 4) count = 3;
-        s32 next = 0;
-        if ((s32)count > 0) {
-            next = count & 1;
-            if (next == 1) {
-                BattleFormation* f = *formation;
-                u64 bit = 1 << (candidates[0].slot + 1);
-                f->selectedMask |= bit;
-                (*formation)->selected[0] = candidates[0].slot + 1;
-            }
-        }
-        for (; next < (s32)count; next += 2) {
-            BattleFormation* f = *formation;
-            u64 bitA = 1 << (candidates[next].slot + 1);
-            f->selectedMask |= bitA;
-            (*formation)->selected[next] = candidates[next].slot + 1;
-            f = *formation;
-            u64 bitB = 1 << (candidates[next + 1].slot + 1);
-            f->selectedMask |= bitB;
-            (*formation)->selected[next + 1] = candidates[next + 1].slot + 1;
+        if (count > 3) count = 3;
+        for (s32 i = 0; i < count; i++) {
+            (*formation)->selectedMask |= 1 << (candidates[i].slot + 1);
+            (*formation)->selected[i] = candidates[i].slot + 1;
         }
     }
     asdMemFreeIfNotNull(candidates);

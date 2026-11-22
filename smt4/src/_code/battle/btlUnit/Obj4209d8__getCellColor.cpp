@@ -13,7 +13,7 @@ struct Obj4209d8Combatant {
 extern "C" {
 Obj4209d8Combatant *btlMainFindEntryByListedId(Obj4209d8Owner *owner, s32 id);
 u32 FUN_0026e6a0(u32 first, u32 second, u32 duration, u32 phase, u32 mode);
-extern Obj4209d8ColorDefaults DAT_00439ce0;
+extern Obj4209d8ColorDefaults g_btlColorDefaults;
 }
 
 u32 Obj4209d8::getCellColor(s32 index) const
@@ -29,13 +29,13 @@ u32 Obj4209d8::getCellColor(s32 index) const
         return value << 24 | value << 16 | value << 8;
     }
     if (combatant != NULL && (combatant->flags & 0x2000000) != 0 && (combatant->statusFlags & 0x10) != 0) {
-        u8 red = (u8)((f32)DAT_00439ce0.statusRed * DAT_00439ce0.statusDepth);
-        u8 green = (u8)((f32)DAT_00439ce0.statusGreen * DAT_00439ce0.statusDepth);
-        u8 blue = (u8)((f32)DAT_00439ce0.statusBlue * DAT_00439ce0.statusDepth);
-        red = FUN_0026e6a0(red, DAT_00439ce0.statusRed, DAT_00439ce0.statusDuration, cell->colorPhase, 0);
-        green = FUN_0026e6a0(green, DAT_00439ce0.statusGreen, DAT_00439ce0.statusDuration, cell->colorPhase, 0);
-        blue = FUN_0026e6a0(blue, DAT_00439ce0.statusBlue, DAT_00439ce0.statusDuration, cell->colorPhase, 0);
-        return red << 24 | green << 16 | blue << 8 | DAT_00439ce0.statusAlpha;
+        u8 red = (u8)((f32)g_btlColorDefaults.statusRed * g_btlColorDefaults.statusDepth);
+        u8 green = (u8)((f32)g_btlColorDefaults.statusGreen * g_btlColorDefaults.statusDepth);
+        u8 blue = (u8)((f32)g_btlColorDefaults.statusBlue * g_btlColorDefaults.statusDepth);
+        red = FUN_0026e6a0(red, g_btlColorDefaults.statusRed, g_btlColorDefaults.statusDuration, cell->colorPhase, 0);
+        green = FUN_0026e6a0(green, g_btlColorDefaults.statusGreen, g_btlColorDefaults.statusDuration, cell->colorPhase, 0);
+        blue = FUN_0026e6a0(blue, g_btlColorDefaults.statusBlue, g_btlColorDefaults.statusDuration, cell->colorPhase, 0);
+        return red << 24 | green << 16 | blue << 8 | g_btlColorDefaults.statusAlpha;
     }
     return 0;
 }

@@ -24,7 +24,7 @@ int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int FUN_00169a1c(...);
-int statRowDrawValueImpl(...);
+int numberFontDrawFormatted(...);
 int uiDrawItemOrStatusIcon(...);
 int texDrawTableEntryAtStoredOrigin(...);
 int fontMeasureLineAdvance(...);
@@ -61,7 +61,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00167860. */
 /* Supplied declaration required: FUN_00169a1c. */
-/* Supplied declaration required: statRowDrawValueImpl. */
+/* Supplied declaration required: numberFontDrawFormatted. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
@@ -366,7 +366,7 @@ void btlUiPartyDisplayDrawEntry(int param_1)
               temp_v16[0] = 4;
               temp_v16[1] = 0xc9;
               temp_v18 = temp_v3;
-              statRowDrawValueImpl(2,*(short *)(temp_v6 + 8) + temp_v4,*(short *)(temp_v6 + 10) + temp_v2,1);
+              numberFontDrawFormatted(2,*(short *)(temp_v6 + 8) + temp_v4,*(short *)(temp_v6 + 10) + temp_v2,1);
             }
           }
           else {
@@ -441,12 +441,12 @@ void btlUiPartyDisplayDrawEntry(int param_1)
         temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x12d));
         temp_v16[0] = 1;
         temp_v16[1] = 0xc9;
-        statRowDrawValueImpl(2,*(short *)(temp_v6 + 8) + temp_v4,*(short *)(temp_v6 + 10) + temp_v2,1);
+        numberFontDrawFormatted(2,*(short *)(temp_v6 + 8) + temp_v4,*(short *)(temp_v6 + 10) + temp_v2,1);
         temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x12d));
         temp_v16[0] = 4;
         temp_v16[1] = 0xc9;
         temp_v18 = temp_v3;
-        statRowDrawValueImpl(2,*(short *)(temp_v6 + 8) + temp_v4,*(short *)(temp_v6 + 10) + temp_v2,1);
+        numberFontDrawFormatted(2,*(short *)(temp_v6 + 8) + temp_v4,*(short *)(temp_v6 + 10) + temp_v2,1);
       }
     }
     else {
@@ -480,7 +480,7 @@ void btlUiPartyDisplayDrawEntry(int param_1)
       temp_v16[0] = 4;
       temp_v16[1] = 0xc9;
       temp_v18 = 0;
-      statRowDrawValueImpl(2,*(short *)(temp_v3 + 8) + temp_v4,*(short *)(temp_v3 + 10) + temp_v2,1);
+      numberFontDrawFormatted(2,*(short *)(temp_v3 + 8) + temp_v4,*(short *)(temp_v3 + 10) + temp_v2,1);
     }
   }
   else {
@@ -606,7 +606,7 @@ void btlUiPartyDisplayDrawEntry(int param_1)
     temp_v16[0] = 4;
     temp_v16[1] = 0xc9;
     temp_v18 = temp_v3;
-    statRowDrawValueImpl(2,*(short *)(temp_v6 + 8) + temp_v4,*(short *)(temp_v6 + 10) + temp_v2,1);
+    numberFontDrawFormatted(2,*(short *)(temp_v6 + 8) + temp_v4,*(short *)(temp_v6 + 10) + temp_v2,1);
   }
   efctSetSpeed();
   return;

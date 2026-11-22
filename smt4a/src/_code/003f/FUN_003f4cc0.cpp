@@ -8,7 +8,7 @@ extern "C" {
 int textDrawString(...);
 int efctSetSpeed(void);
 int gameGetPlayerData(...);
-int statRowDrawValueImpl(int, int, int, int);
+int numberFontDrawFormatted(int, int, int, int);
 int uiDrawItemOrStatusIcon(...);
 int asdTMTexTableEntryAt(...);
 int texDrawTableEntryAtStoredOrigin(...);
@@ -31,7 +31,7 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: efctSetSpeed. */
 extern unsigned int table01RecordLookupForContent(unsigned short);
 /* Supplied declaration required: gameGetPlayerData. */
-/* Supplied declaration required: statRowDrawValueImpl. */
+/* Supplied declaration required: numberFontDrawFormatted. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
@@ -105,7 +105,7 @@ LAB_003f510c:
               temp_v5 = asdTMTexTableEntryAt(0x11,0x7d);
               temp_v10 = 3;
               temp_v11 = 0x79;
-              statRowDrawValueImpl(0,*(short *)(temp_v5 + 8) + param_3,*(short *)(temp_v5 + 10) + param_4,1);
+              numberFontDrawFormatted(0,*(short *)(temp_v5 + 8) + param_3,*(short *)(temp_v5 + 10) + param_4,1);
               efctSetSpeed();
               return;
             }
@@ -116,7 +116,7 @@ LAB_003f510c:
           temp_v5 = asdTMTexTableEntryAt(0x11,0x15);
           temp_v10 = 2;
           temp_v11 = 0x79;
-          statRowDrawValueImpl(0,*(short *)(temp_v5 + 8) + param_3,*(short *)(temp_v5 + 10) + param_4,1);
+          numberFontDrawFormatted(0,*(short *)(temp_v5 + 8) + param_3,*(short *)(temp_v5 + 10) + param_4,1);
         }
         else if (*(char *)(param_1 + 0x20) == '\0') {
           if (*(int *)(param_1 + 0x34) != -1) {

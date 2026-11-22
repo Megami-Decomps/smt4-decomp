@@ -5,7 +5,7 @@
 extern "C" {
 
 int ARM_common_memset4_6(...);
-int FUN_0014eae4(void);
+int asdModelApplyShadowMaterials(void);
 int FUN_002a6264(int *, int);
 int graphicsResourceSetLeafValue(int *, int);
 int FUN_002a65d8(int *, int);
@@ -54,7 +54,7 @@ extern unsigned int sceneGroup1Root; /* 0x464b8c */
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 /* Supplied declaration required: ARM_common_memset4_6. */
-/* Supplied declaration required: FUN_0014eae4. */
+/* Supplied declaration required: asdModelApplyShadowMaterials. */
 /* Supplied declaration required: FUN_002a6264. */
 /* Supplied declaration required: graphicsResourceSetLeafValue. */
 /* Supplied declaration required: FUN_002a65d8. */
@@ -217,7 +217,7 @@ void FUN_002a9834(int *param_1,unsigned int *param_2,unsigned int param_3,int pa
       }
 LAB_002a9af8:
       piVar8 = piVar15;
-      FUN_0014eae4();
+      asdModelApplyShadowMaterials();
       if (piVar8 != (int *)0x0) {
         temp_v12 = 1;
         *param_2 = *param_2 | 2;

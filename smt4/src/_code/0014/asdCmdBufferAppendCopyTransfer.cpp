@@ -4,7 +4,7 @@
 extern "C" {
 void nngxLockEnter(void);
 void nngxLockLeave(void);
-void FUN_002ba2b8(void);
+void gfxReplayRecordedCommands(void);
 
 // Queue a source/target transfer, packing 16/24/32-bit pixel formats into the command.
 void asdCmdBufferAppendCopyTransfer(AsdCmdBuffer *buffer, const void *source, u32 sourceSize, u32 sourcePitch,
@@ -37,7 +37,7 @@ void asdCmdBufferAppendCopyTransfer(AsdCmdBuffer *buffer, const void *source, u3
     if (g_asdGfxContext.activeBuffer == buffer && g_asdGfxContext.submitEnabled != 0 &&
         g_asdGfxContext.submitPending == 0) {
         g_asdGfxContext.submitPending = 1;
-        FUN_002ba2b8();
+        gfxReplayRecordedCommands();
     }
     nngxLockLeave();
 }

@@ -1,7 +1,8 @@
-/* NON_MATCHING: retail keeps the white color unfolded (1.0f * 255.0f converted four times per entry, constants hoisted into s16/s17); armcc folds the all-white pack to a constant here, so the loop body differs. */
+/* NON_MATCHING: 130 lines (145 vs 125 rows): real renderCtxPackPassFlagsWithAlpha(6, 0.0f), DrawVec2 by-value pass, and renderStackPushCounted on stack A match; retail keeps the white color (1.0f * 255.0f) unfolded per entry while armcc folds it here. */
 #include "common.h"
 #include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
+#include "code/Code0038.h"
 
 extern "C" {
 /* One drawn entry: the three words handed to the draw call and a placement record. */
@@ -12,11 +13,16 @@ typedef struct DrawEntry {
     /* 0x0C */ u32 unk0c;
 } DrawEntry;
 
-/* A placement the entry is drawn with (0x1C bytes): two floats at 0xC and 0x10 are passed along. */
+/* 2D draw coordinate pair passed by value. */
+typedef struct DrawVec2 {
+    /* 0x00 */ f32 x;
+    /* 0x04 */ f32 y;
+} DrawVec2;
+
+/* A placement the entry is drawn with (0x1C bytes): a 2D position at 0xC is passed along. */
 typedef struct DrawPlacement {
     /* 0x00 */ u8 unk00[0xC];
-    /* 0x0C */ f32 x;
-    /* 0x10 */ f32 y;
+    /* 0x0C */ DrawVec2 pos;
     /* 0x14 */ u8 unk14[8];
 } DrawPlacement;
 
@@ -35,13 +41,12 @@ typedef struct DrawEntrySource {
 
 
 s32 renderCtxPackPassFlags(u32 kind, u32 arg);
-s32 renderCtxPackPassFlagsWithAlpha(u32 kind);
-void FUN_003fba4c(u32 model, u32 variant, u32 motion, DrawPlacement *placement, u32 color, u32 flags, f32 x, f32 y);
+void FUN_003fba4c(u32 model, u32 variant, u32 motion, DrawPlacement *placement, u32 color, u32 flags, DrawVec2 pos);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 
 /* Packs four 0..1 components into a word, most significant byte first. */
-static u32 packColorBytes(f32 r, f32 g, f32 b, f32 a)
+static __inline u32 packColorBytes(f32 r, f32 g, f32 b, f32 a)
 {
     u32 red = (u32)(r * 255.0f);
     u32 green = (u32)(g * 255.0f);
@@ -55,23 +60,18 @@ static u32 packColorBytes(f32 r, f32 g, f32 b, f32 a)
  * first and third render-state stacks, unless the group is in mode 1 or 2. */
 void btlPartnerDrawEntries(DrawGroup *group, DrawEntrySource *source)
 {
-    RenderCtxA *context = g_renderCtx;
-
     if (group->mode == 1 || group->mode == 2) {
         return;
     }
-    renderCtxPushA(context, renderCtxPackPassFlags(5, 1));
-    context = g_renderCtx;
-    renderStackPushCounted(context->stacks + RENDER_STACK_C, renderCtxPackPassFlagsWithAlpha(6));
+    renderStackPushCounted(g_renderCtx->stacks + RENDER_STACK_A, renderCtxPackPassFlags(5, 1));
+    renderStackPushCounted(g_renderCtx->stacks + RENDER_STACK_C, renderCtxPackPassFlagsWithAlpha(6, 0.0f));
 
     s32 drawn = 0;
     for (s32 i = 0; i < 12; i++) {
-        DrawEntry *entry = &source->entries[i];
-
-        if (entry->model != 0) {
-            FUN_003fba4c(entry->model, entry->variant, entry->motion, &group->placements[drawn],
-                         packColorBytes(1.0f, 1.0f, 1.0f, 1.0f), 0, group->placements[drawn].x,
-                         group->placements[drawn].y);
+        if (source->entries[i].model != 0) {
+            FUN_003fba4c(source->entries[i].model, source->entries[i].variant, source->entries[i].motion,
+                         &group->placements[drawn], packColorBytes(1.0f, 1.0f, 1.0f, 1.0f), 0,
+                         group->placements[drawn].pos);
             drawn++;
         }
     }

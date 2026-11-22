@@ -18,7 +18,7 @@ int dataFindKindRecordWithAocOverrides(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
-int statRowDrawValueImpl(...);
+int numberFontDrawFormatted(...);
 int uiDrawItemOrStatusIcon(...);
 int fontMeasureLineAdvance(...);
 int nkmBaseGetRecord(void);
@@ -55,7 +55,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: textDrawRangeFaded. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: statRowDrawValueImpl. */
+/* Supplied declaration required: numberFontDrawFormatted. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
@@ -390,7 +390,7 @@ LAB_0026b644:
                        0xba);
           temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x4ad));
           temp_v18 = (unsigned int)*(unsigned short *)(temp_v10 + 0xf4a);
-          statRowDrawValueImpl(2,(int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v0,
+          numberFontDrawFormatted(2,(int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v0,
                        (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v1,1,6,0xba);
         }
         else {
@@ -399,7 +399,7 @@ LAB_0026b644:
           texDrawTableEntryAtStoredOrigin(2,0x12,0x4a6,*(short *)(temp_v5 + 8) + temp_v0,*(short *)(temp_v5 + 10) + temp_v1,
                        0xba);
           temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x4ad));
-          statRowDrawValueImpl(2,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v0,
+          numberFontDrawFormatted(2,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v0,
                        (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v1,1,6,0xba);
         }
         temp_v2 = temp_v2 + 1;

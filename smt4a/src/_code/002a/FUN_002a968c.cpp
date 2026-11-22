@@ -10,7 +10,7 @@ extern "C" {
 int textDrawString(...);
 int texDrawCompositeSprite(int, int, int, int, int, int);
 int efctSetSpeed(void);
-int statRowDrawValueImpl(...);
+int numberFontDrawFormatted(...);
 int uiDrawItemOrStatusIcon(...);
 int nkmBaseGetRecord(void);
 int FUN_00185e84(...);
@@ -49,7 +49,7 @@ extern unsigned int demonGetRaceLabel(short, unsigned int);
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
 extern unsigned int table01RecordLookupForContent(short);
-/* Supplied declaration required: statRowDrawValueImpl. */
+/* Supplied declaration required: numberFontDrawFormatted. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: nkmBaseGetRecord. */
@@ -154,12 +154,12 @@ void FUN_002a968c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
     textDrawString(2,0x57d8ffff,temp_v7);
     if ((unsigned short)psVar3[3] >= 100) {
       temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x265));
-      statRowDrawValueImpl(0,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,1,3,0x8d,
+      numberFontDrawFormatted(0,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,1,3,0x8d,
                    "%d",psVar3[3]);
     }
     else {
       temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x51));
-      statRowDrawValueImpl(0,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,1,2,0x8d,
+      numberFontDrawFormatted(0,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,1,2,0x8d,
                    "%d",psVar3[3]);
     }
     temp_v5 = 0;

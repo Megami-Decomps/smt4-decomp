@@ -18,7 +18,7 @@
 #include "gamedata/GameDataAccess.h"
 
 extern "C" {
-void statRowDrawValueImpl(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
+void numberFontDrawFormatted(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
 void FUN_00185e84(s16 id, s32 x, s32 y, u32 layer, u32 a, u32 b);
 void statDrawClampedDelta(SlotRecordA *record, s16 id, s32 x, s32 y, u32 layer, u32 a);
 
@@ -59,7 +59,7 @@ void skillScreenDrawSelectedSlotRow(UniteWorkA *work, SlotRecordA *record, s32 x
     }
     statDrawClampedDelta(record, work->inheritanceA.slots[row], frame->x + part->x + x, frame->y + part->y + y, 0x74, 0);
     part = asdTMTexTableEntryAt(0x1a, 0x1a6);
-    statRowDrawValueImpl(1, frame->x + part->x + x, frame->y + part->y + y, 1, 4, 0x79, "%d", skillGetAdjustedCost(record, work->inheritanceA.slots[row]));
+    numberFontDrawFormatted(1, frame->x + part->x + x, frame->y + part->y + y, 1, 4, 0x79, "%d", skillGetAdjustedCost(record, work->inheritanceA.slots[row]));
 }
 
 } /* extern "C" */

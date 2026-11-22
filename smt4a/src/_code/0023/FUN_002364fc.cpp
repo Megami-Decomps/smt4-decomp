@@ -72,7 +72,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     }
     FUN_0043d394(iVar2 + 0xa6,0x100);
     auStack_108[0] = 0x100;
-    FUN_00268250(2,0,99,iVar2 + 0xa6);
+    saveLoadThreadRequestInit(2,0,99,iVar2 + 0xa6);
     gameDataAddHomeButtonHold(8);
     FUN_002684ac(1);
     gameDataBlocksOrFlagsClearUnk02(1);
@@ -174,7 +174,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     else {
       auStack_108[0] = *(unsigned int *)(iVar2 + 0x18);
       *(unsigned int *)(iVar2 + 0xa0) = 0;
-      FUN_00268250(5,0,1,*(unsigned int *)(iVar2 + 0x14));
+      saveLoadThreadRequestInit(5,0,1,*(unsigned int *)(iVar2 + 0x14));
       uVar5 = 0xc;
     }
     break;
@@ -203,7 +203,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     if (iVar4 < 1) {
       auStack_108[0] = *(unsigned int *)(iVar2 + 0x18);
       *(int *)(iVar2 + 0xa0) = iVar4 + 1;
-      FUN_00268250(3,0,iVar4 + 2,*(unsigned int *)(iVar2 + 0x14));
+      saveLoadThreadRequestInit(3,0,iVar4 + 2,*(unsigned int *)(iVar2 + 0x14));
       uVar5 = 0xc;
     }
     else {
@@ -282,7 +282,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     iVar4 = FUN_00429e14(uVar5,0x19a2);
     if (iVar4 >= 0) {
       auStack_108[0] = 0x100;
-      FUN_00268250(3,0,99,iVar2 + 0x1a6);
+      saveLoadThreadRequestInit(3,0,99,iVar2 + 0x1a6);
       uVar5 = 0x12;
     }
     else {
@@ -362,7 +362,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     if (iVar4 != 0) goto code_r0x00236f38;
     memcpySrcFirst(iVar2 + *(int *)(iVar2 + 0xa0) * 0x80 + 700,*(unsigned int *)(iVar2 + 0x14),0x80);
     auStack_108[0] = *(unsigned int *)(iVar2 + 0x18);
-    FUN_00268250(2,0,0,*(unsigned int *)(iVar2 + 0x14));
+    saveLoadThreadRequestInit(2,0,0,*(unsigned int *)(iVar2 + 0x14));
     FUN_002684ac(1);
     gameDataBlocksOrFlagsClearUnk02(1);
     uVar5 = 0x18;

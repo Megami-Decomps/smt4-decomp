@@ -8,7 +8,7 @@ extern "C" {
 
 
 int CONCAT44(double, double);
-int FUN_00233e10(int, unsigned int);
+int mapIfApplyEntryRequest(int, unsigned int);
 int FUN_002b4cf4(void);
 int libc_strcpy(unsigned int *, int);
 int mathPositionHeadingDegrees(void);
@@ -82,7 +82,7 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-/* Supplied declaration required: FUN_00233e10. */
+/* Supplied declaration required: mapIfApplyEntryRequest. */
 /* Supplied declaration required: FUN_002b4cf4. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
@@ -294,7 +294,7 @@ void FUN_00311b74(void)
                           g_gameState.unk060 = 0xffffffff;
                           libc_strcpy((unsigned int *)g_gameState.entryText,temp_v3 + 0x5f33d8);
                         }
-                        temp_v23 = FUN_00233e10(1,g_gameState.overviewRecord);
+                        temp_v23 = mapIfApplyEntryRequest(1,g_gameState.overviewRecord);
                         in_s3 = temp_v10;
                       }
                     }
@@ -484,7 +484,7 @@ LAB_00312644:
       return;
     }
   }
-  FUN_00233e10(0,0xffffffff);
+  mapIfApplyEntryRequest(0,0xffffffff);
   return;
 }
 

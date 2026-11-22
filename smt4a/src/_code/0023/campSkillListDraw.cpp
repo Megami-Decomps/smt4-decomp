@@ -28,7 +28,7 @@
 extern "C" {
 
 /* Draws formatted text right-aligned in a field of `digits` characters. */
-void statRowDrawValueImpl(s32 font, s32 x, s32 y, s32 align, s32 digits, s32 layer, const char *format, ...);
+void numberFontDrawFormatted(s32 font, s32 x, s32 y, s32 align, s32 digits, s32 layer, const char *format, ...);
 /* The list's scroll bar. */
 void FUN_0023d150(GridNavigation *grid, s32 x, s32 y, s32 mode);
 /* Whether `target` (a unit slot, negative for the player) can use the skill from the camp. */
@@ -89,7 +89,7 @@ void campSkillListDraw(s32 x, s32 y, s32 selected, f32 alpha)
         } else {
             sprintf(text, "%d", skillGetAdjustedCost(record, skill));
         }
-        statRowDrawValueImpl(0, row->x + part->x + x, row->y + part->y + y, 1, 4, 0x6f, text);
+        numberFontDrawFormatted(0, row->x + part->x + x, row->y + part->y + y, 1, 4, 0x6f, text);
 
         part = asdTMTexTableEntryAt(20, 0x43f);
         FUN_00185e84((s16)skill, row->x + part->x + x, row->y + part->y + y, 0x6f, player, 0);
@@ -145,7 +145,7 @@ void campSkillListDraw(s32 x, s32 y, s32 selected, f32 alpha)
         } else {
             sprintf(text, "%d", skillGetAdjustedCost(record, skill));
         }
-        statRowDrawValueImpl(0, row->x + part->x + x, row->y + part->y + y, 1, 4, 0x83, text);
+        numberFontDrawFormatted(0, row->x + part->x + x, row->y + part->y + y, 1, 4, 0x83, text);
         texDrawTableEntryAtStoredOrigin(2, 20, 0x445, row->x + x, row->y + y, 0x83);
 
         part = asdTMTexTableEntryAt(20, 0x448);

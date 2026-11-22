@@ -1,4 +1,4 @@
-/* NON_MATCHING: structure matches retail (panel state block at +0x800 held in a register, entry table pointer taken after the early return, shown-id base at +0xA800); retail saves one more register (sl) and numbers the base registers r6/r7/r4/r5 differently, with a 304-byte frame vs 300. */
+/* NON_MATCHING: 8 lines (175 vs 175 rows): all branches, 3-arg objBInitBlock19D0, UnitRecord copy, slot scan, and shownId base register match; only the entries pointer setup schedules before the entries[0].present check instead of after. */
 #include "shard/Shard0032.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "event/2dEvent/SmokeFade.h"
@@ -20,17 +20,17 @@ struct StatusPanelState {
     /* 0x0062 */ u8 unk0062;
     /* 0x0063 */ s8 viewing; /* a detail view is open */
     /* 0x0064 */ StatusEntry entries[0x500];
-    /* 0xA064 */ u8 unkA064[0xE];
-    /* 0xA072 */ u16 shownId;
 };
 
 struct StatusPanel {
     /* 0x0000 */ u8 unk0000[0x20];
     /* 0x0020 */ u8 holder[0x7E0];
     /* 0x0800 */ StatusPanelState state;
+    /* 0xA864 */ u8 unkA864[0xE];
+    /* 0xA872 */ u16 shownId;
 };
 typedef char StatusPanelOffsets[
-    offsetof(StatusPanel, state.mode) == 0x860 && offsetof(StatusPanel, state.shownId) == 0xA872 ? 1 : -1];
+    offsetof(StatusPanel, state.mode) == 0x860 && offsetof(StatusPanel, shownId) == 0xA872 ? 1 : -1];
 
 /* The party slot table: the units followed by the order they are listed in. */
 struct StatusSlotTable {
@@ -54,27 +54,26 @@ void FUN_0033449c(s32 value);
 void statusScreenRefreshForSelection(s32 value);
 StatusSlotTable *gameGetSlotTable(void);
 s32 FUN_00372014(void);
-void __aeabi_memcpy4(void *destination, const void *source, s32 size);
 void unitRecomputeDerivedStats(UnitRecord *unit);
 u16 recordGetScaledMaximum(UnitRecord *unit);
-void objBInitBlock19D0(UnitRecord *unit, s32 value);
+void objBInitBlock19D0(UnitRecord *unit, s32 copyPair, u32 c);
 
 /* Per-frame refresh of the status panel: when the selected entry changed, switch the demon shown (or, for a party
  * member, build a working copy of its record) and reopen the panel. */
 void FUN_004a3b48(StatusPanel *panel)
 {
     StatusPanelState *state = &panel->state;
-    if (state->entries[0].present == 0) {
+    StatusEntry *entries = state->entries;
+    if (entries[0].present == 0) {
         FUN_0023b45c(0);
         return;
     }
-    StatusEntry *entries = panel->state.entries;
     u16 id = entries[flaggedValueHolderGetTotal(panel->holder)].id;
     if (gameStateIsNotTransitioning() == 0) {
         return;
     }
     if (state->mode == 1) {
-        if (state->viewing == 0 && state->shownId == id) {
+        if (state->viewing == 0 && panel->shownId == id) {
             return;
         }
         if (state->recordPage != 1) {
@@ -93,9 +92,8 @@ void FUN_004a3b48(StatusPanel *panel)
             StatusSlotTable *slots = gameGetSlotTable();
             UnitRecord *member = NULL;
             for (u16 i = 0; i < slots->count; i++) {
-                s8 slot = slots->order[i];
-                if (slot >= 0) {
-                    member = &slots->units[slot];
+                if (slots->order[i] >= 0) {
+                    member = &slots->units[slots->order[i]];
                     if (member->id == id) {
                         break;
                     }
@@ -108,8 +106,7 @@ void FUN_004a3b48(StatusPanel *panel)
                 objBInitBlock12DC5();
             }
             nkmBaseGetRecord(id);
-            UnitRecord unit;
-            __aeabi_memcpy4(&unit, member, sizeof(UnitRecord));
+            UnitRecord unit = *member;
             for (s32 i = 0; i < 0x40; i++) {
                 unit.inheritedFlags[i] = 0;
             }
@@ -117,7 +114,7 @@ void FUN_004a3b48(StatusPanel *panel)
             unit.hp = recordGetScaledMaximum(&unit);
             unit.mp = unit.maxMp;
             unit.ailments = 0;
-            objBInitBlock19D0(&unit, 0);
+            objBInitBlock19D0(&unit, 0, 0);
             FUN_0033449c(1);
             if (state->viewing != 0) {
                 statusScreenRefreshForSelection(1);
@@ -125,10 +122,10 @@ void FUN_004a3b48(StatusPanel *panel)
                 statusPanelSetOpen(1);
             }
         }
-        state->viewing = 0;
+        panel->state.viewing = 0;
         FUN_004a3e04(panel);
     } else {
-        if (state->shownId == id) {
+        if (panel->shownId == id) {
             return;
         }
         s32 previous = gameGlobalsGetFieldState();
@@ -147,6 +144,6 @@ void FUN_004a3b48(StatusPanel *panel)
         statusPanelSetOpen(1);
         FUN_004a3e04(panel);
     }
-    state->shownId = id;
+    panel->shownId = id;
 }
 }

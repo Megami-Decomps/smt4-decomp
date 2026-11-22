@@ -17,7 +17,7 @@ int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int renderPopStateStacks(void);
 int FUN_00168e00(int, int, int, int);
-int statRowDrawValueImpl(...);
+int numberFontDrawFormatted(...);
 
 int gxResetColorQuadToWhite(void);
 int drawSetColorFromRGBA8(...);
@@ -55,7 +55,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00168e00. */
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00169a1c. */
-/* Supplied declaration required: statRowDrawValueImpl. */
+/* Supplied declaration required: numberFontDrawFormatted. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: nkmBaseGetRecord. */
@@ -213,7 +213,7 @@ void campCecCreateEffectDraw(unsigned int *param_1,int param_2,float *param_3,in
         sprintf((char *)temp_v19," %d");
       }
       drawSetColorFromRGBA8(0xffffff00);
-      statRowDrawValueImpl(0,(int)*(short *)(temp_v7 + 8) + param_4 + temp_v5,*(short *)(temp_v7 + 10) + param_5,0
+      numberFontDrawFormatted(0,(int)*(short *)(temp_v7 + 8) + param_4 + temp_v5,*(short *)(temp_v7 + 10) + param_5,0
                    ,5,0x73,temp_v19);
       gxResetColorQuadToWhite();
       temp_v13 = temp_v22;
@@ -318,7 +318,7 @@ void campCecCreateEffectDraw(unsigned int *param_1,int param_2,float *param_3,in
       }
       drawSetColorFromRGBA8(0x32323200);
       param_4 = (int)temp_v13 + param_4;
-      statRowDrawValueImpl(0,*(short *)(temp_v5 + 8) + param_4,*(short *)(temp_v5 + 10) + param_5,0,5,0x74,
+      numberFontDrawFormatted(0,*(short *)(temp_v5 + 8) + param_4,*(short *)(temp_v5 + 10) + param_5,0,5,0x74,
                    temp_v19);
       gxResetColorQuadToWhite();
       efctSetSpeed();
@@ -341,7 +341,7 @@ void campCecCreateEffectDraw(unsigned int *param_1,int param_2,float *param_3,in
                        *(short *)(temp_v5 + 10) + param_5,0x74);
           temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x105));
           sprintf((char *)temp_v19,"%d",*(unsigned short *)(param_2 + 0x3a));
-          statRowDrawValueImpl(0,*(short *)(temp_v5 + 8) + param_4,*(short *)(temp_v5 + 10) + param_5,0,5,0x74,
+          numberFontDrawFormatted(0,*(short *)(temp_v5 + 8) + param_4,*(short *)(temp_v5 + 10) + param_5,0,5,0x74,
                        temp_v19);
           temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x107));
           uiObjectSetColorRgb(param_1[0x12],0xffffff00);

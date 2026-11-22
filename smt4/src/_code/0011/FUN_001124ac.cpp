@@ -14,7 +14,7 @@ int FUN_00129d00(...);
 int FUN_00129d4c(...);
 int nngxLockEnter(void);
 int nngxLockLeave(void);
-int FUN_002ba2b8(void);
+int gfxReplayRecordedCommands(void);
 int FUN_002ba51c(...);
 int asdGxCommandBufferTerminateAndSubmit(void);
 int nngxBindCmdlist(...);
@@ -110,7 +110,7 @@ extern int FUN_00129d34(void);
 extern unsigned int FUN_00129d98(void);
 /* Supplied declaration required: nngxLockEnter. */
 /* Supplied declaration required: nngxLockLeave. */
-/* Supplied declaration required: FUN_002ba2b8. */
+/* Supplied declaration required: gfxReplayRecordedCommands. */
 /* Supplied declaration required: FUN_002ba51c. */
 /* Supplied declaration required: asdGxCommandBufferTerminateAndSubmit. */
 /* Supplied declaration required: nngxBindCmdlist. */
@@ -388,7 +388,7 @@ unsigned int FUN_001124ac(romwright_code *param_1,romwright_code *param_2)
           if (((int)DAT_004c632c[10] < (int)DAT_004c632c[8]) &&
              (DAT_004c62a1 = '\x01', DAT_004c632c[0xb] == 0x300)) {
             nngxLockEnter();
-            FUN_002ba2b8();
+            gfxReplayRecordedCommands();
             nngxLockLeave();
           }
         }

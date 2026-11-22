@@ -8,7 +8,7 @@ extern "C" {
 PartySlotA *partyGetSlotPreferredFirst(u32 index);
 void drawSetColorFromRGBA8(u32 color);
 void uiDrawItemOrStatusIcon(s32 id, s32 x, s32 y, s32 z, s32 tint);
-void statRowDrawValueImpl(u32 screen, s32 x, s32 y, s32 mode, s32 font, s32 layer, const char *format, ...);
+void numberFontDrawFormatted(u32 screen, s32 x, s32 y, s32 mode, s32 font, s32 layer, const char *format, ...);
 u32 texDrawTableEntrySized(u32 id, u32 table, s32 texture, s32 x, s32 y, s32 width, s32 height, u32 tag);
 
 /* Draws part `part` of the status panel's row for party slot `slot` (partyPanelDrawSlotPart's parts, for the rows that
@@ -67,7 +67,7 @@ void partyPanelDrawPartySlotPart(CyclingPanel *panel, s32 part, u32 slot, s32 ro
             DAT_00588c4c.color = color;
         }
         TextureTableEntryIV *levelEntry = DAT_00588c4c.levelEntry;
-        statRowDrawValueImpl(0, levelEntry->x + entry->x + x, entry->y + levelEntry->y + y, 1, font, 0x7e, "%d",
+        numberFontDrawFormatted(0, levelEntry->x + entry->x + x, entry->y + levelEntry->y + y, 1, font, 0x7e, "%d",
                      record->level + levelGain);
         break;
     }

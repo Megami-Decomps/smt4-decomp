@@ -53,7 +53,7 @@ struct DrawWork {
 
 extern "C" {
 
-extern DrawGlobals DAT_00439ce0;
+extern DrawGlobals g_btlColorDefaults;
 extern DrawSlot DAT_0049356c[2];
 
 s32 jobIsValid(u32 job);
@@ -83,10 +83,10 @@ void btlUnitDestroyDrawJobs(u32 job)
             slot->object = NULL;
         }
     }
-    if (DAT_00439ce0.owner != NULL) {
-        DAT_00439ce0.owner->vtbl->shutdown(DAT_00439ce0.owner);
+    if (g_btlColorDefaults.owner != NULL) {
+        g_btlColorDefaults.owner->vtbl->shutdown(g_btlColorDefaults.owner);
     }
-    DAT_00439ce0.owner = NULL;
+    g_btlColorDefaults.owner = NULL;
 }
 
 } /* extern "C" */

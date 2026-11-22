@@ -10,7 +10,7 @@ void rt_aeabi_memclr(void *buffer, u32 size);
 const char *saveFormatSlotFilename(u32 index, u32 flags);
 char *libc_strcpy(char *destination, const char *source);
 s32 FUN_003416a0(u32 index, const char *path);
-void FUN_00268250(s32 operation, s32 mode, s32 flags, void *buffer, u32 size);
+void saveLoadThreadRequestInit(s32 operation, s32 mode, s32 flags, void *buffer, u32 size);
 s32 lazyScriptTaskStep(void);
 void byte1IsZero(void);
 void asdSequenceRequest(s32 sequence, s32 argument, s32 flags);
@@ -42,7 +42,7 @@ void addonAdvanceBootTransition(BootTransitionWork *work)
             work->state += 2;
             return;
         }
-        FUN_00268250(5, 0, 0, requestBuffer, 128);
+        saveLoadThreadRequestInit(5, 0, 0, requestBuffer, 128);
         ++work->state;
     }
     case 4:

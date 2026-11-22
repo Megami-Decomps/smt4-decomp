@@ -7,7 +7,7 @@ s32 FUN_004bd098(void *owner, u32 stat);
 s32 partyRecordClampEquippedRankUp(u32 stat);
 s32 partyRecordClampEquippedRankDown(u32 stat);
 void drawSetColorFromRGBA8(u32 color);
-void statRowDrawValueImpl(s32 layer, s32 x, s32 y, s32 z, s32 mode, s32 depth, const char *format, ...);
+void numberFontDrawFormatted(s32 layer, s32 x, s32 y, s32 z, s32 mode, s32 depth, const char *format, ...);
 void gxResetColorQuadToWhite(void);
 
 enum {
@@ -48,12 +48,12 @@ void statDrawClampedDelta(void *owner, u32 stat, s32 x, s32 y, s32 depth, s32 de
             drawSetColorFromRGBA8(STAT_DELTA_GAIN_COLOR);
         }
         const TextureTableEntryIV *position = asdTMTexTableEntryAt(11, 0x402);
-        statRowDrawValueImpl(2, position->x + x, position->y + y, 0, 1, depth + 1, text);
+        numberFontDrawFormatted(2, position->x + x, position->y + y, 0, 1, depth + 1, text);
         position = asdTMTexTableEntryAt(11, 0x401);
         if (value < 0) {
             value = -value;
         }
-        statRowDrawValueImpl(2, position->x + x, position->y + y, 0, 1, depth + 1, "%d", value);
+        numberFontDrawFormatted(2, position->x + x, position->y + y, 0, 1, depth + 1, "%d", value);
         gxResetColorQuadToWhite();
     }
 }

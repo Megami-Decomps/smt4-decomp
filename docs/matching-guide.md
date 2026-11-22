@@ -134,6 +134,10 @@ difference a register tie-break.
 - Under `--fpmode=fast`, a float compared against a positive constant compiles to an integer compare of the bit
   patterns (`vmov r1, s0; cmp r1, r2` against the constant's word): write the plain float test
   (`if (phase >= 30.0f)`), not a union or cast that recreates the bits (smt4a `FUN_00357ea0`, wave 59).
+- Retail's VFP compares (`vcmpe`) of a float against constant limits, where the plain test gives integer compares,
+  come from the limits passed through a small compare helper: `btlIsBelow`/`btlIsAbove` (`battle/BtlSideLimits.h`)
+  serve smt4a `btlApplyDirectionBucket` (IDENTICAL; 44 lines off with `<`/`>` in place) and both games' effect-set
+  starters (wave 72).
 - Test a returned `nn::Result` from a local: `nn::Result result = f(&out); if (nnResultIsSuccess(result))`
   gives retail's `and #0x80000000; cmp; bge`, passing the call straight in gives `asr; adds` (wave 52:
   `runtimeInitializeSharedHandle`, both games).
@@ -334,6 +338,10 @@ difference a register tie-break.
   smt4 `FUN_001a7810`). That is instruction evidence, not allocation.
 - Conversions through `static __inline f32 get(p) { return p->field; }`; rounding as
   `f32 half = 0.5f;` declared first, then `floorf(scaled + half)`.
+- A multiply by 1.0 that retail performs (`vldr s16` of 1.0 at entry, then `vmul` by `s16`) is a product with a
+  variable that holds 1.0: a literal `* 1.0f` folds away. `f32 scale = 1.0f; … effect * scale` made smt4a
+  `skillScreenDrawCandidateListRow` IDENTICAL (wave 72; 139 lines with the literal). This is instruction evidence; a 1.0f local that
+  only moves where the constant is loaded is not.
 - armcc orders address-taken locals on the stack by reference weight: the most-referenced gets the
   lowest `sp` offset, ties go by declaration order, and references inside conditionals weigh less. A
   frame-layout diff (two locals swapped) points at a missing or extra reference to one of them, not at
@@ -380,6 +388,14 @@ asks for.
   (`--no_autoinline` keeps the helper out of line), and a unit must not add calls to emulate it: such pairs are
   one [translation unit](project.md#translation-units), both units built from one source file
   (`camp/PlayLog/PlayLog/PlayLog.cpp` holds the play-log pair).
+- A function retail inlines whole into another, variadic block included (`str r2, [sp]; add r3, sp, #4` of its
+  `va_start` inside the caller), was in the same file: smt4a `numberFontDrawFormatted` and `numberFontMeasureFormatted` are
+  one translation unit (`0018/NumberFont.cpp`), both IDENTICAL with the real function called, instead of a static copy
+  of its body (wave 72).
+- A value retail computes twice where one statement sequence would share it (`asr r4, r7, #3`, the byte index, again
+  after the first of two bit sets) marks an inline boundary: armcc does not share it across two inlined helpers.
+  The save's unlock-bit setters `unlockBitSetEarned`/`unlockBitSetPending` (`shard/ProgressUnlock.h`, beside the
+  shared test) made smt4a `progressConditionsUpdateUnlocks` IDENTICAL; in place it is 13 lines off (wave 72).
 - A draw block whose by-value parameters retail copies again (a flag moved from a saved register into its own
   stack slot, a float copied into `s1` before each product: `vmov.f32 s1, s16; vmul.f32 s0, s0, s1`) is a plain
   `static` helper inlined late: smt4a `contentListDrawRows`' cursor frame, `drawFocusFrame(screen, x, y, alpha,
@@ -479,6 +495,10 @@ asks for.
 - armcc rerolls consecutive copies from an indexed source array into a loop: name the entries as
   struct members (smt4 `FUN_003852c8`'s sixteen step-function copies from its constant table, one member per
   state, wave 67).
+- A short fixed copy (`dst[i] = src[i] >> 10` for eight elements) compiles to the same unrolled instructions as a
+  loop or as one statement per element, but the two forms schedule a spilled parameter's reload differently: try
+  both (smt4 `btlTargetSelectSetInfoPanel` is IDENTICAL with the eight statements, 50 lines off with the loop; its
+  Apocalypse twin matches either way and keeps the same form, wave 72).
 - A byte copy that retail peels and unrolls by two (one copy before the loop, then pairs) is a `do { *dst++ = *src++; }
   while (--count > 0);` over an unsigned count; a `while`/`for` copy compiles to a plain loop (the nn::cx `UncompressRL`
   copies, `rleDecompress`: 101 and 133 -> 8 lines in the two games, wave 65).

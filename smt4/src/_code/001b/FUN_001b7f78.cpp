@@ -226,7 +226,7 @@ int mapModeInitialize(void);
 int mapEnemyStartRequest(...);
 
 int FUN_001fdebc(...);
-int FUN_00208160(void);
+int mapDepartLoadModelsStep(void);
 int FUN_0027c3d0(void);
 int FUN_0027cc48(...);
 int FUN_0027cc6c(void);
@@ -467,7 +467,7 @@ extern int FUN_001e2760(unsigned int);
 /* Supplied declaration required: questClassifyCompletionNotification. */
 extern int gameMapHasActiveSlotId(int);
 /* Supplied declaration required: FUN_001fdebc. */
-/* Supplied declaration required: FUN_00208160. */
+/* Supplied declaration required: mapDepartLoadModelsStep. */
 /* Supplied declaration required: FUN_00208d8c. */
 /* Supplied declaration required: FUN_0020d6b0. */
 /* Supplied declaration required: mapObjectVisibilityRestore. */
@@ -577,7 +577,7 @@ extern int FUN_00276348(int);
 /* Supplied declaration required: FUN_0027c3d0. */
 /* Supplied declaration required: FUN_0027cc48. */
 /* Supplied declaration required: FUN_0027cc6c. */
-extern int FUN_0027cda0(void);
+extern int mapGimicStepUnitSpawner(void);
 extern int questMapSetCursor(unsigned int, unsigned int);
 /* Supplied declaration required: mapAmbientAudioUpdate. */
 /* Supplied declaration required: mapCompleteGroup. */
@@ -1172,7 +1172,7 @@ LAB_001b848c:
     temp_v10 = puVar14[9] + 1;
     puVar14[9] = temp_v10;
   case 4:
-    FUN_00208160();
+    mapDepartLoadModelsStep();
     if (temp_v10 == 0) {
       return 0;
     }
@@ -1198,7 +1198,7 @@ LAB_001b8aa8:
     mapGimicStartRequest(puVar14[0xb],puVar14[0xc]);
     puVar14[9] = puVar14[9] + 1;
 LAB_001b8ac0:
-    temp_v9 = FUN_0027cda0();
+    temp_v9 = mapGimicStepUnitSpawner();
     if (temp_v9 == 0) {
       return 0;
     }
@@ -5207,7 +5207,7 @@ LAB_001bec78:
     temp_v10 = puVar14[9] + 1;
     puVar14[9] = temp_v10;
   case 0x58:
-    FUN_00208160();
+    mapDepartLoadModelsStep();
     if (temp_v10 == 0) {
       return 0;
     }
@@ -5233,7 +5233,7 @@ LAB_001bf4e0:
     mapGimicStartRequest(puVar14[0xb],puVar14[0xc]);
     puVar14[9] = puVar14[9] + 1;
 LAB_001bf4f8:
-    temp_v9 = FUN_0027cda0();
+    temp_v9 = mapGimicStepUnitSpawner();
     if (temp_v9 == 0) {
       return 0;
     }

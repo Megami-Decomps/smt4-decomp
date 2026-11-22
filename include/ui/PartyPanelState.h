@@ -10,6 +10,7 @@
 #include "ui/PartyPanelParts.h"
 #include <stddef.h>
 #include "script/ScriptVm.h"
+#include "gamedata/PackedIdentifiers.h"
 
 /* A copy of a battle-unit record kept for previews (0x604 bytes); only the two stat arrays are named. */
 struct PartyPanelUnitPreview {
@@ -68,8 +69,7 @@ typedef struct PartyPanelState {
     /* 0x0B34 */ s32 fusionParentIds[2];
     /* 0x0B3C */ s32 fusionParentCount;
     /* 0x0B40 */ u8 unk0B40[8];
-    /* 0x0B48 */ u32 fusionParents;                   /* first parent in bits 0-14, second in 15-29 */
-    /* 0x0B4C */ u32 fusionProduct;                   /* product id in bits 2-16 */
+    /* 0x0B48 */ PackedIdentifiers fusionPair;        /* the two parents' ids and the product's */
     /* 0x0B50 */ u8 fusionResult[0x34];               /* the result unit */
     /* 0x0B84 */ u16 fusionResultSkills[8];
     /* 0x0B94 */ u8 unk0B94[0x5C0];
@@ -101,6 +101,7 @@ typedef char PartyPanelStateOffsetCheck[
     offsetof(PartyPanelState, partyGrid) == 0x8DC &&
     offsetof(PartyPanelState, fullGridAlternate) == 0xA6C &&
     offsetof(PartyPanelState, fusionParentCount) == 0xB3C &&
+    offsetof(PartyPanelState, fusionPair) == 0xB48 &&
     offsetof(PartyPanelState, fusionResultSkills) == 0xB84 &&
     offsetof(PartyPanelState, statusValue) == 0x1158 &&
     offsetof(PartyPanelState, previewUnit) == 0x11EC &&

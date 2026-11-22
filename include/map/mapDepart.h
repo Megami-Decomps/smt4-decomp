@@ -98,29 +98,29 @@ struct AsdMdlObject;
 /* Resources kept while departing (Shin Megami Tensei IV), one block behind a module global. */
 typedef struct MapDepartWork {
     /* 0x00 */ u32 unk00;
-    /* 0x04 */ u16 unk04;
-    /* 0x06 */ u16 unk06;
-    /* 0x08 */ u16 unk08;
+    /* 0x04 */ s16 mapId;        /* the destination map */
+    /* 0x06 */ s16 areaId;       /* its area; also the sky table's key */
+    /* 0x08 */ s16 modelState;   /* the model loader's step (mapDepartLoadModelsStep) */
     union {
         /* 0x0A */ u8 unk0A[2];
         /* 0x0A */ u8 modelsVisible;
     };
     union {
         /* 0x0C */ u32 handleA;
-        /* 0x0C */ AsdMdlObject *nodeA;
+        /* 0x0C */ AsdMdlObject *nodeA;     /* the map model */
     };
     union {
         /* 0x10 */ u32 handleB;
-        /* 0x10 */ AsdMdlObject *nodeB;
+        /* 0x10 */ AsdMdlObject *nodeB;     /* the sky model */
     };
     /* 0x14 */ s16 state;
     /* 0x16 */ u8 unk16[2];
     /* 0x18 */ s32 skyId;        /* optional asynchronous sky archive */
     /* 0x1C */ s16 loadMapId;
     /* 0x1E */ s16 loadAreaId;
-    /* 0x20 */ void *dataA;      /* heap block */
+    /* 0x20 */ void *dataA;      /* heap block: the map model archive */
     /* 0x24 */ u32 sizeA;
-    /* 0x28 */ void *dataB;      /* heap block */
+    /* 0x28 */ void *dataB;      /* heap block: the sky model archive */
     /* 0x2C */ u32 sizeB;
 } MapDepartWork;
 typedef char MapDepartWorkVisibilityOffsetsCheck[

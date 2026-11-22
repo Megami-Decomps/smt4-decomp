@@ -182,6 +182,13 @@ typedef struct GameSavedPairA {
 
 /* Apocalypse: the save body (0x2A71C bytes), copied to and from the work block; it follows the save block's
  * 0x88-byte header. Offsets are from the body; add 0x88 for the save block offset. */
+/* One saved StreetPass ranking entry (4 bytes). */
+typedef struct GameSavedCecRankA {
+    /* 0x00 */ u16 id;                    /* a demon id (players) or a category kind */
+    /* 0x02 */ u16 scoreAndRank;          /* bits 0-9: the score, bits 10 and up: the rank */
+} GameSavedCecRankA;
+typedef char GameSavedCecRankASizeCheck[sizeof(GameSavedCecRankA) == 4 ? 1 : -1];
+
 typedef struct GameSaveBodyA {
     /* 0x00000 */ u16 summaryId;    /* 4 once the save menu writes the body; FUN_002299b0 copies it into the slot summary */
     /* 0x00002 */ u8 saveKind;      /* SaveSlotHeaderWork::saveKind of the menu that wrote it */
@@ -250,6 +257,11 @@ typedef struct GameSaveBodyA {
             /* 0x282C8 */ u8 area282C8[4];
         } area;
         struct {
+            u8 prefix[0x480];
+            /* 0x28310 */ GameSavedCecRankA players[20];   /* the StreetPass ranking's entries (CampCecRanking) */
+            /* 0x28360 */ GameSavedCecRankA categories[7];
+        } cecRanking;
+        struct {
             u8 prefix[0x500];
             /* 0x28390 */ u8 block28390[1];
         } tail;
@@ -279,6 +291,7 @@ typedef char GameSaveBodyAOffsetCheck[offsetof(GameSaveBodyA, slots) == 0x4 && o
     offsetof(GameSaveBodyA, pairs.entries) == 0x270C4 && offsetof(GameSaveBodyA, record.tail.value) == 0x27E0C &&
     offsetof(GameSaveBodyA, saveState) == 0x27E1E && offsetof(GameSaveBodyA, entryFlags) == 0x27E50 &&
     offsetof(GameSaveBodyA, work.savedFlags) == 0x27EB8 && offsetof(GameSaveBodyA, tail.block28390) == 0x28390 &&
+    offsetof(GameSaveBodyA, cecRanking.players) == 0x28310 && offsetof(GameSaveBodyA, cecRanking.categories) == 0x28360 &&
     sizeof(GameSaveBodyA) == 0x2A71C && sizeof(GameSaveDataA) == 0x2A7A4 &&
     offsetof(GameSaveDataA, mapGroup.progress) == 0x66 ? 1 : -1];
 

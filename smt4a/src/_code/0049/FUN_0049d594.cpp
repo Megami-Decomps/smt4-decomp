@@ -8,7 +8,7 @@ void uiDrawListScrollBar(void *controller, s32 x, s32 y, u32 texture,
     s32 firstImage, s32 secondImage, s32 thirdImage, s32 fourthImage,
     s32 fifthImage, s32 sixthImage, s32 seventhImage,
     s32 selected, s32 first, s32 second, u32 flags, s32 mode);
-void FUN_0049d938(void *work, s32 x, s32 y, f32 scale);
+void howToDrawRows(void *work, s32 x, s32 y, f32 scale);
 
 void FUN_0049d594(void *panel)
 {
@@ -35,7 +35,7 @@ void FUN_0049d594(void *panel)
         texDrawTableEntryAtStoredOrigin(2, 0x33, index * 2 + 0x3f, x, y, index + 0xc5);
     }
     efctSetSpeed(1.0f);
-    FUN_0049d938(work, x, y, scale);
+    howToDrawRows(work, x, y, scale);
     efctSetSpeed(scale);
     s32 first = work->first;
     s32 second = work->second;

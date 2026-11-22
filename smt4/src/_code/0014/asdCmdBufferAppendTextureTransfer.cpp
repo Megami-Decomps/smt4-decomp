@@ -4,7 +4,7 @@
 extern "C" {
 void nngxLockEnter(void);
 void nngxLockLeave(void);
-void FUN_002ba2b8(void);
+void gfxReplayRecordedCommands(void);
 
 /* Append a same-size texture transfer, converting GL pixel formats to GPU formats. */
 void asdCmdBufferAppendTextureTransfer(AsdCmdBuffer *buffer, const void *source, void *destination,
@@ -37,7 +37,7 @@ void asdCmdBufferAppendTextureTransfer(AsdCmdBuffer *buffer, const void *source,
     if (g_asdGfxContext.activeBuffer == buffer &&
         g_asdGfxContext.submitEnabled != 0 && g_asdGfxContext.submitPending == 0) {
         g_asdGfxContext.submitPending = 1;
-        FUN_002ba2b8();
+        gfxReplayRecordedCommands();
     }
     nngxLockLeave();
 }

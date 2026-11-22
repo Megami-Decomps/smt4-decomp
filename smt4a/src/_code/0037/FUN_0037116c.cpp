@@ -4,7 +4,7 @@
 extern "C" {
 s32 saveLoadGetValue(void);
 void saveLoadSetValue(s32 value);
-void FUN_00268250(s32 mode, u32 resource, s32 first, s32 second, s32 third);
+void saveLoadThreadRequestInit(s32 mode, u32 resource, s32 first, s32 second, s32 third);
 s32 FUN_002a60f8(void);
 void campButtonHelpLoad(void);
 void helpTexturesRelease(void);
@@ -31,7 +31,7 @@ s32 FUN_0037116c(u32 job)
         campButtonHelpLoad();
         campButtonHelpAcquire();
         messageMainSetFlag(0);
-        FUN_00268250(0, work->unk14, 0, 0, 0);
+        saveLoadThreadRequestInit(0, work->unk14, 0, 0, 0);
         work->state = 13;
         break;
     case 13:

@@ -25,7 +25,7 @@ int sysPlaySe(int);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int mapIfSetMode1(void);
-int FUN_00233e10(int, unsigned int);
+int mapIfApplyEntryRequest(int, unsigned int);
 int FUN_002342b8(void);
 int mapResolveCollisionSphere(int, int, int);
 int distSpatial(void);
@@ -58,7 +58,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: mapIfSetMode1. */
-/* Supplied declaration required: FUN_00233e10. */
+/* Supplied declaration required: mapIfApplyEntryRequest. */
 /* Supplied declaration required: FUN_002342b8. */
 /* Supplied declaration required: mapResolveCollisionSphere. */
 extern int mapIfHasSelection(void);
@@ -144,7 +144,7 @@ void FUN_00327964(void)
           if (temp_v4 != 0) {
             if (temp_v4 == 1) {
               *(int *)(temp_v3 + 8) = *(int *)(temp_v3 + 8) + 1;
-              FUN_00233e10(1,g_gameState.f005f16ac);
+              mapIfApplyEntryRequest(1,g_gameState.f005f16ac);
               temp_v3 = g_lmapScene;
               if (*(int *)(g_lmapScene + 8) >= 3) {
                 temp_v4 = *(int *)(g_lmapScene + 4);
@@ -207,7 +207,7 @@ void FUN_00327964(void)
             lmapCameraSetMode(10);
             *(unsigned int *)(g_lmapView + 0xb0) = 0xffffffff;
             sysPlaySe(0xdd);
-            FUN_00233e10(1,g_gameState.f005f16ac);
+            mapIfApplyEntryRequest(1,g_gameState.f005f16ac);
             mapIfSpawnManholeAction();
             temp_v3 = g_lmapScene;
             temp_v4 = *(int *)(temp_v3 + 4);
@@ -236,7 +236,7 @@ void FUN_00327964(void)
       }
       else {
         *(int *)(temp_v3 + 8) = *(int *)(temp_v3 + 8) + 1;
-        FUN_00233e10(1,g_gameState.f005f16ac);
+        mapIfApplyEntryRequest(1,g_gameState.f005f16ac);
         temp_v4 = inputConfirmPressed();
         temp_v3 = g_lmapScene;
         if (temp_v4 != 0) {
@@ -253,7 +253,7 @@ void FUN_00327964(void)
             temp_v3 = g_lmapScene;
             *(unsigned int *)(g_lmapScene + 0x54) = 0;
             *(unsigned int *)(temp_v3 + 0x58) = temp_v12;
-            FUN_00233e10(0,g_gameState.f005f16ac);
+            mapIfApplyEntryRequest(0,g_gameState.f005f16ac);
             mapIfReleaseSlot1();
             temp_v3 = g_lmapScene;
             *(unsigned int *)(g_lmapScene + 4) = 0x5a;

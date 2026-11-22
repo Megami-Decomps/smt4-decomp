@@ -15,7 +15,7 @@ int soundVolumeSettingSet(...);
 int messageVoiceBankGet(void);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
-int FUN_00233e10(int, unsigned int);
+int mapIfApplyEntryRequest(int, unsigned int);
 int mapEaseSceneHeading(void);
 int FUN_002e364c(...);
 int lmapCameraSetMode(...);
@@ -44,7 +44,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: slotSetRequest. */
-/* Supplied declaration required: FUN_00233e10. */
+/* Supplied declaration required: mapIfApplyEntryRequest. */
 /* Supplied declaration required: FUN_00246014. */
 /* Supplied declaration required: mapIfOverlayRelease. */
 /* Supplied declaration required: mapEaseSceneHeading. */
@@ -207,7 +207,7 @@ LAB_00367d2c:
         if (temp_v2 != 1) {
           if (temp_v2 == 2) {
             *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-            FUN_00233e10(1,g_gameState.overviewRecord);
+            mapIfApplyEntryRequest(1,g_gameState.overviewRecord);
             temp_v1 = inputConfirmPressed();
             if (temp_v1 != 0) {
               table23FindRecordByKey(g_gameState.unk0A4,g_gameState.unk0A8,g_gameState.unk0AC);
@@ -229,7 +229,7 @@ LAB_00367d2c:
                 temp_v1 = g_lmapScene;
                 *(unsigned int *)(g_lmapScene + 0x54) = 0;
                 *(unsigned int *)(temp_v1 + 0x58) = 0x40a00000;
-                FUN_00233e10(0,g_gameState.overviewRecord);
+                mapIfApplyEntryRequest(0,g_gameState.overviewRecord);
                 mapIfReleaseSlot3();
                 temp_v1 = g_lmapScene;
                 *(unsigned int *)(g_lmapScene + 4) = 0x5a;
@@ -240,7 +240,7 @@ LAB_00367d2c:
         }
         else {
           *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-          FUN_00233e10(1,g_gameState.overviewRecord);
+          mapIfApplyEntryRequest(1,g_gameState.overviewRecord);
           temp_v1 = g_lmapScene;
           if (*(int *)(g_lmapScene + 8) >= 3) {
             temp_v2 = *(int *)(g_lmapScene + 4);
@@ -278,7 +278,7 @@ LAB_00367d2c:
       lmapCameraSetMode(10);
       *(unsigned int *)(g_lmapView + 0xb0) = 0xffffffff;
       sysPlaySe(0xdd);
-      FUN_00233e10(1,g_gameState.overviewRecord);
+      mapIfApplyEntryRequest(1,g_gameState.overviewRecord);
       libm_sinf();
       libm_cosf();
       FUN_00246014();

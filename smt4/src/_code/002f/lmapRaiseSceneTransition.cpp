@@ -7,7 +7,7 @@
 extern "C" {
 void mapCollisionRelease();
 void mapCollisionLoad(s32 map, u32 entry, s32 secondaryMap, u32 mode);
-void FUN_002d508c(LmapMainState *state);
+void fieldPlayerMoveByStick(LmapMainState *state);
 void lmapUpdateMapBgm();
 void FUN_00281784();
 void mapInitializeStoryMarkerEffects(u32 map);
@@ -58,7 +58,7 @@ u32 lmapRaiseSceneTransition()
         transition->frame = 0;
         break;
     case 1:
-        FUN_002d508c((LmapMainState *)transition);
+        fieldPlayerMoveByStick((LmapMainState *)transition);
         ++transition->frame;
         g_lmapScene->pose.position.y = transition->start.y +
             (transition->end.y - transition->start.y) * (f32)transition->frame * 0.033333335f;
@@ -71,7 +71,7 @@ u32 lmapRaiseSceneTransition()
         }
         break;
     case 2:
-        FUN_002d508c((LmapMainState *)transition);
+        fieldPlayerMoveByStick((LmapMainState *)transition);
         break;
     case 3:
     case 4:

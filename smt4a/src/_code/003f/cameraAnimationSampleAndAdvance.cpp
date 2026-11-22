@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail copies a full static transform temporary instead of only translation; vector-copy, boolean-return registers and frame padding differ. Original SDK value/temporary ABI is unrecovered. */
+/* NON_MATCHING: 84 lines (128 vs 128 rows): curve-sampling helpers and progress/return flow match sibling cameraMotionSampleAtFrame; retail copies the full static transform temporary in the animationCount==0 path and uses different VFP register numbering (s16/s17/s18). */
 #include "shard/W5_W5Match7_AnimatedObject.h"
 #include "shard/W6_W6Match2_AnimationPlayback.h"
 #include "status/StatusCamera.h"
@@ -51,54 +51,77 @@ struct CameraAnimationOutput {
 };
 
 extern "C" {
-void FUN_001986c4(CameraAnimationCurve *, CameraAnimationTransform *, f32);
-u32 FUN_00198848(CameraAnimationCurve *, Vec3 *, f32);
-u32 FUN_00522a08(CameraAnimationCurve *, f32 *, f32);
-void FUN_0019eb14(CameraAnimationOutput *);
+void FUN_001986c4(CameraAnimationCurve *curve, CameraAnimationTransform *output, f32 frame);
+u32 FUN_00198848(CameraAnimationCurve *curve, Vec3 *output, f32 frame);
+u32 FUN_00522a08(CameraAnimationCurve *curve, f32 *output, f32 frame);
+void FUN_0019eb14(CameraAnimationOutput *camera);
+
+static __inline void cameraAnimationSampleTransform(CameraAnimationClip *clip,
+                                                    CameraAnimationTransform *output, f32 frame)
+{
+    if (clip->transformIndex != 0xFF)
+        FUN_001986c4(clip->curves[clip->transformIndex], output, frame);
+}
+
+static __inline void cameraAnimationSampleTarget(CameraAnimationClip *clip, Vec3 *output, f32 frame)
+{
+    if (clip->targetIndex != 0xFF)
+        FUN_00198848(clip->curves[clip->targetIndex], output, frame);
+}
+
+static __inline void cameraAnimationSampleRoll(CameraAnimationClip *clip, f32 *output, f32 frame)
+{
+    if (clip->rollIndex != 0xFF)
+        FUN_00522a08(clip->curves[clip->rollIndex], output, frame);
+}
+
+static __inline void cameraAnimationSampleFieldOfView(CameraAnimationClip *clip, f32 *output, f32 frame)
+{
+    if (clip->fieldOfViewIndex != 0xFF)
+        FUN_00522a08(clip->curves[clip->fieldOfViewIndex], output, frame);
+}
 
 bool cameraAnimationSampleAndAdvance(AnimatedObject *object, CameraAnimationOutput *output, s32 index, f32 delta)
 {
-    const f32 radiansToDegrees = 57.295776f;
+    bool active = true;
     CameraAnimationResource *resource =
-        static_cast<CameraAnimationResource *>(object->animation.resource);
+        (CameraAnimationResource *)object->animation.resource;
     CameraAnimationDefinition *definition = resource->definitions[index];
     const CameraAnimationProjection *projection = definition->projection;
     if (resource->animationCount == 0) {
-        output->target = *definition->target;
-        output->position = definition->transform.translation;
+        output->target.x = definition->target->x;
+        output->target.y = definition->target->y;
+        output->target.z = definition->target->z;
+        CameraAnimationTransform transform = definition->transform;
+        output->position = transform.translation;
         output->nearClip = projection->nearClip;
         output->farClip = projection->farClip;
         output->aspect = projection->aspect;
-        output->fieldOfView = projection->fieldOfView * radiansToDegrees;
+        output->fieldOfView = projection->fieldOfView * 57.295776f;
         return true;
     }
     CameraAnimationClip *clip = resource->clips[index];
-    if (clip->transformIndex == 0xff && clip->targetIndex == 0xff && clip->rollIndex == 0xff)
+    if (clip->transformIndex == 0xFF && clip->targetIndex == 0xFF && clip->rollIndex == 0xFF)
         return false;
     CameraAnimationTransform transform = definition->transform;
-    if (clip->transformIndex != 0xff)
-        FUN_001986c4(clip->curves[clip->transformIndex], &transform, object->progress);
-    if (clip->targetIndex != 0xff)
-        FUN_00198848(clip->curves[clip->targetIndex], &output->target, object->progress);
-    if (clip->rollIndex != 0xff)
-        FUN_00522a08(clip->curves[clip->rollIndex], &output->roll, object->progress);
+    cameraAnimationSampleTransform(clip, &transform, object->progress);
+    cameraAnimationSampleTarget(clip, &output->target, object->progress);
+    cameraAnimationSampleRoll(clip, &output->roll, object->progress);
     output->position = transform.translation;
     output->nearClip = projection->nearClip;
     output->farClip = projection->farClip;
     output->aspect = projection->aspect;
     f32 fieldOfView = 0.0f;
-    if (clip->fieldOfViewIndex != 0xff)
-        FUN_00522a08(clip->curves[clip->fieldOfViewIndex], &fieldOfView, object->progress);
-    output->fieldOfView = fieldOfView * radiansToDegrees;
+    cameraAnimationSampleFieldOfView(clip, &fieldOfView, object->progress);
+    output->fieldOfView = fieldOfView * 57.295776f;
     if (output->fieldOfView == 0.0f)
-        output->fieldOfView = projection->fieldOfView * radiansToDegrees;
+        output->fieldOfView = projection->fieldOfView * 57.295776f;
     FUN_0019eb14(output);
-    f32 time = object->progress + delta;
-    object->progress = time;
-    if (time > clip->header.duration) {
+    object->progress = object->progress + delta;
+    if (object->progress > clip->header.duration) {
+        active = false;
         object->progress = 0.0f;
-        return false;
     }
-    return true;
+    return active;
 }
 }

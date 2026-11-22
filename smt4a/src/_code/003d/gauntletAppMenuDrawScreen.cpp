@@ -14,7 +14,7 @@ extern "C" {
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
-int statRowDrawValueImpl(...);
+int numberFontDrawFormatted(...);
 int gxResetColorQuadToWhite(void);
 int drawSetColorFromRGBA8(...);
 int fadeObjectResetIfActive(...);
@@ -43,7 +43,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00168470. */
-/* Supplied declaration required: statRowDrawValueImpl. */
+/* Supplied declaration required: numberFontDrawFormatted. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -93,7 +93,7 @@ void gauntletAppMenuDrawScreen(int param_1)
   temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x583));
   temp_v3 = gameSaveGetPoints();
   sprintf((char *)temp_v12,"%u",temp_v3);
-  statRowDrawValueImpl(0,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,1,4,0x6a,temp_v12);
+  numberFontDrawFormatted(0,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,1,4,0x6a,temp_v12);
   temp_v5 = 0;
   temp_v2 = uiSearchPrimary(param_1 + 0x10);
   if (0 < temp_v2) {
@@ -144,7 +144,7 @@ void gauntletAppMenuDrawScreen(int param_1)
           }
           temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x594));
           drawSetColorFromRGBA8(temp_v11);
-          statRowDrawValueImpl(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v0,
+          numberFontDrawFormatted(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v0,
                        (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v1,1,4,0x6f,
                        temp_v12);
           gxResetColorQuadToWhite();
@@ -240,7 +240,7 @@ void gauntletAppMenuDrawScreen(int param_1)
       }
       temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x59d));
       drawSetColorFromRGBA8(temp_v11);
-      statRowDrawValueImpl(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v0,
+      numberFontDrawFormatted(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v0,
                    (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v1,1,4,0x97,
                    temp_v12);
       gxResetColorQuadToWhite();

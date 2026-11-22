@@ -48,7 +48,7 @@ int partyMemberFindById(...);
 int nkmBaseGetRecord(void);
 int table08ApplyToParty(...);
 
-int FUN_001d1828(void);
+int partyPanelApplyFusion(void);
 int FUN_0026c654(...);
 int FUN_0026c710(...);
 int communicationBeginTransition(...);
@@ -120,7 +120,7 @@ extern int g_partyPanel; /* 0x43dcf0 */
 
 /* Supplied declaration required: FUN_0017fbc4. */
 /* Supplied declaration required: scrRunOpcodesStub. */
-/* Supplied declaration required: FUN_001d1828. */
+/* Supplied declaration required: partyPanelApplyFusion. */
 extern int FUN_002015a4(void);
 /* Supplied declaration required: partyPanelResetCursor. */
 /* Supplied declaration required: partyPanelRefreshItemPreview. */
@@ -1391,7 +1391,7 @@ LAB_001c6598:
                       partyPanelShowButtonHelp();
                       temp_v6 = *piVar17;
                       if (temp_v6 >= 2) {
-                        FUN_001d1828();
+                        partyPanelApplyFusion();
                         temp_v4 = g_partyPanel;
                         if (temp_v6 != 0) {
                           temp_v6 = 0;
@@ -1564,7 +1564,7 @@ LAB_001c653c:
                       partyPanelShowButtonHelp();
                       temp_v6 = *piVar17;
                       if (temp_v6 >= 2) {
-                        FUN_001d1828();
+                        partyPanelApplyFusion();
                         temp_v4 = g_partyPanel;
                         if (temp_v6 != 0) {
                           temp_v6 = 0;

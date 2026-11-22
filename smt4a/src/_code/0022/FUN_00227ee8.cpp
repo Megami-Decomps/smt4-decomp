@@ -5,7 +5,7 @@
 extern "C" {
 
 void FUN_003e4070(void *load, u32 arg);
-void FUN_003fa010(JobStateMachine *machine);
+void dataStoreRequestDispatch(JobStateMachine *machine);
 s32 FUN_003fa83c(JobStateMachine *machine);
 void FUN_00442554(JobStateMachine *machine);
 
@@ -22,7 +22,7 @@ s32 FUN_00227ee8(u32 job)
     if (machine->current != machine->next) {
         machine->previous = machine->current;
         machine->current = machine->next;
-        FUN_003fa010(machine);
+        dataStoreRequestDispatch(machine);
     }
     bool advance = true;
     if (!machine->loading) {

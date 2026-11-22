@@ -25,7 +25,7 @@ int aocIndexValueOrDefault(...); // declcheck: local (romwright prototype; the s
 int dataFindKindRecordWithAocOverrides(...);
 int textDrawString(...);
 int efctSetSpeed(void);
-int statRowDrawValueImpl(...);
+int numberFontDrawFormatted(...);
 int texDrawTableEntryAtStoredOrigin(...);
 int FUN_00185e84(...);
 int gameGetSlotRecord(...);
@@ -76,7 +76,7 @@ extern unsigned int DAT_00573bfc; /* 0x573bfc */
 /* Supplied declaration required: effectDispatchSelector. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00167860. */
-/* Supplied declaration required: statRowDrawValueImpl. */
+/* Supplied declaration required: numberFontDrawFormatted. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
 /* Supplied declaration required: nkmBaseGetRecord. */
@@ -263,7 +263,7 @@ void FUN_0028d270(int param_1)
                   temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x86));
                   temp_v14[0] = (unsigned char *)0x49;
                   temp_v14[2] = (unsigned char *)temp_v6;
-                  statRowDrawValueImpl(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
+                  numberFontDrawFormatted(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
                                (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,1,4
                               );
                 }
@@ -353,12 +353,12 @@ void FUN_0028d270(int param_1)
               ;
               temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x8a));
               temp_v14[0] = (unsigned char *)0x74;
-              statRowDrawValueImpl(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
+              numberFontDrawFormatted(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
                            (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,1,1);
               temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x8a));
               temp_v14[0] = (unsigned char *)0x49;
               temp_v14[2] = (unsigned char *)temp_v6;
-              statRowDrawValueImpl(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
+              numberFontDrawFormatted(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
                            (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,1,4);
             }
           }
@@ -397,7 +397,7 @@ void FUN_0028d270(int param_1)
             temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x86));
             temp_v14[0] = (unsigned char *)0x49;
             temp_v14[2] = (unsigned char *)0x0;
-            statRowDrawValueImpl(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
+            numberFontDrawFormatted(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                          (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,1,4);
           }
         }
@@ -598,7 +598,7 @@ LAB_0028d9e0:
           temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x86));
           temp_v14[0] = (unsigned char *)0x49;
           temp_v14[2] = (unsigned char *)temp_v26;
-          statRowDrawValueImpl(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
+          numberFontDrawFormatted(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
                        (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,1,4);
         }
         efctSetSpeed();
@@ -698,7 +698,7 @@ LAB_0028d9e0:
             temp_v14[0] = (unsigned char *)0x74;
             temp_v14[1] = &LAB_0028f73c;
             temp_v14[2] = (unsigned char *)temp_v6;
-            statRowDrawValueImpl(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
+            numberFontDrawFormatted(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
                          (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v2,1,4);
           }
         }
@@ -796,12 +796,12 @@ LAB_0028d9e0:
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v2,0x74,0);
         temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0xa7));
         temp_v14[0] = (unsigned char *)0x74;
-        statRowDrawValueImpl(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
+        numberFontDrawFormatted(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v2,1,1);
         temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0xa7));
         temp_v14[0] = (unsigned char *)0x74;
         temp_v14[2] = (unsigned char *)temp_v6;
-        statRowDrawValueImpl(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
+        numberFontDrawFormatted(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v2,1,4);
       }
     }
@@ -840,7 +840,7 @@ LAB_0028d9e0:
       temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0xa3));
       temp_v14[0] = (unsigned char *)0x74;
       temp_v14[2] = (unsigned char *)0x0;
-      statRowDrawValueImpl(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
+      numberFontDrawFormatted(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
                    (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v2,1,4);
     }
   }
@@ -1001,7 +1001,7 @@ LAB_0028d9e0:
     temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0xa3));
     temp_v14[0] = (unsigned char *)0x74;
     temp_v14[2] = (unsigned char *)temp_v6;
-    statRowDrawValueImpl(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
+    numberFontDrawFormatted(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
                  (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v2,1,4);
   }
   temp_v11 = gridNavigationGetItemCount(*temp_v24);

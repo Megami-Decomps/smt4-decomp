@@ -9,7 +9,7 @@
 
 /* One interface record (0x194 bytes): a map marker, transition point or HUD element. */
 typedef struct MapIfRecord {
-    /* 0x000 */ u8 active;
+    /* 0x000 */ s8 active;
     /* 0x001 */ u8 unk001[3];
     /* 0x004 */ s32 state;
     /* 0x008 */ s32 restart;
@@ -209,7 +209,7 @@ typedef struct MapIfStateA {
     /* 0x0016 */ u8 unk16;
     /* 0x0017 */ u8 unk17;
     /* 0x0018 */ u32 unk18;
-    /* 0x001C */ u8 unk1C;
+    /* 0x001C */ s8 unk1C;
     /* 0x001D */ s8 dialogOpen;    /* set while the interface's dialog is open */
     /* 0x001E */ u8 unk1E[2];
     /* 0x0020 */ s32 unk20;

@@ -12,13 +12,29 @@ typedef struct EffParticleSource {
     /* 0x08 */ u32 count;
 } EffParticleSource;
 
+struct AsdTexture;
+
+/* The model a particle geometry draws with. */
+typedef struct EffParticleModel {
+    /* 0x00 */ u8 unk00[0xB4];
+    /* 0xB4 */ struct AsdTexture *texture;
+} EffParticleModel;
+
+/* The geometry buffer handle of a textured particle block. */
+typedef struct EffParticleGeometry {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ EffParticleModel *model;
+} EffParticleGeometry;
+
 /* A particle parameter block. `type` selects which of the pointer fields below are in use; the
  * arrays hold one handle per particle (`count`, or the count of `source` when it is set). */
 typedef struct EffParticleParam {
     /* 0x00 */ u32 count;
-    /* 0x04 */ u8 unk04[8];
+    /* 0x04 */ s32 handle;         /* -1 (none) when created */
+    /* 0x08 */ f32 scale;          /* 1.0 when created */
     /* 0x0C */ u16 type;
-    /* 0x0E */ u8 unk0e[0x26];
+    /* 0x0E */ u8 flags;           /* bit 0: built from an effect description */
+    /* 0x0F */ u8 unk0f[0x25];
     /* 0x34 */ void **handles34;   /* type 5: handle array (alias of buffer38) */
     /* 0x38 */ void *buffer38;     /* allocation holding handles34 */
     /* 0x3C */ void **handles3c;   /* type 6: handle array (alias of buffer40) */
@@ -29,9 +45,10 @@ typedef struct EffParticleParam {
     union {
         /* 0x50 */ u8 unk50[4];
         /* 0x50 */ void *auxiliary;
+        /* 0x50 */ struct EffParticleGeometry *geometry; /* the buffer handle geometryOwnerSetGeometry creates */
     };
-    /* 0x54 */ u32 unk54;
-    /* 0x58 */ u32 unk58;
+    /* 0x54 */ f32 halfWidth;      /* types 1, 4 and 9: half the texture size, in sixteenths */
+    /* 0x58 */ f32 halfHeight;
 } EffParticleParam;
 typedef char EffParticleAuxiliaryOffsetCheck[sizeof(EffParticleParam) == 0x5C &&
     offsetof(EffParticleParam, auxiliary) == 0x50 ? 1 : -1];

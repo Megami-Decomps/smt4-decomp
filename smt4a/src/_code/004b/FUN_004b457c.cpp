@@ -10,7 +10,7 @@ int textDrawString(...);
 int effectRenderTransformedInstance(...);
 int dataTable25FindById(...);
 int efctSetSpeed(void);
-int statRowDrawValueImpl(...);
+int numberFontDrawFormatted(...);
 int uiDrawItemOrStatusIcon(...);
 int gxResetColorQuadToWhite(void);
 int drawSetColorFromRGBA8(...);
@@ -61,7 +61,7 @@ extern int saveSlotFindSelected(void);
 /* Supplied declaration required: dataTable25FindById. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: statRowDrawValueImpl. */
+/* Supplied declaration required: numberFontDrawFormatted. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
@@ -208,7 +208,7 @@ void FUN_004b457c(int param_1,int param_2,int param_3)
     }
     temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(temp_v28,0x149));
     drawSetColorFromRGBA8(0xff);
-    statRowDrawValueImpl(6,*(short *)(temp_v2 + 8) + temp_v7,*(short *)(temp_v2 + 10) + param_3,1,3,0x79,
+    numberFontDrawFormatted(6,*(short *)(temp_v2 + 8) + temp_v7,*(short *)(temp_v2 + 10) + param_3,1,3,0x79,
                  &LAB_004b4d30,(int)*(short *)(param_1 + 0x7c72) + temp_v8);
     gxResetColorQuadToWhite();
     temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(temp_v28,0x148));
@@ -220,7 +220,7 @@ void FUN_004b457c(int param_1,int param_2,int param_3)
       temp_v0 = levelGetExpRequirement((int)*(short *)(param_1 + 0x7c72) + temp_v8);
       temp_v0 = temp_v0 - ((*(unsigned int *)(param_1 + 0x7c68) >> 0xc) | (*(int *)(param_1 + 0x7c6c) << 0x14));
     }
-    statRowDrawValueImpl(0,*(short *)(temp_v2 + 8) + temp_v7,*(short *)(temp_v2 + 10) + param_3,1,7,0x79,
+    numberFontDrawFormatted(0,*(short *)(temp_v2 + 8) + temp_v7,*(short *)(temp_v2 + 10) + param_3,1,7,0x79,
                  &LAB_004b4d30,temp_v0);
     gxResetColorQuadToWhite();
     temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(temp_v28,0x13b));

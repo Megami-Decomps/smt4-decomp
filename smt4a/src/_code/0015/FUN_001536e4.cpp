@@ -3,7 +3,7 @@
 
 extern "C" {
 void uiSpriteAdvanceAnimation(void *, f32);
-void FUN_00169b30(void *);
+void cardTableReassignPlayer(void *);
 
 void FUN_001536e4(void *owner)
 {
@@ -30,7 +30,7 @@ void FUN_001536e4(void *owner)
                 value -= (value / static_cast<f32>(state->channels[index].rampFrames)) *
                          static_cast<f32>(state->channels[index].frame - (state->channels[index].rampFrames + state->channels[index].holdFrames));
             } else {
-                FUN_00169b30(owner);
+                cardTableReassignPlayer(owner);
                 return;
             }
         }

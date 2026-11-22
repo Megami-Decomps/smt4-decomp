@@ -14,7 +14,7 @@ void mapEaseSceneHeading(void);
 void mapIfSpawnCaveAction(f32 x, f32 y, f32 z, f32 direction);
 void mapIfReleasePanel(void);
 void mapIfReleaseSlot2(void);
-void FUN_00233e10(s32 mode, s32 record);
+void mapIfApplyEntryRequest(s32 mode, s32 record);
 s32 mapIfHasSelection(void);
 void FUN_002342b8(void);
 s32 inputIsQuestMenuPressed(void);
@@ -51,7 +51,7 @@ void FUN_00365dcc(void)
         lmapCameraSetMode(11);
         g_lmapView->contextMode = -2;
         sysPlaySe(0xdd);
-        FUN_00233e10(1, g_gameState.overviewRecord);
+        mapIfApplyEntryRequest(1, g_gameState.overviewRecord);
         f32 x = g_gameState.overviewPosition.x;
         f32 y = g_gameState.overviewPosition.y;
         f32 z = g_gameState.overviewPosition.z;
@@ -63,7 +63,7 @@ void FUN_00365dcc(void)
         break;
     case 1:
         scene->stateTime++;
-        FUN_00233e10(1, g_gameState.overviewRecord);
+        mapIfApplyEntryRequest(1, g_gameState.overviewRecord);
         scene = g_lmapScene;
         if (scene->stateTime > 2) {
             scene->moveMode = 29;
@@ -74,7 +74,7 @@ void FUN_00365dcc(void)
         break;
     case 2:
         scene->stateTime++;
-        FUN_00233e10(1, g_gameState.overviewRecord);
+        mapIfApplyEntryRequest(1, g_gameState.overviewRecord);
         if (inputConfirmPressed()) {
             g_lmapScene->state = 10;
             g_lmapScene->stateTime = 0;
@@ -84,7 +84,7 @@ void FUN_00365dcc(void)
             lmapCameraSetMode(0);
             g_lmapScene->moveMode = 0;
             g_lmapScene->moveSpeed = 5.0f;
-            FUN_00233e10(0, g_gameState.overviewRecord);
+            mapIfApplyEntryRequest(0, g_gameState.overviewRecord);
             mapIfReleaseSlot2();
             g_lmapScene->state = 90;
             g_lmapScene->stateTime = 0;

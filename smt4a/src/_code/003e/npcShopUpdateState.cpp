@@ -19,7 +19,7 @@ struct NpcShopUpdateState {
 extern "C" {
 void FUN_003e600c(NpcShopUpdateState *shop);
 void npcShopUpdateSelectionScript(NpcShopUpdateState *shop);
-void FUN_003e618c(NpcShopUpdateState *shop);
+void npcShopExchangeStep(NpcShopUpdateState *shop);
 void FUN_003e647c(NpcShopUpdateState *shop);
 void FUN_003e65a4(NpcShopUpdateState *shop);
 s32 tableGroupFindEntryIndex(void *table, const char *name);
@@ -61,7 +61,7 @@ extern "C" s32 npcShopUpdateState(NpcShopUpdateState *shop)
         npcShopUpdateSelectionScript(shop);
         break;
     case 4:
-        FUN_003e618c(shop);
+        npcShopExchangeStep(shop);
         break;
     case 5:
         FUN_003e647c(shop);

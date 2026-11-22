@@ -23,7 +23,7 @@ s16 dataTable10FindValue(u16 id);
 u32 table01RecordLookupForContent(void);
 void uiDrawItemOrStatusIcon(s32 icon, s32 x, s32 y, s32 index, s32 flags);
 void drawSetColorFromRGBA8(u32 rgba);
-void statRowDrawValueImpl(s32 mode, s32 x, s32 y, s32 align, s32 digits, s32 index, const char *text);
+void numberFontDrawFormatted(s32 mode, s32 x, s32 y, s32 align, s32 digits, s32 index, const char *text);
 void gxResetColorQuadToWhite(void);
 s32 fontMeasureLineAdvance(const char *text, s32 mode);
 
@@ -77,7 +77,7 @@ void FUN_003721b0(u32 unused, f32 speed, StatusRecord *record, s32 slot, s32 x, 
     frameX += placement->x;
     frameY = placement->y + y;
     drawSetColorFromRGBA8(0xffffffff);
-    statRowDrawValueImpl(0, frameX, frameY, 1, digits, 0xce, countText);
+    numberFontDrawFormatted(0, frameX, frameY, 1, digits, 0xce, countText);
     gxResetColorQuadToWhite();
     placement = asdTMTexTableEntryAt(20, slot + 0xbe5);
     frameX = placement->x + (placement->placement->width - fontMeasureLineAdvance(name, 2)) / 2 + x + parallax;

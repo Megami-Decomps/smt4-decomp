@@ -22,7 +22,7 @@ void modelAnimationEnsureData(u32 handle);
 void btlUiAddListedId(BtlUi *ui, u32 id);
 void effectSlotStart(BattleVersionResources *resources, BtlActionRecord *action, u32 id);
 u32 FUN_003db0c0(BattleVersionResources *resources, BtlActionRecord *action);
-void FUN_003c0ae0(BtlMainState *state, BtlActionRecord *action);
+void btlUnitActionStart(BtlMainState *state, BtlActionRecord *action);
 
 void battleActionPollMemberResources(BtlMainState *state, BtlActionRecord *action)
 {
@@ -78,7 +78,7 @@ void battleActionPollMemberResources(BtlMainState *state, BtlActionRecord *actio
             btlUiAddListedId(g_btlUiBlock, resources->id);
             effectSlotStart(g_btlAux, action, resources->parts[index]);
             FUN_003db0c0(g_btlAux, action);
-            FUN_003c0ae0(state, action);
+            btlUnitActionStart(state, action);
         }
     }
     flags = action->flags;

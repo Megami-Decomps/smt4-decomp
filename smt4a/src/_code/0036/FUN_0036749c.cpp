@@ -26,7 +26,7 @@
 
 extern "C" {
 
-void FUN_00233e10(s32 active, u32 record);
+void mapIfApplyEntryRequest(s32 active, u32 record);
 void mapSetSceneState(u32 scene);
 void lmapCameraSetMode(s32 mode);
 void FUN_00324e38(s32 mode);
@@ -76,7 +76,7 @@ void FUN_0036749c(void)
         lmapCameraSetMode(10);
         g_lmapView->contextMode = -1;
         sysPlaySe(LMAP_SOUND_ENTER);
-        FUN_00233e10(1, g_gameState.overviewRecord);
+        mapIfApplyEntryRequest(1, g_gameState.overviewRecord);
         scene = g_lmapScene;
         scene->state++;
         scene->stateTime = 0;
@@ -84,7 +84,7 @@ void FUN_0036749c(void)
 
     case LMAP_STATE_SETTLE:
         scene->stateTime++;
-        FUN_00233e10(1, g_gameState.overviewRecord);
+        mapIfApplyEntryRequest(1, g_gameState.overviewRecord);
         scene = g_lmapScene;
         if (scene->stateTime >= LMAP_SETTLE_FRAMES) {
             scene->moveMode = 0x1D;
@@ -96,7 +96,7 @@ void FUN_0036749c(void)
 
     case LMAP_STATE_WAIT:
         scene->stateTime++;
-        FUN_00233e10(1, g_gameState.overviewRecord);
+        mapIfApplyEntryRequest(1, g_gameState.overviewRecord);
         if (inputConfirmPressed() != 0) {
             g_lmapScene->state = LMAP_STATE_ENTER;
             g_lmapScene->stateTime = 0;
@@ -106,7 +106,7 @@ void FUN_0036749c(void)
             lmapCameraSetMode(0);
             g_lmapScene->moveMode = 0;
             g_lmapScene->moveSpeed = 5.0f;
-            FUN_00233e10(0, g_gameState.overviewRecord);
+            mapIfApplyEntryRequest(0, g_gameState.overviewRecord);
             g_lmapScene->state = LMAP_STATE_EXIT_A;
             g_lmapScene->stateTime = 0;
         }

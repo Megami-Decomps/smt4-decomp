@@ -9,6 +9,7 @@ typedef struct Sys43e310 {
     /* 0x01 */ s8 unk01;
     /* 0x02 */ s8 unk02;
     /* 0x03 */ s8 unk03;
+    /* 0x04 */ struct SaveLoadThreadRequest *request;
 } Sys43e310;
 
 extern Sys43e310 g_saveLoadThread;

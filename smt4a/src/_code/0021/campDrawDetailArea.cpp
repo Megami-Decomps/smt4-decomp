@@ -21,8 +21,8 @@ extern "C" {
 
 const char *dataFindKindRecordWithAocOverrides(u32 id, s32 alternate);
 /* Draws formatted text right-aligned in a field of `digits` characters. */
-void statRowDrawValueImpl(s32 font, s32 x, s32 y, s32 align, s32 digits, s32 layer, const char *format, ...);
-void FUN_002027fc(void);
+void numberFontDrawFormatted(s32 font, s32 x, s32 y, s32 align, s32 digits, s32 layer, const char *format, ...);
+void configDraw(void);
 void playLogDraw(void);
 /* The other pages of the camp's detail area. */
 void FUN_0023c8c0(s32 item, s32 x, s32 y, s32 selected, f32 alpha);
@@ -86,9 +86,9 @@ static void campDrawItemList(s32 item, s32 x, s32 y, s32 selected, f32 alpha)
         }
         TextureTableEntryIV *countAt = asdTMTexTableEntryAt(20, 0x473);
         sprintf(count, "%d", flagValueRead(id));
-        statRowDrawValueImpl(0, line->x + countAt->x + x, line->y + countAt->y + y, 1, 3, 0x6F, count);
+        numberFontDrawFormatted(0, line->x + countAt->x + x, line->y + countAt->y + y, 1, 3, 0x6F, count);
         TextureTableEntryIV *markAt = asdTMTexTableEntryAt(20, 0x474);
-        statRowDrawValueImpl(0, markAt->x + line->x + x, line->y + markAt->y + y, 1, 1, 0x6F, "*");
+        numberFontDrawFormatted(0, markAt->x + line->x + x, line->y + markAt->y + y, 1, 1, 0x6F, "*");
         TextureTableEntryIV *iconAt = asdTMTexTableEntryAt(20, 0x46F);
         uiDrawItemCategoryIcon((s16)id, iconAt->x + line->x + x, line->y + iconAt->y + y, 0x6F, 0);
     }
@@ -113,9 +113,9 @@ static void campDrawItemList(s32 item, s32 x, s32 y, s32 selected, f32 alpha)
         }
         TextureTableEntryIV *countAt = asdTMTexTableEntryAt(20, 0x47A);
         sprintf(count, "%d", flagValueRead(id));
-        statRowDrawValueImpl(0, countAt->x + line->x + x, line->y + countAt->y + y, 1, 3, 0x83, count);
+        numberFontDrawFormatted(0, countAt->x + line->x + x, line->y + countAt->y + y, 1, 3, 0x83, count);
         TextureTableEntryIV *markAt = asdTMTexTableEntryAt(20, 0x47B);
-        statRowDrawValueImpl(0, markAt->x + line->x + x, line->y + markAt->y + y, 1, 1, 0x83, "*");
+        numberFontDrawFormatted(0, markAt->x + line->x + x, line->y + markAt->y + y, 1, 1, 0x83, "*");
         texDrawTableEntryAtStoredOrigin(2, 20, 0x475, line->x + x, line->y + y, 0x83);
         TextureTableEntryIV *iconAt = asdTMTexTableEntryAt(20, 0x476);
         uiDrawItemCategoryIcon((s16)id, iconAt->x + line->x + x, line->y + iconAt->y + y, 0x88, 0);
@@ -169,7 +169,7 @@ void campDrawDetailArea(s32 item, s32 selected)
         FUN_0023c8c0(item, x, y, selected, alpha);
         break;
     case 41:
-        FUN_002027fc();
+        configDraw();
         break;
     case 43:
         playLogDraw();

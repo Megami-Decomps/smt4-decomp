@@ -128,10 +128,10 @@ static __inline NodeVec3 nodeVec3(f32 x, f32 y, f32 z)
 /* The longest blend the playing motion allows; 0 when nothing is playing. */
 static __inline f32 asdMotionModelBlendLimit(const AsdMdlNode *model)
 {
-    if (model->motionCount > 0 && model->active != NULL) {
-        return model->active->blendLimit;
+    if (model->motionCount <= 0 || model->active == NULL) {
+        return 0.0f;
     }
-    return 0.0f;
+    return model->active->blendLimit;
 }
 
 #ifdef __cplusplus

@@ -27,7 +27,8 @@ u32 FUN_00234618(Inner **owner);
 
 void providerEntrySetVector(Owner *owner, u32 *vector);
 
-u32 NaviMain_GetPosX(void);
+/* The navigator's X position; callers pass their navi handle (`unused`), which it never reads. */
+u32 NaviMain_GetPosX(const void *unused);
 
 void sub10OwnerStart(Obj *obj);
 

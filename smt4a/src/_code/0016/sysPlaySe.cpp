@@ -1,4 +1,5 @@
-/* NON_MATCHING: register allocation and the channel scan differ - retail walks the six channel slots with two incrementing pointers and a down-counter and keeps different values in r5-r9; same stores and calls. */
+/* NON_MATCHING: retail walks the six slots with two incrementing pointers and a down-counter, copies the channel
+ * kinds from a .constdata table (built: from the literal pool), and swaps the work/work+0x500 bases (r4/r5). */
 #include "ui/ButtonHelp.h"
 #include "ui/ButtonHelpGlobal.h"
 
@@ -7,6 +8,12 @@ namespace {
 struct SoundSceneEntry {
     /* 0x00 */ u16 channel[6];
     /* 0x0c */ u8 isLayered;
+};
+
+/* unit-local: the values of the two slots a pair of linked slots shows */
+struct SlotPair {
+    u16 first;
+    u16 second;
 };
 }
 
@@ -59,31 +66,27 @@ void sysPlaySe(u32 id)
             buttonHelpSelectSlot(i & 0xff, 0x12, 0x51, 0);
         }
     }
-    u32 pairA = 0;
-    u32 pairB = 0;
+    SlotPair pairA = {0, 0};
+    SlotPair pairB = {0, 0};
     for (s32 i = 0; i < 6; i++) {
         ButtonHelpSlot *channel = &work->slots[i];
         if (channel->kind == 1) {
-            pairA = (pairA & 0xffff0000) | channel->value;
+            pairA.first = channel->value;
         } else if (channel->kind == 2) {
-            pairA = (pairA & 0xffff) | ((u32)channel->value << 16);
+            pairA.second = channel->value;
         } else if (channel->kind == 5) {
-            pairB = (pairB & 0xffff0000) | channel->value;
+            pairB.first = channel->value;
         } else if (channel->kind == 6) {
-            pairB = (pairB & 0xffff) | ((u32)channel->value << 16);
+            pairB.second = channel->value;
         }
     }
-    u32 lowA = pairA & 0xffff;
-    u32 highA = pairA >> 16;
-    if (lowA != 0 && highA != 0 && lowA == highA) {
+    if (pairA.first != 0 && pairA.second != 0 && pairA.first == pairA.second) {
         buttonHelpSelectSlot(5, 0, 0, 0);
-        buttonHelpSelectSlot(4, 0x14, highA & 0xff, 0);
+        buttonHelpSelectSlot(4, 0x14, pairA.second & 0xff, 0);
     }
-    u32 lowB = pairB & 0xffff;
-    u32 highB = pairB >> 16;
-    if (lowB != 0 && highB != 0 && lowB == highB) {
+    if (pairB.first != 0 && pairB.second != 0 && pairB.first == pairB.second) {
         buttonHelpSelectSlot(1, 0, 0, 0);
-        buttonHelpSelectSlot(0, 0x15, lowB & 0xff, 0);
+        buttonHelpSelectSlot(0, 0x15, pairB.first & 0xff, 0);
     }
     if (from->isLayered != 0) {
         if (to->isLayered == 0) {

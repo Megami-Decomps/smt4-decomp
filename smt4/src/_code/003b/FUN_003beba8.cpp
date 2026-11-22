@@ -1,4 +1,6 @@
-/* NON_MATCHING: float register allocation differs (retail keeps scale in s16, power in s17) and the 0x44a0 flag word is addressed through a separate add. */
+/* NON_MATCHING: 174 lines: float register allocation differs (retail keeps scale in s16, power in s17), retail keeps
+ * the 0.0 adjustment in s24 and adds it (this build folds it), and the 0x44a0 flag word is addressed through a separate
+ * add. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "gamedata/SkillDataLookup.h"
@@ -54,13 +56,15 @@ s32 FUN_003beba8(s32 partyId, s32 mode, s32 attackerId, s32 defenderId, f32 powe
     f32 percent = (f32)(u32)rates.critRate * 0.01f;
     f32 divisor = (f32)(bonusA + bonusB) * 0.5f;
     f32 damage;
-    if (partyId > 0) {
+    if (partyId <= 0) {
+        if (mode != 1) {
+            damage = (dexterity + (f32)baseStat) * 0.33333334f * power * modifier * base * scale * percent;
+        } else {
+            damage = (strength + (f32)baseStat) * 0.33333334f * power * modifier * base * scale * percent;
+        }
+    } else {
         f32 stat = dexterity + strength * 0.5f;
         damage = (power + stat * 4.5f) * 0.33333334f * modifier * base * scale * percent / divisor;
-    } else if (mode != 1) {
-        damage = (dexterity + (f32)baseStat) * 0.33333334f * power * modifier * base * scale * percent;
-    } else {
-        damage = (strength + (f32)baseStat) * 0.33333334f * power * modifier * base * scale * percent;
     }
     damage = damage + adjust + (f32)rankBonus;
 

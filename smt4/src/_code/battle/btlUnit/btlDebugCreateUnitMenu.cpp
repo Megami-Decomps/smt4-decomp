@@ -6,7 +6,7 @@ extern "C" {
 extern AsdListBoxEntry DAT_00434a88[];
 extern u32 DAT_00439ce8;
 extern u32 DAT_00439cf8;
-extern u8 DAT_00439ce0;
+extern u8 g_btlColorDefaults;
 extern u8 DAT_00439ce1;
 extern u8 DAT_00439ce2;
 extern u8 DAT_00439ce3;
@@ -38,7 +38,7 @@ void btlDebugCreateUnitMenu(BattleDebugWork *work, const BattleDebugOwnerView *o
     asdListBoxSetItemMode3(work->listBox, 1, red, 0, 255, 0);
     asdListBoxSetItemMode3(work->listBox, 2, green, 0, 255, 0);
     asdListBoxSetItemMode3(work->listBox, 3, blue, 0, 255, 0);
-    asdListBoxSetItemMode3(work->listBox, 4, DAT_00439ce0, 0, 255, 0);
+    asdListBoxSetItemMode3(work->listBox, 4, g_btlColorDefaults, 0, 255, 0);
     asdListBoxSetItemMode3(work->listBox, 5, DAT_00439ce1, 0, 255, 0);
     asdListBoxSetItemMode3(work->listBox, 6, DAT_00439ce2, 0, 255, 0);
     asdListBoxSetItemMode3(work->listBox, 7, DAT_00439ce3, 0, 255, 0);

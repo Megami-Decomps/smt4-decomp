@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00141710(u32 *obj, int flag);
+int resourceOwnerReleaseLoaded(u32 *obj, int flag);
 int asdMemFree(void *ptr);
 int asdOperatorDelete(u32 handle);
 
@@ -12,7 +12,7 @@ extern u8 DAT_004221dc;
 u32 *destroyObj0055c6e4(u32 *obj)
 {
     *obj = (u32)&DAT_004221dc;
-    FUN_00141710(obj, 1);
+    resourceOwnerReleaseLoaded(obj, 1);
     if (obj[0x13] != 0) {
         asdOperatorDelete(obj[0x13]);
         obj[0x13] = 0;

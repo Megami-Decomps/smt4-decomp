@@ -16,7 +16,7 @@
 
 extern "C" {
 void drawSetColorFromRGBA8(u32 color);
-void statRowDrawValueImpl(s32 layer, s32 x, s32 y, s32 z, s32 scale, s32 depth, const char *format, ...);
+void numberFontDrawFormatted(s32 layer, s32 x, s32 y, s32 z, s32 scale, s32 depth, const char *format, ...);
 
 enum {
     STAT_GREY = 0x9B9B9BFF,
@@ -44,12 +44,12 @@ void resultDrawStatAllocation(ResultWorkA *work, s32 x, s32 y)
     texDrawCompositeSprite(2, textures, 4, x, y, 101);
     TextureTableEntryIV *entry = asdTMTexTableEntryAt(textures, 135);
     drawSetColorFromRGBA8(0x1A5C72FF);
-    statRowDrawValueImpl(0, entry->x + x, entry->y + y, 0, 0, 106, "%d", work->statPointsLeft);
+    numberFontDrawFormatted(0, entry->x + x, entry->y + y, 0, 0, 106, "%d", work->statPointsLeft);
     entry = asdTMTexTableEntryAt(textures, 136);
-    statRowDrawValueImpl(0, entry->x + x, entry->y + y, 0, 0, 106, "/");
+    numberFontDrawFormatted(0, entry->x + x, entry->y + y, 0, 0, 106, "/");
     entry = asdTMTexTableEntryAt(textures, 138);
     drawSetColorFromRGBA8(0xFF);
-    statRowDrawValueImpl(0, entry->x + x, entry->y + y, 0, 0, 106, "%d", work->statPointTotal);
+    numberFontDrawFormatted(0, entry->x + x, entry->y + y, 0, 0, 106, "%d", work->statPointTotal);
     gxResetColorQuadToWhite();
 
     /* HP */
@@ -60,10 +60,10 @@ void resultDrawStatAllocation(ResultWorkA *work, s32 x, s32 y)
     texDrawTableEntryAtStoredOrigin(2, textures, 143, entry->x + x, entry->y + y, 106);
     texDrawTableEntryAtStoredOrigin(2, textures, 145, entry->x + x, entry->y + y, 106);
     TextureTableEntryIV *label = asdTMTexTableEntryAt(textures, 149);
-    statRowDrawValueImpl(0, entry->x + label->x + x, entry->y + label->y + y, 1, 4, 106, "%d", before);
+    numberFontDrawFormatted(0, entry->x + label->x + x, entry->y + label->y + y, 1, 4, 106, "%d", before);
     label = asdTMTexTableEntryAt(textures, 153);
     drawSetColorFromRGBA8(STAT_GAIN);
-    statRowDrawValueImpl(0, entry->x + label->x + x, entry->y + label->y + y, 1, 4, 106, "%d", after);
+    numberFontDrawFormatted(0, entry->x + label->x + x, entry->y + label->y + y, 1, 4, 106, "%d", after);
     gxResetColorQuadToWhite();
 
     /* MP */
@@ -74,10 +74,10 @@ void resultDrawStatAllocation(ResultWorkA *work, s32 x, s32 y)
     texDrawTableEntryAtStoredOrigin(2, textures, 144, entry->x + x, entry->y + y, 106);
     texDrawTableEntryAtStoredOrigin(2, textures, 145, entry->x + x, entry->y + y, 106);
     label = asdTMTexTableEntryAt(textures, 149);
-    statRowDrawValueImpl(0, label->x + entry->x + x, entry->y + label->y + y, 1, 4, 106, "%d", before);
+    numberFontDrawFormatted(0, label->x + entry->x + x, entry->y + label->y + y, 1, 4, 106, "%d", before);
     label = asdTMTexTableEntryAt(textures, 153);
     drawSetColorFromRGBA8(STAT_GAIN);
-    statRowDrawValueImpl(0, label->x + entry->x + x, entry->y + label->y + y, 1, 4, 106, "%d", after);
+    numberFontDrawFormatted(0, label->x + entry->x + x, entry->y + label->y + y, 1, 4, 106, "%d", after);
     gxResetColorQuadToWhite();
 
     for (s32 row = 0; row < 5; row++) {
@@ -111,7 +111,7 @@ void resultDrawStatAllocation(ResultWorkA *work, s32 x, s32 y)
         texDrawTableEntryAtStoredOrigin(2, textures, row + 158, entry->x + x, entry->y + y, 106);
         label = asdTMTexTableEntryAt(textures, 182);
         drawSetColorFromRGBA8(STAT_GREY);
-        statRowDrawValueImpl(0, entry->x + label->x + x, label->y + entry->y + y, 1, 3, 106, "%d", before);
+        numberFontDrawFormatted(0, entry->x + label->x + x, label->y + entry->y + y, 1, 3, 106, "%d", before);
         gxResetColorQuadToWhite();
         label = asdTMTexTableEntryAt(textures, 185);
         u32 color;
@@ -123,7 +123,7 @@ void resultDrawStatAllocation(ResultWorkA *work, s32 x, s32 y)
             color = STAT_GREY;
         }
         drawSetColorFromRGBA8(color);
-        statRowDrawValueImpl(0, label->x + entry->x + x, entry->y + label->y + y, 1, 3, 106, "%d", after);
+        numberFontDrawFormatted(0, label->x + entry->x + x, entry->y + label->y + y, 1, 3, 106, "%d", after);
         gxResetColorQuadToWhite();
         texDrawTableEntryAtStoredOrigin(2, textures, 165, entry->x + x, entry->y + y, 106);
         texDrawTableEntryAtStoredOrigin(2, textures, 166, entry->x + x, entry->y + y, 106);
@@ -186,10 +186,10 @@ void resultDrawStatAllocation(ResultWorkA *work, s32 x, s32 y)
     texDrawTableEntryAtStoredOrigin(2, textures, cursor + 170, entry->x + x, entry->y + y, 106);
     gxResetColorQuadToWhite();
     label = asdTMTexTableEntryAt(textures, 182);
-    statRowDrawValueImpl(0, label->x + entry->x + x, entry->y + label->y + y, 1, 3, 111, "%d", before);
+    numberFontDrawFormatted(0, label->x + entry->x + x, entry->y + label->y + y, 1, 3, 111, "%d", before);
     label = asdTMTexTableEntryAt(textures, 185);
     drawSetColorFromRGBA8(after > before ? STAT_GAIN : 0xFFFFFFFF);
-    statRowDrawValueImpl(0, label->x + entry->x + x, entry->y + label->y + y, 1, 3, 111, "%d", after);
+    numberFontDrawFormatted(0, label->x + entry->x + x, entry->y + label->y + y, 1, 3, 111, "%d", after);
     gxResetColorQuadToWhite();
     drawSetColorFromRGBA8(white);
     texDrawTableEntryAtStoredOrigin(2, textures, 175, entry->x + x, entry->y + y, 111);

@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_001d1df4(void);
+void placedEffectUpdate(void);
 
-/* Forwards to FUN_001d1df4, the function placed right after it. */
+/* Forwards to placedEffectUpdate, the function placed right after it. */
 void FUN_001d1df0(void)
 {
-    FUN_001d1df4();
+    placedEffectUpdate();
 }
 
 } /* extern "C" */

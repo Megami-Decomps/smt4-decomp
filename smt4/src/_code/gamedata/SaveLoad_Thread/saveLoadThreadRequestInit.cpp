@@ -37,8 +37,8 @@ void saveLoadThreadRequestInit(u8 kind, u32 file, u32 slot, void *payload, u32 s
     request->secondResult = -1;
     request->file = file;
     request->slot = slot;
-    request->unk0c = 0;
-    request->unk58 = 0;
+    request->step = 0;
+    request->script = NULL;
     request->messageFile = NULL;
     request->modelFile = NULL;
     asdLoadFileAsyncSimple(DAT_00404290, reinterpret_cast<u32 *>(&request->messageFile), 0);

@@ -14,7 +14,7 @@ typedef struct PartnerUnitView {
     /* 0x130 */ u32 flags;
 } PartnerUnitView;
 
-/* The partner screen (only the fields used here, as in FUN_004bd794). */
+/* The partner screen (only the fields used here, as in partnerMenuHandleSelectionInput). */
 typedef struct PartnerScreenView {
     /* 0x000 */ u8 unk000[0x2C4];
     /* 0x2C4 */ s32 partners[12];

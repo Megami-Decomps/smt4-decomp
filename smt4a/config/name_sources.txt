@@ -8709,3 +8709,30 @@
 004f1c5c btlCameraStartMove inferred near twin of smt4 btlCameraStartMove (tools/shared.py)
 004989f0 shopSelectEntryStart inferred twin of smt4 shopSelectEntryStart (same selection-script start); one name for both games
 0057f3b4 g_eventEffect inferred size:0x88 the asserted sizeof(EventEffectGlobalsA); no symbol before 0x57f43c (retail's pool word 0x57f3d0 is bannerTextures inside it)
+001acca0 asdModelApplyShadowMaterials inferred twin of smt4 asdModelApplyShadowMaterials
+0017e22c asdGxQueueDisplayTransfer inferred twin of smt4 asdGxQueueDisplayTransfer
+001ad2a4 asdModelBuildAttributeRecordsForKey inferred twin of smt4 asdModelBuildAttributeRecordsForKey (w72-o2)
+0047ed10 btlEffectSetStartByName inferred twin of smt4 btlEffectSetStartByName
+00274e4c mapTargetUpdateNearest inferred picks the nearest map target icon (w72-o4)
+00233e10 mapIfApplyEntryRequest inferred applies a map interface entry request (w72-o4)
+00169b30 cardTableReassignPlayer inferred reassigns a player's card pick and follow-up (w72-o4)
+00353200 mapEnemyPlaceNearPlayer inferred places a map enemy near the player (w72-o4)
+0050245c mapVectorScaled inferred returns a MapVector times a scale (w72-o4)
+0015ef04 nw_font_ResFontSetResource inferred nw::font::ResFont::SetResource; the smt4 twin carries this name (w72-o4)
+003712a4 saveLoadProcessLoadStep inferred the update of the Load process saveLoadProcessCreate registers, states 6-11 (w72-f1)
+003c12d8 saveLoadStartLoad inferred pairs with saveLoadStartSave (w72-f1)
+00268250 saveLoadThreadRequestInit inferred twin of smt4 saveLoadThreadRequestInit (w72-f1)
+00180310 numberFontDrawFormatted inferred draws formatted text in a number font (ui/NumberFont.h, w72-f1)
+00184ae0 numberFontMeasureFormatted inferred measures formatted text in a number font (ui/NumberFont.h, w72-f1)
+003510dc effParticleParamCreateFromResource inferred twin of smt4 effParticleParamCreateFromResource
+003cbd04 skillScreenDrawCandidateListRow inferred draws a row of the skill inheritance candidate list (w72-f1)
+00368e10 btlTargetSelectSetInfoPanel inferred twin of smt4 btlTargetSelectSetInfoPanel (w72-f2)
+0037b7e4 campCecRankingCreate inferred the CampCecRanking creator (task names "CampCecRanking Calc/Draw", assert path CampCecRanking.cpp:215, w72-f2)
+0049d938 howToDrawRows inferred draws the how-to list's rows (w72-f2)
+002027fc configDraw inferred the Config screen's draw (w72-f2)
+004a9740 btlUiStartNumberPopup inferred starts a battle UI number popup: projects the position, sets the digit sprites (BtlUiA numbers slots, w72-g1)
+004bd794 partnerMenuHandleSelectionInput inferred the partner select menu's selection input step (PartnerSelectMenu, w72-g1)
+003e618c npcShopExchangeStep inferred steps the NPC shop's exchange ("npcShop_NotEnough", NpcShopExchangeRow offers, w72-g1)
+003e21c8 btlEncountLoadArrangementStep inferred the encounter query's arrangement load step (state 0x16 -> 0x17, w72-g1)
+003fa010 dataStoreRequestDispatch inferred DataStore's nine-kind request factory (w72-g1)
+003fa6a4 dataStoreSubmitJob inferred allocates a DataStore job under the lock and sets its state (w72-g1)

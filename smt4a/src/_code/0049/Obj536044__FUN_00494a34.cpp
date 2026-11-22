@@ -1,4 +1,4 @@
-/* NON_MATCHING: the two item-scan loops and the shared script-start tail are merged differently by armcc than retail, which keeps each copy; the shop step logic is the same. */
+/* NON_MATCHING: 4 lines (205 vs 205 rows): all four steps, both shopHasEntries scans, scripts, and state transitions match; only ldr r1, [r4, #28] and cmp r1, #9 schedule above str r0, [r4] in case 0. */
 #include "common.h"
 #include "game/GameStateA.h"
 #include "gamedata/FlagValueIsPositive.h"
@@ -24,7 +24,6 @@ typedef struct ShopMain {
     /* 0x1604C */ u8 introMode;
 } ShopMain;
 
-
 s32 sysPlaySe(s32 id);
 void buttonHelpSetText(s32 a, u32 color);
 s32 scrRunOpcodesStub(u32 script);
@@ -32,20 +31,20 @@ void scrScriptProcessStartEntry(u32 script, u32 entry);
 void panelSetTarget(s32 offset, s32 frame);
 void messageBannerInitCounter(s32 a, s32 b);
 void FUN_0049a5b4(ShopMain *shop);
-u32 FUN_0049a9a8(void);
+u32 FUN_0049a9a8(ShopMain *shop);
 s32 gameFlagIsSet(u32 flag);
 s32 flagValueRead(u32 id);
 u32 tableGroupFindEntryIndex(u32 table, const char *name);
 
 /* Whether any shop entry in the two id ranges is available. */
-static bool shopHasEntries(void)
+static __inline bool shopHasEntries(void)
 {
-    for (u32 id = 0x3B7; id < 0x47F; id++) {
+    for (u32 id = 0x3B7; id <= 0x47E; id++) {
         if (flagValueIsPositiveForward(id) != 0) {
             return true;
         }
     }
-    for (u32 id = 0x47F; id < 0x79F; id++) {
+    for (u32 id = 0x47F; id <= 0x79E; id++) {
         if (flagValueIsPositiveForward(id) != 0) {
             return true;
         }
@@ -53,69 +52,82 @@ static bool shopHasEntries(void)
     return false;
 }
 
+/* Starts a named script entry from the shop's script table. */
+static __inline void shopStartScript(ShopMain *shop, const char *name)
+{
+    scrScriptProcessStartEntry(shop->script, tableGroupFindEntryIndex(shop->scriptTable, name));
+}
+
+/* Transitions the shop state and resets its step counter. */
+static __inline void shopChangeState(ShopMain *shop, u32 nextState)
+{
+    shop->previousState = shop->state;
+    shop->state = nextState;
+    shop->step = 0;
+}
+
 /* Drives the shop screen's entry steps: step 0 decides whether the intro or the in-shop event
  * runs, steps 1 and 2 wait for the script, and step 3 opens the shop or falls back. */
 void _ZN9Obj53604412FUN_00494a34Ev(ShopMain *shop)
 {
-    if (shop->step == 0) {
+    switch (shop->step) {
+    case 0:
         shop->flags |= 4;
-        if (shop->kind != 9) {
-            if (shop->introMode == 1 && gameFlagIsSet(0x170) != 0 && gameFlagIsSet(0x1CF) == 0) {
-                scrScriptProcessStartEntry(shop->script, tableGroupFindEntryIndex(shop->scriptTable, "shop_event"));
+        if (shop->kind == 9) {
+            if ((flagValueRead(0x363) >= 1 && gameFlagIsSet(0x114) == 0) || gameFlagIsSet(0x113) == 0) {
+                shopStartScript(shop, "shop_event");
                 scrRunOpcodesStub(shop->script);
                 shop->step = 1;
                 sysPlaySe(0xA0);
-                return;
+                break;
             }
-        } else if ((flagValueRead(0x363) > 0 && gameFlagIsSet(0x114) == 0) || gameFlagIsSet(0x113) == 0) {
-            scrScriptProcessStartEntry(shop->script, tableGroupFindEntryIndex(shop->scriptTable, "shop_event"));
+        } else if (shop->introMode == 1 && gameFlagIsSet(0x170) != 0 && gameFlagIsSet(0x1CF) == 0) {
+            shopStartScript(shop, "shop_event");
             scrRunOpcodesStub(shop->script);
             shop->step = 1;
             sysPlaySe(0xA0);
-            return;
+            break;
         }
         if (shopHasEntries()) {
-            scrScriptProcessStartEntry(
-                shop->script,
-                tableGroupFindEntryIndex(shop->scriptTable,
-                                         shop->closeKind != 0 ? "shop_in_sale_closewin" : "shop_in_closewin"));
+            if (shop->closeKind != 0) {
+                shopStartScript(shop, "shop_in_sale_closewin");
+            } else {
+                shopStartScript(shop, "shop_in_closewin");
+            }
             scrRunOpcodesStub(shop->script);
             shop->step = 2;
             sysPlaySe(0xA0);
-            return;
+        } else {
+            messageBannerInitCounter(1, 0);
+            panelSetTarget(0, 0);
+            shopChangeState(shop, 5);
         }
-        messageBannerInitCounter(1, 0);
-        panelSetTarget(0, 0);
-        shop->previousState = shop->state;
-        shop->state = 5;
-        shop->step = 0;
-        return;
-    }
-    if (shop->step == 1) {
+        break;
+    case 1:
         if (scrRunOpcodesStub(shop->script) == 2) {
-            shop->closeKind = (u8)FUN_0049a9a8();
+            shop->closeKind = (u8)FUN_0049a9a8(shop);
             shop->step = 3;
         }
-        return;
-    }
-    if (shop->step == 2) {
+        break;
+    case 2:
         if (scrRunOpcodesStub(shop->script) != 2) {
-            return;
+            break;
         }
         shop->step = 3;
-    } else if (shop->step != 3) {
-        return;
-    }
-    messageBannerInitCounter(1, 0);
-    panelSetTarget(0, 0);
-    if (shopHasEntries()) {
-        shop->previousState = shop->state;
-        shop->state = 2;
-        shop->step = 0;
-        FUN_0049a5b4(shop);
-        sysPlaySe(0x77);
-        buttonHelpSetText(0, 0x323232FF);
-        g_gameState.giftCounter = 0;
+        /* fall through */
+    case 3:
+        messageBannerInitCounter(1, 0);
+        panelSetTarget(0, 0);
+        if (shopHasEntries()) {
+            shopChangeState(shop, 2);
+            FUN_0049a5b4(shop);
+            sysPlaySe(0x77);
+            buttonHelpSetText(0, 0x323232FF);
+            g_gameState.giftCounter = 0;
+        } else {
+            shopChangeState(shop, 5);
+        }
+        break;
     }
 }
 

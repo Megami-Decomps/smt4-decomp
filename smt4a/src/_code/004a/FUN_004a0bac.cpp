@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation and scheduling only - retail spills the restored HP of the first inlined copy to the stack, hoists the 1.25f constant before the group dispatch and keeps the stock loop limit in r7; control flow and calls are identical. */
+/* NON_MATCHING: 122 lines (163 vs 157 rows): switch-based group dispatch and slotRestore null guard match; retail spills the restored HP of the first inlined copy, hoists 1.25f before group dispatch, and keeps the stock loop limit in r7. */
 #include "common.h"
 #include "gamedata/SaveSlotTable.h"
 #include "gamedata/GamePlayerData.h"
@@ -32,6 +32,9 @@ s32 unitHasRankingBonus(u16 id);
 /* Fully restores a slot's HP/MP (HP gets the 1.25x bonus for ids unitHasRankingBonus accepts). */
 static __inline void slotRestore(SlotRecord *record)
 {
+    if (record == NULL) {
+        return;
+    }
     record->status = 0;
     s16 hp = record->maxHp;
     if (unitHasRankingBonus(record->id) != 0) {
@@ -56,28 +59,31 @@ extern "C" void FUN_004a0bac(u32 mode, s32 force)
         player->hp = player->maxHp;
         player->mp = player->maxMp;
     }
-    if (mode == 0 || mode == 1 || mode == 2 || mode == 3) {
-        s32 count;
-        const s8 *slots;
-        if (mode >= 2) {
-            count = 3;
-            slots = gameGetSlotTable()->reserve;
-        } else {
-            count = gameSlotTableFindFree();
-            slots = gameGetSlotTable()->party;
-        }
-        for (s32 i = 0; i < count; i++) {
-            if (slots[i] >= 0) {
-                SlotRecord *record = gameGetSlotRecord(slots[i]);
-                if ((force != 0 || (record->status & STATUS_SKIP) == 0) && (record->status & STATUS_NEVER) == 0) {
-                    if ((record->status & STATUS_KEEP) != 0) {
-                        if (record != NULL) {
-                            slotRestore(record);
-                        }
-                        record->status |= STATUS_KEEP;
-                    } else if (record != NULL) {
-                        slotRestore(record);
-                    }
+    s32 count = 0;
+    const s8 *slots = NULL;
+    switch (mode) {
+    case 0:
+    case 1:
+        count = gameSlotTableFindFree();
+        slots = gameGetSlotTable()->party;
+        break;
+    case 2:
+    case 3:
+        count = 3;
+        slots = gameGetSlotTable()->reserve;
+        break;
+    default:
+        break;
+    }
+    for (s32 i = 0; i < count; i++) {
+        if (slots[i] >= 0) {
+            SlotRecord *record = gameGetSlotRecord(slots[i]);
+            if ((force != 0 || (record->status & STATUS_SKIP) == 0) && (record->status & STATUS_NEVER) == 0) {
+                if ((record->status & STATUS_KEEP) != 0) {
+                    slotRestore(record);
+                    record->status |= STATUS_KEEP;
+                } else {
+                    slotRestore(record);
                 }
             }
         }
@@ -85,8 +91,7 @@ extern "C" void FUN_004a0bac(u32 mode, s32 force)
     if (mode == 0) {
         for (s32 i = 0; i < 12; i++) {
             SlotRecord *record = (u16)i < 12 ? (SlotRecord *)&gameGetSlotTable()->slots[(u16)i] : NULL;
-            if ((force != 0 || (record->status & STATUS_SKIP) == 0) && (record->status & STATUS_NEVER) == 0 &&
-                record != NULL) {
+            if ((force != 0 || (record->status & STATUS_SKIP) == 0) && (record->status & STATUS_NEVER) == 0) {
                 slotRestore(record);
             }
         }

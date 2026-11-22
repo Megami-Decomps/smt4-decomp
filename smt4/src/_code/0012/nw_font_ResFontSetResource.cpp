@@ -1,111 +1,93 @@
-/* NON_MATCHING: file/block/index and dispatch registers differ, FINF width loading moves before its sheet store, and the success epilogue is rescheduled (118/118 rows). */
+/* NON_MATCHING: 82 lines: nw::font::ResFont::SetResource with Rebuild inlined, the same source as the Apocalypse twin
+ * (66 lines there); registers and the block walks' load order differ. */
 #include "shard/W6_W6Match7_FontResource.h"
 
-extern "C" bool nw_ut_IsValidBinaryFile(const NwFontFileHeader*, u32 signature,
-                                       u32 version, u32 minimumBlocks);
 
-namespace {
-struct FontCodeMap {
-    u16 firstCode;
-    u16 lastCode;
-    u16 method;
-    u16 reserved;
-    FontCodeMap* next;
-};
-
-struct FontBlock {
-    u32 kind;
-    u32 size;
-};
-
-template <class T>
-inline void relocateFontOffset(T*& pointer, NwFontFileHeader* file)
+/* nw::ut::ResolveOffset: turns an offset from base into a pointer, in place. */
+template <typename T>
+static __inline void resolveOffset(T *&pointer, void *base)
 {
-    pointer = reinterpret_cast<T*>(reinterpret_cast<u8*>(file) +
-                                  reinterpret_cast<u32>(pointer));
+    pointer = (T *)((u8 *)base + (u32)pointer);
 }
 
-NwFontInfo* findFontInfo(NwFontFileHeader* file)
-{
-    FontBlock* block = reinterpret_cast<FontBlock*>(
-        reinterpret_cast<u8*>(file) + file->headerSize);
-    for (s32 index = 0; index < file->blockCount; ++index) {
-        if (block->kind == 0x464e4946) {
-            return reinterpret_cast<NwFontInfo*>(block + 1);
-        }
-        block = reinterpret_cast<FontBlock*>(
-            reinterpret_cast<u8*>(block) + block->size);
-    }
-    return NULL;
-}
+extern "C" {
+s32 nw_ut_IsValidBinaryFile(const NwFontFileHeader *file, u32 signature, u32 version, u32 minimumBlocks);
 
-NwFontInfo* relocateFontFile(NwFontFileHeader* file)
+/* nw::font::ResFont::Rebuild: resolves the in-file offsets of every block and marks the file resolved. */
+static NwFontInfo *resFontRebuild(NwFontFileHeader *file)
 {
-    if (!nw_ut_IsValidBinaryFile(file, 0x544e4643, 0x03000000, 2)) {
-        return NULL;
-    }
-    NwFontInfo* info = NULL;
-    FontBlock* block = reinterpret_cast<FontBlock*>(
-        reinterpret_cast<u8*>(file) + file->headerSize);
-    for (s32 index = 0; index < file->blockCount; ++index) {
-        switch (block->kind) {
-        case 0x464e4946: // FINF
-            info = reinterpret_cast<NwFontInfo*>(block + 1);
-            relocateFontOffset(info->sheetInfo, file);
-            if (info->widthTable != NULL) {
-                relocateFontOffset(info->widthTable, file);
-            }
-            if (info->charMap != NULL) {
-                relocateFontOffset(info->charMap, file);
-            }
+    NwFontBlockHeader *block;
+    NwFontInfo *info = NULL;
+    s32 nBlocks = 0;
+
+    block = (NwFontBlockHeader *)((u8 *)file + file->headerSize);
+    while (nBlocks < file->blockCount) {
+        switch (block->signature) {
+        case 0x464E4946:
+            info = (NwFontInfo *)(block + 1);
+            resolveOffset(info->sheetInfo, file);
+            if (info->widthTable != NULL)
+                resolveOffset(info->widthTable, file);
+            if (info->charMap != NULL)
+                resolveOffset(info->charMap, file);
             break;
-        case 0x504c4754: { // TGLP
-            NwFontSheetInfo* sheet = reinterpret_cast<NwFontSheetInfo*>(block + 1);
-            relocateFontOffset(sheet->sheetImage, file);
+        case 0x504C4754: {
+            NwFontSheetInfo *sheet = (NwFontSheetInfo *)(block + 1);
+            resolveOffset(sheet->sheetImage, file);
             break;
         }
-        case 0x48445743: { // CWDH
-            NwFontWidthTable* widths = reinterpret_cast<NwFontWidthTable*>(block + 1);
-            if (widths->next != NULL) {
-                relocateFontOffset(widths->next, file);
-            }
+        case 0x48445743: {
+            NwFontWidthTable *widths = (NwFontWidthTable *)(block + 1);
+            if (widths->next != NULL)
+                resolveOffset(widths->next, file);
             break;
         }
-        case 0x50414d43: { // CMAP
-            FontCodeMap* map = reinterpret_cast<FontCodeMap*>(block + 1);
-            if (map->next != NULL) {
-                relocateFontOffset(map->next, file);
-            }
+        case 0x50414D43: {
+            NwFontCharacterMap *map = (NwFontCharacterMap *)(block + 1);
+            if (map->next != NULL)
+                resolveOffset(map->next, file);
             break;
         }
-        case 0x52474c47: // GLGR
+        case 0x52474C47:
             break;
         default:
             return NULL;
         }
-        block = reinterpret_cast<FontBlock*>(
-            reinterpret_cast<u8*>(block) + block->size);
+        block = (NwFontBlockHeader *)((u8 *)block + block->byteSize);
+        nBlocks++;
     }
-    file->signature = 0x554e4643;
+    file->signature = 0x554E4643;
     return info;
 }
-}
 
-// Resolve the font's in-file links once, then attach its FINF data to the reader.
-extern "C" bool nw_font_ResFontSetResource(NwResFontBase* font, NwFontFileHeader* file)
+/* nw::font::ResFont::SetResource: resolves the font file once, then binds its FINF data to an unused font. */
+bool nw_font_ResFontSetResource(NwResFontBase *font, void *resource)
 {
-    if (font->resourceView.resource != NULL) {
+    NwFontInfo *info = NULL;
+    NwFontFileHeader *file = (NwFontFileHeader *)resource;
+    if (font->resourceView.resource != NULL)
         return false;
-    }
-    NwFontInfo* info;
-    if (file->signature == 0x554e4643) { // CFNU: links have already been resolved.
-        info = findFontInfo(file);
+    if (file->signature == 0x554E4643) {
+        NwFontBlockHeader *block;
+        s32 nBlocks = 0;
+
+        block = (NwFontBlockHeader *)((u8 *)file + file->headerSize);
+        while (nBlocks < file->blockCount) {
+            if (block->signature == 0x464E4946) {
+                info = (NwFontInfo *)(block + 1);
+                break;
+            }
+            block = (NwFontBlockHeader *)((u8 *)block + block->byteSize);
+            nBlocks++;
+        }
     } else {
-        info = relocateFontFile(file);
+        if (!nw_ut_IsValidBinaryFile(file, 0x544E4643, 0x03000000, 2))
+            return false;
+        info = resFontRebuild(file);
     }
-    if (info == NULL) {
+    if (info == NULL)
         return false;
-    }
-    nw_font_ResFontSetResourceBuffer(font, file, info);
+    nw_font_ResFontSetResourceBuffer(font, (NwFontFileHeader *)resource, info);
     return true;
 }
+} /* extern "C" */

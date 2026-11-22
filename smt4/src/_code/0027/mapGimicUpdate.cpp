@@ -11,7 +11,7 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMotionControlApi.h"
 
 extern "C" {
-s32 FUN_0027cda0(void);
+s32 mapGimicStepUnitSpawner(void);
 void FUN_002671f4(s32 id, f32 x, f32 y, f32 z, f32 w, f32 a, f32 b, f32 c);
 void modelPartSetRotationDegrees(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z); // declcheck: local (the header's NodeVec3 by-value form builds a stack temporary here: 127 against 111 lines)
 
@@ -39,7 +39,7 @@ void mapGimicUpdate(void)
                 g_mapGimic->entries[i].active = 0;
             }
         } else if (g_mapGimic->mode == 2) {
-            if (FUN_0027cda0() == 0) {
+            if (mapGimicStepUnitSpawner() == 0) {
                 return;
             }
             for (i = 0; i < MAP_GIMIC_COUNT; i++) {

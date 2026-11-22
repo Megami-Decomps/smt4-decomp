@@ -6,7 +6,7 @@ extern "C" {
 
 int nngxLockEnter(void);
 int nngxLockLeave(void);
-int FUN_002ba2b8(void);
+int gfxReplayRecordedCommands(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ extern int DAT_004c6330; /* 0x4c6330 */
 
 /* Supplied declaration required: nngxLockEnter. */
 /* Supplied declaration required: nngxLockLeave. */
-/* Supplied declaration required: FUN_002ba2b8. */
+/* Supplied declaration required: gfxReplayRecordedCommands. */
 
 
 void nngxRunCmdlist(void)
@@ -43,7 +43,7 @@ void nngxRunCmdlist(void)
     return;
   }
   nngxLockEnter();
-  FUN_002ba2b8();
+  gfxReplayRecordedCommands();
   nngxLockLeave();
   return;
 }

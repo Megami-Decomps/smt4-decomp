@@ -8,7 +8,7 @@
 #include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
-s32 FUN_00258de0(s32 user, s32 target, SkillDataRecord *skill, s32 preview, s32 mode);
+s32 skillApplyRestoreToMember(s32 user, s32 target, SkillDataRecord *skill, s32 preview, s32 mode);
 s32 appGetRemainingCapacity(u32 skill);
 s32 skillGetDiscountedCost(u32 skill, s32 mode);
 
@@ -18,13 +18,13 @@ s32 FUN_0026c464(s32 user, u32 skillId, s32 preview)
     bool applied = false;
     SkillDataRecord *skill = skillDataFindById(skillId);
     if (skill != NULL) {
-        if (FUN_00258de0(user, -1, skill, preview, 0) == 0) {
+        if (skillApplyRestoreToMember(user, -1, skill, preview, 0) == 0) {
             applied = true;
         }
         SaveSlotTableIV *slots = gameGetSlotTable();
         for (s32 index = 0; index < 24; ++index) {
             s32 target = slots->stock[index];
-            if (target >= 0 && FUN_00258de0(user, target, skill, preview, 0) == 0) {
+            if (target >= 0 && skillApplyRestoreToMember(user, target, skill, preview, 0) == 0) {
                 applied = true;
             }
         }

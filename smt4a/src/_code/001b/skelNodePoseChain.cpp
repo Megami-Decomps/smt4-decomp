@@ -35,53 +35,52 @@ void gfxQuaternionWorkspaceBuildMatrix(void);
    type handler gets the result. */
 void skelNodePoseChain(SkelNode *root, Vector4 *offsetIn)
 {
-    VectorScratch *workspace = &g_vectorScratch;
-    workspace->first.vector = *offsetIn;
+    g_vectorScratch.first.vector = *offsetIn;
     root->local = *offsetIn;
-    workspace->second.vector = root->base;
-    workspace->first.vector.x = workspace->first.vector.x + workspace->second.vector.x;
-    workspace->first.vector.y = workspace->first.vector.y + workspace->second.vector.y;
-    workspace->first.vector.z = workspace->first.vector.z + workspace->second.vector.z;
-    workspace->first.vector.w = workspace->first.vector.w + workspace->second.vector.w;
-    Vector4 sum = workspace->first.vector;
-    workspace->first.vector = root->rotation;
+    g_vectorScratch.second.vector = root->base;
+    g_vectorScratch.first.vector.x = g_vectorScratch.first.vector.x + g_vectorScratch.second.vector.x;
+    g_vectorScratch.first.vector.y = g_vectorScratch.first.vector.y + g_vectorScratch.second.vector.y;
+    g_vectorScratch.first.vector.z = g_vectorScratch.first.vector.z + g_vectorScratch.second.vector.z;
+    g_vectorScratch.first.vector.w = g_vectorScratch.first.vector.w + g_vectorScratch.second.vector.w;
+    Vector4 sum = g_vectorScratch.first.vector;
+    g_vectorScratch.first.vector = root->rotation;
     gfxQuaternionWorkspaceBuildMatrix();
     f32 scale = root->scaleA * root->scaleB;
     f32 matrix[16];
     for (s32 i = 0; i < 16; i++) {
-        matrix[i] = workspace->matrix.matrix.values[i];
+        matrix[i] = g_vectorScratch.matrix.matrix.values[i];
     }
     for (SkelNode *node = root->firstChild; node != NULL; node = node->next) {
-        workspace->first.vector = sum;
+        g_vectorScratch.first.vector = sum;
         if ((node->flags & 4) != 0) {
-            workspace->first.vector.y = 5.0f;
+            g_vectorScratch.first.vector.y = 5.0f;
         }
-        workspace->second.vector = node->local;
+        g_vectorScratch.second.vector = node->local;
         if ((node->flags & 0x80) != 0) {
-            workspace->second.vector.x = workspace->second.vector.x * scale;
-            workspace->second.vector.y = workspace->second.vector.y * scale;
-            workspace->second.vector.z = workspace->second.vector.z * scale;
-            workspace->second.vector.w = workspace->second.vector.w * scale;
+            g_vectorScratch.second.vector.x = g_vectorScratch.second.vector.x * scale;
+            g_vectorScratch.second.vector.y = g_vectorScratch.second.vector.y * scale;
+            g_vectorScratch.second.vector.z = g_vectorScratch.second.vector.z * scale;
+            g_vectorScratch.second.vector.w = g_vectorScratch.second.vector.w * scale;
         }
         for (s32 i = 0; i < 16; i++) {
-            workspace->matrix.matrix.values[i] = matrix[i];
+            g_vectorScratch.matrix.matrix.values[i] = matrix[i];
         }
-        f32 x = workspace->second.vector.x;
-        f32 y = workspace->second.vector.y;
-        f32 z = workspace->second.vector.z;
-        workspace->second.vector.x = x * matrix[0] + y * matrix[4] + z * matrix[8];
-        workspace->second.vector.y = x * matrix[1] + y * matrix[5] + z * matrix[9];
-        workspace->second.vector.z = x * matrix[2] + y * matrix[6] + z * matrix[10];
-        workspace->second.vector.w = x * matrix[3] + y * matrix[7] + z * matrix[11];
-        workspace->first.vector.x = workspace->first.vector.x + workspace->second.vector.x;
-        workspace->first.vector.y = workspace->first.vector.y + workspace->second.vector.y;
-        workspace->first.vector.z = workspace->first.vector.z + workspace->second.vector.z;
-        workspace->first.vector.w = workspace->first.vector.w + workspace->second.vector.w;
+        f32 x = g_vectorScratch.second.vector.x;
+        f32 y = g_vectorScratch.second.vector.y;
+        f32 z = g_vectorScratch.second.vector.z;
+        g_vectorScratch.second.vector.x = x * matrix[0] + y * matrix[4] + z * matrix[8];
+        g_vectorScratch.second.vector.y = x * matrix[1] + y * matrix[5] + z * matrix[9];
+        g_vectorScratch.second.vector.z = x * matrix[2] + y * matrix[6] + z * matrix[10];
+        g_vectorScratch.second.vector.w = x * matrix[3] + y * matrix[7] + z * matrix[11];
+        g_vectorScratch.first.vector.x = g_vectorScratch.first.vector.x + g_vectorScratch.second.vector.x;
+        g_vectorScratch.first.vector.y = g_vectorScratch.first.vector.y + g_vectorScratch.second.vector.y;
+        g_vectorScratch.first.vector.z = g_vectorScratch.first.vector.z + g_vectorScratch.second.vector.z;
+        g_vectorScratch.first.vector.w = g_vectorScratch.first.vector.w + g_vectorScratch.second.vector.w;
         Resource *resource = node->resource;
         /* The position handler; retail passes the vector by value here. */
         void (*apply)(void *, Vector4) = reinterpret_cast<void (*)(void *, Vector4)>(g_handlerTable[resource->type].setPosition);
         if (apply != NULL) {
-            apply(resource->data, workspace->first.vector);
+            apply(resource->data, g_vectorScratch.first.vector);
         }
     }
 }

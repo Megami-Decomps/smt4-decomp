@@ -20,7 +20,7 @@ u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdP
 s32 callbackDispatchToPresentOwner(u32 process);
 s32 FUN_0031d85c(u32 process);
 s32 FUN_0031d7cc(u32 process);
-void FUN_004bd794(void *work, s32 mode);
+void partnerMenuHandleSelectionInput(void *work, s32 mode);
 extern CallbackOwnerSlots g_callbackOwnerSlots;
 
 void FUN_002e738c(s32 mode)
@@ -33,6 +33,6 @@ void FUN_002e738c(s32 mode)
         taskCreateDraw((const s8 *)"PARTNER UR", 218, 0, 0, FUN_0031d85c, NULL, 0, (void *)work->process);
         taskCreateDraw((const s8 *)"PARTNER DD", 235, 0, 0, FUN_0031d7cc, NULL, 0, (void *)work->process);
     }
-    FUN_004bd794(work, mode);
+    partnerMenuHandleSelectionInput(work, mode);
 }
 }

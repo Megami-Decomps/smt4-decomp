@@ -1,18 +1,14 @@
-/* NON_MATCHING: retail builds the three attribute descriptors with separate stores and does not reload r1 around the trace call; built copies them from a constant and reloads (230 rows vs 231); the buffer layout is the same. */
+/* NON_MATCHING: 42 lines. The descriptors are nn::gr's BindSymbolVSInput (VertexAttributeDescription, as in
+ * vertexAttributeUploadStreams) and FUN_0034711c takes only the render data. Remaining: the descriptors' frame slots
+ * (retail colour +8, texture coordinates +16, positions +24; the build puts positions at +32, the same difference as
+ * vertexAttributeUploadStreams), the vertex count loaded before the stream pointer store (retail stores first), and
+ * the index allocations' stack arguments stored before the argument loads. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "gfx/RenderTargetState.h"
+#include "gfx/VertexAttributeState.h"
 
 extern "C" {
-
-/* One vertex attribute description handed to the command builder (8 bytes). */
-typedef struct AttrDesc {
-    u8 format;
-    u8 components;
-    u8 kind;
-    u8 flag;
-    u32 stride;
-} AttrDesc;
 
 /* A primitive's render data: which attribute arrays it has (flags) and where they live in one
  * shared buffer (only the fields used here, by their offsets). */
@@ -39,34 +35,34 @@ typedef struct PrimRenderData {
 
 extern const char DAT_004094c8[];    /* source path used by the trace calls */
 
-u32 FUN_0034711c(PrimRenderData *prim, s32 line);
+s32 FUN_0034711c(const PrimRenderData *prim); /* the vertex buffer size its attribute flags need */
 void *memAlloc(u32 size, u32 alignment, u32 a, u32 name, u32 b, u32 c);
 void *asdMemoryAllocAligned(u32 size, u32 alignment, u32 a, u32 count, u32 b, u32 c);
-void FUN_0023b9d0(void *commands, AttrDesc *attribute, u32 physAddress, s32 id);
+void FUN_0023b9d0(void *commands, const VertexAttributeDescription *attribute, u32 address, u32 format);
 
 /* Allocates the primitive's shared vertex buffer and fills in its attribute arrays (positions,
  * colours, byte colours, texture coordinates, indices), registering each with the command list
  * when the primitive lives in GPU memory. */
 void primRenderDataAllocateBuffers(PrimRenderData *prim)
 {
-    AttrDesc positionDesc = {0, 1, 0xFF, 0xFF, 0};
-    AttrDesc texCoordDesc = {0, 1, 0xFF, 0xFF, 0};
-    AttrDesc colorDesc = {0, 1, 0xFF, 0xFF, 0};
+    VertexAttributeDescription positionDesc;
+    VertexAttributeDescription colorDesc;
+    VertexAttributeDescription texCoordDesc;
     s32 offset;
 
     if ((prim->flags & 0x100) != 0) {
         asdDebugTrace(DAT_004094c8, 314);
-        prim->buffer = (u8 *)memAlloc(0x10000, 0x100, 0, FUN_0034711c(prim, 314), 16, 1);
+        prim->buffer = (u8 *)memAlloc(0x10000, 0x100, 0, FUN_0034711c(prim), 16, 1);
     } else {
         asdDebugTrace(DAT_004094c8, 311);
-        prim->buffer = (u8 *)memAlloc(0x100, 0x100, 0, FUN_0034711c(prim, 311), 16, 1);
+        prim->buffer = (u8 *)memAlloc(0x100, 0x100, 0, FUN_0034711c(prim), 16, 1);
     }
     offset = 0;
     if ((prim->flags & 1) != 0) {
         prim->positions = (f32 *)prim->buffer;
         offset = prim->vertexCount * 12;
         if ((prim->flags & 0x100) != 0) {
-            positionDesc.kind = 0;
+            positionDesc.index = 0;
             FUN_0023b9d0(prim->commands, &positionDesc, osVirtToPhysAddress(reinterpret_cast<u32>(prim->positions)), 11);
         }
     }
@@ -77,7 +73,7 @@ void primRenderDataAllocateBuffers(PrimRenderData *prim)
             prim->colors[i] = 1.0f;
         }
         if ((prim->flags & 0x100) != 0) {
-            colorDesc.kind = 1;
+            colorDesc.index = 1;
             FUN_0023b9d0(prim->commands, &colorDesc, osVirtToPhysAddress(reinterpret_cast<u32>(prim->colors)), 15);
         }
     }
@@ -88,14 +84,14 @@ void primRenderDataAllocateBuffers(PrimRenderData *prim)
             prim->byteColors[i] = 0xFF;
         }
         if ((prim->flags & 0x100) != 0) {
-            colorDesc.kind = 1;
+            colorDesc.index = 1;
             FUN_0023b9d0(prim->commands, &colorDesc, osVirtToPhysAddress(reinterpret_cast<u32>(prim->byteColors)), 13);
         }
     }
     if ((prim->flags & 4) != 0) {
         prim->texCoords = prim->buffer + offset;
         if ((prim->flags & 0x100) != 0) {
-            texCoordDesc.kind = 2;
+            texCoordDesc.index = 2;
             FUN_0023b9d0(prim->commands, &texCoordDesc, osVirtToPhysAddress(reinterpret_cast<u32>(prim->texCoords)), 7);
         }
     }

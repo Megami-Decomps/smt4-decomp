@@ -47,7 +47,7 @@ extern "C" {
 void mtx44Copy(Matrix44* destination, const Matrix44* source);
 void nn_math_ARMv6_MTX44MultAsm(
     Matrix44* destination, const Matrix44* left, const Matrix44* right);
-void FUN_002b2144(Matrix44* destination, float x, float y, float z);
+void mathMatrixBuildRotationXyz(Matrix44* destination, float x, float y, float z);
 void efctSetSpeed(float speed);
 void cameraSetViewMatrix(RenderCtx *scene, const Matrix44* matrix);
 
@@ -158,7 +158,7 @@ extern "C" void effectRenderTransformedInstance(EffectInstance* effect, float ho
         nn_math_ARMv6_MTX44MultAsm(&view, &view, &transform);
 
         if (rotated) {
-            FUN_002b2144(
+            mathMatrixBuildRotationXyz(
                 &transform, 0.0f, 0.0f, effect->rotation * rotationFactor);
             nn_math_ARMv6_MTX44MultAsm(&view, &view, &transform);
         }
@@ -181,7 +181,7 @@ extern "C" void effectRenderTransformedInstance(EffectInstance* effect, float ho
         nn_math_ARMv6_MTX44MultAsm(&view, &view, &transform);
 
         if (rotated) {
-            FUN_002b2144(
+            mathMatrixBuildRotationXyz(
                 &transform, 0.0f, 0.0f, effect->rotation * rotationFactor);
             nn_math_ARMv6_MTX44MultAsm(&view, &view, &transform);
         }

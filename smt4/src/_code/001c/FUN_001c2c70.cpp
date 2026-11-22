@@ -16,7 +16,7 @@ int nodeTreeReleaseItemClearOwner(double);
 int effRandomSignedValue(...);
 int nodeTreeReleaseItem(...);
 int _ZN2nw4math5MTX448IdentityEv(...);
-int FUN_002b2144(...);
+int mathMatrixBuildRotationXyz(...);
 int mtx44Copy(...);
 int FUN_0032ad34(...);
 int VectorFloatToUnsigned(double, int);
@@ -74,7 +74,7 @@ extern int DAT_00433238; /* 0x433238 */
 /* Supplied declaration required: nodeTreeReleaseItem. */
 extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: _ZN2nw4math5MTX448IdentityEv. */
-/* Supplied declaration required: FUN_002b2144. */
+/* Supplied declaration required: mathMatrixBuildRotationXyz. */
 /* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_0032ad34. */
@@ -250,7 +250,7 @@ void FUN_001c2c70(float *param_1)
       temp_v17 = (float *)romwright_f2u((float)(temp_v14));
       temp_v18 = (float *)romwright_f2u((float)(temp_v14));
       temp_v19 = (float *)romwright_f2u((float)(temp_v12));
-      FUN_002b2144(temp_v28);
+      mathMatrixBuildRotationXyz(temp_v28);
       nn_math_ARMv6_MTX44MultAsm(&uStack_e8,&uStack_e8,temp_v28);
       vec4Transform(&temp_v16,&uStack_e8);
       temp_v7 = temp_v7 + 1;
@@ -295,7 +295,7 @@ void FUN_001c2c70(float *param_1)
         temp_v24 = temp_v21;
         temp_v25 = temp_v22;
         temp_v26 = temp_v12;
-        FUN_002b2144(temp_v29);
+        mathMatrixBuildRotationXyz(temp_v29);
         nn_math_ARMv6_MTX44MultAsm(temp_v27,temp_v27,temp_v29);
         vec4Transform(&temp_v23,temp_v27);
         *(float *)((int)param_1[(int)temp_v2 + 0x99] + 0x358) = temp_v23;
@@ -353,7 +353,7 @@ void FUN_001c2c70(float *param_1)
         temp_v22 = temp_v14;
         temp_v23 = temp_v14;
         temp_v24 = temp_v12;
-        FUN_002b2144(temp_v29);
+        mathMatrixBuildRotationXyz(temp_v29);
         nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,temp_v29);
         vec4Transform(&temp_v21,&temp_v25);
         temp_v30 = temp_v21;

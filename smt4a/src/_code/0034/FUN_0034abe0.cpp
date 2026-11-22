@@ -19,7 +19,7 @@ int demonGetRaceLabel(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
-int statRowDrawValueImpl(...);
+int numberFontDrawFormatted(...);
 int texDrawTableEntryAtStoredOrigin(...);
 int gxResetColorQuadToWhite(void);
 int fontMeasureLineAdvance(...);
@@ -82,7 +82,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: statRowDrawValueImpl. */
+/* Supplied declaration required: numberFontDrawFormatted. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
@@ -189,14 +189,14 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
       texDrawTableEntryAtStoredOrigin(2,0x1a,0x4a,param_1,param_2,0x65);
       temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x253));
       temp_v10 = computeCountLimit();
-      statRowDrawValueImpl(0,(int)&param_1->field_0x0 + (int)*(short *)(temp_v2 + 8),
+      numberFontDrawFormatted(0,(int)&param_1->field_0x0 + (int)*(short *)(temp_v2 + 8),
                    *(short *)(temp_v2 + 10) + param_2,1,3,0x65,&LAB_0034b064,temp_v10);
     }
     else {
       texDrawTableEntryAtStoredOrigin(2,0x1a,0x4a,param_1,param_2,0x65);
       temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x4c));
       temp_v10 = computeCountLimit();
-      statRowDrawValueImpl(0,(int)&param_1->field_0x0 + (int)*(short *)(temp_v2 + 8),
+      numberFontDrawFormatted(0,(int)&param_1->field_0x0 + (int)*(short *)(temp_v2 + 8),
                    *(short *)(temp_v2 + 10) + param_2,1,2,0x65,&LAB_0034b064,temp_v10);
     }
   }
@@ -325,7 +325,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
         if ((unsigned short)puVar7[3] >= 100) {
           texDrawTableEntryAtStoredOrigin(2,0x1a,0x26e,temp_v6,temp_v2,0x6a);
           temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x25c));
-          statRowDrawValueImpl(0,(int)&param_1->field_0x0 +
+          numberFontDrawFormatted(0,(int)&param_1->field_0x0 +
                          (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v8 + 8),
                        (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,1,3,0x6f
                        ,&LAB_0034b68c,puVar7[3]);
@@ -333,7 +333,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
         else {
           texDrawTableEntryAtStoredOrigin(2,0x1a,0xd8,temp_v6,temp_v2,0x6a);
           temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xdf));
-          statRowDrawValueImpl(0,(int)&param_1->field_0x0 +
+          numberFontDrawFormatted(0,(int)&param_1->field_0x0 +
                          (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v8 + 8),
                        (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,1,2,0x6f
                        ,&LAB_0034b68c,puVar7[3]);
@@ -464,14 +464,14 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
         drawSetColorFromRGBA8(temp_v11);
         if ((unsigned short)psVar6[3] >= 100) {
           temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x25f));
-          statRowDrawValueImpl(0,(int)&param_1->field_0x0 +
+          numberFontDrawFormatted(0,(int)&param_1->field_0x0 +
                          (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v8 + 8),
                        (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,1,3,0x6f
                        ,&LAB_0034b68c,psVar6[3]);
         }
         else {
           temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xf7));
-          statRowDrawValueImpl(0,(int)&param_1->field_0x0 +
+          numberFontDrawFormatted(0,(int)&param_1->field_0x0 +
                          (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v8 + 8),
                        (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,1,2,0x6f
                        ,&LAB_0034b68c,psVar6[3]);
@@ -636,14 +636,14 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
   drawSetColorFromRGBA8(temp_v11);
   if ((unsigned short)psVar6[3] >= 100) {
     temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x262));
-    statRowDrawValueImpl(0,(int)&param_1->field_0x0 +
+    numberFontDrawFormatted(0,(int)&param_1->field_0x0 +
                    (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v1 + 8),
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,1,3,0x83,
                  &LAB_0034c1dc,psVar6[3]);
   }
   else {
     temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xfd));
-    statRowDrawValueImpl(0,(int)&param_1->field_0x0 +
+    numberFontDrawFormatted(0,(int)&param_1->field_0x0 +
                    (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v1 + 8),
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,1,2,0x83,
                  &LAB_0034c1dc,psVar6[3]);

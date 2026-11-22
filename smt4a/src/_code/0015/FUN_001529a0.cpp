@@ -1,4 +1,4 @@
-/* NON_MATCHING: saved-register assignment differs (retail keeps the allocator in r9 and the transform part in r7) and the reference swap is a branch around a five-instruction body in retail (it loads the temporary's flag as a word) where ours is conditionally executed; call order and fields match. */
+/* NON_MATCHING: 189 lines: saved-register assignment differs (retail keeps the allocator in r9 and the transform part in r7), the reference swap is a branch around a five-instruction body in retail (it loads the temporary's flag as a word) where ours is conditionally executed, and retail reads the position with one ldm; call order and fields match. */
 #include "classes/AsdAllocatorObject.h"
 
 struct Vector3 {
@@ -43,8 +43,9 @@ public:
     ~OwnedRef()
     {
         if (object != NULL && owned) {
-            object->~SceneObject();
-            object->allocator->release(object);
+            SceneObject *target = object;
+            target->~SceneObject();
+            target->allocator->release(target);
         }
     }
 

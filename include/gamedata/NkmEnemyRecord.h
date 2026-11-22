@@ -68,8 +68,10 @@ struct NkmEnemyRecordA {
     /* 0x04 */ s32 maxHp;
     /* 0x08 */ s32 maxMp;
     /* 0x0C */ u16 stats[5];            /* the thresholds scripts compare the player's stats with */
-    /* 0x16 */ u16 flags;
-    /* 0x18 */ u8 unk18[0x38];
+    /* 0x16 */ u16 flags;               /* bit 2: the target panel hides the demon until it is registered */
+    /* 0x18 */ u8 unk18[0xC];
+    /* 0x24 */ u16 resistances[8];      /* bits 10 and up hold the kind shown on the target panel */
+    /* 0x34 */ u8 unk34[0x1C];
     /* 0x50 */ u16 skills[8];
     /* 0x60 */ Table00Choice choices[3];
     /* 0x72 */ u8 unk72[2];
@@ -93,6 +95,7 @@ struct NkmEnemyRecordA {
 typedef char Table00RecordAOffsetCheck[sizeof(NkmEnemyRecordA) == 0xA8 &&
     offsetof(NkmEnemyRecordA, level) == 2 && offsetof(NkmEnemyRecordA, maxHp) == 4 &&
     offsetof(NkmEnemyRecordA, stats) == 0xC && offsetof(NkmEnemyRecordA, flags) == 0x16 &&
+    offsetof(NkmEnemyRecordA, resistances) == 0x24 &&
     offsetof(NkmEnemyRecordA, skills) == 0x50 && offsetof(NkmEnemyRecordA, choices) == 0x60 &&
     offsetof(NkmEnemyRecordA, experience) == 0x74 && offsetof(NkmEnemyRecordA, relatedIds) == 0x80 &&
     offsetof(NkmEnemyRecordA, portraitId) == 0x88 && offsetof(NkmEnemyRecordA, battleTextureId) == 0x8C && offsetof(NkmEnemyRecordA, aiScriptName) == 0x8E &&

@@ -11,7 +11,7 @@ typedef struct SkillItem {
     /* 0x20 */ u16 skill;
 } SkillItem;
 
-s32 FUN_00258de0(s32 unit, u32 a, SkillItem *item, s32 noCost, s32 e);
+s32 skillApplyRestoreToMember(s32 unit, u32 a, SkillItem *item, s32 noCost, s32 e);
 s32 skillGetDiscountedCost(u32 skill, s32 player);
 s32 appGetRemainingCapacity(u32 skill);
 
@@ -25,7 +25,7 @@ s32 FUN_0026c654(s32 unit, u32 a, u32 id, s32 noCost)
     if (item == NULL) {
         return 1;
     }
-    result = FUN_00258de0(unit, a, item, noCost, 0);
+    result = skillApplyRestoreToMember(unit, a, item, noCost, 0);
     if (result == 0 && noCost == 0) {
         if (unit < 0) {
             PlayerDataIV *player = gameGetPlayerData();

@@ -1,8 +1,14 @@
-/* NON_MATCHING: step function of the save-write process (stage 0: snapshot the extra block and write it to slot file 0x62; stage 2: build the full save image of 0x2a7a4 bytes and write it; stages 1 and 3 wait for the write and either advance, fail to stage 5 or animate the wait counter; stages 4/5 end with a result); written from the decompilation, the goto into the stage-3 wait is rebuilt as a shared helper and the allocation arguments follow gameDataAllocBlocks */
+/* NON_MATCHING: 111 lines. (1) The failed-write block (free the image, state 5) is shared by both wait states and
+ * sits in the second one, whose success block retail moves behind the literal pool. (2) Retail lays out state 5's
+ * result block before state 4's. (3) The constants 4 and 1 are in r7/r8 (built: r8/r7). The runner's flag is read
+ * through flag0CGet, a one-instruction getter armlink inlined (retail's lone `ldrsb r0, [r0, #12]` before the
+ * call padding; the field read gave `ldrb`, 106 lines). */
 #include "common.h"
 #include "gamedata/SaveLoadProcess.h"
+#include "gamedata/SaveLoadProcessState.h"
 #include "gamedata/GameSaveBlocks.h"
 #include "AsdSDK/AsdDebug.h"
+#include "shard/JobWork.h"
 
 #define SAVE_STAGE_WRITE_EXTRA 0
 #define SAVE_STAGE_WAIT_EXTRA 1
@@ -23,146 +29,146 @@
 #define SAVE_ALLOC_HEAP 0x10000
 #define SAVE_ALLOC_ALIGN 0x100
 
-/* The save process's job record (observed fields). */
-struct SaveProcessJob {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u32 stage;
-    /* 0x08 */ u8 *buffer;
-    /* 0x0C */ u32 size;
-    /* 0x10 */ s32 slot;
-    /* 0x14 */ s32 kind;
-    /* 0x18 */ u8 unk18;
-    /* 0x19 */ u8 flag;
-};
-
 struct SaveConfigView {
     /* 0x00 */ u8 unk00[0xC];
-    /* 0x0C */ u8 hasExtraBlocks;
+    /* 0x0C */ s8 hasExtraBlocks;
 };
 
 extern "C" {
-extern u8 DAT_0057f6bd;
-extern u8 DAT_0057f6c0;
-extern u16 DAT_0057f6c2;      /* wait animation phase */
-extern s32 DAT_0057f6c4;      /* wait animation frame */
+extern SaveByteSettings g_saveLoadProcess;
 extern SaveConfigView *g_saveLoadRunner;
 extern u32 DAT_005e20f4[];    /* cached extra block words */
 
-SaveProcessJob *jobGetWork(void);
 void *asdMemoryAlloc(s32 heap, s32 align, s32 unk08, u32 size, s32 fromFront);
 void asdMemFree(void *block);
-void __ARM_common_memcpy4_8(void *destination, u32 source);
 u32 *gameDataGetExtraBlock(void);
-void FUN_00268250(u8 mode, u32 arg0, u32 arg1, void *buffer, u32 size);
+void saveLoadThreadRequestInit(u8 mode, u32 arg0, u32 arg1, void *buffer, u32 size);
 void clockRecordStartSeconds(void);
 void gameDataBlocksSetIndexedValue(s32 index, u32 value);
 u8 *gameDataBlocksGetSaveData(void);
 u32 gameDataBlocksGetSelectedValue(void);
 u32 configGetSettings(void);
+s8 flag0CGet(const SaveConfigView *runner); /* armlink inlined; flag0CSet sets the flag */
 void titleConfigWriteToSave(void);
 s32 campCecGet(void);
 s32 lazyScriptTaskStep(void);
 void rt_memcpy(void *destination, const void *source, u32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
-/* Frees the job's buffer and moves to `stage`. */
-static __inline void saveFinishWrite(SaveProcessJob *job, u32 stage)
-{
-    asdMemFree(job->buffer);
-    job->stage = stage;
-    job->buffer = NULL;
-}
-
-/* Advances the little wait animation while the write is pending. */
+/* Advances the activity icon while the save thread works: a new phase (0-2) every eight frames. */
 static __inline void saveAdvanceWaitAnimation(void)
 {
-    DAT_0057f6c4++;
-    if (DAT_0057f6c4 >= SAVE_WAIT_FRAMES) {
-        DAT_0057f6c2++;
-        if (DAT_0057f6c2 >= SAVE_WAIT_PHASES)
-            DAT_0057f6c2 = 0;
-        DAT_0057f6c4 = 0;
+    g_saveLoadProcess.flags++;
+    if ((s32)g_saveLoadProcess.flags >= SAVE_WAIT_FRAMES) {
+        g_saveLoadProcess.value++;
+        if (g_saveLoadProcess.value >= SAVE_WAIT_PHASES)
+            g_saveLoadProcess.value = 0;
+        g_saveLoadProcess.flags = 0;
     }
 }
 
-u32 saveLoadProcessWriteStep(void)
+/* Steps the save process: writes the countdown block to its own file, then the save image (table,
+ * settings, save body) to the chosen slot, and reports the result. */
+u32 saveLoadProcessWriteStep(u32 job)
 {
-    SaveProcessJob *job = jobGetWork();
+    SaveLoadProcessWorkA *work = (SaveLoadProcessWorkA *)jobGetWork(job);
 
-    switch (job->stage) {
+    switch (work->state) {
     case SAVE_STAGE_WRITE_EXTRA: {
-        job->size = SAVE_EXTRA_SIZE;
+        work->bufferSize = SAVE_EXTRA_SIZE;
         asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\gamedata\\SaveLoadProcess.cpp", 156);
-        job->buffer = static_cast<u8 *>(asdMemoryAlloc(SAVE_ALLOC_HEAP, SAVE_ALLOC_ALIGN, 0, job->size, 1));
+        work->buffer = asdMemoryAlloc(SAVE_ALLOC_HEAP, SAVE_ALLOC_ALIGN, 0, work->bufferSize, 1);
         titleConfigWriteToSave();
-        s32 index = job->kind == 1 ? job->slot : job->slot - 1;
+        s32 index = work->slot - 1;
+        if (work->mode == 1)
+            index = work->slot;
         gameDataBlocksSetIndexedValue(index, gameDataBlocksGetSelectedValue());
-        if (g_saveLoadRunner->hasExtraBlocks != 0) {
-            s32 cec = campCecGet();
-            s32 skip = index;
-            if (cec == 0)
-                skip = SAVE_CEC_SKIP;
-            for (s32 i = 0; i < SAVE_EXTRA_SLOTS; i++) {
-                if (cec == 0) {
+        if (flag0CGet(g_saveLoadRunner) != 0) {
+            s32 i;
+
+            if (campCecGet() == 0) {
+                index = SAVE_CEC_SKIP;
+                for (i = 0; i < SAVE_EXTRA_SLOTS; i++) {
                     DAT_005e20f4[i] = gameDataGetExtraBlock()[i];
-                    gameDataBlocksSetIndexedValue(i, skip);
-                } else if (i == skip) {
-                    gameDataBlocksSetIndexedValue(i, 0);
-                } else {
-                    gameDataBlocksSetIndexedValue(i, DAT_005e20f4[i]);
+                    gameDataBlocksSetIndexedValue(i, index);
+                }
+            } else {
+                for (i = 0; i < SAVE_EXTRA_SLOTS; i++) {
+                    if (i == index) {
+                        gameDataBlocksSetIndexedValue(i, 0);
+                    } else {
+                        gameDataBlocksSetIndexedValue(i, DAT_005e20f4[i]);
+                    }
                 }
             }
         }
-        rt_memcpy(job->buffer, gameDataGetExtraBlock(), SAVE_EXTRA_SIZE);
-        FUN_00268250(2, 0, 0x62, job->buffer, job->size);
-        job->stage = SAVE_STAGE_WAIT_EXTRA;
+        rt_memcpy(work->buffer, gameDataGetExtraBlock(), SAVE_EXTRA_SIZE);
+        saveLoadThreadRequestInit(2, 0, 0x62, work->buffer, work->bufferSize);
+        work->state = SAVE_STAGE_WAIT_EXTRA;
         break;
     }
 
     case SAVE_STAGE_WAIT_EXTRA:
         if (lazyScriptTaskStep() == 1) {
-            saveFinishWrite(job, byte1IsZero() == 0 ? SAVE_STAGE_WRITE_FULL : SAVE_STAGE_FAILED);
-            return 0;
+            if (byte1IsZero() == 0) {
+                asdMemFree(work->buffer);
+                work->state = SAVE_STAGE_WRITE_FULL;
+                work->buffer = NULL;
+            } else {
+                asdMemFree(work->buffer);
+                work->state = SAVE_STAGE_FAILED;
+                work->buffer = NULL;
+            }
+            break;
         }
         saveAdvanceWaitAnimation();
         break;
 
     case SAVE_STAGE_WRITE_FULL: {
-        job->size = SAVE_FULL_SIZE;
+        work->bufferSize = SAVE_FULL_SIZE;
         asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\gamedata\\SaveLoadProcess.cpp", 243);
-        job->buffer = static_cast<u8 *>(asdMemoryAlloc(SAVE_ALLOC_HEAP, SAVE_ALLOC_ALIGN, 0, job->size, 1));
+        work->buffer = asdMemoryAlloc(SAVE_ALLOC_HEAP, SAVE_ALLOC_ALIGN, 0, work->bufferSize, 1);
         titleConfigWriteToSave();
-        s8 slot = (s8)job->slot;
-        s8 stored = job->kind == 1 ? slot : slot - 1;
-        gameDataBlocksGetSaveData()[3] = stored;
-        rt_memcpy(job->buffer, reinterpret_cast<void *>(gameDataBlocksGetTable()), SAVE_TABLE_SIZE);
-        __ARM_common_memcpy4_8(job->buffer + SAVE_TABLE_SIZE, configGetSettings());
-        u8 *body = job->buffer + SAVE_BODY_OFFSET;
+        s32 option = work->slot - 1;
+        if (work->mode == 1)
+            option = work->slot;
+        gameDataBlocksGetSaveData()[3] = option;
+        rt_memcpy(work->buffer, reinterpret_cast<void *>(gameDataBlocksGetTable()), SAVE_TABLE_SIZE);
+        *(SaveSettingsImageA *)((GameSaveDataA *)work->buffer)->settings = *(const SaveSettingsImageA *)configGetSettings();
+        u8 *body = (u8 *)work->buffer + SAVE_BODY_OFFSET;
         __aeabi_memcpy4(body, gameDataBlocksGetSaveData(), SAVE_FULL_BODY_SIZE);
         *reinterpret_cast<u16 *>(body) = 4;
-        job->buffer[SAVE_BODY_OFFSET + 2] = job->flag;
+        body[2] = work->saveKind;
         clockRecordStartSeconds();
-        FUN_00268250(2, job->kind, job->slot, job->buffer, job->size);
-        job->stage = SAVE_STAGE_WAIT_FULL;
+        saveLoadThreadRequestInit(2, work->mode, work->slot, work->buffer, work->bufferSize);
+        work->state = SAVE_STAGE_WAIT_FULL;
         break;
     }
 
     case SAVE_STAGE_WAIT_FULL:
         if (lazyScriptTaskStep() == 1) {
-            saveFinishWrite(job, byte1IsZero() == 0 ? SAVE_STAGE_DONE : SAVE_STAGE_FAILED);
-            return 0;
+            if (byte1IsZero() == 0) {
+                asdMemFree(work->buffer);
+                work->state = SAVE_STAGE_DONE;
+                work->buffer = NULL;
+                return 0;
+            }
+            asdMemFree(work->buffer);
+            work->state = SAVE_STAGE_FAILED;
+            work->buffer = NULL;
+            break;
         }
         saveAdvanceWaitAnimation();
         break;
 
     case SAVE_STAGE_DONE:
-        DAT_0057f6bd = 1;
-        DAT_0057f6c0 = 1;
+        g_saveLoadProcess.first = 1;
+        g_saveLoadProcess.fourth = 1;
         return SAVE_RESULT_FAILED;
 
     case SAVE_STAGE_FAILED:
-        DAT_0057f6c0 = 0;
-        DAT_0057f6bd = 1;
+        g_saveLoadProcess.first = 1;
+        g_saveLoadProcess.fourth = 0;
         return SAVE_RESULT_FAILED;
     }
     return 0;

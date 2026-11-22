@@ -1,76 +1,67 @@
-/* NON_MATCHING: option argument reload/scratch allocation and two-float projection copies differ; -O2 candidate. */
 #include <stdio.h>
 #include "battle/btlTargetSelect.h"
+#include "classes/Obj420780.h"
 #include "gamedata/NkmEnemyLookup.h"
-#include "code/Code0027.h"
+#include "gamedata/GameDataAccess_VariantF.h"
 #include "addon/LookupRecord.h"
+#include "code/Code0027.h"
+#include "nw/math/MTX33.h"
 
-struct TargetInfoPosition { f32 x, y, z; };
-struct TargetInfoProjection { f32 x, y; };
-struct TargetInfoPanel {
-    BtlUiObject base;
-    char name[32];
-    u8 level;
-    u8 unk25[3];
-    u32 category;
-    char categoryName[32];
-    u8 resistances[8];
-    u8 options[6];
-    u8 unk5a[2];
-    TargetInfoPosition position;
-    TargetInfoProjection projected;
-    f32 rightEdge;
-    u8 unk74[4];
-    f32 leftMargin;
-    u8 unk7c[0x5c];
-    f32 width;
-    u8 unkdc[8];
-    u8 side;
-    u8 unke5[0xf];
-    f32 offset;
-};
-static __inline TargetInfoPanel *targetInfoPanel(BtlTargetSelect *selection)
+/* The information panel the target selection owns. */
+static __inline Obj420780 *targetInfoPanel(BtlTargetSelect *select)
 {
-    return (TargetInfoPanel *)selection->primary;
+    return (Obj420780 *)select->primary;
 }
+
 extern "C" {
 extern BtlTargetSelect *g_btlTargetSelect;
-const char *demonGetRaceLabel(u32, u32);
-u8 itemIsCollectedWithRelated(u32);
-void cameraProjectToScreen(TargetInfoProjection *, u32, u32, const TargetInfoPosition *);
+u8 itemIsCollectedWithRelated(u32 demonId);
+void cameraProjectToScreen(ProjectedPoint *out, s32 display, u32 camera, const nw::math::VEC3 *world);
 
-void btlTargetSelectSetInfoPanel(const TargetInfoPosition *position, u32 id, u32 option0, u32 option1,
-                 u8 option2, u8 option3, u8 option4, u8 option5)
+/* Fills the target information panel for the demon `demonId` standing at `position`: its name, race, level,
+ * resistance kinds and the battle's six display flags, then places the panel left or right of the target's
+ * screen position. */
+void btlTargetSelectSetInfoPanel(const nw::math::VEC3 *position, u16 demonId, u32 option0, u32 option1, u8 option2,
+                                 u8 option3, u8 option4, u8 option5)
 {
-    BtlTargetSelect *selection = g_btlTargetSelect;
-    const NkmEnemyRecord *definition = nkmEnemyFindById(id);
-    const char *name = reinterpret_cast<const char *>(dataTable01FindByIdWithAoc(id));
-    sprintf(targetInfoPanel(selection)->name, "%s", name);
-    const char *category = demonGetRaceLabel(id, 0);
-    sprintf(targetInfoPanel(selection)->categoryName, "%s", category);
-    targetInfoPanel(selection)->level = itemIsCollectedWithRelated(id);
-    targetInfoPanel(selection)->category = definition->level;
-    for (u32 i = 0; i < 8; ++i)
-        targetInfoPanel(selection)->resistances[i] = definition->resistances[i] >> 10;
-    targetInfoPanel(selection)->options[0] = option0;
-    targetInfoPanel(selection)->options[1] = option1;
-    targetInfoPanel(selection)->options[2] = option2;
-    targetInfoPanel(selection)->options[3] = option3;
-    targetInfoPanel(selection)->options[4] = option4;
-    targetInfoPanel(selection)->options[5] = option5;
-    TargetInfoPanel *panel = targetInfoPanel(selection);
-    panel->position.x = position->x;
-    panel->position.y = position->y;
-    panel->position.z = position->z;
-    TargetInfoProjection projected;
-    cameraProjectToScreen(&projected, 0, obj80Select(0), &panel->position);
-    panel->projected = projected;
-    if (projected.x > 210.0f) {
+    BtlTargetSelect *select = g_btlTargetSelect;
+    const NkmEnemyRecord *record = nkmEnemyFindById(demonId);
+
+    sprintf(targetInfoPanel(select)->name, "%s", (const char *)dataTable01FindByIdWithAoc(demonId));
+    sprintf(targetInfoPanel(select)->raceName, "%s", demonGetRaceLabel(demonId, 0));
+    targetInfoPanel(select)->registered = itemIsCollectedWithRelated(demonId);
+    targetInfoPanel(select)->level = record->level;
+    targetInfoPanel(select)->resistances[0] = record->resistances[0] >> 10;
+    targetInfoPanel(select)->resistances[1] = record->resistances[1] >> 10;
+    targetInfoPanel(select)->resistances[2] = record->resistances[2] >> 10;
+    targetInfoPanel(select)->resistances[3] = record->resistances[3] >> 10;
+    targetInfoPanel(select)->resistances[4] = record->resistances[4] >> 10;
+    targetInfoPanel(select)->resistances[5] = record->resistances[5] >> 10;
+    targetInfoPanel(select)->resistances[6] = record->resistances[6] >> 10;
+    targetInfoPanel(select)->resistances[7] = record->resistances[7] >> 10;
+    targetInfoPanel(select)->options[0] = option0;
+    targetInfoPanel(select)->options[1] = option1;
+    targetInfoPanel(select)->options[2] = option2;
+    targetInfoPanel(select)->options[3] = option3;
+    targetInfoPanel(select)->options[4] = option4;
+    targetInfoPanel(select)->options[5] = option5;
+
+    Obj420780 *panel = targetInfoPanel(select);
+    panel->position[0] = position->x;
+    panel->position[1] = position->y;
+    panel->position[2] = position->z;
+    ProjectedPoint projected;
+    cameraProjectToScreen(&projected, 0, obj80Select(0), (const nw::math::VEC3 *)panel->position);
+    ScreenPointF screen = projected.screen;
+    panel->screen = screen;
+
+    if (screen.x > 210.0f) {
         panel->side = 0;
-        panel->offset = projected.x - panel->leftMargin;
+        panel->offset = screen.x - panel->anchors[1].x;
     } else {
         panel->side = 1;
-        panel->offset = panel->rightEdge + panel->width - projected.x;
+        panel->offset = panel->anchors[0].x + panel->scale - screen.x;
     }
 }
-}
+
+} /* extern "C" */

@@ -6,7 +6,7 @@ extern u32 *g_commandBufferEnd;
 void nngxLockEnter(void);
 void nngxLockLeave(void);
 void heapCloseOpenBlock(AsdCmdBuffer *buffer, AsdCmdRecord *record);
-void FUN_002ba2b8(void);
+void gfxReplayRecordedCommands(void);
 
 /* Terminates the buffered GPU commands, enqueues a submission record and requests submission. */
 void asdGxCommandBufferTerminateAndSubmit(void)
@@ -50,7 +50,7 @@ void asdGxCommandBufferTerminateAndSubmit(void)
     if (g_asdGfxContext.activeBuffer == buffer &&
         g_asdGfxContext.submitEnabled != 0 && g_asdGfxContext.submitPending == 0) {
         g_asdGfxContext.submitPending = 1;
-        FUN_002ba2b8();
+        gfxReplayRecordedCommands();
     }
     nngxLockLeave();
 }

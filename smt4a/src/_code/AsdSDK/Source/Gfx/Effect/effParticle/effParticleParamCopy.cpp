@@ -26,8 +26,8 @@ void effParticleParamCopy(EffParticleParam *dst, EffParticleParam *src)
     case 1:
     case 4:
     case 9:
-        dst->unk54 = src->unk54;
-        dst->unk58 = src->unk58;
+        dst->halfWidth = src->halfWidth;
+        dst->halfHeight = src->halfHeight;
         break;
     case 2:
         if (dst->object44) {

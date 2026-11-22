@@ -11,7 +11,7 @@ extern "C" {
 int cameraProjectToScreen(unsigned int *, int, unsigned int);
 int FUN_00358e94(...);
 int uiStoreTextureEntryCenter(...);
-int FUN_004a9740(int, int, unsigned int);
+int btlUiStartNumberPopup(int, int, unsigned int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -35,7 +35,7 @@ extern int g_btlUiBlock; /* 0x57a9c8 */
 /* Supplied declaration required: FUN_00358e94. */
 /* Supplied declaration required: uiStoreTextureEntryCenter. */
 extern int btlScriptUnitHasFlags(void);
-/* Supplied declaration required: FUN_004a9740. */
+/* Supplied declaration required: btlUiStartNumberPopup. */
 
 
 void FUN_002cc36c(int param_1)
@@ -129,7 +129,7 @@ LAB_002cc580:
           temp_v12 = (int)*(char *)(temp_v2 + 0xc061);
           temp_v11 = (unsigned int)*(unsigned char *)(temp_v2 + 0xc06b);
           temp_v10 = (unsigned int)*(unsigned char *)(temp_v2 + 0xc06a);
-          FUN_004a9740(param_1,temp_v7,*(unsigned int *)(temp_v2 + 0xc064));
+          btlUiStartNumberPopup(param_1,temp_v7,*(unsigned int *)(temp_v2 + 0xc064));
           *(unsigned char *)(temp_v2 + 0xc060) = 0;
           *(char *)(temp_v5 + 0xf054) = *(char *)(temp_v5 + 0xf054) + '\x01';
         }

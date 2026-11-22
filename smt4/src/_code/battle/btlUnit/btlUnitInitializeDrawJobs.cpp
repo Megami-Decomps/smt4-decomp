@@ -37,7 +37,7 @@ struct BattleUnitDrawDescription {
 struct BattleUnitDrawGlobals { u32 unk00; BattleUnitDrawOwner *owner; };
 struct BattleUnitDrawSlot { BattleUnitDrawObject *object; BattleUnitDrawCallback *callback; };
 extern "C" {
-extern BattleUnitDrawGlobals DAT_00439ce0;
+extern BattleUnitDrawGlobals g_btlColorDefaults;
 extern BattleUnitDrawSlot DAT_0049356c[2];
 extern const u8 _ZTV9Obj4209cc[];
 extern const u8 DAT_00420774, DAT_004208ec;
@@ -57,7 +57,7 @@ void btlUnitInitializeDrawJobs(BattleUnitDrawWork *work)
         owner->vtable = &_ZTV9Obj4209cc[0x18];
         owner->work = work;
     }
-    DAT_00439ce0.owner = owner;
+    g_btlColorDefaults.owner = owner;
     for (s32 i = 0; i < 2; ++i) {
         BattleUnitDrawCallback *callback;
         if (i == 0) {
@@ -65,14 +65,14 @@ void btlUnitInitializeDrawJobs(BattleUnitDrawWork *work)
             callback = (BattleUnitDrawCallback *)asdMemoryAlloc(0x10000, 0x100, 0, sizeof(BattleUnitDrawCallback), 1);
             if (callback) {
                 callback->vtable = &DAT_00420774;
-                callback->owner = DAT_00439ce0.owner;
+                callback->owner = g_btlColorDefaults.owner;
             }
         } else {
             asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\btlUnit.cpp", 221);
             callback = (BattleUnitDrawCallback *)asdMemoryAlloc(0x10000, 0x100, 0, sizeof(BattleUnitDrawCallback), 1);
             if (callback) {
                 callback->vtable = &DAT_004208ec;
-                callback->owner = DAT_00439ce0.owner;
+                callback->owner = g_btlColorDefaults.owner;
             }
         }
         DAT_0049356c[i].callback = callback;

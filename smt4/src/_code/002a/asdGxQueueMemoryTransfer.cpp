@@ -5,7 +5,7 @@ extern "C" {
 
 s32 nngxLockEnter(void);
 s32 nngxLockLeave(void);
-void FUN_002ba2b8(void);
+void gfxReplayRecordedCommands(void);
 
 // Queue a memory transfer on the write queue, then start submission if the queue is the active one and idle.
 void asdGxQueueMemoryTransfer(const void *source, void *destination, u32 bytes)
@@ -22,7 +22,7 @@ void asdGxQueueMemoryTransfer(const void *source, void *destination, u32 bytes)
     if (g_asdGfxContext.activeBuffer == queue && g_asdGfxContext.submitEnabled != 0 &&
         g_asdGfxContext.submitPending == 0) {
         g_asdGfxContext.submitPending = 1;
-        FUN_002ba2b8();
+        gfxReplayRecordedCommands();
     }
     nngxLockLeave();
 }

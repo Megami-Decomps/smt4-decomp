@@ -2785,12 +2785,12 @@
     },
     {
       "address": "0x10a9c8",
-      "function": "FUN_0010a9c8",
+      "function": "messageBannerDraw",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010a9c8.o",
+      "object": "build/obj/_code/0010/messageBannerDraw.o",
       "size": 1344,
-      "source": "src/_code/0010/FUN_0010a9c8.cpp",
-      "target": "orig/target/_code/0010/FUN_0010a9c8.o",
+      "source": "src/_code/0010/messageBannerDraw.cpp",
+      "target": "orig/target/_code/0010/messageBannerDraw.o",
       "thumb": false
     },
     {
@@ -4829,12 +4829,12 @@
     },
     {
       "address": "0x1198a4",
-      "function": "FUN_001198a4",
+      "function": "asdWaveVoiceUpdateAll",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_001198a4.o",
+      "object": "build/obj/_code/0011/asdWaveVoiceUpdateAll.o",
       "size": 768,
-      "source": "src/_code/0011/FUN_001198a4.cpp",
-      "target": "orig/target/_code/0011/FUN_001198a4.o",
+      "source": "src/_code/0011/asdWaveVoiceUpdateAll.cpp",
+      "target": "orig/target/_code/0011/asdWaveVoiceUpdateAll.o",
       "thumb": false
     },
     {
@@ -9760,12 +9760,12 @@
     },
     {
       "address": "0x13780c",
-      "function": "FUN_0013780c",
+      "function": "asdGxQueueDisplayTransfer",
       "module": "_code",
-      "object": "build/obj/_code/0013/FUN_0013780c.o",
+      "object": "build/obj/_code/0013/asdGxQueueDisplayTransfer.o",
       "size": 672,
-      "source": "src/_code/0013/FUN_0013780c.cpp",
-      "target": "orig/target/_code/0013/FUN_0013780c.o",
+      "source": "src/_code/0013/asdGxQueueDisplayTransfer.cpp",
+      "target": "orig/target/_code/0013/asdGxQueueDisplayTransfer.o",
       "thumb": false
     },
     {
@@ -11962,12 +11962,12 @@
     },
     {
       "address": "0x141710",
-      "function": "FUN_00141710",
+      "function": "resourceOwnerReleaseLoaded",
       "module": "_code",
-      "object": "build/obj/_code/0014/FUN_00141710.o",
+      "object": "build/obj/_code/0014/resourceOwnerReleaseLoaded.o",
       "size": 776,
-      "source": "src/_code/0014/FUN_00141710.cpp",
-      "target": "orig/target/_code/0014/FUN_00141710.o",
+      "source": "src/_code/0014/resourceOwnerReleaseLoaded.cpp",
+      "target": "orig/target/_code/0014/resourceOwnerReleaseLoaded.o",
       "thumb": false
     },
     {
@@ -14657,12 +14657,12 @@
     {
       "address": "0x14eae4",
       "file": "AsdSDK/Source/Gfx/Model/AsdModel",
-      "function": "FUN_0014eae4",
+      "function": "asdModelApplyShadowMaterials",
       "module": "_code",
-      "object": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_0014eae4.o",
+      "object": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/asdModelApplyShadowMaterials.o",
       "size": 596,
-      "source": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_0014eae4.cpp",
-      "target": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_0014eae4.o",
+      "source": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/asdModelApplyShadowMaterials.cpp",
+      "target": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/asdModelApplyShadowMaterials.o",
       "thumb": false
     },
     {
@@ -23603,12 +23603,12 @@
     },
     {
       "address": "0x1d1828",
-      "function": "FUN_001d1828",
+      "function": "partyPanelApplyFusion",
       "module": "_code",
-      "object": "build/obj/_code/001d/FUN_001d1828.o",
+      "object": "build/obj/_code/001d/partyPanelApplyFusion.o",
       "size": 864,
-      "source": "src/_code/001d/FUN_001d1828.cpp",
-      "target": "orig/target/_code/001d/FUN_001d1828.o",
+      "source": "src/_code/001d/partyPanelApplyFusion.cpp",
+      "target": "orig/target/_code/001d/partyPanelApplyFusion.o",
       "thumb": false
     },
     {
@@ -23706,12 +23706,12 @@
     },
     {
       "address": "0x1d1df4",
-      "function": "FUN_001d1df4",
+      "function": "placedEffectUpdate",
       "module": "_code",
-      "object": "build/obj/_code/001d/FUN_001d1df4.o",
+      "object": "build/obj/_code/001d/placedEffectUpdate.o",
       "size": 676,
-      "source": "src/_code/001d/FUN_001d1df4.cpp",
-      "target": "orig/target/_code/001d/FUN_001d1df4.o",
+      "source": "src/_code/001d/placedEffectUpdate.cpp",
+      "target": "orig/target/_code/001d/placedEffectUpdate.o",
       "thumb": false
     },
     {
@@ -26292,12 +26292,12 @@
     },
     {
       "address": "0x1edcf0",
-      "function": "FUN_001edcf0",
+      "function": "saveLoadConfirmScriptStep",
       "module": "_code",
-      "object": "build/obj/_code/001e/FUN_001edcf0.o",
+      "object": "build/obj/_code/001e/saveLoadConfirmScriptStep.o",
       "size": 936,
-      "source": "src/_code/001e/FUN_001edcf0.cpp",
-      "target": "orig/target/_code/001e/FUN_001edcf0.o",
+      "source": "src/_code/001e/saveLoadConfirmScriptStep.cpp",
+      "target": "orig/target/_code/001e/saveLoadConfirmScriptStep.o",
       "thumb": false
     },
     {
@@ -27051,12 +27051,12 @@
     },
     {
       "address": "0x1f8da8",
-      "function": "FUN_001f8da8",
+      "function": "rewardDrawFromRecord",
       "module": "_code",
-      "object": "build/obj/_code/001f/FUN_001f8da8.o",
+      "object": "build/obj/_code/001f/rewardDrawFromRecord.o",
       "size": 760,
-      "source": "src/_code/001f/FUN_001f8da8.cpp",
-      "target": "orig/target/_code/001f/FUN_001f8da8.o",
+      "source": "src/_code/001f/rewardDrawFromRecord.cpp",
+      "target": "orig/target/_code/001f/rewardDrawFromRecord.o",
       "thumb": false
     },
     {
@@ -28834,12 +28834,12 @@
     },
     {
       "address": "0x208160",
-      "function": "FUN_00208160",
+      "function": "mapDepartLoadModelsStep",
       "module": "_code",
-      "object": "build/obj/_code/0020/FUN_00208160.o",
+      "object": "build/obj/_code/0020/mapDepartLoadModelsStep.o",
       "size": 796,
-      "source": "src/_code/0020/FUN_00208160.cpp",
-      "target": "orig/target/_code/0020/FUN_00208160.o",
+      "source": "src/_code/0020/mapDepartLoadModelsStep.cpp",
+      "target": "orig/target/_code/0020/mapDepartLoadModelsStep.o",
       "thumb": false
     },
     {
@@ -31651,12 +31651,12 @@
     },
     {
       "address": "0x2205a4",
-      "function": "FUN_002205a4",
+      "function": "bustupCutAnimStartTransition",
       "module": "_code",
-      "object": "build/obj/_code/0022/FUN_002205a4.o",
+      "object": "build/obj/_code/0022/bustupCutAnimStartTransition.o",
       "size": 956,
-      "source": "src/_code/0022/FUN_002205a4.cpp",
-      "target": "orig/target/_code/0022/FUN_002205a4.o",
+      "source": "src/_code/0022/bustupCutAnimStartTransition.cpp",
+      "target": "orig/target/_code/0022/bustupCutAnimStartTransition.o",
       "thumb": false
     },
     {
@@ -39429,7 +39429,7 @@
       "module": "_code",
       "object": "build/obj/_code/0024/FUN_002496cc.o",
       "size": 284,
-      "source": "src/_code/0024/FUN_002496cc.cpp",
+      "source": "src/_code/AsdSDK/Source/Gfx/EffectEditor/EffectEditor/EffectEditor.cpp",
       "target": "orig/target/_code/0024/FUN_002496cc.o",
       "thumb": false
     },
@@ -42015,12 +42015,12 @@
     },
     {
       "address": "0x258de0",
-      "function": "FUN_00258de0",
+      "function": "skillApplyRestoreToMember",
       "module": "_code",
-      "object": "build/obj/_code/0025/FUN_00258de0.o",
+      "object": "build/obj/_code/0025/skillApplyRestoreToMember.o",
       "size": 1032,
-      "source": "src/_code/0025/FUN_00258de0.cpp",
-      "target": "orig/target/_code/0025/FUN_00258de0.o",
+      "source": "src/_code/0025/skillApplyRestoreToMember.cpp",
+      "target": "orig/target/_code/0025/skillApplyRestoreToMember.o",
       "thumb": false
     },
     {
@@ -42964,12 +42964,12 @@
     },
     {
       "address": "0x2624b8",
-      "function": "FUN_002624b8",
+      "function": "fusionBuildPreviewFromUnits",
       "module": "_code",
-      "object": "build/obj/_code/0026/FUN_002624b8.o",
+      "object": "build/obj/_code/0026/fusionBuildPreviewFromUnits.o",
       "size": 12,
-      "source": "src/_code/0026/FUN_002624b8.cpp",
-      "target": "orig/target/_code/0026/FUN_002624b8.o",
+      "source": "src/_code/0026/fusionBuildPreviewFromUnits.cpp",
+      "target": "orig/target/_code/0026/fusionBuildPreviewFromUnits.o",
       "thumb": false
     },
     {
@@ -45849,12 +45849,12 @@
     },
     {
       "address": "0x27cda0",
-      "function": "FUN_0027cda0",
+      "function": "mapGimicStepUnitSpawner",
       "module": "_code",
-      "object": "build/obj/_code/0027/FUN_0027cda0.o",
+      "object": "build/obj/_code/0027/mapGimicStepUnitSpawner.o",
       "size": 780,
-      "source": "src/_code/0027/FUN_0027cda0.cpp",
-      "target": "orig/target/_code/0027/FUN_0027cda0.o",
+      "source": "src/_code/0027/mapGimicStepUnitSpawner.cpp",
+      "target": "orig/target/_code/0027/mapGimicStepUnitSpawner.o",
       "thumb": false
     },
     {
@@ -55694,12 +55694,12 @@
     },
     {
       "address": "0x2b2144",
-      "function": "FUN_002b2144",
+      "function": "mathMatrixBuildRotationXyz",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002b2144.o",
+      "object": "build/obj/_code/002b/mathMatrixBuildRotationXyz.o",
       "size": 496,
-      "source": "src/_code/002b/FUN_002b2144.cpp",
-      "target": "orig/target/_code/002b/FUN_002b2144.o",
+      "source": "src/_code/002b/mathMatrixBuildRotationXyz.cpp",
+      "target": "orig/target/_code/002b/mathMatrixBuildRotationXyz.o",
       "thumb": false
     },
     {
@@ -57498,12 +57498,12 @@
     },
     {
       "address": "0x2ba2b8",
-      "function": "FUN_002ba2b8",
+      "function": "gfxReplayRecordedCommands",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002ba2b8.o",
+      "object": "build/obj/_code/002b/gfxReplayRecordedCommands.o",
       "size": 608,
-      "source": "src/_code/002b/FUN_002ba2b8.cpp",
-      "target": "orig/target/_code/002b/FUN_002ba2b8.o",
+      "source": "src/_code/002b/gfxReplayRecordedCommands.cpp",
+      "target": "orig/target/_code/002b/gfxReplayRecordedCommands.o",
       "thumb": false
     },
     {
@@ -63728,12 +63728,12 @@
     },
     {
       "address": "0x2d508c",
-      "function": "FUN_002d508c",
+      "function": "fieldPlayerMoveByStick",
       "module": "_code",
-      "object": "build/obj/_code/002d/FUN_002d508c.o",
+      "object": "build/obj/_code/002d/fieldPlayerMoveByStick.o",
       "size": 680,
-      "source": "src/_code/002d/FUN_002d508c.cpp",
-      "target": "orig/target/_code/002d/FUN_002d508c.o",
+      "source": "src/_code/002d/fieldPlayerMoveByStick.cpp",
+      "target": "orig/target/_code/002d/fieldPlayerMoveByStick.o",
       "thumb": false
     },
     {
@@ -65335,12 +65335,12 @@
     {
       "address": "0x2de490",
       "file": "AsdSDK/Source/Gfx/Effect/effParticle",
-      "function": "FUN_002de490",
+      "function": "effParticleParamCreateFromResource",
       "module": "_code",
-      "object": "build/obj/_code/AsdSDK/Source/Gfx/Effect/effParticle/FUN_002de490.o",
+      "object": "build/obj/_code/AsdSDK/Source/Gfx/Effect/effParticle/effParticleParamCreateFromResource.o",
       "size": 1204,
-      "source": "src/_code/AsdSDK/Source/Gfx/Effect/effParticle/FUN_002de490.cpp",
-      "target": "orig/target/_code/AsdSDK/Source/Gfx/Effect/effParticle/FUN_002de490.o",
+      "source": "src/_code/AsdSDK/Source/Gfx/Effect/effParticle/effParticleParamCreateFromResource.cpp",
+      "target": "orig/target/_code/AsdSDK/Source/Gfx/Effect/effParticle/effParticleParamCreateFromResource.o",
       "thumb": false
     },
     {
@@ -96664,12 +96664,12 @@
     },
     {
       "address": "0x3947cc",
-      "function": "FUN_003947cc",
+      "function": "btlEffectSetStartByName",
       "module": "_code",
-      "object": "build/obj/_code/0039/FUN_003947cc.o",
+      "object": "build/obj/_code/0039/btlEffectSetStartByName.o",
       "size": 596,
-      "source": "src/_code/0039/FUN_003947cc.cpp",
-      "target": "orig/target/_code/0039/FUN_003947cc.o",
+      "source": "src/_code/0039/btlEffectSetStartByName.cpp",
+      "target": "orig/target/_code/0039/btlEffectSetStartByName.o",
       "thumb": false
     },
     {
@@ -100520,12 +100520,12 @@
     },
     {
       "address": "0x3adca8",
-      "function": "FUN_003adca8",
+      "function": "btlUiStartNumberPopup",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003adca8.o",
+      "object": "build/obj/_code/003a/btlUiStartNumberPopup.o",
       "size": 876,
-      "source": "src/_code/003a/FUN_003adca8.cpp",
-      "target": "orig/target/_code/003a/FUN_003adca8.o",
+      "source": "src/_code/003a/btlUiStartNumberPopup.cpp",
+      "target": "orig/target/_code/003a/btlUiStartNumberPopup.o",
       "thumb": false
     },
     {
@@ -102683,12 +102683,12 @@
     {
       "address": "0x3c0ae0",
       "file": "battle/btlUnit",
-      "function": "FUN_003c0ae0",
+      "function": "btlUnitActionStart",
       "module": "_code",
-      "object": "build/obj/_code/battle/btlUnit/FUN_003c0ae0.o",
+      "object": "build/obj/_code/battle/btlUnit/btlUnitActionStart.o",
       "size": 616,
-      "source": "src/_code/battle/btlUnit/FUN_003c0ae0.cpp",
-      "target": "orig/target/_code/battle/btlUnit/FUN_003c0ae0.o",
+      "source": "src/_code/battle/btlUnit/btlUnitActionStart.cpp",
+      "target": "orig/target/_code/battle/btlUnit/btlUnitActionStart.o",
       "thumb": false
     },
     {
@@ -106609,12 +106609,12 @@
     },
     {
       "address": "0x3e3494",
-      "function": "FUN_003e3494",
+      "function": "gpuWriteRenderTargetCommands",
       "module": "_code",
-      "object": "build/obj/_code/003e/FUN_003e3494.o",
+      "object": "build/obj/_code/003e/gpuWriteRenderTargetCommands.o",
       "size": 612,
-      "source": "src/_code/003e/FUN_003e3494.cpp",
-      "target": "orig/target/_code/003e/FUN_003e3494.o",
+      "source": "src/_code/003e/gpuWriteRenderTargetCommands.cpp",
+      "target": "orig/target/_code/003e/gpuWriteRenderTargetCommands.o",
       "thumb": false
     },
     {
@@ -108969,12 +108969,12 @@
     },
     {
       "address": "0x3eb410",
-      "function": "FUN_003eb410",
+      "function": "asdCecInitGlobals",
       "module": "_code",
-      "object": "build/obj/_code/003e/FUN_003eb410.o",
+      "object": "build/obj/_code/003e/asdCecInitGlobals.o",
       "size": 92,
-      "source": "src/_code/003e/FUN_003eb410.cpp",
-      "target": "orig/target/_code/003e/FUN_003eb410.o",
+      "source": "src/_code/003e/asdCecInitGlobals.cpp",
+      "target": "orig/target/_code/003e/asdCecInitGlobals.o",
       "thumb": false
     },
     {

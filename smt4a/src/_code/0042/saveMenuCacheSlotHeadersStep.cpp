@@ -3,7 +3,7 @@
 
 extern "C" {
 u32 scrRunOpcodesStub(ScriptProcess *script);
-void saveLoadProcessCreate(s32 slot, s32 mode);
+void saveLoadStartLoad(s32 slot, s32 mode);
 void spriteListMenuResetSprites(SaveSlotHeaderWork *work, s32 resetHeader);
 s32 byteTripleGetV0();
 s32 byteArr5Get3();
@@ -14,7 +14,7 @@ void sysMemClear(void *destination, u32 size);
 /* Starts the save/load process on a slot (numbered from 1) in the given mode. */
 static void startSaveLoad(s32 slot, s32 mode)
 {
-    saveLoadProcessCreate(slot, mode);
+    saveLoadStartLoad(slot, mode);
 }
 
 // Cache the five save-slot headers, then wait for the final animation and script.

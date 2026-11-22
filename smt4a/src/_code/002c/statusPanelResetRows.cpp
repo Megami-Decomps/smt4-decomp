@@ -1,81 +1,94 @@
-/* NON_MATCHING: retail unrolls the 0xFFFF fill by two and keeps panel+0x2400 bases (r7/r8) in registers; the build's loop, constants and register use differ. */
+/* NON_MATCHING: 41 lines: retail hoists 0xFA8 and the animation id 12 into saved registers where the build hoists
+ * 0xFA7/0xFA1, and keeps the header sprite's address in sl (built: r9). */
 #include "ui/UiSpriteApi.h"
+#include "ui/UiSpriteState.h"
+#include "battle/BattleContextCommandsA.h"
 #include "common.h"
-#include "sys/RuntimeObjects.h"
 
-/* A sprite widget (0x8C bytes). */
-/* The party status panel work (accessed fields). */
+/* unit-local: the battle status panel's work (BtlUiObjAA), only the fields this function resets */
 struct StatusPanel {
-    u8 unk0000[0x20];
-    UiSpriteState faces[0x42];       // 0x20 (stride 0x8C; other rows interleave at +0x598, +0xB10, ...)
+    /* 0x0000 */ UiResourceParameters parameters;
+    /* 0x0020 */ UiSpriteState sprites[66]; /* six rows of ten party sprites, then the frame sprites */
+    /* 0x2438 */ s32 unk2438;
+    /* 0x243C */ s32 unk243C;
+    /* 0x2440 */ s32 variant;
+    /* 0x2444 */ u8 unk2444[4];
+    /* 0x2448 */ s16 rowCount;
+    /* 0x244A */ s16 selected;
+    /* 0x244C */ u8 unk244C[0x54];
+    /* 0x24A0 */ s16 rowIds[10];
 };
 
-#define WIDGET(panel, offset, i) (reinterpret_cast<UiSpriteState *>(reinterpret_cast<u8 *>(panel) + (offset) + (i) * 0x8C))
-#define PANEL_HALF(panel, offset) (*reinterpret_cast<u16 *>(reinterpret_cast<u8 *>(panel) + (offset)))
-#define PANEL_WORD(panel, offset) (*reinterpret_cast<s32 *>(reinterpret_cast<u8 *>(panel) + (offset)))
+enum {
+    STATUS_PANEL_FACE = 0,      /* the unit's face, one per row */
+    STATUS_PANEL_BACK = 10,
+    STATUS_PANEL_GAUGE = 20,
+    STATUS_PANEL_NAME = 30,
+    STATUS_PANEL_MP = 40,
+    STATUS_PANEL_HP = 50,
+    STATUS_PANEL_HEADER = 61,
+    STATUS_PANEL_TABS = 62      /* four, the first rows only */
+};
 
 extern "C" {
-s32 btlIsDefeatSuppressed(void);
+
+/* Sets the header and the row's tab image of the first four rows; each tab shows the image before the previous one. */
+static void statusPanelSetTabImages(StatusPanel *panel, s32 row, s32 headerImage)
+{
+    if (row <= 3) {
+        if (row == 0)
+            pairSetFirstResetSecond(&panel->sprites[STATUS_PANEL_HEADER], headerImage);
+        pairSetFirstResetSecond(&panel->sprites[STATUS_PANEL_TABS + row], headerImage - 1 - row);
+    }
+}
 
 /* Reset the party panel's rows and set each row's sprites for the current display variant. */
 void statusPanelResetRows(StatusPanel *panel, s32 variant, u16 rowCount, u16 selected)
 {
-    PANEL_HALF(panel, 0x2448) = rowCount;
-    PANEL_HALF(panel, 0x244A) = selected;
-    PANEL_WORD(panel, 0x2440) = variant;
+    panel->rowCount = rowCount;
+    panel->selected = selected;
+    panel->variant = variant;
     for (s32 i = 0; i < 10; i++)
-        PANEL_HALF(panel, 0x24A0 + i * 2) = 0xFFFF;
-    PANEL_WORD(panel, 0x243C) = 2;
-    PANEL_WORD(panel, 0x2438) = 0;
-    for (s32 i = 0; i < 0x42; i++)
-        reinterpret_cast<u8 *>(panel)[0xA5 + i * 0x8C] = 0;
-    UiSpriteState *header = reinterpret_cast<UiSpriteState *>(reinterpret_cast<u8 *>(panel) + 0x217C);
-    for (s32 i = 0; i < static_cast<s16>(PANEL_HALF(panel, 0x2448)); i++) {
-        if (PANEL_WORD(panel, 0x2440) != 0) {
-            pairSetFirstResetSecond((WIDGET(panel, 0x20, i)), 1);
-            pairSetFirstResetSecond((WIDGET(panel, 0xB10, i)), 8);
-            pairSetFirstResetSecond((WIDGET(panel, 0x1088, i)), 3);
-            pairSetFirstResetSecond((WIDGET(panel, 0x1B78, i)), 0xFA7);
-            pairSetFirstResetSecond((WIDGET(panel, 0x1600, i)), 0xFA1);
-            if (i < 4) {
-                if (i == 0)
-                    pairSetFirstResetSecond(header, 0xBD);
-                pairSetFirstResetSecond((WIDGET(panel, 0x2208, i)), 0xBC - i);
-            }
+        panel->rowIds[i] = -1;
+    panel->unk243C = 2;
+    panel->unk2438 = 0;
+    for (s32 i = 0; i < 66; i++)
+        uiSpriteSetUpdated(&panel->sprites[i], 0);
+    for (s32 i = 0; i < panel->rowCount; i++) {
+        if (panel->variant != 0) {
+            pairSetFirstResetSecond(&panel->sprites[STATUS_PANEL_FACE + i], 1);
+            pairSetFirstResetSecond(&panel->sprites[STATUS_PANEL_GAUGE + i], 8);
+            pairSetFirstResetSecond(&panel->sprites[STATUS_PANEL_NAME + i], 3);
+            pairSetFirstResetSecond(&panel->sprites[STATUS_PANEL_HP + i], 0xFA7);
+            pairSetFirstResetSecond(&panel->sprites[STATUS_PANEL_MP + i], 0xFA1);
+            statusPanelSetTabImages(panel, i, 0xBD);
         } else if (btlIsDefeatSuppressed() != 0) {
-            pairSetFirstResetSecond((WIDGET(panel, 0x20, i)), 0xA3);
-            pairSetFirstResetSecond((WIDGET(panel, 0xB10, i)), 0xA5);
-            pairSetFirstResetSecond((WIDGET(panel, 0x1088, i)), 0xA4);
-            pairSetFirstResetSecond((WIDGET(panel, 0x1B78, i)), 0xFA8);
-            pairSetFirstResetSecond((WIDGET(panel, 0x1600, i)), 0xFB0);
-            if (i < 4) {
-                if (i == 0)
-                    pairSetFirstResetSecond(header, 0xC2);
-                pairSetFirstResetSecond((WIDGET(panel, 0x2208, i)), 0xC1 - i);
-            }
+            pairSetFirstResetSecond(&panel->sprites[STATUS_PANEL_FACE + i], 0xA3);
+            pairSetFirstResetSecond(&panel->sprites[STATUS_PANEL_GAUGE + i], 0xA5);
+            pairSetFirstResetSecond(&panel->sprites[STATUS_PANEL_NAME + i], 0xA4);
+            pairSetFirstResetSecond(&panel->sprites[STATUS_PANEL_HP + i], 0xFA8);
+            pairSetFirstResetSecond(&panel->sprites[STATUS_PANEL_MP + i], 0xFB0);
+            statusPanelSetTabImages(panel, i, 0xC2);
         } else {
-            pairSetFirstResetSecond((WIDGET(panel, 0x20, i)), 0);
-            pairSetFirstResetSecond((WIDGET(panel, 0xB10, i)), 7);
-            pairSetFirstResetSecond((WIDGET(panel, 0x1088, i)), 2);
-            pairSetFirstResetSecond((WIDGET(panel, 0x1B78, i)), 0xFA6);
-            pairSetFirstResetSecond((WIDGET(panel, 0x1600, i)), 4000);
-            if (i < 4) {
-                if (i == 0)
-                    pairSetFirstResetSecond(header, 0xB8);
-                pairSetFirstResetSecond((WIDGET(panel, 0x2208, i)), 0xB7 - i);
-            }
+            pairSetFirstResetSecond(&panel->sprites[STATUS_PANEL_FACE + i], 0);
+            pairSetFirstResetSecond(&panel->sprites[STATUS_PANEL_GAUGE + i], 7);
+            pairSetFirstResetSecond(&panel->sprites[STATUS_PANEL_NAME + i], 2);
+            pairSetFirstResetSecond(&panel->sprites[STATUS_PANEL_HP + i], 0xFA6);
+            pairSetFirstResetSecond(&panel->sprites[STATUS_PANEL_MP + i], 4000);
+            statusPanelSetTabImages(panel, i, 0xB8);
         }
-        uiSpriteSelectAnim((WIDGET(panel, 0x20, i)), 2);
-        uiSpriteSelectAnim((WIDGET(panel, 0xB10, i)), 5);
-        uiSpriteSelectAnim((WIDGET(panel, 0x1088, i)), 3);
-        uiSpriteSelectAnim((WIDGET(panel, 0x1B78, i)), 10);
-        if (i < 4) {
+        uiSpriteSelectAnim(&panel->sprites[STATUS_PANEL_FACE + i], 2);
+        uiSpriteSelectAnim(&panel->sprites[STATUS_PANEL_GAUGE + i], 5);
+        uiSpriteSelectAnim(&panel->sprites[STATUS_PANEL_NAME + i], 3);
+        uiSpriteSelectAnim(&panel->sprites[STATUS_PANEL_HP + i], 10);
+        if (i <= 3) {
             if (i == 0)
-                uiSpriteSelectAnim(header, 0xC);
-            uiSpriteSelectAnim((WIDGET(panel, 0x2208, i)), 0xC);
+                uiSpriteSelectAnim(&panel->sprites[STATUS_PANEL_HEADER], 0xC);
+            uiSpriteSelectAnim(&panel->sprites[STATUS_PANEL_TABS + i], 0xC);
         }
-        pairSetFirstResetSecond((WIDGET(panel, 0x598, i)), 6);
-        uiSpriteSelectAnim((WIDGET(panel, 0x598, i)), 1);
+        pairSetFirstResetSecond(&panel->sprites[STATUS_PANEL_BACK + i], 6);
+        uiSpriteSelectAnim(&panel->sprites[STATUS_PANEL_BACK + i], 1);
     }
 }
-}
+
+} /* extern "C" */

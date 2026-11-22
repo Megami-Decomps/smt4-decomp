@@ -25,7 +25,7 @@ int efctSetSpeed(void);
 int messageWindowDrawSprites(int);
 int renderCtxPopState(...);
 int renderStackPushIndexed(...);
-int statRowDrawValueImpl(...);
+int numberFontDrawFormatted(...);
 int gxResetColorQuadToWhite(void);
 int drawSetColorFromRGBA8(...);
 int VectorSignedToFloat(...);
@@ -57,7 +57,7 @@ extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: uiDrawGroupedNumber. */
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
-/* Supplied declaration required: statRowDrawValueImpl. */
+/* Supplied declaration required: numberFontDrawFormatted. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 
@@ -134,11 +134,11 @@ unsigned int FUN_0013f7c4(void)
                  (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,0x10,0);
     drawSetColorFromRGBA8(0xffffffff);
     temp_v5 = (int)asdTMTexTableEntryAt(8,0xc6);
-    statRowDrawValueImpl(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
+    numberFontDrawFormatted(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                  (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,1,4,0x10,
                  &LAB_0013fbbc,*(unsigned int *)(((int)g_messageMain.banner) + 0x7c));
     temp_v5 = (int)asdTMTexTableEntryAt(8,199);
-    statRowDrawValueImpl(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
+    numberFontDrawFormatted(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                  (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0,1,0x10,
                  &LAB_0013fbc0);
     gxResetColorQuadToWhite();
@@ -179,7 +179,7 @@ unsigned int FUN_0013f7c4(void)
       temp_v1 = (int)asdTMTexTableEntryAt(8,0x5d);
     }
     drawSetColorFromRGBA8(0xff);
-    statRowDrawValueImpl(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v1 + 8) + temp_v2,
+    numberFontDrawFormatted(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v1 + 8) + temp_v2,
                  (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v4,0,0xf,0x10,
                  &LAB_0013fbc0);
     gxResetColorQuadToWhite();

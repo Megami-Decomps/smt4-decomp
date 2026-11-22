@@ -9,7 +9,7 @@ struct DrawPositionView {
 
 extern "C" {
 void drawSetColorFromRGBA8(u32 color);
-void statRowDrawValueImpl(u32 drawContext, s32 x, s32 y, u32 option0,
+void numberFontDrawFormatted(u32 drawContext, s32 x, s32 y, u32 option0,
                   u32 option1, u32 option2, const char* format, u32 value);
 void gxResetColorQuadToWhite(void);
 
@@ -23,7 +23,7 @@ void drawTextAtRelativePosition(const DrawPositionView* position, u32 drawContex
     const s32 drawX = (s32)((position->x + position->offsetX) + (f32)xOffset);
     const s32 drawY = (s32)((position->y + position->offsetY) + (f32)yOffset);
 
-    statRowDrawValueImpl(drawContext, drawX, drawY, option0, option1, option2,
+    numberFontDrawFormatted(drawContext, drawX, drawY, option0, option1, option2,
                   "%s", value);
     gxResetColorQuadToWhite();
 }

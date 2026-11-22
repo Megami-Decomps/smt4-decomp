@@ -20,7 +20,7 @@ static u8 decimalDigit(u32 value, u8 place)
 }
 
 extern "C" {
-void statRowDrawValueImpl(s32, u32, u32, s32, s32, u32, const char *);
+void numberFontDrawFormatted(s32, u32, u32, s32, s32, u32, const char *);
 
 /* Draw a seven-column decimal number padded with spaces on the left. */
 void digitsDrawPaddedNumber(u32 value, u32 x, u32 y, u32 color)
@@ -35,6 +35,6 @@ void digitsDrawPaddedNumber(u32 value, u32 x, u32 y, u32 color)
             sprintf(text + column, "%d", digit);
     }
     text[column] = '\0';
-    statRowDrawValueImpl(0, x, y, 0, 5, color, text);
+    numberFontDrawFormatted(0, x, y, 0, 5, color, text);
 }
 }

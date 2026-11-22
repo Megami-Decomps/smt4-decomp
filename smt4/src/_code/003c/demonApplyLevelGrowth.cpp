@@ -1,16 +1,12 @@
-/* NON_MATCHING: growth parameters initialize with byte/halfword stores rather than retail's packed-register construction and spill layout. */
+/* NON_MATCHING: 121 lines. The growth parameters are demonGetGrowthParameters' body inlined (built in registers and
+ * stored as four words, as in retail); the callees are saveIsRecordValueBounded and gameRecordSetValueClamped. The
+ * rest is that body's scheduling (see demonGetGrowthParameters; retail also spills more and keeps a 60-byte frame), and
+ * the order of the stat bonus loads and stores. */
 #include "common.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "gamedata/GameDataAccess.h"
+#include "gamedata/DemonGrowthParameters.h"
 
-struct LevelGrowthParameters {
-    /* 0x00 */ u8 weights[5];
-    /* 0x05 */ u8 reserved;
-    /* 0x06 */ u16 baseHp;
-    /* 0x08 */ u16 baseMp;
-    /* 0x0A */ u8 hpGrowth, mpGrowth;
-    /* 0x0C */ u16 hp, mp;
-};
 struct DemonLevelWork {
     /* 0x00 */ s16 base[7];
     /* 0x0E */ s16 effective[7];
@@ -22,22 +18,13 @@ struct DemonLevelWork {
     /* 0x46 */ u16 id;
     /* 0x48 */ u8 level, levelsGained;
 };
-typedef char LevelGrowthParametersSizeCheck[sizeof(LevelGrowthParameters) == 0x10 ? 1 : -1];
 typedef char DemonLevelWorkSizeCheck[sizeof(DemonLevelWork) == 0x4a ? 1 : -1];
 
 extern "C" {
-u32 unitRollGrowthStat(DemonLevelWork *work, LevelGrowthParameters *parameters, u32 flags);
-s32 FUN_00245768(u32 id);
-void FUN_0024571c(u32 id, s32 value);
+u32 unitRollGrowthStat(DemonLevelWork *work, StatGrowthParametersIV *parameters, u32 flags);
+u32 saveIsRecordValueBounded(u32 index);
+u32 gameRecordSetValueClamped(u32 recordIndex, u32 value);
 void unitRecalculateEffectiveStats(DemonLevelWork *work);
-}
-
-static inline void applyDemonGrowthBonus(DemonLevelWork *work, u32 flag, u32 stat)
-{
-    if (flagBitIsSet(flag) && work->base[stat + 2] < 999) {
-        ++work->base[stat + 2];
-        ++work->gains[stat];
-    }
 }
 
 extern "C" void demonApplyLevelGrowth(DemonLevelWork *work, s32 levels)
@@ -45,18 +32,8 @@ extern "C" void demonApplyLevelGrowth(DemonLevelWork *work, s32 levels)
     if (levels <= 0)
         return;
 
-    NkmBaseRecord *record = nkmBaseGetRecord(work->id);
-    LevelGrowthParameters parameters = {
-        {record->statGrowth[0], record->statGrowth[1], record->statGrowth[2], record->statGrowth[3], record->statGrowth[4]},
-        0, record->baseHp, record->baseMp, record->hpGrowth, record->mpGrowth, 0, 0
-    };
-    s32 hp = record->baseHp + record->level * record->hpGrowth;
-    hp = hp > 9999 ? 9999 : hp;
-    parameters.hp = hp;
-    s32 mp = (record->baseMp + record->level * record->mpGrowth) * 45 / 100;
-    if (mp > 9999)
-        mp = 9999;
-    parameters.mp = mp;
+    StatGrowthParametersIV parameters;
+    demonGrowthParametersIV(work->id, &parameters);
 
     for (s32 level = 0; level < levels; ++level) {
         if (work->level == 99)
@@ -70,14 +47,29 @@ extern "C" void demonApplyLevelGrowth(DemonLevelWork *work, s32 levels)
             case 4: ++work->gains[4]; break;
             }
         }
-        applyDemonGrowthBonus(work, 7, 0);
-        applyDemonGrowthBonus(work, 8, 3);
-        applyDemonGrowthBonus(work, 9, 4);
-        applyDemonGrowthBonus(work, 10, 2);
-        applyDemonGrowthBonus(work, 11, 1);
+        if (flagBitIsSet(7) && work->base[2] < 999) {
+            ++work->base[2];
+            ++work->gains[0];
+        }
+        if (flagBitIsSet(8) && work->base[5] < 999) {
+            ++work->base[5];
+            ++work->gains[3];
+        }
+        if (flagBitIsSet(9) && work->base[6] < 999) {
+            ++work->base[6];
+            ++work->gains[4];
+        }
+        if (flagBitIsSet(10) && work->base[4] < 999) {
+            ++work->base[4];
+            ++work->gains[2];
+        }
+        if (flagBitIsSet(11) && work->base[3] < 999) {
+            ++work->base[3];
+            ++work->gains[1];
+        }
         ++work->levelsGained;
         ++work->level;
-        FUN_0024571c(work->id, FUN_00245768(work->id) + 50);
+        gameRecordSetValueClamped(work->id, saveIsRecordValueBounded(work->id) + 50);
     }
     unitRecalculateEffectiveStats(work);
     work->hp = work->effective[0];

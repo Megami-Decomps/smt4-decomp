@@ -56,7 +56,10 @@ struct MessageWindow {
     /* 0x083 */ s8 activeState;
     /* 0x084 */ u32 unk084;
     /* 0x088 */ u8 panelState;           /* the counter panel's state (0: closed) */
-    /* 0x089 */ u8 unk089[0xF];
+    /* 0x089 */ u8 unk089[3];
+    /* 0x08C */ u32 panelStep;           /* nonzero while the counter panel is drawn */
+    /* 0x090 */ u16 panelCount;          /* the number the counter panel shows */
+    /* 0x092 */ u8 unk092[6];
     /* 0x098 */ u16 unk098;
     /* 0x09A */ u8 unk09A[2];
     /* 0x09C */ u32 unk09C;
@@ -91,6 +94,7 @@ typedef char MessageWindowOffsetsCheck[
     offsetof(MessageWindow, flags) == 0xC && offsetof(MessageWindow, choiceResult) == 0x1C &&
     offsetof(MessageWindow, closeRequested) == 0x35 && offsetof(MessageWindow, closeLocked) == 0x5F &&
     offsetof(MessageWindow, counterState) == 0x7C && offsetof(MessageWindow, panelState) == 0x88 &&
+    offsetof(MessageWindow, panelStep) == 0x8C && offsetof(MessageWindow, panelCount) == 0x90 && offsetof(MessageWindow, unk098) == 0x98 &&
     offsetof(MessageWindow, parameters) == 0xA4 && offsetof(MessageWindow, sprites) == 0xC4 && offsetof(MessageWindow, sprites[12]) == 0x754 &&
     offsetof(MessageWindow, displayMode) == 0xA11 && offsetof(MessageWindow, savedHelpValues) == 0xA1A &&
     offsetof(MessageWindow, enabled) == 0xA26 && offsetof(MessageWindow, taskValue) == 0xA38 &&

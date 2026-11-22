@@ -13,7 +13,7 @@ extern "C" {
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(...);
-int statRowDrawValueImpl(...);
+int numberFontDrawFormatted(...);
 int FUN_00185e84(...);
 int FUN_002685cc(void);
 int listCursorGetRowIfUnblocked(...);
@@ -66,7 +66,7 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: statRowDrawValueImpl. */
+/* Supplied declaration required: numberFontDrawFormatted. */
 /* Supplied declaration required: FUN_00185e84. */
 extern int padGetMappedValue(unsigned short);
 extern int gameGetSlotRecord(int);
@@ -287,7 +287,7 @@ LAB_004b1d78:
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           textDrawString(2,temp_v17,temp_v12,(int)*(short *)(temp_v4 + 8));
           temp_v3 = (int)asdTMTexTableEntryAt(temp_v22,0xe3);
-          statRowDrawValueImpl(1,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v8,
+          numberFontDrawFormatted(1,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v8,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v5,1,4,0x79,
                        &LAB_004b25a8,temp_v25);
         }
@@ -374,7 +374,7 @@ LAB_004b1d78:
                    (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v8 + 10) + param_3,0xc9,1,
                    temp_v9);
       temp_v1 = (int)asdTMTexTableEntryAt(temp_v22,0x102);
-      statRowDrawValueImpl(1,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
+      numberFontDrawFormatted(1,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
                    (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v1 + 10) + param_3,1,4,0xc9,
                    &LAB_004b25a8,temp_v25);
     }
@@ -442,7 +442,7 @@ LAB_004b1d78:
           textDrawString(2,temp_v17,temp_v12,(int)*(short *)(temp_v3 + 8));
           temp_v25 = skillGetAdjustedCost(temp_v13,*(unsigned short *)(temp_v25 + 0x34));
           temp_v8 = (int)asdTMTexTableEntryAt(temp_v22,0xe3);
-          statRowDrawValueImpl(1,(int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
+          numberFontDrawFormatted(1,(int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
                        (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v8 + 10) + param_3,1,4,0xab
                        ,&LAB_004b2a9c,temp_v25);
         }
@@ -525,7 +525,7 @@ LAB_004b1d78:
                  (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v3 + 10) + param_3,0xc9,0,0);
     temp_v10 = skillGetAdjustedCost(temp_v13,*(unsigned short *)(temp_v1 + 0x34));
     temp_v1 = (int)asdTMTexTableEntryAt(temp_v22,0x102);
-    statRowDrawValueImpl(1,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
+    numberFontDrawFormatted(1,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v1 + 10) + param_3,1,4,0xc9,
                  &LAB_004b2a9c,temp_v10);
   }

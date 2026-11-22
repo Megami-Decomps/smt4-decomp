@@ -18,7 +18,7 @@ void rt_memcpy(void *destination, const void *source, u32 size); // declcheck: l
 void nngxLockEnter(void);
 void nngxLockLeave(void);
 void heapCloseOpenBlock(AsdCmdBuffer *buffer, AsdCmdRecord *records);
-void FUN_002ba2b8(void);
+void gfxReplayRecordedCommands(void);
 
 /* Appends a recorded command chunk to the command buffer named `handle`: copies its records into the
  * buffer's list, places the commands after the data written so far (padding to keep copy records
@@ -84,7 +84,7 @@ void nngxImportCmdlist(u32 handle, AsdCmdChunk *chunk)
             if (g_asdGfxContext.activeBuffer == buffer && g_asdGfxContext.submitEnabled != 0 &&
                 g_asdGfxContext.submitPending == 0) {
                 g_asdGfxContext.submitPending = 1;
-                FUN_002ba2b8();
+                gfxReplayRecordedCommands();
             }
             nngxLockLeave();
         }

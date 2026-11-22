@@ -1,9 +1,8 @@
+/* NON_MATCHING: 100 lines (176 vs 176 rows): 44-byte frame, signed ble load guards, and both drawCursorIcon bodies match instruction-for-instruction; only register numbers shift by 1. */
 #include "gfx/StereoParallax.h"
 #include "camp/RenderCtxA.h"
-/* NON_MATCHING: retail hoists the marker ids 0x27/0x2f/0x28/0x30 into registers/stack (44-byte frame) and tests the u16 icon groups with a signed ble where this build emits beq; register allocation and the stm/strd argument packing differ. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
-#include "gfx/StereoParallax.h"
 #include "camp/RenderCtx.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -46,42 +45,45 @@ extern "C" {
 
 void efctSetSpeed(f32 speed);
 
+/* Returns true when the texture group is unused or already loaded. */
+static __inline bool isIconGroupLoaded(s32 group)
+{
+    if (group > 0) {
+        return asdTMTexTableNodeIsLoaded(0x33, group) != 0;
+    }
+    return true;
+}
+
+/* Draws one cursor icon using its table anchor (or a fallback marker entry for anchors 0xB6/0x93). */
+static __inline void drawCursorIcon(s32 group, s32 id, s32 shiftedX, s32 y, f32 speed, s32 z, u32 markerB6, u32 marker93)
+{
+    if (group > 0) {
+        IconTexture *texture = (IconTexture *)asdTMTexTableEntryAt(0x33, id + group * 1000);
+        if (texture->anchor->kind == 0xb6) {
+            texture = (IconTexture *)asdTMTexTableEntryAt(0x33, markerB6);
+        } else if (texture->anchor->kind == 0x93) {
+            texture = (IconTexture *)asdTMTexTableEntryAt(0x33, marker93);
+        }
+        s32 drawX = texture->x + shiftedX;
+        s32 drawY = texture->y + y;
+        efctSetSpeed(speed);
+        texDrawTableEntryAtStoredOrigin(2, 0x33, id + group * 1000, drawX, drawY, z);
+        efctSetSpeed(1.0f);
+    }
+}
+
 /* Draws the two icons selected by the cursor and the marker below them, shifted by the stereo parallax. */
 void FUN_0049ec78(IconPanel *panel, IconCursor *cursor, s32 x, s32 y, f32 speed, s32 z)
 {
     s32 index = cursor->first;
-    if ((panel->data->icons[0].group > 0 && !asdTMTexTableNodeIsLoaded(0x33, panel->data->icons[0].group)) ||
-        (panel->data->icons[1].group > 0 && !asdTMTexTableNodeIsLoaded(0x33, panel->data->icons[1].group))) {
+    if (!isIconGroupLoaded(panel->data->icons[0].group) ||
+        !isIconGroupLoaded(panel->data->icons[1].group)) {
         return;
     }
     s32 shiftedX = x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
-    s32 group = panel->data->icons[index].group;
-    s32 id = panel->data->icons[index].index;
-    if (group > 0) {
-        IconTexture *texture = reinterpret_cast<IconTexture *>(asdTMTexTableEntryAt(0x33, id + group * 1000));
-        if (texture->anchor->kind == 0xb6) {
-            texture = reinterpret_cast<IconTexture *>(asdTMTexTableEntryAt(0x33, 0x27));
-        } else if (texture->anchor->kind == 0x93) {
-            texture = reinterpret_cast<IconTexture *>(asdTMTexTableEntryAt(0x33, 0x2f));
-        }
-        efctSetSpeed(speed);
-        texDrawTableEntryAtStoredOrigin(2, 0x33, id + group * 1000, texture->x + shiftedX, texture->y + y, z + 5);
-        efctSetSpeed(1.0f);
-    }
+    drawCursorIcon(panel->data->icons[index].group, panel->data->icons[index].index, shiftedX, y, speed, z + 5, 0x27, 0x2f);
     index = cursor->second;
-    group = panel->data->icons[index].group;
-    id = panel->data->icons[index].index;
-    if (group > 0) {
-        IconTexture *texture = reinterpret_cast<IconTexture *>(asdTMTexTableEntryAt(0x33, id + group * 1000));
-        if (texture->anchor->kind == 0xb6) {
-            texture = reinterpret_cast<IconTexture *>(asdTMTexTableEntryAt(0x33, 0x28));
-        } else if (texture->anchor->kind == 0x93) {
-            texture = reinterpret_cast<IconTexture *>(asdTMTexTableEntryAt(0x33, 0x30));
-        }
-        efctSetSpeed(speed);
-        texDrawTableEntryAtStoredOrigin(2, 0x33, id + group * 1000, shiftedX + texture->x, texture->y + y, z + 5);
-        efctSetSpeed(1.0f);
-    }
+    drawCursorIcon(panel->data->icons[index].group, panel->data->icons[index].index, shiftedX, y, speed, z + 5, 0x28, 0x30);
     efctSetSpeed(1.0f);
     u16 state = panel->data->state;
     if (state != 3 && state != 9 && state != 11) {

@@ -21,26 +21,26 @@ TexHeader *asdTMTexTableGetHeaderValue(u32 group, s32 index);
 /* Builds the target selection information panel: sprite metrics, colors and texture modes. */
 Obj557bd8::Obj557bd8()
 {
-    sprintf(labelText, "");
-    sprintf(detailText, "");
-    labelMode = 1;
-    labelVisible = 0;
-    detailVisible = 0;
-    detailMode = 2;
-    slotOrder[0] = 0;
-    slotOrder[1] = 1;
-    slotOrder[2] = 2;
-    slotOrder[3] = 3;
-    slotOrder[4] = 4;
-    slotOrder[5] = 5;
-    slotState[0] = 0;
-    slotState[1] = 1;
-    slotState[2] = 0;
-    slotState[3] = 0;
-    slotState[4] = 0;
-    slotState[5] = 0;
-    slotState[6] = 0;
-    slotState[7] = 0;
+    sprintf(name, "");
+    sprintf(raceName, "");
+    level = 1;
+    registered = 0;
+    unseen = 0;
+    levelDigits = 2;
+    resistances[0] = 0;
+    resistances[1] = 1;
+    resistances[2] = 2;
+    resistances[3] = 3;
+    resistances[4] = 4;
+    resistances[5] = 5;
+    resistances[6] = 0;
+    resistances[7] = 1;
+    options[0] = 0;
+    options[1] = 0;
+    options[2] = 0;
+    options[3] = 0;
+    options[4] = 0;
+    options[5] = 0;
 
     TextureTableEntryIV *sprite = asdTMTexTableEntryAt(12, 70);
     iconPos[0][0] = sprite->x;

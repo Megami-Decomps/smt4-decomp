@@ -12,7 +12,7 @@ int textDrawString(...);
 int texDrawCompositeSprite(...);
 int vec2GetXInt(...);
 int efctSetSpeed(...);
-int statRowDrawValueImpl(...);
+int numberFontDrawFormatted(...);
 int fontMeasureLineAdvance(...);
 int nkmBaseGetRecord(void);
 int gxSetMirroredClippedScissor(...);
@@ -46,7 +46,7 @@ extern unsigned int demonGetRaceLabel(short, unsigned int);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: statRowDrawValueImpl. */
+/* Supplied declaration required: numberFontDrawFormatted. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: nkmBaseGetRecord. */
@@ -167,7 +167,7 @@ void FUN_002199fc(int param_1,int param_2,int param_3)
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0xffffffff,temp_v12,(int)*(short *)(temp_v2 + 8));
     temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xdf));
-    statRowDrawValueImpl(0,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v2 + 8) + temp_v1,
+    numberFontDrawFormatted(0,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v2 + 8) + temp_v1,
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v8,1,2,0x6f,
                  &LAB_0021a1f4,*(unsigned short *)(temp_v15 + 0x16));
     if (temp_v16 != 0) {

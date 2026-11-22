@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00141710(...);
+int resourceOwnerReleaseLoaded(...);
 
 int qsort(...);
 int nnnstdMemCpy(...);
@@ -149,7 +149,7 @@ extern unsigned char FUN_00387c68; /* 0x387c68 */
 #define ROMWRIGHT_SUBPIECE_4_2_0_DEFINED
 #define romwright_subpiece_4_2_0(value, offset) ((unsigned short)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_00141710. */
+/* Supplied declaration required: resourceOwnerReleaseLoaded. */
 /* Supplied declaration required: itemVariantReselect. */
 /* Supplied declaration required: aocTexCtrlInit. */
 /* Supplied declaration required: dataTableFileGetTable. */
@@ -1039,7 +1039,7 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
   temp_v2 = 0;
   if (temp_v2 < param_1->field_0x310) {
     do {
-      FUN_00141710(param_1->field_0x318 + temp_v2 * 0x50,0);
+      resourceOwnerReleaseLoaded(param_1->field_0x318 + temp_v2 * 0x50,0);
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < param_1->field_0x310);
   }

@@ -44,7 +44,7 @@ s32 FUN_003ece50(BtlMainStateA *state);
 void btlSetupEnvironmentModelCopies(BtlMainStateA *state);
 s32 FUN_003e1454(BtlStep *step, BtlMainStateA *state);
 s32 contentRequestStart(BtlStep *step, BtlMainStateA *state);
-s32 FUN_003e21c8(BtlStep *step, BtlMainStateA *state);
+s32 btlEncountLoadArrangementStep(BtlStep *step, BtlMainStateA *state);
 u32 FUN_003e0f94(BtlStep *step);
 s32 FUN_003e1b80(BtlStep *step, BtlMainStateA *state);
 s32 btlStepInitEncounterFlags(BtlStep *step, BtlMainStateA *state);
@@ -219,7 +219,7 @@ extern "C" s32 battleEncounterTaskUpdate(BtlStep *step, BtlMainStateA *state)
     case 21:
         return contentRequestStart(step, state);
     case 22:
-        return FUN_003e21c8(step, state);
+        return btlEncountLoadArrangementStep(step, state);
     case 23:
         return FUN_003e0bb8(step, state);
     case 24:

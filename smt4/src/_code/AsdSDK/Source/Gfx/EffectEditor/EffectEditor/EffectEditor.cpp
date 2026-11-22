@@ -43,6 +43,8 @@ void *effBlockCreateFromBlock(EffectSelectionBlock *);
 void resourceQueueDeferredDestroy(void *, s32);
 u32 effectEditorEditPositionVector(EffectEditorSnapshot *, s32);
 void FUN_002496cc(const EffectPositionControl *);
+/* Release armlink removes this optional three-argument transform hook. */
+__weak void effectEditorTransformPosition(const EffectPositionControl *, const EffMenuPosition *, EffMenuPosition *);
 void requestHandlerDispatch(EffectHandlerRequest *, const EffMenuPosition *);
 void FUN_00249678();
 void renderVectorOverrideResolve(EffectEditorSnapshot *, const EffMenuPosition *, EffectEditorWords *);
@@ -163,40 +165,73 @@ extern "C" void effectEditorInitialize()
     floatPairStore(0.0f, 0.0f);
 }
 
-/* NON_MATCHING: aggregate transfer classes and temporary/register allocation differ. */
+/* NON_MATCHING: 68 lines: retail copies the initial vector and the render source's origin into the
+ * scratch with VFP vldmia/vstmia, copies the scratch into the locals as 12 + 4 bytes, and lowers the final branch differently. */
+/* Apply the position override, optional source scale, and render transforms. */
+extern "C" void FUN_002496cc(const EffectPositionControl *control)
+{
+    if (control->flags & 0x18) {
+        g_vectorScratch.first.position = g_effectEditorInitialVector.value;
+        g_vectorScratch.second.position = effectRenderSource()->origin;
+        FUN_00249678();
+        EffMenuPosition transformed = g_vectorScratch.first.position;
+        EffMenuPosition position;
+        effectEditorTransformPosition(control, &transformed, &position);
+        g_vectorScratch.first.position = position;
+    } else {
+        g_vectorScratch.first.position = control->position;
+    }
+    if (control->flags & 0x80) {
+        f32 scale = effectRenderSource()->scale;
+        g_vectorScratch.first.position.x *= scale;
+        g_vectorScratch.first.position.y *= scale;
+        g_vectorScratch.first.position.z *= scale;
+        g_vectorScratch.first.position.w *= scale;
+    }
+    g_vectorScratch.second.position = g_effectEditorInitialVector.value;
+    FUN_00249678();
+    g_vectorScratch.second.position = effectRenderSource()->origin;
+    FUN_00249678();
+    if (control->flags & 4) {
+        g_vectorScratch.first.position.y = 5.0f;
+    }
+}
+
+/* NON_MATCHING: 136 lines: retail copies the scratch value into each local as 12 + 4 bytes (each local in its own
+ * slot: an 80-byte frame against 68), moves the initial vector and the render source's origin and position into the
+ * scratch with VFP vldmia/vstmia (integer ldm/stm here), and reloads the saved snapshot's address after each call. */
 extern "C" void effectEditorApplyHandlerState(EffectHandlerRequest *request)
 {
-    VectorScratch *globals = &g_vectorScratch;
     EffectEditorSnapshot *controls = &g_effectEditorSavedSnapshot;
     FUN_002496cc(reinterpret_cast<const EffectPositionControl *>(controls));
-    EffMenuPosition initial = globals->first.position;
+    EffMenuPosition initial = g_vectorScratch.first.position;
     requestHandlerDispatch(request, &initial);
     if (controls->parameters.flags & 0x60) {
-        globals->first.position = g_effectEditorInitialVector.value;
-        globals->second.position = effectRenderSource()->origin;
+        g_vectorScratch.first.position = g_effectEditorInitialVector.value;
+        g_vectorScratch.second.position = effectRenderSource()->origin;
         FUN_00249678();
-        EffMenuPosition transformed = globals->first.position;
+        EffMenuPosition transformed = g_vectorScratch.first.position;
         EffectEditorWords words;
         renderVectorOverrideResolve(controls, &transformed, &words);
-        globals->first.position = effectRenderSource()->position;
-        globals->second.words = words;
+        g_vectorScratch.first.position = effectRenderSource()->position;
+        g_vectorScratch.second.words = words;
         gfxQuaternionScratchMultiply();
     } else {
-        globals->first.position = effectRenderSource()->position;
-        globals->second.words = controls->parameters.fallback;
+        g_vectorScratch.first.position = effectRenderSource()->position;
+        g_vectorScratch.second.words = controls->parameters.fallback;
         gfxQuaternionScratchMultiply();
     }
-    EffMenuPosition position = globals->first.position;
+    EffMenuPosition position = g_vectorScratch.first.position;
     handlerTableCallWithValueB(request, &position);
     handlerTableCall(request, controls->parameters.scale * effectRenderSource()->scale);
     if (controls->parameters.flags & 0x100) {
-        globals->first.position = controls->parameters.tint;
+        g_vectorScratch.first.position = controls->parameters.tint;
         f32 scale = controls->parameters.scale * effectRenderSource()->scale;
-        globals->first.position.x *= scale;
-        globals->first.position.y *= scale;
-        globals->first.position.z *= scale;
-        globals->first.position.w *= scale;
-        EffMenuPosition tint = globals->first.position;
+        g_vectorScratch.first.position.x *= scale;
+        g_vectorScratch.first.position.y *= scale;
+        g_vectorScratch.first.position.z *= scale;
+        g_vectorScratch.first.position.w *= scale;
+        EffMenuPosition tint = g_vectorScratch.first.position;
         effectResourceSetColor(request, &tint);
     }
     handlerTableCallWithValue(request, controls->parameters.value);

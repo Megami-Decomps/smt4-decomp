@@ -36,7 +36,7 @@ extern u32 DAT_004720a0;                    /* 0x4720a0: depth range as a float2
 extern u32 DAT_004720ec;                    /* 0x4720ec: target format */
 extern u32 *g_commandBufferCursor;          /* 0x4652a0 */
 
-s32 FUN_003e3494(void);
+s32 gpuWriteRenderTargetCommands(void);
 u32 *nw_gfx_internal_FastWordCopyAsm_8(u32 *destination, const u32 *source);
 
 /* Converts a float to the GPU's 31-bit float format (sign, 7-bit exponent, 23-bit mantissa). */
@@ -82,7 +82,7 @@ void FUN_00364ebc(AsdModelRenderer *renderer, AsdRenderTarget *target, const f32
         return;
     }
     target->begin();
-    FUN_003e3494();
+    gpuWriteRenderTargetCommands();
 
     DAT_00472094 = renderer->target->getViewportInfo()[0];
     DAT_00472098 = renderer->target->getViewportInfo()[1];

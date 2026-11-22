@@ -8,7 +8,7 @@ int facingUpdateAngles(int, int);
 int mtx44RotateYXZDegrees(...);
 int mtxMakeTranslation(...);
 int layoutApplyForState(int);
-int FUN_002b2144(...);
+int mathMatrixBuildRotationXyz(...);
 int cameraSetViewMatrix(...);
 int FUN_002ba1e0(...);
 int mtx44Copy(unsigned char [72], unsigned int);
@@ -69,7 +69,7 @@ extern float DAT_004efd98; /* 0x4efd98 */
 /* Supplied declaration required: mtxMakeTranslation. */
 /* Supplied declaration required: layoutApplyForState. */
 extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
-/* Supplied declaration required: FUN_002b2144. */
+/* Supplied declaration required: mathMatrixBuildRotationXyz. */
 /* Supplied declaration required: cameraSetViewMatrix. */
 /* Supplied declaration required: FUN_002ba1e0. */
 /* Supplied declaration required: mtx44Copy. */
@@ -289,7 +289,7 @@ void FUN_001aa6a4(int param_1)
       temp_v9 = temp_v9 + 0x168;
     }
     VectorSignedToFloat(0x168 - temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002b2144(temp_v30,temp_v3);
+    mathMatrixBuildRotationXyz(temp_v30,temp_v3);
     nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v30);
     temp_v3 = (int)*(char *)(param_1 + 0x1da);
     temp_v9 = temp_v5;

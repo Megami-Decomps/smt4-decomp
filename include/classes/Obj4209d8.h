@@ -42,12 +42,15 @@ struct Obj4209d8ColorDefaults {
     /* 0x01 */ u8 statusGreen;
     /* 0x02 */ u8 statusBlue;
     /* 0x03 */ u8 statusAlpha;
-    /* 0x04 */ u8 unk04[0xC];
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ s32 cameraKindOverride; /* the action camera kind (0 near, 1 mid, 2 far) to force; negative: none */
+    /* 0x0C */ s32 markerFadeSteps;  /* frames a unit marker takes to fade to its slot colour */
     /* 0x10 */ u32 statusDuration;   /* frames of one pulse */
     /* 0x14 */ f32 statusDepth;      /* fraction of the colour the pulse starts from */
     /* 0x18 */ u32 unmodulated;      /* tint that leaves the cell colour as it is */
 };
-typedef char Obj4209d8ColorDefaultsCheck[offsetof(Obj4209d8ColorDefaults, statusDuration) == 0x10 &&
+typedef char Obj4209d8ColorDefaultsCheck[offsetof(Obj4209d8ColorDefaults, cameraKindOverride) == 0x08 &&
+    offsetof(Obj4209d8ColorDefaults, statusDuration) == 0x10 &&
     offsetof(Obj4209d8ColorDefaults, unmodulated) == 0x18 ? 1 : -1];
 
 /* Independent model/grid query interface, not the Obj4209cc resource owner. */

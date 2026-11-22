@@ -11,7 +11,7 @@ int asdMemoryAlloc(int, int, int, unsigned int);
 int asdMemoryGetDefaultAllocator(void);
 int nw_gfx_res_ResGraphicsFile_Setup(...);
 int FUN_001aa528(...);
-int FUN_001acca0(void);
+int asdModelApplyShadowMaterials(void);
 void sceneNodeAttachDeclaredChild(SceneChildSet *, SceneNodePrefix *);
 int nw_gfx_SceneBuilder_CreateObject(int *, unsigned int, unsigned int);
 int FUN_001b4288(int *, int);
@@ -62,7 +62,7 @@ extern char s__V_V_V_005b3cc8[13]; /* 0x5b3cc8 */
 /* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Setup. */
 extern int libc_strncmp(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001aa528. */
-/* Supplied declaration required: FUN_001acca0. */
+/* Supplied declaration required: asdModelApplyShadowMaterials. */
 extern unsigned int asdMemoryGetAllocatorA(void);
 /* Supplied declaration required: sceneNodeAttachDeclaredChild. */
 /* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
@@ -220,7 +220,7 @@ void FUN_0019afe4(int *param_1,unsigned int *param_2,unsigned int param_3,int pa
       }
 LAB_0019b2a8:
       piVar8 = piVar15;
-      FUN_001acca0();
+      asdModelApplyShadowMaterials();
       if (piVar8 != (int *)0x0) {
         temp_v12 = 1;
         *param_2 = *param_2 | 2;

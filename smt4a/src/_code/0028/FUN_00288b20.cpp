@@ -11,7 +11,7 @@ extern "C" {
 int textDrawString(...);
 int texDrawCompositeSprite(int, int, int, int, int, int);
 int efctSetSpeed(void);
-int statRowDrawValueImpl(...);
+int numberFontDrawFormatted(...);
 int FUN_00185e84(...);
 int skillDataFindById(void);
 int unitRecordBuild(...);
@@ -39,7 +39,7 @@ extern int g_statusDown; /* 0x588fe8 */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: statRowDrawValueImpl. */
+/* Supplied declaration required: numberFontDrawFormatted. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00185e84. */
 extern int slotRecordFindById(void);
@@ -220,13 +220,13 @@ LAB_00288c34:
                    0xc4);
       if (param_3 != 0) {
         temp_v5 = FUN_002a6a24(param_3);
-        statRowDrawValueImpl(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_1,
+        numberFontDrawFormatted(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_1,
                      (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,1,8,0xc9,
                      "%d",temp_v5);
       }
       else {
         sprintf((char *)temp_v13,"---");
-        statRowDrawValueImpl(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_1,
+        numberFontDrawFormatted(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_1,
                      (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,1,8,0xc9,
                      temp_v13);
       }
@@ -251,7 +251,7 @@ LAB_00288c34:
         }
       }
       temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x429));
-      statRowDrawValueImpl(0,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
+      numberFontDrawFormatted(0,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
                    (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v3 + 10) + param_2,1,4,0xc9,
                    "%d",temp_v10);
     }

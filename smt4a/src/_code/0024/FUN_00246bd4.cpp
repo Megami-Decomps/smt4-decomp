@@ -90,7 +90,7 @@ int table23FindRecordByKey(...);
 int soundVolumeSettingSet(...);
 int messageVoiceBankGet(...);
 int sysPlaySe(...);
-int FUN_00233e10(...);
+int mapIfApplyEntryRequest(...);
 int mapIfSpawnManholeAction(...);
 int lmapRequestTimedEffect(...);
 int lmapCameraSetMode(...);
@@ -312,7 +312,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: mapIfSetMode1. */
 /* Supplied declaration required: mapIfShowActionMarker. */
-/* Supplied declaration required: FUN_00233e10. */
+/* Supplied declaration required: mapIfApplyEntryRequest. */
 /* Supplied declaration required: mapFastModelCreate. */
 /* Supplied declaration required: FUN_002342b8. */
 /* Supplied declaration required: mapIfSpawnCaveAction. */
@@ -2191,7 +2191,7 @@ LAB_003270bc:
             if (temp_v32 != 0) {
               if (temp_v32 == 1) {
                 piVar18[2] = piVar18[2] + 1;
-                FUN_00233e10(1,DAT_005f16ac);
+                mapIfApplyEntryRequest(1,DAT_005f16ac);
                 piVar18 = g_lmapScene;
                 if (g_lmapScene[2] >= 3) {
                   temp_v32 = g_lmapScene[1];
@@ -2254,7 +2254,7 @@ LAB_003270bc:
               lmapCameraSetMode(10);
               g_lmapView[0x2c] = -1;
               sysPlaySe(0xdd);
-              FUN_00233e10(1,DAT_005f16ac);
+              mapIfApplyEntryRequest(1,DAT_005f16ac);
               mapIfSpawnManholeAction();
               piVar18 = g_lmapScene;
               temp_v32 = piVar18[1];
@@ -2283,7 +2283,7 @@ LAB_003270bc:
         }
         else {
           piVar18[2] = piVar18[2] + 1;
-          FUN_00233e10(1,DAT_005f16ac);
+          mapIfApplyEntryRequest(1,DAT_005f16ac);
           temp_v32 = inputConfirmPressed();
           piVar18 = g_lmapScene;
           if (temp_v32 != 0) {
@@ -2300,7 +2300,7 @@ LAB_003270bc:
               piVar18 = g_lmapScene;
               g_lmapScene[0x15] = 0;
               piVar18[0x16] = temp_v12;
-              FUN_00233e10(0,DAT_005f16ac);
+              mapIfApplyEntryRequest(0,DAT_005f16ac);
               mapIfReleaseSlot1();
               piVar18 = g_lmapScene;
               g_lmapScene[1] = 0x5a;
@@ -2412,7 +2412,7 @@ LAB_003270bc:
             if (temp_v32 != 0) {
               if (temp_v32 == 1) {
                 piVar18[2] = piVar18[2] + 1;
-                FUN_00233e10(1,DAT_005f16ac);
+                mapIfApplyEntryRequest(1,DAT_005f16ac);
                 piVar18 = g_lmapScene;
                 if (g_lmapScene[2] >= 3) {
                   temp_v32 = g_lmapScene[1];
@@ -2445,7 +2445,7 @@ LAB_003270bc:
               lmapCameraSetMode(0xb);
               g_lmapView[0x2c] = -2;
               sysPlaySe(0xdd);
-              FUN_00233e10(1,DAT_005f16ac);
+              mapIfApplyEntryRequest(1,DAT_005f16ac);
               libm_sinf();
               libm_cosf();
               mapIfSpawnCaveAction();
@@ -2478,7 +2478,7 @@ LAB_003270bc:
         }
         else {
           piVar18[2] = piVar18[2] + 1;
-          FUN_00233e10(1,DAT_005f16ac);
+          mapIfApplyEntryRequest(1,DAT_005f16ac);
           temp_v32 = inputConfirmPressed();
           piVar18 = g_lmapScene;
           if (temp_v32 != 0) {
@@ -2495,7 +2495,7 @@ LAB_003270bc:
               piVar18 = g_lmapScene;
               g_lmapScene[0x15] = 0;
               piVar18[0x16] = temp_v6;
-              FUN_00233e10(0,DAT_005f16ac);
+              mapIfApplyEntryRequest(0,DAT_005f16ac);
               mapIfReleaseSlot2();
               piVar18 = g_lmapScene;
               g_lmapScene[1] = 0x5a;
@@ -2751,7 +2751,7 @@ LAB_003270bc:
         lmapCameraSetMode(0xc);
         g_lmapView[0x2c] = -3;
         sysPlaySe(0xdd);
-        FUN_00233e10(1,DAT_005f16ac);
+        mapIfApplyEntryRequest(1,DAT_005f16ac);
         libm_sinf();
         libm_cosf();
         FUN_00246014();
@@ -2762,7 +2762,7 @@ LAB_003270bc:
         break;
       case 1:
         g_lmapScene[2] = g_lmapScene[2] + 1;
-        FUN_00233e10(1,DAT_005f16ac);
+        mapIfApplyEntryRequest(1,DAT_005f16ac);
         piVar18 = g_lmapScene;
         if (g_lmapScene[2] >= 3) {
           temp_v32 = g_lmapScene[1];
@@ -2774,7 +2774,7 @@ LAB_003270bc:
         break;
       case 2:
         g_lmapScene[2] = g_lmapScene[2] + 1;
-        FUN_00233e10(1,DAT_005f16ac);
+        mapIfApplyEntryRequest(1,DAT_005f16ac);
         temp_v32 = inputConfirmPressed();
         if (temp_v32 != 0) {
           table23FindRecordByKey(DAT_005f16a0,DAT_005f16a4,DAT_005f16a8);
@@ -2818,7 +2818,7 @@ LAB_003270bc:
             piVar18 = g_lmapScene;
             g_lmapScene[0x15] = 0;
             piVar18[0x16] = 0x40a00000;
-            FUN_00233e10(0,DAT_005f16ac);
+            mapIfApplyEntryRequest(0,DAT_005f16ac);
             mapIfReleaseSlot3();
             piVar18 = g_lmapScene;
             g_lmapScene[1] = 0x5a;
@@ -3109,7 +3109,7 @@ LAB_00366704:
             }
             else {
               g_lmapScene[2] = g_lmapScene[2] + 1;
-              FUN_00233e10(1,DAT_005f16ac);
+              mapIfApplyEntryRequest(1,DAT_005f16ac);
               temp_v32 = inputConfirmPressed();
               piVar18 = g_lmapScene;
               if (temp_v32 != 0) {
@@ -3159,7 +3159,7 @@ LAB_00366704:
                   piVar18 = g_lmapScene;
                   g_lmapScene[0x15] = 0;
                   piVar18[0x16] = 0x40a00000;
-                  FUN_00233e10(0,DAT_005f16ac);
+                  mapIfApplyEntryRequest(0,DAT_005f16ac);
                   mapIfReleaseSlot3();
                   piVar18 = g_lmapScene;
                   g_lmapScene[1] = 0x5a;
@@ -3170,7 +3170,7 @@ LAB_00366704:
           }
           else {
             g_lmapScene[2] = g_lmapScene[2] + 1;
-            FUN_00233e10(1,DAT_005f16ac);
+            mapIfApplyEntryRequest(1,DAT_005f16ac);
             piVar18 = g_lmapScene;
             if (g_lmapScene[2] >= 3) {
               temp_v32 = g_lmapScene[1];
@@ -3194,7 +3194,7 @@ LAB_00366704:
           lmapCameraSetMode(0xc);
           g_lmapView[0x2c] = -3;
           sysPlaySe(0xdd);
-          FUN_00233e10(1,DAT_005f16ac);
+          mapIfApplyEntryRequest(1,DAT_005f16ac);
           libm_sinf();
           libm_cosf();
           FUN_00246014();
@@ -3303,7 +3303,7 @@ LAB_00366704:
             }
             else {
               piVar18[2] = piVar18[2] + 1;
-              FUN_00233e10(1,DAT_005f16ac);
+              mapIfApplyEntryRequest(1,DAT_005f16ac);
               temp_v32 = inputConfirmPressed();
               piVar18 = g_lmapScene;
               if (temp_v32 != 0) {
@@ -3320,7 +3320,7 @@ LAB_00366704:
                   piVar18 = g_lmapScene;
                   g_lmapScene[0x15] = 0;
                   piVar18[0x16] = temp_v6;
-                  FUN_00233e10(0,DAT_005f16ac);
+                  mapIfApplyEntryRequest(0,DAT_005f16ac);
                   piVar18 = g_lmapScene;
                   g_lmapScene[1] = 0x5a;
                   piVar18[2] = 0;
@@ -3330,7 +3330,7 @@ LAB_00366704:
           }
           else {
             piVar18[2] = piVar18[2] + 1;
-            FUN_00233e10(1,DAT_005f16ac);
+            mapIfApplyEntryRequest(1,DAT_005f16ac);
             piVar18 = g_lmapScene;
             if (g_lmapScene[2] >= 3) {
               temp_v32 = g_lmapScene[1];
@@ -3389,7 +3389,7 @@ LAB_00366704:
           lmapCameraSetMode(10);
           g_lmapView[0x2c] = -1;
           sysPlaySe(0xdd);
-          FUN_00233e10(1,DAT_005f16ac);
+          mapIfApplyEntryRequest(1,DAT_005f16ac);
           temp_v32 = g_lmapScene[1];
           piVar18 = g_lmapScene;
           piVar18[1] = temp_v32 + 1;
@@ -3448,7 +3448,7 @@ LAB_00366704:
               if (temp_v32 != 1) {
                 if (temp_v32 == 2) {
                   g_lmapScene[2] = g_lmapScene[2] + 1;
-                  FUN_00233e10(1,DAT_005f16ac);
+                  mapIfApplyEntryRequest(1,DAT_005f16ac);
                   temp_v32 = inputConfirmPressed();
                   if (temp_v32 != 0) {
                     table23FindRecordByKey(DAT_005f16a0,DAT_005f16a4,DAT_005f16a8);
@@ -3470,7 +3470,7 @@ LAB_00366704:
                       piVar18 = g_lmapScene;
                       g_lmapScene[0x15] = 0;
                       piVar18[0x16] = 0x40a00000;
-                      FUN_00233e10(0,DAT_005f16ac);
+                      mapIfApplyEntryRequest(0,DAT_005f16ac);
                       mapIfReleaseSlot3();
                       piVar18 = g_lmapScene;
                       g_lmapScene[1] = 0x5a;
@@ -3481,7 +3481,7 @@ LAB_00366704:
               }
               else {
                 g_lmapScene[2] = g_lmapScene[2] + 1;
-                FUN_00233e10(1,DAT_005f16ac);
+                mapIfApplyEntryRequest(1,DAT_005f16ac);
                 piVar18 = g_lmapScene;
                 if (g_lmapScene[2] >= 3) {
                   temp_v32 = g_lmapScene[1];
@@ -3517,7 +3517,7 @@ LAB_00366704:
               lmapCameraSetMode(10);
               g_lmapView[0x2c] = -1;
               sysPlaySe(0xdd);
-              FUN_00233e10(1,DAT_005f16ac);
+              mapIfApplyEntryRequest(1,DAT_005f16ac);
               libm_sinf();
               libm_cosf();
               FUN_00246014();
@@ -3711,7 +3711,7 @@ LAB_00367f20:
               if (temp_v32 != 1) {
                 if (temp_v32 == 2) {
                   g_lmapScene[2] = g_lmapScene[2] + 1;
-                  FUN_00233e10(1,DAT_005f16ac);
+                  mapIfApplyEntryRequest(1,DAT_005f16ac);
                   temp_v32 = inputConfirmPressed();
                   piVar18 = g_lmapScene;
                   if (temp_v32 != 0) {
@@ -3728,7 +3728,7 @@ LAB_00367f20:
                       piVar18 = g_lmapScene;
                       g_lmapScene[0x15] = 0;
                       piVar18[0x16] = temp_v6;
-                      FUN_00233e10(0,DAT_005f16ac);
+                      mapIfApplyEntryRequest(0,DAT_005f16ac);
                       mapIfReleaseSlot4();
                       piVar18 = g_lmapScene;
                       g_lmapScene[1] = 0x5a;
@@ -3739,7 +3739,7 @@ LAB_00367f20:
               }
               else {
                 g_lmapScene[2] = g_lmapScene[2] + 1;
-                FUN_00233e10(1,DAT_005f16ac);
+                mapIfApplyEntryRequest(1,DAT_005f16ac);
                 piVar18 = g_lmapScene;
                 if (g_lmapScene[2] >= 3) {
                   temp_v32 = g_lmapScene[1];
@@ -3771,7 +3771,7 @@ LAB_00367f20:
               lmapCameraSetMode(0xd);
               g_lmapView[0x2c] = 1;
               sysPlaySe(0xdc);
-              FUN_00233e10(1,DAT_005f16ac);
+              mapIfApplyEntryRequest(1,DAT_005f16ac);
               mapIfShowActionMarker();
               piVar18 = g_lmapScene;
               temp_v32 = piVar18[1];
@@ -3891,7 +3891,7 @@ LAB_00367f20:
             piVar18 = g_lmapScene;
             g_lmapScene[0x15] = 0;
             piVar18[0x16] = temp_v6;
-            FUN_00233e10(0,DAT_005f16ac);
+            mapIfApplyEntryRequest(0,DAT_005f16ac);
             mapIfReleaseSlot4();
             temp_v32 = g_lmapScene[1];
             piVar18 = g_lmapScene;
@@ -3991,7 +3991,7 @@ LAB_0033eae8:
             }
             else {
               g_lmapScene[2] = g_lmapScene[2] + 1;
-              FUN_00233e10(1,DAT_005f16ac);
+              mapIfApplyEntryRequest(1,DAT_005f16ac);
               temp_v32 = inputConfirmPressed();
               piVar18 = g_lmapScene;
               if (temp_v32 != 0) {
@@ -4035,7 +4035,7 @@ LAB_0033eae8:
                   piVar18 = g_lmapScene;
                   g_lmapScene[0x15] = 0;
                   piVar18[0x16] = 0x40a00000;
-                  FUN_00233e10(0,DAT_005f16ac);
+                  mapIfApplyEntryRequest(0,DAT_005f16ac);
                   mapIfReleaseSlot4();
                   piVar18 = g_lmapScene;
                   g_lmapScene[1] = 0x5a;
@@ -4046,7 +4046,7 @@ LAB_0033eae8:
           }
           else {
             g_lmapScene[2] = g_lmapScene[2] + 1;
-            FUN_00233e10(1,DAT_005f16ac);
+            mapIfApplyEntryRequest(1,DAT_005f16ac);
             piVar18 = g_lmapScene;
             if (g_lmapScene[2] >= 3) {
               temp_v32 = g_lmapScene[1];
@@ -4077,7 +4077,7 @@ LAB_0033eae8:
           lmapCameraSetMode(0xd);
           g_lmapView[0x2c] = 1;
           sysPlaySe(0xdc);
-          FUN_00233e10(1,DAT_005f16ac);
+          mapIfApplyEntryRequest(1,DAT_005f16ac);
           mapIfShowActionMarker();
           piVar18 = g_lmapScene;
           g_lmapScene[1] = g_lmapScene[1] + 1;

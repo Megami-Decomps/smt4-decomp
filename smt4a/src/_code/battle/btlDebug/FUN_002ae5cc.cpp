@@ -18,7 +18,7 @@ int FUN_0034ea70(...);
 int FUN_003a6404(...);
 
 int effectDispatchSelector(...);
-int statRowDrawValueImpl(...);
+int numberFontDrawFormatted(...);
 int gxResetColorQuadToWhite(void);
 int pairSetHalves(...);
 int jobGetScalarValue(void);
@@ -114,7 +114,7 @@ extern int vec2GetYInt(int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int recordGetScaledMaximum(int);
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: statRowDrawValueImpl. */
+/* Supplied declaration required: numberFontDrawFormatted. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00183788. */
@@ -587,21 +587,21 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
       efctSetSpeed();
       temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x20));
       if (temp_v29 >= 10000) {
-        statRowDrawValueImpl(0,*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,1,4,0x10,
+        numberFontDrawFormatted(0,*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,1,4,0x10,
                      "9999");
       }
       else {
-        statRowDrawValueImpl(0,*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,1,4,0x10,
+        numberFontDrawFormatted(0,*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,1,4,0x10,
                      temp_v36);
       }
       gxResetColorQuadToWhite();
       temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x24));
       if (temp_v8 >= 10000) {
-        statRowDrawValueImpl(0,*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,1,4,0x10,
+        numberFontDrawFormatted(0,*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,1,4,0x10,
                      "9999");
       }
       else {
-        statRowDrawValueImpl(0,*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,1,4,0x10,
+        numberFontDrawFormatted(0,*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,1,4,0x10,
                      temp_v40);
       }
       if (temp_v50 != 0) {
@@ -848,13 +848,13 @@ LAB_002afb00:
           texDrawTableEntryAtStoredOrigin(2,0xd,500,temp_v6,temp_v5,0x1f);
           texDrawTableEntryAtStoredOrigin(2,0xd,0x1f5,temp_v6,temp_v5,0x1f);
           temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x1f8));
-          statRowDrawValueImpl(0,*(short *)(temp_v7 + 8) + temp_v6,*(short *)(temp_v7 + 10) + temp_v5,1,3,0x24,
+          numberFontDrawFormatted(0,*(short *)(temp_v7 + 8) + temp_v6,*(short *)(temp_v7 + 10) + temp_v5,1,3,0x24,
                        temp_v39);
         }
         else {
           texDrawTableEntryAtStoredOrigin(2,0xd,0x3f,temp_v6,temp_v5 - temp_v28,0x1f);
           temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x42));
-          statRowDrawValueImpl(0,*(short *)(temp_v7 + 8) + temp_v6,(*(short *)(temp_v7 + 10) + temp_v5) - temp_v28,
+          numberFontDrawFormatted(0,*(short *)(temp_v7 + 8) + temp_v6,(*(short *)(temp_v7 + 10) + temp_v5) - temp_v28,
                        1,2,0x24,temp_v39);
         }
       }
@@ -862,13 +862,13 @@ LAB_002afb00:
         texDrawTableEntryAtStoredOrigin(2,0xd,0x1ef,temp_v6,temp_v5,0x1f);
         texDrawTableEntryAtStoredOrigin(2,0xd,0x1f0,temp_v6,temp_v5,0x1f);
         temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,499));
-        statRowDrawValueImpl(0,*(short *)(temp_v7 + 8) + temp_v6,*(short *)(temp_v7 + 10) + temp_v5,1,3,0x24,
+        numberFontDrawFormatted(0,*(short *)(temp_v7 + 8) + temp_v6,*(short *)(temp_v7 + 10) + temp_v5,1,3,0x24,
                      temp_v39);
       }
       else {
         texDrawTableEntryAtStoredOrigin(2,0xd,5,temp_v6,temp_v5,0x1f);
         temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x26));
-        statRowDrawValueImpl(0,*(short *)(temp_v7 + 8) + temp_v6,*(short *)(temp_v7 + 10) + temp_v5,1,2,0x24,
+        numberFontDrawFormatted(0,*(short *)(temp_v7 + 8) + temp_v6,*(short *)(temp_v7 + 10) + temp_v5,1,2,0x24,
                      temp_v39);
       }
       temp_v7 = temp_v34 + 0x4b00;

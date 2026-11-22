@@ -89,3 +89,13 @@ arm 0x43a31c 0x43b658 CTR-SDK service IPC clients and nn::math VEC4Transform; be
 # callers); the two hand-listed smt4 blocks 0x36ef0c and 0x36fc08 are twins of functions inside it.
 arm 0x45181c 0x452300 NintendoWare-gfx res Setup/Cleanup after ResVertexAttribute_Setup, up to ResTextureCoordinatorData; vtable-only entry points
 arm 0x452470 0x4529a0 NintendoWare-gfx res Setup/Cleanup after ResTextureCoordinatorData, before ResFog_Cleanup; vtable-only entry points
+# NintendoWare font: nw::font::ResFont::SetResource with ResFont::Rebuild inlined (the font file's block walk: FINF,
+# CGLP, TGLP 0x504C4754, CWDH, CMAP), between nw_anim res_ResAnim_Setup and the NW block's next functions; smt4's
+# twin nw_font_ResFontSetResource (0x121c60, the same 0x1b8 bytes) is already third-party. It calls
+# nw_font_ResFontSetResourceBuffer.
+arm 0x15ef04 0x15f0bc NintendoWare-font ResFont SetResource: Rebuild's block walk inlined; smt4 twin nw_font_ResFontSetResource
+# NintendoWare sound: nw::snd::internal::SoundArchiveLoader's item load (dispatch on the sound archive's item type to
+# LoadSequenceSound / LoadSoundGroup / LoadImpl, with the loader's recursion depth and cancel flag), placed right after
+# nw_snd_internal_SoundArchiveLoader_LoadSequenceSound and LoadSoundGroup; smt4's counterpart
+# nw_snd_internal_SoundArchiveLoader_Load (0x2af3b4) is already third-party.
+arm 0x1753d4 0x17561c NintendoWare-snd SoundArchiveLoader item load: calls LoadSequenceSound, LoadSoundGroup and LoadImpl; smt4 counterpart nw_snd_internal_SoundArchiveLoader_Load

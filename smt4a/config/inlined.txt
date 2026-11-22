@@ -81,3 +81,5 @@ cecMessageSetRankC = 0xe5c01023; // 0x2a29d8 (FUN_002a28c0: mov r1, r7 with save
 cecMessageSetGameFlag = 0xe5c01042; // 0x2a2a4c (FUN_002a28c0: mov r1, r7 with FUN_002a46b8's result, r0 is FUN_002bf520's record)
 cecMessageSetWord27E8C = 0xe5801024; // 0x2a2a94 (FUN_002a28c0: mov r1, r7 with gameDataBlocksGetWord27E8C's result, r0 is FUN_002bf520's record)
 btlMainGetPartyListCount = 0xe1d00ef0; // 0x21ac68 (FUN_0021a9e8: btlGetMainState's result in r0 is passed, and the s16 result is then moved into r1 as the next call's argument where a direct field read would load into r1)
+uiSpriteSetUpdated = 0xe5c01085; // 0x2cd19c (statusPanelResetRows: add r0, r0, #32 forms each sprite's address in r0, mov r1, #0 is rematerialised before each strb r1, [r0, #133], and the 66-iteration loop is not unrolled)
+flag0CGet = 0xe1d000dc; // 0x3717f8 (saveLoadProcessWriteStep: ldr r0, [r0] loads g_saveLoadRunner into r0, the lone ldrsb returns the s8 flag flag0CSet (0x4188e0) sets, and the compare is followed by the call's nop {0} padding; a field read compiles to ldrb)

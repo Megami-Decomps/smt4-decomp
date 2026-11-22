@@ -7,7 +7,7 @@
 extern "C" {
 f32 uniteDrawSelectionButtonStrip(s32 x, s32 y, f32 speed);
 void uiDrawLayeredSpriteEffect(s32 x, s32 y, f32 speed);
-void FUN_003cbd04(UniteWorkA *work, s32 row, struct SlotRecordA *record, s32 valid, s32 x, s32 y, s32 highlighted,
+void skillScreenDrawCandidateListRow(UniteWorkA *work, s32 row, struct SlotRecordA *record, s32 valid, s32 x, s32 y, s32 highlighted,
                   f32 effect);
 void skillScreenDrawCandidateRow(UniteWorkA *work, struct SlotRecordA *record, s32 x, s32 y, f32 effect);
 
@@ -37,7 +37,7 @@ void drawInteractiveEightRowList(UniteWorkA *work, struct SlotRecordA *record, s
             if (listCursorGetRowIfUnblocked(&work->inheritanceA.skillList) == row && !work->inheritanceA.accepted &&
                 interactive)
                 highlighted = 1;
-            FUN_003cbd04(work, row, record, valid, x, y, highlighted, effect);
+            skillScreenDrawCandidateListRow(work, row, record, valid, x, y, highlighted, effect);
             efctSetSpeed(1.0f);
         }
     }

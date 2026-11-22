@@ -11,7 +11,7 @@
 struct HowToRecord {
     /* 0x00 */ u16 id;                    /* 0 = unused row; also the row's seen-flag id */
     /* 0x02 */ u16 unlockFlag;            /* game flag that makes the page available */
-    /* 0x04 */ u8 unk04[0x28];
+    /* 0x04 */ char title[0x28];          /* the page's name in the how-to list */
     /* 0x2C */ u16 order;                 /* list position (FUN_0049ebf0 sorts by it) */
     /* 0x2E */ u8 unk2E[8];
     /* 0x36 */ u16 imageA;                /* texture of table 0x33 shown with the page, 0 = none */

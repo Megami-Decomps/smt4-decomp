@@ -4,7 +4,7 @@
 
 extern "C" {
 
-u32 NaviMain_GetPosX(void)
+u32 NaviMain_GetPosX(const void *unused)
 {
     return g_naviMain->posX;
 }

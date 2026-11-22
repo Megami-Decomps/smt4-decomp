@@ -1,41 +1,64 @@
-/* NON_MATCHING: stack indices fold into direct base offsets, command constants coalesce and the depth-access predicate short-circuits; 125 vs 114 instructions. */
+/* NON_MATCHING: 181 lines: retail loads every command header from the pool (no 0xF0110/0xF0113 derived from their
+ * neighbours), rematerialises the invalidate block's 1, and builds the stencil bits as `mov rN, #1 ... moveq rN, #0`;
+ * the colour and depth stack reads, the late-inlined stack-top address forms and the statement order agree. */
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
+
 extern "C" {
 extern u32 *g_modelCommandBuffer;
 extern u32 g_modelCommandWordCount;
 void cursorResetFromParam();
 void asdModelCommandBlockRelease();
 }
-namespace {
-inline void appendRegister(u32 *commands, u32 value, u32 header)
+
+/* The current state of the render context's render-state stack `kind` (four calls; plain static, inlined late:
+ * retail forms each stack address from the stack's own count offset). */
+static s32 sceneStackTop(s32 kind)
 {
-    commands[g_modelCommandWordCount] = value;
-    commands[g_modelCommandWordCount + 1] = header;
-    g_modelCommandWordCount += 2;
+    return renderCtxStackTop(g_renderCtx, kind);
 }
-}
+
 extern "C" {
-// Restore color/depth buffer access registers from the current render-state stacks.
+/* Restores the colour and depth buffer access registers from the current render-state stacks. */
 void renderStatesSubmitCached(s32 invalidate)
 {
     cursorResetFromParam();
-    u32 *commands = g_modelCommandBuffer;
     if (invalidate) {
-        appendRegister(commands, 1, 0xf0111);
-        appendRegister(commands, 1, 0xf0110);
+        u32 *commands = g_modelCommandBuffer;
+        commands[g_modelCommandWordCount] = 1;
+        commands[g_modelCommandWordCount + 1] = 0xF0111;
+        g_modelCommandWordCount += 2;
+        commands[g_modelCommandWordCount] = 1;
+        commands[g_modelCommandWordCount + 1] = 0xF0110;
+        g_modelCommandWordCount += 2;
     }
-    commands = g_modelCommandBuffer;
-    u32 colorMask = renderCtxStackTop(g_renderCtx, RENDER_STACK_G) & 0xf00;
-    appendRegister(commands, colorMask ? 15 : 0, 0xf0112);
-    appendRegister(commands, colorMask ? 15 : 0, 0xf0113);
-    u32 rasterState = renderCtxStackTop(g_renderCtx, RENDER_STACK_A);
-    u32 depthState = renderCtxStackTop(g_renderCtx, RENDER_STACK_E);
-    u32 enabledDepth = depthState & -(depthState & 1);
-    appendRegister(commands, static_cast<u32>((enabledDepth & 0x30) && (depthState & 0xf0000000)) |
-        (static_cast<u32>(colorMask || (rasterState & 0x1000)) << 1), 0xf0114);
-    appendRegister(commands, static_cast<u32>((enabledDepth & 0xff00) && renderCtxStackTop(g_renderCtx, RENDER_STACK_F)) |
-        (static_cast<u32>((rasterState & 0x1000) != 0) << 1), 0xf0115);
+    u32 *commands = g_modelCommandBuffer;
+    u32 colorMask = sceneStackTop(RENDER_STACK_G) & 0xf00;
+    u32 colorRead = 0;
+    u32 colorWrite = 0;
+    if (colorMask) {
+        colorRead = 15;
+        colorWrite = 15;
+    }
+    commands[g_modelCommandWordCount] = colorRead;
+    commands[g_modelCommandWordCount + 1] = 0xF0112;
+    g_modelCommandWordCount += 2;
+    commands[g_modelCommandWordCount] = colorWrite;
+    commands[g_modelCommandWordCount + 1] = 0xF0113;
+    g_modelCommandWordCount += 2;
+    u32 rasterState = sceneStackTop(RENDER_STACK_A);
+    bool depthRead = colorMask || (rasterState & 0x1000);
+    u32 testState = sceneStackTop(RENDER_STACK_E);
+    bool stencilRead = ((testState & -(testState & 1)) & 0x30) && (testState & 0xf0000000);
+    commands[g_modelCommandWordCount] = (u32)stencilRead | ((u32)depthRead << 1);
+    commands[g_modelCommandWordCount + 1] = 0xF0114;
+    g_modelCommandWordCount += 2;
+    u32 writeMask = sceneStackTop(RENDER_STACK_F);
+    bool stencilWrite = ((testState & -(testState & 1)) & 0xff00) && writeMask;
+    bool depthWrite = (rasterState & 0x1000) != 0;
+    commands[g_modelCommandWordCount] = (u32)stencilWrite | ((u32)depthWrite << 1);
+    commands[g_modelCommandWordCount + 1] = 0xF0115;
+    g_modelCommandWordCount += 2;
     asdModelCommandBlockRelease();
 }
 }

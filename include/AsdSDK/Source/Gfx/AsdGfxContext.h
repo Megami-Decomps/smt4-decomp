@@ -59,6 +59,36 @@ struct AsdCmdTransferRecord {
 };
 typedef char AsdCmdTransferRecordSizeCheck[sizeof(AsdCmdTransferRecord) == sizeof(AsdCmdRecord) ? 1 : -1];
 
+/* A kind-3 record: a block-to-linear display transfer (nngx's B2L transfer) of a colour buffer. */
+struct AsdCmdDisplayTransferSize {
+    /* 0x00 */ u16 width;
+    /* 0x02 */ u16 height;
+};
+
+struct AsdCmdDisplayTransferFlags {
+    u32 inputFormat : 3;    /* 0 RGBA8, 1 RGB8, 2 RGB565, 3 RGB5A1, 4 RGBA4 */
+    u32 outputFormat : 3;
+    u32 flip : 1;           /* the destination is written bottom-up */
+    u32 antialias : 2;      /* 0 none, 1 2x1, 2 2x2 */
+    u32 block32 : 1;        /* 32x32 blocks instead of 8x8 */
+    u32 unk10 : 2;
+    u32 unk12 : 20;
+};
+
+struct AsdCmdDisplayTransferRecord {
+    /* 0x00 */ u8 kind;           /* 3 */
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ u32 source;
+    /* 0x08 */ u32 destination;
+    /* 0x0C */ AsdCmdDisplayTransferSize sourceSize;
+    /* 0x10 */ AsdCmdDisplayTransferSize destinationSize;
+    /* 0x14 */ AsdCmdDisplayTransferFlags flags;
+    /* 0x18 */ u8 unk18[4];
+};
+typedef char AsdCmdDisplayTransferRecordSizeCheck[
+    sizeof(AsdCmdDisplayTransferRecord) == sizeof(AsdCmdRecord) &&
+    offsetof(AsdCmdDisplayTransferRecord, flags) == 0x14 ? 1 : -1];
+
 /* A kind-4 record: a rectangle copy between two targets, coordinates in pixels. */
 struct AsdCmdBlitRecord {
     /* 0x00 */ u8 kind;           /* 4 */

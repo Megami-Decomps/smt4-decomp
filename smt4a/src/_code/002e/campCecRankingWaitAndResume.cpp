@@ -6,14 +6,14 @@ u8 campCecRankingIsDone(void);
 void campCecRankingDestroy(void);
 void sysPlaySe(u32 id);
 void partyPanelRefreshFromSlotTable(void);
-void FUN_0037b7e4(void);
+void campCecRankingCreate(void);
 
 u32 campCecRankingWaitAndResume(CampCecResumeState* work)
 {
     u32 result = 0;
     switch (campCecRankingExists()) {
     case 0:
-        FUN_0037b7e4();
+        campCecRankingCreate();
         break;
     default:
         if (campCecRankingIsDone()) {

@@ -1,4 +1,5 @@
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlSideLimits.h"
 #include "battle/btlMain.h"
 
 struct BattleDirectionEntry {
@@ -22,16 +23,6 @@ extern BattleCameraAngle *g_btlCamera;
 f32 btlApplyDirectionBucketEffect(BtlAuxA *, u32 kind, s32 x, s32 y);
 void btlQueueActionMessage(u32 unused, u32 handle, u32 flags, s32 a, s32 b, s32 direction, s32 c);
 
-static bool isBelow(f32 value, f32 limit)
-{
-    return value < limit;
-}
-
-static bool isAbove(f32 value, f32 limit)
-{
-    return value > limit;
-}
-
 // Choose one of five facing buckets using fixed or camera-relative angle thresholds.
 void btlApplyDirectionBucket(u32 unused, BattleDirectionEntry *entry)
 {
@@ -48,13 +39,13 @@ void btlApplyDirectionBucket(u32 unused, BattleDirectionEntry *entry)
     case 8:
     case 9:
     case 12:
-        if (isBelow(angle, -2.9650002f))
+        if (btlIsBelow(angle, -0.99f - 1.975f))
             direction = 5;
-        else if (isBelow(angle, -0.99f))
+        else if (btlIsBelow(angle, -0.99f))
             direction = 4;
-        else if (isAbove(angle, 2.94f))
+        else if (btlIsAbove(angle, 2.94f))
             direction = 1;
-        else if (isAbove(angle, 0.96500003f))
+        else if (btlIsAbove(angle, 2.94f - 1.975f))
             direction = 2;
         else
             direction = 3;
@@ -69,13 +60,13 @@ void btlApplyDirectionBucket(u32 unused, BattleDirectionEntry *entry)
         union { u32 bits; f32 value; } word;
         word.bits = g_btlCamera->centerBits;
         f32 center = word.value;
-        if (isBelow(angle, center + farLeft))
+        if (btlIsBelow(angle, center + farLeft))
             direction = 5;
-        else if (isBelow(angle, center + -9.0f))
+        else if (btlIsBelow(angle, center + -9.0f))
             direction = 4;
-        else if (isAbove(angle, center + 17.0f))
+        else if (btlIsAbove(angle, center + 17.0f))
             direction = 1;
-        else if (isAbove(angle, center + 9.0f))
+        else if (btlIsAbove(angle, center + 9.0f))
             direction = 2;
         else
             direction = 3;

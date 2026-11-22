@@ -58,7 +58,7 @@ extern void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 extern void sysMemClear(void *block, s32 size);
 extern void __ARM_common_memcpy4_8(void *dest, void *src);
 extern s32 moriModelContentIsLoaded(u32 request);
-extern void saveLoadProcessCreate(s32 step, s32 arg);
+extern void saveLoadStartLoad(s32 step, s32 arg);
 extern void statusPanelSetOpen(s32 arg);
 extern void FUN_0023b45c(s32 arg);
 extern void statusCameraRestore(s32 arg);
@@ -89,14 +89,14 @@ void FUN_0041f6e0(SaveLoadTask *task)
         }
         task->slotIndex = task->slotIndex + 1;
         if ((s32)task->slotIndex < 1) {
-            saveLoadProcessCreate(task->slotIndex + 1, 1);
+            saveLoadStartLoad(task->slotIndex + 1, 1);
             return;
         }
         if (task->hasNextStage == 0) {
             task->state = 2;
             return;
         }
-        saveLoadProcessCreate(task->slotIndex + 1, 1);
+        saveLoadStartLoad(task->slotIndex + 1, 1);
         task->state = task->state + 1;
         /* fall through */
     case 1:
@@ -118,7 +118,7 @@ void FUN_0041f6e0(SaveLoadTask *task)
         }
         task->slotIndex = task->slotIndex + 1;
         if ((s32)task->slotIndex < SLOT_COUNT) {
-            saveLoadProcessCreate(task->slotIndex + 1, 1);
+            saveLoadStartLoad(task->slotIndex + 1, 1);
             return;
         }
         task->slotsDone = 1;

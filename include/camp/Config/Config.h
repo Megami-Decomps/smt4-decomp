@@ -56,7 +56,7 @@ extern "C" void configDrawChoices(s32 count, s32 x, s32 y, s32 selected, const C
 /* One row of the Apocalypse screen (8 bytes): the value it selects and its help text. */
 typedef struct ConfigRowA {
     /* 0x00 */ s32 value;
-    /* 0x04 */ u32 helpId;                /* record of table 0x36, section 1 */
+    /* 0x04 */ u32 helpId;                /* record of table 0x36, section 1; the draw also names the row by it */
 } ConfigRowA;
 
 /* Table 0x36, section 1 (0x44 bytes): a help text. */

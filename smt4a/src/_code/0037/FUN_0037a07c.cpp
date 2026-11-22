@@ -1,5 +1,6 @@
 #include "map/mapMain.h"
 #include "map/LmapGlobals.h"
+#include "code/Code0027_Smt4a.h"
 
 extern "C" {
 extern MapMainA *g_mapMain;
@@ -13,7 +14,6 @@ u8 FUN_00249dec(void);
 void FUN_002332f4(void);
 void FUN_002242a0(void);
 void FUN_002237a0(void);
-void FUN_00274e4c(f32 x, f32 y, f32 z, f32 heading);
 void FUN_00234b30(void);
 void FUN_0023534c(void);
 void FUN_002737a8(void);
@@ -43,8 +43,7 @@ void FUN_0037a07c(void)
     FUN_002332f4();
     FUN_002242a0();
     FUN_002237a0();
-    FUN_00274e4c(g_lmapScene->pose.targetPosition.x, g_lmapScene->pose.targetPosition.y,
-        g_lmapScene->pose.targetPosition.z, g_lmapScene->pose.targetHeading);
+    mapTargetUpdateNearest(g_lmapScene->pose.targetPosition, g_lmapScene->pose.targetHeading);
     FUN_00234b30();
     FUN_0023534c();
     FUN_002737a8();

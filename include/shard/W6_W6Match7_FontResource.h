@@ -51,7 +51,7 @@ typedef char FontGlyphLookupVTableSizeCheck[sizeof(FontGlyphLookupVTable) == 0x4
 typedef char FontGlyphResourceOwnerSizeCheck[sizeof(FontGlyphResourceOwner) == 0x0C ? 1 : -1];
 
 extern "C" {
-bool nw_font_ResFontSetResource(NwResFontBase* font, NwFontFileHeader* file);
+bool nw_font_ResFontSetResource(NwResFontBase* font, void* resource);
 void nw_font_ResFontSetResourceBuffer(NwResFontBase* font, NwFontFileHeader* file, NwFontInfo* info);
 }
 

@@ -33,6 +33,7 @@ s16 uiSpriteGetMode(const UiSpriteState *sprite);          /* the opacity key */
 s8 uiSpriteGetScaleDone(const UiSpriteState *sprite);       /* the scale track's finished flag */
 void spriteSetLayer(UiSpriteState *sprite, u16 layer);
 void spriteSetVisible(UiSpriteState *sprite, u8 visible);       /* the active flag */
+void uiSpriteSetUpdated(UiSpriteState *sprite, s8 updated);     /* the flag every advance sets */
 
 /* Starts position key `key` and moves the sprite to its first point (its last one when `reverse`). */
 void uiSpriteSetKeyframe(UiSpriteState *sprite, s16 key, s32 reverse);

@@ -10,7 +10,7 @@ void asdTMTexTablePrepareNodeImage(u32 table, s32 index);
 void infoWindowCreate(void);
 void comWindowCreate(void);
 void guestWinCreate(void);
-void FUN_0010a9c8(void *work);
+u32 messageBannerDraw(void);
 Task *taskCreateDraw(const char *name, u16 priority, u32 workSize, TaskFunc update, TaskFunc draw, TaskFunc destroy, void *work, u32 value);
 void objFlagsSetBits(u32 object, u32 bits);
 void messageSetSkipPoll(void (*callback)(void));
@@ -37,7 +37,7 @@ void messageInitializeDisplay(void)
     infoWindowCreate();
     comWindowCreate();
     guestWinCreate();
-    taskCreateDraw("MESS_D", 234, 0, 0, FUN_0010a9c8, 0, g_messageMain.window, g_messageMain.window->job);
+    taskCreateDraw("MESS_D", 234, 0, 0, (TaskFunc)messageBannerDraw, 0, g_messageMain.window, g_messageMain.window->job);
     MessageWindow *state = g_messageMain.window;
     state->displayEnabled = 1;
     g_messageMain.banner->displayEnabled = 0;

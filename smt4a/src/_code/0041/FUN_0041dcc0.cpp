@@ -14,7 +14,7 @@ void sysPlaySe(s32 sound);
 void *gameDataBlocksGetSaveData(void);
 void __aeabi_memcpy4(void *output, const void *input, u32 size);
 void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
-void saveLoadProcessCreate(s32 slot, s32 mode);
+void saveLoadStartLoad(s32 slot, s32 mode);
 
 // Run a save operation, maintain the HOME-button hold and finish its success/failure script.
 void FUN_0041dcc0(SaveLoadControllerA *controller)
@@ -49,7 +49,7 @@ void FUN_0041dcc0(SaveLoadControllerA *controller)
     } else if (!work->operation.started) {
         if (!work->operation.loading) {
             work->operation.started = 1;
-            saveLoadProcessCreate(controller->selectedSlot + 1, 0);
+            saveLoadStartLoad(controller->selectedSlot + 1, 0);
             scrRunOpcodesStub(work->operation.script);
             work->timing.frame = 0;
         }

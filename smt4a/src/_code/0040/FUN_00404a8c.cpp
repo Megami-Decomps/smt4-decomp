@@ -24,7 +24,7 @@ void efctSetSpeed(f32 speed);
 void FUN_00404a8c(FramePanel *panel, s32 x, s32 y, f32 speed)
 {
     efctSetSpeed(speed);
-    renderCtxCalculateStereoParallax(g_renderCtx, 0.27f);
+    renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     if (panel->leftFrame) {
         u32 icons[4];
         icons[0] = 26;
@@ -39,35 +39,35 @@ void FUN_00404a8c(FramePanel *panel, s32 x, s32 y, f32 speed)
             icons[2] = 32;
             icons[3] = 33;
         }
-        s32 shift = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
+        s32 shift = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
         for (s32 i = 0; i < 4; ++i)
             texDrawTableEntryAtStoredOrigin(2, 50, icons[i], shift + x, y, 191);
     }
     if (panel->centerFrame != 0) {
         TextureTableEntryIV *edge = asdTMTexTableEntryAt(50, 40);
-        s32 shift = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
-        s32 edgeY = edge->y + y;
+        s32 shift = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
         s32 edgeX = edge->x + (shift + x);
+        s32 edgeY = edge->y + y;
         texDrawTableEntryAtStoredOrigin(2, 50, 34, edgeX, edgeY, 191);
         texDrawTableEntryAtStoredOrigin(2, 50, 35, edgeX, edgeY, 191);
         TextureTableEntryIV *corner = asdTMTexTableEntryAt(50, 41);
-        shift = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
-        s32 cornerY = corner->y + y;
+        shift = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
         s32 cornerX = corner->x + (shift + x);
+        s32 cornerY = corner->y + y;
         texDrawTableEntryAtStoredOrigin(2, 50, 37, cornerX, cornerY, 191);
         texDrawTableEntryAtStoredOrigin(2, 50, 39, cornerX, cornerY, 191);
     } else {
         TextureTableEntryIV *edge = asdTMTexTableEntryAt(50, 40);
-        s32 shift = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
-        s32 edgeY = edge->y + y;
+        s32 shift = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
         s32 edgeX = edge->x + (shift + x);
+        s32 edgeY = edge->y + y;
         texDrawTableEntryAtStoredOrigin(2, 50, 37, edgeX, edgeY, 191);
         texDrawTableEntryAtStoredOrigin(2, 50, 38, edgeX, edgeY, 191);
         if (panel->leftFrame) {
             TextureTableEntryIV *corner = asdTMTexTableEntryAt(50, 41);
-            shift = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
-            s32 cornerY = corner->y + y;
+            shift = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
             s32 cornerX = corner->x + (shift + x);
+            s32 cornerY = corner->y + y;
             texDrawTableEntryAtStoredOrigin(2, 50, 34, cornerX, cornerY, 191);
             texDrawTableEntryAtStoredOrigin(2, 50, 36, cornerX, cornerY, 191);
         }

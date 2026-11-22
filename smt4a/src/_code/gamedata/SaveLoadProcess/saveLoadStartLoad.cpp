@@ -1,0 +1,79 @@
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+
+struct SaveLoadWork {
+    /* 0x00 */ void *process;
+    /* 0x04 */ s32 state;
+    /* 0x08 */ s32 unk08;
+    /* 0x0c */ s32 unk0c;
+    /* 0x10 */ s32 slot;
+    /* 0x14 */ s32 mode;
+    /* 0x18 */ u8 option;
+};
+
+struct SaveLoadState {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 unk01;
+    /* 0x02 */ u8 unk02;
+    /* 0x03 */ u8 unk03;
+    /* 0x04 */ u8 unk04;
+    /* 0x05 */ u8 unk05;
+    /* 0x06 */ u16 unk06;
+    /* 0x08 */ u32 unk08;
+};
+
+struct SaveHeader {
+    /* 0x00 */ u8 unk00[3];
+    /* 0x03 */ u8 slot;
+};
+
+typedef void (*ProcessCallback)(void *);
+extern "C" {
+void *asdMemoryAllocTracked(u32 size, u32 alignment, s32 heap, s32 category, s32 clear);
+void gameDataAddHomeButtonHold(s32 enabled);
+void gameDataBlocksAddFlags(u32 flags);
+void gameDataBlocksOrFlagsClearUnk02(s32 enabled);
+SaveHeader *gameDataBlocksGetSaveData(void);
+void saveLoadProcessLoadStep(void *);
+void work8BufDestroy(void *);
+void saveLoadDrawActivityIcon(void *);
+void asdProcessClearSelectedFlags(void *, u32, u32);
+void *taskCreateDraw(const char *, s32, s32, s32, ProcessCallback, void *, void *, void *);
+extern SaveLoadState g_saveLoadProcess;
+
+// Start the save/load process and its two draw tasks.
+void *saveLoadStartLoad(s32 selection, u8 option)
+{
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\gamedata\\SaveLoadProcess.cpp", 633);
+    SaveLoadWork *work = static_cast<SaveLoadWork *>(asdMemoryAllocTracked(0x100, 0x100, 0, 0x1c, 1));
+    gameDataAddHomeButtonHold(1);
+    gameDataBlocksAddFlags(1);
+    gameDataBlocksOrFlagsClearUnk02(1);
+    work->unk08 = 0;
+    work->slot = gameDataBlocksGetSaveData()->slot;
+    if (work->slot == 0)
+        work->slot = 1;
+    g_saveLoadProcess.unk03 = 0;
+    g_saveLoadProcess.unk04 = 0;
+    g_saveLoadProcess.unk08 = 0;
+    g_saveLoadProcess.unk06 = 0;
+    work->process = reinterpret_cast<void *>(asdProcessCreateSimple(reinterpret_cast<const s8 *>("Load"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(saveLoadProcessLoadStep), reinterpret_cast<AsdProcFunc>(work8BufDestroy), reinterpret_cast<u32>(work)));
+    asdProcessClearSelectedFlags(work->process, 0x80000, 0);
+    if (selection <= 1) {
+        work->slot = selection;
+        work->mode = 0;
+    } else {
+        work->slot = selection - 1;
+        work->mode = 1;
+    }
+    work->option = option;
+    taskCreateDraw("Boot UpDraw", 0x86, 0, 0, saveLoadDrawActivityIcon, NULL, NULL, work->process);
+    taskCreateDraw("Boot UpDraw_R", 0xe2, 0, 0, saveLoadDrawActivityIcon, NULL, NULL, work->process);
+    g_saveLoadProcess.active = 0;
+    g_saveLoadProcess.unk01 = 0;
+    g_saveLoadProcess.unk02 = 0;
+    work->state = 6;
+    return work->process;
+}
+}

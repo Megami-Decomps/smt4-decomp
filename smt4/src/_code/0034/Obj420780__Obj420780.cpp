@@ -38,24 +38,24 @@ static __inline u32 packColor(const ColorRecord *color)
 
 Obj420780::Obj420780()
 {
-    sprintf(title, "");
-    sprintf(text, "");
-    unk28 = 1;
-    unk24 = 0;
-    order[0] = 0;
-    order[1] = 1;
-    order[2] = 2;
-    order[3] = 3;
-    order[4] = 4;
-    order[5] = 5;
-    pair[0] = 0;
-    pair[1] = 1;
-    unk54[0] = 0;
-    unk54[1] = 0;
-    unk54[2] = 0;
-    unk54[3] = 0;
-    unk54[4] = 0;
-    unk54[5] = 0;
+    sprintf(name, "");
+    sprintf(raceName, "");
+    level = 1;
+    registered = 0;
+    resistances[0] = 0;
+    resistances[1] = 1;
+    resistances[2] = 2;
+    resistances[3] = 3;
+    resistances[4] = 4;
+    resistances[5] = 5;
+    resistances[6] = 0;
+    resistances[7] = 1;
+    options[0] = 0;
+    options[1] = 0;
+    options[2] = 0;
+    options[3] = 0;
+    options[4] = 0;
+    options[5] = 0;
     const s32 slotTextures[8] = {0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50};
     for (s32 i = 0; i < 8; i++) {
         PanelTexture *texture = asdTMTexTableEntryAt(0x14, slotTextures[i]);

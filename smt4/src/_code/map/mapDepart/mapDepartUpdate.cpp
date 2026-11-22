@@ -38,7 +38,7 @@ void navigationResetTimer(void);
 void messageSlotSet(s32 value);
 u32 unlockFlagTest(u32 id);
 /* Lists the relics found under a search record's mark bit. */
-u32 FUN_001f8da8(s32 markBit, u32 *ids, u8 *isNew, s32 *count);
+u32 rewardDrawFromRecord(s32 markBit, u32 *ids, u8 *isNew, s32 *count);
 void FUN_00273358(u32 handle);
 s32 inputConfirmPressed(void);
 s32 inputIsQuestMenuPressed(void);
@@ -142,7 +142,7 @@ s32 mapDepartUpdate(u32 job)
     case DEPART_STATE_RESULT:
         if (++work->counter == 1) {
             if (work->mode == 0) {
-                FUN_001f8da8(FUN_0025b670(g_gameState.recordId)->markBit, g_mapDepartState.depart.foundIds, g_mapDepartState.depart.foundIsNew,
+                rewardDrawFromRecord(FUN_0025b670(g_gameState.recordId)->markBit, g_mapDepartState.depart.foundIds, g_mapDepartState.depart.foundIsNew,
                              &g_mapDepartState.depart.foundCount);
             } else {
                 g_mapDepartState.depart.foundIds[0] = work->entry;

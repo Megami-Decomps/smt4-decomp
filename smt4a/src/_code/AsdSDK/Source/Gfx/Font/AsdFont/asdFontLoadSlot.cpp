@@ -40,7 +40,7 @@ void asdMemFree(void *memory);
 void *asdMemoryAlloc(u32 size, u32 alignment, u32 a, u32 count, u32 b);
 void *asdMemoryAllocTraced(u32 size, const char *sourceFile, u32 sourceLine);
 FontReader *initVtable0055c618(void *storage);
-s32 FUN_0015ef04(FontReader *reader, u8 *data);
+s32 nw_font_ResFontSetResource(FontReader *reader, u8 *data); // declcheck: local (the shared declaration does not compile here or changes this unit)
 AsdTexture *asdTextureCreate(s32 shared);
 void asdTextureSetImage(AsdTexture *texture);
 
@@ -84,7 +84,7 @@ u32 asdFontLoadSlot(u32 index, u8 *data)
         reader = initVtable0055c618(reader);
     }
     slot->reader = reader;
-    if (FUN_0015ef04(reader, slot->data) == 0) {
+    if (nw_font_ResFontSetResource(reader, slot->data) == 0) {
         return 1;
     }
     u8 *blocks = slot->data + *(u16 *)(slot->data + 6);

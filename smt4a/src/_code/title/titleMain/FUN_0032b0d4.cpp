@@ -16,7 +16,7 @@ float fontMeasureTextWidth(const char *, unsigned int, float);
 int renderCtxSelectTexture(...);
 int gxResetColorQuadToWhite(void);
 int dataTableGet(int, int);
-int FUN_002027fc(void);
+int configDraw(void);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -42,7 +42,7 @@ extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: dataTableGet. */
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_002027fc. */
+/* Supplied declaration required: configDraw. */
 extern int s4LoadIsInProgress(void);
 
 
@@ -73,7 +73,7 @@ unsigned int FUN_0032b0d4(void)
     temp_v2 = *(int *)(temp_v2 + 0x78);
     temp_v11 = 0;
     if (!((temp_v2 == 3 || temp_v2 == 4) || temp_v2 == 6)) {
-      FUN_002027fc();
+      configDraw();
       temp_v2 = DAT_00589170;
       renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
       temp_v1 = g_renderCtx;

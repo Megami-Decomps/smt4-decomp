@@ -8,7 +8,7 @@
 extern "C" {
 extern const char DAT_00533f48[];
 void drawSetColorFromRGBA8(u32 color);
-void statRowDrawValueImpl(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
+void numberFontDrawFormatted(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
 void gxResetColorQuadToWhite();
 
 /* Draws the numeric badge background, then its ones and tens digits at their glyph offsets. */
@@ -19,10 +19,10 @@ void FUN_0041af74(u32, s32 value, const UiScaledDrawPosition *position, u32 colo
     s32 tens = value / 10;
     s32 ones = value % 10;
     TextureTableEntryIV *first = asdTMTexTableEntryAt(43, 154);
-    statRowDrawValueImpl(6, position->x + (s16)first->x, position->y + (s16)first->y,
+    numberFontDrawFormatted(6, position->x + (s16)first->x, position->y + (s16)first->y,
         1, 1, 2, DAT_00533f48, ones);
     TextureTableEntryIV *second = asdTMTexTableEntryAt(43, 155);
-    statRowDrawValueImpl(6, position->x + (s16)second->x, position->y + (s16)second->y,
+    numberFontDrawFormatted(6, position->x + (s16)second->x, position->y + (s16)second->y,
         1, 1, 2, DAT_00533f48, tens);
     gxResetColorQuadToWhite();
 }

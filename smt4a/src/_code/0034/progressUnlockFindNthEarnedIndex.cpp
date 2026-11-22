@@ -6,14 +6,6 @@
 extern "C" {
 
 
-static __inline bool unlockBitIsEarned(s32 index)
-{
-    s32 byteIndex = index / 8;
-    s32 bitIndex = index % 8;
-    const u8 *byte = &reinterpret_cast<GameBlock2830C *>(gameDataBlocksGetSaveData())->unlocks.earned[byteIndex];
-    return (*byte & (1u << bitIndex)) != 0;
-}
-
 /* Returns the table index of the nth earned progress unlock, or the table count if fewer are earned. */
 s32 progressUnlockFindNthEarnedIndex(s32 nth)
 {

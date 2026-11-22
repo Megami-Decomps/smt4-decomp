@@ -7,7 +7,7 @@ extern "C" {
 int facingUpdateAngles(...);
 int mtx44RotateYXZDegrees(...);
 int mtxMakeTranslation(...);
-int FUN_002b2144(...);
+int mathMatrixBuildRotationXyz(...);
 int FUN_002ba1e0(...);
 int mtx44Copy(float *, unsigned int);
 int renderCtxSelectTexture(...);
@@ -106,7 +106,7 @@ extern float DAT_004efd98; /* 0x4efd98 */
 /* Supplied declaration required: mtxMakeTranslation. */
 extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
 extern int nn_math_ARMv6_MTX34InverseAsm(unsigned char *, int);
-/* Supplied declaration required: FUN_002b2144. */
+/* Supplied declaration required: mathMatrixBuildRotationXyz. */
 /* Supplied declaration required: FUN_002ba1e0. */
 /* Supplied declaration required: mtx44Copy. */
 extern int __cxa_guard_acquire(unsigned int *);
@@ -407,7 +407,7 @@ void FUN_001aad64(int param_1)
       temp_v11 = temp_v11 + 0x168;
     }
     VectorSignedToFloat(0x168 - temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002b2144(temp_v66,temp_v2);
+    mathMatrixBuildRotationXyz(temp_v66,temp_v2);
     nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,temp_v66);
     temp_v2 = (int)*(char *)(param_1 + 0x1da);
     temp_v11 = temp_v8;

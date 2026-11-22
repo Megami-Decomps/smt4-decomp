@@ -154,7 +154,7 @@ void FUN_003881b0(unsigned int param_1,unsigned int param_2,unsigned int param_3
           FUN_002b6eb8(auStack_f8,auStack_f8,afStack_138);
           uVar10 = (unsigned int)uVar11;
           if (puVar4 != (unsigned int *)0x0) {
-            FUN_002b2144(afStack_138);
+            mathMatrixBuildRotationXyz(afStack_138);
             FUN_002b6eb8(auStack_f8,auStack_f8,afStack_138);
           }
           afStack_138[3] =
@@ -205,7 +205,7 @@ void FUN_003881b0(unsigned int param_1,unsigned int param_2,unsigned int param_3
           afStack_138[0xd] = 0.0f;
           FUN_002b6eb8(auStack_f8,auStack_f8,afStack_138);
           if (puVar4 != (unsigned int *)0x0) {
-            FUN_002b2144(afStack_138);
+            mathMatrixBuildRotationXyz(afStack_138);
             FUN_002b6eb8(auStack_f8,auStack_f8,afStack_138);
           }
           if (bVar6) {

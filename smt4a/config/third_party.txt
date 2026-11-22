@@ -2424,6 +2424,7 @@
 0x0015edbc nw_snd_SoundHeap_Destroy name
 0x0015ee34 nw_snd_SoundHeap_SaveState name
 0x0015ee64 nw_anim_res_ResAnim_Setup name
+0x0015ef04 nw_font_ResFontSetResource name
 0x0015fb84 nn_gr_CTR_Shader_SearchBindSymbol name
 0x0015fe30 nw_snd_SoundArchive_IsAvailable name
 0x0015fe40 FUN_0015fe40 between
@@ -2595,7 +2596,8 @@
 0x00174b5c FUN_00174b5c between
 0x00174c28 nw_snd_internal_SoundArchiveLoader_LoadSoundGroup name
 0x00174dd8 nw_snd_internal_SoundArchiveLoader_LoadSequenceSound name
-0x00174ebc FUN_00174ebc between
+0x00174ebc FUN_00174ebc callers
+0x001753d4 soundArchiveLoaderLoadItem library
 0x0017561c FUN_0017561c between
 0x00175678 objectCommandQueueGet between
 0x001756d0 FUN_001756d0 between
@@ -2842,10 +2844,10 @@
 0x0019070c FUN_0019070c callers
 0x00190784 FUN_00190784 between
 0x001907a4 FUN_001907a4 twin
-0x00190808 FUN_00190808 between
+0x00190808 FUN_00190808 callers
 0x00190898 nw_snd_internal_SoundArchiveLoader_LoadWaveSound name
 0x00190a2c nw_snd_internal_SoundArchiveLoader_LoadWaveArchiveImpl name
-0x00190c24 FUN_00190c24 between
+0x00190c24 FUN_00190c24 callers
 0x00190e30 nw_snd_internal_SoundArchiveLoader_LoadImpl name
 0x00190f58 FUN_00190f58 between
 0x00190fc8 FUN_00190fc8 between
@@ -2888,6 +2890,7 @@
 0x0019472c FUN_0019472c between
 0x00194784 soundInfoOwnerReadInfo between
 0x001947dc soundGroupUpdate between
+0x00194850 optionalNestedValueGet callers
 0x00194860 nw_snd_internal_GroupFileReader_ReadGroupItemInfoEx name
 0x001948a0 nw_snd_internal_GroupFileReader_ReadGroupItemLocationInfo name
 0x001948f4 nw_snd_internal_SoundArchiveFile_FileHeader_GetFileBlockOffset name
@@ -2908,7 +2911,7 @@
 0x00194fd8 FUN_00194fd8 between
 0x00194fe0 FUN_00194fe0 between
 0x00194ff4 nw_snd_internal_SoundArchiveFileReader_ReadPlayerInfo name
-0x00195024 FUN_00195024 between
+0x00195024 FUN_00195024 callers
 0x00195034 nw_snd_SoundArchive_detail_ReadSoundArchivePlayerInfo name
 0x001950b0 FUN_001950b0 callers
 0x00195110 FUN_00195110 callers
@@ -3160,7 +3163,7 @@
 0x001a8c20 nw_snd_internal_Util_BitFlag_GetValueOrZero name
 0x001a8c40 nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundInfo name
 0x001a8c7c nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetPlayerInfo name
-0x001a8cb8 FUN_001a8cb8 between
+0x001a8cb8 FUN_001a8cb8 callers
 0x001a8d1c FUN_001a8d1c between
 0x001a8d28 nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundArchivePlayerInfo name
 0x001a8dec nw_snd_internal_SoundArchiveFileReader_ReadBankInfo name
@@ -3304,7 +3307,7 @@
 0x001b3cb8 FUN_001b3cb8 between
 0x001b3cf8 nw_snd_internal_SoundArchiveFileReader_ReadFileInfo name
 0x001b3d6c nw_snd_internal_SoundArchiveFileReader_ReadWaveArchiveInfo name
-0x001b3da8 FUN_001b3da8 between
+0x001b3da8 FUN_001b3da8 callers
 0x001b3db0 FUN_001b3db0 between
 0x001b3ea4 nw_snd_internal_Util_BitFlag_GetValue name
 0x001b3f20 nw_snd_internal_driver_VoiceManager_GetVoiceCount name
@@ -7104,7 +7107,7 @@
 0x00502374 FUN_00502374 between
 0x005023d0 FUN_005023d0 between
 0x00502424 FUN_00502424 between
-0x0050245c FUN_0050245c between
+0x0050245c mapVectorScaled between
 0x0050247c nw_gfx_AnimBlender_HasMemberAnim name
 0x005024ec FUN_005024ec between
 0x005024f8 FUN_005024f8 between

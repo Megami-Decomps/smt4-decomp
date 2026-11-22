@@ -41,7 +41,7 @@ void statusCameraRestore(s32 value);
 void unitStatusResetSpriteState(void);
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 void FUN_0045b538(void *object);
-void saveLoadProcessCreate(s32 slot, s32 mode);
+void saveLoadStartLoad(s32 slot, s32 mode);
 
 // Start the save/load screen: build its model list on first use, then queue the process.
 void saveLoadUIStart(SaveLoadScreen *screen)
@@ -71,7 +71,7 @@ void saveLoadUIStart(SaveLoadScreen *screen)
         controllerSetPositionXyz(object, 0.0f, -10000.0f, 0.0f);
         object->flags |= 1;
     }
-    saveLoadProcessCreate(screen->slotCount + 1, 1);
+    saveLoadStartLoad(screen->slotCount + 1, 1);
     saveLoadSetState(screen, 2);
 }
 }

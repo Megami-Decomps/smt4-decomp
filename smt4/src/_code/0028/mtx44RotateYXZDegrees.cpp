@@ -2,7 +2,7 @@
 #include "shard/W5_W5Match2_PlainData.h"
 
 extern "C" {
-void FUN_002b2144(Matrix44 *matrix, f32 x, f32 y, f32 z);
+void mathMatrixBuildRotationXyz(Matrix44 *matrix, f32 x, f32 y, f32 z);
 void nn_math_ARMv6_MTX44MultAsm(Matrix44 *destination, const Matrix44 *left, const Matrix44 *right);
 }
 
@@ -23,15 +23,15 @@ extern "C" void mtx44RotateYXZDegrees(Matrix44 *matrix, s32 x, s32 y, s32 z)
     Matrix44 rotation;
     f32 zero = 0.0f;
     if (y != 0) {
-        FUN_002b2144(&rotation, zero, static_cast<f32>(360 - wrapDegrees(y)) * (256.0f / 360.0f), zero);
+        mathMatrixBuildRotationXyz(&rotation, zero, static_cast<f32>(360 - wrapDegrees(y)) * (256.0f / 360.0f), zero);
         nn_math_ARMv6_MTX44MultAsm(matrix, matrix, &rotation);
     }
     if (x != 0) {
-        FUN_002b2144(&rotation, static_cast<f32>(360 - wrapDegrees(x)) * (256.0f / 360.0f), zero, zero);
+        mathMatrixBuildRotationXyz(&rotation, static_cast<f32>(360 - wrapDegrees(x)) * (256.0f / 360.0f), zero, zero);
         nn_math_ARMv6_MTX44MultAsm(matrix, matrix, &rotation);
     }
     if (z != 0) {
-        FUN_002b2144(&rotation, zero, zero, static_cast<f32>(360 - wrapDegrees(z)) * (256.0f / 360.0f));
+        mathMatrixBuildRotationXyz(&rotation, zero, zero, static_cast<f32>(360 - wrapDegrees(z)) * (256.0f / 360.0f));
         nn_math_ARMv6_MTX44MultAsm(matrix, matrix, &rotation);
     }
 }

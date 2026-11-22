@@ -15,7 +15,7 @@ void efctSetSpeed(f32 speed);
 u32 table01RecordLookupForContent(u32 id);
 void uiDrawItemOrStatusIcon(u32 id, s32 x, s32 y, u32 flags, u32 arg);
 void drawSetColorFromRGBA8(u32 color);
-void statRowDrawValueImpl(s32 a, s32 x, s32 y, s32 b, s32 c, u32 flags, const char *text);
+void numberFontDrawFormatted(s32 a, s32 x, s32 y, s32 b, s32 c, u32 flags, const char *text);
 void gxResetColorQuadToWhite(void);
 s32 fontMeasureLineAdvance(const char *text, s32 mode);
 
@@ -54,7 +54,7 @@ void FUN_002ca878(struct SaveListWork *work, s32 x, s32 y, f32 speed)
     sprintf(digits, "%d", 99);
     frame = asdTMTexTableEntryAt(BADGE_BANK, 0xC22);
     drawSetColorFromRGBA8(0xFFFFFFFF);
-    statRowDrawValueImpl(0, iconX + frame->x, frame->y + y, 1, 2, 0xCE, digits);
+    numberFontDrawFormatted(0, iconX + frame->x, frame->y + y, 1, 2, 0xCE, digits);
     gxResetColorQuadToWhite();
 
     frame = asdTMTexTableEntryAt(BADGE_BANK, 0xC1F);

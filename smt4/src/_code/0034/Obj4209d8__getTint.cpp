@@ -1,13 +1,13 @@
 /* NON_MATCHING: rewritten as the real Obj4209d8 member over its cell table; retail reloads the cell array pointer for the tint and the color separately and interleaves the four channel conversions (armcc here hoists the cell address and orders the conversions differently). */
 #include "classes/Obj4209d8.h"
 
-extern "C" Obj4209d8ColorDefaults DAT_00439ce0;
+extern "C" Obj4209d8ColorDefaults g_btlColorDefaults;
 
 /* Modulate each packed color channel of a cell's color by its tint unless the cell uses the default tint. */
 u32 Obj4209d8::getTint(u32 index) const
 {
     u32 tint = owner->cells[index].modulation;
-    if (tint == DAT_00439ce0.unmodulated) {
+    if (tint == g_btlColorDefaults.unmodulated) {
         return owner->cells[index].color;
     }
     u32 color = owner->cells[index].color;

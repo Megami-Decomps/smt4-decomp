@@ -20,7 +20,7 @@ void asdMemFree(void *memory);
 void asdLoadFileAsyncSimple(const char *name, u32 *handle, s32 flags);
 char *libc_strcpy(char *dst, const char *src);
 void *sysMemClear(void *dst, u32 size);
-void FUN_003e21c8(ContentRequest003e1390 *request, ContentDesc003e1390 *desc);
+void btlEncountLoadArrangementStep(ContentRequest003e1390 *request, ContentDesc003e1390 *desc);
 void aocQueueType39(u32 aoc, u32 index, u32 *handle, const char *name);
 char *btlPosArrangeGetFileName(ContentDesc003e1390 *desc);
 s32 FUN_0046ebf0(u32 aoc);
@@ -46,7 +46,7 @@ void contentRequestStart(ContentRequest003e1390 *request, ContentDesc003e1390 *d
     request->state = 0x16;
     request->unk10 = 0;
     request->unk0c = 0;
-    FUN_003e21c8(request, desc);
+    btlEncountLoadArrangementStep(request, desc);
 }
 
 } /* extern "C" */

@@ -6,7 +6,7 @@
 extern "C" {
 void nngxLockEnter(void);
 void nngxLockLeave(void);
-void FUN_002ba2b8(void);
+void gfxReplayRecordedCommands(void);
 
 void asdGxCommandListFinishCurrent(void)
 {
@@ -30,7 +30,7 @@ void asdGxCommandListFinishCurrent(void)
     } else if (buffer->listIndex >= buffer->listCount) {
         gfx->submitPending = 0;
     } else {
-        FUN_002ba2b8();
+        gfxReplayRecordedCommands();
     }
     nngxLockLeave();
     if (callback != NULL) {

@@ -8,7 +8,7 @@
 extern "C" {
 extern const char DAT_0052fa28[];
 s32 fontMeasureLineAdvance(const char *text, s32 font);
-s32 fontMeasureFormattedText(s32 font, const char *format, ...);
+s32 numberFontMeasureFormatted(s32 font, const char *format, ...);
 void FUN_00186008(s32 x, s32 y, s32 flags, s32 value);
 void FUN_00185e84(s32 frame, s32 x, s32 group, s32 flags, s32 first, s32 second);
 void effectDispatchSelector(s32 frame, s32 x, s32 group, s32 flags, f32 alpha);
@@ -42,7 +42,7 @@ void FUN_0016631c(MenuState *menu, const TextureTableEntryIV *layout)
     }
     if (caption->value != 0) {
         labelWidth += asdTMTexTableEntryAt(8, 0x19C)->placement->width;
-        numberWidth = fontMeasureFormattedText(7, DAT_0052fa28, caption->value);
+        numberWidth = numberFontMeasureFormatted(7, DAT_0052fa28, caption->value);
     }
     s32 left = (layout->placement->width - (labelWidth + numberWidth + 13 + signWidth)) / 2;
     const TextureTableEntryIV *labelMetric = asdTMTexTableEntryAt(8, 0x68);

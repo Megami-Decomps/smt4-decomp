@@ -20,7 +20,7 @@ int FUN_004b457c(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int effectDispatchSelector(...);
-int statRowDrawValueImpl(...);
+int numberFontDrawFormatted(...);
 int gxResetColorQuadToWhite(void);
 int fontMeasureLineAdvance(...);
 int drawSetColorFromRGBA8(...);
@@ -76,7 +76,7 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: statRowDrawValueImpl. */
+/* Supplied declaration required: numberFontDrawFormatted. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
@@ -466,7 +466,7 @@ LAB_004b0b54:
         }
       }
       drawSetColorFromRGBA8(temp_v8);
-      statRowDrawValueImpl(6,aiStack_f0[temp_v15] + (int)*(short *)(temp_v5 + 8) + temp_v14,
+      numberFontDrawFormatted(6,aiStack_f0[temp_v15] + (int)*(short *)(temp_v5 + 8) + temp_v14,
                    (int)*(short *)(temp_v5 + 10) + aiStack_120[temp_v15] + temp_v13,1,temp_v23,0x79,
                    &LAB_004b10e4,(int)*(short *)(temp_v4 + 0x788a) + temp_v6);
       gxResetColorQuadToWhite();
@@ -503,7 +503,7 @@ LAB_004b0b54:
         }
       }
       temp_v13 = aiStack_110[temp_v4];
-      statRowDrawValueImpl(0,temp_v27[temp_v4] + aiStack_f0[temp_v4] + (int)*(short *)(temp_v15 + 8),
+      numberFontDrawFormatted(0,temp_v27[temp_v4] + aiStack_f0[temp_v4] + (int)*(short *)(temp_v15 + 8),
                    aiStack_120[temp_v4] + (int)*(short *)(temp_v15 + 10) + temp_v13,1,7,0x79,&LAB_004b10e4
                    ,temp_v5);
     }
@@ -704,7 +704,7 @@ LAB_004b13b4:
                    (int)*(short *)(temp_v9 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v7,
                    (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v11 + 10) + temp_v13,0x6f,0);
       temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(temp_v25,0x46));
-      statRowDrawValueImpl(0,(int)*(short *)(temp_v9 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v7,
+      numberFontDrawFormatted(0,(int)*(short *)(temp_v9 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v7,
                    (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v11 + 10) + temp_v13,1,3,0x6f,
                    &LAB_004b178c,*(unsigned int *)(temp_v5 + 0x4408));
       temp_v9 = gamePackedFlagTest(*(unsigned int *)(temp_v5 + 0x43f0));

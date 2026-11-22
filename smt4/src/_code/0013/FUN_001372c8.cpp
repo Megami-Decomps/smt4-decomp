@@ -4,7 +4,7 @@
 extern "C" {
 void nngxLockEnter(void);
 void nngxLockLeave(void);
-void FUN_002ba2b8(void);
+void gfxReplayRecordedCommands(void);
 
 // Queue a rectangle transfer, converting fixed-point coordinates to pixels.
 void FUN_001372c8(u32 source, s32 sourceX, s32 sourceY, u32 target,
@@ -26,7 +26,7 @@ void FUN_001372c8(u32 source, s32 sourceX, s32 sourceY, u32 target,
     if (g_asdGfxContext.activeBuffer == pool && g_asdGfxContext.submitEnabled &&
         !g_asdGfxContext.submitPending) {
         g_asdGfxContext.submitPending = 1;
-        FUN_002ba2b8();
+        gfxReplayRecordedCommands();
     }
     nngxLockLeave();
 }

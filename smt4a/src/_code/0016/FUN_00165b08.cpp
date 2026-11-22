@@ -16,7 +16,7 @@ int renderCtxPopState(...);
 int textDrawString(...);
 int efctSetSpeed(void);
 int renderStackPushIndexed(RenderCtxA *, int, unsigned int);
-int statRowDrawValueImpl(...);
+int numberFontDrawFormatted(...);
 int uiDrawItemOrStatusIcon(...);
 int gxResetColorQuadToWhite(void);
 int fontMeasureLineAdvance(...);
@@ -44,7 +44,7 @@ extern unsigned char DAT_00530b58; /* 0x530b58 */
 extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
-/* Supplied declaration required: statRowDrawValueImpl. */
+/* Supplied declaration required: numberFontDrawFormatted. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
@@ -152,7 +152,7 @@ void FUN_00165b08(void)
       temp_v0 = *(short *)(temp_v8 + 8);
       temp_v1 = *(short *)(temp_v8 + 10);
       drawSetColorFromRGBA8(0xffffffff);
-      statRowDrawValueImpl(0,temp_v0 + temp_v4,temp_v1 + temp_v5,1,3,0xce,temp_v18);
+      numberFontDrawFormatted(0,temp_v0 + temp_v4,temp_v1 + temp_v5,1,3,0xce,temp_v18);
       gxResetColorQuadToWhite();
       rt_aeabi_memclr(temp_v17,0x40);
       temp_v2 = (unsigned int)table01RecordLookupForContent(*(unsigned short *)(temp_v3 + 0x62));
@@ -214,7 +214,7 @@ LAB_00165eec:
       temp_v0 = *(short *)(temp_v8 + 8);
       temp_v1 = *(short *)(temp_v8 + 10);
       drawSetColorFromRGBA8(0xffffffff);
-      statRowDrawValueImpl(0,temp_v0 + temp_v4,temp_v1 + temp_v5,1,3,0xce,temp_v18);
+      numberFontDrawFormatted(0,temp_v0 + temp_v4,temp_v1 + temp_v5,1,3,0xce,temp_v18);
       gxResetColorQuadToWhite();
       rt_aeabi_memclr(temp_v17,0x40);
       temp_v2 = (unsigned int)table01RecordLookupForContent(*(unsigned short *)(temp_v3 + 0x62));

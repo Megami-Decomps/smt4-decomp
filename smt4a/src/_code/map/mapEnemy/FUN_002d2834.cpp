@@ -13,7 +13,7 @@ int gameDataBlocksAddFloat(void);
 int lmapRequestTimedEffect(...);
 int byte76Set(...);
 int FUN_00352ff8(void);
-int FUN_00353200(void);
+int mapEnemyPlaceNearPlayer(void);
 
 int nkmEnemyFindById(void);
 int ptrListRemoveClearOwner(...);
@@ -142,7 +142,7 @@ extern int mapEnemyIsNearestLocked(char *);
 /* Supplied declaration required: byte76Set. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_00352ff8. */
-/* Supplied declaration required: FUN_00353200. */
+/* Supplied declaration required: mapEnemyPlaceNearPlayer. */
 /* Supplied declaration required: FUN_00353c20. */
 /* Supplied declaration required: mapCollisionRaySegmentTest. */
 /* Supplied declaration required: mathAbsHeadingErrorToPoint. */
@@ -2609,7 +2609,7 @@ LAB_002d68ec:
         *(unsigned int *)(temp_v10 + 100) = 0;
         if (*(int *)(temp_v10 + 0xbc) == 0) {
           pcVar8 = pcVar15;
-          FUN_00353200();
+          mapEnemyPlaceNearPlayer();
           if (pcVar8 == (char *)0x0) {
             *(unsigned int *)(temp_v10 + 0xb8) = 0;
             *(unsigned int *)(temp_v10 + 0xbc) = 0;
@@ -2717,7 +2717,7 @@ LAB_002d68ec:
           temp_v3 = *(int *)(temp_v10 + 0x1b4);
         }
         else {
-          FUN_00353200();
+          mapEnemyPlaceNearPlayer();
           if (pcVar15 == (char *)0x0) {
             temp_v19 = 9;
             *(unsigned int *)(temp_v10 + 0xb8) = temp_v19;

@@ -1,6 +1,5 @@
-/* NON_MATCHING: mask-chain reassociation increases the frame from 12 to 28 bytes and changes register/load scheduling; O2 may restore retail lowering. */
+/* NON_MATCHING: 104 lines (89 vs 93 rows): direct markerMasks.bits sequential ops match retail's 12-byte frame and all three branches; retail keeps &state->markerMasks.bits in sl and spills enabled1.hi instead. */
 #include "battle/btlMain.h"
-#include <string.h>
 
 namespace {
 struct BattleDebugMasks {
@@ -27,26 +26,30 @@ extern u64 DAT_00571678;
 extern u64 DAT_00571720;
 
 /* Normalize the marker-state flags for the active debug mode. */
-void btlDebugNormalizeMarkerFlags(void*, BtlMainStateA* state)
+void btlDebugNormalizeMarkerFlags(void *, BtlMainStateA *state)
 {
-    u64 flags;
-    memcpy(&flags, state->markerMasks.words, sizeof(flags));
-    if (flags & g_btlDebugGlobals.primaryTrigger) {
-        flags = (flags | g_btlDebugGlobals.enabled0 | g_btlDebugGlobals.enabled1 |
-                 g_btlDebugGlobals.enabled3 | g_btlDebugGlobals.enabled4 |
-                 g_btlDebugGlobals.enabled2) & ~g_btlDebugGlobals.secondaryMode;
-    } else if (flags & DAT_00571720) {
-        flags = flags | g_btlDebugGlobals.enabled0 | g_btlDebugGlobals.enabled1 |
-                 g_btlDebugGlobals.enabled3 | g_btlDebugGlobals.enabled4 |
-                 g_btlDebugGlobals.enabled2 | g_btlDebugGlobals.secondaryMode;
-        memcpy(state->markerMasks.words, &flags, sizeof(flags));
-        return;
+    if (state->markerMasks.bits & g_btlDebugGlobals.primaryTrigger) {
+        state->markerMasks.bits |= g_btlDebugGlobals.enabled0;
+        state->markerMasks.bits |= g_btlDebugGlobals.enabled1;
+        state->markerMasks.bits |= g_btlDebugGlobals.enabled3;
+        state->markerMasks.bits |= g_btlDebugGlobals.enabled4;
+        state->markerMasks.bits |= g_btlDebugGlobals.enabled2;
+        state->markerMasks.bits &= ~g_btlDebugGlobals.secondaryMode;
+    } else if (state->markerMasks.bits & DAT_00571720) {
+        state->markerMasks.bits |= g_btlDebugGlobals.enabled0;
+        state->markerMasks.bits |= g_btlDebugGlobals.enabled1;
+        state->markerMasks.bits |= g_btlDebugGlobals.enabled3;
+        state->markerMasks.bits |= g_btlDebugGlobals.enabled4;
+        state->markerMasks.bits |= g_btlDebugGlobals.enabled2;
+        state->markerMasks.bits |= g_btlDebugGlobals.secondaryMode;
     } else {
-        // The default path deliberately omits enabled2 from the clear mask.
-        flags = ((flags & ~g_btlDebugGlobals.enabled0) | DAT_00571678) &
-                ~g_btlDebugGlobals.enabled1 & ~g_btlDebugGlobals.enabled3 &
-                ~g_btlDebugGlobals.enabled4 & ~g_btlDebugGlobals.secondaryMode;
+        /* The default path deliberately omits enabled2 from the clear mask. */
+        state->markerMasks.bits &= ~g_btlDebugGlobals.enabled0;
+        state->markerMasks.bits |= DAT_00571678;
+        state->markerMasks.bits &= ~g_btlDebugGlobals.enabled1;
+        state->markerMasks.bits &= ~g_btlDebugGlobals.enabled3;
+        state->markerMasks.bits &= ~g_btlDebugGlobals.enabled4;
+        state->markerMasks.bits &= ~g_btlDebugGlobals.secondaryMode;
     }
-    memcpy(state->markerMasks.words, &flags, sizeof(flags));
 }
-} // extern "C"
+} /* extern "C" */

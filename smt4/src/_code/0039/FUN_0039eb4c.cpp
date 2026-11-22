@@ -1,6 +1,10 @@
-/* NON_MATCHING: navi map marker placement; float scheduling and the hoisted constants (s19/s22 pairs, vpush d8-d11) differ from retail */
+/* NON_MATCHING: navi map marker placement (147 lines). NaviMain_GetPosX is passed the player handle, as
+ * FUN_0039c09c and naviApplyCategorySelection pass theirs. Remaining: the float registers of the world position, map
+ * position and cursor (retail s16/s17, s22/s18, s20-s21), and the marker block's schedule (retail loads the offset and
+ * size with four vldr, the origin with one vldmia, and stores width and height with two vstr). */
 #include "gamedata/MapSaveBlock.h"
 #include "game/GameState.h"
+#include "code/Code0023_Smt4.h"
 
 struct NaviVec2 {
     f32 x;
@@ -39,7 +43,6 @@ struct NaviMapWork {
 
 extern "C" {
 
-s32 NaviMain_GetPosX(void);
 f32 *lmapSceneGetObj(void *handle);
 NaviVec2 *NaviMain_GetCursorPos(void *handle);
 void pairCopy(void *source, NaviVec2 *destination);
@@ -51,12 +54,11 @@ s32 gameFlagIsSet(s32 flag);
 void FUN_0039eb4c(NaviMapWork *work)
 {
     gameGetMapBlock();
-    u16 *handle = &work->player;
-    s32 area = NaviMain_GetPosX();
-    f32 *player = lmapSceneGetObj(handle);
+    s32 area = NaviMain_GetPosX(&work->player);
+    f32 *player = lmapSceneGetObj(&work->player);
     f32 worldX = player[0];
     f32 worldZ = player[2];
-    NaviVec2 cursor = *NaviMain_GetCursorPos(handle);
+    NaviVec2 cursor = *NaviMain_GetCursorPos(&work->player);
     f32 mapX = 0.0f;
     f32 mapY = 0.0f;
     NaviVec2 origin;

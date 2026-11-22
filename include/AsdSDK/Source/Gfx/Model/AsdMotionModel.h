@@ -7,6 +7,7 @@
 #include <stddef.h>
 #include "shard/S3AsdModelAttr.h"
 #include "gfx/SkeletonInstanceBuffers.h"
+#include "nw/ut/RuntimeTypeInfo.h"
 
 struct AsdMotionInstance;
 struct AsdMotionPool;
@@ -14,11 +15,6 @@ struct AsdTrackNode;
 struct ModelBoneResource;
 struct ModelBoneMatrixProvider;
 struct ModelBoneAnimationTarget;
-
-/* Runtime type record: the chain of base types ends in NULL. */
-typedef struct AsdTypeInfo {
-    /* 0x00 */ const struct AsdTypeInfo *base;
-} AsdTypeInfo;
 
 typedef struct AsdMotionPoolVtbl {
     /* 0x00 */ void *unk00[3];
@@ -60,7 +56,7 @@ typedef struct AsdMotionInstance {
 
 typedef struct AsdTrackNodeVtbl {
     /* 0x00 */ void *unk00[2];
-    /* 0x08 */ const AsdTypeInfo *(*getType)(struct AsdTrackNode *node);
+    /* 0x08 */ const nw::ut::RuntimeTypeInfo *(*getType)(struct AsdTrackNode *node);
 } AsdTrackNodeVtbl;
 
 /* The target of a motion hand-over: it holds the pointer to the instance it plays. */
@@ -84,6 +80,9 @@ typedef struct AsdTrackNode {
     /* 0x34 */ AsdTrackChannel *channelB;
     /* 0x38 */ u8 unk38[9];
     /* 0x41 */ u8 handedOver;
+
+    /* The node's runtime type tag (vtable slot 2), for nw::ut::DynamicCast. */
+    const nw::ut::RuntimeTypeInfo *getRuntimeTypeInfo() { return vtbl->getType(this); }
 } AsdTrackNode;
 struct AsdTrackBlendNode : AsdTrackNode {
     /* 0x44 */ u8 unk44[4];

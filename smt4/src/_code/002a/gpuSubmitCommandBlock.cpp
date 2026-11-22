@@ -6,7 +6,7 @@ extern u8 *g_commandBufferCursor;
 void nngxLockEnter(void);
 void nngxLockLeave(void);
 void asdGxCommandBufferTerminateAndSubmit(u32 committedOffset, u32 writeOffset);
-void FUN_002ba2b8(void);
+void gfxReplayRecordedCommands(void);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 byteCount);
 
 // Append copied GPU words or enqueue an external command block for submission.
@@ -32,7 +32,7 @@ void gpuSubmitCommandBlock(const void *commands, u32 byteCount, s32 copyCommands
             if (g_asdGfxContext.activeBuffer == list &&
                 g_asdGfxContext.submitEnabled && !g_asdGfxContext.submitPending) {
                 g_asdGfxContext.submitPending = 1;
-                FUN_002ba2b8();
+                gfxReplayRecordedCommands();
             }
             nngxLockLeave();
         }

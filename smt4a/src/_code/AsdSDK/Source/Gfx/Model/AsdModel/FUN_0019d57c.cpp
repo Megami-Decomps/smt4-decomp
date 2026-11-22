@@ -1,4 +1,4 @@
-/* NON_MATCHING: as in asdModelRebuildAttributeRecordsForKey, retail keeps the two arguments in the stack frame (push {r0, r1}) and reloads the file pointer for every container scan; the allocation and the scan order otherwise follow retail (about 240 diff lines). */
+/* NON_MATCHING: as in asdModelBuildAttributeRecordsForKey, retail keeps the two arguments in the stack frame (push {r0, r1}) and reloads the file pointer for every container scan; the allocation and the scan order otherwise follow retail (about 240 diff lines). */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/AsdMemCopy.h"
@@ -14,7 +14,7 @@ extern const char g_asdModelContainerAbchMagic[];  /* second container magic */
 extern const char DAT_0053d1a0[];  /* "EPLSIGN" */
 
 /* Rebuilds the model's attribute records from the file's containers: one record per id of every entry that has bit 0
- * of its flags set (the key-less sibling of asdModelRebuildAttributeRecordsForKey). */
+ * of its flags set (the key-less sibling of asdModelBuildAttributeRecordsForKey). */
 void FUN_0019d57c(AsdMdlNode *model, u8 *data)
 {
     AsdEplBlockHeader block;
