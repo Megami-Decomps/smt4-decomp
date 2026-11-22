@@ -8764,3 +8764,27 @@
 00415cd8 btlFilterXPolySetup evidence twin of smt4 btlFilterXPolySetup; its trace names FilterXPoly.cpp
 004097b4 renderCtxFillDisplay inferred twin of smt4 renderCtxFillDisplay
 001418fc asdCameraSetStereoDepth inferred twin of smt4 asdCameraSetStereoDepth
+0038136c colorRampBlendWithFade inferred twin of smt4 colorRampBlendWithFade
+00280070 asdCameraSetScreenPerspective inferred twin of smt4 asdCameraSetScreenPerspective
+00478ac4 aocLoadingTaskDraw evidence the Apocalypse aocLoadingTaskStart registers it as the "Aoc loading DOWN" draw task (w74-o2)
+0021a6c8 listAssignCentredRows inferred assigns list rows centred in their groups (w74-o3)
+0013ab18 bgmRequestChannelsUpdate inferred updates the music request channels (w74-o3)
+00156bfc cameraUpdateViewAndProjection inferred rebuilds a camera's look-at view and perspective projection (w74-o3)
+00187e08 moriCameraAnimLoad inferred loads a Mori model resource's camera animation (w74-o3)
+0028a538 uniteCollectInheritableSkills inferred collects the skills a fusion result can inherit (w74-o3)
+004c1114 btlRollAilment inferred rolls an ailment against the target's resistance (w74-o4)
+004bf348 btlAiRollActionChance inferred rolls the AI's chance to take an action (w74-o4)
+003c8b70 effectEditorUpdateOrbitCamera evidence its debug strings name the orbit controls (height, direction, radius) (w74-f1)
+004ee5b4 btlUnitStartAction inferred starts a battle unit's action: camera, voice and effect requests (w74-f1)
+00165b08 messageDrawDemonNoticeList inferred draws the queued demon notice rows of the message window (w74-f1)
+002d91cc lmapSceneScriptedWalkStep inferred steps a scripted walk of the local map scene (w74-f1)
+002bf520 campCecGetOwnRecord inferred returns the player's own StreetPass record from the overlay (w74-f2)
+002c049c campCecSettingUpdate inferred updates the StreetPass settings screen (w74-f2)
+00487d6c naviPanelDrawFrame inferred draws the navigation panel's upper frame (w74-f2)
+0048a5e4 naviPanelDrawMap inferred draws the navigation panel's map layer (w74-f2)
+002e2404 campCecSetSelection inferred sets the StreetPass overlay's selection (w74-f2)
+0035a074 cecRecordSetEquipment inferred stores the equipment profile into a StreetPass record (w74-f2; takes the record and a 14-byte CecProfile by value)
+002a4664 saveGetEquipment inferred reads the player's equipment profile from the save (w74-f2)
+002a6480 savedRecordSetDemonId inferred stores the demon id in the saved StreetPass record (w74-f2)
+002bf534 campCecCreate inferred creates the camp's StreetPass overlay (w74-f2; IV's campCecCreate plays the same role)
+002a28c0 campCecLoaderThread inferred the StreetPass receive screen's loader thread (w74-f2; IV's counterpart has this name)

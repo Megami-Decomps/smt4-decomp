@@ -8,7 +8,7 @@
 extern "C" {
 f32 FUN_0034f8b4(const u8 *, s32, s32);
 f32 screenEffectProjectWorldRadius(f32 radius);
-u32 FUN_0038136c(const u8 *, const ScreenEffectWeightTrack *, s32, s32);
+u32 colorRampBlendWithFade(const u8 *, const ScreenEffectWeightTrack *, s32, s32);
 void renderCtxSetPackedColor(u32 color);
 
 void radialScreenEffectUpdate(RadialScreenEffectJob *job)
@@ -46,7 +46,7 @@ void radialScreenEffectUpdate(RadialScreenEffectJob *job)
         output->maximum.x = output->center.x + radius;
         output->maximum.y = output->center.y + radius;
     }
-    u32 sampledColor = FUN_0038136c(resource->colorCurve, &resource->weight, frame, duration);
+    u32 sampledColor = colorRampBlendWithFade(resource->colorCurve, &resource->weight, frame, duration);
     renderCtxSetPackedColor(job->color);
     effectColorCopy(&g_vectorScratch.first.color, &g_vectorScratch.second.color);
     renderCtxSetPackedColor(sampledColor);

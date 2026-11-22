@@ -1,17 +1,10 @@
 /* NON_MATCHING: the projections (nn::math's inlined MTX44PerspectivePivotDeg) match retail; in the prologue armcc moves the aspect into s1 before storing the perspective (vstr s0, vstr s4, then the far/aspect pair) where retail stores both pairs from the incoming registers first, and pivot is copied to r5 later. */
 #include "common.h"
+#include "gfx/CameraPerspective.h"
 
 extern "C" {
 
 #define DEG_TO_RAD 0.017453292f
-
-/* A perspective projection: vertical field of view in degrees, clip planes and aspect ratio. */
-typedef struct CameraPerspective {
-    f32 fovy;
-    f32 nearZ;
-    f32 farZ;
-    f32 aspect;
-} CameraPerspective;
 
 /* A stereo-capable camera: only the fields this unit touches are named. */
 typedef struct StereoCameraView {

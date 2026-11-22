@@ -1,4 +1,4 @@
-/* NON_MATCHING: channel interpolation is parallelized across VFP registers instead of retail's sequential packed-channel evaluation. */
+/* NON_MATCHING: retail converts and merges the four channels one after another; armcc unrolls the channel loop and interleaves the conversions across VFP registers. */
 #include "common.h"
 
 struct PairedColorFadeState {
@@ -13,14 +13,10 @@ struct PairedColorFadeState {
 
 static inline u32 interpolateMaskedColor(u32 from, u32 to, f32 weight)
 {
-    u32 alpha = (u32)((f32)((to & 0xff000000) - (from & 0xff000000)) * weight);
-    u32 blue = (u32)((f32)((to & 0x00ff0000) - (from & 0x00ff0000)) * weight);
-    u32 green = (u32)((f32)((to & 0x0000ff00) - (from & 0x0000ff00)) * weight);
-    u32 red = (u32)((f32)((to & 0x000000ff) - (from & 0x000000ff)) * weight);
-    return ((red + (from & 0x000000ff)) & 0x000000ff) |
-           ((green + (from & 0x0000ff00)) & 0x0000ff00) |
-           ((blue + (from & 0x00ff0000)) & 0x00ff0000) |
-           ((alpha + (from & 0xff000000)) & 0xff000000);
+    u32 color = 0;
+    for (u32 mask = 0xff000000; mask != 0; mask >>= 8)
+        color |= ((u32)((f32)((to & mask) - (from & mask)) * weight) + (from & mask)) & mask;
+    return color;
 }
 
 /* Advance either direction of the selected packed-color fade. */

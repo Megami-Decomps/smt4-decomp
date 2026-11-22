@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail counts the used slots with a two-iteration loop over interleaved halfword pairs and lays the per-count returns out differently; the id selection is the same. */
+/* NON_MATCHING: retail counts the six requirement slots (requirements[5] at 0x194 included) in a loop unrolled by two with
+ * two counters, where armcc unrolls this loop fully; the flag tests and the per-count returns are laid out differently. */
 #include "common.h"
 #include "quest_center/QuestRecord.h"
 #include "quest_center/QuestRuntime.h"
@@ -7,7 +8,7 @@
 extern "C" {
 
 /* The message id describing quest record `id`: by its kind, the id of its first slot and how many
- * of its four slots are used. Returns -1 when there is none. */
+ * of its six requirement slots are used. Returns -1 when there is none. */
 s32 FUN_003336dc(u32 id, u8 mask)
 {
     const QuestRuntimeStatus *entry = questGetRuntimeStatus(id);
@@ -23,12 +24,10 @@ s32 FUN_003336dc(u32 id, u8 mask)
         return -1;
     }
     u16 first = record->requirements[0].id;
-    s32 used = first != 0;
+    s32 used = 0;
 
-    for (s32 i = 1; i < 4; i++) {
-        if (record->requirements[i].id != 0) {
-            used++;
-        }
+    for (s32 i = 0; i < 6; i++) {
+        used += record->requirements[i].id != 0;
     }
     u8 kind = record->kind;
 

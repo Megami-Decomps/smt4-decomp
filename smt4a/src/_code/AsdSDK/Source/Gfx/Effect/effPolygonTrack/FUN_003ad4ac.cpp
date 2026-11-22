@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_003380a0(...);
-int FUN_0038136c(...);
+int colorRampBlendWithFade(...);
 int modelSetTransformFromParts(...);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(...);
@@ -35,7 +35,7 @@ extern float DAT_006472f8; /* 0x6472f8 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_003380a0. */
-/* Supplied declaration required: FUN_0038136c. */
+/* Supplied declaration required: colorRampBlendWithFade. */
 /* Supplied declaration required: modelSetTransformFromParts. */
 
 
@@ -74,7 +74,7 @@ void FUN_003ad4ac(int param_1)
   }
   puVar6 = (unsigned int *)**(unsigned int **)(param_1 + 0x3c);
   temp_v3 = temp_v4;
-  FUN_0038136c(temp_v4,temp_v4 + 0x24);
+  colorRampBlendWithFade(temp_v4,temp_v4 + 0x24);
   temp_v19 = 0.003921569f;
   temp_v18 = 255.0f;
   temp_v1 = *(unsigned int *)(param_1 + 0x30);
@@ -106,7 +106,7 @@ void FUN_003ad4ac(int param_1)
     do {
       if (*puVar6 < temp_v6) {
         temp_v2 = temp_v4 + 0x3c;
-        FUN_0038136c(temp_v2,temp_v4 + 0x60,*puVar6,temp_v6);
+        colorRampBlendWithFade(temp_v2,temp_v4 + 0x60,*puVar6,temp_v6);
         DAT_006472f8 = (float)VectorUnsignedToFloat(temp_v2 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
         DAT_006472ec = (float)VectorUnsignedToFloat(temp_v2 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
         DAT_006472f0 = (float)VectorUnsignedToFloat

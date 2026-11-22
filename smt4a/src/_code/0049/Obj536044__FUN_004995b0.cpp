@@ -1,7 +1,12 @@
 /* NON_MATCHING: 16 lines, the same rows and pool as retail; two of the seven state changes differ by a
  * register pair: where a page menu's choice opens its category and where the top menu is left, retail
  * loads the current state into r0 and the new one into r1, this build the other way round (the other
- * five sites agree with retail). */
+ * five sites agree with retail). Wave 74: writing changeState's three stores in place at the two sites, the
+ * if/else shapes around the choice and a signed choice all leave the pair as it is; only a named copy of
+ * the current state taken before the stores (`s32 current = state;`) gives retail's pair: with it at both
+ * sites the function is IDENTICAL, but such a copy is a steering temporary unless something else shows it
+ * (with the copy inside changeState itself the direct calls take retail's pair and the calls nested in
+ * openCategory do not, which fits the leave site but not the sale notice's, so that is not it either). */
 #include "classes/Obj536044.h"
 #include "shop/ShopMenuText.h"
 #include "shop/ShopItemDescription.h"

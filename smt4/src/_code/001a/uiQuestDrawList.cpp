@@ -20,12 +20,12 @@
 #include "code/Code0029_VariantB.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTableEntry.h"
+#include "code/Code001a_Smt4.h"
 
 extern "C" {
 
 u32 resourceRunOperationIfUnblocked(const GridNavigation *grid);
 /* Draws a quest row's plate and returns the colour its name takes. */
-u32 FUN_001af84c(s32 quest, u32 x, u32 y, u32 flags, s32 full);
 void drawSkillCategoryLabel(u16 skill, s32 x, s32 y, u32 style);
 u32 questIsCompleted(int index);
 u8 ifTouchGetSelectionModeForRegion(int id);

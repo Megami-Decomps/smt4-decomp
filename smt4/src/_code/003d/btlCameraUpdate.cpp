@@ -35,7 +35,7 @@ void battleVectorTransitionUpdatePath(BtlCamera *camera);
 void battleCameraBlendTargetOffset(BtlCamera *camera);
 void asdCameraSetLookAtRoll(void *owner, AsdCamera *view, const BtlCameraVector3 *eye, const BtlCameraVector3 *target,
                   const BtlCameraVector3 *up, const BtlCameraVector3 *rotation);
-void FUN_001db388(AsdCamera *view, s32 lowerScreen, f32 fieldOfView, f32 nearClip, f32 farClip);
+void asdCameraSetScreenPerspective(AsdCamera *view, s32 lowerScreen, f32 fieldOfView, f32 nearClip, f32 farClip);
 void effectSetPrimaryPosition(const BtlCameraVector3 *position);
 void effectSetSecondaryPosition(const BtlCameraVector3 *position);
 void effectSetProcessScalar(f32 value);
@@ -391,7 +391,7 @@ s32 btlCameraUpdate(BtlCamera *camera)
         rotation.z = camera->roll + camera->altRoll;
         asdCameraSetLookAtRoll(camera, btlCameraView(camera), &eye, &target, &up, &rotation);
         f32 fov = camera->fov + camera->altFovShift + camera->fovShift;
-        FUN_001db388(btlCameraView(camera), 0, fov, 0.1f, 25600.0f);
+        asdCameraSetScreenPerspective(btlCameraView(camera), 0, fov, 0.1f, 25600.0f);
         effectSetPrimaryPosition(&eye);
         effectSetSecondaryPosition(&target);
         effectSetProcessScalar(fov);

@@ -20,8 +20,9 @@ struct PartySelection {
     s32 active;
 };
 
-/* Compare the identities selected by reserve and active-party bit masks. */
-u32 FUN_004ab594(void)
+/* Compare the identities selected by reserve and active-party bit masks. Its one caller (btlUnitStartAction) passes the
+ * UI block in r0; the body reads it from g_btlUi itself. */
+u32 FUN_004ab594(BtlUiA *)
 {
     BtlUiA *ui = g_btlUi.ui;
     if (FUN_002cc9e0(&ui->objC, 1) != 10)

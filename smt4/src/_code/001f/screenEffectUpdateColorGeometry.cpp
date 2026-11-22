@@ -33,7 +33,7 @@ static __inline void screenEffectSetPoint(Point2 *point, f32 x, f32 y)
 extern "C" {
 void renderCtxSetPackedColor(u32 color);
 f32 FUN_00269508(const u8 *curve, s32 frame, s32 duration);
-u32 FUN_00269694(const u8 *curve, const ScreenEffectWeightTrack *weight,
+u32 colorRampBlendWithFade(const u8 *curve, const ScreenEffectWeightTrack *weight,
                  s32 frame, s32 duration);
 
 // Sample the lifetime curves, modulate the job color and update the screen quad.
@@ -60,7 +60,7 @@ void screenEffectUpdateColorGeometry(ScreenEffectJob *job)
         return;
     }
 
-    u32 curveColor = FUN_00269694(resource->colorCurve, &resource->weight,
+    u32 curveColor = colorRampBlendWithFade(resource->colorCurve, &resource->weight,
                                  frame, duration);
     renderCtxSetPackedColor(job->color);
     effectColorAssign(&g_vectorScratch.second.color, &g_vectorScratch.first.color);

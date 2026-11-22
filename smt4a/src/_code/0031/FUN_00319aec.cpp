@@ -10,8 +10,8 @@ void FUN_00319aec(u8 value)
     OverlayObj *overlay = g_campCec.instance;
 
     if (overlay != NULL) {
-        overlay->unk1A4 = value;
-        overlay->unk1A0 = 1;
+        overlay->slideReversed = value;
+        overlay->slidePhase = 1;
     }
 }
 

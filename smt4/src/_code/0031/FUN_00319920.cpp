@@ -6,7 +6,7 @@ void FUN_00246afc(RenderSubmissionPacket *, const f32 *, const f32 *, const f32 
 void FUN_00246bd4(void);
 void asdSetNormalizedColorRgba(u32);
 void renderSubmissionDrawPacket(RenderSubmissionPacket *, u32);
-u32 FUN_00269694(RenderSubmissionOwner *, const u32 *, u32, u32);
+u32 colorRampBlendWithFade(RenderSubmissionOwner *, const u32 *, u32, u32);
 u32 FUN_00246c28(void);
 
 // Submit the current transform with its owner-modulated color and depth mode.
@@ -16,7 +16,7 @@ void FUN_00319920(RenderSubmission *submission)
     RenderSubmissionPacket *packet = submission->resource->packet;
     if (submission->frame > owner->frame && owner->frame != 0)
         return;
-    u32 ownerColor = FUN_00269694(owner, &owner->color, submission->frame, owner->frame);
+    u32 ownerColor = colorRampBlendWithFade(owner, &owner->color, submission->frame, owner->frame);
     asdSetNormalizedColorRgba(submission->color);
     effectColorCopy(&g_vectorScratch.first.color, &g_vectorScratch.second.color);
     asdSetNormalizedColorRgba(ownerColor);

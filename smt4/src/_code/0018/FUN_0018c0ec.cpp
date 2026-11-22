@@ -42,7 +42,7 @@ int statusDownEnterState4(void);
 int statusDownEnterRefreshState(void);
 
 int scrRunOpcodesStub(...);
-int FUN_00204358(...);
+int resultStatAllocationStep(...);
 int textEncodeFontSlot(...);
 int btlTalkBustUpCreate(void);
 int statusBustUpPortraitRelease(...);
@@ -144,7 +144,7 @@ extern int g_result; /* 0x44dc20 */
 /* Supplied declaration required: statusReplaceSkillList. */
 /* Supplied declaration required: FUN_001cea8c. */
 /* Supplied declaration required: mapDepartAdvanceState. */
-/* Supplied declaration required: FUN_00204358. */
+/* Supplied declaration required: resultStatAllocationStep. */
 /* Supplied declaration required: FUN_00216e64. */
 /* Supplied declaration required: buttonHelpSetTextVisible. */
 /* Supplied declaration required: devilCreateRaceEffect. */
@@ -1041,7 +1041,7 @@ LAB_0018d058:
     }
     break;
   case 10:
-    FUN_00204358(temp_v2);
+    resultStatAllocationStep(temp_v2);
     break;
   case 0xb:
     temp_v8 = temp_v2 + *(int *)(temp_v2 + 0xcf78) * 0x620;

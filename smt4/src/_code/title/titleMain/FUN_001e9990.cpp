@@ -11,7 +11,7 @@
 
 extern "C" {
 
-int FUN_0026faa4(void);
+int encounterFlagsRollSlots(void);
 void modelRemoveFromSlotList(...);
 int sndObjectForwardField8(...);
 
@@ -106,7 +106,7 @@ extern unsigned int asdCameraLoadFromFile(unsigned char *);
 /* Supplied declaration required: aocActivateFileGroupFlags. */
 extern int buttonHelpHasEnabledEntryForId(unsigned int);
 /* Supplied declaration required: playerInitNewGame. */
-/* Supplied declaration required: FUN_0026faa4. */
+/* Supplied declaration required: encounterFlagsRollSlots. */
 /* Supplied declaration required: mapRestoreSavedSelection. */
 /* Supplied declaration required: FUN_0026ff54. */
 /* Supplied declaration required: frameTexCampSetMode. */
@@ -623,7 +623,7 @@ LAB_001ea4cc:
         }
         else {
           mapRestoreSavedSelection();
-          FUN_0026faa4();
+          encounterFlagsRollSlots();
           if (g_mapSelection.selection.group >= 200) {
             temp_v10 = (unsigned int *)(g_mapSelection.selection.group - 200);
             temp_v6 = 4;

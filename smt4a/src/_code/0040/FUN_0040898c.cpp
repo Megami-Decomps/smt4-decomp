@@ -1,14 +1,9 @@
-/* NON_MATCHING: register allocation of the gauge fields (retail loads time/duration with one vldmia and shares the fill loops' tail) and the loop code shape differ; the logic is the same. */
+/* NON_MATCHING: 84 lines, VFP and scratch register choices only: retail loads time and duration with one vldmia
+ * into s0/s1 (ours: two vldr into s1/s0) and the settled step's skip is bcs where ours is bge. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {
-/* A view of a float whose ordering the engine tests through its (signed) bit pattern. */
-union OrderedFloat {
-    f32 value;
-    s32 bits;
-};
-
 /* The segmented gauge's work block. */
 struct GaugeWork {
     /* 0x00 */ u8 unk00[0x98];
@@ -36,16 +31,13 @@ extern "C" {
    the lit segments. */
 void FUN_0040898c(GaugeWork *gauge)
 {
-    OrderedFloat ordered;
-    ordered.value = gauge->scroll + 1.0f;
-    gauge->scroll = ordered.value;
-    if (ordered.bits >= 0x41f00000) {
-        gauge->scroll = ordered.value - 30.0f;
+    gauge->scroll += 1.0f;
+    if (gauge->scroll >= 30.0f) {
+        gauge->scroll -= 30.0f;
     }
-    ordered.value = gauge->angle + 12.0f;
-    gauge->angle = ordered.value;
-    if (ordered.bits > 0x43b40000) {
-        gauge->angle = ordered.value - 360.0f;
+    gauge->angle += 12.0f;
+    if (gauge->angle > 360.0f) {
+        gauge->angle -= 360.0f;
     }
     if (gauge->settled != 0) {
         if (gauge->time < gauge->duration) {
@@ -72,7 +64,12 @@ void FUN_0040898c(GaugeWork *gauge)
         return;
     }
     gauge->position = gauge->target / gauge->duration + gauge->position;
-    if (gauge->litCount != 0) {
+    if (gauge->litCount == 0) {
+        if (!(gauge->target - gauge->position > gauge->span)) {
+            gauge->litCount = 1;
+            gauge->step = 1.0f / ((gauge->duration - gauge->time) * 0.125f);
+        }
+    } else {
         TextureTableEntryIV *source = asdTMTexTableEntryAt(12, 55);
         if (gauge->litCount < 8) {
             f32 remaining = gauge->target - gauge->position;
@@ -87,28 +84,21 @@ void FUN_0040898c(GaugeWork *gauge)
                 } while (!(reach < remaining));
             }
         }
-    } else if (!(gauge->target - gauge->position > gauge->span)) {
-        gauge->litCount = 1;
-        gauge->step = 1.0f / ((gauge->duration - gauge->time) * 0.125f);
     }
     s32 count = gauge->litCount;
     if (gauge->forward != 0) {
         for (s32 i = 0; i < count; i++) {
-            OrderedFloat level;
-            level.value = gauge->fill[i] + gauge->step;
-            if (level.bits > 0x3f800000) {
-                level.value = 1.0f;
+            gauge->fill[i] += gauge->step;
+            if (gauge->fill[i] > 1.0f) {
+                gauge->fill[i] = 1.0f;
             }
-            gauge->fill[i] = level.value;
         }
     } else {
         for (s32 i = 0; i < count; i++) {
-            OrderedFloat level;
-            level.value = gauge->fill[7 - i] + gauge->step;
-            if (level.bits > 0x3f800000) {
-                level.value = 1.0f;
+            gauge->fill[7 - i] += gauge->step;
+            if (gauge->fill[7 - i] > 1.0f) {
+                gauge->fill[7 - i] = 1.0f;
             }
-            gauge->fill[7 - i] = level.value;
         }
     }
 }

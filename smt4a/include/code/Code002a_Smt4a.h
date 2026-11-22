@@ -8,6 +8,9 @@ extern "C" {
 
 u8 FUN_002a6464(void);
 
+/* Stores the demon id in the saved StreetPass record. */
+void savedRecordSetDemonId(s16 value);
+
 u32 compendiumEntryIsRegistered(u32 index);
 
 s32 resourceRunEmbeddedOperationIfUnblocked(Object *object);

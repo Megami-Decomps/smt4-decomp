@@ -4,7 +4,6 @@
 
 extern "C" {
 extern BtlHelpGlobalsA g_btlHelp;
-u32 FUN_00200a68(s32, s32, u32, u32, s32, u32, u32, s32);
 
 // Submit the immediate help request only when neither blocking mask is active.
 u32 FUN_004c8e30(u32 request, s32 last, u32 argument)
@@ -14,6 +13,6 @@ u32 FUN_004c8e30(u32 request, s32 last, u32 argument)
         (state->stateFlags64.bits & g_btlHelp.blockedTransitions))
         return 0;
     u32 context = state->helpMessages.context;
-    return FUN_00200a68(0, 0, request, context, 0, argument, ~0u, last);
+    return (u32)FUN_00200a68(0, 0, request, context, NULL, argument, ~0u, last);
 }
 }

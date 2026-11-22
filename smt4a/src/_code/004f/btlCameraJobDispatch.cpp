@@ -16,7 +16,7 @@ extern "C" {
 int CONCAT44(...);
 int cameraMatrixCacheSetLookAt(...);
 int mathSinCos(...);
-int FUN_00280070(...);
+int asdCameraSetScreenPerspective(...);
 int effectSetValueVec(...);
 int effectProcessSetVector(...);
 int effectProcessSetValue(void);
@@ -133,7 +133,7 @@ extern unsigned int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: eventCommandGetPendingCleanup. */
 extern float *FUN_00208bfc(void);
 extern int rangeIsValid(float *);
-/* Supplied declaration required: FUN_00280070. */
+/* Supplied declaration required: asdCameraSetScreenPerspective. */
 extern int effectProcessIsActive(void);
 /* Supplied declaration required: effectSetValueVec. */
 /* Supplied declaration required: effectProcessSetVector. */
@@ -637,7 +637,7 @@ LAB_004f33d8:
     FUN_004f112c(param_1,param_1 + 0x1b,&temp_v14,&temp_v17);
     temp_v9 = romwright_piece_4_4(temp_v12,temp_v11);
     temp_v6 = CONCAT44(temp_v0,param_1[0x170] + param_1[0x206] + param_1[0x1c5] + param_1[3]);
-    FUN_00280070(param_1 + 0x1b,0);
+    asdCameraSetScreenPerspective(param_1 + 0x1b,0);
     temp_v3 = effectProcessIsActive();
     if (temp_v3 != 0) {
       effectSetValueVec(&temp_v14);
@@ -708,7 +708,7 @@ LAB_004f33d8:
     temp_v16 = param_1[0x19c];
     fStack_10c = param_1[0x19d];
     cameraMatrixCacheSetLookAt(param_1 + 0x1b,&temp_v13,&temp_v15,temp_v44);
-    FUN_00280070(param_1 + 0x1b,0);
+    asdCameraSetScreenPerspective(param_1 + 0x1b,0);
     words5Clear(param_1 + 0x11);
     words5Clear(param_1 + 0x16);
     eventCommandGetPendingCleanup();

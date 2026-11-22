@@ -1,16 +1,10 @@
-/* NON_MATCHING: recovered quad projection and render-state operations use different VFP and call register scheduling. */
+/* NON_MATCHING: the render-state pushes and pops are the context's stacks (B the blend mode, A the pass flags) and
+ * the colour is filled element-wise as retail does; the vertex copy and projection loops and their VFP registers differ. */
 #include "classes/Obj42094c.h"
 #include "classes/FilterDraw.h"
+#include "camp/RenderCtxA.h"
 
-struct Obj42094cDrawContext {
-    u8 unk00[0x1258];
-    FilterDrawState projection;
-    u8 unkBetween[0x40];
-    FilterDrawState blend;
-};
 extern "C" {
-extern Obj42094cDrawContext *g_renderCtx;
-void renderCtxSelectTexture(void *context, u32 texture);
 u32 renderCtxPackPassFlags(u32 mode, u32 value);
 void FUN_00409e78(void *filter, f32 *matrix, const void *motion);
 void FUN_0032c808();
@@ -21,10 +15,14 @@ void FUN_002371b0();
 void Obj42094c::draw()
 {
     Filter4PolyView *filter = (Filter4PolyView *)this;
-    renderCtxSelectTexture(g_renderCtx, ((FilterDrawTexture *)filter->texture)->handle);
-    g_renderCtx->blend.push(filter->config->blendMode);
-    g_renderCtx->projection.push(renderCtxPackPassFlags(1, 0));
-    f32 color[4] = {1, 1, 1, ((FilterDrawChild *)filter->child)->alpha};
+    renderCtxSelectTexture(g_renderCtx, (AsdTexture *)((FilterDrawTexture *)filter->texture)->handle);
+    renderStackPush(g_renderCtx->stacks + RENDER_STACK_B, filter->config->blendMode);
+    renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
+    f32 color[4];
+    color[0] = 1.0f;
+    color[1] = 1.0f;
+    color[2] = 1.0f;
+    color[3] = ((FilterDrawChild *)filter->child)->alpha;
     f32 vertices[4][3];
     for (u32 vertex = 0; vertex < 4; ++vertex) {
         vertices[vertex][0] = filter->vertices[vertex].position[0];
@@ -51,6 +49,6 @@ void Obj42094c::draw()
         }
         FUN_002371b0();
     }
-    g_renderCtx->projection.pop();
-    g_renderCtx->blend.pop();
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
+    renderStackPop(g_renderCtx->stacks + RENDER_STACK_B);
 }

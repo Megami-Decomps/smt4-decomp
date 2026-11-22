@@ -1,4 +1,6 @@
-/* NON_MATCHING: readable rewrite from retail disassembly compiles (211 vs ~208 rows); the 15-column glyph table DAT_00532b5c is referenced as an external array, retail inlines the type/advance sequence at two places and pushes r3 differently */
+/* NON_MATCHING: 201 lines. tabsActive is s8 (retail's split base screen+0x200). Retail tests the tab-typed path
+ * through a flag it sets to 1 and ORs with the character (mov r0, #1; orrs) instead of branching straight on, keeps
+ * the blank-cell code in r9 and pushes sl instead of r3; the glyph table DAT_00532b5c is still an extern array. */
 #include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
@@ -27,7 +29,7 @@ struct NameEntryScreen {
     u8 gridCursor[0x64];        // 0x198: flagged entry of the grid cursor (value A = row, B = column)
     u8 pageCursor[4];           // 0x1fc: flagged entry of the page tabs
     u8 unk200[0x260 - 0x200];
-    u8 tabsActive;              // 0x260
+    s8 tabsActive;              // 0x260
     u8 unk261[0x26c - 0x261];
     u32 process;                // 0x26c: script process
     u8 unk270[0x294 - 0x270];

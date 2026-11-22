@@ -1,12 +1,9 @@
-/* NON_MATCHING: retail walks the offset tables with the three arguments saved in r4-r6, rebuilds the self-relative pointers inline per step and keeps the UV transform in s-registers across the walk; this build recomputes them in a different order (about 250 diff lines). */
+/* NON_MATCHING: the self-relative tables are nw::ut::RelativePointer (retail's add/move-NULL pairs); retail keeps the
+ * request index and the third argument on the stack, a zero register for NULL and the UV transform in s-registers,
+ * so the walk's registers and the NULL tests' layout differ. */
 #include "common.h"
+#include "shard/S1NwGfx.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
-
-/* Resolves a self-relative offset field of the model resource format (0 = absent). */
-static __inline void *resolveOffset(const s32 *field)
-{
-    return *field != 0 ? (u8 *)field + *field : NULL;
-}
 
 /* Layout of the texture-coordinate data of a model resource as this function walks it. */
 struct ResUvDescriptor {
@@ -20,23 +17,23 @@ struct ResUvBlock {
     /* 0x00 */ u32 flags; /* 0x40000000: carries texture coordinates */
     /* 0x04 */ u8 unk04[0x10];
     /* 0x14 */ u32 dataSize;
-    /* 0x18 */ s32 dataOffset;
+    /* 0x18 */ RelativePointer data;
     /* 0x1C */ u8 unk1C[8];
     /* 0x24 */ u32 stride;
     /* 0x28 */ u32 descriptorCount;
-    /* 0x2C */ s32 descriptorOffset;
+    /* 0x2C */ RelativePointer descriptors; /* to the descriptors' RelativePointer table */
 };
 
 struct ResMaterial {
     /* 0x00 */ u32 flags; /* 0x10000001: a material that has blocks */
     /* 0x04 */ u8 unk04[0x34];
     /* 0x38 */ u32 blockCount;
-    /* 0x3C */ s32 blockOffset;
+    /* 0x3C */ RelativePointer blocks; /* to the blocks' RelativePointer table */
 };
 
 struct ResMapperSlots {
     /* 0x000 */ u8 unk000[0x274];
-    /* 0x274 */ s32 mappers[14]; /* offsets to the texture mappers */
+    /* 0x274 */ RelativePointer mappers[14]; /* the texture mappers */
     /* 0x2AC */ u8 unk2AC[4];
     /* 0x2B0 */ u32 textureBound;
 };
@@ -55,7 +52,7 @@ struct ResModelBody {
 
 struct ResMaterialTable {
     /* 0x00 */ u8 unk00[0xC8];
-    /* 0xC8 */ s32 tableOffset;
+    /* 0xC8 */ RelativePointer table; /* to the materials' RelativePointer table */
 };
 
 struct ResModel {
@@ -107,8 +104,8 @@ void FUN_0032360c(ResModelOwner *owner, TextureSource *source, UvTextureRequests
     for (s32 i = 0; i < requests->uvCount; i++) {
         UvRequest *request = &requests->uv[i];
         ResModelBody *body = owner->model->body;
-        s32 *materialTable = (s32 *)resolveOffset(&body->materials->tableOffset);
-        ResMaterial *material = (ResMaterial *)resolveOffset(&materialTable[request->material]);
+        RelativePointer *materialTable = (RelativePointer *)body->materials->table.get();
+        ResMaterial *material = (ResMaterial *)materialTable[request->material].get();
         if (material != NULL && (~material->flags & 0x10000001) != 0) {
             material = NULL;
         }
@@ -116,18 +113,18 @@ void FUN_0032360c(ResModelOwner *owner, TextureSource *source, UvTextureRequests
             continue;
         }
         for (s32 b = 0; b < (s32)material->blockCount; b++) {
-            s32 *blocks = (s32 *)resolveOffset(&material->blockOffset);
-            ResUvBlock *block = (ResUvBlock *)resolveOffset(&blocks[b]);
+            RelativePointer *blocks = (RelativePointer *)material->blocks.get();
+            ResUvBlock *block = (ResUvBlock *)blocks[b].get();
             if (block != NULL && (block->flags & 0x40000000) == 0) {
                 block = NULL;
             }
             if (block == NULL) {
                 continue;
             }
-            u8 *data = (u8 *)resolveOffset(&block->dataOffset);
+            u8 *data = (u8 *)block->data.get();
             for (u32 d = 0; d < block->descriptorCount; d++) {
-                s32 *descriptors = (s32 *)resolveOffset(&block->descriptorOffset);
-                ResUvDescriptor *descriptor = (ResUvDescriptor *)resolveOffset(&descriptors[d]);
+                RelativePointer *descriptors = (RelativePointer *)block->descriptors.get();
+                ResUvDescriptor *descriptor = (ResUvDescriptor *)descriptors[d].get();
                 if (descriptor->key == request->key + 4) {
                     if (descriptor->dataOffset >= 0) {
                         for (f32 *uv = (f32 *)(data + descriptor->dataOffset); uv < (f32 *)(data + block->dataSize);
@@ -137,7 +134,7 @@ void FUN_0032360c(ResModelOwner *owner, TextureSource *source, UvTextureRequests
                             uv[0] += transform.offsetU;
                             uv[1] += transform.offsetV;
                         }
-                        nn_gxlow_CTR_FlushDataCacheForward((u32)(resolveOffset(&block->dataOffset)), block->dataSize);
+                        nn_gxlow_CTR_FlushDataCacheForward((u32)block->data.get(), block->dataSize);
                     }
                     break;
                 }
@@ -147,7 +144,7 @@ void FUN_0032360c(ResModelOwner *owner, TextureSource *source, UvTextureRequests
     for (s32 i = 0; i < requests->textureCount; i++) {
         TextureRequest *request = &requests->textures[i];
         ResMeshSlots *mesh = owner->model->body->meshes[request->mesh];
-        void *mapper = resolveOffset(&mesh->slots->mappers[request->slot]);
+        void *mapper = mesh->slots->mappers[request->slot].get();
         nw_gfx_res_ResTextureMapper_SetTexture(&mapper, source->texture);
         mesh->slots->textureBound = 0;
     }

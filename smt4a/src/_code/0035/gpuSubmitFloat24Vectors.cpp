@@ -1,4 +1,5 @@
-/* NON_MATCHING: float24 exponent extraction/table lookup and packing register scheduling differ from retail. */
+/* NON_MATCHING: the encoders' shifts and table loads now match retail's; retail loads the table base before the push,
+ * keeps the first value in ip and saves r5 as well, so the registers of every encoder differ. */
 #include "shard/W6_W6Match8_GpuDepth.h"
 
 extern "C" void gpuSubmitVectorCommand(const u32 *first, const u32 *second, const u32 *coordinates);

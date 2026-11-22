@@ -23,7 +23,7 @@ int FUN_00164490(int);
 int texDrawCompositeSprite(int, int);
 int vec2GetXInt(...);
 int vec2GetYInt(...);
-int FUN_00165b08(void);
+int messageDrawDemonNoticeList(void);
 int efctSetSpeed(void);
 float fontMeasureTextWidth(const char *, unsigned int, float);
 int renderCtxSelectTexture(...);
@@ -64,7 +64,7 @@ extern int jobGetWork(void);
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: vec2GetYInt. */
-/* Supplied declaration required: FUN_00165b08. */
+/* Supplied declaration required: messageDrawDemonNoticeList. */
 extern int ifTouchIsActive(void);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: messageWindowDrawSprites. */
@@ -130,7 +130,7 @@ char FUN_0014f3f4(void)
       FUN_00164490(1);
     }
     if (*(char *)(DAT_0057f590 + 0x90) != '\0') {
-      FUN_00165b08();
+      messageDrawDemonNoticeList();
     }
     if (*(char *)(DAT_0057f590 + 0x191) != '\0') {
       temp_v6 = DAT_0057f590 + 0x1820;

@@ -68,7 +68,7 @@ extern FrameModel *DAT_0056fcbc;
 void FUN_0017d158(ModelSlot *model);
 bool FUN_00158124(HandleRegistry *manager);
 void FUN_00157050(SlotOwner *owner, ModelAnimationSet *animations);
-void FUN_00156bfc(SceneBlock *scene, u8 *list);
+void cameraUpdateViewAndProjection(SceneBlock *scene, u8 *list);
 s32 FUN_00156bec(SceneBlock *scene);
 void FUN_00157c3c(ModelSlot *model, SceneBlock *scene);
 void FUN_00157be4(ModelSlot *model);
@@ -107,7 +107,7 @@ u32 FUN_00146048(void)
         SlotOwner *owner = manager->owner;
         SceneBlock *scene = manager->scene;
         FUN_00157050(owner, activeAnimations(manager));
-        FUN_00156bfc(scene, owner->list);
+        cameraUpdateViewAndProjection(scene, owner->list);
     }
     manager = g_handleRegistry;
     if (FUN_00158124(manager) && FUN_00156bec(manager->scene) != 0) {

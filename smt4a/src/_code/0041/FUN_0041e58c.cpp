@@ -1,4 +1,6 @@
-/* NON_MATCHING: the two-entry placeholder loop unrolls here but not in retail; per-entry copies otherwise follow retail (word-wise row and label copies). */
+/* NON_MATCHING: 193 lines: retail clears the pairs' two words with one stm of two zero registers (a 64-bit store;
+ * a __packed u64 in ScaledPair scores worse), keeps the slot byte read twice (ldrb, then ldrsb) and copies the row
+ * and label words through other registers. The pair resets go through one helper (five sites). */
 #include "ui/SdCardMenu.h"
 
 extern "C" {
@@ -6,6 +8,14 @@ static const MenuText kNoCardText = { "No SD card detected." };
 u32 dataTableGet(u32 table);
 MenuTableRow *dataTableGetEntries(void);
 void pair10Clear(MenuPair *pair);
+
+/* Clears a pair's two values and sets its scale. */
+static __inline void scaledPairReset(ScaledPair *pair, f32 scale)
+{
+    pair->first = 0;
+    pair->second = 0;
+    pair->scale = scale;
+}
 
 /* Resets the menu: the cleared positions, the table row for the current slot and the placeholder label. */
 void FUN_0041e58c(SdCardMenu *menu)
@@ -18,20 +28,14 @@ void FUN_0041e58c(SdCardMenu *menu)
         menu->enabled = 0;
         menu->pair.unk0C = 8;
     }
-    menu->secondCleared.first = 0;
-    menu->secondCleared.second = 0;
-    menu->secondCleared.scale = 0.0f;
-    menu->cleared.first = 0;
-    menu->cleared.second = 0;
-    menu->cleared.scale = 0.0f;
+    scaledPairReset(&menu->secondCleared, 0.0f);
+    scaledPairReset(&menu->cleared, 0.0f);
     s32 slot = menu->slot;
     dataTableGet(0x3D);
     MenuTableRow *row = dataTableGetEntries() + slot;
     s32 i = 0;
     do {
-        menu->entries[i].position.first = 0;
-        menu->entries[i].position.second = 0;
-        menu->entries[i].position.scale = 0.0f;
+        scaledPairReset(&menu->entries[i].position, 0.0f);
         for (s32 j = 0; j < 6; j++)
             menu->entries[i].row[j] = row->words[j];
         menu->entries[i].label = kNoCardText;
@@ -40,12 +44,8 @@ void FUN_0041e58c(SdCardMenu *menu)
     for (s32 j = 0; j < 6; j++)
         menu->row[j] = row->words[j];
     menu->label = kNoCardText;
-    menu->pair.value.first = 0;
-    menu->pair.value.second = 0;
-    menu->pair.value.scale = 1.0f;
-    menu->thirdCleared.first = 0;
-    menu->thirdCleared.second = 0;
-    menu->thirdCleared.scale = 0.0f;
+    scaledPairReset(&menu->pair.value, 1.0f);
+    scaledPairReset(&menu->thirdCleared, 0.0f);
     for (i = 0; i < menu->entryCount; i++) {
         bool scrolled = sdCardMenuEntryScrolled(menu, i);
         SdCardMenuEntry *entry = &menu->entries[i];

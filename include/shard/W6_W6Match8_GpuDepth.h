@@ -62,13 +62,11 @@ extern "C" u32 g_gpuFloat24ExponentTable[256];
 /* Float24 has a sign bit, seven exponent bits, and sixteen fraction bits. */
 static __forceinline u32 gpuEncodeFloat24(f32 value)
 {
-    GpuFloatEncoding encoding;
-    encoding.value = value;
-    if ((encoding.bits & 0x7FFFFFFF) == 0) {
-        return encoding.ieee.sign << 23;
+    u32 bits = *(u32 *)&value;
+    if ((bits & 0x7FFFFFFF) == 0) {
+        return (bits >> 31) << 23;
     }
-    return g_gpuFloat24ExponentTable[encoding.ieee.exponent] | (encoding.ieee.fraction >> 7)
-        | (encoding.ieee.sign << 23);
+    return g_gpuFloat24ExponentTable[(bits >> 23) & 0xFF] | ((bits & 0x7FFFFF) >> 7) | ((bits >> 31) << 23);
 }
 
 struct GpuFloat24Vectors {

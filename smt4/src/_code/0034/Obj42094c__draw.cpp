@@ -1,16 +1,10 @@
-/* NON_MATCHING: the colour array is filled element-wise like retail (no constant table); the recovered render-state pushes (stack address evaluated before the renderCtxPackPassFlags call in retail) and VFP/call register scheduling still differ. */
+/* NON_MATCHING: the render-state pushes and pops are the context's stacks (B the blend mode, A the pass flags) and
+ * the colour is filled element-wise as retail does; the vertex copy and projection loops and their VFP registers differ. */
 #include "classes/Obj42094c.h"
 #include "classes/FilterDraw.h"
+#include "camp/RenderCtxTitle.h"
 
-struct Obj42094cDrawContext {
-    u8 unk00[0x124c];
-    FilterDrawState projection;
-    u8 unkBetween[0x40];
-    FilterDrawState blend;
-};
 extern "C" {
-extern Obj42094cDrawContext *g_titleScene;
-void renderCtxSelectTexture(void *context, u32 texture);
 u32 renderCtxPackPassFlags(u32 mode, u32 value);
 void titleSceneMultiplyByCameraView(void *filter, f32 *matrix, const void *motion);
 void FUN_002b011c();
@@ -21,9 +15,9 @@ void forwardRecoveredCallback();
 void Obj42094c::draw()
 {
     Filter4PolyView *filter = (Filter4PolyView *)this;
-    renderCtxSelectTexture(g_titleScene, ((FilterDrawTexture *)filter->texture)->handle);
-    g_titleScene->blend.push(filter->config->blendMode);
-    g_titleScene->projection.push(renderCtxPackPassFlags(1, 0));
+    renderCtxSelectTexture(g_titleScene, (AsdTexture *)((FilterDrawTexture *)filter->texture)->handle);
+    renderStackPush(g_titleScene->stacks + RENDER_STACK_B, filter->config->blendMode);
+    renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
     f32 color[4];
     color[0] = 1.0f;
     color[1] = 1.0f;
@@ -55,6 +49,6 @@ void Obj42094c::draw()
         }
         forwardRecoveredCallback();
     }
-    g_titleScene->projection.pop();
-    g_titleScene->blend.pop();
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
+    renderStackPop(g_titleScene->stacks + RENDER_STACK_B);
 }

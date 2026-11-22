@@ -1,6 +1,6 @@
-/* NON_MATCHING: initial field-store ordering and list/return register lifetimes differ. */
 #include "battle/btlHelp.h"
 #include "AsdSDK/AsdDebug.h"
+#include <string.h>
 
 extern "C" {
 extern BtlHelpListA *g_btlHelp;
@@ -8,15 +8,15 @@ void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
 void __aeabi_memcpy4(void *, const void *, u32);
 
 /* Allocate and append a help entry, preserving a snapshot of its combatant. */
-BtlHelpEntryA *FUN_00200a68(u32 id, u16 message, u32 first, u32 second,
-    const void *combatant, u8 mode, u32 argument, u32 context)
+BtlHelpEntryA *FUN_00200a68(u16 id, s16 message, u32 first, u32 second,
+    const void *combatant, u32 mode, u32 argument, u32 context)
 {
     /* The shared entry's byte padding ends at 0x872; adding word-aligned
        fields inside that union would shift dialogIndex. Keep a local view. */
     struct HelpEntryView {
         u16 id;
         s16 kind;
-        u16 message;
+        s16 message;
         u16 unk006;
         u32 first;
         u32 second;
@@ -57,24 +57,10 @@ BtlHelpEntryA *FUN_00200a68(u32 id, u16 message, u32 first, u32 second,
     work->context = context;
     work->state = 0;
     work->dialogIndex = 1;
-    for (s32 i = 0; i < 16; ++i) {
-        work->values[i] = 0;
-    }
+    memset(work->values, 0, sizeof(work->values));
     work->next = NULL;
     work->prev = NULL;
-    BtlHelpEntryA *entry = (BtlHelpEntryA *)work;
-    BtlHelpListA *list = g_btlHelp;
-    if (list->head == NULL) {
-        list->head = entry;
-    }
-    if (list->tail == NULL) {
-        list->tail = entry;
-    } else {
-        list->tail->next = entry;
-        work->prev = list->tail;
-        list->tail = entry;
-    }
-    ++list->count;
-    return entry;
+    btlHelpListAppend(g_btlHelp, (BtlHelpEntryA *)work);
+    return (BtlHelpEntryA *)work;
 }
 }

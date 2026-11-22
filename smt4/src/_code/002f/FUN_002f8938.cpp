@@ -34,12 +34,24 @@ struct EffectGroup {
     EffectMember **membersEnd;   // 0x168
 };
 
+/* A colour channel in 0..1 as a byte. */
+static __inline u32 channel(f32 value)
+{
+    value = value > 1.0f ? 1.0f : (value > 0.0f ? value : 0.0f);
+    return (u32)(value * 255.0f + 0.5f);
+}
 static __inline u32 packColor(const Color4 &color)
 {
-    return (materialColorChannel(color.alpha) << 24) | ((materialColorChannel(color.blue) & 0xff) << 16) |
-           ((materialColorChannel(color.green) & 0xff) << 8) | (materialColorChannel(color.red) & 0xff);
+    return (channel(color.red) & 0xff) | ((channel(color.green) & 0xff) << 8) |
+           ((channel(color.blue) & 0xff) << 16) | (channel(color.alpha) << 24);
 }
 
+/* Stores a colour key and its packed 8-bit form. */
+static __inline void setColorKey(Color4 *key, u32 *packed, Color4 color)
+{
+    *key = color;
+    *packed = packColor(*key);
+}
 extern "C" {
 /* Tint every member emitter of the group with one color. */
 void FUN_002f8938(EffectGroup *group, Color4 color)
@@ -48,10 +60,8 @@ void FUN_002f8938(EffectGroup *group, Color4 color)
     for (s32 i = 0; i < count; i++) {
         EffectMember *member = group->membersBegin[i];
         EmitterColors *emitter = member->emitterCount > 0 ? *member->emitters : NULL;
-        emitter->startColor = color;
-        emitter->packedStart = packColor(emitter->startColor);
-        emitter->endColor = color;
-        emitter->packedEnd = packColor(emitter->endColor);
+        setColorKey(&emitter->startColor, &emitter->packedStart, color);
+        setColorKey(&emitter->endColor, &emitter->packedEnd, color);
     }
 }
 }

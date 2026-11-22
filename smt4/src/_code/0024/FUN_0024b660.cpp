@@ -5,7 +5,7 @@ extern "C" {
 void FUN_00207ee8(void);
 f32 mathAtan2Angle256(f32 y, f32 x);
 f32 FUN_00269508(const void *curve, s32 frame, s32 duration);
-u32 FUN_00269694(const void *curve, const u32 *opacity, s32 frame, s32 duration);
+u32 colorRampBlendWithFade(const void *curve, const u32 *opacity, s32 frame, s32 duration);
 
 static __inline void effectColorSubtract(EffectColor *color, const EffectColor *amount)
 {
@@ -18,7 +18,7 @@ static __inline void effectColorSubtract(EffectColor *color, const EffectColor *
 // Sample color and scale, deriving heading from the path when requested.
 void FUN_0024b660(ParticleTransformSample *sample, ParticleTransformCurves *curves, s32 frame, const EffectColor *previous)
 {
-    sample->color = FUN_00269694(curves->colorCurve, &curves->opacity, frame, curves->duration);
+    sample->color = colorRampBlendWithFade(curves->colorCurve, &curves->opacity, frame, curves->duration);
     sample->scale = FUN_00269508(curves->scaleCurve, frame, curves->duration);
     if (curves->angleMode != 2) {
         sample->angle = FUN_00269508(curves->angleCurve, frame, curves->duration);

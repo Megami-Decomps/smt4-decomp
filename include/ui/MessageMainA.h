@@ -65,9 +65,11 @@ struct MessageWindowA {
     /* 0x00A0 */ u8 queueStates[12];
     /* 0x00AC */ u32 queueIds[12];
     /* 0x00DC */ u8 queueSpecial[12];
-    /* 0x00E8 */ u8 unk00E8;
+    /* 0x00E8 */ u8 queueCursorShown;    /* the rows are a list: the selected row is tinted and gets the cursor */
     /* 0x00E9 */ u8 queuePending;
-    /* 0x00EA */ u8 unk00EA[0x66];
+    /* 0x00EA */ u8 unk00EA[2];
+    /* 0x00EC */ s32 queueRowOffsetY[12]; /* added to a stock row's y while the queue is pending, by stock rank */
+    /* 0x011C */ u8 unk011C[0x34];
     /* The counter panel. */
     /* 0x0150 */ u32 panelMode;
     /* 0x0154 */ u8 panelState;          /* 0: closed */
@@ -98,8 +100,15 @@ struct MessageWindowA {
     /* 0x0192 */ u8 introFlag;
     /* 0x0193 */ u8 unk0193;
     /* 0x0194 */ UiResourceParameters parameters; /* sprite resource packets */
-    /* 0x01B4 */ UiSpriteState sprites[44]; /* 17: the banner frame, 21: the counter panel, 22-33: the
-                                                * notification queue rows, 41: the intro */
+    union {
+        /* 0x01B4 */ UiSpriteState sprites[44]; /* 17: the banner frame, 21: the counter panel, 22-33: the
+                                                    * notification queue rows, 41: the intro, 43: the queue cursor */
+        struct {
+            /* 0x01B4 */ UiSpriteState unk01B4[22];
+            /* 0x0DBC */ UiSpriteState rows[12];   /* the notification queue rows as their own array: the list
+                                                    * draw (messageDrawDemonNoticeList) adds the member's offset after the index */
+        } queueSprites;
+    };
     /* 0x19C4 */ u8 displayEnabled;
     /* 0x19C5 */ u8 displayMode;         /* 0x15: follow the message kind */
     /* 0x19C6 */ u8 unk19C6[0x14];
@@ -143,9 +152,9 @@ typedef char MessageWindowAOffsetsCheck[
     offsetof(MessageWindowA, choiceEnabled) == 0x37 && offsetof(MessageWindowA, selectedChoice) == 0x56 &&
     offsetof(MessageWindowA, selectedChoiceActive) == 0x5C &&
     offsetof(MessageWindowA, counterState) == 0x8D && offsetof(MessageWindowA, activeState) == 0x95 &&
-    offsetof(MessageWindowA, queueIds) == 0xAC && offsetof(MessageWindowA, panelState) == 0x154 &&
+    offsetof(MessageWindowA, queueIds) == 0xAC && offsetof(MessageWindowA, queueRowOffsetY) == 0xEC && offsetof(MessageWindowA, panelState) == 0x154 &&
     offsetof(MessageWindowA, popupValueFloat) == 0x184 && offsetof(MessageWindowA, parameters) == 0x194 &&
-    offsetof(MessageWindowA, sprites) == 0x1B4 && offsetof(MessageWindowA, sprites[17]) == 0xB00 && offsetof(MessageWindowA, displayEnabled) == 0x19C4 &&
+    offsetof(MessageWindowA, sprites) == 0x1B4 && offsetof(MessageWindowA, sprites[17]) == 0xB00 && offsetof(MessageWindowA, queueSprites.rows) == 0xDBC && offsetof(MessageWindowA, displayEnabled) == 0x19C4 &&
     offsetof(MessageWindowA, enabled) == 0x19DA && offsetof(MessageWindowA, taskValue) == 0x19EC &&
     offsetof(MessageWindowA, unk19FC) == 0x19FC && offsetof(MessageWindowA, indexedFlags) == 0x1A11 &&
     offsetof(MessageWindowA, activeValues) == 0x1A1C && sizeof(MessageWindowA) == 0x1A28 ? 1 : -1];

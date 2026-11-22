@@ -16,12 +16,8 @@ static __inline PhaseSinCos samplePhase(const PhaseTrigEntry *table, f32 angle)
 {
     bool negative = angle < 0.0f;
     f32 magnitude = fabsf(angle);
-    union { f32 value; s32 bits; } representation;
-    representation.value = magnitude;
-    while (representation.bits >= 0x47800000) {
+    while (magnitude >= 65536.0f)
         magnitude -= 65536.0f;
-        representation.value = magnitude;
-    }
     u16 whole = (u32)magnitude;
     const PhaseTrigEntry *entry = &table[(u8)whole];
     f32 fraction = magnitude - (f32)whole;

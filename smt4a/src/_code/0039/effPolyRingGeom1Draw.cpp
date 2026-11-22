@@ -9,7 +9,7 @@
 extern "C" {
 void FUN_00338330(RenderSubmissionPacket* packet, const f32* position, const f32* rotation, const f32* scale);
 void renderSubmissionDrawPacket(RenderSubmissionPacket* packet, u32 mode);
-u32 FUN_0038136c(RenderSubmissionOwner* owner, const u32* color, u32 frame, u32 duration);
+u32 colorRampBlendWithFade(RenderSubmissionOwner* owner, const u32* color, u32 frame, u32 duration);
 
 /* color *= factor, component by component (FUN_002f8a54's body; the sibling effect updates inline it too). */
 static void effectColorScale(const EffectColor *factor, EffectColor *color)
@@ -29,7 +29,7 @@ void effPolyRingGeom1Draw(RenderSubmission* submission)
     if (submission->frame > owner->frame && owner->frame != 0)
         return;
 
-    u32 ownerColor = FUN_0038136c(owner, &owner->color, submission->frame, owner->frame);
+    u32 ownerColor = colorRampBlendWithFade(owner, &owner->color, submission->frame, owner->frame);
     effectColorUnpack(submission->color, &g_vectorScratch.second.color);
     effectColorUnpack(ownerColor, &g_vectorScratch.first.color);
     effectColorScale(&g_vectorScratch.second.color, &g_vectorScratch.first.color);

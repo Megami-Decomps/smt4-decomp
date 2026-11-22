@@ -51,7 +51,7 @@ void FUN_0028a420(s32 a, s32 b);
 void mapSceneResetState(s32 mode);
 void FUN_0026ff54(void);
 void mapRestoreSavedSelection(void);
-void FUN_0026faa4(void);
+void encounterFlagsRollSlots(void);
 s32 FUN_002b8694(void);
 u32 screenFadeIsBusy(void);
 void clearFlags310To31F(void);
@@ -165,7 +165,7 @@ void mikadoCampVisitUpdate(MikadoCamera *camera)
             case 0:
             case 1:
                 mapRestoreSavedSelection();
-                FUN_0026faa4();
+                encounterFlagsRollSlots();
                 if (g_mapSelection.selection.group >= 200) {
                     camera->exitRequest[2] = 1;
                 } else if (g_mapSelection.selection.group >= 100) {

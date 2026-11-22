@@ -22,6 +22,7 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "gfx/SpritePartDraw.h"
 #include "util/BitsAndBytes.h"
+#include "code/Code0025_Smt4.h"
 
 extern "C" {
 
@@ -30,7 +31,6 @@ u8 isLowThreshold(s32 current, s16 max);
 void drawSetColorFromRGBA8(u32 packed);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 void gxResetColorQuadToWhite(void); // declcheck: local (ui/AnimatedMessage.h redeclares texDrawCompositeSprite)
-s32 FUN_0025765c(s32 element, u32 phase);
 /* Draws an HP gauge (and its pending change) from the sprites of texture table `table`. */
 void FUN_002be90c(s32 value, s32 max, s32 change, u32 base, u32 table, u32 frame, u32 fill, u32 gain,
                   u32 loss, s32 x, s32 y, u32 layer, u32 flags);

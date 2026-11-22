@@ -1,6 +1,11 @@
-/* NON_MATCHING: readable rebuild from asm of the player stat recompute; retail unrolls the five stat clamps in a fixed order (0x20, 0x24, 0x26, 0x28, 0x22) and interleaves the growth block copy, which armcc here emits from a loop and a struct copy. */
+/* NON_MATCHING: 76 lines: the 999 clamps compare against 1000 where retail keeps 999 in r0 (and clamps the last
+ * stat through a register copy), the skill words are copied without retail's vldm/vstm triple, and the upgrade
+ * buffer and frame sit 8 bytes lower. The equipment id is read through a switch on the slot, as retail's jump
+ * table does. */
 #include "shard/W6_W6Match8_StatGrowth.h"
 #include "gamedata/EquipmentRecordA.h"
+#include "gamedata/PlayerRecordParts.h"
+#include "code/Code004c_Smt4a.h"
 
 /* The capped upgrade bonuses of one equipment piece. */
 struct UpgradeBonuses {
@@ -18,11 +23,21 @@ struct GrowthExtra {
     u16 pad;
 };
 
+/* Maximum HP, MP and the five stats. */
+struct StatValues {
+    /* 0x00 */ u16 hp;
+    /* 0x02 */ u16 mp;
+    /* 0x04 */ u16 stats[5];
+};
+
 /* A player's stat record. */
 struct PlayerStats {
-    /* 0x00 */ u16 equipment[7];
-    /* 0x0E */ u16 base[7];        /* HP, MP, then the five stats */
-    /* 0x1C */ u16 total[7];       /* the same, with equipment and growth applied */
+    union {
+        /* 0x00 */ u16 equipment[7];
+        /* 0x00 */ PlayerEquipment equipped;
+    };
+    /* 0x0E */ StatValues base;     /* without equipment */
+    /* 0x1C */ StatValues total;    /* with equipment and growth applied */
     /* 0x2A */ u16 hp;
     /* 0x2C */ u16 mp;
     /* 0x2E */ u8 unk2E[6];
@@ -35,7 +50,6 @@ struct PlayerStats {
 extern "C" {
 PlayerStats *gameGetPlayerData(void);
 void equipmentGetCappedUpgradeBonuses(u32 id, UpgradeBonuses *out);
-void playerGetGrowthParameters(StatGrowthParameters *out, s32 arg);
 void FUN_004cc6a4(s32 level, u16 *totals, const StatGrowthParameters *parameters);
 s16 FUN_003da998(s32 kind, const StatGrowthParameters *parameters);
 s16 FUN_003daaf4(s32 kind, const StatGrowthParameters *parameters);
@@ -50,17 +64,39 @@ void FUN_003df7c4(PlayerStats *stats)
         stats = gameGetPlayerData();
     s16 hpBonus = 0;
     s16 mpBonus = 0;
-    for (s32 i = 0; i < 7; i++)
-        stats->total[i] = stats->base[i];
+    stats->total = stats->base;
     for (s32 slot = 0; slot < 7; slot++) {
-        u32 id = stats->equipment[slot];
+        u32 id;
+        switch (slot) {
+        case 0:
+            id = stats->equipped.weapon;
+            break;
+        case 1:
+            id = stats->equipped.gun;
+            break;
+        case 2:
+            id = stats->equipped.bullets;
+            break;
+        case 3:
+            id = stats->equipped.head;
+            break;
+        case 4:
+            id = stats->equipped.body;
+            break;
+        case 5:
+            id = stats->equipped.legs;
+            break;
+        case 6:
+            id = stats->equipped.accessory;
+            break;
+        }
         if (id == 0)
             continue;
         EquipmentRecordA *record = itemTableGetEquipmentRecord(id);
         if (record == NULL)
             continue;
         for (s32 i = 0; i < 5; i++)
-            stats->total[2 + i] += record->statBonus[i];
+            stats->total.stats[i] += record->statBonus[i];
         u16 recordHp = record->hpBonus;
         u16 recordMp = record->mpBonus;
         hpBonus += recordHp;
@@ -68,25 +104,56 @@ void FUN_003df7c4(PlayerStats *stats)
         UpgradeBonuses upgrade;
         equipmentGetCappedUpgradeBonuses(id, &upgrade);
         for (s32 i = 0; i < 5; i++)
-            stats->total[2 + i] += upgrade.stats[i];
+            stats->total.stats[i] += upgrade.stats[i];
         hpBonus = (s16)(upgrade.hp + hpBonus);
         mpBonus = (s16)(upgrade.mp + mpBonus);
     }
-    for (s32 i = 2; i < 7; i++) {
-        s32 value = (s16)stats->total[i];
+    {
+        s32 value = (s16)stats->total.stats[0];
         if (value > 999)
             value = 999;
         else if (value < 1)
             value = 1;
-        stats->total[i] = (u16)value;
+        stats->total.stats[0] = (u16)value;
     }
-    StatGrowthParameters parameters;
-    playerGetGrowthParameters(&parameters, 0);
-    FUN_004cc6a4(stats->level, stats->total, &parameters);
-    s32 hpGrowth = stats->base[0] - FUN_003da998(1, &parameters);
-    s32 mpGrowth = stats->base[1] - FUN_003daaf4(1, &parameters);
-    stats->total[0] = stats->total[0] + hpGrowth + hpBonus;
-    stats->total[1] = stats->total[1] + mpGrowth + mpBonus;
+    {
+        s32 value = (s16)stats->total.stats[2];
+        if (value > 999)
+            value = 999;
+        else if (value < 1)
+            value = 1;
+        stats->total.stats[2] = (u16)value;
+    }
+    {
+        s32 value = (s16)stats->total.stats[3];
+        if (value > 999)
+            value = 999;
+        else if (value < 1)
+            value = 1;
+        stats->total.stats[3] = (u16)value;
+    }
+    {
+        s32 value = (s16)stats->total.stats[4];
+        if (value > 999)
+            value = 999;
+        else if (value < 1)
+            value = 1;
+        stats->total.stats[4] = (u16)value;
+    }
+    {
+        s32 value = (s16)stats->total.stats[1];
+        if (value > 999)
+            value = 999;
+        else if (value < 1)
+            value = 1;
+        stats->total.stats[1] = (u16)value;
+    }
+    StatGrowthParameters parameters = playerGetGrowthParameters(0);
+    FUN_004cc6a4(stats->level, &stats->total.hp, &parameters);
+    s32 hpGrowth = stats->base.hp - FUN_003da998(1, &parameters);
+    s32 mpGrowth = stats->base.mp - FUN_003daaf4(1, &parameters);
+    stats->total.hp = stats->total.hp + hpGrowth + hpBonus;
+    stats->total.mp = stats->total.mp + mpGrowth + mpBonus;
     GrowthExtra extra;
     extra.word = stats->extraWord;
     extra.vector[0] = stats->extraVector[0];
@@ -94,11 +161,9 @@ void FUN_003df7c4(PlayerStats *stats)
     extra.vector[2] = stats->extraVector[2];
     EquipmentRecordA *last = itemTableGetEquipmentRecord(stats->equipment[6]);
     extra.special = last != NULL ? last->modifierId : 0;
-    FUN_0034cb50(stats->total, &extra, 9);
-    if ((s16)stats->hp > (s16)stats->total[0])
-        stats->hp = stats->total[0];
-    if ((s16)stats->mp > (s16)stats->total[1])
-        stats->mp = stats->total[1];
+    FUN_0034cb50(&stats->total.hp, &extra, 9);
+    stats->hp = (s16)stats->hp > (s16)stats->total.hp ? stats->total.hp : stats->hp;
+    stats->mp = (s16)stats->mp > (s16)stats->total.mp ? stats->total.mp : stats->mp;
 }
 
 } /* extern "C" */

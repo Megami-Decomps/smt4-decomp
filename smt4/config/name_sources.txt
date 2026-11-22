@@ -6169,3 +6169,15 @@
 001a9104 questShowRequirementProgress inferred shows the open quests' requirement progress after a gain (w73-f2)
 003d5af0 asdCameraSetLookAtRoll inferred sets a camera's look-at with a roll (w73-f2)
 002c159c asdCameraSetStereoDepth inferred sets the camera's stereo base-plane distance and parallax factor (+0x500/+0x504; w73-mg)
+0026faa4 encounterFlagsRollSlots inferred rolls each random-encounter flag slot except the resume zone's (w74-o1)
+00269694 colorRampBlendWithFade inferred blends the colour ramp's key colours and fades the result (w74-o1)
+001db388 asdCameraSetScreenPerspective inferred stores the camera's perspective with the screen's aspect and rebuilds its projections (w74-o1)
+0038f924 aocLoadingTaskDraw evidence aocLoadingTaskStart registers it as the "Aoc loading DOWN" draw task (w74-o2)
+0032ae80 uniteEffectDrawResultBillboard inferred draws the fusion result's billboard facing the camera (w74-o2)
+003c9f58 btlCommandMenuStep inferred steps the battle command menu and sets the actor's action kind (w74-o3)
+0039cddc naviIconsUpdateScreenRects inferred updates the navigation icons' screen rectangles (w74-o3)
+003a4210 saleListBuild inferred builds the sale list from the owned items (w74-o3)
+003ef1e0 filterParamsInitialize inferred initializes the filter parameter blocks filterCreateByKind uses (w74-o3)
+00326fd8 effectEditorUpdateOrbitCamera evidence twin of smt4a effectEditorUpdateOrbitCamera; same debug strings
+00204358 resultStatAllocationStep inferred steps the result screen's stat point allocation (w74-f1)
+00254600 savedRecordSetDemonId inferred twin of smt4a savedRecordSetDemonId

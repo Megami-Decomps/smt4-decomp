@@ -19,7 +19,7 @@ int FUN_00256dbc(...);
 int entryListSetPhase(...);
 int mtx44TransformPosition(...);
 int FUN_00269508(...);
-int FUN_00269694(unsigned int, int, int, int);
+int colorRampBlendWithFade(unsigned int, int, int, int);
 int mathSinCos(...);
 int mtx44Copy(...);
 int childHolderCopyOut(...);
@@ -128,7 +128,7 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 /* Supplied declaration required: mtx44TransformPosition. */
 /* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: FUN_00269508. */
-/* Supplied declaration required: FUN_00269694. */
+/* Supplied declaration required: colorRampBlendWithFade. */
 /* Supplied declaration required: mathSinCos. */
 /* Supplied declaration required: mtx44Copy. */
 extern int __cxa_guard_acquire(unsigned int *);
@@ -258,7 +258,7 @@ void effJobComputeQuadVertices(EffectEmitterB *emitter)
   temp_v22 = (f32)(s32)(temp_v4);
   FUN_0021a1a4(puVar9,(int)emitter,(int)&emitter->transform);
   temp_v2 = (int)&emitter->colorB;
-  FUN_00269694(temp_v2,(int)&emitter->colorTrack,temp_v4,temp_v5);
+  colorRampBlendWithFade(temp_v2,(int)&emitter->colorTrack,temp_v4,temp_v5);
   temp_v3 = emitter->color;
   DAT_004ea92c = (f32)(u32)(temp_v3 >> 0x18);
   DAT_004ea930 = (f32)(u32)((temp_v3 & 0xffffff) >> 0x10);

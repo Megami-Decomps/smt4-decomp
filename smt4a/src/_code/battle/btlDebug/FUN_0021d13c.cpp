@@ -41,7 +41,7 @@ int itemTableGetItemRecord(...);
 int buttonHelpSetText(...);
 int gameGetSlotRecord(...);
 int FUN_0020acd8(...);
-int FUN_0021a6c8(...);
+int listAssignCentredRows(...);
 int btlCommandResolveSelectedTarget(...);
 int btlMenuResolveHighlightedCommand(...);
 int statusBustUpPortraitRelease(...);
@@ -166,7 +166,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0020acd8. */
 /* Supplied declaration required: btlCommandMenuEnterMode. */
 /* Supplied declaration required: FUN_0020d3d4. */
-/* Supplied declaration required: FUN_0021a6c8. */
+/* Supplied declaration required: listAssignCentredRows. */
 /* Supplied declaration required: btlCommandMenuSetupLists. */
 /* Supplied declaration required: gridNavigationHandleConfirm. */
 extern int FUN_0022a030(unsigned int, int);
@@ -1520,7 +1520,7 @@ LAB_0021f338:
     FUN_0020acd8(param_1,*piVar16,(int)*(char *)(param_1 + 0x38b2));
     break;
   case 0x12:
-    FUN_0021a6c8(param_1);
+    listAssignCentredRows(param_1);
     temp_v4 = uiSpriteAdvanceAnimation(param_1 + 0x11a0);
     if (temp_v4 != 0) {
       btlCommandMenuEnterMode(param_1,0x13,0);

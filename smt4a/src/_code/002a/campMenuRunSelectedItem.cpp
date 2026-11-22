@@ -51,7 +51,7 @@ s32 FUN_0032fbd0(void *slot);
 void fusionReleaseRegisteredHandle(void);
 void FUN_002c39dc(u32 first, u32 second, u32 third);
 void FUN_00284ee4(s32 start);
-void FUN_002e2404(u32 value);
+void campCecSetSelection(u32 value);
 u32 messageMainStartMenuAnimationIfEnabled(void);
 u32 gameDataBlocksGetSelectedValue(void);
 void campCecScriptStart(u32 request);
@@ -334,7 +334,7 @@ void campMenuRunSelectedItem(void)
         break;
     case 0x34:
         camp->state = 0x34;
-        FUN_002e2404(2);
+        campCecSetSelection(2);
         messageDismissNumericBanner(1);
         messageMainStartMenuAnimationIfEnabled();
         break;
@@ -365,26 +365,26 @@ void campMenuRunSelectedItem(void)
     }
     case 0x36:
         camp->pendingState = 0x3d;
-        FUN_002e2404(1);
+        campCecSetSelection(1);
         messageDismissNumericBanner(1);
         messageMainStartMenuAnimationIfEnabled();
         uiSpriteSetImageKeyframe(&camp->sprites[29], 7, 0);
         break;
     case 0x37:
         camp->state = 0x3b;
-        FUN_002e2404(4);
+        campCecSetSelection(4);
         messageDismissNumericBanner(1);
         messageMainStartMenuAnimationIfEnabled();
         break;
     case 0x38:
         camp->state = 0x3b;
-        FUN_002e2404(5);
+        campCecSetSelection(5);
         messageDismissNumericBanner(1);
         messageMainStartMenuAnimationIfEnabled();
         break;
     case 0x39:
         camp->state = 0x45;
-        FUN_002e2404(6);
+        campCecSetSelection(6);
         messageDismissNumericBanner(1);
         messageMainStartMenuAnimationIfEnabled();
         break;

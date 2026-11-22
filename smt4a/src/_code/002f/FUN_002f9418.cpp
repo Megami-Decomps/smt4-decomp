@@ -11,7 +11,7 @@ int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
 int nkmBaseGetRecord(void);
 int nkmEnemyFindById(void);
-int FUN_0021a6c8(int);
+int listAssignCentredRows(int);
 int statusPanelSetOpen(...);
 int gameGlobalsGetBlock1390(void);
 int FUN_002c982c(...);
@@ -48,7 +48,7 @@ extern int ifTouchGetSelectedRegion(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: nkmEnemyFindById. */
-/* Supplied declaration required: FUN_0021a6c8. */
+/* Supplied declaration required: listAssignCentredRows. */
 extern int itemIsCollectedWithRelated(unsigned short);
 /* Supplied declaration required: statusPanelSetOpen. */
 extern int FUN_002a7410(void);
@@ -115,7 +115,7 @@ LAB_002f9458:
   puVar13 = (unsigned int *)(param_1 + 0x4850);
   switch(*puVar15) {
   case 1:
-    FUN_0021a6c8(param_1);
+    listAssignCentredRows(param_1);
     statusIconSetKind(param_1,0);
     temp_v8 = uiSpriteAdvanceAnimation(param_1 + 0x11a0);
     if (temp_v8 != 0) {

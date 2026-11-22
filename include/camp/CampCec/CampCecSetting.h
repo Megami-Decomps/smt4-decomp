@@ -3,6 +3,7 @@
 #define CAMP_CAMPCEC_CAMPCECSETTING_H
 
 #include "common.h"
+#include "camp/CampCec/CecRecord.h"
 struct ScriptProcess;
 
 #define CAMPCECSETTING_ITEM_COUNT 7
@@ -42,7 +43,8 @@ u8 campCecSettingIsDone(void);
 extern "C" {
 #endif
 
-u8 *FUN_002bf520(void);
+/* The player's own StreetPass record, kept in the camp's StreetPass overlay. */
+CampCecReceivedRecord *campCecGetOwnRecord(void);
 
 #ifdef __cplusplus
 }

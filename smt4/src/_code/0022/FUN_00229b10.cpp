@@ -1,5 +1,6 @@
-/* NON_MATCHING: 14 lines: only the guard (kind 8) store differs: retail loads the battle state and the slot index into
- * r2 and the slot size into r0 (the build swaps them). */
+/* NON_MATCHING: 22 lines: the slot-kind setter takes its kind as a word, as at its other sites (btlCommandMenuStep and
+ * FUN_003cab9c are worse with a u8); armcc then keeps the kind 24 in r8 across both event tests where retail
+ * rematerialises it, and the guard (kind 8) store loads the slot size into r1 (retail: r2). With a u8 kind: 14 lines. */
 #include "battle/ActionKindSelection.h"
 #include "battle/btlAction.h"
 #include "battle/btlMain.h"
@@ -14,7 +15,7 @@ s32 btlEventSelectTrigger(BattleEvent *, s32, s32, s32);
 void battleSetActionKind(BtlMainState **);
 
 /* Sets the action kind of the battle's current unit slot. */
-static __inline void battleSetUnitActionKind(const BtlMainState *view, u8 kind)
+static __inline void battleSetUnitActionKind(const BtlMainState *view, s32 kind)
 {
     ActionKindThread *thread = &reinterpret_cast<ActionKindThread *>(g_btlAction.slots)[view->actionState.index];
     thread->kind = kind;

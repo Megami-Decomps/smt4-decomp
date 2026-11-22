@@ -59,7 +59,7 @@ int SBORROW4(...);
 int uiSpriteSelectAnim(...);
 int statusPanelClose(void);
 int recordGetModeForId(...);
-int FUN_0028a538(...);
+int uniteCollectInheritableSkills(...);
 int statusPanelSetOpen(...);
 int flaggedEntrySetValueA(...);
 int FUN_003343c0(...);
@@ -265,7 +265,7 @@ extern int FUN_00284e94(void);
 /* Supplied declaration required: FUN_00284ee4. */
 /* Supplied declaration required: uniteCameraInitialize. */
 /* Supplied declaration required: uniteMenuRebuildEntries. */
-/* Supplied declaration required: FUN_0028a538. */
+/* Supplied declaration required: uniteCollectInheritableSkills. */
 /* Supplied declaration required: resourceRunEmbeddedOperationIfUnblocked. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int listCursorGetRowOfChildIfUnblocked(int *);
@@ -2364,7 +2364,7 @@ LAB_001f77ec:
                         temp_v15 = slotRecordFindById(temp_v7);
                         __aeabi_memcpy4(temp_v40,temp_v15,300);
                       }
-                      FUN_0028a538((piVar19[(unsigned int)temp_v1 * 2 + 0x4ef] & 0x1ffffU) >> 2,&temp_v25,
+                      uniteCollectInheritableSkills((piVar19[(unsigned int)temp_v1 * 2 + 0x4ef] & 0x1ffffU) >> 2,&temp_v25,
                                    temp_v40);
                       uniteInheritanceBuildSkillList((piVar3[temp_v47[0] * 2 + 0x4ef] & 0x1ffffU) >> 2);
                       uniteListRebuild((piVar3[temp_v47[0] * 2 + 0x4ef] & 0x1ffffU) >> 2);
@@ -3960,7 +3960,7 @@ joined_r0x001fbbe8:
           temp_v7 = temp_v10 << 2;
           piVar3[0x4f1] = (piVar3[0x4f1] & 0xfffe0003U) | temp_v7;
           piVar3[0x4f3] = (piVar3[0x4f3] & 0xfffe0003U) | temp_v7;
-          FUN_0028a538(temp_v10,temp_v4,temp_v5);
+          uniteCollectInheritableSkills(temp_v10,temp_v4,temp_v5);
           uniteInheritanceBuildSkillList((piVar3[0x4ef] & 0x1ffffU) >> 2);
           uniteListRebuild((piVar3[0x4ef] & 0x1ffffU) >> 2);
           piVar3[0x103] = 0xf;

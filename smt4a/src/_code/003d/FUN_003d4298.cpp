@@ -1,4 +1,5 @@
-/* NON_MATCHING: zero-angle phase sampling and matrix/stack scheduling differ from retail (see mathMatrixBuildInversePlanarTransform); -O2 candidate. */
+/* NON_MATCHING: retail keeps the zero angles' sign flags and table conversions live (no constant folding, as in
+ * mathMatrixBuildInversePlanarTransform) and schedules the matrix and stack stores differently; -O2 is no better. */
 #include "shard/W6_W6Match6_PhaseTrig.h"
 
 extern "C" {
@@ -10,9 +11,18 @@ void FUN_001b4a00(f32 *, const PhaseVector *, const f32 *);
 /* Build a rotation by `angle` about the point (x, y), scaled by `scale` around it. */
 void FUN_003d4298(f32 *matrix, f32 x, f32 y, f32 scale, f32 angle)
 {
-    PhaseVector origin = { x, y, 0.0f };
-    PhaseVector inverseOrigin = { -x, -y, 0.0f };
-    PhaseVector scaling = { scale, scale, 0.0f };
+    PhaseVector origin;
+    origin.x = x;
+    origin.y = y;
+    origin.z = 0.0f;
+    PhaseVector inverseOrigin;
+    inverseOrigin.x = -x;
+    inverseOrigin.y = -y;
+    inverseOrigin.z = 0.0f;
+    PhaseVector scaling;
+    scaling.x = scale;
+    scaling.y = scale;
+    scaling.z = 0.0f;
     PhaseSinCos xRotation = samplePhase(g_sinCosTable, 0.0f);
     PhaseSinCos yRotation = samplePhase(g_sinCosTable, 0.0f);
     PhaseSinCos zRotation = samplePhase(g_sinCosTable, angle);

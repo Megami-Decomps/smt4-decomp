@@ -20,7 +20,7 @@ int btlSlotManagerResetStates(int);
 int FUN_003f1244(void);
 int btlUIClearWorkTables(void);
 int FUN_004abfd0(...);
-int FUN_004c1114(int, int);
+int btlRollAilment(int, int);
 int btlSlotSetStoreValue(...);
 int btlAdjustPropertyClamped(...);
 int FUN_004c8ee0(...);
@@ -107,7 +107,7 @@ extern int g_btlUiBlock; /* 0x57a9c8 */
 extern int FUN_004abac8(int);
 /* Supplied declaration required: FUN_004abfd0. */
 extern int btlUiIsMenuSceneActive(int);
-/* Supplied declaration required: FUN_004c1114. */
+/* Supplied declaration required: btlRollAilment. */
 /* Supplied declaration required: btlSlotSetStoreValue. */
 extern unsigned int mapCategoryToDestinationGroup(unsigned int);
 /* Supplied declaration required: btlAdjustPropertyClamped. */
@@ -332,31 +332,31 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
       temp_v24 = 0;
       temp_v19 = (int)*(short *)(param_2[9] + 0x6a);
       if (((*(unsigned short *)(param_2[10] + 0x110) & 0x80) != 0) &&
-         (temp_v25 = temp_v19, FUN_004c1114(temp_v19,7), temp_v25 != 0)) {
+         (temp_v25 = temp_v19, btlRollAilment(temp_v19,7), temp_v25 != 0)) {
         temp_v24 = 0x80;
       }
       if (((*(unsigned short *)(param_2[10] + 0x110) & 0x40) != 0) &&
-         (temp_v25 = temp_v19, FUN_004c1114(temp_v19,6), temp_v25 != 0)) {
+         (temp_v25 = temp_v19, btlRollAilment(temp_v19,6), temp_v25 != 0)) {
         temp_v24 = temp_v24 | 0x40;
       }
       if (((*(unsigned short *)(param_2[10] + 0x110) & 0x100) != 0) &&
-         (temp_v25 = temp_v19, FUN_004c1114(temp_v19,8), temp_v25 != 0)) {
+         (temp_v25 = temp_v19, btlRollAilment(temp_v19,8), temp_v25 != 0)) {
         temp_v24 = temp_v24 | 0x100;
       }
       if (((*(unsigned short *)(param_2[10] + 0x110) & 8) != 0) &&
-         (temp_v25 = temp_v19, FUN_004c1114(temp_v19,3), temp_v25 != 0)) {
+         (temp_v25 = temp_v19, btlRollAilment(temp_v19,3), temp_v25 != 0)) {
         temp_v24 = temp_v24 | 8;
       }
       if (((*(unsigned short *)(param_2[10] + 0x110) & 0x800) != 0) &&
-         (temp_v25 = temp_v19, FUN_004c1114(temp_v19,0xb), temp_v25 != 0)) {
+         (temp_v25 = temp_v19, btlRollAilment(temp_v19,0xb), temp_v25 != 0)) {
         temp_v24 = temp_v24 | 0x800;
       }
       if (((*(unsigned short *)(param_2[10] + 0x110) & 0x1000) != 0) &&
-         (temp_v25 = temp_v19, FUN_004c1114(temp_v19,0xc), temp_v25 != 0)) {
+         (temp_v25 = temp_v19, btlRollAilment(temp_v19,0xc), temp_v25 != 0)) {
         temp_v24 = temp_v24 | 0x1000;
       }
       if (((*(unsigned short *)(param_2[10] + 0x110) & 0x2000) != 0) &&
-         (temp_v25 = temp_v19, FUN_004c1114(temp_v19,0xd), temp_v25 != 0)) {
+         (temp_v25 = temp_v19, btlRollAilment(temp_v19,0xd), temp_v25 != 0)) {
         temp_v24 = temp_v24 | 0x2000;
       }
       if (temp_v24 != 0) {

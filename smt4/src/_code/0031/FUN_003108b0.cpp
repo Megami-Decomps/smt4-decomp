@@ -1,4 +1,6 @@
-/* NON_MATCHING: readable rebuild via gfx/MaterialPairScan.h; retail keeps the owner on the stack, reloads the model chain each pass and resolves the self-relative tables with post-indexed loads (`ldr r,[r,#N]!` then add/mov0); armcc here recomputes the slot addresses and keeps a different register assignment. */
+/* NON_MATCHING: readable rebuild via gfx/MaterialPairScan.h; retail keeps the reference count and the owner on the
+ * stack, reloads the model chain each pass, hoists the 0x274 entry offset and loads "dami" pc-relative at the call
+ * (written in place instead of through the helper it is 163 lines off, with the helper 177). */
 #include "gfx/MaterialPairScan.h"
 
 extern "C" {

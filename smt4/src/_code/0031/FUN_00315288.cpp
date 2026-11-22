@@ -6,7 +6,7 @@ void FUN_00246afc(RenderSubmissionPacket *packet, const f32 *position, const f32
 void FUN_00246bd4();
 void asdSetNormalizedColorRgba(u32 color);
 void renderSubmissionDrawPacket(RenderSubmissionPacket *packet, u32 mode);
-u32 FUN_00269694(RenderSubmissionOwner *owner, const u32 *color, u32 frame, u32 duration);
+u32 colorRampBlendWithFade(RenderSubmissionOwner *owner, const u32 *color, u32 frame, u32 duration);
 u32 FUN_00246c28();
 
 // Apply the owner's interpolated color and draw settings while the submission is alive.
@@ -17,7 +17,7 @@ void FUN_00315288(RenderSubmission *submission)
     if (submission->frame > owner->frame && owner->frame != 0)
         return;
 
-    u32 ownerColor = FUN_00269694(owner, &owner->color, submission->frame, owner->frame);
+    u32 ownerColor = colorRampBlendWithFade(owner, &owner->color, submission->frame, owner->frame);
     asdSetNormalizedColorRgba(submission->color);
     effectColorCopy(&g_vectorScratch.first.color, &g_vectorScratch.second.color);
     asdSetNormalizedColorRgba(ownerColor);

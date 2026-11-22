@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail unrolls the 8-element skill copy, keeps the zero constant in sl and the base percentage/skill pointer in extra callee-saved registers; build keeps the copy loop rolled. */
+/* NON_MATCHING: 80 lines: retail hoists the zero for the skill buffer into sl at entry and gives the two inlined MP
+ * heals of the side-unit loops other scratch registers (r1/r3/ip against r2/r3). */
 #include "common.h"
 #include "gamedata/SaveSlotTable.h"
 #include "shard/W6_W6Match8_StatGrowth.h"
@@ -20,12 +21,13 @@ struct StepUnitRecord {
 extern "C" {
 StepUnitRecord *gameGetSlotRecord(s32 slot);
 
-/* A percentage of max, never negative. */
+/* Whether the unit's flag bit is set. */
 static __inline u32 unitHasFlag(const StepUnitRecord *unit, u32 bit)
 {
     return (static_cast<u32>(unit->flags) & (1 << (bit & 0xFF))) != 0;
 }
 
+/* A percentage of max, never negative. */
 static __inline s32 percentOfMax(s32 max, s32 percent)
 {
     s32 amount = max * percent / 100;
@@ -73,8 +75,14 @@ static __inline void healRegenSkillUnitsMp(s32 percent, s32 count)
             if (!unitHasFlag(unit, 1) && !unitHasFlag(unit, 10)) {
                 u16 skills[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
                 if (unit != NULL) {
-                    for (s32 k = 0; k < 8; ++k)
-                        skills[k] = unit->skills[k];
+                    skills[0] = unit->skills[0];
+                    skills[1] = unit->skills[1];
+                    skills[2] = unit->skills[2];
+                    skills[3] = unit->skills[3];
+                    skills[4] = unit->skills[4];
+                    skills[5] = unit->skills[5];
+                    skills[6] = unit->skills[6];
+                    skills[7] = unit->skills[7];
                 }
                 for (s32 k = 0; k < 9; ++k) {
                     if (skills[k] != 0 && skills[k] == 0x1C7) {
@@ -96,12 +104,12 @@ void FUN_004a08f0(void)
             percent = 5;
         else if ((s32)gameDataFlagTestBit(0x64))
             percent = 2;
-        s32 total = percent;
+        s32 sidePercent = percent;
         if (gameGetPlayerData()->equipped.accessory == 0x2AB)
-            total += 2;
-        if (total > 0) {
+            percent += 2;
+        if (percent > 0) {
             s32 max = gameGetPlayerData()->maxMp;
-            s32 mp = gameGetPlayerData()->mp + percentOfMax(max, total);
+            s32 mp = gameGetPlayerData()->mp + percentOfMax(max, percent);
             if (mp > max)
                 mp = max;
             s16 value = mp;
@@ -113,8 +121,8 @@ void FUN_004a08f0(void)
                 value = 1;
             player->mp = value;
         }
-        if (percent > 0 && (s32)gameDataFlagTestBit(0x67))
-            healSideUnitsMp(percent, 3);
+        if (sidePercent > 0 && (s32)gameDataFlagTestBit(0x67))
+            healSideUnitsMp(sidePercent, 3);
         healRegenSkillUnitsMp(2, 3);
     }
 }

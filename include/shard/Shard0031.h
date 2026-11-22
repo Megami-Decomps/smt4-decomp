@@ -12,6 +12,7 @@
 #include "ui/ButtonHelp.h"
 #include "shard/NaviMain.h"
 #include "shard/W6_W6Match3_ChunkPool.h"
+#include "camp/CampCec/CecRecord.h"
 #include "script/ScriptVm.h"
 
 /* Doubly linked list node; the list keeps a sentinel node whose `prev` is the last element. */
@@ -333,8 +334,8 @@ struct OverlayObj {
     /* 0x00 */ u32 job;
     /* 0x04 */ u8 unk04[4];
     /* 0x08 */ OverlayStateHandler handlers[14];  /* run per state; 0 = none */
-    /* 0x40 */ u8 block40[0x50];
-    /* 0x90 */ u8 block90[0x20];
+    /* 0x40 */ CampCecReceivedRecord ownRecord;   /* the player's own StreetPass record (campCecGetOwnRecord returns it) */
+    /* 0xA4 */ u8 unkA4[0xC];
     /* 0xB0 */ StatusScene scene;
     /* 0xE0 */ u8 unkE0[0x4];
     /* 0xE4 */ void *buffer0;
@@ -345,26 +346,32 @@ struct OverlayObj {
     /* 0x13C */ s32 previousState;
     /* 0x140 */ s32 state;
     /* 0x144 */ s32 nextState;    /* -1 = none queued */
-    /* 0x148 */ u8 unk148[4];
-    /* 0x14C */ u32 unk14C;
+    /* 0x148 */ s32 unk148;       /* -1 at the start */
+    /* 0x14C */ s32 selection;    /* the menu entry chosen (campCecRecvMenuIdleState), 0 for none */
     /* 0x150 */ u8 unk150[0x18];
-    /* 0x168 */ u32 unk168;
-    /* 0x16C */ u8 unk16C;
-    /* 0x16D */ u8 unk16D[0x7];
-    /* 0x174 */ u32 unk174;
+    /* 0x168 */ u32 restriction;  /* 0: StreetPass can run; 1: restricted by parental controls, 2: not enabled (only the notice's script runs) */
+    /* 0x16C */ u8 optionalProcess; /* cecQueryOptionalProcess' answer when the overlay was created */
+    /* 0x16D */ s8 initialized;   /* the menu's idle state has run once */
+    /* 0x16E */ u8 unk16E;
+    /* 0x16F */ s8 refreshRequested; /* the idle state restores the message banner */
+    /* 0x170 */ u8 unk170;
+    /* 0x171 */ u8 unk171[3];
+    /* 0x174 */ u32 labels;       /* the own record's label set (campCecDrawSetCreate) */
     /* 0x178 */ OverlaySlide slides[2];
-    /* 0x1A0 */ u32 unk1A0;
-    /* 0x1A4 */ u8 unk1A4;
+    /* 0x1A0 */ u32 slidePhase;   /* 0: at rest, 1: sliding out, 2: sliding in, 3: slid in */
+    /* 0x1A4 */ u8 slideReversed; /* the slides run from the other side */
 };
 
 typedef struct OverlayRef {
-    /* 0x00 */ u32 unk00;
+    /* 0x00 */ u8 unk00;         /* cleared when the overlay is created from the camp menu (not on a return to it) */
+    /* 0x01 */ u8 unk01[3];
     /* 0x04 */ OverlayObj *instance;
 } OverlayRef;
 
 typedef char CampCecOverlayLayoutCheck[sizeof(OverlayObj) == 0x1A8 ? 1 : -1];
 
-typedef char CampCecOverlayOffsets[offsetof(OverlayObj, scriptProcess) == 0xF4 && offsetof(OverlayObj, unk14C) == 0x14C ? 1 : -1];
+typedef char CampCecOverlayOffsets[offsetof(OverlayObj, scriptProcess) == 0xF4 && offsetof(OverlayObj, selection) == 0x14C &&
+    offsetof(OverlayObj, ownRecord) == 0x40 && offsetof(OverlayObj, scene) == 0xB0 && offsetof(OverlayObj, unk170) == 0x170 ? 1 : -1];
 
 
 #ifdef __cplusplus

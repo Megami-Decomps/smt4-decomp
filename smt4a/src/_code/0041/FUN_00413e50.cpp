@@ -74,7 +74,7 @@ extern unsigned char DAT_0055cacc; /* 0x55cacc */
 extern unsigned int randRange(unsigned int);
 extern int gameFlagIsSet(unsigned int);
 extern int campCecHasObject(void);
-extern unsigned int FUN_002bf520(void);
+extern unsigned int campCecGetOwnRecord(void);
 extern int rt_malloc(unsigned int);
 /* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: _Znwj. */
@@ -145,7 +145,7 @@ void FUN_00413e50(int param_1)
   
   temp_v0 = campCecHasObject();
   if (temp_v0 != 0) {
-    temp_v1 = FUN_002bf520();
+    temp_v1 = campCecGetOwnRecord();
     __aeabi_memcpy4(temp_v23,temp_v1,100);
   }
   else {

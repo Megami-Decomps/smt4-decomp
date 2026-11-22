@@ -70,7 +70,7 @@ void resultDrawLevelUpPanel(ResultWork *work, s32 x, s32 y)
     gxResetColorQuadToWhite();
 
     for (s32 i = 0; i < 5; ++i) {
-        if (listCursorGetRowIfUnblocked(work->statCursor) == i)
+        if (listCursorGetRowIfUnblocked(&work->statCursor) == i)
             continue;
         switch (i) {
         case 0:
@@ -115,7 +115,7 @@ void resultDrawLevelUpPanel(ResultWork *work, s32 x, s32 y)
         texDrawTableEntryAtStoredOrigin(2, table, 166, entry->x + x, entry->y + y, 106);
     }
 
-    s32 row = listCursorGetRowIfUnblocked(work->statCursor);
+    s32 row = listCursorGetRowIfUnblocked(&work->statCursor);
     entry = asdTMTexTableEntryAt(table, row + 186);
     switch (row) {
     case 0:

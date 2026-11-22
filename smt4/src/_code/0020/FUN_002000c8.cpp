@@ -24,7 +24,7 @@ int campCecEditDestroy(void);
 
 extern int scrRunOpcodesStub(unsigned int);
 extern int campCecEditGetFlag125(void);
-/* Supplied declaration required: FUN_00254600. */
+/* Supplied declaration required: savedRecordSetDemonId. */
 /* Supplied declaration required: FUN_0025461c. */
 /* Supplied declaration required: FUN_0025463c. */
 extern int gameDataBlockTestFlag(unsigned int);
@@ -144,7 +144,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
             return 0;
           }
           FUN_0025461c();
-          FUN_00254600(0);
+          savedRecordSetDemonId(0);
           scrScriptProcessStartEntry(*(unsigned int *)(temp_v4 + 4),9);
           temp_v3 = gameGetSlotTable();
           temp_v5 = 0;
@@ -210,7 +210,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
               return 0;
             }
             FUN_0025461c();
-            FUN_00254600(0);
+            savedRecordSetDemonId(0);
             temp_v3 = gameGetSlotTable();
             temp_v5 = 0;
             do {

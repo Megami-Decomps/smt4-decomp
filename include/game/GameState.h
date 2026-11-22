@@ -255,7 +255,8 @@ typedef struct GameState {
     /* 0x3D4 */ s32 unk3D4;
     /* 0x3D8 */ u8 unk3D8[8];
     /* 0x3E0 */ s32 showAllEntries;     /* nonzero: every entry is visible, requirements ignored */
-    /* 0x3E4 */ u8 unk3E4[8];
+    /* 0x3E4 */ s8 showHiddenIcons;    /* nonzero: the navigator places hidden icons too */
+    /* 0x3E5 */ u8 unk3E5[7];
     /* 0x3EC */ s32 stageOverride;      /* -1: derive the stage from the data table */
     /* 0x3F0 */ s32 groupOverride;      /* -1: derive the group from the data table */
     /* 0x3F4 */ u8 unk3F4[4];

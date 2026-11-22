@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0034f8b4(float *, double, double);
-int FUN_0038136c(float *, float *, double, double);
+int colorRampBlendWithFade(float *, float *, double, double);
 int mathInterpolateClamped(void);
 int VectorSignedToFloat(double, int);
 int VectorUnsignedToFloat(...);
@@ -46,7 +46,7 @@ extern unsigned int nw_ut_FloatColor_ToPicaU32(void);
 extern int effGetFrameStep(void);
 extern int asdModelBankGetModel(int, unsigned int);
 /* Supplied declaration required: FUN_0034f8b4. */
-/* Supplied declaration required: FUN_0038136c. */
+/* Supplied declaration required: colorRampBlendWithFade. */
 /* Supplied declaration required: mathInterpolateClamped. */
 
 
@@ -115,7 +115,7 @@ void FUN_00270df0(float *param_1)
     param_1[0xb] = 0.0f;
   }
   pfVar2 = param_1 + 0xc;
-  FUN_0038136c(pfVar2,param_1 + 0x15,temp_v4,temp_v5);
+  colorRampBlendWithFade(pfVar2,param_1 + 0x15,temp_v4,temp_v5);
   temp_v1 = param_1[9];
   DAT_006472ec = (float)VectorUnsignedToFloat((unsigned int)temp_v1 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
   DAT_006472f0 = (float)VectorUnsignedToFloat

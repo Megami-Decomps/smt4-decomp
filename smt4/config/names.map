@@ -6320,3 +6320,15 @@
 001a9104 questShowRequirementProgress
 003d5af0 asdCameraSetLookAtRoll
 002c159c asdCameraSetStereoDepth
+0026faa4 encounterFlagsRollSlots
+00269694 colorRampBlendWithFade
+001db388 asdCameraSetScreenPerspective
+0038f924 aocLoadingTaskDraw
+0032ae80 uniteEffectDrawResultBillboard
+003c9f58 btlCommandMenuStep
+0039cddc naviIconsUpdateScreenRects
+003a4210 saleListBuild
+003ef1e0 filterParamsInitialize
+00326fd8 effectEditorUpdateOrbitCamera
+00204358 resultStatAllocationStep
+00254600 savedRecordSetDemonId

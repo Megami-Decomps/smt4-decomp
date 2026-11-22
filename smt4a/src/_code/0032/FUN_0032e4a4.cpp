@@ -232,17 +232,17 @@ code_r0x0032e99c:
         compendiumRegisterPartyDemon(*(unsigned short *)(iVar9 + 0x62));
         *(unsigned char *)(param_1 + 0x7d4) = 1;
       }
-      FUN_002bf520();
+      campCecGetOwnRecord();
       FUN_0032e30c();
-      uVar8 = FUN_002bf520();
+      uVar8 = campCecGetOwnRecord();
       slotNameDisplaySetEntry(uVar8,(int)*(short *)(iVar9 + 0x62));
       if (((*(char *)(param_1 + 0x7d5) == '\0') && (*(char *)(param_1 + 0x3e4) != '\0')) &&
          (iVar9 = FUN_00345388(0x20), iVar9 != 0)) {
         FUN_00319e58();
-        FUN_002bf520();
+        campCecGetOwnRecord();
         FUN_002c0b5c();
       }
-      FUN_002bf520();
+      campCecGetOwnRecord();
       FUN_002f4014();
     }
     else {

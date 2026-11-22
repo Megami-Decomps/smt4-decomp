@@ -1,8 +1,9 @@
-/* NON_MATCHING: readable rewrite; the per-goal loop body matches retail, but retail shares ONE goal-changed mark between the store paths and the second check (the build duplicates it), keeps a 0x34 frame and its register order for the amount/base differs. */
+/* NON_MATCHING: 113 lines. The goal logic and its single goal-changed mark now match; retail keeps a 0x34-byte
+ * frame (the bank pointer spilled at sp+32) where ours needs 12 bytes, swaps the amount and first-slot registers
+ * (sl/r9) and computes the stock slot address inside the second loop's inlined body. */
 #include "gamedata/RosterView.h"
 #include "quest_center/QuestRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
-#include "AsdSDK/AsdDebugHooks.h"
 #include "gamedata/MapSaveBlockA.h"
 
 /* A roster slot seen as a goal slot: the goal id and one progress counter per requirement. */
@@ -21,11 +22,10 @@ static __inline u8 *goalFlagEntry(u32 goalId)
     return reinterpret_cast<u8 *>(&reinterpret_cast<RosterView *>(gameFlagBlockGet())->flags[goalId]);
 }
 
-/* Marks the goal as having changed. */
-static __inline void goalMarkChanged(u32 goalId)
+/* Bit 3 of a goal's flag entry (the body of partyEntryFlagsBit3). */
+static u32 goalFlagBit3(s32 index)
 {
-    asdDebugHookVoid();
-    goalFlagEntry(goalId)[2] |= 2;
+    return (*goalFlagEntry(index) & 8) >> 3;
 }
 
 /* Adds `amount` to the counter of every requirement of the goal that counts `target`, reporting the goal that
@@ -57,25 +57,22 @@ static __inline void goalAddProgress(GoalSlot *counters, u16 goalId, u16 target,
                     } else {
                         bank->secondProgressedItem = target;
                     }
-                    goalMarkChanged(goalId);
-                    return;
                 }
             } else {
                 counters->counts[i] = 0xffff;
-                if (incomplete) {
-                    goalMarkChanged(goalId);
-                    return;
-                }
             }
             break;
         }
     }
-    if (goal->kind == 1 && goal->requirements[0].kind == 2 && goal->requirements[0].id != 0 &&
-        ((*goalFlagEntry(goal->id) & 8) >> 3) == 0 &&
-        goalConditionsSatisfied(goal->id) != 0) {
+    if (!incomplete) {
+        if (goal->kind != 1 || goal->requirements[0].kind != 2 || goal->requirements[0].id == 0 ||
+            goalFlagBit3(goal->id) != 0 ||
+            goalConditionsSatisfied(goal->id) == 0) {
+            return;
+        }
         bank->secondCompletedItem = goal->requirements[0].id;
-        goalMarkChanged(goalId);
     }
+    goalFlagEntry(goalId)[2] |= 2; /* the goal changed */
 }
 
 /* Adds `amount` progress for `target` to every goal held by the active party and the stock slots. */

@@ -1,4 +1,4 @@
-/* NON_MATCHING: zero-angle sampling retains wrap loops and matrix/stack scheduling differs; -O2 candidate. */
+/* NON_MATCHING: retail keeps the zero angles' sign flags and table conversions live (no constant folding) and schedules the matrix differently. */
 #include "shard/W6_W6Match6_PhaseTrig.h"
 
 extern "C" {
@@ -9,8 +9,14 @@ void nn_math_ARMv6_MTX34AddTranslateAsm(f32 *, const PhaseVector *, const f32 *)
 // Build the inverse planar rotation and translate around the requested origin.
 void mathMatrixBuildInversePlanarTransform(f32 *matrix, f32 angle, f32 x, f32 y)
 {
-    PhaseVector origin = { x, y, 0.0f };
-    PhaseVector inverseOrigin = { -x, -y, 0.0f };
+    PhaseVector origin;
+    origin.x = x;
+    origin.y = y;
+    origin.z = 0.0f;
+    PhaseVector inverseOrigin;
+    inverseOrigin.x = -x;
+    inverseOrigin.y = -y;
+    inverseOrigin.z = 0.0f;
     PhaseSinCos xRotation = samplePhase(g_sinCosTable, 0.0f);
     PhaseSinCos yRotation = samplePhase(g_sinCosTable, 0.0f);
     PhaseSinCos zRotation = samplePhase(g_sinCosTable, 256.0f - angle);

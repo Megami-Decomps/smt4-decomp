@@ -87,16 +87,28 @@ typedef struct BtlUnitA {
     /* 0x000 */ u32 flags;
     /* 0x004 */ s8 state;
     /* 0x005 */ u8 command;         /* the action command requested next */
-    /* 0x006 */ u8 unk006[0x1A];
+    /* 0x006 */ u8 unk006[6];
+    /* 0x00C */ u32 unk00C;         /* cleared when an action starts (btlUnitStartAction) */
+    /* 0x010 */ u8 unk010[0xC];
+    /* 0x01C */ u32 unk01C;         /* cleared when an action starts */
     /* 0x020 */ BtlCombatantEntryA *entry; /* the unit's battle entry */
     /* 0x024 */ BattleRosterRecordA *record; /* the roster record of the action's current target */
     /* 0x028 */ BtlUnitDataA *data;  /* the entry's data block (btlFindEntryBlockByMemberId) */
     /* 0x02C */ u16 id;
     /* 0x02E */ u8 unk02E[0xA];
     /* 0x038 */ s8 targets[0x85]; /* indexed by battle entry: 1 = selected as a target */
-    /* 0x0BD */ u8 unk0BD[0x4D7];
+    /* 0x0BD */ u8 unk0BD[0x4AF];
+    /* 0x56C */ u32 unk56C;         /* 0x56C-0x574 and 0x584-0x58C: cleared when an action starts (btlUnitStartAction) */
+    /* 0x570 */ u32 unk570;
+    /* 0x574 */ u32 unk574;
+    /* 0x578 */ u8 unk578[0xC];
+    /* 0x584 */ u32 unk584;
+    /* 0x588 */ u32 unk588;
+    /* 0x58C */ u32 unk58C;
+    /* 0x590 */ u8 unk590[4];
     /* 0x594 */ u32 cameraMode;     /* the action's camera mode (FUN_004e69e8) */
-    /* 0x598 */ u8 unk598[5];
+    /* 0x598 */ u8 unk598[4];
+    /* 0x59C */ u8 unk59C;          /* cleared when an action starts */
     /* 0x59D */ s8 uiMode;          /* the command menu variant (dispatchBattleCommandUiVariant) */
     /* 0x59E */ u8 unk59E[0x1A];
     /* 0x5B8 */ BtlUnitTargetPair pairs[BTL_UNIT_TARGET_PAIR_COUNT];
@@ -112,6 +124,7 @@ typedef char BtlUnitALayoutCheck[
     sizeof(BtlUnitA) == 0x1250 && sizeof(BtlActionSlotA) == 0x1254 && offsetof(BtlUnitA, entry) == 0x20 &&
     offsetof(BtlUnitA, data) == 0x28 && offsetof(BtlUnitA, targets) == 0x38 &&
     offsetof(BtlUnitA, cameraMode) == 0x594 && offsetof(BtlUnitA, uiMode) == 0x59D && offsetof(BtlUnitA, pairs) == 0x5B8 &&
-    offsetof(BtlUnitA, record) == 0x24 && offsetof(BtlUnitA, targetStates) == 0x9E0 && sizeof(BtlUnitTargetStateA) == 0x10 ? 1 : -1];
+    offsetof(BtlUnitA, record) == 0x24 && offsetof(BtlUnitA, unk01C) == 0x1C && offsetof(BtlUnitA, unk56C) == 0x56C &&
+    offsetof(BtlUnitA, unk584) == 0x584 && offsetof(BtlUnitA, unk59C) == 0x59C && offsetof(BtlUnitA, targetStates) == 0x9E0 && sizeof(BtlUnitTargetStateA) == 0x10 ? 1 : -1];
 
 #endif

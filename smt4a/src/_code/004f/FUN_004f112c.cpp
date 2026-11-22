@@ -1,121 +1,72 @@
-/* NON_MATCHING: 249 vs 255 rows; retail reorders the incoming eye/target registers, copies target/up with different ldm/ldr forms, schedules the distance terms differently and allocates the VFP constants differently. */
+/* NON_MATCHING: 215 lines (177 by shape); the same source as IV's asdCameraSetLookAtRoll. The prologue, the
+ * constants, the straight up/down arm, both identity copies and the tails are retail's. Retail copies
+ * eye/target/up with plain word moves and reloads all six coordinates for the distance test (the build
+ * forwards eye.z and target.y out of the copies), recomputes the eye-to-target differences and the squared
+ * length inside the look-at instead of sharing them with that test, and computes the look-at's three
+ * translations before its first store, from one load of the eye. Tried in wave 74: the look-at written with
+ * scalar locals (it gives retail's operand orders, `st * u.x` and `eye.x * right.x`, and its single load of
+ * the eye) behind a VEC3SquareDist-style test with its own temporary (it gives the recomputed differences and
+ * length) has retail's instruction sequence in the twisted arm, but its registers and the three copies still
+ * differ and it scores 223 (189 by shape). Copying the three vectors through an inline setter that takes
+ * the vector by value gives retail's six reloads in retail's order and three-word ldm/stm copies, but not
+ * retail's registers (246 alone, 199 at best together with the forms above). */
 #include "AsdSDK/Source/Gfx/Camera/AsdCamera.h"
-#include <math.h>
+#include "nw/math/VEC3.h"
 
 using nw::math::MTX34;
 using nw::math::MTX44;
-
-static __inline void copyVector(AsdCameraVec3 *destination, const AsdCameraVec3 *source)
-{
-    *destination = *source;
-}
+using nw::math::VEC3;
 
 extern "C" {
-void cameraMatrixCacheSetLookAt(void *owner);
-void FUN_001aff14(MTX34 *matrix, s32 mode, f32 x, f32 y, f32 z);
-void mathSinCos(f32 *first, f32 *second, f32 angle);
+void cameraMatrixCacheSetLookAt(void *camera, const AsdCameraVec3 *eye, const AsdCameraVec3 *target,
+                                const AsdCameraVec3 *up);
+void FUN_001aff14(MTX34 *matrix, s32 clearTranslation, f32 x, f32 y, f32 z);
 void FUN_00162330(void *destination, const MTX34 *source);
 void FUN_0015a1b4(AsdCamera *camera, const MTX34 *view);
 void nn_math_ARMv6_MTX34CopyAsm(MTX34 *dest, const MTX34 *source);
-void nn_math_ARMv6_VEC3TransformAsm_2AD44C(AsdCameraVec3 *vector, const MTX34 *matrix);
+void nn_math_ARMv6_VEC3TransformAsm_2AD44C(AsdCameraVec3 *out, const MTX34 *matrix, const AsdCameraVec3 *vector);
 void nn_math_ARMv6_MTX44TransposeAsm(MTX44 *dest, const MTX44 *source);
 
-/* Points the camera from `eye` at `target`, keeps `up` (turned by `rotation`, in 1/256 turn units
-   per degree) as its up vector and rebuilds the view matrices; with no roll in `rotation` the
-   owner's plain handler runs instead. */
+/* Points the camera from `eye` at `target`, rolled by `rotation->z` degrees: the view matrix is
+ * nn::math's look-at with a twist, and `up` is turned by the whole `rotation`. With no roll the
+ * owner's plain look-at runs instead. */
 void FUN_004f112c(void *owner, AsdCamera *camera, const AsdCameraVec3 *eye, const AsdCameraVec3 *target,
                   const AsdCameraVec3 *up, const AsdCameraVec3 *rotation)
 {
     if (rotation->z == 0.0f) {
-        cameraMatrixCacheSetLookAt(static_cast<u8 *>(owner) + 0x6c);
+        cameraMatrixCacheSetLookAt((u8 *)owner + 0x6c, eye, target, up);
         return;
     }
-    copyVector(&camera->eye, eye);
-    copyVector(&camera->target, target);
-    copyVector(&camera->up, up);
+    camera->eye = *eye;
+    camera->target = *target;
+    camera->up = *up;
     camera->unk001 = 0;
-    if ((camera->eye.x - camera->target.x) * (camera->eye.x - camera->target.x) +
-            (camera->eye.y - camera->target.y) * (camera->eye.y - camera->target.y) +
-            (camera->eye.z - camera->target.z) * (camera->eye.z - camera->target.z) !=
-        0.0f) {
-        f32 dx = camera->eye.x - camera->target.x;
-        f32 dy = camera->eye.y - camera->target.y;
-        f32 dz = camera->eye.z - camera->target.z;
-        f32 (*view)[4] = camera->view.m;
-        if (dx == 0.0f && dz == 0.0f) {
-            view[0][0] = 1.0f;
-            view[0][1] = 0.0f;
-            view[0][2] = 0.0f;
-            view[0][3] = -camera->eye.x;
-            view[1][0] = 0.0f;
-            view[1][1] = 0.0f;
-            view[2][0] = 0.0f;
-            view[2][2] = 0.0f;
-            if (dy > 0.0f) {
-                view[1][2] = -1.0f;
-                view[1][3] = camera->eye.z;
-                view[2][1] = 1.0f;
-                view[2][3] = -camera->eye.y;
-            } else {
-                view[1][2] = 1.0f;
-                view[1][3] = -camera->eye.z;
-                view[2][1] = -1.0f;
-                view[2][3] = camera->eye.y;
-            }
-        } else {
-            f32 sine;
-            f32 cosine;
-            f32 inverse = 1.0f / sqrtf(dx * dx + dy * dy + dz * dz);
-            f32 forwardY = dy * inverse;
-            f32 forwardX = dx * inverse;
-            f32 forwardZ = dz * inverse;
-            inverse = 1.0f / sqrtf(dz * dz + dx * dx);
-            f32 sideX = dz * inverse;
-            f32 sideZ = -(dx * inverse);
-            f32 upX = forwardZ * sideX - forwardX * sideZ;
-            f32 upY = forwardX * 0.0f - forwardY * sideX;
-            f32 upZ = forwardY * sideZ - forwardZ * 0.0f;
-            mathSinCos(&sine, &cosine, rotation->z * (256.0f / 360.0f));
-            f32 rowX0 = sine * upZ + cosine * sideX;
-            f32 rowX1 = cosine * upZ - sine * sideX;
-            f32 rowZ0 = sine * upY + cosine * sideZ;
-            f32 rowZ1 = cosine * upY - sine * sideZ;
-            f32 rowY0 = sine * upX;
-            f32 rowY1 = cosine * upX;
-            view[0][0] = rowX0;
-            view[0][1] = rowY0;
-            view[0][2] = rowZ0;
-            view[0][3] = -(camera->eye.x * rowX0 + camera->eye.y * rowY0 + camera->eye.z * rowZ0);
-            view[1][0] = rowX1;
-            view[1][1] = rowY1;
-            view[1][2] = rowZ1;
-            view[1][3] = -(camera->eye.x * rowX1 + camera->eye.y * rowY1 + camera->eye.z * rowZ1);
-            view[2][0] = forwardX;
-            view[2][1] = forwardY;
-            view[2][2] = forwardZ;
-            view[2][3] = -(camera->eye.x * forwardX + camera->eye.y * forwardY + camera->eye.z * forwardZ);
-        }
+    f32 dx = camera->eye.x - camera->target.x;
+    f32 dy = camera->eye.y - camera->target.y;
+    f32 dz = camera->eye.z - camera->target.z;
+    if (dx * dx + dy * dy + dz * dz != 0.0f) {
+        nw::math::MTX34LookAt(&camera->view, (const VEC3 *)&camera->eye, rotation->z, (const VEC3 *)&camera->target);
         MTX34 turn;
         nn_math_ARMv6_MTX34CopyAsm(&turn, &MTX34::Identity());
-        FUN_001aff14(&turn, 1, rotation->x * (256.0f / 360.0f), rotation->y * (256.0f / 360.0f), rotation->z * (256.0f / 360.0f));
-        nn_math_ARMv6_VEC3TransformAsm_2AD44C(&camera->up, &turn);
+        FUN_001aff14(&turn, 1, NW_MATH_DEG_TO_FIDX(rotation->x), NW_MATH_DEG_TO_FIDX(rotation->y),
+                     NW_MATH_DEG_TO_FIDX(rotation->z));
+        nn_math_ARMv6_VEC3TransformAsm_2AD44C(&camera->up, &turn, &camera->up);
         FUN_00162330(camera->unk128, &camera->view);
-        *reinterpret_cast<MTX34 *>(&camera->viewTransposed) = camera->view;
+        *(MTX34 *)&camera->viewTransposed = camera->view;
         camera->viewTransposed.m[3][0] = 0.0f;
         camera->viewTransposed.m[3][1] = 0.0f;
         camera->viewTransposed.m[3][2] = 0.0f;
         camera->viewTransposed.m[3][3] = 1.0f;
         nn_math_ARMv6_MTX44TransposeAsm(&camera->viewTransposed, &camera->viewTransposed);
-        if (camera->enabled == 0) {
-            return;
-        }
+        if (camera->enabled)
+            FUN_0015a1b4(camera, &camera->view);
     } else {
-        if (camera->enabled == 0) {
-            return;
+        /* The eye is on the target: the view is left as it is. */
+        if (camera->enabled) {
+            MTX34 turn;
+            nn_math_ARMv6_MTX34CopyAsm(&turn, &MTX34::Identity());
+            FUN_0015a1b4(camera, &camera->view);
         }
-        MTX34 turn;
-        nn_math_ARMv6_MTX34CopyAsm(&turn, &MTX34::Identity());
     }
-    FUN_0015a1b4(camera, &camera->view);
 }
 }

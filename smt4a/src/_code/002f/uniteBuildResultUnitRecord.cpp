@@ -14,7 +14,7 @@ extern "C" {
 void unitRecordBuild(s32 id, UnitRecord *out);
 void recordMergeByteMasks(void *context, UnitRecord *first, UnitRecord *second,
                   s32 option, UnitRecord *out);
-void FUN_0028a538(u32 resultId, UnitRecord *first, UnitRecord *second);
+void uniteCollectInheritableSkills(u32 resultId, UnitRecord *first, UnitRecord *second);
 void unitRecomputeDerivedStats(UnitRecord *unit);
 
 /* Builds the result record of fusion pair `index` into `out` (mode 0: the fused demon with its inherited skills;
@@ -31,7 +31,7 @@ u32 uniteBuildResultUnitRecord(UnitRecord *out, s32 index, s32 mode, u32)
             UnitRecord *second = slotRecordFindById(list->pairs[index].secondId);
             if (first && second) {
                 recordMergeByteMasks(work->context, first, second, 0, out);
-                FUN_0028a538(list->pairs[index].resultId, first, second);
+                uniteCollectInheritableSkills(list->pairs[index].resultId, first, second);
                 for (s32 i = 0; i < 24; ++i) {
                     if (work->inheritanceA.skills[i] != 0 &&
                         !arrayContainsU16(out->skills, 8, work->inheritanceA.skills[i])) {

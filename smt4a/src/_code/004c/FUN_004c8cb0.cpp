@@ -12,8 +12,6 @@ struct HelpMasksView {
 extern "C" {
 extern BtlHelpGlobalsA g_btlHelp;
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
-BtlHelpEntryA *FUN_00200a68(u32 kind, u16 message, u32 object, u32 command,
-                         const void *combatant, u8 option, u32 category, u32 resource);
 
 // Issue a targeted resource request unless the help state suppresses new requests.
 u32 FUN_004c8cb0(u32 object, s32 index, u8 option)

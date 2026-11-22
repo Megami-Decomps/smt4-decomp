@@ -31,7 +31,7 @@ void FUN_00229a24(BtlUi *block);
 void FUN_00229b10(BtlMainState **block, CommandState *state);
 
 /* Sets the acting unit's action kind. */
-static __inline void setActorAction(BtlMainState **block, u8 kind)
+static __inline void setActorAction(BtlMainState **block, s32 kind)
 {
     reinterpret_cast<ActionStateChannels *>(g_btlAction.slots)->entries[(*block)->actionState.index].pending = kind;
 }

@@ -39,7 +39,7 @@ int asdGxPresetsGetDepth(...);
 int titleCloseMoviePlayer(...);
 int asdGxSetChannelFlags(...);
 int soundFlushEventQueue(...);
-int FUN_0013ab18(...);
+int bgmRequestChannelsUpdate(...);
 int titleConfigApplyTarget(...);
 int dataTable02Sub3GetRecord(...);
 int FUN_0013bb34(...);
@@ -356,7 +356,7 @@ extern unsigned int FUN_0013a608(unsigned int);
 /* Supplied declaration required: soundInitializePersistentSlots. */
 /* Supplied declaration required: soundFlushEventQueue. */
 /* Supplied declaration required: soundSetupArchiveAndSlots. */
-/* Supplied declaration required: FUN_0013ab18. */
+/* Supplied declaration required: bgmRequestChannelsUpdate. */
 /* Supplied declaration required: FUN_0013ae58. */
 extern unsigned int FUN_0013af10(void);
 /* Supplied declaration required: renderCtxSetupScreenCamera. */
@@ -720,7 +720,7 @@ LAB_00136430:
         if (DAT_0057ffd3 == 0) {
           temp_v4 = (unsigned int)g_mobiclipProcess;
           if (temp_v4 == 0) {
-            FUN_0013ab18();
+            bgmRequestChannelsUpdate();
             soundFlushEventQueue();
             temp_v4 = FUN_0013af10();
           }

@@ -146,7 +146,7 @@ void campCecEditCreate(u8 openMode)
     edit->table.values[23] = 4;
 
     edit->unk04 = (u32)overlayGetStatusScene();
-    edit->unk08 = (u16 *)FUN_002bf520();
+    edit->unk08 = (u16 *)campCecGetOwnRecord();
     /* the player wears the edited record's equipment while the screen is open */
     __aeabi_memcpy4(edit->unk16C, gameGetPlayerData(), 0xe);
     __aeabi_memcpy4(gameGetPlayerData(), edit->unk08, 0xe);

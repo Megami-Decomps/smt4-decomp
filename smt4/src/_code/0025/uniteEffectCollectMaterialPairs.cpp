@@ -1,4 +1,5 @@
-/* NON_MATCHING: readable rebuild via gfx/MaterialPairScan.h (same loop as FUN_003108b0 with a caller-supplied pattern); relative-pointer walks and register assignment differ from retail. */
+/* NON_MATCHING: readable rebuild via gfx/MaterialPairScan.h (same loop as FUN_003108b0 with a caller-supplied pattern);
+ * retail keeps the reference count on the stack, hoists the 0x274 entry offset and allocates other registers. */
 #include "camp/Unite/UniteEffectState.h"
 
 extern "C" {

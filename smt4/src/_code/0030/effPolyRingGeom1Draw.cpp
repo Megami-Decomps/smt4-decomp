@@ -9,7 +9,7 @@ extern "C" {
 
 void renderSubmissionDrawPacket(PolyGeom *geom, u32 value);
 void FUN_00246afc(PolyGeom *geom, PolyVec4 *rotation0, PolyVec4 *rotation1, PolyVec4 *color);
-u32 FUN_00269694(void *work, void *colorRamp);
+u32 colorRampBlendWithFade(void *work, void *colorRamp);
 
 /* Per-frame draw of a ring effect built from a single geometry (the kind's late update): tints the
  * colour from the work area's ramp with the object's tint into the geometry and, while it is visible,
@@ -21,7 +21,7 @@ void effPolyRingGeom1Draw(PolyObject *obj)
     if ((u32)obj->frame > work->duration && work->duration != 0)
         return;
 
-    u32 ringColor = FUN_00269694(work, work->colorRamp);
+    u32 ringColor = colorRampBlendWithFade(work, work->colorRamp);
     effectColorUnpack(obj->unk30, &g_vectorScratch.second.color);
     effectColorUnpack(ringColor, &g_vectorScratch.first.color);
     g_vectorScratch.first.color.red *= g_vectorScratch.second.color.red;

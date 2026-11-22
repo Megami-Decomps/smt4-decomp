@@ -14,7 +14,7 @@ int sysPlaySe(int id);
 int sysMemClear(void *ptr, int size);                  /* zero a block */
 void *asdMemoryAllocTracked(int heap, int align, int arg2, int size, int arg4);
 u32 taskCreateDraw(const char *name, int priority, int arg2, int arg3, VoidFunc cb, int arg5, int arg6, u32 parent);
-void FUN_002c049c(void);
+void campCecSettingUpdate(void);
 void campCecSettingQueryZero(void);
 
 extern CampCecSetting *g_campCecSetting;
@@ -29,7 +29,7 @@ void campCecSettingOpen(void)
     }
     setting = g_campCecSetting;
     sysMemClear(setting, 0x44);
-    setting->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("CampCecSetting Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002c049c), 0, 0);
+    setting->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("CampCecSetting Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(campCecSettingUpdate), 0, 0);
     taskCreateDraw("CampCecSetting DrawUpLeft", 0x86, 0, 0, campCecSettingQueryZero, 0, 0, setting->task);
     taskCreateDraw("CampCecSetting DrawUpRight", 0xe2, 0, 0, campCecSettingQueryZero, 0, 0, setting->task);
     asdLoadFileAsyncSimple("camp/CecSetting_scr.bf", reinterpret_cast<u32 *>(&setting->heapA), 0);

@@ -18,7 +18,6 @@ struct BattleHelpMasksView {
 
 extern "C" {
 extern BtlHelpGlobalsA g_btlHelp;
-u32 FUN_00200a68(s32, s32, u32, u32, s32, u32, u32, s32);
 
 // The help globals' blocking masks.
 static __inline const BattleHelpMasksView *helpMasks(void)
@@ -32,6 +31,6 @@ u32 FUN_004c8c10(u32 request, s32 index, u32 argument)
     BattleHelpStateView *state = reinterpret_cast<BattleHelpStateView *>(btlGetMainState());
     if ((state->flags & helpMasks()->blockedStates) || (state->flags & helpMasks()->blockedTransitions))
         return 0;
-    return FUN_00200a68(8, static_cast<s16>(index), request, state->requestContext, 0, argument, ~0u, 0);
+    return (u32)FUN_00200a68(8, index, request, state->requestContext, NULL, argument, ~0u, 0);
 }
 }

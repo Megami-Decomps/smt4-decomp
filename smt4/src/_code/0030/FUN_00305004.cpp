@@ -1,111 +1,136 @@
-/* NON_MATCHING: updates the colour and flags of the particle emitters of an effect (effect tint times definition colour times emitter colour); written from the decompilation and the retail disassembly, the colour scratch lives in locals here (retail keeps it in four-float globals) and the float/int conversions are not compared with retail */
+/* NON_MATCHING: written as its siblings FUN_00326650 and FUN_0031b42c (shared EffectColor state in g_vectorScratch,
+ * the saved product copied back each pass, colour bytes through a byte swap); like them, the VFP register
+ * numbering and the unpack/multiply scheduling differ from retail. */
 #include "common.h"
-
-#define COLOR_SCALE (1.0f / 255.0f)
-#define PARTICLE_FLAG_VISIBLE 0x100
-
-/* An ARGB colour as four floats in 0..1 (or 0..255 when scaled back). */
-struct Color4 {
-    f32 a;
-    f32 r;
-    f32 g;
-    f32 b;
-};
-
-struct ParticleSprite {
-    /* 0x00 */ u16 flags;
-    /* 0x02 */ u8 unk02[0xE];
-    /* 0x10 */ u8 transform[0x40];
-    /* 0x50 */ u32 color;
-};
-
-/* One emitter record (0x30 bytes). */
-struct ParticleEmitter {
-    /* 0x00 */ ParticleSprite *sprite;
-    /* 0x04 */ u8 unk04[0x10];
-    /* 0x14 */ s32 particleCount;
-    /* 0x18 */ u32 color;
-    /* 0x1C */ u8 unk1C[0x14];
-};
-
-struct ParticleEmitterList {
-    /* 0x00 */ ParticleEmitter *emitters;
-};
-
-struct ParticleDefinition {
-    /* 0x00 */ u8 unk00[0x24];
-    /* 0x24 */ u8 gradient[0x4];
-    /* 0x28 */ u32 frame;
-    /* 0x2C */ u8 unk2C[8];
-    /* 0x34 */ s32 lifetime;
-    /* 0x38 */ s32 emitterCount;
-    /* 0x3C */ u8 unk3C[0x20];
-    /* 0x5C */ u8 visible;
-};
-
-struct ParticleEffect {
-    /* 0x00 */ u8 origin[0x10];
-    /* 0x10 */ u8 offset[0x14];
-    /* 0x24 */ u32 color;             /* ARGB tint */
-    /* 0x28 */ s32 frame;
-    /* 0x2C */ u8 unk2C[4];
-    /* 0x30 */ ParticleEmitterList *emitterList;
-    /* 0x34 */ ParticleDefinition *definition;
-};
+#include "shard/W6_W6Match3_EffectColor.h"
+#include "gfx/PackedColorBytes.h"
+#include "gfx/VectorScratch.h"
 
 extern "C" {
-u32 FUN_00269694(ParticleDefinition *definition, const void *gradient);
-void matrixInitializeWithScaleAndOffset(void *matrix, const void *scale, const void *offset);
-void matrixApplyByMode(void *transform, const void *matrix, s32 flag);
-void renderSubmissionDrawPacket(ParticleSprite *sprite, u32 frame);
 
-/* Splits an ARGB word into floats scaled by `scale`. */
-static __inline Color4 colorUnpack(u32 argb, f32 scale)
+/* A particle's sprite. */
+struct TintObject {
+    u16 flags;        /* 0x00: bit 0x100 = tinted */
+    u8 pad02[0x0E];
+    u8 transform[0x40]; /* 0x10 */
+    u32 color;        /* 0x50: packed colour, high byte first */
+};
+
+/* One emitter of the list, stride 0x30. */
+struct TintPart {
+    TintObject *object;   /* 0x00 */
+    u8 pad04[0x10];
+    s32 ready;            /* 0x14: live particle count */
+    u32 color;            /* 0x18 */
+    u8 pad1C[0x14];
+};
+
+struct TintList {
+    TintPart part[1];
+};
+
+struct TintBlock {
+    u8 pad00[0x24];
+    u32 colorSource[1];   /* 0x24 */
+    u32 frameId;          /* 0x28 */
+    u8 pad2C[4];
+    u8 pad30[4];
+    s32 startFrame;       /* 0x34 */
+    s32 partCount;        /* 0x38 */
+    u8 pad3C[0x20];
+    u8 tinted;            /* 0x5C */
+};
+
+struct TintEffect {
+    u8 origin[0x10];      /* 0x00 */
+    u8 rotation[0x10];    /* 0x10 */
+    f32 scale;            /* 0x20 */
+    u32 tint;             /* 0x24 */
+    s32 frame;            /* 0x28 */
+    u8 pad2C[4];
+    TintList **list;      /* 0x30 */
+    TintBlock *block;     /* 0x34 */
+};
+
+u32 colorRampBlendWithFade(TintBlock *block, u32 *colorSource);
+void matrixInitializeWithScaleAndOffset(u8 *matrix, TintEffect *effect, const u8 *source, f32 scale); // declcheck: local (the views of FUN_00326650 and FUN_0031b42c: the effect's origin and rotation)
+void matrixApplyByMode(u8 *transform, u8 *matrix, s32 flag);
+void renderSubmissionDrawPacket(TintObject *object, u32 frame);
+
+/* A packed colour word addressed by its byte channels. */
+union TintColor {
+    u32 value;
+    struct {
+        u32 red : 8;
+        u32 green : 8;
+        u32 blue : 8;
+        u32 alpha : 8;
+    } channels;
+};
+
+/* Unpacks the four bytes of a packed colour (high byte first) into 0..1 floats. */
+static __inline void unpackColor(u32 color, EffectColor *out)
 {
-    Color4 color;
-    color.a = (f32)(argb >> 24) * scale;
-    color.r = (f32)((argb & 0xFFFFFF) >> 16) * scale;
-    color.g = (f32)((argb & 0xFFFF) >> 8) * scale;
-    color.b = (f32)(argb & 0xFF) * scale;
-    return color;
+    out->red = (f32)(color >> 24) * 0.003921569f;
+    out->green = (f32)((color & 0xFFFFFF) >> 16) * 0.003921569f;
+    out->blue = (f32)((color & 0xFFFF) >> 8) * 0.003921569f;
+    out->alpha = (f32)(color & 0xFF) * 0.003921569f;
 }
 
-void FUN_00305004(ParticleEffect *effect)
+static __inline void multiplyColor(EffectColor *color, const EffectColor *by)
 {
-    ParticleEmitter *emitter = effect->emitterList->emitters;
-    ParticleDefinition *definition = effect->definition;
-    if (effect->frame > definition->lifetime && definition->lifetime != 0)
-        return;
+    color->red = color->red * by->red;
+    color->green = color->green * by->green;
+    color->blue = color->blue * by->blue;
+    color->alpha = color->alpha * by->alpha;
+}
 
-    s32 emitterCount = definition->emitterCount;
-    u32 definitionColor = FUN_00269694(definition, definition->gradient);
-    Color4 tint = colorUnpack(effect->color, COLOR_SCALE);
-    Color4 base = colorUnpack(definitionColor, COLOR_SCALE);
-    Color4 effectColor;
-    effectColor.a = base.a * tint.a;
-    effectColor.r = base.r * tint.r;
-    effectColor.g = base.g * tint.g;
-    effectColor.b = base.b * tint.b;
+/* Tints every live emitter of the effect by (block colour * effect tint * part colour), once the
+ * effect frame has reached the block's start frame. */
+void FUN_00305004(TintEffect *effect)
+{
+    TintBlock *block = effect->block;
+    TintList *list = *effect->list;
 
-    u8 matrix[0x5C];
-    matrixInitializeWithScaleAndOffset(matrix, effect, effect->offset);
-    for (s32 i = 0; i < emitterCount; i++, emitter++) {
-        if (emitter->particleCount <= 0)
-            continue;
-        ParticleSprite *sprite = emitter->sprite;
-        matrixApplyByMode(sprite->transform, matrix, 0);
+    if (effect->frame <= block->startFrame || block->startFrame == 0) {
+        s32 partCount = block->partCount;
+        u32 blockColor = colorRampBlendWithFade(block, block->colorSource);
+        EffectColor saved;
+        TintColor color;
+        u8 matrix[0x40];
 
-        Color4 own = colorUnpack(emitter->color, COLOR_SCALE);
-        u32 a = (u32)(own.a * effectColor.a * 255.0f);
-        u32 r = (u32)(own.r * effectColor.r * 255.0f);
-        u32 g = (u32)(own.g * effectColor.g * 255.0f);
-        u32 b = (u32)(own.b * effectColor.b * 255.0f);
-        sprite->color = (b & 0xFF) | ((g & 0xFF) << 8) | ((r & 0xFF) << 16) | (a << 24);
-        if (definition->visible != 0)
-            sprite->flags |= PARTICLE_FLAG_VISIBLE;
-        else
-            sprite->flags &= ~PARTICLE_FLAG_VISIBLE;
-        renderSubmissionDrawPacket(sprite, definition->frame & 0xFFFF);
+        unpackColor(effect->tint, &g_vectorScratch.second.color);
+        unpackColor(blockColor, &g_vectorScratch.first.color);
+        multiplyColor(&g_vectorScratch.first.color, &g_vectorScratch.second.color);
+        effectColorCopy(&g_vectorScratch.first.color, &saved);
+        matrixInitializeWithScaleAndOffset(matrix, effect, effect->rotation, effect->scale);
+
+        for (s32 n = 0; n < partCount; n++) {
+            TintPart *part = &list->part[n];
+            if (part->ready > 0) {
+                TintObject *object = part->object;
+                matrixApplyByMode(object->transform, matrix, 0);
+                unpackColor(part->color, &g_vectorScratch.first.color);
+                effectColorCopy(&saved, &g_vectorScratch.second.color);
+                multiplyColor(&g_vectorScratch.first.color, &g_vectorScratch.second.color);
+                u32 a = (u32)(g_vectorScratch.first.color.red * 255.0f);
+                u32 r = (u32)(g_vectorScratch.first.color.green * 255.0f);
+                u32 g = (u32)(g_vectorScratch.first.color.blue * 255.0f);
+                u32 b = (u32)(g_vectorScratch.first.color.alpha * 255.0f);
+                u32 packed = (a << 24) | ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF);
+                color.channels.red = packedColorSwap32(packed) >> 24;
+                color.channels.green = packedColorSwap32(packed) >> 16;
+                color.channels.blue = packedColorSwap32(packed) >> 8;
+                color.channels.alpha = packedColorSwap32(packed);
+                object->color = color.value;
+                if (block->tinted != 0) {
+                    object->flags = object->flags | 0x100;
+                } else {
+                    object->flags = object->flags & 0xFEFF;
+                }
+                renderSubmissionDrawPacket(object, block->frameId & 0xFFFF);
+            }
+        }
     }
 }
 

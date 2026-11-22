@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match4_CampCecResumeState.h"
+#include "cec/CecProcessGlobal.h"
 
 extern "C" {
 u32 campCecSettingExists();
@@ -6,7 +7,6 @@ u32 campCecSettingIsDone();
 void campCecSettingOpen();
 void campCecSettingDestroy();
 void partyPanelRefreshFromSlotTable();
-u8 cecQueryOptionalProcess();
 
 u32 campCecWaitForSettings(CampCecResumeState *state)
 {

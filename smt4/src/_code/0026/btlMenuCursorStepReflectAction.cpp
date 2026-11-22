@@ -1,4 +1,8 @@
-/* NON_MATCHING: readable rewrite from retail disassembly compiles (215 vs 175 rows); retail spills r0-r3 and reloads the second argument from the stack and lays the per-kind cases out as shared tails */
+/* NON_MATCHING: readable rewrite from retail disassembly compiles (215 vs 175 rows); retail spills r0-r3 and reloads the second argument from the stack and lays the per-kind cases out as shared tails.
+ * Leads: the callers pass an integer 1 as the fifth (stack) argument, which retail copies through s16 into the
+ * action's 0x28 word (`value`), and retail inlines the "cannot move" notice test in each case that sends it
+ * (cases 5/6, 7/8/14/15, 21, 22, 23); written that way the shape score falls from 248 to 172 but the raw diff
+ * grows (316) because the prologue still keeps the second argument in a register. */
 #include "battle/btlReflect.h"
 #include "common.h"
 #include "battle/BtlMainAccess.h"

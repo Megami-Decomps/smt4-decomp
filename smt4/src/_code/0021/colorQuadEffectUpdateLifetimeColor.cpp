@@ -28,7 +28,7 @@ static __inline void colorQuadSetRect(ColorQuadEffectOutput *output,
 
 extern "C" {
 void renderCtxSetPackedColor(u32 color);
-u32 FUN_00269694(const u8 *curve, const ScreenEffectWeightTrack *weight,
+u32 colorRampBlendWithFade(const u8 *curve, const ScreenEffectWeightTrack *weight,
                  s32 frame, s32 duration);
 
 void colorQuadEffectUpdateLifetimeColor(ColorQuadEffectJob *job)
@@ -50,7 +50,7 @@ void colorQuadEffectUpdateLifetimeColor(ColorQuadEffectJob *job)
         output->color.a = 0;
         return;
     }
-    u32 sampledColor = FUN_00269694(resource->colorCurve, &resource->weight,
+    u32 sampledColor = colorRampBlendWithFade(resource->colorCurve, &resource->weight,
                                    frame, duration);
     renderCtxSetPackedColor(job->color);
     effectColorCopy(&g_vectorScratch.first.color, &g_vectorScratch.second.color);

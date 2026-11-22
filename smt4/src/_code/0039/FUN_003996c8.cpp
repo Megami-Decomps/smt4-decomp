@@ -14,7 +14,7 @@ int mathDistanceBetweenPoints(void);
 int renderCtxPopState(...);
 int renderStackPushIndexed(unsigned int, int, unsigned int);
 int FUN_0039af94(int);
-int FUN_0039cddc(int);
+int naviIconsUpdateScreenRects(int);
 int FUN_0039d0d0(int);
 int FUN_0039e56c(int);
 int eventRefreshVisibility(int);
@@ -44,7 +44,7 @@ extern int mapClassifyPlaceState(unsigned int);
 /* Supplied declaration required: renderStackPushIndexed. */
 extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0039af94. */
-/* Supplied declaration required: FUN_0039cddc. */
+/* Supplied declaration required: naviIconsUpdateScreenRects. */
 /* Supplied declaration required: FUN_0039d0d0. */
 /* Supplied declaration required: FUN_0039e56c. */
 /* Supplied declaration required: eventRefreshVisibility. */
@@ -150,10 +150,10 @@ void FUN_003996c8(int param_1)
       FUN_0039e56c(param_1);
       temp_v1 = 1;
       *(unsigned char *)(param_1 + 0x5a8f) = 1;
-      FUN_0039cddc(param_1);
+      naviIconsUpdateScreenRects(param_1);
     }
     else if (*(char *)(param_1 + 0x5a8f) != '\0') {
-      FUN_0039cddc(param_1);
+      naviIconsUpdateScreenRects(param_1);
     }
   }
 LAB_003998fc:

@@ -6,10 +6,8 @@
 #define NW_MATH_VEC3_H
 
 #include "nw/math/MTX33.h"
+#include "nw/math/Trig.h"
 #include <math.h>
-
-/* The trig table lookup (nn::math's SinCosFIdx): sine and cosine of an index of 256 steps a turn. */
-extern "C" void mathSinCos(f32 *sine, f32 *cosine, f32 index);
 
 namespace nw {
 namespace math {

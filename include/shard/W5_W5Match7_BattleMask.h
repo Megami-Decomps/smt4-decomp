@@ -35,4 +35,12 @@ typedef char BattleMaskPresetsDownedOffsetCheck[
 extern "C" {
 extern BattleMaskPresets g_battleMaskPresets;
 }
+
+/* Whether an entry's or the battle state's 64-bit flags hold any bit of `mask`. Both are passed by value: retail
+ * reads the flags as two words and the mask as one 64-bit load where the open-coded test pairs them the other way
+ * (smt4a FUN_003cc460, btlUnitStartAction). */
+static __inline bool battleMaskIntersects(u64 flags, u64 mask)
+{
+    return (flags & mask) != 0;
+}
 #endif

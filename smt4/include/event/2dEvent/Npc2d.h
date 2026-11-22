@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_00254600(u16 value);
+void savedRecordSetDemonId(u16 value);
 
 u8 *gameGetCounters(void);
 

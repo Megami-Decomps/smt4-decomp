@@ -33,8 +33,8 @@ int playLogUpdate(void);
 int campReleaseRegisteredTouchRegions(void);
 int useCounterStart(void);
 int campCecScriptStart(...);
-int FUN_002bf534(...);
-int FUN_002e2404(...);
+int campCecCreate(...);
+int campCecSetSelection(...);
 int campCecSetObjectValue(...);
 int FUN_00319aec(...);
 int campCecDestroyOverlay(...);
@@ -243,7 +243,7 @@ extern int uniteGetState(void);
 /* Supplied declaration required: campFusionResultCommand. */
 /* Supplied declaration required: buttonHelpSetPanelState. */
 extern int campCecEditIsOpen(void);
-/* Supplied declaration required: FUN_002bf534. */
+/* Supplied declaration required: campCecCreate. */
 extern int FUN_002bfd04(void);
 /* Supplied declaration required: frameTexSetValue. */
 extern int FUN_002c2bd0(void);
@@ -256,7 +256,7 @@ extern int pairedAvailabilityBothReady(void);
 /* Supplied declaration required: dataTableAndTexRelease. */
 extern int campCecEditIsActive(void);
 extern int FUN_002e2054(void);
-/* Supplied declaration required: FUN_002e2404. */
+/* Supplied declaration required: campCecSetSelection. */
 /* Supplied declaration required: campCecSetObjectValue. */
 /* Supplied declaration required: FUN_002e26a4. */
 /* Supplied declaration required: FUN_002e26c4. */
@@ -1805,7 +1805,7 @@ LAB_003d801c:
           }
           puVar2[7] = 0x34;
           gameGlobalsSetMenuOpenFlag(0);
-          FUN_002e2404(3);
+          campCecSetSelection(3);
         }
       }
       else {
@@ -1820,7 +1820,7 @@ LAB_003d801c:
     else {
       temp_v4 = mapRndMazeTaskIsActive();
       if (temp_v4 == 0) {
-        FUN_002bf534(1);
+        campCecCreate(1);
         temp_v4 = puVar2[0xb] + 1;
         puVar2[0xb] = temp_v4;
       }
@@ -1831,7 +1831,7 @@ LAB_003d801c:
     if (temp_v4 == 0) {
       temp_v4 = mapRndMazeTaskIsActive();
       if (temp_v4 == 0) {
-        FUN_002bf534(1);
+        campCecCreate(1);
         temp_v4 = puVar2[0xb] + 1;
         puVar2[0xb] = temp_v4;
       }
@@ -1951,7 +1951,7 @@ LAB_003d801c:
         temp_v4 = temp_v4 + 1;
         if (temp_v4 >= 8) break;
         if ((temp_v4 == 7) && (*(char *)((int)puVar2 + 0xd72) != '\0')) {
-          FUN_002bf534(0);
+          campCecCreate(0);
         }
       }
       puVar12 = puVar2 + 0x196;

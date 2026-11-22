@@ -1,4 +1,6 @@
-/* NON_MATCHING: translation-copy addressing and child-vector growth allocate registers differently from retail. */
+/* NON_MATCHING: retail stores the saved translation with one stm (a 3-word value built from the matrix column), binds
+ * the animation through a (row, column) accessor (`mla` of the zero indices) and allocates the child-vector growth
+ * differently. */
 #include "common.h"
 #include <stddef.h>
 #include "shard/W6_W6Match3_RotationY.h"
@@ -114,9 +116,7 @@ void modelSelectionActivate(ModelSelection* selection, int modelIndex, int anima
     selection->savedTranslation.z = model->translationZ;
 
     WordVector3* auxiliary = cameraGetProviderEntryPayload(model);
-    selection->savedAuxiliary.x = auxiliary->x;
-    selection->savedAuxiliary.y = auxiliary->y;
-    selection->savedAuxiliary.z = auxiliary->z;
+    selection->savedAuxiliary = *auxiliary;
 
     gfxModelSlotSetActive(model, 0);
     sysFlagsSetBits(1);

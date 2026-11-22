@@ -1,4 +1,6 @@
-/* NON_MATCHING: register allocation and scheduling differ (menu/loop index swap, mode byte base hoisted into a register in retail, flag materialised as mov #1/moveq #0); logic matches retail. */
+/* NON_MATCHING: 183 lines: the mode byte is s8 (retail's split base work+0x800, as here); remaining: retail spills
+ * fewer values (a 20-byte frame against ours 52), materialises the compare flag as mov #1/moveq #0 and swaps the
+ * menu/loop-index registers; logic matches retail. */
 #include "common.h"
 #include <stdio.h>
 #include "gamedata/NkmBaseRecordA.h"
@@ -30,7 +32,7 @@ struct StatMenu {
     s8 level;
     u8 unk95[0x33];
     u8 sprites[0x798];
-    u8 mode;
+    s8 mode;
     u8 kind;
     u8 unk862[6];
     StatEntry entries[1];

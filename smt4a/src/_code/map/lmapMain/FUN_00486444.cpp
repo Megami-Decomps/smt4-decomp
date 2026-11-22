@@ -13,10 +13,10 @@ int FUN_0049368c(...);
 int renderStackPushIndexed(...);
 int distSpatial(void);
 int FUN_00486d0c(...);
-int FUN_00487d6c(...);
+int naviPanelDrawFrame(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int FUN_004884d8(...);
 int FUN_004888e4(...);
-int FUN_0048a5e4(...);
+int naviPanelDrawMap(...);
 int titleScissorApplyOrClearRequests(...);
 int FUN_0048d67c(...);
 int FUN_0048d98c(...);
@@ -61,10 +61,10 @@ extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int gameFlagsClassify(unsigned int);
 extern int FUN_00384cf4(void);
 /* Supplied declaration required: FUN_00486d0c. */
-/* Supplied declaration required: FUN_00487d6c. */
+/* Supplied declaration required: naviPanelDrawFrame. */
 /* Supplied declaration required: FUN_004884d8. */
 /* Supplied declaration required: FUN_004888e4. */
-/* Supplied declaration required: FUN_0048a5e4. */
+/* Supplied declaration required: naviPanelDrawMap. */
 extern unsigned char mathHeadingToDirectionCode(int context, float angle);
 /* Supplied declaration required: titleScissorApplyOrClearRequests. */
 /* Supplied declaration required: FUN_0048d67c. */
@@ -121,8 +121,8 @@ void FUN_00486444(int param_1)
   if (DAT_005f1a5e != '\0') {
     temp_v4 = FUN_00384cf4();
     if (temp_v4 == 0) {
-      FUN_0048a5e4(param_1);
-      FUN_00487d6c(param_1);
+      naviPanelDrawMap(param_1);
+      naviPanelDrawFrame(param_1);
       return;
     }
     temp_v5 = naviMainGetRequestedMap(temp_v3);
@@ -151,8 +151,8 @@ void FUN_00486444(int param_1)
     temp_v6 = gameFlagsClassify(temp_v5);
     if (temp_v6 == 2 || temp_v6 == 3) {
       DAT_00587f20 = 0xf1;
-      FUN_0048a5e4(param_1);
-      FUN_00487d6c(param_1);
+      naviPanelDrawMap(param_1);
+      naviPanelDrawFrame(param_1);
       DAT_00587f20 = DAT_00587f20 + 1;
       return;
     }
@@ -344,8 +344,8 @@ LAB_004866c8:
   }
   titleScissorApplyOrClearRequests(param_1,0);
   DAT_00587f20 = 0xf1;
-  FUN_0048a5e4(param_1);
-  FUN_00487d6c(param_1);
+  naviPanelDrawMap(param_1);
+  naviPanelDrawFrame(param_1);
   DAT_00587f20 = DAT_00587f20 + 1;
   return;
 }

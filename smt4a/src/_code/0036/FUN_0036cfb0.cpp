@@ -2,6 +2,7 @@
 #include "shard/Shard0031.h"
 #include "gamedata/SaveSlotRecord.h"
 #include "gamedata/SaveSlotTable.h"
+#include "code/Code002a_Smt4a.h"
 
 extern "C" {
 void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
@@ -9,7 +10,6 @@ void sysPlaySe(s32 sound);
 void cecProcessStart(void);
 void cecProcessCall4(void);
 void cecProcessDestroy(void);
-void FUN_002a6480(u16 value);
 void partyPanelRefreshFromSlotTable(void);
 s32 bitsAt60Test(SlotRecordA *record, u32 flags);
 void bitsAt60Clear(SlotRecordA *record, u32 flags);
@@ -29,7 +29,7 @@ u32 FUN_0036cfb0(CampCecResumeState *state)
             cecProcessStart();
             cecProcessCall4();
             cecProcessDestroy();
-            FUN_002a6480(0);
+            savedRecordSetDemonId(0);
             ++state->exchange.scriptStep;
         }
         break;
@@ -43,7 +43,7 @@ u32 FUN_0036cfb0(CampCecResumeState *state)
                     }
                 }
             }
-            FUN_002a6480(0);
+            savedRecordSetDemonId(0);
             partyPanelRefreshFromSlotTable();
             scrScriptProcessStartEntry(state->launch.script, 30);
             ++state->exchange.scriptStep;

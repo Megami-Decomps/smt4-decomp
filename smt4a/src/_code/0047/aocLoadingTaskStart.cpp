@@ -4,7 +4,7 @@
 
 extern "C" {
 s32 cycleWorkStep(u32 job);
-s32 FUN_00478ac4(u32 job);
+s32 aocLoadingTaskDraw(u32 job);
 
 u32 taskCreateDraw(const s8* name, s32 group, u16 startDelay,
                    u16 endDelay, AsdProcUpdateFunc callback,
@@ -19,7 +19,7 @@ void aocLoadingTaskStart(AocLoadingTask *loading, u32 request)
         u32 process = asdProcessCreateSimple(reinterpret_cast<const s8*>("Aoc loading CALC"), 4, 0, 0, cycleWorkStep, NULL, reinterpret_cast<u32>(loading));
         loading->process = process;
         taskCreateDraw(reinterpret_cast<const s8*>("Aoc loading DOWN"), 0xEC, 1, 0,
-                       FUN_00478ac4, NULL, reinterpret_cast<u32>(loading),
+                       aocLoadingTaskDraw, NULL, reinterpret_cast<u32>(loading),
                        reinterpret_cast<void*>(process));
     }
 }

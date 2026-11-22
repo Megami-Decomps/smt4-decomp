@@ -22,6 +22,7 @@ struct NaviPanelListEntry {
 
 class Obj532300;
 extern "C" void naviPanelInitialize(Obj532300 *panel);
+extern "C" void naviPanelDrawFrame(Obj532300 *panel);
 
 /* The map navigation panel: its state handlers are the member-function pointers listed in the
  * table at 0x532300 (named after it until the real name is known), kept in 17 slots at +0x13F8. */
@@ -137,6 +138,7 @@ protected:
     /* 0x20650 */ u8 unk20650[4];
 
     friend void naviPanelInitialize(Obj532300 *panel);
+    friend void naviPanelDrawFrame(Obj532300 *panel);
     friend struct Obj532300LayoutCheck;
 };
 

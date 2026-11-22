@@ -1,82 +1,55 @@
-/* NON_MATCHING: register allocation only: same instruction sequence and row count, but retail keeps the base in r3, saves fp as well and assigns the six field pointers to different registers. */
+/* NON_MATCHING: twin of IV's battleUpdateScreenFade; retail converts and merges the four channels one after another; armcc unrolls the channel loop and interleaves the conversions across VFP registers. */
 #include "common.h"
 
-/* Two tinted layers' color fades: per layer the current color, the fade ends, the state and its progress. */
-struct LayerColorFades {
-    /* 0x0000 */ u8 unk0000[0x4D18];
-    /* 0x4D18 */ u32 color[2];
-    /* 0x4D20 */ u32 from[2];
-    /* 0x4D28 */ u32 to[2];
+struct PairedColorFadeState {
+    /* 0x0000 */ u8 unk0000[0x4d18];
+    /* 0x4D18 */ u32 current[2];
+    /* 0x4D20 */ u32 first[2];
+    /* 0x4D28 */ u32 second[2];
     /* 0x4D30 */ u32 state[2];
-    /* 0x4D38 */ s32 step[2];
+    /* 0x4D38 */ s32 elapsed[2];
     /* 0x4D40 */ s32 duration[2];
 };
 
-/* Moves each channel of `base` toward `other` by `weight` (0..1). */
-static __inline u32 blendColor(u32 base, u32 other, f32 weight)
+static inline u32 interpolateMaskedColor(u32 from, u32 to, f32 weight)
 {
-    u32 red = ((u32)((f32)((other & 0xFF000000) - (base & 0xFF000000)) * weight) + (base & 0xFF000000)) & 0xFF000000;
-    u32 green = ((u32)((f32)((other & 0xFF0000) - (base & 0xFF0000)) * weight) + (base & 0xFF0000)) & 0xFF0000;
-    u32 blue = ((u32)((f32)((other & 0xFF00) - (base & 0xFF00)) * weight) + (base & 0xFF00)) & 0xFF00;
-    u32 alpha = ((u32)((f32)((other & 0xFF) - (base & 0xFF)) * weight) + (base & 0xFF)) & 0xFF;
-    return alpha | blue | green | red;
+    u32 color = 0;
+    for (u32 mask = 0xff000000; mask != 0; mask >>= 8)
+        color |= ((u32)((f32)((to & mask) - (from & mask)) * weight) + (from & mask)) & mask;
+    return color;
 }
 
-extern "C" {
-
-/* Steps one layer's color fade: fades in (states 0-2) or out (states 4-6), then holds the end color. */
-void FUN_003e785c(LayerColorFades *fades, s32 layer)
+/* Advance either direction of the selected packed-color fade. */
+extern "C" void FUN_003e785c(PairedColorFadeState *fade, s32 index)
 {
-    u32 *state = &fades->state[layer];
-    s32 *duration = &fades->duration[layer];
-    s32 *step = &fades->step[layer];
-    u32 *color = &fades->color[layer];
-    u32 *from = &fades->from[layer];
-    u32 *to = &fades->to[layer];
-    switch (*state) {
+    switch (fade->state[index]) {
     case 0:
-        *state = 1;
+        fade->state[index] = 1;
     case 1: {
-        s32 total = *duration;
-        u32 end = *to;
-        u32 start = *from;
-        f32 weight = 1.0f - (f32)*step / (f32)total;
-        s32 next = *step + 1;
-        *color = blendColor(end, start, weight);
-        *step = next;
-        if (next < total) {
-            return;
-        }
-        *state = 2;
+        s32 duration = fade->duration[index];
+        f32 weight = 1.0f - (f32)fade->elapsed[index] / (f32)duration;
+        fade->current[index] = interpolateMaskedColor(fade->second[index], fade->first[index], weight);
+        if (++fade->elapsed[index] >= duration)
+            fade->state[index] = 2;
         break;
     }
     case 2:
-        *color = *to;
-        *state = 3;
+        fade->current[index] = fade->second[index];
+        fade->state[index] = 3;
         break;
-    default:
-        return;
     case 4:
-        *state = 5;
+        fade->state[index] = 5;
     case 5: {
-        s32 total = *duration;
-        u32 end = *to;
-        u32 start = *from;
-        f32 weight = (f32)*step / (f32)total;
-        s32 next = *step + 1;
-        *color = blendColor(start, end, weight);
-        *step = next;
-        if (next < total) {
-            return;
-        }
-        *state = 6;
+        s32 duration = fade->duration[index];
+        f32 weight = (f32)fade->elapsed[index] / (f32)duration;
+        fade->current[index] = interpolateMaskedColor(fade->first[index], fade->second[index], weight);
+        if (++fade->elapsed[index] >= duration)
+            fade->state[index] = 6;
         break;
     }
     case 6:
-        *color = *to;
-        *state = 7;
+        fade->current[index] = fade->second[index];
+        fade->state[index] = 7;
         break;
     }
-}
-
 }

@@ -1,4 +1,6 @@
-/* NON_MATCHING: ARMCC folds sprite-field addresses and merges transition tails differently; retail also retains extra branches in its animation-variant selection. */
+/* NON_MATCHING: 84 lines. Retail keeps the shared `FUN_004029f4(list, nextState, 0)` tail in case 5 (cases 2 and 4
+ * branch to it; ours keeps case 2's copy) and lays the release block before that tail; the page-button pose
+ * keeps its variant in r6 and re-forms the sprite address per call. */
 #include "ui/UiSpriteApi.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "addon/PackageSelection.h"
@@ -13,7 +15,7 @@ struct ContentListState {
     /* 0x0F4 */ s32 scroll;
     /* 0x0F8 */ s32 selection;
     /* 0x0FC */ u8 unk0FC[8];
-    /* 0x104 */ u8 ownsTextureNode;
+    /* 0x104 */ s8 ownsTextureNode;
     /* 0x105 */ u8 unk105[3];
     /* 0x108 */ s32 animationPhase;
     /* 0x10C */ u8 unk10C[0x40];
@@ -40,6 +42,33 @@ s32 useCounterGetCurrentValue(void);
 void sortOwnerRun(ContentListState* list);
 }
 
+/* Poses the page button: variants 0 and 1 are its two resting keyframes (4, 5), 2 and 3 the pressed
+ * ones (6, 7), which also switch to the pressed image. Inlined: retail tests all four variants against a
+ * value that can only be 0 or 1 here (FUN_00402f58 poses the pressed keyframes 6 and 7 directly). */
+static __inline void contentListPosePageButton(UiSpriteState *sprite, s32 variant)
+{
+    s32 key = 0;
+    s32 image = 0;
+    switch (variant) {
+    case 0:
+        key = 4;
+        break;
+    case 1:
+        key = 5;
+        break;
+    case 2:
+        key = 6;
+        image = 1;
+        break;
+    case 3:
+        key = 7;
+        image = 1;
+        break;
+    }
+    uiSpriteSetKeyframe(sprite, key, 0);
+    uiSpriteSetImageKeyframe(sprite, image, 0);
+}
+
 // Drive content-list initialization, texture ownership, and sprite transitions.
 extern "C" u32 FUN_00405268(ContentListState* list)
 {
@@ -48,9 +77,10 @@ extern "C" u32 FUN_00405268(ContentListState* list)
         contentListWaitAndInitialize(list);
         break;
     case 2:
-        if (uiSpriteAdvanceAnimation(&list->firstSprite, 1.0f)) {
-            FUN_004029f4(list, list->nextState, 0);
+        if (!uiSpriteAdvanceAnimation(&list->firstSprite, 1.0f)) {
+            break;
         }
+        FUN_004029f4(list, list->nextState, 0);
         break;
     case 3:
         FUN_00403e2c(list);
@@ -58,20 +88,16 @@ extern "C" u32 FUN_00405268(ContentListState* list)
     case 4: {
         u16 table = list->texture->content.table;
         u16 node = list->texture->content.node;
-        if (table != 0) {
-            if (!textureGetIndexedResource(table) ||
-                !asdTMTexTableNodeIsLoaded(table, node)) {
-                break;
-            }
+        if (table == 0 || (textureGetIndexedResource(table) && asdTMTexTableNodeIsLoaded(table, node))) {
+            FUN_004029f4(list, list->nextState, 0);
         }
-        FUN_004029f4(list, list->nextState, 0);
         break;
     }
     case 5:
         if (!uiSpriteAdvanceAnimation(&list->secondSprite, 1.0f)) {
             break;
         }
-        if (list->secondSprite.alphaKey != 1) {
+        if (uiSpriteGetMode(&list->secondSprite) != 1) {
             u16 table = list->texture->content.table;
             u16 node = list->texture->content.node;
             if (table != 0 &&
@@ -93,15 +119,13 @@ extern "C" u32 FUN_00405268(ContentListState* list)
         break;
     case 6:
         if (uiSpriteAdvanceAnimation(&list->thirdSprite, 1.0f)) {
-            if (list->thirdSprite.alphaKey != 1) {
+            if (uiSpriteGetMode(&list->thirdSprite) != 1) {
                 FUN_004029f4(list, 7, 0);
                 list->firstFlag = 0;
                 list->secondFlag = 0;
             } else {
-                s16 frame = uiSpriteGetOperationMode(&list->thirdSprite) == 7 ? 4 : 5;
-                uiSpriteSetKeyframe(&list->thirdSprite, frame, 0);
-                uiSpriteSetImageKeyframe(&list->thirdSprite, 0, 0);
-                if (++list->animationPhase > 1) {
+                contentListPosePageButton(&list->thirdSprite, uiSpriteGetOperationMode(&list->thirdSprite) == 7 ? 0 : 1);
+                if (++list->animationPhase >= 2) {
                     list->animationPhase = 0;
                 }
             }

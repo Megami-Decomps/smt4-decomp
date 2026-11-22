@@ -311,7 +311,7 @@ s32 campCecRecvDownloadState(CampCecRecv *recv)
         if (scrRunOpcodesStub(recv->receive.script) != 2) {
             return 3;
         }
-        playerSummaryFill((PlayerSummary *)FUN_002bf520());
+        playerSummaryFill((PlayerSummary *)campCecGetOwnRecord());
         if (!gameFlagIsSet(0x551)) {
             /* Announce the first sender whose record asks for it. */
             s32 limit = 32;

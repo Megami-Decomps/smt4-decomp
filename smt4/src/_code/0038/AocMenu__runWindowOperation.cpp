@@ -1,9 +1,13 @@
 #include "code/Code0023.h"
 #include "addon/aocMain.h"
-/* NON_MATCHING: retail unpacks the pending event with an ldm/stm copy into a second 20-byte temp, keeps the state constants in r6/r7/r8 and orders the switch tests as a compare ladder (frame 72 bytes here 52); the state machine, calls and stored fields are the same. */
+/* NON_MATCHING: retail inlines the panel's Obj4221a4::initialize (the base initialize, the three table-58
+ * touch regions and `ready = 1`) where this unit calls it: the two were one translation unit (56 lines off
+ * with that definition in this file, 91 without). The rest is the touch-call argument scheduling
+ * Obj4221a4::initialize itself still misses, the `panel.state` base and the step-6 change sharing its tail. */
 #include "classes/AocMenu.h"
 #include "classes/Obj422594.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/AsdDebugHooks.h"
 
 /* A window operation object: slot 1 releases it, slot 3 hands out its pending event. */
 class WindowOperation {
@@ -13,10 +17,6 @@ public:
     virtual void slot2();
     virtual RequestParameters getEvent();
 };
-
-namespace {
-
-}
 
 extern "C" {
 s32 strIsEmpty(RequestParameters *event);
@@ -30,9 +30,6 @@ void ifTouchRegionClearAll(u32 *regions);
 void releaseEntriesA(u32 *entries); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: argument of type "u32 *" is incompatible with parameter of type "Obj *")
 void FUN_00233e70(u32 *job, s32 a, s32 b);
 void listScrollerInitialize(u32 *range, s32 a, s32 entry, s32 b, s32 c, s32 d);
-void touchRegisterFirstRegion(Obj422594 *object, s32 x, s32 y, s32 width, s32 height);
-void touchRegisterSecondRegion(Obj422594 *object, s32 x, s32 y, s32 width, s32 height);
-void touchRegionOwnerAddRegion(Obj422594 *object, s32 x, s32 y, s32 width, s32 height);
 s32 rangeLimitMin(u32 *range);
 void messageIdListInit(u32 *entries, u32 group, u32 id, s32 value);
 
@@ -40,118 +37,88 @@ void messageIdListInit(u32 *entries, u32 group, u32 id, s32 value);
    either completes (event 0x66/0x67 or an empty event) or stores the event and parks in state 9999. */
 void AocMenu::runWindowOperation()
 {
-    u32 * job = reinterpret_cast<u32 *>(this);
+    u32 *job = reinterpret_cast<u32 *>(this);
     RequestParameters event;
     AocMain *aoc = g_aocMain;
-    WindowOperation *operation = reinterpret_cast<WindowOperation *>(job[0x82]);
-    switch (job[2]) {
+    switch (substep) {
     case 0:
         aocMenuSetButtonHelp(job, 0xffffffff, 0);
-        job[2] = 1;
-        return;
+        substep = 1;
+        break;
     case 1:
         if (buttonHelpStateIsNot3() != 0) {
             ifTouchRegionClearAll(job + 0xba);
             releaseEntriesA(job + 0xad);
             aocLoadingTaskStart(job, 0);
-            void *created = windowCreateStatusOperation(job + 0x83, 0);
-            job[2] = 2;
-            job[0x82] = reinterpret_cast<u32>(created);
+            AocMenuWindow *created = (AocMenuWindow *)windowCreateStatusOperation(unk020C, 0);
+            substep = 2;
+            window = created;
         }
-        return;
+        break;
     case 2:
-        if ((job[0] & 0x200) != 0) {
-            RequestParameters polled = operation->getEvent();
+        if ((flags & 0x200) != 0) {
+            RequestParameters polled = ((WindowOperation *)window)->getEvent();
             event = polled;
             if (strIsEmpty(&event) != 0) {
-                job[2] = 3;
+                substep = 3;
             } else if (byteIsAtLeast100(&event) != 0) {
                 jobStopAndClearFlags(job);
-                if (event.kind == 0x66) {
-                    FUN_00234124(job, &event);
-                    return;
+                switch (event.kind) {
+                case 0x67:
+                    aocMenuChangeStep(this, 3);
+                    break;
+                case 0x66: {
+                    RequestParameters copy = event;
+                    FUN_00234124(job, &copy);
+                    break;
                 }
-                if (event.kind != 0x67) {
-                    job[2] = 9999;
-                    job[0x84] = event.word(0);
-                    job[0x85] = event.word(1);
-                    job[0x86] = event.word(2);
-                    job[0x87] = event.word(3);
-                    job[0x88] = event.word(4);
-                    return;
-                }
-                WindowOperation *current = reinterpret_cast<WindowOperation *>(job[0x82]);
-                job[1] = 3;
-                job[2] = 0;
-                if (current != NULL) {
-                    current->release();
-                    job[0x82] = 0;
+                default:
+                    request = event;
+                    substep = 9999;
+                    break;
                 }
             }
         }
-        return;
+        break;
     case 3: {
-        if (operation != NULL) {
-            operation->release();
-        }
-        void *created = windowCreateStatusOperation(job + 0x83, 1);
-        job[2] = 4;
-        job[0x82] = reinterpret_cast<u32>(created);
+        if (window != NULL)
+            delete window;
+        AocMenuWindow *created = (AocMenuWindow *)windowCreateStatusOperation(unk020C, 1);
+        substep = 4;
+        window = created;
         aocLoadingTaskStart(job, 1);
-        return;
+        break;
     }
     case 4: {
-        RequestParameters polled = operation->getEvent();
+        RequestParameters polled = ((WindowOperation *)window)->getEvent();
         event = polled;
         if (strIsEmpty(&event) != 0) {
             jobStopAndClearFlags(job);
-            WindowOperation *current;
             if (aoc->recordCount != 0) {
                 listScrollerInitialize(job + 0x90, 3, aoc->recordCount, 0, 1, 1);
-                Obj422594 *object = reinterpret_cast<Obj422594 *>(job + 0xba);
-                reinterpret_cast<u8 *>(job)[0x24d] = 1;
-                object->initialize(job + 0x90);
-                TextureTableEntryIV *record = asdTMTexTableEntryAt(0x3a, 0x4f);
-                touchRegisterFirstRegion(object, record->x, record->y, record->placement->width, record->placement->height);
-                record = asdTMTexTableEntryAt(0x3a, 0x50);
-                touchRegisterSecondRegion(object, record->x, record->y, record->placement->width, record->placement->height);
-                record = asdTMTexTableEntryAt(0x3a, 0x4e);
-                touchRegionOwnerAddRegion(object, record->x, record->y, record->placement->width, record->placement->height);
-                reinterpret_cast<u8 *>(job)[0x34c] = 1;
-                reinterpret_cast<u16 *>(job)[0xbb * 2] = reinterpret_cast<u16 *>(job)[0xbb * 2] | 0x1000;
+                asdDebugHookPtrInt(&selection, 1);
+                selection.active = 1;
+                panel.initialize(&selection);
+                panel.state |= 0x1000;
                 s32 limit = rangeLimitMin(job + 0x90);
                 messageIdListInit(job + 0xad, 0x3a, 0x88, limit);
-                reinterpret_cast<u8 *>(job)[0x2c4] = 1;
-                reinterpret_cast<u8 *>(job)[0x2e6] = 0;
+                touchRows.soundEnabled = 1;
+                touchRows.movedByPress = 0;
                 aocMenuSetButtonHelp(job, 2, 1);
-                current = reinterpret_cast<WindowOperation *>(job[0x82]);
-                job[1] = 6;
-                job[2] = 0;
+                aocMenuChangeStep(this, 6);
             } else {
-                current = reinterpret_cast<WindowOperation *>(job[0x82]);
-                job[1] = 0xb;
-                job[2] = 0;
+                aocMenuChangeStep(this, 11);
             }
-            if (current != NULL) {
-                current->release();
-                job[0x82] = 0;
-            }
-            return;
-        }
-        if (byteIsAtLeast100(&event) != 0) {
+        } else if (byteIsAtLeast100(&event) != 0) {
             jobStopAndClearFlags(job);
-            job[2] = 9999;
-            job[0x84] = event.word(0);
-            job[0x85] = event.word(1);
-            job[0x86] = event.word(2);
-            job[0x87] = event.word(3);
-            job[0x88] = event.word(4);
+            request = event;
+            substep = 9999;
         }
-        return;
+        break;
     }
     case 9999:
         FUN_00233e70(job, 5, 3);
-        return;
+        break;
     }
 }
 

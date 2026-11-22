@@ -21,7 +21,7 @@ extern "C" {
 extern UniteCamera *g_uniteCamera;
 
 void cameraMatrixCacheSetLookAt(UniteCamera *camera, UniteCameraTarget *target, const Vec3 *eye, const Vec3 *lookAt);
-void FUN_00280070(UniteCamera *camera, s32 mode, Vec3 up);
+void asdCameraSetScreenPerspective(UniteCamera *camera, s32 mode, Vec3 up);
 
 /* Places the unite camera one unit from its target along the target's pitch and yaw and looks at
  * the target's look-at point. */
@@ -35,7 +35,7 @@ void FUN_002c8894(void)
         eye.y += libm_sinf(camera->target->pitch);
         eye.z -= libm_cosf(camera->target->yaw);
         cameraMatrixCacheSetLookAt(camera, camera->target, &eye, &camera->target->lookAt);
-        FUN_00280070(camera, 0, camera->target->up);
+        asdCameraSetScreenPerspective(camera, 0, camera->target->up);
     }
 }
 

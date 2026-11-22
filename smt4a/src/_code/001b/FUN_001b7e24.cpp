@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail interleaves the three phase samples (one load/convert pass per angle, sign flags kept in registers) where the inline samplePhase calls run one after another; the matrix and flags are the same (178 vs 184 rows). */
+/* NON_MATCHING: retail interleaves the three phase samples (one load/convert pass per angle, sign flags kept in registers) where the build, written as mathMatrixBuildRotationXyz batches them (signs, wraps, then one lookup after another), converts one axis at a time; the matrix and flags are the same (178 vs 184 rows). */
 #include "shard/W6_W6Match6_PhaseTrig.h"
 
 extern "C" {
@@ -31,9 +31,18 @@ void FUN_001b7e24(PlacementTransform *transform, const PlacementSource *source)
     f32 angleX = source->rotation.x * 40.743664f;
     f32 angleY = source->rotation.y * 40.743664f;
     f32 angleZ = source->rotation.z * 40.743664f;
-    PhaseSinCos x = samplePhase(g_sinCosTable, angleX);
-    PhaseSinCos y = samplePhase(g_sinCosTable, angleY);
-    PhaseSinCos z = samplePhase(g_sinCosTable, angleZ);
+    bool xNegative = angleX < 0.0f;
+    f32 xPhase = fabsf(angleX);
+    bool yNegative = angleY < 0.0f;
+    f32 yPhase = fabsf(angleY);
+    bool zNegative = angleZ < 0.0f;
+    f32 zPhase = fabsf(angleZ);
+    xPhase = wrapPhase(xPhase);
+    yPhase = wrapPhase(yPhase);
+    zPhase = wrapPhase(zPhase);
+    PhaseSinCos x = lookupPhase(g_sinCosTable, xPhase, xNegative);
+    PhaseSinCos y = lookupPhase(g_sinCosTable, yPhase, yNegative);
+    PhaseSinCos z = lookupPhase(g_sinCosTable, zPhase, zNegative);
 
     transform->m[8] = -y.sine;
     transform->m[4] = z.sine * y.cosine;

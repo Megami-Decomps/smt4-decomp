@@ -1,4 +1,6 @@
-/* NON_MATCHING: retail schedules the far/near vldr after `mov r1, #1`; ours emits them before it. */
+/* NON_MATCHING: 4 lines: retail schedules the far/near vldr after `mov r1, #1`; ours emits them before it. The order
+ * (fovy, camera, nearZ, farZ, pivot, aspect) would match, but the callee takes a by-value CameraPerspective; built as
+ * one in field order here it is 6 lines off (wave 74). */
 #include "common.h"
 #include "map/mapDepart.h"
 #include "task/TaskPasses.h"

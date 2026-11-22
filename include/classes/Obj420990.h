@@ -2,6 +2,7 @@
 #define OBJ420990_H
 
 #include "classes/Obj420794.h"
+#include "shard/S1Mover.h"
 
 struct Obj420990ResourceState {
     /* 0x00 */ u8 unk00[0x38];
@@ -16,7 +17,7 @@ struct Obj420990Resource {
 };
 /* One vertex of the two quads: texture coordinates at +0x0C. */
 struct Obj420990Vertex {
-    /* 0x00 */ f32 position[3];
+    /* 0x00 */ Vec3f position;
     /* 0x0C */ f32 u;
     /* 0x10 */ f32 v;
 };

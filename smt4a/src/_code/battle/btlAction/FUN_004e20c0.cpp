@@ -62,7 +62,7 @@ int dataTable41FindById(void);
 int btlScriptUnitHasFlags(...);
 int btlMainFindEntryByListedId(...);
 int FUN_003f2aac(...);
-int FUN_004bf348(...);
+int btlAiRollActionChance(...);
 int btlGetCurableAilmentMaskForTarget(unsigned int *, unsigned int, int, int, int);
 int FUN_004bfcfc(unsigned int *, unsigned int, unsigned int, int, int, int);
 int mathScaleByCategory(int);
@@ -248,7 +248,7 @@ extern int FUN_003eca48(unsigned int, unsigned short);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_003f21ec. */
 /* Supplied declaration required: FUN_003f2aac. */
-/* Supplied declaration required: FUN_004bf348. */
+/* Supplied declaration required: btlAiRollActionChance. */
 /* Supplied declaration required: btlGetCurableAilmentMaskForTarget. */
 /* Supplied declaration required: FUN_004bfcfc. */
 /* Supplied declaration required: mathScaleByCategory. */
@@ -522,7 +522,7 @@ void FUN_004e20c0(unsigned int *param_1,unsigned int *param_2,int param_3,unsign
         }
       }
       else {
-        temp_v5 = FUN_004bf348(param_8,3,temp_v47);
+        temp_v5 = btlAiRollActionChance(param_8,3,temp_v47);
         if (temp_v5 != 0) {
           FUN_003f2aac(*param_1,param_8,1);
         }
@@ -544,7 +544,7 @@ void FUN_004e20c0(unsigned int *param_1,unsigned int *param_2,int param_3,unsign
       }
     }
     else {
-      temp_v5 = FUN_004bf348(param_8,2,temp_v47);
+      temp_v5 = btlAiRollActionChance(param_8,2,temp_v47);
       if (temp_v5 != 0) {
         FUN_003f2aac(*param_1,param_8,1);
       }
@@ -577,7 +577,7 @@ void FUN_004e20c0(unsigned int *param_1,unsigned int *param_2,int param_3,unsign
     if ((puVar9[1] & DAT_005711d4) != 0 || (*puVar9 & DAT_005711d0) != 0) {
       temp_v95 = 1;
     }
-    temp_v5 = FUN_004bf348(param_8,temp_v107,temp_v47);
+    temp_v5 = btlAiRollActionChance(param_8,temp_v107,temp_v47);
     if (temp_v5 != 0) {
       FUN_003f2aac(*param_1,param_8,1);
     }
@@ -1455,7 +1455,7 @@ LAB_004e458c:
   if (temp_v98 != (unsigned int *)0x1) {
     if (temp_v47 == (unsigned int *)0x2 || temp_v47 == (unsigned int *)0x1) {
 LAB_004e45bc:
-      temp_v5 = FUN_004bf348(param_7,temp_v107,temp_v47);
+      temp_v5 = btlAiRollActionChance(param_7,temp_v107,temp_v47);
       if (temp_v5 != 0) {
         FUN_003f2aac(*param_1,param_7,1);
       }
@@ -1467,7 +1467,7 @@ LAB_004e45bc:
   }
   if (((*(unsigned int *)(*param_1 + 0x45a8) & DAT_005712e8) != 0 ||
        (*(unsigned int *)(*param_1 + 0x45ac) & DAT_005712ec) != 0) &&
-     (temp_v5 = FUN_004bf348(param_7,temp_v107,temp_v47), temp_v5 != 0)) {
+     (temp_v5 = btlAiRollActionChance(param_7,temp_v107,temp_v47), temp_v5 != 0)) {
     FUN_003f2aac(*param_1,param_7,1);
   }
   temp_v14 = temp_v47 != (unsigned int *)0x5;

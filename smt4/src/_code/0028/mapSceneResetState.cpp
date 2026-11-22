@@ -7,7 +7,7 @@
 extern "C" {
 
 int asdMdlBanksReset(void);
-int FUN_0026faa4(void);
+int encounterFlagsRollSlots(void);
 int mapClearPendingEntries(void);
 
 extern unsigned int DAT_0049f920; /* 0x49f920 */
@@ -251,7 +251,7 @@ extern unsigned int DAT_0049fd1c; /* 0x49fd1c */
 extern unsigned int DAT_0049fd20; /* 0x49fd20 */
 
 /* Supplied declaration required: asdMdlBanksReset. */
-/* Supplied declaration required: FUN_0026faa4. */
+/* Supplied declaration required: encounterFlagsRollSlots. */
 extern unsigned long long FUN_00270384(int);
 /* Supplied declaration required: mapClearPendingEntries. */
 
@@ -491,7 +491,7 @@ void mapSceneResetState(int param_1)
   asdMdlBanksReset();
   if (param_1 == 0) {
     mapClearPendingEntries();
-    FUN_0026faa4();
+    encounterFlagsRollSlots();
   }
   temp_v0 = (int)gameGetMapBlock();
   temp_v2 = 0;

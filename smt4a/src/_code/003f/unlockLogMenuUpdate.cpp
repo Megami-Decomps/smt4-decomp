@@ -1,4 +1,6 @@
-/* NON_MATCHING: compiler folds keyframe-mode conversion, changes signed key loads and lays out state branches differently. */
+/* NON_MATCHING: 145 lines (shape 67). Retail cross-jumps the dialogEnterState calls of cases 4, 8, 9 and 10 into one
+ * unpadded `bl` (case 4 sets r0 first), keeps the button-pose variant in r6 and re-forms the sprite address per
+ * call; most other rows are the shifted branch offsets. Cases are in retail's layout order. */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "ui/UiSpriteApi.h"
@@ -44,12 +46,58 @@ void FUN_003f6bc0(UnlockLogUpdateWork *work);
 void scrollListAdvancePage(UnlockLogUpdateWork *work, u32 state);
 }
 
+/* Poses a button sprite: variants 0 and 1 are its resting keyframes, 2 and 3 the pressed ones, which also
+ * switch to the pressed image. Inlined: retail tests all four variants against a value that can only be 0 or 1
+ * here (FUN_00405268 poses the content list's page button the same way). */
+static __inline void unlockLogPoseButton(UiSpriteState *sprite, s32 variant)
+{
+    s32 key = 0;
+    s32 image = 0;
+    switch (variant) {
+    case 0:
+        key = 0;
+        break;
+    case 1:
+        key = 1;
+        break;
+    case 2:
+        key = 2;
+        image = 1;
+        break;
+    case 3:
+        key = 3;
+        image = 1;
+        break;
+    }
+    uiSpriteSetKeyframe(sprite, key, 0);
+    uiSpriteSetImageKeyframe(sprite, image, 0);
+}
+
+/* Waits for the log's owner, resource and both texture nodes, then opens the log (state 10). State 9's body:
+ * retail runs it with the work pointer copied to r5 and the loop index in r4, as an inlined function. */
+static void unlockLogMenuOpenWhenReady(UnlockLogUpdateWork *work)
+{
+    if (work->owner == 0 || work->resource == NULL || textureGetIndexedResource(0x31) == NULL)
+        return;
+    for (s32 index = 0; index < 2; ++index) {
+        if (!asdTMTexTableNodeIsLoaded(0x31, index))
+            return;
+    }
+    FUN_003f6bc0(work);
+    uiSpriteSetKeyframe(&work->first, 1, 0);
+    uiSpriteSetImageKeyframe(&work->first, 0, 0);
+    dialogEnterState(work, 10, 0);
+}
+
 /* Advance the unlock-log animations, script, and resource-ready transitions. */
 extern "C" s32 unlockLogMenuUpdate(UnlockLogUpdateWork *work)
 {
     switch (work->state) {
     case 1:
         unlockLogMenuInitializeReadyResources(work);
+        break;
+    case 3:
+        FUN_003f5ed8(work);
         break;
     case 2: {
         u32 firstDone = uiSpriteAdvanceAnimation(&work->first, 1.0f);
@@ -58,18 +106,16 @@ extern "C" s32 unlockLogMenuUpdate(UnlockLogUpdateWork *work)
             dialogEnterState(work, work->nextState, 0);
         break;
     }
-    case 3:
-        FUN_003f5ed8(work);
-        break;
-    case 4:
-        dialogEnterState(work, 5, 0);
-        break;
     case 5: {
         uiSpriteAdvanceAnimation(&work->fourth, 1.0f);
         u32 firstDone = uiSpriteAdvanceAnimation(&work->fifth, 1.0f);
         u32 secondDone = uiSpriteAdvanceAnimation(&work->second, 1.0f);
-        if (firstDone & secondDone)
-            dialogEnterState(work, uiSpriteGetMode(&work->second) == 1 ? work->nextState : 7, 0);
+        if (firstDone & secondDone) {
+            if (uiSpriteGetMode(&work->second) != 1)
+                dialogEnterState(work, 7, 0);
+            else
+                dialogEnterState(work, work->nextState, 0);
+        }
         break;
     }
     case 6:
@@ -79,12 +125,14 @@ extern "C" s32 unlockLogMenuUpdate(UnlockLogUpdateWork *work)
                 work->firstFlag = 0;
                 work->secondFlag = 0;
             } else {
-                uiSpriteSetKeyframe(&work->third, uiSpriteGetOperationMode(&work->third) != 3, 0);
-                uiSpriteSetImageKeyframe(&work->third, 0, 0);
+                unlockLogPoseButton(&work->third, uiSpriteGetOperationMode(&work->third) == 3 ? 0 : 1);
                 if (++work->counter >= 2)
                     work->counter = 0;
             }
         }
+        break;
+    case 4:
+        dialogEnterState(work, 5, 0);
         break;
     case 7:
         FUN_003f56ac(work);
@@ -104,16 +152,7 @@ extern "C" s32 unlockLogMenuUpdate(UnlockLogUpdateWork *work)
         }
         break;
     case 9:
-        if (work->owner == 0 || work->resource == NULL || textureGetIndexedResource(0x31) == NULL)
-            return 0;
-        for (s32 index = 0; index < 2; ++index) {
-            if (!asdTMTexTableNodeIsLoaded(0x31, index))
-                return 0;
-        }
-        FUN_003f6bc0(work);
-        uiSpriteSetKeyframe(&work->first, 1, 0);
-        uiSpriteSetImageKeyframe(&work->first, 0, 0);
-        dialogEnterState(work, 10, 0);
+        unlockLogMenuOpenWhenReady(work);
         break;
     case 10:
         if (uiSpriteAdvanceAnimation(&work->first, 1.0f)) {

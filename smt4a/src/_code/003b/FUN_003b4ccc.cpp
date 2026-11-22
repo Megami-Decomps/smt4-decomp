@@ -51,7 +51,7 @@ struct TintEffect {
     TintBlock *block;     /* 0x34 */
 };
 
-u32 FUN_0038136c(TintBlock *block, u32 *colorSource);
+u32 colorRampBlendWithFade(TintBlock *block, u32 *colorSource);
 void matrixInitializeWithScaleAndOffset(u8 *matrix, TintEffect *effect, s32 offset, f32 scale);
 void matrixApplyByMode(u8 *transform, u8 *matrix, s32 flag);
 void renderSubmissionDrawPacket(TintObject *object, u32 frame);
@@ -68,7 +68,7 @@ union TintColor {
 };
 
 /* Unpacks the four bytes of a packed colour (high byte first) into 0..1 floats. */
-static void unpackColor(u32 color, EffectColor *out)
+static __inline void unpackColor(u32 color, EffectColor *out)
 {
     out->red = (f32)(color >> 24) * 0.003921569f;
     out->green = (f32)((color & 0xFFFFFF) >> 16) * 0.003921569f;
@@ -76,7 +76,7 @@ static void unpackColor(u32 color, EffectColor *out)
     out->alpha = (f32)(color & 0xFF) * 0.003921569f;
 }
 
-static void multiplyColor(EffectColor *color, const EffectColor *by)
+static __inline void multiplyColor(EffectColor *color, const EffectColor *by)
 {
     color->red = color->red * by->red;
     color->green = color->green * by->green;
@@ -93,7 +93,7 @@ void FUN_003b4ccc(TintEffect *effect)
 
     if (effect->frame <= block->startFrame || block->startFrame == 0) {
         s32 partCount = block->partCount;
-        u32 blockColor = FUN_0038136c(block, block->colorSource);
+        u32 blockColor = colorRampBlendWithFade(block, block->colorSource);
         EffectColor saved;
         TintColor color;
         u8 matrix[0x40];

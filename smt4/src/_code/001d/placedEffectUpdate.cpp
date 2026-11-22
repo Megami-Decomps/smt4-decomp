@@ -50,7 +50,7 @@ extern "C" {
 extern EffectDefaults DAT_00472398;
 
 s32 effGetFrameCounter(void);
-u32 FUN_00269694(void *curve, void *keys, s32 frame, s32 duration);
+u32 colorRampBlendWithFade(void *curve, void *keys, s32 frame, s32 duration);
 f32 FUN_00269508(void *curve, s32 frame, s32 duration);
 void placedModelApplyLook(PlacedEffect *effect);
 
@@ -91,7 +91,7 @@ void placedEffectUpdate(PlacedEffect *effect)
         effect->frame = 0;
     }
 
-    u32 tint = FUN_00269694(effect->colorCurve, effect->colorKeys, frame, duration);
+    u32 tint = colorRampBlendWithFade(effect->colorCurve, effect->colorKeys, frame, duration);
     colorUnpack(&g_vectorScratch.second.color, effect->baseColor);
     colorUnpack(&g_vectorScratch.first.color, tint);
     effectColorScale(&g_vectorScratch.second.color, &g_vectorScratch.first.color);

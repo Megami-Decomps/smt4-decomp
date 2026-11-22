@@ -9,17 +9,6 @@
 struct PairSet {
     struct Pair { s16 kind, index; } pairs[64];
     s32 count;
-
-    void add(s32 kind, s32 index)
-    {
-        for (s32 i = 0; i < count; i++) {
-            if (pairs[i].kind == kind && pairs[i].index == index)
-                return;
-        }
-        pairs[count].kind = kind;
-        pairs[count].index = index;
-        count++;
-    }
 };
 
 /* The two sets a model's damage materials are collected into. */
@@ -31,7 +20,7 @@ struct DamageMaterialSets {
 /* A material's shape slot: a self-relative entry, optionally wrapped in a typed node. */
 struct MaterialSlot {
     /* 0x00 */ u32 type;
-    /* 0x04 */ u8 unk04[0xC];
+    /* 0x04 */ u8 unk04[0x8];
     /* 0x0C */ RelativePointer name;
     /* 0x10 */ u8 unk10[0xC];
     /* 0x1C */ RelativePointer inner;
@@ -101,9 +90,36 @@ static __inline void collectMaterialPairs(DamageMaterialSets *sets, DamageOwner 
             const char *name = (const char *)slot->name.get();
             if (!FUN_00100c4c(name, pattern))
                 continue;
-            sets->materials.add(info->material, slotIndex);
-            if (&material->shapes[slotIndex] != NULL)
-                sets->shapes.add(info->shape, material->shapes[slotIndex].shape);
+            bool found = false;
+            for (s32 i = 0; i < sets->materials.count; i++) {
+                if (sets->materials.pairs[i].kind == info->material) {
+                    if (sets->materials.pairs[i].index == slotIndex) {
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            if (!found) {
+                sets->materials.pairs[sets->materials.count].kind = info->material;
+                sets->materials.pairs[sets->materials.count].index = slotIndex;
+                sets->materials.count++;
+            }
+            if (&material->shapes[slotIndex] == NULL)
+                continue;
+            found = false;
+            for (s32 i = 0; i < sets->shapes.count; i++) {
+                if (sets->shapes.pairs[i].kind == info->shape) {
+                    if (sets->shapes.pairs[i].index == material->shapes[slotIndex].shape) {
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            if (!found) {
+                sets->shapes.pairs[sets->shapes.count].kind = info->shape;
+                sets->shapes.pairs[sets->shapes.count].index = material->shapes[slotIndex].shape;
+                sets->shapes.count++;
+            }
         }
     }
 }

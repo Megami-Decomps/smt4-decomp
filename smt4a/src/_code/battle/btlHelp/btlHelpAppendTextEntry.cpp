@@ -1,4 +1,5 @@
-/* NON_MATCHING: 106 lines (100 vs 96 rows): help-entry allocation, early NULL return layout, and list-link g_btlHelp pool reload differ. */
+/* NON_MATCHING: 82 lines: help-entry allocation and the early NULL return layout differ; the list append is
+ * btlHelpListAppend, as in the other creators. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlHelp.h"
 #include "battle/btlMain.h"
@@ -57,19 +58,8 @@ static BtlHelpEntryA *helpTextEntryCreate(u16 type, u32 id, u32 context, const v
     libc_strcpy(entry->caption, caption);
     entry->next = NULL;
     entry->prev = NULL;
-    BtlHelpEntryA *message = (BtlHelpEntryA *)entry;
-    BtlHelpListA *list = g_btlHelp.list;
-    if (list->head == NULL)
-        list->head = message;
-    if (list->tail == NULL)
-        list->tail = message;
-    else {
-        list->tail->next = message;
-        entry->prev = list->tail;
-        list->tail = message;
-    }
-    list->count++;
-    return message;
+    btlHelpListAppend(g_btlHelp.list, (BtlHelpEntryA *)entry);
+    return (BtlHelpEntryA *)entry;
 }
 
 BtlHelpEntryA *btlHelpAppendTextEntry(u32 id, const void *payload, const char *caption, u8 mode)

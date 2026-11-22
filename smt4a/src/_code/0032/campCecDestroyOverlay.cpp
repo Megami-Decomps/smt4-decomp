@@ -33,7 +33,7 @@ void campCecDestroyOverlay(s32 leaving)
     MarkEntry *entry;
 
     messageSetMode(1);
-    if (overlay->unk168 != 0) {
+    if (overlay->restriction != 0) {
         if (overlay->buffer0 != NULL) {
             asdMemFree(overlay->buffer0);
         }
@@ -47,14 +47,14 @@ void campCecDestroyOverlay(s32 leaving)
         asdMemFree(overlay);
         g_campCec.instance = NULL;
     } else {
-        if (overlay->unk16C != 0 && gameDataTestFlags(0x20) != 0) {
+        if (overlay->optionalProcess != 0 && gameDataTestFlags(0x20) != 0) {
             if (gameDataGetRecordValue() == 0) {
-                slotNameDisplaySetEntry(g_campCec.instance->block40, 0);
+                slotNameDisplaySetEntry(&g_campCec.instance->ownRecord, 0);
             }
             cecProcessCall2();
-            cecProcessForward(g_campCec.instance->block40);
+            cecProcessForward(&g_campCec.instance->ownRecord);
             if (gameDataGetRecordValue() == 0) {
-                rt_aeabi_memclr(g_campCec.instance->block90, 0x14);
+                rt_aeabi_memclr(g_campCec.instance->ownRecord.demon, 0x14);
             }
         }
         for (i = 0; i < 0x20; i++) {
@@ -79,7 +79,7 @@ void campCecDestroyOverlay(s32 leaving)
         asdTMTexTableReleaseNode(0x2E, 0);
         asdTMTexTableFreeEntry(0x2E);
         statusSceneDestroy(&g_campCec.instance->scene);
-        handleObjectFree(overlay->unk174);
+        handleObjectFree(overlay->labels);
         jobStop(overlay->job, 0);
         asdMemFree(overlay);
         g_campCec.instance = NULL;

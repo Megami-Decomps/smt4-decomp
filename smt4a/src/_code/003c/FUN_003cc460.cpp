@@ -6,11 +6,6 @@ extern "C" {
 
 void FUN_004c3db4(BtlCombatantEntryA *entry);
 
-static __inline bool battleMaskIntersects(u64 mask, u64 flags)
-{
-    return (flags & mask) != 0;
-}
-
 /* Runs FUN_004c3db4 for every battle entry that is eligible, not excluded and has the required mask bits. */
 u32 FUN_003cc460(void)
 {
@@ -20,7 +15,7 @@ u32 FUN_003cc460(void)
         BtlCombatantEntryA *entry = &battle->entries[i];
 
         if ((entry->flags & g_battleMaskPresets.eligibility.active) != 0 &&
-            !battleMaskIntersects(g_battleMaskPresets.eligibility.excluded, entry->flags) &&
+            !battleMaskIntersects(entry->flags, g_battleMaskPresets.eligibility.excluded) &&
             (entry->flags & g_battleMaskPresets.eligibility.required) != 0) {
             FUN_004c3db4(entry);
         }

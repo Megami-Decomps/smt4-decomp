@@ -1,4 +1,5 @@
-/* NON_MATCHING: inlined float24 encoders and packed-word stores are scheduled differently from retail. */
+/* NON_MATCHING: the encoders' shifts and table loads now match retail's; retail loads the table base before the push,
+ * keeps the first value in ip and saves r5 as well, so the registers of every encoder differ. */
 #include "shard/W6_W6Match8_GpuDepth.h"
 
 struct GpuFloatVector4 { f32 x, y, z, w; };
@@ -8,13 +9,10 @@ extern "C" void gpuSubmitVectorCommand(const u32 *first, const u32 *second, cons
 
 static __forceinline u32 encodeGpuFloat24(f32 value)
 {
-    GpuFloatEncoding encoding;
-    encoding.value = value;
-    u32 magnitude = encoding.bits & 0x7fffffff;
-    if (magnitude == 0)
-        return (encoding.bits >> 31) << 23;
-    return DAT_004e31a0[magnitude >> 23] | ((encoding.bits & 0x7fffff) >> 7) |
-           ((encoding.bits >> 31) << 23);
+    u32 bits = *(u32 *)&value;
+    if ((bits & 0x7fffffff) == 0)
+        return (bits >> 31) << 23;
+    return DAT_004e31a0[(bits >> 23) & 0xff] | ((bits & 0x7fffff) >> 7) | ((bits >> 31) << 23);
 }
 
 /* Pack two four-component GPU vectors and a coordinate pair into float24 command words. */

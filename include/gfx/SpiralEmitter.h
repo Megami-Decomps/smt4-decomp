@@ -132,38 +132,12 @@ extern const Vector4 DAT_005c1e90;      /* the bouncing emitter's (effBounceEmit
 
 }
 
-/* Rotates `v` by the scratch matrix (the emitter's orientation). */
-static __inline void scratchRotate(Vector4 *v)
-{
-    const f32 (*m)[4] = g_vectorScratch.matrix.rows;
-    f32 x = v->x * m[0][0] + v->y * m[1][0] + v->z * m[2][0];
-    f32 y = v->x * m[0][1] + v->y * m[1][1] + v->z * m[2][1];
-    f32 z = v->x * m[0][2] + v->y * m[1][2] + v->z * m[2][2];
-    f32 w = v->x * m[0][3] + v->y * m[1][3] + v->z * m[2][3];
-    v->x = x;
-    v->y = y;
-    v->z = z;
-    v->w = w;
-}
-
-
 static __inline void vec4Set(Vector4 *v, f32 x, f32 y, f32 z, f32 w)
 {
     v->x = x;
     v->y = y;
     v->z = z;
     v->w = w;
-}
-
-/* Scales `v` to unit length unless it is the zero vector. */
-static __inline void vec3Normalize(Vector4 *out, const Vector4 *v)
-{
-    f32 length = sqrtf(v->x * v->x + v->y * v->y + v->z * v->z);
-    if (length > 0.0f) {
-        out->x = v->x / length;
-        out->y = v->y / length;
-        out->z = v->z / length;
-    }
 }
 
 static __inline void vec4Multiply(Vector4 *out, const Vector4 *a, const Vector4 *b)

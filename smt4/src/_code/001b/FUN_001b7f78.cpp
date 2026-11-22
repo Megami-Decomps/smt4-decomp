@@ -29,7 +29,7 @@ int asdMdlBanksDestroyAll(void);
 int gfxDestroyModelGroups(void);
 int FUN_0026f960(...);
 int bgmReleaseStopped(void);
-int FUN_0026faa4(void);
+int encounterFlagsRollSlots(void);
 int mapRestoreSavedSelection(void);
 int FUN_0026ff54(void);
 int mapTableRelease(void);
@@ -488,7 +488,7 @@ extern int FUN_0021e4bc(void);
 /* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: FUN_0026fa30. */
 /* Supplied declaration required: slotFindByPair. */
-/* Supplied declaration required: FUN_0026faa4. */
+/* Supplied declaration required: encounterFlagsRollSlots. */
 /* Supplied declaration required: mapRestoreSavedSelection. */
 /* Supplied declaration required: FUN_0026ff54. */
 /* Supplied declaration required: mapTableRelease. */
@@ -5699,7 +5699,7 @@ joined_r0x001bfcb4:
       FUN_0026ff54();
       mapSceneResetState(1);
       mapRestoreSavedSelection();
-      FUN_0026faa4();
+      encounterFlagsRollSlots();
       if ((DAT_0049f950 != '\0') && (temp_v10 = gameDataBlocksGetSaveData(), *(char *)(temp_v10 + 2) == '\x02')) {
         bgmReleaseStopped();
         soundChannelStopAll(0xf);

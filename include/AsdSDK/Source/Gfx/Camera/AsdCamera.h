@@ -8,6 +8,7 @@
 #include "nw/math/MTX44.h"
 #include "classes/FloatState.h"
 #include "gfx/CameraVector3.h"
+#include "gfx/CameraPerspective.h"
 
 /* The stereo pair's parameters (0x6C bytes); initialized by asdCameraInitializeStereo. */
 struct AsdCameraStereo {
@@ -32,12 +33,13 @@ struct AsdCamera {
     /* 0x004 */ AsdCameraVec3 eye;
     /* 0x010 */ AsdCameraVec3 target;
     /* 0x01C */ AsdCameraVec3 up;
-    /* 0x028 */ u8 unk028[0x10];
+    /* 0x028 */ CameraPerspective perspective;   /* stereoCameraSetPerspective stores it whole */
     /* 0x038 */ nw::math::MTX34 view;
     /* 0x068 */ u8 unk068[0x40];
     /* 0x0A8 */ nw::math::MTX44 projection;
     /* 0x0E8 */ nw::math::MTX44 stereoProjection;
-    /* 0x128 */ u8 unk128[0x70];
+    /* 0x128 */ u8 unk128[0x30];
+    /* 0x158 */ nw::math::MTX44 projectionTransposed;
     /* 0x198 */ nw::math::MTX44 viewTransposed;
     /* 0x1D8 */ u8 unk1D8[0x2c0];
     /* 0x498 */ f32 unk498;
@@ -48,7 +50,8 @@ struct AsdCamera {
 
 typedef char AsdCameraLayoutCheck[offsetof(AsdCamera, view) == 0x38 && offsetof(AsdCamera, eye) == 0x04 &&
     offsetof(AsdCamera, target) == 0x10 && offsetof(AsdCamera, up) == 0x1C &&
-    offsetof(AsdCamera, viewTransposed) == 0x198 &&
+    offsetof(AsdCamera, viewTransposed) == 0x198 && offsetof(AsdCamera, perspective) == 0x28 &&
+    offsetof(AsdCamera, projectionTransposed) == 0x158 &&
     offsetof(AsdCamera, projection) == 0xA8 && offsetof(AsdCamera, stereoProjection) == 0xE8 &&
     offsetof(AsdCamera, stereo) == 0x4A0 && sizeof(AsdCamera) == 0x50C ? 1 : -1];
 

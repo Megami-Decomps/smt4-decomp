@@ -61,7 +61,7 @@ extern "C" {
 extern HandleRegistryView *g_handleRegistry;
 
 u32 FUN_00186118(u32 handle, u32 *size);
-void FUN_00187e08(MoriUnit *unit, u32 resource, u32 first, u32 second, u32 third);
+void moriCameraAnimLoad(MoriUnit *unit, u32 resource, u32 first, u32 second, u32 third);
 void FUN_0018f69c(ModelTextureBindings *model, u8 *matrix, u8 *replacementCommands, const u8 *originalCommands);
 void FUN_0018f9c0(MaterialTextureBinding *binding, u8 *matrix);
 void *asdMemoryAllocTraced(u32 bytes, const char *file, s32 line);
@@ -82,7 +82,7 @@ extern "C" void FUN_0016c88c(const MoriUnitSpec *spec, MoriUnit *unit)
     } else {
         resource = spec->handle;
     }
-    FUN_00187e08(unit, resource, spec->first, spec->second, spec->third);
+    moriCameraAnimLoad(unit, resource, spec->first, spec->second, spec->third);
     unit->flags = spec->mode;
     unit->handle = spec->handle;
     unit->flag = spec->isResource;

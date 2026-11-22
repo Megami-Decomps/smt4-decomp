@@ -21,7 +21,7 @@ void FUN_0023c154(BtlMainState *, s32, s32, s32, ActionKindSelection *);
 }
 
 /* Sets the selected action thread's kind (the setter battleSetActionKind and FUN_00229b10 inline). */
-static __inline void battleSetSelectedActionThreadKind(s32 index, u8 kind)
+static __inline void battleSetSelectedActionThreadKind(s32 index, s32 kind)
 {
     ActionKindThread *thread = &reinterpret_cast<ActionKindThread *>(g_btlAction.slots)[index];
     thread->kind = kind;

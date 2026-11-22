@@ -6,7 +6,7 @@ void FUN_00338330(RenderSubmissionPacket *, const f32 *, const f32 *, const f32 
 void FUN_002f8a54();
 void asdGxSetEffectColorFromRGBA8(u32 color);
 void renderSubmissionDrawPacket(RenderSubmissionPacket *, u32 mode);
-u32 FUN_0038136c(RenderSubmissionOwner *, const u32 *color, u32 frame, u32 duration);
+u32 colorRampBlendWithFade(RenderSubmissionOwner *, const u32 *color, u32 frame, u32 duration);
 u32 FUN_00221cb0();
 
 /* Submit a frame-visible effect with the owner's color and depth mode. */
@@ -16,7 +16,7 @@ void FUN_003ac09c(RenderSubmission *submission)
     RenderSubmissionPacket *packet = submission->resource->packet;
     if (submission->frame > owner->frame && owner->frame != 0)
         return;
-    u32 ownerColor = FUN_0038136c(owner, &owner->color, submission->frame, owner->frame);
+    u32 ownerColor = colorRampBlendWithFade(owner, &owner->color, submission->frame, owner->frame);
     asdGxSetEffectColorFromRGBA8(submission->color);
     effectColorCopy(&g_vectorScratch.first.color, &g_vectorScratch.second.color);
     asdGxSetEffectColorFromRGBA8(ownerColor);

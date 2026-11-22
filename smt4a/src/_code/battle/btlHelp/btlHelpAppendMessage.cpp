@@ -1,5 +1,3 @@
-/* NON_MATCHING: 6 lines: retail increments the list count through r0 and only then returns the entry (mov r0, r4); the
-   build schedules the return copy before the increment. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlHelp.h"
 #include "battle/btlMain.h"
@@ -54,19 +52,7 @@ static __inline BtlHelpEntryA *helpMessageCreate(u16 type, const char *text, u8 
     libc_strcpy(message->text, text);
     message->next = NULL;
     message->prev = NULL;
-    BtlHelpEntryA *entry = reinterpret_cast<BtlHelpEntryA *>(message);
-    BtlHelpListA *list = g_btlHelp.list;
-    if (list->head == NULL) {
-        list->head = entry;
-    }
-    if (list->tail == NULL) {
-        list->tail = entry;
-    } else {
-        list->tail->next = entry;
-        entry->prev = list->tail;
-        list->tail = entry;
-    }
-    ++list->count;
+    btlHelpListAppend(g_btlHelp.list, reinterpret_cast<BtlHelpEntryA *>(message));
     return reinterpret_cast<BtlHelpEntryA *>(message);
 }
 

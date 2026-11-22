@@ -90,7 +90,7 @@ int FUN_004e5a40(...);
 int FUN_004e6b64(...);
 int FUN_004e8454(int *);
 int FUN_004eaa68(...);
-int FUN_004ee5b4(int *, unsigned int *);
+int btlUnitStartAction(int *, unsigned int *);
 int btlQueueDuplicateSuppressedAction(...);
 int btlReflectQueueSelectionMarks(...);
 int FUN_004fda78(...);
@@ -230,7 +230,7 @@ extern int FUN_004ea0c0(int *, unsigned int *);
 /* Supplied declaration required: FUN_004eaa68. */
 /* Supplied declaration required: FUN_004ecd7c. */
 /* Supplied declaration required: FUN_004ecee8. */
-/* Supplied declaration required: FUN_004ee5b4. */
+/* Supplied declaration required: btlUnitStartAction. */
 extern int btlEffectNameHasPrefix(int, int);
 extern int btlGetMaxSlotMetric(int);
 extern int FUN_004f5a40(int);
@@ -425,7 +425,7 @@ LAB_004ebd00:
       }
     } while( 1 );
   case 0xb:
-    FUN_004ee5b4(param_1,puVar25);
+    btlUnitStartAction(param_1,puVar25);
     return;
   case 0xc:
     temp_v3 = 0;

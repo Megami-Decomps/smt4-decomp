@@ -33,7 +33,7 @@ extern u8 DAT_00472561;
 extern u8 DAT_00472562;
 extern u8 DAT_00472563;
 /* The curve sampler: (curve, envelope, frame, duration); the emitter's own color is sampled with only its first two arguments. */
-u32 FUN_00269694(const void *curve, const void *envelope, ...);
+u32 colorRampBlendWithFade(const void *curve, const void *envelope, ...);
 void modelSetTransformFromParts(PolygonTrackPrimitive *primitive, const f32 *rotation, const f32 *scale);
 void tiledMeshDraw(PolygonTrackPrimitive *primitive, u32 drawMode);
 
@@ -49,7 +49,7 @@ void FUN_00316550(RenderSubmission *submission)
         return;
     }
 
-    u32 emitterColor = FUN_00269694(emitter, &emitter->color);
+    u32 emitterColor = colorRampBlendWithFade(emitter, &emitter->color);
     effectColorUnpack(submission->color, &g_vectorScratch.second.color);
     effectColorUnpack(emitterColor, &g_vectorScratch.first.color);
     g_vectorScratch.first.color.red *= g_vectorScratch.second.color.red;
@@ -62,7 +62,7 @@ void FUN_00316550(RenderSubmission *submission)
     for (u32 i = 0; i < emitter->vertexCount; i++) {
         EffectColor *out = &primitive->colors[(u16)i];
         if (*entries < duration) {
-            u32 curveColor = FUN_00269694(emitter->colorCurve, emitter->envelope, *entries, duration);
+            u32 curveColor = colorRampBlendWithFade(emitter->colorCurve, emitter->envelope, *entries, duration);
             effectColorUnpack(curveColor, &g_vectorScratch.second.color);
             effectColorUnpack(base, &g_vectorScratch.first.color);
             g_vectorScratch.first.color.red *= g_vectorScratch.second.color.red;

@@ -13,6 +13,25 @@ struct VEC4 {
 };
 typedef char VEC4Size[sizeof(VEC4) == 0x10 ? 1 : -1];
 
+/* nn::math's VEC4 header inlines (the C versions): component-wise, `pOut` may alias an operand. */
+static __inline VEC4 *VEC4Add(VEC4 *pOut, const VEC4 *p1, const VEC4 *p2)
+{
+    pOut->x = p1->x + p2->x;
+    pOut->y = p1->y + p2->y;
+    pOut->z = p1->z + p2->z;
+    pOut->w = p1->w + p2->w;
+    return pOut;
+}
+
+static __inline VEC4 *VEC4Scale(VEC4 *pOut, const VEC4 *p, f32 scale)
+{
+    pOut->x = p->x * scale;
+    pOut->y = p->y * scale;
+    pOut->z = p->z * scale;
+    pOut->w = p->w * scale;
+    return pOut;
+}
+
 } // namespace math
 } // namespace nw
 

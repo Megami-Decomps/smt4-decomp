@@ -41,7 +41,7 @@ void messageTargetSetValue(s32 value, s32 arg);
 PlaceRecord *dataTable17Sub1GetRecord(u32 *ignored, u32 index);
 s32 dataTable17Sub1GetCount(u32 *ignored);
 s32 FUN_0028e9d0(u32 flag);
-void FUN_003a4210(PlaceScene *scene);
+void saleListBuild(PlaceScene *scene);
 void buttonHelpSetPreset(s32 preset);
 void buttonHelpSetText(s32 slot, u32 color);
 
@@ -99,7 +99,7 @@ void FUN_003a0d64(PlaceScene *scene)
     if (placeFlagsAnySet()) {
         scene->substate = 0;
         scene->state = 1;
-        FUN_003a4210(scene);
+        saleListBuild(scene);
         buttonHelpSetPreset(0x75);
         buttonHelpSetText(0, 0x323232FF);
     } else {

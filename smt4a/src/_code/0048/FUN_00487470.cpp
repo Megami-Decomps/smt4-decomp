@@ -9,8 +9,8 @@ extern "C" {
 int CONCAT44(double, double);
 int FUN_001849bc(...);
 int areaDiscoveryMarkCell(...);
-int FUN_00487d6c(...);
-int FUN_0048a5e4(...);
+int naviPanelDrawFrame(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
+int naviPanelDrawMap(...);
 int titleScissorApplyOrClearRequests(...);
 int FUN_00490a10(...);
 int FUN_0049177c(...);
@@ -59,8 +59,8 @@ extern unsigned long long gameFlagIsSet(unsigned int);
 /* Supplied declaration required: areaDiscoveryMarkCell. */
 extern int gameFlagsClassify(int);
 extern int FUN_00384cf4(void);
-/* Supplied declaration required: FUN_00487d6c. */
-/* Supplied declaration required: FUN_0048a5e4. */
+/* Supplied declaration required: naviPanelDrawFrame. */
+/* Supplied declaration required: naviPanelDrawMap. */
 extern unsigned char mathHeadingToDirectionCode(int context, float angle);
 /* Supplied declaration required: titleScissorApplyOrClearRequests. */
 /* Supplied declaration required: FUN_00490a10. */
@@ -151,8 +151,8 @@ void FUN_00487470(int param_1)
   if (DAT_005f1a5e != '\0') {
     temp_v2 = FUN_00384cf4();
     if (temp_v2 == 0) {
-      FUN_0048a5e4(temp_v42);
-      FUN_00487d6c(temp_v42);
+      naviPanelDrawMap(temp_v42);
+      naviPanelDrawFrame(temp_v42);
       return;
     }
     temp_v31 = naviMainGetRequestedMap(temp_v37);
@@ -445,8 +445,8 @@ LAB_00487744:
   }
   titleScissorApplyOrClearRequests(temp_v42,0);
   DAT_00587f20 = 0xf1;
-  FUN_0048a5e4(temp_v42);
-  FUN_00487d6c(temp_v42);
+  naviPanelDrawMap(temp_v42);
+  naviPanelDrawFrame(temp_v42);
   return;
 }
 

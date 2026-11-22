@@ -1,6 +1,6 @@
-/* NON_MATCHING: retail inlines the availability check three times with separate stack buffers, keeps the script and group in stack slots and holds the three scan results in r8/r9/fp; this version shares one helper, so register allocation and frame size differ. The scan logic and calls are the same. */
+/* NON_MATCHING: 268 lines. listGetEntryCount is a getter armlink inlined (retail's lone `ldr r0, [r0, #1324]`, inlined.txt). Retail keeps all three scan results live (r9/r8/fp, the type 3 and type 2 ones never read afterwards) and so spills the script and group to the stack in each inlined availability check; armcc drops the unread two here and keeps the script in fp. */
 #include "common.h"
-#include <stdio.h>
+#include "runtime/Stdio.h"
 
 namespace {
 /* A row of the list window (the entry type, its script name and the two flags gating it). */
@@ -41,6 +41,7 @@ struct ListWindow {
 
 extern "C" {
 extern s32 DAT_0044cfb8;                 /* set by the script when it rejects the entry */
+extern const char DAT_00404e04[];        /* "%s" */
 ListEntry *FUN_0022b238(void *list, s32 index);
 u32 tableGroupFindEntryIndex(u32 group, const char *name);
 void scrScriptProcessStartEntry(u32 script, u32 entry);
@@ -53,14 +54,18 @@ void messageMainFinishWindow(void);
 void contentMenuRebuildGroup(ListWindow *window, s32 selected, s32 kind);
 void FUN_0022afc4(u32 animation, s32 a, s32 b);
 
-/* Runs the entry's availability script and reports whether the entry is currently available. */
-static s32 entryIsAvailable(ListWindow *window, ListEntry *entry)
+/* Runs the entry's availability script and reports whether the entry is currently available (an entry named "0"
+   has none). */
+static __inline s32 entryIsAvailable(ListWindow *window, ListEntry *entry)
 {
+    if (entry->name[0] == '0') {
+        return 0;
+    }
     char name[36];
     u32 script = window->script;
     u32 group = window->scriptGroup;
     DAT_0044cfb8 = 0;
-    sprintf(name, "%s", entry->name);
+    __2sprintf(name, DAT_00404e04, entry->name);
     scrScriptProcessStartEntry(script, tableGroupFindEntryIndex(group, name));
     while (scrRunOpcodesStub(script) != 2) {
     }
@@ -68,32 +73,37 @@ static s32 entryIsAvailable(ListWindow *window, ListEntry *entry)
            (entry->forbiddenFlag == 0 || gameFlagIsSet(entry->forbiddenFlag) == 0);
 }
 
-/* Checks which kinds of entries are currently available (type 4 rows gate the window, type 3 and 2 rows
-   only run their scripts) and then updates the window for its state: open, close or show the selection. */
+/* Checks which kinds of entries are currently available (one scan for type 3 and 4 rows, one for type 2 rows; only
+   the type 4 result gates the window) and then updates the window for its state: open, close or show the
+   selection. */
 void FUN_003b9c00(ListWindow *window)
 {
-    s32 noPassingEntry = 1;
+    s32 noType3 = 1;
+    s32 noType4 = 1;
+    s32 noType2 = 1;
     s32 count = listGetEntryCount(window->list);
     for (s32 i = 0; i < count; i++) {
         ListEntry *entry = FUN_0022b238(window->list, i);
-        if (entry->type == 3 && entry->name[0] != '0' && entryIsAvailable(window, entry)) {
+        if (entry->type == 3 && entryIsAvailable(window, entry)) {
+            noType3 = 0;
             break;
         }
-        if (entry->type == 4 && entry->name[0] != '0' && entryIsAvailable(window, entry)) {
-            noPassingEntry = 0;
+        if (entry->type == 4 && entryIsAvailable(window, entry)) {
+            noType4 = 0;
             break;
         }
     }
     for (s32 i = 0; i < count; i++) {
         ListEntry *entry = FUN_0022b238(window->list, i);
-        if (entry->type == 2 && entry->name[0] != '0' && entryIsAvailable(window, entry)) {
+        if (entry->type == 2 && entryIsAvailable(window, entry)) {
+            noType2 = 0;
             break;
         }
     }
     u16 vector[3] = { 0, 0, 0 };
     switch (window->state) {
     case 0:
-        if (noPassingEntry != 0 && gameFlagIsSet(0x15) != 0) {
+        if (noType4 != 0 && gameFlagIsSet(0x15) != 0) {
             vector[0] = 4;
             listScrollToId(window->list, 0xff);
             __ARM_common_memcpy4_6(window->cursor, vector);
@@ -107,7 +117,7 @@ void FUN_003b9c00(ListWindow *window)
         }
         break;
     case 5:
-        if (noPassingEntry == 0) {
+        if (noType4 == 0) {
             return;
         }
         /* fall through */

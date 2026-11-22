@@ -14,7 +14,7 @@ int btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
 int btlHasFilteredCommand(void);
 int FUN_004abba8(...);
 int btlUiIdsRefresh(unsigned int);
-int FUN_004c1114(...);
+int btlRollAilment(...);
 int btlSlotSetStoreValue(...);
 int btlAdjustPropertyClamped(...);
 int btlSelectSourceTriggeredSkill(int, int);
@@ -83,7 +83,7 @@ extern int FUN_003e4978(void);
 /* Supplied declaration required: FUN_003f034c. */
 /* Supplied declaration required: FUN_004abba8. */
 /* Supplied declaration required: btlUiIdsRefresh. */
-/* Supplied declaration required: FUN_004c1114. */
+/* Supplied declaration required: btlRollAilment. */
 /* Supplied declaration required: btlSlotSetStoreValue. */
 extern unsigned int mapCategoryToDestinationGroup(unsigned int);
 /* Supplied declaration required: btlAdjustPropertyClamped. */
@@ -211,7 +211,7 @@ LAB_003987dc:
               if ((puVar10[0x9d] & 0x10) != 0) {
                 btlAdjustPropertyClamped((int)(short)puVar10[2],0x22,1,0);
                 temp_v7 = temp_v6;
-                FUN_004c1114(temp_v6,4);
+                btlRollAilment(temp_v6,4);
                 if (temp_v7 != 0) {
                   FUN_004fcffc(0,0,*(int *)(param_1 + 0x1ed4) + (short)puVar10[2] * 0x1d0,0x10);
                 }
@@ -238,27 +238,27 @@ LAB_003987dc:
 LAB_00398a18:
                 temp_v3 = 0;
                 if (((puVar10[0x9d] & 0x80) != 0) &&
-                   (temp_v7 = temp_v6, FUN_004c1114(temp_v6,7), temp_v7 != 0)) {
+                   (temp_v7 = temp_v6, btlRollAilment(temp_v6,7), temp_v7 != 0)) {
                   temp_v3 = 0x80;
                 }
                 if (((puVar10[0x9d] & 0x40) != 0) &&
-                   (temp_v7 = temp_v6, FUN_004c1114(temp_v6,6), temp_v7 != 0)) {
+                   (temp_v7 = temp_v6, btlRollAilment(temp_v6,6), temp_v7 != 0)) {
                   temp_v3 = temp_v3 | 0x40;
                 }
                 if (((puVar10[0x9d] & 0x100) != 0) &&
-                   (temp_v7 = temp_v6, FUN_004c1114(temp_v6,8), temp_v7 != 0)) {
+                   (temp_v7 = temp_v6, btlRollAilment(temp_v6,8), temp_v7 != 0)) {
                   temp_v3 = temp_v3 | 0x100;
                 }
                 if (((puVar10[0x9d] & 8) != 0) &&
-                   (temp_v7 = temp_v6, FUN_004c1114(temp_v6,3), temp_v7 != 0)) {
+                   (temp_v7 = temp_v6, btlRollAilment(temp_v6,3), temp_v7 != 0)) {
                   temp_v3 = temp_v3 | 8;
                 }
                 if (((puVar10[0x9d] & 0x800) != 0) &&
-                   (temp_v7 = temp_v6, FUN_004c1114(temp_v6,0xb), temp_v7 != 0)) {
+                   (temp_v7 = temp_v6, btlRollAilment(temp_v6,0xb), temp_v7 != 0)) {
                   temp_v3 = temp_v3 | 0x800;
                 }
                 if (((puVar10[0x9d] & 0x2000) != 0) &&
-                   (temp_v7 = temp_v6, FUN_004c1114(temp_v6,0xd), temp_v7 != 0)) {
+                   (temp_v7 = temp_v6, btlRollAilment(temp_v6,0xd), temp_v7 != 0)) {
                   temp_v3 = temp_v3 | 0x2000;
                 }
                 if ((temp_v3 != 0) && (-1 < (short)puVar10[2])) {

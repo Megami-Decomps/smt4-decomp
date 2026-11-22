@@ -1,15 +1,15 @@
-/* NON_MATCHING: retail keeps the 16 zeroed words and the list links in fp/sl-based stores scheduled after the second payload copy and loads the help context through a VFP register (vldr s16); the build orders the stores and registers differently. */
+/* NON_MATCHING: 112 lines: the blocked-state masks load through other registers, retail keeps 0 in sl for the counter
+ * and stores row/column with one stm from r8/r9; the list append (btlHelpListAppend) now matches. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlHelp.h"
 #include "battle/btlMain.h"
 #include "AsdSDK/AsdDebug.h"
+#include <string.h>
 
 extern "C" {
 extern BtlHelpGlobalsA g_btlHelp;
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 tracked);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
-BtlHelpEntryA *FUN_00200a68(u32 id, u16 message, u32 first, u32 second, const void *combatant, u8 mode,
-                            u32 argument, u32 context);
 BtlHelpEntryA *FUN_004c8e30(u32 first, u32 second, u32 third);
 
 // The shared entry's byte padding ends at 0x872; keep a word-aligned local view.
@@ -66,25 +66,12 @@ static __inline BtlHelpEntryA *helpPairedEntryCreate(u16 type, u32 first, f32 co
     entry->column = column;
     entry->frame = 0;
     entry->dialogIndex = 1;
-    for (s32 i = 0; i < 16; ++i) {
-        entry->values[i] = 0;
-    }
+    memset(entry->values, 0, sizeof(entry->values));
     entry->next = NULL;
     entry->prev = NULL;
 
-    BtlHelpEntryA *message = reinterpret_cast<BtlHelpEntryA *>(entry);
-    BtlHelpListA *list = g_btlHelp.list;
-    if (list->head == NULL)
-        list->head = message;
-    if (list->tail == NULL)
-        list->tail = message;
-    else {
-        list->tail->next = message;
-        entry->prev = list->tail;
-        list->tail = message;
-    }
-    list->count++;
-    return message;
+    btlHelpListAppend(g_btlHelp.list, reinterpret_cast<BtlHelpEntryA *>(entry));
+    return reinterpret_cast<BtlHelpEntryA *>(entry);
 }
 
 // Queues a help entry showing two combatant snapshots side by side; with one snapshot (or none) it falls back to the

@@ -76,6 +76,23 @@ typedef struct BtlHelpListA {
     /* 0x08 */ s32 count;
 } BtlHelpListA;
 
+/* Appends a new entry to the help list: the last step of every creator of btlHelp.cpp (btlHelpAppendMessage,
+ * btlHelpAppendTextEntry, FUN_00200a68, FUN_004c9220), inlined there. */
+static __inline void btlHelpListAppend(BtlHelpListA *list, BtlHelpEntryA *entry)
+{
+    if (list->head == NULL) {
+        list->head = entry;
+    }
+    if (list->tail == NULL) {
+        list->tail = entry;
+    } else {
+        list->tail->next = entry;
+        entry->prev = list->tail;
+        list->tail = entry;
+    }
+    ++list->count;
+}
+
 /* The help module's global state and the battle states which suppress new messages. */
 struct BtlHelpGlobalsA {
     /* 0x00 */ BtlHelpListA *list;
@@ -88,6 +105,11 @@ typedef char BtlHelpGlobalsAMasksOffsetCheck[
     offsetof(BtlHelpGlobalsA, blockedStates) == 0x20 &&
     offsetof(BtlHelpGlobalsA, blockedTransitions) == 0x28 &&
     sizeof(BtlHelpGlobalsA) == 0x30 ? 1 : -1];
+
+/* Creates a help entry (Apocalypse's btlHelp.cpp creator; IV's is btlHelpEntryCreate), snapshotting its combatant,
+ * and appends it to the help list. */
+extern "C" BtlHelpEntryA *FUN_00200a68(u16 id, s16 message, u32 first, u32 second, const void *combatant, u32 mode,
+    u32 argument, u32 context);
 
 extern "C" {
 void infoWinSetShown(u8 value);

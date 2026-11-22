@@ -16,7 +16,7 @@ int gfxResolveTimedTextureFrame(...);
 int renderSubmissionDrawPacket(...);
 int FUN_002ff7ac(unsigned short *, int, int);
 int FUN_0034f8b4(...);
-int FUN_0038136c(unsigned int, int, int, int);
+int colorRampBlendWithFade(unsigned int, int, int, int);
 int childHolderCopyOut(...);
 int SBORROW4(int, int);
 int VectorFloatToUnsigned(...);
@@ -147,7 +147,7 @@ static float romwright_sqrt_4(float value)
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002ff7ac. */
 /* Supplied declaration required: FUN_0034f8b4. */
-/* Supplied declaration required: FUN_0038136c. */
+/* Supplied declaration required: colorRampBlendWithFade. */
 /* Supplied declaration required: childHolderCopyOut. */
 
 
@@ -279,7 +279,7 @@ void effJobComputeQuadVertices(int param_1)
   temp_v22 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002ff7ac(puVar9,param_1,param_1 + 0x10);
   temp_v2 = param_1 + 0x30;
-  FUN_0038136c(temp_v2,param_1 + 0x54,temp_v4,temp_v5);
+  colorRampBlendWithFade(temp_v2,param_1 + 0x54,temp_v4,temp_v5);
   temp_v3 = *(unsigned int *)(param_1 + 0x24);
   DAT_006472ec = (float)VectorUnsignedToFloat(temp_v3 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
   DAT_006472f0 = (float)VectorUnsignedToFloat

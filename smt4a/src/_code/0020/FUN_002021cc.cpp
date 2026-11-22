@@ -26,8 +26,8 @@ u32 FUN_002021cc(void)
         statusCameraApply();
         FUN_003e5858(scene->object);
     }
-    if (overlay->unk1A0 == 2) {
-        s32 start = overlay->unk1A4 != 0 ? -330 : 330;
+    if (overlay->slidePhase == 2) {
+        s32 start = overlay->slideReversed != 0 ? -330 : 330;
         for (s32 i = 0; i < 2; i++) {
             if (i == 0) {
                 if (FUN_0039a2d8(&overlay->slides[i].offset, start, 0, 4, overlay->slides[i].elapsed, 1) != 0) {
@@ -49,13 +49,13 @@ u32 FUN_002021cc(void)
             overlay->slides[0].done = 0;
             overlay->slides[1].elapsed = 0;
             overlay->slides[1].done = 0;
-            overlay->unk1A0 = 3;
+            overlay->slidePhase = 3;
             return 0;
         }
     }
-    if (overlay->unk1A0 == 1) {
+    if (overlay->slidePhase == 1) {
         s32 end = -330;
-        if (overlay->unk1A4 != 0) {
+        if (overlay->slideReversed != 0) {
             end = 330;
         }
         for (s32 i = 0; i < 2; i++) {
@@ -70,7 +70,7 @@ u32 FUN_002021cc(void)
             overlay->slides[0].done = 0;
             overlay->slides[1].elapsed = 0;
             overlay->slides[1].done = 0;
-            overlay->unk1A0 = 0;
+            overlay->slidePhase = 0;
         }
     }
     return 0;

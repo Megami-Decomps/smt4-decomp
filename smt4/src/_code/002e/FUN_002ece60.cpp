@@ -30,7 +30,7 @@ u32 FUN_002ece60(CampCecMenu *work)
             cecProcessStart();
             FUN_0025461c();
             cecProcessDestroy();
-            FUN_00254600(0);
+            savedRecordSetDemonId(0);
             ++work->scriptFlow.phase;
         }
         break;
@@ -44,7 +44,7 @@ u32 FUN_002ece60(CampCecMenu *work)
                     }
                 }
             }
-            FUN_00254600(0);
+            savedRecordSetDemonId(0);
             FUN_0026b9bc();
             scrScriptProcessStartEntry(work->script.process, 0x1E);
             ++work->scriptFlow.phase;

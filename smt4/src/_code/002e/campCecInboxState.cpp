@@ -102,7 +102,7 @@ s32 campCecInboxState(CampCecMenu *work)
             if (!cleared) {
                 work->state = 6;
             } else {
-                FUN_00254600(0);
+                savedRecordSetDemonId(0);
                 FUN_0026b9bc();
                 work->state = 12;
             }

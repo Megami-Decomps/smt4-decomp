@@ -640,7 +640,9 @@ typedef struct BtlMainStateA {
     /* 0x4CD2 */ u8 unk4cd2[2];
     /* 0x4CD4 */ s32 debugEnemySkill; /* the debug flag menu's "enemy skill" value */
     /* 0x4CD8 */ u64 scriptFlags;
-    /* 0x4CE0 */ u8 unk4ce0[0xC];
+    /* 0x4CE0 */ u8 unk4ce0[4];
+    /* 0x4CE4 */ s32 currentSoundId; /* the sound btlSwitchId4CE4 last started, -1 = none */
+    /* 0x4CE8 */ s32 actionSoundId;  /* the sound an action switches to (btlUnitStartAction) */
     /* 0x4CEC */ s32 specialEffect; /* effect handle for the special combatant, 0 = none */
 } BtlMainStateA;
 typedef char BtlMainStateADebugValueOffsetCheck[

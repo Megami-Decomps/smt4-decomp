@@ -15,10 +15,14 @@ typedef struct MapMain {
     /* 0x24 */ u32 state;        /* map-mode controller state */
     /* 0x28 */ u32 stateTime;    /* elapsed updates within the state */
     /* 0x2C */ u32 mapId;
-    /* 0x30 */ u32 areaId;
+    /* 0x30 */ s32 areaId;
     /* 0x34 */ u8 unk34[8];
     /* 0x3C */ u8 unk3C;
-    /* 0x3D */ u8 unk3D[0xF];
+    /* 0x3D */ u8 unk3D[3];
+    /* 0x40 */ s32 unk40;         /* 1 and 2 keep the room's own music (mapAmbientAudioUpdate) */
+    /* 0x44 */ u8 unk44;
+    /* 0x45 */ u8 silent;         /* the room plays no music */
+    /* 0x46 */ u8 unk46[6];
     /* 0x4C */ void *systemScriptData;    /* borrowed map/all/mapsys_scr.bf buffer */
     /* 0x50 */ void *systemMessageData;   /* borrowed map/all/mapsys_mes.mbm buffer */
     /* 0x54 */ ScriptProcess *systemScriptProcess;

@@ -19,10 +19,10 @@ u32 FUN_0025cf44(void)
     if (asdTMTexTableNodeIsLoaded(46, 0) == 0)
         return 0;
     const TextureTableEntryIV *dimensions = asdTMTexTableEntryAt(46, 151);
-    void *data = g_campCec.instance->block40;
-    cecCardDrawBackgroundAndLabel(work->unk174, data, work->slides, 0, 0);
-    data = g_campCec.instance->block40;
-    saveSlotDrawSummary(work->unk174, data, work->slides + 1, dimensions->x, dimensions->y, 0);
+    void *data = &g_campCec.instance->ownRecord;
+    cecCardDrawBackgroundAndLabel(work->labels, data, work->slides, 0, 0);
+    data = &g_campCec.instance->ownRecord;
+    saveSlotDrawSummary(work->labels, data, work->slides + 1, dimensions->x, dimensions->y, 0);
     return 0;
 }
 }

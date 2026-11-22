@@ -154,6 +154,13 @@ difference a register tie-break.
   stack slot: retail's larger frame (and a `vldmia`/`vstmia` copy) means the callee takes a reference and the caller
   writes `f(owner, archive, lookup(&ref))`, not a named local passed by address (`Obj4221fc::vfunc0c`,
   `Obj422260::vfunc0c`, both games; `classes/WindowStatus.h`).
+- Settle a parameter's type from its callers as well as its definition: an argument every caller passes unnarrowed (no
+  `and #255`, no `uxth`) is word-sized even when the callee only stores its low byte, and one they sign-extend is `s16`
+  (with the field it is stored into `s16` too). btlHelp's creator smt4a `FUN_00200a68(u16 id, s16 message, …, u32 mode,
+  …)`, one declaration in `battle/btlHelp.h`, is IDENTICAL with all eight callers (wave 74).
+- A by-value struct of four floats travels in `s0`-`s3` in field order wherever it is listed, so building it in the
+  caller does not reproduce a schedule that only an interleaved scalar order matches: `stereoCameraSetPerspective`'s
+  callers stay closer with scalar arguments (wave 74).
 - Parameter order is part of the signature even where the registers agree: see
   [Parameter order](#parameter-order).
 
@@ -199,6 +206,9 @@ difference a register tie-break.
   `bustupTextureStart`, wave 56; the same dead read is in the Apocalypse twin). The rule: both arms hold the statements
   retail performs and the tested value is a load retail keeps; an empty arm, or a test added only to move a branch
   or a register, is steering (wave 55 rejected one).
+- The same holds for an unused computation: keep it only where retail performs it (the `vcvt`/`vmul` are in its
+  code). Retail loading a global's address early into a saved register is not such evidence: smt4a `FUN_00487d6c`
+  matched with a draw depth it never used and retail never computes, and stays `NON_MATCHING` at 6 lines (wave 74).
 - `if (a == b) { X } else { Y }` moves `X` out of line after the next unconditional branch; the `!=`
   spelling does not. `cmp; beq; cmp; beq; b` is an if/else-if chain, `cmp; beq; cmp; bne; b` a
   `switch`. Which copy of identical tail blocks survives follows `return` against `break`, and
@@ -273,7 +283,9 @@ difference a register tie-break.
 - A block scope around a local needs retail evidence besides the score: retail reusing the local's stack slot for a
   later call's outgoing stack arguments (the slot can only be shared when the local's scope excludes that call). Say so
   in a comment at the block. smt4 `FUN_00150d2c`: the wave-archive load info lives at `[sp]`, the next read's two
-  stack arguments go to `[sp]` and `[sp, #4]`. A block found only by its score is steering.
+  stack arguments go to `[sp]` and `[sp, #4]`. Two locals overlapping in one frame area is the same evidence: smt4a
+  `FUN_002a28c0` keeps its equipment profile at `sp+4`, inside the 100 bytes the later outbox card occupies (wave 74).
+  A block found only by its score is steering.
 
 ### Locals, constants and literal pools
 
@@ -397,7 +409,8 @@ asks for.
 - A function retail inlines whole into another, variadic block included (`str r2, [sp]; add r3, sp, #4` of its
   `va_start` inside the caller), was in the same file: smt4a `numberFontDrawFormatted` and `numberFontMeasureFormatted` are
   one translation unit (`0018/NumberFont.cpp`), both IDENTICAL with the real function called, instead of a static copy
-  of its body (wave 72).
+  of its body (wave 72). So are smt4a `FUN_002bf520` and `FUN_002bf534` (`camp/CampCec/CampCec/CampCec.cpp`: adjacent,
+  the assert names CampCec.cpp, the getter inlined late at every use; wave 74).
 - A value retail computes twice where one statement sequence would share it (`asr r4, r7, #3`, the byte index, again
   after the first of two bit sets) marks an inline boundary: armcc does not share it across two inlined helpers.
   The save's unlock-bit setters `unlockBitSetEarned`/`unlockBitSetPending` (`shard/ProgressUnlock.h`, beside the

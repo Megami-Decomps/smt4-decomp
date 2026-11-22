@@ -143,7 +143,8 @@ static void phaseVectorSet(PhaseVector *vector, f32 x, f32 y, f32 z)
 /* NON_MATCHING: 6 lines: everything but stereoCameraSetPerspective's argument schedule matches (retail moves the
  * pivot 1 into r1 between the aspect and far-plane literals, the build after all four). The callee's definition takes
  * a CameraPerspective by value; paramorder makes this IDENTICAL with the order (fieldOfView, camera, near, far,
- * enabled, aspect), which is not the definition's. */
+ * enabled, aspect), which is not the definition's. The callee takes a by-value CameraPerspective (retail's definition stores it with two vstmia pairs); built as one
+ * in field order here it is worse (10 lines), so the call keeps the scalar form (wave 74). */
 extern "C" void FUN_002830cc(void)
 {
     randomStateSeed(0, 0x12345678);

@@ -25,7 +25,7 @@ static u32 effectColorPackFrom(EffectColor color)
 extern "C" {
 void renderCtxSetPackedColor(u32);
 f32 FUN_0034f8b4(const u8 *, s32, s32);
-u32 FUN_0038136c(const u8 *, const ScreenEffectWeightTrack *, s32, s32);
+u32 colorRampBlendWithFade(const u8 *, const ScreenEffectWeightTrack *, s32, s32);
 
 void FUN_00337cd0(ScreenEffectJob *job)
 {
@@ -51,7 +51,7 @@ void FUN_00337cd0(ScreenEffectJob *job)
         output->color.a = 0;
         return;
     }
-    u32 color = FUN_0038136c(resource->colorCurve, &resource->weight, frame, duration);
+    u32 color = colorRampBlendWithFade(resource->colorCurve, &resource->weight, frame, duration);
     renderCtxSetPackedColor(job->color);
     effectColorAssign(&g_vectorScratch.second.color, &g_vectorScratch.first.color);
     renderCtxSetPackedColor(color);

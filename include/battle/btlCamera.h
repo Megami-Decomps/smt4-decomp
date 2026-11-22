@@ -47,7 +47,7 @@ typedef struct BtlCamera {
     };
     /* 0x024 */ s32 editorValue;     /* nonzero: the editor's pose applies (btlCameraStartMove) */
     /* 0x028 */ s32 state;           /* 0: idle, 1: updating, 2: finished */
-    /* 0x02C */ u8 unk02C[4];
+    /* 0x02C */ u32 shakeEffect;   /* shakeEffectAlloc's handle */
     /* 0x030 */ BtlCameraShake shake;      /* flag 0x40000 */
     /* 0x044 */ BtlCameraShake shakeExtra; /* flag 0x400000 */
     /* 0x058 */ u8 view[0x508];      /* the AsdCamera (0x50C bytes; its last word is debugScalar) */
@@ -94,7 +94,7 @@ typedef struct BtlCamera {
     /* 0x6AC */ s32 fovShiftDuration;
     /* 0x6B0 */ s32 fovShiftFrame;
     /* 0x6B4 */ s32 fovShiftMode;
-    /* 0x6B8 */ u8 unk6B8[4];
+    /* 0x6B8 */ f32 unk6B8;          /* cleared with the channels */
     /* 0x6BC */ s32 rollDuration;    /* flag 0x800: roll runs to the end pose's */
     /* 0x6C0 */ s32 rollFrame;
     /* 0x6C4 */ s32 rollMode;
@@ -117,10 +117,11 @@ typedef struct BtlCamera {
     /* 0x72C */ s32 moveDuration;
     /* 0x730 */ u8 unk730[8];
     /* 0x738 */ BtlCameraVector3 eyeOrigin;  /* added to the eye (flag 0x800000: FUN_003d681c moves both origins) */
-    /* 0x744 */ u8 unk744[0x1C];
-    /* 0x760 */ s32 unk760;
+    /* 0x744 */ u8 unk744[0x18];
+    /* 0x75C */ s32 unk75C;         /* -1 when idle */
+    /* 0x760 */ s32 unk760;         /* -1 when idle */
     /* 0x764 */ BtlCameraVector3 lookOrigin; /* added to the target */
-    /* 0x770 */ u8 unk770[0xC];
+    /* 0x770 */ BtlCameraVector3 unk770;
     /* 0x77C */ BtlCameraVector3 eyeLocal;   /* the last eye and target without their origins */
     /* 0x788 */ BtlCameraVector3 lookLocal;
     /* The channels of the alternate mode (flag 0x100), timed by the module's statics. */

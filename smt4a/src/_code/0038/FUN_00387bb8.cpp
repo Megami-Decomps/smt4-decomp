@@ -1,11 +1,11 @@
 /* NON_MATCHING: only case 6 differs: when FUN_00284e94 fails retail returns its known-zero r0 straight from the pop, this build branches to the shared `mov r0, r6` exit. */
 #include "camp/CampCec/CharacterRefreshWork.h"
 #include "event/2dEvent/EventEffect.h"
+#include "cec/CecProcessGlobal.h"
 
 extern "C" {
 void playerSummaryFill(PlayerSummary *summary);
 void slotNameDisplaySetEntry(PlayerSummary *summary, u32 argument);
-s32 cecQueryOptionalProcess(void);
 s32 gameDataTestFlags(u32 flags);
 void cecProcessCall2(void);
 void cecProcessForward(PlayerSummary *summary);

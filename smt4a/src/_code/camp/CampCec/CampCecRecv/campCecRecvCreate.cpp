@@ -4,6 +4,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "sys/ResultReport.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "cec/CecProcessGlobal.h"
 
 typedef void (*CecHandler)(void);
 
@@ -70,14 +71,13 @@ void menuPollModeScript(void);
 void questQueryFalse(void);
 void stateMachineRun(void);
 void FUN_0025d578(void);
-void FUN_002a28c0(void);
+void campCecLoaderThread(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void FUN_00514a64(void);
 void FUN_00514b84(void);
 void FUN_00514b14(void);
 u8* stockFindSelectedUnit(void);
 s32 nn_cfg_CTR_IsRestrictP2pCec(void);
 s32 FUN_004310c0(void);
-s32 cecQueryOptionalProcess(void);
 s32 bitsAt60Test(u8* object, u32 bit);
 void sysPlaySe(s32 id);
 void runWinOpen(void);
@@ -170,7 +170,7 @@ void campCecRecvCreate(u8 fromMenu)
         void (*second)(void);
         void (*third)(void);
     } handlers = { 4, FUN_00514a64, FUN_00514b84, FUN_00514b14 };
-    u32 result = FUN_002fb0d4(&recv->result, &handlers, FUN_002a28c0, &recv, recv->list->size + recv->list->begin, 0x11, -2, 0);
+    u32 result = FUN_002fb0d4(&recv->result, &handlers, campCecLoaderThread, &recv, recv->list->size + recv->list->begin, 0x11, -2, 0);
     if ((result & 0x7e00000) != 0x600000 && (s32)nnResultIsFailure(result)) {
         resultHandleFailure(result);
     }

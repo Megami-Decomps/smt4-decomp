@@ -32,7 +32,7 @@ int useCounterAppendValue(...);
 int sortMenuAcquire(...);
 int stateAtF4Apply(void);
 int uiScrollHandleActionsOrTouch(...);
-int engineForwardVariadicCommand(...);
+int cecRecordSetEquipment(...);
 int FUN_0036cf98(...);
 int FUN_0038b57c(...);
 int FUN_0038b5fc(...);
@@ -98,7 +98,7 @@ extern int resourceRunOperationIfUnblocked(int);
 extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: statusPanelSetOpen. */
 /* Supplied declaration required: campTouchRegionsRemoveGroup. */
-extern unsigned int FUN_002bf520(void);
+extern unsigned int campCecGetOwnRecord(void);
 extern int widgetSubCallIfVisible(int);
 /* Supplied declaration required: gameGlobalsSetSceneState. */
 /* Supplied declaration required: campListRegisterTouchRegions. */
@@ -115,7 +115,7 @@ extern int widgetSubCallIfVisible(int);
 /* Supplied declaration required: stateAtF4Apply. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: objBSetWordByIndex. */
-/* Supplied declaration required: engineForwardVariadicCommand. */
+/* Supplied declaration required: cecRecordSetEquipment. */
 extern int FUN_0036cf78(void);
 /* Supplied declaration required: FUN_0036cf98. */
 /* Supplied declaration required: gameGlobalsQueueValues. */
@@ -444,8 +444,8 @@ void FUN_001fdde8(int param_1)
       }
       if (temp_v10 != 0) {
         puVar8 = (unsigned int *)gameGetPlayerData();
-        temp_v3 = FUN_002bf520();
-        engineForwardVariadicCommand(temp_v3,*puVar8,puVar8[1],puVar8[2],romwright_piece_2_2(temp_v2,*(unsigned short *)(puVar8 + 3)));
+        temp_v3 = campCecGetOwnRecord();
+        cecRecordSetEquipment(temp_v3,*puVar8,puVar8[1],puVar8[2],romwright_piece_2_2(temp_v2,*(unsigned short *)(puVar8 + 3)));
         stateAtF4Apply();
       }
       else {
