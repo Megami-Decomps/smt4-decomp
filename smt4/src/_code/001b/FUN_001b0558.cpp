@@ -4,7 +4,7 @@
 #include "shard/W6_W6Match4_RelativeDirectory.h"
 
 extern "C" {
-s32 FUN_00282e70(void);
+s32 partyPanelIsTransitionDone(void);
 s32 FUN_00282ccc(void);
 void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 index);
 void buttonHelpSetText(const char* text, u32 color);
@@ -26,7 +26,7 @@ static __inline const char* partyHelpText(u32 index)
 extern "C" void FUN_001b0558(void)
 {
     PartyPanelState* panel = g_partyPanel;
-    s32 equippedWeapon = FUN_00282e70();
+    s32 equippedWeapon = partyPanelIsTransitionDone();
     s32 selection = FUN_00282ccc();
     if (equippedWeapon) {
         updateEquippedWeaponHelp(NULL, 0);

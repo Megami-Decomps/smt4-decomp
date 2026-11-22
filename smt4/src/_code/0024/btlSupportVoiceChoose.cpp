@@ -1,4 +1,4 @@
-/* NON_MATCHING: lookup exit control flow and persistent zero register differ; native stereo gains and six-choice compaction are restored. */
+/* NON_MATCHING: the record search keeps retail's found-index exit; retail lays the default-progress loop after the alternate one, keeps a zero in r9 from the second table lookup to the candidate clears (category in sl, one more saved register, 104-byte frame) where armcc here rematerialises it. */
 #include "shard/GameOptions.h"
 #include "gamedata/DataTable.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
@@ -25,22 +25,27 @@ u32 btlSupportVoiceChoose(s32 category, u32 excludedVoice)
     s32 count = dataTableGetCount(dataTableGet(0x3E, 0));
     u16 progress = gameGetSupportUnitData()->unk604;
     SupportVoiceRecord record;
-    s32 index = 0;
+    s32 index = -1;
+    s32 i;
     if (gameGetOptionProgressStatus() != 2) {
-        for (; index < count; ++index) {
-            __aeabi_memcpy4(&record, &entries[index], sizeof(record));
-            if (record.progress == progress)
+        for (i = 0; i < count; ++i) {
+            __aeabi_memcpy4(&record, &entries[i], sizeof(record));
+            if (record.progress == progress) {
+                index = i;
                 break;
+            }
         }
     } else {
         progress = gameGetSupportUnitData()->unk46;
-        for (; index < count; ++index) {
-            __aeabi_memcpy4(&record, &entries[index], sizeof(record));
-            if (record.alternateProgress == progress)
+        for (i = 0; i < count; ++i) {
+            __aeabi_memcpy4(&record, &entries[i], sizeof(record));
+            if (record.alternateProgress == progress) {
+                index = i;
                 break;
+            }
         }
     }
-    if (index >= count)
+    if (index < 0)
         return 0;
     __aeabi_memcpy4(&record, &entries[index], sizeof(record));
     u32 candidates[6] = {};

@@ -47,7 +47,7 @@ typedef struct MapMazeState {
     /* 0x5 */ s8 height;
     /* 0x6 */ u8 startX;
     /* 0x7 */ u8 startY;
-    /* 0x8 */ u8 specialCount;
+    /* 0x8 */ s8 specialCount;
     /* 0x9 */ u8 ready;
     /* 0xA */ s8 displayX;
     /* 0xB */ s8 displayY;

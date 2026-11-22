@@ -16,7 +16,10 @@ struct DemonSaveSnapshot {
     /* 0x1A */ u16 variant;
     /* 0x1C */ DemonSnapshotFourWords data;
     /* 0x2C */ DemonSnapshotTwoWords extra;
-    /* 0x34 */ u32 status;
+    union {
+        /* 0x34 */ u32 status;
+        /* 0x34 */ u16 statusHalves[2]; /* [1] bits 2-7: nonzero once the demon is registered (the NPC shop's test) */
+    };
     /* 0x38 */ u32 experience;
     /* 0x3C */ u8 inherited[0x12];
 };

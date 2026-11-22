@@ -1,4 +1,5 @@
-/* NON_MATCHING: register allocation and spill: retail keeps x/y in fp/r5, spills the offset x to [sp+8] and has a 0x24-byte frame (icon id slots at sp+12/sp+20); here x/y live in sl/r6 with no spill. */
+/* NON_MATCHING: 12 lines: the second render-state set swaps r1/r2 against retail's (both of retail's sets are
+ * the same instructions); writing the two sets in different forms matches, which is steering. */
 #include "ui/UiSpriteApi.h"
 #include "shard/S1ListPanel.h"
 #include "camp/RenderCtxA.h"
@@ -31,24 +32,22 @@ void FUN_002fa1b0(IconPanel *panel, u32 kind, s32 x, s32 y, f32 speed, s32 alter
             offsetX = vec2GetXInt((&panel->position));
             offsetY = vec2GetYInt((&panel->position));
         }
-        offsetX += x;
-        offsetY += y;
-        texDrawTableEntryAtStoredOrigin(2, 13, 170, offsetX, offsetY, 52);
-        texDrawTableEntryAtStoredOrigin(2, 13, 171, offsetX, offsetY, 52);
-        texDrawTableEntryAtStoredOrigin(2, 13, 222, offsetX, offsetY, 53);
+        texDrawTableEntryAtStoredOrigin(2, 13, 170, x + offsetX, y + offsetY, 52);
+        texDrawTableEntryAtStoredOrigin(2, 13, 171, x + offsetX, y + offsetY, 52);
+        texDrawTableEntryAtStoredOrigin(2, 13, 222, x + offsetX, y + offsetY, 53);
         if (panel->styled == 1) {
             efctSetSpeed(vec2GetSpeed(&panel->position) * speed);
             RenderCtxA *render = g_renderCtx;
             u32 blend = packNibblesAndByte(6, 1, 0);
             renderCtxSetB(render, blend);
-            texDrawTableEntryAtStoredOrigin(2, 13, 222, offsetX, offsetY, 54);
+            texDrawTableEntryAtStoredOrigin(2, 13, 222, x + offsetX, y + offsetY, 54);
             render = g_renderCtx;
             blend = packNibblesAndByte(6, 7, 0);
             renderCtxSetB(render, blend);
             efctSetSpeed(speed);
         }
         texDrawTableEntryAtStoredOrigin(2, 13, background, x, y, 55);
-        texDrawTableEntryAtStoredOrigin(2, 13, foreground, offsetX, offsetY, 56);
+        texDrawTableEntryAtStoredOrigin(2, 13, foreground, x + offsetX, y + offsetY, 56);
     } else {
         texDrawTableEntryAtStoredOrigin(2, 13, 221, x, y, 44);
         texDrawTableEntryAtStoredOrigin(2, 13, background, x, y, 45);

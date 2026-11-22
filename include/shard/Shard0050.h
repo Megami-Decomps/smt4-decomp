@@ -29,8 +29,6 @@ struct SndSource {
 extern "C" {
 #endif
 
-void fillThreeWordsWithByte(u32 *words, u32 value);
-
 #ifdef __cplusplus
 }
 #endif

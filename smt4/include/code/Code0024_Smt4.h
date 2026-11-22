@@ -12,7 +12,7 @@ struct Owner;
 struct MenuScreen;
 extern "C" {
 
-u8 * FUN_0024aaa0(void);
+u8 * overlayGetStatusScene(void);
 
 u32 FUN_00245c78(void);
 

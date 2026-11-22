@@ -27,7 +27,7 @@ static __inline s32 resultDescription(s32 status)
 extern "C" {
 void nn_fs_ExtSaveDataSpecifier_Make(SaveDataArchivePath *path, u8 mediaType, u64 titleId);
 nn::Result FUN_0042b3b8(SaveDataArchive **archive, const SaveDataArchivePath *path, u32 flags);
-s32 FUN_001aeefc(const char *name, SaveDataArchive *archive, u32 first, u32 second);
+s32 fsMountRegister(const char *name, SaveDataArchive *archive, u32 first, u32 second);
 
 s32 FUN_00429fcc(const char *name, u64 titleId)
 {
@@ -40,7 +40,7 @@ s32 FUN_00429fcc(const char *name, u64 titleId)
         status = (s32)0xc8804482;
     }
     if (nnResultIsSuccess(status)) {
-        status = FUN_001aeefc(name, archive, 0, 0);
+        status = fsMountRegister(name, archive, 0, 0);
         if ((s32)(status & 0x80000000) < 0) {
             archive->vtable->close(archive);
         }

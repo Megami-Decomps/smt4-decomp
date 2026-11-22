@@ -30,7 +30,7 @@ enum {
 
 extern "C" {
 
-void FUN_003d84d8(EventCamera* camera, s32 mode, s32 arg);
+void cameraPoseApplyPreset(EventCamera* camera, s32 mode, s32 arg);
 void cameraMatrixCacheReset(void* node, s32 flag);
 void cameraMatrixCacheSetLookAt(void* node, void* position, f32* target, s32* result);
 void stereoCameraSetPerspective(void* node, s32 flag);
@@ -42,7 +42,7 @@ void eventCommandSetPendingCleanup(void);
 void eventCameraInitialize(EventCamera* camera)
 {
     CameraWord* w = camera->w;
-    FUN_003d84d8(camera, 0, 0);
+    cameraPoseApplyPreset(camera, 0, 0);
     w[0x1e5].f = 0.0f;
     w[0x1eb].f = 0.0f;
     w[0x1f4].f = 0.0f;

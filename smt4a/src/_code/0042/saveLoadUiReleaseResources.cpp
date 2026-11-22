@@ -3,6 +3,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/DataTableSections.h"
 #include "shard/Shard0050.h"
+#include <string.h>
 
 /* The shared controller's padding starts at 0x13; pointer members there would change its alignment. */
 struct SaveLoadCleanupBuffersView {
@@ -39,7 +40,7 @@ static __inline void saveLoadClearTouchRegions(SaveLoadControllerA *work)
     for (s32 i = 0; i < work->touch.count; ++i)
         ifTouchRegionRemove();
     work->touch.count = 0;
-    fillThreeWordsWithByte(work->touch.handles, -1);
+    memset(work->touch.handles, -1, sizeof(work->touch.handles));
     work->pending = 0;
     work->confirmed = 0;
     work->canceled = 0;

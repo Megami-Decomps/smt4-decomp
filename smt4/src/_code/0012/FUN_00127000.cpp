@@ -19,7 +19,7 @@ typedef char MountedArchiveReleaseOffsetCheck[
 extern "C" {
 u32 titleContentStreamCreate(u32 *handle, const HandleRequest *request,
     u32 fileCount, u32 directoryCount, u32 buffer, u32 bytes, u32 flags);
-u32 FUN_002bb99c(const char *name, u32 handle, u8 downloadable, u8 flags);
+u32 fsMountRegister(const char *name, u32 handle, u8 downloadable, u8 flags);
 
 // Mount a title-backed archive using the supplied fixed workspace.
 s32 FUN_00127000(const char *name, u32 mode, u64 titleId, u32 option,
@@ -36,7 +36,7 @@ s32 FUN_00127000(const char *name, u32 mode, u64 titleId, u32 option,
         return static_cast<s32>(result);
     const u32 category = static_cast<u32>(titleId >> 32);
     const bool downloadable = (category >> 14) == 0x10 && static_cast<u16>(category) == 0x8C;
-    result = FUN_002bb99c(name, handle, downloadable, 0);
+    result = fsMountRegister(name, handle, downloadable, 0);
     if (nnResultIsFailure(static_cast<s32>(result))) {
         MountedArchiveDevice *device = reinterpret_cast<MountedArchiveDevice *>(handle);
         device->vtable->release(device);

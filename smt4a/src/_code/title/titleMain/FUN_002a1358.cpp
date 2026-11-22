@@ -1,5 +1,7 @@
-/* NON_MATCHING: the order of the work-block field stores and the zero float register differ from retail (192 vs 198 rows); the title setup is the same. */
+/* NON_MATCHING: 8 lines: the mode constant 2 and the level copy go through r1 where retail uses r0 (retail tests
+ * the level in r0 with cmp, the build copies it with movs). */
 #include "common.h"
+#include <stddef.h>
 #include "gamedata/GameFlags.h"
 #include "addon/AocSystemA.h"
 #include "AsdSDK/AsdDebug.h"
@@ -7,6 +9,12 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
+
+/* A title button's screen position. */
+struct TitleButtonPosition {
+    f32 x;
+    f32 y;
+};
 
 /* The title screen's work block (0x260 bytes; only the fields set here). */
 typedef struct TitleMain {
@@ -17,7 +25,7 @@ typedef struct TitleMain {
     /* 0x00C */ u32 unk00c;
     /* 0x010 */ u8 unk010;
     /* 0x011 */ u8 unk011[3];
-    /* 0x014 */ f32 buttonPosition[5][2];
+    /* 0x014 */ TitleButtonPosition buttonPosition[5];
     /* 0x03C */ u8 unk03c;
     /* 0x03D */ u8 unk03d;
     /* 0x03E */ u8 unk03e;
@@ -27,15 +35,29 @@ typedef struct TitleMain {
     /* 0x048 */ u8 unk048[4];
     /* 0x04C */ u16 unk04c;
     /* 0x04E */ u16 unk04e;
-    /* 0x050 */ u32 triple[3];
+    /* 0x050 */ u32 triple[2]; /* two words and a halfword, cleared by wordTripleClear */
+    /* 0x058 */ u16 tripleEnd;
     /* 0x05A */ u8 unk05a;
+    /* 0x05B */ u8 unk05b;
     /* 0x05C */ s32 mode;
     /* 0x060 */ u8 unk060;
     /* 0x061 */ u8 helpAcquired;
     /* 0x062 */ u8 unk062;
     /* 0x063 */ u8 unk063;
-    /* 0x064 */ u8 unk064[6];
+    /* 0x064 */ u8 unk064[0xC];
+    /* 0x070 */ u8 unk070;
+    /* 0x071 */ u8 entryMode; /* from the creation options */
+    /* 0x072 */ u8 unk072;
+    /* 0x073 */ u8 unk073;
+    /* 0x074 */ f32 unk074;
+    /* 0x078 */ u8 unk078[0x18];
+    /* 0x090 */ u8 level; /* the resident module's level at creation */
+    /* 0x091 */ u8 unk091[3];
+    /* 0x094 */ u32 unk094;
+    /* 0x098 */ u8 unk098;
 } TitleMain;
+typedef char TitleMainOffsets[offsetof(TitleMain, mode) == 0x5C && offsetof(TitleMain, level) == 0x90 &&
+                              offsetof(TitleMain, unk098) == 0x98 ? 1 : -1];
 
 /* The title main pointer slot (the work block is the second word). */
 typedef struct TitleMainGlobals {
@@ -58,13 +80,14 @@ void titleDrawModeOverlay(void *process);
 void drawTitleModeOverlay(void *process);
 void FUN_0032b0d4(void *process);
 
-/* Reads the screen position of layout record `id` of group 9 into `position`. */
-static __inline void readButtonPosition(f32 *position, u32 id)
+/* A button position from integer layout coordinates. */
+static __inline TitleButtonPosition titleButtonPosition(s32 x, s32 y)
 {
-    const TextureTableEntryIV *layout = asdTMTexTableEntryAt(9, id);
+    TitleButtonPosition position;
 
-    position[0] = (f32)layout->x;
-    position[1] = (f32)layout->y;
+    position.x = (f32)x;
+    position.y = (f32)y;
+    return position;
 }
 
 /* Creates the title screen: clears its work block, reads the button positions when the game is
@@ -80,8 +103,8 @@ void FUN_002a1358(u8 *options)
     title->unk010 = 0;
     title->unk03c = 1;
     for (s32 i = 0; i < 5; i++) {
-        title->buttonPosition[i][0] = 0.0f;
-        title->buttonPosition[i][1] = 0.0f;
+        title->buttonPosition[i].x = 0.0f;
+        title->buttonPosition[i].y = 0.0f;
     }
     title->unk03f = 0;
     title->unk03d = 0;
@@ -93,33 +116,42 @@ void FUN_002a1358(u8 *options)
     title->unk040 = 0.0f;
     title->unk044 = 0.0f;
     title->unk05a = 0;
-    *((u8 *)title + 0x60) = 0;
-    *((u8 *)title + 0x61) = 0;
-    *((u8 *)title + 0x63) = 0;
-    *((u8 *)title + 0x62) = 1;
-    *((u8 *)title + 0x72) = 0;
-    *((u8 *)title + 0x70) = 0;
-    *(f32 *)((u8 *)title + 0x74) = 0.0f;
-    *((u8 *)title + 0x71) = 0;
-    *(u32 *)((u8 *)title + 0x94) = 0;
-    *((u8 *)title + 0x98) = 0;
+    title->unk060 = 0;
+    title->helpAcquired = 0;
+    title->unk063 = 0;
+    title->unk062 = 1;
+    title->unk072 = 0;
+    title->unk070 = 0;
+    title->unk074 = 0.0f;
+    title->entryMode = 0;
+    title->unk094 = 0;
+    title->unk098 = 0;
     s32 level = jyoucyuGetLevel();
 
-    *((u8 *)title + 0x90) = (u8)level;
+    title->level = level;
     if (level != 0) {
-        readButtonPosition(title->buttonPosition[0], 0x22);
-        readButtonPosition(title->buttonPosition[1], 0x23);
-        readButtonPosition(title->buttonPosition[2], 0x24);
-        readButtonPosition(title->buttonPosition[3], 0x25);
-        readButtonPosition(title->buttonPosition[4], 0x26);
+        const TextureTableEntryIV *layout = asdTMTexTableEntryAt(9, 0x22);
+        title->buttonPosition[0] = titleButtonPosition(layout->x, layout->y);
+        layout = asdTMTexTableEntryAt(9, 0x23);
+        title->buttonPosition[1] = titleButtonPosition(layout->x, layout->y);
+        layout = asdTMTexTableEntryAt(9, 0x24);
+        title->buttonPosition[2] = titleButtonPosition(layout->x, layout->y);
+        layout = asdTMTexTableEntryAt(9, 0x25);
+        title->buttonPosition[3] = titleButtonPosition(layout->x, layout->y);
+        layout = asdTMTexTableEntryAt(9, 0x26);
+        title->buttonPosition[4] = titleButtonPosition(layout->x, layout->y);
         campButtonHelpAcquire();
         campCommonBgAcquire();
         title->helpAcquired = 1;
     }
-    gameFlagSetValue(0x534, aocHasType36(g_aocSystem, 0x534) != 0 ? 1 : 0, 1);
+    if (aocHasType36(g_aocSystem, 0x534) != 0) {
+        gameFlagSetValue(0x534, 1, 1);
+    } else {
+        gameFlagSetValue(0x534, 0, 1);
+    }
     title->unk004 = 0;
     if (options != NULL) {
-        *((u8 *)title + 0x71) = *options;
+        title->entryMode = *options;
         title->unk010 = 0;
     }
     void *process = reinterpret_cast<void *>(asdProcessCreateSimple(reinterpret_cast<const s8 *>("TITLE C"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0029f2fc), reinterpret_cast<AsdProcFunc>(titleMainRelease), 0));

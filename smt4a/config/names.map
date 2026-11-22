@@ -1819,7 +1819,7 @@
 0037d024 jobSetWork31
 0037d1c8 stateRef568IsState2
 0037d204 jobsOwnerStopSubJobs
-0037d400 jobRefStopAndFree
+0037d400 freeCameraDestroy
 0037d478 gameDataBlocksGetWord27E90
 0037d494 gameDataBlocksGetHalf280C4
 0037d6c4 obj04StateIs4
@@ -2360,7 +2360,7 @@
 0050d708 clearWordHalfByte
 0050d71c clearTwoWords
 0050d72c __ARM_common_memclr4_9
-0050d778 fillThreeWordsWithByte
+0050d778 __ARM_common_memset4_12
 0050d794 fillTwoWordsWithByte
 00501f28 copy0x70Bytes
 00507cbc soundLoaderLoadFile
@@ -7943,3 +7943,16 @@
 003e854c battleInitializeEnemyFormation
 003ef614 battleReleaseUnusedEnemyResources
 004bfa30 btlGetCurableAilmentMaskForTarget
+003d2294 vec3RotateXyzDegrees
+001aeefc fsMountRegister
+001c940c commandHolderCreate
+003273ac mazeGridApplyPreset
+003339ec userSettingsResetPriorities
+002cad18 partyPanelIsTransitionDone
+00214dc4 playLogDraw
+003e32b0 npcShopSelectUpdate
+0035e03c itemApplySecondaryEffects
+004ce3c0 sceneHealingUpdate
+00348c50 freeCameraCreate
+00404050 contentListDrawRow
+00404f40 contentListDrawFocusedRow

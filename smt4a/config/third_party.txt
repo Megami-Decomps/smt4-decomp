@@ -3205,7 +3205,7 @@
 0x001aec9c nn_cx_UncompressRL name
 0x001aeddc nn_cx_UncompressHuffman name
 0x001aeecc nn_cx_GetUncompressedSize name
-0x001aeefc FUN_001aeefc between
+0x001aeefc fsMountRegister between
 0x001af058 nn_fs_ipc_FileSystem_GetPriority name
 0x001af090 FUN_001af090 between
 0x001af0f4 FUN_001af0f4 callers
@@ -7381,6 +7381,7 @@
 0x0050d72c __ARM_common_memclr4_9 name
 0x0050d740 __ARM_common_memcpy4_7 name
 0x0050d75c __ARM_common_memcpy4_9 name
+0x0050d778 __ARM_common_memset4_12 name
 0x0050d8e4 __hardfp_atan2f name
 0x0050db54 mathlib_ceilf name
 0x0050dbe4 FUN_0050dbe4 callers

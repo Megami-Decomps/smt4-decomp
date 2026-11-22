@@ -1,3 +1,4 @@
+#include "gfx/FreeCamera.h"
 #include "battle/btlCamera.h"
 #include "Model/MoriModelManager.h"
 #include "shard/JobWork.h"
@@ -6,7 +7,6 @@
 extern "C" {
 
 extern void jobStop(u32 job, s32 arg);
-extern void jobRefStopAndFree(void);
 extern void uiFreeCallback(u32 job);
 extern void eventCommandSetPendingCleanup(s32 arg);
 extern void modelRemoveFromSlotList(u32 object, s32 arg);
@@ -24,7 +24,7 @@ void btlCameraDestroy(u32 job)
 
     if (camera != NULL) {
         g_handleRegistry->camera = NULL;
-        jobRefStopAndFree();
+        freeCameraDestroy();
         uiFreeCallback(camera->job);
         camera->job = 0;
         eventCommandSetPendingCleanup(0);

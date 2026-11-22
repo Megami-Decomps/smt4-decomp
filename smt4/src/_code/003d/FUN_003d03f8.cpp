@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail spills its argument words (push r0-r3, args read via stack) and evaluates the skill kind/amount tests with different register use; logic equivalent. */
+/* NON_MATCHING: the protection flag is read through the view pointer as retail does and the incapacitation default is declared where it is tested; still different: retail keeps the skill kind in r3 (subs) with the view in r0, copies the -1 default into the third register before the call, and reads the limit argument of FUN_002551ac before storing the other stack arguments. */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
@@ -36,7 +36,7 @@ s32 FUN_003d03f8(s32 *state, BtlUnit *unit, s32 amount, s32 slot, BtlActionRecor
         u32 limit = *reinterpret_cast<u16 *>(table + 0x9D4);
         if (static_cast<s32>(limit) <= amount) {
             amount = limit - 1;
-            if (kind == 2 && (*reinterpret_cast<u16 *>(reinterpret_cast<u8 *>(context) + 0x1C6) & 8) == 0)
+            if (kind == 2 && (*reinterpret_cast<u16 *>(reinterpret_cast<u8 *>(view) + 0xC6) & 8) == 0)
                 extraEffect = *reinterpret_cast<u16 *>(table + 0x9D6);
             actionCreateKindSeventeen(0, unit, *reinterpret_cast<s16 *>(reinterpret_cast<u8 *>(context) + 0x6E));
             FUN_00227d18(skill->memberId);
@@ -49,12 +49,12 @@ s32 FUN_003d03f8(s32 *state, BtlUnit *unit, s32 amount, s32 slot, BtlActionRecor
             *reinterpret_cast<u32 *>(*state + 0x88) = 0xD;
     }
     s32 a = -1;
-    s32 b = -1;
     s32 c = -1;
     if ((*context & 0x10) == 0) {
         a = 0;
         c = 0xB;
     }
+    s32 b = -1;
     if (btlScriptUnitIsIncapacitated(*state) == 0)
         b = 0;
     FUN_002551ac(slot, unit, skill, 0, amount, -1, -1,

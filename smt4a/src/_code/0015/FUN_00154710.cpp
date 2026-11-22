@@ -1,4 +1,4 @@
-/* NON_MATCHING: listener global-address grouping, scalar/vector store combining and VFP basis-register allocation differ. */
+/* NON_MATCHING: the listener target is the position plus a direction whose zero y component retail keeps (unfolded, s23); the remaining differences are VFP register allocation in the look-at basis (forward/right/up components land in other s registers, so the right vector is stored with three vstr instead of one vstmia) and the base-register grouping of the listener fields. */
 #include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 #include <math.h>
 
@@ -12,30 +12,33 @@ void FUN_00154710(const AsdSndListener *position, f32 heading)
 {
     AsdSnd3dStateA *state = &g_asdSoundSystem.sound3d;
     f32 x = position->x;
-    f32 y = position->y;
-    f32 z = position->z;
     state->listenerPosition.x = x;
+    f32 y = position->y;
     state->listenerPosition.y = y;
+    f32 z = position->z;
     state->listenerPosition.z = z;
     state->listenerHeading = heading;
-    AsdSndListener up = state->listenerUp;
     f32 angle = heading * 0.7111111f;
-    AsdSndListener offset = { -FUN_001a1ee0(angle), 0.0f, -phaseCosine(angle) };
+    AsdSndListener up = state->listenerUp;
+    AsdSndListener offset;
+    offset.x = -FUN_001a1ee0(angle);
+    offset.y = 0.0f;
+    offset.z = -phaseCosine(angle);
     AsdSndListener target = { x + offset.x, y + offset.y, z + offset.z };
     AsdSndListener forward = { x - target.x, y - target.y, z - target.z };
     f32 inverseLength = 1.0f / sqrtf(forward.x * forward.x + forward.y * forward.y + forward.z * forward.z);
+    forward.z *= inverseLength;
     forward.x *= inverseLength;
     forward.y *= inverseLength;
-    forward.z *= inverseLength;
     AsdSndListener right = {
         up.y * forward.z - up.z * forward.y,
         up.z * forward.x - up.x * forward.z,
         up.x * forward.y - up.y * forward.x
     };
     inverseLength = 1.0f / sqrtf(right.x * right.x + right.y * right.y + right.z * right.z);
+    right.z *= inverseLength;
     right.x *= inverseLength;
     right.y *= inverseLength;
-    right.z *= inverseLength;
     AsdSndListener vertical = {
         forward.y * right.z - forward.z * right.y,
         forward.z * right.x - forward.x * right.z,

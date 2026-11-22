@@ -84,8 +84,8 @@ struct MapEnemyEntry {
     /* 0x170 */ s32 level;              /* 999 until set */
     /* 0x174 */ s32 kind;               /* 1-10: field enemy; indexes the extra models */
     /* 0x178 */ AsdMdlObject *model;
-    /* 0x17C */ u8 registered;
-    /* 0x17D */ u8 owned;               /* the entry created the model */
+    /* 0x17C */ s8 registered;          /* s8: retail tests it in its own block (mapEnemyCleanupUpdate, FUN_002d2b40) */
+    /* 0x17D */ s8 owned;               /* the entry created the model */
     /* 0x17E */ u8 unk17E[2];
 };
 

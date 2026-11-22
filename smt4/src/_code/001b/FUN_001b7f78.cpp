@@ -213,7 +213,7 @@ int mapGimicUpdateVisualBounds(void);
 int mapObjectSpawnAmbientEffects(void);
 int FUN_0027b1b4(void);
 int mapRangeEntriesRun(void);
-int FUN_0027b2b4(...);
+int mapCollisionLoad(...);
 int FUN_0027b65c(...);
 int mapSpawnActiveSlotEffects(void);
 int mapIfResetRecords(void);
@@ -572,7 +572,7 @@ extern int FUN_00276348(int);
 /* Supplied declaration required: mapObjectSpawnAmbientEffects. */
 /* Supplied declaration required: FUN_0027b1b4. */
 /* Supplied declaration required: mapRangeEntriesRun. */
-/* Supplied declaration required: FUN_0027b2b4. */
+/* Supplied declaration required: mapCollisionLoad. */
 /* Supplied declaration required: FUN_0027b65c. */
 /* Supplied declaration required: FUN_0027c3d0. */
 /* Supplied declaration required: FUN_0027cc48. */
@@ -732,7 +732,7 @@ extern int mapMainPollScript(void);
 /* Supplied declaration required: mapPerFrameUpdate. */
 /* Supplied declaration required: mapEnemyRestartIdleEntries. */
 extern int FUN_002d2b40(void);
-extern int FUN_002d3b20(void);
+extern int mapRangeCreateModels(void);
 /* Supplied declaration required: mapIfDestroyModelManagers. */
 /* Supplied declaration required: FUN_002d3e88. */
 /* Supplied declaration required: mapEnemyEndEligibleStates. */
@@ -1219,7 +1219,7 @@ LAB_001b8b20:
     mapRangeStartRequest(puVar14[0xb],puVar14[0xc]);
     puVar14[9] = puVar14[9] + 1;
 LAB_001b8b40:
-    temp_v9 = FUN_002d3b20();
+    temp_v9 = mapRangeCreateModels();
     if (temp_v9 == 0) {
       return 0;
     }
@@ -1361,7 +1361,7 @@ LAB_001b8c80:
           if (puVar14[0xc] != 1) goto LAB_001b8e80;
           temp_v9 = gameFlagIsSet(0xc6);
           if ((temp_v9 == 0) || (temp_v9 = gameFlagIsSet(0x108), temp_v9 != 0)) goto LAB_001b8e38;
-          FUN_0027b2b4(puVar14[0xb],puVar14[0xc],puVar14[0xb],99);
+          mapCollisionLoad(puVar14[0xb],puVar14[0xc],puVar14[0xb],99);
         }
         else {
 LAB_001b8e38:
@@ -1383,7 +1383,7 @@ LAB_001b8e80:
             temp_v17 = 99;
             temp_v16 = temp_v13;
           }
-          FUN_0027b2b4(temp_v13,temp_v15,temp_v16,temp_v17);
+          mapCollisionLoad(temp_v13,temp_v15,temp_v16,temp_v17);
         }
         mapRangeEntriesRun();
         FUN_0027b1b4();
@@ -5254,7 +5254,7 @@ LAB_001bf558:
     mapRangeStartRequest(puVar14[0xb],puVar14[0xc]);
     puVar14[9] = puVar14[9] + 1;
 LAB_001bf578:
-    temp_v9 = FUN_002d3b20();
+    temp_v9 = mapRangeCreateModels();
     if (temp_v9 == 0) {
       return 0;
     }
@@ -5290,7 +5290,7 @@ LAB_001bf628:
           if (puVar14[0xc] != 1) goto LAB_001bf6c8;
           temp_v9 = gameFlagIsSet(0xc6);
           if ((temp_v9 == 0) || (temp_v9 = gameFlagIsSet(0x108), temp_v9 != 0)) goto LAB_001bf680;
-          FUN_0027b2b4(puVar14[0xb],puVar14[0xc],puVar14[0xb],99);
+          mapCollisionLoad(puVar14[0xb],puVar14[0xc],puVar14[0xb],99);
         }
         else {
 LAB_001bf680:
@@ -5312,7 +5312,7 @@ LAB_001bf6c8:
             temp_v17 = 99;
             temp_v16 = temp_v13;
           }
-          FUN_0027b2b4(temp_v13,temp_v15,temp_v16,temp_v17);
+          mapCollisionLoad(temp_v13,temp_v15,temp_v16,temp_v17);
         }
         mapRangeEntriesRun();
         FUN_0027b1b4();

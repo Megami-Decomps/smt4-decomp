@@ -7,12 +7,25 @@
 #include "shard/W6_W6Match3_ScrollSelection.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 
-/* Work area, Shin Megami Tensei IV. */
+/* Work area, Shin Megami Tensei IV (0x488 bytes). */
 typedef struct PlayLogWork {
-    /* 0x00 */ u8 unk00[0x358];
+    /* 0x000 */ UiResourceParameters parameters;
+    /* 0x020 */ UiSpriteState sprites[5];
+    /* 0x2DC */ ScrollSelection list;
+    /* 0x340 */ u8 unk340[4];
+    /* 0x344 */ s32 state;
+    /* 0x348 */ s16 touchRegions[3];
+    /* 0x34E */ u8 unk34E[0xA];
     /* 0x358 */ s16 count;
     /* 0x35A */ u16 unk35A;
+    /* 0x35C */ u32 values[50];             /* the value of each PlayLogTable row */
+    /* 0x424 */ s16 ids[50];                /* the rows listed, in order */
 } PlayLogWork;
+
+typedef char PlayLogWorkOffsetCheck[
+    offsetof(PlayLogWork, sprites) == 0x20 && offsetof(PlayLogWork, list) == 0x2DC &&
+    offsetof(PlayLogWork, touchRegions) == 0x348 && offsetof(PlayLogWork, count) == 0x358 &&
+    offsetof(PlayLogWork, ids) == 0x424 && sizeof(PlayLogWork) == 0x488 ? 1 : -1];
 
 /* One page of Apocalypse's play log (0x130 bytes): the rows it lists. */
 typedef struct PlayLogPageA {

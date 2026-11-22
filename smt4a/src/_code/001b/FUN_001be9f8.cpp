@@ -43,7 +43,7 @@ extern int DAT_0064c080; /* 0x64c080 */
 
 extern int *_ZN9Obj55b680C1EP18AsdAllocatorObjectP12Obj55b680ResPv(int, int *, unsigned int *, int);
 /* Supplied declaration required: FUN_001c8248. */
-extern int FUN_001c940c(unsigned int *, unsigned int, int *, unsigned int);
+extern int commandHolderCreate(unsigned int *, unsigned int, int *, unsigned int);
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
@@ -233,7 +233,7 @@ int * FUN_001be9f8(int param_1,unsigned int *param_2,int param_3,int *param_4,un
       else {
         puVar9 = (unsigned int *)0x0;
       }
-      temp_v6 = FUN_001c940c(puVar7,*puVar9,temp_v13,param_5);
+      temp_v6 = commandHolderCreate(puVar7,*puVar9,temp_v13,param_5);
       if (temp_v6 == 0) {
 LAB_001beec8:
         temp_v5 = 0;

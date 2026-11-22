@@ -28,8 +28,12 @@ typedef struct QcWork {
 /* IV: the quest center's globals. */
 typedef struct QcGlobals {
     /* 0x00 */ u8 mode;
-    /* 0x01 */ u8 unk01[0x3];
+    /* 0x01 */ u8 restoreMenus;           /* set when the menus have to be reset on exit */
+    /* 0x02 */ u8 unk02[0x2];
     /* 0x04 */ QcWork *work;              /* NULL while closed */
+    /* 0x08 */ s32 area;                  /* the area the quest center was opened from */
+    /* 0x0C */ u32 argument;
+    /* 0x10 */ s32 resident;              /* nonzero: the screen's shared UI stays up */
 } QcGlobals;
 
 /* Apocalypse: the quest center's globals. */
@@ -56,7 +60,7 @@ typedef struct QcFlagBlock {
 
 /* Retail 32-bit layout invariants. */
 typedef char QcWorkSizeCheck[sizeof(QcWork) == 0x20 ? 1 : -1];
-typedef char QcGlobalsSizeCheck[sizeof(QcGlobals) == 0x8 ? 1 : -1];
+typedef char QcGlobalsSizeCheck[sizeof(QcGlobals) == 0x14 ? 1 : -1];
 typedef char QcGlobalsASizeCheck[sizeof(QcGlobalsA) == 0x14 ? 1 : -1];
 
 extern "C" {

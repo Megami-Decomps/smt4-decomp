@@ -51,7 +51,7 @@ s32 padIsButtonPressed(u32 button);
 s32 FUN_003ae608(BtlUi *ui, s32 button);
 u32 FUN_003af054(BtlUi *ui);
 void FUN_003af06c(BtlUi *ui, u64 mask);
-s32 FUN_003d06e4(BtlMainState **block, CommandState *work);
+s32 btlAiSelectCommand(BtlMainState **block, CommandState *work);
 void FUN_003d0fcc(BtlMainState **block, s32 mode);
 void FUN_003d1e2c(BtlMainState **block, CommandState *work);
 void FUN_003dda20(s32 a, CommandState *work, s32 amount);
@@ -200,7 +200,7 @@ u32 FUN_003cbf40(BtlMainState **block, CommandState *work)
     } else if ((work->flags & 0x1000) != 0) {
         FUN_00229098(block);
         markPickableUnits(block);
-        FUN_003d06e4(block, work);
+        btlAiSelectCommand(block, work);
         clearActionMarks(block);
         FUN_00229b10(block, work);
         refresh = true;

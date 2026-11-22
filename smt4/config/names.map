@@ -3963,7 +3963,7 @@
 003a0284 questEvaluateUnlockConditions
 002f8120 itemCompareCategoryDescendingValueAscending
 0038a154 aocQueueFileLoad
-003130c4 battleUiClearColumnValues
+003130c4 battleUiClearPositionActiveFlags
 001d9578 nameEntryUpdateTask
 002990a0 messageInitializeSavedBanner
 00224820 effectJobUpdateSpawn
@@ -6216,3 +6216,18 @@
 0033a144 btlHistoryStoreActionValues
 001e1540 fusionComparePairsByParentPriorityAscending
 00219148 skillListCompareBySortKeyAndUnit
+001d9294 mapEnemyCleanupUpdate
+0027b2b4 mapCollisionLoad
+003d06e4 btlAiSelectCommand
+003b6a5c resultDrawPointsCounter
+003d84d8 cameraPoseApplyPreset
+003398e4 btlSetupPartyResources
+002d00a4 battleUiFindOrAddPosition
+002d3b20 mapRangeCreateModels
+00291434 vec3RotateXyzDegrees
+002bb99c fsMountRegister
+0013e084 commandHolderCreate
+00282e70 partyPanelIsTransitionDone
+002d67fc campCecEditCreate
+00194b14 playLogDraw
+0024aaa0 overlayGetStatusScene

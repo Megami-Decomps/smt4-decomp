@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_00282ccc(void);
-int FUN_00282e70(void);
+int partyPanelIsTransitionDone(void);
 int FUN_0029dfa8(void);
 int buttonHelpSetPreset(u32 preset);
 int campCecIsActive(void);
@@ -27,7 +27,7 @@ void FUN_0026c214(void)
     if (mode == 0 || mode == 1 || mode == 0xC || mode == 0xD || mode == 0xE) {
         plain = false;
     }
-    s32 a = FUN_00282e70();
+    s32 a = partyPanelIsTransitionDone();
     s32 b = FUN_00282ccc();
     u32 preset;
     bool apply = true;

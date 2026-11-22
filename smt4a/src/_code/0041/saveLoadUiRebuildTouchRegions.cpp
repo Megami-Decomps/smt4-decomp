@@ -1,6 +1,7 @@
 #include "ui/UiControl.h"
 #include "saveLoadUI/SaveLoadTransitionsA.h"
 #include "shard/Shard0050.h"
+#include <string.h>
 
 extern "C" {
 s16 ifTouchRegionAddRequested(s32 group, s32 index);
@@ -13,7 +14,7 @@ void saveLoadUiRebuildTouchRegions(SaveSlotHeaderWork *ui, s32)
         ifTouchRegionRemove();
     }
     ui->touchRegionCount = 0;
-    fillThreeWordsWithByte(reinterpret_cast<u32 *>(ui->touchRegions), ~0u);
+    memset(ui->touchRegions, -1, sizeof(ui->touchRegions));
     clearSaveLoadTouchResult(ui);
     for (i = 0; i < ui->spriteCount; ++i) {
         ui->touchRegions[i] = ifTouchRegionAddRequested(0x2b, i + 0x51);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rewrite compiles (175 vs 168 rows); register allocation and frame size (12 vs 16 bytes) differ */
+/* NON_MATCHING: version accumulation, header reset (six floats and a count through one pointer) and clamp now follow retail; registers still differ: retail keeps the snapshot block in r0 and uses fp as a ninth saved register (12-byte frame against 16), which moves the digit arithmetic and the side-loop address registers. */
 #include "code/Code0013.h"
 #include "common.h"
 #include "shard/W6_W6Match2_ScrollList.h"
@@ -8,7 +8,7 @@
 // Saved battle block: a header with a four-digit ASCII version and the payload.
 struct BattleSaveBlock {
     u8 unk00[4];
-    char version[4];        // 0x04: "1100"-style digits
+    s8 version[4];          // 0x04: "1100"-style digits
     u16 payloadOffset;      // 0x08
     u8 kind;                // 0x0a: 1 = full battle snapshot
     u8 unk0b;
@@ -31,6 +31,13 @@ struct BattleSideEntry {
     s16 listedId;           // 0x62
 };
 
+// The snapshot's header block, copied whole from the save (0x118 bytes).
+struct BattleSnapshotHeader {
+    f32 values[6];          // 0x00
+    u32 count;              // 0x18
+    u8 unk1c[0x118 - 0x1c];
+};
+
 struct BattleMain {
     u8 unk0000[0xe0];
     u32 rules;              // 0xe0
@@ -39,8 +46,7 @@ struct BattleMain {
     u8 unk1e9c;
     u8 maxEntries;          // 0x1e9d
     u8 unk1e9e[6];
-    u32 header[7];          // 0x1ea4
-    u8 unk1ec0[0x1fbc - 0x1ec0];
+    BattleSnapshotHeader header; // 0x1ea4
     void* extraBuffer;      // 0x1fbc
     u8 unk1fc0[0x44a0 - 0x1fc0];
     u32 flags;              // 0x44a0
@@ -66,15 +72,26 @@ void FUN_0023fffc(BattleLoadState* state, BattleMain* battle)
     if (block == NULL) return;
 
     if ((battle->flags & 0x200) == 0 && block->kind == 1) {
-        char d0 = block->version[0], d1 = block->version[1], d2 = block->version[2], d3 = block->version[3];
+        s32 version = 0;
+        version += (block->version[0] - '0') * 1000;
+        version += (block->version[1] - '0') * 100;
+        version += (block->version[2] - '0') * 10;
+        version += block->version[3] - '0';
         s32 size = block->size;
         u8* payload = reinterpret_cast<u8*>(block) + block->payloadOffset;
-        for (s32 i = 0; i < 7; i++) battle->header[i] = 0;
-        if (d3 + (d0 * 1000 + d1 * 100 + d2 * 10 - 0xd050) == 0x44c) {
-            __aeabi_memcpy4(battle->header, payload, 0x118);
+        BattleSnapshotHeader* header = &battle->header;
+        header->values[0] = 0.0f;
+        header->values[1] = 0.0f;
+        header->values[2] = 0.0f;
+        header->values[3] = 0.0f;
+        header->values[4] = 0.0f;
+        header->values[5] = 0.0f;
+        header->count = 0;
+        if (version == 1100) {
+            __aeabi_memcpy4(header, payload, 0x118);
             payload += 0x118;
         }
-        u32 count = (size - 0x118U) / 0x18;
+        s32 count = (size - 0x118U) / 0x18;
         if (battle->maxEntries < count) count = battle->maxEntries;
         __aeabi_memcpy4(battle->extraBuffer, payload, count * 0x18);
     }

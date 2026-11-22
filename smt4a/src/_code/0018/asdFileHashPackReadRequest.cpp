@@ -1,4 +1,5 @@
-/* NON_MATCHING: uppercase loop is not pair-unrolled; frame/register layout and redundant retail READ-state store differ. */
+/* NON_MATCHING: 49 lines: retail unrolls the uppercase loop by two (as FUN_001a70dc, likely one shared helper of
+ * the original file, inlined late), which also gives it one saved register less and a 268-byte frame. */
 #include <stdio.h>
 #include "AsdSDK/Source/Sys/File/AsdFileHashPack.h"
 #include "nn/Result.h"
@@ -13,6 +14,9 @@ void *asdFileAllocBuffer(AsdFileHashPack *, AsdFileRequest *);
 void acmpUnpackInPlace(void **, void *, u32);
 void asdMemFreeAndClear(void **);
 
+/* Reads a queued request's file from the hash pack: finds its entry by the upper-cased path, reads it into the request's
+ * buffer (allocated if needed), unpacks a compressed file in place and marks the request done. Returns 0 when the
+ * file is not in the pack. */
 u32 asdFileHashPackReadRequest(AsdFileHashPack *pack, AsdFileRequest *request)
 {
     if (!request)
@@ -22,12 +26,15 @@ u32 asdFileHashPackReadRequest(AsdFileHashPack *pack, AsdFileRequest *request)
     sprintf(path, request->path);
     pathStripScheme(pack, path, libc_strlen(path));
     s32 length = libc_strlen(path);
-    for (s32 index = 0; index < length; ++index)
-        path[index] = libc_toupper(static_cast<s8>(path[index]));
+    for (s32 index = 0; index < length; ++index) {
+        char *c = &path[index];
+        *c = libc_toupper(static_cast<s8>(*c));
+    }
     const AsdHashPackEntry *entry = FUN_001a70dc(pack, path);
     if (!entry || !entry->storedSize)
         return 0;
-    if (request->state == ASD_FILE_QUEUED) {
+    switch (request->state) {
+    case ASD_FILE_QUEUED: {
         u32 storedSize = entry->storedSize;
         bool compressed = entry->uncompressedSize != 0;
         request->size = compressed ? entry->uncompressedSize : storedSize;
@@ -37,19 +44,22 @@ u32 asdFileHashPackReadRequest(AsdFileHashPack *pack, AsdFileRequest *request)
         u32 transferred;
         s32 result = pack->stream->io->read(pack->stream, &transferred, request->buffer, storedSize);
         request->readResult = result;
-        if (nnResultIsFailure(result)) {
+        if (!nnResultIsSuccess(result)) {
             request->state = ASD_FILE_FAILED;
             request->size = 0;
-            return 1;
+            break;
         }
         if (compressed) {
             void *scratch = NULL;
             acmpUnpackInPlace(&scratch, request->buffer, request->size);
             asdMemFreeAndClear(&scratch);
         }
+        request->state = ASD_FILE_READ;
+    }
+        /* fall through */
+    case ASD_FILE_READ:
         request->state = ASD_FILE_DONE;
-    } else if (request->state == ASD_FILE_READ) {
-        request->state = ASD_FILE_DONE;
+        break;
     }
     return 1;
 }

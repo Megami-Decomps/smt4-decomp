@@ -2,7 +2,11 @@
  * register allocation does not. Retail keeps 0 in fp and 1 in r7 (the build: r8 and fp), spills the list pointer in
  * state 2 as well (sp+20, which makes its frame 8 bytes larger), holds 10 and 9 in r1/r2 for both row-limit
  * selections and skips the empty-list test after clamping, and so merges the four help lookups of state 2
- * differently. */
+ * differently. The empty-list test is threaded as in retail once state 1 has no `list` local between the clamp and
+ * the loop (the list address then moves into the loop's preheader, as retail has it), but that form is 460 lines
+ * off against 405 because the register allocation shifts again, so it is not written. Retail's 10 and 9 in r1/r2
+ * come back when the clamp is an inline taking both row counts as parameters (402 lines); nothing else shows such
+ * a helper, so that is not written either. */
 #include "ui/UiSpriteApi.h"
 #include "ui/UiControl.h"
 #include "shard/W6_W6Match6_SortMenu.h"

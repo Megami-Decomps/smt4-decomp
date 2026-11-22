@@ -8631,3 +8631,19 @@
 00587f10 g_uiTextFontSettings inferred size:0x18 FUN_00485e74 clears its word at +0x14; g_naviMain follows at 0x587f28
 00588ef0 g_shopListSlotNeighbors inferred size:0x38 seven {next, previous} slot steps of the equipment lists, right before g_shopTabNeighbors
 00588f78 g_shopItemTabNeighbors inferred {next, previous} tab steps of the shop item list (FUN_00499fdc, FUN_00498594)
+003d2294 vec3RotateXyzDegrees inferred twin of smt4 FUN_00291434
+001aeefc fsMountRegister inferred twin of smt4 FUN_002bb99c
+001c940c commandHolderCreate inferred twin of smt4 FUN_0013e084
+003273ac mazeGridApplyPreset inferred lays out the maze grid of a grid map from its preset
+005813a4 g_mazeGridPresets inferred the fixed maze layouts FUN_003273ac indexes (GridPreset array)
+003339ec userSettingsResetPriorities inferred installs the default priorities of the user settings block's priority table
+002cad18 partyPanelIsTransitionDone inferred reports whether the party panel's mode transition has finished (twin smt4 FUN_00282e70)
+00214dc4 playLogDraw inferred draws the play log's rows (twin smt4 FUN_00194b14)
+003e32b0 npcShopSelectUpdate inferred the NPC shop selection state machine (NpcShopWork)
+0035e03c itemApplySecondaryEffects inferred applies an item's secondary effects to a slot record
+004ce3c0 sceneHealingUpdate inferred the Spring of Healing scene update (sibling sceneHealingRelease)
+00348c50 freeCameraCreate evidence creates the "FreeCamera PROC" task and g_freeCamera
+0037d400 freeCameraDestroy inferred stops g_freeCamera's job and frees it (counterpart of freeCameraCreate)
+00404050 contentListDrawRow inferred draws one row of the content list (called by contentListDrawRows)
+00404f40 contentListDrawFocusedRow inferred draws the focused row of the content list
+0050d778 __ARM_common_memset4_12 evidence armcc's own 12-byte fill helper: memset(p, v, 12) of a word-aligned buffer compiles to a call to it with this body

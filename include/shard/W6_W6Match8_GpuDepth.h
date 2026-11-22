@@ -28,21 +28,18 @@ union GpuFloatEncoding {
     } ieee;
 };
 
-// Encode the GPU's signed half-float fields, flushing values below its exponent range.
-static __inline u32 gpuDepthEncodeHalf(f32 value)
+/* Encodes the GPU's signed half-float fields, flushing values below its exponent range (nn::gr's
+ * Float32ToFloat16: the exponent is rebiased only for a nonzero magnitude). */
+static __inline u16 gpuDepthEncodeHalf(f32 value)
 {
     GpuFloatEncoding encoding;
     encoding.value = value;
-    u32 magnitude = encoding.bits & 0x7fffffff;
-    s32 exponent = 0;
-    if (magnitude != 0) {
-        exponent = ((encoding.bits >> 23) & 0xff) - 112;
-        if (exponent < 0) {
-            return (encoding.bits >> 31) << 15;
-        }
+    u32 bits = encoding.bits;
+    s32 exponent = (bits & 0x7fffffff) ? (s32)(((bits >> 23) & 0xff) - 112) : 0;
+    if (exponent >= 0) {
+        return (u16)(((bits & 0x7fffff) >> 13) | (exponent << 10) | ((bits >> 31) << 15));
     }
-    return static_cast<u16>(((encoding.bits & 0xe07fffff) >> 13) |
-                            (exponent << 10) | ((encoding.bits >> 31) << 15));
+    return (u16)((bits >> 31) << 15);
 }
 
 static __inline u32 gpuDepthEncodeUnorm24(f32 depth)

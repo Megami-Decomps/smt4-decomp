@@ -1,5 +1,4 @@
-/* NON_MATCHING: written as the IV twin FUN_003b8c40; retail clears skipRestore through a split base (add r0, r0, #168;
- * strb with a fresh zero), gives case 2 its own choice-clearing tail, and allocates the remaining registers differently. */
+/* NON_MATCHING: 38 lines; case 2 now has its own choice-clearing return, remaining: retail clears skipRestore via a linker-inlined AocScriptHolder setter (0xe5c01019) and schedules case 4 infoWinSetText loads differently. */
 #include "script/scrScriptProcess.h"
 #include "ui/UiControl.h"
 #include "addon/aocMain.h"
@@ -75,7 +74,8 @@ void FUN_004b7b74(MapMenuCompletionWork *work)
         sysPlaySe(0xa0);
         scrScriptProcessStartEntry(work->battleProcess,
             tableGroupFindEntryIndex(work->battleTable, "scr_sbq_sysbtl"));
-        break;
+        work->choice = 0;
+        return;
     case 3:
         work->mode = 11;
         work->frame = 0;

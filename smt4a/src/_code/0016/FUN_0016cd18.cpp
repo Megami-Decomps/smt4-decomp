@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_10_stack;
 
-extern int FUN_001aeefc(unsigned int, int *);
+extern int fsMountRegister(unsigned int, int *);
 /* Supplied declaration required: titleContentStreamCreate. */
 
 
@@ -41,7 +41,7 @@ void FUN_0016cd18(unsigned int param_1,unsigned int param_2,unsigned int param_3
   uStack_24 = param_4;
   temp_v3 = param_2;
   titleContentStreamCreate(ppiVar1,&temp_v2,param_6,param_7,param_8,param_9,param_10);
-  if ((-1 < (int)ppiVar1) && (temp_v0 = FUN_001aeefc(param_1,temp_v1), temp_v0 < 0)) {
+  if ((-1 < (int)ppiVar1) && (temp_v0 = fsMountRegister(param_1,temp_v1), temp_v0 < 0)) {
     (**(romwright_code **)(*temp_v1 + 0x30))();
   }
   return;

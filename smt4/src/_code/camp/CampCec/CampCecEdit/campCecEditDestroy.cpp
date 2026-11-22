@@ -18,13 +18,13 @@ void campCecEditDestroy(void)
 {
     CampCecEdit *edit = g_campCecEdit;
 
-    asdMemFree(g_campCecEdit->heapA);
-    asdMemFree(edit->heapB);
-    asdMemFree(edit->heapC);
-    asdMemFreeSlot(edit->handleE);
+    asdMemFree(g_campCecEdit->scriptFile);
+    asdMemFree(edit->messageFile);
+    asdMemFree(edit->cardMessageFile);
+    asdMemFreeSlot((u32)edit->text);
     scrScriptProcessDestroy(edit->resource);
-    campCecEditDestroyResources(edit->handleD);
-    handleObjectFree(edit->handleC);
+    campCecEditDestroyResources(edit->infoPage);
+    handleObjectFree(edit->nameLabels);
     jobStop(edit->task, 0);
     asdMemFree(edit);
     g_campCecEdit = NULL;

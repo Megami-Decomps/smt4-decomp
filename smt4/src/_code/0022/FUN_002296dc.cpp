@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void battleUiClearColumnValues(BtlUiObjC *obj);
+void battleUiClearPositionActiveFlags(BtlUiObjC *obj);
 
 
 void FUN_002296dc(void)
 {
-    battleUiClearColumnValues(&g_btlUi.ui->objC);
+    battleUiClearPositionActiveFlags(&g_btlUi.ui->objC);
 }
 
 } /* extern "C" */

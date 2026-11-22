@@ -1,19 +1,15 @@
 #include "common.h"
+#include "quest_center/qcUtility.h"
 
 extern "C" {
 
-int QcUtility_BuildTabList(int list, u32 a, u32 b, u32 c, u32 d, u32 e, u32 f);
-
-typedef struct Obj {
-    /* 0x0 */ u8 unk0[9];
-    /* 0x9 */ u8 tabMask;
-} Obj;
-
-int qcUtilityBuildAndMarkTabList(Obj *obj, u32 tab, u32 b, u32 c, u32 d, u32 e)
+/* Builds one tab of the quest center's list by random draw and marks it as built. */
+int qcUtilityBuildAndMarkTabList(QcTabListState *list, u32 tab, u32 group, u32 weightKind, u32 firstRandomSlot,
+                                 u32 lastRandomSlot)
 {
-    int result = QcUtility_BuildTabList((int)obj, tab, b, 0xffffffff, c, d, e);
+    int result = QcUtility_BuildTabList(list, tab, group, -1, weightKind, firstRandomSlot, lastRandomSlot);
 
-    obj->tabMask = (u8)((1 << (tab & 0xff)) | obj->tabMask);
+    list->builtTabs = (u8)((1 << (tab & 0xff)) | list->builtTabs);
     return result;
 }
 

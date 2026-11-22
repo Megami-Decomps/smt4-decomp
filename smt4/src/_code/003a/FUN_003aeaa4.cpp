@@ -15,7 +15,7 @@ struct BattleUiCommand {
 };
 
 extern "C" {
-u32 FUN_002d00a4(BtlUiObjC *, const BattleUiCommand *);
+u32 battleUiFindOrAddPosition(BtlUiObjC *, const BattleUiCommand *);
 
 // Queue a battle-UI command with its position and four halfword parameters.
 u32 FUN_003aeaa4(u32, u16 kind, u32 value, s16 first, s16 second, u16 third,
@@ -29,6 +29,6 @@ u32 FUN_003aeaa4(u32, u16 kind, u32 value, s16 first, s16 second, u16 third,
     command.second = second;
     command.first = first;
     command.third = third;
-    return FUN_002d00a4(&ui->objC, &command);
+    return battleUiFindOrAddPosition(&ui->objC, &command);
 }
 }

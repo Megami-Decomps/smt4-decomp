@@ -9,7 +9,7 @@ extern "C" {
 u32 table23FindRecordByKey(s32 map, u32 destination, u32 flags);
 void mapDepartSetTarget(s32 group, s32 map, s32 target);
 void mapCollisionRelease(void);
-void FUN_0027b2b4(s32 map, u32 destination, s32 group, s32 target);
+void mapCollisionLoad(s32 map, u32 destination, s32 group, s32 target);
 void lmapUpdateMapBgm(void);
 void lmapEntryPoolDestroyAll(LmapObj *object);
 void objSetBaseAndValue(LmapObj *object, s32 base, u32 value);
@@ -45,9 +45,9 @@ void FUN_002d1b94(u32 destination, u32 flags)
     g_lmapScene->pose.previousPosition = position;
     mapCollisionRelease();
     if (state->mapId == 101) {
-        FUN_0027b2b4(state->mapId, state->areaId, 101, 10);
+        mapCollisionLoad(state->mapId, state->areaId, 101, 10);
     } else {
-        FUN_0027b2b4(state->mapId, state->areaId, 0, 0);
+        mapCollisionLoad(state->mapId, state->areaId, 0, 0);
     }
     lmapUpdateMapBgm();
     lmapEntryPoolDestroyAll(&state->obj);

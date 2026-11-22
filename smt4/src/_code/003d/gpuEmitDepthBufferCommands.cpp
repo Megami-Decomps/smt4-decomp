@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the command cursor in r1 and packs the depth word with lsr/lsl instead of a bic; half-float temporaries use other registers. */
+/* NON_MATCHING: with the ternary return (the cursor stays in r1, copied to r0 only on the plain return) and nn::gr's Float32ToFloat16 the half-float fields match; retail packs the shadow depth word with lsr #1 / lsl #1 where armcc folds `(depth >> 1) << 1` into a bic (a separate `u32 field = depth >> 1;` statement reproduces it, 4 lines left), and loads the first command pair into lr/r0 rather than r0/lr. */
 #include "shard/W6_W6Match8_GpuDepth.h"
 
 extern "C" {
@@ -24,9 +24,6 @@ u32 *gpuEmitDepthBufferCommands(const GpuDepthState *state, u32 *commands, s32 e
         *commands++ = farDepth | (nearDepth << 16);
         *commands++ = 0xf0130;
     }
-    if (emitColor) {
-        return FUN_002265ac(&state->owner->colorState, commands, 1);
-    }
-    return commands;
+    return emitColor ? FUN_002265ac(&state->owner->colorState, commands, 1) : commands;
 }
 }

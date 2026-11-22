@@ -10,7 +10,7 @@ int FUN_002a2cbc(void);
 int FUN_002e6340(void);
 int sysMemClear(int, int);
 int rt_memclr(int, int);
-int FUN_003339ec(void);
+int userSettingsResetPriorities(void);
 int FUN_0034c8e8(void);
 int partyFlagRange(void);
 int gameFlagsClearEntryLowBits(void);
@@ -29,7 +29,7 @@ extern unsigned int *DAT_0057f6a4; /* 0x57f6a4 */
 /* Supplied declaration required: FUN_002e6340. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: FUN_003339ec. */
+/* Supplied declaration required: userSettingsResetPriorities. */
 /* Supplied declaration required: FUN_0034c8e8. */
 /* Supplied declaration required: partyFlagRange. */
 /* Supplied declaration required: gameFlagsClearEntryLowBits. */
@@ -330,7 +330,7 @@ void gameWorldResetForNewGame(void)
   FUN_004bb880();
   statisticsRollAll();
   rt_memclr(DAT_0057f69c + 0x21550,0x80);
-  FUN_003339ec();
+  userSettingsResetPriorities();
   FUN_0034c8e8();
   FUN_002a2cbc();
   temp_v4 = DAT_0057f69c;

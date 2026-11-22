@@ -62,7 +62,7 @@ s32 campCecEditMessageState(CampCecEdit *edit)
             if (edit->card->selectedDemon == 0) {
                 rt_aeabi_memclr(&edit->card->demon, sizeof(CecCardDemon));
             }
-            if (edit->unk11C != 0) {
+            if (edit->activeMemberCount != 0) {
                 edit->message = -1;
                 edit->nextMessage = 1;
             } else {
@@ -92,7 +92,7 @@ s32 campCecEditMessageState(CampCecEdit *edit)
             edit->followingState = 3;
             edit->nextState = 5;
             campCecEditResetPositions(edit);
-            linkHolderApplyFlag(edit->linkHolder, 0);
+            linkHolderApplyFlag(edit->statusScene, 0);
             FUN_0028a924(0x10, 0, -1);
             FUN_0029e774();
             FUN_0028a368(1);
@@ -108,7 +108,7 @@ s32 campCecEditMessageState(CampCecEdit *edit)
             if (edit->unit == 0) {
                 rt_aeabi_memclr(&edit->card->demon, sizeof(CecCardDemon));
             }
-            characterInfoPanelPopulate(edit->handleD, edit->card, edit->heapC);
+            characterInfoPanelPopulate(edit->infoPage, edit->card, edit->cardMessageFile);
             edit->nextState = 5;
             edit->followingState = 2;
             campCecEditResetPositions(edit);
@@ -148,13 +148,13 @@ s32 campCecEditMessageState(CampCecEdit *edit)
         case 0:
             FUN_0026d5a4();
             cecCardBuild(edit->card, edit->unit, edit->card->selectionMode, FUN_00259800());
-            characterInfoPanelPopulate(edit->handleD, edit->card, edit->heapC);
-            uiDrawRecordNameLabels(edit->handleC, edit->card);
+            characterInfoPanelPopulate(edit->infoPage, edit->card, edit->cardMessageFile);
+            uiDrawRecordNameLabels(edit->nameLabels, edit->card);
             edit->message = -1;
             edit->followingState = 2;
             edit->nextState = 5;
             edit->nextMessage = 7;
-            linkHolderApplyFlag(edit->linkHolder, 1);
+            linkHolderApplyFlag(edit->statusScene, 1);
             campCecEditResetPositions(edit);
             buttonHelpSetPreset(200);
             devilCreateRaceEffect(edit->unit, 0);
@@ -205,8 +205,8 @@ s32 campCecEditMessageState(CampCecEdit *edit)
             edit->listActive = 0;
             edit->followingState = 8;
             edit->nextState = 7;
-            edit->listWindowFrame = 0;
-            edit->listWindowDone = 0;
+            edit->listWindow.frame = 0;
+            edit->listWindow.done = 0;
             buttonHelpSetPreset(0xbd);
             buttonHelpSetTextVisible(0);
             result = 2;

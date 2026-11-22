@@ -12,7 +12,7 @@ int cameraMatrixCacheSetLookAt(unsigned int *, unsigned int *, float *, int *);
 int stereoCameraSetPerspective(unsigned int *, int);
 int eventCommandSetPendingCleanup(void);
 int shakeEffectAlloc(void);
-int FUN_00348c50(int);
+int freeCameraCreate(int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void btlCameraApplyBlendPreset(W5Match8CameraTransition*, u32 preset, s32 slot);
 
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
@@ -34,7 +34,7 @@ extern int g_freeCamera; /* 0x589144 */
 /* Supplied declaration required: stereoCameraSetPerspective. */
 /* Supplied declaration required: eventCommandSetPendingCleanup. */
 /* Supplied declaration required: shakeEffectAlloc. */
-/* Supplied declaration required: FUN_00348c50. */
+/* Supplied declaration required: freeCameraCreate. */
 /* Supplied declaration required: FUN_0036b824. */
 
 
@@ -158,7 +158,7 @@ void FUN_004f0e20(unsigned int *param_1)
   param_1[0x18] = 0;
   param_1[0x19] = 0;
   param_1[0x1a] = 0;
-  FUN_00348c50(0);
+  freeCameraCreate(0);
   *(unsigned int **)(g_freeCamera + 0x10) = param_1 + 0x1b;
   param_1[0xe] = 1;
   param_1[0xf] = 0;

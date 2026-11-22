@@ -2,6 +2,7 @@
 #include "saveLoadUI/SaveLoadControllerA.h"
 #include "sys/RuntimeObjects.h"
 #include "shard/Shard0050.h"
+#include <string.h>
 
 struct SaveLoadScriptEntryViewA {
     u8 unk00[0x40];
@@ -27,7 +28,7 @@ void FUN_0041e9d4(SaveLoadControllerA *work)
     for (s32 i = 0; i < work->touch.count; ++i)
         ifTouchRegionRemove();
     work->touch.count = 0;
-    fillThreeWordsWithByte(work->touch.handles, -1);
+    memset(work->touch.handles, -1, sizeof(work->touch.handles));
     work->pending = 0;
     work->confirmed = 0;
     work->canceled = 0;

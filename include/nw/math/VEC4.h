@@ -3,6 +3,7 @@
 #define NW_MATH_VEC4_H
 
 #include "common.h"
+#include "nw/math/MTX44.h"
 
 namespace nw {
 namespace math {
@@ -29,6 +30,23 @@ static __inline nw::math::VEC4 *vec3TransformMtx44(nw::math::VEC4 *out, const f3
     out->z = tmp.z;
     out->w = tmp.w;
     return out;
+}
+
+/* nn::math's VEC4Transform (the body of vec4Transform, smt4 0x26e768): every row's dot product into a temporary,
+ * then copied to `pOut` (which may alias `pV`). */
+static __inline nw::math::VEC4 *vec4TransformMtx44(nw::math::VEC4 *pOut, const nw::math::MTX44 *pM,
+                                                   const nw::math::VEC4 *pV)
+{
+    nw::math::VEC4 tmp;
+    tmp.x = pM->m[0][0] * pV->x + pM->m[0][1] * pV->y + pM->m[0][2] * pV->z + pM->m[0][3] * pV->w;
+    tmp.y = pM->m[1][0] * pV->x + pM->m[1][1] * pV->y + pM->m[1][2] * pV->z + pM->m[1][3] * pV->w;
+    tmp.z = pM->m[2][0] * pV->x + pM->m[2][1] * pV->y + pM->m[2][2] * pV->z + pM->m[2][3] * pV->w;
+    tmp.w = pM->m[3][0] * pV->x + pM->m[3][1] * pV->y + pM->m[3][2] * pV->z + pM->m[3][3] * pV->w;
+    pOut->x = tmp.x;
+    pOut->y = tmp.y;
+    pOut->z = tmp.z;
+    pOut->w = tmp.w;
+    return pOut;
 }
 
 #endif

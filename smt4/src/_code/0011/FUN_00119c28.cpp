@@ -1,18 +1,18 @@
-/* NON_MATCHING: listener basis arithmetic uses different VFP scheduling and folds the zero vertical displacement. */
+/* NON_MATCHING: the listener target is the position plus a direction whose zero y component retail keeps (unfolded, s23); the remaining differences are VFP register allocation in the look-at basis (forward/right/up components land in other s registers, so the right vector is stored with three vstr instead of one vstmia) and the base-register grouping of the listener fields. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include <math.h>
 
 struct ListenerVector { f32 x, y, z; };
 struct ListenerOrientationView {
-    u8 prefix[0x1100];
+    u8 prefix[0x97C];
     u8 listener[0x6C];
     f32 matrix[12];
     ListenerVector position;
     ListenerVector up;
     f32 angle;
 };
-typedef char ListenerMatrixOffset[offsetof(ListenerOrientationView, matrix) == 0x116C ? 1 : -1];
-typedef char ListenerUpOffset[offsetof(ListenerOrientationView, up) == 0x11A8 ? 1 : -1];
+typedef char ListenerMatrixOffset[offsetof(ListenerOrientationView, matrix) == 0x9E8 ? 1 : -1];
+typedef char ListenerUpOffset[offsetof(ListenerOrientationView, up) == 0xA24 ? 1 : -1];
 extern "C" {
 extern AsdSoundSystem g_asdSound;
 f32 mathSinFixedAngle(f32 phase);
@@ -21,7 +21,7 @@ void FUN_0012f6f4(void *listener, const f32 *matrix);
 
 void FUN_00119c28(const ListenerVector *position, f32 angle)
 {
-    ListenerOrientationView *sound = (ListenerOrientationView *)&g_asdSound;
+    ListenerOrientationView *sound = (ListenerOrientationView *)&g_asdSound.sound3d;
     f32 x = position->x;
     sound->position.x = x;
     f32 y = position->y;
@@ -31,9 +31,12 @@ void FUN_00119c28(const ListenerVector *position, f32 angle)
     sound->angle = angle;
     f32 phase = angle * 0.7111111f;
     ListenerVector up = sound->up;
-    f32 dx = -mathSinFixedAngle(phase);
-    f32 dz = -phaseCosInterpolate(phase);
-    ListenerVector forward = {x - (x + dx), y - (y + 0.0f), z - (z + dz)};
+    ListenerVector direction;
+    direction.x = -mathSinFixedAngle(phase);
+    direction.y = 0.0f;
+    direction.z = -phaseCosInterpolate(phase);
+    ListenerVector target = {x + direction.x, y + direction.y, z + direction.z};
+    ListenerVector forward = {x - target.x, y - target.y, z - target.z};
     f32 inverseLength = 1.0f / sqrtf(forward.x * forward.x + forward.y * forward.y + forward.z * forward.z);
     forward.z *= inverseLength;
     forward.x *= inverseLength;

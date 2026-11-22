@@ -1,4 +1,5 @@
-/* NON_MATCHING: argument/pane live ranges change register allocation, permission handling folds into BIC/early stores, and the final option-byte address is folded; candidate -O2. */
+/* NON_MATCHING: 66 lines: retail keeps the record in r7 and the object in r5 (swapped here), shares the constant 1
+ * with the option flag (r9) and converts the signed id it tested with uxth instead of reloading it. */
 #include "shard/Shard0033.h"
 #include "gamedata/NkmEnemyLookup.h"
 #include "game/GameGlobalsRef.h"
@@ -18,7 +19,7 @@ struct StatusDisplayPane {
 };
 struct StatusDisplayPaneView {
     u8 unk0000[0x137d];
-    u8 optionActive;
+    s8 optionActive;
     u8 unk137e[0x12];
     StatusDisplayPane pane;
 };
@@ -76,21 +77,20 @@ extern "C" void statusDisplayBindUnitRecord(StatusUnitRecord *record, s32 useBas
     } else {
         flags->mode = btlMainIsRunning() && btlIsDefeatSuppressed() ? 17 : 2;
     }
-    StatusDisplayPane *pane = &statusDisplayPaneView(object)->pane;
-    FUN_0026fd50(pane, record, 0, parameters);
+    FUN_0026fd50(&statusDisplayPaneView(object)->pane, record, 0, parameters);
     if (useBaseStats != 0) {
         if (gameProgressIsAdvanced()) {
-            statusScaleUnitDisplayVitals(pane, record->id);
+            statusScaleUnitDisplayVitals(&statusDisplayPaneView(object)->pane, record->id);
         } else {
             const NkmEnemyRecordA *base = nkmEnemyFindById(record->id);
             if (base != NULL) {
-                pane->maxHp = base->maxHp;
-                pane->maxMp = base->maxMp;
+                statusDisplayPaneView(object)->pane.maxHp = base->maxHp;
+                statusDisplayPaneView(object)->pane.maxMp = base->maxMp;
                 s32 hp = FUN_002b4dcc(record);
-                pane->hp = hp;
-                pane->mp = base->maxMp;
+                statusDisplayPaneView(object)->pane.hp = hp;
+                statusDisplayPaneView(object)->pane.mp = base->maxMp;
                 if (hp < 0) {
-                    pane->hp = base->maxHp;
+                    statusDisplayPaneView(object)->pane.hp = base->maxHp;
                 }
             }
         }
@@ -98,13 +98,15 @@ extern "C" void statusDisplayBindUnitRecord(StatusUnitRecord *record, s32 useBas
     flags->selection = selection;
     flags->refresh = 1;
     flags->changed = 0;
-    u8 allowOption = 1;
+    s32 allowOption = 1;
     if (static_cast<s16>(record->id) >= 0) {
         const NkmEnemyRecordA *base = nkmEnemyFindById(record->id);
         if (base == NULL) {
             allowOption = 0;
         } else {
-            allowOption = (base->flags & 0x400) == 0;
+            if (base->flags & 0x400) {
+                allowOption = 0;
+            }
             ObjB *current = g_gameGlobals.instance;
             if (current != NULL && statusDisplayFlags(current)->mode == 17) {
                 allowOption = 0;

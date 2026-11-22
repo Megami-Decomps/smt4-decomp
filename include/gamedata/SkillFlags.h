@@ -22,6 +22,8 @@ extern "C" {
 #endif
 /* Finds the record of data table 6/1 whose key is `id`. */
 SkillFlagsRecord *dataTable06Sub1GetRecord(u16 id);
+/* Maps the category of the data table 6/1 record whose key is `id` through a byte table (the skill's element). */
+u8 idMapLookup(u16 id);
 #ifdef __cplusplus
 }
 #endif

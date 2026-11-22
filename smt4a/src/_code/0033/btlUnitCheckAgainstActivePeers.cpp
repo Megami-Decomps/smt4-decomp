@@ -1,4 +1,5 @@
-/* NON_MATCHING: folded roster-plus-four addressing changes saved registers/frame size and the first comparison-loop register allocation. */
+/* NON_MATCHING: 46 lines: retail loads battle->roster once before the gather loop (the build reloads it every
+ * iteration), and the 0x40000 loop's index and remainder registers are swapped. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
@@ -17,9 +18,8 @@ u32 btlUnitCheckAgainstActivePeers(const BattleRosterRecordA *unit, u32 conditio
     const BattleRosterRecordA *peers[50];
     sysMemClear(peers, sizeof(peers));
     u32 count = 0;
-    const BattleRosterRecordA *roster = battle->roster;
     for (index = 0; index < 50; ++index) {
-        const BattleRosterRecordA *peer = &roster[index + 4];
+        const BattleRosterRecordA *peer = &battle->roster[index + 4];
         u32 flags = peer->render.flags;
         if ((flags & 1) && (flags & 2) && (flags & 0x80) &&
             !(flags & 0x10) && peer->render.group != unit->render.group)

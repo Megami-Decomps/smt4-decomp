@@ -222,7 +222,7 @@ extern int FUN_002c7cb4(void);
 /* Supplied declaration required: FUN_002c8550. */
 /* Supplied declaration required: gameGlobalsSetSceneState. */
 extern unsigned short partyPanelGetSelectedDemonId(void);
-extern unsigned char FUN_002cad18(void);
+extern unsigned char partyPanelIsTransitionDone(void);
 /* Supplied declaration required: FUN_002cb84c. */
 /* Supplied declaration required: FUN_002cbca8. */
 /* Supplied declaration required: partyPanelRefreshItemPreview. */
@@ -407,7 +407,7 @@ unsigned int FUN_00262874(void)
   } while ((int)temp_v5 < 0x1c);
   temp_v3 = partyPanelGetSelectedDemonId();
   *(unsigned short *)(temp_v1 + 0x3a) = temp_v3;
-  temp_v2 = FUN_002cad18();
+  temp_v2 = partyPanelIsTransitionDone();
   *(unsigned char *)(temp_v1 + 0x44) = temp_v2;
   temp_v6 = g_partyPanel;
   switch(*(unsigned int *)(temp_v1 + 0x1c)) {

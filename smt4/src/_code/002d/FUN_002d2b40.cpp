@@ -25,13 +25,15 @@ static __inline void applyEnemyEncounter(MapEnemyEntry *enemy, MapSaveBlock *map
         return;
     if (g_gameState.encounterChangeMapId)
         map->mapId = static_cast<s16>(enemy->mapId);
-    if ((!forced || enemy->message > 0) && enemy->scriptMode) {
-        g_gameState.event.scriptPending = 1;
-        g_gameState.event.scriptId = enemy->message;
-        sprintf(g_gameState.event.scriptName, "e%03d_%02d", enemy->message, enemy->messageArgument);
-    } else if (forced ? enemy->message > 0 : enemy->message != 0) {
-        sequenceRequestDefer(enemy->message, enemy->messageArgument);
-    } else if (forced) {
+    if (!forced || enemy->message > 0) {
+        if (enemy->scriptMode) {
+            g_gameState.event.scriptPending = 1;
+            g_gameState.event.scriptId = enemy->message;
+            sprintf(g_gameState.event.scriptName, "e%03d_%02d", enemy->message, enemy->messageArgument);
+        } else if (enemy->message != 0) {
+            sequenceRequestDefer(enemy->message, enemy->messageArgument);
+        }
+    } else {
         sequenceRequestClearDeferred();
     }
     mapSetActiveEntryId(enemy->result);

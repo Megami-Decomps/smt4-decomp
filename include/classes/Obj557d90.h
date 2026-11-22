@@ -9,6 +9,7 @@ extern "C" void asdOperatorDelete(void *block);
 
 struct ParticleVec3 : MapVector {
     ParticleVec3() {}
+    ParticleVec3(f32 sx, f32 sy, f32 sz) { x = sx; y = sy; z = sz; }
     void set(f32 sx, f32 sy, f32 sz) { x = sx; y = sy; z = sz; }
 };
 

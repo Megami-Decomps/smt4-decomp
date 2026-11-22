@@ -7,7 +7,7 @@
 extern "C" {
 
 void sysPlaySe(u32 sound);
-s32 FUN_002cad18(void);
+s32 partyPanelIsTransitionDone(void);
 s32 partyPanelGetSelectedDemonId(void);
 s8 FUN_0022e714(void);
 s32 campCecHasObject(void);
@@ -24,7 +24,7 @@ void partyPanelPlayInputCue(void)
     if (page == 0 || page == 1 || page == 0xc || page == 0xd || page == 0xe) {
         subPage = false;
     }
-    s32 confirmed = FUN_002cad18();
+    s32 confirmed = partyPanelIsTransitionDone();
     s32 demonId = partyPanelGetSelectedDemonId();
     if (confirmed != 0) {
         if (subPage) {

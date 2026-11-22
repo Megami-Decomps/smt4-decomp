@@ -5,6 +5,7 @@
 #include "common.h"
 
 #include "ui/UiSpriteState.h"
+#include <string.h>
 
 /* Animation key tables passed to paramsInit; the original file defined them statically. */
 static const UiSpritePositionKey sScreenPositionKeys[] = {
@@ -58,7 +59,6 @@ typedef struct PartnerScreen {
 
 extern u8 g_callbackOwnerSlots;
 
-void fillThreeWordsWithByte(u32 *words, u8 value);
 PartnerUnit *saveSlotFindSelected(void);
 void __aeabi_memset4(void *destination, u32 size, s32 value);
 PartnerUnit *FUN_00187068(s32 index);
@@ -80,7 +80,7 @@ void FUN_004bd794(PartnerScreen *screen, u8 mode)
 {
     screen->unk334 = 0;
     screen->mode = mode;
-    fillThreeWordsWithByte(screen->fill, 1);
+    memset(screen->fill, 1, sizeof(screen->fill));
     s32 count = 0;
     u16 selectedId = 0;
     PartnerUnit *selected = saveSlotFindSelected();

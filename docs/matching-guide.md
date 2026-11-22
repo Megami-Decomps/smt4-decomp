@@ -238,6 +238,13 @@ difference a register tie-break.
 - An octant fold (atan2 into a ratio of the minor over the major axis plus a base angle) assigns the base offset
   explicitly in every arm, `offset = 0.0f;` included, and the ratio's numerator into its own variable, not an
   `f32 offset = 0.0f;` initialiser with the zero arms left out: smt4 `FUN_0024c418` and smt4a `FUN_001b640c` (wave 61).
+- A compare retail performs twice, once after each of two alternative calls (`bl costA; cmp r0, r1; ble` and
+  `bl costB; cmp r0, r1`), is the test written in each arm: `if (discounted) { if (costA(id) > budget) continue; }
+  else { if (costB(id) > budget) continue; }`. A ternary choosing the cost, compared once, gives one compare
+  (smt4 `FUN_003d06e4` IDENTICAL, wave 69).
+- A function that returns its cursor parameter unchanged on one path keeps it in place with a ternary return,
+  `return emitColor ? emitMasks(&state->colorState, commands, 1) : commands;`; the `if` forms move the cursor to
+  another register (`gpuEmitDepthBufferCommands`, both games: 30 lines off against 124; wave 69).
 - A search loop that sets `bool found = true; break;` and tests `found` afterwards is jump-threaded
   into retail's in-loop layout.
 - In a nested search (an inner loop whose hit ends the outer one too), set the result variable before each
@@ -368,6 +375,10 @@ asks for.
   (`--no_autoinline` keeps the helper out of line), and a unit must not add calls to emulate it: such pairs are
   one [translation unit](project.md#translation-units), both units built from one source file
   (`camp/PlayLog/PlayLog/PlayLog.cpp` holds the play-log pair).
+- A draw block whose by-value parameters retail copies again (a flag moved from a saved register into its own
+  stack slot, a float copied into `s1` before each product: `vmov.f32 s1, s16; vmul.f32 s0, s0, s1`) is a plain
+  `static` helper inlined late: smt4a `contentListDrawRows`' cursor frame, `drawFocusFrame(screen, x, y, alpha,
+  pressed)`, is 60 lines off with it and 114 in place (wave 69; still `NON_MATCHING`).
 - Retail copying fields one `ldr`/`str` pair at a time where the build batches the same copies through VFP
   registers (`vldr`/`vstr` runs) is a plain `static` helper armcc inlined late, called once per copy: smt4
   `FUN_001569d8` and its smt4a twin `FUN_004491fc` (15 calls of `resetCursorRewind`, `current = begin`) are
@@ -505,7 +516,10 @@ More on classes, constructors and destructors is in [C++](style-and-naming.md#c)
 - **armcc's copy helpers** `__ARM_common_memcpy4_N` are emitted for `strcpy` of an N-byte literal into
   an aligned buffer and for copies of N-byte packed records: write `strcpy` or the assignment. Likewise
   `__ARM_common_memclr4_N` is armcc's call for a `memset(p, 0, N)` of a word-aligned buffer it does not clear
-  inline (Apocalypse's 9-byte clear-save options, `FUN_00241058`): write the `memset`. A caller
+  inline (Apocalypse's 9-byte clear-save options, `FUN_00241058`): write the `memset`. So is
+  `__ARM_common_memset4_12` for a 12-byte `memset` of any one value (smt4a 0x50d778, once called
+  `fillThreeWordsWithByte`): `memset(ui->touchRegions, -1, sizeof(ui->touchRegions))` keeps
+  `saveLoadUiRebuildTouchRegions` IDENTICAL (wave 69). A caller
   that retail compiled against an opaque copy (it keeps a dead store into the copied record) declares
   `ARM_common_memcpy4_6_call`, an alias in `config/symbols.txt`.
 - **`__2sprintf` is armlib's `sprintf`**: armcc compiles `sprintf(buf, fmt, ...)` under `<stdio.h>` as a

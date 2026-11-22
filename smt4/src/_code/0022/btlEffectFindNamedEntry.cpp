@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the NULL result in r7 and the string-table base in r9 (one more saved register) and zeroes the index before the preferFirst test. */
+/* NON_MATCHING: registers and loops now follow retail (NULL result in r7, table base r9, entry offset 264 in r8, loops not unrolled); retail zeroes the index before the preferFirst test and returns the found entry from one shared block, where armcc here keeps the result == NULL test between the loops and a second copy of the entry address. */
 #include "common.h"
 #include <string.h>
 
@@ -28,25 +28,30 @@ extern BtlEffectNames g_btlEffect;
 /* Finds the entry named like the preferred effect (first, when `preferFirst` is positive) or the fallback; NULL if none. */
 char *btlEffectFindNamedEntry(BtlEffectNameOwner *owner, s32 preferFirst)
 {
-    s32 i;
+    char *result = NULL;
 
     if (owner->names != NULL) {
         if (preferFirst > 0) {
-            for (i = 0; i < 4; i++) {
-                if (strcmp(owner->names->entries[i].name, g_btlEffect.preferredName) == 0) {
-                    return owner->names->entries[i].name;
+            for (s32 i = 0; i < 4; i++) {
+                BtlEffectNameEntry *entry = &owner->names->entries[i];
+                if (strcmp(entry->name, g_btlEffect.preferredName) == 0) {
+                    result = owner->names->entries[i].name;
+                    break;
                 }
             }
         }
-        for (i = 0; i < 4; i++) {
-            char *name = owner->names->entries[i].name;
-            if (name != NULL && (strcmp(name, g_btlEffect.fallbackName) == 0 ||
-                                 strcmp(name, g_btlEffect.preferredName) == 0)) {
-                return owner->names->entries[i].name;
+        if (result == NULL) {
+            for (s32 i = 0; i < 4; i++) {
+                BtlEffectNameEntry *entry = &owner->names->entries[i];
+                if (entry != NULL && (strcmp(entry->name, g_btlEffect.fallbackName) == 0 ||
+                                      strcmp(entry->name, g_btlEffect.preferredName) == 0)) {
+                    result = owner->names->entries[i].name;
+                    break;
+                }
             }
         }
     }
-    return NULL;
+    return result;
 }
 
 } /* extern "C" */

@@ -6053,3 +6053,20 @@
 00219148 skillListCompareBySortKeyAndUnit inferred near twin of smt4a FUN_002fd824
 00464d6c DAT_00464d6c inferred lies inside g_asdTextDefaults (its skip and advance polls at +0x24/+0x28)
 00464d48 g_asdTextDefaults inferred size:0x34 sizeof(AsdTextDefaults), asserted in TextDefaults.h
+001d9294 mapEnemyCleanupUpdate inferred twin of smt4a mapEnemyCleanupUpdate (same two cleanup helpers, same state machine over g_mapEnemy)
+0027b2b4 mapCollisionLoad inferred twin of smt4a mapCollisionLoad: loads the map collision files, relocates their tables and builds both collision sets
+003d06e4 btlAiSelectCommand inferred picks the AI's command: first-choice behaviour, three passes over the sorted candidate skills, attack/guard fallback
+003b6a5c resultDrawPointsCounter inferred draws the result screen's counting points (ResultWork startPoints/shownPoints)
+003d84d8 cameraPoseApplyPreset inferred sets the camera pose vectors of a preset (15 vector stores)
+003398e4 btlSetupPartyResources inferred sets up the party's battle resources on BtlMainState
+002d00a4 battleUiFindOrAddPosition inferred finds or adds a BtlUiObjC position entry for a query
+002d3b20 mapRangeCreateModels inferred creates the map-range models (counts the ranges, finds free slots, creates the base model)
+00291434 vec3RotateXyzDegrees inferred rotates a point by x, y, z degrees (three VEC4 transforms)
+002bb99c fsMountRegister inferred registers a file-system mount (rewritten from the smt4a twin FUN_001aeefc)
+003130c4 battleUiClearPositionActiveFlags inferred clears positions[i].active of BtlUiObjC
+0013e084 commandHolderCreate inferred creates the command holder object (twin smt4a FUN_001c940c)
+00282e70 partyPanelIsTransitionDone inferred twin of smt4a FUN_002cad18
+002d67fc campCecEditCreate inferred twin of smt4a campCecEditCreate; its asdDebugTrace names camp\CampCec\CampCecEdit.cpp
+00194b14 playLogDraw inferred twin of smt4a FUN_00214dc4
+0024aaa0 overlayGetStatusScene inferred the smt4a twin's name for the same call
+0044dbb0 g_qcStartSequences inferred the quest center's start-sequence table QuestCenterMainProcUpdate searches

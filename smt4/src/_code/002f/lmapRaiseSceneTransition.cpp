@@ -6,7 +6,7 @@
 
 extern "C" {
 void mapCollisionRelease();
-void FUN_0027b2b4(s32 map, u32 entry, s32 secondaryMap, u32 mode);
+void mapCollisionLoad(s32 map, u32 entry, s32 secondaryMap, u32 mode);
 void FUN_002d508c(LmapMainState *state);
 void lmapUpdateMapBgm();
 void FUN_00281784();
@@ -52,7 +52,7 @@ u32 lmapRaiseSceneTransition()
         transition->entry = 99;
         g_gameState.areaId = 99;
         mapCollisionRelease();
-        FUN_0027b2b4(transition->map, transition->entry,
+        mapCollisionLoad(transition->map, transition->entry,
             transition->map != 101 ? 0 : 101, transition->map != 101 ? 0 : 10);
         transition->phase = 1;
         transition->frame = 0;

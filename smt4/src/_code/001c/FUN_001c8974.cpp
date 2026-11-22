@@ -5,7 +5,7 @@ extern "C" {
 s32 modelPairTryBind(ResultInputWork *);
 void FUN_003b49a0(ResultInputWork *, s32, s32);
 void FUN_003b5f30(ResultInputWork *, s32, s32);
-void FUN_003b6a5c(ResultInputWork *, s32, s32);
+void resultDrawPointsCounter(ResultInputWork *, s32, s32);
 void resultDrawLevelUpPanel(ResultInputWork *, s32, s32);
 
 /* Dispatch the active result-screen coordinate control. */
@@ -29,7 +29,7 @@ u32 FUN_001c8974(void)
         case 18: {
             s32 x = vec2GetXInt((const UiSpriteState *)&work->detailPosition);
             s32 y = vec2GetYInt((const UiSpriteState *)&work->detailPosition);
-            FUN_003b6a5c(work, x, y);
+            resultDrawPointsCounter(work, x, y);
             break;
         }
         case 17: {

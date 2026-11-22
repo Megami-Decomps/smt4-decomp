@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail converts the power once (vcvt into s0, copied to the score in s16) where this converts it twice, loads preferredElement after saving the kind, compares the two categories in the other register order, and reads the chosen list with add/ldm before hoisting the zero for the candidate store. */
+/* NON_MATCHING: 69 lines with idMapLookup's real prototype, u8 (u16) from gamedata/SkillFlags.h (22 with the
+ * old local s32 (u32) one); retail converts the power once (vcvt into s0, copied to the score in s16) where this converts it twice, loads preferredElement after saving the kind, compares the two categories in the other register order, and reads the chosen list with add/ldm before hoisting the zero for the candidate store. */
 #include "common.h"
 #include "gamedata/SkillFlags.h"
 #include "gamedata/SkillDataLookup.h"
@@ -7,7 +8,6 @@
 
 
 extern "C" {
-s32 idMapLookup(u32 id);
 
 /* Scores every candidate (power, plus a bonus for the wanted kind and for a held passive that
  * boosts it, minus a penalty for kinds and elements already chosen), moves the best one (the lower id

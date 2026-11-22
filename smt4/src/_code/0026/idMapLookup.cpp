@@ -1,5 +1,6 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
+#include "gamedata/SkillFlags.h"
 
 extern "C" {
 

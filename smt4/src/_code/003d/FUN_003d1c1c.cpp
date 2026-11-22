@@ -18,7 +18,7 @@ s32 btlAuxAreResourcesReady(void *auxiliary);
 void nameEntriesRegisterVerNamesThenContinue(void *auxiliary);
 void FUN_00339eec(ActionStateChannelOwner *owner);
 s32 modelOwnerResetPlayerIfReady(ActionStateChannelOwner *owner);
-void FUN_003398e4(ActionStateChannelOwner *owner);
+void btlSetupPartyResources(ActionStateChannelOwner *owner);
 s32 FUN_0033ac58(ActionStateChannelOwner *owner);
 void FUN_003392cc(ActionStateChannelOwner *owner);
 void FUN_00339fa8(ActionStateChannelOwner *owner);
@@ -58,7 +58,7 @@ u32 FUN_003d1c1c(ActionStateChannelOwner **owner, ActionKindSelection *work)
         work->sequence.phase = 4;
         break;
     case 4:
-        FUN_003398e4(*owner);
+        btlSetupPartyResources(*owner);
         work->sequence.phase = 5;
         break;
     case 5:

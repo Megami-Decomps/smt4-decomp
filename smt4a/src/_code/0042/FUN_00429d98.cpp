@@ -27,7 +27,7 @@ extern "C" {
 
 extern SessionRoot DAT_00589398;
 s32 FUN_0042bbf4(SessionObject **object, s32 size);
-s32 FUN_001aeefc(u32 owner, SessionObject *object, u32 a, u32 b);
+s32 fsMountRegister(u32 owner, SessionObject *object, u32 a, u32 b);
 
 /* Registers a session object once: fails with 0xC92044E7 if one exists, releases the object on failure. */
 s32 FUN_00429d98(u32 owner)
@@ -40,7 +40,7 @@ s32 FUN_00429d98(u32 owner)
     }
     s32 result = FUN_0042bbf4(&object, 4);
     if ((s32)(result & 0x80000000) >= 0) {
-        result = FUN_001aeefc(owner, object, 0, 0);
+        result = fsMountRegister(owner, object, 0, 0);
         if ((s32)(result & 0x80000000) >= 0) {
             root->session = object;
         } else {

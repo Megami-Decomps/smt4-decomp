@@ -1,134 +1,113 @@
+/* NON_MATCHING: same instructions, frame and block layout, 30 rows differ. Retail keeps x in r9 and the focused
+ * entry in sl (here sl and r9), spills the first-set flag to sp+28 and the plate colour to sp+24 (here the other way
+ * round) and, for the focused row, adds the entry's x before its y and stores the pressed flag first. */
+#include "common.h"
 #include "ui/UiSpriteApi.h"
-/* NON_MATCHING: romwright 0.5.0 decompilation of `contentListDrawRows` (_code @ 0x40307c, 0x488 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "ui/AnimatedMessage.h"
+#include "addon/ContentListScreen.h"
+#include "gamedata/GameDataAccess.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-int efctSetSpeed(void);
-int uiDrawListScrollBar(...);
-int FUN_00404050(...);
-int FUN_00404f40(...);
+struct Object;
+u32 tableFlagBit1(s32 index);
+u32 tableFlagBit2(s32 index);
+void contentListDrawRow(ContentListScreen *screen, f32 speed, u32 id, s32 x, s32 y, s32 useFirstSet, s32 useSecondSet);
+void contentListDrawFocusedRow(ContentListScreen *screen, u16 id, s32 x, s32 y, f32 speed, u32 useFirstSet, u32 useSecondSet, u32 color);
+void uiDrawListScrollBar(Object *widget, s32 x, s32 y, u32 group, u32 frameId, u32 trackId, u32 trackPressedId, u32 arrowAId,
+                         u32 arrowAPressedId, u32 arrowBId, u32 arrowBPressedId, u32 thumbRegion, s32 arrowARegion,
+                         u32 arrowBRegion, s32 layer, s32 horizontal);
 
-/* stack frame of param_1: 10 slot(s), 40 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-} param_1_stack;
-
-/* Supplied declaration required: efctSetSpeed. */
-extern int recordGetModeForId(int);
-/* Supplied declaration required: uiDrawListScrollBar. */
-/* Supplied declaration required: FUN_00404050. */
-/* Supplied declaration required: FUN_00404f40. */
-extern unsigned int tableFlagBit2(unsigned int);
-extern unsigned int tableFlagBit1(void);
-
-
-void contentListDrawRows(int param_1)
-
+/* Draws the cursor frame and glow of the focused row at (x, y), brighter while the row is pressed.
+ * Retail shows this body inlined with its by-value parameters: `pressed` is copied from r4 to its own slot
+ * (sp+64), x to sp+8, and `alpha` into s1 before each product (`vmov.f32 s1, s16; vmul.f32 s0, s0, s1`); written
+ * in place, armcc keeps the flag in one slot and multiplies by s16 directly (57 rows off instead of 30). */
+static void drawFocusFrame(ContentListScreen *screen, s32 x, s32 y, f32 alpha, bool pressed)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  unsigned int temp_v10;
-  int temp_v11;
-  unsigned int temp_v12;
-  
-  temp_v0 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(param_1 + 0x14c)));
-  temp_v1 = vec2GetYInt((UiSpriteState *)(param_1 + 0x14c));
-  efctSetSpeed();
-  texDrawTableEntryAtStoredOrigin(2,0x32,0x4d,temp_v0,temp_v1,0x60);
-  texDrawTableEntryAtStoredOrigin(2,0x32,0x4e,temp_v0,temp_v1,0x60);
-  texDrawTableEntryAtStoredOrigin(2,0x32,0x4a,temp_v0,temp_v1,0x65);
-  texDrawTableEntryAtStoredOrigin(2,0x32,0x4b,temp_v0,temp_v1,0x65);
-  texDrawTableEntryAtStoredOrigin(2,0x32,0x4c,temp_v0,temp_v1,0x66);
-  temp_v8 = 0;
-  do {
-    texDrawTableEntryAtStoredOrigin(2,0x32,temp_v8 * 2 + 0x4f,temp_v0,temp_v1,0x6a);
-    texDrawTableEntryAtStoredOrigin(2,0x32,temp_v8 * 2 + 0x50,temp_v0,temp_v1,0x6a);
-    temp_v8 = temp_v8 + 1;
-  } while (temp_v8 < 9);
-  efctSetSpeed();
-  temp_v8 = 0;
-  do {
-    if (*(int *)(param_1 + 0x660) <= temp_v8) break;
-    temp_v2 = (unsigned int)*(unsigned short *)(param_1 + (*(int *)(param_1 + 0xf8) + temp_v8) * 2 + 0x408);
-    temp_v3 = tableFlagBit1();
-    temp_v4 = tableFlagBit2(temp_v2);
-    if (*(int *)(param_1 + 0xf4) == temp_v8) {
-      temp_v5 = (int)asdTMTexTableEntryAt(0x32,temp_v8 + 0x72);
-      temp_v12 = 0x9fe7ffff;
-      temp_v6 = recordGetModeForId((int)*(short *)(param_1 + temp_v8 * 2 + 0x10c));
-      if ((temp_v6 == 1 || temp_v6 == 2) || temp_v6 == 6) {
-        temp_v12 = 0xf5ff9fff;
-      }
-      temp_v7 = *(short *)(temp_v5 + 8) + temp_v0;
-      temp_v11 = *(short *)(temp_v5 + 10) + temp_v1;
-      if (*(char *)(param_1 + 4) != '\b') {
-        efctSetSpeed();
-        temp_v9 = 0;
-        do {
-          texDrawTableEntryAtStoredOrigin(2,0x32,temp_v9 + 0x7d,temp_v7,temp_v11,0x7e);
-          temp_v9 = temp_v9 + 1;
-        } while (temp_v9 < 3);
-        efctSetSpeed();
-        texDrawTableEntryAtStoredOrigin(2,0x32,0x80,temp_v7,temp_v11,0x7e);
-        if (!((temp_v6 != 1 && temp_v6 != 2) && temp_v6 != 6)) {
-          texDrawTableEntryAtStoredOrigin(2,0x32,0xa2,temp_v7,temp_v11,0x83);
-          texDrawTableEntryAtStoredOrigin(2,0x32,0xa3,temp_v7,temp_v11,0x83);
-          texDrawTableEntryAtStoredOrigin(2,0x32,0xa4,temp_v7,temp_v11,0x88);
-          temp_v10 = 0xa5;
+    if (screen->state != CONTENT_LIST_STATE_NO_CURSOR) {
+        efctSetSpeed(vec2GetSpeed(&screen->sprites[CONTENT_LIST_SPRITE_CURSOR]) * alpha);
+        for (s32 i = 0; i < 3; i++) {
+            texDrawTableEntryAtStoredOrigin(2, 0x32, i + 0x7d, x, y, 0x7e);
         }
-        else {
-          texDrawTableEntryAtStoredOrigin(2,0x32,0x81,temp_v7,temp_v11,0x83);
-          texDrawTableEntryAtStoredOrigin(2,0x32,0x82,temp_v7,temp_v11,0x83);
-          texDrawTableEntryAtStoredOrigin(2,0x32,0x83,temp_v7,temp_v11,0x88);
-          temp_v10 = 0xa1;
+        efctSetSpeed(alpha);
+        texDrawTableEntryAtStoredOrigin(2, 0x32, 0x80, x, y, 0x7e);
+        s32 glow;
+        if (pressed) {
+            texDrawTableEntryAtStoredOrigin(2, 0x32, 0xa2, x, y, 0x83);
+            texDrawTableEntryAtStoredOrigin(2, 0x32, 0xa3, x, y, 0x83);
+            texDrawTableEntryAtStoredOrigin(2, 0x32, 0xa4, x, y, 0x88);
+            glow = 0xa5;
+        } else {
+            texDrawTableEntryAtStoredOrigin(2, 0x32, 0x81, x, y, 0x83);
+            texDrawTableEntryAtStoredOrigin(2, 0x32, 0x82, x, y, 0x83);
+            texDrawTableEntryAtStoredOrigin(2, 0x32, 0x83, x, y, 0x88);
+            glow = 0xa1;
         }
-        efctSetSpeed();
-        texDrawTableEntryAtStoredOrigin(2,0x32,temp_v10,temp_v7,temp_v11,0x8d);
-        efctSetSpeed();
-      }
-      FUN_00404f40(param_1,temp_v2,*(short *)(temp_v5 + 8) + temp_v0,*(short *)(temp_v5 + 10) + temp_v1,temp_v3,
-                   temp_v4,temp_v12);
+        efctSetSpeed(vec2GetSpeed(&screen->sprites[CONTENT_LIST_SPRITE_GLOW]) * alpha);
+        texDrawTableEntryAtStoredOrigin(2, 0x32, glow, x, y, 0x8d);
+        efctSetSpeed(1.0f);
     }
-    else {
-      temp_v5 = (int)asdTMTexTableEntryAt(0x32,temp_v8 + 0x67);
-      FUN_00404050(param_1,temp_v2,*(short *)(temp_v5 + 8) + temp_v0,*(short *)(temp_v5 + 10) + temp_v1,temp_v3,
-                   temp_v4);
+}
+
+/* Draws the content list: the window, a plate for each visible row, the enlarged row under the cursor with
+ * its cursor frame and glow, the scroll bar and, from the detail state on, the cover over the list. */
+void contentListDrawRows(ContentListScreen *screen)
+{
+    s32 x = vec2GetXInt(&screen->sprites[CONTENT_LIST_SPRITE_WINDOW]);
+    s32 y = vec2GetYInt(&screen->sprites[CONTENT_LIST_SPRITE_WINDOW]);
+    f32 alpha = vec2GetSpeed(&screen->sprites[CONTENT_LIST_SPRITE_WINDOW]);
+    s32 drawX = x;  /* where the current piece goes: the window, then the focused row */
+    s32 drawY = y;
+
+    efctSetSpeed(alpha);
+    texDrawTableEntryAtStoredOrigin(2, 0x32, 0x4d, drawX, drawY, 0x60);
+    texDrawTableEntryAtStoredOrigin(2, 0x32, 0x4e, drawX, drawY, 0x60);
+    texDrawTableEntryAtStoredOrigin(2, 0x32, 0x4a, drawX, drawY, 0x65);
+    texDrawTableEntryAtStoredOrigin(2, 0x32, 0x4b, drawX, drawY, 0x65);
+    texDrawTableEntryAtStoredOrigin(2, 0x32, 0x4c, drawX, drawY, 0x66);
+    for (s32 i = 0; i < 9; i++) {
+        texDrawTableEntryAtStoredOrigin(2, 0x32, 0x4f + i * 2, drawX, drawY, 0x6a);
+        texDrawTableEntryAtStoredOrigin(2, 0x32, 0x50 + i * 2, drawX, drawY, 0x6a);
     }
-    temp_v8 = temp_v8 + 1;
-  } while (temp_v8 < 10);
-  efctSetSpeed();
-  uiDrawListScrollBar(param_1 + 0x90,temp_v0,temp_v1,0x32,0x88,0x89,0x8a,0x84,0x85,0x86,0x87,
-               (int)*(short *)(param_1 + 0x126),(int)*(short *)(param_1 + 0x122),
-               (int)*(short *)(param_1 + 0x124),0x6a,0);
-  if (*(unsigned char *)(param_1 + 4) >= 4) {
-    efctSetSpeed();
-    texDrawTableEntryAtStoredOrigin(2,0x32,0x95,temp_v0,temp_v1,0x97);
-    efctSetSpeed();
-  }
-  efctSetSpeed();
-  return;
+    efctSetSpeed(1.0f);
+
+    for (s32 row = 0; row < 10; row++) {
+        if (row >= screen->rowCount) {
+            break;
+        }
+        u16 id = screen->ids[screen->firstRow + row];
+        u32 useFirstSet = tableFlagBit1(id);
+        u32 useSecondSet = tableFlagBit2(id);
+        if (screen->focusedRow == row) {
+            TextureTableEntryIV *entry = asdTMTexTableEntryAt(0x32, row + 0x72);
+            u32 color = 0x9fe7ffff;
+            bool pressed = false;
+            s32 mode = recordGetModeForId(screen->rowRegions[row]);
+            if (mode == 1 || mode == 2 || mode == 6) {
+                color = 0xf5ff9fff;
+                pressed = true;
+            }
+            drawX = entry->x + x;
+            drawY = entry->y + y;
+            drawFocusFrame(screen, drawX, drawY, alpha, pressed);
+            contentListDrawFocusedRow(screen, id, entry->x + x, entry->y + y, alpha, useFirstSet, useSecondSet, color);
+        } else {
+            TextureTableEntryIV *entry = asdTMTexTableEntryAt(0x32, row + 0x67);
+            contentListDrawRow(screen, alpha, id, entry->x + x, entry->y + y, useFirstSet, useSecondSet);
+        }
+    }
+
+    efctSetSpeed(alpha);
+    uiDrawListScrollBar((Object *)screen->scroller, x, y, 0x32, 0x88, 0x89, 0x8a, 0x84, 0x85, 0x86, 0x87,
+                        screen->scrollThumbRegion, screen->scrollUpRegion, screen->scrollDownRegion, 0x6a, 0);
+    if (screen->state >= CONTENT_LIST_STATE_DETAIL) {
+        efctSetSpeed(alpha);
+        texDrawTableEntryAtStoredOrigin(2, 0x32, 0x95, x, y, 0x97);
+        efctSetSpeed(1.0f);
+    }
+    efctSetSpeed(1.0f);
 }
 
 } /* extern "C" */

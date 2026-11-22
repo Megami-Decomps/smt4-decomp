@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail derives the work pointer as texture-base - 24 (one pool word, two ldr); here the struct of globals is read with a post-incremented ldr. Everything else (switch layout, texture table walk, interpolation calls) matches. */
+/* NON_MATCHING: retail addresses the globals from the texture array (pool word 0x43df00, the work pointer at -24, each texture's table and node by separate loads), as if the original file defined the work pointer and the textures as its own data; here the base is g_eventEffect and the pair loads as one ldrd. Everything else matches. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -28,13 +28,12 @@ s32 eventIsSkipping(void);
 /* Update the blink-fade event effect: waits for its textures, then slides and fades for 300 frames. */
 s32 eventEffectBlinkFadeUpdate(void)
 {
-    u32 *textures = g_eventEffect.textures;
     BlinkFadeWork *work = g_eventEffect.work;
     switch (work->state) {
     case 0: {
         s32 loaded = 0;
         for (s32 i = 0; i < 2; i++) {
-            if (asdTMTexTableNodeIsLoaded(textures[i * 3], textures[i * 3 + 1]) != 0) {
+            if (asdTMTexTableNodeIsLoaded(g_eventEffect.textures[i * 3], g_eventEffect.textures[i * 3 + 1]) != 0) {
                 loaded++;
             }
         }
@@ -86,7 +85,7 @@ s32 eventEffectBlinkFadeUpdate(void)
     if (eventIsSkipping() != 0) {
         s32 loaded = 0;
         for (s32 i = 0; i < 2; i++) {
-            if (asdTMTexTableNodeIsLoaded(textures[i * 3], textures[i * 3 + 1]) != 0) {
+            if (asdTMTexTableNodeIsLoaded(g_eventEffect.textures[i * 3], g_eventEffect.textures[i * 3 + 1]) != 0) {
                 loaded++;
             }
         }

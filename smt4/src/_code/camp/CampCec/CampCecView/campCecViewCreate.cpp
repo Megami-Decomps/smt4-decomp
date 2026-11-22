@@ -78,7 +78,7 @@ void campCecViewCreate(void)
         }
     }
     asdLoadFileAsyncSimple("camp/CecEdit_one_msg.mbm", (u32 *)&view->heap, 0);
-    view->statusScene = (u32)FUN_0024aaa0();
+    view->statusScene = (u32)overlayGetStatusScene();
     view->current = saveGetIndexedMapValue(view->selected);
     for (i = 0; i < CAMP_CEC_VIEW_ROWS; i++) {
         view->handle[i] = campCecDrawSetCreate();

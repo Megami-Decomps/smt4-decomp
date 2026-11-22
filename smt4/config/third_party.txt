@@ -1617,7 +1617,7 @@
 0x002bb4c4 nn_fs_detail_FileBase_TryRead name
 0x002bb54c nn_fs_detail_FileBase_TryGetSize name
 0x002bb7ec nn_os_AddressSpaceManager_Allocate name
-0x002bb99c FUN_002bb99c between
+0x002bb99c fsMountRegister between
 0x002bbbc8 cameraComposeMatrices between
 0x002bbe30 mathCopyIdentityMatrix between
 0x002bbed0 nn_math_ARMv6_MTX44PivotC_FAST name

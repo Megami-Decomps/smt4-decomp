@@ -1,6 +1,9 @@
-/* NON_MATCHING: readable rewrite of the map-interface registration (allocate and clear the state, create its four tasks, set up the three marker quads); retail also loads two debug arguments (a source-path string and a line number) that asdMemAlloc discards, and schedules the quad stores in a different order with the state fields interleaved. */
+/* NON_MATCHING: 127 lines: readable rewrite of the map-interface registration (trace, allocate and clear the state, create
+ * its four tasks, set up the three marker quads). Retail stores each marker quad through its own slot pointer (base,
+ * +0x630, +0x630 again) in corner order, where armcc here splits the large offsets from one base. */
 #include "map/MapIfGlobals.h"
 #include "bible/bibleAnalyze.h"
+#include "AsdSDK/AsdDebug.h"
 
 // A map-interface marker quad: four corners of (x, y, z).
 struct MapIfQuad {
@@ -29,6 +32,7 @@ void mapIfResetRecords(void);
 // fills the three marker quads (one facing the camera, two lying on the ground plane).
 void MapIf_Register(u32 parent, u8 variant)
 {
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\map\\mapIf.cpp", 862);
     g_mapIf.state = (MapIfState *)asdMemAlloc(0x100, 0x100, 0, 0xcce8, 1);
     MapIfState *state = g_mapIf.state;
     state->unk14 = 0;

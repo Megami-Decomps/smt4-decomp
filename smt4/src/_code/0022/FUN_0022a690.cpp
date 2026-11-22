@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail converts the float id once before the first call and keeps it in s17; here the conversion is placed after btlGetMainState and registers/switch offsets shift. */
+/* NON_MATCHING: retail converts the listed id inside the push (vcvt into s17) and copies it into r4/r5 before each lookup, keeping five integer saved registers; here the conversion lands in s0 before the push, the id gets r8 and the zero/table registers shift (r9, sl saved). */
 #include "battle/BtlEntry.h"
 #include "battle/BattleUnitSlot.h"
 #include "battle/BtlMainAccess.h"
@@ -21,12 +21,15 @@ extern u32 g_btlScriptUnit;
 /* Rate multiplier for a script's damage kind (7-11) applied to the listed combatant, with the extra boosts for kinds 7 and 8. */
 f32 FUN_0022a690(s32 kind, f32 listedId)
 {
+    s32 id = (s32)listedId;
     f32 rate = 1.0f;
-    BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), (s32)listedId);
+    BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
     s32 other = 0;
-    s32 stat = entry ? entry->stat[kind] : 0;
+    s32 stat = 0;
+    if (entry)
+        stat = entry->stat[kind];
     s32 negatedStat = -stat;
-    entry = btlMainFindEntryByListedId(btlGetMainState(), (s32)listedId);
+    entry = btlMainFindEntryByListedId(btlGetMainState(), id);
     switch (kind) {
     case 7:
     case 8:
@@ -39,14 +42,14 @@ f32 FUN_0022a690(s32 kind, f32 listedId)
         break;
     case 11:
         rate = stepRate(DAT_00439ab0, stat);
-        entry = btlMainFindEntryByListedId(btlGetMainState(), (s32)listedId);
+        entry = btlMainFindEntryByListedId(btlGetMainState(), id);
         if (entry)
             other = entry->effects.unk08a;
         rate = stepRate(DAT_00439ab0, other) * rate;
         break;
     case 9:
         rate = stepRate(DAT_00439ab0, negatedStat);
-        entry = btlMainFindEntryByListedId(btlGetMainState(), (s32)listedId);
+        entry = btlMainFindEntryByListedId(btlGetMainState(), id);
         if (entry)
             other = entry->effects.unk08a;
         rate = stepRate(DAT_00439ab0, -other) * rate;
@@ -54,20 +57,20 @@ f32 FUN_0022a690(s32 kind, f32 listedId)
     }
     if (!(reinterpret_cast<BtlEntry *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->flags & 0x200)) {
         if (kind == 8) {
-            entry = btlMainFindEntryByListedId(btlGetMainState(), (s32)listedId);
+            entry = btlMainFindEntryByListedId(btlGetMainState(), id);
             if (entry && entry->effects.primaryAlternate > 0)
                 rate *= 2.5f;
-            entry = btlMainFindEntryByListedId(btlGetMainState(), (s32)listedId);
+            entry = btlMainFindEntryByListedId(btlGetMainState(), id);
             if (entry && entry->effects.unk08c > 0)
                 rate *= 1.25f;
-            entry = btlMainFindEntryByListedId(btlGetMainState(), (s32)listedId);
+            entry = btlMainFindEntryByListedId(btlGetMainState(), id);
             if (entry && entry->effects.secondaryAlternate > 0)
                 rate *= 3.0f;
         } else if (kind == 7) {
-            entry = btlMainFindEntryByListedId(btlGetMainState(), (s32)listedId);
+            entry = btlMainFindEntryByListedId(btlGetMainState(), id);
             if (entry && entry->effects.primary > 0)
                 rate *= 2.5f;
-            entry = btlMainFindEntryByListedId(btlGetMainState(), (s32)listedId);
+            entry = btlMainFindEntryByListedId(btlGetMainState(), id);
             if (entry && entry->effects.secondary > 0)
                 rate *= 3.0f;
         }

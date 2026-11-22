@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild of the sphere-versus-collision-planes push-out; the scalar/VFP register assignment and the order of the plane test sequence differ from retail. */
+/* NON_MATCHING: readable rebuild of the sphere-versus-collision-planes push-out (the passes are a switch, as retail lays out cases 0 and 1 out of line); y and z swap VFP registers, the plane tests branch on other conditions (bls/bgt against retail ble/bcc), and retail homes r0-r2 and reloads the normal for the projection. */
 #include "gfx/CollisionPlaneView.h"
 #include <math.h>
 
@@ -20,22 +20,28 @@ u32 FUN_0025363c(const CollisionVector *position, CollisionVector *out, s32 want
     for (s32 pass = 0; pass < 4; pass++) {
         CollisionPlaneView *planes;
         s32 count;
-        f32 radius = 25.0f;
-        if (pass == 0) {
+        f32 radius;
+        switch (pass) {
+        case 0:
+            radius = 25.0f;
             planes = (CollisionPlaneView *)g_mapCollision.triangles;
             count = g_mapCollision.geometry.triangleCount;
-        } else if (pass == 1) {
+            break;
+        case 1:
+            radius = 25.0f;
             planes = (CollisionPlaneView *)g_mapCollision.quads;
             count = g_mapCollision.quadCount;
-        } else {
+            break;
+        case 2:
             radius = 60.0f;
-            if (pass == 2) {
-                planes = (CollisionPlaneView *)g_mapCollision.second;
-                count = g_mapCollision.segmentCounts[0];
-            } else {
-                planes = (CollisionPlaneView *)g_mapCollision.unk24;
-                count = g_mapCollision.segmentCounts[1];
-            }
+            planes = (CollisionPlaneView *)g_mapCollision.second;
+            count = g_mapCollision.segmentCounts[0];
+            break;
+        default:
+            radius = 60.0f;
+            planes = (CollisionPlaneView *)g_mapCollision.unk24;
+            count = g_mapCollision.segmentCounts[1];
+            break;
         }
         for (s32 i = 0; i < count; i++, planes++) {
             if (!planes->active)

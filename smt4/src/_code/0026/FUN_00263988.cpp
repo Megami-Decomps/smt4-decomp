@@ -1,4 +1,4 @@
-/* NON_MATCHING: only register naming differs: retail keeps &current in r6 and the motion in r7, and 0.0f/1.0f in s16/s17 (here swapped). */
+/* NON_MATCHING: 69 lines: retail stops the old player through one pointer load (speed, enabled flag and refresh) where this reloads it for each access, keeps 0.0f/1.0f in s16/s17 (here swapped) and pools mathClampFloat after the loop policy. */
 #include "common.h"
 
 extern "C" {
@@ -76,10 +76,9 @@ void FUN_00263988(ModelSwitcher *switcher, s32 motion)
     if (switcher->current != -1) {
         modelRemoveFromSlotList(switcher->slots[switcher->current], 0);
         animOwnerSetScale(switcher->models[switcher->modelIndex], 0.0f);
-        AnimationPlayer *old = switcher->slots[switcher->current]->player;
-        old->speed = 0.0f;
-        old->dirty = 1;
-        old->refresh();
+        switcher->slots[switcher->current]->player->speed = 0.0f;
+        switcher->slots[switcher->current]->player->dirty = 1;
+        switcher->slots[switcher->current]->player->refresh();
     }
     switcher->current = motion;
     modelSlotAttachChild(switcher->slots[motion], 0);

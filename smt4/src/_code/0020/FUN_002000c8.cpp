@@ -19,7 +19,7 @@ int gameGetUnitRecord(...);
 int buttonHelpSetPreset(int);
 int cecCardBuild(unsigned int, int, int); // declcheck: local (the shared CecProcessSlot prototype does not fit this draft yet)
 int rt_aeabi_memclr(int, int);
-int FUN_002d67fc(int);
+int campCecEditCreate(int);
 int campCecEditDestroy(void);
 
 extern int scrRunOpcodesStub(unsigned int);
@@ -43,7 +43,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: cecCardBuild. */
 /* Supplied declaration required: rt_aeabi_memclr. */
-/* Supplied declaration required: FUN_002d67fc. */
+/* Supplied declaration required: campCecEditCreate. */
 extern int FUN_002e1afc(void);
 /* Supplied declaration required: campCecEditDestroy. */
 
@@ -120,7 +120,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
         }
         if (temp_v3 != 9) {
           if (temp_v3 == 7) {
-            FUN_002d67fc(1);
+            campCecEditCreate(1);
             *(unsigned char *)(temp_v4 + 0x3e) = 1;
             *(unsigned char *)(temp_v4 + 0x3c) = 0;
             if ((*(char *)(temp_v4 + 0x3f) != '\0') &&

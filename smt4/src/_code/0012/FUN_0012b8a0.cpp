@@ -41,7 +41,7 @@ extern int DAT_004efd90; /* 0x4efd90 */
 extern int DAT_004efd94; /* 0x4efd94 */
 extern int DAT_004efd98; /* 0x4efd98 */
 
-extern int FUN_0013e084(unsigned int *, unsigned int, int *, unsigned int);
+extern int commandHolderCreate(unsigned int *, unsigned int, int *, unsigned int);
 extern int *_ZN9Obj421230C1EP18AsdAllocatorObjectP12Obj421230ResPv(int, int *, unsigned int *, int);
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
@@ -233,7 +233,7 @@ int * FUN_0012b8a0(int param_1,unsigned int *param_2,int param_3,int *param_4,un
       else {
         puVar10 = (unsigned int *)0x0;
       }
-      temp_v6 = FUN_0013e084(puVar7,*puVar10,temp_v13,param_5);
+      temp_v6 = commandHolderCreate(puVar7,*puVar10,temp_v13,param_5);
       if (temp_v6 == 0) {
 LAB_0012bd74:
         temp_v5 = 0;

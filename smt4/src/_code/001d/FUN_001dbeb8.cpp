@@ -16,7 +16,7 @@ void buttonHelpSetPreset(s32 preset);
 void FUN_0026b9bc(void);
 void FUN_0028a924(s32 a, s32 b, s32 c);
 void FUN_0028a368(s32 a);
-void FUN_002d67fc(s32 a);
+void campCecEditCreate(s32 a);
 
 /* Closes the camp CEC edit screen once it signals completion; returns 2 when the camp state moved to 6. */
 s32 FUN_001dbeb8(CampState *camp)
@@ -24,7 +24,7 @@ s32 FUN_001dbeb8(CampState *camp)
     s32 result = 0;
 
     if (campCecEditExists() == 0) {
-        FUN_002d67fc(0);
+        campCecEditCreate(0);
     } else if (campCecEditGetFlag125() != 0) {
         campCecEditDestroy();
         buttonHelpSetPreset(3);

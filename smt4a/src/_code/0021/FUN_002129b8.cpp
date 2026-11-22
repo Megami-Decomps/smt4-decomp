@@ -8,7 +8,7 @@ int effRandomSignedValue(...);
 int FUN_00213d1c(unsigned int *);
 int FUN_00213fe4(unsigned int *);
 int nodeTreeReleaseItem(void);
-int FUN_003d2294(float *, unsigned int, unsigned int, unsigned int);
+int vec3RotateXyzDegrees(float *, unsigned int, unsigned int, unsigned int);
 int VectorSignedToFloat(unsigned int, int);
 int __aeabi_memcpy4(unsigned int *, unsigned int *, int);
 
@@ -29,7 +29,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00213d1c. */
 /* Supplied declaration required: FUN_00213fe4. */
 /* Supplied declaration required: nodeTreeReleaseItem. */
-/* Supplied declaration required: FUN_003d2294. */
+/* Supplied declaration required: vec3RotateXyzDegrees. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -134,7 +134,7 @@ void FUN_002129b8(unsigned int *param_1)
           temp_v10 = temp_v6 * *(float *)(param_1[0xd5] + 0x14);
           temp_v11 = temp_v5 * *(float *)(param_1[0xd5] + 0x14);
           temp_v12 = temp_v12 * *(float *)(param_1[0xd5] + 0x14);
-          FUN_003d2294(&temp_v10,param_1[0x58],param_1[0x59],param_1[0x5a]);
+          vec3RotateXyzDegrees(&temp_v10,param_1[0x58],param_1[0x59],param_1[0x5a]);
           param_1[0x48] = (unsigned int)((float)param_1[0x48] + temp_v10);
           temp_v9 = (float)param_1[0x49];
           param_1[0x49] = (unsigned int)(temp_v9 + temp_v11);
@@ -153,7 +153,7 @@ void FUN_002129b8(unsigned int *param_1)
         temp_v10 = (float)param_1[0xd2] * temp_v8 * *(float *)(param_1[0xd5] + 0x14);
         temp_v11 = (temp_v9 + (float)param_1[0xd3]) * temp_v8 * *(float *)(param_1[0xd5] + 0x14);
         temp_v12 = (float)param_1[0xd4] * temp_v8 * *(float *)(param_1[0xd5] + 0x14);
-        FUN_003d2294(&temp_v10,param_1[0x58],param_1[0x59],param_1[0x5a]);
+        vec3RotateXyzDegrees(&temp_v10,param_1[0x58],param_1[0x59],param_1[0x5a]);
         param_1[0x48] = (unsigned int)((float)param_1[0x48] + temp_v10);
         temp_v9 = (float)param_1[0x49];
         param_1[0x49] = (unsigned int)(temp_v9 + temp_v11);
@@ -177,7 +177,7 @@ void FUN_002129b8(unsigned int *param_1)
       temp_v10 = temp_v10 * *(float *)(param_1[0xd5] + 0x14);
       temp_v11 = temp_v11 * *(float *)(param_1[0xd5] + 0x14);
       temp_v12 = (float)param_1[0xde] * *(float *)(param_1[0xd5] + 0x14);
-      FUN_003d2294(&temp_v10,param_1[0x58],param_1[0x59],param_1[0x5a]);
+      vec3RotateXyzDegrees(&temp_v10,param_1[0x58],param_1[0x59],param_1[0x5a]);
       param_1[0x48] = (unsigned int)((float)param_1[0x48] + temp_v10);
       param_1[0x49] = (unsigned int)((float)param_1[0x49] + temp_v11);
       param_1[0x4a] = (unsigned int)((float)param_1[0x4a] + temp_v12);

@@ -5,7 +5,7 @@
 
 extern "C" {
 u16 ifTouchGetButtonHelpValue(void);
-s32 FUN_002cad18(void);
+s32 partyPanelIsTransitionDone(void);
 s32 partyPanelGetSelectedDemonId(void);
 void partyPanelPlayInputCue(void);
 void FUN_0023f900(void);
@@ -19,7 +19,7 @@ void partyPanelPollHelpRefresh(void)
     bool refresh = false;
     gameGlobalsGetBlock1390();
     u32 help = ifTouchGetButtonHelpValue();
-    s32 slot = FUN_002cad18();
+    s32 slot = partyPanelIsTransitionDone();
     s32 demon = partyPanelGetSelectedDemonId();
     if ((help == 0x1C || help == 0x1E || help == 0xBA || help == 0xC1 || help == 0xCE || help == 0x28) &&
         (slot == 0 || panel->alternate == 0))

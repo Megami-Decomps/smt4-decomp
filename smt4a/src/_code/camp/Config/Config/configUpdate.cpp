@@ -23,6 +23,7 @@
 #include "battle/btlDebug.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include <string.h>
 
 extern "C" {
 extern ConfigWorkA *g_config;
@@ -147,7 +148,7 @@ void configUpdate(void)
             s32 i;
             for (i = 0; i < work->count; i++)
                 ifTouchRegionRemove();
-            fillThreeWordsWithByte((u32 *)&work->touchGroup, 0xffffffff);
+            memset(&work->touchGroup, -1, 12);
             s32 first = work->firstRegionImage;
             work->count = 0;
             s32 rows = uiSearchPrimary(&work->cursor);

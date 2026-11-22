@@ -12,12 +12,6 @@
 #include "ui/UiSpriteState.h"
 #include <stddef.h>
 
-/* Only the byte column is recovered, not the true boundaries of the underlying records. */
-typedef struct BtlUiColumnRecord {
-    /* 0x00 */ u8 value;
-    /* 0x01 */ u8 unk01[0x2b];
-} BtlUiColumnRecord;
-
 /* Shin Megami Tensei IV layout. */
 typedef struct BtlUiObjA { /* 0x0000 */ u8 unk[0x21F8]; } BtlUiObjA;
 typedef struct BtlUiObjB {
@@ -35,6 +29,29 @@ typedef struct BtlUiUnitRecord {
     /* 0x046 */ u16 unitId;
     /* 0x048 */ u8 unk048[0x5BC];
 } BtlUiUnitRecord;
+/* A UI position request: an id, three halfword parameters, a position and a value. */
+typedef struct BtlUiPositionQuery {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u16 first;
+    /* 0x04 */ u16 second;
+    /* 0x06 */ u16 mode;
+    /* 0x08 */ f32 x;
+    /* 0x0C */ f32 y;
+    /* 0x10 */ f32 z;
+    /* 0x14 */ u32 value;
+} BtlUiPositionQuery;
+
+/* One cached position request and the handle it was given (battleUiFindOrAddPosition). */
+typedef struct BtlUiPositionEntry {
+    /* 0x00 */ BtlUiPositionQuery request;
+    /* 0x18 */ u8 active;
+    /* 0x19 */ u8 unk19[3];
+    /* 0x1C */ u32 handle;
+    /* 0x20 */ u8 unk20[8];
+    /* 0x28 */ u8 used;
+    /* 0x29 */ u8 unk29[3];
+} BtlUiPositionEntry;
+
 typedef struct BtlUiObjC {
     /* 0x0000 */ u8 unk[0x307c];
     /* 0x307c */ u8 unk307C;
@@ -50,10 +67,10 @@ typedef struct BtlUiObjC {
             /* 0x3218 */ u8 cursor[0x6E8];  /* the support-unit selection list */
         } supportSelection;
     };
-    /* 0x5758 */ s32 columnCount;
-    /* 0x575c */ u8 unk575C[0x1c];
-    /* 0x5778 */ BtlUiColumnRecord columns[1];
-    /* 0x57a4 */ u8 unk57A4[0x1fc];
+    /* 0x5758 */ s32 positionCount;
+    /* 0x575c */ u8 unk575C[4];
+    /* 0x5760 */ BtlUiPositionEntry positions[13];
+    /* 0x599c */ u8 unk599C[4];
 } BtlUiObjC;
 typedef struct BtlUiAvailabilityRow {
     u8 active;
@@ -374,11 +391,11 @@ typedef char BtlUiUnitRecordLayoutCheck[sizeof(BtlUiUnitRecord) == 0x604 &&
 typedef char BtlUiUnitRecordALayoutCheck[sizeof(BtlUiUnitRecordA) == 0x12C &&
     offsetof(BtlUiA, unitRecords.records) == 0x6AF4 &&
     offsetof(BtlUiA, requiresTargetSelection) == 0x74B0 && sizeof(BtlUiA) == 0x12FD0 ? 1 : -1];
-typedef char BtlUiColumnLayoutCheck[sizeof(BtlUiColumnRecord) == 0x2c &&
-    sizeof(BtlUiObjC) == 0x59a0 &&
+typedef char BtlUiColumnLayoutCheck[sizeof(BtlUiObjC) == 0x59a0 &&
     offsetof(BtlUiObjC, unk307C) == 0x307c &&
-    offsetof(BtlUiObjC, columnCount) == 0x5758 &&
-    offsetof(BtlUiObjC, columns) == 0x5778 &&
+    sizeof(BtlUiPositionEntry) == 0x2c &&
+    offsetof(BtlUiObjC, positionCount) == 0x5758 &&
+    offsetof(BtlUiObjC, positions) == 0x5760 &&
     offsetof(BtlUiObjC, supportSelection.cursor) == 0x3218 ? 1 : -1];
 typedef char BtlUiLayoutCheck[sizeof(BtlUi) == 0xf040 &&
     offsetof(BtlUi, objC) == 0x2460 &&

@@ -20,7 +20,7 @@ extern int DAT_005893a8; /* 0x5893a8 */
 extern unsigned int DAT_0062d34c; /* 0x62d34c */
 
 /* Supplied declaration required: nn_fs_ipc_FileSystem_CloseArchive. */
-extern unsigned int FUN_001aeefc(unsigned int, int *, unsigned int);
+extern unsigned int fsMountRegister(unsigned int, int *, unsigned int);
 extern unsigned long long nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(unsigned int *);
 extern unsigned int nn_fs_ipc_FileSystem_OpenArchive(unsigned int, unsigned long long *, unsigned int, unsigned int, unsigned char *, unsigned int);
 
@@ -70,7 +70,7 @@ unsigned int FUN_0042a16c(unsigned int param_1,unsigned int param_2,unsigned int
       piVar5[1] = temp_v0;
     }
     if ((int)temp_v3 >= 0) {
-      temp_v3 = FUN_001aeefc(param_1,piVar5,0);
+      temp_v3 = fsMountRegister(param_1,piVar5,0);
       if ((int)temp_v3 < 0) {
         (**(romwright_code **)(*piVar5 + 0x30))(piVar5);
       }

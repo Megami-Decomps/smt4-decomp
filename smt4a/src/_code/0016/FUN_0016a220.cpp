@@ -1,4 +1,5 @@
-/* NON_MATCHING: outer/mixer register bases, sample-count hoisting and callback tail guards differ. */
+/* NON_MATCHING: 79 lines: retail keeps &fade->mixer in r5 for the mixing calls and the elapsed/duration/buffer
+ * accesses and hoists count - 1 out of the clearing loop; the build re-forms the mixer address at each use. */
 #include "common.h"
 #include <stddef.h>
 
@@ -54,45 +55,44 @@ void FUN_00198360(u32 handle, u32 owner, CrossfadeMix *mix, const u8 *params, f3
  * fade at its duration and then steps both tracks; otherwise just plays the current track. */
 void FUN_0016a220(Crossfade *fade, f32 deltaTime)
 {
-    CrossfadeMix *mixer = &fade->mixer;
-    if (mixer->fading) {
-        f32 elapsed = mixer->elapsed;
-        if (mixer->duration <= elapsed) {
-            mixer->fading = 0;
-            fade->tracks[mixer->current ^ 1].handle = 0;
+    if (fade->mixer.fading) {
+        f32 elapsed = fade->mixer.elapsed;
+        if (fade->mixer.duration <= elapsed) {
+            fade->mixer.fading = 0;
+            fade->tracks[fade->mixer.current ^ 1].handle = 0;
         } else {
-            f32 weight = elapsed / mixer->duration;
+            f32 weight = elapsed / fade->mixer.duration;
             if (weight > 1.0f)
                 weight = 1.0f;
             u32 i = 0;
             do {
-                mixer->data[i] = 0.0f;
+                fade->mixer.data[i] = 0.0f;
                 i++;
-            } while (i <= (u32)mixer->count - 1);
-            CrossfadeTrack *track = &fade->tracks[mixer->current];
+            } while (i <= (u32)fade->mixer.count - 1);
+            CrossfadeTrack *track = &fade->tracks[fade->mixer.current];
             if (weight > 0.0f)
-                FUN_00198360(track->handle, fade->owner, mixer, track->params, track->volume, weight);
-            track = &fade->tracks[mixer->current ^ 1];
+                FUN_00198360(track->handle, fade->owner, &fade->mixer, track->params, track->volume, weight);
+            track = &fade->tracks[fade->mixer.current ^ 1];
             if (1.0f - weight > 0.0f)
-                FUN_00198360(track->handle, fade->owner, mixer, track->params, track->volume, 1.0f - weight);
-            FUN_00198144(mixer, fade->owner);
+                FUN_00198360(track->handle, fade->owner, &fade->mixer, track->params, track->volume, 1.0f - weight);
+            FUN_00198144(&fade->mixer, fade->owner);
         }
     }
-    if (!mixer->fading) {
-        CrossfadeTrack *track = &fade->tracks[mixer->current];
+    if (!fade->mixer.fading) {
+        CrossfadeTrack *track = &fade->tracks[fade->mixer.current];
         if (track->handle != 0) {
             FUN_00193c08(fade->channel, fade->owner);
             FUN_001981d8(track->handle, fade->owner, track->params, track->volume);
         }
     }
-    if (mixer->fading) {
-        mixer->elapsed += deltaTime;
-        if (trackAdvance(&fade->tracks[mixer->current], deltaTime) && fade->onFinished)
+    if (fade->mixer.fading) {
+        fade->mixer.elapsed += deltaTime;
+        if (trackAdvance(&fade->tracks[fade->mixer.current], deltaTime) && fade->onFinished)
             FUN_001882fc(fade->onFinished);
-        trackAdvance(&fade->tracks[mixer->current ^ 1], deltaTime);
+        trackAdvance(&fade->tracks[fade->mixer.current ^ 1], deltaTime);
         return;
     }
-    if (trackAdvance(&fade->tracks[mixer->current], deltaTime) && fade->onFinished)
+    if (trackAdvance(&fade->tracks[fade->mixer.current], deltaTime) && fade->onFinished)
         FUN_001882fc(fade->onFinished);
 }
 

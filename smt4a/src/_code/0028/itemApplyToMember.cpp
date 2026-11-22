@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_0035e03c(...);
+int itemApplySecondaryEffects(...);
 
 int recordGetScaledMaximum(...);
 int FUN_002b4dcc(void);
@@ -60,7 +60,7 @@ extern int btlMainGetUnk14(void);
 extern int btlIsDefeatSuppressed(void);
 /* Supplied declaration required: FUN_002b4dcc. */
 /* Supplied declaration required: FUN_002b4e7c. */
-/* Supplied declaration required: FUN_0035e03c. */
+/* Supplied declaration required: itemApplySecondaryEffects. */
 extern fn_00287790_arg0 *FUN_003b7430(fn_00287790_arg0 *, fn_00287790_arg1 *, int);
 extern int FUN_003d2b2c(fn_00287790_arg1 *, unsigned short);
 /* Supplied declaration required: playerSyncPair2A. */
@@ -496,7 +496,7 @@ LAB_00287fec:
       temp_v7 = playerHasFlagBit(1);
       if (temp_v7 == 0) {
         if ((param_2->field_0x42 & 2) != 0) {
-          FUN_0035e03c(temp_v11,param_2,pfVar10,param_3);
+          itemApplySecondaryEffects(temp_v11,param_2,pfVar10,param_3);
           pfVar10 = temp_v11;
         }
         return (int)pfVar10;
@@ -599,7 +599,7 @@ LAB_00287fec:
     }
   }
   if ((param_2->field_0x42 & 2) != 0) {
-    FUN_0035e03c(temp_v11,param_2,pfVar10,param_3);
+    itemApplySecondaryEffects(temp_v11,param_2,pfVar10,param_3);
     pfVar10 = temp_v11;
   }
   return (int)pfVar10;

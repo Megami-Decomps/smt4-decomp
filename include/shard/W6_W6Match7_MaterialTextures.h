@@ -37,7 +37,8 @@ struct MaterialTextureBinding {
     /* 0x10 */ MaterialTextureCommands commands;
     /* 0x18 */ MaterialTextureSampler* samplers;
     /* 0x1c */ const char* textureNames[3];
-    /* 0x28 */ u32 unk28;
+    /* 0x28 */ u8 flags; /* 8: bound again to the owning unit's matrix at unit setup */
+    /* 0x29 */ u8 unk29[3];
 };
 
 // Prefix of the model resource used by its material bindings.

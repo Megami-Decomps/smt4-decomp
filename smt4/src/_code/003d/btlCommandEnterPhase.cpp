@@ -1,4 +1,9 @@
-/* NON_MATCHING: void phase dispatcher and party lookup recovered; switch layout and instruction scheduling still differ. */
+/* NON_MATCHING: the phase dispatcher's table, blocks and calls match retail (126 lines, 68 by shape). Phases 8 and
+ * 15 are functions armcc inlined: retail copies `work` into another register at the start of each (mov r9, r4;
+ * mov r1, r4) and reuses r4 for the body's own locals. What differs: in phase 15 retail loads the entry list
+ * predicated before the branch and the action list at the else loop's head (this build selects one address and
+ * loads once), and in phase 19 it keeps the reflect chance in r0 and the selection kind in r1 (this build ip and
+ * r0). */
 #include "battle/BattleCommandController.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
@@ -55,12 +60,67 @@ void modelSetResetSlots(void *object);
 void eventCommandDispatchPendingCleanup(void);
 void FUN_00394b8c(void);
 
-// Initialize the effects, windows and command data for a newly entered action phase.
+/* Phase 8: points each present player-side combatant at its party record again, and queues its selection
+ * marks when the record has left the party. */
+static __inline void commandRebindPartyUnits(BtlMainState **block, CommandState *work)
+{
+    SaveSlotTableIV *slots = gameGetSlotTable();
+    for (s32 index = 0; index < 4; ++index) {
+        BtlEntry *entry = &(*block)->entries[index];
+        if ((entry->flags & 1) != 0 && (entry->flags & 8) != 0) {
+            bool found = false;
+            for (s32 slot = 0; slot < 3; ++slot) {
+                if (slots->active[slot] >= 0) {
+                    StatBlock *member = saveResolvePartySlot(slot);
+                    if (member->id == entry->data.id) {
+                        entry->data.partyUnit = member;
+                        entry->data.model = gameSlotFindByCategory(member);
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            if (!found)
+                btlReflectQueueSelectionMarks(0, reinterpret_cast<u32>(work), entry);
+        }
+    }
+}
+
+/* Phase 15: starts the action on its first target, the first usable combatant when the battle picks the
+ * target itself, else the first marked one (-1 when there is none). */
+static __inline void commandStartOnFirstTarget(BtlMainState *state, CommandState *work)
+{
+    s32 target = -1;
+    s32 index = 0;
+    if ((state->battleFlags & 0x200) != 0) {
+        BtlEntry *entries = state->entries;
+        for (; index < BTL_ENTRY_COUNT; ++index) {
+            BtlEntry *entry = &entries[index];
+            if ((entry->flags & 1) != 0 && (entry->flags & 0x40) == 0 && entry->ids[0] >= 0 &&
+                (entry->flags & 0x10) != 0) {
+                target = entry->ids[0];
+                break;
+            }
+        }
+    } else {
+        for (; index < BTL_ENTRY_COUNT; ++index) {
+            s32 combatant = state->actions[index].participant.combatantIndex;
+            if (combatant >= 0 && work->targetMarks[combatant] != 0) {
+                target = state->actions[index].memberId;
+                break;
+            }
+        }
+    }
+    FUN_001d2710(state, work, 0, target);
+}
+
+/* Initializes the effects, windows and command data for a newly entered action phase. */
 void btlCommandEnterPhase(BtlMainState **block, s32 phase)
 {
     BtlMainState *state = *block;
     s32 actor = state->actionState.index;
-    CommandState *work = reinterpret_cast<CommandState *>(&reinterpret_cast<ActionStateChannels *>(g_btlAction.slots)->entries[actor].flags);
+    ActionStateChannel *channel = &((ActionStateChannels *)g_btlAction.slots)->entries[actor];
+    CommandState *work = (CommandState *)&channel->flags;
     switch (phase) {
     case 1:
         if ((state->battleFlags & 0x40) != 0)
@@ -104,29 +164,9 @@ void btlCommandEnterPhase(BtlMainState **block, s32 phase)
         memClear(work->targetMarks, 0x85);
         gameGetSlotTable();
         return;
-    case 8: {
-        SaveSlotTableIV *slots = gameGetSlotTable();
-        for (s32 index = 0; index < 4; ++index) {
-            BtlEntry *entry = &(*block)->entries[index];
-            if ((entry->flags & 1) != 0 && (entry->flags & 8) != 0) {
-                bool found = false;
-                for (s32 slot = 0; slot < 3; ++slot) {
-                    if (slots->active[slot] >= 0) {
-                        StatBlock *member = saveResolvePartySlot(slot);
-                        if (member->id == entry->data.id) {
-                            entry->data.partyUnit = member;
-                            entry->data.model = gameSlotFindByCategory(member);
-                            found = true;
-                            break;
-                        }
-                    }
-                }
-                if (!found)
-                    btlReflectQueueSelectionMarks(0, reinterpret_cast<u32>(work), entry);
-            }
-        }
+    case 8:
+        commandRebindPartyUnits(block, work);
         return;
-    }
     case 11:
         FUN_003d3944(block, work);
         return;
@@ -143,31 +183,9 @@ void btlCommandEnterPhase(BtlMainState **block, s32 phase)
     case 14:
         FUN_003d3ba8(block, work);
         return;
-    case 15: {
-        s32 target = -1;
-        s32 index = 0;
-        if ((state->battleFlags & 0x200) != 0) {
-            BtlEntry *entries = state->entries;
-            for (; index < BTL_ENTRY_COUNT; ++index) {
-                BtlEntry *entry = &entries[index];
-                if ((entry->flags & 1) != 0 && (entry->flags & 0x40) == 0 && entry->ids[0] >= 0 &&
-                    (entry->flags & 0x10) != 0) {
-                    target = entry->ids[0];
-                    break;
-                }
-            }
-        } else {
-            for (; index < BTL_ENTRY_COUNT; ++index) {
-                s32 combatant = state->actions[index].participant.combatantIndex;
-                if (combatant >= 0 && work->targetMarks[combatant] != 0) {
-                    target = state->actions[index].memberId;
-                    break;
-                }
-            }
-        }
-        FUN_001d2710(state, work, 0, target);
+    case 15:
+        commandStartOnFirstTarget(state, work);
         return;
-    }
     case 16:
         btlResolveCommandEvent(block, work);
         return;
@@ -179,8 +197,7 @@ void btlCommandEnterPhase(BtlMainState **block, s32 phase)
     case 18: {
         s32 chance = (work->flags & 0x1080) == 0 ? 50 : 0;
         btlMenuCursorStepReflectAction(chance, work, 0, NULL, 1);
-        s32 value = questGetCurrentRecordHalf4();
-        if (value != 0)
+        if (s32 value = questGetCurrentRecordHalf4())
             btlReflectCreateKind10(0, work, value, -1);
         return;
     }
@@ -218,12 +235,14 @@ void btlCommandEnterPhase(BtlMainState **block, s32 phase)
         FUN_003ca32c(block, work);
         return;
     case 33:
-        if ((work->flags & 0x10000) != 0) {
-            if (state->eventCount <= 0)
+        if ((work->flags & 0x10000) == 0) {
+            u32 flags = work->entry->flags;
+            if ((flags & 1) == 0)
+                return;
+            if ((flags & 0x40) != 0)
                 return;
         } else {
-            u32 flags = work->entry->flags;
-            if ((flags & 1) == 0 || (flags & 0x40) != 0)
+            if (state->eventCount <= 0)
                 return;
         }
         if (isEntryUsable(g_btlEvent) != 0)

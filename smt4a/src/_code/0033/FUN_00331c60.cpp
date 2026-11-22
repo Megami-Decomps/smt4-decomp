@@ -1,4 +1,6 @@
-/* NON_MATCHING: register allocation differs: retail spills the member record and keeps the item loop base/limit (r5/r6) in registers and loads the divide-by-100 reciprocal later; logic matches. */
+/* NON_MATCHING: 124 lines: retail walks the skill ids through a base pointer (member + 0x34) with the count 8
+ * in a register and spills both slot records (a 12-byte frame); the build indexes from the record and keeps it
+ * in a register. The share arithmetic and the store order match. */
 #include "common.h"
 #include "mapnavi/naviMain.h"
 #include "gamedata/SkillDataRecord.h"
@@ -67,7 +69,7 @@ void FUN_00331c60(RewardSource *source)
         u32 share = baseShare * dataTable9Type3GetClamped(member->level, level) / 100;
         if (share == 0 && baseShare != 0)
             share = 1;
-        if (share == 0 && experience != 0)
+        if (static_cast<s32>(share) < 1 && experience != 0)
             share = 1;
         totals->entries[1 + record->tableIndex].total += share;
     }

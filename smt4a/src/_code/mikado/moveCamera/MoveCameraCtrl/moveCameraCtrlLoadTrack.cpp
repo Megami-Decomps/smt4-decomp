@@ -1,7 +1,3 @@
-/* NON_MATCHING: 8 lines, all in the inlined moveCameraSelectKey: retail sets up the index (r1) before the mode (r2)
- * and stores them in that order; this build swaps the two registers.
- * The view's scalars are set in the order of their fields (roll, field of view, near, far): retail numbers 30.0
- * before 10000.0 (s3, s4) and stores the roll and the field of view as one pair. */
 #include "gfx/MoveCameraCtrl.h"
 #include "Model/MoriModelManager.h"
 #include "classes/Obj557b58.h"

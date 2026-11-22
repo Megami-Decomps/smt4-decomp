@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_9_stack;
 
-extern int FUN_002bb99c(unsigned int, int *);
+extern int fsMountRegister(unsigned int, int *);
 
 
 /* WARNING: Removing unreachable block (ram,0x0015f088) */
@@ -39,7 +39,7 @@ void FUN_0015f028(unsigned int param_1,unsigned int param_2,unsigned int param_3
   status = titleContentStreamCreate(&handle,&request,param_5,param_6,param_7,param_8,param_9);
   if (static_cast<s32>(status) >= 0) {
     temp_v1 = reinterpret_cast<int *>(handle);
-    temp_v0 = FUN_002bb99c(param_1,temp_v1);
+    temp_v0 = fsMountRegister(param_1,temp_v1);
     if (temp_v0 < 0)
       (**(romwright_code **)(*temp_v1 + 0x30))(temp_v1);
   }

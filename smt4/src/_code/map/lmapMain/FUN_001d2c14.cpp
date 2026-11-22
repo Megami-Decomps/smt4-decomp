@@ -1,4 +1,4 @@
-/* NON_MATCHING: words[] clear becomes __aeabi_memclr4 instead of retail's pair-unrolled loop; scene vector copies group differently, the optional three-word clear uses separate stores and task callback declarations still lack native handle types. */
+/* NON_MATCHING: the state reset is lmapMainStateSet's body inlined (its stm pair now matches); words[] clear becomes __aeabi_memclr4 instead of retail's pair-unrolled loop, the scene position stores share registers differently (retail copies x into s3 for a vstmia run), and the task callback declarations still lack native handle types. */
 #include "gamedata/MapSaveBlock.h"
 #include "AsdSDK/AsdDebug.h"
 #include "map/LmapMainGlobals.h"
@@ -36,11 +36,7 @@ void FUN_001d2c14(void)
     state->external = 0;
     state->unk0C = 0;
     state->unk10 = 0;
-    if (g_lmapMainState->state != 0) {
-        g_lmapMainState->state = 0;
-        g_lmapMainState->stateStep = 0;
-        g_lmapMainState->stateTime = 0;
-    }
+    lmapMainStateSetInline(0);
     state->unkC8Float = 1.0f;
     state->unkC4 = 1.0f;
     state->mapId = 0x65;

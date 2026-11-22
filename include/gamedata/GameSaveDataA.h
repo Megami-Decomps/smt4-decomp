@@ -65,7 +65,10 @@ typedef struct SlotRecordA {
         /* 0x034 */ u16 skills[8];
         /* 0x034 */ u32 skillWords[4];  /* the same ids, copied as words */
     };
-    /* 0x044 */ s8 skillRanks[8];     /* the rank of each skill (PlayerDataA.skillRanks) */
+    union {
+        /* 0x044 */ s8 skillRanks[8]; /* the rank of each skill (PlayerDataA.skillRanks) */
+        /* 0x044 */ u32 skillRankWords[2]; /* the same ranks, cleared as words */
+    };
     union {
         /* 0x04C */ u16 name[9];
         /* 0x04C */ s8 categoryRanks[18]; /* a devil's inherited rank per skill category (partyRecordSetEquippedItemClampRank) */

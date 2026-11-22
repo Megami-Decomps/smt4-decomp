@@ -27,11 +27,11 @@ struct ConsumableRecordA {
         } sortBits;
     };
     /* 0x48 */ u16 effectValue;          /* the healing percentage of healing items */
-    /* 0x4A */ u8 unk4A[2];
+    /* 0x4A */ u16 points;              /* the points the item awards (gameDataAddCappedPoints) */
     /* 0x4C */ s32 buyPrice;
     /* 0x50 */ s32 sellPrice;
     /* 0x54 */ u16 count;               /* waited for by scrCommRecordProgressWait */
-    /* 0x56 */ u8 unk56[0x12];
+    /* 0x56 */ s8 categoryRankBoosts[18]; /* added to a unit's SlotRecordA.categoryRanks */
     /* 0x68 */ u32 flags;
 };
 
@@ -39,7 +39,8 @@ typedef char ConsumableRecordAOffsetCheck[sizeof(ConsumableRecordA) == 0x6C &&
     offsetof(ConsumableRecordA, id) == 0x30 && offsetof(ConsumableRecordA, skillId) == 0x32 &&
     offsetof(ConsumableRecordA, kind) == 0x3B && offsetof(ConsumableRecordA, type) == 0x41 &&
     offsetof(ConsumableRecordA, useFlags) == 0x42 && offsetof(ConsumableRecordA, sortFlags) == 0x44 &&
-    offsetof(ConsumableRecordA, buyPrice) == 0x4C && offsetof(ConsumableRecordA, flags) == 0x68 ? 1 : -1];
+    offsetof(ConsumableRecordA, points) == 0x4A && offsetof(ConsumableRecordA, buyPrice) == 0x4C &&
+    offsetof(ConsumableRecordA, categoryRankBoosts) == 0x56 && offsetof(ConsumableRecordA, flags) == 0x68 ? 1 : -1];
 
 extern "C" {
 

@@ -34,12 +34,12 @@ static __inline bool listWindowSlideIn(CampCecEdit *edit)
 {
     bool finished = false;
 
-    if (FUN_0026f024(&edit->listWindowX, 330, 0, 12, edit->listWindowFrame, 1)) {
-        edit->listWindowDone = 1;
+    if (FUN_0026f024(&edit->listWindow.x, 330, 0, 12, edit->listWindow.frame, 1)) {
+        edit->listWindow.done = 1;
     } else {
-        edit->listWindowFrame++;
+        edit->listWindow.frame++;
     }
-    if (edit->listWindowDone == 1) {
+    if (edit->listWindow.done == 1) {
         finished = true;
     }
     return finished;
@@ -238,7 +238,7 @@ s32 campCecEditChoiceListState(CampCecEdit *edit)
         /* Preview the message the cursor moved to on the card. */
         if (edit->listRow != startRow || edit->listTop != startTop) {
             edit->card->selection = edit->listRow + edit->listTop + edit->messageBase;
-            characterInfoPanelPopulate(edit->handleD, edit->card, edit->heapC);
+            characterInfoPanelPopulate(edit->infoPage, edit->card, edit->cardMessageFile);
             soundPlaySeUnpanned(0x100016c);
         }
 

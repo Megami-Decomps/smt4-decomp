@@ -34,7 +34,7 @@ int FUN_004f5238(...);
 int btlQueueActionMessage(...);
 void btlReflectCreateKind43(int, unsigned int, unsigned int, unsigned int, unsigned int);
 int btlReflectCreateKind42(unsigned int, int, unsigned int, int **);
-int fillThreeWordsWithByte(...);
+int __ARM_common_memset4_12(...);
 int __aeabi_memcpy4(unsigned int ****, unsigned char *, int);
 
 #ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
@@ -107,7 +107,7 @@ extern int chainCountIdUnflagged(unsigned int, unsigned int);
 /* Supplied declaration required: btlQueueActionMessage. */
 /* Supplied declaration required: btlReflectCreateKind43. */
 /* Supplied declaration required: btlReflectCreateKind42. */
-/* Supplied declaration required: fillThreeWordsWithByte. */
+/* Supplied declaration required: __ARM_common_memset4_12. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -177,7 +177,7 @@ void FUN_00410628(int param_1)
     *(unsigned int *)(param_1 + 0x1b4) = 0;
     temp_v6 = 0;
     *(unsigned int *)(param_1 + 0x1b8) = 0;
-    fillThreeWordsWithByte(param_1 + 0x1bc,1);
+    __ARM_common_memset4_12(param_1 + 0x1bc,1);
     temp_v5 = 0;
     do {
       temp_v0 = temp_v5;
@@ -213,7 +213,7 @@ void FUN_00410628(int param_1)
         puVar8 = puVar8 + 2;
         temp_v5 = temp_v5 + 2;
       }
-      fillThreeWordsWithByte(&temp_v12,0xffffffff);
+      __ARM_common_memset4_12(&temp_v12,0xffffffff);
       temp_v3 = 0;
       temp_v7 = 0;
       temp_v5 = temp_v6;

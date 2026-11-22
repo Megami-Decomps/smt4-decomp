@@ -21,7 +21,7 @@ u32 campCecEditRunState(void)
                 }
             }
         } else if (result == 1) {
-            linkHolderApplyFlag(edit->linkHolder, 0);
+            linkHolderApplyFlag(edit->statusScene, 0);
             edit->unk125 = 1;
         }
     }

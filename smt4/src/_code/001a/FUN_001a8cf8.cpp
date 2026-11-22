@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail spills the zero return value to the stack and hoists 0/5/100.0f into r9/sl/s19 with the loop index in r5 (built: r4/r8); the switch jump table and call sequence are identical */
+/* NON_MATCHING: retail hoists -90.0f into fp (here the phase 3 constant takes it) and cross-jumps the retire arms into the model arm's phase store; it also loads the entry heading before moving the angle result, predicates the triggered store before the facing branch and copies the target into s16..s18 in x/y/z order. */
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "map/mapDepart.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
@@ -76,6 +76,7 @@ void mapCollisionDisableByTag(s32 id);
  * faces it, plays its sound and effect, then retires its model. */
 u32 FUN_001a8cf8(void)
 {
+    u32 result = 0;
     for (s32 i = 0; i < MAP_RANGE_ENTRY_COUNT; i++) {
         MapRangeEntry *entry = &g_mapRangeWork->entries[i];
         if (!entry->active)
@@ -91,12 +92,13 @@ u32 FUN_001a8cf8(void)
                 f32 delta = mathGetShortestAngleDelta(entry->heading, heading);
                 if (delta > -90.0f && delta < 90.0f)
                     facing = 1;
-                if (mathDistanceBetweenPoints(g_gameState.event.encounterSourcePosition.x, g_gameState.event.encounterSourcePosition.y, g_gameState.event.encounterSourcePosition.z, entry->position.x, entry->position.y, entry->position.z) < 300.0f
+                MapVector target = entry->position;
+                if (mathDistanceBetweenPoints(g_gameState.event.encounterSourcePosition.x, g_gameState.event.encounterSourcePosition.y, g_gameState.event.encounterSourcePosition.z, target.x, target.y, target.z) < 300.0f
                     && mathAbsHeadingErrorToPoint(g_gameState.event.encounterSourcePosition.x,
                                     g_gameState.event.encounterSourcePosition.y,
                                     g_gameState.event.encounterSourcePosition.z,
-                                    g_gameState.event.encounterSourceHeading, entry->position.x,
-                                    entry->position.y, entry->position.z) < 70.0f
+                                    g_gameState.event.encounterSourceHeading, target.x,
+                                    target.y, target.z) < 70.0f
                     && facing) {
                     entry->triggered = 1;
                     SoundActorQueuePosition position = {entry->position.x, entry->position.y + 100.0f,
@@ -117,20 +119,18 @@ u32 FUN_001a8cf8(void)
             if (entry->timer == 0x28)
                 mapCollisionDisableByTag((s16)entry->soundId);
             if (entry->timer >= 0x3C) {
-                u32 next;
                 if (entry->hasModel) {
                     if (entry->model == NULL)
                         break;
                     asdMdlManagerMarkDestroy(entry->model);
                     entry->modelVisible = 0;
-                    next = MAP_RANGE_FINISHING;
+                    entry->phase = MAP_RANGE_FINISHING;
                 } else {
                     MapRangeObject *object = g_mapRangeWork->objects[entry->objectIndex].object;
                     object->flags |= 2;
                     object->data->inner->visible = 0;
-                    next = 3;
+                    entry->phase = 3;
                 }
-                entry->phase = next;
             }
             break;
         case MAP_RANGE_FINISHING:
@@ -146,7 +146,7 @@ u32 FUN_001a8cf8(void)
             break;
         }
     }
-    return 0;
+    return result;
 }
 
 } /* extern "C" */

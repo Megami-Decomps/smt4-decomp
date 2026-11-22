@@ -1,4 +1,4 @@
-/* NON_MATCHING: copies a captured frame surface into the half-size work surface and draws it scaled; the capture/copy arms are now duplicated per surface and the wide (480) horizontal extent condition restored as in retail (245 vs 248 rows); remaining: global/work pointer load order (retail reads g_frameTex twice and the work pointer through the 0x1490 literal) and register numbering. */
+/* NON_MATCHING: copies a captured frame surface into the half-size work surface and draws it scaled; with the work surface and flags read through the local frame-texture pointer, the filter flags as an if/else and the blend-state sets through renderCtxSetB the code is retail's but for scheduling: retail pools 240.0 before the 0x1490 offset, divides the vertical extent first and loads height before width, and moves the colour argument into r1-r3 just before the call. */
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "util/BitsAndBytes.h"
@@ -39,42 +39,36 @@ void FUN_00150d38(s32 usePrimary)
         tex->sceneSurface->dimensions.height >>= 1;
     }
 
+    AsdTexture *work = tex->sceneSurface;
     f32 extentX = FRAME_COPY_WIDTH;
     f32 extentY = FRAME_COPY_HEIGHT;
-    if (g_frameTex->zan.captureResult == 0 && usePrimary != 0) {
+    if (tex->zan.captureResult == 0 && usePrimary != 0) {
         extentX = FRAME_COPY_WIDE_WIDTH;
     }
-    AsdTexture *work = g_frameTex->sceneSurface;
     f32 scale = FUN_001a9698(2.0f, 1.0f);
     f32 width = (f32)work->dimensions.width;
+    f32 height = (f32)work->dimensions.height;
     if (tex->zan.filtered != 0) {
         work->filterX = 1;
         work->filterY = 1;
-    }
-    f32 height = (f32)work->dimensions.height;
-    if (tex->zan.filtered == 0) {
+    } else {
         work->filterX = 0;
         work->filterY = 0;
     }
     f32 maxU = (extentX / scale) / width;
     f32 maxV = (extentY / scale) / height;
-
     RenderCtxA *context = g_renderCtx;
     s32 state = renderCtxPackPassFlags(1, 0);
     renderStackPushCounted(context->stacks + RENDER_STACK_A, state);
-    context = g_renderCtx;
     switch (tex->zan.blendMode) {
     case 0:
-        state = packNibblesAndByte(6, 7, 0);
-        renderStackSet(context->stacks + RENDER_STACK_B, state);
+        renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
         break;
     case 1:
-        state = packNibblesAndByte(6, 1, 0);
-        renderStackSet(context->stacks + RENDER_STACK_B, state);
+        renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
         break;
     case 2:
-        state = packNibblesAndByte(6, 1, 2);
-        renderStackSet(context->stacks + RENDER_STACK_B, state);
+        renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 2));
         break;
     }
     renderCtxSelectTexture(g_renderCtx, work);
@@ -84,10 +78,8 @@ void FUN_00150d38(s32 usePrimary)
                  tex->zan.x[0], tex->zan.y[0], z, tex->zan.x[1], tex->zan.y[1], z,
                  tex->zan.x[2], tex->zan.y[2], z, tex->zan.x[3], tex->zan.y[3], z,
                  maxU, 0.0f, maxU, maxV, 0.0f, 0.0f, 0.0f, maxV);
-    context = g_renderCtx;
     if (tex->zan.blendMode != 0) {
-        state = packNibblesAndByte(6, 7, 0);
-        renderStackSet(context->stacks + RENDER_STACK_B, state);
+        renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
     }
     renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
 }

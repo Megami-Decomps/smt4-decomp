@@ -8,7 +8,7 @@
 
 extern "C" {
 
-int FUN_00194b14(void);
+int playLogDraw(void);
 
 int FUN_001ae538(...);
 int campSkillListDraw(int, int, int);
@@ -38,7 +38,7 @@ extern int g_camp; /* 0x43da90 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: configDrawOptionPanel. */
-/* Supplied declaration required: FUN_00194b14. */
+/* Supplied declaration required: playLogDraw. */
 /* Supplied declaration required: FUN_001ae538. */
 /* Supplied declaration required: campSkillListDraw. */
 /* Supplied declaration required: campAppListDraw. */
@@ -233,7 +233,7 @@ void FUN_0019715c(int param_1,int param_2)
         if (param_1 != 0x29) {
           return;
         }
-        FUN_00194b14();
+        playLogDraw();
         return;
       }
       if ((param_1 != 0x14 && param_1 != 0x15) && param_1 != 0x16) {

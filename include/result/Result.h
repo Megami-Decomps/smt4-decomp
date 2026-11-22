@@ -61,7 +61,10 @@ struct ResultWork : ResultInputWork {
     /* 0xD040 */ s32 scriptValue;             /* reported to the script by FUN_003235a8 */
     /* 0xD044 */ u8 unkD044[0x4EC];
     /* 0xD530 */ s8 startLevel;               /* the player's level before the level-ups */
-    /* 0xD531 */ u8 unkD531[0x110];
+    /* 0xD531 */ u8 unkD531[0x1B];
+    /* 0xD54C */ s32 startPoints;             /* the points the counter starts from */
+    /* 0xD550 */ u32 shownPoints;             /* the counted-up points shown, 12 fractional bits */
+    /* 0xD554 */ u8 unkD554[0xED];
     /* 0xD641 */ u8 rewardFlagA;              /* copied from the battle reward (+0x3C) */
     /* 0xD642 */ u8 rewardFlagB;              /* copied from the battle reward (+0x3D) */
     /* 0xD643 */ u8 unkD643;
@@ -84,6 +87,8 @@ typedef char ResultWorkLevelUpOffsetsCheck[
     offsetof(ResultEntry, overrideId) == 0x4A && offsetof(ResultWork, remainingPoints) == 0xCFCC &&
     offsetof(ResultWork, statCursor) == 0xCFD4 && offsetof(ResultWork, valueIndex) == 0xD038 &&
     offsetof(ResultWork, startLevel) == 0xD530 && offsetof(ResultWork, rewardFlagA) == 0xD641 ? 1 : -1];
+typedef char ResultWorkPointsOffsetsCheck[
+    offsetof(ResultWork, startPoints) == 0xD54C && offsetof(ResultWork, shownPoints) == 0xD550 ? 1 : -1];
 
 extern "C" {
 extern ResultWork *g_result;

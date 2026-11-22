@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail homes r0-r3 at entry (push {r0-r3,...}) and reloads the list pointer from its home slot before every call, and sign-extends the three region ids at the call; ours keeps the pointer in a saved register and passes the ids unextended */
+/* NON_MATCHING: 30 lines: the previous and next modes swap registers (retail: previous in sl, next in r9), and armcc keeps the previous-step branch's copy of the shared eventQueueAddUnique tail where retail keeps the next-step (horizontal) copy. */
 #include "common.h"
 #include "ui/IfTouch.h"
 #include "code/Code001c_Smt4.h"
@@ -14,7 +14,7 @@ struct ScrollList;
 
 extern "C" {
 
-s32 ifTouchGetSelectionModeForRegion(s16 id);
+u8 ifTouchGetSelectionModeForRegion(s32 id);
 s32 resourceRunOperationIfUnblocked(ScrollList *list);
 s32 resourceRunEmbeddedOperationIfUnblocked(ScrollList *list);
 s32 gridNavigationGetItemCount(ScrollList *list);
@@ -28,69 +28,66 @@ void eventQueueAddUnique(u32 event);
 /* Handles a touch on a scrolling list: the previous/next controls move one step, a touch on the
  * bar jumps to the matching position (horizontal lists use x, vertical ones y). Returns whether
  * the touch was used. */
-u32 FUN_0026ab64(ScrollList *list, ScrollPoint touch, ScrollPoint barSize, s16 barId, s16 previousId, s16 nextId,
+u32 FUN_0026ab64(ScrollList *list, ScrollPoint touch, ScrollPoint barSize, s32 barId, s32 previousId, s32 nextId,
                  s32 horizontal, s32 playSound)
 {
-    s32 previousMode = ifTouchGetSelectionModeForRegion(previousId);
-    s32 nextMode = ifTouchGetSelectionModeForRegion(nextId);
-    s32 barMode = ifTouchGetSelectionModeForRegion(barId);
+    u32 used = 0;
+    u8 previousMode = ifTouchGetSelectionModeForRegion((s16)previousId);
+    u8 nextMode = ifTouchGetSelectionModeForRegion((s16)nextId);
+    u8 barMode = ifTouchGetSelectionModeForRegion((s16)barId);
 
     if (previousMode == 6 || previousMode == 2) {
-        s32 position = resourceRunOperationIfUnblocked(list) + listCursorGetRowIfUnblocked(list);
+        s32 index = resourceRunOperationIfUnblocked(list) + listCursorGetRowIfUnblocked(list) - 1;
         if (horizontal != 0) {
-            position = resourceRunEmbeddedOperationIfUnblocked(list) + objectPartRunUnlessLocked(list);
+            index = resourceRunEmbeddedOperationIfUnblocked(list) + objectPartRunUnlessLocked(list) - 1;
         }
-        if (position - 1 < 0) {
-            return 1;
+        if (index >= 0) {
+            if (horizontal != 0) {
+                scrollOwnerSelectIndex(list, index);
+            } else {
+                scrollListSetSelectionMarkChanged(list, index);
+            }
+            if (playSound != 0) {
+                eventQueueAddUnique(0x100016c);
+            }
         }
-        if (horizontal != 0) {
-            scrollOwnerSelectIndex(list, position - 1);
-        } else {
-            scrollListSetSelectionMarkChanged(list, position - 1);
-        }
+        used = 1;
     } else if (nextMode == 6 || nextMode == 2) {
-        s32 position = resourceRunOperationIfUnblocked(list) + listCursorGetRowIfUnblocked(list) + 1;
+        s32 index = resourceRunOperationIfUnblocked(list) + listCursorGetRowIfUnblocked(list) + 1;
         if (horizontal != 0) {
-            position = resourceRunEmbeddedOperationIfUnblocked(list) + objectPartRunUnlessLocked(list) + 1;
-            if (uiGridNavigationEntryCount(list) <= position) {
-                return 1;
+            index = resourceRunEmbeddedOperationIfUnblocked(list) + objectPartRunUnlessLocked(list) + 1;
+            if (index < uiGridNavigationEntryCount(list)) {
+                scrollOwnerSelectIndex(list, index);
+                if (playSound != 0) {
+                    eventQueueAddUnique(0x100016c);
+                }
             }
-            scrollOwnerSelectIndex(list, position);
-        } else {
-            if (gridNavigationGetItemCount(list) <= position) {
-                return 1;
+        } else if (index < gridNavigationGetItemCount(list)) {
+            scrollListSetSelectionMarkChanged(list, index);
+            if (playSound != 0) {
+                eventQueueAddUnique(0x100016c);
             }
-            scrollListSetSelectionMarkChanged(list, position);
         }
-    } else {
-        if (barMode == 0) {
-            return 0;
-        }
+        used = 1;
+    } else if (barMode != 0) {
         s32 total = gridNavigationGetItemCount(list);
         s16 y = FUN_001c36a0() - touch.y;
         if (horizontal != 0) {
             total = uiGridNavigationEntryCount(list);
             s16 x = FUN_001c3688() - touch.x;
-            if (x < 0 || barSize.x <= x) {
-                return 1;
+            if (x >= 0 && x < barSize.x) {
+                scrollOwnerSelectIndex(list, (s16)(x * total / barSize.x));
             }
-            scrollOwnerSelectIndex(list, static_cast<s16>(x * total / barSize.x));
-            return 1;
+        } else if (y >= 0 && y < barSize.y) {
+            s16 target = y * total / barSize.y;
+            if (listCursorGetRowIfUnblocked(list) + resourceRunOperationIfUnblocked(list) != target && playSound != 0) {
+                eventQueueAddUnique(0x100016c);
+            }
+            scrollListSetSelectionMarkChanged(list, target);
         }
-        if (y < 0 || barSize.y <= y) {
-            return 1;
-        }
-        s16 target = y * total / barSize.y;
-        if (listCursorGetRowIfUnblocked(list) + resourceRunOperationIfUnblocked(list) != target && playSound != 0) {
-            eventQueueAddUnique(0x100016c);
-        }
-        scrollListSetSelectionMarkChanged(list, target);
-        return 1;
+        used = 1;
     }
-    if (playSound != 0) {
-        eventQueueAddUnique(0x100016c);
-    }
-    return 1;
+    return used;
 }
 
 }

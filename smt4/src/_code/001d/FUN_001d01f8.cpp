@@ -1,4 +1,5 @@
-/* NON_MATCHING: control flow matches; retail converts the cost once (vcvt into s0, copied to the score in s16) where this converts it twice (a float local gives the single vcvt but keeps the score in s0), and compares the two categories in the other register order (either source order gives cmp r0, r1). */
+/* NON_MATCHING: 22 lines with idMapLookup's real prototype, u8 (u16) from gamedata/SkillFlags.h (8 with the
+ * old local s32 (u32) one); control flow matches; retail converts the cost once (vcvt into s0, copied to the score in s16) where this converts it twice (a float local gives the single vcvt but keeps the score in s0), and compares the two categories in the other register order (either source order gives cmp r0, r1). */
 #include "common.h"
 #include "gamedata/SkillFlags.h"
 #include "gamedata/SkillDataLookup.h"
@@ -6,7 +7,6 @@
 #include "gamedata/SkillPicker.h"
 
 extern "C" {
-s32 idMapLookup(u32 id);
 
 /* Picks the best remaining candidate skill (cheapest bonus first, preferring the unit's element and the passives
    that go with it, penalising what is already chosen), moves it - and the first passive matching it - into

@@ -17,7 +17,7 @@ struct ScriptTransition {
 extern ScriptTransition *DAT_0058812c;
 extern u8 DAT_00533204[];
 void FUN_003e36e4(ScriptTransition *work);
-void FUN_003e32b0(ScriptTransition *work);
+void npcShopSelectUpdate(ScriptTransition *work);
 void FUN_003e37f8(ScriptTransition *work);
 void FUN_003e3bcc(ScriptTransition *work);
 s32 tableGroupFindEntryIndex(u32 id, void *group);
@@ -32,7 +32,7 @@ s32 scrTransitionUpdate(void)
     }
     switch (work->state) {
     case 1: FUN_003e36e4(work); break;
-    case 3: FUN_003e32b0(work); break;
+    case 3: npcShopSelectUpdate(work); break;
     case 4: FUN_003e37f8(work); break;
     case 5: FUN_003e3bcc(work); break;
     case 6:

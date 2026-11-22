@@ -10,24 +10,6 @@ u32 gameCountersGetWord(u8 counter);
 u32 gameDataGetTableValue();
 }
 
-/* Play log row `index`, or NULL past the end: dataTableGetEntry37's body, which retail inlines here. */
-static __inline PlayLogRecord *playLogRowAt(u32 index)
-{
-    void *table;
-    PlayLogRecord *entries;
-    u32 count;
-
-    table = dataTableGet(0x37, 0);
-    entries = static_cast<PlayLogRecord *>(dataTableGetEntries(table));
-    count = dataTableGetCount(table);
-    if (index >= count) {
-        entries = NULL;
-    } else {
-        entries = entries + index;
-    }
-    return entries;
-}
-
 /* Rebuild nonzero-counter lists, applying the two special counter interpretations. */
 extern "C" void playLogBuildPages(PlayLogWorkA *work)
 {

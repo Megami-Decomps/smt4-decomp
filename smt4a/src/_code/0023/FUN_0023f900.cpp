@@ -13,7 +13,7 @@ struct HelpUnitRecord {
 extern "C" {
 
 void buttonHelpSetText(const char *text, u32 color);
-s32 FUN_002cad18(void);
+s32 partyPanelIsTransitionDone(void);
 u32 partyPanelGetSelectedDemonId(void);
 u32 btlMainGetUnk14(void);
 void FUN_003aeb18(s32 value, s32 other);
@@ -38,7 +38,7 @@ static __inline char *partyHelpText(u32 index)
 void FUN_0023f900(void)
 {
     PartyPanelStateA *panel = g_partyPanel;
-    s32 hasSelection = FUN_002cad18();
+    s32 hasSelection = partyPanelIsTransitionDone();
     s32 selected = (s32)partyPanelGetSelectedDemonId();
 
     if (panel->layoutMode != 1) {

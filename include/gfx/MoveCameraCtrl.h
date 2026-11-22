@@ -84,8 +84,8 @@ extern "C" void spatialCameraUpdateLookAt(MoveCameraCtrlWork *work);
 static __inline void moveCameraSelectKey(MoveCameraCtrlWork *work, s32 index, s32 mode)
 {
     if (index >= 0 && work->frameCount > index) {
-        work->frame = index;
         work->selectedKey = mode;
+        work->frame = index;
         const MoveCameraTrackKey *key = work->resource->track->keys[index];
         /* The target pointer is read before the position copy: the copy's word stores may alias it, so reading
          * it afterwards would be another program (armcc reloads it there; retail reads it first, here and in

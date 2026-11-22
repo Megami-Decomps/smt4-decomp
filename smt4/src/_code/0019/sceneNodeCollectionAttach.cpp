@@ -1,4 +1,4 @@
-/* NON_MATCHING: new buffer stays in fp instead of retail stack pair; growth/result scheduling and 40-vs-48-byte frame differ (105/101). */
+/* NON_MATCHING: push and attach now follow retail's flow (growth result kept, early false return); remaining: retail keeps the parent in r6 and the node in r5 (swapped here), and its element copy walks the source in r0 and the new buffer in r1 (swapped here). */
 #include "shard/W6_W6Match7_SceneAttachment.h"
 #include "classes/AsdAllocatorObject.h"
 #include <new>
@@ -46,15 +46,15 @@ struct SceneNodeArray {
     bool pushBack(SceneNode *node)
     {
         s32 currentCapacity = capacity();
-        if (end - begin >= currentCapacity) {
-            s32 requested = currentCapacity != 0 ? currentCapacity * 2 : 1;
-            if (!reserve(requested)) {
-                return false;
-            }
+        bool added = true;
+        if (currentCapacity <= end - begin) {
+            added = reserve(currentCapacity != 0 ? currentCapacity * 2 : 1);
         }
-        new (end) value_type(node);
-        ++end;
-        return true;
+        if (added) {
+            new (end) value_type(node);
+            ++end;
+        }
+        return added;
     }
 };
 
@@ -80,11 +80,11 @@ inline bool SceneNodeChildren::attach(SceneNode *node)
     if (node->parent != NULL) {
         return false;
     }
-    bool attached = nodes.pushBack(node);
-    if (attached) {
-        node->parent = owner;
+    if (!nodes.pushBack(node)) {
+        return false;
     }
-    return attached;
+    node->parent = owner;
+    return true;
 }
 
 inline bool SceneNode::attachChild(SceneNode *node)

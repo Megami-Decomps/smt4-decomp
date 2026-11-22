@@ -1,4 +1,4 @@
-/* NON_MATCHING: steps the touch-to-continue splash (loads its textures, pulses the prompt, fades in, waits for a touch or a timeout, then tears down); float constants now land in the retail registers (s18/s16/s17 = 60/1/0) but retail stores the initial fields in a different order (offsets first, pulse last, timeout in r8), keeps the SetPair1C argument in r1, and the vstmia/vldmia pairs of the build do not appear in retail */
+/* NON_MATCHING: 38 lines (244 vs 244 rows); float constants s18/s16/s17 and control flow match, remaining: init store scheduling of scaleB/timeout vs scaleA/offsetB, s0/s1 swap for drift step, and strge ordering in fade-in. */
 #include "common.h"
 #include "code/Code0013.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
@@ -58,12 +58,12 @@ void titleSetSlotValueState2(s32 a, s32 b);
 u32 touchToContinueSplashStep(SplashWork *splash)
 {
     if (splash->state == SPLASH_STATE_LOAD) {
-        splash->pulse = SPLASH_PULSE_PERIOD;
-        splash->scaleA = 1.0f;
         splash->offsetA = 0.0f;
+        splash->scaleA = 1.0f;
         splash->offsetB = 1.0f;
         splash->scaleB = 1.5f;
         splash->timeout = SPLASH_TIMEOUT_FRAMES;
+        splash->pulse = SPLASH_PULSE_PERIOD;
         clearWordHalfByte(reinterpret_cast<SplashHalfByte *>(splash->flags));
         splash->flags[7] = 0;
         if (textureGetIndexedResource(SPLASH_TEXTURE_TABLE) == 0) {
@@ -99,20 +99,19 @@ u32 touchToContinueSplashStep(SplashWork *splash)
         splash->scaleA = 1.0f;
         splash->offsetA = 0.0f;
     }
-    f32 pulse = splash->pulse;
-    if (pulse <= SPLASH_PULSE_HALF) {
+    if (splash->pulse <= SPLASH_PULSE_HALF) {
         if (splash->offsetB <= 0.0f) {
             splash->offsetB = 0.0f;
             splash->scaleB = 1.0f;
         }
     }
-    if (pulse > SPLASH_PULSE_HALF) {
+    if (splash->pulse > SPLASH_PULSE_HALF) {
         splash->offsetA += SPLASH_FADE_STEP;
         splash->scaleA += SPLASH_DRIFT_STEP;
         splash->offsetB -= SPLASH_FADE_STEP;
         splash->scaleB += SPLASH_DRIFT_STEP;
     }
-    if (pulse < SPLASH_PULSE_HALF) {
+    if (splash->pulse < SPLASH_PULSE_HALF) {
         splash->offsetA -= SPLASH_FADE_STEP;
         splash->scaleA += SPLASH_DRIFT_STEP;
         splash->offsetB += SPLASH_FADE_STEP;
@@ -128,10 +127,10 @@ u32 touchToContinueSplashStep(SplashWork *splash)
             titleSetSlotValueState2(1, 0x1E);
         if (pairedAvailabilityGetState(0) == 2)
             return 0;
-        if (splash->alpha < 1.0f)
-            splash->alpha += SPLASH_FADE_STEP;
-        else
+        if (splash->alpha >= 1.0f)
             splash->timeout = SPLASH_TIMEOUT_FRAMES;
+        else
+            splash->alpha += SPLASH_FADE_STEP;
     }
 
     if (splash->state == SPLASH_STATE_TIMEOUT) {

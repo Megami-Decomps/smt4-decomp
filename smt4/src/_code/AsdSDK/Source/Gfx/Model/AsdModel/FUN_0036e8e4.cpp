@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads 0x2010000 once into a register and lays the memory-type tests out as a decision tree around it (`sub ip, kind, r3; beq; bge` then `cmp ip, #0x10000; cmpne ip, #0x20000`) with the bodies after the tests, keeps NULL in fp and carries the block index in a pre-indexed ldr; this build tests the types as an if chain and allocates registers differently (a switch over the same four types gives another tree). */
+/* NON_MATCHING: written as a switch over the memory type (116 lines against 125 for the if chain); retail's switch tree pivots on 0x2010000 (`sub ip, kind, r3; beq; bge`, then `cmp ip, #0x10000; cmpne ip, #0x20000`) where this build tests 0x1010000 first, shares the deviceMemoryType store between the two copy cases, keeps NULL in fp and the 0x70 header size in sl (stm of header/size), and allocates the block and index registers the other way round. */
 #include "classes/AsdAllocatorObject.h"
 #include "shard/S1NwGfx.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
@@ -60,22 +60,27 @@ void FUN_0036e8e4(VertexDataList **resource, AsdAllocatorObject *allocator)
         size = block->size;
         void *tag = results[i];
         u32 kind = memoryType & 0xffff0000;
-        if (kind == 0x2010000) {
+        switch (kind) {
+        case 0x2010000:
             nn_gxlow_CTR_FlushDataCacheForward((u32)(block->source.get()), size);
-        } else if (kind > 0x2010000) {
-            if (kind == 0x2020000 || kind == 0x2030000) {
-                u32 pool = memoryType & 0x30000;
-                void *memory = g_gfxAllocateCallback(pool, 0x102, tag, size);
-                asdGxQueueMemoryTransfer(block->source.get(), memory, size);
-                block->deviceMemory = memory;
-                block->deviceMemoryType = pool;
-            }
-        } else if (kind == 0x1010000) {
+            break;
+        case 0x2020000:
+        case 0x2030000: {
+            u32 pool = memoryType & 0x30000;
+            void *memory = g_gfxAllocateCallback(pool, 0x102, tag, size);
+            asdGxQueueMemoryTransfer(block->source.get(), memory, size);
+            block->deviceMemory = memory;
+            block->deviceMemoryType = pool;
+            break;
+        }
+        case 0x1010000: {
             void *memory = g_gfxAllocateCallback(0x10000, 0x102, tag, size);
             nnnstdMemCpy(memory, block->source.get(), size);
             nn_gxlow_CTR_FlushDataCacheForward((u32)(memory), size);
             block->deviceMemory = memory;
             block->deviceMemoryType = 0x10000;
+            break;
+        }
         }
     }
 }

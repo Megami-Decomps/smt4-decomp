@@ -51,7 +51,7 @@ int mapStatesReleaseMarks(void);
 int entryTableMarkDestroy(void);
 int mapCollisionRelease(void);
 int FUN_00277d2c(...);
-int FUN_0027b2b4(...);
+int mapCollisionLoad(...);
 int FUN_0027c3d0(void);
 int FUN_0027cc48(...);
 int FUN_0027cc6c(void);
@@ -426,7 +426,7 @@ extern int FUN_00276348(unsigned int);
 /* Supplied declaration required: mapDepartSetTarget. */
 /* Supplied declaration required: FUN_00277b5c. */
 /* Supplied declaration required: FUN_00277d2c. */
-/* Supplied declaration required: FUN_0027b2b4. */
+/* Supplied declaration required: mapCollisionLoad. */
 /* Supplied declaration required: FUN_0027c3d0. */
 /* Supplied declaration required: FUN_0027cc48. */
 /* Supplied declaration required: FUN_0027cc6c. */
@@ -2669,7 +2669,7 @@ LAB_001d6bd0:
         temp_v8 = temp_v8 + 1;
       } while (temp_v8 < 0x10);
     }
-    FUN_0027b2b4(puVar7[0x10],puVar7[0x12]);
+    mapCollisionLoad(puVar7[0x10],puVar7[0x12]);
     FUN_00277d2c(puVar7[0x10],puVar7[0x12]);
     mapSkyTableLoad(puVar7[0x10]);
     mapEntryTriggerForScene(1);
@@ -2745,7 +2745,7 @@ LAB_001d6bd0:
       puVar17 = g_lmapMainState;
       DAT_0049f920 = temp_v6;
       mapCollisionRelease();
-      FUN_0027b2b4(puVar17[0x10],puVar17[0x12]);
+      mapCollisionLoad(puVar17[0x10],puVar17[0x12]);
       temp_v14 = 0x40000000;
       puVar17[0x37] = 0x40000000;
       *(unsigned char *)(puVar17 + 0x38) = 1;
@@ -2972,7 +2972,7 @@ LAB_001d6bd0:
     puVar7[0x3b] = temp_v8;
     lmapUpdateMapBgm();
     mapInitializeStoryMarkerEffects(puVar7[0x10]);
-    FUN_0027b2b4(puVar7[0x10],puVar7[0x12]);
+    mapCollisionLoad(puVar7[0x10],puVar7[0x12]);
     FUN_00277d2c(puVar7[0x10],puVar7[0x12]);
     mapSkyTableLoad(puVar7[0x10]);
     mapEntryTriggerForScene(1);
@@ -3112,7 +3112,7 @@ LAB_001d884c:
     puVar7[3] = puVar7[3] + 1;
     break;
   case 0x59:
-    FUN_0027b2b4(puVar7[0x10],puVar7[0x12]);
+    mapCollisionLoad(puVar7[0x10],puVar7[0x12]);
     lmapUpdateMapBgm();
     lmapEntryPoolDestroyAll((LmapObj *)(puVar7 + 0x3b));
     objSetBaseAndValue(puVar7 + 0x3b,puVar7[0x10] - 100,puVar7[0x12]);
@@ -3546,7 +3546,7 @@ LAB_001d4774:
   }
   DAT_0049fb9c = 0;
   mapInitializeStoryMarkerEffects(puVar7[0x10]);
-  FUN_0027b2b4(puVar7[0x10],puVar7[0x12]);
+  mapCollisionLoad(puVar7[0x10],puVar7[0x12]);
   FUN_00277d2c(puVar7[0x10],puVar7[0x12]);
   mapSkyTableLoad(puVar7[0x10]);
   mapEntryTriggerForScene(1);

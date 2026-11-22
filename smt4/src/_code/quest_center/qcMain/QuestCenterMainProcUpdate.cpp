@@ -1,21 +1,12 @@
-/* NON_MATCHING: block layout of the area-to-kind chain and constant/register order differ; the rest of the update follows retail */
+/* NON_MATCHING: 16 rows, one allocation choice: retail keeps the hoisted constant 1 in r9 and 0 in sl, this build
+ * the other way round (every store of either differs). One more store of 1 anywhere in the function gives retail's
+ * registers, so retail's source holds a use of 1 this one does not. */
 #include "common.h"
 #include "quest_center/qcMain.h"
 #include "classes/SelectionState.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "game/GameState.h"
-
-/* The quest center's globals as the update reads them (qcMain.h's QcGlobals is the 8-byte head). */
-struct QcMainState {
-    /* 0x00 */ u8 mode;
-    /* 0x01 */ u8 restoreMenus;           /* set when the menus have to be reset on exit */
-    /* 0x02 */ u8 unk02[2];
-    /* 0x04 */ QcWork *work;
-    /* 0x08 */ s32 area;                  /* the area the quest center was opened from */
-    /* 0x0c */ u32 argument;
-    /* 0x10 */ s32 resident;              /* nonzero: the screen's shared UI stays up */
-};
 
 /* A quest center start sequence: the table row selects it by kind, area and quest conditions. */
 struct QcStartSequence {
@@ -35,13 +26,13 @@ struct QuestEntry {
     /* 0x667 */ u8 unk667[0x95d];
 
     QuestEntry() : state(0) {}
-    static void *operator new(u32 size);
+    static void *operator new(u32 size) throw();
 };
 
 
 extern "C" {
-extern QcMainState g_qcMain;
-extern QcStartSequence DAT_0044dbb0[3];
+extern QcGlobals g_qcMain;
+extern QcStartSequence g_qcStartSequences[3];
 void *asdOperatorNew(u32 size);
 s32 gameFlagIsSet(u32 flag);
 s32 gameStateIsFlagSetAndLarge(void);
@@ -54,7 +45,7 @@ s32 bgmGetStateById(u32 id);
 s32 objectFlagBitIsSet(u32 object, u32 bit);
 s32 questIsCompleted(u32 quest);
 void titleSetSlotValueState2(s32 first, s32 second);
-void menuSceneTeardown(void);
+void menuSceneTeardown(void *scene);
 void libc_strcpy(char *destination, const char *source);
 void asdSequenceRequest(u32 kind, const void *argument, u32 size);
 void bgmStopWithoutEntry(void);
@@ -68,9 +59,20 @@ void buttonHelpRelease(void);
 void buttonHelpTexturesUnref(void);
 void uiFadeRelease(void);
 
-void *QuestEntry::operator new(u32 size)
+void *QuestEntry::operator new(u32 size) throw()
 {
     return asdOperatorNew(size);
+}
+
+/* Marks the screen finished and tears its entry list down (effectQcFinish's body). */
+static __inline void qcWorkFinish(QcWork *work)
+{
+    work->done = 1;
+    if (work->entry != NULL) {
+        menuSceneTeardown(work->entry);
+        asdMemFreeNonNull(work->entry);
+        work->entry = NULL;
+    }
 }
 
 /* Per-frame update of the quest center screen: opens the entry list (playing a start sequence if
@@ -81,22 +83,22 @@ s32 QuestCenterMainProcUpdate(u32 handle)
     switch (work->mode) {
     case 0: {
         s16 kind;
-        if (g_qcMain.area == 11) {
-            kind = 3;
-        } else if (g_qcMain.area > 11) {
-            if (g_qcMain.area == 12 || g_qcMain.area == 13) {
-                kind = 3;
-            } else {
-                kind = 1;
-            }
-        } else if (g_qcMain.area == 1) {
+        switch (g_qcMain.area) {
+        case 1:
             kind = 0;
-        } else if (g_qcMain.area == 9) {
+            break;
+        case 9:
             kind = 2;
-        } else if (g_qcMain.area == 10) {
+            break;
+        case 10:
+        case 11:
+        case 12:
+        case 13:
             kind = 3;
-        } else {
+            break;
+        default:
             kind = 1;
+            break;
         }
         if (g_qcMain.resident == 0) {
             if (kind == 1 && gameFlagIsSet(0x235)) {
@@ -104,9 +106,10 @@ s32 QuestCenterMainProcUpdate(u32 handle)
                     questCompletionSetTierFlags(0);
                 }
             }
+            const QcStartSequence *sequence = NULL;
             for (u32 i = 0; i < 3; i++) {
-                const QcStartSequence *row = &DAT_0044dbb0[i];
-                if (row->kind != kind || (row->area != -1 && g_qcMain.area != row->area)) {
+                const QcStartSequence *row = &g_qcStartSequences[i];
+                if (row->kind != kind || (row->area != -1 && row->area != g_qcMain.area)) {
                     continue;
                 }
                 if (row->requiredFlag != 0) {
@@ -119,32 +122,30 @@ s32 QuestCenterMainProcUpdate(u32 handle)
                     }
                 }
                 if (row->skipFlag == 0 || !gameFlagIsSet(row->skipFlag)) {
-                    if (row != NULL) {
-                        struct {
-                            u32 argument;
-                            s32 unk04;
-                            char name[28];
-                        } request;
-                        request.argument = row->sequenceArgument;
-                        request.unk04 = -1;
-                        libc_strcpy(request.name, row->name);
-                        asdSequenceRequest(4, &request, 0x20);
-                        return 0;
-                    }
+                    sequence = row;
                     break;
                 }
             }
-            u32 bgm;
-            s32 bgmState;
-            if (g_qcMain.area != 1) {
-                bgm = 0x100005a;
-                bgmState = bgmGetStateById(bgm);
-            } else {
-                bgm = 0x100005d;
-                bgmState = bgmGetStateById(bgm);
+            if (sequence != NULL) {
+                struct {
+                    u32 argument;
+                    s32 unk04;
+                    char name[28];
+                } request;
+                request.argument = sequence->sequenceArgument;
+                request.unk04 = -1;
+                libc_strcpy(request.name, sequence->name);
+                asdSequenceRequest(4, &request, 0x20);
+                break;
             }
-            if (bgmState != 1) {
-                bgmResumeOrRequestTrack(bgm);
+            if (g_qcMain.area == 1) {
+                if (bgmGetStateById(0x100005d) != 1) {
+                    bgmResumeOrRequestTrack(0x100005d);
+                }
+            } else {
+                if (bgmGetStateById(0x100005a) != 1) {
+                    bgmResumeOrRequestTrack(0x100005a);
+                }
             }
             commonBgAcquire();
             buttonHelpAcquireResources();
@@ -165,12 +166,7 @@ s32 QuestCenterMainProcUpdate(u32 handle)
         break;
     case 2:
         work->mode = 4;
-        work->done = 1;
-        if (work->entry != NULL) {
-            menuSceneTeardown();
-            asdMemFreeNonNull(work->entry);
-            work->entry = NULL;
-        }
+        qcWorkFinish(work);
         break;
     case 3:
         if ((work->entry == NULL || entryRequestSequence() == 0) && FUN_00287304() != 0 &&
@@ -183,12 +179,7 @@ s32 QuestCenterMainProcUpdate(u32 handle)
             }
         }
         work->mode = 4;
-        work->done = 1;
-        if (work->entry != NULL) {
-            menuSceneTeardown();
-            asdMemFreeNonNull(work->entry);
-            work->entry = NULL;
-        }
+        qcWorkFinish(work);
         if (g_qcMain.resident == 0) {
             uiFadeRelease();
             buttonHelpRelease();

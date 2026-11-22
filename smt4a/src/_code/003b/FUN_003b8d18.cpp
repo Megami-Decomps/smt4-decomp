@@ -1,5 +1,3 @@
-/* NON_MATCHING: the three choices are now unrolled as in retail; only the id/constant register assignment differs (retail ldrh r1 / constant r0). */
-/* Selects a random nonempty demon id from a record's choices and the battle's extra table. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "gamedata/DataTable.h"
@@ -12,23 +10,21 @@
 
 extern "C" {
 
+/* Selects a random nonempty demon id from a record's choices and the battle's extra table. */
 u32 FUN_003b8d18(void)
 {
     NkmEnemyRecordA *record = nkmEnemyFindById((u16)scrGetArg(0));
     u32 candidates[128];
     sysMemClear(candidates, sizeof(candidates));
     u8 count = 0;
-    u16 id = record->choices[0].value;
-    if (id != 0x7B6 && id != 0) {
-        candidates[count++] = id;
+    if (record->choices[0].value != 0x7B6 && record->choices[0].value != 0) {
+        candidates[count++] = record->choices[0].value;
     }
-    id = record->choices[1].value;
-    if (id != 0x7B6 && id != 0) {
-        candidates[count++] = id;
+    if (record->choices[1].value != 0x7B6 && record->choices[1].value != 0) {
+        candidates[count++] = record->choices[1].value;
     }
-    id = record->choices[2].value;
-    if (id != 0x7B6 && id != 0) {
-        candidates[count++] = id;
+    if (record->choices[2].value != 0x7B6 && record->choices[2].value != 0) {
+        candidates[count++] = record->choices[2].value;
     }
     void *table = btlGetTable(btlGetMainState(), 0x10);
     u16 *entries = (u16 *)dataTableGetEntries(table);

@@ -12,7 +12,7 @@ u32 campCecEditDrawSelectedImage(void)
     CampCecEdit *obj = g_campCecEdit;
 
     if (partyPanelAcceptsAction() == 0) {
-        messageDrawSelectedImagePair(obj->requestHandle, obj->selectedImage);
+        messageDrawSelectedImagePair(obj->requestHandle, &obj->upperSlides[1]);
     }
     return 0;
 }

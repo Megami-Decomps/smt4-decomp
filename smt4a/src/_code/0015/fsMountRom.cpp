@@ -23,7 +23,7 @@ struct DeviceOpenRequest {
 extern "C" {
 s32 FUN_0016cf30(u32 *handle, u32 first, u32 second, void *buffer, u32 size, u32 mode,
                  const DeviceOpenRequest *request);
-u32 FUN_001aeefc(const char *name, u32 handle, u8 downloadable, u8 flags);
+u32 fsMountRegister(const char *name, u32 handle, u8 downloadable, u8 flags);
 
 // Open the device behind `device` and register it, releasing it again when registration fails.
 u32 fsMountRom(const char *device, u32 first, u32 second, void *buffer, u32 size, u32 mode)
@@ -37,7 +37,7 @@ u32 fsMountRom(const char *device, u32 first, u32 second, void *buffer, u32 size
         result = 0;
     }
     checkPlatformResult(result, __current_pc());
-    result = static_cast<s32>(FUN_001aeefc(device, reinterpret_cast<u32>(opened), 0, 0));
+    result = static_cast<s32>(fsMountRegister(device, reinterpret_cast<u32>(opened), 0, 0));
     if ((s32)(result & 0x80000000) < 0) {
         opened->vtable->release(opened);
         checkPlatformResult(result, __current_pc());

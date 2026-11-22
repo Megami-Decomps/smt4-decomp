@@ -3,7 +3,7 @@
 extern "C" {
 s32 FUN_0029e02c(void);
 s32 buttonHelpGetStatus(void);
-s32 FUN_00282e70(void);
+s32 partyPanelIsTransitionDone(void);
 s32 FUN_00282ccc(void);
 void FUN_0026c214(void);
 void FUN_001b0558(void);
@@ -18,7 +18,7 @@ void partyPanelPollHelpRefresh(void)
     bool refresh = false;
     FUN_0029acb0();
     s32 help = buttonHelpGetStatus();
-    s32 mode = FUN_00282e70();
+    s32 mode = partyPanelIsTransitionDone();
     s32 selection = FUN_00282ccc();
     if ((help == 0x1C || help == 0x1E || help == 0xB8 || help == 0xBF || help == 0xCC) &&
         (!mode || !panel->alternate))

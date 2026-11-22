@@ -23,7 +23,7 @@ const char *dataFindKindRecordWithAocOverrides(u32 id, s32 alternate);
 /* Draws formatted text right-aligned in a field of `digits` characters. */
 void statRowDrawValueImpl(s32 font, s32 x, s32 y, s32 align, s32 digits, s32 layer, const char *format, ...);
 void FUN_002027fc(void);
-void FUN_00214dc4(void);
+void playLogDraw(void);
 /* The other pages of the camp's detail area. */
 void FUN_0023c8c0(s32 item, s32 x, s32 y, s32 selected, f32 alpha);
 void campSkillListDraw(s32 x, s32 y, s32 selected, f32 alpha);
@@ -172,7 +172,7 @@ void campDrawDetailArea(s32 item, s32 selected)
         FUN_002027fc();
         break;
     case 43:
-        FUN_00214dc4();
+        playLogDraw();
         break;
     }
     efctSetSpeed(1.0f);

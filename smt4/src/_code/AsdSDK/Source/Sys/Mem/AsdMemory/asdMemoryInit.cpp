@@ -1,14 +1,12 @@
-/* NON_MATCHING: heap/lock, locked allocation and VRAM bank helpers, debug traces and the VFP spill now match; the three allocator objects are built by retail through an (empty) constructor call guarded by a null check, and zero/one/four constants sit in different saved registers. */
+/* NON_MATCHING: the allocator objects are now built by `new` through their class operator new (trace at line 172, size kept in r4, null-checked vtable store) as retail; the remaining differences are saved-register choices in the locked extra-heap allocation (heap/lock/size/alignment and the two zero stack arguments) and the zero/one constants (r5/r6 swapped, useAllocatorA cleared from a fresh zero). */
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdDebug.h"
+
 extern const char g_asdMemorySourcePath[]; /* __FILE__ of AsdMemory.cpp */
 extern "C" {
 extern AsdMemory g_asdMemory;
 extern AsdVramHeap g_asdVramHeapA; /* VRAM bank A */
 extern AsdVramHeap g_asdVramHeapB; /* VRAM bank B */
-extern u8 DAT_00420938;          /* allocator vtables */
-extern u8 DAT_004207f8;
-extern u8 DAT_00420870;
 
 void nn_os_CriticalSection_Enter(void *lock);
 void nn_os_CriticalSection_Leave(void *lock);
@@ -24,6 +22,34 @@ void FUN_0011bfec(void *expHeap, u32 block, u32 size);
 void memoryDebugSetRegions(u32 mainBase, u32 mainSize, u32 extraBase, u32 extraSize, u32 vramABase, u32 vramASize, u32 vramBBase, u32 vramBSize);
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void asdVramBlockListInsert(void *list, AsdVramBlock *block);
+
+/* Objects AsdMemory builds come from the main heap (AsdMemory.cpp line 172). */
+class AsdMemObject {
+public:
+    static void *operator new(unsigned int size) throw()
+    {
+        asdDebugTrace(g_asdMemorySourcePath, 172);
+        return asdMemoryAlloc(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, size, 1);
+    }
+};
+
+/* The three allocator classes AsdMemory builds (vtables at 0x420930, 0x4207f0, 0x420868). */
+class Obj420930 : public AsdMemObject {
+public:
+    virtual ~Obj420930();
+    virtual void *allocate(u32 size, u32 alignment);
+    virtual void release(void *block);
+};
+class Obj4207f0 : public AsdMemObject {
+public:
+    virtual ~Obj4207f0();
+    virtual void *allocate(u32 size, u32 alignment);
+    virtual void release(void *block);
+};
+class Obj420868 : public AsdMemObject {
+public:
+    virtual ~Obj420868();
+};
 
 /* Creates an ExpHeap owner; the heap object embeds its critical section at +0x58. */
 static __inline void createHeapWithLock(u8 *heap, u32 base, u32 size)
@@ -62,7 +88,7 @@ static __inline u32 allocLocked(u8 *heap, u8 *lock, u32 size, int alignment, u8 
 }
 
 /* Shrinks a heap block to `size` bytes while holding the heap's lock. */
-static __inline void trimBlockLocked(u8 *heap, u8 *lock, u32 block, u32 size)
+static void trimBlockLocked(u8 *heap, u8 *lock, u32 block, u32 size)
 {
     nn_os_CriticalSection_Enter(lock);
     FUN_0011bfec(heap, block, size);
@@ -104,27 +130,12 @@ void asdMemoryInit(void)
     vramHeapInitFree(&g_asdVramHeapA + 1, g_asdMemory.system->vramB.base, g_asdMemory.system->vramB.size);
 
     /* The allocator objects the engine's operator new/delete use. */
-    asdDebugTrace(g_asdMemorySourcePath, 172);
-    allocator = (AsdAllocator *)asdMemoryAlloc(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(AsdAllocator), 1);
-    if (allocator != NULL) {
-        allocator->vtable = &DAT_00420938;
-    }
-    g_asdMemory.allocatorA = allocator;
+    g_asdMemory.allocatorA = (AsdAllocator *)new Obj420930;
 
-    asdDebugTrace(g_asdMemorySourcePath, 172);
-    allocator = (AsdAllocator *)asdMemoryAlloc(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(AsdAllocator), 1);
-    if (allocator != NULL) {
-        allocator->vtable = &DAT_004207f8;
-    }
-    g_asdMemory.allocatorB = allocator;
+    g_asdMemory.allocatorB = (AsdAllocator *)new Obj4207f0;
     g_asdMemory.useAllocatorA = 0;
 
-    asdDebugTrace(g_asdMemorySourcePath, 172);
-    allocator = (AsdAllocator *)asdMemoryAlloc(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(AsdAllocator), 1);
-    if (allocator != NULL) {
-        allocator->vtable = &DAT_00420870;
-    }
-    g_asdMemory.allocatorC = allocator;
+    g_asdMemory.allocatorC = (AsdAllocator *)new Obj420868;
 }
 
 } /* extern "C" */

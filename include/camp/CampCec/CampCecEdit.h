@@ -8,43 +8,36 @@
 #include "cec/CecMessage.h"
 #include "camp/CampCec/CampCecEditList.h"
 
+/* A sliding element of the screen: its position and how far its slide has run (0x14 bytes). */
+typedef struct CampCecEditSlide {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ s32 x;
+    /* 0x08 */ s32 y;
+    /* 0x0C */ u32 frame;                  /* frames into the slide */
+    /* 0x10 */ s8 done;                    /* the slide finished */
+    /* 0x11 */ u8 unk11[0x3];
+} CampCecEditSlide;
+
+typedef char CampCecEditSlideCheck[sizeof(CampCecEditSlide) == 0x14 && offsetof(CampCecEditSlide, frame) == 0xC ? 1 : -1];
+
 typedef struct CampCecEdit {
     /* 0x00 */ u32 task;                   /* the screen's task handle */
-    /* 0x04 */ u32 linkHolder;
+    /* 0x04 */ u32 statusScene;            /* the camp's status scene, which shows the card's owner */
     union {
         /* 0x08 */ u32 requestHandle;
         /* 0x08 */ CecProcessSlot *card;   /* the StreetPass card being edited */
     };
-    /* 0x0C */ u32 handleC;                /* released on close */
-    /* 0x10 */ u32 handleD;                /* released on close */
-    /* 0x14 */ u8 unk14[0xC];
-    /* 0x20 */ u32 unk20;
-    /* 0x24 */ u8 unk24;
-    /* 0x25 */ u8 unk25[0x3];
-    /* 0x28 */ u8 selectedImage[1];
-    /* 0x29 */ u8 unk29[0xB];
-    /* 0x34 */ u32 unk34;
-    /* 0x38 */ u8 unk38;
-    /* 0x39 */ u8 unk39[0xF];
-    /* 0x48 */ u32 unk48;
-    /* 0x4C */ u8 unk4C;
-    /* 0x4D */ u8 unk4D[0xF];
-    /* 0x5C */ u32 unk5C;
-    /* 0x60 */ u8 unk60;
-    /* 0x61 */ u8 unk61[0xF];
-    /* 0x70 */ u32 unk70;
-    /* 0x74 */ u8 unk74;
-    /* 0x75 */ u8 unk75[0x1B];
-    /* 0x90 */ s32 listWindowX;           /* the choice list's window slides in from 330 to 0 */
-    /* 0x94 */ u8 unk94[0x4];
-    /* 0x98 */ u32 listWindowFrame;       /* frames into the slide */
-    /* 0x9C */ s8 listWindowDone;         /* the slide finished */
-    /* 0x9D */ u8 unk9D[0x3];
+    /* 0x0C */ u32 nameLabels;             /* the card's name label set (campCecDrawSetCreate), released on close */
+    /* 0x10 */ u32 infoPage;               /* the card's info page (campCecDrawPageCreate), released on close */
+    /* 0x14 */ CampCecEditSlide upperSlides[2]; /* [1] is the selected image's position */
+    /* 0x3C */ CampCecEditSlide lowerSlides[3]; /* the panel, title and header areas of the lower screen */
+    /* 0x78 */ CampCecEditSlide cursorArea;
+    /* 0x8C */ CampCecEditSlide listWindow;     /* the choice list's window slides in from 330 to 0 */
     /* 0xA0 */ ScriptProcess *resource;               /* released on close */
-    /* 0xA4 */ void *heapA;               /* heap block, freed on close */
-    /* 0xA8 */ void *heapB;               /* heap block, freed on close */
-    /* 0xAC */ void *heapC;               /* heap block, freed on close */
-    /* 0xB0 */ u32 handleE;                /* released on close */
+    /* 0xA4 */ void *scriptFile;          /* camp/CecEdit_scr.bf, freed on close */
+    /* 0xA8 */ void *messageFile;         /* camp/CecEdit_msg.mbm, freed on close */
+    /* 0xAC */ void *cardMessageFile;     /* camp/CecEdit_one_msg.mbm, freed on close */
+    /* 0xB0 */ struct AsdText *text;       /* the screen's text object, released on close */
     /* 0xB4 */ s32 (*stateHandlers[9])(struct CampCecEdit *edit); /* 1 = close, 2 = change state */
     /* 0xD8 */ s32 messageEntries[10];    /* each message's entry in the screen's script */
     /* 0x100 */ s32 message;              /* the message being shown, -1 = none */
@@ -54,13 +47,15 @@ typedef struct CampCecEdit {
     /* 0x110 */ s32 nextState;            /* -1 = none */
     /* 0x114 */ s32 followingState;       /* the state the next one leads to */
     /* 0x118 */ s32 touchFrames;          /* frames the stylus has stayed on a list row */
-    /* 0x11C */ s32 unk11C;
+    /* 0x11C */ s32 activeMemberCount;    /* stocked demons that are neither dead nor excluded */
     /* 0x120 */ s16 unit;                 /* the demon attached to the card, 0 = none */
     /* 0x122 */ u8 unk122;
     /* 0x123 */ u8 selectionMode;         /* the answer to the first question (0 or 1) */
     /* 0x124 */ u8 unk124;
     /* 0x125 */ u8 unk125;
-    /* 0x126 */ u8 unk126[0x4];
+    /* 0x126 */ u8 unk126[0x2];
+    /* 0x128 */ u8 headerVisible;
+    /* 0x129 */ u8 openMode;              /* campCecEditCreate's argument */
     /* 0x12A */ u8 unk12A;
     /* 0x12B */ u8 unk12B;
     /* 0x12C */ s32 listIndex;            /* the choice list's position among all its items */
@@ -83,33 +78,33 @@ typedef struct CampCecEdit {
 /* smt4a: the edit screen has a different layout; see campCecEditCreate. */
 typedef char CampCecEditLayoutCheck[sizeof(CampCecEdit) == 0x160 ? 1 : -1];
 
-typedef char CampCecEditListOffsets[offsetof(CampCecEdit, listWindowX) == 0x90 &&
-    offsetof(CampCecEdit, listWindowFrame) == 0x98 && offsetof(CampCecEdit, touchFrames) == 0x118 &&
+typedef char CampCecEditListOffsets[offsetof(CampCecEdit, listWindow.x) == 0x90 &&
+    offsetof(CampCecEdit, listWindow.frame) == 0x98 && offsetof(CampCecEdit, touchFrames) == 0x118 &&
     offsetof(CampCecEdit, listIndex) == 0x12C && offsetof(CampCecEdit, listRow) == 0x13C &&
     offsetof(CampCecEdit, tickerX) == 0x144 && offsetof(CampCecEdit, touchY) == 0x158 ? 1 : -1];
 
-typedef char CampCecEditStateOffsets[offsetof(CampCecEdit, unk74) == 0x74 && offsetof(CampCecEdit, nextState) == 0x110 && offsetof(CampCecEdit, unk125) == 0x125 ? 1 : -1];
-typedef char CampCecEditMessageOffsets[offsetof(CampCecEdit, listWindowFrame) == 0x98 && offsetof(CampCecEdit, messageEntries) == 0xD8 &&
+typedef char CampCecEditStateOffsets[offsetof(CampCecEdit, lowerSlides[2].done) == 0x74 && offsetof(CampCecEdit, headerVisible) == 0x128 && offsetof(CampCecEdit, nextState) == 0x110 && offsetof(CampCecEdit, unk125) == 0x125 ? 1 : -1];
+typedef char CampCecEditMessageOffsets[offsetof(CampCecEdit, listWindow.done) == 0x9C && offsetof(CampCecEdit, messageEntries) == 0xD8 &&
     offsetof(CampCecEdit, message) == 0x100 && offsetof(CampCecEdit, prevState) == 0x108 &&
     offsetof(CampCecEdit, followingState) == 0x114 && offsetof(CampCecEdit, unit) == 0x120 &&
     offsetof(CampCecEdit, selectionMode) == 0x123 && offsetof(CampCecEdit, unk12A) == 0x12A &&
     offsetof(CampCecEdit, listCount) == 0x138 && offsetof(CampCecEdit, listActive) == 0x141 &&
     offsetof(CampCecEdit, messageBase) == 0x148 && offsetof(CampCecEdit, shownTarget) == 0x15C ? 1 : -1];
-typedef char CampCecEditOffsets[offsetof(CampCecEdit, requestHandle) == 8 && offsetof(CampCecEdit, selectedImage) == 0x28 ? 1 : -1];
+typedef char CampCecEditOffsets[offsetof(CampCecEdit, requestHandle) == 8 && offsetof(CampCecEdit, upperSlides[1]) == 0x28 ? 1 : -1];
 
 /* Clears the five list positions of the screen (the three at 0x3C first, then the two at 0x14). */
 static __inline void campCecEditResetPositions(CampCecEdit *edit)
 {
-    edit->unk48 = 0;
-    edit->unk4C = 0;
-    edit->unk5C = 0;
-    edit->unk60 = 0;
-    edit->unk70 = 0;
-    edit->unk74 = 0;
-    edit->unk20 = 0;
-    edit->unk24 = 0;
-    edit->unk34 = 0;
-    edit->unk38 = 0;
+    edit->lowerSlides[0].frame = 0;
+    edit->lowerSlides[0].done = 0;
+    edit->lowerSlides[1].frame = 0;
+    edit->lowerSlides[1].done = 0;
+    edit->lowerSlides[2].frame = 0;
+    edit->lowerSlides[2].done = 0;
+    edit->upperSlides[0].frame = 0;
+    edit->upperSlides[0].done = 0;
+    edit->upperSlides[1].frame = 0;
+    edit->upperSlides[1].done = 0;
 }
 
 extern "C" s32 campCecClassifyRequestedUnit(CampCecEdit *edit);

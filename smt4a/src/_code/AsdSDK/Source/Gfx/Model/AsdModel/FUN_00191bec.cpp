@@ -1,14 +1,14 @@
-/* NON_MATCHING: camera arms, native MTX34::Identity() guard and the eye ldm copy now match retail; remaining: model/camera saved registers (r4/r5 swapped), the hoisted constants 0/1 and the early type-info literal load. */
+/* NON_MATCHING: the view updater is found by nw::ut::DynamicCast (retail's type walk, the hoisted 1 and the early type-info load now match); remaining: model/camera saved registers (r4/r5 swapped, one register fewer and a 52-byte frame), retail's hoisted zero in r8 (predicated zero store of the stereo flag, the cast's NULL) where armcc here places the zero store out of line. */
 #include "gfx/CameraManager.h"
 #include "gfx/CameraParameters.h"
 #include "classes/Obj4215f4.h"
-#include "classes/Obj4216b4.h"
 #include "shard/W6_W6Match6_ProjectionCamera.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include <new>
 #include "nw/math/MTX34.h"
-#include <stddef.h>
 #include "code/Code0015.h"
+#include <stddef.h>
+#include "nw/ut/RuntimeTypeInfo.h"
 
 extern "C" {
 ManagedCamera *FUN_0019e31c();
@@ -18,6 +18,15 @@ void nn_math_ARMv6_MTX34CopyAsm(void *, const void *);
 extern u8 DAT_005c0f14[];
 extern MovedPart *g_asdModelSlotArray0[];
 }
+
+/* The camera's view updater (nw::gfx): slot 2 its type tag, slot 4 its resource. */
+class CameraViewUpdater {
+public:
+    virtual ~CameraViewUpdater();
+    virtual const nw::ut::RuntimeTypeInfo *getRuntimeTypeInfo() const;
+    virtual void unk0c();
+    virtual void *getResource();
+};
 
 extern "C" void FUN_00191bec(MovedPart *model, s32 cameraIndex)
 {
@@ -29,24 +38,17 @@ extern "C" void FUN_00191bec(MovedPart *model, s32 cameraIndex)
     };
     struct ModelCameraFields {
         u8 prefix[0x258];
-        Obj4216b4 *view;
+        CameraViewUpdater *view;
         u8 padding25C[4];
         Obj4215f4 *projection;
         u8 padding264[0x30];
         f32 scalar;
     };
     struct LensTypeHeader { u32 flags; };
-    struct TypeInfo { const TypeInfo *parent; };
     struct ViewResource {
         u8 prefix[8];
         Vec3f target;
         Vec3f up;
-    };
-    struct ViewMethods {
-        u8 prefix[8];
-        const TypeInfo *(*getType)(Obj4216b4 *);
-        u8 padding0C[4];
-        ViewResource *(*getResource)(Obj4216b4 *);
     };
     struct CameraTransform {
         u8 prefix[0x4C];
@@ -56,7 +58,6 @@ extern "C" void FUN_00191bec(MovedPart *model, s32 cameraIndex)
         offsetof(ModelCameraFields, view) == 0x258 &&
         offsetof(ModelCameraFields, projection) == 0x260 &&
         offsetof(ModelCameraFields, scalar) == 0x294 &&
-        offsetof(ViewMethods, getResource) == 0x10 &&
         offsetof(CameraTransform, matrix) == 0x4C ? 1 : -1];
     ManagedCamera *camera;
     if (cameraIndex == 0)
@@ -74,30 +75,19 @@ extern "C" void FUN_00191bec(MovedPart *model, s32 cameraIndex)
     lens->nearClip = description->pose.nearClip;
     lens->farClip = description->pose.farClip;
     lens->fieldOfView = description->pose.fieldOfView * 0.017453292f;
-    if (cameraIndex == 0 && gxIsStereoscopic3dEnabled() == 1)
-        fields->projection->unk08 = 0;
-    else
+    if (cameraIndex != 0 || gxIsStereoscopic3dEnabled() != 1)
         fields->projection->unk08 = 1;
+    else
+        fields->projection->unk08 = 0;
     Vec3f eye = description->pose.eye;
     model->x = eye.x;
     model->y = eye.y;
     model->z = eye.z;
     model->flags |= MOVED_PART_DIRTY;
 
-    Obj4216b4 *view = fields->view;
-    if (view != NULL) {
-        const ViewMethods *methods = *reinterpret_cast<const ViewMethods *const *>(view);
-        const TypeInfo *type = methods->getType(view);
-        while (type != reinterpret_cast<const TypeInfo *>(DAT_005c0f14)) {
-            type = type->parent;
-            if (type == NULL) {
-                view = NULL;
-                break;
-            }
-        }
-    }
-    const ViewMethods *methods = *reinterpret_cast<const ViewMethods *const *>(view);
-    ViewResource *resource = methods->getResource(view);
+    CameraViewUpdater *view = nw::ut::DynamicCast<CameraViewUpdater>(
+        fields->view, reinterpret_cast<const nw::ut::RuntimeTypeInfo *>(DAT_005c0f14));
+    ViewResource *resource = static_cast<ViewResource *>(view->getResource());
     resource->target = description->pose.target;
     resource->up = description->pose.up;
 

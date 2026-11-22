@@ -14,7 +14,7 @@
 extern "C" {
 u32 taskCreateDraw(const char *name, u16 priority, u8 list, u32 bytes,
                    TaskFunc update, TaskFunc destroy, void *work, u32 parent);
-s32 FUN_001d9294();
+s32 mapEnemyCleanupUpdate();
 void mapEnemyFreeWork();
 
 void MapEnemy_Register(u32 parent)
@@ -23,7 +23,7 @@ void MapEnemy_Register(u32 parent)
     g_mapEnemy = static_cast<MapEnemy *>(asdMemAlloc(0x100, 0x100, 0, sizeof(MapEnemy), 1));
     MapEnemy *work = g_mapEnemy;
     work->task = taskCreateDraw("MENEMY", 2, 0, 0,
-        reinterpret_cast<TaskFunc>(FUN_001d9294), reinterpret_cast<TaskFunc>(mapEnemyFreeWork), NULL, parent);
+        reinterpret_cast<TaskFunc>(mapEnemyCleanupUpdate), reinterpret_cast<TaskFunc>(mapEnemyFreeWork), NULL, parent);
     work->state = 0;
     work->elapsed = 0;
     work->requestArgs[0] = 0;

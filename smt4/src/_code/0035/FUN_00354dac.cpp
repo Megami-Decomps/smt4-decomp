@@ -23,7 +23,7 @@ static __inline s32 resultDescription(s32 status)
 extern "C" {
 void nn_fs_ExtSaveDataSpecifier_Make(ExtSaveDataSpecifier *specifier, s32 mediaType);
 nn::Result FUN_00355ecc(SaveDataArchive **archive, const ExtSaveDataSpecifier *specifier, u32 flags);
-s32 FUN_002bb99c(const char *name, SaveDataArchive *archive, u8 downloadable, u8 flags);
+s32 fsMountRegister(const char *name, SaveDataArchive *archive, u8 downloadable, u8 flags);
 
 /* Opens the ext save data archive, maps its "not found" descriptions to one result, and runs the
  * archive operation; closes the archive when that fails. */
@@ -38,7 +38,7 @@ s32 FUN_00354dac(const char *name)
         status = (s32)0xc8804482;
     }
     if (nnResultIsSuccess(status)) {
-        status = FUN_002bb99c(name, archive, 0, 0);
+        status = fsMountRegister(name, archive, 0, 0);
         if ((s32)(status & 0x80000000) < 0) {
             archive->vtable->close(archive);
         }

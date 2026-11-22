@@ -1,4 +1,4 @@
-/* NON_MATCHING: roster-sum loop saved registers (total/index) are swapped and the zero result is not hoisted above the prologue. */
+/* NON_MATCHING: 22 lines; all five category loops match byte-for-byte, remaining: retail hoists zero into r0 before push and puts the case-0/default pop before the jump table. */
 #include "common.h"
 
 extern "C" {
@@ -10,24 +10,33 @@ extern u32 DAT_0057f7a8[11];
 s32 flagValueRead(u32 id);
 }
 
-static s32 addMemberValues(s32 total, const u32 *members)
-{
-    for (s32 i = 0; i < 11; ++i)
-        total += flagValueRead(members[i]);
-    return total;
-}
-
-// Sum the eleven member values in the requested roster category.
+/* Sum the eleven member values in the requested roster category. */
 extern "C" s32 FUN_00480738(s32 category)
 {
     s32 total = 0;
     switch (category) {
-    case 1: total = addMemberValues(total, DAT_0057f6f8); break;
-    case 2: total = addMemberValues(total, DAT_0057f724); break;
-    case 3: total = addMemberValues(total, DAT_0057f750); break;
-    case 4: total = addMemberValues(total, DAT_0057f77c); break;
-    case 5: total = addMemberValues(total, DAT_0057f7a8); break;
-    default: return 0;
+    case 0:
+        return 0;
+    case 1:
+        for (s32 i = 0; i < 11; ++i)
+            total += flagValueRead(DAT_0057f6f8[i]);
+        break;
+    case 2:
+        for (s32 i = 0; i < 11; ++i)
+            total += flagValueRead(DAT_0057f724[i]);
+        break;
+    case 3:
+        for (s32 i = 0; i < 11; ++i)
+            total += flagValueRead(DAT_0057f750[i]);
+        break;
+    case 4:
+        for (s32 i = 0; i < 11; ++i)
+            total += flagValueRead(DAT_0057f77c[i]);
+        break;
+    case 5:
+        for (s32 i = 0; i < 11; ++i)
+            total += flagValueRead(DAT_0057f7a8[i]);
+        break;
     }
     return total;
 }

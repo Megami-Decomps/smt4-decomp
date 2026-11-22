@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild of the path mover step; retail keeps the distance, the direction components and the new heading in s16..s20 across the atan2/angle calls and lays the waypoint-advance block before the move, which armcc here orders differently. */
+/* NON_MATCHING: the waypoint advance now matches retail's layout (end-of-queue snap by chained assignment, both legs set by one helper); retail still splits the restart leg's position copy instead of the target's and loads the direction components one by one into s17/s18/s20 (heading s19, zero s21) where armcc here uses one vldmia and s19..s21. */
 #include "common.h"
 #include "util/MathFunctions.h"
 
@@ -38,6 +38,13 @@ extern PathQueue *g_vectorQueueWork;
 f32 __hardfp_atan2f(f32 y, f32 x); /* __hardfp_atan2f */
 f32 mathGetShortestAngleDelta(f32 from, f32 to);
 
+/* Puts the walker on the leg from waypoint `index` to the next one. */
+static __inline void pathMoverSetLeg(PathMover *mover, const PathQueue *queue, s32 index)
+{
+    mover->position = queue->points[index].position;
+    mover->target = queue->points[index + 1].position;
+}
+
 /* Moves the walker one step toward its target waypoint, turning its heading gradually; when the
  * waypoint is reached it advances to the next pair, wrapping to the start at the end. */
 void FUN_0021e224(PathMover *mover)
@@ -51,19 +58,16 @@ void FUN_0021e224(PathMover *mover)
     if (mover->speed > distance) {
         s32 next = ++mover->waypoint;
         PathQueue *queue = &g_vectorQueueWork[mover->queue];
-        if (next + 1 < queue->count) {
-            mover->position = queue->points[next].position;
-            mover->target = queue->points[next + 1].position;
+        if (next + 1 >= queue->count) {
+            mover->waypoint = queue->count - 1;
+            mover->reached = 1;
+            mover->position = mover->target = queue->points[mover->waypoint].position;
+            mover->reached = 0;
+            mover->waypoint = 0;
+            pathMoverSetLeg(mover, queue, 0);
             return;
         }
-        mover->waypoint = queue->count - 1;
-        mover->reached = 1;
-        mover->target = queue->points[queue->count - 1].position;
-        mover->position = queue->points[queue->count - 1].position;
-        mover->reached = 0;
-        mover->waypoint = 0;
-        mover->position = queue->points[0].position;
-        mover->target = queue->points[1].position;
+        pathMoverSetLeg(mover, queue, next);
         return;
     }
 

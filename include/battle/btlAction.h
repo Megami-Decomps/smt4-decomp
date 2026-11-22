@@ -144,7 +144,8 @@ typedef struct BtlActionGlobalsA {
     /* 0xE0 */ u64 cameraExcludedMask;  /* battle state bits that suppress the action camera (FUN_004e69e8) */
     /* 0xE8 */ u8 unkE8[8];
     /* 0xF0 */ u64 cameraExcludedMaskB; /* more battle state bits that suppress it */
-    /* 0xF8 */ u8 unkF8[0x30];
+    /* 0xF8 */ u64 helpModeMask;    /* battle state bits that pick the targetable-combatant help subject (FUN_004ecd7c) */
+    /* 0x100 */ u8 unk100[0x28];
     /* 0x128 */ u64 interruptMask; /* actor flag bits that block the skill start */
     /* 0x130 */ u8 unk130[0x50];
     /* 0x180 */ u64 aiMenuMask;     /* battle state bits that make the AI open a menu command */
@@ -158,7 +159,7 @@ typedef char BtlActionClearedFlagsOffsetCheck[
     offsetof(BtlActionGlobalsA, clearedFlags.mask) == 0x58 &&
     offsetof(BtlActionGlobalsA, interruptMask) == 0x128 && offsetof(BtlActionGlobalsA, aiActMask) == 0xD8 &&
     offsetof(BtlActionGlobalsA, aiMenuMask) == 0x180 && offsetof(BtlActionGlobalsA, aiTargetMask) == 0x188 &&
-    offsetof(BtlActionGlobalsA, cameraExcludedMask) == 0xE0 && offsetof(BtlActionGlobalsA, cameraExcludedMaskB) == 0xF0 ? 1 : -1];
+    offsetof(BtlActionGlobalsA, cameraExcludedMask) == 0xE0 && offsetof(BtlActionGlobalsA, cameraExcludedMaskB) == 0xF0 && offsetof(BtlActionGlobalsA, helpModeMask) == 0xF8 ? 1 : -1];
 typedef char BtlActionInteractionMasksOffsetCheck[
     offsetof(BtlActionGlobalsA, interaction.requiredMask) == 0x30 &&
     offsetof(BtlActionGlobalsA, interaction.reachMask) == 0x38 &&

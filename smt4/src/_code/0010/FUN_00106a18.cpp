@@ -1,7 +1,7 @@
-/* NON_MATCHING: VFP grouping, folded zero cross-products and matrix-store scheduling differ. */
+/* NON_MATCHING: the view is nn::math's MTX34LookAt (nw/math/VEC3.h) of an eye at (0, 0, depth); retail copies the five float arguments into s17/s20/s21/s18 one by one and keeps 1.0f in s19 from entry, where armcc here allocates the arguments in order and loads the constants late, which moves every look-at register. */
 #include "camp/RenderCtx.h"
 #include "shard/S1Mover.h"
-#include <math.h>
+#include "nw/math/VEC3.h"
 
 extern "C" {
 void cameraMatrixCacheReset(RenderCtx *context, s32 mode);
@@ -24,31 +24,20 @@ void FUN_00106a18(RenderCtx *context, f32 depth, f32 minimum, f32 maximum, f32 p
     context->stereo.defaultView.depth = depth;
     context->stereo.minimum = minimum;
     context->stereo.maximum = maximum;
-    Vec3f eye = {0.0f, 0.0f, depth};
-    Vec3f forward = {eye.x - 0.0f, eye.y - 0.0f, eye.z - 0.0f};
-    f32 inverseLength = 1.0f / sqrtf(forward.x * forward.x + forward.y * forward.y + forward.z * forward.z);
-    forward.z *= inverseLength;
-    forward.x *= inverseLength;
-    forward.y *= inverseLength;
-    Vec3f right = {
-        1.0f * forward.z - 0.0f * forward.y,
-        0.0f * forward.x - 0.0f * forward.z,
-        0.0f * forward.y - 1.0f * forward.x
-    };
-    inverseLength = 1.0f / sqrtf(right.x * right.x + right.y * right.y + right.z * right.z);
-    right.z *= inverseLength;
-    right.x *= inverseLength;
-    right.y *= inverseLength;
-    Vec3f vertical = {
-        forward.y * right.z - forward.z * right.y,
-        forward.z * right.x - forward.x * right.z,
-        forward.x * right.y - forward.y * right.x
-    };
-    f32 view[3][4] = {
-        {right.x, right.y, right.z, -(eye.x * right.x + eye.y * right.y + eye.z * right.z)},
-        {vertical.x, vertical.y, vertical.z, -(eye.x * vertical.x + eye.y * vertical.y + eye.z * vertical.z)},
-        {forward.x, forward.y, forward.z, -(eye.x * forward.x + eye.y * forward.y + eye.z * forward.z)}
-    };
+    nw::math::VEC3 eye;
+    eye.x = 0.0f;
+    eye.y = 0.0f;
+    eye.z = depth;
+    nw::math::VEC3 up;
+    up.x = 0.0f;
+    up.y = 1.0f;
+    up.z = 0.0f;
+    nw::math::VEC3 target;
+    target.x = 0.0f;
+    target.y = 0.0f;
+    target.z = 0.0f;
+    f32 view[3][4];
+    nw::math::MTX34LookAt(view, &eye, &up, &target);
     FUN_0011d084(context, &view[0][0]);
     FUN_002c159c(context, depth, parameter);
     asdCameraRegister(context);

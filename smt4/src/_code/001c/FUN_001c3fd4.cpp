@@ -151,7 +151,7 @@ extern int gameGetNavigationState(void);
 extern int gameGetPendingNavigationState(void);
 extern int campCecIsActive(void);
 extern unsigned short FUN_00282ccc(void);
-extern unsigned char FUN_00282e70(void);
+extern unsigned char partyPanelIsTransitionDone(void);
 /* Supplied declaration required: FUN_0028a924. */
 /* Supplied declaration required: FUN_0028d1f4. */
 extern int flagValueRead(unsigned short);
@@ -352,7 +352,7 @@ unsigned int FUN_001c3fd4(void)
   } while ((int)temp_v15 < 0x1c);
   temp_v3 = FUN_00282ccc();
   *(unsigned short *)(temp_v1 + 0x3a) = temp_v3;
-  temp_v2 = FUN_00282e70();
+  temp_v2 = partyPanelIsTransitionDone();
   *(unsigned char *)(temp_v1 + 0x44) = temp_v2;
   switch(*(unsigned int *)(temp_v1 + 0x1c)) {
   case 0:

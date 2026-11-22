@@ -1,4 +1,4 @@
-/* NON_MATCHING: the stack layout and register allocation differ - retail keeps the current name pointer in the first word of the 128-byte text buffer and fetches the effect work through r7/r8; the control flow and calls are the same. */
+/* NON_MATCHING: the control flow and calls are the same; retail addresses the reference-model fields through a second copy of the work pointer made just before FUN_002276f8 (this build hoists work + 0x3000 to the top and spills it), keeps the current name pointer in the first word of the 128-byte text buffer during the reference scan, and allocates the loop registers differently. */
 #include "common.h"
 #include "runtime/Stdio.h"
 #include <string.h>
@@ -19,7 +19,9 @@ typedef struct EffectWork {
     /* 0x0000 */ u8 unk0000[0x1CFC];
     /* 0x1CFC */ const char (*names)[22];   /* four 22-byte names */
     /* 0x1D00 */ EffectSlot slots[27];
-    /* 0x2BA4 */ u8 unk2ba4[0x3034 - 0x2BA4 + 0x1D00 - 0x1D00];
+    /* 0x2BC4 */ u8 unk2BC4[0x3034 - 0x2BC4];
+    /* 0x3034 */ u32 referenceFilter;   /* the filter of the selected reference model */
+    /* 0x3038 */ u8 referenceIndex;     /* the selected reference model */
 } EffectWork;
 
 extern const char *g_btlEffect[];           /* name prefixes and special names the table skips */
@@ -66,12 +68,12 @@ u32 FUN_003dab2c(EffectWork *work)
         }
         bool selected = false;
         if (name != NULL && libc_strncmp(name, g_btlEffect[0], libc_strlen(g_btlEffect[0])) == 0) {
-            for (u32 j = 0; j < 11; j++) {
+            for (s32 j = 0; j < 11; j++) {
                 __2sprintf(text, DAT_00400904, g_btlEffect[0], j);
                 if (strcmp(text, name) == 0) {
                     FUN_002276f8(work);
-                    *reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(work) + 0x3034) = filterCreateByKind(j & 0xff, 7, 0);
-                    *(reinterpret_cast<u8 *>(work) + 0x3038) = j;
+                    work->referenceFilter = filterCreateByKind(j & 0xff, 7, 0);
+                    work->referenceIndex = j;
                     selected = true;
                     break;
                 }
@@ -91,14 +93,14 @@ u32 FUN_003dab2c(EffectWork *work)
             continue;
         }
         if (name != NULL) {
-            bool reference = false;
+            s32 reference = -1;
             for (s32 j = 0; j < 11; j++) {
                 if (libc_strncmp(name, DAT_00400664[j], libc_strlen(DAT_00400664[j])) == 0) {
-                    reference = true;
+                    reference = j;
                     break;
                 }
             }
-            if (reference) {
+            if (reference >= 0) {
                 continue;
             }
         }

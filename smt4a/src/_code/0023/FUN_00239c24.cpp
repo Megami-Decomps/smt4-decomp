@@ -21,7 +21,7 @@ int FUN_002de4d4(int, int, int);
 int FUN_002edf08(void);
 int mapRndMazeCreateEntranceMarker(void);
 int naviMainSetFlagsAndActivate(int, int, int, int, int, int);
-int FUN_003273ac(int);
+int mazeGridApplyPreset(int);
 int FUN_003276f0(...);
 int FUN_00331efc(void);
 int FUN_00398004(int);
@@ -55,7 +55,7 @@ extern int gameDataIsFlagByteSet(int);
 /* Supplied declaration required: mapRndMazeCreateEntranceMarker. */
 extern int flagCategoryIsAvailable(int);
 /* Supplied declaration required: naviMainSetFlagsAndActivate. */
-/* Supplied declaration required: FUN_003273ac. */
+/* Supplied declaration required: mazeGridApplyPreset. */
 extern int FUN_00327540(int);
 /* Supplied declaration required: FUN_003276f0. */
 /* Supplied declaration required: FUN_00331efc. */
@@ -103,7 +103,7 @@ void FUN_00239c24(void)
       DAT_0060ff94 = 0;
       temp_v5 = FUN_00327540((int)*(float *)(temp_v3 + 0x15c4));
       if (temp_v5 != 0) {
-        FUN_003273ac((int)*(float *)(temp_v3 + 0x15c4));
+        mazeGridApplyPreset((int)*(float *)(temp_v3 + 0x15c4));
       }
       else {
         FUN_002edf08();

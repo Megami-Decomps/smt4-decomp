@@ -1,4 +1,6 @@
-/* NON_MATCHING: readable rebuild of the model unit setup; retail merges the two registry blocks with a shared null test, keeps the counters in r5/r6/r8 across the binding calls and reloads the content tables per iteration, which armcc here allocates differently. */
+/* NON_MATCHING: 117 lines: retail loads spec->handle separately in each arm of the resource choice, re-tests
+ * g_handleRegistry after an empty texture bind, and reuses the tested registry pointer for the shared model;
+ * armcc here threads those tests and the counters land in other registers. */
 #include "shard/W6_W6Match7_MaterialTextures.h"
 #include "classes/Obj557dcc.h"
 
@@ -58,7 +60,7 @@ struct MoriUnitSpec {
 extern "C" {
 extern HandleRegistryView *g_handleRegistry;
 
-u32 FUN_00186118(u32 handle, u32 *argument);
+u32 FUN_00186118(u32 handle, u32 *size);
 void FUN_00187e08(MoriUnit *unit, u32 resource, u32 first, u32 second, u32 third);
 void FUN_0018f69c(ModelTextureBindings *model, u8 *matrix, u8 *replacementCommands, const u8 *originalCommands);
 void FUN_0018f9c0(MaterialTextureBinding *binding, u8 *matrix);
@@ -71,13 +73,14 @@ static inline void *operator new(u32 bytes, const char *file, s32 line) throw()
     return asdMemoryAllocTraced(bytes, file, line);
 }
 
-extern "C" void FUN_0016c88c(const MoriUnitSpec *spec, MoriUnit *unit, u32 unused, u32 argument)
+extern "C" void FUN_0016c88c(const MoriUnitSpec *spec, MoriUnit *unit)
 {
     u32 resource;
-    if (spec->isResource) {
-        resource = spec->handle;
+    if (spec->isResource == 0) {
+        u32 size;
+        resource = FUN_00186118(spec->handle, &size);
     } else {
-        resource = FUN_00186118(spec->handle, &argument);
+        resource = spec->handle;
     }
     FUN_00187e08(unit, resource, spec->first, spec->second, spec->third);
     unit->flags = spec->mode;
@@ -89,21 +92,23 @@ extern "C" void FUN_0016c88c(const MoriUnitSpec *spec, MoriUnit *unit, u32 unuse
     u32 bindingCount = unit->tables->bindingCount;
     for (u32 i = 0; i < bindingCount; i++) {
         MaterialTextureBinding *binding = unit->tables->bindings[i];
-        if (binding->unk28 & 8)
+        if (binding->flags & 8)
             FUN_0018f9c0(binding, unit->matrix);
     }
     if (g_handleRegistry != NULL) {
         if (unit->flags & 2) {
             NamedModelTexture *texture = g_handleRegistry->bound->texture;
             if (texture != NULL) {
-                for (u32 i = 0; i < unit->tables->modelCount; i++)
+                u32 count = unit->tables->modelCount;
+                for (u32 i = 0; i < count; i++)
                     gfxModelBindTextureByName(unit->tables->models[i], texture->name, texture, unit->replacementCommands,
                                               unit->originalCommands);
             }
         }
         if (g_handleRegistry != NULL && g_handleRegistry->sharedModel != NULL) {
             RegistryModel *shared = g_handleRegistry->sharedModel;
-            for (s32 i = 0; i < (s32)unit->tables->modelCount; i++) {
+            s32 count = unit->tables->modelCount;
+            for (s32 i = 0; i < count; i++) {
                 ModelTextureBindings *model = unit->tables->models[i];
                 for (MaterialTextureBinding *binding = model->bindings; binding != model->bindings + model->bindingCount;
                      binding++) {
