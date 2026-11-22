@@ -22,7 +22,7 @@ void _ZN18WindowStatusResultC1Ej(u32 request, u32 result);
 u32 FUN_003520dc(u32 *archive, ArchivePathWork *, u32 type, u64 id, u32 flags);
 u32 handleRequestSubmit(ArchiveFile *, u32 type, u64 id, u32 zero, u32 flags,
                  u32 mode, void *path, u32 capacity, u32 unused);
-u32 FUN_00352920(ArchiveFile *);
+u32 archiveReadContentHeaderPair(ArchiveFile *);
 
 // Replace an archive-backed file handle, normalizing archive-not-found results.
 void archiveFileReplaceHandle(u32 request, ArchiveFile *file, const ArchiveRequest *source)
@@ -59,7 +59,7 @@ void archiveFileReplaceHandle(u32 request, ArchiveFile *file, const ArchiveReque
         _ZN18WindowStatusResultC1Ej(request, result);
         return;
     }
-    result = FUN_00352920(file);
+    result = archiveReadContentHeaderPair(file);
     if (!(result & 0x80000000)) {
         _ZN18WindowStatusResultC1Ej(request, 0);
         return;

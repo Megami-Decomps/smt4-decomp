@@ -17,7 +17,7 @@ extern const PhaseTrigEntry g_sinCosTable[];
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(nw::math::VEC3 *output, const nw::math::MTX34 *matrix,
                                            const nw::math::VEC3 *input);
 /* Appends a four-corner quad (corners in order, then its normal) to the collision list. */
-void FUN_002c0b98(u16 tag, CollisionVector a, CollisionVector b, CollisionVector c, CollisionVector d,
+void mapCollisionQueueEdgeQuad(u16 tag, CollisionVector a, CollisionVector b, CollisionVector c, CollisionVector d,
                   CollisionVector normal);
 }
 
@@ -138,7 +138,7 @@ extern "C" void FUN_00281b94(u16 tag, nw::math::VEC3 position, f32 angle, f32 wi
     p3.x += position.x;
     p3.y += position.y;
     p3.z += position.z;
-    FUN_002c0b98(tag, p0, p1, p2, p3, n);
+    mapCollisionQueueEdgeQuad(tag, p0, p1, p2, p3, n);
 
     corner0.x = -halfDepth;
     corner0.y = 0.0f;
@@ -173,7 +173,7 @@ extern "C" void FUN_00281b94(u16 tag, nw::math::VEC3 position, f32 angle, f32 wi
     p3.x += position.x;
     p3.y += position.y;
     p3.z += position.z;
-    FUN_002c0b98(tag, p0, p1, p2, p3, n);
+    mapCollisionQueueEdgeQuad(tag, p0, p1, p2, p3, n);
 
     corner0.x = -halfWidth;
     corner0.y = 0.0f;
@@ -208,7 +208,7 @@ extern "C" void FUN_00281b94(u16 tag, nw::math::VEC3 position, f32 angle, f32 wi
     p3.x += position.x;
     p3.y += position.y;
     p3.z += position.z;
-    FUN_002c0b98(tag, p0, p1, p2, p3, n);
+    mapCollisionQueueEdgeQuad(tag, p0, p1, p2, p3, n);
 
     corner0.x = -halfDepth;
     corner0.y = 0.0f;
@@ -243,5 +243,5 @@ extern "C" void FUN_00281b94(u16 tag, nw::math::VEC3 position, f32 angle, f32 wi
     p3.x += position.x;
     p3.y += position.y;
     p3.z += position.z;
-    FUN_002c0b98(tag, p0, p1, p2, p3, n);
+    mapCollisionQueueEdgeQuad(tag, p0, p1, p2, p3, n);
 }

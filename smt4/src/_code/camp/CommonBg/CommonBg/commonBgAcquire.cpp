@@ -1,4 +1,3 @@
-/* NON_MATCHING: native0xE0 work/module, unsigned wobble,102px extent and mode stores recovered; particle interior-base, constant lifetime and scheduling differ. */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -62,6 +61,12 @@ s32 FUN_001ed134(u32 handle);
 
 #define COMMON_BG_SPEED_STEP 0.1f
 
+/* A random particle size in 2.0..4.0. */
+static f32 commonBgRandomSize(void)
+{
+    return (f32)(randNextInRange(0x14) + 0x14) * COMMON_BG_SPEED_STEP;
+}
+
 /* Creates the common background on the first use: allocates its work, starts the calc process
  * and the two draw tasks and scatters the particles; later uses only re-arm it. */
 void commonBgAcquire(void)
@@ -80,33 +85,31 @@ void commonBgAcquire(void)
 
         work = g_commonBg.work;
         for (s32 i = 0; i < COMMON_BG_DRIFT_COUNT; i++) {
-            CommonBgDrift *p = &work->drift[i];
-            p->x = (f32)randNextInRange(0x131);
-            p->y = (f32)randNextInRange(0xE1);
-            p->velocityX = -COMMON_BG_SPEED_STEP + (f32)(randNextInRange(0x13) + 1) * COMMON_BG_SPEED_STEP;
-            p->velocityY = -COMMON_BG_SPEED_STEP + (f32)(randNextInRange(0x13) + 1) * COMMON_BG_SPEED_STEP;
-            p->size = (f32)(randNextInRange(0x14) + 0x14) * COMMON_BG_SPEED_STEP;
-            if (p->velocityX == 0.0f)
-                p->velocityX = 1.0f;
-            if (p->velocityY == 0.0f)
-                p->velocityY = 1.0f;
+            work->drift[i].x = (f32)randNextInRange(0x131);
+            work->drift[i].y = (f32)randNextInRange(0xE1);
+            work->drift[i].velocityX = -COMMON_BG_SPEED_STEP + (f32)(randNextInRange(0x13) + 1) * COMMON_BG_SPEED_STEP;
+            work->drift[i].velocityY = -COMMON_BG_SPEED_STEP + (f32)(randNextInRange(0x13) + 1) * COMMON_BG_SPEED_STEP;
+            work->drift[i].size = commonBgRandomSize();
+            if (work->drift[i].velocityX == 0.0f)
+                work->drift[i].velocityX = 1.0f;
+            if (work->drift[i].velocityY == 0.0f)
+                work->drift[i].velocityY = 1.0f;
         }
         for (s32 i = 0; i < COMMON_BG_RISE_COUNT; i++) {
-            CommonBgRise *p = &work->rise[i];
-            p->x = (f32)randNextInRange(0xF0);
-            p->speed = -COMMON_BG_SPEED_STEP + (f32)(randNextInRange(0x13) + 1) * COMMON_BG_SPEED_STEP;
-            p->extent = 102.0f;
-            p->wobbleA = 0;
-            p->wobbleB = 0xF0;
-            p->size = (f32)(randNextInRange(0x14) + 0x14) * COMMON_BG_SPEED_STEP;
+            work->rise[i].x = (f32)randNextInRange(0xF0);
+            work->rise[i].speed = -COMMON_BG_SPEED_STEP + (f32)(randNextInRange(0x13) + 1) * COMMON_BG_SPEED_STEP;
+            work->rise[i].size = commonBgRandomSize();
+            work->rise[i].extent = 102.0f;
+            work->rise[i].wobbleA = 0;
+            work->rise[i].wobbleB = 0xF0;
             if (randNextInRange(2) == 0) {
-                p->wobbleA -= randNextInRange(0x1E);
-                p->wobbleB += randNextInRange(0x1E);
+                work->rise[i].wobbleA -= randNextInRange(0x1E);
+                work->rise[i].wobbleB += randNextInRange(0x1E);
             }
-            if (p->speed == 0.0f)
-                p->speed = 1.0f;
-            if (p->speed < COMMON_BG_SPEED_STEP && p->speed > -COMMON_BG_SPEED_STEP)
-                p->speed *= 10.0f;
+            if (work->rise[i].speed == 0.0f)
+                work->rise[i].speed = 1.0f;
+            if (work->rise[i].speed < COMMON_BG_SPEED_STEP && work->rise[i].speed > -COMMON_BG_SPEED_STEP)
+                work->rise[i].speed *= 10.0f;
         }
         work->phase = 0.0f;
         work->active = 0;

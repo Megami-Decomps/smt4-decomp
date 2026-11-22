@@ -1,84 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `aocOpenPackedArchive` (_code @ 0x354608, 0x134 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: 78 lines (81 vs 85 rows): all nn::Result checks and WindowStatusResult returns match; retail packs descriptor into r0:r1 for strd/stm and keeps code in r0 across result tests. */
+#include "common.h"
+#include "nn/Result.h"
+#include "classes/WindowStatus.h"
+
+struct AocResourceOptions {
+    u32 id;
+    u8 kind;
+    u8 detail;
+    u8 unk06[2];
+};
 
 extern "C" {
+u32 FUN_003520dc(u32 *scratch, u32 state[6], u32 count, u64 descriptor, u32 flags);
+s32 FUN_0035228c(void *output, u8 flag, const void *input, s32 count);
 
-int _ZN18WindowStatusResultC1Ej(...);
-int FUN_003520dc(unsigned char *, unsigned char [24], int, unsigned int, unsigned int, unsigned int, int);
-int FUN_0035228c(unsigned char *, int, unsigned int *);
-
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_3_stack;
-
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-/* Supplied declaration required: FUN_003520dc. */
-/* Supplied declaration required: FUN_0035228c. */
-
-
-void aocOpenPackedArchive(unsigned int param_1,unsigned int *param_2,unsigned int *param_3)
-
+/* Maps the archive kind selector (0..3) to its high-word flags (shared with smt4a sdkCreateEncodedResourceDescriptor). */
+static __inline u32 encodeResourceKind(u8 kind)
 {
-/* irregular: 3 native warning(s); review required */
-  char temp_v0;
-  unsigned char *puVar2;
-  unsigned char *puVar3;
-  unsigned char temp_v1 [4];
-  unsigned int temp_v2;
-  unsigned int uStack_44;
-  unsigned char temp_v3 [24];
-  unsigned char temp_v4 [24];
-  
-  temp_v0 = (char)param_3[1];
-  if (temp_v0 == '\0') {
-    uStack_44 = 0x8c;
-  }
-  else if (temp_v0 == '\x01') {
-    uStack_44 = 0xd;
-  }
-  else if ((temp_v0 == '\x02') || (temp_v0 != '\x03')) {
-    uStack_44 = 0;
-  }
-  else {
-    uStack_44 = 0x10;
-  }
-  uStack_44 = uStack_44 | 0x40000;
-  temp_v2 = (unsigned int)*(unsigned char *)((int)param_3 + 5) | ((*param_3 & 0xff0fffff) << 8);
-  puVar2 = temp_v1;
-  FUN_003520dc(puVar2,temp_v3,1,*param_3,temp_v2,uStack_44,0);
-  if (puVar2 == (unsigned char *)0xd8a083fa) {
-    _ZN18WindowStatusResultC1Ej(param_1,0xc8813894);
-    return;
-  }
-  if ((int)puVar2 < 0) {
-    _ZN18WindowStatusResultC1Ej(param_1,puVar2);
-    return;
-  }
-  puVar2 = temp_v4;
-  FUN_0035228c(puVar2,1,&temp_v2);
-  puVar3 = (unsigned char *)(((unsigned int)puVar2 & 0x3fc00) >> 10);
-  if (((puVar3 != (unsigned char *)0x11) ||
-      (puVar3 = (unsigned char *)((unsigned int)puVar2 & 0x3ff), puVar3 < (unsigned char *)0x64)) ||
-     ((unsigned char *)0xb3 < puVar3)) {
-    if (puVar2 != (unsigned char *)0xd8a083fa) {
-      puVar3 = (unsigned char *)0xc8a0802b;
+    switch (kind) {
+    case 0: return 0x8c;
+    case 1: return 0x0d;
+    case 2: break;
+    case 3: return 0x10;
+    default: break;
     }
-    if (puVar2 != (unsigned char *)0xd8a083fa && puVar2 != puVar3) {
-      if (-1 < (int)puVar2) {
-        *param_2 = temp_v2;
-        param_2[1] = uStack_44;
-        _ZN18WindowStatusResultC1Ej(param_1,0);
-        return;
-      }
-      _ZN18WindowStatusResultC1Ej(param_1,puVar2);
-      return;
-    }
-  }
-  _ZN18WindowStatusResultC1Ej(param_1,0xc8813887);
-  return;
+    return 0;
 }
 
-} /* extern "C" */
+WindowStatusResult aocOpenPackedArchive(u64 *outDescriptor, const AocResourceOptions *options)
+{
+    u32 flags = encodeResourceKind(options->kind) | 0x40000;
+    u32 value = options->detail | ((options->id & 0xfffffu) << 8);
+    u64 descriptor = ((u64)flags << 32) | value;
+    u32 scratch;
+    u32 requestState[6];
+    u32 code = FUN_003520dc(&scratch, requestState, 1, descriptor, 0);
+    if (code == 0xd8a083fa) {
+        return WindowStatusResult(0xc8813894);
+    }
+    if (nnResultIsFailure(code)) {
+        return WindowStatusResult(code);
+    }
+    u32 queryState[6];
+    code = FUN_0035228c(queryState, 1, &descriptor, 1);
+    if ((nnResultModule(code) == 17 && nnResultDescriptionBits(code) >= 100 && nnResultDescriptionBits(code) <= 179) ||
+        code == 0xd8a083fa || code == 0xc8a0802b) {
+        return WindowStatusResult(0xc8813887);
+    }
+    if (nnResultIsFailure(code)) {
+        return WindowStatusResult(code);
+    }
+    *outDescriptor = descriptor;
+    return WindowStatusResult(0);
+}
+}

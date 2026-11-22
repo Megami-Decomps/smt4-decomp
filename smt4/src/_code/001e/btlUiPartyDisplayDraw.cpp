@@ -13,7 +13,7 @@ void renderCtxResetColorScale(RenderCtx *context);
    that many steps and `dimGuest` darkens the guest panel. */
 void FUN_0025f6b8(PlayScene *scene, s32 expanded, s32 allLit, s32 lift, s32 dimGuest);
 void campDrawPartyComparisonIndicators(PlayScene *scene, s32 forceFull);
-void FUN_0025ee64(PlayScene *scene);
+void btlCommandMenuDraw(PlayScene *scene);
 void FUN_0025d1c4(PlayScene *scene);
 void btlUiPartyDisplayDrawEntry(PlayScene *scene);
 void uiIconScrollerDrawArrow(PlayScene *scene, s32 amount);
@@ -53,7 +53,7 @@ void btlUiPartyDisplayDraw(PlayScene *scene)
         FUN_0025f6b8(scene, 0, 0, 0, 0);
         campDrawPartyComparisonIndicators(scene, 0);
         FUN_0025f300(scene);
-        FUN_0025ee64(scene);
+        btlCommandMenuDraw(scene);
         break;
     case 8:
     case 9:
@@ -66,20 +66,20 @@ void btlUiPartyDisplayDraw(PlayScene *scene)
         FUN_0025f6b8(scene, 0, 0, 0, 0);
         campDrawPartyComparisonIndicators(scene, 0);
         FUN_0025f300(scene);
-        FUN_0025ee64(scene);
+        btlCommandMenuDraw(scene);
         FUN_0025d1c4(scene);
         break;
     case 16:
         FUN_0025f6b8(scene, 1, 1, scene->unk3044, 0);
         campDrawPartyComparisonIndicators(scene, 1);
-        FUN_0025ee64(scene);
+        btlCommandMenuDraw(scene);
         FUN_0025d1c4(scene);
         break;
     case 17:
     case 41:
         FUN_0025f6b8(scene, 0, 0, 0, 0);
         campDrawPartyComparisonIndicators(scene, 0);
-        FUN_0025ee64(scene);
+        btlCommandMenuDraw(scene);
         FUN_0025d1c4(scene);
         break;
     case 18:
@@ -87,14 +87,14 @@ void btlUiPartyDisplayDraw(PlayScene *scene)
         FUN_0025f6b8(scene, 0, 0, 0, 0);
         campDrawPartyComparisonIndicators(scene, 0);
         FUN_0025f300(scene);
-        FUN_0025ee64(scene);
+        btlCommandMenuDraw(scene);
         FUN_0025d1c4(scene);
         btlUiPartyDisplayDrawEntry(scene);
         break;
     case 22:
         FUN_0025f6b8(scene, 0, 1, 0, 0);
         campDrawPartyComparisonIndicators(scene, 0);
-        FUN_0025ee64(scene);
+        btlCommandMenuDraw(scene);
         selectionPanelDrawMarkers(scene, 1);
         break;
     case 24:
@@ -149,19 +149,19 @@ void btlUiPartyDisplayDraw(PlayScene *scene)
     case 34:
         FUN_0025f6b8(scene, 0, 1, 0, 1);
         campDrawPartyComparisonIndicators(scene, 1);
-        FUN_0025ee64(scene);
+        btlCommandMenuDraw(scene);
         selectionPanelDrawMarkers(scene, 0);
         break;
     case 36:
         FUN_0025f6b8(scene, 0, 0, 0, 0);
         campDrawPartyComparisonIndicators(scene, 0);
-        FUN_0025ee64(scene);
+        btlCommandMenuDraw(scene);
         selectionPanelDrawMarkers(scene, 0);
         break;
     case 35:
         FUN_0025f6b8(scene, 0, 1, 0, 1);
         campDrawPartyComparisonIndicators(scene, 1);
-        FUN_0025ee64(scene);
+        btlCommandMenuDraw(scene);
         selectionPanelDrawMarkers(scene, 1);
         break;
     case 37:
@@ -175,7 +175,7 @@ void btlUiPartyDisplayDraw(PlayScene *scene)
             campDrawPartyComparisonIndicators(scene, 1);
         }
         FUN_0025f300(scene);
-        FUN_0025ee64(scene);
+        btlCommandMenuDraw(scene);
         break;
     case 39:
         mode = scene->mode;
@@ -185,7 +185,7 @@ void btlUiPartyDisplayDraw(PlayScene *scene)
             FUN_0025f6b8(scene, 0, 0, 0, 0);
             campDrawPartyComparisonIndicators(scene, 0);
             FUN_0025f300(scene);
-            FUN_0025ee64(scene);
+            btlCommandMenuDraw(scene);
         }
         break;
     }

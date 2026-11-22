@@ -28,7 +28,7 @@ typedef struct LmapObj {
 } LmapObj;
 
 /* One 0x88-byte slot of the state block's marker and model tables: the marker's pose and its
- * registration and visibility bytes (FUN_00272970 clears 0x84-0x86 of every slot). */
+ * registration and visibility bytes (lmapMainCreate clears 0x84-0x86 of every slot). */
 typedef struct LmapMainSlot {
     /* 0x00 */ MapVector position;
     /* 0x0C */ f32 rotation[9];
@@ -214,7 +214,7 @@ typedef char LmapSceneOffsetsCheck[offsetof(LmapScene, pose) == 0x1C && offsetof
     offsetof(LmapScene, markers.mapFile5) == 0x178 && offsetof(LmapScene, markerState.showFile5) == 0x182 &&
     offsetof(LmapScene, requestedChannelValues) == 0x1A8 && offsetof(LmapScene, equippedLegs) == 0x1B8 ? 1 : -1];
 
-/* The map state block in Apocalypse (0x9370 bytes, allocated by FUN_00272970). */
+/* The map state block in Apocalypse (0x9370 bytes, allocated by lmapMainCreate). */
 typedef struct LmapMainStateA {
     /* 0x0000 */ u32 job;
     /* 0x0004 */ u32 drawTask;

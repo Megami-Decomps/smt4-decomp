@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: retail spills the data argument to the frame ([sp,#24], block at sp+0) and keeps the running total in sl; built keeps data in a register and spills the total */
+/* NON_MATCHING: register allocation only: retail spills the data argument to the frame ([sp,#24], block at sp+0) and keeps the records pointer in r8 and the running total in sl; built keeps data in sl and addresses the records through the attribute base. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/S3AsdModelAttr.h"
@@ -25,8 +25,7 @@ void FUN_001457ec(AsdModelAttrModelB *model, u8 *data)
         total = ((AsdAtbcHeader *)data)->count;
     }
     attr.containers.count = total;
-    AsdModelAttrRecords &records = attr.records;
-    records.count = 0;
+    attr.records.count = 0;
     total = 0;
     for (s32 i = 0; i < attr.containers.count; i++) {
         AsdAtbcHeader *atbc = (AsdAtbcHeader *)data;
@@ -54,12 +53,12 @@ void FUN_001457ec(AsdModelAttrModelB *model, u8 *data)
             total += entry->hi - entry->lo + 1;
         }
     }
-    records.count = total;
+    attr.records.count = total;
     if (total == 0) {
-        records.items = NULL;
+        attr.records.items = NULL;
     } else {
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Model\\AsdModel.cpp", 1739);
-    records.items = (AsdModelAttrRecord *)asdMemAlloc(256, 256, 0, records.count * sizeof(AsdModelAttrRecord), 1);
+    attr.records.items = (AsdModelAttrRecord *)asdMemAlloc(256, 256, 0, attr.records.count * sizeof(AsdModelAttrRecord), 1);
 
     s32 count = 0;
     for (s32 i = 0; i < attr.containers.count; i++) {
@@ -90,7 +89,7 @@ void FUN_001457ec(AsdModelAttrModelB *model, u8 *data)
             s32 id = entry->lo;
 
             do {
-                AsdModelAttrRecord *record = &records.items[count];
+                AsdModelAttrRecord *record = &attr.records.items[count];
 
                 record->id = id;
                 record->handle = effPartCreateFromSource(tail);

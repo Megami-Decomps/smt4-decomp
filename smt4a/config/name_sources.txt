@@ -8674,3 +8674,38 @@
 004aa3d4 btlUiOpenHelpWindow inferred formats and opens the battle UI help window by kind
 004e7168 btlActionStepUnit inferred advances a battle unit's action phases
 0046e458 resourceSetFindActiveModelLinkValue inferred finds an id across six IdTables and returns the first active kind-5 link value
+00588c58 g_whisperLineData inferred twin of smt4 g_whisperLineData
+0036f424 eventTexCreate inferred twin of smt4 eventTexCreate
+0031fec0 whisperEffectDraw inferred twin of smt4 whisperEffectDraw
+002c0b98 mapCollisionQueueEdgeQuad inferred twin of smt4 mapCollisionQueueEdgeQuad
+0047dae0 strIsEmpty inferred twin of smt4 strIsEmpty (same body: first byte is 0); one name for both games
+00427360 archiveReadContentHeaderPair inferred twin of smt4 archiveReadContentHeaderPair
+0013b244 renderCtxSetupScreenCamera inferred twin of smt4 renderCtxSetupScreenCamera
+0033a690 lmapCameraSetMapPresets inferred twin of smt4 lmapCameraSetMapPresets
+00272970 lmapMainCreate evidence creates the "LMAP C"/"LMAP U" tasks; lmapMain.cpp trace path
+0035c3d0 eventSlashStart evidence starts the "EvtEftSlash" event effect
+0031c794 eventBannerUpdate inferred updates the event banner (EventEffectGlobalsA banner, bannerTextures)
+00295108 popupTryStartStory inferred starts a story popup when its cooldown and milestone allow
+0028a2e8 uniteMenuRebuildEntries inferred rebuilds the fusion menu's entries from two SearchTable lookups
+002c7388 fsResultReportNotice inferred reports a file-system result notice (fsResultInRange helpers)
+0016ae94 renderOutputBuildProjection inferred builds the render output's perspective projection (MTX44Perspective, quarter-turn pivot)
+00289f10 spriteJobDraw inferred draws a sprite job with its packed colour
+00334e1c statRowDraw inferred draws a status row
+0036dbd8 scrSelectSevenChoice inferred script choice selection over seven entries
+00155840 guestWinDraw evidence twin of smt4 guestWinDraw, same "GuestWin" draw task
+004bea0c partnerMenuUpdateList inferred runs the partner grid's input (PartnerSelectMenu)
+004bf174 partnerMenuUpdateStatusPage inferred runs the partner menu's status page
+004be990 partnerMenuStartPanelSlide inferred starts the partner menu panel sprite's slide
+0028f740 btlCommandMenuDraw inferred twin of smt4 btlCommandMenuDraw
+003da6ac btlCommandMenuKindAt inferred twin of smt4 btlCommandMenuKindAt
+00496a0c shopScreenRebuildForSelection inferred twin of smt4 shopScreenRebuildForSelection
+0036b21c titleMainDraw inferred draws the title screen (TitleMainA sprites)
+0047d904 asyncOperationStartOrPollNonBlocking inferred twin of asyncOperationStartOrPoll with timeout 0
+0048144c itemCanUseOnParty inferred whether an item can be used on the party (itemApplyToParty preview)
+004f5750 btlSpatialEffectStart inferred starts a battle spatial effect task (spatialEffectTaskCreate)
+003f26d4 btlAiBuildTurnOrder inferred builds the turn order (battleSortTurnOrder)
+004c9538 btlHelpAppendTextEntry inferred appends a text entry to the battle help (btlHelp.cpp line-275 creator)
+004b7694 questMenuPanelUpdate inferred updates the quest menu panel (uiClampScrollOffset, listSelectItem)
+004f1c5c btlCameraStartMove inferred near twin of smt4 btlCameraStartMove (tools/shared.py)
+004989f0 shopSelectEntryStart inferred twin of smt4 shopSelectEntryStart (same selection-script start); one name for both games
+0057f3b4 g_eventEffect inferred size:0x88 the asserted sizeof(EventEffectGlobalsA); no symbol before 0x57f43c (retail's pool word 0x57f3d0 is bannerTextures inside it)

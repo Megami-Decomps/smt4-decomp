@@ -6,7 +6,7 @@ extern "C" {
 
 
 void btlUiClearSelectionSlots(BtlUiA *block);
-void FUN_003f26d4(BtlMainStateA *battle);
+void btlAiBuildTurnOrder(BtlMainStateA *battle);
 void FUN_003ebc08(BtlMainStateA *battle, s32 flag);
 
 /* Commits the requested target counts, clears the selection slots and drops the preset's mask bits from the battle mask. */
@@ -19,7 +19,7 @@ u32 FUN_003cac6c(void)
     btlUiClearSelectionSlots(g_btlUiBlock);
     if ((battle->stateFlags64.bits & g_battleMaskPresets.clearView.clearMask) != 0) {
         battle->stateFlags64.bits &= ~g_battleMaskPresets.clearView.clearMask;
-        FUN_003f26d4(battle);
+        btlAiBuildTurnOrder(battle);
     }
     FUN_003ebc08(battle, 1);
     return 1;

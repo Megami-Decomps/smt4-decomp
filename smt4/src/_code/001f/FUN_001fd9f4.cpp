@@ -12,7 +12,7 @@ int mathInterpolatePackedTable(unsigned int);
 int FUN_002ba1e0(unsigned int);
 int renderCtxSelectTexture(...);
 int FUN_002e0460(void);
-int FUN_002f3904(void);
+int registeredBoundsDrawDebug(void);
 int FUN_002f484c(void);
 int FUN_0030f730(void);
 int FUN_00396dec(int);
@@ -43,7 +43,7 @@ extern unsigned int asdTMTexTableGetNodeTexture(unsigned int, unsigned int);
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002e0460. */
-/* Supplied declaration required: FUN_002f3904. */
+/* Supplied declaration required: registeredBoundsDrawDebug. */
 /* Supplied declaration required: FUN_002f484c. */
 /* Supplied declaration required: FUN_0030f730. */
 /* Supplied declaration required: FUN_00396dec. */
@@ -109,7 +109,7 @@ unsigned int FUN_001fd9f4(void)
       *(unsigned char *)(temp_v3 + 0x1264) = 0;
     }
     renderCtxSelectTexture(g_titleScene,0);
-    FUN_002f3904();
+    registeredBoundsDrawDebug();
     temp_v3 = g_titleScene;
     piVar7 = (int *)(g_titleScene + 0x124c);
     temp_v0 = *piVar7;

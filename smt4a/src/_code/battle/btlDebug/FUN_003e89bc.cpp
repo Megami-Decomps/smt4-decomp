@@ -19,7 +19,7 @@ void nameEntriesRegisterVerNames(void *work);
 void FUN_004cae0c(void *context, void *state, s32 pending, u32 target);
 void btlReflectQueueKind44(s32 x, s32 y, BattleRosterRecordA *record, u32 alpha, s32 height, s32 mode);
 void FUN_004fe764(s32 x, s32 y, BattleRosterRecordA *record, u32 icon, s32 layer);
-void FUN_004f1c5c(BtlCameraA *camera, s32 frames);
+void btlCameraStartMove(BtlCameraA *camera, s32 frames);
 
 /* Sort active enemy records and place their debug labels/icons in the selected spacing scheme. */
 void FUN_003e89bc(BtlMainStateA *battle)
@@ -56,6 +56,6 @@ void FUN_003e89bc(BtlMainStateA *battle)
                 first = true;
         }
     }
-    FUN_004f1c5c(g_btlCamera, 120);
+    btlCameraStartMove(g_btlCamera, 120);
 }
 }

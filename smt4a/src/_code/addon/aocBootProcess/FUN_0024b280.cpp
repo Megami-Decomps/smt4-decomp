@@ -43,7 +43,7 @@ void aocResetOperationState(AocSystemA *system);
 void aocEntryPanelCreateText(void *owner, s32 a, s32 b, s32 c);
 RequestParameters FUN_0046f3ac(AocSystemA *system);
 u8 startsWithH(const void *value);
-u8 isEmptyString(const void *value);
+u8 strIsEmpty(const void *value);
 u8 byteIsAtLeast100(const void *value);
 
 /* Bit `bit` of a flag word, as 0 or 1. */
@@ -110,7 +110,7 @@ u32 FUN_0024b280(void)
                 boot->dialogOpen = 1;
                 break;
             }
-            if (isEmptyString(&request) != 0 || byteIsAtLeast100(&request) != 0)
+            if (strIsEmpty(&request) != 0 || byteIsAtLeast100(&request) != 0)
                 boot->state = AOC_BOOT_STATE_OPEN_DIALOG;
             return 0;
         }

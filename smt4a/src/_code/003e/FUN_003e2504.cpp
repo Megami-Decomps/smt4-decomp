@@ -14,7 +14,7 @@ void frameTexRequestFade(s32 kind);
 u32 pairedAvailabilityGetState(u32 display);
 void screenFadeStartIn(u32 display, s32 frames, u32 alpha);
 void FUN_003ed6e8(BtlMainStateA *state);
-void FUN_003f26d4(BtlMainStateA *state);
+void btlAiBuildTurnOrder(BtlMainStateA *state);
 s32 btlFindSelectionIndexByOrdinal(BtlMainStateA *state, s32 flags);
 void FUN_0047f444(s32 kind);
 void FUN_004aa2e0(BtlUiA *ui, s32 mode);
@@ -39,7 +39,7 @@ u32 FUN_003e2504(BtlStep *step, BtlMainStateA *state)
         }
         bool special = (state->stateFlags64.bits & g_btlEncount.initialStateMask) != 0;
         FUN_003ed6e8(state);
-        FUN_003f26d4(state);
+        btlAiBuildTurnOrder(state);
         state->stateFlags64.bits |= masks->transition | masks->completed;
         if (!special) {
             FUN_004aa2e0(g_btlUiBlock, 0);

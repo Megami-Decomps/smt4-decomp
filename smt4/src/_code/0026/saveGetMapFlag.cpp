@@ -5,8 +5,8 @@ void saveGetMapFlag(u32 mask, s32 enabled)
 {
     GameSaveBody *body = &g_gameDataBlocks.saveBlock->body;
     if (enabled)
-        body->config.selection.modeFlags |= mask;
+        body->config.selection.state.modeFlags |= mask;
     else
-        body->config.selection.modeFlags &= ~mask;
+        body->config.selection.state.modeFlags &= ~mask;
 }
 }

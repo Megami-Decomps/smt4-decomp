@@ -28,7 +28,7 @@ u8 FUN_0031e384(void)
                               270.0f, 225.0f, 180.0f, 135.0f, 90.0f, 45.0f };
     const f32 reverse[12] = { 45.0f, 90.0f, 135.0f, 180.0f, 225.0f, 270.0f,
                               45.0f, 90.0f, 135.0f, 180.0f, 225.0f, 270.0f };
-    u8 flags = g_gameDataBlocks.saveBlock->body.config.selection.modeFlags;
+    u8 flags = g_gameDataBlocks.saveBlock->body.config.selection.state.modeFlags;
     if (slotIsActive(7) == 0) {
         g_gameDataBlocks.cheatSequenceStep = 0;
         return flags;
@@ -96,13 +96,13 @@ u8 FUN_0031e384(void)
         }
     }
     if (g_gameDataBlocks.cheatSequenceStep == 15) {
-        u8 current = g_gameDataBlocks.saveBlock->body.config.selection.modeFlags;
+        u8 current = g_gameDataBlocks.saveBlock->body.config.selection.state.modeFlags;
         if ((flags & 2) == 0) {
             current = current | 2;
         } else {
             current = current & 0xfd;
         }
-        g_gameDataBlocks.saveBlock->body.config.selection.modeFlags = current;
+        g_gameDataBlocks.saveBlock->body.config.selection.state.modeFlags = current;
         soundPlaySeUnpanned(0x1000170);
         g_gameDataBlocks.cheatSequenceStep = 0;
     }

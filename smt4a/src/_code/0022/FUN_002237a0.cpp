@@ -12,7 +12,7 @@ extern "C" {
 int FUN_001628c0(...);
 int eventQueueAddUnique(...);
 int FUN_00234880(void);
-int FUN_00295108(void);
+int popupTryStartStory(void);
 int mapIfStart(void);
 int popupQueueInsertUnique(...);
 int FUN_00312af0(void);
@@ -32,7 +32,7 @@ extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_001628c0. */
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: FUN_00234880. */
-/* Supplied declaration required: FUN_00295108. */
+/* Supplied declaration required: popupTryStartStory. */
 /* Supplied declaration required: mapIfStart. */
 /* Supplied declaration required: popupQueueInsertUnique. */
 /* Supplied declaration required: FUN_00312af0. */
@@ -327,7 +327,7 @@ LAB_00223c28:
   temp_v3 = lmapSceneGetUnk0();
   if ((temp_v3 == 1) && (g_gameState.unk2E8 = g_gameState.unk2E8 + 1, g_gameState.unk2E8 >= 27000)) {
     if (g_popupState->state == 0) {
-      FUN_00295108();
+      popupTryStartStory();
       FUN_00234880();
       g_gameState.unk2E8 = 0;
       if ((g_popupState->state != 0 && g_popupState->state != 0x12) &&

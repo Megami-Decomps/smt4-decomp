@@ -6,7 +6,7 @@ extern "C" {
 void FUN_00254600(u16 value)
 {
     GameSaveSelection *selection = &g_gameDataBlocks.saveBlock->body.config.selection;
-    selection->selectedUnitId = value;
+    selection->state.selectedUnitId = value;
 }
 
 } /* extern "C" */

@@ -34,7 +34,7 @@ void uiSpriteBankApplyPreset(SpritePresetBank *bank, u32 preset);
 void FUN_0049af90(Obj536044 *shop);
 void releaseEntriesB(CountAt5A *entries);
 void menuOpenCommandList(Obj536044 *shop);
-void shopStartSelectionScript(Obj536044 *shop, s32 kind);
+void shopSelectEntryStart(Obj536044 *shop, s32 kind);
 s32 tableGroupFindEntryIndex(u32 table, const char *name);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
 void buttonHelpSetText(const s8 *text, u32 color);
@@ -175,45 +175,45 @@ void Obj536044::FUN_0049bd20()
         case 0:
         case 1:
         case 2:
-            cleared[2] = 0;
-            cleared[1] = 0;
+            menuCursors[2] = 0;
+            menuCursors[1] = 0;
             if (slot == 1) {
-                cleared[1] = 1;
+                menuCursors[1] = 1;
             } else if (slot == 2) {
-                cleared[1] = 2;
+                menuCursors[1] = 2;
             }
-            clearedFlags[1] = 1;
+            menuCursorSet[1] = 1;
             if (visibleCount > 1) {
                 scrScriptProcessStartEntry(controller, tableGroupFindEntryIndex(tableGroup, "shop_in2"));
                 scrRunOpcodesStub(controller);
-                shopStartSelectionScript(this, 1);
+                shopSelectEntryStart(this, 1);
                 substate = 3;
                 buttonHelpSetText(NULL, 0xF4F4F4FF);
             }
-            clearedFlags[1] = 0;
+            menuCursorSet[1] = 0;
             break;
         case 3:
         case 4:
         case 5:
         case 6:
-            cleared[0] = 0;
-            cleared[2] = 1;
+            menuCursors[0] = 0;
+            menuCursors[2] = 1;
             if (slot == 4) {
-                cleared[0] = 1;
+                menuCursors[0] = 1;
             } else if (slot == 5) {
-                cleared[0] = 2;
+                menuCursors[0] = 2;
             } else if (slot == 6) {
-                cleared[0] = 3;
+                menuCursors[0] = 3;
             }
-            clearedFlags[0] = 1;
+            menuCursorSet[0] = 1;
             if (visibleCount > 1) {
                 scrScriptProcessStartEntry(controller, tableGroupFindEntryIndex(tableGroup, "shop_in2"));
                 scrRunOpcodesStub(controller);
-                shopStartSelectionScript(this, 2);
+                shopSelectEntryStart(this, 2);
                 substate = 4;
                 buttonHelpSetText(NULL, 0xF4F4F4FF);
             }
-            clearedFlags[0] = 0;
+            menuCursorSet[0] = 0;
             break;
         }
     } else if (inputIsQuestCancelPressed() != 0) {

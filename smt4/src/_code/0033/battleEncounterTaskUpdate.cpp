@@ -29,7 +29,7 @@ void asdMemFree(void *allocation); // declcheck: local (the shared declaration d
 void asdLoadFileAsyncSimple(const char *path, void **output, u32 flags); // declcheck: local (the shared declaration does not compile here or changes this unit)
 u32 FUN_0023fffc(BattleEncounterQuery *query, BtlMainState *battle);
 s32 screenFadesAllReady(); // declcheck: local (the shared declaration does not compile here or changes this unit)
-u32 FUN_0023fbdc(BattleEncounterQuery *query, BtlMainState *battle);
+u32 battleEncounterStepShowAmbushMarkers(BattleEncounterQuery *query, BtlMainState *battle);
 u32 battleEncounterStepAwaitCompletion(BattleEncounterQuery *query, BtlMainState *battle);
 s32 nodeListCountActiveById(void *list, u32 id); // declcheck: local (the shared declaration does not compile here or changes this unit)
 s32 recordAreAllCountsNonpositive(void *table);
@@ -157,9 +157,9 @@ extern "C" u32 battleEncounterTaskUpdate(BattleEncounterQuery *query, BtlMainSta
             return 0;
         query->pending = 0;
         query->step = 14;
-        return FUN_0023fbdc(query, battle);
+        return battleEncounterStepShowAmbushMarkers(query, battle);
     case 14:
-        return FUN_0023fbdc(query, battle);
+        return battleEncounterStepShowAmbushMarkers(query, battle);
     case 15:
         return battleEncounterStepAwaitCompletion(query, battle);
     case 16:

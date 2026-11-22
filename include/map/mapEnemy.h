@@ -71,7 +71,7 @@ struct MapEnemyEntry {
     /* 0x13E */ u8 tracking;            /* shown by an edge arrow when off screen */
     /* 0x13F */ u8 unk13F;
     /* 0x140 */ s32 blinkTimer;
-    /* 0x144 */ u8 onRadar;
+    /* 0x144 */ s8 onRadar;
     /* 0x145 */ u8 unk145[3];
     /* 0x148 */ f32 playerDistance;
     /* 0x14C */ u8 unk14C[0x10];

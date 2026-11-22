@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail expands four survivor tests; default compiler retains a loop and changes flag-mask addressing/saved registers (107/70). */
+/* NON_MATCHING: 129 lines (107 vs 66 rows): single-return control flow and stateFlags64.bits match; retail unrolls the four survivor tests while reloading exclusionMask per slot. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "battle/BtlGlobals.h"
@@ -13,27 +13,24 @@ u8 gameDataFlagTestBit(u32 flag);
 
 extern "C" bool battlePartyIsDefeated(const BtlMainStateA *state)
 {
-    u64 stateFlags = state->stateFlags.words[0] |
-                     (static_cast<u64>(state->stateFlags.words[1]) << 32);
-    if ((stateFlags & g_btlMain.suppressDefeat) != 0)
-        return false;
-
     bool defeated = true;
-    for (s32 i = 0; i < 4; ++i) {
-        const BtlCombatantEntryA &entry = state->entries[i];
-        if ((entry.flags & g_btlMain.combatantMasks.required) != 0 &&
-            (entry.flags & g_btlMain.exclusionMask) == 0 && entry.data.hp > 0) {
-            defeated = false;
-            break;
+    if ((g_btlMain.suppressDefeat & state->stateFlags64.bits) != 0) {
+        defeated = false;
+    } else {
+        for (s32 i = 0; i < 4; ++i) {
+            const BtlCombatantEntryA *entry = &state->entries[i];
+            if ((entry->flags & g_btlMain.combatantMasks.required) != 0 &&
+                (entry->flags & g_btlMain.exclusionMask) == 0 && entry->data.hp > 0) {
+                defeated = false;
+                break;
+            }
         }
-    }
-
-    if (gameDataBlocksGetTableFlag() == 4 || gameDataFlagTestBit(0x80) != 0) {
-        u64 leaderFlags = state->entries[0].flags;
-        if ((leaderFlags & g_btlMain.combatantMasks.required) == 0)
-            defeated = true;
-        if ((leaderFlags & g_btlMain.exclusionMask) != 0)
-            defeated = true;
+        if (gameDataBlocksGetTableFlag() == 4 || gameDataFlagTestBit(0x80) != 0) {
+            if ((g_btlMain.combatantMasks.required & state->entries[0].flags) == 0)
+                defeated = true;
+            if ((g_btlMain.exclusionMask & state->entries[0].flags) != 0)
+                defeated = true;
+        }
     }
     return defeated;
 }

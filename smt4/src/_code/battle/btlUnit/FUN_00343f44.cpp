@@ -49,7 +49,7 @@ typedef char BattleQueuedActionStepLayoutCheck[offsetof(BattleQueuedActionStep, 
 struct BtlUi;
 extern "C" {
 extern BattleVersionResources *g_btlAux;
-extern const BattleQueuedActionDrawDefaults DAT_00439a20;
+extern const BattleQueuedActionDrawDefaults g_btlMarkerTimings;
 void FUN_003c1248(s32 mode, s32 queue, s32 actor, s32 target);
 void FUN_0023f79c(BtlMainState *state, u32 flags);
 s32 FUN_003c0ab4(BtlActionRecord *action);
@@ -99,9 +99,9 @@ void FUN_00343f44(u32, BattleQueuedActionStep *work)
                 work->active = 0;
                 return;
             }
-            const s16 first = static_cast<s16>(DAT_00439a20.first);
-            const s16 second = static_cast<s16>(DAT_00439a20.second);
-            const s16 priority = static_cast<s16>(DAT_00439a20.priority);
+            const s16 first = static_cast<s16>(g_btlMarkerTimings.first);
+            const s16 second = static_cast<s16>(g_btlMarkerTimings.second);
+            const s16 priority = static_cast<s16>(g_btlMarkerTimings.priority);
             FUN_0024057c(reinterpret_cast<u32>(state), reinterpret_cast<ColorFadeWork *>(action), 0, 0);
             btlReflectCreateKind22(second + first, work->context, reinterpret_cast<u32>(action), 0xFF, priority, 0);
             u32 kind = 6;

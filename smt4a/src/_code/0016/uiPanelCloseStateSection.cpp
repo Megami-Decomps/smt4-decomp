@@ -1,110 +1,99 @@
-/* NON_MATCHING: HUD panel state reset by state id (hide or reset the sprites depending on the open/lock checks); written from the decompilation, branch/tail-call layout not compared with retail */
 #include "ui/UiSpriteApi.h"
-#include "common.h"
+#include "ui/MessageMainA.h"
 #include "StaffRoll/StaffRollMain.h"
-#include "ui/UiControl.h"
-
-struct PanelSprite {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ f32 progress;
-    /* 0x24 */ u8 unk24[0x61];
-    /* 0x85 */ u8 hidden;
-    /* 0x86 */ u8 unk86[6];
-};
-
-struct PanelWork {
-    /* 0x000 */ u8 unk000[0x28];
-    /* 0x028 */ s32 cursorBusy;
-    /* 0x02C */ u8 unk02C[0xB];
-    /* 0x037 */ u8 rowActive[5];
-    /* 0x03C */ u8 unk03C[0x1A];
-    /* 0x056 */ s16 selectedRow;
-    /* 0x058 */ u8 unk058[4];
-    /* 0x05C */ u8 selectedRowActive;
-    /* 0x05D */ u8 unk05D[0x157];
-    /* 0x1B4 */ PanelSprite sprites[0x2B];   /* the panel's sprites; indices below name the ones used */
-};
-
-#define PANEL_SPRITE_MAIN 0
-#define PANEL_SPRITE_SECOND 1
-#define PANEL_SPRITE_SIDE 2
-#define PANEL_SPRITE_FOURTH 3
-#define PANEL_SPRITE_SIXTH 5
-#define PANEL_SPRITE_SEVENTH 6
-#define PANEL_SPRITE_ROWS 7      /* five row sprites start here */
-#define PANEL_SPRITE_CURSORS 12  /* per-row cursor sprites */
-#define PANEL_SPRITE_LAST 42
 
 extern "C" {
 s32 padQueryLogicalKey(s32 a, s32 b);
-void workSetStateByte(PanelSprite *sprite, s32 value);
+void workSetStateByte(UiSpriteState *sprite, u8 state);
 
-/* Closes the panel parts that belong to the state; when the panel may stay open the sprites are
- * re-keyed instead of hidden. */
-void uiPanelCloseStateSection(PanelWork *panel, u32 state)
+/* Ends a sprite's closing at once (the skip path): clears its update state instead of keying it. */
+static void spriteSkipClose(UiSpriteState *sprite)
 {
-    PanelSprite *sprites = panel->sprites;
-    switch (state) {
-    default:
-        return;
+    workSetStateByte(sprite, 0);
+}
+
+/* Closes the window parts that belong to the layout `mode`: while the skip key is held or slot 6 is
+ * active the sprites are only marked, otherwise they play their closing keyframes. */
+void uiPanelCloseStateSection(MessageWindowA *window, u32 mode)
+{
+    switch (mode) {
     case 1:
-    case 10:
-        if (padQueryLogicalKey(9, 2) != 0 || slotIsActive(6) != 0)
-            workSetStateByte(&sprites[PANEL_SPRITE_MAIN], 0);
-        else
-            uiSpriteSetImageKeyframe((UiSpriteState *)(&sprites[PANEL_SPRITE_MAIN]), 2, 0);
-        return;
+        if (padQueryLogicalKey(9, 2) != 0 || slotIsActive(6) != 0) {
+            spriteSkipClose(&window->sprites[0]);
+        } else {
+            uiSpriteSetImageKeyframe(&window->sprites[0], 2, 0);
+        }
+        break;
     case 2:
     case 3:
     case 4:
     case 5:
-    case 0x11:
-    case 0x12:
-    case 0x13:
+    case 17:
+    case 18:
+    case 19:
         if (padQueryLogicalKey(9, 2) != 0 || slotIsActive(6) != 0) {
-            sprites[PANEL_SPRITE_MAIN].hidden = 0;
-            sprites[PANEL_SPRITE_SIDE].hidden = 0;
+            spriteSkipClose(&window->sprites[0]);
+            spriteSkipClose(&window->sprites[2]);
+            spriteSkipClose(&window->sprites[1]);
         } else {
-            uiSpriteSetImageKeyframe((UiSpriteState *)(&sprites[PANEL_SPRITE_MAIN]), 2, 0);
-            uiSpriteSetImageKeyframe((UiSpriteState *)(&sprites[PANEL_SPRITE_SIDE]), 2, 0);
+            uiSpriteSetImageKeyframe(&window->sprites[0], 2, 0);
+            uiSpriteSetImageKeyframe(&window->sprites[2], 2, 0);
+            spriteSkipClose(&window->sprites[1]);
         }
-        workSetStateByte(&sprites[PANEL_SPRITE_SECOND], 0);
-        return;
+        break;
     case 6:
-        if (padQueryLogicalKey(9, 2) != 0 || slotIsActive(6) != 0)
-            workSetStateByte(&sprites[PANEL_SPRITE_MAIN], 0);
-        else if (*(s32 *)&sprites[PANEL_SPRITE_MAIN].progress == 0x3F800000)
-            uiSpriteSetImageKeyframe((UiSpriteState *)(&sprites[PANEL_SPRITE_MAIN]), 2, 0);
-        return;
+        if (padQueryLogicalKey(9, 2) != 0 || slotIsActive(6) != 0) {
+            spriteSkipClose(&window->sprites[0]);
+        } else if (vec2GetSpeed(&window->sprites[0]) == 1.0f) {
+            uiSpriteSetImageKeyframe(&window->sprites[0], 2, 0);
+        }
+        break;
     case 7:
     case 8:
+        if (padQueryLogicalKey(9, 2) != 0 || slotIsActive(6) != 0) {
+            spriteSkipClose(&window->sprites[0]);
+            spriteSkipClose(&window->sprites[6]);
+        } else {
+            uiSpriteSetImageKeyframe(&window->sprites[0], 2, 0);
+            uiSpriteSetImageKeyframe(&window->sprites[6], 2, 0);
+        }
+        break;
     case 9:
         if (padQueryLogicalKey(9, 2) != 0 || slotIsActive(6) != 0) {
-            sprites[PANEL_SPRITE_MAIN].hidden = 0;
-            workSetStateByte(&sprites[PANEL_SPRITE_SEVENTH], 0);
+            spriteSkipClose(&window->sprites[0]);
+            spriteSkipClose(&window->sprites[6]);
         } else {
-            uiSpriteSetImageKeyframe((UiSpriteState *)(&sprites[PANEL_SPRITE_MAIN]), 2, 0);
-            uiSpriteSetImageKeyframe((UiSpriteState *)(&sprites[PANEL_SPRITE_SEVENTH]), 2, 0);
+            uiSpriteSetImageKeyframe(&window->sprites[0], 2, 0);
+            uiSpriteSetImageKeyframe(&window->sprites[6], 2, 0);
         }
-        return;
-    case 0xB:
-        uiSpriteSelectAnim((UiSpriteState *)(&sprites[PANEL_SPRITE_MAIN]), 7);
-        uiSpriteSelectAnim((UiSpriteState *)(&sprites[PANEL_SPRITE_FOURTH]), 7);
-        sprites[PANEL_SPRITE_SIXTH].hidden = 0;
-        uiSpriteSelectAnim((UiSpriteState *)(&sprites[PANEL_SPRITE_LAST]), 7);
-        return;
-    case 0xC:
+        break;
+    case 10:
+        if (padQueryLogicalKey(9, 2) != 0 || slotIsActive(6) != 0) {
+            spriteSkipClose(&window->sprites[0]);
+        } else {
+            uiSpriteSetImageKeyframe(&window->sprites[0], 2, 0);
+        }
+        break;
+    case 11:
+        uiSpriteSelectAnim(&window->sprites[0], 7);
+        uiSpriteSelectAnim(&window->sprites[3], 7);
+        workSetStateByte(&window->sprites[5], 0);
+        uiSpriteSelectAnim(&window->sprites[42], 7);
+        break;
+    case 12:
         for (s32 i = 0; i < 5; i++) {
-            if (panel->rowActive[i] != 0)
-                uiSpriteSetImageKeyframe((UiSpriteState *)(&sprites[PANEL_SPRITE_ROWS + i]), 5, 0);
+            if (window->choiceEnabled[i] != 0) {
+                uiSpriteSetImageKeyframe(&window->sprites[7 + i], 5, 0);
+            }
         }
-        panel->cursorBusy = 0;
-        return;
-    case 0xD:
-        if (panel->selectedRowActive != 0)
-            uiSpriteSetImageKeyframe((UiSpriteState *)(&sprites[PANEL_SPRITE_CURSORS + panel->selectedRow]), 5, 0);
-        panel->cursorBusy = 0;
-        return;
+        window->choicePhase = 0;
+        break;
+    case 13:
+        if (window->selectedChoiceActive != 0) {
+            uiSpriteSetImageKeyframe(&window->sprites[12 + window->selectedChoice], 5, 0);
+        }
+        window->choicePhase = 0;
+        break;
     }
 }
 

@@ -34,8 +34,8 @@ extern "C" {
 extern s8 g_callbackOwnerSlots;
 
 s32 FUN_004be1c8(PartnerMenuFull *menu);
-s32 FUN_004bea0c(PartnerMenuFull *menu);
-s32 FUN_004bf174(PartnerMenuFull *menu);
+s32 partnerMenuUpdateList(PartnerMenuFull *menu);
+s32 partnerMenuUpdateStatusPage(PartnerMenuFull *menu);
 void gameGlobalsSetMenuOpenFlag(s32 owner);
 void messageBannerRestartOrClear(void);
 s32 messageMainGetValue(void);
@@ -74,10 +74,10 @@ u32 FUN_004be608(PartnerMenuFull *menu)
         }
         break;
     case 3:
-        FUN_004bea0c(menu);
+        partnerMenuUpdateList(menu);
         break;
     case 4:
-        FUN_004bf174(menu);
+        partnerMenuUpdateStatusPage(menu);
         break;
     case 5:
         if (scrRunOpcodesStub(menu->script) != 2)

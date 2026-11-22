@@ -20,12 +20,17 @@ typedef struct GameOptions {
         struct {
             u8 unk0000[0xE];
             /* 0x000E */ s16 maxHp;
-            u8 unk0010[0x34];
+            u8 unk0010[0x1A];
+            /* 0x002A */ s16 hp;
+            u8 unk002C[0x18];
             /* 0x0044 */ u16 ailments;   /* bit 1: dead */
         } guest;
         GameOptionsSupportStats supportStats;
     };
-    /* 0x0046 */ u16 unk46;
+    union {
+        /* 0x0046 */ u16 unk46;
+        /* 0x0046 */ u16 guestId;       /* the guest's demon id (0: no guest) */
+    };
     union {
         /* 0x0048 */ u8 unk0048[0x5BC];
         struct {
@@ -35,7 +40,10 @@ typedef struct GameOptions {
             u8 unk058C[0x78];
         } inheritance;
     };
-    /* 0x0604 */ u16 unk604;
+    union {
+        /* 0x0604 */ u16 unk604;
+        /* 0x0604 */ u16 supportKind;   /* the support unit's table kind (supportUnitGetEntry; its name is FUN_002bcf4c's) */
+    };
     /* 0x0606 */ u16 supportIndex;
     /* 0x0608 */ u16 flags;
     /* 0x060A */ u16 supportCandidates[3];

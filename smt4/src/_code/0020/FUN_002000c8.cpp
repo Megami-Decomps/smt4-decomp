@@ -8,7 +8,7 @@ extern "C" {
 
 int FUN_0025461c(void);
 int FUN_0025463c(void);
-int FUN_002595e0(void);
+int saveSelectReserveUnit(void);
 int cecProcessForward(void);
 int FUN_002597c0(void);
 int objectFlagsClear(unsigned int, int);
@@ -29,7 +29,7 @@ extern int campCecEditGetFlag125(void);
 /* Supplied declaration required: FUN_0025463c. */
 extern int gameDataBlockTestFlag(unsigned int);
 extern int cecQueryOptionalProcess(void);
-/* Supplied declaration required: FUN_002595e0. */
+/* Supplied declaration required: saveSelectReserveUnit. */
 /* Supplied declaration required: cecProcessForward. */
 /* Supplied declaration required: FUN_002597c0. */
 /* Supplied declaration required: objectFlagsClear. */
@@ -108,7 +108,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
           temp_v3 = FUN_0025463c();
           rt_aeabi_memclr(temp_v3 + 0x38,0x14);
           FUN_0025463c();
-          FUN_002595e0();
+          saveSelectReserveUnit();
           gameFlagSetValue(0x550, 1, 1);
           *(unsigned int *)(temp_v4 + 0x38) = 7;
           *(unsigned char *)(temp_v4 + 0x3c) = (*(unsigned char *)(temp_v4 + 0x3c) & 0xfe) | 2;

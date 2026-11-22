@@ -55,7 +55,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: jobFlagsWorkStop. */
 /* Supplied declaration required: FUN_0047bc90. */
 /* Supplied declaration required: aocLoadingTaskStart. */
-extern int isEmptyString(unsigned int *);
+extern int strIsEmpty(unsigned int *);
 
 
 void AocMenu::runConnectedProcess()
@@ -117,7 +117,7 @@ void AocMenu::runConnectedProcess()
           record.word(2) = uStack_44;
           record.word(3) = uStack_40;
           record.word(4) = uStack_3c;
-          temp_v1 = isEmptyString(&record.word(0));
+          temp_v1 = strIsEmpty(&record.word(0));
           if (temp_v1 != 0) {
             *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) | 0x100;
             aocMenuSetButtonHelp(param_1,1);

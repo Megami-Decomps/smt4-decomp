@@ -29,7 +29,7 @@ u32 asdListBoxGetSelectedItemId(u32 listBox);
 const char *aocIndexValueOrDefault(u32 index);
 void textDrawDefaultString(const char *text, f32 x, f32 y);
 u32 FUN_002561d8(BtlDebugWork *work, u32 unit, s32 flags);
-void FUN_003c2fe8(BtlDebugMenu *menu, u32 value);
+void btlDebugDrawSpriteHelp(BtlDebugMenu *menu, u32 value);
 void uiDrawFlagLabels(BtlDebugMenu *menu, u32 value);
 
 /* Battle debug menu update: act on the selected list item for the menu's current state. */
@@ -42,7 +42,7 @@ s32 FUN_001fc5c0(u32 handle)
         return 0;
     }
     if (menu->state == 1) {
-        FUN_003c2fe8(menu, g_btlDebugState.value);
+        btlDebugDrawSpriteHelp(menu, g_btlDebugState.value);
     } else if (menu->state == 10) {
         if (asdListBoxGetSelectedItemId(menu->listBox) == 11) {
             textDrawDefaultString(aocIndexValueOrDefault(work->aocIndex), 256.0f, 42.0f);

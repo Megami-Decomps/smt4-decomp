@@ -68,7 +68,17 @@ typedef char UniteEffectWorkLayoutCheck[offsetof(UniteEffectWork, renderTarget.m
     offsetof(UniteEffectWork, sprites) == 0x2C8 && offsetof(UniteEffectWork, cursor) == 0x8CC &&
     sizeof(UniteEffectWork) == 0x958 ? 1 : -1];
 
+/* When a material's portrait is shown during the model animation (state 3): the frames, counted by
+ * UniteEffectWork::phase, at which its band has opened and at which it starts to close. */
+struct UniteMaterialCue {
+    /* 0x00 */ u16 start;
+    /* 0x02 */ u16 end;
+};
+
 extern "C" {
+extern const UniteMaterialCue g_uniteMaterialCues2[4]; /* two materials, then two unused entries */
+extern const UniteMaterialCue g_uniteMaterialCues3[4]; /* three materials, then one unused entry */
+extern const UniteMaterialCue g_uniteMaterialCues4[4]; /* four materials */
 extern UniteEffectWork *g_screenStateWork;
 s32 uniteEffectUpdate(u32 process);
 void titleLogoDraw(UniteRenderTarget *target);

@@ -9,7 +9,7 @@ extern "C" {
 int FUN_0026b9bc(void);
 int titleSetSlotValueState2(...);
 
-int FUN_002595e0(...);
+int saveSelectReserveUnit(...);
 int cecProcessForward(...);
 int FUN_00262f78(void);
 int objectFlagSetBit(...);
@@ -50,7 +50,7 @@ extern int g_campCec; /* 0x43daa8 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_002595e0. */
+/* Supplied declaration required: saveSelectReserveUnit. */
 /* Supplied declaration required: cecProcessForward. */
 /* Supplied declaration required: FUN_002597c0. */
 extern unsigned int gameDataBlocksGetFlagByteA(void);
@@ -350,7 +350,7 @@ LAB_001ec410:
       cecCardBuild(g_campCec + 0x48,(int)*(short *)(temp_v7 + 0x46),temp_v8,temp_v5);
       FUN_002597c0();
       cecProcessForward(g_campCec + 0x48);
-      FUN_002595e0(g_campCec + 0x48);
+      saveSelectReserveUnit(g_campCec + 0x48);
     }
     else {
       __aeabi_memcpy4(param_1 + 0x6e4,param_1 + 0xe0,0x604);

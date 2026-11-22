@@ -1,4 +1,4 @@
-/* NON_MATCHING: 14 lines, all in the list branch: the cursor marker's colour copy (mov r7, fp) is scheduled after its draw call's arguments, and the item address takes r0/r1 the other way round. Both colour resets use effectColorSet: field stores for the first one give 6, only by moving registers in the unrelated list branch. */
+/* NON_MATCHING: 10 lines (the pop's stack address now agrees through renderCtxPopCounted), all in the list branch: the cursor marker's colour copy (mov r7, fp) is scheduled after its draw call's arguments, and the item address takes r0/r1 the other way round. Both colour resets use effectColorSet: field stores for the first one give 6, only by moving registers in the unrelated list branch. */
 #include "camp/RenderCtx.h"
 #include "text/TextDraw.h"
 #include "shard/W6_W6Match3_EffectColor.h"
@@ -69,7 +69,7 @@ u32 FUN_00201830(void)
             effectColorSet(&color, 1.0f, 1.0f, 1.0f, work->fade);
             renderCtxSelectTexture(g_titleScene, 0);
             gfxDrawQuadFourColors(0.0f, 0.0f, 400.0f, 240.0f, &color, &color, &color, &color, 0.95703125f);
-            renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
+            renderCtxPopCounted(g_titleScene, RENDER_STACK_A);
         }
     }
     renderCtxApplyTransforms(g_titleScene);

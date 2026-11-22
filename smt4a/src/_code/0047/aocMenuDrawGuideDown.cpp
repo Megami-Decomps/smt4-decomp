@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the g_renderCtx / text-array register pair (r9, r8) is swapped. */
 #include "ui/UiSpriteApi.h"
 #include "shard/S1ListPanel.h"
 #include "shard/W4_Match3_AocMainA.h"
@@ -58,7 +57,7 @@ extern "C" s32 aocMenuDrawGuideDown(u32 job)
             s32 textY = sprite->y + y;
             textDrawString(static_cast<f32>(textX), static_cast<f32>(textY), 0.5f, 3, 0.0f, color, 1.0f, (const char *)&text[i]);
         }
-        renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
+        renderCtxPopCounted(g_renderCtx, RENDER_STACK_A);
     }
     return 0;
 }

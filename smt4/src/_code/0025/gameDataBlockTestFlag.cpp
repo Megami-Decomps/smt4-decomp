@@ -7,7 +7,7 @@ s32 gameDataBlockTestFlag(u32 mask)
 {
     GameSaveBody *body = &g_gameDataBlocks.saveBlock->body;
 
-    return (mask & body->config.selection.modeFlags) != 0;
+    return (mask & body->config.selection.state.modeFlags) != 0;
 }
 
 }

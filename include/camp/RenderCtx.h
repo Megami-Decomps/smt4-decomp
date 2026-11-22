@@ -76,7 +76,13 @@ typedef struct RenderCtxA {
             /* 0x050C */ f32 parameter;
             /* 0x0510 */ f32 minimum;
             /* 0x0514 */ f32 maximum;
-            u8 unk0518[8];
+            union {
+                u8 unk0518[8];
+                struct {
+                    /* 0x0518 */ f32 depth;
+                    /* 0x051C */ f32 scale;
+                } defaultView;
+            };
             /* 0x0520 */ f32 (*transform)(f32 value, f32 parameter);
         } stereo;
     };
@@ -148,6 +154,9 @@ typedef char RenderCtxAStereoOffsetCheck[
     offsetof(RenderCtxA, stereo.maximum) == 0x514 &&
     offsetof(RenderCtxA, stereo.transform) == 0x520 &&
     offsetof(RenderCtxA, stereoMode) == 0x52C ? 1 : -1];
+typedef char RenderCtxADefaultViewOffsets[
+    offsetof(RenderCtxA, stereo.defaultView.depth) == 0x518 &&
+    offsetof(RenderCtxA, stereo.defaultView.scale) == 0x51C ? 1 : -1];
 typedef char RenderCtxAColorScaleOffsetCheck[offsetof(RenderCtxA, color.colorScale) == 0x11D8 ? 1 : -1];
 typedef char RenderCtxAColorDirtyOffsetCheck[offsetof(RenderCtxA, color.colorScaleDirty) == 0x11E8 ? 1 : -1];
 typedef char RenderCtxStacksOffsetCheck[
@@ -186,6 +195,20 @@ static __inline void renderCtxSetStackTop(RenderCtx *context, s32 kind, s32 stat
 static __inline void renderCtxSetStackTop(RenderCtxA *context, s32 kind, s32 state)
 {
     renderStackSetCounted(&context->stacks[kind], state);
+}
+
+/* Pops the context's stack `kind` (RenderStackKind) with the depth read once: the inlined form of the
+ * context's pop (renderCtxPopState is its out-of-line copy). Retail keeps the context in a scratch register
+ * and forms the stack's address from it (`ldr r0; add r4, r0, #4096`), which naming the stack at the call
+ * (`renderStackPopCounted(context->stacks + kind)`) does not give. */
+static __inline void renderCtxPopCounted(RenderCtx *context, s32 kind)
+{
+    renderStackPopCounted(&context->stacks[kind]);
+}
+
+static __inline void renderCtxPopCounted(RenderCtxA *context, s32 kind)
+{
+    renderStackPopCounted(&context->stacks[kind]);
 }
 
 /* Pushes `state` on the context's first stack; the stack is located after `state` is evaluated. */

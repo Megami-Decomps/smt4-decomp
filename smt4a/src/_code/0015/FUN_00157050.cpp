@@ -3,7 +3,7 @@
 
 extern "C" {
 void FUN_0016a438(RenderUpdateStatePrefixA *state);
-void FUN_0016ae94(RenderUpdateStatePrefixA *state, const RenderUpdateContextPrefixA *context);
+void renderOutputBuildProjection(RenderUpdateStatePrefixA *state, const RenderUpdateContextPrefixA *context);
 void FUN_0018ab54(u8 *result, const u8 *source);
 void FUN_0018f0ac(u8 *result, u32 mode, const u8 *transform,
                   f32 value0, f32 value1, f32 value2,
@@ -18,7 +18,7 @@ void FUN_00157050(RenderUpdateStatePrefixA *state,
     FUN_0016a438(state);
 
     if ((state->flags & 2u) != 0) {
-        FUN_0016ae94(state, context);
+        renderOutputBuildProjection(state, context);
     } else {
         const RenderUpdateCoreA *core = &state->core;
         const RenderUpdateParametersA *parameters = &state->parameters;

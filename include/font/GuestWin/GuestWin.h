@@ -5,28 +5,33 @@
 #include "common.h"
 #include <stddef.h>
 
-/* The guest window's work area. */
+#include "ui/UiSpriteState.h"
+
+/* The guest window's work area (0xBC bytes). */
 typedef struct GuestWinWork {
     union {
         /* 0x00 */ u8 unk00[0x8];
-        /* 0x00 */ u32 job;
+        /* 0x00 */ u32 job;                /* the update process the draw tasks hang from */
     };
     /* 0x08 */ s32 state;                  /* 0 idle, 1 opening, 2 shown, 3 closing */
     /* 0x0C */ s32 frames;                 /* frames since the window was shown */
-    /* 0x10 */ u8 unk10[0x20];
-    /* 0x30 */ u8 ui[0x20];                /* UI object of the window */
+    /* 0x10 */ u8 unk10[0x20];             /* the sprite's resource packet (UiResourceParameters) */
+    /* 0x30 */ UiSpriteState sprite;       /* the window's sprite: its position and alpha place the contents */
 } GuestWinWork;
 typedef char GuestWinJobPrefixLayoutCheck[offsetof(GuestWinWork, job) == 0 &&
-    sizeof(GuestWinWork) == 0x50 ? 1 : -1];
+    offsetof(GuestWinWork, sprite) == 0x30 && sizeof(GuestWinWork) == 0xBC ? 1 : -1];
 
-/* Apocalypse: the guest window's work area. */
+/* Apocalypse: the guest window's work area (0xBC bytes). */
 typedef struct GuestWinWorkA {
-    /* 0x00 */ u8 unk00[0x8];
+    /* 0x00 */ u32 process;                /* the update process the draw tasks hang from */
+    /* 0x04 */ u8 unk04[4];
     /* 0x08 */ s32 state;                  /* 0 idle, 1 opening, 2 shown, 3 closing */
     /* 0x0C */ s32 frames;                 /* frames since the window was shown */
-    /* 0x10 */ u8 unk10[0x20];
-    /* 0x30 */ u8 ui[0x20];                /* UI object of the window */
+    /* 0x10 */ u8 parameters[0x20];        /* the sprite's resource packet (UiResourceParameters) */
+    /* 0x30 */ UiSpriteState sprite;       /* the window's sprite: its position and alpha place the contents */
 } GuestWinWorkA;
+typedef char GuestWinWorkALayoutCheck[offsetof(GuestWinWorkA, sprite) == 0x30 &&
+    sizeof(GuestWinWorkA) == 0xBC ? 1 : -1];
 
 /* IV: the options block returned by FUN_002b6b20. */
 typedef struct GuestWinOptions {

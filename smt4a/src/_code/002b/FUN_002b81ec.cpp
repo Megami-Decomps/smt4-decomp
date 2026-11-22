@@ -22,7 +22,7 @@ int mapResolveCollisionSphere(int, int, int);
 float mathSnapHeading16(float angle);
 float calcHeadingRoundedTo32Directions(float angle);
 int FUN_00294c28(void);
-int FUN_00295108(int);
+int popupTryStartStory(int);
 int distSpatial(void);
 int mathAngleDeltaDegrees(void);
 int FUN_002b80b8(void);
@@ -83,7 +83,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: mapResolveCollisionSphere. */
 extern unsigned int FUN_0029202c(void);
 /* Supplied declaration required: FUN_00294c28. */
-/* Supplied declaration required: FUN_00295108. */
+/* Supplied declaration required: popupTryStartStory. */
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: FUN_002b621c. */
@@ -302,7 +302,7 @@ void FUN_002b81ec(void)
         }
         if ((*(int *)(temp_v2 + 0xdcc) == 0) &&
            (temp_v5 = *(int *)(temp_v2 + 0xdc8) + 1, *(int *)(temp_v2 + 0xdc8) = temp_v5, temp_v5 >= 901)) {
-          FUN_00295108(0);
+          popupTryStartStory(0);
           FUN_00294c28();
           FUN_002b80b8();
           *(unsigned int *)(temp_v2 + 0xdcc) = 0xe10;

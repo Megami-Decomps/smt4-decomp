@@ -1,37 +1,35 @@
-/* NON_MATCHING: eligibility cold-block placement and field-load registers differ; the compact save record is placed at a different stack offset/frame size. */
+/* NON_MATCHING: 6 lines: the spilled result slot sits at [sp, #92] instead of [sp, #88]; all 101 instructions and the frame size match. */
 #include "shard/W6_W6Match8_FusionSelection.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-
-struct FusionSavedDemon {
-    u8 unk00[0x36];
-    u16 flags;
-    u8 unk38[0x18];
-};
+#include "gamedata/GameSaveDataA.h"
+#include "gamedata/GameDataAccess_VariantE.h"
+#include "map/lmapMain.h"
 
 extern "C" {
-s32 gameFlagIsSet(u32 flag);
-u32 gameDataCopySaveEntry(u32 id, void *out);
 
-u16 uniteFindClosestEligibleCandidate(FusionRaceSelection *selection, s32 race, u32 level, s32 checkRecord)
+/* Finds the closest eligible candidate in `race` at or below `level` (clamped to the race's last entry). */
+u16 uniteFindClosestEligibleCandidate(FusionRaceSelection *selection, s32 race, u16 level, s32 checkRecord)
 {
-    u16 bestDifference = 999;
-    u32 bestId = 0;
-    u32 count = selection->counts[race];
-    if (count != 0) {
-        u32 highestLevel = selection->levels[race][count - 1].level;
-        u32 threshold = level;
-        if (highestLevel > threshold) {
-            threshold = highestLevel;
+    u16 result = 0;
+    u16 bestDistance = 999;
+
+    if (selection->counts[race] != 0) {
+        u16 lastLevel = selection->levels[race][selection->counts[race] - 1].level;
+        if (lastLevel > level) {
+            level = lastLevel;
         }
         for (s32 index = 0; index < selection->counts[race]; ++index) {
-            u32 candidateLevel = selection->levels[race][index].level;
-            if (candidateLevel > threshold || static_cast<s32>(threshold - candidateLevel) >= bestDifference) {
+            if (selection->levels[race][index].level > level ||
+                (s32)(level - selection->levels[race][index].level) >= bestDistance) {
                 continue;
             }
-            u16 id = selection->levels[race][index].id;
-            if (checkRecord) {
-                const NkmBaseRecordA *record = nkmBaseGetRecord(id);
+            if (checkRecord == 0) {
+                if (!entryDefIsAvailable(selection, selection->levels[race][index].id)) {
+                    continue;
+                }
+            } else {
+                const NkmBaseRecordA *record = nkmBaseGetRecord(selection->levels[race][index].id);
                 if (record->fusionRestrictions & 0x1c00000) {
                     continue;
                 }
@@ -39,25 +37,26 @@ u16 uniteFindClosestEligibleCandidate(FusionRaceSelection *selection, s32 race, 
                     continue;
                 }
                 if (record->saveRequirement & 1) {
-                    FusionSavedDemon saved;
-                    if (record->saveRequirement & 0xfffe) {
-                        if (!gameDataCopySaveEntry(record->saveRequirement >> 1, &saved) || !(saved.flags & 0xfc)) {
+                    GameSavedItemA saved;
+                    if (record->saveRequirement & ~1) {
+                        if (!gameDataCopySaveEntry(record->saveRequirement >> 1, &saved) || !(saved.bits & 0xfc)) {
                             continue;
                         }
-                    } else if (!gameDataCopySaveEntry(record->id, &saved) || !(saved.flags & 0xfc)) {
-                        continue;
+                    } else {
+                        if (!gameDataCopySaveEntry(record->id, &saved) || !(saved.bits & 0xfc)) {
+                            continue;
+                        }
                     }
                 }
                 if (!(record->flags & 1)) {
                     continue;
                 }
-            } else if (!entryDefIsAvailable(selection, id)) {
-                continue;
             }
-            bestId = selection->levels[race][index].id;
-            bestDifference = threshold - selection->levels[race][index].level;
+            result = selection->levels[race][index].id;
+            bestDistance = level - selection->levels[race][index].level;
         }
     }
-    return bestId;
+    return result;
 }
-}
+
+} /* extern "C" */

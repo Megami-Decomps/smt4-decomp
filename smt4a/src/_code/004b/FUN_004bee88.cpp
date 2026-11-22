@@ -1,6 +1,6 @@
-/* NON_MATCHING: register assignment differs (retail keeps y in r6 and the unit in r5; built swaps them) and the notice text buffer frame is 8 bytes larger (200 vs 185 rows); the partner screen drawing is the same. */
+/* NON_MATCHING: 116 lines (187 vs 185 rows): frame size (char text[64]) and __2sprintf match; retail swaps r5/r6 (y vs unit) and loads slot->x before slot->y. */
 #include "common.h"
-#include <stdio.h>
+#include "runtime/Stdio.h"
 #include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
@@ -22,6 +22,7 @@ typedef struct PartnerScreenView {
     /* 0x328 */ s32 current;
 } PartnerScreenView;
 
+extern const char DAT_0052d83c[];
 s32 renderCtxPackPassFlags(s32 a, s32 b);
 PartnerUnitView *partyGetSlot(u16 index);
 void FUN_004bde34(PartnerScreenView *screen, PartnerUnitView *unit, s32 index, s32 x, s32 y, f32 scale);
@@ -36,7 +37,7 @@ void renderCtxResetColorScale(RenderCtxA *context);
 void FUN_004bee88(PartnerScreenView *screen, s32 x, s32 y, f32 scale)
 {
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
-    renderStackPush(g_renderCtx->stacks + RENDER_STACK_A, renderCtxPackPassFlags(1, 0));
+    renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
     s32 shown = 0;
 
     for (s32 i = 0; i < 12; i++) {
@@ -57,12 +58,9 @@ void FUN_004bee88(PartnerScreenView *screen, s32 x, s32 y, f32 scale)
             texDrawTableEntryAtStoredOrigin(2, 0x11, i + 0xBE, 0, 0, 0x6F);
         }
         TextureTableEntryIV *notice = asdTMTexTableEntryAt(0x11, 0xC4);
-        u8 text[76];
+        char text[64];
 
-        sprintf((char *)text,
-                         "\202\170\202\217\202\225\201\100\202\204\202\217\201\100\202\216\202\217\202\224\201\100\202\210"
-                         "\202\201\202\226\202\205\201\100\202\201\202\216\202\231\201\100\202\220\202\201\202\222\202\224"
-                         "\202\216\202\205\202\222\202\223\201\104");
+        __2sprintf(text, DAT_0052d83c);
         s32 width = fontMeasureLineAdvance(text, 3);
         s32 offset = (notice->placement->width - width) / 2;
 

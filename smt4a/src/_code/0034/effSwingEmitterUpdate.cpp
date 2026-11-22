@@ -1,10 +1,14 @@
-/* NON_MATCHING: typed rewrite from its twin effSpiralEmitterUpdate (537 raw / 481 shape rows, from 609; the count
- * is mostly renumbered registers). The calls, stores, constants and block order (live particles first, the emit
- * path between the two halves of the live update) follow retail. Retail saves d8-d14 and computes
- * -(0.5 * gravity) * step inside the loop; this build hoists that product, saves d8-d15 and so renumbers most VFP
- * registers. Retail copies the definition's rotation (with the duration behind it) and the live particle's
- * previous position through VFP registers (vldmia/vstmia) where the build uses ldm/stm, loads the 0.0 constant
- * before the emission-state call, and rotates the up axis row by row (vldmia of each matrix row). */
+/* NON_MATCHING: typed rewrite from its twin effSpiralEmitterUpdate (536 raw / 476 shape rows; the count is mostly
+ * renumbered registers). The calls, stores, constants, block order (live particles first, the emit path between
+ * the two halves of the live update) and the 36-byte frame follow retail. Retail saves d8-d14 and computes
+ * -(0.5 * gravity) * step inside the loop as `vnmul 0.5, gravity` then `vmul step`; this build folds the negation
+ * into a -0.5 constant, hoists the product, saves d8-d15 and so renumbers most VFP registers (a named
+ * `f32 half = 0.5f` gives the vnmul but still hoists half * gravity). Retail loads the definition's rotation and
+ * the duration behind it with one `vldmia {s0-s4}` and keeps the duration on the stack, copies the live
+ * particle's previous position through VFP registers (vldmia/vstmia; a copy through four float values gives
+ * that, the struct assignment here ldm/stm), loads the 0.0 constant before the emission-state call, and rotates
+ * the up axis row by row (a vldmia of each matrix row, the result stored with one vstmia) where the swing axis
+ * is rotated element by element as here. */
 #include "gfx/SpiralEmitter.h"
 
 extern "C" {
@@ -79,12 +83,12 @@ extern "C" void effSwingEmitterUpdate(ParticleEmissionState *emitter)
             Vector4 axis = g_vectorScratch.first.vector;
             vec3Set(motion->axis, axis.x, axis.y, axis.z);
 
-            motion->speed = randomVarianceOf(definition->speedVariance) * definition->speed;
-            f32 radius = randomVarianceOf(definition->radiusVariance) * definition->radius;
-            f32 endRadius = randomVarianceOf(definition->endRadiusVariance) * definition->endRadius;
+            motion->speed = EFF_RANDOM_VARIANCE(definition->speedVariance) * definition->speed;
+            f32 radius = EFF_RANDOM_VARIANCE(definition->radiusVariance) * definition->radius;
+            f32 endRadius = EFF_RANDOM_VARIANCE(definition->endRadiusVariance) * definition->endRadius;
             motion->radius = radius;
             motion->radiusStep = (endRadius - radius) / (f32)lifetime;
-            motion->phaseStep = randomVarianceOf(definition->phaseStepVariance) * definition->phaseStep;
+            motion->phaseStep = EFF_RANDOM_VARIANCE(definition->phaseStepVariance) * definition->phaseStep;
             motion->phase = shiftRandomNextFraction(NULL) * 6.2831855f;
             motion->wave = FUN_001a1ee0(motion->phase * 40.743664f);
 
@@ -99,12 +103,12 @@ extern "C" void effSwingEmitterUpdate(ParticleEmissionState *emitter)
             }
             particle->position = g_vectorScratch.first.vector;
 
-            motion->scale = randomVarianceOf(definition->scaleVariance);
+            motion->scale = EFF_RANDOM_VARIANCE(definition->scaleVariance);
             if (angleMode == 2) {
                 motion->angleOffset = zero;
                 motion->angleScale = 1.0f;
             } else {
-                motion->angleScale = randomVarianceOf(definition->angleVariance);
+                motion->angleScale = EFF_RANDOM_VARIANCE(definition->angleVariance);
                 if (angleMode != 1) {
                     motion->angleOffset = zero;
                 } else {

@@ -1,4 +1,5 @@
-/* NON_MATCHING: resource-request cold block is laid out inline and compiler saves two fewer registers; -O2 candidate. */
+/* NON_MATCHING: retail keeps the zero it stores into the task in r8 from before the resource block (saving r4-sl), reloads the
+ * flags after setting 0x300 where this build predicates the store, and allocates the index and handle to r6/r9 (154 rows). */
 #include "battle/btlMain.h"
 #include "battle/BtlEntryLookup.h"
 #include "battle/btlAction.h"
@@ -41,13 +42,13 @@ void battleActionPollMemberResources(BtlMainState *state, BtlActionRecord *actio
             if (index < 0)
                 index = 0;
             BtlUnitData *resources = btlFindEntryBlockByMemberId(state, action->memberId);
-            if (entryContainsIdentifier(state, resources->parts[index])) {
-                action->flags |= 0x300;
-            } else {
+            if (entryContainsIdentifier(state, resources->parts[index]) == 0) {
                 action->flags &= ~0x300u;
                 u32 handle = eventResourceCacheAcquire(resources->parts[index], 1);
                 resourceSlotsInsert(state, handle);
                 entryAddUniqueIdentifier(state, (s16)resources->parts[index]);
+            } else {
+                action->flags |= 0x300;
             }
             action->flags &= ~0x10u;
         }

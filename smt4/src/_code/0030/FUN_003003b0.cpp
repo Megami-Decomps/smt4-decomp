@@ -5,7 +5,7 @@
 
 extern "C" {
 u32 FUN_002463e8(u32 status);
-u32 FUN_00246134(s32 side, u32 status, s32 kind, u32 mask);
+u32 btlSkillHitFlags(s32 side, u32 status, s32 kind, u32 mask);
 void FUN_00246080(s32 side, s32 actor, ScriptUnit *source, BtlActionRecord *action, s32 kind);
 void FUN_00246e24(s32 side, ScriptUnit *source, BtlActionRecord *action, u32 mask, s32 enabled);
 void FUN_00246d38(s32 side, ScriptUnit *source, BtlActionRecord *action, u32 mask);
@@ -23,7 +23,7 @@ u32 FUN_003003b0(void)
         FUN_00246d38(0, source, battle->actions, 1u << status);
     } else {
         if (checkImmunity != 0 &&
-            (FUN_00246134(0, FUN_002463e8(status), 2, ~0u) & 0x10000) != 0) {
+            (btlSkillHitFlags(0, FUN_002463e8(status), 2, ~0u) & 0x10000) != 0) {
             FUN_00246080(0, 0, source, battle->actions, 4);
             btlQueueKeyedScalarReflectAction(0, source, 0x10001EA, 0, 1, 0, 0);
         } else {

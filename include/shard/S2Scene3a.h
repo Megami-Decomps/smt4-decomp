@@ -59,6 +59,11 @@ struct Scene3a {
         } appraisal;
         struct {
             ShopPageTransition transition;
+            u8 unk0C[0x11];
+            /* 0x0001D */ u8 onSale;        /* the shop greets with its sale script ("shop_in_sale") */
+        } greeting;
+        struct {
+            ShopPageTransition transition;
             u8 unk0C[0x12];
             /* 0x0001E */ u8 requested;
             /* 0x0001F */ u8 ready;
@@ -69,7 +74,9 @@ struct Scene3a {
     /* 0x00160 */ void *scriptTable;        /* the shop script's entry names (tableGroupFindEntryIndex) */
     /* 0x00164 */ u8 unk164[4];
     /* 0x00168 */ ScriptProcess *process;   /* the shop script */
-    /* 0x0016C */ u8 unk16C[0x210];
+    /* 0x0016C */ ScriptProcess *menuProcess;   /* the category menu's script ("shop_select") */
+    /* 0x00170 */ char menuText[0x200];     /* the menu's rows, one "name<br>" each (shopSelectEntryStart) */
+    /* 0x00370 */ u8 unk370[0xC];
     /* 0x0037C */ u32 listId;
     union {
         /* 0x00380 */ AsdTextureRegion region;
@@ -100,11 +107,18 @@ struct Scene3a {
             /* 0x15D28 */ u32 item;
             u8 unk15d2c[0x1C];
         } equipmentPreview;
+        struct {
+            u8 unk15d28[4];
+            /* 0x15D2C */ s32 rows[4];      /* what each row of the category menu stands for (equipmentMenuBuildVisibleCategories) */
+            /* 0x15D3C */ s32 rowCount;
+        } menu;
     };
     /* 0x15D48 */ void *modelManager;
     /* 0x15D4C */ u8 unk15d4c[8];
     /* 0x15D54 */ u32 selectedItem;
-    /* 0x15D58 */ u8 unk15D58[0x10];
+    /* 0x15D58 */ u32 menuCursors[3];       /* where each category menu's cursor returns to: [0] the armour page's, [1] the weapons page's, [2] the top menu's row */
+    /* 0x15D64 */ u8 menuCursorSet[2];      /* set while a page menu is started ([0] armour, [1] weapons): it opens at its remembered cursor */
+    /* 0x15D66 */ u8 unk15D66[2];
     /* 0x15D68 */ s32 quantityIndex;        /* the list index the quantity panel was set up for, -1: none */
 };
 typedef char Scene3aPageLayoutCheck[offsetof(Scene3a, listId) == 0x37C &&
@@ -121,6 +135,10 @@ typedef char Scene3aQuantityLayoutCheck[offsetof(Scene3a, pageTransition) == 4 &
     offsetof(Scene3a, wait.frames) == 0xC &&
     offsetof(Scene3a, appraisal.kindTenFrame) == 0x1C &&
     offsetof(Scene3a, scriptTable) == 0x160 && offsetof(Scene3a, process) == 0x168 &&
+    offsetof(Scene3a, greeting.onSale) == 0x1D && offsetof(Scene3a, menuText) == 0x170 &&
+    offsetof(Scene3a, listId) == 0x37C && offsetof(Scene3a, menu.rows) == 0x15D2C &&
+    offsetof(Scene3a, menu.rowCount) == 0x15D3C && offsetof(Scene3a, menuCursors) == 0x15D58 &&
+    offsetof(Scene3a, menuCursorSet) == 0x15D64 &&
     offsetof(Scene3a, panel.rect) == 0x394 && offsetof(Scene3a, animation) == 0x3A8 &&
     offsetof(Scene3a, touchSelection) == 0x828 && offsetof(Scene3a, quantity) == 0x868 &&
     sizeof(NumericStepper) == 0x18 ? 1 : -1];

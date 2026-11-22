@@ -60,6 +60,19 @@ static inline SearchTableRecordA *searchTableRecordsA(void *table)
 {
     return static_cast<SearchTableRecordA *>(dataTableGetEntries(table));
 }
+
+/* Apocalypse: entry `index`'s unlock flag, 0 (always listed) past the end. A plain static: uniteCreate
+ * needs it inlined late (as `static __inline` it is 2 rows off). */
+static u16 searchTableFlagId(u32 index)
+{
+    void *table = dataTableGet(0x24, 0);
+    SearchTableRecordA *entries = searchTableRecordsA(table);
+    u32 count = dataTableGetCount(table);
+    if (index >= count) {
+        return 0;
+    }
+    return entries[index].flagId;
+}
 #endif
 
 #endif

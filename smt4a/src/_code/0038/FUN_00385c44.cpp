@@ -9,7 +9,7 @@ extern "C" {
 int FUN_003ed6e8(...);
 int FUN_003f0070(...);
 int btlMainFindEntryByListedId(...);
-int FUN_003f26d4(...);
+int btlAiBuildTurnOrder(...);
 int itemEffectPlay(...);
 int FUN_004a9c84(...);
 int btlFindEntryValue(...);
@@ -82,7 +82,7 @@ extern int FUN_003e4978(void);
 /* Supplied declaration required: FUN_003ed6e8. */
 /* Supplied declaration required: FUN_003f0070. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
-/* Supplied declaration required: FUN_003f26d4. */
+/* Supplied declaration required: btlAiBuildTurnOrder. */
 /* Supplied declaration required: itemEffectPlay. */
 /* Supplied declaration required: FUN_004a9c84. */
 /* Supplied declaration required: btlFindEntryValue. */
@@ -312,7 +312,7 @@ LAB_003861d0:
         *puVar15 = *puVar15 & ~temp_v7;
       }
       if ((param_1[0x1169] & DAT_00573a64) == 0 && (*puVar15 & DAT_00573a60) == 0) {
-        FUN_003f26d4(param_1);
+        btlAiBuildTurnOrder(param_1);
       }
       else {
         temp_v7 = ~DAT_00573a60;

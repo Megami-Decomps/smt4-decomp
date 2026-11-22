@@ -62,7 +62,7 @@ int btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
 int btlHasFilteredCommand(void);
 int btlFindSelectionIndexByOrdinal(unsigned int, int);
 int FUN_003f034c(...);
-int FUN_003f26d4(unsigned int);
+int btlAiBuildTurnOrder(unsigned int);
 int chainCountIdUnflagged(...);
 int jyoucyuEnsureResidentEntry(void);
 int btlUiEnterStateEntryStartup(...);
@@ -225,7 +225,7 @@ extern int FUN_003ed878(unsigned int);
 /* Supplied declaration required: btlFindSelectionIndexByOrdinal. */
 /* Supplied declaration required: FUN_003ef1e4. */
 /* Supplied declaration required: FUN_003f034c. */
-/* Supplied declaration required: FUN_003f26d4. */
+/* Supplied declaration required: btlAiBuildTurnOrder. */
 /* Supplied declaration required: FUN_003fda64. */
 /* Supplied declaration required: resourceReleaseReference. */
 /* Supplied declaration required: chainCountIdUnflagged. */
@@ -375,7 +375,7 @@ unsigned int FUN_0024bcd4(void)
         }
         *puVar16 = temp_v5 | *puVar16;
         if (0 < temp_v3) {
-          FUN_003f26d4(temp_v7);
+          btlAiBuildTurnOrder(temp_v7);
         }
       }
     }
@@ -467,7 +467,7 @@ joined_r0x0024c078:
     temp_v7 = ~DAT_005739f0;
     *(unsigned int *)(temp_v2 + 0x45a4) = *(unsigned int *)(temp_v2 + 0x45a4) & ~DAT_005739f4 & ~DAT_005739ec;
     *(unsigned int *)(temp_v2 + 0x45a0) = *(unsigned int *)(temp_v2 + 0x45a0) & temp_v7 & ~temp_v5;
-    FUN_003f26d4(temp_v2);
+    btlAiBuildTurnOrder(temp_v2);
     FUN_004aa2e0(g_btlUiBlock,0);
     temp_v6 = 8;
     break;

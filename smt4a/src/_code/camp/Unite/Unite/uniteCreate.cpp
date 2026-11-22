@@ -130,18 +130,6 @@ static u32 searchTableOption(u32 index)
     return entries[index].option;
 }
 
-/* Entry `index`'s unlock flag, 0 past the end. */
-static u16 searchTableFlagId(u32 index)
-{
-    void *table = dataTableGet(0x24, 0);
-    SearchTableRecordA *entries = searchTableRecordsA(table);
-    u32 count = dataTableGetCount(table);
-    if (index >= count) {
-        return 0;
-    }
-    return entries[index].flagId;
-}
-
 extern "C" {
 
 /* Opens the fusion screen: allocates its work, starts its process, draw task and catalog thread, drops saved

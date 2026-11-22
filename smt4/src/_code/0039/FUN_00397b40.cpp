@@ -1,7 +1,10 @@
-/* NON_MATCHING: close: control flow, tables and calls match; built folds the preset calls into predicated moves, computes the form pointer differently and splits the two lookup loops with different register use */
+/* NON_MATCHING: the name buffers are block-scoped so the preset and state calls tail-call as in retail, and the
+ * characters come through nameFormGetCharacter; retail hoists the four table bases and &name (r5-r9, seven registers
+ * saved), tests the name kind with one cmpne and keeps the unlocked preset choice after the pool (148 rows). */
 #include "common.h"
 #include <stddef.h>
 #include "name/nameMain.h"
+#include "name/NameFormText.h"
 
 /* A name as the engine stores it: nine two-byte characters and a terminator. */
 struct NameBuffer {
@@ -15,15 +18,19 @@ struct NameForm {
     /* 0x4A */ u8 unk4A[0xA];
 };
 
-/* The name-entry task as this function sees it. */
+/* The name-entry task as this function sees it: the form's text (name/NameFormText.h) leads it. */
 struct NameTask {
-    /* 0x000 */ u8 unk000[0x20];
-    /* 0x020 */ s8 mode;
-    /* 0x021 */ u8 unk021[8];
-    /* 0x029 */ u8 locked;
-    /* 0x02A */ u8 unk02A[0x86];
-    /* 0x0B0 */ u8 text[18];            /* edited name, one big-endian character per two bytes */
-    /* 0x0C2 */ u8 unk0C2[0x53E];
+    /* 0x000 */ u8 unk000[0x10];
+    union {
+        /* 0x010 */ NameFormTextFields text; /* the edited name, its characters at 0xB0 */
+        struct {
+            /* 0x010 */ u8 unk010[0x10];
+            /* 0x020 */ s8 mode;
+            /* 0x021 */ u8 unk021[8];
+            /* 0x029 */ u8 locked;
+        } entry;
+    };
+    /* 0x0D4 */ u8 unk0D4[0x52C];
     /* 0x600 */ NameForm form;
     /* 0x654 */ u32 script;
     /* 0x658 */ u8 scriptStarted;
@@ -31,8 +38,8 @@ struct NameTask {
     /* 0x794 */ u8 sprite[0x1BA];
     /* 0x94E */ char confirmText[1];
 };
-typedef char NameTaskLayout[offsetof(NameTask, text) == 0xB0 && offsetof(NameTask, form) == 0x600 &&
-    offsetof(NameTask, sprite) == 0x794 && offsetof(NameTask, confirmText) == 0x94E ? 1 : -1];
+typedef char NameTaskLayout[offsetof(NameTask, text.characters) == 0xB0 && offsetof(NameTask, entry.locked) == 0x29 &&
+    offsetof(NameTask, form) == 0x600 && offsetof(NameTask, sprite) == 0x794 && offsetof(NameTask, confirmText) == 0x94E ? 1 : -1];
 
 /* Character conversion tables: a lookup from the entered character to its stored form, in two ranges. */
 struct NameCharTables {
@@ -62,16 +69,11 @@ NameBuffer *logFormatBuffer(NameBuffer *name, const char *text, s32 mode);
  * confirmation and validates the converted name. */
 void FUN_00397b40(NameTask *task)
 {
-    NameBuffer name;
-    NameBuffer *result;
     NameForm *form = &task->form;
-    s32 i;
-    s32 j;
-    s32 lookup;
-    s32 found;
 
     if (task->scriptStarted == 0) {
         if (sys43e188GetState() != 0) {
+            NameBuffer name;
             nameEntryCopyEditedName(task, &name);
             textEncodeFontSlot(0x32, &name);
             scrScriptProcessStartEntry(task->script, 1);
@@ -85,11 +87,11 @@ void FUN_00397b40(NameTask *task)
     }
     if (messageMainGetChoiceResult() != 0) {
         messageOwnerSetState(task, 2);
-        if (task->locked != 0) {
+        if (task->entry.locked != 0) {
             buttonHelpSetPreset(0x97);
             return;
         }
-        if (task->mode == 2 || task->mode == 6) {
+        if (task->entry.mode == 2 || task->entry.mode == 6) {
             buttonHelpSetPreset(0x96);
             return;
         }
@@ -97,48 +99,43 @@ void FUN_00397b40(NameTask *task)
         return;
     }
     uiSpriteSetImageKeyframe(task->sprite, 0, 1);
-    if (form->nameKind != 0 && form->nameKind != 1) {
-        buttonHelpResetSlots();
-        messageOwnerSetState(task, 7);
-        return;
-    }
-    nameEntryCopyEditedName(task, &name);
-    for (i = 0; i <= 8; i++) {
-        s16 character;
-
-        if ((s8)i < 0) {
-            character = (s16)0x8140;
-        } else {
-            character = (s16)(((u16)task->text[(s8)i * 2] << 8) + task->text[(s8)i * 2 + 1]);
-        }
-        found = 0;
-        for (j = 0; j < 0x104; j++) {
-            if (DAT_00405070.keysA[j] == character) {
-                ((u8 *)&name)[i * 2] = (u8)(DAT_00405070.valuesA[j] >> 8);
-                ((u8 *)&name)[i * 2 + 1] = (u8)DAT_00405070.valuesA[j];
-                found = 1;
-                break;
-            }
-        }
-        if (!found) {
-            for (j = 0; j < 0x54; j++) {
-                if (DAT_00405070.keysB[j] == character) {
-                    ((u8 *)&name)[i * 2] = (u8)(DAT_00405070.valuesB[j] >> 8);
-                    ((u8 *)&name)[i * 2 + 1] = (u8)DAT_00405070.valuesB[j];
+    if (form->nameKind == 0 || form->nameKind == 1) {
+        NameBuffer name;
+        nameEntryCopyEditedName(task, &name);
+        for (s32 i = 0; i <= 8; i++) {
+            s16 character = nameFormGetCharacter(task, (s8)i);
+            s32 found = 0;
+            for (s32 j = 0; j < 0x104; j++) {
+                if (DAT_00405070.keysA[j] == character) {
+                    ((u8 *)&name)[i * 2] = (u8)(DAT_00405070.valuesA[j] >> 8);
+                    ((u8 *)&name)[i * 2 + 1] = (u8)DAT_00405070.valuesA[j];
+                    found = 1;
                     break;
                 }
             }
+            if (!found) {
+                for (s32 j = 0; j < 0x54; j++) {
+                    if (DAT_00405070.keysB[j] == character) {
+                        ((u8 *)&name)[i * 2] = (u8)(DAT_00405070.valuesB[j] >> 8);
+                        ((u8 *)&name)[i * 2 + 1] = (u8)DAT_00405070.valuesB[j];
+                        break;
+                    }
+                }
+            }
         }
-    }
-    result = logFormatBuffer(&name, task->confirmText, 1);
-    lookup = convertToBufferAndStore(reinterpret_cast<const char *>(&name), reinterpret_cast<u16 *>(task->confirmText));
-    if (result->words[0] == 0 && lookup < 6) {
-        buttonHelpResetSlots();
-        messageOwnerSetState(task, 7);
+        NameBuffer *result = logFormatBuffer(&name, task->confirmText, 1);
+        s32 lookup = convertToBufferAndStore(reinterpret_cast<const char *>(&name), reinterpret_cast<u16 *>(task->confirmText));
+        if (result->words[0] == 0 && lookup < 6) {
+            buttonHelpResetSlots();
+            messageOwnerSetState(task, 7);
+        } else {
+            messageOwnerSetState(task, 6);
+            scrScriptProcessStartEntry(task->script, 4);
+        }
         return;
     }
-    messageOwnerSetState(task, 6);
-    scrScriptProcessStartEntry(task->script, 4);
+    buttonHelpResetSlots();
+    messageOwnerSetState(task, 7);
 }
 
 } /* extern "C" */

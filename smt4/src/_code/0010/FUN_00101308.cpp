@@ -65,7 +65,7 @@ int asdGxSetFrameInterval(...);
 int soundInitializePersistentSlots(...);
 int soundSetupArchiveAndSlots(...);
 int FUN_00106650(...);
-int FUN_00106a18(...);
+int renderCtxSetupScreenCamera(...);
 int asdGxLoadMaterialShader(...);
 int FUN_0010707c(...);
 int FUN_001070ac(...);
@@ -349,7 +349,7 @@ extern unsigned int asdModelGetStatic54(void);
 /* Supplied declaration required: FUN_0010633c. */
 /* Supplied declaration required: FUN_00106650. */
 extern unsigned int FUN_00106708(void);
-/* Supplied declaration required: FUN_00106a18. */
+/* Supplied declaration required: renderCtxSetupScreenCamera. */
 /* Supplied declaration required: asdGxLoadMaterialShader. */
 /* Supplied declaration required: FUN_00106c28. */
 /* Supplied declaration required: sysInitializeServices. */
@@ -695,7 +695,7 @@ void FUN_00101308(void)
   FUN_001043c8(1);
   FUN_00102e34(0);
   temp_v22 = 0.25f;
-  FUN_00106a18(g_titleScene);
+  renderCtxSetupScreenCamera(g_titleScene);
   gameDataRemoveHomeButtonHold(7);
   gameDataFlagsClearAndRefresh(7);
   gameDataFlagsClear(1);

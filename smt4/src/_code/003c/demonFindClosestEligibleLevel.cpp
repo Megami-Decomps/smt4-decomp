@@ -1,6 +1,3 @@
-/* NON_MATCHING: 20 lines: the result is a halfword (retail returns the spilled id without a uxth, which a u32 or s32
- * result needs: 1 line off that way), but declared u16 armcc loads the category count into r1 and the zero into r0 at
- * entry, the other way round from retail, and the registers of the first block follow. */
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "shard/W6_W6Match2_RecordValue.h"
 #include "gamedata/GameDataAccess_VariantB_RecordValue.h"
@@ -19,19 +16,17 @@ extern "C" {
 s32 devilIsAvailable(DemonLevelTable *, u16 id);
 
 /* Finds the closest eligible table entry at or below the requested level. */
-u16 demonFindClosestEligibleLevel(DemonLevelTable *table, s32 category, u32 level, s32 validate)
+u16 demonFindClosestEligibleLevel(DemonLevelTable *table, s32 category, u8 level, s32 validate)
 {
     u16 result = 0;
     u8 bestDistance = 0xff;
-    u32 count = table->counts[category];
-    if (count != 0) {
-        u32 lastLevel = table->entries[category][table->counts[category] - 1].level;
-        if (lastLevel > level) {
-            level = static_cast<u8>(lastLevel);
+    if (table->counts[category] != 0) {
+        if (table->entries[category][table->counts[category] - 1].level > level) {
+            level = table->entries[category][table->counts[category] - 1].level;
         }
         for (s32 index = 0; index < table->counts[category]; ++index) {
             if (table->entries[category][index].level > level ||
-                static_cast<s32>(level - table->entries[category][index].level) >= bestDistance) {
+                (s32)(level - table->entries[category][index].level) >= bestDistance) {
                 continue;
             }
             if (validate == 0) {

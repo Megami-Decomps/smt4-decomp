@@ -1,4 +1,6 @@
-/* NON_MATCHING: readable rewrite; the build allocates the registers of the two table scans differently from retail. */
+/* NON_MATCHING: retail keeps the content search's -1 in a register from the loop's start and reuses the loop
+ * index as the result, and the record arm jumps into the content arm's naviSetActiveMapSlot call (here the other
+ * way round). */
 #include "gamedata/MapSaveBlock.h"
 
 // A location record of the type-50 table (the part this function reads).
@@ -26,7 +28,7 @@ struct ContentEntry {
     /* 0x08 */ s16 v1;
     /* 0x0a */ s16 v2;
     /* 0x0c */ u16 v3;
-    /* 0x0e */ u16 minutes;
+    /* 0x0e */ s16 minutes;
     /* 0x10 */ u8 third;
     /* 0x11 */ u8 fourth;
 };
@@ -56,9 +58,8 @@ void mapUpdateLocationAvailability(void)
         if (record->first == -1 || record->mapId == 0 || FUN_0027d968() != (s16)record->mapId) {
             continue;
         }
-        MapMarkerSlot *marker = &block->markers[used];
         if (record->contentId != 0) {
-            marker->flags = (marker->flags & ~4) | 3;
+            block->markers[used].flags = (block->markers[used].flags & ~4) | 3;
             s16 id = (s16)record->contentId;
             s32 found = -1;
             for (s32 j = 0; j < FUN_00326e44(); j++) {
@@ -68,36 +69,38 @@ void mapUpdateLocationAvailability(void)
                     break;
                 }
             }
-            marker->contentIndex = (s16)found;
+            block->markers[used].contentIndex = (s16)found;
             ContentEntry *entry = contentEntryGetE((s16)found);
-            marker->stage = 0;
-            marker->timer = entry->minutes * 0x708;
-            marker->first = entry->first;
-            marker->second = entry->second;
-            marker->values[0] = entry->v0;
-            marker->values[1] = entry->v1;
-            marker->values[2] = entry->v2;
-            marker->values[3] = entry->v3;
-            marker->x = entry->third;
-            marker->y = entry->fourth;
+            block->markers[used].stage = 0;
+            block->markers[used].timer = entry->minutes * 0x708;
+            block->markers[used].first = entry->first;
+            block->markers[used].second = entry->second;
+            block->markers[used].values[0] = entry->v0;
+            block->markers[used].values[1] = entry->v1;
+            block->markers[used].values[2] = entry->v2;
+            block->markers[used].values[3] = entry->v3;
+            block->markers[used].x = entry->third;
+            block->markers[used].y = entry->fourth;
+            naviSetActiveMapSlot(used, block->markers[used].first, block->markers[used].second,
+                                 block->markers[used].values[0], block->markers[used].values[1],
+                                 block->markers[used].values[2], 0);
         } else if (record->kind == 2 || record->kind == 3) {
-            marker->flags = (marker->flags & ~6) | 1;
-            marker->contentIndex = 0;
-            marker->stage = 0;
-            marker->timer = 0;
-            marker->first = record->first;
-            marker->second = record->second;
-            marker->values[0] = record->v0;
-            marker->values[1] = record->v1;
-            marker->values[2] = record->v2;
-            marker->values[3] = record->v3;
-            marker->x = 0;
-            marker->y = 0;
-        } else {
-            used++;
-            continue;
+            block->markers[used].flags = (block->markers[used].flags & ~6) | 1;
+            block->markers[used].contentIndex = 0;
+            block->markers[used].stage = 0;
+            block->markers[used].timer = 0;
+            block->markers[used].first = record->first;
+            block->markers[used].second = record->second;
+            block->markers[used].values[0] = record->v0;
+            block->markers[used].values[1] = record->v1;
+            block->markers[used].values[2] = record->v2;
+            block->markers[used].values[3] = record->v3;
+            block->markers[used].x = 0;
+            block->markers[used].y = 0;
+            naviSetActiveMapSlot(used, block->markers[used].first, block->markers[used].second,
+                                 block->markers[used].values[0], block->markers[used].values[1],
+                                 block->markers[used].values[2], 0);
         }
-        naviSetActiveMapSlot(used, marker->first, marker->second, marker->values[0], marker->values[1], marker->values[2], 0);
         used++;
     }
 }

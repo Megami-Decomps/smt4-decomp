@@ -5,7 +5,7 @@
 #include "sys/RuntimeObjects.h"
 
 extern "C" {
-s32 FUN_0047d904(void *request, nn::Result *code, u32 *detail);
+s32 asyncOperationStartOrPollNonBlocking(void *request, nn::Result *code, u32 *detail);
 WindowStatusResult FUN_00473acc(ResourceLookup *lookup);
 s32 FUN_00473da0(AocMain *main);
 s32 block88OwnerCheck(AocMain *main);
@@ -19,7 +19,7 @@ WindowStatusOperationResult aocPollPendingOperation(AocPollStep *step)
     case 0: {
         nn::Result queryCode;
         u32 queryDetail;
-        if (FUN_0047d904(step->request, &queryCode, &queryDetail)) {
+        if (asyncOperationStartOrPollNonBlocking(step->request, &queryCode, &queryDetail)) {
             if (nnResultIsFailure(queryResultFailureOnly(&main->queryResult))) {
                 WindowStatusResult failure = FUN_00473acc(reinterpret_cast<ResourceLookup *>(main));
                 step->result = failure;

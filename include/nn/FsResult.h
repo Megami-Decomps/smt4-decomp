@@ -25,6 +25,12 @@ static __inline bool fsResultInRange200(nn::Result result)
     return nnResultModule(result) == 17 && nnResultDescriptionBits(result) >= 200 && nnResultDescriptionBits(result) <= 219;
 }
 
+/* Filesystem result descriptions 220-229. */
+static __inline bool fsResultInRange220(nn::Result result)
+{
+    return nnResultModule(result) == 17 && nnResultDescriptionBits(result) >= 220 && nnResultDescriptionBits(result) <= 229;
+}
+
 /* Filesystem result descriptions 230-339. */
 static __inline bool fsResultInRange230(nn::Result result)
 {

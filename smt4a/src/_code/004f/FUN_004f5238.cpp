@@ -1,6 +1,6 @@
 #include "battle/BtlEffectFiles.h"
 
-/* unit-local: the two floats callers pass last (s0/s1), forwarded by value to FUN_004f5750 (its own `Vector2 start`). */
+/* unit-local: the two floats callers pass last (s0/s1), forwarded by value to btlSpatialEffectStart (its own `Vector2 start`). */
 struct EffectOffset2D {
     f32 x;
     f32 y;
@@ -8,7 +8,7 @@ struct EffectOffset2D {
 
 extern "C" {
 s32 libc_strcpy(char *dest, const char *source);
-s32 FUN_004f5750(BtlEffectFiles *work, u32 handle, u32 a, u32 b, s32 group, u32 c, char *name, u32 d, u32 e, EffectOffset2D offset);
+s32 btlSpatialEffectStart(BtlEffectFiles *work, u32 handle, u32 a, u32 b, s32 group, u32 c, char *name, u32 d, u32 e, EffectOffset2D offset);
 
 /* Looks up the effect slot of (group 0-3 the unit sets, 4 markers, 5 and 6 further sets, 7 the last,
  * 8 the single, 9 and 10 the remaining groups, index) and starts its effect with a copy of its name; the name
@@ -89,7 +89,7 @@ s32 FUN_004f5238(BtlEffectFiles *work, u32 a, u32 b, s32 group, s32 index, u32 c
     }
     if (nameOut != NULL)
         libc_strcpy(nameOut, name);
-    return FUN_004f5750(work, handle, a, b, group, c, name, d, e, offset);
+    return btlSpatialEffectStart(work, handle, a, b, group, c, name, d, e, offset);
 }
 
 } /* extern "C" */

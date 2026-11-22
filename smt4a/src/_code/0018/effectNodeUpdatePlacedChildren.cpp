@@ -1,4 +1,6 @@
-/* NON_MATCHING: near (206 rows against 207): retail copies the origin/offset vectors with mixed ldr/ldm and keeps the saved orientation in s16-s19, the node flags in r8 and the callback table in r7, with a 9-register push; ours uses plain ldm/stm vector copies and different VFP/saved-register assignments. Control flow, constants and the render-state push/pop agree. */
+/* NON_MATCHING: retail copies the origin/offset vectors with mixed ldr/ldm and keeps the saved orientation in
+ * s16-s19, the node flags in r8 and the callback table in r7 (a 9-register push); the build assigns the VFP and
+ * saved registers differently. Control flow, constants and the render-state push/pop agree. */
 #include "shard/Resource.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
@@ -32,8 +34,14 @@ struct EffectNode {
 
 extern "C" {
 
-s32 renderVectorOverrideResolve(EffectNode *node, const Vector4 *position, f32 *matrix);
-void effectTimelinePartApplyRotation(EffectNode *node, const f32 *matrix);
+void renderVectorOverrideResolve(EffectNode *node, const Vector4 *position, Vector4 *rotation);
+void effectTimelinePartApplyRotation(EffectNode *node, const Vector4 *rotation);
+
+/* Copies through pointers: armcc moves such a 16-byte value with VFP vldmia/vstmia. */
+static __inline void vector4Copy(const Vector4 *source, Vector4 *destination)
+{
+    *destination = *source;
+}
 
 /* Places the effect node and updates every child that has started, with the title scene's render state
  * duplicated for the duration; the node's "placed" flag is cleared afterwards. */
@@ -41,7 +49,7 @@ void effectNodeUpdatePlacedChildren(EffectNode *node)
 {
     Vector4 position;
     Vector4 childOffset;
-    f32 matrix[9];
+    Vector4 rotation;
     f32 scale;
     s32 lastFrame;
     EffectNode *child;
@@ -61,8 +69,8 @@ void effectNodeUpdatePlacedChildren(EffectNode *node)
     if ((flags & 0x60) != 0 && (flags & EFFECT_NODE_PLACED) == 0) {
         Vector4 orientation = node->orientation;
 
-        renderVectorOverrideResolve(node, &position, matrix);
-        effectTimelinePartApplyRotation(node, matrix);
+        renderVectorOverrideResolve(node, &position, &rotation);
+        effectTimelinePartApplyRotation(node, &rotation);
         node->orientation = orientation;
     }
     lastFrame = node->frame - 1;
@@ -77,11 +85,11 @@ void effectNodeUpdatePlacedChildren(EffectNode *node)
             if ((child->flags & 0x18) != 0) {
                 ResourceHandler *handler;
 
-                g_vectorScratch.first.vector = position;
+                vector4Copy(&position, &g_vectorScratch.first.vector);
                 if ((child->flags & 4) != 0) {
                     g_vectorScratch.first.vector.y = 5.0f;
                 }
-                g_vectorScratch.second.vector = childOffset;
+                vector4Copy(&childOffset, &g_vectorScratch.second.vector);
                 if ((child->flags & 0x80) != 0) {
                     g_vectorScratch.second.vector.x *= scale;
                     g_vectorScratch.second.vector.y *= scale;
@@ -102,10 +110,10 @@ void effectNodeUpdatePlacedChildren(EffectNode *node)
             if ((child->flags & 0x60) != 0) {
                 ResourceHandler *handler;
 
-                renderVectorOverrideResolve(child, &position, matrix);
+                renderVectorOverrideResolve(child, &position, &rotation);
                 handler = &g_handlerTable[child->resource->type];
                 if (handler->setOrientation != NULL) {
-                    handler->setOrientation(child->resource->data, matrix);
+                    handler->setOrientation(child->resource->data, &rotation.x);
                 }
             }
         }

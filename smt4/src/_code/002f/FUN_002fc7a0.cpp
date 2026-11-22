@@ -53,7 +53,7 @@ extern "C" {
 void rt_aeabi_memclr(void *data, u32 size);
 void characterInfoPanelPopulate(void *panel, PartyPanelRecord *record, void *preview);
 void uiDrawRecordNameLabels(void *labels, PartyPanelRecord *record);
-void FUN_002595e0(PartyPanelRecord *record);
+void saveSelectReserveUnit(PartyPanelRecord *record);
 void linkHolderApplyFlag(void *link, s32 flag);
 s32 partyPanelExists(void);
 
@@ -73,7 +73,7 @@ u32 FUN_002fc7a0(PartyPanelRefreshWork *work)
         }
         characterInfoPanelPopulate(work->characterPanel, work->record, work->preview);
         uiDrawRecordNameLabels(work->nameLabels, work->record);
-        FUN_002595e0(work->record);
+        saveSelectReserveUnit(work->record);
         linkHolderApplyFlag(work->link, 1);
         work->selected = -1;
         if (work->compact == 0)

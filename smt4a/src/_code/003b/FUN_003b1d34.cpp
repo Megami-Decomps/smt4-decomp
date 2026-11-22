@@ -3,7 +3,7 @@
 extern "C" {
 s32 scrGetArg(u32);
 void mathVectorClear(f32*);
-void FUN_004f1c5c(BtlCameraA*, s32);
+void btlCameraStartMove(BtlCameraA*, s32);
 void FUN_004f1edc(BtlCameraA*);
 
 // Resets the battle camera to its stored coordinates or clears its current coordinates.
@@ -13,7 +13,7 @@ u32 FUN_003b1d34(void)
     BtlCameraA* camera = g_btlCamera;
     if (camera != NULL) {
         if (mode == 0) {
-            FUN_004f1c5c(camera, 0);
+            btlCameraStartMove(camera, 0);
             FUN_004f1edc(camera);
             camera->unk3C = 0;
             camera->unk38 = 1;

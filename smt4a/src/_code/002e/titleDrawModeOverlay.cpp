@@ -14,7 +14,7 @@ struct TitleRenderState {
 extern "C" {
 extern TitleMainGlobals g_titleMain;
 s32 renderCtxPackPassFlags(u32, u32);
-void FUN_0036b21c();
+void titleMainDraw();
 
 u32 titleDrawModeOverlay()
 {
@@ -38,10 +38,10 @@ u32 titleDrawModeOverlay()
     case 14:
         break;
     case 7:
-        FUN_0036b21c();
+        titleMainDraw();
         break;
     default:
-        FUN_0036b21c();
+        titleMainDraw();
         break;
     }
     return 0;

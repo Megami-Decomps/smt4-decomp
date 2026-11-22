@@ -1,5 +1,6 @@
-/* NON_MATCHING: floating arithmetic reassociation, queue branch placement and saved vector allocation differ; -O2 candidate. */
-#include "shard/W6_W6Match6_CollisionQuad.h"
+/* NON_MATCHING: retail places the first queue's slot computation out of line and saves the vector arguments in
+ * other VFP registers; the centre sums follow retail. */
+#include "map/CollisionVectorMath.h"
 
 extern "C" {
 extern CollisionQuad g_collisionPlaneTable[];
@@ -10,9 +11,11 @@ void mapCollisionQueueQuad(s32 queue, u16 tag, u16 material, CollisionVector a, 
                   CollisionVector c, CollisionVector d, CollisionVector normal)
 {
     CollisionQuad *quad;
-    quad = queue
-        ? &g_collisionPlaneTable[g_mapCollision.secondCount++]
-        : &g_mapCollision.first[g_mapCollision.firstCount++];
+    if (queue == 0) {
+        quad = &g_mapCollision.first[g_mapCollision.firstCount++];
+    } else {
+        quad = &g_collisionPlaneTable[g_mapCollision.secondCount++];
+    }
     quad->normal = normal;
     quad->distance = normal.x * a.x + normal.y * a.y + normal.z * a.z;
     quad->vertices[0] = a;
@@ -25,9 +28,12 @@ void mapCollisionQueueQuad(s32 queue, u16 tag, u16 material, CollisionVector a, 
     quad->vertexCount = 4;
     quad->enabled = 1;
     quad->active = 1;
-    quad->center.x = (a.x + b.x + c.x + d.x) * 0.25f;
-    quad->center.y = (a.y + b.y + c.y + d.y) * 0.25f;
-    quad->center.z = (a.z + b.z + c.z + d.z) * 0.25f;
+    CollisionVector center;
+    collisionVectorAdd(&center, &a, &b);
+    collisionVectorAdd(&center, &center, &c);
+    collisionVectorAdd(&center, &center, &d);
+    collisionVectorScale(&center, &center, 0.25f);
+    quad->center = center;
     CollisionVector reference;
     FUN_0026e80c(1, &reference, a, b, c, d);
     statusCameraBuildAxisPlane(quad->enabled, 0, &quad->edgeNormals[0], &quad->edgeDistances[0], reference, a, b);

@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_00262a8c(...);
+int mapCollisionQueueEdgeQuad(...);
 int mapCollisionQueueQuad(int, int);
 int VectorSignedToFloat(...);
 
@@ -15,7 +15,7 @@ typedef struct {
 } void_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00262a8c. */
+/* Supplied declaration required: mapCollisionQueueEdgeQuad. */
 /* Supplied declaration required: mapCollisionQueueQuad. */
 
 
@@ -49,16 +49,16 @@ void FUN_002ce4e4(void)
               if (*(char *)(temp_v3 - 0x3c) != '\x01') {
                 if ((*(char *)(temp_v3 - 0x3c) == '\x02') && (temp_v1)) {
                   VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-                  FUN_00262a8c(0);
+                  mapCollisionQueueEdgeQuad(0);
                   temp_v1 = 0;
-                  FUN_00262a8c(0);
+                  mapCollisionQueueEdgeQuad(0);
                 }
               }
               else if (!temp_v1) {
                 temp_v1 = 1;
                 if (*(char *)(temp_v3 + 0x34) != '\x01') {
                   VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-                  FUN_00262a8c(0);
+                  mapCollisionQueueEdgeQuad(0);
                 }
                 else {
                   VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -68,7 +68,7 @@ void FUN_002ce4e4(void)
           }
           else if (temp_v1) {
             VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_00262a8c(0);
+            mapCollisionQueueEdgeQuad(0);
             temp_v1 = 0;
           }
           temp_v4 = temp_v4 + 1;
@@ -91,16 +91,16 @@ void FUN_002ce4e4(void)
               if (*(char *)(temp_v3 + 0xb4) != '\x01') {
                 if ((*(char *)(temp_v3 + 0xb4) == '\x02') && (temp_v1)) {
                   VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-                  FUN_00262a8c(0);
+                  mapCollisionQueueEdgeQuad(0);
                   temp_v1 = 0;
-                  FUN_00262a8c(0);
+                  mapCollisionQueueEdgeQuad(0);
                 }
               }
               else if (!temp_v1) {
                 temp_v1 = 1;
                 if (*(char *)(temp_v3 + 0x34) != '\x01') {
                   VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-                  FUN_00262a8c(0);
+                  mapCollisionQueueEdgeQuad(0);
                 }
                 else {
                   VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -110,7 +110,7 @@ void FUN_002ce4e4(void)
           }
           else if (temp_v1) {
             VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_00262a8c(0);
+            mapCollisionQueueEdgeQuad(0);
             temp_v1 = 0;
           }
           temp_v4 = temp_v4 + 1;
@@ -135,7 +135,7 @@ void FUN_002ce4e4(void)
               if (temp_v0 != '\x01') {
                 if ((temp_v0 == '\x02') && (temp_v1)) {
                   VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-                  FUN_00262a8c(0);
+                  mapCollisionQueueEdgeQuad(0);
                   temp_v1 = 0;
                 }
               }
@@ -147,7 +147,7 @@ void FUN_002ce4e4(void)
           }
           else if (temp_v1) {
             VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_00262a8c(0);
+            mapCollisionQueueEdgeQuad(0);
             temp_v1 = 0;
           }
           temp_v4 = temp_v4 + 1;
@@ -172,7 +172,7 @@ void FUN_002ce4e4(void)
               if (temp_v0 != '\x01') {
                 if ((temp_v0 == '\x02') && (temp_v1)) {
                   VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-                  FUN_00262a8c(0);
+                  mapCollisionQueueEdgeQuad(0);
                   temp_v1 = 0;
                 }
               }
@@ -184,7 +184,7 @@ void FUN_002ce4e4(void)
           }
           else if (temp_v1) {
             VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_00262a8c(0);
+            mapCollisionQueueEdgeQuad(0);
             temp_v1 = 0;
           }
           temp_v4 = temp_v4 + 1;

@@ -10,7 +10,7 @@ s32 recordGetModeForId(s32 itemId);
 s32 FUN_004d0494(void);
 s32 inputIsQuestMenuPressed(void);
 s32 inputIsQuestCancelPressed(void);
-void FUN_00496a0c(EquipmentMenuState *menu, u32 changed);
+void shopScreenRebuildForSelection(EquipmentMenuState *menu, u32 changed);
 void sendEvent1000210(void);
 void sendEvent100020F(void);
 void sendEvent100020E(void);
@@ -38,13 +38,13 @@ void _ZN9Obj53604412FUN_00498594Ev(EquipmentMenuState *menu)
     messageChoiceShowCurrent(menu);
     if (inputIsQuestRepeatRight() || recordGetModeForId(neighbors->nextItem) == 6) {
         menu->selection.index = g_shopItemTabNeighbors[menu->selection.index][0];
-        FUN_00496a0c(menu, 1);
+        shopScreenRebuildForSelection(menu, 1);
         sendEvent1000210();
         return;
     }
     if (FUN_004d0494() || recordGetModeForId(neighbors->previousItem) == 6) {
         menu->selection.index = g_shopItemTabNeighbors[menu->selection.index][1];
-        FUN_00496a0c(menu, 1);
+        shopScreenRebuildForSelection(menu, 1);
         sendEvent1000210();
         return;
     }

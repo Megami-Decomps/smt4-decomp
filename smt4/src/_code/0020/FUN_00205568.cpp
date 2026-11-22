@@ -1,4 +1,4 @@
-/* NON_MATCHING: skill-list walks compile as up-counting index loops with different registers; retail walks a biased pointer counting down (pairs at -2 offset). */
+/* NON_MATCHING: retail unrolls each eight-skill walk by two (a pointer biased by -2, a count-down of 4; the player walk peeled at both ends); armcc here keeps one skill per iteration and compares the pointer against the end. */
 #include "common.h"
 #include <stddef.h>
 #include "gamedata/PlayerDataBlock.h"
@@ -20,24 +20,17 @@ struct SkillExclusions {
 };
 typedef char SkillExclusionsOffsetCheck[offsetof(SkillExclusions, flags) == 0x1A ? 1 : -1];
 
-struct SkillPair {
-    u16 first;
-    u16 second;
-};
-
 struct SkillSourceView {
     /* 0x00 */ u8 unk00[0x3C];
-    /* 0x3C */ SkillPair skills[4];
+    /* 0x3C */ u16 skills[8];
 };
 struct PlayerSkillView {
     /* 0x00 */ u8 unk00[0x34];
-    /* 0x34 */ u16 firstSkill;
-    /* 0x36 */ SkillPair skills[3];
-    /* 0x42 */ u16 lastSkill;
+    /* 0x34 */ u16 skills[8];
 };
 struct UnitSkillView {
     /* 0x00 */ u8 unk00[0x34];
-    /* 0x34 */ SkillPair skills[4];
+    /* 0x34 */ u16 skills[8];
     /* 0x44 */ u8 unk44[2];
     /* 0x46 */ u16 id;
 };
@@ -60,19 +53,11 @@ static __inline s32 appendSkill(u16 *out, s32 count, u16 skill)
 s32 FUN_00205568(u16 *out, const SkillSourceView *source, const PackedSkillPair *covered, const SkillExclusions *exclusions)
 {
     s32 count = 0;
-    const SkillPair *pair = source->skills;
-    for (s32 i = 0; i < 4; i++, pair++) {
-        count = appendSkill(out, count, pair->first);
-        count = appendSkill(out, count, pair->second);
-    }
+    for (const u16 *skill = source->skills; skill < source->skills + 8; skill++)
+        count = appendSkill(out, count, *skill);
     PlayerSkillView *player = reinterpret_cast<PlayerSkillView *>(gameGetPlayerData());
-    count = appendSkill(out, count, player->firstSkill);
-    pair = player->skills;
-    for (s32 i = 0; i < 3; i++, pair++) {
-        count = appendSkill(out, count, pair->first);
-        count = appendSkill(out, count, pair->second);
-    }
-    count = appendSkill(out, count, player->lastSkill);
+    for (const u16 *skill = player->skills; skill < player->skills + 8; skill++)
+        count = appendSkill(out, count, *skill);
     SaveSlotTableIV *slots = gameGetSlotTable();
     for (s32 slot = 0; slot < 24; slot++) {
         if (slots->stock[slot] < 0)
@@ -90,11 +75,8 @@ s32 FUN_00205568(u16 *out, const SkillSourceView *source, const PackedSkillPair 
             if (excluded)
                 continue;
         }
-        pair = unit->skills;
-        for (s32 i = 0; i < 4; i++, pair++) {
-            count = appendSkill(out, count, pair->first);
-            count = appendSkill(out, count, pair->second);
-        }
+        for (const u16 *skill = unit->skills; skill < unit->skills + 8; skill++)
+            count = appendSkill(out, count, *skill);
     }
     return count;
 }

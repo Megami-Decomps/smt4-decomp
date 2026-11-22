@@ -14,7 +14,7 @@ nn::Result socketInitializeWithWorkBuffer(u32 buffer, u32 address, u32 size, u32
 s32 svcCreateEvent(u32 *handle, s32 manualReset);
 void sysFatalBreak(void);
 
-/* CTR-SDK nn::os::Event::Initialize idiom (siblings: FUN_0042230c, asyncOperationStartOrPoll, FUN_0016f574, FUN_0047d904, FUN_004d95e8). */
+/* CTR-SDK nn::os::Event::Initialize idiom (siblings: FUN_0042230c, asyncOperationStartOrPoll, FUN_0016f574, asyncOperationStartOrPollNonBlocking, FUN_004d95e8). */
 static __inline s32 nnOsEventInitialize(u32 *slot, bool manualReset)
 {
     u32 handle = 0;

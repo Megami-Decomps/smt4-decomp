@@ -2722,7 +2722,6 @@
 0x0018a870 nn_snd_CTR_Voice_SetSampleRate name
 0x0018a8a8 FUN_0018a8a8 between
 0x0018a8c8 FUN_0018a8c8 between
-0x0018a9bc mathCopyIdentityMatrix twin
 0x0018aa5c nn_math_ARMv6_MTX34LookAtC_FAST name
 0x0018ab54 FUN_0018ab54 between
 0x0018aeb8 _ZN2nw4math5MTX448IdentityEv name

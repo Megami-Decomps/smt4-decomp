@@ -75,7 +75,8 @@ difference a register tie-break.
   reshaping a layout. It holds for a small struct inside an array too: an `s8 active` byte in
   `AsdSndSlotC` made retail's split base (`add r0, r1, #1536` then `[r0, #130]`/`[r0, #146]`, smt4
   `FUN_0010d3f8`), where a `u8` addresses each slot from the sound base.
-- A flag read with `ldrb` through a split large-offset base and tested against 0 is `s8`.
+- A flag read with `ldrb` through a split large-offset base and tested against 0 is `s8`: `ButtonHelpWork::drawEnabled`
+  and `ButtonHelpText::highlightLine` (retail's work+0x400 and +0x500 bases) made smt4 `FUN_002109cc` IDENTICAL (wave 71).
 - So is one read through a pool-loaded offset (`ldr r0, =0x1168; ldrb r0, [r0, r4]`), where a `u8` gives
   `add r5, r4, #0x1000; ldrb r0, [r5, #360]`: smt4a `FUN_004b82a0`'s `returnToMap` (47 against 88 lines), and the
   same `s8` made its IV twin `FUN_003b92b4` IDENTICAL (63 lines as `u8`; wave 66).
@@ -443,6 +444,12 @@ asks for.
 - A sound stop guarded by its handle (`if (u32 handle = playback.handles[i]) stop(handle, frames);`) is
   nw::snd's `SoundHandle::Stop` header inline: as a `static __inline` it gave the spatial actor stops of both games
   (smt4 `FUN_002ebdd8`, smt4a `FUN_0036be10`, wave 57); the same test written in place differs by two lines.
+- A render-stack pop whose context retail loads into a scratch register and then forms the stack's address from
+  (`ldr r0, [ctx]; add r4, r0, #4096`), where `renderStackPop(g_renderCtx->stacks + K)` loads the context straight
+  into the address register, is the context-level pop inlined: `renderCtxPopCounted(context, kind)` (`camp/RenderCtx.h`,
+  the body of the out-of-line `renderCtxPopState`). Five near misses became IDENTICAL with it alone (smt4 `FUN_002e15f8`,
+  `shopDrawQuantityPanel`; smt4a `runWinDraw`, `aocMenuDrawGuideDown`, `FUN_00359c78`), and the GuestWin draws of both
+  games use it (wave 71).
 - AocMenu's step change (store the step, clear the substep, delete the window) is `aocMenuChangeStep` in
   `classes/AocMenu.h`, the helper `AocMenu::runMainProcess` uses at six sites in each game; called in place of the
   open-coded statements it made smt4a `aocMenuUpdate` IDENTICAL (wave 57).
@@ -690,6 +697,11 @@ unit can name those callees in a `multifile` list in `config/project.json`; `bui
 `fdiff` then compile it in one `--multifile --no_autoinline` run with the callees' unit sources
 and keep only the unit's function. Same evidence rule as `cflags`, and the callees' own sources
 must clobber what retail's do (matched callees are best).
+The recipe always adds `--no_autoinline`, which most multifile units need (without it their callees are
+inlined). Some need autoinline on: smt4 `mapDepartAdvanceCameraSequence` keeps retail's `r3` across six calls of
+`vectorPairTransitionStep`, its prologue and its 116-byte frame only in a `--multifile` run without
+`--no_autoinline` (the callee calls inline helpers; 84 lines left against 278 with the recipe), so it has no
+`multifile` entry yet: a per-unit switch for the flag is a tools follow-up (wave 71).
 
 ### Finding the evidence
 

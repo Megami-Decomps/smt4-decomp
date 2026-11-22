@@ -1,5 +1,3 @@
-/* NON_MATCHING: only the stack-B pop's address differs: retail loads g_renderCtx into r0 and adds the offset into r5
- * (ldr r0; add r5, r0, #4096), this build loads it into r5 directly (the same residue as smt4 aocMenuDrawScreen). */
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
@@ -49,10 +47,10 @@ u8 runWinDraw(void)
         texDrawCompositeSprite(2, 8, 19, x, y, 110);
         RenderCtxA *scene = g_renderCtx;
         s32 state = packNibblesAndByte(6, 1, 0);
-        renderStackPushCountedDirect(scene->stacks + RENDER_STACK_B, state);
+        renderStackPush(scene->stacks + RENDER_STACK_B, state);
         texDrawTableEntryAtStoredOrigin(2, 8, 0x150, x, 0, 111);
         texDrawTableEntryAtStoredOrigin(2, 8, 0x151, x, 0, 111);
-        renderStackPopCounted(g_renderCtx->stacks + RENDER_STACK_B);
+        renderCtxPopCounted(g_renderCtx, RENDER_STACK_B);
         TextureTableEntryIV *labelPoint = asdTMTexTableEntryAt(8, 0x153);
         textDrawString((f32)(labelPoint->x + (x - 20)), (f32)(labelPoint->y + y), 0.56640625f, 4, 0.0f, 0x57D8FFFF, win->alpha, (const char *)win->label);
         s32 lit = (win->frame / 5) % 8;

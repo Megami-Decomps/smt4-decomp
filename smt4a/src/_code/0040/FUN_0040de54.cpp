@@ -68,7 +68,7 @@ int FUN_004c8e30(...);
 int FUN_004c909c(...);
 int FUN_004c9160(...);
 int FUN_004c9474(...);
-int FUN_004c9538(...);
+int btlHelpAppendTextEntry(...);
 int FUN_004cab9c(...);
 int FUN_004cad84(void);
 void btlRosterMotionRestart(TransitionView *state);
@@ -241,7 +241,7 @@ extern unsigned int FUN_0047fa50(unsigned int);
 /* Supplied declaration required: FUN_004c909c. */
 /* Supplied declaration required: FUN_004c9160. */
 /* Supplied declaration required: FUN_004c9474. */
-/* Supplied declaration required: FUN_004c9538. */
+/* Supplied declaration required: btlHelpAppendTextEntry. */
 /* Supplied declaration required: FUN_004c9d04. */
 /* Supplied declaration required: FUN_004cab9c. */
 /* Supplied declaration required: FUN_004cad84. */
@@ -748,7 +748,7 @@ joined_r0x0040ec14:
       break;
     }
     if (psVar2[0x12] == 0) {
-      FUN_004c9538(*(unsigned int *)(psVar2 + 0x14),*(unsigned int *)(psVar2 + 0xc));
+      btlHelpAppendTextEntry(*(unsigned int *)(psVar2 + 0x14),*(unsigned int *)(psVar2 + 0xc));
       psVar2[0x12] = psVar2[0x12] + 1;
       temp_v4 = 1;
       psVar2[1] = temp_v4;

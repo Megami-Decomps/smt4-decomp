@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00262a8c(...);
+int mapCollisionQueueEdgeQuad(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(...);
 int nn_math_ARMv6_VEC3TransformAsm_2AD44C(...);
@@ -82,7 +82,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00262a8c. */
+/* Supplied declaration required: mapCollisionQueueEdgeQuad. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
 
@@ -240,7 +240,7 @@ void FUN_002d2efc(fn_002d2efc_arg0 *param_1)
   temp_v56 = temp_v56 + param_1->field_0xc;
   temp_v57 = temp_v57 + param_1->field_0x10;
   temp_v58 = temp_v58 + param_1->field_0x14;
-  FUN_00262a8c((int)(short)param_1->field_0x38);
+  mapCollisionQueueEdgeQuad((int)(short)param_1->field_0x38);
   temp_v22 = 0xc2c80000;
   temp_v35 = 0xc2c80000;
   temp_v50 = 0xc2c80000;
@@ -312,7 +312,7 @@ void FUN_002d2efc(fn_002d2efc_arg0 *param_1)
   temp_v56 = temp_v56 + param_1->field_0xc;
   temp_v57 = temp_v57 + param_1->field_0x10;
   temp_v58 = temp_v58 + param_1->field_0x14;
-  FUN_00262a8c((int)(short)param_1->field_0x38);
+  mapCollisionQueueEdgeQuad((int)(short)param_1->field_0x38);
   temp_v2 = (param_1->field_0x18 + 180.0f) * temp_v20;
   temp_v1 = (temp_v1 & 0xfffffff) | ((unsigned int)(temp_v14 <= temp_v2) << 0x1d);
   for (temp_v2 = romwright_fabs_4(temp_v2); temp_v6 = temp_v14, (int)temp_v2 >= 0x47800000; temp_v2 = temp_v2 - temp_v17) {
@@ -384,7 +384,7 @@ void FUN_002d2efc(fn_002d2efc_arg0 *param_1)
   temp_v56 = temp_v56 + param_1->field_0xc;
   temp_v57 = temp_v57 + param_1->field_0x10;
   temp_v58 = temp_v58 + param_1->field_0x14;
-  FUN_00262a8c((int)(short)param_1->field_0x38);
+  mapCollisionQueueEdgeQuad((int)(short)param_1->field_0x38);
   temp_v20 = (param_1->field_0x18 + 270.0f) * temp_v20;
   temp_v1 = (temp_v1 & 0xfffffff) | ((unsigned int)(temp_v14 <= temp_v20) << 0x1d);
   for (temp_v20 = romwright_fabs_4(temp_v20); temp_v2 = temp_v14, (int)temp_v20 >= 0x47800000; temp_v20 = temp_v20 - temp_v17) {
@@ -455,7 +455,7 @@ void FUN_002d2efc(fn_002d2efc_arg0 *param_1)
   temp_v56 = temp_v56 + param_1->field_0xc;
   temp_v57 = temp_v57 + param_1->field_0x10;
   temp_v58 = temp_v58 + param_1->field_0x14;
-  FUN_00262a8c((int)(short)param_1->field_0x38);
+  mapCollisionQueueEdgeQuad((int)(short)param_1->field_0x38);
   return;
 }
 

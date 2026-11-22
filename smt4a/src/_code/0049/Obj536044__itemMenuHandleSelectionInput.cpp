@@ -49,7 +49,7 @@ void Obj536044::itemMenuHandleSelectionInput()
         return;
     }
     if (inputIsQuestMenuPressed() != 0) {
-        cleared[2] = 0;
+        menuCursors[2] = 0;
         FUN_0038b010(0);
         sendEvent100020F();
         uiSpriteBankApplyPreset(&animation, 1);

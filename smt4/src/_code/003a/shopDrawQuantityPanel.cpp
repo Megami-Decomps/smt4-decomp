@@ -1,5 +1,3 @@
-/* NON_MATCHING: register allocation only: retail loads g_titleScene into r0 before forming the second stack's
- * address in r5 for the pop, the build loads it into r5 directly. */
 #include <stdio.h>
 #include "shop/ShopScreen.h"
 #include "camp/RenderCtx.h"
@@ -46,7 +44,7 @@ void shopDrawQuantityPanel(ShopScreen *screen)
     if (screen->quantity.decrementActive != 0) {
         FUN_00231bcc(&screen->panel.rect, 0xc5, x, y, depth + 1, 1);
     }
-    renderStackPopChecked(g_titleScene->stacks + RENDER_STACK_B);
+    renderCtxPopCounted(g_titleScene, RENDER_STACK_B);
     s32 quantity = screen->quantity.value;
     const TextureTableEntryIV *numberPos = layoutFindTableEntry(&screen->panel.rect, 199);
     u32 color = 0xffffffff;

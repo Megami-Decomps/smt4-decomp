@@ -50,7 +50,7 @@ int FUN_00246128(void);
 int scrScriptProcessCreate(...);
 int scrScriptProcessStartEntry(...);
 int messageSlotSet(int);
-int FUN_00295108(...);
+int popupTryStartStory(...);
 int FUN_002b5e08(int, int *, unsigned char *, unsigned int *);
 int blockResetAxis(...);
 int mapSetSceneState(...);
@@ -137,7 +137,7 @@ extern int messageMainIsIdle(void);
 /* Supplied declaration required: scrScriptProcessCreate. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: messageSlotSet. */
-/* Supplied declaration required: FUN_00295108. */
+/* Supplied declaration required: popupTryStartStory. */
 extern int messageMainGetValue(void);
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002b5e08. */
@@ -538,7 +538,7 @@ LAB_00299e1c:
           }
           else if (*(unsigned int *)(temp_v4 + 0xc) != 3) {
             if ((*(char *)(temp_v4 + 0x60) == '\0') && (*(unsigned int *)(temp_v4 + 0xc) < 2)) {
-              FUN_00295108(0);
+              popupTryStartStory(0);
               FUN_00246128();
               temp_v11 = popupIsActive();
               *(unsigned char *)(temp_v4 + 0x8e) = temp_v11 != 0;
@@ -624,7 +624,7 @@ LAB_0029a094:
           else {
             if (((*(char *)(temp_v4 + 0x60) == '\0') && (*(char *)(temp_v4 + 0x8d) != '\0')) &&
                (*(char *)(temp_v4 + 0xa1) == '\0')) {
-              FUN_00295108(0,(int)DAT_005f1e18,*(int *)(temp_v4 + 0x98) * 0x2aaaaaab);
+              popupTryStartStory(0,(int)DAT_005f1e18,*(int *)(temp_v4 + 0x98) * 0x2aaaaaab);
               FUN_00246128();
               popupTryStartActionLabelPrompt(*(unsigned int *)(temp_v4 + 0xa4),*(unsigned int *)(temp_v4 + 0xa8));
             }

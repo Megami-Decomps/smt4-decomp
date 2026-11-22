@@ -1,4 +1,5 @@
-/* NON_MATCHING: readable switch rewrite (171 vs 168 rows); register numbering and case-body ordering differ from retail */
+/* NON_MATCHING: the menu, cursor and index get other callee-saved registers, and retail copies the slot-id table
+ * from a shared constant anchor; case order and bodies follow retail. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "code/Code0029_VariantB.h"
@@ -35,29 +36,29 @@ void btlCommandMenuResolveLayout(CommandMenu* menu, u16* layout, s16* cursor)
         *cursor = 7;
         return;
     }
-    s16 result;
+    s32 result;
     switch (FUN_00297ca4(menu, 1)) {
-    case 0:
-    case 6:
-        result = 0;
-        *layout = 1;
-        break;
     case 1: {
         s32 base = resourceRunOperationIfUnblocked(menu->itemList);
         index = listCursorGetRowIfUnblocked(menu->itemList) + base;
-        u16 page;
         if (menu->hasPlayerList != 0) {
-            page = (index != 0) ? 2 : 1;
-        } else if (index == 0) {
-            page = 1;
-        } else {
-            page = 2;
-            if (index == 1 && gameFlagIsSet(0x410)) {
-                PlayerDataIV* player = gameGetPlayerData();
-                if (player->equipped.gun != 0 && player->equipped.bullets != 0) page = 1;
+            if (index == 0) {
+                *layout = 1;
+            } else {
+                *layout = 2;
             }
+        } else if (index == 0) {
+            *layout = 1;
+        } else if (index == 1 && gameFlagIsSet(0x410)) {
+            PlayerDataIV* player = gameGetPlayerData();
+            if (player->equipped.gun != 0 && player->equipped.bullets != 0) {
+                *layout = 1;
+            } else {
+                *layout = 2;
+            }
+        } else {
+            *layout = 2;
         }
-        *layout = page;
         result = menu->cursorDefault;
         break;
     }
@@ -81,23 +82,33 @@ void btlCommandMenuResolveLayout(CommandMenu* menu, u16* layout, s16* cursor)
             }
             return;
         }
-        result = resourceRunOperationIfUnblocked(menu) + listCursorGetRowIfUnblocked(menu->skillList);
-        break;
-    case 4:
-        result = 0;
-        *layout = 0xd;
+        result = resourceRunOperationIfUnblocked(menu->skillList) + listCursorGetRowIfUnblocked(menu->skillList);
         break;
     case 5:
         result = 0;
         *layout = 6;
         break;
+    case 0:
+    case 6:
+        result = 0;
+        *layout = 1;
+        break;
     case 7:
         *layout = 8;
         result = menu->targetIds[resourceRunOperationIfUnblocked(menu->targetList) + listCursorGetRowIfUnblocked(menu->targetList)];
         break;
+    case 0xffffffff:
+    case 8:
+        result = 0;
+        *layout = 5;
+        break;
     case 9:
         result = 0;
         *layout = 4;
+        break;
+    case 4:
+        result = 0;
+        *layout = 0xd;
         break;
     case 10:
         result = 0;
@@ -107,11 +118,6 @@ void btlCommandMenuResolveLayout(CommandMenu* menu, u16* layout, s16* cursor)
         *layout = 0xe;
         *cursor = 0;
         return;
-    case 0xffffffff:
-    case 8:
-        result = 0;
-        *layout = 5;
-        break;
     default:
         return;
     }

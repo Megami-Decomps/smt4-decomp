@@ -1,5 +1,5 @@
 /* nn::math's VEC3 header inlines (the C versions) and the look-at view matrix built from them,
- * inlined by the screen camera setup (smt4 FUN_00106a18). The listener orientation of both games
+ * inlined by the screen camera setup (smt4 renderCtxSetupScreenCamera). The listener orientation of both games
  * (smt4 FUN_00119c28, smt4a FUN_00154710) inlines the same look-at, but with this form its VFP
  * allocation scores worse there, so those stay open-coded for now. */
 #ifndef NW_MATH_VEC3_H

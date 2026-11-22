@@ -1,4 +1,4 @@
-/* NON_MATCHING: the phase switch now builds retail's jump table (labels 3 and 4 fall out to the default, as in retail) and the images base is shared; the saved registers still differ (retail: state r4, loop index r5, loaded count r6, images r7; built has them rotated). */
+/* NON_MATCHING: only registers differ: retail counts loaded images in r6 with the images base in r7 (built: r7/r6), and the row lookup keeps the index in r0 and the table in r1 (built: swapped), which also swaps the frame/split pair in phase 1. */
 #include "event/2dEvent/SmokeFade.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -24,12 +24,13 @@ f32 mathInterpolateTimed(s32 total, s32 elapsed, f32 from, f32 to);
 }
 
 /* The row of the fade table selected by the state, or NULL while the table is not loaded. */
-static __inline SmokeFadeRow *smokeFadeGetRow()
+static __inline SmokeFadeRow *smokeFadeGetRow(s32 index)
 {
+    SmokeFadeRow *row = NULL;
     SmokeFadeRow *rows = static_cast<SmokeFadeRow *>(DAT_0043df28.state->file);
-    if (rows == NULL)
-        return NULL;
-    return rows + DAT_0043df28.state->first;
+    if (rows != NULL)
+        row = rows + index;
+    return row;
 }
 
 static __inline bool smokeFadeImagesLoaded(SmokeFadeImage *images)
@@ -54,24 +55,24 @@ extern "C" u32 smokeFadeUpdate(u32 job)
     case 0: {
         if (!smokeFadeImagesLoaded(images) || fade->file == NULL)
             return 0;
-        SmokeFadeRow *row = smokeFadeGetRow();
-        if (fade->second != 0) {
-            fade->scale = 0.0f;
-            fade->opacity = 0.0f;
-            fade->phase = 2;
-            slotSetRequest(1, row->fadeInFrames + 1, 0xFFFFFFFF);
-        } else {
+        SmokeFadeRow *row = smokeFadeGetRow(fade->first);
+        if (fade->second == 0) {
             titleSetSlotValueState2(0, 0);
             titleSetSlotValueState2(1, row->fadeOutFrames + 1);
             fade->scale = 1.0f;
             fade->opacity = 1.0f;
             fade->phase = 1;
+        } else {
+            fade->scale = 0.0f;
+            fade->opacity = 0.0f;
+            fade->phase = 2;
+            slotSetRequest(1, row->fadeInFrames + 1, 0xFFFFFFFF);
         }
         fade->active = 1;
         return 0;
     }
     case 1: {
-        SmokeFadeRow *row = smokeFadeGetRow();
+        SmokeFadeRow *row = smokeFadeGetRow(fade->first);
         fade->opacity = mathInterpolateTimed(row->fadeOutFrames, fade->frame, 1.0f, 0.0f);
         if (fade->frame >= row->fadeOutSplit)
             fade->scale = mathInterpolateTimed(row->fadeOutFrames - row->fadeOutSplit,
@@ -82,7 +83,7 @@ extern "C" u32 smokeFadeUpdate(u32 job)
         break;
     }
     case 2: {
-        SmokeFadeRow *row = smokeFadeGetRow();
+        SmokeFadeRow *row = smokeFadeGetRow(fade->first);
         fade->opacity = mathInterpolateTimed(row->fadeInFrames, fade->frame, 0.0f, 1.0f);
         if (fade->frame >= row->fadeInSplit)
             fade->scale = mathInterpolateTimed(row->fadeInFrames - row->fadeInSplit, fade->frame - 50, 0.0f, 1.0f);

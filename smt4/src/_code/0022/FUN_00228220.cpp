@@ -13,7 +13,7 @@ int btlEntryHasSkillCategory(unsigned int *, unsigned int);
 int selectionCopySupportedValue(int, unsigned int [3]);
 int FUN_0023ea94(void);
 int randRange(int);
-int FUN_00246134(...);
+int btlSkillHitFlags(...);
 int FUN_002463e8(...);
 int btlEntryBuildSummary(unsigned char [2], unsigned int, unsigned int *);
 int skillDataFindById(void);
@@ -43,7 +43,7 @@ typedef struct {
 /* Supplied declaration required: selectionCopySupportedValue. */
 /* Supplied declaration required: FUN_0023ea94. */
 /* Supplied declaration required: randRange. */
-/* Supplied declaration required: FUN_00246134. */
+/* Supplied declaration required: btlSkillHitFlags. */
 /* Supplied declaration required: FUN_002463e8. */
 /* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
@@ -160,7 +160,7 @@ void FUN_00228220(int param_1,unsigned int param_2,int param_3,unsigned int para
         return;
       }
       temp_v4 = param_5;
-      FUN_00246134();
+      btlSkillHitFlags();
       selectionCopySupportedValue(temp_v1,temp_v18);
       puVar9 = puVar6;
       btlEntryHasSkillCategory(puVar6,temp_v18[0] & 0xff);
@@ -237,7 +237,7 @@ void FUN_00228220(int param_1,unsigned int param_2,int param_3,unsigned int para
           temp_v7 = 0;
           do {
             temp_v4 = param_5;
-            FUN_00246134(param_5,temp_v10[temp_v7],*(unsigned char *)(temp_v3 + 0x23),0xffffffff);
+            btlSkillHitFlags(param_5,temp_v10[temp_v7],*(unsigned char *)(temp_v3 + 0x23),0xffffffff);
             temp_v13[temp_v7] = temp_v4;
             temp_v4 = param_5;
             btlGetPassiveAffinityOverride(param_5,temp_v10[temp_v7]);

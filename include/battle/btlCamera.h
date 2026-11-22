@@ -45,7 +45,7 @@ typedef struct BtlCamera {
         /* 0x00C */ f32 vectors[2][3];   /* the two editor poses (btlCameraEditorInitializeList) */
         /* 0x00C */ BtlCameraVector3 movePoints[2]; /* where flag 0x80000 moves `position` from and to */
     };
-    /* 0x024 */ s32 editorValue;     /* nonzero: the editor's pose applies (FUN_0024082c) */
+    /* 0x024 */ s32 editorValue;     /* nonzero: the editor's pose applies (btlCameraStartMove) */
     /* 0x028 */ s32 state;           /* 0: idle, 1: updating, 2: finished */
     /* 0x02C */ u8 unk02C[4];
     /* 0x030 */ BtlCameraShake shake;      /* flag 0x40000 */
@@ -174,6 +174,12 @@ typedef char BtlCameraChannelCheck[
 static __inline AsdCamera *btlCameraView(BtlCamera *camera)
 {
     return (AsdCamera *)camera->view;
+}
+
+/* Sets flags of the camera. */
+static __inline void btlCameraSetFlags(BtlCamera *camera, u32 flags)
+{
+    camera->flags |= flags;
 }
 
 struct BtlCameraA;

@@ -1,5 +1,6 @@
-/* NON_MATCHING: switch table becomes a comparison chain, packed descriptor stores combine, and result-test registers differ; -O2 may preserve the retail SDK control flow. */
+/* NON_MATCHING: 64 lines (102 vs 102 rows): jump table, descriptor packing and all nn::Result checks match; r5/r6/r7 rotation and mov r1, r0 placement before result tests remain (-O2 candidate). */
 #include "common.h"
+#include "nn/Result.h"
 #include "shard/W6_W6Match7_ArchiveIcon.h"
 
 struct SdkResourceOptions {
@@ -12,20 +13,25 @@ struct SdkResourceOptions {
 
 extern "C" {
 void sysFatalBreak(void);
-void _ZN18WindowStatusResultC1Ej(u32 *result, u32 code);
 u32 FUN_00426800(u32 *scratch, u32 state[6], u32 count, u64 descriptor, u32 flags);
 
-void sdkCreateEncodedResourceDescriptor(u32 *result, u64 *outDescriptor, const SdkResourceOptions *options)
+/* Maps the archive kind selector (0..4) to its high-word flags (shared with smt4 aocOpenPackedArchive). */
+static __inline u32 encodeResourceKind(u8 kind)
 {
-    u32 flags;
-    switch (options->kind) {
-    case 0: flags = 0x8c; break;
-    case 1: flags = 0x0d; break;
-    case 3: flags = 0x10; break;
-    case 4: flags = 0x30; break;
-    default: flags = 0; break;
+    switch (kind) {
+    case 0: return 0x8c;
+    case 1: return 0x0d;
+    case 2: break;
+    case 3: return 0x10;
+    case 4: return 0x30;
+    default: break;
     }
-    flags |= 0x40000;
+    return 0;
+}
+
+WindowStatusResult sdkCreateEncodedResourceDescriptor(u64 *outDescriptor, const SdkResourceOptions *options)
+{
+    u32 flags = encodeResourceKind(options->kind) | 0x40000;
     u32 value = options->detail | ((options->id & 0xfffff) << 8);
     s32 memory = options->memory;
     switch (memory) {
@@ -39,32 +45,27 @@ void sdkCreateEncodedResourceDescriptor(u32 *result, u64 *outDescriptor, const S
         memory = 0;
         break;
     }
-    u64 descriptor = (static_cast<u64>(flags) << 32) | (value & ~0xf0000000u) |
-        static_cast<s64>(memory << 28);
+    u64 descriptor = ((u64)flags << 32) | (value & ~0xf0000000u) |
+        (s64)(memory << 28);
     u32 scratch;
     u32 requestState[6];
     u32 code = FUN_00426800(&scratch, requestState, 1, descriptor, 0);
     if (code == 0xd8a083fa) {
-        _ZN18WindowStatusResultC1Ej(result, 0xc8813894);
-        return;
+        return WindowStatusResult(0xc8813894);
     }
-    if (static_cast<s32>(code) < 0) {
-        _ZN18WindowStatusResultC1Ej(result, code);
-        return;
+    if (nnResultIsFailure(code)) {
+        return WindowStatusResult(code);
     }
     u32 queryState[6];
     code = FUN_004269b0(queryState, 1, &descriptor, 1);
-    s32 description = code & 0x3ff;
-    if ((((code & 0x3fc00) >> 10) == 17 && description >= 100 && description <= 179) ||
+    if ((nnResultModule(code) == 17 && nnResultDescriptionBits(code) >= 100 && nnResultDescriptionBits(code) <= 179) ||
         code == 0xd8a083fa || code == 0xc8a0802b) {
-        _ZN18WindowStatusResultC1Ej(result, 0xc8813887);
-        return;
+        return WindowStatusResult(0xc8813887);
     }
-    if (static_cast<s32>(code) < 0) {
-        _ZN18WindowStatusResultC1Ej(result, code);
-        return;
+    if (nnResultIsFailure(code)) {
+        return WindowStatusResult(code);
     }
     *outDescriptor = descriptor;
-    _ZN18WindowStatusResultC1Ej(result, 0);
+    return WindowStatusResult(0);
 }
 }

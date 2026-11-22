@@ -1,10 +1,12 @@
-/* NON_MATCHING: O3 scalarizes the 4x4-to-3x4 copy and merges cache stores; template-copy, frame and register allocation differ. O2 candidate. */
+/* NON_MATCHING: retail copies the first three rows of the SRT matrix into the local and then into the cache one
+ * 16-byte row at a time (ldm/stm), where memcpy and the struct copy go through VFP registers; the template copy, frame
+ * (152 bytes) and the hoisted 0x804f02c0 header differ with it. */
 #include "shard/W6_W6Match7_TextureTransform.h"
 
 extern "C" {
 extern const TextureModeTables textureModeTables;
 extern u32 *g_commandBufferCursor;
-Matrix44 textureCalcSrtMatrix(s32 mode, TextureTransformVector2 scale, f32 rotation, TextureTransformVector2 translation);
+Matrix44 *textureCalcSrtMatrix(Matrix44 *out, s32 mode, f32 scaleX, f32 scaleY, f32 rotation, f32 translateX, f32 translateY);
 void FUN_001bc768(u32 *out, const ShaderLightMatrix *matrix, u32 header);
 void nw_gfx_internal_NWCopyVec3Reverse(u32 *out, const f32 *vector);
 
@@ -21,7 +23,10 @@ void gfxEmitTextureTransform(u32 unused, TextureTransformContext *context, Textu
     if (transform.enabled != 0) {
         ShaderLightMatrix matrix;
         if (transform.dirty != 0) {
-            matrix = textureTransformFrom44(textureCalcSrtMatrix(transform.matrixMode & 0xff, transform.scale, transform.rotation, transform.translation));
+            Matrix44 srt;
+            textureCalcSrtMatrix(&srt, transform.matrixMode & 0xff, transform.scale.x, transform.scale.y, transform.rotation,
+                transform.translation.x, transform.translation.y);
+            memcpy(&matrix, &srt, sizeof(matrix)); /* the shader takes the first three rows */
             transform.matrix = matrix;
             transform.dirty = 0;
         } else {

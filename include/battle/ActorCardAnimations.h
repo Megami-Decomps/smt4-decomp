@@ -35,7 +35,7 @@ struct ActorCardAnimations {
     /* 0x0000 */ UiResourceParameters resources;  /* every sprite's animation tables */
     /* 0x0020 */ UiSpriteState backdrop;
     /* 0x00AC */ UiSpriteState intro;
-    /* 0x0138 */ UiSpriteState unk0138[8];
+    /* 0x0138 */ UiSpriteState commandItems[8];    /* the command menu's rows */
     /* 0x0598 */ UiSpriteState unk0598;
     /* 0x0624 */ UiSpriteState unk0624;
     /* 0x06B0 */ UiSpriteState unk06B0;
@@ -107,7 +107,7 @@ struct ActorCardAnimationsA {
     /* 0x0000 */ UiResourceParameters resources;  /* every sprite's animation tables */
     /* 0x0020 */ UiSpriteState backdrop;
     /* 0x00AC */ UiSpriteState intro;
-    /* 0x0138 */ UiSpriteState unk0138[8];
+    /* 0x0138 */ UiSpriteState commandItems[8];    /* the command menu's rows */
     /* 0x0598 */ UiSpriteState unk0598;
     /* 0x0624 */ UiSpriteState unk0624;
     /* 0x06B0 */ UiSpriteState unk06B0;
@@ -147,7 +147,8 @@ struct ActorCardAnimationsA {
     /* 0x38B5 */ u8 unk38B5;
     /* 0x38B6 */ u8 unk38B6[4];
     /* 0x38BA */ u8 unk38BA;
-    /* 0x38BB */ u8 unk38BB[0x191];
+    /* 0x38BB */ u8 unk38BB;
+    /* 0x38BC */ GridNavigation commandBoxes[4];   /* the command menu's cursor, one per command owner (page) */
     /* 0x3A4C */ GridNavigation pageBox;
     /* 0x3AB0 */ GridNavigation headerBox;
     /* 0x3B14 */ GridNavigation skillBox;

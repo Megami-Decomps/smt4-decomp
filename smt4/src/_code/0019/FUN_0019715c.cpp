@@ -15,7 +15,7 @@ int campSkillListDraw(int, int, int);
 int campAppListDraw(int, int, int);
 int FUN_0028f694(...);
 int FUN_0028f870(...);
-int FUN_0028fc60(void);
+int itemCanUseOnParty(void);
 int FUN_002bdf94(...);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
@@ -45,7 +45,7 @@ extern int g_camp; /* 0x43da90 */
 /* Supplied declaration required: FUN_0028f694. */
 /* Supplied declaration required: FUN_0028f870. */
 extern unsigned int flagValueRead(unsigned int);
-/* Supplied declaration required: FUN_0028fc60. */
+/* Supplied declaration required: itemCanUseOnParty. */
 extern int gridNavigationGetItemCount(int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
@@ -149,7 +149,7 @@ void FUN_0019715c(int param_1,int param_2)
           dataFindKindRecordWithAocOverrides(temp_v10,0);
           if (temp_v6 != 0) {
             temp_v11 = 0xff;
-            if ((temp_v14 == 0xb) && (temp_v7 = temp_v10, FUN_0028fc60(), temp_v7 == 0)) {
+            if ((temp_v14 == 0xb) && (temp_v7 = temp_v10, itemCanUseOnParty(), temp_v7 == 0)) {
               temp_v11 = 0x5a5a5aff;
             }
             VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v3,
@@ -190,7 +190,7 @@ void FUN_0019715c(int param_1,int param_2)
           dataFindKindRecordWithAocOverrides(temp_v10,0);
           if (temp_v6 != 0) {
             temp_v11 = 0xffffffff;
-            if ((temp_v14 == 0xb) && (temp_v7 = temp_v10, FUN_0028fc60(), temp_v7 == 0)) {
+            if ((temp_v14 == 0xb) && (temp_v7 = temp_v10, itemCanUseOnParty(), temp_v7 == 0)) {
               temp_v11 = 0x5a5a5aff;
             }
             VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v3,

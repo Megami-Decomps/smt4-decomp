@@ -30,7 +30,7 @@ void campSkillListDraw(s32 x, s32 y, s32 selected, f32 alpha);
 /* The list's scroll bar. */
 void FUN_0023d150(GridNavigation *grid, s32 x, s32 y, s32 mode);
 /* Whether the consumable `id` can be used now. */
-u32 FUN_0048144c(s32 id);
+u32 itemCanUseOnParty(s32 id);
 
 /* Draws an item list page: the usable items (11) or one of the two other bags, eleven rows from the
    list's top, the scroll bar and, when `selected`, the cursor row on top. */
@@ -79,7 +79,7 @@ static void campDrawItemList(s32 item, s32 x, s32 y, s32 selected, f32 alpha)
         name = dataFindKindRecordWithAocOverrides(id, 0);
         if (name) {
             color = 0xFFFFFFFF;
-            if (item == 11 && FUN_0048144c(id) == 0) {
+            if (item == 11 && itemCanUseOnParty(id) == 0) {
                 color = 0x9B9B9BFF;
             }
             textDrawString(line->x + nameAt->x + x, line->y + nameAt->y + y, 0.55f, 2, 0.0f, color, alpha, name);
@@ -106,7 +106,7 @@ static void campDrawItemList(s32 item, s32 x, s32 y, s32 selected, f32 alpha)
         TextureTableEntryIV *nameAt = asdTMTexTableEntryAt(20, 0x477);
         name = dataFindKindRecordWithAocOverrides(id, 0);
         if (name) {
-            if (item == 11 && FUN_0048144c(id) == 0) {
+            if (item == 11 && itemCanUseOnParty(id) == 0) {
                 color = 0x9B9B9BFF;
             }
             textDrawString(line->x + nameAt->x + x, line->y + nameAt->y + y, 0.5f, 3, 0.0f, color, alpha, name);

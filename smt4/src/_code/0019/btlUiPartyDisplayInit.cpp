@@ -183,8 +183,8 @@ void btlUiPartyDisplayInit(ActorCardAnimations *card, u32 unit)
     uiSpriteStateInitFromSource(&card->backdrop, 0x15, 0xdb, &card->resources, 6, 1.0f);
     spriteStartAnimationByIndex(&card->backdrop, 0);
     for (i = 0; i < 8; i++) {
-        uiSpriteStateInitFromSource(&card->unk0138[i], 0x15, 0xdd, &card->resources, 6, 1.0f);
-        spriteStartAnimationByIndex(&card->unk0138[i], 0);
+        uiSpriteStateInitFromSource(&card->commandItems[i], 0x15, 0xdd, &card->resources, 6, 1.0f);
+        spriteStartAnimationByIndex(&card->commandItems[i], 0);
     }
     uiSpriteStateInitFromSource(&card->intro, 0x15, 0xde, &card->resources, 6, 1.0f);
     spriteStartAnimationByIndex(&card->intro, 1);

@@ -56,7 +56,7 @@ extern BattleMainGlobals g_btlMain;
 
 
 u32 *btlFindFirstEntryMatchingCategoryAndRequiredMask(BattleFlagsState *battle);
-void FUN_003f26d4(BattleFlagsState *battle);
+void btlAiBuildTurnOrder(BattleFlagsState *battle);
 void btlUiIdsRefresh(BtlUiA *block);
 void btlUiEnterStateEntryStartup(BtlUiA *block);
 void FUN_004fbf90(s32 arg);
@@ -86,7 +86,7 @@ void FUN_003f034c(BattleFlagsState *battle)
     bool resolved = (battle->flags & g_btlMain.resolveMask) != 0;
     battle->flags &= ~g_btlMain.resolveMask & ~g_btlMain.clearMaskG;
     if (resolved) {
-        FUN_003f26d4(battle);
+        btlAiBuildTurnOrder(battle);
         btlUiIdsRefresh(g_btlUiBlock);
         battle->flags &= ~g_btlMain.clearMaskA & ~g_btlMain.clearMaskD;
         if (g_btlMain.state != NULL)

@@ -12,7 +12,7 @@ int frameTexRequestFade(int);
 int FUN_003e0cd4(unsigned int *, int);
 int FUN_003ed6e8(int);
 int btlLoadBossAppearData(...);
-int FUN_003f26d4(int);
+int btlAiBuildTurnOrder(int);
 int FUN_004aa2e0(unsigned int, int);
 int cameraBeginScalarTransition(...);
 int FUN_004f41b0(int, int, int);
@@ -52,7 +52,7 @@ extern int dataTableGetCount(unsigned int);
 /* Supplied declaration required: FUN_003ed6e8. */
 extern int FUN_003f1230(int);
 /* Supplied declaration required: btlLoadBossAppearData. */
-/* Supplied declaration required: FUN_003f26d4. */
+/* Supplied declaration required: btlAiBuildTurnOrder. */
 extern int chainCountIdUnflagged(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_004aa2e0. */
 /* Supplied declaration required: cameraBeginScalarTransition. */
@@ -91,7 +91,7 @@ void FUN_003e1b80(unsigned int *param_1,int param_2,int param_3)
         }
         if ((*(unsigned int *)(param_2 + 0x45a4) & DAT_0057385c) == 0 && (DAT_00573858 & *puVar10) == 0) {
           FUN_003ed6e8(param_2);
-          FUN_003f26d4(param_2);
+          btlAiBuildTurnOrder(param_2);
           temp_v5 = DAT_0057387c | *(unsigned int *)(param_2 + 0x45a4) | DAT_00573894;
           *puVar10 = *puVar10 | DAT_00573878 | DAT_00573890;
           *(unsigned int *)(param_2 + 0x45a4) = temp_v5;

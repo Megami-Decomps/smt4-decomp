@@ -12,7 +12,7 @@ int questDataGetRecord(void);
 int goalConditionsSatisfied(...);
 int FUN_002466a8(void);
 int FUN_00295024(void);
-int FUN_00295108(...);
+int popupTryStartStory(...);
 int gameDataSetStatusFlag(...);
 int rt_aeabi_memclr(unsigned short [300], int);
 int mapIfDispatchCommand(...);
@@ -45,7 +45,7 @@ extern int gameFlagEntryGetBit(unsigned int, unsigned int);
 /* Supplied declaration required: goalConditionsSatisfied. */
 /* Supplied declaration required: FUN_002466a8. */
 /* Supplied declaration required: FUN_00295024. */
-/* Supplied declaration required: FUN_00295108. */
+/* Supplied declaration required: popupTryStartStory. */
 extern int gameDataStatusFlagGet(unsigned short);
 /* Supplied declaration required: gameDataSetStatusFlag. */
 /* Supplied declaration required: rt_aeabi_memclr. */
@@ -385,7 +385,7 @@ LAB_002359c4:
         *(unsigned short *)(temp_v19 + 0x94) = 0;
       }
       if (g_gameState.unk39C != 0) {
-        FUN_00295108(0);
+        popupTryStartStory(0);
         g_gameState.unk39C = 0;
       }
       return temp_v17;

@@ -126,7 +126,7 @@ int mapResolveCollisionSphere(...);
 float mathSnapHeading16(float angle);
 float calcHeadingRoundedTo32Directions(float angle);
 int FUN_00294c28(...);
-int FUN_00295108(...);
+int popupTryStartStory(...);
 int distSpatial(...);
 int mathAngleDeltaDegrees(...);
 int FUN_002b80b8(...);
@@ -327,7 +327,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapIfReleaseResource. */
 /* Supplied declaration required: FUN_00294c28. */
 /* Supplied declaration required: FUN_002950a8. */
-/* Supplied declaration required: FUN_00295108. */
+/* Supplied declaration required: popupTryStartStory. */
 /* Supplied declaration required: FUN_00297f00. */
 /* Supplied declaration required: FUN_002b56e0. */
 /* Supplied declaration required: distSpatial. */
@@ -743,7 +743,7 @@ LAB_002b82a8:
       }
       if ((*(int *)(temp_v6 + 0xdcc) == 0) &&
          (temp_v12 = *(int *)(temp_v6 + 0xdc8) + 1, *(int *)(temp_v6 + 0xdc8) = temp_v12, temp_v12 >= 901)) {
-        FUN_00295108(0);
+        popupTryStartStory(0);
         FUN_00294c28();
         FUN_002b80b8();
         *(unsigned int *)(temp_v6 + 0xdcc) = 0xe10;

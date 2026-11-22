@@ -1,11 +1,11 @@
-/* NON_MATCHING: typed rewrite from its sibling effSwingEmitterUpdate (576 raw / 516 shape rows, from 627; the
+/* NON_MATCHING: typed rewrite from its sibling effSwingEmitterUpdate (528 raw / 482 shape rows; the
  * count is mostly renumbered VFP registers). The calls, stores, constants and block order (live particles first,
  * the emit path between the two halves of the live update) follow retail. Retail uses all of s16-s31: it keeps
  * the swing axis in s20-s22 and s24 across the emit path's calls and so hoists only the two step-only values
  * (`step * 2 - step + 1`, `step - 1`) out of the loop, computing -(0.5 * gravity) * step inside it; this build
- * copies the axis through the stack and hoists the whole product. Retail also loads the 0.0 constant before the
+ * hoists the whole product (the 36-byte frame now agrees). Retail also loads the 0.0 constant before the
  * emission-state call, addresses the scratch rotation through its own pool word (this build keeps the workspace
- * base in r7 there) and its frame is 36 bytes (here 44). */
+ * base in r7 there). */
 #include "gfx/SpiralEmitter.h"
 
 extern "C" {
@@ -81,13 +81,13 @@ extern "C" void effBounceEmitterUpdate(ParticleEmissionState *emitter)
             Vector4 axis = g_vectorScratch.first.vector;
             vec3Set(motion->axis, axis.x, axis.y, axis.z);
 
-            motion->speed = randomVarianceOf(definition->speedVariance) * definition->speed;
-            motion->bounce = -(definition->bounce * randomVarianceOf(definition->bounceVariance));
-            f32 radius = randomVarianceOf(definition->radiusVariance) * definition->radius;
-            f32 endRadius = randomVarianceOf(definition->endRadiusVariance) * definition->endRadius;
+            motion->speed = EFF_RANDOM_VARIANCE(definition->speedVariance) * definition->speed;
+            motion->bounce = -(definition->bounce * EFF_RANDOM_VARIANCE(definition->bounceVariance));
+            f32 radius = EFF_RANDOM_VARIANCE(definition->radiusVariance) * definition->radius;
+            f32 endRadius = EFF_RANDOM_VARIANCE(definition->endRadiusVariance) * definition->endRadius;
             motion->radius = radius;
             motion->radiusStep = (endRadius - radius) / (f32)lifetime;
-            motion->phaseStep = randomVarianceOf(definition->phaseStepVariance) * definition->phaseStep;
+            motion->phaseStep = EFF_RANDOM_VARIANCE(definition->phaseStepVariance) * definition->phaseStep;
             motion->phase = shiftRandomNextFraction(NULL) * 6.2831855f;
             motion->wave = FUN_001a1ee0(motion->phase * 40.743664f);
 
@@ -102,12 +102,12 @@ extern "C" void effBounceEmitterUpdate(ParticleEmissionState *emitter)
             }
             particle->position = g_vectorScratch.first.vector;
 
-            motion->scale = randomVarianceOf(definition->scaleVariance);
+            motion->scale = EFF_RANDOM_VARIANCE(definition->scaleVariance);
             if (angleMode == 2) {
                 motion->angleOffset = zero;
                 motion->angleScale = 1.0f;
             } else {
-                motion->angleScale = randomVarianceOf(definition->angleVariance);
+                motion->angleScale = EFF_RANDOM_VARIANCE(definition->angleVariance);
                 if (angleMode != 1) {
                     motion->angleOffset = zero;
                 } else {

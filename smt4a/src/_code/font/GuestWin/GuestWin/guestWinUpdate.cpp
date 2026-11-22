@@ -1,10 +1,10 @@
 #include "common.h"
 #include "font/GuestWin/GuestWin.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
 GuestWinOptionsA *gameGetOptions(void);
-s32 uiSpriteAdvanceAnimation(u8 *ui, f32 speed);
 extern GuestWinWorkA *g_guestWin;
 
 u16 guestWinUpdate(void)
@@ -18,7 +18,7 @@ u16 guestWinUpdate(void)
     case 0:
         break;
     case 1:
-        if (uiSpriteAdvanceAnimation(guest->ui, 1.0f) != 0) {
+        if (uiSpriteAdvanceAnimation(&guest->sprite, 1.0f) != 0) {
             guest->state = 2;
             guest->frames = 0;
         }
@@ -26,7 +26,7 @@ u16 guestWinUpdate(void)
     case 2:
         break;
     case 3:
-        if (uiSpriteAdvanceAnimation(guest->ui, 1.0f) != 0) {
+        if (uiSpriteAdvanceAnimation(&guest->sprite, 1.0f) != 0) {
             guest->state = 0;
         }
         break;

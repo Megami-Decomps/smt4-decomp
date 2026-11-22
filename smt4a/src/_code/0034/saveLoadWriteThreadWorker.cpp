@@ -12,7 +12,7 @@ void rt_aeabi_memclr(void *, u32);
 char *libc_strcpy(char *, const char *);
 void FUN_00399c90(u32, const char *);
 s32 FUN_0032c8c8(void);
-void FUN_002c7388(u32, const char *, u32, u32);
+void fsResultReportNotice(u32, const char *, u32, u32);
 void asdSaveHeaderInit(AsdSaveHeader *, u32, u32, u32, u32, u32, u32);
 s32 asdSaveWriteBlock(u32, const char *, const AsdSaveHeader *, const void *, u32);
 s32 fsResultClassifyRestriction(u32, const char *);
@@ -43,7 +43,7 @@ void saveLoadWriteThreadWorker(u32 job)
     if (backend == 1) {
         FUN_00399c90(backend, "sdds4/");
         if (FUN_0032c8c8()) {
-            FUN_002c7388(job, "sdds4/", 1, 0);
+            fsResultReportNotice(job, "sdds4/", 1, 0);
             return;
         }
         u32 slot = state->request->slot;
@@ -62,7 +62,7 @@ void saveLoadWriteThreadWorker(u32 job)
         if (backend == 0) {
             state->result = fsResultClassifyRestriction(job, filename) == 1 ? 6 : -1;
         } else if (backend == 1) {
-            FUN_002c7388(job, filename, 1, 0);
+            fsResultReportNotice(job, filename, 1, 0);
             state->busy = 0;
             return;
         }

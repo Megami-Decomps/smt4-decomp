@@ -39,7 +39,7 @@ void aocMenuSetButtonHelp(AocLicenseMenu *menu, s32 selection, s32 mode);
 void jobFlagsWorkStop(AocLicenseMenu *menu);
 void FUN_0047bc90(AocLicenseMenu *menu, RequestParameters *parameters);
 void aocLoadingTaskStart(AocLicenseMenu *menu, s32 value);
-s32 isEmptyString(const RequestParameters *result);
+s32 strIsEmpty(const RequestParameters *result);
 
 /* Releases the polled operation, if any. */
 static __inline void releaseHandler(AocLicenseMenu *menu)
@@ -78,7 +78,7 @@ void AocMenu::runLicenseFlow()
             return;
         }
         result = menu->handler->poll();
-        if (isEmptyString(&result) != 0) {
+        if (strIsEmpty(&result) != 0) {
             menu->step = 2;
             return;
         }
@@ -95,7 +95,7 @@ void AocMenu::runLicenseFlow()
         return;
     case 3:
         result = menu->handler->poll();
-        if (isEmptyString(&result) != 0) {
+        if (strIsEmpty(&result) != 0) {
             releaseHandler(menu);
             aocLoadingTaskStart(menu, 0);
             startHandler(menu, 0);
@@ -114,7 +114,7 @@ void AocMenu::runLicenseFlow()
             return;
         }
         result = menu->handler->poll();
-        if (isEmptyString(&result) != 0) {
+        if (strIsEmpty(&result) != 0) {
             menu->step = 5;
             aocLoadingTaskStart(menu, 1);
             return;
@@ -132,7 +132,7 @@ void AocMenu::runLicenseFlow()
         return;
     case 6:
         result = menu->handler->poll();
-        if (isEmptyString(&result) != 0) {
+        if (strIsEmpty(&result) != 0) {
             menu->state = 10;
             menu->step = 0;
             if (menu->handler != NULL) {

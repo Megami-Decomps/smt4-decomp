@@ -5,12 +5,12 @@ struct BtlMainFUN_002e430c;
 
 extern "C" {
 
-void FUN_00336bec(BtlMainFUN_002e430c *state);
+void battleShowUnitMarkers(BtlMainFUN_002e430c *state);
 
-/* Script command: runs FUN_00336bec on the battle state. */
+/* Script command: runs battleShowUnitMarkers on the battle state. */
 s32 FUN_002e430c(void)
 {
-    FUN_00336bec(reinterpret_cast<BtlMainFUN_002e430c *>(btlGetMainState()));
+    battleShowUnitMarkers(reinterpret_cast<BtlMainFUN_002e430c *>(btlGetMainState()));
     return 1;
 }
 

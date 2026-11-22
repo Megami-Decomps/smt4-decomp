@@ -26,9 +26,9 @@ extern const char DAT_00528558[];
 void effectRequestByName(BtlAuxA *effects, const char *name);
 s32 btlPollVersionedEffectTexture(BtlAuxA *effects);
 void FUN_003e2840(BtlStep *step, BtlMainStateA *battle, s32 mode);
-void FUN_004f1c5c(BtlCameraA *camera, u32 duration);
+void btlCameraStartMove(BtlCameraA *camera, u32 duration);
 void FUN_003ed6e8(BtlMainStateA *battle);
-void FUN_003f26d4(BtlMainStateA *battle);
+void btlAiBuildTurnOrder(BtlMainStateA *battle);
 void FUN_004aa2e0(BtlUiA *ui, s32 value);
 void FUN_003e0cd4(BtlStep *step, BtlMainStateA *battle);
 
@@ -42,12 +42,12 @@ void FUN_003e1a30(BtlStep *step, BtlMainStateA *battle)
     if ((step->counters.unk0C & 2) != 0 && btlPollVersionedEffectTexture(g_btlAux) != 0) {
         FUN_003e2840(step, battle, 3);
         if (g_btlCamera->movement.duration == 0)
-            FUN_004f1c5c(g_btlCamera, 120);
+            btlCameraStartMove(g_btlCamera, 120);
         else
-            FUN_004f1c5c(g_btlCamera, g_btlCamera->movement.duration);
+            btlCameraStartMove(g_btlCamera, g_btlCamera->movement.duration);
         if ((g_btlEncount.initial & battle->stateFlags64.bits) == 0) {
             FUN_003ed6e8(battle);
-            FUN_003f26d4(battle);
+            btlAiBuildTurnOrder(battle);
             battle->stateFlags64.bits |= g_btlEncount.completed | g_btlEncount.queued;
             FUN_004aa2e0(g_btlUiBlock, 0);
         }

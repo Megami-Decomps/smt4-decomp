@@ -1,4 +1,4 @@
-/* NON_MATCHING: only case 2's 64-bit mask update differs: retail keeps the mask pointer in r2 (ldm r2,{r1,r2} / ldm r2,{r1,r3}) with the same hoisted address setup, the build keeps it in r1 and splits the loads (ldr). Every other case and the jump table match. */
+/* NON_MATCHING: 6 lines: in case 2's clear arm, retail loads the mask into {r1, r3} and the flags via ldm {r2, ip}; the build loads the mask into {r1, ip} and the flags via ldrd {r2, r3}. Every other case and the jump table match. */
 #include "battle/btlCamera.h"
 #include "battle/btlMain.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
@@ -44,7 +44,7 @@ f32 *asdListBoxGetFloatValuePtr(AsdListBox *list, u32 index);
 s32 *asdListBoxGetIntValuePtr(AsdListBox *list, u32 index);
 void effectSetValue(BtlCameraA *camera, f32 value);
 
-// Apply a debug-menu change to the camera effect parameters or the battle's marker mask.
+/* Apply a debug-menu change to the camera effect parameters or the battle's marker mask. */
 void FUN_004d5be4(CameraDebugMenu *menu, BtlMainStateA *battle, u32 index)
 {
     switch (index) {
@@ -59,12 +59,10 @@ void FUN_004d5be4(CameraDebugMenu *menu, BtlMainStateA *battle, u32 index)
         return;
     case 2: {
         s32 enabled = listBoxItemHasOwner(menu->list);
-        const u64 *mask = &DAT_00571718;
-        u64 *bits = &battle->markerMasks.bits;
         if (enabled)
-            *bits = *mask | *bits;
+            battle->markerMasks.bits |= DAT_00571718;
         else
-            *bits &= ~*mask;
+            battle->markerMasks.bits &= ~DAT_00571718;
         return;
     }
     case 3:

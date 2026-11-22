@@ -1,4 +1,5 @@
-/* NON_MATCHING: VFP scheduling and local vector copies differ: retail keeps the saved orientation in s16-s19 and copies the position/offset vectors with ldm/stm, the build spills extra vector temporaries (larger frame). */
+/* NON_MATCHING: retail adds the scratch vectors through a second pointer to the slot (two copies of its
+ * address) and copies them out with mixed ldm/ldr; the frame and the in-loop VFP copies follow retail. */
 #include "common.h"
 #include "shard/Resource.h"
 #include "AsdSDK/Source/Gfx/Effect/effPolygonRing.h"
@@ -29,8 +30,14 @@ struct EffectNode {
 };
 
 extern "C" {
-s32 renderVectorOverrideResolve(EffectNode *node, const Vector4 *position, f32 *matrix);
-void effectTimelinePartApplyRotation(EffectNode *node, const f32 *matrix);
+void renderVectorOverrideResolve(EffectNode *node, const Vector4 *position, Vector4 *rotation);
+void effectTimelinePartApplyRotation(EffectNode *node, const Vector4 *rotation);
+}
+
+/* Copies through pointers: armcc moves such a 16-byte value with VFP vldmia/vstmia. */
+static __inline void vector4Copy(const Vector4 *source, Vector4 *destination)
+{
+    *destination = *source;
 }
 
 /* Advance an effect node one frame: place it, then update every child that has started. */
@@ -44,11 +51,11 @@ extern "C" void effectNodeUpdateTransform(EffectNode *node)
     g_vectorScratch.first.vector.w += g_vectorScratch.second.vector.w;
     Vector4 position = g_vectorScratch.first.vector;
     Vector4 childOffset;
-    f32 matrix[8];
+    Vector4 rotation;
     if ((node->flags & 0x60) != 0) {
         Vector4 orientation = node->orientation;
-        renderVectorOverrideResolve(node, &position, matrix);
-        effectTimelinePartApplyRotation(node, matrix);
+        renderVectorOverrideResolve(node, &position, &rotation);
+        effectTimelinePartApplyRotation(node, &rotation);
         node->orientation = orientation;
     }
     f32 scale = node->scale * node->childScale;
@@ -57,10 +64,10 @@ extern "C" void effectNodeUpdateTransform(EffectNode *node)
         if (child->startFrame > frame || (child->frame & 2) != 0)
             continue;
         if ((child->flags & 0x18) != 0) {
-            g_vectorScratch.first.vector = position;
+            vector4Copy(&position, &g_vectorScratch.first.vector);
             if ((child->flags & 4) != 0)
                 g_vectorScratch.first.vector.y = 5.0f;
-            g_vectorScratch.second.vector = childOffset;
+            vector4Copy(&childOffset, &g_vectorScratch.second.vector);
             if ((child->flags & 0x80) != 0) {
                 g_vectorScratch.second.vector.x *= scale;
                 g_vectorScratch.second.vector.y *= scale;
@@ -78,10 +85,10 @@ extern "C" void effectNodeUpdateTransform(EffectNode *node)
                 handler->setPosition(child->resource->data, reinterpret_cast<const Vec4 *>(&childOffset));
         }
         if ((child->flags & 0x60) != 0) {
-            renderVectorOverrideResolve(child, &position, matrix);
+            renderVectorOverrideResolve(child, &position, &rotation);
             ResourceHandler *handler = &g_handlerTable[child->resource->type];
             if (handler->setOrientation != 0)
-                handler->setOrientation(child->resource->data, matrix);
+                handler->setOrientation(child->resource->data, &rotation.x);
         }
         g_handlerTable[child->resource->type].run(child->resource->data);
     }

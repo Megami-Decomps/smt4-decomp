@@ -19,6 +19,14 @@ typedef struct PlayScene {
             u8 prefix0000[0xAC];
             /* 0x00AC */ UiSpriteState animation;
         } intro;
+        /* The command menu: its plate and one sprite per listed command (up to nine; they run on past
+         * this union, over timerSub). */
+        struct {
+            u8 prefix0000[0x20];
+            /* 0x0020 */ UiSpriteState plate;
+            u8 unk00AC[0x8C];
+            /* 0x0138 */ UiSpriteState items[1];
+        } commands;
     };
     /* 0x01C4 */ UiSpriteState timerSub;
     /* 0x0250 */ u8 unk0250[0x4EC];
@@ -44,7 +52,10 @@ typedef struct PlayScene {
     /* 0x3050 */ u32 unk3050;
     /* 0x3054 */ u32 unk3054;
     /* 0x3058 */ u8 unk3058[0x4];
-    /* 0x305C */ u32 unk305C;
+    union {
+        /* 0x305C */ u32 unk305C;
+        /* 0x305C */ u32 commandOwner;   /* whose command menu is open: 0 the player's, 1-3 an active position's */
+    };
     /* 0x3060 */ u8 unk3060;
     /* 0x3061 */ u8 unk3061[0x3];
     /* 0x3064 */ s32 unk3064;          /* -1 when target selection starts */
@@ -154,6 +165,9 @@ typedef char PlayScenePartyOffsets[
     offsetof(PlayScene, slideShown) == 0x5925 && offsetof(PlayScene, slideTimers) == 0x592C &&
     offsetof(PlayScene, badges) == 0x5950 && offsetof(PlayScene, ailmentIconShown) == 0x5978 &&
     offsetof(PlayScene, badgeOffsetY) == 0x59B0 ? 1 : -1];
+typedef char PlaySceneCommandSpriteOffsets[
+    offsetof(PlayScene, commands.plate) == 0x20 && offsetof(PlayScene, commands.items) == 0x138 &&
+    offsetof(PlayScene, commandOwner) == 0x305C && sizeof(PlayScene) == 0x59BC ? 1 : -1];
 typedef char PlaySceneIntroAnimationOffsets[
     offsetof(PlayScene, intro.animation) == 0xAC &&
     offsetof(PlayScene, intro.animation.alpha) == 0xCC &&

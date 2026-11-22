@@ -13,7 +13,7 @@ struct BtlUnit;
 extern "C" {
 extern u32 g_btlScriptUnit;
 u32 FUN_002463e8(u32 status);
-u32 FUN_00246134(s32 entryId, u32 resistance, s32 mode, s32 option);
+u32 btlSkillHitFlags(s32 entryId, u32 resistance, s32 mode, s32 option);
 u32 FUN_00246080(s16 priority, s16 mode, BtlUnit* source,
                  BtlActionRecord* target, s32 kind);
 u32 FUN_00246d38(s16 priority, BtlUnit* source, BtlActionRecord* target, u32 mask);
@@ -40,7 +40,7 @@ u32 btlScriptSetPartyStatus()
             continue;
         }
         if (apply && checkResistance &&
-            (FUN_00246134(entry->ids[0], FUN_002463e8(status), 2, -1) &
+            (btlSkillHitFlags(entry->ids[0], FUN_002463e8(status), 2, -1) &
              0x10000)) {
             FUN_00246080(0, 0, source,
                          &table->actions[entry->ids[0]], 4);

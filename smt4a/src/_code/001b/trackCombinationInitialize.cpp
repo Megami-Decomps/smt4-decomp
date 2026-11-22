@@ -1,4 +1,4 @@
-/* NON_MATCHING: resource countdown loops gain signed-range guards and allocation differs; -O2 candidate. */
+/* NON_MATCHING: the track-offset loop matches; this build versions the value-copy loop on the count's range (cmn #0x7fffffff) where retail keeps one subs/bne loop, gives the zero and the allocator other registers, and sums the size table in the other order. -O2 -Otime scores 70 (diagnostic only). */
 #include "common.h"
 
 struct CombinationTrack {
@@ -47,15 +47,14 @@ void FUN_001c5fa8(CombinationState *, u32 *, u32, s32);
 // Resolve resource offsets and build combinations of independent and dependent tracks.
 void trackCombinationInitialize(CombinationState *state, const CombinationFile *file, s32 primary, s32 secondary, u32 allocator)
 {
-    s32 remaining = file->trackCount & 0xff;
+    u32 remaining = file->trackCount & 0xff;
     state->trackCount = remaining;
     state->unka4 = 0;
     state->unka8 = 0;
     const u32 *offset = file->trackOffsets;
     u32 track = 0;
-    while (remaining != 0) {
+    for (; remaining != 0; remaining--) {
         state->tracks[track++] = (CombinationTrack *)((u8 *)file + *offset++);
-        --remaining;
     }
     const CombinationFileTail *tail = (const CombinationFileTail *)offset;
     state->data = (u8 *)tail + tail->dataOffset;
@@ -63,14 +62,12 @@ void trackCombinationInitialize(CombinationState *state, const CombinationFile *
     state->valueCount = tail->valueCount;
     const CombinationValue *values = (const CombinationValue *)((const u8 *)tail + tail->valuesOffset);
     FUN_001c5da0(state, allocator);
-    s32 count = state->valueCount;
-    if (count != 0) {
-        u32 index = 0;
-        do {
-            --count;
-            state->values[index++] = values->value;
-            ++values;
-        } while (count != 0);
+    u32 count = state->valueCount;
+    u32 index = 0;
+    while (count != 0) {
+        state->values[index++] = values->value;
+        ++values;
+        --count;
     }
     u8 previousMode = state->mode;
     FUN_001c6c24(state);

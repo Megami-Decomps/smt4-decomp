@@ -1,51 +1,48 @@
-/* NON_MATCHING: the selection range's stack slots and loads differ; register allocation of the mask AND/ORR chain differs; u64 mask loads pair differently (ldm versus two ldr); the frame/saved-register set differs (the active-entry byte already folds with the s8 flag). */
+/* NON_MATCHING: the loop, the mask tests and the inlined FUN_003249c0 body follow retail's shape; retail's frame is 60 bytes with the slot count at sp and the first slot at sp+12 (reloaded every iteration), here 12 bytes, and it loads the entry's flags with ldm and keeps them in r0/r2 where this build uses ldrd into r2/r3. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
 #include "script/ScriptArgs.h"
 
-struct BattleCountAction { s16 unk00, type, id, unk06; };
-struct BattleCountActions {
-    u8 unk000[0x328];
-    BattleCountAction current;
-    u8 unk330[8];
-    BattleCountAction choices[10];
-};
 extern "C" {
 s32 btlResolveEntryChoice(s32);
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *);
-s32 FUN_003249c0(BtlCombatantEntryA *, s32);
+s32 FUN_003249c0(const BtlCombatantEntryA *entry, s32 id);
 void scrSetResult(s32);
 }
 
-static __inline s32 countMatchingActions(const BtlCombatantEntryA *entry, s32 skill)
+/* FUN_003249c0's body, inlined here: counts the entry's kind-two or kind-three actions with the id, from its
+ * single action when it is masked, otherwise from its ten available ones. */
+static __inline s32 countMatchingActions(const BtlCombatantEntryA *entry, s32 id)
 {
-    const BattleCountActions *actions = (const BattleCountActions *)entry;
-    if ((entry->flags & g_btlCandidateMasks.unavailable) || (entry->flags & g_btlCandidateMasks.singleAction)) {
-        return (actions->current.type == 2 || actions->current.type == 3) && actions->current.id == skill;
-    }
     s32 count = 0;
-    for (s32 i = 0; i < 10; ++i) {
-        const BattleCountAction *action = &actions->choices[i];
-        if ((action->type == 2 || action->type == 3) && action->id == skill)
-            ++count;
+    if ((entry->flags & g_btlCandidateMasks.unavailable) != 0 ||
+        (entry->flags & g_btlCandidateMasks.singleAction) != 0) {
+        if ((entry->data.actionList.single.kind == 2 || entry->data.actionList.single.kind == 3) &&
+            entry->data.actionList.single.id == id)
+            return 1;
+    } else {
+        for (s32 i = 0; i < 10; ++i) {
+            if ((entry->data.actionList.available[i].kind == 2 || entry->data.actionList.available[i].kind == 3) &&
+                entry->data.actionList.available[i].id == id)
+                ++count;
+        }
     }
     return count;
 }
 
+/* Counts the skill's queued actions over the requested eligible combatants and the auxiliary unit. */
 extern "C" u32 scrCountBattleSkillActions()
 {
     s32 skill = scrGetArg(0);
-    s32 group = btlResolveEntryChoice(scrGetArg(1));
-    s32 starts[12], counts[3];
     s32 total = 0;
-    btlGetEntryChoiceRange(group, starts, counts);
-    for (s32 slot = starts[0]; slot < starts[0] + counts[0]; ++slot) {
-        BtlCombatantEntryA *entry = &btlGetMainState()->entries[slot];
-        u64 flags = entry->flags;
-        if (!(flags & g_btlCandidateMasks.unavailable) && (flags & g_btlCandidateMasks.required) &&
-            !(flags & g_btlCandidateMasks.excluded)) {
+    s32 first, count;
+    btlGetEntryChoiceRange(btlResolveEntryChoice(scrGetArg(1)), &first, &count);
+    for (s32 index = first; index < first + count; ++index) {
+        BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
+        if (!(entry->flags & g_btlCandidateMasks.unavailable) && (entry->flags & g_btlCandidateMasks.required) &&
+            !(entry->flags & g_btlCandidateMasks.excluded)) {
             total += countMatchingActions(entry, skill);
         }
     }

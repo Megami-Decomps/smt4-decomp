@@ -189,20 +189,11 @@ static __inline void vec3Set(f32 *v, f32 x, f32 y, f32 z)
     v[2] = z;
 }
 
-/* A random factor in [1 - variance, 1], reading the variance after the random draw as effSwingEmitterUpdate's retail
- * code does (it loads each variance from the definition once the call has returned). */
-static __inline f32 randomVarianceOf(const f32 &variance)
-{
-    f32 random = shiftRandomNextFraction(NULL);
-    return (1.0f - variance) + random * variance;
-}
-
-/* A random factor in [1 - variance, 1]. */
-static f32 randomVariance(f32 variance)
-{
-    f32 random = shiftRandomNextFraction(NULL);
-    return (1.0f - variance) + random * variance;
-}
+/* A random factor in [1 - variance, 1]. An expression, not a function: retail draws the random number first and
+ * reads the variance from the definition afterwards (`bl shiftRandomNextFraction; vldr s0, [definition, #N]`), which
+ * a by-value parameter (read before the call, kept in a saved register) or a reference (its address kept on the
+ * stack: an 8 to 88 bytes larger frame in the three emitters) does not give. */
+#define EFF_RANDOM_VARIANCE(variance) ((1.0f - (variance)) + shiftRandomNextFraction(NULL) * (variance))
 
 /* A random value in [-1, 1). */
 static f32 randomSigned(void)

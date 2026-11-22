@@ -51,11 +51,11 @@ void Obj536044::FUN_00498ac0()
         scrScriptProcessStartEntry(appraisalShop(this)->script(), tableGroupFindEntryIndex(appraisalShop(this)->tableGroup, "shop_Kantei1"));
         scrRunOpcodesStub(appraisalShop(this)->script());
         appraisalShop(this)->timer = 0;
-        appraisalShop(this)->cleared[0] = 0;
-        appraisalShop(this)->cleared[1] = 0;
-        appraisalShop(this)->cleared[2] = 0;
-        appraisalShop(this)->clearedFlags[0] = 0;
-        appraisalShop(this)->clearedFlags[1] = 0;
+        appraisalShop(this)->menuCursors[0] = 0;
+        appraisalShop(this)->menuCursors[1] = 0;
+        appraisalShop(this)->menuCursors[2] = 0;
+        appraisalShop(this)->menuCursorSet[0] = 0;
+        appraisalShop(this)->menuCursorSet[1] = 0;
         appraisalShop(this)->quantityIndex = -1;
         appraisalShop(this)->substate = 1;
         return;

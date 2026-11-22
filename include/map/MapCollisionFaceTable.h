@@ -27,7 +27,7 @@ struct CollisionMesh {
 struct CollisionFace {
     /* 0x00 */ u32 owner;
     /* 0x04 */ s8 kind;
-    /* 0x05 */ u8 vertexCount;
+    /* 0x05 */ s8 vertexCount;
     /* 0x06 */ u16 unk06;
     /* 0x08 */ u8 enabled;
     /* 0x09 */ u8 unk09;

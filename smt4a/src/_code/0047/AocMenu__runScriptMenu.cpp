@@ -52,7 +52,7 @@ void FUN_00476e58(AocMenuProcess *process, s32 unused, s32 next);
 AocMenuObject *windowCreateStatusOperation(AocMenuObject *object, s32 kind);
 s32 tableGroupFindEntryIndex(void *table, const char *name);
 void scrScriptProcessStartEntry(void *script, s32 entry);
-s32 isEmptyString(u32 *record);
+s32 strIsEmpty(u32 *record);
 void jobFlagsWorkStop(AocMenuProcess *process);
 void obj04Finish(void);
 u32 flaggedValueHolderGetTotal(void *holder);
@@ -90,7 +90,7 @@ void AocMenu::runScriptMenu()
         scrRunOpcodesStub(process->script);
         AocResult raw = process->active->vtable->readResult(process->active);
         record = reinterpret_cast<const RequestParameters &>(raw);
-        if (isEmptyString(&record.word(0)) != 0) {
+        if (strIsEmpty(&record.word(0)) != 0) {
             jobFlagsWorkStop(process);
             obj04Finish();
             process->phase = 3;

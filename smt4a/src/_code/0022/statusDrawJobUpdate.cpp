@@ -29,7 +29,7 @@ int jobGetScalarValue(void);
 int FUN_0022e9c8(void);
 int compareWithFeedbackColor(...);
 int FUN_0025e704(...);
-int FUN_00334e1c(...);
+int statRowDraw(...);
 int FUN_00345098(void);
 int table8Type5GetValue(...);
 int VectorUnsignedToFloat(...);
@@ -149,7 +149,7 @@ extern int valueAtMostFifthOfTotal(unsigned char *, unsigned char *);
 extern unsigned int heldAmountLessThan(int, int);
 extern int FUN_0031e6d4(void);
 /* Supplied declaration required: FUN_00334044. */
-/* Supplied declaration required: FUN_00334e1c. */
+/* Supplied declaration required: statRowDraw. */
 /* Supplied declaration required: FUN_00345098. */
 extern int FUN_003453b0(void);
 /* Supplied declaration required: FUN_003481c4. */
@@ -1167,7 +1167,7 @@ LAB_0022b9b8:
       if (*(char *)(temp_v2 + 0x2017) != '\x04') {
         temp_v8 = 0;
         do {
-          FUN_00334e1c(temp_v7,temp_v8);
+          statRowDraw(temp_v7,temp_v8);
           temp_v10 = (unsigned int)((unsigned long long)temp_v22 >> 0x20);
           temp_v8 = temp_v8 + 1;
         } while (temp_v8 < 5);

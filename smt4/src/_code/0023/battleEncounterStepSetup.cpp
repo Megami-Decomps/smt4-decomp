@@ -15,7 +15,7 @@ void asdMemFree(void *allocation);
 void asdLoadFileAsyncSimple(const char *path, void **output, u32 flags);
 s32 fileExistsPatchOrRom(BtlMainState *context, const char *path);
 u32 FUN_0023fffc(BattleEncounterQuery *query, BtlMainState *context);
-u32 FUN_0023fbdc(BattleEncounterQuery *query, BtlMainState *context);
+u32 battleEncounterStepShowAmbushMarkers(BattleEncounterQuery *query, BtlMainState *context);
 void frameTexApplyMode(s32 mode);
 void FUN_00338458(BtlMainState *context);
 void btlHistoryStoreActionValues(BtlMainState *context);
@@ -101,7 +101,7 @@ u32 battleEncounterStepSetup(BattleEncounterQuery *query, BtlMainState *context)
         }
         query->step = 0xe;
         query->pending = 0;
-        return FUN_0023fbdc(query, context);
+        return battleEncounterStepShowAmbushMarkers(query, context);
     }
 }
 

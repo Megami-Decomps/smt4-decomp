@@ -1,4 +1,4 @@
-/* NON_MATCHING: the render-state push/pop, the text buffer frame and the float constant registers differ from retail (233 vs 235 rows); the quest screen drawing is the same. */
+/* NON_MATCHING: the render-state push (the pop agrees through renderCtxPopCounted), the text buffer frame and the float constant registers differ from retail (233 vs 235 rows); the quest screen drawing is the same. */
 #include "common.h"
 #include <stdio.h>
 #include "shard/TextureDrawCall.h"
@@ -117,7 +117,7 @@ u32 uiQuestDrawUpper(void)
         break;
     }
     }
-    renderStackPopChecked(g_renderCtx->stacks + RENDER_STACK_A);
+    renderCtxPopCounted(g_renderCtx, RENDER_STACK_A);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);

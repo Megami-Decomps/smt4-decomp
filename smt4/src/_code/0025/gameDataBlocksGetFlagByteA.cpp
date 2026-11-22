@@ -7,7 +7,7 @@ u8 gameDataBlocksGetFlagByteA(void)
 {
     GameSaveBody *body = &g_gameDataBlocks.saveBlock->body;
 
-    return body->config.selection.mode;
+    return body->config.selection.state.mode;
 }
 
 } /* extern "C" */

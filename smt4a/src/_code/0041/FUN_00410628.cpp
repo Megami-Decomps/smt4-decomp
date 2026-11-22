@@ -26,7 +26,7 @@ int FUN_00411c04(int, int);
 int FUN_00416610(unsigned int);
 int btlPlayIndexedVoice(unsigned int);
 int mathVectorClear(...);
-int FUN_004f1c5c(...);
+int btlCameraStartMove(...);
 void FUN_004f1edc(BtlCameraA *camera);
 int cameraBeginScalarTransition(...);
 int FUN_004f41b0(...);
@@ -100,7 +100,7 @@ extern int chainCountIdUnflagged(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00416610. */
 /* Supplied declaration required: btlPlayIndexedVoice. */
 /* Supplied declaration required: mathVectorClear. */
-/* Supplied declaration required: FUN_004f1c5c. */
+/* Supplied declaration required: btlCameraStartMove. */
 /* Supplied declaration required: cameraBeginScalarTransition. */
 /* Supplied declaration required: FUN_004f41b0. */
 /* Supplied declaration required: FUN_004f5238. */
@@ -369,7 +369,7 @@ void FUN_00410628(int param_1)
     }
     mathVectorClear(((int)g_btlCamera));
     markerOwnerUpdatePositions(g_btlStageModel);
-    FUN_004f1c5c(((int)g_btlCamera),0);
+    btlCameraStartMove(((int)g_btlCamera),0);
     FUN_004f1edc(g_btlCamera);
     temp_v3 = ((int)g_btlCamera);
     *(unsigned int *)(((int)g_btlCamera) + 0xc) = *(unsigned int *)(((int)g_btlCamera) + 0x14);

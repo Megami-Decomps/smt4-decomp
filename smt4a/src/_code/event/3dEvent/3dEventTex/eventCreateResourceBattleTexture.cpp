@@ -15,7 +15,7 @@ BattleTextureResourceRecord *FUN_00283498(u32 id);
 s32 eventIsSkipping();
 u32 resourceCacheGetOrLoadModel(s32 textureId, s32 first, s32 second);
 u32 eventUpdateTextureFadeJob(void *job);
-u32 FUN_00289f10(void *job);
+u32 spriteJobDraw(void *job);
 void jobWorkDestroy34(void *job);
 void *taskCreateDraw(const char *name, s32 priority, s32 flags, s32 owner,
     u32 (*draw)(void *), void (*destroy)(void *), void *work, void *process);
@@ -58,7 +58,7 @@ void *eventCreateResourceBattleTexture(u32 id, f32 x, f32 y)
     work->enabled = 1;
     work->unk15 = 0;
     void *process = reinterpret_cast<void *>(asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_0052f6a8), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(eventUpdateTextureFadeJob), reinterpret_cast<AsdProcFunc>(jobWorkDestroy34), reinterpret_cast<u32>(work)));
-    taskCreateDraw(DAT_0052f698, 0x71, 0, 0, FUN_00289f10, 0, work, process);
+    taskCreateDraw(DAT_0052f698, 0x71, 0, 0, spriteJobDraw, 0, work, process);
     return process;
 }
 }

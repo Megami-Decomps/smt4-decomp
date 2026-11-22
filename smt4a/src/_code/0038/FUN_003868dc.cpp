@@ -10,7 +10,7 @@ int libm_cosf(void); // declcheck: local (romwright prototype; the shared declar
 int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int mapResolveCollisionSphere(int, int, int);
 int FUN_00294c28(void);
-int FUN_00295108(int);
+int popupTryStartStory(int);
 int distSpatial(void);
 int FUN_002b80b8(void);
 int padGetNormalizedAnalogStick(float *, unsigned int [12], int);
@@ -48,7 +48,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: mapResolveCollisionSphere. */
 extern unsigned int FUN_0029202c(void);
 /* Supplied declaration required: FUN_00294c28. */
-/* Supplied declaration required: FUN_00295108. */
+/* Supplied declaration required: popupTryStartStory. */
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002b80b8. */
 /* Supplied declaration required: padGetNormalizedAnalogStick. */
@@ -190,7 +190,7 @@ void FUN_003868dc(int param_1)
       else {
         if ((*(int *)(temp_v0 + 0xdcc) == 0) &&
            (temp_v2 = *(int *)(temp_v0 + 0xdc8) + 1, *(int *)(temp_v0 + 0xdc8) = temp_v2, temp_v2 >= 901)) {
-          FUN_00295108(0);
+          popupTryStartStory(0);
           FUN_00294c28();
           FUN_002b80b8();
           *(unsigned int *)(temp_v0 + 0xdcc) = 0xe10;

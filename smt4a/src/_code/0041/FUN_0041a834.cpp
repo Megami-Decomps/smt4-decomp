@@ -25,7 +25,7 @@ extern "C" {
 void efctSetSpeed(f32 speed);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 s32 renderCtxPackPassFlags(u32 kind, bool enabled);
-void FUN_003c5de0(f32 scale, s32 handle, u32 id, s32 x, s32 y, s32 priority);
+void FUN_003c5de0(s32 handle, u32 id, s32 x, s32 y, u32 priority, f32 scale, f32 speed);
 
 /* Draws the selected icon of the strip at `position`, shifted by the stereo parallax and a phase wobble,
  * with the pulse scaling it while the strip is not frozen. */
@@ -59,9 +59,9 @@ void FUN_0041a834(BtlIconStrip *strip, Vector2 *position, f32 scale)
             index = strip->selection % strip->count;
             drawScale = 1.0f;
         }
-        FUN_003c5de0(drawScale, (s16)strip->handle[index], strip->id[index],
+        FUN_003c5de0((s16)strip->handle[index], strip->id[index],
                      (s32)(((x - 1.0f * 12.0f) + (f32)shift) + (f32)parallax),
-                     (s32)((y - 12.0f) + (f32)wobbleOffset), 0x49);
+                     (s32)((y - 12.0f) + (f32)wobbleOffset), 0x49, drawScale, 1.0f);
     }
     efctSetSpeed(1.0f);
     renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);

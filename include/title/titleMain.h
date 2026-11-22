@@ -5,6 +5,7 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "camp/RenderCtx.h"
+#include "ui/ClippedSprite.h"
 #include <stddef.h>
 
 /* The title screen's block, kept by a module global. */
@@ -32,10 +33,34 @@ typedef char TitleMainTraceLayoutCheck[
     offsetof(TitleMain, modelA) == 0x8C &&
     sizeof(TitleMain) == 0x94 ? 1 : -1];
 
+/* A sprite of Apocalypse's title screen (0x38 bytes): where it is drawn, how opaque, and which image
+ * of which texture table it shows. */
+typedef struct TitleSpriteA {
+    /* 0x00 */ s32 x;
+    /* 0x04 */ s32 y;
+    /* 0x08 */ f32 alpha;      /* 0 or less: not drawn */
+    /* 0x0C */ u8 unk0C[0x18];
+    /* 0x24 */ u32 table;
+    /* 0x28 */ u32 image;
+    /* 0x2C */ u8 unk2C[0xC];
+} TitleSpriteA;
+
+/* Apocalypse's title screen block (0x260 bytes, g_titleMain.title): the title screen's state, then what it
+ * draws: two clipped menu sprites and six plain ones. */
+struct TitleMainA : TitleMain {
+    /* 0x094 */ u8 unk094[8];
+    /* 0x09C */ ClippedSprite menuSprites[2];  /* 0x38 apart */
+    /* 0x10C */ TitleSpriteA sprites[6];       /* drawn in the order 3, 4, the menu sprites, 1, 0, 2, 5 */
+    /* 0x25C */ u8 unk25C[4];
+};
+typedef char TitleMainALayoutCheck[sizeof(TitleSpriteA) == 0x38 && sizeof(ClippedSprite) == 0x38 &&
+    offsetof(TitleMainA, menuSprites) == 0x9C && offsetof(TitleMainA, sprites) == 0x10C &&
+    sizeof(TitleMainA) == 0x260 ? 1 : -1];
+
 /* Apocalypse keeps another word in front of the title screen's pointer. */
 typedef struct TitleMainGlobals {
     /* 0x00 */ u32 unk00;
-    /* 0x04 */ TitleMain *title;
+    /* 0x04 */ TitleMainA *title;
 } TitleMainGlobals;
 
 /* The scene block most title/event/map modules share through DAT_0044ea00 (Shin Megami Tensei IV):

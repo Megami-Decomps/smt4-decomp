@@ -16,7 +16,7 @@ void aocReleasePackageOwner(AocSystemA *system);
 void aocResetOperationState(AocSystemA *system);
 s32 sysLightEventTryWait(void *event);
 u8 buttonHelpStateIsNot3(void);
-u8 isEmptyString(const void *value);
+u8 strIsEmpty(const void *value);
 u8 byteIsAtLeast100(const void *value);
 }
 
@@ -63,7 +63,7 @@ void AocMenu::closeMenu()
     case 2:
         if (menu->flags & 0x200) {
             request = FUN_0046f3ac(g_aocSystem);
-            if (isEmptyString(&request) != 0) {
+            if (strIsEmpty(&request) != 0) {
                 menu->substep = 3;
             } else if (byteIsAtLeast100(&request) != 0) {
                 menu->substep = 9999;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: vector copies and camera-offset arithmetic lower to different VFP load/store and scheduling sequences. */
+/* NON_MATCHING: 134 lines: retail addresses g_cameraAlternateProgressStart/Previous relative to one pool base (same TU) and packs duration/frame/mode via stm; vector load/store scheduling differs. */
 #include "shard/W5_W5Match8_CameraTransition.h"
 #include "battle/btlCamera.h"
 
@@ -11,14 +11,11 @@ extern "C" W5Match8Vec3 g_cameraUnoffsetStartPosition;
 extern "C" void cameraBeginPositionTransition(W5Match8CameraTransition *camera,
                             f32 x, f32 y, f32 z, u32 duration, u32)
 {
-    CameraPositionTransitionView *state = reinterpret_cast<CameraPositionTransitionView *>(camera);
+    CameraPositionTransitionView *state = (CameraPositionTransitionView *)camera;
     if (g_btlCamera.routingMode == 2) {
-        g_cameraUnoffsetStartPosition.x = state->position.x;
-        g_cameraUnoffsetStartPosition.y = state->position.y;
-        g_cameraUnoffsetStartPosition.z = state->position.z;
-        g_cameraUnoffsetStartPosition.x -= state->offset.x;
-        g_cameraUnoffsetStartPosition.y -= state->offset.y;
-        g_cameraUnoffsetStartPosition.z -= state->offset.z;
+        g_cameraUnoffsetStartPosition.x = state->position.x - state->offset.x;
+        g_cameraUnoffsetStartPosition.y = state->position.y - state->offset.y;
+        g_cameraUnoffsetStartPosition.z = state->position.z - state->offset.z;
         state->target.x = x;
         state->target.y = y;
         state->target.z = z;

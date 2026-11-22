@@ -9,6 +9,7 @@ struct ClippedSprite {
     u8 unk18[0x14];
     u32 group;
     u32 image;
+    u8 unk34[4];    /* the title screen's two are 0x38 apart, like the plain sprites after them */
 };
-typedef char ClippedSpriteLayoutCheck[offsetof(ClippedSprite, group) == 0x2C && sizeof(ClippedSprite) == 0x34 ? 1 : -1];
+typedef char ClippedSpriteLayoutCheck[offsetof(ClippedSprite, group) == 0x2C && sizeof(ClippedSprite) == 0x38 ? 1 : -1];
 #endif

@@ -89,7 +89,7 @@ struct WhisperLineAnimation {
     const WhisperBlinkKey *blink;
     s32 positionFrame;
     s32 blinkFrame;
-    u32 unk20;
+    const char *text;   /* frameCount two-byte characters, no terminator */
     s32 frameCount;
     s32 frame;
     s32 tick;

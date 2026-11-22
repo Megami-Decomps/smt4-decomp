@@ -144,7 +144,7 @@ int uniteMenuChangeState(...);
 int uniteSortCandidateList(void);
 int FUN_00215bbc(void);
 int FUN_00284ee4(...);
-int FUN_0028a2e8(...);
+int uniteMenuRebuildEntries(...);
 int FUN_002c39dc(...);
 int partyPanelRefreshFromSlotTable(void);
 int contentEntryFindById(void);
@@ -264,7 +264,7 @@ extern int messageMainIsIdle(void);
 extern int FUN_00284e94(void);
 /* Supplied declaration required: FUN_00284ee4. */
 /* Supplied declaration required: uniteCameraInitialize. */
-/* Supplied declaration required: FUN_0028a2e8. */
+/* Supplied declaration required: uniteMenuRebuildEntries. */
 /* Supplied declaration required: FUN_0028a538. */
 /* Supplied declaration required: resourceRunEmbeddedOperationIfUnblocked. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
@@ -605,7 +605,7 @@ s32 FUN_001f5294(u32)
   case 0:
     if ((char)piVar3[0x108] == '\0') {
       rebuildFusionCatalogLists();
-      FUN_0028a2e8(0);
+      uniteMenuRebuildEntries(0);
       FUN_00184b90(piVar3,1);
       uniteMenuChangeState(5,1);
       temp_v4 = gameFlagIsSet(0x455);
@@ -1224,7 +1224,7 @@ joined_r0x001f6a20:
               case 0xb:
                 if (*(char *)(temp_v4 + 0x30) == '\0') {
                   *(unsigned char *)(temp_v4 + 0x30) = 1;
-                  FUN_0028a2e8(1);
+                  uniteMenuRebuildEntries(1);
                   temp_v15 = 9;
                 }
                 else {
@@ -1239,7 +1239,7 @@ joined_r0x001f6a20:
                   break;
                 }
                 *(unsigned char *)(temp_v4 + 0x31) = 1;
-                FUN_0028a2e8(1);
+                uniteMenuRebuildEntries(1);
                 temp_v15 = 9;
                 uniteMenuChangeState(temp_v15,1);
                 break;
@@ -1250,7 +1250,7 @@ joined_r0x001f6a20:
                   break;
                 }
                 *(unsigned char *)(temp_v4 + 0x32) = 1;
-                FUN_0028a2e8(1);
+                uniteMenuRebuildEntries(1);
                 temp_v15 = 9;
                 uniteMenuChangeState(temp_v15,1);
                 break;
@@ -1750,7 +1750,7 @@ LAB_001f732c:
         *(unsigned char *)(temp_v4 + 0x32) = 0;
       }
     }
-    FUN_0028a2e8(1);
+    uniteMenuRebuildEntries(1);
     temp_v15 = 1;
     temp_v4 = 5;
     break;

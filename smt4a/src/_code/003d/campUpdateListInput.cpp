@@ -32,7 +32,7 @@ u8 gridNavigationHandleConfirm(GridNavigation *list, s32 mode);
 void campListRegisterTouchRegions(GridNavigation *list, s32 mode);
 s32 resourceRunOperationIfUnblocked(GridNavigation *list); // declcheck: local (the shared prototype takes the opaque Object; the list is a GridNavigation)
 void FUN_0021b274(s32 mode, s32 image, u32 frame);
-u32 FUN_0048144c(s32 id);
+u32 itemCanUseOnParty(s32 id);
 void flagValueSub(s32 id, u32 amount);
 bool FUN_00481404(u16 id);
 void FUN_003a7c00(u8 value);
@@ -85,7 +85,7 @@ void campUpdateListInput(s32 state)
         } else if ((padQueryLogicalKey(0, 1) || touched) && state == 11) {
             s32 row = resourceRunOperationIfUnblocked(list) + listCursorGetRowIfUnblocked(list);
 
-            if (FUN_0048144c(camp->gridIds0[row])) {
+            if (itemCanUseOnParty(camp->gridIds0[row])) {
                 camp->usedItem = camp->gridIds0[row];
                 if (camp->gridIds0[row] == ITEM_CONFIRMED_USE) {
                     eventQueueAddUniqueIfValid(CAMP_SE_DECIDE);

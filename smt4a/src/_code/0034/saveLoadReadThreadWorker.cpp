@@ -27,7 +27,7 @@ void rt_aeabi_memclr(void *buffer, u32 size);
 char *libc_strcpy(char *destination, const char *source);
 u32 FUN_003416a0(s32 archive, u32 path);
 u32 asdSaveReadBlock(u32 archive, u32 path, void *header, void *payload, u32 payloadSize);
-u32 FUN_002c7388(u32 context, s32 path, s32 operation, s32 slot);
+u32 fsResultReportNotice(u32 context, s32 path, s32 operation, s32 slot);
 s32 fsResultClassifyRestriction(u32 context, const char *path);
 
 void saveLoadReadThreadWorker(u32 context)
@@ -60,11 +60,11 @@ void saveLoadReadThreadWorker(u32 context)
                 thread->state = -1;
             }
         } else if (archive == 1) {
-            FUN_002c7388(context, (s32)filename, 0, 0);
+            fsResultReportNotice(context, (s32)filename, 0, 0);
         }
     } else {
         if (archive == 1) {
-            FUN_002c7388(context, (s32)filename, 0, 0);
+            fsResultReportNotice(context, (s32)filename, 0, 0);
         }
         thread->state = -1;
     }

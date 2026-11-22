@@ -8,7 +8,7 @@ void lmapApplyMapAndArea(void);
 void FUN_003b5d1c(void);
 void popupQueueInsertUnique(s32 request);
 const char *popupSelectWeightedMessage(s32 kind, s32 speakerId);
-void FUN_00295108(s32 enabled);
+void popupTryStartStory(s32 enabled);
 
 /* Handles the queued popup requests: 13 and 16 open their popup (or queue it) and stop, 18 and 19 are
  * handled in place; every handled request is cleared. */
@@ -49,7 +49,7 @@ void FUN_00312af0(void)
             g_popupState->pending[index] = 0;
             return;
         case 18:
-            FUN_00295108(1);
+            popupTryStartStory(1);
             g_popupState->pending[index] = 0;
             break;
         case 19:

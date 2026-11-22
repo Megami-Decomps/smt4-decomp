@@ -7,7 +7,7 @@
 extern "C" {
 void *asdOperatorNewC(u32);
 void asdMemFreeIfNotNull(void *);
-u32 FUN_00246134(s32, u32, s32, s32);
+u32 btlSkillHitFlags(s32, u32, s32, s32);
 u32 btlGetPassiveAffinityOverride(u32, u32);
 s32 randRange(u16);
 void FUN_00246e24(u32, u32, BtlActionRecord *, u32, s32);
@@ -26,7 +26,7 @@ void FUN_003cefe0(BtlMainState **owner, u32 action, u32 parameter)
         if ((entry->flags & BTL_ENTRY_FLAG_ACTIVE) && !(entry->flags & BTL_ENTRY_FLAG_BLOCKED) &&
             !(entry->data.statusFlags & 0x400) && !(entry->data.statusFlags & 4)) {
             if (!(entry->data.statusFlags & 0x200)) {
-                u32 status = FUN_00246134(entry->ids[0], 15, 2, -1);
+                u32 status = btlSkillHitFlags(entry->ids[0], 15, 2, -1);
                 u32 passive = btlGetPassiveAffinityOverride(entry->ids[0], 15);
                 if (!((status | passive) & 0x170000)) {
                     noCandidates = false;

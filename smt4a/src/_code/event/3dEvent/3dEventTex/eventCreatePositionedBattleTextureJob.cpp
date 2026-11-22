@@ -12,7 +12,7 @@ void sysMemClear(void *memory, u32 size);
 s32 eventIsSkipping();
 u32 resourceCacheGetOrLoadModel(s32 id, u32 first, u32 second);
 u32 eventUpdateTextureFadeJob(u32 job);
-s32 FUN_00289f10(u32 job);
+s32 spriteJobDraw(u32 job);
 void jobWorkDestroy34(u32 job);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, void *owner);
@@ -55,7 +55,7 @@ u32 eventCreatePositionedBattleTextureJob(u32 id, EventTexturePosition position)
     work->visible = 1;
     work->initialized = 0;
     u32 job = asdProcessCreateSimple(DAT_0052f6a8, 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(eventUpdateTextureFadeJob), jobWorkDestroy34, reinterpret_cast<u32>(work));
-    taskCreateDraw(DAT_0052f698, 0x71, 0, 0, FUN_00289f10, NULL,
+    taskCreateDraw(DAT_0052f698, 0x71, 0, 0, spriteJobDraw, NULL,
         reinterpret_cast<u32>(work), reinterpret_cast<void *>(job));
     return job;
 }

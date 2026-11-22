@@ -93,14 +93,19 @@ typedef struct GameSavedItem {
 typedef char GameSavedItemOffsetCheck[sizeof(GameSavedItem) == 0x34 && offsetof(GameSavedItem, registrationFlags) == 0x16 &&
     offsetof(GameSavedItem, value) == 0x2C && offsetof(GameSavedItem, flags) == 0x2E ? 1 : -1];
 
+/* IV: the selection state (save block + 0x24BA4): saveSelectReserveUnit writes it through a pointer of its own. */
+typedef struct GameSaveSelectionState {
+    /* 0x00 */ u32 value;
+    /* 0x04 */ u32 money;          /* capped at 9999999 */
+    /* 0x08 */ s16 selectedUnitId; /* id of the selected party unit, 0 = none */
+    /* 0x0A */ u8 mode;
+    /* 0x0B */ u8 modeFlags;       /* bit 1: the hidden mode toggled by FUN_0031e384 */
+} GameSaveSelectionState;
+
 /* IV: the unit selection block (save block + 0x24B88). */
 typedef struct GameSaveSelection {
     /* 0x00 */ u8 unk00[0x1C];
-    /* 0x1C */ u32 value;
-    /* 0x20 */ u32 money;          /* capped at 9999999 */
-    /* 0x24 */ s16 selectedUnitId; /* id of the selected party unit, 0 = none */
-    /* 0x26 */ u8 mode;
-    /* 0x27 */ u8 modeFlags;       /* bit 1: the hidden mode toggled by FUN_0031e384 */
+    /* 0x1C */ GameSaveSelectionState state;
 } GameSaveSelection;
 
 typedef struct GameSaveLinkSlot {
@@ -207,7 +212,7 @@ typedef char GameSaveDataUpperOffsets[offsetof(GameSaveBody, flagRows) == 0x1C5A
     offsetof(GameSaveBody, questSnapshot.value) == 0x1F85C && offsetof(GameSaveBody, playerName.name) == 0x1F860 &&
     offsetof(GameSaveBody, summary.records) == 0x2478C && offsetof(GameSaveBody, gameOverContinueEnabled) == 0x24B29 &&
     offsetof(GameSaveBody, config.hasConfig) == 0x24AF8 &&
-    offsetof(GameSaveBody, config.selection.money) == 0x24B20 && offsetof(GameSaveBody, config.selection.modeFlags) == 0x24B27 &&
+    offsetof(GameSaveBody, config.selection.state.money) == 0x24B20 && offsetof(GameSaveBody, config.selection.state.modeFlags) == 0x24B27 &&
     offsetof(GameSaveBody, linkSlots) == 0x24B2C && offsetof(GameSaveBody, extendedFlags.flagsB) == 0x24B5C &&
     sizeof(GameSaveBody) == 0x24D28 && sizeof(GameSaveData) == 0x24DB0 ? 1 : -1];
 

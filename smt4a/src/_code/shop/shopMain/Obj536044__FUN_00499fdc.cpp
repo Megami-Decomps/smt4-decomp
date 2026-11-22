@@ -23,7 +23,7 @@ void sendEvent100020F(void);
 void sendEvent1000210(void);
 s32 inputIsQuestRepeatRight(void);
 s32 FUN_004d0494(void);
-void FUN_00496a0c(Obj536044 *scene, u32 mode);
+void shopScreenRebuildForSelection(Obj536044 *scene, u32 mode);
 s32 inputIsQuestMenuPressed(void);
 s32 inputIsQuestCancelPressed(void);
 void FUN_0038b010(u8 value);
@@ -71,13 +71,13 @@ void Obj536044::FUN_00499fdc()
     }
     if (inputIsQuestRepeatRight() != 0 || recordGetModeForId(nextItem) == 6) {
         tab = g_shopItemTabNeighbors[tab].next;
-        FUN_00496a0c(this, 1);
+        shopScreenRebuildForSelection(this, 1);
         sendEvent1000210();
         return;
     }
     if (FUN_004d0494() != 0 || recordGetModeForId(previousItem) == 6) {
         tab = g_shopItemTabNeighbors[tab].previous;
-        FUN_00496a0c(this, 1);
+        shopScreenRebuildForSelection(this, 1);
         sendEvent1000210();
         return;
     }
@@ -87,9 +87,9 @@ void Obj536044::FUN_00499fdc()
         uiSpriteBankApplyPreset(&animation, 1);
         obj04Finish();
         if (restricted == 1) {
-            cleared[2] = 1;
+            menuCursors[2] = 1;
         } else {
-            cleared[2] = 2;
+            menuCursors[2] = 2;
         }
         releaseEntriesB((CountAt5A *)view);
         releaseEntriesA((CountAt30 *)touchSelection);

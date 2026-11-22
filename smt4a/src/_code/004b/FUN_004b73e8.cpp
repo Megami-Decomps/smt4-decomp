@@ -9,7 +9,7 @@ s32 aocSelectedRecordIsUnavailable(void *system);
 void slotSetRequest(s32 slot, s32 frames, s32 alpha);
 void obj04Finish(void);
 ListEntry20 *menu4CGetCurrentEntry(Menu4C *menu);
-void FUN_004b7694(CampScriptPanelResources *panel);
+void questMenuPanelUpdate(CampScriptPanelResources *panel);
 void transformInterpolationStep(CampScriptPanelResources *panel);
 void uiClampScrollOffset(CampScriptPanelResources *panel, void *animation);
 void spatialAdvanceTransformTransition(u32 handle);
@@ -101,7 +101,7 @@ void FUN_004b73e8(CampScriptPanelResources *panel)
             panel->selected.entry = menu4CGetCurrentEntry(reinterpret_cast<Menu4C *>(panel->selectionMenu.menu));
             panel->mikado.flags &= ~0x2000;
         } else {
-            FUN_004b7694(panel);
+            questMenuPanelUpdate(panel);
         }
     }
     transformInterpolationStep(panel);

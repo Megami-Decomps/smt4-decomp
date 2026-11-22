@@ -71,7 +71,7 @@ int asdGxSetFrameInterval(...);
 int soundInitializePersistentSlots(...);
 int soundSetupArchiveAndSlots(...);
 int FUN_0013ae58(...);
-int FUN_0013b244(...);
+int renderCtxSetupScreenCamera(...);
 int FUN_0013b3d0(...);
 int asdGxLoadMaterialShader(...);
 int FUN_0013ba0c(...);
@@ -359,7 +359,7 @@ extern unsigned int FUN_0013a608(unsigned int);
 /* Supplied declaration required: FUN_0013ab18. */
 /* Supplied declaration required: FUN_0013ae58. */
 extern unsigned int FUN_0013af10(void);
-/* Supplied declaration required: FUN_0013b244. */
+/* Supplied declaration required: renderCtxSetupScreenCamera. */
 /* Supplied declaration required: FUN_0013b3d0. */
 /* Supplied declaration required: handleRegistryCreate. */
 /* Supplied declaration required: titleConfigApplyTarget. */
@@ -655,7 +655,7 @@ void FUN_00135c30(void)
   FUN_00138e14(1);
   FUN_0013778c(0);
   temp_v16 = 0.25f;
-  FUN_0013b244(g_renderCtx);
+  renderCtxSetupScreenCamera(g_renderCtx);
   gameDataBlocksReleaseHold(0xf);
   gameDataFlagsClearBits(7);
   gameDataBlocksMaskClearBits(1);

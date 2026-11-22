@@ -11,7 +11,7 @@ int btlGetPassiveAffinityOverride(...);
 int btlEntryHasSkillCategory(unsigned int *, unsigned int);
 int selectionCopySupportedValue(unsigned int, unsigned int *);
 int btlEntryGetPassiveSkillIds(...);
-int FUN_00246134(unsigned int, unsigned int, int, unsigned int);
+int btlSkillHitFlags(unsigned int, unsigned int, int, unsigned int);
 int FUN_002463e8(...);
 int btlEntryBuildSummary(...);
 int passiveSkillLookupRecord(void);
@@ -60,7 +60,7 @@ typedef struct {
 /* Supplied declaration required: btlEntryGetPassiveSkillIds. */
 extern int randRange(unsigned int);
 extern unsigned short mapCategoryToDestinationGroup(unsigned int);
-/* Supplied declaration required: FUN_00246134. */
+/* Supplied declaration required: btlSkillHitFlags. */
 /* Supplied declaration required: FUN_002463e8. */
 /* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlFindEntryBlockByMemberId. */
@@ -182,7 +182,7 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
     temp_v30 = 1;
   }
   temp_v6 = param_5;
-  FUN_00246134(param_5,temp_v9,(int)(short)temp_v17,0xffffffff);
+  btlSkillHitFlags(param_5,temp_v9,(int)(short)temp_v17,0xffffffff);
   if (((temp_v6 & 0x80000000) != 0) && ((*(unsigned short *)((int)puVar6 + 0xfa) & 0x10) == 0)) {
     reinterpret_cast<int>(btlGetMainState());
     temp_v16 = 0;
@@ -255,7 +255,7 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
         temp_v8 = 0;
 LAB_00228c48:
         temp_v9 = param_5;
-        FUN_00246134(param_5,(&temp_v16)[temp_v8],*(unsigned char *)(param_1 + 0x23),0xffffffff);
+        btlSkillHitFlags(param_5,(&temp_v16)[temp_v8],*(unsigned char *)(param_1 + 0x23),0xffffffff);
         temp_v25[temp_v8] = temp_v9;
         temp_v9 = param_5;
         btlGetPassiveAffinityOverride(param_5,(&temp_v16)[temp_v8]);

@@ -1,11 +1,11 @@
 /* Guest window update: while enabled, advances the open/close state machine and counts frames. */
 #include "common.h"
 #include "font/GuestWin/GuestWin.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
 extern GuestWinOptions *gameGetSupportUnitData(void);
-extern int uiSpriteAdvanceAnimation(u8 *ui);
 
 extern GuestWinWork *g_guestWin;
 
@@ -21,7 +21,7 @@ u16 guestWinUpdate(void)
     case 0:
         break;
     case 1:
-        if (uiSpriteAdvanceAnimation(guest->ui) != 0) {
+        if (uiSpriteAdvanceAnimation(&guest->sprite) != 0) {
             guest->state = 2;
             guest->frames = 0;
         }
@@ -29,7 +29,7 @@ u16 guestWinUpdate(void)
     case 2:
         break;
     case 3:
-        if (uiSpriteAdvanceAnimation(guest->ui) != 0) {
+        if (uiSpriteAdvanceAnimation(&guest->sprite) != 0) {
             guest->state = 0;
         }
         break;

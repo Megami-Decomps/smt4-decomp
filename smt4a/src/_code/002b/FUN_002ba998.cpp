@@ -49,7 +49,7 @@ int battleInitializeEnemyFormation(...);
 int FUN_003e892c(...);
 int btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
 int btlHasFilteredCommand(void);
-int FUN_003f26d4(...);
+int btlAiBuildTurnOrder(...);
 int btlPopFilteredCommand(...);
 int gameCounterAddSaturating(...);
 int FUN_004aa2e0(...);
@@ -238,7 +238,7 @@ extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_003ef1e4. */
 /* Supplied declaration required: FUN_003f135c. */
 /* Supplied declaration required: FUN_003f1d74. */
-/* Supplied declaration required: FUN_003f26d4. */
+/* Supplied declaration required: btlAiBuildTurnOrder. */
 /* Supplied declaration required: btlPopFilteredCommand. */
 /* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: countersAddSaturating. */
@@ -771,7 +771,7 @@ LAB_002bb21c:
     break;
   case 0xe:
     *(unsigned int *)(temp_v7 + 0xa8) = 0;
-    FUN_003f26d4(temp_v7);
+    btlAiBuildTurnOrder(temp_v7);
     temp_v11 = 0xc;
     if (g_btlMain != 0) {
       *(unsigned int *)(g_btlMain + 0x8c) = temp_v11;
@@ -783,7 +783,7 @@ LAB_002bb21c:
       *(unsigned int *)(g_btlPartnerAttack + 8) = 4;
     }
     else {
-      FUN_003f26d4(temp_v7);
+      btlAiBuildTurnOrder(temp_v7);
       *(unsigned int *)(g_btlPartnerAttack + 8) = 1;
       btlQueueDuplicateSuppressedAction(0,0);
       FUN_004feecc(1,0);

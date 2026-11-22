@@ -9,7 +9,7 @@
 
 extern "C" {
 void btlEntryBuildSummary(void *, BtlMainState *, BtlEntry *);
-u32 FUN_00246134(u32, u32, s32, u32);
+u32 btlSkillHitFlags(u32, u32, s32, u32);
 void selectionCopySupportedValue(u32, u32 *);
 s32 btlEntryHasSkillCategory(BtlEntry *, u32);
 f32 battleGetPassiveAffinityMultiplier(u32, u32);
@@ -40,7 +40,7 @@ f32 FUN_003bd1d8(u32 listedId, u32 request)
     if ((u32)(query.category - 3) <= 7u)
         return scale;
 
-    u32 result = FUN_00246134(request, entryId, query.category, 0xFFFFFFFFu);
+    u32 result = btlSkillHitFlags(request, entryId, query.category, 0xFFFFFFFFu);
     s32 percent = (u16)result;
     if ((result & 0x60000u) != 0 && percent == 0)
         percent = 100;

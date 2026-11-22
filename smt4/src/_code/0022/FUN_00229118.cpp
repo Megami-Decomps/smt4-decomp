@@ -10,7 +10,7 @@ int btlGetListedSummaryValues(...);
 int btlEntryHasSkillCategory(...);
 int selectionCopySupportedValue(...);
 int FUN_0023cd08(...);
-int FUN_00246134(...);
+int btlSkillHitFlags(...);
 int btlEntryBuildSummary(...);
 int targetSelectChangeDisplayMode(...);
 int btlTargetSelectSetEntry(...);
@@ -39,7 +39,7 @@ typedef struct {
 /* Supplied declaration required: btlEntryHasSkillCategory. */
 /* Supplied declaration required: selectionCopySupportedValue. */
 /* Supplied declaration required: FUN_0023cd08. */
-/* Supplied declaration required: FUN_00246134. */
+/* Supplied declaration required: btlSkillHitFlags. */
 /* Supplied declaration required: btlEntryBuildSummary. */
 extern int battleGetEntryHalfword(unsigned int, unsigned int);
 /* Supplied declaration required: btlFindEntryBlockByMemberId. */
@@ -117,7 +117,7 @@ void FUN_00229118(int *param_1,int param_2,unsigned int param_3,int param_4)
         temp_v10 = 0;
         btlGetListedSummaryValues((int)*(short *)(*(int *)(param_4 + 0x24) + 0x62),&temp_v9,&temp_v10);
         temp_v8 = param_3;
-        FUN_00246134(param_3,temp_v9,temp_v10,0xffffffff);
+        btlSkillHitFlags(param_3,temp_v9,temp_v10,0xffffffff);
         if ((temp_v8 & 0x20000) != 0) {
           temp_v4 = 3;
         }
@@ -230,7 +230,7 @@ LAB_002292ac:
           temp_v10 = 0;
           temp_v11 = 0;
           btlGetListedSummaryValues((int)*(short *)(*(int *)(param_4 + 0x24) + 0x62),&temp_v10,&temp_v11);
-          FUN_00246134(temp_v8,temp_v10,temp_v11,0xffffffff);
+          btlSkillHitFlags(temp_v8,temp_v10,temp_v11,0xffffffff);
           if ((temp_v8 & 0x20000) != 0) {
             temp_v7 = 3;
           }

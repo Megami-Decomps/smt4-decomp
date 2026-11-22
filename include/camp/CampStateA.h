@@ -82,7 +82,7 @@ typedef struct CampStateA {
     /* 0x32A8 */ s8 menuGroupBorrowed;      /* leaving the list puts the menu back on group 1 */
     /* 0x32A9 */ u8 slotRequestPending;     /* set by menu item 7 with slot request 10 */
     /* 0x32AA */ u8 unk32AA[6];
-    /* 0x32B0 */ u8 noticeFlags[7];
+    /* 0x32B0 */ s8 noticeFlags[7];
     /* 0x32B7 */ u8 unk32B7[0x101];
     /* 0x33B8 */ u32 usedItem;              /* the item last used from the item list */
     /* 0x33BC */ u8 unk33BC[4];

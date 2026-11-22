@@ -56,7 +56,7 @@ u32 messageGetChoiceResult(void); // declcheck: local (declared in the item desc
 u32 panelSetMode3(u32 value, u8 flag);
 u8 panelStateIs0(void);
 void inventoryApplyTransaction(const EquipmentMenuItem *item, s32 count, s32 charge);
-void FUN_00496a0c(Obj536044 *scene, u32 mode);
+void shopScreenRebuildForSelection(Obj536044 *scene, u32 mode);
 void setListWindow(EquipmentMenuCursor *list, u32 first, u32 row);
 void FUN_003df7c4(PlayerDataA *player);
 void gameGlobalsQueueValues(PlayerDataA *player, u32 second);
@@ -326,7 +326,7 @@ void Obj536044::shopQuantityStep()
                 s32 row = FUN_0031d174(list);
                 s32 first = resourceDispatchTaggedOperation(list);
 
-                FUN_00496a0c(this, 0);
+                shopScreenRebuildForSelection(this, 0);
                 if (first > 0) {
                     first--;
                 } else if (row != 0 && list->range.count <= row + first) {

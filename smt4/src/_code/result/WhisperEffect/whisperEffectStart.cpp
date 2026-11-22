@@ -1,103 +1,109 @@
-/* NON_MATCHING: retail takes the text pointers from one contiguous data block and the task callbacks are local code labels (LAB_*) that are not decompiled; stores and pool layout differ */
-/* Starts the whisper effect: allocates its work area, picks the random start values and the
- * text of every line, then creates the effect's update and draw tasks. */
+/* NON_MATCHING: retail stores the layer rates, periods and line counts before it walks the line tables;
+ * this build interleaves those stores with the table walk (and numbers the saved registers differently). */
 #include "common.h"
 #include "result/WhisperEffect.h"
+#include "code/Code002c_Smt4.h"
+#include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "shard/W6_W6Match2_HelpResources.h"
+#include "gamedata/NkmBaseRecord.h"
 
 extern "C" {
-
-typedef void (*VoidFunc)(void);
 
 int randBetween(int low, int high);                    /* random integer in [low, high] */
 int soundChannelStopAll(int id);
 int soundChannelRequestIfEnabled(u32 handle, int arg1, int arg2);
-int nkmBaseGetRecord(void);
 int memClear(void *ptr, int size);                  /* zero a block */
-u32 taskCreateDraw(VoidFunc fn, int priority, int arg2, int arg3, VoidFunc cb, int arg5, void *work, u32 parent);
 void *asdMemoryAlloc(int heap, int align, int arg2, int size, int arg4);
 int asdTMTexTableLoadTmx(int type, int arg);
-void FUN_0022413c(void);
-void whisperEffectDestroy(void);
-void whisperEffectUpdate(void);
-void LAB_002f6a28(void);
-void LAB_002f6a40(void);
-void LAB_002f6a5c(void);
+s32 whisperEffectDraw(u32 job);
+void whisperEffectDestroy(u32 job);
+s32 whisperEffectUpdate(u32 job);
 
-extern WhisperEffect *g_whisperEffect;
-extern char DAT_0044dc68[];
-extern char DAT_0044dc98[];
-extern char s________________0044dca8[43];
-extern char DAT_0044dcf4[];
-extern char s________________0044dd04[43];
-extern char DAT_0044dd50[];
-extern char s____________0044dd60[31];
-extern char DAT_0044dda4[];
-extern char s____________0044ddb4[31];
-extern char DAT_0044ddf8[];
-extern char DAT_0044de08[];
+extern WhisperAnimationView *g_whisperEffect;
+/* The five lines' tables, back to back (read-only data): for each line three position keys, two blink keys
+ * and its text (two-byte characters, frameCount of them, no terminator). */
+extern const u8 g_whisperLineData[];
 
+/* Starts the whisper effect: allocates its work area, loads its textures, sets the layer rates, the line
+ * tables and random start phases and frames, then creates the effect's process and draw tasks and plays the
+ * demon's whisper voice. */
 void whisperEffectStart(u32 devilId)
 {
-    WhisperEffect *fx;
-    WhisperLine *line;
-    int i;
+    WhisperAnimationView *fx;
+    s32 i;
 
-    fx = (WhisperEffect *)asdMemoryAlloc(0x100, 0x100, 0, 0x1b8, 1);
-    g_whisperEffect = fx;
-    memClear(fx, 0x1b8);
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\result\\WhisperEffect.cpp", 683);
+    g_whisperEffect = (WhisperAnimationView *)asdMemoryAlloc(0x100, 0x100, 0, sizeof(WhisperAnimationView), 1);
+    memClear(g_whisperEffect, sizeof(WhisperAnimationView));
+    fx = g_whisperEffect;
     asdTMTexTableLoadTmx(0x37, 0);
     for (i = 0; i < 5; i++) {
         asdTMTexTableLoadEntryAsync(0x37, i);
     }
 
-    fx->unk10 = 1.0f;
-    fx->periodA = 3000;
-    fx->rateA = 0.16592593f;
-    fx->periodB = 2000;
-    fx->rateB = 0.10666667f;
-    fx->unk70 = 0;
-    fx->unk90 = 0;
-    fx->periodC = 1000;
-    fx->rateC = 0.09756097f;
+    fx->opacity = 1.0f;
+    fx->particles[0].period = 3000;
+    fx->particles[0].rate = 0.16592593f;
+    fx->particles[1].period = 2000;
+    fx->particles[1].rate = 0.10666667f;
+    fx->layers[0].period = 0;
+    fx->layers[1].period = 0;
+    fx->layers[2].period = 1000;
+    fx->layers[2].rate = 0.09756097f;
 
-    fx->lines[0].count = 0xe;
-    fx->lines[1].count = 0xe;
-    fx->lines[2].count = 10;
-    fx->lines[4].count = 0xe;
-    fx->lines[0].textA = DAT_0044dc68;
-    fx->lines[0].textB = DAT_0044dc98;
-    fx->lines[0].name = s________________0044dca8;
-    fx->lines[1].textA = s________________0044dca8 + 0x1c;
-    fx->lines[1].textB = DAT_0044dcf4;
-    fx->lines[1].name = s________________0044dd04;
-    fx->lines[2].textA = s________________0044dd04 + 0x1c;
-    fx->lines[2].textB = DAT_0044dd50;
-    fx->lines[2].name = s____________0044dd60;
-    fx->lines[3].textA = s____________0044dd60 + 0x14;
-    fx->lines[3].textB = DAT_0044dda4;
-    fx->lines[3].name = s____________0044ddb4;
-    fx->lines[3].count = 10;
-    fx->lines[4].textA = s____________0044ddb4 + 0x14;
-    fx->lines[4].textB = DAT_0044ddf8;
-    fx->lines[4].name = DAT_0044de08;
+    fx->lines[0].frameCount = 14;
+    fx->lines[1].frameCount = 14;
+    fx->lines[2].frameCount = 10;
+    fx->lines[4].frameCount = 14;
+    const u8 *data = g_whisperLineData;
+    fx->lines[0].positions = (const WhisperPositionKey *)data;
+    data += sizeof(WhisperPositionKey) * 3;
+    fx->lines[0].blink = (const WhisperBlinkKey *)data;
+    data += sizeof(WhisperBlinkKey) * 2;
+    fx->lines[0].text = (const char *)data;
+    data += fx->lines[0].frameCount * 2;
+    fx->lines[1].positions = (const WhisperPositionKey *)data;
+    data += sizeof(WhisperPositionKey) * 3;
+    fx->lines[1].blink = (const WhisperBlinkKey *)data;
+    data += sizeof(WhisperBlinkKey) * 2;
+    fx->lines[1].text = (const char *)data;
+    data += fx->lines[1].frameCount * 2;
+    fx->lines[2].positions = (const WhisperPositionKey *)data;
+    data += sizeof(WhisperPositionKey) * 3;
+    fx->lines[2].blink = (const WhisperBlinkKey *)data;
+    data += sizeof(WhisperBlinkKey) * 2;
+    fx->lines[2].text = (const char *)data;
+    data += fx->lines[2].frameCount * 2;
+    fx->lines[3].positions = (const WhisperPositionKey *)data;
+    data += sizeof(WhisperPositionKey) * 3;
+    fx->lines[3].blink = (const WhisperBlinkKey *)data;
+    data += sizeof(WhisperBlinkKey) * 2;
+    fx->lines[3].text = (const char *)data;
+    fx->lines[3].frameCount = 10;
+    data += fx->lines[3].frameCount * 2;
+    fx->lines[4].positions = (const WhisperPositionKey *)data;
+    data += sizeof(WhisperPositionKey) * 3;
+    fx->lines[4].blink = (const WhisperBlinkKey *)data;
+    data += sizeof(WhisperBlinkKey) * 2;
+    fx->lines[4].text = (const char *)data;
 
-    fx->phaseA = (f32)randBetween(0, 0xff);
-    fx->phaseB = (f32)randBetween(0, 0xff);
-    for (i = 0; i < 5; i++) {
-        fx->lines[i].pick = randBetween(0, fx->lines[i].count - 1);
+    for (u32 particle = 0; particle < 2; particle++) {
+        fx->particles[particle].phase = (f32)randBetween(0, 0xff);
+    }
+    for (u32 line = 0; line < 5; line++) {
+        fx->lines[line].frame = randBetween(0, fx->lines[line].frameCount - 1);
     }
 
-    devilId &= 0xffff;
-    nkmBaseGetRecord();
-    fx = g_whisperEffect;
-    fx->handle = ((u8 *)devilId)[0x32] + 0x100008a;
-    fx->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>(LAB_002f6a28), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(whisperEffectUpdate), reinterpret_cast<AsdProcFunc>(whisperEffectDestroy), reinterpret_cast<u32>(fx));
-    taskCreateDraw(LAB_002f6a40, 0x7d, 0, 0, FUN_0022413c, 0, fx, fx->task);
-    taskCreateDraw(LAB_002f6a5c, 0xdb, 0, 0, FUN_0022413c, 0, g_whisperEffect, g_whisperEffect->task);
+    g_whisperEffect->handle = nkmBaseGetRecord((u16)devilId)->unk32 + 0x100008a;
+    g_whisperEffect->task = asdProcessCreateSimple((const s8 *)"WhisperEffect CALC", 2, 0, 0, whisperEffectUpdate,
+                                                   whisperEffectDestroy, (u32)g_whisperEffect);
+    taskCreateDraw((const s8 *)"WhisperEffect DrawUpLeft", 0x7d, 0, 0, whisperEffectDraw, NULL, (u32)g_whisperEffect,
+                   (void *)g_whisperEffect->task);
+    taskCreateDraw((const s8 *)"WhisperEffect DrawUpRight", 0xdb, 0, 0, whisperEffectDraw, NULL, (u32)g_whisperEffect,
+                   (void *)g_whisperEffect->task);
     soundChannelStopAll(0);
-    soundChannelRequestIfEnabled(g_whisperEffect->handle, 0, 0x3c);
+    soundChannelRequestIfEnabled(g_whisperEffect->handle, 0, 60);
 }
 
 } /* extern "C" */

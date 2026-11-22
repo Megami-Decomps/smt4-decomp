@@ -1,4 +1,3 @@
-/* NON_MATCHING: the context reload and first add of the pop's stack address use a different scratch register. */
 #include "camp/RenderCtx.h"
 #include "util/BitsAndBytes_VariantA.h"
 #include "shard/TextureDrawCall.h"
@@ -19,7 +18,7 @@ void FUN_002e15f8(const TitleOverlayParameters *parameters, s32 x, u32 color)
     RenderCtx *context = g_titleScene;
     renderCtxPushB(context, packNibblesAndByte(6, 1, 0));
     texDrawCompositeSprite(2, 57, 12, x, color, 117);
-    renderStackPopChecked(g_titleScene->stacks + RENDER_STACK_B);
+    renderCtxPopCounted(g_titleScene, RENDER_STACK_B);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     texDrawTableEntryAtStoredOrigin(2, 57, 146, parameters->offset + x, color, 118);

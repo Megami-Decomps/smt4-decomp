@@ -11,7 +11,7 @@ int CONCAT44(...);
 int btlGetPassiveAffinityOverride(unsigned int, unsigned int);
 int selectionCopySupportedValue(...);
 int btlEntryGetPassiveSkillIds(void);
-int FUN_00246134(unsigned int, unsigned int, int, unsigned int);
+int btlSkillHitFlags(unsigned int, unsigned int, int, unsigned int);
 int btlEntryBuildSummary(...);
 int passiveSkillLookupRecord(void);
 int skillSumRankBonuses(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
@@ -68,7 +68,7 @@ typedef struct {
 /* Supplied declaration required: btlEntryGetPassiveSkillIds. */
 extern int FUN_0023ea94(void);
 extern int randRange(unsigned int);
-/* Supplied declaration required: FUN_00246134. */
+/* Supplied declaration required: btlSkillHitFlags. */
 extern unsigned int FUN_002463e8(unsigned int);
 /* Supplied declaration required: btlEntryBuildSummary. */
 extern unsigned int FUN_00255de0(unsigned int, unsigned int);
@@ -246,7 +246,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
   if ((temp_v13 != 0xff) && (temp_v9 = 0, temp_v10 != 0)) {
     do {
       temp_v6 = param_5;
-      FUN_00246134(param_5,temp_v28[temp_v9],(int)temp_v21,temp_v8);
+      btlSkillHitFlags(param_5,temp_v28[temp_v9],(int)temp_v21,temp_v8);
       temp_v31[temp_v9] = temp_v6;
       temp_v6 = param_5;
       btlGetPassiveAffinityOverride(param_5,temp_v28[temp_v9]);

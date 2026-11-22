@@ -15,7 +15,10 @@ struct PackedRenderParameters {
 };
 struct PackedRenderState {
     /* 0x00 */ u32 values[6];
-    /* 0x18 */ u32 flags;
+    union {
+        /* 0x18 */ u32 flags;
+        /* 0x18 */ s16 templateIndex; /* the low half: the template the sprite was built from */
+    };
     /* 0x1C */ union {
         u32 mode;
         struct { u16 unk1C; u8 format; u8 kind; } formatInfo;
@@ -29,7 +32,7 @@ struct PackedRenderState {
     /* 0x2D */ u8 green;
     /* 0x2E */ u8 blue;
     /* 0x2F */ u8 alpha;
-    /* 0x30 */ u8 unk30[8];
+    /* 0x30 */ f32 scale[2];
     /* 0x38 */ u8 active;
     /* 0x39 */ u8 unk39[0x17];
     /* 0x50 */ s16 offsetX;

@@ -16,7 +16,7 @@ extern "C" {
 
 
 s32 guestWinRequestClose(void);
-s32 FUN_0028fc60(u32 id);
+s32 itemCanUseOnParty(u32 id);
 void campReleaseScreenTouchRegions(GridNavigation *list, s32 flag);
 void campListShowSelectedHelp(s32 arg);
 void messageDismissNumericBanner(s32 arg);
@@ -78,7 +78,7 @@ void campUpdateListInput(s32 kind)
     if ((inputQueryButtonState(0, 1) | touched) != 0 && kind == CAMP_LIST_A) {
         s32 index = resourceRunOperationIfUnblocked(list) + listCursorGetRowIfUnblocked(list);
         u32 id = camp->gridIds0[index];
-        if (FUN_0028fc60(id) != 0) {
+        if (itemCanUseOnParty(id) != 0) {
             camp->selectedId = camp->gridIds0[index];
             uiSpriteSetKeyframe(&camp->sprites[1], 3, 0);
             camp->returnState = 11;

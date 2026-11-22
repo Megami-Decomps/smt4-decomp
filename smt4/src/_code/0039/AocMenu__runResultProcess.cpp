@@ -1,163 +1,149 @@
+/* NON_MATCHING: written like _ZN7AocMenu15runQueryProcessEv; step 4's error store differs: retail loads the failed
+ * result (ldrd) before storing the error kind, where this build stores the kind first (4 rows), and retail hoists the
+ * constant 3 before the step number (4 rows; writing `counter = 3;` before `step = N;` gives that order, but the two
+ * are independent stores and the order is only score evidence). */
 #include "code/Code0023.h"
+#include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "classes/Obj422214Owner.h"
-/* NON_MATCHING: retail's states return through the shared epilogue with different register assignment (process in r4, g_aocMain in r6), copies the polled five-word result through ldm/stm pairs and tests the 0x66/0x67 kinds with the removed-inline gotos of the original; this build lays the cases out differently. */
-#include "classes/AocMenu.h"
-#include "common.h"
+#include "nn/Result.h"
+#include "sys/RuntimeObjects.h"
+#include "util/BitsAndBytes.h"
 
-struct AocMenuObject;
-
-/* A five-word result record: the first byte is its kind (0 = none, >= 100 = a command). */
-struct AocResult {
-    /* 0x00 */ u32 words[5];
+/* The query operation the menu is polling (its deleting destructor is vtable slot 1). */
+class AocQueryHandler {
+public:
+    virtual ~AocQueryHandler();
+    virtual void vfunc08();
+    virtual RequestParameters poll();
 };
 
-/* The object a menu owns for its current screen: slot 1 destroys it, slot 3 reads its pending result. */
-struct AocMenuObjectVtable {
-    /* 0x00 */ void *unk00;
-    /* 0x04 */ void (*destroy)(AocMenuObject *object);
-    /* 0x08 */ void *unk08;
-    /* 0x0C */ AocResult (*readResult)(AocMenuObject *object);
+/* A handler's own state: only the word the menu fills in after creating it. */
+struct AocQueryHandlerState {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ u32 slotValue;
 };
 
-/* The screen object is embedded in the process; once the screen ends its place holds the result record. */
-struct AocMenuObject {
-    /* 0x00 */ AocMenuObjectVtable *vtable;
-    /* 0x04 */ u32 result[5];
-};
-
-
-/* A script-driven menu process of the AOC part. */
-struct AocMenuProcess {
-    /* 0x000 */ u32 flags;
-    /* 0x004 */ u32 mode;
-    /* 0x008 */ s32 phase;
-    /* 0x00C */ s32 timer;
+struct AocQueryMenu {
+    /* 0x000 */ u32 unk000;
+    /* 0x004 */ s32 state;
+    /* 0x008 */ s32 step;
+    /* 0x00C */ s32 counter;
     /* 0x010 */ u8 unk010[0x1F8];
-    /* 0x208 */ AocMenuObject *active;
-    /* 0x20C */ u32 unk20C;
+    /* 0x208 */ AocQueryHandler *handler;
+    /* 0x20C */ u8 handlerStorage[4];
     /* 0x210 */ RequestParameters result;
     /* 0x224 */ u8 unk224[0x1C];
-    /* 0x240 */ u8 holder[0x110];
-    /* 0x350 */ void *table;
-    /* 0x354 */ u8 unk354[4];
-    /* 0x358 */ void *script;
+    /* 0x240 */ u8 slotHolder[0x74];
 };
 
 extern "C" {
 
-void FUN_00233e70(AocMenuProcess *process, s32 unused, s32 next);
-void FUN_00234124(AocMenuProcess *process, const RequestParameters *request);
-RequestParameters FUN_002341d4(AocMain *aoc);
-s32 strIsEmpty(u32 *record);
-u8 byteIsAtLeast100(u32 *record);
-s32 legacyResourceIdRemap(const RequestParameters *record);
+void FUN_00233e70(AocQueryMenu *menu, s32 first, s32 second);
+void FUN_00234124(AocQueryMenu *menu, RequestParameters *result);
+WindowStatusResult FUN_002341d4(AocMain *main);
+s32 strIsEmpty(const RequestParameters *result);
 u32 flaggedValueHolderGetTotal(void *holder);
 
-/* Runs one step of the menu process that reports the screen's result: phases 0-5 and 9999. */
+/* The kinds of a finished query result. */
+enum {
+    AOC_RESULT_RETRY = 0x66,
+    AOC_RESULT_DONE = 0x67
+};
+
+/* Per-frame update of the menu's result screen: polls its status operations, reads the slot's content code and
+ * reports the result (steps 0-5 and 9999). */
 void AocMenu::runResultProcess()
 {
-    AocMenuProcess * process = reinterpret_cast<AocMenuProcess *>(this);
-    RequestParameters record;
-    AocMain *aoc = g_aocMain;
-    switch (process->phase) {
+    AocQueryMenu * menu = reinterpret_cast<AocQueryMenu *>(this);
+    RequestParameters result;
+    AocMain *aocMain = g_aocMain;
+
+    switch (menu->step) {
     case 0: {
-        AocMenuObject *object = (AocMenuObject *)windowCreateStatusOperation(&process->unk20C, 0);
-        process->phase = 1;
-        process->active = object;
-        return;
+        AocQueryHandler *created = reinterpret_cast<AocQueryHandler *>(windowCreateStatusOperation(menu->handlerStorage, 0));
+        menu->step = 1;
+        menu->handler = created;
+        break;
     }
     case 1: {
-        AocResult raw = process->active->vtable->readResult(process->active);
-        record = reinterpret_cast<const RequestParameters &>(raw);
-        if (strIsEmpty(&record.word(0)) != 0) {
-            process->phase = 2;
-            return;
-        }
-        if (byteIsAtLeast100(&record.word(0)) != 0) {
-            if ((record.word(0) & 0xff) == 0x66) {
-                RequestParameters request = record;
-                FUN_00234124(process, &request);
-                return;
+        RequestParameters polled = menu->handler->poll();
+        result = polled;
+        if (strIsEmpty(&result) != 0) {
+            menu->step = 2;
+        } else if (byteIsAtLeast100(reinterpret_cast<const u8 *>(&result)) != 0) {
+            switch (result.kind) {
+            case AOC_RESULT_DONE:
+                menu->step = 5;
+                menu->counter = 3;
+                break;
+            case AOC_RESULT_RETRY: {
+                RequestParameters copy = result;
+                FUN_00234124(menu, &copy);
+                break;
             }
-            if ((record.word(0) & 0xff) != 0x67) {
-                process->phase = 9999;
-                process->result = record;
-                return;
+            default:
+                menu->result = result;
+                menu->step = 9999;
+                break;
             }
-            process->phase = 5;
-            process->timer = 3;
-            return;
         }
-        return;
+        break;
     }
     case 2: {
-        if (process->active != 0) {
-            process->active->vtable->destroy(process->active);
-        }
-        AocMenuObject *object = (AocMenuObject *)windowCreateStatusOperation(&process->unk20C, 2);
-        process->active = object;
-        object->result[4] = aoc->records[flaggedValueHolderGetTotal(process->holder)].contentId;
-        process->phase = 3;
-        return;
+        if (menu->handler != NULL)
+            delete menu->handler;
+        AocQueryHandler *created = reinterpret_cast<AocQueryHandler *>(windowCreateStatusOperation(menu->handlerStorage, 2));
+        menu->handler = created;
+        ((AocQueryHandlerState *)created)->slotValue = aocMain->records[flaggedValueHolderGetTotal(menu->slotHolder)].contentId;
+        menu->step = 3;
+        break;
     }
     case 3: {
-        AocResult raw = process->active->vtable->readResult(process->active);
-        record = reinterpret_cast<const RequestParameters &>(raw);
-        if (strIsEmpty(&record.word(0)) != 0) {
-            AocMenuObject *object = process->active;
-            process->mode = 10;
-            process->phase = 0;
-            if (object != 0) {
-                object->vtable->destroy(object);
-                process->active = 0;
+        RequestParameters polled = menu->handler->poll();
+        result = polled;
+        if (strIsEmpty(&result) != 0) {
+            aocMenuChangeStep(this, 10);
+        } else if (byteIsAtLeast100(reinterpret_cast<const u8 *>(&result)) != 0) {
+            switch (result.kind) {
+            case AOC_RESULT_DONE:
+                menu->step = 4;
+                break;
+            case AOC_RESULT_RETRY: {
+                RequestParameters copy = result;
+                FUN_00234124(menu, &copy);
+                break;
             }
-            return;
+            default:
+                menu->result = result;
+                menu->step = 9999;
+                break;
+            }
         }
-        if (byteIsAtLeast100(&record.word(0)) != 0) {
-            if ((record.word(0) & 0xff) == 0x66) {
-                RequestParameters request = record;
-                FUN_00234124(process, &request);
-                return;
-            }
-            if ((record.word(0) & 0xff) != 0x67) {
-                process->phase = 9999;
-                process->result = record;
-                return;
-            }
-            process->phase = 4;
-            return;
-        }
-        return;
+        break;
     }
     case 4: {
-        RequestParameters remapped = FUN_002341d4(aoc);
-        if (legacyResourceIdRemap(&remapped) < 0) {
-            process->phase = 9999;
-            process->result.word(0) = 100;
-            process->result.word(1) = remapped.word(0);
-            process->result.word(2) = remapped.word(1);
-            return;
+        WindowStatusResult status = FUN_002341d4(aocMain);
+        if (nnResultIsFailure(legacyResourceIdRemap(&status))) {
+            menu->step = 9999;
+            menu->result.kind = 100;
+            menu->result.result = status;
+            break;
         }
-        process->phase = 5;
-        process->timer = 3;
-        return;
+        menu->step = 5;
+        menu->counter = 3;
+        break;
     }
     case 5:
-        process->timer--;
-        if (process->timer < 1) {
-            AocMenuObject *object = process->active;
-            process->mode = 6;
-            process->phase = 0;
-            if (object != 0) {
-                object->vtable->destroy(object);
-                process->active = 0;
-            }
-        }
-        return;
+        menu->counter--;
+        if (menu->counter > 0)
+            break;
+        aocMenuChangeStep(this, 6);
+        break;
     case 9999:
-        FUN_00233e70(process, 5, 3);
-        return;
+        FUN_00233e70(menu, 5, 3);
+        break;
     }
 }
+
 }

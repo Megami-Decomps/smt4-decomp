@@ -1,7 +1,8 @@
-/* NON_MATCHING: readable rewrite compiles (189 vs 210 rows); retail keeps the address of the 0x80-byte block at +0x56c in a register and schedules the field clears differently */
+/* NON_MATCHING: retail reads the camera node straight from the scene ([r4,#0x56c]) but the payload argument through the block address, and keeps the argument registers in r5/r6 order; the self-relative node walk (nw::ut::RelativePointer) and the copies match in shape. */
 #include "common.h"
 #include <stdio.h>
 #include "AsdSDK/AsdMemUtil.h"
+#include "shard/S1NwGfx.h"
 
 struct Vec3 {
     u32 x, y, z;    // raw words, copied verbatim
@@ -58,7 +59,8 @@ void FUN_00234f5c(MikadoScene* scene, const char* name, const char* override)
     scene->unk04 = 0;
     scene->dummyCount = 0;
     scene->hasMarkers = 0;
-    memClear(&scene->cameraBlock, 0x80);
+    u32* block = &scene->cameraBlock;
+    memClear(block, 0x80);
     if (override != NULL) {
         sprintf(path, "%s.bam", override);
     } else {
@@ -73,37 +75,34 @@ void FUN_00234f5c(MikadoScene* scene, const char* name, const char* override)
     FUN_002a04f0(0);
 
     // Camera position and target come from the camera node and its look-at.
-    u32* camera = reinterpret_cast<u32*>(scene->cameraBlock);
-    scene->cameraPos.x = camera[0x58 / 4];
-    scene->cameraPos.y = camera[0x68 / 4];
-    scene->cameraPos.z = camera[0x78 / 4];
-    u32* target = cameraGetProviderEntryPayload(scene->cameraBlock);
-    scene->cameraTarget.x = target[0];
-    scene->cameraTarget.y = target[1];
-    scene->cameraTarget.z = target[2];
+    u32* camera = reinterpret_cast<u32*>(*block);
+    Vec3 position;
+    position.x = camera[0x58 / 4];
+    position.y = camera[0x68 / 4];
+    position.z = camera[0x78 / 4];
+    scene->cameraPos = position;
+    Vec3 target = *reinterpret_cast<Vec3*>(cameraGetProviderEntryPayload(*block));
+    scene->cameraTarget = target;
     scene->viewStart = scene->cameraPos;
-    scene->viewCurrent.x = target[0];
-    scene->viewCurrent.y = target[1];
-    scene->viewCurrent.z = target[2];
+    scene->viewCurrent = target;
 
     // Walk the model's node table and record every node named "Dum_*".
     u32* resource = *reinterpret_cast<u32**>(*reinterpret_cast<s32*>(*reinterpret_cast<s32*>(scene->model + 8) + 0x2c) + 8);
     if (resource != NULL && (~*resource & 0x40000092) != 0) resource = NULL;
-    u32 nodesOffset = resource[0x38];
-    s32* nodes = nodesOffset != 0 ? reinterpret_cast<s32*>(nodesOffset + (s32)(resource + 0x38)) : NULL;
+    s32* nodes = static_cast<s32*>(reinterpret_cast<RelativePointer*>(&resource[0x38])->get());
     s32 nodeCount = nodes[0x18 / 4];
     for (s32 i = 0; i < nodeCount; i++) {
-        s32* table = nodes[0x1c / 4] != 0 ? reinterpret_cast<s32*>((s32)&nodes[0x1c / 4] + nodes[0x1c / 4]) : NULL;
+        u8* table = static_cast<u8*>(reinterpret_cast<RelativePointer*>(&nodes[0x1c / 4])->get());
         s32* node = NULL;
         if (table != NULL) {
-            s32* entry = reinterpret_cast<s32*>((s32)table + i * 0x10 + 0x28);
-            node = *entry != 0 ? reinterpret_cast<s32*>((s32)entry + *entry) : NULL;
+            node = static_cast<s32*>(reinterpret_cast<RelativePointer*>(table + i * 0x10 + 0x28)->get());
         }
-        const char* nodeName = *node != 0 ? reinterpret_cast<const char*>((s32)node + *node) : NULL;
+        const char* nodeName = static_cast<const char*>(reinterpret_cast<RelativePointer*>(node)->get());
         if (FUN_00100c4c(nodeName, "Dum_")) {
-            scene->dummies[scene->dummyCount].x = node[0xe];
-            scene->dummies[scene->dummyCount].y = node[0xf];
-            scene->dummies[scene->dummyCount].z = node[0x10];
+            Vec3 translation = *reinterpret_cast<Vec3*>(&node[0xe]);
+            scene->dummies[scene->dummyCount].x = translation.x;
+            scene->dummies[scene->dummyCount].y = translation.y;
+            scene->dummies[scene->dummyCount].z = translation.z;
             scene->dummyCount++;
         }
     }

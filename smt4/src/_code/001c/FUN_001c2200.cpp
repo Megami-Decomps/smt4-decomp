@@ -1,4 +1,4 @@
-/* NON_MATCHING: the per-vertex float loads and register allocation differ and the face-normal test is a float compare where retail compares the raw bits (194 vs 185 rows). */
+/* NON_MATCHING: VFP register allocation differs: retail keeps the four corners in s16-s27 loaded whole with vldmia and passes them straight on; armcc here splits two corners into scalars and reassociates the centre sums; the |normal.y| test compares the raw bits in both. */
 #include "common.h"
 
 extern "C" {
@@ -27,6 +27,12 @@ typedef struct CollisionQuad {
     /* 0xA4 */ u8 unkA4[4];
 } CollisionQuad;
 
+/* A mesh vertex or normal: the vector padded to 16 bytes. */
+typedef struct CollisionMeshVec4 {
+    CollisionVec3 v;
+    f32 w;
+} CollisionMeshVec4;
+
 /* A mesh face: four vertex indices, the normal index and one more word. */
 typedef struct MeshFace {
     s32 vertex[4];
@@ -35,9 +41,9 @@ typedef struct MeshFace {
 } MeshFace;
 
 typedef struct CollisionQuadMesh {
-    /* 0x00 */ CollisionVec3 *vertices;     /* stride 0x10 */
+    /* 0x00 */ CollisionMeshVec4 *vertices;
     /* 0x04 */ u8 unk04[4];
-    /* 0x08 */ CollisionVec3 *normals;      /* stride 0x10 */
+    /* 0x08 */ CollisionMeshVec4 *normals;
     /* 0x0C */ u8 unk0c[0x1C];
     /* 0x28 */ MeshFace *faces;
     /* 0x2C */ u32 faceCount;
@@ -55,7 +61,7 @@ typedef struct CollisionBuild {
 
 extern CollisionBuild g_mapCollision;
 
-void FUN_0026e80c(s32 shape, u8 buffer[68], CollisionVec3 a, CollisionVec3 b, CollisionVec3 c, CollisionVec3 d);
+void FUN_0026e80c(s32 shape, CollisionVec3 *reference, CollisionVec3 a, CollisionVec3 b, CollisionVec3 c, CollisionVec3 d);
 void statusCameraBuildAxisPlane(s32 shape, s32 index, CollisionVec3 *direction, f32 *length, CollisionVec3 buffer, CollisionVec3 a,
                   CollisionVec3 b);
 void FUN_0026e8a4(s32 shape, s32 kind, f32 *bounds, f32 *extent, CollisionVec3 a, CollisionVec3 b, CollisionVec3 c,
@@ -68,15 +74,16 @@ void FUN_001c2200(u32 owner)
 {
     for (u32 i = 0; i < g_mapCollision.mesh->faceCount; i++) {
         CollisionQuad *quad = &g_mapCollision.quads[g_mapCollision.quadCount];
-        MeshFace *face = &g_mapCollision.mesh->faces[i];
-        CollisionVec3 v0 = g_mapCollision.mesh->vertices[face->vertex[0]];
-        CollisionVec3 v1 = g_mapCollision.mesh->vertices[face->vertex[1]];
-        CollisionVec3 v2 = g_mapCollision.mesh->vertices[face->vertex[2]];
-        CollisionVec3 v3 = g_mapCollision.mesh->vertices[face->vertex[3]];
-        CollisionVec3 normal = g_mapCollision.mesh->normals[face->normal];
+        CollisionQuadMesh *mesh = g_mapCollision.mesh;
+        MeshFace *face = &mesh->faces[i];
+        CollisionVec3 v0 = mesh->vertices[face->vertex[0]].v;
+        CollisionVec3 v1 = mesh->vertices[face->vertex[1]].v;
+        CollisionVec3 v2 = mesh->vertices[face->vertex[2]].v;
+        CollisionVec3 v3 = mesh->vertices[face->vertex[3]].v;
+        CollisionVec3 normal = mesh->normals[face->normal].v;
 
         quad->normal = normal;
-        quad->planeD = normal.x * v0.x + normal.y * v0.y + normal.z * v0.z;
+        quad->planeD = quad->normal.x * v0.x + quad->normal.y * v0.y + quad->normal.z * v0.z;
         quad->center.x = (v0.x + v1.x + v2.x + v3.x) * 0.25f;
         quad->center.y = (v0.y + v1.y + v2.y + v3.y) * 0.25f;
         quad->center.z = (v1.z + v0.z + v2.z + v3.z) * 0.25f;
@@ -90,18 +97,18 @@ void FUN_001c2200(u32 owner)
         quad->active = 1;
         quad->unk09 = 0;
         if (__fabsf(quad->normal.y) < 0.9f) {
-            u8 buffer[68];
+            CollisionVec3 reference;
 
             if (__fabsf(quad->normal.x) >= __fabsf(quad->normal.z)) {
                 quad->shape = 0;
             } else {
                 quad->shape = 2;
             }
-            FUN_0026e80c(quad->shape, buffer, v0, v1, v2, v3);
-            statusCameraBuildAxisPlane(quad->shape, 0, &quad->edgeDirection[0], &quad->edgeLength[0], *(CollisionVec3 *)buffer, v0, v1);
-            statusCameraBuildAxisPlane(quad->shape, 1, &quad->edgeDirection[1], &quad->edgeLength[1], *(CollisionVec3 *)buffer, v1, v2);
-            statusCameraBuildAxisPlane(quad->shape, 2, &quad->edgeDirection[2], &quad->edgeLength[2], *(CollisionVec3 *)buffer, v2, v3);
-            statusCameraBuildAxisPlane(quad->shape, 2, &quad->edgeDirection[3], &quad->edgeLength[3], *(CollisionVec3 *)buffer, v3, v0);
+            FUN_0026e80c(quad->shape, &reference, v0, v1, v2, v3);
+            statusCameraBuildAxisPlane(quad->shape, 0, &quad->edgeDirection[0], &quad->edgeLength[0], reference, v0, v1);
+            statusCameraBuildAxisPlane(quad->shape, 1, &quad->edgeDirection[1], &quad->edgeLength[1], reference, v1, v2);
+            statusCameraBuildAxisPlane(quad->shape, 2, &quad->edgeDirection[2], &quad->edgeLength[2], reference, v2, v3);
+            statusCameraBuildAxisPlane(quad->shape, 2, &quad->edgeDirection[3], &quad->edgeLength[3], reference, v3, v0);
             FUN_0026e8a4(quad->shape, quad->kind, quad->bounds, &quad->extent, v0, v1, v2, v3);
             g_mapCollision.quadCount++;
         }

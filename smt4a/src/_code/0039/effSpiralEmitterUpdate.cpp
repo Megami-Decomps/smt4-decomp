@@ -1,10 +1,11 @@
-/* NON_MATCHING: typed rewrite; the calls, stores and block order (live particles first, the emit path between the
- * two halves of the live update) follow retail, the register allocation does not. Retail keeps the emitter in fp
- * and saves d8-d14: it reloads the scratch workspace's address at each vector operation and computes
- * -(0.5 * gravity) * step inside the loop, where this build keeps the workspace address in a callee-saved register
- * (spilling the emitter), hoists that product and saves d8-d15, which renumbers most VFP registers. Retail also
- * moves the up axis, the origin and the motion's direction through VFP registers (vldmia/vstmia) and reloads
- * the random axis from the workspace before normalising it. */
+/* NON_MATCHING: typed rewrite (546 raw / 496 shape rows); the calls, stores, block order (live particles first,
+ * the emit path between the two halves of the live update) and the 36-byte frame follow retail, the register
+ * allocation does not. Retail keeps the emitter in fp and saves d8-d14: it reloads the scratch workspace's address
+ * at each vector operation and computes -(0.5 * gravity) * step inside the loop (`vnmul 0.5, gravity`), where this
+ * build keeps the workspace address in a callee-saved register (spilling the emitter), hoists that product with a
+ * -0.5 constant and saves d8-d15, which renumbers most VFP registers. Retail also loads the definition's rotation
+ * and the duration behind it with one `vldmia {s0-s4}`, moves the up axis, the origin and the motion's direction
+ * through VFP registers (vldmia/vstmia) and reloads the random axis from the workspace before normalising it. */
 #include "gfx/SpiralEmitter.h"
 
 extern "C" {
@@ -82,12 +83,12 @@ extern "C" void effSpiralEmitterUpdate(ParticleEmissionState *emitter)
             motion->axis[1] = axis.y;
             motion->axis[2] = axis.z;
 
-            motion->speed = randomVariance(definition->speedVariance) * definition->speed;
-            f32 radius = randomVariance(definition->radiusVariance) * definition->radius;
-            f32 endRadius = randomVariance(definition->endRadiusVariance) * definition->endRadius;
+            motion->speed = EFF_RANDOM_VARIANCE(definition->speedVariance) * definition->speed;
+            f32 radius = EFF_RANDOM_VARIANCE(definition->radiusVariance) * definition->radius;
+            f32 endRadius = EFF_RANDOM_VARIANCE(definition->endRadiusVariance) * definition->endRadius;
             motion->radius = radius;
             motion->radiusStep = (endRadius - radius) / (f32)lifetime;
-            motion->phaseStep = randomVariance(definition->phaseStepVariance) * definition->phaseStep;
+            motion->phaseStep = EFF_RANDOM_VARIANCE(definition->phaseStepVariance) * definition->phaseStep;
             motion->phase = shiftRandomNextFraction(NULL) * 6.2831855f;
             motion->wave = FUN_001a1ee0(motion->phase * 40.743664f);
 
@@ -102,12 +103,12 @@ extern "C" void effSpiralEmitterUpdate(ParticleEmissionState *emitter)
             }
             particle->position = g_vectorScratch.first.vector;
 
-            motion->scale = randomVariance(definition->scaleVariance);
+            motion->scale = EFF_RANDOM_VARIANCE(definition->scaleVariance);
             if (angleMode == 2) {
                 motion->angleOffset = zero;
                 motion->angleScale = 1.0f;
             } else {
-                motion->angleScale = randomVariance(definition->angleVariance);
+                motion->angleScale = EFF_RANDOM_VARIANCE(definition->angleVariance);
                 if (angleMode != 1) {
                     motion->angleOffset = zero;
                 } else {

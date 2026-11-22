@@ -1619,7 +1619,6 @@
 0x002bb7ec nn_os_AddressSpaceManager_Allocate name
 0x002bb99c fsMountRegister between
 0x002bbbc8 cameraComposeMatrices between
-0x002bbe30 mathCopyIdentityMatrix between
 0x002bbed0 nn_math_ARMv6_MTX44PivotC_FAST name
 0x002bcbb0 nw_snd_internal_BasicSound_SetVolume name
 0x002bcc14 nw_snd_SoundStartable_StartSound name

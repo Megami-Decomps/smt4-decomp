@@ -108,7 +108,7 @@ int partyTryOpenLevelLimitPopup(void);
 int popupStateSetAndShow(...);
 void popupTryStartTimedPrompt(void);
 int FUN_00294cfc(...);
-int FUN_00295108(...);
+int popupTryStartStory(...);
 int FUN_002b80b8(void);
 void FUN_002b80fc(float x, float y, float z);
 int mapIfStart(...);
@@ -463,7 +463,7 @@ extern char *campGetState(void);
 /* Supplied declaration required: FUN_00294854. */
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_00294cfc. */
-/* Supplied declaration required: FUN_00295108. */
+/* Supplied declaration required: popupTryStartStory. */
 /* Supplied declaration required: FUN_00297c3c. */
 /* Supplied declaration required: mapCollisionLoad. */
 extern int messageGetChoiceResult(void);
@@ -1862,7 +1862,7 @@ LAB_00278b38:
                                 if (temp_v8 != 0) {
                                   temp_v8 = mapIfGetState();
                                   if (temp_v8 == 0) {
-                                    FUN_00295108(0);
+                                    popupTryStartStory(0);
                                     FUN_0020ecd4();
                                     partyTryOpenLevelLimitPopup();
                                     FUN_00294cfc(DAT_005f18e8);

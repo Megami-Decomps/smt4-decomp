@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail places the request-1 switch table between the two branches and keeps constants 1/0x4d2|1 in callee-saved registers (more saved registers); block layout and the flag-or differ. */
+/* NON_MATCHING: the request-1 switch now builds retail's six-entry table; retail has a linker-removed call (a NOP) after optionsGoalConditionCheck succeeds that is not identified yet, tests the table flag with bhi, saves fp/ip and keeps 0x4D2 in r4 for an orrne where this build pools 0x4D3, and the scene-start block's registers differ. */
 #include "common.h"
 #include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
@@ -55,6 +55,10 @@ void FUN_002d2000(void)
                     gameFlagsGetBlock()->departureIndex = 0;
                     gameFlagsGetBlock()->unk001C = 0;
                 }
+                break;
+            case 2:
+            case 4:
+                break;
             }
         } else {
             if (gameDataTableGetFlag() <= 0) {
@@ -62,7 +66,7 @@ void FUN_002d2000(void)
                 gameValueBlockSet(scene, 1);
                 if (scene == 9) {
                     u32 flag = 0x4D2;
-                    if (gameFlagIsSet(0x4D2) != 0)
+                    if (gameFlagIsSet(flag) != 0)
                         flag |= 1;
                     gameFlagSetValue(flag, 1, 1);
                     sectionValueSetClamped(gameDataGetTableValue() + 1);

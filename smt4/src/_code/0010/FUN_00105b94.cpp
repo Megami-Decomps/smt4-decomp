@@ -18,7 +18,7 @@ struct TitleSceneStorage {
 }
 
 extern "C" {
-void FUN_0010f144(TitleScene*);
+void asdRenderContextInitialize(TitleScene*);
 extern TitleScene* g_titleScene;
 
 // Allocate the full scene, construct its state blocks and publish it.
@@ -33,6 +33,6 @@ void FUN_00105b94()
         values[3] = 1.0f;
     }
     g_titleScene = (TitleScene*)scene;
-    FUN_0010f144((TitleScene*)scene);
+    asdRenderContextInitialize((TitleScene*)scene);
 }
 }

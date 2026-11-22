@@ -8,11 +8,11 @@ extern "C" StatBlock *stockFindSelectedUnit(void)
     StatBlock *result = NULL;
     SaveSlotTableIV *slots = &g_gameDataBlocks.saveBlock->body.slots;
 
-    if (g_gameDataBlocks.saveBlock->body.config.selection.selectedUnitId != 0) {
+    if (g_gameDataBlocks.saveBlock->body.config.selection.state.selectedUnitId != 0) {
         for (s32 slotIndex = 0; slotIndex < 24; ++slotIndex) {
             s32 recordIndex = slots->stock[slotIndex];
             if (recordIndex >= 0 &&
-                slots->units[recordIndex].id == g_gameDataBlocks.saveBlock->body.config.selection.selectedUnitId) {
+                slots->units[recordIndex].id == g_gameDataBlocks.saveBlock->body.config.selection.state.selectedUnitId) {
                 result = &slots->units[slots->stock[slotIndex]];
                 break;
             }

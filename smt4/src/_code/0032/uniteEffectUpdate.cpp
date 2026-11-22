@@ -18,17 +18,9 @@
 #include "sound/soundEffect.h"
 #include "code/Code0038.h"
 
-struct UniteMaterialCue {
-    u16 start;
-    u16 end;
-};
-
 extern "C" {
 s32 soundPlaySeUnpanned(u32 id);
 u32 soundSlotStopById(s32 id);
-extern const UniteMaterialCue DAT_004033b0[4]; // two materials, then two unused entries
-extern const UniteMaterialCue DAT_004033c0[4]; // three materials, then one unused entry
-extern const UniteMaterialCue DAT_004033d0[4]; // four materials
 
 struct EffectOwner;
 struct ModelSlotOwner;
@@ -129,11 +121,11 @@ extern "C" s32 uniteEffectUpdate(u32)
         const TextureTableEntryIV *portrait = asdTMTexTableEntryAt(0x24, 0x20E);
         const UniteMaterialCue *cues = NULL;
         if (cueWork->materialCount == 2)
-            cues = DAT_004033b0;
+            cues = g_uniteMaterialCues2;
         else if (cueWork->materialCount == 3)
-            cues = DAT_004033c0;
+            cues = g_uniteMaterialCues3;
         else if (cueWork->materialCount == 4)
-            cues = DAT_004033d0;
+            cues = g_uniteMaterialCues4;
         for (s32 i = 0; i < cueWork->materialCount; ++i) {
             const UniteMaterialCue &cue = cues[i];
             s32 fadeInStart = cue.start - 5;

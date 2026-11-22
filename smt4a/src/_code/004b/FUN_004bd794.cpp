@@ -70,7 +70,7 @@ void unitStatusResetSpriteState(void);
 void sysPlaySe(u32 id);
 void paramsClearPacket(void *packet);
 
-void FUN_004be990(PartnerScreen *screen, s32 a, s32 b);
+void partnerMenuStartPanelSlide(PartnerScreen *screen, s32 a, s32 b); // declcheck: local (the shared declaration does not compile here or changes this unit)
 u8 FUN_002857b8(void);
 
 /* Starts the partner screen in `mode`: lists the owned partners (their party slot, 0 when not in
@@ -143,7 +143,7 @@ void FUN_004bd794(PartnerScreen *screen, u8 mode)
         for (s32 i = 0; i < 4; i++) {
             uiSpriteStateInitFromSource((UiSpriteState *)((u8 *)screen + 0x30 + i * 0x8C), 0x11, 0, (UiResourceParameters *)(screen->params), 0x6A, 1.0f);
         }
-        FUN_004be990(screen, 0, -1);
+        partnerMenuStartPanelSlide(screen, 0, -1);
         screen->unk344 = 0;
     } else {
         gridNavigationConfigure(screen->list, count, count, 1, 1, 1);

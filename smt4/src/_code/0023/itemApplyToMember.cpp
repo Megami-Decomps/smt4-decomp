@@ -9,7 +9,7 @@ int padClearBits(...);
 int btlSourceGetMaxHp(...);
 int objectFlagsClear(...);
 int btlLinkGetMaxHp(...);
-int FUN_002e33f4(...);
+int itemEffectApplyToUnit(...);
 int SBORROW4(...);
 
 typedef struct fn_00232b68_arg0 fn_00232b68_arg0;
@@ -51,7 +51,7 @@ extern int playerPadTestBit(unsigned int);
 extern int flagWordTestBit(int, unsigned int);
 extern int gameGetUnitRecord(void);
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_002e33f4. */
+/* Supplied declaration required: itemEffectApplyToUnit. */
 extern fn_00232b68_arg0 *itemApplyPermanentStatBoost(fn_00232b68_arg0 *, fn_00232b68_arg1 *);
 extern int recordFilterMaskByKind(fn_00232b68_arg1 *, unsigned short);
 
@@ -339,7 +339,7 @@ LAB_00233114:
     temp_v6 = playerPadTestBit(1);
     if (temp_v6 == 0) {
       if ((param_2[1].field_0x2 & 2) != 0) {
-        FUN_002e33f4(param_1,param_2,pfVar11,param_3);
+        itemEffectApplyToUnit(param_1,param_2,pfVar11,param_3);
         pfVar11 = param_1;
       }
       return (int)pfVar11;
@@ -441,7 +441,7 @@ LAB_00233114:
     }
   }
   if ((param_2[1].field_0x2 & 2) != 0) {
-    FUN_002e33f4(param_1,param_2,pfVar11,param_3);
+    itemEffectApplyToUnit(param_1,param_2,pfVar11,param_3);
     pfVar11 = param_1;
   }
   return (int)pfVar11;

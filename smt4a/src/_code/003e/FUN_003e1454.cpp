@@ -67,7 +67,7 @@ UnitDataBlock *btlFindEntryBlockByMemberId(BtlStartState *state, s32 resourceId)
 s32 pairedEntryTableContains(BtlStartState *state, u16 id);
 void btlQueueActionMessage(s32 a, s32 b, u32 id, s32 c, s32 d, s32 e, s32 f);
 void FUN_003ed6e8(BtlStartState *state);
-void FUN_003f26d4(BtlStartState *state);
+void btlAiBuildTurnOrder(BtlStartState *state);
 void frameTexRequestFade(s32 mode);
 void FUN_003e0bb8(BtlStep *request, BtlStartState *state);
 void contentRequestStart(BtlStep *request, BtlStartState *state);
@@ -105,7 +105,7 @@ void FUN_003e1454(BtlStep *request, BtlStartState *state)
             }
             btlQueueActionMessage(0, 0, 0x100021B, 0, 0, 0, 0);
             FUN_003ed6e8(state);
-            FUN_003f26d4(state);
+            btlAiBuildTurnOrder(state);
             state->flags = state->flags | g_btlEncount.formation | g_btlEncount.ready;
         }
         btlStepEnter(request, 0x17);

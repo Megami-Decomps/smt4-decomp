@@ -4,7 +4,7 @@
 
 extern "C" {
 extern MapCollisionFaceTable g_mapCollision;
-void FUN_0026e80c(s32 flag, Vec3f *out, f32 hint);
+void FUN_0026e80c(s32 axis, Vec3f *out, Vec3f a, Vec3f b, Vec3f c, Vec3f d);
 void statusCameraBuildAxisPlane(s32 kind, s32 corner, f32 *edge, f32 *limit, Vec3f origin, Vec3f from, Vec3f to);
 void FUN_0026e8a4(s32 kind, s32 count, f32 *bounds, f32 *bounds2, Vec3f a, Vec3f b, Vec3f c, Vec3f d);
 
@@ -12,14 +12,15 @@ void FUN_0026e8a4(s32 kind, s32 count, f32 *bounds, f32 *bounds2, Vec3f a, Vec3f
 void FUN_001c2778(u32 owner)
 {
     for (u32 i = 0; i < g_mapCollision.mesh->faceCount; i++) {
-        const MeshFace *source = &g_mapCollision.mesh->faces[i];
+        CollisionMesh *mesh = g_mapCollision.mesh;
+        const MeshFace *source = &mesh->faces[i];
         CollisionFace *face = &g_mapCollision.faces[g_mapCollision.faceCount];
-        const MeshVec4 *vertices = g_mapCollision.mesh->vertices;
+        const MeshVec4 *vertices = mesh->vertices;
         Vec3f v0 = vertices[source->vertex[0]].v;
         Vec3f v1 = vertices[source->vertex[1]].v;
         Vec3f v2 = vertices[source->vertex[2]].v;
         Vec3f v3 = vertices[source->vertex[3]].v;
-        const MeshVec4 *normal = &g_mapCollision.mesh->normals[source->normal];
+        const MeshVec4 *normal = &mesh->normals[source->normal];
         face->normal = normal->v;
         face->distance = normal->v.x * v0.x + normal->v.y * v0.y + normal->v.z * v0.z;
         face->center.x = (v0.x + v1.x + v2.x + v3.x) * 0.25f;
@@ -37,7 +38,7 @@ void FUN_001c2778(u32 owner)
         face->unk09 = 0;
         face->unk0a = 0;
         Vec3f reference;
-        FUN_0026e80c(1, &reference, v0.x);
+        FUN_0026e80c(1, &reference, v0, v1, v2, v3);
         statusCameraBuildAxisPlane(face->kind, 0, face->edgeA, &face->limitA, reference, v0, v1);
         statusCameraBuildAxisPlane(face->kind, 1, face->edgeB, &face->limitB, reference, v1, v2);
         statusCameraBuildAxisPlane(face->kind, 2, face->edgeC, &face->limitC, reference, v2, v3);

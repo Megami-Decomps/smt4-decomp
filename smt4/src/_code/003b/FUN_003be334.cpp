@@ -1,4 +1,6 @@
-/* NON_MATCHING: readable rebuild from asm of the battle damage/value estimate for a skill or an item-like record; armcc here orders the local action-info block and the spilled arguments differently (retail pushes r0-r3 and d0 and reloads the stack arguments), and the 0.01f/25% scaling and the random bonus are scheduled differently. */
+/* NON_MATCHING: retail dispatches the skill kind through a two-entry jump table (explicit empty cases 2-8, as the
+ * sibling FUN_003bdab0 lists them, give that table here) and does not thread case 0's cleared `scaled` past the random
+ * bonus test (this build branches straight past it); with the explicit cases the threading costs more rows (52 rows). */
 #include "battle/BtlMainAccess.h"
 #include "battle/BtlEntryLookup.h"
 #include "gamedata/SkillDataLookup.h"
@@ -48,27 +50,33 @@ s32 FUN_003be334(s32 wantDamage, s32 skillId, u32 unused, s32 recordId, f32 mult
     s32 value = -1;
     bool scaled = true;
     if (!info.flagB && info.flagA)
-        return -1;
+        return damage;
     if (skill != NULL) {
         if (skill->flags & 0x7F0000)
-            return -1;
+            return damage;
         f32 power = (f32)skill->power;
-        if (skill->kind == 1) {
-            if (skill->flags & 0x8000) {
-                scaled = false;
-                damage = targetEntry->data.mp / 2;
-            } else if (info.flagB) {
-                damage = FUN_003be918(skillId, attacker, target, info.columnArg, info.rowArg, power, multiplier);
+        switch (skill->kind) {
+        case 1:
+            if ((skill->flags & 0x8000) == 0) {
                 if (info.flagB) {
-                    damage /= 3;
-                    if (damage > 100)
-                        damage = 100;
+                    damage = FUN_003be918(skillId, attacker, target, info.columnArg, info.rowArg, power, multiplier);
+                    if (info.flagB) {
+                        damage /= 3;
+                        if (damage > 100)
+                            damage = 100;
+                    }
+                    if (attackerEntry->data.statusFlags & 0x200)
+                        damage -= damage * 25 / 100;
+                    if (targetEntry->data.statusFlags & 0x80)
+                        damage += damage * 25 / 100;
                 }
-                if (attackerEntry->data.statusFlags & 0x200)
-                    damage -= damage * 25 / 100;
-                if (targetEntry->data.statusFlags & 0x80)
-                    damage += damage * 25 / 100;
+                break;
             }
+            /* fall through: the skill halves the target's HP */
+        case 0:
+            scaled = false;
+            damage = targetEntry->data.mp / 2;
+            break;
         }
         if (!(battle->battleMask & 0x40000) && scaled && damage > 0 && !(battle->editorMask & (0x40ULL << 32)) &&
             !(battle->encounter.flags & 0x20000000))
@@ -80,18 +88,23 @@ s32 FUN_003be334(s32 wantDamage, s32 skillId, u32 unused, s32 recordId, f32 mult
         return damage;
     }
     if (record == NULL)
-        return -1;
+        return value;
     if (record->healMp != 0)
         value = record->healMp;
     if (record->curesMp != 0) {
-        s32 base = target < 109 ? (u16)btlFindEntryBlockByMemberId(battle, target)->maxMp /* zero-extended in retail */ : gameGetUnitRecord(target - 109)->maxMp;
-        value = (s32)((f32)(s16)(base * record->curesMp) * 0.01f);
+        if (target < 109)
+            value = (s32)((f32)((s16)btlFindEntryBlockByMemberId(battle, target)->maxMp * record->curesMp) * 0.01f);
+        else
+            value = (s32)((f32)((s16)gameGetUnitRecord(target - 109)->maxMp * record->curesMp) * 0.01f);
     }
     if (wantDamage != 0)
         return damage;
-    bool capped = target < 109 ? (targetEntry->data.statusFlags & 8) != 0 : flagWordTestBit(gameGetUnitRecord(target - 109), 3) != 0;
-    if (capped && value > 1)
+    if (target < 109) {
+        if ((targetEntry->data.statusFlags & 8) != 0 && value > 1)
+            value = 1;
+    } else if (flagWordTestBit(gameGetUnitRecord(target - 109), 3) != 0 && value > 1) {
         value = 1;
+    }
     return value;
 }
 

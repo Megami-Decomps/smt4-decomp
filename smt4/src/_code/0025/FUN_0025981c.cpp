@@ -4,7 +4,7 @@ extern "C" {
 
 u32 FUN_0025981c(void)
 {
-    return g_gameDataBlocks.saveBlock->body.config.selection.money;
+    return g_gameDataBlocks.saveBlock->body.config.selection.state.money;
 }
 
 } /* extern "C" */

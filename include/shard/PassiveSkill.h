@@ -39,7 +39,15 @@ struct PassiveSkillRecord {
             /* 0x35 */ u8 tier;
         } rank;
     };
-    /* 0x38 */ u32 affinity;
+    union {
+        /* 0x38 */ u32 affinity;
+        struct {
+            u32 unk0 : 11;
+            u32 element : 5;      /* the skill element the passive applies to */
+            u32 resistance : 4;   /* what it does to that element (btlSkillHitFlags maps it to a hit flag) */
+            u32 unk20 : 12;
+        } affinityBits;
+    };
 };
 
 typedef char PassiveSkillRecordBonusOffsetCheck[

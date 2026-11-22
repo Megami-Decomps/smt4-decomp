@@ -1,107 +1,91 @@
-/* NON_MATCHING: template register allocation, packed field updates and output store scheduling differ; -O2 candidate. */
-#include "addon/aocMain.h"
+/* NON_MATCHING: the template lookup is dataTable02GetEntryByIndex's body and the expansion FUN_003bbfdc's; retail
+ * copies the template into other registers (one ldm of words 1-4), stores the six coordinates as str/stm/stm right after
+ * the index, keeps the flag word in a register across both flag tests and clears the mode bits with two bic (127 rows). */
 #include "gamedata/DataTable.h"
+#include "gfx/PackedRenderState.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "addon/AocSystem.h"
 
+/* The sprite metadata row aocEntryFind returns here: a default texture bank, page and resource. */
 struct SpriteMetadata {
-    u16 id;
-    u8 textureBank;
-    u8 texturePage;
-    u32 texture;
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u8 bank;
+    /* 0x03 */ u8 page;
+    /* 0x04 */ u32 resource;
 };
-struct SpriteTemplate {
-    u32 flags;
-    union {
-        u32 packed;
-        struct { u32 bank : 8; u32 page : 8; u32 reserved : 16; } texture;
-    } source;
-    u32 texture;
-    u32 bounds[3];
-    u32 dimensions;
-};
-struct SpriteDescriptor {
-    u32 coordinates[6]; // 0x00
-    union { u32 control; s16 index; } state; // 0x18
-    union {
-        u32 flags;
-        struct { u8 unk1c[2]; u8 blendMode; u8 textureBank; } bytes;
-    } render; // 0x1c
-    s8 texturePage; // 0x20
-    u8 unk21[3];
-    u32 texture; // 0x24
-    u16 offsetX, offsetY; // 0x28
-    u8 color[4]; // 0x2c
-    f32 scaleX, scaleY; // 0x30
-    u8 hidden; // 0x38
-    u8 unk39[0x17];
-    u16 width, height; // 0x50
-    u8 unk54[0x20];
-};
-struct Table02Sub2Entry;
-extern "C" {
-SpriteMetadata *aocEntryFind(void *, u32);
-Table02Sub2Entry *aocFindSpriteTemplateByKey(AocSystem *, u32);
 
-void spriteDescriptorInitFromTemplate(SpriteDescriptor *sprite, s32 index, void *metadataTable, u32 metadataId,
-                  s32 bank, s32 page)
+extern "C" {
+SpriteMetadata *aocEntryFind(void *table, u32 id); // declcheck: local (EncountData.h types it for the encounter table)
+const PackedRenderParameters *aocFindSpriteTemplateByKey(AocSystem *system, u32 key); // declcheck: local (EncountData.h returns the encounter group view of the same row)
+
+/* Template `index` (an add-on one first); the section's first row for a bad index: the body of
+ * dataTable02GetEntryByIndex. */
+static __inline const PackedRenderParameters *templateByIndex(s32 index)
 {
-    memClear(sprite, sizeof(*sprite));
-    sprite->coordinates[0] = 0;
-    sprite->coordinates[1] = 0;
-    sprite->coordinates[2] = 0;
-    sprite->coordinates[3] = 0;
-    sprite->coordinates[4] = 0;
-    sprite->coordinates[5] = 0;
-    sprite->scaleX = 1.0f;
-    sprite->scaleY = 1.0f;
-    SpriteMetadata *metadata = aocEntryFind(metadataTable, metadataId);
     void *section = dataTableGet(2, 2);
-    const SpriteTemplate *source = (const SpriteTemplate *)dataTableGetEntries(section);
-    if (index >= 0 && (u32)index < dataTableGetCount(section)) {
-        const SpriteTemplate *download = (const SpriteTemplate *)aocFindSpriteTemplateByKey(g_aocSystem, index);
-        if (download)
-            source = download;
-        else
-            source += index;
+    const PackedRenderParameters *entries = (const PackedRenderParameters *)dataTableGetEntries(section);
+    if (index < 0 || (u32)index >= dataTableGetCount(section)) {
+        return entries;
     }
-    SpriteTemplate entry = *source;
-    if (!entry.source.texture.bank) {
-        entry.source.texture.bank = metadata->textureBank;
-        entry.source.texture.page = metadata->texturePage;
+    const PackedRenderParameters *entry = aocFindSpriteTemplateByKey(g_aocSystem, index);
+    if (entry == NULL) {
+        entry = &entries[index];
+    }
+    return entry;
+}
+
+/* Initialises a 0x74-byte sprite descriptor from template `index`, taking the texture bank, page and resource the
+ * template leaves unset from the metadata row; a positive bank and page given here replace both. */
+void spriteDescriptorInitFromTemplate(PackedRenderState *sprite, s32 index, void *metadataTable, u32 metadataId,
+                                      s32 bank, s32 page)
+{
+    memClear(sprite, 0x74);
+    sprite->values[0] = 0;
+    sprite->values[1] = 0;
+    sprite->values[2] = 0;
+    sprite->values[3] = 0;
+    sprite->values[4] = 0;
+    sprite->values[5] = 0;
+    sprite->scale[0] = 1.0f;
+    sprite->scale[1] = 1.0f;
+    SpriteMetadata *metadata = aocEntryFind(metadataTable, metadataId);
+    PackedRenderParameters parameters = *templateByIndex(index);
+    if (parameters.kind == 0) {
+        parameters.kind = metadata->bank;
+        parameters.variant = metadata->page;
     }
     if (bank > 0 && page > 0) {
-        entry.source.texture.bank = bank;
-        entry.source.texture.page = page;
+        parameters.kind = bank;
+        parameters.variant = page;
     }
-    if (!entry.texture)
-        entry.texture = metadata->texture;
-    sprite->state.index = index;
-    sprite->coordinates[0] = entry.bounds[0] & 0xffff;
-    sprite->coordinates[1] = entry.bounds[0] >> 16;
-    sprite->coordinates[2] = entry.bounds[1] & 0xffff;
-    sprite->coordinates[3] = entry.bounds[1] >> 16;
-    sprite->coordinates[4] = entry.bounds[2] & 0xffff;
-    sprite->coordinates[5] = entry.bounds[2] >> 16;
-    sprite->hidden = 0;
-    sprite->render.bytes.textureBank = entry.source.texture.bank;
-    sprite->texturePage = (s8)entry.source.texture.page;
-    sprite->texture = entry.texture;
-    sprite->state.control |= 0x40000000;
-    sprite->render.bytes.blendMode = ((entry.flags >> 2) & 7) - 1;
-    if (entry.flags & 1)
-        sprite->state.control |= 0x10000;
-    if (entry.flags & 2)
-        sprite->state.control |= 0x20000;
-    sprite->width = entry.dimensions;
-    sprite->height = entry.dimensions >> 16;
-    sprite->offsetX = 0;
-    sprite->offsetY = 0;
-    sprite->render.flags &= ~0x3cu;
-    sprite->color[0] = 0;
-    sprite->color[1] = 0;
-    sprite->color[2] = 0;
-    sprite->color[3] = 0;
-    sprite->state.control |= 0x100000;
+    if (parameters.resource == 0)
+        parameters.resource = metadata->resource;
+    sprite->templateIndex = index;
+    for (s32 i = 0; i < 6; ++i) {
+        sprite->values[i] = parameters.values[i];
+    }
+    sprite->active = 0;
+    sprite->formatInfo.kind = parameters.kind;
+    sprite->variant = parameters.variant;
+    sprite->resource = parameters.resource;
+    sprite->flags |= 0x40000000;
+    u32 format = (parameters.flags >> 2) & 7;
+    sprite->formatInfo.format = format - 1;
+    if (parameters.flags & 1) {
+        sprite->flags |= 0x10000;
+    }
+    if (parameters.flags & 2) {
+        sprite->flags |= 0x20000;
+    }
+    sprite->offsetX = parameters.offsetX;
+    sprite->offsetY = parameters.offsetY;
+    sprite->phase = 0;
+    sprite->timer = 0;
+    sprite->mode &= ~0x3C;
+    sprite->red = 0;
+    sprite->green = 0;
+    sprite->blue = 0;
+    sprite->alpha = 0;
+    sprite->flags |= 0x100000;
 }
 }

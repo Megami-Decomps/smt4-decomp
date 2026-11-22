@@ -13,7 +13,7 @@ struct CellListController {
 };
 extern "C" void FUN_00499d14(CellListController *controller);
 extern "C" void FUN_004964e0(CellListController *controller, s32 refresh);
-extern "C" void FUN_00496a0c(CellListController *controller, s32 refresh);
+extern "C" void shopScreenRebuildForSelection(CellListController *controller, s32 refresh);
 
 static __inline void cellListEnterState(CellListController *controller, s32 next)
 {
@@ -34,5 +34,5 @@ extern "C" void _ZN9Obj53604412FUN_004969a8Ev(CellListController *controller)
         FUN_004964e0(controller, 1);
         return;
     }
-    FUN_00496a0c(controller, 1);
+    shopScreenRebuildForSelection(controller, 1);
 }

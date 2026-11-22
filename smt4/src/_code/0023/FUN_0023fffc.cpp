@@ -56,7 +56,7 @@ struct BattleMain {
 
 extern "C" {
 
-void FUN_0023fbdc(BattleLoadState* state, BattleMain* battle);
+void battleEncounterStepShowAmbushMarkers(BattleLoadState* state, BattleMain* battle);
 s32 pairedEntryTableContains(BattleMain* battle, u16 id);
 void btlQueueKeyedScalarReflectAction(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
 void frameTexApplyMode(s32 mode);
@@ -121,7 +121,7 @@ void FUN_0023fffc(BattleLoadState* state, BattleMain* battle)
     if (screenFadesAllReady() != 0) {
         state->phase = 0xe;
         state->unk0c = 0;
-        FUN_0023fbdc(state, battle);
+        battleEncounterStepShowAmbushMarkers(state, battle);
     }
 }
 

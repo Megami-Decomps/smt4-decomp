@@ -72,6 +72,11 @@ protected:
     /* The list states' tests of the item under the cursor: whether it can be sold (inline in
      * Obj536044__FUN_00499fdc.cpp) and whether the player can pay for it (shop/ShopBuyItem.h, inlined by
      * FUN_0049bd20 and itemMenuHandleSelectionInput). Slot 8 is the selling list. */
+    /* The category menu's helpers, inline in Obj536044__FUN_004995b0.cpp: running the shop's scripts
+     * with the menu cursor, and opening a weapon or armour category's list. */
+    void advanceMenu(UiSpriteState *cursor);
+    void openCategory(s32 category);
+
     bool canSellItem(const EquipmentMenuItem *item);
     bool canBuyItem(const EquipmentMenuItem *item);
 
@@ -82,7 +87,10 @@ protected:
     /* 0x10 */ s32 previousState;
     /* 0x14 */ s32 mode;                /* 0 and 1: the equipment pages; with 1 the restricted slot 0 can still be left */
     /* 0x18 */ u8 restricted;           /* slots 0 and 3 take their restricted neighbours, as they do until flag 0x410 is set */
-    /* 0x19 */ u8 unk19[9];
+    /* 0x19 */ u8 unk19[3];
+    /* 0x1C */ s32 kind;                /* which shop this is; its sale has its own flag (statsTestFlag) */
+    /* 0x20 */ u8 unk20;
+    /* 0x21 */ u8 onSale;               /* the shop greets with its sale script ("shop_in_sale") */
     /* 0x22 */ u8 previewing;           /* the selected item's preview is up */
     /* 0x23 */ u8 previewReady;         /* the equipment preview model has been requested */
     /* 0x24 */ Handler states[22];
@@ -90,7 +98,8 @@ protected:
     /* 0x184 */ u32 tableGroup;
     /* 0x188 */ u8 unk188[4];
     /* 0x18C */ ScriptProcess *controller;  /* the shop script */
-    /* 0x190 */ u8 unk190[0x204];
+    /* 0x190 */ ScriptProcess *menuScript;  /* the category menu's script ("shop_select") */
+    /* 0x194 */ char menuText[0x200];       /* the menu's rows, one line each (shopSelectEntryStart) */
     /* 0x394 */ void *resultTable;
     /* 0x398 */ void *resultMessages;
     /* 0x39C */ ScriptProcess *resultScript;
@@ -113,7 +122,7 @@ protected:
     /* 0x16000 */ u32 panel;
     /* 0x16004 */ s32 previewEnabled;       /* the selected item is shown on the character */
     /* 0x16008 */ u32 previewedId;          /* the item shown on the character */
-    /* 0x1600C */ u8 unk1600C[0x10];
+    /* 0x1600C */ s32 rows[4];              /* what each row of the category menu stands for */
     /* 0x1601C */ s32 visibleCount;         /* how many categories the menu shows */
     /* 0x16020 */ u8 unk16020[8];
     /* 0x16028 */ MoriModelContent *resource;  /* the equipment preview model */
@@ -122,8 +131,8 @@ protected:
     /* 0x16030 */ s16 touchRegionCount;
     /* 0x16032 */ u8 unk16032[2];
     /* 0x16034 */ u32 lastSelectedId;       /* the item the preview was last restarted for */
-    /* 0x16038 */ u32 cleared[3];
-    /* 0x16044 */ u8 clearedFlags[2];
+    /* 0x16038 */ u32 menuCursors[3];       /* where each category menu's cursor returns to: [0] the armour page's, [1] the weapons page's, [2] the top menu's row */
+    /* 0x16044 */ u8 menuCursorSet[2];      /* set while a page menu is started ([0] armour, [1] weapons): it opens at its remembered cursor */
     /* 0x16046 */ u8 unk16046[2];
     /* 0x16048 */ s32 quantityIndex;        /* the list index the quantity panel was set up for, -1: none */
 
@@ -160,6 +169,10 @@ struct Obj536044LayoutCheck {
     char previewedId[offsetof(Obj536044, previewedId) == 0x16008 ? 1 : -1];
     char lastSelectedId[offsetof(Obj536044, lastSelectedId) == 0x16034 ? 1 : -1];
     char mode[offsetof(Obj536044, mode) == 0x14 ? 1 : -1];
+    char kind[offsetof(Obj536044, kind) == 0x1C ? 1 : -1];
+    char onSale[offsetof(Obj536044, onSale) == 0x21 ? 1 : -1];
+    char menuScript[offsetof(Obj536044, menuScript) == 0x190 ? 1 : -1];
+    char rows[offsetof(Obj536044, rows) == 0x1600C ? 1 : -1];
     char resultScript[offsetof(Obj536044, resultScript) == 0x39C ? 1 : -1];
     char previewReady[offsetof(Obj536044, previewReady) == 0x23 ? 1 : -1];
     char panelRect[offsetof(Obj536044, panelRect) == 0x3B8 ? 1 : -1];

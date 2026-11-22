@@ -59,9 +59,9 @@ void FUN_004cae0c(void *context, void *state, s32 pending, u32 target);
 void btlReflectQueueKind44(s32 offset, StateObject* object, BattleUnitEntry* unit, s32 a, s32 b, s32 c);
 void FUN_004fe764(s32 offset, StateObject* object, BattleUnitEntry* unit, u32 kind, s32 arg);
 void btlQueueActionMessage(s32 offset, StateObject* object, s32 id, s32 a, s32 b, s32 c, s32 d);
-void FUN_004f1c5c(s32 camera, s32 arg);
+void btlCameraStartMove(s32 camera, s32 arg);
 void FUN_003ed6e8(BattleState* state);
-void FUN_003f26d4(BattleState* state);
+void btlAiBuildTurnOrder(BattleState* state);
 void FUN_004aa2e0(BtlUiA *ui, s32 arg);
 void FUN_003e0cd4(StateObject* object, BattleState* state);
 
@@ -118,13 +118,13 @@ void FUN_003e16cc(StateObject* object, BattleState* state)
         }
     }
     if (*reinterpret_cast<s32*>(g_btlCamera + 0x34) != 0) {
-        FUN_004f1c5c(g_btlCamera, 0);
+        btlCameraStartMove(g_btlCamera, 0);
     } else {
-        FUN_004f1c5c(g_btlCamera, 0x78);
+        btlCameraStartMove(g_btlCamera, 0x78);
     }
     if ((DAT_00573858 & state->pendingMask) == 0) {
         FUN_003ed6e8(state);
-        FUN_003f26d4(state);
+        btlAiBuildTurnOrder(state);
         state->pendingMask = DAT_00573878 | state->pendingMask | DAT_00573890;
         FUN_004aa2e0(g_btlUiBlock, 0);
     }

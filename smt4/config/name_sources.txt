@@ -6096,3 +6096,30 @@
 002276f8 btlEffectNumberedRelease inferred releases the numbered effect (clears its flag)
 0023c6e4 asdModelSetUnitSlotColor inferred forwards r, g, b to asdModelSlotSetColor for the global unit's model: sets a colour, clears nothing
 003c7f08 objModelSlotSetColor inferred forwards r, g, b to asdModelSlotSetColor: sets a colour
+0010f144 asdRenderContextInitialize inferred twin of smt4a asdRenderContextInitialize (same body, offsets +4/+12)
+0044dc68 g_whisperLineData inferred the whisper effect's line tables whisperEffectStart walks (WhisperAnimationView)
+002ee6f8 eventTexCreate inferred creates the 2D event texture job and its EventTex work
+0022413c whisperEffectDraw inferred draws the whisper effect's lines
+002f3904 registeredBoundsDrawDebug inferred draws the corners of every registered bounds entry (drawRegisteredBoundsCorners, 8 calls)
+002595e0 saveSelectReserveUnit inferred selects a reserve unit through the save selection state (GameSaveSelectionState)
+00246134 btlSkillHitFlags inferred computes a skill's hit flags from the passive skill affinity bits and ranks
+002e33f4 itemEffectApplyToUnit inferred applies an item effect of a kind to a unit (random roll < 25)
+00262a8c mapCollisionQueueEdgeQuad inferred queues a collision quad around an edge's centre (mapCollisionQueueQuad)
+00352920 archiveReadContentHeaderPair inferred opens "/MetaDataContentHeader.bin" and reads the content header pair
+003c2fe8 btlDebugDrawSpriteHelp inferred draws the battle debug sprite help labels
+00106a18 renderCtxSetupScreenCamera inferred sets up the render context's screen camera
+0011aa94 guestWinDraw evidence registered as the "GuestWin DrawUpLeft/Right" task's draw
+0025ee64 btlCommandMenuDraw inferred draws the battle command menu's rows
+00330f80 btlCommandMenuKindAt inferred the command kind of a battle command menu row
+00330ac8 uniteEffectDraw inferred draws the fusion effect's sprites over its model
+00240d88 uniteEffectDrawMaterial inferred draws one material portrait of the fusion effect (opening, shown, closed)
+004033b0 g_uniteMaterialCues2 inferred the material cues of a two-demon fusion (UniteMaterialCue)
+004033c0 g_uniteMaterialCues3 inferred the material cues of a three-demon fusion (UniteMaterialCue)
+004033d0 g_uniteMaterialCues4 inferred the material cues of a four-demon fusion (UniteMaterialCue)
+003a3354 shopUpdateCategoryMenu inferred updates the shop's category menu (Scene3a menu, cursors)
+0022e818 equipmentMenuBuildVisibleCategories inferred twin of smt4a equipmentMenuBuildVisibleCategories
+0023fbdc battleEncounterStepShowAmbushMarkers inferred encounter step that queues the ambush markers of the shown units
+00336bec battleShowUnitMarkers inferred queues the markers of the shown units (BattleMarkerTimings)
+00439a20 g_btlMarkerTimings inferred the battle marker timing table (BattleMarkerTimings)
+0024082c btlCameraStartMove inferred starts a battle camera move of a duration
+0028fc60 itemCanUseOnParty inferred twin of smt4a itemCanUseOnParty

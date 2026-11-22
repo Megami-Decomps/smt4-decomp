@@ -27,7 +27,7 @@ void sysFatalBreak(void);
 s32 FUN_00426800(u32 *attribute, u8 *metadata, u32 kind, u64 id, u32 flags);
 s32 handleRequestSubmit(ArchiveMountState *state, u32 kind, u64 id, u32 first,
                         u32 second, u32 third, void *header, u32 headerSize, u32 flags);
-s32 FUN_00427360(ArchiveMountState *state);
+s32 archiveReadContentHeaderPair(ArchiveMountState *state);
 
 /* Open a packed archive ID, translating unavailable media errors and cleaning failed handles. */
 WindowStatusResult aocOpenPackedArchive(ArchiveMountState *state, const ArchiveMountOptions *options)
@@ -73,7 +73,7 @@ WindowStatusResult aocOpenPackedArchive(ArchiveMountState *state, const ArchiveM
     if (nnResultIsFailure(result)) {
         return WindowStatusResult(result);
     }
-    result = FUN_00427360(state);
+    result = archiveReadContentHeaderPair(state);
     if (!nnResultIsSuccess(result)) {
         vtableRunIfPresent(state->handle);
         state->words.low = 0;

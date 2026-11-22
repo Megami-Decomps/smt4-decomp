@@ -33,7 +33,7 @@ typedef struct ButtonHelpText {
     /* 0x00 */ u32 style;
     /* 0x04 */ ButtonHelpTextLine lines[2];
     /* 0x84 */ u32 highlightStyle;
-    /* 0x88 */ u8 highlightLine;
+    /* 0x88 */ s8 highlightLine;
     /* 0x89 */ u8 highlightStart;
     /* 0x8A */ u8 highlightLength;
     /* 0x8B */ u8 unk8B;
@@ -55,7 +55,7 @@ typedef struct ButtonHelpWork {
     /* 0x4AC */ s16 touchRegions[6];     /* each slot's touch region id */
     /* 0x4B8 */ u8 touchPressed[6];      /* the slot's region is selected in touch selection modes 1 and 2 */
     /* 0x4BE */ u8 touchSelected[6];     /* the slot's region is selected in the other modes */
-    /* 0x4C4 */ u8 drawEnabled;
+    /* 0x4C4 */ s8 drawEnabled;
     /* 0x4C5 */ s8 panelState;
     /* 0x4C6 */ s8 panelSliding;         /* mode 1 slides the panel sprites in (s8: read through a work + 0x400 base) */
     /* 0x4C7 */ u8 touchSuspended;       /* nonzero: the touch update leaves the slot flags alone */

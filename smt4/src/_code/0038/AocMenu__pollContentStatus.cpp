@@ -1,14 +1,12 @@
 #include "code/Code0023.h"
-/* NON_MATCHING: block layout of the 0x66/default tails, and the constants 3/5 in r5/r6 (swapped). */
+/* NON_MATCHING: written like _ZN7AocMenu15runQueryProcessEv; step 4's error store differs: retail loads the failed
+ * result (ldrd) before storing the error kind, where this build stores the kind first (4 rows), and retail hoists the
+ * constant 3 before the step number (4 rows; writing `counter = 3;` before `step = N;` gives that order, but the two
+ * are independent stores and the order is only score evidence). */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "nn/Result.h"
-
-/* A result code and its description. */
-struct AocPollCode {
-    u32 code;
-    u32 description;
-};
+#include "sys/RuntimeObjects.h"
 
 /* The status operation the menu is polling (its deleting destructor is vtable slot 1). */
 class AocPollHandler {
@@ -34,10 +32,9 @@ extern "C" {
 
 void FUN_00233e70(AocPollMenu *menu, s32 first, s32 second);
 void FUN_00234124(AocPollMenu *menu, RequestParameters *result);
-void FUN_002341d4(AocPollCode *result, AocMain *main);
+WindowStatusResult FUN_002341d4(AocMain *main);
 s32 strIsEmpty(const RequestParameters *result);
 s32 byteIsAtLeast100(const RequestParameters *result);
-s32 legacyResourceIdRemap(const AocPollCode *result);
 
 /* Per-frame update of the content-status menu: starts its two status operations, polls them and reports the result. */
 void AocMenu::pollContentStatus()
@@ -46,101 +43,89 @@ void AocMenu::pollContentStatus()
     RequestParameters result;
     AocMain *aocMain = g_aocMain;
     switch (menu->step) {
-    case 0:
-        {
-            AocPollHandler *created = reinterpret_cast<AocPollHandler *>(windowCreateStatusOperation(menu->handlerStorage, 0));
-            menu->step = 1;
-            menu->handler = created;
-        }
-        return;
-    case 2:
-        if (menu->handler != NULL) {
-            delete menu->handler;
-        }
-        {
-            AocPollHandler *created = reinterpret_cast<AocPollHandler *>(windowCreateStatusOperation(menu->handlerStorage, 5));
-            menu->step = 3;
-            menu->handler = created;
-        }
-        return;
+    case 0: {
+        AocPollHandler *created = reinterpret_cast<AocPollHandler *>(windowCreateStatusOperation(menu->handlerStorage, 0));
+        menu->step = 1;
+        menu->handler = created;
+        break;
+    }
     case 1: {
         RequestParameters polled = menu->handler->poll();
         result = polled;
         if (strIsEmpty(&result) != 0) {
             menu->step = 2;
-            return;
+        } else if (byteIsAtLeast100(&result) != 0) {
+            switch (result.kind) {
+            case 0x67:
+                menu->step = 5;
+                menu->counter = 3;
+                break;
+            case 0x66: {
+                RequestParameters copy = result;
+                FUN_00234124(menu, &copy);
+                break;
+            }
+            default:
+                menu->result = result;
+                menu->step = 9999;
+                break;
+            }
         }
-        if (byteIsAtLeast100(&result) == 0) {
-            return;
-        }
-        if (result.kind == 0x66) {
-            RequestParameters copy = result;
-            FUN_00234124(menu, &copy);
-            return;
-        }
-        if (result.kind != 0x67) {
-            menu->step = 9999;
-            menu->result = result;
-            return;
-        }
-        menu->step = 5;
-        menu->counter = 3;
-        return;
+        break;
+    }
+    case 2: {
+        if (menu->handler != NULL)
+            delete menu->handler;
+        AocPollHandler *created = reinterpret_cast<AocPollHandler *>(windowCreateStatusOperation(menu->handlerStorage, 5));
+        menu->step = 3;
+        menu->handler = created;
+        break;
     }
     case 3: {
         RequestParameters polled = menu->handler->poll();
         result = polled;
         if (strIsEmpty(&result) != 0) {
             menu->step = 4;
-            return;
+        } else if (byteIsAtLeast100(&result) != 0) {
+            switch (result.kind) {
+            case 0x67:
+                menu->step = 5;
+                menu->counter = 3;
+                break;
+            case 0x66: {
+                RequestParameters copy = result;
+                FUN_00234124(menu, &copy);
+                break;
+            }
+            default:
+                menu->result = result;
+                menu->step = 9999;
+                break;
+            }
         }
-        if (byteIsAtLeast100(&result) == 0) {
-            return;
-        }
-        if (result.kind == 0x66) {
-            RequestParameters copy = result;
-            FUN_00234124(menu, &copy);
-            return;
-        }
-        if (result.kind != 0x67) {
-            menu->step = 9999;
-            menu->result = result;
-            return;
-        }
-        menu->step = 5;
-        menu->counter = 3;
-        return;
+        break;
     }
     case 4: {
-        AocPollCode status;
-        FUN_002341d4(&status, aocMain);
-        AocPollCode remapped = status;
-        if (nnResultIsFailure(legacyResourceIdRemap(&remapped))) {
+        WindowStatusResult status = FUN_002341d4(aocMain);
+        if (nnResultIsFailure(legacyResourceIdRemap(&status))) {
             menu->step = 9999;
             menu->result.kind = 100;
-            menu->result.result.code = remapped.code;
-            menu->result.result.description = remapped.description;
-            return;
+            menu->result.result = status;
+            break;
         }
         menu->step = 5;
         menu->counter = 3;
-        return;
+        break;
     }
     case 5:
         menu->counter--;
-        if (menu->counter > 0) {
-            return;
-        }
-        menu->state = 6;
-        menu->step = 0;
-        if (menu->handler != NULL) {
-            delete menu->handler;
-            menu->handler = NULL;
-        }
-        return;
+        if (menu->counter > 0)
+            break;
+        aocMenuChangeStep(this, 6);
+        break;
     case 9999:
         FUN_00233e70(menu, 12, 3);
-        return;
+        break;
     }
 }
 

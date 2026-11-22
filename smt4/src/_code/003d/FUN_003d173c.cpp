@@ -64,7 +64,7 @@ void FUN_00244fb0(BtlMainState *state, u32 slot, u32 palette, u32 param, u32 alp
 void FUN_00339254(BtlMainState *state);
 void groupStartItems(void *group);
 void objectDestroyGfx(BtlCamera *main);
-void FUN_0024082c(BtlCamera *main, u32 value);
+void btlCameraStartMove(BtlCamera *main, u32 value);
 void FUN_003dc02c(void *object);
 void FUN_00339dc0(BtlMainState *state);
 void FUN_00338fb0(BtlMainState *state);
@@ -160,7 +160,7 @@ u32 FUN_003d173c(BtlMainState **block, ActionStateChannel *channel)
         groupStartItems(DAT_004398d4);
         actionCreateKindFive(0, channel, 1);
         objectDestroyGfx(g_btlMain);
-        FUN_0024082c(g_btlMain, 0);
+        btlCameraStartMove(g_btlMain, 0);
         FUN_003dc02c(g_btlAux);
         FUN_00339dc0(*block);
         FUN_00338fb0(*block);

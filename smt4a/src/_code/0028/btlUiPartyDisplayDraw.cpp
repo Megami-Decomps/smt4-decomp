@@ -14,7 +14,7 @@ void renderCtxResetColorScale(RenderCtxA *context);
 void FUN_002ae5cc(ActorCardAnimationsA *scene, s32 expanded, s32 allLit, s32 lift, s32 dimGuest);
 void FUN_002fa4dc(ActorCardAnimationsA *scene, s32 forceFull);
 void FUN_003741cc(ActorCardAnimationsA *scene);
-void FUN_0028f740(ActorCardAnimationsA *scene);
+void btlCommandMenuDraw(ActorCardAnimationsA *scene);
 void FUN_0028d270(ActorCardAnimationsA *scene);
 void btlUiPartyDisplayDrawEntry(ActorCardAnimationsA *scene);
 void saveSlotDrawClippedGaugeFrame(ActorCardAnimationsA *scene, s32 amount);
@@ -54,7 +54,7 @@ void btlUiPartyDisplayDraw(ActorCardAnimationsA *scene)
         FUN_002ae5cc(scene, 0, 0, 0, 0);
         FUN_002fa4dc(scene, 0);
         FUN_003741cc(scene);
-        FUN_0028f740(scene);
+        btlCommandMenuDraw(scene);
         break;
     case 8:
     case 9:
@@ -67,20 +67,20 @@ void btlUiPartyDisplayDraw(ActorCardAnimationsA *scene)
         FUN_002ae5cc(scene, 0, 0, 0, 0);
         FUN_002fa4dc(scene, 0);
         FUN_003741cc(scene);
-        FUN_0028f740(scene);
+        btlCommandMenuDraw(scene);
         FUN_0028d270(scene);
         break;
     case 16:
         FUN_002ae5cc(scene, 1, 1, scene->unk3878, 0);
         FUN_002fa4dc(scene, 1);
-        FUN_0028f740(scene);
+        btlCommandMenuDraw(scene);
         FUN_0028d270(scene);
         break;
     case 17:
     case 41:
         FUN_002ae5cc(scene, 0, 0, 0, 0);
         FUN_002fa4dc(scene, 0);
-        FUN_0028f740(scene);
+        btlCommandMenuDraw(scene);
         FUN_0028d270(scene);
         break;
     case 18:
@@ -88,14 +88,14 @@ void btlUiPartyDisplayDraw(ActorCardAnimationsA *scene)
         FUN_002ae5cc(scene, 0, 0, 0, 0);
         FUN_002fa4dc(scene, 0);
         FUN_003741cc(scene);
-        FUN_0028f740(scene);
+        btlCommandMenuDraw(scene);
         FUN_0028d270(scene);
         btlUiPartyDisplayDrawEntry(scene);
         break;
     case 22:
         FUN_002ae5cc(scene, 0, 1, 0, 0);
         FUN_002fa4dc(scene, 0);
-        FUN_0028f740(scene);
+        btlCommandMenuDraw(scene);
         selectionPanelDrawMarkers(scene, 1);
         break;
     case 24:
@@ -153,19 +153,19 @@ void btlUiPartyDisplayDraw(ActorCardAnimationsA *scene)
     case 34:
         FUN_002ae5cc(scene, 0, 1, 0, 1);
         FUN_002fa4dc(scene, 1);
-        FUN_0028f740(scene);
+        btlCommandMenuDraw(scene);
         selectionPanelDrawMarkers(scene, 0);
         break;
     case 36:
         FUN_002ae5cc(scene, 0, 0, 0, 0);
         FUN_002fa4dc(scene, 0);
-        FUN_0028f740(scene);
+        btlCommandMenuDraw(scene);
         selectionPanelDrawMarkers(scene, 0);
         break;
     case 35:
         FUN_002ae5cc(scene, 0, 1, 0, 1);
         FUN_002fa4dc(scene, 1);
-        FUN_0028f740(scene);
+        btlCommandMenuDraw(scene);
         selectionPanelDrawMarkers(scene, 1);
         break;
     case 37:
@@ -179,7 +179,7 @@ void btlUiPartyDisplayDraw(ActorCardAnimationsA *scene)
             FUN_002fa4dc(scene, 1);
         }
         FUN_003741cc(scene);
-        FUN_0028f740(scene);
+        btlCommandMenuDraw(scene);
         break;
     case 39:
         mode = scene->mode;
@@ -189,7 +189,7 @@ void btlUiPartyDisplayDraw(ActorCardAnimationsA *scene)
             FUN_002ae5cc(scene, 0, 0, 0, 0);
             FUN_002fa4dc(scene, 0);
             FUN_003741cc(scene);
-            FUN_0028f740(scene);
+            btlCommandMenuDraw(scene);
         }
         break;
     }

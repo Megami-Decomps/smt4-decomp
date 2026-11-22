@@ -9,7 +9,7 @@ struct SmokeFadeState {
     u32 phase;
     u32 first;
     u32 second;
-    u32 frame;
+    s32 frame;
     f32 opacity;
     f32 scale;
     union { u32 flags; u8 active; };

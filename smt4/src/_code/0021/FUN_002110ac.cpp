@@ -1,4 +1,3 @@
-/* NON_MATCHING: readable rebuild of the battle talk gift/result state machine; retail enters the shared script-wait tail of states 4/5 by goto and shares the state-store tail between cases, and the local item id pair is built by one 32-bit store, which armcc here lays out differently. */
 #include "common.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include "bible/bibleDevil.h"
@@ -29,7 +28,7 @@ void saveFlagSetOrAddCounter(u32 item, s32 amount);
 void scrScriptProcessStartEntry(u32 script, s32 entry);
 s32 scrRunOpcodesStub(u32 script);
 void messageMainSetEnabled(s32 enabled);
-void dataFindKindRecordWithAocOverrides(u32 item, s32 a);
+u8 *dataFindKindRecordWithAocOverrides(u32 id, int payload);
 s32 gameDataBlocksGetFlagByteA(void);
 s32 battleTalkIsBustReady(void);
 
@@ -37,8 +36,7 @@ s32 battleTalkIsBustReady(void);
 static void printItemName(u32 item)
 {
     u8 name[128];
-    dataFindKindRecordWithAocOverrides(item, 1);
-    libc_strcpy(reinterpret_cast<unsigned int *>(name), reinterpret_cast<unsigned int *>(item));
+    libc_strcpy((unsigned int *)name, (unsigned int *)dataFindKindRecordWithAocOverrides(item, 1));
     textEncodeFontSlot(0, name);
 }
 
@@ -46,21 +44,22 @@ static void printItemName(u32 item)
  * talk is over and `result` holds how it ended. */
 u32 FUN_002110ac(BattleTalkWork *work)
 {
-    u16 giftIds[2] = { 0xB, 0xC };
+    u32 done = 0;
     switch (work->state) {
     case 0:
-        if (btlTalkBustUpGetValue() == 0)
-            return 0;
-        scrScriptProcessStartEntry(work->introScript, 1);
-        work->state++;
-        return 0;
+        if (btlTalkBustUpGetValue() != 0) {
+            scrScriptProcessStartEntry(work->introScript, 1);
+            work->state++;
+        }
+        break;
     case 1:
         if (scrRunOpcodesStub(work->introScript) == 2) {
             work->state++;
             work->giftIndex = 0;
         }
-        return 0;
+        break;
     case 2: {
+        u16 giftIds[2] = { 0xB, 0xC };
         s32 amount = work->giftAmounts[work->giftIndex];
         if (amount > 0 && gameDataBlocksGetFlagByteA() == 0) {
             FUN_0029ede8(1, amount, 0xFFFFFFFF, 0);
@@ -69,67 +68,77 @@ u32 FUN_002110ac(BattleTalkWork *work)
             work->state = 3;
             saveFlagSetOrAddCounter(giftIds[work->giftIndex], amount);
             messageMainSetEnabled(1);
-            return 0;
-        }
-        if (gameDataBlocksGetFlagByteA() != 0) {
+        } else if (gameDataBlocksGetFlagByteA() != 0) {
             work->state = 4;
-            return 0;
+        } else {
+            work->giftIndex++;
+            if (work->giftIndex < 2) {
+                work->state = 2;
+            } else {
+                work->state = 4;
+            }
         }
-        work->giftIndex++;
-        work->state = work->giftIndex < 2 ? 2 : 4;
-        return 0;
+        break;
     }
     case 3:
-        if (scrRunOpcodesStub(work->giftScript) != 2)
-            return 0;
-        work->giftIndex++;
-        work->state = work->giftIndex < 2 ? 2 : 4;
-        return 0;
+        if (scrRunOpcodesStub(work->giftScript) == 2) {
+            if (++work->giftIndex >= 2) {
+                work->state = 4;
+            } else {
+                work->state = 2;
+            }
+        }
+        break;
     case 4: {
+        bool found = false;
         for (s32 i = 0; i < work->leftoverCount; i++) {
             if (work->leftoverIds[i] != 0) {
                 printItemName(work->leftoverIds[i]);
                 saveFlagSetOrAddCounter(work->leftoverIds[i], 1);
                 work->leftoverIds[i] = 0;
                 scrScriptProcessStartEntry(work->giftScript, 0xE);
-                work->state = 5;
-                if (scrRunOpcodesStub(work->giftScript) == 2)
-                    work->state = 4;
-                return 0;
+                work->state++;
+                found = true;
+                break;
             }
         }
-        u32 flags = work->flags;
-        work->flags = flags & ~2u;
-        s32 result;
-        if (flags & 8) {
-            result = 2;
-        } else if (flags & 1) {
-            result = 3;
-        } else if (flags & 4) {
-            result = 4;
-        } else {
-            work->state = 10;
-            btlTalkBustUpReleaseAllSlots();
-            return 0;
+        if (!found) {
+            work->flags &= ~2u;
+            s32 result;
+            if (work->flags & 8) {
+                result = 2;
+            } else if (work->flags & 1) {
+                result = 3;
+            } else if (work->flags & 4) {
+                result = 4;
+            } else if (work->flags & 2) {
+                result = 5;
+            } else {
+                work->state = 10;
+                btlTalkBustUpReleaseAllSlots();
+                break;
+            }
+            work->state = 0;
+            work->result = result;
+            done = 2;
+            break;
         }
-        work->state = 0;
-        work->result = result;
-        return 2;
     }
+        /* fall through */
     case 5:
         if (scrRunOpcodesStub(work->giftScript) == 2)
             work->state--;
-        return 0;
+        break;
     case 10:
-        if (battleTalkIsBustReady() == 0)
-            return 0;
-        work->state = 0;
-        btlTalkBustUpReleaseTexture();
-        work->result = 6;
-        return 2;
-    default:
-        return 0;
+        if (battleTalkIsBustReady() != 0) {
+            work->state = 0;
+            btlTalkBustUpReleaseTexture();
+            work->result = 6;
+            done = 2;
+        }
+        break;
     }
+    return done;
 }
 
 } /* extern "C" */

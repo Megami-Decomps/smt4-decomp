@@ -1,9 +1,15 @@
 /* NON_MATCHING: the code is retail's except for one register. Retail keeps the pointer to the running move in r3
- * across the calls to vectorPairTransitionStep (so it saves r4-r7 only and the frame is 4 bytes larger: 116 against
- * 112); the build keeps it in r4 and saves r8 too. armcc holds a value in r3 across a call only when it has seen
- * the callee: with vectorPairTransitionStep defined in the same file the build does the same (84 raw lines left,
- * the x and z registers of three points swapped), so the two belong to one translation unit. Apocalypse's twin,
- * lmapViewUpdateOrbitSequence, keeps the pointer in r4 and is IDENTICAL. */
+ * across the six calls to vectorPairTransitionStep (so it saves r4-r7 only and the frame is 4 bytes larger: 116
+ * against 112); the build keeps it in r4 and saves r8 too. armcc holds a value in r3 across a call only when it
+ * knows what the callee clobbers, and retail's vectorPairTransitionStep uses r0-r2 and s0-s6 only: the two were
+ * compiled in one --multifile run (they are 0x79ba0 bytes apart in the image, so not one file). Measured:
+ * - `--multifile` with vectorPairTransitionStep's source and no `--no_autoinline`: retail's r3, prologue and
+ *   frame; 84 raw lines left (the x and z registers of three points swapped);
+ * - build.py's recipe for a `multifile` unit (`--multifile --no_autoinline --split_sections`): r4 and 278 lines,
+ *   as long as vectorPairTransitionStep's source calls inline helpers (its VEC3 add/sub/scale, whatever their
+ *   linkage); with a copy of that function written without helpers the same recipe keeps r3 too.
+ * Apocalypse's twin, lmapViewUpdateOrbitSequence, keeps the pointer in r4 (its vectorPairTransitionStep uses r3)
+ * and is IDENTICAL. */
 #include "map/LmapViewGlobals.h"
 #include "map/LmapGlobals.h"
 #include "map/VectorPairTransition.h"

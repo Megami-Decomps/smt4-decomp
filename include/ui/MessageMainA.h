@@ -22,7 +22,7 @@ struct MessageWindowA {
     /* 0x001C */ u32 choiceResult;
     /* 0x0020 */ u32 unk0020;
     /* 0x0024 */ u32 argument;           /* the auxiliary window's script value */
-    /* 0x0028 */ u32 unk0028;
+    /* 0x0028 */ s32 choicePhase;        /* cleared when the choice rows close (IV: TitleOverlay::phase) */
     /* 0x002C */ u8 unk002C[3];
     /* 0x002F */ u8 unk002F;
     /* 0x0030 */ u8 unk0030;
@@ -31,9 +31,14 @@ struct MessageWindowA {
     /* 0x0033 */ u8 unk0033;
     /* 0x0034 */ u8 unk0034;
     /* 0x0035 */ u8 closeRequested;
-    /* 0x0036 */ u8 unk0036[0x22];
+    /* 0x0036 */ u8 unk0036;
+    /* 0x0037 */ u8 choiceEnabled[5];    /* rows drawn with sprites[7..11] (IV: TitleOverlay::enabled) */
+    /* 0x003C */ u8 unk003C[0x1A];
+    /* 0x0056 */ s16 selectedChoice;     /* its cursor is sprites[12 + selectedChoice] */
     /* 0x0058 */ u16 unk0058;
-    /* 0x005A */ u8 unk005A[0x13];
+    /* 0x005A */ u8 unk005A[2];
+    /* 0x005C */ u8 selectedChoiceActive;
+    /* 0x005D */ u8 unk005D[0x10];
     /* 0x006D */ u8 closeLocked;
     /* 0x006E */ u8 unk006E[6];
     /* The banner's animated counter or its timed display (as in IV, 0x10 bytes later). */
@@ -135,6 +140,8 @@ struct MessageMainA {
 
 typedef char MessageWindowAOffsetsCheck[
     offsetof(MessageWindowA, closeRequested) == 0x35 && offsetof(MessageWindowA, closeLocked) == 0x6D &&
+    offsetof(MessageWindowA, choiceEnabled) == 0x37 && offsetof(MessageWindowA, selectedChoice) == 0x56 &&
+    offsetof(MessageWindowA, selectedChoiceActive) == 0x5C &&
     offsetof(MessageWindowA, counterState) == 0x8D && offsetof(MessageWindowA, activeState) == 0x95 &&
     offsetof(MessageWindowA, queueIds) == 0xAC && offsetof(MessageWindowA, panelState) == 0x154 &&
     offsetof(MessageWindowA, popupValueFloat) == 0x184 && offsetof(MessageWindowA, parameters) == 0x194 &&

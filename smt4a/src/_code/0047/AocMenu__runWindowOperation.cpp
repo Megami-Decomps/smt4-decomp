@@ -19,7 +19,7 @@ namespace {
 }
 
 extern "C" {
-s32 isEmptyString(RequestParameters *event);
+s32 strIsEmpty(RequestParameters *event);
 s32 byteIsAtLeast100(RequestParameters *event);
 void jobFlagsWorkStop(u32 *job);
 void *windowCreateStatusOperation(void *operation, s32 mode); // declcheck: local (the shared declaration does not compile here or changes this unit)
@@ -62,7 +62,7 @@ void AocMenu::runWindowOperation()
         if ((job[0] & 0x200) != 0) {
             RequestParameters polled = operation->getEvent();
             event = polled;
-            if (isEmptyString(&event) != 0) {
+            if (strIsEmpty(&event) != 0) {
                 job[2] = 3;
             } else if (byteIsAtLeast100(&event) != 0) {
                 jobFlagsWorkStop(job);
@@ -102,7 +102,7 @@ void AocMenu::runWindowOperation()
     case 4: {
         RequestParameters polled = operation->getEvent();
         event = polled;
-        if (isEmptyString(&event) != 0) {
+        if (strIsEmpty(&event) != 0) {
             jobFlagsWorkStop(job);
             WindowOperation *current;
             if (g_aocMain->recordCount != 0) {
