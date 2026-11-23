@@ -1,4 +1,4 @@
-/* NON_MATCHING: 118 vs 118 rows (12 diff lines); battleVectorClear, battleVectorCopy and direct selection fields match lines 24-118 identically; remaining: prologue scheduling of editorControl.flags offset load (ip vs r3) around flags &= ~0x800000. */
+/* NON_MATCHING: 118 vs 118 rows (12 diff lines); battleVectorClear, battleVectorCopy and direct selection fields match lines 24-118 identically; remaining: prologue scheduling of editorControl.flags offset load (ip vs r3) around flags &= ~0x800000 (w86 review: flagsSetBits/flagsClearBits match it too, but no twin of the pair agrees, so the plain operator stays). */
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
@@ -32,6 +32,8 @@ extern "C" {
 extern BattleVectorTransition *g_btlMain;
 extern BattleVector3 DAT_00493554;
 
+/* Moves the formation camera to party slot `slot` (0-3): clears its position and offset, then, unless the battle
+ * suppresses it, sets the slot's x position and offset and the height of the slot's demon. */
 void FUN_003d6644(FormationCameraIV *camera, BtlMainState *battle, s32 slot)
 {
     battleVectorClear(&camera->position);

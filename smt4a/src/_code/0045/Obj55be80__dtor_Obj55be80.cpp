@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail inlines the slot-clear with `this` copied to a second register and the zero hoisted above the vptr store (one extra push); register layout only. */
+/* NON_MATCHING: register allocation only: in the inlined slot clear retail addresses the word tables through ip and the pairs through r4; the build swaps them. */
 #include "classes/Obj55be80.h"
 
 /* Clears the active slots and releases the resource word. */

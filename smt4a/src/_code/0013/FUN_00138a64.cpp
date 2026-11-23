@@ -3,13 +3,13 @@
 
 extern "C" {
 
-extern CommandQueueDefaults _ZTV9Obj464cb0;
+extern CommandQueueDefaults g_commandQueueDefaults;
 
-/* Resets queue defaults stored immediately after the command-object vtable. */
+/* Resets the command queue defaults: no entries, room for 100. */
 void FUN_00138a64(void)
 {
-    _ZTV9Obj464cb0.count = 0;
-    _ZTV9Obj464cb0.capacity = 100;
+    g_commandQueueDefaults.count = 0;
+    g_commandQueueDefaults.capacity = 100;
 }
 
 } /* extern "C" */

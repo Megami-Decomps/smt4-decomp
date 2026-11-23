@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016e7c0(int, int);
+int faultReportKind5(int, int);
 int vcallSlot12IfValid(unsigned int);
 int sysFatalBreak(void);
 
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_0016e7c0. */
+/* Supplied declaration required: faultReportKind5. */
 /* Supplied declaration required: vcallSlot12IfValid. */
 /* Supplied declaration required: sysFatalBreak. */
 
@@ -36,7 +36,7 @@ void FUN_0016e1a8(int *param_1,unsigned int param_2)
       param_1[2] = 0;
     }
     if (temp_v0 < 0) {
-      FUN_0016e7c0(temp_v0,0x16e214);
+      faultReportKind5(temp_v0,0x16e214);
     }
   }
   temp_v0 = (**(romwright_code **)(*param_1 + 0x34))(param_1,temp_v1,param_2,0x14,1);
@@ -49,7 +49,7 @@ void FUN_0016e1a8(int *param_1,unsigned int param_2)
       param_1[2] = 0;
     }
     if (temp_v0 < 0) {
-      FUN_0016e7c0(temp_v0,0x16e278);
+      faultReportKind5(temp_v0,0x16e278);
     }
   }
   if ((param_1[2] & 0xfffffffeU) != 0) {

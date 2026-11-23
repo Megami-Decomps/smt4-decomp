@@ -1,4 +1,4 @@
-/* NON_MATCHING: the twin's search and return shape matches; the entry base, outer index and member-id addressing use different registers. */
+/* NON_MATCHING: the outer fixed-capacity index and entry base now use retail's registers; the member-id lookup's scratch registers and loop condition differ. */
 #include "battle/BtlGlobals.h"
 #include "battle/BtlEntryA.h"
 
@@ -8,7 +8,7 @@ extern "C" {
 BtlUnitDataA *btlFindEntryBlockByMemberId(BtlMainStateA *state, s32 id)
 {
     BtlUnitDataA *result = NULL;
-    for (s32 unit = 0; unit < 109; unit++) {
+    for (u32 unit = 0; unit < 109; unit++) {
         for (s32 i = 0; i < 50; i++) {
             s32 entry = state->entries[unit].ids[i];
 

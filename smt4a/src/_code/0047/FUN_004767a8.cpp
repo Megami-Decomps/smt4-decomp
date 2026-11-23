@@ -16,7 +16,7 @@ int FUN_00429c08(int *, AocCatalogRequest *, int);
 int stringFormatUnbounded(...);
 int FUN_00473980(...);
 void aocApplicationRecreateDecoder(struct AocMain *app);
-int FUN_004760bc(void);
+int aocCatalogBuildItemRecords(void);
 
 /* stack frame of param_1: 11 slot(s), 44 byte(s) */
 typedef struct {
@@ -50,7 +50,7 @@ extern unsigned int halfPair48LowByteB(int);
 /* Supplied declaration required: stringFormatUnbounded. */
 /* Supplied declaration required: FUN_00473980. */
 /* Supplied declaration required: aocApplicationRecreateDecoder. */
-/* Supplied declaration required: FUN_004760bc. */
+/* Supplied declaration required: aocCatalogBuildItemRecords. */
 extern unsigned int valueHolderGetValue(unsigned int);
 extern unsigned int FUN_005001e8(unsigned int);
 extern int nn_fnd_DateTime_GetDay(unsigned int);
@@ -257,7 +257,7 @@ void FUN_004767a8(int param_1)
       nn_fnd_DateTime_DateToDays(temp_v5,temp_v4,temp_v1);
       *(int *)(param_1 + 0x18) = temp_v5;
       temp_v1 = param_1;
-      FUN_004760bc();
+      aocCatalogBuildItemRecords();
       recordClearWideHandle(temp_v0 + 0x28);
       if (-1 < temp_v1) {
         FUN_00473980(&temp_v8,temp_v0);

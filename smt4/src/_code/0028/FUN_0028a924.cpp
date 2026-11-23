@@ -16,7 +16,7 @@ int partyPanelResetWidgets(void);
 int partyPanelRefreshItemPreview(void);
 int saveResolvePartySlot(...);
 int FUN_0026b7c0(void);
-int FUN_0026c654(...);
+int skillUseOnTarget(...);
 int FUN_0026c710(...);
 int partyPanelShowButtonHelp(void);
 int partyPanelRefreshFusionParents(void);
@@ -45,7 +45,7 @@ extern int g_partyPanel; /* 0x43dcf0 */
 /* Supplied declaration required: partyPanelRefreshItemPreview. */
 /* Supplied declaration required: saveResolvePartySlot. */
 /* Supplied declaration required: FUN_0026b7c0. */
-/* Supplied declaration required: FUN_0026c654. */
+/* Supplied declaration required: skillUseOnTarget. */
 /* Supplied declaration required: FUN_0026c710. */
 /* Supplied declaration required: partyPanelShowButtonHelp. */
 /* Supplied declaration required: partyPanelRefreshFusionParents. */
@@ -370,7 +370,7 @@ LAB_0028ad80:
           *(unsigned char *)(temp_v0 + 0x67b) = 0;
         }
         temp_v3 = (int)*(short *)(temp_v0 + 0x38);
-        FUN_0026c654(temp_v3,0xffffffff,temp_v5,1);
+        skillUseOnTarget(temp_v3,0xffffffff,temp_v5,1);
         if (temp_v3 == 1) {
           *(unsigned char *)(temp_v0 + 0x678) = 0;
           temp_v3 = reinterpret_cast<int>(btlGetMainState());
@@ -382,7 +382,7 @@ LAB_0028ad80:
         temp_v3 = 0;
         do {
           temp_v9 = (int)*(short *)(temp_v0 + 0x38);
-          FUN_0026c654(temp_v9,(int)*(char *)(temp_v2 + temp_v3 + 0x9108),temp_v5,1);
+          skillUseOnTarget(temp_v9,(int)*(char *)(temp_v2 + temp_v3 + 0x9108),temp_v5,1);
           if (temp_v9 == 1) {
             *(unsigned char *)(temp_v0 + temp_v3 + 0x679) = 0;
           }
@@ -392,7 +392,7 @@ LAB_0028ad80:
         do {
           temp_v3 = (int)*(short *)(temp_v0 + 0x38);
           temp_v9 = temp_v0 + temp_v2 * 8;
-          FUN_0026c654(temp_v3,*(unsigned int *)(temp_v9 + 0x738),temp_v5,1);
+          skillUseOnTarget(temp_v3,*(unsigned int *)(temp_v9 + 0x738),temp_v5,1);
           if (temp_v3 == 1) {
             *(unsigned short *)(temp_v9 + 0x73c) = 0;
           }

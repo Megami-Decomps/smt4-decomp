@@ -5,7 +5,7 @@
 extern "C" {
 
 int nn_pl_CTR_CreateGameCoinSaveFile(void);
-int FUN_0016e7c0(void);
+int faultReportKind5(void);
 int archivePathDeviceOpen(unsigned int, unsigned int, int);
 int archiveDeviceSendPathRequest(void);
 int fileSystemRequireReady(void);
@@ -16,7 +16,7 @@ extern unsigned char DAT_005c0adc; /* 0x5c0adc */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: nn_pl_CTR_CreateGameCoinSaveFile. */
-/* Supplied declaration required: FUN_0016e7c0. */
+/* Supplied declaration required: faultReportKind5. */
 /* Supplied declaration required: archivePathDeviceOpen. */
 /* Supplied declaration required: archiveDeviceSendPathRequest. */
 /* Supplied declaration required: fileSystemRequireReady. */
@@ -62,7 +62,7 @@ unsigned int FUN_00188e44(int param_1)
       archiveDeviceSendPathRequest();
       if (((((temp_v3 & 0x3fc00) != 0x4400) || ((temp_v3 & 0x3ff) < 100)) || ((temp_v3 & 0x3ff) >= 0xb4))
          && ((int)temp_v3 < 0)) {
-        FUN_0016e7c0();
+        faultReportKind5();
       }
       nn_pl_CTR_CreateGameCoinSaveFile();
       temp_v4 = 1;
@@ -81,7 +81,7 @@ unsigned int FUN_00188e44(int param_1)
         archiveDeviceSendPathRequest();
         if (((((temp_v3 & 0x3fc00) != 0x4400) || ((temp_v3 & 0x3ff) < 100)) || ((temp_v3 & 0x3ff) >= 0xb4))
            && ((int)temp_v3 < 0)) {
-          FUN_0016e7c0();
+          faultReportKind5();
         }
         nn_pl_CTR_CreateGameCoinSaveFile();
         temp_v4 = 1;
@@ -89,7 +89,7 @@ unsigned int FUN_00188e44(int param_1)
       }
     }
     if ((int)temp_v2 < 0) {
-      FUN_0016e7c0();
+      faultReportKind5();
     }
   } while( 1 );
 }

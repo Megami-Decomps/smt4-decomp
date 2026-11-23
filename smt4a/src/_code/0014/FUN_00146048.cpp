@@ -3,6 +3,7 @@
 #include "camp/RenderCtxA.h"
 #include "code/Code0014.h"
 #include "code/Code0015.h"
+#include "Model/MoriModelCommand.h"
 
 struct SlotOwner {
     /* 0x00 */ u8 unk00[0x10];
@@ -27,11 +28,7 @@ struct SceneBlock {
     /* 0xC4 */ u8 hasMatrices;
 };
 
-struct ModelSlot {
-    /* 0x00 */ u8 unk00[0xA8];
-    /* 0xA8 */ u32 matrixListA;
-    /* 0xAC */ u32 matrixListB;
-};
+typedef MoriModelCommand ModelSlot;
 
 struct FrameModel {
     /* 0x00 */ u8 unk00[0xA8];
@@ -65,7 +62,6 @@ extern HandleRegistry *g_handleRegistry;
 extern ModelOverride *DAT_0056fcb8;
 extern FrameModel *DAT_0056fcbc;
 
-void FUN_0017d158(ModelSlot *model);
 bool FUN_00158124(HandleRegistry *manager);
 void FUN_00157050(SlotOwner *owner, ModelAnimationSet *animations);
 void cameraUpdateViewAndProjection(SceneBlock *scene, u8 *list);
@@ -101,7 +97,7 @@ static __inline ModelAnimationSet *activeAnimations(HandleRegistry *manager)
  * holders. */
 u32 FUN_00146048(void)
 {
-    FUN_0017d158(g_handleRegistry->model);
+    moriModelCommandSwapBuffers(g_handleRegistry->model);
     HandleRegistry *manager = g_handleRegistry;
     if (FUN_00158124(manager)) {
         SlotOwner *owner = manager->owner;
@@ -112,8 +108,8 @@ u32 FUN_00146048(void)
     manager = g_handleRegistry;
     if (FUN_00158124(manager) && FUN_00156bec(manager->scene) != 0) {
         FUN_00157c3c(manager->model, manager->scene);
-        if (manager->scene->hasMatrices != 0 && manager->model->matrixListB != 0) {
-            MatrixSlotList list(manager->model->matrixListB, manager->owner,
+        if (manager->scene->hasMatrices != 0 && manager->model->listB != NULL) {
+            MatrixSlotList list((u32)manager->model->listB, manager->owner,
                                 (u32)activeAnimations(manager)->matrices);
             FUN_0016bad8(&list);
             FUN_00157520(&list);
@@ -123,7 +119,7 @@ u32 FUN_00146048(void)
     manager = g_handleRegistry;
     if (FUN_00158124(manager)) {
         FUN_0016d304(manager->model);
-        MatrixSlotList list(g_handleRegistry->model->matrixListA, g_handleRegistry->owner,
+        MatrixSlotList list((u32)g_handleRegistry->model->listA, g_handleRegistry->owner,
                             (u32)activeAnimations(g_handleRegistry)->matrices);
         FUN_00157268(&list);
         FUN_00157520(&list);

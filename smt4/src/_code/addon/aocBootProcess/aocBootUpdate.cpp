@@ -42,7 +42,7 @@ void jyoucyuGetTableEntry(u32 id);
 void aocResetOperationState(AocSystem *system);
 void aocClearDisplayFlag(AocSystem *system);
 void aocEntryPanelCreateText(void *owner, s32 a, s32 b, s32 c);
-RequestParameters FUN_003887cc(AocSystem *system);
+RequestParameters aocSystemMountStep(AocSystem *system);
 u8 startsWithH(const void *value);
 u8 strIsEmpty(const void *value);
 u8 byteIsAtLeast100(const void *value);
@@ -92,7 +92,7 @@ u32 aocBootUpdate(void)
             break;
         }
         case AOC_BOOT_STATE_QUERY: {
-            request = FUN_003887cc(g_aocSystem);
+            request = aocSystemMountStep(g_aocSystem);
             if (boot->dialogOpen == 0 && reinterpret_cast<AocSystemBootView *>(g_aocSystem)->packageHandle != 0) {
                 reinterpret_cast<AocSystemBootView *>(g_aocSystem)->phase = 6;
                 aocEntryPanelCreateText(boot->dialog, 0xBE, 2, 0);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: the cleared flags word takes r1 and the state constant r0 is set before the flag store; retail clears the flags in r0 and loads 17 after storing it. */
+/* NON_MATCHING: the cleared flags word takes r1 and the state constant r0 is set before the flag store; retail clears the flags in r0 and loads 17 after storing it (w86 review: flagsSetBits/flagsClearBits match it too, but no twin of the pair agrees, so the plain operator stays). */
 #include "shard/Shard0046.h"
 #include "gamedata/GameFlags.h"
 #include "shard/W6_W6Match7_QuestInteraction.h"
@@ -17,6 +17,8 @@ Entry40 *dataTable28Type0GetEntry(u32 unused, u32 index);
 u8 gameFlagIsSet(u32 flag);
 u32 messageWindowIsState1(void);
 
+/* Starts the interaction's next script: the quest announcement, the active quest's talk or the entry's confirmation;
+ * a non-interactive entry ends in state 17. */
 void questInteractionChooseEntry(QuestInteraction *object)
 {
     FUN_003a7630(1);

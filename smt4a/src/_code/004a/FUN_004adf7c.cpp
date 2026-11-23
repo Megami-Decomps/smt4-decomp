@@ -61,8 +61,8 @@ typedef struct {
 extern int *****containerGrowCapacity(int *****);
 /* Supplied declaration required: FUN_004d8f4c. */
 /* Supplied declaration required: treeRebalanceAfterErase. */
-extern romwright_code ***FUN_004d91b0(romwright_code *****);
-extern romwright_code ***FUN_004d9234(romwright_code *****);
+extern romwright_code ***aaTreeNext(romwright_code *****);
+extern romwright_code ***aaTreePrev(romwright_code *****);
 /* Supplied declaration required: FUN_0050d0ac. */
 /* Supplied declaration required: vtblCopyAssign. */
 extern int FUN_0050d178(unsigned int *, unsigned int, romwright_code ***);
@@ -708,7 +708,7 @@ int FUN_004adf7c(unsigned int *param_1,int param_2,unsigned int *param_3,unsigne
           pppcVar22[2] = (romwright_code **)temp_v17;
           temp_v17[3] = (romwright_code ****)pppcVar22;
         }
-        pppcVar22 = (romwright_code ***)FUN_004d91b0(temp_v21);
+        pppcVar22 = (romwright_code ***)aaTreeNext(temp_v21);
         ppppcVar4 = *pppppcVar2;
         ppppcVar5 = ppppcVar15 + 1;
         if (ppppcVar4 != ppppcVar5) {
@@ -719,7 +719,7 @@ int FUN_004adf7c(unsigned int *param_1,int param_2,unsigned int *param_3,unsigne
             ppppcVar15[5] = pppcVar22;
           }
           if ((romwright_code *****)ppppcVar15[6] == pppppcVar2) {
-            pppcVar22 = (romwright_code ***)FUN_004d9234(pppppcVar2);
+            pppcVar22 = (romwright_code ***)aaTreePrev(pppppcVar2);
             ppppcVar15[6] = pppcVar22;
           }
           ppppcVar16 = pppppcVar2[2];

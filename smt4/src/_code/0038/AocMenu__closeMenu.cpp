@@ -5,7 +5,7 @@
 #include "addon/AocSystem.h"
 
 extern "C" {
-RequestParameters FUN_003887cc(AocSystem *system);
+RequestParameters aocSystemMountStep(AocSystem *system);
 void aocMenuSetButtonHelp(AocMenu *menu, s32 request, s32 mode);
 void aocLoadingTaskStart(AocMenu *menu, u32 request);
 void FUN_00126fb8(void *query);
@@ -61,7 +61,7 @@ void AocMenu::closeMenu()
         break;
     case 2:
         if (menu->flags & 0x200) {
-            request = FUN_003887cc(g_aocSystem);
+            request = aocSystemMountStep(g_aocSystem);
             if (strIsEmpty(&request) != 0) {
                 menu->substep = 3;
             } else if (byteIsAtLeast100(&request) != 0) {

@@ -1,4 +1,4 @@
-/* NON_MATCHING: -O2 candidate; map-state, registry, object and zero register roles differ although all82 normalized instructions otherwise agree. */
+/* NON_MATCHING: -O2 candidate; map-state, registry, object and zero register roles differ although all82 normalized instructions otherwise agree (w86 review: flagsSetBits/flagsClearBits match it too, but no twin of the pair agrees, so the plain operator stays). */
 #include "map/MapIfGlobals.h"
 #include "game/GameStateA.h"
 #include "shard/W5_W5Match7_SceneState.h"
@@ -36,6 +36,7 @@ inline void initializeController(MapIfModelMarkerA* controller, MoriModelContent
 }
 }
 
+/* Binds the three map-interface model markers to the scene's controller resources and resets them. */
 extern "C" void mapIfInitializeSceneControllers(void)
 {
     MapIfStateA* state = g_mapIf.state;

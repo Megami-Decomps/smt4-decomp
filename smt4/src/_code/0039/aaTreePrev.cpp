@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the left subtree's first rightmost test compares its operands the other way round (retail cmp r2, r3: right against right->right). */
 #include "shard/W6_W6Match3_AATreeNode.h"
 
 /* Whether a node is the tree's sentinel, the only node linked to itself. */
@@ -13,12 +12,12 @@ static __inline void aaTreeDecrement(AATreeNode *&node)
     AATreeNode *previous = node->left;
     AATreeNode *right = previous->right;
     if (previous != right) {
-        node = previous;
-        if (right != right->right) {
-            do {
-                node = node->right;
-            } while (node->right != node->right->right);
+        /* The left subtree's rightmost node. */
+        AATreeNode *last = previous;
+        while (last->right != last->right->right) {
+            last = last->right;
         }
+        node = last;
     } else if (node->left == node) {
         AATreeNode *sentinel = node;
         node = node->parent;
@@ -35,7 +34,7 @@ static __inline void aaTreeDecrement(AATreeNode *&node)
 }
 
 // Find the preceding node, including traversal from the tree's sentinel.
-extern "C" AATreeNode *FUN_004d9234(AATreeNode *node)
+extern "C" AATreeNode *aaTreePrev(AATreeNode *node)
 {
     aaTreeDecrement(node);
     return node;

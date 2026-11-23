@@ -57,7 +57,7 @@ void FUN_00234f5c(QuestTalkWork *talk, const char *name, s32 flag);
 void asdLoadFileAsyncSimple(const char *path, u32 *handle, s32 flags);
 void qcGetCenterSlotGroups(u32 area);
 s32 timerStampIsExpired(void);
-void sysResetTimestampState(void);
+void qcTabListResetStamp(void);
 s32 storyModeCanProceed(u8 area);
 void questCompletionSetTierFlags(s32 flag);
 void titleRestartSlotState3(s32 slot, s32 value);
@@ -139,7 +139,7 @@ void FUN_003840f4(QuestCounterScene *scene, s32 questId, u8 unused, u8 mode)
         qcGetCenterSlotGroups(scene->area);
         if (timerStampIsExpired() != 0) {
             qcGetCenterSlotGroups(scene->area);
-            sysResetTimestampState();
+            qcTabListResetStamp();
         }
     }
     if (storyModeCanProceed(scene->area) != 0)

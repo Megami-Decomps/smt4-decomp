@@ -15,7 +15,7 @@ char *libc_strcpy(char *destination, const char *source);
 void dataTableReload(u32 table);
 void dataTableResolveEntryVariants();
 s32 eventScriptJobUpdate(u32 job);
-void FUN_00298978(JobWork *job);
+void eventViewJobUpdate(JobWork *job);
 void aocJobRequest(JobWork *job);
 void resourceDefaultFalseCallback(JobWork *job);
 void resourceEmptyCallback(JobWork *job);
@@ -82,7 +82,7 @@ void FUN_00291728(const RequestParameters *parameters)
             dataTableReload(0x1C);
             dataTableResolveEntryVariants();
         }
-        work->prefix.id = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVENT VIEW CALC"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_00298978), reinterpret_cast<AsdProcFunc>(aocJobRequest), NULL);
+        work->prefix.id = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVENT VIEW CALC"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(eventViewJobUpdate), reinterpret_cast<AsdProcFunc>(aocJobRequest), NULL);
         taskCreateDraw("EVENT VIEW UDRAW", 0x75, 0, 0,
             resourceDefaultFalseCallback, resourceEmptyCallback, NULL, work->prefix.id);
         taskCreateDraw("EVENT VIEW DDRAW", 0xEA, 0, 0,

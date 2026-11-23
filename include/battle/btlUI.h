@@ -468,7 +468,12 @@ typedef struct BtlUiA {
 typedef struct BtlUiGlobalsA {
     /* 0x00 */ u8 unk00[0x10];
     /* 0x10 */ BtlUiA *ui;
-    /* 0x14 */ u8 unk14[0x24];
+    /* 0x14 */ u8 unk14[4];
+    /* The combatant flag masks of the roster summary (smt4a btlUiBuildRosterSummary). */
+    /* 0x18 */ u64 rosterMask;         /* the combatants the summary lists */
+    /* 0x20 */ u64 rosterBlankMask;    /* listed as a blank line */
+    /* 0x28 */ u64 rosterPartyMask;    /* listed by party slot */
+    /* 0x30 */ u64 rosterGroupedMask;  /* listed by side and position */
     /* 0x38 */ u64 completionMask;     /* the owner flag bit an action slot sets when it completes (btlUiReserveActionSlot) */
 } BtlUiGlobalsA;
 

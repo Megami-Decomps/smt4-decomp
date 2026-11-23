@@ -50,7 +50,7 @@ void FUN_002897b0(u8 value);
 int eventIsSkipping(void);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 u32 tableGroupFindEntryIndex(void *commands, const char *name);
-void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
+u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 /* The game flag an event entry raises when it ends, 0 when it has none. */
 u32 eventScriptFindCompletionFlag(u32 eventId, const ScriptVmLabel *entry);
 u8 gameJumpRequestIsPending(void);

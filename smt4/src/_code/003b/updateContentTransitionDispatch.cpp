@@ -1,8 +1,8 @@
-/* NON_MATCHING: only the flag reload after FUN_0022b8c0 differs: retail stores the saved token before reloading the flags, the build hoists the load above the store. */
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match6_ContentTransition.h"
 #include "game/GameState.h"
 #include "addon/AocSystem.h"
+#include "util/BitsAndBytes.h"
 
 struct ContentTransitionUpdate {
     ContentTransition scene;
@@ -112,7 +112,7 @@ void updateContentTransitionDispatch(ContentTransitionUpdate *update)
             update->scene.step.state = 6;
             update->scene.step.phase = 0;
             update->savedToken = FUN_0022b8c0(update->tokens);
-            update->scene.flags &= ~0x2000;
+            flagsClearBits(&update->scene.flags, 0x2000);
         } else {
             FUN_003b875c(&update->scene);
         }

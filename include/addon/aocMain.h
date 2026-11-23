@@ -71,7 +71,8 @@ typedef struct AocMain {
     /* 0x680 */ u32 catalogTotal;          /* entries the service holds for the last catalog query */
     /* 0x684 */ u32 catalogOffset;         /* first entry the next catalog query asks for */
     /* 0x688 */ Obj422214Owner *selectedRecord;
-    /* 0x68C */ u8 unk68C[8];
+    /* 0x68C */ u32 itemRecordCount;       /* item records behind selectedRecord (smt4a aocCatalogBuildItemRecords builds them from itemRequest) */
+    /* 0x690 */ u8 unk690[4];
     /* 0x694 */ union {
         char text[64];                    /* the content code the purchase is made with (UTF-8, from the keyboard) */
         u32 words[16];                    /* cleared a word at a time */

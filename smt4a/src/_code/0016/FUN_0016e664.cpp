@@ -1,4 +1,4 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_0016e7c0; not written yet. */
+/* NON_MATCHING: found outside every function: branched to by faultReportKind5; not written yet. */
 /* romwright 0.5.0 decompilation of FUN_0016e664 for reference (not compiled; its own view of the boundaries):
 
 unsigned long long FUN_0016e664(unsigned int param_1,unsigned int param_2)

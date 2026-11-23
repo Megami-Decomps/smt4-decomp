@@ -8295,3 +8295,17 @@
 002a968c uniteDrawSkillInheritancePanel
 003c9354 uniteInheritanceUpdateSkillList
 0049e3f8 listPanelDraw
+0016e7c0 faultReportKind5
+00473e44 aocMainQueueRequest
+004d91b0 aaTreeNext
+004d9234 aaTreePrev
+0017d158 moriModelCommandSwapBuffers
+0017d184 moriCommandQueueClear
+0017d1e4 moriCommandQueueInit
+002fa1b0 btlCommandMenuDrawStatusIcon
+00357d2c scrCommClearPartySlotInactive
+00298978 eventViewJobUpdate
+004760bc aocCatalogBuildItemRecords
+002c5df4 mapRndMazeUpdateModelVisibility
+004ab10c btlUiBuildRosterSummary
+0046f3ac aocSystemMountStep

@@ -22,7 +22,7 @@ void buttonHelpResetSlots(void);
 u32 screenFadeIsBusy(void);
 s32 gameFlagIsSet(u32 flag); // declcheck: local (its headers belong to the battle and camp menus)
 s32 storyModeCanProceed(u32 mode);
-void FUN_00382878(DummyAttachmentWork *work);
+void qcBoardBuildShownTab(DummyAttachmentWork *work);
 u32 FUN_002950e8(UiSpriteState *sprite, s32 fromBelow);
 s32 FUN_00296284(UiSpriteState *sprite, s32 reverse, s32 vertical);
 u8 *qcGetCenterSlotGroups(s32 index);
@@ -98,7 +98,7 @@ void qcBoardStep(DummyAttachmentWork *work)
         if (work->location != 2 && work->location != 3) {
             buttonHelpSetPreset(0xa4);
             work->step++;
-            FUN_00382878(work);
+            qcBoardBuildShownTab(work);
             uiSpriteStateInitFromSource(&work->board.sprites[0], 0x31, -1, &work->board.resources, 11, 1.0f);
             uiSpriteStateInitFromSource(&work->board.sprites[1], 0x31, -1, &work->board.resources, 11, 1.0f);
             uiSpriteStateInitFromSource(&work->board.sprites[2], 0x31, -1, &work->board.resources, 11, 1.0f);

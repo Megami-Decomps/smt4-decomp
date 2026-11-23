@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0016e1a8(unsigned char **, int *);
-int FUN_0016e7c0(void);
+int faultReportKind5(void);
 int vcallSlot12IfValid(unsigned int);
 int fileSystemRequireReady(void);
 int FUN_00188e0c(unsigned int *, int, int, unsigned int);
@@ -54,7 +54,7 @@ extern unsigned char DAT_00557fcc; /* 0x557fcc */
 extern unsigned char DAT_005c0adc; /* 0x5c0adc */
 
 /* Supplied declaration required: FUN_0016e1a8. */
-/* Supplied declaration required: FUN_0016e7c0. */
+/* Supplied declaration required: faultReportKind5. */
 /* Supplied declaration required: vcallSlot12IfValid. */
 /* Supplied declaration required: fileSystemRequireReady. */
 /* Supplied declaration required: FUN_00188e0c. */
@@ -156,7 +156,7 @@ void nn_pl_CTR_CreateGameCoinSaveFile(void)
   }
   else if (((((temp_v1 & 0x3fc00) != 0x4400) || ((temp_v1 & 0x3ff) < 0xb4)) || ((temp_v1 & 0x3ff) >= 200))
           && ((int)temp_v1 < 0)) {
-    FUN_0016e7c0();
+    faultReportKind5();
     return;
   }
   return;

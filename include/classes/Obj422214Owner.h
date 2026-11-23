@@ -5,10 +5,14 @@
 #include "nn/fnd/DateTime.h"
 #include <stddef.h>
 
+extern "C" void *asdOperatorNewE(u32 bytes, ...);
+
 /* Nonpolymorphic owner of the concrete buffer window at offset 0x9bc. */
 struct Obj422214Owner {
     Obj422214Owner();
     ~Obj422214Owner();
+    /* The record arrays come from the engine's allocator (smt4a aocCatalogBuildItemRecords). */
+    static void *operator new[](u32 bytes) throw() { return asdOperatorNewE(bytes); }
     /* 0x000 */ u8 header[0x80];
     /* 0x080 */ u8 directory[0x100];
     /* 0x180 */ u8 contents[0x800];

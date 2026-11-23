@@ -15,7 +15,7 @@ typedef char RandomChoicePreviousOffset[offsetof(RandomChoiceStateView, previous
 extern "C" {
 
 /* Exhaust all four choices before restarting, without repeating the previous choice. */
-u32 FUN_003819b8(RandomChoiceStateView *state)
+u32 qcTabListPickRandomTab(RandomChoiceStateView *state)
 {
     if (state->usedMask == 0xf)
         state->usedMask = 0;

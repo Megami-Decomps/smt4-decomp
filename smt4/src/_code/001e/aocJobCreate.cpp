@@ -31,7 +31,7 @@ void dataTable19ResolveVariants(void);
 char *libc_strcpy(char *destination, const char *source);
 
 s32 eventScriptJobUpdate(u32 job);
-s32 FUN_001e4d70(void);
+s32 eventViewJobUpdate(void);
 void aocJobEnable(void);
 s32 campQueryFalse(void);
 void noopCallback(void *);
@@ -71,7 +71,7 @@ void aocJobCreate(const AocJobTarget *target)
             fileSlotReloadRaw(0x1c);
             dataTable19ResolveVariants();
         }
-        job->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVENT VIEW CALC"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001e4d70), reinterpret_cast<AsdProcFunc>(aocJobEnable), 0);
+        job->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVENT VIEW CALC"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(eventViewJobUpdate), reinterpret_cast<AsdProcFunc>(aocJobEnable), 0);
         taskCreateDraw(reinterpret_cast<const s8 *>("EVENT VIEW UDRAW"), 0x73, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(campQueryFalse), reinterpret_cast<AsdProcFunc>(noopCallback), 0, reinterpret_cast<void *>(job->process));
         taskCreateDraw(reinterpret_cast<const s8 *>("EVENT VIEW DDRAW"), 0xe6, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(noOpReturnZero), reinterpret_cast<AsdProcFunc>(aocViewDrawTaskEnd), 0, reinterpret_cast<void *>(job->process));
     }

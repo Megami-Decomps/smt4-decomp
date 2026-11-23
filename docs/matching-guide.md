@@ -317,6 +317,10 @@ difference a register tie-break.
   another register (`gpuEmitDepthBufferCommands`, both games: 30 lines off against 124; wave 69).
 - A search loop that sets `bool found = true; break;` and tests `found` afterwards is jump-threaded
   into retail's in-loop layout.
+  A call retail makes once at the loop's exit but cross-jumps from two places (the hit, and running out of slots)
+  is such a search too: `found = true;` with the hit's call in the loop and `if (!found) call(0);` after it made
+  smt4a `FUN_00357d2c` IDENTICAL in the loop form its siblings use, where the review rejected a `for (;;)` with the
+  call written in both exits (wave 86).
 - In a nested search (an inner loop whose hit ends the outer one too), set the result variable before each
   `break`, break the outer loop on it and apply the default once after both: `result = level; break;` …
   `if (result != 0) break;` … `return result != 0 ? result : 1;`. smt4 `FUN_0029aef0` is IDENTICAL with it and
@@ -432,6 +436,8 @@ difference a register tie-break.
   code (which halfwords load first, which registers the sums go through); where the scalar goes does
   not. Try both pointer orders, not every permutation (`labelEntry->x + entry->x + x`, smt4
   `titleConfigDraw`).
+- Write one order in the whole function: smt4 `FUN_0019715c` matched closer (77 lines) with the operand order picked
+  site by site to follow retail's adds; the wave 86 review wrote `row + part + x` throughout (155 lines).
 - A value retail computes ahead of a call's stack arguments, or keeps across an earlier call in place of the value it
   derives from, was its own statement before the call: `s32 offset = bar->x - damage->x;` (smt4a `FUN_003c4250`) and
   `s32 nextSlide = slide + 13;` held across the first draw (smt4a `partyPanelDrawAilmentIcon`), both IDENTICAL (wave 73).
@@ -484,6 +490,14 @@ asks for.
 - The navigation screens' flag-word updates are `flagsSetBits`/`flagsClearBits` (`util/BitsAndBytes.h`; one copy
   each, `*flags |= bits` and `*flags &= ~bits`): smt4 `screenStep` is IDENTICAL with it and its twelve other users in
   both games keep their scores (wave 84).
+  Wave 86 kept the helper only where both twins of a pair use it and are IDENTICAL with it (`aocLoadingTaskStart`,
+  `AocMain::submitTokenRequest`, `FUN_0038b4f0`/`FUN_00473e44`, `updateContentTransitionDispatch`/`FUN_004b73e8`) and
+  rejected three singles whose twin keeps the operator or gets worse with the helper. Open question, not a rule: the
+  same AocMain module's `aocBoardCreateDrawJobs` is IDENTICAL with a plain `|=`.
+- A value retail forms twice, once for the range tests and again for the in-range result (`sub r1, r0, #1 ...
+  subge r0, r0, #1`), is a macro evaluating its argument twice: the event viewers' `EVENT_WRAP_VALUE(value, max)`
+  (`event/EventScriptJob.h`) with the `u32` event id converted, `EVENT_WRAP_VALUE((s32)work->eventId - 1, 999)`, took
+  smt4a `FUN_00298978` from 252 lines (an inline function) to 36 and its IV twin `FUN_001e4d70` to 14 (wave 86).
 - A degree or ratio product passed to both `sinf` and `cosf` is written in each call (`sinf(ratio * 1.5707964f)`,
   `cosf(ratio * 1.5707964f)`), not as a shared `angle` local: smt4 `FUN_0026f024`/smt4a `FUN_0039a2d8`,
   `effectSpawnAheadOfScene` and smt4a `FUN_003135bc` are IDENTICAL with it (wave 84).
@@ -658,6 +672,11 @@ asks for.
 - A translation unit only helps when retail keeps the callee out of line: built as one file, smt4
   `buttonHelpSetSlot` was inlined into `buttonHelpCalc` (153 retail rows against 222), although both address the
   queued arrays from one pool word; the TU was not made (wave 80).
+- Data addressed from another file-defined object's literal (`sub r1, r0, #0x120` from one table to the next) is
+  evidence of the file too: smt4 `FUN_00326e94` and `FUN_00327858` joined the `EffectEditor/EffectEditor.cpp` unit
+  (13 -> 11 and 13 lines). Their page tables belong to a larger block of editor menu pages in `.data` (labels in
+  `.rodata`, handler pointers, `g_effectEditorState` among them) that the file defines and is not written yet
+  (wave 86).
 - When a caller inlines a real function, its out-of-line copy should call the shared inline and stay IDENTICAL:
   `gameSetFlag1E60` (`shard/GameGlobals.h`, FUN_0029dfc0's body written flat; the comma-assigned spelling is 38 lines
   off) made smt4 `campMenuSessionReset` IDENTICAL, `questReadRuntimeFlagInline` the quest-list collectors (wave 82).
@@ -718,6 +737,9 @@ asks for.
 - A destructor slot whose whole body is `b <Base>::~Base` names the base class: smt4a `Obj55c99c` (slot 0 is a tail
   call of `Obj422540::~Obj422540`, the Apocalypse twin vtable `_ZTV9Obj422540`) derives from `Obj422540`, and its
   creator `FUN_004ad184` is IDENTICAL built through the base's constructor (wave 82).
+  Not yet for its siblings `Obj55c954`/`Obj55c978` (their destructor slots tail-call `~Obj422540` as well): with the
+  base, the proven creator `FUN_004acea0` loses IDENTICAL in either order of the `kind`/`size` stores (6 or 15
+  lines), so `classes/AllocatedSelection.h` keeps its `AllocatedSelectionState` view (wave 86).
 - A vtable whose slots 0/1 are destructors: declare a virtual destructor and write `delete`; it fixes
   the predication around the call. Not when slot 0 is an ordinary method.
 - A slot-0 function whose whole body is a removed tail call is not a native destructor even when the derived class's
@@ -996,6 +1018,11 @@ wave 71). A unit's `"autoinline"` key overrides the recipe ([per-unit compile ke
   recipe, 532 so) have the entry `"multifile": ["vectorPairTransitionStep"], "autoinline": true`; the smt4
   `playerInitializeStats` translation unit has `"autoinline": false` (`playerGetGrowthParameters` IDENTICAL, 41 lines
   with autoinline; `playerInitializeStats` calls the header inlines retail inlined; wave 85).
+- Autoinline off is not a file setting in retail: compiling every unproven unit of both games (1987 smt4, 2602 smt4a)
+  with the other setting gave five isolated hits, no twin and no run, and the proven neighbours of the four plain
+  units break with `--no_autoinline` (wave 86). Autoinline on is armcc's default for every plain unit; on a
+  `multifile` unit, `"autoinline": true` is the normal fix when retail inlines what the recipe keeps out of line:
+  smt4a `requestImageDraw` (`"multifile": ["requestIdToCode"]`) is IDENTICAL with it (4 lines with the recipe).
 
 ### Finding the evidence
 

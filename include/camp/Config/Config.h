@@ -49,7 +49,7 @@ struct ConfigHelpRecord {
 };
 typedef char ConfigWorkTouchOffsets[offsetof(ConfigWork, touchGroupImage) == 0x70 &&
     offsetof(ConfigWork, countA) == 0x74 ? 1 : -1];
-/* FUN_0019715c tail-calls the draw with its third (unused here) display parameter in r2. */
+/* campDrawSlidingPanel tail-calls the draw with its third (unused here) display parameter in r2. */
 extern "C" void configDrawOptionPanel(s32 x, s32 y, s32 display);
 extern "C" void configDrawChoices(s32 count, s32 x, s32 y, s32 selected, const ConfigurationChoices *choices);
 

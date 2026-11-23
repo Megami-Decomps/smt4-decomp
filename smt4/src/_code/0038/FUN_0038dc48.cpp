@@ -15,8 +15,8 @@ int FUN_00352f14(int [3], unsigned char [1024], int);
 int FUN_003531dc(...);
 int FUN_0035474c(int *, unsigned char [16]);
 int FUN_00354a20(int *, unsigned char [16], int);
-int FUN_00354b18(unsigned char [16], unsigned int, unsigned char [1024], int);
-int FUN_00354b3c(...);
+int _ZN17AocCatalogRequestC1EjPvj(unsigned char [16], unsigned int, unsigned char [1024], int);
+int _ZN17AocCatalogRequestD1Ev(...);
 int aocApplicationRecreateDecoder(...);
 int FUN_0038d598(void);
 
@@ -56,8 +56,6 @@ extern unsigned int halfPair48LowByteB(int);
 /* Supplied declaration required: FUN_003531dc. */
 /* Supplied declaration required: FUN_0035474c. */
 /* Supplied declaration required: FUN_00354a20. */
-/* Supplied declaration required: FUN_00354b18. */
-/* Supplied declaration required: FUN_00354b3c. */
 /* Supplied declaration required: aocApplicationRecreateDecoder. */
 /* Supplied declaration required: FUN_0038d598. */
 extern unsigned int valueOwnerGet(unsigned int);
@@ -129,14 +127,14 @@ void FUN_0038dc48(int param_1)
   if (temp_v1 < 0) {
     return;
   }
-  FUN_00354b18(temp_v17,*(unsigned int *)(temp_v0 + 0x80),temp_v6,0x400);
+  _ZN17AocCatalogRequestC1EjPvj(temp_v17,*(unsigned int *)(temp_v0 + 0x80),temp_v6,0x400);
   FUN_00354a20(&temp_v8,temp_v17,temp_v0 + 0x694);
   *(unsigned int *)(param_1 + 0xc) = temp_v8;
   *(unsigned int *)(param_1 + 0x10) = uStack_f4;
   temp_v1 = legacyResourceIdRemap(param_1 + 0xc);
   if (temp_v1 < 0) {
     recordClearWideHandle(temp_v0 + 0x28);
-    FUN_00354b3c(temp_v17);
+    _ZN17AocCatalogRequestD1Ev(temp_v17);
     return;
   }
   FUN_00352f14(temp_v12,temp_v7,0x400);
@@ -277,12 +275,12 @@ void FUN_0038dc48(int param_1)
         *(unsigned int *)(param_1 + 0x10) = uStack_f4;
         legacyResourceIdRemap(param_1 + 0xc);
       }
-      FUN_00354b3c(temp_v17);
+      _ZN17AocCatalogRequestD1Ev(temp_v17);
       return;
     }
   }
   recordClearWideHandle(temp_v0 + 0x28);
-  FUN_00354b3c(temp_v17);
+  _ZN17AocCatalogRequestD1Ev(temp_v17);
   return;
 }
 

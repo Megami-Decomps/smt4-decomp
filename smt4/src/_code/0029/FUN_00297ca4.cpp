@@ -18,7 +18,6 @@ u32 FUN_00297ca4(BattleCommandMenu *menu, s32 confirm)
     if (confirm != 0 && menu->mode == 6)
         return 11;
     s8 *slotTable = gameGetSlotTable();
-    CommandMenuState *state = &menu->state;
     BattleCommandEntry *command;
     s32 count = 0;
     for (s32 i = 0; i < 9; i++) {
@@ -29,7 +28,7 @@ u32 FUN_00297ca4(BattleCommandMenu *menu, s32 confirm)
         if (!battleCommandIsAvailable(command))
             continue;
         if (command->kind == 5) {
-            if (state->slotCommandLocked != 0)
+            if (menu->state.slotCommandLocked != 0)
                 continue;
         } else if (command->kind == 2) {
             if (FUN_00293988(btlGetMainState()) == 0)

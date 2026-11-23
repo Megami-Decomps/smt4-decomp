@@ -21,7 +21,7 @@ void FUN_0016e1a4(void)
       piVar1[2] = 0;
     }
     if (iVar2 < 0) {
-      FUN_0016e7c0(iVar2,0x16e214);
+      faultReportKind5(iVar2,0x16e214);
     }
   }
   iVar2 = (**(code **)(*piVar1 + 0x34))(piVar1,auStack_1c,(int)((unsigned long long)uVar3 >> 0x20),0x14,1);
@@ -34,7 +34,7 @@ void FUN_0016e1a4(void)
       piVar1[2] = 0;
     }
     if (iVar2 < 0) {
-      FUN_0016e7c0(iVar2,0x16e278);
+      faultReportKind5(iVar2,0x16e278);
     }
   }
   if ((piVar1[2] & 0xfffffffeU) != 0) {

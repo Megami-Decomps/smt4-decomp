@@ -9054,3 +9054,19 @@
 00635e08 g_asdModelSlotBanks inferred twin of smt4 g_asdModelSlotBanks: the banks after g_asdModelBanks (w85-f2)
 00636310 g_asdModelBanks2 inferred twin of smt4 g_asdModelBanks2
 00636818 g_asdModelSlotBanks2 inferred twin of smt4 g_asdModelSlotBanks2
+005b3d14 _ZTV9Obj464cb0 inferred size:0x38 vtable: header and 12 slots; 0x5b3d4c is a separate object (twin of smt4's)
+005b3d4c g_commandQueueDefaults inferred size:0x8 twin of smt4 g_commandQueueDefaults (FUN_00138a64 resets it)
+0016e7c0 faultReportKind5 inferred twin of smt4 faultReportKind5
+00473e44 aocMainQueueRequest inferred twin of smt4 aocMainQueueRequest
+004d91b0 aaTreeNext inferred twin of smt4 aaTreeNext
+004d9234 aaTreePrev inferred twin of smt4 aaTreePrev
+0017d158 moriModelCommandSwapBuffers inferred flips the model command buffer index and clears the newly selected queue (w86-s1)
+0017d184 moriCommandQueueClear inferred clears a model command queue's records and bookkeeping (w86-s1)
+0017d1e4 moriCommandQueueInit inferred initialises a model command queue on two caller-supplied buffers (w86-s1)
+002fa1b0 btlCommandMenuDrawStatusIcon inferred draws a battle command menu's status icon; btlCommandMenuDraw calls it for both styles (w86-s1)
+00357d2c scrCommClearPartySlotInactive inferred script command: picks another occupied party slot when the member is selected, then clears its inactive flag (w86-s2)
+00298978 eventViewJobUpdate inferred twin of smt4 eventViewJobUpdate (w86-f1)
+004760bc aocCatalogBuildItemRecords inferred rebuilds the shop's item records from the catalog's item entries (w86-f1)
+002c5df4 mapRndMazeUpdateModelVisibility inferred shows and hides the random maze's piece models by cell (w86-f1)
+004ab10c btlUiBuildRosterSummary inferred builds the battle UI's roster masks (w86-f1)
+0046f3ac aocSystemMountStep inferred twin of smt4 aocSystemMountStep

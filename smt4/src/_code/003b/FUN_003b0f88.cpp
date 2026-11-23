@@ -60,8 +60,8 @@ extern unsigned int containerGrowCapacity(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0022c564. */
 /* Supplied declaration required: FUN_00396f3c. */
 /* Supplied declaration required: treeRebalanceAfterErase. */
-extern romwright_code *****FUN_003970f8(romwright_code *******);
-extern romwright_code *****FUN_0039717c(romwright_code *******);
+extern romwright_code *****aaTreeNext(romwright_code *******);
+extern romwright_code *****aaTreePrev(romwright_code *******);
 /* Supplied declaration required: FUN_003af304. */
 /* Supplied declaration required: FUN_003aff9c. */
 /* Supplied declaration required: FUN_003b0190. */
@@ -694,7 +694,7 @@ unsigned int FUN_003b0f88(unsigned int *param_1,int param_2,unsigned int *param_
           pppppcVar20[2] = (romwright_code ****)temp_v17;
           temp_v17[3] = (romwright_code ******)pppppcVar20;
         }
-        pppppcVar20 = (romwright_code *****)FUN_003970f8(temp_v18);
+        pppppcVar20 = (romwright_code *****)aaTreeNext(temp_v18);
         ppppppcVar15 = *pppppppcVar6;
         ppppppcVar5 = (romwright_code ******)(pppppppcVar1 + 2);
         if (ppppppcVar15 != ppppppcVar5) {
@@ -705,7 +705,7 @@ unsigned int FUN_003b0f88(unsigned int *param_1,int param_2,unsigned int *param_
             pppppppcVar1[6] = (romwright_code ******)pppppcVar20;
           }
           if ((romwright_code *******)pppppppcVar1[7] == pppppppcVar6) {
-            pppppcVar20 = (romwright_code *****)FUN_0039717c(pppppppcVar6);
+            pppppcVar20 = (romwright_code *****)aaTreePrev(pppppppcVar6);
             pppppppcVar1[7] = (romwright_code ******)pppppcVar20;
           }
           ppppppcVar3 = pppppppcVar6[2];

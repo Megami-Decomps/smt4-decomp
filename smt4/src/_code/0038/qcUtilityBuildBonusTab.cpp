@@ -8,7 +8,7 @@
 extern "C" {
 
 /* Builds the extra tab (4) of the quest center's list, with the bonus slot forced, and shows it. */
-u32 FUN_00381958(QcTabListState *list, u32 group, u32 forcedSlot, u32 weightKind)
+u32 qcUtilityBuildBonusTab(QcTabListState *list, u32 group, u32 forcedSlot, u32 weightKind)
 {
     u32 result = QcUtility_BuildTabList(list, 4, group, forcedSlot, weightKind, 0, 20);
     list->tab = 4;

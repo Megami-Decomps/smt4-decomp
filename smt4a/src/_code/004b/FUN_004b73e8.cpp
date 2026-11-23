@@ -2,6 +2,7 @@
 #include "game/GameStateA.h"
 #include "shard/Shard004B.h"
 #include "shard/W5_W5Match7_SceneState.h"
+#include "util/BitsAndBytes.h"
 
 extern "C" {
 extern void *g_aocSystem;
@@ -98,7 +99,7 @@ void FUN_004b73e8(CampScriptPanelResources *panel)
             panel->transition.state = 6;
             panel->transition.timer = 0;
             panel->selected.entry = menu4CGetCurrentEntry(reinterpret_cast<Menu4C *>(panel->selectionMenu.menu));
-            panel->mikado.flags &= ~0x2000;
+            flagsClearBits(&panel->mikado.flags, 0x2000);
         } else {
             questMenuPanelUpdate(panel);
         }

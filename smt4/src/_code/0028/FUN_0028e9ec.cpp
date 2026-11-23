@@ -1,4 +1,5 @@
-/* NON_MATCHING: menu-state base hoist precedes the slot clear; kind-3 test uses BEQ/B rather than retail BNE/B. */
+/* NON_MATCHING: 4 lines: the kind-3 test branches with beq/b where retail uses bne/b (FUN_00297ca4's kind-2 test
+ * has the same residue). */
 #include "battle/BattleCommandMenu.h"
 #include "gamedata/UnitRecordAccess.h"
 
@@ -28,7 +29,6 @@ void FUN_0028e9ec(BattleCommandMenu *menu)
             count++;
     }
     gridNavigationConfigure(&menu->counters[0], count, 1, count, 1, 1);
-    CommandMenuState *state = &menu->state;
     for (s32 slot = 0; slot < 3; slot++) {
         s32 slotCount = 0;
         if (gameGetSlotTable()[0x9108 + slot] >= 0) {
@@ -39,7 +39,7 @@ void FUN_0028e9ec(BattleCommandMenu *menu)
                     if (!battleCommandIsAvailable(command))
                         continue;
                     if (command->kind == 5) {
-                        if (state->slotCommandLocked != 0)
+                        if (menu->state.slotCommandLocked != 0)
                             continue;
                     } else if (command->kind == 3) {
                         if (idOwnerHasActiveObject(unit) == 0)

@@ -27,9 +27,10 @@
 
 extern "C" {
 extern EventScriptJobWork *g_aocJob;
-extern EventScriptRequest DAT_005e1f70;
 
 void rt_aeabi_memclr(void *memory, u32 size);
+extern EventScriptRequest DAT_005e1f70;
+
 void jobSetIntensity(u32 job, s32 fullIntensity);
 void messageSlotSet(s32 value);
 u32 messageMainGetValue(void);
@@ -53,7 +54,7 @@ void byteTableASetValue3(s8 value);
 s32 eventIsSkipping(void);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 u32 tableGroupFindEntryIndex(void *commands, const char *name);
-void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
+u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 /* The game flag an event entry raises when it ends. Apocalypse's is a stub returning 0 that armlink
  * inlined at its only call and removed. */
 u32 eventScriptFindCompletionFlag(u32 eventId, const ScriptVmLabel *entry);

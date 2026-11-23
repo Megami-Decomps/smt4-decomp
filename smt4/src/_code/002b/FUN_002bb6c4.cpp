@@ -21,14 +21,14 @@ struct FileObj {
 
 extern "C" {
 void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
-void FUN_002bb648(s32 result, u32 location, u32 failed);
+void faultReportKind5(s32 result, u32 location, u32 failed);
 }
 
 static __inline void checkFileResult(s32 result, u32 location)
 {
     u32 failed = static_cast<u32>(result) >> 31;
     if (failed)
-        FUN_002bb648(result, location, failed);
+        faultReportKind5(result, location, failed);
 }
 
 static __inline void fileObjClose(FileObj *file)

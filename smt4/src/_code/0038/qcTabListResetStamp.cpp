@@ -11,7 +11,7 @@ typedef struct Obj {
     /* 0x9 */ u8 unk9;
 } Obj;
 
-void sysResetTimestampState(Obj *obj)
+void qcTabListResetStamp(Obj *obj)
 {
     obj->unk9 = 0;
     obj->unk8 = 0;

@@ -8,7 +8,7 @@ int nn_pl_CTR_CreateGameCoinSaveFile(void);
 int FUN_001398f8(...);
 int archiveDeviceSendPathRequest(void);
 int fileSystemRequireReady(void);
-int FUN_002bb648(...);
+int faultReportKind5(...);
 int asdFatalError(void);
 
 typedef int romwright_code(...);
@@ -18,7 +18,7 @@ extern unsigned char DAT_00471b5c; /* 0x471b5c */
 /* Supplied declaration required: FUN_001398f8. */
 /* Supplied declaration required: archiveDeviceSendPathRequest. */
 /* Supplied declaration required: fileSystemRequireReady. */
-/* Supplied declaration required: FUN_002bb648. */
+/* Supplied declaration required: faultReportKind5. */
 /* Supplied declaration required: asdFatalError. */
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
@@ -44,7 +44,7 @@ unsigned int FUN_00139e40(int *param_1,int *param_2,unsigned int param_3,unsigne
       param_1[2] = 0;
     }
     if (temp_v1 < 0) {
-      FUN_002bb648(temp_v1,0x139eb0);
+      faultReportKind5(temp_v1,0x139eb0);
     }
   }
   if (*param_2 != 0x4f00) {
@@ -60,7 +60,7 @@ unsigned int FUN_00139e40(int *param_1,int *param_2,unsigned int param_3,unsigne
     archiveDeviceSendPathRequest();
     if ((((temp_v2 & 0x3fc00) != 0x4400) || ((temp_v2 & 0x3ff) < 100)) || ((temp_v2 & 0x3ff) >= 0xb4)) {
       if ((int)temp_v2 < 0) {
-        FUN_002bb648();
+        faultReportKind5();
       }
     }
     nn_pl_CTR_CreateGameCoinSaveFile();
@@ -76,7 +76,7 @@ unsigned int FUN_00139e40(int *param_1,int *param_2,unsigned int param_3,unsigne
         param_1[2] = 0;
       }
       if (temp_v1 < 0) {
-        FUN_002bb648(temp_v1,0x139f9c);
+        faultReportKind5(temp_v1,0x139f9c);
       }
     }
   }

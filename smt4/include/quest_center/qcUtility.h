@@ -40,8 +40,8 @@ struct QcTabListState {
 
 /* One 0x20-byte record of the quest center's quest table (data table 0x26). */
 struct QcQuestRecord {
-    /* 0x00 */ u8 unk00[0x16];
-    /* 0x16 */ u16 category;
+    /* 0x00 */ char name[0x16];    /* shown on the board when the quest has no category */
+    /* 0x16 */ u16 category;       /* row of data table 0x25 naming the quest, 0 = none */
     /* 0x18 */ u16 requiredFlag;   /* the quest is skipped once this game flag is set */
     /* 0x1A */ u8 weights[6];      /* the quest's draw weight in each list kind, 0 = never drawn */
 };

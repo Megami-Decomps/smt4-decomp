@@ -22,7 +22,7 @@ struct CommandCounter {
 
 struct CommandMenuState {
     u8 unk00[0xD1];
-    u8 slotCommandLocked; // 0xD1
+    s8 slotCommandLocked; // 0xD1 (s8: retail reads it through a menu + 0x3800 base register)
 };
 
 /* The battle command menu object (accessed prefix). */

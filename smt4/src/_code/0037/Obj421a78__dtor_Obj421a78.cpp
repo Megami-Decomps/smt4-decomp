@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail inlines the clear body with its own copy of `this` (mov r1, r0) and a zero register set up before the vtable store, loading the vtable before the prologue; armcc keeps r0 and schedules the vtable store first. */
+/* NON_MATCHING: register allocation only: in the inlined slot clear retail addresses the word tables through ip and the pairs through r4; the build swaps them. */
 #include "classes/Obj421a78.h"
 
 /* Clears the active slots and releases the resource word. */

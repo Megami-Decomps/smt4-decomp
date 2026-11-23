@@ -33383,12 +33383,12 @@
     },
     {
       "address": "0x16e7c0",
-      "function": "FUN_0016e7c0",
+      "function": "faultReportKind5",
       "module": "_code",
-      "object": "build/obj/_code/0016/FUN_0016e7c0.o",
+      "object": "build/obj/_code/0016/faultReportKind5.o",
       "size": 56,
-      "source": "src/_code/0016/FUN_0016e7c0.cpp",
-      "target": "orig/target/_code/0016/FUN_0016e7c0.o",
+      "source": "src/_code/0016/faultReportKind5.cpp",
+      "target": "orig/target/_code/0016/faultReportKind5.o",
       "thumb": false
     },
     {
@@ -35745,32 +35745,32 @@
     },
     {
       "address": "0x17d158",
-      "function": "FUN_0017d158",
+      "function": "moriModelCommandSwapBuffers",
       "module": "_code",
-      "object": "build/obj/_code/0017/FUN_0017d158.o",
+      "object": "build/obj/_code/0017/moriModelCommandSwapBuffers.o",
       "size": 44,
-      "source": "src/_code/0017/FUN_0017d158.cpp",
-      "target": "orig/target/_code/0017/FUN_0017d158.o",
+      "source": "src/_code/0017/moriModelCommandSwapBuffers.cpp",
+      "target": "orig/target/_code/0017/moriModelCommandSwapBuffers.o",
       "thumb": false
     },
     {
       "address": "0x17d184",
-      "function": "FUN_0017d184",
+      "function": "moriCommandQueueClear",
       "module": "_code",
-      "object": "build/obj/_code/0017/FUN_0017d184.o",
+      "object": "build/obj/_code/0017/moriCommandQueueClear.o",
       "size": 96,
-      "source": "src/_code/0017/FUN_0017d184.cpp",
-      "target": "orig/target/_code/0017/FUN_0017d184.o",
+      "source": "src/_code/0017/moriCommandQueueClear.cpp",
+      "target": "orig/target/_code/0017/moriCommandQueueClear.o",
       "thumb": false
     },
     {
       "address": "0x17d1e4",
-      "function": "FUN_0017d1e4",
+      "function": "moriCommandQueueInit",
       "module": "_code",
-      "object": "build/obj/_code/0017/FUN_0017d1e4.o",
+      "object": "build/obj/_code/0017/moriCommandQueueInit.o",
       "size": 116,
-      "source": "src/_code/0017/FUN_0017d1e4.cpp",
-      "target": "orig/target/_code/0017/FUN_0017d1e4.o",
+      "source": "src/_code/0017/moriCommandQueueInit.cpp",
+      "target": "orig/target/_code/0017/moriCommandQueueInit.o",
       "thumb": false
     },
     {
@@ -56709,7 +56709,8 @@
       "thumb": false,
       "multifile": [
         "requestIdToCode"
-      ]
+      ],
+      "autoinline": true
     },
     {
       "address": "0x227294",
@@ -64629,12 +64630,12 @@
     },
     {
       "address": "0x298978",
-      "function": "FUN_00298978",
+      "function": "eventViewJobUpdate",
       "module": "_code",
-      "object": "build/obj/_code/0029/FUN_00298978.o",
+      "object": "build/obj/_code/0029/eventViewJobUpdate.o",
       "size": 2140,
-      "source": "src/_code/0029/FUN_00298978.cpp",
-      "target": "orig/target/_code/0029/FUN_00298978.o",
+      "source": "src/_code/0029/eventViewJobUpdate.cpp",
+      "target": "orig/target/_code/0029/eventViewJobUpdate.o",
       "thumb": false
     },
     {
@@ -69026,12 +69027,12 @@
     },
     {
       "address": "0x2c5df4",
-      "function": "FUN_002c5df4",
+      "function": "mapRndMazeUpdateModelVisibility",
       "module": "_code",
-      "object": "build/obj/_code/002c/FUN_002c5df4.o",
+      "object": "build/obj/_code/002c/mapRndMazeUpdateModelVisibility.o",
       "size": 2328,
-      "source": "src/_code/002c/FUN_002c5df4.cpp",
-      "target": "orig/target/_code/002c/FUN_002c5df4.o",
+      "source": "src/_code/002c/mapRndMazeUpdateModelVisibility.cpp",
+      "target": "orig/target/_code/002c/mapRndMazeUpdateModelVisibility.o",
       "thumb": false
     },
     {
@@ -82255,12 +82256,12 @@
     },
     {
       "address": "0x2fa1b0",
-      "function": "FUN_002fa1b0",
+      "function": "btlCommandMenuDrawStatusIcon",
       "module": "_code",
-      "object": "build/obj/_code/002f/FUN_002fa1b0.o",
+      "object": "build/obj/_code/002f/btlCommandMenuDrawStatusIcon.o",
       "size": 636,
-      "source": "src/_code/002f/FUN_002fa1b0.cpp",
-      "target": "orig/target/_code/002f/FUN_002fa1b0.o",
+      "source": "src/_code/002f/btlCommandMenuDrawStatusIcon.cpp",
+      "target": "orig/target/_code/002f/btlCommandMenuDrawStatusIcon.o",
       "thumb": false
     },
     {
@@ -104700,12 +104701,12 @@
     },
     {
       "address": "0x357d2c",
-      "function": "FUN_00357d2c",
+      "function": "scrCommClearPartySlotInactive",
       "module": "_code",
-      "object": "build/obj/_code/0035/FUN_00357d2c.o",
+      "object": "build/obj/_code/0035/scrCommClearPartySlotInactive.o",
       "size": 144,
-      "source": "src/_code/0035/FUN_00357d2c.cpp",
-      "target": "orig/target/_code/0035/FUN_00357d2c.o",
+      "source": "src/_code/0035/scrCommClearPartySlotInactive.cpp",
+      "target": "orig/target/_code/0035/scrCommClearPartySlotInactive.o",
       "thumb": false
     },
     {
@@ -153352,12 +153353,12 @@
     },
     {
       "address": "0x46f3ac",
-      "function": "FUN_0046f3ac",
+      "function": "aocSystemMountStep",
       "module": "_code",
-      "object": "build/obj/_code/0046/FUN_0046f3ac.o",
+      "object": "build/obj/_code/0046/aocSystemMountStep.o",
       "size": 1732,
-      "source": "src/_code/0046/FUN_0046f3ac.cpp",
-      "target": "orig/target/_code/0046/FUN_0046f3ac.o",
+      "source": "src/_code/0046/aocSystemMountStep.cpp",
+      "target": "orig/target/_code/0046/aocSystemMountStep.o",
       "thumb": false
     },
     {
@@ -154254,12 +154255,12 @@
     },
     {
       "address": "0x473e44",
-      "function": "FUN_00473e44",
+      "function": "aocMainQueueRequest",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_00473e44.o",
+      "object": "build/obj/_code/0047/aocMainQueueRequest.o",
       "size": 84,
-      "source": "src/_code/0047/FUN_00473e44.cpp",
-      "target": "orig/target/_code/0047/FUN_00473e44.o",
+      "source": "src/_code/0047/aocMainQueueRequest.cpp",
+      "target": "orig/target/_code/0047/aocMainQueueRequest.o",
       "thumb": false
     },
     {
@@ -154626,12 +154627,12 @@
     },
     {
       "address": "0x4760bc",
-      "function": "FUN_004760bc",
+      "function": "aocCatalogBuildItemRecords",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_004760bc.o",
+      "object": "build/obj/_code/0047/aocCatalogBuildItemRecords.o",
       "size": 1772,
-      "source": "src/_code/0047/FUN_004760bc.cpp",
-      "target": "orig/target/_code/0047/FUN_004760bc.o",
+      "source": "src/_code/0047/aocCatalogBuildItemRecords.cpp",
+      "target": "orig/target/_code/0047/aocCatalogBuildItemRecords.o",
       "thumb": false
     },
     {
@@ -161588,12 +161589,12 @@
     },
     {
       "address": "0x4ab10c",
-      "function": "FUN_004ab10c",
+      "function": "btlUiBuildRosterSummary",
       "module": "_code",
-      "object": "build/obj/_code/004a/FUN_004ab10c.o",
+      "object": "build/obj/_code/004a/btlUiBuildRosterSummary.o",
       "size": 1148,
-      "source": "src/_code/004a/FUN_004ab10c.cpp",
-      "target": "orig/target/_code/004a/FUN_004ab10c.o",
+      "source": "src/_code/004a/btlUiBuildRosterSummary.cpp",
+      "target": "orig/target/_code/004a/btlUiBuildRosterSummary.o",
       "thumb": false
     },
     {
@@ -166776,22 +166777,22 @@
     },
     {
       "address": "0x4d91b0",
-      "function": "FUN_004d91b0",
+      "function": "aaTreeNext",
       "module": "_code",
-      "object": "build/obj/_code/004d/FUN_004d91b0.o",
+      "object": "build/obj/_code/004d/aaTreeNext.o",
       "size": 132,
-      "source": "src/_code/004d/FUN_004d91b0.cpp",
-      "target": "orig/target/_code/004d/FUN_004d91b0.o",
+      "source": "src/_code/004d/aaTreeNext.cpp",
+      "target": "orig/target/_code/004d/aaTreeNext.o",
       "thumb": false
     },
     {
       "address": "0x4d9234",
-      "function": "FUN_004d9234",
+      "function": "aaTreePrev",
       "module": "_code",
-      "object": "build/obj/_code/004d/FUN_004d9234.o",
+      "object": "build/obj/_code/004d/aaTreePrev.o",
       "size": 132,
-      "source": "src/_code/004d/FUN_004d9234.cpp",
-      "target": "orig/target/_code/004d/FUN_004d9234.o",
+      "source": "src/_code/004d/aaTreePrev.cpp",
+      "target": "orig/target/_code/004d/aaTreePrev.o",
       "thumb": false
     },
     {

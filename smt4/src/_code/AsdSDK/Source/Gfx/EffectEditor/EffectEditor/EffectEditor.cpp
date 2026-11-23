@@ -1,5 +1,6 @@
 #include "ui/UiSpriteApi.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers_effMenu.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #define EFFECT_EDITOR_STORAGE_DEFINITIONS
 #include "gfx/EffectEditorStorage.h"
 #include "shard/W6_W6Match6_EffectRender.h"
@@ -15,6 +16,20 @@
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 #include "AsdSDK/AsdMemCopy.h"
 #include "gfx/VectorScratch.h"
+
+/* One line of an editor parameter page. */
+struct EffectEditorPageItem {
+    /* 0x00 */ u8 unk00[0x18];
+};
+
+/* The parameter page cursor: the shown items and the selected one. */
+struct EffectEditorPageCursor {
+    /* 0x00 */ u8 unk00[0xc];
+    /* 0x0C */ s32 index;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ EffectEditorPageItem *items;
+    /* 0x18 */ s32 itemCount;
+};
 
 extern "C" {
 static EffectEditorSettings g_effectEditorSettings;
@@ -33,6 +48,9 @@ __align(16) static EffectEditorVector g_effectEditorVector;
 static EffectEditorVector g_effectEditorRotation;
 extern EffectEditorDefaultSlot g_effectEditorState;
 extern EffectSelectionCatalogEntry *DAT_0044f4d4[13];
+extern EffectEditorPageCursor DAT_0044f708;
+extern EffectEditorPageItem DAT_0044f5e8[3];
+extern EffectEditorPageItem DAT_0044f630[9];
 void __aeabi_memcpy4(void *, const void *, u32);
 void randomStateSeed(u32, u32);
 EffectSelectionItem *linkedFindItemByIndex(void *, s32);
@@ -374,3 +392,61 @@ u32 effectEditorEditPositionVector(EffectEditorSnapshot *record, s32 relative)
     return result;
 }
 }
+
+extern "C" {
+
+/* NON_MATCHING: 11 lines: the page tables and their cursor (DAT_0044f5e8, DAT_0044f630, DAT_0044f708) are part of
+ * the editor's block of menu pages in .data, which this file defines in retail and which is not written yet: retail
+ * addresses DAT_0044f5e8 as DAT_0044f708 - 0x120, this build loads each from its own literal. */
+/* Reloads the selected effect record over its saved header and picks the parameter page for its
+ * kind (flag 2: the three-line page, else the nine-line page), keeping the cursor in range. */
+void *FUN_00326e94(void *arg)
+{
+    void *item = linkedFindItemByIndex(static_cast<LinkedItems *>(g_effectEditor.list),
+                                       g_effectEditorState.object.indices.extraOffset + g_effectEditor.index);
+    __aeabi_memcpy4(&g_effectEditorSettings, item, sizeof(g_effectEditorSettings));
+    __aeabi_memcpy4(&g_effectEditorSettings, &g_effectEditorSavedSnapshot, sizeof(g_effectEditorSavedSnapshot));
+    if (g_effectEditorSettings.record.flags & 2) {
+        DAT_0044f708.items = DAT_0044f5e8;
+        DAT_0044f708.itemCount = 3;
+        if (DAT_0044f708.index > 3) {
+            DAT_0044f708.index = 0;
+        }
+    } else {
+        DAT_0044f708.items = DAT_0044f630;
+        DAT_0044f708.itemCount = 9;
+        if (DAT_0044f708.index == 0) {
+            DAT_0044f708.index = 1;
+        }
+    }
+    return arg;
+}
+
+/* NON_MATCHING: 13 lines: the paired default-state addresses and the reset stores are formed differently (retail
+ * addresses the first slot as g_effectEditorState - 0x350: the file defines both, not modelled yet). */
+/* Recreates the editor's part and clears its current and default selections. */
+u32 FUN_00327858(void)
+{
+    if (g_effectEditor.resource != NULL) {
+        registrationEntryInsert((u32)g_effectEditor.node, 3);
+        g_effectEditor.node = 0;
+        if (g_effectEditor.resource != NULL) {
+            resourceQueueDeferredDestroy(g_effectEditor.resource, 3);
+            g_effectEditor.resource = NULL;
+        }
+    }
+    if (g_effectEditor.list != NULL) {
+        registrationEntryInsert((u32)g_effectEditor.list, 3);
+    }
+    g_effectEditor.list = effPartCreate();
+    /* The retail symbol names the second element of the paired defaults. */
+    EffectEditorDefaultPair* defaults = (EffectEditorDefaultPair*)
+        ((u8*)&g_effectEditorState - offsetof(EffectEditorDefaultPair, second));
+    defaults->first.object.indices.extraOffset = 0;
+    g_effectEditor.index = 0;
+    defaults->second.object.indices.extraOffset = 0;
+    g_effectEditorResourceName[0] = 0;
+    g_effectEditor.object = &defaults->second.object;
+    return 0;
+}
+} /* extern "C" */

@@ -24,7 +24,7 @@ enum {
 extern "C" {
 
 s32 widgetSubCallIfVisible(GridNavigation *grid);
-void FUN_002fa1b0(ActorCardAnimationsA *scene, u32 kind, s32 x, s32 y, f32 alpha, s32 alternate);
+void btlCommandMenuDrawStatusIcon(ActorCardAnimationsA *scene, u32 kind, s32 x, s32 y, f32 alpha, s32 alternate);
 
 /* Draws the battle command menu: its plate, each listed command's icon at its row sprite, and the
  * selected command's highlighted icon last (not while the menu's state hides the cursor). */
@@ -60,7 +60,7 @@ void btlCommandMenuDraw(ActorCardAnimationsA *scene)
         } else {
             point = asdTMTexTableEntryAt(COMMAND_MENU_TABLE, row + (7 - count) / 2 + COMMAND_MENU_ROW_POINTS_ODD);
         }
-        FUN_002fa1b0(scene, actorCardContextCommandKind(scene, row), point->x + x, y + point->y, alpha, 0);
+        btlCommandMenuDrawStatusIcon(scene, actorCardContextCommandKind(scene, row), point->x + x, y + point->y, alpha, 0);
     }
 
     if (showCursor) {
@@ -75,7 +75,7 @@ void btlCommandMenuDraw(ActorCardAnimationsA *scene)
             point = asdTMTexTableEntryAt(COMMAND_MENU_TABLE,
                                          selected + (7 - count) / 2 + COMMAND_MENU_CURSOR_POINTS_ODD);
         }
-        FUN_002fa1b0(scene, btlCommandMenuKindAt(scene, selected), point->x + x, point->y + y, alpha, 1);
+        btlCommandMenuDrawStatusIcon(scene, btlCommandMenuKindAt(scene, selected), point->x + x, point->y + y, alpha, 1);
     }
 }
 

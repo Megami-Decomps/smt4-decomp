@@ -1,6 +1,8 @@
 #include "gfx/StereoParallax.h"
 #include "camp/RenderCtxA.h"
-/* NON_MATCHING: built --multifile with requestIdToCode (config: retail keeps the 1000 in r1 across its nine calls); remaining: the final pop loads g_renderCtx into r4 directly where retail goes through r0. */
+/* Built --multifile with requestIdToCode (config: retail keeps the 1000 in r1 across its nine calls) and autoinline on
+ * (config), the setting of its plain address neighbours (proven FUN_0022791c differs without it): with the recipe's
+ * --no_autoinline the final pop loaded g_renderCtx into r4 directly where retail goes through r0 (wave 86). */
 #include "font/SearchWin/RunWin.h"
 #include "shard/TextureDrawCall.h"
 #include "gfx/StereoParallax.h"

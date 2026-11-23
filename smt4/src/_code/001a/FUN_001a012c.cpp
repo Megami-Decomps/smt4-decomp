@@ -35,7 +35,7 @@ u8 *dataFindKindRecordWithAocOverrides(u32 id, s32 payload);
 s32 uniteGetState(void);
 void uniteDrawResultPanel(s32 x, s32 y, u32 selected, s32 cursorSlot, s32 region);
 void campDrawCommandMenu(void);
-void FUN_0019715c(s32 item, s32 mode);
+void campDrawSlidingPanel(s32 item, s32 mode);
 void renderCtxResetColorScale(RenderCtx *context);
 
 /* The id of the item under the cursor. */
@@ -148,10 +148,10 @@ u32 FUN_001a012c(void)
         break;
     }
     case 4: case 5: case 0x28: case 0x29:
-        FUN_0019715c(campCursorItem(camp), 0);
+        campDrawSlidingPanel(campCursorItem(camp), 0);
         break;
     case 10: case 0xC: case 0xD: case 0xE: case 0x10: case 0x1A: case 0x2B: case 0x2C:
-        FUN_0019715c(campCursorItem(camp), 1);
+        campDrawSlidingPanel(campCursorItem(camp), 1);
         break;
     case 0x1D: case 0x1E: case 0x1F:
         if (uniteGetState() == 2 || uiSpriteGetCompletionState(&camp->sprites[0]) == 0) {

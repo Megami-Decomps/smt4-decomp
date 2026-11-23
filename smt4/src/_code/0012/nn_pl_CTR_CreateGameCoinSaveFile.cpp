@@ -12,7 +12,7 @@ int FUN_001398f8(unsigned char **);
 int FUN_0013a5b0(unsigned int *, int *);
 int asdSaveHeaderBuildCalendarTime(int *, int *);
 int fileSystemRequireReady(void);
-int FUN_002bb648(void);
+int faultReportKind5(void);
 int FUN_002bb6c4(unsigned char **, int *);
 int clockGetTicksAsMicroseconds(int *);
 
@@ -59,7 +59,7 @@ extern unsigned char DAT_00471b5c; /* 0x471b5c */
 /* Supplied declaration required: FUN_0013a5b0. */
 /* Supplied declaration required: asdSaveHeaderBuildCalendarTime. */
 /* Supplied declaration required: fileSystemRequireReady. */
-/* Supplied declaration required: FUN_002bb648. */
+/* Supplied declaration required: faultReportKind5. */
 /* Supplied declaration required: FUN_002bb6c4. */
 /* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: clockGetTicksAsMicroseconds. */
@@ -155,7 +155,7 @@ void nn_pl_CTR_CreateGameCoinSaveFile(void)
   }
   else if (((((temp_v1 & 0x3fc00) != 0x4400) || ((temp_v1 & 0x3ff) < 0xb4)) || ((temp_v1 & 0x3ff) >= 200))
           && ((int)temp_v1 < 0)) {
-    FUN_002bb648();
+    faultReportKind5();
     return;
   }
   return;

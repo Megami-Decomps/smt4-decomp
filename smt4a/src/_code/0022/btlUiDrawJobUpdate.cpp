@@ -70,7 +70,7 @@ int menu32EnterState27(int);
 int controllerResetInterpolation(unsigned int);
 int cyclingPanelAdvance(unsigned int);
 int FUN_003f9970(unsigned int, unsigned int *, int);
-int FUN_004ab10c(int, unsigned int *);
+int btlUiBuildRosterSummary(int, unsigned int *);
 
 /* stack frame of void: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -183,7 +183,7 @@ extern int btlScriptUnitHasFlags(void);
 /* Supplied declaration required: FUN_0047f66c. */
 /* Supplied declaration required: btlUiQueuePositionedRequest. */
 /* Supplied declaration required: btlUiPositionRequestAdd. */
-/* Supplied declaration required: FUN_004ab10c. */
+/* Supplied declaration required: btlUiBuildRosterSummary. */
 
 
 unsigned int btlUiDrawJobUpdate(void)
@@ -394,7 +394,7 @@ unsigned int btlUiDrawJobUpdate(void)
     if (temp_v9 != 0) {
       sysMemClear(&temp_v16,0x180);
       temp_v10 = temp_v0;
-      FUN_004ab10c(temp_v0,&temp_v16);
+      btlUiBuildRosterSummary(temp_v0,&temp_v16);
       FUN_003f9970(*(unsigned int *)(temp_v0 + 0x7488),&temp_v16,temp_v10);
       controllerResetInterpolation(*(unsigned int *)(temp_v0 + 0x7488));
       *(unsigned int *)(temp_v0 + 0x74a0) = 0xd;

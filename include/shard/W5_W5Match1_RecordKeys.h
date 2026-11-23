@@ -200,10 +200,10 @@ struct InitialWorkState {
     /* 0x04 */ u8 active;
 };
 
+/* g_commandQueueDefaults: the object right after _ZTV9Obj464cb0 (both games). */
 struct CommandQueueDefaults {
-    /* 0x00 */ u8 vtable[0x38];
-    /* 0x38 */ u32 count;
-    /* 0x3C */ u32 capacity;
+    /* 0x00 */ u32 count;
+    /* 0x04 */ u32 capacity;
 };
 
 struct TextDrawDefaults {

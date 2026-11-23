@@ -37,20 +37,27 @@ public:
     virtual ~Obj421a78();
     virtual void vfunc0c();
 
-    /* Clears the per-slot words of every active slot and drops the dirty flag. */
+    /* Clears the per-slot words of every active slot. Its own inline under clearSlots: retail's destructors copy
+     * `this` into a second register for it (`mov r1, r0`) and keep the count load after the flag store. */
+    void clearSlotWords()
+    {
+        s32 i = 0;
+        while (i < slotCount) {
+            tableA[i] = 0;
+            tableB[i] = 0;
+            pairs[i].first = 0;
+            pairs[i].second = 0;
+            tableC[i] = 0;
+            i++;
+        }
+    }
+
+    /* When flagged, drops the dirty flag and clears the per-slot words of every active slot. */
     void clearSlots()
     {
         if (slotsDirty != 0) {
             slotsDirty = 0;
-            s32 i = 0;
-            while (i < slotCount) {
-                tableA[i] = 0;
-                tableB[i] = 0;
-                pairs[i].first = 0;
-                pairs[i].second = 0;
-                tableC[i] = 0;
-                i++;
-            }
+            clearSlotWords();
         }
     }
 

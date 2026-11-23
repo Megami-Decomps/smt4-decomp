@@ -42,7 +42,8 @@ struct DummyAttachmentWork {
     u8 unk11[3];
     const QcDeliveryEvent *deliveryEvent; // 0x14, the event a finished delivery unlocked
     u8 location; // 0x18, which quest center this is (0: Mikado, 1-3: the Tokyo ones, by quest area)
-    u8 unk19[7];
+    u8 unk19[3];
+    u32 tierReward; // 0x1c, questCompletionSetTierFlags' draw (0: the best tier), the bonus tab's forced slot
     u8 npcTable; // 0x20, the `this` of the table 0x27 accessors
     u8 mode; // 0x21
     u8 unk22[2];
@@ -52,6 +53,8 @@ struct DummyAttachmentWork {
             UiResourceParameters resources; // 0x24
             UiSpriteState sprites[4];       // 0x44, the board's three panels and its fade
             ScreenVec2 positions[3];        // 0x274, where the panels slide in from
+            u32 titleText;                  // 0x28c, the text object of the board's heading
+            u32 slotTexts[3];               // 0x290, the text objects of the three quest slots shown
         } board;
     };
     u32 npcScriptFile; // 0x5b8, the loaded "n%03d.bf"
@@ -100,6 +103,8 @@ typedef char DummyAttachmentLayoutCheck[
     offsetof(DummyAttachmentWork, kind) == 0x10 &&
     offsetof(DummyAttachmentWork, deliveryEvent) == 0x14 &&
     offsetof(DummyAttachmentWork, location) == 0x18 &&
+    offsetof(DummyAttachmentWork, tierReward) == 0x1c &&
+    offsetof(DummyAttachmentWork, board.titleText) == 0x28c &&
     offsetof(DummyAttachmentWork, questId) == 0xd0c &&
     offsetof(DummyAttachmentWork, mode) == 0x21 &&
     offsetof(DummyAttachmentWork, primary) == 0xd10 &&

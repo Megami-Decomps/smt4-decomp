@@ -3683,7 +3683,7 @@
 00207054 btlDevilCompareRankAndOrder
 003acc80 btlDevilCompareMetricAndLevel
 002e0df8 cecMaintainMessageBox
-00381ac0 sysResetTimestampState
+00381ac0 qcTabListResetStamp
 001041e8 sysShutdownAndClearBusy
 00152394 soundArchiveReadWaveArchiveInfo
 002c86ec mathVec3Dot
@@ -6489,3 +6489,17 @@
 001049ac asdModelSystemStart
 0029212c buttonHelpShowEntryDescription
 001dddd8 uniteDrawListPanel
+00354b18 _ZN17AocCatalogRequestC1EjPvj
+00354b3c _ZN17AocCatalogRequestD1Ev
+0026c654 skillUseOnTarget
+0026c464 skillUseOnParty
+002bb648 faultReportKind5
+0038b4f0 aocMainQueueRequest
+003970f8 aaTreeNext
+0039717c aaTreePrev
+001e4d70 eventViewJobUpdate
+0019715c campDrawSlidingPanel
+00382878 qcBoardBuildShownTab
+003887cc aocSystemMountStep
+003819b8 qcTabListPickRandomTab
+00381958 qcUtilityBuildBonusTab

@@ -32,7 +32,7 @@ int FUN_003ae34c(...);
 int scrRunOpcodesStub(...);
 int btlMenuCursorStepReflectAction(...);
 int FUN_0026c214(void);
-int FUN_0026c464(...);
+int skillUseOnParty(...);
 int uniteLoadPreviewRoomModel(void);
 int FUN_0028a924(...);
 int FUN_0028d1f4(...);
@@ -49,7 +49,7 @@ int nkmBaseGetRecord(void);
 int table08ApplyToParty(...);
 
 int partyPanelApplyFusion(void);
-int FUN_0026c654(...);
+int skillUseOnTarget(...);
 int FUN_0026c710(...);
 int communicationBeginTransition(...);
 int communicationSetResultPointer(void);
@@ -129,10 +129,10 @@ extern int FUN_002015a4(void);
 /* Supplied declaration required: partyPanelSortEntries. */
 /* Supplied declaration required: btlMenuCursorStepReflectAction. */
 /* Supplied declaration required: FUN_0026c214. */
-/* Supplied declaration required: FUN_0026c464. */
+/* Supplied declaration required: skillUseOnParty. */
 /* Supplied declaration required: uniteLoadPreviewRoomModel. */
 extern int gameGetNavigationState(void);
-/* Supplied declaration required: FUN_0026c654. */
+/* Supplied declaration required: skillUseOnTarget. */
 /* Supplied declaration required: FUN_0026c710. */
 /* Supplied declaration required: communicationBeginTransition. */
 /* Supplied declaration required: communicationSetResultPointer. */
@@ -1280,17 +1280,17 @@ LAB_001c659c:
                             if (temp_v6 != 0) {
                               temp_v4 = temp_v4 + temp_v6;
                               temp_v6 = (int)*(short *)(temp_v1 + 0x38);
-                              FUN_0026c654(temp_v6,(int)*(char *)(temp_v4 + 0x9107),
+                              skillUseOnTarget(temp_v6,(int)*(char *)(temp_v4 + 0x9107),
                                            *(unsigned short *)(temp_v1 + 0x36),1);
                               if (temp_v6 == 0) {
-                                FUN_0026c654((int)*(short *)(temp_v1 + 0x38),
+                                skillUseOnTarget((int)*(short *)(temp_v1 + 0x38),
                                              (int)*(char *)(temp_v4 + 0x9107),
                                              *(unsigned short *)(temp_v1 + 0x36),0);
                                 temp_v7 = gameGetUnitRecord((int)*(char *)(temp_v4 + 0x9107));
                                 FUN_0029d8f4(temp_v7,0);
                                 FUN_0026dafc(partyPanelPollSelectedStatusColor());
                                 temp_v6 = (int)*(short *)(temp_v1 + 0x38);
-                                FUN_0026c654(temp_v6,(int)*(char *)(temp_v4 + 0x9107),
+                                skillUseOnTarget(temp_v6,(int)*(char *)(temp_v4 + 0x9107),
                                              *(unsigned short *)(temp_v1 + 0x36),1);
                                 if (temp_v6 == 1) {
                                   *(unsigned char *)(temp_v24 + 0x678) = 0;
@@ -1300,14 +1300,14 @@ LAB_001c659c:
                             }
                             else {
                               temp_v6 = (int)*(short *)(temp_v1 + 0x38);
-                              FUN_0026c654(temp_v6,0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
+                              skillUseOnTarget(temp_v6,0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
                               if (temp_v6 == 0) {
-                                FUN_0026c654((int)*(short *)(temp_v1 + 0x38),0xffffffff,
+                                skillUseOnTarget((int)*(short *)(temp_v1 + 0x38),0xffffffff,
                                              *(unsigned short *)(temp_v1 + 0x36),0);
                                 gameLoadUnitSnapshot(0xffffffff,0);
                                 FUN_0026dafc(partyPanelPollSelectedStatusColor());
                                 temp_v6 = (int)*(short *)(temp_v1 + 0x38);
-                                FUN_0026c654(temp_v6,0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
+                                skillUseOnTarget(temp_v6,0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
                                 if (temp_v6 == 1) {
                                   *(unsigned char *)(temp_v1 + 0x678) = 0;
                                 }
@@ -1499,17 +1499,17 @@ LAB_001c6598:
                           else {
                             gameGlobalsSetSubScreenActive(1);
                             temp_v4 = (int)*(short *)(temp_v1 + 0x38);
-                            FUN_0026c654(temp_v4,*(unsigned int *)(temp_v6 + 0x738),
+                            skillUseOnTarget(temp_v4,*(unsigned int *)(temp_v6 + 0x738),
                                          *(unsigned short *)(temp_v1 + 0x36),1);
                             if (temp_v4 == 0) {
-                              FUN_0026c654((int)*(short *)(temp_v1 + 0x38),
+                              skillUseOnTarget((int)*(short *)(temp_v1 + 0x38),
                                            *(unsigned int *)(temp_v6 + 0x738),
                                            *(unsigned short *)(temp_v1 + 0x36),0);
                               temp_v7 = gameGetUnitRecord(*(unsigned int *)(temp_v6 + 0x738));
                               FUN_0029d8f4(temp_v7,0);
                               FUN_0026dafc(partyPanelPollSelectedStatusColor());
                               temp_v4 = (int)*(short *)(temp_v1 + 0x38);
-                              FUN_0026c654(temp_v4,*(unsigned int *)(temp_v6 + 0x738),
+                              skillUseOnTarget(temp_v4,*(unsigned int *)(temp_v6 + 0x738),
                                            *(unsigned short *)(temp_v1 + 0x36),1);
                               if (temp_v4 == 1) {
                                 *(unsigned short *)(temp_v6 + 0x73c) = 0;
@@ -1877,7 +1877,7 @@ LAB_001c6eb8:
               FUN_0026d5a4();
             }
             else {
-              FUN_0026c464((int)*(short *)(temp_v1 + 0x38),*(unsigned short *)(temp_v1 + 0x36),0);
+              skillUseOnParty((int)*(short *)(temp_v1 + 0x38),*(unsigned short *)(temp_v1 + 0x36),0);
               temp_v6 = FUN_0028d1f4(*(unsigned short *)(temp_v1 + 0x36));
               messageBannerSetCountdown(-temp_v6,0);
               partyPanelSetState(0x11,1);
@@ -1887,9 +1887,9 @@ LAB_001c6eb8:
           else {
             gameGlobalsSetSubScreenActive(1);
             temp_v6 = (int)*(short *)(temp_v1 + 0x38);
-            FUN_0026c464(temp_v6,*(unsigned short *)(temp_v1 + 0x36),1);
+            skillUseOnParty(temp_v6,*(unsigned short *)(temp_v1 + 0x36),1);
             if (temp_v6 == 0) {
-              FUN_0026c464((int)*(short *)(temp_v1 + 0x38),*(unsigned short *)(temp_v1 + 0x36),0);
+              skillUseOnParty((int)*(short *)(temp_v1 + 0x38),*(unsigned short *)(temp_v1 + 0x36),0);
               if (-1 < *(short *)(temp_v1 + 0x38)) goto LAB_001c6d98;
 LAB_001c6d64:
               gameLoadUnitSnapshot(0xffffffff,0);
@@ -2437,12 +2437,12 @@ LAB_001c7c50:
             temp_v24 = objectPartRunUnlessLocked(temp_v6);
             if (temp_v24 != 0) {
               temp_v8 = (int)*(short *)(temp_v1 + 0x38);
-              FUN_0026c654(temp_v8,(int)*(char *)(temp_v24 + temp_v4 + 0x9107),
+              skillUseOnTarget(temp_v8,(int)*(char *)(temp_v24 + temp_v4 + 0x9107),
                            *(unsigned short *)(temp_v1 + 0x36),1);
             }
             else {
               temp_v8 = (int)*(short *)(temp_v1 + 0x38);
-              FUN_0026c654(temp_v8,0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
+              skillUseOnTarget(temp_v8,0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
             }
           }
           else {
@@ -2458,7 +2458,7 @@ LAB_001c7c50:
               temp_v24 = temp_v24 + temp_v4 * 4 + temp_v8 * 0xc;
             }
             temp_v8 = (int)*(short *)(temp_v1 + 0x38);
-            FUN_0026c654(temp_v8,*(unsigned int *)(temp_v1 + (temp_v24 - 4) * 8 + 0x738),
+            skillUseOnTarget(temp_v8,*(unsigned int *)(temp_v1 + (temp_v24 - 4) * 8 + 0x738),
                          *(unsigned short *)(temp_v1 + 0x36),1);
           }
           if ((temp_v8 != 0) &&
@@ -2544,7 +2544,7 @@ LAB_001c7c50:
           break;
         }
         temp_v6 = (int)*(short *)(temp_v1 + 0x38);
-        FUN_0026c654(temp_v6,0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
+        skillUseOnTarget(temp_v6,0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
         if (temp_v6 == 1) {
           *(unsigned char *)(temp_v1 + 0x678) = 0;
           temp_v6 = reinterpret_cast<int>(btlGetMainState());
@@ -2556,7 +2556,7 @@ LAB_001c7c50:
         temp_v6 = 0;
         do {
           temp_v24 = (int)*(short *)(temp_v1 + 0x38);
-          FUN_0026c654(temp_v24,(int)*(char *)(temp_v4 + temp_v6 + 0x9108),*(unsigned short *)(temp_v1 + 0x36),1
+          skillUseOnTarget(temp_v24,(int)*(char *)(temp_v4 + temp_v6 + 0x9108),*(unsigned short *)(temp_v1 + 0x36),1
                       );
           if (temp_v24 == 1) {
             *(unsigned char *)(temp_v1 + temp_v6 + 0x679) = 0;
@@ -2567,7 +2567,7 @@ LAB_001c7c50:
         do {
           temp_v24 = temp_v1 + temp_v6 * 8;
           temp_v4 = (int)*(short *)(temp_v1 + 0x38);
-          FUN_0026c654(temp_v4,*(unsigned int *)(temp_v24 + 0x738),*(unsigned short *)(temp_v1 + 0x36),1);
+          skillUseOnTarget(temp_v4,*(unsigned int *)(temp_v24 + 0x738),*(unsigned short *)(temp_v1 + 0x36),1);
           if (temp_v4 == 1) {
             *(unsigned short *)(temp_v24 + 0x73c) = 0;
           }

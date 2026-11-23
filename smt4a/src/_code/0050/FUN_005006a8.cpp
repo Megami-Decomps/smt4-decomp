@@ -12,27 +12,29 @@ struct HalfwordSource {
 
 extern "C" {
 
-s32 FUN_004267bc(u32 handle, s32 mode, u32 first, u32 second, u16 *data, u32 count);
+s32 FUN_004267bc(void *records, s32 mode, u32 first, u32 second, u16 *data, u32 count); // declcheck: local (the shared declaration takes six plain words)
 
-/* Reads up to `count` halfwords of the source starting at `start` (request `code`); stores the number read in `*readCount`. */
-WindowStatusResult FUN_005006a8(HalfwordSource **source, u32 *readCount, s32 code, u32 count, u32 start)
+/* Reads up to `count` halfwords of the source starting at `start`, with the `count` 24-byte records that go with
+ * them into `records`; stores the number read in `*readCount`. */
+WindowStatusResult FUN_005006a8(HalfwordSource **source, u32 *readCount, void *records, u32 count, u32 start)
 {
     HalfwordSource *input = *source;
     u32 length = input->length;
+    s32 result;
 
     if (start >= length) {
-        code = *readCount = 0;
+        result = *readCount = 0;
     } else {
         if (length - start < count) {
             count = length - start;
         }
-        code = FUN_004267bc(code, 1, input->first, input->second, input->data + start, count);
-        if (!nnResultIsFailure(code)) {
-            code = 0;
+        result = FUN_004267bc(records, 1, input->first, input->second, input->data + start, count);
+        if (!nnResultIsFailure(result)) {
+            result = 0;
             *readCount = count;
         }
     }
-    return WindowStatusResult(code);
+    return WindowStatusResult(result);
 }
 
 } /* extern "C" */

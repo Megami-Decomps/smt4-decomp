@@ -3,8 +3,9 @@
 #define MODEL_MORIMODELCOMMAND_H
 
 #include "common.h"
+#include <stddef.h>
 
-/* A command queue: a raw byte block plus an array of 0x1C-byte records (FUN_0017d1e4 sets it up). */
+/* A command queue: a raw byte block plus an array of 0x1C-byte records (moriCommandQueueInit sets it up). */
 typedef struct MoriCommandQueue {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ void *data;
@@ -42,9 +43,20 @@ typedef struct Vector8 {
 typedef struct MoriModelCommand {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ MoriCommandBuffer buffers[2];
-    /* 0x9C */ u8 unk9C[0xC];
+    /* 0x9C */ u32 activeBuffer;
+    /* 0xA0 */ u32 unkA0;
+    /* 0xA4 */ u32 unkA4;
     /* 0xA8 */ Vector8 *listA;
     /* 0xAC */ Vector8 *listB;
 } MoriModelCommand;
+
+typedef char MoriModelCommandOffsets[offsetof(MoriModelCommand, activeBuffer) == 0x9C &&
+    offsetof(MoriModelCommand, listA) == 0xA8 && sizeof(MoriModelCommand) == 0xB0 ? 1 : -1];
+
+extern "C" {
+void moriModelCommandSwapBuffers(MoriModelCommand *command);
+void moriCommandQueueClear(MoriCommandQueue *queue);
+void moriCommandQueueInit(MoriCommandQueue *queue, u32 dataSize, void *data, s32 recordCapacity, void *records);
+} /* extern "C" */
 
 #endif

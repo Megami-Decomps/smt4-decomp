@@ -7,8 +7,6 @@ void *asdMemoryAllocAligned(u32 heap, u32 type, u32 flags, u32 bytes, u32 alignm
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 Vector8 *FUN_0016d374(Vector8 *list, u32 begin);
 s32 FUN_0017daf8(s32 count);
-void FUN_0017d1e4(MoriCommandQueue *queue, u32 dataSize, void *data, s32 recordCapacity, void *records);
-void FUN_0017d184(MoriCommandQueue *queue);
 
 /* Allocates and initialises both command buffers, then the two lists. */
 void moriModelCommandInitBuffers(MoriModelCommand *command, u32 dataSize, s32 recordCapacity)
@@ -20,8 +18,8 @@ void moriModelCommandInitBuffers(MoriModelCommand *command, u32 dataSize, s32 re
         s32 recordBytes = FUN_0017daf8(recordCapacity);
         asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelCommand.cpp", 76);
         buffer->recordBlock = asdMemoryAllocAligned(0x10000, 0x100, 0, recordBytes, 16, 1);
-        FUN_0017d1e4(&buffer->queue, dataSize, buffer->dataBlock, recordCapacity, buffer->recordBlock);
-        FUN_0017d184(&buffer->queue);
+        moriCommandQueueInit(&buffer->queue, dataSize, buffer->dataBlock, recordCapacity, buffer->recordBlock);
+        moriCommandQueueClear(&buffer->queue);
     }
 
     Vector8 *list = (Vector8 *)asdMemoryAllocTraced(sizeof(Vector8), "c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelCommand.cpp", 89);

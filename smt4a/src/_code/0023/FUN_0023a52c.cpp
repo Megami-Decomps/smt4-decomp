@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_002c5df4(void);
+void mapRndMazeUpdateModelVisibility(void);
 
 extern struct {
     u8 unk000[0x394];
@@ -13,7 +13,7 @@ extern struct {
 void FUN_0023a52c(void)
 {
     if (g_mapRndMaze.unk394 != 0 && g_gameState.progressEnabled != 0) {
-        FUN_002c5df4();
+        mapRndMazeUpdateModelVisibility();
     }
 }
 

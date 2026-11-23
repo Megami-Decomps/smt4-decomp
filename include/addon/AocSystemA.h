@@ -30,11 +30,14 @@ typedef struct AocSystemA {
     /* 0x310 */ s32 packageCount;
     /* 0x314 */ u32 packageHandle;      /* nonzero while packages are mounted */
     /* 0x318 */ AocPackage *packages;
-    /* 0x31C */ u8 unk31C[0x14];
+    /* 0x31C */ RequestParameters mountResult; /* what the mount thread ended with (FUN_00471adc) */
     /* 0x330 */ u8 requestPending;
-    /* 0x331 */ u8 unk331[0x1F];
-    /* 0x350 */ u32 unk350;
-    /* 0x354 */ u8 unk354[8];
+    /* 0x331 */ u8 unk331[0x13];
+    /* 0x344 */ u32 state;              /* the mount's step (aocSystemMountStep) */
+    /* 0x348 */ u8 unk348[8];
+    /* 0x350 */ s32 unk350;             /* failed mounts so far; the third one is not retried */
+    /* 0x354 */ s32 loadIndex;          /* the package whose files are being loaded */
+    /* 0x358 */ s32 loadStep;           /* 0: request that package's files, 1: wait for them */
     /* 0x35C */ u32 devilCount;
     /* 0x360 */ NkmBaseRecord *devils;
     /* 0x364 */ u32 table00Count;
@@ -58,7 +61,8 @@ typedef struct AocSystemA {
     /* 0x454 */ u8 unk454[0xC];
     /* 0x460 */ s32 aiDemonId;              /* the demon whose add-on AI script is in use, -1 when none */
     /* 0x464 */ u32 phase;
-    /* 0x468 */ u8 unk468[8];
+    /* 0x468 */ s32 waitFrames;         /* frames the mount thread's start has been held back */
+    /* 0x46C */ u8 unk46C[4];
 } AocSystemA;
 
 typedef char AocSystemALayoutCheck[sizeof(AocSystemA) == 0x470 &&

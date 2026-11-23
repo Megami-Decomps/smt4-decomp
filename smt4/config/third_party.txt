@@ -1843,7 +1843,7 @@
 0x003542c4 FUN_003542c4 between
 0x00354450 FUN_00354450 between
 0x00354608 aocOpenPackedArchive between
-0x00354b3c FUN_00354b3c between
+0x00354b3c _ZN17AocCatalogRequestD1Ev between
 0x00354c60 fsFormatSaveData between
 0x00354ce0 FUN_00354ce0 between
 0x00354d0c FUN_00354d0c between
