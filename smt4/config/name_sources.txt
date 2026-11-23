@@ -6293,3 +6293,12 @@
 002671f4 mapCollisionQueueBoxWalls inferred twin of smt4a mapCollisionQueueBoxWalls
 0025090c mapDepartFormatPlaceName inferred formats the departure's place name from the fixed labels and area names (w80-f2)
 004ea81c g_vectorScratch evidence size:0x1C0 sizeof(VectorScratch) asserted in gfx/VectorScratch.h; no symbol inside the range
+00103cec screenFadeSlotsReset inferred clears both screen-fade slots (no value, no fade, colour index 0xff) (w81-o1)
+00107934 padUpdateHeldFrames inferred polls the pad into g_padInputs[0] and counts each mapped button's held frames (w81-o1)
+004e3c28 g_padInputs inferred the pad readings (held/pressed/released masks and stick) padUpdateHeldFrames polls into
+002bc560 gxMakeScreenFramebufferDesc inferred twin of smt4a gxMakeScreenFramebufferDesc
+00119c28 soundListenerSetPose inferred sets the sound listener's position and angle (residentApplyFallbackValues passes the camera's) (w81-o2)
+0023bba0 enemyGrRendererBuildCommands inferred twin of smt4a enemyGrRendererBuildCommands
+001f42d4 eventTexDrawJobs inferred twin of smt4a eventTexDrawJobs
+001e2350 btlStageCreate inferred twin of smt4a btlStageCreate
+0033e7c4 nkdwLoadWorldData inferred twin of smt4a nkdwLoadWorldData

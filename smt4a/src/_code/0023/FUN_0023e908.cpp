@@ -8,7 +8,6 @@ void ifTouchRegionRemove(void);
 u16 ifTouchRegionAddRequested(u32, s32);
 void __aeabi_memset4(void *, u32, s32);
 
-struct RosterCountView { u8 prefix[0x1CA3]; u8 count; };
 // Removes the panel's touch regions and clears its handle table.
 static __inline void touchPanelClearRegions(PartyPanelStateA *panel)
 {
@@ -28,7 +27,7 @@ void FUN_0023e908(void)
             panel->touch.characters[i] = ifTouchRegionAddRequested(0x11, i + 0x57);
             ++panel->touch.count;
         }
-        for (s32 i = 0; i < reinterpret_cast<RosterCountView *>(gameGetSlotTable())->count; ++i) {
+        for (s32 i = 0; i < gameGetSlotTable()->count; ++i) {
             panel->touch.demons[i] = ifTouchRegionAddRequested(0x11, i + 0x5B);
             ++panel->touch.count;
         }
@@ -39,10 +38,10 @@ void FUN_0023e908(void)
         }
         s32 visibleCount = 12;
         if (panel->page == 0) {
-            if (reinterpret_cast<RosterCountView *>(gameGetSlotTable())->count < 12)
-                visibleCount = reinterpret_cast<RosterCountView *>(gameGetSlotTable())->count;
+            if (gameGetSlotTable()->count < 12)
+                visibleCount = gameGetSlotTable()->count;
         } else {
-            visibleCount = reinterpret_cast<RosterCountView *>(gameGetSlotTable())->count - 12;
+            visibleCount = gameGetSlotTable()->count - 12;
         }
         for (s32 i = 0; i < visibleCount; ++i) {
             panel->touch.demons[i] = ifTouchRegionAddRequested(0x11, i + 0x31);

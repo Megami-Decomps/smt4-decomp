@@ -2,28 +2,22 @@
 
 extern "C" {
 
-// Report an active request in a bank unless that bank is suppressed.
-u32 FUN_004a94a8(u32, s32 bank)
+/* Whether number-popup slot `slot` is busy: its popup is showing or a request is queued for it. A slot whose
+ * popup has started to fade out reports free. */
+u32 FUN_004a94a8(u32, s32 slot)
 {
-    // The request banks continue past the recovered ObjDA widget's end.
-    struct RequestBanksView {
-        u8 unk0000[0xC060];
-        BattleUiRequestBank banks[16];
-    };
-    typedef char RequestBanksOffset[offsetof(RequestBanksView, banks) == 0xC060 ? 1 : -1];
     BtlUiA* work = g_btlUi.ui;
     if (work == NULL) {
         return 0;
     }
-    const BattleUiBankStatus* status = &work->objD.requests.banks[bank];
-    if (status->suppressed != 0) {
+    if (work->objD.numbers.slots[slot].disabled != 0) {
         return 0;
     }
-    if (status->pending != 0) {
+    if (work->objD.numbers.slots[slot].active != 0) {
         return 1;
     }
-    for (s32 i = 0; i < work->requestCounts.counts[bank]; ++i) {
-        if (reinterpret_cast<const RequestBanksView*>(work)->banks[bank].requests[i].active != 0) {
+    for (s32 i = 0; i < work->requestCounts.counts[slot]; ++i) {
+        if (work->objD.numberRequests.rows[slot].entries[i].active != 0) {
             return 1;
         }
     }

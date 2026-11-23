@@ -2,10 +2,11 @@
 #include "common.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "saveLoadUI/SaveSlotRow.h"
 
 namespace {
-struct MenuRowRecord { u8 data[0x80]; };
-struct MenuRowWidget { u8 data[0x44]; };
+typedef SaveSlotRecord MenuRowRecord;
+typedef SaveSlotRow MenuRowWidget;
 struct MenuRowRefreshView {
     u8 unk000[0x13];
     u8 allowEmpty;
@@ -24,7 +25,6 @@ struct MenuRowRefreshView {
 typedef char MenuRowRefreshLayoutCheck[offsetof(MenuRowRefreshView, records) == 0x6c && offsetof(MenuRowRefreshView, occupied) == 0x2ec && offsetof(MenuRowRefreshView, rows) == 0x664 && offsetof(MenuRowRefreshView, selection) == 0x6ec ? 1 : -1];
 }
 extern "C" {
-void FUN_0041b360(MenuRowWidget *, MenuRowRecord *, const TextureTableEntryIV *, s32, s32, s32);
 void FUN_0041c45c(void *, const TextureTableEntryIV *);
 
 // Refresh the visible record rows and their selection indicator.
@@ -40,11 +40,11 @@ void FUN_0041f9e4(MenuRowRefreshView *menu)
         if (menu->selectedRow == row)
             selected = 1;
         if (menu->occupied[recordIndex]) {
-            FUN_0041b360(&menu->rows[row], &menu->records[recordIndex], layout,
+            saveSlotRowDraw(&menu->rows[row], &menu->records[recordIndex], layout,
                         recordIndex + 1, selected, 1);
         } else {
             s32 enabled = menu->allowEmpty || recordIndex < 1;
-            FUN_0041b360(&menu->rows[row], NULL, layout,
+            saveSlotRowDraw(&menu->rows[row], NULL, layout,
                         recordIndex + 1, selected, enabled);
         }
     }

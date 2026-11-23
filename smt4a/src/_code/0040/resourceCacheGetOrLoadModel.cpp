@@ -19,7 +19,7 @@ extern const char DAT_00527250[];
 extern const char DAT_0052726c[];
 
 void asdLoadFileAsyncSimple(const char *path, void **resource, s32 mode);
-void FUN_003fc1b0(Obj557b08 *model, s32 id);
+void nkdwLoadWorldData(Obj557b08 *model, s32 id);
 void FUN_003fcd20(Obj557b08 *model);
 void aocQueueType0c(u32 system, s32 id, void **handle, const char *path);
 s32 aocPackageHasTextureContent(u32 system, s32 id, s32 flag);
@@ -80,7 +80,7 @@ Obj557b08 *resourceCacheGetOrLoadModel(s32 id, s32 load, s32 synchronous, u32 al
         if (id < 0) {
             FUN_003fcd20(model);
         } else {
-            FUN_003fc1b0(model, id);
+            nkdwLoadWorldData(model, id);
         }
     }
     return model;

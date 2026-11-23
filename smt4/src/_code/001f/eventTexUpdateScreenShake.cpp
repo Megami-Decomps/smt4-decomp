@@ -12,11 +12,6 @@ struct ScreenShakeState {
     s16 elapsed;            // 0x12
 };
 
-struct EventTexMotionView {
-    EventTex base;
-    MotionOffset shake; // 0x60; keep the shared EventTex prefix unchanged.
-};
-
 extern "C" {
 extern EventTex *g_eventTex;
 u32 eventCommandGetPendingCleanup(void);
@@ -32,9 +27,9 @@ u32 eventTexUpdateScreenShake(void)
         effShakeParticleAdvance(shake);
         const MotionOffset *offset = FUN_0018f654(shake);
         if (offset->x != 0.0f || offset->y != 0.0f) {
-            EventTexMotionView *texture = reinterpret_cast<EventTexMotionView *>(g_eventTex);
-            texture->shake.x = offset->x * 30.0f;
-            texture->shake.y = offset->y * 30.0f;
+            EventTex *texture = g_eventTex;
+            texture->drawOrigin.x = offset->x * 30.0f;
+            texture->drawOrigin.y = offset->y * 30.0f;
         }
     }
     return 0;

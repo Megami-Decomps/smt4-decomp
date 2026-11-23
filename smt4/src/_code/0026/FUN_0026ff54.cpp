@@ -1,17 +1,19 @@
-/* NON_MATCHING: one scheduling difference: retail loads the 0x24d28 size literal into r2 before the backup pointer in r1 for the save data copy. */
+/* NON_MATCHING: one scheduling difference: for the save data copy (armcc's __aeabi_memcpy4) retail loads the 0x24d28 size literal into r2 before the backup pointer in r1. */
 #include "shard/Sys44de28.h"
+#include "saveLoadUI/saveLoadUI.h"
+#include "gamedata/GameSaveData.h"
+#include "gamedata/SaveLoadProcess.h"
+#include "gamedata/GameDataAccess.h"
+#include "mobiclip_ctrl/MobiclipCtrl.h"
 
 extern "C" {
 
 void aocActivateFileGroupFlags(u32 system);
-void __ARM_common_memcpy4_8(u32 settings, void *backup);
 void asdMemFree(void *block);
 void titleConfigApplyAudio(void);
 void titleSynchronizeSavedConfig(void);
-void __aeabi_memcpy4(u32 destination, void *source, u32 size);
-u32 configGetSettings(void);
-u32 gameDataBlocksGetTable(void);
-u32 gameDataBlocksGetSaveData(void);
+
+SaveTableImage *gameDataBlocksGetTable(void);
 
 extern u32 g_aocSystem; /* 0x433158 */
 
@@ -19,9 +21,9 @@ extern u32 g_aocSystem; /* 0x433158 */
 void FUN_0026ff54(void)
 {
     if (g_saveLoadUIFlags.backupTable != NULL) {
-        __aeabi_memcpy4(gameDataBlocksGetTable(), g_saveLoadUIFlags.backupTable, 0x80);
-        __ARM_common_memcpy4_8(configGetSettings(), g_saveLoadUIFlags.backupConfig);
-        __aeabi_memcpy4(gameDataBlocksGetSaveData(), g_saveLoadUIFlags.backupSave, 0x24d28);
+        *gameDataBlocksGetTable() = *g_saveLoadUIFlags.backupTable;
+        *(ConfigSettingsImage *)configGetSettings() = *g_saveLoadUIFlags.backupConfig;
+        *(GameSaveBody *)gameDataBlocksGetSaveData() = *g_saveLoadUIFlags.backupSave;
         titleSynchronizeSavedConfig();
         titleConfigApplyAudio();
         aocActivateFileGroupFlags(g_aocSystem);

@@ -1,4 +1,5 @@
-/* NON_MATCHING: stack-pointer adjustment is scheduled before the first entry load and available=1 swaps r0/r1. */
+/* NON_MATCHING: written as IV's twin dataEntryQueueSupportedFiles (IDENTICAL); only the final `available = 1` store
+ * swaps r0/r1 (retail keeps the file table in r0 and the 1 in r1, the build the reverse). */
 #include <stdio.h>
 #include "gamedata/DataTable.h"
 #include "addon/AocSystemA.h"
@@ -14,15 +15,13 @@ void aocRequestDataEntryFiles(AocPackage *entry)
     if (entry->directoryFile == NULL || entry->files == NULL) {
         return;
     }
-    AocPackageDirectoryEntry *rows = NULL;
-    if (entry->directoryLoaded) {
-        void *table = dataTableFileGetTable(entry->directoryFile, 0);
-        rows = (AocPackageDirectoryEntry *)dataTableGetEntries(table);
+    const AocPackageDirectoryEntry *rows = NULL;
+    if (entry->directoryLoaded != 0 && entry->directoryFile != NULL) {
+        rows = (const AocPackageDirectoryEntry *)dataTableGetEntries(dataTableFileGetTable(entry->directoryFile, 0));
     }
     u32 count = 0;
-    if (entry->directoryLoaded && entry->directoryFile != NULL) {
-        void *table = dataTableFileGetTable(entry->directoryFile, 0);
-        count = dataTableGetCount(table);
+    if (entry->directoryLoaded != 0 && entry->directoryFile != NULL) {
+        count = dataTableGetCount(dataTableFileGetTable(entry->directoryFile, 0));
     }
     for (u32 index = 0; index < count; ++index) {
         switch (rows[index].kind) {
@@ -63,7 +62,7 @@ void aocRequestDataEntryFiles(AocPackage *entry)
             sysMemClear(path, sizeof(path));
             sprintf(path, "%s/%s", entry->mountName, rows[index].name);
             AocPackageFile *file = &entry->files[index];
-            aocQueueFileLoad(g_aocDisplay, path, file, 1, 0x80, file);
+            aocQueueFileLoad(g_aocDisplay, path, file, 1, sizeof(path), file);
             entry->files[index].available = 1;
             break;
         }

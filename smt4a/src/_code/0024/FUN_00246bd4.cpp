@@ -20,7 +20,7 @@ int asdMemoryAllocTraced(...);
 int mapFastModelCreate(...);
 int calcHeadingRoundedToCardinalDirection(...);
 int effPartClone(...);
-int FUN_002b56e0(...);
+int lmapViewUpdateCloseUpSequence(...);
 int lmapViewUpdateOrbitSequence(...);
 int vectorPairTransitionStart(...);
 int FUN_003026d8(...);
@@ -33,7 +33,7 @@ int motionPlayerStartBlended(...);
 int modelPlayClip(...);
 int itemTableClear(...);
 int FUN_0045adc0(...);
-int FUN_0049fc88(...);
+int partyTryInflictConditionScaled(...);
 int mapIfReleaseHandle(...);
 int mapInterfaceUnregisterHandle(...);
 
@@ -329,7 +329,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_002950a8. */
 /* Supplied declaration required: popupTryStartStory. */
 /* Supplied declaration required: FUN_00297f00. */
-/* Supplied declaration required: FUN_002b56e0. */
+/* Supplied declaration required: lmapViewUpdateCloseUpSequence. */
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: FUN_002b621c. */
@@ -419,7 +419,7 @@ extern int linkHolderCheckFirst(int);
 /* Supplied declaration required: itemTableClear. */
 /* Supplied declaration required: FUN_0045adc0. */
 /* Supplied declaration required: flagValueSub. */
-/* Supplied declaration required: FUN_0049fc88. */
+/* Supplied declaration required: partyTryInflictConditionScaled. */
 /* Supplied declaration required: FUN_0049fe58. */
 /* Supplied declaration required: FUN_004a01c8. */
 /* Supplied declaration required: fieldWalkRecoverHp. */
@@ -5214,12 +5214,12 @@ LAB_002dad8c:
       if (!(g_gameState == (unsigned int *)0x5 && puVar6 == (unsigned int *)0x9)) {
         gameDataFlagTestBit(0x84);
         FUN_0049fe58(2);
-        FUN_0049fc88(2,5);
+        partyTryInflictConditionScaled(2,5);
       }
       else {
         gameDataFlagTestBit(0x84);
         FUN_0049fe58(2);
-        FUN_0049fc88(2,5);
+        partyTryInflictConditionScaled(2,5);
       }
       piVar18 = g_lmapScene;
       g_lmapScene[1] = g_lmapScene[1] + 1;
@@ -6801,7 +6801,7 @@ code_r0x00303460:
       FUN_003026d8();
       break;
     case 0xd:
-      FUN_002b56e0();
+      lmapViewUpdateCloseUpSequence();
       break;
     case 0xe:
       temp_v32 = g_lmapView[1];

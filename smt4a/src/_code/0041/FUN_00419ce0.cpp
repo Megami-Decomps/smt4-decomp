@@ -1,61 +1,28 @@
-/* NON_MATCHING: Retail mov ip, r0 differs from recovered ldr r0, [r0, #4]. */
-#include "common.h"
-
-struct CachedCommandView {
-    s32 wordCount;                  // 0x00
-    u32 words[0x78C / sizeof(u32)]; // 0x04
-};
-
-struct CommandRecordView {
-    u8 unk00[0x10];                // 0x00
-    CachedCommandView commands;    // 0x10
-    u8 unk7A0[1];                  // 0x7A0
-};
-
-struct CommandTableView {
-    u32 unk00;                     // 0x00
-    CommandRecordView** records;   // 0x04
-};
-
-struct CommandHeaderView {
-    u32 value;                     // 0x00
-    u32 command;                   // 0x04
-};
+/* NON_MATCHING: retail moves the output pointer into r0 and the matrix into r1 at entry and writes the two header
+ * words with one `strd r2, r3, [r0], #8`; the build keeps the output in r1 and stores the words separately. The
+ * rest matches. */
+/* Emits a selected cached graphics-command record, generating its words on first use. */
+#include <string.h>
+#include "gfx/CachedCommandCount.h"
+#include "gfx/VertexUniformMatrix.h"
 
 extern "C" {
 extern u8 DAT_005dee3e;
-void FUN_0019a270(u32* destination, u32 value, u32 command);
-u32* FUN_00501084(CachedCommandView* commands, u32* destination);
-void FUN_00500fe4(CachedCommandView* commands, u32* destination,
-                  const void* data);
-void* __aeabi_memcpy4(void* destination, const void* source, u32 byteCount);
-}
+void FUN_00500fe4(CachedCommandWords *commands, u32 *destination, const void *trailer);
 
-// Emit the selected record, generating and caching its command words on first use.
-extern "C" void FUN_00419ce0(CommandTableView* table, u32* destination,
-                             u32 recordIndex, u32 value)
+void FUN_00419ce0(CachedCommandTable *table, u32 *destination, u32 index, const f32 *matrix)
 {
-    CommandRecordView* record = table->records[recordIndex];
-    if (record == 0) {
-        return;
+    CachedCommandRecord *record = table->recordLists[0][index];
+    if (record != NULL) {
+        const void *trailer = record->trailer;
+        destination[0] = 0x80000000u | DAT_005dee3e;
+        destination[1] = 0xF02C0;
+        destination += 2;
+        FUN_0019a270(destination, matrix, 0xBF02C1);
+        CachedCommandWords *commands = &record->commands;
+        destination += 14;
+        memcpy(destination, commands->words, cachedCommandWordCount(commands) * sizeof(u32));
+        FUN_00500fe4(commands, destination + commands->count, trailer);
     }
-
-    const void* trailingData = record->unk7A0;
-    const CommandHeaderView header = {
-        0x80000000u | DAT_005dee3e, 0x000F02C0
-    };
-    *reinterpret_cast<CommandHeaderView*>(destination) = header;
-    destination += 2;
-    FUN_0019a270(destination, value, 0x00BF02C1);
-
-    CachedCommandView* commands = &record->commands;
-    destination += 14;
-    if (commands->wordCount == 0) {
-        u32* end = FUN_00501084(commands, commands->words);
-        commands->wordCount = end - commands->words;
-    }
-
-    __aeabi_memcpy4(destination, commands->words,
-                static_cast<u32>(commands->wordCount) * sizeof(u32));
-    FUN_00500fe4(commands, destination + commands->wordCount, trailingData);
+}
 }

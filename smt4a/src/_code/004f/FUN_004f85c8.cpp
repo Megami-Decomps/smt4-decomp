@@ -10,10 +10,17 @@ extern const char DAT_00528420[3][0x20];
 extern const char DAT_005284c0[];
 void sysMemClear(void *memory, u32 size);
 char *libc_strcpy(char *destination, const char *source);
-char *libc_strrchr(const char *string, s32 character);
+char *libc_strrchr(const char *path, s32 character);
 }
 
 namespace {
+/* Reads the last path component, like the default effect loader. */
+static const char *fileNameFromPath(const char *path)
+{
+    const char *separator = libc_strrchr(path, '/');
+    return separator + 1;
+}
+
 inline void requestAssistEffect(PendingResourceRecord *record, const char *stem,
     char (&formatted)[0x80], char (&path)[0x80])
 {
@@ -28,7 +35,7 @@ inline void requestAssistEffect(PendingResourceRecord *record, const char *stem,
     sysMemClear(formatted, sizeof(formatted));
     __2sprintf(formatted, DAT_005284c0, stem);
     libc_strcpy(path, formatted);
-    libc_strcpy(record->name, libc_strrchr(path, '/') + 1);
+    libc_strcpy(record->name, fileNameFromPath(path));
     if (findRecordByKey(record->name) == 0xFF) {
         asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&record->resource), 1);
         record->flags |= 1;

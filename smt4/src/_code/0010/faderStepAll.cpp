@@ -1,4 +1,7 @@
-/* NON_MATCHING: retail keeps the 1.0 constant in s18 and 0.0 in s19 (loading 0.0 first); this build swaps the two registers. Interpolation start/end now land in s17/s16 as in retail. */
+/* NON_MATCHING: 37 lines. Retail never sets the interpolation endpoints for a state above 3 (the original left
+ * `from`/`to` uninitialised, so such a fader reused stale s16/s17); they are initialised here to keep the source
+ * defined. With them defined armcc keeps the endpoints in s0/s1 and frees d9, where retail holds them in s16/s17
+ * and 1.0/0.0 in s18/s19. */
 #include "common.h"
 
 /* A 0..1 fader: 0 = off, 1 = fading in, 2 = fading out, 3 = on. */
@@ -20,8 +23,8 @@ f32 mathInterpolateTimed(s32 duration, s32 frame, f32 from, f32 to);
 /* Step one fader by one frame. */
 static __inline void faderStep(Fader *fader)
 {
-    f32 from;
-    f32 to;
+    f32 from = 0.0f;
+    f32 to = 0.0f;
     u8 state = fader->state;
     fader->frame++;
     s32 frame = fader->frame;

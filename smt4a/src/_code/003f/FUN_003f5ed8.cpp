@@ -47,7 +47,7 @@ s32 ifTouchGetSelectionMode(void);
 s32 uiScrollHandleActionsOrTouch(void *list, const TextureTableEntryIV *touchArea, void *panel, s32 a, s32 b, s32 c, u8 *flag, s32 d, s32 e);
 s32 padQueryLogicalKey(s32 which, s32 arg);
 void eventQueueAddUniqueIfValid(u32 event);
-void FUN_003f6abc(DialogWork *work);
+void unlockLogLoadSelectedTopic(DialogWork *work);
 void dialogEnterState(DialogWork *work, s32 state, s32 arg);
 
 /* Updates the selection dialog: pulses its three highlights, blinks, refreshes the visible window
@@ -92,7 +92,7 @@ void FUN_003f5ed8(DialogWork *work)
     }
     if ((padQueryLogicalKey(0, 1) != 0 || touchMode == 6) && *work->selected != 0) {
         eventQueueAddUniqueIfValid(0x100020E);
-        FUN_003f6abc(work);
+        unlockLogLoadSelectedTopic(work);
         uiSpriteSetKeyframe((UiSpriteState *)((u8 *)work + 0x1F8), 1, 0);
         uiSpriteSetImageKeyframe((UiSpriteState *)((u8 *)work + 0x1F8), 0, 0);
         uiSpriteSetKeyframe((UiSpriteState *)((u8 *)work + 0x540), 2, 0);

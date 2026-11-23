@@ -2,7 +2,7 @@
 #include "runtime/Stdio.h"
 #include "classes/Obj557c48.h"
 #include "classes/Obj557c28.h"
-#include "classes/Obj557b28.h"
+#include "classes/MoriModelShadowMap.h"
 #include <new>
 
 class Obj557d00;
@@ -50,9 +50,9 @@ void modelHandleRegistryInit(Obj557c48 *manager)
     Obj557c28 *command = memory != NULL ? new (memory) Obj557c28() : NULL;
     moriModelCommandInitBuffers(command->command(), 0x100000, 0x200);
     manager->setCommands(command);
-    Obj557b28 *tuning = static_cast<Obj557b28 *>(asdMemoryAllocTraced(sizeof(Obj557b28), DAT_00526098, 0x60));
+    MoriModelShadowMap *tuning = static_cast<MoriModelShadowMap *>(asdMemoryAllocTraced(sizeof(MoriModelShadowMap), DAT_00526098, 0x60));
     if (tuning != NULL)
-        tuning = new (tuning) Obj557b28();
+        tuning = new (tuning) MoriModelShadowMap();
     manager->setShadowMap(tuning);
     FUN_00156ea8();
     u32 *scratch = static_cast<u32 *>(asdMemoryAllocTraced(sizeof(u32), DAT_00526098, 100));

@@ -22,7 +22,7 @@ void statusDownDrawEndBanner(s32 x, s32 y, f32 alpha);
 void FUN_002f67c4(s32 card, s32 x, s32 y, s32 order, f32 alpha);
 void FUN_0037e5c0(s32 card, s32 x, s32 y, f32 alpha);
 
-extern const char DAT_00536bc4[]; /* the confirm banner's text */
+extern const char g_statusDownEndBannerText[]; /* the confirm banner's text */
 
 /* Draws the status-down card row and, while confirming, the highlighted card's banner. */
 void statusDownDrawCardRow(s32 x, s32 y, f32 alpha)
@@ -46,7 +46,7 @@ void statusDownDrawCardRow(s32 x, s32 y, f32 alpha)
         FUN_00334c6c(banner->x + x, banner->y + y, special);
         efctSetSpeed(alpha);
         char text[36];
-        __2sprintf(text, DAT_00536bc4);
+        __2sprintf(text, g_statusDownEndBannerText);
         s32 textWidth = fontMeasureLineAdvance((u8 *)text, 3);
         s32 textX = x + (banner->x + (banner->placement->width - textWidth) / 2);
         s32 textY = banner->y + y;

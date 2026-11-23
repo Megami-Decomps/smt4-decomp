@@ -26,7 +26,7 @@ void sysMemClear(void *destination, u32 size);
 static InputReaderGlobals g_padInputState = {NULL, 0, 0, 15, 4, 0};
 extern InputReaderCounters DAT_0063fff0;
 extern u8 g_padHeldFrames[0x7c];
-extern u8 DAT_0064007c[0x7c];
+extern u8 g_padHeldFramesSnapshot[0x7c];
 
 // Construct the HID reader once, then reset the game's two input histories and counters.
 void FUN_0013eb10(void)
@@ -37,7 +37,7 @@ void FUN_0013eb10(void)
     clamper->mode = 0;
     nn_hid_CTR_AnalogStickClamper_SetClampParam(g_padInputState.reader, 0x28, 0x91);
     sysMemClear(g_padHeldFrames, sizeof(g_padHeldFrames));
-    sysMemClear(DAT_0064007c, sizeof(DAT_0064007c));
+    sysMemClear(g_padHeldFramesSnapshot, sizeof(g_padHeldFramesSnapshot));
     DAT_0063fff0.held = 0;
     DAT_0063fff0.pressed = 0;
     DAT_0063fff0.released = 0;

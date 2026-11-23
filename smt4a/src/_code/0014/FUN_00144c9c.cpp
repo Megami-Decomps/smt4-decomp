@@ -23,7 +23,7 @@ typedef struct GxLayout {
     s32 mode2;
 } GxLayout;
 
-GxTarget FUN_001550b8(s32 kind, s32 size);
+GxTarget gxMakeScreenFramebufferDesc(s32 kind, s32 size);
 void FUN_00153084(AsdGxFramebuffer *framebuffer, const void *source, s32 allocated);
 
 /* Sets the display presets: the top screen's target alone, or the bottom screen's target, layout
@@ -39,13 +39,13 @@ void FUN_00144c9c(s32 top, s32 size, s32 mode)
         heightKind = 0x500;
     }
     if (top != 0) {
-        GxTarget target = FUN_001550b8(1, size);
+        GxTarget target = gxMakeScreenFramebufferDesc(1, size);
 
         FUN_00153084(&g_asdGxPresets.framebuffers[0], &target, 1);
         g_asdGxPresets.sharePrimaryFramebuffer = 1;
         return;
     }
-    GxTarget bottom = FUN_001550b8(0, heightKind);
+    GxTarget bottom = gxMakeScreenFramebufferDesc(0, heightKind);
     s32 rows = widthKind == 0x501 || widthKind == 0x502 ? 2 : 1;
     s32 columns = widthKind == 0x502 ? 2 : 1;
     GxLayout layout;
@@ -62,7 +62,7 @@ void FUN_00144c9c(s32 top, s32 size, s32 mode)
     layout.flagsB = 0x30000;
     layout.idC = 0x821A;
     layout.mode2 = widthKind;
-    GxTarget third = FUN_001550b8(0, heightKind);
+    GxTarget third = gxMakeScreenFramebufferDesc(0, heightKind);
 
     if (g_asdGxPresets.displayMode != 0) {
         FUN_00153084(&g_asdGxPresets.framebuffers[0], &bottom, 1);

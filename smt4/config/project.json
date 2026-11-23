@@ -1260,12 +1260,12 @@
     },
     {
       "address": "0x103cec",
-      "function": "FUN_00103cec",
+      "function": "screenFadeSlotsReset",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_00103cec.o",
+      "object": "build/obj/_code/0010/screenFadeSlotsReset.o",
       "size": 68,
-      "source": "src/_code/0010/FUN_00103cec.cpp",
-      "target": "orig/target/_code/0010/FUN_00103cec.o",
+      "source": "src/_code/0010/screenFadeSlotsReset.cpp",
+      "target": "orig/target/_code/0010/screenFadeSlotsReset.o",
       "thumb": false
     },
     {
@@ -2215,12 +2215,12 @@
     },
     {
       "address": "0x107934",
-      "function": "FUN_00107934",
+      "function": "padUpdateHeldFrames",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_00107934.o",
+      "object": "build/obj/_code/0010/padUpdateHeldFrames.o",
       "size": 148,
-      "source": "src/_code/0010/FUN_00107934.cpp",
-      "target": "orig/target/_code/0010/FUN_00107934.o",
+      "source": "src/_code/0010/padUpdateHeldFrames.cpp",
+      "target": "orig/target/_code/0010/padUpdateHeldFrames.o",
       "thumb": false
     },
     {
@@ -4849,12 +4849,12 @@
     },
     {
       "address": "0x119c28",
-      "function": "FUN_00119c28",
+      "function": "soundListenerSetPose",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_00119c28.o",
+      "object": "build/obj/_code/0011/soundListenerSetPose.o",
       "size": 384,
-      "source": "src/_code/0011/FUN_00119c28.cpp",
-      "target": "orig/target/_code/0011/FUN_00119c28.o",
+      "source": "src/_code/0011/soundListenerSetPose.cpp",
+      "target": "orig/target/_code/0011/soundListenerSetPose.o",
       "thumb": false
     },
     {
@@ -13148,9 +13148,19 @@
       "function": "soundVoiceSetVolume",
       "module": "_code",
       "object": "build/obj/_code/0014/soundVoiceSetVolume.o",
-      "size": 32,
+      "size": 12,
       "source": "src/_code/0014/soundVoiceSetVolume.cpp",
       "target": "orig/target/_code/0014/soundVoiceSetVolume.o",
+      "thumb": false
+    },
+    {
+      "address": "0x14737c",
+      "function": "FUN_0014737c",
+      "module": "_code",
+      "object": "build/obj/_code/0014/FUN_0014737c.o",
+      "size": 20,
+      "source": "src/_code/0014/FUN_0014737c.cpp",
+      "target": "orig/target/_code/0014/FUN_0014737c.o",
       "thumb": false
     },
     {
@@ -25217,12 +25227,12 @@
     {
       "address": "0x1e2350",
       "file": "battle/btlStage",
-      "function": "FUN_001e2350",
+      "function": "btlStageCreate",
       "module": "_code",
-      "object": "build/obj/_code/battle/btlStage/FUN_001e2350.o",
+      "object": "build/obj/_code/battle/btlStage/btlStageCreate.o",
       "size": 212,
-      "source": "src/_code/battle/btlStage/FUN_001e2350.cpp",
-      "target": "orig/target/_code/battle/btlStage/FUN_001e2350.o",
+      "source": "src/_code/battle/btlStage/btlStageCreate.cpp",
+      "target": "orig/target/_code/battle/btlStage/btlStageCreate.o",
       "thumb": false
     },
     {
@@ -26524,12 +26534,12 @@
     },
     {
       "address": "0x1f42d4",
-      "function": "FUN_001f42d4",
+      "function": "eventTexDrawJobs",
       "module": "_code",
-      "object": "build/obj/_code/001f/FUN_001f42d4.o",
+      "object": "build/obj/_code/001f/eventTexDrawJobs.o",
       "size": 648,
-      "source": "src/_code/001f/FUN_001f42d4.cpp",
-      "target": "orig/target/_code/001f/FUN_001f42d4.o",
+      "source": "src/_code/001f/eventTexDrawJobs.cpp",
+      "target": "orig/target/_code/001f/eventTexDrawJobs.o",
       "thumb": false
     },
     {
@@ -37083,12 +37093,12 @@
     },
     {
       "address": "0x23bba0",
-      "function": "FUN_0023bba0",
+      "function": "enemyGrRendererBuildCommands",
       "module": "_code",
-      "object": "build/obj/_code/0023/FUN_0023bba0.o",
+      "object": "build/obj/_code/0023/enemyGrRendererBuildCommands.o",
       "size": 1304,
-      "source": "src/_code/0023/FUN_0023bba0.cpp",
-      "target": "orig/target/_code/0023/FUN_0023bba0.o",
+      "source": "src/_code/0023/enemyGrRendererBuildCommands.cpp",
+      "target": "orig/target/_code/0023/enemyGrRendererBuildCommands.o",
       "thumb": false
     },
     {
@@ -58259,12 +58269,12 @@
     },
     {
       "address": "0x2bc560",
-      "function": "FUN_002bc560",
+      "function": "gxMakeScreenFramebufferDesc",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002bc560.o",
+      "object": "build/obj/_code/002b/gxMakeScreenFramebufferDesc.o",
       "size": 212,
-      "source": "src/_code/002b/FUN_002bc560.cpp",
-      "target": "orig/target/_code/002b/FUN_002bc560.o",
+      "source": "src/_code/002b/gxMakeScreenFramebufferDesc.cpp",
+      "target": "orig/target/_code/002b/gxMakeScreenFramebufferDesc.o",
       "thumb": false
     },
     {
@@ -80471,12 +80481,12 @@
     },
     {
       "address": "0x33e7c4",
-      "function": "FUN_0033e7c4",
+      "function": "nkdwLoadWorldData",
       "module": "_code",
-      "object": "build/obj/_code/0033/FUN_0033e7c4.o",
+      "object": "build/obj/_code/0033/nkdwLoadWorldData.o",
       "size": 216,
-      "source": "src/_code/0033/FUN_0033e7c4.cpp",
-      "target": "orig/target/_code/0033/FUN_0033e7c4.o",
+      "source": "src/_code/0033/nkdwLoadWorldData.cpp",
+      "target": "orig/target/_code/0033/nkdwLoadWorldData.o",
       "thumb": false
     },
     {
@@ -84428,7 +84438,18 @@
       "size": 140,
       "source": "src/_code/0035/recordQueryAndValidatePairWithKey.cpp",
       "target": "orig/target/_code/0035/recordQueryAndValidatePairWithKey.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x353a74",

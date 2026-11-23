@@ -1,0 +1,55 @@
+#include "map/DistanceVisibilityWork.h"
+#include "game/GameStateA.h"
+#include "map/LmapGlobals.h"
+#include "shard/W6_W6Match1_PositionedStream.h"
+
+extern "C" {
+
+/* Updates map actor movement or visibility according to the controller's mode. */
+void mapActorUpdateDistanceVisibility(DistanceVisibilityWork *work)
+{
+    /* This gate lies in the byte-aligned mapFlags union. */
+    union OrderedDistance {
+        f32 value;
+        s32 bits;
+    };
+    DistanceVisibilityActor *actor = work->actor;
+    DistanceVisibilityBlock *block = &actor->block;
+    DistanceVisibilityTail *tail = &actor->tail;
+    if (g_gameState.unk5C8 || g_gameState.inputBlocked ||
+        g_gameState.paused || g_gameState.loading)
+        return;
+    if (work->mode != 0) {
+        if (work->mode != 1)
+            return;
+        FUN_00481ba8(work);
+        mapVectorAdd(&block->position, &block->position, &work->offset);
+        return;
+    }
+    if (g_gameState.unk2A0)
+        return;
+    OrderedDistance distance;
+    /* Positive distances use the engine's ordered IEEE-754 integer representation. */
+    if (tail->category == 1) {
+        distance.value = distSpatial(block->position,
+            g_lmapScene->pose.position);
+        if (distance.bits < 0x44960000) { /* 1200.0f */
+            block->flags |= 8;
+            work->actor->block.graphics->model->flags &= ~3u;
+        } else {
+            block->flags &= ~8u;
+            work->actor->block.graphics->model->flags |= 3;
+        }
+    } else if (tail->category == 2) {
+        distance.value = distSpatial(block->position,
+            g_lmapScene->pose.position);
+        if (distance.bits < 0x44160000) { /* 600.0f */
+            block->flags |= 8;
+            work->actor->block.graphics->model->flags &= ~3u;
+        } else {
+            block->flags &= ~8u;
+            work->actor->block.graphics->model->flags |= 3;
+        }
+    }
+}
+} /* extern "C" */

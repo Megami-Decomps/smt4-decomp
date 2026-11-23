@@ -59,7 +59,7 @@ int FUN_002b1838(int);
 int FUN_002b24dc(int);
 int statusAcquireSharedResources(void);
 int gameGlobalsSetSceneState(int);
-int FUN_002cc36c(int);
+int btlUiStepNumberPopupsAndMarkers(int);
 int FUN_002cdd18(int);
 int sysMemClear(unsigned int *, int);
 int uiWorkEndState1(int);
@@ -129,7 +129,7 @@ extern int FUN_00284e94(void);
 /* Supplied declaration required: FUN_002c39dc. */
 /* Supplied declaration required: statusAcquireSharedResources. */
 /* Supplied declaration required: gameGlobalsSetSceneState. */
-/* Supplied declaration required: FUN_002cc36c. */
+/* Supplied declaration required: btlUiStepNumberPopupsAndMarkers. */
 /* Supplied declaration required: btlMenuResolveHighlightedCommand. */
 /* Supplied declaration required: FUN_002cdd18. */
 /* Supplied declaration required: asdOperatorDelete. */
@@ -247,7 +247,7 @@ unsigned int btlUiDrawJobUpdate(void)
   FUN_002cdd18(temp_v0 + 0x24bc);
   FUN_002b1838(temp_v0 + 8);
   FUN_0021d13c(temp_v0 + 0x28c4);
-  FUN_002cc36c(temp_v0);
+  btlUiStepNumberPopupsAndMarkers(temp_v0);
   if ((*(char *)(temp_v0 + 0xc040) != '\0') &&
      (temp_v10 = *(int *)(temp_v0 + 0xc048) + 1, *(int *)(temp_v0 + 0xc048) = temp_v10,
      *(int *)(temp_v0 + 0xc044) < temp_v10)) {

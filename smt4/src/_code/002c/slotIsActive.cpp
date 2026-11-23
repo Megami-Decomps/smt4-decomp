@@ -15,7 +15,7 @@ typedef struct InputState {
 
 extern MaskEntry DAT_00409ab0[31];
 extern InputState g_padInputState;
-extern u32 DAT_004e3c28;
+extern u32 g_padInputs;
 extern u32 DAT_004e3c48;
 
 /* Returns whether the entry's mask intersects the current input word (never for out-of-range or disabled entries). */
@@ -31,7 +31,7 @@ u8 slotIsActive(u32 index)
             if ((g_padInputState.flags & 1) != 0) {
                 source = &DAT_004e3c48;
             } else {
-                source = &DAT_004e3c28;
+                source = &g_padInputs;
             }
             bits = source != NULL ? *source : 0;
             return (bits & entry->mask) != 0;

@@ -3,7 +3,7 @@
 #include "shard/GlobalBlocks.h"
 
 extern "C" {
-extern PadAnalogSample DAT_0063ffd0[2];
+extern PadAnalogSample g_padInputs[2];
 extern PadAnalogSample DAT_0063fff0;
 f32 inputApplyDeadZone(f32 *value, f32 threshold);
 
@@ -26,7 +26,7 @@ u32 padGetNormalizedAnalogStick(f32 *outX, f32 *outY, u32 index)
         if (locked || (g_padInputState.flags & 2) != 0)
             sample = &DAT_0063fff0;
         else
-            sample = &DAT_0063ffd0[index];
+            sample = &g_padInputs[index];
         if (sample) {
             f32 rawX = (f32)sample->x;
             f32 rawY = (f32)sample->y;

@@ -6,7 +6,7 @@ extern "C" {
 extern MapMainA *g_mapMain;
 s32 renderCtxPackPassFlags(s32 preset, s32 index);
 void FUN_002b6f30(void);
-void FUN_002cfb18(void);
+void mapDrawTargetMarkerQuad(void);
 void FUN_002443e4(void);
 void mapEplUpdateEntriesIfAny(void);
 
@@ -27,7 +27,7 @@ s32 mapMainDrawOrdinaryPass(u32 job)
     s32 state = renderCtxPackPassFlags(5, 0);
     renderStackPush(context->stacks + RENDER_STACK_A, state);
     FUN_002b6f30();
-    FUN_002cfb18();
+    mapDrawTargetMarkerQuad();
     FUN_002443e4();
     renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     mapEplUpdateEntriesIfAny();

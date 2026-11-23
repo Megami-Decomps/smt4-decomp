@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00150784(void);
-int FUN_00154710(...);
+int soundListenerSetPose(...);
 int holderStartOnce(...);
 int trackerMoveTo(...);
 int nw_snd_Sound3DManager_Initialize(...);
@@ -67,7 +67,7 @@ extern unsigned int DAT_0064c01c; /* 0x64c01c */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_00150784. */
-/* Supplied declaration required: FUN_00154710. */
+/* Supplied declaration required: soundListenerSetPose. */
 /* Supplied declaration required: holderStartOnce. */
 /* Supplied declaration required: trackerMoveTo. */
 /* Supplied declaration required: nw_snd_Sound3DManager_Initialize. */
@@ -167,7 +167,7 @@ unsigned int FUN_0013df74(unsigned int param_1,int param_2,unsigned char *param_
     DAT_0063f4a0 = temp_v1;
     DAT_0063f4a4 = temp_v2;
     DAT_0063f4a8 = temp_v1;
-    FUN_00154710(&temp_v5);
+    soundListenerSetPose(&temp_v5);
     temp_v4 = romwright_piece_4_4(0x40a00000,temp_v1);
     if (DAT_0063f4c4 != '\0') {
       DAT_0063f4b0 = 0x40a00000;

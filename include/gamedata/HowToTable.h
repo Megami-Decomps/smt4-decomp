@@ -26,11 +26,26 @@ typedef char HowToRecordLayoutCheck[
     offsetof(HowToRecord, imageA) == 0x36 &&
     offsetof(HowToRecord, imageB) == 0x40 ? 1 : -1];
 
+/* The table section loaded by the how-to list and entry screens. */
+struct HowToRecordSection {
+    /* 0x00 */ HowToRecord *entries;
+    /* 0x04 */ u32 count;
+};
+typedef char HowToRecordSectionSizeCheck[sizeof(HowToRecordSection) == 8 ? 1 : -1];
+
 #ifdef __cplusplus
 /* The section's rows; their number is dataTableGetCount of the same section. */
 static inline HowToRecord *howToRecords(void *table)
 {
     return static_cast<HowToRecord *>(dataTableGetEntries(table));
+}
+
+/* Loads the entries and count of HowToTable.tbb's tutorial section. */
+static __inline void howToLoadRecordSection(HowToRecordSection *section)
+{
+    void *table = dataTableGet(0x46, 0);
+    section->entries = howToRecords(table);
+    section->count = dataTableGetCount(table);
 }
 #endif
 

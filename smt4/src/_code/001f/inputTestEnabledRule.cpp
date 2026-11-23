@@ -12,7 +12,7 @@ struct InputState {
 };
 extern InputRule DAT_00409ab0[31];
 extern InputState DAT_004e3c48;
-extern InputState DAT_004e3c28;
+extern InputState g_padInputs;
 
 /* Read buttons from an optional input source. */
 static __inline u32 inputButtons(const InputState *input)
@@ -30,7 +30,7 @@ bool inputTestEnabledRule(u32 index)
     if ((g_padInputState.flags & 1) != 0) {
         input = &DAT_004e3c48;
     } else {
-        input = &DAT_004e3c28;
+        input = &g_padInputs;
     }
     return (inputButtons(input) & DAT_00409ab0[index].mask) != 0;
 }

@@ -1,14 +1,13 @@
-/* NON_MATCHING: the command list now copies as retail does; retail loads owner->writer after the program argument and writer->cursor before the projection register, the build schedules both loads the other way. */
+/* NON_MATCHING: only the owner->writer load is scheduled before the program argument here (retail loads it after, through the copied owner register). */
 #include "gfx/ModelMatrixUpload.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "Model/MoriModelEffect.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
+#include "gfx/VertexUniformMatrix.h"
 
 extern "C" {
 void FUN_00177684(u32 program, u32 mode, u32 enabled);
 void gfxCommandVectorResetAt(ModelCommandWriter *writer, u32 *begin);
-void FUN_0019a2ac(u32 *commands, const f32 *matrix, u32 header);
-void FUN_0019a270(u32 *commands, const f32 *matrix, u32 header);
 
 // Upload projection/model matrices and append a linked segment of model commands.
 void FUN_00157c3c(ModelMatrixUploadOwner *owner, ModelMatrixUploadSource *source,
@@ -20,15 +19,9 @@ void FUN_00157c3c(ModelMatrixUploadOwner *owner, ModelMatrixUploadSource *source
     FUN_00177684(source->program, 1, 1);
     gfxCommandVectorResetAt(writer, reinterpret_cast<u32 *>(asdGxGetCommandCursor()));
     u32 *commands = writer->cursor;
-    *commands++ = owner->projectionRegister | 0x80000000u;
-    *commands++ = 0xF02C0;
-    FUN_0019a2ac(commands, projection, 0xFF02C1);
-    commands += 18;
+    gpuAppendVertexUniformMatrix4x4(&commands, owner->projectionRegister, projection);
     writer->cursor = commands;
-    *commands++ = owner->modelRegister | 0x80000000u;
-    *commands++ = 0xF02C0;
-    FUN_0019a270(commands, model, 0xBF02C1);
-    commands += 14;
+    gpuAppendVertexUniformMatrix3x4(&commands, owner->modelRegister, model);
     writer->cursor = commands;
     ModelCommandList list = source->commandList;
     const u32 *modelCommands = list.commands;

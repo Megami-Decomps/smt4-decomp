@@ -22,7 +22,7 @@ extern "C" {
 extern HandleRegistryView *g_handleRegistry;
 extern RenderParameterOverride *DAT_0056fcb8;
 s32 FUN_00158124(HandleRegistryView *registry);
-void FUN_00157e98(void *target, const void *parameters);
+void modelUploadStereoMatrices(void *target, const void *parameters);
 void effectRestoreSavedRenderPairs(RenderCtxA *context, u32 value);
 void holderFlushPending(RegisteredHandle *holder);
 
@@ -42,7 +42,7 @@ u32 FUN_00146314()
     HandleRegistryView *registry = g_handleRegistry;
     if (FUN_00158124(registry)) {
         void *target = registry->target;
-        FUN_00157e98(target, activeParameters(registry));
+        modelUploadStereoMatrices(target, activeParameters(registry));
     }
     effectRestoreSavedRenderPairs(g_renderCtx, asdCameraGetSavedRenderPairs());
     RegisteredHandle **end = g_handleRegistry->end;

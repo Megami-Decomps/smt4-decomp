@@ -6427,3 +6427,11 @@
 002ca09c mapDepartSearch2dUpdate
 002671f4 mapCollisionQueueBoxWalls
 0025090c mapDepartFormatPlaceName
+00103cec screenFadeSlotsReset
+00107934 padUpdateHeldFrames
+002bc560 gxMakeScreenFramebufferDesc
+00119c28 soundListenerSetPose
+0023bba0 enemyGrRendererBuildCommands
+001f42d4 eventTexDrawJobs
+001e2350 btlStageCreate
+0033e7c4 nkdwLoadWorldData

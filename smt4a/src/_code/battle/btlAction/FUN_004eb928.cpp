@@ -27,7 +27,7 @@ int FUN_004ecd7c(...);
 int FUN_004ecee8(...);
 int btlCameraFinishTransition(...);
 int objRef1F50Release(...);
-int FUN_004f84ec(...);
+int btlLoadDefaultNiyariEffect(...);
 int btlStageResetAndClearCameraFlag(void);
 int FUN_004f8fa0(...);
 int FUN_004fb4fc(...);
@@ -240,7 +240,7 @@ extern int FUN_004f6478(int);
 /* Supplied declaration required: objRef1F50Release. */
 /* Supplied declaration required: obj4FSlots28Reset. */
 extern int FUN_004f80e4(int);
-/* Supplied declaration required: FUN_004f84ec. */
+/* Supplied declaration required: btlLoadDefaultNiyariEffect. */
 /* Supplied declaration required: btlStageResetAndClearCameraFlag. */
 /* Supplied declaration required: FUN_004f8fa0. */
 extern int FUN_004f9ae4(int, unsigned int);
@@ -1443,7 +1443,7 @@ code_r0x004f054c:
     }
     break;
   case 0x22:
-    FUN_004f84ec(g_btlAux);
+    btlLoadDefaultNiyariEffect(g_btlAux);
     return;
   case 0x23:
     FUN_004dcc5c(param_1,puVar25);

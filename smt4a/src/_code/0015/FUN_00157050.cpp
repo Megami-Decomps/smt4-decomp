@@ -1,8 +1,8 @@
-/* NON_MATCHING: the output and depth pair are reached through the core block at state+0x10 and the parameter block at 0x17C, like retail; remaining: two scheduling swaps (the prologue copies state before loading batch, and the parameter-block address is formed after the transform argument). */
+/* NON_MATCHING: the output and depth pair are reached through the core block at state+0x10 and the parameter block at 0x17C, like retail; remaining: the parameter-block address (`add r4, r4, #380`) is formed before the transform argument here, after it in retail. */
 #include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
-void FUN_0016a438(RenderUpdateStatePrefixA *state);
+void FUN_0016a438(RenderUpdateStatePrefixA *state, RenderUpdateContextPrefixA *context);
 void renderOutputBuildProjection(RenderUpdateStatePrefixA *state, const RenderUpdateContextPrefixA *context);
 void FUN_0018ab54(u8 *result, const u8 *source);
 void FUN_0018f0ac(u8 *result, u32 mode, const u8 *transform,
@@ -15,7 +15,7 @@ void FUN_00157050(RenderUpdateStatePrefixA *state,
                   RenderUpdateContextPrefixA *context)
 {
     RenderUpdateBatchA *batch = state->batch;
-    FUN_0016a438(state);
+    FUN_0016a438(state, context);
 
     if ((state->flags & 2u) != 0) {
         renderOutputBuildProjection(state, context);

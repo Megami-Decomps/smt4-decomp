@@ -2,7 +2,7 @@
 #include "common.h"
 #include <stdio.h>
 #include "text/TextDraw.h"
-#include "code/Code0019.h"
+#include "ui/ElementCategory.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/RenderCtxA.h"
 
@@ -29,30 +29,9 @@ void FUN_003f707c(DetailPanel *panel, s32 x, s32 y, u32 a, u32 b, u32 c, u32 d, 
 const char *FUN_003f74a8(DetailPanel *panel, DetailItem *item);
 void FUN_003f757c(DetailPanel *panel, s32 x, s32 y, u32 layer, const char *text, u32 a, u32 b, u32 c, u32 d, f32 speed);
 
-#define DETAIL_KIND_NONE_SOUND (-1)
 #define DETAIL_KIND_SPECIAL 9
 #define DETAIL_KIND_NO_VALUE 10
 #define DETAIL_STEREO_SCALE 0.26f
-
-/* Message group id for a record category, or -1 when it has none (same table as FUN_003f6424 and FUN_003f74a8). */
-static __inline s32 elementMessageGroup(u32 kind)
-{
-    s32 id;
-    switch (kind) {
-    case 0: id = 0xAE; break;
-    case 1: id = 0xB2; break;
-    case 2: id = 0xB0; break;
-    case 3: id = 0xB1; break;
-    case 4: id = 0xB3; break;
-    case 5: id = 5; break;
-    case 6: id = 0xBA; break;
-    case 7: id = 0xB9; break;
-    case 8: id = 0xAF; break;
-    case 9: id = 0xBB; break;
-    default: id = DETAIL_KIND_NONE_SOUND; break;
-    }
-    return id;
-}
 
 /* Draws the notice header text with stereo parallax (same operation as sibling FUN_003f78f8). */
 static __inline void drawNoticeHeader(s32 x, s32 y, s32 sprite, const char *text, u32 color, f32 speed)

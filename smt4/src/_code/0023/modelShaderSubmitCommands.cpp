@@ -18,7 +18,7 @@ struct ModelShaderCommands {
 };
 extern "C" {
 void gxGetCommandListParameter(u32, u32 **);
-u32 *FUN_0023bba0(ModelShaderCommands *, u32 *);
+u32 *enemyGrRendererBuildCommands(ModelShaderCommands *, u32 *); // declcheck: local (the shared declaration does not compile here or changes this unit)
 u32 *FUN_0023bb00(ModelShaderCommands *, u32 *, const void *);
 void *__aeabi_memcpy4(void *, const void *, u32);
 }
@@ -63,7 +63,7 @@ extern "C" void modelShaderSubmitCommands(void *, ModelShaderCommands *shader, c
     *cursor++ = 0x30253;
     cursor = appendAttributeReset(cursor, shader);
     if (!shader->cachedCount) {
-        u32 *end = FUN_0023bba0(shader, shader->cached);
+        u32 *end = enemyGrRendererBuildCommands(shader, shader->cached);
         shader->cachedCount = end - shader->cached;
     }
     __aeabi_memcpy4(cursor, shader->cached, shader->cachedCount * sizeof(u32));

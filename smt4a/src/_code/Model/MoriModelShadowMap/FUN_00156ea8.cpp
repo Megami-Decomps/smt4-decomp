@@ -1,25 +1,17 @@
 /* NON_MATCHING: allocation + constructor + handle clears now form one conditional initialiser (writeback clears match retail); the build assigns NULL to the work register on the failed-allocation path (moveq r1,#0) where retail keeps the allocation result in r0 and moves the work pointer back before the store. */
 #include "common.h"
-
-struct ShadowMapWork {
-    u8 unk00[0x48];
-    u32 handles[6]; // 0x48
-    u8 unk60[8];
-};
-struct ModelShadowMap {
-    u32 unk00;
-    ShadowMapWork *work; // 0x04
-};
+#include "classes/MoriModelShadowMap.h"
+#include "gfx/TexSetup.h"
 
 extern "C" {
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
-ShadowMapWork *FUN_0016d17c(ShadowMapWork *work);
+TexSetup *FUN_0016d17c(TexSetup *work);
 
 /* Runs the work area's constructor and clears its six handles. */
-static __inline ShadowMapWork *initShadowMapWork(ShadowMapWork *work)
+static __inline TexSetup *initShadowMapWork(TexSetup *work)
 {
     work = FUN_0016d17c(work);
-    u32 *handle = work->handles;
+    u32 *handle = work->lists[0];
     handle[0] = 0;
     handle[1] = 0;
     handle[2] = 0;
@@ -30,11 +22,11 @@ static __inline ShadowMapWork *initShadowMapWork(ShadowMapWork *work)
 }
 
 // Allocate and initialize the model's shadow-map work area.
-void FUN_00156ea8(ModelShadowMap *shadow)
+void FUN_00156ea8(MoriModelShadowMap *shadow)
 {
-    void *memory = asdMemoryAllocTraced(sizeof(ShadowMapWork),
+    void *memory = asdMemoryAllocTraced(sizeof(TexSetup),
         "c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelShadowMap.cpp", 62);
-    ShadowMapWork *work = memory != NULL ? initShadowMapWork(static_cast<ShadowMapWork *>(memory)) : NULL;
-    shadow->work = work;
+    TexSetup *work = memory != NULL ? initShadowMapWork(static_cast<TexSetup *>(memory)) : NULL;
+    shadow->target = work;
 }
 }

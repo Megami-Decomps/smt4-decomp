@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gfx/AnimationVisualCompletion.h"
 
 /* An animation key: the frame it fires on and its parameter. */
 struct BtlAttackAnimKey {
@@ -19,14 +19,13 @@ struct BtlAttackAnim {
     /* 0x0000 */ u8 unk0000[0x33B4];
     /* 0x33B4 */ u8 state;
     /* 0x33B5 */ u8 unk33B5[0xB];
-    /* 0x33C0 */ void *animation;
+    /* 0x33C0 */ AnimationVisualState *animation;
     /* 0x33C4 */ BtlAttackAnimKey *key;
     /* 0x33C8 */ BtlAttackAnimColor *color;
 };
 
 extern "C" {
 
-bool FUN_004212b8(void *animation);
 f32 animationGetModeChannelValue(void *animation);
 void btlReflectCreateTint(s32 a, s32 b, s32 param, f32 red, f32 green, f32 blue);
 void actionSequenceTriggerRangeAnimation(BtlAttackAnim *anim, s16 frame, s32 mode);
@@ -37,7 +36,7 @@ void btlUpdateAttackAnimation(BtlAttackAnim *anim);
  * moves to state 10 and updates the attack animation. */
 void FUN_004fa15c(BtlAttackAnim *anim)
 {
-    if (!FUN_004212b8(anim->animation)) {
+    if (!attackAnimationFirstChildIsComplete(anim->animation)) {
         s32 frame = (s32)animationGetModeChannelValue(anim->animation);
         if (anim->key->frame == frame) {
             btlReflectCreateTint(0, 0, anim->key->param, anim->color->red * 0.01f,
@@ -45,7 +44,7 @@ void FUN_004fa15c(BtlAttackAnim *anim)
         }
         actionSequenceTriggerRangeAnimation(anim, frame, 1);
     }
-    if (FUN_004212b8(anim->animation)) {
+    if (attackAnimationFirstChildIsComplete(anim->animation)) {
         FUN_00420fc0(anim->animation);
         anim->state = 10;
         btlUpdateAttackAnimation(anim);

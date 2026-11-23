@@ -1,6 +1,7 @@
 /* NON_MATCHING: writes the GPU command stream that uploads a skinned mesh's bone matrices (per batch: either bone x bind-pose products, a plain copy of the bone matrices, or a single matrix, each as float24 uniform rows with reversed components, followed by the batch's trailing data); written from the decompilation, the matrix buffer is one array instead of the decompiler's split locals and the source/out parameters of gpuCmdWriteCopy are recovered from its call site */
 #include "common.h"
 #include "Model/MoriModelEffect.h"
+#include "gfx/VertexUniformMatrix.h"
 
 #define BATCH_FLAG_PRODUCT 1
 #define BATCH_FLAG_COPY 2
@@ -65,7 +66,6 @@ struct CmdStream {
 
 extern "C" {
 void FUN_001a063c(CmdStream *stream, u32 commands, s32 bytes);
-void FUN_0019a270(u32 *out, const u8 *matrix, u32 command);
 void nn_math_ARMv6_MTX34MultAsm(f32 *out, const u8 *boneMatrix, const u8 *bindPose);
 s32 gpuCmdWriteCopy(s32 cursor, s32 *mark, s32 size);
 
@@ -121,7 +121,7 @@ void FUN_0019430c(SkinMesh *mesh, CmdStream *stream, SkinSkeleton *skeleton, Ski
             u32 *out = stream->cursor;
             out[0] = params->unitId | CMD_HEADER_FLAG;
             out[1] = CMD_UNIFORM_INDEX;
-            FUN_0019a270(out + 2, skeleton->bones + batch->bones[0] * MATRIX_BONE_STRIDE, CMD_UNIFORM_SINGLE_DATA);
+            FUN_0019a270(out + 2, (const f32 *)(skeleton->bones + batch->bones[0] * MATRIX_BONE_STRIDE), CMD_UNIFORM_SINGLE_DATA);
             stream->cursor = out + 0x10;
         }
 

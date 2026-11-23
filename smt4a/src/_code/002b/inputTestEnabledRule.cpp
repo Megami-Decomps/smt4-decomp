@@ -17,7 +17,7 @@ extern "C" {
 extern InputRule DAT_0053d740[31];
 extern InputMode g_padInputState;
 extern InputState DAT_0063fff0;
-extern InputState DAT_0063ffd0;
+extern InputState g_padInputs;
 
 /* Read buttons from an optional input source. */
 static __inline u32 inputButtons(const InputState *input)
@@ -37,7 +37,7 @@ bool inputTestEnabledRule(u32 index)
     } else if ((g_padInputState.flags & 2) != 0) {
         input = &DAT_0063fff0;
     } else {
-        input = &DAT_0063ffd0;
+        input = &g_padInputs;
     }
     return (inputButtons(input) & DAT_0053d740[index].mask) != 0;
 }

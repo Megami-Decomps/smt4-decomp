@@ -184,6 +184,9 @@ difference a register tie-break.
 - A type chosen only for the loads it gives must still say what the field holds: an `nn::fnd::TimeSpan` delay gave
   retail's two word loads in smt4a `FUN_00146808`/smt4 `FUN_0010f764`, but the field holds milliseconds (the sleeper
   multiplies it by 1000000), so the review kept `s64` and `NON_MATCHING` (wave 80).
+- A "fourth float" a function reads after a three-float by-value struct can be a separate `f32` argument: smt4/smt4a
+  `residentApplyFallbackValues(MapVector position, f32 angle)` forwards both to `soundListenerSetPose(const MapVector *, f32)`
+  and is IDENTICAL in both games; a four-float struct made armcc reload the spilled fourth word (wave 81).
 
 ### 64-bit flag masks
 
@@ -604,6 +607,17 @@ asks for.
 - A reset both games' fusion builders perform after their sort loops is one `static __inline` body
   (`fusionResetSelection`): smt4a `fusionRaceSelectionInitialize` is IDENTICAL with it (94 lines in place) and the IV
   twin `uniteCtrlBuildRaceLists` goes from 145 to 33 lines (wave 80).
+- A GPU command upload of a header pair and a matrix, written through a cursor taken by address
+  (`gpuAppendVertexUniformMatrix4x4(&cursor, index, matrix)`, `gfx/VertexUniformMatrix.h` per game), gives retail's
+  `strd r2, r3, [r0], #8` header store: `gpuWriteVertexUniformMatrix` (both games) and smt4a `modelUploadStereoMatrices` are IDENTICAL
+  with it. The cached-command emitters' identical `strd` (smt4 `FUN_00349cdc`/`d88`/`e34`, smt4a `FUN_00419c34`/`ce0`/
+  `d8c`) does not come from it (18 -> 28 lines): those keep the header written in place (wave 81).
+- Not evidence for a helper (wave 81 review): a single-use per-slot `static __inline` taking a `u32` index only
+  because the module's real setters take one (smt4 `screenFadeSlotsReset`), and a single-use inline whose only effect is the
+  literal-pool order of an argument's address (smt4 `padUpdateHeldFrames`). Both matched and both stay `NON_MATCHING`.
+- A match that needs a local left unset on some path (retail reuses a stale register for a state that sets no
+  interpolation endpoints) is undefined behaviour: initialise the local and keep `NON_MATCHING` (smt4/smt4a
+  `faderStepAll`, 14 -> 37/40 lines, wave 81).
 - A translation unit only helps when retail keeps the callee out of line: built as one file, smt4
   `buttonHelpSetSlot` was inlined into `buttonHelpCalc` (153 retail rows against 222), although both address the
   queued arrays from one pool word; the TU was not made (wave 80).

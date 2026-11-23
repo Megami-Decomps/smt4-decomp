@@ -13,4 +13,13 @@ static __inline void sinCosRad(f32 *sine, f32 *cosine, f32 radians)
     mathSinCos(sine, cosine, radians * 40.743664f);
 }
 
+/* nn::math::TanRad: the tangent as the table's sine over its cosine. */
+static __inline f32 tanRad(f32 radians)
+{
+    f32 sine;
+    f32 cosine;
+    sinCosRad(&sine, &cosine, radians);
+    return sine / cosine;
+}
+
 #endif

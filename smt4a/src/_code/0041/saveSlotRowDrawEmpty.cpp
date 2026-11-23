@@ -1,0 +1,33 @@
+/* NON_MATCHING: the centring offset's halving folds into the add (retail keeps a separate asr and adds the left edge to it), the label's y is computed before x, and the 0.0f literal pools before the colour. */
+#include "gfx/UiControlDraw.h"
+#include "saveLoadUI/SaveSlotRow.h"
+#include "shard/TextureDrawCall.h"
+#include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+
+extern "C" {
+void efctSetSpeed(f32 alpha);
+s32 fontMeasureLineAdvance(const char *text, s32 font);
+
+/* Draws the framed label and its numeric badge using the supplied position and opacity. */
+void saveSlotRowDrawEmpty(SaveSlotRow *owner, const UiScaledDrawPosition *position, const char *text, s32 value, s32)
+{
+    efctSetSpeed(position->speed);
+    texDrawTableEntryAtStoredOrigin(2, 0x2B, 0x8C, position->x, position->y, 2);
+    texDrawTableEntryAtStoredOrigin(2, 0x2B, 0x8D, position->x, position->y, 7);
+    for (s32 index = 0; index < 4; ++index) {
+        texDrawTableEntryAtStoredOrigin(2, 0x2B, index + 0x8E, position->x, position->y, 12);
+    }
+    for (s32 index = 0; index < 4; ++index) {
+        texDrawTableEntryAtStoredOrigin(2, 0x2B, index + 0x92, position->x, position->y, 17);
+    }
+    TextureTableEntryIV *metrics = asdTMTexTableEntryAt(0x2B, 0x8A);
+    s32 width = fontMeasureLineAdvance(text, 4);
+    s32 offset = (metrics->placement->width - width) / 2;
+    textDrawString((f32)(offset + (position->x + metrics->x)), (f32)(metrics->y + position->y), 0.0f, 4, 0.0f, 0x646464FF, position->speed, text);
+    texDrawTableEntryAtStoredOrigin(2, 0x2B, 0x96, position->x, position->y, 2);
+    texDrawTableEntryAtStoredOrigin(2, 0x2B, owner->emptyFrame, position->x, position->y, 2);
+    saveSlotRowDrawNumber(owner, value, position, 0x646464FF);
+    efctSetSpeed(1.0f);
+}
+}

@@ -4,7 +4,7 @@
 extern "C" {
 
 int stateValuesGetBySelector(int arg);
-int FUN_0014aa9c(int arg);
+int frameTexDrawCampTransition(int arg);
 
 /* "CAMPDR" draw: once the CAMP effect is enabled with its left capture done, draws it when no state selector is set and the transition is active; always returns 0. */
 u8 FUN_0013d2dc(u32 job)
@@ -21,7 +21,7 @@ u8 FUN_0013d2dc(u32 job)
         return 0;
     }
     if (work->campActive != 0) {
-        FUN_0014aa9c(0);
+        frameTexDrawCampTransition(0);
     }
     return 0;
 }

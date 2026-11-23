@@ -60,7 +60,7 @@ int scrScriptProcessCreate(...);
 int statusPanelSetOpen(...);
 int gameGlobalsSetOverlayActive(...);
 int gameGlobalsSetSceneState(...);
-int FUN_002c9a8c(...);
+int resultStatAllocationStep(...);
 int btlTalkBustUpCreate(void);
 int libc_strcpy(...);
 int scrSetStringSlot(...);
@@ -234,7 +234,7 @@ extern int messageGetChoiceResult(void);
 /* Supplied declaration required: gameGlobalsSetOverlayActive. */
 /* Supplied declaration required: gameGlobalsSetSceneState. */
 extern int FUN_002c8748(void);
-/* Supplied declaration required: FUN_002c9a8c. */
+/* Supplied declaration required: resultStatAllocationStep. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: gameSaveGetPoints. */
@@ -1367,7 +1367,7 @@ LAB_00205528:
     }
     break;
   case 0xb:
-    FUN_002c9a8c(temp_v6);
+    resultStatAllocationStep(temp_v6);
     break;
   case 0xc:
     temp_v16 = temp_v6 + *(int *)(temp_v6 + 0x74c0) * 0x150;

@@ -1,7 +1,7 @@
 #include "event/2dEvent/2dEventEffect.h"
 
 extern "C" {
-extern EventTexEffectA *g_eventTex;
+extern EventTexA *g_eventTex;
 extern const EventEffectPresets DAT_0052f4e0;
 s32 scrGetArg(u32 index);
 void scrSetResult(u32 result);
@@ -15,10 +15,10 @@ u32 scrCommStartEventTextureEffect(void)
     s32 preset = scrGetArg(0);
     s32 duration = scrGetArg(1);
     EventEffectPresets presets = DAT_0052f4e0;
-    u32 job = bustupStartUniformShake(&g_eventTex->effectValues[0], &g_eventTex->effectValues[1],
+    u32 job = bustupStartUniformShake(&g_eventTex->drawOrigin.x, &g_eventTex->drawOrigin.y,
                           presets.values[preset], static_cast<f32>(duration));
     if (jobIsValid(job))
-        jobSetParent(g_eventTex->textures.job, job);
+        jobSetParent(g_eventTex->job, job);
     scrSetResult(job);
     return 1;
 }

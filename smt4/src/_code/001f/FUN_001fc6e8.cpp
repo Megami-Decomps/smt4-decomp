@@ -65,7 +65,7 @@ int btlStageModelRelease(...);
 int btlUiCreateTasks(...);
 int btlAutoCalcTaskCreate(...);
 int btlUnitInitializeDrawJobs(...);
-int FUN_001e2350(...);
+int btlStageCreate(...);
 int btlCameraCreateDrawTaskAndInitializeStorage(...);
 int FUN_00255e38(...);
 int FUN_002560a4(int);
@@ -123,7 +123,7 @@ extern int DAT_0049fb9c; /* 0x49fb9c */
 /* Supplied declaration required: btlUnitInitializeDrawJobs. */
 /* Supplied declaration required: gameDataSlotSetFlag. */
 /* Supplied declaration required: btlEventTaskStart. */
-/* Supplied declaration required: FUN_001e2350. */
+/* Supplied declaration required: btlStageCreate. */
 /* Supplied declaration required: FUN_001f7d50. */
 /* Supplied declaration required: btlCameraCreateDrawTaskAndInitializeStorage. */
 /* Supplied declaration required: btlEditorCreate. */
@@ -350,7 +350,7 @@ void FUN_001fc6e8(unsigned int param_1)
       FUN_003ad754(g_btlUiBlock,0);
     }
     btlUnitInitializeDrawJobs(temp_v4);
-    FUN_001e2350(temp_v4);
+    btlStageCreate(temp_v4);
     btlEffectCreate(temp_v4);
     FUN_0021ae40(temp_v4);
     FUN_001d2628(temp_v4);

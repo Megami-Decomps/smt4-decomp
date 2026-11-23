@@ -1,12 +1,12 @@
-/* Runs FUN_0013c1fc and touchInputUpdate, then accelerometerUpdate (placed right after, so the last call is a linker NOP). */
+/* Runs padUpdateHeldFrames and touchInputUpdate, then accelerometerUpdate (placed right after, so the last call is a linker NOP). */
 extern "C" {
-void FUN_0013c1fc(void);
+void padUpdateHeldFrames(void);
 void touchInputUpdate(void);
 void accelerometerUpdate(void);
 
 void FUN_00140ba4(void)
 {
-    FUN_0013c1fc();
+    padUpdateHeldFrames();
     touchInputUpdate();
     accelerometerUpdate();
 }

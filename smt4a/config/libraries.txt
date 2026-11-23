@@ -114,3 +114,16 @@ arm 0x42e870 0x42ea6c nn::cec MessageBox::CloseMessageBox: WriteBoxInfo/WriteMes
 # arguments go through ARM_fpclassifyf; larger ones use sqrt((1 - |x|) / 2) and pi/2 split as 0x3fc90000 + 0x39fdaa22,
 # a rational polynomial in x*x; placed right before the third-party __hardfp_atan2f.
 arm 0x50d7ac 0x50d8b0 armlib asinf: ARM_fpclassifyf, __set_errno, vdiv 0/0, pi/2 split 0x3fc90000/0x39fdaa22
+# NintendoWare gfx: hand-written asm copies of the uniform-matrix writers FUN_001bc768 (3x4) and FUN_001bc7ec (4x4)
+# (between nw_gfx_internal_NWCopyMtx34Reverse and NWCopyVec3Reverse): the same instructions, byte for byte, including
+# the asm-only `vldmia r1!` writeback; linked here between nn_math_ARMv6_MTX34ToMTX33Asm and svcBreakTrap; smt4's
+# copies are 0x23ae1c/0x23ae58.
+arm 0x19a270 0x19a2f8 NintendoWare-gfx uniform-matrix writer copies: byte-identical to FUN_001bc768/FUN_001bc7ec, vldmia r1! writeback
+# armlib's VFP float-to-unsigned conversion (vmov/vcvt.u32.f32/vmov/bx lr), called only by FUN_001a9698 (armlib's
+# fplib powf; its exact twin's place among smt4 game code keeps it without a block for now); twin of smt4 0x15d0c8.
+arm 0x1cd32c 0x1cd33c armlib VFP float-to-unsigned conversion called only by powf (FUN_001a9698); twin of smt4 0x15d0c8
+# nn::os memory blocks: allocate and initialise call nn_os_AddressSpaceManager_Allocate on the SDK's address-space
+# manager and fail with the OS module's out-of-resource result 0xd8601837 (module 6 = OS); twins of smt4's 0x10f830
+# and 0x123a38 (the latter already third-party there).
+arm 0x1468a8 0x146904 nn::os memory block allocate: nn_os_AddressSpaceManager_Allocate, OS result 0xd8601837; twin of smt4 0x10f830
+arm 0x161b14 0x161b80 nn::os memory block initialise: nn_os_AddressSpaceManager_Allocate, OS result 0xd8601837; twin of smt4 0x123a38

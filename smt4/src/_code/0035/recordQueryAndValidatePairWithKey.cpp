@@ -1,4 +1,3 @@
-/* NON_MATCHING: IDENTICAL with unit cflags `--fpu=softvfp` (matching smt4a's project.json entry; default flags spill the 5th argument to s16). */
 #include "classes/WindowStatus.h"
 #include "nn/Result.h"
 

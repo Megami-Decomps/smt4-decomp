@@ -84,7 +84,7 @@ int asdProcessInit(...);
 int asdMemoryInit(...);
 int asdNgcInit(...);
 int appletCloseApplication(...);
-int FUN_00103cec(...);
+int screenFadeSlotsReset(...);
 int FUN_00103fec(...);
 int FUN_0010421c(...);
 int gfxInitDefaultDrawColor(...);
@@ -290,7 +290,7 @@ extern unsigned int asdModelGetStatic3C(void);
 /* Supplied declaration required: appletCloseApplication. */
 /* Supplied declaration required: FUN_00103c9c. */
 /* Supplied declaration required: appletReplySleepQueryAllow. */
-/* Supplied declaration required: FUN_00103cec. */
+/* Supplied declaration required: screenFadeSlotsReset. */
 extern unsigned long long FUN_00103d38(unsigned int);
 /* Supplied declaration required: contentUnmount. */
 extern int gameDataHasNoFlags(void);
@@ -575,7 +575,7 @@ void FUN_00101308(void)
   asdProcessInit(0x163);
   FUN_00103fec();
   asdTMTexTableLoadList(&LAB_001017ec);
-  FUN_00103cec();
+  screenFadeSlotsReset();
   ifTouchAcquire();
   messageInitializeDisplay();
   FUN_00105948();

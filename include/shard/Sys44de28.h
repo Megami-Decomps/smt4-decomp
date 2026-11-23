@@ -5,6 +5,10 @@
 #include "common.h"
 #include <stddef.h>
 
+struct SaveTableImage;      /* saveLoadUI/saveLoadUI.h */
+struct ConfigSettingsImage; /* gamedata/SaveLoadProcess.h */
+struct GameSaveBody;        /* gamedata/GameSaveData.h */
+
 typedef struct Worker {
     /* 0x000 */ u32 job;
     /* 0x004 */ u8 stopRequested;
@@ -44,9 +48,9 @@ typedef struct Sys44de28 {
     /* 0x04 */ Worker *worker;
     /* 0x08 */ s32 lastSlot;       /* the slot the screen selects when it opens */
     /* 0x0C */ s32 openedSlot;     /* lastSlot as the screen opened */
-    /* 0x10 */ void *backupTable;  /* copies of the game data table, settings and save data taken before a load */
-    /* 0x14 */ void *backupConfig;
-    /* 0x18 */ void *backupSave;
+    /* 0x10 */ SaveTableImage *backupTable;  /* copies of the game data table, settings and save data taken before a load */
+    /* 0x14 */ ConfigSettingsImage *backupConfig;
+    /* 0x18 */ GameSaveBody *backupSave;
 } Sys44de28;
 
 extern Sys44de28 g_saveLoadUIFlags;

@@ -55,7 +55,7 @@ s32 buttonHelpIsActionActive(s32 value);
 void statusCameraRestore(s32 value);
 void FUN_0033449c(s32 value);
 void FUN_0038b5fc(s32 index, u32 value);
-void FUN_0041e2d8(SelectScreen *screen);
+void saveLoadApplySelectedPlayerRecord(SelectScreen *screen);
 void FUN_0041e450(SelectScreen *screen);
 void FUN_0041e7c0(SelectScreen *screen);
 void FUN_0041e9d4(SelectScreen *screen);
@@ -108,7 +108,7 @@ extern "C" void FUN_0041f22c(SelectScreen *screen)
     FUN_0041e450(screen);
     FUN_0041e7c0(screen);
     FUN_0041fc24(screen);
-    FUN_0041e2d8(screen);
+    saveLoadApplySelectedPlayerRecord(screen);
     if ((objBStateAllowsAction() != 0 && padButtonIsPressed(1) != 0) || buttonHelpIsActionActive(2) != 0) {
         eventQueueAddUnique(0x100020F);
         FUN_0033449c(0);

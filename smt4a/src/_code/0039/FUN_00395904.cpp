@@ -10,7 +10,7 @@ int lmapCameraRecentreStep(void);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int calcHeadingRoundedToCardinalDirection(void);
-int FUN_002b56e0(void);
+int lmapViewUpdateCloseUpSequence(void);
 int mathAngleDeltaDegrees(void);
 int lmapViewUpdateOrbitSequence(void);
 int vectorPairTransitionStart(float *);
@@ -525,7 +525,7 @@ void FUN_00395904(void)
     FUN_003026d8();
     break;
   case 0xd:
-    FUN_002b56e0();
+    lmapViewUpdateCloseUpSequence();
     break;
   case 0xe:
     temp_v9 = g_lmapView[1];

@@ -75,7 +75,7 @@ int btlAutoStartCalculation(...);
 int FUN_0027249c(...);
 int FUN_002726b8(...);
 int FUN_002919b4(...);
-int FUN_00291ce8(...);
+int btlStageCreate(...);
 int btlCameraCreate(...);
 int btlEffectCreateTasks(...);
 int btlTalkBustUpCreate(void);
@@ -199,7 +199,7 @@ extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_002854d8. */
 /* Supplied declaration required: FUN_002919b4. */
 /* Supplied declaration required: btlEventTaskCreate. */
-/* Supplied declaration required: FUN_00291ce8. */
+/* Supplied declaration required: btlStageCreate. */
 /* Supplied declaration required: btlActionRingStartCalc. */
 /* Supplied declaration required: btlCameraCreate. */
 /* Supplied declaration required: btlEditorCreate. */
@@ -417,7 +417,7 @@ void FUN_002ba998(unsigned int param_1)
     }
     FUN_004a8edc(g_btlUiBlock,0);
     FUN_002726b8(temp_v7);
-    FUN_00291ce8(temp_v7);
+    btlStageCreate(temp_v7);
     btlEffectCreateTasks(temp_v7);
     FUN_00301ad0(temp_v7);
     FUN_0027249c(temp_v7);

@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_001177e0(void);
-int FUN_00119c28(...);
+int soundListenerSetPose(...);
 int FUN_00121030(unsigned char *, unsigned char *, unsigned int, unsigned int);
 int nw_snd_SoundArchivePlayer_Initialize(...);
 int soundArchiveLoadInfoBlock(unsigned char *, unsigned int, unsigned int);
@@ -67,7 +67,7 @@ extern unsigned int DAT_004efd34; /* 0x4efd34 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_001177e0. */
-/* Supplied declaration required: FUN_00119c28. */
+/* Supplied declaration required: soundListenerSetPose. */
 /* Supplied declaration required: FUN_00121030. */
 /* Supplied declaration required: nw_snd_SoundArchivePlayer_Initialize. */
 /* Supplied declaration required: soundArchiveLoadInfoBlock. */
@@ -165,7 +165,7 @@ unsigned int FUN_001096ec(unsigned int param_1,int param_2,unsigned char *param_
     DAT_004e3110 = temp_v1;
     DAT_004e3114 = temp_v2;
     DAT_004e3118 = temp_v1;
-    FUN_00119c28(&temp_v5);
+    soundListenerSetPose(&temp_v5);
     temp_v4 = romwright_piece_4_4(0x40a00000,temp_v1);
     if (DAT_004e3134 != '\0') {
       DAT_004e3120 = 0x40a00000;

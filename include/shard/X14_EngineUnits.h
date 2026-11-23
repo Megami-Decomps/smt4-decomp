@@ -12,7 +12,8 @@
 /* One 0x150-byte unit entry. */
 typedef struct EngineUnit {
     /* 0x00 */ s8 rank;        /* below 25: the slot's own record; from 25: a table record */
-    /* 0x01 */ u8 unk01[0x1F];
+    /* 0x01 */ u8 unk01[0x15];
+    /* 0x16 */ s16 baseStats[5]; /* the player's stats before the points were handed out (the allocation's floor) */
     /* 0x20 */ s16 maxHp;      /* the unit's values before the level-up being shown */
     /* 0x22 */ s16 maxMp;
     /* 0x24 */ s16 stats[5];
@@ -92,7 +93,10 @@ typedef struct ResultWorkA {
     /* 0x7F30 */ u32 job;                       /* "Result CALC" */
     /* 0x7F34 */ u32 unk7F34;
     /* 0x7F38 */ u32 drawTask;
-    /* 0x7F3C */ u8 unk7F3C[0x1C];
+    /* 0x7F3C */ u8 unk7F3C[4];
+    /* 0x7F40 */ f32 unk7F40[4];                /* the stat panel's animation steps (engineGetFloatTableValue) */
+    /* 0x7F50 */ s8 unk7F50;                    /* nonzero: the panel advances by unk7F40[0] instead of 1 */
+    /* 0x7F51 */ u8 unk7F51[7];
 } ResultWorkA;
 
 /* g_engineCleanupOwner (Apocalypse, a global block, not a pointer): the result screen's work and the
@@ -132,7 +136,8 @@ typedef char ResultWorkAOffsetsCheck[
     sizeof(ResultWorkA) == 0x7F58 ? 1 : -1];
 
 
-typedef char ResultWorkAStatLayoutCheck[offsetof(EngineUnit, maxHp) == 0x20 && offsetof(EngineUnit, stats) == 0x24 &&
+typedef char ResultWorkAStatLayoutCheck[offsetof(EngineUnit, maxHp) == 0x20 && offsetof(EngineUnit, baseStats) == 0x16 &&
+    offsetof(ResultWorkA, unk7F50) == 0x7F50 && offsetof(EngineUnit, stats) == 0x24 &&
     offsetof(EngineUnit, id) == 0x66 && sizeof(EngineUnit) == 0x150 &&
     offsetof(ResultWorkA, statRowRegions) == 0x43B6 && offsetof(ResultWorkA, statArrowRegions) == 0x43D8 &&
     offsetof(ResultWorkA, units) == 0x442C && offsetof(ResultWorkA, statPointTotal) == 0x7558 &&

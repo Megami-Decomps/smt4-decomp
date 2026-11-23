@@ -33,8 +33,8 @@ struct MapNaviCategoryRecord {
     };
 };
 struct MapNaviCategoryGrid {
-    u16 firstCell;
-    s16 width;
+    s16 firstCell;
+    u16 width;
     s16 pitch;
     s16 height;
 };

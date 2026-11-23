@@ -3,7 +3,7 @@
 
 extern "C" {
 void FUN_001536e4(FrameTexWorkA *);
-void FUN_0014aa9c(s32);
+void frameTexDrawCampTransition(s32);
 
 /* "CAMPDL" draw: animates the CAMP panel toward its expanded or contracted scale and draws it. */
 u8 panelUpdateAnimatedScale(u32 job)
@@ -41,7 +41,7 @@ u8 panelUpdateAnimatedScale(u32 job)
             if (uiSpriteGetCompletionState(&panel->campWidgets[3]))
                 uiSpriteAdvanceAnimation(&panel->campWidgets[0], 1.0f);
         }
-        FUN_0014aa9c(1);
+        frameTexDrawCampTransition(1);
     }
     return 0;
 }

@@ -6,13 +6,6 @@
 
 extern "C" {
 
-struct BattleDebugFlagsView {
-    u8 unk00[0x5c];
-    u32 job;
-    u8 unk60[0x4448];
-    u64 flags;
-};
-
 extern AsdListBoxEntry DAT_004343a8[];
 extern u32 DAT_00435dc0;
 extern u32 DAT_00435dd8;
@@ -25,7 +18,7 @@ s32 dataTable03Sub0GetCount(void);
 s32 dataTable22GetCount(void);
 
 // Build the battle debug menu from the current category, ids and debug flags.
-void FUN_003c5150(BattleDebugWork *work, const BattleDebugFlagsView *owner)
+void FUN_003c5150(BattleDebugWork *work, const BattleDebugOwnerView *owner)
 {
     u32 listBox = asdListBoxCreateDefault(owner->job, 0x73, 0, 0);
     work->listBox = listBox;
@@ -43,13 +36,13 @@ void FUN_003c5150(BattleDebugWork *work, const BattleDebugFlagsView *owner)
     }
     asdListBoxSetItemMode3(work->listBox, 2, DAT_00435dc0, 0, 0x4b1, 0);
     asdListBoxSetItemMode3(work->listBox, 3, DAT_00435dd8, 0, 1000, 0);
-    asdListBoxSetItemMode2(work->listBox, 4, ((u32)owner->flags & 0x4000) >> 14);
-    asdListBoxSetItemMode2(work->listBox, 5, ((u32)owner->flags & 0x8000) >> 15);
-    asdListBoxSetItemMode2(work->listBox, 6, ((u32)owner->flags & 0x10000) >> 16);
-    asdListBoxSetItemMode2(work->listBox, 11, ((u32)owner->flags & 0x20000000) >> 29);
-    asdListBoxSetItemMode2(work->listBox, 12, (owner->flags & 0x2000000000ULL) != 0);
-    asdListBoxSetItemMode2(work->listBox, 13, ((u32)owner->flags & 0x100000) >> 20);
-    asdListBoxSetItemMode2(work->listBox, 14, (u32)owner->flags >> 31);
+    asdListBoxSetItemMode2(work->listBox, 4, ((u32)owner->editorMask & 0x4000) >> 14);
+    asdListBoxSetItemMode2(work->listBox, 5, ((u32)owner->editorMask & 0x8000) >> 15);
+    asdListBoxSetItemMode2(work->listBox, 6, ((u32)owner->editorMask & 0x10000) >> 16);
+    asdListBoxSetItemMode2(work->listBox, 11, ((u32)owner->editorMask & 0x20000000) >> 29);
+    asdListBoxSetItemMode2(work->listBox, 12, (owner->editorMask & 0x2000000000ULL) != 0);
+    asdListBoxSetItemMode2(work->listBox, 13, ((u32)owner->editorMask & 0x100000) >> 20);
+    asdListBoxSetItemMode2(work->listBox, 14, (u32)owner->editorMask >> 31);
     void *section = dataTableGet(0x1c, 2);
     dataTableGetEntries(section);
     asdListBoxSetItemMode3(work->listBox, 10, 0, 0, dataTableGetCount(section), 0);

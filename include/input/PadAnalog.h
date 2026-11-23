@@ -24,8 +24,11 @@ static __inline void padAnalogGetExtrema(const PadAnalogCalibration *calibration
     }
 }
 
+/* One pad reading as the pad reader fills it: the button masks, then the stick. */
 struct PadAnalogSample {
-    /* 0x00 */ u8 prefix[0xC];
+    /* 0x00 */ u32 held;
+    /* 0x04 */ u32 pressed;
+    /* 0x08 */ u32 released;
     /* 0x0C */ s16 x;
     /* 0x0E */ s16 y;
 };

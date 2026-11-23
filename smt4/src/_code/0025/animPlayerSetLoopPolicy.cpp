@@ -1,4 +1,3 @@
-/* NON_MATCHING: scheduling only: retail stores the enabled byte (strb [r0,#88]) before the policy pointer (str [r0,#76]); the same body in FUN_002e11f4 matches. */
 #include "classes/Obj421460.h"
 
 extern "C" {

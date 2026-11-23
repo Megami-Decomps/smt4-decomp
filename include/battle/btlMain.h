@@ -7,6 +7,7 @@
 #include "battle/BattleRosterCache.h"
 #include "shard/W6_W6Match1_BattleCountSlot.h"
 #include "battle/btlCamera.h"
+#include "battle/btlStage.h"
 #include <stddef.h>
 
 
@@ -80,6 +81,16 @@ typedef struct BtlMainState {
             u8 prefix[0x58];
             /* 0x58 */ u32 job;
         } editor;
+        struct {
+            u8 prefix[0x30];
+            /* 0x0030 */ u32 job;
+            u8 unk34[0x94];
+            /* 0x00C8 */ u8 description[0x1F];
+            /* 0x00E7 */ s8 defaultStage;
+            /* 0x00E8 */ s8 defaultVariant;
+            u8 unkE9[0x53];
+            /* 0x013C */ BtlStageIdPair identifiers;
+        } stageSetup;
         struct {
             u8 unk000BeforeSprite[0xC0];
             /* 0x0C0 */ s32 templateIndex;
@@ -439,6 +450,10 @@ typedef struct BtlMainStateA {
             u8 prefix[0x08];
             /* 0x0058 */ u32 effectJob; /* btlUnit calculation task */
         } effectTasks;
+        struct {
+            u8 prefix[4];
+            /* 0x0054 */ u32 job;
+        } stageTask;
     };
     /* 0x0084 */ u8 freeOnEnd;    /* 0 = keep the block after the job ends */
     /* 0x0085 */ u8 unk0085[3];
@@ -494,6 +509,17 @@ typedef struct BtlMainStateA {
             u8 unk00F4[0x18];
             /* 0x010C */ s32 second;
         } activity;
+        struct {
+            u8 prefix[0x68];
+            /* 0x00F4 */ struct {
+                u8 unk00[0x20];
+                /* 0x0114 */ s8 stageId;
+                /* 0x0115 */ s8 stageVariant;
+                u8 unk22[2];
+            } prepared;
+            u8 unk118[0x60];
+            /* 0x0178 */ BtlStageIdPair identifiers;
+        } stageSetup;
         struct {
             u8 prefix[0x92];
             /* 0x011E */ u16 devilId;
@@ -718,6 +744,15 @@ typedef char BtlMainStateABattleMaskViewOffsetCheck[
     offsetof(BtlMainStateA, gameOver.kind) == 0x4C80 && offsetof(BtlMainStateA, escapes.count) == 0x45BA &&
     offsetof(BtlMainStateA, statBonus.firstBonus) == 0xA0 && offsetof(BtlMainStateA, statBonus.secondBonus) == 0xA1 &&
     sizeof(BtlMainStateA) == 0x4CF0 ? 1 : -1];
+typedef char BtlMainStageSetupOffsetCheck[
+    offsetof(BtlMainState, stageSetup.job) == 0x30 &&
+    offsetof(BtlMainState, stageSetup.description) == 0xC8 &&
+    offsetof(BtlMainState, stageSetup.defaultStage) == 0xE7 &&
+    offsetof(BtlMainState, stageSetup.identifiers) == 0x13C &&
+    offsetof(BtlMainStateA, stageTask.job) == 0x54 &&
+    offsetof(BtlMainStateA, stageSetup.prepared) == 0xF4 &&
+    offsetof(BtlMainStateA, stageSetup.prepared.stageId) == 0x114 &&
+    offsetof(BtlMainStateA, stageSetup.identifiers) == 0x178 ? 1 : -1];
 typedef char BtlMainStateAUiDrawJobOffsetCheck[
     offsetof(BtlMainStateA, uiJobs.drawJob) == 0x78 && sizeof(BtlMainStateA) == 0x4CF0 ? 1 : -1];
 typedef char BtlMainStateAAuxiliaryTaskOffsetCheck[

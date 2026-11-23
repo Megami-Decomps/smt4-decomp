@@ -107,3 +107,18 @@ arm 0x360294 0x360ac8 CTR-SDK service IPC clients: srv session, command-header I
 # pre-decrements the pointer and scans with ldrb until the character (returning the pointer, the terminator counts)
 # or the terminator (returning 0); it matches only with --cpu=5TE -Ospace, as the runtime was built.
 thumb 0x10024c 0x100262 armlib strchr: lsls/lsrs #24 char, subs r0, #1 then adds/ldrb/cmp loop, movs r0, #0 on the terminator
+# NintendoWare gfx: hand-written asm copies of the uniform-matrix writers FUN_002a1828 (3x4) and FUN_002a18ac (4x4),
+# which sit in the nw::gfx internal block next to nw_gfx_internal_NWCopyMtx34Reverse: the same instructions, byte for
+# byte, including the asm-only `vldmia r1!` writeback (armcc never writes back an unused pointer); smt4a's copies are
+# 0x19a270/0x19a2ac (twins of its 0x1bc768/0x1bc7ec).
+arm 0x23ae1c 0x23aea4 NintendoWare-gfx uniform-matrix writer copies: byte-identical to FUN_002a1828/FUN_002a18ac, vldmia r1! writeback
+# armlib's VFP float-to-unsigned conversion (vmov s0, r0; vcvt.u32.f32 s2, s0; vmov r0, s2; bx lr), called only by
+# FUN_002b99b8 (armlib's fplib powf: ARM_fpclassifyf, __set_errno). powf has no block yet: it is linked among game
+# code here, and as a third-party anchor it would pull unanchored game functions after it (aocEntryFind,
+# kernelThreadJoinAndClose) into the between rule. Exact twin of smt4a's 0x1cd32c.
+arm 0x15d0c8 0x15d0d8 armlib VFP float-to-unsigned conversion called only by powf (FUN_002b99b8); twin of smt4a 0x1cd32c
+# nn::os memory blocks: the block allocator (and its initialising twin addressBlockInit, already third-party here) call
+# nn_os_AddressSpaceManager_Allocate on the SDK's address-space manager and fail with the OS module's out-of-resource
+# result 0xd8601837 (module 6 = OS); placed between nnosGetApplicationMemorySize and the SDK heap set-up.
+arm 0x10f830 0x10f88c nn::os memory block allocate: nn_os_AddressSpaceManager_Allocate, OS result 0xd8601837; twin of smt4a 0x1468a8
+arm 0x123a38 0x123aa4 nn::os memory block initialise: clears the block, nn_os_AddressSpaceManager_Allocate, OS result 0xd8601837; twin of smt4a 0x161b14

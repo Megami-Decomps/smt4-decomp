@@ -409,6 +409,8 @@ typedef char LmapViewAOffsetsCheck[offsetof(LmapViewA, heading) == 0x18 && offse
 typedef struct LmapViewHolderA {
     /* 0x00 */ u32 unk00;
     /* 0x04 */ LmapViewA *view;
+    /* 0x08 */ u8 unk08[8];
+    /* 0x10 */ f32 eyeFloor;    /* the eye height of the last close-up; the pull-back does not go below it */
 } LmapViewHolderA;
 
 /* An actor the Apocalypse map scene drives: its controller handle at 0x04. */

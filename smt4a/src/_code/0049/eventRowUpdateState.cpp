@@ -28,7 +28,7 @@ void FUN_0049df84(EventRow* row);
 void updateNineRowListInput(EventRow* row);
 s32 padQueryLogicalKey(u32 button, u32 mode);
 void eventQueueAddUniqueIfValid(u32 event);
-void FUN_0049ea54(EventRow* row);
+void howToOpenSelectedEntry(EventRow* row);
 }
 
 // A nonpositive texture ID does not need a table node.
@@ -73,7 +73,7 @@ extern "C" u32 eventRowUpdateState(EventRow* row, u32 handle)
         }
         break;
     case 7:
-        FUN_0049ea54(row);
+        howToOpenSelectedEntry(row);
         break;
     case 8:
         if (!eventRowTextureIsReady(row->textures->firstTexture)) {

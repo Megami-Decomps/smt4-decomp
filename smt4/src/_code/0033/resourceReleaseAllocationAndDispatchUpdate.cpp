@@ -24,7 +24,7 @@ void asdMemFree(void *allocation);
 void aocPackageClearFileRefFlagType0C(void *system, s32 value);
 void aocPackageClearFileRefFlagType10(void *system, s32 value);
 void FUN_0033f2b8(ResourceLocalView *resource, s32 value);
-void FUN_0033e7c4(ResourceLocalView *resource, s32 value);
+void nkdwLoadWorldData(ResourceLocalView *resource, s32 value);
 
 // Releases the optional allocation and dispatches the resource update by its mode.
 void resourceReleaseAllocationAndDispatchUpdate(ResourceLocalView *resource)
@@ -45,7 +45,7 @@ void resourceReleaseAllocationAndDispatchUpdate(ResourceLocalView *resource)
     switch (resource->unk08) {
     case 12:
         aocPackageClearFileRefFlagType10(g_aocSystem, resource->unk04);
-        FUN_0033e7c4(resource, resource->unk04);
+        nkdwLoadWorldData(resource, resource->unk04);
         break;
     default:
         aocPackageClearFileRefFlagType0C(g_aocSystem, resource->unk04);

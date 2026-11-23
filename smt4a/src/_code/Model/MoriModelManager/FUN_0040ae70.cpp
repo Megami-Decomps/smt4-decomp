@@ -6,7 +6,7 @@ extern "C" {
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 Obj557d00 *FUN_001581dc(void *owner);
 void FUN_00406834(UiLookupObj *scene, UiOwner *owner);
-void FUN_003fed38(Obj557b28 *shadowMap, Obj557b68Layer *layer);
+void moriModelShadowMapBuild(MoriModelShadowMap *shadowMap, Obj557b68Layer *layer);
 
 // Allocate the manager's render scene once, bind its target and optionally attach its shadow map.
 void FUN_0040ae70(Obj557c48 *manager, s32 attach)
@@ -33,7 +33,7 @@ void FUN_0040ae70(Obj557c48 *manager, s32 attach)
                 reinterpret_cast<UiOwner *>(FUN_001581dc(&pass)));
         }
         if (attach != 0 && manager->scene() != NULL)
-            FUN_003fed38(manager->shadowMap(), &manager->scene()->layer);
+            moriModelShadowMapBuild(manager->shadowMap(), &manager->scene()->layer);
     }
 }
 }

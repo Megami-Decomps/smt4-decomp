@@ -4,14 +4,14 @@
 #include "gamedata/MapSaveBlockA.h"
 
 extern "C" {
-void FUN_00490484(void *panel, u32 first, u32 third, u32 second, f32 x, f32 y);
+void naviRevealCellsAround(void *panel, u32 first, u32 third, u32 second, f32 x, f32 y);
 
 void navigationSetOrQueueRequest(u32 first, u32 second, u32 third, f32 x, f32 y)
 {
     NaviMainA *navigation = g_naviMain;
     MapSaveBlockA *flags = gameFlagsGetBlock();
     if (navigation != NULL) {
-        FUN_00490484(navigation->panel, first, third, second, x, y);
+        naviRevealCellsAround(navigation->panel, first, third, second, x, y);
         return;
     }
     /* Deferred navigation storage is beyond the shared MapSaveBlockA prefix. */

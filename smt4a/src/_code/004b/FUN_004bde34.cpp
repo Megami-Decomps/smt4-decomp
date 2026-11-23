@@ -2,32 +2,12 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "ui/UiControl.h"
+#include "ui/PartnerCard.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-/* A party unit record (only the fields read here). */
-typedef struct PartnerCardUnit {
-    /* 0x00 */ u8 unk00[0x2A];
-    /* 0x2A */ s16 hp;
-    /* 0x2C */ u8 unk2c[0x34];
-    /* 0x60 */ u16 flags;               /* bit 1: dimmed; bits 1..13: owned marker kinds */
-    /* 0x62 */ u16 portrait;
-    /* 0x64 */ u16 level;
-} PartnerCardUnit;
-
-
-/* The partner screen (only the fields used here, by their offsets). */
-typedef struct PartnerCardScreen {
-    /* 0x000 */ u8 unk000[4];
-    /* 0x004 */ u8 mode;
-    /* 0x005 */ u8 unk005[0x333];
-    /* 0x338 */ u8 active[16];
-    /* 0x348 */ s32 cycle[12];          /* frames each slot's marker has been shown */
-    /* 0x378 */ s32 marker[12];         /* which owned marker each slot shows */
-} PartnerCardScreen;
-
-s32 btlUnitMaxHp(PartnerCardUnit *unit);
+s32 btlUnitMaxHp(SlotRecordA *unit);
 void efctSetSpeed(f32 speed);
 void numberFontDrawFormatted(u32 a, s32 x, s32 y, u32 b, u32 c, u32 tag, const char *format, s32 value);
 void FUN_00183788(s32 hp, s32 maxHp, u32 a, u32 b, u32 group, u32 id0, u32 id1, u32 id2, u32 id3, s32 x, s32 y, u32 tag,
@@ -36,18 +16,17 @@ s32 valueAtMostFifthOfTotal(s32 value, s32 total);
 void drawSetColorFromRGBA8(u32 color);
 void gxResetColorQuadToWhite(void);
 void uiDrawItemOrStatusIcon(s16 portrait, s32 x, s32 y, u32 id, u32 flag);
-void FUN_004bda84(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s32 x, s32 y, f32 scale);
 
 /* Draws partner card `slot` for `unit` at (`x`, `y`) with fade `scale`: the card frame, level, hp
  * gauge and number, the cycling marker icon, then the extras. Several owned markers cycle every
  * 24 frames. */
-void FUN_004bde34(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s32 x, s32 y, f32 scale)
+void FUN_004bde34(PartnerCardScreen *screen, SlotRecordA *unit, s32 slot, s32 x, s32 y, f32 scale)
 {
-    u16 portrait = unit->portrait;
+    u16 portrait = unit->id;
     u32 level = unit->level;
     s32 hp = unit->hp;
     s32 maxHp = btlUnitMaxHp(unit);
-    u16 flags = unit->flags;
+    u16 flags = unit->ailments;
 
     if (screen->mode == 2 && screen->active[slot] == 0) {
         scale = scale * 0.5f;
@@ -100,7 +79,7 @@ void FUN_004bde34(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s3
     s32 count = 0;
 
     for (s32 kind = 1; kind < 14; kind++) {
-        if ((unit->flags & (1 << kind)) != 0) {
+        if ((unit->ailments & (1 << kind)) != 0) {
             count++;
         }
     }
@@ -111,7 +90,7 @@ void FUN_004bde34(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s3
             screen->cycle[slot] = 0;
         }
     }
-    FUN_004bda84(screen, unit, slot, x, y, scale);
+    partnerCardDrawAilmentMarker(screen, unit, slot, x, y, scale);
     efctSetSpeed(1.0f);
 }
 

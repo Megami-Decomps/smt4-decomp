@@ -3,7 +3,7 @@
 #include "shard/Sys4650a0.h"
 
 extern "C" {
-extern PadAnalogSample DAT_004e3c28[2];
+extern PadAnalogSample g_padInputs[2];
 extern PadAnalogSample DAT_004e3c48;
 f32 inputApplyDeadZone(f32 *value, f32 threshold);
 
@@ -21,7 +21,7 @@ u32 padGetNormalizedAnalogStick(f32 *outX, f32 *outY, u32 index)
         return 0;
     }
     {
-        PadAnalogSample *sample = (g_padInputState.flags & 1) != 0 ? &DAT_004e3c48 : &DAT_004e3c28[index];
+        PadAnalogSample *sample = (g_padInputState.flags & 1) != 0 ? &DAT_004e3c48 : &g_padInputs[index];
         if (sample != NULL) {
             f32 rawX = (f32)sample->x;
             f32 rawY = (f32)sample->y;

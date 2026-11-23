@@ -1,22 +1,18 @@
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "util/BitsAndBytes.h"
+#include "shard/SpriteDetailPanel.h"
 
-struct HunterDatabaseDrawView {
-    u32 unk00;
-    u8 state;
-};
 extern "C" {
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *);
 void efctSetSpeed(f32);
 void renderCtxResetColorScale(RenderCtxA *);
-void spriteDetailPanelDraw(HunterDatabaseDrawView *);
 u32 renderCtxPackPassFlags(u32, u32);
 
 // Draw the database with a temporary draw state, then restore blending and color.
-u32 hunterDatabaseDrawWithState(HunterDatabaseDrawView *work)
+u32 hunterDatabaseDrawWithState(SpriteDetailPanel *work)
 {
-    if (work->state == 0 || work->state == 1)
+    if (work->stage == 0 || work->stage == 1)
         return 0;
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *context = g_renderCtx;

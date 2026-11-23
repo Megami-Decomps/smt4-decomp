@@ -1046,7 +1046,7 @@ typedef char ParticleInstanceALayoutCheck[
 
 /* Observed command-submission prefix in Apocalypse.
  * This is not a recovered full object size or a resource-array boundary.
- * Selector names describe their uses in FUN_00157e98 only.
+ * Selector names describe their uses in modelUploadStereoMatrices only.
  */
 struct ModelCommandPrefixA {
     /* 0x000 */ u8 unk000[0x9c];

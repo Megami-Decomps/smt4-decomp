@@ -4,7 +4,7 @@
 
 extern "C" {
 u32 asdGxGetCommandCursor(void);
-u32 *FUN_00501084(Obj42072cState *cache, u32 *commands);
+u32 *enemyGrRendererBuildCommands(Obj42072cState *cache, u32 *commands); // declcheck: local (the shared declaration does not compile here or changes this unit)
 u32 *FUN_00500fe4(u32 unused, u32 *commands, const TextureCommandSource *texture);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void asdModelCommitCommandRange(u32 begin, u32 end);
@@ -40,7 +40,7 @@ static __inline u32 *vertexResetCommandSlots(u32 *commands, const Obj42072cState
 static __inline u32 *cacheEmitCommands(Obj42072cState *cache, u32 *commands, const TextureCommandSource *texture)
 {
     if (cache->commandWordCount == 0) {
-        u32 *end = FUN_00501084(cache, cache->commands);
+        u32 *end = enemyGrRendererBuildCommands(cache, cache->commands);
         cache->commandWordCount = end - cache->commands;
     }
     __aeabi_memcpy4(commands, cache->commands, cache->commandWordCount * sizeof(u32));

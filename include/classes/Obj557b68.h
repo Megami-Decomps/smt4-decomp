@@ -42,12 +42,25 @@ struct Obj557b68MinusOne {
     Obj557b68MinusOne() { setMinus1ReturnPtr(&value); }
 };
 
+// A projection onto a texture and its clip range (the shadow map's set-up, smt4a moriModelShadowMapBuild, addresses the block
+// from its start and fills it in).
+struct Obj557b68Projection {
+    Obj557b68Projection() : unk00(0), unk01(0), nearClip(0.0f), farClip(0.0f) {}
+
+    u8 unk00;                         // 0x00
+    u8 unk01;                         // 0x01
+    Obj557b18Matrix matrixB;          // 0x04: the texture projection
+    Obj557b18Matrix matrixC;          // 0x34
+    f32 nearClip;                     // 0x64
+    f32 farClip;                      // 0x68
+};
+
 // The first block of the object's state: counters, three matrices and the projection setup.
 struct Obj557b68Layer {
     Obj557b68Layer()
         : unk010(0), unk014(0), unk018(0), unk01c(0),
-          unk050(0), unk054(0), unk058(0), unk059(0),
-          unk0bc(0.0f), unk0c0(0.0f), width(240.0f), height(400.0f), unk0cc(0x18000000),
+          unk050(0), unk054(0),
+          width(240.0f), height(400.0f), unk0cc(0x18000000),
           unk0d4(0.0f), unk0d8(1.0f), unk0dc(0), unk0e0(0), unk0e8(0)
     {
     }
@@ -59,12 +72,7 @@ struct Obj557b68Layer {
     Obj557b18Matrix matrixA;          // 0x020
     u32 unk050;                       // 0x050
     u32 unk054;                       // 0x054
-    u8 unk058;                        // 0x058
-    u8 unk059;                        // 0x059
-    Obj557b18Matrix matrixB;          // 0x05C
-    Obj557b18Matrix matrixC;          // 0x08C
-    f32 unk0bc;                       // 0x0BC
-    f32 unk0c0;                       // 0x0C0
+    Obj557b68Projection projection;   // 0x058
     f32 width;                        // 0x0C4
     f32 height;                       // 0x0C8
     u32 unk0cc;                       // 0x0CC
@@ -122,7 +130,8 @@ public:
 };
 
 typedef char Obj557b68LayoutCheck[offsetof(Obj557b68, layer) == 0x10 && offsetof(Obj557b68Layer, matrixA) == 0x10 &&
-    offsetof(Obj557b68Layer, matrixB) == 0x4C && offsetof(Obj557b68Layer, matrixC) == 0x7C &&
+    offsetof(Obj557b68Layer, projection.matrixB) == 0x4C && offsetof(Obj557b68Layer, projection.matrixC) == 0x7C &&
+    offsetof(Obj557b68Layer, projection.farClip) == 0xB0 &&
     offsetof(Obj557b68Layer, unk0e4) == 0xD4 && sizeof(Obj557b68Layer) == 0xDC &&
     offsetof(Obj557b68, tail) == 0xEC && offsetof(Obj557b68, unk104) == 0x104 &&
     offsetof(Obj557b68, entries) == 0x108 && offsetof(Obj557b68, records) == 0x114 &&

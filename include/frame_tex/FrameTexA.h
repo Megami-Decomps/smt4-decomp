@@ -13,6 +13,31 @@ struct FrameTexTransitionPresets {
     f32 values[15];
 };
 
+/* One tile of the CAMP transition's board. */
+struct FrameTexCampTile {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ f32 alpha;
+    /* 0x10 */ u8 unk10[4];
+};
+
+/* The board of 24 tiles the CAMP transition draws over the capture (Apocalypse only). */
+struct FrameTexCampBoard {
+    /* 0x000 */ u8 unk000[0x60];
+    /* 0x060 */ s32 tileImages[24];    /* texture-table entry drawn for each tile */
+    /* 0x0C0 */ u8 unk0C0[0xC0];
+    /* 0x180 */ FrameTexCampTile tiles[24];
+};
+typedef char FrameTexCampBoardLayoutCheck[
+    sizeof(FrameTexCampTile) == 0x14 && offsetof(FrameTexCampBoard, tileImages) == 0x60 &&
+    offsetof(FrameTexCampBoard, tiles) == 0x180 && sizeof(FrameTexCampBoard) == 0x360 ? 1 : -1];
+
+/* The opacity of one board tile. Retail forms the board's address once for this read (`add r9, work, #0x1078`,
+ * then `[r9 + tile * 20 + 0x18C]`) while it reads tileImages relative to the work, so the read took the board. */
+static __inline f32 frameTexCampTileAlpha(const FrameTexCampBoard *board, s32 tile)
+{
+    return board->tiles[tile].alpha;
+}
+
 struct FrameTexWorkA {
     /* 0x0000 */ u32 job;                    /* the "HDRCL" process owning the other jobs */
     /* 0x0004 */ AsdTexture *surfaceLeft;    /* capture textures of the CAMP/ENCEFF/XFADE sets */
@@ -45,7 +70,8 @@ struct FrameTexWorkA {
     /* 0x1043 */ s8 campCapturedLeft;
     /* 0x1044 */ s8 campCapturedRight;
     /* 0x1045 */ s8 campPendingRight;        /* the right capture waits while a state selector is set */
-    /* 0x1046 */ u8 unk1046[0x392];
+    /* 0x1046 */ u8 unk1046[0x32];
+    /* 0x1078 */ FrameTexCampBoard campBoard;
     /* 0x13D8 */ FrameTexTransitionPresets transitionPresets;
     /* 0x1414 */ s8 encEffEnabled;
     /* 0x1415 */ u8 unk1415;
@@ -77,6 +103,7 @@ struct FrameTexWorkA {
 typedef char FrameTexWorkAHdrOffsetCheck[offsetof(FrameTexWorkA, hdr) == 0xFA4 ? 1 : -1];
 typedef char FrameTexWorkAZanOffsetCheck[offsetof(FrameTexWorkA, zan) == 0xFF4 ? 1 : -1];
 typedef char FrameTexWorkACampOffsetCheck[offsetof(FrameTexWorkA, campEnabled) == 0x1040 ? 1 : -1];
+typedef char FrameTexWorkACampBoardOffsetCheck[offsetof(FrameTexWorkA, campBoard) == 0x1078 ? 1 : -1];
 typedef char FrameTexWorkAPresetsOffsetCheck[offsetof(FrameTexWorkA, transitionPresets) == 0x13D8 ? 1 : -1];
 typedef char FrameTexWorkAEncEffOffsetCheck[offsetof(FrameTexWorkA, encEffEnabled) == 0x1414 ? 1 : -1];
 typedef char FrameTexWorkAFadeOffsetCheck[offsetof(FrameTexWorkA, fadeEnabled) == 0x144E ? 1 : -1];

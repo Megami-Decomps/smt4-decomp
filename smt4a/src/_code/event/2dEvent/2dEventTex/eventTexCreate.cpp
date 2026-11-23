@@ -16,7 +16,7 @@ void taskCreateDraw(const char* name, s32 priority, s32 a, s32 b, s32 (*draw)(u3
                     void* owner, u32 parent);
 void FUN_002ad130(void* owner);
 void eventTexFree(void* owner);
-s32 FUN_002ad180(u32 job);
+s32 eventTexDrawJobs(u32 job);
 s32 jobIsValid(u32 job);
 void jobSetWork31(u32 job, u8 value);
 void jobSetParent(u32 parent, u32 job);
@@ -32,8 +32,8 @@ u32 eventTexCreate(void)
         g_eventTex = manager;
         manager->flag = 1;
         manager->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVE_2dTex"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002ad130), reinterpret_cast<AsdProcFunc>(eventTexFree), reinterpret_cast<u32>(manager));
-        taskCreateDraw("EVE_2dTexDraw", 0x81, 0, 0, FUN_002ad180, 0, manager, manager->job);
-        taskCreateDraw("EVE_2dTexDraw", 0xdd, 0, 0, FUN_002ad180, 0, manager, manager->job);
+        taskCreateDraw("EVE_2dTexDraw", 0x81, 0, 0, eventTexDrawJobs, 0, manager, manager->job);
+        taskCreateDraw("EVE_2dTexDraw", 0xdd, 0, 0, eventTexDrawJobs, 0, manager, manager->job);
 
         for (s32 n = 0; n < 4; n++) {
             if (!jobIsValid(g_eventTexHandles[n])) continue;

@@ -30,7 +30,7 @@ struct ListMenu {
 extern "C" {
 void efctSetSpeed(f32 speed);
 void FUN_003f7164(ListMenu *menu, ListEntry *entry, s32 index, u32 kind, s32 x, s32 y, u32 slot, f32 speed);
-void FUN_003f6424(ListMenu *menu, ListEntry *entry, u32 kind, s32 x, s32 y, u32 slot);
+void elementPanelDrawRecordRow(ListMenu *menu, ListEntry *entry, u32 kind, s32 x, s32 y, u32 slot);
 void uiDrawListScrollBar(void *frame, s32 x, s32 y, u32 group, u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g,
                   s32 h, s32 i, s32 j, u32 k, u32 l);
 
@@ -80,7 +80,7 @@ void FUN_003f66dc(ListMenu *menu, s32 x, s32 y, f32 speed)
             TextureTableEntryIV *record = asdTMTexTableEntryAt(0x31, slot + 0x88);
             s32 iconX = record->x + x;
             s32 iconY = record->y + y;
-            FUN_003f6424(menu, entry, kind, iconX, iconY, 0x8d);
+            elementPanelDrawRecordRow(menu, entry, kind, iconX, iconY, 0x8d);
             if (flagsBGetBit1(entry->flags) != 0) {
                 record = asdTMTexTableEntryAt(0x31, 0x87);
                 iconX = iconX + record->x;

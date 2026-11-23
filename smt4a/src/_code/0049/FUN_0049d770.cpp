@@ -20,12 +20,10 @@ void FUN_0049d770(CallbackControllerWork *work)
     if (work->bufferA == NULL || work->bufferB == NULL ||
         textureGetIndexedResource(51) == NULL || !asdTMTexTableNodeIsLoaded(51, 0))
         return;
-    void *table = dataTableGet(70, 0);
-    work->catalog.entries = howToRecords(table);
-    work->catalog.count = dataTableGetCount(table);
+    howToLoadRecordSection(&work->catalog.section);
     s32 available = 0;
-    for (u32 index = 0; index < work->catalog.count; ++index) {
-        HowToRecord *record = &work->catalog.entries[index];
+    for (u32 index = 0; index < work->catalog.section.count; ++index) {
+        HowToRecord *record = &work->catalog.section.entries[index];
         if (record != NULL && record->id != 0) {
             if (!flagsAtGetBit0(record->id)) {
                 if (!gameFlagIsSet(record->unlockFlag))

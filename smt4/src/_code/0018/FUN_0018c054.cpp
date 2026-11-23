@@ -1,18 +1,8 @@
 #include "event/2dEvent/2dEventTex.h"
-#include <stddef.h>
-
-/* The shake output cells follow the shared event-texture prefix. */
-struct EventTextureShakeState : EventTex {
-    f32 shakeX;
-    f32 shakeY;
-};
-typedef char EventTextureShakeStateOffsets[
-    offsetof(EventTextureShakeState, shakeX) == 0x60 &&
-    offsetof(EventTextureShakeState, shakeY) == 0x64 ? 1 : -1];
 
 extern "C" {
 
-extern EventTextureShakeState *g_eventTex;
+extern EventTex *g_eventTex;
 
 s32 scrGetArg(u32 index);
 u32 bustupShakeStart(f32 *outputX, f32 *outputY, f32 amplitude, f32 duration);
@@ -25,7 +15,7 @@ s32 FUN_0018c054(void)
     s32 index = scrGetArg(0);
     s32 duration = scrGetArg(1);
     const f32 amplitudes[3] = {2.0f, 4.0f, 6.0f};
-    u32 job = bustupShakeStart(&g_eventTex->shakeX, &g_eventTex->shakeY, amplitudes[index], (f32)duration);
+    u32 job = bustupShakeStart(&g_eventTex->drawOrigin.x, &g_eventTex->drawOrigin.y, amplitudes[index], (f32)duration);
 
     if (jobIsValid(job) != 0) {
         jobSetParent(g_eventTex->job, job);

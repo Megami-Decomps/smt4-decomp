@@ -2286,6 +2286,7 @@
 0x0013bf84 nngxIsStereoVisionAllowed name
 0x0013f4c4 mobiclipRestoreDisplayState name
 0x00140290 mobiclipCtrlClosePlayer name
+0x001468a8 addressBlockAllocate library
 0x00146a30 nn_os_CriticalSection_TryEnter name
 0x00146a74 runtimeInitializeSharedHandle callers
 0x00146ab0 nnosGetAppMemAlloc name
@@ -2428,7 +2429,7 @@
 0x001615a8 nngxGetVramEndAddr name
 0x0016182c gfxRestoreTextureBindingState callers
 0x00161ab0 nnosAddressSpaceManagerInitialize name
-0x00161b14 addressBlockInit callers
+0x00161b14 addressBlockInit library
 0x00161dbc _ZSt16__introsort_loopIPP10SortObjecti14SortObjectLessEvT_S4_T0_T1_ name
 0x00162234 nn_math_ARMv6_MTX34InvTransposeAsm name
 0x00162390 FUN_00162390 between
@@ -2953,6 +2954,8 @@
 0x0019a0dc FUN_0019a0dc between
 0x0019a0fc nn_math_ARMv6_MTX44MultAsm name
 0x0019a258 nn_math_ARMv6_MTX34ToMTX33Asm name
+0x0019a270 FUN_0019a270 library
+0x0019a2ac FUN_0019a2ac library
 0x0019a2f8 svcBreakTrap name
 0x0019a300 svcConnectToPort name
 0x0019a318 FUN_0019a318 between
@@ -3346,6 +3349,7 @@
 0x001b620c nn_snd_CTR_Dspsnd_SetChannelIIRFilter_Biquad name
 0x001b6280 FUN_001b6280 between
 0x001b6368 FUN_001b6368 callers
+0x001b639c FUN_001b639c between
 0x001b6520 nn_gxlow_CTR_Gpu_TriggerCmdReqQueue name
 0x001b6548 nn_gxlow_CTR_Gpu_ImportDisplayCaptureInfo name
 0x001b6598 FUN_001b6598 between
@@ -3623,6 +3627,7 @@
 0x001cd210 slotTableFillResult callers
 0x001cd260 FUN_001cd260 callers
 0x001cd2dc nw_snd_internal_MoveValue_float_int_SetTarget name
+0x001cd32c FUN_001cd32c library
 0x001cd33c FUN_001cd33c callers
 0x001cd428 FUN_001cd428 callers
 0x001cd448 FUN_001cd448 between

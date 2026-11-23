@@ -1,5 +1,5 @@
 /* NON_MATCHING: register allocation only: retail keeps the kind in r0 (here r2) and clears the message with a predicated movlt. */
-#include "common.h"
+#include "ui/ElementCategory.h"
 
 namespace {
 struct ElementInfo {
@@ -11,51 +11,7 @@ struct ElementInfo {
 extern "C" {
 
 extern const char DAT_0052d3e8[];
-u16 dataTable10FindValue(u16 id);
 const char *table01RecordLookupForContent(u16 messageId);
-
-// Message group id for an element kind, -1 when it has none.
-static inline s32 elementMessageGroup(u32 kind)
-{
-    s32 id;
-
-    switch (kind) {
-    case 0:
-        id = 0xae;
-        break;
-    case 1:
-        id = 0xb2;
-        break;
-    case 2:
-        id = 0xb0;
-        break;
-    case 3:
-        id = 0xb1;
-        break;
-    case 4:
-        id = 0xb3;
-        break;
-    case 5:
-        id = 5;
-        break;
-    case 6:
-        id = 0xba;
-        break;
-    case 7:
-        id = 0xb9;
-        break;
-    case 8:
-        id = 0xaf;
-        break;
-    case 9:
-        id = 0xbb;
-        break;
-    default:
-        id = -1;
-        break;
-    }
-    return id;
-}
 
 /* Text naming the element kind of an entry (empty for kind 10). */
 const char *FUN_003f74a8(void *owner, const ElementInfo *info)
@@ -74,7 +30,7 @@ const char *FUN_003f74a8(void *owner, const ElementInfo *info)
         if (kind == 9) {
             message = 0x29d;
         } else {
-            message = dataTable10FindValue(id);
+            message = dataTable10FindValue((u16)id);
         }
     }
     return table01RecordLookupForContent(message);

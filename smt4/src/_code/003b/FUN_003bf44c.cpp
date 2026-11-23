@@ -1,4 +1,3 @@
-/* NON_MATCHING: the division by 60 written in both arms and the separate bonus product give retail's hoisted 0x88888889 and vmul/vadd; remaining: retail also loads the 0.0f clamp floor into s17 before the clock call. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "battle/BattleBalanceRow.h"
@@ -15,12 +14,13 @@ u32 clockGetSecondsSinceStart();
 u32 saveBlockGetPlaySeconds();
 f32 FUN_002b99b8(f32 base, f32 exponent);
 
-// Scale a level-derived battle amount by elapsed minutes and the active multiplier.
+/* Scales a level-derived battle amount by the elapsed minutes and the active multiplier. */
 s32 FUN_003bf44c()
 {
     BattleAmountWork *battle = reinterpret_cast<BattleAmountWork *>(btlGetMainState());
     gameGetSlotTable();
-    f32 minutes;
+    /* Initialised although every path sets it: retail materialises the 0.0 in s17 at entry, before the clock call. */
+    f32 minutes = 0.0f;
     u32 seconds = clockGetSecondsSinceStart();
     if (seconds == 0xffffffff)
         minutes = (f32)(saveBlockGetPlaySeconds() / 60);

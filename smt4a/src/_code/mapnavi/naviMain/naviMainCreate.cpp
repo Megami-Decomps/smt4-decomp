@@ -16,7 +16,7 @@ void campCommonBgAcquire(void);
 void campButtonHelpAcquire(void);
 void commonBgStopChildAndBeginTransition(void);
 void commonBgReset(void);
-void FUN_00490484(void *panel, u32 first, u32 third, u32 second, f32 x, f32 y);
+void naviRevealCellsAround(void *panel, u32 first, u32 third, u32 second, f32 x, f32 y);
 void requestBeginProcessing(u8 *request, s32 value, s32 type);
 void NaviMain_ResetFlags(u8 *request, u8 mode);
 s32 naviMenuStartIfIdle(u32 handle);
@@ -69,7 +69,7 @@ void naviMainCreate(u32 unused, u32 argument)
     }
 
     if (queued->pending == 1) {
-        FUN_00490484(navigation->panel, queued->first, queued->third, queued->second, (f32)queued->x,
+        naviRevealCellsAround(navigation->panel, queued->first, queued->third, queued->second, (f32)queued->x,
                      (f32)queued->y);
         queued->pending = 0;
         queued->first = 0;

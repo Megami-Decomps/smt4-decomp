@@ -84,7 +84,7 @@ void FUN_00144ab4(s32 value);
 void asdGxFlushCommandBuffer(void);
 void renderCtxResetFrameState(RenderCtxA *context);
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
-s32 FUN_00157e98(ModelSlot *model, ModelAnimationSet *animations);
+s32 modelUploadStereoMatrices(ModelSlot *model, ModelAnimationSet *animations);
 void holderFlushPending(u32 handle);
 
 /* The animation set in use: the override's embedded record when it is fully enabled, else the manager's own. */
@@ -144,7 +144,7 @@ u32 FUN_00146048(void)
     manager = g_handleRegistry;
     if (FUN_00158124(manager)) {
         ModelSlot *model = manager->model;
-        if (FUN_00157e98(model, activeAnimations(manager)) == 0) {
+        if (modelUploadStereoMatrices(model, activeAnimations(manager)) == 0) {
             renderCtxResetFrameState(g_renderCtx);
         }
     } else {

@@ -2,6 +2,8 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "script/scrScriptProcess.h"
 #include "code/Code0038.h"
+#include "gfx/CameraPerspective.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMotionControlApi.h"
 
 /* Radians to degrees, as moverAimCameraAlongPart and the title menu's FUN_001e9990 convert the same camera field of view. */
 static f32 radiansToDegrees(f32 radians)
@@ -21,13 +23,6 @@ typedef struct TitleIntroCamera {
     /* 0x08 */ void *node;
 } TitleIntroCamera;
 
-/* The model node's motion speed: the base (0x74) and the applied value (0x78). */
-typedef struct TitleIntroNode {
-    /* 0x00 */ u8 unk00[0x74];
-    /* 0x74 */ f32 baseSpeed;
-    /* 0x78 */ f32 speed;
-} TitleIntroNode;
-
 /* Work block of the title intro (the animated logo before the title menu). */
 typedef struct TitleIntro {
     /* 0x00 */ u8 started;
@@ -45,20 +40,15 @@ typedef struct TitleIntro {
 } TitleIntro;
 
 void asdWorkAreaReset(void);
-typedef struct CameraView {
-    f32 fov;
-    f32 v[3];
-} CameraView;
 
 void FUN_002a09b4(const char *path, s32 flags);
 void modelSlotAttachChild(TitleIntroCamera *camera, s32 index);
 void *asdCameraGetSavedRenderPairs(void);
 void cameraExportProviderEntryWords(void *node, f32 *a, f32 *b, f32 *c, f32 *d);
-void stereoCameraSetPerspective(void *camera, s32 flag, CameraView view);
+void stereoCameraSetPerspective(void *camera, u32 pivot, CameraPerspective perspective);
 
 s32 modelHasLoadedAttachment(AsdMdlObject *model);
 
-void modelSetScale(void *node, f32 speed);
 s32 effTimelineIsDone(void *effect);
 void slotSetRequest(s32 slot, s32 value, s32 arg);
 s32 screenFadeIsBusy(void);
@@ -86,10 +76,10 @@ void FUN_003bc9d0(TitleIntro *intro)
         intro->camera = static_cast<TitleIntroCamera *>(asdCameraLoadFromFile(DAT_00407db0));
         modelSlotAttachChild(intro->camera, 0);
         void *camera = asdCameraGetSavedRenderPairs();
-        CameraView view;
-        cameraExportProviderEntryWords(intro->camera->node, &view.fov, &view.v[2], &view.v[0], &view.v[1]);
-        view.fov = radiansToDegrees(view.fov);
-        stereoCameraSetPerspective(camera, 1, view);
+        CameraPerspective perspective;
+        cameraExportProviderEntryWords(intro->camera->node, &perspective.fovy, &perspective.aspect, &perspective.nearZ, &perspective.farZ);
+        perspective.fovy = radiansToDegrees(perspective.fovy);
+        stereoCameraSetPerspective(camera, 1, perspective);
         FUN_00298d50(reinterpret_cast<u32>(camera));
         intro->model = asdMdlManagerCreateLoaded(DAT_00407d9c, 0x38);
         if (modelHasLoadedAttachment(intro->model) != 0) {
@@ -97,8 +87,8 @@ void FUN_003bc9d0(TitleIntro *intro)
             AsdMdlObject *model = intro->model;
             if ((model->flags & 4) != 0) {
                 model->flags &= ~4;
-                ((TitleIntroNode *)model->node)->baseSpeed = 1.0f;
-                modelSetScale(model->node, ((TitleIntroNode *)model->node)->speed);
+                model->node->animationSpeed = 1.0f;
+                modelSetScale(model->node, model->node->speed);
             }
         }
         intro->started = 1;

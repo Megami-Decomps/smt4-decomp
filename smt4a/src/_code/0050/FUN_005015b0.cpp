@@ -1,18 +1,7 @@
 /* NON_MATCHING: retail loads the command header before choosing the mode word, shifts the clamped y inside its clamp
    branch (keeping the word in r0) and post-increments the third store; the rest matches. */
-#include "common.h"
+#include "gfx/GxRenderArea.h"
 
-/* A scissor rectangle and the size of the render target it is clamped to. */
-struct ScissorState {
-    /* 0x00 */ u8 enabled;
-    /* 0x01 */ u8 unk01[3];
-    /* 0x04 */ s32 x;
-    /* 0x08 */ s32 y;
-    /* 0x0C */ s32 width;
-    /* 0x10 */ s32 height;
-    /* 0x14 */ s32 targetWidth;
-    /* 0x18 */ s32 targetHeight;
-};
 
 extern "C" {
 

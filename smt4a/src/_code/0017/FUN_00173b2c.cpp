@@ -1,4 +1,4 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_00154710; not written yet. */
+/* NON_MATCHING: found outside every function: branched to by soundListenerSetPose; not written yet. */
 /* romwright 0.5.0 decompilation of FUN_00173b2c for reference (not compiled; its own view of the boundaries):
 
 void FUN_00173b2c(float *param_1,float *param_2)

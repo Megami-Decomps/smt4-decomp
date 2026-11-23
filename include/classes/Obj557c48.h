@@ -7,7 +7,7 @@
 
 class Obj557b68;
 class Obj557c28;
-class Obj557b28;
+class MoriModelShadowMap;
 class Obj557d00;
 
 /* Polymorphic base holding the render scene (vtable at 0x557c38 region; no separate symbol). */
@@ -34,15 +34,15 @@ public:
     void setShader(Obj557d00 *value) { shader = value; }
     Obj557c28 *commands() const { return commandQueue; }
     void setCommands(Obj557c28 *value) { commandQueue = value; }
-    Obj557b28 *shadowMap() const { return shadowMapState; }
-    void setShadowMap(Obj557b28 *value) { shadowMapState = value; }
+    MoriModelShadowMap *shadowMap() const { return shadowMapState; }
+    void setShadowMap(MoriModelShadowMap *value) { shadowMapState = value; }
     void *sceneResource() const { return resource; }
     void setScratch(void *value) { scratch = value; }
 
     /* 0x08 */ Obj557d00 *shader;
     /* 0x0C */ void *camera;                  /* the camera the scene is drawn with */
     /* 0x10 */ Obj557c28 *commandQueue;
-    /* 0x14 */ Obj557b28 *shadowMapState;
+    /* 0x14 */ MoriModelShadowMap *shadowMapState;
     /* 0x18 */ std::vector<u32> objects;      /* the registered model objects */
     /* 0x24 */ std::vector<std::pair<u32, u32> > entries;
     /* 0x30 */ f32 scale;

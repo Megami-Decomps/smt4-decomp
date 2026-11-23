@@ -44,11 +44,6 @@ typedef struct BtlStageGlobals {
     /* 0x04 */ BtlStage *stage;
 } BtlStageGlobals;
 
-/* Work area of the job that owns the stage (Apocalypse layout). */
-typedef struct BtlStageOwnerA {
-    /* 0x00 */ u8 unk00[0x54];
-    /* 0x54 */ u32 job;       /* job stopped when the stage is destroyed */
-} BtlStageOwnerA;
 typedef char BtlStageSetupOffsets[sizeof(BtlStage) == 0xC4 &&
     offsetof(BtlStage, setup.identifiers.stageId) == 0x84 &&
     offsetof(BtlStage, setup.identifiers.stageVariant) == 0x88 &&

@@ -2,27 +2,11 @@
 #include "gamedata/SaveSlotTable.h"
 #include "shard/Shard0034.h"
 #include "gamedata/GamePlayerData.h"
+#include "gamedata/StatusAffinity.h"
 
 extern "C" {
 s32 gameSlotTableFindFree(void);
 s32 randRange(s32 maximum);
-void demonBuildAffinitySlots(u16 *affinities, const PlayerDataA *player);
-void affinityResolveUnitSlot(u16 *affinity, const SlotRecordA *unit, u32 element);
-
-static inline s32 statusAffinityAllows(u16 affinity)
-{
-    u32 state = affinity >> 10;
-    if (state == 1 || state == 3 || state == 4)
-        return 0;
-    return 1;
-}
-
-static inline s32 unitAffinityAllows(SlotRecordA *unit)
-{
-    u16 affinity;
-    affinityResolveUnitSlot(&affinity, unit, 11);
-    return statusAffinityAllows(affinity);
-}
 
 /* Apply a probabilistic status to the selected player and party groups. */
 void partyTryInflictCondition(u32 group, u32 condition, s32 chance)

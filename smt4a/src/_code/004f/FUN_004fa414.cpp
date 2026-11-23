@@ -1,10 +1,9 @@
 #include "gfx/RangeAnimationSelection.h"
-#include "shard/W6_W6Match2_AnimationVisualState.h"
+#include "gfx/AnimationVisualCompletion.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "battle/BtlMainAccess.h"
 
 extern "C" {
-u8 animationVisualIsComplete(const AnimationVisualState *visual);
 f32 animationGetModeChannelValue(AnimationVisualState *visual);
 void FUN_004f5238(RangeAnimationOwner *work, s32 first, s32 second, s32 kind,
                   s32 mode, s32 channel, s32 option, s32 enabled, s32 last,

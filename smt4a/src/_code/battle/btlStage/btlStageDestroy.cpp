@@ -1,4 +1,4 @@
-#include "battle/btlStage.h"
+#include "battle/btlMain.h"
 #include "shard/JobWork.h"
 
 extern "C" {
@@ -14,7 +14,7 @@ extern BtlStageGlobals g_btlStage;
 /* Destroy callback of the stage job: tears the stage model down, frees it and stops the owner job. */
 void btlStageDestroy(u32 job)
 {
-    BtlStageOwnerA *owner = (BtlStageOwnerA *)jobGetWork(job);
+    BtlMainStateA *owner = (BtlMainStateA *)jobGetWork(job);
     BtlStage *stage = g_btlStage.stage;
 
     if (g_btlStage.stage != NULL) {
@@ -27,8 +27,8 @@ void btlStageDestroy(u32 job)
         asdMemFree(g_btlStage.stage);
         g_btlStage.stage = NULL;
     }
-    if (jobIsValid(owner->job) != 0) {
-        jobStop(owner->job, 0);
+    if (jobIsValid(owner->stageTask.job) != 0) {
+        jobStop(owner->stageTask.job, 0);
     }
 }
 

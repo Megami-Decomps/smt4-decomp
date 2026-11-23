@@ -3,6 +3,7 @@
  * (the build saves r3 instead) and schedules the command refresh tests differently. */
 #include "common.h"
 #include "nw/math/MTX34.h"
+#include "gfx/VertexUniformMatrix.h"
 
 using nw::math::MTX34;
 
@@ -82,7 +83,6 @@ extern const char DAT_00526038[];    /* "$shadowmap" */
 u32 libc_strlen(const char *text);
 u16 nameTableLookupEntry(u8 *names, const char *text, u32 length);
 void FUN_001a063c(CommandHolder *commands, const u32 *data, u32 size);
-void FUN_0019a270(u32 *destination, const void *matrix, u32 header);
 void FUN_0018f488(CommandHolder *commands, u32 mode, u32 size);
 void FUN_001942a8(ModelContext *context, CommandHolder *commands);
 void FUN_0019430c(ModelContext *context, CommandHolder *commands, u32 sceneArg, u8 *registers);
@@ -94,7 +94,7 @@ static inline void emitMatrix(CommandHolder *commands, u8 reg, const void *matri
 
     cursor[0] = 0x80000000 | reg;
     cursor[1] = 0xf02c0;
-    FUN_0019a270(cursor + 2, matrix, 0xbf02c1);
+    FUN_0019a270(cursor + 2, (const f32 *)matrix, 0xbf02c1);
     commands->cursor = cursor + 16;
 }
 

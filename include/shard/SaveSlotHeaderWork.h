@@ -9,6 +9,23 @@
 
 struct ScriptProcess;
 
+/* The sampled origin passed to the save menu's composite and effect draws. */
+struct SaveSlotDrawOrigin {
+    /* 0x00 */ s32 x;
+    /* 0x04 */ s32 y;
+    /* 0x08 */ f32 opacity;
+};
+
+struct SaveSlotRowDraw {
+    /* 0x00 */ SaveSlotDrawOrigin origin;
+    /* 0x0C */ u8 unk0c[0x30];
+    /* 0x3C */ u32 firstSprite;
+    /* 0x40 */ u32 secondSprite;
+};
+
+typedef char SaveSlotDrawOriginSizeCheck[sizeof(SaveSlotDrawOrigin) == 0xc ? 1 : -1];
+typedef char SaveSlotRowDrawSizeCheck[sizeof(SaveSlotRowDraw) == 0x44 ? 1 : -1];
+
 /* The save menu's work record: its first 0x6f8 bytes (the object goes on: FUN_0041c108 draws sub-objects at 0x6f8 and
  * 0x710). SaveLoadControllerA, SaveLoadTransitionPrefixA and the units' local views describe the same object. */
 struct SaveSlotHeaderWork {
@@ -61,7 +78,10 @@ struct SaveSlotHeaderWork {
     UiSpriteState slotSprites[2]; /* 0x500..0x617: `spriteCount` of them in use; the last one ends a transition */
     u8 unk618[8];
     u32 transitionCounter;      /* 0x620 */
-    u8 unk624[0xc8];
+    /* 0x624 */ SaveSlotDrawOrigin headerOrigin;
+    /* 0x630 */ u32 headerSprite;
+    /* 0x634 */ u8 unk634[0x30];
+    /* 0x664 */ SaveSlotRowDraw slotDraws[2];
     SaveLoadTransitionValues transition; /* 0x6ec */
 };
 
@@ -77,8 +97,9 @@ typedef char SaveSlotHeaderWorkMidCheck[
     offsetof(SaveSlotHeaderWork, touchRegions) == 0x43c && offsetof(SaveSlotHeaderWork, touchRegionCount) == 0x448 &&
     offsetof(SaveSlotHeaderWork, pending) == 0x44c ? 1 : -1];
 typedef char SaveSlotHeaderWorkTailCheck[
-    offsetof(SaveSlotHeaderWork, transitionCounter) == 0x620 && offsetof(SaveSlotHeaderWork, transition) == 0x6ec &&
-    sizeof(SaveSlotHeaderWork) == 0x6f8 ? 1 : -1];
+    offsetof(SaveSlotHeaderWork, transitionCounter) == 0x620 &&
+    offsetof(SaveSlotHeaderWork, headerOrigin) == 0x624 && offsetof(SaveSlotHeaderWork, slotDraws) == 0x664 &&
+    offsetof(SaveSlotHeaderWork, transition) == 0x6ec && sizeof(SaveSlotHeaderWork) == 0x6f8 ? 1 : -1];
 
 /* The three fixed buttons' touch-region IDs. */
 struct SaveSlotFixedRegionsA {
@@ -89,10 +110,13 @@ struct SaveSlotFixedRegionsA {
 
 /* The touch-region indices the full menu keeps after its transition widgets. */
 struct SaveSlotTouchWorkA : SaveSlotHeaderWork {
-    u8 unk6f8[0x24];
-    SaveSlotFixedRegionsA fixedButtonRegions; /* 0x71c */
+    /* 0x6f8 */ u8 unk6f8[0x18];
+    /* 0x710 */ SaveSlotDrawOrigin effectOrigin;
+    /* 0x71c */ SaveSlotFixedRegionsA fixedButtonRegions;
 };
-typedef char SaveSlotTouchWorkACheck[offsetof(SaveSlotTouchWorkA, fixedButtonRegions) == 0x71c ? 1 : -1];
+typedef char SaveSlotTouchWorkACheck[
+    offsetof(SaveSlotTouchWorkA, effectOrigin) == 0x710 &&
+    offsetof(SaveSlotTouchWorkA, fixedButtonRegions) == 0x71c ? 1 : -1];
 
 extern "C" {
 extern SaveLoadUiSharedPrefixA g_saveLoadUIBase;

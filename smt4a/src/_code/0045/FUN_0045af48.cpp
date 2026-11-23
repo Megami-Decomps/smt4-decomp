@@ -1,53 +1,9 @@
 /* NON_MATCHING: register allocation only: retail keeps commands/extra in r8/r7 (built r7/r8) and materialises the zero for unk05 and for each block's zero command word separately, where the build shares one zero register (r9). */
 #include "common.h"
+#include "gfx/TexSetup.h"
 
 extern "C" {
 
-typedef struct TexSource {
-    /* 0x00 */ u32 address;
-    /* 0x04 */ u32 height;
-    /* 0x08 */ u32 width;
-    /* 0x0C */ u32 unk0C;
-    /* 0x10 */ u32 unk10;
-    /* 0x14 */ u32 unk14;
-    /* 0x18 */ u32 unk18;
-    /* 0x1C */ u32 unk1C;
-    /* 0x20 */ u8 format;
-    /* 0x21 */ u8 simple;
-    /* 0x22 */ u8 kind;
-    /* 0x23 */ u8 flag;
-} TexSource;
-
-typedef struct TexSetup {
-    /* 0x00 */ u32 address;
-    /* 0x04 */ u8 kind;
-    /* 0x05 */ u8 unk05;
-    /* 0x06 */ u8 unk06[2];
-    /* 0x08 */ u32 height;
-    /* 0x0C */ u32 width;
-    /* 0x10 */ u32 unk10;
-    /* 0x14 */ u32 unk14;
-    /* 0x18 */ u32 unk18;
-    /* 0x1C */ u32 unk1C;
-    /* 0x20 */ u8 unk20[4];
-    /* 0x24 */ u32 extra;
-    /* 0x28 */ u8 flag;
-    /* 0x29 */ u8 unk29[3];
-    /* 0x2C */ u32 height2;
-    /* 0x30 */ u32 width2;
-    /* 0x34 */ u32 value;
-    /* 0x38 */ u8 format;
-    /* 0x39 */ u8 unk39[7];
-    /* 0x40 */ u32 height3;
-    /* 0x44 */ u32 width3;
-    /* 0x48 */ u32 list0[2];
-    /* 0x50 */ u32 list1[2];
-    /* 0x58 */ u32 list2[2];
-    /* 0x60 */ u8 mode;
-    /* 0x61 */ u8 enabled;
-    /* 0x62 */ u8 unk62[2];
-    /* 0x64 */ u32 sourceAddress;
-} TexSetup;
 
 u32 asdGxGetPhysicalAddress(u32 address);
 typedef struct CommandWriter {
@@ -98,7 +54,7 @@ void FUN_0045af48(TexSetup *setup, u32 *commands, u32 address, u32 extra, TexSou
     *cursor++ = setup->mode;
     *cursor++ = 0xF008E;
     writer.cursor = cursor;
-    FUN_001b14dc(&writer, setup->list0);
+    FUN_001b14dc(&writer, setup->lists[0]);
     if (source->simple == 0) {
         cursor = writer.cursor;
         *cursor++ = source->width | (source->height << 16);
@@ -110,7 +66,7 @@ void FUN_0045af48(TexSetup *setup, u32 *commands, u32 address, u32 extra, TexSou
         *cursor++ = setup->mode;
         *cursor++ = 0xF0096;
         writer.cursor = cursor;
-        FUN_001b14dc(&writer, setup->list1);
+        FUN_001b14dc(&writer, setup->lists[1]);
         if (source->simple == 0) {
             cursor = writer.cursor;
             *cursor++ = source->width | (source->height << 16);
@@ -122,7 +78,7 @@ void FUN_0045af48(TexSetup *setup, u32 *commands, u32 address, u32 extra, TexSou
             *cursor++ = setup->mode;
             *cursor++ = 0xF009E;
             writer.cursor = cursor;
-            FUN_001b14dc(&writer, setup->list2);
+            FUN_001b14dc(&writer, setup->lists[2]);
         }
     }
 }

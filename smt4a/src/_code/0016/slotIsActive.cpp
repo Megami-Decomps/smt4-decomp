@@ -16,7 +16,7 @@ typedef struct Mode {
 extern Slot DAT_0053d740[31];
 extern Mode g_padInputState;
 extern u32 DAT_0063fff0;
-extern u32 DAT_0063ffd0;
+extern u32 g_padInputs;
 
 static inline bool usesAlternateMask()
 {
@@ -44,7 +44,7 @@ u32 slotIsActive(u32 index)
     if (usesAlternateMask()) {
         source = &DAT_0063fff0;
     } else {
-        source = &DAT_0063ffd0;
+        source = &g_padInputs;
     }
     bits = source != NULL ? *source : 0;
     return (bits & slot->mask) != 0;

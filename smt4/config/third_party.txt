@@ -94,6 +94,7 @@
 0x0010a714 mobiclipRestoreDisplayState name
 0x0010afbc mobiclipCtrlClosePlayer name
 0x0010f820 nnosGetApplicationMemorySize name
+0x0010f830 addressBlockAllocate library
 0x0010f930 runtimeInitializeSharedHandle between
 0x0010f96c nnosGetAppMemAlloc name
 0x0010fab0 nnosInitAddressSpaceOnce name
@@ -223,7 +224,7 @@
 0x0012312c vldtr_initializeStateValidator name
 0x00123750 gfxRestoreTextureBindingState callers
 0x001239d4 nnosAddressSpaceManagerInitialize name
-0x00123a38 addressBlockInit callers
+0x00123a38 addressBlockInit library
 0x00123d00 _ZSt16__introsort_loopIPP10SortObjecti14SortObjectLessEvT_S4_T0_T1_ name
 0x00124178 FUN_00124178 between
 0x0012419c FUN_0012419c between
@@ -664,6 +665,7 @@
 0x0014732c FUN_0014732c between
 0x00147334 FUN_00147334 between
 0x0014734c FUN_0014734c between
+0x0014737c FUN_0014737c between
 0x00147390 appletWaitForSlotReady between
 0x00147394 FUN_00147394 between
 0x001473e8 FUN_001473e8 between
@@ -1078,6 +1080,7 @@
 0x0015c6bc FUN_0015c6bc between
 0x0015c7b0 nw_snd_internal_driver_VoiceManager_FreeVoice name
 0x0015c7dc FUN_0015c7dc library
+0x0015d0c8 FUN_0015d0c8 library
 0x0015d0d8 FUN_0015d0d8 callers
 0x0015d0f8 FUN_0015d0f8 callers
 0x0015d19c FUN_0015d19c callers
@@ -1354,6 +1357,8 @@
 0x0023a488 FUN_0023a488 between
 0x0023a4f8 FUN_0023a4f8 callers
 0x0023a5dc counterPairRemaining callers
+0x0023ae1c FUN_0023ae1c library
+0x0023ae58 FUN_0023ae58 library
 0x0023b4f4 nn_math_VEC3TransformCoordArray name
 0x0023d240 nn_math_ARMv6_MTX34MultTranslateAsm name
 0x0023d304 nn_gr_CTR_Vertex_LoadArray_DisableAll name

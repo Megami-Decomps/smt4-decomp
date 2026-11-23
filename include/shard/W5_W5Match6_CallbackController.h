@@ -2,9 +2,9 @@
 #define SHARD_W5_W5MATCH6_CALLBACKCONTROLLER_H
 
 #include "common.h"
+#include "gamedata/HowToTable.h"
 #include "ui/GridNavigation.h"
 #include <stddef.h>
-struct HowToRecord;
 
 
 /* The work area g_callbackController.work points at. */
@@ -17,8 +17,7 @@ typedef struct CallbackControllerWork {
     union {
         /* 0x010 */ u8 unk010[0x78];
         struct {
-            /* 0x010 */ HowToRecord *entries;
-            /* 0x014 */ u32 count;
+            /* 0x010 */ HowToRecordSection section;
             /* 0x018 */ u16 indices[52];
             /* 0x080 */ s32 availableCount;
         } catalog;
@@ -47,7 +46,7 @@ typedef char CallbackControllerWorkOffsets[offsetof(CallbackControllerWork, stat
     offsetof(CallbackControllerWork, slots) == 0x88 &&
     offsetof(CallbackControllerWork, touchRegionCount) == 0x218 ? 1 : -1];
 typedef char CallbackControllerCatalogOffsetsCheck[
-    offsetof(CallbackControllerWork, catalog.entries) == 0x10 &&
+    offsetof(CallbackControllerWork, catalog.section) == 0x10 &&
     offsetof(CallbackControllerWork, catalog.indices) == 0x18 &&
     offsetof(CallbackControllerWork, catalog.availableCount) == 0x80 &&
     offsetof(CallbackControllerWork, list.navigation) == 0x18C &&

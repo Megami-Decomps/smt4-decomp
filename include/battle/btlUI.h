@@ -7,7 +7,6 @@
 #define BATTLE_BTLUI_H
 
 #include "common.h"
-#include "battle/BattleUiRequests.h"
 #include "battle/BattleUiActionSlot.h"
 #include "ui/UiSpriteState.h"
 #include <stddef.h>
@@ -102,6 +101,29 @@ struct BtlUiPositionRequest {
 struct BtlUiPositionRequestRow {
     BtlUiPositionRequest entries[32];
 };
+/* One queued number popup (0x18 bytes): started in its slot once the slot is free and `delay` has run out. */
+struct BtlUiNumberRequest {
+    /* 0x00 */ f32 x, y, z;
+    /* 0x0C */ u8 active;
+    /* 0x0D */ s8 anchored;
+    /* 0x0E */ u8 unk0E[2];
+    /* 0x10 */ s32 number;
+    /* 0x14 */ s16 delay;       /* frames left before the popup may start */
+    /* 0x16 */ u8 small;
+    /* 0x17 */ u8 alt;
+};
+struct BtlUiNumberRequestRow {
+    BtlUiNumberRequest entries[32];
+};
+/* The marker a position request shows (0xA0 bytes, one per slot). */
+struct BtlUiPositionMarker {
+    /* 0x00 */ UiSpriteState sprite;
+    /* 0x8C */ BattleUiActionVector position;
+    /* 0x98 */ s8 active;
+    /* 0x99 */ s8 anchored;
+    /* 0x9A */ u8 unk9A[2];
+    /* 0x9C */ s32 timer;
+};
 
 /* One number popup (0x400 bytes, from 0x8C in the battle UI's objD in both games): five digit
  * sprites, two label sprites and the state that places them. */
@@ -112,7 +134,7 @@ typedef struct BtlUiNumberSlot {
     /* 0x3E0 */ s8 active;
     /* 0x3E1 */ u8 anchored;      /* whether the position is kept on screen (3D depth shift) */
     /* 0x3E2 */ u8 unk3E2[2];
-    /* 0x3E4 */ u32 digitTimers[5];
+    /* 0x3E4 */ s32 digitTimers[5];
     /* 0x3F8 */ s32 number;
     /* 0x3FC */ s8 disabled;
     /* 0x3FD */ u8 unk3FD[3];
@@ -295,15 +317,21 @@ typedef struct BtlUiObjDA {
             u8 prefix[0x8C];
             /* 0x75B4 in BtlUiA */ BtlUiNumberSlot slots[16];
         } numbers;
-        struct {
-            u8 unk0000[0x3D8];
-            BattleUiBankStatus banks[16];
-        } requests;
         /* Strided byte view, not recovered underlying record boundaries. */
         struct {
             u8 prefix[0x40D8];
             BtlUiAvailabilityRowA rows[1];
         } availability;
+        /* The same rows as whole records. */
+        struct {
+            u8 prefix[0x408C];
+            /* 0xB5B4 in BtlUiA */ BtlUiPositionMarker markers[16];
+        } positionMarkers;
+        /* Sixteen rows, which run on past this view into BtlUiA's request block (to 0xF054). */
+        struct {
+            u8 prefix[0x4B2C];
+            /* 0xC054 in BtlUiA */ BtlUiNumberRequestRow rows[1];
+        } numberRequests;
     };
 } BtlUiObjDA;
 
@@ -351,7 +379,8 @@ typedef struct BtlUiA {
     /* 0xCFCC */ union {
         u8 unkCFCC[0x6000];
         struct {
-            u8 unkCFCC[0x2098];
+            u8 unkCFCC[0x2088];
+            /* 0xF054 */ s8 cursors[16];   /* each slot's next number request */
             /* 0xF064 */ s8 counts[16];
         } requestCounts;
         /* Strided byte view; slots start 32 cell strides apart. */
@@ -369,6 +398,8 @@ typedef struct BtlUiA {
         struct {
             u8 prefix[0x20a8];
             /* 0xF074 */ BtlUiPositionRequestRow rows[16];
+            /* 0x11874 */ s8 cursors[16];  /* each slot's next position request */
+            /* 0x11884 */ s8 counts[16];
         } positionRequests;
         struct {
             u8 prefix[0x4948];
@@ -405,7 +436,7 @@ typedef char BtlUiLayoutCheck[sizeof(BtlUi) == 0xf040 &&
     offsetof(BtlUi, listedIdCount) == 0x7e9c &&
     offsetof(BtlUi, objD) == 0x7ec0 ? 1 : -1];
 typedef char BtlUiARequestOffsetsCheck[sizeof(BtlUiObjDA) == 0x5AA4 &&
-    sizeof(BtlUiA) == 0x12FD0 && offsetof(BtlUiA, objD.requests.banks) == 0x7900 &&
+    sizeof(BtlUiA) == 0x12FD0 &&
     offsetof(BtlUiA, requestCounts.counts) == 0xF064 ? 1 : -1];
 
 typedef char BtlUiAPanelOffsetsCheck[offsetof(BtlUiA, firstPair) == 0x7490 &&
@@ -431,7 +462,13 @@ typedef char BtlUiPositionRequestOffsetsCheck[
     offsetof(BtlUiA, positionRequests.rows) == 0xf074 &&
     sizeof(BtlUiPositionRequest) == 0x14 &&
     offsetof(BtlUiPositionRequest, active) == 0xc &&
-    sizeof(BtlUiPositionRequestRow) == 0x280 ? 1 : -1];
+    sizeof(BtlUiPositionRequestRow) == 0x280 &&
+    offsetof(BtlUiA, positionRequests.cursors) == 0x11874 &&
+    offsetof(BtlUiA, positionRequests.counts) == 0x11884 &&
+    sizeof(BtlUiNumberRequest) == 0x18 && sizeof(BtlUiPositionMarker) == 0xA0 &&
+    offsetof(BtlUiA, objD.positionMarkers.markers) == 0xB5B4 &&
+    offsetof(BtlUiA, objD.numberRequests.rows) == 0xC054 &&
+    offsetof(BtlUiA, requestCounts.cursors) == 0xF054 ? 1 : -1];
 
 #ifdef __cplusplus
 extern "C" {
