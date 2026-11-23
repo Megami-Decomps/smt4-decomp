@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_002355fc(...);
-int FUN_00380a60(void);
+int animCalcCallbackCurve(void);
 
 /* Supplied declaration required: FUN_002355fc. */
-/* Supplied declaration required: FUN_00380a60. */
+/* Supplied declaration required: animCalcCallbackCurve. */
 extern unsigned char rangeDispatchEvaluate(float);
 extern unsigned int FUN_003e8f70(int *, float *);
 extern unsigned int nw_anim_res_ResRgbaColorAnim_EvaluateResult(int *, float *);
@@ -57,7 +57,7 @@ unsigned int FUN_003e8c38(int *param_1,float *param_2,unsigned int param_3)
       if (temp_v3 != 0) {
         temp_v5 = (float)(temp_v3 + (int)(puVar2 + 3));
       }
-      FUN_00380a60();
+      animCalcCallbackCurve();
     }
     *param_2 = temp_v5;
     param_3 = param_3 | 1;

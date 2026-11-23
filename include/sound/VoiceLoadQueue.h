@@ -19,13 +19,25 @@ struct VoiceLoadRequest {
 };
 struct VoiceLoadQueue {
     VoiceLoadRequest entries[4];
-    /* 0x1E0 */ u8 unk1E0[4];
+    /* 0x1E0 */ void *panTable;  /* snd/voice_pan.tbl, loaded once by FUN_0013ae58 */
     /* 0x1E4 */ u8 voiceFlags;   /* messageVoiceFlagsGet */
     /* 0x1E5 */ u8 voiceBank;    /* messageVoiceBankGet */
     /* 0x1E6 */ u8 disabled;
 };
 /* The voice load queue at 0x61978C. */
 extern VoiceLoadQueue g_soundObjectTable;
+
+/* The voice ducking parameters the voice initialisation passes to asdSoundDuckSetup. The voice file defines them
+ * right after its queue (smt4a 0x619974, smt4 0x4C581C), which is why its initialisation (smt4a FUN_0013ae58,
+ * smt4 FUN_00106650) defines both objects. */
+struct VoiceDuckSettings {
+    /* 0x00 */ f32 level;
+    /* 0x04 */ u32 holdFrames;
+    /* 0x08 */ u32 mode;
+    /* 0x0C */ u32 fadeInFrames;
+    /* 0x10 */ u32 fadeOutFrames;
+};
+extern VoiceDuckSettings g_voiceDuckSettings;
 typedef char VoiceLoadQueueOffsets[
     sizeof(VoiceLoadRequest) == 0x78 && offsetof(VoiceLoadRequest, path) == 1 &&
     offsetof(VoiceLoadRequest, group) == 0x50 && offsetof(VoiceLoadRequest, id) == 0x54 &&

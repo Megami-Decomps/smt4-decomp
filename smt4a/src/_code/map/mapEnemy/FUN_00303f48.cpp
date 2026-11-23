@@ -17,7 +17,7 @@ int gameFlagIsSet(...);
 int nkmEnemyFindById(void);
 int distSpatial(void);
 int FUN_002b64c0(...);
-int FUN_002b67a0(int);
+int mapEnemyPlaceFromRows(int);
 int fieldFindAreaPlacementRecord(void);
 int contentEntryGetB(void);
 int contentEntryGetC(void);
@@ -89,7 +89,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: nkmEnemyFindById. */
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002b64c0. */
-/* Supplied declaration required: FUN_002b67a0. */
+/* Supplied declaration required: mapEnemyPlaceFromRows. */
 extern int mapEnemyLoadExtraModel(unsigned int);
 extern char *FUN_00332fcc(void);
 /* Supplied declaration required: fieldFindAreaPlacementRecord. */
@@ -286,7 +286,7 @@ void FUN_00303f48(void)
     *(unsigned int *)(temp_v2 + 0x4c8c) = 0;
   } while (temp_v1 < 0x10);
   *(unsigned int *)(temp_v6 + 0x4d80) = 0;
-  FUN_002b67a0(0);
+  mapEnemyPlaceFromRows(0);
   if (DAT_005f1623 != '\0') {
     temp_v17 = (char *)FUN_00371058();
     temp_v18 = (char *)FUN_00332fcc();

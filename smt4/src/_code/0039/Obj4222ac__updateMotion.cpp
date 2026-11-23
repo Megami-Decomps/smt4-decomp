@@ -28,21 +28,21 @@ static __inline void flagsSet(u32 *flags, u32 mask)
 void Obj4222ac::updateMotion()
 {
     if ((flags & 1) != 0) {
-        position[1] += 50.0f;
-        if (position[1] > 0) {
-            position[1] = 0;
+        position.y += 50.0f;
+        if (position.y > 0) {
+            position.y = 0;
             flagsClear(&flags, 1);
         }
     }
     if ((u32)frames < 10) {
-        position[1] -= 50.0f;
+        position.y -= 50.0f;
         flagsSet(&flags, 2);
     }
     if (handle != 0) {
         f32 translated[3] = {
-            basePosition.x + position[0],
-            basePosition.y + position[1],
-            basePosition.z + position[2]
+            basePosition.x + position.x,
+            basePosition.y + position.y,
+            basePosition.z + position.z
         };
         if (g_mapCamera->weight > 0.9f) {
             f32 amount = (g_mapCamera->weight - 0.9f) * 10.0f;

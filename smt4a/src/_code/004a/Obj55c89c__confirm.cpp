@@ -54,7 +54,7 @@ void unitRecordBuildFromSave(u16 id, u8 *out);
 void panelSetTarget(s32 target, s32 arg);
 void messageBannerInitCounter(s32 a, s32 b);
 void FUN_004a3b48(BibleItemMenu *menu);
-s32 FUN_004a8750(u16 id, u8 flag, s32 a, s32 b, s32 c);
+s32 compendiumComputeSummonCost(u16 id, u8 flag, s32 a, s32 b, s32 c);
 s32 utilityReturnSuccess(u8 *object);
 u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *holder);
 }
@@ -74,7 +74,7 @@ void Obj55c89c::confirm()
     BibleItemEntry *list = menu->entries;
     if (menu->owned == 0) {
         s16 id = list[flaggedValueHolderGetTotal(menu->holder())].getItemId();
-        s32 target = FUN_004a8750((u16)id, menu->confirmed, 0, menu->level >= 100, 0);
+        s32 target = compendiumComputeSummonCost((u16)id, menu->confirmed, 0, menu->level >= 100, 0);
         messageBannerInitCounter(1, 0);
         if (compendiumEntryIsRegistered((u16)id) != 0) {
             panelSetTarget(-target, 0);

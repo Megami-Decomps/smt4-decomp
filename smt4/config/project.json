@@ -34135,32 +34135,32 @@
     },
     {
       "address": "0x22d9c8",
-      "function": "FUN_0022d9c8",
+      "function": "bibleDevilDrawStat",
       "module": "_code",
-      "object": "build/obj/_code/0022/FUN_0022d9c8.o",
+      "object": "build/obj/_code/0022/bibleDevilDrawStat.o",
       "size": 216,
-      "source": "src/_code/0022/FUN_0022d9c8.cpp",
-      "target": "orig/target/_code/0022/FUN_0022d9c8.o",
+      "source": "src/_code/0022/bibleDevilDrawStat.cpp",
+      "target": "orig/target/_code/0022/bibleDevilDrawStat.o",
       "thumb": false
     },
     {
       "address": "0x22daac",
-      "function": "FUN_0022daac",
+      "function": "bibleDevilDrawName",
       "module": "_code",
-      "object": "build/obj/_code/0022/FUN_0022daac.o",
+      "object": "build/obj/_code/0022/bibleDevilDrawName.o",
       "size": 212,
-      "source": "src/_code/0022/FUN_0022daac.cpp",
-      "target": "orig/target/_code/0022/FUN_0022daac.o",
+      "source": "src/_code/0022/bibleDevilDrawName.cpp",
+      "target": "orig/target/_code/0022/bibleDevilDrawName.o",
       "thumb": false
     },
     {
       "address": "0x22db94",
-      "function": "FUN_0022db94",
+      "function": "bibleDevilDrawRace",
       "module": "_code",
-      "object": "build/obj/_code/0022/FUN_0022db94.o",
+      "object": "build/obj/_code/0022/bibleDevilDrawRace.o",
       "size": 256,
-      "source": "src/_code/0022/FUN_0022db94.cpp",
-      "target": "orig/target/_code/0022/FUN_0022db94.o",
+      "source": "src/_code/0022/bibleDevilDrawRace.cpp",
+      "target": "orig/target/_code/0022/bibleDevilDrawRace.o",
       "thumb": false
     },
     {
@@ -34945,12 +34945,12 @@
     },
     {
       "address": "0x231d2c",
-      "function": "FUN_00231d2c",
+      "function": "cameraViewHeadingDegrees",
       "module": "_code",
-      "object": "build/obj/_code/0023/FUN_00231d2c.o",
+      "object": "build/obj/_code/0023/cameraViewHeadingDegrees.o",
       "size": 112,
-      "source": "src/_code/0023/FUN_00231d2c.cpp",
-      "target": "orig/target/_code/0023/FUN_00231d2c.o",
+      "source": "src/_code/0023/cameraViewHeadingDegrees.cpp",
+      "target": "orig/target/_code/0023/cameraViewHeadingDegrees.o",
       "thumb": false
     },
     {
@@ -35879,12 +35879,12 @@
     },
     {
       "address": "0x235744",
-      "function": "thresholdDispatchOutsideRange",
+      "function": "animCurveAdjustFrame",
       "module": "_code",
-      "object": "build/obj/_code/0023/thresholdDispatchOutsideRange.o",
+      "object": "build/obj/_code/0023/animCurveAdjustFrame.o",
       "size": 64,
-      "source": "src/_code/0023/thresholdDispatchOutsideRange.cpp",
-      "target": "orig/target/_code/0023/thresholdDispatchOutsideRange.o",
+      "source": "src/_code/0023/animCurveAdjustFrame.cpp",
+      "target": "orig/target/_code/0023/animCurveAdjustFrame.o",
       "thumb": false
     },
     {
@@ -43571,12 +43571,12 @@
     },
     {
       "address": "0x265f50",
-      "function": "FUN_00265f50",
+      "function": "lmapMainUpdateFollowCamera",
       "module": "_code",
-      "object": "build/obj/_code/0026/FUN_00265f50.o",
+      "object": "build/obj/_code/0026/lmapMainUpdateFollowCamera.o",
       "size": 1388,
-      "source": "src/_code/0026/FUN_00265f50.cpp",
-      "target": "orig/target/_code/0026/FUN_00265f50.o",
+      "source": "src/_code/0026/lmapMainUpdateFollowCamera.cpp",
+      "target": "orig/target/_code/0026/lmapMainUpdateFollowCamera.o",
       "thumb": false
     },
     {
@@ -50487,12 +50487,12 @@
     },
     {
       "address": "0x296fec",
-      "function": "FUN_00296fec",
+      "function": "aocMenuReset",
       "module": "_code",
-      "object": "build/obj/_code/0029/FUN_00296fec.o",
+      "object": "build/obj/_code/0029/aocMenuReset.o",
       "size": 100,
-      "source": "src/_code/0029/FUN_00296fec.cpp",
-      "target": "orig/target/_code/0029/FUN_00296fec.o",
+      "source": "src/_code/0029/aocMenuReset.cpp",
+      "target": "orig/target/_code/0029/aocMenuReset.o",
       "thumb": false
     },
     {
@@ -62148,12 +62148,12 @@
     {
       "address": "0x2ca7fc",
       "file": "title/titleMain",
-      "function": "FUN_002ca7fc",
+      "function": "titleMainDrawLower",
       "module": "_code",
-      "object": "build/obj/_code/title/titleMain/FUN_002ca7fc.o",
+      "object": "build/obj/_code/title/titleMain/titleMainDrawLower.o",
       "size": 972,
-      "source": "src/_code/title/titleMain/FUN_002ca7fc.cpp",
-      "target": "orig/target/_code/title/titleMain/FUN_002ca7fc.o",
+      "source": "src/_code/title/titleMain/titleMainDrawLower.cpp",
+      "target": "orig/target/_code/title/titleMain/titleMainDrawLower.o",
       "thumb": false
     },
     {
@@ -94293,12 +94293,12 @@
     {
       "address": "0x380a60",
       "file": "AsdSDK/Source/Gfx/Model/AsdModel",
-      "function": "FUN_00380a60",
+      "function": "animCalcCallbackCurve",
       "module": "_code",
-      "object": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_00380a60.o",
+      "object": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/animCalcCallbackCurve.o",
       "size": 60,
-      "source": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_00380a60.cpp",
-      "target": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_00380a60.o",
+      "source": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/animCalcCallbackCurve.cpp",
+      "target": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/animCalcCallbackCurve.o",
       "thumb": false
     },
     {
@@ -94334,12 +94334,12 @@
     },
     {
       "address": "0x380e30",
-      "function": "FUN_00380e30",
+      "function": "animCalcBakedMatrixCurve",
       "module": "_code",
-      "object": "build/obj/_code/0038/FUN_00380e30.o",
+      "object": "build/obj/_code/0038/animCalcBakedMatrixCurve.o",
       "size": 68,
-      "source": "src/_code/0038/FUN_00380e30.cpp",
-      "target": "orig/target/_code/0038/FUN_00380e30.o",
+      "source": "src/_code/0038/animCalcBakedMatrixCurve.cpp",
+      "target": "orig/target/_code/0038/animCalcBakedMatrixCurve.o",
       "thumb": false
     },
     {

@@ -12,7 +12,7 @@ public:
     virtual void start(); /* +0x08 */
     virtual void updateMotion(); /* +0x18 */
 
-    /* 0x74 */ f32 position[3];
+    /* 0x74 */ NodeVec3 position;
 };
 
 typedef char Obj4222acSizeCheck[sizeof(Obj4222ac) == 0x80 ? 1 : -1];

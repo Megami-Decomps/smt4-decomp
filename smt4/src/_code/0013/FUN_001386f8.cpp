@@ -3,29 +3,29 @@
 #include "common.h"
 #include "addon/aocMain.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "shard/PassiveSkill.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/SkillDataLookup.h"
 #include "addon/AocSystem.h"
 
 extern "C" {
-Table4SearchRecordIV *recordTableFindById(AocSystem *system, u32 id);
 s32 passiveSkillCompareById(const void *key, const void *entry);
 void *libc_bsearch(const void *key, const void *entries, u32 count,
                    u32 entrySize, s32 (*compare)(const void *, const void *));
 }
 
 /* Looks the add-on record up by id, falling back to the data table 4 search. */
-static __inline Table4SearchRecordIV *aocExtraRecordFind(u32 id)
+static __inline PassiveSkillRecord *aocExtraRecordFind(u32 id)
 {
-    Table4SearchRecordIV *record = recordTableFindById(g_aocSystem, id);
+    PassiveSkillRecord *record = recordTableFindById(g_aocSystem, id);
     if (record == 0) {
         void *table = dataTableGet(4, 1);
         const void *entries = dataTableGetEntries(table);
         u32 count = dataTableGetCount(table);
-        Table4SearchRecordIV key;
-        // The comparator key's only initialized member in retail.
-        key.id = static_cast<u16>(id);
-        record = static_cast<Table4SearchRecordIV *>(
+        PassiveSkillRecord key;
+        /* The comparator reads only the id. */
+        key.id = (u16)id;
+        record = (PassiveSkillRecord *)(
             libc_bsearch(&key, entries, count, 0x3C, passiveSkillCompareById));
     }
     return record;
@@ -34,16 +34,16 @@ static __inline Table4SearchRecordIV *aocExtraRecordFind(u32 id)
 /* The add-on record's bit-30 flag, or 0 when there is no record. */
 static __inline u32 aocExtraRecordFlagged(u32 id)
 {
-    if (Table4SearchRecordIV *record = aocExtraRecordFind(id))
-        return (record->flags & 0x40000000u) >> 30;
+    if (PassiveSkillRecord *record = aocExtraRecordFind(id))
+        return (record->affinity & 0x40000000u) >> 30;
     return 0;
 }
 
 extern "C" u32 FUN_001386f8(u32 id)
 {
     if (id > 400) {
-        if (Table4SearchRecordIV *record = aocExtraRecordFind(id))
-            return (record->flags & 0x40000000u) >> 30;
+        if (PassiveSkillRecord *record = aocExtraRecordFind(id))
+            return (record->affinity & 0x40000000u) >> 30;
     } else {
         RecordSlotQueryPrefixIV *record = reinterpret_cast<RecordSlotQueryPrefixIV *>(skillDataFindById(id));
         if (record != 0 && (record->flags & 0x80000000u) == 0) {

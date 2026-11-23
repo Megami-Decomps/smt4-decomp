@@ -138,6 +138,9 @@ typedef char BtlCombatantRecordLayoutCheck[
     offsetof(BattleCandidateRecord, flags) == 0x16 &&
     offsetof(BattleSlotSourceRecordA, id) == 0x62 && sizeof(BattleSlotSourceRecordA) == 0x64 ? 1 : -1];
 
+/* Returns the downgraded element's slot, or -1 when all eight are already weak. */
+extern "C" s32 btlDowngradeRandomResistance(BtlCombatantEntryA *entry);
+
 /* A unit's turn-order speed: its agility plus its battle speed bonus (the turn-order sorts compare it). */
 static __inline s16 btlUnitTurnSpeedA(const BtlUnitDataA *data)
 {

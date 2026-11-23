@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int thresholdDispatchOutsideRange(float *);
+int animCurveAdjustFrame(float *);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(int, int);
 
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: thresholdDispatchOutsideRange. */
+/* Supplied declaration required: animCurveAdjustFrame. */
 
 
 void nw_anim_res_CalcVector3Curve(float *param_1,unsigned int *param_2,float *param_3)
@@ -29,7 +29,7 @@ void nw_anim_res_CalcVector3Curve(float *param_1,unsigned int *param_2,float *pa
     in_s0 = *param_3;
   }
   else {
-    thresholdDispatchOutsideRange(param_3);
+    animCurveAdjustFrame(param_3);
   }
   temp_v3 = VectorFloatToUnsigned(in_s0,3);
   temp_v4 = (float)VectorUnsignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -54,7 +54,7 @@ void nw_anim_res_CalcVector3Curve(float *param_1,unsigned int *param_2,float *pa
       return;
     }
     in_s0 = in_s0 + 1.0f;
-    thresholdDispatchOutsideRange(param_3);
+    animCurveAdjustFrame(param_3);
     temp_v2 = VectorFloatToUnsigned(in_s0,3);
     temp_v1 = param_3[temp_v3 * 4 + 4];
     *param_1 = temp_v1 + temp_v4 * (param_3[temp_v2 * 4 + 4] - temp_v1);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001afe40(int *, float *, int);
-int thresholdDispatchOutsideRange(float *);
+int animCurveAdjustFrame(float *);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(int, int);
 
@@ -29,7 +29,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001afe40. */
-/* Supplied declaration required: thresholdDispatchOutsideRange. */
+/* Supplied declaration required: animCurveAdjustFrame. */
 
 
 void FUN_00467374(unsigned int *param_1,unsigned int *param_2,float *param_3)
@@ -56,7 +56,7 @@ void FUN_00467374(unsigned int *param_1,unsigned int *param_2,float *param_3)
   float temp_v15;
   float temp_v16;
   
-  thresholdDispatchOutsideRange(param_3);
+  animCurveAdjustFrame(param_3);
   if (((unsigned int)param_3[3] & 1) != 0) {
     in_s0 = *param_3;
   }
@@ -83,7 +83,7 @@ void FUN_00467374(unsigned int *param_1,unsigned int *param_2,float *param_3)
     }
     else {
       in_s0 = in_s0 + 1.0f;
-      thresholdDispatchOutsideRange(param_3);
+      animCurveAdjustFrame(param_3);
       temp_v1 = VectorFloatToUnsigned(in_s0,3);
       temp_v13 = param_3[temp_v2 * 5 + 4];
       temp_v13 = temp_v13 + temp_v3 * (param_3[temp_v1 * 5 + 4] - temp_v13);

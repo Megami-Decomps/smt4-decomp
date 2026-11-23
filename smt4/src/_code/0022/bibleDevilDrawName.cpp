@@ -14,7 +14,7 @@ void drawTextAtSnappedRectangle(UiLayoutResourceIV *resource, f32 x, f32 y,
                   f32 opacity, f32 rotation, u32 layer, u32 mask,
                   f32 scale, u32 convertedValue);
 
-void FUN_0022daac(void *owner, u32 value, u32 entryIndex,
+void bibleDevilDrawName(void *owner, u32 value, u32 entryIndex,
                   s32 alternate, s32 fade)
 {
     // RSB is a wrapping 32-bit subtraction before signed conversion to float.

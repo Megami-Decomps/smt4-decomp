@@ -11,7 +11,7 @@ int sysPlaySe(...);
 int buttonHelpTeardownSlots(void);
 int padGetNormalizedAnalogStick(...);
 int naviRequestSelectedMap(void);
-int FUN_003a35a4(void);
+int naviRequestSavedDestination(void);
 int sysPlayVoice(...);
 int naviInputHandleMapToggle(int);
 int naviMapHandleTouchButtons(void);
@@ -80,7 +80,7 @@ extern int FUN_00167c0c(unsigned int **, int *);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: naviRequestSelectedMap. */
-/* Supplied declaration required: FUN_003a35a4. */
+/* Supplied declaration required: naviRequestSavedDestination. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: naviInputHandleMapToggle. */
 /* Supplied declaration required: naviMapHandleTouchButtons. */
@@ -307,7 +307,7 @@ unsigned int FUN_00488ce8(int param_1)
           if (*(int *)(temp_v0 + 0x15b8) != 0) {
             *(int *)(temp_v0 + 0x15b8) = 0;
           }
-          FUN_003a35a4();
+          naviRequestSavedDestination();
         }
         *puVar8 = 1;
         *puVar7 = 1;

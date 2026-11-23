@@ -3,6 +3,7 @@
 #include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
+#include "ui/FloatTableLookup.h"
 #include "ui/UiControl.h"
 #include "code/Code002c.h"
 #include "ui/UiSpriteApi.h"
@@ -18,7 +19,6 @@ int campButtonHelpAcquire(void);
 int statusBustUpPortraitAcquire(...);
 int objBMarkAndInit20D4(void);
 int stateHolderMarkAndInit2588(void);
-int copyDefaultWordsPair(...);
 int loadSlotRequestAsync(int, int);
 int paramsClearPacket(int);
 
@@ -51,7 +51,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: statusBustUpPortraitAcquire. */
 /* Supplied declaration required: objBMarkAndInit20D4. */
 /* Supplied declaration required: stateHolderMarkAndInit2588. */
-/* Supplied declaration required: copyDefaultWordsPair. */
+/* Supplied declaration required: copyDefaultAnimationSteps. */
 /* Supplied declaration required: loadSlotRequestAsync. */
 /* Supplied declaration required: paramsClearPacket. */
 
@@ -235,7 +235,7 @@ void FUN_004b6390(int param_1)
   statusDownSwitchTab(0);
   gameGlobalsSetOverlayActive(0);
   campButtonHelpAcquire();
-  copyDefaultWordsPair(param_1 + 0x7f40);
+  copyDefaultAnimationSteps((f32 *)(param_1 + 0x7f40));
   objBMarkAndInit20D4();
   stateHolderMarkAndInit2588();
   return;

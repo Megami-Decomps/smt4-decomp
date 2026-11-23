@@ -14,7 +14,7 @@ int CONCAT44(double, double);
 int mapExplorationCellMark(...);
 int pairCopy(int, float *);
 int FUN_00231bcc(...);
-float FUN_00231d2c(int);
+float cameraViewHeadingDegrees(int);
 int titleScissorApplyOrClearRequests(...);
 int FUN_002b04e8(...);
 int uiDrawTransientSprites(...);
@@ -869,7 +869,7 @@ LAB_0039aba4:
   temp_v23 = temp_v23 + 120.0f;
   temp_v15 = temp_v15 + temp_v13;
   if (temp_v12 == 0) {
-    temp_v3 = mathHeadingToDirectionCode(temp_v44,FUN_00231d2c(temp_v37));
+    temp_v3 = mathHeadingToDirectionCode(temp_v44,cameraViewHeadingDegrees(temp_v37));
     temp_v18 = (int)temp_v23;
     temp_v4 = (int)temp_v15;
     FUN_00231bcc(temp_v44 + 0x164,temp_v3 + 0xbc1,temp_v4,temp_v18,0xb,1);

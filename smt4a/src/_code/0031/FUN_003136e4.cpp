@@ -64,9 +64,9 @@ void FUN_003136e4(f32 angle, f32 distance)
     f32 x = g_lmapScene->pose.position.x;
     f32 y = g_lmapScene->pose.position.y;
     f32 z = g_lmapScene->pose.position.z;
-    f32 radians = (g_lmapScene->pose.heading + angle) * 0.017453292f;
-    x += libm_sinf(radians) * distance;
-    z += libm_cosf(radians) * distance;
+    f32 degrees = g_lmapScene->pose.heading + angle;
+    x += libm_sinf(degrees * 0.017453292f) * distance;
+    z += libm_cosf(degrees * 0.017453292f) * distance;
     y += 5.0f;
     eplSlotStartRequest(0);
 

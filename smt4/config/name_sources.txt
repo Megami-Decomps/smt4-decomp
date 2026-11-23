@@ -6342,3 +6342,21 @@
 00186a48 uiQuestDrawDetailPanel inferred draws the quest menu's detail panel (w83-f2)
 00352e6c aocServiceQueryCatalog inferred twin of smt4a aocServiceQueryCatalog (w83-mg)
 00239dec fsArchiveFileRequireHandle inferred reports an unopened archive file before returning its IPC handle (w83-mg)
+00235744 animCurveAdjustFrame inferred maps a frame outside the curve's [start, end) back by its pre/post repeat method (nw::anim res curve; w84-o2)
+00380e30 animCalcBakedMatrixCurve inferred evaluates a baked matrix curve at a frame after animCurveAdjustFrame (w84-o2)
+00380a60 animCalcCallbackCurve inferred adjusts the frame and evaluates the curve through its callback table (w84-o2)
+00296fec aocMenuReset inferred resets a newly constructed add-on content menu: step 0, no window, flags cleared (w84-o2)
+00231d2c cameraViewHeadingDegrees inferred the saved camera's horizontal view heading in degrees (w84-o2)
+004c581c g_voiceDuckSettings inferred size:0x14 the voice ducking parameters passed to asdSoundDuckSetup (VoiceDuckSettings), right after the queue
+0049357c DAT_0049357c inferred unnamed: the stat rows are six separate arrays (named below)
+0049357c g_bibleDevilRowValue inferred size:0x28 the stat value of each visible devil row (FUN_0022d1a8 fills it)
+004935a4 g_bibleDevilRowColor inferred size:0x28 the stat's comparison colour of each row
+004935cc g_bibleDevilRowCostX inferred size:0x28 the summon cost's x of each row
+004935f4 g_bibleDevilRowCostY inferred size:0x28 the summon cost's y of each row
+0049361c g_bibleDevilRowCostText inferred size:0x140 the summon cost's digits of each row (0x20 bytes each)
+0049375c g_bibleDevilRowCostColor inferred size:0x28 the summon cost's colour of each row (ends at g_campState 0x493784)
+00265f50 lmapMainUpdateFollowCamera inferred the field map's follow camera: focus and eye, collision pull-in, easing, applied to the camera, view and listener (w84-f1)
+0022db94 bibleDevilDrawRace inferred draws a devil list row's race label (w84-f1)
+0022daac bibleDevilDrawName inferred draws a devil list row's name (w84-f1)
+0022d9c8 bibleDevilDrawStat inferred draws a devil list row's stat value in its comparison colour (w84-f1)
+002ca7fc titleMainDrawLower inferred the title's lower-screen draw task (registered as "TITLE D" by titleMainInitialize) (w84-f2)

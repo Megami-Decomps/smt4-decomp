@@ -1,4 +1,4 @@
-/* NON_MATCHING: the zeroing now matches; only the two accumulators swap r5/r6 inside the loop (retail adds the maximum into r5, the current HP into r6). */
+#include "battle/BattleHelpers.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
@@ -10,19 +10,19 @@ extern "C" {
 u32 scrCommBtlHpPercentWithin(void)
 {
     s32 limit = scrGetArg(0);
-    s32 curSum = 0;
-    s32 maxSum = 0;
-    s32 index;
+    HpSums sums;
 
-    for (index = 0; index < 0x6D; index++) {
+    sums.maximum = 0;
+    sums.current = 0;
+    for (s32 index = 0; index < 0x6D; index++) {
         BtlEntry *unit = &btlGetMainState()->entries[index];
 
         if ((unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40)) {
-            maxSum += unit->data.maxHp;
-            curSum += unit->data.hp;
+            sums.maximum += unit->data.maxHp;
+            sums.current += unit->data.hp;
         }
     }
-    scrSetResult(curSum * 100 / maxSum <= limit);
+    scrSetResult(sums.current * 100 / sums.maximum <= limit);
     return 1;
 }
 

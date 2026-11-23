@@ -136,8 +136,8 @@ typedef struct ObjB {
     /* 0x20D0 */ u8 unk20D0;
     /* 0x20D1 */ u8 unk20D1;
     /* 0x20D2 */ u8 unk20D2[0x2];
-    /* 0x20D4 */ u8 block20D4[4];
-    /* 0x20D8 */ u8 unk20D8[0xE];
+    /* 0x20D4 */ f32 animationSteps[2];
+    /* 0x20DC */ u8 unk20DC[0xA];
     /* 0x20E6 */ u8 unk20E6;
     /* 0x20E7 */ u8 unk20E7;
     /* 0x20E8 */ s32 scaledMaxHp;
@@ -153,6 +153,7 @@ typedef char ObjBSessionOffsetsCheck[sizeof(ObjB) == 0x20F4 &&
     offsetof(ObjB, scaledMaxHp) == 0x20E8 && offsetof(ObjB, scaledMaxMp) == 0x20EC ? 1 : -1];
 typedef char ObjBMenuSpriteOffsetsCheck[
     offsetof(ObjB, statusSprites.status) == 0x418 && offsetof(ObjB, statusModelPosition) == 0x2038 &&
+    offsetof(ObjB, animationSteps) == 0x20D4 &&
     offsetof(ObjB, unk20E6) == 0x20E6 &&
     offsetof(ObjB, menuReset.first) == 0x18 &&
     offsetof(ObjB, menuReset.second) == 0x1C &&

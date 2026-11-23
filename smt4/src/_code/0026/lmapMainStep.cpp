@@ -8,7 +8,7 @@ extern "C" {
 void lmapMainUpdateState(LmapMainState *main);
 void FUN_00265180(void);
 void mapUpdateFollowerModels(LmapMainState *main);
-void FUN_00265f50(LmapMainState *main);
+void lmapMainUpdateFollowCamera(LmapMainState *main);
 void lmapRaiseSceneTransition(void);
 
 
@@ -24,7 +24,7 @@ void lmapMainStep(void)
             lmapMainUpdateState(main);
         }
     }
-    FUN_00265f50(main);
+    lmapMainUpdateFollowCamera(main);
     mapUpdateFollowerModels(main);
     if (g_lmapMainState->mapId != 100) {
         FUN_00265180();

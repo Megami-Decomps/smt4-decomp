@@ -1,6 +1,6 @@
-/* NON_MATCHING: 10 lines, all in the release arm: retail stores the cleared drag flag before it loads stillFrames
- * (the build loads first) and loads touch.y/previousTouch.y into s1/s0 where the build uses s0/s1. */
+/* NON_MATCHING: 6 lines, in the release arm: retail loads touch.y/previousTouch.y into s1/s0 where the build uses s0/s1. */
 #include "map/mapDepart.h"
+#include "util/BitsAndBytes.h"
 #include "map/NavigationInterpolation.h"
 #include "game/GameState.h"
 #include "shard/NaviMain.h"
@@ -38,7 +38,7 @@ u32 naviDragScrollUpdate(NavigationInterpolation *nav)
             nav->drag.previousTouch.x = (f32)x;
             nav->drag.previousTouch.y = (f32)y;
             nav->drag.stillFrames = 0;
-            nav->flags |= 0x20000;
+            flagsSetBits(&nav->flags, 0x20000);
         }
     } else {
         s32 x, y;
@@ -58,7 +58,7 @@ u32 naviDragScrollUpdate(NavigationInterpolation *nav)
                 nav->drag.touch.y = (f32)y;
             }
         } else if (FUN_003c2e14(&x, &y) != 0 || g_gameState.inputBlocked != 0) {
-            nav->flags &= ~0x20000;
+            flagsClearBits(&nav->flags, 0x20000);
             if (nav->drag.stillFrames > 2) {
                 nav->drag.velocity.x = 0.0f;
                 nav->drag.velocity.y = 0.0f;

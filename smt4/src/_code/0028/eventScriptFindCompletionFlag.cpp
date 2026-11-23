@@ -1,4 +1,4 @@
-/* NON_MATCHING: bsearch argument setup: armcc folds the table count load and the entry-base add into a post-indexed load (ldr r2, [r1], #24) where retail adds the base first, and the compare-pointer load is scheduled earlier. */
+/* NON_MATCHING: bsearch argument setup: armcc folds the table count load and the entry-base add into a post-indexed load (ldr r2, [r1], #24) where retail adds the base first, and the compare-pointer load is scheduled earlier. Naming the global directly (no table pointer) gives retail's pool order but keeps the post-indexed load (11 lines). */
 #include "shard/W6_W6Match5_NamedLookup.h"
 
 struct NamedLookupTable {

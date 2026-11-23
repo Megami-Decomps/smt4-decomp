@@ -1,20 +1,11 @@
 /* NON_MATCHING: same 100 rows and instruction order as retail now (flag bits through set/clear helpers); only the saved registers differ (retail r5=0, r6=sprite base, r7=2; ours r7=0, r5=base, r6=2). */
 #include "shard/W6_W6Match7_NumericStepper.h"
+#include "util/BitsAndBytes.h"
 #include "shard/NaviMain_GetCurrentMap.h"
 #include "ui/NaviCategorySelection.h"
 #include "ui/UiSpriteApi.h"
 #include "shard/W5_W5Match2_ScalarArguments.h"
 #include "map/lmapMain.h"
-
-static __inline void flagsSetBits(u32 *flags, u32 bits)
-{
-    *flags |= bits;
-}
-
-static __inline void flagsClearBits(u32 *flags, u32 bits)
-{
-    *flags &= ~bits;
-}
 
 extern "C" {
 void uiSpriteBankApplyPreset(void *, s32);

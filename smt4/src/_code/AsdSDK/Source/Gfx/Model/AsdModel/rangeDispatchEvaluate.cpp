@@ -12,7 +12,7 @@ struct RangeDispatchView {
 typedef s32 (*RangeDispatchCallback)(u8 *payload, f32 value);
 
 extern "C" {
-f32 thresholdDispatchOutsideRange(RangeDispatchView *record, f32 value);
+f32 animCurveAdjustFrame(RangeDispatchView *record, f32 value);
 f32 mathlib_ceilf(f32 value);
 extern RangeDispatchCallback DAT_00471c20[];
 }
@@ -20,7 +20,7 @@ extern RangeDispatchCallback DAT_00471c20[];
 // Resolve a constant, packed-bit, or callback result after adjusting the input.
 extern "C" u32 rangeDispatchEvaluate(RangeDispatchView *record, f32 value)
 {
-    value = thresholdDispatchOutsideRange(record, value);
+    value = animCurveAdjustFrame(record, value);
 
     const u32 flags = record->flags;
     if (flags & 1) {

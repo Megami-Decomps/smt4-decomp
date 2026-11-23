@@ -2692,7 +2692,7 @@
 002340e4 _ZN17RequestParametersC1Ev
 0023470c touchRegisterSecondRegion
 0023474c touchRegisterFirstRegion
-00235744 thresholdDispatchOutsideRange
+00235744 animCurveAdjustFrame
 002419b0 mapAdvanceSceneTwentyEight
 00241c58 taskUpdateOrderedPasses
 00253ce4 bufferDestroyOwnedPair
@@ -6472,3 +6472,12 @@
 0031b7dc dataTable42GetCombinedCount
 00186a48 uiQuestDrawDetailPanel
 00352e6c aocServiceQueryCatalog
+00380e30 animCalcBakedMatrixCurve
+00380a60 animCalcCallbackCurve
+00296fec aocMenuReset
+00231d2c cameraViewHeadingDegrees
+00265f50 lmapMainUpdateFollowCamera
+0022db94 bibleDevilDrawRace
+0022daac bibleDevilDrawName
+0022d9c8 bibleDevilDrawStat
+002ca7fc titleMainDrawLower

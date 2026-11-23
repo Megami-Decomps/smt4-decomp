@@ -1,4 +1,4 @@
-/* NON_MATCHING: VFP scheduling only: the shared 0.0f and the heading swap s16/s17, and the radians product is computed before the position instead of after it. */
+/* NON_MATCHING: VFP scheduling only (53 lines): the shared 0.0f and the heading swap s16/s17, and the heading's integer conversions load in another order. */
 #include "gamedata/MapSaveBlockA.h"
 #include "map/mapRndMaze.h"
 #include "Model/MoriModelContent.h"
@@ -35,12 +35,11 @@ void mapRndMazeCreateEntranceMarker()
     position.x = (f32)(maze->displayX * 700 + 350);
     position.y = 0.0f;
     position.z = (f32)(maze->displayY * 700 + 350);
-    f32 radians = heading * 0.017453292f;
     /* retail evaluates the sine and cosine once more without using them */
-    libm_sinf(radians);
-    libm_cosf(radians);
-    position.x -= libm_sinf(radians) * 330.0f;
-    position.z -= libm_cosf(radians) * 330.0f;
+    libm_sinf(heading * 0.017453292f);
+    libm_cosf(heading * 0.017453292f);
+    position.x -= libm_sinf(heading * 0.017453292f) * 330.0f;
+    position.z -= libm_cosf(heading * 0.017453292f) * 330.0f;
     MoriModelContent *marker = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent),
         "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp", 0x12E1));
     if (marker != NULL)

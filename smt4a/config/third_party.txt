@@ -6923,6 +6923,7 @@
 0x00461d20 FUN_00461d20 between
 0x00461d28 FUN_00461d28 between
 0x00461e58 voiceOwnerClear between
+0x00461e8c halfArrayOwnerGet between
 0x00461ea0 FUN_00461ea0 between
 0x00461ea8 voiceOwnerSetPaused between
 0x00461efc FUN_00461efc between
@@ -7035,13 +7036,14 @@
 0x00467158 FUN_00467158 between
 0x0046715c FUN_0046715c between
 0x00467160 FUN_00467160 between
-0x00467164 FUN_00467164 between
+0x00467164 animCalcCallbackCurve between
 0x004671a4 FUN_004671a4 between
 0x00467374 FUN_00467374 between
 0x00467558 nw_anim_res_CalcVector3Curve name
-0x00467684 FUN_00467684 between
+0x00467684 animCalcBakedMatrixCurve between
 0x004676c8 nw_anim_res_CalcTranslateCurve name
 0x00467810 FUN_00467810 between
+0x00467840 animCurveAdjustFrame library
 0x00467888 FUN_00467888 between
 0x00467898 FUN_00467898 between
 0x004678a8 FUN_004678a8 between

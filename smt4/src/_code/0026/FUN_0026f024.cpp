@@ -1,4 +1,3 @@
-/* NON_MATCHING (b1454): only VFP register allocation differs (retail keeps the 1.5707964 constant in s1 and the divisor in s2; the build swaps them). */
 #include "common.h"
 #include <math.h>
 #include "util/TrigF32.h"
@@ -14,12 +13,11 @@ u32 FUN_0026f024(s32 *output, s32 start, s32 end, s32 duration, s32 elapsed, s32
         return 1;
     }
     f32 ratio = (f32)elapsed / (f32)duration;
-    f32 angle = ratio * 1.5707964f;
     f32 progress;
     if (easeOut != 0) {
-        progress = libm_sinf(angle);
+        progress = libm_sinf(ratio * 1.5707964f);
     } else {
-        progress = 1.0f - libm_cosf(angle);
+        progress = 1.0f - libm_cosf(ratio * 1.5707964f);
     }
     if (start < end) {
         *output = (s32)((f32)start + (f32)distance * progress);

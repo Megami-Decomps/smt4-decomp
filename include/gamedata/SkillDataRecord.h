@@ -238,6 +238,11 @@ struct SkillDataRecordA {
             /* 0x60 */ s8 summons;       /* positive: needs room for another unit */
             /* 0x61 */ u8 unk61;
         } usabilityTail;
+        struct {
+            /* 0x40 */ s8 amount40;      /* with amount42: positive for the skills the AI's ailment-cure check skips */
+            /* 0x41 */ u8 unk41;
+            /* 0x42 */ s16 amount42;
+        } recovery;
     };
     /* 0x62 */ u8 stages[9][2];
     /* 0x74 */ u8 unk74[0x12];

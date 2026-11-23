@@ -1,4 +1,3 @@
-/* NON_MATCHING: scheduling only: retail issues `mov r0, #1` (the return value) before the flag load/or/store and keeps the value in r2. */
 #include "battle/BattleUnitSlot.h"
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
@@ -17,7 +16,7 @@ u32 scrCommBtlSetFlag16AfterEntryLookup(void)
     u32 unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
 
     btlReflectQueueSelectionMarks(0, unit, reinterpret_cast<s32>(btlMainFindEntryByListedId(main, id)));
-    main->battleFlags |= 0x10000;
+    main->battleMask |= 0x10000;
     return 1;
 }
 

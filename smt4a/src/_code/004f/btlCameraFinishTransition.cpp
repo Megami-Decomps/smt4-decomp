@@ -1,4 +1,5 @@
 #include "battle/btlMain.h"
+#include "util/BitsAndBytes.h"
 #include "battle/BtlGlobals.h"
 
 struct BattleCameraTransition {
@@ -11,11 +12,6 @@ struct BattleCameraTransition {
 
 extern "C" {
 void objDestroyIfSet(void *object);
-
-static __inline void flagsClearBits(u32 *flags, u32 bits)
-{
-    *flags &= ~bits;
-}
 
 // Release the transition object and clear its pending battle-camera flag.
 void btlCameraFinishTransition(BattleCameraTransition *transition)

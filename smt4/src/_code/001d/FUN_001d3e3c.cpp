@@ -133,7 +133,7 @@ int lmapMainUpdateState(...);
 int FUN_00265180(void);
 int lmapSlotSetVisible(...);
 int mapUpdateFollowerModels(...);
-int FUN_00265f50(...);
+int lmapMainUpdateFollowCamera(...);
 int entryListCollectMatches(...);
 int FUN_002666b0(void);
 int lmapUpdateMapBgm(void);
@@ -366,7 +366,7 @@ extern int lmapMainUpdateScriptTransition(void);
 /* Supplied declaration required: FUN_00265180. */
 /* Supplied declaration required: lmapSlotSetVisible. */
 /* Supplied declaration required: mapUpdateFollowerModels. */
-/* Supplied declaration required: FUN_00265f50. */
+/* Supplied declaration required: lmapMainUpdateFollowCamera. */
 /* Supplied declaration required: entryListCollectMatches. */
 /* Supplied declaration required: mapInitializeStoryMarkerEffects. */
 /* Supplied declaration required: objSetBaseAndValue. */
@@ -850,7 +850,7 @@ unsigned int FUN_001d3e3c(void)
     puVar7[3] = puVar7[3] + 1;
     *(unsigned char *)(puVar7 + 0x25) = 1;
     FUN_0027052c();
-    FUN_00265f50(puVar7);
+    lmapMainUpdateFollowCamera(puVar7);
     mapUpdateFollowerModels(puVar7);
     FUN_00275364();
     DAT_0049f934 = '\0';
@@ -1027,7 +1027,7 @@ unsigned int FUN_001d3e3c(void)
         }
         FUN_0027052c();
         *(char *)(puVar7 + 0x268) = temp_v0;
-        FUN_00265f50(puVar7);
+        lmapMainUpdateFollowCamera(puVar7);
         mapUpdateFollowerModels(puVar7);
         FUN_00275364();
         navigationSetArguments(puVar7[0x10],puVar7[0x12],DAT_0049f924);
@@ -1475,7 +1475,7 @@ joined_r0x001d535c:
     DAT_0049fb48 = 0;
     frameTexConfigureCaptureTextures(1);
     DAT_0049f93e = 0;
-    FUN_00265f50(puVar7);
+    lmapMainUpdateFollowCamera(puVar7);
     FUN_002757a8();
     mapEntryTriggerForScene(1);
     puVar17 = g_lmapMainState;
@@ -1759,12 +1759,12 @@ joined_r0x001d6448:
     scrScriptProcessStartEntry(puVar17[0x27b],temp_v7);
     DAT_0049f970 = 0;
     puVar7[3] = puVar7[3] + 1;
-    FUN_00265f50(puVar7);
+    lmapMainUpdateFollowCamera(puVar7);
     lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     break;
   case 0x1e:
-    FUN_00265f50(puVar7);
+    lmapMainUpdateFollowCamera(puVar7);
     lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     temp_v6 = lmapMainUpdateScriptTransition();
@@ -1811,12 +1811,12 @@ LAB_001d6bd0:
     scrScriptProcessStartEntry(puVar7[0x26e],DAT_0049f974);
     DAT_0049f970 = 0;
     puVar7[3] = puVar7[3] + 1;
-    FUN_00265f50(puVar7);
+    lmapMainUpdateFollowCamera(puVar7);
     lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     break;
   case 0x20:
-    FUN_00265f50(puVar7);
+    lmapMainUpdateFollowCamera(puVar7);
     lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     temp_v6 = scrRunOpcodesStub(puVar7[0x26e]);
@@ -1856,13 +1856,13 @@ LAB_001d6bd0:
     scrScriptProcessStartEntry(puVar7[0x26e],DAT_0049f974);
     DAT_0049f970 = 0;
     puVar7[3] = puVar7[3] + 1;
-    FUN_00265f50(puVar7);
+    lmapMainUpdateFollowCamera(puVar7);
     lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     navigationResetTimer();
     break;
   case 0x22:
-    FUN_00265f50(puVar7);
+    lmapMainUpdateFollowCamera(puVar7);
     lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     temp_v6 = scrRunOpcodesStub(puVar7[0x26e]);
@@ -1897,7 +1897,7 @@ LAB_001d6bd0:
     }
     messageSetConfirmDisplayMode();
     scrScriptProcessStartEntry(puVar7[0x26e],DAT_0049f974);
-    FUN_00265f50(puVar7);
+    lmapMainUpdateFollowCamera(puVar7);
     lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     FUN_0027052c();
@@ -1912,7 +1912,7 @@ LAB_001d6bd0:
   case 0x24:
     lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
-    FUN_00265f50(puVar7);
+    lmapMainUpdateFollowCamera(puVar7);
     FUN_0027052c();
     FUN_00275364();
     FUN_00274798();
@@ -1939,7 +1939,7 @@ LAB_001d6bd0:
     puVar7[0x267] = temp_v7;
     messageSetConfirmDisplayMode();
     scrScriptProcessStartEntry(puVar7[0x26b],puVar7[0x267]);
-    FUN_00265f50(puVar7);
+    lmapMainUpdateFollowCamera(puVar7);
     lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     puVar7[3] = puVar7[3] + 1;
@@ -1947,7 +1947,7 @@ LAB_001d6bd0:
     break;
   case 0x26:
     puVar7[4] = puVar7[4] + 1;
-    FUN_00265f50(puVar7);
+    lmapMainUpdateFollowCamera(puVar7);
     lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     temp_v6 = scrRunOpcodesStub(puVar7[0x26b]);
@@ -2325,7 +2325,7 @@ LAB_001d6bd0:
     *(unsigned char *)(puVar7 + 0x268) = 0;
     FUN_0027052c();
     *(unsigned char *)(puVar7 + 0x268) = temp_v1;
-    FUN_00265f50(puVar7);
+    lmapMainUpdateFollowCamera(puVar7);
     mapUpdateFollowerModels(puVar7);
     FUN_00275364();
     DAT_0049fb46 = 0;
@@ -2336,7 +2336,7 @@ LAB_001d6bd0:
     *(unsigned char *)(puVar7 + 0x268) = 0;
     FUN_0027052c();
     *(char *)(puVar7 + 0x268) = (char)temp_v5;
-    FUN_00265f50(puVar7);
+    lmapMainUpdateFollowCamera(puVar7);
     mapUpdateFollowerModels(puVar7);
     FUN_00275364();
     temp_v6 = FUN_002eb134();
@@ -2365,7 +2365,7 @@ LAB_001d6bd0:
   case 0x38:
     FUN_0027052c();
     *(char *)(puVar7 + 0x268) = (char)temp_v5;
-    FUN_00265f50(puVar7);
+    lmapMainUpdateFollowCamera(puVar7);
     mapUpdateFollowerModels(puVar7);
     FUN_00275364();
     puVar7[4] = puVar7[4] + 1;
@@ -2406,7 +2406,7 @@ LAB_001d6bd0:
     break;
   case 0x3b:
     mapCameraUpdateTurn();
-    FUN_00265f50(puVar7);
+    lmapMainUpdateFollowCamera(puVar7);
     temp_v6 = scrRunOpcodesStub(puVar7[0x26e]);
     if (temp_v6 != 2) {
       return 0;
@@ -3154,7 +3154,7 @@ LAB_001d884c:
       puVar17[0x33] = 2;
       puVar17[0x35] = 0;
     }
-    FUN_00265f50(puVar7);
+    lmapMainUpdateFollowCamera(puVar7);
     lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     temp_v6 = puVar7[4];
@@ -3171,7 +3171,7 @@ LAB_001d884c:
       slotSetRequest(0,10,0xff);
       slotSetRequest(1,10,0xff);
     }
-    FUN_00265f50(puVar7);
+    lmapMainUpdateFollowCamera(puVar7);
     lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     puVar7[4] = puVar7[4] + 1;

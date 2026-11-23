@@ -61,7 +61,7 @@ enum {
 extern "C" {
 
 LmapScenePose *lmapSceneGetObj(void);
-f32 FUN_00231d2c(void *navi);
+f32 cameraViewHeadingDegrees(void *navi);
 u32 mapClassifyPlaceState(s32 id);
 void titleScissorApplyOrClearRequests(NaviMapDrawView *owner, s32 clip);
 void FUN_00231dec(NaviMapDrawView *screen);
@@ -171,10 +171,10 @@ void naviMapDraw(NaviMapDrawView *screen)
             markerY = (f32)screen->markerY;
             if (g_gameState.currentObjectId == 0x73 || g_gameState.currentObjectId == 0x77) {
                 screen->viewHeading = -NaviMain_GetState(navi);
-                screen->playerHeading = -FUN_00231d2c(navi);
+                screen->playerHeading = -cameraViewHeadingDegrees(navi);
             } else {
                 screen->viewHeading = NaviMain_GetState(navi);
-                screen->playerHeading = FUN_00231d2c(navi);
+                screen->playerHeading = cameraViewHeadingDegrees(navi);
             }
         } else {
             markerX = (f32)screen->markerX;

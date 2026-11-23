@@ -14,6 +14,7 @@
 #include "ui/UiControl.h"
 #include "status/StatusDownA.h"
 #include "ui/UiSpriteState.h"
+#include "ui/FloatTableLookup.h"
 
 /* Animation tables for paramsInit; the original file defined them statically. */
 static const UiSpritePositionKey sPositionKeys[] = {
@@ -78,7 +79,6 @@ void paramsClearPacket(void *packet);
 void statusDownSetSpriteMode(s32 mode, s32 imageKey, s32 flag);
 AsdText *spriteHandleCreate(u32 kind);
 void positionStateSet(AsdText *text, u32 a, u32 color, f32 value);
-void copyDefaultWordsPair(void *state);
 void FUN_00268770(void *process);
 void FUN_0026b0e4(void *process);
 
@@ -149,7 +149,7 @@ void statusDownCreateScreen(void)
     menu->source = NULL;
     StatusDownStateA *holder = g_statusDown;
     g_statusDown->unk2584 = 0;
-    copyDefaultWordsPair(holder->block2588);
+    copyDefaultAnimationSteps(holder->animationSteps);
     down->unk2598 = 0;
     menu = &g_statusDown->menu;
     menu->process = NULL;

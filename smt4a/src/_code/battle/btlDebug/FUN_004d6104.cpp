@@ -122,7 +122,7 @@ void FUN_004d3950(DebugMenu *menu, DebugBattle *battle);
 void btlReserveEditorApplySelection(DebugMenu *menu, DebugBattle *battle);
 void FUN_004d3df0(DebugMenu *menu, DebugBattle *battle);
 void FUN_004d463c(DebugMenu *menu);
-void FUN_004d5290(DebugMenu *menu, DebugBattle *battle);
+void btlDebugOpenCameraControlMenu(DebugMenu *menu, DebugBattle *battle);
 void btlCameraApplyEditorValue(DebugMenu *menu, DebugBattle *battle, u32 item);
 void FUN_004d5578(DebugMenu *menu, DebugBattle *battle);
 void FUN_004d5be4(DebugMenu *menu, DebugBattle *battle, u32 item);
@@ -392,7 +392,7 @@ u32 FUN_004d6104(DebugMenu *menu, DebugBattle *battle)
             }
             next = 6;
         } else {
-            FUN_004d5290(menu, battle);
+            btlDebugOpenCameraControlMenu(menu, battle);
             next = 6;
         }
         break;

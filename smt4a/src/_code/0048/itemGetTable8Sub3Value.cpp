@@ -1,6 +1,7 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
 #include "shard/ItemStackLimit.h"
+#include "shard/W5_W5Match5_RecordKeys.h"
 #include "addon/AocSystemA.h"
 
 extern "C" {
@@ -21,7 +22,7 @@ typedef struct ItemInfo {
 } ItemInfo;
 
 Table8Sub3Record *idEntryTableFindById(AocSystemA *aoc, u32 id);
-s32 compareRecordKey(const void *left, const void *right);
+
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
                    s32 (*compare)(const void *, const void *));
 

@@ -1,12 +1,10 @@
-/* NON_MATCHING: scheduling only: retail stores the style word before the active byte (str [600]; strb [606]); built swaps the two stores */
 #include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "sys/RuntimeObjects.h"
 
 extern "C" {
 
-      /* animation objects, known through their setter functions */
-
+/* The battle opening panel (Apocalypse's BtlUiObjBA): its animation objects, known through their setter functions. */
 typedef struct Panel {
     /* 0x000 */ u8 unk000[0x20];
     /* 0x020 */ UiSpriteState animA;
@@ -21,7 +19,6 @@ typedef struct Panel {
     /* 0x25E */ u8 active;
 } Panel;
 
-
 /* Starts the panel's animations for style 0 or 1 and resets its phase. */
 void FUN_001e1104(Panel *panel, s32 style, u8 flagB, u8 flagA)
 {
@@ -29,24 +26,24 @@ void FUN_001e1104(Panel *panel, s32 style, u8 flagB, u8 flagA)
     panel->active = 1;
     panel->flagA = flagA;
     panel->flagB = flagB;
-    if (style == 0) {
-    pairSetFirstResetSecond(&panel->animA, 41);
-    spriteStartAnimationByIndex(&panel->animA, 0);
-    pairSetSecondResetFirst(&panel->animC, 2);
-    spriteStartAnimationByIndex(&panel->animC, 2);
-    pairSetSecondResetFirst(&panel->animB, 0);
-    spriteStartAnimationByIndex(&panel->animB, 1);
-    pairSetFirstResetSecond(&panel->timer, 9);
-    uiSpriteSetKeyframe(&panel->timer, 2, 0);
-    } else if (style == 1) {
-    pairSetFirstResetSecond(&panel->animA, 42);
-    spriteStartAnimationByIndex(&panel->animA, 0);
-    pairSetSecondResetFirst(&panel->animC, 3);
-    spriteStartAnimationByIndex(&panel->animC, 2);
-    pairSetSecondResetFirst(&panel->animB, 1);
-    spriteStartAnimationByIndex(&panel->animB, 1);
-    pairSetFirstResetSecond(&panel->timer, 10);
-    uiSpriteSetKeyframe(&panel->timer, 2, 0);
+    if (panel->style == 0) {
+        pairSetFirstResetSecond(&panel->animA, 41);
+        spriteStartAnimationByIndex(&panel->animA, 0);
+        pairSetSecondResetFirst(&panel->animC, 2);
+        spriteStartAnimationByIndex(&panel->animC, 2);
+        pairSetSecondResetFirst(&panel->animB, 0);
+        spriteStartAnimationByIndex(&panel->animB, 1);
+        pairSetFirstResetSecond(&panel->timer, 9);
+        uiSpriteSetKeyframe(&panel->timer, 2, 0);
+    } else if (panel->style == 1) {
+        pairSetFirstResetSecond(&panel->animA, 42);
+        spriteStartAnimationByIndex(&panel->animA, 0);
+        pairSetSecondResetFirst(&panel->animC, 3);
+        spriteStartAnimationByIndex(&panel->animC, 2);
+        pairSetSecondResetFirst(&panel->animB, 1);
+        spriteStartAnimationByIndex(&panel->animB, 1);
+        pairSetFirstResetSecond(&panel->timer, 10);
+        uiSpriteSetKeyframe(&panel->timer, 2, 0);
     }
     panel->phase = 0;
     panel->step = 2;

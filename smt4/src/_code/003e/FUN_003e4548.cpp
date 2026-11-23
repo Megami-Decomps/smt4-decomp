@@ -5,7 +5,7 @@
 extern "C" {
 
 void FUN_00236350(GfxTransform *transform, f32 *rotation, f32 *scale);
-void FUN_00380e30(GfxTransform *out, void *data, f32 frame);
+void animCalcBakedMatrixCurve(GfxTransform *out, void *data, f32 frame);
 void nw_gfx_TransformAnimEvaluator_EvaluateMemberAnim(GfxAnimEvaluator *evaluator, GfxTransform *out, GfxAnimEntry *entry, GfxAnimMember *member, s32 arg4, f32 frame);
 void nw_gfx_TransformAnimEvaluator_EvaluateMemberBakedAnim(GfxAnimEvaluator *evaluator, GfxTransform *out, GfxAnimEntry *entry, GfxAnimMember *member, s32 arg4, f32 frame);
 void nw_gfx_TransformAnimEvaluator_UpdateFlags(GfxAnimEvaluator *evaluator, GfxTransform *transform);
@@ -38,7 +38,7 @@ GfxTransform *FUN_003e4548(GfxAnimEvaluator *evaluator, GfxTransform *out, s32 i
                 nw_gfx_TransformAnimEvaluator_EvaluateMemberBakedAnim(evaluator, out, entry, member, arg3, evaluator->frame);
                 break;
             case GFX_ANIM_FRAME_DATA:
-                FUN_00380e30(out, gfxRelativePointer(&entry->dataOffset), evaluator->frame);
+                animCalcBakedMatrixCurve(out, gfxRelativePointer(&entry->dataOffset), evaluator->frame);
                 break;
             }
         } else {

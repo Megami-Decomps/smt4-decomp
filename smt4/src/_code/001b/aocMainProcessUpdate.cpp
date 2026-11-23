@@ -9,7 +9,6 @@ extern SceneResourceWork *g_sceneResourceWork;
 void commonBgAcquire();
 void buttonHelpAcquireResources();
 void buttonHelpCreate();
-void FUN_00296fec();
 void aocMenuUpdate(SceneResource *);
 void titleSetSlotValueState2(u32, u32);
 void soundChannelStopAll(u32);
@@ -31,7 +30,7 @@ u32 aocMainProcessUpdate()
         if (resource)
             resource = new (resource) AocMenu;
         work->resource = reinterpret_cast<SceneResource *>(resource);
-        FUN_00296fec();
+        aocMenuReset(resource);
         work->state.pending = 1;
         break;
     }

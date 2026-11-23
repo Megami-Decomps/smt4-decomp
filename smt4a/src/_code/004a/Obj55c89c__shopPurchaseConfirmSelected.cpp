@@ -38,7 +38,7 @@ s32 FUN_0035dbb0(void);
 void messageMainSetTargetFlags(s32 arg);
 s32 flaggedValueHolderGetTotal(void *holder);
 s32 partyFindFirstUnusedEntry(void);
-s32 FUN_004a8750(u16 id, u8 alternate, s32 arg2, bool highLevel, s32 arg4);
+s32 compendiumComputeSummonCost(u16 id, u8 alternate, s32 arg2, bool highLevel, s32 arg4);
 void gameCounterAddSaturating(s32 kind, s32 amount);
 void gameGlobalsSetMenuOpenFlag(s32 arg);
 u16 shopListItemGetId(const PanelListItem *item);
@@ -64,7 +64,7 @@ void Obj55c89c::shopPurchaseConfirmSelected()
     if (target != -1) {
         dispatchIfFound(target, itemId, panel->isAlternate());
     }
-    price = FUN_004a8750(id, panel->alternate, 0, panel->level >= 100, 0);
+    price = compendiumComputeSummonCost(id, panel->alternate, 0, panel->level >= 100, 0);
     partyAddMoneyClampedForward(-price);
     gameCounterAddSaturating(40, price);
     gameGlobalsSetMenuOpenFlag(0);

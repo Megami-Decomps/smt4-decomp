@@ -149,6 +149,16 @@ enum {
     CEC_EDIT_ITEM_MESSAGE = 7
 };
 
+/* One of the edit screen's sliding, fading elements (0x14 bytes). */
+typedef struct CecEditSlide {
+    /* 0x00 */ f32 alpha;
+    /* 0x04 */ s32 x;
+    /* 0x08 */ s32 y;
+    /* 0x0C */ s32 frame;        /* frames into the slide and fade */
+    /* 0x10 */ s8 done;          /* the slide and fade finished */
+} CecEditSlide;
+typedef char CecEditSlideSizeCheck[sizeof(CecEditSlide) == 0x14 ? 1 : -1];
+
 typedef struct StateAtF4 {
     /* 0x00 */ u32 job;
     /* 0x04 */ u32 unk04;
@@ -161,6 +171,7 @@ typedef struct StateAtF4 {
     union {
         /* 0x10 */ u8 unk10[0x14];
         /* 0x10 */ u8 panels[2][0x14];   /* two 0x14-byte records, cleared on creation; [1] starts with `image` */
+        /* 0x10 */ CecEditSlide slides[2]; /* the same two records, as the mode handlers animate them */
         struct {
             u8 unk10[0x14];
             /* 0x24 */ u8 image[1];
@@ -168,13 +179,7 @@ typedef struct StateAtF4 {
     };
     union {
         /* 0x38 */ u8 unk38[0x14];
-        struct {
-            /* 0x38 */ f32 alpha;
-            /* 0x3C */ s32 x;            /* 30 on creation */
-            /* 0x40 */ s32 y;
-            /* 0x44 */ s32 frame;        /* frames into the slide and fade */
-            /* 0x48 */ s8 done;          /* the slide and fade finished */
-        } cursor;                        /* the third 0x14-byte record (FUN_002e1d1c draws it) */
+        /* 0x38 */ CecEditSlide cursor;  /* the third 0x14-byte record (FUN_002e1d1c draws it); x is 30 on creation */
     };
     /* 0x4C */ ScriptProcess *scriptProcess;
     /* 0x50 */ void *buf50;
@@ -206,7 +211,8 @@ typedef struct StateAtF4 {
     /* 0x10D */ u8 unk10D;               /* the save block's byte at 0x27E0E */
     /* 0x10E */ u8 imageActive;
     /* 0x10F */ u8 unk10F;
-    /* 0x110 */ u8 unk110[2];
+    /* 0x110 */ u8 unk110;
+    /* 0x111 */ s8 helpShown;            /* the first slide (the help panel) is on screen; the help button toggles it */
     /* 0x112 */ u8 unk112;               /* 1 on creation */
     /* 0x113 */ u8 openMode;             /* the argument the screen was created with */
     /* 0x114 */ u8 listCancelled;        /* the choice list was left without choosing */

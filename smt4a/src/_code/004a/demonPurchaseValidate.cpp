@@ -5,7 +5,7 @@
 #include "code/Code002a_Smt4a.h"
 
 extern "C" {
-u32 FUN_004a8750(u32 id, u32 mode, s32 first, s32 special, s32 second);
+u32 compendiumComputeSummonCost(u32 id, u32 mode, s32 first, s32 special, s32 second);
 u32 FUN_004d05b4();
 s32 flagValueRead(u32 flag);
 s32 gameStockContainsEntry(u32 id);
@@ -28,7 +28,7 @@ u32 demonPurchaseValidate(Screen4A *screen, u32 id)
     typedef char ValidationViewLayout[offsetof(ValidationView, mode) == 0x861 &&
         offsetof(ValidationView, candidates) == 0x868 ? 1 : -1];
     ValidationView *view = reinterpret_cast<ValidationView *>(screen);
-    u32 cost = FUN_004a8750(id, view->mode, 0, view->rank >= 100, 0);
+    u32 cost = compendiumComputeSummonCost(id, view->mode, 0, view->rank >= 100, 0);
     s32 selection = flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(view->selection));
     Candidate *selected = &view->candidates[selection];
     if (view->mode == 0) {

@@ -8,6 +8,7 @@
 #include "gamedata/GameData.h"
 #include "gamedata/PlayerRecordParts.h"
 #include "gamedata/MapSaveBlockA.h"
+#include "gamedata/SavedUnitChoice.h"
 #include <stddef.h>
 
 /* Apocalypse: the player's record (save block + 0x90, 0x64 bytes), returned by gameGetPlayerData(). Its layout
@@ -219,7 +220,8 @@ typedef struct GameSaveBodyA {
             /* 0x22198 */ u8 playerName[1];
         } runtime;
         struct {
-            u8 prefix[0x5B38];
+            u8 prefix[0x5AB8];
+            /* 0x27044 */ SavedUnitChoice selectedUnit;
             /* 0x270C4 */ GameSavedPairA entries[1];
         } pairs;
     };
@@ -288,7 +290,8 @@ typedef char GameSaveBodyAOffsetCheck[offsetof(GameSaveBodyA, slots) == 0x4 && o
     offsetof(GameSaveBodyA, area.area282C8) == 0x282C8 && offsetof(GameSaveBodyA, pointsTotal) == 0x2D2C && offsetof(GameSaveBodyA, points) == 0x2D30 && offsetof(GameSaveBodyA, mapBlock) == 0x3DEC && offsetof(GameSaveBodyA, flagBlock) == 0x54D0 &&
     offsetof(GameSaveBodyA, items) == 0x5E84 && offsetof(GameSaveBodyA, flagRows) == 0x1EED4 && offsetof(GameSaveBodyA, questCenter) == 0x21254 && offsetof(GameSaveBodyA, runtime.playerName) == 0x22198 && offsetof(GameSaveBodyA, tableFlag) == 0x27E3C && offsetof(GameSaveBodyA, status.flags) == 0x27FB8 &&
     offsetof(GameSaveBodyA, block214C8) == 0x214C8 && offsetof(GameSaveBodyA, runtime.unk21D8C) == 0x21D8C &&
-    offsetof(GameSaveBodyA, pairs.entries) == 0x270C4 && offsetof(GameSaveBodyA, record.tail.value) == 0x27E0C &&
+    offsetof(GameSaveBodyA, pairs.selectedUnit) == 0x27044 && offsetof(GameSaveBodyA, pairs.entries) == 0x270C4 &&
+    offsetof(GameSaveBodyA, record.tail.value) == 0x27E0C &&
     offsetof(GameSaveBodyA, saveState) == 0x27E1E && offsetof(GameSaveBodyA, entryFlags) == 0x27E50 &&
     offsetof(GameSaveBodyA, work.savedFlags) == 0x27EB8 && offsetof(GameSaveBodyA, tail.block28390) == 0x28390 &&
     offsetof(GameSaveBodyA, cecRanking.players) == 0x28310 && offsetof(GameSaveBodyA, cecRanking.categories) == 0x28360 &&

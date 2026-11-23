@@ -151,3 +151,9 @@ arm 0x1ab838 0x1ab850 CTR-SDK svcGetProcessId: push {r0}; svc 0x35; ldr r2, [sp]
 # (registered with __aeabi_atexit). nn_applet_CTR_detail_NotifyToWait uses the same handle and lock.
 arm 0x189a80 0x189b88 nn::err err:f port connection: CriticalSection Enter, svcConnectToPort, svcGetProcessId, nn_err_CTR_FatalErr_Throw, LightEvent wait; smt4 twin 0x2ad4f8
 arm 0x50e4c4 0x50e500 nn::err static initialiser: err:f handle state and its nn::os::CriticalSection (atexit-registered destructor); smt4 counterpart 0x3ec298
+# NintendoWare anim: nw::anim::res's curve frame adjustment. It takes a curve whose header is {f32 startFrame,
+# f32 endFrame, u8 preRepeatMethod, u8 postRepeatMethod} and, for a frame outside [start, end), returns the frame
+# mapped back by the pre- or post-repeat method from two three-entry function tables (value, start, end) -> frame.
+# Linked inside the nw_anim_res block (between nw_anim_res_CalcTranslateCurve and nw_anim_res_ResAnim_Cleanup) and
+# called by nw_anim_res_CalcVector3Curve and nw_anim_res_CalcTranslateCurve; exact twin of smt4 0x235744.
+arm 0x467840 0x467880 NintendoWare-anim res curve frame repeat adjustment inside the nw_anim_res block; twin of smt4 0x235744

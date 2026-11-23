@@ -5,6 +5,7 @@
 #include "gamedata/GameFlags.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
 #include "battle/BattleCommandValue.h"
+#include "battle/BtlEntryA.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ int __ARM_common_memcpy4_9(...);
 int btlFindEntryBlockByMemberId(...);
 int btlSlotSetStoreValue(...);
 int btlCombatantGetSummaryValues(...);
-int btlDowngradeRandomResistance(void);
 int mapCategoryToDestinationGroup(...);
 int btlGetAffinity(...);
 int halfTable152TopIs2(...);
@@ -1167,9 +1167,8 @@ LAB_004e34b8:
     }
     if (((temp_v89 != (unsigned int *)0x0) && ((*(unsigned char *)((int)temp_v89 + 0x39) & 0x20) != 0)) &&
        (temp_v6 == 0)) {
-      puVar12 = temp_v60;
-      btlDowngradeRandomResistance();
-      if ((int)puVar12 >= 0) {
+      s32 downgraded = btlDowngradeRandomResistance((BtlCombatantEntryA *)temp_v60);
+      if (downgraded >= 0) {
         temp_v61 = 0;
         temp_v62 = 0;
         temp_v63 = 0;
@@ -1186,7 +1185,7 @@ LAB_004e34b8:
         temp_v74 = 0;
         temp_v75 = 0;
         temp_v76 = 0;
-        switch((unsigned int)puVar12) {
+        switch((unsigned int)downgraded) {
         case (unsigned int)0x0:
           temp_v18 = 0x4e3f7c;
           __ARM_common_memcpy4_9(&temp_v61,temp_v18);

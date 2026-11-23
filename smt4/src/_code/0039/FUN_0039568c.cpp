@@ -1,4 +1,5 @@
-/* NON_MATCHING: suppress-step and movement address load order, modulo constant load and last velocity load scheduling differ. */
+/* NON_MATCHING: only the entry differs: the build loads g_gameState's address before the push and the actor before the
+ * suppress-step flag; retail loads it after `mov r5, r0` and reads the flag first. */
 #include "map/AmbientMovement.h"
 #include "map/LmapGlobals.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
@@ -17,9 +18,7 @@ void FUN_0039568c(AmbientMovementWork *work)
     if (work->state != 0) {
         if (work->state == 1) {
             FUN_0039560c(work);
-            movement->position.x += work->velocity.x;
-            movement->position.y += work->velocity.y;
-            movement->position.z += work->velocity.z;
+            mapVectorAdd(&movement->position, &movement->position, &work->velocity);
         }
     } else {
         if (g_gameState.map.unk5C)

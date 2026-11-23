@@ -9020,3 +9020,23 @@
 0013f7c4 messageBannerDraw inferred draws the message banner window (w83-f2)
 00581280 g_mapNpcWork inferred the map NPC loader's work (MapNpcWork *) (w83-f2)
 00500924 fsArchiveFileRequireHandle inferred twin of smt4 fsArchiveFileRequireHandle
+00467840 animCurveAdjustFrame inferred twin of smt4 animCurveAdjustFrame
+00467684 animCalcBakedMatrixCurve inferred twin of smt4 animCalcBakedMatrixCurve
+00467164 animCalcCallbackCurve inferred look-alike of smt4 animCalcCallbackCurve (same body, Apocalypse's table)
+003a7644 aocMenuReset inferred twin of smt4 aocMenuReset
+00492adc cameraViewHeadingDegrees inferred look-alike of smt4 cameraViewHeadingDegrees (same VEC3 body)
+0037f080 scrCommBtlHpPercentWithin inferred look-alike of smt4 scrCommBtlHpPercentWithin (same command over Apocalypse's candidate masks)
+00619974 g_voiceDuckSettings inferred size:0x14 the voice ducking parameters passed to asdSoundDuckSetup (VoiceDuckSettings), right after the queue
+003c87b4 messageClosePairedFrameAndIsIdle inferred starts the paired message frame's closing animations on a fresh command frame; returns whether it is idle (w84-s1)
+003e4140 copyDefaultAnimationSteps inferred copies the two default animation steps (engineGetFloatTableValue's built-in table) into a caller's table (w84-s1)
+00536bcc g_defaultAnimationSteps inferred the built-in float table engineGetFloatTableValue falls back to (w84-s1)
+00318e08 slideInterpolateAndSnap inferred interpolates a slide for the frame and snaps to the endpoint once reached (w84-s1)
+003a35a4 naviRequestSavedDestination inferred reads saved navigation slot 0 and requests that destination (w84-s1)
+004d5290 btlDebugOpenCameraControlMenu inferred opens the battle debug "Camera Ctrl" editor list (title string at 0x52809c) (w84-s2)
+0052809c g_btlCameraControlTitle inferred the "Camera Ctrl" title of the battle camera debug editor (w84-s2)
+0041dcc0 savedUnitEditorPollLoad inferred polls the selected slot's load and runs the saved-unit editor's completion script (w84-s2)
+004a8750 compendiumComputeSummonCost inferred the compendium's summon cost from stats, affinities and skills (data table 0x22 weights, cost rate, difficulty, discounts) (w84-f1)
+00318e84 campCecEditItemState inferred StreetPass edit screen's mode handler 1 (handlers[1] in campCecEditCreate) (w84-f2)
+003c2690 btlPartyDisplayDrawGauge inferred draws the party display's eight-segment gauge (w84-f2)
+002b67a0 mapEnemyPlaceFromRows inferred places the visible enemies from the map's placement rows (w84-f2)
+004ea634 btlAiCureSkillHasTarget inferred AI test for whether a cure-category skill has a target (w84-f2)

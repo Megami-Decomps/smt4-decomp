@@ -5,7 +5,7 @@ extern "C" {
 
 void FUN_0050594c(SkeletonObj *skeleton, Mtx44Data *out, SkeletonTrack *track, f32 *node, s32 flags, f32 frame);
 void FUN_00505f04(SkeletonObj *skeleton, Mtx44Data *out, SkeletonTrack *track, f32 *node, s32 flags, f32 frame);
-void FUN_00467684(Mtx44Data *out, void *data, f32 frame);
+void animCalcBakedMatrixCurve(Mtx44Data *out, void *data, f32 frame);
 void FUN_0044baf4(Mtx44Data *out, f32 *rotation, f32 *scale);
 void FUN_0044b864(SkeletonObj *skeleton, Mtx44Data *out);
 
@@ -39,7 +39,7 @@ Mtx44Data *FUN_005057bc(SkeletonObj *skeleton, Mtx44Data *out, s32 bone, s32 fla
             FUN_00505f04(skeleton, out, track, node, flags, skeleton->frame);
             break;
         case 9:
-            FUN_00467684(out, skeletonRelPtrGet(&track->data), skeleton->frame);
+            animCalcBakedMatrixCurve(out, skeletonRelPtrGet(&track->data), skeleton->frame);
             break;
         }
     } else {

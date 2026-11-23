@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc combines the view-size stores into an stm and schedules memFill8's value argument earlier than retail. */
+/* NON_MATCHING: armcc schedules memFill8's value argument between the two adds of its address; retail sets it after. */
 #include "gamedata/MapSaveBlock.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
@@ -50,8 +50,8 @@ struct NaviMainWork {
     /* 0x00a88 */ NaviSprite spriteB;
     /* 0x00b14 */ u8 unk00b14[0x68];
     /* 0x00b7c */ u32 unkB7C;
-    /* 0x00b80 */ u32 unkB80;
-    /* 0x00b84 */ u32 unkB84;
+    /* 0x00b80 */ u32 scrollX;  /* the map's scroll origin (naviMapDraw), centred on the 320x240 screen */
+    /* 0x00b84 */ u32 scrollY;
     /* 0x00b88 */ NaviPair pairsA[32];
     /* 0x00c88 */ NaviPair pairsB[32];
     /* 0x00d88 */ u8 unk00d88[0x4d00];
@@ -132,8 +132,8 @@ void NaviMain_InitInstance(NaviMainWork *work)
         uiSpriteSetKeyframe(&work->sprites[i], 4, 0);
     }
     uiInitializeEightTimerSet(work->timers);
-    work->unkB84 = 0x78;
-    work->unkB80 = 0xa0;
+    work->scrollX = 160;
+    work->scrollY = 120;
     work->unkB7C = 0;
     if (mapBlock->layout == 0) {
         mapBlock->layout = 0xc;

@@ -22,7 +22,7 @@ int FUN_0048d67c(...);
 int FUN_0048d98c(...);
 int FUN_004900e0(...);
 int FUN_004915f0(int);
-float FUN_00492adc(int);
+float cameraViewHeadingDegrees(int);
 float FUN_00492b98(void);
 int lmapSceneGetObj(...);
 int NaviMain_GetCurrentMap(...);
@@ -296,7 +296,7 @@ LAB_004866c8:
       temp_v4 = (int)((temp_v11 + *pfVar5 * temp_v14) - (temp_v8 - temp_v15));
       *piVar10 = temp_v4;
       *piVar11 = (int)((temp_v12 + temp_v7 * temp_v14) - (temp_v10 - temp_v16));
-      FUN_00492adc(temp_v3);
+      cameraViewHeadingDegrees(temp_v3);
       *(int *)(param_1 + 0x20518) = temp_v4;
       temp_v15 = (float)VectorSignedToFloat(*piVar10,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v14 = (float)VectorSignedToFloat(*piVar11,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -314,7 +314,7 @@ LAB_004866c8:
       *(float *)(param_1 + 0x20524) = temp_v8;
       FUN_00492b98();
       *(float *)(param_1 + 0x20514) = temp_v17;
-      FUN_00492adc(temp_v3);
+      cameraViewHeadingDegrees(temp_v3);
       *(float *)(param_1 + 0x20518) = temp_v17;
       if (DAT_005f1c73 != '\0') {
         FUN_00492b98();
@@ -340,7 +340,7 @@ LAB_004866c8:
       FUN_0049368c(param_1 + 0x4d0,temp_v4 + 0xbb9,(int)temp_v15,(int)temp_v14,0xb,1);
     }
     renderCtxPopState(g_renderCtx,3);
-    FUN_00492adc(temp_v3);
+    cameraViewHeadingDegrees(temp_v3);
   }
   titleScissorApplyOrClearRequests(param_1,0);
   DAT_00587f20 = 0xf1;

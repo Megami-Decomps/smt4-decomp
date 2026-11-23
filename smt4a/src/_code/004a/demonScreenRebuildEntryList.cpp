@@ -70,7 +70,7 @@ SlotTable *gameGetSlotTable(void);
 NkmBaseRecordA *dataTable0ProbeEntryById(u16 index);
 s32 FUN_0032fbd0(DemonSlotData *slot);
 s32 compendiumEntryIsRegistered(u16 id);
-u32 FUN_004a8750(u16 id, u8 category, s32 flag, s32 full, s32 extra);
+u32 compendiumComputeSummonCost(u16 id, u8 category, s32 flag, s32 full, s32 extra);
 void inventoryListAppend(EntryList *list, const CampUnitComparison *entry);
 void entryCollectionSortByMode(EntryList *list, s32 mode);
 void listScrollerInitialize(void *layout, s32 columns, s32 count, s32 a, s32 b, s32 c);
@@ -100,7 +100,7 @@ void demonScreenRebuildEntryList(EntryScreen *screen)
                     CampUnitComparison entry;
 
                     campFillUnitComparison(&entry, record->id, 1);
-                    *(u32 *)((u8 *)&entry + 8) = FUN_004a8750(record->id, screen->category, 0, screen->percent >= 100, 0);
+                    *(u32 *)((u8 *)&entry + 8) = compendiumComputeSummonCost(record->id, screen->category, 0, screen->percent >= 100, 0);
                     inventoryListAppend(&screen->list, &entry);
                 }
             }
@@ -139,7 +139,7 @@ void demonScreenRebuildEntryList(EntryScreen *screen)
                     CampUnitComparison entry;
 
                     campFillUnitComparison(&entry, record->id, 0);
-                    *(u32 *)((u8 *)&entry + 8) = FUN_004a8750(record->id, screen->category, 0, screen->percent >= 100, 0);
+                    *(u32 *)((u8 *)&entry + 8) = compendiumComputeSummonCost(record->id, screen->category, 0, screen->percent >= 100, 0);
                     inventoryListAppend(&screen->list, &entry);
                 }
             }

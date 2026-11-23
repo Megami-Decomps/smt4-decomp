@@ -3,9 +3,9 @@
 extern "C" {
 
 /* Compares record keys for sorting. */
-s32 compareRecordKey(const RecordSortEntry *left, const RecordSortEntry *right)
+s32 compareRecordKey(const void *left, const void *right)
 {
-    return left->key - right->key;
+    return ((const RecordSortEntry *)left)->key - ((const RecordSortEntry *)right)->key;
 }
 
 } /* extern "C" */

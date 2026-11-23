@@ -8,7 +8,7 @@ int qsort(unsigned short [18], int, int, unsigned char *);
 int lcgRandomRange(...);
 int skillDataFindById(void);
 int btlActionClassifyTargetSide(int *, unsigned int, int, unsigned int *, int *);
-int FUN_004ea634(int *, int, unsigned int);
+int btlAiCureSkillHasTarget(int *, int, unsigned int);
 
 /* stack frame of param_2: 23 slot(s), 88 byte(s) */
 typedef struct {
@@ -47,7 +47,7 @@ extern unsigned int DAT_0057117c; /* 0x57117c */
 /* Supplied declaration required: lcgRandomRange. */
 /* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: btlActionClassifyTargetSide. */
-/* Supplied declaration required: FUN_004ea634. */
+/* Supplied declaration required: btlAiCureSkillHasTarget. */
 
 
 unsigned int FUN_004e8b54(int *param_1,int param_2)
@@ -113,7 +113,7 @@ unsigned int FUN_004e8b54(int *param_1,int param_2)
        ((*(unsigned int *)(temp_v1 + 0x28) & 0x1ff) >> 5 != 4)) {
       if (*(char *)(temp_v1 + 0x23) != '\x03') {
         if ((*(char *)(temp_v1 + 0x23) == '\x04') &&
-           (FUN_004ea634(temp_v19,temp_v20,temp_v1), piVar3 != (int *)0x0)) {
+           (btlAiCureSkillHasTarget(temp_v19,temp_v20,temp_v1), piVar3 != (int *)0x0)) {
           temp_v9[temp_v10 + 8] = *(unsigned short *)(temp_v11 + 0x20);
           temp_v10 = (temp_v10 + 1) & 0xffff;
         }

@@ -4,14 +4,14 @@
 #include "gfx/ScalarAnimationNode.h"
 
 extern "C" {
-f32 thresholdDispatchOutsideRange(const ScalarAnimationNode *node, f32 frame);
+f32 animCurveAdjustFrame(const ScalarAnimationNode *node, f32 frame);
 typedef f32 (*ScalarAnimationEvaluator)(const void *keys, f32 frame);
 extern ScalarAnimationEvaluator DAT_00471bc0[8][8];
 
 // Evaluate additive, constant, or sectioned scalar animation at the adjusted frame.
 f32 FUN_002355fc(ScalarAnimationNode *node, f32 frame)
 {
-    frame = thresholdDispatchOutsideRange(node, frame);
+    frame = animCurveAdjustFrame(node, frame);
     u32 flags = node->flags;
     if (flags & 1) {
         ScalarAnimationNode *first = node->first.get();

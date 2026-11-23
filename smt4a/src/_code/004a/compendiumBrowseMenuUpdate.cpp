@@ -57,7 +57,7 @@ s32 gameGetMode(void);
 s32 statusDownGetFlag(void);
 s32 FUN_0035db94(void);
 void uiSpriteBankApplyPreset(void *sprites, s32 preset);
-s32 FUN_004a8750(u16 id, u8 page, s32 arg, s32 highPercent, s32 extra);
+s32 compendiumComputeSummonCost(u16 id, u8 page, s32 arg, s32 highPercent, s32 extra);
 void messageBannerInitCounter(s32 a, s32 b);
 s32 compendiumEntryIsRegistered(u16 id);
 void panelSetTarget(s32 target, s32 arg);
@@ -98,7 +98,7 @@ void compendiumBrowseMenuUpdate(StatusMenu *menu)
             return;
         }
         s16 id = menu->entries[flaggedValueHolderGetTotal((const FlaggedValueHolder *)menu->list)].getId();
-        s32 price = FUN_004a8750((u16)id, (u8)menu->tabPage, 0, menu->compendiumPercent >= 100, 0);
+        s32 price = compendiumComputeSummonCost((u16)id, (u8)menu->tabPage, 0, menu->compendiumPercent >= 100, 0);
         messageBannerInitCounter(1, 0);
         if (compendiumEntryIsRegistered((u16)id) != 0) {
             panelSetTarget(-price, 0);

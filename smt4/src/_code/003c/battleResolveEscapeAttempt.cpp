@@ -1,4 +1,4 @@
-/* NON_MATCHING: the saturating attempt count now matches; retail places the failed-escape arm after the epilogue and branches back to the shared FUN_00229a3c call, and pools g_btlAux in another slot. */
+/* NON_MATCHING: the saturating attempt count and the battleMask updates now match; retail places the failed-escape arm after the epilogue and branches back to the shared FUN_00229a3c call, and pools g_btlAux in another slot. */
 #include "battle/btlMain.h"
 #include "util/Random.h"
 #include "battle/btlEvent.h"
@@ -52,7 +52,7 @@ void battleResolveEscapeAttempt(BattleRetreatOwner *owner, BattleRetreatAction *
     action->result = 0;
     BtlMainState *script = owner->script;
     BattleRetreatScriptFields *fields = reinterpret_cast<BattleRetreatScriptFields *>(script);
-    if (!(script->battleFlags & 0x40000) && (fields->initialFlags & 0x40000)) {
+    if (!(script->battleMask & 0x40000) && (fields->initialFlags & 0x40000)) {
         FUN_00229a3c(0, reinterpret_cast<u32>(action), 0, 5, 0);
         return;
     }
@@ -77,7 +77,7 @@ void battleResolveEscapeAttempt(BattleRetreatOwner *owner, BattleRetreatAction *
     fields = reinterpret_cast<BattleRetreatScriptFields *>(script);
     if (fields->formation == 3)
         success = true;
-    if (script->battleFlags & 0x40000)
+    if (script->battleMask & 0x40000)
         success = true;
     if (fields->result == 4 || success) {
         gameCounterAddSaturating(4, 1);
@@ -91,7 +91,7 @@ void battleResolveEscapeAttempt(BattleRetreatOwner *owner, BattleRetreatAction *
     } else {
         gameCounterAddSaturating(5, 1);
         reinterpret_cast<BattleRetreatScriptFields *>(owner->script)->result = 0;
-        owner->script->battleFlags |= 0x2000;
+        owner->script->battleMask |= 0x2000;
     }
     FUN_00229a3c(0, reinterpret_cast<u32>(action), 0, 1, 0);
 }

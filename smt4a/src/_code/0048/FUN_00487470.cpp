@@ -14,7 +14,7 @@ int naviPanelDrawMap(...);
 int titleScissorApplyOrClearRequests(...);
 int FUN_00490a10(...);
 int FUN_0049177c(...);
-float FUN_00492adc(int);
+float cameraViewHeadingDegrees(int);
 float FUN_00492b98(void);
 int naviGetActiveStateValue(...);
 int naviMainSelectPair(int);
@@ -434,14 +434,14 @@ LAB_00487744:
   temp_v5 = NaviMain_GetCurrentMap(temp_v37);
   if (temp_v2 == temp_v5) {
     if (temp_v38 == 0) {
-      temp_v2 = mathHeadingToDirectionCode(temp_v42,FUN_00492adc(temp_v37));
+      temp_v2 = mathHeadingToDirectionCode(temp_v42,cameraViewHeadingDegrees(temp_v37));
       temp_v14 = (int)temp_v29;
       temp_v5 = (int)temp_v28;
       FUN_0049368c(temp_v42 + 0x4d0,temp_v2 + 0xbc1,temp_v5,temp_v14,0xb,1);
       temp_v2 = mathHeadingToDirectionCode(temp_v42,FUN_00492b98());
       FUN_0049368c(temp_v42 + 0x4d0,temp_v2 + 0xbb9,temp_v5,temp_v14,0xb,1);
     }
-    FUN_00492adc(temp_v37);
+    cameraViewHeadingDegrees(temp_v37);
   }
   titleScissorApplyOrClearRequests(temp_v42,0);
   DAT_00587f20 = 0xf1;

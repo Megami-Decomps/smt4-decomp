@@ -1,13 +1,9 @@
 #include "classes/Obj532300.h"
+#include "util/BitsAndBytes.h"
 
 extern "C" {
 void naviRefreshBackgroundAndFeedback(Obj532300 *panel);
 u8 buttonHelpIsNotActive(void);
-}
-
-static __inline void flagsClearBits(u32 *flags, u32 bits)
-{
-    *flags &= ~bits;
 }
 
 // Task state machine: open the help (0), wait until it has closed (1), then clear the display flag and finish (2).

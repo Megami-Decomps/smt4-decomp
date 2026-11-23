@@ -9,7 +9,6 @@ extern "C" {
 extern void *g_handleRegistry;
 extern s8 g_saveLoadUIBase;
 void statusCameraRestore(s32 enabled);
-void FUN_0041dcc0(SavedUnitSelection *editor);
 s32 byte1IsZero();
 void FUN_0023b45c(s32 enabled);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
@@ -36,7 +35,7 @@ void savedUnitEditorApplyOrClose(SavedUnitSelection *editor)
         statusCameraRestore(1);
         editor->changed = 1;
     }
-    FUN_0041dcc0(editor);
+    savedUnitEditorPollLoad(editor);
     if (g_saveLoadUIBase == 0 || editor->active) {
         if (!editor->editor.canApply || editor->active || !byte1IsZero())
             return;

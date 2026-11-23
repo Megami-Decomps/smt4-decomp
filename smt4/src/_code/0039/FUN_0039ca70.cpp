@@ -1,4 +1,5 @@
 #include "map/mapDepart.h"
+#include "util/BitsAndBytes.h"
 #include "bible/bibleAnalyze.h"
 #include "game/GameState.h"
 
@@ -12,12 +13,6 @@ struct Unk39ca70Phase {
     /* 0x0C */ u32 unk0C;
     /* 0x10 */ u32 flags;
 };
-
-/* Same helper as the Apocalypse twin (Obj532300::FUN_0048d1c8). */
-static __inline void flagsClearBits(u32 *flags, u32 bits)
-{
-    *flags &= ~bits;
-}
 
 extern "C" {
 

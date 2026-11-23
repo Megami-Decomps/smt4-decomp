@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/BitsAndBytes.h"
 #include "battle/BtlGlobals.h"
 
 extern "C" {
@@ -14,11 +15,6 @@ typedef struct Owner {
 
 extern void FUN_001ab998(void);
 
-
-static __inline void flagsClearBits(u32 *flags, u32 bits)
-{
-    *flags &= ~bits;
-}
 
 /* Releases the owner's handle, resets its state to 12, clears its flag 2 and the battle flag 0x4000000. */
 void btlEffectNumberedRelease(Owner *owner)

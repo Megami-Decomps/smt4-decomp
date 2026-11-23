@@ -1,39 +1,38 @@
-/* NON_MATCHING: body matches retail; only the prologue schedule differs (retail materialises the candidate-array base `mov r5, sp` after the first test, ours hoists it). */
-#include "common.h"
+/* NON_MATCHING: only the prologue schedule differs: retail materialises the candidate array's base (`mov r5, sp`)
+ * after the first test, the build before it. Writing the first test alone as `candidates[0] = 0; count = 1;` is
+ * IDENTICAL, but that spells one of eight identical statements differently for the schedule (review w84: steering). */
+#include "battle/BtlEntryA.h"
 #include "util/Random.h"
 
-struct BattleResistances {
-    /* 0x000 */ u8 unk000[0x2b6];
-    /* 0x2b6 */ u16 elements[8];
-};
+enum { RESISTANCE_WEAK = 2 };
 
 extern "C" {
 
-// Downgrade one randomly selected elemental resistance that is not already a weakness.
-s32 btlDowngradeRandomResistance(BattleResistances *resistances)
+/* Downgrades one randomly selected elemental resistance that is not already a weakness. */
+s32 btlDowngradeRandomResistance(BtlCombatantEntryA *entry)
 {
     s32 candidates[10];
     u32 count = 0;
-    if ((resistances->elements[0] >> 10) != 2)
+    if ((entry->data.values[0] >> 10) != RESISTANCE_WEAK)
         candidates[count++] = 0;
-    if ((resistances->elements[1] >> 10) != 2)
+    if ((entry->data.values[1] >> 10) != RESISTANCE_WEAK)
         candidates[count++] = 1;
-    if ((resistances->elements[2] >> 10) != 2)
+    if ((entry->data.values[2] >> 10) != RESISTANCE_WEAK)
         candidates[count++] = 2;
-    if ((resistances->elements[3] >> 10) != 2)
+    if ((entry->data.values[3] >> 10) != RESISTANCE_WEAK)
         candidates[count++] = 3;
-    if ((resistances->elements[4] >> 10) != 2)
+    if ((entry->data.values[4] >> 10) != RESISTANCE_WEAK)
         candidates[count++] = 4;
-    if ((resistances->elements[5] >> 10) != 2)
+    if ((entry->data.values[5] >> 10) != RESISTANCE_WEAK)
         candidates[count++] = 5;
-    if ((resistances->elements[6] >> 10) != 2)
+    if ((entry->data.values[6] >> 10) != RESISTANCE_WEAK)
         candidates[count++] = 6;
-    if ((resistances->elements[7] >> 10) != 2)
+    if ((entry->data.values[7] >> 10) != RESISTANCE_WEAK)
         candidates[count++] = 7;
     if (count == 0)
         return -1;
-    s32 selected = candidates[lcgRandomRange(static_cast<u16>(count - 1))];
-    u16 *resistance = &resistances->elements[selected];
+    s32 selected = candidates[lcgRandomRange((u16)(count - 1))];
+    u16 *resistance = &entry->data.values[selected];
     u32 value = *resistance;
     switch (value >> 10) {
     case 3:
@@ -52,4 +51,4 @@ s32 btlDowngradeRandomResistance(BattleResistances *resistances)
     }
     return selected;
 }
-}
+} /* extern "C" */

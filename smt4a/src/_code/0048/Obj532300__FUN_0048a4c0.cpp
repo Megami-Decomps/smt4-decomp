@@ -1,4 +1,5 @@
 #include "map/NavigationInterpolation.h"
+#include "util/BitsAndBytes.h"
 #include "ui/UiSpriteApi.h"
 
 /* The navigation panel's work block (see NavigationFadeWork for the shared prefix). */
@@ -28,7 +29,7 @@ void _ZN9Obj53230012FUN_0048a4c0Ev(NavigationIntroWork *work)
     switch (work->interpolation.progress.substep) {
     case 0: {
         work->interpolation.unk02C[0x32] = 0;
-        work->interpolation.flags |= 0x1008;
+        flagsSetBits(&work->interpolation.flags, 0x1008);
         lmapSceneGetObj(work->scene);
         NavigationPoint point = *sub68OwnerGetBlock60(work->scene);
         point.x = 0.0f;

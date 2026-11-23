@@ -1,5 +1,5 @@
-/* NON_MATCHING: register scheduling only in the step-0 block: retail reloads the constant 0 into r1 for the first FUN_00233240 call and ors the flags in r0, the build reuses the zero from the preceding strb */
 #include "common.h"
+#include "util/BitsAndBytes.h"
 
 extern "C" {
 
@@ -28,7 +28,7 @@ void screenStep(Screen0039bc28 *screen)
 
     if (screen->step == 0) {
         screen->unk05b = 0;
-        screen->flags |= 0x1008;
+        flagsSetBits(&screen->flags, 0x1008);
         FUN_00233240(screen->panel, 0);
         FUN_00233240(screen->panel, 1);
         uiSpriteSetImageKeyframe(screen->sprite, 1, 0);

@@ -59,7 +59,12 @@ typedef struct LmapMainState {
     /* 0x4C */ u16 unk4C;
     /* 0x4E */ u16 unk4E;
     /* 0x50 */ f32 angle;
-    /* 0x54 */ u8 unk54[0x40];
+    /* 0x54 */ MapVector cameraUp;
+    /* 0x60 */ MapVector cameraFrom;    /* where the follow camera wants its eye: behind the focus (lmapMainUpdateFollowCamera) */
+    /* 0x6C */ MapVector cameraFocus;   /* the point it follows: above the player's position */
+    /* 0x78 */ MapVector cameraEye;     /* the eye and target applied, eased toward the two above */
+    /* 0x84 */ MapVector cameraTarget;
+    /* 0x90 */ f32 cameraFocusLift;     /* added to the focus height while the map is stepped externally */
     /* 0x94 */ u8 angleReset;
     /* 0x95 */ u8 unk95[0x2F];
     /* 0xC4 */ f32 unkC4;

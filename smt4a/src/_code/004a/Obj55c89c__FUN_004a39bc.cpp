@@ -19,7 +19,7 @@ typedef char BibleSummonConfirmationOffsets[
 
 extern "C" {
 s32 scrRunOpcodesStub(u32 script);
-u32 FUN_004a8750(u16 id, u8 mode, u32 option, u32 highRank, u32 flags);
+u32 compendiumComputeSummonCost(u16 id, u8 mode, u32 option, u32 highRank, u32 flags);
 void panelSetMode3(u32 value, s32 option);
 void objBInitBlocks274300(void);
 void messageMainSetTargetFlags(u32 flags);
@@ -56,7 +56,7 @@ void Obj55c89c::FUN_004a39bc()
         s32 index = flaggedValueHolderGetTotal(&screen->selection.holder);
         u16 raw = entries[index].id;
         s16 id = raw;
-        panelSetMode3(-FUN_004a8750(id, details->mode, 0, details->rank >= 100, 0), 0);
+        panelSetMode3(-compendiumComputeSummonCost(id, details->mode, 0, details->rank >= 100, 0), 0);
         gameGlobalsSetMenuOpenFlag(1);
         screen->state = 4;
         screen->unk18 = 0;

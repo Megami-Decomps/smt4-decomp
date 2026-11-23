@@ -9,7 +9,7 @@
 
 extern "C" {
 s32 rangeGetMinimumLimit(void *list);
-u32 FUN_004a8750(u32 id, u32 kind, bool flag, bool high, u32 extra);
+u32 compendiumComputeSummonCost(u32 id, u32 kind, bool flag, bool high, u32 extra);
 extern s32 g_animatedPageSelection[];
 extern u32 g_entryWindowNumberFirst[20];
 extern s32 g_entryWindowCaptionX[10];
@@ -90,10 +90,10 @@ extern "C" void FUN_004a3e04(StatMenu *menu)
         TextureTableEntryIV *offset = layoutFindTableEntry(menu->sprites, i + 0x42F);
         s16 x = offset->x;
         s16 y = offset->y;
-        u32 shown = FUN_004a8750((u16)id, menu->kind, flag, menu->level >= 100, 0);
+        u32 shown = compendiumComputeSummonCost((u16)id, menu->kind, flag, menu->level >= 100, 0);
         u32 shownColor = 0xFFFFFFFF;
         if (menu->mode == 1) {
-            u32 other = FUN_004a8750((u16)id, 0, flag, menu->level >= 100, 0);
+            u32 other = compendiumComputeSummonCost((u16)id, 0, flag, menu->level >= 100, 0);
             if (shown < other)
                 shownColor = 0xDC0F14FF;
             if (shown > other)

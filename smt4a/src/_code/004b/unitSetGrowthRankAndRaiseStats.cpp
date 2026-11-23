@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the temporaries used for the five stat updates differ (retail ip/lr/r2/r3/r4, ours r2/r3/lr/ip/r4). */
 #include "common.h"
 
 /* A unit record: five base stats at 4 and the growth rank at 0x12B. */
@@ -13,19 +12,24 @@ extern "C" {
 
 void unitRecomputeDerivedStats(GrowthRecord *record);
 
-/* Sets the growth rank (1-3; other values give 0) and raises the five base stats by it, then recalculates. */
-void unitSetGrowthRankAndRaiseStats(GrowthRecord *record, s32 rankArg)
+/* Sets the growth rank (1-3; other values give 0) and raises the five base stats by it, then recalculates.
+ * The script caller passes a word; the rank is switched on at the width of the byte it is stored into (reading the stored field back
+ * gives the same values but not retail's code, 22 lines). The IV twin FUN_003bc8f8 is written the same way. */
+void unitSetGrowthRankAndRaiseStats(GrowthRecord *record, u32 rank)
 {
     u32 bonus = 0;
-    u8 rank = rankArg;
 
     record->growthRank = rank;
-    if (rank == 1) {
+    switch ((u8)rank) {
+    case 1:
         bonus = 1;
-    } else if (rank == 2) {
+        break;
+    case 2:
         bonus = 2;
-    } else if (rank == 3) {
+        break;
+    case 3:
         bonus = 3;
+        break;
     }
     record->stats[0] += bonus;
     record->stats[1] += bonus;

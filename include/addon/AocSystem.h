@@ -16,6 +16,7 @@ struct NkmEnemyRecord;
 struct AocLookupRecord;
 struct AocTableSearchRecord;
 struct QuestRecord;
+struct PassiveSkillRecord;
 
 /* One entry of the content table: an id and 0x50 bytes of data. */
 typedef struct AocEntry {
@@ -84,6 +85,7 @@ void aocReleasePackageOwner(AocSystem *system);
 u32 aocContentLookupSucceeds(AocSystem *system, u32 id);
 AocPackageDirectoryEntry *packageFindRecordByName(AocSystem *system, s32 kind, u32 key);
 AocPackageFile *packageFindFileRefByName(AocSystem *system, s32 kind, u32 key);
+PassiveSkillRecord *recordTableFindById(AocSystem *system, u32 id);
 }
 
 #endif

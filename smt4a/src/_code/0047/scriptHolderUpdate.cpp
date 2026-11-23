@@ -1,13 +1,14 @@
-/* NON_MATCHING: process setter call recovered; switch cases merge state stores into different tails. */
+/* NON_MATCHING: the load and start cases merge their phase stores into a different switch tail than retail. */
 #include "shard/Shard0047.h"
 #include "script/scrScriptProcess.h"
 #include "code/Code0041_Smt4a.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+
 extern "C" {
 void sysPlaySe(u32 sound);
 void asdLoadFileAsyncSimple(const char *path, void **buffer, s32 flags);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
-s32 partyEntryFlagsBit1();
 void optionsClearFlag1();
 u32 FUN_003a36b4(void);
 s32 gameBlockByte27E98Is1To3();
@@ -40,7 +41,7 @@ u32 scriptHolderUpdate(ScriptHolder *holder)
             return 0;
         }
         u32 owner = rosterGetLeaderId();
-        if (partyEntryFlagsBit1()) {
+        if (partyEntryFlagsBit1(owner)) {
             FUN_00418070(owner, 0);
         }
         optionsClearFlag1();

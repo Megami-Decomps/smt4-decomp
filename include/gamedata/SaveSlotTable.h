@@ -24,4 +24,24 @@ PartySlotA *FUN_00187068(u32 rank);
 }
 #endif
 
+/* The party's unit record of devil `id`, or NULL when that devil is not in the party. */
+static __inline SlotRecordA *saveSlotTableFindPartyUnit(u32 id)
+{
+    SaveSlotTableA *table = gameGetSlotTable();
+    u16 i;
+
+    for (i = 0; i < table->count; i++) {
+        s32 entry = table->party[i];
+
+        if (entry >= 0) {
+            SlotRecordA *unit = &table->entries[entry];
+
+            if (unit->id == id) {
+                return unit;
+            }
+        }
+    }
+    return NULL;
+}
+
 #endif

@@ -1,4 +1,4 @@
-/* NON_MATCHING: two scheduling differences only (the 0x1BE clear's address is computed after the unk116 store instead of before it, and one skill-slot bitfield update loads its old halfword after instead of before the shift); a `u8 *firstClearGroup = unit->clear1BE;` temporary hoisted above the stores reproduces both, but it is steering. */
+/* NON_MATCHING: one scheduling difference: the 0x1BE clear's address is computed after the unk116 store instead of before it (a `u8 *firstClearGroup = unit->clear1BE;` temporary hoisted above the stores reproduces it, but it is steering). */
 #include "battle/BattleUnitInit.h"
 #include "gamedata/NkmBaseRecordA.h"
 
@@ -64,12 +64,16 @@ void btlInitializeDemonUnitState(u32 unused, BattleUnitState *unit, UnitSourceRe
         unit->learnableCategory[i] = unit->learnable[i].category;
     }
     unit->unk1BB = model->battleRace;
-    if (model->category == 1) {
+    switch (model->category) {
+    case 1:
         unit->unk1BC = 1;
-    } else if (model->category == 4) {
+        break;
+    case 4:
         unit->unk1BC = 0;
-    } else if (model->category == 5) {
+        break;
+    case 5:
         unit->unk1BC = 2;
+        break;
     }
     unit->affinities = record->affinities;
     sysMemClear(unit->flagsA, 0x15);

@@ -104,7 +104,8 @@ public:
     /* 0x020C */ u8 unk020C[4];
     /* 0x0210 */ RequestParameters request; /* the request the menu is waiting on */
     /* 0x0224 */ RequestParameters secondRequest;
-    /* 0x0238 */ u8 unk0238[8];
+    /* 0x0238 */ u32 unk0238;
+    /* 0x023C */ u8 unk023C[4];
     /* 0x0240 */ SelectionFlags selection;
     /* 0x024F */ u8 unk024F[0x65];
     union {
@@ -167,6 +168,10 @@ extern "C" {
  * FUN_0047bc90). */
 void FUN_00234124(AocMenu *menu, const RequestParameters *request);
 void FUN_0047bc90(AocMenu *menu, const RequestParameters *request);
+/* Resets a newly constructed menu: step 0 without a window, the flags cleared (IV aocMenuReset, Apocalypse
+ * aocMenuReset). */
+void aocMenuReset(AocMenu *menu);
+void aocMenuReset(AocMenu *menu);
 }
 
 typedef char AocMenuSizeCheck[sizeof(AocMenu) == 0x26F0 ? 1 : -1];

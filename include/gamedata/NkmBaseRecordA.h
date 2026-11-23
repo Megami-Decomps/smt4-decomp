@@ -87,7 +87,8 @@ struct NkmBaseRecordA {
         /* 0x70 */ DevilAffinityA affinities[16];
         /* 0x70 */ u16 affinityWords[16];
     };
-    /* 0x90 */ u8 unk90[0xC];
+    /* 0x90 */ u8 unk90[0xA];
+    /* 0x9A */ u16 summonCostRate;     /* tenths applied to the compendium's summon cost (compendiumComputeSummonCost) */
     /* 0x9C */ u16 model;              /* model, bust-up and texture id */
     /* 0x9E */ u8 lineKey;             /* key of the demon's records in its line table */
     /* 0x9F */ u8 unk9F;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: battle debug list box item-changed handler (copies the edited item into the matching debug setting); the list box is read per case and case 1 calls workSetScalarParameter as retail does; retail loads the destination address before the item value in the direct-store cases and orders the arm blocks without the shared store tail. */
 #include "common.h"
+#include "util/BitsAndBytes.h"
 #include "battle/btlHelp.h"
 #include "battle/BtlGlobals.h"
 
@@ -49,16 +50,6 @@ extern u32 DAT_0049355c;
 u32 *asdListBoxGetItemText(u32 box);
 void workSetScalarParameter(BtlCamera *work, f32 value);
 s32 listBoxItemHasOwner(u32 box);
-
-static __inline void flagsSetBits(u32 *flags, u32 mask)
-{
-    *flags |= mask;
-}
-
-static __inline void flagsClearBits(u32 *flags, u32 mask)
-{
-    *flags &= ~mask;
-}
 
 static __inline void listBoxStoreText(u32 box, u32 *destination)
 {

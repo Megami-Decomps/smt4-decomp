@@ -1,4 +1,4 @@
-/* NON_MATCHING: instructions and layout match retail; only the register assignment differs (retail keeps the banner pointer in r7 and the style in r6, sprite pointers in r8/r9/sl vs mine). */
+/* NON_MATCHING: banner, style and sprite-pointer registers differ, and the last texture ID is pooled separately instead of derived from 0xAC01. */
 #include "ui/UiSpriteApi.h"
 #include "ui/MessageMainA.h"
 #include "script/ScriptArgs.h"
@@ -19,36 +19,36 @@ u8 FUN_003c55e8(void)
         uiSpriteStateInitFromSource(&p->sprites[38], 4, 0xac01, &p->parameters, 0xb, 1.0f);
         uiSpriteStateInitFromSource(&p->sprites[39], 4, 0xac01, &p->parameters, 0xb, 1.0f);
         uiSpriteStateInitFromSource(&p->sprites[40], 4, 0xabfe, &p->parameters, 0xb, 1.0f);
-        p->unk19FC = style;
-        p->unk19FB = 1;
-        p->unk19FA = 1;
+        p->pairedFrameStyle = style;
+        p->pairedFrameEnabled = 1;
+        p->pairedFrameBusy = 1;
         uiSpriteSelectAnim(&p->sprites[37], 0xd);
         uiSpriteSelectAnim(&p->sprites[38], 0xe);
         uiSpriteSelectAnim(&p->sprites[40], 0x11);
-        switch (p->unk19FC) {
+        switch (p->pairedFrameStyle) {
         case 0:
-            p->unk19F9 = 6;
+            p->pairedFrameState = 6;
             break;
         case 1:
             uiSpriteSelectAnim(&p->sprites[35], 0x13);
             uiSpriteSelectAnim(&p->sprites[36], 0x16);
             uiSpriteSelectAnim(&p->sprites[39], 0x19);
-            p->unk19F9 = 1;
+            p->pairedFrameState = 1;
             break;
         case 2:
             uiSpriteSelectAnim(&p->sprites[35], 0x14);
             uiSpriteSelectAnim(&p->sprites[36], 0x17);
             uiSpriteSelectAnim(&p->sprites[39], 0x1a);
-            p->unk19F9 = 1;
+            p->pairedFrameState = 1;
             break;
         default:
             uiSpriteSelectAnim(&p->sprites[35], 0x15);
             uiSpriteSelectAnim(&p->sprites[36], 0x18);
             uiSpriteSelectAnim(&p->sprites[39], 0x1b);
-            p->unk19F9 = 1;
+            p->pairedFrameState = 1;
             break;
         }
     }
-    return panel->unk19FA == 0;
+    return panel->pairedFrameBusy == 0;
 }
 }

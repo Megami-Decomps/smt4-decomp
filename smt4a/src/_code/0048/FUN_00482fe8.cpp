@@ -3,28 +3,9 @@
 #include "classes/Obj55c840.h"
 #include "map/LmapGlobals.h"
 #include "map/ControllerPool.h"
+#include "map/ControllerPlacement.h"
 #include "shard/W5_W5Match7_SceneState.h"
 #include <math.h>
-
-/* One placed controller of the current map: where it stands and the flags that gate it. */
-struct ControllerPlacement {
-    /* 0x00 */ s8 kind;
-    /* 0x01 */ s8 sub;
-    /* 0x02 */ s16 x;
-    /* 0x04 */ s16 y;
-    /* 0x06 */ s16 z;
-    /* 0x08 */ s16 heading;
-    /* 0x0A */ u8 unk0A[6];
-    /* 0x10 */ s16 sourceValue;
-    /* 0x12 */ u16 modelId;
-    /* 0x14 */ s16 requiredFlag;
-    /* 0x16 */ s16 forbiddenFlag;
-    /* 0x18 */ s16 param0;
-    /* 0x1A */ s16 param1;
-    /* 0x1C */ u32 param2;
-    /* 0x20 */ s16 param3;
-    /* 0x22 */ s16 param4;
-};
 
 struct ControllerParams95 {
     /* 0x00 */ u8 unk00[0xAC];

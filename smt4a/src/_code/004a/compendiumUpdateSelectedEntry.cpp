@@ -43,7 +43,7 @@ extern "C" {
 extern AnimatedPageSelection g_animatedPageSelection;
 
 s32 flaggedValueHolderGetTotal(void* holder);
-s32 FUN_004a8750(u32 id, u32 page, s32 arg, s32 flag, s32 more);
+s32 compendiumComputeSummonCost(u32 id, u32 page, s32 arg, s32 flag, s32 more);
 void panelSetTarget(s32 target, s32 arg);
 void messageSetActiveMode(s32 mode);
 s32 inputIsQuestMenuPressed(void);
@@ -87,7 +87,7 @@ void compendiumUpdateSelectedEntry(StatusScreen* screen)
     s32 select = 0;
     s32 cancel = 0;
     s16 id = currentId(screen);
-    s32 price = FUN_004a8750((u16)id, screen->page, 0, (s8)SCREEN_BYTE(screen, 0x94) >= 100, 0);
+    s32 price = compendiumComputeSummonCost((u16)id, screen->page, 0, (s8)SCREEN_BYTE(screen, 0x94) >= 100, 0);
     if (compendiumEntryIsRegistered((u16)id) != 0) {
         panelSetTarget(-price, 0);
     } else {
@@ -106,7 +106,7 @@ void compendiumUpdateSelectedEntry(StatusScreen* screen)
     }
     if (select != 0) {
         id = currentId(screen);
-        entryTableResetAndInit(0x18, FUN_004a8750((u16)id, screen->page, 0, (s8)SCREEN_BYTE(screen, 0x94) >= 100, 0), -1, 0);
+        entryTableResetAndInit(0x18, compendiumComputeSummonCost((u16)id, screen->page, 0, (s8)SCREEN_BYTE(screen, 0x94) >= 100, 0), -1, 0);
         if (demonPurchaseValidate(screen, (u16)id) != 0) {
             char text[128];
             libc_strcpy(text, dataTable01GetRecordWithAocOverride((u16)id));

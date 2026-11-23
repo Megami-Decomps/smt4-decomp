@@ -4,15 +4,16 @@
 #include "common.h"
 
 extern "C" {
-extern const f32 DAT_00536bcc[];
+extern const f32 g_defaultAnimationSteps[];
 f32 engineGetFloatTableValue(const f32 *values, u32 index);
+void copyDefaultAnimationSteps(f32 *values);
 } /* extern "C" */
 
 /* Reads the selected value, using the built-in table if no override was supplied. */
 static __inline f32 engineFloatTableValue(const f32 *values, u32 index)
 {
     if (values == NULL) {
-        values = DAT_00536bcc;
+        values = g_defaultAnimationSteps;
     }
     return values[index];
 }

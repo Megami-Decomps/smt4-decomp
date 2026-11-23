@@ -1,4 +1,4 @@
-/* NON_MATCHING: named current-map comparison fixes loads/registers; cmp operands remain reversed. */
+/* NON_MATCHING: the requested and current maps are compared in the opposite register order. */
 #include "gamedata/NaviDestinationRecord.h"
 #include "mapnavi/NaviMainGlobals.h"
 #include "game/GameStateA.h"
@@ -8,10 +8,9 @@ extern "C" {
 const u8* gameFlagsGetWord1590Ptr(u32);
 const NaviDestinationRecord* dataTableGetEntry49(u8);
 void pair20638Set(NaviTransitionState*, s32, s32, s32);
-void menuEnterState11(NaviTransitionState*);
 void naviSelectRequestedCategory(NaviTransitionState*, s32);
 
-void FUN_003a35a4(void)
+void naviRequestSavedDestination(void)
 {
     const u8* destinationId = gameFlagsGetWord1590Ptr(0);
     if (destinationId == NULL) {
@@ -24,7 +23,7 @@ void FUN_003a35a4(void)
     pair20638Set(&main->transition, destination->unk32, destination->unk34, destination->unk36);
     s32 currentMap = main->currentMap;
     if (currentMap != destination->mapId) {
-        menuEnterState11(&main->transition);
+        menuEnterState11(&main->transition, destination->mapId);
     } else {
         g_gameState.naviMapPending = 1;
         naviSelectRequestedCategory(&main->transition, destination->unk32);

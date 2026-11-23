@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rebuild; retail loads g_aocSystem after setting the key id and replicates the `if (record) return record; return 0` check in every case, so each case body is a few instructions longer than armcc's merged form here. */
 #include "common.h"
 #include "shard/ItemStackLimit.h"
+#include "shard/W5_W5Match5_RecordKeys.h"
 #include "addon/AocSystemA.h"
 #include "gamedata/EquipmentRecordA.h"
 #include "gamedata/ConsumableRecordA.h"
@@ -31,7 +32,7 @@ extern "C" {
 
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 FUN_0019e30c(const void *a, const void *b);
-s32 compareRecordKey(const void *a, const void *b);
+
 s32 FUN_00169230(const void *a, const void *b);
 void *FUN_001a6858(AocSystemA *system, u32 id);
 void *idEntryTableFindById(AocSystemA *system, u32 id);

@@ -6552,7 +6552,7 @@
 00456624 nw_gfx_Material_DestroyResFragmentShader
 00466f98 soundRequestPostType30
 00467040 _ZN9Obj55c3ecC1Ev
-00467840 thresholdDispatchOutsideRange
+00467840 animCurveAdjustFrame
 00477d10 aocMenuSetButtonHelp
 004d8d40 btlStageUpdate
 00501b90 nn_cec_CTR_MessageBox_ReadMessageBoxInfo
@@ -7610,7 +7610,7 @@
 003df57c skillGetCostWithRankReduction
 003dfd08 saveDataAdjustCounterB
 003dfdf0 saveDataAdjustCounterA
-003e4140 copyDefaultWordsPair
+003e4140 copyDefaultAnimationSteps
 003e41f8 gameDataArea28350SetBit
 003e44ec gameDataArea28350TestBit
 003e48dc partySlotClearInactiveFlag
@@ -8271,3 +8271,18 @@
 003b564c dataTable42GetCombinedCount
 0013f7c4 messageBannerDraw
 00500924 fsArchiveFileRequireHandle
+00467684 animCalcBakedMatrixCurve
+00467164 animCalcCallbackCurve
+003a7644 aocMenuReset
+00492adc cameraViewHeadingDegrees
+0037f080 scrCommBtlHpPercentWithin
+003c87b4 messageClosePairedFrameAndIsIdle
+00318e08 slideInterpolateAndSnap
+003a35a4 naviRequestSavedDestination
+004d5290 btlDebugOpenCameraControlMenu
+0041dcc0 savedUnitEditorPollLoad
+004a8750 compendiumComputeSummonCost
+00318e84 campCecEditItemState
+003c2690 btlPartyDisplayDrawGauge
+002b67a0 mapEnemyPlaceFromRows
+004ea634 btlAiCureSkillHasTarget

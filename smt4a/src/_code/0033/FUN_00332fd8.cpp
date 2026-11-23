@@ -1,4 +1,4 @@
-/* NON_MATCHING: 62 lines off; sceneRegisterBoxEffect now takes its definition's 19 integer and 7 float arguments. Retail copies the zero (y) into s19 early and reuses s16 for z, loads 90.0f before the predicated move; the build keeps the zero in s16 and z in s19. */
+/* NON_MATCHING: 56 lines off; sceneRegisterBoxEffect now takes its definition's 19 integer and 7 float arguments. Retail copies the zero (y) into s19 early and reuses s16 for z, loads 90.0f before the predicated move; the build keeps the zero in s16 and z in s19. */
 #include "common.h"
 #include "util/MathFunctions.h"
 #include "gamedata/DataTable4CValue.h"
@@ -44,9 +44,8 @@ void FUN_00332fd8(void)
     }
     f32 x = static_cast<f32>(grid->displayX * 700 + 350);
     f32 z = static_cast<f32>(grid->displayY * 700 + 350);
-    f32 radians = heading * 0.017453292f;
-    x -= libm_sinf(radians) * 250.0f;
-    z -= libm_cosf(radians) * 250.0f;
+    x -= libm_sinf(heading * 0.017453292f) * 250.0f;
+    z -= libm_cosf(heading * 0.017453292f) * 250.0f;
     s32 kind = 18;
     if (FUN_002393cc(scene) != 0) {
         switch (scene) {

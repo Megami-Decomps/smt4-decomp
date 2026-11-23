@@ -15,7 +15,7 @@ s32 drawTextAtRelativePosition(TextLayoutContextIV *context, s32 origin,
                                u8 *text);
 
 /* Draws a two-digit number at a layout entry, offset by the shared number layout. */
-void FUN_0022d9c8(void *owner, s32 value, s32 index, s32 alternateLayout,
+void bibleDevilDrawStat(void *owner, s32 value, s32 index, s32 alternateLayout,
                   u32 parameterLow, u32 parameterHigh)
 {
     TextLayoutEntryPrefixIV *position;

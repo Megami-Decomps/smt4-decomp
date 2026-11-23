@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail resolves the table offset with a hoisted NULL register (moveq/addne select, then a separate null test); armcc merges both tests into one adds/moveq. */
+/* NON_MATCHING: retail resolves the table offset with a hoisted NULL register (moveq/addne select, then a separate null test); armcc merges both tests into one adds/moveq. resourceGetRelativeElement's ternary (`table != NULL ? ...get() : NULL`) gives the select but other registers and an addsne (35 lines). */
 #include "common.h"
 #include "shard/W6_W6Match4_RelativeResourceGraph.h"
 

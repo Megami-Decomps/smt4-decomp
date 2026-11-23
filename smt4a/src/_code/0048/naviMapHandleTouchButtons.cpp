@@ -20,7 +20,7 @@ u32 naviGetActiveStateValue(void *scene); // declcheck: local (its header also d
 void naviRequestSelectedMap(void);
 s32 listGetAdjacentEntryId(NavigationFadeWork *work, s32 direction);
 void naviSelectRequestedCategory(NavigationFadeWork *work, u32 category);
-void FUN_003a35a4(void);
+void naviRequestSavedDestination(void);
 u32 FUN_004d040c(s32 x, s32 y, u32 width, u32 height);
 u8 FUN_00325064(void);
 void buttonHelpTeardownSlots(void);
@@ -274,7 +274,7 @@ u32 naviMapHandleTouchButtons(NavigationFadeWork *work)
                         if (save->naviRefresh != 0) {
                             save->naviRefresh = 0;
                         }
-                        FUN_003a35a4();
+                        naviRequestSavedDestination();
                     }
                     work->interpolation.drag.cancelTimer = kHighlightFrames;
                     work->flag7B90 = 1;
@@ -305,7 +305,7 @@ u32 naviMapHandleTouchButtons(NavigationFadeWork *work)
                     naviMainSetValuePair(work->scene, &point);
                     work->interpolation.drag.valueOrigin.x = point.x;
                     work->interpolation.drag.valueOrigin.y = point.y;
-                    FUN_003a35a4();
+                    naviRequestSavedDestination();
                 }
                 work->flag7B90 = 1;
                 work->flag7B91 = 1;

@@ -28,7 +28,7 @@ int FUN_001f3e80(...);
 int fadeObjectResetIfActive(...);
 int efctCallRoutineWithSpeedOverride(...);
 int devilDispatchTextureResource(...);
-int FUN_003c2690(...);
+int btlPartyDisplayDrawGauge(...);
 int FUN_003eb200(void);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(...);
@@ -141,7 +141,7 @@ extern int valueAtMostFifthOfTotal(int, int);
 /* Supplied declaration required: devilDispatchTextureResource. */
 /* Supplied declaration required: FUN_003a6404. */
 /* Supplied declaration required: devilIsTextureLoaded. */
-/* Supplied declaration required: FUN_003c2690. */
+/* Supplied declaration required: btlPartyDisplayDrawGauge. */
 extern int FUN_003e4978(void);
 extern int partySlotMatchesSelected(int);
 extern int uiEntryGetState(int, int);
@@ -1096,7 +1096,7 @@ LAB_002afb00:
                    (*(short *)(temp_v4 + 10) + temp_v16) - temp_v28,0x42);
       temp_v4 = FUN_003e4978();
       if (temp_v4 != 0) {
-        FUN_003c2690(param_1,temp_v6,temp_v16,temp_v28);
+        btlPartyDisplayDrawGauge(param_1,temp_v6,temp_v16,temp_v28);
       }
       temp_v12 = recordGetScaledMaximum(temp_v3);
       temp_v4 = 0;

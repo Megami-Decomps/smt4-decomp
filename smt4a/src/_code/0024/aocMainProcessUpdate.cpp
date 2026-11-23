@@ -7,7 +7,6 @@ extern SceneResourceWork *g_sceneResourceWork;
 void campCommonBgAcquire(void);
 void campButtonHelpLoad(void);
 void campButtonHelpAcquire(void);
-void FUN_003a7644(AocMenu *menu);
 void aocMenuUpdate(AocMenu *menu);
 void titleSetSlotValueState2(s32 channel, s32 value);
 void soundChannelStopAll(s32 mask);
@@ -26,7 +25,7 @@ u32 aocMainProcessUpdate(void)
         campButtonHelpLoad();
         campButtonHelpAcquire();
         work->resource = (SceneResource *)new AocMenu;
-        FUN_003a7644((AocMenu *)work->resource);
+        aocMenuReset((AocMenu *)work->resource);
         work->state.pending = 1;
         break;
     case 1:

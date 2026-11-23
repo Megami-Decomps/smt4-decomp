@@ -1,4 +1,4 @@
-/* NON_MATCHING: only retail's copy of the level into r5 (mov r5, r4) before the cost-table call is missing; the build indexes with r4 directly. */
+/* NON_MATCHING: only retail's copy of the level into r5 (mov r5, r4) before the cost-table call is missing; the build indexes with r4 directly. levelExpRequirement, a copy of devilCalculateRankCost's body called as (id, level, level) and that function in the same file all give the same 11 lines. */
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 

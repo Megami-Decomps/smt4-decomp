@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int thresholdDispatchOutsideRange(void);
+int animCurveAdjustFrame(void);
 int VectorFloatToUnsigned(double, int);
 int mathlib_ceilf(void);
 
 typedef int romwright_code(...);
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: thresholdDispatchOutsideRange. */
+/* Supplied declaration required: animCurveAdjustFrame. */
 /* Supplied declaration required: mathlib_ceilf. */
 
 
@@ -23,7 +23,7 @@ unsigned int FUN_004671a4(float *param_1)
   float in_s0;
   unsigned int temp_v2;
   
-  thresholdDispatchOutsideRange();
+  animCurveAdjustFrame();
   temp_v0 = param_1[3];
   if (((unsigned int)temp_v0 & 1) != 0) {
     temp_v2 = ((unsigned int)temp_v0 & 2) >> 1;

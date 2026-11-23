@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail does not predicate the name test (`cmp r0,#1; bhi` skips the ldrb); armcc emits ldrbls/cmpls for every && / nested / early-return form tried (smt4a twin predicates). */
+/* NON_MATCHING: retail does not predicate the name test (`cmp r0,#1; bhi` skips the ldrb); armcc emits ldrbls/cmpls for every && / nested / early-return form tried (smt4a twin predicates). A `(s8)` cast of token[0] gives IDENTICAL, `length < 2` 4 lines; the token is a char string, so neither is applied. */
 #include "common.h"
 #include "quest_center/QuestRecord.h"
 

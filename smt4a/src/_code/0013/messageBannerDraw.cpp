@@ -53,7 +53,7 @@ enum {
 /* The four glow sprites from `firstId`, drawn over a choice panel while its glow is up. */
 static __inline void messageDrawChoiceGlow(s32 firstId)
 {
-    if (g_messageMain.banner->unk19F9 == 3) {
+    if (g_messageMain.banner->pairedFrameState == 3) {
         efctSetSpeed(vec2GetSpeed(&g_messageMain.banner->sprites[BANNER_SPRITE_CHOICE_GLOW]));
         for (s32 i = 0; i < 4; ++i)
             texDrawTableEntryAtStoredOrigin(2, CHOICE_TABLE, firstId + i, 0, 0, CHOICE_LAYER);
@@ -164,8 +164,8 @@ u32 messageBannerDraw(void)
     }
 
     window = g_messageMain.banner;
-    if (window->unk19FB != 0) {
-        switch (window->unk19FC) {
+    if (window->pairedFrameEnabled != 0) {
+        switch (window->pairedFrameStyle) {
         case 0:
             break;
         case 1:

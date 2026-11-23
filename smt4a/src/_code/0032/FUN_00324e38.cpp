@@ -1,4 +1,4 @@
-/* NON_MATCHING: variant alternation folds to BIC, and the position loads and VFP register allocation differ. */
+/* NON_MATCHING: written as its IV twin mapDepartSpawnPlayerEffect; the VFP registers of the three coordinates and the order of the jitter adds' operands differ. */
 #include "shard/W5_W5Match7_SceneState.h"
 #include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
@@ -11,25 +11,32 @@ s32 randBetween(s32, s32);
 /* Alternate a regional map effect and scatter it near the scene position. */
 void FUN_00324e38(s32 variant)
 {
-    DAT_005806c0 = (DAT_005806c0 + 1) & 1;
-    const MapVector &pose = g_lmapScene->pose.position;
-    SoundActorQueuePosition position = {pose.x, pose.y, pose.z};
+    ++DAT_005806c0;
+    DAT_005806c0 &= 1;
+    SoundActorQueuePosition position;
+    position = *reinterpret_cast<const SoundActorQueuePosition *>(&g_lmapScene->pose.position);
     position.y += 140.0f;
     position.y += (f32)randBetween(-10, 10);
     position.x += (f32)randBetween(-15, 15);
     position.z += (f32)randBetween(-15, 15);
-    if (variant == 0) {
+    switch (variant) {
+    case 0:
         DAT_005806c0 = 0;
-    } else if (variant == 1) {
+        break;
+    case 1:
         DAT_005806c0 = 1;
+        break;
     }
-    u32 region = g_gameState.stageGroup;
-    if (region == 0) {
+    switch (g_gameState.stageGroup) {
+    case 0:
         soundActorStartOnFreeChannel(DAT_005806c0 + 0x10002A0, position);
-    } else if (region == 1) {
+        break;
+    case 1:
         soundActorStartOnFreeChannel(DAT_005806c0 + 0x10002A2, position);
-    } else if (region == 2) {
+        break;
+    case 2:
         soundActorStartOnFreeChannel(DAT_005806c0 + 0x10002A4, position);
+        break;
     }
 }
 } /* extern "C" */

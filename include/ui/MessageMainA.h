@@ -123,10 +123,10 @@ struct MessageWindowA {
     /* 0x19F3 */ u8 unk19F3;
     /* 0x19F4 */ u32 panelTextureVariant; /* added to texture IDs when drawing sprite 34 */
     /* 0x19F8 */ u8 unk19F8;
-    /* 0x19F9 */ u8 unk19F9;
-    /* 0x19FA */ u8 unk19FA;
-    /* 0x19FB */ u8 unk19FB;
-    /* 0x19FC */ u32 unk19FC;
+    /* 0x19F9 */ u8 pairedFrameState;
+    /* 0x19FA */ s8 pairedFrameBusy;
+    /* 0x19FB */ u8 pairedFrameEnabled;
+    /* 0x19FC */ u32 pairedFrameStyle;
     /* 0x1A00 */ u8 unk1A00[4];
     /* 0x1A04 */ u32 unk1A04;
     /* 0x1A08 */ u8 unk1A08;
@@ -156,7 +156,8 @@ typedef char MessageWindowAOffsetsCheck[
     offsetof(MessageWindowA, popupValueFloat) == 0x184 && offsetof(MessageWindowA, parameters) == 0x194 &&
     offsetof(MessageWindowA, sprites) == 0x1B4 && offsetof(MessageWindowA, sprites[17]) == 0xB00 && offsetof(MessageWindowA, queueSprites.rows) == 0xDBC && offsetof(MessageWindowA, displayEnabled) == 0x19C4 &&
     offsetof(MessageWindowA, enabled) == 0x19DA && offsetof(MessageWindowA, taskValue) == 0x19EC &&
-    offsetof(MessageWindowA, unk19FC) == 0x19FC && offsetof(MessageWindowA, indexedFlags) == 0x1A11 &&
+    offsetof(MessageWindowA, pairedFrameBusy) == 0x19FA && offsetof(MessageWindowA, pairedFrameStyle) == 0x19FC &&
+    offsetof(MessageWindowA, indexedFlags) == 0x1A11 &&
     offsetof(MessageWindowA, activeValues) == 0x1A1C && sizeof(MessageWindowA) == 0x1A28 ? 1 : -1];
 typedef char MessageMainASizeCheck[sizeof(MessageMainA) == 0x10 ? 1 : -1];
 

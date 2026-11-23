@@ -8,19 +8,37 @@
 #include "ui/ClippedSprite.h"
 #include <stddef.h>
 
+/* Where the title menu draws one of its entries (the cursor sprite and the entry's text). */
+typedef struct TitleMenuEntryPosition {
+    /* 0x00 */ f32 x;
+    /* 0x04 */ f32 y;
+} TitleMenuEntryPosition;
+
 /* The title screen's block, kept by a module global. */
 typedef struct TitleMain {
     /* 0x00 */ u32 job;          /* job that runs the title screen */
     /* 0x04 */ u8 freeOnEnd;     /* 0 = keep the block after the job ends */
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ s32 cursor;                        /* the highlighted menu entry */
+    /* 0x0C */ u8 unk0C[4];
     union {
-        /* 0x05 */ u8 unk05[0x80];
+        /* 0x10 */ u8 unk10[0x30];
+        /* 0x10 */ u8 menuHidden;                 /* non-zero: the lower screen's menu is not drawn */
         struct {
-            /* 0x05 */ u8 unk05[0xB];
             /* 0x10 */ u8 usesSubobject;
             /* 0x11 */ u8 unk11[3];
             /* 0x14 */ u8 subobject[4];
         } trace;
     };
+    /* 0x40 */ TitleMenuEntryPosition entries[4];
+    /* 0x60 */ u8 menuEnabled;                    /* 0: the unselected entries are greyed out */
+    /* 0x61 */ u8 unk61;
+    /* 0x62 */ u8 unk62;
+    /* 0x63 */ u8 unk63;
+    /* 0x64 */ u8 unk64[4];
+    /* 0x68 */ f32 cursorAlpha;                   /* the cursor's second layer, unless unk61 or unk62 is set */
+    /* 0x6C */ f32 menuAlpha;                     /* the whole menu's */
+    /* 0x70 */ u8 unk70[0x15];
     /* 0x85 */ u8 unk85;
     /* 0x86 */ u8 unk86[2];
     /* 0x88 */ u32 unk88;
@@ -30,6 +48,11 @@ typedef struct TitleMain {
 typedef char TitleMainTraceLayoutCheck[
     offsetof(TitleMain, trace.usesSubobject) == 0x10 &&
     offsetof(TitleMain, trace.subobject) == 0x14 &&
+    offsetof(TitleMain, cursor) == 0x08 &&
+    offsetof(TitleMain, entries) == 0x40 &&
+    offsetof(TitleMain, menuEnabled) == 0x60 &&
+    offsetof(TitleMain, menuAlpha) == 0x6C &&
+    offsetof(TitleMain, unk85) == 0x85 &&
     offsetof(TitleMain, modelA) == 0x8C &&
     sizeof(TitleMain) == 0x94 ? 1 : -1];
 

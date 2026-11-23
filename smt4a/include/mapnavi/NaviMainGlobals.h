@@ -8,6 +8,9 @@ extern "C" {
 
 extern NaviMainA *g_naviMain; /* 0x587f28: the state block while the screen exists, else NULL */
 
+/* Enters the navigation transition and records the requested map. */
+void menuEnterState11(NaviTransitionState *menu, u32 selection);
+
 }
 
 #endif

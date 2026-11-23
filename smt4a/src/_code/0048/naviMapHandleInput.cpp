@@ -25,7 +25,7 @@ u32 naviGetActiveStateValue(void *scene); // declcheck: local (its header also d
 void naviRequestSelectedMap(void);
 s32 listGetAdjacentEntryId(NavigationFadeWork *work, s32 direction);
 void naviSelectRequestedCategory(NavigationFadeWork *work, u32 category);
-void FUN_003a35a4(void);
+void naviRequestSavedDestination(void);
 u32 FUN_004d040c(s32 x, s32 y, u32 width, u32 height);
 void FUN_004d03c8(s32 *x, s32 *y);
 s32 FUN_00167c0c(s32 *x, s32 *y);
@@ -97,7 +97,7 @@ void naviMapHandleInput(NavigationFadeWork *work)
                 naviMainSetValuePair(work->scene, &point);
                 work->interpolation.drag.valueOrigin.x = point.x;
                 work->interpolation.drag.valueOrigin.y = point.y;
-                FUN_003a35a4();
+                naviRequestSavedDestination();
             }
             work->interpolation.drag.confirmTimer = 0;
             work->interpolation.drag.cancelTimer = 5;

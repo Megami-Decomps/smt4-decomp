@@ -1283,6 +1283,8 @@
 0x002262ac FUN_002262ac callers
 0x0022638c nn_math_ARMv6_MTX33MultAsm_nn_math_MTX34 name
 0x00226500 nn_gr_CTR_Texture_MakeFuncCommand name
+0x00235744 animCurveAdjustFrame twin
+0x0023578c FUN_0023578c between
 0x002357a0 nw_snd_internal_driver_SequenceTrack_Close name
 0x00235804 __aeabi_f2ulz name
 0x00235870 nw_snd_internal_driver_Channel_Release name
@@ -2703,7 +2705,7 @@
 0x003806a0 soundVoicePostCursor callers
 0x00380b2c nw_anim_res_CalcRotateCurve name
 0x00380d04 nw_anim_res_CalcVector3Curve name
-0x00380e30 FUN_00380e30 between
+0x00380e30 animCalcBakedMatrixCurve between
 0x00380e74 nw_anim_res_CalcTranslateCurve name
 0x00380fbc FUN_00380fbc callers
 0x00380fec FUN_00380fec between

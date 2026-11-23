@@ -12,7 +12,7 @@ s32 textMeasureOnLayer(const char *, u32);
 void drawTextAtSnappedRectangle(UiSpriteState *, f32, f32, f32, f32, u32, u32, f32, const char *);
 }
 
-extern "C" void FUN_0022db94(ListLabelWork *work, u32 id, s32 row, s32 highlighted, s32 depth)
+extern "C" void bibleDevilDrawRace(ListLabelWork *work, u32 id, s32 row, s32 highlighted, s32 depth)
 {
     f32 z = f32(256 - depth) * 0.00390625f;
     SpriteInfo *rowSprite;

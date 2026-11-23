@@ -122,12 +122,12 @@ struct ActorCardAnimationsA {
     /* 0x1344 */ UiSpriteState guestFlash;
     /* 0x13D0 */ UiSpriteState unk13D0;
     /* 0x145C */ UiSpriteState sprites[3][4];      /* a panel's badge: its fade, its icon and its large icon */
-    /* 0x1AEC */ UiSpriteState unk1AEC;
+    /* 0x1AEC */ UiSpriteState gaugeFill;             /* the newest filled segment's fade-in */
     /* 0x1B78 */ UiSpriteState unk1B78;
-    /* 0x1C04 */ UiSpriteState unk1C04;
-    /* 0x1C90 */ UiSpriteState unk1C90;
-    /* 0x1D1C */ UiSpriteState unk1D1C;
-    /* 0x1DA8 */ UiSpriteState unk1DA8[8];
+    /* 0x1C04 */ UiSpriteState gaugeBadge;
+    /* 0x1C90 */ UiSpriteState gaugeGlow;             /* the glow over the gauge in states 2 and 3 */
+    /* 0x1D1C */ UiSpriteState gaugeSpark;
+    /* 0x1DA8 */ UiSpriteState gaugeSegments[8];      /* the full gauge's segments; [5]'s opacity is also its label's */
     /* 0x2208 */ UiSpriteState unk2208;
     /* 0x2294 */ UiSpriteState unk2294[25];
     /* 0x3040 */ UiSpriteState unk3040[5];
@@ -188,9 +188,9 @@ struct ActorCardAnimationsA {
     /* 0x4B28 */ u8 unk4B28[4];
     /* 0x4B2C */ ActorCardAnimationState animation;
     /* 0x4B98 */ u32 messageFile;                  /* the loaded battle/BattleUI.mbm */
-    /* 0x4B9C */ u16 unk4B9C;
+    /* 0x4B9C */ u16 gaugeFilled;                       /* filled segments of the eight-segment gauge */
     /* 0x4B9E */ u16 unk4B9E;
-    /* 0x4BA0 */ u8 unk4BA0;
+    /* 0x4BA0 */ u8 gaugeState;                         /* 2, 3: glowing (3: lifted with the panel), 4: full */
     /* 0x4BA1 */ u8 unk4BA1[3];
     /* 0x4BA4 */ u32 unk4BA4;
     /* 0x4BA8 */ u8 unk4BA8[4];

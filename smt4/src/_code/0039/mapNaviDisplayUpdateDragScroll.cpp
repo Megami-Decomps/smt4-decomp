@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail uses two predicated velocity stores on drag release and schedules the address setup and float operations differently. */
 #include <math.h>
+#include "util/BitsAndBytes.h"
 #include "map/NaviDisplayTransition.h"
 #include "map/mapDepart.h"
 #include "game/GameState.h"
@@ -51,7 +52,7 @@ void mapNaviDisplayUpdateDragScroll(MapNaviDisplay *display)
             }
             work->overlayDirty = 1;
         } else {
-            work->flags &= ~0x30000u;
+            flagsClearBits(&work->flags, 0x30000u);
             if (work->touchAge > 2) {
                 naviStopScroll(work);
             } else {

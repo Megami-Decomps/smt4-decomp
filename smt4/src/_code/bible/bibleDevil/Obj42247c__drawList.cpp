@@ -1,238 +1,194 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `drawList` (_code @ 0x22cba8, 0x5d0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: 232 raw / 78 shape lines. Retail sets the layer pass's `work` and `raised` arguments once ahead of
+ * the switch (here each case sets r0 itself) and builds the icon pass's owned flag in r0 before moving it to r1.
+ * (`raised` is s32, as its callees take it; a u32 parameter, chosen from a type grid, scored 57 shape.) */
 #include "classes/Obj42247c.h"
+#include "bible/BibleDevilList.h"
+#include "code/Code0029.h"
+#include "shard/Shard004A.h"
+#include "shard/W6_W6Match3_BattleQueue.h"
+#include "ui/AnimatedMessage.h"
+
+/* A screen position or offset of the list. */
+struct BibleDevilPoint {
+    f32 x;
+    f32 y;
+};
+
+enum {
+    BIBLE_DEVIL_STEP_BROWSE = 2,    /* the step in which the cursor's entry is drawn raised */
+    BIBLE_DEVIL_IMAGE_FRAME = 0x4A4, /* the first of the four frame images */
+    BIBLE_DEVIL_IMAGE_HEADER = 0x4A2,
+    BIBLE_DEVIL_IMAGE_COMPARE_HEADER = 0x4A3
+};
+
+/* The passes an entry is drawn in, back to front. */
+enum BibleDevilLayer {
+    BIBLE_DEVIL_LAYER_CURSOR,
+    BIBLE_DEVIL_LAYER_ICON,
+    BIBLE_DEVIL_LAYER_RACE,
+    BIBLE_DEVIL_LAYER_NAME,
+    BIBLE_DEVIL_LAYER_STAT,
+    BIBLE_DEVIL_LAYER_COST
+};
 
 extern "C" {
 
-int digitsDrawAtAreaCorner(...);
-int scrollMenuDrawLayer(...);
-int uiDrawScrollingSelectionEntry(...);
-int FUN_0022d9c8(...);
-int FUN_0022daac(...);
-int FUN_0022db94(...);
-int demonIconPanelDrawRow(...);
-int uiRectDrawAtBottomRight(int, int, int);
-int pairCopy(int, float *);
-int FUN_00231bcc(int, int, int);
-int flaggedEntryGetValueByState(...);
-int drawSetColorFromRGBA8(...);
-int gxResetColorQuadToWhite(void);
-int uiMenuAnchorGetOffset(int, float [3]);
+void uiMenuAnchorGetOffset(const u8 *layout, BibleDevilPoint *offset);
+void uiRectDrawAtBottomRight(const u8 *layout, u32 id, s32 dx, s32 dy, u32 layer);
+void FUN_00231bcc(const u8 *layout, u32 image, s32 x, s32 y, u32 layer, u32 flags);
+s32 rangeLimitMin(void *list);
+u32 flaggedEntryGetValueByState(void *list);
+s8 touchSelectionGetSelected(const BibleDevilTouchSelection *selection);
+void uiDrawScrollingSelectionEntry(BibleDevilWork *work, s32 row, u32 layer, s32 selected);
+void demonIconPanelDrawRow(BibleDevilWork *work, s32 showOwned, s32 devil, s32 row, s32 raised, u32 layer);
+void bibleDevilDrawRace(BibleDevilWork *work, u32 devil, s32 row, s32 raised, s32 layer);
+void bibleDevilDrawName(BibleDevilWork *work, u32 devil, u32 row, s32 raised, s32 layer);
+void bibleDevilDrawStat(BibleDevilWork *work, s32 value, s32 row, s32 raised, u32 layer, u32 color);
+void digitsDrawAtAreaCorner(const u8 *layout, s32 x, s32 y, u32 layer, const char *digits);
+void drawSetColorFromRGBA8(u32 color);
+void scrollMenuDrawLayer(BibleDevilWork *work, u32 layer);
 
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
+} /* extern "C" */
 
-extern unsigned int DAT_0049375c; /* 0x49375c */
+/* Whether the list's anchor is horizontally on screen. */
+static __inline bool bibleDevilListOnScreen(BibleDevilWork *work)
+{
+    BibleDevilPoint position;
+    BibleDevilPoint offset;
 
-/* Supplied declaration required: digitsDrawAtAreaCorner. */
-/* Supplied declaration required: scrollMenuDrawLayer. */
-/* Supplied declaration required: uiDrawScrollingSelectionEntry. */
-/* Supplied declaration required: FUN_0022d9c8. */
-/* Supplied declaration required: FUN_0022daac. */
-/* Supplied declaration required: FUN_0022db94. */
-/* Supplied declaration required: demonIconPanelDrawRow. */
-/* Supplied declaration required: uiRectDrawAtBottomRight. */
-/* Supplied declaration required: pairCopy. */
-/* Supplied declaration required: FUN_00231bcc. */
-extern int flaggedValueHolderGetTotal(int);
-extern unsigned long long rangeLimitMin(int);
-/* Supplied declaration required: flaggedEntryGetValueByState. */
-extern int FUN_0029e924(int);
-/* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: gxResetColorQuadToWhite. */
-/* Supplied declaration required: uiMenuAnchorGetOffset. */
-
-
-/* WARNING: Removing unreachable block (ram,0x0022cf08) */
-
+    pairCopy(reinterpret_cast<u32 *>(work->layout), reinterpret_cast<u32 *>(&position));
+    uiMenuAnchorGetOffset(work->layout, &offset);
+    return position.x + offset.x < 320.0f && position.x + offset.x > -320.0f;
 }
 
+/* Sets the cost text's colour for `row`, unless the row before already set the same one. */
+static __inline void bibleDevilSetCostColor(s32 row)
+{
+    if (row == 0) {
+        drawSetColorFromRGBA8(g_bibleDevilRowCostColor[0]);
+    } else if (g_bibleDevilRowCostColor[row - 1] != g_bibleDevilRowCostColor[row]) {
+        drawSetColorFromRGBA8(g_bibleDevilRowCostColor[row]);
+    }
+}
+
+/* Draws one pass of the entry in `row` (Apocalypse keeps this out of line: FUN_004a3238). */
+static __inline void bibleDevilDrawEntryLayer(BibleDevilWork *work, s32 row, s32 pass, s32 raised, s32 devil)
+{
+    u32 layer = work->touchSelection.drawLayer;
+
+    switch (pass) {
+    case BIBLE_DEVIL_LAYER_CURSOR:
+        if (raised != 0) {
+            uiDrawScrollingSelectionEntry(work, row, layer, touchSelectionGetSelected(&work->touchSelection));
+        }
+        break;
+    case BIBLE_DEVIL_LAYER_ICON: {
+        s32 showOwned = 0;
+
+        if (work->mode == 0) {
+            showOwned = 1;
+        }
+        demonIconPanelDrawRow(work, showOwned, devil, row, raised, layer);
+        break;
+    }
+    case BIBLE_DEVIL_LAYER_RACE:
+        bibleDevilDrawRace(work, devil, row, raised, layer);
+        break;
+    case BIBLE_DEVIL_LAYER_NAME:
+        bibleDevilDrawName(work, devil, row, raised, layer);
+        break;
+    case BIBLE_DEVIL_LAYER_STAT:
+        bibleDevilDrawStat(work, g_bibleDevilRowValue[row], row, raised, layer, g_bibleDevilRowColor[row]);
+        break;
+    case BIBLE_DEVIL_LAYER_COST:
+        bibleDevilSetCostColor(row);
+        digitsDrawAtAreaCorner(work->layout, g_bibleDevilRowCostX[row], g_bibleDevilRowCostY[row], layer,
+            g_bibleDevilRowCostText[row]);
+        break;
+    }
+}
+
+/* Draws every pass of the entry in `row`, one layer up when it is raised (Apocalypse keeps this out of line:
+ * FUN_004a2a30). */
+static __inline void bibleDevilDrawEntry(BibleDevilWork *work, s32 row, s32 raised, s32 devil)
+{
+    u32 layer = work->touchSelection.drawLayer;
+    s32 showOwned;
+
+    if (raised != 0) {
+        layer++;
+    }
+    if (raised != 0) {
+        uiDrawScrollingSelectionEntry(work, row, layer, touchSelectionGetSelected(&work->touchSelection));
+    }
+    showOwned = 0;
+    if (work->mode == 0) {
+        showOwned = 1;
+    }
+    demonIconPanelDrawRow(work, showOwned, devil, row, raised, layer);
+    bibleDevilDrawRace(work, devil, row, raised, layer);
+    bibleDevilDrawName(work, devil, row, raised, layer);
+    bibleDevilDrawStat(work, g_bibleDevilRowValue[row], row, raised, layer, g_bibleDevilRowColor[row]);
+    drawSetColorFromRGBA8(g_bibleDevilRowCostColor[row]);
+    digitsDrawAtAreaCorner(work->layout, g_bibleDevilRowCostX[row], g_bibleDevilRowCostY[row], layer,
+        g_bibleDevilRowCostText[row]);
+    gxResetColorQuadToWhite();
+}
+
+/* Draws the devil list: its frame, the visible entries pass by pass (the cursor's entry skipped while
+ * browsing), then the cursor's entry raised above them. */
 void Obj42247c::drawList()
 {
-    int param_1 = (int)this;
-/* irregular: 1 goto(s); 23 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  int temp_v10;
-  int temp_v11;
-  float temp_v12;
-  unsigned int temp_v13;
-  int temp_v14;
-  unsigned long long temp_v15;
-  float temp_v16;
-  float temp_v17;
-  float temp_v18 [3];
-  
-  pairCopy(param_1 + 200,&temp_v16);
-  uiMenuAnchorGetOffset(param_1 + 200,temp_v18);
-  if (((int)(temp_v16 + temp_v18[0]) < 0x43a00000) && ((unsigned int)(temp_v16 + temp_v18[0]) < 0xc3a00000))
-  {
-    temp_v16 = *(float *)(param_1 + 0x594);
-    temp_v18[0] = temp_v16;
-    uiRectDrawAtBottomRight(param_1 + 200,2,0);
-    temp_v16 = temp_v18[0];
-    temp_v17 = 1.4013e-45f;
-    FUN_00231bcc(param_1 + 200,0x4a4,0);
-    temp_v16 = temp_v18[0];
-    temp_v17 = 1.4013e-45f;
-    FUN_00231bcc(param_1 + 200,0x4a5,0);
-    temp_v16 = temp_v18[0];
-    temp_v17 = 1.4013e-45f;
-    FUN_00231bcc(param_1 + 200,0x4a6,0);
-    temp_v16 = temp_v18[0];
-    temp_v17 = 1.4013e-45f;
-    FUN_00231bcc(param_1 + 200,0x4a7,0);
-    if (*(char *)(param_1 + 0x5a4) != '\0') {
-      temp_v16 = temp_v18[0];
-      temp_v17 = 1.4013e-45f;
-      FUN_00231bcc(param_1 + 200,0x4a3,0);
+    /* The entries and the mode at 0x5A4 belong to the list's derived menus (a class hierarchy still to recover), so
+     * the drawer reads the object through the list's work view. */
+    BibleDevilWork *work = reinterpret_cast<BibleDevilWork *>(this);
+
+    if (!bibleDevilListOnScreen(work)) {
+        return;
     }
-    else {
-      temp_v16 = temp_v18[0];
-      temp_v17 = 1.4013e-45f;
-      FUN_00231bcc(param_1 + 200,0x4a2,0);
+    u32 layer = work->touchSelection.drawLayer;
+    uiRectDrawAtBottomRight(work->layout, 2, 0, 0, layer);
+    FUN_00231bcc(work->layout, BIBLE_DEVIL_IMAGE_FRAME, 0, 0, layer, 1);
+    FUN_00231bcc(work->layout, BIBLE_DEVIL_IMAGE_FRAME + 1, 0, 0, layer, 1);
+    FUN_00231bcc(work->layout, BIBLE_DEVIL_IMAGE_FRAME + 2, 0, 0, layer, 1);
+    FUN_00231bcc(work->layout, BIBLE_DEVIL_IMAGE_FRAME + 3, 0, 0, layer, 1);
+    if (work->mode == 0) {
+        FUN_00231bcc(work->layout, BIBLE_DEVIL_IMAGE_HEADER, 0, 0, layer, 1);
+    } else {
+        FUN_00231bcc(work->layout, BIBLE_DEVIL_IMAGE_COMPARE_HEADER, 0, 0, layer, 1);
     }
-    if (*(int *)(param_1 + 0x28) != 0) {
-      temp_v0 = FUN_0029e924(param_1 + 0x20);
-      temp_v15 = rangeLimitMin(param_1 + 0x20);
-      temp_v2 = (int)((unsigned long long)temp_v15 >> 0x20);
-      temp_v1 = (int)temp_v15;
-      temp_v14 = 1;
-      do {
-        temp_v11 = 0;
-        if (temp_v11 < temp_v1) {
-          do {
-            if (*(int *)(param_1 + 0x14) == 2) {
-              temp_v15 = flaggedEntryGetValueByState(param_1 + 0x20);
-              temp_v2 = (int)((unsigned long long)temp_v15 >> 0x20);
-              if ((int)temp_v15 != temp_v11) goto LAB_0022cd30;
+    if (work->list.count == 0) {
+        return;
+    }
+
+    s32 first = FUN_0029e924(&work->list);
+    s32 visible = rangeLimitMin(&work->list);
+    BibleDevilEntry *entries = work->entries;
+    s32 pass;
+    s32 row;
+    for (pass = BIBLE_DEVIL_LAYER_ICON; pass <= BIBLE_DEVIL_LAYER_STAT; pass++) {
+        for (row = 0; row < visible; row++) {
+            if (work->step != BIBLE_DEVIL_STEP_BROWSE || flaggedEntryGetValueByState(&work->list) != row) {
+                bibleDevilDrawEntryLayer(work, row, pass, 0, (s16)entries[first + row].devilId);
             }
-            else {
-LAB_0022cd30:
-              temp_v12 = *(float *)(param_1 + 0x594);
-              temp_v2 = (int)*(short *)(param_1 + 0x5a8 + (temp_v0 + temp_v11) * 0x20 + 4);
-              switch(temp_v14) {
-              case 1:
-                temp_v16 = 0.0f;
-                temp_v17 = temp_v12;
-                demonIconPanelDrawRow(param_1,*(char *)(param_1 + 0x5a4) == '\0',temp_v2,temp_v11);
-                temp_v2 = temp_v3;
-                break;
-              case 2:
-                temp_v16 = temp_v12;
-                FUN_0022db94(param_1,temp_v2,temp_v11);
-                temp_v2 = temp_v4;
-                break;
-              case 3:
-                temp_v16 = temp_v12;
-                FUN_0022daac(param_1,temp_v2,temp_v11);
-                temp_v2 = temp_v5;
-                break;
-              case 4:
-                temp_v17 = *(float *)(temp_v11 * 4 + 0x4935a4);
-                temp_v16 = temp_v12;
-                FUN_0022d9c8(param_1,*(unsigned int *)(temp_v11 * 4 + 0x49357c),temp_v11);
-                temp_v2 = temp_v6;
-                break;
-              case 5:
-                if (temp_v11 != 0) {
-                  if (*(int *)(temp_v11 * 4 + 0x493758) != (&DAT_0049375c)[temp_v11]) {
-                    drawSetColorFromRGBA8();
-                  }
-                }
-                else {
-                  drawSetColorFromRGBA8(DAT_0049375c);
-                }
-                temp_v16 = (float)(temp_v11 * 0x20 + 0x49361c);
-                digitsDrawAtAreaCorner(param_1 + 200,*(unsigned int *)(temp_v11 * 4 + 0x4935cc),
-                             *(unsigned int *)(temp_v11 * 4 + 0x4935f4),temp_v12);
-                temp_v2 = temp_v7;
-              }
-            }
-            temp_v11 = temp_v11 + 1;
-          } while (temp_v11 < temp_v1);
         }
-        temp_v14 = temp_v14 + 1;
-        if (temp_v14 >= 5) {
-          temp_v0 = 0;
-          if (temp_v0 < temp_v1) {
-            do {
-              if ((*(int *)(param_1 + 0x14) == 2) &&
-                 (temp_v2 = flaggedEntryGetValueByState(param_1 + 0x20,temp_v2), temp_v2 == temp_v0)) {
-                if (temp_v0 != 0) {
-                  temp_v2 = *(int *)(temp_v0 * 4 + 0x493758);
-                  if (temp_v2 != (&DAT_0049375c)[temp_v0]) {
-                    drawSetColorFromRGBA8();
-                    temp_v2 = temp_v8;
-                  }
-                }
-                else {
-                  drawSetColorFromRGBA8(DAT_0049375c);
-                  temp_v2 = temp_v9;
-                }
-              }
-              else {
-                temp_v13 = *(unsigned int *)(param_1 + 0x594);
-                if (temp_v0 != 0) {
-                  if (*(int *)(temp_v0 * 4 + 0x493758) != (&DAT_0049375c)[temp_v0]) {
-                    drawSetColorFromRGBA8();
-                  }
-                }
-                else {
-                  drawSetColorFromRGBA8(DAT_0049375c);
-                }
-                temp_v16 = (float)(temp_v0 * 0x20 + 0x49361c);
-                digitsDrawAtAreaCorner(param_1 + 200,*(unsigned int *)(temp_v0 * 4 + 0x4935cc),
-                             *(unsigned int *)(temp_v0 * 4 + 0x4935f4),temp_v13);
-                temp_v2 = temp_v10;
-              }
-              temp_v0 = temp_v0 + 1;
-            } while (temp_v0 < temp_v1);
-          }
-          gxResetColorQuadToWhite();
-          temp_v2 = *(int *)(param_1 + 0x14);
-          if (((temp_v2 == 2 || temp_v2 == 3) || (temp_v2 == 7 || temp_v2 == 4)) ||
-             (temp_v2 == 5 || temp_v2 == 8)) {
-            temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
-            temp_v0 = (int)*(short *)(param_1 + 0x5a8 + temp_v2 * 0x20 + 4);
-            temp_v2 = flaggedEntryGetValueByState(param_1 + 0x20);
-            temp_v12 = (float)(*(int *)(param_1 + 0x594) + 1);
-            uiDrawScrollingSelectionEntry(param_1,temp_v2,temp_v12,(int)*(char *)(param_1 + 0x56d));
-            temp_v16 = 1.4013e-45f;
-            temp_v17 = temp_v12;
-            demonIconPanelDrawRow(param_1,*(char *)(param_1 + 0x5a4) == '\0',temp_v0,temp_v2);
-            temp_v16 = temp_v12;
-            FUN_0022db94(param_1,temp_v0,temp_v2,1);
-            temp_v16 = temp_v12;
-            FUN_0022daac(param_1,temp_v0,temp_v2,1);
-            temp_v17 = *(float *)(temp_v2 * 4 + 0x4935a4);
-            temp_v16 = temp_v12;
-            FUN_0022d9c8(param_1,*(unsigned int *)(temp_v2 * 4 + 0x49357c),temp_v2,1);
-            drawSetColorFromRGBA8((&DAT_0049375c)[temp_v2]);
-            temp_v16 = (float)(temp_v2 * 0x20 + 0x49361c);
-            digitsDrawAtAreaCorner(param_1 + 200,*(unsigned int *)(temp_v2 * 4 + 0x4935cc),
-                         *(unsigned int *)(temp_v2 * 4 + 0x4935f4),temp_v12);
-            gxResetColorQuadToWhite();
-          }
-          scrollMenuDrawLayer(param_1,temp_v18[0]);
-          return;
-        }
-      } while( 1 );
     }
-  }
-  return;
+    /* Retail sets the pass again here (`mov r9, #5`) although the loop above leaves it at the cost pass. */
+    pass = BIBLE_DEVIL_LAYER_COST;
+    for (row = 0; row < visible; row++) {
+        if (work->step == BIBLE_DEVIL_STEP_BROWSE && flaggedEntryGetValueByState(&work->list) == row) {
+            bibleDevilSetCostColor(row);
+        } else {
+            bibleDevilDrawEntryLayer(work, row, pass, 0, (s16)entries[first + row].devilId);
+        }
+    }
+    gxResetColorQuadToWhite();
+
+    if (work->step == 2 || work->step == 3 || work->step == 7 || work->step == 4 || work->step == 5 ||
+        work->step == 8) {
+        s32 devil = (s16)entries[flaggedValueHolderGetTotal(&work->list)].devilId;
+
+        bibleDevilDrawEntry(work, flaggedEntryGetValueByState(&work->list), 1, devil);
+    }
+    scrollMenuDrawLayer(work, layer);
 }

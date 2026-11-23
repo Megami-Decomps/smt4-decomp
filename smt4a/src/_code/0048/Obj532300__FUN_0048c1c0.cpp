@@ -1,20 +1,11 @@
 /* NON_MATCHING: the refresh/discovered byte offsets (0x7b91-0x7b93) are synthesized from the state constant 2 (orr with 2) where retail derives them from 0x7b91 (add 1, orr asr 13); registers shift around them. */
 #include "ui/UiSpriteApi.h"
+#include "util/BitsAndBytes.h"
 #include "ui/NaviCategorySelection.h"
 #include "game/GameStateA.h"
 #include "ui/ButtonHelp.h"
 #include "map/mapDepart.h"
 #include "test/BustupViewer.h"
-
-static __inline void flagsSetBits(u32 *flags, u32 mask)
-{
-    *flags |= mask;
-}
-
-static __inline void flagsClearBits(u32 *flags, u32 mask)
-{
-    *flags &= mask;
-}
 
 struct NaviCategoryTransitionView {
     u8 unk0000[8];
@@ -85,11 +76,11 @@ void _ZN9Obj53230012FUN_0048c1c0Ev(NaviCategorySelectionWork *work)
     }
     case 2:
         if (g_gameState.unk461) {
-            flagsClearBits(&((NaviCategoryTransitionView *)work)->flags, ~8u);
+            flagsClearBits(&((NaviCategoryTransitionView *)work)->flags, 8);
             sub68OwnerDestroy();
             g_gameState.unk461 = 0;
         }
-        flagsClearBits(&((NaviCategoryTransitionView *)work)->flags, ~8u);
+        flagsClearBits(&((NaviCategoryTransitionView *)work)->flags, 8);
         return;
     default:
         return;

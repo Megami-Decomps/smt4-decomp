@@ -201,8 +201,9 @@ difference a register tie-break.
 - A flag `|=`/`&=` whose temporary lands in `r1`/`r2` where armcc would use `r0`, or an
   `and rX, #N; movs rY, rX` test, is a `u64` field (`BtlMainState::battleMask`/`editorMask`,
   `BtlEntry::flagMask`).
-- Read the field in each test (no `u64 flags = entry->flags;` copy) and choose `(flags & mask)` or
-  `(mask & flags)` per test.
+- Read the field in each test (no `u64 flags = entry->flags;` copy). Write one operand order throughout a function:
+  choosing `(flags & mask)` or `(mask & flags)` test by test from a grid of every combination is an order picked per
+  site by score (smt4a `btlAiCureSkillHasTarget`: 36 lines that way, 212 with one order; the wave 84 review kept the one order).
 
 ### Control flow
 
@@ -238,6 +239,10 @@ difference a register tie-break.
   condition joined into the test: `if (stockOnly == 0 && row < 1) { …; f(unit, index, 0); } else { …;
   f(entry, index, 1); }` made smt4 `FUN_0026d3e0` and smt4a `partyPanelRefreshSelectedItemValues`
   IDENTICAL (wave 58), where `if (…) { …; f(…); return; }` followed by the tail did not.
+- Not evidence (wave 84 review): a single-use `u8` copy of a loop counter that only narrows the table index
+  (smt4a `copyDefaultAnimationSteps`), and one of eight identical appends spelled `candidates[0] = 0; count = 1;` while
+  the other seven use `candidates[count++]` (smt4a `btlDowngradeRandomResistance`): both matched, both stay
+  `NON_MATCHING`.
 - A load whose value retail never uses (`ldrb r0, [r1, #43]` between the stores, nothing reads `r0`) can be the
   condition of an `if`/`else` whose two arms do the same stores: armcc merges the arms and drops the compare but
   keeps the load (`if (definition->flags != 0) { x = 25.0f; y = 25.0f; } else { x = 25.0f; y = 25.0f; }`, smt4
@@ -448,6 +453,10 @@ difference a register tie-break.
   at 0x49FD14 was carved out of `g_gameState`).
   smt4a's `g_eventEffect` is several EventEffect.cpp globals: every function of the file pools its base and a second
   word; sized 0x1C with `g_eventBannerTextures` at 0x57f3d0, seven of them come out IDENTICAL by `fdiff` (wave 82).
+- A block retail stores as `add r0, rG, #off; vstmia r0!, {s0}; stm r0, {...}` off a global's pool word, where the build
+  stores `vstr` and a separate `stm`, is another global the same file defines: the voice initialisations smt4
+  `FUN_00106650` and smt4a `FUN_0013ae58` define the voice queue and `g_voiceDuckSettings` (`sound/VoiceLoadQueue.h`)
+  and are IDENTICAL, placed by relink (wave 84).
 - Two globals that retail reaches from one pool word plus an offset (status as `g_asdSoundDuck + 0x1c`) are
   defined in the same file: armcc folds them onto one base only for data the translation unit defines. Define them
   in the unit that owns the file's data and keep every other declaration `extern` (smt4 `asdSoundInitialize`,
@@ -467,6 +476,17 @@ asks for.
   tail call or predication: move the lookup into a `static __inline` helper so its scope ends there.
 - A body retail repeats in its callers (an allocator such as `effBlockCreate`, a sibling function from
   the same file) is a `static __inline` copy of that body.
+- A script command whose code is a matched sibling command's except that it returns the shift base kept in a saved
+  register (`mov r0, r8` where the sibling has `mov r0, #1`) is `return sibling();` with the sibling's body inlined:
+  smt4 `FUN_002ff500` and `FUN_002f07c8`, smt4a `FUN_003729ec` and `FUN_003a83c0` are IDENTICAL with a `static __inline`
+  copy of the body. The copy cannot move into a header the sibling uses too: its out-of-line body then returns the
+  saved register as well and stops matching (wave 84).
+- The navigation screens' flag-word updates are `flagsSetBits`/`flagsClearBits` (`util/BitsAndBytes.h`; one copy
+  each, `*flags |= bits` and `*flags &= ~bits`): smt4 `screenStep` is IDENTICAL with it and its twelve other users in
+  both games keep their scores (wave 84).
+- A degree or ratio product passed to both `sinf` and `cosf` is written in each call (`sinf(ratio * 1.5707964f)`,
+  `cosf(ratio * 1.5707964f)`), not as a shared `angle` local: smt4 `FUN_0026f024`/smt4a `FUN_0039a2d8`,
+  `effectSpawnAheadOfScene` and smt4a `FUN_003135bc` are IDENTICAL with it (wave 84).
 - IV's shop list states inline the helpers Apocalypse's shop has as members (`Obj536044::selectedItem`, `canBuyItem`,
   `canSellItem`): `shopSelectedItem` and `shopCanBuyItem` in `shop/ShopScreen.h`, written as the members are, made smt4
   `shopDrawSelectedItem`, `FUN_003a18a0`, `FUN_003a3a9c` and `FUN_003a3c7c` IDENTICAL as ports of their twins (wave 75).
@@ -977,3 +997,9 @@ its own cflags ignored (the wave-49 IPC stubs all come back IDENTICAL with `twin
   `const` parameters, local copies and multifile did not move it; don't spend long on it.
   The counter adders had it too and matched once an inner inline helper was written in place, its statements
   repeated (smt4a `gameCounterAddSaturating`, `FUN_002c5214`; smt4 `FUN_002021b4`; wave 78): try that before giving up.
+- A halfword `|=` that retail writes back through a pre-indexed address (`ldrh rX, [rY, #N]!`) right after an
+  `initialize()` call (`window->state |= 0x1000`: smt4 `Obj4223c4::FUN_003a6e68`, `saleListBuild` and others) was
+  never reproduced: pointer, inline, sub-struct, bitfield, `s16`, `volatile` and flag variants all fail (wave 84).
+- `push {r4, lr}; bl f; pop {r4, pc}` where the build tail-calls `b f` (smt4's `Obj4224b0`/`d4`/`f8`/`51c`
+  destructors, `FUN_003e4fe8`, `FUN_003e5d78`; smt4a `FUN_0050625c`, `FUN_00506fec`) only comes back with `f`
+  declared `__weak`, which the rules forbid for a function the image defines; leave them `NON_MATCHING` (wave 84).

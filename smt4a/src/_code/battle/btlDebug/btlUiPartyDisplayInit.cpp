@@ -328,26 +328,26 @@ void btlUiPartyDisplayInit(ActorCardAnimationsA *card, u32 unit)
     uiSpriteSelectAnim(&card->unk122C, 8);
     uiSpriteStateInitFromSource(&card->slide, 0xd, 0, &card->resources, 6, 1.0f);
     uiSpriteStateInitFromSource(&card->unk2208, 0xd, 0, &card->resources, 6, 1.0f);
-    uiSpriteStateInitFromSource(&card->unk1AEC, 0xd, 0xfa9, &card->resources, 0x42, 1.0f);
-    uiSpriteSetImageKeyframe(&card->unk1AEC, 0x1b, 0);
+    uiSpriteStateInitFromSource(&card->gaugeFill, 0xd, 0xfa9, &card->resources, 0x42, 1.0f);
+    uiSpriteSetImageKeyframe(&card->gaugeFill, 0x1b, 0);
     uiSpriteStateInitFromSource(&card->unk1B78, 0xd, 0xfa9, &card->resources, 0x42, 1.0f);
     uiSpriteSelectAnim(&card->unk1B78, 0x14);
-    uiSpriteStateInitFromSource(&card->unk1C04, 0xd, 0xfbd, &card->resources, 0x42, 1.0f);
-    uiSpriteStateInitFromSource(&card->unk1C90, 0xd, 0xfbe, &card->resources, 0x42, 1.0f);
-    uiSpriteSelectAnim(&card->unk1C90, 0x15);
-    uiStoreTextureEntryCenter(&card->unk1C04, 0xd, 0xfc1);
-    uiSpriteStateInitFromSource(&card->unk1D1C, 0xd, 0xfbf, &card->resources, 0x42, 1.0f);
-    uiSpriteSelectAnim(&card->unk1D1C, 0x16);
-    uiSpriteSetScaleKeyframe(&card->unk1D1C, 14, 0);
-    uiStoreTextureEntryCenter(&card->unk1C04, 0xd, 0xfc2);
+    uiSpriteStateInitFromSource(&card->gaugeBadge, 0xd, 0xfbd, &card->resources, 0x42, 1.0f);
+    uiSpriteStateInitFromSource(&card->gaugeGlow, 0xd, 0xfbe, &card->resources, 0x42, 1.0f);
+    uiSpriteSelectAnim(&card->gaugeGlow, 0x15);
+    uiStoreTextureEntryCenter(&card->gaugeBadge, 0xd, 0xfc1);
+    uiSpriteStateInitFromSource(&card->gaugeSpark, 0xd, 0xfbf, &card->resources, 0x42, 1.0f);
+    uiSpriteSelectAnim(&card->gaugeSpark, 0x16);
+    uiSpriteSetScaleKeyframe(&card->gaugeSpark, 14, 0);
+    uiStoreTextureEntryCenter(&card->gaugeBadge, 0xd, 0xfc2);
     for (i = 0; i < 8; i++) {
-        uiSpriteStateInitFromSource(&card->unk1DA8[i], 0xd, 0xfbf, &card->resources, 0x42, 1.0f);
-        uiSpriteSetImageKeyframe(&card->unk1D1C, 0x28, 0);
+        uiSpriteStateInitFromSource(&card->gaugeSegments[i], 0xd, 0xfbf, &card->resources, 0x42, 1.0f);
+        uiSpriteSetImageKeyframe(&card->gaugeSpark, 0x28, 0);
     }
-    card->unk4B9C = FUN_003e53ec();
-    card->unk4BA0 = 0;
+    card->gaugeFilled = FUN_003e53ec();
+    card->gaugeState = 0;
     if (FUN_003e48bc())
-        card->unk4BA0 = 2;
+        card->gaugeState = 2;
     card->unk4B9E = 0;
     for (i = 0; i < 4; i++)
         card->portraitIds[i] = 0;

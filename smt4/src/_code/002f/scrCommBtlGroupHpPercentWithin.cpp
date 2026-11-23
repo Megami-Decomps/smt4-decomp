@@ -1,4 +1,5 @@
 /* NON_MATCHING: everything matches except the frame size: retail reserves 28 bytes (count at sp, start at sp+4), this build 12. */
+#include "battle/BattleHelpers.h"
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
 #include "util/SlotRangeSelect.h"
@@ -7,12 +8,6 @@ extern "C" {
 
 extern BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 extern s32 btlScriptResolveGroupArg(s32 group);
-
-/* HP totals of a set of units. */
-struct HpSums {
-    s32 maximum;
-    s32 current;
-};
 
 /* Script command: pushes whether the HP percentage of the present, non-excluded units of the current group (and the
  * active entry) is at most argument 0. */

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00467164(void);
+int animCalcCallbackCurve(void);
 int FUN_0046722c(...);
 
-/* Supplied declaration required: FUN_00467164. */
+/* Supplied declaration required: animCalcCallbackCurve. */
 extern unsigned char FUN_004671a4(float);
 /* Supplied declaration required: FUN_0046722c. */
 extern unsigned int FUN_0050b8e0(int *, float *);
@@ -57,7 +57,7 @@ unsigned int FUN_0050b5a8(int *param_1,float *param_2,unsigned int param_3)
       if (temp_v3 != 0) {
         temp_v5 = (float)(temp_v3 + (int)(puVar2 + 3));
       }
-      FUN_00467164();
+      animCalcCallbackCurve();
     }
     *param_2 = temp_v5;
     param_3 = param_3 | 1;

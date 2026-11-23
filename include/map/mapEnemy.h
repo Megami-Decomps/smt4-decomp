@@ -160,7 +160,9 @@ struct MapEnemyEntryA {
     /* 0x088 */ s32 elapsed;
     /* 0x08C */ s32 randomDelay;
     /* 0x090 */ u32 unk090;
-    /* 0x094 */ u8 unk094[0x20];
+    /* 0x094 */ u8 unk094[0x10];
+    /* 0x0A4 */ s32 wanderDelay;        /* 1 to 150, drawn when a waiting enemy is placed */
+    /* 0x0A8 */ u8 unk0A8[0xC];
     /* 0x0B4 */ u32 approachMode;
     /* 0x0B8 */ f32 approachHeight;
     /* 0x0BC */ u8 unk0BC[0x48];

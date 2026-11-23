@@ -5,21 +5,6 @@
 #include "gamedata/SaveSlotTable.h"
 #include "addon/LookupRecord.h"
 
-static inline UnitRecord *findComparisonPartyUnit(u32 id)
-{
-    SaveSlotTableA *party = gameGetSlotTable();
-    for (u16 i = 0; i < party->count; ++i) {
-        s32 slot = party->party[i];
-        if (slot >= 0) {
-            UnitRecord *unit = (UnitRecord *)&party->entries[slot];
-            if (unit->id == id) {
-                return unit;
-            }
-        }
-    }
-    return NULL;
-}
-
 extern "C" {
 void unitRecordBuildFromSave(u32, UnitRecord *);
 s32 recordGetScaledMaximum(const UnitRecord *);
@@ -40,7 +25,7 @@ void campFillUnitComparison(CampUnitComparison *row, u32 id, s32 compareParty)
         row->maximum = recordGetScaledMaximum(&saved);
         row->secondaryMaximum = saved.maxMp;
 
-        UnitRecord *current = findComparisonPartyUnit(id);
+        UnitRecord *current = saveSlotTableFindPartyUnit(id);
         row->otherLevel = current->level;
         row->otherMaximum = recordGetScaledMaximum(current);
         row->otherSecondaryMaximum = current->maxMp;

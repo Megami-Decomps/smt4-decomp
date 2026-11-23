@@ -10,7 +10,7 @@ void messageDrawPairedFrameSprites(u32 leftBase, u32 leftOverlay, u32 leftEdge,
 {
     MessageWindowA *panel = g_messageMain.banner;
     s32 leftX, leftY, rightX, rightY;
-    if (panel->unk19FA != 0) {
+    if (panel->pairedFrameBusy != 0) {
         leftX = vec2GetXInt(&panel->sprites[37]);
         leftY = vec2GetYInt(&panel->sprites[37]);
         rightX = vec2GetXInt(&panel->sprites[38]);

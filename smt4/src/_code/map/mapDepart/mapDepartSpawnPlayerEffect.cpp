@@ -1,4 +1,4 @@
-/* NON_MATCHING: pool order and loads now match; only the callee-saved VFP registers of the three coordinates differ (retail x/y/z in s18/s17/s16) with the jitter adds commuted. */
+/* NON_MATCHING: pool order, loads and registers now match; only the three jitter adds take their operands the other way round (retail vadd s17, s17, s0: the coordinate first). */
 #include "map/LmapGlobals.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "game/GameState.h"
@@ -18,20 +18,27 @@ void mapDepartSpawnPlayerEffect(s32 variant)
     position.y += randBetween(-10, 10);
     position.x += randBetween(-15, 15);
     position.z += randBetween(-15, 15);
-    if (variant == 0) {
+    switch (variant) {
+    case 0:
         DAT_00447538 = 0;
-    } else if (variant == 1) {
+        break;
+    case 1:
         DAT_00447538 = 1;
+        break;
     }
     // Adding a word in the byte-aligned shared union would move its trailing flags.
     struct EffectModeView { u8 prefix[0x21c]; s32 mode; };
     const EffectModeView *state = reinterpret_cast<const EffectModeView *>(&g_gameState);
-    if (state->mode == 0) {
+    switch (state->mode) {
+    case 0:
         soundActorStartOnFreeChannel(DAT_00447538 + 0x10001f5, position);
-    } else if (state->mode == 1) {
+        break;
+    case 1:
         soundActorStartOnFreeChannel(DAT_00447538 + 0x10001f7, position);
-    } else if (state->mode == 2) {
+        break;
+    case 2:
         soundActorStartOnFreeChannel(DAT_00447538 + 0x10001f9, position);
+        break;
     }
 }
 }

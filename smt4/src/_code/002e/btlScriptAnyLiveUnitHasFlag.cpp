@@ -16,7 +16,7 @@ u32 btlScriptAnyLiveUnitHasFlag(void)
     s32 count;
     u32 group = btlScriptResolveGroupArg(scrGetArg(1));
     btlSideGetEntryRange(group, &first, &count);
-    for (s32 index = first; index < count + first; ++index) {
+    for (s32 index = first; index < first + count; ++index) {
         BtlEntry* unit = &btlGetMainState()->entries[index];
         if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) &&
             (unit->data.statusFlags & (1u << flag))) {

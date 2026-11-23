@@ -71,7 +71,7 @@ int uniteInheritanceBuildSkillList(...);
 int FUN_003c3f8c(...);
 int FUN_003c9354(void);
 int FUN_003cca18(...);
-int FUN_004a8750(...);
+int compendiumComputeSummonCost(...);
 int unitRecomputeDerivedStats(...);
 int FUN_004d0eec(void);
 int unitRecordMergeInheritedFlags(...);
@@ -380,7 +380,7 @@ extern int modelListInit(void);
 extern int FUN_0040af60(int);
 /* Supplied declaration required: resourceOwnerLoadNamed. */
 /* Supplied declaration required: flagValueSub. */
-/* Supplied declaration required: FUN_004a8750. */
+/* Supplied declaration required: compendiumComputeSummonCost. */
 /* Supplied declaration required: unitRecomputeDerivedStats. */
 /* Supplied declaration required: FUN_004bd17c. */
 /* Supplied declaration required: dispatchIfFound. */
@@ -2168,12 +2168,12 @@ LAB_001f77ec:
           if (*temp_v27 >> 0x1e == 3) {
             temp_v7 = *temp_v27 & 0x7fff;
             temp_v25 = (int *)0x0;
-            FUN_004a8750(temp_v7,1,0);
+            compendiumComputeSummonCost(temp_v7,1,0);
           }
           if ((temp_v27[1] & 3) == 3) {
             temp_v25 = (int *)0x0;
             temp_v10 = (*temp_v27 & 0x3fffffff) >> 0xf;
-            FUN_004a8750(temp_v10,1,0);
+            compendiumComputeSummonCost(temp_v10,1,0);
             temp_v7 = temp_v7 + temp_v10;
           }
           piVar3[0x106] = temp_v7;
@@ -2213,12 +2213,12 @@ LAB_001f77ec:
           if (temp_v9 >> 0x1e == 3) {
             temp_v7 = temp_v9 & 0x7fff;
             temp_v25 = (int *)0x0;
-            FUN_004a8750(temp_v7,1,0);
+            compendiumComputeSummonCost(temp_v7,1,0);
           }
           if ((piVar3[temp_v10 * 2 + 0x4ef] & 3U) == 3) {
             temp_v25 = (int *)0x0;
             temp_v10 = (piVar3[temp_v10 * 2 + 0x4ee] & 0x3fffffffU) >> 0xf;
-            FUN_004a8750(temp_v10,1,0);
+            compendiumComputeSummonCost(temp_v10,1,0);
             temp_v7 = temp_v7 + temp_v10;
           }
           piVar3[0x106] = temp_v7;
@@ -3415,7 +3415,7 @@ LAB_001fac50:
               if (*(char *)((int)piVar19 + temp_v5 + 0x1a) == '\x03') {
                 temp_v25 = (int *)0x0;
                 temp_v7 = (unsigned int)*(unsigned short *)((int)piVar19 + temp_v5 * 2 + 2);
-                FUN_004a8750(temp_v7,1,0);
+                compendiumComputeSummonCost(temp_v7,1,0);
                 temp_v6 = temp_v6 + temp_v7;
               }
               temp_v5 = temp_v5 + 1;
@@ -3741,7 +3741,7 @@ LAB_001fac1c:
                 if (*(char *)((int)piVar3 + temp_v4 + 0x5252) == '\x03') {
                   temp_v25 = (int *)0x0;
                   temp_v10 = (unsigned int)*(unsigned short *)((int)piVar3 + temp_v4 * 2 + 0x523a);
-                  FUN_004a8750(temp_v10,1,0);
+                  compendiumComputeSummonCost(temp_v10,1,0);
                   temp_v5 = temp_v5 + temp_v10;
                 }
                 temp_v4 = temp_v4 + 1;

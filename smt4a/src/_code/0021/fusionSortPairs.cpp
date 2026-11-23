@@ -29,7 +29,7 @@ s32 FUN_002b28d8(const void *a, const void *b);
 s32 fusionComparePairPriority(const void *a, const void *b);
 s32 fusionComparePairsByTablePriority(const void *a, const void *b);
 s32 fusionComparePackedPairsByMappedKey(const void *a, const void *b);
-u32 FUN_004a8750(u32 id, s32 a, s32 b, s32 c, s32 d);
+u32 compendiumComputeSummonCost(u32 id, s32 a, s32 b, s32 c, s32 d);
 void arraySortQsort(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 
 /* Sort the fusion pair list by the key the player selected. */
@@ -59,12 +59,12 @@ void fusionSortPairs(void)
             const FusionPairBits *pair = (const FusionPairBits *)&work->pairSort.pairs[index];
             u32 score = 0;
             if (pair->fields.firstType == 3) {
-                score = FUN_004a8750(pair->fields.firstId, 1, 0, 0, 0);
+                score = compendiumComputeSummonCost(pair->fields.firstId, 1, 0, 0, 0);
             }
             FusionPairBits second;
             second.packed = pair->packed;
             if (second.fields.secondType == 3) {
-                score += FUN_004a8750(pair->fields.secondId, 1, 0, 0, 0);
+                score += compendiumComputeSummonCost(pair->fields.secondId, 1, 0, 0, 0);
             }
             work->pairSort.pairScores[work->pairSort.sortedPairs[i]] = score;
         }

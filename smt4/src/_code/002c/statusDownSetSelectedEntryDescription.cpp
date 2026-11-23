@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the registers of the constants 3 and 0 kept across the draws swap (r7/r8). */
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
@@ -34,7 +33,9 @@ void statusDownSetSelectedEntryDescription(s16 entry)
         }
     }
     screen->selectedEntry = entry;
-    if (entry < 0) {
+    /* Tested through the field just stored (the parameter gives 12 lines); Apocalypse's statusDownSetSelectedEntry
+     * is another function (an s32 entry narrowed on store, a game-state test) and tests its parameter. */
+    if (screen->selectedEntry < 0) {
         RelativeDirectory *directory = (RelativeDirectory *)fileSlotGetBuffer(0x40);
         asdTextDrawDirectoryEntry(screen->text, 3, -1, 0, 3, directory, 0);
     } else {

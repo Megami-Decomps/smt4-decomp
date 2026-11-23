@@ -131,8 +131,8 @@ typedef struct StatusDownStateA {
     /* 0x24AC */ StatusDownSkillMenuA menu;
     /* 0x2584 */ u8 unk2584;
     /* 0x2585 */ u8 unk2585[3];
-    /* 0x2588 */ u8 block2588[4];
-    /* 0x258C */ u8 unk258C[0xC];
+    /* 0x2588 */ f32 animationSteps[2];
+    /* 0x2590 */ u8 unk2590[8];
     /* 0x2598 */ u8 unk2598;
 } StatusDownStateA;
 
@@ -169,7 +169,7 @@ typedef char StatusDownStateALayoutCheck[
     offsetof(StatusDownSkillMenuA, step) == 0xB8 && sizeof(StatusDownSkillStep) == 8 &&
     offsetof(StatusDownStateA, menu.process) == 0x2574 &&
     offsetof(StatusDownStateA, menu.activatedSession) == 0x2580 &&
-    offsetof(StatusDownStateA, block2588) == 0x2588 &&
+    offsetof(StatusDownStateA, animationSteps) == 0x2588 &&
     sizeof(StatusDownStateA) == 0x259C ? 1 : -1];
 
 #endif

@@ -29,9 +29,9 @@ typedef struct RowPanel {
 extern s8 touchSelectionGetSelected(const CursorState *cursor);
 extern LayoutSlot *layoutFindTableEntry(u8 *layout, u32 id);
 extern void uiDrawScrollingSelectionEntry(RowPanel *panel, s32 index, s32 alpha, s32 row);
-extern void FUN_0022d9c8(RowPanel *panel, s32 kind, s32 index, s32 selected, s32 alpha, s32 color);
-extern void FUN_0022daac(RowPanel *panel, u32 id, s32 index, s32 selected, s32 alpha);
-extern void FUN_0022db94(RowPanel *panel, u32 id, s32 index, s32 selected, s32 alpha);
+extern void bibleDevilDrawStat(RowPanel *panel, s32 kind, s32 index, s32 selected, s32 alpha, s32 color);
+extern void bibleDevilDrawName(RowPanel *panel, u32 id, s32 index, s32 selected, s32 alpha);
+extern void bibleDevilDrawRace(RowPanel *panel, u32 id, s32 index, s32 selected, s32 alpha);
 extern void demonIconPanelDrawRow(RowPanel *panel, s32 a, u32 id, s32 index, s32 selected, s32 alpha);
 extern void drawTextAtRelativePosition(u8 *layout, s32 a, s32 x, s32 y, s32 b, s32 c, u32 color, s32 alpha, u8 *text);
 
@@ -62,14 +62,14 @@ void FUN_003a9df4(RowPanel *panel, s32 index, s32 selected, u32 id)
         uiDrawScrollingSelectionEntry(panel, index, alpha, touchSelectionGetSelected(&panel->cursor));
     }
     demonIconPanelDrawRow(panel, 1, id, index, selected, alpha);
-    FUN_0022db94(panel, id, index, selected, alpha);
-    FUN_0022daac(panel, id, index, selected, alpha);
+    bibleDevilDrawRace(panel, id, index, selected, alpha);
+    bibleDevilDrawName(panel, id, index, selected, alpha);
     record = nkmEnemyFindById((u16)id);
     kind = 0;
     if (record != NULL) {
         kind = record->level;
     }
-    FUN_0022d9c8(panel, kind, index, selected, alpha, -1);
+    bibleDevilDrawStat(panel, kind, index, selected, alpha, -1);
     record = nkmEnemyFindById((u16)id);
     count = 0;
     if (record != NULL) {

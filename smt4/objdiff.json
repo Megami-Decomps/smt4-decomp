@@ -67696,13 +67696,13 @@
       "target_path": "orig/target/_code/0022/uiDrawScrollingSelectionEntry.o"
     },
     {
-      "base_path": "build/obj/_code/0022/FUN_0022d9c8.o",
+      "base_path": "build/obj/_code/0022/bibleDevilDrawStat.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0022d9c8",
+            "name": "bibleDevilDrawStat",
             "size": 216,
             "vram": "0x22d9c8"
           }
@@ -67710,19 +67710,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0022/FUN_0022d9c8.cpp"
+        "source_path": "src/_code/0022/bibleDevilDrawStat.cpp"
       },
-      "name": "_code/0022/FUN_0022d9c8",
-      "target_path": "orig/target/_code/0022/FUN_0022d9c8.o"
+      "name": "_code/0022/bibleDevilDrawStat",
+      "target_path": "orig/target/_code/0022/bibleDevilDrawStat.o"
     },
     {
-      "base_path": "build/obj/_code/0022/FUN_0022daac.o",
+      "base_path": "build/obj/_code/0022/bibleDevilDrawName.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0022daac",
+            "name": "bibleDevilDrawName",
             "size": 212,
             "vram": "0x22daac"
           }
@@ -67730,19 +67730,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0022/FUN_0022daac.cpp"
+        "source_path": "src/_code/0022/bibleDevilDrawName.cpp"
       },
-      "name": "_code/0022/FUN_0022daac",
-      "target_path": "orig/target/_code/0022/FUN_0022daac.o"
+      "name": "_code/0022/bibleDevilDrawName",
+      "target_path": "orig/target/_code/0022/bibleDevilDrawName.o"
     },
     {
-      "base_path": "build/obj/_code/0022/FUN_0022db94.o",
+      "base_path": "build/obj/_code/0022/bibleDevilDrawRace.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0022db94",
+            "name": "bibleDevilDrawRace",
             "size": 256,
             "vram": "0x22db94"
           }
@@ -67750,10 +67750,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0022/FUN_0022db94.cpp"
+        "source_path": "src/_code/0022/bibleDevilDrawRace.cpp"
       },
-      "name": "_code/0022/FUN_0022db94",
-      "target_path": "orig/target/_code/0022/FUN_0022db94.o"
+      "name": "_code/0022/bibleDevilDrawRace",
+      "target_path": "orig/target/_code/0022/bibleDevilDrawRace.o"
     },
     {
       "base_path": "build/obj/_code/0022/demonIconPanelDrawRow.o",
@@ -69276,13 +69276,13 @@
       "target_path": "orig/target/_code/0023/mathHeadingToDirectionCode.o"
     },
     {
-      "base_path": "build/obj/_code/0023/FUN_00231d2c.o",
+      "base_path": "build/obj/_code/0023/cameraViewHeadingDegrees.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00231d2c",
+            "name": "cameraViewHeadingDegrees",
             "size": 112,
             "vram": "0x231d2c"
           }
@@ -69290,10 +69290,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0023/FUN_00231d2c.cpp"
+        "source_path": "src/_code/0023/cameraViewHeadingDegrees.cpp"
       },
-      "name": "_code/0023/FUN_00231d2c",
-      "target_path": "orig/target/_code/0023/FUN_00231d2c.o"
+      "name": "_code/0023/cameraViewHeadingDegrees",
+      "target_path": "orig/target/_code/0023/cameraViewHeadingDegrees.o"
     },
     {
       "base_path": "build/obj/_code/0023/NaviMain_GetState.o",
@@ -71058,13 +71058,13 @@
       "target_path": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_002355fc.o"
     },
     {
-      "base_path": "build/obj/_code/0023/thresholdDispatchOutsideRange.o",
+      "base_path": "build/obj/_code/0023/animCurveAdjustFrame.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "thresholdDispatchOutsideRange",
+            "name": "animCurveAdjustFrame",
             "size": 64,
             "vram": "0x235744"
           }
@@ -71072,10 +71072,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0023/thresholdDispatchOutsideRange.cpp"
+        "source_path": "src/_code/0023/animCurveAdjustFrame.cpp"
       },
-      "name": "_code/0023/thresholdDispatchOutsideRange",
-      "target_path": "orig/target/_code/0023/thresholdDispatchOutsideRange.o"
+      "name": "_code/0023/animCurveAdjustFrame",
+      "target_path": "orig/target/_code/0023/animCurveAdjustFrame.o"
     },
     {
       "base_path": "build/obj/_code/0023/FUN_0023578c.o",
@@ -86113,13 +86113,13 @@
       "target_path": "orig/target/_code/0026/mapUpdateFollowerModels.o"
     },
     {
-      "base_path": "build/obj/_code/0026/FUN_00265f50.o",
+      "base_path": "build/obj/_code/0026/lmapMainUpdateFollowCamera.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00265f50",
+            "name": "lmapMainUpdateFollowCamera",
             "size": 1388,
             "vram": "0x265f50"
           }
@@ -86127,10 +86127,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0026/FUN_00265f50.cpp"
+        "source_path": "src/_code/0026/lmapMainUpdateFollowCamera.cpp"
       },
-      "name": "_code/0026/FUN_00265f50",
-      "target_path": "orig/target/_code/0026/FUN_00265f50.o"
+      "name": "_code/0026/lmapMainUpdateFollowCamera",
+      "target_path": "orig/target/_code/0026/lmapMainUpdateFollowCamera.o"
     },
     {
       "base_path": "build/obj/_code/0026/entryListCollectMatches.o",
@@ -99733,13 +99733,13 @@
       "target_path": "orig/target/_code/0029/scrScriptProcessStartEntry.o"
     },
     {
-      "base_path": "build/obj/_code/0029/FUN_00296fec.o",
+      "base_path": "build/obj/_code/0029/aocMenuReset.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00296fec",
+            "name": "aocMenuReset",
             "size": 100,
             "vram": "0x296fec"
           }
@@ -99747,10 +99747,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0029/FUN_00296fec.cpp"
+        "source_path": "src/_code/0029/aocMenuReset.cpp"
       },
-      "name": "_code/0029/FUN_00296fec",
-      "target_path": "orig/target/_code/0029/FUN_00296fec.o"
+      "name": "_code/0029/aocMenuReset",
+      "target_path": "orig/target/_code/0029/aocMenuReset.o"
     },
     {
       "base_path": "build/obj/_code/0029/messageMainSetEnabled.o",
@@ -122621,13 +122621,13 @@
       "target_path": "orig/target/_code/title/titleMain/titleMainDestroy.o"
     },
     {
-      "base_path": "build/obj/_code/title/titleMain/FUN_002ca7fc.o",
+      "base_path": "build/obj/_code/title/titleMain/titleMainDrawLower.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002ca7fc",
+            "name": "titleMainDrawLower",
             "size": 972,
             "vram": "0x2ca7fc"
           }
@@ -122636,10 +122636,10 @@
           "_code",
           "title/titleMain"
         ],
-        "source_path": "src/_code/title/titleMain/FUN_002ca7fc.cpp"
+        "source_path": "src/_code/title/titleMain/titleMainDrawLower.cpp"
       },
-      "name": "_code/title/titleMain/FUN_002ca7fc",
-      "target_path": "orig/target/_code/title/titleMain/FUN_002ca7fc.o"
+      "name": "_code/title/titleMain/titleMainDrawLower",
+      "target_path": "orig/target/_code/title/titleMain/titleMainDrawLower.o"
     },
     {
       "base_path": "build/obj/_code/002c/bgmVolumeToStep.o",
@@ -185881,13 +185881,13 @@
       "target_path": "orig/target/_code/0038/FUN_00380a5c.o"
     },
     {
-      "base_path": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_00380a60.o",
+      "base_path": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/animCalcCallbackCurve.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00380a60",
+            "name": "animCalcCallbackCurve",
             "size": 60,
             "vram": "0x380a60"
           }
@@ -185896,10 +185896,10 @@
           "_code",
           "AsdSDK/Source/Gfx/Model/AsdModel"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_00380a60.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/animCalcCallbackCurve.cpp"
       },
-      "name": "_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_00380a60",
-      "target_path": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_00380a60.o"
+      "name": "_code/AsdSDK/Source/Gfx/Model/AsdModel/animCalcCallbackCurve",
+      "target_path": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/animCalcCallbackCurve.o"
     },
     {
       "base_path": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/rangeDispatchEvaluate.o",
@@ -185963,13 +185963,13 @@
       "target_path": "orig/target/_code/0038/nw_anim_res_CalcVector3Curve.o"
     },
     {
-      "base_path": "build/obj/_code/0038/FUN_00380e30.o",
+      "base_path": "build/obj/_code/0038/animCalcBakedMatrixCurve.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00380e30",
+            "name": "animCalcBakedMatrixCurve",
             "size": 68,
             "vram": "0x380e30"
           }
@@ -185977,10 +185977,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0038/FUN_00380e30.cpp"
+        "source_path": "src/_code/0038/animCalcBakedMatrixCurve.cpp"
       },
-      "name": "_code/0038/FUN_00380e30",
-      "target_path": "orig/target/_code/0038/FUN_00380e30.o"
+      "name": "_code/0038/animCalcBakedMatrixCurve",
+      "target_path": "orig/target/_code/0038/animCalcBakedMatrixCurve.o"
     },
     {
       "base_path": "build/obj/_code/0038/nw_anim_res_CalcTranslateCurve.o",

@@ -1,15 +1,6 @@
 /* NON_MATCHING: the colours are stored through the byte-reversed packing (rev/lsr strb) as retail does; retail keeps the loop-invariant fade bounds in the stack and allocates the loop registers differently. */
 #include "effect/FadeStrip.h"
-
-static __inline void flagsSetBits(u32 *flags, u32 mask)
-{
-    *flags |= mask;
-}
-
-static __inline void flagsClearBits(u32 *flags, u32 mask)
-{
-    *flags &= mask;
-}
+#include "util/BitsAndBytes.h"
 
 
 extern "C" {

@@ -14,13 +14,13 @@
 #include "ui/ParamsClearPacket.h"
 #include "shard/W6_W6Match2_FormattedTextSource.h"
 #include "game/GameGlobalsRef.h"
+#include "ui/FloatTableLookup.h"
 
 extern "C" {
 
 
 void positionStateSet(u32 object, u32 first, u32 second, f32 scale);
 int statusDownCreateScreen(...);
-int copyDefaultWordsPair(...);
 
 
 
@@ -211,7 +211,7 @@ void statusAcquireSharedResources(void)
     workWords = reinterpret_cast<u32 *>(g_gameGlobals.instance);
     if (reinterpret_cast<u32 *>(g_gameGlobals.instance) != (unsigned int *)0x0) {
       *(unsigned char *)((int)reinterpret_cast<u32 *>(g_gameGlobals.instance) + 0x20d1) = 0;
-      copyDefaultWordsPair(workWords + 0x835);
+      copyDefaultAnimationSteps(g_gameGlobals.instance->animationSteps);
     }
   }
   ++g_gameGlobals.unk00;

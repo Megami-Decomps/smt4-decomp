@@ -1,6 +1,13 @@
 #pragma once
 #include "common.h"
 
+/* HP totals of a set of battle units: the HP-percentage script commands (smt4 scrCommBtlHpPercentWithin and
+ * scrCommBtlGroupHpPercentWithin, smt4a scrCommBtlHpPercentWithin) sum the maximum and the current HP into one. */
+struct HpSums {
+    s32 maximum;
+    s32 current;
+};
+
 /* Battle unit, entry and script helpers. */
 extern "C" {
 

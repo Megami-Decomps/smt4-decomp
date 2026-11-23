@@ -1,9 +1,8 @@
 #include "status/StatusDownA.h"
 #include "shard/Shard003B.h"
+#include "ui/FloatTableLookup.h"
 
 extern "C" {
-
-extern void copyDefaultWordsPair(u8 *block);
 
 void stateHolderMarkAndInit2588(void)
 {
@@ -11,7 +10,7 @@ void stateHolderMarkAndInit2588(void)
 
     if (g_statusDown != NULL) {
         g_statusDown->unk2584 = 1;
-        copyDefaultWordsPair(obj->block2588);
+        copyDefaultAnimationSteps(obj->animationSteps);
     }
 }
 
